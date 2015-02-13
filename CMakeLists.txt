@@ -67,6 +67,29 @@ target_link_libraries(cube_with_colors
 set_target_properties(cube_with_colors PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/cube_with_colors/")
 create_target_launcher(cube_with_colors WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/cube_with_colors/")
 
+# Tutorial 7
+add_executable(model_loading
+	model_loading/model_loading.cpp
+	common/shader.cpp
+	common/shader.hpp
+	common/controls.cpp
+	common/controls.hpp
+	common/texture.cpp
+	common/texture.hpp
+	common/objloader.cpp
+	common/objloader.hpp
+
+	model_loading/TransformVertexShader.vertexshader
+	model_loading/TextureFragmentShader.fragmentshader
+)
+target_link_libraries(model_loading
+	${ALL_LIBS}
+)
+# Xcode and Visual working directories
+set_target_properties(model_loading PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/model_loading/")
+create_target_launcher(model_loading WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/model_loading/")
+
+
 SOURCE_GROUP(common REGULAR_EXPRESSION ".*/common/.*" )
 SOURCE_GROUP(shaders REGULAR_EXPRESSION ".*/.*shader$" )
 
