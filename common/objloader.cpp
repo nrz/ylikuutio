@@ -7,6 +7,8 @@
 
 #include "objloader.hpp"
 
+#define LINE_HEADER_SIZE 4096
+
 // Very, VERY simple OBJ loader.
 // Here is a short list of features a real function would provide :
 // - Binary files. Reading a model should be just a few memcpy's away, not parsing a file at runtime. In short : OBJ is not very great.
@@ -39,7 +41,7 @@ bool loadOBJ(const char * path,
 
     while (true)
     {
-        char lineHeader[128];
+        char lineHeader[LINE_HEADER_SIZE];
         // read the first word of the line
         int res = fscanf(file, "%s", lineHeader);
         if (res == EOF)
