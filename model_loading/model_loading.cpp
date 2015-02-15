@@ -33,9 +33,8 @@ int main(void)
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
 
-
     // Open a window and create its OpenGL context
-    window = glfwCreateWindow( 1024, 768, "Tutorial 07 - Model Loading", NULL, NULL);
+    window = glfwCreateWindow(1024, 768, "Tutorial 07 - Model Loading", NULL, NULL);
     if (window == NULL)
     {
         fprintf( stderr, "Failed to open GLFW window.\n" );
@@ -94,7 +93,6 @@ int main(void)
     printf("vertices.size: %d", vertices.size());
 
     // Load it into a VBO
-
     GLuint vertexbuffer;
     glGenBuffers(1, &vertexbuffer);
     glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
