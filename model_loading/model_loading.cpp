@@ -88,8 +88,9 @@ int main(void)
     std::vector<glm::vec3> vertices;
     std::vector<glm::vec2> uvs;
     std::vector<glm::vec3> normals; // Won't be used at the moment.
-    bool res = loadOBJ("cube.obj", vertices, uvs, normals);
+    // bool res = loadOBJ("cube.obj", vertices, uvs, normals);
     // bool res = loadOBJ("oma_icosphere.obj", vertices, uvs, normals);
+    bool res = loadOBJ("kirjainkuutio.obj", vertices, uvs, normals);
 
     printf("vertices.size: %d", vertices.size());
 
