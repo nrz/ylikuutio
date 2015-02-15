@@ -76,7 +76,8 @@ int main(void)
     GLuint vertexUVID = glGetAttribLocation(programID, "vertexUV");
 
     // Load the texture
-    GLuint Texture = loadBMP_custom("uvtemplate.bmp");
+    GLuint Texture = loadBMP_custom("kuutio-uv-numerot.bmp");
+    // GLuint Texture = loadBMP_custom("uvtemplate.bmp");
     // GLuint Texture = loadDDS("uvtemplate.DDS");
     // GLuint Texture = loadDDS("uvmap.DDS");
 
