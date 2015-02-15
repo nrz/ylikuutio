@@ -9,6 +9,11 @@
 
 #define LINE_HEADER_SIZE 4096
 
+bool read_until_newline(FILE *file)
+{
+    while (getc(file) != '\n');
+}
+
 // Very, VERY simple OBJ loader.
 // Here is a short list of features a real function would provide :
 // - Binary files. Reading a model should be just a few memcpy's away, not parsing a file at runtime. In short : OBJ is not very great.
@@ -51,7 +56,11 @@ bool loadOBJ(const char *path,
 
         // else : parse lineHeader
 
-        if (strcmp(lineHeader, "v") == 0)
+        if (strcmp(lineHeader, "o") == 0)
+        {
+            read_until_newline(file);
+        }
+        else if (strcmp(lineHeader, "v") == 0)
         {
             // This line specifies a vertex.
             // Example:
