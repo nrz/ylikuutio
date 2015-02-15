@@ -1,0 +1,21 @@
+UV layoutin exporttaus Blenderissä:
+* UV/Image Editor -moodissa -> UVs -> Export UV Layout , .png-tiedostona ulos.
+
+Ladataan .png GIMP:ssä.
+
+Ladataan toistaiseksi funktiolla `GLuint loadBMP_custom(const char *imagepath)`:
+
+Tekstuuritiedoston ('diffuse texture') exporttaus GIMP:ssä (`*.bmp`):
+* Toistaiseksi, siis ennen kuvan peilaus tehdään funktiossa `loadBMP_custom`, se on tehtävä käsin GIMP:ssä, siis:
+  -> Image
+  -> Transform
+  -> Flip Vertically
+
+Tiedoston tallennus `*.bmp`-formaatissa (toistaiseksi pitää olla 24-bittinen BMP):
+* -> Export
+  -> Windows BMP Image (*.bmp)
+  -> Compatibility Options
+  -> Do not write color space information (raksi ruutuun)
+  -> Advanced Options
+  -> 24 bits (R8 G8 B8)
+  -> Export
