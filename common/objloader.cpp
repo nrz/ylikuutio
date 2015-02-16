@@ -1,3 +1,4 @@
+#include <iostream>
 #include <vector>
 #include <stdio.h>
 #include <string>
@@ -8,6 +9,8 @@
 #include "objloader.hpp"
 
 #define LINE_HEADER_SIZE 4096
+
+using namespace glm;
 
 bool read_until_newline(FILE *file)
 {
@@ -24,12 +27,13 @@ bool read_until_newline(FILE *file)
 // - More secure. Change another line and you can inject code.
 // - Loading from memory, stream, etc
 
-bool loadOBJ(const char *path,
-        std::vector<glm::vec3> & out_vertices,
-        std::vector<glm::vec2> & out_uvs,
-        std::vector<glm::vec3> & out_normals)
+bool load_OBJ(
+        const char *path,
+        std::vector<glm::vec3> &out_vertices,
+        std::vector<glm::vec2> &out_uvs,
+        std::vector<glm::vec3> &out_normals)
 {
-    printf("Loading OBJ file %s...\n", path);
+    std::cout << "Loading OBJ file " << path << " ...\n";
 
     std::vector<unsigned int> vertexIndices, uvIndices, normalIndices;
     std::vector<glm::vec3> temp_vertices;
@@ -179,7 +183,7 @@ bool loadAssImp(
 
     // Fill vertices positions
     vertices.reserve(mesh->mNumVertices);
-    for(unsigned int i = 0; i < mesh->mNumVertices; i++)
+    for (unsigned int i = 0; i < mesh->mNumVertices; i++)
     {
         aiVector3D pos = mesh->mVertices[i];
         vertices.push_back(glm::vec3(pos.x, pos.y, pos.z));
