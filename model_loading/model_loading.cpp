@@ -1,7 +1,10 @@
 // Include standard headers
+#include <iostream>
+#include <string>
+#include <string.h>
+#include <vector>
 #include <stdio.h>
 #include <stdlib.h>
-#include <vector>
 
 // Include GLEW
 #include <GL/glew.h>
@@ -13,19 +16,35 @@ GLFWwindow* window;
 // Include GLM
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
-using namespace glm;
+// using namespace glm;
+using namespace std;
 
 #include <common/shader.hpp>
 #include <common/texture.hpp>
 #include <common/controls.hpp>
 #include <common/objloader.hpp>
 
+// model file format: obj/bmp/...
+// std::string g_model_file_format = "bmp";
+std::string g_model_file_format = "obj";
+
+// model filename.
+// std::string g_model_filename = "cube.obj";
+// std::string g_model_filename = "oma_icosphere.obj";
+std::string g_model_filename = "kirjainkuutio.obj";
+
+// texture file format: bmp/...
+std::string g_texture_file_format = "bmp";
+
+// texture filename.
+std::string g_texture_filename = "kuutio-uv-numerot.bmp";
+
 int main(void)
 {
     // Initialise GLFW
     if (!glfwInit())
     {
-        fprintf( stderr, "Failed to initialize GLFW\n" );
+        cerr << "Failed to initialize GLFW\n";
         return -1;
     }
 
@@ -37,7 +56,7 @@ int main(void)
     window = glfwCreateWindow(1024, 768, "Tutorial 07 - Model Loading", NULL, NULL);
     if (window == NULL)
     {
-        fprintf( stderr, "Failed to open GLFW window.\n" );
+        cerr << "Failed to open GLFW window.\n";
         glfwTerminate();
         return -1;
     }
@@ -46,7 +65,7 @@ int main(void)
     // Initialize GLEW
     if (glewInit() != GLEW_OK)
     {
-        fprintf(stderr, "Failed to initialize GLEW\n");
+        cerr << "Failed to initialize GLEW\n";
         return -1;
     }
 
@@ -66,7 +85,7 @@ int main(void)
     glEnable(GL_CULL_FACE);
 
     // Create and compile our GLSL program from the shaders
-    GLuint programID = LoadShaders( "TransformVertexShader.vertexshader", "TextureFragmentShader.fragmentshader" );
+    GLuint programID = LoadShaders("TransformVertexShader.vertexshader", "TextureFragmentShader.fragmentshader");
 
     // Get a handle for our "MVP" uniform
     GLuint MatrixID = glGetUniformLocation(programID, "MVP");
@@ -76,10 +95,21 @@ int main(void)
     GLuint vertexUVID = glGetAttribLocation(programID, "vertexUV");
 
     // Load the texture
-    GLuint Texture = loadBMP_custom("kuutio-uv-numerot.bmp");
-    // GLuint Texture = loadBMP_custom("uvtemplate.bmp");
-    // GLuint Texture = loadDDS("uvtemplate.DDS");
-    // GLuint Texture = loadDDS("uvmap.DDS");
+    GLuint Texture;
+
+    const char *char_g_texture_file_format = g_texture_file_format.c_str();
+    const char *char_g_texture_filename = g_texture_filename.c_str();
+
+    if (strcmp(char_g_texture_file_format, "bmp") == 0)
+    {
+        Texture = loadBMP_custom(char_g_texture_filename);
+    }
+    else
+    {
+        cerr << "no texture was loaded!\n";
+        cerr << "texture file format: " << g_texture_file_format << "\n";
+        return -1;
+    }
 
     // Get a handle for our "myTextureSampler" uniform
     GLuint TextureID  = glGetUniformLocation(programID, "myTextureSampler");
@@ -88,11 +118,20 @@ int main(void)
     std::vector<glm::vec3> vertices;
     std::vector<glm::vec2> uvs;
     std::vector<glm::vec3> normals; // Won't be used at the moment.
-    // bool res = loadOBJ("cube.obj", vertices, uvs, normals);
-    // bool res = loadOBJ("oma_icosphere.obj", vertices, uvs, normals);
-    bool res = loadOBJ("kirjainkuutio.obj", vertices, uvs, normals);
 
-    printf("vertices.size: %d", vertices.size());
+    const char *char_g_model_file_format = g_model_file_format.c_str();
+    const char *char_g_model_filename = g_model_filename.c_str();
+    if (strcmp(char_g_model_file_format, "obj") == 0)
+    {
+        bool res = loadOBJ(char_g_model_filename, vertices, uvs, normals);
+    }
+    else
+    {
+        cerr << "no model was loaded!\n";
+        cerr << "model file format: " << g_model_file_format << "\n";
+        return -1;
+    }
+    cout << "vertices.size: " << vertices.size() << "\n";
 
     // Load it into a VBO
     GLuint vertexbuffer;
@@ -155,7 +194,7 @@ int main(void)
                 );
 
         // Draw the triangles !
-        glDrawArrays(GL_TRIANGLES, 0, vertices.size() );
+        glDrawArrays(GL_TRIANGLES, 0, vertices.size());
 
         glDisableVertexAttribArray(vertexPosition_modelspaceID);
         glDisableVertexAttribArray(vertexUVID);
@@ -166,7 +205,7 @@ int main(void)
 
     } // Check if the ESC key was pressed or the window was closed
     while ((glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS)
-            && (glfwWindowShouldClose(window) == 0 ));
+            && (glfwWindowShouldClose(window) == 0));
 
     // Cleanup VBO and shader
     glDeleteBuffers(1, &vertexbuffer);
