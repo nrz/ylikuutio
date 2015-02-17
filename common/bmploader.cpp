@@ -14,8 +14,8 @@
 
 int32_t get_y(
         int32_t *vertex_data,
-        int32_t x, 
-        int32_t z, 
+        int32_t x,
+        int32_t z,
         int32_t image_width)
 {
     int32_t *vertex_pointer;
@@ -43,11 +43,11 @@ bool triangulate_quads(
     {
         for (int32_t x = 0; x < image_width; x++)
         {
-            uint32_t y;       // Y (altitude
+            int32_t y;       // Y (altitude).
 
             // current x,z coordinates).
             y = get_y(input_vertex_pointer, x, z, image_width);
-           
+
             // This corresponds to "v": specify one vertex.
             glm::vec3 vertex;
             vertex.x = x;
@@ -55,10 +55,12 @@ bool triangulate_quads(
             vertex.z = z;
             temp_vertices.push_back(vertex);
 
+            float texture_x = ((float) y) / 256;
+
             // This corresponds to "vt": specify texture coordinates of one vertex.
             glm::vec2 uv;
-            uv.x = y; // TODO: define a proper texture coordinate!
-            uv.y = 0; // TODO: define a proper texture coordinate!
+            uv.x = texture_x; // TODO: define a proper texture coordinate!
+            uv.y = 0;         // TODO: define a proper texture coordinate!
             temp_uvs.push_back(uv);
 
             // This corresponds to "vn": specify normal of one vertex.
@@ -97,6 +99,8 @@ bool triangulate_quads(
 
     std::cout << "triangulation type in use: " << triangulation_type << "\n";
     std::cout << "is triangulation type valid: " << is_triangulation_type_valid << "\n";
+
+    uint32_t triangle_i = 0;
 
     if (is_4_triangles_in_use)
     {
@@ -137,7 +141,7 @@ bool triangulate_quads(
                 normalIndex[0] = 0; // TODO: add proper normal index.
                 normalIndex[1] = 0; // TODO: add proper normal index.
                 normalIndex[2] = 0; // TODO: add proper normal index.
-       
+
                 glm::vec3 vertex;
                 glm::vec2 uv;
                 glm::vec3 normal;
@@ -149,6 +153,8 @@ bool triangulate_quads(
                 normal = temp_normals[normalIndex[0]];
                 out_normals.push_back(normal);
 
+                // std::cout << "triangle " << triangle_i << ", vertex 0: (" << vertex.x << ", " << vertex.y << ", " << vertex.z << ").\n";
+
                 vertex = temp_vertices[vertexIndex[1]];
                 out_vertices.push_back(vertex);
                 uv = temp_uvs[uvIndex[1]];
@@ -156,12 +162,17 @@ bool triangulate_quads(
                 normal = temp_normals[normalIndex[1]];
                 out_normals.push_back(normal);
 
+                // std::cout << "triangle " << triangle_i << ", vertex 1: (" << vertex.x << ", " << vertex.y << ", " << vertex.z << ").\n";
+
                 vertex = temp_vertices[vertexIndex[2]];
                 out_vertices.push_back(vertex);
                 uv = temp_uvs[uvIndex[2]];
                 out_uvs.push_back(uv);
                 normal = temp_normals[normalIndex[2]];
                 out_normals.push_back(normal);
+
+                // std::cout << "triangle " << triangle_i << ", vertex 2: (" << vertex.x << ", " << vertex.y << ", " << vertex.z << ").\n\n";
+                triangle_i++;
 
                 // Define the second triangle: 1, 3, 4 (southwest, northeast, northwest).
 
@@ -184,6 +195,8 @@ bool triangulate_quads(
                 normal = temp_normals[normalIndex[0]];
                 out_normals.push_back(normal);
 
+                // std::cout << "triangle " << triangle_i << ", vertex 0: (" << vertex.x << ", " << vertex.y << ", " << vertex.z << ").\n";
+
                 vertex = temp_vertices[vertexIndex[1]];
                 out_vertices.push_back(vertex);
                 uv = temp_uvs[uvIndex[1]];
@@ -191,12 +204,17 @@ bool triangulate_quads(
                 normal = temp_normals[normalIndex[1]];
                 out_normals.push_back(normal);
 
+                // std::cout << "triangle " << triangle_i << ", vertex 1: (" << vertex.x << ", " << vertex.y << ", " << vertex.z << ").\n";
+
                 vertex = temp_vertices[vertexIndex[2]];
                 out_vertices.push_back(vertex);
                 uv = temp_uvs[uvIndex[2]];
                 out_uvs.push_back(uv);
                 normal = temp_normals[normalIndex[2]];
                 out_normals.push_back(normal);
+
+                // std::cout << "triangle " << triangle_i << ", vertex 2: (" << vertex.x << ", " << vertex.y << ", " << vertex.z << ").\n";
+                triangle_i++;
             }
         }
     }
@@ -210,29 +228,6 @@ bool triangulate_quads(
         std::cerr << "quad triangulation type " << triangulation_type << " not yet implemented!\n";
         return false;
     }
-
-    /*
-    // For each vertex of each triangle
-    for (uint32_t i = 0; i < vertexIndices.size(); i++)
-    {
-        // Get the indices of its attributes
-        unsigned int vertexIndex = vertexIndices[i];
-        unsigned int uvIndex = uvIndices[i];
-        unsigned int normalIndex = normalIndices[i];
-
-        // Get the attributes thanks to the index
-        glm::vec3 vertex = temp_vertices[vertexIndex - 1];
-        glm::vec2 uv = temp_uvs[uvIndex - 1];
-        glm::vec3 normal = temp_normals[normalIndex - 1];
-
-        // Put the attributes in buffers
-        out_vertices.push_back(vertex);
-        out_uvs.push_back(uv);
-        out_normals.push_back(normal);
-
-        std::cout << "out normal " << i << ".\n";
-    }
-    */
     return true;
 }
 
@@ -249,7 +244,7 @@ bool load_BMP_world(
     unsigned char header[54];
     unsigned int dataPos;
     unsigned int imageSize;
-    unsigned int image_width, image_height;
+    uint32_t image_width, image_height;
     // Actual RGB image data.
     uint8_t *image_data;
 
@@ -317,22 +312,20 @@ bool load_BMP_world(
     // Everything is in memory now, the file can be closed
     fclose(file);
 
-    int32_t *quad_vertex_data;
-    quad_vertex_data = new int32_t [3 * imageSize];
+    int32_t *vertex_data;
+    vertex_data = new int32_t [imageSize];
 
     uint8_t *image_pointer;
     image_pointer = image_data;
 
-    int32_t *quad_vertex_pointer;
-    quad_vertex_pointer = quad_vertex_data;
+    int32_t *vertex_pointer;
+    vertex_pointer = vertex_data;
 
     // start processing image_data.
     for (int32_t z = 0; z < image_height; z++)
     {
         for (int32_t x = 0; x < image_width; x++)
         {
-            *quad_vertex_pointer++ = x; // x.
-
             const char *char_color_channel = color_channel.c_str();
             int32_t y;
 
@@ -359,21 +352,16 @@ bool load_BMP_world(
             }
 
             // std::cout << color_channel << " color channel value at (" << x << ", " << z << "): " << y << ".\n";
-            *quad_vertex_pointer++ = y;
-
+            *vertex_pointer++ = y;
             image_pointer += 3; // R, G, & B.
-            *quad_vertex_pointer++ = z; // z.
         }
     }
     std::cout << "color channel in use: " << color_channel << "\n";
-
-    // reset `quad_vertex_pointer`.
-    quad_vertex_pointer = quad_vertex_data;
 
     // std::string triangulation_type = "4_triangles";
     // std::string triangulation_type = "southeast_northwest"; // "northwest_southeast" is equivalent.
     std::string triangulation_type = "southwest_northeast"; // "northeast_southwest" is equivalent.
 
-    bool triangulation_result = triangulate_quads(quad_vertex_pointer, image_width, image_height, out_vertices, out_uvs, out_normals, triangulation_type);
+    bool triangulation_result = triangulate_quads(vertex_data, image_width, image_height, out_vertices, out_uvs, out_normals, triangulation_type);
     return true;
 }

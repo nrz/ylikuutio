@@ -36,10 +36,8 @@ float initialFoV = 45.0f;
 float speed = 3.0f; // 3 units / second
 float mouseSpeed = 0.005f;
 
-
 void computeMatricesFromInputs()
 {
-
     // glfwGetTime is called only once, the first time this function is called
     static double lastTime = glfwGetTime();
 
