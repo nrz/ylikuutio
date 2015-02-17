@@ -46,6 +46,11 @@ bool triangulate_quads(
 #define NORTHWEST_Y get_y(input_vertex_pointer, x - 1, z, image_width)
 #define NORTHEAST_Y get_y(input_vertex_pointer, x, z, image_width)
 
+#define SOUTHWEST_VERTEX_I (image_width * (z - 1) + (x - 1))
+#define SOUTHEAST_VERTEX_I (image_width * (z - 1) + x)
+#define NORTHWEST_VERTEX_I (image_width * z + (x - 1))
+#define NORTHEAST_VERTEX_I (image_width * z + x)
+
     std::vector<uint32_t> vertexIndices, uvIndices, normalIndices;
     std::vector<glm::vec3> temp_vertices;
     std::vector<glm::vec2> temp_uvs;
@@ -173,9 +178,9 @@ bool triangulate_quads(
 #endif
 
 #ifdef USE_REAL_TEXTURE_COORDINATES
-                    uvIndex[0] = image_width * (z - 1) + (x - 1); // southwest vertex.
-                    uvIndex[1] = image_width * z + x;             // northeast (current) vertex.
-                    uvIndex[2] = image_width * (z - 1) + x;       // southeast vertex.
+                    uvIndex[0] = SOUTHWEST_VERTEX_I;
+                    uvIndex[1] = NORTHEAST_VERTEX_I;
+                    uvIndex[2] = SOUTHEAST_VERTEX_I;
 #endif
                 }
                 normalIndex[0] = 0; // TODO: add proper normal index.
@@ -232,9 +237,9 @@ bool triangulate_quads(
 #endif
 
 #ifdef USE_REAL_TEXTURE_COORDINATES
-                    uvIndex[0] = image_width * (z - 1) + (x - 1); // southwest vertex.
-                    uvIndex[1] = image_width * z + (x - 1);       // northwest vertex.
-                    uvIndex[2] = image_width * z + x;             // northeast (current) vertex.
+                    uvIndex[0] = SOUTHWEST_VERTEX_I;
+                    uvIndex[1] = NORTHWEST_VERTEX_I;
+                    uvIndex[2] = NORTHEAST_VERTEX_I;
 #endif
                 }
 
