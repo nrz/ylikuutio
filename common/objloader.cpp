@@ -10,7 +10,7 @@
 
 #define LINE_HEADER_SIZE 4096
 
-bool read_until_newline(FILE *file)
+void read_until_newline(FILE *file)
 {
     while (getc(file) != '\n');
 }
