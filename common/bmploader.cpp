@@ -73,8 +73,17 @@ bool triangulate_quads(
 
             // This corresponds to "vt": specify texture coordinates of one vertex.
             glm::vec2 uv;
+
+#ifdef USE_HEIGHT_AS_TEXTURE_COORDINATE
+            uv.x = ((float) y) / 256;
+            uv.y = 0;
+#endif
+
+#ifdef USE_REAL_TEXTURE_COORDINATES
             uv.x = round((float) texture_x);
             uv.y = round((float) texture_y);
+#endif
+
             temp_uvs.push_back(uv);
 
             // This corresponds to "vn": specify normal of one vertex.
