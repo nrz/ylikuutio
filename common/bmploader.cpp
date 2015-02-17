@@ -12,6 +12,9 @@
 
 #include "bmploader.hpp"
 
+// #define USE_HEIGHT_AS_TEXTURE_COORDINATE
+#define USE_REAL_TEXTURE_COORDINATES
+
 int32_t get_y(
         int32_t *vertex_data,
         int32_t x,
@@ -141,15 +144,17 @@ bool triangulate_quads(
                 vertexIndex[1] = current_vertex_i;                   // northeast (current vertex).
                 vertexIndex[2] = current_vertex_i - image_width;     // southeast.
 
-                /*
-                   uvIndex[0] = get_y(input_vertex_pointer, x - 1, z - 1, image_width); // altitude of southwest vertex.
-                   uvIndex[1] = get_y(input_vertex_pointer, x, z, image_width);         // altitude of northeast (current) vertex.
-                   uvIndex[2] = get_y(input_vertex_pointer, x, z - 1, image_width);     // altitude of southeast vertex.
-                   */
+#ifdef USE_HEIGHT_AS_TEXTURE_COORDINATE
+                uvIndex[0] = get_y(input_vertex_pointer, x - 1, z - 1, image_width); // altitude of southwest vertex.
+                uvIndex[1] = get_y(input_vertex_pointer, x, z, image_width);         // altitude of northeast (current) vertex.
+                uvIndex[2] = get_y(input_vertex_pointer, x, z - 1, image_width);     // altitude of southeast vertex.
+#endif
 
+#ifdef USE_REAL_TEXTURE_COORDINATES
                 uvIndex[0] = image_width * (z - 1) + (x - 1); // southwest vertex.
                 uvIndex[1] = image_width * z + x;             // northeast (current) vertex.
                 uvIndex[2] = image_width * (z - 1) + x;       // southeast vertex.
+#endif
 
                 normalIndex[0] = 0; // TODO: add proper normal index.
                 normalIndex[1] = 0; // TODO: add proper normal index.
@@ -196,15 +201,17 @@ bool triangulate_quads(
                 vertexIndex[1] = current_vertex_i - 1;               // northwest.
                 vertexIndex[2] = current_vertex_i;                   // northeast (current vertex).
 
-                /*
-                   uvIndex[0] = get_y(input_vertex_pointer, x - 1, z - 1, image_width); // altitude of southwest vertex.
-                   uvIndex[1] = get_y(input_vertex_pointer, x - 1, z, image_width);     // altitude of northwest (current) vertex.
-                   uvIndex[2] = get_y(input_vertex_pointer, x, z, image_width);         // altitude of northeast vertex.
-                   */
+#ifdef USE_HEIGHT_AS_TEXTURE_COORDINATE
+                uvIndex[0] = get_y(input_vertex_pointer, x - 1, z - 1, image_width); // altitude of southwest vertex.
+                uvIndex[1] = get_y(input_vertex_pointer, x - 1, z, image_width);     // altitude of northwest (current) vertex.
+                uvIndex[2] = get_y(input_vertex_pointer, x, z, image_width);         // altitude of northeast vertex.
+#endif
 
+#ifdef USE_REAL_TEXTURE_COORDINATES
                 uvIndex[0] = image_width * (z - 1) + (x - 1); // southwest vertex.
                 uvIndex[1] = image_width * z + (x - 1);       // northwest vertex.
                 uvIndex[2] = image_width * z + x;             // northeast (current) vertex.
+#endif
 
                 normalIndex[0] = 0; // TODO: add proper normal index.
                 normalIndex[1] = 0; // TODO: add proper normal index.
