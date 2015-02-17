@@ -165,8 +165,6 @@ bool triangulate_quads(
                     vertexIndex[0] = SOUTHWEST;
                     vertexIndex[1] = NORTHEAST;
                     vertexIndex[2] = SOUTHEAST;
-#define NORTH
-
 
 #ifdef USE_HEIGHT_AS_TEXTURE_COORDINATE
                     uvIndex[0] = SOUTHWEST_Y;
