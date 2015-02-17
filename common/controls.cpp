@@ -9,7 +9,7 @@ using namespace glm;
 
 #include "controls.hpp"
 
-#define WINDOW_WIDTH 1024
+#define WINDOW_WIDTH 1600
 #define WINDOW_HEIGHT (WINDOW_WIDTH * 3 / 4)
 
 #define INVERT_MOUSE

@@ -26,7 +26,7 @@ using namespace std;
 #include "common/bmploader.hpp"
 #include "common/objloader.hpp"
 
-#define WINDOW_WIDTH 1024
+#define WINDOW_WIDTH 1600
 #define WINDOW_HEIGHT (WINDOW_WIDTH * 3 / 4)
 
 // model file format: obj/bmp/...
