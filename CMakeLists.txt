@@ -76,6 +76,8 @@ add_executable(model_loading
 	common/controls.hpp
 	common/texture.cpp
 	common/texture.hpp
+	common/bmploader.cpp
+	common/bmploader.hpp
 	common/objloader.cpp
 	common/objloader.hpp
 

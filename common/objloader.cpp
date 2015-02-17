@@ -10,8 +10,6 @@
 
 #define LINE_HEADER_SIZE 4096
 
-using namespace std;
-
 bool read_until_newline(FILE *file)
 {
     while (getc(file) != '\n');

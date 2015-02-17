@@ -2,8 +2,10 @@
 #include <iostream>
 #include <string>
 #include <string.h>
+#include <cstring>
 #include <vector>
 #include <stdio.h>
+#include <stdint.h>
 #include <stdlib.h>
 
 // Include GLEW
@@ -16,27 +18,38 @@ GLFWwindow* window;
 // Include GLM
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
-using namespace glm;
+using namespace std;
 
 #include <common/shader.hpp>
 #include <common/texture.hpp>
 #include <common/controls.hpp>
-#include <common/objloader.hpp>
+#include "common/bmploader.hpp"
+#include "common/objloader.hpp"
 
 // model file format: obj/bmp/...
 // std::string g_model_file_format = "bmp";
-std::string g_model_file_format = "obj";
+std::string g_model_file_format = "bmp";
 
 // model filename.
 // std::string g_model_filename = "cube.obj";
 // std::string g_model_filename = "oma_icosphere.obj";
-std::string g_model_filename = "kirjainkuutio.obj";
+// std::string g_model_filename = "kirjainkuutio.obj";
+// std::string g_model_filename = "noise1024x1024.bmp";
+// std::string g_model_filename = "noise256x256.bmp";
+std::string g_model_filename = "noise128x128.bmp";
 
 // texture file format: bmp/...
 std::string g_texture_file_format = "bmp";
 
+// color channel to use for height data.
+// std::string g_height_data_color_channel = "red";
+// std::string g_height_data_color_channel = "green";
+// std::string g_height_data_color_channel = "blue";
+std::string g_height_data_color_channel = "mean"; // "all" is equivalent to "mean".
+
 // texture filename.
-std::string g_texture_filename = "kuutio-uv-numerot.bmp";
+// std::string_g_texture_filename = "kuutio-uv-numerot.bmp";
+std::string g_texture_filename = "punamusta.bmp";
 
 int main(void)
 {
@@ -125,6 +138,11 @@ int main(void)
     if (strcmp(char_g_model_file_format, "obj") == 0)
     {
         model_loading_result = load_OBJ(char_g_model_filename, vertices, uvs, normals);
+    }
+    else if (strcmp(char_g_model_file_format, "bmp") == 0)
+    {
+        const char *char_g_height_data_color_channel = g_height_data_color_channel.c_str();
+        model_loading_result = load_BMP_world(char_g_model_filename, vertices, uvs, normals, g_height_data_color_channel);
     }
     else
     {
