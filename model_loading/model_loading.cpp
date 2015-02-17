@@ -26,6 +26,9 @@ using namespace std;
 #include "common/bmploader.hpp"
 #include "common/objloader.hpp"
 
+#define WINDOW_WIDTH 1024
+#define WINDOW_HEIGHT (WINDOW_WIDTH * 3 / 4)
+
 // model file format: obj/bmp/...
 // std::string g_model_file_format = "bmp";
 std::string g_model_file_format = "bmp";
@@ -66,7 +69,7 @@ int main(void)
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
 
     // Open a window and create its OpenGL context.
-    window = glfwCreateWindow(1024, 768, "Tutorial 07 - Model Loading", NULL, NULL);
+    window = glfwCreateWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "Ylikuutio", NULL, NULL);
     if (window == NULL)
     {
         std::cerr << "Failed to open GLFW window.\n";
@@ -84,7 +87,7 @@ int main(void)
 
     // Ensure we can capture the escape key being pressed below.
     glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
-    glfwSetCursorPos(window, 1024/2, 768/2);
+    glfwSetCursorPos(window, WINDOW_WIDTH/2, WINDOW_HEIGHT/2);
 
     // Dark blue background.
     glClearColor(0.0f, 0.0f, 0.4f, 0.0f);

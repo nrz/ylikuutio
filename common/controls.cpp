@@ -9,6 +9,9 @@ using namespace glm;
 
 #include "controls.hpp"
 
+#define WINDOW_WIDTH 1024
+#define WINDOW_HEIGHT (WINDOW_WIDTH * 3 / 4)
+
 #define INVERT_MOUSE
 
 glm::mat4 ViewMatrix;
@@ -50,17 +53,17 @@ void computeMatricesFromInputs()
     glfwGetCursorPos(window, &xpos, &ypos);
 
     // Reset mouse position for next frame
-    glfwSetCursorPos(window, 1024/2, 768/2);
+    glfwSetCursorPos(window, WINDOW_WIDTH/2, WINDOW_HEIGHT/2);
 
     // Compute new orientation
-    horizontalAngle += mouseSpeed * float(1024/2 - xpos);
+    horizontalAngle += mouseSpeed * float(WINDOW_WIDTH/2 - xpos);
 
 #ifdef INVERT_MOUSE
     // invert mouse.
-    verticalAngle   -= mouseSpeed * float(768/2 - ypos);
+    verticalAngle   -= mouseSpeed * float(WINDOW_HEIGHT/2 - ypos);
 #else
     // don't invert mouse.
-    verticalAngle   += mouseSpeed * float(768/2 - ypos);
+    verticalAngle   += mouseSpeed * float(WINDOW_HEIGHT/2 - ypos);
 #endif
 
     // Direction : Spherical coordinates to Cartesian coordinates conversion
