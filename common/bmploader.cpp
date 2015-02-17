@@ -41,6 +41,11 @@ bool triangulate_quads(
 #define NORTHWEST (current_vertex_i - 1)
 #define NORTHEAST (current_vertex_i)
 
+#define SOUTHWEST_Y get_y(input_vertex_pointer, x - 1, z - 1, image_width)
+#define SOUTHEAST_Y get_y(input_vertex_pointer, x, z, image_width)
+#define NORTHWEST_Y get_y(input_vertex_pointer, x - 1, z, image_width)
+#define NORTHEAST_Y get_y(input_vertex_pointer, x, z, image_width)
+
     std::vector<uint32_t> vertexIndices, uvIndices, normalIndices;
     std::vector<glm::vec3> temp_vertices;
     std::vector<glm::vec2> temp_uvs;
@@ -151,11 +156,13 @@ bool triangulate_quads(
                     vertexIndex[0] = SOUTHWEST;
                     vertexIndex[1] = NORTHEAST;
                     vertexIndex[2] = SOUTHEAST;
+#define NORTH
+
 
 #ifdef USE_HEIGHT_AS_TEXTURE_COORDINATE
-                    uvIndex[0] = get_y(input_vertex_pointer, x - 1, z - 1, image_width); // altitude of southwest vertex.
-                    uvIndex[1] = get_y(input_vertex_pointer, x, z, image_width);         // altitude of northeast (current) vertex.
-                    uvIndex[2] = get_y(input_vertex_pointer, x, z - 1, image_width);     // altitude of southeast vertex.
+                    uvIndex[0] = SOUTHWEST_Y;
+                    uvIndex[1] = NORTHEAST_Y;
+                    uvIndex[2] = SOUTHEAST_Y;
 #endif
 
 #ifdef USE_REAL_TEXTURE_COORDINATES
@@ -212,9 +219,9 @@ bool triangulate_quads(
                     vertexIndex[2] = NORTHEAST;
 
 #ifdef USE_HEIGHT_AS_TEXTURE_COORDINATE
-                    uvIndex[0] = get_y(input_vertex_pointer, x - 1, z - 1, image_width); // altitude of southwest vertex.
-                    uvIndex[1] = get_y(input_vertex_pointer, x - 1, z, image_width);     // altitude of northwest vertex.
-                    uvIndex[2] = get_y(input_vertex_pointer, x, z, image_width);         // altitude of northeast (current) vertex.
+                    uvIndex[0] = SOUTHWEST_Y;
+                    uvIndex[1] = NORTHWEST_Y;
+                    uvIndex[2] = NORTHEAST_Y;
 #endif
 
 #ifdef USE_REAL_TEXTURE_COORDINATES
