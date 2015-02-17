@@ -138,7 +138,7 @@ bool triangulate_quads(
         std::cerr << "quad triangulation type " << triangulation_type << " not yet implemented!\n";
         return false;
     }
-    else if (is_southwest_northeast_in_use)
+    else if (is_southwest_northeast_in_use || is_southeast_northwest_in_use)
     {
         std::cout << "image width: " << image_width << " pixels.\n";
         std::cout << "image height: " << image_height << " pixels.\n";
@@ -183,6 +183,35 @@ bool triangulate_quads(
                     uvIndex[2] = SOUTHEAST_VERTEX_I;
 #endif
                 }
+                else if (is_southeast_northwest_in_use)
+                {
+                    // First triangle: 2, 1, 3 (southeast, southwest, northwest).
+                    // Second triangle: 2, 3, 4 (southeast, northwest, northeast).
+                    // 2, 1, 3 are relative vertex indices (base 1).
+                    // 2, 3, 4 are relative vertex indices (base 1).
+
+                    // Define the first triangle: 2, 1, 3 (southeast, southwest, northwest).
+                    // southeast: down from current coordinate.
+                    // southwest: down and left from current coordinate.
+                    // northwest: left from current coordinate.
+
+                    vertexIndex[0] = SOUTHEAST;
+                    vertexIndex[1] = SOUTHWEST;
+                    vertexIndex[2] = NORTHWEST;
+
+#ifdef USE_HEIGHT_AS_TEXTURE_COORDINATE
+                    uvIndex[0] = SOUTHEAST_Y;
+                    uvIndex[1] = SOUTHWEST_Y;
+                    uvIndex[2] = NORTHWEST_Y;
+#endif
+
+#ifdef USE_REAL_TEXTURE_COORDINATES
+                    uvIndex[0] = SOUTHEAST_VERTEX_I;
+                    uvIndex[1] = SOUTHWEST_VERTEX_I;
+                    uvIndex[2] = NORTHWEST_VERTEX_I;
+#endif
+                }
+
                 normalIndex[0] = 0; // TODO: add proper normal index.
                 normalIndex[1] = 0; // TODO: add proper normal index.
                 normalIndex[2] = 0; // TODO: add proper normal index.
@@ -238,6 +267,29 @@ bool triangulate_quads(
 
 #ifdef USE_REAL_TEXTURE_COORDINATES
                     uvIndex[0] = SOUTHWEST_VERTEX_I;
+                    uvIndex[1] = NORTHWEST_VERTEX_I;
+                    uvIndex[2] = NORTHEAST_VERTEX_I;
+#endif
+                }
+                else if (is_southeast_northwest_in_use)
+                {
+                    // Define the second triangle: 2, 3, 4 (southeast, northwest, northeast).
+                    // southeast: down from current coordinate.
+                    // northwest: left from current coordinate.
+                    // northeast: current coordinate.
+
+                    vertexIndex[0] = SOUTHEAST;
+                    vertexIndex[1] = NORTHWEST;
+                    vertexIndex[2] = NORTHEAST;
+
+#ifdef USE_HEIGHT_AS_TEXTURE_COORDINATE
+                    uvIndex[0] = SOUTHEAST_Y;
+                    uvIndex[1] = NORTHWEST_Y;
+                    uvIndex[2] = NORTHEAST_Y;
+#endif
+
+#ifdef USE_REAL_TEXTURE_COORDINATES
+                    uvIndex[0] = SOUTHEAST_VERTEX_I;
                     uvIndex[1] = NORTHWEST_VERTEX_I;
                     uvIndex[2] = NORTHEAST_VERTEX_I;
 #endif
@@ -419,8 +471,8 @@ bool load_BMP_world(
     std::cout << "color channel in use: " << color_channel << "\n";
 
     // std::string triangulation_type = "4_triangles";
-    // std::string triangulation_type = "southeast_northwest"; // "northwest_southeast" is equivalent.
-    std::string triangulation_type = "southwest_northeast"; // "northeast_southwest" is equivalent.
+    std::string triangulation_type = "southeast_northwest"; // "northwest_southeast" is equivalent.
+    // std::string triangulation_type = "southwest_northeast"; // "northeast_southwest" is equivalent.
 
     bool triangulation_result = triangulate_quads(vertex_data, image_width, image_height, out_vertices, out_uvs, out_normals, triangulation_type);
     return true;
