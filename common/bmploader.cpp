@@ -138,12 +138,12 @@ bool triangulate_quads(
 
                 if (is_southwest_northeast_in_use)
                 {
-                    // First triangle: 1, 2, 3 (southwest, southeast, northeast).
-                    // Second triangle: 1, 3, 4 (southwest, northeast, northwest).
+                    // First triangle: 1, 4, 2 (southwest, northeast, southeast).
+                    // Second triangle: 1, 3, 4 (southwest, northwest, northeast).
+                    // 1, 4, 2 are relative vertex indices (base 1).
                     // 1, 3, 4 are relative vertex indices (base 1).
-                    // 1, 2, 3 are relative vertex indices (base 1).
 
-                    // Define the first triangle: 1, 2, 3 (southwest, southeast, northeast).
+                    // Define the first triangle: 1, 4, 2 (southwest, northeast, southeast).
                     // southwest: down and left from current coordinate.
                     // southeast: down from current coordinate.
                     // northeast: current coordinate.
@@ -202,10 +202,10 @@ bool triangulate_quads(
 
                 if (is_southwest_northeast_in_use)
                 {
-                    // Define the second triangle: 1, 3, 4 (southwest, northeast, northwest).
+                    // Define the second triangle: 1, 3, 4 (southwest, northwest, northeast).
                     // southwest: down and left from current coordinate.
-                    // northeast: current coordinate.
                     // northwest: left from current coordinate.
+                    // northeast: current coordinate.
 
                     vertexIndex[0] = SOUTHWEST;
                     vertexIndex[1] = NORTHWEST;
