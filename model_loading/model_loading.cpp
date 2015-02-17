@@ -49,7 +49,8 @@ std::string g_height_data_color_channel = "mean"; // "all" is equivalent to "mea
 
 // texture filename.
 // std::string_g_texture_filename = "kuutio-uv-numerot.bmp";
-std::string g_texture_filename = "punamusta.bmp";
+// std::string g_texture_filename = "punamusta.bmp";
+std::string g_texture_filename = "GrassGreenTexture0002.bmp";
 
 int main(void)
 {
