@@ -330,11 +330,6 @@ bool triangulate_quads(
         }
         return true;
     }
-    else if (is_southeast_northwest_in_use)
-    {
-        std::cerr << "quad triangulation type " << triangulation_type << " not yet implemented!\n";
-        return false;
-    }
     else
     {
         std::cerr << "quad triangulation type " << triangulation_type << " not yet implemented!\n";
