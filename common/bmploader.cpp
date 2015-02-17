@@ -36,6 +36,11 @@ bool triangulate_quads(
         std::string triangulation_type)
 
 {
+#define SOUTHWEST (current_vertex_i - image_width - 1)
+#define SOUTHEAST (current_vertex_i - image_width)
+#define NORTHWEST (current_vertex_i - 1)
+#define NORTHEAST (current_vertex_i)
+
     std::vector<uint32_t> vertexIndices, uvIndices, normalIndices;
     std::vector<glm::vec3> temp_vertices;
     std::vector<glm::vec2> temp_uvs;
@@ -129,33 +134,36 @@ bool triangulate_quads(
                 // This corresponds to "f": specify a face (but here we specify 2 faces instead!).
                 std::cout << "Handling coordinate (" << x << ", " << z << ").\n";
 
-                // First triangle: 1, 2, 3 (southwest, southeast, northeast).
-                // Second triangle: 1, 3, 4 (southwest, northeast, northwest).
-                // 1, 3, 4 are relative vertex indices (base 1).
-                // 1, 2, 3 are relative vertex indices (base 1).
                 uint32_t current_vertex_i = image_width * z + x;
 
-                // Define the first triangle: 1, 2, 3 (southwest, southeast, northeast).
-                // southwest: down and left from current coordinate.
-                // southeast: down from current coordinate.
-                // northeast: current coordinate.
+                if (is_southwest_northeast_in_use)
+                {
+                    // First triangle: 1, 2, 3 (southwest, southeast, northeast).
+                    // Second triangle: 1, 3, 4 (southwest, northeast, northwest).
+                    // 1, 3, 4 are relative vertex indices (base 1).
+                    // 1, 2, 3 are relative vertex indices (base 1).
 
-                vertexIndex[0] = current_vertex_i - image_width - 1; // southwest.
-                vertexIndex[1] = current_vertex_i;                   // northeast (current vertex).
-                vertexIndex[2] = current_vertex_i - image_width;     // southeast.
+                    // Define the first triangle: 1, 2, 3 (southwest, southeast, northeast).
+                    // southwest: down and left from current coordinate.
+                    // southeast: down from current coordinate.
+                    // northeast: current coordinate.
+
+                    vertexIndex[0] = SOUTHWEST;
+                    vertexIndex[1] = NORTHEAST;
+                    vertexIndex[2] = SOUTHEAST;
 
 #ifdef USE_HEIGHT_AS_TEXTURE_COORDINATE
-                uvIndex[0] = get_y(input_vertex_pointer, x - 1, z - 1, image_width); // altitude of southwest vertex.
-                uvIndex[1] = get_y(input_vertex_pointer, x, z, image_width);         // altitude of northeast (current) vertex.
-                uvIndex[2] = get_y(input_vertex_pointer, x, z - 1, image_width);     // altitude of southeast vertex.
+                    uvIndex[0] = get_y(input_vertex_pointer, x - 1, z - 1, image_width); // altitude of southwest vertex.
+                    uvIndex[1] = get_y(input_vertex_pointer, x, z, image_width);         // altitude of northeast (current) vertex.
+                    uvIndex[2] = get_y(input_vertex_pointer, x, z - 1, image_width);     // altitude of southeast vertex.
 #endif
 
 #ifdef USE_REAL_TEXTURE_COORDINATES
-                uvIndex[0] = image_width * (z - 1) + (x - 1); // southwest vertex.
-                uvIndex[1] = image_width * z + x;             // northeast (current) vertex.
-                uvIndex[2] = image_width * (z - 1) + x;       // southeast vertex.
+                    uvIndex[0] = image_width * (z - 1) + (x - 1); // southwest vertex.
+                    uvIndex[1] = image_width * z + x;             // northeast (current) vertex.
+                    uvIndex[2] = image_width * (z - 1) + x;       // southeast vertex.
 #endif
-
+                }
                 normalIndex[0] = 0; // TODO: add proper normal index.
                 normalIndex[1] = 0; // TODO: add proper normal index.
                 normalIndex[2] = 0; // TODO: add proper normal index.
@@ -192,26 +200,29 @@ bool triangulate_quads(
                 // std::cout << "triangle " << triangle_i << ", vertex 2: (" << vertex.x << ", " << vertex.y << ", " << vertex.z << ").\n\n";
                 triangle_i++;
 
-                // Define the second triangle: 1, 3, 4 (southwest, northeast, northwest).
-                // southwest: down and left from current coordinate.
-                // northeast: current coordinate.
-                // northwest: left from current coordinate.
+                if (is_southwest_northeast_in_use)
+                {
+                    // Define the second triangle: 1, 3, 4 (southwest, northeast, northwest).
+                    // southwest: down and left from current coordinate.
+                    // northeast: current coordinate.
+                    // northwest: left from current coordinate.
 
-                vertexIndex[0] = current_vertex_i - image_width - 1; // southwest.
-                vertexIndex[1] = current_vertex_i - 1;               // northwest.
-                vertexIndex[2] = current_vertex_i;                   // northeast (current vertex).
+                    vertexIndex[0] = SOUTHWEST;
+                    vertexIndex[1] = NORTHWEST;
+                    vertexIndex[2] = NORTHEAST;
 
 #ifdef USE_HEIGHT_AS_TEXTURE_COORDINATE
-                uvIndex[0] = get_y(input_vertex_pointer, x - 1, z - 1, image_width); // altitude of southwest vertex.
-                uvIndex[1] = get_y(input_vertex_pointer, x - 1, z, image_width);     // altitude of northwest (current) vertex.
-                uvIndex[2] = get_y(input_vertex_pointer, x, z, image_width);         // altitude of northeast vertex.
+                    uvIndex[0] = get_y(input_vertex_pointer, x - 1, z - 1, image_width); // altitude of southwest vertex.
+                    uvIndex[1] = get_y(input_vertex_pointer, x - 1, z, image_width);     // altitude of northwest vertex.
+                    uvIndex[2] = get_y(input_vertex_pointer, x, z, image_width);         // altitude of northeast (current) vertex.
 #endif
 
 #ifdef USE_REAL_TEXTURE_COORDINATES
-                uvIndex[0] = image_width * (z - 1) + (x - 1); // southwest vertex.
-                uvIndex[1] = image_width * z + (x - 1);       // northwest vertex.
-                uvIndex[2] = image_width * z + x;             // northeast (current) vertex.
+                    uvIndex[0] = image_width * (z - 1) + (x - 1); // southwest vertex.
+                    uvIndex[1] = image_width * z + (x - 1);       // northwest vertex.
+                    uvIndex[2] = image_width * z + x;             // northeast (current) vertex.
 #endif
+                }
 
                 normalIndex[0] = 0; // TODO: add proper normal index.
                 normalIndex[1] = 0; // TODO: add proper normal index.
@@ -246,6 +257,7 @@ bool triangulate_quads(
                 triangle_i++;
             }
         }
+        return true;
     }
     else if (is_southeast_northwest_in_use)
     {
