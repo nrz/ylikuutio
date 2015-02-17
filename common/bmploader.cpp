@@ -132,7 +132,7 @@ bool triangulate_quads(
             for (int32_t x = 1; x < image_width; x++)
             {
                 // This corresponds to "f": specify a face (but here we specify 2 faces instead!).
-                std::cout << "Handling coordinate (" << x << ", " << z << ").\n";
+                std::cout << "Processing coordinate (" << x << ", " << z << ").\n";
 
                 uint32_t current_vertex_i = image_width * z + x;
 
