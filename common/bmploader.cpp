@@ -38,6 +38,9 @@ bool triangulate_quads(
     std::vector<glm::vec2> temp_uvs;
     std::vector<glm::vec3> temp_normals;
 
+    uint32_t texture_x = 0;
+    uint32_t texture_y = 0;
+
     // First, define the temporary vertices in a double loop.
     for (int32_t z = 0; z < image_height; z++)
     {
@@ -55,12 +58,10 @@ bool triangulate_quads(
             vertex.z = z;
             temp_vertices.push_back(vertex);
 
-            float texture_x = ((float) y) / 256;
-
             // This corresponds to "vt": specify texture coordinates of one vertex.
             glm::vec2 uv;
-            uv.x = texture_x; // TODO: define a proper texture coordinate!
-            uv.y = 0;         // TODO: define a proper texture coordinate!
+            uv.x = round((float) texture_x);
+            uv.y = round((float) texture_y);
             temp_uvs.push_back(uv);
 
             // This corresponds to "vn": specify normal of one vertex.
@@ -69,7 +70,10 @@ bool triangulate_quads(
             normal.y = 1; // TODO: define a proper normal!
             normal.z = 0; // TODO: define a proper normal!
             temp_normals.push_back(normal);
+
+            texture_x ^= 1;
         }
+        texture_y ^= 1;
     }
 
     uint32_t vertexIndex[3], uvIndex[3], normalIndex[3];
@@ -134,12 +138,18 @@ bool triangulate_quads(
                 // northeast: current coordinate.
 
                 vertexIndex[0] = current_vertex_i - image_width - 1; // southwest.
-                vertexIndex[1] = current_vertex_i;                   // northeast.
+                vertexIndex[1] = current_vertex_i;                   // northeast (current vertex).
                 vertexIndex[2] = current_vertex_i - image_width;     // southeast.
 
-                uvIndex[0] = get_y(input_vertex_pointer, x - 1, z - 1, image_width); // altitude of southwest vertex.
-                uvIndex[1] = get_y(input_vertex_pointer, x, z, image_width);         // altitude of northeast vertex.
-                uvIndex[2] = get_y(input_vertex_pointer, x, z - 1, image_width);     // altitude of southeast vertex.
+                /*
+                   uvIndex[0] = get_y(input_vertex_pointer, x - 1, z - 1, image_width); // altitude of southwest vertex.
+                   uvIndex[1] = get_y(input_vertex_pointer, x, z, image_width);         // altitude of northeast (current) vertex.
+                   uvIndex[2] = get_y(input_vertex_pointer, x, z - 1, image_width);     // altitude of southeast vertex.
+                   */
+
+                uvIndex[0] = image_width * (z - 1) + (x - 1); // southwest vertex.
+                uvIndex[1] = image_width * z + x;             // northeast (current) vertex.
+                uvIndex[2] = image_width * (z - 1) + x;       // southeast vertex.
 
                 normalIndex[0] = 0; // TODO: add proper normal index.
                 normalIndex[1] = 0; // TODO: add proper normal index.
@@ -184,11 +194,17 @@ bool triangulate_quads(
 
                 vertexIndex[0] = current_vertex_i - image_width - 1; // southwest.
                 vertexIndex[1] = current_vertex_i - 1;               // northwest.
-                vertexIndex[2] = current_vertex_i;                   // northeast.
+                vertexIndex[2] = current_vertex_i;                   // northeast (current vertex).
 
-                uvIndex[0] = get_y(input_vertex_pointer, x - 1, z - 1, image_width); // altitude of southwest vertex.
-                uvIndex[1] = get_y(input_vertex_pointer, x - 1, z, image_width);     // altitude of northwest vertex.
-                uvIndex[2] = get_y(input_vertex_pointer, x, z, image_width);         // altitude of northeast vertex.
+                /*
+                   uvIndex[0] = get_y(input_vertex_pointer, x - 1, z - 1, image_width); // altitude of southwest vertex.
+                   uvIndex[1] = get_y(input_vertex_pointer, x - 1, z, image_width);     // altitude of northwest (current) vertex.
+                   uvIndex[2] = get_y(input_vertex_pointer, x, z, image_width);         // altitude of northeast vertex.
+                   */
+
+                uvIndex[0] = image_width * (z - 1) + (x - 1); // southwest vertex.
+                uvIndex[1] = image_width * z + (x - 1);       // northwest vertex.
+                uvIndex[2] = image_width * z + x;             // northeast (current) vertex.
 
                 normalIndex[0] = 0; // TODO: add proper normal index.
                 normalIndex[1] = 0; // TODO: add proper normal index.
