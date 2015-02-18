@@ -15,19 +15,19 @@
 // #define USE_HEIGHT_AS_TEXTURE_COORDINATE
 #define USE_REAL_TEXTURE_COORDINATES
 
-int32_t get_y(
-        int32_t *vertex_data,
-        int32_t x,
-        int32_t z,
-        int32_t image_width)
+uint32_t get_y(
+        uint32_t *vertex_data,
+        uint32_t x,
+        uint32_t z,
+        uint32_t image_width)
 {
-    int32_t *vertex_pointer;
+    uint32_t *vertex_pointer;
     vertex_pointer = vertex_data + z * image_width + x;
     return *vertex_pointer;
 }
 
 bool triangulate_quads(
-        int32_t *input_vertex_pointer,
+        uint32_t *input_vertex_pointer,
         uint32_t image_width,
         uint32_t image_height,
         std::vector<glm::vec3> &out_vertices,
@@ -40,11 +40,13 @@ bool triangulate_quads(
 #define SOUTHEAST (current_vertex_i - image_width)
 #define NORTHWEST (current_vertex_i - 1)
 #define NORTHEAST (current_vertex_i)
+#define CENTER (current_interpolated_vertex_i)
 
 #define SOUTHWEST_Y (get_y(input_vertex_pointer, x - 1, z - 1, image_width))
 #define SOUTHEAST_Y (get_y(input_vertex_pointer, x, z, image_width))
 #define NORTHWEST_Y (get_y(input_vertex_pointer, x - 1, z, image_width))
 #define NORTHEAST_Y (get_y(input_vertex_pointer, x, z, image_width))
+#define CENTER_Y ((SOUTHWEST_Y + SOUTHEAST_Y + NORTHWEST_Y + NORTHEAST_Y) / 4)
 
     std::vector<uint32_t> vertexIndices, uvIndices, normalIndices;
     std::vector<glm::vec3> temp_vertices;
@@ -55,19 +57,17 @@ bool triangulate_quads(
     uint32_t texture_y = 0;
 
     // First, define the temporary vertices in a double loop.
-    for (int32_t z = 0; z < image_height; z++)
+    for (uint32_t z = 0; z < image_height; z++)
     {
-        for (int32_t x = 0; x < image_width; x++)
+        for (uint32_t x = 0; x < image_width; x++)
         {
-            int32_t y;       // Y (altitude).
-
             // current x,z coordinates).
-            y = get_y(input_vertex_pointer, x, z, image_width);
+            float y = (float) get_y(input_vertex_pointer, x, z, image_width);
 
             // This corresponds to "v": specify one vertex.
             glm::vec3 vertex;
             vertex.x = (float) x;
-            vertex.y = (float) y;
+            vertex.y = y;
             vertex.z = (float) z;
             temp_vertices.push_back(vertex);
 
@@ -75,7 +75,7 @@ bool triangulate_quads(
             glm::vec2 uv;
 
 #ifdef USE_HEIGHT_AS_TEXTURE_COORDINATE
-            uv.x = ((float) y) / 256;
+            uv.x = y / 256;
             uv.y = 0.0f;
 #endif
 
@@ -130,8 +130,262 @@ bool triangulate_quads(
 
     if (is_bilinear_interpolation_in_use)
     {
-        std::cerr << "quad triangulation type " << triangulation_type << " not yet implemented!\n";
-        return false;
+        std::cout << "image width: " << image_width << " pixels.\n";
+        std::cout << "image height: " << image_height << " pixels.\n";
+
+        uint32_t current_interpolated_vertex_i = image_width * image_height;
+
+        // Then, define the faces in a double loop.
+        // Begin from index 1.
+        for (uint32_t z = 1; z < image_height; z++)
+        {
+            // Begin from index 1.
+            for (uint32_t x = 1; x < image_width; x++)
+            {
+                // This corresponds to "f": specify a face (but here we specify 2 faces instead!).
+                std::cout << "Processing coordinate (" << x << ", " << z << ").\n";
+
+                uint32_t current_vertex_i = image_width * z + x;
+
+                // Interpolate y coordinate (altitude).
+                float y = ((float) SOUTHWEST_Y + SOUTHEAST_Y + NORTHWEST_Y + NORTHEAST_Y) / 4;
+
+                // Create a new vertex using bilinear interpolation.
+                // This corresponds to "v": specify one vertex.
+                glm::vec3 vertex;
+                vertex.x = (float) x - 0.5f;
+                vertex.y = y;
+                vertex.z = (float) z - 0.5f;
+                temp_vertices.push_back(vertex);
+
+                // This corresponds to "vt": specify texture coordinates of one vertex.
+                glm::vec2 uv;
+
+#ifdef USE_HEIGHT_AS_TEXTURE_COORDINATE
+                uv.x = y / 256;
+                uv.y = 0.0f;
+#endif
+
+#ifdef USE_REAL_TEXTURE_COORDINATES
+                uv.x = 0.5f;
+                uv.y = 0.5f;
+#endif
+
+                temp_uvs.push_back(uv);
+
+                // This corresponds to "vn": specify normal of one vertex.
+                glm::vec3 normal;
+                normal.x = 0.0f; // TODO: define a proper normal!
+                normal.y = 1.0f; // TODO: define a proper normal!
+                normal.z = 0.0f; // TODO: define a proper normal!
+                temp_normals.push_back(normal);
+
+                // Then, define the triangles (4 faces).
+                // First triangle: center, southwest, northwest.
+                // Second triangle: center, northwest, northeast.
+                // Third triangle: center, northeast, southeast.
+                // Fourth triangle: center, southeast, southwest.
+
+                // Define the first triangle: center, southwest, northwest.
+                vertexIndex[0] = CENTER;
+                vertexIndex[1] = SOUTHWEST;
+                vertexIndex[2] = NORTHWEST;
+
+#ifdef USE_HEIGHT_AS_TEXTURE_COORDINATE
+                uvIndex[0] = CENTER_Y;
+                uvIndex[1] = SOUTHWEST_Y;
+                uvIndex[2] = NORTHWEST_Y;
+#endif
+
+#ifdef USE_REAL_TEXTURE_COORDINATES
+                uvIndex[0] = CENTER;
+                uvIndex[1] = SOUTHWEST;
+                uvIndex[2] = NORTHWEST;
+#endif
+
+                normalIndex[0] = 0; // TODO: add proper normal index.
+                normalIndex[1] = 0; // TODO: add proper normal index.
+                normalIndex[2] = 0; // TODO: add proper normal index.
+
+                vertex = temp_vertices[vertexIndex[0]];
+                out_vertices.push_back(vertex);
+                uv = temp_uvs[uvIndex[0]];
+                out_uvs.push_back(uv);
+                normal = temp_normals[normalIndex[0]];
+                out_normals.push_back(normal);
+
+                // std::cout << "triangle " << triangle_i << ", vertex 0: (" << vertex.x << ", " << vertex.y << ", " << vertex.z << ").\n";
+
+                vertex = temp_vertices[vertexIndex[1]];
+                out_vertices.push_back(vertex);
+                uv = temp_uvs[uvIndex[1]];
+                out_uvs.push_back(uv);
+                normal = temp_normals[normalIndex[1]];
+                out_normals.push_back(normal);
+
+                // std::cout << "triangle " << triangle_i << ", vertex 1: (" << vertex.x << ", " << vertex.y << ", " << vertex.z << ").\n";
+
+                vertex = temp_vertices[vertexIndex[2]];
+                out_vertices.push_back(vertex);
+                uv = temp_uvs[uvIndex[2]];
+                out_uvs.push_back(uv);
+                normal = temp_normals[normalIndex[2]];
+                out_normals.push_back(normal);
+
+                // std::cout << "triangle " << triangle_i << ", vertex 2: (" << vertex.x << ", " << vertex.y << ", " << vertex.z << ").\n\n";
+                triangle_i++;
+
+                // Define the second triangle: center, northwest, northeast.
+                vertexIndex[0] = CENTER;
+                vertexIndex[1] = NORTHWEST;
+                vertexIndex[2] = NORTHEAST;
+
+#ifdef USE_HEIGHT_AS_TEXTURE_COORDINATE
+                uvIndex[0] = CENTER_Y;
+                uvIndex[1] = NORTHWEST_y;
+                uvIndex[2] = NORTHEAST_Y;
+#endif
+
+#ifdef USE_REAL_TEXTURE_COORDINATES
+                uvIndex[0] = CENTER;
+                uvIndex[1] = NORTHWEST;
+                uvIndex[2] = NORTHEAST;
+#endif
+
+                normalIndex[0] = 0; // TODO: add proper normal index.
+                normalIndex[1] = 0; // TODO: add proper normal index.
+                normalIndex[2] = 0; // TODO: add proper normal index.
+
+                vertex = temp_vertices[vertexIndex[0]];
+                out_vertices.push_back(vertex);
+                uv = temp_uvs[uvIndex[0]];
+                out_uvs.push_back(uv);
+                normal = temp_normals[normalIndex[0]];
+                out_normals.push_back(normal);
+
+                // std::cout << "triangle " << triangle_i << ", vertex 0: (" << vertex.x << ", " << vertex.y << ", " << vertex.z << ").\n";
+
+                vertex = temp_vertices[vertexIndex[1]];
+                out_vertices.push_back(vertex);
+                uv = temp_uvs[uvIndex[1]];
+                out_uvs.push_back(uv);
+                normal = temp_normals[normalIndex[1]];
+                out_normals.push_back(normal);
+
+                // std::cout << "triangle " << triangle_i << ", vertex 1: (" << vertex.x << ", " << vertex.y << ", " << vertex.z << ").\n";
+
+                vertex = temp_vertices[vertexIndex[2]];
+                out_vertices.push_back(vertex);
+                uv = temp_uvs[uvIndex[2]];
+                out_uvs.push_back(uv);
+                normal = temp_normals[normalIndex[2]];
+                out_normals.push_back(normal);
+
+                // std::cout << "triangle " << triangle_i << ", vertex 2: (" << vertex.x << ", " << vertex.y << ", " << vertex.z << ").\n\n";
+                triangle_i++;
+
+                // Define the third triangle: center, northeast, southeast.
+                vertexIndex[0] = CENTER;
+                vertexIndex[1] = NORTHEAST;
+                vertexIndex[2] = SOUTHEAST;
+
+#ifdef USE_HEIGHT_AS_TEXTURE_COORDINATE
+                uvIndex[0] = CENTER_Y;
+                uvIndex[1] = NORTHEAST_y;
+                uvIndex[2] = SOUTHEAST_Y;
+#endif
+
+#ifdef USE_REAL_TEXTURE_COORDINATES
+                uvIndex[0] = CENTER;
+                uvIndex[1] = NORTHEAST;
+                uvIndex[2] = SOUTHEAST;
+#endif
+
+                normalIndex[0] = 0; // TODO: add proper normal index.
+                normalIndex[1] = 0; // TODO: add proper normal index.
+                normalIndex[2] = 0; // TODO: add proper normal index.
+
+                vertex = temp_vertices[vertexIndex[0]];
+                out_vertices.push_back(vertex);
+                uv = temp_uvs[uvIndex[0]];
+                out_uvs.push_back(uv);
+                normal = temp_normals[normalIndex[0]];
+                out_normals.push_back(normal);
+
+                // std::cout << "triangle " << triangle_i << ", vertex 0: (" << vertex.x << ", " << vertex.y << ", " << vertex.z << ").\n";
+
+                vertex = temp_vertices[vertexIndex[1]];
+                out_vertices.push_back(vertex);
+                uv = temp_uvs[uvIndex[1]];
+                out_uvs.push_back(uv);
+                normal = temp_normals[normalIndex[1]];
+                out_normals.push_back(normal);
+
+                // std::cout << "triangle " << triangle_i << ", vertex 1: (" << vertex.x << ", " << vertex.y << ", " << vertex.z << ").\n";
+
+                vertex = temp_vertices[vertexIndex[2]];
+                out_vertices.push_back(vertex);
+                uv = temp_uvs[uvIndex[2]];
+                out_uvs.push_back(uv);
+                normal = temp_normals[normalIndex[2]];
+                out_normals.push_back(normal);
+
+                // std::cout << "triangle " << triangle_i << ", vertex 2: (" << vertex.x << ", " << vertex.y << ", " << vertex.z << ").\n\n";
+                triangle_i++;
+
+                // Define the fourth triangle: center, southeast, southwest.
+                vertexIndex[0] = CENTER;
+                vertexIndex[1] = SOUTHEAST;
+                vertexIndex[2] = SOUTHWEST;
+
+#ifdef USE_HEIGHT_AS_TEXTURE_COORDINATE
+                uvIndex[0] = CENTER_Y;
+                uvIndex[1] = SOUTHEAST_y;
+                uvIndex[2] = SOUTHWEST_Y;
+#endif
+
+#ifdef USE_REAL_TEXTURE_COORDINATES
+                uvIndex[0] = CENTER;
+                uvIndex[1] = SOUTHEAST;
+                uvIndex[2] = SOUTHWEST;
+#endif
+
+                normalIndex[0] = 0; // TODO: add proper normal index.
+                normalIndex[1] = 0; // TODO: add proper normal index.
+                normalIndex[2] = 0; // TODO: add proper normal index.
+
+                vertex = temp_vertices[vertexIndex[0]];
+                out_vertices.push_back(vertex);
+                uv = temp_uvs[uvIndex[0]];
+                out_uvs.push_back(uv);
+                normal = temp_normals[normalIndex[0]];
+                out_normals.push_back(normal);
+
+                // std::cout << "triangle " << triangle_i << ", vertex 0: (" << vertex.x << ", " << vertex.y << ", " << vertex.z << ").\n";
+
+                vertex = temp_vertices[vertexIndex[1]];
+                out_vertices.push_back(vertex);
+                uv = temp_uvs[uvIndex[1]];
+                out_uvs.push_back(uv);
+                normal = temp_normals[normalIndex[1]];
+                out_normals.push_back(normal);
+
+                // std::cout << "triangle " << triangle_i << ", vertex 1: (" << vertex.x << ", " << vertex.y << ", " << vertex.z << ").\n";
+
+                vertex = temp_vertices[vertexIndex[2]];
+                out_vertices.push_back(vertex);
+                uv = temp_uvs[uvIndex[2]];
+                out_uvs.push_back(uv);
+                normal = temp_normals[normalIndex[2]];
+                out_normals.push_back(normal);
+
+                // std::cout << "triangle " << triangle_i << ", vertex 2: (" << vertex.x << ", " << vertex.y << ", " << vertex.z << ").\n\n";
+                triangle_i++;
+
+                current_interpolated_vertex_i++;
+            }
+        }
+        return true;
     }
     else if (is_southwest_northeast_in_use || is_southeast_northwest_in_use)
     {
@@ -140,10 +394,10 @@ bool triangulate_quads(
 
         // Then, define the faces in a double loop.
         // Begin from index 1.
-        for (int32_t z = 1; z < image_height; z++)
+        for (uint32_t z = 1; z < image_height; z++)
         {
             // Begin from index 1.
-            for (int32_t x = 1; x < image_width; x++)
+            for (uint32_t x = 1; x < image_width; x++)
             {
                 // This corresponds to "f": specify a face (but here we specify 2 faces instead!).
                 std::cout << "Processing coordinate (" << x << ", " << z << ").\n";
@@ -414,39 +668,39 @@ bool load_BMP_world(
     // Everything is in memory now, the file can be closed
     fclose(file);
 
-    int32_t *vertex_data;
-    vertex_data = new int32_t [imageSize];
+    uint32_t *vertex_data;
+    vertex_data = new uint32_t [imageSize];
 
     uint8_t *image_pointer;
     image_pointer = image_data;
 
-    int32_t *vertex_pointer;
+    uint32_t *vertex_pointer;
     vertex_pointer = vertex_data;
 
     // start processing image_data.
-    for (int32_t z = 0; z < image_height; z++)
+    for (uint32_t z = 0; z < image_height; z++)
     {
-        for (int32_t x = 0; x < image_width; x++)
+        for (uint32_t x = 0; x < image_width; x++)
         {
             const char *char_color_channel = color_channel.c_str();
-            int32_t y;
+            uint32_t y;
 
             if (strcmp(char_color_channel, "red") == 0)
             {
-                y = (int32_t) *image_pointer;       // y-coordinate is the red (R) value.
+                y = (uint32_t) *image_pointer;       // y-coordinate is the red (R) value.
             }
             else if (strcmp(char_color_channel, "green") == 0)
             {
-                y = (int32_t) *(image_pointer + 1); // y-coordinate is the green (G) value.
+                y = (uint32_t) *(image_pointer + 1); // y-coordinate is the green (G) value.
             }
             else if (strcmp(char_color_channel, "green") == 0)
             {
-                y = (int32_t) *(image_pointer + 2); // y-coordinate is the blue (B) value.
+                y = (uint32_t) *(image_pointer + 2); // y-coordinate is the blue (B) value.
             }
             // y-coordinate is the mean of R, G, & B.
             else if ((strcmp(char_color_channel, "mean") == 0) || (strcmp(char_color_channel, "all") == 0))
             {
-                y = (((int32_t) *image_pointer) + ((int32_t) *(image_pointer + 1)) + ((int32_t) *(image_pointer + 2))) / 3;
+                y = (((uint32_t) *image_pointer) + ((uint32_t) *(image_pointer + 1)) + ((uint32_t) *(image_pointer + 2))) / 3;
             }
             else
             {
@@ -460,9 +714,9 @@ bool load_BMP_world(
     }
     std::cout << "color channel in use: " << color_channel << "\n";
 
-    // std::string triangulation_type = "bilinear_interpolation";
+    std::string triangulation_type = "bilinear_interpolation";
     // std::string triangulation_type = "southeast_northwest"; // "northwest_southeast" is equivalent.
-    std::string triangulation_type = "southwest_northeast"; // "northeast_southwest" is equivalent.
+    // std::string triangulation_type = "southwest_northeast"; // "northeast_southwest" is equivalent.
 
     bool triangulation_result = triangulate_quads(vertex_data, image_width, image_height, out_vertices, out_uvs, out_normals, triangulation_type);
     return true;
