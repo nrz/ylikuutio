@@ -46,11 +46,6 @@ bool triangulate_quads(
 #define NORTHWEST_Y (get_y(input_vertex_pointer, x - 1, z, image_width))
 #define NORTHEAST_Y (get_y(input_vertex_pointer, x, z, image_width))
 
-#define SOUTHWEST_VERTEX_I (image_width * (z - 1) + (x - 1))
-#define SOUTHEAST_VERTEX_I (image_width * (z - 1) + x)
-#define NORTHWEST_VERTEX_I (image_width * z + (x - 1))
-#define NORTHEAST_VERTEX_I (image_width * z + x)
-
     std::vector<uint32_t> vertexIndices, uvIndices, normalIndices;
     std::vector<glm::vec3> temp_vertices;
     std::vector<glm::vec2> temp_uvs;
@@ -178,9 +173,9 @@ bool triangulate_quads(
 #endif
 
 #ifdef USE_REAL_TEXTURE_COORDINATES
-                    uvIndex[0] = SOUTHWEST_VERTEX_I;
-                    uvIndex[1] = NORTHEAST_VERTEX_I;
-                    uvIndex[2] = SOUTHEAST_VERTEX_I;
+                    uvIndex[0] = SOUTHWEST;
+                    uvIndex[1] = NORTHEAST;
+                    uvIndex[2] = SOUTHEAST;
 #endif
                 }
                 else if (is_southeast_northwest_in_use)
@@ -206,9 +201,9 @@ bool triangulate_quads(
 #endif
 
 #ifdef USE_REAL_TEXTURE_COORDINATES
-                    uvIndex[0] = SOUTHEAST_VERTEX_I;
-                    uvIndex[1] = SOUTHWEST_VERTEX_I;
-                    uvIndex[2] = NORTHWEST_VERTEX_I;
+                    uvIndex[0] = SOUTHEAST;
+                    uvIndex[1] = SOUTHWEST;
+                    uvIndex[2] = NORTHWEST;
 #endif
                 }
 
@@ -266,9 +261,9 @@ bool triangulate_quads(
 #endif
 
 #ifdef USE_REAL_TEXTURE_COORDINATES
-                    uvIndex[0] = SOUTHWEST_VERTEX_I;
-                    uvIndex[1] = NORTHWEST_VERTEX_I;
-                    uvIndex[2] = NORTHEAST_VERTEX_I;
+                    uvIndex[0] = SOUTHWEST;
+                    uvIndex[1] = NORTHWEST;
+                    uvIndex[2] = NORTHEAST;
 #endif
                 }
                 else if (is_southeast_northwest_in_use)
@@ -289,9 +284,9 @@ bool triangulate_quads(
 #endif
 
 #ifdef USE_REAL_TEXTURE_COORDINATES
-                    uvIndex[0] = SOUTHEAST_VERTEX_I;
-                    uvIndex[1] = NORTHWEST_VERTEX_I;
-                    uvIndex[2] = NORTHEAST_VERTEX_I;
+                    uvIndex[0] = SOUTHEAST;
+                    uvIndex[1] = NORTHWEST;
+                    uvIndex[2] = NORTHEAST;
 #endif
                 }
 
