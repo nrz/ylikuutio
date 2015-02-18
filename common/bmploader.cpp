@@ -71,9 +71,9 @@ bool triangulate_quads(
 
             // This corresponds to "v": specify one vertex.
             glm::vec3 vertex;
-            vertex.x = x;
-            vertex.y = y;
-            vertex.z = z;
+            vertex.x = (float) x;
+            vertex.y = (float) y;
+            vertex.z = (float) z;
             temp_vertices.push_back(vertex);
 
             // This corresponds to "vt": specify texture coordinates of one vertex.
@@ -81,7 +81,7 @@ bool triangulate_quads(
 
 #ifdef USE_HEIGHT_AS_TEXTURE_COORDINATE
             uv.x = ((float) y) / 256;
-            uv.y = 0;
+            uv.y = 0.0f;
 #endif
 
 #ifdef USE_REAL_TEXTURE_COORDINATES
@@ -93,9 +93,9 @@ bool triangulate_quads(
 
             // This corresponds to "vn": specify normal of one vertex.
             glm::vec3 normal;
-            normal.x = 0; // TODO: define a proper normal!
-            normal.y = 1; // TODO: define a proper normal!
-            normal.z = 0; // TODO: define a proper normal!
+            normal.x = 0.0f; // TODO: define a proper normal!
+            normal.y = 1.0f; // TODO: define a proper normal!
+            normal.z = 0.0f; // TODO: define a proper normal!
             temp_normals.push_back(normal);
 
             texture_x ^= 1;
