@@ -26,6 +26,51 @@ uint32_t get_y(
     return *vertex_pointer;
 }
 
+uint32_t output_triangle_vertices(
+        std::vector<glm::vec3> &temp_vertices,
+        std::vector<glm::vec2> &temp_uvs,
+        std::vector<glm::vec3> &temp_normals,
+        uint32_t vertexIndex[3],
+        uint32_t uvIndex[3],
+        uint32_t normalIndex[3],
+        std::vector<glm::vec3> &out_vertices,
+        std::vector<glm::vec2> &out_uvs,
+        std::vector<glm::vec3> &out_normals,
+        uint32_t triangle_i)
+{
+    glm::vec3 vertex;
+    glm::vec2 uv;
+    glm::vec3 normal;
+
+    vertex = temp_vertices[vertexIndex[0]];
+    out_vertices.push_back(vertex);
+    uv = temp_uvs[uvIndex[0]];
+    out_uvs.push_back(uv);
+    normal = temp_normals[normalIndex[0]];
+    out_normals.push_back(normal);
+
+    // std::cout << "triangle " << triangle_i << ", vertex 0: (" << vertex.x << ", " << vertex.y << ", " << vertex.z << ").\n";
+
+    vertex = temp_vertices[vertexIndex[1]];
+    out_vertices.push_back(vertex);
+    uv = temp_uvs[uvIndex[1]];
+    out_uvs.push_back(uv);
+    normal = temp_normals[normalIndex[1]];
+    out_normals.push_back(normal);
+
+    // std::cout << "triangle " << triangle_i << ", vertex 1: (" << vertex.x << ", " << vertex.y << ", " << vertex.z << ").\n";
+
+    vertex = temp_vertices[vertexIndex[2]];
+    out_vertices.push_back(vertex);
+    uv = temp_uvs[uvIndex[2]];
+    out_uvs.push_back(uv);
+    normal = temp_normals[normalIndex[2]];
+    out_normals.push_back(normal);
+
+    // std::cout << "triangle " << triangle_i << ", vertex 2: (" << vertex.x << ", " << vertex.y << ", " << vertex.z << ").\n\n";
+    triangle_i++;
+}
+
 bool triangulate_quads(
         uint32_t *input_vertex_pointer,
         uint32_t image_width,
@@ -207,33 +252,17 @@ bool triangulate_quads(
                 normalIndex[1] = 0; // TODO: add proper normal index.
                 normalIndex[2] = 0; // TODO: add proper normal index.
 
-                vertex = temp_vertices[vertexIndex[0]];
-                out_vertices.push_back(vertex);
-                uv = temp_uvs[uvIndex[0]];
-                out_uvs.push_back(uv);
-                normal = temp_normals[normalIndex[0]];
-                out_normals.push_back(normal);
-
-                // std::cout << "triangle " << triangle_i << ", vertex 0: (" << vertex.x << ", " << vertex.y << ", " << vertex.z << ").\n";
-
-                vertex = temp_vertices[vertexIndex[1]];
-                out_vertices.push_back(vertex);
-                uv = temp_uvs[uvIndex[1]];
-                out_uvs.push_back(uv);
-                normal = temp_normals[normalIndex[1]];
-                out_normals.push_back(normal);
-
-                // std::cout << "triangle " << triangle_i << ", vertex 1: (" << vertex.x << ", " << vertex.y << ", " << vertex.z << ").\n";
-
-                vertex = temp_vertices[vertexIndex[2]];
-                out_vertices.push_back(vertex);
-                uv = temp_uvs[uvIndex[2]];
-                out_uvs.push_back(uv);
-                normal = temp_normals[normalIndex[2]];
-                out_normals.push_back(normal);
-
-                // std::cout << "triangle " << triangle_i << ", vertex 2: (" << vertex.x << ", " << vertex.y << ", " << vertex.z << ").\n\n";
-                triangle_i++;
+                triangle_i = output_triangle_vertices(
+                        temp_vertices,
+                        temp_uvs,
+                        temp_normals,
+                        vertexIndex,
+                        uvIndex,
+                        normalIndex,
+                        out_vertices,
+                        out_uvs,
+                        out_normals,
+                        triangle_i);
 
                 // Define the second triangle: center, northwest, northeast.
                 vertexIndex[0] = CENTER;
@@ -256,33 +285,17 @@ bool triangulate_quads(
                 normalIndex[1] = 0; // TODO: add proper normal index.
                 normalIndex[2] = 0; // TODO: add proper normal index.
 
-                vertex = temp_vertices[vertexIndex[0]];
-                out_vertices.push_back(vertex);
-                uv = temp_uvs[uvIndex[0]];
-                out_uvs.push_back(uv);
-                normal = temp_normals[normalIndex[0]];
-                out_normals.push_back(normal);
-
-                // std::cout << "triangle " << triangle_i << ", vertex 0: (" << vertex.x << ", " << vertex.y << ", " << vertex.z << ").\n";
-
-                vertex = temp_vertices[vertexIndex[1]];
-                out_vertices.push_back(vertex);
-                uv = temp_uvs[uvIndex[1]];
-                out_uvs.push_back(uv);
-                normal = temp_normals[normalIndex[1]];
-                out_normals.push_back(normal);
-
-                // std::cout << "triangle " << triangle_i << ", vertex 1: (" << vertex.x << ", " << vertex.y << ", " << vertex.z << ").\n";
-
-                vertex = temp_vertices[vertexIndex[2]];
-                out_vertices.push_back(vertex);
-                uv = temp_uvs[uvIndex[2]];
-                out_uvs.push_back(uv);
-                normal = temp_normals[normalIndex[2]];
-                out_normals.push_back(normal);
-
-                // std::cout << "triangle " << triangle_i << ", vertex 2: (" << vertex.x << ", " << vertex.y << ", " << vertex.z << ").\n\n";
-                triangle_i++;
+                triangle_i = output_triangle_vertices(
+                        temp_vertices,
+                        temp_uvs,
+                        temp_normals,
+                        vertexIndex,
+                        uvIndex,
+                        normalIndex,
+                        out_vertices,
+                        out_uvs,
+                        out_normals,
+                        triangle_i);
 
                 // Define the third triangle: center, northeast, southeast.
                 vertexIndex[0] = CENTER;
@@ -305,33 +318,17 @@ bool triangulate_quads(
                 normalIndex[1] = 0; // TODO: add proper normal index.
                 normalIndex[2] = 0; // TODO: add proper normal index.
 
-                vertex = temp_vertices[vertexIndex[0]];
-                out_vertices.push_back(vertex);
-                uv = temp_uvs[uvIndex[0]];
-                out_uvs.push_back(uv);
-                normal = temp_normals[normalIndex[0]];
-                out_normals.push_back(normal);
-
-                // std::cout << "triangle " << triangle_i << ", vertex 0: (" << vertex.x << ", " << vertex.y << ", " << vertex.z << ").\n";
-
-                vertex = temp_vertices[vertexIndex[1]];
-                out_vertices.push_back(vertex);
-                uv = temp_uvs[uvIndex[1]];
-                out_uvs.push_back(uv);
-                normal = temp_normals[normalIndex[1]];
-                out_normals.push_back(normal);
-
-                // std::cout << "triangle " << triangle_i << ", vertex 1: (" << vertex.x << ", " << vertex.y << ", " << vertex.z << ").\n";
-
-                vertex = temp_vertices[vertexIndex[2]];
-                out_vertices.push_back(vertex);
-                uv = temp_uvs[uvIndex[2]];
-                out_uvs.push_back(uv);
-                normal = temp_normals[normalIndex[2]];
-                out_normals.push_back(normal);
-
-                // std::cout << "triangle " << triangle_i << ", vertex 2: (" << vertex.x << ", " << vertex.y << ", " << vertex.z << ").\n\n";
-                triangle_i++;
+                triangle_i = output_triangle_vertices(
+                        temp_vertices,
+                        temp_uvs,
+                        temp_normals,
+                        vertexIndex,
+                        uvIndex,
+                        normalIndex,
+                        out_vertices,
+                        out_uvs,
+                        out_normals,
+                        triangle_i);
 
                 // Define the fourth triangle: center, southeast, southwest.
                 vertexIndex[0] = CENTER;
@@ -354,33 +351,17 @@ bool triangulate_quads(
                 normalIndex[1] = 0; // TODO: add proper normal index.
                 normalIndex[2] = 0; // TODO: add proper normal index.
 
-                vertex = temp_vertices[vertexIndex[0]];
-                out_vertices.push_back(vertex);
-                uv = temp_uvs[uvIndex[0]];
-                out_uvs.push_back(uv);
-                normal = temp_normals[normalIndex[0]];
-                out_normals.push_back(normal);
-
-                // std::cout << "triangle " << triangle_i << ", vertex 0: (" << vertex.x << ", " << vertex.y << ", " << vertex.z << ").\n";
-
-                vertex = temp_vertices[vertexIndex[1]];
-                out_vertices.push_back(vertex);
-                uv = temp_uvs[uvIndex[1]];
-                out_uvs.push_back(uv);
-                normal = temp_normals[normalIndex[1]];
-                out_normals.push_back(normal);
-
-                // std::cout << "triangle " << triangle_i << ", vertex 1: (" << vertex.x << ", " << vertex.y << ", " << vertex.z << ").\n";
-
-                vertex = temp_vertices[vertexIndex[2]];
-                out_vertices.push_back(vertex);
-                uv = temp_uvs[uvIndex[2]];
-                out_uvs.push_back(uv);
-                normal = temp_normals[normalIndex[2]];
-                out_normals.push_back(normal);
-
-                // std::cout << "triangle " << triangle_i << ", vertex 2: (" << vertex.x << ", " << vertex.y << ", " << vertex.z << ").\n\n";
-                triangle_i++;
+                triangle_i = output_triangle_vertices(
+                        temp_vertices,
+                        temp_uvs,
+                        temp_normals,
+                        vertexIndex,
+                        uvIndex,
+                        normalIndex,
+                        out_vertices,
+                        out_uvs,
+                        out_normals,
+                        triangle_i);
 
                 current_interpolated_vertex_i++;
             }
@@ -465,37 +446,17 @@ bool triangulate_quads(
                 normalIndex[1] = 0; // TODO: add proper normal index.
                 normalIndex[2] = 0; // TODO: add proper normal index.
 
-                glm::vec3 vertex;
-                glm::vec2 uv;
-                glm::vec3 normal;
-
-                vertex = temp_vertices[vertexIndex[0]];
-                out_vertices.push_back(vertex);
-                uv = temp_uvs[uvIndex[0]];
-                out_uvs.push_back(uv);
-                normal = temp_normals[normalIndex[0]];
-                out_normals.push_back(normal);
-
-                // std::cout << "triangle " << triangle_i << ", vertex 0: (" << vertex.x << ", " << vertex.y << ", " << vertex.z << ").\n";
-
-                vertex = temp_vertices[vertexIndex[1]];
-                out_vertices.push_back(vertex);
-                uv = temp_uvs[uvIndex[1]];
-                out_uvs.push_back(uv);
-                normal = temp_normals[normalIndex[1]];
-                out_normals.push_back(normal);
-
-                // std::cout << "triangle " << triangle_i << ", vertex 1: (" << vertex.x << ", " << vertex.y << ", " << vertex.z << ").\n";
-
-                vertex = temp_vertices[vertexIndex[2]];
-                out_vertices.push_back(vertex);
-                uv = temp_uvs[uvIndex[2]];
-                out_uvs.push_back(uv);
-                normal = temp_normals[normalIndex[2]];
-                out_normals.push_back(normal);
-
-                // std::cout << "triangle " << triangle_i << ", vertex 2: (" << vertex.x << ", " << vertex.y << ", " << vertex.z << ").\n\n";
-                triangle_i++;
+                triangle_i = output_triangle_vertices(
+                        temp_vertices,
+                        temp_uvs,
+                        temp_normals,
+                        vertexIndex,
+                        uvIndex,
+                        normalIndex,
+                        out_vertices,
+                        out_uvs,
+                        out_normals,
+                        triangle_i);
 
                 if (is_southwest_northeast_in_use)
                 {
@@ -548,33 +509,17 @@ bool triangulate_quads(
                 normalIndex[1] = 0; // TODO: add proper normal index.
                 normalIndex[2] = 0; // TODO: add proper normal index.
 
-                vertex = temp_vertices[vertexIndex[0]];
-                out_vertices.push_back(vertex);
-                uv = temp_uvs[uvIndex[0]];
-                out_uvs.push_back(uv);
-                normal = temp_normals[normalIndex[0]];
-                out_normals.push_back(normal);
-
-                // std::cout << "triangle " << triangle_i << ", vertex 0: (" << vertex.x << ", " << vertex.y << ", " << vertex.z << ").\n";
-
-                vertex = temp_vertices[vertexIndex[1]];
-                out_vertices.push_back(vertex);
-                uv = temp_uvs[uvIndex[1]];
-                out_uvs.push_back(uv);
-                normal = temp_normals[normalIndex[1]];
-                out_normals.push_back(normal);
-
-                // std::cout << "triangle " << triangle_i << ", vertex 1: (" << vertex.x << ", " << vertex.y << ", " << vertex.z << ").\n";
-
-                vertex = temp_vertices[vertexIndex[2]];
-                out_vertices.push_back(vertex);
-                uv = temp_uvs[uvIndex[2]];
-                out_uvs.push_back(uv);
-                normal = temp_normals[normalIndex[2]];
-                out_normals.push_back(normal);
-
-                // std::cout << "triangle " << triangle_i << ", vertex 2: (" << vertex.x << ", " << vertex.y << ", " << vertex.z << ").\n";
-                triangle_i++;
+                triangle_i = output_triangle_vertices(
+                        temp_vertices,
+                        temp_uvs,
+                        temp_normals,
+                        vertexIndex,
+                        uvIndex,
+                        normalIndex,
+                        out_vertices,
+                        out_uvs,
+                        out_normals,
+                        triangle_i);
             }
         }
         return true;
