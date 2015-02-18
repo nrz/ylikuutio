@@ -105,16 +105,16 @@ bool triangulate_quads(
 
     uint32_t vertexIndex[3], uvIndex[3], normalIndex[3];
 
-    bool is_4_triangles_in_use = false;
+    bool is_bilinear_interpolation_in_use = false;
     bool is_southwest_northeast_in_use = false;
     bool is_southeast_northwest_in_use = false;
     bool is_triangulation_type_valid = false;
 
     const char *char_triangulation_type = triangulation_type.c_str();
 
-    if (strcmp(char_triangulation_type, "4_triangles") == 0)
+    if (strcmp(char_triangulation_type, "bilinear_interpolation") == 0)
     {
-        is_4_triangles_in_use = true;
+        is_bilinear_interpolation_in_use = true;
         is_triangulation_type_valid = true;
     }
     else if ((strcmp(char_triangulation_type, "southwest_northeast") == 0) || (strcmp(char_triangulation_type, "northeast_southwest") == 0))
@@ -133,7 +133,7 @@ bool triangulate_quads(
 
     uint32_t triangle_i = 0;
 
-    if (is_4_triangles_in_use)
+    if (is_bilinear_interpolation_in_use)
     {
         std::cerr << "quad triangulation type " << triangulation_type << " not yet implemented!\n";
         return false;
@@ -465,9 +465,9 @@ bool load_BMP_world(
     }
     std::cout << "color channel in use: " << color_channel << "\n";
 
-    // std::string triangulation_type = "4_triangles";
-    std::string triangulation_type = "southeast_northwest"; // "northwest_southeast" is equivalent.
-    // std::string triangulation_type = "southwest_northeast"; // "northeast_southwest" is equivalent.
+    // std::string triangulation_type = "bilinear_interpolation";
+    // std::string triangulation_type = "southeast_northwest"; // "northwest_southeast" is equivalent.
+    std::string triangulation_type = "southwest_northeast"; // "northeast_southwest" is equivalent.
 
     bool triangulation_result = triangulate_quads(vertex_data, image_width, image_height, out_vertices, out_uvs, out_normals, triangulation_type);
     return true;
