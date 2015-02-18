@@ -41,10 +41,10 @@ bool triangulate_quads(
 #define NORTHWEST (current_vertex_i - 1)
 #define NORTHEAST (current_vertex_i)
 
-#define SOUTHWEST_Y get_y(input_vertex_pointer, x - 1, z - 1, image_width)
-#define SOUTHEAST_Y get_y(input_vertex_pointer, x, z, image_width)
-#define NORTHWEST_Y get_y(input_vertex_pointer, x - 1, z, image_width)
-#define NORTHEAST_Y get_y(input_vertex_pointer, x, z, image_width)
+#define SOUTHWEST_Y (get_y(input_vertex_pointer, x - 1, z - 1, image_width))
+#define SOUTHEAST_Y (get_y(input_vertex_pointer, x, z, image_width))
+#define NORTHWEST_Y (get_y(input_vertex_pointer, x - 1, z, image_width))
+#define NORTHEAST_Y (get_y(input_vertex_pointer, x, z, image_width))
 
 #define SOUTHWEST_VERTEX_I (image_width * (z - 1) + (x - 1))
 #define SOUTHEAST_VERTEX_I (image_width * (z - 1) + x)
