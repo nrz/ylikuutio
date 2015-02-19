@@ -67,7 +67,7 @@ target_link_libraries(cube_with_colors
 set_target_properties(cube_with_colors PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/cube_with_colors/")
 create_target_launcher(cube_with_colors WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/cube_with_colors/")
 
-# Tutorial 7
+# Ylikuutio
 add_executable(model_loading
     model_loading/model_loading.cpp
     common/shader.cpp
@@ -83,6 +83,8 @@ add_executable(model_loading
 
     model_loading/TransformVertexShader.vertexshader
     model_loading/TextureFragmentShader.fragmentshader
+    model_loading/StandardShading.vertexshader
+    model_loading/StandardShading.fragmentshader
 )
 target_link_libraries(model_loading
     ${ALL_LIBS}
