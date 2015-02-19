@@ -226,12 +226,47 @@ bool triangulate_quads(
                 temp_normals.push_back(normal);
 
                 // Then, define the triangles (4 faces).
-                // First triangle: center, southwest, northwest.
-                // Second triangle: center, northwest, northeast.
-                // Third triangle: center, northeast, southeast.
-                // Fourth triangle: center, southeast, southwest.
+                // Triangle order: S - W - N - E.
+                //
+                // First triangle: center, southeast, southwest.
+                // Second triangle: center, southwest, northwest.
+                // Third triangle: center, northwest, northeast.
+                // Fourth triangle: center, northeast, southeast.
 
-                // Define the first triangle: center, southwest, northwest.
+                // Define the first triangle, S: center, southeast, southwest.
+                vertexIndex[0] = CENTER;
+                vertexIndex[1] = SOUTHEAST;
+                vertexIndex[2] = SOUTHWEST;
+
+#ifdef USE_HEIGHT_AS_TEXTURE_COORDINATE
+                uvIndex[0] = CENTER_Y;
+                uvIndex[1] = SOUTHEAST_y;
+                uvIndex[2] = SOUTHWEST_Y;
+#endif
+
+#ifdef USE_REAL_TEXTURE_COORDINATES
+                uvIndex[0] = CENTER;
+                uvIndex[1] = SOUTHEAST;
+                uvIndex[2] = SOUTHWEST;
+#endif
+
+                normalIndex[0] = 0; // TODO: add proper normal index.
+                normalIndex[1] = 0; // TODO: add proper normal index.
+                normalIndex[2] = 0; // TODO: add proper normal index.
+
+                triangle_i = output_triangle_vertices(
+                        temp_vertices,
+                        temp_uvs,
+                        temp_normals,
+                        vertexIndex,
+                        uvIndex,
+                        normalIndex,
+                        out_vertices,
+                        out_uvs,
+                        out_normals,
+                        triangle_i);
+
+                // Define the second triangle, W: center, southwest, northwest.
                 vertexIndex[0] = CENTER;
                 vertexIndex[1] = SOUTHWEST;
                 vertexIndex[2] = NORTHWEST;
@@ -264,7 +299,7 @@ bool triangulate_quads(
                         out_normals,
                         triangle_i);
 
-                // Define the second triangle: center, northwest, northeast.
+                // Define the third triangle, N: center, northwest, northeast.
                 vertexIndex[0] = CENTER;
                 vertexIndex[1] = NORTHWEST;
                 vertexIndex[2] = NORTHEAST;
@@ -297,7 +332,7 @@ bool triangulate_quads(
                         out_normals,
                         triangle_i);
 
-                // Define the third triangle: center, northeast, southeast.
+                // Define the fourth triangle, E: center, northeast, southeast.
                 vertexIndex[0] = CENTER;
                 vertexIndex[1] = NORTHEAST;
                 vertexIndex[2] = SOUTHEAST;
@@ -312,39 +347,6 @@ bool triangulate_quads(
                 uvIndex[0] = CENTER;
                 uvIndex[1] = NORTHEAST;
                 uvIndex[2] = SOUTHEAST;
-#endif
-
-                normalIndex[0] = 0; // TODO: add proper normal index.
-                normalIndex[1] = 0; // TODO: add proper normal index.
-                normalIndex[2] = 0; // TODO: add proper normal index.
-
-                triangle_i = output_triangle_vertices(
-                        temp_vertices,
-                        temp_uvs,
-                        temp_normals,
-                        vertexIndex,
-                        uvIndex,
-                        normalIndex,
-                        out_vertices,
-                        out_uvs,
-                        out_normals,
-                        triangle_i);
-
-                // Define the fourth triangle: center, southeast, southwest.
-                vertexIndex[0] = CENTER;
-                vertexIndex[1] = SOUTHEAST;
-                vertexIndex[2] = SOUTHWEST;
-
-#ifdef USE_HEIGHT_AS_TEXTURE_COORDINATE
-                uvIndex[0] = CENTER_Y;
-                uvIndex[1] = SOUTHEAST_y;
-                uvIndex[2] = SOUTHWEST_Y;
-#endif
-
-#ifdef USE_REAL_TEXTURE_COORDINATES
-                uvIndex[0] = CENTER;
-                uvIndex[1] = SOUTHEAST;
-                uvIndex[2] = SOUTHWEST;
 #endif
 
                 normalIndex[0] = 0; // TODO: add proper normal index.
