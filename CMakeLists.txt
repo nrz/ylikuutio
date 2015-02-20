@@ -68,8 +68,8 @@ set_target_properties(cube_with_colors PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_
 create_target_launcher(cube_with_colors WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/cube_with_colors/")
 
 # Ylikuutio
-add_executable(model_loading
-    model_loading/model_loading.cpp
+add_executable(ylikuutio
+    ylikuutio/ylikuutio.cpp
     common/shader.cpp
     common/shader.hpp
     common/controls.cpp
@@ -81,17 +81,24 @@ add_executable(model_loading
     common/objloader.cpp
     common/objloader.hpp
 
-    model_loading/TransformVertexShader.vertexshader
-    model_loading/TextureFragmentShader.fragmentshader
-    model_loading/StandardShading.vertexshader
-    model_loading/StandardShading.fragmentshader
+    ylikuutio/TransformVertexShader.vertexshader
+    ylikuutio/TextureFragmentShader.fragmentshader
+    ylikuutio/StandardShading.vertexshader
+    ylikuutio/StandardShading.fragmentshader
 )
-target_link_libraries(model_loading
+configure_file(ylikuutio/TransformVertexShader.vertexshader TransformVertexShader.vertexshader COPYONLY)
+configure_file(ylikuutio/TextureFragmentShader.fragmentshader TextureFragmentShader.fragmentshader COPYONLY)
+configure_file(ylikuutio/StandardShading.vertexshader StandardShading.vertexshader COPYONLY)
+configure_file(ylikuutio/StandardShading.fragmentshader StandardShading.fragmentshader COPYONLY)
+configure_file(ylikuutio/GrassGreenTexture0002.bmp GrassGreenTexture0002.bmp COPYONLY)
+configure_file(ylikuutio/noise128x128.bmp noise128x128.bmp COPYONLY)
+
+target_link_libraries(ylikuutio
     ${ALL_LIBS}
 )
 # Xcode and Visual working directories
-set_target_properties(model_loading PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/model_loading/")
-create_target_launcher(model_loading WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/model_loading/")
+set_target_properties(ylikuutio PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/ylikuutio/")
+create_target_launcher(ylikuutio WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/ylikuutio/")
 
 
 SOURCE_GROUP(common REGULAR_EXPRESSION ".*/common/.*" )
