@@ -103,6 +103,8 @@ void computeMatricesFromInputs()
     {
         position -= right * deltaTime * speed;
     }
+
+    // Move up.
     if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
     {
         position.y += deltaTime * speed;
