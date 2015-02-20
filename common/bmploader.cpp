@@ -389,12 +389,15 @@ bool triangulate_quads(
 
                 if (is_southwest_northeast_in_use)
                 {
+                    // Define the triangles (2 faces).
+                    // Triangle order: SE - NW.
+                    //
                     // First triangle: 1, 4, 2 (southwest, northeast, southeast).
                     // Second triangle: 1, 3, 4 (southwest, northwest, northeast).
                     // 1, 4, 2 are relative vertex indices (base 1).
                     // 1, 3, 4 are relative vertex indices (base 1).
 
-                    // Define the first triangle: 1, 4, 2 (southwest, northeast, southeast).
+                    // Define the first triangle, SE: 1, 4, 2 (southwest, northeast, southeast).
                     // southwest: down and left from current coordinate.
                     // southeast: down from current coordinate.
                     // northeast: current coordinate.
@@ -417,12 +420,15 @@ bool triangulate_quads(
                 }
                 else if (is_southeast_northwest_in_use)
                 {
+                    // Define the triangles (2 faces).
+                    // Triangle order: SW - NE.
+                    //
                     // First triangle: 2, 1, 3 (southeast, southwest, northwest).
                     // Second triangle: 2, 3, 4 (southeast, northwest, northeast).
                     // 2, 1, 3 are relative vertex indices (base 1).
                     // 2, 3, 4 are relative vertex indices (base 1).
 
-                    // Define the first triangle: 2, 1, 3 (southeast, southwest, northwest).
+                    // Define the first triangle, SW: 2, 1, 3 (southeast, southwest, northwest).
                     // southeast: down from current coordinate.
                     // southwest: down and left from current coordinate.
                     // northwest: left from current coordinate.
@@ -462,7 +468,7 @@ bool triangulate_quads(
 
                 if (is_southwest_northeast_in_use)
                 {
-                    // Define the second triangle: 1, 3, 4 (southwest, northwest, northeast).
+                    // Define the second triangle, NW: 1, 3, 4 (southwest, northwest, northeast).
                     // southwest: down and left from current coordinate.
                     // northwest: left from current coordinate.
                     // northeast: current coordinate.
@@ -485,7 +491,7 @@ bool triangulate_quads(
                 }
                 else if (is_southeast_northwest_in_use)
                 {
-                    // Define the second triangle: 2, 3, 4 (southeast, northwest, northeast).
+                    // Define the second triangle, NE: 2, 3, 4 (southeast, northwest, northeast).
                     // southeast: down from current coordinate.
                     // northwest: left from current coordinate.
                     // northeast: current coordinate.
