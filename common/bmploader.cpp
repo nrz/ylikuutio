@@ -15,6 +15,57 @@
 // #define USE_HEIGHT_AS_TEXTURE_COORDINATE
 #define USE_REAL_TEXTURE_COORDINATES
 
+#define SSW_CODE 0
+#define WSW_CODE 1
+#define WNW_CODE 2
+#define NNW_CODE 3
+#define NNE_CODE 4
+#define ENE_CODE 5
+#define ESE_CODE 6
+#define SSE_CODE 7
+
+glm::vec3 get_face_normal(
+        std::vector<glm::vec3> &face_normal_data,
+        uint32_t x,
+        uint32_t z,
+        uint32_t compass_point_code,
+        uint32_t image_width)
+{
+    switch (compass_point_code)
+    {
+        uint32_t face_normal_i;
+
+        case SSW_CODE:
+        face_normal_i = 4 * (z - 1) * (image_width - 1) + (4 * x) - 1;
+        break;
+        case WSW_CODE:
+        face_normal_i = 4 * (z - 1) * (image_width - 1) + (4 * x) - 2;
+        break;
+        case WNW_CODE:
+        face_normal_i = 4 * z * (image_width - 1) + (4 * x) - 4;
+        break;
+        case NNW_CODE:
+        face_normal_i = 4 * z * (image_width - 1) + (4 * x) - 1;
+        break;
+        case NNE_CODE:
+        face_normal_i = 4 * z * (image_width - 1) + (4 * x) + 1;
+        break;
+        case ENE_CODE:
+        face_normal_i = 4 * z * (image_width - 1) + (4 * x);
+        break;
+        case ESE_CODE:
+        face_normal_i = 4 * (z - 1) * (image_width - 1) + (4 * x) + 2;
+        break;
+        case SSE_CODE:
+        face_normal_i = 4 * (z - 1) * (image_width - 1) + (4 * x) + 1;
+        break;
+        default:
+        std::cerr << "invalid compass point code!\n";
+
+        return face_normal_data[face_normal_i];
+    }
+}
+
 uint32_t get_y(
         uint32_t *vertex_data,
         uint32_t x,
@@ -93,6 +144,20 @@ bool triangulate_quads(
 #define NORTHEAST_Y (get_y(input_vertex_pointer, x, z, image_width))
 #define CENTER_Y ((SOUTHWEST_Y + SOUTHEAST_Y + NORTHWEST_Y + NORTHEAST_Y) / 4)
 
+#define SSW_FACE_NORMAL (get_face_normal(face_normal_vector_vec3, x, z, SSE_CODE, image_width))
+#define WSW_FACE_NORMAL (get_face_normal(face_normal_vector_vec3, x, z, WSW_CODE, image_width))
+#define WNW_FACE_NORMAL (get_face_normal(face_normal_vector_vec3, x, z, WNW_CODE, image_width))
+#define NNW_FACE_NORMAL (get_face_normal(face_normal_vector_vec3, x, z, NNW_CODE, image_width))
+#define NNE_FACE_NORMAL (get_face_normal(face_normal_vector_vec3, x, z, NNE_CODE, image_width))
+#define ENE_FACE_NORMAL (get_face_normal(face_normal_vector_vec3, x, z, ENE_CODE, image_width))
+#define ESE_FACE_NORMAL (get_face_normal(face_normal_vector_vec3, x, z, ESE_CODE, image_width))
+#define SSE_FACE_NORMAL (get_face_normal(face_normal_vector_vec3, x, z, SSE_CODE, image_width))
+
+#define S_FACE_NORMAL (get_face_normal(face_normal_vector_vec3, x - 1, z - 1, ENE_CODE, image_width))
+#define W_FACE_NORMAL (get_face_normal(face_normal_vector_vec3, x - 1, z - 1, NNE_CODE, image_width))
+#define N_FACE_NORMAL (get_face_normal(face_normal_vector_vec3, x, z, WSW_CODE, image_width))
+#define E_FACE_NORMAL (get_face_normal(face_normal_vector_vec3, x, z, SSW_CODE, image_width))
+
     std::vector<uint32_t> vertexIndices, uvIndices, normalIndices;
     std::vector<glm::vec3> temp_vertices;
     std::vector<glm::vec2> temp_uvs;
@@ -131,26 +196,17 @@ bool triangulate_quads(
 
             temp_uvs.push_back(uv);
 
-            // This corresponds to "vn": specify normal of one vertex.
-            glm::vec3 normal;
-            normal.x = 0.0f; // TODO: define a proper normal!
-            normal.y = 1.0f; // TODO: define a proper normal!
-            normal.z = 0.0f; // TODO: define a proper normal!
-            temp_normals.push_back(normal);
-
             texture_x ^= 1;
         }
         texture_y ^= 1;
     }
 
-    uint32_t vertexIndex[3], uvIndex[3], normalIndex[3];
+    const char *char_triangulation_type = triangulation_type.c_str();
 
     bool is_bilinear_interpolation_in_use = false;
     bool is_southwest_northeast_in_use = false;
     bool is_southeast_northwest_in_use = false;
     bool is_triangulation_type_valid = false;
-
-    const char *char_triangulation_type = triangulation_type.c_str();
 
     if (strcmp(char_triangulation_type, "bilinear_interpolation") == 0)
     {
@@ -169,15 +225,220 @@ bool triangulate_quads(
     }
 
     std::cout << "triangulation type in use: " << triangulation_type << "\n";
-    std::cout << "is triangulation type valid: " << is_triangulation_type_valid << "\n";
+
+    if (!is_triangulation_type_valid)
+    {
+        std::cerr << "invalid triangulation type!\n";
+    }
+
+    uint32_t n_faces_for_each_vertex;
+    uint32_t n_faces;
+
+    if (is_bilinear_interpolation_in_use)
+    {
+        n_faces_for_each_vertex = 4;
+    }
+    else if (is_southwest_northeast_in_use || is_southeast_northwest_in_use)
+    {
+        n_faces_for_each_vertex = 2;
+    }
+
+    n_faces = n_faces_for_each_vertex * (image_width - 1) * (image_height - 1);
+
+    std::cout << "image width: " << image_width << " pixels.\n";
+    std::cout << "image height: " << image_height << " pixels.\n";
+    std::cout << "number of faces: " << n_faces << ".\n";
+
+    // First, compute the face normals.
+    // Triangle order: S - W - N - E.
+    //
+    // First triangle: center, southeast, southwest.
+    // Second triangle: center, southwest, northwest.
+    // Third triangle: center, northwest, northeast.
+    // Fourth triangle: center, northeast, southeast.
+
+    std::vector<glm::vec3> face_normal_vector_vec3;
+
+    uint32_t current_interpolated_vertex_i;
+
+    current_interpolated_vertex_i = image_width * image_height;
+
+    for (uint32_t z = 1; z < image_height; z++)
+    {
+        for (uint32_t x = 1; x < image_width; x++)
+        {
+            uint32_t current_vertex_i = image_width * z + x;
+
+            // Computing of face normals depends on triangulation type.
+            if (is_bilinear_interpolation_in_use)
+            {
+                glm::vec3 edge1;
+                glm::vec3 edge2;
+                glm::vec3 face_normal;
+
+                // Compute the normal of S face.
+                edge1 = temp_vertices[SOUTHEAST] - temp_vertices[CENTER];
+                edge2 = temp_vertices[SOUTHWEST] - temp_vertices[CENTER];
+                face_normal = glm::cross(edge2, edge1);
+                face_normal_vector_vec3.push_back(face_normal);
+
+                // Compute the normal of W face.
+                edge1 = temp_vertices[SOUTHWEST] - temp_vertices[CENTER];
+                edge2 = temp_vertices[NORTHWEST] - temp_vertices[CENTER];
+                face_normal = glm::cross(edge2, edge1);
+                face_normal_vector_vec3.push_back(face_normal);
+
+                // Compute the normal of N face.
+                edge1 = temp_vertices[NORTHWEST] - temp_vertices[CENTER];
+                edge2 = temp_vertices[NORTHEAST] - temp_vertices[CENTER];
+                face_normal = glm::cross(edge2, edge1);
+                face_normal_vector_vec3.push_back(face_normal);
+
+                // Compute the normal of E face.
+                edge1 = temp_vertices[NORTHEAST] - temp_vertices[CENTER];
+                edge2 = temp_vertices[SOUTHEAST] - temp_vertices[CENTER];
+                face_normal = glm::cross(edge2, edge1);
+                face_normal_vector_vec3.push_back(face_normal);
+            }
+            else if (is_southwest_northeast_in_use)
+            {
+                glm::vec3 edge1;
+                glm::vec3 edge2;
+                glm::vec3 face_normal;
+
+                // Compute the normal of SE face.
+                edge1 = temp_vertices[SOUTHEAST] - temp_vertices[NORTHEAST];
+                edge2 = temp_vertices[SOUTHWEST] - temp_vertices[NORTHEAST];
+                face_normal = glm::cross(edge2, edge1);
+                face_normal_vector_vec3.push_back(face_normal);
+
+                // Compute the normal of NW face.
+                edge1 = temp_vertices[SOUTHWEST] - temp_vertices[NORTHEAST];
+                edge2 = temp_vertices[NORTHWEST] - temp_vertices[NORTHEAST];
+                face_normal = glm::cross(edge2, edge1);
+                face_normal_vector_vec3.push_back(face_normal);
+            }
+            else if (is_southeast_northwest_in_use)
+            {
+                glm::vec3 edge1;
+                glm::vec3 edge2;
+                glm::vec3 face_normal;
+
+                // Compute the normal of SW face.
+                edge1 = temp_vertices[SOUTHEAST] - temp_vertices[NORTHWEST];
+                edge2 = temp_vertices[SOUTHWEST] - temp_vertices[NORTHWEST];
+                face_normal = glm::cross(edge2, edge1);
+                face_normal_vector_vec3.push_back(face_normal);
+
+                // Compute the normal of NE face.
+                edge1 = temp_vertices[NORTHEAST] - temp_vertices[NORTHWEST];
+                edge2 = temp_vertices[SOUTHEAST] - temp_vertices[NORTHWEST];
+                face_normal = glm::cross(edge2, edge1);
+                face_normal_vector_vec3.push_back(face_normal);
+            }
+            else
+            {
+                std::cerr << "invalid triangulation type!\n";
+            }
+
+            current_interpolated_vertex_i++;
+        }
+    }
+
+    current_interpolated_vertex_i = image_width * image_height;
+
+    if (is_bilinear_interpolation_in_use)
+    {
+        uint32_t x = 0;
+        uint32_t z = 0;
+
+        // Compute the normal of the southwesternmost vertex.
+        // Number of adjacent faces: 2.
+        glm::vec3 face_normal1;
+        glm::vec3 face_normal2;
+        glm::vec3 vertex_normal;
+
+        face_normal1 = face_normal_vector_vec3[0];
+        face_normal2 = face_normal_vector_vec3[1];
+        vertex_normal = face_normal1 + face_normal2;
+        temp_normals.push_back(vertex_normal);
+
+        // Compute the normals of southern vertices.
+        for (x = 1; x < (image_width - 1); x++)
+        {
+            // Compute the normal of a southern vertex.
+            // Number of adjacent faces: 4.
+            vertex_normal = WNW_FACE_NORMAL + NNW_FACE_NORMAL + NNE_FACE_NORMAL + ENE_FACE_NORMAL;
+            temp_normals.push_back(vertex_normal);
+        }
+
+        // Compute the normal of the southeasternmost vertex.
+        // Number of adjacent faces: 2.
+        vertex_normal = WNW_FACE_NORMAL + NNW_FACE_NORMAL;
+        temp_normals.push_back(vertex_normal);
+
+        // Then, define the temporary vertices in a double loop.
+        for (z = 1; z < (image_height - 1); z++)
+        {
+            // Compute the normal of a western vertex.
+            // Number of adjacent faces: 4.
+            vertex_normal = NNE_FACE_NORMAL + ENE_FACE_NORMAL + ESE_FACE_NORMAL + SSE_FACE_NORMAL;
+            temp_normals.push_back(vertex_normal);
+
+            for (x = 1; x < (image_width - 1); x++)
+            {
+                uint32_t current_vertex_i = image_width * z + x;
+
+                // Compute the normal of a central vertex.
+                // Number of adjacent faces: 8.
+                vertex_normal = SSW_FACE_NORMAL + WSW_FACE_NORMAL + WNW_FACE_NORMAL + NNW_FACE_NORMAL + NNE_FACE_NORMAL + ENE_FACE_NORMAL + ESE_FACE_NORMAL + SSE_FACE_NORMAL;
+                temp_normals.push_back(vertex_normal);
+            }
+
+            x = 0;
+
+            // Compute the normal of an eastern vertex.
+            // Number of adjacent faces: 4.
+            vertex_normal = SSW_FACE_NORMAL + WSW_FACE_NORMAL + WNW_FACE_NORMAL + NNW_FACE_NORMAL;
+            temp_normals.push_back(vertex_normal);
+        }
+
+        // Compute the normal of the northwesternmost vertex.
+        // Number of adjacent faces: 2.
+        vertex_normal = NNE_FACE_NORMAL + ENE_FACE_NORMAL;
+        temp_normals.push_back(vertex_normal);
+
+        // Compute the normals of northern vertices.
+        for (x = 1; x < (image_width - 1); x++)
+        {
+            // Compute the normal of a northern vertex.
+            // Number of adjacent faces: 4.
+            vertex_normal = SSW_FACE_NORMAL + WSW_FACE_NORMAL + ESE_FACE_NORMAL + SSE_FACE_NORMAL;
+            temp_normals.push_back(vertex_normal);
+        }
+
+        // Compute the normal of the northeasternmost vertex.
+        // Number of adjacent faces: 2.
+        vertex_normal = SSW_FACE_NORMAL + WSW_FACE_NORMAL;
+        temp_normals.push_back(vertex_normal);
+
+        // Process interpolated vertices.
+        for (z = 1; z < image_height; z++)
+        {
+            for (x = 1; x < image_width; x++)
+            {
+                vertex_normal = S_FACE_NORMAL + W_FACE_NORMAL + N_FACE_NORMAL + E_FACE_NORMAL;
+                temp_normals.push_back(vertex_normal);
+            }
+        }
+    }
+
+    uint32_t vertexIndex[3], uvIndex[3], normalIndex[3];
 
     uint32_t triangle_i = 0;
 
     if (is_bilinear_interpolation_in_use)
     {
-        std::cout << "image width: " << image_width << " pixels.\n";
-        std::cout << "image height: " << image_height << " pixels.\n";
-
         uint32_t current_interpolated_vertex_i = image_width * image_height;
 
         // Then, define the faces in a double loop.
@@ -372,9 +633,6 @@ bool triangulate_quads(
     }
     else if (is_southwest_northeast_in_use || is_southeast_northwest_in_use)
     {
-        std::cout << "image width: " << image_width << " pixels.\n";
-        std::cout << "image height: " << image_height << " pixels.\n";
-
         // Then, define the faces in a double loop.
         // Begin from index 1.
         for (uint32_t z = 1; z < image_height; z++)
@@ -657,7 +915,7 @@ bool load_BMP_world(
             }
             else
             {
-                std::cerr << "invalid color channel!";
+                std::cerr << "invalid color channel!\n";
             }
 
             // std::cout << color_channel << " color channel value at (" << x << ", " << z << "): " << y << ".\n";

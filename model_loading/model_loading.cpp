@@ -25,6 +25,7 @@ using namespace std;
 #include <common/controls.hpp>
 #include "common/bmploader.hpp"
 #include "common/objloader.hpp"
+#include "common/vboindexer.hpp"
 
 #define WINDOW_WIDTH 1600
 #define WINDOW_HEIGHT (WINDOW_WIDTH * 3 / 4)
@@ -101,14 +102,18 @@ int main(void)
     glEnable(GL_CULL_FACE);
 
     // Create and compile our GLSL program from the shaders.
-    GLuint programID = LoadShaders("TransformVertexShader.vertexshader", "TextureFragmentShader.fragmentshader");
+    // GLuint programID = LoadShaders("TransformVertexShader.vertexshader", "TextureFragmentShader.fragmentshader");
+    GLuint programID = LoadShaders("StandardShading.vertexshader", "StandardShading.fragmentshader");
 
     // Get a handle for our "MVP" uniform.
     GLuint MatrixID = glGetUniformLocation(programID, "MVP");
+    GLuint ViewMatrixID = glGetUniformLocation(programID, "V");
+    GLuint ModelMatrixID = glGetUniformLocation(programID, "M");
 
     // Get a handle for our buffers.
     GLuint vertexPosition_modelspaceID = glGetAttribLocation(programID, "vertexPosition_modelspace");
     GLuint vertexUVID = glGetAttribLocation(programID, "vertexUV");
+    GLuint vertexNormal_modelspaceID = glGetAttribLocation(programID, "vertexNormal_modelspace");
 
     // Load the texture.
     GLuint Texture;
@@ -162,7 +167,9 @@ int main(void)
         std::cerr << "model file name: " << g_model_filename << "\n";
     }
 
-    std::cout << "vertices.size: " << vertices.size() << "\n";
+    std::cout << "number of vertices: " << vertices.size() << ".\n";
+    std::cout << "number of UVs: " << uvs.size() << ".\n";
+    std::cout << "number of normals: " << normals.size() << ".\n";
 
     // Load it into a VBO.
     GLuint vertexbuffer;
@@ -174,6 +181,15 @@ int main(void)
     glGenBuffers(1, &uvbuffer);
     glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
     glBufferData(GL_ARRAY_BUFFER, uvs.size() * sizeof(glm::vec2), &uvs[0], GL_STATIC_DRAW);
+
+    GLuint normalbuffer;
+    glGenBuffers(1, &normalbuffer);
+    glBindBuffer(GL_ARRAY_BUFFER, normalbuffer);
+    glBufferData(GL_ARRAY_BUFFER, normals.size() * sizeof(glm::vec3), &normals[0], GL_STATIC_DRAW);
+
+    // Get a handle for our "LightPosition" uniform
+    glUseProgram(programID);
+    GLuint LightID = glGetUniformLocation(programID, "LightPosition_worldspace");
 
     do
     {
@@ -193,6 +209,11 @@ int main(void)
         // Send our transformation to the currently bound shader,
         // in the "MVP" uniform
         glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP[0][0]);
+        glUniformMatrix4fv(ModelMatrixID, 1, GL_FALSE, &ModelMatrix[0][0]);
+        glUniformMatrix4fv(ViewMatrixID, 1, GL_FALSE, &ViewMatrix[0][0]);
+
+        glm::vec3 lightPos = glm::vec3(4, 4, 4);
+        glUniform3f(LightID, lightPos.x, lightPos.y, lightPos.z);
 
         // Bind our texture in Texture Unit 0.
         glActiveTexture(GL_TEXTURE0);
@@ -224,11 +245,23 @@ int main(void)
                 (void*) 0                     // array buffer offset
                 );
 
+        // 3rd attribute buffer : normals
+        glEnableVertexAttribArray(vertexNormal_modelspaceID);
+        glBindBuffer(GL_ARRAY_BUFFER, normalbuffer);
+        glVertexAttribPointer(
+                vertexNormal_modelspaceID,    // The attribute we want to configure
+                3,                            // size
+                GL_FLOAT,                     // type
+                GL_FALSE,                     // normalized?
+                0,                            // stride
+                (void*) 0                     // array buffer offset
+                );
         // Draw the triangles.
         glDrawArrays(GL_TRIANGLES, 0, vertices.size());
 
         glDisableVertexAttribArray(vertexPosition_modelspaceID);
         glDisableVertexAttribArray(vertexUVID);
+        glDisableVertexAttribArray(vertexNormal_modelspaceID);
 
         // Swap buffers.
         glfwSwapBuffers(window);
@@ -240,6 +273,7 @@ int main(void)
     // Cleanup VBO and shader
     glDeleteBuffers(1, &vertexbuffer);
     glDeleteBuffers(1, &uvbuffer);
+    glDeleteBuffers(1, &normalbuffer);
     glDeleteProgram(programID);
     glDeleteTextures(1, &TextureID);
 
