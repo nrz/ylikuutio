@@ -809,8 +809,8 @@ bool load_BMP_world(
 
     // Data read from the header of the BMP file
     unsigned char header[54];
-    unsigned int dataPos;
-    unsigned int imageSize;
+    uint32_t dataPos;
+    uint32_t imageSize;
     uint32_t image_width, image_height;
     // Actual RGB image data.
     uint8_t *image_data;
@@ -841,23 +841,23 @@ bool load_BMP_world(
     }
 
     // Make sure this is a 24bpp file
-    if (*(int*) & (header[0x1E]) != 0)
+    if (*(uint32_t*) & (header[0x1E]) != 0)
     {
         std::cerr << "not a correct BMP file.\n";
         return 0;
     }
 
-    if (*(int*) & (header[0x1C]) != 24)
+    if (*(uint32_t*) & (header[0x1C]) != 24)
     {
         std::cerr << "not a correct BMP file.\n";
         return 0;
     }
 
     // Read the information about the image
-    dataPos      = *(int*) & (header[0x0A]);
-    imageSize    = *(int*) & (header[0x22]);
-    image_width  = *(int*) & (header[0x12]);
-    image_height = *(int*) & (header[0x16]);
+    dataPos      = *(uint32_t*) & (header[0x0A]);
+    imageSize    = *(uint32_t*) & (header[0x22]);
+    image_width  = *(uint32_t*) & (header[0x12]);
+    image_height = *(uint32_t*) & (header[0x16]);
 
     // Some BMP files are misformatted, guess missing information
     if (imageSize == 0)
