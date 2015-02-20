@@ -91,6 +91,8 @@ configure_file(ylikuutio/TextureFragmentShader.fragmentshader TextureFragmentSha
 configure_file(ylikuutio/StandardShading.vertexshader StandardShading.vertexshader COPYONLY)
 configure_file(ylikuutio/StandardShading.fragmentshader StandardShading.fragmentshader COPYONLY)
 configure_file(ylikuutio/GrassGreenTexture0002.bmp GrassGreenTexture0002.bmp COPYONLY)
+configure_file(ylikuutio/noise1024x1024.bmp noise1024x1024.bmp COPYONLY)
+configure_file(ylikuutio/noise256x256.bmp noise256x256.bmp COPYONLY)
 configure_file(ylikuutio/noise128x128.bmp noise128x128.bmp COPYONLY)
 
 target_link_libraries(ylikuutio
