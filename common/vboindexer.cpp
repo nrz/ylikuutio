@@ -10,7 +10,7 @@
 // Returns true iif v1 can be considered equal to v2
 bool is_near(float v1, float v2)
 {
-    return (fabs(v1-v2) < 0.01f);
+    return (fabs(v1 - v2) < 0.01f);
 }
 
 // Searches through all already-exported vertices
@@ -26,7 +26,7 @@ bool getSimilarVertexIndex(
         GLuint &result)
 {
     // Lame linear search
-    for (unsigned int i = 0; i < out_vertices.size(); i++)
+    for (uint32_t i = 0; i < out_vertices.size(); i++)
     {
         if (is_near(in_vertex.x, out_vertices[i].x) &&
                 is_near(in_vertex.y, out_vertices[i].y) &&
@@ -86,7 +86,7 @@ struct PackedVertex
     glm::vec3 normal;
     bool operator < (const PackedVertex that) const
     {
-        return (memcmp((void*)this, (void*)&that, sizeof(PackedVertex)) > 0);
+        return (memcmp((void*) this, (void*) &that, sizeof(PackedVertex)) > 0);
     };
 };
 
@@ -120,9 +120,9 @@ void indexVBO(
     std::map<PackedVertex, GLuint> VertexToOutIndex;
 
     // For each input vertex
-    for (unsigned int i = 0; i < in_vertices.size(); i++)
+    for (uint32_t i = 0; i < in_vertices.size(); i++)
     {
-        PackedVertex packed = {in_vertices[i], in_uvs[i], in_normals[i]};
+        PackedVertex packed = { in_vertices[i], in_uvs[i], in_normals[i] };
 
         // Try to find a similar vertex in out_XXXX
         GLuint index;
@@ -164,7 +164,7 @@ void indexVBO_TBN(
     {
         // Try to find a similar vertex in out_XXXX
         GLuint index;
-        bool found = getSimilarVertexIndex(in_vertices[i], in_uvs[i], in_normals[i],     out_vertices, out_uvs, out_normals, index);
+        bool found = getSimilarVertexIndex(in_vertices[i], in_uvs[i], in_normals[i], out_vertices, out_uvs, out_normals, index);
 
         if (found)
         {
