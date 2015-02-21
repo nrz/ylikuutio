@@ -109,6 +109,8 @@ add_executable(ylikuutio
     common/bmploader.hpp
     common/objloader.cpp
     common/objloader.hpp
+    common/vboindexer.cpp
+    common/vboindexer.hpp
 
     ylikuutio/TransformVertexShader.vertexshader
     ylikuutio/TextureFragmentShader.fragmentshader
