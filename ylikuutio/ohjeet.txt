@@ -19,3 +19,11 @@ Tiedoston tallennus `*.bmp`-formaatissa (toistaiseksi pitää olla 24-bittinen B
   -> Advanced Options
   -> 24 bits (R8 G8 B8)
   -> Export
+
+OpenGL-ohjeita:
+http://www.opengl-tutorial.org/
+http://ogldev.atspace.co.uk/
+http://www.arcsynthesis.org/gltut/
+
+Blender-ohjeita:
+https://www.youtube.com/playlist?list=PLda3VoSoc_TR7X7wfblBGiRz-bvhKpGkS
