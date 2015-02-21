@@ -67,6 +67,35 @@ target_link_libraries(cube_with_colors
 set_target_properties(cube_with_colors PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/cube_with_colors/")
 create_target_launcher(cube_with_colors WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/cube_with_colors/")
 
+# Tutorial 9 - several objects
+add_executable(several_objects
+	several_objects/several_objects.cpp
+	common/shader.cpp
+	common/shader.hpp
+	common/controls.cpp
+	common/controls.hpp
+	common/texture.cpp
+	common/texture.hpp
+	common/objloader.cpp
+	common/objloader.hpp
+	common/vboindexer.cpp
+	common/vboindexer.hpp
+
+	several_objects/StandardShading.vertexshader
+	several_objects/StandardShading.fragmentshader
+)
+configure_file(several_objects/StandardShading.vertexshader StandardShading.vertexshader COPYONLY)
+configure_file(several_objects/StandardShading.fragmentshader StandardShading.fragmentshader COPYONLY)
+configure_file(several_objects/suzanne.obj suzanne.obj COPYONLY)
+configure_file(several_objects/uvmap.DDS uvmap.DDS COPYONLY)
+
+target_link_libraries(several_objects
+	${ALL_LIBS}
+)
+# Xcode and Visual working directories
+set_target_properties(several_objects PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/several_objects/")
+create_target_launcher(several_objects WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/several_objects/")
+
 # Ylikuutio
 add_executable(ylikuutio
     ylikuutio/ylikuutio.cpp
