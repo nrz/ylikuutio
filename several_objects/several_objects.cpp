@@ -91,7 +91,7 @@ int main(void)
     std::vector<glm::vec3> normals;
     bool res = load_OBJ("suzanne.obj", vertices, uvs, normals);
 
-    std::vector<unsigned short> indices;
+    std::vector<GLuint> indices;
     std::vector<glm::vec3> indexed_vertices;
     std::vector<glm::vec2> indexed_uvs;
     std::vector<glm::vec3> indexed_normals;
@@ -118,7 +118,7 @@ int main(void)
     GLuint elementbuffer;
     glGenBuffers(1, &elementbuffer);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, elementbuffer);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned short), &indices[0] , GL_STATIC_DRAW);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(GLuint), &indices[0] , GL_STATIC_DRAW);
 
     // Get a handle for our "LightPosition" uniform
     glUseProgram(programID);
@@ -212,10 +212,10 @@ int main(void)
 
         // Draw the triangles !
         glDrawElements(
-                GL_TRIANGLES,      // mode
-                indices.size(),    // count
-                GL_UNSIGNED_SHORT, // type
-                (void*) 0          // element array buffer offset
+                GL_TRIANGLES,    // mode
+                indices.size(),  // count
+                GL_UNSIGNED_INT, // type
+                (void*) 0        // element array buffer offset
                 );
 
         ////// End of rendering of the first object //////
