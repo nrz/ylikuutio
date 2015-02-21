@@ -39,8 +39,8 @@ std::string g_model_file_format = "bmp";
 // std::string g_model_filename = "oma_icosphere.obj";
 // std::string g_model_filename = "kirjainkuutio.obj";
 // std::string g_model_filename = "noise1024x1024.bmp";
-// std::string g_model_filename = "noise256x256.bmp";
-std::string g_model_filename = "noise128x128.bmp";
+std::string g_model_filename = "noise256x256.bmp";
+// std::string g_model_filename = "noise128x128.bmp";
 
 // texture file format: bmp/...
 std::string g_texture_file_format = "bmp";
