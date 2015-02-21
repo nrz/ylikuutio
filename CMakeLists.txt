@@ -35,13 +35,13 @@ include_directories(
     external/assimp-3.0.1270/include/
     external/bullet-2.81-rev2613/src/
     .
-)
+    )
 
 set(ALL_LIBS
     ${OPENGL_LIBRARY}
     GLFW_303
     GLEW_190
-)
+    )
 
 add_definitions(
     -DTW_STATIC
@@ -49,7 +49,7 @@ add_definitions(
     -DTW_NO_DIRECT3D
     -DGLEW_STATIC
     -D_CRT_SECURE_NO_WARNINGS
-)
+    )
 
 # Tutorial 4
 add_executable(cube_with_colors
@@ -59,39 +59,39 @@ add_executable(cube_with_colors
 
     cube_with_colors/TransformVertexShader.vertexshader
     cube_with_colors/ColorFragmentShader.fragmentshader
-)
+    )
 target_link_libraries(cube_with_colors
     ${ALL_LIBS}
-)
+    )
 # Xcode and Visual working directories
 set_target_properties(cube_with_colors PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/cube_with_colors/")
 create_target_launcher(cube_with_colors WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/cube_with_colors/")
 
 # Tutorial 9 - several objects
 add_executable(several_objects
-	several_objects/several_objects.cpp
-	common/shader.cpp
-	common/shader.hpp
-	common/controls.cpp
-	common/controls.hpp
-	common/texture.cpp
-	common/texture.hpp
-	common/objloader.cpp
-	common/objloader.hpp
-	common/vboindexer.cpp
-	common/vboindexer.hpp
+    several_objects/several_objects.cpp
+    common/shader.cpp
+    common/shader.hpp
+    common/controls.cpp
+    common/controls.hpp
+    common/texture.cpp
+    common/texture.hpp
+    common/objloader.cpp
+    common/objloader.hpp
+    common/vboindexer.cpp
+    common/vboindexer.hpp
 
-	several_objects/StandardShading.vertexshader
-	several_objects/StandardShading.fragmentshader
-)
+    several_objects/StandardShading.vertexshader
+    several_objects/StandardShading.fragmentshader
+    )
 configure_file(several_objects/StandardShading.vertexshader StandardShading.vertexshader COPYONLY)
 configure_file(several_objects/StandardShading.fragmentshader StandardShading.fragmentshader COPYONLY)
 configure_file(several_objects/suzanne.obj suzanne.obj COPYONLY)
 configure_file(several_objects/uvmap.DDS uvmap.DDS COPYONLY)
 
 target_link_libraries(several_objects
-	${ALL_LIBS}
-)
+    ${ALL_LIBS}
+    )
 # Xcode and Visual working directories
 set_target_properties(several_objects PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/several_objects/")
 create_target_launcher(several_objects WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/several_objects/")
@@ -114,7 +114,7 @@ add_executable(ylikuutio
     ylikuutio/TextureFragmentShader.fragmentshader
     ylikuutio/StandardShading.vertexshader
     ylikuutio/StandardShading.fragmentshader
-)
+    )
 configure_file(ylikuutio/TransformVertexShader.vertexshader TransformVertexShader.vertexshader COPYONLY)
 configure_file(ylikuutio/TextureFragmentShader.fragmentshader TextureFragmentShader.fragmentshader COPYONLY)
 configure_file(ylikuutio/StandardShading.vertexshader StandardShading.vertexshader COPYONLY)
@@ -126,7 +126,7 @@ configure_file(ylikuutio/noise128x128.bmp noise128x128.bmp COPYONLY)
 
 target_link_libraries(ylikuutio
     ${ALL_LIBS}
-)
+    )
 # Xcode and Visual working directories
 set_target_properties(ylikuutio PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/ylikuutio/")
 create_target_launcher(ylikuutio WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/ylikuutio/")
@@ -136,10 +136,10 @@ SOURCE_GROUP(common REGULAR_EXPRESSION ".*/common/.*" )
 SOURCE_GROUP(shaders REGULAR_EXPRESSION ".*/.*shader$" )
 
 if (NOT ${CMAKE_GENERATOR} MATCHES "Xcode" )
-add_custom_command(
-   TARGET cube_with_colors POST_BUILD
-   COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_CFG_INTDIR}/cube_with_colors${CMAKE_EXECUTABLE_SUFFIX}" "${CMAKE_CURRENT_SOURCE_DIR}/cube_with_colors/"
-)
+    add_custom_command(
+        TARGET cube_with_colors POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_CFG_INTDIR}/cube_with_colors${CMAKE_EXECUTABLE_SUFFIX}" "${CMAKE_CURRENT_SOURCE_DIR}/cube_with_colors/"
+        )
 
 elseif (${CMAKE_GENERATOR} MATCHES "Xcode" )
 
