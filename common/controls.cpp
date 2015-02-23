@@ -129,6 +129,30 @@ void computeMatricesFromInputs()
         position.y -= deltaTime * temp_speed;
     }
 
+    // Move west.
+    if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+    {
+        position.x -= deltaTime * temp_speed;
+    }
+
+    // Move east.
+    if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS)
+    {
+        position.x += deltaTime * temp_speed;
+    }
+
+    // Move north.
+    if (glfwGetKey(window, GLFW_KEY_N) == GLFW_PRESS)
+    {
+        position.z -= deltaTime * temp_speed;
+    }
+
+    // Move south.
+    if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+    {
+        position.z += deltaTime * temp_speed;
+    }
+
     float FoV = initialFoV;// - 5 * glfwGetMouseWheel(); // Now GLFW 3 requires setting up a callback for this. It's a bit too complicated for this beginner's tutorial, so it's disabled instead.
 
     // Projection matrix : 45° Field of View, 4:3 ratio, display range : 0.1 unit <-> 100 units
