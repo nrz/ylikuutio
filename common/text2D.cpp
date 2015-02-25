@@ -7,15 +7,15 @@
 #include "texture.hpp"
 #include "text2D.hpp"
 
-uint32_t Text2DTextureID;              // Texture containing the font
-uint32_t Text2DVertexBufferID;         // Buffer containing the vertices
-uint32_t Text2DUVBufferID;             //                       UVs
-uint32_t Text2DShaderID;               // Program used to disaply the text
-uint32_t vertexPosition_screenspaceID; // Location of the program's "vertexPosition_screenspace" attribute
-uint32_t vertexUVID;                   // Location of the program's "vertexUV" attribute
-uint32_t Text2DUniformID;              // Location of the program's texture attribute
-GLint screen_width_uniform_ID;      // Location of the program's window width uniform.
-GLint screen_height_uniform_ID;     // Location of the program's window height uniform.
+GLuint Text2DTextureID;              // Texture containing the font
+GLuint Text2DVertexBufferID;         // Buffer containing the vertices
+GLuint Text2DUVBufferID;             //                       UVs
+GLuint Text2DShaderID;               // Program used to disaply the text
+GLuint vertexPosition_screenspaceID; // Location of the program's "vertexPosition_screenspace" attribute
+GLuint vertexUVID;                   // Location of the program's "vertexUV" attribute
+GLuint Text2DUniformID;              // Location of the program's texture attribute
+GLuint screen_width_uniform_ID;      // Location of the program's window width uniform.
+GLuint screen_height_uniform_ID;     // Location of the program's window height uniform.
 
 void initText2D(GLuint screen_width, GLuint screen_height, const char *texturePath, const char *char_font_texture_file_format)
 {
