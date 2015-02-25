@@ -12,9 +12,9 @@ GLuint loadBMP_custom(const char *imagepath)
 
     // Data read from the header of the BMP file
     unsigned char header[54];
-    unsigned int dataPos;
-    unsigned int imageSize;
-    unsigned int width, height;
+    uint32_t dataPos;
+    uint32_t imageSize;
+    uint32_t width, height;
     // Actual RGB data
     unsigned char *data;
 
@@ -100,7 +100,7 @@ GLuint loadBMP_custom(const char *imagepath)
     //glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 
 #define CLAMP_TEXTURES
-// #define REPEAT_TEXTURES
+    // #define REPEAT_TEXTURES
 
 #ifdef CLAMP_TEXTURES
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
@@ -125,25 +125,25 @@ GLuint loadBMP_custom(const char *imagepath)
 // or do it yourself (just like loadBMP_custom and loadDDS)
 //GLuint loadTGA_glfw(const char * imagepath){
 //
-//	// Create one OpenGL texture
-//	GLuint textureID;
-//	glGenTextures(1, &textureID);
+//    // Create one OpenGL texture
+//    GLuint textureID;
+//    glGenTextures(1, &textureID);
 //
-//	// "Bind" the newly created texture : all future texture functions will modify this texture
-//	glBindTexture(GL_TEXTURE_2D, textureID);
+//    // "Bind" the newly created texture : all future texture functions will modify this texture
+//    glBindTexture(GL_TEXTURE_2D, textureID);
 //
-//	// Read the file, call glTexImage2D with the right parameters
-//	glfwLoadTexture2D(imagepath, 0);
+//    // Read the file, call glTexImage2D with the right parameters
+//    glfwLoadTexture2D(imagepath, 0);
 //
-//	// Nice trilinear filtering.
-//	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-//	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-//	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-//	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-//	glGenerateMipmap(GL_TEXTURE_2D);
+//    // Nice trilinear filtering.
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+//    glGenerateMipmap(GL_TEXTURE_2D);
 //
-//	// Return the ID of the texture we just created
-//	return textureID;
+//    // Return the ID of the texture we just created
+//    return textureID;
 //}
 
 #define FOURCC_DXT1 0x31545844 // Equivalent to "DXT1" in ASCII
@@ -176,14 +176,14 @@ GLuint loadDDS(const char *imagepath)
     /* get the surface desc */
     fread(&header, 124, 1, fp);
 
-    unsigned int height      = *(unsigned int*) & (header[8 ]);
-    unsigned int width	     = *(unsigned int*) & (header[12]);
-    unsigned int linearSize	 = *(unsigned int*) & (header[16]);
-    unsigned int mipMapCount = *(unsigned int*) & (header[24]);
-    unsigned int fourCC      = *(unsigned int*) & (header[80]);
+    uint32_t height      = *(uint32_t*) & (header[8 ]);
+    uint32_t width       = *(uint32_t*) & (header[12]);
+    uint32_t linearSize  = *(uint32_t*) & (header[16]);
+    uint32_t mipMapCount = *(uint32_t*) & (header[24]);
+    uint32_t fourCC      = *(uint32_t*) & (header[80]);
 
     unsigned char * buffer;
-    unsigned int bufsize;
+    uint32_t bufsize;
     /* how big is it going to be including all mipmaps? */
     bufsize = mipMapCount > 1 ? linearSize * 2 : linearSize;
     buffer = (unsigned char*) malloc(bufsize * sizeof(unsigned char));
@@ -191,8 +191,8 @@ GLuint loadDDS(const char *imagepath)
     /* close the file pointer */
     fclose(fp);
 
-    unsigned int components = (fourCC == FOURCC_DXT1) ? 3 : 4;
-    unsigned int format;
+    uint32_t components = (fourCC == FOURCC_DXT1) ? 3 : 4;
+    uint32_t format;
     switch(fourCC)
     {
         case FOURCC_DXT1:
@@ -215,15 +215,15 @@ GLuint loadDDS(const char *imagepath)
 
     // "Bind" the newly created texture : all future texture functions will modify this texture
     glBindTexture(GL_TEXTURE_2D, textureID);
-    glPixelStorei(GL_UNPACK_ALIGNMENT,1);
+    glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
-    unsigned int blockSize = (format == GL_COMPRESSED_RGBA_S3TC_DXT1_EXT) ? 8 : 16;
-    unsigned int offset = 0;
+    uint32_t blockSize = (format == GL_COMPRESSED_RGBA_S3TC_DXT1_EXT) ? 8 : 16;
+    uint32_t offset = 0;
 
     /* load the mipmaps */
-    for (unsigned int level = 0; level < mipMapCount && (width || height); ++level)
+    for (uint32_t level = 0; level < mipMapCount && (width || height); ++level)
     {
-        unsigned int size = ((width+3)/4) * ((height+3)/4) * blockSize;
+        uint32_t size = ((width + 3) / 4) * ((height + 3) / 4) * blockSize;
         glCompressedTexImage2D(
                 GL_TEXTURE_2D,
                 level,
