@@ -14,8 +14,10 @@ uint32_t Text2DShaderID;               // Program used to disaply the text
 uint32_t vertexPosition_screenspaceID; // Location of the program's "vertexPosition_screenspace" attribute
 uint32_t vertexUVID;                   // Location of the program's "vertexUV" attribute
 uint32_t Text2DUniformID;              // Location of the program's texture attribute
+GLint screen_width_uniform_ID;      // Location of the program's window width uniform.
+GLint screen_height_uniform_ID;     // Location of the program's window height uniform.
 
-void initText2D(const char *texturePath, const char *char_font_texture_file_format)
+void initText2D(GLuint screen_width, GLuint screen_height, const char *texturePath, const char *char_font_texture_file_format)
 {
     // Initialize texture
     if (strcmp(char_font_texture_file_format, "bmp") == 0)
@@ -40,9 +42,17 @@ void initText2D(const char *texturePath, const char *char_font_texture_file_form
 
     // Initialize uniforms' IDs
     Text2DUniformID = glGetUniformLocation(Text2DShaderID, "myTextureSampler");
+
+    // Initialize uniform window width.
+    screen_width_uniform_ID = glGetUniformLocation(Text2DShaderID, "screen_width");
+    glUniform1i(screen_width_uniform_ID, screen_width);
+
+    // Initialize uniform window height.
+    screen_height_uniform_ID = glGetUniformLocation(Text2DShaderID, "screen_height");
+    glUniform1i(screen_height_uniform_ID, screen_height);
 }
 
-void printText2D(const char *text, uint32_t x, uint32_t y, uint32_t size, const char *char_font_texture_file_format)
+void printText2D(GLuint screen_width, GLuint screen_height, GLuint x, GLuint y, GLuint size, const char *text, const char *char_font_texture_file_format)
 {
     uint32_t length = strlen(text);
 
@@ -51,10 +61,12 @@ void printText2D(const char *text, uint32_t x, uint32_t y, uint32_t size, const 
     std::vector<glm::vec2> UVs;
     for (uint32_t i = 0; i < length; i++)
     {
-        glm::vec2 vertex_up_left    = glm::vec2(x + (i * size)       , y + size);
-        glm::vec2 vertex_up_right   = glm::vec2(x + (i * size + size), y + size);
-        glm::vec2 vertex_down_right = glm::vec2(x + (i * size + size), y);
-        glm::vec2 vertex_down_left  = glm::vec2(x + (i * size)       , y);
+        // Print to the right side of X (so far there is no check for input length).
+        // Print up and down of Y.
+        glm::vec2 vertex_up_left    = glm::vec2(x + (i * size)       , y + size / 2);
+        glm::vec2 vertex_up_right   = glm::vec2(x + (i * size + size), y + size / 2);
+        glm::vec2 vertex_down_right = glm::vec2(x + (i * size + size), y - size / 2);
+        glm::vec2 vertex_down_left  = glm::vec2(x + (i * size)       , y - size / 2);
 
         vertices.push_back(vertex_up_left);
         vertices.push_back(vertex_down_left);
@@ -114,6 +126,12 @@ void printText2D(const char *text, uint32_t x, uint32_t y, uint32_t size, const 
     glBindTexture(GL_TEXTURE_2D, Text2DTextureID);
     // Set our "myTextureSampler" sampler to user Texture Unit 0
     glUniform1i(Text2DUniformID, 0);
+
+    // Set screen width.
+    glUniform1i(screen_width_uniform_ID, screen_width);
+
+    // Set screen height.
+    glUniform1i(screen_height_uniform_ID, screen_height);
 
     // 1rst attribute buffer : vertices
     glEnableVertexAttribArray(vertexPosition_screenspaceID);

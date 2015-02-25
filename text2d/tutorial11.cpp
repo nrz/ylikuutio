@@ -22,7 +22,7 @@ using namespace glm;
 #include <common/vboindexer.hpp>
 #include <common/text2D.hpp>
 
-#define WINDOW_WIDTH 1024
+#define WINDOW_WIDTH 1600
 #define WINDOW_HEIGHT (WINDOW_WIDTH * 3 / 4)
 
 int main(void)
@@ -130,7 +130,7 @@ int main(void)
 
     // Initialize our little text library with the Holstein font
     // initText2D("Holstein.DDS", "dds");
-    initText2D("Holstein.bmp", "bmp");
+    initText2D(WINDOW_WIDTH, WINDOW_HEIGHT, "Holstein.bmp", "bmp");
 
     // For speed computation
     double lastTime = glfwGetTime();
@@ -231,8 +231,7 @@ int main(void)
 
         char text[256];
         sprintf(text,"%.2f sec", glfwGetTime());
-        // printText2D(text, 10, 500, 60, "DDS");
-        printText2D(text, 10, 500, 60, "bmp");
+        printText2D(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2, 40, text, "bmp");
 
         // Swap buffers
         glfwSwapBuffers(window);

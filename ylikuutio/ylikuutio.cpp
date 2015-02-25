@@ -20,12 +20,13 @@ GLFWwindow* window;
 #include <glm/gtc/matrix_transform.hpp>
 using namespace std;
 
-#include <common/shader.hpp>
-#include <common/texture.hpp>
-#include <common/controls.hpp>
+#include "common/shader.hpp"
+#include "common/texture.hpp"
+#include "common/controls.hpp"
 #include "common/bmploader.hpp"
 #include "common/objloader.hpp"
 #include "common/vboindexer.hpp"
+#include "common/text2D.hpp"
 
 #define WINDOW_WIDTH 1600
 #define WINDOW_HEIGHT (WINDOW_WIDTH * 3 / 4)
@@ -55,6 +56,13 @@ std::string g_height_data_color_channel = "mean"; // "all" is equivalent to "mea
 // std::string_g_texture_filename = "kuutio-uv-numerot.bmp";
 // std::string g_texture_filename = "punamusta.bmp";
 std::string g_texture_filename = "GrassGreenTexture0002.bmp";
+
+// font texture file format: bmp/...
+std::string g_font_texture_file_format = "bmp";
+
+// font texture filename.
+// std::string g_font_texture_filename = "Holstein.DDS";
+std::string g_font_texture_filename = "Holstein.bmp";
 
 int main(void)
 {
@@ -88,7 +96,7 @@ int main(void)
 
     // Ensure we can capture the escape key being pressed below.
     glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
-    glfwSetCursorPos(window, WINDOW_WIDTH/2, WINDOW_HEIGHT/2);
+    glfwSetCursorPos(window, (WINDOW_WIDTH / 2), (WINDOW_HEIGHT / 2));
 
     // Dark blue background.
     glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
@@ -206,6 +214,13 @@ int main(void)
     glUseProgram(programID);
     GLuint LightID = glGetUniformLocation(programID, "LightPosition_worldspace");
 
+    // Initialize our little text library with the Holstein font
+    // initText2D("Holstein.DDS");
+    const char *char_g_font_texture_filename = g_font_texture_filename.c_str();
+    const char *char_g_font_texture_file_format = g_font_texture_file_format.c_str();
+    // initText2D(char_g_font_texture_filename, char_g_font_texture_file_format);
+    initText2D(WINDOW_WIDTH, WINDOW_HEIGHT, "Holstein.bmp", "bmp");
+
     // For speed computation
     double lastTime = glfwGetTime();
     int nbFrames = 0;
@@ -219,7 +234,7 @@ int main(void)
         {
             // If last printf() was more than 1 sec ago
             // printf and reset
-            printf("%f ms/frame\n", 1000.0/double(nbFrames));
+            printf("%f ms/frame\n", 1000.0 / ((double)  nbFrames));
             nbFrames = 0;
             lastTime += 1.0;
         }
@@ -302,6 +317,16 @@ int main(void)
         glDisableVertexAttribArray(vertexUVID);
         glDisableVertexAttribArray(vertexNormal_modelspaceID);
 
+        char text[256];
+        sprintf(text, "%.2f sec", glfwGetTime());
+        // sprintf(text, "Hello world!");
+        // printText2D(text, (WINDOW_WIDTH / 2), (WINDOW_HEIGHT / 2), 100, "bmp");
+        // printText2D(text, 10, 500, 60, "bmp");
+        // printText2D(WINDOW_WIDTH, WINDOW_HEIGHT, 500, 500, 10, text, "bmp");
+        printText2D(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2, 40, text, "bmp");
+        // printText2D(text, 10, 500, 60, "DDS");
+        // printText2D(text, 10, 500, 60, "bmp");
+
         // Swap buffers.
         glfwSwapBuffers(window);
         glfwPollEvents();
@@ -309,13 +334,16 @@ int main(void)
     while ((glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS)
             && (glfwWindowShouldClose(window) == 0));
 
-    // Cleanup VBO and shader
+    // Cleanup VBO, shader and texture.
     glDeleteBuffers(1, &vertexbuffer);
     glDeleteBuffers(1, &uvbuffer);
     glDeleteBuffers(1, &normalbuffer);
     glDeleteBuffers(1, &elementbuffer);
     glDeleteProgram(programID);
-    glDeleteTextures(1, &TextureID);
+    glDeleteTextures(1, &Texture);
+
+    // Delete the text's VBO, the shader and the texture
+    cleanupText2D();
 
     // Close OpenGL window and terminate GLFW
     glfwTerminate();

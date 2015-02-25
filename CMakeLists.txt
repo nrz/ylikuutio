@@ -146,17 +146,25 @@ add_executable(ylikuutio
     common/objloader.hpp
     common/vboindexer.cpp
     common/vboindexer.hpp
+    common/text2D.cpp
+    common/text2D.hpp
 
     ylikuutio/TransformVertexShader.vertexshader
     ylikuutio/TextureFragmentShader.fragmentshader
     ylikuutio/StandardShading.vertexshader
     ylikuutio/StandardShading.fragmentshader
+    ylikuutio/TextVertexShader.vertexshader
+    ylikuutio/TextVertexShader.fragmentshader
     )
 configure_file(ylikuutio/TransformVertexShader.vertexshader TransformVertexShader.vertexshader COPYONLY)
 configure_file(ylikuutio/TextureFragmentShader.fragmentshader TextureFragmentShader.fragmentshader COPYONLY)
 configure_file(ylikuutio/StandardShading.vertexshader StandardShading.vertexshader COPYONLY)
 configure_file(ylikuutio/StandardShading.fragmentshader StandardShading.fragmentshader COPYONLY)
+configure_file(ylikuutio/TextVertexShader.vertexshader TextVertexShader.vertexshader COPYONLY)
+configure_file(ylikuutio/TextVertexShader.fragmentshader TextVertexShader.fragmentshader COPYONLY)
 configure_file(ylikuutio/GrassGreenTexture0002.bmp GrassGreenTexture0002.bmp COPYONLY)
+configure_file(ylikuutio/Holstein.DDS Holstein.DDS COPYONLY)
+configure_file(ylikuutio/Holstein.bmp Holstein.bmp COPYONLY)
 configure_file(ylikuutio/noise1024x1024.bmp noise1024x1024.bmp COPYONLY)
 configure_file(ylikuutio/noise256x256.bmp noise256x256.bmp COPYONLY)
 configure_file(ylikuutio/noise128x128.bmp noise128x128.bmp COPYONLY)
