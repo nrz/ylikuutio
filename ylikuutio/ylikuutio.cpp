@@ -152,11 +152,11 @@ int main(void)
 
     const char *char_g_model_file_format = g_model_file_format.c_str();
     const char *char_g_model_filename = g_model_filename.c_str();
-    if (strcmp(char_g_model_file_format, "obj") == 0)
+    if ((strcmp(char_g_model_file_format, "obj") == 0) || (strcmp(char_g_model_file_format, "OBJ") == 0))
     {
         model_loading_result = load_OBJ(char_g_model_filename, vertices, uvs, normals);
     }
-    else if (strcmp(char_g_model_file_format, "bmp") == 0)
+    else if ((strcmp(char_g_model_file_format, "bmp") == 0) || (strcmp(char_g_model_file_format, "BMP") == 0))
     {
         const char *char_g_height_data_color_channel = g_height_data_color_channel.c_str();
         model_loading_result = load_BMP_world(char_g_model_filename, vertices, uvs, normals, g_height_data_color_channel);
