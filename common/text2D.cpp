@@ -20,11 +20,11 @@ GLuint screen_height_uniform_ID;     // Location of the program's window height 
 void initText2D(GLuint screen_width, GLuint screen_height, const char *texturePath, const char *char_font_texture_file_format)
 {
     // Initialize texture
-    if (strcmp(char_font_texture_file_format, "bmp") == 0)
+    if ((strcmp(char_font_texture_file_format, "bmp") == 0) || (strcmp(char_font_texture_file_format, "BMP") == 0))
     {
         Text2DTextureID = loadBMP_custom(texturePath);
     }
-    else if (strcmp(char_font_texture_file_format, "dds") == 0)
+    else if ((strcmp(char_font_texture_file_format, "dds") == 0) || (strcmp(char_font_texture_file_format, "DDS") == 0))
     {
         Text2DTextureID = loadDDS(texturePath);
     }
@@ -80,11 +80,11 @@ void printText2D(GLuint screen_width, GLuint screen_height, GLuint x, GLuint y, 
         float uv_x = (character % 16) / 16.0f;
         float uv_y;
 
-        if (strcmp(char_font_texture_file_format, "DDS") == 0)
+        if ((strcmp(char_font_texture_file_format, "dds") == 0) || (strcmp(char_font_texture_file_format, "DDS") == 0))
         {
             uv_y = (character / 16) / 16.0f;
         }
-        else if (strcmp(char_font_texture_file_format, "bmp") == 0)
+        else if ((strcmp(char_font_texture_file_format, "bmp") == 0) || (strcmp(char_font_texture_file_format, "BMP") == 0))
         {
             // BMP is stored in the file beginning from the bottom line.
             uv_y = 1 - (character / 16) / 16.0f;
@@ -94,12 +94,12 @@ void printText2D(GLuint screen_width, GLuint screen_height, GLuint x, GLuint y, 
         glm::vec2 uv_up_right   = glm::vec2(uv_x + (1.0f / 16.0f), uv_y);
         glm::vec2 uv_down_right;
         glm::vec2 uv_down_left;
-        if (strcmp(char_font_texture_file_format, "DDS") == 0)
+        if ((strcmp(char_font_texture_file_format, "dds") == 0) || (strcmp(char_font_texture_file_format, "DDS") == 0))
         {
             uv_down_right = glm::vec2(uv_x + (1.0f / 16.0f), (uv_y + 1.0f / 16.0f));
             uv_down_left  = glm::vec2(uv_x                 , (uv_y + 1.0f / 16.0f));
         }
-        else if (strcmp(char_font_texture_file_format, "bmp") == 0)
+        else if ((strcmp(char_font_texture_file_format, "bmp") == 0) || (strcmp(char_font_texture_file_format, "BMP") == 0))
         {
             // BMP is stored in the file beginning from the bottom line.
             uv_down_right = glm::vec2(uv_x + (1.0f / 16.0f), (uv_y - 1.0f / 16.0f));
