@@ -81,11 +81,11 @@ add_executable(several_objects
     common/vboindexer.cpp
     common/vboindexer.hpp
 
-    several_objects/StandardShading.vertexshader
-    several_objects/StandardShading.fragmentshader
+    common/StandardShading.vertexshader
+    common/StandardShading.fragmentshader
     )
-configure_file(several_objects/StandardShading.vertexshader StandardShading.vertexshader COPYONLY)
-configure_file(several_objects/StandardShading.fragmentshader StandardShading.fragmentshader COPYONLY)
+configure_file(common/StandardShading.vertexshader StandardShading.vertexshader COPYONLY)
+configure_file(common/StandardShading.fragmentshader StandardShading.fragmentshader COPYONLY)
 configure_file(several_objects/suzanne.obj suzanne.obj COPYONLY)
 configure_file(several_objects/uvmap.DDS uvmap.DDS COPYONLY)
 
@@ -112,15 +112,15 @@ add_executable(text2d
 	common/text2D.hpp
 	common/text2D.cpp
 
-	text2d/StandardShading.vertexshader
-	text2d/StandardShading.fragmentshader
-	text2d/TextVertexShader.vertexshader
-	text2d/TextVertexShader.fragmentshader
+	common/StandardShading.vertexshader
+	common/StandardShading.fragmentshader
+	common/TextVertexShader.vertexshader
+	common/TextVertexShader.fragmentshader
 )
-configure_file(text2d/StandardShading.vertexshader StandardShading.vertexshader COPYONLY)
-configure_file(text2d/StandardShading.fragmentshader StandardShading.fragmentshader COPYONLY)
-configure_file(text2d/TextVertexShader.vertexshader TextVertexShader.vertexshader COPYONLY)
-configure_file(text2d/TextVertexShader.fragmentshader TextVertexShader.fragmentshader COPYONLY)
+configure_file(common/StandardShading.vertexshader StandardShading.vertexshader COPYONLY)
+configure_file(common/StandardShading.fragmentshader StandardShading.fragmentshader COPYONLY)
+configure_file(common/TextVertexShader.vertexshader TextVertexShader.vertexshader COPYONLY)
+configure_file(common/TextVertexShader.fragmentshader TextVertexShader.fragmentshader COPYONLY)
 configure_file(text2d/Holstein.DDS Holstein.DDS COPYONLY)
 configure_file(text2d/Holstein.bmp Holstein.bmp COPYONLY)
 
@@ -149,19 +149,19 @@ add_executable(ylikuutio
     common/text2D.cpp
     common/text2D.hpp
 
-    ylikuutio/TransformVertexShader.vertexshader
-    ylikuutio/TextureFragmentShader.fragmentshader
-    ylikuutio/StandardShading.vertexshader
-    ylikuutio/StandardShading.fragmentshader
-    ylikuutio/TextVertexShader.vertexshader
-    ylikuutio/TextVertexShader.fragmentshader
+    common/TransformVertexShader.vertexshader
+    common/TextureFragmentShader.fragmentshader
+    common/StandardShading.vertexshader
+    common/StandardShading.fragmentshader
+    common/TextVertexShader.vertexshader
+    common/TextVertexShader.fragmentshader
     )
-configure_file(ylikuutio/TransformVertexShader.vertexshader TransformVertexShader.vertexshader COPYONLY)
-configure_file(ylikuutio/TextureFragmentShader.fragmentshader TextureFragmentShader.fragmentshader COPYONLY)
-configure_file(ylikuutio/StandardShading.vertexshader StandardShading.vertexshader COPYONLY)
-configure_file(ylikuutio/StandardShading.fragmentshader StandardShading.fragmentshader COPYONLY)
-configure_file(ylikuutio/TextVertexShader.vertexshader TextVertexShader.vertexshader COPYONLY)
-configure_file(ylikuutio/TextVertexShader.fragmentshader TextVertexShader.fragmentshader COPYONLY)
+configure_file(common/TransformVertexShader.vertexshader TransformVertexShader.vertexshader COPYONLY)
+configure_file(common/TextureFragmentShader.fragmentshader TextureFragmentShader.fragmentshader COPYONLY)
+configure_file(common/StandardShading.vertexshader StandardShading.vertexshader COPYONLY)
+configure_file(common/StandardShading.fragmentshader StandardShading.fragmentshader COPYONLY)
+configure_file(common/TextVertexShader.vertexshader TextVertexShader.vertexshader COPYONLY)
+configure_file(common/TextVertexShader.fragmentshader TextVertexShader.fragmentshader COPYONLY)
 configure_file(ylikuutio/GrassGreenTexture0002.bmp GrassGreenTexture0002.bmp COPYONLY)
 configure_file(ylikuutio/Holstein.DDS Holstein.DDS COPYONLY)
 configure_file(ylikuutio/Holstein.bmp Holstein.bmp COPYONLY)
