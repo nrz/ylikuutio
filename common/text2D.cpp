@@ -62,11 +62,11 @@ void printText2D(GLuint screen_width, GLuint screen_height, GLuint x, GLuint y, 
     for (uint32_t i = 0; i < length; i++)
     {
         // Print to the right side of X (so far there is no check for input length).
-        // Print up and down of Y.
-        glm::vec2 vertex_up_left    = glm::vec2(x + (i * size)       , y + size / 2);
-        glm::vec2 vertex_up_right   = glm::vec2(x + (i * size + size), y + size / 2);
-        glm::vec2 vertex_down_right = glm::vec2(x + (i * size + size), y - size / 2);
-        glm::vec2 vertex_down_left  = glm::vec2(x + (i * size)       , y - size / 2);
+        // Print up of Y.
+        glm::vec2 vertex_up_left    = glm::vec2(x + (i * size)       , y + size);
+        glm::vec2 vertex_up_right   = glm::vec2(x + (i * size + size), y + size);
+        glm::vec2 vertex_down_right = glm::vec2(x + (i * size + size), y);
+        glm::vec2 vertex_down_left  = glm::vec2(x + (i * size)       , y);
 
         vertices.push_back(vertex_up_left);
         vertices.push_back(vertex_down_left);
