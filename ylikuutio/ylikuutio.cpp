@@ -129,7 +129,7 @@ int main(void)
     const char *char_g_texture_file_format = g_texture_file_format.c_str();
     const char *char_g_texture_filename = g_texture_filename.c_str();
 
-    if (strcmp(char_g_texture_file_format, "bmp") == 0)
+    if ((strcmp(char_g_texture_file_format, "bmp") == 0) || (strcmp(char_g_texture_file_format, "BMP") == 0))
     {
         Texture = loadBMP_custom(char_g_texture_filename);
     }
