@@ -12,6 +12,8 @@ using namespace glm;
 #define WINDOW_WIDTH 1600
 #define WINDOW_HEIGHT (WINDOW_WIDTH * 3 / 4)
 
+#define PI 3.14159265359f
+
 #define INVERT_MOUSE
 
 glm::mat4 ViewMatrix;
@@ -32,7 +34,7 @@ glm::vec3 position = glm::vec3(100, 100, 100);
 // Initial horizontal angle : toward -Z
 float horizontalAngle = 0.0f;
 // Initial vertical angle : none
-float verticalAngle = 0.0f;
+float verticalAngle = PI / 2;
 // Initial Field of View
 float initialFoV = 45.0f;
 
@@ -76,9 +78,9 @@ void computeMatricesFromInputs()
 
     // Right vector
     glm::vec3 right = glm::vec3(
-            sin(horizontalAngle - 3.14f/2.0f),
+            sin(horizontalAngle - PI/2.0f),
             0,
-            cos(horizontalAngle - 3.14f/2.0f)
+            cos(horizontalAngle - PI/2.0f)
             );
 
     // Up vector
