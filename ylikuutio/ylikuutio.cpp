@@ -317,7 +317,7 @@ int main(void)
 
         char text[256];
         sprintf(text, "%.2f sec", glfwGetTime());
-        printText2D(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2, 40, text, "bmp");
+        printText2D(WINDOW_WIDTH, WINDOW_HEIGHT, 0, 0, 40, text, "bmp");
 
         // Swap buffers.
         glfwSwapBuffers(window);
