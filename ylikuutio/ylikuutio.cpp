@@ -215,11 +215,9 @@ int main(void)
     GLuint LightID = glGetUniformLocation(programID, "LightPosition_worldspace");
 
     // Initialize our little text library with the Holstein font
-    // initText2D("Holstein.DDS");
     const char *char_g_font_texture_filename = g_font_texture_filename.c_str();
     const char *char_g_font_texture_file_format = g_font_texture_file_format.c_str();
-    // initText2D(char_g_font_texture_filename, char_g_font_texture_file_format);
-    initText2D(WINDOW_WIDTH, WINDOW_HEIGHT, "Holstein.bmp", "bmp");
+    initText2D(WINDOW_WIDTH, WINDOW_HEIGHT, char_g_font_texture_filename, char_g_font_texture_file_format);
 
     // For speed computation
     double lastTime = glfwGetTime();
