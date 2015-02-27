@@ -28,3 +28,9 @@ http://www.videotutorialsrock.com/index.php
 
 Blender-ohjeita:
 https://www.youtube.com/playlist?list=PLda3VoSoc_TR7X7wfblBGiRz-bvhKpGkS
+
+Avaruuden pilkkominen (space partitioning):
+http://tulrich.com/geekstuff/partitioning.html
+
+Octree-ohjeita:
+http://www.gamedev.net/page/resources/_/technical/game-programming/introduction-to-octrees-r3529
