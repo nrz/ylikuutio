@@ -17,7 +17,11 @@ GLuint Text2DUniformID;              // Location of the program's texture attrib
 GLuint screen_width_uniform_ID;      // Location of the program's window width uniform.
 GLuint screen_height_uniform_ID;     // Location of the program's window height uniform.
 
-void initText2D(GLuint screen_width, GLuint screen_height, const char *texturePath, const char *char_font_texture_file_format)
+void initText2D(
+        GLuint screen_width,
+        GLuint screen_height,
+        const char *texturePath,
+        const char *char_font_texture_file_format)
 {
     // Initialize texture
     if ((strcmp(char_font_texture_file_format, "bmp") == 0) || (strcmp(char_font_texture_file_format, "BMP") == 0))
@@ -52,7 +56,14 @@ void initText2D(GLuint screen_width, GLuint screen_height, const char *texturePa
     glUniform1i(screen_height_uniform_ID, screen_height);
 }
 
-void printText2D(GLuint screen_width, GLuint screen_height, GLuint x, GLuint y, GLuint size, const char *text, const char *char_font_texture_file_format)
+void printText2D(
+        GLuint screen_width,
+        GLuint screen_height,
+        GLuint x,
+        GLuint y,
+        GLuint size,
+        const char *text,
+        const char *char_font_texture_file_format)
 {
     uint32_t length = strlen(text);
 
