@@ -72,6 +72,8 @@ add_executable(several_objects
     several_objects/several_objects.cpp
     common/shader.cpp
     common/shader.hpp
+    common/globals.cpp
+    common/globals.hpp
     common/controls.cpp
     common/controls.hpp
     common/texture.cpp
@@ -98,25 +100,27 @@ create_target_launcher(several_objects WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE
 
 # Tutorial 11
 add_executable(text2d
-	text2d/tutorial11.cpp
-	common/shader.cpp
-	common/shader.hpp
-	common/controls.cpp
-	common/controls.hpp
-	common/texture.cpp
-	common/texture.hpp
-	common/objloader.cpp
-	common/objloader.hpp
-	common/vboindexer.cpp
-	common/vboindexer.hpp
-	common/text2D.hpp
-	common/text2D.cpp
+    text2d/tutorial11.cpp
+    common/shader.cpp
+    common/shader.hpp
+    common/globals.cpp
+    common/globals.hpp
+    common/controls.cpp
+    common/controls.hpp
+    common/texture.cpp
+    common/texture.hpp
+    common/objloader.cpp
+    common/objloader.hpp
+    common/vboindexer.cpp
+    common/vboindexer.hpp
+    common/text2D.hpp
+    common/text2D.cpp
 
-	common/StandardShading.vertexshader
-	common/StandardShading.fragmentshader
-	common/TextVertexShader.vertexshader
-	common/TextVertexShader.fragmentshader
-)
+    common/StandardShading.vertexshader
+    common/StandardShading.fragmentshader
+    common/TextVertexShader.vertexshader
+    common/TextVertexShader.fragmentshader
+    )
 configure_file(common/StandardShading.vertexshader StandardShading.vertexshader COPYONLY)
 configure_file(common/StandardShading.fragmentshader StandardShading.fragmentshader COPYONLY)
 configure_file(common/TextVertexShader.vertexshader TextVertexShader.vertexshader COPYONLY)
@@ -125,8 +129,8 @@ configure_file(text2d/Holstein.DDS Holstein.DDS COPYONLY)
 configure_file(text2d/Holstein.bmp Holstein.bmp COPYONLY)
 
 target_link_libraries(text2d
-	${ALL_LIBS}
-)
+    ${ALL_LIBS}
+    )
 # Xcode and Visual working directories
 set_target_properties(text2d PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/text2d/")
 create_target_launcher(text2d WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/text2d/")
@@ -136,6 +140,8 @@ add_executable(ylikuutio
     ylikuutio/ylikuutio.cpp
     common/shader.cpp
     common/shader.hpp
+    common/globals.cpp
+    common/globals.hpp
     common/controls.cpp
     common/controls.hpp
     common/texture.cpp

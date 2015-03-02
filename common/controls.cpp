@@ -7,6 +7,7 @@ extern GLFWwindow* window; // The "extern" keyword here is to access the variabl
 #include <glm/gtc/matrix_transform.hpp>
 using namespace glm;
 
+#include "globals.hpp"
 #include "controls.hpp"
 
 #define WINDOW_WIDTH 1600
@@ -28,15 +29,6 @@ glm::mat4 getProjectionMatrix()
 {
     return ProjectionMatrix;
 }
-
-// Initial position : on +Z
-glm::vec3 position = glm::vec3(100, 100, 100);
-// Initial horizontal angle : toward -Z
-float horizontalAngle = 0.0f;
-// Initial vertical angle : none
-float verticalAngle = PI / 2;
-// Initial Field of View
-float initialFoV = 45.0f;
 
 float speed = 5.0f; // 5 units / second
 float turbo_factor = 3.0f; // 5 units / second

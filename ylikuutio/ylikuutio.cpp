@@ -22,6 +22,7 @@ using namespace std;
 
 #include "common/shader.hpp"
 #include "common/texture.hpp"
+#include "common/globals.hpp"
 #include "common/controls.hpp"
 #include "common/bmploader.hpp"
 #include "common/objloader.hpp"
@@ -30,6 +31,10 @@ using namespace std;
 
 #define WINDOW_WIDTH 1600
 #define WINDOW_HEIGHT (WINDOW_WIDTH * 3 / 4)
+
+#define TEXT_SIZE 40
+
+#define PI 3.14159265359f
 
 // model file format: obj/bmp/...
 // std::string g_model_file_format = "bmp";
@@ -66,6 +71,15 @@ std::string g_font_texture_filename = "Holstein.bmp";
 
 int main(void)
 {
+    // Initial position : on +Z
+    position = glm::vec3(100, 100, 100);
+    // Initial horizontal angle : toward -Z
+    horizontalAngle = 0.0f;
+    // Initial vertical angle : none
+    verticalAngle = PI / 2;
+    // Initial Field of View
+    initialFoV = 45.0f;
+
     // Initialise GLFW
     if (!glfwInit())
     {
@@ -226,13 +240,14 @@ int main(void)
     do
     {
         // Measure speed
+        char ms_frame_text[256];
         double currentTime = glfwGetTime();
         nbFrames++;
         if (currentTime - lastTime >= 1.0)
         {
             // If last printf() was more than 1 sec ago
             // printf and reset
-            printf("%f ms/frame\n", 1000.0 / ((double)  nbFrames));
+            sprintf(ms_frame_text, "%f ms/frame; %f frames/second", 1000.0f / ((double) nbFrames), 1000.0f / (1000.0f / ((double) nbFrames)));
             nbFrames = 0;
             lastTime += 1.0;
         }
@@ -316,8 +331,10 @@ int main(void)
         glDisableVertexAttribArray(vertexNormal_modelspaceID);
 
         char text[256];
-        sprintf(text, "%.2f sec", glfwGetTime());
-        printText2D(WINDOW_WIDTH, WINDOW_HEIGHT, 0, 0, 40, text, "bmp");
+        // sprintf(text, "%.2f sec. (%.2f, %.2f, %.2f)", glfwGetTime(), position.x, position.y, position.z);
+        sprintf(text, "(%.2f,%.2f,%.2f) (%.2f,%.2f)", position.x, position.y, position.z, horizontalAngle, verticalAngle);
+        printText2D(WINDOW_WIDTH, WINDOW_HEIGHT, 0, 0, TEXT_SIZE, text, "bmp");
+        printText2D(WINDOW_WIDTH, WINDOW_HEIGHT, 0, TEXT_SIZE, TEXT_SIZE, ms_frame_text, "bmp");
 
         // Swap buffers.
         glfwSwapBuffers(window);
