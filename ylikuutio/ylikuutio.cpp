@@ -333,8 +333,8 @@ int main(void)
         char text[256];
         // sprintf(text, "%.2f sec. (%.2f, %.2f, %.2f)", glfwGetTime(), position.x, position.y, position.z);
         sprintf(text, "(%.2f,%.2f,%.2f) (%.2f,%.2f)", position.x, position.y, position.z, horizontalAngle, verticalAngle);
-        printText2D(WINDOW_WIDTH, WINDOW_HEIGHT, 0, 0, TEXT_SIZE, text, "bmp");
-        printText2D(WINDOW_WIDTH, WINDOW_HEIGHT, 0, TEXT_SIZE, TEXT_SIZE, ms_frame_text, "bmp");
+        printText2D(WINDOW_WIDTH, WINDOW_HEIGHT, 0, 0, TEXT_SIZE, text, "bmp", "left", "bottom");
+        printText2D(WINDOW_WIDTH, WINDOW_HEIGHT, 0, TEXT_SIZE, TEXT_SIZE, ms_frame_text, "bmp", "left", "bottom");
 
         // Swap buffers.
         glfwSwapBuffers(window);

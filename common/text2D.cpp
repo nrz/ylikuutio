@@ -63,7 +63,9 @@ void printText2D(
         GLuint y,
         GLuint size,
         const char *text,
-        const char *char_font_texture_file_format)
+        const char *char_font_texture_file_format,
+        const char *horizontal_alignment,
+        const char *vertical_alignment)
 {
     uint32_t length = strlen(text);
 
@@ -164,6 +166,18 @@ void printText2D(
 
     glDisableVertexAttribArray(vertexPosition_screenspaceID);
     glDisableVertexAttribArray(vertexUVID);
+}
+
+void printText2D(
+        GLuint screen_width,
+        GLuint screen_height,
+        GLuint x,
+        GLuint y,
+        GLuint size,
+        const char *text,
+        const char *char_font_texture_file_format)
+{
+    printText2D(screen_width, screen_height, x, y, size, text, char_font_texture_file_format, "left", "bottom");
 }
 
 void cleanupText2D()
