@@ -76,10 +76,43 @@ void printText2D(
     {
         // Print to the right side of X (so far there is no check for input length).
         // Print up of Y.
-        glm::vec2 vertex_up_left    = glm::vec2(x + (i * size)       , y + size);
-        glm::vec2 vertex_up_right   = glm::vec2(x + (i * size + size), y + size);
-        glm::vec2 vertex_down_right = glm::vec2(x + (i * size + size), y);
-        glm::vec2 vertex_down_left  = glm::vec2(x + (i * size)       , y);
+        GLfloat vertex_up_left_x;
+        GLfloat vertex_up_left_y;
+        GLfloat vertex_up_right_x;
+        GLfloat vertex_up_right_y;
+        GLfloat vertex_down_left_x;
+        GLfloat vertex_down_left_y;
+        GLfloat vertex_down_right_x;
+        GLfloat vertex_down_right_y;
+
+        if (strcmp(horizontal_alignment, "left") == 0)
+        {
+            vertex_up_left_x  = vertex_down_left_x  = x + (i * size);
+            vertex_up_right_x = vertex_down_right_x = x + (i * size + size);
+        }
+        else if (strcmp(horizontal_alignment, "right") == 0)
+        {
+        }
+        else if (strcmp(horizontal_alignment, "center") == 0)
+        {
+        }
+
+        if (strcmp(vertical_alignment, "bottom") == 0)
+        {
+            vertex_down_left_y = vertex_down_right_y = y;
+            vertex_up_left_y   = vertex_up_right_y   = y + size;
+        }
+        else if (strcmp(vertical_alignment, "top") == 0)
+        {
+        }
+        else if (strcmp(vertical_alignment, "center") == 0)
+        {
+        }
+
+        glm::vec2 vertex_up_left = glm::vec2(vertex_up_left_x, vertex_up_left_y);
+        glm::vec2 vertex_up_right = glm::vec2(vertex_up_right_x, vertex_up_right_y);
+        glm::vec2 vertex_down_left = glm::vec2(vertex_down_left_x, vertex_down_left_y);
+        glm::vec2 vertex_down_right = glm::vec2(vertex_down_right_x, vertex_down_right_y);
 
         vertices.push_back(vertex_up_left);
         vertices.push_back(vertex_down_left);
