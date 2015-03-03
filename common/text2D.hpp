@@ -12,7 +12,7 @@ void printText2D(
         GLuint screen_height,
         GLuint x,
         GLuint y,
-        GLuint size,
+        GLuint text_size,
         const char *text,
         const char *char_font_texture_file_format,
         const char *horizontal_alignment,
@@ -23,7 +23,7 @@ void printText2D(
         GLuint screen_height,
         GLuint x,
         GLuint y,
-        GLuint size,
+        GLuint text_size,
         const char *text,
         const char *char_font_texture_file_format);
 

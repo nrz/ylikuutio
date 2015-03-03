@@ -61,7 +61,7 @@ void printText2D(
         GLuint screen_height,
         GLuint x,
         GLuint y,
-        GLuint size,
+        GLuint text_size,
         const char *text,
         const char *char_font_texture_file_format,
         const char *horizontal_alignment,
@@ -87,8 +87,8 @@ void printText2D(
 
         if (strcmp(horizontal_alignment, "left") == 0)
         {
-            vertex_up_left_x  = vertex_down_left_x  = x + (i * size);
-            vertex_up_right_x = vertex_down_right_x = x + (i * size + size);
+            vertex_up_left_x  = vertex_down_left_x  = x + (i * text_size);
+            vertex_up_right_x = vertex_down_right_x = x + (i * text_size + text_size);
         }
         else if (strcmp(horizontal_alignment, "right") == 0)
         {
@@ -100,7 +100,7 @@ void printText2D(
         if (strcmp(vertical_alignment, "bottom") == 0)
         {
             vertex_down_left_y = vertex_down_right_y = y;
-            vertex_up_left_y   = vertex_up_right_y   = y + size;
+            vertex_up_left_y   = vertex_up_right_y   = y + text_size;
         }
         else if (strcmp(vertical_alignment, "top") == 0)
         {
@@ -206,11 +206,11 @@ void printText2D(
         GLuint screen_height,
         GLuint x,
         GLuint y,
-        GLuint size,
+        GLuint text_size,
         const char *text,
         const char *char_font_texture_file_format)
 {
-    printText2D(screen_width, screen_height, x, y, size, text, char_font_texture_file_format, "left", "bottom");
+    printText2D(screen_width, screen_height, x, y, text_size, text, char_font_texture_file_format, "left", "bottom");
 }
 
 void cleanupText2D()
