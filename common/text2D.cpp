@@ -62,6 +62,7 @@ void printText2D(
         GLuint x,
         GLuint y,
         GLuint text_size,
+        GLuint font_size,
         const char *text,
         const char *char_font_texture_file_format,
         const char *horizontal_alignment,
@@ -123,33 +124,33 @@ void printText2D(
         vertices.push_back(vertex_down_left);
 
         char character = text[i];
-        float uv_x = (character % 16) / 16.0f;
+        float uv_x = (character % font_size) / (GLfloat) font_size;
         float uv_y;
 
         if ((strcmp(char_font_texture_file_format, "dds") == 0) || (strcmp(char_font_texture_file_format, "DDS") == 0))
         {
-            uv_y = (character / 16) / 16.0f;
+            uv_y = (character / font_size) / (GLfloat) font_size;
         }
         else if ((strcmp(char_font_texture_file_format, "bmp") == 0) || (strcmp(char_font_texture_file_format, "BMP") == 0))
         {
             // BMP is stored in the file beginning from the bottom line.
-            uv_y = 1 - (character / 16) / 16.0f;
+            uv_y = 1 - (character / font_size) / (GLfloat) font_size;
         }
 
         glm::vec2 uv_up_left    = glm::vec2(uv_x                 , uv_y);
-        glm::vec2 uv_up_right   = glm::vec2(uv_x + (1.0f / 16.0f), uv_y);
+        glm::vec2 uv_up_right   = glm::vec2(uv_x + (1.0f / (GLfloat) font_size), uv_y);
         glm::vec2 uv_down_right;
         glm::vec2 uv_down_left;
         if ((strcmp(char_font_texture_file_format, "dds") == 0) || (strcmp(char_font_texture_file_format, "DDS") == 0))
         {
-            uv_down_right = glm::vec2(uv_x + (1.0f / 16.0f), (uv_y + 1.0f / 16.0f));
-            uv_down_left  = glm::vec2(uv_x                 , (uv_y + 1.0f / 16.0f));
+            uv_down_right = glm::vec2(uv_x + (1.0f / (GLfloat) font_size), (uv_y + 1.0f / (GLfloat) font_size));
+            uv_down_left  = glm::vec2(uv_x                               , (uv_y + 1.0f / (GLfloat) font_size));
         }
         else if ((strcmp(char_font_texture_file_format, "bmp") == 0) || (strcmp(char_font_texture_file_format, "BMP") == 0))
         {
             // BMP is stored in the file beginning from the bottom line.
-            uv_down_right = glm::vec2(uv_x + (1.0f / 16.0f), (uv_y - 1.0f / 16.0f));
-            uv_down_left  = glm::vec2(uv_x                 , (uv_y - 1.0f / 16.0f));
+            uv_down_right = glm::vec2(uv_x + (1.0f / (GLfloat) font_size), (uv_y - 1.0f / (GLfloat) font_size));
+            uv_down_left  = glm::vec2(uv_x                               , (uv_y - 1.0f / (GLfloat) font_size));
         }
         UVs.push_back(uv_up_left);
         UVs.push_back(uv_down_left);
@@ -207,10 +208,11 @@ void printText2D(
         GLuint x,
         GLuint y,
         GLuint text_size,
+        GLuint font_size,
         const char *text,
         const char *char_font_texture_file_format)
 {
-    printText2D(screen_width, screen_height, x, y, text_size, text, char_font_texture_file_format, "left", "bottom");
+    printText2D(screen_width, screen_height, x, y, text_size, font_size, text, char_font_texture_file_format, "left", "bottom");
 }
 
 void cleanupText2D()

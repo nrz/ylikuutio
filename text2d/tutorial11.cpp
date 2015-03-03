@@ -25,6 +25,9 @@ using namespace glm;
 #define WINDOW_WIDTH 1600
 #define WINDOW_HEIGHT (WINDOW_WIDTH * 3 / 4)
 
+#define TEXT_SIZE 40
+#define FONT_SIZE 16
+
 int main(void)
 {
     // Initialise GLFW
@@ -231,7 +234,7 @@ int main(void)
 
         char text[256];
         sprintf(text,"%.2f sec", glfwGetTime());
-        printText2D(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2, 40, text, "bmp");
+        printText2D(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2, TEXT_SIZE, FONT_SIZE, text, "bmp");
 
         // Swap buffers
         glfwSwapBuffers(window);
