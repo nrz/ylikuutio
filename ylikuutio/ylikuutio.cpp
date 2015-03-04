@@ -335,7 +335,8 @@ int main(void)
         // sprintf(text, "%.2f sec. (%.2f, %.2f, %.2f)", glfwGetTime(), position.x, position.y, position.z);
         sprintf(text, "(%.2f,%.2f,%.2f) (%.2f,%.2f)", position.x, position.y, position.z, horizontalAngle, verticalAngle);
         printText2D(WINDOW_WIDTH, WINDOW_HEIGHT, 0, 0, TEXT_SIZE, FONT_SIZE, text, "bmp", "left", "bottom");
-        printText2D(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_WIDTH, WINDOW_HEIGHT, TEXT_SIZE, FONT_SIZE, ms_frame_text, "bmp", "right", "top");
+        // printText2D(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_WIDTH, WINDOW_HEIGHT, TEXT_SIZE, FONT_SIZE, ms_frame_text, "bmp", "right", "top");
+        printText2D(WINDOW_WIDTH, WINDOW_HEIGHT, (WINDOW_WIDTH / 2), WINDOW_HEIGHT, TEXT_SIZE, FONT_SIZE, ms_frame_text, "bmp", "center", "top");
 
         // Swap buffers.
         glfwSwapBuffers(window);
