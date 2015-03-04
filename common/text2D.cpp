@@ -107,6 +107,8 @@ void printText2D(
         }
         else if (strcmp(vertical_alignment, "top") == 0)
         {
+            vertex_down_left_y = vertex_down_right_y = y - text_size;
+            vertex_up_left_y   = vertex_up_right_y   = y;
         }
         else if (strcmp(vertical_alignment, "center") == 0)
         {
