@@ -114,6 +114,8 @@ void printText2D(
         }
         else if (strcmp(vertical_alignment, "center") == 0)
         {
+            vertex_down_left_y = vertex_down_right_y = y - 0.5f * text_size;
+            vertex_up_left_y   = vertex_up_right_y   = y + 0.5f * text_size;
         }
 
         glm::vec2 vertex_up_left = glm::vec2(vertex_up_left_x, vertex_up_left_y);
