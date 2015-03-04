@@ -30,7 +30,7 @@ using namespace std;
 #include "common/text2D.hpp"
 
 #define WINDOW_WIDTH 1600
-#define WINDOW_HEIGHT (WINDOW_WIDTH * 3 / 4)
+#define WINDOW_HEIGHT 900
 
 #define TEXT_SIZE 40
 #define FONT_SIZE 16

@@ -11,7 +11,7 @@ using namespace glm;
 #include "controls.hpp"
 
 #define WINDOW_WIDTH 1600
-#define WINDOW_HEIGHT (WINDOW_WIDTH * 3 / 4)
+#define WINDOW_HEIGHT 900
 
 #define PI 3.14159265359f
 
