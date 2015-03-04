@@ -89,7 +89,7 @@ void printText2D(
         if (strcmp(horizontal_alignment, "left") == 0)
         {
             vertex_up_left_x  = vertex_down_left_x  = x + (i * text_size);
-            vertex_up_right_x = vertex_down_right_x = x + (i * text_size + text_size);
+            vertex_up_right_x = vertex_down_right_x = x + (i * text_size) + text_size;
         }
         else if (strcmp(horizontal_alignment, "right") == 0)
         {
