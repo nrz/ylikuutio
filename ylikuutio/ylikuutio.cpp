@@ -248,7 +248,7 @@ int main(void)
         {
             // If last printf() was more than 1 sec ago
             // printf and reset
-            sprintf(ms_frame_text, "%f ms/frame; %f frames/second", 1000.0f / ((double) nbFrames), 1000.0f / (1000.0f / ((double) nbFrames)));
+            sprintf(ms_frame_text, "%.02f ms/frame; %.02f frames/s", 1000.0f / ((double) nbFrames), 1000.0f / (1000.0f / ((double) nbFrames)));
             nbFrames = 0;
             lastTime += 1.0;
         }
@@ -335,7 +335,7 @@ int main(void)
         // sprintf(text, "%.2f sec. (%.2f, %.2f, %.2f)", glfwGetTime(), position.x, position.y, position.z);
         sprintf(text, "(%.2f,%.2f,%.2f) (%.2f,%.2f)", position.x, position.y, position.z, horizontalAngle, verticalAngle);
         printText2D(WINDOW_WIDTH, WINDOW_HEIGHT, 0, 0, TEXT_SIZE, FONT_SIZE, text, "bmp", "left", "bottom");
-        printText2D(WINDOW_WIDTH, WINDOW_HEIGHT, 0, TEXT_SIZE, TEXT_SIZE, FONT_SIZE, ms_frame_text, "bmp", "left", "bottom");
+        printText2D(WINDOW_WIDTH, WINDOW_HEIGHT, (WINDOW_WIDTH - 1), TEXT_SIZE, TEXT_SIZE, FONT_SIZE, ms_frame_text, "bmp", "right", "bottom");
 
         // Swap buffers.
         glfwSwapBuffers(window);
