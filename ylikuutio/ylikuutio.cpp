@@ -9,14 +9,25 @@
 #include <stdlib.h>
 
 // Include GLEW
+#ifndef __GL_GLEW_H_INCLUDED
+#define __GL_GLEW_H_INCLUDED
 #include <GL/glew.h>
+#endif
 
 // Include GLFW
+#ifndef __GLFW3_H_INCLUDED
+#define __GLFW3_H_INCLUDED
 #include <glfw3.h>
+#endif
+
 GLFWwindow* window;
 
 // Include GLM
+#ifndef __GLM_GLM_HPP_INCLUDED
+#define __GLM_GLM_HPP_INCLUDED
 #include <glm/glm.hpp>
+#endif
+
 #include <glm/gtc/matrix_transform.hpp>
 using namespace std;
 

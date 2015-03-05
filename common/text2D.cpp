@@ -1,7 +1,18 @@
 #include <vector>
 #include <cstring>
+
+// Include GLEW
+#ifndef __GL_GLEW_H_INCLUDED
+#define __GL_GLEW_H_INCLUDED
 #include <GL/glew.h>
+#endif
+
+// Include GLM
+#ifndef __GLM_GLM_HPP_INCLUDED
+#define __GLM_GLM_HPP_INCLUDED
 #include <glm/glm.hpp>
+#endif
+
 #include <glm/gtc/matrix_transform.hpp>
 #include "shader.hpp"
 #include "texture.hpp"

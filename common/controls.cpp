@@ -1,9 +1,17 @@
 // Include GLFW
+#ifndef __GLFW3_H_INCLUDED
+#define __GLFW3_H_INCLUDED
 #include <glfw3.h>
+#endif
+
 extern GLFWwindow* window; // The "extern" keyword here is to access the variable "window" declared in tutorialXXX.cpp. This is a hack to keep the tutorials simple. Please avoid this.
 
 // Include GLM
+#ifndef __GLM_GLM_HPP_INCLUDED
+#define __GLM_GLM_HPP_INCLUDED
 #include <glm/glm.hpp>
+#endif
+
 #include <glm/gtc/matrix_transform.hpp>
 using namespace glm;
 
