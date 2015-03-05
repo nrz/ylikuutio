@@ -8,3 +8,5 @@ extern glm::vec3 position;
 extern float horizontalAngle;
 extern float verticalAngle;
 extern float initialFoV;
+
+extern struct PrintingStruct *printing_struct;
