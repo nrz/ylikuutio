@@ -342,12 +342,30 @@ int main(void)
         glDisableVertexAttribArray(vertexUVID);
         glDisableVertexAttribArray(vertexNormal_modelspaceID);
 
+        PrintingStruct printing_struct;
+        printing_struct.screen_width = WINDOW_WIDTH;
+        printing_struct.screen_height = WINDOW_HEIGHT;
+        printing_struct.text_size = TEXT_SIZE;
+        printing_struct.font_size = FONT_SIZE;
+        printing_struct.char_font_texture_file_format = "bmp";
+
         char text[256];
         // sprintf(text, "%.2f sec. (%.2f, %.2f, %.2f)", glfwGetTime(), position.x, position.y, position.z);
         sprintf(text, "(%.2f,%.2f,%.2f) (%.2f,%.2f)", position.x, position.y, position.z, horizontalAngle, verticalAngle);
-        printText2D(WINDOW_WIDTH, WINDOW_HEIGHT, 0, 0, TEXT_SIZE, FONT_SIZE, text, "bmp", "left", "bottom");
-        // printText2D(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_WIDTH, WINDOW_HEIGHT, TEXT_SIZE, FONT_SIZE, ms_frame_text, "bmp", "right", "top");
-        printText2D(WINDOW_WIDTH, WINDOW_HEIGHT, (WINDOW_WIDTH / 2), WINDOW_HEIGHT, TEXT_SIZE, FONT_SIZE, ms_frame_text, "bmp", "center", "top");
+
+        printing_struct.x = 0;
+        printing_struct.y = 0;
+        printing_struct.text = text;
+        printing_struct.horizontal_alignment = "left";
+        printing_struct.vertical_alignment = "bottom";
+        printText2D(printing_struct);
+
+        printing_struct.x = (WINDOW_WIDTH / 2);
+        printing_struct.y = WINDOW_HEIGHT;
+        printing_struct.text = ms_frame_text;
+        printing_struct.horizontal_alignment = "center";
+        printing_struct.vertical_alignment = "top";
+        printText2D(printing_struct);
 
         // Swap buffers.
         glfwSwapBuffers(window);

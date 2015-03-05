@@ -1,6 +1,8 @@
 #ifndef TEXT2D_HPP
 #define TEXT2D_HPP
 
+#include "globals.hpp"
+
 void initText2D(
         GLuint screen_width,
         GLuint screen_height,
@@ -18,6 +20,8 @@ void printText2D(
         const char *char_font_texture_file_format,
         const char *horizontal_alignment,
         const char *vertical_alignment);
+
+void printText2D(PrintingStruct printing_struct);
 
 void printText2D(
         GLuint screen_width,

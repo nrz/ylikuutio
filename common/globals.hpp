@@ -1,3 +1,6 @@
+#ifndef __GLOBALS_HPP_INCLUDED
+#define __GLOBALS_HPP_INCLUDED
+
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
 #define __GLM_GLM_HPP_INCLUDED
@@ -9,4 +12,18 @@ extern float horizontalAngle;
 extern float verticalAngle;
 extern float initialFoV;
 
-extern struct PrintingStruct *printing_struct;
+typedef struct
+{
+    GLuint screen_width;
+    GLuint screen_height;
+    GLuint x;
+    GLuint y;
+    GLuint text_size;
+    GLuint font_size;
+    const char *text;
+    const char *char_font_texture_file_format;
+    const char *horizontal_alignment;
+    const char *vertical_alignment;
+} PrintingStruct;
+
+#endif
