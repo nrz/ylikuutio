@@ -34,3 +34,6 @@ http://tulrich.com/geekstuff/partitioning.html
 
 Octree-ohjeita:
 http://www.gamedev.net/page/resources/_/technical/game-programming/introduction-to-octrees-r3529
+
+GPU Gems:
+http://http.developer.nvidia.com/GPUGems/gpugems_pref01.html
