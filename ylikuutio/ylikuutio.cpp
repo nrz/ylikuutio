@@ -249,6 +249,8 @@ int main(void)
     double lastTime = glfwGetTime();
     int nbFrames = 0;
 
+    bool ms_frame_text_ready = false;
+
     do
     {
         // Measure speed
@@ -259,7 +261,8 @@ int main(void)
         {
             // If last printf() was more than 1 sec ago
             // printf and reset
-            sprintf(ms_frame_text, "%.02f ms/frame; %.02f frames/s", 1000.0f / ((double) nbFrames), 1000.0f / (1000.0f / ((double) nbFrames)));
+            sprintf(ms_frame_text, "%.02f ms/frame; %.02f Hz", 1000.0f / ((double) nbFrames), 1000.0f / (1000.0f / ((double) nbFrames)));
+            ms_frame_text_ready = true;
             nbFrames = 0;
             lastTime += 1.0;
         }
@@ -349,23 +352,35 @@ int main(void)
         printing_struct.font_size = FONT_SIZE;
         printing_struct.char_font_texture_file_format = "bmp";
 
-        char text[256];
-        // sprintf(text, "%.2f sec. (%.2f, %.2f, %.2f)", glfwGetTime(), position.x, position.y, position.z);
-        sprintf(text, "(%.2f,%.2f,%.2f) (%.2f,%.2f)", position.x, position.y, position.z, horizontalAngle, verticalAngle);
+        char coordinates_text[256];
+        sprintf(coordinates_text, "(%.2f,%.2f,%.2f) (%.2f,%.2f)", position.x, position.y, position.z, horizontalAngle, verticalAngle);
+
+        char time_text[256];
+        sprintf(time_text, "%.2f sec", glfwGetTime(), position.x, position.y, position.z);
 
         printing_struct.x = 0;
         printing_struct.y = 0;
-        printing_struct.text = text;
+        printing_struct.text = coordinates_text;
         printing_struct.horizontal_alignment = "left";
         printing_struct.vertical_alignment = "bottom";
         printText2D(printing_struct);
 
-        printing_struct.x = (WINDOW_WIDTH / 2);
+        printing_struct.x = 0;
         printing_struct.y = WINDOW_HEIGHT;
-        printing_struct.text = ms_frame_text;
-        printing_struct.horizontal_alignment = "center";
+        printing_struct.text = time_text;
+        printing_struct.horizontal_alignment = "left";
         printing_struct.vertical_alignment = "top";
         printText2D(printing_struct);
+
+        if (ms_frame_text_ready)
+        {
+            printing_struct.x = WINDOW_WIDTH;
+            printing_struct.y = WINDOW_HEIGHT;
+            printing_struct.text = ms_frame_text;
+            printing_struct.horizontal_alignment = "right";
+            printing_struct.vertical_alignment = "top";
+            printText2D(printing_struct);
+        }
 
         // Swap buffers.
         glfwSwapBuffers(window);
