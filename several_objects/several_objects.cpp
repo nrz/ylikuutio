@@ -294,17 +294,17 @@ int main(void)
         // The rest is exactly the same as the first object
 
         // 1st attribute buffer : vertices
-        //glEnableVertexAttribArray(vertexPosition_modelspaceID); // Already enabled
+        // glEnableVertexAttribArray(vertexPosition_modelspaceID); // Already enabled
         glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
         glVertexAttribPointer(vertexPosition_modelspaceID, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
 
         // 2nd attribute buffer : UVs
-        //glEnableVertexAttribArray(vertexUVID); // Already enabled
+        // glEnableVertexAttribArray(vertexUVID); // Already enabled
         glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
         glVertexAttribPointer(vertexUVID, 2, GL_FLOAT, GL_FALSE, 0, (void*)0);
 
         // 3rd attribute buffer : normals
-        //glEnableVertexAttribArray(vertexNormal_modelspaceID); // Already enabled
+        // glEnableVertexAttribArray(vertexNormal_modelspaceID); // Already enabled
         glBindBuffer(GL_ARRAY_BUFFER, normalbuffer);
         glVertexAttribPointer(vertexNormal_modelspaceID, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
 
