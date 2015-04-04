@@ -4,6 +4,8 @@
 #include <glfw3.h>
 #endif
 
+#include "common/globals.hpp"
+
 extern GLFWwindow* window; // The "extern" keyword here is to access the variable "window" declared in tutorialXXX.cpp. This is a hack to keep the tutorials simple. Please avoid this.
 
 // Include GLM
@@ -15,7 +17,11 @@ extern GLFWwindow* window; // The "extern" keyword here is to access the variabl
 #include <glm/gtc/matrix_transform.hpp>
 using namespace glm;
 
-#include "globals.hpp"
+#ifndef __COMMON_GLOBALS_HPP_INCLUDED
+#define __COMMON_GLOBALS_HPP_INCLUDED
+#include "common/globals.hpp"
+#endif
+
 #include "controls.hpp"
 
 #define WINDOW_WIDTH 1600
@@ -38,9 +44,9 @@ glm::mat4 getProjectionMatrix()
     return ProjectionMatrix;
 }
 
-float speed = 5.0f; // 5 units / second
-float turbo_factor = 3.0f; // 5 units / second
-float mouseSpeed = 0.005f;
+GLfloat speed = 5.0f; // 5 units / second
+GLfloat turbo_factor = 3.0f; // 5 units / second
+GLfloat mouseSpeed = 0.005f;
 
 void computeMatricesFromInputs()
 {
@@ -58,16 +64,21 @@ void computeMatricesFromInputs()
     // Reset mouse position for next frame
     glfwSetCursorPos(window, WINDOW_WIDTH/2, WINDOW_HEIGHT/2);
 
-    // Compute new orientation
-    horizontalAngle += mouseSpeed * float(WINDOW_WIDTH/2 - xpos);
+    if (hasMouseEverMoved || (abs(xpos) > 0.0001) || (abs(ypos) > 0.0001))
+    {
+        hasMouseEverMoved = true;
+
+        // Compute new orientation
+        horizontalAngle += mouseSpeed * GLfloat(WINDOW_WIDTH/2 - xpos);
 
 #ifdef INVERT_MOUSE
-    // invert mouse.
-    verticalAngle   -= mouseSpeed * float(WINDOW_HEIGHT/2 - ypos);
+        // invert mouse.
+        verticalAngle   -= mouseSpeed * GLfloat(WINDOW_HEIGHT/2 - ypos);
 #else
-    // don't invert mouse.
-    verticalAngle   += mouseSpeed * float(WINDOW_HEIGHT/2 - ypos);
+        // don't invert mouse.
+        verticalAngle   += mouseSpeed * GLfloat(WINDOW_HEIGHT/2 - ypos);
 #endif
+    }
 
     // Direction : Spherical coordinates to Cartesian coordinates conversion
     glm::vec3 direction(
@@ -86,7 +97,7 @@ void computeMatricesFromInputs()
     // Up vector
     glm::vec3 up = glm::cross(right, direction);
 
-    float temp_speed;
+    GLfloat temp_speed;
 
     // Turbo.
     if ((glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS) || (glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS))
@@ -155,7 +166,7 @@ void computeMatricesFromInputs()
         position.z += deltaTime * temp_speed;
     }
 
-    float FoV = initialFoV;// - 5 * glfwGetMouseWheel(); // Now GLFW 3 requires setting up a callback for this. It's a bit too complicated for this beginner's tutorial, so it's disabled instead.
+    GLfloat FoV = initialFoV;// - 5 * glfwGetMouseWheel(); // Now GLFW 3 requires setting up a callback for this. It's a bit too complicated for this beginner's tutorial, so it's disabled instead.
 
     // Projection matrix : 45° Field of View, 4:3 ratio, display range : 0.1 unit <-> 100 units
     ProjectionMatrix = glm::perspective(FoV, 4.0f / 3.0f, 0.1f, 500.0f);

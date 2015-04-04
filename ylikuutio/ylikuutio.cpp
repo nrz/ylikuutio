@@ -33,7 +33,12 @@ using namespace std;
 
 #include "common/shader.hpp"
 #include "common/texture.hpp"
+
+#ifndef __COMMON_GLOBALS_HPP_INCLUDED
+#define __COMMON_GLOBALS_HPP_INCLUDED
 #include "common/globals.hpp"
+#endif
+
 #include "common/controls.hpp"
 #include "common/bmploader.hpp"
 #include "common/objloader.hpp"

@@ -2,27 +2,65 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <vector>
+#include <string>
 
 // Include GLEW
+#ifndef __GL_GLEW_H_INCLUDED
+#define __GL_GLEW_H_INCLUDED
 #include <GL/glew.h>
+#endif
 
 // Include GLFW
+#ifndef __GLFW3_H_INCLUDED
+#define __GLFW3_H_INCLUDED
 #include <glfw3.h>
+#endif
+
 GLFWwindow* window;
 
 // Include GLM
+#ifndef __GLM_GLM_HPP_INCLUDED
+#define __GLM_GLM_HPP_INCLUDED
 #include <glm/glm.hpp>
+#endif
+
 #include <glm/gtc/matrix_transform.hpp>
 using namespace std;
 
-#include <common/shader.hpp>
-#include <common/texture.hpp>
-#include <common/controls.hpp>
-#include <common/objloader.hpp>
-#include <common/vboindexer.hpp>
+#include "common/shader.hpp"
+#include "common/texture.hpp"
+#include "common/controls.hpp"
+#include "common/objloader.hpp"
+#include "common/vboindexer.hpp"
+#include "common/text2D.hpp"
+
+#define WINDOW_WIDTH 1600
+#define WINDOW_HEIGHT 900
+
+#define TEXT_SIZE 40
+#define FONT_SIZE 16
+
+#define PI 3.14159265359f
+
+// font texture file format: bmp/...
+std::string g_font_texture_file_format = "bmp";
+
+// font texture filename.
+// std::string g_font_texture_filename = "Holstein.DDS";
+std::string g_font_texture_filename = "Holstein.bmp";
 
 int main(void)
 {
+    // Initial position : on +Z
+    position = glm::vec3(1.5f, 0.0f, 3.75f);
+    // Initial horizontal angle : toward -Z
+    horizontalAngle = -3.0f;
+    // Initial vertical angle : none
+    // verticalAngle = PI / 2;
+    verticalAngle = 0.0f;
+    // Initial Field of View
+    initialFoV = 45.0f;
+
     // Initialise GLFW
     if (!glfwInit())
     {
@@ -35,7 +73,7 @@ int main(void)
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
 
     // Open a window and create its OpenGL context
-    window = glfwCreateWindow(1024, 768, "Tutorial 09 - Rendering several models", NULL, NULL);
+    window = glfwCreateWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "Several models", NULL, NULL);
     if (window == NULL)
     {
         fprintf (stderr, "Failed to open GLFW window.\n");
@@ -53,7 +91,7 @@ int main(void)
 
     // Ensure we can capture the escape key being pressed below
     glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
-    glfwSetCursorPos(window, 1024/2, 768/2);
+    glfwSetCursorPos(window, (WINDOW_WIDTH / 2), (WINDOW_HEIGHT / 2));
 
     // Dark blue background
     glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
@@ -123,6 +161,11 @@ int main(void)
     // Get a handle for our "LightPosition" uniform
     glUseProgram(programID);
     GLuint LightID = glGetUniformLocation(programID, "LightPosition_worldspace");
+
+    // Initialize our little text library with the Holstein font
+    const char *char_g_font_texture_filename = g_font_texture_filename.c_str();
+    const char *char_g_font_texture_file_format = g_font_texture_file_format.c_str();
+    initText2D(WINDOW_WIDTH, WINDOW_HEIGHT, char_g_font_texture_filename, char_g_font_texture_file_format);
 
     // For speed computation
     double lastTime = glfwGetTime();
@@ -277,12 +320,29 @@ int main(void)
         glDisableVertexAttribArray(vertexUVID);
         glDisableVertexAttribArray(vertexNormal_modelspaceID);
 
+        PrintingStruct printing_struct;
+        printing_struct.screen_width = WINDOW_WIDTH;
+        printing_struct.screen_height = WINDOW_HEIGHT;
+        printing_struct.text_size = TEXT_SIZE;
+        printing_struct.font_size = FONT_SIZE;
+        printing_struct.char_font_texture_file_format = "bmp";
+
+        char coordinates_text[256];
+        sprintf(coordinates_text, "(%.2f,%.2f,%.2f) (%.2f,%.2f)", position.x, position.y, position.z, horizontalAngle, verticalAngle);
+
+        printing_struct.x = 0;
+        printing_struct.y = 0;
+        printing_struct.text = coordinates_text;
+        printing_struct.horizontal_alignment = "left";
+        printing_struct.vertical_alignment = "bottom";
+        printText2D(printing_struct);
+
         // Swap buffers
         glfwSwapBuffers(window);
         glfwPollEvents();
 
     } // Check if the ESC key was pressed or the window was closed
-    while(glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS &&
+    while (glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS &&
             glfwWindowShouldClose(window) == 0);
 
     // Cleanup VBO and shader
@@ -292,6 +352,9 @@ int main(void)
     glDeleteBuffers(1, &elementbuffer);
     glDeleteProgram(programID);
     glDeleteTextures(1, &Texture);
+
+    // Delete the text's VBO, the shader and the texture
+    cleanupText2D();
 
     // Close OpenGL window and terminate GLFW
     glfwTerminate();

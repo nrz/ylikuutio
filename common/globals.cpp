@@ -13,6 +13,8 @@
 #include "globals.hpp"
 
 glm::vec3 position;
-float horizontalAngle;
-float verticalAngle;
-float initialFoV;
+GLfloat horizontalAngle;
+GLfloat verticalAngle;
+GLfloat initialFoV;
+
+bool hasMouseEverMoved;
