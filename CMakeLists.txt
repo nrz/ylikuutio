@@ -82,6 +82,8 @@ add_executable(several_objects
     common/objloader.hpp
     common/vboindexer.cpp
     common/vboindexer.hpp
+    common/text2D.hpp
+    common/text2D.cpp
 
     common/StandardShading.vertexshader
     common/StandardShading.fragmentshader
@@ -90,6 +92,8 @@ configure_file(common/StandardShading.vertexshader StandardShading.vertexshader 
 configure_file(common/StandardShading.fragmentshader StandardShading.fragmentshader COPYONLY)
 configure_file(several_objects/suzanne.obj suzanne.obj COPYONLY)
 configure_file(several_objects/uvmap.DDS uvmap.DDS COPYONLY)
+configure_file(text2d/Holstein.DDS Holstein.DDS COPYONLY)
+configure_file(text2d/Holstein.bmp Holstein.bmp COPYONLY)
 
 target_link_libraries(several_objects
     ${ALL_LIBS}
