@@ -223,7 +223,7 @@ int main(void)
                 GL_FLOAT,           // type
                 GL_FALSE,           // normalized?
                 0,                  // stride
-                (void*)0            // array buffer offset
+                (void*) 0            // array buffer offset
                 );
 
         // 2nd attribute buffer : UVs
@@ -296,23 +296,23 @@ int main(void)
         // 1st attribute buffer : vertices
         // glEnableVertexAttribArray(vertexPosition_modelspaceID); // Already enabled
         glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
-        glVertexAttribPointer(vertexPosition_modelspaceID, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+        glVertexAttribPointer(vertexPosition_modelspaceID, 3, GL_FLOAT, GL_FALSE, 0, (void*) 0);
 
         // 2nd attribute buffer : UVs
         // glEnableVertexAttribArray(vertexUVID); // Already enabled
         glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
-        glVertexAttribPointer(vertexUVID, 2, GL_FLOAT, GL_FALSE, 0, (void*)0);
+        glVertexAttribPointer(vertexUVID, 2, GL_FLOAT, GL_FALSE, 0, (void*) 0);
 
         // 3rd attribute buffer : normals
         // glEnableVertexAttribArray(vertexNormal_modelspaceID); // Already enabled
         glBindBuffer(GL_ARRAY_BUFFER, normalbuffer);
-        glVertexAttribPointer(vertexNormal_modelspaceID, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+        glVertexAttribPointer(vertexNormal_modelspaceID, 3, GL_FLOAT, GL_FALSE, 0, (void*) 0);
 
         // Index buffer
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, elementbuffer);
 
         // Draw the triangles !
-        glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, (void*)0);
+        glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, (void*) 0);
 
         ////// End of rendering of the second object //////
 
