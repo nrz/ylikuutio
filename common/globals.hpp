@@ -2,6 +2,19 @@
 #define __GLOBALS_HPP_INCLUDED
 
 #include <string>
+#include <vector>
+
+// Include GLEW
+#ifndef __GL_GLEW_H_INCLUDED
+#define __GL_GLEW_H_INCLUDED
+#include <GL/glew.h>
+#endif
+
+// Include GLFW
+#ifndef __GLFW3_H_INCLUDED
+#define __GLFW3_H_INCLUDED
+#include <glfw3.h>
+#endif
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -42,5 +55,12 @@ typedef struct
     const char *horizontal_alignment;
     const char *vertical_alignment;
 } PrintingStruct;
+
+typedef struct
+{
+    std::string vertex_shader;
+    std::string fragment_shader;
+    std::vector<ObjectStruct> object_vector;
+} SpeciesStruct;
 
 #endif

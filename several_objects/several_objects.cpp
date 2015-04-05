@@ -50,7 +50,7 @@ std::string g_font_texture_file_format = "bmp";
 // std::string g_font_texture_filename = "Holstein.DDS";
 std::string g_font_texture_filename = "Holstein.bmp";
 
-std::vector<Object> object_vector;
+std::vector<model::Object> object_vector;
 
 int main(void)
 {
@@ -179,8 +179,10 @@ int main(void)
         // Measure speed
         double currentTime = glfwGetTime();
         nbFrames++;
-        if (currentTime - lastTime >= 1.0){ // If last prinf() was more than 1sec ago
-            // printf and reset
+        if (currentTime - lastTime >= 1.0)
+        {
+            // If last `printf()` was more than 1 sec ago,
+            // `printf` and reset.
             printf("%f ms/frame\n", 1000.0f/double(nbFrames));
             nbFrames = 0;
             lastTime += 1.0;

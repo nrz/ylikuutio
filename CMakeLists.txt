@@ -86,6 +86,8 @@ add_executable(several_objects
     common/vboindexer.hpp
     common/text2D.hpp
     common/text2D.cpp
+    common/Species.hpp
+    common/Species.cpp
     common/Object.hpp
     common/Object.cpp
 
@@ -164,6 +166,8 @@ add_executable(ylikuutio
     common/vboindexer.hpp
     common/text2D.cpp
     common/text2D.hpp
+    common/Species.hpp
+    common/Species.cpp
     common/Object.hpp
     common/Object.cpp
 

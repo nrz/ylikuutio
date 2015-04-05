@@ -258,8 +258,8 @@ int main(void)
         nbFrames++;
         if (currentTime - lastTime >= 1.0)
         {
-            // If last printf() was more than 1 sec ago
-            // printf and reset
+            // If last `printf()` was more than 1 sec ago,
+            // `printf` and reset.
             sprintf(ms_frame_text, "%.02f ms/frame; %.02f Hz", 1000.0f / ((double) nbFrames), 1000.0f / (1000.0f / ((double) nbFrames)));
             ms_frame_text_ready = true;
             nbFrames = 0;
