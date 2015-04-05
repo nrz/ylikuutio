@@ -78,12 +78,16 @@ add_executable(several_objects
     common/controls.hpp
     common/texture.cpp
     common/texture.hpp
+    common/bmploader.cpp
+    common/bmploader.hpp
     common/objloader.cpp
     common/objloader.hpp
     common/vboindexer.cpp
     common/vboindexer.hpp
     common/text2D.hpp
     common/text2D.cpp
+    common/Object.hpp
+    common/Object.cpp
 
     common/StandardShading.vertexshader
     common/StandardShading.fragmentshader
@@ -113,6 +117,8 @@ add_executable(text2d
     common/controls.hpp
     common/texture.cpp
     common/texture.hpp
+    common/bmploader.cpp
+    common/bmploader.hpp
     common/objloader.cpp
     common/objloader.hpp
     common/vboindexer.cpp
@@ -158,6 +164,8 @@ add_executable(ylikuutio
     common/vboindexer.hpp
     common/text2D.cpp
     common/text2D.hpp
+    common/Object.hpp
+    common/Object.cpp
 
     common/TransformVertexShader.vertexshader
     common/TextureFragmentShader.fragmentshader
