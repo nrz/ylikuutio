@@ -29,16 +29,11 @@ GLFWwindow* window;
 #endif
 
 #include <glm/gtc/matrix_transform.hpp>
-using namespace std;
 
 #include "common/shader.hpp"
 #include "common/texture.hpp"
 
-#ifndef __COMMON_GLOBALS_HPP_INCLUDED
-#define __COMMON_GLOBALS_HPP_INCLUDED
 #include "common/globals.hpp"
-#endif
-
 #include "common/controls.hpp"
 #include "common/bmploader.hpp"
 #include "common/objloader.hpp"
@@ -162,7 +157,7 @@ int main(void)
 
     if ((strcmp(char_g_texture_file_format, "bmp") == 0) || (strcmp(char_g_texture_file_format, "BMP") == 0))
     {
-        Texture = loadBMP_custom(char_g_texture_filename);
+        Texture = texture::loadBMP_custom(char_g_texture_filename);
     }
     else
     {
@@ -176,7 +171,7 @@ int main(void)
 
     // Read the model file.
     std::vector<glm::vec3> vertices;
-    std::vector<glm::vec2> uvs;
+    std::vector<glm::vec2> UVs;
     std::vector<glm::vec3> normals; // Won't be used at the moment.
 
     bool model_loading_result = false;
@@ -185,12 +180,11 @@ int main(void)
     const char *char_g_model_filename = g_model_filename.c_str();
     if ((strcmp(char_g_model_file_format, "obj") == 0) || (strcmp(char_g_model_file_format, "OBJ") == 0))
     {
-        model_loading_result = load_OBJ(char_g_model_filename, vertices, uvs, normals);
+        model_loading_result = model::load_OBJ(char_g_model_filename, vertices, UVs, normals);
     }
     else if ((strcmp(char_g_model_file_format, "bmp") == 0) || (strcmp(char_g_model_file_format, "BMP") == 0))
     {
-        const char *char_g_height_data_color_channel = g_height_data_color_channel.c_str();
-        model_loading_result = load_BMP_world(char_g_model_filename, vertices, uvs, normals, g_height_data_color_channel);
+        model_loading_result = model::load_BMP_world(char_g_model_filename, vertices, UVs, normals, g_height_data_color_channel);
     }
     else
     {
@@ -207,16 +201,16 @@ int main(void)
     }
 
     std::cout << "number of vertices: " << vertices.size() << ".\n";
-    std::cout << "number of UVs: " << uvs.size() << ".\n";
+    std::cout << "number of UVs: " << UVs.size() << ".\n";
     std::cout << "number of normals: " << normals.size() << ".\n";
 
     std::vector<GLuint> indices;
     std::vector<glm::vec3> indexed_vertices;
-    std::vector<glm::vec2> indexed_uvs;
+    std::vector<glm::vec2> indexed_UVs;
     std::vector<glm::vec3> indexed_normals;
-    indexVBO(vertices, uvs, normals, indices, indexed_vertices, indexed_uvs, indexed_normals);
+    indexVBO(vertices, UVs, normals, indices, indexed_vertices, indexed_UVs, indexed_normals);
     std::cout << "number of indexed vertices: " << indexed_vertices.size() << ".\n";
-    std::cout << "number of indexed UVs: " << indexed_uvs.size() << ".\n";
+    std::cout << "number of indexed UVs: " << indexed_UVs.size() << ".\n";
     std::cout << "number of indexed normals: " << indexed_normals.size() << ".\n";
 
     // Load it into a VBO.
@@ -228,7 +222,7 @@ int main(void)
     GLuint uvbuffer;
     glGenBuffers(1, &uvbuffer);
     glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
-    glBufferData(GL_ARRAY_BUFFER, indexed_uvs.size() * sizeof(glm::vec2), &indexed_uvs[0], GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, indexed_UVs.size() * sizeof(glm::vec2), &indexed_UVs[0], GL_STATIC_DRAW);
 
     GLuint normalbuffer;
     glGenBuffers(1, &normalbuffer);
@@ -248,7 +242,7 @@ int main(void)
     // Initialize our little text library with the Holstein font
     const char *char_g_font_texture_filename = g_font_texture_filename.c_str();
     const char *char_g_font_texture_file_format = g_font_texture_file_format.c_str();
-    initText2D(WINDOW_WIDTH, WINDOW_HEIGHT, char_g_font_texture_filename, char_g_font_texture_file_format);
+    text2D::initText2D(WINDOW_WIDTH, WINDOW_HEIGHT, char_g_font_texture_filename, char_g_font_texture_file_format);
 
     // For speed computation
     double lastTime = glfwGetTime();
@@ -368,14 +362,14 @@ int main(void)
         printing_struct.text = coordinates_text;
         printing_struct.horizontal_alignment = "left";
         printing_struct.vertical_alignment = "bottom";
-        printText2D(printing_struct);
+        text2D::printText2D(printing_struct);
 
         printing_struct.x = 0;
         printing_struct.y = WINDOW_HEIGHT;
         printing_struct.text = time_text;
         printing_struct.horizontal_alignment = "left";
         printing_struct.vertical_alignment = "top";
-        printText2D(printing_struct);
+        text2D::printText2D(printing_struct);
 
         if (ms_frame_text_ready)
         {
@@ -384,7 +378,7 @@ int main(void)
             printing_struct.text = ms_frame_text;
             printing_struct.horizontal_alignment = "right";
             printing_struct.vertical_alignment = "top";
-            printText2D(printing_struct);
+            text2D::printText2D(printing_struct);
         }
 
         // Swap buffers.
@@ -403,7 +397,7 @@ int main(void)
     glDeleteTextures(1, &Texture);
 
     // Delete the text's VBO, the shader and the texture
-    cleanupText2D();
+    text2D::cleanupText2D();
 
     // Close OpenGL window and terminate GLFW
     glfwTerminate();

@@ -25,14 +25,15 @@ GLFWwindow* window;
 #endif
 
 #include <glm/gtc/matrix_transform.hpp>
-using namespace std;
 
 #include "common/shader.hpp"
 #include "common/texture.hpp"
 #include "common/controls.hpp"
 #include "common/objloader.hpp"
+#include "common/bmploader.hpp"
 #include "common/vboindexer.hpp"
 #include "common/text2D.hpp"
+#include "common/Object.hpp"
 
 #define WINDOW_WIDTH 1600
 #define WINDOW_HEIGHT 900
@@ -48,6 +49,8 @@ std::string g_font_texture_file_format = "bmp";
 // font texture filename.
 // std::string g_font_texture_filename = "Holstein.DDS";
 std::string g_font_texture_filename = "Holstein.bmp";
+
+std::vector<Object> object_vector;
 
 int main(void)
 {
@@ -118,22 +121,22 @@ int main(void)
     GLuint vertexNormal_modelspaceID = glGetAttribLocation(programID, "vertexNormal_modelspace");
 
     // Load the texture
-    GLuint Texture = loadDDS("uvmap.DDS");
+    GLuint Texture = texture::loadDDS("uvmap.DDS");
 
     // Get a handle for our "myTextureSampler" uniform
     GLuint TextureID  = glGetUniformLocation(programID, "myTextureSampler");
 
     // Read our .obj file
     std::vector<glm::vec3> vertices;
-    std::vector<glm::vec2> uvs;
+    std::vector<glm::vec2> UVs;
     std::vector<glm::vec3> normals;
-    bool res = load_OBJ("suzanne.obj", vertices, uvs, normals);
+    bool res = model::load_OBJ("suzanne.obj", vertices, UVs, normals);
 
     std::vector<GLuint> indices;
     std::vector<glm::vec3> indexed_vertices;
-    std::vector<glm::vec2> indexed_uvs;
+    std::vector<glm::vec2> indexed_UVs;
     std::vector<glm::vec3> indexed_normals;
-    indexVBO(vertices, uvs, normals, indices, indexed_vertices, indexed_uvs, indexed_normals);
+    indexVBO(vertices, UVs, normals, indices, indexed_vertices, indexed_UVs, indexed_normals);
 
     // Load it into a VBO
 
@@ -145,7 +148,7 @@ int main(void)
     GLuint uvbuffer;
     glGenBuffers(1, &uvbuffer);
     glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
-    glBufferData(GL_ARRAY_BUFFER, indexed_uvs.size() * sizeof(glm::vec2), &indexed_uvs[0], GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, indexed_UVs.size() * sizeof(glm::vec2), &indexed_UVs[0], GL_STATIC_DRAW);
 
     GLuint normalbuffer;
     glGenBuffers(1, &normalbuffer);
@@ -165,7 +168,7 @@ int main(void)
     // Initialize our little text library with the Holstein font
     const char *char_g_font_texture_filename = g_font_texture_filename.c_str();
     const char *char_g_font_texture_file_format = g_font_texture_file_format.c_str();
-    initText2D(WINDOW_WIDTH, WINDOW_HEIGHT, char_g_font_texture_filename, char_g_font_texture_file_format);
+    text2D::initText2D(WINDOW_WIDTH, WINDOW_HEIGHT, char_g_font_texture_filename, char_g_font_texture_file_format);
 
     // For speed computation
     double lastTime = glfwGetTime();
@@ -178,7 +181,7 @@ int main(void)
         nbFrames++;
         if (currentTime - lastTime >= 1.0){ // If last prinf() was more than 1sec ago
             // printf and reset
-            printf("%f ms/frame\n", 1000.0/double(nbFrames));
+            printf("%f ms/frame\n", 1000.0f/double(nbFrames));
             nbFrames = 0;
             lastTime += 1.0;
         }
@@ -196,7 +199,7 @@ int main(void)
         // Use our shader
         glUseProgram(programID);
 
-        glm::vec3 lightPos = glm::vec3(4,4,4);
+        glm::vec3 lightPos = glm::vec3(4, 4, 4);
         glUniform3f(LightID, lightPos.x, lightPos.y, lightPos.z);
         glUniformMatrix4fv(ViewMatrixID, 1, GL_FALSE, &ViewMatrix[0][0]); // This one doesn't change between objects, so this can be done once for all objects that use "programID"
 
@@ -214,7 +217,7 @@ int main(void)
         // Set our "myTextureSampler" sampler to user Texture Unit 0
         glUniform1i(TextureID, 0);
 
-        // 1rst attribute buffer : vertices
+        // 1st attribute buffer : vertices
         glEnableVertexAttribArray(vertexPosition_modelspaceID);
         glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
         glVertexAttribPointer(
@@ -223,7 +226,7 @@ int main(void)
                 GL_FLOAT,           // type
                 GL_FALSE,           // normalized?
                 0,                  // stride
-                (void*) 0            // array buffer offset
+                (void*) 0           // array buffer offset
                 );
 
         // 2nd attribute buffer : UVs
@@ -335,7 +338,7 @@ int main(void)
         printing_struct.text = coordinates_text;
         printing_struct.horizontal_alignment = "left";
         printing_struct.vertical_alignment = "bottom";
-        printText2D(printing_struct);
+        text2D::printText2D(printing_struct);
 
         // Swap buffers
         glfwSwapBuffers(window);
@@ -354,7 +357,7 @@ int main(void)
     glDeleteTextures(1, &Texture);
 
     // Delete the text's VBO, the shader and the texture
-    cleanupText2D();
+    text2D::cleanupText2D();
 
     // Close OpenGL window and terminate GLFW
     glfwTerminate();

@@ -87,22 +87,22 @@ int main(void)
     GLuint vertexNormal_modelspaceID = glGetAttribLocation(programID, "vertexNormal_modelspace");
 
     // Load the texture
-    GLuint Texture = loadDDS("uvmap.DDS");
+    GLuint Texture = texture::loadDDS("uvmap.DDS");
 
     // Get a handle for our "myTextureSampler" uniform
     GLuint TextureID = glGetUniformLocation(programID, "myTextureSampler");
 
     // Read our .obj file
     std::vector<glm::vec3> vertices;
-    std::vector<glm::vec2> uvs;
+    std::vector<glm::vec2> UVs;
     std::vector<glm::vec3> normals;
-    bool res = load_OBJ("suzanne.obj", vertices, uvs, normals);
+    bool res = model::load_OBJ("suzanne.obj", vertices, UVs, normals);
 
     std::vector<GLuint> indices;
     std::vector<glm::vec3> indexed_vertices;
-    std::vector<glm::vec2> indexed_uvs;
+    std::vector<glm::vec2> indexed_UVs;
     std::vector<glm::vec3> indexed_normals;
-    indexVBO(vertices, uvs, normals, indices, indexed_vertices, indexed_uvs, indexed_normals);
+    indexVBO(vertices, UVs, normals, indices, indexed_vertices, indexed_UVs, indexed_normals);
 
     // Load it into a VBO
 
@@ -114,7 +114,7 @@ int main(void)
     GLuint uvbuffer;
     glGenBuffers(1, &uvbuffer);
     glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
-    glBufferData(GL_ARRAY_BUFFER, indexed_uvs.size() * sizeof(glm::vec2), &indexed_uvs[0], GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, indexed_UVs.size() * sizeof(glm::vec2), &indexed_UVs[0], GL_STATIC_DRAW);
 
     GLuint normalbuffer;
     glGenBuffers(1, &normalbuffer);
@@ -133,7 +133,7 @@ int main(void)
 
     // Initialize our little text library with the Holstein font
     // initText2D("Holstein.DDS", "dds");
-    initText2D(WINDOW_WIDTH, WINDOW_HEIGHT, "Holstein.bmp", "bmp");
+    text2D::initText2D(WINDOW_WIDTH, WINDOW_HEIGHT, "Holstein.bmp", "bmp");
 
     // For speed computation
     double lastTime = glfwGetTime();
@@ -234,7 +234,7 @@ int main(void)
 
         char text[256];
         sprintf(text,"%.2f sec", glfwGetTime());
-        printText2D(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2, TEXT_SIZE, FONT_SIZE, text, "bmp");
+        text2D::printText2D(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2, TEXT_SIZE, FONT_SIZE, text, "bmp");
 
         // Swap buffers
         glfwSwapBuffers(window);
@@ -253,7 +253,7 @@ int main(void)
     glDeleteTextures(1, &Texture);
 
     // Delete the text's VBO, the shader and the texture
-    cleanupText2D();
+    text2D::cleanupText2D();
 
     // Close OpenGL window and terminate GLFW
     glfwTerminate();

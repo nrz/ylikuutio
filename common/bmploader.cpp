@@ -83,13 +83,13 @@ uint32_t get_y(
 
 uint32_t output_triangle_vertices(
         std::vector<glm::vec3> &temp_vertices,
-        std::vector<glm::vec2> &temp_uvs,
+        std::vector<glm::vec2> &temp_UVs,
         std::vector<glm::vec3> &temp_normals,
         uint32_t vertexIndex[3],
         uint32_t uvIndex[3],
         uint32_t normalIndex[3],
         std::vector<glm::vec3> &out_vertices,
-        std::vector<glm::vec2> &out_uvs,
+        std::vector<glm::vec2> &out_UVs,
         std::vector<glm::vec3> &out_normals,
         uint32_t triangle_i)
 {
@@ -99,8 +99,8 @@ uint32_t output_triangle_vertices(
 
     vertex = temp_vertices[vertexIndex[0]];
     out_vertices.push_back(vertex);
-    uv = temp_uvs[uvIndex[0]];
-    out_uvs.push_back(uv);
+    uv = temp_UVs[uvIndex[0]];
+    out_UVs.push_back(uv);
     normal = temp_normals[normalIndex[0]];
     out_normals.push_back(normal);
 
@@ -108,8 +108,8 @@ uint32_t output_triangle_vertices(
 
     vertex = temp_vertices[vertexIndex[1]];
     out_vertices.push_back(vertex);
-    uv = temp_uvs[uvIndex[1]];
-    out_uvs.push_back(uv);
+    uv = temp_UVs[uvIndex[1]];
+    out_UVs.push_back(uv);
     normal = temp_normals[normalIndex[1]];
     out_normals.push_back(normal);
 
@@ -117,8 +117,8 @@ uint32_t output_triangle_vertices(
 
     vertex = temp_vertices[vertexIndex[2]];
     out_vertices.push_back(vertex);
-    uv = temp_uvs[uvIndex[2]];
-    out_uvs.push_back(uv);
+    uv = temp_UVs[uvIndex[2]];
+    out_UVs.push_back(uv);
     normal = temp_normals[normalIndex[2]];
     out_normals.push_back(normal);
 
@@ -131,7 +131,7 @@ bool triangulate_quads(
         uint32_t image_width,
         uint32_t image_height,
         std::vector<glm::vec3> &out_vertices,
-        std::vector<glm::vec2> &out_uvs,
+        std::vector<glm::vec2> &out_UVs,
         std::vector<glm::vec3> &out_normals,
         std::string triangulation_type)
 
@@ -164,7 +164,7 @@ bool triangulate_quads(
 
     std::vector<uint32_t> vertexIndices, uvIndices, normalIndices;
     std::vector<glm::vec3> temp_vertices;
-    std::vector<glm::vec2> temp_uvs;
+    std::vector<glm::vec2> temp_UVs;
     std::vector<glm::vec3> temp_normals;
 
     uint32_t texture_x = 0;
@@ -198,7 +198,7 @@ bool triangulate_quads(
             uv.y = round((float) texture_y);
 #endif
 
-            temp_uvs.push_back(uv);
+            temp_UVs.push_back(uv);
 
             texture_x ^= 1;
         }
@@ -481,7 +481,7 @@ bool triangulate_quads(
                 uv.y = 0.5f;
 #endif
 
-                temp_uvs.push_back(uv);
+                temp_UVs.push_back(uv);
 
                 // This corresponds to "vn": specify normal of one vertex.
                 glm::vec3 normal;
@@ -521,13 +521,13 @@ bool triangulate_quads(
 
                 triangle_i = output_triangle_vertices(
                         temp_vertices,
-                        temp_uvs,
+                        temp_UVs,
                         temp_normals,
                         vertexIndex,
                         uvIndex,
                         normalIndex,
                         out_vertices,
-                        out_uvs,
+                        out_UVs,
                         out_normals,
                         triangle_i);
 
@@ -554,13 +554,13 @@ bool triangulate_quads(
 
                 triangle_i = output_triangle_vertices(
                         temp_vertices,
-                        temp_uvs,
+                        temp_UVs,
                         temp_normals,
                         vertexIndex,
                         uvIndex,
                         normalIndex,
                         out_vertices,
-                        out_uvs,
+                        out_UVs,
                         out_normals,
                         triangle_i);
 
@@ -587,13 +587,13 @@ bool triangulate_quads(
 
                 triangle_i = output_triangle_vertices(
                         temp_vertices,
-                        temp_uvs,
+                        temp_UVs,
                         temp_normals,
                         vertexIndex,
                         uvIndex,
                         normalIndex,
                         out_vertices,
-                        out_uvs,
+                        out_UVs,
                         out_normals,
                         triangle_i);
 
@@ -620,13 +620,13 @@ bool triangulate_quads(
 
                 triangle_i = output_triangle_vertices(
                         temp_vertices,
-                        temp_uvs,
+                        temp_UVs,
                         temp_normals,
                         vertexIndex,
                         uvIndex,
                         normalIndex,
                         out_vertices,
-                        out_uvs,
+                        out_UVs,
                         out_normals,
                         triangle_i);
 
@@ -718,13 +718,13 @@ bool triangulate_quads(
 
                 triangle_i = output_triangle_vertices(
                         temp_vertices,
-                        temp_uvs,
+                        temp_UVs,
                         temp_normals,
                         vertexIndex,
                         uvIndex,
                         normalIndex,
                         out_vertices,
-                        out_uvs,
+                        out_UVs,
                         out_normals,
                         triangle_i);
 
@@ -781,13 +781,13 @@ bool triangulate_quads(
 
                 triangle_i = output_triangle_vertices(
                         temp_vertices,
-                        temp_uvs,
+                        temp_UVs,
                         temp_normals,
                         vertexIndex,
                         uvIndex,
                         normalIndex,
                         out_vertices,
-                        out_uvs,
+                        out_UVs,
                         out_normals,
                         triangle_i);
             }
@@ -802,137 +802,141 @@ bool triangulate_quads(
     return true;
 }
 
-bool load_BMP_world(
-        const char *image_path,
-        std::vector<glm::vec3> &out_vertices,
-        std::vector<glm::vec2> &out_uvs,
-        std::vector<glm::vec3> &out_normals,
-        std::string color_channel)
+namespace model
 {
-    std::cout << "Loading BMP file " << image_path << " ...\n";
-
-    // Data read from the header of the BMP file
-    unsigned char header[54];
-    uint32_t dataPos;
-    uint32_t imageSize;
-    uint32_t image_width, image_height;
-    // Actual RGB image data.
-    uint8_t *image_data;
-
-    // Open the file
-    FILE *file = fopen(image_path,"rb");
-    if (!file)
+    bool load_BMP_world(
+            const char *image_path,
+            std::vector<glm::vec3> &out_vertices,
+            std::vector<glm::vec2> &out_UVs,
+            std::vector<glm::vec3> &out_normals,
+            std::string color_channel)
     {
-        std::cerr << image_path << " could not be opened.\n";
-        getchar();
-        return 0;
-    }
+        std::cout << "Loading BMP file " << image_path << " ...\n";
 
-    // Read the header, i.e. the 54 first bytes
+        // Data read from the header of the BMP file
+        unsigned char header[54];
+        uint32_t dataPos;
+        uint32_t imageSize;
+        uint32_t image_width, image_height;
+        // Actual RGB image data.
+        uint8_t *image_data;
 
-    // If less than 54 bytes are read, it's a problem.
-    if (fread(header, 1, 54, file) != 54)
-    {
-        std::cerr << "not a correct BMP file.\n";
-        return 0;
-    }
-
-    // A BMP files always begins with "BM"
-    if ((header[0] != 'B') || (header[1] != 'M'))
-    {
-        std::cerr << "not a correct BMP file.\n";
-        return 0;
-    }
-
-    // Make sure this is a 24bpp file
-    if (*(uint32_t*) & (header[0x1E]) != 0)
-    {
-        std::cerr << "not a correct BMP file.\n";
-        return 0;
-    }
-
-    if (*(uint32_t*) & (header[0x1C]) != 24)
-    {
-        std::cerr << "not a correct BMP file.\n";
-        return 0;
-    }
-
-    // Read the information about the image
-    dataPos      = *(uint32_t*) & (header[0x0A]);
-    imageSize    = *(uint32_t*) & (header[0x22]);
-    image_width  = *(uint32_t*) & (header[0x12]);
-    image_height = *(uint32_t*) & (header[0x16]);
-
-    // Some BMP files are misformatted, guess missing information
-    if (imageSize == 0)
-    {
-        imageSize = image_width * image_height * 3; // 3 : one byte for each Red, Green and Blue component
-    }
-
-    if (dataPos == 0)
-    {
-        dataPos = 54; // The BMP header is done that way
-    }
-
-    // Create a buffer.
-    image_data = new uint8_t [imageSize];
-
-    // Read the actual image data from the file into the buffer.
-    fread(image_data, 1, imageSize, file);
-
-    // Everything is in memory now, the file can be closed
-    fclose(file);
-
-    uint32_t *vertex_data;
-    vertex_data = new uint32_t [imageSize];
-
-    uint8_t *image_pointer;
-    image_pointer = image_data;
-
-    uint32_t *vertex_pointer;
-    vertex_pointer = vertex_data;
-
-    // start processing image_data.
-    for (uint32_t z = 0; z < image_height; z++)
-    {
-        for (uint32_t x = 0; x < image_width; x++)
+        // Open the file
+        FILE *file = fopen(image_path,"rb");
+        if (!file)
         {
-            const char *char_color_channel = color_channel.c_str();
-            uint32_t y;
-
-            if (strcmp(char_color_channel, "red") == 0)
-            {
-                y = (uint32_t) *image_pointer;       // y-coordinate is the red (R) value.
-            }
-            else if (strcmp(char_color_channel, "green") == 0)
-            {
-                y = (uint32_t) *(image_pointer + 1); // y-coordinate is the green (G) value.
-            }
-            else if (strcmp(char_color_channel, "green") == 0)
-            {
-                y = (uint32_t) *(image_pointer + 2); // y-coordinate is the blue (B) value.
-            }
-            // y-coordinate is the mean of R, G, & B.
-            else if ((strcmp(char_color_channel, "mean") == 0) || (strcmp(char_color_channel, "all") == 0))
-            {
-                y = (((uint32_t) *image_pointer) + ((uint32_t) *(image_pointer + 1)) + ((uint32_t) *(image_pointer + 2))) / 3;
-            }
-            else
-            {
-                std::cerr << "invalid color channel!\n";
-            }
-
-            // std::cout << color_channel << " color channel value at (" << x << ", " << z << "): " << y << ".\n";
-            *vertex_pointer++ = y;
-            image_pointer += 3; // R, G, & B.
+            std::cerr << image_path << " could not be opened.\n";
+            getchar();
+            return 0;
         }
+
+        // Read the header, i.e. the 54 first bytes
+
+        // If less than 54 bytes are read, it's a problem.
+        if (fread(header, 1, 54, file) != 54)
+        {
+            std::cerr << "not a correct BMP file.\n";
+            return 0;
+        }
+
+        // A BMP files always begins with "BM"
+        if ((header[0] != 'B') || (header[1] != 'M'))
+        {
+            std::cerr << "not a correct BMP file.\n";
+            return 0;
+        }
+
+        // Make sure this is a 24bpp file
+        if (*(uint32_t*) & (header[0x1E]) != 0)
+        {
+            std::cerr << "not a correct BMP file.\n";
+            return 0;
+        }
+
+        if (*(uint32_t*) & (header[0x1C]) != 24)
+        {
+            std::cerr << "not a correct BMP file.\n";
+            return 0;
+        }
+
+        // Read the information about the image
+        dataPos      = *(uint32_t*) & (header[0x0A]);
+        imageSize    = *(uint32_t*) & (header[0x22]);
+        image_width  = *(uint32_t*) & (header[0x12]);
+        image_height = *(uint32_t*) & (header[0x16]);
+
+        // Some BMP files are misformatted, guess missing information
+        if (imageSize == 0)
+        {
+            imageSize = image_width * image_height * 3; // 3 : one byte for each Red, Green and Blue component
+        }
+
+        if (dataPos == 0)
+        {
+            dataPos = 54; // The BMP header is done that way
+        }
+
+        // Create a buffer.
+        image_data = new uint8_t [imageSize];
+
+        // Read the actual image data from the file into the buffer.
+        fread(image_data, 1, imageSize, file);
+
+        // Everything is in memory now, the file can be closed
+        fclose(file);
+
+        uint32_t *vertex_data;
+        vertex_data = new uint32_t [imageSize];
+
+        uint8_t *image_pointer;
+        image_pointer = image_data;
+
+        uint32_t *vertex_pointer;
+        vertex_pointer = vertex_data;
+
+        const char *char_color_channel = color_channel.c_str();
+
+        // start processing image_data.
+        for (uint32_t z = 0; z < image_height; z++)
+        {
+            for (uint32_t x = 0; x < image_width; x++)
+            {
+                uint32_t y;
+
+                if (strcmp(char_color_channel, "red") == 0)
+                {
+                    y = (uint32_t) *image_pointer;       // y-coordinate is the red (R) value.
+                }
+                else if (strcmp(char_color_channel, "green") == 0)
+                {
+                    y = (uint32_t) *(image_pointer + 1); // y-coordinate is the green (G) value.
+                }
+                else if (strcmp(char_color_channel, "green") == 0)
+                {
+                    y = (uint32_t) *(image_pointer + 2); // y-coordinate is the blue (B) value.
+                }
+                // y-coordinate is the mean of R, G, & B.
+                else if ((strcmp(char_color_channel, "mean") == 0) || (strcmp(char_color_channel, "all") == 0))
+                {
+                    y = (((uint32_t) *image_pointer) + ((uint32_t) *(image_pointer + 1)) + ((uint32_t) *(image_pointer + 2))) / 3;
+                }
+                else
+                {
+                    std::cerr << "invalid color channel!\n";
+                }
+
+                // std::cout << color_channel << " color channel value at (" << x << ", " << z << "): " << y << ".\n";
+                *vertex_pointer++ = y;
+                image_pointer += 3; // R, G, & B.
+            }
+        }
+        std::cout << "color channel in use: " << color_channel << "\n";
+
+        std::string triangulation_type = "bilinear_interpolation";
+        // std::string triangulation_type = "southeast_northwest"; // "northwest_southeast" is equivalent.
+        // std::string triangulation_type = "southwest_northeast"; // "northeast_southwest" is equivalent.
+
+        bool triangulation_result = triangulate_quads(vertex_data, image_width, image_height, out_vertices, out_UVs, out_normals, triangulation_type);
+        return true;
     }
-    std::cout << "color channel in use: " << color_channel << "\n";
-
-    std::string triangulation_type = "bilinear_interpolation";
-    // std::string triangulation_type = "southeast_northwest"; // "northwest_southeast" is equivalent.
-    // std::string triangulation_type = "southwest_northeast"; // "northeast_southwest" is equivalent.
-
-    bool triangulation_result = triangulate_quads(vertex_data, image_width, image_height, out_vertices, out_uvs, out_normals, triangulation_type);
-    return true;
 }
