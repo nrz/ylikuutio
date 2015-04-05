@@ -4,7 +4,11 @@
 #include <stdio.h>
 #include <vector>
 
+// Include GLM
+#ifndef __GLM_GLM_HPP_INCLUDED
+#define __GLM_GLM_HPP_INCLUDED
 #include <glm/glm.hpp>
+#endif
 
 #include "objloader.hpp"
 
