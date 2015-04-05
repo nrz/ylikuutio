@@ -1,6 +1,8 @@
 #ifndef __GLOBALS_HPP_INCLUDED
 #define __GLOBALS_HPP_INCLUDED
 
+#include <string>
+
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
 #define __GLM_GLM_HPP_INCLUDED
@@ -12,6 +14,20 @@ extern float horizontalAngle;
 extern float verticalAngle;
 extern float initialFoV;
 extern bool hasMouseEverMoved;
+
+typedef struct
+{
+    std::string model_file_format;   // type of the model file, eg. `"bmp"`.
+    std::string model_filename;      // filename of the model file.
+    std::string texture_file_format; // type of the model file, eg. `"bmp"`.
+    std::string texture_filename;    // filename of the model file.
+    std::string vertex_shader;       // filename of vertex shader.
+    std::string fragment_shader;     // filename of fragment shader.
+    std::string color_channel;       // filename of fragment shader.
+    glm::mat4 model_matrix;          // model matrix.
+    glm::vec3 translate_vector;      // translate vector.
+    glm::mat4 MVP_matrix;            // model view projection matrix.
+} ObjectStruct;
 
 typedef struct
 {
