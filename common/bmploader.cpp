@@ -537,13 +537,13 @@ bool triangulate_quads(
                 // Compute the normal of SE face.
                 edge1 = temp_vertices[SOUTHEAST] - temp_vertices[NORTHEAST];
                 edge2 = temp_vertices[SOUTHWEST] - temp_vertices[NORTHEAST];
-                face_normal = glm::cross(edge2, edge1);
+                face_normal = glm::cross(edge1, edge2);
                 face_normal_vector_vec3.push_back(face_normal);
 
                 // Compute the normal of NW face.
                 edge1 = temp_vertices[SOUTHWEST] - temp_vertices[NORTHEAST];
                 edge2 = temp_vertices[NORTHWEST] - temp_vertices[NORTHEAST];
-                face_normal = glm::cross(edge2, edge1);
+                face_normal = glm::cross(edge1, edge2);
                 face_normal_vector_vec3.push_back(face_normal);
             }
             else if (is_southeast_northwest_in_use)
@@ -555,13 +555,13 @@ bool triangulate_quads(
                 // Compute the normal of SW face.
                 edge1 = temp_vertices[SOUTHEAST] - temp_vertices[NORTHWEST];
                 edge2 = temp_vertices[SOUTHWEST] - temp_vertices[NORTHWEST];
-                face_normal = glm::cross(edge2, edge1);
+                face_normal = glm::cross(edge1, edge2);
                 face_normal_vector_vec3.push_back(face_normal);
 
                 // Compute the normal of NE face.
                 edge1 = temp_vertices[NORTHEAST] - temp_vertices[NORTHWEST];
                 edge2 = temp_vertices[SOUTHEAST] - temp_vertices[NORTHWEST];
-                face_normal = glm::cross(edge2, edge1);
+                face_normal = glm::cross(edge1, edge2);
                 face_normal_vector_vec3.push_back(face_normal);
             }
             else
