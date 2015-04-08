@@ -269,6 +269,8 @@ bool triangulate_quads(
     // 2. Interpolate the vertices between, using bilinear interpolation, `push_back` to `temp_vertices`.
     if (is_bilinear_interpolation_in_use)
     {
+        std::cout << "interpolating center vertices.\n";
+
         // Then, define the faces in a double loop.
         // Begin from index 1.
         for (uint32_t z = 1; z < image_height; z++)
@@ -480,15 +482,13 @@ bool triangulate_quads(
     // Second triangle: center, southwest, northwest.
     // Third triangle: center, northwest, northeast.
     // Fourth triangle: center, northeast, southeast.
+    std::cout << "computing face normals.\n";
 
     std::vector<glm::vec3> face_normal_vector_vec3;
 
     uint32_t current_interpolated_vertex_i;
 
     current_interpolated_vertex_i = image_width * image_height;
-
-    std::cout << "temp_vertices size: " << temp_vertices.size() << "\n";
-    std::cout << "CENTER: " << CENTER << "\n";
 
     for (uint32_t z = 1; z < image_height; z++)
     {
@@ -575,6 +575,8 @@ bool triangulate_quads(
     current_interpolated_vertex_i = image_width * image_height;
 
     // 4. Compute the vertex normals for vertices loaded from file, `push_back` to `temp_normals`.
+    std::cout << "computing vertex normals for vertices loaded from file.\n";
+
     if (is_bilinear_interpolation_in_use)
     {
         uint32_t x = 0;
