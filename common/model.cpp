@@ -43,7 +43,7 @@ namespace model
         this->char_vertex_shader       = this->vertex_shader.c_str();
         this->char_fragment_shader     = this->fragment_shader.c_str();
 
-        // Load the shaders.
+        // Create and compile our GLSL program from the shaders
         this->programID = LoadShaders(this->char_vertex_shader, this->char_fragment_shader);
 
         // Get a handle for our "MVP" uniform
