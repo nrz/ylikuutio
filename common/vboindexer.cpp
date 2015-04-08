@@ -1,4 +1,5 @@
 #include <string.h> // for memcmp
+#include <stdint.h> // uint32_t etc.
 #include <vector>
 #include <map>
 

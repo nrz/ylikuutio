@@ -5,8 +5,8 @@
 #include <cstring>
 #include <vector>
 #include <stdio.h>
-#include <stdint.h>
 #include <stdlib.h>
+#include <stdint.h> // uint32_t etc.
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED

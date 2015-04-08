@@ -1,5 +1,6 @@
 #include <vector>
 #include <cstring>
+#include <stdint.h> // uint32_t etc.
 
 // Include GLEW
 #ifndef __GL_GLEW_H_INCLUDED
