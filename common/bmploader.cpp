@@ -143,7 +143,7 @@ bool triangulate_quads(
 #define CENTER (current_interpolated_vertex_i)
 
 #define SOUTHWEST_Y (get_y(input_vertex_pointer, x - 1, z - 1, image_width))
-#define SOUTHEAST_Y (get_y(input_vertex_pointer, x, z, image_width))
+#define SOUTHEAST_Y (get_y(input_vertex_pointer, x, z - 1, image_width))
 #define NORTHWEST_Y (get_y(input_vertex_pointer, x - 1, z, image_width))
 #define NORTHEAST_Y (get_y(input_vertex_pointer, x, z, image_width))
 #define CENTER_Y ((SOUTHWEST_Y + SOUTHEAST_Y + NORTHWEST_Y + NORTHEAST_Y) / 4)
