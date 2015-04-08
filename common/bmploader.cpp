@@ -358,6 +358,7 @@ bool triangulate_quads(
                 }
                 else if (is_southeast_northwest_in_use)
                 {
+
                     // Define the triangles (2 faces).
                     // Triangle order: SW - NE.
                     //
