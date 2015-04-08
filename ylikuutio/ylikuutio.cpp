@@ -35,8 +35,9 @@ GLFWwindow* window;
 
 #include "common/globals.hpp"
 #include "common/controls.hpp"
-#include "common/bmploader.hpp"
-#include "common/objloader.hpp"
+// #include "common/objloader.hpp"
+// #include "common/bmploader.hpp"
+#include "common/model.hpp"
 #include "common/vboindexer.hpp"
 #include "common/text2D.hpp"
 
@@ -208,7 +209,7 @@ int main(void)
     std::vector<glm::vec3> indexed_vertices;
     std::vector<glm::vec2> indexed_UVs;
     std::vector<glm::vec3> indexed_normals;
-    indexVBO(vertices, UVs, normals, indices, indexed_vertices, indexed_UVs, indexed_normals);
+    model::indexVBO(vertices, UVs, normals, indices, indexed_vertices, indexed_UVs, indexed_normals);
     std::cout << "number of indexed vertices: " << indexed_vertices.size() << ".\n";
     std::cout << "number of indexed UVs: " << indexed_UVs.size() << ".\n";
     std::cout << "number of indexed normals: " << indexed_normals.size() << ".\n";
@@ -272,9 +273,9 @@ int main(void)
         glUseProgram(programID);
 
         // Compute the MVP matrix from keyboard and mouse input.
-        computeMatricesFromInputs();
-        glm::mat4 ProjectionMatrix = getProjectionMatrix();
-        glm::mat4 ViewMatrix = getViewMatrix();
+        controls::computeMatricesFromInputs();
+        glm::mat4 ProjectionMatrix = controls::getProjectionMatrix();
+        glm::mat4 ViewMatrix = controls::getViewMatrix();
         glm::mat4 ModelMatrix = glm::mat4(1.0);
         glm::mat4 MVP = ProjectionMatrix * ViewMatrix * ModelMatrix;
 

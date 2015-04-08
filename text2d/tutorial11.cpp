@@ -15,12 +15,13 @@ GLFWwindow* window;
 #include <glm/gtc/matrix_transform.hpp>
 using namespace glm;
 
-#include <common/shader.hpp>
-#include <common/texture.hpp>
-#include <common/controls.hpp>
-#include <common/objloader.hpp>
-#include <common/vboindexer.hpp>
-#include <common/text2D.hpp>
+#include "common/shader.hpp"
+#include "common/texture.hpp"
+#include "common/controls.hpp"
+// #include "common/objloader.hpp"
+#include "common/model.hpp"
+#include "common/vboindexer.hpp"
+#include "common/text2D.hpp"
 
 #define WINDOW_WIDTH 1600
 #define WINDOW_HEIGHT (WINDOW_WIDTH * 3 / 4)
@@ -102,7 +103,7 @@ int main(void)
     std::vector<glm::vec3> indexed_vertices;
     std::vector<glm::vec2> indexed_UVs;
     std::vector<glm::vec3> indexed_normals;
-    indexVBO(vertices, UVs, normals, indices, indexed_vertices, indexed_UVs, indexed_normals);
+    model::indexVBO(vertices, UVs, normals, indices, indexed_vertices, indexed_UVs, indexed_normals);
 
     // Load it into a VBO
 
@@ -160,9 +161,9 @@ int main(void)
         glUseProgram(programID);
 
         // Compute the MVP matrix from keyboard and mouse input
-        computeMatricesFromInputs();
-        glm::mat4 ProjectionMatrix = getProjectionMatrix();
-        glm::mat4 ViewMatrix = getViewMatrix();
+        controls::computeMatricesFromInputs();
+        glm::mat4 ProjectionMatrix = controls::getProjectionMatrix();
+        glm::mat4 ViewMatrix = controls::getViewMatrix();
         glm::mat4 ModelMatrix = glm::mat4(1.0);
         glm::mat4 MVP = ProjectionMatrix * ViewMatrix * ModelMatrix;
 

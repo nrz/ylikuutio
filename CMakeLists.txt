@@ -82,14 +82,12 @@ add_executable(several_objects
     common/bmploader.hpp
     common/objloader.cpp
     common/objloader.hpp
+    common/model.cpp
+    common/model.hpp
     common/vboindexer.cpp
     common/vboindexer.hpp
     common/text2D.hpp
     common/text2D.cpp
-    common/Species.hpp
-    common/Species.cpp
-    common/Object.hpp
-    common/Object.cpp
 
     common/StandardShading.vertexshader
     common/StandardShading.fragmentshader
@@ -123,6 +121,8 @@ add_executable(text2d
     common/bmploader.hpp
     common/objloader.cpp
     common/objloader.hpp
+    common/model.cpp
+    common/model.hpp
     common/vboindexer.cpp
     common/vboindexer.hpp
     common/text2D.hpp
@@ -162,14 +162,12 @@ add_executable(ylikuutio
     common/bmploader.hpp
     common/objloader.cpp
     common/objloader.hpp
+    common/model.cpp
+    common/model.hpp
     common/vboindexer.cpp
     common/vboindexer.hpp
     common/text2D.cpp
     common/text2D.hpp
-    common/Species.hpp
-    common/Species.cpp
-    common/Object.hpp
-    common/Object.cpp
 
     common/TransformVertexShader.vertexshader
     common/TextureFragmentShader.fragmentshader

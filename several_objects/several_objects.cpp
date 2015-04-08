@@ -24,16 +24,21 @@ GLFWwindow* window;
 #include <glm/glm.hpp>
 #endif
 
+// Include matrix_transform.hpp .
+#ifndef __GLM_GTC_MATRIX_TRANSFORM_HPP_INCLUDED
+#define __GLM_GTC_MATRIX_TRANSFORM_HPP_INCLUDED
 #include <glm/gtc/matrix_transform.hpp>
+#endif
 
 #include "common/shader.hpp"
 #include "common/texture.hpp"
 #include "common/controls.hpp"
-#include "common/objloader.hpp"
-#include "common/bmploader.hpp"
+// #include "common/objloader.hpp"
+// #include "common/bmploader.hpp"
+#include "common/model.hpp"
 #include "common/vboindexer.hpp"
 #include "common/text2D.hpp"
-#include "common/Object.hpp"
+// #include "common/Object.hpp"
 
 #define WINDOW_WIDTH 1600
 #define WINDOW_HEIGHT 900
@@ -107,63 +112,109 @@ int main(void)
     // Cull triangles which normal is not towards the camera
     glEnable(GL_CULL_FACE);
 
+    // Create the species, store it in `suzanne_species`.
+    SpeciesStruct species_struct;
+    species_struct.model_file_format = "obj";
+    species_struct.model_filename = "suzanne.obj";
+    species_struct.texture_file_format = "dds";
+    species_struct.texture_filename = "uvmap.DDS";
+    species_struct.vertex_shader = "StandardShading.vertexshader";
+    species_struct.fragment_shader = "StandardShading.fragmentshader";
+    species_struct.lightPos = glm::vec3(4, 4, 4);
+    model::Species suzanne_species = model::Species(species_struct);
+
+    // create a species pointer.
+    model::Species *species_ptr = &suzanne_species;
+
+    // Create suzanne1, store it in `suzanne1`.
+    ObjectStruct object_struct1;
+    object_struct1.model_matrix = glm::mat4(1.0);
+    object_struct1.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
+    model::Object suzanne1 = model::Object(object_struct1);
+    suzanne1.species_ptr = species_ptr;
+
+    // Create suzanne2, store it in `suzanne2`.
+    ObjectStruct object_struct2;
+    object_struct2.model_matrix = glm::mat4(1.0);
+    object_struct2.translate_vector = glm::vec3(0.1f, 0.0f, 0.0f);
+    model::Object suzanne2 = model::Object(object_struct2);
+    suzanne2.species_ptr = species_ptr;
+
     // Create and compile our GLSL program from the shaders
-    GLuint programID = LoadShaders("StandardShading.vertexshader", "StandardShading.fragmentshader");
+    // GLuint programID = LoadShaders("StandardShading.vertexshader", "StandardShading.fragmentshader");
+    GLuint programID = suzanne_species.programID;
 
     // Get a handle for our "MVP" uniform
-    GLuint MatrixID = glGetUniformLocation(programID, "MVP");
-    GLuint ViewMatrixID = glGetUniformLocation(programID, "V");
-    GLuint ModelMatrixID = glGetUniformLocation(programID, "M");
+    GLuint MatrixID = suzanne_species.MatrixID;
+    GLuint ViewMatrixID = suzanne_species.ViewMatrixID;
+    GLuint ModelMatrixID = suzanne_species.ModelMatrixID;
 
     // Get a handle for our buffers
-    GLuint vertexPosition_modelspaceID = glGetAttribLocation(programID, "vertexPosition_modelspace");
-    GLuint vertexUVID = glGetAttribLocation(programID, "vertexUV");
-    GLuint vertexNormal_modelspaceID = glGetAttribLocation(programID, "vertexNormal_modelspace");
+    GLuint vertexPosition_modelspaceID = suzanne_species.vertexPosition_modelspaceID;
+    GLuint vertexUVID = suzanne_species.vertexUVID;
+    GLuint vertexNormal_modelspaceID = suzanne_species.vertexNormal_modelspaceID;
 
     // Load the texture
-    GLuint Texture = texture::loadDDS("uvmap.DDS");
+    // GLuint Texture = texture::loadDDS("uvmap.DDS");
+    GLuint Texture = suzanne_species.texture;
 
     // Get a handle for our "myTextureSampler" uniform
-    GLuint TextureID  = glGetUniformLocation(programID, "myTextureSampler");
+    // GLuint TextureID  = glGetUniformLocation(programID, "myTextureSampler");
+    GLuint TextureID = suzanne_species.textureID;
 
     // Read our .obj file
     std::vector<glm::vec3> vertices;
     std::vector<glm::vec2> UVs;
     std::vector<glm::vec3> normals;
-    bool res = model::load_OBJ("suzanne.obj", vertices, UVs, normals);
+
+    // bool res = model::load_OBJ("suzanne.obj", vertices, UVs, normals);
+    vertices = suzanne_species.vertices;
+    UVs = suzanne_species.UVs;
+    normals = suzanne_species.normals;
 
     std::vector<GLuint> indices;
     std::vector<glm::vec3> indexed_vertices;
     std::vector<glm::vec2> indexed_UVs;
     std::vector<glm::vec3> indexed_normals;
-    indexVBO(vertices, UVs, normals, indices, indexed_vertices, indexed_UVs, indexed_normals);
+    // model::indexVBO(vertices, UVs, normals, indices, indexed_vertices, indexed_UVs, indexed_normals);
+    indices = suzanne_species.indices;
+    indexed_vertices = suzanne_species.indexed_vertices;
+    indexed_UVs = suzanne_species.indexed_UVs;
+    indexed_normals = suzanne_species.indexed_normals;
 
     // Load it into a VBO
 
     GLuint vertexbuffer;
-    glGenBuffers(1, &vertexbuffer);
-    glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
-    glBufferData(GL_ARRAY_BUFFER, indexed_vertices.size() * sizeof(glm::vec3), &indexed_vertices[0], GL_STATIC_DRAW);
-
     GLuint uvbuffer;
-    glGenBuffers(1, &uvbuffer);
-    glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
-    glBufferData(GL_ARRAY_BUFFER, indexed_UVs.size() * sizeof(glm::vec2), &indexed_UVs[0], GL_STATIC_DRAW);
-
     GLuint normalbuffer;
-    glGenBuffers(1, &normalbuffer);
-    glBindBuffer(GL_ARRAY_BUFFER, normalbuffer);
-    glBufferData(GL_ARRAY_BUFFER, indexed_normals.size() * sizeof(glm::vec3), &indexed_normals[0], GL_STATIC_DRAW);
+
+    // glGenBuffers(1, &vertexbuffer);
+    // glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
+    // glBufferData(GL_ARRAY_BUFFER, indexed_vertices.size() * sizeof(glm::vec3), &indexed_vertices[0], GL_STATIC_DRAW);
+    // vertexbuffer = suzanne_species.vertexbuffer;
+
+    // glGenBuffers(1, &uvbuffer);
+    // glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
+    // glBufferData(GL_ARRAY_BUFFER, indexed_UVs.size() * sizeof(glm::vec2), &indexed_UVs[0], GL_STATIC_DRAW);
+    // uvbuffer = suzanne_species.uvbuffer;
+
+    // glGenBuffers(1, &normalbuffer);
+    // glBindBuffer(GL_ARRAY_BUFFER, normalbuffer);
+    // glBufferData(GL_ARRAY_BUFFER, indexed_normals.size() * sizeof(glm::vec3), &indexed_normals[0], GL_STATIC_DRAW);
+    // normalbuffer = suzanne_species.normalbuffer;
 
     // Generate a buffer for the indices as well
-    GLuint elementbuffer;
-    glGenBuffers(1, &elementbuffer);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, elementbuffer);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(GLuint), &indices[0] , GL_STATIC_DRAW);
+    //GLuint elementbuffer;
+    // glGenBuffers(1, &elementbuffer);
+    // glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, elementbuffer);
+    // glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(GLuint), &indices[0] , GL_STATIC_DRAW);
+    // elementbuffer = suzanne_species.elementbuffer;
 
     // Get a handle for our "LightPosition" uniform
-    glUseProgram(programID);
-    GLuint LightID = glGetUniformLocation(programID, "LightPosition_worldspace");
+    // glUseProgram(programID);
+    // GLuint LightID = glGetUniformLocation(programID, "LightPosition_worldspace");
+    // GLuint LightID;
+    // LightID = suzanne_species.lightID;
 
     // Initialize our little text library with the Holstein font
     const char *char_g_font_texture_filename = g_font_texture_filename.c_str();
@@ -191,139 +242,15 @@ int main(void)
         // Clear the screen
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        // Compute the MVP matrix from keyboard and mouse input
-        computeMatricesFromInputs();
-        glm::mat4 ProjectionMatrix = getProjectionMatrix();
-        glm::mat4 ViewMatrix = getViewMatrix();
+        suzanne_species.render();
 
-        ////// Start of the rendering of the first object //////
+        suzanne1.render();
 
-        // Use our shader
-        glUseProgram(programID);
+        suzanne2.render();
 
-        glm::vec3 lightPos = glm::vec3(4, 4, 4);
-        glUniform3f(LightID, lightPos.x, lightPos.y, lightPos.z);
-        glUniformMatrix4fv(ViewMatrixID, 1, GL_FALSE, &ViewMatrix[0][0]); // This one doesn't change between objects, so this can be done once for all objects that use "programID"
-
-        glm::mat4 ModelMatrix1 = glm::mat4(1.0);
-        glm::mat4 MVP1 = ProjectionMatrix * ViewMatrix * ModelMatrix1;
-
-        // Send our transformation to the currently bound shader,
-        // in the "MVP" uniform
-        glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP1[0][0]);
-        glUniformMatrix4fv(ModelMatrixID, 1, GL_FALSE, &ModelMatrix1[0][0]);
-
-        // Bind our texture in Texture Unit 0
-        glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, Texture);
-        // Set our "myTextureSampler" sampler to user Texture Unit 0
-        glUniform1i(TextureID, 0);
-
-        // 1st attribute buffer : vertices
-        glEnableVertexAttribArray(vertexPosition_modelspaceID);
-        glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
-        glVertexAttribPointer(
-                vertexPosition_modelspaceID, // The attribute we want to configure
-                3,                  // size
-                GL_FLOAT,           // type
-                GL_FALSE,           // normalized?
-                0,                  // stride
-                (void*) 0           // array buffer offset
-                );
-
-        // 2nd attribute buffer : UVs
-        glEnableVertexAttribArray(vertexUVID);
-        glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
-        glVertexAttribPointer(
-                vertexUVID,                       // The attribute we want to configure
-                2,                                // size : U+V => 2
-                GL_FLOAT,                         // type
-                GL_FALSE,                         // normalized?
-                0,                                // stride
-                (void*) 0                         // array buffer offset
-                );
-
-        // 3rd attribute buffer : normals
-        glEnableVertexAttribArray(vertexNormal_modelspaceID);
-        glBindBuffer(GL_ARRAY_BUFFER, normalbuffer);
-        glVertexAttribPointer(
-                vertexNormal_modelspaceID, // The attribute we want to configure
-                3,                         // size
-                GL_FLOAT,                  // type
-                GL_FALSE,                  // normalized?
-                0,                         // stride
-                (void*) 0                  // array buffer offset
-                );
-
-        // Index buffer
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, elementbuffer);
-
-        // Draw the triangles !
-        glDrawElements(
-                GL_TRIANGLES,    // mode
-                indices.size(),  // count
-                GL_UNSIGNED_INT, // type
-                (void*) 0        // element array buffer offset
-                );
-
-        ////// End of rendering of the first object //////
-        ////// Start of the rendering of the second object //////
-
-        // In our very specific case, the 2 objects use the same shader.
-        // So it's useless to re-bind the "programID" shader, since it's already the current one.
-        //glUseProgram(programID);
-
-        // Similarly : don't re-set the light position and camera matrix in programID,
-        // it's still valid !
-        // *** You would have to do it if you used another shader ! ***
-        //glUniform3f(LightID, lightPos.x, lightPos.y, lightPos.z);
-        //glUniformMatrix4fv(ViewMatrixID, 1, GL_FALSE, &ViewMatrix[0][0]); // This one doesn't change between objects, so this can be done once for all objects that use "programID"
-
-        // Again : this is already done, but this only works because we use the same shader.
-        //// Bind our texture in Texture Unit 0
-        //glActiveTexture(GL_TEXTURE0);
-        //glBindTexture(GL_TEXTURE_2D, Texture);
-        //// Set our "myTextureSampler" sampler to user Texture Unit 0
-        //glUniform1i(TextureID, 0);
-
-        // BUT the Model matrix is different (and the MVP too)
-        glm::mat4 ModelMatrix2 = glm::mat4(1.0);
-        ModelMatrix2 = glm::translate(ModelMatrix2, glm::vec3(2.0f, 0.0f, 0.0f));
-        glm::mat4 MVP2 = ProjectionMatrix * ViewMatrix * ModelMatrix2;
-
-        // Send our transformation to the currently bound shader,
-        // in the "MVP" uniform
-        glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP2[0][0]);
-        glUniformMatrix4fv(ModelMatrixID, 1, GL_FALSE, &ModelMatrix2[0][0]);
-
-        // The rest is exactly the same as the first object
-
-        // 1st attribute buffer : vertices
-        // glEnableVertexAttribArray(vertexPosition_modelspaceID); // Already enabled
-        glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
-        glVertexAttribPointer(vertexPosition_modelspaceID, 3, GL_FLOAT, GL_FALSE, 0, (void*) 0);
-
-        // 2nd attribute buffer : UVs
-        // glEnableVertexAttribArray(vertexUVID); // Already enabled
-        glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
-        glVertexAttribPointer(vertexUVID, 2, GL_FLOAT, GL_FALSE, 0, (void*) 0);
-
-        // 3rd attribute buffer : normals
-        // glEnableVertexAttribArray(vertexNormal_modelspaceID); // Already enabled
-        glBindBuffer(GL_ARRAY_BUFFER, normalbuffer);
-        glVertexAttribPointer(vertexNormal_modelspaceID, 3, GL_FLOAT, GL_FALSE, 0, (void*) 0);
-
-        // Index buffer
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, elementbuffer);
-
-        // Draw the triangles !
-        glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, (void*) 0);
-
-        ////// End of rendering of the second object //////
-
-        glDisableVertexAttribArray(vertexPosition_modelspaceID);
-        glDisableVertexAttribArray(vertexUVID);
-        glDisableVertexAttribArray(vertexNormal_modelspaceID);
+        glDisableVertexAttribArray(suzanne_species.vertexPosition_modelspaceID);
+        glDisableVertexAttribArray(suzanne_species.vertexUVID);
+        glDisableVertexAttribArray(suzanne_species.vertexNormal_modelspaceID);
 
         PrintingStruct printing_struct;
         printing_struct.screen_width = WINDOW_WIDTH;
@@ -351,12 +278,12 @@ int main(void)
             glfwWindowShouldClose(window) == 0);
 
     // Cleanup VBO and shader
-    glDeleteBuffers(1, &vertexbuffer);
-    glDeleteBuffers(1, &uvbuffer);
-    glDeleteBuffers(1, &normalbuffer);
-    glDeleteBuffers(1, &elementbuffer);
-    glDeleteProgram(programID);
-    glDeleteTextures(1, &Texture);
+    glDeleteBuffers(1, &suzanne_species.vertexbuffer);
+    glDeleteBuffers(1, &suzanne_species.uvbuffer);
+    glDeleteBuffers(1, &suzanne_species.normalbuffer);
+    glDeleteBuffers(1, &suzanne_species.elementbuffer);
+    glDeleteProgram(suzanne_species.programID);
+    glDeleteTextures(1, &suzanne_species.texture);
 
     // Delete the text's VBO, the shader and the texture
     text2D::cleanupText2D();

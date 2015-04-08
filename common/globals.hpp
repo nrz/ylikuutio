@@ -30,17 +30,30 @@ extern bool hasMouseEverMoved;
 
 typedef struct
 {
-    std::string model_file_format;   // type of the model file, eg. `"bmp"`.
-    std::string model_filename;      // filename of the model file.
-    std::string texture_file_format; // type of the model file, eg. `"bmp"`.
-    std::string texture_filename;    // filename of the model file.
-    std::string vertex_shader;       // filename of vertex shader.
-    std::string fragment_shader;     // filename of fragment shader.
-    std::string color_channel;       // filename of fragment shader.
+    std::string texture_file_format;
+    std::string image_path;
+} TextureStruct;
+
+typedef struct
+{
     glm::mat4 model_matrix;          // model matrix.
     glm::vec3 translate_vector;      // translate vector.
     glm::mat4 MVP_matrix;            // model view projection matrix.
+    void *species_ptr;               // pointer to the species.
 } ObjectStruct;
+
+typedef struct
+{
+    std::string model_file_format;           // type of the model file, eg. `"bmp"`.
+    std::string model_filename;              // filename of the model file.
+    std::string texture_file_format;         // type of the model file, eg. `"bmp"`.
+    std::string texture_filename;            // filename of the model file.
+    std::string vertex_shader;               // filename of vertex shader.
+    std::string fragment_shader;             // filename of fragment shader.
+    std::string color_channel;               // filename of fragment shader.
+    std::vector<ObjectStruct> object_vector; // vector of individual objects of this species.
+    glm::vec3 lightPos;                      // light position.
+} SpeciesStruct;
 
 typedef struct
 {
@@ -55,12 +68,5 @@ typedef struct
     const char *horizontal_alignment;
     const char *vertical_alignment;
 } PrintingStruct;
-
-typedef struct
-{
-    std::string vertex_shader;
-    std::string fragment_shader;
-    std::vector<ObjectStruct> object_vector;
-} SpeciesStruct;
 
 #endif
