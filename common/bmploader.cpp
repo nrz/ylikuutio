@@ -35,9 +35,10 @@ glm::vec3 get_face_normal(
         uint32_t compass_point_code,
         uint32_t image_width)
 {
+    uint32_t face_normal_i;
+
     switch (compass_point_code)
     {
-        uint32_t face_normal_i;
 
         case SSW_CODE:
         face_normal_i = 4 * (z - 1) * (image_width - 1) + (4 * x) - 1;
@@ -65,9 +66,8 @@ glm::vec3 get_face_normal(
         break;
         default:
         std::cerr << "invalid compass point code!\n";
-
-        return face_normal_data[face_normal_i];
     }
+    return face_normal_data[face_normal_i];
 }
 
 uint32_t get_y(
@@ -123,7 +123,7 @@ uint32_t output_triangle_vertices(
     out_normals.push_back(normal);
 
     // std::cout << "triangle " << triangle_i << ", vertex 2: (" << vertex.x << ", " << vertex.y << ", " << vertex.z << ").\n\n";
-    triangle_i++;
+    return triangle_i++;
 }
 
 bool triangulate_quads(
