@@ -148,7 +148,7 @@ bool triangulate_quads(
 #define NORTHEAST_Y (get_y(input_vertex_pointer, x, z, image_width))
 #define CENTER_Y ((SOUTHWEST_Y + SOUTHEAST_Y + NORTHWEST_Y + NORTHEAST_Y) / 4)
 
-#define SSW_FACE_NORMAL (get_face_normal(face_normal_vector_vec3, x, z, SSE_CODE, image_width))
+#define SSW_FACE_NORMAL (get_face_normal(face_normal_vector_vec3, x, z, SSW_CODE, image_width))
 #define WSW_FACE_NORMAL (get_face_normal(face_normal_vector_vec3, x, z, WSW_CODE, image_width))
 #define WNW_FACE_NORMAL (get_face_normal(face_normal_vector_vec3, x, z, WNW_CODE, image_width))
 #define NNW_FACE_NORMAL (get_face_normal(face_normal_vector_vec3, x, z, NNW_CODE, image_width))
