@@ -41,31 +41,31 @@ glm::vec3 get_face_normal(
     {
 
         case SSW_CODE:
-        face_normal_i = 4 * (z - 1) * (image_width - 1) + (4 * x) - 1;
-        break;
+            face_normal_i = 4 * (z - 1) * (image_width - 1) + (4 * x) - 1;
+            break;
         case WSW_CODE:
-        face_normal_i = 4 * (z - 1) * (image_width - 1) + (4 * x) - 2;
-        break;
+            face_normal_i = 4 * (z - 1) * (image_width - 1) + (4 * x) - 2;
+            break;
         case WNW_CODE:
-        face_normal_i = 4 * z * (image_width - 1) + (4 * x) - 4;
-        break;
+            face_normal_i = 4 * z * (image_width - 1) + (4 * x) - 4;
+            break;
         case NNW_CODE:
-        face_normal_i = 4 * z * (image_width - 1) + (4 * x) - 1;
-        break;
+            face_normal_i = 4 * z * (image_width - 1) + (4 * x) - 1;
+            break;
         case NNE_CODE:
-        face_normal_i = 4 * z * (image_width - 1) + (4 * x) + 1;
-        break;
+            face_normal_i = 4 * z * (image_width - 1) + (4 * x) + 1;
+            break;
         case ENE_CODE:
-        face_normal_i = 4 * z * (image_width - 1) + (4 * x);
-        break;
+            face_normal_i = 4 * z * (image_width - 1) + (4 * x);
+            break;
         case ESE_CODE:
-        face_normal_i = 4 * (z - 1) * (image_width - 1) + (4 * x) + 2;
-        break;
+            face_normal_i = 4 * (z - 1) * (image_width - 1) + (4 * x) + 2;
+            break;
         case SSE_CODE:
-        face_normal_i = 4 * (z - 1) * (image_width - 1) + (4 * x) + 1;
-        break;
+            face_normal_i = 4 * (z - 1) * (image_width - 1) + (4 * x) + 1;
+            break;
         default:
-        std::cerr << "invalid compass point code!\n";
+            std::cerr << "invalid compass point code!\n";
     }
     return face_normal_data[face_normal_i];
 }
