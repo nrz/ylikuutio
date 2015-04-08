@@ -657,6 +657,8 @@ bool triangulate_quads(
         temp_normals.push_back(vertex_normal);
 
         // 5. Compute the the vertices between, `push_back` to `temp_normals`.
+        std::cout << "computing vertex normals for interpolated vertices.\n";
+
         for (z = 1; z < image_height; z++)
         {
             for (x = 1; x < image_width; x++)
@@ -676,7 +678,7 @@ bool triangulate_quads(
     }
 
     // 6. Loop through all vertices and `output_triangle_vertices`.
-    std::cout << "define output vertices, UVs and normals.\n";
+    std::cout << "defining output vertices, UVs and normals.\n";
 
     if (is_bilinear_interpolation_in_use)
     {
