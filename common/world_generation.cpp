@@ -1,3 +1,5 @@
+#include <stdint.h> // uint32_t etc.
+
 struct read_BMP_into_world_data(const char *imagepath)
 {
     printf("Reading image %s\n", imagepath);
