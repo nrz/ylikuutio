@@ -148,7 +148,7 @@ bool triangulate_quads(
 #define NORTHEAST_Y (get_y(input_vertex_pointer, x, z, image_width))
 #define CENTER_Y ((SOUTHWEST_Y + SOUTHEAST_Y + NORTHWEST_Y + NORTHEAST_Y) / 4)
 
-#define SSW_FACE_NORMAL (get_face_normal(face_normal_vector_vec3, x, z, SSE_CODE, image_width))
+#define SSW_FACE_NORMAL (get_face_normal(face_normal_vector_vec3, x, z, SSW_CODE, image_width))
 #define WSW_FACE_NORMAL (get_face_normal(face_normal_vector_vec3, x, z, WSW_CODE, image_width))
 #define WNW_FACE_NORMAL (get_face_normal(face_normal_vector_vec3, x, z, WNW_CODE, image_width))
 #define NNW_FACE_NORMAL (get_face_normal(face_normal_vector_vec3, x, z, NNW_CODE, image_width))
@@ -170,6 +170,15 @@ bool triangulate_quads(
     uint32_t texture_x = 0;
     uint32_t texture_y = 0;
 
+    // Processing stages:
+    // 1. Define the vertices for vertices loaded from file, `push_back` to `temp_vertices`.
+    // 2. Interpolate the vertices between, using bilinear interpolation, `push_back` to `temp_vertices` and `temp_UVs`.
+    // 3. Compute the face normals, `push_back` to `face_normals`.
+    // 4. Compute the vertex normals for vertices loaded from file, `push_back` to `temp_normals`.
+    // 5. Compute the the vertices between, `push_back` to `temp_normals`.
+    // 6. Loop through all vertices and `output_triangle_vertices`.
+
+    // 1. Define the vertices for vertices loaded from file, `push_back` to `temp_vertices`.
     // First, define the temporary vertices in a double loop.
     for (uint32_t z = 0; z < image_height; z++)
     {
@@ -253,7 +262,218 @@ bool triangulate_quads(
     std::cout << "image height: " << image_height << " pixels.\n";
     std::cout << "number of faces: " << n_faces << ".\n";
 
-    // First, compute the face normals.
+    uint32_t vertexIndex[3], uvIndex[3], normalIndex[3];
+
+    uint32_t triangle_i = 0;
+
+    // 2. Interpolate the vertices between, using bilinear interpolation, `push_back` to `temp_vertices`.
+    if (is_bilinear_interpolation_in_use)
+    {
+        // Then, define the faces in a double loop.
+        // Begin from index 1.
+        for (uint32_t z = 1; z < image_height; z++)
+        {
+            // Begin from index 1.
+            for (uint32_t x = 1; x < image_width; x++)
+            {
+                // This corresponds to "f": specify a face (but here we specify 2 faces instead!).
+                // std::cout << "Processing coordinate (" << x << ", " << z << ").\n";
+
+                uint32_t current_vertex_i = image_width * z + x;
+
+                // Interpolate y coordinate (altitude).
+                float y = ((float) SOUTHWEST_Y + SOUTHEAST_Y + NORTHWEST_Y + NORTHEAST_Y) / 4;
+
+                // Create a new vertex using bilinear interpolation.
+                // This corresponds to "v": specify one vertex.
+                glm::vec3 vertex;
+                vertex.x = (float) x - 0.5f;
+                vertex.y = y;
+                vertex.z = (float) z - 0.5f;
+                temp_vertices.push_back(vertex);
+
+                // This corresponds to "vt": specify texture coordinates of one vertex.
+                glm::vec2 uv;
+
+#ifdef USE_HEIGHT_AS_TEXTURE_COORDINATE
+                uv.x = y / 256;
+                uv.y = 0.0f;
+#endif
+
+#ifdef USE_REAL_TEXTURE_COORDINATES
+                uv.x = 0.5f;
+                uv.y = 0.5f;
+#endif
+
+                temp_UVs.push_back(uv);
+            }
+        }
+    }
+    else if (is_southwest_northeast_in_use || is_southeast_northwest_in_use)
+    {
+        // Then, define the faces in a double loop.
+        // Begin from index 1.
+        for (uint32_t z = 1; z < image_height; z++)
+        {
+            // Begin from index 1.
+            for (uint32_t x = 1; x < image_width; x++)
+            {
+                // This corresponds to "f": specify a face (but here we specify 2 faces instead!).
+                // std::cout << "Processing coordinate (" << x << ", " << z << ").\n";
+
+                uint32_t current_vertex_i = image_width * z + x;
+
+                if (is_southwest_northeast_in_use)
+                {
+                    // Define the triangles (2 faces).
+                    // Triangle order: SE - NW.
+                    //
+                    // First triangle: 1, 4, 2 (southwest, northeast, southeast).
+                    // Second triangle: 1, 3, 4 (southwest, northwest, northeast).
+                    // 1, 4, 2 are relative vertex indices (base 1).
+                    // 1, 3, 4 are relative vertex indices (base 1).
+
+                    // Define the first triangle, SE: 1, 4, 2 (southwest, northeast, southeast).
+                    // southwest: down and left from current coordinate.
+                    // southeast: down from current coordinate.
+                    // northeast: current coordinate.
+
+                    vertexIndex[0] = SOUTHWEST;
+                    vertexIndex[1] = NORTHEAST;
+                    vertexIndex[2] = SOUTHEAST;
+
+#ifdef USE_HEIGHT_AS_TEXTURE_COORDINATE
+                    uvIndex[0] = SOUTHWEST_Y;
+                    uvIndex[1] = NORTHEAST_Y;
+                    uvIndex[2] = SOUTHEAST_Y;
+#endif
+
+#ifdef USE_REAL_TEXTURE_COORDINATES
+                    uvIndex[0] = SOUTHWEST;
+                    uvIndex[1] = NORTHEAST;
+                    uvIndex[2] = SOUTHEAST;
+#endif
+                }
+                else if (is_southeast_northwest_in_use)
+                {
+                    // Define the triangles (2 faces).
+                    // Triangle order: SW - NE.
+                    //
+                    // First triangle: 2, 1, 3 (southeast, southwest, northwest).
+                    // Second triangle: 2, 3, 4 (southeast, northwest, northeast).
+                    // 2, 1, 3 are relative vertex indices (base 1).
+                    // 2, 3, 4 are relative vertex indices (base 1).
+
+                    // Define the first triangle, SW: 2, 1, 3 (southeast, southwest, northwest).
+                    // southeast: down from current coordinate.
+                    // southwest: down and left from current coordinate.
+                    // northwest: left from current coordinate.
+
+                    vertexIndex[0] = SOUTHEAST;
+                    vertexIndex[1] = SOUTHWEST;
+                    vertexIndex[2] = NORTHWEST;
+
+#ifdef USE_HEIGHT_AS_TEXTURE_COORDINATE
+                    uvIndex[0] = SOUTHEAST_Y;
+                    uvIndex[1] = SOUTHWEST_Y;
+                    uvIndex[2] = NORTHWEST_Y;
+#endif
+
+#ifdef USE_REAL_TEXTURE_COORDINATES
+                    uvIndex[0] = SOUTHEAST;
+                    uvIndex[1] = SOUTHWEST;
+                    uvIndex[2] = NORTHWEST;
+#endif
+                }
+
+                normalIndex[0] = 0; // TODO: add proper normal index.
+                normalIndex[1] = 0; // TODO: add proper normal index.
+                normalIndex[2] = 0; // TODO: add proper normal index.
+
+                // triangle_i = output_triangle_vertices(
+                //         temp_vertices,
+                //         temp_UVs,
+                //         temp_normals,
+                //         vertexIndex,
+                //         uvIndex,
+                //         normalIndex,
+                //         out_vertices,
+                //         out_UVs,
+                //         out_normals,
+                //         triangle_i);
+
+                if (is_southwest_northeast_in_use)
+                {
+                    // Define the second triangle, NW: 1, 3, 4 (southwest, northwest, northeast).
+                    // southwest: down and left from current coordinate.
+                    // northwest: left from current coordinate.
+                    // northeast: current coordinate.
+
+                    vertexIndex[0] = SOUTHWEST;
+                    vertexIndex[1] = NORTHWEST;
+                    vertexIndex[2] = NORTHEAST;
+
+#ifdef USE_HEIGHT_AS_TEXTURE_COORDINATE
+                    uvIndex[0] = SOUTHWEST_Y;
+                    uvIndex[1] = NORTHWEST_Y;
+                    uvIndex[2] = NORTHEAST_Y;
+#endif
+
+#ifdef USE_REAL_TEXTURE_COORDINATES
+                    uvIndex[0] = SOUTHWEST;
+                    uvIndex[1] = NORTHWEST;
+                    uvIndex[2] = NORTHEAST;
+#endif
+                }
+                else if (is_southeast_northwest_in_use)
+                {
+                    // Define the second triangle, NE: 2, 3, 4 (southeast, northwest, northeast).
+                    // southeast: down from current coordinate.
+                    // northwest: left from current coordinate.
+                    // northeast: current coordinate.
+
+                    vertexIndex[0] = SOUTHEAST;
+                    vertexIndex[1] = NORTHWEST;
+                    vertexIndex[2] = NORTHEAST;
+
+#ifdef USE_HEIGHT_AS_TEXTURE_COORDINATE
+                    uvIndex[0] = SOUTHEAST_Y;
+                    uvIndex[1] = NORTHWEST_Y;
+                    uvIndex[2] = NORTHEAST_Y;
+#endif
+
+#ifdef USE_REAL_TEXTURE_COORDINATES
+                    uvIndex[0] = SOUTHEAST;
+                    uvIndex[1] = NORTHWEST;
+                    uvIndex[2] = NORTHEAST;
+#endif
+                }
+
+                normalIndex[0] = 0; // TODO: add proper normal index.
+                normalIndex[1] = 0; // TODO: add proper normal index.
+                normalIndex[2] = 0; // TODO: add proper normal index.
+
+                // triangle_i = output_triangle_vertices(
+                //         temp_vertices,
+                //         temp_UVs,
+                //         temp_normals,
+                //         vertexIndex,
+                //         uvIndex,
+                //         normalIndex,
+                //         out_vertices,
+                //         out_UVs,
+                //         out_normals,
+                //         triangle_i);
+            }
+        }
+    }
+    else
+    {
+        std::cerr << "quad triangulation type " << triangulation_type << " not yet implemented!\n";
+        return false;
+    }
+
+    // 3. Compute the face normals, `push_back` to `face_normals`.
     // Triangle order: S - W - N - E.
     //
     // First triangle: center, southeast, southwest.
@@ -266,6 +486,9 @@ bool triangulate_quads(
     uint32_t current_interpolated_vertex_i;
 
     current_interpolated_vertex_i = image_width * image_height;
+
+    std::cout << "temp_vertices size: " << temp_vertices.size() << "\n";
+    std::cout << "CENTER: " << CENTER << "\n";
 
     for (uint32_t z = 1; z < image_height; z++)
     {
@@ -283,25 +506,25 @@ bool triangulate_quads(
                 // Compute the normal of S face.
                 edge1 = temp_vertices[SOUTHEAST] - temp_vertices[CENTER];
                 edge2 = temp_vertices[SOUTHWEST] - temp_vertices[CENTER];
-                face_normal = glm::cross(edge2, edge1);
+                face_normal = glm::cross(edge1, edge2);
                 face_normal_vector_vec3.push_back(face_normal);
 
                 // Compute the normal of W face.
                 edge1 = temp_vertices[SOUTHWEST] - temp_vertices[CENTER];
                 edge2 = temp_vertices[NORTHWEST] - temp_vertices[CENTER];
-                face_normal = glm::cross(edge2, edge1);
+                face_normal = glm::cross(edge1, edge2);
                 face_normal_vector_vec3.push_back(face_normal);
 
                 // Compute the normal of N face.
                 edge1 = temp_vertices[NORTHWEST] - temp_vertices[CENTER];
                 edge2 = temp_vertices[NORTHEAST] - temp_vertices[CENTER];
-                face_normal = glm::cross(edge2, edge1);
+                face_normal = glm::cross(edge1, edge2);
                 face_normal_vector_vec3.push_back(face_normal);
 
                 // Compute the normal of E face.
                 edge1 = temp_vertices[NORTHEAST] - temp_vertices[CENTER];
                 edge2 = temp_vertices[SOUTHEAST] - temp_vertices[CENTER];
-                face_normal = glm::cross(edge2, edge1);
+                face_normal = glm::cross(edge1, edge2);
                 face_normal_vector_vec3.push_back(face_normal);
             }
             else if (is_southwest_northeast_in_use)
@@ -351,6 +574,7 @@ bool triangulate_quads(
 
     current_interpolated_vertex_i = image_width * image_height;
 
+    // 4. Compute the vertex normals for vertices loaded from file, `push_back` to `temp_normals`.
     if (is_bilinear_interpolation_in_use)
     {
         uint32_t x = 0;
@@ -378,6 +602,7 @@ bool triangulate_quads(
 
         // Compute the normal of the southeasternmost vertex.
         // Number of adjacent faces: 2.
+        x = image_width - 1;
         vertex_normal = WNW_FACE_NORMAL + NNW_FACE_NORMAL;
         temp_normals.push_back(vertex_normal);
 
@@ -386,6 +611,7 @@ bool triangulate_quads(
         {
             // Compute the normal of a western vertex.
             // Number of adjacent faces: 4.
+            x = 0;
             vertex_normal = NNE_FACE_NORMAL + ENE_FACE_NORMAL + ESE_FACE_NORMAL + SSE_FACE_NORMAL;
             temp_normals.push_back(vertex_normal);
 
@@ -399,7 +625,7 @@ bool triangulate_quads(
                 temp_normals.push_back(vertex_normal);
             }
 
-            x = 0;
+            x = image_width - 1;
 
             // Compute the normal of an eastern vertex.
             // Number of adjacent faces: 4.
@@ -409,6 +635,7 @@ bool triangulate_quads(
 
         // Compute the normal of the northwesternmost vertex.
         // Number of adjacent faces: 2.
+        x = 0;
         vertex_normal = NNE_FACE_NORMAL + ENE_FACE_NORMAL;
         temp_normals.push_back(vertex_normal);
 
@@ -423,10 +650,11 @@ bool triangulate_quads(
 
         // Compute the normal of the northeasternmost vertex.
         // Number of adjacent faces: 2.
+        x = image_width - 1;
         vertex_normal = SSW_FACE_NORMAL + WSW_FACE_NORMAL;
         temp_normals.push_back(vertex_normal);
 
-        // Process interpolated vertices.
+        // 5. Compute the the vertices between, `push_back` to `temp_normals`.
         for (z = 1; z < image_height; z++)
         {
             for (x = 1; x < image_width; x++)
@@ -435,61 +663,28 @@ bool triangulate_quads(
                 temp_normals.push_back(vertex_normal);
             }
         }
-    }
 
-    uint32_t vertexIndex[3], uvIndex[3], normalIndex[3];
-
-    uint32_t triangle_i = 0;
-
-    if (is_bilinear_interpolation_in_use)
-    {
+        // 6. Loop through all vertices and `output_triangle_vertices`.
+        uint32_t triangle_i = 0;
         uint32_t current_interpolated_vertex_i = image_width * image_height;
 
-        // Then, define the faces in a double loop.
-        // Begin from index 1.
-        for (uint32_t z = 1; z < image_height; z++)
+        for (z = 1; z < image_height; z++)
         {
-            // Begin from index 1.
-            for (uint32_t x = 1; x < image_width; x++)
+            for (x = 1; x < image_width; x++)
             {
-                // This corresponds to "f": specify a face (but here we specify 2 faces instead!).
-                // std::cout << "Processing coordinate (" << x << ", " << z << ").\n";
-
                 uint32_t current_vertex_i = image_width * z + x;
 
-                // Interpolate y coordinate (altitude).
-                float y = ((float) SOUTHWEST_Y + SOUTHEAST_Y + NORTHWEST_Y + NORTHEAST_Y) / 4;
-
-                // Create a new vertex using bilinear interpolation.
-                // This corresponds to "v": specify one vertex.
-                glm::vec3 vertex;
-                vertex.x = (float) x - 0.5f;
-                vertex.y = y;
-                vertex.z = (float) z - 0.5f;
-                temp_vertices.push_back(vertex);
-
-                // This corresponds to "vt": specify texture coordinates of one vertex.
-                glm::vec2 uv;
-
-#ifdef USE_HEIGHT_AS_TEXTURE_COORDINATE
-                uv.x = y / 256;
-                uv.y = 0.0f;
-#endif
-
-#ifdef USE_REAL_TEXTURE_COORDINATES
-                uv.x = 0.5f;
-                uv.y = 0.5f;
-#endif
-
-                temp_UVs.push_back(uv);
-
                 // This corresponds to "vn": specify normal of one vertex.
-                glm::vec3 normal;
-                normal.x = 0.0f; // TODO: define a proper normal!
-                normal.y = 1.0f; // TODO: define a proper normal!
-                normal.z = 0.0f; // TODO: define a proper normal!
-                temp_normals.push_back(normal);
 
+                // Then, define the triangles (4 faces).
+                // Triangle order: S - W - N - E.
+                //
+                // First triangle: center, southeast, southwest.
+                // Second triangle: center, southwest, northwest.
+                // Third triangle: center, northwest, northeast.
+                // Fourth triangle: center, northeast, southeast.
+
+                // Define the first triangle, S: center, southeast, southwest.
                 // Then, define the triangles (4 faces).
                 // Triangle order: S - W - N - E.
                 //
@@ -633,171 +828,6 @@ bool triangulate_quads(
                 current_interpolated_vertex_i++;
             }
         }
-        return true;
-    }
-    else if (is_southwest_northeast_in_use || is_southeast_northwest_in_use)
-    {
-        // Then, define the faces in a double loop.
-        // Begin from index 1.
-        for (uint32_t z = 1; z < image_height; z++)
-        {
-            // Begin from index 1.
-            for (uint32_t x = 1; x < image_width; x++)
-            {
-                // This corresponds to "f": specify a face (but here we specify 2 faces instead!).
-                // std::cout << "Processing coordinate (" << x << ", " << z << ").\n";
-
-                uint32_t current_vertex_i = image_width * z + x;
-
-                if (is_southwest_northeast_in_use)
-                {
-                    // Define the triangles (2 faces).
-                    // Triangle order: SE - NW.
-                    //
-                    // First triangle: 1, 4, 2 (southwest, northeast, southeast).
-                    // Second triangle: 1, 3, 4 (southwest, northwest, northeast).
-                    // 1, 4, 2 are relative vertex indices (base 1).
-                    // 1, 3, 4 are relative vertex indices (base 1).
-
-                    // Define the first triangle, SE: 1, 4, 2 (southwest, northeast, southeast).
-                    // southwest: down and left from current coordinate.
-                    // southeast: down from current coordinate.
-                    // northeast: current coordinate.
-
-                    vertexIndex[0] = SOUTHWEST;
-                    vertexIndex[1] = NORTHEAST;
-                    vertexIndex[2] = SOUTHEAST;
-
-#ifdef USE_HEIGHT_AS_TEXTURE_COORDINATE
-                    uvIndex[0] = SOUTHWEST_Y;
-                    uvIndex[1] = NORTHEAST_Y;
-                    uvIndex[2] = SOUTHEAST_Y;
-#endif
-
-#ifdef USE_REAL_TEXTURE_COORDINATES
-                    uvIndex[0] = SOUTHWEST;
-                    uvIndex[1] = NORTHEAST;
-                    uvIndex[2] = SOUTHEAST;
-#endif
-                }
-                else if (is_southeast_northwest_in_use)
-                {
-                    // Define the triangles (2 faces).
-                    // Triangle order: SW - NE.
-                    //
-                    // First triangle: 2, 1, 3 (southeast, southwest, northwest).
-                    // Second triangle: 2, 3, 4 (southeast, northwest, northeast).
-                    // 2, 1, 3 are relative vertex indices (base 1).
-                    // 2, 3, 4 are relative vertex indices (base 1).
-
-                    // Define the first triangle, SW: 2, 1, 3 (southeast, southwest, northwest).
-                    // southeast: down from current coordinate.
-                    // southwest: down and left from current coordinate.
-                    // northwest: left from current coordinate.
-
-                    vertexIndex[0] = SOUTHEAST;
-                    vertexIndex[1] = SOUTHWEST;
-                    vertexIndex[2] = NORTHWEST;
-
-#ifdef USE_HEIGHT_AS_TEXTURE_COORDINATE
-                    uvIndex[0] = SOUTHEAST_Y;
-                    uvIndex[1] = SOUTHWEST_Y;
-                    uvIndex[2] = NORTHWEST_Y;
-#endif
-
-#ifdef USE_REAL_TEXTURE_COORDINATES
-                    uvIndex[0] = SOUTHEAST;
-                    uvIndex[1] = SOUTHWEST;
-                    uvIndex[2] = NORTHWEST;
-#endif
-                }
-
-                normalIndex[0] = 0; // TODO: add proper normal index.
-                normalIndex[1] = 0; // TODO: add proper normal index.
-                normalIndex[2] = 0; // TODO: add proper normal index.
-
-                triangle_i = output_triangle_vertices(
-                        temp_vertices,
-                        temp_UVs,
-                        temp_normals,
-                        vertexIndex,
-                        uvIndex,
-                        normalIndex,
-                        out_vertices,
-                        out_UVs,
-                        out_normals,
-                        triangle_i);
-
-                if (is_southwest_northeast_in_use)
-                {
-                    // Define the second triangle, NW: 1, 3, 4 (southwest, northwest, northeast).
-                    // southwest: down and left from current coordinate.
-                    // northwest: left from current coordinate.
-                    // northeast: current coordinate.
-
-                    vertexIndex[0] = SOUTHWEST;
-                    vertexIndex[1] = NORTHWEST;
-                    vertexIndex[2] = NORTHEAST;
-
-#ifdef USE_HEIGHT_AS_TEXTURE_COORDINATE
-                    uvIndex[0] = SOUTHWEST_Y;
-                    uvIndex[1] = NORTHWEST_Y;
-                    uvIndex[2] = NORTHEAST_Y;
-#endif
-
-#ifdef USE_REAL_TEXTURE_COORDINATES
-                    uvIndex[0] = SOUTHWEST;
-                    uvIndex[1] = NORTHWEST;
-                    uvIndex[2] = NORTHEAST;
-#endif
-                }
-                else if (is_southeast_northwest_in_use)
-                {
-                    // Define the second triangle, NE: 2, 3, 4 (southeast, northwest, northeast).
-                    // southeast: down from current coordinate.
-                    // northwest: left from current coordinate.
-                    // northeast: current coordinate.
-
-                    vertexIndex[0] = SOUTHEAST;
-                    vertexIndex[1] = NORTHWEST;
-                    vertexIndex[2] = NORTHEAST;
-
-#ifdef USE_HEIGHT_AS_TEXTURE_COORDINATE
-                    uvIndex[0] = SOUTHEAST_Y;
-                    uvIndex[1] = NORTHWEST_Y;
-                    uvIndex[2] = NORTHEAST_Y;
-#endif
-
-#ifdef USE_REAL_TEXTURE_COORDINATES
-                    uvIndex[0] = SOUTHEAST;
-                    uvIndex[1] = NORTHWEST;
-                    uvIndex[2] = NORTHEAST;
-#endif
-                }
-
-                normalIndex[0] = 0; // TODO: add proper normal index.
-                normalIndex[1] = 0; // TODO: add proper normal index.
-                normalIndex[2] = 0; // TODO: add proper normal index.
-
-                triangle_i = output_triangle_vertices(
-                        temp_vertices,
-                        temp_UVs,
-                        temp_normals,
-                        vertexIndex,
-                        uvIndex,
-                        normalIndex,
-                        out_vertices,
-                        out_UVs,
-                        out_normals,
-                        triangle_i);
-            }
-        }
-        return true;
-    }
-    else
-    {
-        std::cerr << "quad triangulation type " << triangulation_type << " not yet implemented!\n";
-        return false;
     }
     return true;
 }
