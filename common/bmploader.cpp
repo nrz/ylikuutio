@@ -39,7 +39,6 @@ glm::vec3 get_face_normal(
 
     switch (compass_point_code)
     {
-
         case SSW_CODE:
             face_normal_i = 4 * (z - 1) * (image_width - 1) + (4 * x) - 1;
             break;
