@@ -216,8 +216,8 @@ bool triangulate_quads(
     const char *char_triangulation_type = triangulation_type.c_str();
 
     bool is_bilinear_interpolation_in_use = false;
-    bool is_southwest_northeast_in_use = false;
-    bool is_southeast_northwest_in_use = false;
+    bool is_southwest_northeast_edges_in_use = false;
+    bool is_southeast_northwest_edges_in_use = false;
     bool is_triangulation_type_valid = false;
 
     if (strcmp(char_triangulation_type, "bilinear_interpolation") == 0)
@@ -225,14 +225,14 @@ bool triangulate_quads(
         is_bilinear_interpolation_in_use = true;
         is_triangulation_type_valid = true;
     }
-    else if ((strcmp(char_triangulation_type, "southwest_northeast") == 0) || (strcmp(char_triangulation_type, "northeast_southwest") == 0))
+    else if ((strcmp(char_triangulation_type, "southwest_northeast_edges") == 0) || (strcmp(char_triangulation_type, "northeast_southwest_edges") == 0))
     {
-        is_southwest_northeast_in_use = true;
+        is_southwest_northeast_edges_in_use = true;
         is_triangulation_type_valid = true;
     }
-    else if ((strcmp(char_triangulation_type, "southeast_northwest") == 0) || (strcmp(char_triangulation_type, "northwest_southeast") == 0))
+    else if ((strcmp(char_triangulation_type, "southeast_northwest_edges") == 0) || (strcmp(char_triangulation_type, "northwest_southeast_edges") == 0))
     {
-        is_southeast_northwest_in_use = true;
+        is_southeast_northwest_edges_in_use = true;
         is_triangulation_type_valid = true;
     }
 
@@ -250,7 +250,7 @@ bool triangulate_quads(
     {
         n_faces_for_each_vertex = 4;
     }
-    else if (is_southwest_northeast_in_use || is_southeast_northwest_in_use)
+    else if (is_southwest_northeast_edges_in_use || is_southeast_northwest_edges_in_use)
     {
         n_faces_for_each_vertex = 2;
     }
@@ -310,7 +310,7 @@ bool triangulate_quads(
             }
         }
     }
-    else if (is_southwest_northeast_in_use || is_southeast_northwest_in_use)
+    else if (is_southwest_northeast_edges_in_use || is_southeast_northwest_edges_in_use)
     {
         // Then, define the faces in a double loop.
         // Begin from index 1.
@@ -324,7 +324,7 @@ bool triangulate_quads(
 
                 uint32_t current_vertex_i = image_width * z + x;
 
-                if (is_southwest_northeast_in_use)
+                if (is_southwest_northeast_edges_in_use)
                 {
                     // Define the triangles (2 faces).
                     // Triangle order: SE - NW.
@@ -355,7 +355,7 @@ bool triangulate_quads(
                     uvIndex[2] = SOUTHEAST;
 #endif
                 }
-                else if (is_southeast_northwest_in_use)
+                else if (is_southeast_northwest_edges_in_use)
                 {
 
                     // Define the triangles (2 faces).
@@ -404,7 +404,7 @@ bool triangulate_quads(
                 //         out_normals,
                 //         triangle_i);
 
-                if (is_southwest_northeast_in_use)
+                if (is_southwest_northeast_edges_in_use)
                 {
                     // Define the second triangle, NW: 1, 3, 4 (southwest, northwest, northeast).
                     // southwest: down and left from current coordinate.
@@ -427,7 +427,7 @@ bool triangulate_quads(
                     uvIndex[2] = NORTHEAST;
 #endif
                 }
-                else if (is_southeast_northwest_in_use)
+                else if (is_southeast_northwest_edges_in_use)
                 {
                     // Define the second triangle, NE: 2, 3, 4 (southeast, northwest, northeast).
                     // southeast: down from current coordinate.
@@ -527,7 +527,7 @@ bool triangulate_quads(
                 face_normal = glm::cross(edge1, edge2);
                 face_normal_vector_vec3.push_back(face_normal);
             }
-            else if (is_southwest_northeast_in_use)
+            else if (is_southwest_northeast_edges_in_use)
             {
                 glm::vec3 edge1;
                 glm::vec3 edge2;
@@ -545,7 +545,7 @@ bool triangulate_quads(
                 face_normal = glm::cross(edge1, edge2);
                 face_normal_vector_vec3.push_back(face_normal);
             }
-            else if (is_southeast_northwest_in_use)
+            else if (is_southeast_northwest_edges_in_use)
             {
                 glm::vec3 edge1;
                 glm::vec3 edge2;
@@ -667,13 +667,13 @@ bool triangulate_quads(
             }
         }
     }
-    else if (is_southwest_northeast_in_use)
+    else if (is_southwest_northeast_edges_in_use)
     {
-        // TODO: compute vertex normals for `"southwest_northeast"`.
+        // TODO: compute vertex normals for `"southwest_northeast_edges"`.
     }
-    else if (is_southeast_northwest_in_use)
+    else if (is_southeast_northwest_edges_in_use)
     {
-        // TODO: compute vertex normals for `"southeast_northwest"`.
+        // TODO: compute vertex normals for `"southeast_northwest_edges"`.
     }
 
     // 6. Loop through all vertices and `output_triangle_vertices`.
@@ -845,13 +845,13 @@ bool triangulate_quads(
             }
         }
     }
-    else if (is_southwest_northeast_in_use)
+    else if (is_southwest_northeast_edges_in_use)
     {
-        // TODO: define output vertices, UVs and normals for `"southwest_northeast"`.
+        // TODO: define output vertices, UVs and normals for `"southwest_northeast_edges"`.
     }
-    else if (is_southeast_northwest_in_use)
+    else if (is_southeast_northwest_edges_in_use)
     {
-        // TODO: define output vertices, UVs and normals for `"southeast_northwest"`.
+        // TODO: define output vertices, UVs and normals for `"southeast_northwest_edges"`.
     }
     return true;
 }
@@ -987,8 +987,8 @@ namespace model
         std::cout << "color channel in use: " << color_channel << "\n";
 
         std::string triangulation_type = "bilinear_interpolation";
-        // std::string triangulation_type = "southeast_northwest"; // "northwest_southeast" is equivalent.
-        // std::string triangulation_type = "southwest_northeast"; // "northeast_southwest" is equivalent.
+        // std::string triangulation_type = "southeast_northwest_edges"; // "northwest_southeast_edges" is equivalent.
+        // std::string triangulation_type = "southwest_northeast_edges"; // "northeast_southwest_edges" is equivalent.
 
         bool triangulation_result = triangulate_quads(vertex_data, image_width, image_height, out_vertices, out_UVs, out_normals, triangulation_type);
         return true;
