@@ -29,6 +29,14 @@
 #define ESE_CODE 6
 #define SSE_CODE 7
 
+// for southeast-northwest edges.
+#define SSE_CODE_FOR_SE_NW 0
+#define WNW_CODE_FOR_SE_NW 1
+#define ESE_CODE_FOR_SE_NW 2
+#define NNW_CODE_FOR_SE_NW 3
+#define SW_CODE_FOR_SE_NW 4
+#define NE_CODE_FOR_SE_NW 5
+
 // for bilinear interpolation, southeast-northwest edges, and southwest-northeast edges.
 #define SOUTHWEST (current_vertex_i - image_width - 1)
 #define SOUTHEAST (current_vertex_i - image_width)
@@ -59,6 +67,14 @@
 #define W_FACE_NORMAL (get_face_normal(face_normal_vector_vec3, x - 1, z - 1, NNE_CODE, image_width))
 #define N_FACE_NORMAL (get_face_normal(face_normal_vector_vec3, x, z, WSW_CODE, image_width))
 #define E_FACE_NORMAL (get_face_normal(face_normal_vector_vec3, x, z, SSW_CODE, image_width))
+
+// for southeast-northwest edges.
+#define SSE_FACE_NORMAL_FOR_SE_NW (get_face_normal_for_SE_NW(face_normal_vector_vec3, x, z, SSE_CODE_FOR_SE_NW, image_width))
+#define WNW_FACE_NORMAL_FOR_SE_NW (get_face_normal_for_SE_NW(face_normal_vector_vec3, x, z, WNW_CODE_FOR_SE_NW, image_width))
+#define ESE_FACE_NORMAL_FOR_SE_NW (get_face_normal_for_SE_NW(face_normal_vector_vec3, x, z, ESE_CODE_FOR_SE_NW, image_width))
+#define NNW_FACE_NORMAL_FOR_SE_NW (get_face_normal_for_SE_NW(face_normal_vector_vec3, x, z, NNW_CODE_FOR_SE_NW, image_width))
+#define SW_FACE_NORMAL_FOR_SE_NW (get_face_normal_for_SE_NW(face_normal_vector_vec3, x, z, SW_CODE_FOR_SE_NW, image_width))
+#define NE_FACE_NORMAL_FOR_SE_NW (get_face_normal_for_SE_NW(face_normal_vector_vec3, x, z, NE_CODE_FOR_SE_NW, image_width))
 
 // for bilinear interpolation.
 glm::vec3 get_face_normal(
@@ -95,6 +111,42 @@ glm::vec3 get_face_normal(
             break;
         case SSE_CODE:
             face_normal_i = 4 * (z - 1) * (image_width - 1) + (4 * x) + 1;
+            break;
+        default:
+            std::cerr << "invalid compass point code!\n";
+    }
+    return face_normal_data[face_normal_i];
+}
+
+// for southeast-northwest edges.
+glm::vec3 get_face_normal_for_SE_NW(
+        std::vector<glm::vec3> &face_normal_data,
+        uint32_t x,
+        uint32_t z,
+        uint32_t compass_point_code,
+        uint32_t image_width)
+{
+    uint32_t face_normal_i;
+
+    switch (compass_point_code)
+    {
+        case SSE_CODE_FOR_SE_NW:
+            face_normal_i = 2 * (z - 1) * (image_width - 1) + 2 * x;
+            break;
+        case WNW_CODE_FOR_SE_NW:
+            face_normal_i = 2 * z * (image_width - 1) + 2 * x - 2;
+            break;
+        case ESE_CODE_FOR_SE_NW:
+            face_normal_i = 2 * (z - 1) * (image_width - 1) + 2 * x + 1;
+            break;
+        case NNW_CODE_FOR_SE_NW:
+            face_normal_i = 2 * z * (image_width - 1) + 2 * x - 1;
+            break;
+        case SW_CODE_FOR_SE_NW:
+            face_normal_i = 2 * (z - 1) * (image_width - 1) + 2 * (x - 1) + 1;
+            break;
+        case NE_CODE_FOR_SE_NW:
+            face_normal_i = 2 * z * (image_width - 1) + 2 * x;
             break;
         default:
             std::cerr << "invalid compass point code!\n";
@@ -678,7 +730,77 @@ bool triangulate_quads(
     }
     else if (is_southeast_northwest_edges_in_use)
     {
-        // TODO: compute vertex normals for `"southeast_northwest_edges"`.
+        uint32_t x = 0;
+        uint32_t z = 0;
+
+        // Compute the normal of the southwesternmost vertex.
+        // Number of adjacent faces: 1.
+        glm::vec3 vertex_normal;
+        vertex_normal = NE_FACE_NORMAL_FOR_SE_NW;
+        temp_normals.push_back(vertex_normal);
+
+        // Compute the normals of southern vertices.
+        for (x = 1; x < (image_width - 1); x++)
+        {
+            // Compute the normal of a southern vertex.
+            // Number of adjacent faces: 3.
+            vertex_normal = WNW_FACE_NORMAL_FOR_SE_NW + NNW_FACE_NORMAL_FOR_SE_NW + NE_FACE_NORMAL_FOR_SE_NW;
+            temp_normals.push_back(vertex_normal);
+        }
+
+        // Compute the normal of the southeasternmost vertex.
+        // Number of adjacent faces: 2.
+        x = image_width - 1;
+        vertex_normal = WNW_FACE_NORMAL_FOR_SE_NW + NNW_FACE_NORMAL_FOR_SE_NW;
+        temp_normals.push_back(vertex_normal);
+
+        // Then, define most normals in a double loop.
+        for (z = 1; z < (image_height - 1); z++)
+        {
+            // Compute the normal of a western vertex.
+            // Number of adjacent faces: 3.
+            x = 0;
+            vertex_normal = NE_FACE_NORMAL_FOR_SE_NW + ESE_FACE_NORMAL_FOR_SE_NW + SSE_FACE_NORMAL_FOR_SE_NW;
+            temp_normals.push_back(vertex_normal);
+
+            for (x = 1; x < (image_width - 1); x++)
+            {
+                uint32_t current_vertex_i = image_width * z + x;
+
+                // Compute the normal of a central vertex.
+                // Number of adjacent faces: 6.
+                vertex_normal = SSE_FACE_NORMAL_FOR_SE_NW + SW_FACE_NORMAL_FOR_SE_NW + WNW_FACE_NORMAL_FOR_SE_NW + NNW_FACE_NORMAL_FOR_SE_NW + NE_FACE_NORMAL_FOR_SE_NW + ESE_FACE_NORMAL_FOR_SE_NW;
+                temp_normals.push_back(vertex_normal);
+            }
+
+            x = image_width - 1;
+
+            // Compute the normal of an eastern vertex.
+            // Number of adjacent faces: 4.
+            vertex_normal = SW_FACE_NORMAL_FOR_SE_NW + WNW_FACE_NORMAL_FOR_SE_NW + NNW_FACE_NORMAL_FOR_SE_NW;
+            temp_normals.push_back(vertex_normal);
+        }
+
+        // Compute the normal of the northwesternmost vertex.
+        // Number of adjacent faces: 2.
+        x = 0;
+        vertex_normal = SSE_FACE_NORMAL_FOR_SE_NW + ESE_FACE_NORMAL_FOR_SE_NW;
+        temp_normals.push_back(vertex_normal);
+
+        // Compute the normals of northern vertices.
+        for (x = 1; x < (image_width - 1); x++)
+        {
+            // Compute the normal of a northern vertex.
+            // Number of adjacent faces: 3.
+            vertex_normal = SW_FACE_NORMAL_FOR_SE_NW + ESE_FACE_NORMAL_FOR_SE_NW + SSE_FACE_NORMAL_FOR_SE_NW;
+            temp_normals.push_back(vertex_normal);
+        }
+
+        // Compute the normal of the northeasternmost vertex.
+        // Number of adjacent faces: 1.
+        x = image_width - 1;
+        vertex_normal = SW_FACE_NORMAL_FOR_SE_NW;
+        temp_normals.push_back(vertex_normal);
     }
 
     // 6. Loop through all vertices and `output_triangle_vertices`.
@@ -850,7 +972,92 @@ bool triangulate_quads(
     }
     else if (is_southeast_northwest_edges_in_use)
     {
-        // TODO: define output vertices, UVs and normals for `"southeast_northwest_edges"`.
+        uint32_t x;
+        uint32_t z;
+
+        triangle_i = 0;
+
+        for (z = 1; z < image_height; z++)
+        {
+            for (x = 1; x < image_width; x++)
+            {
+                uint32_t current_vertex_i = image_width * z + x;
+
+                // This corresponds to "vn": specify normal of one vertex.
+
+                // Then, define the triangles (2 faces).
+                // Triangle order: SW - NE.
+                //
+                // First triangle: southwest, northwest, southeast.
+                // Second triangle: northeast, southeast, northwest.
+
+                // Define the first triangle, SW: southwest, northwest, southeast.
+                vertexIndex[0] = SOUTHWEST;
+                vertexIndex[1] = NORTHWEST;
+                vertexIndex[2] = SOUTHEAST;
+
+#ifdef USE_HEIGHT_AS_TEXTURE_COORDINATE
+                uvIndex[0] = SOUTHWEST_Y;
+                uvIndex[1] = NORTHWEST_y;
+                uvIndex[2] = SOUTHEAST_Y;
+#endif
+
+#ifdef USE_REAL_TEXTURE_COORDINATES
+                uvIndex[0] = SOUTHWEST;
+                uvIndex[1] = NORTHWEST;
+                uvIndex[2] = SOUTHEAST;
+#endif
+
+                normalIndex[0] = 0; // TODO: add proper normal index.
+                normalIndex[1] = 0; // TODO: add proper normal index.
+                normalIndex[2] = 0; // TODO: add proper normal index.
+
+                triangle_i = output_triangle_vertices(
+                        temp_vertices,
+                        temp_UVs,
+                        temp_normals,
+                        vertexIndex,
+                        uvIndex,
+                        normalIndex,
+                        out_vertices,
+                        out_UVs,
+                        out_normals,
+                        triangle_i);
+
+                // Define the second triangle, NW: northeast, southeast, northwest.
+                vertexIndex[0] = NORTHEAST;
+                vertexIndex[1] = SOUTHEAST;
+                vertexIndex[2] = NORTHWEST;
+
+#ifdef USE_HEIGHT_AS_TEXTURE_COORDINATE
+                uvIndex[0] = NORTHEAST_Y;
+                uvIndex[1] = SOUTHEAST_y;
+                uvIndex[2] = NORTHWEST_Y;
+#endif
+
+#ifdef USE_REAL_TEXTURE_COORDINATES
+                uvIndex[0] = NORTHEAST;
+                uvIndex[1] = SOUTHEAST;
+                uvIndex[2] = NORTHWEST;
+#endif
+
+                normalIndex[0] = 0; // TODO: add proper normal index.
+                normalIndex[1] = 0; // TODO: add proper normal index.
+                normalIndex[2] = 0; // TODO: add proper normal index.
+
+                triangle_i = output_triangle_vertices(
+                        temp_vertices,
+                        temp_UVs,
+                        temp_normals,
+                        vertexIndex,
+                        uvIndex,
+                        normalIndex,
+                        out_vertices,
+                        out_UVs,
+                        out_normals,
+                        triangle_i);
+            }
+        }
     }
     return true;
 }
@@ -985,8 +1192,8 @@ namespace model
         }
         std::cout << "color channel in use: " << color_channel << "\n";
 
-        std::string triangulation_type = "bilinear_interpolation";
-        // std::string triangulation_type = "southeast_northwest_edges"; // "northwest_southeast_edges" is equivalent.
+        // std::string triangulation_type = "bilinear_interpolation";
+        std::string triangulation_type = "southeast_northwest_edges"; // "northwest_southeast_edges" is equivalent.
         // std::string triangulation_type = "southwest_northeast_edges"; // "northeast_southwest_edges" is equivalent.
 
         bool triangulation_result = triangulate_quads(vertex_data, image_width, image_height, out_vertices, out_UVs, out_normals, triangulation_type);
