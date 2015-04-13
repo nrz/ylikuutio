@@ -612,7 +612,7 @@ bool triangulate_quads(
         vertex_normal = WNW_FACE_NORMAL + NNW_FACE_NORMAL;
         temp_normals.push_back(vertex_normal);
 
-        // Then, define the temporary vertices in a double loop.
+        // Then, define most normals in a double loop.
         for (z = 1; z < (image_height - 1); z++)
         {
             // Compute the normal of a western vertex.
@@ -700,15 +700,6 @@ bool triangulate_quads(
 
                 // This corresponds to "vn": specify normal of one vertex.
 
-                // Then, define the triangles (4 faces).
-                // Triangle order: S - W - N - E.
-                //
-                // First triangle: center, southeast, southwest.
-                // Second triangle: center, southwest, northwest.
-                // Third triangle: center, northwest, northeast.
-                // Fourth triangle: center, northeast, southeast.
-
-                // Define the first triangle, S: center, southeast, southwest.
                 // Then, define the triangles (4 faces).
                 // Triangle order: S - W - N - E.
                 //
