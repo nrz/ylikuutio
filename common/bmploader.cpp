@@ -575,7 +575,6 @@ bool triangulate_quads(
             {
                 std::cerr << "invalid triangulation type!\n";
             }
-
             current_interpolated_vertex_i++;
         }
     }
