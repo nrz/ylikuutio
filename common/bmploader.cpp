@@ -594,9 +594,7 @@ bool triangulate_quads(
         glm::vec3 face_normal2;
         glm::vec3 vertex_normal;
 
-        face_normal1 = face_normal_vector_vec3[0];
-        face_normal2 = face_normal_vector_vec3[1];
-        vertex_normal = face_normal1 + face_normal2;
+        vertex_normal = NNE_FACE_NORMAL + ENE_FACE_NORMAL;
         temp_normals.push_back(vertex_normal);
 
         // Compute the normals of southern vertices.
