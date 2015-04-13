@@ -579,15 +579,15 @@ bool triangulate_quads(
         }
     }
 
-    current_interpolated_vertex_i = image_width * image_height;
-    uint32_t x = 0;
-    uint32_t z = 0;
-
     // 4. Compute the vertex normals for vertices loaded from file, `push_back` to `temp_normals`.
     std::cout << "computing vertex normals for vertices loaded from file.\n";
 
     if (is_bilinear_interpolation_in_use)
     {
+        current_interpolated_vertex_i = image_width * image_height;
+        uint32_t x = 0;
+        uint32_t z = 0;
+
         // Compute the normal of the southwesternmost vertex.
         // Number of adjacent faces: 2.
         glm::vec3 face_normal1;
@@ -686,6 +686,9 @@ bool triangulate_quads(
 
     if (is_bilinear_interpolation_in_use)
     {
+        uint32_t x;
+        uint32_t z;
+
         triangle_i = 0;
         current_interpolated_vertex_i = image_width * image_height;
 
