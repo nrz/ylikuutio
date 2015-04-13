@@ -1192,8 +1192,8 @@ namespace model
         }
         std::cout << "color channel in use: " << color_channel << "\n";
 
-        // std::string triangulation_type = "bilinear_interpolation";
-        std::string triangulation_type = "southeast_northwest_edges"; // "northwest_southeast_edges" is equivalent.
+        std::string triangulation_type = "bilinear_interpolation";
+        // std::string triangulation_type = "southeast_northwest_edges"; // "northwest_southeast_edges" is equivalent.
         // std::string triangulation_type = "southwest_northeast_edges"; // "northeast_southwest_edges" is equivalent.
 
         bool triangulation_result = triangulate_quads(vertex_data, image_width, image_height, out_vertices, out_UVs, out_normals, triangulation_type);
