@@ -19,6 +19,7 @@
 // #define USE_HEIGHT_AS_TEXTURE_COORDINATE
 #define USE_REAL_TEXTURE_COORDINATES
 
+// for bilinear interpolation.
 #define SSW_CODE 0
 #define WSW_CODE 1
 #define WNW_CODE 2
@@ -28,6 +29,38 @@
 #define ESE_CODE 6
 #define SSE_CODE 7
 
+// for bilinear interpolation, southeast-northwest edges, and southwest-northeast edges.
+#define SOUTHWEST (current_vertex_i - image_width - 1)
+#define SOUTHEAST (current_vertex_i - image_width)
+#define NORTHWEST (current_vertex_i - 1)
+#define NORTHEAST (current_vertex_i)
+// for bilinear interpolation.
+#define CENTER (current_interpolated_vertex_i)
+
+// for bilinear interpolation.
+#define SOUTHWEST_Y (get_y(input_vertex_pointer, x - 1, z - 1, image_width))
+#define SOUTHEAST_Y (get_y(input_vertex_pointer, x, z - 1, image_width))
+#define NORTHWEST_Y (get_y(input_vertex_pointer, x - 1, z, image_width))
+#define NORTHEAST_Y (get_y(input_vertex_pointer, x, z, image_width))
+#define CENTER_Y ((SOUTHWEST_Y + SOUTHEAST_Y + NORTHWEST_Y + NORTHEAST_Y) / 4)
+
+// for bilinear interpolation.
+#define SSW_FACE_NORMAL (get_face_normal(face_normal_vector_vec3, x, z, SSW_CODE, image_width))
+#define WSW_FACE_NORMAL (get_face_normal(face_normal_vector_vec3, x, z, WSW_CODE, image_width))
+#define WNW_FACE_NORMAL (get_face_normal(face_normal_vector_vec3, x, z, WNW_CODE, image_width))
+#define NNW_FACE_NORMAL (get_face_normal(face_normal_vector_vec3, x, z, NNW_CODE, image_width))
+#define NNE_FACE_NORMAL (get_face_normal(face_normal_vector_vec3, x, z, NNE_CODE, image_width))
+#define ENE_FACE_NORMAL (get_face_normal(face_normal_vector_vec3, x, z, ENE_CODE, image_width))
+#define ESE_FACE_NORMAL (get_face_normal(face_normal_vector_vec3, x, z, ESE_CODE, image_width))
+#define SSE_FACE_NORMAL (get_face_normal(face_normal_vector_vec3, x, z, SSE_CODE, image_width))
+
+// for bilinear interpolation.
+#define S_FACE_NORMAL (get_face_normal(face_normal_vector_vec3, x - 1, z - 1, ENE_CODE, image_width))
+#define W_FACE_NORMAL (get_face_normal(face_normal_vector_vec3, x - 1, z - 1, NNE_CODE, image_width))
+#define N_FACE_NORMAL (get_face_normal(face_normal_vector_vec3, x, z, WSW_CODE, image_width))
+#define E_FACE_NORMAL (get_face_normal(face_normal_vector_vec3, x, z, SSW_CODE, image_width))
+
+// for bilinear interpolation.
 glm::vec3 get_face_normal(
         std::vector<glm::vec3> &face_normal_data,
         uint32_t x,
@@ -135,31 +168,6 @@ bool triangulate_quads(
         std::string triangulation_type)
 
 {
-#define SOUTHWEST (current_vertex_i - image_width - 1)
-#define SOUTHEAST (current_vertex_i - image_width)
-#define NORTHWEST (current_vertex_i - 1)
-#define NORTHEAST (current_vertex_i)
-#define CENTER (current_interpolated_vertex_i)
-
-#define SOUTHWEST_Y (get_y(input_vertex_pointer, x - 1, z - 1, image_width))
-#define SOUTHEAST_Y (get_y(input_vertex_pointer, x, z - 1, image_width))
-#define NORTHWEST_Y (get_y(input_vertex_pointer, x - 1, z, image_width))
-#define NORTHEAST_Y (get_y(input_vertex_pointer, x, z, image_width))
-#define CENTER_Y ((SOUTHWEST_Y + SOUTHEAST_Y + NORTHWEST_Y + NORTHEAST_Y) / 4)
-
-#define SSW_FACE_NORMAL (get_face_normal(face_normal_vector_vec3, x, z, SSW_CODE, image_width))
-#define WSW_FACE_NORMAL (get_face_normal(face_normal_vector_vec3, x, z, WSW_CODE, image_width))
-#define WNW_FACE_NORMAL (get_face_normal(face_normal_vector_vec3, x, z, WNW_CODE, image_width))
-#define NNW_FACE_NORMAL (get_face_normal(face_normal_vector_vec3, x, z, NNW_CODE, image_width))
-#define NNE_FACE_NORMAL (get_face_normal(face_normal_vector_vec3, x, z, NNE_CODE, image_width))
-#define ENE_FACE_NORMAL (get_face_normal(face_normal_vector_vec3, x, z, ENE_CODE, image_width))
-#define ESE_FACE_NORMAL (get_face_normal(face_normal_vector_vec3, x, z, ESE_CODE, image_width))
-#define SSE_FACE_NORMAL (get_face_normal(face_normal_vector_vec3, x, z, SSE_CODE, image_width))
-
-#define S_FACE_NORMAL (get_face_normal(face_normal_vector_vec3, x - 1, z - 1, ENE_CODE, image_width))
-#define W_FACE_NORMAL (get_face_normal(face_normal_vector_vec3, x - 1, z - 1, NNE_CODE, image_width))
-#define N_FACE_NORMAL (get_face_normal(face_normal_vector_vec3, x, z, WSW_CODE, image_width))
-#define E_FACE_NORMAL (get_face_normal(face_normal_vector_vec3, x, z, SSW_CODE, image_width))
 
     std::vector<uint32_t> vertexIndices, uvIndices, normalIndices;
     std::vector<glm::vec3> temp_vertices;
