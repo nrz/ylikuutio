@@ -642,7 +642,7 @@ bool triangulate_quads(
         // Compute the normal of the northwesternmost vertex.
         // Number of adjacent faces: 2.
         x = 0;
-        vertex_normal = NNE_FACE_NORMAL + ENE_FACE_NORMAL;
+        vertex_normal = SSE_FACE_NORMAL + ESE_FACE_NORMAL;
         temp_normals.push_back(vertex_normal);
 
         // Compute the normals of northern vertices.
