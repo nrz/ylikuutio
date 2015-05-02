@@ -166,13 +166,13 @@ namespace controls
         // Move north.
         if (glfwGetKey(window, GLFW_KEY_N) == GLFW_PRESS)
         {
-            position.z -= deltaTime * temp_speed;
+            position.z += deltaTime * temp_speed;
         }
 
         // Move south.
         if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
         {
-            position.z += deltaTime * temp_speed;
+            position.z -= deltaTime * temp_speed;
         }
 
         GLfloat FoV = initialFoV;// - 5 * glfwGetMouseWheel(); // Now GLFW 3 requires setting up a callback for this. It's a bit too complicated for this beginner's tutorial, so it's disabled instead.
