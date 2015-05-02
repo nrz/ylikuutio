@@ -35,8 +35,6 @@ GLFWwindow* window;
 
 #include "common/globals.hpp"
 #include "common/controls.hpp"
-// #include "common/objloader.hpp"
-// #include "common/bmploader.hpp"
 #include "common/model.hpp"
 #include "common/vboindexer.hpp"
 #include "common/text2D.hpp"
