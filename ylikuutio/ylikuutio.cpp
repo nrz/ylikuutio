@@ -134,109 +134,35 @@ int main(void)
     // Cull triangles which normal is not towards the camera.
     glEnable(GL_CULL_FACE);
 
-    // Create and compile our GLSL program from the shaders.
-    // GLuint programID = LoadShaders("TransformVertexShader.vertexshader", "TextureFragmentShader.fragmentshader");
-    GLuint programID = LoadShaders("StandardShading.vertexshader", "StandardShading.fragmentshader");
+    // Create the species, store it in `terrain_species`.
+    SpeciesStruct species_struct;
+    species_struct.model_file_format = g_model_file_format;
+    species_struct.model_filename = g_model_filename;
+    species_struct.texture_file_format = g_texture_file_format;
+    species_struct.color_channel = g_height_data_color_channel;
+    species_struct.texture_filename = g_texture_filename;
+    species_struct.vertex_shader = "StandardShading.vertexshader";
+    species_struct.fragment_shader = "StandardShading.fragmentshader";
+    species_struct.lightPos = glm::vec3(4, 4, 4);
+    model::Species terrain_species = model::Species(species_struct);
 
-    // Get a handle for our "MVP" uniform.
-    GLuint MatrixID = glGetUniformLocation(programID, "MVP");
-    GLuint ViewMatrixID = glGetUniformLocation(programID, "V");
-    GLuint ModelMatrixID = glGetUniformLocation(programID, "M");
+    // create a species pointer.
+    model::Species *species_ptr = &terrain_species;
 
-    // Get a handle for our buffers.
-    GLuint vertexPosition_modelspaceID = glGetAttribLocation(programID, "vertexPosition_modelspace");
-    GLuint vertexUVID = glGetAttribLocation(programID, "vertexUV");
-    GLuint vertexNormal_modelspaceID = glGetAttribLocation(programID, "vertexNormal_modelspace");
+    // Create terrain1, store it in `terrain1`.
+    ObjectStruct object_struct1;
+    object_struct1.model_matrix = glm::mat4(1.0);
+    object_struct1.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
+    model::Object terrain1 = model::Object(object_struct1);
+    terrain1.species_ptr = species_ptr;
 
-    // Load the texture.
-    GLuint Texture;
+    std::cout << "number of vertices: " << terrain_species.vertices.size() << ".\n";
+    std::cout << "number of UVs: " << terrain_species.UVs.size() << ".\n";
+    std::cout << "number of normals: " << terrain_species.normals.size() << ".\n";
 
-    const char *char_g_texture_file_format = g_texture_file_format.c_str();
-    const char *char_g_texture_filename = g_texture_filename.c_str();
-
-    if ((strcmp(char_g_texture_file_format, "bmp") == 0) || (strcmp(char_g_texture_file_format, "BMP") == 0))
-    {
-        Texture = texture::loadBMP_custom(char_g_texture_filename);
-    }
-    else
-    {
-        std::cerr << "no texture was loaded!\n";
-        std::cerr << "texture file format: " << g_texture_file_format << "\n";
-        return -1;
-    }
-
-    // Get a handle for our "myTextureSampler" uniform.
-    GLuint TextureID  = glGetUniformLocation(programID, "myTextureSampler");
-
-    // Read the model file.
-    std::vector<glm::vec3> vertices;
-    std::vector<glm::vec2> UVs;
-    std::vector<glm::vec3> normals; // Won't be used at the moment.
-
-    bool model_loading_result = false;
-
-    const char *char_g_model_file_format = g_model_file_format.c_str();
-    const char *char_g_model_filename = g_model_filename.c_str();
-    if ((strcmp(char_g_model_file_format, "obj") == 0) || (strcmp(char_g_model_file_format, "OBJ") == 0))
-    {
-        model_loading_result = model::load_OBJ(char_g_model_filename, vertices, UVs, normals);
-    }
-    else if ((strcmp(char_g_model_file_format, "bmp") == 0) || (strcmp(char_g_model_file_format, "BMP") == 0))
-    {
-        model_loading_result = model::load_BMP_world(char_g_model_filename, vertices, UVs, normals, g_height_data_color_channel);
-    }
-    else
-    {
-        std::cerr << "no model was loaded!\n";
-        std::cerr << "model file format: " << g_model_file_format << "\n";
-        return -1;
-    }
-
-    if (!model_loading_result)
-    {
-        std::cerr << "model loading failed!\n";
-        std::cerr << "model file format: " << g_model_file_format << "\n";
-        std::cerr << "model file name: " << g_model_filename << "\n";
-    }
-
-    std::cout << "number of vertices: " << vertices.size() << ".\n";
-    std::cout << "number of UVs: " << UVs.size() << ".\n";
-    std::cout << "number of normals: " << normals.size() << ".\n";
-
-    std::vector<GLuint> indices;
-    std::vector<glm::vec3> indexed_vertices;
-    std::vector<glm::vec2> indexed_UVs;
-    std::vector<glm::vec3> indexed_normals;
-    model::indexVBO(vertices, UVs, normals, indices, indexed_vertices, indexed_UVs, indexed_normals);
-    std::cout << "number of indexed vertices: " << indexed_vertices.size() << ".\n";
-    std::cout << "number of indexed UVs: " << indexed_UVs.size() << ".\n";
-    std::cout << "number of indexed normals: " << indexed_normals.size() << ".\n";
-
-    // Load it into a VBO.
-    GLuint vertexbuffer;
-    glGenBuffers(1, &vertexbuffer);
-    glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
-    glBufferData(GL_ARRAY_BUFFER, indexed_vertices.size() * sizeof(glm::vec3), &indexed_vertices[0], GL_STATIC_DRAW);
-
-    GLuint uvbuffer;
-    glGenBuffers(1, &uvbuffer);
-    glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
-    glBufferData(GL_ARRAY_BUFFER, indexed_UVs.size() * sizeof(glm::vec2), &indexed_UVs[0], GL_STATIC_DRAW);
-
-    GLuint normalbuffer;
-    glGenBuffers(1, &normalbuffer);
-    glBindBuffer(GL_ARRAY_BUFFER, normalbuffer);
-    glBufferData(GL_ARRAY_BUFFER, indexed_normals.size() * sizeof(glm::vec3), &indexed_normals[0], GL_STATIC_DRAW);
-
-    // Generate a buffer for the indices as well
-    GLuint elementbuffer;
-    glGenBuffers(1, &elementbuffer);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, elementbuffer);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(GLuint), &indices[0], GL_STATIC_DRAW);
-
-    // Get a handle for our "LightPosition" uniform
-    glUseProgram(programID);
-    GLuint LightID = glGetUniformLocation(programID, "LightPosition_worldspace");
+    std::cout << "number of indexed vertices: " << terrain_species.indexed_vertices.size() << ".\n";
+    std::cout << "number of indexed UVs: " << terrain_species.indexed_UVs.size() << ".\n";
+    std::cout << "number of indexed normals: " << terrain_species.indexed_normals.size() << ".\n";
 
     // Initialize our little text library with the Holstein font
     const char *char_g_font_texture_filename = g_font_texture_filename.c_str();
@@ -267,81 +193,13 @@ int main(void)
         // Clear the screen.
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        // Use our shader.
-        glUseProgram(programID);
+        terrain_species.render();
 
-        // Compute the MVP matrix from keyboard and mouse input.
-        controls::computeMatricesFromInputs();
-        glm::mat4 ProjectionMatrix = controls::getProjectionMatrix();
-        glm::mat4 ViewMatrix = controls::getViewMatrix();
-        glm::mat4 ModelMatrix = glm::mat4(1.0);
-        glm::mat4 MVP = ProjectionMatrix * ViewMatrix * ModelMatrix;
+        terrain1.render();
 
-        // Send our transformation to the currently bound shader,
-        // in the "MVP" uniform
-        glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP[0][0]);
-        glUniformMatrix4fv(ModelMatrixID, 1, GL_FALSE, &ModelMatrix[0][0]);
-        glUniformMatrix4fv(ViewMatrixID, 1, GL_FALSE, &ViewMatrix[0][0]);
-
-        glm::vec3 lightPos = glm::vec3(4, 4, 4);
-        glUniform3f(LightID, lightPos.x, lightPos.y, lightPos.z);
-
-        // Bind our texture in Texture Unit 0.
-        glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, Texture);
-        // Set our "myTextureSampler" sampler to user Texture Unit 0.
-        glUniform1i(TextureID, 0);
-
-        // 1st attribute buffer : vertices.
-        glEnableVertexAttribArray(vertexPosition_modelspaceID);
-        glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
-        glVertexAttribPointer(
-                vertexPosition_modelspaceID,  // The attribute we want to configure
-                3,                            // size
-                GL_FLOAT,                     // type
-                GL_FALSE,                     // normalized?
-                0,                            // stride
-                (void*) 0                     // array buffer offset
-                );
-
-        // 2nd attribute buffer : UVs.
-        glEnableVertexAttribArray(vertexUVID);
-        glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
-        glVertexAttribPointer(
-                vertexUVID,                   // The attribute we want to configure
-                2,                            // size : U+V => 2
-                GL_FLOAT,                     // type
-                GL_FALSE,                     // normalized?
-                0,                            // stride
-                (void*) 0                     // array buffer offset
-                );
-
-        // 3rd attribute buffer : normals
-        glEnableVertexAttribArray(vertexNormal_modelspaceID);
-        glBindBuffer(GL_ARRAY_BUFFER, normalbuffer);
-        glVertexAttribPointer(
-                vertexNormal_modelspaceID,    // The attribute we want to configure
-                3,                            // size
-                GL_FLOAT,                     // type
-                GL_FALSE,                     // normalized?
-                0,                            // stride
-                (void*) 0                     // array buffer offset
-                );
-
-        // Index buffer
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, elementbuffer);
-
-        // Draw the triangles !
-        glDrawElements(
-                GL_TRIANGLES,    // mode
-                indices.size(),  // count
-                GL_UNSIGNED_INT, // type
-                (void*) 0        // element array buffer offset
-                );
-
-        glDisableVertexAttribArray(vertexPosition_modelspaceID);
-        glDisableVertexAttribArray(vertexUVID);
-        glDisableVertexAttribArray(vertexNormal_modelspaceID);
+        glDisableVertexAttribArray(terrain_species.vertexPosition_modelspaceID);
+        glDisableVertexAttribArray(terrain_species.vertexUVID);
+        glDisableVertexAttribArray(terrain_species.vertexNormal_modelspaceID);
 
         PrintingStruct printing_struct;
         printing_struct.screen_width = WINDOW_WIDTH;
@@ -388,12 +246,12 @@ int main(void)
             && (glfwWindowShouldClose(window) == 0));
 
     // Cleanup VBO, shader and texture.
-    glDeleteBuffers(1, &vertexbuffer);
-    glDeleteBuffers(1, &uvbuffer);
-    glDeleteBuffers(1, &normalbuffer);
-    glDeleteBuffers(1, &elementbuffer);
-    glDeleteProgram(programID);
-    glDeleteTextures(1, &Texture);
+    glDeleteBuffers(1, &terrain_species.vertexbuffer);
+    glDeleteBuffers(1, &terrain_species.uvbuffer);
+    glDeleteBuffers(1, &terrain_species.normalbuffer);
+    glDeleteBuffers(1, &terrain_species.elementbuffer);
+    glDeleteProgram(terrain_species.programID);
+    glDeleteTextures(1, &terrain_species.texture);
 
     // Delete the text's VBO, the shader and the texture
     text2D::cleanupText2D();
