@@ -135,26 +135,70 @@ int main(void)
     glEnable(GL_CULL_FACE);
 
     // Create the species, store it in `terrain_species`.
-    SpeciesStruct species_struct;
-    species_struct.model_file_format = g_model_file_format;
-    species_struct.model_filename = g_model_filename;
-    species_struct.texture_file_format = g_texture_file_format;
-    species_struct.color_channel = g_height_data_color_channel;
-    species_struct.texture_filename = g_texture_filename;
-    species_struct.vertex_shader = "StandardShading.vertexshader";
-    species_struct.fragment_shader = "StandardShading.fragmentshader";
-    species_struct.lightPos = glm::vec3(4, 4, 4);
-    model::Species terrain_species = model::Species(species_struct);
+    SpeciesStruct terrain_species_struct;
+    terrain_species_struct.model_file_format = g_model_file_format;
+    terrain_species_struct.model_filename = g_model_filename;
+    terrain_species_struct.texture_file_format = g_texture_file_format;
+    terrain_species_struct.color_channel = g_height_data_color_channel;
+    terrain_species_struct.texture_filename = g_texture_filename;
+    terrain_species_struct.vertex_shader = "StandardShading.vertexshader";
+    terrain_species_struct.fragment_shader = "StandardShading.fragmentshader";
+    terrain_species_struct.lightPos = glm::vec3(4, 4, 4);
+    model::Species terrain_species = model::Species(terrain_species_struct);
 
     // create a species pointer.
-    model::Species *species_ptr = &terrain_species;
+    model::Species *terrain_species_ptr = &terrain_species;
 
     // Create terrain1, store it in `terrain1`.
-    ObjectStruct object_struct1;
-    object_struct1.model_matrix = glm::mat4(1.0);
-    object_struct1.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
-    model::Object terrain1 = model::Object(object_struct1);
-    terrain1.species_ptr = species_ptr;
+    ObjectStruct terrain_object_struct1;
+    terrain_object_struct1.model_matrix = glm::mat4(1.0);
+    terrain_object_struct1.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
+    model::Object terrain1 = model::Object(terrain_object_struct1);
+    terrain1.species_ptr = terrain_species_ptr;
+
+    SpeciesStruct suzanne_species_struct;
+    suzanne_species_struct.model_file_format = "obj";
+    suzanne_species_struct.model_filename = "suzanne.obj";
+    suzanne_species_struct.texture_file_format = "dds";
+    suzanne_species_struct.texture_filename = "uvmap.DDS";
+    suzanne_species_struct.vertex_shader = "StandardShading.vertexshader";
+    suzanne_species_struct.fragment_shader = "StandardShading.fragmentshader";
+    suzanne_species_struct.lightPos = glm::vec3(4, 4, 4);
+    model::Species suzanne_species = model::Species(suzanne_species_struct);
+
+    // create a species pointer.
+    model::Species *suzanne_species_ptr = &suzanne_species;
+
+    // Create suzanne1, store it in `suzanne1`.
+    ObjectStruct suzanne_object_struct1;
+    suzanne_object_struct1.model_matrix = glm::translate(glm::mat4(1.0), glm::vec3(82.50f, 119.00f, 95.50f));
+    suzanne_object_struct1.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
+    model::Object suzanne1 = model::Object(suzanne_object_struct1);
+    suzanne1.species_ptr = suzanne_species_ptr;
+
+    ObjectStruct suzanne_object_struct2;
+    suzanne_object_struct2.model_matrix = glm::translate(glm::mat4(1.0), glm::vec3(112.90f, 113.90f, 75.50f));
+    suzanne_object_struct2.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
+    model::Object suzanne2 = model::Object(suzanne_object_struct2);
+    suzanne2.species_ptr = suzanne_species_ptr;
+
+    ObjectStruct suzanne_object_struct3;
+    suzanne_object_struct3.model_matrix = glm::translate(glm::mat4(1.0), glm::vec3(126.90f, 162.90f, 103.00f));
+    suzanne_object_struct3.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
+    model::Object suzanne3 = model::Object(suzanne_object_struct3);
+    suzanne3.species_ptr = suzanne_species_ptr;
+
+    ObjectStruct suzanne_object_struct4;
+    suzanne_object_struct4.model_matrix = glm::translate(glm::mat4(1.0), glm::vec3(96.00f, 130.00f, 109.00f));
+    suzanne_object_struct4.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
+    model::Object suzanne4 = model::Object(suzanne_object_struct4);
+    suzanne4.species_ptr = suzanne_species_ptr;
+
+    ObjectStruct suzanne_object_struct5;
+    suzanne_object_struct5.model_matrix = glm::translate(glm::mat4(1.0), glm::vec3(103.00f, 105.00f, 109.00f));
+    suzanne_object_struct5.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
+    model::Object suzanne5 = model::Object(suzanne_object_struct5);
+    suzanne5.species_ptr = suzanne_species_ptr;
 
     std::cout << "number of vertices: " << terrain_species.vertices.size() << ".\n";
     std::cout << "number of UVs: " << terrain_species.UVs.size() << ".\n";
@@ -196,6 +240,14 @@ int main(void)
         terrain_species.render();
 
         terrain1.render();
+
+        suzanne_species.render();
+
+        suzanne1.render();
+        suzanne2.render();
+        suzanne3.render();
+        suzanne4.render();
+        suzanne5.render();
 
         glDisableVertexAttribArray(terrain_species.vertexPosition_modelspaceID);
         glDisableVertexAttribArray(terrain_species.vertexUVID);
