@@ -33,12 +33,9 @@ GLFWwindow* window;
 #include "common/shader.hpp"
 #include "common/texture.hpp"
 #include "common/controls.hpp"
-// #include "common/objloader.hpp"
-// #include "common/bmploader.hpp"
 #include "common/model.hpp"
 #include "common/vboindexer.hpp"
 #include "common/text2D.hpp"
-// #include "common/Object.hpp"
 
 #define WINDOW_WIDTH 1600
 #define WINDOW_HEIGHT 900
