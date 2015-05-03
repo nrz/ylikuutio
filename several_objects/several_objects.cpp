@@ -153,6 +153,7 @@ int main(void)
 
     // For speed computation
     double lastTime = glfwGetTime();
+    double last_time_for_display_sync = glfwGetTime();
     int nbFrames = 0;
 
     do
@@ -160,8 +161,10 @@ int main(void)
         // Measure speed
         double currentTime = glfwGetTime();
 
-        if (currentTime - lastTime >= (1.0f / MAX_FPS))
+        if (currentTime - last_time_for_display_sync >= (1.0f / MAX_FPS))
         {
+            last_time_for_display_sync = glfwGetTime();
+
             nbFrames++;
 
             if (currentTime - lastTime >= 1.0)

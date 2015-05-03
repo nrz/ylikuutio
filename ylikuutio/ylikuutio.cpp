@@ -231,6 +231,7 @@ int main(void)
 
     // For speed computation
     double lastTime = glfwGetTime();
+    double last_time_for_display_sync = glfwGetTime();
     int nbFrames = 0;
 
     bool ms_frame_text_ready = false;
@@ -240,8 +241,10 @@ int main(void)
         // Measure speed
         double currentTime = glfwGetTime();
 
-        if (currentTime - lastTime >= (1.0f / MAX_FPS))
+        if (currentTime - last_time_for_display_sync >= (1.0f / MAX_FPS))
         {
+            last_time_for_display_sync = glfwGetTime();
+
             char ms_frame_text[256];
             nbFrames++;
 
@@ -254,6 +257,7 @@ int main(void)
                 nbFrames = 0;
                 lastTime += 1.0;
             }
+
             // Clear the screen.
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
