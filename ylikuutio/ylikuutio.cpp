@@ -184,21 +184,21 @@ int main(void)
     ObjectStruct suzanne_object_struct1;
     suzanne_object_struct1.coordinate_vector = glm::vec3(82.50f, 119.00f, 95.50f);
     suzanne_object_struct1.rotate_vector = glm::vec3(1.0f, 0.0f, 0.0f);
-    suzanne_object_struct1.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
+    suzanne_object_struct1.translate_vector = glm::vec3(1.0f, 0.0f, 0.0f);
     model::Object suzanne1 = model::Object(suzanne_object_struct1);
     suzanne1.species_ptr = suzanne_species_ptr;
 
     ObjectStruct suzanne_object_struct2;
     suzanne_object_struct2.coordinate_vector = glm::vec3(112.90f, 113.90f, 75.50f);
     suzanne_object_struct2.rotate_vector = glm::vec3(1.0f, 0.0f, 0.0f);
-    suzanne_object_struct2.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
+    suzanne_object_struct2.translate_vector = glm::vec3(0.0f, 1.0f, 0.0f);
     model::Object suzanne2 = model::Object(suzanne_object_struct2);
     suzanne2.species_ptr = suzanne_species_ptr;
 
     ObjectStruct suzanne_object_struct3;
     suzanne_object_struct3.coordinate_vector = glm::vec3(126.90f, 162.90f, 103.00f);
     suzanne_object_struct3.rotate_vector = glm::vec3(1.0f, 0.0f, 0.0f);
-    suzanne_object_struct3.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
+    suzanne_object_struct3.translate_vector = glm::vec3(0.0f, 0.0f, 1.0f);
     model::Object suzanne3 = model::Object(suzanne_object_struct3);
     suzanne3.species_ptr = suzanne_species_ptr;
 

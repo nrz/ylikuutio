@@ -175,7 +175,6 @@ namespace model
         this->has_entered       = false;
         this->species_ptr       = static_cast<model::Species*>(object_struct.species_ptr);
 
-        // this->model_matrix = glm::translate(glm::mat4(1.0f), this->coordinate_vector);
         bool model_loading_result = false;
     }
 
@@ -186,7 +185,7 @@ namespace model
             this->model_matrix = glm::translate(glm::mat4(1.0f), this->coordinate_vector);
 
             // store the new coordinates to be used in the next update.
-            // this->coordinate_vector = glm::vec3(model_matrix[0][0], model_matrix[1][1], model_matrix[2][2]);
+            this->coordinate_vector = glm::vec3(model_matrix[0][0], model_matrix[1][1], model_matrix[2][2]);
             this->has_entered = true;
         }
         else
@@ -196,9 +195,15 @@ namespace model
             my_quaternion = glm::quat(DEGREES_TO_RADIANS(this->rotate_vector));
             glm::mat4 rotation_matrix = glm::toMat4(my_quaternion);
 
-            this->model_matrix = rotation_matrix * this->model_matrix;
+            // rotate.
+            // this->model_matrix = rotation_matrix * this->model_matrix;
+            if (this->rotate_vector != glm::vec3(0.0f, 0.0f, 0.0f))
+            {
+                this->model_matrix = glm::rotate(this->model_matrix, 0.1f, this->rotate_vector);
+            }
 
             this->model_matrix = glm::translate(this->model_matrix, this->translate_vector);
+            this->coordinate_vector = glm::vec3(model_matrix[0][0], model_matrix[1][1], model_matrix[2][2]);
         }
 
         this->MVP_matrix = this->species_ptr->ProjectionMatrix * this->species_ptr->ViewMatrix * this->model_matrix;
