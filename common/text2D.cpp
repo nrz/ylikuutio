@@ -44,7 +44,7 @@ namespace text2D
         }
         else if ((strcmp(char_font_texture_file_format, "dds") == 0) || (strcmp(char_font_texture_file_format, "DDS") == 0))
         {
-            Text2DTextureID = texture::loadDDS(texturePath);
+            Text2DTextureID = texture::load_DDS_texture(texturePath);
         }
 
         // Initialize VBO

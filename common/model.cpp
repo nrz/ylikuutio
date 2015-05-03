@@ -84,7 +84,7 @@ namespace model
         }
         else if ((strcmp(this->char_texture_file_format, "dds") == 0) || (strcmp(this->char_texture_file_format, "DDS") == 0))
         {
-            this->texture = texture::loadDDS(this->char_texture_filename);
+            this->texture = texture::load_DDS_texture(this->char_texture_filename);
         }
         else
         {

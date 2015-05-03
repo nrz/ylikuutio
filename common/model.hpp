@@ -51,7 +51,7 @@ namespace model
             // The rest fields are created in the constructor.
             GLuint programID;                      // shaders' programID, returned by `LoadShaders`.
             GLuint lightID;                        // light ID, returned by `glGetUniformLocation(programID, "LightPosition_worldspace");`.
-            GLuint texture;                        // Texture, returned by `loadDDS` or `load_BMP_texture`.
+            GLuint texture;                        // Texture, returned by `load_DDS_texture` or `load_BMP_texture`.
             GLuint textureID;                      // texture ID, returned by `glGetUniformLocation(programID, "myTextureSampler");`.
             GLuint MatrixID;
             GLuint ViewMatrixID;
