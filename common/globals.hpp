@@ -36,8 +36,10 @@ typedef struct
 
 typedef struct
 {
-    glm::mat4 model_matrix;          // model matrix.
+    glm::vec3 coordinate_vector;     // rotate vector.
+    glm::vec3 rotate_vector;         // rotate vector.
     glm::vec3 translate_vector;      // translate vector.
+    glm::mat4 model_matrix;          // model matrix.
     glm::mat4 MVP_matrix;            // model view projection matrix.
     void *species_ptr;               // pointer to the species.
 } ObjectStruct;
@@ -53,6 +55,7 @@ typedef struct
     std::string color_channel;               // filename of fragment shader.
     std::vector<ObjectStruct> object_vector; // vector of individual objects of this species.
     glm::vec3 lightPos;                      // light position.
+    bool is_world;                           // worlds currently do not rotate nor translate.
 } SpeciesStruct;
 
 typedef struct

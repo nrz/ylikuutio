@@ -1,3 +1,12 @@
+#ifndef PI
+#define PI 3.14159265359f
+#endif
+
+#ifndef GLM_FORCE_RADIANS
+#define GLM_FORCE_RADIANS
+#define DEGREES_TO_RADIANS(x) (x * PI / 180.0f)
+#endif
+
 #include <string>
 
 // Include GLM
@@ -10,6 +19,18 @@
 #ifndef __GLM_GTC_MATRIX_TRANSFORM_HPP_INCLUDED
 #define __GLM_GTC_MATRIX_TRANSFORM_HPP_INCLUDED
 #include <glm/gtc/matrix_transform.hpp>
+#endif
+
+// Include gtc/quaternion.hpp .
+#ifndef __GLM_GTC_QUATERNION_HPP_INCLUDED
+#define __GLM_GTC_QUATERNION_HPP_INCLUDED
+#include <glm/gtc/quaternion.hpp>
+#endif
+
+// Include gtx/quaternion.hpp .
+#ifndef __GLM_GTX_QUATERNION_HPP_INCLUDED
+#define __GLM_GTX_QUATERNION_HPP_INCLUDED
+#include <glm/gtx/quaternion.hpp>
 #endif
 
 #include "model.hpp"
@@ -112,6 +133,8 @@ namespace model
         // Get a handle for our "LightPosition" uniform.
         glUseProgram(this->programID);
         this->lightID = glGetUniformLocation(this->programID, "LightPosition_worldspace");
+
+        // Compute the graph of this object type.
     }
 
     void Species::render()
@@ -146,16 +169,38 @@ namespace model
     Object::Object(ObjectStruct object_struct)
     {
         // constructor.
-        this->model_matrix     = object_struct.model_matrix;
-        this->translate_vector = object_struct.translate_vector;
-        this->species_ptr      = static_cast<model::Species*>(object_struct.species_ptr);
+        this->coordinate_vector = object_struct.coordinate_vector;
+        this->rotate_vector     = object_struct.rotate_vector;
+        this->translate_vector  = object_struct.translate_vector;
+        this->has_entered       = false;
+        this->species_ptr       = static_cast<model::Species*>(object_struct.species_ptr);
 
+        // this->model_matrix = glm::translate(glm::mat4(1.0f), this->coordinate_vector);
         bool model_loading_result = false;
     }
 
     void Object::render()
     {
-        this->model_matrix = glm::translate(this->model_matrix, this->translate_vector);
+        if (!this->has_entered)
+        {
+            this->model_matrix = glm::translate(glm::mat4(1.0f), this->coordinate_vector);
+
+            // store the new coordinates to be used in the next update.
+            // this->coordinate_vector = glm::vec3(model_matrix[0][0], model_matrix[1][1], model_matrix[2][2]);
+            this->has_entered = true;
+        }
+        else
+        {
+            // create `rotation_matrix` using quaternions.
+            glm::quat my_quaternion;
+            my_quaternion = glm::quat(DEGREES_TO_RADIANS(this->rotate_vector));
+            glm::mat4 rotation_matrix = glm::toMat4(my_quaternion);
+
+            this->model_matrix = rotation_matrix * this->model_matrix;
+
+            this->model_matrix = glm::translate(this->model_matrix, this->translate_vector);
+        }
+
         this->MVP_matrix = this->species_ptr->ProjectionMatrix * this->species_ptr->ViewMatrix * this->model_matrix;
 
         // Send our transformation to the currently bound shader,

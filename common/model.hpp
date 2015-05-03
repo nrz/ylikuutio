@@ -97,7 +97,9 @@ namespace model
             // Then, render each individual object.
             void render();
 
-            glm::mat4 model_matrix;                // model matrix.
+            bool has_entered;
+            glm::vec3 coordinate_vector;           // rotate vector.
+            glm::vec3 rotate_vector;               // rotate vector.
             glm::vec3 translate_vector;            // translate vector.
             model::Species *species_ptr;           // pointer to the species.
 
@@ -106,6 +108,7 @@ namespace model
             model::Species *texture_species_ptr;   // pointer to the texture species (not yet in use!).
 
             // The rest fields are created in the constructor.
+            glm::mat4 model_matrix;                // model matrix.
             std::vector<glm::vec3> vertices;       // vertices of the object.
             std::vector<glm::vec2> UVs;            // UVs of the object.
             std::vector<glm::vec3> normals;        // normals of the object. not used at the moment.

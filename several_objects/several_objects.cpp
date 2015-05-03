@@ -1,3 +1,12 @@
+#ifndef PI
+#define PI 3.14159265359f
+#endif
+
+#ifndef GLM_FORCE_RADIANS
+#define GLM_FORCE_RADIANS
+#define DEGREES_TO_RADIANS(x) (x * PI / 180.0f)
+#endif
+
 // Include standard headers
 #include <stdio.h>
 #include <stdlib.h>
@@ -42,8 +51,6 @@ GLFWwindow* window;
 
 #define TEXT_SIZE 40
 #define FONT_SIZE 16
-
-#define PI 3.14159265359f
 
 // font texture file format: bmp/...
 std::string g_font_texture_file_format = "bmp";
@@ -125,14 +132,14 @@ int main(void)
 
     // Create suzanne1, store it in `suzanne1`.
     ObjectStruct object_struct1;
-    object_struct1.model_matrix = glm::mat4(1.0);
+    object_struct1.coordinate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
     object_struct1.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
     model::Object suzanne1 = model::Object(object_struct1);
     suzanne1.species_ptr = species_ptr;
 
     // Create suzanne2, store it in `suzanne2`.
     ObjectStruct object_struct2;
-    object_struct2.model_matrix = glm::mat4(1.0);
+    object_struct2.coordinate_vector = glm::vec3(-1.0f, 0.0f, 0.0f);
     object_struct2.translate_vector = glm::vec3(0.1f, 0.0f, 0.0f);
     model::Object suzanne2 = model::Object(object_struct2);
     suzanne2.species_ptr = species_ptr;

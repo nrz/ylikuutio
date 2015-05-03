@@ -1,3 +1,12 @@
+#ifndef PI
+#define PI 3.14159265359f
+#endif
+
+#ifndef GLM_FORCE_RADIANS
+#define GLM_FORCE_RADIANS
+#define DEGREES_TO_RADIANS(x) (x * PI / 180.0f)
+#endif
+
 // Include standard headers
 #include <iostream>
 #include <string>
@@ -44,8 +53,6 @@ GLFWwindow* window;
 
 #define TEXT_SIZE 40
 #define FONT_SIZE 16
-
-#define PI 3.14159265359f
 
 // model file format: obj/bmp/...
 // std::string g_model_file_format = "bmp";
@@ -151,7 +158,8 @@ int main(void)
 
     // Create terrain1, store it in `terrain1`.
     ObjectStruct terrain_object_struct1;
-    terrain_object_struct1.model_matrix = glm::mat4(1.0);
+    terrain_object_struct1.coordinate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
+    terrain_object_struct1.rotate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
     terrain_object_struct1.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
     model::Object terrain1 = model::Object(terrain_object_struct1);
     terrain1.species_ptr = terrain_species_ptr;
@@ -164,6 +172,7 @@ int main(void)
     suzanne_species_struct.vertex_shader = "StandardShading.vertexshader";
     suzanne_species_struct.fragment_shader = "StandardShading.fragmentshader";
     suzanne_species_struct.lightPos = glm::vec3(4, 4, 4);
+    suzanne_species_struct.is_world = false;
     model::Species suzanne_species = model::Species(suzanne_species_struct);
 
     // create a species pointer.
@@ -171,31 +180,36 @@ int main(void)
 
     // Create suzanne1, store it in `suzanne1`.
     ObjectStruct suzanne_object_struct1;
-    suzanne_object_struct1.model_matrix = glm::translate(glm::mat4(1.0), glm::vec3(82.50f, 119.00f, 95.50f));
+    suzanne_object_struct1.coordinate_vector = glm::vec3(82.50f, 119.00f, 95.50f);
+    suzanne_object_struct1.rotate_vector = glm::vec3(1.0f, 0.0f, 0.0f);
     suzanne_object_struct1.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
     model::Object suzanne1 = model::Object(suzanne_object_struct1);
     suzanne1.species_ptr = suzanne_species_ptr;
 
     ObjectStruct suzanne_object_struct2;
-    suzanne_object_struct2.model_matrix = glm::translate(glm::mat4(1.0), glm::vec3(112.90f, 113.90f, 75.50f));
+    suzanne_object_struct2.coordinate_vector = glm::vec3(112.90f, 113.90f, 75.50f);
+    suzanne_object_struct2.rotate_vector = glm::vec3(1.0f, 0.0f, 0.0f);
     suzanne_object_struct2.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
     model::Object suzanne2 = model::Object(suzanne_object_struct2);
     suzanne2.species_ptr = suzanne_species_ptr;
 
     ObjectStruct suzanne_object_struct3;
-    suzanne_object_struct3.model_matrix = glm::translate(glm::mat4(1.0), glm::vec3(126.90f, 162.90f, 103.00f));
+    suzanne_object_struct3.coordinate_vector = glm::vec3(126.90f, 162.90f, 103.00f);
+    suzanne_object_struct3.rotate_vector = glm::vec3(1.0f, 0.0f, 0.0f);
     suzanne_object_struct3.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
     model::Object suzanne3 = model::Object(suzanne_object_struct3);
     suzanne3.species_ptr = suzanne_species_ptr;
 
     ObjectStruct suzanne_object_struct4;
-    suzanne_object_struct4.model_matrix = glm::translate(glm::mat4(1.0), glm::vec3(96.00f, 130.00f, 109.00f));
+    suzanne_object_struct4.coordinate_vector = glm::vec3(96.00f, 130.00f, 109.00f);
+    suzanne_object_struct4.rotate_vector = glm::vec3(1.0f, 0.0f, 0.0f);
     suzanne_object_struct4.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
     model::Object suzanne4 = model::Object(suzanne_object_struct4);
     suzanne4.species_ptr = suzanne_species_ptr;
 
     ObjectStruct suzanne_object_struct5;
-    suzanne_object_struct5.model_matrix = glm::translate(glm::mat4(1.0), glm::vec3(103.00f, 105.00f, 109.00f));
+    suzanne_object_struct5.coordinate_vector = glm::vec3(103.00f, 105.00f, 109.00f);
+    suzanne_object_struct5.rotate_vector = glm::vec3(1.0f, 0.0f, 0.0f);
     suzanne_object_struct5.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
     model::Object suzanne5 = model::Object(suzanne_object_struct5);
     suzanne5.species_ptr = suzanne_species_ptr;
@@ -225,7 +239,7 @@ int main(void)
         char ms_frame_text[256];
         double currentTime = glfwGetTime();
         nbFrames++;
-        if (currentTime - lastTime >= 1.0)
+        if (currentTime - lastTime >= 1.0f)
         {
             // If last `printf()` was more than 1 sec ago,
             // `printf` and reset.
