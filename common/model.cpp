@@ -43,20 +43,20 @@ namespace model
         this->char_vertex_shader       = this->vertex_shader.c_str();
         this->char_fragment_shader     = this->fragment_shader.c_str();
 
-        // Create and compile our GLSL program from the shaders
+        // Create and compile our GLSL program from the shaders.
         this->programID = LoadShaders(this->char_vertex_shader, this->char_fragment_shader);
 
-        // Get a handle for our "MVP" uniform
+        // Get a handle for our "MVP" uniform.
         this->MatrixID = glGetUniformLocation(this->programID, "MVP");
         this->ViewMatrixID = glGetUniformLocation(this->programID, "V");
         this->ModelMatrixID = glGetUniformLocation(this->programID, "M");
 
-        // Get a handle for our buffers
+        // Get a handle for our buffers.
         this->vertexPosition_modelspaceID = glGetAttribLocation(this->programID, "vertexPosition_modelspace");
         this->vertexUVID = glGetAttribLocation(this->programID, "vertexUV");
         this->vertexNormal_modelspaceID = glGetAttribLocation(this->programID, "vertexNormal_modelspace");
 
-        // Load the texture
+        // Load the texture.
         if ((strcmp(this->char_texture_file_format, "bmp") == 0) || (strcmp(this->char_texture_file_format, "BMP") == 0))
         {
             this->texture = texture::loadBMP_custom(this->char_texture_filename);
@@ -71,7 +71,7 @@ namespace model
             std::cerr << "texture file format: " << this->texture_file_format << "\n";
         }
 
-        // Get a handle for our "myTextureSampler" uniform
+        // Get a handle for our "myTextureSampler" uniform.
         this->textureID = glGetUniformLocation(programID, "myTextureSampler");
 
         bool model_loading_result;
@@ -92,7 +92,7 @@ namespace model
 
         model::indexVBO(this->vertices, this->UVs, this->normals, this->indices, this->indexed_vertices, this->indexed_UVs, this->indexed_normals);
 
-        // Load it into a VBO
+        // Load it into a VBO.
         glGenBuffers(1, &this->vertexbuffer);
         glBindBuffer(GL_ARRAY_BUFFER, this->vertexbuffer);
         glBufferData(GL_ARRAY_BUFFER, this->indexed_vertices.size() * sizeof(glm::vec3), &this->indexed_vertices[0], GL_STATIC_DRAW);
@@ -109,14 +109,14 @@ namespace model
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->elementbuffer);
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, this->indices.size() * sizeof(GLuint), &this->indices[0] , GL_STATIC_DRAW);
 
-        // Get a handle for our "LightPosition" uniform
+        // Get a handle for our "LightPosition" uniform.
         glUseProgram(this->programID);
         this->lightID = glGetUniformLocation(this->programID, "LightPosition_worldspace");
     }
 
     void Species::render()
     {
-        // Compute the MVP matrix from keyboard and mouse input
+        // Compute the MVP matrix from keyboard and mouse input.
         controls::computeMatricesFromInputs();
         this->ProjectionMatrix = controls::getProjectionMatrix();
         this->ViewMatrix = controls::getViewMatrix();
@@ -127,19 +127,19 @@ namespace model
         glUniform3f(this->lightID, this->lightPos.x, this->lightPos.y, this->lightPos.z);
         glUniformMatrix4fv(this->ViewMatrixID, 1, GL_FALSE, &this->ViewMatrix[0][0]); // This one doesn't change between objects, so this can be done once for all objects that use "programID"
 
-        // Bind our texture in Texture Unit 0
+        // Bind our texture in Texture Unit 0.
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, this->texture);
-        // Set our "myTextureSampler" sampler to user Texture Unit 0
+        // Set our "myTextureSampler" sampler to user Texture Unit 0.
         glUniform1i(this->textureID, 0);
 
-        // 1st attribute buffer : vertices
+        // 1st attribute buffer : vertices.
         glEnableVertexAttribArray(this->vertexPosition_modelspaceID);
 
-        // 2nd attribute buffer : UVs
+        // 2nd attribute buffer : UVs.
         glEnableVertexAttribArray(this->vertexUVID);
 
-        // 3rd attribute buffer : normals
+        // 3rd attribute buffer : normals.
         glEnableVertexAttribArray(this->vertexNormal_modelspaceID);
     }
 
@@ -159,22 +159,22 @@ namespace model
         this->MVP_matrix = this->species_ptr->ProjectionMatrix * this->species_ptr->ViewMatrix * this->model_matrix;
 
         // Send our transformation to the currently bound shader,
-        // in the "MVP" uniform
+        // in the "MVP" uniform.
         glUniformMatrix4fv(this->species_ptr->MatrixID, 1, GL_FALSE, &this->MVP_matrix[0][0]);
         glUniformMatrix4fv(this->species_ptr->ModelMatrixID, 1, GL_FALSE, &this->model_matrix[0][0]);
 
-        // 1st attribute buffer : vertices
+        // 1st attribute buffer : vertices.
         glBindBuffer(GL_ARRAY_BUFFER, this->species_ptr->vertexbuffer);
         glVertexAttribPointer(
                 this->species_ptr->vertexPosition_modelspaceID, // The attribute we want to configure
-                3,                  // size
-                GL_FLOAT,           // type
-                GL_FALSE,           // normalized?
-                0,                  // stride
-                (void*) 0           // array buffer offset
+                3,                                              // size
+                GL_FLOAT,                                       // type
+                GL_FALSE,                                       // normalized?
+                0,                                              // stride
+                (void*) 0                                       // array buffer offset
                 );
 
-        // 2nd attribute buffer : UVs
+        // 2nd attribute buffer : UVs.
         glBindBuffer(GL_ARRAY_BUFFER, this->species_ptr->uvbuffer);
         glVertexAttribPointer(
                 this->species_ptr->vertexUVID, // The attribute we want to configure
@@ -185,7 +185,7 @@ namespace model
                 (void*) 0                      // array buffer offset
                 );
 
-        // 3rd attribute buffer : normals
+        // 3rd attribute buffer : normals.
         glBindBuffer(GL_ARRAY_BUFFER, this->species_ptr->normalbuffer);
         glVertexAttribPointer(
                 this->species_ptr->vertexNormal_modelspaceID, // The attribute we want to configure
@@ -196,7 +196,7 @@ namespace model
                 (void*) 0                                     // array buffer offset
                 );
 
-        // Index buffer
+        // Index buffer.
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->species_ptr->elementbuffer);
 
         // Draw the triangles!
