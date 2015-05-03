@@ -52,6 +52,8 @@ GLFWwindow* window;
 #define TEXT_SIZE 40
 #define FONT_SIZE 16
 
+#define MAX_FPS 60
+
 // font texture file format: bmp/...
 std::string g_font_texture_file_format = "bmp";
 
@@ -157,48 +159,54 @@ int main(void)
     {
         // Measure speed
         double currentTime = glfwGetTime();
-        nbFrames++;
-        if (currentTime - lastTime >= 1.0)
+
+        if (currentTime - lastTime >= (1.0f / MAX_FPS))
         {
-            // If last `printf()` was more than 1 sec ago,
-            // `printf` and reset.
-            printf("%f ms/frame\n", 1000.0f/double(nbFrames));
-            nbFrames = 0;
-            lastTime += 1.0;
+            nbFrames++;
+
+            if (currentTime - lastTime >= 1.0)
+            {
+                // If last `printf()` was more than 1 sec ago,
+                // `printf` and reset.
+                printf("%f ms/frame\n", 1000.0f/double(nbFrames));
+                nbFrames = 0;
+                lastTime += 1.0;
+            }
+
+            // Clear the screen
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+            suzanne_species.render();
+
+            suzanne1.render();
+
+            suzanne2.render();
+
+            glDisableVertexAttribArray(suzanne_species.vertexPosition_modelspaceID);
+            glDisableVertexAttribArray(suzanne_species.vertexUVID);
+            glDisableVertexAttribArray(suzanne_species.vertexNormal_modelspaceID);
+
+            PrintingStruct printing_struct;
+            printing_struct.screen_width = WINDOW_WIDTH;
+            printing_struct.screen_height = WINDOW_HEIGHT;
+            printing_struct.text_size = TEXT_SIZE;
+            printing_struct.font_size = FONT_SIZE;
+            printing_struct.char_font_texture_file_format = "bmp";
+
+            char coordinates_text[256];
+            sprintf(coordinates_text, "(%.2f,%.2f,%.2f) (%.2f,%.2f)", position.x, position.y, position.z, horizontalAngle, verticalAngle);
+
+            printing_struct.x = 0;
+            printing_struct.y = 0;
+            printing_struct.text = coordinates_text;
+            printing_struct.horizontal_alignment = "left";
+            printing_struct.vertical_alignment = "bottom";
+            text2D::printText2D(printing_struct);
+
+            // Swap buffers
+            glfwSwapBuffers(window);
         }
 
-        // Clear the screen
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-        suzanne_species.render();
-
-        suzanne1.render();
-
-        suzanne2.render();
-
-        glDisableVertexAttribArray(suzanne_species.vertexPosition_modelspaceID);
-        glDisableVertexAttribArray(suzanne_species.vertexUVID);
-        glDisableVertexAttribArray(suzanne_species.vertexNormal_modelspaceID);
-
-        PrintingStruct printing_struct;
-        printing_struct.screen_width = WINDOW_WIDTH;
-        printing_struct.screen_height = WINDOW_HEIGHT;
-        printing_struct.text_size = TEXT_SIZE;
-        printing_struct.font_size = FONT_SIZE;
-        printing_struct.char_font_texture_file_format = "bmp";
-
-        char coordinates_text[256];
-        sprintf(coordinates_text, "(%.2f,%.2f,%.2f) (%.2f,%.2f)", position.x, position.y, position.z, horizontalAngle, verticalAngle);
-
-        printing_struct.x = 0;
-        printing_struct.y = 0;
-        printing_struct.text = coordinates_text;
-        printing_struct.horizontal_alignment = "left";
-        printing_struct.vertical_alignment = "bottom";
-        text2D::printText2D(printing_struct);
-
-        // Swap buffers
-        glfwSwapBuffers(window);
         glfwPollEvents();
 
     } // Check if the ESC key was pressed or the window was closed

@@ -54,6 +54,8 @@ GLFWwindow* window;
 #define TEXT_SIZE 40
 #define FONT_SIZE 16
 
+#define MAX_FPS 60
+
 // model file format: obj/bmp/...
 // std::string g_model_file_format = "bmp";
 std::string g_model_file_format = "bmp";
@@ -236,76 +238,82 @@ int main(void)
     do
     {
         // Measure speed
-        char ms_frame_text[256];
         double currentTime = glfwGetTime();
-        nbFrames++;
-        if (currentTime - lastTime >= 1.0f)
+
+        if (currentTime - lastTime >= (1.0f / MAX_FPS))
         {
-            // If last `printf()` was more than 1 sec ago,
-            // `printf` and reset.
-            sprintf(ms_frame_text, "%.02f ms/frame; %.02f Hz", 1000.0f / ((double) nbFrames), 1000.0f / (1000.0f / ((double) nbFrames)));
-            ms_frame_text_ready = true;
-            nbFrames = 0;
-            lastTime += 1.0;
-        }
-        // Clear the screen.
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+            char ms_frame_text[256];
+            nbFrames++;
 
-        terrain_species.render();
+            if (currentTime - lastTime >= 1.0f)
+            {
+                // If last `printf()` was more than 1 sec ago,
+                // `printf` and reset.
+                sprintf(ms_frame_text, "%.02f ms/frame; %.02f Hz", 1000.0f / ((double) nbFrames), 1000.0f / (1000.0f / ((double) nbFrames)));
+                ms_frame_text_ready = true;
+                nbFrames = 0;
+                lastTime += 1.0;
+            }
+            // Clear the screen.
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        terrain1.render();
+            terrain_species.render();
 
-        suzanne_species.render();
+            terrain1.render();
 
-        suzanne1.render();
-        suzanne2.render();
-        suzanne3.render();
-        suzanne4.render();
-        suzanne5.render();
+            suzanne_species.render();
 
-        glDisableVertexAttribArray(terrain_species.vertexPosition_modelspaceID);
-        glDisableVertexAttribArray(terrain_species.vertexUVID);
-        glDisableVertexAttribArray(terrain_species.vertexNormal_modelspaceID);
+            suzanne1.render();
+            suzanne2.render();
+            suzanne3.render();
+            suzanne4.render();
+            suzanne5.render();
 
-        PrintingStruct printing_struct;
-        printing_struct.screen_width = WINDOW_WIDTH;
-        printing_struct.screen_height = WINDOW_HEIGHT;
-        printing_struct.text_size = TEXT_SIZE;
-        printing_struct.font_size = FONT_SIZE;
-        printing_struct.char_font_texture_file_format = "bmp";
+            glDisableVertexAttribArray(terrain_species.vertexPosition_modelspaceID);
+            glDisableVertexAttribArray(terrain_species.vertexUVID);
+            glDisableVertexAttribArray(terrain_species.vertexNormal_modelspaceID);
 
-        char coordinates_text[256];
-        sprintf(coordinates_text, "(%.2f,%.2f,%.2f) (%.2f,%.2f)", position.x, position.y, position.z, horizontalAngle, verticalAngle);
+            PrintingStruct printing_struct;
+            printing_struct.screen_width = WINDOW_WIDTH;
+            printing_struct.screen_height = WINDOW_HEIGHT;
+            printing_struct.text_size = TEXT_SIZE;
+            printing_struct.font_size = FONT_SIZE;
+            printing_struct.char_font_texture_file_format = "bmp";
 
-        char time_text[256];
-        sprintf(time_text, "%.2f sec", glfwGetTime(), position.x, position.y, position.z);
+            char coordinates_text[256];
+            sprintf(coordinates_text, "(%.2f,%.2f,%.2f) (%.2f,%.2f)", position.x, position.y, position.z, horizontalAngle, verticalAngle);
 
-        printing_struct.x = 0;
-        printing_struct.y = 0;
-        printing_struct.text = coordinates_text;
-        printing_struct.horizontal_alignment = "left";
-        printing_struct.vertical_alignment = "bottom";
-        text2D::printText2D(printing_struct);
+            char time_text[256];
+            sprintf(time_text, "%.2f sec", glfwGetTime(), position.x, position.y, position.z);
 
-        printing_struct.x = 0;
-        printing_struct.y = WINDOW_HEIGHT;
-        printing_struct.text = time_text;
-        printing_struct.horizontal_alignment = "left";
-        printing_struct.vertical_alignment = "top";
-        text2D::printText2D(printing_struct);
+            printing_struct.x = 0;
+            printing_struct.y = 0;
+            printing_struct.text = coordinates_text;
+            printing_struct.horizontal_alignment = "left";
+            printing_struct.vertical_alignment = "bottom";
+            text2D::printText2D(printing_struct);
 
-        if (ms_frame_text_ready)
-        {
-            printing_struct.x = WINDOW_WIDTH;
+            printing_struct.x = 0;
             printing_struct.y = WINDOW_HEIGHT;
-            printing_struct.text = ms_frame_text;
-            printing_struct.horizontal_alignment = "right";
+            printing_struct.text = time_text;
+            printing_struct.horizontal_alignment = "left";
             printing_struct.vertical_alignment = "top";
             text2D::printText2D(printing_struct);
+
+            if (ms_frame_text_ready)
+            {
+                printing_struct.x = WINDOW_WIDTH;
+                printing_struct.y = WINDOW_HEIGHT;
+                printing_struct.text = ms_frame_text;
+                printing_struct.horizontal_alignment = "right";
+                printing_struct.vertical_alignment = "top";
+                text2D::printText2D(printing_struct);
+            }
+
+            // Swap buffers.
+            glfwSwapBuffers(window);
         }
 
-        // Swap buffers.
-        glfwSwapBuffers(window);
         glfwPollEvents();
     } // Check if the ESC key was pressed or the window was closed
     while ((glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS)
