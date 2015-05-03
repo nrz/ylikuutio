@@ -80,7 +80,7 @@ namespace model
         // Load the texture.
         if ((strcmp(this->char_texture_file_format, "bmp") == 0) || (strcmp(this->char_texture_file_format, "BMP") == 0))
         {
-            this->texture = texture::loadBMP_custom(this->char_texture_filename);
+            this->texture = texture::load_BMP_texture(this->char_texture_filename);
         }
         else if ((strcmp(this->char_texture_file_format, "dds") == 0) || (strcmp(this->char_texture_file_format, "DDS") == 0))
         {

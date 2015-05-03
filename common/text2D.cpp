@@ -40,7 +40,7 @@ namespace text2D
         // Initialize texture
         if ((strcmp(char_font_texture_file_format, "bmp") == 0) || (strcmp(char_font_texture_file_format, "BMP") == 0))
         {
-            Text2DTextureID = texture::loadBMP_custom(texturePath);
+            Text2DTextureID = texture::load_BMP_texture(texturePath);
         }
         else if ((strcmp(char_font_texture_file_format, "dds") == 0) || (strcmp(char_font_texture_file_format, "DDS") == 0))
         {
