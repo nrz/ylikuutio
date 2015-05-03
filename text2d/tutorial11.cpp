@@ -88,7 +88,7 @@ int main(void)
     GLuint vertexNormal_modelspaceID = glGetAttribLocation(programID, "vertexNormal_modelspace");
 
     // Load the texture
-    GLuint Texture = texture::loadDDS("uvmap.DDS");
+    GLuint Texture = texture::load_DDS_texture("uvmap.DDS");
 
     // Get a handle for our "myTextureSampler" uniform
     GLuint TextureID = glGetUniformLocation(programID, "myTextureSampler");
