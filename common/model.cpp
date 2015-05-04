@@ -228,6 +228,7 @@ namespace model
             // this->model_matrix = rotation_matrix * this->model_matrix;
             if (this->rotate_vector != glm::vec3(0.0f, 0.0f, 0.0f))
             {
+                // TODO: change the hardcoded rotation speed 0.1f to a proper rotation speed.
                 this->model_matrix = glm::rotate(this->model_matrix, 0.1f, this->rotate_vector);
             }
 
