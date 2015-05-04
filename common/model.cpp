@@ -8,6 +8,7 @@
 #endif
 
 #include <string>
+#include <algorithm> // std::find
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -286,5 +287,57 @@ namespace model
                 GL_UNSIGNED_INT,                   // type
                 (void*) 0                          // element array buffer offset
                 );
+    }
+
+    Node::Node(NodeStruct node_struct)
+    {
+        // constructor.
+        this->nodeID = node_struct.nodeID;
+        this->coordinate_vector = node_struct.coordinate_vector;
+        this->neighbor_nodeIDs = node_struct.neighbor_nodeIDs;
+
+        for (uint32_t link_i = 0; link_i < this->neighbor_nodeIDs.size(); link_i++)
+        {
+            this->create_link(this->neighbor_nodeIDs[link_i]);
+        }
+    }
+
+    Node::~Node()
+    {
+        // destructor.
+        for (uint32_t link_i = 0; link_i < this->neighbor_nodeIDs.size(); link_i++)
+        {
+            this->delete_link(this->neighbor_nodeIDs[link_i]);
+        }
+    }
+
+    void Node::create_link(uint32_t nodeID)
+    {
+        // this method creates a bidirectional link.
+        if (std::find(this->neighbor_nodeIDs.begin(), this->neighbor_nodeIDs.end(), nodeID) == this->neighbor_nodeIDs.end())
+        {
+            this->neighbor_nodeIDs.push_back(nodeID);
+        }
+    }
+
+    void Node::delete_link(uint32_t nodeID)
+    {
+        // this method deletes a bidirectional link.
+    }
+
+    Graph::Graph(GraphStruct graph_struct)
+    {
+        // constructor.
+        this->vertex_data = graph_struct.vertex_data;
+    }
+
+    void Graph::set_pointer(uint32_t nodeID, model::Node* node_pointer)
+    {
+        this->node_pointer_vector[nodeID] = node_pointer;
+    }
+
+    model::Node* Graph::get_pointer(uint32_t nodeID)
+    {
+        return this->node_pointer_vector[nodeID];
     }
 }

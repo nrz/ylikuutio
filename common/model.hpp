@@ -116,6 +116,46 @@ namespace model
 
             glm::mat4 MVP_matrix;                  // model view projection matrix.
     };
+
+    // class Node : public Graph
+    class Node
+    {
+        public:
+            // constructor.
+            Node(NodeStruct node_struct);
+
+            // destructor.
+            ~Node();
+
+        private:
+            uint32_t nodeID;
+            glm::vec3 coordinate_vector;
+            std::vector<uint32_t> neighbor_nodeIDs;
+
+            // this method creates a bidirectional link.
+            void create_link(uint32_t nodeID);
+
+            // this method deletes a bidirectional link.
+            void delete_link(uint32_t nodeID);
+    };
+
+    class Graph
+    {
+        public:
+            // constructor.
+            Graph(GraphStruct graph_struct);
+
+            // this method sets a node pointer.
+            void set_pointer(uint32_t nodeID, model::Node* node_pointer);
+
+            // this method gets a node pointer.
+            model::Node* get_pointer(uint32_t nodeID);
+
+            uint32_t *vertex_data;
+
+        private:
+            std::vector<model::Node*> node_pointer_vector;
+    };
 }
 
 #endif

@@ -36,6 +36,18 @@ typedef struct
 
 typedef struct
 {
+    uint32_t *vertex_data;
+} GraphStruct;
+
+typedef struct
+{
+    uint32_t nodeID;
+    glm::vec3 coordinate_vector;
+    std::vector<uint32_t> neighbor_nodeIDs;
+} NodeStruct;
+
+typedef struct
+{
     glm::vec3 coordinate_vector;     // coordinate vector.
     GLfloat rotate_angle;            // rotate angle.
     glm::vec3 rotate_vector;         // rotate vector.
