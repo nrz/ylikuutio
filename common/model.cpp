@@ -135,6 +135,35 @@ namespace model
         this->lightID = glGetUniformLocation(this->programID, "LightPosition_worldspace");
 
         // Compute the graph of this object type.
+        //
+        // Characteristics of object type graphs:
+        // 1. Each object must be an undirected graph.
+        // 2. Each edge must be a link in the graph.
+        // 3. The faces of each object must form a closed surface. The only exception is the terrain object, which may have borders.
+        //
+        // Modifying object type graphs:
+        // 1. Translation of vertex does not require changes in any other nodes of the graph.
+        // 2. Adding a vertex always requires changes in some other nodes of the graph.
+        // 3. Deleting a vertex always requires deletion of edges from some other nodes of the graph.
+        // 4. Deleting a vertex or vertices usually also requires appropriate vertex additions. These changes are called 'complex modifications'.
+        //
+        // Adding a vertex or several vertices:
+        // 1. The new edges must be connected to the existing graph with appropriate links.
+        // 2. Each new face must be a triangle.
+        //
+        // Deleting a vertex or several vertices:
+        // 1. When a vertex or several vertices are deleted, their links must be deleted too.
+        // 2. If the vertex to be deleted is on the border of a [terrain] object, it can be deleted.
+        // 3. If the vertices that are neighbors to the vertex to be deleted form only triangeles, the vertex can be deleted without vertex additions.
+        // 4. Otherwise the vertex cannot be deleted without appropriate vertex and edge additions.
+        //
+        // Complex modifications:
+        // 1. In complex modifications one or more vertices and edges are deleted and one or more vertices and edges are added.
+        // 2. Complex modifications may also change the topology of the object (tunnels, arcs, etc.).
+        // 3. If a complex modification causes splitting the object in two or more pieces, each piece becomes a separate object.
+        // 4. If the splitted object is a terrain object, then the lowest vertex (any vertex with smallest y-coordinate) of each piece is searched and the
+        //    y-coordinates of these are compared. The piece with the smallest y-coordinate (lowest altitude) remains terrain, other pieces become
+        //    regular objects. The pieces that become regular objects will be subject to gravity the same way as any regular object.
     }
 
     void Species::render()
