@@ -1,0 +1,23 @@
+TEE-lista:
+Listaa tähän keskeneräiset asiat kiireellisyysjärjestyksessä kiireellisimmät ylös. Rasti ruutuun ja valmiit-osastolle kun on valmis.
+
+Maasto-ohjelman kehityksen kannalta välttämättömiä työvaiheita:
+[ ] Luo graafi maailman vertekseistä ja särmistä.
+[ ] Lisää maailman segmentointi.
+[ ] Lisää ray castingiä käyttävä toiminto verteksien valitsemiseen ja muokkaamiseen.
+[ ] Lisää verteksien muokkaaminen.
+[ ] Lisää painovoima.
+[ ] Lisää tekoälyoliot.
+[ ] Lisää Bigloo-tuki tekoälyolioiden ohjelmointiin (Bigloo Scheme).
+
+Vähemmän kiireellisiä:
+[ ] Lisää konsoli (aukeaa näppäimellä `).
+[ ] Lisää Bigloo-tuki konsoliin (Bigloo Scheme).
+[ ] Lisää tuki osittain läpinäkyvälle tekstille.
+[ ] Lisää tuki kolmiulotteiselle tekstille.
+[ ] Lisää tuki yli 3-ulotteisille kappaleille (projisoidaan `Object::render()`-metodissa 3-ulotteiseen avaruuteen).
+
+Valmiit:
+[x] Lisää testi-VBO, vaikka jonkinlainen partikkeliobjekti.
+[x] Määrittele objektiluokka.
+[x] Lisää tuki useille VBO:ille.
