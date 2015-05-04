@@ -36,7 +36,8 @@ typedef struct
 
 typedef struct
 {
-    glm::vec3 coordinate_vector;     // rotate vector.
+    glm::vec3 coordinate_vector;     // coordinate vector.
+    GLfloat rotate_angle;            // rotate angle.
     glm::vec3 rotate_vector;         // rotate vector.
     glm::vec3 translate_vector;      // translate vector.
     glm::mat4 model_matrix;          // model matrix.

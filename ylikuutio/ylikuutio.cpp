@@ -161,6 +161,7 @@ int main(void)
     // Create terrain1, store it in `terrain1`.
     ObjectStruct terrain_object_struct1;
     terrain_object_struct1.coordinate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
+    terrain_object_struct1.rotate_angle = 0.0f;
     terrain_object_struct1.rotate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
     terrain_object_struct1.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
     model::Object terrain1 = model::Object(terrain_object_struct1);
@@ -183,6 +184,7 @@ int main(void)
     // Create suzanne1, store it in `suzanne1`.
     ObjectStruct suzanne_object_struct1;
     suzanne_object_struct1.coordinate_vector = glm::vec3(82.50f, 119.00f, 95.50f);
+    suzanne_object_struct1.rotate_angle = 0.10f;
     suzanne_object_struct1.rotate_vector = glm::vec3(1.0f, 0.0f, 0.0f);
     suzanne_object_struct1.translate_vector = glm::vec3(1.0f, 0.0f, 0.0f);
     model::Object suzanne1 = model::Object(suzanne_object_struct1);
@@ -190,6 +192,7 @@ int main(void)
 
     ObjectStruct suzanne_object_struct2;
     suzanne_object_struct2.coordinate_vector = glm::vec3(112.90f, 113.90f, 75.50f);
+    suzanne_object_struct2.rotate_angle = 0.20f;
     suzanne_object_struct2.rotate_vector = glm::vec3(1.0f, 0.0f, 0.0f);
     suzanne_object_struct2.translate_vector = glm::vec3(0.0f, 1.0f, 0.0f);
     model::Object suzanne2 = model::Object(suzanne_object_struct2);
@@ -197,6 +200,7 @@ int main(void)
 
     ObjectStruct suzanne_object_struct3;
     suzanne_object_struct3.coordinate_vector = glm::vec3(126.90f, 162.90f, 103.00f);
+    suzanne_object_struct3.rotate_angle = 0.05f;
     suzanne_object_struct3.rotate_vector = glm::vec3(1.0f, 0.0f, 0.0f);
     suzanne_object_struct3.translate_vector = glm::vec3(0.0f, 0.0f, 1.0f);
     model::Object suzanne3 = model::Object(suzanne_object_struct3);
@@ -204,6 +208,7 @@ int main(void)
 
     ObjectStruct suzanne_object_struct4;
     suzanne_object_struct4.coordinate_vector = glm::vec3(96.00f, 130.00f, 109.00f);
+    suzanne_object_struct4.rotate_angle = 0.15f;
     suzanne_object_struct4.rotate_vector = glm::vec3(1.0f, 0.0f, 0.0f);
     suzanne_object_struct4.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
     model::Object suzanne4 = model::Object(suzanne_object_struct4);
@@ -211,7 +216,8 @@ int main(void)
 
     ObjectStruct suzanne_object_struct5;
     suzanne_object_struct5.coordinate_vector = glm::vec3(103.00f, 105.00f, 109.00f);
-    suzanne_object_struct5.rotate_vector = glm::vec3(1.0f, 0.0f, 0.0f);
+    suzanne_object_struct5.rotate_angle = 0.03f;
+    suzanne_object_struct5.rotate_vector = glm::vec3(1.0f, 1.0f, 1.0f);
     suzanne_object_struct5.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
     model::Object suzanne5 = model::Object(suzanne_object_struct5);
     suzanne5.species_ptr = suzanne_species_ptr;

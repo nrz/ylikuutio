@@ -99,6 +99,7 @@ namespace model
 
             bool has_entered;
             glm::vec3 coordinate_vector;           // rotate vector.
+            GLfloat rotate_angle;                  // rotate angle.
             glm::vec3 rotate_vector;               // rotate vector.
             glm::vec3 translate_vector;            // translate vector.
             model::Species *species_ptr;           // pointer to the species.
