@@ -62,9 +62,9 @@ namespace model
 
             std::vector<glm::vec3> vertices;       // vertices of the object.
             std::vector<glm::vec2> UVs;            // UVs of the object.
-            std::vector<glm::vec3> normals;        // normals of the object. not used at the moment.
+            std::vector<glm::vec3> normals;        // normals of the object.
 
-            std::vector<GLuint> indices;
+            std::vector<GLuint> indices;           // the deleted vertices will be reused (though it is not required, if there's enough memory).
             std::vector<glm::vec3> indexed_vertices;
             std::vector<glm::vec2> indexed_UVs;
             std::vector<glm::vec3> indexed_normals;
