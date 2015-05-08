@@ -203,9 +203,9 @@ uint32_t output_triangle_vertices(
         std::vector<glm::vec3> &temp_vertices,
         std::vector<glm::vec2> &temp_UVs,
         std::vector<glm::vec3> &temp_normals,
-        uint32_t vertexIndex[3],
-        uint32_t uvIndex[3],
-        uint32_t normalIndex[3],
+        GLuint vertexIndex[3],
+        GLuint uvIndex[3],
+        GLuint normalIndex[3],
         std::vector<glm::vec3> &out_vertices,
         std::vector<glm::vec2> &out_UVs,
         std::vector<glm::vec3> &out_normals,
@@ -255,7 +255,7 @@ bool triangulate_quads(
 
 {
 
-    std::vector<uint32_t> vertexIndices, uvIndices, normalIndices;
+    std::vector<GLuint> vertexIndices, uvIndices, normalIndices;
     std::vector<glm::vec3> temp_vertices;
     std::vector<glm::vec2> temp_UVs;
     std::vector<glm::vec3> temp_normals;
@@ -278,13 +278,13 @@ bool triangulate_quads(
         for (uint32_t x = 0; x < image_width; x++)
         {
             // current x,z coordinates).
-            float y = (float) get_y(input_vertex_pointer, x, z, image_width);
+            GLfloat y = (GLfloat) get_y(input_vertex_pointer, x, z, image_width);
 
             // This corresponds to "v": specify one vertex.
             glm::vec3 vertex;
-            vertex.x = (float) x;
+            vertex.x = (GLfloat) x;
             vertex.y = y;
-            vertex.z = (float) z;
+            vertex.z = (GLfloat) z;
             temp_vertices.push_back(vertex);
 
             // This corresponds to "vt": specify texture coordinates of one vertex.
@@ -296,8 +296,8 @@ bool triangulate_quads(
 #endif
 
 #ifdef USE_REAL_TEXTURE_COORDINATES
-            uv.x = round((float) texture_x);
-            uv.y = round((float) texture_y);
+            uv.x = round((GLfloat) texture_x);
+            uv.y = round((GLfloat) texture_y);
 #endif
 
             temp_UVs.push_back(uv);
@@ -377,14 +377,14 @@ bool triangulate_quads(
                 uint32_t current_vertex_i = image_width * z + x;
 
                 // Interpolate y coordinate (altitude).
-                float y = ((float) SOUTHWEST_Y + SOUTHEAST_Y + NORTHWEST_Y + NORTHEAST_Y) / 4;
+                GLfloat y = ((GLfloat) SOUTHWEST_Y + SOUTHEAST_Y + NORTHWEST_Y + NORTHEAST_Y) / 4;
 
                 // Create a new vertex using bilinear interpolation.
                 // This corresponds to "v": specify one vertex.
                 glm::vec3 vertex;
-                vertex.x = (float) x - 0.5f;
+                vertex.x = (GLfloat) x - 0.5f;
                 vertex.y = y;
-                vertex.z = (float) z - 0.5f;
+                vertex.z = (GLfloat) z - 0.5f;
                 temp_vertices.push_back(vertex);
 
                 // This corresponds to "vt": specify texture coordinates of one vertex.
