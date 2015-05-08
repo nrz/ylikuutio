@@ -8,6 +8,12 @@
 #include <stdlib.h>
 #include <stdint.h> // uint32_t etc.
 
+// Include GLEW
+#ifndef __GL_GLEW_H_INCLUDED
+#define __GL_GLEW_H_INCLUDED
+#include <GL/glew.h>
+#endif
+
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
 #define __GLM_GLM_HPP_INCLUDED
@@ -182,13 +188,13 @@ glm::vec3 get_face_normal_for_SE_NW(
     return face_normal_data[face_normal_i];
 }
 
-uint32_t get_y(
-        uint32_t *vertex_data,
+GLuint get_y(
+        GLuint *vertex_data,
         uint32_t x,
         uint32_t z,
         uint32_t image_width)
 {
-    uint32_t *vertex_pointer;
+    GLuint *vertex_pointer;
     vertex_pointer = vertex_data + z * image_width + x;
     return *vertex_pointer;
 }
@@ -239,7 +245,7 @@ uint32_t output_triangle_vertices(
 }
 
 bool triangulate_quads(
-        uint32_t *input_vertex_pointer,
+        GLuint *input_vertex_pointer,
         uint32_t image_width,
         uint32_t image_height,
         std::vector<glm::vec3> &out_vertices,
@@ -1173,13 +1179,13 @@ namespace model
         // Everything is in memory now, the file can be closed
         fclose(file);
 
-        uint32_t *vertex_data;
-        vertex_data = new uint32_t [imageSize];
+        GLuint *vertex_data;
+        vertex_data = new GLuint [imageSize];
 
         uint8_t *image_pointer;
         image_pointer = image_data;
 
-        uint32_t *vertex_pointer;
+        GLuint *vertex_pointer;
         vertex_pointer = vertex_data;
 
         const char *char_color_channel = color_channel.c_str();
