@@ -42,6 +42,7 @@ typedef struct
 typedef struct
 {
     GLuint nodeID;
+    void* graph_pointer;
     glm::vec3 coordinate_vector;
     std::vector<uint32_t> neighbor_nodeIDs;
 } NodeStruct;

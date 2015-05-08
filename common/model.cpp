@@ -44,6 +44,197 @@
 
 namespace model
 {
+    // Characteristics of object type graphs:
+    // 1. Each object must be an undirected graph.
+    // 2. Each edge must be a link in the graph.
+    // 3. The faces of each object must form a closed surface. The only exception is the terrain object, which may have borders.
+    //
+    // Modifying object type graphs:
+    // 1. Translation of vertex does not require changes in any other nodes of the graph.
+    // 2. Adding a vertex always requires changes in some other nodes of the graph.
+    // 3. Deleting a vertex always requires deletion of edges from some other nodes of the graph.
+    // 4. Deleting a vertex or vertices usually also requires appropriate vertex additions. These changes are called 'complex modifications'.
+    //
+    // Adding a vertex or several vertices:
+    // 1. The new edges must be connected to the existing graph with appropriate links.
+    // 2. Each new face must be a triangle.
+    //
+    // Deleting a vertex or several vertices:
+    // 1. When a vertex or several vertices are deleted, their links must be deleted too (`Node` destructor handles this).
+    // 2. If the vertex to be deleted is on the border of a [terrain] object, it can be deleted.
+    // 3. If the vertices that are neighbors to the vertex to be deleted form only triangeles, the vertex can be deleted without vertex additions.
+    // 4. Otherwise the vertex cannot be deleted without appropriate vertex and edge additions.
+    //
+    // Complex modifications:
+    // 1. In complex modifications one or more vertices and edges are deleted and one or more vertices and edges are added.
+    // 2. Complex modifications may also change the topology of the object (tunnels, arcs, etc.).
+    // 3. If a complex modification causes splitting the object in two or more pieces, each piece becomes a separate object.
+    // 4. If the splitted object is a terrain object, then the lowest vertex (any vertex with smallest y-coordinate) of each piece is searched and the
+    //    y-coordinates of these are compared. The piece with the smallest y-coordinate (lowest altitude) remains terrain, other pieces become
+    //    regular objects. The pieces that become regular objects will be subject to gravity the same way as any regular object.
+
+    Graph::Graph(GraphStruct graph_struct)
+    {
+        // constructor.
+        this->vertex_data = graph_struct.vertex_data;
+    }
+
+    void Graph::set_pointer(GLuint nodeID, void* node_pointer)
+    {
+        this->node_pointer_vector[nodeID] = node_pointer;
+
+        if (node_pointer == NULL)
+        {
+            // OK, the pointer to be stored was NULL, then that nodeID is released to be used again.
+            this->free_nodeID_queue.push(nodeID);
+
+            if (nodeID == this->node_pointer_vector.size() - 1)
+            {
+                // OK, this is the biggest nodeID of all nodeID's of this graph.
+                // We can reduce the size of the node pointer vector at least by 1.
+                while ((node_pointer_vector.back() == NULL) && (!node_pointer_vector.empty()))
+                {
+                    // Reduce the size of node pointer vector by 1.
+                    node_pointer_vector.pop_back();
+                }
+            }
+        }
+    }
+
+    void* Graph::get_pointer(GLuint nodeID)
+    {
+        return this->node_pointer_vector[nodeID];
+    }
+
+    GLuint Graph::get_nodeID()
+    {
+        GLuint nodeID;
+
+        while (!this->free_nodeID_queue.empty())
+        {
+            // return the first (oldest) free nodeID.
+            nodeID = this->free_nodeID_queue.front();
+            this->free_nodeID_queue.pop();
+
+            // check that the node index does not exceed current node pointer vector.
+            if (nodeID < this->node_pointer_vector.size())
+            {
+                // OK, it does not exceed current node pointer vector.
+                return nodeID;
+            }
+        }
+
+        // OK, the queue is empty.
+        // A new node index must be created.
+        nodeID = this->node_pointer_vector.size();
+
+        // node pointer vector must also be extended with an appropriate NULL pointer.
+        this->node_pointer_vector.push_back(NULL);
+
+        return nodeID;
+    }
+
+    Graph::~Graph()
+    {
+        // destructor.
+
+        // destroy all nodes of this graph.
+        for (GLuint node_i = 0; node_i < this->node_pointer_vector.size(); node_i++)
+        {
+            model::Node *node_pointer;
+            node_pointer = static_cast<model::Node*>(this->node_pointer_vector[node_i]);
+
+            if (node_pointer != NULL)
+            {
+                // call destructor of each node.
+                node_pointer->~Node();
+            }
+        }
+    }
+
+    Node::Node(NodeStruct node_struct)
+    {
+        // constructor.
+        this->nodeID = node_struct.nodeID;
+        this->coordinate_vector = node_struct.coordinate_vector;
+        this->neighbor_nodeIDs = node_struct.neighbor_nodeIDs;
+        this->graph_pointer = static_cast<model::Graph*>(node_struct.graph_pointer);
+
+        // set pointer to this node.
+        this->graph_pointer->set_pointer(this->nodeID, this);
+
+        // create all unidirectional links from this node to neighbor nodes.
+        for (GLuint link_i = 0; link_i < this->neighbor_nodeIDs.size(); link_i++)
+        {
+            this->create_unidirectional_link(this->neighbor_nodeIDs[link_i]);
+        }
+    }
+
+    Node::~Node()
+    {
+        // destructor.
+
+        // delete all bidirectional links.
+        for (GLuint link_i = 0; link_i < this->neighbor_nodeIDs.size(); link_i++)
+        {
+            this->delete_bidirectional_link(this->neighbor_nodeIDs[link_i]);
+        }
+
+        // set pointer to this node to NULL.
+        this->graph_pointer->set_pointer(this->nodeID, NULL);
+    }
+
+    void Node::create_unidirectional_link(GLuint nodeID)
+    {
+        // this method creates an unidirectional link.
+
+        // check that a link not exist already.
+        if (std::find(this->neighbor_nodeIDs.begin(), this->neighbor_nodeIDs.end(), nodeID) == this->neighbor_nodeIDs.end())
+        {
+            // OK, it does not exist yet,
+            // so create a link from this node to destination node.
+            this->neighbor_nodeIDs.push_back(nodeID);
+        }
+        // an alternative: create a link from this node to destination node without checking its prior existence.
+        // this->neighbor_nodeIDs.push_back(nodeID);
+    }
+
+    void Node::create_bidirectional_link(GLuint nodeID)
+    {
+        // create a link from this node to destination node.
+        this->create_unidirectional_link(nodeID);
+
+        // create a link from destination node to this node.
+        static_cast<model::Node*>(this->graph_pointer->get_pointer(nodeID))->create_unidirectional_link(this->nodeID);
+    }
+
+    void Node::delete_unidirectional_link(GLuint nodeID)
+    {
+        // this method deletes an unidirectional link.
+        this->neighbor_nodeIDs.erase(std::remove(this->neighbor_nodeIDs.begin(), this->neighbor_nodeIDs.end(), nodeID), this->neighbor_nodeIDs.end());
+    }
+
+    void Node::delete_bidirectional_link(GLuint nodeID)
+    {
+        // this method deletes a bidirectional link.
+        this->delete_unidirectional_link(nodeID);
+
+        // delete a link from destination node to this node.
+        static_cast<model::Node*>(this->graph_pointer->get_pointer(nodeID))->delete_unidirectional_link(this->nodeID);
+    }
+
+    void Node::transfer_to_new_graph(model::Graph *new_graph_pointer)
+    {
+        // set pointer to this node to NULL.
+        this->graph_pointer->set_pointer(this->nodeID, NULL);
+
+        // set new graph pointer.
+        this->graph_pointer = new_graph_pointer;
+
+        // set pointer to this node.
+        this->graph_pointer->set_pointer(this->nodeID, this);
+    }
+
     Species::Species(SpeciesStruct species_struct)
     {
         // constructor.
@@ -136,35 +327,6 @@ namespace model
         this->lightID = glGetUniformLocation(this->programID, "LightPosition_worldspace");
 
         // Compute the graph of this object type.
-        //
-        // Characteristics of object type graphs:
-        // 1. Each object must be an undirected graph.
-        // 2. Each edge must be a link in the graph.
-        // 3. The faces of each object must form a closed surface. The only exception is the terrain object, which may have borders.
-        //
-        // Modifying object type graphs:
-        // 1. Translation of vertex does not require changes in any other nodes of the graph.
-        // 2. Adding a vertex always requires changes in some other nodes of the graph.
-        // 3. Deleting a vertex always requires deletion of edges from some other nodes of the graph.
-        // 4. Deleting a vertex or vertices usually also requires appropriate vertex additions. These changes are called 'complex modifications'.
-        //
-        // Adding a vertex or several vertices:
-        // 1. The new edges must be connected to the existing graph with appropriate links.
-        // 2. Each new face must be a triangle.
-        //
-        // Deleting a vertex or several vertices:
-        // 1. When a vertex or several vertices are deleted, their links must be deleted too.
-        // 2. If the vertex to be deleted is on the border of a [terrain] object, it can be deleted.
-        // 3. If the vertices that are neighbors to the vertex to be deleted form only triangeles, the vertex can be deleted without vertex additions.
-        // 4. Otherwise the vertex cannot be deleted without appropriate vertex and edge additions.
-        //
-        // Complex modifications:
-        // 1. In complex modifications one or more vertices and edges are deleted and one or more vertices and edges are added.
-        // 2. Complex modifications may also change the topology of the object (tunnels, arcs, etc.).
-        // 3. If a complex modification causes splitting the object in two or more pieces, each piece becomes a separate object.
-        // 4. If the splitted object is a terrain object, then the lowest vertex (any vertex with smallest y-coordinate) of each piece is searched and the
-        //    y-coordinates of these are compared. The piece with the smallest y-coordinate (lowest altitude) remains terrain, other pieces become
-        //    regular objects. The pieces that become regular objects will be subject to gravity the same way as any regular object.
     }
 
     void Species::render()
@@ -287,57 +449,5 @@ namespace model
                 GL_UNSIGNED_INT,                   // type
                 (void*) 0                          // element array buffer offset
                 );
-    }
-
-    Node::Node(NodeStruct node_struct)
-    {
-        // constructor.
-        this->nodeID = node_struct.nodeID;
-        this->coordinate_vector = node_struct.coordinate_vector;
-        this->neighbor_nodeIDs = node_struct.neighbor_nodeIDs;
-
-        for (uint32_t link_i = 0; link_i < this->neighbor_nodeIDs.size(); link_i++)
-        {
-            this->create_link(this->neighbor_nodeIDs[link_i]);
-        }
-    }
-
-    Node::~Node()
-    {
-        // destructor.
-        for (uint32_t link_i = 0; link_i < this->neighbor_nodeIDs.size(); link_i++)
-        {
-            this->delete_link(this->neighbor_nodeIDs[link_i]);
-        }
-    }
-
-    void Node::create_link(uint32_t nodeID)
-    {
-        // this method creates a bidirectional link.
-        if (std::find(this->neighbor_nodeIDs.begin(), this->neighbor_nodeIDs.end(), nodeID) == this->neighbor_nodeIDs.end())
-        {
-            this->neighbor_nodeIDs.push_back(nodeID);
-        }
-    }
-
-    void Node::delete_link(uint32_t nodeID)
-    {
-        // this method deletes a bidirectional link.
-    }
-
-    Graph::Graph(GraphStruct graph_struct)
-    {
-        // constructor.
-        this->vertex_data = graph_struct.vertex_data;
-    }
-
-    void Graph::set_pointer(uint32_t nodeID, model::Node* node_pointer)
-    {
-        this->node_pointer_vector[nodeID] = node_pointer;
-    }
-
-    model::Node* Graph::get_pointer(uint32_t nodeID)
-    {
-        return this->node_pointer_vector[nodeID];
     }
 }

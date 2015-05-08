@@ -20,6 +20,7 @@
 #endif
 
 #include <iostream>
+#include <queue> // std::queue
 #include <string.h>
 #include "globals.hpp"
 #include "shader.hpp"
@@ -28,6 +29,75 @@
 
 namespace model
 {
+    class Graph
+    {
+        public:
+            // constructor.
+            Graph(GraphStruct graph_struct);
+
+            // destructor.
+            ~Graph();
+
+            // this method sets a node pointer.
+            void set_pointer(GLuint nodeID, void* node_pointer);
+
+            // this method gets a node pointer.
+            void* get_pointer(GLuint nodeID);
+
+            // this method gets a node ID and removes it from the `free_nodeID_queue` if it was popped from the queue.
+            GLuint get_nodeID();
+
+            GLuint *vertex_data;
+
+        private:
+            std::vector<void*> node_pointer_vector;
+            std::queue<GLuint> free_nodeID_queue;
+    };
+
+    // `Node` is not a subclass of `Graph` because if the graph splits, node may be transferred to an another graph.
+    // Transferring a node to a new graph naturally requires appropriate reindexing of `nodeID`s.
+    // The graph in which a node belongs is accessible through `void* graph_pointer` (must be cast to `model::Graph*`).
+    class Node
+    {
+        public:
+            // constructor.
+            Node(NodeStruct node_struct);
+
+            // destructor.
+            ~Node();
+
+            // this method creates a bidirectional link.
+            // creating of bidirectional links is not possible before all nodes are created.
+            void create_bidirectional_link(GLuint nodeID);
+
+            // this method deletes a bidirectional link.
+            // deleting of links is not possible before all nodes are created.
+            void delete_bidirectional_link(GLuint nodeID);
+
+            // this method transfers this node to a new graph.
+            // links will not be changed.
+            // all nodes that are to be transferred must be transferred separately.
+            // before transfering any node to a new graph,
+            // all links to nodes that do not belong to the new graph of this node must be deleted with separate `delete_bidirectional_link` calls.
+            void transfer_to_new_graph(model::Graph *new_graph_pointer);
+
+            GLuint nodeID;
+            model::Graph *graph_pointer;
+
+            // nodes do not keep pointers to neighbor nodes, because all pointer values are not known yet before all nodes are created.
+            std::vector<GLuint> neighbor_nodeIDs;
+
+        private:
+            // this method creates an unidirectional link.
+            // in the constructor only unidirectional links can be created.
+            void create_unidirectional_link(GLuint nodeID);
+
+            // this method deletes an unidirectional link.
+            void delete_unidirectional_link(GLuint nodeID);
+
+            glm::vec3 coordinate_vector;
+    };
+
     class Species
     {
         public:
@@ -115,46 +185,6 @@ namespace model
             std::vector<glm::vec3> normals;        // normals of the object. not used at the moment.
 
             glm::mat4 MVP_matrix;                  // model view projection matrix.
-    };
-
-    // class Node : public Graph
-    class Node
-    {
-        public:
-            // constructor.
-            Node(NodeStruct node_struct);
-
-            // destructor.
-            ~Node();
-
-        private:
-            uint32_t nodeID;
-            glm::vec3 coordinate_vector;
-            std::vector<uint32_t> neighbor_nodeIDs;
-
-            // this method creates a bidirectional link.
-            void create_link(uint32_t nodeID);
-
-            // this method deletes a bidirectional link.
-            void delete_link(uint32_t nodeID);
-    };
-
-    class Graph
-    {
-        public:
-            // constructor.
-            Graph(GraphStruct graph_struct);
-
-            // this method sets a node pointer.
-            void set_pointer(uint32_t nodeID, model::Node* node_pointer);
-
-            // this method gets a node pointer.
-            model::Node* get_pointer(uint32_t nodeID);
-
-            uint32_t *vertex_data;
-
-        private:
-            std::vector<model::Node*> node_pointer_vector;
     };
 }
 
