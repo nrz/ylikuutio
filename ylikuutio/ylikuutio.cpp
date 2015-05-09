@@ -100,6 +100,8 @@ int main(void)
     // Initial Field of View
     initialFoV = 45.0f;
 
+    bool does_suzanne_species_exist = true;
+
     // Initialise GLFW
     if (!glfwInit())
     {
@@ -312,6 +314,12 @@ int main(void)
 
             // Swap buffers.
             glfwSwapBuffers(window);
+        }
+
+        if ((glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) && does_suzanne_species_exist)
+        {
+            delete suzanne_species;
+            does_suzanne_species_exist = false;
         }
 
         glfwPollEvents();
