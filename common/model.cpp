@@ -455,6 +455,9 @@ namespace model
         glDeleteBuffers(1, &this->elementbuffer);
         glDeleteProgram(this->programID);
         glDeleteTextures(1, &this->texture);
+
+        // set pointer to this species to NULL.
+        this->world_pointer->set_pointer(this->speciesID, NULL);
     }
 
     void Species::render()
