@@ -29,6 +29,33 @@
 
 namespace model
 {
+    class World
+    {
+        public:
+            // constructor.
+            World();
+
+            // destructor.
+            ~World();
+
+            void render();
+
+            // this method sets a species pointer.
+            void set_pointer(GLuint speciesID, void* species_pointer);
+
+            // this method gets a species pointer.
+            void* get_pointer(GLuint speciesID);
+
+            // this method gets a species ID and removes it from the `free_speciesID_queue` if it was popped from the queue.
+            GLuint get_speciesID();
+
+            GLuint *species_data;
+
+        private:
+            std::vector<void*> species_pointer_vector;
+            std::queue<GLuint> free_speciesID_queue;
+    };
+
     class Graph
     {
         public:
@@ -47,7 +74,7 @@ namespace model
             // this method gets a node ID and removes it from the `free_nodeID_queue` if it was popped from the queue.
             GLuint get_nodeID();
 
-            GLuint *vertex_data;
+            GLuint *node_data;
 
         private:
             std::vector<void*> node_pointer_vector;
@@ -108,6 +135,17 @@ namespace model
             // Then, render each individual object of this species.
             void render();
 
+            // this method sets a object pointer.
+            void set_pointer(GLuint objectID, void* object_pointer);
+
+            // this method gets a object pointer.
+            void* get_pointer(GLuint objectID);
+
+            // this method gets a object ID and removes it from the `free_objectID_queue` if it was popped from the queue.
+            GLuint get_objectID();
+
+            model::World *world_pointer;             // pointer to the world.
+
             std::string model_file_format;           // type of the model file, eg. `"bmp"`.
             std::string model_filename;              // filename of the model file.
             std::string texture_file_format;         // type of the model file, eg. `"bmp"`.
@@ -119,6 +157,7 @@ namespace model
             glm::vec3 lightPos;                      // light position.
 
             // The rest fields are created in the constructor.
+            GLuint speciesID;                      // species ID, returned by `model::World->get_speciesID()`.
             GLuint programID;                      // shaders' programID, returned by `LoadShaders`.
             GLuint lightID;                        // light ID, returned by `glGetUniformLocation(programID, "LightPosition_worldspace");`.
             GLuint texture;                        // Texture, returned by `load_DDS_texture` or `load_BMP_texture`.
@@ -146,7 +185,6 @@ namespace model
 
             glm::mat4 ProjectionMatrix;
             glm::mat4 ViewMatrix;
-
         private:
             const char *char_model_file_format;
             const char *char_model_filename;
@@ -155,6 +193,9 @@ namespace model
             const char *char_color_channel;
             const char *char_vertex_shader;
             const char *char_fragment_shader;
+
+            std::vector<void*> object_pointer_vector;
+            std::queue<GLuint> free_objectID_queue;
     };
 
     class Object
@@ -167,16 +208,19 @@ namespace model
             // Then, render each individual object.
             void render();
 
+            model::Species *species_pointer;       // pointer to the species.
+
+            GLuint objectID;                      // object ID, returned by `model::Species->get_objectID()`.
+
             bool has_entered;
             glm::vec3 coordinate_vector;           // rotate vector.
             GLfloat rotate_angle;                  // rotate angle.
             glm::vec3 rotate_vector;               // rotate vector.
             glm::vec3 translate_vector;            // translate vector.
-            model::Species *species_ptr;           // pointer to the species.
 
-            model::Species *shader_species_ptr;    // pointer to the shader species (not yet in use!).
-            model::Species *vertex_UV_species_ptr; // pointer to the vertex & UV species (not yet in use!).
-            model::Species *texture_species_ptr;   // pointer to the texture species (not yet in use!).
+            model::Species *shader_species_pointer;    // pointer to the shader species (not yet in use!).
+            model::Species *vertex_UV_species_pointer; // pointer to the vertex & UV species (not yet in use!).
+            model::Species *texture_species_pointer;   // pointer to the texture species (not yet in use!).
 
             // The rest fields are created in the constructor.
             glm::mat4 model_matrix;                // model matrix.

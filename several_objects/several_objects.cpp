@@ -118,8 +118,12 @@ int main(void)
     // Cull triangles which normal is not towards the camera
     glEnable(GL_CULL_FACE);
 
+    // Create the world, store it in `my_world`.
+    model::World my_world = model::World();
+
     // Create the species, store it in `suzanne_species`.
     SpeciesStruct species_struct;
+    species_struct.world_pointer = &my_world;
     species_struct.model_file_format = "obj";
     species_struct.model_filename = "suzanne.obj";
     species_struct.texture_file_format = "dds";
@@ -129,22 +133,19 @@ int main(void)
     species_struct.lightPos = glm::vec3(4, 4, 4);
     model::Species suzanne_species = model::Species(species_struct);
 
-    // create a species pointer.
-    model::Species *species_ptr = &suzanne_species;
-
     // Create suzanne1, store it in `suzanne1`.
     ObjectStruct object_struct1;
+    object_struct1.species_pointer = &suzanne_species;
     object_struct1.coordinate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
     object_struct1.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
     model::Object suzanne1 = model::Object(object_struct1);
-    suzanne1.species_ptr = species_ptr;
 
     // Create suzanne2, store it in `suzanne2`.
     ObjectStruct object_struct2;
+    object_struct2.species_pointer = &suzanne_species;
     object_struct2.coordinate_vector = glm::vec3(-1.0f, 0.0f, 0.0f);
     object_struct2.translate_vector = glm::vec3(0.1f, 0.0f, 0.0f);
     model::Object suzanne2 = model::Object(object_struct2);
-    suzanne2.species_ptr = species_ptr;
 
     // Initialize our little text library with the Holstein font
     const char *char_g_font_texture_filename = g_font_texture_filename.c_str();
@@ -179,11 +180,8 @@ int main(void)
             // Clear the screen
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-            suzanne_species.render();
-
-            suzanne1.render();
-
-            suzanne2.render();
+            // Render the world.
+            my_world.render();
 
             glDisableVertexAttribArray(suzanne_species.vertexPosition_modelspaceID);
             glDisableVertexAttribArray(suzanne_species.vertexUVID);

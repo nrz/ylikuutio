@@ -44,6 +44,86 @@
 
 namespace model
 {
+    World::World()
+    {
+        // constructor.
+    }
+
+    World::~World()
+    {
+        // destructor.
+    }
+
+    void World::render()
+    {
+        // this method renders the world by calling `render()` methods of each species.
+        for (GLuint species_i = 0; species_i < this->species_pointer_vector.size(); species_i++)
+        {
+            model::Species *species_pointer;
+            species_pointer = static_cast<model::Species*>(this->species_pointer_vector[species_i]);
+
+            if (species_pointer != NULL)
+            {
+                species_pointer->render();
+            }
+        }
+    }
+
+    void World::set_pointer(GLuint speciesID, void* species_pointer)
+    {
+        this->species_pointer_vector[speciesID] = species_pointer;
+
+        if (species_pointer == NULL)
+        {
+            // OK, the pointer to be stored was NULL, then that speciesID is released to be used again.
+            this->free_speciesID_queue.push(speciesID);
+
+            if (speciesID == this->species_pointer_vector.size() - 1)
+            {
+                // OK, this is the biggest speciesID of all speciesID's of this world.
+                // We can reduce the size of the species pointer vector at least by 1.
+                while ((species_pointer_vector.back() == NULL) && (!species_pointer_vector.empty()))
+                {
+                    // Reduce the size of species pointer vector by 1.
+                    species_pointer_vector.pop_back();
+                }
+            }
+        }
+    }
+
+    void* World::get_pointer(GLuint speciesID)
+    {
+        return this->species_pointer_vector[speciesID];
+    }
+
+    GLuint World::get_speciesID()
+    {
+        GLuint speciesID;
+
+        while (!this->free_speciesID_queue.empty())
+        {
+            // return the first (oldest) free speciesID.
+            speciesID = this->free_speciesID_queue.front();
+            this->free_speciesID_queue.pop();
+
+            // check that the species index does not exceed current species pointer vector.
+            if (speciesID < this->species_pointer_vector.size())
+            {
+                // OK, it does not exceed current species pointer vector.
+                return speciesID;
+            }
+        }
+
+        // OK, the queue is empty.
+        // A new species index must be created.
+        speciesID = this->species_pointer_vector.size();
+
+        // species pointer vector must also be extended with an appropriate NULL pointer.
+        this->species_pointer_vector.push_back(NULL);
+
+        return speciesID;
+    }
+
     // Characteristics of object type graphs:
     // 1. Each object must be an undirected graph.
     // 2. Each edge must be a link in the graph.
@@ -76,7 +156,7 @@ namespace model
     Graph::Graph(GraphStruct graph_struct)
     {
         // constructor.
-        this->vertex_data = graph_struct.vertex_data;
+        this->node_data = graph_struct.node_data;
     }
 
     void Graph::set_pointer(GLuint nodeID, void* node_pointer)
@@ -246,6 +326,7 @@ namespace model
         this->vertex_shader       = species_struct.vertex_shader;
         this->fragment_shader     = species_struct.fragment_shader;
         this->lightPos            = species_struct.lightPos;
+        this->world_pointer       = static_cast<model::World*>(species_struct.world_pointer);
 
         this->char_model_file_format   = this->model_file_format.c_str();
         this->char_model_filename      = this->model_filename.c_str();
@@ -255,6 +336,12 @@ namespace model
 
         this->char_vertex_shader       = this->vertex_shader.c_str();
         this->char_fragment_shader     = this->fragment_shader.c_str();
+
+        // get speciesID from the World.
+        this->speciesID = this->world_pointer->get_speciesID();
+
+        // set pointer to this species.
+        this->world_pointer->set_pointer(this->speciesID, this);
 
         // Create and compile our GLSL program from the shaders.
         this->programID = LoadShaders(this->char_vertex_shader, this->char_fragment_shader);
@@ -356,6 +443,73 @@ namespace model
 
         // 3rd attribute buffer : normals.
         glEnableVertexAttribArray(this->vertexNormal_modelspaceID);
+
+        // this method renders the species by calling `render()` methods of each object.
+        for (GLuint object_i = 0; object_i < this->object_pointer_vector.size(); object_i++)
+        {
+            model::Object *object_pointer;
+            object_pointer = static_cast<model::Object*>(this->object_pointer_vector[object_i]);
+
+            if (object_pointer != NULL)
+            {
+                object_pointer->render();
+            }
+        }
+    }
+
+    void Species::set_pointer(GLuint objectID, void* object_pointer)
+    {
+        this->object_pointer_vector[objectID] = object_pointer;
+
+        if (object_pointer == NULL)
+        {
+            // OK, the pointer to be stored was NULL, then that objectID is released to be used again.
+            this->free_objectID_queue.push(objectID);
+
+            if (objectID == this->object_pointer_vector.size() - 1)
+            {
+                // OK, this is the biggest objectID of all objectID's of this species.
+                // We can reduce the size of the object pointer vector at least by 1.
+                while ((object_pointer_vector.back() == NULL) && (!object_pointer_vector.empty()))
+                {
+                    // Reduce the size of object pointer vector by 1.
+                    object_pointer_vector.pop_back();
+                }
+            }
+        }
+    }
+
+    void* Species::get_pointer(GLuint objectID)
+    {
+        return this->object_pointer_vector[objectID];
+    }
+
+    GLuint Species::get_objectID()
+    {
+        GLuint objectID;
+
+        while (!this->free_objectID_queue.empty())
+        {
+            // return the first (oldest) free objectID.
+            objectID = this->free_objectID_queue.front();
+            this->free_objectID_queue.pop();
+
+            // check that the object index does not exceed current object pointer vector.
+            if (objectID < this->object_pointer_vector.size())
+            {
+                // OK, it does not exceed current object pointer vector.
+                return objectID;
+            }
+        }
+
+        // OK, the queue is empty.
+        // A new object index must be created.
+        objectID = this->object_pointer_vector.size();
+
+        // object pointer vector must also be extended with an appropriate NULL pointer.
+        this->object_pointer_vector.push_back(NULL);
+
+        return objectID;
     }
 
     Object::Object(ObjectStruct object_struct)
@@ -366,7 +520,13 @@ namespace model
         this->rotate_vector     = object_struct.rotate_vector;
         this->translate_vector  = object_struct.translate_vector;
         this->has_entered       = false;
-        this->species_ptr       = static_cast<model::Species*>(object_struct.species_ptr);
+        this->species_pointer       = static_cast<model::Species*>(object_struct.species_pointer);
+
+        // get objectID from the Species.
+        this->objectID = this->species_pointer->get_objectID();
+
+        // set pointer to this object.
+        this->species_pointer->set_pointer(this->objectID, this);
 
         bool model_loading_result = false;
     }
@@ -399,55 +559,55 @@ namespace model
             this->coordinate_vector = glm::vec3(model_matrix[0][0], model_matrix[1][1], model_matrix[2][2]);
         }
 
-        this->MVP_matrix = this->species_ptr->ProjectionMatrix * this->species_ptr->ViewMatrix * this->model_matrix;
+        this->MVP_matrix = this->species_pointer->ProjectionMatrix * this->species_pointer->ViewMatrix * this->model_matrix;
 
         // Send our transformation to the currently bound shader,
         // in the "MVP" uniform.
-        glUniformMatrix4fv(this->species_ptr->MatrixID, 1, GL_FALSE, &this->MVP_matrix[0][0]);
-        glUniformMatrix4fv(this->species_ptr->ModelMatrixID, 1, GL_FALSE, &this->model_matrix[0][0]);
+        glUniformMatrix4fv(this->species_pointer->MatrixID, 1, GL_FALSE, &this->MVP_matrix[0][0]);
+        glUniformMatrix4fv(this->species_pointer->ModelMatrixID, 1, GL_FALSE, &this->model_matrix[0][0]);
 
         // 1st attribute buffer : vertices.
-        glBindBuffer(GL_ARRAY_BUFFER, this->species_ptr->vertexbuffer);
+        glBindBuffer(GL_ARRAY_BUFFER, this->species_pointer->vertexbuffer);
         glVertexAttribPointer(
-                this->species_ptr->vertexPosition_modelspaceID, // The attribute we want to configure
-                3,                                              // size
-                GL_FLOAT,                                       // type
-                GL_FALSE,                                       // normalized?
-                0,                                              // stride
-                (void*) 0                                       // array buffer offset
+                this->species_pointer->vertexPosition_modelspaceID, // The attribute we want to configure
+                3,                                                  // size
+                GL_FLOAT,                                           // type
+                GL_FALSE,                                           // normalized?
+                0,                                                  // stride
+                (void*) 0                                           // array buffer offset
                 );
 
         // 2nd attribute buffer : UVs.
-        glBindBuffer(GL_ARRAY_BUFFER, this->species_ptr->uvbuffer);
+        glBindBuffer(GL_ARRAY_BUFFER, this->species_pointer->uvbuffer);
         glVertexAttribPointer(
-                this->species_ptr->vertexUVID, // The attribute we want to configure
-                2,                             // size : U+V => 2
-                GL_FLOAT,                      // type
-                GL_FALSE,                      // normalized?
-                0,                             // stride
-                (void*) 0                      // array buffer offset
+                this->species_pointer->vertexUVID, // The attribute we want to configure
+                2,                                 // size : U+V => 2
+                GL_FLOAT,                          // type
+                GL_FALSE,                          // normalized?
+                0,                                 // stride
+                (void*) 0                          // array buffer offset
                 );
 
         // 3rd attribute buffer : normals.
-        glBindBuffer(GL_ARRAY_BUFFER, this->species_ptr->normalbuffer);
+        glBindBuffer(GL_ARRAY_BUFFER, this->species_pointer->normalbuffer);
         glVertexAttribPointer(
-                this->species_ptr->vertexNormal_modelspaceID, // The attribute we want to configure
-                3,                                            // size
-                GL_FLOAT,                                     // type
-                GL_FALSE,                                     // normalized?
-                0,                                            // stride
-                (void*) 0                                     // array buffer offset
+                this->species_pointer->vertexNormal_modelspaceID, // The attribute we want to configure
+                3,                                                // size
+                GL_FLOAT,                                         // type
+                GL_FALSE,                                         // normalized?
+                0,                                                // stride
+                (void*) 0                                         // array buffer offset
                 );
 
         // Index buffer.
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->species_ptr->elementbuffer);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->species_pointer->elementbuffer);
 
         // Draw the triangles!
         glDrawElements(
-                GL_TRIANGLES,                      // mode
-                this->species_ptr->indices.size(), // count
-                GL_UNSIGNED_INT,                   // type
-                (void*) 0                          // element array buffer offset
+                GL_TRIANGLES,                          // mode
+                this->species_pointer->indices.size(), // count
+                GL_UNSIGNED_INT,                       // type
+                (void*) 0                              // element array buffer offset
                 );
     }
 }

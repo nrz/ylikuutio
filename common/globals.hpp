@@ -36,7 +36,7 @@ typedef struct
 
 typedef struct
 {
-    uint32_t *vertex_data;
+    uint32_t *node_data;
 } GraphStruct;
 
 typedef struct
@@ -55,11 +55,12 @@ typedef struct
     glm::vec3 translate_vector;      // translate vector.
     glm::mat4 model_matrix;          // model matrix.
     glm::mat4 MVP_matrix;            // model view projection matrix.
-    void *species_ptr;               // pointer to the species.
+    void *species_pointer;           // pointer to the species.
 } ObjectStruct;
 
 typedef struct
 {
+    void *world_pointer;                     // pointer to the world (draw list).
     std::string model_file_format;           // type of the model file, eg. `"bmp"`.
     std::string model_filename;              // filename of the model file.
     std::string texture_file_format;         // type of the model file, eg. `"bmp"`.
