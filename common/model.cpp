@@ -52,6 +52,19 @@ namespace model
     World::~World()
     {
         // destructor.
+
+        // destroy all species of this world.
+        for (GLuint species_i = 0; species_i < this->species_pointer_vector.size(); species_i++)
+        {
+            model::Species *species_pointer;
+            species_pointer = static_cast<model::Species*>(this->species_pointer_vector[species_i]);
+
+            if (species_pointer != NULL)
+            {
+                // call destructor of each species.
+                species_pointer->~Species();
+            }
+        }
     }
 
     void World::render()
@@ -416,6 +429,24 @@ namespace model
         // Compute the graph of this object type.
     }
 
+    Species::~Species()
+    {
+        // destructor.
+
+        // destroy all objects of this species.
+        for (GLuint object_i = 0; object_i < this->object_pointer_vector.size(); object_i++)
+        {
+            model::Object *object_pointer;
+            object_pointer = static_cast<model::Object*>(this->object_pointer_vector[object_i]);
+
+            if (object_pointer != NULL)
+            {
+                // call destructor of each object.
+                object_pointer->~Object();
+            }
+        }
+    }
+
     void Species::render()
     {
         // Compute the MVP matrix from keyboard and mouse input.
@@ -529,6 +560,14 @@ namespace model
         this->species_pointer->set_pointer(this->objectID, this);
 
         bool model_loading_result = false;
+    }
+
+    Object::~Object()
+    {
+        // destructor.
+
+        // set pointer to this object to NULL.
+        this->species_pointer->set_pointer(this->objectID, NULL);
     }
 
     void Object::render()

@@ -131,6 +131,9 @@ namespace model
             // constructor.
             Species(SpeciesStruct species_struct);
 
+            // destructor.
+            ~Species();
+
             // First, render the species.
             // Then, render each individual object of this species.
             void render();
@@ -203,6 +206,9 @@ namespace model
         public:
             // constructor.
             Object(ObjectStruct object_struct);
+
+            // destructor.
+            ~Object();
 
             // First, render the species.
             // Then, render each individual object.
