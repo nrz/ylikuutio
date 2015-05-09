@@ -564,7 +564,7 @@ namespace model
         this->rotate_vector     = object_struct.rotate_vector;
         this->translate_vector  = object_struct.translate_vector;
         this->has_entered       = false;
-        this->species_pointer       = static_cast<model::Species*>(object_struct.species_pointer);
+        this->species_pointer   = static_cast<model::Species*>(object_struct.species_pointer);
 
         // get objectID from the Species.
         this->objectID = this->species_pointer->get_objectID();
