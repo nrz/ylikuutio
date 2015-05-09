@@ -159,6 +159,10 @@ namespace model
             std::vector<ObjectStruct> object_vector; // vector of individual objects of this species.
             glm::vec3 lightPos;                      // light position.
 
+            void *shader_pointer;                    // pointer to the shader species (not yet in use!).
+            void *vertex_UV_pointer;                 // pointer to the vertex & UV species (not yet in use!).
+            void *texture_pointer;                   // pointer to the texture species (not yet in use!).
+
             // The rest fields are created in the constructor.
             GLuint speciesID;                      // species ID, returned by `model::World->get_speciesID()`.
             GLuint programID;                      // shaders' programID, returned by `LoadShaders`.
@@ -223,10 +227,6 @@ namespace model
             GLfloat rotate_angle;                  // rotate angle.
             glm::vec3 rotate_vector;               // rotate vector.
             glm::vec3 translate_vector;            // translate vector.
-
-            model::Species *shader_species_pointer;    // pointer to the shader species (not yet in use!).
-            model::Species *vertex_UV_species_pointer; // pointer to the vertex & UV species (not yet in use!).
-            model::Species *texture_species_pointer;   // pointer to the texture species (not yet in use!).
 
             // The rest fields are created in the constructor.
             glm::mat4 model_matrix;                // model matrix.
