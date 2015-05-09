@@ -52,6 +52,7 @@ namespace model
     World::~World()
     {
         // destructor.
+        std::cout << "This world will be destroyed.\n";
 
         // destroy all species of this world.
         for (GLuint species_i = 0; species_i < this->species_pointer_vector.size(); species_i++)
@@ -62,7 +63,7 @@ namespace model
             if (species_pointer != NULL)
             {
                 // call destructor of each species.
-                species_pointer->~Species();
+                delete species_pointer;
             }
         }
     }
@@ -240,7 +241,7 @@ namespace model
             if (node_pointer != NULL)
             {
                 // call destructor of each node.
-                node_pointer->~Node();
+                delete node_pointer;
             }
         }
     }
@@ -432,6 +433,7 @@ namespace model
     Species::~Species()
     {
         // destructor.
+        std::cout << "Species with speciesID " << this->speciesID << " will be destroyed.\n";
 
         // destroy all objects of this species.
         for (GLuint object_i = 0; object_i < this->object_pointer_vector.size(); object_i++)
@@ -442,9 +444,17 @@ namespace model
             if (object_pointer != NULL)
             {
                 // call destructor of each object.
-                object_pointer->~Object();
+                delete object_pointer;
             }
         }
+
+        // Cleanup VBO, shader and texture.
+        glDeleteBuffers(1, &this->vertexbuffer);
+        glDeleteBuffers(1, &this->uvbuffer);
+        glDeleteBuffers(1, &this->normalbuffer);
+        glDeleteBuffers(1, &this->elementbuffer);
+        glDeleteProgram(this->programID);
+        glDeleteTextures(1, &this->texture);
     }
 
     void Species::render()
@@ -565,6 +575,7 @@ namespace model
     Object::~Object()
     {
         // destructor.
+        std::cout << "Object with objectID " << this->objectID << " will be destroyed.\n";
 
         // set pointer to this object to NULL.
         this->species_pointer->set_pointer(this->objectID, NULL);

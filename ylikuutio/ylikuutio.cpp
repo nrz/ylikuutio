@@ -319,13 +319,7 @@ int main(void)
     while ((glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS)
             && (glfwWindowShouldClose(window) == 0));
 
-    // Cleanup VBO, shader and texture.
-    glDeleteBuffers(1, &terrain_species->vertexbuffer);
-    glDeleteBuffers(1, &terrain_species->uvbuffer);
-    glDeleteBuffers(1, &terrain_species->normalbuffer);
-    glDeleteBuffers(1, &terrain_species->elementbuffer);
-    glDeleteProgram(terrain_species->programID);
-    glDeleteTextures(1, &terrain_species->texture);
+    delete my_world;
 
     // Delete the text's VBO, the shader and the texture
     text2D::cleanupText2D();

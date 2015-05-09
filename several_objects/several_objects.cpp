@@ -214,13 +214,7 @@ int main(void)
     while (glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS &&
             glfwWindowShouldClose(window) == 0);
 
-    // Cleanup VBO and shader
-    glDeleteBuffers(1, &suzanne_species->vertexbuffer);
-    glDeleteBuffers(1, &suzanne_species->uvbuffer);
-    glDeleteBuffers(1, &suzanne_species->normalbuffer);
-    glDeleteBuffers(1, &suzanne_species->elementbuffer);
-    glDeleteProgram(suzanne_species->programID);
-    glDeleteTextures(1, &suzanne_species->texture);
+    delete my_world;
 
     // Delete the text's VBO, the shader and the texture
     text2D::cleanupText2D();
