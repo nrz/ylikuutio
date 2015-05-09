@@ -35,9 +35,6 @@ using namespace glm;
 
 #define PI 3.14159265359f
 
-#define INVERT_MOUSE
-
-
 glm::mat4 ViewMatrix;
 glm::mat4 ProjectionMatrix;
 
@@ -80,13 +77,16 @@ namespace controls
             // Compute new orientation
             horizontalAngle += mouseSpeed * GLfloat(WINDOW_WIDTH/2 - xpos);
 
-#ifdef INVERT_MOUSE
-            // invert mouse.
-            verticalAngle   -= mouseSpeed * GLfloat(WINDOW_HEIGHT/2 - ypos);
-#else
-            // don't invert mouse.
-            verticalAngle   += mouseSpeed * GLfloat(WINDOW_HEIGHT/2 - ypos);
-#endif
+            if (is_invert_mouse_in_use)
+            {
+                // invert mouse.
+                verticalAngle   -= mouseSpeed * GLfloat(WINDOW_HEIGHT/2 - ypos);
+            }
+            else
+            {
+                // don't invert mouse.
+                verticalAngle   += mouseSpeed * GLfloat(WINDOW_HEIGHT/2 - ypos);
+            }
         }
 
         // Direction : Spherical coordinates to Cartesian coordinates conversion
@@ -176,6 +176,25 @@ namespace controls
         }
 
         GLfloat FoV = initialFoV;// - 5 * glfwGetMouseWheel(); // Now GLFW 3 requires setting up a callback for this. It's a bit too complicated for this beginner's tutorial, so it's disabled instead.
+
+        if (glfwGetKey(window, GLFW_KEY_I) == GLFW_PRESS)
+        {
+            if (is_key_I_released)
+            {
+                if (is_invert_mouse_in_use)
+                {
+                    is_invert_mouse_in_use = false;
+                }
+                else
+                {
+                    is_invert_mouse_in_use = true;
+                }
+            }
+        }
+        else
+        {
+            is_key_I_released = true;
+        }
 
         // Projection matrix : 45° Field of View, 4:3 ratio, display range : 0.1 unit <-> 100 units
         ProjectionMatrix = glm::perspective(FoV, 4.0f / 3.0f, 0.1f, 500.0f);

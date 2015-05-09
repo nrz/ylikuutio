@@ -27,6 +27,8 @@ extern float horizontalAngle;
 extern float verticalAngle;
 extern float initialFoV;
 extern bool hasMouseEverMoved;
+extern bool is_invert_mouse_in_use;
+extern bool is_key_I_released;
 
 typedef struct
 {

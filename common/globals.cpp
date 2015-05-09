@@ -18,3 +18,5 @@ GLfloat verticalAngle;
 GLfloat initialFoV;
 
 bool hasMouseEverMoved;
+bool is_invert_mouse_in_use;
+bool is_key_I_released;
