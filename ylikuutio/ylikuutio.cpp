@@ -148,16 +148,21 @@ int main(void)
     // Create the world, store it in `my_world`.
     model::World *my_world = new model::World();
 
+    // Create the shader, store it in 'my_shader`.
+    ShaderStruct shader_struct;
+    shader_struct.world_pointer = my_world;
+    shader_struct.vertex_shader = "StandardShading.vertexshader";
+    shader_struct.fragment_shader = "StandardShading.fragmentshader";
+    model::Shader *my_shader = new model::Shader(shader_struct);
+
     // Create the species, store it in `terrain_species`.
     SpeciesStruct terrain_species_struct;
-    terrain_species_struct.world_pointer = my_world;
+    terrain_species_struct.shader_pointer = my_shader;
     terrain_species_struct.model_file_format = g_model_file_format;
     terrain_species_struct.model_filename = g_model_filename;
     terrain_species_struct.texture_file_format = g_texture_file_format;
     terrain_species_struct.color_channel = g_height_data_color_channel;
     terrain_species_struct.texture_filename = g_texture_filename;
-    terrain_species_struct.vertex_shader = "StandardShading.vertexshader";
-    terrain_species_struct.fragment_shader = "StandardShading.fragmentshader";
     terrain_species_struct.lightPos = glm::vec3(4, 4, 4);
     model::Species *terrain_species = new model::Species(terrain_species_struct);
 
@@ -171,13 +176,11 @@ int main(void)
     model::Object *terrain1 = new model::Object(terrain_object_struct1);
 
     SpeciesStruct suzanne_species_struct;
-    suzanne_species_struct.world_pointer = my_world;
+    suzanne_species_struct.shader_pointer = my_shader;
     suzanne_species_struct.model_file_format = "obj";
     suzanne_species_struct.model_filename = "suzanne.obj";
     suzanne_species_struct.texture_file_format = "dds";
     suzanne_species_struct.texture_filename = "uvmap.DDS";
-    suzanne_species_struct.vertex_shader = "StandardShading.vertexshader";
-    suzanne_species_struct.fragment_shader = "StandardShading.fragmentshader";
     suzanne_species_struct.lightPos = glm::vec3(4, 4, 4);
     suzanne_species_struct.is_world = false;
     model::Species *suzanne_species = new model::Species(suzanne_species_struct);

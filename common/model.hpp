@@ -38,6 +38,33 @@ namespace model
             // destructor.
             ~World();
 
+            // this method renders the entire world, one shader at a time.
+            void render();
+
+            // this method sets a shader pointer.
+            void set_pointer(GLuint shaderID, void* shader_pointer);
+
+            // this method gets a shader pointer.
+            void* get_pointer(GLuint shaderID);
+
+            // this method gets a shader ID and removes it from the `free_shaderID_queue` if it was popped from the queue.
+            GLuint get_shaderID();
+
+        private:
+            std::vector<void*> shader_pointer_vector;
+            std::queue<GLuint> free_shaderID_queue;
+    };
+
+    class Shader
+    {
+        public:
+            // constructor.
+            Shader(ShaderStruct shader_struct);
+
+            // destructor.
+            ~Shader();
+
+            // this method renders all species using this shader.
             void render();
 
             // this method sets a species pointer.
@@ -49,11 +76,21 @@ namespace model
             // this method gets a species ID and removes it from the `free_speciesID_queue` if it was popped from the queue.
             GLuint get_speciesID();
 
-            GLuint *species_data;
+            model::World *world_pointer;          // pointer to the world.
+
+            GLuint shaderID;                      // shader ID, returned by `model::World->get_shaderID()`.
+
+            std::string vertex_shader;            // filename of vertex shader.
+            std::string fragment_shader;          // filename of fragment shader.
+
+            GLuint programID;                     // shaders' programID, returned by `LoadShaders`.
 
         private:
             std::vector<void*> species_pointer_vector;
             std::queue<GLuint> free_speciesID_queue;
+
+            const char *char_vertex_shader;
+            const char *char_fragment_shader;
     };
 
     class Graph
@@ -134,8 +171,7 @@ namespace model
             // destructor.
             ~Species();
 
-            // First, render the species.
-            // Then, render each individual object of this species.
+            // this method renders all objects of this species.
             void render();
 
             // this method sets a object pointer.
@@ -147,25 +183,21 @@ namespace model
             // this method gets a object ID and removes it from the `free_objectID_queue` if it was popped from the queue.
             GLuint get_objectID();
 
-            model::World *world_pointer;             // pointer to the world.
+            model::Shader *shader_pointer;           // pointer to the shader.
 
             std::string model_file_format;           // type of the model file, eg. `"bmp"`.
             std::string model_filename;              // filename of the model file.
             std::string texture_file_format;         // type of the model file, eg. `"bmp"`.
             std::string texture_filename;            // filename of the model file.
             std::string color_channel;               // filename of fragment shader.
-            std::string vertex_shader;               // filename of vertex shader.
-            std::string fragment_shader;             // filename of fragment shader.
             std::vector<ObjectStruct> object_vector; // vector of individual objects of this species.
             glm::vec3 lightPos;                      // light position.
 
-            void *shader_pointer;                    // pointer to the shader species (not yet in use!).
             void *vertex_UV_pointer;                 // pointer to the vertex & UV species (not yet in use!).
             void *texture_pointer;                   // pointer to the texture species (not yet in use!).
 
             // The rest fields are created in the constructor.
             GLuint speciesID;                      // species ID, returned by `model::World->get_speciesID()`.
-            GLuint programID;                      // shaders' programID, returned by `LoadShaders`.
             GLuint lightID;                        // light ID, returned by `glGetUniformLocation(programID, "LightPosition_worldspace");`.
             GLuint texture;                        // Texture, returned by `load_DDS_texture` or `load_BMP_texture`.
             GLuint textureID;                      // texture ID, returned by `glGetUniformLocation(programID, "myTextureSampler");`.
@@ -198,8 +230,6 @@ namespace model
             const char *char_texture_file_format;
             const char *char_texture_filename;
             const char *char_color_channel;
-            const char *char_vertex_shader;
-            const char *char_fragment_shader;
 
             std::vector<void*> object_pointer_vector;
             std::queue<GLuint> free_objectID_queue;
@@ -214,8 +244,7 @@ namespace model
             // destructor.
             ~Object();
 
-            // First, render the species.
-            // Then, render each individual object.
+            // this method renders this object.
             void render();
 
             model::Species *species_pointer;       // pointer to the species.

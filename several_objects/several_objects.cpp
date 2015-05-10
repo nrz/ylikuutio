@@ -121,9 +121,16 @@ int main(void)
     // Create the world, store it in `my_world`.
     model::World *my_world = new model::World();
 
+    // Create the shader, store it in 'my_shader`.
+    ShaderStruct shader_struct;
+    shader_struct.world_pointer = my_world;
+    shader_struct.vertex_shader = "StandardShading.vertexshader";
+    shader_struct.fragment_shader = "StandardShading.fragmentshader";
+    model::Shader *my_shader = new model::Shader(shader_struct);
+
     // Create the species, store it in `suzanne_species`.
     SpeciesStruct species_struct;
-    species_struct.world_pointer = my_world;
+    species_struct.shader_pointer = my_shader;
     species_struct.model_file_format = "obj";
     species_struct.model_filename = "suzanne.obj";
     species_struct.texture_file_format = "dds";

@@ -38,6 +38,13 @@ typedef struct
 
 typedef struct
 {
+    void *world_pointer;                     // pointer to the world (draw list).
+    std::string vertex_shader;               // filename of vertex shader.
+    std::string fragment_shader;             // filename of fragment shader.
+} ShaderStruct;
+
+typedef struct
+{
     uint32_t *node_data;
 } GraphStruct;
 
@@ -62,7 +69,7 @@ typedef struct
 
 typedef struct
 {
-    void *world_pointer;                     // pointer to the world (draw list).
+    void *shader_pointer;                    // pointer to the shader object.
     std::string model_file_format;           // type of the model file, eg. `"bmp"`.
     std::string model_filename;              // filename of the model file.
     std::string texture_file_format;         // type of the model file, eg. `"bmp"`.
