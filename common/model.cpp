@@ -797,4 +797,15 @@ namespace model
                 (void*) 0                              // element array buffer offset
                 );
     }
+
+    void Object::switch_to_new_species(model::Species *new_species_pointer)
+    {
+        // set pointer to this object to NULL.
+        this->species_pointer->set_pointer(this->objectID, NULL);
+
+        this->species_pointer = new_species_pointer;
+
+        // get objectID from the Species.
+        this->objectID = this->species_pointer->get_objectID();
+    }
 }

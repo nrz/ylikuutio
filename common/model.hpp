@@ -253,6 +253,9 @@ namespace model
             // this method renders this object.
             void render();
 
+            // this method sets old species pointer to NULL and sets `species_pointer` according to the input.
+            void switch_to_new_species(model::Species *new_species_pointer);
+
             model::Species *species_pointer;       // pointer to the species.
 
             GLuint objectID;                      // object ID, returned by `model::Species->get_objectID()`.
