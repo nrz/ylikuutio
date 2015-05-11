@@ -76,6 +76,9 @@ namespace model
             // this method gets a species ID and removes it from the `free_speciesID_queue` if it was popped from the queue.
             GLuint get_speciesID();
 
+            // this method sets old world pointer to NULL and sets `world_pointer` according to the input.
+            void switch_to_new_world(model::World *new_world_pointer);
+
             model::World *world_pointer;          // pointer to the world.
 
             GLuint shaderID;                      // shader ID, returned by `model::World->get_shaderID()`.

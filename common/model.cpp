@@ -288,7 +288,16 @@ namespace model
         return speciesID;
     }
 
+    void Shader::switch_to_new_world(model::World *new_world_pointer)
+    {
+        // set pointer to this shader to NULL.
+        this->world_pointer->set_pointer(this->shaderID, NULL);
 
+        this->world_pointer = new_world_pointer;
+
+        // get shaderID from the World.
+        this->shaderID = this->world_pointer->get_shaderID();
+    }
 
     Graph::Graph(GraphStruct graph_struct)
     {
