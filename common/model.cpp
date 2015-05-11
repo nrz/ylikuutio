@@ -246,7 +246,7 @@ namespace model
             {
                 // OK, this is the biggest speciesID of all speciesID's of this shader.
                 // We can reduce the size of the species pointer vector at least by 1.
-                while ((species_pointer_vector.back() == NULL) && (!species_pointer_vector.empty()))
+                while ((!species_pointer_vector.empty()) && (species_pointer_vector.back() == NULL))
                 {
                     // Reduce the size of species pointer vector by 1.
                     species_pointer_vector.pop_back();
@@ -318,7 +318,7 @@ namespace model
             {
                 // OK, this is the biggest nodeID of all nodeID's of this graph.
                 // We can reduce the size of the node pointer vector at least by 1.
-                while ((node_pointer_vector.back() == NULL) && (!node_pointer_vector.empty()))
+                while ((!node_pointer_vector.empty()) && (node_pointer_vector.back() == NULL))
                 {
                     // Reduce the size of node pointer vector by 1.
                     node_pointer_vector.pop_back();
@@ -637,7 +637,7 @@ namespace model
             {
                 // OK, this is the biggest objectID of all objectID's of this species.
                 // We can reduce the size of the object pointer vector at least by 1.
-                while ((object_pointer_vector.back() == NULL) && (!object_pointer_vector.empty()))
+                while ((!object_pointer_vector.empty()) && (object_pointer_vector.back() == NULL))
                 {
                     // Reduce the size of object pointer vector by 1.
                     object_pointer_vector.pop_back();
