@@ -186,6 +186,9 @@ namespace model
             // this method gets a object ID and removes it from the `free_objectID_queue` if it was popped from the queue.
             GLuint get_objectID();
 
+            // this method sets old shader pointer to NULL and sets `shader_pointer` according to the input.
+            void switch_to_new_shader(model::Shader *new_shader_pointer);
+
             model::Shader *shader_pointer;           // pointer to the shader.
 
             std::string model_file_format;           // type of the model file, eg. `"bmp"`.

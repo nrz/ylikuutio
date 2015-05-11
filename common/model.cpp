@@ -679,6 +679,17 @@ namespace model
         return objectID;
     }
 
+    void Species::switch_to_new_shader(model::Shader *new_shader_pointer)
+    {
+        // set pointer to this species to NULL.
+        this->shader_pointer->set_pointer(this->speciesID, NULL);
+
+        this->shader_pointer = new_shader_pointer;
+
+        // get speciesID from the Shader.
+        this->speciesID = this->shader_pointer->get_speciesID();
+    }
+
     Object::Object(ObjectStruct object_struct)
     {
         // constructor.
