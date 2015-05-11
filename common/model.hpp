@@ -76,7 +76,7 @@ namespace model
             // this method gets a species ID and removes it from the `free_speciesID_queue` if it was popped from the queue.
             GLuint get_speciesID();
 
-            // this method sets old world pointer to NULL and sets `world_pointer` according to the input.
+            // this method sets pointer to this shader to NULL, sets `world_pointer` according to the input, and requests a new `shaderID` from the new world.
             void switch_to_new_world(model::World *new_world_pointer);
 
             model::World *world_pointer;          // pointer to the world.
@@ -186,7 +186,7 @@ namespace model
             // this method gets a object ID and removes it from the `free_objectID_queue` if it was popped from the queue.
             GLuint get_objectID();
 
-            // this method sets old shader pointer to NULL and sets `shader_pointer` according to the input.
+            // this method sets pointer to this species to NULL, sets `shader_pointer` according to the input, and requests a new `speciesID` from the new shader.
             void switch_to_new_shader(model::Shader *new_shader_pointer);
 
             model::Shader *shader_pointer;           // pointer to the shader.
@@ -253,7 +253,7 @@ namespace model
             // this method renders this object.
             void render();
 
-            // this method sets old species pointer to NULL and sets `species_pointer` according to the input.
+            // this method sets pointer to this object to NULL, sets `species_pointer` according to the input, and requests a new `objectID` from the new species.
             void switch_to_new_species(model::Species *new_species_pointer);
 
             model::Species *species_pointer;       // pointer to the species.
