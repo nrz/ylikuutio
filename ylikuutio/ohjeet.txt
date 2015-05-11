@@ -37,3 +37,10 @@ http://www.gamedev.net/page/resources/_/technical/game-programming/introduction-
 
 GPU Gems:
 http://http.developer.nvidia.com/GPUGems/gpugems_pref01.html
+
+Nykyajan 3U-peligrafiikan esimerkkejä:
+Far Cry 4:
+http://far-cry.ubi.com/en-GB/media/index.aspx
+
+The Elder Scrolls V - Skyrim:
+http://www.elderscrolls.com/skyrim/media/
