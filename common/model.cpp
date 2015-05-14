@@ -135,7 +135,7 @@ namespace model
             {
                 // OK, this is the biggest shaderID of all shaderID's of this world.
                 // We can reduce the size of the shader pointer vector at least by 1.
-                while ((shader_pointer_vector.back() == NULL) && (!shader_pointer_vector.empty()))
+                while ((!shader_pointer_vector.empty()) && (shader_pointer_vector.back() == NULL))
                 {
                     // Reduce the size of shader pointer vector by 1.
                     shader_pointer_vector.pop_back();
