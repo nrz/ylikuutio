@@ -449,6 +449,15 @@ namespace model
         static_cast<model::Node*>(this->graph_pointer->get_pointer(nodeID))->delete_unidirectional_link(this->nodeID);
     }
 
+    // Transfering node to a new graph is similar to `switch_to_new_world`, `switch_to_new_shader`, `switch_to_new_species`,
+    // but there is one important difference:
+    // nodes have references (links) to other nodes, whereas shaders, species, and objects do not.
+    // The easiest way would be to request new `nodeID` for each new node, but it is not that effective.
+    // Better option would be to change only those `nodeID`'s for which there would be duplicate `nodeID`'s.
+    // However, that may consume huge amounts of memory if a big object (eg. a terrain object) is split into several smaller objects.
+    // Thereofore a `nodeID_bias` will be defined for each graph, it will be used for reindexing.
+    // If `Graph::get_nodeID` would cause overflow (2^32 = 4 294 967 295), it will instead give smallest current `nodeID` of the graph and decrement `nodeID_bias` by 1.
+
     void Node::transfer_to_new_graph(model::Graph *new_graph_pointer)
     {
         // set pointer to this node to NULL.
