@@ -24,7 +24,7 @@
 #include <string.h>
 #include "globals.hpp"
 #include "shader.hpp"
-#include "bmploader.hpp"
+#include "heightmap_loader.hpp"
 #include "objloader.hpp"
 
 namespace model

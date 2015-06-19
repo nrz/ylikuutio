@@ -20,7 +20,7 @@
 #include <glm/glm.hpp>
 #endif
 
-#include "bmploader.hpp"
+#include "heightmap_loader.hpp"
 
 // #define USE_HEIGHT_AS_TEXTURE_COORDINATE
 #define USE_REAL_TEXTURE_COORDINATES
