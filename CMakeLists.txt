@@ -80,8 +80,8 @@ add_executable(several_objects
     common/controls.hpp
     common/texture.cpp
     common/texture.hpp
-    common/bmploader.cpp
-    common/bmploader.hpp
+    common/heightmap_loader.cpp
+    common/heightmap_loader.hpp
     common/objloader.cpp
     common/objloader.hpp
     common/model.cpp
@@ -119,8 +119,8 @@ add_executable(text2d
     common/controls.hpp
     common/texture.cpp
     common/texture.hpp
-    common/bmploader.cpp
-    common/bmploader.hpp
+    common/heightmap_loader.cpp
+    common/heightmap_loader.hpp
     common/objloader.cpp
     common/objloader.hpp
     common/model.cpp
@@ -160,8 +160,8 @@ add_executable(ylikuutio
     common/controls.hpp
     common/texture.cpp
     common/texture.hpp
-    common/bmploader.cpp
-    common/bmploader.hpp
+    common/heightmap_loader.cpp
+    common/heightmap_loader.hpp
     common/objloader.cpp
     common/objloader.hpp
     common/model.cpp
