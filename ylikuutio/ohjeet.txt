@@ -20,6 +20,31 @@ Tiedoston tallennus `*.bmp`-formaatissa (toistaiseksi pitää olla 24-bittinen B
   -> 24 bits (R8 G8 B8)
   -> Export
 
+Maapallon korkeusdataa:
+http://wiki.openstreetmap.org/wiki/SRTM
+http://e4ftl01.cr.usgs.gov/SRTM/SRTMGL3.003/
+
+Maapallon kasvillisuusdataa (43200 x 86400 pikseliä):
+http://landcover.usgs.gov/global_climatology.php
+
+Globaali säätietopalvelu (API):
+http://openweathermap.org/
+
+Kuun korkeusdataa: LRO Lola Elevation Model 118m (LDEM GDR) (46080 x 92160 pikseliä):
+http://astrogeology.usgs.gov/search/details/Moon/LRO/LOLA/Lunar_LRO_LOLA_Global_LDEM_118m_Mar2014/cub
+
+Mars Global Data Sets:
+http://www.mars.asu.edu/data/
+
+Mars Global Data Sets - MOLA Shaded Relief (46080 x 23040 pikseliä):
+http://www.mars.asu.edu/data/mola_color/
+
+HGT-tiedostoformaatti:
+http://gis.stackexchange.com/questions/43743/how-to-extract-elevation-from-hgt-file
+
+CUB-tiedostoformaatin muuntaminen esim. `gdal_translate`:lla:
+http://planetarygis.blogspot.fi/2014/06/using-isis-23-image-cubes-in-gis.html
+
 OpenGL-ohjeita:
 http://www.opengl-tutorial.org/
 http://ogldev.atspace.co.uk/
