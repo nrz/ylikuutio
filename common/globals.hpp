@@ -23,9 +23,9 @@
 #endif
 
 extern glm::vec3 position;
-extern float horizontalAngle;
-extern float verticalAngle;
-extern float initialFoV;
+extern GLfloat horizontalAngle;
+extern GLfloat verticalAngle;
+extern GLfloat initialFoV;
 extern GLfloat earth_radius;
 extern bool hasMouseEverMoved;
 extern bool is_invert_mouse_in_use;
