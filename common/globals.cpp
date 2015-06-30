@@ -22,3 +22,5 @@ GLfloat earth_radius;
 bool hasMouseEverMoved;
 bool is_invert_mouse_in_use;
 bool is_key_I_released;
+bool is_world_loaded; // no more than one world object can be loaded. TODO: check that no more than one world is loaded!
+bool is_world_spherical;
