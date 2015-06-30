@@ -1388,9 +1388,13 @@ namespace model
 
         // FIXME: this is a temporary testing code with a hardcoded start from the northwestern corner.
         // TODO: write a proper code for loading the appropriate chunks (based on real spherical coordinates) into VBOs!
-        for (uint32_t z = 0; z < HORIZONTAL_STEP_IN_METERS * image_height_in_use; z += HORIZONTAL_STEP_IN_METERS)
+        uint32_t z = 0;
+
+        while (z < HORIZONTAL_STEP_IN_METERS * image_height_in_use)
         {
-            for (uint32_t x = 0; x < HORIZONTAL_STEP_IN_METERS * image_width_in_use; x += HORIZONTAL_STEP_IN_METERS)
+            uint32_t x = 0;
+
+            while (x < HORIZONTAL_STEP_IN_METERS * image_width_in_use)
             {
                 uint32_t y;
 
@@ -1398,8 +1402,10 @@ namespace model
 
                 *vertex_pointer++ = y;
                 image_pointer += sizeof(int16_t); // 16 bits for each datum.
+                x += HORIZONTAL_STEP_IN_METERS;
             }
             image_pointer += sizeof(int16_t) * (true_image_width - image_width_in_use);
+            z += HORIZONTAL_STEP_IN_METERS;
         }
 
         std::string triangulation_type = "bilinear_interpolation";
