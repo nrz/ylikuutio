@@ -22,6 +22,17 @@
 #include <glm/glm.hpp>
 #endif
 
+#define WINDOW_WIDTH 1600
+#define WINDOW_HEIGHT 900
+
+#ifndef PI
+#define PI 3.14159265359f
+#endif
+
+#ifndef EARTH_RADIUS
+#define EARTH_RADIUS 6371000.0f
+#endif
+
 extern glm::vec3 position;
 extern glm::vec3 spherical_position;
 extern GLfloat horizontalAngle;

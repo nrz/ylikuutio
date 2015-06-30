@@ -30,12 +30,6 @@ using namespace glm;
 
 #include "controls.hpp"
 
-#define WINDOW_WIDTH 1600
-#define WINDOW_HEIGHT 900
-
-#define PI 3.14159265359f
-#define EARTH_RADIUS 6371000.0f
-
 glm::mat4 ViewMatrix;
 glm::mat4 ProjectionMatrix;
 

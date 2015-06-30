@@ -1383,14 +1383,17 @@ namespace model
         vertex_pointer = vertex_data;
 
         // start processing image_data.
+#define LATITUDE_STEP_FOR_1_ARC_DEGREE_IN_METERS ((PI * EARTH_RADIUS) / 180.0f)
+#define LATITUDE_STEP_FOR_3_ARC_SECONDS_IN_METERS (LATITUDE_STEP_FOR_1_ARC_DEGREE_IN_METERS / 20.0f)
 #define LONGITUDE_STEP_IN_METERS 90
         // 90 meters is for equator.
 
         // FIXME: this is a temporary testing code with a hardcoded start from the northwestern corner.
         // TODO: write a proper code for loading the appropriate chunks (based on real spherical coordinates) into VBOs!
+        uint32_t z_i = 0;
         uint32_t z = 0;
 
-        while (z < LONGITUDE_STEP_IN_METERS * image_height_in_use)
+        while (z_i < true_image_height)
         {
             uint32_t x = 0;
 
@@ -1405,7 +1408,8 @@ namespace model
                 x += LONGITUDE_STEP_IN_METERS;
             }
             image_pointer += sizeof(int16_t) * (true_image_width - image_width_in_use);
-            z += LONGITUDE_STEP_IN_METERS;
+            z += LATITUDE_STEP_FOR_3_ARC_SECONDS_IN_METERS;
+            z_i++;
         }
 
         std::string triangulation_type = "bilinear_interpolation";
