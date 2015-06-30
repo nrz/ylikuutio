@@ -107,4 +107,11 @@ typedef struct
     const char *vertical_alignment;
 } PrintingStruct;
 
+typedef struct
+{
+    double rho;
+    double theta;
+    double phi;
+} SphericalCoordinatesStruct;
+
 #endif
