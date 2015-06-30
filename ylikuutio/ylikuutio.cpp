@@ -92,7 +92,9 @@ std::string g_font_texture_filename = "Holstein.bmp";
 int main(void)
 {
     // Initial position : on +Z
-    position = glm::vec3(100, 100, 100);
+    // position = glm::vec3(100, 100, 100);
+    // position = glm::vec3(100, 3900, 100);
+    position = glm::vec3(100, 5000, 100);
     // Initial horizontal angle : toward -Z
     horizontalAngle = 0.0f;
     // Initial vertical angle : none
