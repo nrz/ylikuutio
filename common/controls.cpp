@@ -51,7 +51,8 @@ namespace controls
     }
 
     GLfloat speed = 5.0f; // 5 units / second
-    GLfloat turbo_factor = 3.0f; // 5 units / second
+    GLfloat turbo_factor = 5.0f;
+    GLfloat twin_turbo_factor = 100.0f;
     GLfloat mouseSpeed = 0.005f;
 
     void computeMatricesFromInputs()
@@ -109,7 +110,11 @@ namespace controls
         GLfloat temp_speed;
 
         // Turbo.
-        if ((glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS) || (glfwGetKey(window, GLFW_KEY_RIGHT_CONTROL) == GLFW_PRESS))
+        if ((glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS) && (glfwGetKey(window, GLFW_KEY_RIGHT_CONTROL) == GLFW_PRESS))
+        {
+            temp_speed = twin_turbo_factor * speed;
+        }
+        else if ((glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS) || (glfwGetKey(window, GLFW_KEY_RIGHT_CONTROL) == GLFW_PRESS))
         {
             temp_speed = turbo_factor * speed;
         }
