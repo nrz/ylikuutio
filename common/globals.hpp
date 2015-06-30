@@ -23,6 +23,7 @@
 #endif
 
 extern glm::vec3 position;
+extern glm::vec3 spherical_position;
 extern GLfloat horizontalAngle;
 extern GLfloat verticalAngle;
 extern GLfloat initialFoV;
