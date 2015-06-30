@@ -1399,9 +1399,8 @@ namespace model
 
             while (x < LONGITUDE_STEP_IN_METERS * image_width_in_use)
             {
-                uint32_t y;
-
-                y = ((((uint32_t) *image_pointer) << 8) | ((uint32_t) *(image_pointer + 1)));
+                GLfloat y;
+                y = ((((uint32_t) *image_pointer) << 8) | ((uint32_t) *(image_pointer + 1))) + 1.0f;
 
                 *vertex_pointer++ = y;
                 image_pointer += sizeof(int16_t); // 16 bits for each datum.
