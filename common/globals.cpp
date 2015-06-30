@@ -16,6 +16,7 @@ glm::vec3 position;
 GLfloat horizontalAngle;
 GLfloat verticalAngle;
 GLfloat initialFoV;
+GLfloat earth_radius;
 
 bool hasMouseEverMoved;
 bool is_invert_mouse_in_use;

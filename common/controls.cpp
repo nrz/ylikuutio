@@ -34,6 +34,7 @@ using namespace glm;
 #define WINDOW_HEIGHT 900
 
 #define PI 3.14159265359f
+#define EARTH_RADIUS 6371000.0f
 
 glm::mat4 ViewMatrix;
 glm::mat4 ProjectionMatrix;
@@ -200,6 +201,8 @@ namespace controls
         {
             is_key_I_released = true;
         }
+
+        earth_radius = EARTH_RADIUS;
 
         // Projection matrix : 45° Field of View, 4:3 ratio, display range : 0.1 unit <-> 100 units
         ProjectionMatrix = glm::perspective(FoV, 4.0f / 3.0f, 0.1f, 5000.0f);
