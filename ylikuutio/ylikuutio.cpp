@@ -100,7 +100,8 @@ int main(void)
     // Initial vertical angle : none
     verticalAngle = PI / 2;
     // Initial Field of View
-    initialFoV = 45.0f;
+    // initialFoV = 45.0f;
+    initialFoV = 60.0f;
 
     bool does_suzanne_species_exist = true;
 
