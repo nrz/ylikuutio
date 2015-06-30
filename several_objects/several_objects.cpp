@@ -204,6 +204,7 @@ int main(void)
             char coordinates_text[256];
             sprintf(coordinates_text, "(%.2f,%.2f,%.2f) (%.2f,%.2f)", position.x, position.y, position.z, horizontalAngle, verticalAngle);
 
+            // print cartesian coordinates on bottom left corner.
             printing_struct.x = 0;
             printing_struct.y = 0;
             printing_struct.text = coordinates_text;

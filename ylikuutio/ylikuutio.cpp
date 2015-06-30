@@ -291,6 +291,7 @@ int main(void)
             char time_text[256];
             sprintf(time_text, "%.2f sec", glfwGetTime(), position.x, position.y, position.z);
 
+            // print cartesian coordinates on bottom left corner.
             printing_struct.x = 0;
             printing_struct.y = 0;
             printing_struct.text = coordinates_text;
@@ -298,6 +299,7 @@ int main(void)
             printing_struct.vertical_alignment = "bottom";
             text2D::printText2D(printing_struct);
 
+            // print cartesian coordinates on top left corner.
             printing_struct.x = 0;
             printing_struct.y = WINDOW_HEIGHT;
             printing_struct.text = time_text;
@@ -307,6 +309,7 @@ int main(void)
 
             if (ms_frame_text_ready)
             {
+                // print frame rate data on top right corner.
                 printing_struct.x = WINDOW_WIDTH;
                 printing_struct.y = WINDOW_HEIGHT;
                 printing_struct.text = ms_frame_text;
