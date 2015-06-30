@@ -527,9 +527,18 @@ namespace model
         {
             model_loading_result = model::load_OBJ(this->char_model_filename, this->vertices, this->UVs, this->normals);
         }
+        else if (strcmp(this->char_model_file_format, "SRTM") == 0)
+        {
+            double current_latitude;
+            double current_longitude;
+            current_latitude = -16.50f;
+            current_longitude = -68.15f;
+
+            model_loading_result = model::load_SRTM_world(this->model_filename, current_latitude, current_longitude, this->vertices, this->UVs, this->normals);
+        }
         else if ((strcmp(this->char_model_file_format, "bmp") == 0) || (strcmp(this->char_model_file_format, "BMP") == 0))
         {
-            model_loading_result = model::load_BMP_world(this->char_model_filename, this->vertices, this->UVs, this->normals, this->color_channel);
+            model_loading_result = model::load_BMP_world(this->model_filename, this->vertices, this->UVs, this->normals, this->color_channel);
         }
         else
         {

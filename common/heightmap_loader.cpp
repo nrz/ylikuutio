@@ -7,6 +7,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h> // uint32_t etc.
+#include <sstream>  // stringstream etc.
+#include <iomanip>  // setw, setfill etc.
 
 // Include GLEW
 #ifndef __GL_GLEW_H_INCLUDED
@@ -20,7 +22,11 @@
 #include <glm/glm.hpp>
 #endif
 
+#include "globals.hpp"
 #include "heightmap_loader.hpp"
+
+#define SRTM_FILENAME_N_OF_LATITUDE_CHARS 2
+#define SRTM_FILENAME_N_OF_LONGITUDE_CHARS 3
 
 // #define USE_HEIGHT_AS_TEXTURE_COORDINATE
 #define USE_REAL_TEXTURE_COORDINATES
@@ -253,8 +259,8 @@ namespace model
             std::vector<glm::vec3> &out_vertices,
             std::vector<glm::vec2> &out_UVs,
             std::vector<glm::vec3> &out_normals,
-            std::string triangulation_type)
-
+            std::string triangulation_type,
+            GLfloat sphere_radius)
     {
 
         std::vector<GLuint> vertexIndices, uvIndices, normalIndices;
@@ -268,10 +274,11 @@ namespace model
         // Processing stages:
         // 1. Define the vertices for vertices loaded from file, `push_back` to `temp_vertices`.
         // 2. Interpolate the vertices between, using bilinear interpolation, `push_back` to `temp_vertices` and `temp_UVs`.
-        // 3. Compute the face normals, `push_back` to `face_normals`.
-        // 4. Compute the vertex normals for vertices loaded from file, `push_back` to `temp_normals`.
-        // 5. Compute the the vertices between, `push_back` to `temp_normals`.
-        // 6. Loop through all vertices and `model::output_triangle_vertices`.
+        // 3. Transform spherical coordinates to cartesian coordinates.
+        // 4. Compute the face normals, `push_back` to `face_normals`.
+        // 5. Compute the vertex normals for vertices loaded from file, `push_back` to `temp_normals`.
+        // 6. Compute the vertices between, `push_back` to `temp_normals`.
+        // 7. Loop through all vertices and `model::output_triangle_vertices`.
 
         // 1. Define the vertices for vertices loaded from file, `push_back` to `temp_vertices`.
         // First, define the temporary vertices in a double loop.
@@ -571,7 +578,53 @@ namespace model
             return false;
         }
 
-        // 3. Compute the face normals, `push_back` to `face_normals`.
+        // 3. Transform spherical coordinates to cartesian coordinates.
+        //
+        // Wikipedia:
+        // https://en.wikipedia.org/wiki/List_of_common_coordinate_transformations#From_spherical_coordinates
+        //
+        // x = rho * sin(theta) * cos(phi)
+        // y = rho * sin(theta) * sin(phi)
+        // z = rho * cos(theta)
+
+        if (!std::isnan(sphere_radius))
+        {
+            std::cout << "transforming spherical coordinates to cartesian coordinates.\n";
+            std::cout << "radius: " << sphere_radius << "\n";
+
+            // Loop through `temp_vertices` and transform all vertices from spherical coordinates to cartesian coordinates.
+            for (uint32_t temp_vertices_i = 0; temp_vertices_i < temp_vertices.size(); temp_vertices_i++)
+            {
+                glm::vec3 temp_vertex = temp_vertices[temp_vertices_i];
+                SphericalCoordinatesStruct spherical_vertex;
+                // spherical_vertex.rho = temp_vertex.x;
+                spherical_vertex.rho = temp_vertex.y;
+                // spherical_vertex.rho += sphere_radius;
+                spherical_vertex.theta = temp_vertex.x;
+                // spherical_vertex.theta += sphere_radius;
+                spherical_vertex.phi = temp_vertex.z;
+
+                /*
+                spherical_vertex.rho = temp_vertex.y;   // rho is altitude.
+                spherical_vertex.rho += sphere_radius;
+                spherical_vertex.theta = temp_vertex.z; // theta is latitude.
+                spherical_vertex.phi = temp_vertex.x;   // phi is longitude.
+                */
+
+                glm::vec3 cartesian_vertex;
+                cartesian_vertex.x = spherical_vertex.rho * sin(spherical_vertex.theta) * cos(spherical_vertex.phi);
+                cartesian_vertex.y = spherical_vertex.rho * sin(spherical_vertex.theta) * sin(spherical_vertex.phi);
+                cartesian_vertex.z = spherical_vertex.rho * cos(spherical_vertex.theta);
+                temp_vertices[temp_vertices_i] = cartesian_vertex;
+            }
+
+        }
+        else
+        {
+            std::cout << "no coordinate transformation is needed.\n";
+        }
+
+        // 4. Compute the face normals, `push_back` to `face_normals`.
         // Triangle order: S - W - N - E.
         //
         // First triangle: center, southeast, southwest.
@@ -667,7 +720,7 @@ namespace model
             }
         }
 
-        // 4. Compute the vertex normals for vertices loaded from file, `push_back` to `temp_normals`.
+        // 5. Compute the vertex normals for vertices loaded from file, `push_back` to `temp_normals`.
         std::cout << "computing vertex normals for vertices loaded from file.\n";
 
         if (is_bilinear_interpolation_in_use)
@@ -748,7 +801,7 @@ namespace model
             vertex_normal = SSW_FACE_NORMAL + WSW_FACE_NORMAL;
             temp_normals.push_back(vertex_normal);
 
-            // 5. Compute the the vertices between, `push_back` to `temp_normals`.
+            // 6. Compute the vertices between, `push_back` to `temp_normals`.
             std::cout << "computing vertex normals for interpolated vertices.\n";
 
             for (z = 1; z < image_height; z++)
@@ -839,7 +892,7 @@ namespace model
             temp_normals.push_back(vertex_normal);
         }
 
-        // 6. Loop through all vertices and `model::output_triangle_vertices`.
+        // 7. Loop through all vertices and `model::output_triangle_vertices`.
         std::cout << "defining output vertices, UVs and normals.\n";
 
         if (is_bilinear_interpolation_in_use)
@@ -1095,11 +1148,12 @@ namespace model
                 }
             }
         }
+
         return true;
     }
 
     bool load_BMP_world(
-            const char *image_path,
+            std::string image_path,
             std::vector<glm::vec3> &out_vertices,
             std::vector<glm::vec2> &out_UVs,
             std::vector<glm::vec3> &out_normals,
@@ -1116,7 +1170,8 @@ namespace model
         uint8_t *image_data;
 
         // Open the file
-        FILE *file = fopen(image_path,"rb");
+        const char *char_image_path = image_path.c_str();
+        FILE *file = fopen(char_image_path, "rb");
         if (!file)
         {
             std::cerr << image_path << " could not be opened.\n";
@@ -1230,7 +1285,136 @@ namespace model
         // std::string triangulation_type = "southeast_northwest_edges"; // "northwest_southeast_edges" is equivalent.
         // std::string triangulation_type = "southwest_northeast_edges"; // "northeast_southwest_edges" is equivalent.
 
-        bool triangulation_result = model::triangulate_quads(vertex_data, image_width, image_height, out_vertices, out_UVs, out_normals, triangulation_type);
+        bool triangulation_result = model::triangulate_quads(vertex_data, image_width, image_height, out_vertices, out_UVs, out_normals, triangulation_type, NAN);
+        return true;
+    }
+
+    bool load_SRTM_world(
+            std::string image_path,
+            double latitude,
+            double longitude,
+            std::vector<glm::vec3> &out_vertices,
+            std::vector<glm::vec2> &out_UVs,
+            std::vector<glm::vec3> &out_normals)
+    {
+        // For SRTM worlds, the right heightmap filename must be resolved first.
+        // The SRTM filenames contain always the southwest coordinate of the block.
+        // Each single SRTM file contains 1 degree of latitude and 1 degree of longiture. File size is 1201x1201.
+        // Precision is 3 arc-seconds in both latitude and longitude.
+
+        // In coordinates (`latitude` and `longitude`) negative values mean south for latitude and west for longitude,
+        // and positive value mean north for latitude and east for longitude.
+        // Therefore the SRTM heightmap filename can be resolved by rounding both latitude and longitude down (towards negative infinity).
+
+        int32_t int_latitude = floor(latitude);
+        int32_t int_longitude = floor(longitude);
+
+        std::string south_north_char;
+        std::string west_east_char;
+
+        if (int_latitude < 0)
+        {
+            // negative latitudes mean southern hemisphere.
+            south_north_char = "S";
+        }
+        else
+        {
+            // positive latitudes mean northern hemisphere.
+            south_north_char = "N";
+        }
+
+        if (int_longitude < 0)
+        {
+            // negative longitudes mean western hemisphere.
+            west_east_char = "W";
+        }
+        else
+        {
+            // positive longitudes mean eastern hemisphere.
+            west_east_char = "E";
+        }
+
+        std::stringstream latitude_stringstream;
+        std::stringstream longitude_stringstream;
+
+        latitude_stringstream << std::setw(SRTM_FILENAME_N_OF_LATITUDE_CHARS) << std::setfill('0') << abs(int_latitude);
+        latitude_stringstream << std::setw(SRTM_FILENAME_N_OF_LONGITUDE_CHARS) << std::setfill('0') << abs(int_longitude);
+
+        std::cout << "Loading SRTM file " << image_path << " ...\n";
+
+        uint32_t dataPos;
+        uint32_t imageSize;
+        uint32_t true_image_width, true_image_height, image_width_in_use, image_height_in_use;
+        // Actual 16-bit big-endian signed integer heightmap data.
+        uint8_t *image_data;
+
+        // Open the file
+        const char *char_image_path = image_path.c_str();
+        FILE *file = fopen(char_image_path, "rb");
+        if (!file)
+        {
+            std::cerr << image_path << " could not be opened.\n";
+            getchar();
+            return 0;
+        }
+
+        true_image_width  = 1201;
+        true_image_height = 1201;
+        image_width_in_use  = 30;
+        image_height_in_use = 30;
+        imageSize = sizeof(int16_t) * true_image_width * true_image_height;
+
+        // Create a buffer.
+        image_data = new uint8_t [imageSize];
+
+        // Read the actual image data from the file into the buffer.
+        fread(image_data, 1, imageSize, file);
+
+        // Everything is in memory now, the file can be closed
+        fclose(file);
+
+        GLuint *vertex_data;
+        vertex_data = new GLuint [imageSize];
+
+        uint8_t *image_pointer;
+        image_pointer = image_data;
+
+        GLuint *vertex_pointer;
+        vertex_pointer = vertex_data;
+
+        // start processing image_data.
+#define HORIZONTAL_STEP_IN_METERS 90
+        // 90 meters is for equator.
+
+        // FIXME: this is a temporary testing code with a hardcoded start from the northwestern corner.
+        // TODO: write a proper code for loading the appropriate chunks (based on real spherical coordinates) into VBOs!
+        for (uint32_t z = 0; z < HORIZONTAL_STEP_IN_METERS * image_height_in_use; z += HORIZONTAL_STEP_IN_METERS)
+        {
+            for (uint32_t x = 0; x < HORIZONTAL_STEP_IN_METERS * image_width_in_use; x += HORIZONTAL_STEP_IN_METERS)
+            {
+                uint32_t y;
+
+                y = ((((uint32_t) *image_pointer) << 8) | ((uint32_t) *(image_pointer + 1)));
+
+                *vertex_pointer++ = y;
+                image_pointer += sizeof(int16_t); // 16 bits for each datum.
+            }
+            image_pointer += sizeof(int16_t) * (true_image_width - image_width_in_use);
+        }
+
+        std::string triangulation_type = "bilinear_interpolation";
+        // std::string triangulation_type = "southeast_northwest_edges"; // "northwest_southeast_edges" is equivalent.
+        // std::string triangulation_type = "southwest_northeast_edges"; // "northeast_southwest_edges" is equivalent.
+
+        bool triangulation_result = model::triangulate_quads(
+                vertex_data,
+                image_width_in_use,
+                image_height_in_use,
+                out_vertices,
+                out_UVs,
+                out_normals,
+                triangulation_type,
+                earth_radius);
         return true;
     }
 }

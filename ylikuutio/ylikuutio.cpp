@@ -56,6 +56,8 @@ GLFWwindow* window;
 
 #define MAX_FPS 60
 
+#define TESTING_SPHERICAL_WORLD_IN_USE
+
 // model file format: obj/bmp/...
 // std::string g_model_file_format = "bmp";
 std::string g_model_file_format = "bmp";
@@ -158,16 +160,29 @@ int main(void)
     shader_struct.fragment_shader = "StandardShading.fragmentshader";
     model::Shader *my_shader = new model::Shader(shader_struct);
 
+#ifdef TESTING_SPHERICAL_WORLD_IN_USE
     // Create the species, store it in `terrain_species`.
-    SpeciesStruct terrain_species_struct;
-    terrain_species_struct.shader_pointer = my_shader;
-    terrain_species_struct.model_file_format = g_model_file_format;
-    terrain_species_struct.model_filename = g_model_filename;
-    terrain_species_struct.texture_file_format = g_texture_file_format;
-    terrain_species_struct.color_channel = g_height_data_color_channel;
-    terrain_species_struct.texture_filename = g_texture_filename;
-    terrain_species_struct.lightPos = glm::vec3(4, 4, 4);
-    model::Species *terrain_species = new model::Species(terrain_species_struct);
+    SpeciesStruct SRTM_terrain_species_struct;
+    SRTM_terrain_species_struct.shader_pointer = my_shader;
+    SRTM_terrain_species_struct.model_file_format = "SRTM";
+    SRTM_terrain_species_struct.model_filename = "/media/laatikko_4TB/satelliittikuvat/srtm/version3/data/S17W069.hgt";
+    SRTM_terrain_species_struct.texture_file_format = g_texture_file_format;
+    SRTM_terrain_species_struct.color_channel = g_height_data_color_channel;
+    SRTM_terrain_species_struct.texture_filename = g_texture_filename;
+    SRTM_terrain_species_struct.lightPos = glm::vec3(4, 4, 4);
+    model::Species *terrain_species = new model::Species(SRTM_terrain_species_struct);
+#else
+    // Create the species, store it in `terrain_species`.
+    SpeciesStruct bmp_terrain_species_struct;
+    bmp_terrain_species_struct.shader_pointer = my_shader;
+    bmp_terrain_species_struct.model_file_format = g_model_file_format;
+    bmp_terrain_species_struct.model_filename = g_model_filename;
+    bmp_terrain_species_struct.texture_file_format = g_texture_file_format;
+    bmp_terrain_species_struct.color_channel = g_height_data_color_channel;
+    bmp_terrain_species_struct.texture_filename = g_texture_filename;
+    bmp_terrain_species_struct.lightPos = glm::vec3(4, 4, 4);
+    model::Species *terrain_species = new model::Species(bmp_terrain_species_struct);
+#endif
 
     // Create terrain1, store it in `terrain1`.
     ObjectStruct terrain_object_struct1;
