@@ -22,8 +22,17 @@
 #include <glm/glm.hpp>
 #endif
 
+#ifndef ASPECT_RATIO
+#define ASPECT_RATIO (4/3)
+#endif
+
+#ifndef WINDOW_WIDTH
 #define WINDOW_WIDTH 1600
-#define WINDOW_HEIGHT 900
+#endif
+
+#ifndef WINDOW_HEIGHT
+#define WINDOW_HEIGHT (WINDOW_WIDTH / ASPECT_RATIO)
+#endif
 
 #ifndef PI
 #define PI 3.14159265359f
@@ -31,6 +40,18 @@
 
 #ifndef EARTH_RADIUS
 #define EARTH_RADIUS 6371000.0f
+#endif
+
+#ifndef TEXT_SIZE
+#define TEXT_SIZE 40
+#endif
+
+#ifndef FONT_SIZE
+#define FONT_SIZE 16
+#endif
+
+#ifndef MAX_FPS
+#define MAX_FPS 60
 #endif
 
 extern glm::vec3 position;

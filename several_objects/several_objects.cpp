@@ -42,14 +42,6 @@ GLFWwindow* window;
 #include "common/vboindexer.hpp"
 #include "common/text2D.hpp"
 
-#define WINDOW_WIDTH 1600
-#define WINDOW_HEIGHT 900
-
-#define TEXT_SIZE 40
-#define FONT_SIZE 16
-
-#define MAX_FPS 60
-
 // font texture file format: bmp/...
 std::string g_font_texture_file_format = "bmp";
 
