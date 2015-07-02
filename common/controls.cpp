@@ -47,7 +47,7 @@ namespace controls
 
     GLfloat speed = 5.0f; // 5 units / second
     GLfloat turbo_factor = 5.0f;
-    GLfloat twin_turbo_factor = 100.0f;
+    GLfloat twin_turbo_factor = 1000.0f;
     GLfloat mouseSpeed = 0.005f;
 
     void computeMatricesFromInputs()
