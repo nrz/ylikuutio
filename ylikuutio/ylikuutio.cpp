@@ -44,7 +44,7 @@ GLFWwindow* window;
 #include "common/vboindexer.hpp"
 #include "common/text2D.hpp"
 
-#define TESTING_SPHERICAL_WORLD_IN_USE
+// #define TESTING_SPHERICAL_WORLD_IN_USE
 
 // model file format: obj/bmp/...
 // std::string g_model_file_format = "bmp";
@@ -84,7 +84,12 @@ int main(void)
     // Initial position : on +Z
     // position = glm::vec3(100, 100, 100);
     // position = glm::vec3(100, 3900, 100);
-    position = glm::vec3(100.0f, 5000.0f, 100.0f);
+    // position = glm::vec3(100.0f, 5000.0f, 100.0f);
+#ifdef TESTING_SPHERICAL_WORLD_IN_USE
+    position = glm::vec3(100.0f, 5000.0f + EARTH_RADIUS, 100.0f);
+#else
+    position = glm::vec3(100.0f, 100.0f, 100.0f);
+#endif
     // Initial horizontal angle : toward -Z
     horizontalAngle = 0.0f;
     // Initial vertical angle : none
