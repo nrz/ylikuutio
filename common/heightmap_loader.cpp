@@ -1340,8 +1340,8 @@ namespace model
         int32_t filename_latitude = floor(southern_latitude);
         int32_t filename_longitude = floor(western_longitude);
 
-        GLfloat northern_latitude = southern_latitude + 1.0f;
-        GLfloat eastern_longitude = western_longitude + 1.0f;
+        double northern_latitude = southern_latitude + 1.0f;
+        double eastern_longitude = western_longitude + 1.0f;
 
         std::string south_north_char;
         std::string west_east_char;
