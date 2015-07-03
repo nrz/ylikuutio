@@ -1430,8 +1430,8 @@ namespace model
                 // y = ((((GLuint) *image_pointer) << 8) | ((GLuint) *(image_pointer + 1))) + (GLuint) EARTH_RADIUS;
                 y = ((((GLuint) *image_pointer) << 8) | ((GLuint) *(image_pointer + 1)));
 
-                *vertex_pointer++ = y;
                 image_pointer += sizeof(int16_t);
+                *vertex_pointer++ = y;
             }
             image_pointer += sizeof(int16_t) * (true_image_width - image_width_in_use);
         }
