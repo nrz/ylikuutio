@@ -529,12 +529,18 @@ namespace model
         }
         else if (strcmp(this->char_model_file_format, "SRTM") == 0)
         {
-            double current_latitude;
-            double current_longitude;
-            current_latitude = -16.50f;
-            current_longitude = -68.15f;
+            double current_latitude_in_degrees;
+            double current_longitude_in_degrees;
+            current_latitude_in_degrees = -16.50f;
+            current_longitude_in_degrees = -68.15f;
 
-            model_loading_result = model::load_SRTM_world(this->model_filename, current_latitude, current_longitude, this->vertices, this->UVs, this->normals);
+            model_loading_result = model::load_SRTM_world(
+                    this->model_filename,
+                    current_latitude_in_degrees,
+                    current_longitude_in_degrees,
+                    this->vertices,
+                    this->UVs,
+                    this->normals);
         }
         else if ((strcmp(this->char_model_file_format, "bmp") == 0) || (strcmp(this->char_model_file_format, "BMP") == 0))
         {
