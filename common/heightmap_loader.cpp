@@ -278,14 +278,13 @@ namespace model
         uint32_t texture_y = 0;
 
         // Processing stages:
-        // 1. Define the vertices for vertices loaded from file, `push_back` to `temp_vertices`.
-        // 2. Interpolate the vertices between, using bilinear interpolation, `push_back` to `temp_vertices` and `temp_UVs`.
+        // 1. Define the (GLfloat) vertices for vertices loaded from file, `push_back` to `temp_vertices`.
+        // 2. Interpolate the (GLfloat) vertices between, using bilinear interpolation, `push_back` to `temp_vertices` and `temp_UVs`.
         // 3. Transform spherical coordinates loaded from file (and computed this far as being in horizontal plane) to a curved surface.
         // 4. Transform interpolated coordinates (and computed this far as being in horizontal plane) to a curved surface.
         // 5. Compute the face normals, `push_back` to `face_normals`.
-        // 6. Compute the vertex normals for vertices loaded from file, `push_back` to `temp_normals`.
-        // 7. Compute the vertices between, `push_back` to `temp_normals`.
-        // 8. Loop through all vertices and `model::output_triangle_vertices`.
+        // 6. Compute the vertex normals for vertices loaded from file and for interpolated vertices (for `"bilinear_interpolation"`), `push_back` to `temp_normals`.
+        // 7. Loop through all vertices and `model::output_triangle_vertices`.
 
         // 1. Define the vertices for vertices loaded from file, `push_back` to `temp_vertices`.
         // First, define the temporary vertices in a double loop.
@@ -912,7 +911,7 @@ namespace model
             temp_normals.push_back(vertex_normal);
         }
 
-        // 8. Loop through all vertices and `model::output_triangle_vertices`.
+        // 7. Loop through all vertices and `model::output_triangle_vertices`.
         std::cout << "defining output vertices, UVs and normals.\n";
 
         if (is_bilinear_interpolation_in_use)
