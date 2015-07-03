@@ -12,8 +12,8 @@ namespace model
 
     bool load_SRTM_world(
             std::string image_path,
-            double latitude,
-            double longitude,
+            GLfloat southern_latitude,
+            GLfloat western_longitude,
             std::vector<glm::vec3> &out_vertices,
             std::vector<glm::vec2> &out_UVs,
             std::vector<glm::vec3> &out_normals);

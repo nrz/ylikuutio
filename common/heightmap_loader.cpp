@@ -1315,8 +1315,8 @@ namespace model
 
     bool load_SRTM_world(
             std::string image_path,
-            double latitude,
-            double longitude,
+            GLfloat southern_latitude,
+            GLfloat western_longitude,
             std::vector<glm::vec3> &out_vertices,
             std::vector<glm::vec2> &out_UVs,
             std::vector<glm::vec3> &out_normals)
@@ -1330,13 +1330,16 @@ namespace model
         // and positive value mean north for latitude and east for longitude.
         // Therefore the SRTM heightmap filename can be resolved by rounding both latitude and longitude down (towards negative infinity).
 
-        int32_t int_latitude = floor(latitude);
-        int32_t int_longitude = floor(longitude);
+        int32_t filename_latitude = floor(southern_latitude);
+        int32_t filename_longitude = floor(western_longitude);
+
+        GLfloat northern_latitude = southern_latitude + 1.0f;
+        GLfloat eastern_longitude = western_longitude + 1.0f;
 
         std::string south_north_char;
         std::string west_east_char;
 
-        if (int_latitude < 0)
+        if (filename_latitude < 0)
         {
             // negative latitudes mean southern hemisphere.
             south_north_char = "S";
@@ -1347,7 +1350,7 @@ namespace model
             south_north_char = "N";
         }
 
-        if (int_longitude < 0)
+        if (filename_longitude < 0)
         {
             // negative longitudes mean western hemisphere.
             west_east_char = "W";
@@ -1361,8 +1364,8 @@ namespace model
         std::stringstream latitude_stringstream;
         std::stringstream longitude_stringstream;
 
-        latitude_stringstream << std::setw(SRTM_FILENAME_N_OF_LATITUDE_CHARS) << std::setfill('0') << abs(int_latitude);
-        latitude_stringstream << std::setw(SRTM_FILENAME_N_OF_LONGITUDE_CHARS) << std::setfill('0') << abs(int_longitude);
+        latitude_stringstream << std::setw(SRTM_FILENAME_N_OF_LATITUDE_CHARS) << std::setfill('0') << abs(filename_latitude);
+        latitude_stringstream << std::setw(SRTM_FILENAME_N_OF_LONGITUDE_CHARS) << std::setfill('0') << abs(filename_longitude);
 
         std::cout << "Loading SRTM file " << image_path << " ...\n";
 
@@ -1407,37 +1410,34 @@ namespace model
         vertex_pointer = vertex_data;
 
         // start processing image_data.
-#define LATITUDE_STEP_FOR_1_ARC_DEGREE_IN_METERS ((PI * EARTH_RADIUS) / 180.0f)
-#define LATITUDE_STEP_FOR_3_ARC_SECONDS_IN_METERS (LATITUDE_STEP_FOR_1_ARC_DEGREE_IN_METERS / 20.0f)
-#define LONGITUDE_STEP_IN_METERS 90
         // 90 meters is for equator.
 
         // FIXME: this is a temporary testing code with a hardcoded start from the northwestern corner.
         // TODO: write a proper code for loading the appropriate chunks (based on real spherical coordinates) into VBOs!
-        uint32_t z_i = 0;
-        uint32_t z = 0;
 
-        while (z_i < true_image_height)
+        for (uint32_t z = 0; z < image_height_in_use; z++)
         {
-            uint32_t x = 0;
-
-            while (x < LONGITUDE_STEP_IN_METERS * image_width_in_use)
+            for (uint32_t x = 0; x < image_width_in_use; x++)
             {
-                GLfloat y;
-                y = ((((uint32_t) *image_pointer) << 8) | ((uint32_t) *(image_pointer + 1))) + 1.0f;
+                GLuint y;
+                // y = ((((GLuint) *image_pointer) << 8) | ((GLuint) *(image_pointer + 1))) + (GLuint) EARTH_RADIUS;
+                y = ((((GLuint) *image_pointer) << 8) | ((GLuint) *(image_pointer + 1)));
 
                 *vertex_pointer++ = y;
-                image_pointer += sizeof(int16_t); // 16 bits for each datum.
-                x += LONGITUDE_STEP_IN_METERS;
+                image_pointer += sizeof(int16_t);
             }
             image_pointer += sizeof(int16_t) * (true_image_width - image_width_in_use);
-            z += LATITUDE_STEP_FOR_3_ARC_SECONDS_IN_METERS;
-            z_i++;
         }
 
         std::string triangulation_type = "bilinear_interpolation";
         // std::string triangulation_type = "southeast_northwest_edges"; // "northwest_southeast_edges" is equivalent.
         // std::string triangulation_type = "southwest_northeast_edges"; // "northeast_southwest_edges" is equivalent.
+
+        SphericalWorldStruct spherical_world_struct;
+        spherical_world_struct.southern_latitude = (GLfloat) southern_latitude; // must be GLfloat, though SRTM data is split between full degrees.
+        spherical_world_struct.northern_latitude = (GLfloat) northern_latitude; // must be GLfloat, though SRTM data is split between full degrees.
+        spherical_world_struct.western_longitude = (GLfloat) western_longitude; // must be GLfloat, though SRTM data is split between full degrees.
+        spherical_world_struct.eastern_longitude = (GLfloat) eastern_longitude; // must be GLfloat, though SRTM data is split between full degrees.
 
         bool triangulation_result = model::triangulate_quads(
                 vertex_data,
