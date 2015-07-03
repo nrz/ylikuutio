@@ -31,13 +31,20 @@ if(INCLUDE_DISTRIB)
     add_subdirectory(distrib)
 endif(INCLUDE_DISTRIB)
 
+# include_directories(
+#     external/AntTweakBar-1.16/include/
+#     external/glfw-3.0.3/include/GLFW/
+#     external/glm-0.9.4.0/
+#     external/glew-1.9.0/include/
+#     external/assimp-3.0.1270/include/
+#     external/bullet-2.81-rev2613/src/
+#     .
+#     )
+
 include_directories(
-    external/AntTweakBar-1.16/include/
     external/glfw-3.0.3/include/GLFW/
     external/glm-0.9.4.0/
     external/glew-1.9.0/include/
-    external/assimp-3.0.1270/include/
-    external/bullet-2.81-rev2613/src/
     .
     )
 
