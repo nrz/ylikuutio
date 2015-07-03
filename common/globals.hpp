@@ -146,4 +146,12 @@ typedef struct
     double phi;
 } SphericalCoordinatesStruct;
 
+typedef struct
+{
+    GLfloat southern_latitude;
+    GLfloat northern_latitude;
+    GLfloat western_longitude;
+    GLfloat eastern_longitude;
+} SphericalWorldStruct;
+
 #endif
