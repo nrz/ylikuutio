@@ -1401,7 +1401,7 @@ namespace model
         fclose(file);
 
         GLuint *vertex_data;
-        vertex_data = new GLuint [imageSize];
+        vertex_data = new GLuint [image_width_in_use * image_height_in_use];
 
         uint8_t *image_pointer;
         image_pointer = image_data;
