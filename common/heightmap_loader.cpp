@@ -1,3 +1,8 @@
+#ifndef GLM_FORCE_RADIANS
+#define GLM_FORCE_RADIANS
+#define DEGREES_TO_RADIANS(x) (x * PI / 180.0f)
+#endif
+
 // Include standard headers
 #include <iostream>
 #include <string>
