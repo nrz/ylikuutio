@@ -582,7 +582,6 @@ namespace model
 
         if (!std::isnan(sphere_radius))
         {
-            std::cout << "transforming spherical coordinates to cartesian coordinates.\n";
             // 3. Transform spherical coordinates loaded from file (and computed this far as being in horizontal plane) to a curved surface.
             //
             // Wikipedia:
@@ -592,6 +591,7 @@ namespace model
             // y = rho * sin(theta) * sin(phi)
             // z = rho * cos(theta)
 
+            std::cout << "transforming spherical coordinates loaded from file to cartesian coordinates.\n";
             std::cout << "radius: " << sphere_radius << "\n";
 
             // Loop through `temp_vertices` and transform all vertices from spherical coordinates to cartesian coordinates.
@@ -630,6 +630,9 @@ namespace model
             // z = rho * cos(theta)
 
             // 4. Transform interpolated coordinates (and computed this far as being in horizontal plane) to a curved surface.
+
+            std::cout << "transforming interpolated spherical coordinates to cartesian coordinates.\n";
+            std::cout << "radius: " << sphere_radius << "\n";
         }
         else
         {
