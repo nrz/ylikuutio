@@ -1268,28 +1268,28 @@ namespace model
         const char *char_color_channel = color_channel.c_str();
 
         // start processing image_data.
-        for (uint32_t z = 0; z < image_height; z++)
+        for (GLuint z = 0; z < image_height; z++)
         {
-            for (uint32_t x = 0; x < image_width; x++)
+            for (GLuint x = 0; x < image_width; x++)
             {
-                uint32_t y;
+                GLuint y;
 
                 if (strcmp(char_color_channel, "red") == 0)
                 {
-                    y = (uint32_t) *image_pointer;       // y-coordinate is the red (R) value.
+                    y = (GLuint) *image_pointer;       // y-coordinate is the red (R) value.
                 }
                 else if (strcmp(char_color_channel, "green") == 0)
                 {
-                    y = (uint32_t) *(image_pointer + 1); // y-coordinate is the green (G) value.
+                    y = (GLuint) *(image_pointer + 1); // y-coordinate is the green (G) value.
                 }
                 else if (strcmp(char_color_channel, "green") == 0)
                 {
-                    y = (uint32_t) *(image_pointer + 2); // y-coordinate is the blue (B) value.
+                    y = (GLuint) *(image_pointer + 2); // y-coordinate is the blue (B) value.
                 }
                 // y-coordinate is the mean of R, G, & B.
                 else if ((strcmp(char_color_channel, "mean") == 0) || (strcmp(char_color_channel, "all") == 0))
                 {
-                    y = (((uint32_t) *image_pointer) + ((uint32_t) *(image_pointer + 1)) + ((uint32_t) *(image_pointer + 2))) / 3;
+                    y = (((GLuint) *image_pointer) + ((GLuint) *(image_pointer + 1)) + ((GLuint) *(image_pointer + 2))) / 3;
                 }
                 else
                 {
