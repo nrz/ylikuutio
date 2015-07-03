@@ -148,10 +148,10 @@ typedef struct
 
 typedef struct
 {
-    GLfloat southern_latitude;
-    GLfloat northern_latitude;
-    GLfloat western_longitude;
-    GLfloat eastern_longitude;
+    double southern_latitude;
+    double northern_latitude;
+    double western_longitude;
+    double eastern_longitude;
 } SphericalWorldStruct;
 
 #endif

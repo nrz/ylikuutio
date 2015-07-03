@@ -1441,10 +1441,10 @@ namespace model
         // std::string triangulation_type = "southwest_northeast_edges"; // "northeast_southwest_edges" is equivalent.
 
         SphericalWorldStruct spherical_world_struct;
-        spherical_world_struct.southern_latitude = (GLfloat) southern_latitude; // must be GLfloat, though SRTM data is split between full degrees.
-        spherical_world_struct.northern_latitude = (GLfloat) northern_latitude; // must be GLfloat, though SRTM data is split between full degrees.
-        spherical_world_struct.western_longitude = (GLfloat) western_longitude; // must be GLfloat, though SRTM data is split between full degrees.
-        spherical_world_struct.eastern_longitude = (GLfloat) eastern_longitude; // must be GLfloat, though SRTM data is split between full degrees.
+        spherical_world_struct.southern_latitude = (double) southern_latitude; // must be double, though SRTM data is split between full degrees.
+        spherical_world_struct.northern_latitude = (double) northern_latitude; // must be double, though SRTM data is split between full degrees.
+        spherical_world_struct.western_longitude = (double) western_longitude; // must be double, though SRTM data is split between full degrees.
+        spherical_world_struct.eastern_longitude = (double) eastern_longitude; // must be double, though SRTM data is split between full degrees.
 
         bool triangulation_result = model::triangulate_quads(
                 vertex_data,
