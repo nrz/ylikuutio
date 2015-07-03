@@ -44,7 +44,7 @@ GLFWwindow* window;
 #include "common/vboindexer.hpp"
 #include "common/text2D.hpp"
 
-// #define TESTING_SPHERICAL_WORLD_IN_USE
+#define TESTING_SPHERICAL_WORLD_IN_USE
 
 // model file format: obj/bmp/...
 // std::string g_model_file_format = "bmp";
