@@ -260,7 +260,8 @@ namespace model
             std::vector<glm::vec2> &out_UVs,
             std::vector<glm::vec3> &out_normals,
             std::string triangulation_type,
-            GLfloat sphere_radius)
+            GLfloat sphere_radius,
+            SphericalWorldStruct spherical_world_struct)
     {
 
         std::vector<GLuint> vertexIndices, uvIndices, normalIndices;
@@ -1296,7 +1297,16 @@ namespace model
         // std::string triangulation_type = "southeast_northwest_edges"; // "northwest_southeast_edges" is equivalent.
         // std::string triangulation_type = "southwest_northeast_edges"; // "northeast_southwest_edges" is equivalent.
 
-        bool triangulation_result = model::triangulate_quads(vertex_data, image_width, image_height, out_vertices, out_UVs, out_normals, triangulation_type, NAN);
+        bool triangulation_result = model::triangulate_quads(
+                vertex_data,
+                image_width,
+                image_height,
+                out_vertices,
+                out_UVs,
+                out_normals,
+                triangulation_type,
+                NAN,
+                SphericalWorldStruct()); // not used, but is needed in the function call.
         return true;
     }
 
@@ -1434,7 +1444,8 @@ namespace model
                 out_UVs,
                 out_normals,
                 triangulation_type,
-                earth_radius);
+                EARTH_RADIUS,
+                spherical_world_struct);
         return true;
     }
 }
