@@ -1394,8 +1394,8 @@ namespace model
 
         true_image_width  = 1201;
         true_image_height = 1201;
-        image_width_in_use  = 30;
-        image_height_in_use = 30;
+        image_width_in_use  = 200;
+        image_height_in_use = 200;
         imageSize = sizeof(int16_t) * true_image_width * true_image_height;
 
         // Create a buffer.
