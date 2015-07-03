@@ -1422,9 +1422,9 @@ namespace model
         // FIXME: this is a temporary testing code with a hardcoded start from the northwestern corner.
         // TODO: write a proper code for loading the appropriate chunks (based on real spherical coordinates) into VBOs!
 
-        for (uint32_t z = 0; z < image_height_in_use; z++)
+        for (GLuint z = 0; z < image_height_in_use; z++)
         {
-            for (uint32_t x = 0; x < image_width_in_use; x++)
+            for (GLuint x = 0; x < image_width_in_use; x++)
             {
                 GLuint y;
                 // y = ((((GLuint) *image_pointer) << 8) | ((GLuint) *(image_pointer + 1))) + (GLuint) EARTH_RADIUS;
