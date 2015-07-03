@@ -274,11 +274,12 @@ namespace model
         // Processing stages:
         // 1. Define the vertices for vertices loaded from file, `push_back` to `temp_vertices`.
         // 2. Interpolate the vertices between, using bilinear interpolation, `push_back` to `temp_vertices` and `temp_UVs`.
-        // 3. Transform spherical coordinates to cartesian coordinates.
-        // 4. Compute the face normals, `push_back` to `face_normals`.
-        // 5. Compute the vertex normals for vertices loaded from file, `push_back` to `temp_normals`.
-        // 6. Compute the vertices between, `push_back` to `temp_normals`.
-        // 7. Loop through all vertices and `model::output_triangle_vertices`.
+        // 3. Transform spherical coordinates loaded from file (and computed this far as being in horizontal plane) to a curved surface.
+        // 4. Transform interpolated coordinates (and computed this far as being in horizontal plane) to a curved surface.
+        // 5. Compute the face normals, `push_back` to `face_normals`.
+        // 6. Compute the vertex normals for vertices loaded from file, `push_back` to `temp_normals`.
+        // 7. Compute the vertices between, `push_back` to `temp_normals`.
+        // 8. Loop through all vertices and `model::output_triangle_vertices`.
 
         // 1. Define the vertices for vertices loaded from file, `push_back` to `temp_vertices`.
         // First, define the temporary vertices in a double loop.
@@ -578,18 +579,18 @@ namespace model
             return false;
         }
 
-        // 3. Transform spherical coordinates to cartesian coordinates.
-        //
-        // Wikipedia:
-        // https://en.wikipedia.org/wiki/List_of_common_coordinate_transformations#From_spherical_coordinates
-        //
-        // x = rho * sin(theta) * cos(phi)
-        // y = rho * sin(theta) * sin(phi)
-        // z = rho * cos(theta)
-
         if (!std::isnan(sphere_radius))
         {
             std::cout << "transforming spherical coordinates to cartesian coordinates.\n";
+            // 3. Transform spherical coordinates loaded from file (and computed this far as being in horizontal plane) to a curved surface.
+            //
+            // Wikipedia:
+            // https://en.wikipedia.org/wiki/List_of_common_coordinate_transformations#From_spherical_coordinates
+            //
+            // x = rho * sin(theta) * cos(phi)
+            // y = rho * sin(theta) * sin(phi)
+            // z = rho * cos(theta)
+
             std::cout << "radius: " << sphere_radius << "\n";
 
             // Loop through `temp_vertices` and transform all vertices from spherical coordinates to cartesian coordinates.
@@ -618,13 +619,23 @@ namespace model
                 temp_vertices[temp_vertices_i] = cartesian_vertex;
             }
 
+            // 4. Transform interpolated coordinates (and computed this far as being in horizontal plane) to a curved surface.
+            //
+            // Wikipedia:
+            // https://en.wikipedia.org/wiki/List_of_common_coordinate_transformations#From_spherical_coordinates
+            //
+            // x = rho * sin(theta) * cos(phi)
+            // y = rho * sin(theta) * sin(phi)
+            // z = rho * cos(theta)
+
+            // 4. Transform interpolated coordinates (and computed this far as being in horizontal plane) to a curved surface.
         }
         else
         {
             std::cout << "no coordinate transformation is needed.\n";
         }
 
-        // 4. Compute the face normals, `push_back` to `face_normals`.
+        // 5. Compute the face normals, `push_back` to `face_normals`.
         // Triangle order: S - W - N - E.
         //
         // First triangle: center, southeast, southwest.
@@ -720,7 +731,7 @@ namespace model
             }
         }
 
-        // 5. Compute the vertex normals for vertices loaded from file, `push_back` to `temp_normals`.
+        // 6. Compute the vertex normals for vertices loaded from file, `push_back` to `temp_normals`.
         std::cout << "computing vertex normals for vertices loaded from file.\n";
 
         if (is_bilinear_interpolation_in_use)
@@ -892,7 +903,7 @@ namespace model
             temp_normals.push_back(vertex_normal);
         }
 
-        // 7. Loop through all vertices and `model::output_triangle_vertices`.
+        // 8. Loop through all vertices and `model::output_triangle_vertices`.
         std::cout << "defining output vertices, UVs and normals.\n";
 
         if (is_bilinear_interpolation_in_use)
