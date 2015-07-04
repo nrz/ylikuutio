@@ -311,7 +311,8 @@ int main(void)
             printing_struct.vertical_alignment = "bottom";
             text2D::printText2D(printing_struct);
 
-            // print cartesian coordinates on top left corner.
+
+            // print time data on top left corner.
             printing_struct.x = 0;
             printing_struct.y = (GLuint) WINDOW_HEIGHT;
             printing_struct.text = time_text;
