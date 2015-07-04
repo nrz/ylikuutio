@@ -650,29 +650,32 @@ namespace model
                 }
             }
 
-            // 4. Transform interpolated coordinates (and computed this far as being in horizontal plane) to a curved surface.
-            //
-            // Wikipedia:
-            // https://en.wikipedia.org/wiki/List_of_common_coordinate_transformations#From_spherical_coordinates
-            //
-            // x = rho * sin(theta) * cos(phi)
-            // y = rho * sin(theta) * sin(phi)
-            // z = rho * cos(theta)
-
-            // 4. Transform interpolated coordinates (and computed this far as being in horizontal plane) to a curved surface.
-
-            std::cout << "transforming interpolated spherical coordinates to cartesian coordinates.\n";
-            std::cout << "radius: " << sphere_radius << "\n";
-
-            for (uint32_t z = 1; z < image_height; z++)
+            if (is_bilinear_interpolation_in_use)
             {
-                // loop through all latitudes.
+                // 4. Transform interpolated coordinates (and computed this far as being in horizontal plane) to a curved surface.
+                //
+                // Wikipedia:
+                // https://en.wikipedia.org/wiki/List_of_common_coordinate_transformations#From_spherical_coordinates
+                //
+                // x = rho * sin(theta) * cos(phi)
+                // y = rho * sin(theta) * sin(phi)
+                // z = rho * cos(theta)
 
-                double current_longitude = spherical_world_struct.western_longitude;
+                // 4. Transform interpolated coordinates (and computed this far as being in horizontal plane) to a curved surface.
 
-                for (uint32_t x = 1; x < image_width; x++)
+                std::cout << "transforming interpolated spherical coordinates to cartesian coordinates.\n";
+                std::cout << "radius: " << sphere_radius << "\n";
+
+                for (uint32_t z = 1; z < image_height; z++)
                 {
-                    temp_vertices[temp_vertices_i++] = transform_planar_world_vertex_into_cartesian_vertex(temp_vertices[temp_vertices_i], sphere_radius);
+                    // loop through all latitudes.
+
+                    double current_longitude = spherical_world_struct.western_longitude;
+
+                    for (uint32_t x = 1; x < image_width; x++)
+                    {
+                        temp_vertices[temp_vertices_i++] = transform_planar_world_vertex_into_cartesian_vertex(temp_vertices[temp_vertices_i], sphere_radius);
+                    }
                 }
             }
         }
