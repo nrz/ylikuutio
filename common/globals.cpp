@@ -17,7 +17,7 @@ SphericalCoordinatesStruct spherical_position;
 GLfloat horizontalAngle;
 GLfloat verticalAngle;
 GLfloat initialFoV;
-GLfloat earth_radius;
+double earth_radius;
 
 bool hasMouseEverMoved;
 bool is_invert_mouse_in_use;
