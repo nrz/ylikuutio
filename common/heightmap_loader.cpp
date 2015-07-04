@@ -638,9 +638,9 @@ namespace model
             GLuint temp_vertices_i = 0;
 
             // Loop through `temp_vertices` and transform all vertices from spherical coordinates to cartesian coordinates.
-            for (uint32_t temp_vertices_i = 0; temp_vertices_i < temp_vertices.size(); temp_vertices_i++)
+            while (temp_vertices_i < temp_vertices.size())
             {
-                temp_vertices[temp_vertices_i] = transform_planar_world_vertex_into_cartesian_vertex(temp_vertices[temp_vertices_i], sphere_radius);
+                temp_vertices[temp_vertices_i++] = transform_planar_world_vertex_into_cartesian_vertex(temp_vertices[temp_vertices_i], sphere_radius);
             }
 
             // 4. Transform interpolated coordinates (and computed this far as being in horizontal plane) to a curved surface.
