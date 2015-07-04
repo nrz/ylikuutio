@@ -620,13 +620,13 @@ namespace model
             std::cout << "transforming spherical coordinates loaded from file to cartesian coordinates.\n";
             std::cout << "radius: " << sphere_radius << "\n";
 
-            double current_latitude = spherical_world_struct.northern_latitude;
-
             double latitude_step_in_degrees = SRTM_LATITUDE_STEP_IN_DEGREES;
             std::cout << "latitude step in degrees: " << SRTM_LATITUDE_STEP_IN_DEGREES << "\n";
 
             double longitude_step_in_degrees = SRTM_LONGITUDE_STEP_IN_DEGREES;
             std::cout << "longitude step in degrees: " << SRTM_LONGITUDE_STEP_IN_DEGREES << "\n";
+
+            double current_latitude_in_degrees = spherical_world_struct.northern_latitude;
 
             GLuint temp_vertices_i = 0;
 
@@ -635,7 +635,7 @@ namespace model
             {
                 // loop through all latitudes.
 
-                double current_longitude = spherical_world_struct.western_longitude;
+                double current_longitude_in_degrees = spherical_world_struct.western_longitude;
 
                 for (uint32_t x = 0; x < image_width; x++)
                 {
