@@ -217,16 +217,12 @@ namespace model
             GLfloat sphere_radius)
     {
         SphericalCoordinatesStruct spherical_vertex;
-        // spherical_vertex.rho = planar_world_vertex.x;
-        spherical_vertex.rho = planar_world_vertex.y;
+        spherical_vertex.rho = planar_world_vertex.y;   // rho is altitude.
         // spherical_vertex.rho += sphere_radius;
         spherical_vertex.theta = planar_world_vertex.x;
-        // spherical_vertex.theta += sphere_radius;
         spherical_vertex.phi = planar_world_vertex.z;
 
         /*
-           spherical_vertex.rho = temp_vertex.y;   // rho is altitude.
-           spherical_vertex.rho += sphere_radius;
            spherical_vertex.theta = temp_vertex.z; // theta is latitude.
            spherical_vertex.phi = temp_vertex.x;   // phi is longitude.
            */
