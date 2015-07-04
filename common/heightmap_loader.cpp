@@ -212,6 +212,32 @@ namespace model
         return *vertex_pointer;
     }
 
+    glm::vec3 transform_planar_world_vertex_into_cartesian_vertex(
+            glm::vec3 planar_world_vertex,
+            GLfloat sphere_radius)
+    {
+        SphericalCoordinatesStruct spherical_vertex;
+        // spherical_vertex.rho = planar_world_vertex.x;
+        spherical_vertex.rho = planar_world_vertex.y;
+        // spherical_vertex.rho += sphere_radius;
+        spherical_vertex.theta = planar_world_vertex.x;
+        // spherical_vertex.theta += sphere_radius;
+        spherical_vertex.phi = planar_world_vertex.z;
+
+        /*
+           spherical_vertex.rho = temp_vertex.y;   // rho is altitude.
+           spherical_vertex.rho += sphere_radius;
+           spherical_vertex.theta = temp_vertex.z; // theta is latitude.
+           spherical_vertex.phi = temp_vertex.x;   // phi is longitude.
+           */
+
+        glm::vec3 cartesian_vertex;
+        cartesian_vertex.x = spherical_vertex.rho * sin(spherical_vertex.theta) * cos(spherical_vertex.phi);
+        cartesian_vertex.y = spherical_vertex.rho * sin(spherical_vertex.theta) * sin(spherical_vertex.phi);
+        cartesian_vertex.z = spherical_vertex.rho * cos(spherical_vertex.theta);
+        return cartesian_vertex;
+    };
+
     uint32_t output_triangle_vertices(
             std::vector<glm::vec3> &temp_vertices,
             std::vector<glm::vec2> &temp_UVs,
@@ -614,27 +640,7 @@ namespace model
             // Loop through `temp_vertices` and transform all vertices from spherical coordinates to cartesian coordinates.
             for (uint32_t temp_vertices_i = 0; temp_vertices_i < temp_vertices.size(); temp_vertices_i++)
             {
-                glm::vec3 planar_world_vertex = temp_vertices[temp_vertices_i];
-                SphericalCoordinatesStruct spherical_vertex;
-                // spherical_vertex.rho = planar_world_vertex.x;
-                spherical_vertex.rho = planar_world_vertex.y;
-                // spherical_vertex.rho += sphere_radius;
-                spherical_vertex.theta = planar_world_vertex.x;
-                // spherical_vertex.theta += sphere_radius;
-                spherical_vertex.phi = planar_world_vertex.z;
-
-                /*
-                spherical_vertex.rho = temp_vertex.y;   // rho is altitude.
-                spherical_vertex.rho += sphere_radius;
-                spherical_vertex.theta = temp_vertex.z; // theta is latitude.
-                spherical_vertex.phi = temp_vertex.x;   // phi is longitude.
-                */
-
-                glm::vec3 cartesian_vertex;
-                cartesian_vertex.x = spherical_vertex.rho * sin(spherical_vertex.theta) * cos(spherical_vertex.phi);
-                cartesian_vertex.y = spherical_vertex.rho * sin(spherical_vertex.theta) * sin(spherical_vertex.phi);
-                cartesian_vertex.z = spherical_vertex.rho * cos(spherical_vertex.theta);
-                temp_vertices[temp_vertices_i] = cartesian_vertex;
+                temp_vertices[temp_vertices_i] = transform_planar_world_vertex_into_cartesian_vertex(temp_vertices[temp_vertices_i], sphere_radius);
             }
 
             // 4. Transform interpolated coordinates (and computed this far as being in horizontal plane) to a curved surface.
