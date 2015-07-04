@@ -217,14 +217,14 @@ namespace model
             double sphere_radius)
     {
         SphericalCoordinatesStruct spherical_vertex;
-        spherical_vertex.rho = (GLfloat) planar_world_vertex.y + sphere_radius;       // rho is altitude.
-        spherical_vertex.theta = (GLfloat) DEGREES_TO_RADIANS(planar_world_vertex.x); // theta is longitude, the azimuthal angle.
-        spherical_vertex.phi = (GLfloat) DEGREES_TO_RADIANS(planar_world_vertex.z);   // phi is latitude, the polar angle.
+        spherical_vertex.rho = planar_world_vertex.y + sphere_radius;       // rho is altitude.
+        spherical_vertex.theta = DEGREES_TO_RADIANS(planar_world_vertex.x); // theta is longitude, the azimuthal angle.
+        spherical_vertex.phi = DEGREES_TO_RADIANS(planar_world_vertex.z);   // phi is latitude, the polar angle.
 
         glm::vec3 cartesian_vertex;
-        cartesian_vertex.x = spherical_vertex.rho * sin(spherical_vertex.theta) * cos(spherical_vertex.phi);
-        cartesian_vertex.y = spherical_vertex.rho * sin(spherical_vertex.theta) * sin(spherical_vertex.phi);
-        cartesian_vertex.z = spherical_vertex.rho * cos(spherical_vertex.theta);
+        cartesian_vertex.x = (GLfloat) (spherical_vertex.rho * sin(spherical_vertex.theta) * cos(spherical_vertex.phi));
+        cartesian_vertex.y = (GLfloat) (spherical_vertex.rho * sin(spherical_vertex.theta) * sin(spherical_vertex.phi));
+        cartesian_vertex.z = (GLfloat) (spherical_vertex.rho * cos(spherical_vertex.theta));
 
         // std::cout << "cartesian vertex, x: " << cartesian_vertex.x << ", y: " << cartesian_vertex.y << ", z: " << cartesian_vertex.z << "\n";
         return cartesian_vertex;
