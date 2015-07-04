@@ -168,7 +168,7 @@ int main(void)
     SpeciesStruct SRTM_terrain_species_struct;
     SRTM_terrain_species_struct.shader_pointer = my_shader;
     SRTM_terrain_species_struct.model_file_format = "SRTM";
-    SRTM_terrain_species_struct.model_filename = "/media/laatikko_4TB/satelliittikuvat/srtm/version3/data/S17W069.hgt";
+    SRTM_terrain_species_struct.model_filename = "/media/laatikko_4TB/satelliittikuvat/srtm/version3/data/";
     SRTM_terrain_species_struct.texture_file_format = g_texture_file_format;
     SRTM_terrain_species_struct.color_channel = g_height_data_color_channel;
     SRTM_terrain_species_struct.texture_filename = g_texture_filename;
