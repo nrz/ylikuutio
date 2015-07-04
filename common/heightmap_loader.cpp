@@ -614,14 +614,14 @@ namespace model
             // Loop through `temp_vertices` and transform all vertices from spherical coordinates to cartesian coordinates.
             for (uint32_t temp_vertices_i = 0; temp_vertices_i < temp_vertices.size(); temp_vertices_i++)
             {
-                glm::vec3 temp_vertex = temp_vertices[temp_vertices_i];
+                glm::vec3 planar_world_vertex = temp_vertices[temp_vertices_i];
                 SphericalCoordinatesStruct spherical_vertex;
-                // spherical_vertex.rho = temp_vertex.x;
-                spherical_vertex.rho = temp_vertex.y;
+                // spherical_vertex.rho = planar_world_vertex.x;
+                spherical_vertex.rho = planar_world_vertex.y;
                 // spherical_vertex.rho += sphere_radius;
-                spherical_vertex.theta = temp_vertex.x;
+                spherical_vertex.theta = planar_world_vertex.x;
                 // spherical_vertex.theta += sphere_radius;
-                spherical_vertex.phi = temp_vertex.z;
+                spherical_vertex.phi = planar_world_vertex.z;
 
                 /*
                 spherical_vertex.rho = temp_vertex.y;   // rho is altitude.
