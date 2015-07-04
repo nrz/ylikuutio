@@ -1366,8 +1366,8 @@ namespace model
 
     bool load_SRTM_world(
             std::string image_path,
-            double southern_latitude,
-            double western_longitude,
+            double latitude,
+            double longitude,
             std::vector<glm::vec3> &out_vertices,
             std::vector<glm::vec2> &out_UVs,
             std::vector<glm::vec3> &out_normals)
@@ -1381,8 +1381,11 @@ namespace model
         // and positive value mean north for latitude and east for longitude.
         // Therefore the SRTM heightmap filename can be resolved by rounding both latitude and longitude down (towards negative infinity).
 
-        int32_t filename_latitude = floor(southern_latitude);
-        int32_t filename_longitude = floor(western_longitude);
+        int32_t filename_latitude = floor(latitude);
+        int32_t filename_longitude = floor(longitude);
+
+        double southern_latitude = floor(latitude);
+        double western_longitude = floor(longitude);
 
         double northern_latitude = southern_latitude + 1.0f;
         double eastern_longitude = western_longitude + 1.0f;
