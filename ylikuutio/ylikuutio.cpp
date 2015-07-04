@@ -97,9 +97,11 @@ int main(void)
     position = glm::vec3(100.0f, 100.0f, 100.0f);
 #endif
     // Initial horizontal angle : toward -Z
-    horizontalAngle = 0.0f;
+    // horizontalAngle = 0.0f;
+    horizontalAngle = 0.00f;
     // Initial vertical angle : none
-    verticalAngle = PI / 2;
+    // verticalAngle = PI / 2;
+    verticalAngle = -6.50f;
     // Initial Field of View
     // initialFoV = 45.0f;
     initialFoV = 60.0f;
