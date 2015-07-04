@@ -93,15 +93,17 @@ int main(void)
     // position = glm::vec3(100.0f, 5000.0f + EARTH_RADIUS, 100.0f);
     // position = glm::vec3(100.0f, 5000.0f, 100.0f);
     position = glm::vec3(-344.0f, -500.0f, -3850.0f);
+    // position = glm::vec3(-5.69973e+06+500.0f, 1.58068e+06+500.0f, 2.37756e+06+500.0f);
+    position = glm::vec3(-5699409.50f, 1577462.38f, 2375270.00f);
 #else
     position = glm::vec3(100.0f, 100.0f, 100.0f);
 #endif
     // Initial horizontal angle : toward -Z
     // horizontalAngle = 0.0f;
-    horizontalAngle = 0.00f;
+    horizontalAngle = 5.06f;
     // Initial vertical angle : none
     // verticalAngle = PI / 2;
-    verticalAngle = -6.50f;
+    verticalAngle = -4.65f;
     // Initial Field of View
     // initialFoV = 45.0f;
     initialFoV = 60.0f;
