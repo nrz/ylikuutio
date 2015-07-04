@@ -310,6 +310,9 @@ int main(void)
             char time_text[256];
             sprintf(time_text, "%.2f sec", glfwGetTime(), position.x, position.y, position.z);
 
+            char spherical_coordinates_text[256];
+            sprintf(spherical_coordinates_text, "rho:%.2f theta:%.2f phi:%.2f", spherical_position.rho, spherical_position.theta, spherical_position.phi);
+
             // print cartesian coordinates on bottom left corner.
             printing_struct.x = 0;
             printing_struct.y = 0;
@@ -320,8 +323,16 @@ int main(void)
 
             // print horizontal and vertical angles on bottom left corner.
             printing_struct.x = 0;
-            printing_struct.y = TEXT_SIZE;
+            printing_struct.y += TEXT_SIZE;
             printing_struct.text = angles_text;
+            printing_struct.horizontal_alignment = "left";
+            printing_struct.vertical_alignment = "bottom";
+            text2D::printText2D(printing_struct);
+
+            // print spherical coordinates on bottom left corner.
+            printing_struct.x = 0;
+            printing_struct.y += TEXT_SIZE;
+            printing_struct.text = spherical_coordinates_text;
             printing_struct.horizontal_alignment = "left";
             printing_struct.vertical_alignment = "bottom";
             text2D::printText2D(printing_struct);

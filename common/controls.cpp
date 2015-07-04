@@ -200,6 +200,11 @@ namespace controls
             is_key_I_released = true;
         }
 
+        // compute spherical coordinates.
+        spherical_position.rho = sqrt((position.x * position.x) + (position.y * position.y) + (position.z * position.z));
+        spherical_position.theta = RADIANS_TO_DEGREES(atan2(sqrt((position.x * position.x) + (position.y * position.y)), position.z));
+        spherical_position.phi = RADIANS_TO_DEGREES(atan2(position.y, position.x));
+
         earth_radius = EARTH_RADIUS;
 
         // Projection matrix : 45° Field of View, aspect ratio, display range : 0.1 unit <-> 100 units
