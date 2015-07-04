@@ -601,6 +601,16 @@ namespace model
             std::cout << "transforming spherical coordinates loaded from file to cartesian coordinates.\n";
             std::cout << "radius: " << sphere_radius << "\n";
 
+            double current_latitude = spherical_world_struct.northern_latitude;
+
+            double latitude_step_in_degrees = SRTM_LATITUDE_STEP_IN_DEGREES;
+            std::cout << "latitude step in degrees: " << SRTM_LATITUDE_STEP_IN_DEGREES << "\n";
+
+            double longitude_step_in_degrees = SRTM_LONGITUDE_STEP_IN_DEGREES;
+            std::cout << "longitude step in degrees: " << SRTM_LONGITUDE_STEP_IN_DEGREES << "\n";
+
+            GLuint temp_vertices_i = 0;
+
             // Loop through `temp_vertices` and transform all vertices from spherical coordinates to cartesian coordinates.
             for (uint32_t temp_vertices_i = 0; temp_vertices_i < temp_vertices.size(); temp_vertices_i++)
             {
