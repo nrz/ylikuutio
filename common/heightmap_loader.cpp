@@ -625,7 +625,7 @@ namespace model
             double longitude_step_in_degrees = SRTM_LONGITUDE_STEP_IN_DEGREES;
             std::cout << "longitude step in degrees: " << SRTM_LONGITUDE_STEP_IN_DEGREES << "\n";
 
-            double current_latitude_in_degrees = spherical_world_struct.northern_latitude;
+            double current_latitude_in_degrees = spherical_world_struct.southern_latitude;
 
             GLuint temp_vertices_i = 0;
 
@@ -645,7 +645,7 @@ namespace model
 
                     current_longitude_in_degrees += longitude_step_in_degrees;
                 }
-                current_latitude_in_degrees -= latitude_step_in_degrees;
+                current_latitude_in_degrees += latitude_step_in_degrees;
             }
 
             if (is_bilinear_interpolation_in_use)
@@ -664,7 +664,7 @@ namespace model
                 std::cout << "transforming interpolated spherical coordinates to cartesian coordinates.\n";
                 std::cout << "radius: " << sphere_radius << "\n";
 
-                double current_latitude_in_degrees = spherical_world_struct.northern_latitude;
+                double current_latitude_in_degrees = spherical_world_struct.southern_latitude;
 
                 for (uint32_t z = 1; z < image_height; z++)
                 {
@@ -681,8 +681,8 @@ namespace model
 
                         current_longitude_in_degrees += longitude_step_in_degrees;
                     }
+                    current_latitude_in_degrees += latitude_step_in_degrees;
                 }
-                current_latitude_in_degrees -= latitude_step_in_degrees;
             }
         }
         else
@@ -1462,7 +1462,7 @@ namespace model
         vertex_data = new GLuint [image_width_in_use * image_height_in_use];
 
         uint8_t *image_pointer;
-        image_pointer = image_data;
+        image_pointer = image_data + sizeof(int16_t) * (true_image_height - 1) * true_image_width; // start from southwestern corner.
 
         GLuint *vertex_pointer;
         vertex_pointer = vertex_data;
@@ -1470,7 +1470,7 @@ namespace model
         // start processing image_data.
         // 90 meters is for equator.
 
-        // FIXME: this is a temporary testing code with a hardcoded start from the northwestern corner.
+        // FIXME: this is a temporary testing code with a hardcoded start from the southwestern corner.
         // TODO: write a proper code for loading the appropriate chunks (based on real spherical coordinates) into VBOs!
 
         for (GLuint z = 0; z < image_height_in_use; z++)
@@ -1484,7 +1484,7 @@ namespace model
                 image_pointer += sizeof(int16_t);
                 *vertex_pointer++ = y;
             }
-            image_pointer += sizeof(int16_t) * (true_image_width - image_width_in_use);
+            image_pointer -= sizeof(int16_t) * (image_width_in_use + true_image_width);
         }
 
         std::string triangulation_type = "bilinear_interpolation";
