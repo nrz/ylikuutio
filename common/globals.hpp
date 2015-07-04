@@ -22,16 +22,16 @@
 #include <glm/glm.hpp>
 #endif
 
-#ifndef ASPECT_RATIO
-#define ASPECT_RATIO (4/3)
-#endif
-
 #ifndef WINDOW_WIDTH
-#define WINDOW_WIDTH 1600
+#define WINDOW_WIDTH (1600.0f)
 #endif
 
 #ifndef WINDOW_HEIGHT
-#define WINDOW_HEIGHT (WINDOW_WIDTH / ASPECT_RATIO)
+#define WINDOW_HEIGHT (900.0f)
+#endif
+
+#ifndef ASPECT_RATIO
+#define ASPECT_RATIO (WINDOW_WIDTH / WINDOW_HEIGHT)
 #endif
 
 #ifndef PI
