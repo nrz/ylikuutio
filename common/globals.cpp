@@ -13,7 +13,7 @@
 #include "globals.hpp"
 
 glm::vec3 position;
-glm::vec3 spherical_position;
+SphericalCoordinatesStruct spherical_position;
 GLfloat horizontalAngle;
 GLfloat verticalAngle;
 GLfloat initialFoV;
