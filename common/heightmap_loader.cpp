@@ -619,10 +619,12 @@ namespace model
             std::cout << "transforming spherical coordinates loaded from file to cartesian coordinates.\n";
             std::cout << "radius: " << sphere_radius << "\n";
 
-            double latitude_step_in_degrees = SRTM_LATITUDE_STEP_IN_DEGREES;
+            // double latitude_step_in_degrees = SRTM_LATITUDE_STEP_IN_DEGREES;
+            double latitude_step_in_degrees = (360.0f / image_height);
             std::cout << "latitude step in degrees: " << SRTM_LATITUDE_STEP_IN_DEGREES << "\n";
 
-            double longitude_step_in_degrees = SRTM_LONGITUDE_STEP_IN_DEGREES;
+            // double longitude_step_in_degrees = SRTM_LONGITUDE_STEP_IN_DEGREES;
+            double longitude_step_in_degrees = (360.0f / image_width);
             std::cout << "longitude step in degrees: " << SRTM_LONGITUDE_STEP_IN_DEGREES << "\n";
 
             double current_latitude_in_degrees = spherical_world_struct.southern_latitude;
