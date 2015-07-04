@@ -219,7 +219,7 @@ namespace model
         SphericalCoordinatesStruct spherical_vertex;
         spherical_vertex.rho = planar_world_vertex.y + sphere_radius;       // rho is altitude.
         spherical_vertex.theta = DEGREES_TO_RADIANS(planar_world_vertex.x); // theta is longitude, the azimuthal angle.
-        spherical_vertex.phi = DEGREES_TO_RADIANS(planar_world_vertex.z);   // phi is latitude, the polar angle.
+        spherical_vertex.phi = DEGREES_TO_RADIANS(-planar_world_vertex.z);  // phi is latitude, the polar angle.
 
         glm::vec3 cartesian_vertex;
         cartesian_vertex.x = (GLfloat) (spherical_vertex.rho * sin(spherical_vertex.theta) * cos(spherical_vertex.phi));
