@@ -208,7 +208,7 @@ namespace controls
         earth_radius = EARTH_RADIUS;
 
         // Projection matrix : 45° Field of View, aspect ratio, display range : 0.1 unit <-> 100 units
-        ProjectionMatrix = glm::perspective(FoV, ASPECT_RATIO, 0.1f, 5000.0f + EARTH_RADIUS);
+        ProjectionMatrix = glm::perspective(FoV, ASPECT_RATIO, 0.1f, 5000.0f + 2.0f * EARTH_RADIUS);
         // Camera matrix
         ViewMatrix = glm::lookAt(
                 position,           // Camera is here
