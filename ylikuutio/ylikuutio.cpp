@@ -298,7 +298,10 @@ int main(void)
             printing_struct.char_font_texture_file_format = "bmp";
 
             char coordinates_text[256];
-            sprintf(coordinates_text, "(%.2f,%.2f,%.2f) (%.2f,%.2f)", position.x, position.y, position.z, horizontalAngle, verticalAngle);
+            sprintf(coordinates_text, "(%.2f,%.2f,%.2f)", position.x, position.y, position.z);
+
+            char angles_text[256];
+            sprintf(angles_text, "(%.2f,%.2f)", horizontalAngle, verticalAngle);
 
             char time_text[256];
             sprintf(time_text, "%.2f sec", glfwGetTime(), position.x, position.y, position.z);
@@ -311,6 +314,13 @@ int main(void)
             printing_struct.vertical_alignment = "bottom";
             text2D::printText2D(printing_struct);
 
+            // print horizontal and vertical angles on bottom left corner.
+            printing_struct.x = 0;
+            printing_struct.y = TEXT_SIZE;
+            printing_struct.text = angles_text;
+            printing_struct.horizontal_alignment = "left";
+            printing_struct.vertical_alignment = "bottom";
+            text2D::printText2D(printing_struct);
 
             // print time data on top left corner.
             printing_struct.x = 0;
