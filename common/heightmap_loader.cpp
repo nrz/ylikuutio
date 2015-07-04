@@ -214,7 +214,7 @@ namespace model
 
     glm::vec3 transform_planar_world_vertex_into_cartesian_vertex(
             glm::vec3 planar_world_vertex,
-            GLfloat sphere_radius)
+            double sphere_radius)
     {
         SphericalCoordinatesStruct spherical_vertex;
         spherical_vertex.rho = (GLfloat) planar_world_vertex.y + sphere_radius;       // rho is altitude.
@@ -283,7 +283,7 @@ namespace model
             std::vector<glm::vec2> &out_UVs,
             std::vector<glm::vec3> &out_normals,
             std::string triangulation_type,
-            GLfloat sphere_radius,
+            double sphere_radius,
             SphericalWorldStruct spherical_world_struct)
     {
 
