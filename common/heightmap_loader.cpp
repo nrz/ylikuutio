@@ -621,8 +621,8 @@ namespace model
             // y = rho * sin(theta) * sin(phi)
             // z = rho * cos(theta)
 
-#define SRTM_LATITUDE_STEP_IN_DEGREES (1/1200)
-#define SRTM_LONGITUDE_STEP_IN_DEGREES (1/1200)
+#define SRTM_LATITUDE_STEP_IN_DEGREES (1.0f/1200.0f)
+#define SRTM_LONGITUDE_STEP_IN_DEGREES (1.0f/1200.0f)
 
             std::cout << "transforming spherical coordinates loaded from file to cartesian coordinates.\n";
             std::cout << "radius: " << sphere_radius << "\n";
