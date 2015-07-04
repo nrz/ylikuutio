@@ -1439,11 +1439,11 @@ namespace model
         uint8_t *image_data;
 
         // Open the file
-        const char *char_image_path = image_path.c_str();
+        const char *char_image_path = abs_image_path.c_str();
         FILE *file = fopen(char_image_path, "rb");
         if (!file)
         {
-            std::cerr << image_path << " could not be opened.\n";
+            std::cerr << abs_image_path << " could not be opened.\n";
             getchar();
             return 0;
         }
