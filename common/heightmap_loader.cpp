@@ -217,10 +217,9 @@ namespace model
             GLfloat sphere_radius)
     {
         SphericalCoordinatesStruct spherical_vertex;
-        spherical_vertex.rho = planar_world_vertex.y;   // rho is altitude.
-        // spherical_vertex.rho += sphere_radius;
-        spherical_vertex.theta = planar_world_vertex.z; // theta is latitude.
-        spherical_vertex.phi = planar_world_vertex.x;   // phi is longitude.
+        spherical_vertex.rho = (GLfloat) planar_world_vertex.y + sphere_radius;       // rho is altitude.
+        spherical_vertex.theta = (GLfloat) DEGREES_TO_RADIANS(planar_world_vertex.x); // theta is longitude, the azimuthal angle.
+        spherical_vertex.phi = (GLfloat) DEGREES_TO_RADIANS(planar_world_vertex.z);   // phi is latitude, the polar angle.
 
         glm::vec3 cartesian_vertex;
         cartesian_vertex.x = spherical_vertex.rho * sin(spherical_vertex.theta) * cos(spherical_vertex.phi);
