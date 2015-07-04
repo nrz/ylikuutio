@@ -100,10 +100,10 @@ int main(void)
 #endif
     // Initial horizontal angle : toward -Z
     // horizontalAngle = 0.0f;
-    horizontalAngle = 5.06f;
+    horizontalAngle = 14.60f;
     // Initial vertical angle : none
     // verticalAngle = PI / 2;
-    verticalAngle = -4.65f;
+    verticalAngle = -5.15f;
     // Initial Field of View
     // initialFoV = 45.0f;
     initialFoV = 60.0f;
