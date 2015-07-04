@@ -14,8 +14,8 @@
 
 glm::vec3 position;
 SphericalCoordinatesStruct spherical_position;
-GLfloat horizontalAngle;
-GLfloat verticalAngle;
+double horizontalAngle;
+double verticalAngle;
 GLfloat initialFoV;
 double earth_radius;
 

@@ -55,8 +55,8 @@
 #endif
 
 extern glm::vec3 position;
-extern GLfloat horizontalAngle;
-extern GLfloat verticalAngle;
+extern double horizontalAngle;
+extern double verticalAngle;
 extern GLfloat initialFoV;
 extern double earth_radius;
 extern bool hasMouseEverMoved;
