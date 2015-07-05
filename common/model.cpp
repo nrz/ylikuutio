@@ -381,7 +381,6 @@ namespace model
         // constructor.
         this->nodeID = node_struct.nodeID;
         this->coordinate_vector = node_struct.coordinate_vector;
-        this->neighbor_nodeIDs = node_struct.neighbor_nodeIDs;
         this->graph_pointer = static_cast<model::Graph*>(node_struct.graph_pointer);
 
         // set pointer to this node.
