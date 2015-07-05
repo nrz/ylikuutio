@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include <stdint.h> // uint32_t etc.
 
 // Include GLEW
 #ifndef __GL_GLEW_H_INCLUDED
@@ -80,7 +81,7 @@ typedef struct
 
 typedef struct
 {
-    uint32_t *node_data;
+    GLuint *node_data;
 } GraphStruct;
 
 typedef struct
