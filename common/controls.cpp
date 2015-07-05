@@ -50,8 +50,13 @@ namespace controls
     }
 
     GLfloat speed = 5.0f; // 5 units / second
+#ifdef TESTING_SPHERICAL_WORLD_IN_USE
     GLfloat turbo_factor = 100.0f;
     GLfloat twin_turbo_factor = 50000.0f;
+#else
+    GLfloat turbo_factor = 5.0f;
+    GLfloat twin_turbo_factor = 100.0f;
+#endif
     GLfloat mouseSpeed = 0.005f;
 
     void computeMatricesFromInputs()
@@ -200,10 +205,12 @@ namespace controls
             is_key_I_released = true;
         }
 
+#ifdef TESTING_SPHERICAL_WORLD_IN_USE
         // compute spherical coordinates.
         spherical_position.rho = sqrt((position.x * position.x) + (position.y * position.y) + (position.z * position.z));
         spherical_position.theta = RADIANS_TO_DEGREES(atan2(sqrt((position.x * position.x) + (position.y * position.y)), position.z));
         spherical_position.phi = RADIANS_TO_DEGREES(atan2(position.y, position.x));
+#endif
 
         earth_radius = EARTH_RADIUS;
 

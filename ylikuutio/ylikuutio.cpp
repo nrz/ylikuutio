@@ -315,8 +315,10 @@ int main(void)
             char time_text[256];
             sprintf(time_text, "%.2f sec", glfwGetTime(), position.x, position.y, position.z);
 
+#ifdef TESTING_SPHERICAL_WORLD_IN_USE
             char spherical_coordinates_text[256];
             sprintf(spherical_coordinates_text, "rho:%.2f theta:%.2f phi:%.2f", spherical_position.rho, spherical_position.theta, spherical_position.phi);
+#endif
 
             // print cartesian coordinates on bottom left corner.
             printing_struct.x = 0;
@@ -334,6 +336,7 @@ int main(void)
             printing_struct.vertical_alignment = "bottom";
             text2D::printText2D(printing_struct);
 
+#ifdef TESTING_SPHERICAL_WORLD_IN_USE
             // print spherical coordinates on bottom left corner.
             printing_struct.x = 0;
             printing_struct.y += TEXT_SIZE;
@@ -341,6 +344,7 @@ int main(void)
             printing_struct.horizontal_alignment = "left";
             printing_struct.vertical_alignment = "bottom";
             text2D::printText2D(printing_struct);
+#endif
 
             // print time data on top left corner.
             printing_struct.x = 0;
