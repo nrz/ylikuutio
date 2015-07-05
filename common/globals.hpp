@@ -81,7 +81,7 @@ typedef struct
 
 typedef struct
 {
-    uint32_t *node_data;
+    GLuint *node_data;
 } GraphStruct;
 
 typedef struct
