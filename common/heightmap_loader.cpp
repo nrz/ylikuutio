@@ -968,11 +968,17 @@ namespace model
             uint32_t x;
             uint32_t z;
 
+            int32_t current_percent = 0;
+
             triangle_i = 0;
             current_interpolated_vertex_i = image_width * image_height;
 
             for (z = 1; z < image_height; z++)
             {
+                // show progress in percents.
+                current_percent = (int32_t) floor(100.0f * ((double) z / (double) (image_height - 1)));
+                std::cout << current_percent << "% ";
+
                 for (x = 1; x < image_width; x++)
                 {
                     uint32_t current_vertex_i = image_width * z + x;
