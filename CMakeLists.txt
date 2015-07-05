@@ -4,6 +4,8 @@ project (ylikuutio)
 
 find_package(OpenGL REQUIRED)
 
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+
 # set(CMAKE_COLOR_MAKEFILE ON)
 # set(CMAKE_VERBOSE_MAKEFILE ON)
 
@@ -29,13 +31,20 @@ if(INCLUDE_DISTRIB)
     add_subdirectory(distrib)
 endif(INCLUDE_DISTRIB)
 
+# include_directories(
+#     external/AntTweakBar-1.16/include/
+#     external/glfw-3.0.3/include/GLFW/
+#     external/glm-0.9.4.0/
+#     external/glew-1.9.0/include/
+#     external/assimp-3.0.1270/include/
+#     external/bullet-2.81-rev2613/src/
+#     .
+#     )
+
 include_directories(
-    external/AntTweakBar-1.16/include/
     external/glfw-3.0.3/include/GLFW/
     external/glm-0.9.4.0/
     external/glew-1.9.0/include/
-    external/assimp-3.0.1270/include/
-    external/bullet-2.81-rev2613/src/
     .
     )
 
@@ -80,8 +89,8 @@ add_executable(several_objects
     common/controls.hpp
     common/texture.cpp
     common/texture.hpp
-    common/bmploader.cpp
-    common/bmploader.hpp
+    common/heightmap_loader.cpp
+    common/heightmap_loader.hpp
     common/objloader.cpp
     common/objloader.hpp
     common/model.cpp
@@ -119,8 +128,8 @@ add_executable(text2d
     common/controls.hpp
     common/texture.cpp
     common/texture.hpp
-    common/bmploader.cpp
-    common/bmploader.hpp
+    common/heightmap_loader.cpp
+    common/heightmap_loader.hpp
     common/objloader.cpp
     common/objloader.hpp
     common/model.cpp
@@ -160,8 +169,8 @@ add_executable(ylikuutio
     common/controls.hpp
     common/texture.cpp
     common/texture.hpp
-    common/bmploader.cpp
-    common/bmploader.hpp
+    common/heightmap_loader.cpp
+    common/heightmap_loader.hpp
     common/objloader.cpp
     common/objloader.hpp
     common/model.cpp
@@ -190,6 +199,7 @@ configure_file(ylikuutio/Holstein.bmp Holstein.bmp COPYONLY)
 configure_file(ylikuutio/noise1024x1024.bmp noise1024x1024.bmp COPYONLY)
 configure_file(ylikuutio/noise256x256.bmp noise256x256.bmp COPYONLY)
 configure_file(ylikuutio/noise128x128.bmp noise128x128.bmp COPYONLY)
+configure_file(ylikuutio/S17W069.hgt S17W069.hgt COPYONLY)
 
 target_link_libraries(ylikuutio
     ${ALL_LIBS}

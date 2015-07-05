@@ -1,7 +1,3 @@
-#ifndef PI
-#define PI 3.14159265359f
-#endif
-
 #ifndef GLM_FORCE_RADIANS
 #define GLM_FORCE_RADIANS
 #define DEGREES_TO_RADIANS(x) (x * PI / 180.0f)
@@ -45,14 +41,6 @@ GLFWwindow* window;
 #include "common/model.hpp"
 #include "common/vboindexer.hpp"
 #include "common/text2D.hpp"
-
-#define WINDOW_WIDTH 1600
-#define WINDOW_HEIGHT 900
-
-#define TEXT_SIZE 40
-#define FONT_SIZE 16
-
-#define MAX_FPS 60
 
 // font texture file format: bmp/...
 std::string g_font_texture_file_format = "bmp";
@@ -118,8 +106,19 @@ int main(void)
     // Cull triangles which normal is not towards the camera
     glEnable(GL_CULL_FACE);
 
+    // Create the world, store it in `my_world`.
+    model::World *my_world = new model::World();
+
+    // Create the shader, store it in 'my_shader`.
+    ShaderStruct shader_struct;
+    shader_struct.world_pointer = my_world;
+    shader_struct.vertex_shader = "StandardShading.vertexshader";
+    shader_struct.fragment_shader = "StandardShading.fragmentshader";
+    model::Shader *my_shader = new model::Shader(shader_struct);
+
     // Create the species, store it in `suzanne_species`.
     SpeciesStruct species_struct;
+    species_struct.shader_pointer = my_shader;
     species_struct.model_file_format = "obj";
     species_struct.model_filename = "suzanne.obj";
     species_struct.texture_file_format = "dds";
@@ -127,24 +126,21 @@ int main(void)
     species_struct.vertex_shader = "StandardShading.vertexshader";
     species_struct.fragment_shader = "StandardShading.fragmentshader";
     species_struct.lightPos = glm::vec3(4, 4, 4);
-    model::Species suzanne_species = model::Species(species_struct);
-
-    // create a species pointer.
-    model::Species *species_ptr = &suzanne_species;
+    model::Species *suzanne_species = new model::Species(species_struct);
 
     // Create suzanne1, store it in `suzanne1`.
     ObjectStruct object_struct1;
+    object_struct1.species_pointer = suzanne_species;
     object_struct1.coordinate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
     object_struct1.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
-    model::Object suzanne1 = model::Object(object_struct1);
-    suzanne1.species_ptr = species_ptr;
+    model::Object *suzanne1 = new model::Object(object_struct1);
 
     // Create suzanne2, store it in `suzanne2`.
     ObjectStruct object_struct2;
+    object_struct2.species_pointer = suzanne_species;
     object_struct2.coordinate_vector = glm::vec3(-1.0f, 0.0f, 0.0f);
     object_struct2.translate_vector = glm::vec3(0.1f, 0.0f, 0.0f);
-    model::Object suzanne2 = model::Object(object_struct2);
-    suzanne2.species_ptr = species_ptr;
+    model::Object *suzanne2 = new model::Object(object_struct2);
 
     // Initialize our little text library with the Holstein font
     const char *char_g_font_texture_filename = g_font_texture_filename.c_str();
@@ -179,15 +175,12 @@ int main(void)
             // Clear the screen
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-            suzanne_species.render();
+            // Render the world.
+            my_world->render();
 
-            suzanne1.render();
-
-            suzanne2.render();
-
-            glDisableVertexAttribArray(suzanne_species.vertexPosition_modelspaceID);
-            glDisableVertexAttribArray(suzanne_species.vertexUVID);
-            glDisableVertexAttribArray(suzanne_species.vertexNormal_modelspaceID);
+            glDisableVertexAttribArray(suzanne_species->vertexPosition_modelspaceID);
+            glDisableVertexAttribArray(suzanne_species->vertexUVID);
+            glDisableVertexAttribArray(suzanne_species->vertexNormal_modelspaceID);
 
             PrintingStruct printing_struct;
             printing_struct.screen_width = WINDOW_WIDTH;
@@ -199,6 +192,7 @@ int main(void)
             char coordinates_text[256];
             sprintf(coordinates_text, "(%.2f,%.2f,%.2f) (%.2f,%.2f)", position.x, position.y, position.z, horizontalAngle, verticalAngle);
 
+            // print cartesian coordinates on bottom left corner.
             printing_struct.x = 0;
             printing_struct.y = 0;
             printing_struct.text = coordinates_text;
@@ -216,13 +210,7 @@ int main(void)
     while (glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS &&
             glfwWindowShouldClose(window) == 0);
 
-    // Cleanup VBO and shader
-    glDeleteBuffers(1, &suzanne_species.vertexbuffer);
-    glDeleteBuffers(1, &suzanne_species.uvbuffer);
-    glDeleteBuffers(1, &suzanne_species.normalbuffer);
-    glDeleteBuffers(1, &suzanne_species.elementbuffer);
-    glDeleteProgram(suzanne_species.programID);
-    glDeleteTextures(1, &suzanne_species.texture);
+    delete my_world;
 
     // Delete the text's VBO, the shader and the texture
     text2D::cleanupText2D();

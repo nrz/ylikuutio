@@ -2,8 +2,8 @@
 #define CONTROLS_HPP
 
 extern glm::vec3 position;
-extern float horizontalAngle;
-extern float verticalAngle;
+extern double horizontalAngle;
+extern double verticalAngle;
 extern float initialFoV;
 
 namespace controls

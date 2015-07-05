@@ -153,7 +153,7 @@ namespace model
                 out_normals.push_back(in_normals[i]);
                 GLuint newindex = (GLuint) out_vertices.size() - 1;
                 out_indices.push_back(newindex);
-                VertexToOutIndex[ packed ] = newindex;
+                VertexToOutIndex[packed] = newindex;
             }
         }
     }

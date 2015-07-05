@@ -23,12 +23,6 @@ using namespace glm;
 #include "common/vboindexer.hpp"
 #include "common/text2D.hpp"
 
-#define WINDOW_WIDTH 1600
-#define WINDOW_HEIGHT (WINDOW_WIDTH * 3 / 4)
-
-#define TEXT_SIZE 40
-#define FONT_SIZE 16
-
 int main(void)
 {
     // Initialise GLFW

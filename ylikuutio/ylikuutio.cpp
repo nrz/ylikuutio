@@ -1,10 +1,10 @@
-#ifndef PI
-#define PI 3.14159265359f
-#endif
-
 #ifndef GLM_FORCE_RADIANS
 #define GLM_FORCE_RADIANS
 #define DEGREES_TO_RADIANS(x) (x * PI / 180.0f)
+#endif
+
+#ifndef RADIANS_TO_DEGREES
+#define RADIANS_TO_DEGREES(x) (x * 180.0f / PI)
 #endif
 
 // Include standard headers
@@ -48,13 +48,7 @@ GLFWwindow* window;
 #include "common/vboindexer.hpp"
 #include "common/text2D.hpp"
 
-#define WINDOW_WIDTH 1600
-#define WINDOW_HEIGHT 900
-
-#define TEXT_SIZE 40
-#define FONT_SIZE 16
-
-#define MAX_FPS 60
+#define TESTING_SPHERICAL_WORLD_IN_USE
 
 // model file format: obj/bmp/...
 // std::string g_model_file_format = "bmp";
@@ -92,13 +86,28 @@ std::string g_font_texture_filename = "Holstein.bmp";
 int main(void)
 {
     // Initial position : on +Z
-    position = glm::vec3(100, 100, 100);
+    // position = glm::vec3(100, 100, 100);
+    // position = glm::vec3(100, 3900, 100);
+    // position = glm::vec3(100.0f, 5000.0f, 100.0f);
+#ifdef TESTING_SPHERICAL_WORLD_IN_USE
+    // position = glm::vec3(100.0f, 5000.0f + EARTH_RADIUS, 100.0f);
+    // position = glm::vec3(100.0f, 5000.0f, 100.0f);
+    // position = glm::vec3(-5658223.00f, -1700825.12f, 2322764.00f);
+    position = glm::vec3(-5659377.50f, -1696985.38f, 2358353.25f);
+#else
+    position = glm::vec3(100.0f, 100.0f, 100.0f);
+#endif
     // Initial horizontal angle : toward -Z
-    horizontalAngle = 0.0f;
+    // horizontalAngle = 0.0f;
+    horizontalAngle = 42.42f;
     // Initial vertical angle : none
-    verticalAngle = PI / 2;
+    // verticalAngle = PI / 2;
+    verticalAngle = 7.44f;
     // Initial Field of View
-    initialFoV = 45.0f;
+    // initialFoV = 45.0f;
+    initialFoV = 60.0f;
+
+    bool does_suzanne_species_exist = true;
 
     // Initialise GLFW
     if (!glfwInit())
@@ -112,7 +121,7 @@ int main(void)
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
 
     // Open a window and create its OpenGL context.
-    window = glfwCreateWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "Ylikuutio", NULL, NULL);
+    window = glfwCreateWindow((GLuint) WINDOW_WIDTH, (GLuint) WINDOW_HEIGHT, "Ylikuutio", NULL, NULL);
     if (window == NULL)
     {
         std::cerr << "Failed to open GLFW window.\n";
@@ -130,7 +139,7 @@ int main(void)
 
     // Ensure we can capture the escape key being pressed below.
     glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
-    glfwSetCursorPos(window, (WINDOW_WIDTH / 2), (WINDOW_HEIGHT / 2));
+    glfwSetCursorPos(window, ((GLuint) WINDOW_WIDTH / 2), ((GLuint) WINDOW_HEIGHT / 2));
 
     // Dark blue background.
     glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
@@ -143,97 +152,113 @@ int main(void)
     // Cull triangles which normal is not towards the camera.
     glEnable(GL_CULL_FACE);
 
-    // Create the species, store it in `terrain_species`.
-    SpeciesStruct terrain_species_struct;
-    terrain_species_struct.model_file_format = g_model_file_format;
-    terrain_species_struct.model_filename = g_model_filename;
-    terrain_species_struct.texture_file_format = g_texture_file_format;
-    terrain_species_struct.color_channel = g_height_data_color_channel;
-    terrain_species_struct.texture_filename = g_texture_filename;
-    terrain_species_struct.vertex_shader = "StandardShading.vertexshader";
-    terrain_species_struct.fragment_shader = "StandardShading.fragmentshader";
-    terrain_species_struct.lightPos = glm::vec3(4, 4, 4);
-    model::Species terrain_species = model::Species(terrain_species_struct);
+    // Create the world, store it in `my_world`.
+    model::World *my_world = new model::World();
 
-    // create a species pointer.
-    model::Species *terrain_species_ptr = &terrain_species;
+    // Create the shader, store it in 'my_shader`.
+    ShaderStruct shader_struct;
+    shader_struct.world_pointer = my_world;
+    shader_struct.vertex_shader = "StandardShading.vertexshader";
+    shader_struct.fragment_shader = "StandardShading.fragmentshader";
+    model::Shader *my_shader = new model::Shader(shader_struct);
+
+#ifdef TESTING_SPHERICAL_WORLD_IN_USE
+    // Create the species, store it in `terrain_species`.
+    SpeciesStruct SRTM_terrain_species_struct;
+    SRTM_terrain_species_struct.shader_pointer = my_shader;
+    SRTM_terrain_species_struct.model_file_format = "SRTM";
+    // SRTM_terrain_species_struct.model_filename = "/media/laatikko_4TB/satelliittikuvat/srtm/version3/data/";
+    SRTM_terrain_species_struct.model_filename = "./"; // for testing
+    SRTM_terrain_species_struct.texture_file_format = g_texture_file_format;
+    SRTM_terrain_species_struct.color_channel = g_height_data_color_channel;
+    SRTM_terrain_species_struct.texture_filename = g_texture_filename;
+    SRTM_terrain_species_struct.lightPos = glm::vec3(4, 4, 4);
+    model::Species *terrain_species = new model::Species(SRTM_terrain_species_struct);
+#else
+    // Create the species, store it in `terrain_species`.
+    SpeciesStruct bmp_terrain_species_struct;
+    bmp_terrain_species_struct.shader_pointer = my_shader;
+    bmp_terrain_species_struct.model_file_format = g_model_file_format;
+    bmp_terrain_species_struct.model_filename = g_model_filename;
+    bmp_terrain_species_struct.texture_file_format = g_texture_file_format;
+    bmp_terrain_species_struct.color_channel = g_height_data_color_channel;
+    bmp_terrain_species_struct.texture_filename = g_texture_filename;
+    bmp_terrain_species_struct.lightPos = glm::vec3(4, 4, 4);
+    model::Species *terrain_species = new model::Species(bmp_terrain_species_struct);
+#endif
 
     // Create terrain1, store it in `terrain1`.
     ObjectStruct terrain_object_struct1;
+    terrain_object_struct1.species_pointer = terrain_species;
     terrain_object_struct1.coordinate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
     terrain_object_struct1.rotate_angle = 0.0f;
     terrain_object_struct1.rotate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
     terrain_object_struct1.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
-    model::Object terrain1 = model::Object(terrain_object_struct1);
-    terrain1.species_ptr = terrain_species_ptr;
+    model::Object *terrain1 = new model::Object(terrain_object_struct1);
 
     SpeciesStruct suzanne_species_struct;
+    suzanne_species_struct.shader_pointer = my_shader;
     suzanne_species_struct.model_file_format = "obj";
     suzanne_species_struct.model_filename = "suzanne.obj";
     suzanne_species_struct.texture_file_format = "dds";
     suzanne_species_struct.texture_filename = "uvmap.DDS";
-    suzanne_species_struct.vertex_shader = "StandardShading.vertexshader";
-    suzanne_species_struct.fragment_shader = "StandardShading.fragmentshader";
     suzanne_species_struct.lightPos = glm::vec3(4, 4, 4);
     suzanne_species_struct.is_world = false;
-    model::Species suzanne_species = model::Species(suzanne_species_struct);
-
-    // create a species pointer.
-    model::Species *suzanne_species_ptr = &suzanne_species;
+    model::Species *suzanne_species = new model::Species(suzanne_species_struct);
 
     // Create suzanne1, store it in `suzanne1`.
     ObjectStruct suzanne_object_struct1;
+    suzanne_object_struct1.species_pointer = suzanne_species;
     suzanne_object_struct1.coordinate_vector = glm::vec3(82.50f, 119.00f, 95.50f);
     suzanne_object_struct1.rotate_angle = 0.10f;
     suzanne_object_struct1.rotate_vector = glm::vec3(1.0f, 0.0f, 0.0f);
     suzanne_object_struct1.translate_vector = glm::vec3(1.0f, 0.0f, 0.0f);
-    model::Object suzanne1 = model::Object(suzanne_object_struct1);
-    suzanne1.species_ptr = suzanne_species_ptr;
+    model::Object *suzanne1 = new model::Object(suzanne_object_struct1);
 
     ObjectStruct suzanne_object_struct2;
+    suzanne_object_struct2.species_pointer = suzanne_species;
     suzanne_object_struct2.coordinate_vector = glm::vec3(112.90f, 113.90f, 75.50f);
     suzanne_object_struct2.rotate_angle = 0.20f;
     suzanne_object_struct2.rotate_vector = glm::vec3(1.0f, 0.0f, 0.0f);
     suzanne_object_struct2.translate_vector = glm::vec3(0.0f, 1.0f, 0.0f);
-    model::Object suzanne2 = model::Object(suzanne_object_struct2);
-    suzanne2.species_ptr = suzanne_species_ptr;
+    model::Object *suzanne2 = new model::Object(suzanne_object_struct2);
 
     ObjectStruct suzanne_object_struct3;
+    suzanne_object_struct3.species_pointer = suzanne_species;
     suzanne_object_struct3.coordinate_vector = glm::vec3(126.90f, 162.90f, 103.00f);
     suzanne_object_struct3.rotate_angle = 0.05f;
     suzanne_object_struct3.rotate_vector = glm::vec3(1.0f, 0.0f, 0.0f);
     suzanne_object_struct3.translate_vector = glm::vec3(0.0f, 0.0f, 1.0f);
-    model::Object suzanne3 = model::Object(suzanne_object_struct3);
-    suzanne3.species_ptr = suzanne_species_ptr;
+    model::Object *suzanne3 = new model::Object(suzanne_object_struct3);
 
     ObjectStruct suzanne_object_struct4;
+    suzanne_object_struct4.species_pointer = suzanne_species;
     suzanne_object_struct4.coordinate_vector = glm::vec3(96.00f, 130.00f, 109.00f);
     suzanne_object_struct4.rotate_angle = 0.15f;
     suzanne_object_struct4.rotate_vector = glm::vec3(1.0f, 0.0f, 0.0f);
     suzanne_object_struct4.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
-    model::Object suzanne4 = model::Object(suzanne_object_struct4);
-    suzanne4.species_ptr = suzanne_species_ptr;
+    model::Object *suzanne4 = new model::Object(suzanne_object_struct4);
 
     ObjectStruct suzanne_object_struct5;
+    suzanne_object_struct5.species_pointer = suzanne_species;
     suzanne_object_struct5.coordinate_vector = glm::vec3(103.00f, 105.00f, 109.00f);
     suzanne_object_struct5.rotate_angle = 0.03f;
     suzanne_object_struct5.rotate_vector = glm::vec3(1.0f, 1.0f, 1.0f);
     suzanne_object_struct5.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
-    model::Object suzanne5 = model::Object(suzanne_object_struct5);
-    suzanne5.species_ptr = suzanne_species_ptr;
+    model::Object *suzanne5 = new model::Object(suzanne_object_struct5);
 
-    std::cout << "number of vertices: " << terrain_species.vertices.size() << ".\n";
-    std::cout << "number of UVs: " << terrain_species.UVs.size() << ".\n";
-    std::cout << "number of normals: " << terrain_species.normals.size() << ".\n";
+    std::cout << "number of vertices: " << terrain_species->vertices.size() << ".\n";
+    std::cout << "number of UVs: " << terrain_species->UVs.size() << ".\n";
+    std::cout << "number of normals: " << terrain_species->normals.size() << ".\n";
 
-    std::cout << "number of indexed vertices: " << terrain_species.indexed_vertices.size() << ".\n";
-    std::cout << "number of indexed UVs: " << terrain_species.indexed_UVs.size() << ".\n";
-    std::cout << "number of indexed normals: " << terrain_species.indexed_normals.size() << ".\n";
+    std::cout << "number of indexed vertices: " << terrain_species->indexed_vertices.size() << ".\n";
+    std::cout << "number of indexed UVs: " << terrain_species->indexed_UVs.size() << ".\n";
+    std::cout << "number of indexed normals: " << terrain_species->indexed_normals.size() << ".\n";
 
     // Initialize our little text library with the Holstein font
     const char *char_g_font_texture_filename = g_font_texture_filename.c_str();
     const char *char_g_font_texture_file_format = g_font_texture_file_format.c_str();
-    text2D::initText2D(WINDOW_WIDTH, WINDOW_HEIGHT, char_g_font_texture_filename, char_g_font_texture_file_format);
+    text2D::initText2D((GLuint) WINDOW_WIDTH, (GLuint) WINDOW_HEIGHT, char_g_font_texture_filename, char_g_font_texture_file_format);
 
     // For speed computation
     double lastTime = glfwGetTime();
@@ -267,35 +292,33 @@ int main(void)
             // Clear the screen.
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-            terrain_species.render();
+            // Render the world.
+            my_world->render();
 
-            terrain1.render();
-
-            suzanne_species.render();
-
-            suzanne1.render();
-            suzanne2.render();
-            suzanne3.render();
-            suzanne4.render();
-            suzanne5.render();
-
-            glDisableVertexAttribArray(terrain_species.vertexPosition_modelspaceID);
-            glDisableVertexAttribArray(terrain_species.vertexUVID);
-            glDisableVertexAttribArray(terrain_species.vertexNormal_modelspaceID);
+            glDisableVertexAttribArray(terrain_species->vertexPosition_modelspaceID);
+            glDisableVertexAttribArray(terrain_species->vertexUVID);
+            glDisableVertexAttribArray(terrain_species->vertexNormal_modelspaceID);
 
             PrintingStruct printing_struct;
-            printing_struct.screen_width = WINDOW_WIDTH;
-            printing_struct.screen_height = WINDOW_HEIGHT;
+            printing_struct.screen_width = (GLuint) WINDOW_WIDTH;
+            printing_struct.screen_height = (GLuint) WINDOW_HEIGHT;
             printing_struct.text_size = TEXT_SIZE;
             printing_struct.font_size = FONT_SIZE;
             printing_struct.char_font_texture_file_format = "bmp";
 
             char coordinates_text[256];
-            sprintf(coordinates_text, "(%.2f,%.2f,%.2f) (%.2f,%.2f)", position.x, position.y, position.z, horizontalAngle, verticalAngle);
+            sprintf(coordinates_text, "(%.2f,%.2f,%.2f)", position.x, position.y, position.z);
+
+            char angles_text[256];
+            sprintf(angles_text, "(%.2f,%.2f)", horizontalAngle, verticalAngle);
 
             char time_text[256];
             sprintf(time_text, "%.2f sec", glfwGetTime(), position.x, position.y, position.z);
 
+            char spherical_coordinates_text[256];
+            sprintf(spherical_coordinates_text, "rho:%.2f theta:%.2f phi:%.2f", spherical_position.rho, spherical_position.theta, spherical_position.phi);
+
+            // print cartesian coordinates on bottom left corner.
             printing_struct.x = 0;
             printing_struct.y = 0;
             printing_struct.text = coordinates_text;
@@ -303,8 +326,25 @@ int main(void)
             printing_struct.vertical_alignment = "bottom";
             text2D::printText2D(printing_struct);
 
+            // print horizontal and vertical angles on bottom left corner.
             printing_struct.x = 0;
-            printing_struct.y = WINDOW_HEIGHT;
+            printing_struct.y += TEXT_SIZE;
+            printing_struct.text = angles_text;
+            printing_struct.horizontal_alignment = "left";
+            printing_struct.vertical_alignment = "bottom";
+            text2D::printText2D(printing_struct);
+
+            // print spherical coordinates on bottom left corner.
+            printing_struct.x = 0;
+            printing_struct.y += TEXT_SIZE;
+            printing_struct.text = spherical_coordinates_text;
+            printing_struct.horizontal_alignment = "left";
+            printing_struct.vertical_alignment = "bottom";
+            text2D::printText2D(printing_struct);
+
+            // print time data on top left corner.
+            printing_struct.x = 0;
+            printing_struct.y = (GLuint) WINDOW_HEIGHT;
             printing_struct.text = time_text;
             printing_struct.horizontal_alignment = "left";
             printing_struct.vertical_alignment = "top";
@@ -312,6 +352,7 @@ int main(void)
 
             if (ms_frame_text_ready)
             {
+                // print frame rate data on top right corner.
                 printing_struct.x = WINDOW_WIDTH;
                 printing_struct.y = WINDOW_HEIGHT;
                 printing_struct.text = ms_frame_text;
@@ -324,18 +365,18 @@ int main(void)
             glfwSwapBuffers(window);
         }
 
+        if ((glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) && does_suzanne_species_exist)
+        {
+            delete suzanne_species;
+            does_suzanne_species_exist = false;
+        }
+
         glfwPollEvents();
     } // Check if the ESC key was pressed or the window was closed
     while ((glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS)
             && (glfwWindowShouldClose(window) == 0));
 
-    // Cleanup VBO, shader and texture.
-    glDeleteBuffers(1, &terrain_species.vertexbuffer);
-    glDeleteBuffers(1, &terrain_species.uvbuffer);
-    glDeleteBuffers(1, &terrain_species.normalbuffer);
-    glDeleteBuffers(1, &terrain_species.elementbuffer);
-    glDeleteProgram(terrain_species.programID);
-    glDeleteTextures(1, &terrain_species.texture);
+    delete my_world;
 
     // Delete the text's VBO, the shader and the texture
     text2D::cleanupText2D();

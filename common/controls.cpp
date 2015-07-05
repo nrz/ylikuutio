@@ -1,3 +1,7 @@
+#ifndef RADIANS_TO_DEGREES
+#define RADIANS_TO_DEGREES(x) (x * 180.0f / PI)
+#endif
+
 // Include GLEW
 #ifndef __GL_GLEW_H_INCLUDED
 #define __GL_GLEW_H_INCLUDED
@@ -30,14 +34,6 @@ using namespace glm;
 
 #include "controls.hpp"
 
-#define WINDOW_WIDTH 1600
-#define WINDOW_HEIGHT 900
-
-#define PI 3.14159265359f
-
-#define INVERT_MOUSE
-
-
 glm::mat4 ViewMatrix;
 glm::mat4 ProjectionMatrix;
 
@@ -54,7 +50,8 @@ namespace controls
     }
 
     GLfloat speed = 5.0f; // 5 units / second
-    GLfloat turbo_factor = 3.0f; // 5 units / second
+    GLfloat turbo_factor = 100.0f;
+    GLfloat twin_turbo_factor = 50000.0f;
     GLfloat mouseSpeed = 0.005f;
 
     void computeMatricesFromInputs()
@@ -80,13 +77,16 @@ namespace controls
             // Compute new orientation
             horizontalAngle += mouseSpeed * GLfloat(WINDOW_WIDTH/2 - xpos);
 
-#ifdef INVERT_MOUSE
-            // invert mouse.
-            verticalAngle   -= mouseSpeed * GLfloat(WINDOW_HEIGHT/2 - ypos);
-#else
-            // don't invert mouse.
-            verticalAngle   += mouseSpeed * GLfloat(WINDOW_HEIGHT/2 - ypos);
-#endif
+            if (is_invert_mouse_in_use)
+            {
+                // invert mouse.
+                verticalAngle   -= mouseSpeed * GLfloat(WINDOW_HEIGHT/2 - ypos);
+            }
+            else
+            {
+                // don't invert mouse.
+                verticalAngle   += mouseSpeed * GLfloat(WINDOW_HEIGHT/2 - ypos);
+            }
         }
 
         // Direction : Spherical coordinates to Cartesian coordinates conversion
@@ -109,7 +109,11 @@ namespace controls
         GLfloat temp_speed;
 
         // Turbo.
-        if ((glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS) || (glfwGetKey(window, GLFW_KEY_RIGHT_CONTROL) == GLFW_PRESS))
+        if ((glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS) && (glfwGetKey(window, GLFW_KEY_RIGHT_CONTROL) == GLFW_PRESS))
+        {
+            temp_speed = twin_turbo_factor * speed;
+        }
+        else if ((glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS) || (glfwGetKey(window, GLFW_KEY_RIGHT_CONTROL) == GLFW_PRESS))
         {
             temp_speed = turbo_factor * speed;
         }
@@ -177,8 +181,34 @@ namespace controls
 
         GLfloat FoV = initialFoV;// - 5 * glfwGetMouseWheel(); // Now GLFW 3 requires setting up a callback for this. It's a bit too complicated for this beginner's tutorial, so it's disabled instead.
 
-        // Projection matrix : 45° Field of View, 4:3 ratio, display range : 0.1 unit <-> 100 units
-        ProjectionMatrix = glm::perspective(FoV, 4.0f / 3.0f, 0.1f, 500.0f);
+        if (glfwGetKey(window, GLFW_KEY_I) == GLFW_PRESS)
+        {
+            if (is_key_I_released)
+            {
+                if (is_invert_mouse_in_use)
+                {
+                    is_invert_mouse_in_use = false;
+                }
+                else
+                {
+                    is_invert_mouse_in_use = true;
+                }
+            }
+        }
+        else
+        {
+            is_key_I_released = true;
+        }
+
+        // compute spherical coordinates.
+        spherical_position.rho = sqrt((position.x * position.x) + (position.y * position.y) + (position.z * position.z));
+        spherical_position.theta = RADIANS_TO_DEGREES(atan2(sqrt((position.x * position.x) + (position.y * position.y)), position.z));
+        spherical_position.phi = RADIANS_TO_DEGREES(atan2(position.y, position.x));
+
+        earth_radius = EARTH_RADIUS;
+
+        // Projection matrix : 45° Field of View, aspect ratio, display range : 0.1 unit <-> 100 units
+        ProjectionMatrix = glm::perspective(FoV, ASPECT_RATIO, 0.1f, 5000.0f + 2.0f * EARTH_RADIUS);
         // Camera matrix
         ViewMatrix = glm::lookAt(
                 position,           // Camera is here
