@@ -92,16 +92,17 @@ int main(void)
 #ifdef TESTING_SPHERICAL_WORLD_IN_USE
     // position = glm::vec3(100.0f, 5000.0f + EARTH_RADIUS, 100.0f);
     // position = glm::vec3(100.0f, 5000.0f, 100.0f);
-    position = glm::vec3(2081595.88f, -5590267.50f, 3507914.75f);
+    // position = glm::vec3(-5658223.00f, -1700825.12f, 2322764.00f);
+    position = glm::vec3(-5659377.50f, -1696985.38f, 2358353.25f);
 #else
     position = glm::vec3(100.0f, 100.0f, 100.0f);
 #endif
     // Initial horizontal angle : toward -Z
     // horizontalAngle = 0.0f;
-    horizontalAngle = 41.76f;
+    horizontalAngle = 42.42f;
     // Initial vertical angle : none
     // verticalAngle = PI / 2;
-    verticalAngle = -10.50f;
+    verticalAngle = 7.44f;
     // Initial Field of View
     // initialFoV = 45.0f;
     initialFoV = 60.0f;
