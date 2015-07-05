@@ -199,6 +199,7 @@ configure_file(ylikuutio/Holstein.bmp Holstein.bmp COPYONLY)
 configure_file(ylikuutio/noise1024x1024.bmp noise1024x1024.bmp COPYONLY)
 configure_file(ylikuutio/noise256x256.bmp noise256x256.bmp COPYONLY)
 configure_file(ylikuutio/noise128x128.bmp noise128x128.bmp COPYONLY)
+configure_file(ylikuutio/S17W069.hgt S17W069.hgt COPYONLY)
 
 target_link_libraries(ylikuutio
     ${ALL_LIBS}
