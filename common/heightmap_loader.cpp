@@ -1483,7 +1483,6 @@ namespace model
             for (GLuint x = 0; x < image_width_in_use; x++)
             {
                 GLuint y;
-                // y = ((((GLuint) *image_pointer) << 8) | ((GLuint) *(image_pointer + 1))) + (GLuint) EARTH_RADIUS;
                 y = ((((GLuint) *image_pointer) << 8) | ((GLuint) *(image_pointer + 1)));
 
                 image_pointer += sizeof(int16_t);
