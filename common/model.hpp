@@ -100,7 +100,7 @@ namespace model
     {
         public:
             // constructor.
-            Graph(GraphStruct graph_struct);
+            Graph();
 
             // destructor.
             ~Graph();

@@ -299,10 +299,8 @@ namespace model
         this->shaderID = this->world_pointer->get_shaderID();
     }
 
-    Graph::Graph(GraphStruct graph_struct)
+    Graph::Graph()
     {
-        // constructor.
-        this->node_data = graph_struct.node_data;
     }
 
     void Graph::set_pointer(GLuint nodeID, void* node_pointer)
