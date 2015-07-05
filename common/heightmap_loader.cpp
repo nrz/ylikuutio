@@ -1128,6 +1128,7 @@ namespace model
                     current_interpolated_vertex_i++;
                 }
             }
+            std::cout << "\n"; // a newline after percent progress meter.
         }
         else if (is_southwest_northeast_edges_in_use)
         {
