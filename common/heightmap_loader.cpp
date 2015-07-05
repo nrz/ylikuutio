@@ -619,12 +619,12 @@ namespace model
             std::cout << "transforming spherical coordinates loaded from file to cartesian coordinates.\n";
             std::cout << "radius: " << sphere_radius << "\n";
 
-            // double latitude_step_in_degrees = SRTM_LATITUDE_STEP_IN_DEGREES;
-            double latitude_step_in_degrees = (360.0f / image_height);
+            double latitude_step_in_degrees = SRTM_LATITUDE_STEP_IN_DEGREES;
+            // double latitude_step_in_degrees = (360.0f / image_height); // for testing, creates a sphere always.
             std::cout << "latitude step in degrees: " << SRTM_LATITUDE_STEP_IN_DEGREES << "\n";
 
-            // double longitude_step_in_degrees = SRTM_LONGITUDE_STEP_IN_DEGREES;
-            double longitude_step_in_degrees = (360.0f / image_width);
+            double longitude_step_in_degrees = SRTM_LONGITUDE_STEP_IN_DEGREES;
+            // double longitude_step_in_degrees = (360.0f / image_width); // for testing, creates a sphere always.
             std::cout << "longitude step in degrees: " << SRTM_LONGITUDE_STEP_IN_DEGREES << "\n";
 
             double current_latitude_in_degrees = spherical_world_struct.southern_latitude;
@@ -641,8 +641,8 @@ namespace model
                 for (uint32_t x = 0; x < image_width; x++)
                 {
                     glm::vec3 spherical_world_vertex = temp_vertices[temp_vertices_i];
-                    // spherical_world_vertex.x = (GLfloat) current_longitude_in_degrees;
-                    // spherical_world_vertex.z = (GLfloat) current_latitude_in_degrees;
+                    spherical_world_vertex.x = (GLfloat) current_longitude_in_degrees;
+                    spherical_world_vertex.z = (GLfloat) current_latitude_in_degrees;
                     temp_vertices[temp_vertices_i++] = transform_planar_world_vertex_into_cartesian_vertex(spherical_world_vertex, sphere_radius);
 
                     current_longitude_in_degrees += longitude_step_in_degrees;
@@ -677,8 +677,8 @@ namespace model
                     for (uint32_t x = 1; x < image_width; x++)
                     {
                         glm::vec3 spherical_world_vertex = temp_vertices[temp_vertices_i];
-                        // spherical_world_vertex.x = (GLfloat) current_longitude_in_degrees;
-                        // spherical_world_vertex.z = (GLfloat) current_latitude_in_degrees;
+                        spherical_world_vertex.x = (GLfloat) current_longitude_in_degrees;
+                        spherical_world_vertex.z = (GLfloat) current_latitude_in_degrees;
                         temp_vertices[temp_vertices_i++] = transform_planar_world_vertex_into_cartesian_vertex(spherical_world_vertex, sphere_radius);
 
                         current_longitude_in_degrees += longitude_step_in_degrees;
