@@ -81,11 +81,6 @@ typedef struct
 
 typedef struct
 {
-    GLuint *node_data;
-} GraphStruct;
-
-typedef struct
-{
     GLuint nodeID;
     void* graph_pointer;
     glm::vec3 coordinate_vector;
