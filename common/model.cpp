@@ -301,6 +301,7 @@ namespace model
 
     Graph::Graph()
     {
+        // constructor.
     }
 
     void Graph::set_pointer(GLuint nodeID, void* node_pointer)
