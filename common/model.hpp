@@ -114,8 +114,6 @@ namespace model
             // this method gets a node ID and removes it from the `free_nodeID_queue` if it was popped from the queue.
             GLuint get_nodeID();
 
-            GLuint *node_data;
-
         private:
             std::vector<void*> node_pointer_vector;
             std::queue<GLuint> free_nodeID_queue;
