@@ -201,7 +201,6 @@ namespace model
             void *texture_pointer;                   // pointer to the texture species (not yet in use!).
 
             // The rest fields are created in the constructor.
-            GLuint texture;                        // Texture, returned by `load_DDS_texture` or `load_BMP_texture`.
             GLuint textureID;                      // texture ID, returned by `glGetUniformLocation(programID, "myTextureSampler");`.
             GLuint MatrixID;
             GLuint ViewMatrixID;
@@ -229,6 +228,7 @@ namespace model
         private:
             GLuint speciesID;                      // species ID, returned by `model::World->get_speciesID()`.
             GLuint lightID;                        // light ID, returned by `glGetUniformLocation(programID, "LightPosition_worldspace");`.
+            GLuint texture;                        // Texture, returned by `load_DDS_texture` or `load_BMP_texture`.
             const char *char_model_file_format;
             const char *char_model_filename;
             const char *char_texture_file_format;
