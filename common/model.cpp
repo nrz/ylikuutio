@@ -464,6 +464,9 @@ namespace model
         // set new graph pointer.
         this->graph_pointer = new_graph_pointer;
 
+        // request a new nodeID.
+        this->nodeID = this->graph_pointer->get_nodeID();
+
         // set pointer to this node.
         this->graph_pointer->set_pointer(this->nodeID, this);
     }
