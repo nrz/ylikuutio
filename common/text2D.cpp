@@ -21,8 +21,8 @@
 
 GLuint Text2DTextureID;              // Texture containing the font
 GLuint Text2DVertexBufferID;         // Buffer containing the vertices
-GLuint Text2DUVBufferID;             //                       UVs
-GLuint Text2DShaderID;               // Program used to disaply the text
+GLuint Text2DUVBufferID;             // Buffer containing the UVs
+GLuint Text2DShaderID;               // Shader program used to display the text
 GLuint vertexPosition_screenspaceID; // Location of the program's "vertexPosition_screenspace" attribute
 GLuint vertexUVID;                   // Location of the program's "vertexUV" attribute
 GLuint Text2DUniformID;              // Location of the program's texture attribute
