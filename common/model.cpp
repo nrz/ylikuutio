@@ -387,7 +387,7 @@ namespace model
         // set pointer to this node.
         this->graph_pointer->set_pointer(this->nodeID, this);
 
-        // create all unidirectional links from this node to neighbor nodes.
+        // create all bidirectional links between this node and neighbor nodes.
         for (GLuint link_i = 0; link_i < this->neighbor_nodeIDs.size(); link_i++)
         {
             this->create_bidirectional_link(this->neighbor_nodeIDs[link_i]);
