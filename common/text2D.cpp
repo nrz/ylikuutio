@@ -202,7 +202,7 @@ namespace text2D
         // Set screen height.
         glUniform1i(screen_height_uniform_ID, screen_height);
 
-        // 1rst attribute buffer : vertices
+        // 1st attribute buffer : vertices
         glEnableVertexAttribArray(vertexPosition_screenspaceID);
         glBindBuffer(GL_ARRAY_BUFFER, Text2DVertexBufferID);
         glVertexAttribPointer(vertexPosition_screenspaceID, 2, GL_FLOAT, GL_FALSE, 0, (void*) 0);
