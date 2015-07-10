@@ -390,7 +390,7 @@ namespace model
         // create all unidirectional links from this node to neighbor nodes.
         for (GLuint link_i = 0; link_i < this->neighbor_nodeIDs.size(); link_i++)
         {
-            this->create_unidirectional_link(this->neighbor_nodeIDs[link_i]);
+            this->create_bidirectional_link(this->neighbor_nodeIDs[link_i]);
         }
     }
 
