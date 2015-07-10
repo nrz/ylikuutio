@@ -519,18 +519,6 @@ namespace model
                     normalIndex[1] = 0; // TODO: add proper normal index.
                     normalIndex[2] = 0; // TODO: add proper normal index.
 
-                    // triangle_i = model::output_triangle_vertices(
-                    //         temp_vertices,
-                    //         temp_UVs,
-                    //         temp_normals,
-                    //         vertexIndex,
-                    //         uvIndex,
-                    //         normalIndex,
-                    //         out_vertices,
-                    //         out_UVs,
-                    //         out_normals,
-                    //         triangle_i);
-
                     if (is_southwest_northeast_edges_in_use)
                     {
                         // Define the second triangle, NW: 1, 3, 4 (southwest, northwest, northeast).
@@ -581,18 +569,6 @@ namespace model
                     normalIndex[0] = 0; // TODO: add proper normal index.
                     normalIndex[1] = 0; // TODO: add proper normal index.
                     normalIndex[2] = 0; // TODO: add proper normal index.
-
-                    // triangle_i = model::output_triangle_vertices(
-                    //         temp_vertices,
-                    //         temp_UVs,
-                    //         temp_normals,
-                    //         vertexIndex,
-                    //         uvIndex,
-                    //         normalIndex,
-                    //         out_vertices,
-                    //         out_UVs,
-                    //         out_normals,
-                    //         triangle_i);
                 }
             }
         }
