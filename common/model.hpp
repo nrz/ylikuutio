@@ -187,7 +187,6 @@ namespace model
             // this method sets pointer to this species to NULL, sets `shader_pointer` according to the input, and requests a new `speciesID` from the new shader.
             void switch_to_new_shader(model::Shader *new_shader_pointer);
 
-            std::string texture_filename;            // filename of the model file.
             std::string color_channel;               // color channel in use: `"red"`, `"green"`, `"blue"`, `"mean"` or `"all"`.
             std::vector<ObjectStruct> object_vector; // vector of individual objects of this species.
             glm::vec3 lightPos;                      // light position.
@@ -225,6 +224,7 @@ namespace model
             std::string model_file_format;         // type of the model file, eg. `"bmp"`.
             std::string model_filename;            // filename of the model file.
             std::string texture_file_format;       // type of the model file, eg. `"bmp"`.
+            std::string texture_filename;          // filename of the model file.
             GLuint speciesID;                      // species ID, returned by `model::World->get_speciesID()`.
             GLuint lightID;                        // light ID, returned by `glGetUniformLocation(programID, "LightPosition_worldspace");`.
             GLuint texture;                        // Texture, returned by `load_DDS_texture` or `load_BMP_texture`.
