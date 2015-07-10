@@ -313,7 +313,7 @@ int main(void)
             sprintf(angles_text, "(%.2f,%.2f)", horizontalAngle, verticalAngle);
 
             char time_text[256];
-            sprintf(time_text, "%.2f sec", glfwGetTime(), position.x, position.y, position.z);
+            sprintf(time_text, "%.2f sec", glfwGetTime());
 
 #ifdef TESTING_SPHERICAL_WORLD_IN_USE
             char spherical_coordinates_text[256];
