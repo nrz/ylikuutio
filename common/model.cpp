@@ -60,9 +60,9 @@ namespace model
     // 3. The faces of each object must form a closed surface. The only exception is the terrain object, which may have borders.
     //
     // Modifying object type graphs:
-    // 1. Translation of vertex does not require changes in any other nodes of the graph.
-    // 2. Adding a vertex always requires changes in some other nodes of the graph.
-    // 3. Deleting a vertex always requires deletion of edges from some other nodes of the graph.
+    // 1. Translation of a vertex does not require changes in any other nodes of the graph.
+    // 2. Adding a vertex always requires changes in some other nodes of the graph (unless the graph is empty before adding the vertex).
+    // 3. Deleting a vertex always requires deletion of edges from some other nodes of the graph (unless the vertex is the only vertex of the graph).
     // 4. Deleting a vertex or vertices usually also requires appropriate vertex additions. These changes are called 'complex modifications'.
     //
     // Adding a vertex or several vertices:
