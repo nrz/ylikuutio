@@ -717,7 +717,7 @@ namespace model
         }
 
         // Get a handle for our "myTextureSampler" uniform.
-        this->textureID = glGetUniformLocation(this->shader_pointer->programID, "myTextureSampler");
+        this->openGL_textureID = glGetUniformLocation(this->shader_pointer->programID, "myTextureSampler");
 
         bool model_loading_result;
 
@@ -825,7 +825,7 @@ namespace model
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, this->texture);
         // Set our "myTextureSampler" sampler to user Texture Unit 0.
-        glUniform1i(this->textureID, 0);
+        glUniform1i(this->openGL_textureID, 0);
 
         // 1st attribute buffer : vertices.
         glEnableVertexAttribArray(this->vertexPosition_modelspaceID);

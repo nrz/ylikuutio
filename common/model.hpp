@@ -275,7 +275,7 @@ namespace model
             GLuint speciesID_from_texture;         // species ID, returned by `model::Texture->get_speciesID()`.
             GLuint lightID;                        // light ID, returned by `glGetUniformLocation(programID, "LightPosition_worldspace");`.
             GLuint texture;                        // Texture, returned by `load_DDS_texture` or `load_BMP_texture`.
-            GLuint textureID;                      // texture ID, returned by `glGetUniformLocation(programID, "myTextureSampler");`.
+            GLuint openGL_textureID;               // texture ID, returned by `glGetUniformLocation(programID, "myTextureSampler");`.
             const char *char_model_file_format;
             const char *char_model_filename;
             const char *char_texture_file_format;
