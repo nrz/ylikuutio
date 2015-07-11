@@ -68,16 +68,17 @@ extern bool is_world_spherical;
 
 typedef struct
 {
-    std::string texture_file_format;
-    std::string image_path;
-} TextureStruct;
-
-typedef struct
-{
     void *world_pointer;                     // pointer to the world (draw list).
     std::string vertex_shader;               // filename of vertex shader.
     std::string fragment_shader;             // filename of fragment shader.
 } ShaderStruct;
+
+typedef struct
+{
+    void *world_pointer;                     // pointer to the world.
+    std::string texture_file_format;
+    std::string image_path;
+} TextureStruct;
 
 typedef struct
 {
