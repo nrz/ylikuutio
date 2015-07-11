@@ -49,13 +49,17 @@ namespace model
     // `Shader` must be created before any `Species`. `shader_pointer` must be given to each `Species`.
     // `Species` must be create before any `Object` of that `Species`. `species_pointer` must be given to each `Object` of the `Species`.
     //
-    // World
-    // + Shader
-    //   + Species
-    //     + Object
+    //     World
+    //     ^   ^
+    // Shader Texture
+    //     ^   ^
+    //    Species
+    //       ^
+    //     Object
     //
-    // Deleting a `World` also deletes all shaders, species and objects that belong the same world.
+    // Deleting a `World` also deletes all shaders, textures, species and objects that belong the same world.
     // Deleting a `Shader` also deletes all species and objects that belong the same world.
+    // Deleting a `Texture` also deletes all species and objects that belong the same world.
     // Deleting a `Species` also deletes all objects that belong the same world.
     // Deleting an `Object` only deletes the object.
 
