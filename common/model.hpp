@@ -118,6 +118,9 @@ namespace model
 
             model::World *world_pointer;           // pointer to the world.
             GLuint textureID;                      // texture ID, returned by `glGetUniformLocation(programID, "myTextureSampler");`.
+
+        private:
+            std::vector<void*> species_pointer_vector;
     };
 
     class Graph
