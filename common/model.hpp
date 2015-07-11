@@ -121,6 +121,7 @@ namespace model
 
         private:
             std::vector<void*> species_pointer_vector;
+            std::queue<GLuint> free_speciesID_queue;
     };
 
     class Graph
