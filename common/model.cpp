@@ -393,6 +393,8 @@ namespace model
         this->texture_file_format = texture_struct.texture_file_format;
         this->texture_filename    = texture_struct.texture_filename;
 
+        this->char_texture_file_format = this->texture_file_format.c_str();
+
         // get textureID from the World.
         this->textureID = this->world_pointer->get_textureID();
 
