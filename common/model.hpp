@@ -138,6 +138,7 @@ namespace model
             std::string texture_filename;          // filename of the model file.
             GLuint texture;                        // Texture, returned by `load_DDS_texture` or `load_BMP_texture`.
             GLuint textureID;                      // texture ID, returned by `World::get_textureID`.
+            GLuint openGL_textureID;               // texture ID, returned by `glGetUniformLocation(programID, "myTextureSampler");`.
             const char *char_texture_file_format;
             const char *char_texture_filename;
     };
