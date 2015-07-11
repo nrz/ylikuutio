@@ -47,6 +47,7 @@ GLFWwindow* window;
 #include "common/model.hpp"
 #include "common/vboindexer.hpp"
 #include "common/text2D.hpp"
+#include "common/text3D.hpp"
 
 // #define TESTING_SPHERICAL_WORLD_IN_USE
 

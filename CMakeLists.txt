@@ -179,6 +179,8 @@ add_executable(ylikuutio
     common/vboindexer.hpp
     common/text2D.cpp
     common/text2D.hpp
+    common/text3D.hpp
+    common/text3D.cpp
 
     common/TransformVertexShader.vertexshader
     common/TextureFragmentShader.fragmentshader
