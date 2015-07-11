@@ -380,6 +380,28 @@ namespace model
         this->world_pointer->set_texture_pointer(this->textureID, this);
     }
 
+    Texture::~Texture()
+    {
+        // destructor.
+        std::cout << "Texture with textureID " << this->textureID << " will be destroyed.\n";
+
+        // destroy all species of this texture.
+        std::cout << "All species of this texture will be destroyed.\n";
+
+        // destroy all species of this texture.
+        for (GLuint species_i = 0; species_i < this->species_pointer_vector.size(); species_i++)
+        {
+            model::Species *species_pointer;
+            species_pointer = static_cast<model::Species*>(this->species_pointer_vector[species_i]);
+
+            if (species_pointer != NULL)
+            {
+                // call destructor of each species.
+                delete species_pointer;
+            }
+        }
+    }
+
     Graph::Graph()
     {
         // constructor.
