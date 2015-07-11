@@ -153,7 +153,7 @@ namespace model
         }
     }
 
-    void* World::get_pointer(GLuint shaderID)
+    void* World::get_shader_pointer(GLuint shaderID)
     {
         return this->shader_pointer_vector[shaderID];
     }

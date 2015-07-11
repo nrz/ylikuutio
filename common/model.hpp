@@ -45,7 +45,7 @@ namespace model
             void set_shader_pointer(GLuint shaderID, void* shader_pointer);
 
             // this method gets a shader pointer.
-            void* get_pointer(GLuint shaderID);
+            void* get_shader_pointer(GLuint shaderID);
 
             // this method gets a shader ID and removes it from the `free_shaderID_queue` if it was popped from the queue.
             GLuint get_shaderID();
