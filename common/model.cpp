@@ -131,7 +131,7 @@ namespace model
         }
     }
 
-    void World::set_pointer(GLuint shaderID, void* shader_pointer)
+    void World::set_shader_pointer(GLuint shaderID, void* shader_pointer)
     {
         this->shader_pointer_vector[shaderID] = shader_pointer;
 
@@ -201,7 +201,7 @@ namespace model
         this->shaderID = this->world_pointer->get_shaderID();
 
         // set pointer to this shader.
-        this->world_pointer->set_pointer(this->shaderID, this);
+        this->world_pointer->set_shader_pointer(this->shaderID, this);
 
         // Create and compile our GLSL program from the shaders.
         this->programID = LoadShaders(this->char_vertex_shader, this->char_fragment_shader);
@@ -300,7 +300,7 @@ namespace model
     void Shader::switch_to_new_world(model::World *new_world_pointer)
     {
         // set pointer to this shader to NULL.
-        this->world_pointer->set_pointer(this->shaderID, NULL);
+        this->world_pointer->set_shader_pointer(this->shaderID, NULL);
 
         this->world_pointer = new_world_pointer;
 

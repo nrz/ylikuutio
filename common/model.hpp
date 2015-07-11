@@ -42,7 +42,7 @@ namespace model
             void render();
 
             // this method sets a shader pointer.
-            void set_pointer(GLuint shaderID, void* shader_pointer);
+            void set_shader_pointer(GLuint shaderID, void* shader_pointer);
 
             // this method gets a shader pointer.
             void* get_pointer(GLuint shaderID);
