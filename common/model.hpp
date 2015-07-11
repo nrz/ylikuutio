@@ -129,7 +129,6 @@ namespace model
             void switch_to_new_world(model::World *new_world_pointer);
 
             model::World *world_pointer;           // pointer to the world.
-            GLuint textureID;                      // texture ID, returned by `glGetUniformLocation(programID, "myTextureSampler");`.
 
         private:
             std::vector<void*> species_pointer_vector;
@@ -137,6 +136,7 @@ namespace model
 
             std::string texture_file_format;       // type of the model file, eg. `"bmp"`.
             std::string texture_filename;          // filename of the model file.
+            GLuint textureID;                      // texture ID, returned by `glGetUniformLocation(programID, "myTextureSampler");`.
             const char *char_texture_file_format;
             const char *char_texture_filename;
     };
