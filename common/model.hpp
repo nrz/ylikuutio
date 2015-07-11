@@ -232,7 +232,6 @@ namespace model
             glm::vec3 lightPos;                      // light position.
 
             void *vertex_UV_pointer;                 // pointer to the vertex & UV species (not yet in use!).
-            void *texture_pointer;                   // pointer to the texture species (not yet in use!).
 
             // The rest fields are created in the constructor.
             GLuint MatrixID;
@@ -260,6 +259,7 @@ namespace model
             glm::mat4 ViewMatrix;
         private:
             model::Shader *shader_pointer;         // pointer to the shader.
+            model::Texture *texture_pointer;       // pointer to the texture.
 
             std::string model_file_format;         // type of the model file, eg. `"bmp"`.
             std::string model_filename;            // filename of the model file.
