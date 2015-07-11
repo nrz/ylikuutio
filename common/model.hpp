@@ -249,7 +249,7 @@ namespace model
             std::string model_filename;            // filename of the model file.
             std::string texture_file_format;       // type of the model file, eg. `"bmp"`.
             std::string texture_filename;          // filename of the model file.
-            GLuint speciesID;                      // species ID, returned by `model::World->get_speciesID()`.
+            GLuint speciesID_from_shader;          // species ID, returned by `model::World->get_speciesID()`.
             GLuint lightID;                        // light ID, returned by `glGetUniformLocation(programID, "LightPosition_worldspace");`.
             GLuint texture;                        // Texture, returned by `load_DDS_texture` or `load_BMP_texture`.
             GLuint textureID;                      // texture ID, returned by `glGetUniformLocation(programID, "myTextureSampler");`.

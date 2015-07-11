@@ -574,11 +574,11 @@ namespace model
         this->char_texture_filename    = this->texture_filename.c_str();
         this->char_color_channel       = this->color_channel.c_str();
 
-        // get speciesID from the Shader.
-        this->speciesID = this->shader_pointer->get_speciesID();
+        // get speciesID_from_shader from the Shader.
+        this->speciesID_from_shader = this->shader_pointer->get_speciesID();
 
         // set pointer to this species.
-        this->shader_pointer->set_pointer(this->speciesID, this);
+        this->shader_pointer->set_pointer(this->speciesID_from_shader, this);
 
         // Get a handle for our "MVP" uniform.
         this->MatrixID = glGetUniformLocation(this->shader_pointer->programID, "MVP");
@@ -668,7 +668,7 @@ namespace model
     Species::~Species()
     {
         // destructor.
-        std::cout << "Species with speciesID " << this->speciesID << " will be destroyed.\n";
+        std::cout << "Species with speciesID_from_shader " << this->speciesID_from_shader << " will be destroyed.\n";
 
         // destroy all objects of this species.
         std::cout << "All objects of this species will be destroyed.\n";
@@ -694,7 +694,7 @@ namespace model
         glDeleteTextures(1, &this->texture);
 
         // set pointer to this species to NULL.
-        this->shader_pointer->set_pointer(this->speciesID, NULL);
+        this->shader_pointer->set_pointer(this->speciesID_from_shader, NULL);
     }
 
     void Species::render()
@@ -796,12 +796,12 @@ namespace model
     void Species::switch_to_new_shader(model::Shader *new_shader_pointer)
     {
         // set pointer to this species to NULL.
-        this->shader_pointer->set_pointer(this->speciesID, NULL);
+        this->shader_pointer->set_pointer(this->speciesID_from_shader, NULL);
 
         this->shader_pointer = new_shader_pointer;
 
-        // get speciesID from the Shader.
-        this->speciesID = this->shader_pointer->get_speciesID();
+        // get speciesID_from_shader from the Shader.
+        this->speciesID_from_shader = this->shader_pointer->get_speciesID();
     }
 
     Object::Object(ObjectStruct object_struct)
