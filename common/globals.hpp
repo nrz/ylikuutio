@@ -76,7 +76,7 @@ typedef struct
 typedef struct
 {
     void *world_pointer;                     // pointer to the world.
-    std::string texture_file_format;
+    std::string texture_file_format;         // type of the texture file. supported file formats so far: `"bmp"`/`"BMP"`, `"dds"`/`"DDS"`.
     std::string image_path;
 } TextureStruct;
 
