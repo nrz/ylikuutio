@@ -231,6 +231,9 @@ namespace model
                 delete texture_pointer;
             }
         }
+        // set pointer to this shader to NULL.
+        this->world_pointer->set_shader_pointer(this->shaderID, NULL);
+
         glDeleteProgram(this->programID);
     }
 
@@ -331,6 +334,24 @@ namespace model
 
         // set pointer to this texture.
         this->shader_pointer->set_texture_pointer(this->textureID, this);
+
+        // Load the texture.
+        if ((strcmp(this->char_texture_file_format, "bmp") == 0) || (strcmp(this->char_texture_file_format, "BMP") == 0))
+        {
+            this->texture = texture::load_BMP_texture(this->char_texture_filename);
+        }
+        else if ((strcmp(this->char_texture_file_format, "dds") == 0) || (strcmp(this->char_texture_file_format, "DDS") == 0))
+        {
+            this->texture = texture::load_DDS_texture(this->char_texture_filename);
+        }
+        else
+        {
+            std::cerr << "no texture was loaded!\n";
+            std::cerr << "texture file format: " << this->texture_file_format << "\n";
+        }
+
+        // Get a handle for our "myTextureSampler" uniform.
+        this->openGL_textureID = glGetUniformLocation(this->shader_pointer->programID, "myTextureSampler");
     }
 
     Texture::~Texture()
@@ -353,6 +374,10 @@ namespace model
                 delete species_pointer;
             }
         }
+        glDeleteTextures(1, &this->texture);
+
+        // set pointer to this texture to NULL.
+        this->shader_pointer->set_texture_pointer(this->textureID, NULL);
     }
 
     void Texture::render()
@@ -618,16 +643,12 @@ namespace model
         // constructor.
         this->model_file_format   = species_struct.model_file_format;
         this->model_filename      = species_struct.model_filename;
-        this->texture_file_format = species_struct.texture_file_format;
-        this->texture_filename    = species_struct.texture_filename;
         this->color_channel       = species_struct.color_channel;
         this->lightPos            = species_struct.lightPos;
         this->texture_pointer     = static_cast<model::Texture*>(species_struct.texture_pointer);
 
         this->char_model_file_format   = this->model_file_format.c_str();
         this->char_model_filename      = this->model_filename.c_str();
-        this->char_texture_file_format = this->texture_file_format.c_str();
-        this->char_texture_filename    = this->texture_filename.c_str();
         this->char_color_channel       = this->color_channel.c_str();
 
         // get speciesID from the Texture.
@@ -645,24 +666,6 @@ namespace model
         this->vertexPosition_modelspaceID = glGetAttribLocation(this->texture_pointer->shader_pointer->programID, "vertexPosition_modelspace");
         this->vertexUVID = glGetAttribLocation(this->texture_pointer->shader_pointer->programID, "vertexUV");
         this->vertexNormal_modelspaceID = glGetAttribLocation(this->texture_pointer->shader_pointer->programID, "vertexNormal_modelspace");
-
-        // Load the texture.
-        if ((strcmp(this->char_texture_file_format, "bmp") == 0) || (strcmp(this->char_texture_file_format, "BMP") == 0))
-        {
-            this->texture = texture::load_BMP_texture(this->char_texture_filename);
-        }
-        else if ((strcmp(this->char_texture_file_format, "dds") == 0) || (strcmp(this->char_texture_file_format, "DDS") == 0))
-        {
-            this->texture = texture::load_DDS_texture(this->char_texture_filename);
-        }
-        else
-        {
-            std::cerr << "no texture was loaded!\n";
-            std::cerr << "texture file format: " << this->texture_file_format << "\n";
-        }
-
-        // Get a handle for our "myTextureSampler" uniform.
-        this->openGL_textureID = glGetUniformLocation(this->texture_pointer->shader_pointer->programID, "myTextureSampler");
 
         bool model_loading_result;
 
@@ -747,7 +750,6 @@ namespace model
         glDeleteBuffers(1, &this->uvbuffer);
         glDeleteBuffers(1, &this->normalbuffer);
         glDeleteBuffers(1, &this->elementbuffer);
-        glDeleteTextures(1, &this->texture);
 
         // set pointer to this species to NULL.
         this->texture_pointer->set_pointer(this->speciesID, NULL);
@@ -768,9 +770,9 @@ namespace model
 
         // Bind our texture in Texture Unit 0.
         glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, this->texture);
+        glBindTexture(GL_TEXTURE_2D, this->texture_pointer->texture);
         // Set our "myTextureSampler" sampler to user Texture Unit 0.
-        glUniform1i(this->openGL_textureID, 0);
+        glUniform1i(this->texture_pointer->openGL_textureID, 0);
 
         // 1st attribute buffer : vertices.
         glEnableVertexAttribArray(this->vertexPosition_modelspaceID);

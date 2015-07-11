@@ -121,6 +121,8 @@ namespace model
             void switch_to_new_shader(model::Shader *new_world_pointer);
 
             model::Shader *shader_pointer;         // pointer to the shader.
+            GLuint texture;                        // Texture, returned by `load_DDS_texture` or `load_BMP_texture`.
+            GLuint openGL_textureID;               // texture ID, returned by `glGetUniformLocation(programID, "myTextureSampler");`.
 
         private:
             std::vector<void*> species_pointer_vector;
@@ -128,9 +130,7 @@ namespace model
 
             std::string texture_file_format;       // type of the model file, eg. `"bmp"`.
             std::string texture_filename;          // filename of the model file.
-            GLuint texture;                        // Texture, returned by `load_DDS_texture` or `load_BMP_texture`.
             GLuint textureID;                      // texture ID, returned by `Shader::get_textureID`.
-            GLuint openGL_textureID;               // texture ID, returned by `glGetUniformLocation(programID, "myTextureSampler");`.
             const char *char_texture_file_format;
             const char *char_texture_filename;
     };
@@ -261,16 +261,10 @@ namespace model
 
             std::string model_file_format;         // type of the model file, eg. `"bmp"`.
             std::string model_filename;            // filename of the model file.
-            std::string texture_file_format;       // type of the model file, eg. `"bmp"`.
-            std::string texture_filename;          // filename of the model file.
             GLuint speciesID;                      // species ID, returned by `model::Texture->get_speciesID()`.
             GLuint lightID;                        // light ID, returned by `glGetUniformLocation(programID, "LightPosition_worldspace");`.
-            GLuint texture;                        // Texture, returned by `load_DDS_texture` or `load_BMP_texture`.
-            GLuint openGL_textureID;               // texture ID, returned by `glGetUniformLocation(programID, "myTextureSampler");`.
             const char *char_model_file_format;
             const char *char_model_filename;
-            const char *char_texture_file_format;
-            const char *char_texture_filename;
             const char *char_color_channel;
 
             std::vector<void*> object_pointer_vector;

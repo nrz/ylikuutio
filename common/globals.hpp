@@ -106,8 +106,6 @@ typedef struct
     void *texture_pointer;                   // pointer to the texture object.
     std::string model_file_format;           // type of the model file. supported file formats so far: `"bmp"`/`"BMP"`, `"obj"`/`"OBJ"`.
                                              // TODO: add support for `"SRTM"`.
-    std::string texture_file_format;         // type of the texture file. supported file formats so far: `"bmp"`/`"BMP"`, `"dds"`/`"DDS"`.
-    std::string texture_filename;            // filename of the model file.
     std::string vertex_shader;               // filename of vertex shader.
     std::string fragment_shader;             // filename of fragment shader.
     glm::vec3 lightPos;                      // light position.

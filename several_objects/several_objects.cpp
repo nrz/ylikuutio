@@ -128,8 +128,6 @@ int main(void)
     species_struct.texture_pointer = my_texture;
     species_struct.model_file_format = "obj";
     species_struct.model_filename = "suzanne.obj";
-    species_struct.texture_file_format = "dds";
-    species_struct.texture_filename = "uvmap.DDS";
     species_struct.vertex_shader = "StandardShading.vertexshader";
     species_struct.fragment_shader = "StandardShading.fragmentshader";
     species_struct.lightPos = glm::vec3(4, 4, 4);
