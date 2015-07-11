@@ -47,12 +47,23 @@ namespace model
             // this method gets a shader pointer.
             void* get_shader_pointer(GLuint shaderID);
 
+            // this method sets a texture pointer.
+            void set_texture_pointer(GLuint textureID, void* texture_pointer);
+
+            // this method gets a texture pointer.
+            void* get_texture_pointer(GLuint textureID);
+
             // this method gets a shader ID and removes it from the `free_shaderID_queue` if it was popped from the queue.
             GLuint get_shaderID();
+
+            // this method gets a texture ID and removes it from the `free_textureID_queue` if it was popped from the queue.
+            GLuint get_textureID();
 
         private:
             std::vector<void*> shader_pointer_vector;
             std::queue<GLuint> free_shaderID_queue;
+            std::vector<void*> texture_pointer_vector;
+            std::queue<GLuint> free_textureID_queue;
     };
 
     class Shader
@@ -94,6 +105,19 @@ namespace model
 
             const char *char_vertex_shader;
             const char *char_fragment_shader;
+    };
+
+    class Texture
+    {
+        public:
+            // constructor.
+            Texture(TextureStruct texture_struct);
+
+            // destructor.
+            ~Texture();
+
+            model::World *world_pointer;           // pointer to the world.
+            GLuint textureID;                      // texture ID, returned by `glGetUniformLocation(programID, "myTextureSampler");`.
     };
 
     class Graph

@@ -158,6 +158,33 @@ namespace model
         return this->shader_pointer_vector[shaderID];
     }
 
+    void World::set_texture_pointer(GLuint textureID, void* texture_pointer)
+    {
+        this->texture_pointer_vector[textureID] = texture_pointer;
+
+        if (texture_pointer == NULL)
+        {
+            // OK, the pointer to be stored was NULL, then that textureID is released to be used again.
+            this->free_textureID_queue.push(textureID);
+
+            if (textureID == this->texture_pointer_vector.size() - 1)
+            {
+                // OK, this is the biggest textureID of all textureID's of this world.
+                // We can reduce the size of the texture pointer vector at least by 1.
+                while ((!texture_pointer_vector.empty()) && (texture_pointer_vector.back() == NULL))
+                {
+                    // Reduce the size of texture pointer vector by 1.
+                    texture_pointer_vector.pop_back();
+                }
+            }
+        }
+    }
+
+    void* World::get_texture_pointer(GLuint textureID)
+    {
+        return this->texture_pointer_vector[textureID];
+    }
+
     GLuint World::get_shaderID()
     {
         GLuint shaderID;
@@ -184,6 +211,34 @@ namespace model
         this->shader_pointer_vector.push_back(NULL);
 
         return shaderID;
+    }
+
+    GLuint World::get_textureID()
+    {
+        GLuint textureID;
+
+        while (!this->free_textureID_queue.empty())
+        {
+            // return the first (oldest) free textureID.
+            textureID = this->free_textureID_queue.front();
+            this->free_textureID_queue.pop();
+
+            // check that the texture index does not exceed current texture pointer vector.
+            if (textureID < this->texture_pointer_vector.size())
+            {
+                // OK, it does not exceed current texture pointer vector.
+                return textureID;
+            }
+        }
+
+        // OK, the queue is empty.
+        // A new texture index must be created.
+        textureID = this->texture_pointer_vector.size();
+
+        // texture pointer vector must also be extended with an appropriate NULL pointer.
+        this->texture_pointer_vector.push_back(NULL);
+
+        return textureID;
     }
 
     Shader::Shader(ShaderStruct shader_struct)
@@ -306,6 +361,18 @@ namespace model
 
         // get shaderID from the World.
         this->shaderID = this->world_pointer->get_shaderID();
+    }
+
+    Texture::Texture(TextureStruct texture_struct)
+    {
+        // constructor.
+        this->world_pointer        = static_cast<model::World*>(texture_struct.world_pointer);
+
+        // get textureID from the World.
+        this->textureID = this->world_pointer->get_textureID();
+
+        // set pointer to this texture.
+        this->world_pointer->set_texture_pointer(this->textureID, this);
     }
 
     Graph::Graph()
