@@ -404,6 +404,28 @@ namespace model
         }
     }
 
+    void Texture::set_pointer(GLuint speciesID, void* species_pointer)
+    {
+        this->species_pointer_vector[speciesID] = species_pointer;
+
+        if (species_pointer == NULL)
+        {
+            // OK, the pointer to be stored was NULL, then that speciesID is released to be used again.
+            this->free_speciesID_queue.push(speciesID);
+
+            if (speciesID == this->species_pointer_vector.size() - 1)
+            {
+                // OK, this is the biggest speciesID of all speciesID's of this texture.
+                // We can reduce the size of the species pointer vector at least by 1.
+                while ((!species_pointer_vector.empty()) && (species_pointer_vector.back() == NULL))
+                {
+                    // Reduce the size of species pointer vector by 1.
+                    species_pointer_vector.pop_back();
+                }
+            }
+        }
+    }
+
     Graph::Graph()
     {
         // constructor.
