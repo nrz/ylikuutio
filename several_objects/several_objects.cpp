@@ -118,14 +118,14 @@ int main(void)
 
     // Create the texture, store it in 'my_texture`.
     TextureStruct texture_struct;
-    texture_struct.world_pointer = my_world;
+    texture_struct.shader_pointer = my_shader;
     texture_struct.texture_file_format = "dds";
     texture_struct.texture_filename = "uvmap.DDS";
     model::Texture *my_texture = new model::Texture(texture_struct);
 
     // Create the species, store it in `suzanne_species`.
     SpeciesStruct species_struct;
-    species_struct.shader_pointer = my_shader;
+    species_struct.texture_pointer = my_texture;
     species_struct.model_file_format = "obj";
     species_struct.model_filename = "suzanne.obj";
     species_struct.texture_file_format = "dds";

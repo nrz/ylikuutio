@@ -119,21 +119,6 @@ namespace model
                 delete shader_pointer;
             }
         }
-
-        // destroy all textures of this world.
-        std::cout << "All textures of this world will be destroyed.\n";
-
-        for (GLuint texture_i = 0; texture_i < this->texture_pointer_vector.size(); texture_i++)
-        {
-            model::Texture *texture_pointer;
-            texture_pointer = static_cast<model::Texture*>(this->texture_pointer_vector[texture_i]);
-
-            if (texture_pointer != NULL)
-            {
-                // call destructor of each texture.
-                delete texture_pointer;
-            }
-        }
     }
 
     void World::render()
@@ -178,33 +163,6 @@ namespace model
         return this->shader_pointer_vector[shaderID];
     }
 
-    void World::set_texture_pointer(GLuint textureID, void* texture_pointer)
-    {
-        this->texture_pointer_vector[textureID] = texture_pointer;
-
-        if (texture_pointer == NULL)
-        {
-            // OK, the pointer to be stored was NULL, then that textureID is released to be used again.
-            this->free_textureID_queue.push(textureID);
-
-            if (textureID == this->texture_pointer_vector.size() - 1)
-            {
-                // OK, this is the biggest textureID of all textureID's of this world.
-                // We can reduce the size of the texture pointer vector at least by 1.
-                while ((!texture_pointer_vector.empty()) && (texture_pointer_vector.back() == NULL))
-                {
-                    // Reduce the size of texture pointer vector by 1.
-                    texture_pointer_vector.pop_back();
-                }
-            }
-        }
-    }
-
-    void* World::get_texture_pointer(GLuint textureID)
-    {
-        return this->texture_pointer_vector[textureID];
-    }
-
     GLuint World::get_shaderID()
     {
         GLuint shaderID;
@@ -233,7 +191,92 @@ namespace model
         return shaderID;
     }
 
-    GLuint World::get_textureID()
+    Shader::Shader(ShaderStruct shader_struct)
+    {
+        // constructor.
+
+        this->vertex_shader        = shader_struct.vertex_shader;
+        this->fragment_shader      = shader_struct.fragment_shader;
+
+        this->char_vertex_shader   = this->vertex_shader.c_str();
+        this->char_fragment_shader = this->fragment_shader.c_str();
+        this->world_pointer        = static_cast<model::World*>(shader_struct.world_pointer);
+
+        // get shaderID from the World.
+        this->shaderID = this->world_pointer->get_shaderID();
+
+        // set pointer to this shader.
+        this->world_pointer->set_shader_pointer(this->shaderID, this);
+
+        // Create and compile our GLSL program from the shaders.
+        this->programID = LoadShaders(this->char_vertex_shader, this->char_fragment_shader);
+    }
+
+    Shader::~Shader()
+    {
+        // destructor.
+        std::cout << "Shader with shaderID " << this->shaderID << " will be destroyed.\n";
+
+        // destroy all textures of this shader.
+        std::cout << "All textures of this shader will be destroyed.\n";
+
+        for (GLuint texture_i = 0; texture_i < this->texture_pointer_vector.size(); texture_i++)
+        {
+            model::Texture *texture_pointer;
+            texture_pointer = static_cast<model::Texture*>(this->texture_pointer_vector[texture_i]);
+
+            if (texture_pointer != NULL)
+            {
+                // call destructor of each texture.
+                delete texture_pointer;
+            }
+        }
+        glDeleteProgram(this->programID);
+    }
+
+    void Shader::render()
+    {
+        // this method renders the shader by calling `render()` methods of each texture.
+        for (GLuint texture_i = 0; texture_i < this->texture_pointer_vector.size(); texture_i++)
+        {
+            model::Texture *texture_pointer;
+            texture_pointer = static_cast<model::Texture*>(this->texture_pointer_vector[texture_i]);
+
+            if (texture_pointer != NULL)
+            {
+                texture_pointer->render();
+            }
+        }
+    }
+
+    void Shader::set_texture_pointer(GLuint textureID, void* texture_pointer)
+    {
+        this->texture_pointer_vector[textureID] = texture_pointer;
+
+        if (texture_pointer == NULL)
+        {
+            // OK, the pointer to be stored was NULL, then that textureID is released to be used again.
+            this->free_textureID_queue.push(textureID);
+
+            if (textureID == this->texture_pointer_vector.size() - 1)
+            {
+                // OK, this is the biggest textureID of all textureID's of this shader.
+                // We can reduce the size of the texture pointer vector at least by 1.
+                while ((!texture_pointer_vector.empty()) && (texture_pointer_vector.back() == NULL))
+                {
+                    // Reduce the size of texture pointer vector by 1.
+                    texture_pointer_vector.pop_back();
+                }
+            }
+        }
+    }
+
+    void* Shader::get_texture_pointer(GLuint textureID)
+    {
+        return this->texture_pointer_vector[textureID];
+    }
+
+    GLuint Shader::get_textureID()
     {
         GLuint textureID;
 
@@ -261,120 +304,6 @@ namespace model
         return textureID;
     }
 
-    Shader::Shader(ShaderStruct shader_struct)
-    {
-        // constructor.
-
-        this->vertex_shader        = shader_struct.vertex_shader;
-        this->fragment_shader      = shader_struct.fragment_shader;
-
-        this->char_vertex_shader   = this->vertex_shader.c_str();
-        this->char_fragment_shader = this->fragment_shader.c_str();
-        this->world_pointer        = static_cast<model::World*>(shader_struct.world_pointer);
-
-        // get shaderID from the World.
-        this->shaderID = this->world_pointer->get_shaderID();
-
-        // set pointer to this shader.
-        this->world_pointer->set_shader_pointer(this->shaderID, this);
-
-        // Create and compile our GLSL program from the shaders.
-        this->programID = LoadShaders(this->char_vertex_shader, this->char_fragment_shader);
-    }
-
-    Shader::~Shader()
-    {
-        // destructor.
-        std::cout << "Shader with shaderID " << this->shaderID << " will be destroyed.\n";
-
-        // destroy all species of this shader.
-        std::cout << "All species of this shader will be destroyed.\n";
-
-        // destroy all species of this shader.
-        for (GLuint species_i = 0; species_i < this->species_pointer_vector.size(); species_i++)
-        {
-            model::Species *species_pointer;
-            species_pointer = static_cast<model::Species*>(this->species_pointer_vector[species_i]);
-
-            if (species_pointer != NULL)
-            {
-                // call destructor of each species.
-                delete species_pointer;
-            }
-        }
-        glDeleteProgram(this->programID);
-    }
-
-    void Shader::render()
-    {
-        // this method renders the shader by calling `render()` methods of each species.
-        for (GLuint species_i = 0; species_i < this->species_pointer_vector.size(); species_i++)
-        {
-            model::Species *species_pointer;
-            species_pointer = static_cast<model::Species*>(this->species_pointer_vector[species_i]);
-
-            if (species_pointer != NULL)
-            {
-                species_pointer->render();
-            }
-        }
-    }
-
-    void Shader::set_pointer(GLuint speciesID, void* species_pointer)
-    {
-        this->species_pointer_vector[speciesID] = species_pointer;
-
-        if (species_pointer == NULL)
-        {
-            // OK, the pointer to be stored was NULL, then that speciesID is released to be used again.
-            this->free_speciesID_queue.push(speciesID);
-
-            if (speciesID == this->species_pointer_vector.size() - 1)
-            {
-                // OK, this is the biggest speciesID of all speciesID's of this shader.
-                // We can reduce the size of the species pointer vector at least by 1.
-                while ((!species_pointer_vector.empty()) && (species_pointer_vector.back() == NULL))
-                {
-                    // Reduce the size of species pointer vector by 1.
-                    species_pointer_vector.pop_back();
-                }
-            }
-        }
-    }
-
-    void* Shader::get_pointer(GLuint speciesID)
-    {
-        return this->species_pointer_vector[speciesID];
-    }
-
-    GLuint Shader::get_speciesID()
-    {
-        GLuint speciesID;
-
-        while (!this->free_speciesID_queue.empty())
-        {
-            // return the first (oldest) free speciesID.
-            speciesID = this->free_speciesID_queue.front();
-            this->free_speciesID_queue.pop();
-
-            // check that the species index does not exceed current species pointer vector.
-            if (speciesID < this->species_pointer_vector.size())
-            {
-                // OK, it does not exceed current species pointer vector.
-                return speciesID;
-            }
-        }
-
-        // OK, the queue is empty.
-        // A new species index must be created.
-        speciesID = this->species_pointer_vector.size();
-
-        // species pointer vector must also be extended with an appropriate NULL pointer.
-        this->species_pointer_vector.push_back(NULL);
-
-        return speciesID;
-    }
-
     void Shader::switch_to_new_world(model::World *new_world_pointer)
     {
         // set pointer to this shader to NULL.
@@ -389,7 +318,7 @@ namespace model
     Texture::Texture(TextureStruct texture_struct)
     {
         // constructor.
-        this->world_pointer = static_cast<model::World*>(texture_struct.world_pointer);
+        this->shader_pointer = static_cast<model::Shader*>(texture_struct.shader_pointer);
 
         this->texture_file_format = texture_struct.texture_file_format;
         this->texture_filename    = texture_struct.texture_filename;
@@ -397,11 +326,11 @@ namespace model
         this->char_texture_file_format = this->texture_file_format.c_str();
         this->char_texture_filename    = this->texture_filename.c_str();
 
-        // get textureID from the World.
-        this->textureID = this->world_pointer->get_textureID();
+        // get textureID from the Shader.
+        this->textureID = this->shader_pointer->get_textureID();
 
         // set pointer to this texture.
-        this->world_pointer->set_texture_pointer(this->textureID, this);
+        this->shader_pointer->set_texture_pointer(this->textureID, this);
     }
 
     Texture::~Texture()
@@ -422,6 +351,21 @@ namespace model
             {
                 // call destructor of each species.
                 delete species_pointer;
+            }
+        }
+    }
+
+    void Texture::render()
+    {
+        // this method renders the texture by calling `render()` methods of each species.
+        for (GLuint species_i = 0; species_i < this->species_pointer_vector.size(); species_i++)
+        {
+            model::Species *species_pointer;
+            species_pointer = static_cast<model::Species*>(this->species_pointer_vector[species_i]);
+
+            if (species_pointer != NULL)
+            {
+                species_pointer->render();
             }
         }
     }
@@ -481,15 +425,15 @@ namespace model
         return speciesID;
     }
 
-    void Texture::switch_to_new_world(model::World *new_world_pointer)
+    void Texture::switch_to_new_shader(model::Shader *new_shader_pointer)
     {
         // set pointer to this texture to NULL.
-        this->world_pointer->set_texture_pointer(this->textureID, NULL);
+        this->shader_pointer->set_texture_pointer(this->textureID, NULL);
 
-        this->world_pointer = new_world_pointer;
+        this->shader_pointer = new_shader_pointer;
 
-        // get textureID from the World.
-        this->textureID = this->world_pointer->get_textureID();
+        // get textureID from the Shader.
+        this->textureID = this->shader_pointer->get_textureID();
     }
 
     Graph::Graph()
@@ -678,7 +622,7 @@ namespace model
         this->texture_filename    = species_struct.texture_filename;
         this->color_channel       = species_struct.color_channel;
         this->lightPos            = species_struct.lightPos;
-        this->shader_pointer      = static_cast<model::Shader*>(species_struct.shader_pointer);
+        this->texture_pointer     = static_cast<model::Texture*>(species_struct.texture_pointer);
 
         this->char_model_file_format   = this->model_file_format.c_str();
         this->char_model_filename      = this->model_filename.c_str();
@@ -686,21 +630,21 @@ namespace model
         this->char_texture_filename    = this->texture_filename.c_str();
         this->char_color_channel       = this->color_channel.c_str();
 
-        // get speciesID_from_shader from the Shader.
-        this->speciesID_from_shader = this->shader_pointer->get_speciesID();
+        // get speciesID_from_texture from the Texture.
+        this->speciesID_from_texture = this->texture_pointer->get_speciesID();
 
         // set pointer to this species.
-        this->shader_pointer->set_pointer(this->speciesID_from_shader, this);
+        this->texture_pointer->set_pointer(this->speciesID_from_texture, this);
 
         // Get a handle for our "MVP" uniform.
-        this->MatrixID = glGetUniformLocation(this->shader_pointer->programID, "MVP");
-        this->ViewMatrixID = glGetUniformLocation(this->shader_pointer->programID, "V");
-        this->ModelMatrixID = glGetUniformLocation(this->shader_pointer->programID, "M");
+        this->MatrixID = glGetUniformLocation(this->texture_pointer->shader_pointer->programID, "MVP");
+        this->ViewMatrixID = glGetUniformLocation(this->texture_pointer->shader_pointer->programID, "V");
+        this->ModelMatrixID = glGetUniformLocation(this->texture_pointer->shader_pointer->programID, "M");
 
         // Get a handle for our buffers.
-        this->vertexPosition_modelspaceID = glGetAttribLocation(this->shader_pointer->programID, "vertexPosition_modelspace");
-        this->vertexUVID = glGetAttribLocation(this->shader_pointer->programID, "vertexUV");
-        this->vertexNormal_modelspaceID = glGetAttribLocation(this->shader_pointer->programID, "vertexNormal_modelspace");
+        this->vertexPosition_modelspaceID = glGetAttribLocation(this->texture_pointer->shader_pointer->programID, "vertexPosition_modelspace");
+        this->vertexUVID = glGetAttribLocation(this->texture_pointer->shader_pointer->programID, "vertexUV");
+        this->vertexNormal_modelspaceID = glGetAttribLocation(this->texture_pointer->shader_pointer->programID, "vertexNormal_modelspace");
 
         // Load the texture.
         if ((strcmp(this->char_texture_file_format, "bmp") == 0) || (strcmp(this->char_texture_file_format, "BMP") == 0))
@@ -718,7 +662,7 @@ namespace model
         }
 
         // Get a handle for our "myTextureSampler" uniform.
-        this->openGL_textureID = glGetUniformLocation(this->shader_pointer->programID, "myTextureSampler");
+        this->openGL_textureID = glGetUniformLocation(this->texture_pointer->shader_pointer->programID, "myTextureSampler");
 
         bool model_loading_result;
 
@@ -771,8 +715,8 @@ namespace model
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, this->indices.size() * sizeof(GLuint), &this->indices[0] , GL_STATIC_DRAW);
 
         // Get a handle for our "LightPosition" uniform.
-        glUseProgram(this->shader_pointer->programID);
-        this->lightID = glGetUniformLocation(this->shader_pointer->programID, "LightPosition_worldspace");
+        glUseProgram(this->texture_pointer->shader_pointer->programID);
+        this->lightID = glGetUniformLocation(this->texture_pointer->shader_pointer->programID, "LightPosition_worldspace");
 
         // Compute the graph of this object type.
     }
@@ -780,7 +724,7 @@ namespace model
     Species::~Species()
     {
         // destructor.
-        std::cout << "Species with speciesID_from_shader " << this->speciesID_from_shader << " will be destroyed.\n";
+        std::cout << "Species with speciesID_from_texture " << this->speciesID_from_texture << " will be destroyed.\n";
 
         // destroy all objects of this species.
         std::cout << "All objects of this species will be destroyed.\n";
@@ -806,7 +750,7 @@ namespace model
         glDeleteTextures(1, &this->texture);
 
         // set pointer to this species to NULL.
-        this->shader_pointer->set_pointer(this->speciesID_from_shader, NULL);
+        this->texture_pointer->set_pointer(this->speciesID_from_texture, NULL);
     }
 
     void Species::render()
@@ -817,7 +761,7 @@ namespace model
         this->ViewMatrix = controls::getViewMatrix();
 
         // [re]bind `programID` shader.
-        glUseProgram(this->shader_pointer->programID);
+        glUseProgram(this->texture_pointer->shader_pointer->programID);
 
         glUniform3f(this->lightID, this->lightPos.x, this->lightPos.y, this->lightPos.z);
         glUniformMatrix4fv(this->ViewMatrixID, 1, GL_FALSE, &this->ViewMatrix[0][0]); // This one doesn't change between objects, so this can be done once for all objects that use "programID"
@@ -905,15 +849,15 @@ namespace model
         return objectID;
     }
 
-    void Species::switch_to_new_shader(model::Shader *new_shader_pointer)
+    void Species::switch_to_new_texture(model::Texture *new_texture_pointer)
     {
         // set pointer to this species to NULL.
-        this->shader_pointer->set_pointer(this->speciesID_from_shader, NULL);
+        this->texture_pointer->set_pointer(this->speciesID_from_texture, NULL);
 
-        this->shader_pointer = new_shader_pointer;
+        this->texture_pointer = new_texture_pointer;
 
-        // get speciesID_from_shader from the Shader.
-        this->speciesID_from_shader = this->shader_pointer->get_speciesID();
+        // get speciesID_from_shader from the Texture.
+        this->speciesID_from_texture = this->texture_pointer->get_speciesID();
     }
 
     Object::Object(ObjectStruct object_struct)

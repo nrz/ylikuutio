@@ -165,7 +165,7 @@ int main(void)
 
     // Create the texture, store it in 'my_texture`.
     TextureStruct texture_struct;
-    texture_struct.world_pointer = my_world;
+    texture_struct.shader_pointer = my_shader;
     texture_struct.texture_file_format = g_texture_file_format;
     texture_struct.texture_filename = g_texture_filename;
     model::Texture *my_texture = new model::Texture(texture_struct);
@@ -173,7 +173,7 @@ int main(void)
 #ifdef TESTING_SPHERICAL_WORLD_IN_USE
     // Create the species, store it in `terrain_species`.
     SpeciesStruct SRTM_terrain_species_struct;
-    SRTM_terrain_species_struct.shader_pointer = my_shader;
+    SRTM_terrain_species_struct.texture_pointer = texture_pointer;
     SRTM_terrain_species_struct.model_file_format = "SRTM";
     // SRTM_terrain_species_struct.model_filename = "/media/laatikko_4TB/satelliittikuvat/srtm/version3/data/";
     SRTM_terrain_species_struct.model_filename = "./"; // for testing
@@ -185,7 +185,7 @@ int main(void)
 #else
     // Create the species, store it in `terrain_species`.
     SpeciesStruct bmp_terrain_species_struct;
-    bmp_terrain_species_struct.shader_pointer = my_shader;
+    bmp_terrain_species_struct.texture_pointer = my_texture;
     bmp_terrain_species_struct.model_file_format = g_model_file_format;
     bmp_terrain_species_struct.model_filename = g_model_filename;
     bmp_terrain_species_struct.texture_file_format = g_texture_file_format;
@@ -205,7 +205,7 @@ int main(void)
     model::Object *terrain1 = new model::Object(terrain_object_struct1);
 
     SpeciesStruct suzanne_species_struct;
-    suzanne_species_struct.shader_pointer = my_shader;
+    suzanne_species_struct.texture_pointer = my_texture;
     suzanne_species_struct.model_file_format = "obj";
     suzanne_species_struct.model_filename = "suzanne.obj";
     suzanne_species_struct.texture_file_format = "dds";

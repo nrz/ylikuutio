@@ -75,7 +75,7 @@ typedef struct
 
 typedef struct
 {
-    void *world_pointer;                     // pointer to the world.
+    void *shader_pointer;                    // pointer to the shader.
     std::string texture_file_format;         // type of the texture file. supported file formats so far: `"bmp"`/`"BMP"`, `"dds"`/`"DDS"`.
     std::string texture_filename;            // filename of the model file.
     std::string image_path;
@@ -103,7 +103,7 @@ typedef struct
 typedef struct
 {
     // used for all files (for all species).
-    void *shader_pointer;                    // pointer to the shader object.
+    void *texture_pointer;                   // pointer to the texture object.
     std::string model_file_format;           // type of the model file. supported file formats so far: `"bmp"`/`"BMP"`, `"obj"`/`"OBJ"`.
                                              // TODO: add support for `"SRTM"`.
     std::string texture_file_format;         // type of the texture file. supported file formats so far: `"bmp"`/`"BMP"`, `"dds"`/`"DDS"`.

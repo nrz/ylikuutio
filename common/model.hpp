@@ -47,23 +47,12 @@ namespace model
             // this method gets a shader pointer.
             void* get_shader_pointer(GLuint shaderID);
 
-            // this method sets a texture pointer.
-            void set_texture_pointer(GLuint textureID, void* texture_pointer);
-
-            // this method gets a texture pointer.
-            void* get_texture_pointer(GLuint textureID);
-
             // this method gets a shader ID and removes it from the `free_shaderID_queue` if it was popped from the queue.
             GLuint get_shaderID();
-
-            // this method gets a texture ID and removes it from the `free_textureID_queue` if it was popped from the queue.
-            GLuint get_textureID();
 
         private:
             std::vector<void*> shader_pointer_vector;
             std::queue<GLuint> free_shaderID_queue;
-            std::vector<void*> texture_pointer_vector;
-            std::queue<GLuint> free_textureID_queue;
     };
 
     class Shader
@@ -75,17 +64,17 @@ namespace model
             // destructor.
             ~Shader();
 
-            // this method renders all species using this shader.
+            // this method renders all textures using this shader.
             void render();
 
-            // this method sets a species pointer.
-            void set_pointer(GLuint speciesID, void* species_pointer);
+            // this method sets a texture pointer.
+            void set_texture_pointer(GLuint textureID, void* texture_pointer);
 
-            // this method gets a species pointer.
-            void* get_pointer(GLuint speciesID);
+            // this method gets a texture pointer.
+            void* get_texture_pointer(GLuint textureID);
 
-            // this method gets a species ID and removes it from the `free_speciesID_queue` if it was popped from the queue.
-            GLuint get_speciesID();
+            // this method gets a texture ID and removes it from the `free_textureID_queue` if it was popped from the queue.
+            GLuint get_textureID();
 
             // this method sets pointer to this shader to NULL, sets `world_pointer` according to the input, and requests a new `shaderID` from the new world.
             void switch_to_new_world(model::World *new_world_pointer);
@@ -100,8 +89,8 @@ namespace model
             GLuint programID;                     // shaders' programID, returned by `LoadShaders`.
 
         private:
-            std::vector<void*> species_pointer_vector;
-            std::queue<GLuint> free_speciesID_queue;
+            std::vector<void*> texture_pointer_vector;
+            std::queue<GLuint> free_textureID_queue;
 
             const char *char_vertex_shader;
             const char *char_fragment_shader;
@@ -116,6 +105,9 @@ namespace model
             // destructor.
             ~Texture();
 
+            // this method renders all species using this texture.
+            void render();
+
             // this method sets a species pointer.
             void set_pointer(GLuint speciesID, void* species_pointer);
 
@@ -125,10 +117,10 @@ namespace model
             // this method gets a species ID and removes it from the `free_speciesID_queue` if it was popped from the queue.
             GLuint get_speciesID();
 
-            // this method sets pointer to this shader to NULL, sets `world_pointer` according to the input, and requests a new `shaderID` from the new world.
-            void switch_to_new_world(model::World *new_world_pointer);
+            // this method sets pointer to this shader to NULL, sets `shader_pointer` according to the input, and requests a new `textureID` from the new shader.
+            void switch_to_new_shader(model::Shader *new_world_pointer);
 
-            model::World *world_pointer;           // pointer to the world.
+            model::Shader *shader_pointer;         // pointer to the shader.
 
         private:
             std::vector<void*> species_pointer_vector;
@@ -137,7 +129,7 @@ namespace model
             std::string texture_file_format;       // type of the model file, eg. `"bmp"`.
             std::string texture_filename;          // filename of the model file.
             GLuint texture;                        // Texture, returned by `load_DDS_texture` or `load_BMP_texture`.
-            GLuint textureID;                      // texture ID, returned by `World::get_textureID`.
+            GLuint textureID;                      // texture ID, returned by `Shader::get_textureID`.
             GLuint openGL_textureID;               // texture ID, returned by `glGetUniformLocation(programID, "myTextureSampler");`.
             const char *char_texture_file_format;
             const char *char_texture_filename;
@@ -231,8 +223,8 @@ namespace model
             // this method gets a object ID and removes it from the `free_objectID_queue` if it was popped from the queue.
             GLuint get_objectID();
 
-            // this method sets pointer to this species to NULL, sets `shader_pointer` according to the input, and requests a new `speciesID` from the new shader.
-            void switch_to_new_shader(model::Shader *new_shader_pointer);
+            // this method sets pointer to this species to NULL, sets `texture_pointer` according to the input, and requests a new `speciesID` from the new texture.
+            void switch_to_new_texture(model::Texture *new_texture_pointer);
 
             std::string color_channel;               // color channel in use: `"red"`, `"green"`, `"blue"`, `"mean"` or `"all"`.
             std::vector<ObjectStruct> object_vector; // vector of individual objects of this species.
@@ -265,14 +257,12 @@ namespace model
             glm::mat4 ProjectionMatrix;
             glm::mat4 ViewMatrix;
         private:
-            model::Shader *shader_pointer;         // pointer to the shader.
             model::Texture *texture_pointer;       // pointer to the texture.
 
             std::string model_file_format;         // type of the model file, eg. `"bmp"`.
             std::string model_filename;            // filename of the model file.
             std::string texture_file_format;       // type of the model file, eg. `"bmp"`.
             std::string texture_filename;          // filename of the model file.
-            GLuint speciesID_from_shader;          // species ID, returned by `model::Shader->get_speciesID()`.
             GLuint speciesID_from_texture;         // species ID, returned by `model::Texture->get_speciesID()`.
             GLuint lightID;                        // light ID, returned by `glGetUniformLocation(programID, "LightPosition_worldspace");`.
             GLuint texture;                        // Texture, returned by `load_DDS_texture` or `load_BMP_texture`.
