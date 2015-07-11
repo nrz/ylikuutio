@@ -116,6 +116,13 @@ int main(void)
     shader_struct.fragment_shader = "StandardShading.fragmentshader";
     model::Shader *my_shader = new model::Shader(shader_struct);
 
+    // Create the texture, store it in 'my_texture`.
+    TextureStruct texture_struct;
+    texture_struct.world_pointer = my_world;
+    texture_struct.texture_file_format = "dds";
+    texture_struct.texture_filename = "uvmap.DDS";
+    model::Texture *my_texture = new model::Texture(texture_struct);
+
     // Create the species, store it in `suzanne_species`.
     SpeciesStruct species_struct;
     species_struct.shader_pointer = my_shader;

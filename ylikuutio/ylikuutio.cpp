@@ -163,6 +163,13 @@ int main(void)
     shader_struct.fragment_shader = "StandardShading.fragmentshader";
     model::Shader *my_shader = new model::Shader(shader_struct);
 
+    // Create the texture, store it in 'my_texture`.
+    TextureStruct texture_struct;
+    texture_struct.world_pointer = my_world;
+    texture_struct.texture_file_format = g_texture_file_format;
+    texture_struct.texture_filename = g_texture_filename;
+    model::Texture *my_texture = new model::Texture(texture_struct);
+
 #ifdef TESTING_SPHERICAL_WORLD_IN_USE
     // Create the species, store it in `terrain_species`.
     SpeciesStruct SRTM_terrain_species_struct;
