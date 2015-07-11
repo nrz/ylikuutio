@@ -118,6 +118,21 @@ namespace model
                 delete shader_pointer;
             }
         }
+
+        // destroy all textures of this world.
+        std::cout << "All textures of this world will be destroyed.\n";
+
+        for (GLuint texture_i = 0; texture_i < this->texture_pointer_vector.size(); texture_i++)
+        {
+            model::Texture *texture_pointer;
+            texture_pointer = static_cast<model::Texture*>(this->texture_pointer_vector[texture_i]);
+
+            if (texture_pointer != NULL)
+            {
+                // call destructor of each texture.
+                delete texture_pointer;
+            }
+        }
     }
 
     void World::render()
