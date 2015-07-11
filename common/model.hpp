@@ -136,6 +136,7 @@ namespace model
             std::queue<GLuint> free_speciesID_queue;
 
             std::string texture_file_format;       // type of the model file, eg. `"bmp"`.
+            std::string texture_filename;          // filename of the model file.
     };
 
     class Graph
