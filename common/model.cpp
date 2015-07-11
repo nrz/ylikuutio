@@ -431,6 +431,34 @@ namespace model
         return this->species_pointer_vector[speciesID];
     }
 
+    GLuint Texture::get_speciesID()
+    {
+        GLuint speciesID;
+
+        while (!this->free_speciesID_queue.empty())
+        {
+            // return the first (oldest) free speciesID.
+            speciesID = this->free_speciesID_queue.front();
+            this->free_speciesID_queue.pop();
+
+            // check that the species index does not exceed current species pointer vector.
+            if (speciesID < this->species_pointer_vector.size())
+            {
+                // OK, it does not exceed current species pointer vector.
+                return speciesID;
+            }
+        }
+
+        // OK, the queue is empty.
+        // A new species index must be created.
+        speciesID = this->species_pointer_vector.size();
+
+        // species pointer vector must also be extended with an appropriate NULL pointer.
+        this->species_pointer_vector.push_back(NULL);
+
+        return speciesID;
+    }
+
     Graph::Graph()
     {
         // constructor.
