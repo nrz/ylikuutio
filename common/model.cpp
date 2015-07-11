@@ -44,9 +44,11 @@
 
 namespace model
 {
-    // `World`, `Shader`, `Species`, `Object`.
+    // `World`, `Shader`, `Texture`, `Species`, `Object`.
     // `World` must be created before any `Shader`. `world_pointer` must be given to each `Shader`.
+    // `World` must be created before any `Texture`. `world_pointer` must be given to each `Texture`.
     // `Shader` must be created before any `Species`. `shader_pointer` must be given to each `Species`.
+    // `Texture` must be created before any `Species`. `texture_pointer` must be given to each `Species`.
     // `Species` must be create before any `Object` of that `Species`. `species_pointer` must be given to each `Object` of the `Species`.
     //
     //     World
