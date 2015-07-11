@@ -630,11 +630,11 @@ namespace model
         this->char_texture_filename    = this->texture_filename.c_str();
         this->char_color_channel       = this->color_channel.c_str();
 
-        // get speciesID_from_texture from the Texture.
-        this->speciesID_from_texture = this->texture_pointer->get_speciesID();
+        // get speciesID from the Texture.
+        this->speciesID = this->texture_pointer->get_speciesID();
 
         // set pointer to this species.
-        this->texture_pointer->set_pointer(this->speciesID_from_texture, this);
+        this->texture_pointer->set_pointer(this->speciesID, this);
 
         // Get a handle for our "MVP" uniform.
         this->MatrixID = glGetUniformLocation(this->texture_pointer->shader_pointer->programID, "MVP");
@@ -724,7 +724,7 @@ namespace model
     Species::~Species()
     {
         // destructor.
-        std::cout << "Species with speciesID_from_texture " << this->speciesID_from_texture << " will be destroyed.\n";
+        std::cout << "Species with speciesID " << this->speciesID << " will be destroyed.\n";
 
         // destroy all objects of this species.
         std::cout << "All objects of this species will be destroyed.\n";
@@ -750,7 +750,7 @@ namespace model
         glDeleteTextures(1, &this->texture);
 
         // set pointer to this species to NULL.
-        this->texture_pointer->set_pointer(this->speciesID_from_texture, NULL);
+        this->texture_pointer->set_pointer(this->speciesID, NULL);
     }
 
     void Species::render()
@@ -852,12 +852,12 @@ namespace model
     void Species::switch_to_new_texture(model::Texture *new_texture_pointer)
     {
         // set pointer to this species to NULL.
-        this->texture_pointer->set_pointer(this->speciesID_from_texture, NULL);
+        this->texture_pointer->set_pointer(this->speciesID, NULL);
 
         this->texture_pointer = new_texture_pointer;
 
         // get speciesID_from_shader from the Texture.
-        this->speciesID_from_texture = this->texture_pointer->get_speciesID();
+        this->speciesID = this->texture_pointer->get_speciesID();
     }
 
     Object::Object(ObjectStruct object_struct)
