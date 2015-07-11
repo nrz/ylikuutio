@@ -103,6 +103,8 @@ namespace model
         std::cout << "This world will be destroyed.\n";
 
         // destroy all shaders of this world.
+        std::cout << "All shaders of this world will be destroyed.\n";
+
         for (GLuint shader_i = 0; shader_i < this->shader_pointer_vector.size(); shader_i++)
         {
             model::Shader *shader_pointer;
@@ -266,6 +268,9 @@ namespace model
     {
         // destructor.
         std::cout << "Shader with shaderID " << this->shaderID << " will be destroyed.\n";
+
+        // destroy all species of this shader.
+        std::cout << "All species of this shader will be destroyed.\n";
 
         // destroy all species of this shader.
         for (GLuint species_i = 0; species_i < this->species_pointer_vector.size(); species_i++)
@@ -438,6 +443,10 @@ namespace model
     Graph::~Graph()
     {
         // destructor.
+        std::cout << "This graph will be destroyed.\n";
+
+        // destroy all nodes of this graph.
+        std::cout << "All nodes of this graph will be destroyed.\n";
 
         // destroy all nodes of this graph.
         for (GLuint node_i = 0; node_i < this->node_pointer_vector.size(); node_i++)
@@ -473,6 +482,7 @@ namespace model
     Node::~Node()
     {
         // destructor.
+        std::cout << "Node with nodeID " << this->nodeID << " will be destroyed.\n";
 
         // delete all bidirectional links.
         for (GLuint link_i = 0; link_i < this->neighbor_nodeIDs.size(); link_i++)
@@ -659,6 +669,9 @@ namespace model
     {
         // destructor.
         std::cout << "Species with speciesID " << this->speciesID << " will be destroyed.\n";
+
+        // destroy all objects of this species.
+        std::cout << "All objects of this species will be destroyed.\n";
 
         // destroy all objects of this species.
         for (GLuint object_i = 0; object_i < this->object_pointer_vector.size(); object_i++)
