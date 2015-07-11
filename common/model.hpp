@@ -119,6 +119,9 @@ namespace model
             // this method sets a species pointer.
             void set_pointer(GLuint speciesID, void* species_pointer);
 
+            // this method gets a species pointer.
+            void* get_pointer(GLuint speciesID);
+
             model::World *world_pointer;           // pointer to the world.
             GLuint textureID;                      // texture ID, returned by `glGetUniformLocation(programID, "myTextureSampler");`.
 
