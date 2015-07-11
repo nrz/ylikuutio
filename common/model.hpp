@@ -125,6 +125,9 @@ namespace model
             // this method gets a species ID and removes it from the `free_speciesID_queue` if it was popped from the queue.
             GLuint get_speciesID();
 
+            // this method sets pointer to this shader to NULL, sets `world_pointer` according to the input, and requests a new `shaderID` from the new world.
+            void switch_to_new_world(model::World *new_world_pointer);
+
             model::World *world_pointer;           // pointer to the world.
             GLuint textureID;                      // texture ID, returned by `glGetUniformLocation(programID, "myTextureSampler");`.
 

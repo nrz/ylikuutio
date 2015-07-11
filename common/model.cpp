@@ -459,6 +459,17 @@ namespace model
         return speciesID;
     }
 
+    void Texture::switch_to_new_world(model::World *new_world_pointer)
+    {
+        // set pointer to this texture to NULL.
+        this->world_pointer->set_texture_pointer(this->textureID, NULL);
+
+        this->world_pointer = new_world_pointer;
+
+        // get textureID from the World.
+        this->textureID = this->world_pointer->get_textureID();
+    }
+
     Graph::Graph()
     {
         // constructor.
