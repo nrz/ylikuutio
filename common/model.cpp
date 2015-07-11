@@ -390,6 +390,8 @@ namespace model
         // constructor.
         this->world_pointer = static_cast<model::World*>(texture_struct.world_pointer);
 
+        this->texture_file_format = texture_struct.texture_file_format;
+
         // get textureID from the World.
         this->textureID = this->world_pointer->get_textureID();
 
