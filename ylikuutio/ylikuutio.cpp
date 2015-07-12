@@ -166,8 +166,8 @@ int main(void)
     // Create the texture, store it in 'my_grass_texture`.
     TextureStruct grass_texture_struct;
     grass_texture_struct.shader_pointer = my_shader;
-    grass_texture_struct.texture_file_format = "dds";
-    grass_texture_struct.texture_filename = "uvmap.DDS";
+    grass_texture_struct.texture_file_format = g_texture_file_format;
+    grass_texture_struct.texture_filename = g_texture_filename;
     model::Texture *my_grass_texture = new model::Texture(grass_texture_struct);
 
     // Create the texture, store it in 'my_uvmap_texture`.
