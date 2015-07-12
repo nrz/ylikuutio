@@ -208,7 +208,7 @@ int main(void)
     model::Object *terrain1 = new model::Object(terrain_object_struct1);
 
     SpeciesStruct suzanne_species_struct;
-    suzanne_species_struct.texture_pointer = my_grass_texture;
+    suzanne_species_struct.texture_pointer = my_uvmap_texture;
     suzanne_species_struct.model_file_format = "obj";
     suzanne_species_struct.model_filename = "suzanne.obj";
     suzanne_species_struct.lightPos = glm::vec3(4, 4, 4);
