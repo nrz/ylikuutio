@@ -232,13 +232,16 @@ namespace model
             // this method sets pointer to this species to NULL, sets `texture_pointer` according to the input, and requests a new `speciesID` from the new texture.
             void switch_to_new_texture(model::Texture *new_texture_pointer);
 
+            bool is_world;                           // worlds currently do not rotate nor translate.
+
             std::string color_channel;               // color channel in use: `"red"`, `"green"`, `"blue"`, `"mean"` or `"all"`.
             std::vector<ObjectStruct> object_vector; // vector of individual objects of this species.
             glm::vec3 lightPos;                      // light position.
 
-            void *vertex_UV_pointer;                 // pointer to the vertex & UV species (not yet in use!).
-
             // The rest fields are created in the constructor.
+            GLuint image_width;
+            GLuint image_height;
+
             GLuint MatrixID;
             GLuint ViewMatrixID;
             GLuint ModelMatrixID;

@@ -95,6 +95,67 @@ namespace model
     //    y-coordinates of these are compared. The piece with the smallest y-coordinate (lowest altitude) remains terrain, other pieces become
     //    regular objects. The pieces that become regular objects will be subject to gravity the same way as any regular object.
 
+    GLfloat get_ground_level(
+            model::Species* world_species,
+            GLfloat x,
+            GLfloat y,
+            GLfloat z)
+    {
+        if (world_species == NULL)
+        {
+            return NAN;
+        }
+
+        if (x < 0.0f)
+        {
+            std::cout << "x was below zero\n";
+            x = 0.0f;
+        }
+        else if (x > world_species->image_width)
+        {
+            std::cout << "x was above image width\n";
+            x = world_species->image_width - 1.0f;
+        }
+
+        if (z < 0.0f)
+        {
+            std::cout << "z was below zero\n";
+            z = 0.0f;
+        }
+        else if (z > world_species->image_height)
+        {
+            std::cout << "z was above image width\n";
+            x = world_species->image_height - 1.0f;
+        }
+
+        GLuint southwest_i = (GLuint) floor(z) * world_species->image_width + floor(x);
+        GLuint southeast_i = (GLuint) floor(z) * world_species->image_width + ceil(x);
+        GLuint northwest_i = (GLuint) ceil(z) * world_species->image_width + floor(x);
+        GLuint northeast_i = (GLuint) ceil(z) * world_species->image_width + ceil(x);
+
+        std::cout << "southwest_i: " << southwest_i << "\n";
+        std::cout << "southeast_i: " << southeast_i << "\n";
+        std::cout << "northwest_i: " << northwest_i << "\n";
+        std::cout << "northeast_i: " << northeast_i << "\n";
+
+        GLfloat southwest_height = world_species->vertices[southwest_i].y;
+        GLfloat southeast_height = world_species->vertices[southeast_i].y;
+        GLfloat northwest_height = world_species->vertices[northwest_i].y;
+        GLfloat northeast_height = world_species->vertices[northeast_i].y;
+
+        // the height is computed using bilinear interpolation.
+        GLfloat south_mean = (GLfloat) ((double) ceil(x) - x) * southwest_height + (x - (double) floor(x)) * southeast_height;
+        std::cout << "south_mean: " << south_mean << "\n";
+
+        GLfloat north_mean = (GLfloat) ((double) ceil(x) - x) * northwest_height + (x - (double) floor(x)) * northeast_height;
+        std::cout << "north_mean: " << north_mean << "\n";
+
+        GLfloat mean = (GLfloat) ((double) ceil(z) - z) * south_mean + (z - (double) floor(z)) * north_mean;
+        std::cout << "mean: " << mean << "\n";
+
+        return mean;
+    }
+
     World::World()
     {
         // constructor.
@@ -123,6 +184,8 @@ namespace model
 
     void World::render()
     {
+        controls::computeMatricesFromInputs();
+
         // this method renders the world by calling `render()` methods of each shader.
         for (GLuint shader_i = 0; shader_i < this->shader_pointer_vector.size(); shader_i++)
         {
@@ -671,6 +734,7 @@ namespace model
     Species::Species(SpeciesStruct species_struct)
     {
         // constructor.
+        this->is_world          = species_struct.is_world;
         this->model_file_format = species_struct.model_file_format;
         this->model_filename    = species_struct.model_filename;
         this->color_channel     = species_struct.color_channel;
@@ -717,7 +781,14 @@ namespace model
         }
         else if ((strcmp(this->char_model_file_format, "bmp") == 0) || (strcmp(this->char_model_file_format, "BMP") == 0))
         {
-            model_loading_result = model::load_BMP_world(this->model_filename, this->vertices, this->UVs, this->normals, this->color_channel);
+            model_loading_result = model::load_BMP_world(
+                    this->model_filename,
+                    this->vertices,
+                    this->UVs,
+                    this->normals,
+                    this->image_width,
+                    this->image_height,
+                    this->color_channel);
         }
         else
         {
@@ -784,8 +855,32 @@ namespace model
 
     void Species::render()
     {
+        if (!inFlightmode)
+        {
+            if (this->is_world)
+            {
+                GLfloat ground_y = model::get_ground_level(this, position.x, position.y, position.z);
+
+                if (!std::isnan(ground_y))
+                {
+                    if (position.y < ground_y)
+                    {
+                        // std::cout << "fell below ground. ground_y: " << ground_y << "\n";
+                        position.y = ground_y;
+                        fallSpeed = gravity;
+                        inFreefall = false;
+                    }
+                    else
+                    {
+                        // std::cout << "in freefall. ground_y: " << ground_y << "\n";
+                        fallSpeed += gravity;
+                        inFreefall = true;
+                    }
+                }
+            }
+        }
+
         // Compute the MVP matrix from keyboard and mouse input.
-        controls::computeMatricesFromInputs();
         this->ProjectionMatrix = controls::getProjectionMatrix();
         this->ViewMatrix = controls::getViewMatrix();
 

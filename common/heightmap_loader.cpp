@@ -1208,6 +1208,8 @@ namespace model
             std::vector<glm::vec3> &out_vertices,
             std::vector<glm::vec2> &out_UVs,
             std::vector<glm::vec3> &out_normals,
+            GLuint &image_width,
+            GLuint &image_height,
             std::string color_channel)
     {
         std::cout << "Loading BMP file " << image_path << " ...\n";
@@ -1216,7 +1218,6 @@ namespace model
         unsigned char header[54];
         uint32_t dataPos;
         uint32_t imageSize;
-        uint32_t image_width, image_height;
         // Actual RGB image data.
         uint8_t *image_data;
 

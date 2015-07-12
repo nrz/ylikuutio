@@ -188,6 +188,7 @@ int main(void)
     SRTM_terrain_species_struct.model_filename = "./"; // for testing
     SRTM_terrain_species_struct.color_channel = g_height_data_color_channel;
     SRTM_terrain_species_struct.lightPos = glm::vec3(4, 4, 4);
+    SRTM_terrain_species_struct.is_world = true;
     model::Species *terrain_species = new model::Species(SRTM_terrain_species_struct);
 #else
     // Create the species, store it in `terrain_species`.
@@ -197,6 +198,7 @@ int main(void)
     bmp_terrain_species_struct.model_filename = g_model_filename;
     bmp_terrain_species_struct.color_channel = g_height_data_color_channel;
     bmp_terrain_species_struct.lightPos = glm::vec3(4, 4, 4);
+    bmp_terrain_species_struct.is_world = true;
     model::Species *terrain_species = new model::Species(bmp_terrain_species_struct);
 #endif
 
