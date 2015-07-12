@@ -245,6 +245,9 @@ namespace model
 
     void Shader::render()
     {
+        // [re]bind `programID` shader.
+        glUseProgram(this->programID);
+
         // this method renders the shader by calling `render()` methods of each texture.
         for (GLuint texture_i = 0; texture_i < this->texture_pointer_vector.size(); texture_i++)
         {
@@ -779,9 +782,6 @@ namespace model
         controls::computeMatricesFromInputs();
         this->ProjectionMatrix = controls::getProjectionMatrix();
         this->ViewMatrix = controls::getViewMatrix();
-
-        // [re]bind `programID` shader.
-        glUseProgram(this->texture_pointer->shader_pointer->programID);
 
         glUniform3f(this->lightID, this->lightPos.x, this->lightPos.y, this->lightPos.z);
         glUniformMatrix4fv(this->ViewMatrixID, 1, GL_FALSE, &this->ViewMatrix[0][0]); // This one doesn't change between objects, so this can be done once for all objects that use "programID"
