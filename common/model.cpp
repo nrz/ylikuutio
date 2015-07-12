@@ -500,7 +500,7 @@ namespace model
         }
     }
 
-    void* Graph::get_pointer(GLuint nodeID)
+    void* Graph::get_node_pointer(GLuint nodeID)
     {
         return this->node_pointer_vector[nodeID];
     }
@@ -608,7 +608,7 @@ namespace model
         this->create_unidirectional_link(nodeID);
 
         // create a link from destination node to this node.
-        static_cast<model::Node*>(this->graph_pointer->get_pointer(nodeID))->create_unidirectional_link(this->nodeID);
+        static_cast<model::Node*>(this->graph_pointer->get_node_pointer(nodeID))->create_unidirectional_link(this->nodeID);
     }
 
     void Node::delete_unidirectional_link(GLuint nodeID)
@@ -623,7 +623,7 @@ namespace model
         this->delete_unidirectional_link(nodeID);
 
         // delete a link from destination node to this node.
-        static_cast<model::Node*>(this->graph_pointer->get_pointer(nodeID))->delete_unidirectional_link(this->nodeID);
+        static_cast<model::Node*>(this->graph_pointer->get_node_pointer(nodeID))->delete_unidirectional_link(this->nodeID);
     }
 
     // Transfering node to a new graph is similar to `switch_to_new_world`, `switch_to_new_shader`, `switch_to_new_species`,

@@ -152,7 +152,7 @@ namespace model
             void set_node_pointer(GLuint nodeID, void* node_pointer);
 
             // this method gets a node pointer.
-            void* get_pointer(GLuint nodeID);
+            void* get_node_pointer(GLuint nodeID);
 
             // this method gets a node ID and removes it from the `free_nodeID_queue` if it was popped from the queue.
             GLuint get_nodeID();
