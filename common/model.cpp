@@ -814,7 +814,7 @@ namespace model
         }
     }
 
-    void Species::set_pointer(GLuint objectID, void* object_pointer)
+    void Species::set_object_pointer(GLuint objectID, void* object_pointer)
     {
         this->object_pointer_vector[objectID] = object_pointer;
 
@@ -886,7 +886,7 @@ namespace model
         this->objectID = this->species_pointer->get_objectID();
 
         // set pointer to this object.
-        this->species_pointer->set_pointer(this->objectID, this);
+        this->species_pointer->set_object_pointer(this->objectID, this);
     }
 
     Object::Object(ObjectStruct object_struct)
@@ -911,7 +911,7 @@ namespace model
         std::cout << "Object with objectID " << this->objectID << " will be destroyed.\n";
 
         // set pointer to this object to NULL.
-        this->species_pointer->set_pointer(this->objectID, NULL);
+        this->species_pointer->set_object_pointer(this->objectID, NULL);
     }
 
     void Object::render()
@@ -997,7 +997,7 @@ namespace model
     void Object::switch_to_new_species(model::Species *new_species_pointer)
     {
         // set pointer to this object to NULL.
-        this->species_pointer->set_pointer(this->objectID, NULL);
+        this->species_pointer->set_object_pointer(this->objectID, NULL);
 
         this->species_pointer = new_species_pointer;
 

@@ -221,7 +221,7 @@ namespace model
             void render();
 
             // this method sets a object pointer.
-            void set_pointer(GLuint objectID, void* object_pointer);
+            void set_object_pointer(GLuint objectID, void* object_pointer);
 
             // this method gets a object pointer.
             void* get_pointer(GLuint objectID);
