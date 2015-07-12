@@ -671,15 +671,15 @@ namespace model
     Species::Species(SpeciesStruct species_struct)
     {
         // constructor.
-        this->model_file_format   = species_struct.model_file_format;
-        this->model_filename      = species_struct.model_filename;
-        this->color_channel       = species_struct.color_channel;
-        this->lightPos            = species_struct.lightPos;
-        this->texture_pointer     = static_cast<model::Texture*>(species_struct.texture_pointer);
+        this->model_file_format = species_struct.model_file_format;
+        this->model_filename    = species_struct.model_filename;
+        this->color_channel     = species_struct.color_channel;
+        this->lightPos          = species_struct.lightPos;
+        this->texture_pointer   = static_cast<model::Texture*>(species_struct.texture_pointer);
 
-        this->char_model_file_format   = this->model_file_format.c_str();
-        this->char_model_filename      = this->model_filename.c_str();
-        this->char_color_channel       = this->color_channel.c_str();
+        this->char_model_file_format = this->model_file_format.c_str();
+        this->char_model_filename    = this->model_filename.c_str();
+        this->char_color_channel     = this->color_channel.c_str();
 
         // get speciesID from the Texture and set pointer to this species.
         this->bind_to_texture();
