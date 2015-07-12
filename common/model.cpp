@@ -462,6 +462,9 @@ namespace model
 
         // get textureID from the Shader.
         this->textureID = this->shader_pointer->get_textureID();
+
+        // set pointer to this texture.
+        this->shader_pointer->set_texture_pointer(this->textureID, this);
     }
 
     Graph::Graph()
