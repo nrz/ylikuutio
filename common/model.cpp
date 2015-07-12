@@ -108,23 +108,23 @@ namespace model
 
         if (x < 0.0f)
         {
-            std::cout << "x was below zero\n";
+            // std::cout << "x was below zero\n";
             x = 0.0f;
         }
         else if (x > world_species->image_width)
         {
-            std::cout << "x was above image width\n";
+            // std::cout << "x was above image width\n";
             x = world_species->image_width - 1.0f;
         }
 
         if (z < 0.0f)
         {
-            std::cout << "z was below zero\n";
+            // std::cout << "z was below zero\n";
             z = 0.0f;
         }
         else if (z > world_species->image_height)
         {
-            std::cout << "z was above image height\n";
+            // std::cout << "z was above image height\n";
             x = world_species->image_height - 1.0f;
         }
 
