@@ -109,6 +109,7 @@ int main(void)
     initialFoV = 60.0f;
 
     bool does_suzanne_species_exist = true;
+    bool does_suzanne_species_have_uvmap_texture = true;
 
     // Initialise GLFW
     if (!glfwInit())
@@ -382,6 +383,19 @@ int main(void)
         {
             delete suzanne_species;
             does_suzanne_species_exist = false;
+        }
+
+        if (does_suzanne_species_exist && does_suzanne_species_have_uvmap_texture && (glfwGetKey(window, GLFW_KEY_G) == GLFW_PRESS))
+        {
+            // switch to grass texture.
+            suzanne_species->switch_to_new_texture(my_grass_texture);
+            does_suzanne_species_have_uvmap_texture = false;
+        }
+        else if (does_suzanne_species_exist && !does_suzanne_species_have_uvmap_texture && (glfwGetKey(window, GLFW_KEY_U) == GLFW_PRESS))
+        {
+            // switch to uvmap texture.
+            suzanne_species->switch_to_new_texture(my_uvmap_texture);
+            does_suzanne_species_have_uvmap_texture = true;
         }
 
         glfwPollEvents();
