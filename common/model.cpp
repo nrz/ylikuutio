@@ -60,10 +60,10 @@ namespace model
     //       ^
     //    Object
     //
-    // Deleting a `World` also deletes all shaders, textures, species and objects that belong the same world.
-    // Deleting a `Shader` also deletes all textures, species and objects that belong the same world.
-    // Deleting a `Texture` also deletes all species and objects that belong the same world.
-    // Deleting a `Species` also deletes all objects that belong the same world.
+    // Deleting a `World` also deletes all shaders, textures, species and objects that are binded to the same World.
+    // Deleting a `Shader` also deletes all textures, species and objects that are binded to the same Shader.
+    // Deleting a `Texture` also deletes all species and objects that are binded to the same Texture.
+    // Deleting a `Species` also deletes all objects that are binded to the same Species.
     // Deleting an `Object` only deletes the object.
 
     // Characteristics of object type graphs:
