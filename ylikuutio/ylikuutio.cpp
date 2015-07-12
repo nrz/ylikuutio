@@ -163,12 +163,12 @@ int main(void)
     shader_struct.fragment_shader = "StandardShading.fragmentshader";
     model::Shader *my_shader = new model::Shader(shader_struct);
 
-    // Create the texture, store it in 'my_texture`.
+    // Create the texture, store it in 'my_grass_texture`.
     TextureStruct texture_struct;
     texture_struct.shader_pointer = my_shader;
     texture_struct.texture_file_format = g_texture_file_format;
     texture_struct.texture_filename = g_texture_filename;
-    model::Texture *my_texture = new model::Texture(texture_struct);
+    model::Texture *my_grass_texture = new model::Texture(texture_struct);
 
 #ifdef TESTING_SPHERICAL_WORLD_IN_USE
     // Create the species, store it in `terrain_species`.
@@ -183,7 +183,7 @@ int main(void)
 #else
     // Create the species, store it in `terrain_species`.
     SpeciesStruct bmp_terrain_species_struct;
-    bmp_terrain_species_struct.texture_pointer = my_texture;
+    bmp_terrain_species_struct.texture_pointer = my_grass_texture;
     bmp_terrain_species_struct.model_file_format = g_model_file_format;
     bmp_terrain_species_struct.model_filename = g_model_filename;
     bmp_terrain_species_struct.color_channel = g_height_data_color_channel;
@@ -201,7 +201,7 @@ int main(void)
     model::Object *terrain1 = new model::Object(terrain_object_struct1);
 
     SpeciesStruct suzanne_species_struct;
-    suzanne_species_struct.texture_pointer = my_texture;
+    suzanne_species_struct.texture_pointer = my_grass_texture;
     suzanne_species_struct.model_file_format = "obj";
     suzanne_species_struct.model_filename = "suzanne.obj";
     suzanne_species_struct.lightPos = glm::vec3(4, 4, 4);
