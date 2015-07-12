@@ -316,6 +316,9 @@ namespace model
 
         // get shaderID from the World.
         this->shaderID = this->world_pointer->get_shaderID();
+
+        // set pointer to this shader.
+        this->world_pointer->set_shader_pointer(this->shaderID, this);
     }
 
     Texture::Texture(TextureStruct texture_struct)
