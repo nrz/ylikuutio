@@ -397,6 +397,12 @@ namespace model
 
     void Texture::render()
     {
+        // Bind our texture in Texture Unit 0.
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, this->texture);
+        // Set our "myTextureSampler" sampler to user Texture Unit 0.
+        glUniform1i(this->openGL_textureID, 0);
+
         // this method renders the texture by calling `render()` methods of each species.
         for (GLuint species_i = 0; species_i < this->species_pointer_vector.size(); species_i++)
         {
@@ -785,12 +791,6 @@ namespace model
 
         glUniform3f(this->lightID, this->lightPos.x, this->lightPos.y, this->lightPos.z);
         glUniformMatrix4fv(this->ViewMatrixID, 1, GL_FALSE, &this->ViewMatrix[0][0]); // This one doesn't change between objects, so this can be done once for all objects that use "programID"
-
-        // Bind our texture in Texture Unit 0.
-        glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, this->texture_pointer->texture);
-        // Set our "myTextureSampler" sampler to user Texture Unit 0.
-        glUniform1i(this->texture_pointer->openGL_textureID, 0);
 
         // 1st attribute buffer : vertices.
         glEnableVertexAttribArray(this->vertexPosition_modelspaceID);
