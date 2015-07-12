@@ -191,6 +191,15 @@ namespace model
         return shaderID;
     }
 
+    void Shader::bind_to_world()
+    {
+        // get shaderID from the World.
+        this->shaderID = this->world_pointer->get_shaderID();
+
+        // set pointer to this shader.
+        this->world_pointer->set_shader_pointer(this->shaderID, this);
+    }
+
     Shader::Shader(ShaderStruct shader_struct)
     {
         // constructor.
@@ -202,11 +211,8 @@ namespace model
         this->char_fragment_shader = this->fragment_shader.c_str();
         this->world_pointer        = static_cast<model::World*>(shader_struct.world_pointer);
 
-        // get shaderID from the World.
-        this->shaderID = this->world_pointer->get_shaderID();
-
-        // set pointer to this shader.
-        this->world_pointer->set_shader_pointer(this->shaderID, this);
+        // get shaderID from the World and set pointer to this shader.
+        this->bind_to_world();
 
         // Create and compile our GLSL program from the shaders.
         this->programID = LoadShaders(this->char_vertex_shader, this->char_fragment_shader);
@@ -314,11 +320,8 @@ namespace model
 
         this->world_pointer = new_world_pointer;
 
-        // get shaderID from the World.
-        this->shaderID = this->world_pointer->get_shaderID();
-
-        // set pointer to this shader.
-        this->world_pointer->set_shader_pointer(this->shaderID, this);
+        // get shaderID from the World and set pointer to this shader.
+        this->bind_to_world();
     }
 
     Texture::Texture(TextureStruct texture_struct)

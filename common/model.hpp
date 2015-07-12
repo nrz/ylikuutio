@@ -58,6 +58,8 @@ namespace model
     class Shader
     {
         public:
+            void bind_to_world();
+
             // constructor.
             Shader(ShaderStruct shader_struct);
 
