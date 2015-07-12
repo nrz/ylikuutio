@@ -836,7 +836,7 @@ namespace model
         }
     }
 
-    void* Species::get_pointer(GLuint objectID)
+    void* Species::get_object_pointer(GLuint objectID)
     {
         return this->object_pointer_vector[objectID];
     }

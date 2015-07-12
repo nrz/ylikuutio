@@ -224,7 +224,7 @@ namespace model
             void set_object_pointer(GLuint objectID, void* object_pointer);
 
             // this method gets a object pointer.
-            void* get_pointer(GLuint objectID);
+            void* get_object_pointer(GLuint objectID);
 
             // this method gets a object ID and removes it from the `free_objectID_queue` if it was popped from the queue.
             GLuint get_objectID();
