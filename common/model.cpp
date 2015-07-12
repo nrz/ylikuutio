@@ -124,7 +124,7 @@ namespace model
         }
         else if (z > world_species->image_height)
         {
-            std::cout << "z was above image width\n";
+            std::cout << "z was above image height\n";
             x = world_species->image_height - 1.0f;
         }
 
