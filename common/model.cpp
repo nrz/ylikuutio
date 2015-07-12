@@ -866,6 +866,9 @@ namespace model
 
         // get speciesID_from_shader from the Texture.
         this->speciesID = this->texture_pointer->get_speciesID();
+
+        // set pointer to this species.
+        this->texture_pointer->set_pointer(this->speciesID, this);
     }
 
     Object::Object(ObjectStruct object_struct)
