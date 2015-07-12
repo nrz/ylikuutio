@@ -173,7 +173,7 @@ int main(void)
 #ifdef TESTING_SPHERICAL_WORLD_IN_USE
     // Create the species, store it in `terrain_species`.
     SpeciesStruct SRTM_terrain_species_struct;
-    SRTM_terrain_species_struct.texture_pointer = texture_pointer;
+    SRTM_terrain_species_struct.texture_pointer = my_grass_texture;
     SRTM_terrain_species_struct.model_file_format = "SRTM";
     // SRTM_terrain_species_struct.model_filename = "/media/laatikko_4TB/satelliittikuvat/srtm/version3/data/";
     SRTM_terrain_species_struct.model_filename = "./"; // for testing
