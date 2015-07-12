@@ -161,7 +161,7 @@ namespace model
 
         if ((z - floor(z) < 0.0001f) || (ceil(z) - z < 0.0001f))
         {
-            mean = south_mean + north_mean / 2;
+            mean = (south_mean + north_mean) / 2.0f;
         }
         else
         {
