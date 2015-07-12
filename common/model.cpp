@@ -165,7 +165,7 @@ namespace model
         }
         else
         {
-            mean = (GLfloat) ((double) ceil(z) - z) * south_mean + (z - (double) floor(z)) * north_mean;
+            mean = (GLfloat) (ceil(z) - z) * south_mean + (z - floor(z)) * north_mean;
         }
         std::cout << "mean: " << mean << "\n";
 
