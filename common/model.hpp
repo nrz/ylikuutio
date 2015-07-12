@@ -113,7 +113,7 @@ namespace model
             void render();
 
             // this method sets a species pointer.
-            void set_pointer(GLuint speciesID, void* species_pointer);
+            void set_species_pointer(GLuint speciesID, void* species_pointer);
 
             // this method gets a species pointer.
             void* get_pointer(GLuint speciesID);

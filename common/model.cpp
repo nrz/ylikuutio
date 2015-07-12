@@ -407,7 +407,7 @@ namespace model
         }
     }
 
-    void Texture::set_pointer(GLuint speciesID, void* species_pointer)
+    void Texture::set_species_pointer(GLuint speciesID, void* species_pointer)
     {
         this->species_pointer_vector[speciesID] = species_pointer;
 
@@ -656,7 +656,7 @@ namespace model
         this->speciesID = this->texture_pointer->get_speciesID();
 
         // set pointer to this species.
-        this->texture_pointer->set_pointer(this->speciesID, this);
+        this->texture_pointer->set_species_pointer(this->speciesID, this);
     }
 
     Species::Species(SpeciesStruct species_struct)
@@ -770,7 +770,7 @@ namespace model
         glDeleteBuffers(1, &this->elementbuffer);
 
         // set pointer to this species to NULL.
-        this->texture_pointer->set_pointer(this->speciesID, NULL);
+        this->texture_pointer->set_species_pointer(this->speciesID, NULL);
     }
 
     void Species::render()
@@ -872,7 +872,7 @@ namespace model
     void Species::switch_to_new_texture(model::Texture *new_texture_pointer)
     {
         // set pointer to this species to NULL.
-        this->texture_pointer->set_pointer(this->speciesID, NULL);
+        this->texture_pointer->set_species_pointer(this->speciesID, NULL);
 
         this->texture_pointer = new_texture_pointer;
 
