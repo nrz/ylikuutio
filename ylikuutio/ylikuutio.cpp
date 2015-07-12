@@ -110,6 +110,7 @@ int main(void)
 
     bool does_suzanne_species_exist = true;
     bool does_suzanne_species_have_uvmap_texture = true;
+    bool has_suzanne_2_transformed_into_terrain = false;
 
     // Initialise GLFW
     if (!glfwInit())
@@ -396,6 +397,19 @@ int main(void)
             // switch to uvmap texture.
             suzanne_species->switch_to_new_texture(my_uvmap_texture);
             does_suzanne_species_have_uvmap_texture = true;
+        }
+
+        if (does_suzanne_species_exist && has_suzanne_2_transformed_into_terrain && (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS))
+        {
+            // switch to suzanne species.
+            suzanne2->switch_to_new_species(suzanne_species);
+            has_suzanne_2_transformed_into_terrain = false;
+        }
+        else if (does_suzanne_species_exist && !has_suzanne_2_transformed_into_terrain && (glfwGetKey(window, GLFW_KEY_T) == GLFW_PRESS))
+        {
+            // switch to terrain species.
+            suzanne2->switch_to_new_species(terrain_species);
+            has_suzanne_2_transformed_into_terrain = true;
         }
 
         glfwPollEvents();
