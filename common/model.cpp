@@ -880,6 +880,15 @@ namespace model
         this->bind_to_texture();
     }
 
+    void Object::bind_to_species()
+    {
+        // get objectID from the Species.
+        this->objectID = this->species_pointer->get_objectID();
+
+        // set pointer to this object.
+        this->species_pointer->set_pointer(this->objectID, this);
+    }
+
     Object::Object(ObjectStruct object_struct)
     {
         // constructor.
@@ -890,11 +899,8 @@ namespace model
         this->has_entered       = false;
         this->species_pointer   = static_cast<model::Species*>(object_struct.species_pointer);
 
-        // get objectID from the Species.
-        this->objectID = this->species_pointer->get_objectID();
-
-        // set pointer to this object.
-        this->species_pointer->set_pointer(this->objectID, this);
+        // get objectID from the Species and set pointer to this object.
+        this->bind_to_species();
 
         bool model_loading_result = false;
     }
@@ -995,7 +1001,7 @@ namespace model
 
         this->species_pointer = new_species_pointer;
 
-        // get objectID from the Species.
-        this->objectID = this->species_pointer->get_objectID();
+        // get objectID from the Species and set pointer to this object.
+        this->bind_to_species();
     }
 }

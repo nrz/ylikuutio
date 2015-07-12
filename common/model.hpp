@@ -280,6 +280,8 @@ namespace model
     class Object
     {
         public:
+            void bind_to_species();
+
             // constructor.
             Object(ObjectStruct object_struct);
 
