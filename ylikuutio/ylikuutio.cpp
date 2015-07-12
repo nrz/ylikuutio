@@ -173,8 +173,8 @@ int main(void)
     // Create the texture, store it in 'my_uvmap_texture`.
     TextureStruct uvmap_texture_struct;
     uvmap_texture_struct.shader_pointer = my_shader;
-    uvmap_texture_struct.texture_file_format = g_texture_file_format;
-    uvmap_texture_struct.texture_filename = g_texture_filename;
+    uvmap_texture_struct.texture_file_format = "dds";
+    uvmap_texture_struct.texture_filename = "uvmap.DDS";
     model::Texture *my_uvmap_texture = new model::Texture(uvmap_texture_struct);
 
 #ifdef TESTING_SPHERICAL_WORLD_IN_USE
