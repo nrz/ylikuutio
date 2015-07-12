@@ -151,7 +151,7 @@ namespace model
         if ((x - floor(x) < 0.0001f) || (ceil(x) - x < 0.0001f))
         {
             south_mean = southwest_height;
-            north_mean = southwest_height;
+            north_mean = northwest_height;
         }
         else
         {
