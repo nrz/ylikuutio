@@ -650,6 +650,15 @@ namespace model
         this->graph_pointer->set_pointer(this->nodeID, this);
     }
 
+    void Species::bind_to_texture()
+    {
+        // get speciesID from the Texture.
+        this->speciesID = this->texture_pointer->get_speciesID();
+
+        // set pointer to this species.
+        this->texture_pointer->set_pointer(this->speciesID, this);
+    }
+
     Species::Species(SpeciesStruct species_struct)
     {
         // constructor.
@@ -663,11 +672,8 @@ namespace model
         this->char_model_filename      = this->model_filename.c_str();
         this->char_color_channel       = this->color_channel.c_str();
 
-        // get speciesID from the Texture.
-        this->speciesID = this->texture_pointer->get_speciesID();
-
-        // set pointer to this species.
-        this->texture_pointer->set_pointer(this->speciesID, this);
+        // get speciesID from the Texture and set pointer to this species.
+        this->bind_to_texture();
 
         // Get a handle for our "MVP" uniform.
         this->MatrixID = glGetUniformLocation(this->texture_pointer->shader_pointer->programID, "MVP");
@@ -870,11 +876,8 @@ namespace model
 
         this->texture_pointer = new_texture_pointer;
 
-        // get speciesID_from_shader from the Texture.
-        this->speciesID = this->texture_pointer->get_speciesID();
-
-        // set pointer to this species.
-        this->texture_pointer->set_pointer(this->speciesID, this);
+        // get speciesID from the Texture and set pointer to this species.
+        this->bind_to_texture();
     }
 
     Object::Object(ObjectStruct object_struct)

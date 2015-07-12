@@ -209,6 +209,8 @@ namespace model
     class Species
     {
         public:
+            void bind_to_texture();
+
             // constructor.
             Species(SpeciesStruct species_struct);
 
