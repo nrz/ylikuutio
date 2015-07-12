@@ -133,10 +133,10 @@ namespace model
         GLuint northwest_i = (GLuint) ceil(z) * world_species->image_width + floor(x);
         GLuint northeast_i = (GLuint) ceil(z) * world_species->image_width + ceil(x);
 
-        std::cout << "southwest_i: " << southwest_i << "\n";
-        std::cout << "southeast_i: " << southeast_i << "\n";
-        std::cout << "northwest_i: " << northwest_i << "\n";
-        std::cout << "northeast_i: " << northeast_i << "\n";
+        // std::cout << "southwest_i: " << southwest_i << "\n";
+        // std::cout << "southeast_i: " << southeast_i << "\n";
+        // std::cout << "northwest_i: " << northwest_i << "\n";
+        // std::cout << "northeast_i: " << northeast_i << "\n";
 
         GLfloat southwest_height = world_species->vertices[southwest_i].y;
         GLfloat southeast_height = world_species->vertices[southeast_i].y;
@@ -167,7 +167,7 @@ namespace model
         {
             mean = (GLfloat) (ceil(z) - z) * south_mean + (z - floor(z)) * north_mean;
         }
-        std::cout << "mean: " << mean << "\n";
+        // std::cout << "mean: " << mean << "\n";
 
         return mean;
     }
