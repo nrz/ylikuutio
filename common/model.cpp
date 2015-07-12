@@ -143,14 +143,30 @@ namespace model
         GLfloat northwest_height = world_species->vertices[northwest_i].y;
         GLfloat northeast_height = world_species->vertices[northeast_i].y;
 
+        GLfloat south_mean;
+        GLfloat north_mean;
+        GLfloat mean;
+
         // the height is computed using bilinear interpolation.
-        GLfloat south_mean = (GLfloat) ((double) ceil(x) - x) * southwest_height + (x - (double) floor(x)) * southeast_height;
-        std::cout << "south_mean: " << south_mean << "\n";
+        if ((x - floor(x) < 0.0001f) || (ceil(x) - x < 0.0001f))
+        {
+            south_mean = southwest_height;
+            north_mean = southwest_height;
+        }
+        else
+        {
+            south_mean = (GLfloat) (ceil(x) - x) * southwest_height + (x - floor(x)) * southeast_height;
+            north_mean = (GLfloat) (ceil(x) - x) * northwest_height + (x - floor(x)) * northeast_height;
+        }
 
-        GLfloat north_mean = (GLfloat) ((double) ceil(x) - x) * northwest_height + (x - (double) floor(x)) * northeast_height;
-        std::cout << "north_mean: " << north_mean << "\n";
-
-        GLfloat mean = (GLfloat) ((double) ceil(z) - z) * south_mean + (z - (double) floor(z)) * north_mean;
+        if ((z - floor(z) < 0.0001f) || (ceil(z) - z < 0.0001f))
+        {
+            mean = south_mean + north_mean / 2;
+        }
+        else
+        {
+            mean = (GLfloat) ((double) ceil(z) - z) * south_mean + (z - (double) floor(z)) * north_mean;
+        }
         std::cout << "mean: " << mean << "\n";
 
         return mean;
