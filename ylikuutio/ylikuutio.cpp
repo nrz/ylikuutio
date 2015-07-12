@@ -166,9 +166,16 @@ int main(void)
     // Create the texture, store it in 'my_grass_texture`.
     TextureStruct grass_texture_struct;
     grass_texture_struct.shader_pointer = my_shader;
-    grass_texture_struct.texture_file_format = g_texture_file_format;
-    grass_texture_struct.texture_filename = g_texture_filename;
+    grass_texture_struct.texture_file_format = "dds";
+    grass_texture_struct.texture_filename = "uvmap.DDS";
     model::Texture *my_grass_texture = new model::Texture(grass_texture_struct);
+
+    // Create the texture, store it in 'my_uvmap_texture`.
+    TextureStruct uvmap_texture_struct;
+    uvmap_texture_struct.shader_pointer = my_shader;
+    uvmap_texture_struct.texture_file_format = g_texture_file_format;
+    uvmap_texture_struct.texture_filename = g_texture_filename;
+    model::Texture *my_uvmap_texture = new model::Texture(uvmap_texture_struct);
 
 #ifdef TESTING_SPHERICAL_WORLD_IN_USE
     // Create the species, store it in `terrain_species`.
