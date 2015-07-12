@@ -64,7 +64,7 @@ quat LookAt(vec3 direction, vec3 desiredUp){
 	// Find the rotation between the front of the object (that we assume towards +Z,
 	// but this depends on your model) and the desired direction
 	quat rot1 = RotationBetweenVectors(vec3(0.0f, 0.0f, 1.0f), direction);
-	// Because of the 1rst rotation, the up is probably completely screwed up. 
+	// Because of the 1st rotation, the up is probably completely screwed up.
 	// Find the rotation between the "up" of the rotated object, and the desired up
 	vec3 newUp = rot1 * vec3(0.0f, 1.0f, 0.0f);
 	quat rot2 = RotationBetweenVectors(newUp, desiredUp);

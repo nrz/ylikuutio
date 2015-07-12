@@ -183,7 +183,7 @@ int main(void)
         // in the "MVP" uniform
         glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP[0][0]);
 
-        // 1rst attribute buffer : vertices
+        // 1st attribute buffer : vertices
         glEnableVertexAttribArray(vertexPosition_modelspaceID);
         glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
         glVertexAttribPointer(

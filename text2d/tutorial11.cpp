@@ -176,7 +176,7 @@ int main(void)
         // Set our "myTextureSampler" sampler to user Texture Unit 0
         glUniform1i(TextureID, 0);
 
-        // 1rst attribute buffer : vertices
+        // 1st attribute buffer : vertices
         glEnableVertexAttribArray(vertexPosition_modelspaceID);
         glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
         glVertexAttribPointer(
