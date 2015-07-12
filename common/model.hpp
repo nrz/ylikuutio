@@ -116,7 +116,7 @@ namespace model
             void set_species_pointer(GLuint speciesID, void* species_pointer);
 
             // this method gets a species pointer.
-            void* get_pointer(GLuint speciesID);
+            void* get_species_pointer(GLuint speciesID);
 
             // this method gets a species ID and removes it from the `free_speciesID_queue` if it was popped from the queue.
             GLuint get_speciesID();

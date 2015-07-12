@@ -429,7 +429,7 @@ namespace model
         }
     }
 
-    void* Texture::get_pointer(GLuint speciesID)
+    void* Texture::get_species_pointer(GLuint speciesID)
     {
         return this->species_pointer_vector[speciesID];
     }
