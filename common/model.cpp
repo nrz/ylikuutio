@@ -324,6 +324,15 @@ namespace model
         this->bind_to_world();
     }
 
+    void Texture::bind_to_shader()
+    {
+        // get textureID from the Shader.
+        this->textureID = this->shader_pointer->get_textureID();
+
+        // set pointer to this texture.
+        this->shader_pointer->set_texture_pointer(this->textureID, this);
+    }
+
     Texture::Texture(TextureStruct texture_struct)
     {
         // constructor.
@@ -335,11 +344,8 @@ namespace model
         this->char_texture_file_format = this->texture_file_format.c_str();
         this->char_texture_filename    = this->texture_filename.c_str();
 
-        // get textureID from the Shader.
-        this->textureID = this->shader_pointer->get_textureID();
-
-        // set pointer to this texture.
-        this->shader_pointer->set_texture_pointer(this->textureID, this);
+        // get textureID from the Shader and set pointer to this texture.
+        this->bind_to_shader();
 
         // Load the texture.
         if ((strcmp(this->char_texture_file_format, "bmp") == 0) || (strcmp(this->char_texture_file_format, "BMP") == 0))
@@ -463,11 +469,8 @@ namespace model
 
         this->shader_pointer = new_shader_pointer;
 
-        // get textureID from the Shader.
-        this->textureID = this->shader_pointer->get_textureID();
-
-        // set pointer to this texture.
-        this->shader_pointer->set_texture_pointer(this->textureID, this);
+        // get textureID from the Shader and set pointer to this texture.
+        this->bind_to_shader();
     }
 
     Graph::Graph()

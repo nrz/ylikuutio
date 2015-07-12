@@ -101,6 +101,8 @@ namespace model
     class Texture
     {
         public:
+            void bind_to_shader();
+
             // constructor.
             Texture(TextureStruct texture_struct);
 
