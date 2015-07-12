@@ -478,7 +478,7 @@ namespace model
         // constructor.
     }
 
-    void Graph::set_pointer(GLuint nodeID, void* node_pointer)
+    void Graph::set_node_pointer(GLuint nodeID, void* node_pointer)
     {
         this->node_pointer_vector[nodeID] = node_pointer;
 
@@ -563,7 +563,7 @@ namespace model
         this->graph_pointer = static_cast<model::Graph*>(node_struct.graph_pointer);
 
         // set pointer to this node.
-        this->graph_pointer->set_pointer(this->nodeID, this);
+        this->graph_pointer->set_node_pointer(this->nodeID, this);
 
         // create all bidirectional links between this node and neighbor nodes.
         for (GLuint link_i = 0; link_i < this->neighbor_nodeIDs.size(); link_i++)
@@ -584,7 +584,7 @@ namespace model
         }
 
         // set pointer to this node to NULL.
-        this->graph_pointer->set_pointer(this->nodeID, NULL);
+        this->graph_pointer->set_node_pointer(this->nodeID, NULL);
     }
 
     void Node::create_unidirectional_link(GLuint nodeID)
@@ -638,7 +638,7 @@ namespace model
     void Node::transfer_to_new_graph(model::Graph *new_graph_pointer)
     {
         // set pointer to this node to NULL.
-        this->graph_pointer->set_pointer(this->nodeID, NULL);
+        this->graph_pointer->set_node_pointer(this->nodeID, NULL);
 
         // set new graph pointer.
         this->graph_pointer = new_graph_pointer;
@@ -647,7 +647,7 @@ namespace model
         this->nodeID = this->graph_pointer->get_nodeID();
 
         // set pointer to this node.
-        this->graph_pointer->set_pointer(this->nodeID, this);
+        this->graph_pointer->set_node_pointer(this->nodeID, this);
     }
 
     void Species::bind_to_texture()

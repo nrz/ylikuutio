@@ -149,7 +149,7 @@ namespace model
             ~Graph();
 
             // this method sets a node pointer.
-            void set_pointer(GLuint nodeID, void* node_pointer);
+            void set_node_pointer(GLuint nodeID, void* node_pointer);
 
             // this method gets a node pointer.
             void* get_pointer(GLuint nodeID);
