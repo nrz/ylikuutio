@@ -99,7 +99,7 @@ namespace model
             model::Species* world_species,
             glm::vec3 position)
     {
-        if (world_species == NULL)
+        if (!world_species->is_world)
         {
             // if the current species is not a world species, no collision detection to the ground will be performed.
             return NAN;
