@@ -97,77 +97,67 @@ namespace model
 
     GLfloat get_ground_level(
             model::Species* world_species,
-            GLfloat x,
-            GLfloat y,
-            GLfloat z)
+            glm::vec3 position)
     {
         if (world_species == NULL)
         {
+            // if the current species is not a world species, no collision detection to the ground will be performed.
             return NAN;
         }
 
-        if (x < 0.0f)
+        if ((position.x < 0.0f) || (position.x > world_species->image_width))
         {
-            // std::cout << "x was below zero\n";
-            x = 0.0f;
-        }
-        else if (x > world_species->image_width)
-        {
-            // std::cout << "x was above image width\n";
-            x = world_species->image_width - 1.0f;
+            // if the x coordinate is out of range, no collision detection to the ground will be performed.
+            return NAN;
         }
 
-        if (z < 0.0f)
+        if ((position.z < 0.0f) || (position.z > world_species->image_height))
         {
-            // std::cout << "z was below zero\n";
-            z = 0.0f;
-        }
-        else if (z > world_species->image_height)
-        {
-            // std::cout << "z was above image height\n";
-            x = world_species->image_height - 1.0f;
+            // if the z coordinate is out of range, no collision detection to the ground will be performed.
+            return NAN;
         }
 
-        GLuint southwest_i = (GLuint) floor(z) * world_species->image_width + floor(x);
-        GLuint southeast_i = (GLuint) floor(z) * world_species->image_width + ceil(x);
-        GLuint northwest_i = (GLuint) ceil(z) * world_species->image_width + floor(x);
-        GLuint northeast_i = (GLuint) ceil(z) * world_species->image_width + ceil(x);
+        // compute the indices of closest vertices.
+        GLuint southwest_i = (GLuint) floor(position.z) * world_species->image_width + floor(position.x);
+        GLuint southeast_i = (GLuint) floor(position.z) * world_species->image_width + ceil(position.x);
+        GLuint northwest_i = (GLuint) ceil(position.z) * world_species->image_width + floor(position.x);
+        GLuint northeast_i = (GLuint) ceil(position.z) * world_species->image_width + ceil(position.x);
 
-        // std::cout << "southwest_i: " << southwest_i << "\n";
-        // std::cout << "southeast_i: " << southeast_i << "\n";
-        // std::cout << "northwest_i: " << northwest_i << "\n";
-        // std::cout << "northeast_i: " << northeast_i << "\n";
-
+        // read closest the heights of closest integer coordinates to be used in bilinear interpolation.
         GLfloat southwest_height = world_species->vertices[southwest_i].y;
         GLfloat southeast_height = world_species->vertices[southeast_i].y;
         GLfloat northwest_height = world_species->vertices[northwest_i].y;
         GLfloat northeast_height = world_species->vertices[northeast_i].y;
 
+        // these are not actually means but interpolations.
+        // the result of the interpolation is mean if and only if (ceil(x) - x == 0.5) & (x - floor(x) == 0.5) , likewise for the z coordinate.
         GLfloat south_mean;
         GLfloat north_mean;
         GLfloat mean;
 
-        // the height is computed using bilinear interpolation.
-        if ((x - floor(x) < 0.0001f) || (ceil(x) - x < 0.0001f))
+        if ((position.x - floor(position.x) < 0.01f) || (ceil(position.x) - position.x < 0.01f))
         {
+            // if the x coordinate is too close to integer, the height of the closest vertex is used instead.
             south_mean = southwest_height;
             north_mean = northwest_height;
         }
         else
         {
-            south_mean = (GLfloat) (ceil(x) - x) * southwest_height + (x - floor(x)) * southeast_height;
-            north_mean = (GLfloat) (ceil(x) - x) * northwest_height + (x - floor(x)) * northeast_height;
+            // the height is computed using bilinear interpolation.
+            south_mean = (GLfloat) ((ceil(position.x) - position.x) * southwest_height) + ((position.x - floor(position.x)) * southeast_height);
+            north_mean = (GLfloat) ((ceil(position.x) - position.x) * northwest_height) + ((position.x - floor(position.x)) * northeast_height);
         }
 
-        if ((z - floor(z) < 0.0001f) || (ceil(z) - z < 0.0001f))
+        if ((position.z - floor(position.z) < 0.01f) || (ceil(position.z) - position.z < 0.01f))
         {
+            // if the z coordinate is too close to integer, the mean is used instead of bilinear interpolation.
             mean = (south_mean + north_mean) / 2.0f;
         }
         else
         {
-            mean = (GLfloat) (ceil(z) - z) * south_mean + (z - floor(z)) * north_mean;
+            // the height is computed using bilinear interpolation.
+            mean = (GLfloat) ((ceil(position.z) - position.z) * south_mean) + ((position.z - floor(position.z)) * north_mean);
         }
-        // std::cout << "mean: " << mean << "\n";
 
         return mean;
     }
@@ -875,7 +865,7 @@ namespace model
         {
             if (this->is_world)
             {
-                GLfloat ground_y = model::get_ground_level(this, position.x, position.y, position.z);
+                GLfloat ground_y = model::get_ground_level(this, position);
 
                 if (!std::isnan(ground_y))
                 {
