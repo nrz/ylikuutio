@@ -874,13 +874,11 @@ namespace model
                         // std::cout << "fell below ground. ground_y: " << ground_y << "\n";
                         position.y = ground_y;
                         fallSpeed = gravity;
-                        inFreefall = false;
                     }
                     else
                     {
                         // std::cout << "in freefall. ground_y: " << ground_y << "\n";
                         fallSpeed += gravity;
-                        inFreefall = true;
                     }
                 }
             }

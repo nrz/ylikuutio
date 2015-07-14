@@ -14,7 +14,6 @@
 
 glm::vec3 position;
 GLfloat gravity = 9.81f / 60.0f;
-bool inFreefall;
 bool inFlightmode;
 GLfloat fallSpeed = gravity;
 SphericalCoordinatesStruct spherical_position;

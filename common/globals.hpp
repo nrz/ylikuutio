@@ -57,7 +57,6 @@
 
 extern glm::vec3 position;
 extern GLfloat gravity;
-extern bool inFreefall;
 extern bool inFlightmode;
 extern GLfloat fallSpeed;
 extern double horizontalAngle;
