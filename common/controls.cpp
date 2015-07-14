@@ -188,19 +188,20 @@ namespace controls
         // Flight mode on.
         if (glfwGetKey(window, GLFW_KEY_F) == GLFW_PRESS)
         {
-            fallSpeed = gravity;
+            fallSpeed = 0.0f;
             inFlightmode = true;
         }
 
         // Run mode on.
         if (glfwGetKey(window, GLFW_KEY_R) == GLFW_PRESS)
         {
-            fallSpeed = gravity;
+            fallSpeed = 0.0f;
             inFlightmode = false;
         }
 
         if (!inFlightmode)
         {
+            fallSpeed += gravity;
             position.y -= fallSpeed;
         }
 

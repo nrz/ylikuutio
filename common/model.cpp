@@ -871,14 +871,8 @@ namespace model
                 {
                     if (position.y < ground_y)
                     {
-                        // std::cout << "fell below ground. ground_y: " << ground_y << "\n";
                         position.y = ground_y;
-                        fallSpeed = gravity;
-                    }
-                    else
-                    {
-                        // std::cout << "in freefall. ground_y: " << ground_y << "\n";
-                        fallSpeed += gravity;
+                        fallSpeed = 0.0f;
                     }
                 }
             }
