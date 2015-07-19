@@ -216,7 +216,6 @@ int main(void)
     suzanne_species_struct.model_file_format = "obj";
     suzanne_species_struct.model_filename = "suzanne.obj";
     suzanne_species_struct.lightPos = glm::vec3(4, 4, 4);
-    suzanne_species_struct.is_world = false;
     model::Species *suzanne_species = new model::Species(suzanne_species_struct);
 
     // Create suzanne1, store it in `suzanne1`.

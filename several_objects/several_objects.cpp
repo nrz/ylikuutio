@@ -131,7 +131,6 @@ int main(void)
     species_struct.vertex_shader = "StandardShading.vertexshader";
     species_struct.fragment_shader = "StandardShading.fragmentshader";
     species_struct.lightPos = glm::vec3(4, 4, 4);
-    species_struct.is_world = false;
     model::Species *suzanne_species = new model::Species(species_struct);
 
     // Create suzanne1, store it in `suzanne1`.
