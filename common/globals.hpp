@@ -71,14 +71,14 @@ extern bool is_world_spherical;
 
 typedef struct
 {
-    void *world_pointer;                     // pointer to the world (draw list).
+    void *world_pointer = NULL;              // pointer to the world (draw list).
     std::string vertex_shader;               // filename of vertex shader.
     std::string fragment_shader;             // filename of fragment shader.
 } ShaderStruct;
 
 typedef struct
 {
-    void *shader_pointer;                    // pointer to the shader.
+    void *shader_pointer = NULL;             // pointer to the shader.
     std::string texture_file_format;         // type of the texture file. supported file formats so far: `"bmp"`/`"BMP"`, `"dds"`/`"DDS"`.
     std::string texture_filename;            // filename of the model file.
     std::string image_path;
@@ -87,7 +87,7 @@ typedef struct
 typedef struct
 {
     GLuint nodeID;
-    void* graph_pointer;
+    void *graph_pointer = NULL;
     glm::vec3 coordinate_vector;
     std::vector<uint32_t> neighbor_nodeIDs;
 } NodeStruct;
@@ -100,13 +100,13 @@ typedef struct
     glm::vec3 translate_vector;      // translate vector.
     glm::mat4 model_matrix;          // model matrix.
     glm::mat4 MVP_matrix;            // model view projection matrix.
-    void *species_pointer;           // pointer to the species.
+    void *species_pointer = NULL;    // pointer to the species.
 } ObjectStruct;
 
 typedef struct
 {
     // used for all files (for all species).
-    void *texture_pointer;                   // pointer to the texture object.
+    void *texture_pointer = NULL;            // pointer to the texture object.
     std::string model_file_format;           // type of the model file. supported file formats so far: `"bmp"`/`"BMP"`, `"obj"`/`"OBJ"`.
                                              // TODO: add support for `"SRTM"`.
     std::string vertex_shader;               // filename of vertex shader.
