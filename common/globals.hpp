@@ -113,7 +113,7 @@ typedef struct
     std::string fragment_shader;             // filename of fragment shader.
     glm::vec3 lightPos;                      // light position.
     std::vector<ObjectStruct> object_vector; // vector of individual objects of this species.
-    bool is_world;                           // worlds currently do not rotate nor translate.
+    bool is_world = false;                   // worlds currently do not rotate nor translate.
     std::string coordinate_system;           // used only for worlds (`is_world` == `true`). valid values: `"cartesian"`.
                                              // TODO: add support for `"spherical"`. `"spherical"` is used eg. in SRTM heightmaps.
     double world_radius;                    // radius of sea level in meters. used only for worlds.
