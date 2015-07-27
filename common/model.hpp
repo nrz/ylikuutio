@@ -83,14 +83,14 @@ namespace model
 
             model::World *world_pointer;          // pointer to the world.
 
+            GLuint programID;                     // shaders' programID, returned by `LoadShaders`.
+
+        private:
             GLuint shaderID;                      // shader ID, returned by `model::World->get_shaderID()`.
 
             std::string vertex_shader;            // filename of vertex shader.
             std::string fragment_shader;          // filename of fragment shader.
 
-            GLuint programID;                     // shaders' programID, returned by `LoadShaders`.
-
-        private:
             std::vector<void*> texture_pointer_vector;
             std::queue<GLuint> free_textureID_queue;
 
