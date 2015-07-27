@@ -58,8 +58,6 @@ namespace model
     class Shader
     {
         public:
-            void bind_to_world();
-
             // constructor.
             Shader(ShaderStruct shader_struct);
 
@@ -86,6 +84,8 @@ namespace model
             GLuint programID;                     // shaders' programID, returned by `LoadShaders`.
 
         private:
+            void bind_to_world();
+
             GLuint shaderID;                      // shader ID, returned by `model::World->get_shaderID()`.
 
             std::string vertex_shader;            // filename of vertex shader.
