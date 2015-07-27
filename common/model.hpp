@@ -125,10 +125,11 @@ namespace model
             void switch_to_new_shader(model::Shader *new_world_pointer);
 
             model::Shader *shader_pointer;         // pointer to the shader.
+
+        private:
             GLuint texture;                        // Texture, returned by `load_DDS_texture` or `load_BMP_texture`.
             GLuint openGL_textureID;               // texture ID, returned by `glGetUniformLocation(programID, "myTextureSampler");`.
 
-        private:
             std::vector<void*> species_pointer_vector;
             std::queue<GLuint> free_speciesID_queue;
 
