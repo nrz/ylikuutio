@@ -297,11 +297,14 @@ namespace model
             // this method sets pointer to this object to NULL, sets `species_pointer` according to the input, and requests a new `objectID` from the new species.
             void switch_to_new_species(model::Species *new_species_pointer);
 
+        private:
+            void bind_to_species();
+
             model::Species *species_pointer;       // pointer to the species.
 
             GLuint objectID;                      // object ID, returned by `model::Species->get_objectID()`.
-
             bool has_entered;
+
             glm::vec3 coordinate_vector;           // rotate vector.
             GLfloat rotate_angle;                  // rotate angle.
             glm::vec3 rotate_vector;               // rotate vector.
@@ -314,9 +317,6 @@ namespace model
             std::vector<glm::vec3> normals;        // normals of the object. not used at the moment.
 
             glm::mat4 MVP_matrix;                  // model view projection matrix.
-
-        private:
-            void bind_to_species();
     };
 }
 
