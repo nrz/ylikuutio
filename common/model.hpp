@@ -193,10 +193,10 @@ namespace model
             GLuint nodeID;
             model::Graph *graph_pointer;
 
+        private:
             // nodes do not keep pointers to neighbor nodes, because all pointer values are not known yet before all nodes are created.
             std::vector<GLuint> neighbor_nodeIDs;
 
-        private:
             // this method creates an unidirectional link.
             // in the constructor only unidirectional links can be created.
             void create_unidirectional_link(GLuint nodeID);
