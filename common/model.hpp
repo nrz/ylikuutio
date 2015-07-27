@@ -101,8 +101,6 @@ namespace model
     class Texture
     {
         public:
-            void bind_to_shader();
-
             // constructor.
             Texture(TextureStruct texture_struct);
 
@@ -127,6 +125,8 @@ namespace model
             model::Shader *shader_pointer;         // pointer to the shader.
 
         private:
+            void bind_to_shader();
+
             GLuint texture;                        // Texture, returned by `load_DDS_texture` or `load_BMP_texture`.
             GLuint openGL_textureID;               // texture ID, returned by `glGetUniformLocation(programID, "myTextureSampler");`.
 
