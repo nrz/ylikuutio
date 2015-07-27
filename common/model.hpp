@@ -210,8 +210,6 @@ namespace model
     class Species
     {
         public:
-            void bind_to_texture();
-
             // constructor.
             Species(SpeciesStruct species_struct);
 
@@ -266,7 +264,10 @@ namespace model
 
             glm::mat4 ProjectionMatrix;
             glm::mat4 ViewMatrix;
+
         private:
+            void bind_to_texture();
+
             model::Texture *texture_pointer;       // pointer to the texture.
 
             std::string model_file_format;         // type of the model file, eg. `"bmp"`.
