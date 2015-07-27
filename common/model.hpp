@@ -285,8 +285,6 @@ namespace model
     class Object
     {
         public:
-            void bind_to_species();
-
             // constructor.
             Object(ObjectStruct object_struct);
 
@@ -316,6 +314,9 @@ namespace model
             std::vector<glm::vec3> normals;        // normals of the object. not used at the moment.
 
             glm::mat4 MVP_matrix;                  // model view projection matrix.
+
+        private:
+            void bind_to_species();
     };
 }
 
