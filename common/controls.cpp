@@ -239,7 +239,7 @@ namespace controls
         camera_position.y += 2.0f;
 
         // Projection matrix : 45° Field of View, aspect ratio, display range : 0.1 unit <-> 100 units
-        ProjectionMatrix = glm::perspective(FoV, ASPECT_RATIO, 0.01f, 5000.0f + 2.0f * EARTH_RADIUS);
+        ProjectionMatrix = glm::perspective(FoV, ASPECT_RATIO, 0.01f, 5000.0f + 2.0f * (GLfloat) earth_radius);
         // Camera matrix
         ViewMatrix = glm::lookAt(
                 position,           // Camera is here
