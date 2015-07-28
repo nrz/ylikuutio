@@ -80,10 +80,9 @@ extern bool is_world_spherical;
 
 typedef struct
 {
-#ifdef __gnu_linux__
+#ifdef __STRUCT_DEFAULT_VALUES_ARE_ACCEPTED
     void *world_pointer = NULL;              // pointer to the world (draw list).
-#endif
-#ifdef _WIN32
+#else
     void *world_pointer;                     // pointer to the world (draw list).
 #endif
     std::string vertex_shader;               // filename of vertex shader.
@@ -100,10 +99,9 @@ ShaderStruct x; x.world_pointer = NULL
 
 typedef struct
 {
-#ifdef __gnu_linux__
+#ifdef __STRUCT_DEFAULT_VALUES_ARE_ACCEPTED
     void *shader_pointer = NULL;             // pointer to the shader.
-#endif
-#ifdef _WIN32
+#else
     void *shader_pointer;                    // pointer to the shader.
 #endif
     std::string texture_file_format;         // type of the texture file. supported file formats so far: `"bmp"`/`"BMP"`, `"dds"`/`"DDS"`.
@@ -122,10 +120,9 @@ TextureStruct x; x.shader_pointer = NULL
 typedef struct
 {
     GLuint nodeID;
-#ifdef __gnu_linux__
+#ifdef __STRUCT_DEFAULT_VALUES_ARE_ACCEPTED
     void *graph_pointer = NULL;
-#endif
-#ifdef _WIN32
+#else
     void *graph_pointer;
 #endif
     glm::vec3 coordinate_vector;
@@ -142,11 +139,10 @@ NodeStruct x; x.graph_pointer = NULL
 
 typedef struct
 {
-#ifdef __gnu_linux__
+#ifdef __STRUCT_DEFAULT_VALUES_ARE_ACCEPTED
     void *species_pointer = NULL;    // pointer to the species.
     GLfloat rotate_angle = NAN;      // rotate angle.
-#endif
-#ifdef _WIN32
+#else
     void *species_pointer;           // pointer to the species.
     GLfloat rotate_angle;            // rotate angle.
 #endif
@@ -168,12 +164,11 @@ ObjectStruct x; x.species_pointer = NULL; x.rotate_angle = NAN
 typedef struct
 {
     // used for all files (for all species).
-#ifdef __gnu_linux__
+#ifdef __STRUCT_DEFAULT_VALUES_ARE_ACCEPTED
     void *texture_pointer = NULL;            // pointer to the texture object.
     bool is_world = false;                   // worlds currently do not rotate nor translate.
     double world_radius = NAN;               // radius of sea level in meters. used only for worlds.
-#endif
-#ifdef _WIN32
+#else
     void *texture_pointer;                   // pointer to the texture object.
     bool is_world;                           // worlds currently do not rotate nor translate.
     double world_radius;                     // radius of sea level in meters. used only for worlds.
