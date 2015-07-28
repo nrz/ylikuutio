@@ -187,6 +187,42 @@ namespace model
         return mean;
     }
 
+    GLfloat get_floor_level(
+            model::Species* world_species,
+            glm::vec3 position)
+    {
+        if (!world_species->is_world)
+        {
+            // if the current species is not a world species, no collision detection to the ground will be performed.
+            return NAN;
+        }
+
+#define CHARACTER_RADIUS 1.0f
+        GLfloat current_ground_level = get_ground_level(world_species, position);
+
+        // Get ground level at current location and +/- 1.0f.
+        glm::vec3 south_position = position;
+        south_position.z -= (GLfloat) CHARACTER_RADIUS;
+        GLfloat south_ground_level = get_ground_level(world_species, south_position);
+
+        glm::vec3 west_position = position;
+        west_position.x -= (GLfloat) CHARACTER_RADIUS;
+        GLfloat west_ground_level = get_ground_level(world_species, west_position);
+
+        glm::vec3 north_position = position;
+        north_position.z += (GLfloat) CHARACTER_RADIUS;
+        GLfloat north_ground_level = get_ground_level(world_species, north_position);
+
+        glm::vec3 east_position = position;
+        east_position.x += (GLfloat) CHARACTER_RADIUS;
+        GLfloat east_ground_level = get_ground_level(world_species, east_position);
+
+        GLfloat temp_max_between_south_and_north = fmax(south_ground_level, north_ground_level);
+        GLfloat temp_max_between_west_and_east = fmax(west_ground_level, east_ground_level);
+        GLfloat temp_max_around_character = fmax(temp_max_between_south_and_north, temp_max_between_west_and_east);
+        return fmax(temp_max_around_character, current_ground_level);
+    }
+
     World::World()
     {
         // constructor.
@@ -461,7 +497,7 @@ namespace model
         {
             if (this->world_species_pointer != NULL)
             {
-                GLfloat ground_y = model::get_ground_level(static_cast<model::Species*>(this->world_species_pointer), position);
+                GLfloat ground_y = model::get_floor_level(static_cast<model::Species*>(this->world_species_pointer), position);
 
                 if (!std::isnan(ground_y))
                 {
