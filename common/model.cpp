@@ -236,8 +236,6 @@ namespace model
     {
         GLuint shaderID;
 
-        // FIXME: `this->free_shaderID_queue.empty()` causes segmentation fault in Clang version 3.7.0!
-
         while (!this->free_shaderID_queue.empty())
         {
             // return the first (oldest) free shaderID.
