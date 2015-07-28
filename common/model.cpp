@@ -260,6 +260,11 @@ namespace model
         return shaderID;
     }
 
+    void World::set_world_species_pointer(void* world_species_pointer)
+    {
+        this->world_species_pointer = world_species_pointer;
+    }
+
     void Shader::bind_to_world()
     {
         // get shaderID from the World.
@@ -824,6 +829,13 @@ namespace model
         // Get a handle for our "LightPosition" uniform.
         glUseProgram(this->texture_pointer->shader_pointer->programID);
         this->lightID = glGetUniformLocation(this->texture_pointer->shader_pointer->programID, "LightPosition_worldspace");
+
+        if (this->is_world)
+        {
+            // set world species pointer so that it points to this species.
+            // currently there can be only one world species (used in collision detection).
+            this->texture_pointer->shader_pointer->world_pointer->set_world_species_pointer(this);
+        }
 
         // Compute the graph of this object type.
     }

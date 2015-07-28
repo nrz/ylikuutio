@@ -50,7 +50,13 @@ namespace model
             // this method gets a shader ID and removes it from the `free_shaderID_queue` if it was popped from the queue.
             GLuint get_shaderID();
 
+            // this method sets a world species pointer.
+            void set_world_species_pointer(void* world_species_pointer);
+
         private:
+            // pointer to world species (used in collision detection).
+            void* world_species_pointer;
+
             std::vector<void*> shader_pointer_vector;
             std::queue<GLuint> free_shaderID_queue;
     };
