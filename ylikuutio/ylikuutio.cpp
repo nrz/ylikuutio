@@ -181,7 +181,7 @@ int main(void)
 
 #ifdef TESTING_SPHERICAL_WORLD_IN_USE
     // Create the species, store it in `terrain_species`.
-    SpeciesStruct SRTM_terrain_species_struct;
+    SPECIESSTRUCT(SRTM_terrain_species_struct);
     SRTM_terrain_species_struct.texture_pointer = my_grass_texture;
     SRTM_terrain_species_struct.model_file_format = "SRTM";
     // SRTM_terrain_species_struct.model_filename = "/media/laatikko_4TB/satelliittikuvat/srtm/version3/data/";
@@ -192,7 +192,7 @@ int main(void)
     model::Species *terrain_species = new model::Species(SRTM_terrain_species_struct);
 #else
     // Create the species, store it in `terrain_species`.
-    SpeciesStruct bmp_terrain_species_struct;
+    SPECIESSTRUCT(bmp_terrain_species_struct);
     bmp_terrain_species_struct.texture_pointer = my_grass_texture;
     bmp_terrain_species_struct.model_file_format = g_model_file_format;
     bmp_terrain_species_struct.model_filename = g_model_filename;
@@ -211,7 +211,7 @@ int main(void)
     terrain_object_struct1.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
     model::Object *terrain1 = new model::Object(terrain_object_struct1);
 
-    SpeciesStruct suzanne_species_struct;
+    SPECIESSTRUCT(suzanne_species_struct);
     suzanne_species_struct.texture_pointer = my_uvmap_texture;
     suzanne_species_struct.model_file_format = "obj";
     suzanne_species_struct.model_filename = "suzanne.obj";

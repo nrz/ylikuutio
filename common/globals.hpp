@@ -148,22 +148,38 @@ typedef struct
 typedef struct
 {
     // used for all files (for all species).
+#ifdef __gnu_linux__
     void *texture_pointer = NULL;            // pointer to the texture object.
+    bool is_world = false;                   // worlds currently do not rotate nor translate.
+    double world_radius = NAN;               // radius of sea level in meters. used only for worlds.
+#endif
+#ifdef _WIN32
+    void *texture_pointer;                   // pointer to the texture object.
+    bool is_world;                           // worlds currently do not rotate nor translate.
+    double world_radius;                     // radius of sea level in meters. used only for worlds.
+#endif
     std::string model_file_format;           // type of the model file. supported file formats so far: `"bmp"`/`"BMP"`, `"obj"`/`"OBJ"`.
                                              // TODO: add support for `"SRTM"`.
     std::string vertex_shader;               // filename of vertex shader.
     std::string fragment_shader;             // filename of fragment shader.
     glm::vec3 lightPos;                      // light position.
     std::vector<ObjectStruct> object_vector; // vector of individual objects of this species.
-    bool is_world = false;                   // worlds currently do not rotate nor translate.
     std::string coordinate_system;           // used only for worlds (`is_world` == `true`). valid values: `"cartesian"`.
                                              // TODO: add support for `"spherical"`. `"spherical"` is used eg. in SRTM heightmaps.
-    double world_radius = NAN;               // radius of sea level in meters. used only for worlds.
 
     // for `"bmp"` model files.
     std::string model_filename;              // filename of the model file.
     std::string color_channel;               // color channel to use for altitude data.
 } SpeciesStruct;
+
+#ifdef __gnu_linux__
+#define SPECIESSTRUCT(x) \
+SpeciesStruct x
+#endif
+#ifdef _WIN32
+#define SPECIESSTRUCT(x) \
+SpeciesStruct x; x.texture_pointer = NULL; x.is_world = false; x.world_radius = NAN
+#endif
 
 typedef struct
 {

@@ -124,7 +124,7 @@ int main(void)
     model::Texture *my_texture = new model::Texture(texture_struct);
 
     // Create the species, store it in `suzanne_species`.
-    SpeciesStruct species_struct;
+    SPECIESSTRUCT(species_struct);
     species_struct.texture_pointer = my_texture;
     species_struct.model_file_format = "obj";
     species_struct.model_filename = "suzanne.obj";
