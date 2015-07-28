@@ -136,14 +136,29 @@ NodeStruct x; x.graph_pointer = NULL
 
 typedef struct
 {
-    glm::vec3 coordinate_vector;     // coordinate vector.
+#ifdef __gnu_linux__
+    void *species_pointer = NULL;    // pointer to the species.
     GLfloat rotate_angle = NAN;      // rotate angle.
+#endif
+#ifdef _WIN32
+    void *species_pointer;           // pointer to the species.
+    GLfloat rotate_angle;            // rotate angle.
+#endif
+    glm::vec3 coordinate_vector;     // coordinate vector.
     glm::vec3 rotate_vector;         // rotate vector.
     glm::vec3 translate_vector;      // translate vector.
     glm::mat4 model_matrix;          // model matrix.
     glm::mat4 MVP_matrix;            // model view projection matrix.
-    void *species_pointer = NULL;    // pointer to the species.
 } ObjectStruct;
+
+#ifdef __gnu_linux__
+#define OBJECTSTRUCT(x) \
+ObjectStruct x
+#endif
+#ifdef _WIN32
+#define OBJECTSTRUCT(x) \
+ObjectStruct x; x.species_pointer = NULL; x.rotate_angle = NAN
+#endif
 
 typedef struct
 {
