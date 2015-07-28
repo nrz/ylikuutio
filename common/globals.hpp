@@ -115,10 +115,24 @@ TextureStruct x; x.shader_pointer = NULL
 typedef struct
 {
     GLuint nodeID;
+#ifdef __gnu_linux__
     void *graph_pointer = NULL;
+#endif
+#ifdef _WIN32
+    void *graph_pointer;
+#endif
     glm::vec3 coordinate_vector;
     std::vector<uint32_t> neighbor_nodeIDs;
 } NodeStruct;
+
+#ifdef __gnu_linux__
+#define NODESTRUCT(x) \
+NodeStruct x
+#endif
+#ifdef _WIN32
+#define NODESTRUCT(x) \
+NodeStruct x; x.graph_pointer = NULL
+#endif
 
 typedef struct
 {
