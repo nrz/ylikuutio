@@ -1118,23 +1118,6 @@ namespace model
 
     void Species::render()
     {
-        if (!inFlightmode)
-        {
-            if (this->is_world)
-            {
-                GLfloat ground_y = model::get_ground_level(this, position);
-
-                if (!std::isnan(ground_y))
-                {
-                    if (position.y < ground_y)
-                    {
-                        position.y = ground_y;
-                        fallSpeed = 0.0f;
-                    }
-                }
-            }
-        }
-
         // Compute the MVP matrix from keyboard and mouse input.
         this->ProjectionMatrix = model::getProjectionMatrix();
         this->ViewMatrix = model::getViewMatrix();
