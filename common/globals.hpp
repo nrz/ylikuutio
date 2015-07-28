@@ -1,7 +1,8 @@
 #ifndef __GLOBALS_HPP_INCLUDED
 #define __GLOBALS_HPP_INCLUDED
 
-#ifdef __GNUC__
+#ifdef __clang__
+#elif defined(__GNUC__)
 #define __STRUCT_DEFAULT_VALUES_ARE_ACCEPTED
 #elif defined(_WIN32)
 #if (_MSC_VER >= 1900)
