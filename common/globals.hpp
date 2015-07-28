@@ -1,6 +1,15 @@
 #ifndef __GLOBALS_HPP_INCLUDED
 #define __GLOBALS_HPP_INCLUDED
 
+#ifdef __GNUC__
+#define __STRUCT_DEFAULT_VALUES_ARE_ACCEPTED
+#endif
+#ifdef _WIN32
+#if (_MSC_VER >= 1900)
+#define __STRUCT_DEFAULT_VALUES_ARE_ACCEPTED
+#endif
+#endif
+
 #include <string>
 #include <vector>
 #include <stdint.h> // uint32_t etc.
@@ -81,11 +90,10 @@ typedef struct
     std::string fragment_shader;             // filename of fragment shader.
 } ShaderStruct;
 
-#ifdef __gnu_linux__
+#ifdef __STRUCT_DEFAULT_VALUES_ARE_ACCEPTED
 #define SHADERSTRUCT(x) \
 ShaderStruct x
-#endif
-#ifdef _WIN32
+#else
 #define SHADERSTRUCT(x) \
 ShaderStruct x; x.world_pointer = NULL
 #endif
@@ -103,11 +111,10 @@ typedef struct
     std::string image_path;
 } TextureStruct;
 
-#ifdef __gnu_linux__
+#ifdef __STRUCT_DEFAULT_VALUES_ARE_ACCEPTED
 #define TEXTURESTRUCT(x) \
 TextureStruct x
-#endif
-#ifdef _WIN32
+#else
 #define TEXTURESTRUCT(x) \
 TextureStruct x; x.shader_pointer = NULL
 #endif
@@ -125,11 +132,10 @@ typedef struct
     std::vector<uint32_t> neighbor_nodeIDs;
 } NodeStruct;
 
-#ifdef __gnu_linux__
+#ifdef __STRUCT_DEFAULT_VALUES_ARE_ACCEPTED
 #define NODESTRUCT(x) \
 NodeStruct x
-#endif
-#ifdef _WIN32
+#else
 #define NODESTRUCT(x) \
 NodeStruct x; x.graph_pointer = NULL
 #endif
@@ -151,11 +157,10 @@ typedef struct
     glm::mat4 MVP_matrix;            // model view projection matrix.
 } ObjectStruct;
 
-#ifdef __gnu_linux__
+#ifdef __STRUCT_DEFAULT_VALUES_ARE_ACCEPTED
 #define OBJECTSTRUCT(x) \
 ObjectStruct x
-#endif
-#ifdef _WIN32
+#else
 #define OBJECTSTRUCT(x) \
 ObjectStruct x; x.species_pointer = NULL; x.rotate_angle = NAN
 #endif
@@ -187,11 +192,10 @@ typedef struct
     std::string color_channel;               // color channel to use for altitude data.
 } SpeciesStruct;
 
-#ifdef __gnu_linux__
+#ifdef __STRUCT_DEFAULT_VALUES_ARE_ACCEPTED
 #define SPECIESSTRUCT(x) \
 SpeciesStruct x
-#endif
-#ifdef _WIN32
+#else
 #define SPECIESSTRUCT(x) \
 SpeciesStruct x; x.texture_pointer = NULL; x.is_world = false; x.world_radius = NAN
 #endif
