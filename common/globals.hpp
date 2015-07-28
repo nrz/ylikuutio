@@ -3,8 +3,7 @@
 
 #ifdef __GNUC__
 #define __STRUCT_DEFAULT_VALUES_ARE_ACCEPTED
-#endif
-#ifdef _WIN32
+#elif defined(_WIN32)
 #if (_MSC_VER >= 1900)
 #define __STRUCT_DEFAULT_VALUES_ARE_ACCEPTED
 #endif
