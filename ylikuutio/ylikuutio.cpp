@@ -159,7 +159,7 @@ int main(void)
     model::World *my_world = new model::World();
 
     // Create the shader, store it in 'my_shader`.
-    ShaderStruct shader_struct;
+    SHADERSTRUCT(shader_struct);
     shader_struct.world_pointer = my_world;
     shader_struct.vertex_shader = "StandardShading.vertexshader";
     shader_struct.fragment_shader = "StandardShading.fragmentshader";

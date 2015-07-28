@@ -71,10 +71,24 @@ extern bool is_world_spherical;
 
 typedef struct
 {
+#ifdef __gnu_linux__
     void *world_pointer = NULL;              // pointer to the world (draw list).
+#endif
+#ifdef _WIN32
+    void *world_pointer;                     // pointer to the world (draw list).
+#endif
     std::string vertex_shader;               // filename of vertex shader.
     std::string fragment_shader;             // filename of fragment shader.
 } ShaderStruct;
+
+#ifdef __gnu_linux__
+#define SHADERSTRUCT(x) \
+ShaderStruct x
+#endif
+#ifdef _WIN32
+#define SHADERSTRUCT(x) \
+ShaderStruct x; x.world_pointer = NULL
+#endif
 
 typedef struct
 {
