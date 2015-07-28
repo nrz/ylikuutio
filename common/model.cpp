@@ -401,6 +401,12 @@ namespace model
         this->bind_to_world();
     }
 
+    void Shader::set_world_species_pointer(void* world_species_pointer)
+    {
+        this->world_species_pointer = world_species_pointer;
+        this->world_pointer->set_world_species_pointer(this->world_species_pointer);
+    }
+
     void Texture::bind_to_shader()
     {
         // get textureID from the Shader.

@@ -84,12 +84,17 @@ namespace model
             // this method sets pointer to this shader to NULL, sets `world_pointer` according to the input, and requests a new `shaderID` from the new world.
             void switch_to_new_world(model::World *new_world_pointer);
 
+            // this method sets a world species pointer.
+            void set_world_species_pointer(void* world_species_pointer);
+
             model::World *world_pointer;          // pointer to the world.
 
             GLuint programID;                     // shaders' programID, returned by `LoadShaders`.
 
         private:
             void bind_to_world();
+
+            void* world_species_pointer;          // pointer to world species (used in collision detection).
 
             GLuint shaderID;                      // shader ID, returned by `model::World->get_shaderID()`.
 
