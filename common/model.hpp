@@ -132,10 +132,15 @@ namespace model
             // this method sets pointer to this shader to NULL, sets `shader_pointer` according to the input, and requests a new `textureID` from the new shader.
             void switch_to_new_shader(model::Shader *new_world_pointer);
 
+            // this method sets a world species pointer.
+            void set_world_species_pointer(void* world_species_pointer);
+
             model::Shader *shader_pointer;         // pointer to the shader.
 
         private:
             void bind_to_shader();
+
+            void* world_species_pointer;           // pointer to world species (used in collision detection).
 
             GLuint texture;                        // Texture, returned by `load_DDS_texture` or `load_BMP_texture`.
             GLuint openGL_textureID;               // texture ID, returned by `glGetUniformLocation(programID, "myTextureSampler");`.

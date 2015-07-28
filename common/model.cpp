@@ -562,6 +562,12 @@ namespace model
         this->bind_to_shader();
     }
 
+    void Texture::set_world_species_pointer(void* world_species_pointer)
+    {
+        this->world_species_pointer = world_species_pointer;
+        this->shader_pointer->set_world_species_pointer(this->world_species_pointer);
+    }
+
     Graph::Graph()
     {
         // constructor.
