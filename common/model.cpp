@@ -215,7 +215,7 @@ namespace model
 
     void World::render()
     {
-        this->compute_matrices_from_inputs(this);
+        this->compute_matrices_from_inputs();
 
         // this method renders the world by calling `render()` methods of each shader.
         for (GLuint shader_i = 0; shader_i < this->shader_pointer_vector.size(); shader_i++)
@@ -290,7 +290,7 @@ namespace model
         this->world_species_pointer = world_species_pointer;
     }
 
-    void World::compute_matrices_from_inputs(void* world_species_pointer)
+    void World::compute_matrices_from_inputs()
     {
         // glfwGetTime is called only once, the first time this function is called
         static double lastTime = glfwGetTime();
