@@ -117,7 +117,7 @@ int main(void)
     model::Shader *my_shader = new model::Shader(shader_struct);
 
     // Create the texture, store it in 'my_texture`.
-    TextureStruct texture_struct;
+    TEXTURESTRUCT(texture_struct);
     texture_struct.shader_pointer = my_shader;
     texture_struct.texture_file_format = "dds";
     texture_struct.texture_filename = "uvmap.DDS";

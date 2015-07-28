@@ -92,11 +92,25 @@ ShaderStruct x; x.world_pointer = NULL
 
 typedef struct
 {
+#ifdef __gnu_linux__
     void *shader_pointer = NULL;             // pointer to the shader.
+#endif
+#ifdef _WIN32
+    void *shader_pointer;                    // pointer to the shader.
+#endif
     std::string texture_file_format;         // type of the texture file. supported file formats so far: `"bmp"`/`"BMP"`, `"dds"`/`"DDS"`.
     std::string texture_filename;            // filename of the model file.
     std::string image_path;
 } TextureStruct;
+
+#ifdef __gnu_linux__
+#define TEXTURESTRUCT(x) \
+TextureStruct x
+#endif
+#ifdef _WIN32
+#define TEXTURESTRUCT(x) \
+TextureStruct x; x.shader_pointer = NULL
+#endif
 
 typedef struct
 {
