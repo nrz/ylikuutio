@@ -54,8 +54,7 @@ namespace model
             void set_world_species_pointer(void* world_species_pointer);
 
         private:
-            // pointer to world species (used in collision detection).
-            void* world_species_pointer;
+            void* world_species_pointer;              // pointer to world species (used in collision detection).
 
             std::vector<void*> shader_pointer_vector;
             std::queue<GLuint> free_shaderID_queue;
