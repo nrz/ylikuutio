@@ -85,8 +85,6 @@ add_executable(several_objects
     common/shader.hpp
     common/globals.cpp
     common/globals.hpp
-    common/controls.cpp
-    common/controls.hpp
     common/texture.cpp
     common/texture.hpp
     common/heightmap_loader.cpp
@@ -107,8 +105,8 @@ configure_file(common/StandardShading.vertexshader StandardShading.vertexshader 
 configure_file(common/StandardShading.fragmentshader StandardShading.fragmentshader COPYONLY)
 configure_file(several_objects/suzanne.obj suzanne.obj COPYONLY)
 configure_file(several_objects/uvmap.DDS uvmap.DDS COPYONLY)
-configure_file(text2d/Holstein.DDS Holstein.DDS COPYONLY)
-configure_file(text2d/Holstein.bmp Holstein.bmp COPYONLY)
+configure_file(ylikuutio/Holstein.DDS Holstein.DDS COPYONLY)
+configure_file(ylikuutio/Holstein.bmp Holstein.bmp COPYONLY)
 
 target_link_libraries(several_objects
     ${ALL_LIBS}
@@ -117,47 +115,6 @@ target_link_libraries(several_objects
 set_target_properties(several_objects PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/several_objects/")
 create_target_launcher(several_objects WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/several_objects/")
 
-# Tutorial 11
-add_executable(text2d
-    text2d/tutorial11.cpp
-    common/shader.cpp
-    common/shader.hpp
-    common/globals.cpp
-    common/globals.hpp
-    common/controls.cpp
-    common/controls.hpp
-    common/texture.cpp
-    common/texture.hpp
-    common/heightmap_loader.cpp
-    common/heightmap_loader.hpp
-    common/objloader.cpp
-    common/objloader.hpp
-    common/model.cpp
-    common/model.hpp
-    common/vboindexer.cpp
-    common/vboindexer.hpp
-    common/text2D.hpp
-    common/text2D.cpp
-
-    common/StandardShading.vertexshader
-    common/StandardShading.fragmentshader
-    common/TextVertexShader.vertexshader
-    common/TextVertexShader.fragmentshader
-    )
-configure_file(common/StandardShading.vertexshader StandardShading.vertexshader COPYONLY)
-configure_file(common/StandardShading.fragmentshader StandardShading.fragmentshader COPYONLY)
-configure_file(common/TextVertexShader.vertexshader TextVertexShader.vertexshader COPYONLY)
-configure_file(common/TextVertexShader.fragmentshader TextVertexShader.fragmentshader COPYONLY)
-configure_file(text2d/Holstein.DDS Holstein.DDS COPYONLY)
-configure_file(text2d/Holstein.bmp Holstein.bmp COPYONLY)
-
-target_link_libraries(text2d
-    ${ALL_LIBS}
-    )
-# Xcode and Visual working directories
-set_target_properties(text2d PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/text2d/")
-create_target_launcher(text2d WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/text2d/")
-
 # Ylikuutio
 add_executable(ylikuutio
     ylikuutio/ylikuutio.cpp
@@ -165,8 +122,6 @@ add_executable(ylikuutio
     common/shader.hpp
     common/globals.cpp
     common/globals.hpp
-    common/controls.cpp
-    common/controls.hpp
     common/texture.cpp
     common/texture.hpp
     common/heightmap_loader.cpp
@@ -209,7 +164,6 @@ target_link_libraries(ylikuutio
 # Xcode and Visual working directories
 set_target_properties(ylikuutio PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/ylikuutio/")
 create_target_launcher(ylikuutio WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/ylikuutio/")
-
 
 SOURCE_GROUP(common REGULAR_EXPRESSION ".*/common/.*" )
 SOURCE_GROUP(shaders REGULAR_EXPRESSION ".*/.*shader$" )
