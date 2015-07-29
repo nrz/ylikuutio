@@ -217,7 +217,27 @@ namespace model
         east_position.x += (GLfloat) CHARACTER_RADIUS;
         GLfloat east_ground_level = get_ground_level(world_species, east_position);
 
-        GLfloat temp_max_between_south_and_north = fmax(south_ground_level, north_ground_level);
+        glm::vec3 southwest_position = south_position;
+        southwest_position.x -= (GLfloat) CHARACTER_RADIUS;
+        GLfloat southwest_ground_level = get_ground_level(world_species, southwest_position);
+
+        glm::vec3 southeast_position = south_position;
+        southeast_position.x += (GLfloat) CHARACTER_RADIUS;
+        GLfloat southeast_ground_level = get_ground_level(world_species, southeast_position);
+
+        glm::vec3 northwest_position = north_position;
+        northwest_position.x -= (GLfloat) CHARACTER_RADIUS;
+        GLfloat northwest_ground_level = get_ground_level(world_species, northwest_position);
+
+        glm::vec3 northeast_position = north_position;
+        northeast_position.x += (GLfloat) CHARACTER_RADIUS;
+        GLfloat northeast_ground_level = get_ground_level(world_species, northeast_position);
+
+        GLfloat temp_max_between_southwest_and_southeast = fmax(southwest_ground_level, southeast_ground_level);
+        GLfloat temp_max_south = fmax(temp_max_between_southwest_and_southeast, south_ground_level);
+        GLfloat temp_max_between_northwest_and_northeast = fmax(northwest_ground_level, northeast_ground_level);
+        GLfloat temp_max_north = fmax(temp_max_between_northwest_and_northeast, north_ground_level);
+        GLfloat temp_max_between_south_and_north = fmax(temp_max_south, temp_max_north);
         GLfloat temp_max_between_west_and_east = fmax(west_ground_level, east_ground_level);
         GLfloat temp_max_around_character = fmax(temp_max_between_south_and_north, temp_max_between_west_and_east);
         return fmax(temp_max_around_character, current_ground_level);
