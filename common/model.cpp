@@ -360,6 +360,7 @@ namespace model
                 // don't invert mouse.
                 verticalAngle   += mouseSpeed * GLfloat(WINDOW_HEIGHT/2 - ypos);
             }
+            verticalAngle = remainder(verticalAngle, (2.0f * PI));
         }
 
         // Direction : Spherical coordinates to Cartesian coordinates conversion
