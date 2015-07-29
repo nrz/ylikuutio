@@ -348,6 +348,7 @@ namespace model
 
             // Compute new orientation
             horizontalAngle += mouseSpeed * GLfloat(WINDOW_WIDTH/2 - xpos);
+            horizontalAngle = remainder(horizontalAngle, (2.0f * PI));
 
             if (is_invert_mouse_in_use)
             {
