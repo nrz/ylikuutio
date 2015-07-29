@@ -252,6 +252,7 @@ int main(void)
 
     OBJECTSTRUCT(suzanne_object_struct5);
     suzanne_object_struct5.species_pointer = suzanne_species;
+    suzanne_object_struct5.original_scale_vector = glm::vec3(10.0f, 10.0f, 10.0f);
     suzanne_object_struct5.coordinate_vector = glm::vec3(103.00f, 105.00f, 109.00f);
     suzanne_object_struct5.rotate_angle = 0.03f;
     suzanne_object_struct5.rotate_vector = glm::vec3(1.0f, 1.0f, 1.0f);

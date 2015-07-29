@@ -140,10 +140,12 @@ NodeStruct x; x.graph_pointer = NULL
 typedef struct
 {
 #ifdef __STRUCT_DEFAULT_VALUES_ARE_ACCEPTED
-    void *species_pointer = NULL;    // pointer to the species.
-    GLfloat rotate_angle = NAN;      // rotate angle.
+    void *species_pointer = NULL;                                  // pointer to the species.
+    glm::vec3 original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f); // original scale vector.
+    GLfloat rotate_angle = NAN;                                    // rotate angle.
 #else
     void *species_pointer;           // pointer to the species.
+    glm::vec3 original_scale_vector; // original scale vector.
     GLfloat rotate_angle;            // rotate angle.
 #endif
     glm::vec3 coordinate_vector;     // coordinate vector.
@@ -158,7 +160,7 @@ typedef struct
 ObjectStruct x
 #else
 #define OBJECTSTRUCT(x) \
-ObjectStruct x; x.species_pointer = NULL; x.rotate_angle = NAN
+ObjectStruct x; x.species_pointer = NULL; x.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f); x.rotate_angle = NAN
 #endif
 
 typedef struct

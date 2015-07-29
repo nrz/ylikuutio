@@ -1284,6 +1284,7 @@ namespace model
     {
         // constructor.
         this->coordinate_vector = object_struct.coordinate_vector;
+        this->original_scale_vector = object_struct.original_scale_vector;
         this->rotate_angle      = object_struct.rotate_angle;
         this->rotate_vector     = object_struct.rotate_vector;
         this->translate_vector  = object_struct.translate_vector;
@@ -1310,6 +1311,7 @@ namespace model
         if (!this->has_entered)
         {
             this->model_matrix = glm::translate(glm::mat4(1.0f), this->coordinate_vector);
+            this->model_matrix = glm::scale(this->model_matrix, this->original_scale_vector);
 
             // store the new coordinates to be used in the next update.
             this->coordinate_vector = glm::vec3(model_matrix[0][0], model_matrix[1][1], model_matrix[2][2]);
