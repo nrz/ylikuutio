@@ -324,7 +324,7 @@ int main(void)
             char angles_text[256];
             sprintf(
                     angles_text,
-                    "%.2f,%.2f rad, %.2f,%.2f deg",
+                    "%.2f,%.2f rad; %.2f,%.2f deg",
                     horizontalAngle,
                     verticalAngle,
                     RADIANS_TO_DEGREES(horizontalAngle),
