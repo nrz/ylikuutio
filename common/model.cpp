@@ -548,9 +548,9 @@ namespace model
         ProjectionMatrix = glm::perspective(FoV, ASPECT_RATIO, 0.0001f, 5000.0f + 2.0f * (GLfloat) earth_radius);
         // Camera matrix
         ViewMatrix = glm::lookAt(
-                position,           // Camera is here
-                position+direction, // and looks here : at the same position, plus "direction"
-                up                  // Head is up (set to 0,-1,0 to look upside-down)
+                camera_position,           // Camera is here
+                camera_position+direction, // and looks here : at the same position, plus "direction"
+                up                         // Head is up (set to 0,-1,0 to look upside-down)
                 );
 
         // For the next frame, the "last time" will be "now"
