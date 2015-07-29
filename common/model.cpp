@@ -348,6 +348,7 @@ namespace model
 
             // Compute new orientation
             horizontalAngle += mouseSpeed * GLfloat(WINDOW_WIDTH/2 - xpos);
+            horizontalAngle = remainder(horizontalAngle, (2.0f * PI));
 
             if (is_invert_mouse_in_use)
             {
@@ -359,6 +360,7 @@ namespace model
                 // don't invert mouse.
                 verticalAngle   += mouseSpeed * GLfloat(WINDOW_HEIGHT/2 - ypos);
             }
+            verticalAngle = remainder(verticalAngle, (2.0f * PI));
         }
 
         // Direction : Spherical coordinates to Cartesian coordinates conversion
