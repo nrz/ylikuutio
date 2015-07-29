@@ -322,7 +322,7 @@ namespace model
             GLuint objectID;                       // object ID, returned by `model::Species->get_objectID()`.
             bool has_entered;
 
-            glm::vec3 coordinate_vector;           // rotate vector.
+            glm::vec3 coordinate_vector;           // coordinate vector.
             GLfloat rotate_angle;                  // rotate angle.
             glm::vec3 rotate_vector;               // rotate vector.
             glm::vec3 translate_vector;            // translate vector.
