@@ -1283,13 +1283,13 @@ namespace model
     Object::Object(ObjectStruct object_struct)
     {
         // constructor.
-        this->coordinate_vector = object_struct.coordinate_vector;
+        this->coordinate_vector     = object_struct.coordinate_vector;
         this->original_scale_vector = object_struct.original_scale_vector;
-        this->rotate_angle      = object_struct.rotate_angle;
-        this->rotate_vector     = object_struct.rotate_vector;
-        this->translate_vector  = object_struct.translate_vector;
-        this->has_entered       = false;
-        this->species_pointer   = static_cast<model::Species*>(object_struct.species_pointer);
+        this->rotate_angle          = object_struct.rotate_angle;
+        this->rotate_vector         = object_struct.rotate_vector;
+        this->translate_vector      = object_struct.translate_vector;
+        this->has_entered           = false;
+        this->species_pointer       = static_cast<model::Species*>(object_struct.species_pointer);
 
         // get objectID from the Species and set pointer to this object.
         this->bind_to_species();
