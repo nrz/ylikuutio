@@ -321,7 +321,7 @@ int main(void)
             sprintf(coordinates_text, "(%.2f,%.2f,%.2f)", position.x, position.y, position.z);
 
             char angles_text[256];
-            sprintf(angles_text, "(%.2f,%.2f)", horizontalAngle, verticalAngle);
+            sprintf(angles_text, "%.2f,%.2f rad", horizontalAngle, verticalAngle);
 
             char time_text[256];
             sprintf(time_text, "%.2f sec", glfwGetTime());
