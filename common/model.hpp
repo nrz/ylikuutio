@@ -319,7 +319,7 @@ namespace model
 
             model::Species *species_pointer;       // pointer to the species.
 
-            GLuint objectID;                      // object ID, returned by `model::Species->get_objectID()`.
+            GLuint objectID;                       // object ID, returned by `model::Species->get_objectID()`.
             bool has_entered;
 
             glm::vec3 coordinate_vector;           // rotate vector.
