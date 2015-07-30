@@ -178,6 +178,8 @@ namespace model
 
     class Graph
     {
+        friend class Node;
+
         public:
             // constructor.
             Graph();
@@ -185,6 +187,7 @@ namespace model
             // destructor.
             ~Graph();
 
+        protected:
             // this method sets a node pointer.
             void set_node_pointer(GLuint nodeID, void* node_pointer);
 
