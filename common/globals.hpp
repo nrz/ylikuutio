@@ -211,6 +211,52 @@ SpeciesStruct x; x.texture_pointer = NULL; x.is_world = false; x.world_radius = 
 
 typedef struct
 {
+    // used for all files (for all font).
+#ifdef __STRUCT_DEFAULT_VALUES_ARE_ACCEPTED
+    void *texture_pointer = NULL;            // pointer to the texture object.
+#else
+    void *texture_pointer;                   // pointer to the texture object.
+#endif
+    std::string model_file_format;           // type of the model file. supported file formats so far: `"bmp"`/`"BMP"`, `"obj"`/`"OBJ"`.
+                                             // TODO: add support for `"SRTM"`.
+    std::string vertex_shader;               // filename of vertex shader.
+    std::string fragment_shader;             // filename of fragment shader.
+    glm::vec3 lightPos;                      // light position.
+    std::vector<ObjectStruct> glyph_vector;  // vector of individual objects of this font.
+
+    // for `"bmp"` model files.
+    std::string model_filename;              // filename of the model file.
+} FontStruct;
+
+#ifdef __STRUCT_DEFAULT_VALUES_ARE_ACCEPTED
+#define FONTSTRUCT(x) \
+FontStruct x
+#else
+#define FONTSTRUCT(x) \
+FontStruct x; x.texture_pointer = NULL
+#endif
+
+typedef struct
+{
+    // used for all files (for all glyph).
+#ifdef __STRUCT_DEFAULT_VALUES_ARE_ACCEPTED
+    void *font_pointer = NULL;               // pointer to the font object.
+#else
+    void *font_pointer;                      // pointer to the font object.
+#endif
+    std::vector<ObjectStruct> object_vector; // vector of individual objects of this glyph.
+} GlyphStruct;
+
+#ifdef __STRUCT_DEFAULT_VALUES_ARE_ACCEPTED
+#define GLYPHSTRUCT(x) \
+GlyphStruct x
+#else
+#define GLYPHSTRUCT(x) \
+GlyphStruct x; x.font_pointer = NULL
+#endif
+
+typedef struct
+{
     GLuint screen_width;
     GLuint screen_height;
     GLuint x;

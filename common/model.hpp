@@ -297,12 +297,107 @@ namespace model
             std::queue<GLuint> free_objectID_queue;
     };
 
-    class FontSpecies
+    class Font
     {
+        public:
+            // constructor.
+            Font(FontStruct font_struct);
+
+            // destructor.
+            ~Font();
+
+            // this method renders all objects of this species.
+            void render();
+
+            // this method sets a glyph pointer.
+            void set_glyph_pointer(GLuint objectID, void* object_pointer);
+
+            // this method gets a glyph pointer.
+            void* get_glyph_pointer(GLuint objectID);
+
+            // this method gets a object ID and removes it from the `free_objectID_queue` if it was popped from the queue.
+            GLuint get_glyphID();
+
+            // this method sets pointer to this species to NULL, sets `texture_pointer` according to the input, and requests a new `speciesID` from the new texture.
+            void switch_to_new_texture(model::Texture *new_texture_pointer);
+
+            std::vector<ObjectStruct> object_vector; // vector of individual objects of this species.
+            glm::vec3 lightPos;                      // light position.
+
+            // The rest fields are created in the constructor.
+            GLuint image_width;
+            GLuint image_height;
+
+            model::Texture *texture_pointer;       // pointer to the texture.
+
+        private:
+            void bind_to_texture();
+
+            std::string model_file_format;         // type of the model file, eg. `"bmp"`.
+            std::string model_filename;            // filename of the model file.
+            GLuint speciesID;                      // species ID, returned by `model::Texture->get_speciesID()`.
+            GLuint lightID;                        // light ID, returned by `glGetUniformLocation(programID, "LightPosition_worldspace");`.
+            const char *char_model_file_format;
+            const char *char_model_filename;
+            const char *char_color_channel;
+
+            std::vector<void*> object_pointer_vector;
+            std::queue<GLuint> free_objectID_queue;
     };
 
-    class GlyphSpecies
+    class Glyph
     {
+        public:
+            // constructor.
+            Glyph(GlyphStruct glyph_struct);
+
+            // destructor.
+            ~Glyph();
+
+            // this method renders all objects of this species.
+            void render();
+
+            // this method sets a object pointer.
+            void set_object_pointer(GLuint objectID, void* object_pointer);
+
+            // this method gets a object pointer.
+            void* get_object_pointer(GLuint objectID);
+
+            // this method gets a object ID and removes it from the `free_objectID_queue` if it was popped from the queue.
+            GLuint get_objectID();
+
+            // The rest fields are created in the constructor.
+            GLuint image_width;
+            GLuint image_height;
+
+            GLuint vertexPosition_modelspaceID;
+            GLuint vertexUVID;
+            GLuint vertexNormal_modelspaceID;
+
+            std::vector<glm::vec3> vertices;       // vertices of the object.
+            std::vector<glm::vec2> UVs;            // UVs of the object.
+            std::vector<glm::vec3> normals;        // normals of the object.
+
+            std::vector<GLuint> indices;           // the deleted vertices will be reused (though it is not required, if there's enough memory).
+            std::vector<glm::vec3> indexed_vertices;
+            std::vector<glm::vec2> indexed_UVs;
+            std::vector<glm::vec3> indexed_normals;
+
+            GLuint vertexbuffer;
+            GLuint uvbuffer;
+            GLuint normalbuffer;
+            GLuint elementbuffer;
+
+            model::Font *font_pointer;             // pointer to the font.
+
+        private:
+            void bind_to_font();
+
+            GLuint glyphID;                        // glyph ID, returned by `model::Font->get_glyphID()`.
+            GLuint lightID;                        // light ID, returned by `glGetUniformLocation(programID, "LightPosition_worldspace");`.
+
+            std::vector<void*> object_pointer_vector;
+            std::queue<GLuint> free_objectID_queue;
     };
 
     class Object

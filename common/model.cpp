@@ -85,9 +85,9 @@ namespace model
     //       ^
     //    Texture
     //       ^
-    //  FontSpecies
+    //     Font
     //       ^
-    //  GlyphSpecies
+    //     Glyph
     //       ^
     //    Object
     //
