@@ -126,6 +126,10 @@ namespace model
 
     class Texture
     {
+        friend class Shader;
+        friend class Species;
+        friend class Object;
+
         public:
             // constructor.
             Texture(TextureStruct texture_struct);
@@ -133,6 +137,7 @@ namespace model
             // destructor.
             ~Texture();
 
+        protected:
             // this method renders all species using this texture.
             void render();
 
