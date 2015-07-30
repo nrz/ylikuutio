@@ -68,6 +68,11 @@ namespace model
 
     class Shader
     {
+        friend class World;
+        friend class Texture;
+        friend class Species;
+        friend class Object;
+
         public:
             // constructor.
             Shader(ShaderStruct shader_struct);
@@ -75,6 +80,7 @@ namespace model
             // destructor.
             ~Shader();
 
+        protected:
             // this method renders all textures using this shader.
             void render();
 
