@@ -31,6 +31,9 @@ namespace model
 {
     class World
     {
+        friend class Shader;
+        friend class Species;
+
         public:
             // constructor.
             World();
@@ -41,6 +44,7 @@ namespace model
             // this method renders the entire world, one shader at a time.
             void render();
 
+        protected:
             // this method sets a shader pointer.
             void set_shader_pointer(GLuint shaderID, void* shader_pointer);
 
