@@ -1208,6 +1208,9 @@ namespace model
                 object_pointer->render();
             }
         }
+        glDisableVertexAttribArray(this->vertexPosition_modelspaceID);
+        glDisableVertexAttribArray(this->vertexUVID);
+        glDisableVertexAttribArray(this->vertexNormal_modelspaceID);
     }
 
     void Species::set_object_pointer(GLuint objectID, void* object_pointer)

@@ -307,10 +307,6 @@ int main(void)
             // Render the world.
             my_world->render();
 
-            glDisableVertexAttribArray(terrain_species->vertexPosition_modelspaceID);
-            glDisableVertexAttribArray(terrain_species->vertexUVID);
-            glDisableVertexAttribArray(terrain_species->vertexNormal_modelspaceID);
-
             PrintingStruct printing_struct;
             printing_struct.screen_width = (GLuint) WINDOW_WIDTH;
             printing_struct.screen_height = (GLuint) WINDOW_HEIGHT;

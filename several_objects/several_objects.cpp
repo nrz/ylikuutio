@@ -182,10 +182,6 @@ int main(void)
             // Render the world.
             my_world->render();
 
-            glDisableVertexAttribArray(suzanne_species->vertexPosition_modelspaceID);
-            glDisableVertexAttribArray(suzanne_species->vertexUVID);
-            glDisableVertexAttribArray(suzanne_species->vertexNormal_modelspaceID);
-
             PrintingStruct printing_struct;
             printing_struct.screen_width = WINDOW_WIDTH;
             printing_struct.screen_height = WINDOW_HEIGHT;
