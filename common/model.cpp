@@ -63,6 +63,9 @@ namespace model
     // `Texture` must be created before any `Species`. `texture_pointer` must be given to each `Species`.
     // `Species` must be create before any `Object` of that `Species`. `species_pointer` must be given to each `Object` of the `Species`.
     //
+    //
+    // Hierarchy for regular objects (including world species):
+    //
     //     World
     //       ^
     //    Shader
@@ -72,6 +75,22 @@ namespace model
     //    Species
     //       ^
     //    Object
+    //
+    //
+    // Hierarchy for glyph (character) objects:
+    //
+    //     World
+    //       ^
+    //    Shader
+    //       ^
+    //    Texture
+    //       ^
+    //  FontSpecies
+    //       ^
+    //  GlyphSpecies
+    //       ^
+    //    Object
+    //
     //
     // Deleting a `World` also deletes all shaders, textures, species and objects that are binded to the same World.
     // Deleting a `Shader` also deletes all textures, species and objects that are binded to the same Shader.

@@ -297,6 +297,14 @@ namespace model
             std::queue<GLuint> free_objectID_queue;
     };
 
+    class FontSpecies
+    {
+    };
+
+    class GlyphSpecies
+    {
+    };
+
     class Object
     {
         public:
