@@ -93,6 +93,10 @@ namespace model
 
             GLuint programID;                     // shaders' programID, returned by `LoadShaders`.
 
+            GLuint MatrixID;
+            GLuint ViewMatrixID;
+            GLuint ModelMatrixID;
+
         private:
             void bind_to_world();
 
@@ -258,9 +262,6 @@ namespace model
             GLuint image_width;
             GLuint image_height;
 
-            GLuint MatrixID;
-            GLuint ViewMatrixID;
-            GLuint ModelMatrixID;
             GLuint vertexPosition_modelspaceID;
             GLuint vertexUVID;
             GLuint vertexNormal_modelspaceID;
@@ -279,10 +280,10 @@ namespace model
             GLuint normalbuffer;
             GLuint elementbuffer;
 
+            model::Texture *texture_pointer;       // pointer to the texture.
+
         private:
             void bind_to_texture();
-
-            model::Texture *texture_pointer;       // pointer to the texture.
 
             std::string model_file_format;         // type of the model file, eg. `"bmp"`.
             std::string model_filename;            // filename of the model file.

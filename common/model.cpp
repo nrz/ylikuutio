@@ -569,6 +569,11 @@ namespace model
 
         // Create and compile our GLSL program from the shaders.
         this->programID = LoadShaders(this->char_vertex_shader, this->char_fragment_shader);
+
+        // Get a handle for our "MVP" uniform.
+        this->MatrixID = glGetUniformLocation(this->programID, "MVP");
+        this->ViewMatrixID = glGetUniformLocation(this->programID, "V");
+        this->ModelMatrixID = glGetUniformLocation(this->programID, "M");
     }
 
     Shader::~Shader()
@@ -600,6 +605,8 @@ namespace model
     {
         // [re]bind `programID` shader.
         glUseProgram(this->programID);
+
+        glUniformMatrix4fv(this->ViewMatrixID, 1, GL_FALSE, &ViewMatrix[0][0]); // This one doesn't change between objects, so this can be done once for all objects that use "programID"
 
         // this method renders the shader by calling `render()` methods of each texture.
         for (GLuint texture_i = 0; texture_i < this->texture_pointer_vector.size(); texture_i++)
@@ -1050,11 +1057,6 @@ namespace model
         // get speciesID from the Texture and set pointer to this species.
         this->bind_to_texture();
 
-        // Get a handle for our "MVP" uniform.
-        this->MatrixID = glGetUniformLocation(this->texture_pointer->shader_pointer->programID, "MVP");
-        this->ViewMatrixID = glGetUniformLocation(this->texture_pointer->shader_pointer->programID, "V");
-        this->ModelMatrixID = glGetUniformLocation(this->texture_pointer->shader_pointer->programID, "M");
-
         // Get a handle for our buffers.
         this->vertexPosition_modelspaceID = glGetAttribLocation(this->texture_pointer->shader_pointer->programID, "vertexPosition_modelspace");
         this->vertexUVID = glGetAttribLocation(this->texture_pointer->shader_pointer->programID, "vertexUV");
@@ -1166,7 +1168,6 @@ namespace model
     {
         // Compute the MVP matrix from keyboard and mouse input.
         glUniform3f(this->lightID, this->lightPos.x, this->lightPos.y, this->lightPos.z);
-        glUniformMatrix4fv(this->ViewMatrixID, 1, GL_FALSE, &ViewMatrix[0][0]); // This one doesn't change between objects, so this can be done once for all objects that use "programID"
 
         // 1st attribute buffer : vertices.
         glEnableVertexAttribArray(this->vertexPosition_modelspaceID);
@@ -1324,8 +1325,8 @@ namespace model
 
         // Send our transformation to the currently bound shader,
         // in the "MVP" uniform.
-        glUniformMatrix4fv(this->species_pointer->MatrixID, 1, GL_FALSE, &this->MVP_matrix[0][0]);
-        glUniformMatrix4fv(this->species_pointer->ModelMatrixID, 1, GL_FALSE, &this->model_matrix[0][0]);
+        glUniformMatrix4fv(this->species_pointer->texture_pointer->shader_pointer->MatrixID, 1, GL_FALSE, &this->MVP_matrix[0][0]);
+        glUniformMatrix4fv(this->species_pointer->texture_pointer->shader_pointer->ModelMatrixID, 1, GL_FALSE, &this->model_matrix[0][0]);
 
         // 1st attribute buffer : vertices.
         glBindBuffer(GL_ARRAY_BUFFER, this->species_pointer->vertexbuffer);
