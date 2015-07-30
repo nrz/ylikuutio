@@ -75,6 +75,7 @@
 #endif
 
 extern glm::mat4 ProjectionMatrix;
+extern glm::mat4 ViewMatrix;
 extern glm::vec3 position;
 extern GLfloat gravity;
 extern bool inFlightmode;

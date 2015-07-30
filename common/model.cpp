@@ -43,7 +43,6 @@
 
 extern GLFWwindow* window; // The "extern" keyword here is to access the variable "window" declared in tutorialXXX.cpp. This is a hack to keep the tutorials simple. Please avoid this.
 
-glm::mat4 ViewMatrix;
 glm::vec3 camera_position;
 
 namespace model
@@ -57,11 +56,6 @@ namespace model
     GLfloat twin_turbo_factor = 100.0f;
 #endif
     GLfloat mouseSpeed = 0.005f;
-
-    glm::mat4 getViewMatrix()
-    {
-        return ViewMatrix;
-    }
 
     // `World`, `Shader`, `Texture`, `Species`, `Object`.
     // `World` must be created before any `Shader`. `world_pointer` must be given to each `Shader`.
@@ -1171,10 +1165,8 @@ namespace model
     void Species::render()
     {
         // Compute the MVP matrix from keyboard and mouse input.
-        this->ViewMatrix = model::getViewMatrix();
-
         glUniform3f(this->lightID, this->lightPos.x, this->lightPos.y, this->lightPos.z);
-        glUniformMatrix4fv(this->ViewMatrixID, 1, GL_FALSE, &this->ViewMatrix[0][0]); // This one doesn't change between objects, so this can be done once for all objects that use "programID"
+        glUniformMatrix4fv(this->ViewMatrixID, 1, GL_FALSE, &ViewMatrix[0][0]); // This one doesn't change between objects, so this can be done once for all objects that use "programID"
 
         // 1st attribute buffer : vertices.
         glEnableVertexAttribArray(this->vertexPosition_modelspaceID);
@@ -1328,7 +1320,7 @@ namespace model
             this->coordinate_vector = glm::vec3(model_matrix[0][0], model_matrix[1][1], model_matrix[2][2]);
         }
 
-        this->MVP_matrix = ProjectionMatrix * this->species_pointer->ViewMatrix * this->model_matrix;
+        this->MVP_matrix = ProjectionMatrix * ViewMatrix * this->model_matrix;
 
         // Send our transformation to the currently bound shader,
         // in the "MVP" uniform.

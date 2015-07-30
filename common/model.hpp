@@ -279,8 +279,6 @@ namespace model
             GLuint normalbuffer;
             GLuint elementbuffer;
 
-            glm::mat4 ViewMatrix;
-
         private:
             void bind_to_texture();
 
