@@ -12,6 +12,7 @@
 
 #include "globals.hpp"
 
+glm::mat4 ProjectionMatrix;
 glm::vec3 position;
 GLfloat gravity = 9.81f / 60.0f;
 bool inFlightmode;

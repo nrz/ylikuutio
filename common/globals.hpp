@@ -74,6 +74,7 @@
 #define MAX_FPS 60
 #endif
 
+extern glm::mat4 ProjectionMatrix;
 extern glm::vec3 position;
 extern GLfloat gravity;
 extern bool inFlightmode;

@@ -279,7 +279,6 @@ namespace model
             GLuint normalbuffer;
             GLuint elementbuffer;
 
-            glm::mat4 ProjectionMatrix;
             glm::mat4 ViewMatrix;
 
         private:

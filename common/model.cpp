@@ -44,7 +44,6 @@
 extern GLFWwindow* window; // The "extern" keyword here is to access the variable "window" declared in tutorialXXX.cpp. This is a hack to keep the tutorials simple. Please avoid this.
 
 glm::mat4 ViewMatrix;
-glm::mat4 ProjectionMatrix;
 glm::vec3 camera_position;
 
 namespace model
@@ -62,11 +61,6 @@ namespace model
     glm::mat4 getViewMatrix()
     {
         return ViewMatrix;
-    }
-
-    glm::mat4 getProjectionMatrix()
-    {
-        return ProjectionMatrix;
     }
 
     // `World`, `Shader`, `Texture`, `Species`, `Object`.
@@ -1177,7 +1171,6 @@ namespace model
     void Species::render()
     {
         // Compute the MVP matrix from keyboard and mouse input.
-        this->ProjectionMatrix = model::getProjectionMatrix();
         this->ViewMatrix = model::getViewMatrix();
 
         glUniform3f(this->lightID, this->lightPos.x, this->lightPos.y, this->lightPos.z);
@@ -1335,7 +1328,7 @@ namespace model
             this->coordinate_vector = glm::vec3(model_matrix[0][0], model_matrix[1][1], model_matrix[2][2]);
         }
 
-        this->MVP_matrix = this->species_pointer->ProjectionMatrix * this->species_pointer->ViewMatrix * this->model_matrix;
+        this->MVP_matrix = ProjectionMatrix * this->species_pointer->ViewMatrix * this->model_matrix;
 
         // Send our transformation to the currently bound shader,
         // in the "MVP" uniform.
