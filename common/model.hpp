@@ -154,6 +154,9 @@ namespace model
             // this method gets a species ID and removes it from the `free_speciesID_queue` if it was popped from the queue.
             GLuint get_speciesID();
 
+            // this method gets a font ID and removes it from the `free_fontID_queue` if it was popped from the queue.
+            GLuint get_fontID();
+
             // this method sets a world species pointer.
             void set_world_species_pointer(void* world_species_pointer);
 
