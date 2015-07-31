@@ -181,10 +181,10 @@ namespace model
             // constructor.
             Graph();
 
+        private:
             // destructor.
             ~Graph();
 
-        private:
             // this method sets a node pointer.
             void set_node_pointer(GLuint nodeID, void* node_pointer);
 
