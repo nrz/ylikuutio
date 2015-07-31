@@ -209,6 +209,7 @@ namespace model
             // constructor.
             Node(NodeStruct node_struct);
 
+        private:
             // destructor.
             ~Node();
 
@@ -230,7 +231,6 @@ namespace model
             GLuint nodeID;
             model::Graph *graph_pointer;
 
-        private:
             // nodes do not keep pointers to neighbor nodes, because all pointer values are not known yet before all nodes are created.
             std::vector<GLuint> neighbor_nodeIDs;
 
