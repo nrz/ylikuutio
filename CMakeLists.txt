@@ -64,114 +64,114 @@ add_definitions(
 
 # Tutorial 4
 add_executable(cube_with_colors
-    cube_with_colors/cube_with_colors.cpp
-    common/shader.cpp
-    common/shader.hpp
+    cpp/cube_with_colors/cube_with_colors.cpp
+    cpp/common/shader.cpp
+    cpp/common/shader.hpp
 
-    cube_with_colors/TransformVertexShader.vertexshader
-    cube_with_colors/ColorFragmentShader.fragmentshader
+    cpp/cube_with_colors/TransformVertexShader.vertexshader
+    cpp/cube_with_colors/ColorFragmentShader.fragmentshader
     )
 target_link_libraries(cube_with_colors
     ${ALL_LIBS}
     )
 # Xcode and Visual working directories
-set_target_properties(cube_with_colors PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/cube_with_colors/")
-create_target_launcher(cube_with_colors WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/cube_with_colors/")
+set_target_properties(cube_with_colors PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/cpp/cube_with_colors/")
+create_target_launcher(cube_with_colors WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/cpp/cube_with_colors/")
 
 # Tutorial 9 - several objects
 add_executable(several_objects
-    several_objects/several_objects.cpp
-    common/shader.cpp
-    common/shader.hpp
-    common/globals.cpp
-    common/globals.hpp
-    common/texture.cpp
-    common/texture.hpp
-    common/heightmap_loader.cpp
-    common/heightmap_loader.hpp
-    common/objloader.cpp
-    common/objloader.hpp
-    common/model.cpp
-    common/model.hpp
-    common/vboindexer.cpp
-    common/vboindexer.hpp
-    common/text2D.hpp
-    common/text2D.cpp
+    cpp/several_objects/several_objects.cpp
+    cpp/common/shader.cpp
+    cpp/common/shader.hpp
+    cpp/common/globals.cpp
+    cpp/common/globals.hpp
+    cpp/common/texture.cpp
+    cpp/common/texture.hpp
+    cpp/common/heightmap_loader.cpp
+    cpp/common/heightmap_loader.hpp
+    cpp/common/objloader.cpp
+    cpp/common/objloader.hpp
+    cpp/common/model.cpp
+    cpp/common/model.hpp
+    cpp/common/vboindexer.cpp
+    cpp/common/vboindexer.hpp
+    cpp/common/text2D.hpp
+    cpp/common/text2D.cpp
 
-    common/StandardShading.vertexshader
-    common/StandardShading.fragmentshader
+    cpp/common/StandardShading.vertexshader
+    cpp/common/StandardShading.fragmentshader
     )
-configure_file(common/StandardShading.vertexshader StandardShading.vertexshader COPYONLY)
-configure_file(common/StandardShading.fragmentshader StandardShading.fragmentshader COPYONLY)
-configure_file(several_objects/suzanne.obj suzanne.obj COPYONLY)
-configure_file(several_objects/uvmap.DDS uvmap.DDS COPYONLY)
-configure_file(ylikuutio/Holstein.DDS Holstein.DDS COPYONLY)
-configure_file(ylikuutio/Holstein.bmp Holstein.bmp COPYONLY)
+configure_file(cpp/common/StandardShading.vertexshader StandardShading.vertexshader COPYONLY)
+configure_file(cpp/common/StandardShading.fragmentshader StandardShading.fragmentshader COPYONLY)
+configure_file(cpp/several_objects/suzanne.obj suzanne.obj COPYONLY)
+configure_file(cpp/several_objects/uvmap.DDS uvmap.DDS COPYONLY)
+configure_file(cpp/ylikuutio/Holstein.DDS Holstein.DDS COPYONLY)
+configure_file(cpp/ylikuutio/Holstein.bmp Holstein.bmp COPYONLY)
 
 target_link_libraries(several_objects
     ${ALL_LIBS}
     )
 # Xcode and Visual working directories
-set_target_properties(several_objects PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/several_objects/")
-create_target_launcher(several_objects WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/several_objects/")
+set_target_properties(several_objects PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/cpp/several_objects/")
+create_target_launcher(several_objects WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/cpp/several_objects/")
 
 # Ylikuutio
 add_executable(ylikuutio
-    ylikuutio/ylikuutio.cpp
-    common/shader.cpp
-    common/shader.hpp
-    common/globals.cpp
-    common/globals.hpp
-    common/texture.cpp
-    common/texture.hpp
-    common/heightmap_loader.cpp
-    common/heightmap_loader.hpp
-    common/objloader.cpp
-    common/objloader.hpp
-    common/model.cpp
-    common/model.hpp
-    common/vboindexer.cpp
-    common/vboindexer.hpp
-    common/text2D.cpp
-    common/text2D.hpp
-    common/text3D.hpp
-    common/text3D.cpp
+    cpp/ylikuutio/ylikuutio.cpp
+    cpp/common/shader.cpp
+    cpp/common/shader.hpp
+    cpp/common/globals.cpp
+    cpp/common/globals.hpp
+    cpp/common/texture.cpp
+    cpp/common/texture.hpp
+    cpp/common/heightmap_loader.cpp
+    cpp/common/heightmap_loader.hpp
+    cpp/common/objloader.cpp
+    cpp/common/objloader.hpp
+    cpp/common/model.cpp
+    cpp/common/model.hpp
+    cpp/common/vboindexer.cpp
+    cpp/common/vboindexer.hpp
+    cpp/common/text2D.cpp
+    cpp/common/text2D.hpp
+    cpp/common/text3D.hpp
+    cpp/common/text3D.cpp
 
-    common/TransformVertexShader.vertexshader
-    common/TextureFragmentShader.fragmentshader
-    common/StandardShading.vertexshader
-    common/StandardShading.fragmentshader
-    common/TextVertexShader.vertexshader
-    common/TextVertexShader.fragmentshader
+    cpp/common/TransformVertexShader.vertexshader
+    cpp/common/TextureFragmentShader.fragmentshader
+    cpp/common/StandardShading.vertexshader
+    cpp/common/StandardShading.fragmentshader
+    cpp/common/TextVertexShader.vertexshader
+    cpp/common/TextVertexShader.fragmentshader
     )
-configure_file(common/TransformVertexShader.vertexshader TransformVertexShader.vertexshader COPYONLY)
-configure_file(common/TextureFragmentShader.fragmentshader TextureFragmentShader.fragmentshader COPYONLY)
-configure_file(common/StandardShading.vertexshader StandardShading.vertexshader COPYONLY)
-configure_file(common/StandardShading.fragmentshader StandardShading.fragmentshader COPYONLY)
-configure_file(common/TextVertexShader.vertexshader TextVertexShader.vertexshader COPYONLY)
-configure_file(common/TextVertexShader.fragmentshader TextVertexShader.fragmentshader COPYONLY)
-configure_file(ylikuutio/GrassGreenTexture0002.bmp GrassGreenTexture0002.bmp COPYONLY)
-configure_file(ylikuutio/Holstein.DDS Holstein.DDS COPYONLY)
-configure_file(ylikuutio/Holstein.bmp Holstein.bmp COPYONLY)
-configure_file(ylikuutio/noise1024x1024.bmp noise1024x1024.bmp COPYONLY)
-configure_file(ylikuutio/noise256x256.bmp noise256x256.bmp COPYONLY)
-configure_file(ylikuutio/noise128x128.bmp noise128x128.bmp COPYONLY)
-configure_file(ylikuutio/S17W069.hgt S17W069.hgt COPYONLY)
+configure_file(cpp/common/TransformVertexShader.vertexshader TransformVertexShader.vertexshader COPYONLY)
+configure_file(cpp/common/TextureFragmentShader.fragmentshader TextureFragmentShader.fragmentshader COPYONLY)
+configure_file(cpp/common/StandardShading.vertexshader StandardShading.vertexshader COPYONLY)
+configure_file(cpp/common/StandardShading.fragmentshader StandardShading.fragmentshader COPYONLY)
+configure_file(cpp/common/TextVertexShader.vertexshader TextVertexShader.vertexshader COPYONLY)
+configure_file(cpp/common/TextVertexShader.fragmentshader TextVertexShader.fragmentshader COPYONLY)
+configure_file(cpp/ylikuutio/GrassGreenTexture0002.bmp GrassGreenTexture0002.bmp COPYONLY)
+configure_file(cpp/ylikuutio/Holstein.DDS Holstein.DDS COPYONLY)
+configure_file(cpp/ylikuutio/Holstein.bmp Holstein.bmp COPYONLY)
+configure_file(cpp/ylikuutio/noise1024x1024.bmp noise1024x1024.bmp COPYONLY)
+configure_file(cpp/ylikuutio/noise256x256.bmp noise256x256.bmp COPYONLY)
+configure_file(cpp/ylikuutio/noise128x128.bmp noise128x128.bmp COPYONLY)
+configure_file(cpp/ylikuutio/S17W069.hgt S17W069.hgt COPYONLY)
 
 target_link_libraries(ylikuutio
     ${ALL_LIBS}
     )
 # Xcode and Visual working directories
-set_target_properties(ylikuutio PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/ylikuutio/")
-create_target_launcher(ylikuutio WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/ylikuutio/")
+set_target_properties(ylikuutio PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/cpp/ylikuutio/")
+create_target_launcher(ylikuutio WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/cpp/ylikuutio/")
 
-SOURCE_GROUP(common REGULAR_EXPRESSION ".*/common/.*" )
+SOURCE_GROUP(common REGULAR_EXPRESSION ".*/cpp/common/.*" )
 SOURCE_GROUP(shaders REGULAR_EXPRESSION ".*/.*shader$" )
 
 if (NOT ${CMAKE_GENERATOR} MATCHES "Xcode" )
     add_custom_command(
         TARGET cube_with_colors POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_CFG_INTDIR}/cube_with_colors${CMAKE_EXECUTABLE_SUFFIX}" "${CMAKE_CURRENT_SOURCE_DIR}/cube_with_colors/"
+        COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_CFG_INTDIR}/cube_with_colors${CMAKE_EXECUTABLE_SUFFIX}" "${CMAKE_CURRENT_SOURCE_DIR}/cpp/cube_with_colors/"
         )
 
 elseif (${CMAKE_GENERATOR} MATCHES "Xcode" )

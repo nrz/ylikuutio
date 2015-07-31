@@ -35,11 +35,11 @@ GLFWwindow* window;
 #include <glm/gtc/matrix_transform.hpp>
 #endif
 
-#include "common/shader.hpp"
-#include "common/texture.hpp"
-#include "common/model.hpp"
-#include "common/vboindexer.hpp"
-#include "common/text2D.hpp"
+#include "cpp/common/shader.hpp"
+#include "cpp/common/texture.hpp"
+#include "cpp/common/model.hpp"
+#include "cpp/common/vboindexer.hpp"
+#include "cpp/common/text2D.hpp"
 
 // font texture file format: bmp/...
 std::string g_font_texture_file_format = "bmp";
