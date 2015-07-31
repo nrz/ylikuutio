@@ -145,6 +145,9 @@ namespace model
             // this method sets a species pointer.
             void set_species_pointer(GLuint speciesID, void* species_pointer);
 
+            // this method sets a font pointer.
+            void set_font_pointer(GLuint fontID, void* font_pointer);
+
             // this method gets a species pointer.
             void* get_species_pointer(GLuint speciesID);
 
