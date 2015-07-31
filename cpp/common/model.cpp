@@ -149,6 +149,33 @@ namespace model
         }
     }
 
+    GLuint get_childID(std::vector<void*> &child_pointer_vector, std::queue<GLuint> &free_childID_queue)
+    {
+        GLuint childID;
+
+        while (!free_childID_queue.empty())
+        {
+            // return the first (oldest) free childID.
+            childID = free_childID_queue.front();
+            free_childID_queue.pop();
+
+            // check that the child index does not exceed current child pointer vector.
+            if (childID < child_pointer_vector.size())
+            {
+                // OK, it does not exceed current child pointer vector.
+                return childID;
+            }
+        }
+        // OK, the queue is empty.
+        // A new child index must be created.
+        childID = child_pointer_vector.size();
+
+        // child pointer vector must also be extended with an appropriate NULL pointer.
+        child_pointer_vector.push_back(NULL);
+
+        return childID;
+    }
+
     GLfloat get_ground_level(
             model::Species* world_species,
             glm::vec3 position)
@@ -327,30 +354,7 @@ namespace model
 
     GLuint World::get_shaderID()
     {
-        GLuint shaderID;
-
-        while (!this->free_shaderID_queue.empty())
-        {
-            // return the first (oldest) free shaderID.
-            shaderID = this->free_shaderID_queue.front();
-            this->free_shaderID_queue.pop();
-
-            // check that the shader index does not exceed current shader pointer vector.
-            if (shaderID < this->shader_pointer_vector.size())
-            {
-                // OK, it does not exceed current shader pointer vector.
-                return shaderID;
-            }
-        }
-
-        // OK, the queue is empty.
-        // A new shader index must be created.
-        shaderID = this->shader_pointer_vector.size();
-
-        // shader pointer vector must also be extended with an appropriate NULL pointer.
-        this->shader_pointer_vector.push_back(NULL);
-
-        return shaderID;
+        return get_childID(shader_pointer_vector, free_shaderID_queue);
     }
 
     void World::set_world_species_pointer(void* world_species_pointer)
@@ -657,30 +661,7 @@ namespace model
 
     GLuint Shader::get_textureID()
     {
-        GLuint textureID;
-
-        while (!this->free_textureID_queue.empty())
-        {
-            // return the first (oldest) free textureID.
-            textureID = this->free_textureID_queue.front();
-            this->free_textureID_queue.pop();
-
-            // check that the texture index does not exceed current texture pointer vector.
-            if (textureID < this->texture_pointer_vector.size())
-            {
-                // OK, it does not exceed current texture pointer vector.
-                return textureID;
-            }
-        }
-
-        // OK, the queue is empty.
-        // A new texture index must be created.
-        textureID = this->texture_pointer_vector.size();
-
-        // texture pointer vector must also be extended with an appropriate NULL pointer.
-        this->texture_pointer_vector.push_back(NULL);
-
-        return textureID;
+        return get_childID(texture_pointer_vector, free_textureID_queue);
     }
 
     void Shader::switch_to_new_world(model::World *new_world_pointer)
@@ -801,30 +782,7 @@ namespace model
 
     GLuint Texture::get_speciesID()
     {
-        GLuint speciesID;
-
-        while (!this->free_speciesID_queue.empty())
-        {
-            // return the first (oldest) free speciesID.
-            speciesID = this->free_speciesID_queue.front();
-            this->free_speciesID_queue.pop();
-
-            // check that the species index does not exceed current species pointer vector.
-            if (speciesID < this->species_pointer_vector.size())
-            {
-                // OK, it does not exceed current species pointer vector.
-                return speciesID;
-            }
-        }
-
-        // OK, the queue is empty.
-        // A new species index must be created.
-        speciesID = this->species_pointer_vector.size();
-
-        // species pointer vector must also be extended with an appropriate NULL pointer.
-        this->species_pointer_vector.push_back(NULL);
-
-        return speciesID;
+        return get_childID(species_pointer_vector, free_speciesID_queue);
     }
 
     void Texture::switch_texture_to_new_shader(model::Shader *new_shader_pointer)
@@ -861,30 +819,7 @@ namespace model
 
     GLuint Graph::get_nodeID()
     {
-        GLuint nodeID;
-
-        while (!this->free_nodeID_queue.empty())
-        {
-            // return the first (oldest) free nodeID.
-            nodeID = this->free_nodeID_queue.front();
-            this->free_nodeID_queue.pop();
-
-            // check that the node index does not exceed current node pointer vector.
-            if (nodeID < this->node_pointer_vector.size())
-            {
-                // OK, it does not exceed current node pointer vector.
-                return nodeID;
-            }
-        }
-
-        // OK, the queue is empty.
-        // A new node index must be created.
-        nodeID = this->node_pointer_vector.size();
-
-        // node pointer vector must also be extended with an appropriate NULL pointer.
-        this->node_pointer_vector.push_back(NULL);
-
-        return nodeID;
+        return get_childID(node_pointer_vector, free_nodeID_queue);
     }
 
     Graph::~Graph()
@@ -1179,30 +1114,7 @@ namespace model
 
     GLuint Species::get_objectID()
     {
-        GLuint objectID;
-
-        while (!this->free_objectID_queue.empty())
-        {
-            // return the first (oldest) free objectID.
-            objectID = this->free_objectID_queue.front();
-            this->free_objectID_queue.pop();
-
-            // check that the object index does not exceed current object pointer vector.
-            if (objectID < this->object_pointer_vector.size())
-            {
-                // OK, it does not exceed current object pointer vector.
-                return objectID;
-            }
-        }
-
-        // OK, the queue is empty.
-        // A new object index must be created.
-        objectID = this->object_pointer_vector.size();
-
-        // object pointer vector must also be extended with an appropriate NULL pointer.
-        this->object_pointer_vector.push_back(NULL);
-
-        return objectID;
+        return get_childID(object_pointer_vector, free_objectID_queue);
     }
 
     void Species::switch_to_new_texture(model::Texture *new_texture_pointer)
