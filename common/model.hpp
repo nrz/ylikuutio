@@ -248,6 +248,9 @@ namespace model
             // constructor.
             Species(SpeciesStruct species_struct);
 
+            // this method sets pointer to this species to NULL, sets `texture_pointer` according to the input, and requests a new `speciesID` from the new texture.
+            void switch_to_new_texture(model::Texture *new_texture_pointer);
+
             // destructor.
             ~Species();
 
@@ -262,9 +265,6 @@ namespace model
 
             // this method gets a object ID and removes it from the `free_objectID_queue` if it was popped from the queue.
             GLuint get_objectID();
-
-            // this method sets pointer to this species to NULL, sets `texture_pointer` according to the input, and requests a new `speciesID` from the new texture.
-            void switch_to_new_texture(model::Texture *new_texture_pointer);
 
             bool is_world;                           // worlds currently do not rotate nor translate.
 
