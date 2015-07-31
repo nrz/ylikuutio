@@ -856,7 +856,7 @@ namespace model
         return speciesID;
     }
 
-    void Texture::switch_to_new_shader(model::Shader *new_shader_pointer)
+    void Texture::switch_texture_to_new_shader(model::Shader *new_shader_pointer)
     {
         // set pointer to this texture to NULL.
         this->shader_pointer->set_texture_pointer(this->textureID, NULL);
@@ -1026,7 +1026,7 @@ namespace model
         static_cast<model::Node*>(this->graph_pointer->get_node_pointer(nodeID))->delete_unidirectional_link(this->nodeID);
     }
 
-    // Transfering node to a new graph is similar to `switch_to_new_world`, `switch_to_new_shader`, `switch_to_new_species`,
+    // Transfering node to a new graph is similar to `switch_to_new_world`, `switch_texture_to_new_shader`, `switch_to_new_species`,
     // but there is one important difference:
     // nodes have references (links) to other nodes, whereas shaders, species, and objects do not.
     // The easiest way would be to request new `nodeID` for each new node, and this will be probably be implemented first.
