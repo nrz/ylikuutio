@@ -203,6 +203,8 @@ namespace model
     // The graph in which a node belongs is accessible through `void* graph_pointer` (must be cast to `model::Graph*`).
     class Node
     {
+        friend class Graph;
+
         public:
             // constructor.
             Node(NodeStruct node_struct);
