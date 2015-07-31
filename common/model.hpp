@@ -135,10 +135,10 @@ namespace model
             // this method sets pointer to this shader to NULL, sets `shader_pointer` according to the input, and requests a new `textureID` from the new shader.
             void switch_to_new_shader(model::Shader *new_shader_pointer);
 
+        private:
             // destructor.
             ~Texture();
 
-        private:
             // this method renders all species using this texture.
             void render();
 
