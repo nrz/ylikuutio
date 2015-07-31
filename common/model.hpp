@@ -79,10 +79,10 @@ namespace model
             // this method sets pointer to this shader to NULL, sets `world_pointer` according to the input, and requests a new `shaderID` from the new world.
             void switch_to_new_world(model::World *new_world_pointer);
 
+        private:
             // destructor.
             ~Shader();
 
-        private:
             // this method renders all textures using this shader.
             void render();
 
