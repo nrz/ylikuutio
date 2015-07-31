@@ -1304,17 +1304,17 @@ namespace model
             {
                 GLuint y;
 
-                if (strcmp(char_color_channel, "red") == 0)
+                if (strcmp(char_color_channel, "blue") == 0)
                 {
-                    y = (GLuint) *image_pointer;       // y-coordinate is the red (R) value.
+                    y = (GLuint) *image_pointer;       // y-coordinate is the blue (B) value.
                 }
                 else if (strcmp(char_color_channel, "green") == 0)
                 {
                     y = (GLuint) *(image_pointer + 1); // y-coordinate is the green (G) value.
                 }
-                else if (strcmp(char_color_channel, "green") == 0)
+                else if (strcmp(char_color_channel, "red") == 0)
                 {
-                    y = (GLuint) *(image_pointer + 2); // y-coordinate is the blue (B) value.
+                    y = (GLuint) *(image_pointer + 2); // y-coordinate is the red (R) value.
                 }
                 // y-coordinate is the mean of R, G, & B.
                 else if ((strcmp(char_color_channel, "mean") == 0) || (strcmp(char_color_channel, "all") == 0))
