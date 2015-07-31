@@ -29,6 +29,8 @@
 
 namespace model
 {
+    void set_child_pointer(GLuint childID, void* child_pointer, std::vector<void*> &child_pointer_vector, std::queue<GLuint> &free_childID_queue);
+
     class World
     {
         friend class Shader;

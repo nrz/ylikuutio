@@ -127,6 +127,28 @@ namespace model
     //    y-coordinates of these are compared. The piece with the smallest y-coordinate (lowest altitude) remains terrain, other pieces become
     //    regular objects. The pieces that become regular objects will be subject to gravity the same way as any regular object.
 
+    void set_child_pointer(GLuint childID, void* child_pointer, std::vector<void*> &child_pointer_vector, std::queue<GLuint> &free_childID_queue)
+    {
+        child_pointer_vector[childID] = child_pointer;
+
+        if (child_pointer == NULL)
+        {
+            // OK, the pointer to be stored was NULL, then that childID is released to be used again.
+            // free_childID_queue.push(childID);
+
+            if (childID == child_pointer_vector.size() - 1)
+            {
+                // OK, this is the biggest childID of all childID's of this 'object'.
+                // We can reduce the size of the child pointer vector at least by 1.
+                while ((!child_pointer_vector.empty()) && (child_pointer_vector.back() == NULL))
+                {
+                    // Reduce the size of child pointer vector by 1.
+                    child_pointer_vector.pop_back();
+                }
+            }
+        }
+    }
+
     GLfloat get_ground_level(
             model::Species* world_species,
             glm::vec3 position)
@@ -295,24 +317,7 @@ namespace model
 
     void World::set_shader_pointer(GLuint shaderID, void* shader_pointer)
     {
-        this->shader_pointer_vector[shaderID] = shader_pointer;
-
-        if (shader_pointer == NULL)
-        {
-            // OK, the pointer to be stored was NULL, then that shaderID is released to be used again.
-            this->free_shaderID_queue.push(shaderID);
-
-            if (shaderID == this->shader_pointer_vector.size() - 1)
-            {
-                // OK, this is the biggest shaderID of all shaderID's of this world.
-                // We can reduce the size of the shader pointer vector at least by 1.
-                while ((!shader_pointer_vector.empty()) && (shader_pointer_vector.back() == NULL))
-                {
-                    // Reduce the size of shader pointer vector by 1.
-                    shader_pointer_vector.pop_back();
-                }
-            }
-        }
+        set_child_pointer(shaderID, shader_pointer, this->shader_pointer_vector, this->free_shaderID_queue);
     }
 
     void* World::get_shader_pointer(GLuint shaderID)
@@ -642,24 +647,7 @@ namespace model
 
     void Shader::set_texture_pointer(GLuint textureID, void* texture_pointer)
     {
-        this->texture_pointer_vector[textureID] = texture_pointer;
-
-        if (texture_pointer == NULL)
-        {
-            // OK, the pointer to be stored was NULL, then that textureID is released to be used again.
-            this->free_textureID_queue.push(textureID);
-
-            if (textureID == this->texture_pointer_vector.size() - 1)
-            {
-                // OK, this is the biggest textureID of all textureID's of this shader.
-                // We can reduce the size of the texture pointer vector at least by 1.
-                while ((!texture_pointer_vector.empty()) && (texture_pointer_vector.back() == NULL))
-                {
-                    // Reduce the size of texture pointer vector by 1.
-                    texture_pointer_vector.pop_back();
-                }
-            }
-        }
+        set_child_pointer(textureID, texture_pointer, this->texture_pointer_vector, this->free_textureID_queue);
     }
 
     void* Shader::get_texture_pointer(GLuint textureID)
@@ -803,24 +791,7 @@ namespace model
 
     void Texture::set_species_pointer(GLuint speciesID, void* species_pointer)
     {
-        this->species_pointer_vector[speciesID] = species_pointer;
-
-        if (species_pointer == NULL)
-        {
-            // OK, the pointer to be stored was NULL, then that speciesID is released to be used again.
-            this->free_speciesID_queue.push(speciesID);
-
-            if (speciesID == this->species_pointer_vector.size() - 1)
-            {
-                // OK, this is the biggest speciesID of all speciesID's of this texture.
-                // We can reduce the size of the species pointer vector at least by 1.
-                while ((!species_pointer_vector.empty()) && (species_pointer_vector.back() == NULL))
-                {
-                    // Reduce the size of species pointer vector by 1.
-                    species_pointer_vector.pop_back();
-                }
-            }
-        }
+        set_child_pointer(speciesID, species_pointer, this->species_pointer_vector, this->free_speciesID_queue);
     }
 
     void* Texture::get_species_pointer(GLuint speciesID)
@@ -880,24 +851,7 @@ namespace model
 
     void Graph::set_node_pointer(GLuint nodeID, void* node_pointer)
     {
-        this->node_pointer_vector[nodeID] = node_pointer;
-
-        if (node_pointer == NULL)
-        {
-            // OK, the pointer to be stored was NULL, then that nodeID is released to be used again.
-            this->free_nodeID_queue.push(nodeID);
-
-            if (nodeID == this->node_pointer_vector.size() - 1)
-            {
-                // OK, this is the biggest nodeID of all nodeID's of this graph.
-                // We can reduce the size of the node pointer vector at least by 1.
-                while ((!node_pointer_vector.empty()) && (node_pointer_vector.back() == NULL))
-                {
-                    // Reduce the size of node pointer vector by 1.
-                    node_pointer_vector.pop_back();
-                }
-            }
-        }
+        set_child_pointer(nodeID, node_pointer, this->node_pointer_vector, this->free_nodeID_queue);
     }
 
     void* Graph::get_node_pointer(GLuint nodeID)
@@ -1215,24 +1169,7 @@ namespace model
 
     void Species::set_object_pointer(GLuint objectID, void* object_pointer)
     {
-        this->object_pointer_vector[objectID] = object_pointer;
-
-        if (object_pointer == NULL)
-        {
-            // OK, the pointer to be stored was NULL, then that objectID is released to be used again.
-            this->free_objectID_queue.push(objectID);
-
-            if (objectID == this->object_pointer_vector.size() - 1)
-            {
-                // OK, this is the biggest objectID of all objectID's of this species.
-                // We can reduce the size of the object pointer vector at least by 1.
-                while ((!object_pointer_vector.empty()) && (object_pointer_vector.back() == NULL))
-                {
-                    // Reduce the size of object pointer vector by 1.
-                    object_pointer_vector.pop_back();
-                }
-            }
-        }
+        set_child_pointer(objectID, object_pointer, this->object_pointer_vector, this->free_objectID_queue);
     }
 
     void* Species::get_object_pointer(GLuint objectID)
