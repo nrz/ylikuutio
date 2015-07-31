@@ -76,6 +76,9 @@ namespace model
             // constructor.
             Shader(ShaderStruct shader_struct);
 
+            // this method sets pointer to this shader to NULL, sets `world_pointer` according to the input, and requests a new `shaderID` from the new world.
+            void switch_to_new_world(model::World *new_world_pointer);
+
             // destructor.
             ~Shader();
 
@@ -91,9 +94,6 @@ namespace model
 
             // this method gets a texture ID and removes it from the `free_textureID_queue` if it was popped from the queue.
             GLuint get_textureID();
-
-            // this method sets pointer to this shader to NULL, sets `world_pointer` according to the input, and requests a new `shaderID` from the new world.
-            void switch_to_new_world(model::World *new_world_pointer);
 
             // this method sets a world species pointer.
             void set_world_species_pointer(void* world_species_pointer);
