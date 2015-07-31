@@ -44,7 +44,7 @@ namespace model
             // this method renders the entire world, one shader at a time.
             void render();
 
-        protected:
+        private:
             // this method sets a shader pointer.
             void set_shader_pointer(GLuint shaderID, void* shader_pointer);
 
@@ -57,7 +57,6 @@ namespace model
             // this method sets a world species pointer.
             void set_world_species_pointer(void* world_species_pointer);
 
-        private:
             void compute_matrices_from_inputs();
 
             void* world_species_pointer;              // pointer to world species (used in collision detection).
@@ -80,7 +79,7 @@ namespace model
             // destructor.
             ~Shader();
 
-        protected:
+        private:
             // this method renders all textures using this shader.
             void render();
 
@@ -107,7 +106,6 @@ namespace model
             GLuint ViewMatrixID;
             GLuint ModelMatrixID;
 
-        private:
             void bind_to_world();
 
             void* world_species_pointer;          // pointer to world species (used in collision detection).
@@ -137,7 +135,7 @@ namespace model
             // destructor.
             ~Texture();
 
-        protected:
+        private:
             // this method renders all species using this texture.
             void render();
 
@@ -158,7 +156,6 @@ namespace model
 
             model::Shader *shader_pointer;         // pointer to the shader.
 
-        private:
             void bind_to_shader();
 
             void* world_species_pointer;           // pointer to world species (used in collision detection).
@@ -187,7 +184,7 @@ namespace model
             // destructor.
             ~Graph();
 
-        protected:
+        private:
             // this method sets a node pointer.
             void set_node_pointer(GLuint nodeID, void* node_pointer);
 
@@ -197,7 +194,6 @@ namespace model
             // this method gets a node ID and removes it from the `free_nodeID_queue` if it was popped from the queue.
             GLuint get_nodeID();
 
-        private:
             std::vector<void*> node_pointer_vector;
             std::queue<GLuint> free_nodeID_queue;
     };
