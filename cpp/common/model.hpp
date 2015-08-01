@@ -34,201 +34,201 @@ namespace model
 
     class World
     {
-        friend class Shader;
-        friend class Species;
-
         public:
-        // constructor.
-        World();
+            // constructor.
+            World();
 
-        // this template method gets the child pointer (can be used for comparing with NULL).
-        void* get_child_pointer(GLuint child_i);
+            // this template method gets the child pointer (can be used for comparing with NULL).
+            void* get_child_pointer(GLuint child_i);
 
-        // this template method deletes a child.
-        void delete_child(GLuint child_i);
+            // this template method deletes a child.
+            void delete_child(GLuint child_i);
 
-        // destructor.
-        ~World();
+            // destructor.
+            ~World();
 
-        // this method renders the entire world, one shader at a time.
-        void render();
+            // this method renders the entire world, one shader at a time.
+            void render();
 
         private:
-        // this method sets a shader pointer.
-        void set_shader_pointer(GLuint shaderID, void* shader_pointer);
+            // this method sets a shader pointer.
+            void set_shader_pointer(GLuint shaderID, void* shader_pointer);
 
-        // this method gets a shader pointer.
-        void* get_shader_pointer(GLuint shaderID);
+            // this method gets a shader pointer.
+            void* get_shader_pointer(GLuint shaderID);
 
-        // this method gets a shader ID and removes it from the `free_shaderID_queue` if it was popped from the queue.
-        GLuint get_shaderID();
+            // this method gets a shader ID and removes it from the `free_shaderID_queue` if it was popped from the queue.
+            GLuint get_shaderID();
 
-        // this method sets a world species pointer.
-        void set_world_species_pointer(void* world_species_pointer);
+            // this method sets a world species pointer.
+            void set_world_species_pointer(void* world_species_pointer);
 
-        void compute_matrices_from_inputs();
+            void compute_matrices_from_inputs();
 
-        void* world_species_pointer;              // pointer to world species (used in collision detection).
+            void* world_species_pointer;              // pointer to world species (used in collision detection).
 
-        std::vector<void*> shader_pointer_vector;
-        std::queue<GLuint> free_shaderID_queue;
+            std::vector<void*> shader_pointer_vector;
+            std::queue<GLuint> free_shaderID_queue;
+
+            friend class Shader;
+            friend class Species;
     };
 
     class Shader
     {
-        friend class World;
-        friend class Texture;
-        friend class Species;
-        friend class Object;
-
         public:
-        // constructor.
-        Shader(ShaderStruct shader_struct);
+            // constructor.
+            Shader(ShaderStruct shader_struct);
 
-        // this template method gets the child pointer (can be used for comparing with NULL).
-        void* get_child_pointer(GLuint child_i);
+            // this template method gets the child pointer (can be used for comparing with NULL).
+            void* get_child_pointer(GLuint child_i);
 
-        // this template method deletes a child.
-        void delete_child(GLuint child_i);
+            // this template method deletes a child.
+            void delete_child(GLuint child_i);
 
-        // this method sets pointer to this shader to NULL, sets `world_pointer` according to the input, and requests a new `shaderID` from the new world.
-        void switch_to_new_world(model::World *new_world_pointer);
+            // this method sets pointer to this shader to NULL, sets `world_pointer` according to the input, and requests a new `shaderID` from the new world.
+            void switch_to_new_world(model::World *new_world_pointer);
 
         private:
-        // destructor.
-        ~Shader();
+            // destructor.
+            ~Shader();
 
-        // this method renders all textures using this shader.
-        void render();
+            // this method renders all textures using this shader.
+            void render();
 
-        // this method sets a texture pointer.
-        void set_texture_pointer(GLuint textureID, void* texture_pointer);
+            // this method sets a texture pointer.
+            void set_texture_pointer(GLuint textureID, void* texture_pointer);
 
-        // this method gets a texture pointer.
-        void* get_texture_pointer(GLuint textureID);
+            // this method gets a texture pointer.
+            void* get_texture_pointer(GLuint textureID);
 
-        // this method gets a texture ID and removes it from the `free_textureID_queue` if it was popped from the queue.
-        GLuint get_textureID();
+            // this method gets a texture ID and removes it from the `free_textureID_queue` if it was popped from the queue.
+            GLuint get_textureID();
 
-        // this method sets a world species pointer.
-        void set_world_species_pointer(void* world_species_pointer);
+            // this method sets a world species pointer.
+            void set_world_species_pointer(void* world_species_pointer);
 
-        model::World *world_pointer;          // pointer to the world.
+            model::World *world_pointer;          // pointer to the world.
 
-        GLuint programID;                     // shaders' programID, returned by `LoadShaders`.
+            GLuint programID;                     // shaders' programID, returned by `LoadShaders`.
 
-        GLuint MatrixID;
-        GLuint ViewMatrixID;
-        GLuint ModelMatrixID;
+            GLuint MatrixID;
+            GLuint ViewMatrixID;
+            GLuint ModelMatrixID;
 
-        void bind_to_world();
+            void bind_to_world();
 
-        void* world_species_pointer;          // pointer to world species (used in collision detection).
+            void* world_species_pointer;          // pointer to world species (used in collision detection).
 
-        GLuint shaderID;                      // shader ID, returned by `model::World->get_shaderID()`.
+            GLuint shaderID;                      // shader ID, returned by `model::World->get_shaderID()`.
 
-        std::string vertex_shader;            // filename of vertex shader.
-        std::string fragment_shader;          // filename of fragment shader.
+            std::string vertex_shader;            // filename of vertex shader.
+            std::string fragment_shader;          // filename of fragment shader.
 
-        std::vector<void*> texture_pointer_vector;
-        std::queue<GLuint> free_textureID_queue;
+            std::vector<void*> texture_pointer_vector;
+            std::queue<GLuint> free_textureID_queue;
 
-        const char *char_vertex_shader;
-        const char *char_fragment_shader;
+            const char *char_vertex_shader;
+            const char *char_fragment_shader;
+
+            friend class World;
+            friend class Texture;
+            friend class Species;
+            friend class Object;
     };
 
     class Texture
     {
-        friend class Shader;
-        friend class Species;
-        friend class Object;
-
         public:
-        // constructor.
-        Texture(TextureStruct texture_struct);
+            // constructor.
+            Texture(TextureStruct texture_struct);
 
-        // this template method gets the child pointer (can be used for comparing with NULL).
-        void* get_child_pointer(GLuint child_i);
+            // this template method gets the child pointer (can be used for comparing with NULL).
+            void* get_child_pointer(GLuint child_i);
 
-        // this template method deletes a child.
-        void delete_child(GLuint child_i);
+            // this template method deletes a child.
+            void delete_child(GLuint child_i);
 
-        // this method sets pointer to this shader to NULL, sets `shader_pointer` according to the input, and requests a new `textureID` from the new shader.
-        void switch_texture_to_new_shader(model::Shader *new_shader_pointer);
+            // this method sets pointer to this shader to NULL, sets `shader_pointer` according to the input, and requests a new `textureID` from the new shader.
+            void switch_texture_to_new_shader(model::Shader *new_shader_pointer);
 
         private:
-        // destructor.
-        ~Texture();
+            // destructor.
+            ~Texture();
 
-        // this method renders all species using this texture.
-        void render();
+            // this method renders all species using this texture.
+            void render();
 
-        // this method sets a species pointer.
-        void set_species_pointer(GLuint speciesID, void* species_pointer);
+            // this method sets a species pointer.
+            void set_species_pointer(GLuint speciesID, void* species_pointer);
 
-        // this method sets a font pointer.
-        void set_font_pointer(GLuint fontID, void* font_pointer);
+            // this method sets a font pointer.
+            void set_font_pointer(GLuint fontID, void* font_pointer);
 
-        // this method gets a species pointer.
-        void* get_species_pointer(GLuint speciesID);
+            // this method gets a species pointer.
+            void* get_species_pointer(GLuint speciesID);
 
-        // this method gets a species ID and removes it from the `free_speciesID_queue` if it was popped from the queue.
-        GLuint get_speciesID();
+            // this method gets a species ID and removes it from the `free_speciesID_queue` if it was popped from the queue.
+            GLuint get_speciesID();
 
-        // this method gets a font ID and removes it from the `free_fontID_queue` if it was popped from the queue.
-        GLuint get_fontID();
+            // this method gets a font ID and removes it from the `free_fontID_queue` if it was popped from the queue.
+            GLuint get_fontID();
 
-        // this method sets a world species pointer.
-        void set_world_species_pointer(void* world_species_pointer);
+            // this method sets a world species pointer.
+            void set_world_species_pointer(void* world_species_pointer);
 
-        model::Shader *shader_pointer;         // pointer to the shader.
+            model::Shader *shader_pointer;         // pointer to the shader.
 
-        void bind_to_shader();
+            void bind_to_shader();
 
-        void* world_species_pointer;           // pointer to world species (used in collision detection).
+            void* world_species_pointer;           // pointer to world species (used in collision detection).
 
-        GLuint texture;                        // Texture, returned by `load_DDS_texture` or `load_BMP_texture`.
-        GLuint openGL_textureID;               // texture ID, returned by `glGetUniformLocation(programID, "myTextureSampler");`.
+            GLuint texture;                        // Texture, returned by `load_DDS_texture` or `load_BMP_texture`.
+            GLuint openGL_textureID;               // texture ID, returned by `glGetUniformLocation(programID, "myTextureSampler");`.
 
-        std::vector<void*> species_pointer_vector;
-        std::queue<GLuint> free_speciesID_queue;
+            std::vector<void*> species_pointer_vector;
+            std::queue<GLuint> free_speciesID_queue;
 
-        std::string texture_file_format;       // type of the model file, eg. `"bmp"`.
-        std::string texture_filename;          // filename of the model file.
-        GLuint textureID;                      // texture ID, returned by `Shader::get_textureID`.
-        const char *char_texture_file_format;
-        const char *char_texture_filename;
+            std::string texture_file_format;       // type of the model file, eg. `"bmp"`.
+            std::string texture_filename;          // filename of the model file.
+            GLuint textureID;                      // texture ID, returned by `Shader::get_textureID`.
+            const char *char_texture_file_format;
+            const char *char_texture_filename;
+
+            friend class Shader;
+            friend class Species;
+            friend class Object;
     };
 
     class Graph
     {
-        friend class Node;
-
         public:
-        // constructor.
-        Graph();
+            // constructor.
+            Graph();
 
-        // this template method gets the child pointer (can be used for comparing with NULL).
-        void* get_child_pointer(GLuint child_i);
+            // this template method gets the child pointer (can be used for comparing with NULL).
+            void* get_child_pointer(GLuint child_i);
 
-        // this template method deletes a child.
-        void delete_child(GLuint child_i);
+            // this template method deletes a child.
+            void delete_child(GLuint child_i);
 
         private:
-        // destructor.
-        ~Graph();
+            // destructor.
+            ~Graph();
 
-        // this method sets a node pointer.
-        void set_node_pointer(GLuint nodeID, void* node_pointer);
+            // this method sets a node pointer.
+            void set_node_pointer(GLuint nodeID, void* node_pointer);
 
-        // this method gets a node pointer.
-        void* get_node_pointer(GLuint nodeID);
+            // this method gets a node pointer.
+            void* get_node_pointer(GLuint nodeID);
 
-        // this method gets a node ID and removes it from the `free_nodeID_queue` if it was popped from the queue.
-        GLuint get_nodeID();
+            // this method gets a node ID and removes it from the `free_nodeID_queue` if it was popped from the queue.
+            GLuint get_nodeID();
 
-        std::vector<void*> node_pointer_vector;
-        std::queue<GLuint> free_nodeID_queue;
+            std::vector<void*> node_pointer_vector;
+            std::queue<GLuint> free_nodeID_queue;
+
+            friend class Node;
     };
 
     // `Node` is not a subclass of `Graph` because if the graph splits, node may be transferred to an another graph.
@@ -236,45 +236,45 @@ namespace model
     // The graph in which a node belongs is accessible through `void* graph_pointer` (must be cast to `model::Graph*`).
     class Node
     {
-        friend class Graph;
-
         public:
-        // constructor.
-        Node(NodeStruct node_struct);
+            // constructor.
+            Node(NodeStruct node_struct);
 
         private:
-        // destructor.
-        ~Node();
+            // destructor.
+            ~Node();
 
-        // this method creates a bidirectional link.
-        // creating of bidirectional links is not possible before all nodes are created.
-        void create_bidirectional_link(GLuint nodeID);
+            // this method creates a bidirectional link.
+            // creating of bidirectional links is not possible before all nodes are created.
+            void create_bidirectional_link(GLuint nodeID);
 
-        // this method deletes a bidirectional link.
-        // deleting of links is not possible before all nodes are created.
-        void delete_bidirectional_link(GLuint nodeID);
+            // this method deletes a bidirectional link.
+            // deleting of links is not possible before all nodes are created.
+            void delete_bidirectional_link(GLuint nodeID);
 
-        // this method transfers this node to a new graph.
-        // links will not be changed.
-        // all nodes that are to be transferred must be transferred separately.
-        // before transfering any node to a new graph,
-        // all links to nodes that do not belong to the new graph of this node must be deleted with separate `delete_bidirectional_link` calls.
-        void transfer_to_new_graph(model::Graph *new_graph_pointer);
+            // this method transfers this node to a new graph.
+            // links will not be changed.
+            // all nodes that are to be transferred must be transferred separately.
+            // before transfering any node to a new graph,
+            // all links to nodes that do not belong to the new graph of this node must be deleted with separate `delete_bidirectional_link` calls.
+            void transfer_to_new_graph(model::Graph *new_graph_pointer);
 
-        GLuint nodeID;
-        model::Graph *graph_pointer;
+            GLuint nodeID;
+            model::Graph *graph_pointer;
 
-        // nodes do not keep pointers to neighbor nodes, because all pointer values are not known yet before all nodes are created.
-        std::vector<GLuint> neighbor_nodeIDs;
+            // nodes do not keep pointers to neighbor nodes, because all pointer values are not known yet before all nodes are created.
+            std::vector<GLuint> neighbor_nodeIDs;
 
-        // this method creates an unidirectional link.
-        // in the constructor only unidirectional links can be created.
-        void create_unidirectional_link(GLuint nodeID);
+            // this method creates an unidirectional link.
+            // in the constructor only unidirectional links can be created.
+            void create_unidirectional_link(GLuint nodeID);
 
-        // this method deletes an unidirectional link.
-        void delete_unidirectional_link(GLuint nodeID);
+            // this method deletes an unidirectional link.
+            void delete_unidirectional_link(GLuint nodeID);
 
-        glm::vec3 coordinate_vector;
+            glm::vec3 coordinate_vector;
+
+            friend class Graph;
     };
 
     class Species
