@@ -184,6 +184,9 @@ namespace model
                 {
                     return Container::get_child_pointer(true);
                 }
+                void delete_child(GLuint child_i)
+                {
+                }
         };
 
     GLfloat get_ground_level(
@@ -319,6 +322,11 @@ namespace model
         return static_cast<model::Shader*>(this->shader_pointer_vector[child_i]);
     }
 
+    void World::delete_child(GLuint child_i)
+    {
+        delete static_cast<model::Shader*>(this->shader_pointer_vector[child_i]);
+    }
+
     World::~World()
     {
         // destructor.
@@ -329,14 +337,7 @@ namespace model
 
         for (GLuint shader_i = 0; shader_i < this->shader_pointer_vector.size(); shader_i++)
         {
-            model::Shader *shader_pointer;
-            shader_pointer = static_cast<model::Shader*>(this->shader_pointer_vector[shader_i]);
-
-            if (this->get_child_pointer(shader_i))
-            {
-                // call destructor of each shader.
-                delete shader_pointer;
-            }
+            this->delete_child(shader_i);
         }
     }
 
@@ -624,6 +625,11 @@ namespace model
         return static_cast<model::Texture*>(this->texture_pointer_vector[child_i]);
     }
 
+    void Shader::delete_child(GLuint child_i)
+    {
+        delete static_cast<model::Texture*>(this->texture_pointer_vector[child_i]);
+    }
+
     Shader::~Shader()
     {
         // destructor.
@@ -634,14 +640,7 @@ namespace model
 
         for (GLuint texture_i = 0; texture_i < this->texture_pointer_vector.size(); texture_i++)
         {
-            model::Texture *texture_pointer;
-            texture_pointer = static_cast<model::Texture*>(this->texture_pointer_vector[texture_i]);
-
-            if (this->get_child_pointer(texture_i))
-            {
-                // call destructor of each texture.
-                delete texture_pointer;
-            }
+            this->delete_child(texture_i);
         }
         // set pointer to this shader to NULL.
         this->world_pointer->set_shader_pointer(this->shaderID, NULL);
@@ -748,6 +747,11 @@ namespace model
         return static_cast<model::Species*>(this->species_pointer_vector[child_i]);
     }
 
+    void Texture::delete_child(GLuint child_i)
+    {
+        delete static_cast<model::Species*>(this->species_pointer_vector[child_i]);
+    }
+
     Texture::~Texture()
     {
         // destructor.
@@ -759,14 +763,7 @@ namespace model
         // destroy all species of this texture.
         for (GLuint species_i = 0; species_i < this->species_pointer_vector.size(); species_i++)
         {
-            model::Species *species_pointer;
-            species_pointer = static_cast<model::Species*>(this->species_pointer_vector[species_i]);
-
-            if (this->get_child_pointer(species_i))
-            {
-                // call destructor of each species.
-                delete species_pointer;
-            }
+            this->delete_child(species_i);
         }
         glDeleteTextures(1, &this->texture);
 
@@ -852,6 +849,11 @@ namespace model
         return get_childID(node_pointer_vector, free_nodeID_queue);
     }
 
+    void Graph::delete_child(GLuint child_i)
+    {
+        delete static_cast<model::Node*>(this->node_pointer_vector[child_i]);
+    }
+
     Graph::~Graph()
     {
         // destructor.
@@ -863,14 +865,7 @@ namespace model
         // destroy all nodes of this graph.
         for (GLuint node_i = 0; node_i < this->node_pointer_vector.size(); node_i++)
         {
-            model::Node *node_pointer;
-            node_pointer = static_cast<model::Node*>(this->node_pointer_vector[node_i]);
-
-            if (this->get_child_pointer(node_i))
-            {
-                // call destructor of each node.
-                delete node_pointer;
-            }
+            this->delete_child(node_i);
         }
     }
 
@@ -1076,6 +1071,11 @@ namespace model
         return static_cast<model::Object*>(this->object_pointer_vector[child_i]);
     }
 
+    void Species::delete_child(GLuint child_i)
+    {
+        delete static_cast<model::Object*>(this->object_pointer_vector[child_i]);
+    }
+
     Species::~Species()
     {
         // destructor.
@@ -1087,14 +1087,7 @@ namespace model
         // destroy all objects of this species.
         for (GLuint object_i = 0; object_i < this->object_pointer_vector.size(); object_i++)
         {
-            model::Object *object_pointer;
-            object_pointer = static_cast<model::Object*>(this->object_pointer_vector[object_i]);
-
-            if (this->get_child_pointer(object_i))
-            {
-                // call destructor of each object.
-                delete object_pointer;
-            }
+            this->delete_child(object_i);
         }
 
         // Cleanup VBO, shader and texture.
