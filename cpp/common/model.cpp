@@ -176,6 +176,16 @@ namespace model
         return childID;
     }
 
+    template <class Container>
+        class A
+        {
+            public:
+                bool get_child_pointer(GLuint child_i)
+                {
+                    return Container::get_child_pointer(true);
+                }
+        };
+
     GLfloat get_ground_level(
             model::Species* world_species,
             glm::vec3 position)
@@ -304,6 +314,11 @@ namespace model
         // constructor.
     }
 
+    void* World::get_child_pointer(GLuint child_i)
+    {
+        return static_cast<model::Shader*>(this->shader_pointer_vector[child_i]);
+    }
+
     World::~World()
     {
         // destructor.
@@ -317,7 +332,7 @@ namespace model
             model::Shader *shader_pointer;
             shader_pointer = static_cast<model::Shader*>(this->shader_pointer_vector[shader_i]);
 
-            if (shader_pointer != NULL)
+            if (this->get_child_pointer(shader_i))
             {
                 // call destructor of each shader.
                 delete shader_pointer;
@@ -604,6 +619,11 @@ namespace model
         this->ModelMatrixID = glGetUniformLocation(this->programID, "M");
     }
 
+    void* Shader::get_child_pointer(GLuint child_i)
+    {
+        return static_cast<model::Texture*>(this->texture_pointer_vector[child_i]);
+    }
+
     Shader::~Shader()
     {
         // destructor.
@@ -617,7 +637,7 @@ namespace model
             model::Texture *texture_pointer;
             texture_pointer = static_cast<model::Texture*>(this->texture_pointer_vector[texture_i]);
 
-            if (texture_pointer != NULL)
+            if (this->get_child_pointer(texture_i))
             {
                 // call destructor of each texture.
                 delete texture_pointer;
@@ -723,6 +743,11 @@ namespace model
         this->openGL_textureID = glGetUniformLocation(this->shader_pointer->programID, "myTextureSampler");
     }
 
+    void* Texture::get_child_pointer(GLuint child_i)
+    {
+        return static_cast<model::Species*>(this->species_pointer_vector[child_i]);
+    }
+
     Texture::~Texture()
     {
         // destructor.
@@ -737,7 +762,7 @@ namespace model
             model::Species *species_pointer;
             species_pointer = static_cast<model::Species*>(this->species_pointer_vector[species_i]);
 
-            if (species_pointer != NULL)
+            if (this->get_child_pointer(species_i))
             {
                 // call destructor of each species.
                 delete species_pointer;
@@ -807,6 +832,11 @@ namespace model
         // constructor.
     }
 
+    void* Graph::get_child_pointer(GLuint child_i)
+    {
+        return static_cast<model::Node*>(this->node_pointer_vector[child_i]);
+    }
+
     void Graph::set_node_pointer(GLuint nodeID, void* node_pointer)
     {
         set_child_pointer(nodeID, node_pointer, this->node_pointer_vector, this->free_nodeID_queue);
@@ -836,7 +866,7 @@ namespace model
             model::Node *node_pointer;
             node_pointer = static_cast<model::Node*>(this->node_pointer_vector[node_i]);
 
-            if (node_pointer != NULL)
+            if (this->get_child_pointer(node_i))
             {
                 // call destructor of each node.
                 delete node_pointer;
@@ -1041,6 +1071,11 @@ namespace model
         // Compute the graph of this object type.
     }
 
+    void* Species::get_child_pointer(GLuint child_i)
+    {
+        return static_cast<model::Object*>(this->object_pointer_vector[child_i]);
+    }
+
     Species::~Species()
     {
         // destructor.
@@ -1055,7 +1090,7 @@ namespace model
             model::Object *object_pointer;
             object_pointer = static_cast<model::Object*>(this->object_pointer_vector[object_i]);
 
-            if (object_pointer != NULL)
+            if (this->get_child_pointer(object_i))
             {
                 // call destructor of each object.
                 delete object_pointer;
