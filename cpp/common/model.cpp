@@ -176,19 +176,6 @@ namespace model
         return childID;
     }
 
-    template <class Container>
-        class A
-        {
-            public:
-                bool get_child_pointer(GLuint child_i)
-                {
-                    return Container::get_child_pointer(true);
-                }
-                void delete_child(GLuint child_i)
-                {
-                }
-        };
-
     GLfloat get_ground_level(
             model::Species* world_species,
             glm::vec3 position)
