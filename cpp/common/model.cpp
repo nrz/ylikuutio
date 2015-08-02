@@ -306,7 +306,7 @@ namespace model
 
     void* World::get_child_pointer(GLuint child_i)
     {
-        return static_cast<model::Shader*>(this->shader_pointer_vector[child_i]);
+        return shader_pointer_vector[child_i];
     }
 
     void World::delete_child(GLuint child_i)
@@ -609,7 +609,7 @@ namespace model
 
     void* Shader::get_child_pointer(GLuint child_i)
     {
-        return static_cast<model::Texture*>(this->texture_pointer_vector[child_i]);
+        return texture_pointer_vector[child_i];
     }
 
     void Shader::delete_child(GLuint child_i)
@@ -731,7 +731,7 @@ namespace model
 
     void* Texture::get_child_pointer(GLuint child_i)
     {
-        return static_cast<model::Species*>(this->species_pointer_vector[child_i]);
+        return species_pointer_vector[child_i];
     }
 
     void Texture::delete_child(GLuint child_i)
@@ -818,7 +818,7 @@ namespace model
 
     void* Graph::get_child_pointer(GLuint child_i)
     {
-        return static_cast<model::Node*>(this->node_pointer_vector[child_i]);
+        return node_pointer_vector[child_i];
     }
 
     void Graph::set_node_pointer(GLuint nodeID, void* node_pointer)
@@ -1055,7 +1055,7 @@ namespace model
 
     void* Species::get_child_pointer(GLuint child_i)
     {
-        return static_cast<model::Object*>(this->object_pointer_vector[child_i]);
+        return object_pointer_vector[child_i];
     }
 
     void Species::delete_child(GLuint child_i)
