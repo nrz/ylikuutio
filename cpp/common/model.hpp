@@ -38,9 +38,6 @@ namespace model
             // constructor.
             World();
 
-            // this template method gets the child pointer (can be used for comparing with NULL).
-            void* get_child_pointer(GLuint child_i);
-
             // destructor.
             ~World();
 
@@ -48,9 +45,6 @@ namespace model
             void render();
 
         private:
-            // this template method deletes a child.
-            void delete_child(GLuint child_i);
-
             // this method sets a shader pointer.
             void set_shader_pointer(GLuint shaderID, void* shader_pointer);
 
@@ -80,19 +74,13 @@ namespace model
             // constructor.
             Shader(ShaderStruct shader_struct);
 
-            // this template method gets the child pointer (can be used for comparing with NULL).
-            void* get_child_pointer(GLuint child_i);
+            // destructor.
+            ~Shader();
 
             // this method sets pointer to this shader to NULL, sets `world_pointer` according to the input, and requests a new `shaderID` from the new world.
             void switch_to_new_world(model::World *new_world_pointer);
 
         private:
-            // destructor.
-            ~Shader();
-
-            // this template method deletes a child.
-            void delete_child(GLuint child_i);
-
             // this method renders all textures using this shader.
             void render();
 
@@ -143,19 +131,13 @@ namespace model
             // constructor.
             Texture(TextureStruct texture_struct);
 
-            // this template method gets the child pointer (can be used for comparing with NULL).
-            void* get_child_pointer(GLuint child_i);
+            // destructor.
+            ~Texture();
 
             // this method sets pointer to this shader to NULL, sets `shader_pointer` according to the input, and requests a new `textureID` from the new shader.
             void switch_texture_to_new_shader(model::Shader *new_shader_pointer);
 
         private:
-            // destructor.
-            ~Texture();
-
-            // this template method deletes a child.
-            void delete_child(GLuint child_i);
-
             // this method renders all species using this texture.
             void render();
 
@@ -206,16 +188,10 @@ namespace model
             // constructor.
             Graph();
 
-            // this template method gets the child pointer (can be used for comparing with NULL).
-            void* get_child_pointer(GLuint child_i);
-
-        private:
             // destructor.
             ~Graph();
 
-            // this template method deletes a child.
-            void delete_child(GLuint child_i);
-
+        private:
             // this method sets a node pointer.
             void set_node_pointer(GLuint nodeID, void* node_pointer);
 
@@ -240,10 +216,10 @@ namespace model
             // constructor.
             Node(NodeStruct node_struct);
 
-        private:
             // destructor.
             ~Node();
 
+        private:
             // this method creates a bidirectional link.
             // creating of bidirectional links is not possible before all nodes are created.
             void create_bidirectional_link(GLuint nodeID);
@@ -283,14 +259,11 @@ namespace model
             // constructor.
             Species(SpeciesStruct species_struct);
 
-            // this template method gets the child pointer (can be used for comparing with NULL).
-            void* get_child_pointer(GLuint child_i);
+            // destructor.
+            ~Species();
 
             // this method sets pointer to this species to NULL, sets `texture_pointer` according to the input, and requests a new `speciesID` from the new texture.
             void switch_to_new_texture(model::Texture *new_texture_pointer);
-
-            // destructor.
-            ~Species();
 
             // this method renders all objects of this species.
             void render();
@@ -335,9 +308,6 @@ namespace model
             model::Texture *texture_pointer;       // pointer to the texture.
 
         private:
-            // this template method deletes a child.
-            void delete_child(GLuint child_i);
-
             void bind_to_texture();
 
             std::string model_file_format;         // type of the model file, eg. `"bmp"`.
@@ -357,9 +327,6 @@ namespace model
         public:
             // constructor.
             Font(FontStruct font_struct);
-
-            // this template method gets the child pointer (can be used for comparing with NULL).
-            void* get_child_pointer(GLuint child_i);
 
             // destructor.
             ~Font();
@@ -389,9 +356,6 @@ namespace model
             model::Texture *texture_pointer;       // pointer to the texture.
 
         private:
-            // this template method deletes a child.
-            void delete_child(GLuint child_i);
-
             void bind_to_texture();
 
             std::string model_file_format;         // type of the model file, eg. `"bmp"`.
