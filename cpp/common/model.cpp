@@ -301,9 +301,12 @@ namespace model
 
     // template<typename T1>
     template<class T1>
-        void delete_child(GLuint child_i, std::vector<void*> &child_pointer_vector)
+        void delete_children(std::vector<void*> &child_pointer_vector)
         {
-            delete static_cast<T1>(child_pointer_vector[child_i]);
+            for (GLuint child_i = 0; child_i < child_pointer_vector.size(); child_i++)
+            {
+                delete static_cast<T1>(child_pointer_vector[child_i]);
+            }
         }
 
     World::World()
@@ -318,11 +321,7 @@ namespace model
 
         // destroy all shaders of this world.
         std::cout << "All shaders of this world will be destroyed.\n";
-
-        for (GLuint shader_i = 0; shader_i < this->shader_pointer_vector.size(); shader_i++)
-        {
-            delete_child<model::Shader*>(shader_i, this->shader_pointer_vector);
-        }
+        delete_children<model::Shader*>(this->shader_pointer_vector);
     }
 
     void World::render()
@@ -611,11 +610,8 @@ namespace model
 
         // destroy all textures of this shader.
         std::cout << "All textures of this shader will be destroyed.\n";
+        delete_children<model::Texture*>(this->texture_pointer_vector);
 
-        for (GLuint texture_i = 0; texture_i < this->texture_pointer_vector.size(); texture_i++)
-        {
-            delete_child<model::Texture*>(texture_i, this->texture_pointer_vector);
-        }
         // set pointer to this shader to NULL.
         this->world_pointer->set_shader_pointer(this->shaderID, NULL);
 
@@ -723,12 +719,8 @@ namespace model
 
         // destroy all species of this texture.
         std::cout << "All species of this texture will be destroyed.\n";
+        delete_children<model::Species*>(this->species_pointer_vector);
 
-        // destroy all species of this texture.
-        for (GLuint species_i = 0; species_i < this->species_pointer_vector.size(); species_i++)
-        {
-            delete_child<model::Species*>(species_i, this->species_pointer_vector);
-        }
         glDeleteTextures(1, &this->texture);
 
         // set pointer to this texture to NULL.
@@ -815,12 +807,7 @@ namespace model
 
         // destroy all nodes of this graph.
         std::cout << "All nodes of this graph will be destroyed.\n";
-
-        // destroy all nodes of this graph.
-        for (GLuint node_i = 0; node_i < this->node_pointer_vector.size(); node_i++)
-        {
-            delete_child<model::Node*>(node_i, this->node_pointer_vector);
-        }
+        delete_children<model::Node*>(this->node_pointer_vector);
     }
 
     Node::Node(NodeStruct node_struct)
@@ -1027,12 +1014,7 @@ namespace model
 
         // destroy all objects of this species.
         std::cout << "All objects of this species will be destroyed.\n";
-
-        // destroy all objects of this species.
-        for (GLuint object_i = 0; object_i < this->object_pointer_vector.size(); object_i++)
-        {
-            delete_child<model::Object*>(object_i, this->object_pointer_vector);
-        }
+        delete_children<model::Object*>(this->object_pointer_vector);
 
         // Cleanup VBO, shader and texture.
         glDeleteBuffers(1, &this->vertexbuffer);
