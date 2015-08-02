@@ -348,14 +348,14 @@ namespace model
         render_children<model::Shader*>(this->shader_pointer_vector);
     }
 
-    void World::set_shader_pointer(GLuint shaderID, void* shader_pointer)
+    void World::set_shader_pointer(GLuint childID, void* shader_pointer)
     {
-        set_child_pointer(shaderID, shader_pointer, this->shader_pointer_vector, this->free_shaderID_queue);
+        set_child_pointer(childID, shader_pointer, this->shader_pointer_vector, this->free_shaderID_queue);
     }
 
-    void* World::get_shader_pointer(GLuint shaderID)
+    void* World::get_shader_pointer(GLuint childID)
     {
-        return this->shader_pointer_vector[shaderID];
+        return this->shader_pointer_vector[childID];
     }
 
     GLuint World::get_shaderID()
@@ -580,11 +580,11 @@ namespace model
     }
     void Shader::bind_to_world()
     {
-        // get shaderID from the World.
-        this->shaderID = this->world_pointer->get_shaderID();
+        // get childID from the World.
+        this->childID = this->world_pointer->get_shaderID();
 
         // set pointer to this shader.
-        this->world_pointer->set_shader_pointer(this->shaderID, this);
+        this->world_pointer->set_shader_pointer(this->childID, this);
     }
 
     Shader::Shader(ShaderStruct shader_struct)
@@ -598,7 +598,7 @@ namespace model
         this->char_fragment_shader = this->fragment_shader.c_str();
         this->world_pointer        = static_cast<model::World*>(shader_struct.world_pointer);
 
-        // get shaderID from the World and set pointer to this shader.
+        // get childID from the World and set pointer to this shader.
         this->bind_to_world();
 
         // Create and compile our GLSL program from the shaders.
@@ -613,14 +613,14 @@ namespace model
     Shader::~Shader()
     {
         // destructor.
-        std::cout << "Shader with shaderID " << this->shaderID << " will be destroyed.\n";
+        std::cout << "Shader with childID " << this->childID << " will be destroyed.\n";
 
         // destroy all textures of this shader.
         std::cout << "All textures of this shader will be destroyed.\n";
         delete_children<model::Texture*>(this->texture_pointer_vector);
 
         // set pointer to this shader to NULL.
-        this->world_pointer->set_shader_pointer(this->shaderID, NULL);
+        this->world_pointer->set_shader_pointer(this->childID, NULL);
 
         glDeleteProgram(this->programID);
     }
@@ -636,14 +636,14 @@ namespace model
         render_children<model::Texture*>(this->texture_pointer_vector);
     }
 
-    void Shader::set_texture_pointer(GLuint textureID, void* texture_pointer)
+    void Shader::set_texture_pointer(GLuint childID, void* texture_pointer)
     {
-        set_child_pointer(textureID, texture_pointer, this->texture_pointer_vector, this->free_textureID_queue);
+        set_child_pointer(childID, texture_pointer, this->texture_pointer_vector, this->free_textureID_queue);
     }
 
-    void* Shader::get_texture_pointer(GLuint textureID)
+    void* Shader::get_texture_pointer(GLuint childID)
     {
-        return this->texture_pointer_vector[textureID];
+        return this->texture_pointer_vector[childID];
     }
 
     GLuint Shader::get_textureID()
@@ -654,11 +654,11 @@ namespace model
     void Shader::switch_to_new_world(model::World *new_world_pointer)
     {
         // set pointer to this shader to NULL.
-        this->world_pointer->set_shader_pointer(this->shaderID, NULL);
+        this->world_pointer->set_shader_pointer(this->childID, NULL);
 
         this->world_pointer = new_world_pointer;
 
-        // get shaderID from the World and set pointer to this shader.
+        // get childID from the World and set pointer to this shader.
         this->bind_to_world();
     }
 
@@ -670,11 +670,11 @@ namespace model
 
     void Texture::bind_to_shader()
     {
-        // get textureID from the Shader.
-        this->textureID = this->shader_pointer->get_textureID();
+        // get childID from the Shader.
+        this->childID = this->shader_pointer->get_textureID();
 
         // set pointer to this texture.
-        this->shader_pointer->set_texture_pointer(this->textureID, this);
+        this->shader_pointer->set_texture_pointer(this->childID, this);
     }
 
     Texture::Texture(TextureStruct texture_struct)
@@ -688,7 +688,7 @@ namespace model
         this->char_texture_file_format = this->texture_file_format.c_str();
         this->char_texture_filename    = this->texture_filename.c_str();
 
-        // get textureID from the Shader and set pointer to this texture.
+        // get childID from the Shader and set pointer to this texture.
         this->bind_to_shader();
 
         // Load the texture.
@@ -713,7 +713,7 @@ namespace model
     Texture::~Texture()
     {
         // destructor.
-        std::cout << "Texture with textureID " << this->textureID << " will be destroyed.\n";
+        std::cout << "Texture with childID " << this->childID << " will be destroyed.\n";
 
         // destroy all species of this texture.
         std::cout << "All species of this texture will be destroyed.\n";
@@ -722,7 +722,7 @@ namespace model
         glDeleteTextures(1, &this->texture);
 
         // set pointer to this texture to NULL.
-        this->shader_pointer->set_texture_pointer(this->textureID, NULL);
+        this->shader_pointer->set_texture_pointer(this->childID, NULL);
     }
 
     void Texture::render()
@@ -737,14 +737,14 @@ namespace model
         render_children<model::Species*>(this->species_pointer_vector);
     }
 
-    void Texture::set_species_pointer(GLuint speciesID, void* species_pointer)
+    void Texture::set_species_pointer(GLuint childID, void* species_pointer)
     {
-        set_child_pointer(speciesID, species_pointer, this->species_pointer_vector, this->free_speciesID_queue);
+        set_child_pointer(childID, species_pointer, this->species_pointer_vector, this->free_speciesID_queue);
     }
 
-    void* Texture::get_species_pointer(GLuint speciesID)
+    void* Texture::get_species_pointer(GLuint childID)
     {
-        return this->species_pointer_vector[speciesID];
+        return this->species_pointer_vector[childID];
     }
 
     GLuint Texture::get_speciesID()
@@ -755,11 +755,11 @@ namespace model
     void Texture::switch_texture_to_new_shader(model::Shader *new_shader_pointer)
     {
         // set pointer to this texture to NULL.
-        this->shader_pointer->set_texture_pointer(this->textureID, NULL);
+        this->shader_pointer->set_texture_pointer(this->childID, NULL);
 
         this->shader_pointer = new_shader_pointer;
 
-        // get textureID from the Shader and set pointer to this texture.
+        // get childID from the Shader and set pointer to this texture.
         this->bind_to_shader();
     }
 
@@ -896,11 +896,11 @@ namespace model
 
     void Species::bind_to_texture()
     {
-        // get speciesID from the Texture.
-        this->speciesID = this->texture_pointer->get_speciesID();
+        // get childID from the Texture.
+        this->childID = this->texture_pointer->get_speciesID();
 
         // set pointer to this species.
-        this->texture_pointer->set_species_pointer(this->speciesID, this);
+        this->texture_pointer->set_species_pointer(this->childID, this);
     }
 
     Species::Species(SpeciesStruct species_struct)
@@ -917,7 +917,7 @@ namespace model
         this->char_model_filename    = this->model_filename.c_str();
         this->char_color_channel     = this->color_channel.c_str();
 
-        // get speciesID from the Texture and set pointer to this species.
+        // get childID from the Texture and set pointer to this species.
         this->bind_to_texture();
 
         // Get a handle for our buffers.
@@ -999,7 +999,7 @@ namespace model
     Species::~Species()
     {
         // destructor.
-        std::cout << "Species with speciesID " << this->speciesID << " will be destroyed.\n";
+        std::cout << "Species with childID " << this->childID << " will be destroyed.\n";
 
         // destroy all objects of this species.
         std::cout << "All objects of this species will be destroyed.\n";
@@ -1012,7 +1012,7 @@ namespace model
         glDeleteBuffers(1, &this->elementbuffer);
 
         // set pointer to this species to NULL.
-        this->texture_pointer->set_species_pointer(this->speciesID, NULL);
+        this->texture_pointer->set_species_pointer(this->childID, NULL);
     }
 
     void Species::render()
@@ -1037,14 +1037,14 @@ namespace model
         glDisableVertexAttribArray(this->vertexNormal_modelspaceID);
     }
 
-    void Species::set_object_pointer(GLuint objectID, void* object_pointer)
+    void Species::set_object_pointer(GLuint childID, void* object_pointer)
     {
-        set_child_pointer(objectID, object_pointer, this->object_pointer_vector, this->free_objectID_queue);
+        set_child_pointer(childID, object_pointer, this->object_pointer_vector, this->free_objectID_queue);
     }
 
-    void* Species::get_object_pointer(GLuint objectID)
+    void* Species::get_object_pointer(GLuint childID)
     {
-        return this->object_pointer_vector[objectID];
+        return this->object_pointer_vector[childID];
     }
 
     GLuint Species::get_objectID()
@@ -1055,21 +1055,21 @@ namespace model
     void Species::switch_to_new_texture(model::Texture *new_texture_pointer)
     {
         // set pointer to this species to NULL.
-        this->texture_pointer->set_species_pointer(this->speciesID, NULL);
+        this->texture_pointer->set_species_pointer(this->childID, NULL);
 
         this->texture_pointer = new_texture_pointer;
 
-        // get speciesID from the Texture and set pointer to this species.
+        // get childID from the Texture and set pointer to this species.
         this->bind_to_texture();
     }
 
     void Object::bind_to_species()
     {
-        // get objectID from the Species.
-        this->objectID = this->species_pointer->get_objectID();
+        // get childID from the Species.
+        this->childID = this->species_pointer->get_objectID();
 
         // set pointer to this object.
-        this->species_pointer->set_object_pointer(this->objectID, this);
+        this->species_pointer->set_object_pointer(this->childID, this);
     }
 
     Object::Object(ObjectStruct object_struct)
@@ -1083,7 +1083,7 @@ namespace model
         this->has_entered           = false;
         this->species_pointer       = static_cast<model::Species*>(object_struct.species_pointer);
 
-        // get objectID from the Species and set pointer to this object.
+        // get childID from the Species and set pointer to this object.
         this->bind_to_species();
 
         bool model_loading_result = false;
@@ -1092,10 +1092,10 @@ namespace model
     Object::~Object()
     {
         // destructor.
-        std::cout << "Object with objectID " << this->objectID << " will be destroyed.\n";
+        std::cout << "Object with childID " << this->childID << " will be destroyed.\n";
 
         // set pointer to this object to NULL.
-        this->species_pointer->set_object_pointer(this->objectID, NULL);
+        this->species_pointer->set_object_pointer(this->childID, NULL);
     }
 
     void Object::render()
@@ -1182,11 +1182,11 @@ namespace model
     void Object::switch_to_new_species(model::Species *new_species_pointer)
     {
         // set pointer to this object to NULL.
-        this->species_pointer->set_object_pointer(this->objectID, NULL);
+        this->species_pointer->set_object_pointer(this->childID, NULL);
 
         this->species_pointer = new_species_pointer;
 
-        // get objectID from the Species and set pointer to this object.
+        // get childID from the Species and set pointer to this object.
         this->bind_to_species();
     }
 }
