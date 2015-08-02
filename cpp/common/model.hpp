@@ -77,13 +77,13 @@ namespace model
             // destructor.
             ~Shader();
 
+            // this method renders all textures using this shader.
+            void render();
+
             // this method sets pointer to this shader to NULL, sets `world_pointer` according to the input, and requests a new `shaderID` from the new world.
             void switch_to_new_world(model::World *new_world_pointer);
 
         private:
-            // this method renders all textures using this shader.
-            void render();
-
             // this method sets a texture pointer.
             void set_texture_pointer(GLuint textureID, void* texture_pointer);
 
@@ -134,13 +134,13 @@ namespace model
             // destructor.
             ~Texture();
 
+            // this method renders all species using this texture.
+            void render();
+
             // this method sets pointer to this shader to NULL, sets `shader_pointer` according to the input, and requests a new `textureID` from the new shader.
             void switch_texture_to_new_shader(model::Shader *new_shader_pointer);
 
         private:
-            // this method renders all species using this texture.
-            void render();
-
             // this method sets a species pointer.
             void set_species_pointer(GLuint speciesID, void* species_pointer);
 
@@ -262,11 +262,11 @@ namespace model
             // destructor.
             ~Species();
 
-            // this method sets pointer to this species to NULL, sets `texture_pointer` according to the input, and requests a new `speciesID` from the new texture.
-            void switch_to_new_texture(model::Texture *new_texture_pointer);
-
             // this method renders all objects of this species.
             void render();
+
+            // this method sets pointer to this species to NULL, sets `texture_pointer` according to the input, and requests a new `speciesID` from the new texture.
+            void switch_to_new_texture(model::Texture *new_texture_pointer);
 
             // this method sets a object pointer.
             void set_object_pointer(GLuint objectID, void* object_pointer);

@@ -309,6 +309,22 @@ namespace model
             }
         }
 
+    // template<typename T1>
+    template<class T1>
+        void render_children(std::vector<void*> &child_pointer_vector)
+        {
+            for (GLuint child_i = 0; child_i < child_pointer_vector.size(); child_i++)
+            {
+                T1 child_pointer;
+                child_pointer = static_cast<T1>(child_pointer_vector[child_i]);
+
+                if (child_pointer != NULL)
+                {
+                    child_pointer->render();
+                }
+            }
+        }
+
     World::World()
     {
         // constructor.
@@ -328,17 +344,8 @@ namespace model
     {
         this->compute_matrices_from_inputs();
 
-        // this method renders the world by calling `render()` methods of each shader.
-        for (GLuint shader_i = 0; shader_i < this->shader_pointer_vector.size(); shader_i++)
-        {
-            model::Shader *shader_pointer;
-            shader_pointer = static_cast<model::Shader*>(this->shader_pointer_vector[shader_i]);
-
-            if (shader_pointer != NULL)
-            {
-                shader_pointer->render();
-            }
-        }
+        // render World by calling `render()` function of each Shader.
+        render_children<model::Shader*>(this->shader_pointer_vector);
     }
 
     void World::set_shader_pointer(GLuint shaderID, void* shader_pointer)
@@ -625,17 +632,8 @@ namespace model
 
         glUniformMatrix4fv(this->ViewMatrixID, 1, GL_FALSE, &ViewMatrix[0][0]); // This one doesn't change between objects, so this can be done once for all objects that use "programID"
 
-        // this method renders the shader by calling `render()` methods of each texture.
-        for (GLuint texture_i = 0; texture_i < this->texture_pointer_vector.size(); texture_i++)
-        {
-            model::Texture *texture_pointer;
-            texture_pointer = static_cast<model::Texture*>(this->texture_pointer_vector[texture_i]);
-
-            if (texture_pointer != NULL)
-            {
-                texture_pointer->render();
-            }
-        }
+        // render Shader by calling `render()` function of each Texture.
+        render_children<model::Texture*>(this->texture_pointer_vector);
     }
 
     void Shader::set_texture_pointer(GLuint textureID, void* texture_pointer)
@@ -735,17 +733,8 @@ namespace model
         // Set our "myTextureSampler" sampler to user Texture Unit 0.
         glUniform1i(this->openGL_textureID, 0);
 
-        // this method renders the texture by calling `render()` methods of each species.
-        for (GLuint species_i = 0; species_i < this->species_pointer_vector.size(); species_i++)
-        {
-            model::Species *species_pointer;
-            species_pointer = static_cast<model::Species*>(this->species_pointer_vector[species_i]);
-
-            if (species_pointer != NULL)
-            {
-                species_pointer->render();
-            }
-        }
+        // render Texture by calling `render()` function of each Species.
+        render_children<model::Species*>(this->species_pointer_vector);
     }
 
     void Texture::set_species_pointer(GLuint speciesID, void* species_pointer)
@@ -1040,17 +1029,9 @@ namespace model
         // 3rd attribute buffer : normals.
         glEnableVertexAttribArray(this->vertexNormal_modelspaceID);
 
-        // this method renders the species by calling `render()` methods of each object.
-        for (GLuint object_i = 0; object_i < this->object_pointer_vector.size(); object_i++)
-        {
-            model::Object *object_pointer;
-            object_pointer = static_cast<model::Object*>(this->object_pointer_vector[object_i]);
+        // render Species by calling `render()` function of each Object.
+        render_children<model::Object*>(this->object_pointer_vector);
 
-            if (object_pointer != NULL)
-            {
-                object_pointer->render();
-            }
-        }
         glDisableVertexAttribArray(this->vertexPosition_modelspaceID);
         glDisableVertexAttribArray(this->vertexUVID);
         glDisableVertexAttribArray(this->vertexNormal_modelspaceID);
