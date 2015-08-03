@@ -173,7 +173,9 @@ namespace model
             GLuint openGL_textureID;               // texture ID, returned by `glGetUniformLocation(programID, "myTextureSampler");`.
 
             std::vector<void*> species_pointer_vector;
+            std::vector<void*> font_pointer_vector;
             std::queue<GLuint> free_speciesID_queue;
+            std::queue<GLuint> free_fontID_queue;
 
             std::string texture_file_format;       // type of the model file, eg. `"bmp"`.
             std::string texture_filename;          // filename of the model file.

@@ -732,8 +732,9 @@ namespace model
         // Set our "myTextureSampler" sampler to user Texture Unit 0.
         glUniform1i(this->openGL_textureID, 0);
 
-        // render Texture by calling `render()` function of each Species.
+        // render Texture by calling `render()` function of each Species and of each Font.
         render_children<model::Species*>(this->species_pointer_vector);
+        render_children<model::Font*>(this->font_pointer_vector);
     }
 
     void Texture::set_species_pointer(GLuint childID, void* parent_pointer)
@@ -1034,6 +1035,18 @@ namespace model
     void Species::bind_to_new_parent(model::Texture *new_texture_pointer)
     {
         model::bind_child_to_new_parent<model::Species*, model::Texture*>(this, new_texture_pointer, this->parent_pointer->species_pointer_vector, this->parent_pointer->free_speciesID_queue);
+    }
+
+    Font::Font(FontStruct font_struct)
+    {
+    }
+
+    Font::~Font()
+    {
+    }
+
+    void Font::render()
+    {
     }
 
     void Object::bind_to_parent()
