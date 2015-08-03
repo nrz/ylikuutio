@@ -371,8 +371,8 @@ namespace model
             const char *char_model_filename;
             const char *char_color_channel;
 
-            std::vector<void*> object_pointer_vector;
-            std::queue<GLuint> free_objectID_queue;
+            std::vector<void*> glyph_pointer_vector;
+            std::queue<GLuint> free_glyphID_queue;
     };
 
     class Glyph

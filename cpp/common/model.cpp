@@ -1014,14 +1014,39 @@ namespace model
 
     Font::Font(FontStruct font_struct)
     {
+        // constructor.
     }
 
     Font::~Font()
     {
+        // destructor.
     }
 
     void Font::render()
     {
+        // render Font by calling `render()` function of each Glyph.
+        render_children<model::Glyph*>(this->glyph_pointer_vector);
+    }
+
+    void Font::set_glyph_pointer(GLuint childID, void* parent_pointer)
+    {
+        set_child_pointer(childID, parent_pointer, this->glyph_pointer_vector, this->free_glyphID_queue);
+    }
+
+    Glyph::Glyph(GlyphStruct glyph_struct)
+    {
+        // constructor.
+    }
+
+    Glyph::~Glyph()
+    {
+        // destructor.
+    }
+
+    void Glyph::render()
+    {
+        // render Glyph by calling `render()` function of each Object.
+        render_children<model::Object*>(this->object_pointer_vector);
     }
 
     void Object::bind_to_parent()
