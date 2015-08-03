@@ -78,7 +78,7 @@ namespace model
             ~Shader();
 
             // this method sets pointer to this shader to NULL, sets `parent_pointer` according to the input, and requests a new `childID` from the new world.
-            void switch_to_new_world(model::World *new_world_pointer);
+            void bind_to_new_parent(model::World *new_world_pointer);
 
             friend class World;
             friend class Texture;
@@ -281,7 +281,7 @@ namespace model
             ~Species();
 
             // this method sets pointer to this species to NULL, sets `parent_pointer` according to the input, and requests a new `childID` from the new texture.
-            void switch_to_new_texture(model::Texture *new_texture_pointer);
+            void bind_to_new_parent(model::Texture *new_texture_pointer);
 
             // this method sets a object pointer.
             void set_object_pointer(GLuint childID, void* parent_pointer);
@@ -367,7 +367,7 @@ namespace model
             GLuint get_glyphID();
 
             // this method sets pointer to this species to NULL, sets `parent_pointer` according to the input, and requests a new `childID` from the new texture.
-            void switch_to_new_texture(model::Texture *new_texture_pointer);
+            void bind_to_new_parent(model::Texture *new_texture_pointer);
 
             std::vector<ObjectStruct> object_vector; // vector of individual objects of this species.
             glm::vec3 lightPos;                      // light position.
@@ -471,7 +471,7 @@ namespace model
             ~Object();
 
             // this method sets pointer to this object to NULL, sets `parent_pointer` according to the input, and requests a new `childID` from the new species.
-            void switch_to_new_species(model::Species *new_species_pointer);
+            void bind_to_new_parent(model::Species *new_species_pointer);
 
             template<class T1>
                 friend void render_children(std::vector<void*> &child_pointer_vector);

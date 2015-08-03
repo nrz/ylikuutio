@@ -392,26 +392,26 @@ int main(void)
         if (does_suzanne_species_exist && does_suzanne_species_have_uvmap_texture && (glfwGetKey(window, GLFW_KEY_G) == GLFW_PRESS))
         {
             // switch to grass texture.
-            suzanne_species->switch_to_new_texture(my_grass_texture);
+            suzanne_species->bind_to_new_parent(my_grass_texture);
             does_suzanne_species_have_uvmap_texture = false;
         }
         else if (does_suzanne_species_exist && !does_suzanne_species_have_uvmap_texture && (glfwGetKey(window, GLFW_KEY_U) == GLFW_PRESS))
         {
             // switch to uvmap texture.
-            suzanne_species->switch_to_new_texture(my_uvmap_texture);
+            suzanne_species->bind_to_new_parent(my_uvmap_texture);
             does_suzanne_species_have_uvmap_texture = true;
         }
 
         if (does_suzanne_species_exist && has_suzanne_2_transformed_into_terrain && (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS))
         {
             // switch to suzanne species.
-            suzanne2->switch_to_new_species(suzanne_species);
+            suzanne2->bind_to_new_parent(suzanne_species);
             has_suzanne_2_transformed_into_terrain = false;
         }
         else if (does_suzanne_species_exist && !has_suzanne_2_transformed_into_terrain && (glfwGetKey(window, GLFW_KEY_T) == GLFW_PRESS))
         {
             // switch to terrain species.
-            suzanne2->switch_to_new_species(terrain_species);
+            suzanne2->bind_to_new_parent(terrain_species);
             has_suzanne_2_transformed_into_terrain = true;
         }
 
