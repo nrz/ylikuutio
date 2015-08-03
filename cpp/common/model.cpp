@@ -1019,6 +1019,9 @@ namespace model
     Font::Font(FontStruct font_struct)
     {
         // constructor.
+        //
+        // Font constructor also creates each Glyph and binds them to the Font.
+        // TODO: implement the constructor!
     }
 
     Font::~Font()
