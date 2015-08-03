@@ -44,6 +44,9 @@ namespace model
             // this method renders the entire world, one shader at a time.
             void render();
 
+            friend class Shader;
+            friend class Species;
+
         private:
             // this method sets a shader pointer.
             void set_shader_pointer(GLuint childID, void* shader_pointer);
@@ -63,9 +66,6 @@ namespace model
 
             std::vector<void*> shader_pointer_vector;
             std::queue<GLuint> free_shaderID_queue;
-
-            friend class Shader;
-            friend class Species;
     };
 
     class Shader
@@ -82,6 +82,11 @@ namespace model
 
             // this method sets pointer to this shader to NULL, sets `world_pointer` according to the input, and requests a new `childID` from the new world.
             void switch_to_new_world(model::World *new_world_pointer);
+
+            friend class World;
+            friend class Texture;
+            friend class Species;
+            friend class Object;
 
         private:
             // this method sets a texture pointer.
@@ -118,11 +123,6 @@ namespace model
 
             const char *char_vertex_shader;
             const char *char_fragment_shader;
-
-            friend class World;
-            friend class Texture;
-            friend class Species;
-            friend class Object;
     };
 
     class Texture
@@ -139,6 +139,10 @@ namespace model
 
             // this method sets pointer to this shader to NULL, sets `shader_pointer` according to the input, and requests a new `childID` from the new shader.
             void switch_texture_to_new_shader(model::Shader *new_shader_pointer);
+
+            friend class Shader;
+            friend class Species;
+            friend class Object;
 
         private:
             // this method sets a species pointer.
@@ -176,10 +180,6 @@ namespace model
             GLuint childID;                      // texture ID, returned by `Shader::get_textureID`.
             const char *char_texture_file_format;
             const char *char_texture_filename;
-
-            friend class Shader;
-            friend class Species;
-            friend class Object;
     };
 
     class Graph
@@ -190,6 +190,8 @@ namespace model
 
             // destructor.
             ~Graph();
+
+            friend class Node;
 
         private:
             // this method sets a node pointer.
@@ -203,8 +205,6 @@ namespace model
 
             std::vector<void*> node_pointer_vector;
             std::queue<GLuint> free_nodeID_queue;
-
-            friend class Node;
     };
 
     // `Node` is not a subclass of `Graph` because if the graph splits, node may be transferred to an another graph.
@@ -218,6 +218,8 @@ namespace model
 
             // destructor.
             ~Node();
+
+            friend class Graph;
 
         private:
             // this method creates a bidirectional link.
@@ -249,8 +251,6 @@ namespace model
             void delete_unidirectional_link(GLuint nodeID);
 
             glm::vec3 coordinate_vector;
-
-            friend class Graph;
     };
 
     class Species
