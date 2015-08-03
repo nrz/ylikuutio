@@ -595,6 +595,7 @@ namespace model
         // For the next frame, the "last time" will be "now"
         lastTime = currentTime;
     }
+
     void Shader::bind_to_parent()
     {
         model::bind_child_to_parent<model::Shader*>(this, this->parent_pointer->shader_pointer_vector, this->parent_pointer->free_shaderID_queue);
