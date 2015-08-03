@@ -1020,6 +1020,11 @@ namespace model
     Font::~Font()
     {
         // destructor.
+        std::cout << "This font will be destroyed.\n";
+
+        // destroy all glyphs of this font.
+        std::cout << "All glyphs of this font will be destroyed.\n";
+        delete_children<model::Glyph*>(this->glyph_pointer_vector);
     }
 
     void Font::render()
