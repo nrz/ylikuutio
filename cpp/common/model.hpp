@@ -113,7 +113,7 @@ namespace model
             GLuint ViewMatrixID;
             GLuint ModelMatrixID;
 
-            void bind_to_world();
+            void bind_to_parent();
 
             void* world_species_pointer;          // pointer to world species (used in collision detection).
 
@@ -173,7 +173,7 @@ namespace model
 
             model::Shader *parent_pointer;         // pointer to the shader.
 
-            void bind_to_shader();
+            void bind_to_parent();
 
             void* world_species_pointer;           // pointer to world species (used in collision detection).
 
@@ -323,7 +323,7 @@ namespace model
                 friend void bind_to_parent(T1 child_pointer, std::vector<void*> &child_pointer_vector, std::queue<GLuint> &free_childID_queue);
 
         private:
-            void bind_to_texture();
+            void bind_to_parent();
 
             // this method renders all objects of this species.
             void render();
@@ -376,7 +376,7 @@ namespace model
                 friend void bind_to_parent(T1 child_pointer, std::vector<void*> &child_pointer_vector, std::queue<GLuint> &free_childID_queue);
 
         private:
-            void bind_to_texture();
+            void bind_to_parent();
 
             // this method renders all objects of this species.
             void render();
@@ -441,7 +441,7 @@ namespace model
                 friend void bind_to_parent(T1 child_pointer, std::vector<void*> &child_pointer_vector, std::queue<GLuint> &free_childID_queue);
 
         private:
-            void bind_to_font();
+            void bind_to_parent();
 
             // this method renders all objects of this species.
             void render();
@@ -471,7 +471,7 @@ namespace model
                 friend void bind_to_parent(T1 child_pointer, std::vector<void*> &child_pointer_vector, std::queue<GLuint> &free_childID_queue);
 
         private:
-            void bind_to_species();
+            void bind_to_parent();
 
             // this method renders this object.
             void render();

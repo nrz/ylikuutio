@@ -585,7 +585,7 @@ namespace model
         // For the next frame, the "last time" will be "now"
         lastTime = currentTime;
     }
-    void Shader::bind_to_world()
+    void Shader::bind_to_parent()
     {
         model::bind_to_parent<model::Shader*>(this, this->parent_pointer->shader_pointer_vector, this->parent_pointer->free_shaderID_queue);
     }
@@ -602,7 +602,7 @@ namespace model
         this->parent_pointer        = static_cast<model::World*>(shader_struct.parent_pointer);
 
         // get childID from the World and set pointer to this shader.
-        this->bind_to_world();
+        this->bind_to_parent();
 
         // Create and compile our GLSL program from the shaders.
         this->programID = LoadShaders(this->char_vertex_shader, this->char_fragment_shader);
@@ -662,7 +662,7 @@ namespace model
         this->parent_pointer = new_world_pointer;
 
         // get childID from the World and set pointer to this shader.
-        this->bind_to_world();
+        this->bind_to_parent();
     }
 
     void Shader::set_world_species_pointer(void* world_species_pointer)
@@ -671,7 +671,7 @@ namespace model
         this->parent_pointer->set_world_species_pointer(this->world_species_pointer);
     }
 
-    void Texture::bind_to_shader()
+    void Texture::bind_to_parent()
     {
         model::bind_to_parent<model::Texture*>(this, this->parent_pointer->texture_pointer_vector, this->parent_pointer->free_textureID_queue);
     }
@@ -688,7 +688,7 @@ namespace model
         this->char_texture_filename    = this->texture_filename.c_str();
 
         // get childID from the Shader and set pointer to this texture.
-        this->bind_to_shader();
+        this->bind_to_parent();
 
         // Load the texture.
         if ((strcmp(this->char_texture_file_format, "bmp") == 0) || (strcmp(this->char_texture_file_format, "BMP") == 0))
@@ -759,7 +759,7 @@ namespace model
         this->parent_pointer = new_shader_pointer;
 
         // get childID from the Shader and set pointer to this texture.
-        this->bind_to_shader();
+        this->bind_to_parent();
     }
 
     void Texture::set_world_species_pointer(void* world_species_pointer)
@@ -893,7 +893,7 @@ namespace model
         this->parent_pointer->set_node_pointer(this->nodeID, this);
     }
 
-    void Species::bind_to_texture()
+    void Species::bind_to_parent()
     {
         model::bind_to_parent<model::Species*>(this, this->parent_pointer->species_pointer_vector, this->parent_pointer->free_speciesID_queue);
     }
@@ -913,7 +913,7 @@ namespace model
         this->char_color_channel     = this->color_channel.c_str();
 
         // get childID from the Texture and set pointer to this species.
-        this->bind_to_texture();
+        this->bind_to_parent();
 
         // Get a handle for our buffers.
         this->vertexPosition_modelspaceID = glGetAttribLocation(this->parent_pointer->parent_pointer->programID, "vertexPosition_modelspace");
@@ -1055,10 +1055,10 @@ namespace model
         this->parent_pointer = new_texture_pointer;
 
         // get childID from the Texture and set pointer to this species.
-        this->bind_to_texture();
+        this->bind_to_parent();
     }
 
-    void Object::bind_to_species()
+    void Object::bind_to_parent()
     {
         model::bind_to_parent<model::Object*>(this, this->parent_pointer->object_pointer_vector, this->parent_pointer->free_objectID_queue);
     }
@@ -1075,7 +1075,7 @@ namespace model
         this->parent_pointer       = static_cast<model::Species*>(object_struct.parent_pointer);
 
         // get childID from the Species and set pointer to this object.
-        this->bind_to_species();
+        this->bind_to_parent();
 
         bool model_loading_result = false;
     }
@@ -1178,6 +1178,6 @@ namespace model
         this->parent_pointer = new_species_pointer;
 
         // get childID from the Species and set pointer to this object.
-        this->bind_to_species();
+        this->bind_to_parent();
     }
 }
