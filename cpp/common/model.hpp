@@ -54,9 +54,6 @@ namespace model
             // this method gets a shader pointer.
             void* get_shader_pointer(GLuint childID);
 
-            // this method gets a shader ID and removes it from the `free_shaderID_queue` if it was popped from the queue.
-            GLuint get_shaderID();
-
             // this method sets a world species pointer.
             void set_world_species_pointer(void* world_species_pointer);
 
@@ -100,9 +97,6 @@ namespace model
 
             // this method gets a texture pointer.
             void* get_texture_pointer(GLuint childID);
-
-            // this method gets a texture ID and removes it from the `free_textureID_queue` if it was popped from the queue.
-            GLuint get_textureID();
 
             // this method sets a world species pointer.
             void set_world_species_pointer(void* world_species_pointer);
@@ -165,12 +159,6 @@ namespace model
 
             // this method gets a species pointer.
             void* get_species_pointer(GLuint childID);
-
-            // this method gets a species ID and removes it from the `free_speciesID_queue` if it was popped from the queue.
-            GLuint get_speciesID();
-
-            // this method gets a font ID and removes it from the `free_fontID_queue` if it was popped from the queue.
-            GLuint get_fontID();
 
             // this method sets a world species pointer.
             void set_world_species_pointer(void* world_species_pointer);
@@ -362,9 +350,6 @@ namespace model
 
             // this method gets a glyph pointer.
             void* get_glyph_pointer(GLuint childID);
-
-            // this method gets a object ID and removes it from the `free_objectID_queue` if it was popped from the queue.
-            GLuint get_glyphID();
 
             // this method sets pointer to this species to NULL, sets `parent_pointer` according to the input, and requests a new `childID` from the new texture.
             void bind_to_new_parent(model::Texture *new_texture_pointer);
