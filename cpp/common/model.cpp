@@ -375,11 +375,6 @@ namespace model
         set_child_pointer(childID, parent_pointer, this->shader_pointer_vector, this->free_shaderID_queue);
     }
 
-    void* World::get_shader_pointer(GLuint childID)
-    {
-        return this->shader_pointer_vector[childID];
-    }
-
     void World::set_world_species_pointer(void* world_species_pointer)
     {
         this->world_species_pointer = world_species_pointer;
@@ -655,11 +650,6 @@ namespace model
         set_child_pointer(childID, parent_pointer, this->texture_pointer_vector, this->free_textureID_queue);
     }
 
-    void* Shader::get_texture_pointer(GLuint childID)
-    {
-        return this->texture_pointer_vector[childID];
-    }
-
     void Shader::bind_to_new_parent(model::World *new_world_pointer)
     {
         model::bind_child_to_new_parent<model::Shader*, model::World*>(this, new_world_pointer, this->parent_pointer->shader_pointer_vector, this->parent_pointer->free_shaderID_queue);
@@ -740,11 +730,6 @@ namespace model
     void Texture::set_species_pointer(GLuint childID, void* parent_pointer)
     {
         set_child_pointer(childID, parent_pointer, this->species_pointer_vector, this->free_speciesID_queue);
-    }
-
-    void* Texture::get_species_pointer(GLuint childID)
-    {
-        return this->species_pointer_vector[childID];
     }
 
     void Texture::bind_to_new_parent(model::Shader *new_shader_pointer)
@@ -1020,11 +1005,6 @@ namespace model
     void Species::set_object_pointer(GLuint childID, void* parent_pointer)
     {
         set_child_pointer(childID, parent_pointer, this->object_pointer_vector, this->free_objectID_queue);
-    }
-
-    void* Species::get_object_pointer(GLuint childID)
-    {
-        return this->object_pointer_vector[childID];
     }
 
     void Species::bind_to_new_parent(model::Texture *new_texture_pointer)
