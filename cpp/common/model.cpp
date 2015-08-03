@@ -708,6 +708,10 @@ namespace model
         std::cout << "All species of this texture will be destroyed.\n";
         model::delete_children<model::Species*>(this->species_pointer_vector);
 
+        // destroy all fonts of this texture.
+        std::cout << "All fonts of this texture will be destroyed.\n";
+        model::delete_children<model::Font*>(this->species_pointer_vector);
+
         glDeleteTextures(1, &this->texture);
 
         // set pointer to this texture to NULL.
