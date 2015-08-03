@@ -760,7 +760,7 @@ namespace model
         return get_childID(species_pointer_vector, free_speciesID_queue);
     }
 
-    void Texture::switch_texture_to_new_shader(model::Shader *new_shader_pointer)
+    void Texture::bind_to_new_parent(model::Shader *new_shader_pointer)
     {
         model::bind_child_to_new_parent<model::Texture*, model::Shader*>(this, new_shader_pointer, this->parent_pointer->texture_pointer_vector, this->parent_pointer->free_textureID_queue);
     }
@@ -872,7 +872,7 @@ namespace model
         static_cast<model::Node*>(this->parent_pointer->get_node_pointer(nodeID))->delete_unidirectional_link(this->nodeID);
     }
 
-    // Transfering node to a new graph is similar to `bind_to_new_parent`, `switch_texture_to_new_shader`, `bind_to_new_parent`,
+    // Transfering node to a new graph is similar to `bind_to_new_parent`, `bind_to_new_parent`, `bind_to_new_parent`,
     // but there is one important difference:
     // nodes have references (links) to other nodes, whereas shaders, species, and objects do not.
     // The easiest way would be to request new `nodeID` for each new node, and this will be probably be implemented first.
