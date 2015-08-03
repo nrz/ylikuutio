@@ -306,6 +306,21 @@ namespace model
             set_child_pointer(child_pointer->childID, child_pointer, child_pointer_vector, free_childID_queue);
         }
 
+    template <class T1, class T2>
+        void bind_child_to_new_parent(
+                T1 child_pointer,
+                T2 new_parent_pointer,
+                std::vector<void*> &old_child_pointer_vector,
+                std::queue<GLuint> &old_free_childID_queue)
+        {
+            // set pointer to this child to NULL in the old parent.
+            set_child_pointer(child_pointer->childID, NULL, old_child_pointer_vector, old_free_childID_queue);
+            // set the new parent pointer.
+            child_pointer->parent_pointer = new_parent_pointer;
+            // bind to the new parent.
+            child_pointer->bind_to_parent();
+        }
+
     // template<typename T1>
     template<class T1>
         void delete_children(std::vector<void*> &child_pointer_vector)
@@ -656,13 +671,7 @@ namespace model
 
     void Shader::switch_to_new_world(model::World *new_world_pointer)
     {
-        // set pointer to this shader to NULL.
-        this->parent_pointer->set_shader_pointer(this->childID, NULL);
-
-        this->parent_pointer = new_world_pointer;
-
-        // get childID from the World and set pointer to this shader.
-        this->bind_to_parent();
+        model::bind_child_to_new_parent<model::Shader*, model::World*>(this, new_world_pointer, this->parent_pointer->shader_pointer_vector, this->parent_pointer->free_shaderID_queue);
     }
 
     void Shader::set_world_species_pointer(void* world_species_pointer)
@@ -753,13 +762,7 @@ namespace model
 
     void Texture::switch_texture_to_new_shader(model::Shader *new_shader_pointer)
     {
-        // set pointer to this texture to NULL.
-        this->parent_pointer->set_texture_pointer(this->childID, NULL);
-
-        this->parent_pointer = new_shader_pointer;
-
-        // get childID from the Shader and set pointer to this texture.
-        this->bind_to_parent();
+        model::bind_child_to_new_parent<model::Texture*, model::Shader*>(this, new_shader_pointer, this->parent_pointer->texture_pointer_vector, this->parent_pointer->free_textureID_queue);
     }
 
     void Texture::set_world_species_pointer(void* world_species_pointer)
@@ -1049,13 +1052,7 @@ namespace model
 
     void Species::switch_to_new_texture(model::Texture *new_texture_pointer)
     {
-        // set pointer to this species to NULL.
-        this->parent_pointer->set_species_pointer(this->childID, NULL);
-
-        this->parent_pointer = new_texture_pointer;
-
-        // get childID from the Texture and set pointer to this species.
-        this->bind_to_parent();
+        model::bind_child_to_new_parent<model::Species*, model::Texture*>(this, new_texture_pointer, this->parent_pointer->species_pointer_vector, this->parent_pointer->free_speciesID_queue);
     }
 
     void Object::bind_to_parent()
