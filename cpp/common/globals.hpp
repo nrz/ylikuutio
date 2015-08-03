@@ -93,9 +93,9 @@ extern bool is_world_spherical;
 typedef struct
 {
 #ifdef __STRUCT_DEFAULT_VALUES_ARE_ACCEPTED
-    void *world_pointer = NULL;              // pointer to the world (draw list).
+    void *parent_pointer = NULL;              // pointer to the world (draw list).
 #else
-    void *world_pointer;                     // pointer to the world (draw list).
+    void *parent_pointer;                     // pointer to the world (draw list).
 #endif
     std::string vertex_shader;               // filename of vertex shader.
     std::string fragment_shader;             // filename of fragment shader.
@@ -106,15 +106,15 @@ typedef struct
 ShaderStruct x
 #else
 #define SHADERSTRUCT(x) \
-ShaderStruct x; x.world_pointer = NULL
+ShaderStruct x; x.parent_pointer = NULL
 #endif
 
 typedef struct
 {
 #ifdef __STRUCT_DEFAULT_VALUES_ARE_ACCEPTED
-    void *shader_pointer = NULL;             // pointer to the shader.
+    void *parent_pointer = NULL;             // pointer to the shader.
 #else
-    void *shader_pointer;                    // pointer to the shader.
+    void *parent_pointer;                    // pointer to the shader.
 #endif
     std::string texture_file_format;         // type of the texture file. supported file formats so far: `"bmp"`/`"BMP"`, `"dds"`/`"DDS"`.
     std::string texture_filename;            // filename of the model file.
@@ -126,16 +126,16 @@ typedef struct
 TextureStruct x
 #else
 #define TEXTURESTRUCT(x) \
-TextureStruct x; x.shader_pointer = NULL
+TextureStruct x; x.parent_pointer = NULL
 #endif
 
 typedef struct
 {
     GLuint nodeID;
 #ifdef __STRUCT_DEFAULT_VALUES_ARE_ACCEPTED
-    void *graph_pointer = NULL;
+    void *parent_pointer = NULL;
 #else
-    void *graph_pointer;
+    void *parent_pointer;
 #endif
     glm::vec3 coordinate_vector;
     std::vector<uint32_t> neighbor_nodeIDs;
@@ -146,17 +146,17 @@ typedef struct
 NodeStruct x
 #else
 #define NODESTRUCT(x) \
-NodeStruct x; x.graph_pointer = NULL
+NodeStruct x; x.parent_pointer = NULL
 #endif
 
 typedef struct
 {
 #ifdef __STRUCT_DEFAULT_VALUES_ARE_ACCEPTED
-    void *species_pointer = NULL;                                  // pointer to the species.
+    void *parent_pointer = NULL;                                  // pointer to the species.
     glm::vec3 original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f); // original scale vector.
     GLfloat rotate_angle = NAN;                                    // rotate angle.
 #else
-    void *species_pointer;           // pointer to the species.
+    void *parent_pointer;           // pointer to the species.
     glm::vec3 original_scale_vector; // original scale vector.
     GLfloat rotate_angle;            // rotate angle.
 #endif
@@ -172,18 +172,18 @@ typedef struct
 ObjectStruct x
 #else
 #define OBJECTSTRUCT(x) \
-ObjectStruct x; x.species_pointer = NULL; x.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f); x.rotate_angle = NAN
+ObjectStruct x; x.parent_pointer = NULL; x.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f); x.rotate_angle = NAN
 #endif
 
 typedef struct
 {
     // used for all files (for all species).
 #ifdef __STRUCT_DEFAULT_VALUES_ARE_ACCEPTED
-    void *texture_pointer = NULL;            // pointer to the texture object.
+    void *parent_pointer = NULL;            // pointer to the texture object.
     bool is_world = false;                   // worlds currently do not rotate nor translate.
     double world_radius = NAN;               // radius of sea level in meters. used only for worlds.
 #else
-    void *texture_pointer;                   // pointer to the texture object.
+    void *parent_pointer;                   // pointer to the texture object.
     bool is_world;                           // worlds currently do not rotate nor translate.
     double world_radius;                     // radius of sea level in meters. used only for worlds.
 #endif
@@ -206,16 +206,16 @@ typedef struct
 SpeciesStruct x
 #else
 #define SPECIESSTRUCT(x) \
-SpeciesStruct x; x.texture_pointer = NULL; x.is_world = false; x.world_radius = NAN
+SpeciesStruct x; x.parent_pointer = NULL; x.is_world = false; x.world_radius = NAN
 #endif
 
 typedef struct
 {
     // used for all files (for all font).
 #ifdef __STRUCT_DEFAULT_VALUES_ARE_ACCEPTED
-    void *texture_pointer = NULL;            // pointer to the texture object.
+    void *parent_pointer = NULL;            // pointer to the texture object.
 #else
-    void *texture_pointer;                   // pointer to the texture object.
+    void *parent_pointer;                   // pointer to the texture object.
 #endif
     std::string model_file_format;           // type of the model file. supported file formats so far: `"bmp"`/`"BMP"`, `"obj"`/`"OBJ"`.
                                              // TODO: add support for `"SRTM"`.
@@ -233,16 +233,16 @@ typedef struct
 FontStruct x
 #else
 #define FONTSTRUCT(x) \
-FontStruct x; x.texture_pointer = NULL
+FontStruct x; x.parent_pointer = NULL
 #endif
 
 typedef struct
 {
     // used for all files (for all glyph).
 #ifdef __STRUCT_DEFAULT_VALUES_ARE_ACCEPTED
-    void *font_pointer = NULL;               // pointer to the font object.
+    void *parent_pointer = NULL;               // pointer to the font object.
 #else
-    void *font_pointer;                      // pointer to the font object.
+    void *parent_pointer;                      // pointer to the font object.
 #endif
     std::vector<ObjectStruct> object_vector; // vector of individual objects of this glyph.
 } GlyphStruct;
@@ -252,7 +252,7 @@ typedef struct
 GlyphStruct x
 #else
 #define GLYPHSTRUCT(x) \
-GlyphStruct x; x.font_pointer = NULL
+GlyphStruct x; x.parent_pointer = NULL
 #endif
 
 typedef struct

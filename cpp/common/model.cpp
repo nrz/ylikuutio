@@ -58,10 +58,10 @@ namespace model
     GLfloat mouseSpeed = 0.005f;
 
     // `World`, `Shader`, `Texture`, `Species`, `Object`.
-    // `World` must be created before any `Shader`. `world_pointer` must be given to each `Shader`.
-    // `Shader` must be created before any `Texture`. `shader_pointer` must be given to each `Texture`.
-    // `Texture` must be created before any `Species`. `texture_pointer` must be given to each `Species`.
-    // `Species` must be create before any `Object` of that `Species`. `species_pointer` must be given to each `Object` of the `Species`.
+    // `World` must be created before any `Shader`. `parent_pointer` must be given to each `Shader`.
+    // `Shader` must be created before any `Texture`. `parent_pointer` must be given to each `Texture`.
+    // `Texture` must be created before any `Species`. `parent_pointer` must be given to each `Species`.
+    // `Species` must be create before any `Object` of that `Species`. `parent_pointer` must be given to each `Object` of the `Species`.
     //
     //
     // Hierarchy for regular objects (including world species):
@@ -345,9 +345,9 @@ namespace model
         render_children<model::Shader*>(this->shader_pointer_vector);
     }
 
-    void World::set_shader_pointer(GLuint childID, void* shader_pointer)
+    void World::set_shader_pointer(GLuint childID, void* parent_pointer)
     {
-        set_child_pointer(childID, shader_pointer, this->shader_pointer_vector, this->free_shaderID_queue);
+        set_child_pointer(childID, parent_pointer, this->shader_pointer_vector, this->free_shaderID_queue);
     }
 
     void* World::get_shader_pointer(GLuint childID)
@@ -578,10 +578,10 @@ namespace model
     void Shader::bind_to_world()
     {
         // get childID from the World.
-        this->childID = this->world_pointer->get_shaderID();
+        this->childID = this->parent_pointer->get_shaderID();
 
         // set pointer to this shader.
-        this->world_pointer->set_shader_pointer(this->childID, this);
+        this->parent_pointer->set_shader_pointer(this->childID, this);
     }
 
     Shader::Shader(ShaderStruct shader_struct)
@@ -593,7 +593,7 @@ namespace model
 
         this->char_vertex_shader   = this->vertex_shader.c_str();
         this->char_fragment_shader = this->fragment_shader.c_str();
-        this->world_pointer        = static_cast<model::World*>(shader_struct.world_pointer);
+        this->parent_pointer        = static_cast<model::World*>(shader_struct.parent_pointer);
 
         // get childID from the World and set pointer to this shader.
         this->bind_to_world();
@@ -617,7 +617,7 @@ namespace model
         delete_children<model::Texture*>(this->texture_pointer_vector);
 
         // set pointer to this shader to NULL.
-        this->world_pointer->set_shader_pointer(this->childID, NULL);
+        this->parent_pointer->set_shader_pointer(this->childID, NULL);
 
         glDeleteProgram(this->programID);
     }
@@ -633,9 +633,9 @@ namespace model
         render_children<model::Texture*>(this->texture_pointer_vector);
     }
 
-    void Shader::set_texture_pointer(GLuint childID, void* texture_pointer)
+    void Shader::set_texture_pointer(GLuint childID, void* parent_pointer)
     {
-        set_child_pointer(childID, texture_pointer, this->texture_pointer_vector, this->free_textureID_queue);
+        set_child_pointer(childID, parent_pointer, this->texture_pointer_vector, this->free_textureID_queue);
     }
 
     void* Shader::get_texture_pointer(GLuint childID)
@@ -651,9 +651,9 @@ namespace model
     void Shader::switch_to_new_world(model::World *new_world_pointer)
     {
         // set pointer to this shader to NULL.
-        this->world_pointer->set_shader_pointer(this->childID, NULL);
+        this->parent_pointer->set_shader_pointer(this->childID, NULL);
 
-        this->world_pointer = new_world_pointer;
+        this->parent_pointer = new_world_pointer;
 
         // get childID from the World and set pointer to this shader.
         this->bind_to_world();
@@ -662,22 +662,22 @@ namespace model
     void Shader::set_world_species_pointer(void* world_species_pointer)
     {
         this->world_species_pointer = world_species_pointer;
-        this->world_pointer->set_world_species_pointer(this->world_species_pointer);
+        this->parent_pointer->set_world_species_pointer(this->world_species_pointer);
     }
 
     void Texture::bind_to_shader()
     {
         // get childID from the Shader.
-        this->childID = this->shader_pointer->get_textureID();
+        this->childID = this->parent_pointer->get_textureID();
 
         // set pointer to this texture.
-        this->shader_pointer->set_texture_pointer(this->childID, this);
+        this->parent_pointer->set_texture_pointer(this->childID, this);
     }
 
     Texture::Texture(TextureStruct texture_struct)
     {
         // constructor.
-        this->shader_pointer = static_cast<model::Shader*>(texture_struct.shader_pointer);
+        this->parent_pointer = static_cast<model::Shader*>(texture_struct.parent_pointer);
 
         this->texture_file_format = texture_struct.texture_file_format;
         this->texture_filename    = texture_struct.texture_filename;
@@ -704,7 +704,7 @@ namespace model
         }
 
         // Get a handle for our "myTextureSampler" uniform.
-        this->openGL_textureID = glGetUniformLocation(this->shader_pointer->programID, "myTextureSampler");
+        this->openGL_textureID = glGetUniformLocation(this->parent_pointer->programID, "myTextureSampler");
     }
 
     Texture::~Texture()
@@ -719,7 +719,7 @@ namespace model
         glDeleteTextures(1, &this->texture);
 
         // set pointer to this texture to NULL.
-        this->shader_pointer->set_texture_pointer(this->childID, NULL);
+        this->parent_pointer->set_texture_pointer(this->childID, NULL);
     }
 
     void Texture::render()
@@ -734,9 +734,9 @@ namespace model
         render_children<model::Species*>(this->species_pointer_vector);
     }
 
-    void Texture::set_species_pointer(GLuint childID, void* species_pointer)
+    void Texture::set_species_pointer(GLuint childID, void* parent_pointer)
     {
-        set_child_pointer(childID, species_pointer, this->species_pointer_vector, this->free_speciesID_queue);
+        set_child_pointer(childID, parent_pointer, this->species_pointer_vector, this->free_speciesID_queue);
     }
 
     void* Texture::get_species_pointer(GLuint childID)
@@ -752,9 +752,9 @@ namespace model
     void Texture::switch_texture_to_new_shader(model::Shader *new_shader_pointer)
     {
         // set pointer to this texture to NULL.
-        this->shader_pointer->set_texture_pointer(this->childID, NULL);
+        this->parent_pointer->set_texture_pointer(this->childID, NULL);
 
-        this->shader_pointer = new_shader_pointer;
+        this->parent_pointer = new_shader_pointer;
 
         // get childID from the Shader and set pointer to this texture.
         this->bind_to_shader();
@@ -763,7 +763,7 @@ namespace model
     void Texture::set_world_species_pointer(void* world_species_pointer)
     {
         this->world_species_pointer = world_species_pointer;
-        this->shader_pointer->set_world_species_pointer(this->world_species_pointer);
+        this->parent_pointer->set_world_species_pointer(this->world_species_pointer);
     }
 
     Graph::Graph()
@@ -801,10 +801,10 @@ namespace model
         // constructor.
         this->nodeID = node_struct.nodeID;
         this->coordinate_vector = node_struct.coordinate_vector;
-        this->graph_pointer = static_cast<model::Graph*>(node_struct.graph_pointer);
+        this->parent_pointer = static_cast<model::Graph*>(node_struct.parent_pointer);
 
         // set pointer to this node.
-        this->graph_pointer->set_node_pointer(this->nodeID, this);
+        this->parent_pointer->set_node_pointer(this->nodeID, this);
 
         // create all bidirectional links between this node and neighbor nodes.
         for (GLuint link_i = 0; link_i < this->neighbor_nodeIDs.size(); link_i++)
@@ -825,7 +825,7 @@ namespace model
         }
 
         // set pointer to this node to NULL.
-        this->graph_pointer->set_node_pointer(this->nodeID, NULL);
+        this->parent_pointer->set_node_pointer(this->nodeID, NULL);
     }
 
     void Node::create_unidirectional_link(GLuint nodeID)
@@ -849,7 +849,7 @@ namespace model
         this->create_unidirectional_link(nodeID);
 
         // create a link from destination node to this node.
-        static_cast<model::Node*>(this->graph_pointer->get_node_pointer(nodeID))->create_unidirectional_link(this->nodeID);
+        static_cast<model::Node*>(this->parent_pointer->get_node_pointer(nodeID))->create_unidirectional_link(this->nodeID);
     }
 
     void Node::delete_unidirectional_link(GLuint nodeID)
@@ -864,7 +864,7 @@ namespace model
         this->delete_unidirectional_link(nodeID);
 
         // delete a link from destination node to this node.
-        static_cast<model::Node*>(this->graph_pointer->get_node_pointer(nodeID))->delete_unidirectional_link(this->nodeID);
+        static_cast<model::Node*>(this->parent_pointer->get_node_pointer(nodeID))->delete_unidirectional_link(this->nodeID);
     }
 
     // Transfering node to a new graph is similar to `switch_to_new_world`, `switch_texture_to_new_shader`, `switch_to_new_species`,
@@ -879,25 +879,25 @@ namespace model
     void Node::transfer_to_new_graph(model::Graph *new_graph_pointer)
     {
         // set pointer to this node to NULL.
-        this->graph_pointer->set_node_pointer(this->nodeID, NULL);
+        this->parent_pointer->set_node_pointer(this->nodeID, NULL);
 
         // set new graph pointer.
-        this->graph_pointer = new_graph_pointer;
+        this->parent_pointer = new_graph_pointer;
 
         // request a new nodeID.
-        this->nodeID = this->graph_pointer->get_nodeID();
+        this->nodeID = this->parent_pointer->get_nodeID();
 
         // set pointer to this node.
-        this->graph_pointer->set_node_pointer(this->nodeID, this);
+        this->parent_pointer->set_node_pointer(this->nodeID, this);
     }
 
     void Species::bind_to_texture()
     {
         // get childID from the Texture.
-        this->childID = this->texture_pointer->get_speciesID();
+        this->childID = this->parent_pointer->get_speciesID();
 
         // set pointer to this species.
-        this->texture_pointer->set_species_pointer(this->childID, this);
+        this->parent_pointer->set_species_pointer(this->childID, this);
     }
 
     Species::Species(SpeciesStruct species_struct)
@@ -908,7 +908,7 @@ namespace model
         this->model_filename    = species_struct.model_filename;
         this->color_channel     = species_struct.color_channel;
         this->lightPos          = species_struct.lightPos;
-        this->texture_pointer   = static_cast<model::Texture*>(species_struct.texture_pointer);
+        this->parent_pointer   = static_cast<model::Texture*>(species_struct.parent_pointer);
 
         this->char_model_file_format = this->model_file_format.c_str();
         this->char_model_filename    = this->model_filename.c_str();
@@ -918,9 +918,9 @@ namespace model
         this->bind_to_texture();
 
         // Get a handle for our buffers.
-        this->vertexPosition_modelspaceID = glGetAttribLocation(this->texture_pointer->shader_pointer->programID, "vertexPosition_modelspace");
-        this->vertexUVID = glGetAttribLocation(this->texture_pointer->shader_pointer->programID, "vertexUV");
-        this->vertexNormal_modelspaceID = glGetAttribLocation(this->texture_pointer->shader_pointer->programID, "vertexNormal_modelspace");
+        this->vertexPosition_modelspaceID = glGetAttribLocation(this->parent_pointer->parent_pointer->programID, "vertexPosition_modelspace");
+        this->vertexUVID = glGetAttribLocation(this->parent_pointer->parent_pointer->programID, "vertexUV");
+        this->vertexNormal_modelspaceID = glGetAttribLocation(this->parent_pointer->parent_pointer->programID, "vertexNormal_modelspace");
 
         bool model_loading_result;
 
@@ -980,14 +980,14 @@ namespace model
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, this->indices.size() * sizeof(GLuint), &this->indices[0] , GL_STATIC_DRAW);
 
         // Get a handle for our "LightPosition" uniform.
-        glUseProgram(this->texture_pointer->shader_pointer->programID);
-        this->lightID = glGetUniformLocation(this->texture_pointer->shader_pointer->programID, "LightPosition_worldspace");
+        glUseProgram(this->parent_pointer->parent_pointer->programID);
+        this->lightID = glGetUniformLocation(this->parent_pointer->parent_pointer->programID, "LightPosition_worldspace");
 
         if (this->is_world)
         {
             // set world species pointer so that it points to this species.
             // currently there can be only one world species (used in collision detection).
-            this->texture_pointer->shader_pointer->world_pointer->set_world_species_pointer(this);
+            this->parent_pointer->parent_pointer->parent_pointer->set_world_species_pointer(this);
         }
 
         // Compute the graph of this object type.
@@ -1009,7 +1009,7 @@ namespace model
         glDeleteBuffers(1, &this->elementbuffer);
 
         // set pointer to this species to NULL.
-        this->texture_pointer->set_species_pointer(this->childID, NULL);
+        this->parent_pointer->set_species_pointer(this->childID, NULL);
     }
 
     void Species::render()
@@ -1034,9 +1034,9 @@ namespace model
         glDisableVertexAttribArray(this->vertexNormal_modelspaceID);
     }
 
-    void Species::set_object_pointer(GLuint childID, void* object_pointer)
+    void Species::set_object_pointer(GLuint childID, void* parent_pointer)
     {
-        set_child_pointer(childID, object_pointer, this->object_pointer_vector, this->free_objectID_queue);
+        set_child_pointer(childID, parent_pointer, this->object_pointer_vector, this->free_objectID_queue);
     }
 
     void* Species::get_object_pointer(GLuint childID)
@@ -1052,9 +1052,9 @@ namespace model
     void Species::switch_to_new_texture(model::Texture *new_texture_pointer)
     {
         // set pointer to this species to NULL.
-        this->texture_pointer->set_species_pointer(this->childID, NULL);
+        this->parent_pointer->set_species_pointer(this->childID, NULL);
 
-        this->texture_pointer = new_texture_pointer;
+        this->parent_pointer = new_texture_pointer;
 
         // get childID from the Texture and set pointer to this species.
         this->bind_to_texture();
@@ -1063,10 +1063,10 @@ namespace model
     void Object::bind_to_species()
     {
         // get childID from the Species.
-        this->childID = this->species_pointer->get_objectID();
+        this->childID = this->parent_pointer->get_objectID();
 
         // set pointer to this object.
-        this->species_pointer->set_object_pointer(this->childID, this);
+        this->parent_pointer->set_object_pointer(this->childID, this);
     }
 
     Object::Object(ObjectStruct object_struct)
@@ -1078,7 +1078,7 @@ namespace model
         this->rotate_vector         = object_struct.rotate_vector;
         this->translate_vector      = object_struct.translate_vector;
         this->has_entered           = false;
-        this->species_pointer       = static_cast<model::Species*>(object_struct.species_pointer);
+        this->parent_pointer       = static_cast<model::Species*>(object_struct.parent_pointer);
 
         // get childID from the Species and set pointer to this object.
         this->bind_to_species();
@@ -1092,7 +1092,7 @@ namespace model
         std::cout << "Object with childID " << this->childID << " will be destroyed.\n";
 
         // set pointer to this object to NULL.
-        this->species_pointer->set_object_pointer(this->childID, NULL);
+        this->parent_pointer->set_object_pointer(this->childID, NULL);
     }
 
     void Object::render()
@@ -1128,13 +1128,13 @@ namespace model
 
         // Send our transformation to the currently bound shader,
         // in the "MVP" uniform.
-        glUniformMatrix4fv(this->species_pointer->texture_pointer->shader_pointer->MatrixID, 1, GL_FALSE, &this->MVP_matrix[0][0]);
-        glUniformMatrix4fv(this->species_pointer->texture_pointer->shader_pointer->ModelMatrixID, 1, GL_FALSE, &this->model_matrix[0][0]);
+        glUniformMatrix4fv(this->parent_pointer->parent_pointer->parent_pointer->MatrixID, 1, GL_FALSE, &this->MVP_matrix[0][0]);
+        glUniformMatrix4fv(this->parent_pointer->parent_pointer->parent_pointer->ModelMatrixID, 1, GL_FALSE, &this->model_matrix[0][0]);
 
         // 1st attribute buffer : vertices.
-        glBindBuffer(GL_ARRAY_BUFFER, this->species_pointer->vertexbuffer);
+        glBindBuffer(GL_ARRAY_BUFFER, this->parent_pointer->vertexbuffer);
         glVertexAttribPointer(
-                this->species_pointer->vertexPosition_modelspaceID, // The attribute we want to configure
+                this->parent_pointer->vertexPosition_modelspaceID, // The attribute we want to configure
                 3,                                                  // size
                 GL_FLOAT,                                           // type
                 GL_FALSE,                                           // normalized?
@@ -1143,9 +1143,9 @@ namespace model
                 );
 
         // 2nd attribute buffer : UVs.
-        glBindBuffer(GL_ARRAY_BUFFER, this->species_pointer->uvbuffer);
+        glBindBuffer(GL_ARRAY_BUFFER, this->parent_pointer->uvbuffer);
         glVertexAttribPointer(
-                this->species_pointer->vertexUVID, // The attribute we want to configure
+                this->parent_pointer->vertexUVID, // The attribute we want to configure
                 2,                                 // size : U+V => 2
                 GL_FLOAT,                          // type
                 GL_FALSE,                          // normalized?
@@ -1154,9 +1154,9 @@ namespace model
                 );
 
         // 3rd attribute buffer : normals.
-        glBindBuffer(GL_ARRAY_BUFFER, this->species_pointer->normalbuffer);
+        glBindBuffer(GL_ARRAY_BUFFER, this->parent_pointer->normalbuffer);
         glVertexAttribPointer(
-                this->species_pointer->vertexNormal_modelspaceID, // The attribute we want to configure
+                this->parent_pointer->vertexNormal_modelspaceID, // The attribute we want to configure
                 3,                                                // size
                 GL_FLOAT,                                         // type
                 GL_FALSE,                                         // normalized?
@@ -1165,12 +1165,12 @@ namespace model
                 );
 
         // Index buffer.
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->species_pointer->elementbuffer);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->parent_pointer->elementbuffer);
 
         // Draw the triangles!
         glDrawElements(
                 GL_TRIANGLES,                          // mode
-                this->species_pointer->indices.size(), // count
+                this->parent_pointer->indices.size(), // count
                 GL_UNSIGNED_INT,                       // type
                 (void*) 0                              // element array buffer offset
                 );
@@ -1179,9 +1179,9 @@ namespace model
     void Object::switch_to_new_species(model::Species *new_species_pointer)
     {
         // set pointer to this object to NULL.
-        this->species_pointer->set_object_pointer(this->childID, NULL);
+        this->parent_pointer->set_object_pointer(this->childID, NULL);
 
-        this->species_pointer = new_species_pointer;
+        this->parent_pointer = new_species_pointer;
 
         // get childID from the Species and set pointer to this object.
         this->bind_to_species();

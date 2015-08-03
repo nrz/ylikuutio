@@ -110,21 +110,21 @@ int main(void)
 
     // Create the shader, store it in 'my_shader`.
     SHADERSTRUCT(shader_struct);
-    shader_struct.world_pointer = my_world;
+    shader_struct.parent_pointer = my_world;
     shader_struct.vertex_shader = "StandardShading.vertexshader";
     shader_struct.fragment_shader = "StandardShading.fragmentshader";
     model::Shader *my_shader = new model::Shader(shader_struct);
 
     // Create the texture, store it in 'my_texture`.
     TEXTURESTRUCT(texture_struct);
-    texture_struct.shader_pointer = my_shader;
+    texture_struct.parent_pointer = my_shader;
     texture_struct.texture_file_format = "dds";
     texture_struct.texture_filename = "uvmap.DDS";
     model::Texture *my_texture = new model::Texture(texture_struct);
 
     // Create the species, store it in `suzanne_species`.
     SPECIESSTRUCT(species_struct);
-    species_struct.texture_pointer = my_texture;
+    species_struct.parent_pointer = my_texture;
     species_struct.model_file_format = "obj";
     species_struct.model_filename = "suzanne.obj";
     species_struct.vertex_shader = "StandardShading.vertexshader";
@@ -134,14 +134,14 @@ int main(void)
 
     // Create suzanne1, store it in `suzanne1`.
     OBJECTSTRUCT(object_struct1);
-    object_struct1.species_pointer = suzanne_species;
+    object_struct1.parent_pointer = suzanne_species;
     object_struct1.coordinate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
     object_struct1.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
     model::Object *suzanne1 = new model::Object(object_struct1);
 
     // Create suzanne2, store it in `suzanne2`.
     OBJECTSTRUCT(object_struct2);
-    object_struct2.species_pointer = suzanne_species;
+    object_struct2.parent_pointer = suzanne_species;
     object_struct2.coordinate_vector = glm::vec3(-1.0f, 0.0f, 0.0f);
     object_struct2.translate_vector = glm::vec3(0.1f, 0.0f, 0.0f);
     model::Object *suzanne2 = new model::Object(object_struct2);

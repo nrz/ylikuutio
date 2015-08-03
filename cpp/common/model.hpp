@@ -49,7 +49,7 @@ namespace model
 
         private:
             // this method sets a shader pointer.
-            void set_shader_pointer(GLuint childID, void* shader_pointer);
+            void set_shader_pointer(GLuint childID, void* parent_pointer);
 
             // this method gets a shader pointer.
             void* get_shader_pointer(GLuint childID);
@@ -77,7 +77,7 @@ namespace model
             // destructor.
             ~Shader();
 
-            // this method sets pointer to this shader to NULL, sets `world_pointer` according to the input, and requests a new `childID` from the new world.
+            // this method sets pointer to this shader to NULL, sets `parent_pointer` according to the input, and requests a new `childID` from the new world.
             void switch_to_new_world(model::World *new_world_pointer);
 
             friend class World;
@@ -92,7 +92,7 @@ namespace model
             void render();
 
             // this method sets a texture pointer.
-            void set_texture_pointer(GLuint childID, void* texture_pointer);
+            void set_texture_pointer(GLuint childID, void* parent_pointer);
 
             // this method gets a texture pointer.
             void* get_texture_pointer(GLuint childID);
@@ -103,7 +103,7 @@ namespace model
             // this method sets a world species pointer.
             void set_world_species_pointer(void* world_species_pointer);
 
-            model::World *world_pointer;          // pointer to the world.
+            model::World *parent_pointer;          // pointer to the world.
 
             GLuint programID;                     // shaders' programID, returned by `LoadShaders`.
 
@@ -136,7 +136,7 @@ namespace model
             // destructor.
             ~Texture();
 
-            // this method sets pointer to this shader to NULL, sets `shader_pointer` according to the input, and requests a new `childID` from the new shader.
+            // this method sets pointer to this shader to NULL, sets `parent_pointer` according to the input, and requests a new `childID` from the new shader.
             void switch_texture_to_new_shader(model::Shader *new_shader_pointer);
 
             friend class Shader;
@@ -150,10 +150,10 @@ namespace model
             void render();
 
             // this method sets a species pointer.
-            void set_species_pointer(GLuint childID, void* species_pointer);
+            void set_species_pointer(GLuint childID, void* parent_pointer);
 
             // this method sets a font pointer.
-            void set_font_pointer(GLuint childID, void* font_pointer);
+            void set_font_pointer(GLuint childID, void* parent_pointer);
 
             // this method gets a species pointer.
             void* get_species_pointer(GLuint childID);
@@ -167,7 +167,7 @@ namespace model
             // this method sets a world species pointer.
             void set_world_species_pointer(void* world_species_pointer);
 
-            model::Shader *shader_pointer;         // pointer to the shader.
+            model::Shader *parent_pointer;         // pointer to the shader.
 
             void bind_to_shader();
 
@@ -213,7 +213,7 @@ namespace model
 
     // `Node` is not a subclass of `Graph` because if the graph splits, node may be transferred to an another graph.
     // Transferring a node to a new graph naturally requires appropriate reindexing of `nodeID`s.
-    // The graph in which a node belongs is accessible through `void* graph_pointer` (must be cast to `model::Graph*`).
+    // The graph in which a node belongs is accessible through `void* parent_pointer` (must be cast to `model::Graph*`).
     class Node
     {
         public:
@@ -244,7 +244,7 @@ namespace model
             void transfer_to_new_graph(model::Graph *new_graph_pointer);
 
             GLuint nodeID;
-            model::Graph *graph_pointer;
+            model::Graph *parent_pointer;
 
             // nodes do not keep pointers to neighbor nodes, because all pointer values are not known yet before all nodes are created.
             std::vector<GLuint> neighbor_nodeIDs;
@@ -268,11 +268,11 @@ namespace model
             // destructor.
             ~Species();
 
-            // this method sets pointer to this species to NULL, sets `texture_pointer` according to the input, and requests a new `childID` from the new texture.
+            // this method sets pointer to this species to NULL, sets `parent_pointer` according to the input, and requests a new `childID` from the new texture.
             void switch_to_new_texture(model::Texture *new_texture_pointer);
 
             // this method sets a object pointer.
-            void set_object_pointer(GLuint childID, void* object_pointer);
+            void set_object_pointer(GLuint childID, void* parent_pointer);
 
             // this method gets a object pointer.
             void* get_object_pointer(GLuint childID);
@@ -308,7 +308,7 @@ namespace model
             GLuint normalbuffer;
             GLuint elementbuffer;
 
-            model::Texture *texture_pointer;       // pointer to the texture.
+            model::Texture *parent_pointer;       // pointer to the texture.
 
             template<class T1>
                 friend void render_children(std::vector<void*> &child_pointer_vector);
@@ -341,7 +341,7 @@ namespace model
             ~Font();
 
             // this method sets a glyph pointer.
-            void set_glyph_pointer(GLuint childID, void* object_pointer);
+            void set_glyph_pointer(GLuint childID, void* parent_pointer);
 
             // this method gets a glyph pointer.
             void* get_glyph_pointer(GLuint childID);
@@ -349,7 +349,7 @@ namespace model
             // this method gets a object ID and removes it from the `free_objectID_queue` if it was popped from the queue.
             GLuint get_glyphID();
 
-            // this method sets pointer to this species to NULL, sets `texture_pointer` according to the input, and requests a new `childID` from the new texture.
+            // this method sets pointer to this species to NULL, sets `parent_pointer` according to the input, and requests a new `childID` from the new texture.
             void switch_to_new_texture(model::Texture *new_texture_pointer);
 
             std::vector<ObjectStruct> object_vector; // vector of individual objects of this species.
@@ -359,7 +359,7 @@ namespace model
             GLuint image_width;
             GLuint image_height;
 
-            model::Texture *texture_pointer;       // pointer to the texture.
+            model::Texture *parent_pointer;       // pointer to the texture.
 
             template<class T1>
                 friend void render_children(std::vector<void*> &child_pointer_vector);
@@ -392,7 +392,7 @@ namespace model
             ~Glyph();
 
             // this method sets a object pointer.
-            void set_object_pointer(GLuint childID, void* object_pointer);
+            void set_object_pointer(GLuint childID, void* parent_pointer);
 
             // this method gets a object pointer.
             void* get_object_pointer(GLuint childID);
@@ -422,7 +422,7 @@ namespace model
             GLuint normalbuffer;
             GLuint elementbuffer;
 
-            model::Font *font_pointer;             // pointer to the font.
+            model::Font *parent_pointer;             // pointer to the font.
 
             template<class T1>
                 friend void render_children(std::vector<void*> &child_pointer_vector);
@@ -449,7 +449,7 @@ namespace model
             // destructor.
             ~Object();
 
-            // this method sets pointer to this object to NULL, sets `species_pointer` according to the input, and requests a new `childID` from the new species.
+            // this method sets pointer to this object to NULL, sets `parent_pointer` according to the input, and requests a new `childID` from the new species.
             void switch_to_new_species(model::Species *new_species_pointer);
 
             template<class T1>
@@ -461,7 +461,7 @@ namespace model
             // this method renders this object.
             void render();
 
-            model::Species *species_pointer;       // pointer to the species.
+            model::Species *parent_pointer;       // pointer to the species.
 
             GLuint childID;                       // object ID, returned by `model::Species->get_objectID()`.
             bool has_entered;

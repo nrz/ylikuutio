@@ -159,21 +159,21 @@ int main(void)
 
     // Create the shader, store it in 'my_shader`.
     SHADERSTRUCT(shader_struct);
-    shader_struct.world_pointer = my_world;
+    shader_struct.parent_pointer = my_world;
     shader_struct.vertex_shader = "StandardShading.vertexshader";
     shader_struct.fragment_shader = "StandardShading.fragmentshader";
     model::Shader *my_shader = new model::Shader(shader_struct);
 
     // Create the texture, store it in 'my_grass_texture`.
     TEXTURESTRUCT(grass_texture_struct);
-    grass_texture_struct.shader_pointer = my_shader;
+    grass_texture_struct.parent_pointer = my_shader;
     grass_texture_struct.texture_file_format = g_texture_file_format;
     grass_texture_struct.texture_filename = g_texture_filename;
     model::Texture *my_grass_texture = new model::Texture(grass_texture_struct);
 
     // Create the texture, store it in 'my_uvmap_texture`.
     TEXTURESTRUCT(uvmap_texture_struct);
-    uvmap_texture_struct.shader_pointer = my_shader;
+    uvmap_texture_struct.parent_pointer = my_shader;
     uvmap_texture_struct.texture_file_format = "dds";
     uvmap_texture_struct.texture_filename = "uvmap.DDS";
     model::Texture *my_uvmap_texture = new model::Texture(uvmap_texture_struct);
@@ -181,7 +181,7 @@ int main(void)
 #ifdef TESTING_SPHERICAL_WORLD_IN_USE
     // Create the species, store it in `terrain_species`.
     SPECIESSTRUCT(SRTM_terrain_species_struct);
-    SRTM_terrain_species_struct.texture_pointer = my_grass_texture;
+    SRTM_terrain_species_struct.parent_pointer = my_grass_texture;
     SRTM_terrain_species_struct.model_file_format = "SRTM";
     // SRTM_terrain_species_struct.model_filename = "/media/laatikko_4TB/satelliittikuvat/srtm/version3/data/";
     SRTM_terrain_species_struct.model_filename = "./"; // for testing
@@ -192,7 +192,7 @@ int main(void)
 #else
     // Create the species, store it in `terrain_species`.
     SPECIESSTRUCT(bmp_terrain_species_struct);
-    bmp_terrain_species_struct.texture_pointer = my_grass_texture;
+    bmp_terrain_species_struct.parent_pointer = my_grass_texture;
     bmp_terrain_species_struct.model_file_format = g_model_file_format;
     bmp_terrain_species_struct.model_filename = g_model_filename;
     bmp_terrain_species_struct.color_channel = g_height_data_color_channel;
@@ -203,7 +203,7 @@ int main(void)
 
     // Create terrain1, store it in `terrain1`.
     OBJECTSTRUCT(terrain_object_struct1);
-    terrain_object_struct1.species_pointer = terrain_species;
+    terrain_object_struct1.parent_pointer = terrain_species;
     terrain_object_struct1.coordinate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
     terrain_object_struct1.rotate_angle = 0.0f;
     terrain_object_struct1.rotate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
@@ -211,7 +211,7 @@ int main(void)
     model::Object *terrain1 = new model::Object(terrain_object_struct1);
 
     SPECIESSTRUCT(suzanne_species_struct);
-    suzanne_species_struct.texture_pointer = my_uvmap_texture;
+    suzanne_species_struct.parent_pointer = my_uvmap_texture;
     suzanne_species_struct.model_file_format = "obj";
     suzanne_species_struct.model_filename = "suzanne.obj";
     suzanne_species_struct.lightPos = glm::vec3(4, 4, 4);
@@ -219,7 +219,7 @@ int main(void)
 
     // Create suzanne1, store it in `suzanne1`.
     OBJECTSTRUCT(suzanne_object_struct1);
-    suzanne_object_struct1.species_pointer = suzanne_species;
+    suzanne_object_struct1.parent_pointer = suzanne_species;
     suzanne_object_struct1.coordinate_vector = glm::vec3(82.50f, 119.00f, 95.50f);
     suzanne_object_struct1.rotate_angle = 0.10f;
     suzanne_object_struct1.rotate_vector = glm::vec3(1.0f, 0.0f, 0.0f);
@@ -227,7 +227,7 @@ int main(void)
     model::Object *suzanne1 = new model::Object(suzanne_object_struct1);
 
     OBJECTSTRUCT(suzanne_object_struct2);
-    suzanne_object_struct2.species_pointer = suzanne_species;
+    suzanne_object_struct2.parent_pointer = suzanne_species;
     suzanne_object_struct2.coordinate_vector = glm::vec3(112.90f, 113.90f, 75.50f);
     suzanne_object_struct2.rotate_angle = 0.20f;
     suzanne_object_struct2.rotate_vector = glm::vec3(1.0f, 0.0f, 0.0f);
@@ -235,7 +235,7 @@ int main(void)
     model::Object *suzanne2 = new model::Object(suzanne_object_struct2);
 
     OBJECTSTRUCT(suzanne_object_struct3);
-    suzanne_object_struct3.species_pointer = suzanne_species;
+    suzanne_object_struct3.parent_pointer = suzanne_species;
     suzanne_object_struct3.coordinate_vector = glm::vec3(126.90f, 162.90f, 103.00f);
     suzanne_object_struct3.rotate_angle = 0.05f;
     suzanne_object_struct3.rotate_vector = glm::vec3(1.0f, 0.0f, 0.0f);
@@ -243,7 +243,7 @@ int main(void)
     model::Object *suzanne3 = new model::Object(suzanne_object_struct3);
 
     OBJECTSTRUCT(suzanne_object_struct4);
-    suzanne_object_struct4.species_pointer = suzanne_species;
+    suzanne_object_struct4.parent_pointer = suzanne_species;
     suzanne_object_struct4.coordinate_vector = glm::vec3(96.00f, 130.00f, 109.00f);
     suzanne_object_struct4.rotate_angle = 0.15f;
     suzanne_object_struct4.rotate_vector = glm::vec3(1.0f, 0.0f, 0.0f);
@@ -251,7 +251,7 @@ int main(void)
     model::Object *suzanne4 = new model::Object(suzanne_object_struct4);
 
     OBJECTSTRUCT(suzanne_object_struct5);
-    suzanne_object_struct5.species_pointer = suzanne_species;
+    suzanne_object_struct5.parent_pointer = suzanne_species;
     suzanne_object_struct5.original_scale_vector = glm::vec3(10.0f, 10.0f, 10.0f);
     suzanne_object_struct5.coordinate_vector = glm::vec3(103.00f, 105.00f, 109.00f);
     suzanne_object_struct5.rotate_angle = 0.03f;
