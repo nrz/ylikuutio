@@ -133,9 +133,6 @@ namespace model
 
         if (child_pointer == NULL)
         {
-            // OK, the pointer to be stored was NULL, then that childID is released to be used again.
-            // free_childID_queue.push(childID);
-
             if (childID == child_pointer_vector.size() - 1)
             {
                 // OK, this is the biggest childID of all childID's of this 'object'.
