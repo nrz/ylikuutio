@@ -763,14 +763,14 @@ namespace model
         // constructor.
     }
 
-    void Graph::set_node_pointer(GLuint nodeID, void* node_pointer)
+    void Graph::set_node_pointer(GLuint childID, void* parent_pointer)
     {
-        set_child_pointer(nodeID, node_pointer, this->node_pointer_vector, this->free_nodeID_queue);
+        set_child_pointer(childID, parent_pointer, this->node_pointer_vector, this->free_nodeID_queue);
     }
 
-    void* Graph::get_node_pointer(GLuint nodeID)
+    void* Graph::get_node_pointer(GLuint childID)
     {
-        return this->node_pointer_vector[nodeID];
+        return this->node_pointer_vector[childID];
     }
 
     GLuint Graph::get_nodeID()
@@ -788,15 +788,20 @@ namespace model
         delete_children<model::Node*>(this->node_pointer_vector);
     }
 
+    void Node::bind_to_parent()
+    {
+        model::bind_child_to_parent<model::Node*>(this, this->parent_pointer->node_pointer_vector, this->parent_pointer->free_nodeID_queue);
+    }
+
     Node::Node(NodeStruct node_struct)
     {
         // constructor.
-        this->nodeID = node_struct.nodeID;
+        this->childID = node_struct.nodeID;
         this->coordinate_vector = node_struct.coordinate_vector;
         this->parent_pointer = static_cast<model::Graph*>(node_struct.parent_pointer);
 
         // set pointer to this node.
-        this->parent_pointer->set_node_pointer(this->nodeID, this);
+        this->parent_pointer->set_node_pointer(this->childID, this);
 
         // create all bidirectional links between this node and neighbor nodes.
         for (GLuint link_i = 0; link_i < this->neighbor_nodeIDs.size(); link_i++)
@@ -808,7 +813,7 @@ namespace model
     Node::~Node()
     {
         // destructor.
-        std::cout << "Node with nodeID " << this->nodeID << " will be destroyed.\n";
+        std::cout << "Node with childID " << this->childID << " will be destroyed.\n";
 
         // delete all bidirectional links.
         for (GLuint link_i = 0; link_i < this->neighbor_nodeIDs.size(); link_i++)
@@ -817,7 +822,7 @@ namespace model
         }
 
         // set pointer to this node to NULL.
-        this->parent_pointer->set_node_pointer(this->nodeID, NULL);
+        this->parent_pointer->set_node_pointer(this->childID, NULL);
     }
 
     void Node::create_unidirectional_link(GLuint nodeID)
@@ -841,7 +846,7 @@ namespace model
         this->create_unidirectional_link(nodeID);
 
         // create a link from destination node to this node.
-        static_cast<model::Node*>(this->parent_pointer->get_node_pointer(nodeID))->create_unidirectional_link(this->nodeID);
+        static_cast<model::Node*>(this->parent_pointer->get_node_pointer(childID))->create_unidirectional_link(this->childID);
     }
 
     void Node::delete_unidirectional_link(GLuint nodeID)
@@ -856,7 +861,7 @@ namespace model
         this->delete_unidirectional_link(nodeID);
 
         // delete a link from destination node to this node.
-        static_cast<model::Node*>(this->parent_pointer->get_node_pointer(nodeID))->delete_unidirectional_link(this->nodeID);
+        static_cast<model::Node*>(this->parent_pointer->get_node_pointer(childID))->delete_unidirectional_link(this->childID);
     }
 
     // Transfering node to a new graph is similar to `bind_to_new_parent`, `bind_to_new_parent`, `bind_to_new_parent`,
@@ -868,19 +873,9 @@ namespace model
     // Therefore a `nodeID_bias` needs to be defined for each graph, it will be used for reindexing.
     // If `Graph::get_nodeID` would cause overflow (2^32 = 4 294 967 295), it will instead give smallest current `nodeID` of the graph and decrement `nodeID_bias` by 1.
 
-    void Node::transfer_to_new_graph(model::Graph *new_graph_pointer)
+    void Node::bind_to_new_parent(model::Graph *new_graph_pointer)
     {
-        // set pointer to this node to NULL.
-        this->parent_pointer->set_node_pointer(this->nodeID, NULL);
-
-        // set new graph pointer.
-        this->parent_pointer = new_graph_pointer;
-
-        // request a new nodeID.
-        this->nodeID = this->parent_pointer->get_nodeID();
-
-        // set pointer to this node.
-        this->parent_pointer->set_node_pointer(this->nodeID, this);
+        model::bind_child_to_new_parent<model::Node*, model::Graph*>(this, new_graph_pointer, this->parent_pointer->node_pointer_vector, this->parent_pointer->free_nodeID_queue);
     }
 
     void Species::bind_to_parent()
