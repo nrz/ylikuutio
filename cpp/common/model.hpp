@@ -77,9 +77,6 @@ namespace model
             // destructor.
             ~Shader();
 
-            // this method renders all textures using this shader.
-            void render();
-
             // this method sets pointer to this shader to NULL, sets `world_pointer` according to the input, and requests a new `childID` from the new world.
             void switch_to_new_world(model::World *new_world_pointer);
 
@@ -87,8 +84,13 @@ namespace model
             friend class Texture;
             friend class Species;
             friend class Object;
+            template<class T1>
+                friend void render_children(std::vector<void*> &child_pointer_vector);
 
         private:
+            // this method renders all textures using this shader.
+            void render();
+
             // this method sets a texture pointer.
             void set_texture_pointer(GLuint childID, void* texture_pointer);
 
@@ -134,17 +136,19 @@ namespace model
             // destructor.
             ~Texture();
 
-            // this method renders all species using this texture.
-            void render();
-
             // this method sets pointer to this shader to NULL, sets `shader_pointer` according to the input, and requests a new `childID` from the new shader.
             void switch_texture_to_new_shader(model::Shader *new_shader_pointer);
 
             friend class Shader;
             friend class Species;
             friend class Object;
+            template<class T1>
+                friend void render_children(std::vector<void*> &child_pointer_vector);
 
         private:
+            // this method renders all species using this texture.
+            void render();
+
             // this method sets a species pointer.
             void set_species_pointer(GLuint childID, void* species_pointer);
 
@@ -220,6 +224,8 @@ namespace model
             ~Node();
 
             friend class Graph;
+            template<class T1>
+                friend void render_children(std::vector<void*> &child_pointer_vector);
 
         private:
             // this method creates a bidirectional link.
@@ -261,9 +267,6 @@ namespace model
 
             // destructor.
             ~Species();
-
-            // this method renders all objects of this species.
-            void render();
 
             // this method sets pointer to this species to NULL, sets `texture_pointer` according to the input, and requests a new `childID` from the new texture.
             void switch_to_new_texture(model::Texture *new_texture_pointer);
@@ -307,8 +310,14 @@ namespace model
 
             model::Texture *texture_pointer;       // pointer to the texture.
 
+            template<class T1>
+                friend void render_children(std::vector<void*> &child_pointer_vector);
+
         private:
             void bind_to_texture();
+
+            // this method renders all objects of this species.
+            void render();
 
             std::string model_file_format;         // type of the model file, eg. `"bmp"`.
             std::string model_filename;            // filename of the model file.
@@ -331,9 +340,6 @@ namespace model
             // destructor.
             ~Font();
 
-            // this method renders all objects of this species.
-            void render();
-
             // this method sets a glyph pointer.
             void set_glyph_pointer(GLuint childID, void* object_pointer);
 
@@ -355,8 +361,14 @@ namespace model
 
             model::Texture *texture_pointer;       // pointer to the texture.
 
+            template<class T1>
+                friend void render_children(std::vector<void*> &child_pointer_vector);
+
         private:
             void bind_to_texture();
+
+            // this method renders all objects of this species.
+            void render();
 
             std::string model_file_format;         // type of the model file, eg. `"bmp"`.
             std::string model_filename;            // filename of the model file.
@@ -378,9 +390,6 @@ namespace model
 
             // destructor.
             ~Glyph();
-
-            // this method renders all objects of this species.
-            void render();
 
             // this method sets a object pointer.
             void set_object_pointer(GLuint childID, void* object_pointer);
@@ -415,8 +424,14 @@ namespace model
 
             model::Font *font_pointer;             // pointer to the font.
 
+            template<class T1>
+                friend void render_children(std::vector<void*> &child_pointer_vector);
+
         private:
             void bind_to_font();
+
+            // this method renders all objects of this species.
+            void render();
 
             GLuint glyphID;                        // glyph ID, returned by `model::Font->get_glyphID()`.
             GLuint lightID;                        // light ID, returned by `glGetUniformLocation(programID, "LightPosition_worldspace");`.
@@ -434,14 +449,17 @@ namespace model
             // destructor.
             ~Object();
 
-            // this method renders this object.
-            void render();
-
             // this method sets pointer to this object to NULL, sets `species_pointer` according to the input, and requests a new `childID` from the new species.
             void switch_to_new_species(model::Species *new_species_pointer);
 
+            template<class T1>
+                friend void render_children(std::vector<void*> &child_pointer_vector);
+
         private:
             void bind_to_species();
+
+            // this method renders this object.
+            void render();
 
             model::Species *species_pointer;       // pointer to the species.
 
