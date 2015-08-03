@@ -359,7 +359,7 @@ namespace model
 
         // destroy all shaders of this world.
         std::cout << "All shaders of this world will be destroyed.\n";
-        delete_children<model::Shader*>(this->shader_pointer_vector);
+        model::delete_children<model::Shader*>(this->shader_pointer_vector);
     }
 
     void World::render()
@@ -626,7 +626,7 @@ namespace model
 
         // destroy all textures of this shader.
         std::cout << "All textures of this shader will be destroyed.\n";
-        delete_children<model::Texture*>(this->texture_pointer_vector);
+        model::delete_children<model::Texture*>(this->texture_pointer_vector);
 
         // set pointer to this shader to NULL.
         this->parent_pointer->set_shader_pointer(this->childID, NULL);
@@ -706,7 +706,7 @@ namespace model
 
         // destroy all species of this texture.
         std::cout << "All species of this texture will be destroyed.\n";
-        delete_children<model::Species*>(this->species_pointer_vector);
+        model::delete_children<model::Species*>(this->species_pointer_vector);
 
         glDeleteTextures(1, &this->texture);
 
@@ -770,7 +770,7 @@ namespace model
 
         // destroy all nodes of this graph.
         std::cout << "All nodes of this graph will be destroyed.\n";
-        delete_children<model::Node*>(this->node_pointer_vector);
+        model::delete_children<model::Node*>(this->node_pointer_vector);
     }
 
     void Node::bind_to_parent()
@@ -968,7 +968,7 @@ namespace model
 
         // destroy all objects of this species.
         std::cout << "All objects of this species will be destroyed.\n";
-        delete_children<model::Object*>(this->object_pointer_vector);
+        model::delete_children<model::Object*>(this->object_pointer_vector);
 
         // Cleanup VBO, shader and texture.
         glDeleteBuffers(1, &this->vertexbuffer);
@@ -1024,7 +1024,7 @@ namespace model
 
         // destroy all glyphs of this font.
         std::cout << "All glyphs of this font will be destroyed.\n";
-        delete_children<model::Glyph*>(this->glyph_pointer_vector);
+        model::delete_children<model::Glyph*>(this->glyph_pointer_vector);
     }
 
     void Font::render()
@@ -1050,7 +1050,7 @@ namespace model
 
         // destroy all shaders of this world.
         std::cout << "All objects of this glyph will be destroyed.\n";
-        delete_children<model::Object*>(this->object_pointer_vector);
+        model::delete_children<model::Object*>(this->object_pointer_vector);
     }
 
     void Glyph::render()
