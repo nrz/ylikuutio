@@ -298,7 +298,7 @@ namespace model
 
     // template<typename T1>
     template<class T1>
-        void bind_to_parent(T1 child_pointer, std::vector<void*> &child_pointer_vector, std::queue<GLuint> &free_childID_queue)
+        void bind_child_to_parent(T1 child_pointer, std::vector<void*> &child_pointer_vector, std::queue<GLuint> &free_childID_queue)
         {
             // get childID from the parent, because every child deserves a unique ID!
             child_pointer->childID = get_childID(child_pointer_vector, free_childID_queue);
@@ -587,7 +587,7 @@ namespace model
     }
     void Shader::bind_to_parent()
     {
-        model::bind_to_parent<model::Shader*>(this, this->parent_pointer->shader_pointer_vector, this->parent_pointer->free_shaderID_queue);
+        model::bind_child_to_parent<model::Shader*>(this, this->parent_pointer->shader_pointer_vector, this->parent_pointer->free_shaderID_queue);
     }
 
     Shader::Shader(ShaderStruct shader_struct)
@@ -673,7 +673,7 @@ namespace model
 
     void Texture::bind_to_parent()
     {
-        model::bind_to_parent<model::Texture*>(this, this->parent_pointer->texture_pointer_vector, this->parent_pointer->free_textureID_queue);
+        model::bind_child_to_parent<model::Texture*>(this, this->parent_pointer->texture_pointer_vector, this->parent_pointer->free_textureID_queue);
     }
 
     Texture::Texture(TextureStruct texture_struct)
@@ -895,7 +895,7 @@ namespace model
 
     void Species::bind_to_parent()
     {
-        model::bind_to_parent<model::Species*>(this, this->parent_pointer->species_pointer_vector, this->parent_pointer->free_speciesID_queue);
+        model::bind_child_to_parent<model::Species*>(this, this->parent_pointer->species_pointer_vector, this->parent_pointer->free_speciesID_queue);
     }
 
     Species::Species(SpeciesStruct species_struct)
@@ -1060,7 +1060,7 @@ namespace model
 
     void Object::bind_to_parent()
     {
-        model::bind_to_parent<model::Object*>(this, this->parent_pointer->object_pointer_vector, this->parent_pointer->free_objectID_queue);
+        model::bind_child_to_parent<model::Object*>(this, this->parent_pointer->object_pointer_vector, this->parent_pointer->free_objectID_queue);
     }
 
     Object::Object(ObjectStruct object_struct)

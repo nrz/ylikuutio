@@ -87,7 +87,7 @@ namespace model
             template<class T1>
                 friend void render_children(std::vector<void*> &child_pointer_vector);
             template<class T1>
-                friend void bind_to_parent(T1 child_pointer, std::vector<void*> &child_pointer_vector, std::queue<GLuint> &free_childID_queue);
+                friend void bind_child_to_parent(T1 child_pointer, std::vector<void*> &child_pointer_vector, std::queue<GLuint> &free_childID_queue);
 
         private:
             // this method renders all textures using this shader.
@@ -147,7 +147,7 @@ namespace model
             template<class T1>
                 friend void render_children(std::vector<void*> &child_pointer_vector);
             template<class T1>
-                friend void bind_to_parent(T1 child_pointer, std::vector<void*> &child_pointer_vector, std::queue<GLuint> &free_childID_queue);
+                friend void bind_child_to_parent(T1 child_pointer, std::vector<void*> &child_pointer_vector, std::queue<GLuint> &free_childID_queue);
 
         private:
             // this method renders all species using this texture.
@@ -231,7 +231,7 @@ namespace model
             template<class T1>
                 friend void render_children(std::vector<void*> &child_pointer_vector);
             template<class T1>
-                friend void bind_to_parent(T1 child_pointer, std::vector<void*> &child_pointer_vector, std::queue<GLuint> &free_childID_queue);
+                friend void bind_child_to_parent(T1 child_pointer, std::vector<void*> &child_pointer_vector, std::queue<GLuint> &free_childID_queue);
 
         private:
             // this method creates a bidirectional link.
@@ -320,7 +320,7 @@ namespace model
             template<class T1>
                 friend void render_children(std::vector<void*> &child_pointer_vector);
             template<class T1>
-                friend void bind_to_parent(T1 child_pointer, std::vector<void*> &child_pointer_vector, std::queue<GLuint> &free_childID_queue);
+                friend void bind_child_to_parent(T1 child_pointer, std::vector<void*> &child_pointer_vector, std::queue<GLuint> &free_childID_queue);
 
         private:
             void bind_to_parent();
@@ -373,7 +373,7 @@ namespace model
             template<class T1>
                 friend void render_children(std::vector<void*> &child_pointer_vector);
             template<class T1>
-                friend void bind_to_parent(T1 child_pointer, std::vector<void*> &child_pointer_vector, std::queue<GLuint> &free_childID_queue);
+                friend void bind_child_to_parent(T1 child_pointer, std::vector<void*> &child_pointer_vector, std::queue<GLuint> &free_childID_queue);
 
         private:
             void bind_to_parent();
@@ -438,7 +438,7 @@ namespace model
             template<class T1>
                 friend void render_children(std::vector<void*> &child_pointer_vector);
             template<class T1>
-                friend void bind_to_parent(T1 child_pointer, std::vector<void*> &child_pointer_vector, std::queue<GLuint> &free_childID_queue);
+                friend void bind_child_to_parent(T1 child_pointer, std::vector<void*> &child_pointer_vector, std::queue<GLuint> &free_childID_queue);
 
         private:
             void bind_to_parent();
@@ -468,7 +468,7 @@ namespace model
             template<class T1>
                 friend void render_children(std::vector<void*> &child_pointer_vector);
             template<class T1>
-                friend void bind_to_parent(T1 child_pointer, std::vector<void*> &child_pointer_vector, std::queue<GLuint> &free_childID_queue);
+                friend void bind_child_to_parent(T1 child_pointer, std::vector<void*> &child_pointer_vector, std::queue<GLuint> &free_childID_queue);
 
         private:
             void bind_to_parent();
