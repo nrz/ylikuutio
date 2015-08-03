@@ -367,7 +367,7 @@ namespace model
         this->compute_matrices_from_inputs();
 
         // render World by calling `render()` function of each Shader.
-        render_children<model::Shader*>(this->shader_pointer_vector);
+        model::render_children<model::Shader*>(this->shader_pointer_vector);
     }
 
     void World::set_shader_pointer(GLuint childID, void* parent_pointer)
@@ -642,7 +642,7 @@ namespace model
         glUniformMatrix4fv(this->ViewMatrixID, 1, GL_FALSE, &ViewMatrix[0][0]); // This one doesn't change between objects, so this can be done once for all objects that use "programID"
 
         // render Shader by calling `render()` function of each Texture.
-        render_children<model::Texture*>(this->texture_pointer_vector);
+        model::render_children<model::Texture*>(this->texture_pointer_vector);
     }
 
     void Shader::set_texture_pointer(GLuint childID, void* parent_pointer)
@@ -723,8 +723,8 @@ namespace model
         glUniform1i(this->openGL_textureID, 0);
 
         // render Texture by calling `render()` function of each Species and of each Font.
-        render_children<model::Species*>(this->species_pointer_vector);
-        render_children<model::Font*>(this->font_pointer_vector);
+        model::render_children<model::Species*>(this->species_pointer_vector);
+        model::render_children<model::Font*>(this->font_pointer_vector);
     }
 
     void Texture::set_species_pointer(GLuint childID, void* parent_pointer)
@@ -995,7 +995,7 @@ namespace model
         glEnableVertexAttribArray(this->vertexNormal_modelspaceID);
 
         // render Species by calling `render()` function of each Object.
-        render_children<model::Object*>(this->object_pointer_vector);
+        model::render_children<model::Object*>(this->object_pointer_vector);
 
         glDisableVertexAttribArray(this->vertexPosition_modelspaceID);
         glDisableVertexAttribArray(this->vertexUVID);
@@ -1030,7 +1030,7 @@ namespace model
     void Font::render()
     {
         // render Font by calling `render()` function of each Glyph.
-        render_children<model::Glyph*>(this->glyph_pointer_vector);
+        model::render_children<model::Glyph*>(this->glyph_pointer_vector);
     }
 
     void Font::set_glyph_pointer(GLuint childID, void* parent_pointer)
@@ -1056,7 +1056,7 @@ namespace model
     void Glyph::render()
     {
         // render Glyph by calling `render()` function of each Object.
-        render_children<model::Object*>(this->object_pointer_vector);
+        model::render_children<model::Object*>(this->object_pointer_vector);
     }
 
     void Object::bind_to_parent()
