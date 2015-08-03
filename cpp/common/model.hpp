@@ -309,6 +309,8 @@ namespace model
                 friend void bind_child_to_parent(T1 child_pointer, std::vector<void*> &child_pointer_vector, std::queue<GLuint> &free_childID_queue);
             template<class T1, class T2>
                 friend void bind_child_to_new_parent(T1 child_pointer, T2 new_parent_pointer, std::vector<void*> &old_child_pointer_vector, std::queue<GLuint> &old_free_childID_queue);
+            template<class T1>
+                friend void render_species_or_glyph(T1 species_or_glyph_pointer);
 
         private:
             void bind_to_parent();
@@ -390,6 +392,8 @@ namespace model
             // this method gets a object ID and removes it from the `free_objectID_queue` if it was popped from the queue.
             GLuint get_objectID();
 
+            glm::vec3 lightPos;                    // light position.
+
             // The rest fields are created in the constructor.
             GLuint image_width;
             GLuint image_height;
@@ -418,6 +422,8 @@ namespace model
                 friend void render_children(std::vector<void*> &child_pointer_vector);
             template<class T1>
                 friend void bind_child_to_parent(T1 child_pointer, std::vector<void*> &child_pointer_vector, std::queue<GLuint> &free_childID_queue);
+            template<class T1>
+                friend void render_species_or_glyph(T1 species_or_glyph_pointer);
 
         private:
             void bind_to_parent();

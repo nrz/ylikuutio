@@ -347,6 +347,34 @@ namespace model
             }
         }
 
+    // template<typename T1>
+    template<class T1>
+        void render_species_or_glyph(T1 species_or_glyph_pointer)
+        {
+            // Compute the MVP matrix from keyboard and mouse input.
+            glUniform3f(
+                    species_or_glyph_pointer->lightID,
+                    species_or_glyph_pointer->lightPos.x,
+                    species_or_glyph_pointer->lightPos.y,
+                    species_or_glyph_pointer->lightPos.z);
+
+            // 1st attribute buffer : vertices.
+            glEnableVertexAttribArray(species_or_glyph_pointer->vertexPosition_modelspaceID);
+
+            // 2nd attribute buffer : UVs.
+            glEnableVertexAttribArray(species_or_glyph_pointer->vertexUVID);
+
+            // 3rd attribute buffer : normals.
+            glEnableVertexAttribArray(species_or_glyph_pointer->vertexNormal_modelspaceID);
+
+            // render Species by calling `render()` function of each Object.
+            model::render_children<model::Object*>(species_or_glyph_pointer->object_pointer_vector);
+
+            glDisableVertexAttribArray(species_or_glyph_pointer->vertexPosition_modelspaceID);
+            glDisableVertexAttribArray(species_or_glyph_pointer->vertexUVID);
+            glDisableVertexAttribArray(species_or_glyph_pointer->vertexNormal_modelspaceID);
+        }
+
     World::World()
     {
         // constructor.
@@ -986,24 +1014,7 @@ namespace model
 
     void Species::render()
     {
-        // Compute the MVP matrix from keyboard and mouse input.
-        glUniform3f(this->lightID, this->lightPos.x, this->lightPos.y, this->lightPos.z);
-
-        // 1st attribute buffer : vertices.
-        glEnableVertexAttribArray(this->vertexPosition_modelspaceID);
-
-        // 2nd attribute buffer : UVs.
-        glEnableVertexAttribArray(this->vertexUVID);
-
-        // 3rd attribute buffer : normals.
-        glEnableVertexAttribArray(this->vertexNormal_modelspaceID);
-
-        // render Species by calling `render()` function of each Object.
-        model::render_children<model::Object*>(this->object_pointer_vector);
-
-        glDisableVertexAttribArray(this->vertexPosition_modelspaceID);
-        glDisableVertexAttribArray(this->vertexUVID);
-        glDisableVertexAttribArray(this->vertexNormal_modelspaceID);
+        model::render_species_or_glyph<model::Species*>(this);
     }
 
     void Species::set_object_pointer(GLuint childID, void* parent_pointer)
@@ -1062,7 +1073,7 @@ namespace model
 
     void Glyph::render()
     {
-        model::render_children<model::Object*>(this->object_pointer_vector);
+        model::render_species_or_glyph<model::Glyph*>(this);
     }
 
     void Object::bind_to_parent()
