@@ -1062,7 +1062,6 @@ namespace model
 
     void Glyph::render()
     {
-        // render Glyph by calling `render()` function of each Object.
         model::render_children<model::Object*>(this->object_pointer_vector);
     }
 
