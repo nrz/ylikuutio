@@ -460,6 +460,7 @@ namespace model
             void render();
 
             model::Species *parent_pointer;       // pointer to the species.
+            bool is_character;
 
             GLuint childID;                       // object ID, returned by `model::Species->get_objectID()`.
             bool has_entered;
