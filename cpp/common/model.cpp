@@ -881,14 +881,14 @@ namespace model
         static_cast<model::Node*>(this->parent_pointer->get_node_pointer(childID))->delete_unidirectional_link(this->childID);
     }
 
-    // Transfering node to a new graph is similar to `bind_to_new_parent`, `bind_to_new_parent`, `bind_to_new_parent`,
-    // but there is one important difference:
-    // nodes have references (links) to other nodes, whereas shaders, species, and objects do not.
-    // The easiest way would be to request new `nodeID` for each new node, and this will be probably be implemented first.
-    // Another option would be to change only those `nodeID`'s for which there would be duplicate `nodeID`'s.
+    // Transfering a Node to a new Graph is similar to `bind_to_new_parent`, but there is one important difference:
+    // Nodes have references (links) to other nodes, whereas Shaders, Textures, Species, Fonts, Glyphs, and Objects do not.
+    // The easiest way would be to request new `childID` for each new node, and this will be probably be implemented first.
+    // Another option would be to change only those `childID`'s for which there would be duplicate `childID`'s.
     // However, that may consume huge amounts of memory if a big object (eg. a terrain object) is split into several smaller objects.
-    // Therefore a `nodeID_bias` needs to be defined for each graph, it will be used for reindexing.
-    // If `Graph::get_nodeID` would cause overflow (2^32 = 4 294 967 295), it will instead give smallest current `nodeID` of the graph and decrement `nodeID_bias` by 1.
+    // Therefore a `childID_bias` needs to be defined for each graph, it will be used for reindexing.
+    // If `Node::bind_to_parent` would cause overflow (2^32 = 4 294 967 295), it will instead give smallest current `childID` of the graph and
+    // decrement `childID_bias` by 1.
 
     void Node::bind_to_new_parent(model::Graph *new_graph_pointer)
     {
