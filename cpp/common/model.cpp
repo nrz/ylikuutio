@@ -1090,7 +1090,7 @@ namespace model
         this->rotate_vector         = object_struct.rotate_vector;
         this->translate_vector      = object_struct.translate_vector;
         this->has_entered           = false;
-        this->parent_pointer       = static_cast<model::Species*>(object_struct.parent_pointer);
+        this->parent_pointer        = static_cast<model::Species*>(object_struct.parent_pointer);
         this->is_character          = object_struct.is_character;
 
         // get childID from the Species and set pointer to this object.
