@@ -375,6 +375,93 @@ namespace model
             glDisableVertexAttribArray(species_or_glyph_pointer->vertexNormal_modelspaceID);
         }
 
+    // template<typename T1>
+    template<class T1>
+        void render_this_object(model::Object* object_pointer, model::Shader* shader_pointer)
+        {
+            if (!object_pointer->has_entered)
+            {
+                object_pointer->model_matrix = glm::translate(glm::mat4(1.0f), object_pointer->coordinate_vector);
+                object_pointer->model_matrix = glm::scale(object_pointer->model_matrix, object_pointer->original_scale_vector);
+
+                // store the new coordinates to be used in the next update.
+                object_pointer->coordinate_vector = glm::vec3(object_pointer->model_matrix[0][0], object_pointer->model_matrix[1][1], object_pointer->model_matrix[2][2]);
+                object_pointer->has_entered = true;
+            }
+            else
+            {
+                // create `rotation_matrix` using quaternions.
+                glm::quat my_quaternion;
+                my_quaternion = glm::quat(DEGREES_TO_RADIANS(object_pointer->rotate_vector));
+                glm::mat4 rotation_matrix = glm::toMat4(my_quaternion);
+
+                // rotate.
+                // this->model_matrix = rotation_matrix * this->model_matrix;
+                if (object_pointer->rotate_vector != glm::vec3(0.0f, 0.0f, 0.0f))
+                {
+                    object_pointer->model_matrix = glm::rotate(object_pointer->model_matrix, object_pointer->rotate_angle, object_pointer->rotate_vector);
+                }
+
+                object_pointer->model_matrix = glm::translate(object_pointer->model_matrix, object_pointer->translate_vector);
+                object_pointer->coordinate_vector = glm::vec3(object_pointer->model_matrix[0][0], object_pointer->model_matrix[1][1], object_pointer->model_matrix[2][2]);
+            }
+
+            object_pointer->MVP_matrix = ProjectionMatrix * ViewMatrix * object_pointer->model_matrix;
+
+            T1 parent_pointer = static_cast<T1>(object_pointer->parent_pointer);
+
+            // Send our transformation to the currently bound shader,
+            // in the "MVP" uniform.
+            // glUniformMatrix4fv(this->parent_pointer->parent_pointer->parent_pointer->MatrixID, 1, GL_FALSE, &this->MVP_matrix[0][0]);
+            glUniformMatrix4fv(shader_pointer->MatrixID, 1, GL_FALSE, &object_pointer->MVP_matrix[0][0]);
+            // glUniformMatrix4fv(this->parent_pointer->parent_pointer->parent_pointer->ModelMatrixID, 1, GL_FALSE, &this->model_matrix[0][0]);
+            glUniformMatrix4fv(shader_pointer->ModelMatrixID, 1, GL_FALSE, &object_pointer->model_matrix[0][0]);
+
+            // 1st attribute buffer : vertices.
+            glBindBuffer(GL_ARRAY_BUFFER, parent_pointer->vertexbuffer);
+            glVertexAttribPointer(
+                    parent_pointer->vertexPosition_modelspaceID, // The attribute we want to configure
+                    3,                                           // size
+                    GL_FLOAT,                                    // type
+                    GL_FALSE,                                    // normalized?
+                    0,                                           // stride
+                    (void*) 0                                    // array buffer offset
+                    );
+
+            // 2nd attribute buffer : UVs.
+            glBindBuffer(GL_ARRAY_BUFFER, parent_pointer->uvbuffer);
+            glVertexAttribPointer(
+                    parent_pointer->vertexUVID, // The attribute we want to configure
+                    2,                          // size : U+V => 2
+                    GL_FLOAT,                   // type
+                    GL_FALSE,                   // normalized?
+                    0,                          // stride
+                    (void*) 0                   // array buffer offset
+                    );
+
+            // 3rd attribute buffer : normals.
+            glBindBuffer(GL_ARRAY_BUFFER, parent_pointer->normalbuffer);
+            glVertexAttribPointer(
+                    parent_pointer->vertexNormal_modelspaceID, // The attribute we want to configure
+                    3,                                         // size
+                    GL_FLOAT,                                  // type
+                    GL_FALSE,                                  // normalized?
+                    0,                                         // stride
+                    (void*) 0                                  // array buffer offset
+                    );
+
+            // Index buffer.
+            glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, parent_pointer->elementbuffer);
+
+            // Draw the triangles!
+            glDrawElements(
+                    GL_TRIANGLES,                   // mode
+                    parent_pointer->indices.size(), // count
+                    GL_UNSIGNED_INT,                // type
+                    (void*) 0                       // element array buffer offset
+                    );
+        }
+
     World::World()
     {
         // constructor.
@@ -1076,9 +1163,25 @@ namespace model
         model::render_species_or_glyph<model::Glyph*>(this);
     }
 
+    void Glyph::set_object_pointer(GLuint childID, void* parent_pointer)
+    {
+        set_child_pointer(childID, parent_pointer, this->object_pointer_vector, this->free_objectID_queue);
+    }
+
     void Object::bind_to_parent()
     {
-        model::bind_child_to_parent<model::Object*>(this, this->parent_pointer->object_pointer_vector, this->parent_pointer->free_objectID_queue);
+        if (this->is_character)
+        {
+            model::Glyph* parent_pointer;
+            parent_pointer = static_cast<model::Glyph*>(this->parent_pointer);
+            model::bind_child_to_parent<model::Object*>(this, parent_pointer->object_pointer_vector, parent_pointer->free_objectID_queue);
+        }
+        else
+        {
+            model::Species* parent_pointer;
+            parent_pointer = static_cast<model::Species*>(this->parent_pointer);
+            model::bind_child_to_parent<model::Object*>(this, parent_pointer->object_pointer_vector, parent_pointer->free_objectID_queue);
+        }
     }
 
     Object::Object(ObjectStruct object_struct)
@@ -1105,98 +1208,49 @@ namespace model
         std::cout << "Object with childID " << this->childID << " will be destroyed.\n";
 
         // set pointer to this object to NULL.
-        this->parent_pointer->set_object_pointer(this->childID, NULL);
+        if (this->is_character)
+        {
+            model::Glyph* parent_pointer;
+            parent_pointer = static_cast<model::Glyph*>(this->parent_pointer);
+            parent_pointer->set_object_pointer(this->childID, NULL);
+        }
+        else
+        {
+            model::Glyph* parent_pointer;
+            parent_pointer = static_cast<model::Glyph*>(this->parent_pointer);
+            parent_pointer->set_object_pointer(this->childID, NULL);
+        }
     }
 
     void Object::render()
     {
-        if (!this->has_entered)
-        {
-            this->model_matrix = glm::translate(glm::mat4(1.0f), this->coordinate_vector);
-            this->model_matrix = glm::scale(this->model_matrix, this->original_scale_vector);
+        model::Shader* shader_pointer;
 
-            // store the new coordinates to be used in the next update.
-            this->coordinate_vector = glm::vec3(model_matrix[0][0], model_matrix[1][1], model_matrix[2][2]);
-            this->has_entered = true;
+        if (this->is_character)
+        {
+            shader_pointer = static_cast<model::Glyph*>(this->parent_pointer)->parent_pointer->parent_pointer->parent_pointer;
+            model::render_this_object<model::Glyph*>(this, shader_pointer);
         }
         else
         {
-            // create `rotation_matrix` using quaternions.
-            glm::quat my_quaternion;
-            my_quaternion = glm::quat(DEGREES_TO_RADIANS(this->rotate_vector));
-            glm::mat4 rotation_matrix = glm::toMat4(my_quaternion);
-
-            // rotate.
-            // this->model_matrix = rotation_matrix * this->model_matrix;
-            if (this->rotate_vector != glm::vec3(0.0f, 0.0f, 0.0f))
-            {
-                this->model_matrix = glm::rotate(this->model_matrix, this->rotate_angle, this->rotate_vector);
-            }
-
-            this->model_matrix = glm::translate(this->model_matrix, this->translate_vector);
-            this->coordinate_vector = glm::vec3(model_matrix[0][0], model_matrix[1][1], model_matrix[2][2]);
+            shader_pointer = static_cast<model::Species*>(this->parent_pointer)->parent_pointer->parent_pointer;
+            model::render_this_object<model::Species*>(this, shader_pointer);
         }
-
-        this->MVP_matrix = ProjectionMatrix * ViewMatrix * this->model_matrix;
-
-        // Send our transformation to the currently bound shader,
-        // in the "MVP" uniform.
-        glUniformMatrix4fv(this->parent_pointer->parent_pointer->parent_pointer->MatrixID, 1, GL_FALSE, &this->MVP_matrix[0][0]);
-        glUniformMatrix4fv(this->parent_pointer->parent_pointer->parent_pointer->ModelMatrixID, 1, GL_FALSE, &this->model_matrix[0][0]);
-
-        // 1st attribute buffer : vertices.
-        glBindBuffer(GL_ARRAY_BUFFER, this->parent_pointer->vertexbuffer);
-        glVertexAttribPointer(
-                this->parent_pointer->vertexPosition_modelspaceID, // The attribute we want to configure
-                3,                                                  // size
-                GL_FLOAT,                                           // type
-                GL_FALSE,                                           // normalized?
-                0,                                                  // stride
-                (void*) 0                                           // array buffer offset
-                );
-
-        // 2nd attribute buffer : UVs.
-        glBindBuffer(GL_ARRAY_BUFFER, this->parent_pointer->uvbuffer);
-        glVertexAttribPointer(
-                this->parent_pointer->vertexUVID, // The attribute we want to configure
-                2,                                 // size : U+V => 2
-                GL_FLOAT,                          // type
-                GL_FALSE,                          // normalized?
-                0,                                 // stride
-                (void*) 0                          // array buffer offset
-                );
-
-        // 3rd attribute buffer : normals.
-        glBindBuffer(GL_ARRAY_BUFFER, this->parent_pointer->normalbuffer);
-        glVertexAttribPointer(
-                this->parent_pointer->vertexNormal_modelspaceID, // The attribute we want to configure
-                3,                                                // size
-                GL_FLOAT,                                         // type
-                GL_FALSE,                                         // normalized?
-                0,                                                // stride
-                (void*) 0                                         // array buffer offset
-                );
-
-        // Index buffer.
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->parent_pointer->elementbuffer);
-
-        // Draw the triangles!
-        glDrawElements(
-                GL_TRIANGLES,                          // mode
-                this->parent_pointer->indices.size(), // count
-                GL_UNSIGNED_INT,                       // type
-                (void*) 0                              // element array buffer offset
-                );
     }
 
-    void Object::bind_to_new_parent(model::Species *new_species_pointer)
+    void Object::bind_to_new_parent(void* new_parent_pointer)
     {
-        // set pointer to this object to NULL.
-        this->parent_pointer->set_object_pointer(this->childID, NULL);
-
-        this->parent_pointer = new_species_pointer;
-
-        // get childID from the Species and set pointer to this object.
-        this->bind_to_parent();
+        if (this->is_character)
+        {
+            model::Glyph* parent_pointer;
+            parent_pointer = static_cast<model::Glyph*>(this->parent_pointer);
+            model::bind_child_to_new_parent<model::Object*, model::Glyph*>(this, static_cast<model::Glyph*>(new_parent_pointer), parent_pointer->object_pointer_vector, parent_pointer->free_objectID_queue);
+        }
+        else
+        {
+            model::Species* parent_pointer;
+            parent_pointer = static_cast<model::Species*>(this->parent_pointer);
+            model::bind_child_to_new_parent<model::Object*, model::Species*>(this, static_cast<model::Species*>(new_parent_pointer), parent_pointer->object_pointer_vector, parent_pointer->free_objectID_queue);
+        }
     }
 }

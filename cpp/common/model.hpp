@@ -29,6 +29,7 @@
 
 namespace model
 {
+    class Object;
     void set_child_pointer(GLuint childID, void* child_pointer, std::vector<void*> &child_pointer_vector, std::queue<GLuint> &free_childID_queue);
     GLuint get_childID(std::vector<void*> &child_pointer_vector, std::queue<GLuint> &free_childID_queue);
 
@@ -84,6 +85,8 @@ namespace model
                 friend void bind_child_to_parent(T1 child_pointer, std::vector<void*> &child_pointer_vector, std::queue<GLuint> &free_childID_queue);
             template<class T1, class T2>
                 friend void bind_child_to_new_parent(T1 child_pointer, T2 new_parent_pointer, std::vector<void*> &old_child_pointer_vector, std::queue<GLuint> &old_free_childID_queue);
+            template<class T1>
+                friend void render_this_object(model::Object* object_pointer, model::Shader* shader_pointer);
 
         private:
             // this method renders all textures using this shader.
@@ -140,6 +143,8 @@ namespace model
                 friend void bind_child_to_parent(T1 child_pointer, std::vector<void*> &child_pointer_vector, std::queue<GLuint> &free_childID_queue);
             template<class T1, class T2>
                 friend void bind_child_to_new_parent(T1 child_pointer, T2 new_parent_pointer, std::vector<void*> &old_child_pointer_vector, std::queue<GLuint> &old_free_childID_queue);
+            template<class T1>
+                friend void render_this_object(model::Object* object_pointer, model::Shader* shader_pointer);
 
         private:
             // this method renders all species using this texture.
@@ -416,6 +421,7 @@ namespace model
 
             model::Font *parent_pointer;             // pointer to the font.
 
+            friend class Object;
             template<class T1>
                 friend void render_children(std::vector<void*> &child_pointer_vector);
             template<class T1>
@@ -446,12 +452,15 @@ namespace model
             ~Object();
 
             // this method sets pointer to this object to NULL, sets `parent_pointer` according to the input, and requests a new `childID` from the new species.
-            void bind_to_new_parent(model::Species *new_species_pointer);
-
+            void bind_to_new_parent(void* new_parent_pointer);
+            template<class T1>
+                friend void bind_child_to_parent(T1 child_pointer, std::vector<void*> &child_pointer_vector, std::queue<GLuint> &free_childID_queue);
+            template<class T1, class T2>
+                friend void bind_child_to_new_parent(T1 child_pointer, T2 new_parent_pointer, std::vector<void*> &old_child_pointer_vector, std::queue<GLuint> &old_free_childID_queue);
             template<class T1>
                 friend void render_children(std::vector<void*> &child_pointer_vector);
             template<class T1>
-                friend void bind_child_to_parent(T1 child_pointer, std::vector<void*> &child_pointer_vector, std::queue<GLuint> &free_childID_queue);
+                friend void render_this_object(model::Object* object_pointer, model::Shader* shader_pointer);
 
         private:
             void bind_to_parent();
@@ -459,7 +468,7 @@ namespace model
             // this method renders this object.
             void render();
 
-            model::Species *parent_pointer;       // pointer to the species.
+            void* parent_pointer;                  // pointer to the species or glyph.
             bool is_character;
 
             GLuint childID;                        // object ID, returned by `model::Species->get_objectID()`.
