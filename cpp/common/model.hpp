@@ -23,7 +23,7 @@
 #include <queue> // std::queue
 #include <string.h>
 #include "globals.hpp"
-#include "shader.hpp"
+#include "shader_loader.hpp"
 #include "heightmap_loader.hpp"
 #include "objloader.hpp"
 

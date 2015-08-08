@@ -35,7 +35,7 @@ GLFWwindow* window;
 #include <glm/gtc/matrix_transform.hpp>
 #endif
 
-#include "cpp/common/shader.hpp"
+#include "cpp/common/shader_loader.hpp"
 #include "cpp/common/texture.hpp"
 #include "cpp/common/model.hpp"
 #include "cpp/common/vboindexer.hpp"

@@ -65,8 +65,8 @@ add_definitions(
 # Tutorial 4
 add_executable(cube_with_colors
     cpp/cube_with_colors/cube_with_colors.cpp
-    cpp/common/shader.cpp
-    cpp/common/shader.hpp
+    cpp/common/shader_loader.cpp
+    cpp/common/shader_loader.hpp
 
     cpp/cube_with_colors/TransformVertexShader.vertexshader
     cpp/cube_with_colors/ColorFragmentShader.fragmentshader
@@ -81,8 +81,8 @@ create_target_launcher(cube_with_colors WORKING_DIRECTORY "${CMAKE_CURRENT_SOURC
 # Tutorial 9 - several objects
 add_executable(several_objects
     cpp/several_objects/several_objects.cpp
-    cpp/common/shader.cpp
-    cpp/common/shader.hpp
+    cpp/common/shader_loader.cpp
+    cpp/common/shader_loader.hpp
     cpp/common/globals.cpp
     cpp/common/globals.hpp
     cpp/common/texture.cpp
@@ -118,8 +118,8 @@ create_target_launcher(several_objects WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE
 # Ylikuutio
 add_executable(ylikuutio
     cpp/ylikuutio/ylikuutio.cpp
-    cpp/common/shader.cpp
-    cpp/common/shader.hpp
+    cpp/common/shader_loader.cpp
+    cpp/common/shader_loader.hpp
     cpp/common/globals.cpp
     cpp/common/globals.hpp
     cpp/common/texture.cpp

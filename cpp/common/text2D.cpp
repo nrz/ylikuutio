@@ -15,7 +15,7 @@
 #endif
 
 #include <glm/gtc/matrix_transform.hpp>
-#include "shader.hpp"
+#include "shader_loader.hpp"
 #include "texture.hpp"
 #include "text2D.hpp"
 
