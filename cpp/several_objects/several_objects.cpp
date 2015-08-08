@@ -36,7 +36,7 @@ GLFWwindow* window;
 #endif
 
 #include "cpp/common/shader_loader.hpp"
-#include "cpp/common/texture.hpp"
+#include "cpp/common/texture_loader.hpp"
 #include "cpp/common/model.hpp"
 #include "cpp/common/vboindexer.hpp"
 #include "cpp/common/text2D.hpp"

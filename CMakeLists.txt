@@ -85,8 +85,8 @@ add_executable(several_objects
     cpp/common/shader_loader.hpp
     cpp/common/globals.cpp
     cpp/common/globals.hpp
-    cpp/common/texture.cpp
-    cpp/common/texture.hpp
+    cpp/common/texture_loader.cpp
+    cpp/common/texture_loader.hpp
     cpp/common/heightmap_loader.cpp
     cpp/common/heightmap_loader.hpp
     cpp/common/objloader.cpp
@@ -122,8 +122,8 @@ add_executable(ylikuutio
     cpp/common/shader_loader.hpp
     cpp/common/globals.cpp
     cpp/common/globals.hpp
-    cpp/common/texture.cpp
-    cpp/common/texture.hpp
+    cpp/common/texture_loader.cpp
+    cpp/common/texture_loader.hpp
     cpp/common/heightmap_loader.cpp
     cpp/common/heightmap_loader.hpp
     cpp/common/objloader.cpp

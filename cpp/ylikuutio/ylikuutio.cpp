@@ -40,7 +40,7 @@ GLFWwindow* window;
 #include <glm/gtc/matrix_transform.hpp>
 
 #include "cpp/common/shader_loader.hpp"
-#include "cpp/common/texture.hpp"
+#include "cpp/common/texture_loader.hpp"
 
 #include "cpp/common/globals.hpp"
 #include "cpp/common/model.hpp"

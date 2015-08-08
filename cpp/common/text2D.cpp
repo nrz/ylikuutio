@@ -16,7 +16,7 @@
 
 #include <glm/gtc/matrix_transform.hpp>
 #include "shader_loader.hpp"
-#include "texture.hpp"
+#include "texture_loader.hpp"
 #include "text2D.hpp"
 
 GLuint Text2DTextureID;              // Texture containing the font

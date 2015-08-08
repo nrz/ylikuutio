@@ -36,7 +36,7 @@
 
 #include "model.hpp"
 #include "globals.hpp"
-#include "texture.hpp"
+#include "texture_loader.hpp"
 #include "heightmap_loader.hpp"
 #include "objloader.hpp"
 #include "vboindexer.hpp"
