@@ -52,8 +52,8 @@ namespace model
         }
         else
         {
-            model::Glyph* parent_pointer;
-            parent_pointer = static_cast<model::Glyph*>(this->parent_pointer);
+            model::Species* parent_pointer;
+            parent_pointer = static_cast<model::Species*>(this->parent_pointer);
             parent_pointer->set_object_pointer(this->childID, NULL);
         }
     }
