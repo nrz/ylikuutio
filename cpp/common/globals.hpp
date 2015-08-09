@@ -90,6 +90,13 @@ extern bool is_key_I_released;
 extern bool is_world_loaded;                 // no more than one world object can be loaded. TODO: check that no more than one world is loaded!
 extern bool is_world_spherical;
 
+extern GLfloat speed;
+extern GLfloat turbo_factor;
+extern GLfloat twin_turbo_factor;
+extern GLfloat mouseSpeed;
+
+extern glm::vec3 camera_position;
+
 typedef struct
 {
 #ifdef __STRUCT_DEFAULT_VALUES_ARE_ACCEPTED

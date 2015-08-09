@@ -3,10 +3,14 @@
 #define DEGREES_TO_RADIANS(x) (x * PI / 180.0f)
 #endif
 
+#ifndef RADIANS_TO_DEGREES
+#define RADIANS_TO_DEGREES(x) (x * 180.0f / PI)
+#endif
+
 // Include standard headers
 #include <stdio.h>
 #include <stdlib.h>
-#include <vector>
+#include <vector>    // std::vector
 #include <string>
 
 // Include GLEW
@@ -29,17 +33,15 @@ GLFWwindow* window;
 #include <glm/glm.hpp>
 #endif
 
-// Include matrix_transform.hpp .
-#ifndef __GLM_GTC_MATRIX_TRANSFORM_HPP_INCLUDED
-#define __GLM_GTC_MATRIX_TRANSFORM_HPP_INCLUDED
-#include <glm/gtc/matrix_transform.hpp>
-#endif
-
 #include "cpp/common/shader_loader.hpp"
 #include "cpp/common/texture_loader.hpp"
-#include "cpp/common/model.hpp"
 #include "cpp/common/vboindexer.hpp"
 #include "cpp/common/text2D.hpp"
+#include "cpp/common/world.hpp"
+#include "cpp/common/shader.hpp"
+#include "cpp/common/texture.hpp"
+#include "cpp/common/species.hpp"
+#include "cpp/common/object.hpp"
 
 // font texture file format: bmp/...
 std::string g_font_texture_file_format = "bmp";

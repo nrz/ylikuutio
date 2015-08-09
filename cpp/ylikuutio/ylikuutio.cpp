@@ -12,7 +12,7 @@
 #include <string>
 #include <string.h>
 #include <cstring>
-#include <vector>
+#include <vector>    // std::vector
 #include <stdio.h>
 #include <stdint.h>
 #include <stdlib.h>
@@ -37,16 +37,17 @@ GLFWwindow* window;
 #include <glm/glm.hpp>
 #endif
 
-#include <glm/gtc/matrix_transform.hpp>
-
+#include "cpp/common/globals.hpp"
 #include "cpp/common/shader_loader.hpp"
 #include "cpp/common/texture_loader.hpp"
-
-#include "cpp/common/globals.hpp"
-#include "cpp/common/model.hpp"
 #include "cpp/common/vboindexer.hpp"
 #include "cpp/common/text2D.hpp"
 #include "cpp/common/text3D.hpp"
+#include "cpp/common/world.hpp"
+#include "cpp/common/shader.hpp"
+#include "cpp/common/texture.hpp"
+#include "cpp/common/species.hpp"
+#include "cpp/common/object.hpp"
 
 // #define TESTING_SPHERICAL_WORLD_IN_USE
 

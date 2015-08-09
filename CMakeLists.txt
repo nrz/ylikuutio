@@ -91,8 +91,28 @@ add_executable(several_objects
     cpp/common/heightmap_loader.hpp
     cpp/common/objloader.cpp
     cpp/common/objloader.hpp
-    cpp/common/model.cpp
-    cpp/common/model.hpp
+    cpp/common/model_common_functions.cpp
+    cpp/common/model_common_functions.hpp
+    cpp/common/model_templates.hpp
+    cpp/common/world.cpp
+    cpp/common/world.hpp
+    cpp/common/shader.cpp
+    cpp/common/shader.hpp
+    cpp/common/texture.cpp
+    cpp/common/texture.hpp
+    cpp/common/graph.cpp
+    cpp/common/graph.hpp
+    cpp/common/node.cpp
+    cpp/common/node.hpp
+    cpp/common/species_or_glyph.hpp
+    cpp/common/species.cpp
+    cpp/common/species.hpp
+    cpp/common/font.cpp
+    cpp/common/font.hpp
+    cpp/common/glyph.cpp
+    cpp/common/glyph.hpp
+    cpp/common/object.cpp
+    cpp/common/object.hpp
     cpp/common/vboindexer.cpp
     cpp/common/vboindexer.hpp
     cpp/common/text2D.hpp
@@ -128,8 +148,28 @@ add_executable(ylikuutio
     cpp/common/heightmap_loader.hpp
     cpp/common/objloader.cpp
     cpp/common/objloader.hpp
-    cpp/common/model.cpp
-    cpp/common/model.hpp
+    cpp/common/model_common_functions.cpp
+    cpp/common/model_common_functions.hpp
+    cpp/common/model_templates.hpp
+    cpp/common/world.cpp
+    cpp/common/world.hpp
+    cpp/common/shader.cpp
+    cpp/common/shader.hpp
+    cpp/common/texture.cpp
+    cpp/common/texture.hpp
+    cpp/common/graph.cpp
+    cpp/common/graph.hpp
+    cpp/common/node.cpp
+    cpp/common/node.hpp
+    cpp/common/species_or_glyph.hpp
+    cpp/common/species.cpp
+    cpp/common/species.hpp
+    cpp/common/font.cpp
+    cpp/common/font.hpp
+    cpp/common/glyph.cpp
+    cpp/common/glyph.hpp
+    cpp/common/object.cpp
+    cpp/common/object.hpp
     cpp/common/vboindexer.cpp
     cpp/common/vboindexer.hpp
     cpp/common/text2D.cpp
