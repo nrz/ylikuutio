@@ -165,13 +165,13 @@ namespace model
         // Move north.
         if (glfwGetKey(window, GLFW_KEY_N) == GLFW_PRESS)
         {
-            position.z += deltaTime * temp_speed;
+            position.z -= deltaTime * temp_speed;
         }
 
         // Move south.
         if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
         {
-            position.z -= deltaTime * temp_speed;
+            position.z += deltaTime * temp_speed;
         }
 
         // Flight mode on.
