@@ -196,13 +196,6 @@ namespace model
             is_key_F_released = true;
         }
 
-        // Run mode on.
-        if (glfwGetKey(window, GLFW_KEY_R) == GLFW_PRESS)
-        {
-            fallSpeed = 0.0f;
-            inFlightmode = false;
-        }
-
         if (!inFlightmode)
         {
             fallSpeed += gravity;
