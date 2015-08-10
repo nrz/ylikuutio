@@ -315,17 +315,17 @@ int main(void)
             printing_struct.font_size = FONT_SIZE;
             printing_struct.char_font_texture_file_format = "bmp";
 
-            char coordinates_text[256];
-            sprintf(coordinates_text, "(%.2f,%.2f,%.2f)", position.x, position.y, position.z);
-
-            char angles_text[256];
+            char angles_and_coordinates_text[256];
             sprintf(
-                    angles_text,
-                    "%.2f,%.2f rad; %.2f,%.2f deg",
+                    angles_and_coordinates_text,
+                    "%.2f,%.2f rad; %.2f,%.2f deg\\n(%.2f,%.2f,%.2f)",
                     horizontalAngle,
                     verticalAngle,
                     RADIANS_TO_DEGREES(horizontalAngle),
-                    RADIANS_TO_DEGREES(verticalAngle));
+                    RADIANS_TO_DEGREES(verticalAngle),
+                    position.x,
+                    position.y,
+                    position.z);
 
             char time_text[256];
             sprintf(time_text, "%.2f sec\\nhello world!", glfwGetTime());
@@ -338,15 +338,7 @@ int main(void)
             // print cartesian coordinates on bottom left corner.
             printing_struct.x = 0;
             printing_struct.y = 0;
-            printing_struct.text = coordinates_text;
-            printing_struct.horizontal_alignment = "left";
-            printing_struct.vertical_alignment = "bottom";
-            text2D::printText2D(printing_struct);
-
-            // print horizontal and vertical angles on bottom left corner.
-            printing_struct.x = 0;
-            printing_struct.y += TEXT_SIZE;
-            printing_struct.text = angles_text;
+            printing_struct.text = angles_and_coordinates_text;
             printing_struct.horizontal_alignment = "left";
             printing_struct.vertical_alignment = "bottom";
             text2D::printText2D(printing_struct);
@@ -354,7 +346,7 @@ int main(void)
 #ifdef TESTING_SPHERICAL_WORLD_IN_USE
             // print spherical coordinates on bottom left corner.
             printing_struct.x = 0;
-            printing_struct.y += TEXT_SIZE;
+            printing_struct.y += 2 * TEXT_SIZE;
             printing_struct.text = spherical_coordinates_text;
             printing_struct.horizontal_alignment = "left";
             printing_struct.vertical_alignment = "bottom";

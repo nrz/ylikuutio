@@ -91,14 +91,48 @@ namespace text2D
         // Newlines need to be checked beforehand.
         uint32_t length = strlen(text);
 
+        // Count the number of lines.
+        uint32_t number_of_lines = 1;
+
+        uint32_t i = 0;
+
+        while(i < length)
+        {
+            char character = text[i++];
+
+            if (character == (char) '\\')
+            {
+                // OK, this character was backslash, so read the next character.
+                character = text[i++];
+
+                if (character == 'n')
+                {
+                    number_of_lines++;
+                }
+            }
+        }
+
         GLuint current_left_x = x;
-        GLuint current_top_y = y;
+        GLuint current_top_y;
+
+        if (strcmp(vertical_alignment, "top") == 0)
+        {
+            current_top_y = y;
+        }
+        else if (strcmp(vertical_alignment, "center") == 0)
+        {
+            current_top_y = y + 0.5f * number_of_lines * text_size;
+        }
+        else if (strcmp(vertical_alignment, "bottom") == 0)
+        {
+            current_top_y = y + number_of_lines * text_size;
+        }
 
         // Fill buffers
         std::vector<glm::vec2> vertices;
         std::vector<glm::vec2> UVs;
 
-        uint32_t i = 0;
+        i = 0;
 
         while(i < length)
         {
@@ -150,8 +184,8 @@ namespace text2D
 
             if (strcmp(vertical_alignment, "bottom") == 0)
             {
-                vertex_down_left_y = vertex_down_right_y = y;
-                vertex_up_left_y   = vertex_up_right_y   = y + text_size;
+                vertex_down_left_y = vertex_down_right_y = current_top_y - text_size;
+                vertex_up_left_y   = vertex_up_right_y   = current_top_y;
             }
             else if (strcmp(vertical_alignment, "top") == 0)
             {
@@ -160,8 +194,8 @@ namespace text2D
             }
             else if (strcmp(vertical_alignment, "center") == 0)
             {
-                vertex_down_left_y = vertex_down_right_y = y - 0.5f * text_size;
-                vertex_up_left_y   = vertex_up_right_y   = y + 0.5f * text_size;
+                vertex_down_left_y = vertex_down_right_y = current_top_y - text_size;
+                vertex_up_left_y   = vertex_up_right_y   = current_top_y;
             }
 
             glm::vec2 vertex_up_left = glm::vec2(vertex_up_left_x, vertex_up_left_y);
