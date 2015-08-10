@@ -8,6 +8,8 @@
 
 namespace model
 {
+    class Object;
+
     class Glyph
     {
         public:
@@ -49,7 +51,7 @@ namespace model
 
             model::Font *parent_pointer;             // pointer to the font.
 
-            // friend class Object;
+            friend class Object;
             template<class T1>
                 friend void render_children(std::vector<void*> &child_pointer_vector);
             template<class T1>
@@ -57,7 +59,7 @@ namespace model
             template<class T1>
                 friend void render_species_or_glyph(T1 species_or_glyph_pointer);
 
-        // private:
+        private:
             void bind_to_parent();
 
             // this method renders all objects of this species.
