@@ -13,7 +13,7 @@ namespace model
         // destructor.
         std::cout << "This glyph will be destroyed.\n";
 
-        // destroy all shaders of this world.
+        // destroy all objects of this glyph.
         std::cout << "All objects of this glyph will be destroyed.\n";
         model::delete_children<model::Object*>(this->object_pointer_vector);
     }
