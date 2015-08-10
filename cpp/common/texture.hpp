@@ -14,7 +14,7 @@
 namespace model
 {
     class Species;
-    // class Object;
+    class Object;
 
     class Texture
     {
@@ -30,17 +30,17 @@ namespace model
 
             friend class Shader;
             friend class Species;
-            // friend class Object;
+            friend class Object;
             template<class T1>
                 friend void render_children(std::vector<void*> &child_pointer_vector);
             template<class T1>
                 friend void bind_child_to_parent(T1 child_pointer, std::vector<void*> &child_pointer_vector, std::queue<GLuint> &free_childID_queue);
             template<class T1, class T2>
                 friend void bind_child_to_new_parent(T1 child_pointer, T2 new_parent_pointer, std::vector<void*> &old_child_pointer_vector, std::queue<GLuint> &old_free_childID_queue);
-            // template<class T1>
-            //    friend void render_this_object(model::Object* object_pointer, model::Shader* shader_pointer);
+            template<class T1>
+               friend void render_this_object(model::Object* object_pointer, model::Shader* shader_pointer);
 
-        // private:
+        private:
             // this method renders all species using this texture.
             void render();
 
