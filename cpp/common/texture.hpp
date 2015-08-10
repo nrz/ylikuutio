@@ -37,8 +37,6 @@ namespace model
                 friend void bind_child_to_parent(T1 child_pointer, std::vector<void*> &child_pointer_vector, std::queue<GLuint> &free_childID_queue);
             template<class T1, class T2>
                 friend void bind_child_to_new_parent(T1 child_pointer, T2 new_parent_pointer, std::vector<void*> &old_child_pointer_vector, std::queue<GLuint> &old_free_childID_queue);
-            template<class T1>
-               friend void render_this_object(model::Object* object_pointer, model::Shader* shader_pointer);
 
         private:
             // this method renders all species using this texture.
