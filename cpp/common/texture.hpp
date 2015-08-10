@@ -29,6 +29,7 @@ namespace model
             void bind_to_new_parent(model::Shader *new_shader_pointer);
 
             friend class Shader;
+            friend class Font;
             friend class Species;
             friend class Object;
             template<class T1>

@@ -3,6 +3,11 @@
 
 namespace model
 {
+    void Font::bind_to_parent()
+    {
+        model::bind_child_to_parent<model::Font*>(this, this->parent_pointer->font_pointer_vector, this->parent_pointer->free_fontID_queue);
+    }
+
     Font::Font(FontStruct font_struct)
     {
         // constructor.
