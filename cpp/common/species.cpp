@@ -26,7 +26,7 @@ namespace model
         this->char_model_filename    = this->model_filename.c_str();
         this->char_color_channel     = this->color_channel.c_str();
 
-        // get childID from the Texture and set pointer to this species.
+        // get childID from the Texture and set pointer to this Species.
         this->bind_to_parent();
 
         // Get a handle for our buffers.

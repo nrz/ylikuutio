@@ -32,7 +32,7 @@ namespace model
         this->parent_pointer        = static_cast<model::Species*>(object_struct.parent_pointer);
         this->is_character          = object_struct.is_character;
 
-        // get childID from the Species and set pointer to this object.
+        // get childID from the Species and set pointer to this Object.
         this->bind_to_parent();
 
         bool model_loading_result = false;

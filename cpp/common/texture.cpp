@@ -21,7 +21,7 @@ namespace model
         this->char_texture_file_format = this->texture_file_format.c_str();
         this->char_texture_filename    = this->texture_filename.c_str();
 
-        // get childID from the Shader and set pointer to this texture.
+        // get childID from the Shader and set pointer to this Texture.
         this->bind_to_parent();
 
         // Load the texture.
