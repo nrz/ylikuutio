@@ -82,12 +82,25 @@ namespace text2D
             const char *horizontal_alignment,
             const char *vertical_alignment)
     {
+        // If horizontal alignment is `"left"`, each line begins from the same x coordinate.
+        // If horizontal alignment is `"left"` and vertical alignment is `"top"`,
+        // then there is no need to check the text beforehand for newlines.
+        // Otherwise newlines need to be checked beforehand.
+        //
+        // If horizontal alignment is right, each line ends in the same x coordinate.
+        // Newlines need to be checked beforehand.
         uint32_t length = strlen(text);
+
+        GLuint current_left_x = x;
+        GLuint current_top_y = y;
 
         // Fill buffers
         std::vector<glm::vec2> vertices;
         std::vector<glm::vec2> UVs;
-        for (uint32_t i = 0; i < length; i++)
+
+        uint32_t i = 0;
+
+        while(i < length)
         {
             // Print to the right side of X (so far there is no check for input length).
             // Print up of Y.
@@ -100,10 +113,29 @@ namespace text2D
             GLfloat vertex_down_right_x;
             GLfloat vertex_down_right_y;
 
+            char character = text[i++];
+
+            if (character == (char) '\\')
+            {
+                // OK, this character was backslash, so read the next character.
+                character = text[i++];
+
+                if (character == 'n')
+                {
+                    // jump to the beginning of the next line.
+                    // `"left"` horizontal alignment and `"top"` vertical alignment are assumed.
+                    // TODO: implement newline for other horizontal and vertical alignments too!
+                    current_left_x = x;
+                    current_top_y -= text_size;
+                    continue;
+                }
+            }
+
             if (strcmp(horizontal_alignment, "left") == 0)
             {
-                vertex_up_left_x  = vertex_down_left_x  = x + (i * text_size);
-                vertex_up_right_x = vertex_down_right_x = x + (i * text_size) + text_size;
+                vertex_up_left_x = vertex_down_left_x = current_left_x;
+                vertex_up_right_x = vertex_down_right_x = current_left_x + text_size;
+                current_left_x += text_size;
             }
             else if (strcmp(horizontal_alignment, "right") == 0)
             {
@@ -123,8 +155,8 @@ namespace text2D
             }
             else if (strcmp(vertical_alignment, "top") == 0)
             {
-                vertex_down_left_y = vertex_down_right_y = y - text_size;
-                vertex_up_left_y   = vertex_up_right_y   = y;
+                vertex_down_left_y = vertex_down_right_y = current_top_y - text_size;
+                vertex_up_left_y   = vertex_up_right_y   = current_top_y;
             }
             else if (strcmp(vertical_alignment, "center") == 0)
             {
@@ -145,7 +177,6 @@ namespace text2D
             vertices.push_back(vertex_up_right);
             vertices.push_back(vertex_down_left);
 
-            char character = text[i];
             float uv_x = (character % font_size) / (GLfloat) font_size;
             float uv_y;
 
@@ -182,6 +213,7 @@ namespace text2D
             UVs.push_back(uv_up_right);
             UVs.push_back(uv_down_left);
         }
+
         glBindBuffer(GL_ARRAY_BUFFER, Text2DVertexBufferID);
         glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(glm::vec2), &vertices[0], GL_STATIC_DRAW);
         glBindBuffer(GL_ARRAY_BUFFER, Text2DUVBufferID);

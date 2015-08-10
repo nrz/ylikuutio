@@ -328,7 +328,7 @@ int main(void)
                     RADIANS_TO_DEGREES(verticalAngle));
 
             char time_text[256];
-            sprintf(time_text, "%.2f sec", glfwGetTime());
+            sprintf(time_text, "%.2f sec\\nhello world!", glfwGetTime());
 
 #ifdef TESTING_SPHERICAL_WORLD_IN_USE
             char spherical_coordinates_text[256];
