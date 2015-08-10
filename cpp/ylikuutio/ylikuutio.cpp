@@ -347,6 +347,7 @@ int main(void)
             char help_text[1024];
             sprintf(
                     help_text,
+                    "F1-help mode\\n"
                     "arrow keys\\n"
                     "N-north\\n"
                     "S-south\\n"
@@ -374,13 +375,16 @@ int main(void)
             printing_struct.vertical_alignment = "bottom";
             text2D::printText2D(printing_struct);
 
-            // print help text.
-            printing_struct.x = 0;
-            printing_struct.y = WINDOW_HEIGHT - (2 * TEXT_SIZE);
-            printing_struct.text = help_text;
-            printing_struct.horizontal_alignment = "left";
-            printing_struct.vertical_alignment = "top";
-            text2D::printText2D(printing_struct);
+            if (in_help_mode)
+            {
+                // print help text.
+                printing_struct.x = 0;
+                printing_struct.y = WINDOW_HEIGHT - (2 * TEXT_SIZE);
+                printing_struct.text = help_text;
+                printing_struct.horizontal_alignment = "left";
+                printing_struct.vertical_alignment = "top";
+                text2D::printText2D(printing_struct);
+            }
 
 #ifdef TESTING_SPHERICAL_WORLD_IN_USE
             // print spherical coordinates on bottom left corner.

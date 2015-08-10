@@ -17,6 +17,7 @@ glm::mat4 ViewMatrix;
 glm::vec3 position;
 GLfloat gravity = 9.81f / 60.0f;
 bool inFlightmode;
+bool in_help_mode = true;
 GLfloat fallSpeed = gravity;
 SphericalCoordinatesStruct spherical_position;
 double horizontalAngle;
@@ -28,6 +29,7 @@ bool hasMouseEverMoved;
 bool is_invert_mouse_in_use;
 bool is_key_I_released;
 bool is_key_F_released;
+bool is_key_F1_released;
 bool is_world_loaded; // no more than one world object can be loaded. TODO: check that no more than one world is loaded!
 bool is_world_spherical;
 
