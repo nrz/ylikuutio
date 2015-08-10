@@ -328,7 +328,38 @@ int main(void)
                     position.z);
 
             char time_text[256];
-            sprintf(time_text, "%.2f sec\\nhello world!", glfwGetTime());
+            sprintf(time_text, "%.2f sec", glfwGetTime());
+
+            char on_text[] = "on";
+            char off_text[] = "off";
+
+            char *flight_mode_text;
+
+            if (inFlightmode)
+            {
+                flight_mode_text = on_text;
+            }
+            else
+            {
+                flight_mode_text = off_text;
+            }
+
+            char help_text[1024];
+            sprintf(
+                    help_text,
+                    "arrow keys\\n"
+                    "N-north\\n"
+                    "S-south\\n"
+                    "W-west\\n"
+                    "E-east\\n"
+                    "F-flight mode (%s)\\n"
+                    "G-grass texture\\n"
+                    "U-uvmap texture\\n"
+                    "T-terrain species\\n"
+                    "A-suzanne species\\n"
+                    "Ctrl     -turbo\\n"
+                    "Ctrl+Ctrl-extra turbo\\n",
+                    flight_mode_text);
 
 #ifdef TESTING_SPHERICAL_WORLD_IN_USE
             char spherical_coordinates_text[256];
@@ -341,6 +372,14 @@ int main(void)
             printing_struct.text = angles_and_coordinates_text;
             printing_struct.horizontal_alignment = "left";
             printing_struct.vertical_alignment = "bottom";
+            text2D::printText2D(printing_struct);
+
+            // print help text.
+            printing_struct.x = 0;
+            printing_struct.y = WINDOW_HEIGHT - (2 * TEXT_SIZE);
+            printing_struct.text = help_text;
+            printing_struct.horizontal_alignment = "left";
+            printing_struct.vertical_alignment = "top";
             text2D::printText2D(printing_struct);
 
 #ifdef TESTING_SPHERICAL_WORLD_IN_USE
