@@ -177,8 +177,23 @@ namespace model
         // Flight mode on.
         if (glfwGetKey(window, GLFW_KEY_F) == GLFW_PRESS)
         {
-            fallSpeed = 0.0f;
-            inFlightmode = true;
+            if (is_key_F_released)
+            {
+                if (inFlightmode)
+                {
+                    inFlightmode = false;
+                }
+                else
+                {
+                    inFlightmode = true;
+                }
+                fallSpeed = 0.0f;
+                is_key_F_released = false;
+            }
+        }
+        else if (glfwGetKey(window, GLFW_KEY_F) == GLFW_RELEASE)
+        {
+            is_key_F_released = true;
         }
 
         // Run mode on.

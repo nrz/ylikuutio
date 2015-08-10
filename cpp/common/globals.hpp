@@ -87,6 +87,7 @@ extern double earth_radius;
 extern bool hasMouseEverMoved;
 extern bool is_invert_mouse_in_use;
 extern bool is_key_I_released;
+extern bool is_key_F_released;
 extern bool is_world_loaded;                 // no more than one world object can be loaded. TODO: check that no more than one world is loaded!
 extern bool is_world_spherical;
 
