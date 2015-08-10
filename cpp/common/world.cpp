@@ -208,9 +208,10 @@ namespace model
                 {
                     is_invert_mouse_in_use = true;
                 }
+                is_key_I_released = false;
             }
         }
-        else
+        else if (glfwGetKey(window, GLFW_KEY_I) == GLFW_RELEASE)
         {
             is_key_I_released = true;
         }
