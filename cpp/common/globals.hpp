@@ -229,15 +229,14 @@ typedef struct
 #else
     void *parent_pointer;                   // pointer to the texture object.
 #endif
-    std::string model_file_format;           // type of the model file. supported file formats so far: `"bmp"`/`"BMP"`, `"obj"`/`"OBJ"`.
-                                             // TODO: add support for `"SRTM"`.
+    std::string font_file_format;            // type of the font file. supported file formats so far: `"svg"`/`"SVG"`.
     std::string vertex_shader;               // filename of vertex shader.
     std::string fragment_shader;             // filename of fragment shader.
     glm::vec3 lightPos;                      // light position.
     std::vector<ObjectStruct> glyph_vector;  // vector of individual objects of this font.
 
     // for `"bmp"` model files.
-    std::string model_filename;              // filename of the model file.
+    std::string font_filename;               // filename of the font file.
 } FontStruct;
 
 #ifdef __STRUCT_DEFAULT_VALUES_ARE_ACCEPTED
