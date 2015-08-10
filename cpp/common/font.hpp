@@ -46,13 +46,12 @@ namespace model
             // this method renders all objects of this species.
             void render();
 
-            std::string model_file_format;         // type of the model file, eg. `"bmp"`.
-            std::string model_filename;            // filename of the model file.
+            std::string font_file_format;          // type of the model file, eg. `"bmp"`.
+            std::string font_filename;             // filename of the model file.
             GLuint childID;                        // species ID, returned by `model::Texture->get_speciesID()`.
             GLuint lightID;                        // light ID, returned by `glGetUniformLocation(programID, "LightPosition_worldspace");`.
-            const char *char_model_file_format;
-            const char *char_model_filename;
-            const char *char_color_channel;
+            const char *char_font_file_format;
+            const char *char_font_filename;
 
             std::vector<void*> glyph_pointer_vector;
             std::queue<GLuint> free_glyphID_queue;
