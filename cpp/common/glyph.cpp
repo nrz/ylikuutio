@@ -11,6 +11,15 @@ namespace model
     Glyph::Glyph(GlyphStruct glyph_struct)
     {
         // constructor.
+        this->light_position = glyph_struct.light_position;
+
+        // get childID from the Texture and set pointer to this Species.
+        this->bind_to_parent();
+
+        // Get a handle for our buffers.
+        this->vertexPosition_modelspaceID = glGetAttribLocation(this->parent_pointer->parent_pointer->parent_pointer->programID, "vertexPosition_modelspace");
+        this->vertexUVID = glGetAttribLocation(this->parent_pointer->parent_pointer->parent_pointer->programID, "vertexUV");
+        this->vertexNormal_modelspaceID = glGetAttribLocation(this->parent_pointer->parent_pointer->parent_pointer->programID, "vertexNormal_modelspace");
     }
 
     Glyph::~Glyph()

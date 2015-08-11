@@ -30,6 +30,7 @@ namespace model
 
             friend class Shader;
             friend class Font;
+            friend class Glyph;
             friend class Species;
             friend class Object;
             template<class T1>

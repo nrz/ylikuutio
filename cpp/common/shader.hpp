@@ -33,6 +33,7 @@ namespace model
 
             friend class World;
             friend class Texture;
+            friend class Glyph;
             friend class Species;
             template<class T1>
                 friend void render_children(std::vector<void*> &child_pointer_vector);
