@@ -56,4 +56,9 @@ namespace model
     {
         set_child_pointer(childID, parent_pointer, this->glyph_pointer_vector, this->free_glyphID_queue);
     }
+
+    void Font::bind_to_new_parent(model::Texture *new_texture_pointer)
+    {
+        model::bind_child_to_new_parent<model::Font*, model::Texture*>(this, new_texture_pointer, this->parent_pointer->font_pointer_vector, this->parent_pointer->free_fontID_queue);
+    }
 }
