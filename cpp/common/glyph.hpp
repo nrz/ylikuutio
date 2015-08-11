@@ -65,7 +65,7 @@ namespace model
             // this method renders all objects of this species.
             void render();
 
-            GLuint glyphID;                        // glyph ID, returned by `model::Font->get_glyphID()`.
+            GLuint childID;                        // glyph ID, returned by `model::Font->get_glyphID()`.
             GLuint lightID;                        // light ID, returned by `glGetUniformLocation(programID, "LightPosition_worldspace");`.
 
             std::vector<void*> object_pointer_vector;
