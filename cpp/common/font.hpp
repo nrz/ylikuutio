@@ -48,7 +48,6 @@ namespace model
             std::string font_file_format;          // type of the model file, eg. `"bmp"`.
             std::string font_filename;             // filename of the model file.
             GLuint childID;                        // species ID, returned by `model::Texture->get_speciesID()`.
-            GLuint lightID;                        // light ID, returned by `glGetUniformLocation(programID, "LightPosition_worldspace");`.
             const char *char_font_file_format;
             const char *char_font_filename;
 
