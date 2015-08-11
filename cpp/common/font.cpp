@@ -14,9 +14,26 @@ namespace model
     Font::Font(FontStruct font_struct)
     {
         // constructor.
-        //
+        this->font_file_format = font_struct.font_file_format;
+        this->font_filename    = font_struct.font_filename;
+        this->parent_pointer   = static_cast<model::Texture*>(font_struct.parent_pointer);
+
+        this->char_font_file_format = this->font_file_format.c_str();
+        this->char_font_filename    = this->font_filename.c_str();
+
+        // get childID from the Graph and set pointer to this font.
+        this->bind_to_parent();
+
+        bool font_loading_result;
+
+        if ((strcmp(this->char_font_file_format, "svg") == 0) || (strcmp(this->char_font_file_format, "SVG") == 0))
+        {
+            // TODO: implement `load_SVG_font`! It should read all necessary data to this Font object.
+            font_loading_result = model::load_SVG_font(this->font_filename);
+        }
+
         // Font constructor also creates each Glyph and binds them to the Font.
-        // TODO: implement the constructor!
+        // TODO: implement creation of each Glyph!
     }
 
     Font::~Font()
