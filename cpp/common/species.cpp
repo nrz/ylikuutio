@@ -19,7 +19,7 @@ namespace model
         this->model_file_format = species_struct.model_file_format;
         this->model_filename    = species_struct.model_filename;
         this->color_channel     = species_struct.color_channel;
-        this->lightPos          = species_struct.lightPos;
+        this->light_position          = species_struct.light_position;
         this->parent_pointer    = static_cast<model::Texture*>(species_struct.parent_pointer);
 
         this->char_model_file_format = this->model_file_format.c_str();

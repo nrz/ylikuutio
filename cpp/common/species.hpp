@@ -34,7 +34,7 @@ namespace model
             bool is_world;                           // worlds currently do not rotate nor translate.
 
             std::string color_channel;               // color channel in use: `"red"`, `"green"`, `"blue"`, `"mean"` or `"all"`.
-            glm::vec3 lightPos;                      // light position.
+            glm::vec3 light_position;                      // light position.
 
             // The rest fields are created in the constructor.
             GLuint image_width;

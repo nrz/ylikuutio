@@ -203,7 +203,7 @@ typedef struct
                                              // TODO: add support for `"SRTM"`.
     std::string vertex_shader;               // filename of vertex shader.
     std::string fragment_shader;             // filename of fragment shader.
-    glm::vec3 lightPos;                      // light position.
+    glm::vec3 light_position;                      // light position.
     std::vector<ObjectStruct> object_vector; // vector of individual objects of this species.
     std::string coordinate_system;           // used only for worlds (`is_world` == `true`). valid values: `"cartesian"`.
                                              // TODO: add support for `"spherical"`. `"spherical"` is used eg. in SRTM heightmaps.
@@ -232,7 +232,7 @@ typedef struct
     std::string font_file_format;            // type of the font file. supported file formats so far: `"svg"`/`"SVG"`.
     std::string vertex_shader;               // filename of vertex shader.
     std::string fragment_shader;             // filename of fragment shader.
-    glm::vec3 lightPos;                      // light position.
+    glm::vec3 light_position;                      // light position.
     std::vector<ObjectStruct> glyph_vector;  // vector of individual objects of this font.
 
     // for `"bmp"` model files.

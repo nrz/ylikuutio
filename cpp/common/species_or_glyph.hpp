@@ -14,9 +14,9 @@ namespace model
             // Compute the MVP matrix from keyboard and mouse input.
             glUniform3f(
                     species_or_glyph_pointer->lightID,
-                    species_or_glyph_pointer->lightPos.x,
-                    species_or_glyph_pointer->lightPos.y,
-                    species_or_glyph_pointer->lightPos.z);
+                    species_or_glyph_pointer->light_position.x,
+                    species_or_glyph_pointer->light_position.y,
+                    species_or_glyph_pointer->light_position.z);
 
             // 1st attribute buffer : vertices.
             glEnableVertexAttribArray(species_or_glyph_pointer->vertexPosition_modelspaceID);

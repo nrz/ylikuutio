@@ -187,7 +187,7 @@ int main(void)
     // SRTM_terrain_species_struct.model_filename = "/media/laatikko_4TB/satelliittikuvat/srtm/version3/data/";
     SRTM_terrain_species_struct.model_filename = "./"; // for testing
     SRTM_terrain_species_struct.color_channel = g_height_data_color_channel;
-    SRTM_terrain_species_struct.lightPos = glm::vec3(4, 4, 4);
+    SRTM_terrain_species_struct.light_position = glm::vec3(4, 4, 4);
     SRTM_terrain_species_struct.is_world = true;
     model::Species *terrain_species = new model::Species(SRTM_terrain_species_struct);
 #else
@@ -197,7 +197,7 @@ int main(void)
     bmp_terrain_species_struct.model_file_format = g_model_file_format;
     bmp_terrain_species_struct.model_filename = g_model_filename;
     bmp_terrain_species_struct.color_channel = g_height_data_color_channel;
-    bmp_terrain_species_struct.lightPos = glm::vec3(4, 4, 4);
+    bmp_terrain_species_struct.light_position = glm::vec3(4, 4, 4);
     bmp_terrain_species_struct.is_world = true;
     model::Species *terrain_species = new model::Species(bmp_terrain_species_struct);
 #endif
@@ -215,7 +215,7 @@ int main(void)
     suzanne_species_struct.parent_pointer = my_uvmap_texture;
     suzanne_species_struct.model_file_format = "obj";
     suzanne_species_struct.model_filename = "suzanne.obj";
-    suzanne_species_struct.lightPos = glm::vec3(4, 4, 4);
+    suzanne_species_struct.light_position = glm::vec3(4, 4, 4);
     model::Species *suzanne_species = new model::Species(suzanne_species_struct);
 
     // Create suzanne1, store it in `suzanne1`.

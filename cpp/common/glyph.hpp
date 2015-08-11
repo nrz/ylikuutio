@@ -25,7 +25,7 @@ namespace model
             // this method gets a object ID and removes it from the `free_objectID_queue` if it was popped from the queue.
             GLuint get_objectID();
 
-            glm::vec3 lightPos;                    // light position.
+            glm::vec3 light_position;                    // light position.
 
             // The rest fields are created in the constructor.
             GLuint image_width;
