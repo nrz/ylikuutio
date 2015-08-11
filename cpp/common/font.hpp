@@ -34,6 +34,7 @@ namespace model
 
             model::Texture *parent_pointer;       // pointer to the texture.
 
+            friend class Glyph;
             template<class T1>
                 friend void render_children(std::vector<void*> &child_pointer_vector);
             template<class T1>

@@ -3,6 +3,11 @@
 
 namespace model
 {
+    void Glyph::bind_to_parent()
+    {
+        model::bind_child_to_parent<model::Glyph*>(this, this->parent_pointer->glyph_pointer_vector, this->parent_pointer->free_glyphID_queue);
+    }
+
     Glyph::Glyph(GlyphStruct glyph_struct)
     {
         // constructor.
