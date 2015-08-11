@@ -1,4 +1,7 @@
 #include "font.hpp"
+#include "model_common_functions.hpp"
+#include "model_templates.hpp"
+#include "font_loader.hpp"
 #include "glyph.hpp"
 
 namespace model

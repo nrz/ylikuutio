@@ -91,6 +91,8 @@ add_executable(several_objects
     cpp/common/heightmap_loader.hpp
     cpp/common/objloader.cpp
     cpp/common/objloader.hpp
+    cpp/common/font_loader.cpp
+    cpp/common/font_loader.hpp
     cpp/common/model_common_functions.cpp
     cpp/common/model_common_functions.hpp
     cpp/common/model_templates.hpp
@@ -148,6 +150,8 @@ add_executable(ylikuutio
     cpp/common/heightmap_loader.hpp
     cpp/common/objloader.cpp
     cpp/common/objloader.hpp
+    cpp/common/font_loader.cpp
+    cpp/common/font_loader.hpp
     cpp/common/model_common_functions.cpp
     cpp/common/model_common_functions.hpp
     cpp/common/model_templates.hpp
