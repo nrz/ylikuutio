@@ -90,7 +90,7 @@ extern bool is_invert_mouse_in_use;
 extern bool is_key_I_released;
 extern bool is_key_F_released;
 extern bool is_key_F1_released;
-extern bool is_world_loaded;                 // no more than one world object can be loaded. TODO: check that no more than one world is loaded!
+extern bool is_world_loaded;        // no more than one world object can be loaded. TODO: check that no more than one world is loaded!
 extern bool is_world_spherical;
 
 extern GLfloat speed;
@@ -103,12 +103,12 @@ extern glm::vec3 camera_position;
 typedef struct
 {
 #ifdef __STRUCT_DEFAULT_VALUES_ARE_ACCEPTED
-    void *parent_pointer = NULL;              // pointer to the world (draw list).
+    void *parent_pointer = NULL; // pointer to the world (draw list).
 #else
-    void *parent_pointer;                     // pointer to the world (draw list).
+    void *parent_pointer;        // pointer to the world (draw list).
 #endif
-    std::string vertex_shader;               // filename of vertex shader.
-    std::string fragment_shader;             // filename of fragment shader.
+    std::string vertex_shader;   // filename of vertex shader.
+    std::string fragment_shader; // filename of fragment shader.
 } ShaderStruct;
 
 #ifdef __STRUCT_DEFAULT_VALUES_ARE_ACCEPTED
@@ -122,12 +122,12 @@ ShaderStruct x; x.parent_pointer = NULL
 typedef struct
 {
 #ifdef __STRUCT_DEFAULT_VALUES_ARE_ACCEPTED
-    void *parent_pointer = NULL;             // pointer to the shader.
+    void *parent_pointer = NULL;     // pointer to the shader.
 #else
-    void *parent_pointer;                    // pointer to the shader.
+    void *parent_pointer;            // pointer to the shader.
 #endif
-    std::string texture_file_format;         // type of the texture file. supported file formats so far: `"bmp"`/`"BMP"`, `"dds"`/`"DDS"`.
-    std::string texture_filename;            // filename of the model file.
+    std::string texture_file_format; // type of the texture file. supported file formats so far: `"bmp"`/`"BMP"`, `"dds"`/`"DDS"`.
+    std::string texture_filename;    // filename of the model file.
     std::string image_path;
 } TextureStruct;
 
@@ -162,12 +162,12 @@ NodeStruct x; x.parent_pointer = NULL
 typedef struct
 {
 #ifdef __STRUCT_DEFAULT_VALUES_ARE_ACCEPTED
-    void *parent_pointer = NULL;                                  // pointer to the species.
+    void *parent_pointer = NULL;                                   // pointer to the species.
     glm::vec3 original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f); // original scale vector.
     GLfloat rotate_angle = NAN;                                    // rotate angle.
     bool is_character = false;                                     // The parent of a character object is a Glyph. The parent of a regular object is a Species.
 #else
-    void *parent_pointer;           // pointer to the species.
+    void *parent_pointer;            // pointer to the species.
     glm::vec3 original_scale_vector; // original scale vector.
     GLfloat rotate_angle;            // rotate angle.
     bool is_character;               // The parent of a character object is a Glyph. The parent of a regular object is a Species.
@@ -191,11 +191,11 @@ typedef struct
 {
     // used for all files (for all species).
 #ifdef __STRUCT_DEFAULT_VALUES_ARE_ACCEPTED
-    void *parent_pointer = NULL;            // pointer to the texture object.
+    void *parent_pointer = NULL;             // pointer to the texture object.
     bool is_world = false;                   // worlds currently do not rotate nor translate.
     double world_radius = NAN;               // radius of sea level in meters. used only for worlds.
 #else
-    void *parent_pointer;                   // pointer to the texture object.
+    void *parent_pointer;                    // pointer to the texture object.
     bool is_world;                           // worlds currently do not rotate nor translate.
     double world_radius;                     // radius of sea level in meters. used only for worlds.
 #endif
@@ -228,14 +228,14 @@ typedef struct
 #else
     void *parent_pointer;                   // pointer to the texture object.
 #endif
-    std::string font_file_format;            // type of the font file. supported file formats so far: `"svg"`/`"SVG"`.
-    std::string vertex_shader;               // filename of vertex shader.
-    std::string fragment_shader;             // filename of fragment shader.
-    glm::vec3 light_position;                      // light position.
-    std::vector<ObjectStruct> glyph_vector;  // vector of individual objects of this font.
+    std::string font_file_format;           // type of the font file. supported file formats so far: `"svg"`/`"SVG"`.
+    std::string vertex_shader;              // filename of vertex shader.
+    std::string fragment_shader;            // filename of fragment shader.
+    glm::vec3 light_position;               // light position.
+    std::vector<ObjectStruct> glyph_vector; // vector of individual objects of this font.
 
     // for `"bmp"` model files.
-    std::string font_filename;               // filename of the font file.
+    std::string font_filename;              // filename of the font file.
 } FontStruct;
 
 #ifdef __STRUCT_DEFAULT_VALUES_ARE_ACCEPTED
@@ -250,9 +250,9 @@ typedef struct
 {
     // used for all files (for all glyph).
 #ifdef __STRUCT_DEFAULT_VALUES_ARE_ACCEPTED
-    void *parent_pointer = NULL;               // pointer to the font object.
+    void *parent_pointer = NULL;             // pointer to the font object.
 #else
-    void *parent_pointer;                      // pointer to the font object.
+    void *parent_pointer;                    // pointer to the font object.
 #endif
     std::vector<ObjectStruct> object_vector; // vector of individual objects of this glyph.
 } GlyphStruct;
