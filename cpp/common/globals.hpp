@@ -201,14 +201,15 @@ typedef struct
 #endif
     std::string model_file_format;           // type of the model file. supported file formats so far: `"bmp"`/`"BMP"`, `"obj"`/`"OBJ"`.
                                              // TODO: add support for `"SRTM"`.
-    glm::vec3 light_position;                      // light position.
+    std::string model_filename;              // filename of the model file.
+    // for `"bmp"` model files.
+    std::string color_channel;               // color channel to use for altitude data.
+
+    glm::vec3 light_position;                // light position.
     std::vector<ObjectStruct> object_vector; // vector of individual objects of this species.
     std::string coordinate_system;           // used only for worlds (`is_world` == `true`). valid values: `"cartesian"`.
                                              // TODO: add support for `"spherical"`. `"spherical"` is used eg. in SRTM heightmaps.
 
-    // for `"bmp"` model files.
-    std::string model_filename;              // filename of the model file.
-    std::string color_channel;               // color channel to use for altitude data.
 } SpeciesStruct;
 
 #ifdef __STRUCT_DEFAULT_VALUES_ARE_ACCEPTED
