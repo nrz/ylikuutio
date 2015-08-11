@@ -28,8 +28,6 @@ namespace model
             // this method sets pointer to this species to NULL, sets `parent_pointer` according to the input, and requests a new `childID` from the new texture.
             void bind_to_new_parent(model::Texture *new_texture_pointer);
 
-            glm::vec3 light_position;                      // light position.
-
             // The rest fields are created in the constructor.
             GLuint image_width;
             GLuint image_height;
