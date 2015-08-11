@@ -254,6 +254,7 @@ typedef struct
 #else
     void *parent_pointer;                    // pointer to the font object.
 #endif
+    glm::vec3 light_position;                // light position.
     std::vector<ObjectStruct> object_vector; // vector of individual objects of this glyph.
 } GlyphStruct;
 
