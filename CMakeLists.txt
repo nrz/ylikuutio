@@ -201,6 +201,7 @@ configure_file(cpp/ylikuutio/noise1024x1024.bmp noise1024x1024.bmp COPYONLY)
 configure_file(cpp/ylikuutio/noise256x256.bmp noise256x256.bmp COPYONLY)
 configure_file(cpp/ylikuutio/noise128x128.bmp noise128x128.bmp COPYONLY)
 configure_file(cpp/ylikuutio/S17W069.hgt S17W069.hgt COPYONLY)
+configure_file(external/kongtext/kongtext.svg kongtext.svg COPYONLY)
 
 target_link_libraries(ylikuutio
     ${ALL_LIBS}
