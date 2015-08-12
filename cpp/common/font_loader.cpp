@@ -92,7 +92,7 @@ namespace model
         return false;
     }
 
-    bool extract_string(
+    void extract_string(
             char* dest_mem_pointer,
             char* src_mem_pointer,
             char* char_end_string)
@@ -166,34 +166,33 @@ namespace model
                         // A glyph-name was found.
                         // TODO: If the glyph does not have a glyph name, an empty string will be stored as glyph-name.
                         // printf("glyph-name= found at 0x%lx.\n", (uint64_t) SVG_data_pointer);
+
+                        // Find the memory address of the opening double quote.
+                        char* opening_double_quote_pointer = strchr(SVG_data_pointer, '"');
+                        if (opening_double_quote_pointer != NULL)
                         {
-                            // Find the memory address of the opening double quote.
-                            char* opening_double_quote_pointer = strchr(SVG_data_pointer, '"');
-                            if (opening_double_quote_pointer != NULL)
+                            // printf("opening \" found at 0x%lx.\n", (uint64_t) opening_double_quote_pointer);
+
+                            opening_double_quote_pointer += sizeof(*opening_double_quote_pointer);
+
+                            // Find the memory address of the closing double quote.
+                            char* closing_double_quote_pointer = strchr(opening_double_quote_pointer, '"');
+                            if (closing_double_quote_pointer != NULL)
                             {
-                                // printf("opening \" found at 0x%lx.\n", (uint64_t) opening_double_quote_pointer);
+                                // printf("closing \" found at 0x%lx.\n", (uint64_t) closing_double_quote_pointer);
 
-                                opening_double_quote_pointer += sizeof(*opening_double_quote_pointer);
+                                closing_double_quote_pointer += sizeof(*closing_double_quote_pointer);
 
-                                // Find the memory address of the closing double quote.
-                                char* closing_double_quote_pointer = strchr(opening_double_quote_pointer, '"');
-                                if (closing_double_quote_pointer != NULL)
-                                {
-                                    // printf("closing \" found at 0x%lx.\n", (uint64_t) closing_double_quote_pointer);
+                                char char_glyph_name[1024];
+                                char* src_mem_pointer;
+                                char* dest_mem_pointer;
+                                src_mem_pointer = opening_double_quote_pointer;
+                                dest_mem_pointer = char_glyph_name;
+                                extract_string(dest_mem_pointer, src_mem_pointer, (char*) "\"");
 
-                                    closing_double_quote_pointer += sizeof(*closing_double_quote_pointer);
+                                printf("glyph name: %s\n", char_glyph_name);
 
-                                    char char_glyph_name[1024];
-                                    char* src_mem_pointer;
-                                    char* dest_mem_pointer;
-                                    src_mem_pointer = opening_double_quote_pointer;
-                                    dest_mem_pointer = char_glyph_name;
-                                    extract_string(dest_mem_pointer, src_mem_pointer, (char*) "\"");
-
-                                    printf("glyph name: %s\n", char_glyph_name);
-
-                                    SVG_data_pointer = closing_double_quote_pointer;
-                                }
+                                SVG_data_pointer = closing_double_quote_pointer;
                             }
                         }
                     }
@@ -202,50 +201,78 @@ namespace model
                         // Unicode was found.
                         // TODO: If the glyph does not have unicode, the glyph will be discarded (as there is no way to refer to it).
                         // printf("unicode= found at 0x%lx.\n", (uint64_t) SVG_data_pointer);
+
+                        // Find the memory address of the opening double quote.
+                        char* opening_double_quote_pointer = strchr(SVG_data_pointer, '"');
+                        if (opening_double_quote_pointer != NULL)
                         {
-                            // Find the memory address of the opening double quote.
-                            char* opening_double_quote_pointer = strchr(SVG_data_pointer, '"');
-                            if (opening_double_quote_pointer != NULL)
+                            // printf("opening \" found at 0x%lx.\n", (uint64_t) opening_double_quote_pointer);
+
+                            opening_double_quote_pointer += sizeof(*opening_double_quote_pointer);
+
+                            // Find the memory address of the closing double quote.
+                            char* closing_double_quote_pointer = strchr(opening_double_quote_pointer, '"');
+                            if (closing_double_quote_pointer != NULL)
                             {
-                                // printf("opening \" found at 0x%lx.\n", (uint64_t) opening_double_quote_pointer);
+                                // printf("closing \" found at 0x%lx.\n", (uint64_t) closing_double_quote_pointer);
 
-                                opening_double_quote_pointer += sizeof(*opening_double_quote_pointer);
+                                closing_double_quote_pointer += sizeof(*closing_double_quote_pointer);
 
-                                // Find the memory address of the closing double quote.
-                                char* closing_double_quote_pointer = strchr(opening_double_quote_pointer, '"');
-                                if (closing_double_quote_pointer != NULL)
-                                {
-                                    // printf("closing \" found at 0x%lx.\n", (uint64_t) closing_double_quote_pointer);
+                                char char_unicode[1024];
+                                char* src_mem_pointer;
+                                char* dest_mem_pointer;
+                                src_mem_pointer = opening_double_quote_pointer;
+                                dest_mem_pointer = char_unicode;
+                                extract_string(dest_mem_pointer, src_mem_pointer, (char*) "\"");
 
-                                    closing_double_quote_pointer += sizeof(*closing_double_quote_pointer);
+                                printf("unicode: %s\n", char_unicode);
 
-                                    char char_unicode[1024];
-                                    char* src_mem_pointer;
-                                    char* dest_mem_pointer;
-                                    src_mem_pointer = opening_double_quote_pointer;
-                                    dest_mem_pointer = char_unicode;
-                                    extract_string(dest_mem_pointer, src_mem_pointer, (char*) "\"");
-
-                                    printf("unicode: %s\n", char_unicode);
-
-                                    SVG_data_pointer = closing_double_quote_pointer;
-                                }
+                                SVG_data_pointer = closing_double_quote_pointer;
                             }
                         }
                     }
-                    else if (strncmp(SVG_data_pointer, "d=\"", strlen("d=\"")) == 0)
+                    else if (strncmp(SVG_data_pointer, "d=", strlen("d=")) == 0)
                     {
                         // d=" was found.
                         // Follow the path and create the vertices accordingly.
                         // TODO: If the glyph does not have path, the vertex data will be empty (space is an example).
                         // printf("d=\" found at 0x%lx.\n", (uint64_t) SVG_data_pointer);
+
+                        // Find the memory address of the opening double quote.
+                        char* opening_double_quote_pointer = strchr(SVG_data_pointer, '"');
+                        if (opening_double_quote_pointer != NULL)
                         {
-                            SVG_data_pointer += strlen("d=\"");
+                            // printf("opening \" found at 0x%lx.\n", (uint64_t) opening_double_quote_pointer);
+
+                            opening_double_quote_pointer += sizeof(*opening_double_quote_pointer);
+
+                            // Find the memory address of the closing double quote.
+                            char* closing_double_quote_pointer = strchr(opening_double_quote_pointer, '"');
+                            if (closing_double_quote_pointer != NULL)
+                            {
+                                // printf("closing \" found at 0x%lx.\n", (uint64_t) closing_double_quote_pointer);
+
+                                closing_double_quote_pointer += sizeof(*closing_double_quote_pointer);
+
+                                char char_path[1024];
+                                char* src_mem_pointer;
+                                char* dest_mem_pointer;
+                                src_mem_pointer = opening_double_quote_pointer;
+                                dest_mem_pointer = char_path;
+                                extract_string(dest_mem_pointer, src_mem_pointer, (char*) "\"");
+
+                                printf("d: %s\n", char_path);
+
+                                SVG_data_pointer = closing_double_quote_pointer;
+                            }
                         }
                     }
                     else if (strncmp(SVG_data_pointer, ">", strlen(">")) == 0)
                     {
                         // OK, this is the end of this glyph.
+                        // Create default vertex vector (no vertices), if needed.
+                        // Store the vertices to the vertex vector.
+                        // Store the vertex vector to glyph vector.
                         break;
                     }
                     SVG_data_pointer += sizeof(*SVG_data_pointer);  // Advance to the next byte inside the glyph.
