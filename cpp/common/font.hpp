@@ -54,6 +54,8 @@ namespace model
             const char *char_font_file_format;
             const char *char_font_filename;
 
+            std::vector<std::vector<glm::vec3>> glyph_vertex_data;
+
             std::vector<void*> glyph_pointer_vector;
             std::queue<GLuint> free_glyphID_queue;
     };

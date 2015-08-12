@@ -29,7 +29,9 @@ namespace model
         if ((strcmp(this->char_font_file_format, "svg") == 0) || (strcmp(this->char_font_file_format, "SVG") == 0))
         {
             // TODO: implement `load_SVG_font`! It should read all necessary data to this Font object.
-            font_loading_result = model::load_SVG_font(this->font_filename);
+            font_loading_result = model::load_SVG_font(
+                    this->font_filename,
+                    this->glyph_vertex_data);
         }
 
         // Font constructor also creates each Glyph and binds them to the Font.
