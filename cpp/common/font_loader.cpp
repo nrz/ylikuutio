@@ -7,7 +7,7 @@
 
 namespace model
 {
-    bool find_first_glyph_in_SVG(char* SVG_data_pointer)
+    bool find_first_glyph_in_SVG(char*& SVG_data_pointer)
     {
         bool is_inside_block = false;
 
