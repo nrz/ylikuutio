@@ -86,6 +86,9 @@ std::string g_font_texture_file_format = "bmp";
 // std::string g_font_texture_filename = "Holstein.DDS";
 std::string g_font_texture_filename = "Holstein.bmp";
 
+std::string g_font_file_format = "svg";
+std::string g_font_filename = "kongtext.svg";
+
 int main(void)
 {
     // Initial position : on +Z
@@ -261,6 +264,12 @@ int main(void)
     suzanne_object_struct5.rotate_vector = glm::vec3(1.0f, 1.0f, 1.0f);
     suzanne_object_struct5.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
     model::Object *suzanne5 = new model::Object(suzanne_object_struct5);
+
+    FONTSTRUCT(kongtext_font_struct);
+    kongtext_font_struct.parent_pointer = my_grass_texture;
+    kongtext_font_struct.font_file_format = g_font_file_format;
+    kongtext_font_struct.font_file_format = g_font_filename;
+    model::Font *kongtext_font = new model::Font(kongtext_font_struct);
 
     std::cout << "number of vertices: " << terrain_species->vertices.size() << ".\n";
     std::cout << "number of UVs: " << terrain_species->UVs.size() << ".\n";
