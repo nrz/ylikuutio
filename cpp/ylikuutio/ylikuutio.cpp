@@ -336,6 +336,7 @@ int main(void)
             char off_text[] = "off";
 
             char *flight_mode_text;
+            char *invert_mouse_text;
 
             if (inFlightmode)
             {
@@ -344,6 +345,15 @@ int main(void)
             else
             {
                 flight_mode_text = off_text;
+            }
+
+            if (is_invert_mouse_in_use)
+            {
+                invert_mouse_text = on_text;
+            }
+            else
+            {
+                invert_mouse_text = off_text;
             }
 
             char help_text[1024];
@@ -355,6 +365,7 @@ int main(void)
                     "S-south\\n"
                     "W-west\\n"
                     "E-east\\n"
+                    "I-invert mouse (%s)\\n"
                     "F-flight mode (%s)\\n"
                     "G-grass texture\\n"
                     "U-uvmap texture\\n"
@@ -362,6 +373,7 @@ int main(void)
                     "A-suzanne species\\n"
                     "Ctrl     -turbo\\n"
                     "Ctrl+Ctrl-extra turbo\\n",
+                    invert_mouse_text,
                     flight_mode_text);
 
 #ifdef TESTING_SPHERICAL_WORLD_IN_USE
