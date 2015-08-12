@@ -268,7 +268,7 @@ int main(void)
     FONTSTRUCT(kongtext_font_struct);
     kongtext_font_struct.parent_pointer = my_grass_texture;
     kongtext_font_struct.font_file_format = g_font_file_format;
-    kongtext_font_struct.font_file_format = g_font_filename;
+    kongtext_font_struct.font_filename = g_font_filename;
     model::Font *kongtext_font = new model::Font(kongtext_font_struct);
 
     std::cout << "number of vertices: " << terrain_species->vertices.size() << ".\n";
