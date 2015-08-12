@@ -20,59 +20,59 @@ namespace model
 
                 if (strncmp(SVG_data_pointer, "<?xml ", strlen("<?xml ")) == 0)
                 {
-                    printf("<?xml found at 0x%x. ", SVG_data_pointer);
+                    printf("<?xml found at 0x%lx. ", (uint64_t) SVG_data_pointer);
                     is_inside_block = true;
                 }
                 else if (strncmp(SVG_data_pointer, "<!DOCTYPE ", strlen("<!DOCTYPE ")) == 0)
                 {
-                    printf("<!DOCTYPE found at 0x%x. ", SVG_data_pointer);
+                    printf("<!DOCTYPE found at 0x%lx. ", (uint64_t) SVG_data_pointer);
                     is_inside_block = true;
                 }
                 else if (strncmp(SVG_data_pointer, "<svg>", strlen("<svg>")) == 0)
                 {
-                    printf("<svg> found at 0x%x. ", SVG_data_pointer);
+                    printf("<svg> found at 0x%lx. ", (uint64_t) SVG_data_pointer);
                     is_inside_block = true;
                 }
                 else if (strncmp(SVG_data_pointer, "<metadata>", strlen("<metadata>")) == 0)
                 {
-                    printf("<metadata> found at 0x%x. ", SVG_data_pointer);
+                    printf("<metadata> found at 0x%lx. ", (uint64_t) SVG_data_pointer);
                     is_inside_block = true;
                 }
                 else if (strncmp(SVG_data_pointer, "</metadata>", strlen("</metadata>")) == 0)
                 {
-                    printf("</metadata> found at 0x%x. ", SVG_data_pointer);
+                    printf("</metadata> found at 0x%lx. ", (uint64_t) SVG_data_pointer);
                     is_inside_block = true;
                 }
                 else if (strncmp(SVG_data_pointer, "<defs>", strlen("<defs>")) == 0)
                 {
-                    printf("<defs> found at 0x%x. ", SVG_data_pointer);
+                    printf("<defs> found at 0x%lx. ", (uint64_t) SVG_data_pointer);
                     is_inside_block = true;
                 }
                 else if (strncmp(SVG_data_pointer, "<font ", strlen("<font ")) == 0)
                 {
-                    printf("<font found at 0x%x. ", SVG_data_pointer);
+                    printf("<font found at 0x%lx. ", (uint64_t) SVG_data_pointer);
                     is_inside_block = true;
                 }
                 else if (strncmp(SVG_data_pointer, "<font-face", strlen("<font-face")) == 0)
                 {
-                    printf("<font-face found at 0x%x. ", SVG_data_pointer);
+                    printf("<font-face found at 0x%lx. ", (uint64_t) SVG_data_pointer);
                     is_inside_block = true;
                 }
                 else if (strncmp(SVG_data_pointer, "<missing-glyph", strlen("<missing-glyph")) == 0)
                 {
-                    printf("<missing-glyph found at 0x%x. ", SVG_data_pointer);
+                    printf("<missing-glyph found at 0x%lx. ", (uint64_t) SVG_data_pointer);
                     is_inside_block = true;
                 }
                 else if (strncmp(SVG_data_pointer, "<glyph", strlen("<glyph")) == 0)
                 {
                     // A glyph was found!
-                    printf("<glyph found at 0x%x.\n", SVG_data_pointer);
+                    printf("<glyph found at 0x%lx.\n", (uint64_t) SVG_data_pointer);
                     return true;
                 }
                 else if (strncmp(SVG_data_pointer, "</svg>", strlen("</svg>")) == 0)
                 {
                     // No glyphs were found!
-                    printf("No glyphs were found! </svg> found at 0x%x. ", SVG_data_pointer);
+                    printf("No glyphs were found! </svg> found at 0x%lx. ", (uint64_t) SVG_data_pointer);
                     break;
                 }
                 SVG_data_pointer++; // Advance to the next byte.
@@ -84,7 +84,7 @@ namespace model
                 SVG_data_pointer = strchr(SVG_data_pointer, '>');
                 if (SVG_data_pointer != NULL)
                 {
-                    printf("> found at 0x%x.\n", SVG_data_pointer);
+                    printf("> found at 0x%lx.\n", (uint64_t) SVG_data_pointer);
                 }
                 is_inside_block = false;
             }
@@ -135,7 +135,7 @@ namespace model
             std::cerr << "no glyphs were found!\n";
             return false;
         }
-        printf("First glyph found at 0x%x.\n", SVG_data_pointer);
+        printf("First glyph found at 0x%lx.\n", (uint64_t) SVG_data_pointer);
 
         // TODO: implement the creation of the glyph objects.
         return true;
