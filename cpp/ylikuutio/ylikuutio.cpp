@@ -335,27 +335,6 @@ int main(void)
             char on_text[] = "on";
             char off_text[] = "off";
 
-            char *flight_mode_text;
-            char *invert_mouse_text;
-
-            if (inFlightmode)
-            {
-                flight_mode_text = on_text;
-            }
-            else
-            {
-                flight_mode_text = off_text;
-            }
-
-            if (is_invert_mouse_in_use)
-            {
-                invert_mouse_text = on_text;
-            }
-            else
-            {
-                invert_mouse_text = off_text;
-            }
-
             char help_text[1024];
             sprintf(
                     help_text,
@@ -373,8 +352,8 @@ int main(void)
                     "A-suzanne species\\n"
                     "Ctrl     -turbo\\n"
                     "Ctrl+Ctrl-extra turbo\\n",
-                    invert_mouse_text,
-                    flight_mode_text);
+                    (is_invert_mouse_in_use ? on_text : off_text),
+                    (inFlightmode ? on_text : off_text));
 
 #ifdef TESTING_SPHERICAL_WORLD_IN_USE
             char spherical_coordinates_text[256];
