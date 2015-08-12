@@ -54,7 +54,7 @@ namespace model
 
         // destroy all fonts of this texture.
         std::cout << "All fonts of this texture will be destroyed.\n";
-        model::delete_children<model::Font*>(this->species_pointer_vector);
+        model::delete_children<model::Font*>(this->font_pointer_vector);
 
         glDeleteTextures(1, &this->texture);
 
