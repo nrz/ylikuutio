@@ -200,14 +200,7 @@ namespace model
         {
             if (is_key_F_released)
             {
-                if (is_flight_mode_in_use)
-                {
-                    is_flight_mode_in_use = false;
-                }
-                else
-                {
-                    is_flight_mode_in_use = true;
-                }
+                is_flight_mode_in_use = (is_flight_mode_in_use ? false : true);
                 fallSpeed = 0.0f;
                 is_key_F_released = false;
             }
@@ -229,14 +222,7 @@ namespace model
         {
             if (is_key_I_released)
             {
-                if (is_invert_mouse_in_use)
-                {
-                    is_invert_mouse_in_use = false;
-                }
-                else
-                {
-                    is_invert_mouse_in_use = true;
-                }
+                is_invert_mouse_in_use = (is_invert_mouse_in_use ? false : true);
                 is_key_I_released = false;
             }
         }
