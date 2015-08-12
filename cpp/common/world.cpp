@@ -200,13 +200,13 @@ namespace model
         {
             if (is_key_F_released)
             {
-                if (inFlightmode)
+                if (is_flight_mode_in_use)
                 {
-                    inFlightmode = false;
+                    is_flight_mode_in_use = false;
                 }
                 else
                 {
-                    inFlightmode = true;
+                    is_flight_mode_in_use = true;
                 }
                 fallSpeed = 0.0f;
                 is_key_F_released = false;
@@ -217,7 +217,7 @@ namespace model
             is_key_F_released = true;
         }
 
-        if (!inFlightmode)
+        if (!is_flight_mode_in_use)
         {
             fallSpeed += gravity;
             position.y -= fallSpeed;
@@ -246,7 +246,7 @@ namespace model
         }
 
         // adjust position according to the ground.
-        if (!inFlightmode)
+        if (!is_flight_mode_in_use)
         {
             if (this->world_species_pointer != NULL)
             {

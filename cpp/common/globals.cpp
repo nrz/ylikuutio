@@ -16,7 +16,7 @@ glm::mat4 ProjectionMatrix;
 glm::mat4 ViewMatrix;
 glm::vec3 position;
 GLfloat gravity = 9.81f / 60.0f;
-bool inFlightmode;
+bool is_flight_mode_in_use;
 bool in_help_mode = true;
 GLfloat fallSpeed = gravity;
 SphericalCoordinatesStruct spherical_position;

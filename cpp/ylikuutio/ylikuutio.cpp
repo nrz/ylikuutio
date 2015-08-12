@@ -353,7 +353,7 @@ int main(void)
                     "Ctrl     -turbo\\n"
                     "Ctrl+Ctrl-extra turbo\\n",
                     (is_invert_mouse_in_use ? on_text : off_text),
-                    (inFlightmode ? on_text : off_text));
+                    (is_flight_mode_in_use ? on_text : off_text));
 
 #ifdef TESTING_SPHERICAL_WORLD_IN_USE
             char spherical_coordinates_text[256];

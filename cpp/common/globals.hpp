@@ -78,7 +78,7 @@ extern glm::mat4 ProjectionMatrix;
 extern glm::mat4 ViewMatrix;
 extern glm::vec3 position;
 extern GLfloat gravity;
-extern bool inFlightmode;
+extern bool is_flight_mode_in_use;
 extern bool in_help_mode;
 extern GLfloat fallSpeed;
 extern double horizontalAngle;
