@@ -75,7 +75,7 @@ namespace model
                     printf("No glyphs were found! </svg> found at 0x%lx. ", (uint64_t) SVG_data_pointer);
                     break;
                 }
-                SVG_data_pointer++; // Advance to the next byte.
+                SVG_data_pointer += sizeof(*SVG_data_pointer);  // Advance to the next character.
             }
             else
             {
@@ -92,12 +92,25 @@ namespace model
         return false;
     }
 
-    // bool load_SVG_font(std::string font_file_path)
+    bool extract_string(
+            char* dest_mem_pointer,
+            char* src_mem_pointer,
+            char* char_end_string)
+    {
+        while (strncmp(src_mem_pointer, char_end_string, strlen(char_end_string)) != 0)
+        {
+            strncpy(dest_mem_pointer, src_mem_pointer, 1);
+            dest_mem_pointer += sizeof(*src_mem_pointer);
+            src_mem_pointer += sizeof(*src_mem_pointer);
+        }
+        *dest_mem_pointer = '\0';
+    }
+
     bool load_SVG_font(
             std::string font_file_path,
             std::vector<std::vector<glm::vec3>> &out_glyph_vertex_data)
     {
-        std::cout << "Loading SVG font file " << font_file_path << " ...\n";
+        std::cout << "Reading SVG font file " << font_file_path << " ...\n";
 
         // TODO: check the size of the font file programmatically!
         uint32_t kongtext_svg_file_size = 22932;
@@ -137,7 +150,124 @@ namespace model
         }
         printf("First glyph found at 0x%lx.\n", (uint64_t) SVG_data_pointer);
 
-        // TODO: implement the creation of the glyph objects.
+        // Create the vertex data for each glyph in a loop.
+        while (true)
+        {
+            if (strncmp(SVG_data_pointer, "<glyph", strlen("<glyph")) == 0)
+            {
+                // A glyph was found!
+                // printf("<glyph found at 0x%lx.\n", (uint64_t) SVG_data_pointer);
+
+                while (true)
+                {
+                    // Keep reading the glyph.
+                    if (strncmp(SVG_data_pointer, "glyph-name=", strlen("glyph-name=")) == 0)
+                    {
+                        // A glyph-name was found.
+                        // TODO: If the glyph does not have a glyph name, an empty string will be stored as glyph-name.
+                        // printf("glyph-name= found at 0x%lx.\n", (uint64_t) SVG_data_pointer);
+                        {
+                            // Find the memory address of the opening double quote.
+                            char* opening_double_quote_pointer = strchr(SVG_data_pointer, '"');
+                            if (opening_double_quote_pointer != NULL)
+                            {
+                                // printf("opening \" found at 0x%lx.\n", (uint64_t) opening_double_quote_pointer);
+
+                                opening_double_quote_pointer += sizeof(*opening_double_quote_pointer);
+
+                                // Find the memory address of the closing double quote.
+                                char* closing_double_quote_pointer = strchr(opening_double_quote_pointer, '"');
+                                if (closing_double_quote_pointer != NULL)
+                                {
+                                    // printf("closing \" found at 0x%lx.\n", (uint64_t) closing_double_quote_pointer);
+
+                                    closing_double_quote_pointer += sizeof(*closing_double_quote_pointer);
+
+                                    char char_glyph_name[1024];
+                                    char* src_mem_pointer;
+                                    char* dest_mem_pointer;
+                                    src_mem_pointer = opening_double_quote_pointer;
+                                    dest_mem_pointer = char_glyph_name;
+                                    extract_string(dest_mem_pointer, src_mem_pointer, (char*) "\"");
+
+                                    printf("glyph name: %s\n", char_glyph_name);
+
+                                    SVG_data_pointer = closing_double_quote_pointer;
+                                }
+                            }
+                        }
+                    }
+                    else if (strncmp(SVG_data_pointer, "unicode=", strlen("unicode=")) == 0)
+                    {
+                        // Unicode was found.
+                        // TODO: If the glyph does not have unicode, the glyph will be discarded (as there is no way to refer to it).
+                        // printf("unicode= found at 0x%lx.\n", (uint64_t) SVG_data_pointer);
+                        {
+                            // Find the memory address of the opening double quote.
+                            char* opening_double_quote_pointer = strchr(SVG_data_pointer, '"');
+                            if (opening_double_quote_pointer != NULL)
+                            {
+                                // printf("opening \" found at 0x%lx.\n", (uint64_t) opening_double_quote_pointer);
+
+                                opening_double_quote_pointer += sizeof(*opening_double_quote_pointer);
+
+                                // Find the memory address of the closing double quote.
+                                char* closing_double_quote_pointer = strchr(opening_double_quote_pointer, '"');
+                                if (closing_double_quote_pointer != NULL)
+                                {
+                                    // printf("closing \" found at 0x%lx.\n", (uint64_t) closing_double_quote_pointer);
+
+                                    closing_double_quote_pointer += sizeof(*closing_double_quote_pointer);
+
+                                    char char_unicode[1024];
+                                    char* src_mem_pointer;
+                                    char* dest_mem_pointer;
+                                    src_mem_pointer = opening_double_quote_pointer;
+                                    dest_mem_pointer = char_unicode;
+                                    extract_string(dest_mem_pointer, src_mem_pointer, (char*) "\"");
+
+                                    printf("unicode: %s\n", char_unicode);
+
+                                    SVG_data_pointer = closing_double_quote_pointer;
+                                }
+                            }
+                        }
+                    }
+                    else if (strncmp(SVG_data_pointer, "d=\"", strlen("d=\"")) == 0)
+                    {
+                        // d=" was found.
+                        // Follow the path and create the vertices accordingly.
+                        // TODO: If the glyph does not have path, the vertex data will be empty (space is an example).
+                        // printf("d=\" found at 0x%lx.\n", (uint64_t) SVG_data_pointer);
+                        {
+                            SVG_data_pointer += strlen("d=\"");
+                        }
+                    }
+                    else if (strncmp(SVG_data_pointer, ">", strlen(">")) == 0)
+                    {
+                        // OK, this is the end of this glyph.
+                        break;
+                    }
+                    SVG_data_pointer += sizeof(*SVG_data_pointer);  // Advance to the next byte inside the glyph.
+                }
+            } // End of glyph.
+            else if (strncmp(SVG_data_pointer, "</font>", strlen("</font>")) == 0)
+            {
+                printf("</font> found at 0x%lx.\n", (uint64_t) SVG_data_pointer);
+                break;
+            }
+            else if (strncmp(SVG_data_pointer, "</defs>", strlen("</defs>")) == 0)
+            {
+                printf("</defs> found at 0x%lx.\n", (uint64_t) SVG_data_pointer);
+                break;
+            }
+            else if (strncmp(SVG_data_pointer, "</svg>", strlen("</svg>")) == 0)
+            {
+                printf("</svg> found at 0x%lx.\n", (uint64_t) SVG_data_pointer);
+                break;
+            }
+            SVG_data_pointer += sizeof(*SVG_data_pointer);  // Advance to the next byte between glyphs.
+        }
         return true;
     }
 }
