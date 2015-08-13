@@ -20,9 +20,10 @@ namespace model
     Font::Font(FontStruct font_struct)
     {
         // constructor.
-        this->font_file_format = font_struct.font_file_format;
-        this->font_filename    = font_struct.font_filename;
-        this->parent_pointer   = static_cast<model::Texture*>(font_struct.parent_pointer);
+        this->font_file_format      = font_struct.font_file_format;
+        this->font_filename         = font_struct.font_filename;
+        this->vertex_scaling_factor = font_struct.vertex_scaling_factor;
+        this->parent_pointer        = static_cast<model::Texture*>(font_struct.parent_pointer);
 
         this->char_font_file_format = this->font_file_format.c_str();
         this->char_font_filename    = this->font_filename.c_str();

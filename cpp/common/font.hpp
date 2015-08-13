@@ -57,6 +57,7 @@ namespace model
 
             std::string font_file_format;          // type of the model file, eg. `"bmp"`.
             std::string font_filename;             // filename of the model file.
+            GLfloat vertex_scaling_factor;
             GLuint childID;                        // species ID, returned by `model::Texture->get_speciesID()`.
             const char *char_font_file_format;
             const char *char_font_filename;
