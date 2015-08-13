@@ -430,7 +430,7 @@ namespace model
 
                             // TODO: Create default vertex vector (no vertices), if needed.
                             //
-                            printf("number of vertices: %d\n", current_glyph_vertices.size());
+                            printf("number of vertices: %lu\n", current_glyph_vertices.size());
                             // Store the vertices of the current vector to the glyph vertex vector
                             // which contains the vertices of all the glyphs.
                             out_glyph_vertex_data.push_back(current_glyph_vertices);
