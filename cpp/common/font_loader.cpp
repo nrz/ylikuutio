@@ -1,9 +1,15 @@
+#include "font_loader.hpp"
+
+// Include GLEW
+#ifndef __GL_GLEW_H_INCLUDED
+#define __GL_GLEW_H_INCLUDED
+#include <GL/glew.h> // GLfloat, GLuint etc.
+#endif
+
 // Include standard headers
 #include <iostream>
 #include <string>
 #include <string.h>
-
-#include "font_loader.hpp"
 
 namespace model
 {

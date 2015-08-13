@@ -1,20 +1,23 @@
 #ifndef __COMMON_SHADER_HPP_INCLUDED
 #define __COMMON_SHADER_HPP_INCLUDED
 
-// Include standard headers
-#include <stdio.h>
-#include <string>
-#include <vector>
-#include <iostream>
-#include <fstream>
-#include <algorithm> // std::find
+#include "shader_loader.hpp"
 
+// Include GLEW
+#ifndef __GL_GLEW_H_INCLUDED
+#define __GL_GLEW_H_INCLUDED
+#include <GL/glew.h> // GLfloat, GLuint etc.
+#endif
+
+// Include standard headers
+#include <algorithm> // std::find
+#include <fstream>
+#include <iostream>
+#include <string>
+#include <vector>    // std::vector
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-#include <GL/glew.h>
-
-#include "shader_loader.hpp"
 
 GLuint LoadShaders(const char *vertex_file_path, const char *fragment_file_path)
 {

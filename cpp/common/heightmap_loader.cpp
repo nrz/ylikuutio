@@ -3,17 +3,8 @@
 #define DEGREES_TO_RADIANS(x) (x * PI / 180.0f)
 #endif
 
-// Include standard headers
-#include <iostream>
-#include <string>
-#include <string.h>
-#include <cstring>
-#include <vector>   // std::vector
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdint.h> // uint32_t etc.
-#include <sstream>  // stringstream etc.
-#include <iomanip>  // setw, setfill etc.
+#include "heightmap_loader.hpp"
+#include "globals.hpp"
 
 // Include GLEW
 #ifndef __GL_GLEW_H_INCLUDED
@@ -27,8 +18,17 @@
 #include <glm/glm.hpp> // glm
 #endif
 
-#include "globals.hpp"
-#include "heightmap_loader.hpp"
+// Include standard headers
+#include <iostream>
+#include <string>
+#include <string.h>
+#include <cstring>
+#include <vector>   // std::vector
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdint.h> // uint32_t etc.
+#include <sstream>  // stringstream etc.
+#include <iomanip>  // setw, setfill etc.
 
 #define SRTM_FILENAME_N_OF_LATITUDE_CHARS 2
 #define SRTM_FILENAME_N_OF_LONGITUDE_CHARS 3

@@ -1,14 +1,20 @@
 #ifndef __SPECIES_HPP_INCLUDED
 #define __SPECIES_HPP_INCLUDED
 
-// Include standard headers
-#include <vector>    // std::vector
-#include <queue>     // std::queue
-
 #include "texture.hpp"
 #include "model_common_functions.hpp"
 #include "model_templates.hpp"
 #include "species_or_glyph.hpp"
+
+// Include GLEW
+#ifndef __GL_GLEW_H_INCLUDED
+#define __GL_GLEW_H_INCLUDED
+#include <GL/glew.h> // GLfloat, GLuint etc.
+#endif
+
+// Include standard headers
+#include <vector>    // std::vector
+#include <queue>     // std::queue
 
 namespace model
 {

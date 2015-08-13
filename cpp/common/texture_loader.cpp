@@ -1,8 +1,4 @@
-// Include standard headers
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdint.h> // uint32_t etc.
-#include <string.h>
+#include "texture_loader.hpp"
 
 // Include GLEW
 #ifndef __GL_GLEW_H_INCLUDED
@@ -15,6 +11,12 @@
 #define __GLFW3_H_INCLUDED
 #include <glfw3.h>
 #endif
+
+// Include standard headers
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdint.h> // uint32_t etc.
+#include <string.h>
 
 namespace texture
 {

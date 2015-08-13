@@ -1,7 +1,6 @@
-// Include standard headers
-#include <vector>   // std::vector
-#include <cstring>
-#include <stdint.h> // uint32_t etc.
+#include "text2D.hpp"
+#include "shader_loader.hpp"
+#include "texture_loader.hpp"
 
 // Include GLEW
 #ifndef __GL_GLEW_H_INCLUDED
@@ -15,10 +14,15 @@
 #include <glm/glm.hpp> // glm
 #endif
 
+#ifndef __GLM_GTC_MATRIX_TRANSFORM_HPP_INCLUDED
+#define __GLM_GTC_MATRIX_TRANSFORM_HPP_INCLUDED
 #include <glm/gtc/matrix_transform.hpp>
-#include "shader_loader.hpp"
-#include "texture_loader.hpp"
-#include "text2D.hpp"
+#endif
+
+// Include standard headers
+#include <vector>   // std::vector
+#include <cstring>
+#include <stdint.h> // uint32_t etc.
 
 GLuint Text2DTextureID;              // Texture containing the font
 GLuint Text2DVertexBufferID;         // Buffer containing the vertices

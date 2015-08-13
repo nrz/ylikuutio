@@ -1,8 +1,4 @@
-// Include GLM
-#ifndef __GLM_GLM_HPP_INCLUDED
-#define __GLM_GLM_HPP_INCLUDED
-#include <glm/glm.hpp>
-#endif
+#include "globals.hpp"
 
 // Include GLEW
 #ifndef __GL_GLEW_H_INCLUDED
@@ -10,7 +6,11 @@
 #include <GL/glew.h> // GLfloat, GLuint etc.
 #endif
 
-#include "globals.hpp"
+// Include GLM
+#ifndef __GLM_GLM_HPP_INCLUDED
+#define __GLM_GLM_HPP_INCLUDED
+#include <glm/glm.hpp> // glm
+#endif
 
 glm::mat4 ProjectionMatrix;
 glm::mat4 ViewMatrix;

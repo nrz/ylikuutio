@@ -1,10 +1,9 @@
 #ifndef __WORLD_HPP_INCLUDED
 #define __WORLD_HPP_INCLUDED
 
-// Include standard headers
-#include <iostream>
-#include <vector>    // std::vector
-#include <queue>     // std::queue
+#include "globals.hpp"
+#include "model_common_functions.hpp"
+#include "model_templates.hpp"
 
 // Include GLEW
 #ifndef __GL_GLEW_H_INCLUDED
@@ -24,12 +23,10 @@
 #include <glm/glm.hpp> // glm
 #endif
 
+// Include standard headers
 #include <iostream>
 #include <vector>    // std::vector
 #include <queue>     // std::queue
-#include "globals.hpp"
-#include "model_common_functions.hpp"
-#include "model_templates.hpp"
 
 namespace model
 {

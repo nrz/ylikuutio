@@ -1,16 +1,22 @@
 #ifndef __TEXTURE_HPP_INCLUDED
 #define __TEXTURE_HPP_INCLUDED
 
+#include "globals.hpp"
+#include "shader.hpp"
+#include "model_common_functions.hpp"
+#include "model_templates.hpp"
+
+// Include GLEW
+#ifndef __GL_GLEW_H_INCLUDED
+#define __GL_GLEW_H_INCLUDED
+#include <GL/glew.h> // GLfloat, GLuint etc.
+#endif
+
 // Include standard headers
 #include <iostream>
 #include <vector>    // std::vector
 #include <queue>     // std::queue
 #include <string.h>
-
-#include "globals.hpp"
-#include "shader.hpp"
-#include "model_common_functions.hpp"
-#include "model_templates.hpp"
 
 namespace model
 {

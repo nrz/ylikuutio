@@ -20,11 +20,6 @@
 #endif
 #endif
 
-// Include standard headers
-#include <string>
-#include <vector>   // std::vector
-#include <stdint.h> // uint32_t etc.
-
 // Include GLEW
 #ifndef __GL_GLEW_H_INCLUDED
 #define __GL_GLEW_H_INCLUDED
@@ -42,6 +37,11 @@
 #define __GLM_GLM_HPP_INCLUDED
 #include <glm/glm.hpp> // glm
 #endif
+
+// Include standard headers
+#include <string>
+#include <vector>   // std::vector
+#include <stdint.h> // uint32_t etc.
 
 #ifndef WINDOW_WIDTH
 #define WINDOW_WIDTH (1600.0f)

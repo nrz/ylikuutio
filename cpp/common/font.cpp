@@ -4,6 +4,12 @@
 #include "font_loader.hpp"
 #include "glyph.hpp"
 
+// Include GLEW
+#ifndef __GL_GLEW_H_INCLUDED
+#define __GL_GLEW_H_INCLUDED
+#include <GL/glew.h> // GLfloat, GLuint etc.
+#endif
+
 namespace model
 {
     void Font::bind_to_parent()
