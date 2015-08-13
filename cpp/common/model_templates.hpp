@@ -4,7 +4,7 @@
 // Include GLEW
 #ifndef __GL_GLEW_H_INCLUDED
 #define __GL_GLEW_H_INCLUDED
-#include <GL/glew.h>
+#include <GL/glew.h> // GLfloat, GLuint etc.
 #endif
 
 // Include GLFW
@@ -16,7 +16,7 @@
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
 #define __GLM_GLM_HPP_INCLUDED
-#include <glm/glm.hpp>
+#include <glm/glm.hpp> // glm
 #endif
 
 #ifndef __GLM_GTC_MATRIX_TRANSFORM_HPP_INCLUDED

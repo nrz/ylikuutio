@@ -8,7 +8,7 @@
 #include <string>
 #include <string.h>
 #include <cstring>
-#include <vector>
+#include <vector>   // std::vector
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h> // uint32_t etc.
@@ -18,13 +18,13 @@
 // Include GLEW
 #ifndef __GL_GLEW_H_INCLUDED
 #define __GL_GLEW_H_INCLUDED
-#include <GL/glew.h>
+#include <GL/glew.h> // GLfloat, GLuint etc.
 #endif
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
 #define __GLM_GLM_HPP_INCLUDED
-#include <glm/glm.hpp>
+#include <glm/glm.hpp> // glm
 #endif
 
 #include "globals.hpp"

@@ -1,3 +1,4 @@
+// Include standard headers
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h> // uint32_t etc.
@@ -6,7 +7,7 @@
 // Include GLEW
 #ifndef __GL_GLEW_H_INCLUDED
 #define __GL_GLEW_H_INCLUDED
-#include <GL/glew.h>
+#include <GL/glew.h> // GLfloat, GLuint etc.
 #endif
 
 // Include GLFW

@@ -1,6 +1,7 @@
 #ifndef __SPECIES_HPP_INCLUDED
 #define __SPECIES_HPP_INCLUDED
 
+// Include standard headers
 #include <vector>    // std::vector
 #include <queue>     // std::queue
 

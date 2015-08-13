@@ -1,3 +1,4 @@
+// Include standard headers
 #include <string.h> // for memcmp
 #include <stdint.h> // uint32_t etc.
 #include <vector>
@@ -6,13 +7,13 @@
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
 #define __GLM_GLM_HPP_INCLUDED
-#include <glm/glm.hpp>
+#include <glm/glm.hpp> // glm
 #endif
 
 // Include GLEW
 #ifndef __GL_GLEW_H_INCLUDED
 #define __GL_GLEW_H_INCLUDED
-#include <GL/glew.h>
+#include <GL/glew.h> // GLfloat, GLuint etc.
 #endif
 
 #include "vboindexer.hpp"

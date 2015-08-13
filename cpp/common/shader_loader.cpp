@@ -1,12 +1,13 @@
 #ifndef __COMMON_SHADER_HPP_INCLUDED
 #define __COMMON_SHADER_HPP_INCLUDED
 
+// Include standard headers
 #include <stdio.h>
 #include <string>
 #include <vector>
 #include <iostream>
 #include <fstream>
-#include <algorithm>
+#include <algorithm> // std::find
 
 #include <stdlib.h>
 #include <string.h>

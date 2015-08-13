@@ -1,6 +1,7 @@
 #ifndef __TEXTURE_HPP_INCLUDED
 #define __TEXTURE_HPP_INCLUDED
 
+// Include standard headers
 #include <iostream>
 #include <vector>    // std::vector
 #include <queue>     // std::queue
