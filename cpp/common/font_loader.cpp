@@ -100,7 +100,7 @@ namespace model
 
     void extract_string(
             char* dest_mem_pointer,
-            char* src_mem_pointer,
+            char* &src_mem_pointer,
             char* char_end_string)
     {
         while (strncmp(src_mem_pointer, char_end_string, strlen(char_end_string)) != 0)
@@ -110,6 +110,36 @@ namespace model
             src_mem_pointer += sizeof(*src_mem_pointer);
         }
         *dest_mem_pointer = '\0';
+    }
+
+    void extract_string_with_several_endings(
+            char* dest_mem_pointer,
+            char*& src_mem_pointer,
+            char* char_end_string)
+    {
+        while (true)
+        {
+            uint32_t n_of_ending_characters = strlen(char_end_string);
+            char* end_char_pointer;
+            end_char_pointer = char_end_string;
+
+            // Check if current character is any of the ending characters.
+            while (strncmp(end_char_pointer, "\0", sizeof("\0")) != 0)
+            {
+                if (strncmp(src_mem_pointer, end_char_pointer, 1) == 0)
+                {
+                    *dest_mem_pointer = '\0';
+                    return;
+                }
+                end_char_pointer += sizeof(*end_char_pointer);
+            }
+
+            // OK, current character is not any of the ending characters.
+            // Copy it and advance the pointers accordingly.
+            strncpy(dest_mem_pointer, src_mem_pointer, 1);
+            dest_mem_pointer += sizeof(*src_mem_pointer);
+            src_mem_pointer += sizeof(*src_mem_pointer);
+        }
     }
 
     bool load_SVG_font(
@@ -170,8 +200,10 @@ namespace model
                 // printf("<glyph found at 0x%lx.\n", (uint64_t) SVG_data_pointer);
                 char char_glyph_name[1024];
                 char char_unicode[1024];
+                std::vector<glm::vec3> current_glyph_vertices; // vertices of the current glyph.
                 bool has_glyph_name = false;
                 bool has_glyph_unicode = false;
+                bool has_glyph_vertices = false;
 
                 while (true)
                 {
@@ -266,9 +298,12 @@ namespace model
                             if (closing_double_quote_pointer != NULL)
                             {
                                 // printf("closing \" found at 0x%lx.\n", (uint64_t) closing_double_quote_pointer);
+                                has_glyph_vertices = true;
 
                                 closing_double_quote_pointer += sizeof(*closing_double_quote_pointer);
 
+                                glm::vec3 current_vertex;
+                                current_vertex.z = 0; // z is not defined in the path (originally these are not 3D fonts!).
                                 char char_path[1024];
                                 char* src_mem_pointer;
                                 char* dest_mem_pointer;
@@ -278,6 +313,93 @@ namespace model
 
                                 printf("d: %s\n", char_path);
 
+                                // Loop through vertices and push them to `current_glyph_vertices`.
+                                char* vertex_data_pointer;
+                                vertex_data_pointer = opening_double_quote_pointer;
+
+                                bool keep_reading_path = true;
+
+                                while (keep_reading_path)
+                                {
+                                    if (strncmp(vertex_data_pointer, "M", strlen("M")) == 0)
+                                    {
+                                        printf("M (moveto) found at 0x%lx.\n", (uint64_t) vertex_data_pointer);
+                                        vertex_data_pointer += sizeof(*vertex_data_pointer); // Advance to the next character.
+                                        char char_number_buffer[1024];
+                                        char* dest_mem_pointer;
+                                        dest_mem_pointer = char_number_buffer;
+
+                                        extract_string_with_several_endings(dest_mem_pointer, vertex_data_pointer, (char*) " -hvz\">");
+                                        uint32_t moveto_x = atoi(dest_mem_pointer);
+                                        current_vertex.x = moveto_x;
+                                        printf("moveto x: %d\n", moveto_x);
+
+                                        while (true)
+                                        {
+                                            if (strncmp(vertex_data_pointer, " ", strlen(" ")) == 0)
+                                            {
+                                                printf("space (moveto y coordinate) found at 0x%lx.\n", (uint64_t) vertex_data_pointer);
+                                                vertex_data_pointer += sizeof(*vertex_data_pointer); // Advance to the next character.
+
+                                                char char_number_buffer[1024];
+                                                char* dest_mem_pointer;
+                                                dest_mem_pointer = char_number_buffer;
+
+                                                extract_string_with_several_endings(dest_mem_pointer, vertex_data_pointer, (char*) " -hvz\">");
+                                                uint32_t moveto_y = atoi(dest_mem_pointer);
+                                                printf("moveto y: %d\n", moveto_y);
+                                                current_vertex.y = moveto_y;
+                                                current_glyph_vertices.push_back(current_vertex);
+                                                break;
+                                            }
+                                            vertex_data_pointer += sizeof(*vertex_data_pointer); // Advance to the next character.
+                                        }
+                                    }
+                                    else if (strncmp(vertex_data_pointer, "h", strlen("h")) == 0)
+                                    {
+                                        // OK, this is horizontal relative lineto.
+                                        printf("h (horizontal relative lineto) found at 0x%lx.\n", (uint64_t) vertex_data_pointer);
+                                        vertex_data_pointer += sizeof(*vertex_data_pointer); // Advance to the next character.
+
+                                        char char_number_buffer[1024];
+                                        char* dest_mem_pointer;
+                                        dest_mem_pointer = char_number_buffer;
+
+                                        extract_string_with_several_endings(dest_mem_pointer, vertex_data_pointer, (char*) " hvz\">");
+                                        int32_t horizontal_lineto_value = atoi(dest_mem_pointer);
+
+                                        printf("horizontal lineto target: %d\n", horizontal_lineto_value);
+                                        current_vertex.x += horizontal_lineto_value;
+                                        current_glyph_vertices.push_back(current_vertex);
+                                    }
+                                    else if (strncmp(vertex_data_pointer, "v", strlen("v")) == 0)
+                                    {
+                                        // OK, this is vertical relative lineto.
+                                        printf("v (vertical relative lineto) found at 0x%lx.\n", (uint64_t) vertex_data_pointer);
+                                        vertex_data_pointer += sizeof(*vertex_data_pointer); // Advance to the next character.
+
+                                        char char_number_buffer[1024];
+                                        char* dest_mem_pointer;
+                                        dest_mem_pointer = char_number_buffer;
+
+                                        extract_string_with_several_endings(dest_mem_pointer, vertex_data_pointer, (char*) " hvz\">");
+                                        int32_t vertical_lineto_value = atoi(dest_mem_pointer);
+
+                                        printf("vertical lineto target: %d\n", vertical_lineto_value);
+                                        current_vertex.y += vertical_lineto_value;
+                                        current_glyph_vertices.push_back(current_vertex);
+                                    }
+                                    else if (strncmp(vertex_data_pointer, "z", strlen("z")) == 0)
+                                    {
+                                        printf("z (closepath) found at 0x%lx.\n", (uint64_t) vertex_data_pointer);
+                                        keep_reading_path = false;
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        vertex_data_pointer += sizeof(*vertex_data_pointer);
+                                    }
+                                }
                                 SVG_data_pointer = closing_double_quote_pointer;
                             }
                         }
@@ -304,10 +426,15 @@ namespace model
                             }
                             glyph_names.push_back(glyph_name_string);
 
+                            glyph_names.push_back(glyph_name_string);
+
+                            // TODO: Create default vertex vector (no vertices), if needed.
+                            //
+                            printf("number of vertices: %d\n", current_glyph_vertices.size());
+                            // Store the vertices of the current vector to the glyph vertex vector
+                            // which contains the vertices of all the glyphs.
+                            out_glyph_vertex_data.push_back(current_glyph_vertices);
                         }
-                        // Create default vertex vector (no vertices), if needed.
-                        // Store the vertices to the vertex vector.
-                        // Store the vertex vector to glyph vector.
                         break;
                     }
                     SVG_data_pointer += sizeof(*SVG_data_pointer);  // Advance to the next byte inside the glyph.
