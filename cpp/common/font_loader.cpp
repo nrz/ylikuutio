@@ -168,6 +168,10 @@ namespace model
             {
                 // A glyph was found!
                 // printf("<glyph found at 0x%lx.\n", (uint64_t) SVG_data_pointer);
+                char char_glyph_name[1024];
+                char char_unicode[1024];
+                bool has_glyph_name = false;
+                bool has_glyph_unicode = false;
 
                 while (true)
                 {
@@ -191,10 +195,10 @@ namespace model
                             if (closing_double_quote_pointer != NULL)
                             {
                                 // printf("closing \" found at 0x%lx.\n", (uint64_t) closing_double_quote_pointer);
+                                has_glyph_name = true;
 
                                 closing_double_quote_pointer += sizeof(*closing_double_quote_pointer);
 
-                                char char_glyph_name[1024];
                                 char* src_mem_pointer;
                                 char* dest_mem_pointer;
                                 src_mem_pointer = opening_double_quote_pointer;
@@ -226,10 +230,10 @@ namespace model
                             if (closing_double_quote_pointer != NULL)
                             {
                                 // printf("closing \" found at 0x%lx.\n", (uint64_t) closing_double_quote_pointer);
+                                has_glyph_unicode = true;
 
                                 closing_double_quote_pointer += sizeof(*closing_double_quote_pointer);
 
-                                char char_unicode[1024];
                                 char* src_mem_pointer;
                                 char* dest_mem_pointer;
                                 src_mem_pointer = opening_double_quote_pointer;
@@ -281,6 +285,26 @@ namespace model
                     else if (strncmp(SVG_data_pointer, ">", strlen(">")) == 0)
                     {
                         // OK, this is the end of this glyph.
+                        if (has_glyph_unicode)
+                        {
+                            // OK, this glyph has an unicode, so it can be stored.
+                            std::string glyph_unicode_string;
+                            glyph_unicode_string = char_unicode;
+                            unicode_strings.push_back(glyph_unicode_string);
+
+                            std::string glyph_name_string;
+
+                            if (!has_glyph_name)
+                            {
+                                glyph_name_string = "";
+                            }
+                            else
+                            {
+                                glyph_name_string = char_glyph_name;
+                            }
+                            glyph_names.push_back(glyph_name_string);
+
+                        }
                         // Create default vertex vector (no vertices), if needed.
                         // Store the vertices to the vertex vector.
                         // Store the vertex vector to glyph vector.
