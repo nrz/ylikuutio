@@ -329,7 +329,7 @@ namespace model
                                         char* dest_mem_pointer;
                                         dest_mem_pointer = char_number_buffer;
 
-                                        extract_string_with_several_endings(dest_mem_pointer, vertex_data_pointer, (char*) " -hvz\">");
+                                        extract_string_with_several_endings(dest_mem_pointer, vertex_data_pointer, (char*) " -Mmhvz\">");
                                         uint32_t moveto_x = atoi(dest_mem_pointer);
                                         current_vertex.x = moveto_x;
                                         printf("moveto x: %d\n", moveto_x);
@@ -345,7 +345,7 @@ namespace model
                                                 char* dest_mem_pointer;
                                                 dest_mem_pointer = char_number_buffer;
 
-                                                extract_string_with_several_endings(dest_mem_pointer, vertex_data_pointer, (char*) " -hvz\">");
+                                                extract_string_with_several_endings(dest_mem_pointer, vertex_data_pointer, (char*) " -Mmhvz\">");
                                                 uint32_t moveto_y = atoi(dest_mem_pointer);
                                                 printf("moveto y: %d\n", moveto_y);
                                                 current_vertex.y = moveto_y;
@@ -365,7 +365,7 @@ namespace model
                                         char* dest_mem_pointer;
                                         dest_mem_pointer = char_number_buffer;
 
-                                        extract_string_with_several_endings(dest_mem_pointer, vertex_data_pointer, (char*) " hvz\">");
+                                        extract_string_with_several_endings(dest_mem_pointer, vertex_data_pointer, (char*) " Mmhvz\">");
                                         int32_t horizontal_lineto_value = atoi(dest_mem_pointer);
 
                                         printf("horizontal lineto target: %d\n", horizontal_lineto_value);
@@ -382,7 +382,7 @@ namespace model
                                         char* dest_mem_pointer;
                                         dest_mem_pointer = char_number_buffer;
 
-                                        extract_string_with_several_endings(dest_mem_pointer, vertex_data_pointer, (char*) " hvz\">");
+                                        extract_string_with_several_endings(dest_mem_pointer, vertex_data_pointer, (char*) " Mmhvz\">");
                                         int32_t vertical_lineto_value = atoi(dest_mem_pointer);
 
                                         printf("vertical lineto target: %d\n", vertical_lineto_value);
