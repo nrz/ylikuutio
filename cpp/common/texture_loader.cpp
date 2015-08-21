@@ -33,7 +33,7 @@ namespace texture
         unsigned char* data;
 
         // Open the file
-        FILE *file = fopen(imagepath,"rb");
+        FILE* file = fopen(imagepath,"rb");
         if (!file)
         {
             printf("%s could not be opened. Are you in the right directory ? Don't forget to read the FAQ !\n", imagepath);
@@ -167,7 +167,7 @@ namespace texture
     GLuint load_DDS_texture(const char* imagepath)
     {
         unsigned char header[124];
-        FILE *fp;
+        FILE* fp;
 
         /* try to open the file */
         fp = fopen(imagepath, "rb");

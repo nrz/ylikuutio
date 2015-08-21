@@ -14,7 +14,7 @@
 
 #define LINE_HEADER_SIZE 4096
 
-void read_until_newline(FILE *file)
+void read_until_newline(FILE* file)
 {
     while (getc(file) != '\n');
 }
@@ -44,7 +44,7 @@ namespace model
         std::vector<glm::vec2> temp_UVs;
         std::vector<glm::vec3> temp_normals;
 
-        FILE *file = fopen(path, "r");
+        FILE* file = fopen(path, "r");
         if (file == NULL)
         {
             printf("Impossible to open the file ! Are you in the right path ? See Tutorial 1 for details\n");

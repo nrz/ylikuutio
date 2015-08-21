@@ -1223,7 +1223,7 @@ namespace model
 
         // Open the file
         const char* char_image_path = image_path.c_str();
-        FILE *file = fopen(char_image_path, "rb");
+        FILE* file = fopen(char_image_path, "rb");
         if (!file)
         {
             std::cerr << image_path << " could not be opened.\n";
@@ -1424,7 +1424,7 @@ namespace model
 
         // Open the file
         const char* char_image_path = abs_image_path.c_str();
-        FILE *file = fopen(char_image_path, "rb");
+        FILE* file = fopen(char_image_path, "rb");
         if (!file)
         {
             std::cerr << abs_image_path << " could not be opened.\n";

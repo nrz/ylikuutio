@@ -160,7 +160,7 @@ namespace model
 
         // Open the file
         const char* char_font_file_path = font_file_path.c_str();
-        FILE *file = fopen(char_font_file_path, "rb");
+        FILE* file = fopen(char_font_file_path, "rb");
         if (!file)
         {
             std::cerr << font_file_path << " could not be opened.\n";

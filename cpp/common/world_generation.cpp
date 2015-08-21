@@ -13,7 +13,7 @@ struct read_BMP_into_world_data(const char* imagepath)
     unsigned char* image_data;
 
     // Open the file
-    FILE *file = fopen(imagepath,"rb");
+    FILE* file = fopen(imagepath,"rb");
     if (!file)
     {
         printf("%s could not be opened.\n", imagepath);
