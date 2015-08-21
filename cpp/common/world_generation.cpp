@@ -1,6 +1,6 @@
 #include <stdint.h> // uint32_t etc.
 
-struct read_BMP_into_world_data(const char *imagepath)
+struct read_BMP_into_world_data(const char* imagepath)
 {
     printf("Reading image %s\n", imagepath);
 
@@ -10,7 +10,7 @@ struct read_BMP_into_world_data(const char *imagepath)
     unsigned int imageSize;
     unsigned int width, height;
     // Actual RGB image data.
-    unsigned char *image_data;
+    unsigned char* image_data;
 
     // Open the file
     FILE *file = fopen(imagepath,"rb");

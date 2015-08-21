@@ -87,9 +87,9 @@ namespace model
             std::string model_filename;              // filename of the model file.
             GLuint childID;                          // species ID, returned by `model::Texture->get_speciesID()`.
             GLuint lightID;                          // light ID, returned by `glGetUniformLocation(programID, "LightPosition_worldspace");`.
-            const char *char_model_file_format;
-            const char *char_model_filename;
-            const char *char_color_channel;
+            const char* char_model_file_format;
+            const char* char_model_filename;
+            const char* char_color_channel;
 
             std::vector<void*> object_pointer_vector;
             std::queue<GLuint> free_objectID_queue;

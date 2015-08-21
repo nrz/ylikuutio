@@ -280,8 +280,8 @@ int main(void)
     std::cout << "number of indexed normals: " << terrain_species->indexed_normals.size() << ".\n";
 
     // Initialize our little text library with the Holstein font
-    const char *char_g_font_texture_filename = g_font_texture_filename.c_str();
-    const char *char_g_font_texture_file_format = g_font_texture_file_format.c_str();
+    const char* char_g_font_texture_filename = g_font_texture_filename.c_str();
+    const char* char_g_font_texture_file_format = g_font_texture_file_format.c_str();
     text2D::initText2D((GLuint) WINDOW_WIDTH, (GLuint) WINDOW_HEIGHT, char_g_font_texture_filename, char_g_font_texture_file_format);
 
     // For speed computation

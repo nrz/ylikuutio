@@ -273,10 +273,10 @@ typedef struct
     GLuint y;
     GLuint text_size;
     GLuint font_size;
-    const char *text;
-    const char *char_font_texture_file_format;
-    const char *horizontal_alignment;
-    const char *vertical_alignment;
+    const char* text;
+    const char* char_font_texture_file_format;
+    const char* horizontal_alignment;
+    const char* vertical_alignment;
 } PrintingStruct;
 
 typedef struct

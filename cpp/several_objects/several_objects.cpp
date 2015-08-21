@@ -147,8 +147,8 @@ int main(void)
     model::Object *suzanne2 = new model::Object(object_struct2);
 
     // Initialize our little text library with the Holstein font
-    const char *char_g_font_texture_filename = g_font_texture_filename.c_str();
-    const char *char_g_font_texture_file_format = g_font_texture_file_format.c_str();
+    const char* char_g_font_texture_filename = g_font_texture_filename.c_str();
+    const char* char_g_font_texture_file_format = g_font_texture_file_format.c_str();
     text2D::initText2D(WINDOW_WIDTH, WINDOW_HEIGHT, char_g_font_texture_filename, char_g_font_texture_file_format);
 
     // For speed computation

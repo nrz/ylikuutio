@@ -14,8 +14,8 @@ namespace text2D
     void initText2D(
             GLuint screen_width,
             GLuint screen_height,
-            const char *texturePath,
-            const char *char_font_texture_file_format);
+            const char* texturePath,
+            const char* char_font_texture_file_format);
 
     void printText2D(
             GLuint screen_width,
@@ -24,10 +24,10 @@ namespace text2D
             GLuint y,
             GLuint text_size,
             GLuint font_size,
-            const char *text,
-            const char *char_font_texture_file_format,
-            const char *horizontal_alignment,
-            const char *vertical_alignment);
+            const char* text,
+            const char* char_font_texture_file_format,
+            const char* horizontal_alignment,
+            const char* vertical_alignment);
 
     void printText2D(PrintingStruct printing_struct);
 
@@ -38,8 +38,8 @@ namespace text2D
             GLuint y,
             GLuint text_size,
             GLuint font_size,
-            const char *text,
-            const char *char_font_texture_file_format);
+            const char* text,
+            const char* char_font_texture_file_format);
 
     void cleanupText2D();
 }

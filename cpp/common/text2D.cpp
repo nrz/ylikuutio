@@ -39,8 +39,8 @@ namespace text2D
     void initText2D(
             GLuint screen_width,
             GLuint screen_height,
-            const char *texturePath,
-            const char *char_font_texture_file_format)
+            const char* texturePath,
+            const char* char_font_texture_file_format)
     {
         // Initialize texture
         if ((strcmp(char_font_texture_file_format, "bmp") == 0) || (strcmp(char_font_texture_file_format, "BMP") == 0))
@@ -82,10 +82,10 @@ namespace text2D
             GLuint y,
             GLuint text_size,
             GLuint font_size,
-            const char *text,
-            const char *char_font_texture_file_format,
-            const char *horizontal_alignment,
-            const char *vertical_alignment)
+            const char* text,
+            const char* char_font_texture_file_format,
+            const char* horizontal_alignment,
+            const char* vertical_alignment)
     {
         // If horizontal alignment is `"left"`, each line begins from the same x coordinate.
         // If horizontal alignment is `"left"` and vertical alignment is `"top"`,
@@ -317,8 +317,8 @@ namespace text2D
             GLuint y,
             GLuint text_size,
             GLuint font_size,
-            const char *text,
-            const char *char_font_texture_file_format)
+            const char* text,
+            const char* char_font_texture_file_format)
     {
         printText2D(screen_width, screen_height, x, y, text_size, font_size, text, char_font_texture_file_format, "left", "bottom");
     }

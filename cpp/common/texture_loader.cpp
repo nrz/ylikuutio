@@ -20,7 +20,7 @@
 
 namespace texture
 {
-    GLuint load_BMP_texture(const char *imagepath)
+    GLuint load_BMP_texture(const char* imagepath)
     {
         printf("Reading image %s\n", imagepath);
 
@@ -30,7 +30,7 @@ namespace texture
         uint32_t imageSize;
         uint32_t width, height;
         // Actual RGB data
-        unsigned char *data;
+        unsigned char* data;
 
         // Open the file
         FILE *file = fopen(imagepath,"rb");
@@ -137,7 +137,7 @@ namespace texture
 
     // Since GLFW 3, glfwLoadTexture2D() has been removed. You have to use another texture loading library,
     // or do it yourself (just like load_BMP_texture and load_DDS_texture)
-    //GLuint loadTGA_glfw(const char * imagepath){
+    //GLuint loadTGA_glfw(const char*  imagepath){
     //
     //    // Create one OpenGL texture
     //    GLuint textureID;
@@ -164,7 +164,7 @@ namespace texture
 #define FOURCC_DXT3 0x33545844 // Equivalent to "DXT3" in ASCII
 #define FOURCC_DXT5 0x35545844 // Equivalent to "DXT5" in ASCII
 
-    GLuint load_DDS_texture(const char *imagepath)
+    GLuint load_DDS_texture(const char* imagepath)
     {
         unsigned char header[124];
         FILE *fp;
@@ -196,7 +196,7 @@ namespace texture
         uint32_t mipMapCount = *(uint32_t*) & (header[24]);
         uint32_t fourCC      = *(uint32_t*) & (header[80]);
 
-        unsigned char * buffer;
+        unsigned char*  buffer;
         uint32_t bufsize;
         /* how big is it going to be including all mipmaps? */
         bufsize = mipMapCount > 1 ? linearSize * 2 : linearSize;

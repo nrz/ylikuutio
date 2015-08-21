@@ -159,7 +159,7 @@ namespace model
         char SVG_data[kongtext_svg_file_size];
 
         // Open the file
-        const char *char_font_file_path = font_file_path.c_str();
+        const char* char_font_file_path = font_file_path.c_str();
         FILE *file = fopen(char_font_file_path, "rb");
         if (!file)
         {
@@ -177,7 +177,7 @@ namespace model
 
         bool is_first_glyph_found;
 
-        char *SVG_data_pointer;
+        char* SVG_data_pointer;
         SVG_data_pointer = SVG_data;
 
         // SVG files are XML files, so we just need to read until we find the data we need.

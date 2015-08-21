@@ -340,7 +340,7 @@ namespace model
             texture_y ^= 1;
         }
 
-        const char *char_triangulation_type = triangulation_type.c_str();
+        const char* char_triangulation_type = triangulation_type.c_str();
 
         bool is_bilinear_interpolation_in_use = false;
         bool is_southwest_northeast_edges_in_use = false;
@@ -1222,7 +1222,7 @@ namespace model
         uint8_t *image_data;
 
         // Open the file
-        const char *char_image_path = image_path.c_str();
+        const char* char_image_path = image_path.c_str();
         FILE *file = fopen(char_image_path, "rb");
         if (!file)
         {
@@ -1295,7 +1295,7 @@ namespace model
         GLuint *vertex_pointer;
         vertex_pointer = vertex_data;
 
-        const char *char_color_channel = color_channel.c_str();
+        const char* char_color_channel = color_channel.c_str();
 
         // start processing image_data.
         for (GLuint z = 0; z < image_height; z++)
@@ -1423,7 +1423,7 @@ namespace model
         uint8_t *image_data;
 
         // Open the file
-        const char *char_image_path = abs_image_path.c_str();
+        const char* char_image_path = abs_image_path.c_str();
         FILE *file = fopen(char_image_path, "rb");
         if (!file)
         {

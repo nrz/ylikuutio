@@ -81,8 +81,8 @@ namespace model
             std::vector<void*> texture_pointer_vector;
             std::queue<GLuint> free_textureID_queue;
 
-            const char *char_vertex_shader;
-            const char *char_fragment_shader;
+            const char* char_vertex_shader;
+            const char* char_fragment_shader;
     };
 }
 

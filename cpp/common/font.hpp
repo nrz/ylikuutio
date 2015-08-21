@@ -59,8 +59,8 @@ namespace model
             std::string font_filename;             // filename of the model file.
             GLfloat vertex_scaling_factor;
             GLuint childID;                        // species ID, returned by `model::Texture->get_speciesID()`.
-            const char *char_font_file_format;
-            const char *char_font_filename;
+            const char* char_font_file_format;
+            const char* char_font_filename;
 
             std::vector<std::vector<glm::vec3>> glyph_vertex_data;
             std::vector<std::vector<glm::vec2>> glyph_UV_data;
