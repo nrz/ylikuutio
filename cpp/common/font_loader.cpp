@@ -79,7 +79,7 @@ namespace model
                 {
                     // No glyphs were found!
                     printf("No glyphs were found! </svg> found at 0x%lx. ", (uint64_t) SVG_data_pointer);
-                    break;
+                    return false;
                 }
                 SVG_data_pointer += sizeof(*SVG_data_pointer);  // Advance to the next character.
             }
@@ -95,7 +95,6 @@ namespace model
                 is_inside_block = false;
             }
         }
-        return false;
     }
 
     void extract_string(
