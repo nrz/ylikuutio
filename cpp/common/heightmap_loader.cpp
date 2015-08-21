@@ -202,12 +202,12 @@ namespace model
     }
 
     GLuint get_y(
-            GLuint *vertex_data,
+            GLuint* vertex_data,
             uint32_t x,
             uint32_t z,
             uint32_t image_width)
     {
-        GLuint *vertex_pointer;
+        GLuint* vertex_pointer;
         vertex_pointer = vertex_data + z * image_width + x;
         return *vertex_pointer;
     }
@@ -276,7 +276,7 @@ namespace model
     }
 
     bool triangulate_quads(
-            GLuint *input_vertex_pointer,
+            GLuint* input_vertex_pointer,
             uint32_t image_width,
             uint32_t image_height,
             std::vector<glm::vec3> &out_vertices,
@@ -1286,13 +1286,13 @@ namespace model
         // Everything is in memory now, the file can be closed
         fclose(file);
 
-        GLuint *vertex_data;
+        GLuint* vertex_data;
         vertex_data = new GLuint [imageSize];
 
         uint8_t *image_pointer;
         image_pointer = image_data;
 
-        GLuint *vertex_pointer;
+        GLuint* vertex_pointer;
         vertex_pointer = vertex_data;
 
         const char* char_color_channel = color_channel.c_str();
@@ -1447,13 +1447,13 @@ namespace model
         // Everything is in memory now, the file can be closed
         fclose(file);
 
-        GLuint *vertex_data;
+        GLuint* vertex_data;
         vertex_data = new GLuint [image_width_in_use * image_height_in_use];
 
         uint8_t *image_pointer;
         image_pointer = image_data + sizeof(int16_t) * (true_image_height - 1) * true_image_width; // start from southwestern corner.
 
-        GLuint *vertex_pointer;
+        GLuint* vertex_pointer;
         vertex_pointer = vertex_data;
 
         // start processing image_data.
