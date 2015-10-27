@@ -171,24 +171,13 @@ typedef struct
 typedef struct
 {
     // used for all files (for all font).
-#ifdef __STRUCT_DEFAULT_VALUES_ARE_ACCEPTED
-    void *parent_pointer = NULL;            // pointer to the texture object.
-    GLfloat vertex_scaling_factor = DEFAULT_VERTEX_SCALING_FACTOR;
-#else
     void *parent_pointer;                   // pointer to the texture object.
     GLfloat vertex_scaling_factor;
-#endif
     std::string font_file_format;           // type of the font file. supported file formats so far: `"svg"`/`"SVG"`.
     std::string font_filename;              // filename of the font file.
 } FontStruct;
 
-#ifdef __STRUCT_DEFAULT_VALUES_ARE_ACCEPTED
-#define FONTSTRUCT(x) \
-FontStruct x
-#else
-#define FONTSTRUCT(x) \
-FontStruct x; x.parent_pointer = NULL; x.vertex_scaling_factor = DEFAULT_VERTEX_SCALING_FACTOR
-#endif
+#define FONTSTRUCT(x) FontStruct x; x.parent_pointer = NULL; x.vertex_scaling_factor = DEFAULT_VERTEX_SCALING_FACTOR
 
 typedef struct
 {
