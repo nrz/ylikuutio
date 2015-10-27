@@ -112,23 +112,13 @@ typedef struct
 
 typedef struct
 {
-#ifdef __STRUCT_DEFAULT_VALUES_ARE_ACCEPTED
-    void *parent_pointer = NULL;     // pointer to the shader.
-#else
     void *parent_pointer;            // pointer to the shader.
-#endif
     std::string texture_file_format; // type of the texture file. supported file formats so far: `"bmp"`/`"BMP"`, `"dds"`/`"DDS"`.
     std::string texture_filename;    // filename of the model file.
     std::string image_path;
 } TextureStruct;
 
-#ifdef __STRUCT_DEFAULT_VALUES_ARE_ACCEPTED
-#define TEXTURESTRUCT(x) \
-TextureStruct x
-#else
-#define TEXTURESTRUCT(x) \
-TextureStruct x; x.parent_pointer = NULL
-#endif
+#define TEXTURESTRUCT(x) TextureStruct x; x.parent_pointer = NULL
 
 typedef struct
 {
