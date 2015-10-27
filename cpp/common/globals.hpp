@@ -132,17 +132,10 @@ typedef struct
 
 typedef struct
 {
-#ifdef __STRUCT_DEFAULT_VALUES_ARE_ACCEPTED
-    void *parent_pointer = NULL;                                   // pointer to the species.
-    glm::vec3 original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f); // original scale vector.
-    GLfloat rotate_angle = NAN;                                    // rotate angle.
-    bool is_character = false;                                     // The parent of a character object is a Glyph. The parent of a regular object is a Species.
-#else
     void *parent_pointer;            // pointer to the species.
     glm::vec3 original_scale_vector; // original scale vector.
     GLfloat rotate_angle;            // rotate angle.
     bool is_character;               // The parent of a character object is a Glyph. The parent of a regular object is a Species.
-#endif
     glm::vec3 coordinate_vector;     // coordinate vector.
     glm::vec3 rotate_vector;         // rotate vector.
     glm::vec3 translate_vector;      // translate vector.
@@ -150,13 +143,7 @@ typedef struct
     glm::mat4 MVP_matrix;            // model view projection matrix.
 } ObjectStruct;
 
-#ifdef __STRUCT_DEFAULT_VALUES_ARE_ACCEPTED
-#define OBJECTSTRUCT(x) \
-ObjectStruct x
-#else
-#define OBJECTSTRUCT(x) \
-ObjectStruct x; x.parent_pointer = NULL; x.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f); x.rotate_angle = NAN; x.is_character = false
-#endif
+#define OBJECTSTRUCT(x) ObjectStruct x; x.parent_pointer = NULL; x.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f); x.rotate_angle = NAN; x.is_character = false
 
 typedef struct
 {
