@@ -182,22 +182,12 @@ typedef struct
 typedef struct
 {
     // used for all files (for all glyph).
-#ifdef __STRUCT_DEFAULT_VALUES_ARE_ACCEPTED
-    void *parent_pointer = NULL;             // pointer to the font object.
-#else
     void *parent_pointer;                    // pointer to the font object.
-#endif
     glm::vec3 light_position;                // light position.
     std::vector<ObjectStruct> object_vector; // vector of individual objects of this glyph.
 } GlyphStruct;
 
-#ifdef __STRUCT_DEFAULT_VALUES_ARE_ACCEPTED
-#define GLYPHSTRUCT(x) \
-GlyphStruct x
-#else
-#define GLYPHSTRUCT(x) \
-GlyphStruct x; x.parent_pointer = NULL
-#endif
+#define GLYPHSTRUCT(x) GlyphStruct x; x.parent_pointer = NULL
 
 typedef struct
 {
