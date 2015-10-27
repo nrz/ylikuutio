@@ -148,15 +148,9 @@ typedef struct
 typedef struct
 {
     // used for all files (for all species).
-#ifdef __STRUCT_DEFAULT_VALUES_ARE_ACCEPTED
-    void *parent_pointer = NULL;             // pointer to the texture object.
-    bool is_world = false;                   // worlds currently do not rotate nor translate.
-    double world_radius = NAN;               // radius of sea level in meters. used only for worlds.
-#else
     void *parent_pointer;                    // pointer to the texture object.
     bool is_world;                           // worlds currently do not rotate nor translate.
     double world_radius;                     // radius of sea level in meters. used only for worlds.
-#endif
     std::string model_file_format;           // type of the model file. supported file formats so far: `"bmp"`/`"BMP"`, `"obj"`/`"OBJ"`.
                                              // TODO: add support for `"SRTM"`.
     std::string model_filename;              // filename of the model file.
@@ -170,13 +164,7 @@ typedef struct
 
 } SpeciesStruct;
 
-#ifdef __STRUCT_DEFAULT_VALUES_ARE_ACCEPTED
-#define SPECIESSTRUCT(x) \
-SpeciesStruct x
-#else
-#define SPECIESSTRUCT(x) \
-SpeciesStruct x; x.parent_pointer = NULL; x.is_world = false; x.world_radius = NAN
-#endif
+#define SPECIESSTRUCT(x) SpeciesStruct x; x.parent_pointer = NULL; x.is_world = false; x.world_radius = NAN
 
 #define DEFAULT_VERTEX_SCALING_FACTOR (0.001f)
 
