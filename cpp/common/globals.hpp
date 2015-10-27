@@ -103,22 +103,12 @@ extern glm::vec3 camera_position;
 
 typedef struct
 {
-#ifdef __STRUCT_DEFAULT_VALUES_ARE_ACCEPTED
-    void *parent_pointer = NULL; // pointer to the world (draw list).
-#else
     void *parent_pointer;        // pointer to the world (draw list).
-#endif
     std::string vertex_shader;   // filename of vertex shader.
     std::string fragment_shader; // filename of fragment shader.
 } ShaderStruct;
 
-#ifdef __STRUCT_DEFAULT_VALUES_ARE_ACCEPTED
-#define SHADERSTRUCT(x) \
-ShaderStruct x
-#else
-#define SHADERSTRUCT(x) \
-ShaderStruct x; x.parent_pointer = NULL
-#endif
+#define SHADERSTRUCT(x) ShaderStruct x; x.parent_pointer = NULL
 
 typedef struct
 {
