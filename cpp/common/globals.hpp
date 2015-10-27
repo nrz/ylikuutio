@@ -123,22 +123,12 @@ typedef struct
 typedef struct
 {
     GLuint nodeID;
-#ifdef __STRUCT_DEFAULT_VALUES_ARE_ACCEPTED
-    void *parent_pointer = NULL;
-#else
     void *parent_pointer;
-#endif
     glm::vec3 coordinate_vector;
     std::vector<uint32_t> neighbor_nodeIDs;
 } NodeStruct;
 
-#ifdef __STRUCT_DEFAULT_VALUES_ARE_ACCEPTED
-#define NODESTRUCT(x) \
-NodeStruct x
-#else
-#define NODESTRUCT(x) \
-NodeStruct x; x.parent_pointer = NULL
-#endif
+#define NODESTRUCT(x) NodeStruct x; x.parent_pointer = NULL
 
 typedef struct
 {
