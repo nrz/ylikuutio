@@ -122,11 +122,11 @@ namespace model
             void set_shader_pointer(GLuint childID, void* parent_pointer);
 
             // this method sets a world species pointer.
-            void set_world_species_pointer(void* world_species_pointer);
+            void set_terrain_species_pointer(void* terrain_species_pointer);
 
             void compute_matrices_from_inputs();
 
-            void* world_species_pointer;              // pointer to world species (used in collision detection).
+            void* terrain_species_pointer;              // pointer to world species (used in collision detection).
 
             std::vector<void*> shader_pointer_vector;
             std::queue<GLuint> free_shaderID_queue;

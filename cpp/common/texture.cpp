@@ -91,9 +91,9 @@ namespace model
         model::bind_child_to_new_parent<model::Texture*, model::Shader*>(this, new_shader_pointer, this->parent_pointer->texture_pointer_vector, this->parent_pointer->free_textureID_queue);
     }
 
-    void Texture::set_world_species_pointer(void* world_species_pointer)
+    void Texture::set_terrain_species_pointer(void* terrain_species_pointer)
     {
-        this->world_species_pointer = world_species_pointer;
-        this->parent_pointer->set_world_species_pointer(this->world_species_pointer);
+        this->terrain_species_pointer = terrain_species_pointer;
+        this->parent_pointer->set_terrain_species_pointer(this->terrain_species_pointer);
     }
 }

@@ -59,7 +59,7 @@ namespace model
             void set_texture_pointer(GLuint childID, void* parent_pointer);
 
             // this method sets a world species pointer.
-            void set_world_species_pointer(void* world_species_pointer);
+            void set_terrain_species_pointer(void* terrain_species_pointer);
 
             model::World *parent_pointer;         // pointer to the world.
 
@@ -71,7 +71,7 @@ namespace model
 
             void bind_to_parent();
 
-            void* world_species_pointer;          // pointer to world species (used in collision detection).
+            void* terrain_species_pointer;          // pointer to world species (used in collision detection).
 
             GLuint childID;                       // shader ID, returned by `model::World->get_shaderID()`.
 

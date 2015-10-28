@@ -48,9 +48,9 @@ namespace model
         set_child_pointer(childID, parent_pointer, this->shader_pointer_vector, this->free_shaderID_queue);
     }
 
-    void World::set_world_species_pointer(void* world_species_pointer)
+    void World::set_terrain_species_pointer(void* terrain_species_pointer)
     {
-        this->world_species_pointer = world_species_pointer;
+        this->terrain_species_pointer = terrain_species_pointer;
     }
 
     void World::compute_matrices_from_inputs()
@@ -240,9 +240,9 @@ namespace model
         // adjust position according to the ground.
         if (!is_flight_mode_in_use)
         {
-            if (this->world_species_pointer != NULL)
+            if (this->terrain_species_pointer != NULL)
             {
-                GLfloat ground_y = model::get_floor_level(static_cast<model::Species*>(this->world_species_pointer), position);
+                GLfloat ground_y = model::get_floor_level(static_cast<model::Species*>(this->terrain_species_pointer), position);
 
                 if (!std::isnan(ground_y))
                 {

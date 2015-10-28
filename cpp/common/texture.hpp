@@ -58,13 +58,13 @@ namespace model
             void set_font_pointer(GLuint childID, void* parent_pointer);
 
             // this method sets a world species pointer.
-            void set_world_species_pointer(void* world_species_pointer);
+            void set_terrain_species_pointer(void* terrain_species_pointer);
 
             model::Shader *parent_pointer;         // pointer to the shader.
 
             void bind_to_parent();
 
-            void* world_species_pointer;           // pointer to world species (used in collision detection).
+            void* terrain_species_pointer;           // pointer to world species (used in collision detection).
 
             GLuint texture;                        // Texture, returned by `load_DDS_texture` or `load_BMP_texture`.
             GLuint openGL_textureID;               // texture ID, returned by `glGetUniformLocation(programID, "myTextureSampler");`.

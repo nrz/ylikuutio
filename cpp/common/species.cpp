@@ -105,7 +105,7 @@ namespace model
         {
             // set world species pointer so that it points to this species.
             // currently there can be only one world species (used in collision detection).
-            this->parent_pointer->parent_pointer->parent_pointer->set_world_species_pointer(this);
+            this->parent_pointer->parent_pointer->parent_pointer->set_terrain_species_pointer(this);
         }
 
         // Compute the graph of this object type.
