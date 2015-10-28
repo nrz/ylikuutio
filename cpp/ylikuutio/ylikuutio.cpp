@@ -45,7 +45,7 @@ GLFWwindow* window;
 #include "cpp/common/text3D.hpp"
 #include "cpp/common/world.hpp"
 #include "cpp/common/shader.hpp"
-#include "cpp/common/texture.hpp"
+#include "cpp/common/material.hpp"
 #include "cpp/common/font.hpp"
 #include "cpp/common/glyph.hpp"
 #include "cpp/common/species.hpp"

@@ -1,6 +1,6 @@
 #include "shader.hpp"
 #include "world.hpp"
-#include "texture.hpp"
+#include "material.hpp"
 
 // Include GLEW
 #ifndef __GL_GLEW_H_INCLUDED

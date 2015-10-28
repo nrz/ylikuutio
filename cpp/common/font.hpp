@@ -4,7 +4,7 @@
 #include "globals.hpp"
 #include "model_common_functions.hpp"
 #include "model_templates.hpp"
-#include "texture.hpp"
+#include "material.hpp"
 
 // Include GLEW
 #ifndef __GL_GLEW_H_INCLUDED

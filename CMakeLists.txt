@@ -100,8 +100,8 @@ add_executable(several_objects
     cpp/common/world.hpp
     cpp/common/shader.cpp
     cpp/common/shader.hpp
-    cpp/common/texture.cpp
-    cpp/common/texture.hpp
+    cpp/common/material.cpp
+    cpp/common/material.hpp
     cpp/common/graph.cpp
     cpp/common/graph.hpp
     cpp/common/node.cpp
@@ -159,8 +159,8 @@ add_executable(ylikuutio
     cpp/common/world.hpp
     cpp/common/shader.cpp
     cpp/common/shader.hpp
-    cpp/common/texture.cpp
-    cpp/common/texture.hpp
+    cpp/common/material.cpp
+    cpp/common/material.hpp
     cpp/common/graph.cpp
     cpp/common/graph.hpp
     cpp/common/node.cpp

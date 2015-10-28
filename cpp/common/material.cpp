@@ -1,4 +1,4 @@
-#include "texture.hpp"
+#include "material.hpp"
 #include "texture_loader.hpp"
 #include "font.hpp"
 #include "species.hpp"

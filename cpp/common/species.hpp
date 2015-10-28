@@ -1,7 +1,7 @@
 #ifndef __SPECIES_HPP_INCLUDED
 #define __SPECIES_HPP_INCLUDED
 
-#include "texture.hpp"
+#include "material.hpp"
 #include "model_common_functions.hpp"
 #include "model_templates.hpp"
 #include "species_or_glyph.hpp"

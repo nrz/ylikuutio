@@ -39,7 +39,7 @@ GLFWwindow* window;
 #include "cpp/common/text2D.hpp"
 #include "cpp/common/world.hpp"
 #include "cpp/common/shader.hpp"
-#include "cpp/common/texture.hpp"
+#include "cpp/common/material.hpp"
 #include "cpp/common/species.hpp"
 #include "cpp/common/object.hpp"
 
