@@ -20,6 +20,8 @@
 #endif
 #endif
 
+#include "world.hpp"
+
 // Include GLEW
 #ifndef __GL_GLEW_H_INCLUDED
 #define __GL_GLEW_H_INCLUDED
@@ -101,9 +103,14 @@ extern GLfloat mouseSpeed;
 
 extern glm::vec3 camera_position;
 
+namespace model
+{
+    class World;
+}
+
 typedef struct
 {
-    void* parent_pointer;        // pointer to the world (draw list).
+    model::World* parent_pointer;        // pointer to the world (draw list).
     std::string vertex_shader;   // filename of vertex shader.
     std::string fragment_shader; // filename of fragment shader.
 } ShaderStruct;
