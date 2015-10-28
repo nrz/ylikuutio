@@ -19,7 +19,7 @@ namespace model
     Texture::Texture(TextureStruct texture_struct)
     {
         // constructor.
-        this->parent_pointer = static_cast<model::Shader*>(texture_struct.parent_pointer);
+        this->parent_pointer = texture_struct.parent_pointer;
 
         this->texture_file_format = texture_struct.texture_file_format;
         this->texture_filename    = texture_struct.texture_filename;
