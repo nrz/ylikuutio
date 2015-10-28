@@ -105,6 +105,7 @@ namespace model
 {
     class World;
     class Shader;
+    class Graph;
 }
 
 typedef struct
@@ -129,7 +130,7 @@ typedef struct
 typedef struct
 {
     GLuint nodeID;
-    void* parent_pointer;
+    model::Graph* parent_pointer;
     glm::vec3 coordinate_vector;
     std::vector<uint32_t> neighbor_nodeIDs;
 } NodeStruct;

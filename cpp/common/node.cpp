@@ -18,7 +18,7 @@ namespace model
         // constructor.
         this->childID = node_struct.nodeID;
         this->coordinate_vector = node_struct.coordinate_vector;
-        this->parent_pointer = static_cast<model::Graph*>(node_struct.parent_pointer);
+        this->parent_pointer = node_struct.parent_pointer;
 
         // set pointer to this node.
         this->parent_pointer->set_node_pointer(this->childID, this);
