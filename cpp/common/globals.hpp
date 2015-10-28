@@ -103,7 +103,7 @@ extern glm::vec3 camera_position;
 
 typedef struct
 {
-    void *parent_pointer;        // pointer to the world (draw list).
+    void* parent_pointer;        // pointer to the world (draw list).
     std::string vertex_shader;   // filename of vertex shader.
     std::string fragment_shader; // filename of fragment shader.
 } ShaderStruct;
@@ -112,7 +112,7 @@ typedef struct
 
 typedef struct
 {
-    void *parent_pointer;            // pointer to the shader.
+    void* parent_pointer;            // pointer to the shader.
     std::string texture_file_format; // type of the texture file. supported file formats so far: `"bmp"`/`"BMP"`, `"dds"`/`"DDS"`.
     std::string texture_filename;    // filename of the model file.
     std::string image_path;
@@ -123,7 +123,7 @@ typedef struct
 typedef struct
 {
     GLuint nodeID;
-    void *parent_pointer;
+    void* parent_pointer;
     glm::vec3 coordinate_vector;
     std::vector<uint32_t> neighbor_nodeIDs;
 } NodeStruct;
@@ -132,7 +132,7 @@ typedef struct
 
 typedef struct
 {
-    void *parent_pointer;            // pointer to the species.
+    void* parent_pointer;            // pointer to the species.
     glm::vec3 original_scale_vector; // original scale vector.
     GLfloat rotate_angle;            // rotate angle.
     bool is_character;               // The parent of a character object is a Glyph. The parent of a regular object is a Species.
@@ -148,7 +148,7 @@ typedef struct
 typedef struct
 {
     // used for all files (for all species).
-    void *parent_pointer;                    // pointer to the texture object.
+    void* parent_pointer;                    // pointer to the texture object.
     bool is_world;                           // worlds currently do not rotate nor translate.
     double world_radius;                     // radius of sea level in meters. used only for worlds.
     std::string model_file_format;           // type of the model file. supported file formats so far: `"bmp"`/`"BMP"`, `"obj"`/`"OBJ"`.
@@ -171,7 +171,7 @@ typedef struct
 typedef struct
 {
     // used for all files (for all font).
-    void *parent_pointer;                   // pointer to the texture object.
+    void* parent_pointer;                   // pointer to the texture object.
     GLfloat vertex_scaling_factor;
     std::string font_file_format;           // type of the font file. supported file formats so far: `"svg"`/`"SVG"`.
     std::string font_filename;              // filename of the font file.
@@ -182,7 +182,7 @@ typedef struct
 typedef struct
 {
     // used for all files (for all glyph).
-    void *parent_pointer;                    // pointer to the font object.
+    void* parent_pointer;                    // pointer to the font object.
     glm::vec3 light_position;                // light position.
     std::vector<ObjectStruct> object_vector; // vector of individual objects of this glyph.
 } GlyphStruct;
