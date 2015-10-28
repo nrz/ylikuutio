@@ -122,7 +122,7 @@ int main(void)
     texture_struct.parent_pointer = my_shader;
     texture_struct.texture_file_format = "dds";
     texture_struct.texture_filename = "uvmap.DDS";
-    model::Texture *my_texture = new model::Texture(texture_struct);
+    model::Material *my_texture = new model::Material(texture_struct);
 
     // Create the species, store it in `suzanne_species`.
     SPECIESSTRUCT(species_struct);

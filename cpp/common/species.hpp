@@ -18,7 +18,7 @@
 
 namespace model
 {
-    class Texture;
+    class Material;
 
     class Species
     {
@@ -30,7 +30,7 @@ namespace model
             ~Species();
 
             // this method sets pointer to this species to NULL, sets `parent_pointer` according to the input, and requests a new `childID` from the new texture.
-            void bind_to_new_parent(model::Texture *new_texture_pointer);
+            void bind_to_new_parent(model::Material *new_texture_pointer);
 
             // this method sets a object pointer.
             void set_object_pointer(GLuint childID, void* parent_pointer);
@@ -65,7 +65,7 @@ namespace model
             GLuint normalbuffer;
             GLuint elementbuffer;
 
-            model::Texture *parent_pointer;          // pointer to the texture.
+            model::Material *parent_pointer;          // pointer to the texture.
 
             friend class Object;
             template<class T1>
@@ -85,7 +85,7 @@ namespace model
 
             std::string model_file_format;           // type of the model file, eg. `"bmp"`.
             std::string model_filename;              // filename of the model file.
-            GLuint childID;                          // species ID, returned by `model::Texture->get_speciesID()`.
+            GLuint childID;                          // species ID, returned by `model::Material->get_speciesID()`.
             GLuint lightID;                          // light ID, returned by `glGetUniformLocation(programID, "LightPosition_worldspace");`.
             const char* char_model_file_format;
             const char* char_model_filename;

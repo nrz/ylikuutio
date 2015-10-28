@@ -28,10 +28,10 @@
 #include <vector>    // std::vector
 #include <queue>     // std::queue
 
-// `World`, `Shader`, `Texture`, `Species`, `Object`.
+// `World`, `Shader`, `Material`, `Species`, `Object`.
 // `World` must be created before any `Shader`. `parent_pointer` must be given to each `Shader`.
-// `Shader` must be created before any `Texture`. `parent_pointer` must be given to each `Texture`.
-// `Texture` must be created before any `Species`. `parent_pointer` must be given to each `Species`.
+// `Shader` must be created before any `Material`. `parent_pointer` must be given to each `Material`.
+// `Material` must be created before any `Species`. `parent_pointer` must be given to each `Species`.
 // `Species` must be create before any `Object` of that `Species`. `parent_pointer` must be given to each `Object` of the `Species`.
 //
 //
@@ -41,7 +41,7 @@
 //       ^
 //    Shader
 //       ^
-//    Texture
+//    Material
 //       ^
 //    Species
 //       ^
@@ -54,7 +54,7 @@
 //       ^
 //    Shader
 //       ^
-//    Texture
+//    Material
 //       ^
 //     Font
 //       ^
@@ -65,7 +65,7 @@
 //
 // Deleting a `World` also deletes all shaders, textures, species and objects that are binded to the same World.
 // Deleting a `Shader` also deletes all textures, species and objects that are binded to the same Shader.
-// Deleting a `Texture` also deletes all species and objects that are binded to the same Texture.
+// Deleting a `Material` also deletes all species and objects that are binded to the same Material.
 // Deleting a `Species` also deletes all objects that are binded to the same Species.
 // Deleting an `Object` only deletes the object.
 

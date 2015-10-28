@@ -11,12 +11,12 @@
 
 namespace model
 {
-    void Texture::bind_to_parent()
+    void Material::bind_to_parent()
     {
-        model::bind_child_to_parent<model::Texture*>(this, this->parent_pointer->texture_pointer_vector, this->parent_pointer->free_textureID_queue);
+        model::bind_child_to_parent<model::Material*>(this, this->parent_pointer->texture_pointer_vector, this->parent_pointer->free_textureID_queue);
     }
 
-    Texture::Texture(TextureStruct texture_struct)
+    Material::Material(TextureStruct texture_struct)
     {
         // constructor.
         this->parent_pointer = texture_struct.parent_pointer;
@@ -27,7 +27,7 @@ namespace model
         this->char_texture_file_format = this->texture_file_format.c_str();
         this->char_texture_filename    = this->texture_filename.c_str();
 
-        // get childID from the Shader and set pointer to this Texture.
+        // get childID from the Shader and set pointer to this Material.
         this->bind_to_parent();
 
         // Load the texture.
@@ -49,10 +49,10 @@ namespace model
         this->openGL_textureID = glGetUniformLocation(this->parent_pointer->programID, "myTextureSampler");
     }
 
-    Texture::~Texture()
+    Material::~Material()
     {
         // destructor.
-        std::cout << "Texture with childID " << this->childID << " will be destroyed.\n";
+        std::cout << "Material with childID " << this->childID << " will be destroyed.\n";
 
         // destroy all species of this texture.
         std::cout << "All species of this texture will be destroyed.\n";
@@ -68,30 +68,30 @@ namespace model
         this->parent_pointer->set_texture_pointer(this->childID, NULL);
     }
 
-    void Texture::render()
+    void Material::render()
     {
-        // Bind our texture in Texture Unit 0.
+        // Bind our texture in Material Unit 0.
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, this->texture);
-        // Set our "myTextureSampler" sampler to user Texture Unit 0.
+        // Set our "myTextureSampler" sampler to user Material Unit 0.
         glUniform1i(this->openGL_textureID, 0);
 
-        // render Texture by calling `render()` function of each Species and of each Font.
+        // render Material by calling `render()` function of each Species and of each Font.
         model::render_children<model::Species*>(this->species_pointer_vector);
         model::render_children<model::Font*>(this->font_pointer_vector);
     }
 
-    void Texture::set_species_pointer(GLuint childID, void* parent_pointer)
+    void Material::set_species_pointer(GLuint childID, void* parent_pointer)
     {
         set_child_pointer(childID, parent_pointer, this->species_pointer_vector, this->free_speciesID_queue);
     }
 
-    void Texture::bind_to_new_parent(model::Shader *new_shader_pointer)
+    void Material::bind_to_new_parent(model::Shader *new_shader_pointer)
     {
-        model::bind_child_to_new_parent<model::Texture*, model::Shader*>(this, new_shader_pointer, this->parent_pointer->texture_pointer_vector, this->parent_pointer->free_textureID_queue);
+        model::bind_child_to_new_parent<model::Material*, model::Shader*>(this, new_shader_pointer, this->parent_pointer->texture_pointer_vector, this->parent_pointer->free_textureID_queue);
     }
 
-    void Texture::set_terrain_species_pointer(void* terrain_species_pointer)
+    void Material::set_terrain_species_pointer(void* terrain_species_pointer)
     {
         this->terrain_species_pointer = terrain_species_pointer;
         this->parent_pointer->set_terrain_species_pointer(this->terrain_species_pointer);

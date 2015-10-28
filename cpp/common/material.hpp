@@ -23,14 +23,14 @@ namespace model
     class Species;
     class Object;
 
-    class Texture
+    class Material
     {
         public:
             // constructor.
-            Texture(TextureStruct texture_struct);
+            Material(TextureStruct texture_struct);
 
             // destructor.
-            ~Texture();
+            ~Material();
 
             // this method sets pointer to this shader to NULL, sets `parent_pointer` according to the input, and requests a new `childID` from the new shader.
             void bind_to_new_parent(model::Shader *new_shader_pointer);
@@ -66,7 +66,7 @@ namespace model
 
             void* terrain_species_pointer;           // pointer to world species (used in collision detection).
 
-            GLuint texture;                        // Texture, returned by `load_DDS_texture` or `load_BMP_texture`.
+            GLuint texture;                        // Material, returned by `load_DDS_texture` or `load_BMP_texture`.
             GLuint openGL_textureID;               // texture ID, returned by `glGetUniformLocation(programID, "myTextureSampler");`.
 
             std::vector<void*> species_pointer_vector;

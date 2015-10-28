@@ -26,13 +26,13 @@ namespace model
         this->model_filename    = species_struct.model_filename;
         this->color_channel     = species_struct.color_channel;
         this->light_position          = species_struct.light_position;
-        this->parent_pointer    = static_cast<model::Texture*>(species_struct.parent_pointer);
+        this->parent_pointer    = static_cast<model::Material*>(species_struct.parent_pointer);
 
         this->char_model_file_format = this->model_file_format.c_str();
         this->char_model_filename    = this->model_filename.c_str();
         this->char_color_channel     = this->color_channel.c_str();
 
-        // get childID from the Texture and set pointer to this Species.
+        // get childID from the Material and set pointer to this Species.
         this->bind_to_parent();
 
         // Get a handle for our buffers.
@@ -140,8 +140,8 @@ namespace model
         set_child_pointer(childID, parent_pointer, this->object_pointer_vector, this->free_objectID_queue);
     }
 
-    void Species::bind_to_new_parent(model::Texture *new_texture_pointer)
+    void Species::bind_to_new_parent(model::Material *new_texture_pointer)
     {
-        model::bind_child_to_new_parent<model::Species*, model::Texture*>(this, new_texture_pointer, this->parent_pointer->species_pointer_vector, this->parent_pointer->free_speciesID_queue);
+        model::bind_child_to_new_parent<model::Species*, model::Material*>(this, new_texture_pointer, this->parent_pointer->species_pointer_vector, this->parent_pointer->free_speciesID_queue);
     }
 }

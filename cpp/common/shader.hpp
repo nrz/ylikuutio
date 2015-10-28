@@ -39,7 +39,7 @@ namespace model
             void bind_to_new_parent(model::World *new_world_pointer);
 
             friend class World;
-            friend class Texture;
+            friend class Material;
             friend class Glyph;
             friend class Species;
             template<class T1>

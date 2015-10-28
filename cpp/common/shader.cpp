@@ -45,7 +45,7 @@ namespace model
 
         // destroy all textures of this shader.
         std::cout << "All textures of this shader will be destroyed.\n";
-        model::delete_children<model::Texture*>(this->texture_pointer_vector);
+        model::delete_children<model::Material*>(this->texture_pointer_vector);
 
         // set pointer to this shader to NULL.
         this->parent_pointer->set_shader_pointer(this->childID, NULL);
@@ -60,8 +60,8 @@ namespace model
 
         glUniformMatrix4fv(this->ViewMatrixID, 1, GL_FALSE, &ViewMatrix[0][0]); // This one doesn't change between objects, so this can be done once for all objects that use "programID"
 
-        // render Shader by calling `render()` function of each Texture.
-        model::render_children<model::Texture*>(this->texture_pointer_vector);
+        // render Shader by calling `render()` function of each Material.
+        model::render_children<model::Material*>(this->texture_pointer_vector);
     }
 
     void Shader::set_texture_pointer(GLuint childID, void* parent_pointer)

@@ -24,7 +24,7 @@
 #include <cstring>
 #include <stdint.h> // uint32_t etc.
 
-GLuint Text2DTextureID;              // Texture containing the font
+GLuint Text2DTextureID;              // Material containing the font
 GLuint Text2DVertexBufferID;         // Buffer containing the vertices
 GLuint Text2DUVBufferID;             // Buffer containing the UVs
 GLuint Text2DShaderID;               // Shader program used to display the text
@@ -264,7 +264,7 @@ namespace text2D
         // Bind texture
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, Text2DTextureID);
-        // Set our "myTextureSampler" sampler to user Texture Unit 0
+        // Set our "myTextureSampler" sampler to user Material Unit 0
         glUniform1i(Text2DUniformID, 0);
 
         // Set screen width.

@@ -18,7 +18,7 @@
 
 namespace model
 {
-    class Texture;
+    class Material;
 
     class Font
     {
@@ -33,13 +33,13 @@ namespace model
             void set_glyph_pointer(GLuint childID, void* parent_pointer);
 
             // this method sets pointer to this species to NULL, sets `parent_pointer` according to the input, and requests a new `childID` from the new texture.
-            void bind_to_new_parent(model::Texture *new_texture_pointer);
+            void bind_to_new_parent(model::Material *new_texture_pointer);
 
             // The rest fields are created in the constructor.
             GLuint image_width;
             GLuint image_height;
 
-            model::Texture *parent_pointer;       // pointer to the texture.
+            model::Material *parent_pointer;       // pointer to the texture.
 
             friend class Glyph;
             template<class T1>
@@ -58,7 +58,7 @@ namespace model
             std::string font_file_format;          // type of the model file, eg. `"bmp"`.
             std::string font_filename;             // filename of the model file.
             GLfloat vertex_scaling_factor;
-            GLuint childID;                        // species ID, returned by `model::Texture->get_speciesID()`.
+            GLuint childID;                        // species ID, returned by `model::Material->get_speciesID()`.
             const char* char_font_file_format;
             const char* char_font_filename;
 

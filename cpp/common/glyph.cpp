@@ -19,7 +19,7 @@ namespace model
         // constructor.
         this->light_position = glyph_struct.light_position;
 
-        // get childID from the Texture and set pointer to this Species.
+        // get childID from the Material and set pointer to this Species.
         this->bind_to_parent();
 
         // Get a handle for our buffers.
