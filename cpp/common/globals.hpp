@@ -106,6 +106,7 @@ namespace model
     class World;
     class Shader;
     class Graph;
+    class Material;
 }
 
 typedef struct
@@ -155,7 +156,7 @@ typedef struct
 typedef struct
 {
     // used for all files (for all species).
-    void* parent_pointer;                    // pointer to the texture object.
+    model::Material* parent_pointer;         // pointer to the material object.
     bool is_world;                           // worlds currently do not rotate nor translate.
     double world_radius;                     // radius of sea level in meters. used only for worlds.
     std::string model_file_format;           // type of the model file. supported file formats so far: `"bmp"`/`"BMP"`, `"obj"`/`"OBJ"`.
@@ -178,7 +179,7 @@ typedef struct
 typedef struct
 {
     // used for all files (for all font).
-    void* parent_pointer;                   // pointer to the texture object.
+    model::Material* parent_pointer;        // pointer to the material object.
     GLfloat vertex_scaling_factor;
     std::string font_file_format;           // type of the font file. supported file formats so far: `"svg"`/`"SVG"`.
     std::string font_filename;              // filename of the font file.
