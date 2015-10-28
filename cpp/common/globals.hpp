@@ -107,6 +107,7 @@ namespace model
     class Shader;
     class Graph;
     class Material;
+    class Font;
 }
 
 typedef struct
@@ -190,7 +191,7 @@ typedef struct
 typedef struct
 {
     // used for all files (for all glyph).
-    void* parent_pointer;                    // pointer to the font object.
+    model::Font* parent_pointer;             // pointer to the font object.
     glm::vec3 light_position;                // light position.
     std::vector<ObjectStruct> object_vector; // vector of individual objects of this glyph.
 } GlyphStruct;
