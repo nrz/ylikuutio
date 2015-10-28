@@ -20,8 +20,6 @@
 #endif
 #endif
 
-#include "world.hpp"
-
 // Include GLEW
 #ifndef __GL_GLEW_H_INCLUDED
 #define __GL_GLEW_H_INCLUDED
