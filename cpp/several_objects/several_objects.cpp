@@ -117,16 +117,16 @@ int main(void)
     shader_struct.fragment_shader = "StandardShading.fragmentshader";
     model::Shader *my_shader = new model::Shader(shader_struct);
 
-    // Create the texture, store it in 'my_texture`.
+    // Create the texture, store it in 'my_material`.
     MATERIALSTRUCT(material_struct);
     material_struct.parent_pointer = my_shader;
     material_struct.texture_file_format = "dds";
     material_struct.texture_filename = "uvmap.DDS";
-    model::Material *my_texture = new model::Material(material_struct);
+    model::Material *my_material = new model::Material(material_struct);
 
     // Create the species, store it in `suzanne_species`.
     SPECIESSTRUCT(species_struct);
-    species_struct.parent_pointer = my_texture;
+    species_struct.parent_pointer = my_material;
     species_struct.model_file_format = "obj";
     species_struct.model_filename = "suzanne.obj";
     species_struct.light_position = glm::vec3(4, 4, 4);
