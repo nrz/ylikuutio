@@ -129,7 +129,7 @@ typedef struct
     std::string image_path;
 } MaterialStruct;
 
-#define TEXTURESTRUCT(x) MaterialStruct x; x.parent_pointer = NULL
+#define MATERIALSTRUCT(x) MaterialStruct x; x.parent_pointer = NULL
 
 typedef struct
 {
