@@ -171,11 +171,11 @@ int main(void)
     model::Shader *my_shader = new model::Shader(shader_struct);
 
     // Create the texture, store it in 'grass_material`.
-    MATERIALSTRUCT(grass_texture_struct);
-    grass_texture_struct.parent_pointer = my_shader;
-    grass_texture_struct.texture_file_format = g_texture_file_format;
-    grass_texture_struct.texture_filename = g_texture_filename;
-    model::Material *grass_material = new model::Material(grass_texture_struct);
+    MATERIALSTRUCT(grass_material_struct);
+    grass_material_struct.parent_pointer = my_shader;
+    grass_material_struct.texture_file_format = g_texture_file_format;
+    grass_material_struct.texture_filename = g_texture_filename;
+    model::Material *grass_material = new model::Material(grass_material_struct);
 
     // Create the texture, store it in 'my_uvmap_texture`.
     MATERIALSTRUCT(uvmap_texture_struct);
