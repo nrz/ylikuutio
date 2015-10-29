@@ -16,13 +16,13 @@ namespace model
         model::bind_child_to_parent<model::Material*>(this, this->parent_pointer->texture_pointer_vector, this->parent_pointer->free_textureID_queue);
     }
 
-    Material::Material(MaterialStruct texture_struct)
+    Material::Material(MaterialStruct material_struct)
     {
         // constructor.
-        this->parent_pointer = texture_struct.parent_pointer;
+        this->parent_pointer = material_struct.parent_pointer;
 
-        this->texture_file_format = texture_struct.texture_file_format;
-        this->texture_filename    = texture_struct.texture_filename;
+        this->texture_file_format = material_struct.texture_file_format;
+        this->texture_filename    = material_struct.texture_filename;
 
         this->char_texture_file_format = this->texture_file_format.c_str();
         this->char_texture_filename    = this->texture_filename.c_str();
