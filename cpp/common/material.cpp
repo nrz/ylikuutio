@@ -16,7 +16,7 @@ namespace model
         model::bind_child_to_parent<model::Material*>(this, this->parent_pointer->texture_pointer_vector, this->parent_pointer->free_textureID_queue);
     }
 
-    Material::Material(TextureStruct texture_struct)
+    Material::Material(MaterialStruct texture_struct)
     {
         // constructor.
         this->parent_pointer = texture_struct.parent_pointer;

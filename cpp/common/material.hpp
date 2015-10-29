@@ -27,7 +27,7 @@ namespace model
     {
         public:
             // constructor.
-            Material(TextureStruct texture_struct);
+            Material(MaterialStruct texture_struct);
 
             // destructor.
             ~Material();

@@ -127,9 +127,9 @@ typedef struct
     std::string texture_file_format; // type of the texture file. supported file formats so far: `"bmp"`/`"BMP"`, `"dds"`/`"DDS"`.
     std::string texture_filename;    // filename of the model file.
     std::string image_path;
-} TextureStruct;
+} MaterialStruct;
 
-#define TEXTURESTRUCT(x) TextureStruct x; x.parent_pointer = NULL
+#define TEXTURESTRUCT(x) MaterialStruct x; x.parent_pointer = NULL
 
 typedef struct
 {
