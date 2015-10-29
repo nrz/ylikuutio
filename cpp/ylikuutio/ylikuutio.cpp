@@ -178,11 +178,11 @@ int main(void)
     model::Material *grass_material = new model::Material(grass_material_struct);
 
     // Create the texture, store it in 'my_uvmap_texture`.
-    MATERIALSTRUCT(uvmap_texture_struct);
-    uvmap_texture_struct.parent_pointer = my_shader;
-    uvmap_texture_struct.texture_file_format = "dds";
-    uvmap_texture_struct.texture_filename = "uvmap.DDS";
-    model::Material *my_uvmap_texture = new model::Material(uvmap_texture_struct);
+    MATERIALSTRUCT(uvmap_material_struct);
+    uvmap_material_struct.parent_pointer = my_shader;
+    uvmap_material_struct.texture_file_format = "dds";
+    uvmap_material_struct.texture_filename = "uvmap.DDS";
+    model::Material *my_uvmap_texture = new model::Material(uvmap_material_struct);
 
 #ifdef TESTING_SPHERICAL_WORLD_IN_USE
     // Create the species, store it in `terrain_species`.
