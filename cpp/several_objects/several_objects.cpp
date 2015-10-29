@@ -110,14 +110,14 @@ int main(void)
     // Create the world, store it in `my_world`.
     model::World *my_world = new model::World();
 
-    // Create the shader, store it in 'my_shader`.
+    // Create the shader, store it in `my_shader`.
     SHADERSTRUCT(shader_struct);
     shader_struct.parent_pointer = my_world;
     shader_struct.vertex_shader = "StandardShading.vertexshader";
     shader_struct.fragment_shader = "StandardShading.fragmentshader";
     model::Shader *my_shader = new model::Shader(shader_struct);
 
-    // Create the texture, store it in 'my_material`.
+    // Create the material, store it in `my_material`.
     MATERIALSTRUCT(material_struct);
     material_struct.parent_pointer = my_shader;
     material_struct.texture_file_format = "dds";

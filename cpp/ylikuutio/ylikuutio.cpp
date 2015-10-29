@@ -163,21 +163,21 @@ int main(void)
     // Create the world, store it in `my_world`.
     model::World *my_world = new model::World();
 
-    // Create the shader, store it in 'my_shader`.
+    // Create the shader, store it in `my_shader`.
     SHADERSTRUCT(shader_struct);
     shader_struct.parent_pointer = my_world;
     shader_struct.vertex_shader = "StandardShading.vertexshader";
     shader_struct.fragment_shader = "StandardShading.fragmentshader";
     model::Shader *my_shader = new model::Shader(shader_struct);
 
-    // Create the texture, store it in 'grass_material`.
+    // Create the material, store it in `grass_material`.
     MATERIALSTRUCT(grass_material_struct);
     grass_material_struct.parent_pointer = my_shader;
     grass_material_struct.texture_file_format = g_texture_file_format;
     grass_material_struct.texture_filename = g_texture_filename;
     model::Material *grass_material = new model::Material(grass_material_struct);
 
-    // Create the texture, store it in 'uvmap_material`.
+    // Create the material, store it in `uvmap_material`.
     MATERIALSTRUCT(uvmap_material_struct);
     uvmap_material_struct.parent_pointer = my_shader;
     uvmap_material_struct.texture_file_format = "dds";
@@ -429,13 +429,13 @@ int main(void)
 
         if (does_suzanne_species_exist && does_suzanne_species_have_uvmap_texture && (glfwGetKey(window, GLFW_KEY_G) == GLFW_PRESS))
         {
-            // switch to grass texture.
+            // switch to grass material.
             suzanne_species->bind_to_new_parent(grass_material);
             does_suzanne_species_have_uvmap_texture = false;
         }
         else if (does_suzanne_species_exist && !does_suzanne_species_have_uvmap_texture && (glfwGetKey(window, GLFW_KEY_U) == GLFW_PRESS))
         {
-            // switch to uvmap texture.
+            // switch to uvmap material.
             suzanne_species->bind_to_new_parent(uvmap_material);
             does_suzanne_species_have_uvmap_texture = true;
         }
