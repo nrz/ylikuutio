@@ -170,12 +170,12 @@ int main(void)
     shader_struct.fragment_shader = "StandardShading.fragmentshader";
     model::Shader *my_shader = new model::Shader(shader_struct);
 
-    // Create the texture, store it in 'my_grass_texture`.
+    // Create the texture, store it in 'grass_material`.
     TEXTURESTRUCT(grass_texture_struct);
     grass_texture_struct.parent_pointer = my_shader;
     grass_texture_struct.texture_file_format = g_texture_file_format;
     grass_texture_struct.texture_filename = g_texture_filename;
-    model::Material *my_grass_texture = new model::Material(grass_texture_struct);
+    model::Material *grass_material = new model::Material(grass_texture_struct);
 
     // Create the texture, store it in 'my_uvmap_texture`.
     TEXTURESTRUCT(uvmap_texture_struct);
@@ -187,7 +187,7 @@ int main(void)
 #ifdef TESTING_SPHERICAL_WORLD_IN_USE
     // Create the species, store it in `terrain_species`.
     SPECIESSTRUCT(SRTM_terrain_species_struct);
-    SRTM_terrain_species_struct.parent_pointer = my_grass_texture;
+    SRTM_terrain_species_struct.parent_pointer = grass_material;
     SRTM_terrain_species_struct.model_file_format = "SRTM";
     // SRTM_terrain_species_struct.model_filename = "/media/laatikko_4TB/satelliittikuvat/srtm/version3/data/";
     SRTM_terrain_species_struct.model_filename = "./"; // for testing
@@ -198,7 +198,7 @@ int main(void)
 #else
     // Create the species, store it in `terrain_species`.
     SPECIESSTRUCT(bmp_terrain_species_struct);
-    bmp_terrain_species_struct.parent_pointer = my_grass_texture;
+    bmp_terrain_species_struct.parent_pointer = grass_material;
     bmp_terrain_species_struct.model_file_format = g_model_file_format;
     bmp_terrain_species_struct.model_filename = g_model_filename;
     bmp_terrain_species_struct.color_channel = g_height_data_color_channel;
@@ -266,7 +266,7 @@ int main(void)
     model::Object *suzanne5 = new model::Object(suzanne_object_struct5);
 
     FONTSTRUCT(kongtext_font_struct);
-    kongtext_font_struct.parent_pointer = my_grass_texture;
+    kongtext_font_struct.parent_pointer = grass_material;
     kongtext_font_struct.font_file_format = g_font_file_format;
     kongtext_font_struct.font_filename = g_font_filename;
     model::Font *kongtext_font = new model::Font(kongtext_font_struct);
@@ -430,7 +430,7 @@ int main(void)
         if (does_suzanne_species_exist && does_suzanne_species_have_uvmap_texture && (glfwGetKey(window, GLFW_KEY_G) == GLFW_PRESS))
         {
             // switch to grass texture.
-            suzanne_species->bind_to_new_parent(my_grass_texture);
+            suzanne_species->bind_to_new_parent(grass_material);
             does_suzanne_species_have_uvmap_texture = false;
         }
         else if (does_suzanne_species_exist && !does_suzanne_species_have_uvmap_texture && (glfwGetKey(window, GLFW_KEY_U) == GLFW_PRESS))
