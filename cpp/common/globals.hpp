@@ -108,6 +108,8 @@ namespace model
     class Graph;
     class Material;
     class Font;
+    class Species;
+    class Glyph;
 }
 
 typedef struct
@@ -141,7 +143,8 @@ typedef struct
 
 typedef struct
 {
-    void* parent_pointer;            // pointer to the species.
+    model::Species* species_parent_pointer; // pointer to the parent species.
+    model::Glyph* glyph_parent_pointer;     // pointer to the parent glyph.
     glm::vec3 original_scale_vector; // original scale vector.
     GLfloat rotate_angle;            // rotate angle.
     bool is_character;               // The parent of a character object is a Glyph. The parent of a regular object is a Species.
@@ -152,7 +155,12 @@ typedef struct
     glm::mat4 MVP_matrix;            // model view projection matrix.
 } ObjectStruct;
 
-#define OBJECTSTRUCT(x) ObjectStruct x; x.parent_pointer = NULL; x.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f); x.rotate_angle = NAN; x.is_character = false
+#define OBJECTSTRUCT(x) ObjectStruct x; \
+x.species_parent_pointer = NULL; \
+x.glyph_parent_pointer = NULL; \
+x.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f); \
+x.rotate_angle = NAN; \
+x.is_character = false
 
 typedef struct
 {

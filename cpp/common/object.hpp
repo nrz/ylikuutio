@@ -2,6 +2,8 @@
 #define __OBJECT_HPP_INCLUDED
 
 #include "shader.hpp"
+#include "species.hpp"
+#include "glyph.hpp"
 #include "model_common_functions.hpp"
 #include "model_templates.hpp"
 
@@ -17,6 +19,9 @@
 
 namespace model
 {
+    class Species;
+    class Glyph;
+
     class Object
     {
         public:
@@ -43,7 +48,8 @@ namespace model
             // this method renders this object.
             void render();
 
-            void* parent_pointer;                  // pointer to the species or glyph.
+            model::Species* species_parent_pointer; // pointer to the species or glyph.
+            model::Glyph* glyph_parent_pointer;     // pointer to the species or glyph.
             bool is_character;
 
             GLuint childID;                        // object ID, returned by `model::Species->get_objectID()`.
@@ -96,8 +102,6 @@ namespace model
 
             object_pointer->MVP_matrix = ProjectionMatrix * ViewMatrix * object_pointer->model_matrix;
 
-            T1 parent_pointer = static_cast<T1>(object_pointer->parent_pointer);
-
             // Send our transformation to the currently bound shader,
             // in the "MVP" uniform.
             // glUniformMatrix4fv(this->parent_pointer->parent_pointer->parent_pointer->MatrixID, 1, GL_FALSE, &this->MVP_matrix[0][0]);
@@ -105,48 +109,82 @@ namespace model
             // glUniformMatrix4fv(this->parent_pointer->parent_pointer->parent_pointer->ModelMatrixID, 1, GL_FALSE, &this->model_matrix[0][0]);
             glUniformMatrix4fv(shader_pointer->ModelMatrixID, 1, GL_FALSE, &object_pointer->model_matrix[0][0]);
 
+            GLuint vertexbuffer;
+            GLuint vertexPosition_modelspaceID;
+            GLuint uvbuffer;
+            GLuint vertexUVID;
+            GLuint normalbuffer;
+            GLuint vertexNormal_modelspaceID;
+            GLuint elementbuffer;
+            GLuint indices_size;
+
+            if (object_pointer->is_character)
+            {
+                model::Glyph* parent_glyph = object_pointer->glyph_parent_pointer;
+                vertexbuffer = parent_glyph->vertexbuffer;
+                vertexPosition_modelspaceID = parent_glyph->vertexPosition_modelspaceID;
+                uvbuffer = parent_glyph->uvbuffer;
+                vertexUVID = parent_glyph->vertexUVID;
+                normalbuffer = parent_glyph->normalbuffer;
+                vertexNormal_modelspaceID = parent_glyph->vertexNormal_modelspaceID;
+                elementbuffer = parent_glyph->elementbuffer;
+                indices_size = parent_glyph->indices.size();
+            }
+            else
+            {
+                model::Species* parent_species = object_pointer->species_parent_pointer;
+                vertexbuffer = parent_species->vertexbuffer;
+                vertexPosition_modelspaceID = parent_species->vertexPosition_modelspaceID;
+                uvbuffer = parent_species->uvbuffer;
+                vertexUVID = parent_species->vertexUVID;
+                normalbuffer = parent_species->normalbuffer;
+                vertexNormal_modelspaceID = parent_species->vertexNormal_modelspaceID;
+                elementbuffer = parent_species->elementbuffer;
+                indices_size = parent_species->indices.size();
+            }
+
             // 1st attribute buffer : vertices.
-            glBindBuffer(GL_ARRAY_BUFFER, parent_pointer->vertexbuffer);
+            glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
             glVertexAttribPointer(
-                    parent_pointer->vertexPosition_modelspaceID, // The attribute we want to configure
-                    3,                                           // size
-                    GL_FLOAT,                                    // type
-                    GL_FALSE,                                    // normalized?
-                    0,                                           // stride
-                    (void*) 0                                    // array buffer offset
+                    vertexPosition_modelspaceID, // The attribute we want to configure
+                    3,                           // size
+                    GL_FLOAT,                    // type
+                    GL_FALSE,                    // normalized?
+                    0,                           // stride
+                    (void*) 0                    // array buffer offset
                     );
 
             // 2nd attribute buffer : UVs.
-            glBindBuffer(GL_ARRAY_BUFFER, parent_pointer->uvbuffer);
+            glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
             glVertexAttribPointer(
-                    parent_pointer->vertexUVID, // The attribute we want to configure
-                    2,                          // size : U+V => 2
-                    GL_FLOAT,                   // type
-                    GL_FALSE,                   // normalized?
-                    0,                          // stride
-                    (void*) 0                   // array buffer offset
+                    vertexUVID, // The attribute we want to configure
+                    2,          // size : U+V => 2
+                    GL_FLOAT,   // type
+                    GL_FALSE,   // normalized?
+                    0,          // stride
+                    (void*) 0   // array buffer offset
                     );
 
             // 3rd attribute buffer : normals.
-            glBindBuffer(GL_ARRAY_BUFFER, parent_pointer->normalbuffer);
+            glBindBuffer(GL_ARRAY_BUFFER, normalbuffer);
             glVertexAttribPointer(
-                    parent_pointer->vertexNormal_modelspaceID, // The attribute we want to configure
-                    3,                                         // size
-                    GL_FLOAT,                                  // type
-                    GL_FALSE,                                  // normalized?
-                    0,                                         // stride
-                    (void*) 0                                  // array buffer offset
+                    vertexNormal_modelspaceID, // The attribute we want to configure
+                    3,                         // size
+                    GL_FLOAT,                  // type
+                    GL_FALSE,                  // normalized?
+                    0,                         // stride
+                    (void*) 0                  // array buffer offset
                     );
 
             // Index buffer.
-            glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, parent_pointer->elementbuffer);
+            glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, elementbuffer);
 
             // Draw the triangles!
             glDrawElements(
-                    GL_TRIANGLES,                   // mode
-                    parent_pointer->indices.size(), // count
-                    GL_UNSIGNED_INT,                // type
-                    (void*) 0                       // element array buffer offset
+                    GL_TRIANGLES,    // mode
+                    indices_size,    // count
+                    GL_UNSIGNED_INT, // type
+                    (void*) 0        // element array buffer offset
                     );
         }
 }

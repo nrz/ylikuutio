@@ -134,14 +134,14 @@ int main(void)
 
     // Create suzanne1, store it in `suzanne1`.
     OBJECTSTRUCT(object_struct1);
-    object_struct1.parent_pointer = suzanne_species;
+    object_struct1.species_parent_pointer = suzanne_species;
     object_struct1.coordinate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
     object_struct1.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
     model::Object *suzanne1 = new model::Object(object_struct1);
 
     // Create suzanne2, store it in `suzanne2`.
     OBJECTSTRUCT(object_struct2);
-    object_struct2.parent_pointer = suzanne_species;
+    object_struct2.species_parent_pointer = suzanne_species;
     object_struct2.coordinate_vector = glm::vec3(-1.0f, 0.0f, 0.0f);
     object_struct2.translate_vector = glm::vec3(0.1f, 0.0f, 0.0f);
     model::Object *suzanne2 = new model::Object(object_struct2);

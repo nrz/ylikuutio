@@ -9,13 +9,13 @@ namespace model
         if (this->is_character)
         {
             model::Glyph* parent_pointer;
-            parent_pointer = static_cast<model::Glyph*>(this->parent_pointer);
+            parent_pointer = this->glyph_parent_pointer;
             model::bind_child_to_parent<model::Object*>(this, parent_pointer->object_pointer_vector, parent_pointer->free_objectID_queue);
         }
         else
         {
             model::Species* parent_pointer;
-            parent_pointer = static_cast<model::Species*>(this->parent_pointer);
+            parent_pointer = this->species_parent_pointer;
             model::bind_child_to_parent<model::Object*>(this, parent_pointer->object_pointer_vector, parent_pointer->free_objectID_queue);
         }
     }
@@ -29,8 +29,18 @@ namespace model
         this->rotate_vector         = object_struct.rotate_vector;
         this->translate_vector      = object_struct.translate_vector;
         this->has_entered           = false;
-        this->parent_pointer        = static_cast<model::Species*>(object_struct.parent_pointer);
         this->is_character          = object_struct.is_character;
+
+        if (this->is_character)
+        {
+            this->species_parent_pointer = NULL;
+            this->glyph_parent_pointer   = object_struct.glyph_parent_pointer;
+        }
+        else
+        {
+            this->species_parent_pointer = object_struct.species_parent_pointer;
+            this->glyph_parent_pointer   = NULL;
+        }
 
         // get childID from the Species and set pointer to this Object.
         this->bind_to_parent();
@@ -46,15 +56,11 @@ namespace model
         // set pointer to this object to NULL.
         if (this->is_character)
         {
-            model::Glyph* parent_pointer;
-            parent_pointer = static_cast<model::Glyph*>(this->parent_pointer);
-            parent_pointer->set_object_pointer(this->childID, NULL);
+            this->glyph_parent_pointer->set_object_pointer(this->childID, NULL);
         }
         else
         {
-            model::Species* parent_pointer;
-            parent_pointer = static_cast<model::Species*>(this->parent_pointer);
-            parent_pointer->set_object_pointer(this->childID, NULL);
+            this->species_parent_pointer->set_object_pointer(this->childID, NULL);
         }
     }
 
@@ -64,12 +70,12 @@ namespace model
 
         if (this->is_character)
         {
-            shader_pointer = static_cast<model::Glyph*>(this->parent_pointer)->parent_pointer->parent_pointer->parent_pointer;
+            shader_pointer = this->glyph_parent_pointer->parent_pointer->parent_pointer->parent_pointer;
             model::render_this_object<model::Glyph*>(this, shader_pointer);
         }
         else
         {
-            shader_pointer = static_cast<model::Species*>(this->parent_pointer)->parent_pointer->parent_pointer;
+            shader_pointer = this->species_parent_pointer->parent_pointer->parent_pointer;
             model::render_this_object<model::Species*>(this, shader_pointer);
         }
     }
@@ -79,14 +85,24 @@ namespace model
         if (this->is_character)
         {
             model::Glyph* parent_pointer;
-            parent_pointer = static_cast<model::Glyph*>(this->parent_pointer);
-            model::bind_child_to_new_parent<model::Object*, model::Glyph*>(this, static_cast<model::Glyph*>(new_parent_pointer), parent_pointer->object_pointer_vector, parent_pointer->free_objectID_queue);
+            parent_pointer = this->glyph_parent_pointer;
+            // set pointer to this child to NULL in the old parent.
+            set_child_pointer(this->childID, NULL, glyph_parent_pointer->object_pointer_vector, glyph_parent_pointer->free_objectID_queue);
+            // set the new parent pointer.
+            this->glyph_parent_pointer = static_cast<model::Glyph*>(new_parent_pointer);
+            // bind to the new parent.
+            this->bind_to_parent();
         }
         else
         {
             model::Species* parent_pointer;
-            parent_pointer = static_cast<model::Species*>(this->parent_pointer);
-            model::bind_child_to_new_parent<model::Object*, model::Species*>(this, static_cast<model::Species*>(new_parent_pointer), parent_pointer->object_pointer_vector, parent_pointer->free_objectID_queue);
+            parent_pointer = this->species_parent_pointer;
+            // set pointer to this child to NULL in the old parent.
+            set_child_pointer(this->childID, NULL, species_parent_pointer->object_pointer_vector, species_parent_pointer->free_objectID_queue);
+            // set the new parent pointer.
+            this->species_parent_pointer = static_cast<model::Species*>(new_parent_pointer);
+            // bind to the new parent.
+            this->bind_to_parent();
         }
     }
 }
