@@ -177,12 +177,12 @@ int main(void)
     grass_material_struct.texture_filename = g_texture_filename;
     model::Material *grass_material = new model::Material(grass_material_struct);
 
-    // Create the texture, store it in 'my_uvmap_texture`.
+    // Create the texture, store it in 'uvmap_material`.
     MATERIALSTRUCT(uvmap_material_struct);
     uvmap_material_struct.parent_pointer = my_shader;
     uvmap_material_struct.texture_file_format = "dds";
     uvmap_material_struct.texture_filename = "uvmap.DDS";
-    model::Material *my_uvmap_texture = new model::Material(uvmap_material_struct);
+    model::Material *uvmap_material = new model::Material(uvmap_material_struct);
 
 #ifdef TESTING_SPHERICAL_WORLD_IN_USE
     // Create the species, store it in `terrain_species`.
@@ -217,7 +217,7 @@ int main(void)
     model::Object *terrain1 = new model::Object(terrain_object_struct1);
 
     SPECIESSTRUCT(suzanne_species_struct);
-    suzanne_species_struct.parent_pointer = my_uvmap_texture;
+    suzanne_species_struct.parent_pointer = uvmap_material;
     suzanne_species_struct.model_file_format = "obj";
     suzanne_species_struct.model_filename = "suzanne.obj";
     suzanne_species_struct.light_position = glm::vec3(4, 4, 4);
@@ -436,7 +436,7 @@ int main(void)
         else if (does_suzanne_species_exist && !does_suzanne_species_have_uvmap_texture && (glfwGetKey(window, GLFW_KEY_U) == GLFW_PRESS))
         {
             // switch to uvmap texture.
-            suzanne_species->bind_to_new_parent(my_uvmap_texture);
+            suzanne_species->bind_to_new_parent(uvmap_material);
             does_suzanne_species_have_uvmap_texture = true;
         }
 
