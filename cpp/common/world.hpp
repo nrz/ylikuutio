@@ -29,43 +29,44 @@
 #include <queue>     // std::queue
 
 // `World`, `Shader`, `Material`, `Species`, `Object`.
+// `World`, `Shader`, `Material`, `Font`, `Glyph`, `Object`.
 // `World` must be created before any `Shader`. `parent_pointer` must be given to each `Shader`.
 // `Shader` must be created before any `Material`. `parent_pointer` must be given to each `Material`.
 // `Material` must be created before any `Species`. `parent_pointer` must be given to each `Species`.
 // `Species` must be create before any `Object` of that `Species`. `parent_pointer` must be given to each `Object` of the `Species`.
 //
 //
-// Hierarchy for regular objects (including world species):
+// Hierarchy for regular objects (including terrain species):
 //
 //     World
 //       ^
-//    Shader
+//     Shader
 //       ^
 //    Material
 //       ^
 //    Species
 //       ^
-//    Object
+//     Object
 //
 //
 // Hierarchy for glyph (character) objects:
 //
 //     World
 //       ^
-//    Shader
+//     Shader
 //       ^
 //    Material
 //       ^
-//     Font
+//      Font
 //       ^
 //     Glyph
 //       ^
-//    Object
+//     Object
 //
 //
-// Deleting a `World` also deletes all shaders, textures, species and objects that are binded to the same World.
-// Deleting a `Shader` also deletes all textures, species and objects that are binded to the same Shader.
-// Deleting a `Material` also deletes all species and objects that are binded to the same Material.
+// Deleting a `World` also deletes all shaders, materials, species, fonts, glyphs and objects that are binded to the same World.
+// Deleting a `Shader` also deletes all materials, species, fonts, glyphs and objects that are binded to the same Shader.
+// Deleting a `Material` also deletes all species, fonts, glyphs and objects that are binded to the same Material.
 // Deleting a `Species` also deletes all objects that are binded to the same Species.
 // Deleting an `Object` only deletes the object.
 
