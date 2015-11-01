@@ -187,21 +187,8 @@ namespace text2D
             vertex_up_right_x = vertex_down_right_x = current_left_x + text_size;
             current_left_x += text_size;
 
-            if (strcmp(vertical_alignment, "bottom") == 0)
-            {
-                vertex_down_left_y = vertex_down_right_y = current_top_y - text_size;
-                vertex_up_left_y   = vertex_up_right_y   = current_top_y;
-            }
-            else if (strcmp(vertical_alignment, "top") == 0)
-            {
-                vertex_down_left_y = vertex_down_right_y = current_top_y - text_size;
-                vertex_up_left_y   = vertex_up_right_y   = current_top_y;
-            }
-            else if (strcmp(vertical_alignment, "center") == 0)
-            {
-                vertex_down_left_y = vertex_down_right_y = current_top_y - text_size;
-                vertex_up_left_y   = vertex_up_right_y   = current_top_y;
-            }
+            vertex_down_left_y = vertex_down_right_y = current_top_y - text_size;
+            vertex_up_left_y   = vertex_up_right_y   = current_top_y;
 
             glm::vec2 vertex_up_left = glm::vec2(vertex_up_left_x, vertex_up_left_y);
             glm::vec2 vertex_up_right = glm::vec2(vertex_up_right_x, vertex_up_right_y);
