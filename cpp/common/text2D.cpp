@@ -183,24 +183,9 @@ namespace text2D
                 }
             }
 
-            if (strcmp(horizontal_alignment, "left") == 0)
-            {
-                vertex_up_left_x = vertex_down_left_x = current_left_x;
-                vertex_up_right_x = vertex_down_right_x = current_left_x + text_size;
-                current_left_x += text_size;
-            }
-            else if (strcmp(horizontal_alignment, "right") == 0)
-            {
-                vertex_up_left_x = vertex_down_left_x = current_left_x;
-                vertex_up_right_x = vertex_down_right_x = current_left_x + text_size;
-                current_left_x += text_size;
-            }
-            else if (strcmp(horizontal_alignment, "center") == 0)
-            {
-                vertex_up_left_x = vertex_down_left_x = current_left_x;
-                vertex_up_right_x = vertex_down_right_x = current_left_x + text_size;
-                current_left_x += text_size;
-            }
+            vertex_up_left_x = vertex_down_left_x = current_left_x;
+            vertex_up_right_x = vertex_down_right_x = current_left_x + text_size;
+            current_left_x += text_size;
 
             if (strcmp(vertical_alignment, "bottom") == 0)
             {
