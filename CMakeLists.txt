@@ -125,10 +125,10 @@ add_executable(several_objects
     )
 configure_file(cpp/common/StandardShading.vertexshader StandardShading.vertexshader COPYONLY)
 configure_file(cpp/common/StandardShading.fragmentshader StandardShading.fragmentshader COPYONLY)
-configure_file(cpp/several_objects/suzanne.obj suzanne.obj COPYONLY)
-configure_file(cpp/several_objects/uvmap.DDS uvmap.DDS COPYONLY)
-configure_file(cpp/ylikuutio/Holstein.DDS Holstein.DDS COPYONLY)
-configure_file(cpp/ylikuutio/Holstein.bmp Holstein.bmp COPYONLY)
+configure_file(res/suzanne.obj suzanne.obj COPYONLY)
+configure_file(res/uvmap.DDS uvmap.DDS COPYONLY)
+configure_file(res/Holstein.DDS Holstein.DDS COPYONLY)
+configure_file(res/Holstein.bmp Holstein.bmp COPYONLY)
 
 target_link_libraries(several_objects
     ${ALL_LIBS}
@@ -194,13 +194,13 @@ configure_file(cpp/common/StandardShading.vertexshader StandardShading.vertexsha
 configure_file(cpp/common/StandardShading.fragmentshader StandardShading.fragmentshader COPYONLY)
 configure_file(cpp/common/TextVertexShader.vertexshader TextVertexShader.vertexshader COPYONLY)
 configure_file(cpp/common/TextVertexShader.fragmentshader TextVertexShader.fragmentshader COPYONLY)
-configure_file(cpp/ylikuutio/GrassGreenTexture0002.bmp GrassGreenTexture0002.bmp COPYONLY)
-configure_file(cpp/ylikuutio/Holstein.DDS Holstein.DDS COPYONLY)
-configure_file(cpp/ylikuutio/Holstein.bmp Holstein.bmp COPYONLY)
-configure_file(cpp/ylikuutio/noise1024x1024.bmp noise1024x1024.bmp COPYONLY)
-configure_file(cpp/ylikuutio/noise256x256.bmp noise256x256.bmp COPYONLY)
-configure_file(cpp/ylikuutio/noise128x128.bmp noise128x128.bmp COPYONLY)
-configure_file(cpp/ylikuutio/S17W069.hgt S17W069.hgt COPYONLY)
+configure_file(res/GrassGreenTexture0002.bmp GrassGreenTexture0002.bmp COPYONLY)
+configure_file(res/Holstein.DDS Holstein.DDS COPYONLY)
+configure_file(res/Holstein.bmp Holstein.bmp COPYONLY)
+configure_file(res/noise1024x1024.bmp noise1024x1024.bmp COPYONLY)
+configure_file(res/noise256x256.bmp noise256x256.bmp COPYONLY)
+configure_file(res/noise128x128.bmp noise128x128.bmp COPYONLY)
+configure_file(res/S17W069.hgt S17W069.hgt COPYONLY)
 configure_file(external/kongtext/kongtext.svg kongtext.svg COPYONLY)
 
 target_link_libraries(ylikuutio
