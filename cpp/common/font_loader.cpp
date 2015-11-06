@@ -15,6 +15,10 @@ namespace model
 {
     bool find_first_glyph_in_SVG(char*& SVG_data_pointer)
     {
+        // This function advances `SVG_data_pointer` to the start of the first glyph.
+        // Returns true if a glyph was found.
+        // Returns false if no glyph was found.
+
         bool is_inside_block = false;
 
         // Read bytes of SVG data until `"<glyph "` is encountered!
