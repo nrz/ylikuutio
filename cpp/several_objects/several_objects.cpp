@@ -108,21 +108,21 @@ int main(void)
     glEnable(GL_CULL_FACE);
 
     // Create the world, store it in `my_world`.
-    model::World *my_world = new model::World();
+    model::World* my_world = new model::World();
 
     // Create the shader, store it in `my_shader`.
     SHADERSTRUCT(shader_struct);
     shader_struct.parent_pointer = my_world;
     shader_struct.vertex_shader = "StandardShading.vertexshader";
     shader_struct.fragment_shader = "StandardShading.fragmentshader";
-    model::Shader *my_shader = new model::Shader(shader_struct);
+    model::Shader* my_shader = new model::Shader(shader_struct);
 
     // Create the material, store it in `my_material`.
     MATERIALSTRUCT(material_struct);
     material_struct.parent_pointer = my_shader;
     material_struct.texture_file_format = "dds";
     material_struct.texture_filename = "uvmap.DDS";
-    model::Material *my_material = new model::Material(material_struct);
+    model::Material* my_material = new model::Material(material_struct);
 
     // Create the species, store it in `suzanne_species`.
     SPECIESSTRUCT(species_struct);
@@ -130,21 +130,21 @@ int main(void)
     species_struct.model_file_format = "obj";
     species_struct.model_filename = "suzanne.obj";
     species_struct.light_position = glm::vec3(4, 4, 4);
-    model::Species *suzanne_species = new model::Species(species_struct);
+    model::Species* suzanne_species = new model::Species(species_struct);
 
     // Create suzanne1, store it in `suzanne1`.
     OBJECTSTRUCT(object_struct1);
     object_struct1.species_parent_pointer = suzanne_species;
     object_struct1.coordinate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
     object_struct1.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
-    model::Object *suzanne1 = new model::Object(object_struct1);
+    model::Object* suzanne1 = new model::Object(object_struct1);
 
     // Create suzanne2, store it in `suzanne2`.
     OBJECTSTRUCT(object_struct2);
     object_struct2.species_parent_pointer = suzanne_species;
     object_struct2.coordinate_vector = glm::vec3(-1.0f, 0.0f, 0.0f);
     object_struct2.translate_vector = glm::vec3(0.1f, 0.0f, 0.0f);
-    model::Object *suzanne2 = new model::Object(object_struct2);
+    model::Object* suzanne2 = new model::Object(object_struct2);
 
     // Initialize our little text library with the Holstein font
     const char* char_g_font_texture_filename = g_font_texture_filename.c_str();
