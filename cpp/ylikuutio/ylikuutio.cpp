@@ -161,28 +161,28 @@ int main(void)
     glEnable(GL_CULL_FACE);
 
     // Create the world, store it in `my_world`.
-    model::World *my_world = new model::World();
+    model::World* my_world = new model::World();
 
     // Create the shader, store it in `my_shader`.
     SHADERSTRUCT(shader_struct);
     shader_struct.parent_pointer = my_world;
     shader_struct.vertex_shader = "StandardShading.vertexshader";
     shader_struct.fragment_shader = "StandardShading.fragmentshader";
-    model::Shader *my_shader = new model::Shader(shader_struct);
+    model::Shader* my_shader = new model::Shader(shader_struct);
 
     // Create the material, store it in `grass_material`.
     MATERIALSTRUCT(grass_material_struct);
     grass_material_struct.parent_pointer = my_shader;
     grass_material_struct.texture_file_format = g_texture_file_format;
     grass_material_struct.texture_filename = g_texture_filename;
-    model::Material *grass_material = new model::Material(grass_material_struct);
+    model::Material* grass_material = new model::Material(grass_material_struct);
 
     // Create the material, store it in `uvmap_material`.
     MATERIALSTRUCT(uvmap_material_struct);
     uvmap_material_struct.parent_pointer = my_shader;
     uvmap_material_struct.texture_file_format = "dds";
     uvmap_material_struct.texture_filename = "uvmap.DDS";
-    model::Material *uvmap_material = new model::Material(uvmap_material_struct);
+    model::Material* uvmap_material = new model::Material(uvmap_material_struct);
 
 #ifdef TESTING_SPHERICAL_WORLD_IN_USE
     // Create the species, store it in `terrain_species`.
@@ -194,7 +194,7 @@ int main(void)
     SRTM_terrain_species_struct.color_channel = g_height_data_color_channel;
     SRTM_terrain_species_struct.light_position = glm::vec3(4, 4, 4);
     SRTM_terrain_species_struct.is_world = true;
-    model::Species *terrain_species = new model::Species(SRTM_terrain_species_struct);
+    model::Species* terrain_species = new model::Species(SRTM_terrain_species_struct);
 #else
     // Create the species, store it in `terrain_species`.
     SPECIESSTRUCT(bmp_terrain_species_struct);
@@ -204,7 +204,7 @@ int main(void)
     bmp_terrain_species_struct.color_channel = g_height_data_color_channel;
     bmp_terrain_species_struct.light_position = glm::vec3(4, 4, 4);
     bmp_terrain_species_struct.is_world = true;
-    model::Species *terrain_species = new model::Species(bmp_terrain_species_struct);
+    model::Species* terrain_species = new model::Species(bmp_terrain_species_struct);
 #endif
 
     // Create terrain1, store it in `terrain1`.
@@ -214,14 +214,14 @@ int main(void)
     terrain_object_struct1.rotate_angle = 0.0f;
     terrain_object_struct1.rotate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
     terrain_object_struct1.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
-    model::Object *terrain1 = new model::Object(terrain_object_struct1);
+    model::Object* terrain1 = new model::Object(terrain_object_struct1);
 
     SPECIESSTRUCT(suzanne_species_struct);
     suzanne_species_struct.parent_pointer = uvmap_material;
     suzanne_species_struct.model_file_format = "obj";
     suzanne_species_struct.model_filename = "suzanne.obj";
     suzanne_species_struct.light_position = glm::vec3(4, 4, 4);
-    model::Species *suzanne_species = new model::Species(suzanne_species_struct);
+    model::Species* suzanne_species = new model::Species(suzanne_species_struct);
 
     // Create suzanne1, store it in `suzanne1`.
     OBJECTSTRUCT(suzanne_object_struct1);
@@ -230,7 +230,7 @@ int main(void)
     suzanne_object_struct1.rotate_angle = 0.10f;
     suzanne_object_struct1.rotate_vector = glm::vec3(1.0f, 0.0f, 0.0f);
     suzanne_object_struct1.translate_vector = glm::vec3(1.0f, 0.0f, 0.0f);
-    model::Object *suzanne1 = new model::Object(suzanne_object_struct1);
+    model::Object* suzanne1 = new model::Object(suzanne_object_struct1);
 
     OBJECTSTRUCT(suzanne_object_struct2);
     suzanne_object_struct2.species_parent_pointer = suzanne_species;
@@ -238,7 +238,7 @@ int main(void)
     suzanne_object_struct2.rotate_angle = 0.20f;
     suzanne_object_struct2.rotate_vector = glm::vec3(1.0f, 0.0f, 0.0f);
     suzanne_object_struct2.translate_vector = glm::vec3(0.0f, 1.0f, 0.0f);
-    model::Object *suzanne2 = new model::Object(suzanne_object_struct2);
+    model::Object* suzanne2 = new model::Object(suzanne_object_struct2);
 
     OBJECTSTRUCT(suzanne_object_struct3);
     suzanne_object_struct3.species_parent_pointer = suzanne_species;
@@ -246,7 +246,7 @@ int main(void)
     suzanne_object_struct3.rotate_angle = 0.05f;
     suzanne_object_struct3.rotate_vector = glm::vec3(1.0f, 0.0f, 0.0f);
     suzanne_object_struct3.translate_vector = glm::vec3(0.0f, 0.0f, 1.0f);
-    model::Object *suzanne3 = new model::Object(suzanne_object_struct3);
+    model::Object* suzanne3 = new model::Object(suzanne_object_struct3);
 
     OBJECTSTRUCT(suzanne_object_struct4);
     suzanne_object_struct4.species_parent_pointer = suzanne_species;
@@ -254,7 +254,7 @@ int main(void)
     suzanne_object_struct4.rotate_angle = 0.15f;
     suzanne_object_struct4.rotate_vector = glm::vec3(1.0f, 0.0f, 0.0f);
     suzanne_object_struct4.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
-    model::Object *suzanne4 = new model::Object(suzanne_object_struct4);
+    model::Object* suzanne4 = new model::Object(suzanne_object_struct4);
 
     OBJECTSTRUCT(suzanne_object_struct5);
     suzanne_object_struct5.species_parent_pointer = suzanne_species;
@@ -263,13 +263,13 @@ int main(void)
     suzanne_object_struct5.rotate_angle = 0.03f;
     suzanne_object_struct5.rotate_vector = glm::vec3(1.0f, 1.0f, 1.0f);
     suzanne_object_struct5.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
-    model::Object *suzanne5 = new model::Object(suzanne_object_struct5);
+    model::Object* suzanne5 = new model::Object(suzanne_object_struct5);
 
     FONTSTRUCT(kongtext_font_struct);
     kongtext_font_struct.parent_pointer = grass_material;
     kongtext_font_struct.font_file_format = g_font_file_format;
     kongtext_font_struct.font_filename = g_font_filename;
-    model::Font *kongtext_font = new model::Font(kongtext_font_struct);
+    model::Font* kongtext_font = new model::Font(kongtext_font_struct);
 
     std::cout << "number of vertices: " << terrain_species->vertices.size() << ".\n";
     std::cout << "number of UVs: " << terrain_species->UVs.size() << ".\n";
