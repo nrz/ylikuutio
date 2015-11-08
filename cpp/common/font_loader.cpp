@@ -54,18 +54,15 @@ namespace model
                     printf("<glyph found at 0x%lx.\n", (uint64_t) SVG_data_pointer);
                     return true;
                 }
+                if (strncmp(SVG_data_pointer, "</svg>", strlen("</svg>")) == 0)
+                {
+                    // No glyphs were found!
+                    printf("No glyphs were found! </svg> found at 0x%lx. ", (uint64_t) SVG_data_pointer);
+                    return false;
+                }
 
                 is_inside_block = model::check_if_we_are_inside_block(SVG_data_pointer);
 
-                if (!is_inside_block)
-                {
-                    if (strncmp(SVG_data_pointer, "</svg>", strlen("</svg>")) == 0)
-                    {
-                        // No glyphs were found!
-                        printf("No glyphs were found! </svg> found at 0x%lx. ", (uint64_t) SVG_data_pointer);
-                        return false;
-                    }
-                }
                 SVG_data_pointer += sizeof(*SVG_data_pointer);  // Advance to the next character.
             }
             else
