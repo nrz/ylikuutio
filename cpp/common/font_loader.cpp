@@ -33,6 +33,36 @@ namespace model
         return false;
     }
 
+    void extract_string_with_several_endings(
+            char* dest_mem_pointer,
+            char*& src_mem_pointer,
+            char* char_end_string)
+    {
+        while (true)
+        {
+            uint32_t n_of_ending_characters = strlen(char_end_string);
+            char* end_char_pointer;
+            end_char_pointer = char_end_string;
+
+            // Check if current character is any of the ending characters.
+            while (strncmp(end_char_pointer, "\0", sizeof("\0")) != 0)
+            {
+                if (strncmp(src_mem_pointer, end_char_pointer, 1) == 0)
+                {
+                    *dest_mem_pointer = '\0';
+                    return;
+                }
+                end_char_pointer += sizeof(*end_char_pointer);
+            }
+
+            // OK, current character is not any of the ending characters.
+            // Copy it and advance the pointers accordingly.
+            strncpy(dest_mem_pointer, src_mem_pointer, 1);
+            dest_mem_pointer += sizeof(*src_mem_pointer);
+            src_mem_pointer += sizeof(*src_mem_pointer);
+        }
+    }
+
     bool find_first_glyph_in_SVG(char*& SVG_data_pointer)
     {
         // This function advances `SVG_data_pointer` to the start of the first glyph.
@@ -91,36 +121,6 @@ namespace model
             src_mem_pointer += sizeof(*src_mem_pointer);
         }
         *dest_mem_pointer = '\0';
-    }
-
-    void extract_string_with_several_endings(
-            char* dest_mem_pointer,
-            char*& src_mem_pointer,
-            char* char_end_string)
-    {
-        while (true)
-        {
-            uint32_t n_of_ending_characters = strlen(char_end_string);
-            char* end_char_pointer;
-            end_char_pointer = char_end_string;
-
-            // Check if current character is any of the ending characters.
-            while (strncmp(end_char_pointer, "\0", sizeof("\0")) != 0)
-            {
-                if (strncmp(src_mem_pointer, end_char_pointer, 1) == 0)
-                {
-                    *dest_mem_pointer = '\0';
-                    return;
-                }
-                end_char_pointer += sizeof(*end_char_pointer);
-            }
-
-            // OK, current character is not any of the ending characters.
-            // Copy it and advance the pointers accordingly.
-            strncpy(dest_mem_pointer, src_mem_pointer, 1);
-            dest_mem_pointer += sizeof(*src_mem_pointer);
-            src_mem_pointer += sizeof(*src_mem_pointer);
-        }
     }
 
     bool load_SVG_font(
