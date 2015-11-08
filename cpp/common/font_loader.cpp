@@ -243,9 +243,9 @@ namespace model
                                 printf("glyph name: %s\n", char_glyph_name);
 
                                 SVG_data_pointer = closing_double_quote_pointer;
-                            }
-                        }
-                    }
+                            } // if (closing_double_quote_pointer != NULL)
+                        } // if (opening_double_quote_pointer != NULL)
+                    } // if (strncmp(SVG_data_pointer, "glyph-name=", strlen("glyph-name=")) == 0)
                     else if (strncmp(SVG_data_pointer, "unicode=", strlen("unicode=")) == 0)
                     {
                         // Unicode was found.
@@ -278,9 +278,9 @@ namespace model
                                 printf("unicode: %s\n", char_unicode);
 
                                 SVG_data_pointer = closing_double_quote_pointer;
-                            }
-                        }
-                    }
+                            } // if (closing_double_quote_pointer != NULL)
+                        } // if (opening_double_quote_pointer != NULL)
+                    } // else if (strncmp(SVG_data_pointer, "unicode=", strlen("unicode=")) == 0)
                     else if (strncmp(SVG_data_pointer, "d=", strlen("d=")) == 0)
                     {
                         // d=" was found.
@@ -354,10 +354,10 @@ namespace model
                                                 current_vertex.y = moveto_y;
                                                 current_glyph_vertices.push_back(current_vertex);
                                                 break;
-                                            }
+                                            } // if (strncmp(vertex_data_pointer, " ", strlen(" ")) == 0)
                                             vertex_data_pointer += sizeof(*vertex_data_pointer); // Advance to the next character.
-                                        }
-                                    }
+                                        } // while (true)
+                                    } // if (strncmp(vertex_data_pointer, "M", strlen("M")) == 0)
                                     else if (strncmp(vertex_data_pointer, "h", strlen("h")) == 0)
                                     {
                                         // OK, this is horizontal relative lineto.
@@ -374,7 +374,7 @@ namespace model
                                         printf("horizontal lineto target: %d\n", horizontal_lineto_value);
                                         current_vertex.x += horizontal_lineto_value;
                                         current_glyph_vertices.push_back(current_vertex);
-                                    }
+                                    } // else if (strncmp(vertex_data_pointer, "h", strlen("h")) == 0)
                                     else if (strncmp(vertex_data_pointer, "v", strlen("v")) == 0)
                                     {
                                         // OK, this is vertical relative lineto.
@@ -391,22 +391,22 @@ namespace model
                                         printf("vertical lineto target: %d\n", vertical_lineto_value);
                                         current_vertex.y += vertical_lineto_value;
                                         current_glyph_vertices.push_back(current_vertex);
-                                    }
+                                    } // else if (strncmp(vertex_data_pointer, "v", strlen("v")) == 0)
                                     else if (strncmp(vertex_data_pointer, "z", strlen("z")) == 0)
                                     {
                                         printf("z (closepath) found at 0x%lx.\n", (uint64_t) vertex_data_pointer);
                                         keep_reading_path = false;
                                         break;
-                                    }
+                                    } // else if (strncmp(vertex_data_pointer, "z", strlen("z")) == 0)
                                     else
                                     {
                                         vertex_data_pointer += sizeof(*vertex_data_pointer);
-                                    }
-                                }
+                                    } // else
+                                } // while (keep_reading_path)
                                 SVG_data_pointer = closing_double_quote_pointer;
-                            }
-                        }
-                    }
+                            } // if (closing_double_quote_pointer != NULL)
+                        } // if (opening_double_quote_pointer != NULL)
+                    } // else if (strncmp(SVG_data_pointer, "d=", strlen("d=")) == 0)
                     else if (strncmp(SVG_data_pointer, ">", strlen(">")) == 0)
                     {
                         // OK, this is the end of this glyph.
@@ -437,11 +437,11 @@ namespace model
                             // Store the vertices of the current vector to the glyph vertex vector
                             // which contains the vertices of all the glyphs.
                             out_glyph_vertex_data.push_back(current_glyph_vertices);
-                        }
+                        } // if (has_glyph_unicode)
                         break;
-                    }
+                    } // else if (strncmp(SVG_data_pointer, ">", strlen(">")) == 0)
                     SVG_data_pointer += sizeof(*SVG_data_pointer);  // Advance to the next byte inside the glyph.
-                }
+                } // while (true)
             } // End of glyph.
             else if (strncmp(SVG_data_pointer, "</font>", strlen("</font>")) == 0)
             {
@@ -459,7 +459,7 @@ namespace model
                 break;
             }
             SVG_data_pointer += sizeof(*SVG_data_pointer);  // Advance to the next byte between glyphs.
-        }
+        } // while (true)
         return true;
     }
 }
