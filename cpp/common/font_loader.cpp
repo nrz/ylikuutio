@@ -63,6 +63,20 @@ namespace model
         }
     }
 
+    int32_t extract_value_from_string(char*& vertex_data_pointer, char* char_end_string, const char* description)
+    {
+        printf("%s found at 0x%lx.\n", description, (uint64_t) vertex_data_pointer);
+        vertex_data_pointer += sizeof(*vertex_data_pointer); // Advance to the next character.
+        char char_number_buffer[1024];
+        char* dest_mem_pointer;
+        dest_mem_pointer = char_number_buffer;
+
+        extract_string_with_several_endings(dest_mem_pointer, vertex_data_pointer, char_end_string);
+        uint32_t value = atoi(dest_mem_pointer);
+        printf("%s: %d\n", description, value);
+        return value;
+    }
+
     bool find_first_glyph_in_SVG(char*& SVG_data_pointer)
     {
         // This function advances `SVG_data_pointer` to the start of the first glyph.
