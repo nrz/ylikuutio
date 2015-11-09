@@ -72,7 +72,7 @@ namespace model
         char* dest_mem_pointer;
         dest_mem_pointer = char_number_buffer;
 
-        extract_string_with_several_endings(dest_mem_pointer, vertex_data_pointer, char_end_string);
+        model::extract_string_with_several_endings(dest_mem_pointer, vertex_data_pointer, char_end_string);
         uint32_t value = atoi(dest_mem_pointer);
         printf("%s: %d\n", description, value);
         return value;
