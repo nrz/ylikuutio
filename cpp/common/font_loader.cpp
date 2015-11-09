@@ -231,7 +231,7 @@ namespace model
                                 char* dest_mem_pointer;
                                 src_mem_pointer = opening_double_quote_pointer;
                                 dest_mem_pointer = char_glyph_name;
-                                extract_string(dest_mem_pointer, src_mem_pointer, (char*) "\"");
+                                model::extract_string(dest_mem_pointer, src_mem_pointer, (char*) "\"");
 
                                 printf("glyph name: %s\n", char_glyph_name);
 
@@ -266,7 +266,7 @@ namespace model
                                 char* dest_mem_pointer;
                                 src_mem_pointer = opening_double_quote_pointer;
                                 dest_mem_pointer = char_unicode;
-                                extract_string(dest_mem_pointer, src_mem_pointer, (char*) "\"");
+                                model::extract_string(dest_mem_pointer, src_mem_pointer, (char*) "\"");
 
                                 printf("unicode: %s\n", char_unicode);
 
@@ -305,7 +305,7 @@ namespace model
                                 char* dest_mem_pointer;
                                 src_mem_pointer = opening_double_quote_pointer;
                                 dest_mem_pointer = char_path;
-                                extract_string(dest_mem_pointer, src_mem_pointer, (char*) "\"");
+                                model::extract_string(dest_mem_pointer, src_mem_pointer, (char*) "\"");
 
                                 printf("d: %s\n", char_path);
 
