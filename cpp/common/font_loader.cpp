@@ -26,7 +26,6 @@ namespace model
 
             if (strncmp(SVG_data_pointer, identifier_string_char, strlen(identifier_string_char)) == 0)
             {
-                // printf("%s found at 0x%lx. ", identifier_string, (uint64_t) SVG_data_pointer);
                 const char* identifier_string_char = identifier_string.c_str();
                 printf("%s found at 0x%lx. ", identifier_string_char, (uint64_t) SVG_data_pointer);
                 return true;
