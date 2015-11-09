@@ -227,11 +227,7 @@ namespace model
 
                                 closing_double_quote_pointer += sizeof(*closing_double_quote_pointer);
 
-                                char* src_mem_pointer;
-                                char* dest_mem_pointer;
-                                src_mem_pointer = opening_double_quote_pointer;
-                                dest_mem_pointer = char_glyph_name;
-                                model::extract_string(dest_mem_pointer, src_mem_pointer, (char*) "\"");
+                                model::extract_string(char_glyph_name, opening_double_quote_pointer, (char*) "\"");
 
                                 printf("glyph name: %s\n", char_glyph_name);
 
@@ -262,11 +258,7 @@ namespace model
 
                                 closing_double_quote_pointer += sizeof(*closing_double_quote_pointer);
 
-                                char* src_mem_pointer;
-                                char* dest_mem_pointer;
-                                src_mem_pointer = opening_double_quote_pointer;
-                                dest_mem_pointer = char_unicode;
-                                model::extract_string(dest_mem_pointer, src_mem_pointer, (char*) "\"");
+                                model::extract_string(char_unicode, opening_double_quote_pointer, (char*) "\"");
 
                                 printf("unicode: %s\n", char_unicode);
 
@@ -301,11 +293,8 @@ namespace model
                                 glm::vec3 current_vertex;
                                 current_vertex.z = 0; // z is not defined in the path (originally these are not 3D fonts!).
                                 char char_path[1024];
-                                char* src_mem_pointer;
-                                char* dest_mem_pointer;
-                                src_mem_pointer = opening_double_quote_pointer;
-                                dest_mem_pointer = char_path;
-                                model::extract_string(dest_mem_pointer, src_mem_pointer, (char*) "\"");
+
+                                model::extract_string(char_path, opening_double_quote_pointer, (char*) "\"");
 
                                 printf("d: %s\n", char_path);
 
