@@ -318,32 +318,13 @@ namespace model
                                 {
                                     if (strncmp(vertex_data_pointer, "M", strlen("M")) == 0)
                                     {
-                                        printf("M (moveto) found at 0x%lx.\n", (uint64_t) vertex_data_pointer);
-                                        vertex_data_pointer += sizeof(*vertex_data_pointer); // Advance to the next character.
-                                        char char_number_buffer[1024];
-                                        char* dest_mem_pointer;
-                                        dest_mem_pointer = char_number_buffer;
-
-                                        extract_string_with_several_endings(dest_mem_pointer, vertex_data_pointer, (char*) " -Mmhvz\">");
-                                        uint32_t moveto_x = atoi(dest_mem_pointer);
-                                        current_vertex.x = moveto_x;
-                                        printf("moveto x: %d\n", moveto_x);
+                                        current_vertex.x = model::extract_value_from_string(vertex_data_pointer, (char*) " -Mmhvz\">", (const char*) "M (moveto)");
 
                                         while (true)
                                         {
                                             if (strncmp(vertex_data_pointer, " ", strlen(" ")) == 0)
                                             {
-                                                printf("space (moveto y coordinate) found at 0x%lx.\n", (uint64_t) vertex_data_pointer);
-                                                vertex_data_pointer += sizeof(*vertex_data_pointer); // Advance to the next character.
-
-                                                char char_number_buffer[1024];
-                                                char* dest_mem_pointer;
-                                                dest_mem_pointer = char_number_buffer;
-
-                                                extract_string_with_several_endings(dest_mem_pointer, vertex_data_pointer, (char*) " -Mmhvz\">");
-                                                uint32_t moveto_y = atoi(dest_mem_pointer);
-                                                printf("moveto y: %d\n", moveto_y);
-                                                current_vertex.y = moveto_y;
+                                                current_vertex.y = model::extract_value_from_string(vertex_data_pointer, (char*) " -Mmhvz\">", (const char*) "space (moveto y coordinate)");
                                                 current_glyph_vertices.push_back(current_vertex);
                                                 break;
                                             } // if (strncmp(vertex_data_pointer, " ", strlen(" ")) == 0)
@@ -353,34 +334,14 @@ namespace model
                                     else if (strncmp(vertex_data_pointer, "h", strlen("h")) == 0)
                                     {
                                         // OK, this is horizontal relative lineto.
-                                        printf("h (horizontal relative lineto) found at 0x%lx.\n", (uint64_t) vertex_data_pointer);
-                                        vertex_data_pointer += sizeof(*vertex_data_pointer); // Advance to the next character.
-
-                                        char char_number_buffer[1024];
-                                        char* dest_mem_pointer;
-                                        dest_mem_pointer = char_number_buffer;
-
-                                        extract_string_with_several_endings(dest_mem_pointer, vertex_data_pointer, (char*) " Mmhvz\">");
-                                        int32_t horizontal_lineto_value = atoi(dest_mem_pointer);
-
-                                        printf("horizontal lineto target: %d\n", horizontal_lineto_value);
+                                        int32_t horizontal_lineto_value = model::extract_value_from_string(vertex_data_pointer, (char*) " -Mmhvz\">", (const char*) "h (horizontal relative lineto)");
                                         current_vertex.x += horizontal_lineto_value;
                                         current_glyph_vertices.push_back(current_vertex);
                                     } // else if (strncmp(vertex_data_pointer, "h", strlen("h")) == 0)
                                     else if (strncmp(vertex_data_pointer, "v", strlen("v")) == 0)
                                     {
                                         // OK, this is vertical relative lineto.
-                                        printf("v (vertical relative lineto) found at 0x%lx.\n", (uint64_t) vertex_data_pointer);
-                                        vertex_data_pointer += sizeof(*vertex_data_pointer); // Advance to the next character.
-
-                                        char char_number_buffer[1024];
-                                        char* dest_mem_pointer;
-                                        dest_mem_pointer = char_number_buffer;
-
-                                        extract_string_with_several_endings(dest_mem_pointer, vertex_data_pointer, (char*) " Mmhvz\">");
-                                        int32_t vertical_lineto_value = atoi(dest_mem_pointer);
-
-                                        printf("vertical lineto target: %d\n", vertical_lineto_value);
+                                        int32_t vertical_lineto_value = model::extract_value_from_string(vertex_data_pointer, (char*) " -Mmhvz\">", (const char*) "v (vertical relative lineto)");
                                         current_vertex.y += vertical_lineto_value;
                                         current_glyph_vertices.push_back(current_vertex);
                                     } // else if (strncmp(vertex_data_pointer, "v", strlen("v")) == 0)
