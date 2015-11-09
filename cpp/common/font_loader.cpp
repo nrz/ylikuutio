@@ -16,6 +16,8 @@ namespace model
     bool check_if_we_are_inside_block(char*& SVG_data_pointer)
     {
         std::vector<std::string> identifier_strings_vector;
+
+        // All possible block identifier strings.
         identifier_strings_vector = { "<?xml ", "<!DOCTYPE ", "<svg>", "<metadata>", "</metadata>", "<defs>", "<font ", "<font-face", "<missing-glyph" };
 
         for (std::string identifier_string : identifier_strings_vector)
