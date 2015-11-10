@@ -35,19 +35,7 @@ namespace model
 
         // All possible block identifier strings.
         identifier_strings_vector = { "<?xml ", "<!DOCTYPE ", "<svg>", "<metadata>", "</metadata>", "<defs>", "<font ", "<font-face", "<missing-glyph" };
-
-        for (std::string identifier_string : identifier_strings_vector)
-        {
-            const char* identifier_string_char = identifier_string.c_str();
-
-            if (strncmp(SVG_data_pointer, identifier_string_char, strlen(identifier_string_char)) == 0)
-            {
-                const char* identifier_string_char = identifier_string.c_str();
-                printf("%s found at 0x%lx. ", identifier_string_char, (uint64_t) SVG_data_pointer);
-                return true;
-            }
-        }
-        return false;
+        return check_and_report_if_some_string_matches(SVG_data_pointer, identifier_strings_vector);
     }
 
     void extract_string_with_several_endings(
@@ -109,16 +97,12 @@ namespace model
             {
                 // OK, were are not inside a block.
 
-                if (strncmp(SVG_data_pointer, "<glyph", strlen("<glyph")) == 0)
+                if (check_and_report_if_some_string_matches(SVG_data_pointer, std::vector<std::string> { "<glyph" }))
                 {
-                    // A glyph was found!
-                    printf("<glyph found at 0x%lx.\n", (uint64_t) SVG_data_pointer);
                     return true;
                 }
-                if (strncmp(SVG_data_pointer, "</svg>", strlen("</svg>")) == 0)
+                if (check_and_report_if_some_string_matches(SVG_data_pointer, std::vector<std::string> { "</svg>" }))
                 {
-                    // No glyphs were found!
-                    printf("No glyphs were found! </svg> found at 0x%lx. ", (uint64_t) SVG_data_pointer);
                     return false;
                 }
 
@@ -410,20 +394,15 @@ namespace model
                     SVG_data_pointer += sizeof(*SVG_data_pointer);  // Advance to the next byte inside the glyph.
                 } // while (true)
             } // End of glyph.
-            else if (strncmp(SVG_data_pointer, "</font>", strlen("</font>")) == 0)
+            else
             {
-                printf("</font> found at 0x%lx.\n", (uint64_t) SVG_data_pointer);
-                break;
-            }
-            else if (strncmp(SVG_data_pointer, "</defs>", strlen("</defs>")) == 0)
-            {
-                printf("</defs> found at 0x%lx.\n", (uint64_t) SVG_data_pointer);
-                break;
-            }
-            else if (strncmp(SVG_data_pointer, "</svg>", strlen("</svg>")) == 0)
-            {
-                printf("</svg> found at 0x%lx.\n", (uint64_t) SVG_data_pointer);
-                break;
+                std::vector<std::string> string_vector;
+                string_vector = { "</font>", "</defs>", "</svg>" };
+
+                if (model::check_and_report_if_some_string_matches(SVG_data_pointer, string_vector))
+                {
+                    break;
+                }
             }
             SVG_data_pointer += sizeof(*SVG_data_pointer);  // Advance to the next byte between glyphs.
         } // while (true)
