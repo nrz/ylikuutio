@@ -13,6 +13,22 @@
 
 namespace model
 {
+    bool check_and_report_if_some_string_matches(char* SVG_data_pointer, std::vector<std::string> identifier_strings_vector)
+    {
+        for (std::string identifier_string : identifier_strings_vector)
+        {
+            const char* identifier_string_char = identifier_string.c_str();
+
+            if (strncmp(SVG_data_pointer, identifier_string_char, strlen(identifier_string_char)) == 0)
+            {
+                const char* identifier_string_char = identifier_string.c_str();
+                printf("%s found at 0x%lx. ", identifier_string_char, (uint64_t) SVG_data_pointer);
+                return true;
+            }
+        }
+        return false;
+    }
+
     bool check_if_we_are_inside_block(char*& SVG_data_pointer)
     {
         std::vector<std::string> identifier_strings_vector;
