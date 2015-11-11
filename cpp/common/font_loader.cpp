@@ -82,6 +82,11 @@ namespace model
         return value;
     }
 
+    int32_t extract_value_from_string_with_standard_endings(char*& vertex_data_pointer, const char* description)
+    {
+        return model::extract_value_from_string(vertex_data_pointer, (char*) " -Mmhvz\">", description);
+    }
+
     bool find_first_glyph_in_SVG(char*& SVG_data_pointer)
     {
         // This function advances `SVG_data_pointer` to the start of the first glyph.
@@ -308,16 +313,14 @@ namespace model
                                 {
                                     if (strncmp(vertex_data_pointer, "M", strlen("M")) == 0)
                                     {
-                                        current_vertex.x = model::extract_value_from_string(vertex_data_pointer,
-                                                (char*) " -Mmhvz\">",
+                                        current_vertex.x = model::extract_value_from_string_with_standard_endings(vertex_data_pointer,
                                                 (const char*) "M (moveto)");
 
                                         while (true)
                                         {
                                             if (strncmp(vertex_data_pointer, " ", strlen(" ")) == 0)
                                             {
-                                                current_vertex.y = model::extract_value_from_string(vertex_data_pointer,
-                                                        (char*) " -Mmhvz\">",
+                                                current_vertex.y = model::extract_value_from_string_with_standard_endings(vertex_data_pointer,
                                                         (const char*) "space (moveto y coordinate)");
                                                 current_glyph_vertices.push_back(current_vertex);
                                                 break;
@@ -328,8 +331,7 @@ namespace model
                                     else if (strncmp(vertex_data_pointer, "h", strlen("h")) == 0)
                                     {
                                         // OK, this is horizontal relative lineto.
-                                        int32_t horizontal_lineto_value = model::extract_value_from_string(vertex_data_pointer,
-                                                (char*) " -Mmhvz\">",
+                                        int32_t horizontal_lineto_value = model::extract_value_from_string_with_standard_endings(vertex_data_pointer,
                                                 (const char*) "h (horizontal relative lineto)");
                                         current_vertex.x += horizontal_lineto_value;
                                         current_glyph_vertices.push_back(current_vertex);
@@ -337,8 +339,7 @@ namespace model
                                     else if (strncmp(vertex_data_pointer, "v", strlen("v")) == 0)
                                     {
                                         // OK, this is vertical relative lineto.
-                                        int32_t vertical_lineto_value = model::extract_value_from_string(vertex_data_pointer,
-                                                (char*) " -Mmhvz\">",
+                                        int32_t vertical_lineto_value = model::extract_value_from_string_with_standard_endings(vertex_data_pointer,
                                                 (const char*) "v (vertical relative lineto)");
                                         current_vertex.y += vertical_lineto_value;
                                         current_glyph_vertices.push_back(current_vertex);
