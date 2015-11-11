@@ -35,7 +35,7 @@ namespace model
 
         // All possible block identifier strings.
         identifier_strings_vector = { "<?xml ", "<!DOCTYPE ", "<svg>", "<metadata>", "</metadata>", "<defs>", "<font ", "<font-face", "<missing-glyph" };
-        return check_and_report_if_some_string_matches(SVG_data_pointer, identifier_strings_vector);
+        return model::check_and_report_if_some_string_matches(SVG_data_pointer, identifier_strings_vector);
     }
 
     void extract_string_with_several_endings(
@@ -97,11 +97,11 @@ namespace model
             {
                 // OK, were are not inside a block.
 
-                if (check_and_report_if_some_string_matches(SVG_data_pointer, std::vector<std::string> { "<glyph" }))
+                if (model::check_and_report_if_some_string_matches(SVG_data_pointer, std::vector<std::string> { "<glyph" }))
                 {
                     return true;
                 }
-                if (check_and_report_if_some_string_matches(SVG_data_pointer, std::vector<std::string> { "</svg>" }))
+                if (model::check_and_report_if_some_string_matches(SVG_data_pointer, std::vector<std::string> { "</svg>" }))
                 {
                     return false;
                 }
