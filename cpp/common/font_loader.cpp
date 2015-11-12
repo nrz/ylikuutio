@@ -120,10 +120,7 @@ namespace model
                 // OK, we are inside a block.
 
                 SVG_data_pointer = strchr(SVG_data_pointer, '>');
-                if (SVG_data_pointer != NULL)
-                {
-                    printf("> found at 0x%lx.\n", (uint64_t) SVG_data_pointer);
-                }
+                check_and_report_if_some_string_matches(SVG_data_pointer, std::vector<std::string> { '>' });
                 is_inside_block = false;
             }
         }
