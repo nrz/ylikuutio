@@ -378,8 +378,6 @@ namespace model
                             }
                             glyph_names.push_back(glyph_name_string);
 
-                            glyph_names.push_back(glyph_name_string);
-
                             // TODO: Create default vertex vector (no vertices), if needed.
                             //
                             printf("number of vertices: %lu\n", current_glyph_vertices.size());
