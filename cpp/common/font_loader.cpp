@@ -13,7 +13,7 @@
 
 namespace model
 {
-    bool check_and_report_if_some_string_matches(char* SVG_data_pointer, std::vector<std::string> identifier_strings_vector)
+    bool check_and_report_if_some_string_matches(const char* SVG_base_pointer, char* SVG_data_pointer, std::vector<std::string> identifier_strings_vector)
     {
         for (std::string identifier_string : identifier_strings_vector)
         {
@@ -22,20 +22,21 @@ namespace model
             if (strncmp(SVG_data_pointer, identifier_string_char, strlen(identifier_string_char)) == 0)
             {
                 const char* identifier_string_char = identifier_string.c_str();
-                printf("%s found at 0x%lx. ", identifier_string_char, (uint64_t) SVG_data_pointer);
+                uint64_t offset = (uint64_t) SVG_data_pointer - (uint64_t) SVG_base_pointer;
+                printf("%s found at file offset 0x%lx (memory address 0x%lx). ", identifier_string_char, offset, (uint64_t) SVG_data_pointer);
                 return true;
             }
         }
         return false;
     }
 
-    bool check_if_we_are_inside_block(char*& SVG_data_pointer)
+    bool check_if_we_are_inside_block(const char* SVG_base_pointer, char*& SVG_data_pointer)
     {
         std::vector<std::string> identifier_strings_vector;
 
         // All possible block identifier strings.
         identifier_strings_vector = { "<?xml ", "<!DOCTYPE ", "<svg>", "<metadata>", "</metadata>", "<defs>", "<font ", "<font-face", "<missing-glyph" };
-        return model::check_and_report_if_some_string_matches(SVG_data_pointer, identifier_strings_vector);
+        return model::check_and_report_if_some_string_matches(SVG_base_pointer, SVG_data_pointer, identifier_strings_vector);
     }
 
     void extract_string_with_several_endings(
@@ -68,9 +69,10 @@ namespace model
         }
     }
 
-    int32_t extract_value_from_string(char*& vertex_data_pointer, char* char_end_string, const char* description)
+    int32_t extract_value_from_string(const char* SVG_base_pointer, char*& vertex_data_pointer, char* char_end_string, const char* description)
     {
-        printf("%s found at 0x%lx.\n", description, (uint64_t) vertex_data_pointer);
+        uint64_t offset = (uint64_t) vertex_data_pointer - (uint64_t) SVG_base_pointer;
+        printf("%s found at file offset 0x%lx (memory address 0x%lx).\n", description, offset, (uint64_t) vertex_data_pointer);
         vertex_data_pointer += sizeof(*vertex_data_pointer); // Advance to the next character.
         char char_number_buffer[1024];
         char* dest_mem_pointer;
@@ -82,12 +84,12 @@ namespace model
         return value;
     }
 
-    int32_t extract_value_from_string_with_standard_endings(char*& vertex_data_pointer, const char* description)
+    int32_t extract_value_from_string_with_standard_endings(const char* SVG_base_pointer, char*& vertex_data_pointer, const char* description)
     {
-        return model::extract_value_from_string(vertex_data_pointer, (char*) " -Mmhvz\">", description);
+        return model::extract_value_from_string(SVG_base_pointer, vertex_data_pointer, (char*) " -Mmhvz\">", description);
     }
 
-    bool find_first_glyph_in_SVG(char*& SVG_data_pointer)
+    bool find_first_glyph_in_SVG(const char* SVG_base_pointer, char*& SVG_data_pointer)
     {
         // This function advances `SVG_data_pointer` to the start of the first glyph.
         // Returns true if a glyph was found.
@@ -102,16 +104,16 @@ namespace model
             {
                 // OK, were are not inside a block.
 
-                if (model::check_and_report_if_some_string_matches(SVG_data_pointer, std::vector<std::string> { "<glyph" }))
+                if (model::check_and_report_if_some_string_matches(SVG_base_pointer, SVG_data_pointer, std::vector<std::string> { "<glyph" }))
                 {
                     return true;
                 }
-                if (model::check_and_report_if_some_string_matches(SVG_data_pointer, std::vector<std::string> { "</svg>" }))
+                if (model::check_and_report_if_some_string_matches(SVG_base_pointer, SVG_data_pointer, std::vector<std::string> { "</svg>" }))
                 {
                     return false;
                 }
 
-                is_inside_block = model::check_if_we_are_inside_block(SVG_data_pointer);
+                is_inside_block = model::check_if_we_are_inside_block(SVG_base_pointer, SVG_data_pointer);
 
                 SVG_data_pointer += sizeof(*SVG_data_pointer);  // Advance to the next character.
             }
@@ -120,7 +122,7 @@ namespace model
                 // OK, we are inside a block.
 
                 SVG_data_pointer = strchr(SVG_data_pointer, '>');
-                check_and_report_if_some_string_matches(SVG_data_pointer, std::vector<std::string> { '>' });
+                check_and_report_if_some_string_matches(SVG_base_pointer, SVG_data_pointer, std::vector<std::string> { '>' });
                 is_inside_block = false;
             }
         }
@@ -176,18 +178,22 @@ namespace model
 
         bool is_first_glyph_found;
 
+        const char* SVG_base_pointer;
         char* SVG_data_pointer;
+        SVG_base_pointer = SVG_data;
         SVG_data_pointer = SVG_data;
 
         // SVG files are XML files, so we just need to read until we find the data we need.
-        is_first_glyph_found = model::find_first_glyph_in_SVG(SVG_data_pointer);
+        is_first_glyph_found = model::find_first_glyph_in_SVG(SVG_base_pointer, SVG_data_pointer);
 
         if (!is_first_glyph_found)
         {
             std::cerr << "no glyphs were found!\n";
             return false;
         }
-        printf("First glyph found at 0x%lx.\n", (uint64_t) SVG_data_pointer);
+
+        uint64_t offset = (uint64_t) SVG_data_pointer - (uint64_t) SVG_base_pointer;
+        printf("First glyph found at file offset 0x%lx (memory address 0x%lx).\n", offset, (uint64_t) SVG_data_pointer);
 
         // Create the vertex data for each glyph in a loop.
         while (true)
@@ -310,14 +316,14 @@ namespace model
                                 {
                                     if (strncmp(vertex_data_pointer, "M", strlen("M")) == 0)
                                     {
-                                        current_vertex.x = model::extract_value_from_string_with_standard_endings(vertex_data_pointer,
+                                        current_vertex.x = model::extract_value_from_string_with_standard_endings(SVG_base_pointer, vertex_data_pointer,
                                                 (const char*) "M (moveto)");
 
                                         while (true)
                                         {
                                             if (strncmp(vertex_data_pointer, " ", strlen(" ")) == 0)
                                             {
-                                                current_vertex.y = model::extract_value_from_string_with_standard_endings(vertex_data_pointer,
+                                                current_vertex.y = model::extract_value_from_string_with_standard_endings(SVG_base_pointer, vertex_data_pointer,
                                                         (const char*) "space (moveto y coordinate)");
                                                 current_glyph_vertices.push_back(current_vertex);
                                                 break;
@@ -328,7 +334,7 @@ namespace model
                                     else if (strncmp(vertex_data_pointer, "h", strlen("h")) == 0)
                                     {
                                         // OK, this is horizontal relative lineto.
-                                        int32_t horizontal_lineto_value = model::extract_value_from_string_with_standard_endings(vertex_data_pointer,
+                                        int32_t horizontal_lineto_value = model::extract_value_from_string_with_standard_endings(SVG_base_pointer, vertex_data_pointer,
                                                 (const char*) "h (horizontal relative lineto)");
                                         current_vertex.x += horizontal_lineto_value;
                                         current_glyph_vertices.push_back(current_vertex);
@@ -336,14 +342,15 @@ namespace model
                                     else if (strncmp(vertex_data_pointer, "v", strlen("v")) == 0)
                                     {
                                         // OK, this is vertical relative lineto.
-                                        int32_t vertical_lineto_value = model::extract_value_from_string_with_standard_endings(vertex_data_pointer,
+                                        int32_t vertical_lineto_value = model::extract_value_from_string_with_standard_endings(SVG_base_pointer, vertex_data_pointer,
                                                 (const char*) "v (vertical relative lineto)");
                                         current_vertex.y += vertical_lineto_value;
                                         current_glyph_vertices.push_back(current_vertex);
                                     } // else if (strncmp(vertex_data_pointer, "v", strlen("v")) == 0)
                                     else if (strncmp(vertex_data_pointer, "z", strlen("z")) == 0)
                                     {
-                                        printf("z (closepath) found at 0x%lx.\n", (uint64_t) vertex_data_pointer);
+                                        uint64_t offset = (uint64_t) vertex_data_pointer - (uint64_t) SVG_base_pointer;
+                                        printf("z (closepath) found at file offset 0x%lx (memory address 0x%lx).\n", offset, (uint64_t) vertex_data_pointer);
                                         keep_reading_path = false;
                                         break;
                                     } // else if (strncmp(vertex_data_pointer, "z", strlen("z")) == 0)
@@ -395,7 +402,7 @@ namespace model
                 std::vector<std::string> string_vector;
                 string_vector = { "</font>", "</defs>", "</svg>" };
 
-                if (model::check_and_report_if_some_string_matches(SVG_data_pointer, string_vector))
+                if (model::check_and_report_if_some_string_matches(SVG_base_pointer, SVG_data_pointer, string_vector))
                 {
                     break;
                 }
