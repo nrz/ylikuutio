@@ -45,6 +45,7 @@ include_directories(
     external/glfw-3.0.3/include/GLFW/
     external/glm-0.9.4.0/
     external/glew-1.9.0/include/
+    external/Catch/single_include/
     .
     )
 
@@ -209,6 +210,18 @@ target_link_libraries(ylikuutio
 # Xcode and Visual working directories
 set_target_properties(ylikuutio PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/cpp/ylikuutio/")
 create_target_launcher(ylikuutio WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/cpp/ylikuutio/")
+
+# Tests
+add_executable(do_tests
+    cpp/tests/test_factorial.cpp
+    )
+
+target_link_libraries(do_tests
+    ${ALL_LIBS}
+    )
+# Xcode and Visual working directories
+set_target_properties(do_tests PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/cpp/tests/")
+create_target_launcher(do_tests WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/cpp/tests/")
 
 SOURCE_GROUP(common REGULAR_EXPRESSION ".*/cpp/common/.*" )
 SOURCE_GROUP(shaders REGULAR_EXPRESSION ".*/.*shader$" )
