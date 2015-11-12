@@ -213,7 +213,7 @@ create_target_launcher(ylikuutio WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/
 
 # Tests
 add_executable(do_tests
-    cpp/tests/test_factorial.cpp
+    cpp/tests/tests.cpp
     )
 
 target_link_libraries(do_tests
