@@ -88,5 +88,4 @@ TEST_CASE("GLYPHSTRUCT must be initialized appropriately", "[GLYPHSTRUCT]")
     GLYPHSTRUCT(test_glyph_struct);
     REQUIRE(test_glyph_struct.parent_pointer == NULL);
     REQUIRE(test_glyph_struct.light_position == glm::vec3(0.0f, 0.0f, 0.0f));
-    REQUIRE(test_glyph_struct.object_vector.empty());
 }

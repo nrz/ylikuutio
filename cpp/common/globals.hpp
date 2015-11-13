@@ -198,7 +198,6 @@ typedef struct
     // used for all files (for all glyph).
     model::Font* parent_pointer;             // pointer to the font object.
     glm::vec3 light_position;                // light position.
-    std::vector<ObjectStruct> object_vector; // vector of individual objects of this glyph.
 } GlyphStruct;
 
 #define GLYPHSTRUCT(x) GlyphStruct x; x.parent_pointer = NULL
