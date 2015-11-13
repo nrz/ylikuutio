@@ -23,16 +23,21 @@
 
 #include <cmath>
 
-TEST_CASE("parent pointer of SHADERSTRUCT must be null", "[SHADERSTRUCT]")
+TEST_CASE("SHADERSTRUCT must be initialized appropriately", "[SHADERSTRUCT]")
 {
     SHADERSTRUCT(test_shader_struct);
     REQUIRE(test_shader_struct.parent_pointer == NULL);
+    REQUIRE(test_shader_struct.vertex_shader.empty());
+    REQUIRE(test_shader_struct.fragment_shader.empty());
 }
 
-TEST_CASE("parent pointer of MATERIALSTRUCT must be null", "[MATERIALSTRUCT]")
+TEST_CASE("MATERIALSTRUCT must be initialized appropriately", "[MATERIALSTRUCT]")
 {
     MATERIALSTRUCT(test_material_struct);
     REQUIRE(test_material_struct.parent_pointer == NULL);
+    REQUIRE(test_material_struct.texture_file_format.empty());
+    REQUIRE(test_material_struct.texture_filename.empty());
+    REQUIRE(test_material_struct.image_path.empty());
 }
 
 TEST_CASE("NODESTRUCT must be initialized appropriately", "[NODESTRUCT]")
@@ -62,6 +67,12 @@ TEST_CASE("SPECIESSTRUCT must be initialized appropriately", "[SPECIESSTRUCT]")
     REQUIRE(test_species_struct.parent_pointer == NULL);
     REQUIRE(test_species_struct.is_world == false);
     REQUIRE(std::isnan(test_species_struct.world_radius));
+    REQUIRE(test_species_struct.model_file_format.empty());
+    REQUIRE(test_species_struct.model_filename.empty());
+    REQUIRE(test_species_struct.color_channel.empty());
+    REQUIRE(test_species_struct.light_position == glm::vec3(0.0f, 0.0f, 0.0f));
+    REQUIRE(test_species_struct.object_vector.empty());
+    REQUIRE(test_species_struct.coordinate_system.empty());
 }
 
 TEST_CASE("FONTSTRUCT must be initialized appropriately", "[FONTSTRUCT]")
@@ -69,10 +80,14 @@ TEST_CASE("FONTSTRUCT must be initialized appropriately", "[FONTSTRUCT]")
     FONTSTRUCT(test_font_struct);
     REQUIRE(test_font_struct.parent_pointer == NULL);
     REQUIRE(test_font_struct.vertex_scaling_factor == DEFAULT_VERTEX_SCALING_FACTOR);
+    REQUIRE(test_font_struct.font_file_format.empty());
+    REQUIRE(test_font_struct.font_filename.empty());
 }
 
-TEST_CASE("parent pointer of GLYPHSTRUCT must be null", "[GLYPHSTRUCT]")
+TEST_CASE("GLYPHSTRUCT must be initialized appropriately", "[GLYPHSTRUCT]")
 {
     GLYPHSTRUCT(test_glyph_struct);
     REQUIRE(test_glyph_struct.parent_pointer == NULL);
+    REQUIRE(test_glyph_struct.light_position == glm::vec3(0.0f, 0.0f, 0.0f));
+    REQUIRE(test_glyph_struct.object_vector.empty());
 }
