@@ -71,7 +71,6 @@ TEST_CASE("SPECIESSTRUCT must be initialized appropriately", "[SPECIESSTRUCT]")
     REQUIRE(test_species_struct.model_filename.empty());
     REQUIRE(test_species_struct.color_channel.empty());
     REQUIRE(test_species_struct.light_position == glm::vec3(0.0f, 0.0f, 0.0f));
-    REQUIRE(test_species_struct.object_vector.empty());
     REQUIRE(test_species_struct.coordinate_system.empty());
 }
 

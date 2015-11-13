@@ -173,7 +173,6 @@ typedef struct
     std::string color_channel;               // color channel to use for altitude data.
 
     glm::vec3 light_position;                // light position.
-    std::vector<ObjectStruct> object_vector; // vector of individual objects of this species.
     std::string coordinate_system;           // used only for worlds (`is_world` == `true`). valid values: `"cartesian"`.
                                              // TODO: add support for `"spherical"`. `"spherical"` is used eg. in SRTM heightmaps.
 
