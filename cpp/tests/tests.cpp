@@ -35,10 +35,11 @@ TEST_CASE("parent pointer of MATERIALSTRUCT must be null", "[MATERIALSTRUCT]")
     REQUIRE(test_material_struct.parent_pointer == NULL);
 }
 
-TEST_CASE("parent pointer of NODESTRUCT must be null", "[NODESTRUCT]")
+TEST_CASE("NODESTRUCT must be initialized appropriately", "[NODESTRUCT]")
 {
     NODESTRUCT(test_node_struct);
     REQUIRE(test_node_struct.parent_pointer == NULL);
+    REQUIRE(test_node_struct.coordinate_vector == glm::vec3(0.0f, 0.0f, 0.0f));
 }
 
 TEST_CASE("OBJECTSTRUCT must be initialized appropriately", "[OBJECTSTRUCT]")
