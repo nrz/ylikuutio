@@ -151,8 +151,6 @@ typedef struct
     glm::vec3 coordinate_vector;     // coordinate vector.
     glm::vec3 rotate_vector;         // rotate vector.
     glm::vec3 translate_vector;      // translate vector.
-    glm::mat4 model_matrix;          // model matrix.
-    glm::mat4 MVP_matrix;            // model view projection matrix.
 } ObjectStruct;
 
 #define OBJECTSTRUCT(x) ObjectStruct x; \
