@@ -40,6 +40,7 @@ TEST_CASE("NODESTRUCT must be initialized appropriately", "[NODESTRUCT]")
     NODESTRUCT(test_node_struct);
     REQUIRE(test_node_struct.parent_pointer == NULL);
     REQUIRE(test_node_struct.coordinate_vector == glm::vec3(0.0f, 0.0f, 0.0f));
+    REQUIRE(test_node_struct.neighbor_nodeIDs.size() == 0);
 }
 
 TEST_CASE("OBJECTSTRUCT must be initialized appropriately", "[OBJECTSTRUCT]")
@@ -50,6 +51,9 @@ TEST_CASE("OBJECTSTRUCT must be initialized appropriately", "[OBJECTSTRUCT]")
     REQUIRE(test_object_struct.original_scale_vector == glm::vec3(1.0f, 1.0f, 1.0f));
     REQUIRE(std::isnan(test_object_struct.rotate_angle));
     REQUIRE(test_object_struct.is_character == false);
+    REQUIRE(test_object_struct.coordinate_vector == glm::vec3(0.0f, 0.0f, 0.0f));
+    REQUIRE(test_object_struct.rotate_vector == glm::vec3(0.0f, 0.0f, 0.0f));
+    REQUIRE(test_object_struct.translate_vector == glm::vec3(0.0f, 0.0f, 0.0f));
 }
 
 TEST_CASE("SPECIESSTRUCT must be initialized appropriately", "[SPECIESSTRUCT]")
