@@ -23,7 +23,7 @@
 
 #include <cmath>
 
-TEST_CASE("parent pointer of OBJECTSTRUCT must be null", "[OBJECTSTRUCT]")
+TEST_CASE("parent pointer of SHADERSTRUCT must be null", "[SHADERSTRUCT]")
 {
     SHADERSTRUCT(test_shader_struct);
     REQUIRE(test_shader_struct.parent_pointer == NULL);
