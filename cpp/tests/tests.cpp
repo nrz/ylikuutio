@@ -21,7 +21,7 @@
 #include "cpp/common/species.hpp"
 #include "cpp/common/object.hpp"
 
-#include <cmath>
+#include <cmath> // std::isnan
 
 TEST_CASE("SHADERSTRUCT must be initialized appropriately", "[SHADERSTRUCT]")
 {
