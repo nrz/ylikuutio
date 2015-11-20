@@ -20,8 +20,24 @@
 #include "cpp/common/glyph.hpp"
 #include "cpp/common/species.hpp"
 #include "cpp/common/object.hpp"
+#include "cpp/common/heightmap_loader.hpp"
+#include "cpp/common/heightmap_loader.cpp"
 
-#include <cmath> // std::isnan
+// Include GLEW
+#ifndef __GL_GLEW_H_INCLUDED
+#define __GL_GLEW_H_INCLUDED
+#include <GL/glew.h> // GLfloat, GLuint etc.
+#endif
+
+// Include GLM
+#ifndef __GLM_GLM_HPP_INCLUDED
+#define __GLM_GLM_HPP_INCLUDED
+#include <glm/glm.hpp> // glm
+#endif
+
+#include <cmath>  // std::isnan
+#include <string>
+#include <vector> // std::vector
 
 TEST_CASE("SHADERSTRUCT must be initialized appropriately", "[SHADERSTRUCT]")
 {
@@ -88,4 +104,32 @@ TEST_CASE("GLYPHSTRUCT must be initialized appropriately", "[GLYPHSTRUCT]")
     GLYPHSTRUCT(test_glyph_struct);
     REQUIRE(test_glyph_struct.parent_pointer == NULL);
     REQUIRE(test_glyph_struct.light_position == glm::vec3(0.0f, 0.0f, 0.0f));
+}
+
+TEST_CASE("BMP world must be loaded appropriately", "[load_BMP_world]")
+{
+    std::string image_path = "noise256x256.bmp";
+    std::vector<glm::vec3> out_vertices;
+    std::vector<glm::vec2> out_UVs;
+    std::vector<glm::vec3> out_normals;
+    GLuint image_width = 0;
+    GLuint image_height = 0;
+    std::string color_channel = "mean";
+
+    bool model_loading_result = model::load_BMP_world(
+            image_path,
+            *&out_vertices,
+            *&out_UVs,
+            *&out_normals,
+            *&image_width,
+            *&image_height,
+            color_channel);
+#define N_VERTICES_FOR_FACE 3
+#define N_FACES_FOR_BILINEAR_TRIANGULATION 4
+#define N_WIDTH_OF_IMAGE_FILE 256
+#define N_HEIGHT_OF_IMAGE_FILE 256
+
+    REQUIRE(out_vertices.size() == N_VERTICES_FOR_FACE * N_FACES_FOR_BILINEAR_TRIANGULATION * (N_WIDTH_OF_IMAGE_FILE - 1) * (N_HEIGHT_OF_IMAGE_FILE - 1));
+    REQUIRE(out_UVs.size() == N_VERTICES_FOR_FACE * N_FACES_FOR_BILINEAR_TRIANGULATION * (N_WIDTH_OF_IMAGE_FILE - 1) * (N_HEIGHT_OF_IMAGE_FILE - 1));
+    REQUIRE(out_normals.size() == N_VERTICES_FOR_FACE * N_FACES_FOR_BILINEAR_TRIANGULATION * (N_WIDTH_OF_IMAGE_FILE - 1) * (N_HEIGHT_OF_IMAGE_FILE - 1));
 }
