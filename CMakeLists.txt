@@ -215,6 +215,8 @@ create_target_launcher(ylikuutio WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/
 add_executable(do_tests
     cpp/tests/tests.cpp
     )
+configure_file(res/noise256x256.bmp noise256x256.bmp COPYONLY)
+configure_file(res/test3x3.bmp test3x3.bmp COPYONLY)
 
 target_link_libraries(do_tests
     ${ALL_LIBS}
