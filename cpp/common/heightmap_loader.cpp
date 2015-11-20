@@ -1199,6 +1199,9 @@ namespace model
                 }
             }
         }
+        std::cout << "number of vertices: " << out_vertices.size() << ".\n";
+        std::cout << "number of UVs: " << out_UVs.size() << ".\n";
+        std::cout << "number of normals: " << out_normals.size() << ".\n";
 
         return true;
     }
