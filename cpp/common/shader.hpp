@@ -18,6 +18,7 @@
 #endif
 
 // Include standard headers
+#include <string>    // std::string
 #include <vector>    // std::vector
 #include <queue>     // std::queue
 

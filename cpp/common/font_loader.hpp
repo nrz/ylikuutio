@@ -2,8 +2,8 @@
 #define __FONT_LOADER_HPP_INCLUDED
 
 // Include standard headers
-#include <string>
-#include <vector>   // std::vector
+#include <string>    // std::string
+#include <vector>    // std::vector
 
 // Include GLEW
 #ifndef __GL_GLEW_H_INCLUDED

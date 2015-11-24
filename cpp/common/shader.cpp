@@ -8,6 +8,9 @@
 #include <GL/glew.h> // GLfloat, GLuint etc.
 #endif
 
+// Include standard headers
+#include <string>    // std::string
+
 namespace model
 {
     void Shader::bind_to_parent()

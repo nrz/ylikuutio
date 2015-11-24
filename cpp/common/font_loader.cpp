@@ -8,7 +8,8 @@
 
 // Include standard headers
 #include <iostream>
-#include <string>
+#include <string>    // std::string
+#include <vector>    // std::vector
 #include <string.h>
 
 namespace model

@@ -19,6 +19,9 @@
 #include "model_common_functions.hpp"
 #include "species.hpp"
 
+// Include standard headers
+#include <vector>    // std::vector
+
 namespace model
 {
     void set_child_pointer(GLuint childID, void* child_pointer, std::vector<void*> &child_pointer_vector, std::queue<GLuint> &free_childID_queue)

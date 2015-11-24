@@ -1,8 +1,4 @@
-// Include standard headers
-#include <string.h> // for memcmp
-#include <stdint.h> // uint32_t etc.
-#include <vector>
-#include <map>
+#include "vboindexer.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -16,7 +12,11 @@
 #include <GL/glew.h> // GLfloat, GLuint etc.
 #endif
 
-#include "vboindexer.hpp"
+// Include standard headers
+#include <string.h> // for memcmp
+#include <stdint.h> // uint32_t etc.
+#include <vector>   // std::vector
+#include <map>
 
 // Returns true iif v1 can be considered equal to v2
 bool is_near(float v1, float v2)

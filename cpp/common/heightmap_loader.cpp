@@ -20,7 +20,7 @@
 
 // Include standard headers
 #include <iostream>
-#include <string>
+#include <string>   // std::string
 #include <string.h>
 #include <cstring>
 #include <vector>   // std::vector

@@ -13,7 +13,7 @@
 #include <algorithm> // std::find
 #include <fstream>
 #include <iostream>
-#include <string>
+#include <string>    // std::string
 #include <vector>    // std::vector
 #include <stdio.h>
 #include <stdlib.h>

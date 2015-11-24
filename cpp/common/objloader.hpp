@@ -1,6 +1,9 @@
 #ifndef __OBJLOADER_HPP_INCLUDED
 #define __OBJLOADER_HPP_INCLUDED
 
+// Include standard headers
+#include <vector>    // std::vector
+
 namespace model
 {
     bool load_OBJ(

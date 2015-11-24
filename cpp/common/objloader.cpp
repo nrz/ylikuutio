@@ -1,8 +1,4 @@
-#include <iostream>
-#include <string>
-#include <cstring>
-#include <stdio.h>
-#include <vector>
+#define LINE_HEADER_SIZE 4096
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -12,7 +8,12 @@
 
 #include "objloader.hpp"
 
-#define LINE_HEADER_SIZE 4096
+// Include standard headers
+#include <iostream>
+#include <cstring>
+#include <string>    // std::string
+#include <vector>    // std::vector
+#include <stdio.h>
 
 void read_until_newline(FILE* file)
 {

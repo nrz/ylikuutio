@@ -14,6 +14,8 @@
 
 // Include standard headers
 #include <iostream>
+#include <string>    // std::string
+#include <vector>    // std::vector
 #include <queue>     // std::queue
 
 namespace model

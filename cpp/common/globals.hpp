@@ -39,7 +39,7 @@
 #endif
 
 // Include standard headers
-#include <string>
+#include <string>   // std::string
 #include <vector>   // std::vector
 #include <stdint.h> // uint32_t etc.
 

@@ -1,3 +1,6 @@
+// Include standard headers
+#include <vector>    // std::vector
+
 #ifndef TANGENTSPACE_HPP
 #define TANGENTSPACE_HPP
 
