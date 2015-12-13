@@ -63,22 +63,6 @@ add_definitions(
     -D_CRT_SECURE_NO_WARNINGS
     )
 
-# Tutorial 4
-add_executable(cube_with_colors
-    cpp/cube_with_colors/cube_with_colors.cpp
-    cpp/common/shader_loader.cpp
-    cpp/common/shader_loader.hpp
-
-    cpp/cube_with_colors/TransformVertexShader.vertexshader
-    cpp/cube_with_colors/ColorFragmentShader.fragmentshader
-    )
-target_link_libraries(cube_with_colors
-    ${ALL_LIBS}
-    )
-# Xcode and Visual working directories
-set_target_properties(cube_with_colors PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/cpp/cube_with_colors/")
-create_target_launcher(cube_with_colors WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/cpp/cube_with_colors/")
-
 # Tutorial 9 - several objects
 add_executable(several_objects
     cpp/several_objects/several_objects.cpp
@@ -227,14 +211,3 @@ create_target_launcher(do_tests WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/c
 
 SOURCE_GROUP(common REGULAR_EXPRESSION ".*/cpp/common/.*" )
 SOURCE_GROUP(shaders REGULAR_EXPRESSION ".*/.*shader$" )
-
-if (NOT ${CMAKE_GENERATOR} MATCHES "Xcode" )
-    add_custom_command(
-        TARGET cube_with_colors POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_CFG_INTDIR}/cube_with_colors${CMAKE_EXECUTABLE_SUFFIX}" "${CMAKE_CURRENT_SOURCE_DIR}/cpp/cube_with_colors/"
-        )
-
-elseif (${CMAKE_GENERATOR} MATCHES "Xcode" )
-
-endif (NOT ${CMAKE_GENERATOR} MATCHES "Xcode" )
-
