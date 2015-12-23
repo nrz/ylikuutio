@@ -106,7 +106,7 @@ TEST_CASE("GLYPHSTRUCT must be initialized appropriately", "[GLYPHSTRUCT]")
     REQUIRE(test_glyph_struct.light_position == glm::vec3(0.0f, 0.0f, 0.0f));
 }
 
-TEST_CASE("BMP world must be loaded appropriately", "[load_BMP_world]")
+TEST_CASE("256x256 BMP world must be loaded appropriately", "[load_256x256_BMP_world]")
 {
     std::string image_path = "noise256x256.bmp";
     std::vector<glm::vec3> out_vertices;
