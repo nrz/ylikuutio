@@ -7,15 +7,19 @@
 #define RADIANS_TO_DEGREES(x) (x * 180.0f / PI)
 #endif
 
-// Include standard headers
-#include <iostream>
-#include <string>   // std::string
-#include <string.h>
-#include <cstring>
-#include <vector>   // std::vector
-#include <stdio.h>
-#include <stdint.h> // uint32_t etc.
-#include <stdlib.h>
+#include "cpp/common/globals.hpp"
+#include "cpp/common/shader_loader.hpp"
+#include "cpp/common/texture_loader.hpp"
+#include "cpp/common/vboindexer.hpp"
+#include "cpp/common/text2D.hpp"
+#include "cpp/common/text3D.hpp"
+#include "cpp/common/world.hpp"
+#include "cpp/common/shader.hpp"
+#include "cpp/common/material.hpp"
+#include "cpp/common/font.hpp"
+#include "cpp/common/glyph.hpp"
+#include "cpp/common/species.hpp"
+#include "cpp/common/object.hpp"
 
 // Include GLEW
 #ifndef __GL_GLEW_H_INCLUDED
@@ -37,19 +41,15 @@ GLFWwindow* window;
 #include <glm/glm.hpp> // glm
 #endif
 
-#include "cpp/common/globals.hpp"
-#include "cpp/common/shader_loader.hpp"
-#include "cpp/common/texture_loader.hpp"
-#include "cpp/common/vboindexer.hpp"
-#include "cpp/common/text2D.hpp"
-#include "cpp/common/text3D.hpp"
-#include "cpp/common/world.hpp"
-#include "cpp/common/shader.hpp"
-#include "cpp/common/material.hpp"
-#include "cpp/common/font.hpp"
-#include "cpp/common/glyph.hpp"
-#include "cpp/common/species.hpp"
-#include "cpp/common/object.hpp"
+// Include standard headers
+#include <iostream> // std::cout, std::cin, std::cerr
+#include <string>   // std::string
+#include <string.h>
+#include <cstring>
+#include <vector>   // std::vector
+#include <stdio.h>
+#include <stdint.h> // uint32_t etc.
+#include <stdlib.h>
 
 // #define TESTING_SPHERICAL_WORLD_IN_USE
 
