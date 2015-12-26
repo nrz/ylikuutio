@@ -40,12 +40,7 @@
 enum BilinearDirections { SSW, WSW, WNW, NNW, NNE, ENE, ESE, SSE };
 
 // for southeast-northwest edges.
-#define SSE_CODE_FOR_SE_NW 0
-#define WNW_CODE_FOR_SE_NW 1
-#define ESE_CODE_FOR_SE_NW 2
-#define NNW_CODE_FOR_SE_NW 3
-#define SW_CODE_FOR_SE_NW 4
-#define NE_CODE_FOR_SE_NW 5
+enum SoutheastNorthwestEdgesDirections { SSE_CODE_FOR_SE_NW, WNW_CODE_FOR_SE_NW, ESE_CODE_FOR_SE_NW, NNW_CODE_FOR_SE_NW, SW_CODE_FOR_SE_NW, NE_CODE_FOR_SE_NW };
 
 // for bilinear interpolation, southeast-northwest edges, and southwest-northeast edges.
 #define SOUTHWEST (current_vertex_i - image_width - 1)
@@ -163,7 +158,7 @@ namespace model
             std::vector<glm::vec3> &face_normal_data,
             uint32_t x,
             uint32_t z,
-            uint32_t compass_point_code,
+            SoutheastNorthwestEdgesDirections compass_point_code,
             uint32_t image_width)
     {
         uint32_t face_normal_i;
