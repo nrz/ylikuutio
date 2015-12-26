@@ -194,7 +194,7 @@ namespace model
         return face_normal_data[face_normal_i];
     }
 
-    GLuint get_y(
+    inline GLuint get_y(
             GLuint* vertex_data,
             uint32_t x,
             uint32_t z,
