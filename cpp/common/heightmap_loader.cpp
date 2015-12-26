@@ -37,14 +37,7 @@
 #define USE_REAL_TEXTURE_COORDINATES
 
 // for bilinear interpolation.
-#define SSW_CODE 0
-#define WSW_CODE 1
-#define WNW_CODE 2
-#define NNW_CODE 3
-#define NNE_CODE 4
-#define ENE_CODE 5
-#define ESE_CODE 6
-#define SSE_CODE 7
+enum BilinearDirections { SSW, WSW, WNW, NNW, NNE, ENE, ESE, SSE };
 
 // for southeast-northwest edges.
 #define SSE_CODE_FOR_SE_NW 0
@@ -70,20 +63,20 @@
 #define CENTER_Y ((SOUTHWEST_Y + SOUTHEAST_Y + NORTHWEST_Y + NORTHEAST_Y) / 4)
 
 // for bilinear interpolation.
-#define SSW_FACE_NORMAL (model::get_face_normal(face_normal_vector_vec3, x, z, SSW_CODE, image_width))
-#define WSW_FACE_NORMAL (model::get_face_normal(face_normal_vector_vec3, x, z, WSW_CODE, image_width))
-#define WNW_FACE_NORMAL (model::get_face_normal(face_normal_vector_vec3, x, z, WNW_CODE, image_width))
-#define NNW_FACE_NORMAL (model::get_face_normal(face_normal_vector_vec3, x, z, NNW_CODE, image_width))
-#define NNE_FACE_NORMAL (model::get_face_normal(face_normal_vector_vec3, x, z, NNE_CODE, image_width))
-#define ENE_FACE_NORMAL (model::get_face_normal(face_normal_vector_vec3, x, z, ENE_CODE, image_width))
-#define ESE_FACE_NORMAL (model::get_face_normal(face_normal_vector_vec3, x, z, ESE_CODE, image_width))
-#define SSE_FACE_NORMAL (model::get_face_normal(face_normal_vector_vec3, x, z, SSE_CODE, image_width))
+#define SSW_FACE_NORMAL (model::get_face_normal(face_normal_vector_vec3, x, z, SSW, image_width))
+#define WSW_FACE_NORMAL (model::get_face_normal(face_normal_vector_vec3, x, z, WSW, image_width))
+#define WNW_FACE_NORMAL (model::get_face_normal(face_normal_vector_vec3, x, z, WNW, image_width))
+#define NNW_FACE_NORMAL (model::get_face_normal(face_normal_vector_vec3, x, z, NNW, image_width))
+#define NNE_FACE_NORMAL (model::get_face_normal(face_normal_vector_vec3, x, z, NNE, image_width))
+#define ENE_FACE_NORMAL (model::get_face_normal(face_normal_vector_vec3, x, z, ENE, image_width))
+#define ESE_FACE_NORMAL (model::get_face_normal(face_normal_vector_vec3, x, z, ESE, image_width))
+#define SSE_FACE_NORMAL (model::get_face_normal(face_normal_vector_vec3, x, z, SSE, image_width))
 
 // for bilinear interpolation.
-#define S_FACE_NORMAL (model::get_face_normal(face_normal_vector_vec3, x - 1, z - 1, ENE_CODE, image_width))
-#define W_FACE_NORMAL (model::get_face_normal(face_normal_vector_vec3, x - 1, z - 1, NNE_CODE, image_width))
-#define N_FACE_NORMAL (model::get_face_normal(face_normal_vector_vec3, x, z, WSW_CODE, image_width))
-#define E_FACE_NORMAL (model::get_face_normal(face_normal_vector_vec3, x, z, SSW_CODE, image_width))
+#define S_FACE_NORMAL (model::get_face_normal(face_normal_vector_vec3, x - 1, z - 1, ENE, image_width))
+#define W_FACE_NORMAL (model::get_face_normal(face_normal_vector_vec3, x - 1, z - 1, NNE, image_width))
+#define N_FACE_NORMAL (model::get_face_normal(face_normal_vector_vec3, x, z, WSW, image_width))
+#define E_FACE_NORMAL (model::get_face_normal(face_normal_vector_vec3, x, z, SSW, image_width))
 
 // for southeast-northwest edges.
 #define SSE_FACE_NORMAL_FOR_SE_NW (model::get_face_normal_for_SE_NW(face_normal_vector_vec3, x, z, SSE_CODE_FOR_SE_NW, image_width))
@@ -100,35 +93,35 @@ namespace model
             std::vector<glm::vec3> &face_normal_data,
             uint32_t x,
             uint32_t z,
-            uint32_t compass_point_code,
+            BilinearDirections compass_point_code,
             uint32_t image_width)
     {
         uint32_t face_normal_i;
 
         switch (compass_point_code)
         {
-            case SSW_CODE:
+            case SSW:
                 face_normal_i = 4 * (z - 1) * (image_width - 1) + (4 * x) - 1;
                 break;
-            case WSW_CODE:
+            case WSW:
                 face_normal_i = 4 * (z - 1) * (image_width - 1) + (4 * x) - 2;
                 break;
-            case WNW_CODE:
+            case WNW:
                 face_normal_i = 4 * z * (image_width - 1) + (4 * x) - 4;
                 break;
-            case NNW_CODE:
+            case NNW:
                 face_normal_i = 4 * z * (image_width - 1) + (4 * x) - 1;
                 break;
-            case NNE_CODE:
+            case NNE:
                 face_normal_i = 4 * z * (image_width - 1) + (4 * x) + 1;
                 break;
-            case ENE_CODE:
+            case ENE:
                 face_normal_i = 4 * z * (image_width - 1) + (4 * x);
                 break;
-            case ESE_CODE:
+            case ESE:
                 face_normal_i = 4 * (z - 1) * (image_width - 1) + (4 * x) + 2;
                 break;
-            case SSE_CODE:
+            case SSE:
                 face_normal_i = 4 * (z - 1) * (image_width - 1) + (4 * x) + 1;
                 break;
             default:
