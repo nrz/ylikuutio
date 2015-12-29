@@ -106,6 +106,42 @@ TEST_CASE("GLYPHSTRUCT must be initialized appropriately", "[GLYPHSTRUCT]")
     REQUIRE(test_glyph_struct.light_position == glm::vec3(0.0f, 0.0f, 0.0f));
 }
 
+TEST_CASE("3x3 BMP world must be loaded appropriately", "[load_3x3_BMP_world]")
+{
+    std::string image_path = "test3x3.bmp";
+    std::vector<glm::vec3> out_vertices;
+    std::vector<glm::vec2> out_UVs;
+    std::vector<glm::vec3> out_normals;
+    GLuint image_width = 0;
+    GLuint image_height = 0;
+    std::string color_channel = "mean";
+
+    std::string triangulation_type = "bilinear_interpolation";
+
+    bool model_loading_result = model::load_BMP_world(
+            image_path,
+            *&out_vertices,
+            *&out_UVs,
+            *&out_normals,
+            *&image_width,
+            *&image_height,
+            color_channel,
+            triangulation_type);
+#define N_VERTICES_FOR_FACE 3
+#define N_FACES_FOR_BILINEAR_TRIANGULATION 4
+#define N_WIDTH_OF_IMAGE_FILE 3
+#define N_HEIGHT_OF_IMAGE_FILE 3
+
+    REQUIRE(out_vertices.size() == N_VERTICES_FOR_FACE * N_FACES_FOR_BILINEAR_TRIANGULATION * (N_WIDTH_OF_IMAGE_FILE - 1) * (N_HEIGHT_OF_IMAGE_FILE - 1));
+    REQUIRE(out_UVs.size() == N_VERTICES_FOR_FACE * N_FACES_FOR_BILINEAR_TRIANGULATION * (N_WIDTH_OF_IMAGE_FILE - 1) * (N_HEIGHT_OF_IMAGE_FILE - 1));
+    REQUIRE(out_normals.size() == N_VERTICES_FOR_FACE * N_FACES_FOR_BILINEAR_TRIANGULATION * (N_WIDTH_OF_IMAGE_FILE - 1) * (N_HEIGHT_OF_IMAGE_FILE - 1));
+
+#undef N_VERTICES_FOR_FACE
+#undef N_FACES_FOR_BILINEAR_TRIANGULATION
+#undef N_WIDTH_OF_IMAGE_FILE
+#undef N_HEIGHT_OF_IMAGE_FILE
+}
+
 TEST_CASE("256x256 BMP world must be loaded appropriately", "[load_256x256_BMP_world]")
 {
     std::string image_path = "noise256x256.bmp";
