@@ -67,6 +67,7 @@ namespace model
             GLuint elementbuffer;
 
             model::Material *parent_pointer;          // pointer to the texture.
+            std::string triangulation_type;
 
             friend class Object;
             template<class T1>

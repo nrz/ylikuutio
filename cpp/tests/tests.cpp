@@ -115,6 +115,7 @@ TEST_CASE("256x256 BMP world must be loaded appropriately", "[load_256x256_BMP_w
     GLuint image_width = 0;
     GLuint image_height = 0;
     std::string color_channel = "mean";
+    std::string triangulation_type = "bilinear_interpolation";
 
     bool model_loading_result = model::load_BMP_world(
             image_path,
@@ -123,7 +124,8 @@ TEST_CASE("256x256 BMP world must be loaded appropriately", "[load_256x256_BMP_w
             *&out_normals,
             *&image_width,
             *&image_height,
-            color_channel);
+            color_channel,
+            triangulation_type);
 #define N_VERTICES_FOR_FACE 3
 #define N_FACES_FOR_BILINEAR_TRIANGULATION 4
 #define N_WIDTH_OF_IMAGE_FILE 256

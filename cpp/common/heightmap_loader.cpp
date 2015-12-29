@@ -1201,7 +1201,8 @@ namespace model
             std::vector<glm::vec3> &out_normals,
             GLuint &image_width,
             GLuint &image_height,
-            std::string color_channel)
+            std::string color_channel,
+            std::string triangulation_type)
     {
         std::cout << "Loading BMP file " << image_path << " ...\n";
 
@@ -1324,10 +1325,6 @@ namespace model
         }
         std::cout << "color channel in use: " << color_channel << "\n";
 
-        std::string triangulation_type = "bilinear_interpolation";
-        // std::string triangulation_type = "southeast_northwest_edges"; // "northwest_southeast_edges" is equivalent.
-        // std::string triangulation_type = "southwest_northeast_edges"; // "northeast_southwest_edges" is equivalent.
-
         bool triangulation_result = model::triangulate_quads(
                 vertex_data,
                 image_width,
@@ -1347,7 +1344,8 @@ namespace model
             double longitude,
             std::vector<glm::vec3> &out_vertices,
             std::vector<glm::vec2> &out_UVs,
-            std::vector<glm::vec3> &out_normals)
+            std::vector<glm::vec3> &out_normals,
+            std::string triangulation_type)
     {
         // For SRTM worlds, the right heightmap filename must be resolved first.
         // The SRTM filenames contain always the southwest coordinate of the block.
@@ -1465,10 +1463,6 @@ namespace model
             }
             image_pointer -= sizeof(int16_t) * (image_width_in_use + true_image_width);
         }
-
-        std::string triangulation_type = "bilinear_interpolation";
-        // std::string triangulation_type = "southeast_northwest_edges"; // "northwest_southeast_edges" is equivalent.
-        // std::string triangulation_type = "southwest_northeast_edges"; // "northeast_southwest_edges" is equivalent.
 
         SphericalWorldStruct spherical_world_struct;
         spherical_world_struct.southern_latitude = southern_latitude; // must be double, though SRTM data is split between full degrees.

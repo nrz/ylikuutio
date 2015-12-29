@@ -27,6 +27,7 @@ namespace model
         this->color_channel     = species_struct.color_channel;
         this->light_position    = species_struct.light_position;
         this->parent_pointer    = species_struct.parent_pointer;
+        this->triangulation_type = species_struct.triangulation_type;
 
         this->char_model_file_format = this->model_file_format.c_str();
         this->char_model_filename    = this->model_filename.c_str();
@@ -58,7 +59,8 @@ namespace model
                     current_longitude_in_degrees,
                     this->vertices,
                     this->UVs,
-                    this->normals);
+                    this->normals,
+                    this->triangulation_type);
         }
         else if ((strcmp(this->char_model_file_format, "bmp") == 0) || (strcmp(this->char_model_file_format, "BMP") == 0))
         {
@@ -69,7 +71,8 @@ namespace model
                     this->normals,
                     this->image_width,
                     this->image_height,
-                    this->color_channel);
+                    this->color_channel,
+                    this->triangulation_type);
         }
         else
         {
