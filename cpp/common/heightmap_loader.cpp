@@ -264,16 +264,17 @@ namespace model
     }
 
     bool triangulate_quads(
-            GLuint* input_vertex_pointer,
-            uint32_t image_width,
-            uint32_t image_height,
+            TriangulateQuadsStruct triangulate_quads_struct,
             std::vector<glm::vec3> &out_vertices,
             std::vector<glm::vec2> &out_UVs,
-            std::vector<glm::vec3> &out_normals,
-            std::string triangulation_type,
-            double sphere_radius,
-            SphericalWorldStruct spherical_world_struct)
+            std::vector<glm::vec3> &out_normals)
     {
+        GLuint* input_vertex_pointer = triangulate_quads_struct.input_vertex_pointer;
+        uint32_t image_width = triangulate_quads_struct.image_width;
+        uint32_t image_height = triangulate_quads_struct.image_height;
+        std::string triangulation_type = triangulate_quads_struct.triangulation_type;
+        double sphere_radius = triangulate_quads_struct.sphere_radius;
+        SphericalWorldStruct spherical_world_struct = triangulate_quads_struct.spherical_world_struct;
 
         std::vector<GLuint> vertexIndices, uvIndices, normalIndices;
         std::vector<glm::vec3> temp_vertices;
@@ -1325,17 +1326,15 @@ namespace model
         }
         std::cout << "color channel in use: " << color_channel << "\n";
 
-        bool triangulation_result = model::triangulate_quads(
-                vertex_data,
-                image_width,
-                image_height,
-                out_vertices,
-                out_UVs,
-                out_normals,
-                triangulation_type,
-                NAN,
-                SphericalWorldStruct()); // not used, but is needed in the function call.
-        return true;
+        TriangulateQuadsStruct triangulate_quads_struct;
+        triangulate_quads_struct.input_vertex_pointer = vertex_data;
+        triangulate_quads_struct.image_width = image_width;
+        triangulate_quads_struct.image_height = image_height;
+        triangulate_quads_struct.triangulation_type = triangulation_type;
+        triangulate_quads_struct.sphere_radius = NAN;
+        triangulate_quads_struct.spherical_world_struct = SphericalWorldStruct(); // not used, but is needed in the function call.
+
+        return model::triangulate_quads(triangulate_quads_struct, out_vertices, out_UVs, out_normals);
     }
 
     bool load_SRTM_world(
@@ -1470,16 +1469,14 @@ namespace model
         spherical_world_struct.western_longitude = western_longitude; // must be double, though SRTM data is split between full degrees.
         spherical_world_struct.eastern_longitude = eastern_longitude; // must be double, though SRTM data is split between full degrees.
 
-        bool triangulation_result = model::triangulate_quads(
-                vertex_data,
-                image_width_in_use,
-                image_height_in_use,
-                out_vertices,
-                out_UVs,
-                out_normals,
-                triangulation_type,
-                EARTH_RADIUS,
-                spherical_world_struct);
-        return true;
+        TriangulateQuadsStruct triangulate_quads_struct;
+        triangulate_quads_struct.input_vertex_pointer = vertex_data;
+        triangulate_quads_struct.image_width = image_width_in_use;
+        triangulate_quads_struct.image_height = image_height_in_use;
+        triangulate_quads_struct.triangulation_type = triangulation_type;
+        triangulate_quads_struct.sphere_radius = EARTH_RADIUS;
+        triangulate_quads_struct.spherical_world_struct = spherical_world_struct;
+
+        return model::triangulate_quads(triangulate_quads_struct, out_vertices, out_UVs, out_normals);
     }
 }

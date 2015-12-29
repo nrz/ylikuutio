@@ -231,6 +231,17 @@ typedef struct
     double eastern_longitude;
 } SphericalWorldStruct;
 
+typedef struct TriangulateQuadsStruct
+{
+    GLuint* input_vertex_pointer;
+    uint32_t image_width;
+    uint32_t image_height;
+    std::string triangulation_type;
+    double sphere_radius;
+    SphericalWorldStruct spherical_world_struct;
+
+} TriangulateQuadsStruct;
+
 extern SphericalCoordinatesStruct spherical_position;
 
 #endif
