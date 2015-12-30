@@ -60,8 +60,7 @@ namespace model
         if (!file)
         {
             std::cerr << image_path << " could not be opened.\n";
-            getchar();
-            return 0;
+            return false;
         }
 
         // Read the header, i.e. the 54 first bytes
@@ -70,27 +69,27 @@ namespace model
         if (fread(header, 1, 54, file) != 54)
         {
             std::cerr << "not a correct BMP file.\n";
-            return 0;
+            return false;
         }
 
         // A BMP files always begins with "BM"
         if ((header[0] != 'B') || (header[1] != 'M'))
         {
             std::cerr << "not a correct BMP file.\n";
-            return 0;
+            return false;
         }
 
         // Make sure this is a 24bpp file
         if (*(uint32_t*) & (header[0x1E]) != 0)
         {
             std::cerr << "not a correct BMP file.\n";
-            return 0;
+            return false;
         }
 
         if (*(uint32_t*) & (header[0x1C]) != 24)
         {
             std::cerr << "not a correct BMP file.\n";
-            return 0;
+            return false;
         }
 
         // Read the information about the image
@@ -157,6 +156,7 @@ namespace model
                 else
                 {
                     std::cerr << "invalid color channel!\n";
+                    return false;
                 }
 
                 // std::cout << color_channel << " color channel value at (" << x << ", " << z << "): " << y << ".\n";
@@ -256,8 +256,7 @@ namespace model
         if (!file)
         {
             std::cerr << abs_image_path << " could not be opened.\n";
-            getchar();
-            return 0;
+            return false;
         }
 
         true_image_width  = 1201;
