@@ -94,7 +94,7 @@ TEST_CASE("SPECIESSTRUCT must be initialized appropriately", "[SPECIESSTRUCT]")
 
 TEST_CASE("FONTSTRUCT must be initialized appropriately", "[FONTSTRUCT]")
 {
-    FONTSTRUCT(test_font_struct);
+    FontStruct test_font_struct;
     REQUIRE(test_font_struct.parent_pointer == NULL);
     REQUIRE(test_font_struct.vertex_scaling_factor == DEFAULT_VERTEX_SCALING_FACTOR);
     REQUIRE(test_font_struct.font_file_format.empty());
