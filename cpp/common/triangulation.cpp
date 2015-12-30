@@ -351,6 +351,7 @@ namespace geometry
         if (!is_triangulation_type_valid)
         {
             std::cerr << "invalid triangulation type!\n";
+            return false;
         }
 
         uint32_t n_faces_for_each_vertex;
@@ -742,6 +743,7 @@ namespace geometry
                 else
                 {
                     std::cerr << "invalid triangulation type!\n";
+                    return false;
                 }
                 current_interpolated_vertex_i++;
             }
