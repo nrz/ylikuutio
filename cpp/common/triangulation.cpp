@@ -113,6 +113,7 @@ namespace geometry
                 break;
             default:
                 std::cerr << "invalid compass point code!\n";
+                return glm::vec3(NAN, NAN, NAN);
         }
         return face_normal_data[face_normal_i];
     }
@@ -177,6 +178,7 @@ namespace geometry
                 break;
             default:
                 std::cerr << "invalid compass point code!\n";
+                return glm::vec3(NAN, NAN, NAN);
         }
         return face_normal_data[face_normal_i];
     }
