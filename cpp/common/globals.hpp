@@ -206,14 +206,17 @@ typedef struct FontStruct
     std::string font_filename;              // filename of the font file.
 } FontStruct;
 
-typedef struct
+typedef struct GlyphStruct
 {
+    GlyphStruct()
+        : parent_pointer(NULL)
+    {
+        // constructor.
+    }
     // used for all files (for all glyph).
     model::Font* parent_pointer;             // pointer to the font object.
     glm::vec3 light_position;                // light position.
 } GlyphStruct;
-
-#define GLYPHSTRUCT(x) GlyphStruct x; x.parent_pointer = NULL
 
 typedef struct
 {
