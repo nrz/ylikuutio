@@ -183,6 +183,8 @@ configure_file(cpp/common/StandardShading.vertexshader StandardShading.vertexsha
 configure_file(cpp/common/StandardShading.fragmentshader StandardShading.fragmentshader COPYONLY)
 configure_file(cpp/common/TextVertexShader.vertexshader TextVertexShader.vertexshader COPYONLY)
 configure_file(cpp/common/TextVertexShader.fragmentshader TextVertexShader.fragmentshader COPYONLY)
+configure_file(res/suzanne.obj suzanne.obj COPYONLY)
+configure_file(res/uvmap.DDS uvmap.DDS COPYONLY)
 configure_file(res/GrassGreenTexture0002.bmp GrassGreenTexture0002.bmp COPYONLY)
 configure_file(res/Holstein.DDS Holstein.DDS COPYONLY)
 configure_file(res/Holstein.bmp Holstein.bmp COPYONLY)
