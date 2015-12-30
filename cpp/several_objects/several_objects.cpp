@@ -116,7 +116,7 @@ int main(void)
     model::Shader* my_shader = new model::Shader(shader_struct);
 
     // Create the material, store it in `my_material`.
-    MATERIALSTRUCT(material_struct);
+    MaterialStruct material_struct;
     material_struct.parent_pointer = my_shader;
     material_struct.texture_file_format = "dds";
     material_struct.texture_filename = "uvmap.DDS";

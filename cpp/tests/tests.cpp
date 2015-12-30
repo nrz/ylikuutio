@@ -51,7 +51,7 @@ TEST_CASE("SHADERSTRUCT must be initialized appropriately", "[SHADERSTRUCT]")
 
 TEST_CASE("MATERIALSTRUCT must be initialized appropriately", "[MATERIALSTRUCT]")
 {
-    MATERIALSTRUCT(test_material_struct);
+    MaterialStruct test_material_struct;
     REQUIRE(test_material_struct.parent_pointer == NULL);
     REQUIRE(test_material_struct.texture_file_format.empty());
     REQUIRE(test_material_struct.texture_filename.empty());

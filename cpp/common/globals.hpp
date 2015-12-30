@@ -124,15 +124,18 @@ typedef struct ShaderStruct
     std::string fragment_shader;  // filename of fragment shader.
 } ShaderStruct;
 
-typedef struct
+typedef struct MaterialStruct
 {
+    MaterialStruct()
+        : parent_pointer(NULL)
+    {
+        // constructor.
+    }
     model::Shader* parent_pointer;   // pointer to the shader.
     std::string texture_file_format; // type of the texture file. supported file formats so far: `"bmp"`/`"BMP"`, `"dds"`/`"DDS"`.
     std::string texture_filename;    // filename of the model file.
     std::string image_path;
 } MaterialStruct;
-
-#define MATERIALSTRUCT(x) MaterialStruct x; x.parent_pointer = NULL
 
 typedef struct
 {
