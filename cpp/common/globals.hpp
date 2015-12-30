@@ -112,14 +112,17 @@ namespace model
     class Glyph;
 }
 
-typedef struct
+typedef struct ShaderStruct
 {
+    ShaderStruct()
+        : parent_pointer(NULL)
+    {
+        // constructor.
+    }
     model::World* parent_pointer; // pointer to the world (draw list).
     std::string vertex_shader;    // filename of vertex shader.
     std::string fragment_shader;  // filename of fragment shader.
 } ShaderStruct;
-
-#define SHADERSTRUCT(x) ShaderStruct x; x.parent_pointer = NULL
 
 typedef struct
 {

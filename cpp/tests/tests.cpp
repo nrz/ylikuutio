@@ -43,7 +43,7 @@
 
 TEST_CASE("SHADERSTRUCT must be initialized appropriately", "[SHADERSTRUCT]")
 {
-    SHADERSTRUCT(test_shader_struct);
+    ShaderStruct test_shader_struct;
     REQUIRE(test_shader_struct.parent_pointer == NULL);
     REQUIRE(test_shader_struct.vertex_shader.empty());
     REQUIRE(test_shader_struct.fragment_shader.empty());
