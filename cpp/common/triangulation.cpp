@@ -1181,4 +1181,3 @@ namespace geometry
         return true;
     }
 }
-
