@@ -150,8 +150,13 @@ typedef struct NodeStruct
     std::vector<uint32_t> neighbor_nodeIDs;
 } NodeStruct;
 
-typedef struct
+typedef struct ObjectStruct
 {
+    ObjectStruct()
+        : species_parent_pointer(NULL), glyph_parent_pointer(NULL), original_scale_vector(glm::vec3(1.0f, 1.0f, 1.0f)), rotate_angle(NAN), is_character(false)
+    {
+        // constructor.
+    }
     model::Species* species_parent_pointer; // pointer to the parent species.
     model::Glyph* glyph_parent_pointer;     // pointer to the parent glyph.
     glm::vec3 original_scale_vector; // original scale vector.
@@ -161,13 +166,6 @@ typedef struct
     glm::vec3 rotate_vector;         // rotate vector.
     glm::vec3 translate_vector;      // translate vector.
 } ObjectStruct;
-
-#define OBJECTSTRUCT(x) ObjectStruct x; \
-x.species_parent_pointer = NULL; \
-x.glyph_parent_pointer = NULL; \
-x.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f); \
-x.rotate_angle = NAN; \
-x.is_character = false
 
 typedef struct
 {

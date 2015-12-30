@@ -68,7 +68,7 @@ TEST_CASE("NODESTRUCT must be initialized appropriately", "[NODESTRUCT]")
 
 TEST_CASE("OBJECTSTRUCT must be initialized appropriately", "[OBJECTSTRUCT]")
 {
-    OBJECTSTRUCT(test_object_struct);
+    ObjectStruct test_object_struct;
     REQUIRE(test_object_struct.species_parent_pointer == NULL);
     REQUIRE(test_object_struct.glyph_parent_pointer == NULL);
     REQUIRE(test_object_struct.original_scale_vector == glm::vec3(1.0f, 1.0f, 1.0f));
