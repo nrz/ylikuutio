@@ -123,7 +123,7 @@ int main(void)
     model::Material* my_material = new model::Material(material_struct);
 
     // Create the species, store it in `suzanne_species`.
-    SPECIESSTRUCT(species_struct);
+    SpeciesStruct species_struct;
     species_struct.parent_pointer = my_material;
     species_struct.model_file_format = "obj";
     species_struct.model_filename = "suzanne.obj";

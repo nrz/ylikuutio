@@ -81,7 +81,7 @@ TEST_CASE("OBJECTSTRUCT must be initialized appropriately", "[OBJECTSTRUCT]")
 
 TEST_CASE("SPECIESSTRUCT must be initialized appropriately", "[SPECIESSTRUCT]")
 {
-    SPECIESSTRUCT(test_species_struct);
+    SpeciesStruct test_species_struct;
     REQUIRE(test_species_struct.parent_pointer == NULL);
     REQUIRE(test_species_struct.is_world == false);
     REQUIRE(std::isnan(test_species_struct.world_radius));

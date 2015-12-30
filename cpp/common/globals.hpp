@@ -167,8 +167,13 @@ typedef struct ObjectStruct
     glm::vec3 translate_vector;      // translate vector.
 } ObjectStruct;
 
-typedef struct
+typedef struct SpeciesStruct
 {
+    SpeciesStruct()
+        : parent_pointer(NULL), is_world(false), world_radius(NAN), triangulation_type("bilinear_interpolation")
+    {
+        // constructor.
+    }
     // used for all files (for all species).
     model::Material* parent_pointer;         // pointer to the material object.
     bool is_world;                           // worlds currently do not rotate nor translate.
@@ -184,8 +189,6 @@ typedef struct
                                              // TODO: add support for `"spherical"`. `"spherical"` is used eg. in SRTM heightmaps.
     std::string triangulation_type;
 } SpeciesStruct;
-
-#define SPECIESSTRUCT(x) SpeciesStruct x; x.parent_pointer = NULL; x.is_world = false; x.world_radius = NAN; x.triangulation_type = "bilinear_interpolation"
 
 #define DEFAULT_VERTEX_SCALING_FACTOR (0.001f)
 
