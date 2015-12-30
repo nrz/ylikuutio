@@ -212,7 +212,7 @@ namespace geometry
         return cartesian_vertex;
     };
 
-    uint32_t output_triangle_vertices(
+    void output_triangle_vertices(
             std::vector<glm::vec3> &temp_vertices,
             std::vector<glm::vec2> &temp_UVs,
             std::vector<glm::vec3> &temp_normals,
@@ -254,7 +254,6 @@ namespace geometry
         out_normals.push_back(normal);
 
         // std::cout << "triangle " << triangle_i << ", vertex 2: (" << vertex.x << ", " << vertex.y << ", " << vertex.z << ").\n\n";
-        return triangle_i++;
     }
 
     bool triangulate_quads(
@@ -975,7 +974,7 @@ namespace geometry
                     normalIndex[1] = 0; // TODO: add proper normal index.
                     normalIndex[2] = 0; // TODO: add proper normal index.
 
-                    triangle_i = geometry::output_triangle_vertices(
+                    geometry::output_triangle_vertices(
                             temp_vertices,
                             temp_UVs,
                             temp_normals,
@@ -986,6 +985,7 @@ namespace geometry
                             out_UVs,
                             out_normals,
                             triangle_i);
+                    triangle_i++;
 
                     // Define the second triangle, W: center, southwest, northwest.
                     vertexIndex[0] = CENTER;
@@ -1008,7 +1008,7 @@ namespace geometry
                     normalIndex[1] = 0; // TODO: add proper normal index.
                     normalIndex[2] = 0; // TODO: add proper normal index.
 
-                    triangle_i = geometry::output_triangle_vertices(
+                    geometry::output_triangle_vertices(
                             temp_vertices,
                             temp_UVs,
                             temp_normals,
@@ -1019,6 +1019,7 @@ namespace geometry
                             out_UVs,
                             out_normals,
                             triangle_i);
+                    triangle_i++;
 
                     // Define the third triangle, N: center, northwest, northeast.
                     vertexIndex[0] = CENTER;
@@ -1041,7 +1042,7 @@ namespace geometry
                     normalIndex[1] = 0; // TODO: add proper normal index.
                     normalIndex[2] = 0; // TODO: add proper normal index.
 
-                    triangle_i = geometry::output_triangle_vertices(
+                    geometry::output_triangle_vertices(
                             temp_vertices,
                             temp_UVs,
                             temp_normals,
@@ -1052,6 +1053,7 @@ namespace geometry
                             out_UVs,
                             out_normals,
                             triangle_i);
+                    triangle_i++;
 
                     // Define the fourth triangle, E: center, northeast, southeast.
                     vertexIndex[0] = CENTER;
@@ -1074,7 +1076,7 @@ namespace geometry
                     normalIndex[1] = 0; // TODO: add proper normal index.
                     normalIndex[2] = 0; // TODO: add proper normal index.
 
-                    triangle_i = geometry::output_triangle_vertices(
+                    geometry::output_triangle_vertices(
                             temp_vertices,
                             temp_UVs,
                             temp_normals,
@@ -1085,6 +1087,7 @@ namespace geometry
                             out_UVs,
                             out_normals,
                             triangle_i);
+                    triangle_i++;
 
                     current_interpolated_vertex_i++;
                 }
@@ -1137,7 +1140,7 @@ namespace geometry
                     normalIndex[1] = 0; // TODO: add proper normal index.
                     normalIndex[2] = 0; // TODO: add proper normal index.
 
-                    triangle_i = geometry::output_triangle_vertices(
+                    geometry::output_triangle_vertices(
                             temp_vertices,
                             temp_UVs,
                             temp_normals,
@@ -1148,6 +1151,7 @@ namespace geometry
                             out_UVs,
                             out_normals,
                             triangle_i);
+                    triangle_i++;
 
                     // Define the second triangle, NW: northeast, southeast, northwest.
                     vertexIndex[0] = NORTHEAST;
@@ -1170,7 +1174,7 @@ namespace geometry
                     normalIndex[1] = 0; // TODO: add proper normal index.
                     normalIndex[2] = 0; // TODO: add proper normal index.
 
-                    triangle_i = geometry::output_triangle_vertices(
+                    geometry::output_triangle_vertices(
                             temp_vertices,
                             temp_UVs,
                             temp_normals,
@@ -1181,6 +1185,7 @@ namespace geometry
                             out_UVs,
                             out_normals,
                             triangle_i);
+                    triangle_i++;
                 }
             }
         }
