@@ -137,15 +137,18 @@ typedef struct MaterialStruct
     std::string image_path;
 } MaterialStruct;
 
-typedef struct
+typedef struct NodeStruct
 {
+    NodeStruct()
+        : parent_pointer(NULL)
+    {
+        // constructor.
+    }
     GLuint nodeID;
     model::Graph* parent_pointer;
     glm::vec3 coordinate_vector;
     std::vector<uint32_t> neighbor_nodeIDs;
 } NodeStruct;
-
-#define NODESTRUCT(x) NodeStruct x; x.parent_pointer = NULL
 
 typedef struct
 {

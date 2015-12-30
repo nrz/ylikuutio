@@ -60,7 +60,7 @@ TEST_CASE("MATERIALSTRUCT must be initialized appropriately", "[MATERIALSTRUCT]"
 
 TEST_CASE("NODESTRUCT must be initialized appropriately", "[NODESTRUCT]")
 {
-    NODESTRUCT(test_node_struct);
+    NodeStruct test_node_struct;
     REQUIRE(test_node_struct.parent_pointer == NULL);
     REQUIRE(test_node_struct.coordinate_vector == glm::vec3(0.0f, 0.0f, 0.0f));
     REQUIRE(test_node_struct.neighbor_nodeIDs.size() == 0);
