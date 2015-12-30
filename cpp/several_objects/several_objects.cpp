@@ -8,10 +8,8 @@
 #endif
 
 // Include standard headers
-#include <stdio.h>
-#include <stdlib.h>
-#include <vector>    // std::vector
-#include <string>
+#include <vector>   // std::vector
+#include <string>   // std::string
 
 // Include GLEW
 #ifndef __GL_GLEW_H_INCLUDED

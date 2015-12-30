@@ -11,6 +11,9 @@
 #include <GL/glew.h> // GLfloat, GLuint etc.
 #endif
 
+// Include standard headers
+#include <cstring>  // strcmp
+
 namespace model
 {
     void Species::bind_to_parent()

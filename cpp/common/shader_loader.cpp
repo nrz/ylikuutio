@@ -11,13 +11,9 @@
 
 // Include standard headers
 #include <algorithm> // std::find
-#include <fstream>
-#include <iostream>
+#include <fstream>   // std::ifstream, std::ios
 #include <string>    // std::string
 #include <vector>    // std::vector
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 
 GLuint LoadShaders(const char* vertex_file_path, const char* fragment_file_path)
 {

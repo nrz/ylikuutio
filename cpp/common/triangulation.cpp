@@ -18,6 +18,7 @@
 #endif
 
 // Include standard headers
+#include <cstring>  // strcmp
 #include <iostream>
 #include <string>   // std::string
 #include <string.h> // strcmp

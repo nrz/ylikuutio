@@ -13,10 +13,11 @@
 #endif
 
 // Include standard headers
-#include <stdio.h>
-#include <stdlib.h>
+#include <cstring>  // strcmp
+#include <stdio.h>  // FILE, fclose, fopen, fread, getchar, printf etc.
+#include <stdlib.h> // free, malloc
 #include <stdint.h> // uint32_t etc.
-#include <string.h>
+#include <string.h> // strcmp, strncmp
 
 namespace texture
 {

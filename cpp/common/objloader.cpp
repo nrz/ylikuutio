@@ -10,9 +10,9 @@
 
 // Include standard headers
 #include <iostream>
-#include <cstring>
-#include <string>    // std::string
-#include <vector>    // std::vector
+#include <cstring>  // strcmp
+#include <string>   // std::string
+#include <vector>   // std::vector
 #include <stdio.h>
 
 void read_until_newline(FILE* file)

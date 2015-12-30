@@ -20,16 +20,15 @@
 #endif
 
 // Include standard headers
+#include <cstring>  // strcmp
 #include <iostream>
 #include <string>   // std::string
-#include <string.h>
-#include <cstring>
+#include <string.h> // strcmp
 #include <vector>   // std::vector
-#include <stdio.h>
-#include <stdlib.h>
 #include <stdint.h> // uint32_t etc.
 #include <sstream>  // stringstream etc.
 #include <iomanip>  // setw, setfill etc.
+#include <stdio.h>  // FILE, fclose, fopen, fread, getchar, printf etc.
 
 #define SRTM_FILENAME_N_OF_LATITUDE_CHARS 2
 #define SRTM_FILENAME_N_OF_LONGITUDE_CHARS 3
