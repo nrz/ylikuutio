@@ -72,6 +72,8 @@ add_executable(several_objects
     cpp/common/globals.hpp
     cpp/common/texture_loader.cpp
     cpp/common/texture_loader.hpp
+    cpp/common/triangulation.cpp
+    cpp/common/triangulation.hpp
     cpp/common/heightmap_loader.cpp
     cpp/common/heightmap_loader.hpp
     cpp/common/objloader.cpp
@@ -131,6 +133,8 @@ add_executable(ylikuutio
     cpp/common/globals.hpp
     cpp/common/texture_loader.cpp
     cpp/common/texture_loader.hpp
+    cpp/common/triangulation.cpp
+    cpp/common/triangulation.hpp
     cpp/common/heightmap_loader.cpp
     cpp/common/heightmap_loader.hpp
     cpp/common/objloader.cpp
