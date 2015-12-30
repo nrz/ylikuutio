@@ -51,37 +51,37 @@ enum SoutheastNorthwestEdgesDirections { SSE_CODE_FOR_SE_NW, WNW_CODE_FOR_SE_NW,
 #define CENTER (current_interpolated_vertex_i)
 
 // for bilinear interpolation.
-#define SOUTHWEST_Y (model::get_y(input_vertex_pointer, x - 1, z - 1, image_width))
-#define SOUTHEAST_Y (model::get_y(input_vertex_pointer, x, z - 1, image_width))
-#define NORTHWEST_Y (model::get_y(input_vertex_pointer, x - 1, z, image_width))
-#define NORTHEAST_Y (model::get_y(input_vertex_pointer, x, z, image_width))
+#define SOUTHWEST_Y (geometry::get_y(input_vertex_pointer, x - 1, z - 1, image_width))
+#define SOUTHEAST_Y (geometry::get_y(input_vertex_pointer, x, z - 1, image_width))
+#define NORTHWEST_Y (geometry::get_y(input_vertex_pointer, x - 1, z, image_width))
+#define NORTHEAST_Y (geometry::get_y(input_vertex_pointer, x, z, image_width))
 #define CENTER_Y ((SOUTHWEST_Y + SOUTHEAST_Y + NORTHWEST_Y + NORTHEAST_Y) / 4)
 
 // for bilinear interpolation.
-#define SSW_FACE_NORMAL (model::get_face_normal(face_normal_vector_vec3, x, z, SSW, image_width))
-#define WSW_FACE_NORMAL (model::get_face_normal(face_normal_vector_vec3, x, z, WSW, image_width))
-#define WNW_FACE_NORMAL (model::get_face_normal(face_normal_vector_vec3, x, z, WNW, image_width))
-#define NNW_FACE_NORMAL (model::get_face_normal(face_normal_vector_vec3, x, z, NNW, image_width))
-#define NNE_FACE_NORMAL (model::get_face_normal(face_normal_vector_vec3, x, z, NNE, image_width))
-#define ENE_FACE_NORMAL (model::get_face_normal(face_normal_vector_vec3, x, z, ENE, image_width))
-#define ESE_FACE_NORMAL (model::get_face_normal(face_normal_vector_vec3, x, z, ESE, image_width))
-#define SSE_FACE_NORMAL (model::get_face_normal(face_normal_vector_vec3, x, z, SSE, image_width))
+#define SSW_FACE_NORMAL (geometry::get_face_normal(face_normal_vector_vec3, x, z, SSW, image_width))
+#define WSW_FACE_NORMAL (geometry::get_face_normal(face_normal_vector_vec3, x, z, WSW, image_width))
+#define WNW_FACE_NORMAL (geometry::get_face_normal(face_normal_vector_vec3, x, z, WNW, image_width))
+#define NNW_FACE_NORMAL (geometry::get_face_normal(face_normal_vector_vec3, x, z, NNW, image_width))
+#define NNE_FACE_NORMAL (geometry::get_face_normal(face_normal_vector_vec3, x, z, NNE, image_width))
+#define ENE_FACE_NORMAL (geometry::get_face_normal(face_normal_vector_vec3, x, z, ENE, image_width))
+#define ESE_FACE_NORMAL (geometry::get_face_normal(face_normal_vector_vec3, x, z, ESE, image_width))
+#define SSE_FACE_NORMAL (geometry::get_face_normal(face_normal_vector_vec3, x, z, SSE, image_width))
 
 // for bilinear interpolation.
-#define S_FACE_NORMAL (model::get_face_normal(face_normal_vector_vec3, x - 1, z - 1, ENE, image_width))
-#define W_FACE_NORMAL (model::get_face_normal(face_normal_vector_vec3, x - 1, z - 1, NNE, image_width))
-#define N_FACE_NORMAL (model::get_face_normal(face_normal_vector_vec3, x, z, WSW, image_width))
-#define E_FACE_NORMAL (model::get_face_normal(face_normal_vector_vec3, x, z, SSW, image_width))
+#define S_FACE_NORMAL (geometry::get_face_normal(face_normal_vector_vec3, x - 1, z - 1, ENE, image_width))
+#define W_FACE_NORMAL (geometry::get_face_normal(face_normal_vector_vec3, x - 1, z - 1, NNE, image_width))
+#define N_FACE_NORMAL (geometry::get_face_normal(face_normal_vector_vec3, x, z, WSW, image_width))
+#define E_FACE_NORMAL (geometry::get_face_normal(face_normal_vector_vec3, x, z, SSW, image_width))
 
 // for southeast-northwest edges.
-#define SSE_FACE_NORMAL_FOR_SE_NW (model::get_face_normal_for_SE_NW(face_normal_vector_vec3, x, z, SSE_CODE_FOR_SE_NW, image_width))
-#define WNW_FACE_NORMAL_FOR_SE_NW (model::get_face_normal_for_SE_NW(face_normal_vector_vec3, x, z, WNW_CODE_FOR_SE_NW, image_width))
-#define ESE_FACE_NORMAL_FOR_SE_NW (model::get_face_normal_for_SE_NW(face_normal_vector_vec3, x, z, ESE_CODE_FOR_SE_NW, image_width))
-#define NNW_FACE_NORMAL_FOR_SE_NW (model::get_face_normal_for_SE_NW(face_normal_vector_vec3, x, z, NNW_CODE_FOR_SE_NW, image_width))
-#define SW_FACE_NORMAL_FOR_SE_NW (model::get_face_normal_for_SE_NW(face_normal_vector_vec3, x, z, SW_CODE_FOR_SE_NW, image_width))
-#define NE_FACE_NORMAL_FOR_SE_NW (model::get_face_normal_for_SE_NW(face_normal_vector_vec3, x, z, NE_CODE_FOR_SE_NW, image_width))
+#define SSE_FACE_NORMAL_FOR_SE_NW (geometry::get_face_normal_for_SE_NW(face_normal_vector_vec3, x, z, SSE_CODE_FOR_SE_NW, image_width))
+#define WNW_FACE_NORMAL_FOR_SE_NW (geometry::get_face_normal_for_SE_NW(face_normal_vector_vec3, x, z, WNW_CODE_FOR_SE_NW, image_width))
+#define ESE_FACE_NORMAL_FOR_SE_NW (geometry::get_face_normal_for_SE_NW(face_normal_vector_vec3, x, z, ESE_CODE_FOR_SE_NW, image_width))
+#define NNW_FACE_NORMAL_FOR_SE_NW (geometry::get_face_normal_for_SE_NW(face_normal_vector_vec3, x, z, NNW_CODE_FOR_SE_NW, image_width))
+#define SW_FACE_NORMAL_FOR_SE_NW (geometry::get_face_normal_for_SE_NW(face_normal_vector_vec3, x, z, SW_CODE_FOR_SE_NW, image_width))
+#define NE_FACE_NORMAL_FOR_SE_NW (geometry::get_face_normal_for_SE_NW(face_normal_vector_vec3, x, z, NE_CODE_FOR_SE_NW, image_width))
 
-namespace model
+namespace geometry
 {
     // for bilinear interpolation.
     glm::vec3 get_face_normal(
@@ -291,7 +291,7 @@ namespace model
         // 4. Transform interpolated coordinates (and computed this far as being in horizontal plane) to a curved surface.
         // 5. Compute the face normals, `push_back` to `face_normals`.
         // 6. Compute the vertex normals for vertices loaded from file and for interpolated vertices (for `"bilinear_interpolation"`), `push_back` to `temp_normals`.
-        // 7. Loop through all vertices and `model::output_triangle_vertices`.
+        // 7. Loop through all vertices and `geometry::output_triangle_vertices`.
 
         // 1. Define the vertices for vertices loaded from file, `push_back` to `temp_vertices`.
         // First, define the temporary vertices in a double loop.
@@ -300,7 +300,7 @@ namespace model
             for (uint32_t x = 0; x < image_width; x++)
             {
                 // current x,z coordinates).
-                GLfloat y = (GLfloat) model::get_y(input_vertex_pointer, x, z, image_width);
+                GLfloat y = (GLfloat) geometry::get_y(input_vertex_pointer, x, z, image_width);
 
                 // This corresponds to "v": specify one vertex.
                 glm::vec3 vertex;
@@ -608,7 +608,7 @@ namespace model
                     glm::vec3 spherical_world_vertex = temp_vertices[temp_vertices_i];
                     spherical_world_vertex.x = (GLfloat) current_longitude_in_degrees;
                     spherical_world_vertex.z = (GLfloat) current_latitude_in_degrees;
-                    temp_vertices[temp_vertices_i++] = transform_planar_world_vertex_into_cartesian_vertex(spherical_world_vertex, sphere_radius);
+                    temp_vertices[temp_vertices_i++] = geometry::transform_planar_world_vertex_into_cartesian_vertex(spherical_world_vertex, sphere_radius);
 
                     current_longitude_in_degrees += longitude_step_in_degrees;
                 }
@@ -644,7 +644,7 @@ namespace model
                         glm::vec3 spherical_world_vertex = temp_vertices[temp_vertices_i];
                         spherical_world_vertex.x = (GLfloat) current_longitude_in_degrees;
                         spherical_world_vertex.z = (GLfloat) current_latitude_in_degrees;
-                        temp_vertices[temp_vertices_i++] = transform_planar_world_vertex_into_cartesian_vertex(spherical_world_vertex, sphere_radius);
+                        temp_vertices[temp_vertices_i++] = geometry::transform_planar_world_vertex_into_cartesian_vertex(spherical_world_vertex, sphere_radius);
 
                         current_longitude_in_degrees += longitude_step_in_degrees;
                     }
@@ -925,7 +925,7 @@ namespace model
             temp_normals.push_back(vertex_normal);
         }
 
-        // 7. Loop through all vertices and `model::output_triangle_vertices`.
+        // 7. Loop through all vertices and `geometry::output_triangle_vertices`.
         std::cout << "defining output vertices, UVs and normals.\n";
 
         if (is_bilinear_interpolation_in_use)
@@ -979,7 +979,7 @@ namespace model
                     normalIndex[1] = 0; // TODO: add proper normal index.
                     normalIndex[2] = 0; // TODO: add proper normal index.
 
-                    triangle_i = model::output_triangle_vertices(
+                    triangle_i = geometry::output_triangle_vertices(
                             temp_vertices,
                             temp_UVs,
                             temp_normals,
@@ -1012,7 +1012,7 @@ namespace model
                     normalIndex[1] = 0; // TODO: add proper normal index.
                     normalIndex[2] = 0; // TODO: add proper normal index.
 
-                    triangle_i = model::output_triangle_vertices(
+                    triangle_i = geometry::output_triangle_vertices(
                             temp_vertices,
                             temp_UVs,
                             temp_normals,
@@ -1045,7 +1045,7 @@ namespace model
                     normalIndex[1] = 0; // TODO: add proper normal index.
                     normalIndex[2] = 0; // TODO: add proper normal index.
 
-                    triangle_i = model::output_triangle_vertices(
+                    triangle_i = geometry::output_triangle_vertices(
                             temp_vertices,
                             temp_UVs,
                             temp_normals,
@@ -1078,7 +1078,7 @@ namespace model
                     normalIndex[1] = 0; // TODO: add proper normal index.
                     normalIndex[2] = 0; // TODO: add proper normal index.
 
-                    triangle_i = model::output_triangle_vertices(
+                    triangle_i = geometry::output_triangle_vertices(
                             temp_vertices,
                             temp_UVs,
                             temp_normals,
@@ -1141,7 +1141,7 @@ namespace model
                     normalIndex[1] = 0; // TODO: add proper normal index.
                     normalIndex[2] = 0; // TODO: add proper normal index.
 
-                    triangle_i = model::output_triangle_vertices(
+                    triangle_i = geometry::output_triangle_vertices(
                             temp_vertices,
                             temp_UVs,
                             temp_normals,
@@ -1174,7 +1174,7 @@ namespace model
                     normalIndex[1] = 0; // TODO: add proper normal index.
                     normalIndex[2] = 0; // TODO: add proper normal index.
 
-                    triangle_i = model::output_triangle_vertices(
+                    triangle_i = geometry::output_triangle_vertices(
                             temp_vertices,
                             temp_UVs,
                             temp_normals,
@@ -1194,7 +1194,10 @@ namespace model
 
         return true;
     }
+}
 
+namespace model
+{
     bool load_BMP_world(
             std::string image_path,
             std::vector<glm::vec3> &out_vertices,
@@ -1334,7 +1337,7 @@ namespace model
         triangulate_quads_struct.sphere_radius = NAN;
         triangulate_quads_struct.spherical_world_struct = SphericalWorldStruct(); // not used, but is needed in the function call.
 
-        return model::triangulate_quads(triangulate_quads_struct, out_vertices, out_UVs, out_normals);
+        return geometry::triangulate_quads(triangulate_quads_struct, out_vertices, out_UVs, out_normals);
     }
 
     bool load_SRTM_world(
@@ -1477,6 +1480,6 @@ namespace model
         triangulate_quads_struct.sphere_radius = EARTH_RADIUS;
         triangulate_quads_struct.spherical_world_struct = spherical_world_struct;
 
-        return model::triangulate_quads(triangulate_quads_struct, out_vertices, out_UVs, out_normals);
+        return geometry::triangulate_quads(triangulate_quads_struct, out_vertices, out_UVs, out_normals);
     }
 }
