@@ -41,7 +41,7 @@
 #include <string>
 #include <vector> // std::vector
 
-TEST_CASE("SHADERSTRUCT must be initialized appropriately", "[SHADERSTRUCT]")
+TEST_CASE("ShaderStruct must be initialized appropriately", "[ShaderStruct]")
 {
     ShaderStruct test_shader_struct;
     REQUIRE(test_shader_struct.parent_pointer == NULL);
@@ -49,7 +49,7 @@ TEST_CASE("SHADERSTRUCT must be initialized appropriately", "[SHADERSTRUCT]")
     REQUIRE(test_shader_struct.fragment_shader.empty());
 }
 
-TEST_CASE("MATERIALSTRUCT must be initialized appropriately", "[MATERIALSTRUCT]")
+TEST_CASE("MaterialStruct must be initialized appropriately", "[MaterialStruct]")
 {
     MaterialStruct test_material_struct;
     REQUIRE(test_material_struct.parent_pointer == NULL);
@@ -58,7 +58,7 @@ TEST_CASE("MATERIALSTRUCT must be initialized appropriately", "[MATERIALSTRUCT]"
     REQUIRE(test_material_struct.image_path.empty());
 }
 
-TEST_CASE("NODESTRUCT must be initialized appropriately", "[NODESTRUCT]")
+TEST_CASE("NodeStruct must be initialized appropriately", "[NodeStruct]")
 {
     NodeStruct test_node_struct;
     REQUIRE(test_node_struct.parent_pointer == NULL);
@@ -66,7 +66,7 @@ TEST_CASE("NODESTRUCT must be initialized appropriately", "[NODESTRUCT]")
     REQUIRE(test_node_struct.neighbor_nodeIDs.size() == 0);
 }
 
-TEST_CASE("OBJECTSTRUCT must be initialized appropriately", "[OBJECTSTRUCT]")
+TEST_CASE("ObjectStruct must be initialized appropriately", "[ObjectStruct]")
 {
     ObjectStruct test_object_struct;
     REQUIRE(test_object_struct.species_parent_pointer == NULL);
@@ -79,7 +79,7 @@ TEST_CASE("OBJECTSTRUCT must be initialized appropriately", "[OBJECTSTRUCT]")
     REQUIRE(test_object_struct.translate_vector == glm::vec3(0.0f, 0.0f, 0.0f));
 }
 
-TEST_CASE("SPECIESSTRUCT must be initialized appropriately", "[SPECIESSTRUCT]")
+TEST_CASE("SpeciesStruct must be initialized appropriately", "[SpeciesStruct]")
 {
     SpeciesStruct test_species_struct;
     REQUIRE(test_species_struct.parent_pointer == NULL);
@@ -92,7 +92,7 @@ TEST_CASE("SPECIESSTRUCT must be initialized appropriately", "[SPECIESSTRUCT]")
     REQUIRE(test_species_struct.coordinate_system.empty());
 }
 
-TEST_CASE("FONTSTRUCT must be initialized appropriately", "[FONTSTRUCT]")
+TEST_CASE("FontStruct must be initialized appropriately", "[FontStruct]")
 {
     FontStruct test_font_struct;
     REQUIRE(test_font_struct.parent_pointer == NULL);
@@ -101,7 +101,7 @@ TEST_CASE("FONTSTRUCT must be initialized appropriately", "[FONTSTRUCT]")
     REQUIRE(test_font_struct.font_filename.empty());
 }
 
-TEST_CASE("GLYPHSTRUCT must be initialized appropriately", "[GLYPHSTRUCT]")
+TEST_CASE("GlyphStruct must be initialized appropriately", "[GlyphStruct]")
 {
     GlyphStruct test_glyph_struct;
     REQUIRE(test_glyph_struct.parent_pointer == NULL);
