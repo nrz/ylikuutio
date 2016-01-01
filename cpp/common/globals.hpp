@@ -247,12 +247,18 @@ typedef struct
     double eastern_longitude;
 } SphericalWorldStruct;
 
-typedef struct
+typedef struct TriangulateQuadsStruct
 {
+    TriangulateQuadsStruct()
+        : should_ylikuutio_use_real_texture_coordinates(true)
+    {
+        // constructor.
+    }
     GLuint* input_vertex_pointer;
     uint32_t image_width;
     uint32_t image_height;
     std::string triangulation_type;
+    bool should_ylikuutio_use_real_texture_coordinates;
     double sphere_radius;
     SphericalWorldStruct spherical_world_struct;
 } TriangulateQuadsStruct;
