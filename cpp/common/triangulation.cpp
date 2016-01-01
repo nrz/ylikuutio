@@ -25,9 +25,6 @@
 #include <vector>   // std::vector
 #include <stdint.h> // uint32_t etc.
 
-// #define USE_HEIGHT_AS_TEXTURE_COORDINATE
-#define USE_REAL_TEXTURE_COORDINATES
-
 // for bilinear interpolation, southeast-northwest edges, and southwest-northeast edges.
 #define SOUTHWEST (current_vertex_i - image_width - 1)
 #define SOUTHEAST (current_vertex_i - image_width)
@@ -305,15 +302,16 @@ namespace geometry
                 // This corresponds to "vt": specify texture coordinates of one vertex.
                 glm::vec2 uv;
 
-#ifdef USE_HEIGHT_AS_TEXTURE_COORDINATE
-                uv.x = y / 256;
-                uv.y = 0.0f;
-#endif
-
-#ifdef USE_REAL_TEXTURE_COORDINATES
-                uv.x = round((GLfloat) texture_x);
-                uv.y = round((GLfloat) texture_y);
-#endif
+                if (triangulate_quads_struct.should_ylikuutio_use_real_texture_coordinates)
+                {
+                    uv.x = round((GLfloat) texture_x);
+                    uv.y = round((GLfloat) texture_y);
+                }
+                else
+                {
+                    uv.x = y / 256;
+                    uv.y = 0.0f;
+                }
 
                 temp_UVs.push_back(uv);
 
@@ -406,15 +404,16 @@ namespace geometry
                     // This corresponds to "vt": specify texture coordinates of one vertex.
                     glm::vec2 uv;
 
-#ifdef USE_HEIGHT_AS_TEXTURE_COORDINATE
-                    uv.x = y / 256;
-                    uv.y = 0.0f;
-#endif
-
-#ifdef USE_REAL_TEXTURE_COORDINATES
-                    uv.x = 0.5f;
-                    uv.y = 0.5f;
-#endif
+                    if (triangulate_quads_struct.should_ylikuutio_use_real_texture_coordinates)
+                    {
+                        uv.x = 0.5f;
+                        uv.y = 0.5f;
+                    }
+                    else
+                    {
+                        uv.x = y / 256;
+                        uv.y = 0.0f;
+                    }
 
                     temp_UVs.push_back(uv);
                 }
@@ -453,17 +452,18 @@ namespace geometry
                         vertexIndex[1] = NORTHEAST;
                         vertexIndex[2] = SOUTHEAST;
 
-#ifdef USE_HEIGHT_AS_TEXTURE_COORDINATE
-                        uvIndex[0] = SOUTHWEST_Y;
-                        uvIndex[1] = NORTHEAST_Y;
-                        uvIndex[2] = SOUTHEAST_Y;
-#endif
-
-#ifdef USE_REAL_TEXTURE_COORDINATES
-                        uvIndex[0] = SOUTHWEST;
-                        uvIndex[1] = NORTHEAST;
-                        uvIndex[2] = SOUTHEAST;
-#endif
+                        if (triangulate_quads_struct.should_ylikuutio_use_real_texture_coordinates)
+                        {
+                            uvIndex[0] = SOUTHWEST;
+                            uvIndex[1] = NORTHEAST;
+                            uvIndex[2] = SOUTHEAST;
+                        }
+                        else
+                        {
+                            uvIndex[0] = SOUTHWEST_Y;
+                            uvIndex[1] = NORTHEAST_Y;
+                            uvIndex[2] = SOUTHEAST_Y;
+                        }
                     }
                     else if (is_southeast_northwest_edges_in_use)
                     {
@@ -485,17 +485,19 @@ namespace geometry
                         vertexIndex[1] = SOUTHWEST;
                         vertexIndex[2] = NORTHWEST;
 
-#ifdef USE_HEIGHT_AS_TEXTURE_COORDINATE
-                        uvIndex[0] = SOUTHEAST_Y;
-                        uvIndex[1] = SOUTHWEST_Y;
-                        uvIndex[2] = NORTHWEST_Y;
-#endif
+                        if (triangulate_quads_struct.should_ylikuutio_use_real_texture_coordinates)
+                        {
+                            uvIndex[0] = SOUTHEAST;
+                            uvIndex[1] = SOUTHWEST;
+                            uvIndex[2] = NORTHWEST;
+                        }
+                        else
+                        {
+                            uvIndex[0] = SOUTHEAST_Y;
+                            uvIndex[1] = SOUTHWEST_Y;
+                            uvIndex[2] = NORTHWEST_Y;
 
-#ifdef USE_REAL_TEXTURE_COORDINATES
-                        uvIndex[0] = SOUTHEAST;
-                        uvIndex[1] = SOUTHWEST;
-                        uvIndex[2] = NORTHWEST;
-#endif
+                        }
                     }
 
                     normalIndex[0] = 0; // TODO: add proper normal index.
@@ -513,17 +515,18 @@ namespace geometry
                         vertexIndex[1] = NORTHWEST;
                         vertexIndex[2] = NORTHEAST;
 
-#ifdef USE_HEIGHT_AS_TEXTURE_COORDINATE
-                        uvIndex[0] = SOUTHWEST_Y;
-                        uvIndex[1] = NORTHWEST_Y;
-                        uvIndex[2] = NORTHEAST_Y;
-#endif
-
-#ifdef USE_REAL_TEXTURE_COORDINATES
-                        uvIndex[0] = SOUTHWEST;
-                        uvIndex[1] = NORTHWEST;
-                        uvIndex[2] = NORTHEAST;
-#endif
+                        if (triangulate_quads_struct.should_ylikuutio_use_real_texture_coordinates)
+                        {
+                            uvIndex[0] = SOUTHWEST;
+                            uvIndex[1] = NORTHWEST;
+                            uvIndex[2] = NORTHEAST;
+                        }
+                        else
+                        {
+                            uvIndex[0] = SOUTHWEST_Y;
+                            uvIndex[1] = NORTHWEST_Y;
+                            uvIndex[2] = NORTHEAST_Y;
+                        }
                     }
                     else if (is_southeast_northwest_edges_in_use)
                     {
@@ -536,17 +539,18 @@ namespace geometry
                         vertexIndex[1] = NORTHWEST;
                         vertexIndex[2] = NORTHEAST;
 
-#ifdef USE_HEIGHT_AS_TEXTURE_COORDINATE
-                        uvIndex[0] = SOUTHEAST_Y;
-                        uvIndex[1] = NORTHWEST_Y;
-                        uvIndex[2] = NORTHEAST_Y;
-#endif
-
-#ifdef USE_REAL_TEXTURE_COORDINATES
-                        uvIndex[0] = SOUTHEAST;
-                        uvIndex[1] = NORTHWEST;
-                        uvIndex[2] = NORTHEAST;
-#endif
+                        if (triangulate_quads_struct.should_ylikuutio_use_real_texture_coordinates)
+                        {
+                            uvIndex[0] = SOUTHEAST;
+                            uvIndex[1] = NORTHWEST;
+                            uvIndex[2] = NORTHEAST;
+                        }
+                        else
+                        {
+                            uvIndex[0] = SOUTHEAST_Y;
+                            uvIndex[1] = NORTHWEST_Y;
+                            uvIndex[2] = NORTHEAST_Y;
+                        }
                     }
 
                     normalIndex[0] = 0; // TODO: add proper normal index.
@@ -958,17 +962,18 @@ namespace geometry
                     vertexIndex[1] = SOUTHEAST;
                     vertexIndex[2] = SOUTHWEST;
 
-#ifdef USE_HEIGHT_AS_TEXTURE_COORDINATE
-                    uvIndex[0] = CENTER_Y;
-                    uvIndex[1] = SOUTHEAST_y;
-                    uvIndex[2] = SOUTHWEST_Y;
-#endif
-
-#ifdef USE_REAL_TEXTURE_COORDINATES
-                    uvIndex[0] = CENTER;
-                    uvIndex[1] = SOUTHEAST;
-                    uvIndex[2] = SOUTHWEST;
-#endif
+                    if (triangulate_quads_struct.should_ylikuutio_use_real_texture_coordinates)
+                    {
+                        uvIndex[0] = CENTER;
+                        uvIndex[1] = SOUTHEAST;
+                        uvIndex[2] = SOUTHWEST;
+                    }
+                    else
+                    {
+                        uvIndex[0] = CENTER_Y;
+                        uvIndex[1] = SOUTHEAST_Y;
+                        uvIndex[2] = SOUTHWEST_Y;
+                    }
 
                     normalIndex[0] = 0; // TODO: add proper normal index.
                     normalIndex[1] = 0; // TODO: add proper normal index.
@@ -992,17 +997,18 @@ namespace geometry
                     vertexIndex[1] = SOUTHWEST;
                     vertexIndex[2] = NORTHWEST;
 
-#ifdef USE_HEIGHT_AS_TEXTURE_COORDINATE
-                    uvIndex[0] = CENTER_Y;
-                    uvIndex[1] = SOUTHWEST_Y;
-                    uvIndex[2] = NORTHWEST_Y;
-#endif
-
-#ifdef USE_REAL_TEXTURE_COORDINATES
-                    uvIndex[0] = CENTER;
-                    uvIndex[1] = SOUTHWEST;
-                    uvIndex[2] = NORTHWEST;
-#endif
+                    if (triangulate_quads_struct.should_ylikuutio_use_real_texture_coordinates)
+                    {
+                        uvIndex[0] = CENTER;
+                        uvIndex[1] = SOUTHWEST;
+                        uvIndex[2] = NORTHWEST;
+                    }
+                    else
+                    {
+                        uvIndex[0] = CENTER_Y;
+                        uvIndex[1] = SOUTHWEST_Y;
+                        uvIndex[2] = NORTHWEST_Y;
+                    }
 
                     normalIndex[0] = 0; // TODO: add proper normal index.
                     normalIndex[1] = 0; // TODO: add proper normal index.
@@ -1026,17 +1032,18 @@ namespace geometry
                     vertexIndex[1] = NORTHWEST;
                     vertexIndex[2] = NORTHEAST;
 
-#ifdef USE_HEIGHT_AS_TEXTURE_COORDINATE
-                    uvIndex[0] = CENTER_Y;
-                    uvIndex[1] = NORTHWEST_y;
-                    uvIndex[2] = NORTHEAST_Y;
-#endif
-
-#ifdef USE_REAL_TEXTURE_COORDINATES
-                    uvIndex[0] = CENTER;
-                    uvIndex[1] = NORTHWEST;
-                    uvIndex[2] = NORTHEAST;
-#endif
+                    if (triangulate_quads_struct.should_ylikuutio_use_real_texture_coordinates)
+                    {
+                        uvIndex[0] = CENTER;
+                        uvIndex[1] = NORTHWEST;
+                        uvIndex[2] = NORTHEAST;
+                    }
+                    else
+                    {
+                        uvIndex[0] = CENTER_Y;
+                        uvIndex[1] = NORTHWEST_Y;
+                        uvIndex[2] = NORTHEAST_Y;
+                    }
 
                     normalIndex[0] = 0; // TODO: add proper normal index.
                     normalIndex[1] = 0; // TODO: add proper normal index.
@@ -1060,17 +1067,18 @@ namespace geometry
                     vertexIndex[1] = NORTHEAST;
                     vertexIndex[2] = SOUTHEAST;
 
-#ifdef USE_HEIGHT_AS_TEXTURE_COORDINATE
-                    uvIndex[0] = CENTER_Y;
-                    uvIndex[1] = NORTHEAST_y;
-                    uvIndex[2] = SOUTHEAST_Y;
-#endif
-
-#ifdef USE_REAL_TEXTURE_COORDINATES
-                    uvIndex[0] = CENTER;
-                    uvIndex[1] = NORTHEAST;
-                    uvIndex[2] = SOUTHEAST;
-#endif
+                    if (triangulate_quads_struct.should_ylikuutio_use_real_texture_coordinates)
+                    {
+                        uvIndex[0] = CENTER;
+                        uvIndex[1] = NORTHEAST;
+                        uvIndex[2] = SOUTHEAST;
+                    }
+                    else
+                    {
+                        uvIndex[0] = CENTER_Y;
+                        uvIndex[1] = NORTHEAST_Y;
+                        uvIndex[2] = SOUTHEAST_Y;
+                    }
 
                     normalIndex[0] = 0; // TODO: add proper normal index.
                     normalIndex[1] = 0; // TODO: add proper normal index.
@@ -1124,17 +1132,18 @@ namespace geometry
                     vertexIndex[1] = NORTHWEST;
                     vertexIndex[2] = SOUTHEAST;
 
-#ifdef USE_HEIGHT_AS_TEXTURE_COORDINATE
-                    uvIndex[0] = SOUTHWEST_Y;
-                    uvIndex[1] = NORTHWEST_y;
-                    uvIndex[2] = SOUTHEAST_Y;
-#endif
-
-#ifdef USE_REAL_TEXTURE_COORDINATES
-                    uvIndex[0] = SOUTHWEST;
-                    uvIndex[1] = NORTHWEST;
-                    uvIndex[2] = SOUTHEAST;
-#endif
+                    if (triangulate_quads_struct.should_ylikuutio_use_real_texture_coordinates)
+                    {
+                        uvIndex[0] = SOUTHWEST;
+                        uvIndex[1] = NORTHWEST;
+                        uvIndex[2] = SOUTHEAST;
+                    }
+                    else
+                    {
+                        uvIndex[0] = SOUTHWEST_Y;
+                        uvIndex[1] = NORTHWEST_Y;
+                        uvIndex[2] = SOUTHEAST_Y;
+                    }
 
                     normalIndex[0] = 0; // TODO: add proper normal index.
                     normalIndex[1] = 0; // TODO: add proper normal index.
@@ -1158,17 +1167,18 @@ namespace geometry
                     vertexIndex[1] = SOUTHEAST;
                     vertexIndex[2] = NORTHWEST;
 
-#ifdef USE_HEIGHT_AS_TEXTURE_COORDINATE
-                    uvIndex[0] = NORTHEAST_Y;
-                    uvIndex[1] = SOUTHEAST_y;
-                    uvIndex[2] = NORTHWEST_Y;
-#endif
-
-#ifdef USE_REAL_TEXTURE_COORDINATES
-                    uvIndex[0] = NORTHEAST;
-                    uvIndex[1] = SOUTHEAST;
-                    uvIndex[2] = NORTHWEST;
-#endif
+                    if (triangulate_quads_struct.should_ylikuutio_use_real_texture_coordinates)
+                    {
+                        uvIndex[0] = NORTHEAST;
+                        uvIndex[1] = SOUTHEAST;
+                        uvIndex[2] = NORTHWEST;
+                    }
+                    else
+                    {
+                        uvIndex[0] = NORTHEAST_Y;
+                        uvIndex[1] = SOUTHEAST_Y;
+                        uvIndex[2] = NORTHWEST_Y;
+                    }
 
                     normalIndex[0] = 0; // TODO: add proper normal index.
                     normalIndex[1] = 0; // TODO: add proper normal index.
