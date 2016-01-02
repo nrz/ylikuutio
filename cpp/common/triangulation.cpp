@@ -538,19 +538,16 @@ namespace geometry
             // y = rho * sin(theta) * sin(phi)
             // z = rho * cos(theta)
 
-#define SRTM_LATITUDE_STEP_IN_DEGREES (1.0f/1200.0f)
-#define SRTM_LONGITUDE_STEP_IN_DEGREES (1.0f/1200.0f)
-
             std::cout << "transforming spherical coordinates loaded from file to cartesian coordinates.\n";
             std::cout << "radius: " << sphere_radius << "\n";
 
-            double latitude_step_in_degrees = SRTM_LATITUDE_STEP_IN_DEGREES;
+            double latitude_step_in_degrees = spherical_world_struct.SRTM_latitude_step_in_degrees;
             // double latitude_step_in_degrees = (360.0f / image_height); // for testing, creates a sphere always.
-            std::cout << "latitude step in degrees: " << SRTM_LATITUDE_STEP_IN_DEGREES << "\n";
+            std::cout << "latitude step in degrees: " << latitude_step_in_degrees << "\n";
 
-            double longitude_step_in_degrees = SRTM_LONGITUDE_STEP_IN_DEGREES;
+            double longitude_step_in_degrees = spherical_world_struct.SRTM_longitude_step_in_degrees;
             // double longitude_step_in_degrees = (360.0f / image_width); // for testing, creates a sphere always.
-            std::cout << "longitude step in degrees: " << SRTM_LONGITUDE_STEP_IN_DEGREES << "\n";
+            std::cout << "longitude step in degrees: " << longitude_step_in_degrees << "\n";
 
             double current_latitude_in_degrees = spherical_world_struct.southern_latitude;
 
