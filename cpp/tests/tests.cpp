@@ -230,6 +230,53 @@ TEST_CASE("2x2 world must be triangulated appropriately", "[triangulate_2x2_worl
             REQUIRE(vertices[11].z == 0.0f);
             REQUIRE(vertices[11].y == southeast_height);
         }
+        WHEN("southeast-northwest edges are used")
+        {
+            triangulate_quads_struct.triangulation_type = "southeast_northwest_edges";
+
+            bool is_success = geometry::triangulate_quads(triangulate_quads_struct, vertices, UVs, normals);
+            REQUIRE(is_success == true);
+            REQUIRE(vertices.size() == 6);
+            REQUIRE(UVs.size() == 6);
+            REQUIRE(normals.size() == 6);
+
+            std::cout << " 0: " << vertices[0].x << ", " << vertices[0].y << ", " << vertices[0].z << "\n";
+            std::cout << " 1: " << vertices[1].x << ", " << vertices[1].y << ", " << vertices[1].z << "\n";
+            std::cout << " 2: " << vertices[2].x << ", " << vertices[2].y << ", " << vertices[2].z << "\n";
+            std::cout << " 3: " << vertices[3].x << ", " << vertices[3].y << ", " << vertices[3].z << "\n";
+            std::cout << " 4: " << vertices[4].x << ", " << vertices[4].y << ", " << vertices[4].z << "\n";
+            std::cout << " 5: " << vertices[5].x << ", " << vertices[5].y << ", " << vertices[5].z << "\n";
+
+            // 1st vertex is the southwest vertex of the 1st triangle.
+            REQUIRE(vertices[0].x == 0.0f);
+            REQUIRE(vertices[0].z == 0.0f);
+            REQUIRE(vertices[0].y == southwest_height);
+
+            // 2nd vertex is the northwest vertex of the 1st triangle.
+            REQUIRE(vertices[1].x == 0.0f);
+            REQUIRE(vertices[1].z == 1.0f);
+            REQUIRE(vertices[1].y == northwest_height);
+
+            // 3rd vertex is the southeast vertex of the 1st triangle.
+            REQUIRE(vertices[2].x == 1.0f);
+            REQUIRE(vertices[2].z == 0.0f);
+            REQUIRE(vertices[2].y == southeast_height);
+
+            // 4th vertex is the northeast vertex of the 2nd triangle.
+            REQUIRE(vertices[3].x == 1.0f);
+            REQUIRE(vertices[3].z == 1.0f);
+            REQUIRE(vertices[3].y == northeast_height);
+
+            // 5th vertex is the southeast vertex of the 2nd triangle.
+            REQUIRE(vertices[4].x == 1.0f);
+            REQUIRE(vertices[4].z == 0.0f);
+            REQUIRE(vertices[4].y == southeast_height);
+
+            // 6th vertex is the northwest vertex of the 2nd triangle.
+            REQUIRE(vertices[5].x == 0.0f);
+            REQUIRE(vertices[5].z == 1.0f);
+            REQUIRE(vertices[5].y == northwest_height);
+        }
     }
 }
 
