@@ -123,7 +123,7 @@ namespace model
             void set_shader_pointer(GLuint childID, void* parent_pointer);
 
             // this method sets a world species pointer.
-            void set_terrain_species_pointer(void* terrain_species_pointer);
+            void set_terrain_species_pointer(model::Species* terrain_species_pointer);
 
             void compute_matrices_from_inputs();
 

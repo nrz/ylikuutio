@@ -48,7 +48,7 @@ namespace model
         set_child_pointer(childID, parent_pointer, this->shader_pointer_vector, this->free_shaderID_queue);
     }
 
-    void World::set_terrain_species_pointer(void* terrain_species_pointer)
+    void World::set_terrain_species_pointer(model::Species* terrain_species_pointer)
     {
         this->terrain_species_pointer = terrain_species_pointer;
     }
