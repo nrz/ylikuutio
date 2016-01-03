@@ -108,6 +108,49 @@ TEST_CASE("GlyphStruct must be initialized appropriately", "[GlyphStruct]")
     REQUIRE(test_glyph_struct.light_position == glm::vec3(0.0f, 0.0f, 0.0f));
 }
 
+TEST_CASE("2x2 world must be triangulated appropriately using bilinear interpolation", "[triangulate_2x2_world_bilinear]")
+{
+    uint32_t image_width = 2;
+    uint32_t image_height = 2;
+    uint32_t world_size = image_width * image_height;
+
+    GLuint* vertex_data;
+    vertex_data = new GLuint [world_size];
+    GLuint* vertex_pointer = vertex_data;
+    // x, z: height (y).
+#define SOUTHWEST_HEIGHT 1
+#define SOUTHEAST_HEIGHT 2
+#define NORTHWEST_HEIGHT 4
+#define NORTHEAST_HEIGHT 8
+
+    // 0, 0: 1.
+    *vertex_data++ = SOUTHWEST_HEIGHT;
+    // 1, 0: 2.
+    *vertex_data++ = SOUTHEAST_HEIGHT;
+    // 0, 1: 4.
+    *vertex_data++ = NORTHWEST_HEIGHT;
+    // 1, 1: 8.
+    *vertex_data++ = NORTHEAST_HEIGHT;
+
+    std::vector<glm::vec3> vertices; // vertices of the object.
+    std::vector<glm::vec2> UVs;      // UVs of the object.
+    std::vector<glm::vec3> normals;  // normals of the object.
+
+    TriangulateQuadsStruct triangulate_quads_struct;
+    triangulate_quads_struct.input_vertex_pointer = vertex_data;
+    triangulate_quads_struct.image_width = image_width;
+    triangulate_quads_struct.image_height = image_height;
+    triangulate_quads_struct.triangulation_type = "bilinear_interpolation";
+    triangulate_quads_struct.sphere_radius = NAN;
+    triangulate_quads_struct.spherical_world_struct = SphericalWorldStruct(); // not used, but is needed in the function call.
+
+    bool is_success = geometry::triangulate_quads(triangulate_quads_struct, vertices, UVs, normals);
+    REQUIRE(is_success == true);
+    REQUIRE(vertices.size() == 12);
+    REQUIRE(UVs.size() == 12);
+    REQUIRE(normals.size() == 12);
+}
+
 TEST_CASE("3x3 BMP world must be loaded appropriately", "[load_3x3_BMP_world]")
 {
     std::string image_path = "test3x3.bmp";
