@@ -83,6 +83,7 @@ namespace model
             std::cerr << "model file format: " << this->model_file_format << "\n";
         }
 
+        // Fill the index buffer.
         model::indexVBO(this->vertices, this->UVs, this->normals, this->indices, this->indexed_vertices, this->indexed_UVs, this->indexed_normals);
 
         // Load it into a VBO.
