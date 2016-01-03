@@ -709,8 +709,6 @@ namespace geometry
 
             // Compute the normal of the southwesternmost vertex.
             // Number of adjacent faces: 2.
-            glm::vec3 face_normal1;
-            glm::vec3 face_normal2;
             glm::vec3 vertex_normal;
 
             vertex_normal = NNE_FACE_NORMAL + ENE_FACE_NORMAL;
