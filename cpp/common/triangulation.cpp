@@ -183,34 +183,21 @@ namespace geometry
             std::vector<glm::vec3> &out_normals,
             uint32_t triangle_i)
     {
-        glm::vec3 vertex;
-        glm::vec2 uv;
-        glm::vec3 normal;
-
-        vertex = temp_vertices[vertexIndex[0]];
-        out_vertices.push_back(vertex);
-        uv = temp_UVs[uvIndex[0]];
-        out_UVs.push_back(uv);
-        normal = temp_normals[normalIndex[0]];
-        out_normals.push_back(normal);
+        out_vertices.push_back(temp_vertices[vertexIndex[0]]);
+        out_UVs.push_back(temp_UVs[uvIndex[0]]);
+        out_normals.push_back(temp_normals[normalIndex[0]]);
 
         // std::cout << "triangle " << triangle_i << ", vertex 0: (" << vertex.x << ", " << vertex.y << ", " << vertex.z << ").\n";
 
-        vertex = temp_vertices[vertexIndex[1]];
-        out_vertices.push_back(vertex);
-        uv = temp_UVs[uvIndex[1]];
-        out_UVs.push_back(uv);
-        normal = temp_normals[normalIndex[1]];
-        out_normals.push_back(normal);
+        out_vertices.push_back(temp_vertices[vertexIndex[1]]);
+        out_UVs.push_back(temp_UVs[uvIndex[1]]);
+        out_normals.push_back(temp_normals[normalIndex[1]]);
 
         // std::cout << "triangle " << triangle_i << ", vertex 1: (" << vertex.x << ", " << vertex.y << ", " << vertex.z << ").\n";
 
-        vertex = temp_vertices[vertexIndex[2]];
-        out_vertices.push_back(vertex);
-        uv = temp_UVs[uvIndex[2]];
-        out_UVs.push_back(uv);
-        normal = temp_normals[normalIndex[2]];
-        out_normals.push_back(normal);
+        out_vertices.push_back(temp_vertices[vertexIndex[2]]);
+        out_UVs.push_back(temp_UVs[uvIndex[2]]);
+        out_normals.push_back(temp_normals[normalIndex[2]]);
 
         // std::cout << "triangle " << triangle_i << ", vertex 2: (" << vertex.x << ", " << vertex.y << ", " << vertex.z << ").\n\n";
     }
