@@ -98,6 +98,9 @@ namespace model
         image_width  = *(uint32_t*) & (header[0x12]);
         image_height = *(uint32_t*) & (header[0x16]);
 
+        // Define world size.
+        uint32_t world_size = image_width * image_height;
+
         // Some BMP files are misformatted, guess missing information
         if (imageSize == 0)
         {
@@ -119,7 +122,7 @@ namespace model
         fclose(file);
 
         GLuint* vertex_data;
-        vertex_data = new GLuint [imageSize];
+        vertex_data = new GLuint [world_size];
 
         uint8_t *image_pointer;
         image_pointer = image_data;
