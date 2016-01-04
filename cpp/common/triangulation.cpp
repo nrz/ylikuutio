@@ -222,7 +222,7 @@ namespace geometry
 
         // std::cout << "cartesian vertex, x: " << cartesian_vertex.x << ", y: " << cartesian_vertex.y << ", z: " << cartesian_vertex.z << "\n";
         return cartesian_vertex;
-    };
+    }
 
     void transform_coordinates_to_curved_surface(
             TransformationStruct transformation_struct,
