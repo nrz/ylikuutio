@@ -73,6 +73,8 @@ add_executable(ylikuutio
     cpp/common/texture_loader.cpp
     cpp/common/texture_loader.hpp
     cpp/common/triangulation_macros.cpp
+    cpp/common/transformation.cpp
+    cpp/common/transformation.hpp
     cpp/common/triangulation.cpp
     cpp/common/triangulation.hpp
     cpp/common/heightmap_loader.cpp

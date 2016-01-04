@@ -20,6 +20,8 @@
 #include "cpp/common/glyph.hpp"
 #include "cpp/common/species.hpp"
 #include "cpp/common/object.hpp"
+#include "cpp/common/transformation.hpp"
+#include "cpp/common/transformation.cpp"
 #include "cpp/common/triangulation.hpp"
 #include "cpp/common/triangulation.cpp"
 #include "cpp/common/heightmap_loader.hpp"
