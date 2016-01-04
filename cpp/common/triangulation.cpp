@@ -189,6 +189,37 @@ namespace geometry
         double sphere_radius = triangulate_quads_struct.sphere_radius;
         SphericalWorldStruct spherical_world_struct = triangulate_quads_struct.spherical_world_struct;
 
+        const char* char_triangulation_type = triangulation_type.c_str();
+
+        bool is_bilinear_interpolation_in_use = false;
+        bool is_southwest_northeast_edges_in_use = false;
+        bool is_southeast_northwest_edges_in_use = false;
+        bool is_triangulation_type_valid = false;
+
+        if (strcmp(char_triangulation_type, "bilinear_interpolation") == 0)
+        {
+            is_bilinear_interpolation_in_use = true;
+            is_triangulation_type_valid = true;
+        }
+        else if ((strcmp(char_triangulation_type, "southwest_northeast_edges") == 0) || (strcmp(char_triangulation_type, "northeast_southwest_edges") == 0))
+        {
+            is_southwest_northeast_edges_in_use = true;
+            is_triangulation_type_valid = true;
+        }
+        else if ((strcmp(char_triangulation_type, "southeast_northwest_edges") == 0) || (strcmp(char_triangulation_type, "northwest_southeast_edges") == 0))
+        {
+            is_southeast_northwest_edges_in_use = true;
+            is_triangulation_type_valid = true;
+        }
+
+        std::cout << "triangulation type in use: " << triangulation_type << "\n";
+
+        if (!is_triangulation_type_valid)
+        {
+            std::cerr << "invalid triangulation type!\n";
+            return false;
+        }
+
         std::vector<GLuint> vertexIndices, uvIndices, normalIndices;
         std::vector<glm::vec3> temp_vertices;
         std::vector<glm::vec2> temp_UVs;
@@ -241,37 +272,6 @@ namespace geometry
                 texture_x ^= 1;
             }
             texture_y ^= 1;
-        }
-
-        const char* char_triangulation_type = triangulation_type.c_str();
-
-        bool is_bilinear_interpolation_in_use = false;
-        bool is_southwest_northeast_edges_in_use = false;
-        bool is_southeast_northwest_edges_in_use = false;
-        bool is_triangulation_type_valid = false;
-
-        if (strcmp(char_triangulation_type, "bilinear_interpolation") == 0)
-        {
-            is_bilinear_interpolation_in_use = true;
-            is_triangulation_type_valid = true;
-        }
-        else if ((strcmp(char_triangulation_type, "southwest_northeast_edges") == 0) || (strcmp(char_triangulation_type, "northeast_southwest_edges") == 0))
-        {
-            is_southwest_northeast_edges_in_use = true;
-            is_triangulation_type_valid = true;
-        }
-        else if ((strcmp(char_triangulation_type, "southeast_northwest_edges") == 0) || (strcmp(char_triangulation_type, "northwest_southeast_edges") == 0))
-        {
-            is_southeast_northwest_edges_in_use = true;
-            is_triangulation_type_valid = true;
-        }
-
-        std::cout << "triangulation type in use: " << triangulation_type << "\n";
-
-        if (!is_triangulation_type_valid)
-        {
-            std::cerr << "invalid triangulation type!\n";
-            return false;
         }
 
         uint32_t n_faces_for_each_vertex;
