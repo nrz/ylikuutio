@@ -263,7 +263,7 @@ namespace geometry
         // 1. Define the (GLfloat) vertices for vertices loaded from file, `push_back` to `temp_vertices`.
         // 2. Interpolate the (GLfloat) vertices between, using bilinear interpolation, `push_back` to `temp_vertices` and `temp_UVs`.
         // 3. Transform spherical coordinates loaded from file (and computed this far as being in horizontal plane) to a curved surface.
-        // 4. Transform interpolated coordinates (and computed this far as being in horizontal plane) to a curved surface.
+        // 4. For bilinear interpolation: Transform interpolated coordinates (and computed this far as being in horizontal plane) to a curved surface.
         // 5. Compute the face normals, `push_back` to `face_normals`.
         // 6. Compute the vertex normals for vertices loaded from file and for interpolated vertices (for `"bilinear_interpolation"`), `push_back` to `temp_normals`.
         // 7. Loop through all vertices and `geometry::output_triangle_vertices`.

@@ -52,6 +52,15 @@ namespace geometry
         bool is_bilinear_interpolation_in_use = transformation_struct.is_bilinear_interpolation_in_use;
         SphericalWorldStruct spherical_world_struct = transformation_struct.spherical_world_struct;
 
+        // 3. Transform spherical coordinates loaded from file (and computed this far as being in horizontal plane) to a curved surface.
+        //
+        // Wikipedia:
+        // https://en.wikipedia.org/wiki/List_of_common_coordinate_transformations#From_spherical_coordinates
+        //
+        // x = rho * sin(theta) * cos(phi)
+        // y = rho * sin(theta) * sin(phi)
+        // z = rho * cos(theta)
+
         std::cout << "transforming spherical coordinates loaded from file to cartesian coordinates.\n";
         std::cout << "radius: " << sphere_radius << "\n";
 
@@ -88,7 +97,7 @@ namespace geometry
 
         if (is_bilinear_interpolation_in_use)
         {
-            // 4. Transform interpolated coordinates (and computed this far as being in horizontal plane) to a curved surface.
+            // 4. For bilinear interpolation: Transform interpolated coordinates (and computed this far as being in horizontal plane) to a curved surface.
             //
             // Wikipedia:
             // https://en.wikipedia.org/wiki/List_of_common_coordinate_transformations#From_spherical_coordinates
