@@ -1,3 +1,6 @@
+#ifndef __TRIANGULATION_MACROS_CPP_INCLUDED
+#define __TRIANGULATION_MACROS_CPP_INCLUDED
+
 // for bilinear interpolation, southeast-northwest edges, and southwest-northeast edges.
 #define SOUTHWEST (current_vertex_i - image_width - 1)
 #define SOUTHEAST (current_vertex_i - image_width)
@@ -36,3 +39,5 @@
 #define NNW_FACE_NORMAL_FOR_SE_NW (geometry::get_face_normal_for_SE_NW(face_normal_vector_vec3, x, z, NNW_CODE_FOR_SE_NW, image_width))
 #define SW_FACE_NORMAL_FOR_SE_NW (geometry::get_face_normal_for_SE_NW(face_normal_vector_vec3, x, z, SW_CODE_FOR_SE_NW, image_width))
 #define NE_FACE_NORMAL_FOR_SE_NW (geometry::get_face_normal_for_SE_NW(face_normal_vector_vec3, x, z, NE_CODE_FOR_SE_NW, image_width))
+
+#endif

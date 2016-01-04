@@ -75,6 +75,10 @@ add_executable(ylikuutio
     cpp/common/triangulation_macros.cpp
     cpp/common/transformation.cpp
     cpp/common/transformation.hpp
+    cpp/common/indexing.cpp
+    cpp/common/indexing.hpp
+    cpp/common/bilinear_interpolation.cpp
+    cpp/common/bilinear_interpolation.hpp
     cpp/common/triangulation.cpp
     cpp/common/triangulation.hpp
     cpp/common/heightmap_loader.cpp
