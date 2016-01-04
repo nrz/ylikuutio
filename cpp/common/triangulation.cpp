@@ -224,6 +224,88 @@ namespace geometry
         return cartesian_vertex;
     };
 
+    void transform_coordinates_to_curved_surface(
+            TransformationStruct transformation_struct,
+            std::vector<glm::vec3> &temp_vertices)
+    {
+        uint32_t image_width = transformation_struct.image_width;
+        uint32_t image_height = transformation_struct.image_height;
+        double sphere_radius = transformation_struct.sphere_radius;
+        bool is_bilinear_interpolation_in_use = transformation_struct.is_bilinear_interpolation_in_use;
+        SphericalWorldStruct spherical_world_struct = transformation_struct.spherical_world_struct;
+
+        std::cout << "transforming spherical coordinates loaded from file to cartesian coordinates.\n";
+        std::cout << "radius: " << sphere_radius << "\n";
+
+        double latitude_step_in_degrees = spherical_world_struct.SRTM_latitude_step_in_degrees;
+        // double latitude_step_in_degrees = (360.0f / image_height); // for testing, creates a sphere always.
+        std::cout << "latitude step in degrees: " << latitude_step_in_degrees << "\n";
+
+        double longitude_step_in_degrees = spherical_world_struct.SRTM_longitude_step_in_degrees;
+        // double longitude_step_in_degrees = (360.0f / image_width); // for testing, creates a sphere always.
+        std::cout << "longitude step in degrees: " << longitude_step_in_degrees << "\n";
+
+        double current_latitude_in_degrees = spherical_world_struct.southern_latitude;
+
+        GLuint temp_vertices_i = 0;
+
+        // Loop through `temp_vertices` and transform all vertices from spherical coordinates to cartesian coordinates.
+        for (uint32_t z = 0; z < image_height; z++)
+        {
+            // loop through all latitudes.
+
+            double current_longitude_in_degrees = spherical_world_struct.western_longitude;
+
+            for (uint32_t x = 0; x < image_width; x++)
+            {
+                glm::vec3 spherical_world_vertex = temp_vertices[temp_vertices_i];
+                spherical_world_vertex.x = (GLfloat) current_longitude_in_degrees;
+                spherical_world_vertex.z = (GLfloat) current_latitude_in_degrees;
+                temp_vertices[temp_vertices_i++] = geometry::transform_planar_world_vertex_into_cartesian_vertex(spherical_world_vertex, sphere_radius);
+
+                current_longitude_in_degrees += longitude_step_in_degrees;
+            }
+            current_latitude_in_degrees += latitude_step_in_degrees;
+        }
+
+        if (is_bilinear_interpolation_in_use)
+        {
+            // 4. Transform interpolated coordinates (and computed this far as being in horizontal plane) to a curved surface.
+            //
+            // Wikipedia:
+            // https://en.wikipedia.org/wiki/List_of_common_coordinate_transformations#From_spherical_coordinates
+            //
+            // x = rho * sin(theta) * cos(phi)
+            // y = rho * sin(theta) * sin(phi)
+            // z = rho * cos(theta)
+
+            // 4. Transform interpolated coordinates (and computed this far as being in horizontal plane) to a curved surface.
+
+            std::cout << "transforming interpolated spherical coordinates to cartesian coordinates.\n";
+            std::cout << "radius: " << sphere_radius << "\n";
+
+            double current_latitude_in_degrees = spherical_world_struct.southern_latitude;
+
+            for (uint32_t z = 1; z < image_height; z++)
+            {
+                // loop through all latitudes.
+
+                double current_longitude_in_degrees = spherical_world_struct.western_longitude;
+
+                for (uint32_t x = 1; x < image_width; x++)
+                {
+                    glm::vec3 spherical_world_vertex = temp_vertices[temp_vertices_i];
+                    spherical_world_vertex.x = (GLfloat) current_longitude_in_degrees;
+                    spherical_world_vertex.z = (GLfloat) current_latitude_in_degrees;
+                    temp_vertices[temp_vertices_i++] = geometry::transform_planar_world_vertex_into_cartesian_vertex(spherical_world_vertex, sphere_radius);
+
+                    current_longitude_in_degrees += longitude_step_in_degrees;
+                }
+                current_latitude_in_degrees += latitude_step_in_degrees;
+            }
+        }
+    }
+
     void output_triangle_vertices(
             std::vector<glm::vec3> &temp_vertices,
             std::vector<glm::vec2> &temp_UVs,
@@ -545,76 +627,13 @@ namespace geometry
             // y = rho * sin(theta) * sin(phi)
             // z = rho * cos(theta)
 
-            std::cout << "transforming spherical coordinates loaded from file to cartesian coordinates.\n";
-            std::cout << "radius: " << sphere_radius << "\n";
-
-            double latitude_step_in_degrees = spherical_world_struct.SRTM_latitude_step_in_degrees;
-            // double latitude_step_in_degrees = (360.0f / image_height); // for testing, creates a sphere always.
-            std::cout << "latitude step in degrees: " << latitude_step_in_degrees << "\n";
-
-            double longitude_step_in_degrees = spherical_world_struct.SRTM_longitude_step_in_degrees;
-            // double longitude_step_in_degrees = (360.0f / image_width); // for testing, creates a sphere always.
-            std::cout << "longitude step in degrees: " << longitude_step_in_degrees << "\n";
-
-            double current_latitude_in_degrees = spherical_world_struct.southern_latitude;
-
-            GLuint temp_vertices_i = 0;
-
-            // Loop through `temp_vertices` and transform all vertices from spherical coordinates to cartesian coordinates.
-            for (uint32_t z = 0; z < image_height; z++)
-            {
-                // loop through all latitudes.
-
-                double current_longitude_in_degrees = spherical_world_struct.western_longitude;
-
-                for (uint32_t x = 0; x < image_width; x++)
-                {
-                    glm::vec3 spherical_world_vertex = temp_vertices[temp_vertices_i];
-                    spherical_world_vertex.x = (GLfloat) current_longitude_in_degrees;
-                    spherical_world_vertex.z = (GLfloat) current_latitude_in_degrees;
-                    temp_vertices[temp_vertices_i++] = geometry::transform_planar_world_vertex_into_cartesian_vertex(spherical_world_vertex, sphere_radius);
-
-                    current_longitude_in_degrees += longitude_step_in_degrees;
-                }
-                current_latitude_in_degrees += latitude_step_in_degrees;
-            }
-
-            if (is_bilinear_interpolation_in_use)
-            {
-                // 4. Transform interpolated coordinates (and computed this far as being in horizontal plane) to a curved surface.
-                //
-                // Wikipedia:
-                // https://en.wikipedia.org/wiki/List_of_common_coordinate_transformations#From_spherical_coordinates
-                //
-                // x = rho * sin(theta) * cos(phi)
-                // y = rho * sin(theta) * sin(phi)
-                // z = rho * cos(theta)
-
-                // 4. Transform interpolated coordinates (and computed this far as being in horizontal plane) to a curved surface.
-
-                std::cout << "transforming interpolated spherical coordinates to cartesian coordinates.\n";
-                std::cout << "radius: " << sphere_radius << "\n";
-
-                double current_latitude_in_degrees = spherical_world_struct.southern_latitude;
-
-                for (uint32_t z = 1; z < image_height; z++)
-                {
-                    // loop through all latitudes.
-
-                    double current_longitude_in_degrees = spherical_world_struct.western_longitude;
-
-                    for (uint32_t x = 1; x < image_width; x++)
-                    {
-                        glm::vec3 spherical_world_vertex = temp_vertices[temp_vertices_i];
-                        spherical_world_vertex.x = (GLfloat) current_longitude_in_degrees;
-                        spherical_world_vertex.z = (GLfloat) current_latitude_in_degrees;
-                        temp_vertices[temp_vertices_i++] = geometry::transform_planar_world_vertex_into_cartesian_vertex(spherical_world_vertex, sphere_radius);
-
-                        current_longitude_in_degrees += longitude_step_in_degrees;
-                    }
-                    current_latitude_in_degrees += latitude_step_in_degrees;
-                }
-            }
+            TransformationStruct transformation_struct;
+            transformation_struct.image_width = image_width;
+            transformation_struct.image_height = image_height;
+            transformation_struct.sphere_radius = sphere_radius;
+            transformation_struct.is_bilinear_interpolation_in_use = is_bilinear_interpolation_in_use;
+            transformation_struct.spherical_world_struct = spherical_world_struct;
+            geometry::transform_coordinates_to_curved_surface(transformation_struct, temp_vertices);
         }
         else
         {
