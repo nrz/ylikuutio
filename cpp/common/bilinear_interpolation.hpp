@@ -21,6 +21,17 @@
 
 namespace geometry
 {
+    // for bilinear interpolation.
+    enum BilinearDirections { SSW, WSW, WNW, NNW, NNE, ENE, ESE, SSE };
+
+    // for bilinear interpolation.
+    glm::vec3 get_face_normal(
+            std::vector<glm::vec3> &face_normal_data,
+            uint32_t x,
+            uint32_t z,
+            BilinearDirections compass_point_code,
+            uint32_t image_width);
+
     void interpolate_vertices_using_bilinear_interpolation(
             BilinearInterpolationStruct bilinear_interpolation_struct,
             std::vector<glm::vec3> &temp_vertices,
