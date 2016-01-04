@@ -278,6 +278,15 @@ typedef struct
     bool should_ylikuutio_use_real_texture_coordinates;
 } BilinearInterpolationStruct;
 
+typedef struct
+{
+    uint32_t image_width;
+    uint32_t image_height;
+    double sphere_radius;
+    bool is_bilinear_interpolation_in_use;
+    SphericalWorldStruct spherical_world_struct;
+} TransformationStruct;
+
 extern SphericalCoordinatesStruct spherical_position;
 
 #endif
