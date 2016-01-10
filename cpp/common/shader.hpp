@@ -37,7 +37,7 @@ namespace model
             ~Shader();
 
             // this method sets pointer to this shader to NULL, sets `parent_pointer` according to the input, and requests a new `childID` from the new world.
-            void bind_to_new_parent(model::World *new_world_pointer);
+            void bind_to_new_parent(model::World *new_scene_pointer);
 
             friend class World;
             friend class Material;

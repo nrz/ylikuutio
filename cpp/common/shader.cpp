@@ -72,9 +72,9 @@ namespace model
         set_child_pointer(childID, parent_pointer, this->texture_pointer_vector, this->free_textureID_queue);
     }
 
-    void Shader::bind_to_new_parent(model::World *new_world_pointer)
+    void Shader::bind_to_new_parent(model::World *new_scene_pointer)
     {
-        model::bind_child_to_new_parent<model::Shader*, model::World*>(this, new_world_pointer, this->parent_pointer->shader_pointer_vector, this->parent_pointer->free_shaderID_queue);
+        model::bind_child_to_new_parent<model::Shader*, model::World*>(this, new_scene_pointer, this->parent_pointer->shader_pointer_vector, this->parent_pointer->free_shaderID_queue);
     }
 
     void Shader::set_terrain_species_pointer(model::Species* terrain_species_pointer)
