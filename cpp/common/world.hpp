@@ -40,6 +40,8 @@
 //
 //     World
 //       ^
+//     Scene
+//       ^
 //     Shader
 //       ^
 //    Material
@@ -53,6 +55,8 @@
 //
 //     World
 //       ^
+//     Scene
+//       ^
 //     Shader
 //       ^
 //    Material
@@ -64,7 +68,8 @@
 //     Object
 //
 //
-// Deleting a `World` also deletes all shaders, materials, species, fonts, glyphs and objects that are binded to the same World.
+// Deleting a `World` also deletes all scenes, all shaders, materials, species, fonts, glyphs and objects that are binded to the same World.
+// Deleting a `Scene` also deletes all shaders, materials, species, fonts, glyphs and objects that are binded to the same World.
 // Deleting a `Shader` also deletes all materials, species, fonts, glyphs and objects that are binded to the same Shader.
 // Deleting a `Material` also deletes all species, fonts, glyphs and objects that are binded to the same Material.
 // Deleting a `Species` also deletes all objects that are binded to the same Species.
