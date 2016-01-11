@@ -86,6 +86,11 @@ std::string g_font_texture_filename = "Holstein.bmp";
 std::string g_font_file_format = "svg";
 std::string g_font_filename = "kongtext.svg";
 
+void do_work(WorldToVoidCallback callback, model::World* world_pointer)
+{
+    callback(world_pointer);
+}
+
 void cleanup(model::World* world_pointer)
 {
     std::cout << "Cleaning up.\n";
@@ -115,6 +120,8 @@ int main(void)
     // Initial Field of View
     // initialFoV = 45.0f;
     initialFoV = 60.0f;
+
+    WorldToVoidCallback cleanup_callback = NULL;
 
     bool does_suzanne_species_exist = true;
     bool does_suzanne_species_have_uvmap_texture = true;
@@ -165,6 +172,7 @@ int main(void)
 
     // Create the world, store it in `my_world`.
     model::World* my_world = new model::World();
+    cleanup_callback = &cleanup;
 
     // Create the shader, store it in `my_shader`.
     ShaderStruct shader_struct;
@@ -461,7 +469,8 @@ int main(void)
     while ((glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS)
             && (glfwWindowShouldClose(window) == 0));
 
-    cleanup(my_world);
+    // do cleanup.
+    do_work(cleanup_callback, my_world);
 
     // Delete the text's VBO, the shader and the texture
     text2D::cleanupText2D();
