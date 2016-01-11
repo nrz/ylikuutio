@@ -86,6 +86,12 @@ std::string g_font_texture_filename = "Holstein.bmp";
 std::string g_font_file_format = "svg";
 std::string g_font_filename = "kongtext.svg";
 
+void cleanup(model::World* world_pointer)
+{
+    std::cout << "Cleaning up.\n";
+    delete world_pointer;
+}
+
 int main(void)
 {
     // Initial position : on +Z
@@ -455,7 +461,7 @@ int main(void)
     while ((glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS)
             && (glfwWindowShouldClose(window) == 0));
 
-    delete my_world;
+    cleanup(my_world);
 
     // Delete the text's VBO, the shader and the texture
     text2D::cleanupText2D();
