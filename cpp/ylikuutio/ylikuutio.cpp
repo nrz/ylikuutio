@@ -95,6 +95,12 @@ void cleanup(model::World* world_pointer)
 {
     std::cout << "Cleaning up.\n";
     delete world_pointer;
+
+    // Delete the text's VBO, the shader and the texture
+    text2D::cleanupText2D();
+
+    // Close OpenGL window and terminate GLFW
+    glfwTerminate();
 }
 
 int main(void)
@@ -471,12 +477,6 @@ int main(void)
 
     // do cleanup.
     do_work(cleanup_callback, my_world);
-
-    // Delete the text's VBO, the shader and the texture
-    text2D::cleanupText2D();
-
-    // Close OpenGL window and terminate GLFW
-    glfwTerminate();
 
     return 0;
 }
