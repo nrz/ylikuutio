@@ -304,6 +304,7 @@ typedef bool (*VoidToBoolCallback)(void);
 typedef float (*VoidToFloatCallback)(void);
 typedef int (*VoidToIntCallback)(void);
 typedef void (*VoidToVoidCallback)(void);
+typedef void (*WorldToVoidCallback)(model::World*);
 
 extern SphericalCoordinatesStruct spherical_position;
 
