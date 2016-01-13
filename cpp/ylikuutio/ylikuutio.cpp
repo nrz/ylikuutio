@@ -91,7 +91,7 @@ void do_work(WorldToVoidCallback callback, model::World* world_pointer)
     callback(world_pointer);
 }
 
-void cleanup(model::World* world_pointer)
+void full_cleanup(model::World* world_pointer)
 {
     std::cout << "Cleaning up.\n";
     delete world_pointer;
@@ -178,7 +178,7 @@ int main(void)
 
     // Create the world, store it in `my_world`.
     model::World* my_world = new model::World();
-    cleanup_callback = &cleanup;
+    cleanup_callback = &full_cleanup;
 
     // Create the shader, store it in `my_shader`.
     ShaderStruct shader_struct;
