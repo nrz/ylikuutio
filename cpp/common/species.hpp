@@ -67,7 +67,6 @@ namespace model
             GLuint elementbuffer;
 
             model::Material *parent_pointer;          // pointer to the texture.
-            std::string triangulation_type;
 
             friend class Object;
             template<class T1>
@@ -94,6 +93,8 @@ namespace model
 
             std::vector<void*> object_pointer_vector;
             std::queue<GLuint> free_objectID_queue;
+
+            std::string triangulation_type;
     };
 }
 
