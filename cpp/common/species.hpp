@@ -61,11 +61,6 @@ namespace model
             std::vector<glm::vec2> indexed_UVs;
             std::vector<glm::vec3> indexed_normals;
 
-            GLuint vertexbuffer;
-            GLuint uvbuffer;
-            GLuint normalbuffer;
-            GLuint elementbuffer;
-
             model::Material *parent_pointer;          // pointer to the texture.
 
             friend class Object;
@@ -77,6 +72,8 @@ namespace model
                 friend void bind_child_to_new_parent(T1 child_pointer, T2 new_parent_pointer, std::vector<void*> &old_child_pointer_vector, std::queue<GLuint> &old_free_childID_queue);
             template<class T1>
                 friend void render_species_or_glyph(T1 species_or_glyph_pointer);
+            template<class T1>
+                friend void render_this_object(model::Object* object_pointer, model::Shader* shader_pointer);
 
         private:
             void bind_to_parent();
@@ -95,6 +92,11 @@ namespace model
             std::queue<GLuint> free_objectID_queue;
 
             std::string triangulation_type;
+
+            GLuint vertexbuffer;
+            GLuint uvbuffer;
+            GLuint normalbuffer;
+            GLuint elementbuffer;
     };
 }
 
