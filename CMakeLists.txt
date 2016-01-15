@@ -70,6 +70,7 @@ add_executable(ylikuutio
     cpp/common/shader_loader.hpp
     cpp/common/globals.cpp
     cpp/common/globals.hpp
+    cpp/common/callback.hpp
     cpp/common/texture_loader.cpp
     cpp/common/texture_loader.hpp
     cpp/common/triangulation_macros.cpp

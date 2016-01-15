@@ -8,6 +8,7 @@
 #endif
 
 #include "cpp/common/globals.hpp"
+#include "cpp/common/callback.hpp"
 #include "cpp/common/shader_loader.hpp"
 #include "cpp/common/texture_loader.hpp"
 #include "cpp/common/vboindexer.hpp"
