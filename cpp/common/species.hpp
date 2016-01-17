@@ -48,10 +48,6 @@ namespace model
             GLuint image_width;
             GLuint image_height;
 
-            GLuint vertexPosition_modelspaceID;
-            GLuint vertexUVID;
-            GLuint vertexNormal_modelspaceID;
-
             model::Material *parent_pointer;          // pointer to the texture.
 
             friend class Object;
@@ -84,6 +80,10 @@ namespace model
             std::queue<GLuint> free_objectID_queue;
 
             std::string triangulation_type;
+
+            GLuint vertexPosition_modelspaceID;
+            GLuint vertexUVID;
+            GLuint vertexNormal_modelspaceID;
 
             std::vector<glm::vec3> vertices;         // vertices of the object.
             std::vector<glm::vec2> UVs;              // UVs of the object.
