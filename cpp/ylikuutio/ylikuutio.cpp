@@ -289,14 +289,6 @@ int main(void)
     kongtext_font_struct.font_filename = g_font_filename;
     model::Font* kongtext_font = new model::Font(kongtext_font_struct);
 
-    std::cout << "number of vertices: " << terrain_species->vertices.size() << ".\n";
-    std::cout << "number of UVs: " << terrain_species->UVs.size() << ".\n";
-    std::cout << "number of normals: " << terrain_species->normals.size() << ".\n";
-
-    std::cout << "number of indexed vertices: " << terrain_species->indexed_vertices.size() << ".\n";
-    std::cout << "number of indexed UVs: " << terrain_species->indexed_UVs.size() << ".\n";
-    std::cout << "number of indexed normals: " << terrain_species->indexed_normals.size() << ".\n";
-
     // Initialize our little text library with the Holstein font
     const char* char_g_font_texture_filename = g_font_texture_filename.c_str();
     const char* char_g_font_texture_file_format = g_font_texture_file_format.c_str();

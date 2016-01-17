@@ -52,15 +52,6 @@ namespace model
             GLuint vertexUVID;
             GLuint vertexNormal_modelspaceID;
 
-            std::vector<glm::vec3> vertices;         // vertices of the object.
-            std::vector<glm::vec2> UVs;              // UVs of the object.
-            std::vector<glm::vec3> normals;          // normals of the object.
-
-            std::vector<GLuint> indices;             // the deleted vertices will be reused (though it is not required, if there's enough memory).
-            std::vector<glm::vec3> indexed_vertices;
-            std::vector<glm::vec2> indexed_UVs;
-            std::vector<glm::vec3> indexed_normals;
-
             model::Material *parent_pointer;          // pointer to the texture.
 
             friend class Object;
@@ -74,6 +65,7 @@ namespace model
                 friend void render_species_or_glyph(T1 species_or_glyph_pointer);
             template<class T1>
                 friend void render_this_object(model::Object* object_pointer, model::Shader* shader_pointer);
+            friend GLfloat get_ground_level(model::Species* terrain_species, glm::vec3 position);
 
         private:
             void bind_to_parent();
@@ -92,6 +84,15 @@ namespace model
             std::queue<GLuint> free_objectID_queue;
 
             std::string triangulation_type;
+
+            std::vector<glm::vec3> vertices;         // vertices of the object.
+            std::vector<glm::vec2> UVs;              // UVs of the object.
+            std::vector<glm::vec3> normals;          // normals of the object.
+
+            std::vector<GLuint> indices;             // the deleted vertices will be reused (though it is not required, if there's enough memory).
+            std::vector<glm::vec3> indexed_vertices;
+            std::vector<glm::vec2> indexed_UVs;
+            std::vector<glm::vec3> indexed_normals;
 
             GLuint vertexbuffer;
             GLuint uvbuffer;
