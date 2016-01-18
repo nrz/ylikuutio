@@ -287,7 +287,6 @@ typedef struct
     SphericalWorldStruct spherical_world_struct;
 } TransformationStruct;
 
-
 extern SphericalCoordinatesStruct spherical_position;
 
 #endif
