@@ -44,12 +44,6 @@ namespace model
             std::string color_channel;               // color channel in use: `"red"`, `"green"`, `"blue"`, `"mean"` or `"all"`.
             glm::vec3 light_position;                // light position.
 
-            // The rest fields are created in the constructor.
-            GLuint image_width;
-            GLuint image_height;
-
-            model::Material *parent_pointer;          // pointer to the texture.
-
             friend class Object;
             template<class T1>
                 friend void render_children(std::vector<void*> &child_pointer_vector);
@@ -80,6 +74,11 @@ namespace model
             std::queue<GLuint> free_objectID_queue;
 
             std::string triangulation_type;
+
+            GLuint image_width;
+            GLuint image_height;
+
+            model::Material *parent_pointer;         // pointer to the texture.
 
             GLuint vertexPosition_modelspaceID;
             GLuint vertexUVID;
