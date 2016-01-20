@@ -29,8 +29,6 @@ namespace model
 
     void set_child_pointer(GLuint childID, void* child_pointer, std::vector<void*> &child_pointer_vector, std::queue<GLuint> &free_childID_queue);
     GLuint get_childID(std::vector<void*> &child_pointer_vector, std::queue<GLuint> &free_childID_queue);
-    GLfloat get_ground_level(model::Species* terrain_species, glm::vec3 position);
-    GLfloat get_floor_level(model::Species* terrain_species, glm::vec3 position);
 }
 
 #endif

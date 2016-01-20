@@ -8,6 +8,7 @@
 #endif
 
 #include "world.hpp"
+#include "ground_level.hpp"
 #include "shader.hpp"
 
 // Include GLEW

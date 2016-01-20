@@ -92,6 +92,8 @@ add_executable(ylikuutio
     cpp/common/font_loader.hpp
     cpp/common/model_common_functions.cpp
     cpp/common/model_common_functions.hpp
+    cpp/common/ground_level.cpp
+    cpp/common/ground_level.hpp
     cpp/common/model_templates.hpp
     cpp/common/world.cpp
     cpp/common/world.hpp
