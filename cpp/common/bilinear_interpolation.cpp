@@ -10,6 +10,7 @@
 #endif
 
 // Include standard headers
+#include <cmath>    // NAN
 #include <iostream>
 #include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector

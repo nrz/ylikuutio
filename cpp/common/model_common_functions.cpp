@@ -20,6 +20,7 @@
 #include "species.hpp"
 
 // Include standard headers
+#include <cmath>     // NAN
 #include <vector>    // std::vector
 
 namespace model

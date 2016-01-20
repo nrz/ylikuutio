@@ -22,6 +22,7 @@
 #endif
 
 // Include standard headers
+#include <cmath>    // NAN
 #include <cstring>  // strcmp
 #include <iostream>
 #include <string>   // std::string
