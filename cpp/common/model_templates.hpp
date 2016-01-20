@@ -44,7 +44,6 @@ namespace model
     void set_child_pointer(GLuint childID, void* child_pointer, std::vector<void*> &child_pointer_vector, std::queue<GLuint> &free_childID_queue);
     GLuint get_childID(std::vector<void*> &child_pointer_vector, std::queue<GLuint> &free_childID_queue);
 
-    // template<typename T1>
     template<class T1>
         void bind_child_to_parent(T1 child_pointer, std::vector<void*> &child_pointer_vector, std::queue<GLuint> &free_childID_queue)
         {
@@ -69,7 +68,6 @@ namespace model
             child_pointer->bind_to_parent();
         }
 
-    // template<typename T1>
     template<class T1>
         void delete_children(std::vector<void*> &child_pointer_vector)
         {
@@ -79,7 +77,6 @@ namespace model
             }
         }
 
-    // template<typename T1>
     template<class T1>
         void render_children(std::vector<void*> &child_pointer_vector)
         {

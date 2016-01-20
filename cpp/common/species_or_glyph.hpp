@@ -7,7 +7,6 @@ namespace model
 {
     class Object;
 
-    // template<typename T1>
     template<class T1>
         void render_species_or_glyph(T1 species_or_glyph_pointer)
         {
