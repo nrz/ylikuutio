@@ -1,3 +1,6 @@
+#include "model_common_functions.hpp"
+#include "species.hpp"
+
 // Include GLEW
 #ifndef __GL_GLEW_H_INCLUDED
 #define __GL_GLEW_H_INCLUDED
@@ -15,9 +18,6 @@
 #define __GLM_GLM_HPP_INCLUDED
 #include <glm/glm.hpp> // glm
 #endif
-
-#include "model_common_functions.hpp"
-#include "species.hpp"
 
 // Include standard headers
 #include <cmath>     // NAN
