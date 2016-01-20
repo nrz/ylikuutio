@@ -34,7 +34,7 @@
 #include <glm/gtx/quaternion.hpp> // glm::toMat4
 #endif
 
-#include "model_common_functions.hpp"
+#include "hierarchy.hpp"
 
 // Include standard headers
 #include <vector>    // std::vector

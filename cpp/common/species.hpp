@@ -3,7 +3,7 @@
 
 #include "material.hpp"
 #include "ground_level.hpp"
-#include "model_common_functions.hpp"
+#include "hierarchy.hpp"
 #include "model_templates.hpp"
 #include "species_or_glyph.hpp"
 

@@ -4,7 +4,7 @@
 #include "shader.hpp"
 #include "species.hpp"
 #include "glyph.hpp"
-#include "model_common_functions.hpp"
+#include "hierarchy.hpp"
 #include "model_templates.hpp"
 
 // Include GLEW

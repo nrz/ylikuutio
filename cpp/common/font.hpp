@@ -2,7 +2,7 @@
 #define __FONT_HPP_INCLUDED
 
 #include "globals.hpp"
-#include "model_common_functions.hpp"
+#include "hierarchy.hpp"
 #include "model_templates.hpp"
 #include "material.hpp"
 

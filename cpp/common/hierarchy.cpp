@@ -1,4 +1,4 @@
-#include "model_common_functions.hpp"
+#include "hierarchy.hpp"
 #include "species.hpp"
 
 // Include standard headers

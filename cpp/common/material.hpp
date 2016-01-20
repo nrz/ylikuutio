@@ -3,7 +3,7 @@
 
 #include "globals.hpp"
 #include "shader.hpp"
-#include "model_common_functions.hpp"
+#include "hierarchy.hpp"
 #include "model_templates.hpp"
 
 // Include GLEW

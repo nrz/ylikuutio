@@ -1,5 +1,5 @@
 #include "graph.hpp"
-#include "model_common_functions.hpp"
+#include "hierarchy.hpp"
 #include "model_templates.hpp"
 #include "node.hpp"
 
