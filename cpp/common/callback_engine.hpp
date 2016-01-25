@@ -1,11 +1,12 @@
-#ifndef __CALLBACK_HPP_INCLUDED
-#define __CALLBACK_HPP_INCLUDED
+#ifndef __CALLBACK_ENGINE_HPP_INCLUDED
+#define __CALLBACK_ENGINE_HPP_INCLUDED
 
-#include "callback.hpp"
 #include "any_value.hpp"
 
 // Include standard headers
 #include <cmath>         // NAN
+#include <queue>         // std::queue
+#include <stdint.h>      // uint32_t etc.
 #include <string>        // std::string
 #include <unordered_map> // std::unordered_map
 #include <vector>        // std::vector
@@ -36,13 +37,6 @@ typedef void (*WorldToVoidCallback)(model::World*);
 
 namespace callback_system
 {
-    class CallbackParameter;
-}
-
-typedef AnyValue (*InputParametersToAnyValueCallback)(std::vector<callback_system::CallbackParameter*>); 
-
-namespace callback_system
-{
     class CallbackObject;
 
     class CallbackEngine
@@ -50,19 +44,28 @@ namespace callback_system
         // `CallbackEngine` is an object that contains some callbacks and hashmaps that are used for input and output parameters.
         // `CallbackEngine` provides a way to create callback chains.
         //
-        // How to use:
-        // 1. Create a new `CallbackEngine`.
+        // How to use.
+        // 1. Create a new `CallbackEngine`. No callbacks have been
+        //    defined yet. Calling `CallbackEngine.execute()` at this
+        //    point will simply go through an empty vector and
+        //    practically won't do anything interesting.
         // 2. Create a new `CallbackObject`, give pointer to the
         //    recently created `CallbackEngine` as input parameter.
-        // 3. If the newly created `CallbackObject` has
-        //    input parameter[s], create the first input parameter
-        //    by calling `add_input_parameter`.
+        // 3. If the callback has parameter[s], create a new
+        //    `CallbackParameter` for each parameter, give `CallbackObject`
+        //    as input parameter for the `CallbackParameter` constructor.
 
         public:
             // constructor.
             CallbackEngine();
 
-            // setter functions for callbacks and callback objects.
+            // destructor.
+            ~CallbackEngine();
+
+            // this method sets a callback object pointer.
+            void set_callback_object_pointer(uint32_t childID, void* parent_pointer);
+
+            // getter functions for callbacks and callback objects.
             bool get_bool(std::string name);
             float get_float(std::string name);
             double get_double(std::string name);
@@ -82,7 +85,8 @@ namespace callback_system
             AnyValue execute();
 
         private:
-            std::vector<callback_system::CallbackObject> callback_objects;
+            std::vector<void*> callback_object_pointer_vector;
+            std::queue<uint32_t> free_callback_objectID_queue;
 
             std::unordered_map<std::string, bool> bool_hashmap;
             std::unordered_map<std::string, float> float_hashmap;
@@ -90,55 +94,6 @@ namespace callback_system
             std::unordered_map<std::string, int32_t> int32_t_hashmap;
             std::unordered_map<std::string, uint32_t> uint32_t_hashmap;
             std::unordered_map<std::string, void*> void_pointer_hashmap;
-    };
-
-    class CallbackObject
-    {
-        // CallbackObject is an object that contains a single callback.
-
-        public:
-            // constructor.
-            CallbackObject(callback_system::CallbackEngine* callback_engine_pointer);
-
-            // constructor.
-            CallbackObject(InputParametersToAnyValueCallback callback, callback_system::CallbackEngine* callback_engine_pointer);
-
-            // add reference to an input variable.
-            // this does not store the value to an appropriate hashmap.
-            // storing the value must be done before or after this call.
-            // each type has its own namespace!
-            void add_input_parameter(std::string name, AnyValue any_value, bool is_reference);
-
-            // execute this callback.
-            AnyValue execute();
-
-            callback_system::CallbackEngine* callback_engine_pointer;
-
-            std::string output_type;
-            std::string output_variable_name;
-            std::vector<callback_system::CallbackParameter*> input_parameters;
-
-            InputParametersToAnyValueCallback callback;
-    };
-
-    class CallbackParameter
-    {
-        public:
-
-            // constructor.
-            CallbackParameter(std::string name, AnyValue any_value, bool is_reference, callback_system::CallbackObject* callback_object);
-
-            std::string name;
-            AnyValue any_value;
-            bool is_reference; // if true, the value is read from the hashmap. if false, then the value is read from the union.
-    };
-
-    class BoolCallbackParameter : CallbackParameter
-    {
-        public:
-
-            // constructor.
-            BoolCallbackParameter();
     };
 }
 

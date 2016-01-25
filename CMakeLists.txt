@@ -71,8 +71,12 @@ add_executable(ylikuutio
     cpp/common/globals.cpp
     cpp/common/globals.hpp
     cpp/common/any_value.hpp
-    cpp/common/callback.cpp
-    cpp/common/callback.hpp
+    cpp/common/callback_engine.cpp
+    cpp/common/callback_engine.hpp
+    cpp/common/callback_object.cpp
+    cpp/common/callback_object.hpp
+    cpp/common/callback_parameter.cpp
+    cpp/common/callback_parameter.hpp
     cpp/common/texture_loader.cpp
     cpp/common/texture_loader.hpp
     cpp/common/triangulation_macros.cpp
