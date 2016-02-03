@@ -1,7 +1,7 @@
 #include "callback_object.hpp"
 #include "callback_parameter.hpp"
-#include "any_value.hpp"
-#include "globals.hpp"
+#include "cpp/common/any_value.hpp"
+#include "cpp/common/globals.hpp"
 
 // Include standard headers
 #include <iostream>

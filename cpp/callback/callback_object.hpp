@@ -1,10 +1,10 @@
 #ifndef __CALLBACK_OBJECT_HPP_INCLUDED
 #define __CALLBACK_OBJECT_HPP_INCLUDED
 
-#include "any_value.hpp"
+#include "cpp/common/any_value.hpp"
 #include "callback_engine.hpp"
 #include "callback_parameter.hpp"
-#include "globals.hpp"
+#include "cpp/common/globals.hpp"
 
 // Include standard headers
 #include <cmath>         // NAN

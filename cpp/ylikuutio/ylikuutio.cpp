@@ -8,9 +8,9 @@
 #endif
 
 #include "cpp/common/globals.hpp"
-#include "cpp/common/callback_engine.hpp"
-#include "cpp/common/callback_object.hpp"
-#include "cpp/common/callback_parameter.hpp"
+#include "cpp/callback/callback_engine.hpp"
+#include "cpp/callback/callback_object.hpp"
+#include "cpp/callback/callback_parameter.hpp"
 #include "cpp/common/shader_loader.hpp"
 #include "cpp/common/texture_loader.hpp"
 #include "cpp/common/vboindexer.hpp"
