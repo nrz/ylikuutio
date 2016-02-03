@@ -105,10 +105,10 @@ add_executable(ylikuutio
     cpp/common/shader.hpp
     cpp/common/material.cpp
     cpp/common/material.hpp
-    cpp/common/graph.cpp
-    cpp/common/graph.hpp
-    cpp/common/node.cpp
-    cpp/common/node.hpp
+    cpp/graph/graph.cpp
+    cpp/graph/graph.hpp
+    cpp/graph/node.cpp
+    cpp/graph/node.hpp
     cpp/common/species_or_glyph.hpp
     cpp/common/species.cpp
     cpp/common/species.hpp

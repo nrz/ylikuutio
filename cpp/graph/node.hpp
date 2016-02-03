@@ -11,10 +11,10 @@
 #include <queue>     // std::queue
 #include <algorithm> // std::find
 
-#include "globals.hpp"
+#include "cpp/common/globals.hpp"
 #include "graph.hpp"
-#include "hierarchy.hpp"
-#include "model_templates.hpp"
+#include "cpp/common/hierarchy.hpp"
+#include "cpp/common/model_templates.hpp"
 
 namespace model
 {
