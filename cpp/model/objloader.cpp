@@ -9,8 +9,9 @@
 #include "objloader.hpp"
 
 // Include standard headers
-#include <iostream>
+#include <cstddef>  // NULL
 #include <cstring>  // strcmp
+#include <iostream> // std::cout, std::cin, std::cerr
 #include <string>   // std::string
 #include <vector>   // std::vector
 #include <stdio.h>

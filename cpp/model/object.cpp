@@ -2,6 +2,10 @@
 #include "glyph.hpp"
 #include "species.hpp"
 
+// Include standard headers
+#include <cstddef>  // NULL
+#include <iostream> // std::cout, std::cin, std::cerr
+
 namespace model
 {
     void Object::bind_to_parent()

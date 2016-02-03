@@ -11,18 +11,18 @@
 #include "cpp/callback/callback_engine.hpp"
 #include "cpp/callback/callback_object.hpp"
 #include "cpp/callback/callback_parameter.hpp"
-#include "cpp/common/shader_loader.hpp"
-#include "cpp/common/texture_loader.hpp"
-#include "cpp/common/vboindexer.hpp"
-#include "cpp/common/text2D.hpp"
-#include "cpp/common/text3D.hpp"
-#include "cpp/common/world.hpp"
-#include "cpp/common/shader.hpp"
-#include "cpp/common/material.hpp"
-#include "cpp/common/font.hpp"
-#include "cpp/common/glyph.hpp"
-#include "cpp/common/species.hpp"
-#include "cpp/common/object.hpp"
+#include "cpp/model/shader_loader.hpp"
+#include "cpp/model/texture_loader.hpp"
+#include "cpp/model/vboindexer.hpp"
+#include "cpp/model/text2D.hpp"
+#include "cpp/model/text3D.hpp"
+#include "cpp/model/world.hpp"
+#include "cpp/model/shader.hpp"
+#include "cpp/model/material.hpp"
+#include "cpp/model/font.hpp"
+#include "cpp/model/glyph.hpp"
+#include "cpp/model/species.hpp"
+#include "cpp/model/object.hpp"
 
 // Include GLEW
 #ifndef __GL_GLEW_H_INCLUDED
@@ -45,6 +45,7 @@ GLFWwindow* window;
 #endif
 
 // Include standard headers
+#include <cstddef>  // NULL
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <string>   // std::string
 #include <vector>   // std::vector

@@ -42,6 +42,7 @@
 
 // Include standard headers
 #include <cmath>    // NAN
+#include <cstddef>  // NULL
 #include <string>   // std::string
 #include <vector>   // std::vector
 #include <stdint.h> // uint32_t etc.

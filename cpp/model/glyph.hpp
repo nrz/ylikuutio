@@ -2,7 +2,7 @@
 #define __GLYPH_HPP_INCLUDED
 
 #include "font.hpp"
-#include "hierarchy.hpp"
+#include "cpp/common/hierarchy.hpp"
 #include "model_templates.hpp"
 #include "species_or_glyph.hpp"
 

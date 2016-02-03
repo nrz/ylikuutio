@@ -18,7 +18,7 @@
 #endif
 
 // Include standard headers
-#include <iostream>
+#include <iostream> // std::cout, std::cin, std::cerr
 #include <vector>   // std::vector
 #include <stdint.h> // uint32_t etc.
 

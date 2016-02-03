@@ -1,8 +1,8 @@
 #ifndef __FONT_HPP_INCLUDED
 #define __FONT_HPP_INCLUDED
 
-#include "globals.hpp"
-#include "hierarchy.hpp"
+#include "cpp/common/globals.hpp"
+#include "cpp/common/hierarchy.hpp"
 #include "model_templates.hpp"
 #include "material.hpp"
 
@@ -13,10 +13,10 @@
 #endif
 
 // Include standard headers
-#include <iostream>
-#include <string>    // std::string
-#include <vector>    // std::vector
-#include <queue>     // std::queue
+#include <iostream> // std::cout, std::cin, std::cerr
+#include <string>   // std::string
+#include <vector>   // std::vector
+#include <queue>    // std::queue
 
 namespace model
 {

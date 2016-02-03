@@ -9,7 +9,8 @@
 #endif
 
 // Include standard headers
-#include <string>    // std::string
+#include <cstddef>  // NULL
+#include <string>   // std::string
 
 namespace model
 {

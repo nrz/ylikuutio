@@ -4,8 +4,8 @@
 #endif
 
 #include "heightmap_loader.hpp"
-#include "triangulation.hpp"
-#include "globals.hpp"
+#include "cpp/common/triangulation.hpp"
+#include "cpp/common/globals.hpp"
 
 // Include GLEW
 #ifndef __GL_GLEW_H_INCLUDED
@@ -22,7 +22,7 @@
 // Include standard headers
 #include <cmath>    // NAN
 #include <cstring>  // strcmp
-#include <iostream>
+#include <iostream> // std::cout, std::cin, std::cerr
 #include <string>   // std::string
 #include <string.h> // strcmp
 #include <vector>   // std::vector

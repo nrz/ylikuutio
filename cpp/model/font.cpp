@@ -1,5 +1,5 @@
 #include "font.hpp"
-#include "hierarchy.hpp"
+#include "cpp/common/hierarchy.hpp"
 #include "model_templates.hpp"
 #include "font_loader.hpp"
 #include "glyph.hpp"

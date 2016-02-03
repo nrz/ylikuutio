@@ -65,73 +65,84 @@ add_definitions(
 
 # Ylikuutio
 add_executable(ylikuutio
-    cpp/ylikuutio/ylikuutio.cpp
-    cpp/common/shader_loader.cpp
-    cpp/common/shader_loader.hpp
-    cpp/common/globals.cpp
-    cpp/common/globals.hpp
-    cpp/common/any_value.hpp
+    # callback, in alphabetical order
     cpp/callback/callback_engine.cpp
     cpp/callback/callback_engine.hpp
     cpp/callback/callback_object.cpp
     cpp/callback/callback_object.hpp
     cpp/callback/callback_parameter.cpp
     cpp/callback/callback_parameter.hpp
-    cpp/common/texture_loader.cpp
-    cpp/common/texture_loader.hpp
-    cpp/common/triangulation_macros.cpp
-    cpp/common/transformation.cpp
-    cpp/common/transformation.hpp
-    cpp/common/indexing.cpp
-    cpp/common/indexing.hpp
+
+    # common, in alphabetical order
+    cpp/common/any_value.hpp
     cpp/common/bilinear_interpolation.cpp
     cpp/common/bilinear_interpolation.hpp
-    cpp/common/triangulation.cpp
-    cpp/common/triangulation.hpp
-    cpp/common/heightmap_loader.cpp
-    cpp/common/heightmap_loader.hpp
-    cpp/common/objloader.cpp
-    cpp/common/objloader.hpp
-    cpp/common/font_loader.cpp
-    cpp/common/font_loader.hpp
+    cpp/common/indexing.cpp
+    cpp/common/indexing.hpp
+    cpp/common/globals.cpp
+    cpp/common/globals.hpp
     cpp/common/hierarchy.cpp
     cpp/common/hierarchy.hpp
-    cpp/common/ground_level.cpp
-    cpp/common/ground_level.hpp
-    cpp/common/model_templates.hpp
-    cpp/common/world.cpp
-    cpp/common/world.hpp
-    cpp/common/shader.cpp
-    cpp/common/shader.hpp
-    cpp/common/material.cpp
-    cpp/common/material.hpp
+    cpp/common/transformation.cpp
+    cpp/common/transformation.hpp
+    cpp/common/triangulation.cpp
+    cpp/common/triangulation.hpp
+    cpp/common/triangulation_macros.cpp
+
+    # graph, in alphabetical order.
     cpp/graph/graph.cpp
     cpp/graph/graph.hpp
     cpp/graph/node.cpp
     cpp/graph/node.hpp
-    cpp/common/species_or_glyph.hpp
-    cpp/common/species.cpp
-    cpp/common/species.hpp
-    cpp/common/font.cpp
-    cpp/common/font.hpp
-    cpp/common/glyph.cpp
-    cpp/common/glyph.hpp
-    cpp/common/object.cpp
-    cpp/common/object.hpp
-    cpp/common/vboindexer.cpp
-    cpp/common/vboindexer.hpp
-    cpp/common/text2D.cpp
-    cpp/common/text2D.hpp
-    cpp/common/text3D.hpp
-    cpp/common/text3D.cpp
 
+    # model, in alphabetical order
+    cpp/model/font.cpp
+    cpp/model/font.hpp
+    cpp/model/font_loader.cpp
+    cpp/model/font_loader.hpp
+    cpp/model/glyph.cpp
+    cpp/model/glyph.hpp
+    cpp/model/ground_level.cpp
+    cpp/model/ground_level.hpp
+    cpp/model/heightmap_loader.cpp
+    cpp/model/heightmap_loader.hpp
+    cpp/model/material.cpp
+    cpp/model/material.hpp
+    cpp/model/model_templates.hpp
+    cpp/model/object.cpp
+    cpp/model/object.hpp
+    cpp/model/objloader.cpp
+    cpp/model/objloader.hpp
+    cpp/model/shader.cpp
+    cpp/model/shader.hpp
+    cpp/model/shader_loader.cpp
+    cpp/model/shader_loader.hpp
+    cpp/model/species.cpp
+    cpp/model/species.hpp
+    cpp/model/species_or_glyph.hpp
+    cpp/model/text2D.cpp
+    cpp/model/text2D.hpp
+    cpp/model/text3D.hpp
+    cpp/model/text3D.cpp
+    cpp/model/texture_loader.cpp
+    cpp/model/texture_loader.hpp
+    cpp/model/vboindexer.cpp
+    cpp/model/vboindexer.hpp
+    cpp/model/world.cpp
+    cpp/model/world.hpp
+
+    # shaders, in alphabetical order
+    cpp/common/StandardShading.fragmentshader
+    cpp/common/StandardShading.vertexshader
     cpp/common/TransformVertexShader.vertexshader
     cpp/common/TextureFragmentShader.fragmentshader
-    cpp/common/StandardShading.vertexshader
-    cpp/common/StandardShading.fragmentshader
-    cpp/common/TextVertexShader.vertexshader
     cpp/common/TextVertexShader.fragmentshader
+    cpp/common/TextVertexShader.vertexshader
+
+    # ylikuutio, in alphabetical order
+    cpp/ylikuutio/ylikuutio.cpp
     )
+
 configure_file(cpp/common/TransformVertexShader.vertexshader TransformVertexShader.vertexshader COPYONLY)
 configure_file(cpp/common/TextureFragmentShader.fragmentshader TextureFragmentShader.fragmentshader COPYONLY)
 configure_file(cpp/common/StandardShading.vertexshader StandardShading.vertexshader COPYONLY)

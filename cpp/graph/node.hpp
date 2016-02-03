@@ -14,7 +14,7 @@
 #include "cpp/common/globals.hpp"
 #include "graph.hpp"
 #include "cpp/common/hierarchy.hpp"
-#include "cpp/common/model_templates.hpp"
+#include "cpp/model/model_templates.hpp"
 
 namespace model
 {

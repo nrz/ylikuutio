@@ -11,7 +11,7 @@
 
 // Include standard headers
 #include <cmath>    // NAN
-#include <iostream>
+#include <iostream> // std::cout, std::cin, std::cerr
 #include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
 

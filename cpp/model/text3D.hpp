@@ -1,7 +1,7 @@
 #ifndef TEXT3D_HPP
 #define TEXT3D_HPP
 
-#include "globals.hpp"
+#include "cpp/common/globals.hpp"
 
 namespace text3D
 {

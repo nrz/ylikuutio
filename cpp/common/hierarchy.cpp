@@ -1,8 +1,8 @@
 #include "hierarchy.hpp"
-#include "species.hpp"
 
 // Include standard headers
 #include <cmath>     // NAN
+#include <cstddef>   // NULL
 #include <queue>     // std::queue
 #include <stdint.h>  // uint32_t etc.
 #include <vector>    // std::vector

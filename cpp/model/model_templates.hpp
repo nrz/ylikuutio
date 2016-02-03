@@ -34,9 +34,10 @@
 #include <glm/gtx/quaternion.hpp> // glm::toMat4
 #endif
 
-#include "hierarchy.hpp"
+#include "cpp/common/hierarchy.hpp"
 
 // Include standard headers
+#include <cstddef>   // NULL
 #include <vector>    // std::vector
 
 namespace model

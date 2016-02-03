@@ -24,7 +24,7 @@
 // Include standard headers
 #include <cmath>    // NAN
 #include <cstring>  // strcmp
-#include <iostream>
+#include <iostream> // std::cout, std::cin, std::cerr
 #include <string>   // std::string
 #include <string.h> // strcmp
 #include <vector>   // std::vector

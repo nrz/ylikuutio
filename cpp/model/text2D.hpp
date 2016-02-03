@@ -1,7 +1,7 @@
 #ifndef TEXT2D_HPP
 #define TEXT2D_HPP
 
-#include "globals.hpp"
+#include "cpp/common/globals.hpp"
 
 // Include GLEW
 #ifndef __GL_GLEW_H_INCLUDED

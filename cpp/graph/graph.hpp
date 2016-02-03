@@ -7,9 +7,10 @@
 #include <GL/glew.h> // GLfloat, GLuint etc.
 #endif
 
-#include <iostream>
-#include <vector>    // std::vector
-#include <queue>     // std::queue
+// Include standard headers
+#include <iostream> // std::cout, std::cin, std::cerr
+#include <vector>   // std::vector
+#include <queue>    // std::queue
 
 namespace model
 {

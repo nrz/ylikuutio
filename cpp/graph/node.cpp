@@ -6,6 +6,9 @@
 #include <GL/glew.h> // GLfloat, GLuint etc.
 #endif
 
+// Include standard headers
+#include <iostream> // std::cout, std::cin, std::cerr
+
 namespace model
 {
     void Node::bind_to_parent()

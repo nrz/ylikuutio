@@ -1,9 +1,9 @@
 #ifndef __TEXTURE_HPP_INCLUDED
 #define __TEXTURE_HPP_INCLUDED
 
-#include "globals.hpp"
+#include "cpp/common/globals.hpp"
 #include "shader.hpp"
-#include "hierarchy.hpp"
+#include "cpp/common/hierarchy.hpp"
 #include "model_templates.hpp"
 
 // Include GLEW
@@ -13,7 +13,7 @@
 #endif
 
 // Include standard headers
-#include <iostream>
+#include <iostream>  // std::cout, std::cin, std::cerr
 #include <string>    // std::string
 #include <vector>    // std::vector
 #include <queue>     // std::queue

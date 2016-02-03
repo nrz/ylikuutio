@@ -11,6 +11,7 @@
 
 // Include standard headers
 #include <algorithm> // std::find
+#include <cstddef>   // NULL
 #include <fstream>   // std::ifstream, std::ios
 #include <string>    // std::string
 #include <vector>    // std::vector

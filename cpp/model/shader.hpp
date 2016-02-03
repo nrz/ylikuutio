@@ -6,9 +6,9 @@
 #define DEGREES_TO_RADIANS(x) (x * PI / 180.0f)
 #endif
 
-#include "globals.hpp"
+#include "cpp/common/globals.hpp"
 #include "shader_loader.hpp"
-#include "hierarchy.hpp"
+#include "cpp/common/hierarchy.hpp"
 #include "model_templates.hpp"
 
 // Include GLEW
