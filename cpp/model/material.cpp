@@ -10,7 +10,7 @@
 #endif
 
 // Include standard headers
-#include <cstddef>  // NULL
+#include <cstddef>  // nullptr
 #include <cstring>  // strcmp
 
 namespace model
@@ -68,8 +68,8 @@ namespace model
 
         glDeleteTextures(1, &this->texture);
 
-        // set pointer to this texture to NULL.
-        this->parent_pointer->set_texture_pointer(this->childID, NULL);
+        // set pointer to this texture to nullptr.
+        this->parent_pointer->set_texture_pointer(this->childID, nullptr);
     }
 
     void Material::render()

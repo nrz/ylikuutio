@@ -31,7 +31,7 @@ namespace model
             // destructor.
             ~Object();
 
-            // this method sets pointer to this object to NULL, sets `parent_pointer` according to the input, and requests a new `childID` from the new species.
+            // this method sets pointer to this object to nullptr, sets `parent_pointer` according to the input, and requests a new `childID` from the new species.
             void bind_to_new_parent(void* new_parent_pointer);
             template<class T1>
                 friend void bind_child_to_parent(T1 child_pointer, std::vector<void*> &child_pointer_vector, std::queue<GLuint> &free_childID_queue);

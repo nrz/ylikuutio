@@ -18,7 +18,7 @@
 #endif
 
 // Include standard headers
-#include <cstddef>  // NULL
+#include <cstddef>  // nullptr
 #include <iostream> // std::cout, std::cin, std::cerr
 
 extern GLFWwindow* window; // The "extern" keyword here is to access the variable "window" declared in tutorialXXX.cpp. This is a hack to keep the tutorials simple. Please avoid this.
@@ -245,7 +245,7 @@ namespace model
         // adjust position according to the ground.
         if (!is_flight_mode_in_use)
         {
-            if (this->terrain_species_pointer != NULL)
+            if (this->terrain_species_pointer != nullptr)
             {
                 GLfloat ground_y = model::get_floor_level(static_cast<model::Species*>(this->terrain_species_pointer), position);
 

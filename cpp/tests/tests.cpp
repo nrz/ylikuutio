@@ -50,7 +50,7 @@
 TEST_CASE("ShaderStruct must be initialized appropriately", "[ShaderStruct]")
 {
     ShaderStruct test_shader_struct;
-    REQUIRE(test_shader_struct.parent_pointer == NULL);
+    REQUIRE(test_shader_struct.parent_pointer == nullptr);
     REQUIRE(test_shader_struct.vertex_shader.empty());
     REQUIRE(test_shader_struct.fragment_shader.empty());
 }
@@ -58,7 +58,7 @@ TEST_CASE("ShaderStruct must be initialized appropriately", "[ShaderStruct]")
 TEST_CASE("MaterialStruct must be initialized appropriately", "[MaterialStruct]")
 {
     MaterialStruct test_material_struct;
-    REQUIRE(test_material_struct.parent_pointer == NULL);
+    REQUIRE(test_material_struct.parent_pointer == nullptr);
     REQUIRE(test_material_struct.texture_file_format.empty());
     REQUIRE(test_material_struct.texture_filename.empty());
     REQUIRE(test_material_struct.image_path.empty());
@@ -67,7 +67,7 @@ TEST_CASE("MaterialStruct must be initialized appropriately", "[MaterialStruct]"
 TEST_CASE("NodeStruct must be initialized appropriately", "[NodeStruct]")
 {
     NodeStruct test_node_struct;
-    REQUIRE(test_node_struct.parent_pointer == NULL);
+    REQUIRE(test_node_struct.parent_pointer == nullptr);
     REQUIRE(test_node_struct.coordinate_vector == glm::vec3(0.0f, 0.0f, 0.0f));
     REQUIRE(test_node_struct.neighbor_nodeIDs.size() == 0);
 }
@@ -75,8 +75,8 @@ TEST_CASE("NodeStruct must be initialized appropriately", "[NodeStruct]")
 TEST_CASE("ObjectStruct must be initialized appropriately", "[ObjectStruct]")
 {
     ObjectStruct test_object_struct;
-    REQUIRE(test_object_struct.species_parent_pointer == NULL);
-    REQUIRE(test_object_struct.glyph_parent_pointer == NULL);
+    REQUIRE(test_object_struct.species_parent_pointer == nullptr);
+    REQUIRE(test_object_struct.glyph_parent_pointer == nullptr);
     REQUIRE(test_object_struct.original_scale_vector == glm::vec3(1.0f, 1.0f, 1.0f));
     REQUIRE(std::isnan(test_object_struct.rotate_angle));
     REQUIRE(test_object_struct.is_character == false);
@@ -88,7 +88,7 @@ TEST_CASE("ObjectStruct must be initialized appropriately", "[ObjectStruct]")
 TEST_CASE("SpeciesStruct must be initialized appropriately", "[SpeciesStruct]")
 {
     SpeciesStruct test_species_struct;
-    REQUIRE(test_species_struct.parent_pointer == NULL);
+    REQUIRE(test_species_struct.parent_pointer == nullptr);
     REQUIRE(test_species_struct.is_world == false);
     REQUIRE(std::isnan(test_species_struct.world_radius));
     REQUIRE(test_species_struct.model_file_format.empty());
@@ -101,7 +101,7 @@ TEST_CASE("SpeciesStruct must be initialized appropriately", "[SpeciesStruct]")
 TEST_CASE("FontStruct must be initialized appropriately", "[FontStruct]")
 {
     FontStruct test_font_struct;
-    REQUIRE(test_font_struct.parent_pointer == NULL);
+    REQUIRE(test_font_struct.parent_pointer == nullptr);
     REQUIRE(test_font_struct.vertex_scaling_factor == DEFAULT_VERTEX_SCALING_FACTOR);
     REQUIRE(test_font_struct.font_file_format.empty());
     REQUIRE(test_font_struct.font_filename.empty());
@@ -110,7 +110,7 @@ TEST_CASE("FontStruct must be initialized appropriately", "[FontStruct]")
 TEST_CASE("GlyphStruct must be initialized appropriately", "[GlyphStruct]")
 {
     GlyphStruct test_glyph_struct;
-    REQUIRE(test_glyph_struct.parent_pointer == NULL);
+    REQUIRE(test_glyph_struct.parent_pointer == nullptr);
     REQUIRE(test_glyph_struct.light_position == glm::vec3(0.0f, 0.0f, 0.0f));
 }
 

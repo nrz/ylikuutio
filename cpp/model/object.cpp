@@ -3,7 +3,7 @@
 #include "species.hpp"
 
 // Include standard headers
-#include <cstddef>  // NULL
+#include <cstddef>  // nullptr
 #include <iostream> // std::cout, std::cin, std::cerr
 
 namespace model
@@ -37,13 +37,13 @@ namespace model
 
         if (this->is_character)
         {
-            this->species_parent_pointer = NULL;
+            this->species_parent_pointer = nullptr;
             this->glyph_parent_pointer   = object_struct.glyph_parent_pointer;
         }
         else
         {
             this->species_parent_pointer = object_struct.species_parent_pointer;
-            this->glyph_parent_pointer   = NULL;
+            this->glyph_parent_pointer   = nullptr;
         }
 
         // get childID from the Species and set pointer to this Object.
@@ -57,14 +57,14 @@ namespace model
         // destructor.
         std::cout << "Object with childID " << this->childID << " will be destroyed.\n";
 
-        // set pointer to this object to NULL.
+        // set pointer to this object to nullptr.
         if (this->is_character)
         {
-            this->glyph_parent_pointer->set_object_pointer(this->childID, NULL);
+            this->glyph_parent_pointer->set_object_pointer(this->childID, nullptr);
         }
         else
         {
-            this->species_parent_pointer->set_object_pointer(this->childID, NULL);
+            this->species_parent_pointer->set_object_pointer(this->childID, nullptr);
         }
     }
 
@@ -90,8 +90,8 @@ namespace model
         {
             model::Glyph* parent_pointer;
             parent_pointer = this->glyph_parent_pointer;
-            // set pointer to this child to NULL in the old parent.
-            set_child_pointer(this->childID, NULL, glyph_parent_pointer->object_pointer_vector, glyph_parent_pointer->free_objectID_queue);
+            // set pointer to this child to nullptr in the old parent.
+            set_child_pointer(this->childID, nullptr, glyph_parent_pointer->object_pointer_vector, glyph_parent_pointer->free_objectID_queue);
             // set the new parent pointer.
             this->glyph_parent_pointer = static_cast<model::Glyph*>(new_parent_pointer);
             // bind to the new parent.
@@ -101,8 +101,8 @@ namespace model
         {
             model::Species* parent_pointer;
             parent_pointer = this->species_parent_pointer;
-            // set pointer to this child to NULL in the old parent.
-            set_child_pointer(this->childID, NULL, species_parent_pointer->object_pointer_vector, species_parent_pointer->free_objectID_queue);
+            // set pointer to this child to nullptr in the old parent.
+            set_child_pointer(this->childID, nullptr, species_parent_pointer->object_pointer_vector, species_parent_pointer->free_objectID_queue);
             // set the new parent pointer.
             this->species_parent_pointer = static_cast<model::Species*>(new_parent_pointer);
             // bind to the new parent.

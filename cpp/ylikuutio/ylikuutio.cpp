@@ -45,7 +45,7 @@ GLFWwindow* window;
 #endif
 
 // Include standard headers
-#include <cstddef>  // NULL
+#include <cstddef>  // nullptr
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <string>   // std::string
 #include <vector>   // std::vector
@@ -131,7 +131,7 @@ int main(void)
     // initialFoV = 45.0f;
     initialFoV = 60.0f;
 
-    WorldToVoidCallback cleanup_callback = NULL;
+    WorldToVoidCallback cleanup_callback = nullptr;
 
     bool does_suzanne_species_exist = true;
     bool does_suzanne_species_have_uvmap_texture = true;
@@ -149,8 +149,8 @@ int main(void)
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
 
     // Open a window and create its OpenGL context.
-    window = glfwCreateWindow((GLuint) WINDOW_WIDTH, (GLuint) WINDOW_HEIGHT, "Ylikuutio", NULL, NULL);
-    if (window == NULL)
+    window = glfwCreateWindow((GLuint) WINDOW_WIDTH, (GLuint) WINDOW_HEIGHT, "Ylikuutio", nullptr, nullptr);
+    if (window == nullptr)
     {
         std::cerr << "Failed to open GLFW window.\n";
         glfwTerminate();

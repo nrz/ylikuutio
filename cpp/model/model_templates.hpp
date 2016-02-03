@@ -37,7 +37,7 @@
 #include "cpp/common/hierarchy.hpp"
 
 // Include standard headers
-#include <cstddef>   // NULL
+#include <cstddef>   // nullptr
 #include <vector>    // std::vector
 
 namespace model
@@ -61,8 +61,8 @@ namespace model
                 std::vector<void*> &old_child_pointer_vector,
                 std::queue<GLuint> &old_free_childID_queue)
         {
-            // set pointer to this child to NULL in the old parent.
-            set_child_pointer(child_pointer->childID, NULL, old_child_pointer_vector, old_free_childID_queue);
+            // set pointer to this child to nullptr in the old parent.
+            set_child_pointer(child_pointer->childID, nullptr, old_child_pointer_vector, old_free_childID_queue);
             // set the new parent pointer.
             child_pointer->parent_pointer = new_parent_pointer;
             // bind to the new parent.
@@ -86,7 +86,7 @@ namespace model
                 T1 child_pointer;
                 child_pointer = static_cast<T1>(child_pointer_vector[child_i]);
 
-                if (child_pointer != NULL)
+                if (child_pointer != nullptr)
                 {
                     child_pointer->render();
                 }

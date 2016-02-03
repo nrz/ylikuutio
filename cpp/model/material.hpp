@@ -33,7 +33,7 @@ namespace model
             // destructor.
             ~Material();
 
-            // this method sets pointer to this shader to NULL, sets `parent_pointer` according to the input, and requests a new `childID` from the new shader.
+            // this method sets pointer to this shader to nullptr, sets `parent_pointer` according to the input, and requests a new `childID` from the new shader.
             void bind_to_new_parent(model::Shader *new_shader_pointer);
 
             friend class Shader;

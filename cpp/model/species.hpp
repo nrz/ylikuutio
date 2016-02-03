@@ -37,7 +37,7 @@ namespace model
             // destructor.
             ~Species();
 
-            // this method sets pointer to this species to NULL, sets `parent_pointer` according to the input, and requests a new `childID` from the new texture.
+            // this method sets pointer to this species to nullptr, sets `parent_pointer` according to the input, and requests a new `childID` from the new texture.
             void bind_to_new_parent(model::Material *new_texture_pointer);
 
             // this method sets a object pointer.

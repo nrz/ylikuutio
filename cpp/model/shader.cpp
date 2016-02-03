@@ -9,7 +9,7 @@
 #endif
 
 // Include standard headers
-#include <cstddef>  // NULL
+#include <cstddef>  // nullptr
 #include <string>   // std::string
 
 namespace model
@@ -51,8 +51,8 @@ namespace model
         std::cout << "All textures of this shader will be destroyed.\n";
         model::delete_children<model::Material*>(this->texture_pointer_vector);
 
-        // set pointer to this shader to NULL.
-        this->parent_pointer->set_shader_pointer(this->childID, NULL);
+        // set pointer to this shader to nullptr.
+        this->parent_pointer->set_shader_pointer(this->childID, nullptr);
 
         glDeleteProgram(this->programID);
     }

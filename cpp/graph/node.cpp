@@ -44,8 +44,8 @@ namespace model
             this->delete_bidirectional_link(this->neighbor_nodeIDs[link_i]);
         }
 
-        // set pointer to this node to NULL.
-        this->parent_pointer->set_node_pointer(this->childID, NULL);
+        // set pointer to this node to nullptr.
+        this->parent_pointer->set_node_pointer(this->childID, nullptr);
     }
 
     void Node::create_unidirectional_link(GLuint nodeID)

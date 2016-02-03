@@ -9,7 +9,7 @@
 #include "objloader.hpp"
 
 // Include standard headers
-#include <cstddef>  // NULL
+#include <cstddef>  // nullptr
 #include <cstring>  // strcmp
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <string>   // std::string
@@ -47,7 +47,7 @@ namespace model
         std::vector<glm::vec3> temp_normals;
 
         FILE* file = fopen(path, "r");
-        if (file == NULL)
+        if (file == nullptr)
         {
             printf("Impossible to open the file ! Are you in the right path ? See Tutorial 1 for details\n");
             getchar();

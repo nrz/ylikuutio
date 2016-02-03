@@ -42,7 +42,7 @@
 
 // Include standard headers
 #include <cmath>    // NAN
-#include <cstddef>  // NULL
+#include <cstddef>  // nullptr
 #include <string>   // std::string
 #include <vector>   // std::vector
 #include <stdint.h> // uint32_t etc.
@@ -119,7 +119,7 @@ namespace model
 typedef struct ShaderStruct
 {
     ShaderStruct()
-        : parent_pointer(NULL)
+        : parent_pointer(nullptr)
     {
         // constructor.
     }
@@ -131,7 +131,7 @@ typedef struct ShaderStruct
 typedef struct MaterialStruct
 {
     MaterialStruct()
-        : parent_pointer(NULL)
+        : parent_pointer(nullptr)
     {
         // constructor.
     }
@@ -144,7 +144,7 @@ typedef struct MaterialStruct
 typedef struct NodeStruct
 {
     NodeStruct()
-        : parent_pointer(NULL)
+        : parent_pointer(nullptr)
     {
         // constructor.
     }
@@ -157,7 +157,7 @@ typedef struct NodeStruct
 typedef struct ObjectStruct
 {
     ObjectStruct()
-        : species_parent_pointer(NULL), glyph_parent_pointer(NULL), original_scale_vector(glm::vec3(1.0f, 1.0f, 1.0f)), rotate_angle(NAN), is_character(false)
+        : species_parent_pointer(nullptr), glyph_parent_pointer(nullptr), original_scale_vector(glm::vec3(1.0f, 1.0f, 1.0f)), rotate_angle(NAN), is_character(false)
     {
         // constructor.
     }
@@ -174,7 +174,7 @@ typedef struct ObjectStruct
 typedef struct SpeciesStruct
 {
     SpeciesStruct()
-        : parent_pointer(NULL), is_world(false), world_radius(NAN), triangulation_type("bilinear_interpolation")
+        : parent_pointer(nullptr), is_world(false), world_radius(NAN), triangulation_type("bilinear_interpolation")
     {
         // constructor.
     }
@@ -199,7 +199,7 @@ typedef struct SpeciesStruct
 typedef struct FontStruct
 {
     FontStruct()
-        : parent_pointer(NULL), vertex_scaling_factor(DEFAULT_VERTEX_SCALING_FACTOR)
+        : parent_pointer(nullptr), vertex_scaling_factor(DEFAULT_VERTEX_SCALING_FACTOR)
     {
         // constructor.
     }
@@ -213,7 +213,7 @@ typedef struct FontStruct
 typedef struct GlyphStruct
 {
     GlyphStruct()
-        : parent_pointer(NULL)
+        : parent_pointer(nullptr)
     {
         // constructor.
     }

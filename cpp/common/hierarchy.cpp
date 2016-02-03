@@ -2,7 +2,7 @@
 
 // Include standard headers
 #include <cmath>     // NAN
-#include <cstddef>   // NULL
+#include <cstddef>   // nullptr
 #include <queue>     // std::queue
 #include <stdint.h>  // uint32_t etc.
 #include <vector>    // std::vector
@@ -13,13 +13,13 @@ namespace model
     {
         child_pointer_vector[childID] = child_pointer;
 
-        if (child_pointer == NULL)
+        if (child_pointer == nullptr)
         {
             if (childID == child_pointer_vector.size() - 1)
             {
                 // OK, this is the biggest childID of all childID's of this 'object'.
                 // We can reduce the size of the child pointer vector at least by 1.
-                while ((!child_pointer_vector.empty()) && (child_pointer_vector.back() == NULL))
+                while ((!child_pointer_vector.empty()) && (child_pointer_vector.back() == nullptr))
                 {
                     // Reduce the size of child pointer vector by 1.
                     child_pointer_vector.pop_back();
@@ -49,8 +49,8 @@ namespace model
         // A new child index must be created.
         childID = child_pointer_vector.size();
 
-        // child pointer vector must also be extended with an appropriate NULL pointer.
-        child_pointer_vector.push_back(NULL);
+        // child pointer vector must also be extended with an appropriate nullptr pointer.
+        child_pointer_vector.push_back(nullptr);
 
         return childID;
     }

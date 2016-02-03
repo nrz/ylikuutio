@@ -12,7 +12,7 @@
 #endif
 
 // Include standard headers
-#include <cstddef>  // NULL
+#include <cstddef>  // nullptr
 #include <cstring>  // strcmp
 
 namespace model
@@ -133,8 +133,8 @@ namespace model
         glDeleteBuffers(1, &this->normalbuffer);
         glDeleteBuffers(1, &this->elementbuffer);
 
-        // set pointer to this species to NULL.
-        this->parent_pointer->set_species_pointer(this->childID, NULL);
+        // set pointer to this species to nullptr.
+        this->parent_pointer->set_species_pointer(this->childID, nullptr);
     }
 
     void Species::render()

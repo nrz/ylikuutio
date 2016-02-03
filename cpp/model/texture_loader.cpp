@@ -13,7 +13,7 @@
 #endif
 
 // Include standard headers
-#include <cstddef>  // NULL
+#include <cstddef>  // nullptr
 #include <cstring>  // strcmp
 #include <stdio.h>  // FILE, fclose, fopen, fread, getchar, printf etc.
 #include <stdlib.h> // free, malloc
@@ -173,7 +173,7 @@ namespace texture
 
         /* try to open the file */
         fp = fopen(imagepath, "rb");
-        if (fp == NULL)
+        if (fp == nullptr)
         {
             printf("%s could not be opened. Are you in the right directory ? Don't forget to read the FAQ !\n", imagepath);
             getchar();
