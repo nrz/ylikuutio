@@ -13,6 +13,27 @@
 #include <GL/glew.h> // GLfloat, GLuint etc.
 #endif
 
+// Include GLM
+#ifndef __GLM_GLM_HPP_INCLUDED
+#define __GLM_GLM_HPP_INCLUDED
+#include <glm/glm.hpp> // glm
+#endif
+
+#ifndef __GLM_GTC_MATRIX_TRANSFORM_HPP_INCLUDED
+#define __GLM_GTC_MATRIX_TRANSFORM_HPP_INCLUDED
+#include <glm/gtc/matrix_transform.hpp>
+#endif
+
+#ifndef __GLM_GTC_QUATERNION_HPP_INCLUDED
+#define __GLM_GTC_QUATERNION_HPP_INCLUDED
+#include <glm/gtc/quaternion.hpp> // glm::quat
+#endif
+
+#ifndef __GLM_GTX_QUATERNION_HPP_INCLUDED
+#define __GLM_GTX_QUATERNION_HPP_INCLUDED
+#include <glm/gtx/quaternion.hpp> // glm::toMat4
+#endif
+
 // Include standard headers
 #include <vector>    // std::vector
 #include <queue>     // std::queue
