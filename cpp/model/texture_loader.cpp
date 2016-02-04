@@ -13,7 +13,6 @@
 #endif
 
 // Include standard headers
-#include <cstddef>  // nullptr
 #include <cstring>  // strcmp
 #include <stdio.h>  // FILE, fclose, fopen, fread, getchar, printf etc.
 #include <stdlib.h> // free, malloc

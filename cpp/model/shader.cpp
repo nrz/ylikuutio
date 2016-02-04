@@ -9,7 +9,6 @@
 #endif
 
 // Include standard headers
-#include <cstddef>  // nullptr
 #include <string>   // std::string
 
 namespace model

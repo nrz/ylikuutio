@@ -10,7 +10,6 @@
 #endif
 
 // Include standard headers
-#include <cstddef>  // nullptr
 #include <cstring>  // strcmp
 
 namespace model

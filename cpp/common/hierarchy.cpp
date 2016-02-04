@@ -2,7 +2,6 @@
 
 // Include standard headers
 #include <cmath>     // NAN
-#include <cstddef>   // nullptr
 #include <queue>     // std::queue
 #include <stdint.h>  // uint32_t etc.
 #include <vector>    // std::vector

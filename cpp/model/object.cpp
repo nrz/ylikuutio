@@ -3,7 +3,6 @@
 #include "species.hpp"
 
 // Include standard headers
-#include <cstddef>  // nullptr
 #include <iostream> // std::cout, std::cin, std::cerr
 
 namespace model

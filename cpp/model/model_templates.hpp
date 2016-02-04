@@ -37,7 +37,6 @@
 #include "cpp/common/hierarchy.hpp"
 
 // Include standard headers
-#include <cstddef>   // nullptr
 #include <vector>    // std::vector
 
 namespace model

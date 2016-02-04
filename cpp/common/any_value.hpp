@@ -3,7 +3,6 @@
 
 // Include standard headers
 #include <cmath>    // NAN
-#include <cstddef>  // nullptr
 #include <string>   // std::string
 #include <stdint.h> // uint32_t etc.
 
