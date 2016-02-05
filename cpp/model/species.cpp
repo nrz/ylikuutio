@@ -5,7 +5,7 @@
 #include "world.hpp"
 #include "object.hpp"
 #include "render_templates.hpp"
-#include "model_templates.hpp"
+#include "cpp/hierarchy/hierarchy_templates.hpp"
 
 // Include GLEW
 #ifndef __GL_GLEW_H_INCLUDED

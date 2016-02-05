@@ -1,4 +1,4 @@
-#include "hierarchy.hpp"
+#include "cpp/hierarchy/hierarchy.hpp"
 
 // Include standard headers
 #include <cmath>     // NAN

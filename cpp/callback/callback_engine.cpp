@@ -1,5 +1,5 @@
 #include "callback_engine.hpp"
-#include "cpp/common/hierarchy.hpp"
+#include "cpp/hierarchy/hierarchy.hpp"
 
 // Include standard headers
 #include <iostream>

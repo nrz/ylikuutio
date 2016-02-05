@@ -1,6 +1,6 @@
 #include "graph.hpp"
-#include "cpp/common/hierarchy.hpp"
-#include "cpp/model/model_templates.hpp"
+#include "cpp/hierarchy/hierarchy.hpp"
+#include "cpp/hierarchy/hierarchy_templates.hpp"
 #include "node.hpp"
 
 // Include GLEW

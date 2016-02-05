@@ -1,7 +1,7 @@
 #include "font.hpp"
-#include "cpp/common/hierarchy.hpp"
+#include "cpp/hierarchy/hierarchy.hpp"
 #include "render_templates.hpp"
-#include "model_templates.hpp"
+#include "cpp/hierarchy/hierarchy_templates.hpp"
 #include "font_loader.hpp"
 #include "glyph.hpp"
 

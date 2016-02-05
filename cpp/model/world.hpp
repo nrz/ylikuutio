@@ -2,8 +2,8 @@
 #define __WORLD_HPP_INCLUDED
 
 #include "cpp/common/globals.hpp"
-#include "cpp/common/hierarchy.hpp"
-#include "model_templates.hpp"
+#include "cpp/hierarchy/hierarchy.hpp"
+#include "cpp/hierarchy/hierarchy_templates.hpp"
 
 // Include GLFW
 #ifndef __GLFW3_H_INCLUDED

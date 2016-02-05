@@ -2,9 +2,9 @@
 #define __GLYPH_HPP_INCLUDED
 
 #include "font.hpp"
-#include "cpp/common/hierarchy.hpp"
+#include "cpp/hierarchy/hierarchy.hpp"
 #include "render_templates.hpp"
-#include "model_templates.hpp"
+#include "cpp/hierarchy/hierarchy_templates.hpp"
 #include "species_or_glyph.hpp"
 
 // Include GLEW

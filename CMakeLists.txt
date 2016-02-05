@@ -81,8 +81,6 @@ add_executable(ylikuutio
     cpp/common/indexing.hpp
     cpp/common/globals.cpp
     cpp/common/globals.hpp
-    cpp/common/hierarchy.cpp
-    cpp/common/hierarchy.hpp
     cpp/common/transformation.cpp
     cpp/common/transformation.hpp
     cpp/common/triangulation.cpp
@@ -94,6 +92,11 @@ add_executable(ylikuutio
     cpp/graph/graph.hpp
     cpp/graph/node.cpp
     cpp/graph/node.hpp
+
+    # hierarchy, in alphabetical order.
+    cpp/hierarchy/hierarchy.cpp
+    cpp/hierarchy/hierarchy.hpp
+    cpp/hierarchy/hierarchy_templates.hpp
 
     # model, in alphabetical order
     cpp/model/font.cpp
@@ -108,7 +111,6 @@ add_executable(ylikuutio
     cpp/model/heightmap_loader.hpp
     cpp/model/material.cpp
     cpp/model/material.hpp
-    cpp/model/model_templates.hpp
     cpp/model/object.cpp
     cpp/model/object.hpp
     cpp/model/objloader.cpp

@@ -3,7 +3,7 @@
 #include "font.hpp"
 #include "species.hpp"
 #include "render_templates.hpp"
-#include "model_templates.hpp"
+#include "cpp/hierarchy/hierarchy_templates.hpp"
 
 // Include standard headers
 #include <cstring>  // strcmp

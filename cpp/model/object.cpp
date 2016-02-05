@@ -2,7 +2,7 @@
 #include "glyph.hpp"
 #include "species.hpp"
 #include "render_templates.hpp"
-#include "model_templates.hpp"
+#include "cpp/hierarchy/hierarchy_templates.hpp"
 
 // Include standard headers
 #include <iostream> // std::cout, std::cin, std::cerr
