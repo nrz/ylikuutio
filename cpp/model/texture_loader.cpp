@@ -14,9 +14,9 @@
 
 // Include standard headers
 #include <cstring>  // strcmp
+#include <stdint.h> // uint32_t etc.
 #include <stdio.h>  // FILE, fclose, fopen, fread, getchar, printf etc.
 #include <stdlib.h> // free, malloc
-#include <stdint.h> // uint32_t etc.
 #include <string.h> // strcmp, strncmp
 
 namespace texture
