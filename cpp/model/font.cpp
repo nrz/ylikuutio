@@ -1,14 +1,9 @@
 #include "font.hpp"
 #include "cpp/common/hierarchy.hpp"
+#include "render_templates.hpp"
 #include "model_templates.hpp"
 #include "font_loader.hpp"
 #include "glyph.hpp"
-
-// Include GLEW
-#ifndef __GL_GLEW_H_INCLUDED
-#define __GL_GLEW_H_INCLUDED
-#include <GL/glew.h> // GLfloat, GLuint etc.
-#endif
 
 // Include standard headers
 #include <cstring>  // strcmp
@@ -69,7 +64,7 @@ namespace model
         model::render_children<model::Glyph*>(this->glyph_pointer_vector);
     }
 
-    void Font::set_glyph_pointer(GLuint childID, void* parent_pointer)
+    void Font::set_glyph_pointer(uint32_t childID, void* parent_pointer)
     {
         set_child_pointer(childID, parent_pointer, this->glyph_pointer_vector, this->free_glyphID_queue);
     }

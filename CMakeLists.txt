@@ -113,6 +113,7 @@ add_executable(ylikuutio
     cpp/model/object.hpp
     cpp/model/objloader.cpp
     cpp/model/objloader.hpp
+    cpp/model/render_templates.hpp
     cpp/model/shader.cpp
     cpp/model/shader.hpp
     cpp/model/shader_loader.cpp

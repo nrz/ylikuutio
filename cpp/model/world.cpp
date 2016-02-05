@@ -10,6 +10,8 @@
 #include "world.hpp"
 #include "ground_level.hpp"
 #include "shader.hpp"
+#include "render_templates.hpp"
+#include "model_templates.hpp"
 
 // Include GLEW
 #ifndef __GL_GLEW_H_INCLUDED
@@ -47,7 +49,7 @@ namespace model
         model::render_children<model::Shader*>(this->shader_pointer_vector);
     }
 
-    void World::set_shader_pointer(GLuint childID, void* parent_pointer)
+    void World::set_shader_pointer(uint32_t childID, void* parent_pointer)
     {
         set_child_pointer(childID, parent_pointer, this->shader_pointer_vector, this->free_shaderID_queue);
     }

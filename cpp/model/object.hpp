@@ -5,6 +5,7 @@
 #include "species.hpp"
 #include "glyph.hpp"
 #include "cpp/common/hierarchy.hpp"
+#include "render_templates.hpp"
 #include "model_templates.hpp"
 
 // Include GLEW
@@ -55,9 +56,9 @@ namespace model
             // this method sets pointer to this object to nullptr, sets `parent_pointer` according to the input, and requests a new `childID` from the new species.
             void bind_to_new_parent(void* new_parent_pointer);
             template<class T1>
-                friend void bind_child_to_parent(T1 child_pointer, std::vector<void*> &child_pointer_vector, std::queue<GLuint> &free_childID_queue);
+                friend void bind_child_to_parent(T1 child_pointer, std::vector<void*> &child_pointer_vector, std::queue<uint32_t> &free_childID_queue);
             template<class T1, class T2>
-                friend void bind_child_to_new_parent(T1 child_pointer, T2 new_parent_pointer, std::vector<void*> &old_child_pointer_vector, std::queue<GLuint> &old_free_childID_queue);
+                friend void bind_child_to_new_parent(T1 child_pointer, T2 new_parent_pointer, std::vector<void*> &old_child_pointer_vector, std::queue<uint32_t> &old_free_childID_queue);
             template<class T1>
                 friend void render_children(std::vector<void*> &child_pointer_vector);
             template<class T1>
@@ -73,7 +74,7 @@ namespace model
             model::Glyph* glyph_parent_pointer;     // pointer to the species or glyph.
             bool is_character;
 
-            GLuint childID;                        // object ID, returned by `model::Species->get_objectID()`.
+            uint32_t childID;                      // object ID, returned by `model::Species->get_objectID()`.
             bool has_entered;
 
             glm::vec3 coordinate_vector;           // coordinate vector.

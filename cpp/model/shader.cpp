@@ -1,12 +1,8 @@
 #include "shader.hpp"
 #include "world.hpp"
 #include "material.hpp"
-
-// Include GLEW
-#ifndef __GL_GLEW_H_INCLUDED
-#define __GL_GLEW_H_INCLUDED
-#include <GL/glew.h> // GLfloat, GLuint etc.
-#endif
+#include "render_templates.hpp"
+#include "model_templates.hpp"
 
 // Include standard headers
 #include <string>   // std::string
@@ -67,7 +63,7 @@ namespace model
         model::render_children<model::Material*>(this->texture_pointer_vector);
     }
 
-    void Shader::set_texture_pointer(GLuint childID, void* parent_pointer)
+    void Shader::set_texture_pointer(uint32_t childID, void* parent_pointer)
     {
         set_child_pointer(childID, parent_pointer, this->texture_pointer_vector, this->free_textureID_queue);
     }

@@ -1,11 +1,7 @@
 #include "glyph.hpp"
 #include "object.hpp"
-
-// Include GLEW
-#ifndef __GL_GLEW_H_INCLUDED
-#define __GL_GLEW_H_INCLUDED
-#include <GL/glew.h> // GLfloat, GLuint etc.
-#endif
+#include "render_templates.hpp"
+#include "model_templates.hpp"
 
 namespace model
 {
@@ -43,7 +39,7 @@ namespace model
         model::render_species_or_glyph<model::Glyph*>(this);
     }
 
-    void Glyph::set_object_pointer(GLuint childID, void* parent_pointer)
+    void Glyph::set_object_pointer(uint32_t childID, void* parent_pointer)
     {
         set_child_pointer(childID, parent_pointer, this->object_pointer_vector, this->free_objectID_queue);
     }

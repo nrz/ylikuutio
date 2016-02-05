@@ -5,12 +5,6 @@
 #include "cpp/common/hierarchy.hpp"
 #include "model_templates.hpp"
 
-// Include GLEW
-#ifndef __GL_GLEW_H_INCLUDED
-#define __GL_GLEW_H_INCLUDED
-#include <GL/glew.h> // GLfloat, GLuint etc.
-#endif
-
 // Include GLFW
 #ifndef __GLFW3_H_INCLUDED
 #define __GLFW3_H_INCLUDED
@@ -125,7 +119,7 @@ namespace model
 
         private:
             // this method sets a shader pointer.
-            void set_shader_pointer(GLuint childID, void* parent_pointer);
+            void set_shader_pointer(uint32_t childID, void* parent_pointer);
 
             // this method sets a world species pointer.
             void set_terrain_species_pointer(model::Species* terrain_species_pointer);
@@ -135,7 +129,7 @@ namespace model
             void* terrain_species_pointer;              // pointer to world species (used in collision detection).
 
             std::vector<void*> shader_pointer_vector;
-            std::queue<GLuint> free_shaderID_queue;
+            std::queue<uint32_t> free_shaderID_queue;
     };
 }
 

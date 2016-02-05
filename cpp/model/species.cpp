@@ -4,6 +4,8 @@
 #include "vboindexer.hpp"
 #include "world.hpp"
 #include "object.hpp"
+#include "render_templates.hpp"
+#include "model_templates.hpp"
 
 // Include GLEW
 #ifndef __GL_GLEW_H_INCLUDED
@@ -141,7 +143,7 @@ namespace model
         model::render_species_or_glyph<model::Species*>(this);
     }
 
-    void Species::set_object_pointer(GLuint childID, void* parent_pointer)
+    void Species::set_object_pointer(uint32_t childID, void* parent_pointer)
     {
         set_child_pointer(childID, parent_pointer, this->object_pointer_vector, this->free_objectID_queue);
     }

@@ -4,6 +4,7 @@
 #include "cpp/common/globals.hpp"
 #include "shader.hpp"
 #include "cpp/common/hierarchy.hpp"
+#include "render_templates.hpp"
 #include "model_templates.hpp"
 
 // Include GLEW
@@ -44,19 +45,19 @@ namespace model
             template<class T1>
                 friend void render_children(std::vector<void*> &child_pointer_vector);
             template<class T1>
-                friend void bind_child_to_parent(T1 child_pointer, std::vector<void*> &child_pointer_vector, std::queue<GLuint> &free_childID_queue);
+                friend void bind_child_to_parent(T1 child_pointer, std::vector<void*> &child_pointer_vector, std::queue<uint32_t> &free_childID_queue);
             template<class T1, class T2>
-                friend void bind_child_to_new_parent(T1 child_pointer, T2 new_parent_pointer, std::vector<void*> &old_child_pointer_vector, std::queue<GLuint> &old_free_childID_queue);
+                friend void bind_child_to_new_parent(T1 child_pointer, T2 new_parent_pointer, std::vector<void*> &old_child_pointer_vector, std::queue<uint32_t> &old_free_childID_queue);
 
         private:
             // this method renders all species using this texture.
             void render();
 
             // this method sets a species pointer.
-            void set_species_pointer(GLuint childID, void* parent_pointer);
+            void set_species_pointer(uint32_t childID, void* parent_pointer);
 
             // this method sets a font pointer.
-            void set_font_pointer(GLuint childID, void* parent_pointer);
+            void set_font_pointer(uint32_t childID, void* parent_pointer);
 
             // this method sets a world species pointer.
             void set_terrain_species_pointer(model::Species* terrain_species_pointer);
@@ -72,12 +73,12 @@ namespace model
 
             std::vector<void*> species_pointer_vector;
             std::vector<void*> font_pointer_vector;
-            std::queue<GLuint> free_speciesID_queue;
-            std::queue<GLuint> free_fontID_queue;
+            std::queue<uint32_t> free_speciesID_queue;
+            std::queue<uint32_t> free_fontID_queue;
 
             std::string texture_file_format;       // type of the model file, eg. `"bmp"`.
             std::string texture_filename;          // filename of the model file.
-            GLuint childID;                      // texture ID, returned by `Shader::get_textureID`.
+            uint32_t childID;                      // texture ID, returned by `Shader::get_textureID`.
             const char* char_texture_file_format;
             const char* char_texture_filename;
     };

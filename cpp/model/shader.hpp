@@ -9,6 +9,7 @@
 #include "cpp/common/globals.hpp"
 #include "shader_loader.hpp"
 #include "cpp/common/hierarchy.hpp"
+#include "render_templates.hpp"
 #include "model_templates.hpp"
 
 // Include GLEW
@@ -46,9 +47,9 @@ namespace model
             template<class T1>
                 friend void render_children(std::vector<void*> &child_pointer_vector);
             template<class T1>
-                friend void bind_child_to_parent(T1 child_pointer, std::vector<void*> &child_pointer_vector, std::queue<GLuint> &free_childID_queue);
+                friend void bind_child_to_parent(T1 child_pointer, std::vector<void*> &child_pointer_vector, std::queue<uint32_t> &free_childID_queue);
             template<class T1, class T2>
-                friend void bind_child_to_new_parent(T1 child_pointer, T2 new_parent_pointer, std::vector<void*> &old_child_pointer_vector, std::queue<GLuint> &old_free_childID_queue);
+                friend void bind_child_to_new_parent(T1 child_pointer, T2 new_parent_pointer, std::vector<void*> &old_child_pointer_vector, std::queue<uint32_t> &old_free_childID_queue);
             template<class T1>
                 friend void render_this_object(model::Object* object_pointer, model::Shader* shader_pointer);
 
@@ -57,7 +58,7 @@ namespace model
             void render();
 
             // this method sets a texture pointer.
-            void set_texture_pointer(GLuint childID, void* parent_pointer);
+            void set_texture_pointer(uint32_t childID, void* parent_pointer);
 
             // this method sets a world species pointer.
             void set_terrain_species_pointer(model::Species* terrain_species_pointer);
@@ -74,13 +75,13 @@ namespace model
 
             model::Species* terrain_species_pointer; // pointer to world species (used in collision detection).
 
-            GLuint childID;                       // shader ID, returned by `model::World->get_shaderID()`.
+            uint32_t childID;                     // shader ID, returned by `model::World->get_shaderID()`.
 
             std::string vertex_shader;            // filename of vertex shader.
             std::string fragment_shader;          // filename of fragment shader.
 
             std::vector<void*> texture_pointer_vector;
-            std::queue<GLuint> free_textureID_queue;
+            std::queue<uint32_t> free_textureID_queue;
 
             const char* char_vertex_shader;
             const char* char_fragment_shader;

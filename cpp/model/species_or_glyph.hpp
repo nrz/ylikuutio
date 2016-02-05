@@ -1,7 +1,7 @@
 #ifndef __SPECIES_OR_GLYPH_HPP_INCLUDED
 #define __SPECIES_OR_GLYPH_HPP_INCLUDED
 
-#include "model_templates.hpp"
+#include "render_templates.hpp"
 
 namespace model
 {
