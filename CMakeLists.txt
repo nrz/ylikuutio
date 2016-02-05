@@ -64,7 +64,7 @@ add_definitions(
     )
 
 # Ylikuutio
-add_executable(ylikuutio
+add_executable(robotum
     # callback, in alphabetical order
     cpp/callback/callback_engine.cpp
     cpp/callback/callback_engine.hpp
@@ -142,8 +142,8 @@ add_executable(ylikuutio
     cpp/common/TextVertexShader.fragmentshader
     cpp/common/TextVertexShader.vertexshader
 
-    # ylikuutio, in alphabetical order
-    cpp/ylikuutio/ylikuutio.cpp
+    # robotum, in alphabetical order
+    cpp/robotum/robotum.cpp
     )
 
 configure_file(cpp/common/TransformVertexShader.vertexshader TransformVertexShader.vertexshader COPYONLY)
@@ -163,12 +163,12 @@ configure_file(res/noise128x128.bmp noise128x128.bmp COPYONLY)
 configure_file(res/S17W069.hgt S17W069.hgt COPYONLY)
 configure_file(res/kongtext.svg kongtext.svg COPYONLY)
 
-target_link_libraries(ylikuutio
+target_link_libraries(robotum
     ${ALL_LIBS}
     )
 # Xcode and Visual working directories
-set_target_properties(ylikuutio PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/cpp/ylikuutio/")
-create_target_launcher(ylikuutio WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/cpp/ylikuutio/")
+set_target_properties(robotum PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/cpp/ylikuutio/")
+create_target_launcher(robotum WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/cpp/ylikuutio/")
 
 # Tests
 add_executable(do_tests
