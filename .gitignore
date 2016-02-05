@@ -1,0 +1,4 @@
+# ohitettavat tiedostot ja hakemistot
+# files and directories to be ignored
+
+build*
