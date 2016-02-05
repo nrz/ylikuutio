@@ -152,16 +152,16 @@ configure_file(cpp/ylikuutio/common/StandardShading.vertexshader StandardShading
 configure_file(cpp/ylikuutio/common/StandardShading.fragmentshader StandardShading.fragmentshader COPYONLY)
 configure_file(cpp/ylikuutio/common/TextVertexShader.vertexshader TextVertexShader.vertexshader COPYONLY)
 configure_file(cpp/ylikuutio/common/TextVertexShader.fragmentshader TextVertexShader.fragmentshader COPYONLY)
-configure_file(res/suzanne.obj suzanne.obj COPYONLY)
-configure_file(res/uvmap.DDS uvmap.DDS COPYONLY)
-configure_file(res/GrassGreenTexture0002.bmp GrassGreenTexture0002.bmp COPYONLY)
-configure_file(res/Holstein.DDS Holstein.DDS COPYONLY)
-configure_file(res/Holstein.bmp Holstein.bmp COPYONLY)
-configure_file(res/noise1024x1024.bmp noise1024x1024.bmp COPYONLY)
-configure_file(res/noise256x256.bmp noise256x256.bmp COPYONLY)
-configure_file(res/noise128x128.bmp noise128x128.bmp COPYONLY)
-configure_file(res/S17W069.hgt S17W069.hgt COPYONLY)
-configure_file(res/kongtext.svg kongtext.svg COPYONLY)
+configure_file(res/objects/suzanne.obj suzanne.obj COPYONLY)
+configure_file(res/textures/uvmap.DDS uvmap.DDS COPYONLY)
+configure_file(res/textures/GrassGreenTexture0002.bmp GrassGreenTexture0002.bmp COPYONLY)
+configure_file(res/fonts/Holstein.DDS Holstein.DDS COPYONLY)
+configure_file(res/fonts/Holstein.bmp Holstein.bmp COPYONLY)
+configure_file(res/height_maps/noise1024x1024.bmp noise1024x1024.bmp COPYONLY)
+configure_file(res/height_maps/noise256x256.bmp noise256x256.bmp COPYONLY)
+configure_file(res/height_maps/noise128x128.bmp noise128x128.bmp COPYONLY)
+configure_file(res/height_maps/S17W069.hgt S17W069.hgt COPYONLY)
+configure_file(res/fonts/kongtext.svg kongtext.svg COPYONLY)
 
 target_link_libraries(robotum
     ${ALL_LIBS}
@@ -174,8 +174,8 @@ create_target_launcher(robotum WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/cp
 add_executable(do_tests
     cpp/ylikuutio/tests/tests.cpp
     )
-configure_file(res/noise256x256.bmp noise256x256.bmp COPYONLY)
-configure_file(res/test3x3.bmp test3x3.bmp COPYONLY)
+configure_file(res/height_maps/noise256x256.bmp noise256x256.bmp COPYONLY)
+configure_file(res/textures/test3x3.bmp test3x3.bmp COPYONLY)
 
 target_link_libraries(do_tests
     ${ALL_LIBS}
