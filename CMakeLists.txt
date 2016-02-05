@@ -66,92 +66,92 @@ add_definitions(
 # Ylikuutio
 add_executable(robotum
     # callback, in alphabetical order
-    cpp/callback/callback_engine.cpp
-    cpp/callback/callback_engine.hpp
-    cpp/callback/callback_object.cpp
-    cpp/callback/callback_object.hpp
-    cpp/callback/callback_parameter.cpp
-    cpp/callback/callback_parameter.hpp
+    cpp/ylikuutio/callback/callback_engine.cpp
+    cpp/ylikuutio/callback/callback_engine.hpp
+    cpp/ylikuutio/callback/callback_object.cpp
+    cpp/ylikuutio/callback/callback_object.hpp
+    cpp/ylikuutio/callback/callback_parameter.cpp
+    cpp/ylikuutio/callback/callback_parameter.hpp
 
     # common, in alphabetical order
-    cpp/common/any_value.hpp
-    cpp/common/bilinear_interpolation.cpp
-    cpp/common/bilinear_interpolation.hpp
-    cpp/common/indexing.cpp
-    cpp/common/indexing.hpp
-    cpp/common/globals.cpp
-    cpp/common/globals.hpp
-    cpp/common/transformation.cpp
-    cpp/common/transformation.hpp
-    cpp/common/triangulation.cpp
-    cpp/common/triangulation.hpp
-    cpp/common/triangulation_macros.cpp
+    cpp/ylikuutio/common/any_value.hpp
+    cpp/ylikuutio/common/bilinear_interpolation.cpp
+    cpp/ylikuutio/common/bilinear_interpolation.hpp
+    cpp/ylikuutio/common/indexing.cpp
+    cpp/ylikuutio/common/indexing.hpp
+    cpp/ylikuutio/common/globals.cpp
+    cpp/ylikuutio/common/globals.hpp
+    cpp/ylikuutio/common/transformation.cpp
+    cpp/ylikuutio/common/transformation.hpp
+    cpp/ylikuutio/common/triangulation.cpp
+    cpp/ylikuutio/common/triangulation.hpp
+    cpp/ylikuutio/common/triangulation_macros.cpp
 
     # graph, in alphabetical order.
-    cpp/graph/graph.cpp
-    cpp/graph/graph.hpp
-    cpp/graph/node.cpp
-    cpp/graph/node.hpp
+    cpp/ylikuutio/graph/graph.cpp
+    cpp/ylikuutio/graph/graph.hpp
+    cpp/ylikuutio/graph/node.cpp
+    cpp/ylikuutio/graph/node.hpp
 
     # hierarchy, in alphabetical order.
-    cpp/hierarchy/hierarchy.cpp
-    cpp/hierarchy/hierarchy.hpp
-    cpp/hierarchy/hierarchy_templates.hpp
+    cpp/ylikuutio/hierarchy/hierarchy.cpp
+    cpp/ylikuutio/hierarchy/hierarchy.hpp
+    cpp/ylikuutio/hierarchy/hierarchy_templates.hpp
 
     # model, in alphabetical order
-    cpp/model/font.cpp
-    cpp/model/font.hpp
-    cpp/model/font_loader.cpp
-    cpp/model/font_loader.hpp
-    cpp/model/glyph.cpp
-    cpp/model/glyph.hpp
-    cpp/model/ground_level.cpp
-    cpp/model/ground_level.hpp
-    cpp/model/heightmap_loader.cpp
-    cpp/model/heightmap_loader.hpp
-    cpp/model/material.cpp
-    cpp/model/material.hpp
-    cpp/model/object.cpp
-    cpp/model/object.hpp
-    cpp/model/objloader.cpp
-    cpp/model/objloader.hpp
-    cpp/model/render_templates.hpp
-    cpp/model/shader.cpp
-    cpp/model/shader.hpp
-    cpp/model/shader_loader.cpp
-    cpp/model/shader_loader.hpp
-    cpp/model/species.cpp
-    cpp/model/species.hpp
-    cpp/model/species_or_glyph.hpp
-    cpp/model/text2D.cpp
-    cpp/model/text2D.hpp
-    cpp/model/text3D.hpp
-    cpp/model/text3D.cpp
-    cpp/model/texture_loader.cpp
-    cpp/model/texture_loader.hpp
-    cpp/model/vboindexer.cpp
-    cpp/model/vboindexer.hpp
-    cpp/model/world.cpp
-    cpp/model/world.hpp
+    cpp/ylikuutio/model/font.cpp
+    cpp/ylikuutio/model/font.hpp
+    cpp/ylikuutio/model/font_loader.cpp
+    cpp/ylikuutio/model/font_loader.hpp
+    cpp/ylikuutio/model/glyph.cpp
+    cpp/ylikuutio/model/glyph.hpp
+    cpp/ylikuutio/model/ground_level.cpp
+    cpp/ylikuutio/model/ground_level.hpp
+    cpp/ylikuutio/model/heightmap_loader.cpp
+    cpp/ylikuutio/model/heightmap_loader.hpp
+    cpp/ylikuutio/model/material.cpp
+    cpp/ylikuutio/model/material.hpp
+    cpp/ylikuutio/model/object.cpp
+    cpp/ylikuutio/model/object.hpp
+    cpp/ylikuutio/model/objloader.cpp
+    cpp/ylikuutio/model/objloader.hpp
+    cpp/ylikuutio/model/render_templates.hpp
+    cpp/ylikuutio/model/shader.cpp
+    cpp/ylikuutio/model/shader.hpp
+    cpp/ylikuutio/model/shader_loader.cpp
+    cpp/ylikuutio/model/shader_loader.hpp
+    cpp/ylikuutio/model/species.cpp
+    cpp/ylikuutio/model/species.hpp
+    cpp/ylikuutio/model/species_or_glyph.hpp
+    cpp/ylikuutio/model/text2D.cpp
+    cpp/ylikuutio/model/text2D.hpp
+    cpp/ylikuutio/model/text3D.hpp
+    cpp/ylikuutio/model/text3D.cpp
+    cpp/ylikuutio/model/texture_loader.cpp
+    cpp/ylikuutio/model/texture_loader.hpp
+    cpp/ylikuutio/model/vboindexer.cpp
+    cpp/ylikuutio/model/vboindexer.hpp
+    cpp/ylikuutio/model/world.cpp
+    cpp/ylikuutio/model/world.hpp
 
     # shaders, in alphabetical order
-    cpp/common/StandardShading.fragmentshader
-    cpp/common/StandardShading.vertexshader
-    cpp/common/TransformVertexShader.vertexshader
-    cpp/common/TextureFragmentShader.fragmentshader
-    cpp/common/TextVertexShader.fragmentshader
-    cpp/common/TextVertexShader.vertexshader
+    cpp/ylikuutio/common/StandardShading.fragmentshader
+    cpp/ylikuutio/common/StandardShading.vertexshader
+    cpp/ylikuutio/common/TransformVertexShader.vertexshader
+    cpp/ylikuutio/common/TextureFragmentShader.fragmentshader
+    cpp/ylikuutio/common/TextVertexShader.fragmentshader
+    cpp/ylikuutio/common/TextVertexShader.vertexshader
 
     # robotum, in alphabetical order
     cpp/robotum/robotum.cpp
     )
 
-configure_file(cpp/common/TransformVertexShader.vertexshader TransformVertexShader.vertexshader COPYONLY)
-configure_file(cpp/common/TextureFragmentShader.fragmentshader TextureFragmentShader.fragmentshader COPYONLY)
-configure_file(cpp/common/StandardShading.vertexshader StandardShading.vertexshader COPYONLY)
-configure_file(cpp/common/StandardShading.fragmentshader StandardShading.fragmentshader COPYONLY)
-configure_file(cpp/common/TextVertexShader.vertexshader TextVertexShader.vertexshader COPYONLY)
-configure_file(cpp/common/TextVertexShader.fragmentshader TextVertexShader.fragmentshader COPYONLY)
+configure_file(cpp/ylikuutio/common/TransformVertexShader.vertexshader TransformVertexShader.vertexshader COPYONLY)
+configure_file(cpp/ylikuutio/common/TextureFragmentShader.fragmentshader TextureFragmentShader.fragmentshader COPYONLY)
+configure_file(cpp/ylikuutio/common/StandardShading.vertexshader StandardShading.vertexshader COPYONLY)
+configure_file(cpp/ylikuutio/common/StandardShading.fragmentshader StandardShading.fragmentshader COPYONLY)
+configure_file(cpp/ylikuutio/common/TextVertexShader.vertexshader TextVertexShader.vertexshader COPYONLY)
+configure_file(cpp/ylikuutio/common/TextVertexShader.fragmentshader TextVertexShader.fragmentshader COPYONLY)
 configure_file(res/suzanne.obj suzanne.obj COPYONLY)
 configure_file(res/uvmap.DDS uvmap.DDS COPYONLY)
 configure_file(res/GrassGreenTexture0002.bmp GrassGreenTexture0002.bmp COPYONLY)
@@ -172,7 +172,7 @@ create_target_launcher(robotum WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/cp
 
 # Tests
 add_executable(do_tests
-    cpp/tests/tests.cpp
+    cpp/ylikuutio/tests/tests.cpp
     )
 configure_file(res/noise256x256.bmp noise256x256.bmp COPYONLY)
 configure_file(res/test3x3.bmp test3x3.bmp COPYONLY)
