@@ -1,11 +1,5 @@
 #include "font_loader.hpp"
 
-// Include GLEW
-#ifndef __GL_GLEW_H_INCLUDED
-#define __GL_GLEW_H_INCLUDED
-#include <GL/glew.h> // GLfloat, GLuint etc.
-#endif
-
 // Include standard headers
 #include <iostream>  // std::cout, std::cin, std::cerr
 #include <string>    // std::string
@@ -150,7 +144,7 @@ namespace model
             std::vector<std::vector<glm::vec3>> &out_glyph_normal_data,
             std::vector<std::string> &glyph_names,
             std::vector<std::string> &unicode_strings,
-            GLfloat vertex_scaling_factor)
+            float vertex_scaling_factor)
     {
         std::cout << "Reading SVG font file " << font_file_path << " ...\n";
 

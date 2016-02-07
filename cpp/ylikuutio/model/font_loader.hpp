@@ -5,12 +5,6 @@
 #include <string>    // std::string
 #include <vector>    // std::vector
 
-// Include GLEW
-#ifndef __GL_GLEW_H_INCLUDED
-#define __GL_GLEW_H_INCLUDED
-#include <GL/glew.h> // GLfloat, GLuint etc.
-#endif
-
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
 #define __GLM_GLM_HPP_INCLUDED
@@ -25,7 +19,7 @@ namespace model
             std::vector<std::vector<glm::vec3>> &out_glyph_normal_data,
             std::vector<std::string> &glyph_names,
             std::vector<std::string> &unicode_strings,
-            GLfloat vertex_scaling_factor);
+            float vertex_scaling_factor);
 }
 
 #endif
