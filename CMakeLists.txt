@@ -63,7 +63,7 @@ add_definitions(
     -D_CRT_SECURE_NO_WARNINGS
     )
 
-# Ylikuutio
+# Robotum
 add_executable(robotum
     # callback, in alphabetical order
     cpp/ylikuutio/callback/callback_engine.cpp
