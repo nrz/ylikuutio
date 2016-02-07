@@ -1,6 +1,8 @@
 #ifndef __TRIANGULATION_MACROS_CPP_INCLUDED
 #define __TRIANGULATION_MACROS_CPP_INCLUDED
 
+#include "indexing.hpp"
+
 // for bilinear interpolation, southeast-northwest edges, and southwest-northeast edges.
 #define SOUTHWEST (current_vertex_i - image_width - 1)
 #define SOUTHEAST (current_vertex_i - image_width)

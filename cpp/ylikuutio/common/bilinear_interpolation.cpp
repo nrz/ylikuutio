@@ -1,5 +1,4 @@
 #include "bilinear_interpolation.hpp"
-#include "indexing.hpp"
 #include "triangulation_macros.cpp"
 #include "globals.hpp"
 
