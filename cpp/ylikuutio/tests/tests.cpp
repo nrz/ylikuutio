@@ -308,19 +308,15 @@ TEST_CASE("3x3 BMP world must be loaded appropriately", "[load_3x3_BMP_world]")
             *&image_height,
             color_channel,
             triangulation_type);
-#define N_VERTICES_FOR_FACE 3
-#define N_FACES_FOR_BILINEAR_TRIANGULATION 4
-#define N_WIDTH_OF_IMAGE_FILE 3
-#define N_HEIGHT_OF_IMAGE_FILE 3
 
-    REQUIRE(out_vertices.size() == N_VERTICES_FOR_FACE * N_FACES_FOR_BILINEAR_TRIANGULATION * (N_WIDTH_OF_IMAGE_FILE - 1) * (N_HEIGHT_OF_IMAGE_FILE - 1));
-    REQUIRE(out_UVs.size() == N_VERTICES_FOR_FACE * N_FACES_FOR_BILINEAR_TRIANGULATION * (N_WIDTH_OF_IMAGE_FILE - 1) * (N_HEIGHT_OF_IMAGE_FILE - 1));
-    REQUIRE(out_normals.size() == N_VERTICES_FOR_FACE * N_FACES_FOR_BILINEAR_TRIANGULATION * (N_WIDTH_OF_IMAGE_FILE - 1) * (N_HEIGHT_OF_IMAGE_FILE - 1));
+    const uint32_t n_vertices_for_face = 3;
+    const uint32_t n_faces_for_bilinear_triangulation = 4;
+    const uint32_t n_width_of_image_file = 3;
+    const uint32_t n_height_of_image_file = 3;
 
-#undef N_VERTICES_FOR_FACE
-#undef N_FACES_FOR_BILINEAR_TRIANGULATION
-#undef N_WIDTH_OF_IMAGE_FILE
-#undef N_HEIGHT_OF_IMAGE_FILE
+    REQUIRE(out_vertices.size() == n_vertices_for_face * n_faces_for_bilinear_triangulation * (n_width_of_image_file - 1) * (n_height_of_image_file - 1));
+    REQUIRE(out_UVs.size() == n_vertices_for_face * n_faces_for_bilinear_triangulation * (n_width_of_image_file - 1) * (n_height_of_image_file - 1));
+    REQUIRE(out_normals.size() == n_vertices_for_face * n_faces_for_bilinear_triangulation * (n_width_of_image_file - 1) * (n_height_of_image_file - 1));
 }
 
 TEST_CASE("256x256 BMP world must be loaded appropriately", "[load_256x256_BMP_world]")
@@ -343,17 +339,13 @@ TEST_CASE("256x256 BMP world must be loaded appropriately", "[load_256x256_BMP_w
             *&image_height,
             color_channel,
             triangulation_type);
-#define N_VERTICES_FOR_FACE 3
-#define N_FACES_FOR_BILINEAR_TRIANGULATION 4
-#define N_WIDTH_OF_IMAGE_FILE 256
-#define N_HEIGHT_OF_IMAGE_FILE 256
 
-    REQUIRE(out_vertices.size() == N_VERTICES_FOR_FACE * N_FACES_FOR_BILINEAR_TRIANGULATION * (N_WIDTH_OF_IMAGE_FILE - 1) * (N_HEIGHT_OF_IMAGE_FILE - 1));
-    REQUIRE(out_UVs.size() == N_VERTICES_FOR_FACE * N_FACES_FOR_BILINEAR_TRIANGULATION * (N_WIDTH_OF_IMAGE_FILE - 1) * (N_HEIGHT_OF_IMAGE_FILE - 1));
-    REQUIRE(out_normals.size() == N_VERTICES_FOR_FACE * N_FACES_FOR_BILINEAR_TRIANGULATION * (N_WIDTH_OF_IMAGE_FILE - 1) * (N_HEIGHT_OF_IMAGE_FILE - 1));
+    const uint32_t n_vertices_for_face = 3;
+    const uint32_t n_faces_for_bilinear_triangulation = 4;
+    const uint32_t n_width_of_image_file = 256;
+    const uint32_t n_height_of_image_file = 256;
 
-#undef N_VERTICES_FOR_FACE
-#undef N_FACES_FOR_BILINEAR_TRIANGULATION
-#undef N_WIDTH_OF_IMAGE_FILE
-#undef N_HEIGHT_OF_IMAGE_FILE
+    REQUIRE(out_vertices.size() == n_vertices_for_face * n_faces_for_bilinear_triangulation * (n_width_of_image_file - 1) * (n_height_of_image_file - 1));
+    REQUIRE(out_UVs.size() == n_vertices_for_face * n_faces_for_bilinear_triangulation * (n_width_of_image_file - 1) * (n_height_of_image_file - 1));
+    REQUIRE(out_normals.size() == n_vertices_for_face * n_faces_for_bilinear_triangulation * (n_width_of_image_file - 1) * (n_height_of_image_file - 1));
 }
