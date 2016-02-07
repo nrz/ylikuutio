@@ -43,9 +43,10 @@
 #include <glm/glm.hpp> // glm
 #endif
 
-#include <cmath>  // std::isnan
-#include <string>
-#include <vector> // std::vector
+#include <cmath>    // std::isnan
+#include <stdint.h> // uint32_t etc.
+#include <string>   // std::string
+#include <vector>   // std::vector
 
 TEST_CASE("ShaderStruct must be initialized appropriately", "[ShaderStruct]")
 {
