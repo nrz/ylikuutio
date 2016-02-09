@@ -8,6 +8,7 @@
 #endif
 
 #include "cpp/ylikuutio/common/globals.hpp"
+#include "cpp/ylikuutio/model/font_loader.hpp"
 #include "cpp/ylikuutio/model/shader_loader.hpp"
 #include "cpp/ylikuutio/model/texture_loader.hpp"
 #include "cpp/ylikuutio/model/vboindexer.hpp"
