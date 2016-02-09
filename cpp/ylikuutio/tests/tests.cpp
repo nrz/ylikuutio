@@ -349,3 +349,65 @@ TEST_CASE("256x256 BMP world must be loaded appropriately", "[load_256x256_BMP_w
     REQUIRE(out_UVs.size() == n_vertices_for_face * n_faces_for_bilinear_triangulation * (n_width_of_image_file - 1) * (n_height_of_image_file - 1));
     REQUIRE(out_normals.size() == n_vertices_for_face * n_faces_for_bilinear_triangulation * (n_width_of_image_file - 1) * (n_height_of_image_file - 1));
 }
+
+TEST_CASE("Some string must match")
+{
+    WHEN("there is only one 1-character string in the identifier string vector and it matches")
+    {
+    }
+
+    WHEN("there is only one 2-character string in the identifier string vector and it matches")
+    {
+    }
+
+    WHEN("there is only one 3-character string in the identifier string vector and it matches")
+    {
+    }
+
+    WHEN("there are two 1-character strings in the identifier string vector and the 1st matches")
+    {
+    }
+
+    WHEN("there are two 1-character strings in the identifier string vector and the 2nd matches")
+    {
+    }
+
+    WHEN("there are three 1-character strings in the identifier string vector and the 1st matches")
+    {
+    }
+
+    WHEN("there are three 1-character strings in the identifier string vector and the 2nd matches")
+    {
+    }
+
+    WHEN("there are three 1-character strings in the identifier string vector and the 3rd matches")
+    {
+    }
+}
+
+TEST_CASE("No string must match")
+{
+    WHEN("the identifier string vector is empty")
+    {
+    }
+
+    WHEN("there is only one 1-character string in the identifier string vector and it does not match")
+    {
+    }
+
+    WHEN("there is only one 2-character string in the identifier string vector and it does not match")
+    {
+    }
+
+    WHEN("there is only one 3-character string in the identifier string vector and it does not match")
+    {
+    }
+
+    WHEN("there are two 1-character strings in the identifier string vector and neither matches")
+    {
+    }
+
+    WHEN("there are three 1-character strings in the identifier string vector and none matches")
+    {
+    }
+}
