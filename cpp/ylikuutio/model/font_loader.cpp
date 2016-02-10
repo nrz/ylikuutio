@@ -1,4 +1,5 @@
 #include "font_loader.hpp"
+#include "cpp/ylikuutio/string/ylikuutio_string.hpp"
 
 // Include standard headers
 #include <iostream>  // std::cout, std::cin, std::cerr
@@ -8,30 +9,13 @@
 
 namespace model
 {
-    bool check_and_report_if_some_string_matches(const char* SVG_base_pointer, char* SVG_data_pointer, std::vector<std::string> identifier_strings_vector)
-    {
-        for (std::string identifier_string : identifier_strings_vector)
-        {
-            const char* identifier_string_char = identifier_string.c_str();
-
-            if (strncmp(SVG_data_pointer, identifier_string_char, strlen(identifier_string_char)) == 0)
-            {
-                const char* identifier_string_char = identifier_string.c_str();
-                uint64_t offset = (uint64_t) SVG_data_pointer - (uint64_t) SVG_base_pointer;
-                printf("%s found at file offset 0x%lx (memory address 0x%lx). ", identifier_string_char, offset, (uint64_t) SVG_data_pointer);
-                return true;
-            }
-        }
-        return false;
-    }
-
     bool check_if_we_are_inside_block(const char* SVG_base_pointer, char*& SVG_data_pointer)
     {
         std::vector<std::string> identifier_strings_vector;
 
         // All possible block identifier strings.
         identifier_strings_vector = { "<?xml ", "<!DOCTYPE ", "<svg>", "<metadata>", "</metadata>", "<defs>", "<font ", "<font-face", "<missing-glyph" };
-        return model::check_and_report_if_some_string_matches(SVG_base_pointer, SVG_data_pointer, identifier_strings_vector);
+        return string::check_and_report_if_some_string_matches(SVG_base_pointer, SVG_data_pointer, identifier_strings_vector);
     }
 
     void extract_string_with_several_endings(
@@ -98,11 +82,11 @@ namespace model
             {
                 // OK, were are not inside a block.
 
-                if (model::check_and_report_if_some_string_matches(SVG_base_pointer, SVG_data_pointer, std::vector<std::string> { "<glyph" }))
+                if (string::check_and_report_if_some_string_matches(SVG_base_pointer, SVG_data_pointer, std::vector<std::string> { "<glyph" }))
                 {
                     return true;
                 }
-                if (model::check_and_report_if_some_string_matches(SVG_base_pointer, SVG_data_pointer, std::vector<std::string> { "</svg>" }))
+                if (string::check_and_report_if_some_string_matches(SVG_base_pointer, SVG_data_pointer, std::vector<std::string> { "</svg>" }))
                 {
                     return false;
                 }
@@ -116,7 +100,7 @@ namespace model
                 // OK, we are inside a block.
 
                 SVG_data_pointer = strchr(SVG_data_pointer, '>');
-                check_and_report_if_some_string_matches(SVG_base_pointer, SVG_data_pointer, std::vector<std::string> { '>' });
+                string::check_and_report_if_some_string_matches(SVG_base_pointer, SVG_data_pointer, std::vector<std::string> { '>' });
                 is_inside_block = false;
             }
         }
@@ -396,7 +380,7 @@ namespace model
                 std::vector<std::string> string_vector;
                 string_vector = { "</font>", "</defs>", "</svg>" };
 
-                if (model::check_and_report_if_some_string_matches(SVG_base_pointer, SVG_data_pointer, string_vector))
+                if (string::check_and_report_if_some_string_matches(SVG_base_pointer, SVG_data_pointer, string_vector))
                 {
                     break;
                 }

@@ -142,6 +142,10 @@ add_executable(ajokki
     cpp/ylikuutio/common/TextVertexShader.fragmentshader
     cpp/ylikuutio/common/TextVertexShader.vertexshader
 
+    # string, in alphabetical order
+    cpp/ylikuutio/string/ylikuutio_string.cpp
+    cpp/ylikuutio/string/ylikuutio_string.hpp
+
     # ajokki, in alphabetical order
     cpp/ajokki/ajokki.cpp
     )

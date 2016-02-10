@@ -13,8 +13,6 @@
 
 namespace model
 {
-    bool check_and_report_if_some_string_matches(const char* SVG_base_pointer, char* SVG_data_pointer, std::vector<std::string> identifier_strings_vector);
-
     bool load_SVG_font(std::string font_file_path,
             std::vector<std::vector<glm::vec3>> &out_glyph_vertex_data,
             std::vector<std::vector<glm::vec2>> &out_glyph_UV_data,
