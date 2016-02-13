@@ -1,8 +1,12 @@
 # CMake entry point
-cmake_minimum_required (VERSION 2.6)
+cmake_minimum_required (VERSION 2.6.2)
 project (ylikuutio)
 
 find_package(OpenGL REQUIRED)
+find_package(Threads REQUIRED)
+
+# Compile external dependencies
+add_subdirectory (external)
 
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
@@ -19,17 +23,83 @@ if( CMAKE_BINARY_DIR MATCHES " " )
     message( "Your Build Directory contains spaces. If you experience problems when compiling, this can be the cause." )
 endif()
 
-# Compile external dependencies
-add_subdirectory (external)
-
 # On Visual 2005 and above, this module can set the debug working directory
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/external/rpavlik-cmake-modules-1c73e35")
 include(CreateLaunchers)
 include(MSVCMultipleProcessCompile) # /MP
 
+include(ExternalProject) # for ExternalProject_Add
+
 if(INCLUDE_DISTRIB)
     add_subdirectory(distrib)
 endif(INCLUDE_DISTRIB)
+
+include_directories(
+    external/glfw-3.0.3/include/GLFW/
+    external/glm-0.9.4.0/
+    external/glew-1.9.0/include/
+    external/Catch/single_include/
+    external/googletest/googletest/include/
+    external/googletest/googlemock/include/
+    .
+    )
+
+# Download and install GoogleTest
+ExternalProject_Add(
+    gtest
+    URL https://googletest.googlecode.com/files/gtest-1.7.0.zip
+    PREFIX ${CMAKE_CURRENT_BINARY_DIR}/gtest
+    # Disable install step
+    INSTALL_COMMAND ""
+    )
+
+# Create a libgtest target to be used as a dependency by test programs
+add_library(libgtest IMPORTED STATIC GLOBAL)
+add_dependencies(libgtest gtest)
+
+# Set gtest properties
+ExternalProject_Get_Property(gtest source_dir binary_dir)
+set_target_properties(libgtest PROPERTIES
+    "IMPORTED_LOCATION" "${binary_dir}/libgtest.a"
+    "IMPORTED_LINK_INTERFACE_LIBRARIES" "${CMAKE_THREAD_LIBS_INIT}"
+    #    "INTERFACE_INCLUDE_DIRECTORIES" "${source_dir}/include"
+    )
+# I couldn't make it work with INTERFACE_INCLUDE_DIRECTORIES
+include_directories("${source_dir}/external/googletest/googletest/include")
+
+# Download and install GoogleMock
+ExternalProject_Add(
+    gmock
+    URL https://googlemock.googlecode.com/files/gmock-1.7.0.zip
+    PREFIX ${CMAKE_CURRENT_BINARY_DIR}/gmock
+    # Disable install step
+    INSTALL_COMMAND ""
+    )
+
+# Create a libgmock target to be used as a dependency by test programs
+add_library(libgmock IMPORTED STATIC GLOBAL)
+add_dependencies(libgmock gmock)
+
+# Set gmock properties
+ExternalProject_Get_Property(gmock source_dir binary_dir)
+set_target_properties(libgmock PROPERTIES
+    "IMPORTED_LOCATION" "${binary_dir}/libgmock.a"
+    "IMPORTED_LINK_INTERFACE_LIBRARIES" "${CMAKE_THREAD_LIBS_INIT}"
+    #    "INTERFACE_INCLUDE_DIRECTORIES" "${source_dir}/include"
+    )
+# I couldn't make it work with INTERFACE_INCLUDE_DIRECTORIES
+include_directories("${source_dir}/external/googletest/googlemock/include")
+
+# for Google Test.
+enable_testing()
+set(GTEST_INCLUDE_DIR "${source_dir}/external/googletest/googletest")
+
+# include_directories(
+#     "${source_dir}/external/googletest/googletest"
+#     "${source_dir}/external/googletest/googletest/include")
+find_package(GTest REQUIRED)
+
+include_directories(${GTEST_INCLUDE_DIR})
 
 # include_directories(
 #     external/AntTweakBar-1.16/include/
@@ -40,14 +110,6 @@ endif(INCLUDE_DISTRIB)
 #     external/bullet-2.81-rev2613/src/
 #     .
 #     )
-
-include_directories(
-    external/glfw-3.0.3/include/GLFW/
-    external/glm-0.9.4.0/
-    external/glew-1.9.0/include/
-    external/Catch/single_include/
-    .
-    )
 
 set(ALL_LIBS
     ${OPENGL_LIBRARY}
