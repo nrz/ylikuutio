@@ -47,7 +47,7 @@ include_directories(
 # Download and install GoogleTest
 ExternalProject_Add(
     gtest
-    URL https://googletest.googlecode.com/files/gtest-1.7.0.zip
+    GIT_REPOSITORY https://github.com/google/googletest
     PREFIX ${CMAKE_CURRENT_BINARY_DIR}/gtest
     # Disable install step
     INSTALL_COMMAND ""
@@ -70,7 +70,7 @@ include_directories("${source_dir}/external/googletest/googletest/include")
 # Download and install GoogleMock
 ExternalProject_Add(
     gmock
-    URL https://googlemock.googlecode.com/files/gmock-1.7.0.zip
+    GIT_REPOSITORY https://github.com/google/googletest
     PREFIX ${CMAKE_CURRENT_BINARY_DIR}/gmock
     # Disable install step
     INSTALL_COMMAND ""
