@@ -1,6 +1,6 @@
 # CMake entry point
-cmake_minimum_required (VERSION 2.6.2)
-project (ylikuutio)
+cmake_minimum_required(VERSION 2.6.2)
+project(ylikuutio)
 
 find_package(OpenGL REQUIRED)
 find_package(Threads REQUIRED)
@@ -8,18 +8,18 @@ find_package(Threads REQUIRED)
 # Compile external dependencies
 add_subdirectory (external)
 
-SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 # set(CMAKE_COLOR_MAKEFILE ON)
 # set(CMAKE_VERBOSE_MAKEFILE ON)
 
-if( CMAKE_BINARY_DIR STREQUAL CMAKE_SOURCE_DIR )
+if(CMAKE_BINARY_DIR STREQUAL CMAKE_SOURCE_DIR)
     message( FATAL_ERROR "Please select another Build Directory ! (and give it a clever name, like bin_Visual2012_64bits/)" )
 endif()
-if( CMAKE_SOURCE_DIR MATCHES " " )
+if(CMAKE_SOURCE_DIR MATCHES " ")
     message( "Your Source Directory contains spaces. If you experience problems when compiling, this can be the cause." )
 endif()
-if( CMAKE_BINARY_DIR MATCHES " " )
+if(CMAKE_BINARY_DIR MATCHES " ")
     message( "Your Build Directory contains spaces. If you experience problems when compiling, this can be the cause." )
 endif()
 
@@ -250,5 +250,5 @@ target_link_libraries(do_tests
 set_target_properties(do_tests PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/cpp/tests/")
 create_target_launcher(do_tests WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/cpp/tests/")
 
-SOURCE_GROUP(common REGULAR_EXPRESSION ".*/cpp/common/.*" )
-SOURCE_GROUP(shaders REGULAR_EXPRESSION ".*/.*shader$" )
+source_group(common REGULAR_EXPRESSION ".*/cpp/common/.*" )
+source_group(shaders REGULAR_EXPRESSION ".*/.*shader$" )
