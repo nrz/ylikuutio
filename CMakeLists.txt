@@ -77,6 +77,9 @@ ExternalProject_Add(
     PREFIX ${CMAKE_CURRENT_BINARY_DIR}/gmock
     # Disable install step
     INSTALL_COMMAND ""
+    LOG_DOWNLOAD ON
+    LOG_DOWNLOAD ON
+    LOG_BUILD ON
     )
 
 # Create a libgmock target to be used as a dependency by test programs
