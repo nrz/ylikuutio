@@ -51,6 +51,9 @@ ExternalProject_Add(
     PREFIX ${CMAKE_CURRENT_BINARY_DIR}/gtest
     # Disable install step
     INSTALL_COMMAND ""
+    LOG_DOWNLOAD ON
+    LOG_DOWNLOAD ON
+    LOG_BUILD ON
     )
 
 # Create a libgtest target to be used as a dependency by test programs
