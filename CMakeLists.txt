@@ -272,7 +272,7 @@ target_link_libraries(do_tests
 set_target_properties(do_tests PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/cpp/tests/")
 create_target_launcher(do_tests WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/cpp/tests/")
 
-set(FILES_TO_TEST cpp/ylikuutio/tests/Testable.cpp)
+set(FILES_TO_TEST cpp/ylikuutio/tests/testable.cpp)
 set(UNIT_TESTS cpp/ylikuutio/tests/test.cpp)
 set(MAIN_FILE cpp/ylikuutio/tests/main.cpp)
 
