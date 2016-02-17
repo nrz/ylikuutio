@@ -35,15 +35,15 @@ endif()
 
 include(ExternalProject) # for ExternalProject_Add
 
+# for Google Test.
+enable_testing()
+
+# Set default ExternalProject root directory
+set_directory_properties(PROPERTIES EP_PREFIX ${CMAKE_BINARY_DIR}/external)
+
 if(INCLUDE_DISTRIB)
     add_subdirectory(distrib)
 endif(INCLUDE_DISTRIB)
-
-# for Google Test.
-enable_testing()
-set(GTEST_INCLUDE_DIR "${source_dir}/external/googletest/googletest/include")
-set(GTEST_LIBRARY "${source_dir}/external/googletest/googletest/libgtest.a")
-set(GTEST_MAIN_LIBRARY "${source_dir}/external/googletest/googletest/libgtest_main.a")
 
 include_directories(
     external/glfw-3.0.3/include/GLFW/
@@ -57,7 +57,7 @@ include_directories(
 
 # Download and install GoogleTest
 ExternalProject_Add(
-    gtest
+    googletest
     GIT_REPOSITORY https://github.com/google/googletest
     PREFIX ${CMAKE_CURRENT_BINARY_DIR}/gtest
     # Disable install step
@@ -69,21 +69,35 @@ ExternalProject_Add(
 
 # Create a libgtest target to be used as a dependency by test programs
 add_library(libgtest IMPORTED STATIC GLOBAL)
-add_dependencies(libgtest gtest)
+add_dependencies(libgtest googletest)
 
 # Set gtest properties
-ExternalProject_Get_Property(gtest source_dir binary_dir)
+ExternalProject_Get_Property(googletest source_dir binary_dir)
 set_target_properties(libgtest PROPERTIES
-    "IMPORTED_LOCATION" "${binary_dir}/libgtest.a"
+    "IMPORTED_LOCATION" "${binary_dir}/googlemock/gtest/libgtest.a"
     "IMPORTED_LINK_INTERFACE_LIBRARIES" "${CMAKE_THREAD_LIBS_INIT}"
     #    "INTERFACE_INCLUDE_DIRECTORIES" "${source_dir}/include"
     )
 # I couldn't make it work with INTERFACE_INCLUDE_DIRECTORIES
-include_directories("${source_dir}/external/googletest/googletest/include")
+# include_directories("${source_dir}/external/googletest/googletest/include")
+
+# specify include directory.
+set(GTEST_INCLUDE_DIR ${source_dir}/include)
+
+# library.
+# set(GTEST_LIBRARY_PATH ${binary_dir}/${CMAKE_FIND_LIBRARY_PREFIXES}gtest.a)
+set(GTEST_LIBRARY_PATH ${binary_dir}/googlemock/gtest/libgtest.a)
+set(GTEST_LIBRARY gtest)
+set(GTEST_MAIN_LIBRARY gtest_main)
+find_package(GTest REQUIRED)
+add_library(${GTEST_LIBRARY} UNKNOWN IMPORTED)
+set_property(TARGET ${GTEST_LIBRARY} PROPERTY IMPORTED_LOCATION
+    ${GTEST_LIBRARY_PATH} )
+add_dependencies(${GTEST_LIBRARY} googletest)
 
 # Download and install GoogleMock
 ExternalProject_Add(
-    gmock
+    googlemock
     GIT_REPOSITORY https://github.com/google/googletest
     PREFIX ${CMAKE_CURRENT_BINARY_DIR}/gmock
     # Disable install step
@@ -95,24 +109,19 @@ ExternalProject_Add(
 
 # Create a libgmock target to be used as a dependency by test programs
 add_library(libgmock IMPORTED STATIC GLOBAL)
-add_dependencies(libgmock gmock)
+add_dependencies(libgmock googlemock)
 
 # Set gmock properties
-ExternalProject_Get_Property(gmock source_dir binary_dir)
+ExternalProject_Get_Property(googlemock source_dir binary_dir)
 set_target_properties(libgmock PROPERTIES
-    "IMPORTED_LOCATION" "${binary_dir}/libgmock.a"
+    "IMPORTED_LOCATION" "${binary_dir}/googlemock/gmock/libgmock.a"
     "IMPORTED_LINK_INTERFACE_LIBRARIES" "${CMAKE_THREAD_LIBS_INIT}"
     #    "INTERFACE_INCLUDE_DIRECTORIES" "${source_dir}/include"
     )
 # I couldn't make it work with INTERFACE_INCLUDE_DIRECTORIES
-include_directories("${source_dir}/external/googletest/googlemock/include")
+# include_directories("${source_dir}/external/googletest/googlemock/include")
 
-# include_directories(
-#     "${source_dir}/external/googletest/googletest"
-#     "${source_dir}/external/googletest/googletest/include")
-find_package(GTest REQUIRED)
-
-include_directories(${GTEST_INCLUDE_DIR})
+include_directories(${GTEST_INCLUDE_DIRS})
 
 # include_directories(
 #     external/AntTweakBar-1.16/include/
@@ -262,6 +271,18 @@ target_link_libraries(do_tests
 # Xcode and Visual working directories
 set_target_properties(do_tests PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/cpp/tests/")
 create_target_launcher(do_tests WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/cpp/tests/")
+
+set(FILES_TO_TEST cpp/ylikuutio/tests/Testable.cpp)
+set(UNIT_TESTS cpp/ylikuutio/tests/Test.cpp)
+set(MAIN_FILE cpp/ylikuutio/tests/main.cpp)
+
+add_library(codeToTest ${FILES_TO_TEST})
+
+add_executable(do_tests_googletest ${MAIN_FILE})
+target_link_libraries(do_tests_googletest codeToTest)
+
+add_executable(unit-test cpp/ylikuutio/tests/test_main.cpp ${UNIT_TESTS})
+target_link_libraries(unit-test gtest libgtest rt pthread codeToTest)
 
 source_group(common REGULAR_EXPRESSION ".*/cpp/common/.*" )
 source_group(shaders REGULAR_EXPRESSION ".*/.*shader$" )
