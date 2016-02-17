@@ -6,6 +6,12 @@
 #include "cpp/ylikuutio/common/bilinear_interpolation.hpp"
 #include "cpp/ylikuutio/common/triangulation.hpp"
 
+// Include GLEW
+#ifndef __GL_GLEW_H_INCLUDED
+#define __GL_GLEW_H_INCLUDED
+#include <GL/glew.h> // GLfloat, GLuint etc.
+#endif
+
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
 #define __GLM_GLM_HPP_INCLUDED
