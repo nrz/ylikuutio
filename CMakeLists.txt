@@ -272,7 +272,18 @@ target_link_libraries(do_tests
 set_target_properties(do_tests PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/cpp/tests/")
 create_target_launcher(do_tests WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/cpp/tests/")
 
-set(FILES_TO_TEST cpp/ylikuutio/tests/testable.cpp)
+set(FILES_TO_TEST
+    cpp/ylikuutio/common/globals.cpp
+    cpp/ylikuutio/common/globals.hpp
+    cpp/ylikuutio/common/transformation.hpp
+    cpp/ylikuutio/common/transformation.cpp
+    cpp/ylikuutio/common/indexing.hpp
+    cpp/ylikuutio/common/indexing.cpp
+    cpp/ylikuutio/common/bilinear_interpolation.hpp
+    cpp/ylikuutio/common/bilinear_interpolation.cpp
+    cpp/ylikuutio/common/triangulation.hpp
+    cpp/ylikuutio/common/triangulation.cpp
+    cpp/ylikuutio/tests/testable.cpp)
 set(UNIT_TESTS cpp/ylikuutio/tests/test.cpp)
 set(MAIN_FILE cpp/ylikuutio/tests/main.cpp)
 
