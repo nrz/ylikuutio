@@ -102,9 +102,11 @@ TEST_CASE("SpeciesStruct must be initialized appropriately", "[SpeciesStruct]")
 
 TEST_CASE("FontStruct must be initialized appropriately", "[FontStruct]")
 {
+    const float default_vertex_scaling_factor = 0.001f;
+
     FontStruct test_font_struct;
     REQUIRE(test_font_struct.parent_pointer == nullptr);
-    REQUIRE(test_font_struct.vertex_scaling_factor == DEFAULT_VERTEX_SCALING_FACTOR);
+    REQUIRE(test_font_struct.vertex_scaling_factor == default_vertex_scaling_factor);
     REQUIRE(test_font_struct.font_file_format.empty());
     REQUIRE(test_font_struct.font_filename.empty());
 }
