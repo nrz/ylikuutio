@@ -34,7 +34,7 @@ if(NOT CMAKE_BUILD_TYPE)
 endif()
 
 # uncomment the following line to do unit tests also with Catch.
-# set(DO_UNIT_TESTS_WITH_CATCH)
+# set(DO_UNIT_TESTS_WITH_CATCH true)
 
 include(ExternalProject) # for ExternalProject_Add
 
