@@ -63,3 +63,14 @@ TEST(SpeciesStruct_must_be_initialized_appropriately, SpeciesStruct)
     ASSERT_EQ(test_species_struct.light_position, glm::vec3(0.0f, 0.0f, 0.0f));
     ASSERT_TRUE(test_species_struct.coordinate_system.empty());
 }
+
+TEST(FontStruct_must_be_initialized_appropriately, FontStruct)
+{
+    const float default_vertex_scaling_factor = 0.001f;
+
+    FontStruct test_font_struct;
+    ASSERT_EQ(test_font_struct.parent_pointer, nullptr);
+    ASSERT_EQ(test_font_struct.vertex_scaling_factor, default_vertex_scaling_factor);
+    ASSERT_TRUE(test_font_struct.font_file_format.empty());
+    ASSERT_TRUE(test_font_struct.font_filename.empty());
+}
