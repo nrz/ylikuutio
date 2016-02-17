@@ -283,7 +283,7 @@ set(FILES_TO_TEST
     cpp/ylikuutio/common/bilinear_interpolation.cpp
     cpp/ylikuutio/common/triangulation.hpp
     cpp/ylikuutio/common/triangulation.cpp
-    cpp/ylikuutio/tests/testable.cpp)
+    )
 set(UNIT_TESTS cpp/ylikuutio/tests/test.cpp)
 set(MAIN_FILE cpp/ylikuutio/tests/main.cpp)
 

@@ -1,5 +1,4 @@
 #include "gtest/gtest.h"
-#include "testable.hpp"
 #include "cpp/ylikuutio/common/globals.hpp"
 #include "cpp/ylikuutio/common/transformation.hpp"
 #include "cpp/ylikuutio/common/indexing.hpp"
@@ -24,11 +23,6 @@
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 #include <vector>   // std::vector
-
-TEST(GetTwoTest, Two)
-{
-    EXPECT_EQ(2, getTwo());
-}
 
 TEST(ShaderStruct_must_be_initialized_appropriately, ShaderStruct)
 {
