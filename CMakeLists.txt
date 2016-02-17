@@ -293,6 +293,8 @@ add_executable(do_tests_googletest ${MAIN_FILE})
 target_link_libraries(do_tests_googletest codeToTest)
 
 add_executable(unit-test cpp/ylikuutio/tests/test_main.cpp ${UNIT_TESTS})
+configure_file(res/height_maps/noise256x256.bmp noise256x256.bmp COPYONLY)
+configure_file(res/textures/test3x3.bmp test3x3.bmp COPYONLY)
 target_link_libraries(unit-test gtest libgtest rt pthread codeToTest)
 
 source_group(common REGULAR_EXPRESSION ".*/cpp/common/.*" )
