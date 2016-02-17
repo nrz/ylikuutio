@@ -50,8 +50,8 @@ include_directories(
     external/glm-0.9.4.0/
     external/glew-1.9.0/include/
     external/Catch/single_include/
-    # external/googletest/googletest/include/
-    # external/googletest/googlemock/include/
+    external/googletest/googletest/include/
+    external/googletest/googlemock/include/
     .
     )
 
