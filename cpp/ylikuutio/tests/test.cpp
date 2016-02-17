@@ -302,7 +302,7 @@ TEST(a_3x3_BMP_world_must_be_loaded_appropriately, load_3x3_BMP_world)
     std::vector<glm::vec2> out_UVs;
     std::vector<glm::vec3> out_normals;
     uint32_t image_width = 0;
-    GLuint image_height = 0;
+    uint32_t image_height = 0;
     std::string color_channel = "mean";
 
     std::string triangulation_type = "bilinear_interpolation";
@@ -334,7 +334,7 @@ TEST(a_256x256_BMP_world_must_be_loaded_appropriately, load_256x256_BMP_world)
     std::vector<glm::vec2> out_UVs;
     std::vector<glm::vec3> out_normals;
     uint32_t image_width = 0;
-    GLuint image_height = 0;
+    uint32_t image_height = 0;
     std::string color_channel = "mean";
     std::string triangulation_type = "bilinear_interpolation";
 
