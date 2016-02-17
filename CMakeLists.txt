@@ -39,13 +39,19 @@ if(INCLUDE_DISTRIB)
     add_subdirectory(distrib)
 endif(INCLUDE_DISTRIB)
 
+# for Google Test.
+enable_testing()
+set(GTEST_INCLUDE_DIR "${source_dir}/external/googletest/googletest/include")
+set(GTEST_LIBRARY "${source_dir}/external/googletest/googletest/libgtest.a")
+set(GTEST_MAIN_LIBRARY "${source_dir}/external/googletest/googletest/libgtest_main.a")
+
 include_directories(
     external/glfw-3.0.3/include/GLFW/
     external/glm-0.9.4.0/
     external/glew-1.9.0/include/
     external/Catch/single_include/
-    external/googletest/googletest/include/
-    external/googletest/googlemock/include/
+    # external/googletest/googletest/include/
+    # external/googletest/googlemock/include/
     .
     )
 
@@ -100,10 +106,6 @@ set_target_properties(libgmock PROPERTIES
     )
 # I couldn't make it work with INTERFACE_INCLUDE_DIRECTORIES
 include_directories("${source_dir}/external/googletest/googlemock/include")
-
-# for Google Test.
-enable_testing()
-set(GTEST_INCLUDE_DIR "${source_dir}/external/googletest/googletest")
 
 # include_directories(
 #     "${source_dir}/external/googletest/googletest"
