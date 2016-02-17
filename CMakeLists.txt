@@ -147,6 +147,28 @@ add_definitions(
     -D_CRT_SECURE_NO_WARNINGS
     )
 
+# for general use.
+configure_file(cpp/ylikuutio/common/TransformVertexShader.vertexshader TransformVertexShader.vertexshader COPYONLY)
+configure_file(cpp/ylikuutio/common/TextureFragmentShader.fragmentshader TextureFragmentShader.fragmentshader COPYONLY)
+configure_file(cpp/ylikuutio/common/StandardShading.vertexshader StandardShading.vertexshader COPYONLY)
+configure_file(cpp/ylikuutio/common/StandardShading.fragmentshader StandardShading.fragmentshader COPYONLY)
+configure_file(cpp/ylikuutio/common/TextVertexShader.vertexshader TextVertexShader.vertexshader COPYONLY)
+configure_file(cpp/ylikuutio/common/TextVertexShader.fragmentshader TextVertexShader.fragmentshader COPYONLY)
+configure_file(res/objects/suzanne.obj suzanne.obj COPYONLY)
+configure_file(res/textures/uvmap.DDS uvmap.DDS COPYONLY)
+configure_file(res/textures/GrassGreenTexture0002.bmp GrassGreenTexture0002.bmp COPYONLY)
+configure_file(res/fonts/Holstein.DDS Holstein.DDS COPYONLY)
+configure_file(res/fonts/Holstein.bmp Holstein.bmp COPYONLY)
+configure_file(res/height_maps/noise1024x1024.bmp noise1024x1024.bmp COPYONLY)
+configure_file(res/height_maps/noise256x256.bmp noise256x256.bmp COPYONLY)
+configure_file(res/height_maps/noise128x128.bmp noise128x128.bmp COPYONLY)
+configure_file(res/height_maps/S17W069.hgt S17W069.hgt COPYONLY)
+configure_file(res/fonts/kongtext.svg kongtext.svg COPYONLY)
+
+# for tests.
+configure_file(res/height_maps/noise256x256.bmp noise256x256.bmp COPYONLY)
+configure_file(res/textures/test3x3.bmp test3x3.bmp COPYONLY)
+
 # Ajokki
 add_executable(ajokki
     # callback, in alphabetical order
@@ -234,23 +256,6 @@ add_executable(ajokki
     cpp/ajokki/ajokki.cpp
     )
 
-configure_file(cpp/ylikuutio/common/TransformVertexShader.vertexshader TransformVertexShader.vertexshader COPYONLY)
-configure_file(cpp/ylikuutio/common/TextureFragmentShader.fragmentshader TextureFragmentShader.fragmentshader COPYONLY)
-configure_file(cpp/ylikuutio/common/StandardShading.vertexshader StandardShading.vertexshader COPYONLY)
-configure_file(cpp/ylikuutio/common/StandardShading.fragmentshader StandardShading.fragmentshader COPYONLY)
-configure_file(cpp/ylikuutio/common/TextVertexShader.vertexshader TextVertexShader.vertexshader COPYONLY)
-configure_file(cpp/ylikuutio/common/TextVertexShader.fragmentshader TextVertexShader.fragmentshader COPYONLY)
-configure_file(res/objects/suzanne.obj suzanne.obj COPYONLY)
-configure_file(res/textures/uvmap.DDS uvmap.DDS COPYONLY)
-configure_file(res/textures/GrassGreenTexture0002.bmp GrassGreenTexture0002.bmp COPYONLY)
-configure_file(res/fonts/Holstein.DDS Holstein.DDS COPYONLY)
-configure_file(res/fonts/Holstein.bmp Holstein.bmp COPYONLY)
-configure_file(res/height_maps/noise1024x1024.bmp noise1024x1024.bmp COPYONLY)
-configure_file(res/height_maps/noise256x256.bmp noise256x256.bmp COPYONLY)
-configure_file(res/height_maps/noise128x128.bmp noise128x128.bmp COPYONLY)
-configure_file(res/height_maps/S17W069.hgt S17W069.hgt COPYONLY)
-configure_file(res/fonts/kongtext.svg kongtext.svg COPYONLY)
-
 target_link_libraries(ajokki
     ${ALL_LIBS}
     )
@@ -262,8 +267,6 @@ create_target_launcher(ajokki WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/cpp
 add_executable(unit_tests_with_Catch
     cpp/ylikuutio/tests/tests.cpp
     )
-configure_file(res/height_maps/noise256x256.bmp noise256x256.bmp COPYONLY)
-configure_file(res/textures/test3x3.bmp test3x3.bmp COPYONLY)
 
 target_link_libraries(unit_tests_with_Catch
     ${ALL_LIBS}
@@ -293,8 +296,6 @@ add_executable(do_tests_googletest ${MAIN_FILE})
 target_link_libraries(do_tests_googletest codeToTest)
 
 add_executable(unit_tests_with_Google_Test cpp/ylikuutio/tests/test_main.cpp ${UNIT_TESTS})
-configure_file(res/height_maps/noise256x256.bmp noise256x256.bmp COPYONLY)
-configure_file(res/textures/test3x3.bmp test3x3.bmp COPYONLY)
 target_link_libraries(unit_tests_with_Google_Test gtest libgtest rt pthread codeToTest)
 
 source_group(common REGULAR_EXPRESSION ".*/cpp/common/.*" )
