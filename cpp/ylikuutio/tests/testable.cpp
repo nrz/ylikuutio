@@ -1,6 +1,6 @@
 #include "testable.hpp"
 
-int GetTwo()
+int getTwo()
 {
     return 3;
 }
