@@ -259,18 +259,18 @@ set_target_properties(ajokki PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR 
 create_target_launcher(ajokki WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/cpp/ylikuutio/")
 
 # Tests
-add_executable(do_tests
+add_executable(unit_tests_with_Catch
     cpp/ylikuutio/tests/tests.cpp
     )
 configure_file(res/height_maps/noise256x256.bmp noise256x256.bmp COPYONLY)
 configure_file(res/textures/test3x3.bmp test3x3.bmp COPYONLY)
 
-target_link_libraries(do_tests
+target_link_libraries(unit_tests_with_Catch
     ${ALL_LIBS}
     )
 # Xcode and Visual working directories
-set_target_properties(do_tests PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/cpp/tests/")
-create_target_launcher(do_tests WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/cpp/tests/")
+set_target_properties(unit_tests_with_Catch PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/cpp/tests/")
+create_target_launcher(unit_tests_with_Catch WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/cpp/tests/")
 
 set(FILES_TO_TEST
     cpp/ylikuutio/common/globals.cpp
