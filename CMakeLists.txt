@@ -36,6 +36,9 @@ endif()
 # uncomment the following line to do unit tests also with Catch.
 # set(DO_UNIT_TESTS_WITH_CATCH true)
 
+# comment the following line to disable unit tests with Google Test.
+set(DO_UNIT_TESTS_WITH_GOOGLE_TEST true)
+
 include(ExternalProject) # for ExternalProject_Add
 
 # for Google Test.
@@ -280,28 +283,30 @@ if(DO_UNIT_TESTS_WITH_CATCH)
     create_target_launcher(unit_tests_with_Catch WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/cpp/tests/")
 endif()
 
-set(FILES_TO_TEST
-    cpp/ylikuutio/common/globals.cpp
-    cpp/ylikuutio/common/globals.hpp
-    cpp/ylikuutio/common/transformation.hpp
-    cpp/ylikuutio/common/transformation.cpp
-    cpp/ylikuutio/common/indexing.hpp
-    cpp/ylikuutio/common/indexing.cpp
-    cpp/ylikuutio/common/bilinear_interpolation.hpp
-    cpp/ylikuutio/common/bilinear_interpolation.cpp
-    cpp/ylikuutio/common/triangulation.hpp
-    cpp/ylikuutio/common/triangulation.cpp
-    )
-set(UNIT_TESTS cpp/ylikuutio/tests/test.cpp)
-set(MAIN_FILE cpp/ylikuutio/tests/main.cpp)
+if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
+    set(FILES_TO_TEST
+        cpp/ylikuutio/common/globals.cpp
+        cpp/ylikuutio/common/globals.hpp
+        cpp/ylikuutio/common/transformation.hpp
+        cpp/ylikuutio/common/transformation.cpp
+        cpp/ylikuutio/common/indexing.hpp
+        cpp/ylikuutio/common/indexing.cpp
+        cpp/ylikuutio/common/bilinear_interpolation.hpp
+        cpp/ylikuutio/common/bilinear_interpolation.cpp
+        cpp/ylikuutio/common/triangulation.hpp
+        cpp/ylikuutio/common/triangulation.cpp
+        )
+    set(UNIT_TESTS cpp/ylikuutio/tests/test.cpp)
+    set(MAIN_FILE cpp/ylikuutio/tests/main.cpp)
 
-add_library(codeToTest ${FILES_TO_TEST})
+    add_library(codeToTest ${FILES_TO_TEST})
 
-add_executable(do_tests_googletest ${MAIN_FILE})
-target_link_libraries(do_tests_googletest codeToTest)
+    add_executable(do_tests_googletest ${MAIN_FILE})
+    target_link_libraries(do_tests_googletest codeToTest)
 
-add_executable(unit_tests_with_Google_Test cpp/ylikuutio/tests/test_main.cpp ${UNIT_TESTS})
-target_link_libraries(unit_tests_with_Google_Test gtest libgtest rt pthread codeToTest)
+    add_executable(unit_tests_with_Google_Test cpp/ylikuutio/tests/test_main.cpp ${UNIT_TESTS})
+    target_link_libraries(unit_tests_with_Google_Test gtest libgtest rt pthread codeToTest)
+endif()
 
 source_group(common REGULAR_EXPRESSION ".*/cpp/common/.*" )
 source_group(shaders REGULAR_EXPRESSION ".*/.*shader$" )
