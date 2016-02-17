@@ -5,6 +5,8 @@
 #include "cpp/ylikuutio/common/indexing.hpp"
 #include "cpp/ylikuutio/common/bilinear_interpolation.hpp"
 #include "cpp/ylikuutio/common/triangulation.hpp"
+#include "cpp/ylikuutio/model/heightmap_loader.hpp"
+#include "cpp/ylikuutio/model/heightmap_loader.cpp"
 
 // Include GLEW
 #ifndef __GL_GLEW_H_INCLUDED
@@ -297,4 +299,36 @@ TEST(a_2x2_world_must_be_triangulated_appropriately, southeast_northwest_edges)
     ASSERT_EQ(vertices[5].x, 0.0f);
     ASSERT_EQ(vertices[5].z, 1.0f);
     ASSERT_EQ(vertices[5].y, northwest_height);
+}
+
+TEST(a_3x3_BMP_world_must_be_loaded_appropriately, load_3x3_BMP_world)
+{
+    std::string image_path = "test3x3.bmp";
+    std::vector<glm::vec3> out_vertices;
+    std::vector<glm::vec2> out_UVs;
+    std::vector<glm::vec3> out_normals;
+    GLuint image_width = 0;
+    GLuint image_height = 0;
+    std::string color_channel = "mean";
+
+    std::string triangulation_type = "bilinear_interpolation";
+
+    bool model_loading_result = model::load_BMP_world(
+            image_path,
+            *&out_vertices,
+            *&out_UVs,
+            *&out_normals,
+            *&image_width,
+            *&image_height,
+            color_channel,
+            triangulation_type);
+
+    const uint32_t n_vertices_for_face = 3;
+    const uint32_t n_faces_for_bilinear_triangulation = 4;
+    const uint32_t n_width_of_image_file = 3;
+    const uint32_t n_height_of_image_file = 3;
+
+    ASSERT_EQ(out_vertices.size(), n_vertices_for_face * n_faces_for_bilinear_triangulation * (n_width_of_image_file - 1) * (n_height_of_image_file - 1));
+    ASSERT_EQ(out_UVs.size(), n_vertices_for_face * n_faces_for_bilinear_triangulation * (n_width_of_image_file - 1) * (n_height_of_image_file - 1));
+    ASSERT_EQ(out_normals.size(), n_vertices_for_face * n_faces_for_bilinear_triangulation * (n_width_of_image_file - 1) * (n_height_of_image_file - 1));
 }
