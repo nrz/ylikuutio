@@ -33,6 +33,9 @@ if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE Release)
 endif()
 
+# uncomment the following line to do unit tests also with Catch.
+set(DO_UNIT_TESTS_WITH_CATCH)
+
 include(ExternalProject) # for ExternalProject_Add
 
 # for Google Test.
@@ -264,16 +267,18 @@ set_target_properties(ajokki PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR 
 create_target_launcher(ajokki WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/cpp/ylikuutio/")
 
 # Tests
-add_executable(unit_tests_with_Catch
-    cpp/ylikuutio/tests/tests.cpp
-    )
+if(DO_UNIT_TESTS_WITH_CATCH)
+    add_executable(unit_tests_with_Catch
+        cpp/ylikuutio/tests/tests.cpp
+        )
 
-target_link_libraries(unit_tests_with_Catch
-    ${ALL_LIBS}
-    )
-# Xcode and Visual working directories
-set_target_properties(unit_tests_with_Catch PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/cpp/tests/")
-create_target_launcher(unit_tests_with_Catch WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/cpp/tests/")
+    target_link_libraries(unit_tests_with_Catch
+        ${ALL_LIBS}
+        )
+    # Xcode and Visual working directories
+    set_target_properties(unit_tests_with_Catch PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/cpp/tests/")
+    create_target_launcher(unit_tests_with_Catch WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/cpp/tests/")
+endif()
 
 set(FILES_TO_TEST
     cpp/ylikuutio/common/globals.cpp
