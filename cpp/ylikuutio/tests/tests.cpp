@@ -298,7 +298,7 @@ TEST_CASE("3x3 BMP world must be loaded appropriately", "[load_3x3_BMP_world]")
     std::vector<glm::vec3> out_vertices;
     std::vector<glm::vec2> out_UVs;
     std::vector<glm::vec3> out_normals;
-    GLuint image_width = 0;
+    uint32_t image_width = 0;
     GLuint image_height = 0;
     std::string color_channel = "mean";
 
@@ -330,7 +330,7 @@ TEST_CASE("256x256 BMP world must be loaded appropriately", "[load_256x256_BMP_w
     std::vector<glm::vec3> out_vertices;
     std::vector<glm::vec2> out_UVs;
     std::vector<glm::vec3> out_normals;
-    GLuint image_width = 0;
+    uint32_t image_width = 0;
     GLuint image_height = 0;
     std::string color_channel = "mean";
     std::string triangulation_type = "bilinear_interpolation";
