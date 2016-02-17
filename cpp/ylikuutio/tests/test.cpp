@@ -18,6 +18,11 @@
 #include <glm/glm.hpp> // glm
 #endif
 
+// Include standard headers
+#include <stdint.h> // uint32_t etc.
+#include <string>   // std::string
+#include <vector>   // std::vector
+
 TEST(GetTwoTest, Two)
 {
     EXPECT_EQ(2, getTwo());
