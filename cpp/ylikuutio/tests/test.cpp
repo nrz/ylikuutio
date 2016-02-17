@@ -50,3 +50,16 @@ TEST(ObjectStruct_must_be_initialized_appropriately, ObjectStruct)
     ASSERT_EQ(test_object_struct.rotate_vector, glm::vec3(0.0f, 0.0f, 0.0f));
     ASSERT_EQ(test_object_struct.translate_vector, glm::vec3(0.0f, 0.0f, 0.0f));
 }
+
+TEST(SpeciesStruct_must_be_initialized_appropriately, SpeciesStruct)
+{
+    SpeciesStruct test_species_struct;
+    ASSERT_EQ(test_species_struct.parent_pointer, nullptr);
+    ASSERT_FALSE(test_species_struct.is_world);
+    ASSERT_TRUE(std::isnan(test_species_struct.world_radius));
+    ASSERT_TRUE(test_species_struct.model_file_format.empty());
+    ASSERT_TRUE(test_species_struct.model_filename.empty());
+    ASSERT_TRUE(test_species_struct.color_channel.empty());
+    ASSERT_EQ(test_species_struct.light_position, glm::vec3(0.0f, 0.0f, 0.0f));
+    ASSERT_TRUE(test_species_struct.coordinate_system.empty());
+}
