@@ -74,3 +74,10 @@ TEST(FontStruct_must_be_initialized_appropriately, FontStruct)
     ASSERT_TRUE(test_font_struct.font_file_format.empty());
     ASSERT_TRUE(test_font_struct.font_filename.empty());
 }
+
+TEST(GlyphStruct_must_be_initialized_appropriately, GlyphStruct)
+{
+    GlyphStruct test_glyph_struct;
+    ASSERT_EQ(test_glyph_struct.parent_pointer, nullptr);
+    ASSERT_EQ(test_glyph_struct.light_position, glm::vec3(0.0f, 0.0f, 0.0f));
+}
