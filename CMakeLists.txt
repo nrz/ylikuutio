@@ -287,14 +287,14 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
     set(FILES_TO_TEST
         cpp/ylikuutio/common/globals.cpp
         cpp/ylikuutio/common/globals.hpp
-        cpp/ylikuutio/common/transformation.hpp
         cpp/ylikuutio/common/transformation.cpp
-        cpp/ylikuutio/common/indexing.hpp
+        cpp/ylikuutio/common/transformation.hpp
         cpp/ylikuutio/common/indexing.cpp
-        cpp/ylikuutio/common/bilinear_interpolation.hpp
+        cpp/ylikuutio/common/indexing.hpp
         cpp/ylikuutio/common/bilinear_interpolation.cpp
-        cpp/ylikuutio/common/triangulation.hpp
+        cpp/ylikuutio/common/bilinear_interpolation.hpp
         cpp/ylikuutio/common/triangulation.cpp
+        cpp/ylikuutio/common/triangulation.hpp
         )
     set(UNIT_TESTS cpp/ylikuutio/tests/test.cpp)
     set(MAIN_FILE cpp/ylikuutio/tests/main.cpp)
