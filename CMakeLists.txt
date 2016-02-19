@@ -272,15 +272,15 @@ create_target_launcher(ajokki WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/cpp
 # Tests
 if(DO_UNIT_TESTS_WITH_CATCH)
     add_executable(unit_tests_with_Catch
-        cpp/ylikuutio/tests/tests.cpp
+        cpp/ylikuutio/tests/catch/tests.cpp
         )
 
     target_link_libraries(unit_tests_with_Catch
         ${ALL_LIBS}
         )
     # Xcode and Visual working directories
-    set_target_properties(unit_tests_with_Catch PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/cpp/tests/")
-    create_target_launcher(unit_tests_with_Catch WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/cpp/tests/")
+    set_target_properties(unit_tests_with_Catch PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/cpp/tests/catch/")
+    create_target_launcher(unit_tests_with_Catch WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/cpp/tests/catch/")
 endif()
 
 if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
@@ -296,15 +296,15 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         cpp/ylikuutio/common/triangulation.cpp
         cpp/ylikuutio/common/triangulation.hpp
         )
-    set(UNIT_TESTS cpp/ylikuutio/tests/test.cpp)
-    set(MAIN_FILE cpp/ylikuutio/tests/main.cpp)
+    set(UNIT_TESTS cpp/ylikuutio/tests/googletest/test.cpp)
+    set(MAIN_FILE cpp/ylikuutio/tests/googletest/main.cpp)
 
     add_library(codeToTest ${FILES_TO_TEST})
 
     add_executable(do_tests_googletest ${MAIN_FILE})
     target_link_libraries(do_tests_googletest codeToTest)
 
-    add_executable(unit_tests_with_Google_Test cpp/ylikuutio/tests/test_main.cpp ${UNIT_TESTS})
+    add_executable(unit_tests_with_Google_Test cpp/ylikuutio/tests/googletest/test_main.cpp ${UNIT_TESTS})
     target_link_libraries(unit_tests_with_Google_Test gtest libgtest rt pthread codeToTest)
 endif()
 
