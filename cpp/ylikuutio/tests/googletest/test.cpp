@@ -439,7 +439,7 @@ TEST(string_matching, no_string_must_match_when_the_identifier_string_vector_is_
     std::vector<std::string> identifier_strings_vector = {};
     ASSERT_FALSE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, identifier_strings_vector));
 }
-TEST(string_matching, no_string_must_match_when_the_identifier_string_vector_is_longer_than_string_to_be_compared_with)
+TEST(string_matching, no_string_must_match_when_the_only_identifier_string_is_longer_than_the_string_to_be_compared_with)
 {
     char text[] = "a";
     const char* text_base_pointer = text;
