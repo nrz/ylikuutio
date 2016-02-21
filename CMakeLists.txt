@@ -306,6 +306,10 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
 
     add_executable(unit_tests_with_Google_Test cpp/ylikuutio/tests/googletest/test_main.cpp ${UNIT_TESTS})
     target_link_libraries(unit_tests_with_Google_Test gtest libgtest rt pthread codeToTest)
+
+    # Xcode and Visual working directories
+    set_target_properties(unit_tests_with_Google_Test PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/cpp/tests/googletest/")
+    create_target_launcher(unit_tests_with_Google_Test WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/cpp/tests/googletest/")
 endif()
 
 source_group(common REGULAR_EXPRESSION ".*/cpp/common/.*" )
