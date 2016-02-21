@@ -295,6 +295,8 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         cpp/ylikuutio/common/bilinear_interpolation.hpp
         cpp/ylikuutio/common/triangulation.cpp
         cpp/ylikuutio/common/triangulation.hpp
+        cpp/ylikuutio/string/ylikuutio_string.cpp
+        cpp/ylikuutio/string/ylikuutio_string.hpp
         )
     set(UNIT_TESTS cpp/ylikuutio/tests/googletest/test.cpp)
     set(MAIN_FILE cpp/ylikuutio/tests/googletest/main.cpp)
