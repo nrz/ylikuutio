@@ -362,6 +362,14 @@ TEST(a_BMP_world_must_be_loaded_appropriately, load_256x256_BMP_world)
     ASSERT_EQ(out_normals.size(), n_vertices_for_face * n_faces_for_bilinear_triangulation * (n_width_of_image_file - 1) * (n_height_of_image_file - 1));
 }
 
+TEST(string_matching, some_string_must_match_when_the_only_identifier_string_is_an_empty_string)
+{
+    char text[] = "a";
+    const char* text_base_pointer = text;
+    char* text_data_pointer = text;
+    std::vector<std::string> identifier_strings_vector = { "" };
+    ASSERT_TRUE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, identifier_strings_vector));
+}
 TEST(string_matching, some_string_must_match_when_there_is_only_one_1_character_string_in_the_identifier_string_vector_and_it_matches)
 {
     char text[] = "a";
