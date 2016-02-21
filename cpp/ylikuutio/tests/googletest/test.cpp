@@ -297,7 +297,7 @@ TEST(a_2x2_world_must_be_triangulated_appropriately, southeast_northwest_edges)
     ASSERT_EQ(vertices[5].y, northwest_height);
 }
 
-TEST(a_3x3_BMP_world_must_be_loaded_appropriately, load_3x3_BMP_world)
+TEST(a_BMP_world_must_be_loaded_appropriately, load_3x3_BMP_world)
 {
     std::string image_path = "test3x3.bmp";
     std::vector<glm::vec3> out_vertices;
@@ -329,7 +329,7 @@ TEST(a_3x3_BMP_world_must_be_loaded_appropriately, load_3x3_BMP_world)
     ASSERT_EQ(out_normals.size(), n_vertices_for_face * n_faces_for_bilinear_triangulation * (n_width_of_image_file - 1) * (n_height_of_image_file - 1));
 }
 
-TEST(a_256x256_BMP_world_must_be_loaded_appropriately, load_256x256_BMP_world)
+TEST(a_BMP_world_must_be_loaded_appropriately, load_256x256_BMP_world)
 {
     std::string image_path = "noise256x256.bmp";
     std::vector<glm::vec3> out_vertices;
