@@ -2,7 +2,6 @@
 #include "cpp/ylikuutio/common/triangulation.hpp"
 
 // Include standard headers
-#include <iostream> // std::cout, std::cin, std::cerr
 #include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
 
@@ -50,19 +49,6 @@ TEST(a_2x2_world_must_be_triangulated_appropriately, bilinear_interpolation)
     ASSERT_EQ(vertices.size(), 12);
     ASSERT_EQ(UVs.size(), 12);
     ASSERT_EQ(normals.size(), 12);
-
-    std::cout << " 0: " << vertices[0].x << ", " << vertices[0].y << ", " << vertices[0].z << "\n";
-    std::cout << " 1: " << vertices[1].x << ", " << vertices[1].y << ", " << vertices[1].z << "\n";
-    std::cout << " 2: " << vertices[2].x << ", " << vertices[2].y << ", " << vertices[2].z << "\n";
-    std::cout << " 3: " << vertices[3].x << ", " << vertices[3].y << ", " << vertices[3].z << "\n";
-    std::cout << " 4: " << vertices[4].x << ", " << vertices[4].y << ", " << vertices[4].z << "\n";
-    std::cout << " 5: " << vertices[5].x << ", " << vertices[5].y << ", " << vertices[5].z << "\n";
-    std::cout << " 6: " << vertices[6].x << ", " << vertices[6].y << ", " << vertices[6].z << "\n";
-    std::cout << " 7: " << vertices[7].x << ", " << vertices[7].y << ", " << vertices[7].z << "\n";
-    std::cout << " 8: " << vertices[8].x << ", " << vertices[8].y << ", " << vertices[8].z << "\n";
-    std::cout << " 9: " << vertices[9].x << ", " << vertices[9].y << ", " << vertices[9].z << "\n";
-    std::cout << "10: " << vertices[10].x << ", " << vertices[10].y << ", " << vertices[10].z << "\n";
-    std::cout << "11: " << vertices[11].x << ", " << vertices[11].y << ", " << vertices[11].z << "\n";
 
     // 1st vertex is the center vertex of the 1st triangle.
     ASSERT_EQ(vertices[0].x, center_x);
@@ -168,13 +154,6 @@ TEST(a_2x2_world_must_be_triangulated_appropriately, southeast_northwest_edges)
     ASSERT_EQ(vertices.size(), 6);
     ASSERT_EQ(UVs.size(), 6);
     ASSERT_EQ(normals.size(), 6);
-
-    std::cout << " 0: " << vertices[0].x << ", " << vertices[0].y << ", " << vertices[0].z << "\n";
-    std::cout << " 1: " << vertices[1].x << ", " << vertices[1].y << ", " << vertices[1].z << "\n";
-    std::cout << " 2: " << vertices[2].x << ", " << vertices[2].y << ", " << vertices[2].z << "\n";
-    std::cout << " 3: " << vertices[3].x << ", " << vertices[3].y << ", " << vertices[3].z << "\n";
-    std::cout << " 4: " << vertices[4].x << ", " << vertices[4].y << ", " << vertices[4].z << "\n";
-    std::cout << " 5: " << vertices[5].x << ", " << vertices[5].y << ", " << vertices[5].z << "\n";
 
     // 1st vertex is the southwest vertex of the 1st triangle.
     ASSERT_EQ(vertices[0].x, 0.0f);
