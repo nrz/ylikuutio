@@ -298,7 +298,9 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         cpp/ylikuutio/string/ylikuutio_string.cpp
         cpp/ylikuutio/string/ylikuutio_string.hpp
         )
-    set(UNIT_TESTS cpp/ylikuutio/tests/googletest/test.cpp)
+    set(UNIT_TESTS
+        cpp/ylikuutio/tests/googletest/test.cpp
+        cpp/ylikuutio/tests/googletest/test_ylikuutio_string.cpp)
     set(MAIN_FILE cpp/ylikuutio/tests/googletest/main.cpp)
 
     add_library(codeToTest ${FILES_TO_TEST})
