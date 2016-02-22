@@ -299,7 +299,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         cpp/ylikuutio/string/ylikuutio_string.hpp
         )
     set(UNIT_TESTS
-        cpp/ylikuutio/tests/googletest/test.cpp
+        cpp/ylikuutio/tests/googletest/test_globals.cpp
         cpp/ylikuutio/tests/googletest/test_heightmap_loader.cpp
         cpp/ylikuutio/tests/googletest/test_triangulation.cpp
         cpp/ylikuutio/tests/googletest/test_ylikuutio_string.cpp)
