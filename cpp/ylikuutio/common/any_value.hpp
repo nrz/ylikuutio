@@ -6,6 +6,11 @@
 #include <string>   // std::string
 #include <stdint.h> // uint32_t etc.
 
+namespace model
+{
+    class World;
+}
+
 namespace datatypes
 {
     enum datatype
@@ -16,7 +21,8 @@ namespace datatypes
         DOUBLE,
         INT32_T,
         UINT32_T,
-        VOID_POINTER
+        VOID_POINTER,
+        WORLD_POINTER
     };
 }
 
@@ -60,6 +66,12 @@ typedef struct AnyValue
 
     AnyValue(void* void_pointer)
         : type(datatypes::VOID_POINTER), bool_value(false), float_value(NAN), double_value(NAN), int32_t_value(0), uint32_t_value(uint32_t_value), void_pointer(void_pointer)
+    {
+        // constructor.
+    }
+
+    AnyValue(model::World* world_pointer)
+        : type(datatypes::WORLD_POINTER), bool_value(false), float_value(NAN), double_value(NAN), int32_t_value(0), uint32_t_value(uint32_t_value), void_pointer(world_pointer)
     {
         // constructor.
     }
