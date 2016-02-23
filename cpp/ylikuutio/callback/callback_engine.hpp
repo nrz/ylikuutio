@@ -88,12 +88,7 @@ namespace callback_system
             std::vector<void*> callback_object_pointer_vector;
             std::queue<uint32_t> free_callback_objectID_queue;
 
-            std::unordered_map<std::string, bool> bool_hashmap;
-            std::unordered_map<std::string, float> float_hashmap;
-            std::unordered_map<std::string, double> double_hashmap;
-            std::unordered_map<std::string, int32_t> int32_t_hashmap;
-            std::unordered_map<std::string, uint32_t> uint32_t_hashmap;
-            std::unordered_map<std::string, void*> void_pointer_hashmap;
+            std::unordered_map<std::string, AnyValue> anyvalue_hashmap;
     };
 }
 

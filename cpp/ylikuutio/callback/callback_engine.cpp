@@ -1,4 +1,5 @@
 #include "callback_engine.hpp"
+#include "cpp/ylikuutio/common/any_value.hpp"
 #include "cpp/ylikuutio/hierarchy/hierarchy.hpp"
 
 // Include standard headers
@@ -29,64 +30,64 @@ namespace callback_system
 
     bool CallbackEngine::get_bool(std::string name)
     {
-        return this->bool_hashmap[name];
+        return this->anyvalue_hashmap[name].bool_value;
     }
 
     float CallbackEngine::get_float(std::string name)
     {
-        return this->float_hashmap[name];
+        return this->anyvalue_hashmap[name].float_value;
     }
 
     double CallbackEngine::get_double(std::string name)
     {
-        return this->double_hashmap[name];
+        return this->anyvalue_hashmap[name].double_value;
     }
 
     int32_t CallbackEngine::get_int32_t(std::string name)
     {
-        return this->int32_t_hashmap[name];
+        return this->anyvalue_hashmap[name].int32_t_value;
     }
 
     uint32_t CallbackEngine::get_uint32_t(std::string name)
     {
-        return this->uint32_t_hashmap[name];
+        return this->anyvalue_hashmap[name].uint32_t_value;
     }
 
     void* CallbackEngine::get_void_pointer(std::string name)
     {
-        return this->void_pointer_hashmap[name];
+        return this->anyvalue_hashmap[name].void_pointer;
     }
 
     // setter functions for callbacks and callback objects.
 
     void CallbackEngine::set_bool(std::string name, bool value)
     {
-        this->bool_hashmap[name] = value;
+        this->anyvalue_hashmap[name] = AnyValue(value);
     }
 
     void CallbackEngine::set_float(std::string name, float value)
     {
-        this->float_hashmap[name] = value;
+        this->anyvalue_hashmap[name] = AnyValue(value);
     }
 
     void CallbackEngine::set_double(std::string name, double value)
     {
-        this->double_hashmap[name] = value;
+        this->anyvalue_hashmap[name] = AnyValue(value);
     }
 
     void CallbackEngine::set_int32_t(std::string name, int32_t value)
     {
-        this->int32_t_hashmap[name] = value;
+        this->anyvalue_hashmap[name] = AnyValue(value);
     }
 
     void CallbackEngine::set_uint32_t(std::string name, uint32_t value)
     {
-        this->uint32_t_hashmap[name] = value;
+        this->anyvalue_hashmap[name] = AnyValue(value);
     }
 
     void CallbackEngine::set_void_pointer(std::string name, void* value)
     {
-        this->void_pointer_hashmap[name] = value;
+        this->anyvalue_hashmap[name] = AnyValue(value);
     }
 
     AnyValue CallbackEngine::execute()
