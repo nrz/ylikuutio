@@ -18,7 +18,7 @@ namespace string
             {
                 const char* identifier_string_char = identifier_string.c_str();
                 uint64_t offset = (uint64_t) SVG_data_pointer - (uint64_t) SVG_base_pointer;
-                printf("%s found at file offset 0x%lx (memory address 0x%lx). ", identifier_string_char, offset, (uint64_t) SVG_data_pointer);
+                printf("%s found at file offset 0x%lx (memory address 0x%lx).\n", identifier_string_char, offset, (uint64_t) SVG_data_pointer);
                 return true;
             }
         }
