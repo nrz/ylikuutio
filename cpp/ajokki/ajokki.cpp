@@ -90,11 +90,6 @@ std::string g_font_texture_filename = "Holstein.bmp";
 std::string g_font_file_format = "svg";
 std::string g_font_filename = "kongtext.svg";
 
-void do_work(AnyValueToVoidCallback callback, AnyValue any_value)
-{
-    callback(any_value);
-}
-
 void full_cleanup(AnyValue any_value)
 {
     std::cout << "Cleaning up.\n";
@@ -478,7 +473,7 @@ int main(void)
             && (glfwWindowShouldClose(window) == 0));
 
     // do cleanup.
-    do_work(cleanup_callback, AnyValue(my_world));
+    cleanup_callback(AnyValue(my_world));
 
     return 0;
 }
