@@ -353,8 +353,10 @@ int main(void)
             char time_text[256];
             sprintf(time_text, "%.2f sec", glfwGetTime());
 
+            char null_text[] = "";
             char on_text[] = "on";
             char off_text[] = "off";
+            char in_use_text[] = " (in use)";
 
             char help_text[1024];
             sprintf(
@@ -369,14 +371,16 @@ int main(void)
                     "E-east\\n"
                     "I-invert mouse (%s)\\n"
                     "F-flight mode (%s)\\n"
-                    "G-grass texture\\n"
-                    "U-uvmap texture\\n"
+                    "G-grass texture%s\\n"
+                    "U-uvmap texture%s\\n"
                     "T-terrain species\\n"
                     "A-suzanne species\\n"
                     "Ctrl     -turbo\\n"
                     "Ctrl+Ctrl-extra turbo\\n",
                     (is_invert_mouse_in_use ? on_text : off_text),
-                    (is_flight_mode_in_use ? on_text : off_text));
+                    (is_flight_mode_in_use ? on_text : off_text),
+                    (!does_suzanne_species_have_uvmap_texture ? in_use_text : null_text),
+                    (does_suzanne_species_have_uvmap_texture ? in_use_text : null_text));
 
 #ifdef TESTING_SPHERICAL_WORLD_IN_USE
             char spherical_coordinates_text[256];
