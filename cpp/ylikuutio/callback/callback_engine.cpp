@@ -90,6 +90,11 @@ namespace callback_system
         this->anyvalue_hashmap[name] = AnyValue(value);
     }
 
+    void CallbackEngine::set_world_pointer(std::string name, model::World* value)
+    {
+        this->anyvalue_hashmap[name] = AnyValue(value);
+    }
+
     AnyValue CallbackEngine::execute()
     {
         std::cout << "Hello from AnyValue CallbackEngine::execute()\n";

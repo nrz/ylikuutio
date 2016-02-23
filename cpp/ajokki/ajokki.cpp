@@ -8,6 +8,7 @@
 #endif
 
 #include "cpp/ylikuutio/common/globals.hpp"
+#include "cpp/ylikuutio/common/any_value.hpp"
 #include "cpp/ylikuutio/callback/callback_engine.hpp"
 #include "cpp/ylikuutio/callback/callback_object.hpp"
 #include "cpp/ylikuutio/callback/callback_parameter.hpp"
@@ -89,15 +90,15 @@ std::string g_font_texture_filename = "Holstein.bmp";
 std::string g_font_file_format = "svg";
 std::string g_font_filename = "kongtext.svg";
 
-void do_work(WorldToVoidCallback callback, model::World* world_pointer)
+void do_work(AnyValueToVoidCallback callback, AnyValue any_value)
 {
-    callback(world_pointer);
+    callback(any_value);
 }
 
-void full_cleanup(model::World* world_pointer)
+void full_cleanup(AnyValue any_value)
 {
     std::cout << "Cleaning up.\n";
-    delete world_pointer;
+    delete static_cast<model::World*>(any_value.void_pointer);
 
     // Delete the text's VBO, the shader and the texture
     text2D::cleanupText2D();
@@ -130,7 +131,7 @@ int main(void)
     // initialFoV = 45.0f;
     initialFoV = 60.0f;
 
-    WorldToVoidCallback cleanup_callback = nullptr;
+    AnyValueToVoidCallback cleanup_callback = nullptr;
 
     bool does_suzanne_species_exist = true;
     bool does_suzanne_species_have_uvmap_texture = true;
@@ -477,7 +478,7 @@ int main(void)
             && (glfwWindowShouldClose(window) == 0));
 
     // do cleanup.
-    do_work(cleanup_callback, my_world);
+    do_work(cleanup_callback, AnyValue(my_world));
 
     return 0;
 }

@@ -83,6 +83,7 @@ namespace callback_system
             void set_int32_t(std::string name, int32_t value);
             void set_uint32_t(std::string name, uint32_t value);
             void set_void_pointer(std::string name, void* value);
+            void set_world_pointer(std::string name, model::World* value);
 
             // execute all callbacks.
             AnyValue execute();
