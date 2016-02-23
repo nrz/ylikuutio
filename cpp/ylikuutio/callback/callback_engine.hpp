@@ -34,6 +34,9 @@ typedef float (*VoidToFloatCallback)(void);
 typedef int (*VoidToIntCallback)(void);
 typedef void (*VoidToVoidCallback)(void);
 typedef void (*WorldToVoidCallback)(model::World*);
+typedef void (*AnyValueToVoidCallback)(AnyValue);
+typedef AnyValue (*VoidToAnyValueCallback)(void);
+typedef AnyValue (*AnyValueToAnyValueCallback)(AnyValue);
 
 namespace callback_system
 {
