@@ -359,6 +359,8 @@ int main(void)
             char help_text[1024];
             sprintf(
                     help_text,
+                    "Ajokki v. 0.0.1\\n"
+                    "\\n"
                     "F1-help mode\\n"
                     "arrow keys\\n"
                     "N-north\\n"
