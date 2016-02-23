@@ -93,7 +93,15 @@ std::string g_font_filename = "kongtext.svg";
 void full_cleanup(AnyValue any_value)
 {
     std::cout << "Cleaning up.\n";
-    delete static_cast<model::World*>(any_value.void_pointer);
+
+    if (any_value.type == datatypes::WORLD_POINTER)
+    {
+        delete static_cast<model::World*>(any_value.void_pointer);
+    }
+    else
+    {
+        std::cerr << "Invalid datatype for full_cleanup!\n";
+    }
 
     // Delete the text's VBO, the shader and the texture
     text2D::cleanupText2D();
