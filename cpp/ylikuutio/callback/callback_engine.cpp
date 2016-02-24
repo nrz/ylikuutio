@@ -3,7 +3,7 @@
 #include "cpp/ylikuutio/hierarchy/hierarchy.hpp"
 
 // Include standard headers
-#include <iostream>
+#include <iostream> // std::cout, std::cin, std::cerr
 #include <queue>    // std::queue
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
