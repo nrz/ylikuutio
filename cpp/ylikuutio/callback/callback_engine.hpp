@@ -77,6 +77,7 @@ namespace callback_system
             std::vector<void*> callback_object_pointer_vector;
             std::queue<uint32_t> free_callback_objectID_queue;
 
+            // A hash map used to store variables.
             std::unordered_map<std::string, AnyValue> anyvalue_hashmap;
     };
 }
