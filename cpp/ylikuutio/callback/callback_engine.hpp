@@ -51,6 +51,12 @@ namespace callback_system
             // this method sets a callback object pointer.
             void set_callback_object_pointer(uint32_t childID, void* parent_pointer);
 
+            // execute all callbacks.
+            AnyValue execute();
+
+            friend class CallbackObject;
+
+        private:
             // getter functions for callbacks and callback objects.
             bool get_bool(std::string name);
             float get_float(std::string name);
@@ -68,10 +74,6 @@ namespace callback_system
             void set_void_pointer(std::string name, void* value);
             void set_world_pointer(std::string name, model::World* value);
 
-            // execute all callbacks.
-            AnyValue execute();
-
-        private:
             std::vector<void*> callback_object_pointer_vector;
             std::queue<uint32_t> free_callback_objectID_queue;
 
