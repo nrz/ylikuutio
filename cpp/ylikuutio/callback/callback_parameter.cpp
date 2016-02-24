@@ -3,7 +3,6 @@
 #include "cpp/ylikuutio/common/any_value.hpp"
 
 // Include standard headers
-#include <iostream>
 #include <string> // std::string
 #include <vector> // std::vector
 
