@@ -4,7 +4,6 @@
 
 // Include standard headers
 #include <string> // std::string
-#include <vector> // std::vector
 
 namespace callback_system
 {
