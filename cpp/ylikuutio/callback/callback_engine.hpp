@@ -4,7 +4,6 @@
 #include "cpp/ylikuutio/common/any_value.hpp"
 
 // Include standard headers
-#include <cmath>         // NAN
 #include <queue>         // std::queue
 #include <stdint.h>      // uint32_t etc.
 #include <string>        // std::string
