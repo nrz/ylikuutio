@@ -285,6 +285,7 @@ endif()
 
 if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
     set(FILES_TO_TEST
+        cpp/ylikuutio/common/any_value.hpp
         cpp/ylikuutio/common/globals.cpp
         cpp/ylikuutio/common/globals.hpp
         cpp/ylikuutio/common/transformation.cpp
@@ -299,6 +300,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         cpp/ylikuutio/string/ylikuutio_string.hpp
         )
     set(UNIT_TESTS
+        cpp/ylikuutio/tests/googletest/test_any_value.cpp
         cpp/ylikuutio/tests/googletest/test_globals.cpp
         cpp/ylikuutio/tests/googletest/test_heightmap_loader.cpp
         cpp/ylikuutio/tests/googletest/test_triangulation.cpp
