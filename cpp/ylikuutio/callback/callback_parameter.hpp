@@ -5,10 +5,7 @@
 #include "callback_object.hpp"
 
 // Include standard headers
-#include <cmath>         // NAN
 #include <string>        // std::string
-#include <unordered_map> // std::unordered_map
-#include <vector>        // std::vector
 
 namespace model
 {
