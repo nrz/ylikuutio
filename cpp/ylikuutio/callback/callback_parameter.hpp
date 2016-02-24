@@ -29,6 +29,9 @@ namespace callback_system
             // constructor.
             CallbackParameter(std::string name, AnyValue any_value, bool is_reference, callback_system::CallbackObject* callback_object);
 
+            friend class CallbackObject;
+
+        private:
             std::string name;
             AnyValue any_value;
             bool is_reference; // if true, the value is read from the hashmap. if false, then the value is read from the union.
