@@ -48,15 +48,15 @@ namespace callback_system
             // destructor.
             ~CallbackEngine();
 
-            // this method sets a callback object pointer.
-            void set_callback_object_pointer(uint32_t childID, void* parent_pointer);
-
             // execute all callbacks.
             AnyValue execute();
 
             friend class CallbackObject;
 
         private:
+            // this method sets a callback object pointer.
+            void set_callback_object_pointer(uint32_t childID, void* parent_pointer);
+
             // getter functions for callbacks and callback objects.
             bool get_bool(std::string name);
             float get_float(std::string name);
