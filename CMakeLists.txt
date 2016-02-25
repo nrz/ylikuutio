@@ -58,6 +58,8 @@ include_directories(
     external/Catch/single_include/
     external/googletest/googletest/include/
     external/googletest/googlemock/include/
+    ${CMAKE_CURRENT_BINARY_DIR}/gtest/src/googletest/googletest/include/
+    ${CMAKE_CURRENT_BINARY_DIR}/gmock/src/googletest/googletest/include/
     .
     )
 
