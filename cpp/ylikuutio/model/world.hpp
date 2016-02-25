@@ -2,8 +2,6 @@
 #define __WORLD_HPP_INCLUDED
 
 #include "cpp/ylikuutio/common/globals.hpp"
-#include "cpp/ylikuutio/hierarchy/hierarchy.hpp"
-#include "cpp/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include GLFW
 #ifndef __GLFW3_H_INCLUDED
