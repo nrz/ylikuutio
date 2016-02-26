@@ -4,9 +4,7 @@
 #include "shader.hpp"
 #include "species.hpp"
 #include "glyph.hpp"
-#include "cpp/ylikuutio/hierarchy/hierarchy.hpp"
 #include "render_templates.hpp"
-#include "cpp/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include GLEW
 #ifndef __GL_GLEW_H_INCLUDED

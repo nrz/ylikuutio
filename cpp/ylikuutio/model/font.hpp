@@ -2,9 +2,7 @@
 #define __FONT_HPP_INCLUDED
 
 #include "cpp/ylikuutio/common/globals.hpp"
-#include "cpp/ylikuutio/hierarchy/hierarchy.hpp"
 #include "render_templates.hpp"
-#include "cpp/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "material.hpp"
 
 // Include standard headers

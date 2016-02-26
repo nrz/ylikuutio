@@ -3,9 +3,7 @@
 
 #include "material.hpp"
 #include "ground_level.hpp"
-#include "cpp/ylikuutio/hierarchy/hierarchy.hpp"
 #include "render_templates.hpp"
-#include "cpp/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "species_or_glyph.hpp"
 
 // Include GLEW

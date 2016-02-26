@@ -1,8 +1,6 @@
 #ifndef __RENDER_TEMPLATES_HPP_INCLUDED
 #define __RENDER_TEMPLATES_HPP_INCLUDED
 
-#include "cpp/ylikuutio/hierarchy/hierarchy.hpp"
-
 // Include standard headers
 #include <vector>    // std::vector
 
