@@ -11,6 +11,8 @@ namespace model
 {
     bool check_if_we_are_inside_block(const char* SVG_base_pointer, char*& SVG_data_pointer)
     {
+        // This function returns `true` if we are inside block, `false` otherwise.
+
         std::vector<std::string> identifier_strings_vector;
 
         // All possible block identifier strings.
@@ -23,6 +25,8 @@ namespace model
             char*& src_mem_pointer,
             char* char_end_string)
     {
+        // This function copies characters from `src_mem_pointer` until a character matches.
+
         while (true)
         {
             uint32_t n_of_ending_characters = strlen(char_end_string);
