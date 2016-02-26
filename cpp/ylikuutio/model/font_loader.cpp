@@ -157,10 +157,11 @@ namespace model
         std::cout << "Reading SVG font file " << font_file_path << " ...\n";
 
         // TODO: check the size of the font file programmatically!
-        const uint32_t kongtext_svg_file_size = 22932;
+        uint32_t kongtext_svg_file_size = 22932;
 
         // TODO: file size of the font file should not be hardcoded!
-        char SVG_data[kongtext_svg_file_size];
+        char* SVG_data;
+        SVG_data = new char[kongtext_svg_file_size];
 
         // Open the file
         const char* char_font_file_path = font_file_path.c_str();
