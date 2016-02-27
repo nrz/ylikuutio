@@ -206,6 +206,10 @@ add_executable(ajokki
     cpp/ylikuutio/common/triangulation.hpp
     cpp/ylikuutio/common/triangulation_macros.cpp
 
+    # file, in alphabetical order.
+    cpp/ylikuutio/file/file_loader.cpp
+    cpp/ylikuutio/file/file_loader.hpp
+
     # graph, in alphabetical order.
     cpp/ylikuutio/graph/graph.cpp
     cpp/ylikuutio/graph/graph.hpp
