@@ -307,11 +307,14 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         cpp/ylikuutio/common/bilinear_interpolation.hpp
         cpp/ylikuutio/common/triangulation.cpp
         cpp/ylikuutio/common/triangulation.hpp
+        cpp/ylikuutio/file/file_loader.cpp
+        cpp/ylikuutio/file/file_loader.hpp
         cpp/ylikuutio/string/ylikuutio_string.cpp
         cpp/ylikuutio/string/ylikuutio_string.hpp
         )
     set(UNIT_TESTS
         cpp/ylikuutio/tests/googletest/test_any_value.cpp
+        cpp/ylikuutio/tests/googletest/test_file_loader.cpp
         cpp/ylikuutio/tests/googletest/test_globals.cpp
         cpp/ylikuutio/tests/googletest/test_heightmap_loader.cpp
         cpp/ylikuutio/tests/googletest/test_triangulation.cpp
