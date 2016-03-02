@@ -13,7 +13,7 @@
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <string>   // std::string
 #include <vector>   // std::vector
-#include <stdio.h>
+#include <cstdio>
 
 void read_until_newline(FILE* file)
 {
