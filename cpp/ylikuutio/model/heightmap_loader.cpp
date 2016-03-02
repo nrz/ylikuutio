@@ -29,7 +29,7 @@
 #include <stdint.h> // uint32_t etc.
 #include <sstream>  // stringstream etc.
 #include <iomanip>  // setw, setfill etc.
-#include <cstdio>  // FILE, fclose, fopen, fread, getchar, printf etc.
+#include <cstdio>  // FILE, fclose, fopen, fread, getchar, std::printf etc.
 
 #define SRTM_FILENAME_N_OF_LATITUDE_CHARS 2
 #define SRTM_FILENAME_N_OF_LONGITUDE_CHARS 3

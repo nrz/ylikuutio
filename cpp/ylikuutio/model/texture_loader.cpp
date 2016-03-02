@@ -15,7 +15,7 @@
 // Include standard headers
 #include <cstring>  // strcmp
 #include <stdint.h> // uint32_t etc.
-#include <cstdio>  // FILE, fclose, fopen, fread, getchar, printf etc.
+#include <cstdio>  // FILE, fclose, fopen, fread, getchar, std::printf etc.
 #include <stdlib.h> // free, malloc
 #include <string.h> // strcmp, strncmp
 
@@ -23,7 +23,7 @@ namespace texture
 {
     GLuint load_BMP_texture(const char* imagepath)
     {
-        printf("Reading image %s\n", imagepath);
+        std::printf("Reading image %s\n", imagepath);
 
         // Data read from the header of the BMP file
         unsigned char header[54];
@@ -37,7 +37,7 @@ namespace texture
         FILE* file = fopen(imagepath,"rb");
         if (!file)
         {
-            printf("%s could not be opened. Are you in the right directory ? Don't forget to read the FAQ !\n", imagepath);
+            std::printf("%s could not be opened. Are you in the right directory ? Don't forget to read the FAQ !\n", imagepath);
             getchar();
             return 0;
         }
@@ -47,27 +47,27 @@ namespace texture
         // If less than 54 bytes are read, problem
         if (fread(header, 1, 54, file) != 54)
         {
-            printf("Not a correct BMP file\n");
+            std::printf("Not a correct BMP file\n");
             return 0;
         }
 
         // A BMP files always begins with "BM"
         if ((header[0] != 'B') || (header[1] != 'M'))
         {
-            printf("Not a correct BMP file\n");
+            std::printf("Not a correct BMP file\n");
             return 0;
         }
 
         // Make sure this is a 24bpp file
         if (*(int*) & (header[0x1E]) != 0)
         {
-            printf("Not a correct BMP file\n");
+            std::printf("Not a correct BMP file\n");
             return 0;
         }
 
         if (*(int*) & (header[0x1C]) != 24)
         {
-            printf("Not a correct BMP file\n");
+            std::printf("Not a correct BMP file\n");
             return 0;
         }
 
@@ -174,7 +174,7 @@ namespace texture
         fp = fopen(imagepath, "rb");
         if (fp == nullptr)
         {
-            printf("%s could not be opened. Are you in the right directory ? Don't forget to read the FAQ !\n", imagepath);
+            std::printf("%s could not be opened. Are you in the right directory ? Don't forget to read the FAQ !\n", imagepath);
             getchar();
             return 0;
         }

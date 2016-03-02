@@ -48,7 +48,7 @@ namespace model
         FILE* file = fopen(path, "r");
         if (file == nullptr)
         {
-            printf("Impossible to open the file ! Are you in the right path ? See Tutorial 1 for details\n");
+            std::printf("Impossible to open the file ! Are you in the right path ? See Tutorial 1 for details\n");
             getchar();
             return false;
         }
@@ -118,7 +118,7 @@ namespace model
                         &normalIndex[2]);
                 if (matches != 9)
                 {
-                    printf("File can't be read by our simple parser :-( Try exporting with other options\n");
+                    std::printf("File can't be read by our simple parser :-( Try exporting with other options\n");
                     return false;
                 }
                 vertexIndices.push_back(vertexIndex[0]);

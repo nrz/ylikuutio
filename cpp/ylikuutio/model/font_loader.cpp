@@ -55,14 +55,14 @@ namespace model
     int32_t extract_value_from_string(const char* SVG_base_pointer, char*& vertex_data_pointer, char* char_end_string, const char* description)
     {
         uint64_t offset = (uint64_t) vertex_data_pointer - (uint64_t) SVG_base_pointer;
-        printf("%s found at file offset 0x%lx (memory address 0x%lx).\n", description, offset, (uint64_t) vertex_data_pointer);
+        std::printf("%s found at file offset 0x%lx (memory address 0x%lx).\n", description, offset, (uint64_t) vertex_data_pointer);
         vertex_data_pointer += sizeof(*vertex_data_pointer); // Advance to the next character.
         char char_number_buffer[1024];
         char* dest_mem_pointer;
         dest_mem_pointer = char_number_buffer;
         model::extract_string_with_several_endings(dest_mem_pointer, vertex_data_pointer, char_end_string);
         uint32_t value = atoi(dest_mem_pointer); // FIXME: sometimes the value of `dest_mem_pointer` is invalid and causes segmentation fault here.
-        printf("%s: %d\n", description, value);
+        std::printf("%s: %d\n", description, value);
         return value;
     }
 
@@ -197,7 +197,7 @@ namespace model
         }
 
         uint64_t offset = (uint64_t) SVG_data_pointer - (uint64_t) SVG_base_pointer;
-        printf("First glyph found at file offset 0x%lx (memory address 0x%lx).\n", offset, (uint64_t) SVG_data_pointer);
+        std::printf("First glyph found at file offset 0x%lx (memory address 0x%lx).\n", offset, (uint64_t) SVG_data_pointer);
 
         // Create the vertex data for each glyph in a loop.
         while (true)
@@ -205,7 +205,7 @@ namespace model
             if (strncmp(SVG_data_pointer, "<glyph", strlen("<glyph")) == 0)
             {
                 // A glyph was found!
-                // printf("<glyph found at 0x%lx.\n", (uint64_t) SVG_data_pointer);
+                // std::printf("<glyph found at 0x%lx.\n", (uint64_t) SVG_data_pointer);
                 char char_glyph_name[1024];
                 char char_unicode[1024];
                 std::vector<glm::vec3> current_glyph_vertices; // vertices of the current glyph.
@@ -220,13 +220,13 @@ namespace model
                     {
                         // A glyph-name was found.
                         // TODO: If the glyph does not have a glyph name, an empty string will be stored as glyph-name.
-                        // printf("glyph-name= found at 0x%lx.\n", (uint64_t) SVG_data_pointer);
+                        // std::printf("glyph-name= found at 0x%lx.\n", (uint64_t) SVG_data_pointer);
 
                         // Find the memory address of the opening double quote.
                         char* opening_double_quote_pointer = strchr(SVG_data_pointer, '"');
                         if (opening_double_quote_pointer != nullptr)
                         {
-                            // printf("opening \" found at 0x%lx.\n", (uint64_t) opening_double_quote_pointer);
+                            // std::printf("opening \" found at 0x%lx.\n", (uint64_t) opening_double_quote_pointer);
 
                             opening_double_quote_pointer += sizeof(*opening_double_quote_pointer);
 
@@ -234,14 +234,14 @@ namespace model
                             char* closing_double_quote_pointer = strchr(opening_double_quote_pointer, '"');
                             if (closing_double_quote_pointer != nullptr)
                             {
-                                // printf("closing \" found at 0x%lx.\n", (uint64_t) closing_double_quote_pointer);
+                                // std::printf("closing \" found at 0x%lx.\n", (uint64_t) closing_double_quote_pointer);
                                 has_glyph_name = true;
 
                                 closing_double_quote_pointer += sizeof(*closing_double_quote_pointer);
 
                                 model::extract_string(char_glyph_name, opening_double_quote_pointer, (char*) "\"");
 
-                                printf("glyph name: %s\n", char_glyph_name);
+                                std::printf("glyph name: %s\n", char_glyph_name);
 
                                 SVG_data_pointer = closing_double_quote_pointer;
                             } // if (closing_double_quote_pointer != nullptr)
@@ -251,13 +251,13 @@ namespace model
                     {
                         // Unicode was found.
                         // TODO: If the glyph does not have unicode, the glyph will be discarded (as there is no way to refer to it).
-                        // printf("unicode= found at 0x%lx.\n", (uint64_t) SVG_data_pointer);
+                        // std::printf("unicode= found at 0x%lx.\n", (uint64_t) SVG_data_pointer);
 
                         // Find the memory address of the opening double quote.
                         char* opening_double_quote_pointer = strchr(SVG_data_pointer, '"');
                         if (opening_double_quote_pointer != nullptr)
                         {
-                            // printf("opening \" found at 0x%lx.\n", (uint64_t) opening_double_quote_pointer);
+                            // std::printf("opening \" found at 0x%lx.\n", (uint64_t) opening_double_quote_pointer);
 
                             opening_double_quote_pointer += sizeof(*opening_double_quote_pointer);
 
@@ -265,14 +265,14 @@ namespace model
                             char* closing_double_quote_pointer = strchr(opening_double_quote_pointer, '"');
                             if (closing_double_quote_pointer != nullptr)
                             {
-                                // printf("closing \" found at 0x%lx.\n", (uint64_t) closing_double_quote_pointer);
+                                // std::printf("closing \" found at 0x%lx.\n", (uint64_t) closing_double_quote_pointer);
                                 has_glyph_unicode = true;
 
                                 closing_double_quote_pointer += sizeof(*closing_double_quote_pointer);
 
                                 model::extract_string(char_unicode, opening_double_quote_pointer, (char*) "\"");
 
-                                printf("unicode: %s\n", char_unicode);
+                                std::printf("unicode: %s\n", char_unicode);
 
                                 SVG_data_pointer = closing_double_quote_pointer;
                             } // if (closing_double_quote_pointer != nullptr)
@@ -283,13 +283,13 @@ namespace model
                         // d=" was found.
                         // Follow the path and create the vertices accordingly.
                         // TODO: If the glyph does not have path, the vertex data will be empty (space is an example).
-                        // printf("d=\" found at 0x%lx.\n", (uint64_t) SVG_data_pointer);
+                        // std::printf("d=\" found at 0x%lx.\n", (uint64_t) SVG_data_pointer);
 
                         // Find the memory address of the opening double quote.
                         char* opening_double_quote_pointer = strchr(SVG_data_pointer, '"');
                         if (opening_double_quote_pointer != nullptr)
                         {
-                            // printf("opening \" found at 0x%lx.\n", (uint64_t) opening_double_quote_pointer);
+                            // std::printf("opening \" found at 0x%lx.\n", (uint64_t) opening_double_quote_pointer);
 
                             opening_double_quote_pointer += sizeof(*opening_double_quote_pointer);
 
@@ -297,7 +297,7 @@ namespace model
                             char* closing_double_quote_pointer = strchr(opening_double_quote_pointer, '"');
                             if (closing_double_quote_pointer != nullptr)
                             {
-                                // printf("closing \" found at 0x%lx.\n", (uint64_t) closing_double_quote_pointer);
+                                // std::printf("closing \" found at 0x%lx.\n", (uint64_t) closing_double_quote_pointer);
                                 has_glyph_vertices = true;
 
                                 closing_double_quote_pointer += sizeof(*closing_double_quote_pointer);
@@ -308,7 +308,7 @@ namespace model
 
                                 model::extract_string(char_path, opening_double_quote_pointer, (char*) "\"");
 
-                                printf("d: %s\n", char_path);
+                                std::printf("d: %s\n", char_path);
 
                                 // Loop through vertices and push them to `current_glyph_vertices`.
                                 char* vertex_data_pointer;
@@ -354,7 +354,7 @@ namespace model
                                     else if (strncmp(vertex_data_pointer, "z", strlen("z")) == 0)
                                     {
                                         uint64_t offset = (uint64_t) vertex_data_pointer - (uint64_t) SVG_base_pointer;
-                                        printf("z (closepath) found at file offset 0x%lx (memory address 0x%lx).\n", offset, (uint64_t) vertex_data_pointer);
+                                        std::printf("z (closepath) found at file offset 0x%lx (memory address 0x%lx).\n", offset, (uint64_t) vertex_data_pointer);
                                         keep_reading_path = false;
                                         break;
                                     } // else if (strncmp(vertex_data_pointer, "z", strlen("z")) == 0)
@@ -391,7 +391,7 @@ namespace model
 
                             // TODO: Create default vertex vector (no vertices), if needed.
                             //
-                            printf("number of vertices: %lu\n", current_glyph_vertices.size());
+                            std::printf("number of vertices: %lu\n", current_glyph_vertices.size());
                             // Store the vertices of the current vector to the glyph vertex vector
                             // which contains the vertices of all the glyphs.
                             out_glyph_vertex_data.push_back(current_glyph_vertices);

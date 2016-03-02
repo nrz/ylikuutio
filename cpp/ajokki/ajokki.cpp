@@ -50,7 +50,7 @@ GLFWwindow* window;
 #include <string>   // std::string
 #include <vector>   // std::vector
 #include <stdint.h> // uint32_t etc.
-#include <cstdio>  // FILE, fclose, fopen, fread, getchar, printf etc.
+#include <cstdio>  // FILE, fclose, fopen, fread, getchar, std::printf etc.
 
 // #define TESTING_SPHERICAL_WORLD_IN_USE
 
@@ -321,8 +321,8 @@ int main(void)
 
             if (currentTime - lastTime >= 1.0f)
             {
-                // If last `printf()` was more than 1 sec ago,
-                // `printf` and reset.
+                // If last `std::printf()` was more than 1 sec ago,
+                // `std::printf` and reset.
                 sprintf(ms_frame_text, "%.02f ms/frame; %.02f Hz", 1000.0f / ((double) nbFrames), 1000.0f / (1000.0f / ((double) nbFrames)));
                 ms_frame_text_ready = true;
                 nbFrames = 0;
