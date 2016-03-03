@@ -23,7 +23,7 @@
 #include <cmath>    // NAN
 #include <cstdio>   // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf etc.
 #include <cstring>  // std::memcmp, std::strcmp, std::strlen, std::strncmp
-#include <iomanip>  // setw, setfill etc.
+#include <iomanip>  // std::setfill, std::setw
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <sstream>  // stringstream etc.
 #include <stdint.h> // uint32_t etc.
