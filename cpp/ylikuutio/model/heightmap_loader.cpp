@@ -25,7 +25,7 @@
 #include <cstring>  // std::memcmp, std::strcmp, std::strlen, std::strncmp
 #include <iomanip>  // std::setfill, std::setw
 #include <iostream> // std::cout, std::cin, std::cerr
-#include <sstream>  // stringstream etc.
+#include <sstream>  // std::stringstream
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 #include <vector>   // std::vector

@@ -12,7 +12,7 @@
 // Include standard headers
 #include <algorithm> // std::find
 #include <cstdio>    // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf etc.
-#include <fstream>   // std::ifstream, std::ios
+#include <fstream>   // std::ifstream
 #include <string>    // std::string
 #include <vector>    // std::vector
 

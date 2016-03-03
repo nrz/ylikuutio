@@ -1,9 +1,9 @@
 #include "file_loader.hpp"
 
 // Include standard headers
-#include <fstream>  // std::ifstream, std::ios
+#include <fstream>  // std::ifstream
 #include <iostream> // std::cout, std::cin, std::cerr
-#include <sstream>  // std::stringstream etc.
+#include <sstream>  // std::stringstream
 #include <string>   // std::string
 
 namespace file
