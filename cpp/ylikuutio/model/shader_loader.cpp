@@ -13,6 +13,7 @@
 #include <algorithm> // std::find
 #include <cstdio>    // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf etc.
 #include <fstream>   // std::ifstream
+#include <ios>       // std::ios
 #include <string>    // std::string
 #include <vector>    // std::vector
 
