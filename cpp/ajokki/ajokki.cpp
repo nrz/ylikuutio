@@ -46,7 +46,7 @@ GLFWwindow* window;
 #endif
 
 // Include standard headers
-#include <cstdio>   // FILE, fclose, fopen, fread, getchar, std::printf etc.
+#include <cstdio>   // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf etc.
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <string>   // std::string
 #include <vector>   // std::vector
@@ -323,7 +323,7 @@ int main(void)
             {
                 // If last `std::printf()` was more than 1 sec ago,
                 // `std::printf` and reset.
-                sprintf(ms_frame_text, "%.02f ms/frame; %.02f Hz", 1000.0f / ((double) nbFrames), 1000.0f / (1000.0f / ((double) nbFrames)));
+                std::sprintf(ms_frame_text, "%.02f ms/frame; %.02f Hz", 1000.0f / ((double) nbFrames), 1000.0f / (1000.0f / ((double) nbFrames)));
                 ms_frame_text_ready = true;
                 nbFrames = 0;
                 lastTime += 1.0;
@@ -343,7 +343,7 @@ int main(void)
             printing_struct.char_font_texture_file_format = "bmp";
 
             char angles_and_coordinates_text[256];
-            sprintf(
+            std::sprintf(
                     angles_and_coordinates_text,
                     "%.2f,%.2f rad; %.2f,%.2f deg\\n(%.2f,%.2f,%.2f)",
                     horizontalAngle,
@@ -355,7 +355,7 @@ int main(void)
                     position.z);
 
             char time_text[256];
-            sprintf(time_text, "%.2f sec", glfwGetTime());
+            std::sprintf(time_text, "%.2f sec", glfwGetTime());
 
             char null_text[] = "";
             char on_text[] = "on";
@@ -363,7 +363,7 @@ int main(void)
             char in_use_text[] = " (in use)";
 
             char help_text[1024];
-            sprintf(
+            std::sprintf(
                     help_text,
                     "Ajokki v. 0.0.1\\n"
                     "\\n"
@@ -388,7 +388,7 @@ int main(void)
 
 #ifdef TESTING_SPHERICAL_WORLD_IN_USE
             char spherical_coordinates_text[256];
-            sprintf(spherical_coordinates_text, "rho:%.2f theta:%.2f phi:%.2f", spherical_position.rho, spherical_position.theta, spherical_position.phi);
+            std::sprintf(spherical_coordinates_text, "rho:%.2f theta:%.2f phi:%.2f", spherical_position.rho, spherical_position.theta, spherical_position.phi);
 #endif
 
             // print cartesian coordinates on bottom left corner.

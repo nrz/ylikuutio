@@ -2,7 +2,7 @@
 #include "cpp/ylikuutio/file/file_loader.hpp"
 
 // Include standard headers
-#include <cstdio>  // FILE, fclose, fopen, fread, getchar, std::printf etc.
+#include <cstdio>  // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf etc.
 
 TEST(file_must_be_slurped_appropriately, kongtext_svg)
 {

@@ -11,7 +11,7 @@
 
 // Include standard headers
 #include <algorithm> // std::find
-#include <cstdio>    // FILE, fclose, fopen, fread, getchar, std::printf etc.
+#include <cstdio>    // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf etc.
 #include <fstream>   // std::ifstream, std::ios
 #include <string>    // std::string
 #include <vector>    // std::vector
@@ -37,7 +37,7 @@ GLuint LoadShaders(const char* vertex_file_path, const char* fragment_file_path)
     else
     {
         std::printf("Impossible to open %s. Are you in the right directory ? Don't forget to read the FAQ !\n", vertex_file_path);
-        getchar();
+        std::getchar();
         return 0;
     }
 

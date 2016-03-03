@@ -2,7 +2,7 @@
 #include "cpp/ylikuutio/string/ylikuutio_string.hpp"
 
 // Include standard headers
-#include <cstdio>   // FILE, fclose, fopen, fread, getchar, std::printf etc.
+#include <cstdio>   // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf etc.
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <string>   // std::string
 #include <string.h> // strcmp, strlen
@@ -166,16 +166,16 @@ namespace model
 
         // Open the file
         const char* char_font_file_path = font_file_path.c_str();
-        FILE* file = fopen(char_font_file_path, "rb");
+        std::FILE* file = std::fopen(char_font_file_path, "rb");
         if (!file)
         {
             std::cerr << font_file_path << " could not be opened.\n";
-            getchar();
+            std::getchar();
             return false;
         }
 
         // If less than requested number of bytes are read, it's a problem.
-        if (fread(SVG_data, 1, kongtext_svg_file_size, file) != kongtext_svg_file_size)
+        if (std::fread(SVG_data, 1, kongtext_svg_file_size, file) != kongtext_svg_file_size)
         {
             std::cerr << "not a correct kongtext.svg file.\n";
             return false;

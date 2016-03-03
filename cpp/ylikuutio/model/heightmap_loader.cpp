@@ -21,7 +21,7 @@
 
 // Include standard headers
 #include <cmath>    // NAN
-#include <cstdio>   // FILE, fclose, fopen, fread, getchar, std::printf etc.
+#include <cstdio>   // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf etc.
 #include <cstring>  // strcmp
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <string>   // std::string
@@ -57,7 +57,7 @@ namespace model
 
         // Open the file
         const char* char_image_path = image_path.c_str();
-        FILE* file = fopen(char_image_path, "rb");
+        std::FILE* file = std::fopen(char_image_path, "rb");
         if (!file)
         {
             std::cerr << image_path << " could not be opened.\n";
@@ -67,7 +67,7 @@ namespace model
         // Read the header, i.e. the 54 first bytes
 
         // If less than 54 bytes are read, it's a problem.
-        if (fread(header, 1, 54, file) != 54)
+        if (std::fread(header, 1, 54, file) != 54)
         {
             std::cerr << "not a correct BMP file.\n";
             return false;
@@ -117,10 +117,10 @@ namespace model
         image_data = new uint8_t [imageSize];
 
         // Read the actual image data from the file into the buffer.
-        fread(image_data, 1, imageSize, file);
+        std::fread(image_data, 1, imageSize, file);
 
         // Everything is in memory now, the file can be closed
-        fclose(file);
+        std::fclose(file);
 
         GLuint* vertex_data;
         vertex_data = new GLuint [world_size];
@@ -256,7 +256,7 @@ namespace model
 
         // Open the file
         const char* char_image_path = abs_image_path.c_str();
-        FILE* file = fopen(char_image_path, "rb");
+        std::FILE* file = std::fopen(char_image_path, "rb");
         if (!file)
         {
             std::cerr << abs_image_path << " could not be opened.\n";
@@ -273,10 +273,10 @@ namespace model
         image_data = new uint8_t [imageSize];
 
         // Read the actual image data from the file into the buffer.
-        fread(image_data, 1, imageSize, file);
+        std::fread(image_data, 1, imageSize, file);
 
         // Everything is in memory now, the file can be closed
-        fclose(file);
+        std::fclose(file);
 
         GLuint* vertex_data;
         vertex_data = new GLuint [image_width_in_use * image_height_in_use];

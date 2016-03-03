@@ -9,13 +9,13 @@
 #include "objloader.hpp"
 
 // Include standard headers
-#include <cstdio>   // FILE, fclose, fopen, fread, getchar, std::printf etc.
+#include <cstdio>   // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf etc.
 #include <cstring>  // strcmp
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <string>   // std::string
 #include <vector>   // std::vector
 
-void read_until_newline(FILE* file)
+void read_until_newline(std::FILE* file)
 {
     while (getc(file) != '\n');
 }
@@ -45,11 +45,11 @@ namespace model
         std::vector<glm::vec2> temp_UVs;
         std::vector<glm::vec3> temp_normals;
 
-        FILE* file = fopen(path, "r");
+        std::FILE* file = std::fopen(path, "r");
         if (file == nullptr)
         {
             std::printf("Impossible to open the file ! Are you in the right path ? See Tutorial 1 for details\n");
-            getchar();
+            std::getchar();
             return false;
         }
 
