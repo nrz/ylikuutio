@@ -9,11 +9,11 @@
 #include "objloader.hpp"
 
 // Include standard headers
+#include <cstdio>   // FILE, fclose, fopen, fread, getchar, std::printf etc.
 #include <cstring>  // strcmp
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <string>   // std::string
 #include <vector>   // std::vector
-#include <cstdio>
 
 void read_until_newline(FILE* file)
 {

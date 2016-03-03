@@ -13,9 +13,9 @@
 #endif
 
 // Include standard headers
+#include <cstdio>   // FILE, fclose, fopen, fread, getchar, std::printf etc.
 #include <cstring>  // strcmp
 #include <stdint.h> // uint32_t etc.
-#include <cstdio>  // FILE, fclose, fopen, fread, getchar, std::printf etc.
 #include <stdlib.h> // free, malloc
 #include <string.h> // strcmp, strncmp
 

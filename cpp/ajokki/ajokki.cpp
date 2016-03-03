@@ -46,11 +46,11 @@ GLFWwindow* window;
 #endif
 
 // Include standard headers
+#include <cstdio>   // FILE, fclose, fopen, fread, getchar, std::printf etc.
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <string>   // std::string
 #include <vector>   // std::vector
 #include <stdint.h> // uint32_t etc.
-#include <cstdio>  // FILE, fclose, fopen, fread, getchar, std::printf etc.
 
 // #define TESTING_SPHERICAL_WORLD_IN_USE
 

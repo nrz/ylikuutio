@@ -1,3 +1,5 @@
+// Include standard headers
+#include <cstdio>   // FILE, fclose, fopen, fread, getchar, std::printf etc.
 #include <stdint.h> // uint32_t etc.
 
 struct read_BMP_into_world_data(const char* imagepath)

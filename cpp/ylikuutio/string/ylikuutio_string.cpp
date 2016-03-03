@@ -1,10 +1,11 @@
 #include "ylikuutio_string.hpp"
 
 // Include standard headers
-#include <iostream>  // std::cout, std::cin, std::cerr
-#include <string>    // std::string
-#include <vector>    // std::vector
-#include <string.h>  // strcmp, strlen
+#include <cstdio>   // FILE, fclose, fopen, fread, getchar, std::printf etc.
+#include <iostream> // std::cout, std::cin, std::cerr
+#include <string>   // std::string
+#include <string.h> // strcmp, strlen
+#include <vector>   // std::vector
 
 namespace string
 {
