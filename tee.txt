@@ -2,7 +2,6 @@ TEE-lista:
 Listaa tähän keskeneräiset asiat kiireellisyysjärjestyksessä kiireellisimmät ylös. Rasti ruutuun ja valmiit-osastolle kun on valmis.
 
 Ylikuution kehityksen kannalta välttämättömiä työvaiheita:
-[ ] `string.h` -> `cstring`.
 [ ] `strcmp` -> `std::strcmp`.
 [ ] `strlen` -> `std::strlen`.
 [ ] Koodaa takaisinkutsut (callback) toimintakuntoon.
@@ -28,3 +27,4 @@ Valmiit:
 [x] Lisää testi-VBO, vaikka jonkinlainen partikkeliobjekti.
 [x] Määrittele objektiluokka.
 [x] Lisää tuki useille VBO:ille.
+[x] `string.h` -> `cstring`.
