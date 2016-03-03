@@ -23,10 +23,9 @@
 
 // Include standard headers
 #include <cmath>    // NAN
-#include <cstring>  // std::strcmp
+#include <cstring>  // std::memcmp, std::strcmp, std::strlen, std::strncmp
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <string>   // std::string
-#include <cstring> // std::memcmp, std::strcmp, std::strlen
 #include <vector>   // std::vector
 #include <stdint.h> // uint32_t etc.
 

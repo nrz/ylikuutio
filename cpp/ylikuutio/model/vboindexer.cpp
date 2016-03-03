@@ -13,10 +13,10 @@
 #endif
 
 // Include standard headers
-#include <cstring> // std::memcmp, std::strcmp, std::strlen
+#include <cstring>  // std::memcmp, std::strcmp, std::strlen, std::strncmp
+#include <map>
 #include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
-#include <map>
 
 // Returns true iif v1 can be considered equal to v2
 bool is_near(float v1, float v2)

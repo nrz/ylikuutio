@@ -22,14 +22,13 @@
 // Include standard headers
 #include <cmath>    // NAN
 #include <cstdio>   // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf etc.
-#include <cstring>  // std::strcmp
-#include <iostream> // std::cout, std::cin, std::cerr
-#include <string>   // std::string
-#include <cstring> // std::memcmp, std::strcmp, std::strlen
-#include <vector>   // std::vector
-#include <stdint.h> // uint32_t etc.
-#include <sstream>  // stringstream etc.
+#include <cstring>  // std::memcmp, std::strcmp, std::strlen, std::strncmp
 #include <iomanip>  // setw, setfill etc.
+#include <iostream> // std::cout, std::cin, std::cerr
+#include <sstream>  // stringstream etc.
+#include <stdint.h> // uint32_t etc.
+#include <string>   // std::string
+#include <vector>   // std::vector
 
 #define SRTM_FILENAME_N_OF_LATITUDE_CHARS 2
 #define SRTM_FILENAME_N_OF_LONGITUDE_CHARS 3

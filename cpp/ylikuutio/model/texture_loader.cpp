@@ -14,10 +14,9 @@
 
 // Include standard headers
 #include <cstdio>   // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf etc.
-#include <cstring>  // std::memcmp, std::strcmp, std::strlen
+#include <cstring>  // std::memcmp, std::strcmp, std::strlen, std::strncmp
 #include <stdint.h> // uint32_t etc.
 #include <stdlib.h> // free, malloc
-#include <cstring> // std::strcmp, std::strncmp
 
 namespace texture
 {

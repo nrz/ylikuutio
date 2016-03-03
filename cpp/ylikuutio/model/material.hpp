@@ -13,10 +13,9 @@
 
 // Include standard headers
 #include <iostream> // std::cout, std::cin, std::cerr
+#include <queue>    // std::queue
 #include <string>   // std::string
 #include <vector>   // std::vector
-#include <queue>    // std::queue
-#include <cstring>  // std::memcmp, std::strcmp, std::strlen
 
 namespace model
 {

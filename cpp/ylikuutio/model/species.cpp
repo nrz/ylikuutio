@@ -14,7 +14,7 @@
 #endif
 
 // Include standard headers
-#include <cstring>  // std::strcmp
+#include <cstring> // std::memcmp, std::strcmp, std::strlen, std::strncmp
 
 namespace model
 {

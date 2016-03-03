@@ -21,7 +21,7 @@
 
 // Include standard headers
 #include <vector>   // std::vector
-#include <cstring>  // std::strcmp
+#include <cstring>  // std::memcmp, std::strcmp, std::strlen, std::strncmp
 #include <stdint.h> // uint32_t etc.
 
 GLuint Text2DTextureID;              // Material containing the font

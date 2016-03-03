@@ -10,7 +10,7 @@
 
 // Include standard headers
 #include <cstdio>   // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf etc.
-#include <cstring>  // std::strcmp
+#include <cstring>  // std::memcmp, std::strcmp, std::strlen, std::strncmp
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <string>   // std::string
 #include <vector>   // std::vector
