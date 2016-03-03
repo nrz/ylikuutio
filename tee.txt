@@ -2,6 +2,9 @@ TEE-lista:
 Listaa tähän keskeneräiset asiat kiireellisyysjärjestyksessä kiireellisimmät ylös. Rasti ruutuun ja valmiit-osastolle kun on valmis.
 
 Ylikuution kehityksen kannalta välttämättömiä työvaiheita:
+[ ] `string.h` -> `cstring`.
+[ ] `strcmp` -> `std::strcmp`.
+[ ] `strlen` -> `std::strlen`.
 [ ] Koodaa takaisinkutsut (callback) toimintakuntoon.
 [ ] Testaa takaisinkutsujen toimintaa.
 [ ] Lisää konsoli (aukeaa näppäimellä `).
