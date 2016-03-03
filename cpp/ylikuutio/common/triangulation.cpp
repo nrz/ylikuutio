@@ -23,10 +23,10 @@
 
 // Include standard headers
 #include <cmath>    // NAN
-#include <cstring>  // strcmp
+#include <cstring>  // std::strcmp
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <string>   // std::string
-#include <cstring> // memcmp, strcmp, strlen
+#include <cstring> // std::memcmp, std::strcmp, std::strlen
 #include <vector>   // std::vector
 #include <stdint.h> // uint32_t etc.
 
@@ -123,17 +123,17 @@ namespace geometry
         bool is_southeast_northwest_edges_in_use = false;
         bool is_triangulation_type_valid = false;
 
-        if (strcmp(char_triangulation_type, "bilinear_interpolation") == 0)
+        if (std::strcmp(char_triangulation_type, "bilinear_interpolation") == 0)
         {
             is_bilinear_interpolation_in_use = true;
             is_triangulation_type_valid = true;
         }
-        else if ((strcmp(char_triangulation_type, "southwest_northeast_edges") == 0) || (strcmp(char_triangulation_type, "northeast_southwest_edges") == 0))
+        else if ((std::strcmp(char_triangulation_type, "southwest_northeast_edges") == 0) || (std::strcmp(char_triangulation_type, "northeast_southwest_edges") == 0))
         {
             is_southwest_northeast_edges_in_use = true;
             is_triangulation_type_valid = true;
         }
-        else if ((strcmp(char_triangulation_type, "southeast_northwest_edges") == 0) || (strcmp(char_triangulation_type, "northwest_southeast_edges") == 0))
+        else if ((std::strcmp(char_triangulation_type, "southeast_northwest_edges") == 0) || (std::strcmp(char_triangulation_type, "northwest_southeast_edges") == 0))
         {
             is_southeast_northwest_edges_in_use = true;
             is_triangulation_type_valid = true;

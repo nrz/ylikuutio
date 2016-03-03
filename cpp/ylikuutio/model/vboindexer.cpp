@@ -13,7 +13,7 @@
 #endif
 
 // Include standard headers
-#include <cstring> // memcmp, strcmp, strlen
+#include <cstring> // std::memcmp, std::strcmp, std::strlen
 #include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
 #include <map>
@@ -99,7 +99,7 @@ namespace model
         glm::vec3 normal;
         bool operator < (const PackedVertex that) const
         {
-            return (memcmp((void*) this, (void*) &that, sizeof(PackedVertex)) > 0);
+            return (std::memcmp((void*) this, (void*) &that, sizeof(PackedVertex)) > 0);
         };
     };
 

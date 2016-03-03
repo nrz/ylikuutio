@@ -10,7 +10,7 @@
 
 // Include standard headers
 #include <cstdio>   // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf etc.
-#include <cstring>  // strcmp
+#include <cstring>  // std::strcmp
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <string>   // std::string
 #include <vector>   // std::vector
@@ -65,11 +65,11 @@ namespace model
 
             // else : parse lineHeader
 
-            if (strcmp(lineHeader, "o") == 0)
+            if (std::strcmp(lineHeader, "o") == 0)
             {
                 read_until_newline(file);
             }
-            else if (strcmp(lineHeader, "v") == 0)
+            else if (std::strcmp(lineHeader, "v") == 0)
             {
                 // This line specifies a vertex.
                 // Example:
@@ -78,7 +78,7 @@ namespace model
                 fscanf(file, "%f %f %f\n", &vertex.x, &vertex.y, &vertex.z);
                 temp_vertices.push_back(vertex);
             }
-            else if (strcmp(lineHeader, "vt") == 0)
+            else if (std::strcmp(lineHeader, "vt") == 0)
             {
                 // This line specifies texture coordinate of one vertex.
                 // Example:
@@ -88,7 +88,7 @@ namespace model
                 // uv.y = -uv.y; // Invert V coordinate since we will only use DDS texture, which are inverted. Remove if you want to use TGA or BMP loaders.
                 temp_UVs.push_back(uv);
             }
-            else if (strcmp(lineHeader, "vn") == 0)
+            else if (std::strcmp(lineHeader, "vn") == 0)
             {
                 // This line specifies the normal of one vertex.
                 // Example:
@@ -97,7 +97,7 @@ namespace model
                 fscanf(file, "%f %f %f\n", &normal.x, &normal.y, &normal.z);
                 temp_normals.push_back(normal);
             }
-            else if (strcmp(lineHeader, "f") == 0)
+            else if (std::strcmp(lineHeader, "f") == 0)
             {
                 // This line specifies a face.
                 // Example:

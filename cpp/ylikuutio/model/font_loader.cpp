@@ -5,7 +5,7 @@
 #include <cstdio>   // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf etc.
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <string>   // std::string
-#include <cstring> // memcmp, strcmp, strlen
+#include <cstring> // std::memcmp, std::strcmp, std::strlen
 #include <vector>   // std::vector
 
 namespace model
@@ -30,14 +30,14 @@ namespace model
 
         while (true)
         {
-            uint32_t n_of_ending_characters = strlen(char_end_string);
+            uint32_t n_of_ending_characters = std::strlen(char_end_string);
             char* end_char_pointer;
             end_char_pointer = char_end_string;
 
             // Check if current character is any of the ending characters.
-            while (strncmp(end_char_pointer, "\0", sizeof("\0")) != 0)
+            while (std::strncmp(end_char_pointer, "\0", sizeof("\0")) != 0)
             {
-                if (strncmp(src_mem_pointer, end_char_pointer, 1) == 0)
+                if (std::strncmp(src_mem_pointer, end_char_pointer, 1) == 0)
                 {
                     *dest_mem_pointer = '\0';
                     return;
@@ -116,7 +116,7 @@ namespace model
             char* &src_mem_pointer,
             char* char_end_string)
     {
-        while (strncmp(src_mem_pointer, char_end_string, strlen(char_end_string)) != 0)
+        while (std::strncmp(src_mem_pointer, char_end_string, std::strlen(char_end_string)) != 0)
         {
             strncpy(dest_mem_pointer, src_mem_pointer, 1);
             dest_mem_pointer += sizeof(*src_mem_pointer);
@@ -203,7 +203,7 @@ namespace model
         // Create the vertex data for each glyph in a loop.
         while (true)
         {
-            if (strncmp(SVG_data_pointer, "<glyph", strlen("<glyph")) == 0)
+            if (std::strncmp(SVG_data_pointer, "<glyph", std::strlen("<glyph")) == 0)
             {
                 // A glyph was found!
                 // std::printf("<glyph found at 0x%lx.\n", (uint64_t) SVG_data_pointer);
@@ -217,7 +217,7 @@ namespace model
                 while (true)
                 {
                     // Keep reading the glyph.
-                    if (strncmp(SVG_data_pointer, "glyph-name=", strlen("glyph-name=")) == 0)
+                    if (std::strncmp(SVG_data_pointer, "glyph-name=", std::strlen("glyph-name=")) == 0)
                     {
                         // A glyph-name was found.
                         // TODO: If the glyph does not have a glyph name, an empty string will be stored as glyph-name.
@@ -247,8 +247,8 @@ namespace model
                                 SVG_data_pointer = closing_double_quote_pointer;
                             } // if (closing_double_quote_pointer != nullptr)
                         } // if (opening_double_quote_pointer != nullptr)
-                    } // if (strncmp(SVG_data_pointer, "glyph-name=", strlen("glyph-name=")) == 0)
-                    else if (strncmp(SVG_data_pointer, "unicode=", strlen("unicode=")) == 0)
+                    } // if (std::strncmp(SVG_data_pointer, "glyph-name=", std::strlen("glyph-name=")) == 0)
+                    else if (std::strncmp(SVG_data_pointer, "unicode=", std::strlen("unicode=")) == 0)
                     {
                         // Unicode was found.
                         // TODO: If the glyph does not have unicode, the glyph will be discarded (as there is no way to refer to it).
@@ -278,8 +278,8 @@ namespace model
                                 SVG_data_pointer = closing_double_quote_pointer;
                             } // if (closing_double_quote_pointer != nullptr)
                         } // if (opening_double_quote_pointer != nullptr)
-                    } // else if (strncmp(SVG_data_pointer, "unicode=", strlen("unicode=")) == 0)
-                    else if (strncmp(SVG_data_pointer, "d=", strlen("d=")) == 0)
+                    } // else if (std::strncmp(SVG_data_pointer, "unicode=", std::strlen("unicode=")) == 0)
+                    else if (std::strncmp(SVG_data_pointer, "d=", std::strlen("d=")) == 0)
                     {
                         // d=" was found.
                         // Follow the path and create the vertices accordingly.
@@ -319,46 +319,46 @@ namespace model
 
                                 while (keep_reading_path)
                                 {
-                                    if (strncmp(vertex_data_pointer, "M", strlen("M")) == 0)
+                                    if (std::strncmp(vertex_data_pointer, "M", std::strlen("M")) == 0)
                                     {
                                         current_vertex.x = model::extract_value_from_string_with_standard_endings(SVG_base_pointer, vertex_data_pointer,
                                                 (const char*) "M (moveto)");
 
                                         while (true)
                                         {
-                                            if (strncmp(vertex_data_pointer, " ", strlen(" ")) == 0)
+                                            if (std::strncmp(vertex_data_pointer, " ", std::strlen(" ")) == 0)
                                             {
                                                 current_vertex.y = model::extract_value_from_string_with_standard_endings(SVG_base_pointer, vertex_data_pointer,
                                                         (const char*) "space (moveto y coordinate)");
                                                 current_glyph_vertices.push_back(current_vertex);
                                                 break;
-                                            } // if (strncmp(vertex_data_pointer, " ", strlen(" ")) == 0)
+                                            } // if (std::strncmp(vertex_data_pointer, " ", std::strlen(" ")) == 0)
                                             vertex_data_pointer += sizeof(*vertex_data_pointer); // Advance to the next character.
                                         } // while (true)
-                                    } // if (strncmp(vertex_data_pointer, "M", strlen("M")) == 0)
-                                    else if (strncmp(vertex_data_pointer, "h", strlen("h")) == 0)
+                                    } // if (std::strncmp(vertex_data_pointer, "M", std::strlen("M")) == 0)
+                                    else if (std::strncmp(vertex_data_pointer, "h", std::strlen("h")) == 0)
                                     {
                                         // OK, this is horizontal relative lineto.
                                         int32_t horizontal_lineto_value = model::extract_value_from_string_with_standard_endings(SVG_base_pointer, vertex_data_pointer,
                                                 (const char*) "h (horizontal relative lineto)");
                                         current_vertex.x += horizontal_lineto_value;
                                         current_glyph_vertices.push_back(current_vertex);
-                                    } // else if (strncmp(vertex_data_pointer, "h", strlen("h")) == 0)
-                                    else if (strncmp(vertex_data_pointer, "v", strlen("v")) == 0)
+                                    } // else if (std::strncmp(vertex_data_pointer, "h", std::strlen("h")) == 0)
+                                    else if (std::strncmp(vertex_data_pointer, "v", std::strlen("v")) == 0)
                                     {
                                         // OK, this is vertical relative lineto.
                                         int32_t vertical_lineto_value = model::extract_value_from_string_with_standard_endings(SVG_base_pointer, vertex_data_pointer,
                                                 (const char*) "v (vertical relative lineto)");
                                         current_vertex.y += vertical_lineto_value;
                                         current_glyph_vertices.push_back(current_vertex);
-                                    } // else if (strncmp(vertex_data_pointer, "v", strlen("v")) == 0)
-                                    else if (strncmp(vertex_data_pointer, "z", strlen("z")) == 0)
+                                    } // else if (std::strncmp(vertex_data_pointer, "v", std::strlen("v")) == 0)
+                                    else if (std::strncmp(vertex_data_pointer, "z", std::strlen("z")) == 0)
                                     {
                                         uint64_t offset = (uint64_t) vertex_data_pointer - (uint64_t) SVG_base_pointer;
                                         std::printf("z (closepath) found at file offset 0x%lx (memory address 0x%lx).\n", offset, (uint64_t) vertex_data_pointer);
                                         keep_reading_path = false;
                                         break;
-                                    } // else if (strncmp(vertex_data_pointer, "z", strlen("z")) == 0)
+                                    } // else if (std::strncmp(vertex_data_pointer, "z", std::strlen("z")) == 0)
                                     else
                                     {
                                         vertex_data_pointer += sizeof(*vertex_data_pointer);
@@ -367,8 +367,8 @@ namespace model
                                 SVG_data_pointer = closing_double_quote_pointer;
                             } // if (closing_double_quote_pointer != nullptr)
                         } // if (opening_double_quote_pointer != nullptr)
-                    } // else if (strncmp(SVG_data_pointer, "d=", strlen("d=")) == 0)
-                    else if (strncmp(SVG_data_pointer, ">", strlen(">")) == 0)
+                    } // else if (std::strncmp(SVG_data_pointer, "d=", std::strlen("d=")) == 0)
+                    else if (std::strncmp(SVG_data_pointer, ">", std::strlen(">")) == 0)
                     {
                         // OK, this is the end of this glyph.
                         if (has_glyph_unicode)
@@ -398,7 +398,7 @@ namespace model
                             out_glyph_vertex_data.push_back(current_glyph_vertices);
                         } // if (has_glyph_unicode)
                         break;
-                    } // else if (strncmp(SVG_data_pointer, ">", strlen(">")) == 0)
+                    } // else if (std::strncmp(SVG_data_pointer, ">", std::strlen(">")) == 0)
                     SVG_data_pointer += sizeof(*SVG_data_pointer);  // Advance to the next byte inside the glyph.
                 } // while (true)
             } // End of glyph.

@@ -16,7 +16,7 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 #include <queue>    // std::queue
-#include <cstring>  // memcmp, strcmp, strlen
+#include <cstring>  // std::memcmp, std::strcmp, std::strlen
 
 namespace model
 {

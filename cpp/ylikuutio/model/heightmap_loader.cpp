@@ -22,10 +22,10 @@
 // Include standard headers
 #include <cmath>    // NAN
 #include <cstdio>   // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf etc.
-#include <cstring>  // strcmp
+#include <cstring>  // std::strcmp
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <string>   // std::string
-#include <cstring> // memcmp, strcmp, strlen
+#include <cstring> // std::memcmp, std::strcmp, std::strlen
 #include <vector>   // std::vector
 #include <stdint.h> // uint32_t etc.
 #include <sstream>  // stringstream etc.
@@ -140,20 +140,20 @@ namespace model
             {
                 GLuint y;
 
-                if (strcmp(char_color_channel, "blue") == 0)
+                if (std::strcmp(char_color_channel, "blue") == 0)
                 {
                     y = (GLuint) *image_pointer;       // y-coordinate is the blue (B) value.
                 }
-                else if (strcmp(char_color_channel, "green") == 0)
+                else if (std::strcmp(char_color_channel, "green") == 0)
                 {
                     y = (GLuint) *(image_pointer + 1); // y-coordinate is the green (G) value.
                 }
-                else if (strcmp(char_color_channel, "red") == 0)
+                else if (std::strcmp(char_color_channel, "red") == 0)
                 {
                     y = (GLuint) *(image_pointer + 2); // y-coordinate is the red (R) value.
                 }
                 // y-coordinate is the mean of R, G, & B.
-                else if ((strcmp(char_color_channel, "mean") == 0) || (strcmp(char_color_channel, "all") == 0))
+                else if ((std::strcmp(char_color_channel, "mean") == 0) || (std::strcmp(char_color_channel, "all") == 0))
                 {
                     y = (((GLuint) *image_pointer) + ((GLuint) *(image_pointer + 1)) + ((GLuint) *(image_pointer + 2))) / 3;
                 }

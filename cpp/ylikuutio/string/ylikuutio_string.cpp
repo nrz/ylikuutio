@@ -4,7 +4,7 @@
 #include <cstdio>   // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf etc.
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <string>   // std::string
-#include <cstring> // memcmp, strcmp, strlen
+#include <cstring> // std::memcmp, std::strcmp, std::strlen
 #include <vector>   // std::vector
 
 namespace string
@@ -15,7 +15,7 @@ namespace string
         {
             const char* identifier_string_char = identifier_string.c_str();
 
-            if (strncmp(SVG_data_pointer, identifier_string_char, strlen(identifier_string_char)) == 0)
+            if (std::strncmp(SVG_data_pointer, identifier_string_char, std::strlen(identifier_string_char)) == 0)
             {
                 const char* identifier_string_char = identifier_string.c_str();
                 uint64_t offset = (uint64_t) SVG_data_pointer - (uint64_t) SVG_base_pointer;

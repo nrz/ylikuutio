@@ -6,7 +6,7 @@
 #include "glyph.hpp"
 
 // Include standard headers
-#include <cstring>  // strcmp
+#include <cstring>  // std::strcmp
 
 namespace model
 {
@@ -31,7 +31,7 @@ namespace model
 
         bool font_loading_result;
 
-        if ((strcmp(this->char_font_file_format, "svg") == 0) || (strcmp(this->char_font_file_format, "SVG") == 0))
+        if ((std::strcmp(this->char_font_file_format, "svg") == 0) || (std::strcmp(this->char_font_file_format, "SVG") == 0))
         {
             // TODO: implement `load_SVG_font`! It should read all necessary data to this Font object.
             /*

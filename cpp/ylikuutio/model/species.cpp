@@ -14,7 +14,7 @@
 #endif
 
 // Include standard headers
-#include <cstring>  // strcmp
+#include <cstring>  // std::strcmp
 
 namespace model
 {
@@ -47,11 +47,11 @@ namespace model
 
         bool model_loading_result;
 
-        if ((strcmp(this->char_model_file_format, "obj") == 0) || (strcmp(this->char_model_file_format, "OBJ") == 0))
+        if ((std::strcmp(this->char_model_file_format, "obj") == 0) || (std::strcmp(this->char_model_file_format, "OBJ") == 0))
         {
             model_loading_result = model::load_OBJ(this->char_model_filename, this->vertices, this->UVs, this->normals);
         }
-        else if (strcmp(this->char_model_file_format, "SRTM") == 0)
+        else if (std::strcmp(this->char_model_file_format, "SRTM") == 0)
         {
             double current_latitude_in_degrees;
             double current_longitude_in_degrees;
@@ -67,7 +67,7 @@ namespace model
                     this->normals,
                     this->triangulation_type);
         }
-        else if ((strcmp(this->char_model_file_format, "bmp") == 0) || (strcmp(this->char_model_file_format, "BMP") == 0))
+        else if ((std::strcmp(this->char_model_file_format, "bmp") == 0) || (std::strcmp(this->char_model_file_format, "BMP") == 0))
         {
             model_loading_result = model::load_BMP_world(
                     this->model_filename,

@@ -14,10 +14,10 @@
 
 // Include standard headers
 #include <cstdio>   // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf etc.
-#include <cstring>  // memcmp, strcmp, strlen
+#include <cstring>  // std::memcmp, std::strcmp, std::strlen
 #include <stdint.h> // uint32_t etc.
 #include <stdlib.h> // free, malloc
-#include <cstring> // strcmp, strncmp
+#include <cstring> // std::strcmp, std::strncmp
 
 namespace texture
 {
@@ -182,7 +182,7 @@ namespace texture
         /* verify the type of file */
         char filecode[4];
         std::fread(filecode, 1, 4, fp);
-        if (strncmp(filecode, "DDS ", 4) != 0)
+        if (std::strncmp(filecode, "DDS ", 4) != 0)
         {
             std::fclose(fp);
             return 0;
