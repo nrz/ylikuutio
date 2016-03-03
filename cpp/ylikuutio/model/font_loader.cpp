@@ -176,6 +176,7 @@ namespace model
         if (!is_first_glyph_found || SVG_data_pointer == nullptr)
         {
             std::cerr << "no glyphs were found!\n";
+            delete SVG_data;
             return false;
         }
 
@@ -231,12 +232,14 @@ namespace model
                             else
                             {
                                 std::cerr << "error: no closing double quote found for glyph-name=!\n";
+                                delete SVG_data;
                                 return false;
                             }
                         } // if (opening_double_quote_pointer != nullptr)
                         else
                         {
                             std::cerr << "error: no opening double quote found for glyph-name=!\n";
+                            delete SVG_data;
                             return false;
                         }
                     } // if (std::strncmp(SVG_data_pointer, "glyph-name=", std::strlen("glyph-name=")) == 0)
@@ -272,12 +275,14 @@ namespace model
                             else
                             {
                                 std::cerr << "error: no closing double quote found for unicode=!\n";
+                                delete SVG_data;
                                 return false;
                             }
                         } // if (opening_double_quote_pointer != nullptr)
                         else
                         {
                             std::cerr << "error: no opening double quote found for unicode=!\n";
+                            delete SVG_data;
                             return false;
                         }
                     } // else if (std::strncmp(SVG_data_pointer, "unicode=", std::strlen("unicode=")) == 0)
@@ -371,12 +376,14 @@ namespace model
                             else
                             {
                                 std::cerr << "error: no closing double quote found for d=!\n";
+                                delete SVG_data;
                                 return false;
                             }
                         } // if (opening_double_quote_pointer != nullptr)
                         else
                         {
                             std::cerr << "error: no opening double quote found for d=!\n";
+                            delete SVG_data;
                             return false;
                         }
                     } // else if (std::strncmp(SVG_data_pointer, "d=", std::strlen("d=")) == 0)
