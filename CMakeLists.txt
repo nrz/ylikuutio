@@ -224,8 +224,8 @@ add_executable(ajokki
     # model, in alphabetical order
     cpp/ylikuutio/model/font.cpp
     cpp/ylikuutio/model/font.hpp
-    # cpp/ylikuutio/model/font_loader.cpp
-    # cpp/ylikuutio/model/font_loader.hpp
+    cpp/ylikuutio/model/font_loader.cpp
+    cpp/ylikuutio/model/font_loader.hpp
     cpp/ylikuutio/model/glyph.cpp
     cpp/ylikuutio/model/glyph.hpp
     cpp/ylikuutio/model/ground_level.cpp

@@ -2,7 +2,7 @@
 #include "cpp/ylikuutio/hierarchy/hierarchy.hpp"
 #include "render_templates.hpp"
 #include "cpp/ylikuutio/hierarchy/hierarchy_templates.hpp"
-// #include "font_loader.hpp"
+#include "font_loader.hpp"
 #include "glyph.hpp"
 
 // Include standard headers
@@ -34,7 +34,6 @@ namespace model
         if ((std::strcmp(this->char_font_file_format, "svg") == 0) || (std::strcmp(this->char_font_file_format, "SVG") == 0))
         {
             // TODO: implement `load_SVG_font`! It should read all necessary data to this Font object.
-            /*
             font_loading_result = model::load_SVG_font(
                     this->font_filename,
                     this->glyph_vertex_data,
@@ -43,7 +42,6 @@ namespace model
                     this->glyph_names,
                     this->unicode_strings,
                     this->vertex_scaling_factor);
-                    */
         }
 
         // Font constructor also creates each Glyph and binds them to the Font.

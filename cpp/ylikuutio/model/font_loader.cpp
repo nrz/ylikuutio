@@ -1,4 +1,5 @@
 #include "font_loader.hpp"
+#include "cpp/ylikuutio/file/file_loader.hpp"
 #include "cpp/ylikuutio/string/ylikuutio_string.hpp"
 
 // Include standard headers
@@ -35,21 +36,21 @@ namespace model
             end_char_pointer = char_end_string;
 
             // Check if current character is any of the ending characters.
-            while (std::strncmp(end_char_pointer, "\0", sizeof("\0")) != 0)
+            while (*end_char_pointer != '\0')
             {
                 if (std::strncmp(src_mem_pointer, end_char_pointer, 1) == 0)
                 {
                     *dest_mem_pointer = '\0';
                     return;
                 }
-                end_char_pointer += sizeof(*end_char_pointer);
+                end_char_pointer++;
             }
 
             // OK, current character is not any of the ending characters.
             // Copy it and advance the pointers accordingly.
             strncpy(dest_mem_pointer, src_mem_pointer, 1);
-            dest_mem_pointer += sizeof(*src_mem_pointer);
-            src_mem_pointer += sizeof(*src_mem_pointer);
+            dest_mem_pointer++;
+            src_mem_pointer++;
         }
     }
 
@@ -57,19 +58,19 @@ namespace model
     {
         uint64_t offset = (uint64_t) vertex_data_pointer - (uint64_t) SVG_base_pointer;
         std::printf("%s found at file offset 0x%lx (memory address 0x%lx).\n", description, offset, (uint64_t) vertex_data_pointer);
-        vertex_data_pointer += sizeof(*vertex_data_pointer); // Advance to the next character.
+        vertex_data_pointer++;
         char char_number_buffer[1024];
         char* dest_mem_pointer;
         dest_mem_pointer = char_number_buffer;
         model::extract_string_with_several_endings(dest_mem_pointer, vertex_data_pointer, char_end_string);
-        uint32_t value = atoi(dest_mem_pointer); // FIXME: sometimes the value of `dest_mem_pointer` is invalid and causes segmentation fault here.
+        uint32_t value = std::atoi(dest_mem_pointer); // FIXME: sometimes the value of `dest_mem_pointer` is invalid and causes segmentation fault here.
         std::printf("%s: %d\n", description, value);
         return value;
     }
 
     int32_t extract_value_from_string_with_standard_endings(const char* SVG_base_pointer, char*& vertex_data_pointer, const char* description)
     {
-        return model::extract_value_from_string(SVG_base_pointer, vertex_data_pointer, (char*) " -Mmhvz\">", description);
+        return model::extract_value_from_string(SVG_base_pointer, vertex_data_pointer, (char*) " Mmhvz\">", description);
     }
 
     bool find_first_glyph_in_SVG(const char* SVG_base_pointer, char*& SVG_data_pointer)
@@ -86,6 +87,10 @@ namespace model
             if (!is_inside_block)
             {
                 // OK, were are not inside a block.
+                if (SVG_data_pointer == nullptr)
+                {
+                    return false;
+                }
 
                 if (string::check_and_report_if_some_string_matches(SVG_base_pointer, SVG_data_pointer, std::vector<std::string> { "<glyph" }))
                 {
@@ -97,14 +102,12 @@ namespace model
                 }
 
                 is_inside_block = model::check_if_we_are_inside_block(SVG_base_pointer, SVG_data_pointer);
-
-                SVG_data_pointer += sizeof(*SVG_data_pointer);  // Advance to the next character.
+                SVG_data_pointer++;
             }
             else
             {
                 // OK, we are inside a block.
-
-                SVG_data_pointer = strchr(SVG_data_pointer, '>');
+                SVG_data_pointer = std::strchr(SVG_data_pointer, '>');
                 string::check_and_report_if_some_string_matches(SVG_base_pointer, SVG_data_pointer, std::vector<std::string> { '>' });
                 is_inside_block = false;
             }
@@ -119,8 +122,8 @@ namespace model
         while (std::strncmp(src_mem_pointer, char_end_string, std::strlen(char_end_string)) != 0)
         {
             strncpy(dest_mem_pointer, src_mem_pointer, 1);
-            dest_mem_pointer += sizeof(*src_mem_pointer);
-            src_mem_pointer += sizeof(*src_mem_pointer);
+            dest_mem_pointer++;
+            src_mem_pointer++;
         }
         *dest_mem_pointer = '\0';
     }
@@ -155,31 +158,10 @@ namespace model
             std::vector<std::string> &unicode_strings,
             float vertex_scaling_factor)
     {
-        std::cout << "Reading SVG font file " << font_file_path << " ...\n";
-
-        // TODO: check the size of the font file programmatically!
-        uint32_t kongtext_svg_file_size = 22932;
-
-        // TODO: file size of the font file should not be hardcoded!
-        char* SVG_data;
-        SVG_data = new char[kongtext_svg_file_size];
-
-        // Open the file
-        const char* char_font_file_path = font_file_path.c_str();
-        std::FILE* file = std::fopen(char_font_file_path, "rb");
-        if (!file)
-        {
-            std::cerr << font_file_path << " could not be opened.\n";
-            std::getchar();
-            return false;
-        }
-
-        // If less than requested number of bytes are read, it's a problem.
-        if (std::fread(SVG_data, 1, kongtext_svg_file_size, file) != kongtext_svg_file_size)
-        {
-            std::cerr << "not a correct kongtext.svg file.\n";
-            return false;
-        }
+        std::string kongtext_svg_string = file::slurp(font_file_path);
+        const uint32_t kongtext_svg_size = kongtext_svg_string.size();
+        char* SVG_data = new char[kongtext_svg_size];
+        std::strncpy(SVG_data, kongtext_svg_string.c_str(), kongtext_svg_size);
 
         bool is_first_glyph_found;
 
@@ -191,7 +173,7 @@ namespace model
         // SVG files are XML files, so we just need to read until we find the data we need.
         is_first_glyph_found = model::find_first_glyph_in_SVG(SVG_base_pointer, SVG_data_pointer);
 
-        if (!is_first_glyph_found)
+        if (!is_first_glyph_found || SVG_data_pointer == nullptr)
         {
             std::cerr << "no glyphs were found!\n";
             return false;
@@ -229,7 +211,7 @@ namespace model
                         {
                             // std::printf("opening \" found at 0x%lx.\n", (uint64_t) opening_double_quote_pointer);
 
-                            opening_double_quote_pointer += sizeof(*opening_double_quote_pointer);
+                            opening_double_quote_pointer++;
 
                             // Find the memory address of the closing double quote.
                             char* closing_double_quote_pointer = strchr(opening_double_quote_pointer, '"');
@@ -238,15 +220,25 @@ namespace model
                                 // std::printf("closing \" found at 0x%lx.\n", (uint64_t) closing_double_quote_pointer);
                                 has_glyph_name = true;
 
-                                closing_double_quote_pointer += sizeof(*closing_double_quote_pointer);
+                                closing_double_quote_pointer++;
 
                                 model::extract_string(char_glyph_name, opening_double_quote_pointer, (char*) "\"");
 
                                 std::printf("glyph name: %s\n", char_glyph_name);
 
-                                SVG_data_pointer = closing_double_quote_pointer;
+                                SVG_data_pointer = ++closing_double_quote_pointer;
                             } // if (closing_double_quote_pointer != nullptr)
+                            else
+                            {
+                                std::cerr << "error: no closing double quote found for glyph-name=!\n";
+                                return false;
+                            }
                         } // if (opening_double_quote_pointer != nullptr)
+                        else
+                        {
+                            std::cerr << "error: no opening double quote found for glyph-name=!\n";
+                            return false;
+                        }
                     } // if (std::strncmp(SVG_data_pointer, "glyph-name=", std::strlen("glyph-name=")) == 0)
                     else if (std::strncmp(SVG_data_pointer, "unicode=", std::strlen("unicode=")) == 0)
                     {
@@ -260,7 +252,7 @@ namespace model
                         {
                             // std::printf("opening \" found at 0x%lx.\n", (uint64_t) opening_double_quote_pointer);
 
-                            opening_double_quote_pointer += sizeof(*opening_double_quote_pointer);
+                            opening_double_quote_pointer++;
 
                             // Find the memory address of the closing double quote.
                             char* closing_double_quote_pointer = strchr(opening_double_quote_pointer, '"');
@@ -269,15 +261,25 @@ namespace model
                                 // std::printf("closing \" found at 0x%lx.\n", (uint64_t) closing_double_quote_pointer);
                                 has_glyph_unicode = true;
 
-                                closing_double_quote_pointer += sizeof(*closing_double_quote_pointer);
+                                closing_double_quote_pointer++;
 
                                 model::extract_string(char_unicode, opening_double_quote_pointer, (char*) "\"");
 
                                 std::printf("unicode: %s\n", char_unicode);
 
-                                SVG_data_pointer = closing_double_quote_pointer;
+                                SVG_data_pointer = ++closing_double_quote_pointer;
                             } // if (closing_double_quote_pointer != nullptr)
+                            else
+                            {
+                                std::cerr << "error: no closing double quote found for unicode=!\n";
+                                return false;
+                            }
                         } // if (opening_double_quote_pointer != nullptr)
+                        else
+                        {
+                            std::cerr << "error: no opening double quote found for unicode=!\n";
+                            return false;
+                        }
                     } // else if (std::strncmp(SVG_data_pointer, "unicode=", std::strlen("unicode=")) == 0)
                     else if (std::strncmp(SVG_data_pointer, "d=", std::strlen("d=")) == 0)
                     {
@@ -292,7 +294,7 @@ namespace model
                         {
                             // std::printf("opening \" found at 0x%lx.\n", (uint64_t) opening_double_quote_pointer);
 
-                            opening_double_quote_pointer += sizeof(*opening_double_quote_pointer);
+                            opening_double_quote_pointer++;
 
                             // Find the memory address of the closing double quote.
                             char* closing_double_quote_pointer = strchr(opening_double_quote_pointer, '"');
@@ -301,7 +303,7 @@ namespace model
                                 // std::printf("closing \" found at 0x%lx.\n", (uint64_t) closing_double_quote_pointer);
                                 has_glyph_vertices = true;
 
-                                closing_double_quote_pointer += sizeof(*closing_double_quote_pointer);
+                                closing_double_quote_pointer++;
 
                                 glm::vec3 current_vertex;
                                 current_vertex.z = 0; // z is not defined in the path (originally these are not 3D fonts!).
@@ -313,7 +315,7 @@ namespace model
 
                                 // Loop through vertices and push them to `current_glyph_vertices`.
                                 char* vertex_data_pointer;
-                                vertex_data_pointer = opening_double_quote_pointer;
+                                vertex_data_pointer = char_path;
 
                                 bool keep_reading_path = true;
 
@@ -333,7 +335,7 @@ namespace model
                                                 current_glyph_vertices.push_back(current_vertex);
                                                 break;
                                             } // if (std::strncmp(vertex_data_pointer, " ", std::strlen(" ")) == 0)
-                                            vertex_data_pointer += sizeof(*vertex_data_pointer); // Advance to the next character.
+                                            vertex_data_pointer++;
                                         } // while (true)
                                     } // if (std::strncmp(vertex_data_pointer, "M", std::strlen("M")) == 0)
                                     else if (std::strncmp(vertex_data_pointer, "h", std::strlen("h")) == 0)
@@ -361,14 +363,24 @@ namespace model
                                     } // else if (std::strncmp(vertex_data_pointer, "z", std::strlen("z")) == 0)
                                     else
                                     {
-                                        vertex_data_pointer += sizeof(*vertex_data_pointer);
+                                        vertex_data_pointer++;
                                     } // else
                                 } // while (keep_reading_path)
-                                SVG_data_pointer = closing_double_quote_pointer;
+                                SVG_data_pointer = ++closing_double_quote_pointer;
                             } // if (closing_double_quote_pointer != nullptr)
+                            else
+                            {
+                                std::cerr << "error: no closing double quote found for d=!\n";
+                                return false;
+                            } // else
                         } // if (opening_double_quote_pointer != nullptr)
+                        else
+                        {
+                            std::cerr << "error: no opening double quote found for d=!\n";
+                            return false;
+                        }
                     } // else if (std::strncmp(SVG_data_pointer, "d=", std::strlen("d=")) == 0)
-                    else if (std::strncmp(SVG_data_pointer, ">", std::strlen(">")) == 0)
+                    else if (std::strncmp(SVG_data_pointer, "/>", std::strlen("/>")) == 0)
                     {
                         // OK, this is the end of this glyph.
                         if (has_glyph_unicode)
@@ -391,15 +403,18 @@ namespace model
                             glyph_names.push_back(glyph_name_string);
 
                             // TODO: Create default vertex vector (no vertices), if needed.
-                            //
                             std::printf("number of vertices: %lu\n", current_glyph_vertices.size());
                             // Store the vertices of the current vector to the glyph vertex vector
                             // which contains the vertices of all the glyphs.
                             out_glyph_vertex_data.push_back(current_glyph_vertices);
                         } // if (has_glyph_unicode)
+                        SVG_data_pointer += std::strlen("/>");
                         break;
                     } // else if (std::strncmp(SVG_data_pointer, ">", std::strlen(">")) == 0)
-                    SVG_data_pointer += sizeof(*SVG_data_pointer);  // Advance to the next byte inside the glyph.
+                    else
+                    {
+                        SVG_data_pointer++; // Advance to the next byte inside the glyph.
+                    }
                 } // while (true)
             } // End of glyph.
             else
@@ -409,11 +424,11 @@ namespace model
 
                 if (string::check_and_report_if_some_string_matches(SVG_base_pointer, SVG_data_pointer, string_vector))
                 {
-                    break;
+                    delete SVG_data;
+                    return true;
                 }
+                SVG_data_pointer++;
             }
-            SVG_data_pointer += sizeof(*SVG_data_pointer);  // Advance to the next byte between glyphs.
         } // while (true)
-        return true;
     }
 }
