@@ -364,7 +364,7 @@ namespace model
                                     else
                                     {
                                         vertex_data_pointer++;
-                                    } // else
+                                    }
                                 } // while (keep_reading_path)
                                 SVG_data_pointer = ++closing_double_quote_pointer;
                             } // if (closing_double_quote_pointer != nullptr)
@@ -372,7 +372,7 @@ namespace model
                             {
                                 std::cerr << "error: no closing double quote found for d=!\n";
                                 return false;
-                            } // else
+                            }
                         } // if (opening_double_quote_pointer != nullptr)
                         else
                         {
