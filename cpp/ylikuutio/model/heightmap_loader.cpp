@@ -21,15 +21,14 @@
 
 // Include standard headers
 #include <cmath>    // NAN
-#include <cstring>  // strcmp
+#include <cstdio>   // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf etc.
+#include <cstring>  // std::memcmp, std::strcmp, std::strlen, std::strncmp
+#include <iomanip>  // std::setfill, std::setw
 #include <iostream> // std::cout, std::cin, std::cerr
-#include <string>   // std::string
-#include <string.h> // strcmp
-#include <vector>   // std::vector
+#include <sstream>  // std::stringstream
 #include <stdint.h> // uint32_t etc.
-#include <sstream>  // stringstream etc.
-#include <iomanip>  // setw, setfill etc.
-#include <stdio.h>  // FILE, fclose, fopen, fread, getchar, printf etc.
+#include <string>   // std::string
+#include <vector>   // std::vector
 
 #define SRTM_FILENAME_N_OF_LATITUDE_CHARS 2
 #define SRTM_FILENAME_N_OF_LONGITUDE_CHARS 3
@@ -57,7 +56,7 @@ namespace model
 
         // Open the file
         const char* char_image_path = image_path.c_str();
-        FILE* file = fopen(char_image_path, "rb");
+        std::FILE* file = std::fopen(char_image_path, "rb");
         if (!file)
         {
             std::cerr << image_path << " could not be opened.\n";
@@ -67,7 +66,7 @@ namespace model
         // Read the header, i.e. the 54 first bytes
 
         // If less than 54 bytes are read, it's a problem.
-        if (fread(header, 1, 54, file) != 54)
+        if (std::fread(header, 1, 54, file) != 54)
         {
             std::cerr << "not a correct BMP file.\n";
             return false;
@@ -117,10 +116,10 @@ namespace model
         image_data = new uint8_t [imageSize];
 
         // Read the actual image data from the file into the buffer.
-        fread(image_data, 1, imageSize, file);
+        std::fread(image_data, 1, imageSize, file);
 
         // Everything is in memory now, the file can be closed
-        fclose(file);
+        std::fclose(file);
 
         GLuint* vertex_data;
         vertex_data = new GLuint [world_size];
@@ -140,20 +139,20 @@ namespace model
             {
                 GLuint y;
 
-                if (strcmp(char_color_channel, "blue") == 0)
+                if (std::strcmp(char_color_channel, "blue") == 0)
                 {
                     y = (GLuint) *image_pointer;       // y-coordinate is the blue (B) value.
                 }
-                else if (strcmp(char_color_channel, "green") == 0)
+                else if (std::strcmp(char_color_channel, "green") == 0)
                 {
                     y = (GLuint) *(image_pointer + 1); // y-coordinate is the green (G) value.
                 }
-                else if (strcmp(char_color_channel, "red") == 0)
+                else if (std::strcmp(char_color_channel, "red") == 0)
                 {
                     y = (GLuint) *(image_pointer + 2); // y-coordinate is the red (R) value.
                 }
                 // y-coordinate is the mean of R, G, & B.
-                else if ((strcmp(char_color_channel, "mean") == 0) || (strcmp(char_color_channel, "all") == 0))
+                else if ((std::strcmp(char_color_channel, "mean") == 0) || (std::strcmp(char_color_channel, "all") == 0))
                 {
                     y = (((GLuint) *image_pointer) + ((GLuint) *(image_pointer + 1)) + ((GLuint) *(image_pointer + 2))) / 3;
                 }
@@ -256,7 +255,7 @@ namespace model
 
         // Open the file
         const char* char_image_path = abs_image_path.c_str();
-        FILE* file = fopen(char_image_path, "rb");
+        std::FILE* file = std::fopen(char_image_path, "rb");
         if (!file)
         {
             std::cerr << abs_image_path << " could not be opened.\n";
@@ -273,10 +272,10 @@ namespace model
         image_data = new uint8_t [imageSize];
 
         // Read the actual image data from the file into the buffer.
-        fread(image_data, 1, imageSize, file);
+        std::fread(image_data, 1, imageSize, file);
 
         // Everything is in memory now, the file can be closed
-        fclose(file);
+        std::fclose(file);
 
         GLuint* vertex_data;
         vertex_data = new GLuint [image_width_in_use * image_height_in_use];

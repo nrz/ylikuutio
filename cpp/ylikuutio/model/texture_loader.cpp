@@ -13,17 +13,16 @@
 #endif
 
 // Include standard headers
-#include <cstring>  // strcmp
+#include <cstdio>   // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf etc.
+#include <cstring>  // std::memcmp, std::strcmp, std::strlen, std::strncmp
 #include <stdint.h> // uint32_t etc.
-#include <stdio.h>  // FILE, fclose, fopen, fread, getchar, printf etc.
 #include <stdlib.h> // free, malloc
-#include <string.h> // strcmp, strncmp
 
 namespace texture
 {
     GLuint load_BMP_texture(const char* imagepath)
     {
-        printf("Reading image %s\n", imagepath);
+        std::printf("Reading image %s\n", imagepath);
 
         // Data read from the header of the BMP file
         unsigned char header[54];
@@ -34,40 +33,40 @@ namespace texture
         unsigned char* data;
 
         // Open the file
-        FILE* file = fopen(imagepath,"rb");
+        std::FILE* file = std::fopen(imagepath,"rb");
         if (!file)
         {
-            printf("%s could not be opened. Are you in the right directory ? Don't forget to read the FAQ !\n", imagepath);
-            getchar();
+            std::printf("%s could not be opened. Are you in the right directory ? Don't forget to read the FAQ !\n", imagepath);
+            std::getchar();
             return 0;
         }
 
         // Read the header, i.e. the 54 first bytes
 
         // If less than 54 bytes are read, problem
-        if (fread(header, 1, 54, file) != 54)
+        if (std::fread(header, 1, 54, file) != 54)
         {
-            printf("Not a correct BMP file\n");
+            std::printf("Not a correct BMP file\n");
             return 0;
         }
 
         // A BMP files always begins with "BM"
         if ((header[0] != 'B') || (header[1] != 'M'))
         {
-            printf("Not a correct BMP file\n");
+            std::printf("Not a correct BMP file\n");
             return 0;
         }
 
         // Make sure this is a 24bpp file
         if (*(int*) & (header[0x1E]) != 0)
         {
-            printf("Not a correct BMP file\n");
+            std::printf("Not a correct BMP file\n");
             return 0;
         }
 
         if (*(int*) & (header[0x1C]) != 24)
         {
-            printf("Not a correct BMP file\n");
+            std::printf("Not a correct BMP file\n");
             return 0;
         }
 
@@ -92,10 +91,10 @@ namespace texture
         data = new unsigned char [imageSize];
 
         // Read the actual data from the file into the buffer
-        fread(data, 1, imageSize, file);
+        std::fread(data, 1, imageSize, file);
 
         // Everything is in memory now, the file can be closed
-        fclose(file);
+        std::fclose(file);
 
         // Create one OpenGL texture
         GLuint textureID;
@@ -168,28 +167,28 @@ namespace texture
     GLuint load_DDS_texture(const char* imagepath)
     {
         unsigned char header[124];
-        FILE* fp;
+        std::FILE* fp;
 
         /* try to open the file */
-        fp = fopen(imagepath, "rb");
+        fp = std::fopen(imagepath, "rb");
         if (fp == nullptr)
         {
-            printf("%s could not be opened. Are you in the right directory ? Don't forget to read the FAQ !\n", imagepath);
-            getchar();
+            std::printf("%s could not be opened. Are you in the right directory ? Don't forget to read the FAQ !\n", imagepath);
+            std::getchar();
             return 0;
         }
 
         /* verify the type of file */
         char filecode[4];
-        fread(filecode, 1, 4, fp);
-        if (strncmp(filecode, "DDS ", 4) != 0)
+        std::fread(filecode, 1, 4, fp);
+        if (std::strncmp(filecode, "DDS ", 4) != 0)
         {
-            fclose(fp);
+            std::fclose(fp);
             return 0;
         }
 
         /* get the surface desc */
-        fread(&header, 124, 1, fp);
+        std::fread(&header, 124, 1, fp);
 
         uint32_t height      = *(uint32_t*) & (header[8 ]);
         uint32_t width       = *(uint32_t*) & (header[12]);
@@ -202,9 +201,9 @@ namespace texture
         /* how big is it going to be including all mipmaps? */
         bufsize = mipMapCount > 1 ? linearSize * 2 : linearSize;
         buffer = (unsigned char*) malloc(bufsize * sizeof(unsigned char));
-        fread(buffer, 1, bufsize, fp);
+        std::fread(buffer, 1, bufsize, fp);
         /* close the file pointer */
-        fclose(fp);
+        std::fclose(fp);
 
         uint32_t components = (fourCC == FOURCC_DXT1) ? 3 : 4;
         uint32_t format;

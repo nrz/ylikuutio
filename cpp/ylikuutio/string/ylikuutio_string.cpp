@@ -1,10 +1,11 @@
 #include "ylikuutio_string.hpp"
 
 // Include standard headers
-#include <iostream>  // std::cout, std::cin, std::cerr
-#include <string>    // std::string
-#include <vector>    // std::vector
-#include <string.h>  // strcmp, strlen
+#include <cstdio>   // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf etc.
+#include <cstring>  // std::memcmp, std::strcmp, std::strlen, std::strncmp
+#include <iostream> // std::cout, std::cin, std::cerr
+#include <string>   // std::string
+#include <vector>   // std::vector
 
 namespace string
 {
@@ -14,11 +15,11 @@ namespace string
         {
             const char* identifier_string_char = identifier_string.c_str();
 
-            if (strncmp(SVG_data_pointer, identifier_string_char, strlen(identifier_string_char)) == 0)
+            if (std::strncmp(SVG_data_pointer, identifier_string_char, std::strlen(identifier_string_char)) == 0)
             {
                 const char* identifier_string_char = identifier_string.c_str();
                 uint64_t offset = (uint64_t) SVG_data_pointer - (uint64_t) SVG_base_pointer;
-                printf("%s found at file offset 0x%lx (memory address 0x%lx).\n", identifier_string_char, offset, (uint64_t) SVG_data_pointer);
+                std::printf("%s found at file offset 0x%lx (memory address 0x%lx).\n", identifier_string_char, offset, (uint64_t) SVG_data_pointer);
                 return true;
             }
         }

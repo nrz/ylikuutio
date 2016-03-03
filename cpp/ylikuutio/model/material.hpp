@@ -12,11 +12,10 @@
 #endif
 
 // Include standard headers
-#include <iostream>  // std::cout, std::cin, std::cerr
-#include <string>    // std::string
-#include <vector>    // std::vector
-#include <queue>     // std::queue
-#include <string.h>
+#include <iostream> // std::cout, std::cin, std::cerr
+#include <queue>    // std::queue
+#include <string>   // std::string
+#include <vector>   // std::vector
 
 namespace model
 {

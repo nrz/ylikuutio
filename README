@@ -1,0 +1,81 @@
+Ylikuutio 3D engine.
+
+A hobby project of mine.
+
+Some code is based on http://www.opengl-tutorial.org/ and is
+under the license conditions stated on opengl-tutorial website.
+
+My code is under The GNU General Public License 3, or
+(at your option) any later version. See LICENSE file.
+All my code copyright (C) 2016 Antti Nuortimo.
+
+Other resources are under their respective license conditions.
+
+Grass texture is from Free Seamless Green Grass Textures:
+http://www.brusheezy.com/textures/20185-seamless-green-grass-textures
+
+UV map texture is from OpenGL tutorial:
+http://www.opengl-tutorial.org/beginners-tutorials/tutorial-8-basic-shading/
+
+Suzanne the monkey is a standard Blender object.
+
+Ylikuutio can be compiled on GCC or Visual Studio.
+C++11 support is required.
+cmake is needed for compiling process.
+git is needed for downloading Google Test testing framework.
+
+In Linux it's simple.
+In Ylikuutio install directory:
+
+$ mkdir build
+$ cd build
+$ cmake ..
+$ make
+
+If you have problems compiling tests or otherwise don't want
+to compile tests, in CMakeLists.txt comment out the line that says:
+set(DO_UNIT_TESTS_WITH_GOOGLE_TEST true)
+
+There are some tests that use Catch testing framework but those tests
+are now considered deprecated and Catch will not be used anymore for
+testing in Ylikuutio. Tests using Catch have been disabled by default
+in CMakeLists.txt .
+
+To run Ajokki (working title based on Finnish bus body manufacturer),
+a demo program so see some properties of Ylikuutio 3D engine:
+
+$ ./ajokki
+
+F to toggle flying on off, arrow keys work too.
+F1 toggles help display and there you'll see some more options to try.
+
+To run tests (coverage is still quite limited but underway):
+
+$ ./unit_tests_with_Google_Test
+
+Future developments underway:
+o callbacks 
+o in-game console
+o partially transparent 2D text
+o 3D text
+o multiple scenes in the same world
+o coordinates relative to other objects, not only to world object
+o collision detection between objects
+o octree space partitioning
+o possibility to create scenes with different spatial scales
+o objects (species in Ylikuutio terminology) with modifiable vertices
+o making holes in objects
+o splitting of objects into 2 or more pieces
+o cementing of 2 or more objects into one
+o morphing between objects (species in Ylikuutio terminology)
+o morphing between objects (species) and 3D text (glyphs)
+o ray casting for vertex selection and vertex modifications
+o objects with 4 or more spatial dimensions,
+  projected to 3D space before rendering to screen
+o more shaders
+o sky dome
+o water
+o more physics
+o artificial intelligence (AI) creatures
+o scripting language, possibly Bigloo
+o visual pattern recognition for AI

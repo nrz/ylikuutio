@@ -206,6 +206,10 @@ add_executable(ajokki
     cpp/ylikuutio/common/triangulation.hpp
     cpp/ylikuutio/common/triangulation_macros.cpp
 
+    # file, in alphabetical order.
+    cpp/ylikuutio/file/file_loader.cpp
+    cpp/ylikuutio/file/file_loader.hpp
+
     # graph, in alphabetical order.
     cpp/ylikuutio/graph/graph.cpp
     cpp/ylikuutio/graph/graph.hpp
@@ -220,8 +224,8 @@ add_executable(ajokki
     # model, in alphabetical order
     cpp/ylikuutio/model/font.cpp
     cpp/ylikuutio/model/font.hpp
-    # cpp/ylikuutio/model/font_loader.cpp
-    # cpp/ylikuutio/model/font_loader.hpp
+    cpp/ylikuutio/model/font_loader.cpp
+    cpp/ylikuutio/model/font_loader.hpp
     cpp/ylikuutio/model/glyph.cpp
     cpp/ylikuutio/model/glyph.hpp
     cpp/ylikuutio/model/ground_level.cpp
@@ -303,11 +307,14 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         cpp/ylikuutio/common/bilinear_interpolation.hpp
         cpp/ylikuutio/common/triangulation.cpp
         cpp/ylikuutio/common/triangulation.hpp
+        cpp/ylikuutio/file/file_loader.cpp
+        cpp/ylikuutio/file/file_loader.hpp
         cpp/ylikuutio/string/ylikuutio_string.cpp
         cpp/ylikuutio/string/ylikuutio_string.hpp
         )
     set(UNIT_TESTS
         cpp/ylikuutio/tests/googletest/test_any_value.cpp
+        cpp/ylikuutio/tests/googletest/test_file_loader.cpp
         cpp/ylikuutio/tests/googletest/test_globals.cpp
         cpp/ylikuutio/tests/googletest/test_heightmap_loader.cpp
         cpp/ylikuutio/tests/googletest/test_triangulation.cpp

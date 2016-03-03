@@ -21,7 +21,7 @@
 
 // Include standard headers
 #include <vector>   // std::vector
-#include <cstring>  // strcmp
+#include <cstring>  // std::memcmp, std::strcmp, std::strlen, std::strncmp
 #include <stdint.h> // uint32_t etc.
 
 GLuint Text2DTextureID;              // Material containing the font
@@ -43,11 +43,11 @@ namespace text2D
             const char* char_font_texture_file_format)
     {
         // Initialize texture
-        if ((strcmp(char_font_texture_file_format, "bmp") == 0) || (strcmp(char_font_texture_file_format, "BMP") == 0))
+        if ((std::strcmp(char_font_texture_file_format, "bmp") == 0) || (std::strcmp(char_font_texture_file_format, "BMP") == 0))
         {
             Text2DTextureID = texture::load_BMP_texture(texturePath);
         }
-        else if ((strcmp(char_font_texture_file_format, "dds") == 0) || (strcmp(char_font_texture_file_format, "DDS") == 0))
+        else if ((std::strcmp(char_font_texture_file_format, "dds") == 0) || (std::strcmp(char_font_texture_file_format, "DDS") == 0))
         {
             Text2DTextureID = texture::load_DDS_texture(texturePath);
         }
@@ -94,7 +94,7 @@ namespace text2D
         //
         // If horizontal alignment is right, each line ends in the same x coordinate.
         // Newlines need to be checked beforehand.
-        uint32_t length = strlen(text);
+        uint32_t length = std::strlen(text);
 
         // Count the number of lines.
         uint32_t number_of_lines = 1;
@@ -120,28 +120,28 @@ namespace text2D
         GLuint current_left_x;
         GLuint current_top_y;
 
-        if (strcmp(horizontal_alignment, "left") == 0)
+        if (std::strcmp(horizontal_alignment, "left") == 0)
         {
             current_left_x = x;
         }
-        else if (strcmp(horizontal_alignment, "center") == 0)
+        else if (std::strcmp(horizontal_alignment, "center") == 0)
         {
             current_left_x = x - 0.5f * length * text_size;
         }
-        else if (strcmp(horizontal_alignment, "right") == 0)
+        else if (std::strcmp(horizontal_alignment, "right") == 0)
         {
             current_left_x = x - length * text_size;
         }
 
-        if (strcmp(vertical_alignment, "top") == 0)
+        if (std::strcmp(vertical_alignment, "top") == 0)
         {
             current_top_y = y;
         }
-        else if (strcmp(vertical_alignment, "center") == 0)
+        else if (std::strcmp(vertical_alignment, "center") == 0)
         {
             current_top_y = y + 0.5f * number_of_lines * text_size;
         }
-        else if (strcmp(vertical_alignment, "bottom") == 0)
+        else if (std::strcmp(vertical_alignment, "bottom") == 0)
         {
             current_top_y = y + number_of_lines * text_size;
         }
@@ -206,11 +206,11 @@ namespace text2D
             float uv_x = (character % font_size) / (GLfloat) font_size;
             float uv_y;
 
-            if ((strcmp(char_font_texture_file_format, "dds") == 0) || (strcmp(char_font_texture_file_format, "DDS") == 0))
+            if ((std::strcmp(char_font_texture_file_format, "dds") == 0) || (std::strcmp(char_font_texture_file_format, "DDS") == 0))
             {
                 uv_y = (character / font_size) / (GLfloat) font_size;
             }
-            else if ((strcmp(char_font_texture_file_format, "bmp") == 0) || (strcmp(char_font_texture_file_format, "BMP") == 0))
+            else if ((std::strcmp(char_font_texture_file_format, "bmp") == 0) || (std::strcmp(char_font_texture_file_format, "BMP") == 0))
             {
                 // BMP is stored in the file beginning from the bottom line.
                 uv_y = 1 - (character / font_size) / (GLfloat) font_size;
@@ -220,12 +220,12 @@ namespace text2D
             glm::vec2 uv_up_right   = glm::vec2(uv_x + (1.0f / (GLfloat) font_size), uv_y);
             glm::vec2 uv_down_right;
             glm::vec2 uv_down_left;
-            if ((strcmp(char_font_texture_file_format, "dds") == 0) || (strcmp(char_font_texture_file_format, "DDS") == 0))
+            if ((std::strcmp(char_font_texture_file_format, "dds") == 0) || (std::strcmp(char_font_texture_file_format, "DDS") == 0))
             {
                 uv_down_right = glm::vec2(uv_x + (1.0f / (GLfloat) font_size), (uv_y + 1.0f / (GLfloat) font_size));
                 uv_down_left  = glm::vec2(uv_x                               , (uv_y + 1.0f / (GLfloat) font_size));
             }
-            else if ((strcmp(char_font_texture_file_format, "bmp") == 0) || (strcmp(char_font_texture_file_format, "BMP") == 0))
+            else if ((std::strcmp(char_font_texture_file_format, "bmp") == 0) || (std::strcmp(char_font_texture_file_format, "BMP") == 0))
             {
                 // BMP is stored in the file beginning from the bottom line.
                 uv_down_right = glm::vec2(uv_x + (1.0f / (GLfloat) font_size), (uv_y - 1.0f / (GLfloat) font_size));

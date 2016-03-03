@@ -1,8 +1,10 @@
+// Include standard headers
+#include <cstdio>   // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf etc.
 #include <stdint.h> // uint32_t etc.
 
 struct read_BMP_into_world_data(const char* imagepath)
 {
-    printf("Reading image %s\n", imagepath);
+    std::printf("Reading image %s\n", imagepath);
 
     // Data read from the header of the BMP file
     unsigned char header[54];
@@ -13,40 +15,40 @@ struct read_BMP_into_world_data(const char* imagepath)
     unsigned char* image_data;
 
     // Open the file
-    FILE* file = fopen(imagepath,"rb");
+    std::FILE* file = std::fopen(imagepath,"rb");
     if (!file)
     {
-        printf("%s could not be opened.\n", imagepath);
-        getchar();
+        std::printf("%s could not be opened.\n", imagepath);
+        std::getchar();
         return 0;
     }
 
     // Read the header, i.e. the 54 first bytes
 
     // If less than 54 bytes are read, it's a problem.
-    if (fread(header, 1, 54, file) != 54)
+    if (std::fread(header, 1, 54, file) != 54)
     {
-        printf("Not a correct BMP file\n");
+        std::printf("Not a correct BMP file\n");
         return 0;
     }
 
     // A BMP files always begins with "BM"
     if ((header[0] != 'B') || (header[1] != 'M'))
     {
-        printf("Not a correct BMP file\n");
+        std::printf("Not a correct BMP file\n");
         return 0;
     }
 
     // Make sure this is a 24bpp file
     if (*(int*) & (header[0x1E]) != 0)
     {
-        printf("Not a correct BMP file\n");
+        std::printf("Not a correct BMP file\n");
         return 0;
     }
 
     if (*(int*) & (header[0x1C]) != 24)
     {
-        printf("Not a correct BMP file\n");
+        std::printf("Not a correct BMP file\n");
         return 0;
     }
 
@@ -71,10 +73,10 @@ struct read_BMP_into_world_data(const char* imagepath)
     image_data = new unsigned char [imageSize];
 
     // Read the actual image data from the file into the buffer.
-    fread(image_data, 1, imageSize, file);
+    std::fread(image_data, 1, imageSize, file);
 
     // Everything is in memory now, the file can be closed
-    fclose(file);
+    std::fclose(file);
 
 #define COLOR_CHANNEL_RED
 #define COLOR_CHANNEL_GREEN

@@ -25,3 +25,6 @@ Valmiit:
 [x] Lisää testi-VBO, vaikka jonkinlainen partikkeliobjekti.
 [x] Määrittele objektiluokka.
 [x] Lisää tuki useille VBO:ille.
+[x] `string.h` -> `cstring`.
+[x] `strcmp` -> `std::strcmp`.
+[x] `strlen` -> `std::strlen`.

@@ -6,7 +6,7 @@
 #include "cpp/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include standard headers
-#include <cstring>  // strcmp
+#include <cstring> // std::memcmp, std::strcmp, std::strlen, std::strncmp
 
 namespace model
 {
@@ -30,11 +30,11 @@ namespace model
         this->bind_to_parent();
 
         // Load the texture.
-        if ((strcmp(this->char_texture_file_format, "bmp") == 0) || (strcmp(this->char_texture_file_format, "BMP") == 0))
+        if ((std::strcmp(this->char_texture_file_format, "bmp") == 0) || (std::strcmp(this->char_texture_file_format, "BMP") == 0))
         {
             this->texture = texture::load_BMP_texture(this->char_texture_filename);
         }
-        else if ((strcmp(this->char_texture_file_format, "dds") == 0) || (strcmp(this->char_texture_file_format, "DDS") == 0))
+        else if ((std::strcmp(this->char_texture_file_format, "dds") == 0) || (std::strcmp(this->char_texture_file_format, "DDS") == 0))
         {
             this->texture = texture::load_DDS_texture(this->char_texture_filename);
         }
