@@ -14,7 +14,7 @@
 
 // Include standard headers
 #include <cstdio>   // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf etc.
-#include <cstring>  // strcmp
+#include <cstring>  // memcmp, strcmp, strlen
 #include <stdint.h> // uint32_t etc.
 #include <stdlib.h> // free, malloc
 #include <string.h> // strcmp, strncmp

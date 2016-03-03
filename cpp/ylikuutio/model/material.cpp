@@ -6,7 +6,7 @@
 #include "cpp/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include standard headers
-#include <cstring>  // strcmp
+#include <cstring> // memcmp, strcmp, strlen
 
 namespace model
 {

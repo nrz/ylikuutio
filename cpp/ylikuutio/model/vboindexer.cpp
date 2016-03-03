@@ -13,7 +13,7 @@
 #endif
 
 // Include standard headers
-#include <string.h> // for memcmp
+#include <string.h> // memcmp, strcmp, strlen
 #include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
 #include <map>
