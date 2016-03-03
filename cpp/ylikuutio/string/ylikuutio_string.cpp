@@ -4,7 +4,7 @@
 #include <cstdio>   // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf etc.
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <string>   // std::string
-#include <string.h> // memcmp, strcmp, strlen
+#include <cstring> // memcmp, strcmp, strlen
 #include <vector>   // std::vector
 
 namespace string

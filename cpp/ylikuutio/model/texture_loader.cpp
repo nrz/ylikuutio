@@ -17,7 +17,7 @@
 #include <cstring>  // memcmp, strcmp, strlen
 #include <stdint.h> // uint32_t etc.
 #include <stdlib.h> // free, malloc
-#include <string.h> // strcmp, strncmp
+#include <cstring> // strcmp, strncmp
 
 namespace texture
 {

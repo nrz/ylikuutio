@@ -16,7 +16,7 @@
 #include <string>    // std::string
 #include <vector>    // std::vector
 #include <queue>     // std::queue
-#include <string.h>
+#include <cstring>
 
 namespace model
 {
