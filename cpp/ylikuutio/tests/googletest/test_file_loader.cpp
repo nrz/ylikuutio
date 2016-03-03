@@ -3,6 +3,7 @@
 
 // Include standard headers
 #include <cstdio>  // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf etc.
+#include <cstring> // memcmp, strcmp, strlen
 
 TEST(file_must_be_slurped_appropriately, kongtext_svg)
 {
