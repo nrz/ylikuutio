@@ -1,12 +1,6 @@
 #ifndef __GRAPH_HPP_INCLUDED
 #define __GRAPH_HPP_INCLUDED
 
-// Include GLEW
-#ifndef __GL_GLEW_H_INCLUDED
-#define __GL_GLEW_H_INCLUDED
-#include <GL/glew.h> // GLfloat, GLuint etc.
-#endif
-
 // Include standard headers
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <vector>   // std::vector
@@ -29,16 +23,16 @@ namespace model
 
         private:
             // this method sets a node pointer.
-            void set_node_pointer(GLuint nodeID, void* node_pointer);
+            void set_node_pointer(uint32_t nodeID, void* node_pointer);
 
             // this method gets a node pointer.
-            void* get_node_pointer(GLuint nodeID);
+            void* get_node_pointer(uint32_t nodeID);
 
             // this method gets a node ID and removes it from the `free_nodeID_queue` if it was popped from the queue.
-            GLuint get_nodeID();
+            uint32_t get_nodeID();
 
             std::vector<void*> node_pointer_vector;
-            std::queue<GLuint> free_nodeID_queue;
+            std::queue<uint32_t> free_nodeID_queue;
     };
 }
 

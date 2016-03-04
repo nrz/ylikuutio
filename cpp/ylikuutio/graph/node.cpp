@@ -1,11 +1,5 @@
 #include "node.hpp"
 
-// Include GLEW
-#ifndef __GL_GLEW_H_INCLUDED
-#define __GL_GLEW_H_INCLUDED
-#include <GL/glew.h> // GLfloat, GLuint etc.
-#endif
-
 // Include standard headers
 #include <iostream> // std::cout, std::cin, std::cerr
 
@@ -27,7 +21,7 @@ namespace model
         this->parent_pointer->set_node_pointer(this->childID, this);
 
         // create all bidirectional links between this node and neighbor nodes.
-        for (GLuint link_i = 0; link_i < this->neighbor_nodeIDs.size(); link_i++)
+        for (uint32_t link_i = 0; link_i < this->neighbor_nodeIDs.size(); link_i++)
         {
             this->create_bidirectional_link(this->neighbor_nodeIDs[link_i]);
         }
@@ -39,7 +33,7 @@ namespace model
         std::cout << "Node with childID " << this->childID << " will be destroyed.\n";
 
         // delete all bidirectional links.
-        for (GLuint link_i = 0; link_i < this->neighbor_nodeIDs.size(); link_i++)
+        for (uint32_t link_i = 0; link_i < this->neighbor_nodeIDs.size(); link_i++)
         {
             this->delete_bidirectional_link(this->neighbor_nodeIDs[link_i]);
         }
@@ -48,7 +42,7 @@ namespace model
         this->parent_pointer->set_node_pointer(this->childID, nullptr);
     }
 
-    void Node::create_unidirectional_link(GLuint nodeID)
+    void Node::create_unidirectional_link(uint32_t nodeID)
     {
         // this method creates an unidirectional link.
 
@@ -63,7 +57,7 @@ namespace model
         // this->neighbor_nodeIDs.push_back(nodeID);
     }
 
-    void Node::create_bidirectional_link(GLuint nodeID)
+    void Node::create_bidirectional_link(uint32_t nodeID)
     {
         // create a link from this node to destination node.
         this->create_unidirectional_link(nodeID);
@@ -72,13 +66,13 @@ namespace model
         static_cast<model::Node*>(this->parent_pointer->get_node_pointer(childID))->create_unidirectional_link(this->childID);
     }
 
-    void Node::delete_unidirectional_link(GLuint nodeID)
+    void Node::delete_unidirectional_link(uint32_t nodeID)
     {
         // this method deletes an unidirectional link.
         this->neighbor_nodeIDs.erase(std::remove(this->neighbor_nodeIDs.begin(), this->neighbor_nodeIDs.end(), nodeID), this->neighbor_nodeIDs.end());
     }
 
-    void Node::delete_bidirectional_link(GLuint nodeID)
+    void Node::delete_bidirectional_link(uint32_t nodeID)
     {
         // this method deletes a bidirectional link.
         this->delete_unidirectional_link(nodeID);
