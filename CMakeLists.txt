@@ -161,12 +161,12 @@ add_definitions(
     )
 
 # for general use.
-configure_file(cpp/ylikuutio/common/TransformVertexShader.vertexshader TransformVertexShader.vertexshader COPYONLY)
-configure_file(cpp/ylikuutio/common/TextureFragmentShader.fragmentshader TextureFragmentShader.fragmentshader COPYONLY)
-configure_file(cpp/ylikuutio/common/StandardShading.vertexshader StandardShading.vertexshader COPYONLY)
-configure_file(cpp/ylikuutio/common/StandardShading.fragmentshader StandardShading.fragmentshader COPYONLY)
-configure_file(cpp/ylikuutio/common/TextVertexShader.vertexshader TextVertexShader.vertexshader COPYONLY)
-configure_file(cpp/ylikuutio/common/TextVertexShader.fragmentshader TextVertexShader.fragmentshader COPYONLY)
+configure_file(cpp/ylikuutio/shaders/TransformVertexShader.vertexshader TransformVertexShader.vertexshader COPYONLY)
+configure_file(cpp/ylikuutio/shaders/TextureFragmentShader.fragmentshader TextureFragmentShader.fragmentshader COPYONLY)
+configure_file(cpp/ylikuutio/shaders/StandardShading.vertexshader StandardShading.vertexshader COPYONLY)
+configure_file(cpp/ylikuutio/shaders/StandardShading.fragmentshader StandardShading.fragmentshader COPYONLY)
+configure_file(cpp/ylikuutio/shaders/TextVertexShader.vertexshader TextVertexShader.vertexshader COPYONLY)
+configure_file(cpp/ylikuutio/shaders/TextVertexShader.fragmentshader TextVertexShader.fragmentshader COPYONLY)
 configure_file(res/objects/suzanne.obj suzanne.obj COPYONLY)
 configure_file(res/textures/uvmap.DDS uvmap.DDS COPYONLY)
 configure_file(res/textures/GrassGreenTexture0002.bmp GrassGreenTexture0002.bmp COPYONLY)
@@ -258,12 +258,12 @@ add_executable(ajokki
     cpp/ylikuutio/model/world.hpp
 
     # shaders, in alphabetical order
-    cpp/ylikuutio/common/StandardShading.fragmentshader
-    cpp/ylikuutio/common/StandardShading.vertexshader
-    cpp/ylikuutio/common/TransformVertexShader.vertexshader
-    cpp/ylikuutio/common/TextureFragmentShader.fragmentshader
-    cpp/ylikuutio/common/TextVertexShader.fragmentshader
-    cpp/ylikuutio/common/TextVertexShader.vertexshader
+    cpp/ylikuutio/shaders/StandardShading.fragmentshader
+    cpp/ylikuutio/shaders/StandardShading.vertexshader
+    cpp/ylikuutio/shaders/TransformVertexShader.vertexshader
+    cpp/ylikuutio/shaders/TextureFragmentShader.fragmentshader
+    cpp/ylikuutio/shaders/TextVertexShader.fragmentshader
+    cpp/ylikuutio/shaders/TextVertexShader.vertexshader
 
     # string, in alphabetical order
     cpp/ylikuutio/string/ylikuutio_string.cpp
