@@ -1,48 +1,60 @@
 Ylikuutio 3D engine.
 
-A hobby project of mine.
+A hobby project of mine. Work in progress.
 
 Some code is based on http://www.opengl-tutorial.org/ and is
-under the license conditions stated on opengl-tutorial website.
+under the license conditions stated on opengl-tutorial website:
+WTF Public License: "you just do what the f*** you want to".
 
-My code is under The GNU General Public License 3, or
+My own code is under The GNU General Public License 3, or
 (at your option) any later version. See LICENSE file.
 All my code copyright (C) 2016 Antti Nuortimo.
 
-Other resources are under their respective license conditions.
+Other resources are under their respective licenses.
 
 Grass texture is from Free Seamless Green Grass Textures:
 http://www.brusheezy.com/textures/20185-seamless-green-grass-textures
 
-UV map texture is from OpenGL tutorial:
+UV map texture is from opengl-tutorial:
 http://www.opengl-tutorial.org/beginners-tutorials/tutorial-8-basic-shading/
 
 Suzanne the monkey is a standard Blender object.
 
-Ylikuutio can be compiled on GCC or Visual Studio.
+Ylikuutio can be compiled with GCC, Clang or Visual Studio.
 C++11 support is required.
-cmake is needed for compiling process.
-git is needed for downloading Google Test testing framework.
+OpenGL 3.0 or newer is required.
+CMake 2.6.2 or newer is needed for compiling process.
+CMake uses git for downloading Google Test testing framework.
 
 In Linux it's simple.
-In Ylikuutio install directory:
+To compile with GCC, in Ylikuutio install directory:
 
 $ mkdir build
 $ cd build
 $ cmake ..
 $ make
 
-If you have problems compiling tests or otherwise don't want
+Or, to compile with Clang, again in Ylikuutio install directory:
+
+$ mkdir build
+$ cd build
+$ export CC='/usr/bin/clang'
+$ export CXX='/usr/bin/clang++'
+$ cmake ..
+$ make
+
+If you have problems compiling tests or for some other reason don't want
 to compile tests, in CMakeLists.txt comment out the line that says:
 set(DO_UNIT_TESTS_WITH_GOOGLE_TEST true)
 
-There are some tests that use Catch testing framework but those tests
-are now considered deprecated and Catch will not be used anymore for
-testing in Ylikuutio. Tests using Catch have been disabled by default
-in CMakeLists.txt .
+There are also tests which use Catch testing framework but those are now
+considered deprecated and Catch will not be used for further testing in
+Ylikuutio. Tests using Catch have been disabled by default but can be
+compiled by uncommenting the corresponding line in CMakeLists.txt:
+# set(DO_UNIT_TESTS_WITH_CATCH true)
 
 To run Ajokki (working title based on Finnish bus body manufacturer),
-a demo program so see some properties of Ylikuutio 3D engine:
+a demo program to check out some properties of Ylikuutio 3D engine:
 
 $ ./ajokki
 
@@ -52,6 +64,10 @@ F1 toggles help display and there you'll see some more options to try.
 To run tests (coverage is still quite limited but underway):
 
 $ ./unit_tests_with_Google_Test
+
+If you compiled tests using Catch framework (they are deprecated):
+
+$ ./unit_tests_with_Catch
 
 Future developments underway:
 o callbacks 
@@ -79,3 +95,12 @@ o more physics
 o artificial intelligence (AI) creatures
 o scripting language, possibly Bigloo
 o visual pattern recognition for AI
+
+contact info (found bugs and suggestions are welcome):
+name:           Antti Nuortimo
+GitHub:         https://github.com/nrz
+Stack Overflow: http://stackoverflow.com/users/1310991/nrz
+email:          ylikuutio at gmail dot com
+                (please write 'ylikuutio' to email title to escape /dev/null)
+
+Work offers are also very welcome!
