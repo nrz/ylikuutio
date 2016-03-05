@@ -92,7 +92,7 @@ namespace geometry
             std::vector<glm::vec3> &temp_vertices,
             std::vector<glm::vec2> &temp_UVs)
     {
-        GLuint* input_vertex_pointer = bilinear_interpolation_struct.input_vertex_pointer;
+        uint32_t* input_vertex_pointer = bilinear_interpolation_struct.input_vertex_pointer;
         uint32_t image_width = bilinear_interpolation_struct.image_width;
         uint32_t image_height = bilinear_interpolation_struct.image_height;
 
