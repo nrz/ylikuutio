@@ -189,6 +189,9 @@ int main(void)
     model::World* my_world = new model::World();
     cleanup_callback = &full_cleanup;
 
+    AnyValue world_pointer_any_value = new AnyValue(my_world);
+    callback_system::CallbackParameter* callback_parameter = new callback_system::CallbackParameter("world_pointer", world_pointer_any_value, false, callback_object);
+
     // Create the shader, store it in `my_shader`.
     ShaderStruct shader_struct;
     shader_struct.parent_pointer = my_world;
