@@ -30,6 +30,14 @@ namespace callback_system
         // `CallbackEngine` is an object that contains some callbacks and hashmaps that are used for input and output parameters.
         // `CallbackEngine` provides a way to create callback chains.
         //
+        // Hierarchy of callbacks:
+        //
+        //     CallbackEngine
+        //           ^
+        //     CallbackObject
+        //           ^
+        //   CallbackParameter
+        //
         // How to use.
         // 1. Create a new `CallbackEngine`. No callbacks have been
         //    defined yet. Calling `CallbackEngine.execute()` at this
