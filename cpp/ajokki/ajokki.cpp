@@ -134,6 +134,7 @@ int main(void)
     // initialFoV = 45.0f;
     initialFoV = 60.0f;
 
+    callback_system::CallbackEngine* callback_engine = new callback_system::CallbackEngine();
     AnyValueToVoidCallback cleanup_callback = nullptr;
 
     bool does_suzanne_species_exist = true;
