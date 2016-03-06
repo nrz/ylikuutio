@@ -10,6 +10,11 @@
 
 namespace callback_system
 {
+    CallbackObject::CallbackObject(callback_system::CallbackEngine* callback_engine_pointer)
+    {
+        this->callback_engine_pointer = callback_engine_pointer;
+    }
+
     CallbackObject::CallbackObject(InputParametersToAnyValueCallback callback, callback_system::CallbackEngine* callback_engine_pointer)
     {
         this->callback_engine_pointer = callback_engine_pointer;
