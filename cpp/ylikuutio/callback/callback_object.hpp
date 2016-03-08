@@ -25,6 +25,9 @@ namespace callback_system
             // constructor.
             CallbackObject(InputParametersToAnyValueCallback callback, callback_system::CallbackEngine* callback_engine_pointer);
 
+            // destructor.
+            ~CallbackObject();
+
             // add reference to an input variable.
             // this does not store the value to an appropriate hashmap.
             // storing the value must be done before or after this call.
