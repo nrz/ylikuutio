@@ -34,6 +34,9 @@ namespace callback_system
             // each type has its own namespace!
             // void add_input_parameter(std::string name, AnyValue any_value, bool is_reference);
 
+            friend class CallbackEngine;
+
+        private:
             // execute this callback.
             AnyValue execute();
 
