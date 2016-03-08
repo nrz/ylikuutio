@@ -37,7 +37,7 @@ namespace callback_system
             // execute this callback.
             AnyValue execute();
 
-            callback_system::CallbackEngine* callback_engine_pointer;
+            callback_system::CallbackEngine* callback_engine_pointer; // pointer to the callback engine.
 
             std::string output_type;
             std::string output_variable_name;

@@ -28,7 +28,7 @@
 // `Species` must be create before any `Object` of that `Species`. `parent_pointer` must be given to each `Object` of the `Species`.
 //
 //
-// Hierarchy for regular objects (including terrain species):
+// Hierarchy of regular objects (including terrain species):
 //
 //     World
 //       ^
@@ -43,7 +43,7 @@
 //     Object
 //
 //
-// Hierarchy for glyph (character) objects:
+// Hierarchy of glyph (character) objects:
 //
 //     World
 //       ^
