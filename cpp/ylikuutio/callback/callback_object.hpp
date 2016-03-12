@@ -40,6 +40,9 @@ namespace callback_system
             // execute this callback.
             AnyValue execute();
 
+            // this method sets a callback parameter pointer.
+            void set_callback_parameter_pointer(uint32_t childID, void* parent_pointer);
+
             callback_system::CallbackEngine* callback_engine_pointer; // pointer to the callback engine.
 
             std::string output_type;
