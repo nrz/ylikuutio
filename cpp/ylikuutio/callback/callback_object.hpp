@@ -47,6 +47,8 @@ namespace callback_system
 
             void bind_to_parent();
 
+            uint32_t childID;                     // callback object ID, returned by `callback_system::CallbackEngine->get_callback_objectID()`.
+
             std::string output_type;
             std::string output_variable_name;
             std::vector<callback_system::CallbackParameter*> callback_parameter_pointer_vector;
