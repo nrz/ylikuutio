@@ -49,6 +49,8 @@ namespace callback_system
 
             uint32_t childID;                     // callback object ID, returned by `callback_system::CallbackEngine->get_callback_objectID()`.
 
+            std::vector<void*> callback_parameter_vector;
+
             std::string output_type;
             std::string output_variable_name;
             std::vector<callback_system::CallbackParameter*> callback_parameter_pointer_vector;
