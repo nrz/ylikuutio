@@ -85,7 +85,7 @@ namespace model
             uint32_t image_width;
             uint32_t image_height;
 
-            model::Material *parent_pointer;         // pointer to the texture.
+            model::Material *parent_pointer;         // pointer to the material.
 
             GLuint vertexPosition_modelspaceID;
             GLuint vertexUVID;
