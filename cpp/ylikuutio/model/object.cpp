@@ -15,13 +15,13 @@ namespace model
         {
             model::Glyph* parent_pointer;
             parent_pointer = this->glyph_parent_pointer;
-            model::bind_child_to_parent<model::Object*>(this, parent_pointer->object_pointer_vector, parent_pointer->free_objectID_queue);
+            hierarchy::bind_child_to_parent<model::Object*>(this, parent_pointer->object_pointer_vector, parent_pointer->free_objectID_queue);
         }
         else
         {
             model::Species* parent_pointer;
             parent_pointer = this->species_parent_pointer;
-            model::bind_child_to_parent<model::Object*>(this, parent_pointer->object_pointer_vector, parent_pointer->free_objectID_queue);
+            hierarchy::bind_child_to_parent<model::Object*>(this, parent_pointer->object_pointer_vector, parent_pointer->free_objectID_queue);
         }
     }
 
@@ -92,7 +92,7 @@ namespace model
             model::Glyph* parent_pointer;
             parent_pointer = this->glyph_parent_pointer;
             // set pointer to this child to nullptr in the old parent.
-            set_child_pointer(this->childID, nullptr, glyph_parent_pointer->object_pointer_vector, glyph_parent_pointer->free_objectID_queue);
+            hierarchy::set_child_pointer(this->childID, nullptr, glyph_parent_pointer->object_pointer_vector, glyph_parent_pointer->free_objectID_queue);
             // set the new parent pointer.
             this->glyph_parent_pointer = static_cast<model::Glyph*>(new_parent_pointer);
             // bind to the new parent.
@@ -103,7 +103,7 @@ namespace model
             model::Species* parent_pointer;
             parent_pointer = this->species_parent_pointer;
             // set pointer to this child to nullptr in the old parent.
-            set_child_pointer(this->childID, nullptr, species_parent_pointer->object_pointer_vector, species_parent_pointer->free_objectID_queue);
+            hierarchy::set_child_pointer(this->childID, nullptr, species_parent_pointer->object_pointer_vector, species_parent_pointer->free_objectID_queue);
             // set the new parent pointer.
             this->species_parent_pointer = static_cast<model::Species*>(new_parent_pointer);
             // bind to the new parent.

@@ -6,7 +6,7 @@
 // Include standard headers
 #include <vector>    // std::vector
 
-namespace model
+namespace hierarchy
 {
     void set_child_pointer(uint32_t childID, void* child_pointer, std::vector<void*> &child_pointer_vector, std::queue<uint32_t> &free_childID_queue);
     uint32_t get_childID(std::vector<void*> &child_pointer_vector, std::queue<uint32_t> &free_childID_queue);

@@ -23,7 +23,7 @@ namespace callback_system
 
     void CallbackEngine::set_callback_object_pointer(uint32_t childID, void* parent_pointer)
     {
-        model::set_child_pointer(childID, parent_pointer, this->callback_object_pointer_vector, this->free_callback_objectID_queue);
+        hierarchy::set_child_pointer(childID, parent_pointer, this->callback_object_pointer_vector, this->free_callback_objectID_queue);
     }
 
     // getter functions for callbacks and callback objects.

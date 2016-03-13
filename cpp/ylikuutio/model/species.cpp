@@ -20,7 +20,7 @@ namespace model
 {
     void Species::bind_to_parent()
     {
-        model::bind_child_to_parent<model::Species*>(this, this->parent_pointer->species_pointer_vector, this->parent_pointer->free_speciesID_queue);
+        hierarchy::bind_child_to_parent<model::Species*>(this, this->parent_pointer->species_pointer_vector, this->parent_pointer->free_speciesID_queue);
     }
 
     Species::Species(SpeciesStruct species_struct)
@@ -126,7 +126,7 @@ namespace model
 
         // destroy all objects of this species.
         std::cout << "All objects of this species will be destroyed.\n";
-        model::delete_children<model::Object*>(this->object_pointer_vector);
+        hierarchy::delete_children<model::Object*>(this->object_pointer_vector);
 
         // Cleanup VBO, shader and texture.
         glDeleteBuffers(1, &this->vertexbuffer);
@@ -145,11 +145,11 @@ namespace model
 
     void Species::set_object_pointer(uint32_t childID, void* parent_pointer)
     {
-        set_child_pointer(childID, parent_pointer, this->object_pointer_vector, this->free_objectID_queue);
+        hierarchy::set_child_pointer(childID, parent_pointer, this->object_pointer_vector, this->free_objectID_queue);
     }
 
     void Species::bind_to_new_parent(model::Material *new_texture_pointer)
     {
-        model::bind_child_to_new_parent<model::Species*, model::Material*>(this, new_texture_pointer, this->parent_pointer->species_pointer_vector, this->parent_pointer->free_speciesID_queue);
+        hierarchy::bind_child_to_new_parent<model::Species*, model::Material*>(this, new_texture_pointer, this->parent_pointer->species_pointer_vector, this->parent_pointer->free_speciesID_queue);
     }
 }

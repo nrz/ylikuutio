@@ -12,7 +12,7 @@ namespace model
 
     void Graph::set_node_pointer(uint32_t childID, void* parent_pointer)
     {
-        set_child_pointer(childID, parent_pointer, this->node_pointer_vector, this->free_nodeID_queue);
+        hierarchy::set_child_pointer(childID, parent_pointer, this->node_pointer_vector, this->free_nodeID_queue);
     }
 
     void* Graph::get_node_pointer(uint32_t childID)
@@ -22,7 +22,7 @@ namespace model
 
     uint32_t Graph::get_nodeID()
     {
-        return get_childID(node_pointer_vector, free_nodeID_queue);
+        return hierarchy::get_childID(node_pointer_vector, free_nodeID_queue);
     }
 
     Graph::~Graph()
@@ -32,6 +32,6 @@ namespace model
 
         // destroy all nodes of this graph.
         std::cout << "All nodes of this graph will be destroyed.\n";
-        model::delete_children<model::Node*>(this->node_pointer_vector);
+        hierarchy::delete_children<model::Node*>(this->node_pointer_vector);
     }
 }

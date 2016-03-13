@@ -1,4 +1,5 @@
 #include "node.hpp"
+#include "cpp/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include standard headers
 #include <iostream> // std::cout, std::cin, std::cerr
@@ -7,7 +8,7 @@ namespace model
 {
     void Node::bind_to_parent()
     {
-        model::bind_child_to_parent<model::Node*>(this, this->parent_pointer->node_pointer_vector, this->parent_pointer->free_nodeID_queue);
+        hierarchy::bind_child_to_parent<model::Node*>(this, this->parent_pointer->node_pointer_vector, this->parent_pointer->free_nodeID_queue);
     }
 
     Node::Node(NodeStruct node_struct)
@@ -92,6 +93,6 @@ namespace model
 
     void Node::bind_to_new_parent(model::Graph *new_graph_pointer)
     {
-        model::bind_child_to_new_parent<model::Node*, model::Graph*>(this, new_graph_pointer, this->parent_pointer->node_pointer_vector, this->parent_pointer->free_nodeID_queue);
+        hierarchy::bind_child_to_new_parent<model::Node*, model::Graph*>(this, new_graph_pointer, this->parent_pointer->node_pointer_vector, this->parent_pointer->free_nodeID_queue);
     }
 }
