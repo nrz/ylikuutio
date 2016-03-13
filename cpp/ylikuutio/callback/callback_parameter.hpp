@@ -36,6 +36,8 @@ namespace callback_system
 
             uint32_t childID;                      // callback parameter ID, returned by `callback_system::CallbackObject->get_callback_parameterID()`.
 
+            callback_system::CallbackObject *parent_pointer; // pointer to the callback object.
+
             std::string name;
             AnyValue any_value;
             bool is_reference; // if true, the value is read from the hashmap. if false, then the value is read from the union.
