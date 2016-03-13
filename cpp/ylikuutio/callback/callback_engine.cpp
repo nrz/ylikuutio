@@ -1,6 +1,6 @@
 #include "callback_engine.hpp"
 #include "cpp/ylikuutio/common/any_value.hpp"
-#include "cpp/ylikuutio/hierarchy/hierarchy.hpp"
+#include "cpp/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include standard headers
 #include <iostream> // std::cout, std::cin, std::cerr
