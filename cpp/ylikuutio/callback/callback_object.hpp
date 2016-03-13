@@ -37,6 +37,8 @@ namespace callback_system
             friend class CallbackEngine;
 
         private:
+            void bind_to_parent();
+
             // execute this callback.
             AnyValue execute();
 
@@ -44,8 +46,6 @@ namespace callback_system
             void set_callback_parameter_pointer(uint32_t childID, void* parent_pointer);
 
             callback_system::CallbackEngine* callback_engine_pointer; // pointer to the callback engine.
-
-            void bind_to_parent();
 
             uint32_t childID;                     // callback object ID, returned by `callback_system::CallbackEngine->get_callback_objectID()`.
 
