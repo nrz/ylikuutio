@@ -29,6 +29,8 @@ namespace callback_system
             friend class CallbackObject;
 
         private:
+            void bind_to_parent();
+
             std::string name;
             AnyValue any_value;
             bool is_reference; // if true, the value is read from the hashmap. if false, then the value is read from the union.
