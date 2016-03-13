@@ -45,6 +45,8 @@ namespace callback_system
 
             callback_system::CallbackEngine* callback_engine_pointer; // pointer to the callback engine.
 
+            void bind_to_parent();
+
             std::string output_type;
             std::string output_variable_name;
             std::vector<callback_system::CallbackParameter*> callback_parameter_pointer_vector;
