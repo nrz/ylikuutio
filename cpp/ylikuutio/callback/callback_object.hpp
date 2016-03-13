@@ -8,6 +8,7 @@
 
 // Include standard headers
 #include <cmath>         // NAN
+#include <queue>         // std::queue
 #include <string>        // std::string
 #include <unordered_map> // std::unordered_map
 #include <vector>        // std::vector
@@ -50,6 +51,7 @@ namespace callback_system
             uint32_t childID;                     // callback object ID, returned by `callback_system::CallbackEngine->get_callback_objectID()`.
 
             std::vector<void*> callback_parameter_vector;
+            std::queue<uint32_t> free_callback_parameterID_queue;
 
             std::string output_type;
             std::string output_variable_name;
