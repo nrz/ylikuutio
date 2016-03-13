@@ -2,6 +2,7 @@
 #define __CALLBACK_ENGINE_HPP_INCLUDED
 
 #include "cpp/ylikuutio/common/any_value.hpp"
+#include "cpp/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include standard headers
 #include <queue>         // std::queue
