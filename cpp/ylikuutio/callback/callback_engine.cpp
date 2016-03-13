@@ -1,4 +1,5 @@
 #include "callback_engine.hpp"
+#include "callback_object.hpp"
 #include "cpp/ylikuutio/common/any_value.hpp"
 #include "cpp/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
@@ -19,6 +20,11 @@ namespace callback_system
     CallbackEngine::~CallbackEngine()
     {
         // destructor.
+        std::cout << "This callback engine will be destroyed.\n";
+
+        // destroy all callback objects of this callback engine.
+        std::cout << "All callback objects of this callback engine will be destroyed.\n";
+        hierarchy::delete_children<callback_system::CallbackObject*>(this->callback_object_pointer_vector);
     }
 
     void CallbackEngine::set_callback_object_pointer(uint32_t childID, void* parent_pointer)
@@ -101,13 +107,12 @@ namespace callback_system
 
         AnyValue any_value;
 
-        /*
         // execute all callbacks.
-        for (callback_system::CallbackObject callback_object : this->callback_objects)
+        for (uint32_t child_i = 0; child_i < this->callback_object_pointer_vector.size(); child_i++)
         {
-            any_value = callback_object.execute();
+            callback_system::CallbackObject* callback_object_pointer = static_cast<callback_system::CallbackObject*>(this->callback_object_pointer_vector[child_i]);
+            any_value = callback_object_pointer->execute();
         }
-        */
 
         return any_value;
     }

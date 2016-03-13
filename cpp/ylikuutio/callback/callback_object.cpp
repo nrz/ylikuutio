@@ -2,22 +2,48 @@
 #include "callback_parameter.hpp"
 #include "cpp/ylikuutio/common/any_value.hpp"
 #include "cpp/ylikuutio/common/globals.hpp"
+#include "cpp/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include standard headers
-#include <iostream>
-#include <string> // std::string
-#include <vector> // std::vector
+#include <iostream> // std::cout, std::cin, std::cerr
+#include <string>   // std::string
+#include <vector>   // std::vector
 
 namespace callback_system
 {
-    CallbackObject::CallbackObject(callback_system::CallbackEngine* callback_engine_pointer)
+    void CallbackObject::bind_to_parent()
     {
-        this->callback_engine_pointer = callback_engine_pointer;
+        hierarchy::bind_child_to_parent<callback_system::CallbackObject*>(this, this->parent_pointer->callback_object_pointer_vector, this->parent_pointer->free_callback_objectID_queue);
     }
 
-    CallbackObject::CallbackObject(InputParametersToAnyValueCallback callback, callback_system::CallbackEngine* callback_engine_pointer)
+    CallbackObject::CallbackObject(callback_system::CallbackEngine* parent_pointer)
     {
-        this->callback_engine_pointer = callback_engine_pointer;
+        // constructor.
+        this->parent_pointer = parent_pointer;
+    }
+
+    CallbackObject::CallbackObject(InputParametersToAnyValueCallback callback, callback_system::CallbackEngine* parent_pointer)
+    {
+        // constructor.
+        this->parent_pointer = parent_pointer;
+    }
+
+    CallbackObject::~CallbackObject()
+    {
+        std::cout << "This callback object will be destroyed.\n";
+
+        // destroy all callback parameters of this callback object.
+        std::cout << "All callback parameters of this callback object will be destroyed.\n";
+        std::vector<void*> callback_parameter_void_pointer_vector;
+        callback_parameter_void_pointer_vector.assign(callback_parameter_void_pointer_vector.begin(), callback_parameter_void_pointer_vector.end());
+        hierarchy::delete_children<callback_system::CallbackParameter*>(callback_parameter_void_pointer_vector);
+    }
+
+    void CallbackObject::set_callback_parameter_pointer(uint32_t childID, void* parent_pointer)
+    {
+        std::vector<void*> callback_parameter_void_pointer_vector;
+        callback_parameter_void_pointer_vector.assign(this->callback_parameter_pointer_vector.begin(), this->callback_parameter_pointer_vector.end());
+        hierarchy::set_child_pointer(childID, parent_pointer, callback_parameter_void_pointer_vector, this->free_callback_parameterID_queue);
     }
 
     AnyValue CallbackObject::execute()
@@ -26,27 +52,28 @@ namespace callback_system
 
         for (uint32_t child_i = 0; child_i < this->callback_parameter_pointer_vector.size(); child_i++)
         {
-            callback_system::CallbackParameter* input_parameter_pointer = this->callback_parameter_pointer_vector.at(child_i);
+            void* void_input_parameter_pointer = this->callback_parameter_pointer_vector.at(child_i);
+            callback_system::CallbackParameter* input_parameter_pointer = static_cast<callback_system::CallbackParameter*>(void_input_parameter_pointer);
 
             switch (input_parameter_pointer->any_value.type)
             {
                 case datatypes::BOOL:
-                    this->callback_engine_pointer->set_bool(input_parameter_pointer->name, input_parameter_pointer->any_value.bool_value);
+                    this->parent_pointer->set_bool(input_parameter_pointer->name, input_parameter_pointer->any_value.bool_value);
                     break;
                 case datatypes::FLOAT:
-                    this->callback_engine_pointer->set_float(input_parameter_pointer->name, input_parameter_pointer->any_value.float_value);
+                    this->parent_pointer->set_float(input_parameter_pointer->name, input_parameter_pointer->any_value.float_value);
                     break;
                 case datatypes::DOUBLE:
-                    this->callback_engine_pointer->set_double(input_parameter_pointer->name, input_parameter_pointer->any_value.double_value);
+                    this->parent_pointer->set_double(input_parameter_pointer->name, input_parameter_pointer->any_value.double_value);
                     break;
                 case datatypes::INT32_T:
-                    this->callback_engine_pointer->set_int32_t(input_parameter_pointer->name, input_parameter_pointer->any_value.int32_t_value);
+                    this->parent_pointer->set_int32_t(input_parameter_pointer->name, input_parameter_pointer->any_value.int32_t_value);
                     break;
                 case datatypes::UINT32_T:
-                    this->callback_engine_pointer->set_uint32_t(input_parameter_pointer->name, input_parameter_pointer->any_value.uint32_t_value);
+                    this->parent_pointer->set_uint32_t(input_parameter_pointer->name, input_parameter_pointer->any_value.uint32_t_value);
                     break;
                 case datatypes::VOID_POINTER:
-                    this->callback_engine_pointer->set_void_pointer(input_parameter_pointer->name, input_parameter_pointer->any_value.void_pointer);
+                    this->parent_pointer->set_void_pointer(input_parameter_pointer->name, input_parameter_pointer->any_value.void_pointer);
                     break;
                 default:
                     break;
