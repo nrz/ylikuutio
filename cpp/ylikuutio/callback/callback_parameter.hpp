@@ -26,6 +26,9 @@ namespace callback_system
             // constructor.
             CallbackParameter(std::string name, AnyValue any_value, bool is_reference, callback_system::CallbackObject* callback_object);
 
+            // destructor.
+            ~CallbackParameter();
+
             friend class CallbackObject;
 
         private:
