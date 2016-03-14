@@ -46,7 +46,7 @@ namespace model
             void bind_to_new_parent(model::Graph *new_graph_pointer);
 
             uint32_t childID;
-            model::Graph *parent_pointer;
+            model::Graph* parent_pointer;
 
             // nodes do not keep pointers to neighbor nodes, because all pointer values are not known yet before all nodes are created.
             std::vector<uint32_t> neighbor_nodeIDs;

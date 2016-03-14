@@ -60,7 +60,7 @@ namespace model
             // this method sets a world species pointer.
             void set_terrain_species_pointer(model::Species* terrain_species_pointer);
 
-            model::Shader *parent_pointer;         // pointer to the shader.
+            model::Shader* parent_pointer;         // pointer to the shader.
 
             void bind_to_parent();
 

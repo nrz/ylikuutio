@@ -62,7 +62,7 @@ namespace model
             // this method sets a world species pointer.
             void set_terrain_species_pointer(model::Species* terrain_species_pointer);
 
-            model::World *parent_pointer;         // pointer to the world.
+            model::World* parent_pointer;         // pointer to the world.
 
             GLuint programID;                     // shaders' programID, returned by `LoadShaders`.
 

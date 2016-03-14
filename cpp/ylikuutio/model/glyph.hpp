@@ -55,7 +55,7 @@ namespace model
             GLuint normalbuffer;
             GLuint elementbuffer;
 
-            model::Font *parent_pointer;             // pointer to the font.
+            model::Font* parent_pointer;             // pointer to the font.
 
             friend class Object;
             template<class T1>
