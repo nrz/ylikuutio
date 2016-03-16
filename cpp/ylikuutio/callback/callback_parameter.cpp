@@ -32,11 +32,8 @@ namespace callback_system
 
     void CallbackParameter::bind_to_parent()
     {
-        callback_system::CallbackObject* parent_pointer;
-        parent_pointer = this->parent_pointer;
-
-        std::vector<void*> callback_parameter_void_pointer_vector;
-        callback_parameter_void_pointer_vector.assign(parent_pointer->callback_parameter_pointer_vector.begin(), parent_pointer->callback_parameter_pointer_vector.end());
-        hierarchy::bind_child_to_parent<callback_system::CallbackParameter*>(this, callback_parameter_void_pointer_vector, parent_pointer->free_callback_parameterID_queue);
+        this->childID = this->parent_pointer->get_callback_parameterID(this->parent_pointer->callback_parameter_pointer_vector, this->parent_pointer->free_callback_parameterID_queue);
+        // set pointer to the child in parent's child pointer vector so that parent knows about children's whereabouts!
+        this->parent_pointer->set_child_pointer(this->childID, this);
     }
 }
