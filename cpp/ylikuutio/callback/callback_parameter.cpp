@@ -16,6 +16,9 @@ namespace callback_system
         this->any_value = any_value;
         this->is_reference = is_reference;
         this->parent_pointer = parent_pointer;
+
+        // get childID from the CallbackObject and set pointer to this CallbackParameter.
+        this->bind_to_parent();
     }
 
     CallbackParameter::~CallbackParameter()
