@@ -16,6 +16,33 @@ namespace callback_system
         hierarchy::bind_child_to_parent<callback_system::CallbackObject*>(this, this->parent_pointer->callback_object_pointer_vector, this->parent_pointer->free_callback_objectID_queue);
     }
 
+    uint32_t CallbackObject::get_childID()
+    {
+        uint32_t childID;
+
+        while (!this->free_callback_parameterID_queue.empty())
+        {
+            // return the first (oldest) free childID.
+            childID = this->free_callback_parameterID_queue.front();
+            this->free_callback_parameterID_queue.pop();
+
+            // check that the child index does not exceed current child pointer vector.
+            if (childID < this->callback_parameter_pointer_vector.size())
+            {
+                // OK, it does not exceed current child pointer vector.
+                return childID;
+            }
+        }
+        // OK, the queue is empty.
+        // A new child index must be created.
+        childID = this->callback_parameter_pointer_vector.size();
+
+        // child pointer vector must also be extended with an appropriate nullptr pointer.
+        this->callback_parameter_pointer_vector.push_back(nullptr);
+
+        return childID;
+    }
+
     CallbackObject::CallbackObject(callback_system::CallbackEngine* parent_pointer)
     {
         // constructor.

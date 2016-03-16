@@ -45,6 +45,8 @@ namespace callback_system
         private:
             void bind_to_parent();
 
+            uint32_t get_childID();
+
             // execute this callback.
             AnyValue execute();
 
