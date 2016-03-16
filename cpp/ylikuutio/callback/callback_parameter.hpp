@@ -25,6 +25,9 @@ namespace callback_system
             // destructor.
             ~CallbackParameter();
 
+            // getter.
+            AnyValue get_any_value();
+
             friend class CallbackObject;
             template<class T1>
                 friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<void*> &child_pointer_vector, std::queue<uint32_t> &free_childID_queue);

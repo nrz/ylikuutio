@@ -30,6 +30,11 @@ namespace callback_system
         this->parent_pointer->set_callback_parameter_pointer(this->childID, nullptr);
     }
 
+    AnyValue CallbackParameter::get_any_value()
+    {
+        return this->any_value;
+    }
+
     void CallbackParameter::bind_to_parent()
     {
         this->childID = this->parent_pointer->get_callback_parameterID(this->parent_pointer->callback_parameter_pointer_vector, this->parent_pointer->free_callback_parameterID_queue);
