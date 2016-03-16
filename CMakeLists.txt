@@ -296,6 +296,12 @@ endif()
 
 if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
     set(FILES_TO_TEST
+        cpp/ylikuutio/callback/callback_engine.cpp
+        cpp/ylikuutio/callback/callback_engine.hpp
+        cpp/ylikuutio/callback/callback_object.cpp
+        cpp/ylikuutio/callback/callback_object.hpp
+        cpp/ylikuutio/callback/callback_parameter.cpp
+        cpp/ylikuutio/callback/callback_parameter.hpp
         cpp/ylikuutio/common/any_value.hpp
         cpp/ylikuutio/common/globals.cpp
         cpp/ylikuutio/common/globals.hpp
@@ -309,11 +315,15 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         cpp/ylikuutio/common/triangulation.hpp
         cpp/ylikuutio/file/file_loader.cpp
         cpp/ylikuutio/file/file_loader.hpp
+        cpp/ylikuutio/hierarchy/hierarchy.cpp
+        cpp/ylikuutio/hierarchy/hierarchy.hpp
+        cpp/ylikuutio/hierarchy/hierarchy_templates.hpp
         cpp/ylikuutio/string/ylikuutio_string.cpp
         cpp/ylikuutio/string/ylikuutio_string.hpp
         )
     set(UNIT_TESTS
         cpp/ylikuutio/tests/googletest/test_any_value.cpp
+        cpp/ylikuutio/tests/googletest/test_callback_system.cpp
         cpp/ylikuutio/tests/googletest/test_file_loader.cpp
         cpp/ylikuutio/tests/googletest/test_globals.cpp
         cpp/ylikuutio/tests/googletest/test_heightmap_loader.cpp
