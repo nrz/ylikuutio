@@ -18,7 +18,7 @@ AnyValue square(std::vector<callback_system::CallbackParameter*> input_parameter
         return AnyValue();
     }
 
-    AnyValue any_value = input_parameters.at(0);
+    AnyValue any_value = input_parameters.at(0)->get_any_value();
 
     if (any_value.type == datatypes::INT32_T)
     {
