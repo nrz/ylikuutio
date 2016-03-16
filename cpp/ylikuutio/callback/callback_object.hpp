@@ -4,6 +4,7 @@
 #include "cpp/ylikuutio/common/any_value.hpp"
 #include "callback_engine.hpp"
 #include "cpp/ylikuutio/common/globals.hpp"
+#include "cpp/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include standard headers
 #include <cmath>         // NAN
