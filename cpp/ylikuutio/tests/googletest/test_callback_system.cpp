@@ -24,7 +24,28 @@ AnyValue square(std::vector<callback_system::CallbackParameter*> input_parameter
     {
         int32_t factor = any_value.int32_t_value;
         int32_t squared = factor * factor;
-        std::cout << "Square of " << factor << " is " << squared << ".\n";
+        std::cout << "Square of (int32_t) " << factor << " is " << squared << ".\n";
+        return AnyValue(squared);
+    }
+    else if (any_value.type == datatypes::UINT32_T)
+    {
+        uint32_t factor = any_value.uint32_t_value;
+        uint32_t squared = factor * factor;
+        std::cout << "Square of (uint32_t) " << factor << " is " << squared << ".\n";
+        return AnyValue(squared);
+    }
+    else if (any_value.type == datatypes::FLOAT)
+    {
+        float factor = any_value.uint32_t_value;
+        float squared = factor * factor;
+        std::cout << "Square of (float) " << factor << " is " << squared << ".\n";
+        return AnyValue(squared);
+    }
+    else if (any_value.type == datatypes::FLOAT)
+    {
+        double factor = any_value.uint32_t_value;
+        double squared = factor * factor;
+        std::cout << "Square of (double) " << factor << " is " << squared << ".\n";
         return AnyValue(squared);
     }
     std::cout << "The datatype of any_value.type is " << any_value.type << "\n";
