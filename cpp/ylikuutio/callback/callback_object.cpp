@@ -41,9 +41,10 @@ namespace callback_system
 
         // destroy all callback parameters of this callback object.
         std::cout << "All callback parameters of this callback object will be destroyed.\n";
-        std::vector<void*> callback_parameter_void_pointer_vector;
-        callback_parameter_void_pointer_vector.assign(callback_parameter_void_pointer_vector.begin(), callback_parameter_void_pointer_vector.end());
-        hierarchy::delete_children<callback_system::CallbackParameter*>(callback_parameter_void_pointer_vector);
+        for (uint32_t child_i = 0; child_i < this->callback_parameter_pointer_vector.size(); child_i++)
+        {
+            delete this->callback_parameter_pointer_vector[child_i];
+        }
     }
 
     void CallbackObject::set_callback_parameter_pointer(uint32_t childID, void* child_pointer)
