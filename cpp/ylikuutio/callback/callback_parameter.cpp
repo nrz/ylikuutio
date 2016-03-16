@@ -15,6 +15,7 @@ namespace callback_system
         this->name = name;
         this->any_value = any_value;
         this->is_reference = is_reference;
+        this->parent_pointer = parent_pointer;
     }
 
     CallbackParameter::~CallbackParameter()
