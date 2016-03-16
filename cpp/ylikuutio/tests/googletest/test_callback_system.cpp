@@ -72,3 +72,23 @@ TEST(callback_engine_must_be_function_properly, int32_t_three_squared_equals_nin
 
     delete callback_engine;
 }
+TEST(callback_engine_must_be_function_properly, uint32_t_three_squared_equals_nine)
+{
+    callback_system::CallbackEngine* callback_engine = new callback_system::CallbackEngine();
+
+    InputParametersToAnyValueCallback square_callback = &square;
+    callback_system::CallbackObject* callback_object = new callback_system::CallbackObject(square_callback, callback_engine);
+
+    std::string parameter_name = "foo";
+    uint32_t three = 3;
+    AnyValue three_value = AnyValue(three);
+
+    bool is_reference_3 = false;
+    callback_system::CallbackParameter* callback_parameter_3 = new callback_system::CallbackParameter(parameter_name, three, is_reference_3, callback_object);
+
+    AnyValue result = callback_engine->execute();
+    ASSERT_EQ(result.type, datatypes::UINT32_T);
+    ASSERT_EQ(result.uint32_t_value, 9);
+
+    delete callback_engine;
+}
