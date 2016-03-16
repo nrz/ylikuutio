@@ -59,10 +59,9 @@ TEST(callback_engine_must_be_function_properly, int32_t_three_squared_equals_nin
     InputParametersToAnyValueCallback square_callback = &square;
     callback_system::CallbackObject* callback_object = new callback_system::CallbackObject(square_callback, callback_engine);
 
-    std::string parameter_name = "foo";
     int32_t three = 3;
     bool is_reference_3 = false;
-    callback_system::CallbackParameter* callback_parameter_3 = new callback_system::CallbackParameter(parameter_name, AnyValue(three), is_reference_3, callback_object);
+    callback_system::CallbackParameter* callback_parameter_3 = new callback_system::CallbackParameter("foo", AnyValue(three), is_reference_3, callback_object);
 
     AnyValue result = callback_engine->execute();
     ASSERT_EQ(result.type, datatypes::INT32_T);
@@ -77,10 +76,9 @@ TEST(callback_engine_must_be_function_properly, uint32_t_three_squared_equals_ni
     InputParametersToAnyValueCallback square_callback = &square;
     callback_system::CallbackObject* callback_object = new callback_system::CallbackObject(square_callback, callback_engine);
 
-    std::string parameter_name = "foo";
     uint32_t three = 3;
     bool is_reference_3 = false;
-    callback_system::CallbackParameter* callback_parameter_3 = new callback_system::CallbackParameter(parameter_name, AnyValue(three), is_reference_3, callback_object);
+    callback_system::CallbackParameter* callback_parameter_3 = new callback_system::CallbackParameter("foo", AnyValue(three), is_reference_3, callback_object);
 
     AnyValue result = callback_engine->execute();
     ASSERT_EQ(result.type, datatypes::UINT32_T);
