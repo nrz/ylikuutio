@@ -25,6 +25,7 @@ namespace callback_system
     CallbackObject::CallbackObject(InputParametersToAnyValueCallback callback, callback_system::CallbackEngine* parent_pointer)
     {
         // constructor.
+        this->callback = callback;
         this->parent_pointer = parent_pointer;
     }
 
