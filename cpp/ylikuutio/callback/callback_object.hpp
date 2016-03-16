@@ -15,6 +15,8 @@
 
 namespace callback_system
 {
+    class CallbackParameter;
+
     class CallbackObject
     {
         // CallbackObject is an object that contains a single callback.
