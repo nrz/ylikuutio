@@ -7,7 +7,6 @@
 #include "cpp/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include standard headers
-#include <cmath>         // NAN
 #include <queue>         // std::queue
 #include <string>        // std::string
 #include <unordered_map> // std::unordered_map

@@ -1,7 +1,6 @@
 #include "cpp/ylikuutio/hierarchy/hierarchy.hpp"
 
 // Include standard headers
-#include <cmath>     // NAN
 #include <queue>     // std::queue
 #include <stdint.h>  // uint32_t etc.
 #include <vector>    // std::vector
