@@ -64,7 +64,7 @@ TEST(callback_engine_must_be_function_properly, int32_t_three_squared_equals_nin
     AnyValue three_value = AnyValue(three);
 
     bool is_reference_3 = false;
-    callback_system::CallbackParameter* callback_parameter_3 = new callback_system::CallbackParameter(parameter_name, three, is_reference_3, callback_object);
+    callback_system::CallbackParameter* callback_parameter_3 = new callback_system::CallbackParameter(parameter_name, three_value, is_reference_3, callback_object);
 
     AnyValue result = callback_engine->execute();
     ASSERT_EQ(result.type, datatypes::INT32_T);
@@ -84,7 +84,7 @@ TEST(callback_engine_must_be_function_properly, uint32_t_three_squared_equals_ni
     AnyValue three_value = AnyValue(three);
 
     bool is_reference_3 = false;
-    callback_system::CallbackParameter* callback_parameter_3 = new callback_system::CallbackParameter(parameter_name, three, is_reference_3, callback_object);
+    callback_system::CallbackParameter* callback_parameter_3 = new callback_system::CallbackParameter(parameter_name, three_value, is_reference_3, callback_object);
 
     AnyValue result = callback_engine->execute();
     ASSERT_EQ(result.type, datatypes::UINT32_T);
