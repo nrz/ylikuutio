@@ -41,7 +41,7 @@
 #endif
 
 // Include standard headers
-#include <cmath>    // NAN
+#include <cmath>    // NAN, std::isnan, std::pow
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 #include <vector>   // std::vector

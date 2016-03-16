@@ -45,7 +45,7 @@
 #endif
 
 // Include standard headers
-#include <cmath>    // std::isnan
+#include <cmath>    // NAN, std::isnan, std::pow
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string

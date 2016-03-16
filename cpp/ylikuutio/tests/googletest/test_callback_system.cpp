@@ -6,7 +6,7 @@
 #include "cpp/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include standard headers
-#include <cmath>    // std::isnan, std::pow
+#include <cmath>    // NAN, std::isnan, std::pow
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 #include <iostream> // std::cout, std::cin, std::cerr

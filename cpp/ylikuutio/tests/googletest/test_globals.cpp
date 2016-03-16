@@ -8,7 +8,7 @@
 #endif
 
 // Include standard headers
-#include <cmath>    // std::isnan
+#include <cmath>    // NAN, std::isnan, std::pow
 #include <vector>   // std::vector
 
 TEST(ShaderStruct_must_be_initialized_appropriately, ShaderStruct)

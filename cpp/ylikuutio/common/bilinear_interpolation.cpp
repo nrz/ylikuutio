@@ -9,7 +9,7 @@
 #endif
 
 // Include standard headers
-#include <cmath>    // NAN
+#include <cmath>    // NAN, std::isnan, std::pow
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector

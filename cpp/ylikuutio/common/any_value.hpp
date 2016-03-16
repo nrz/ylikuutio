@@ -2,7 +2,7 @@
 #define __ANY_VALUE_HPP_INCLUDED
 
 // Include standard headers
-#include <cmath>    // NAN
+#include <cmath>    // NAN, std::isnan, std::pow
 #include <string>   // std::string
 #include <stdint.h> // uint32_t etc.
 

@@ -3,7 +3,7 @@
 #include "cpp/ylikuutio/model/world.hpp"
 
 // Include standard headers
-#include <cmath>    // NAN
+#include <cmath>    // NAN, std::isnan, std::pow
 #include <stdint.h> // uint32_t etc.
 
 TEST(any_value_must_be_initialized_appropriately, no_value)
