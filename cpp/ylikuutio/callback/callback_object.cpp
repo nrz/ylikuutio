@@ -49,9 +49,21 @@ namespace callback_system
 
     void CallbackObject::set_callback_parameter_pointer(uint32_t childID, void* child_pointer)
     {
-        std::vector<void*> callback_parameter_void_pointer_vector;
-        callback_parameter_void_pointer_vector.assign(this->callback_parameter_pointer_vector.begin(), this->callback_parameter_pointer_vector.end());
-        hierarchy::set_child_pointer(childID, child_pointer, callback_parameter_void_pointer_vector, this->free_callback_parameterID_queue);
+        this->callback_parameter_pointer_vector[childID] = static_cast<callback_system::CallbackParameter*>(child_pointer);
+
+        if (child_pointer == nullptr)
+        {
+            if (childID == this->callback_parameter_pointer_vector.size() - 1)
+            {
+                // OK, this is the biggest childID of all childID's of this 'object'.
+                // We can reduce the size of the child pointer vector at least by 1.
+                while ((!this->callback_parameter_pointer_vector.empty()) && (this->callback_parameter_pointer_vector.back() == nullptr))
+                {
+                    // Reduce the size of child pointer vector by 1.
+                    this->callback_parameter_pointer_vector.pop_back();
+                }
+            }
+        }
     }
 
     AnyValue CallbackObject::execute()
