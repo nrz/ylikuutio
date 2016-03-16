@@ -52,7 +52,7 @@ AnyValue square(std::vector<callback_system::CallbackParameter*> input_parameter
     return AnyValue();
 }
 
-TEST(callback_engine_must_be_function_properly, three_squared_equals_nine)
+TEST(callback_engine_must_be_function_properly, int32_t_three_squared_equals_nine)
 {
     callback_system::CallbackEngine* callback_engine = new callback_system::CallbackEngine();
 
