@@ -9,7 +9,7 @@
 
 namespace callback_system
 {
-    CallbackParameter::CallbackParameter(std::string name, AnyValue any_value, bool is_reference, callback_system::CallbackObject* callback_object)
+    CallbackParameter::CallbackParameter(std::string name, AnyValue any_value, bool is_reference, callback_system::CallbackObject* parent_pointer)
     {
         // constructor.
         this->name = name;

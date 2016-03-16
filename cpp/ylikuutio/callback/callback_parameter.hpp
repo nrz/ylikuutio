@@ -20,7 +20,7 @@ namespace callback_system
         public:
 
             // constructor.
-            CallbackParameter(std::string name, AnyValue any_value, bool is_reference, callback_system::CallbackObject* callback_object);
+            CallbackParameter(std::string name, AnyValue any_value, bool is_reference, callback_system::CallbackObject* parent_pointer);
 
             // destructor.
             ~CallbackParameter();
