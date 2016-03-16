@@ -46,11 +46,11 @@ namespace callback_system
         hierarchy::delete_children<callback_system::CallbackParameter*>(callback_parameter_void_pointer_vector);
     }
 
-    void CallbackObject::set_callback_parameter_pointer(uint32_t childID, void* parent_pointer)
+    void CallbackObject::set_callback_parameter_pointer(uint32_t childID, void* child_pointer)
     {
         std::vector<void*> callback_parameter_void_pointer_vector;
         callback_parameter_void_pointer_vector.assign(this->callback_parameter_pointer_vector.begin(), this->callback_parameter_pointer_vector.end());
-        hierarchy::set_child_pointer(childID, parent_pointer, callback_parameter_void_pointer_vector, this->free_callback_parameterID_queue);
+        hierarchy::set_child_pointer(childID, child_pointer, callback_parameter_void_pointer_vector, this->free_callback_parameterID_queue);
     }
 
     AnyValue CallbackObject::execute()

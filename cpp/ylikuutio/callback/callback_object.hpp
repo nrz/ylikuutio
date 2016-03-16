@@ -49,7 +49,7 @@ namespace callback_system
             AnyValue execute();
 
             // this method sets a callback parameter pointer.
-            void set_callback_parameter_pointer(uint32_t childID, void* parent_pointer);
+            void set_callback_parameter_pointer(uint32_t childID, void* child_pointer);
 
             callback_system::CallbackEngine* parent_pointer; // pointer to the callback engine.
 
