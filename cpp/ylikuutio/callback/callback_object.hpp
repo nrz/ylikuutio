@@ -47,6 +47,7 @@ namespace callback_system
 
             uint32_t get_childID();
             void set_child_pointer(uint32_t childID, callback_system::CallbackParameter* child_pointer);
+            void bind_child_to_parent(callback_system::CallbackParameter* child_pointer);
 
             // execute this callback.
             AnyValue execute();

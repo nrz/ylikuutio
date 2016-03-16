@@ -62,6 +62,14 @@ namespace callback_system
         }
     }
 
+    void CallbackObject::bind_child_to_parent(callback_system::CallbackParameter* child_pointer)
+    {
+        // get childID from the parent, because every child deserves a unique ID!
+        child_pointer->childID = this->get_childID();
+        // set pointer to the child in parent's child pointer vector so that parent knows about children's whereabouts!
+        this->set_child_pointer(child_pointer->childID, child_pointer);
+    }
+
     CallbackObject::CallbackObject(callback_system::CallbackEngine* parent_pointer)
     {
         // constructor.
