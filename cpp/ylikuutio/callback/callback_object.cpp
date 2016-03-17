@@ -16,6 +16,11 @@ namespace callback_system
         hierarchy::bind_child_to_parent<callback_system::CallbackObject*>(this, this->parent_pointer->callback_object_pointer_vector, this->parent_pointer->free_callback_objectID_queue);
     }
 
+    void CallbackObject::set_new_callback(InputParametersToAnyValueCallback callback)
+    {
+        this->callback = callback;
+    }
+
     uint32_t CallbackObject::get_childID()
     {
         uint32_t childID;

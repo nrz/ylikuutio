@@ -30,6 +30,9 @@ namespace callback_system
             // destructor.
             ~CallbackObject();
 
+            // this method changes the callback without changing the parameters of CallbackObject.
+            void set_new_callback(InputParametersToAnyValueCallback callback);
+
             // add reference to an input variable.
             // this does not store the value to an appropriate hashmap.
             // storing the value must be done before or after this call.
