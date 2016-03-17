@@ -16,6 +16,7 @@ TEST(any_value_must_be_initialized_appropriately, no_value)
     ASSERT_EQ(no_value.int32_t_value, 0);
     ASSERT_EQ(no_value.uint32_t_value, 0);
     ASSERT_EQ(no_value.void_pointer, nullptr);
+    ASSERT_EQ(no_value.world_pointer, nullptr);
 }
 TEST(any_value_must_be_initialized_appropriately, bool_true)
 {
@@ -28,6 +29,7 @@ TEST(any_value_must_be_initialized_appropriately, bool_true)
     ASSERT_EQ(true_value.int32_t_value, 0);
     ASSERT_EQ(true_value.uint32_t_value, 0);
     ASSERT_EQ(true_value.void_pointer, nullptr);
+    ASSERT_EQ(true_value.world_pointer, nullptr);
 }
 TEST(any_value_must_be_initialized_appropriately, bool_false)
 {
@@ -40,6 +42,7 @@ TEST(any_value_must_be_initialized_appropriately, bool_false)
     ASSERT_EQ(false_value.int32_t_value, 0);
     ASSERT_EQ(false_value.uint32_t_value, 0);
     ASSERT_EQ(false_value.void_pointer, nullptr);
+    ASSERT_EQ(false_value.world_pointer, nullptr);
 }
 TEST(any_value_must_be_initialized_appropriately, float_0)
 {
@@ -52,6 +55,7 @@ TEST(any_value_must_be_initialized_appropriately, float_0)
     ASSERT_EQ(float_zero_value.int32_t_value, 0);
     ASSERT_EQ(float_zero_value.uint32_t_value, 0);
     ASSERT_EQ(float_zero_value.void_pointer, nullptr);
+    ASSERT_EQ(float_zero_value.world_pointer, nullptr);
 }
 TEST(any_value_must_be_initialized_appropriately, float_NAN)
 {
@@ -64,6 +68,7 @@ TEST(any_value_must_be_initialized_appropriately, float_NAN)
     ASSERT_EQ(float_NAN_value.int32_t_value, 0);
     ASSERT_EQ(float_NAN_value.uint32_t_value, 0);
     ASSERT_EQ(float_NAN_value.void_pointer, nullptr);
+    ASSERT_EQ(float_NAN_value.world_pointer, nullptr);
 }
 TEST(any_value_must_be_initialized_appropriately, double_0)
 {
@@ -76,6 +81,7 @@ TEST(any_value_must_be_initialized_appropriately, double_0)
     ASSERT_EQ(double_zero_value.int32_t_value, 0);
     ASSERT_EQ(double_zero_value.uint32_t_value, 0);
     ASSERT_EQ(double_zero_value.void_pointer, nullptr);
+    ASSERT_EQ(double_zero_value.world_pointer, nullptr);
 }
 TEST(any_value_must_be_initialized_appropriately, double_NAN)
 {
@@ -88,6 +94,7 @@ TEST(any_value_must_be_initialized_appropriately, double_NAN)
     ASSERT_EQ(double_NAN_value.int32_t_value, 0);
     ASSERT_EQ(double_NAN_value.uint32_t_value, 0);
     ASSERT_EQ(double_NAN_value.void_pointer, nullptr);
+    ASSERT_EQ(double_NAN_value.world_pointer, nullptr);
 }
 TEST(any_value_must_be_initialized_appropriately, int32_t_zero)
 {
@@ -100,6 +107,7 @@ TEST(any_value_must_be_initialized_appropriately, int32_t_zero)
     ASSERT_EQ(int32_t_zero_value.int32_t_value, 0);
     ASSERT_EQ(int32_t_zero_value.uint32_t_value, 0);
     ASSERT_EQ(int32_t_zero_value.void_pointer, nullptr);
+    ASSERT_EQ(int32_t_zero_value.world_pointer, nullptr);
 }
 TEST(any_value_must_be_initialized_appropriately, int32_t_plus_1)
 {
@@ -112,6 +120,7 @@ TEST(any_value_must_be_initialized_appropriately, int32_t_plus_1)
     ASSERT_EQ(int32_t_plus_1_value.int32_t_value, 1);
     ASSERT_EQ(int32_t_plus_1_value.uint32_t_value, 0);
     ASSERT_EQ(int32_t_plus_1_value.void_pointer, nullptr);
+    ASSERT_EQ(int32_t_plus_1_value.world_pointer, nullptr);
 }
 TEST(any_value_must_be_initialized_appropriately, int32_t_minus_1)
 {
@@ -124,6 +133,7 @@ TEST(any_value_must_be_initialized_appropriately, int32_t_minus_1)
     ASSERT_EQ(int32_t_minus_1_value.int32_t_value, -1);
     ASSERT_EQ(int32_t_minus_1_value.uint32_t_value, 0);
     ASSERT_EQ(int32_t_minus_1_value.void_pointer, nullptr);
+    ASSERT_EQ(int32_t_minus_1_value.world_pointer, nullptr);
 }
 TEST(any_value_must_be_initialized_appropriately, uint32_t_zero)
 {
@@ -136,6 +146,7 @@ TEST(any_value_must_be_initialized_appropriately, uint32_t_zero)
     ASSERT_EQ(uint32_t_zero_value.int32_t_value, 0);
     ASSERT_EQ(uint32_t_zero_value.uint32_t_value, 0);
     ASSERT_EQ(uint32_t_zero_value.void_pointer, nullptr);
+    ASSERT_EQ(uint32_t_zero_value.world_pointer, nullptr);
 }
 TEST(any_value_must_be_initialized_appropriately, uint32_t_plus_1)
 {
@@ -148,6 +159,7 @@ TEST(any_value_must_be_initialized_appropriately, uint32_t_plus_1)
     ASSERT_EQ(uint32_t_plus_1_value.int32_t_value, 0);
     ASSERT_EQ(uint32_t_plus_1_value.uint32_t_value, 1);
     ASSERT_EQ(uint32_t_plus_1_value.void_pointer, nullptr);
+    ASSERT_EQ(uint32_t_plus_1_value.world_pointer, nullptr);
 }
 TEST(any_value_must_be_initialized_appropriately, void_pointer_zero)
 {
@@ -161,6 +173,7 @@ TEST(any_value_must_be_initialized_appropriately, void_pointer_zero)
     ASSERT_EQ(void_pointer_zero_value.int32_t_value, 0);
     ASSERT_EQ(void_pointer_zero_value.uint32_t_value, 0);
     ASSERT_EQ(void_pointer_zero_value.void_pointer, (void*) 0);
+    ASSERT_EQ(void_pointer_zero_value.world_pointer, nullptr);
 }
 TEST(any_value_must_be_initialized_appropriately, void_pointer_1)
 {
@@ -174,6 +187,7 @@ TEST(any_value_must_be_initialized_appropriately, void_pointer_1)
     ASSERT_EQ(void_pointer_1_value.int32_t_value, 0);
     ASSERT_EQ(void_pointer_1_value.uint32_t_value, 0);
     ASSERT_EQ(void_pointer_1_value.void_pointer, (void*) 1);
+    ASSERT_EQ(void_pointer_1_value.world_pointer, nullptr);
 }
 TEST(any_value_must_be_initialized_appropriately, world_pointer_zero)
 {
@@ -186,7 +200,8 @@ TEST(any_value_must_be_initialized_appropriately, world_pointer_zero)
     ASSERT_TRUE(isnan(world_pointer_zero_value.double_value));
     ASSERT_EQ(world_pointer_zero_value.int32_t_value, 0);
     ASSERT_EQ(world_pointer_zero_value.uint32_t_value, 0);
-    ASSERT_EQ(world_pointer_zero_value.void_pointer, (model::World*) 0);
+    ASSERT_EQ(world_pointer_zero_value.void_pointer, nullptr);
+    ASSERT_EQ(world_pointer_zero_value.world_pointer, (model::World*) 0);
 }
 TEST(any_value_must_be_initialized_appropriately, world_pointer_1)
 {
@@ -199,5 +214,6 @@ TEST(any_value_must_be_initialized_appropriately, world_pointer_1)
     ASSERT_TRUE(isnan(world_pointer_1_value.double_value));
     ASSERT_EQ(world_pointer_1_value.int32_t_value, 0);
     ASSERT_EQ(world_pointer_1_value.uint32_t_value, 0);
-    ASSERT_EQ(world_pointer_1_value.void_pointer, (model::World*) 1);
+    ASSERT_EQ(world_pointer_1_value.void_pointer, nullptr);
+    ASSERT_EQ(world_pointer_1_value.world_pointer, (model::World*) 1);
 }
