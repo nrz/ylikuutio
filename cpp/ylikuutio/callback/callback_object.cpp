@@ -189,6 +189,10 @@ namespace callback_system
                 }
             }
         }
-        return this->callback(this->callback_parameter_pointer_vector);
+
+        if (this->callback != nullptr)
+        {
+            return this->callback(this->callback_parameter_pointer_vector);
+        }
     }
 }
