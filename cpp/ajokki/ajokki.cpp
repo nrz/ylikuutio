@@ -90,17 +90,26 @@ std::string g_font_texture_filename = "Holstein.bmp";
 std::string g_font_file_format = "svg";
 std::string g_font_filename = "kongtext.svg";
 
-void full_cleanup(AnyValue any_value)
+AnyValue full_cleanup(std::vector<callback_system::CallbackParameter*> input_parameters)
 {
     std::cout << "Cleaning up.\n";
 
-    if (any_value.type == datatypes::WORLD_POINTER)
+    if (input_parameters.size() != 1)
     {
-        delete static_cast<model::World*>(any_value.void_pointer);
+        std::cerr << "Invalid size of input_parameters: " << input_parameters.size() << ", should be 1.\n";
     }
     else
     {
-        std::cerr << "Invalid datatype for full_cleanup!\n";
+        AnyValue any_value = input_parameters.at(0);
+
+        if (any_value.type == datatypes::WORLD_POINTER)
+        {
+            delete any_value.world_pointer;
+        }
+        else
+        {
+            std::cerr << "Invalid datatype: " << any_value.type << ", should be " << datatypes::WORLD_POINTER << "\n";
+        }
     }
 
     // Delete the text's VBO, the shader and the texture
@@ -108,6 +117,7 @@ void full_cleanup(AnyValue any_value)
 
     // Close OpenGL window and terminate GLFW
     glfwTerminate();
+    return AnyValue();
 }
 
 int main(void)
@@ -135,7 +145,7 @@ int main(void)
     initialFoV = 60.0f;
 
     callback_system::CallbackEngine* callback_engine = new callback_system::CallbackEngine();
-    callback_system::CallbackObject* callback_object = new callback_system::CallbackObject(callback_engine);
+    callback_system::CallbackObject* callback_object = new callback_system::CallbackObject(nullptr, callback_engine);
     AnyValueToVoidCallback cleanup_callback = nullptr;
 
     bool does_suzanne_species_exist = true;
@@ -187,10 +197,9 @@ int main(void)
 
     // Create the world, store it in `my_world`.
     model::World* my_world = new model::World();
-    cleanup_callback = &full_cleanup;
+    callback_object->set_new_callback(&full_cleanup);
 
-    AnyValue world_pointer_any_value = new AnyValue(my_world);
-    callback_system::CallbackParameter* callback_parameter = new callback_system::CallbackParameter("world_pointer", world_pointer_any_value, false, callback_object);
+    callback_system::CallbackParameter* callback_parameter = new callback_system::CallbackParameter("", AnyValue(my_world), false, callback_object);
 
     // Create the shader, store it in `my_shader`.
     ShaderStruct shader_struct;
@@ -486,7 +495,7 @@ int main(void)
             && (glfwWindowShouldClose(window) == 0));
 
     // do cleanup.
-    cleanup_callback(AnyValue(my_world));
+    callback_engine->execute();
 
     return 0;
 }
