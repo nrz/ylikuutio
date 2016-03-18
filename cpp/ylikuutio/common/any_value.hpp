@@ -3,6 +3,7 @@
 
 // Include standard headers
 #include <cmath>    // NAN, std::isnan, std::pow
+#include <iostream> // std::cout, std::cin, std::cerr
 #include <string>   // std::string
 #include <stdint.h> // uint32_t etc.
 
@@ -68,12 +69,14 @@ typedef struct AnyValue
         : type(datatypes::VOID_POINTER), bool_value(false), float_value(NAN), double_value(NAN), int32_t_value(0), uint32_t_value(uint32_t_value), void_pointer(void_pointer), world_pointer(nullptr)
     {
         // constructor.
+        std::cout << "creating AnyValue with void* value.\n";
     }
 
     AnyValue(model::World* world_pointer)
         : type(datatypes::WORLD_POINTER), bool_value(false), float_value(NAN), double_value(NAN), int32_t_value(0), uint32_t_value(uint32_t_value), void_pointer(nullptr), world_pointer(world_pointer)
     {
         // constructor.
+        std::cout << "creating AnyValue with model::World* value.\n";
     }
 
     int type;
