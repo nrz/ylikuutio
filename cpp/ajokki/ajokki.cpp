@@ -90,7 +90,7 @@ std::string g_font_texture_filename = "Holstein.bmp";
 std::string g_font_file_format = "svg";
 std::string g_font_filename = "kongtext.svg";
 
-AnyValue full_cleanup(std::vector<callback_system::CallbackParameter*> input_parameters)
+datatypes::AnyValue full_cleanup(std::vector<callback_system::CallbackParameter*> input_parameters)
 {
     std::cout << "Cleaning up.\n";
 
@@ -100,7 +100,7 @@ AnyValue full_cleanup(std::vector<callback_system::CallbackParameter*> input_par
     }
     else
     {
-        AnyValue any_value = input_parameters.at(0);
+        datatypes::AnyValue any_value = input_parameters.at(0);
 
         if (any_value.type == datatypes::WORLD_POINTER)
         {
@@ -117,7 +117,7 @@ AnyValue full_cleanup(std::vector<callback_system::CallbackParameter*> input_par
 
     // Close OpenGL window and terminate GLFW
     glfwTerminate();
-    return AnyValue();
+    return datatypes::AnyValue();
 }
 
 int main(void)
@@ -199,7 +199,7 @@ int main(void)
     model::World* my_world = new model::World();
     callback_object->set_new_callback(&full_cleanup);
 
-    callback_system::CallbackParameter* callback_parameter = new callback_system::CallbackParameter("", AnyValue(my_world), false, callback_object);
+    callback_system::CallbackParameter* callback_parameter = new callback_system::CallbackParameter("", datatypes::AnyValue(my_world), false, callback_object);
 
     // Create the shader, store it in `my_shader`.
     ShaderStruct shader_struct;

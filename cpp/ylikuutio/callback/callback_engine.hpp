@@ -18,9 +18,9 @@ namespace model
 
 // callback typedefs in alphabetical order.
 typedef void (*VoidToVoidCallback)(void);
-typedef void (*AnyValueToVoidCallback)(AnyValue);
-typedef AnyValue (*VoidToAnyValueCallback)(void);
-typedef AnyValue (*AnyValueToAnyValueCallback)(AnyValue);
+typedef void (*AnyValueToVoidCallback)(datatypes::AnyValue);
+typedef datatypes::AnyValue (*VoidToAnyValueCallback)(void);
+typedef datatypes::AnyValue (*AnyValueToAnyValueCallback)(datatypes::AnyValue);
 
 namespace callback_system
 {
@@ -58,7 +58,7 @@ namespace callback_system
             ~CallbackEngine();
 
             // execute all callbacks.
-            AnyValue execute();
+            datatypes::AnyValue execute();
 
             friend class CallbackObject;
             template<class T1>
@@ -91,7 +91,7 @@ namespace callback_system
             std::queue<uint32_t> free_callback_objectID_queue;
 
             // A hash map used to store variables.
-            std::unordered_map<std::string, AnyValue> anyvalue_hashmap;
+            std::unordered_map<std::string, datatypes::AnyValue> anyvalue_hashmap;
     };
 }
 

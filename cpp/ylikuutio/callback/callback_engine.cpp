@@ -68,44 +68,44 @@ namespace callback_system
 
     void CallbackEngine::set_bool(std::string name, bool value)
     {
-        this->anyvalue_hashmap[name] = AnyValue(value);
+        this->anyvalue_hashmap[name] = datatypes::AnyValue(value);
     }
 
     void CallbackEngine::set_float(std::string name, float value)
     {
-        this->anyvalue_hashmap[name] = AnyValue(value);
+        this->anyvalue_hashmap[name] = datatypes::AnyValue(value);
     }
 
     void CallbackEngine::set_double(std::string name, double value)
     {
-        this->anyvalue_hashmap[name] = AnyValue(value);
+        this->anyvalue_hashmap[name] = datatypes::AnyValue(value);
     }
 
     void CallbackEngine::set_int32_t(std::string name, int32_t value)
     {
-        this->anyvalue_hashmap[name] = AnyValue(value);
+        this->anyvalue_hashmap[name] = datatypes::AnyValue(value);
     }
 
     void CallbackEngine::set_uint32_t(std::string name, uint32_t value)
     {
-        this->anyvalue_hashmap[name] = AnyValue(value);
+        this->anyvalue_hashmap[name] = datatypes::AnyValue(value);
     }
 
     void CallbackEngine::set_void_pointer(std::string name, void* value)
     {
-        this->anyvalue_hashmap[name] = AnyValue(value);
+        this->anyvalue_hashmap[name] = datatypes::AnyValue(value);
     }
 
     void CallbackEngine::set_world_pointer(std::string name, model::World* value)
     {
-        this->anyvalue_hashmap[name] = AnyValue(value);
+        this->anyvalue_hashmap[name] = datatypes::AnyValue(value);
     }
 
-    AnyValue CallbackEngine::execute()
+    datatypes::AnyValue CallbackEngine::execute()
     {
-        std::cout << "Hello from AnyValue CallbackEngine::execute()\n";
+        std::cout << "Hello from datatypes::AnyValue CallbackEngine::execute()\n";
 
-        AnyValue any_value;
+        datatypes::AnyValue any_value;
 
         // execute all callbacks.
         for (uint32_t child_i = 0; child_i < this->callback_object_pointer_vector.size(); child_i++)

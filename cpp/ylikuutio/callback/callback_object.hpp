@@ -37,7 +37,7 @@ namespace callback_system
             // this does not store the value to an appropriate hashmap.
             // storing the value must be done before or after this call.
             // each type has its own namespace!
-            // void add_input_parameter(std::string name, AnyValue any_value, bool is_reference);
+            // void add_input_parameter(std::string name, datatypes::AnyValue any_value, bool is_reference);
 
             friend class CallbackEngine;
             friend class CallbackParameter;
@@ -54,7 +54,7 @@ namespace callback_system
             void bind_child_to_parent(callback_system::CallbackParameter* child_pointer);
 
             // execute this callback.
-            AnyValue execute();
+            datatypes::AnyValue execute();
 
             uint32_t get_callback_parameterID(std::vector<callback_system::CallbackParameter*> &child_pointer_vector, std::queue<uint32_t> &free_childID_queue);
 
