@@ -193,6 +193,7 @@ add_executable(ajokki
     cpp/ylikuutio/callback/callback_parameter.hpp
 
     # common, in alphabetical order
+    cpp/ylikuutio/common/any_value.cpp
     cpp/ylikuutio/common/any_value.hpp
     cpp/ylikuutio/common/bilinear_interpolation.cpp
     cpp/ylikuutio/common/bilinear_interpolation.hpp
@@ -302,6 +303,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         cpp/ylikuutio/callback/callback_object.hpp
         cpp/ylikuutio/callback/callback_parameter.cpp
         cpp/ylikuutio/callback/callback_parameter.hpp
+        cpp/ylikuutio/common/any_value.cpp
         cpp/ylikuutio/common/any_value.hpp
         cpp/ylikuutio/common/globals.cpp
         cpp/ylikuutio/common/globals.hpp
