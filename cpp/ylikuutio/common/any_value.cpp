@@ -26,52 +26,66 @@ namespace datatypes
     }
 
     AnyValue::AnyValue()
-        : type(datatypes::UNKNOWN), bool_value(false), float_value(NAN), double_value(NAN), int32_t_value(0), uint32_t_value(0), void_pointer(nullptr), world_pointer(nullptr)
     {
         // constructor.
+        this->set_default_values();
     }
 
     AnyValue::AnyValue(bool bool_value)
-        : type(datatypes::BOOL), bool_value(bool_value), float_value(NAN), double_value(NAN), int32_t_value(0), uint32_t_value(0), void_pointer(nullptr), world_pointer(nullptr)
     {
         // constructor.
+        this->set_default_values();
+        this->type = datatypes::BOOL;
+        this->bool_value = bool_value;
     }
 
     AnyValue::AnyValue(float float_value)
-        : type(datatypes::FLOAT), bool_value(false), float_value(float_value), double_value(NAN), int32_t_value(0), uint32_t_value(0), void_pointer(nullptr), world_pointer(nullptr)
     {
         // constructor.
+        this->set_default_values();
+        this->type = datatypes::FLOAT;
+        this->float_value = float_value;
     }
 
     AnyValue::AnyValue(double double_value)
-        : type(datatypes::DOUBLE), bool_value(false), float_value(NAN), double_value(double_value), int32_t_value(0), uint32_t_value(0), void_pointer(nullptr), world_pointer(nullptr)
     {
         // constructor.
+        this->set_default_values();
+        this->type = datatypes::DOUBLE;
+        this->double_value = double_value;
     }
 
     AnyValue::AnyValue(int32_t int32_t_value)
-        : type(datatypes::INT32_T), bool_value(false), float_value(NAN), double_value(NAN), int32_t_value(int32_t_value), uint32_t_value(0), void_pointer(nullptr), world_pointer(nullptr)
     {
         // constructor.
+        this->set_default_values();
+        this->type = datatypes::INT32_T;
+        this->int32_t_value = int32_t_value;
     }
 
     AnyValue::AnyValue(uint32_t uint32_t_value)
-        : type(datatypes::UINT32_T), bool_value(false), float_value(NAN), double_value(NAN), int32_t_value(0), uint32_t_value(uint32_t_value), void_pointer(nullptr), world_pointer(nullptr)
     {
         // constructor.
+        this->set_default_values();
+        this->type = datatypes::UINT32_T;
+        this->uint32_t_value = uint32_t_value;
     }
 
     AnyValue::AnyValue(void* void_pointer)
-        : type(datatypes::VOID_POINTER), bool_value(false), float_value(NAN), double_value(NAN), int32_t_value(0), uint32_t_value(uint32_t_value), void_pointer(void_pointer), world_pointer(nullptr)
     {
         // constructor.
         std::cout << "creating AnyValue with void* value.\n";
+        this->set_default_values();
+        this->type = datatypes::VOID_POINTER;
+        this->void_pointer = void_pointer;
     }
 
     AnyValue::AnyValue(model::World* world_pointer)
-        : type(datatypes::WORLD_POINTER), bool_value(false), float_value(NAN), double_value(NAN), int32_t_value(0), uint32_t_value(uint32_t_value), void_pointer(nullptr), world_pointer(world_pointer)
     {
         // constructor.
         std::cout << "creating AnyValue with model::World* value.\n";
+        this->set_default_values();
+        this->type = datatypes::WORLD_POINTER;
+        this->world_pointer = world_pointer;
     }
 }
