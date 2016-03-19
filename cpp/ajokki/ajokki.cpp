@@ -122,7 +122,7 @@ datatypes::AnyValue* full_cleanup(std::vector<callback_system::CallbackParameter
 
     // Close OpenGL window and terminate GLFW
     glfwTerminate();
-    return new datatypes::AnyValue();
+    return nullptr;
 }
 
 int main(void)
