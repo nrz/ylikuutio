@@ -29,25 +29,26 @@ namespace datatypes
 
 namespace datatypes
 {
-    typedef struct AnyValue
+    typedef class AnyValue
     {
-        AnyValue();
-        AnyValue(bool bool_value);
-        AnyValue(float float_value);
-        AnyValue(double double_value);
-        AnyValue(int32_t int32_t_value);
-        AnyValue(uint32_t uint32_t_value);
-        AnyValue(void* void_pointer);
-        AnyValue(model::World* world_pointer);
+        public:
+            AnyValue();
+            AnyValue(bool bool_value);
+            AnyValue(float float_value);
+            AnyValue(double double_value);
+            AnyValue(int32_t int32_t_value);
+            AnyValue(uint32_t uint32_t_value);
+            AnyValue(void* void_pointer);
+            AnyValue(model::World* world_pointer);
 
-        int type;
-        bool bool_value;
-        float float_value;
-        double double_value;
-        int32_t int32_t_value;
-        uint32_t uint32_t_value;
-        void* void_pointer;
-        model::World* world_pointer;
+            int type;
+            bool bool_value;
+            float float_value;
+            double double_value;
+            int32_t int32_t_value;
+            uint32_t uint32_t_value;
+            void* void_pointer;
+            model::World* world_pointer;
     } AnyValue;
 }
 
