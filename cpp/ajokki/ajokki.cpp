@@ -495,6 +495,7 @@ int main(void)
 
     // do cleanup.
     callback_engine->execute();
+    delete my_world_value;
 
     return 0;
 }
