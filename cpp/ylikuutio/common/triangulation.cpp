@@ -22,7 +22,7 @@
 #endif
 
 // Include standard headers
-#include <cmath>    // NAN
+#include <cmath>    // NAN, std::isnan, std::pow
 #include <cstring>  // std::memcmp, std::strcmp, std::strlen, std::strncmp
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <string>   // std::string

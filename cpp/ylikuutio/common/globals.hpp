@@ -41,10 +41,10 @@
 #endif
 
 // Include standard headers
-#include <cmath>    // NAN
+#include <cmath>    // NAN, std::isnan, std::pow
+#include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 #include <vector>   // std::vector
-#include <stdint.h> // uint32_t etc.
 
 #ifndef WINDOW_WIDTH
 #define WINDOW_WIDTH (1600.0f)
@@ -275,7 +275,7 @@ typedef struct TriangulateQuadsStruct
 
 typedef struct
 {
-    GLuint* input_vertex_pointer;
+    uint32_t* input_vertex_pointer;
     uint32_t image_width;
     uint32_t image_height;
     bool should_ylikuutio_use_real_texture_coordinates;
@@ -294,7 +294,7 @@ namespace callback_system
 {
     class CallbackParameter;
 }
-typedef AnyValue (*InputParametersToAnyValueCallback)(std::vector<callback_system::CallbackParameter*>); 
+typedef datatypes::AnyValue* (*InputParametersToAnyValueCallback)(std::vector<callback_system::CallbackParameter*>);
 
 extern SphericalCoordinatesStruct spherical_position;
 

@@ -2,6 +2,7 @@
 #define __CALLBACK_ENGINE_HPP_INCLUDED
 
 #include "cpp/ylikuutio/common/any_value.hpp"
+#include "cpp/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include standard headers
 #include <queue>         // std::queue
@@ -17,9 +18,9 @@ namespace model
 
 // callback typedefs in alphabetical order.
 typedef void (*VoidToVoidCallback)(void);
-typedef void (*AnyValueToVoidCallback)(AnyValue);
-typedef AnyValue (*VoidToAnyValueCallback)(void);
-typedef AnyValue (*AnyValueToAnyValueCallback)(AnyValue);
+typedef void (*AnyValueToVoidCallback)(datatypes::AnyValue);
+typedef datatypes::AnyValue (*VoidToAnyValueCallback)(void);
+typedef datatypes::AnyValue (*AnyValueToAnyValueCallback)(datatypes::AnyValue);
 
 namespace callback_system
 {
@@ -29,6 +30,14 @@ namespace callback_system
     {
         // `CallbackEngine` is an object that contains some callbacks and hashmaps that are used for input and output parameters.
         // `CallbackEngine` provides a way to create callback chains.
+        //
+        // Hierarchy of callbacks:
+        //
+        //     CallbackEngine
+        //           ^
+        //     CallbackObject
+        //           ^
+        //   CallbackParameter
         //
         // How to use.
         // 1. Create a new `CallbackEngine`. No callbacks have been
@@ -49,9 +58,13 @@ namespace callback_system
             ~CallbackEngine();
 
             // execute all callbacks.
-            AnyValue execute();
+            datatypes::AnyValue* execute();
 
             friend class CallbackObject;
+            template<class T1>
+                friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<void*> &child_pointer_vector, std::queue<uint32_t> &free_childID_queue);
+            template<class T1, class T2>
+                friend void hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent_pointer, std::vector<void*> &old_child_pointer_vector, std::queue<uint32_t> &old_free_childID_queue);
 
         private:
             // this method sets a callback object pointer.
@@ -78,7 +91,7 @@ namespace callback_system
             std::queue<uint32_t> free_callback_objectID_queue;
 
             // A hash map used to store variables.
-            std::unordered_map<std::string, AnyValue> anyvalue_hashmap;
+            std::unordered_map<std::string, datatypes::AnyValue> anyvalue_hashmap;
     };
 }
 

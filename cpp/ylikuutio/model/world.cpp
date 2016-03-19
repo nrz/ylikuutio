@@ -38,7 +38,7 @@ namespace model
 
         // destroy all shaders of this world.
         std::cout << "All shaders of this world will be destroyed.\n";
-        model::delete_children<model::Shader*>(this->shader_pointer_vector);
+        hierarchy::delete_children<model::Shader*>(this->shader_pointer_vector);
     }
 
     void World::render()
@@ -51,7 +51,7 @@ namespace model
 
     void World::set_shader_pointer(uint32_t childID, void* parent_pointer)
     {
-        set_child_pointer(childID, parent_pointer, this->shader_pointer_vector, this->free_shaderID_queue);
+        hierarchy::set_child_pointer(childID, parent_pointer, this->shader_pointer_vector, this->free_shaderID_queue);
     }
 
     void World::set_terrain_species_pointer(model::Species* terrain_species_pointer)

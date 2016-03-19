@@ -12,7 +12,7 @@ namespace model
 {
     void Font::bind_to_parent()
     {
-        model::bind_child_to_parent<model::Font*>(this, this->parent_pointer->font_pointer_vector, this->parent_pointer->free_fontID_queue);
+        hierarchy::bind_child_to_parent<model::Font*>(this, this->parent_pointer->font_pointer_vector, this->parent_pointer->free_fontID_queue);
     }
 
     Font::Font(FontStruct font_struct)
@@ -55,7 +55,7 @@ namespace model
 
         // destroy all glyphs of this font.
         std::cout << "All glyphs of this font will be destroyed.\n";
-        model::delete_children<model::Glyph*>(this->glyph_pointer_vector);
+        hierarchy::delete_children<model::Glyph*>(this->glyph_pointer_vector);
     }
 
     void Font::render()
@@ -66,11 +66,11 @@ namespace model
 
     void Font::set_glyph_pointer(uint32_t childID, void* parent_pointer)
     {
-        set_child_pointer(childID, parent_pointer, this->glyph_pointer_vector, this->free_glyphID_queue);
+        hierarchy::set_child_pointer(childID, parent_pointer, this->glyph_pointer_vector, this->free_glyphID_queue);
     }
 
     void Font::bind_to_new_parent(model::Material *new_texture_pointer)
     {
-        model::bind_child_to_new_parent<model::Font*, model::Material*>(this, new_texture_pointer, this->parent_pointer->font_pointer_vector, this->parent_pointer->free_fontID_queue);
+        hierarchy::bind_child_to_new_parent<model::Font*, model::Material*>(this, new_texture_pointer, this->parent_pointer->font_pointer_vector, this->parent_pointer->free_fontID_queue);
     }
 }

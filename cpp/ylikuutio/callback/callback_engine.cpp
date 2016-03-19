@@ -1,6 +1,7 @@
 #include "callback_engine.hpp"
+#include "callback_object.hpp"
 #include "cpp/ylikuutio/common/any_value.hpp"
-#include "cpp/ylikuutio/hierarchy/hierarchy.hpp"
+#include "cpp/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include standard headers
 #include <iostream> // std::cout, std::cin, std::cerr
@@ -19,11 +20,16 @@ namespace callback_system
     CallbackEngine::~CallbackEngine()
     {
         // destructor.
+        std::cout << "This callback engine will be destroyed.\n";
+
+        // destroy all callback objects of this callback engine.
+        std::cout << "All callback objects of this callback engine will be destroyed.\n";
+        hierarchy::delete_children<callback_system::CallbackObject*>(this->callback_object_pointer_vector);
     }
 
     void CallbackEngine::set_callback_object_pointer(uint32_t childID, void* parent_pointer)
     {
-        model::set_child_pointer(childID, parent_pointer, this->callback_object_pointer_vector, this->free_callback_objectID_queue);
+        hierarchy::set_child_pointer(childID, parent_pointer, this->callback_object_pointer_vector, this->free_callback_objectID_queue);
     }
 
     // getter functions for callbacks and callback objects.
@@ -62,52 +68,51 @@ namespace callback_system
 
     void CallbackEngine::set_bool(std::string name, bool value)
     {
-        this->anyvalue_hashmap[name] = AnyValue(value);
+        this->anyvalue_hashmap[name] = datatypes::AnyValue(value);
     }
 
     void CallbackEngine::set_float(std::string name, float value)
     {
-        this->anyvalue_hashmap[name] = AnyValue(value);
+        this->anyvalue_hashmap[name] = datatypes::AnyValue(value);
     }
 
     void CallbackEngine::set_double(std::string name, double value)
     {
-        this->anyvalue_hashmap[name] = AnyValue(value);
+        this->anyvalue_hashmap[name] = datatypes::AnyValue(value);
     }
 
     void CallbackEngine::set_int32_t(std::string name, int32_t value)
     {
-        this->anyvalue_hashmap[name] = AnyValue(value);
+        this->anyvalue_hashmap[name] = datatypes::AnyValue(value);
     }
 
     void CallbackEngine::set_uint32_t(std::string name, uint32_t value)
     {
-        this->anyvalue_hashmap[name] = AnyValue(value);
+        this->anyvalue_hashmap[name] = datatypes::AnyValue(value);
     }
 
     void CallbackEngine::set_void_pointer(std::string name, void* value)
     {
-        this->anyvalue_hashmap[name] = AnyValue(value);
+        this->anyvalue_hashmap[name] = datatypes::AnyValue(value);
     }
 
     void CallbackEngine::set_world_pointer(std::string name, model::World* value)
     {
-        this->anyvalue_hashmap[name] = AnyValue(value);
+        this->anyvalue_hashmap[name] = datatypes::AnyValue(value);
     }
 
-    AnyValue CallbackEngine::execute()
+    datatypes::AnyValue* CallbackEngine::execute()
     {
-        std::cout << "Hello from AnyValue CallbackEngine::execute()\n";
+        std::cout << "Hello from datatypes::AnyValue CallbackEngine::execute()\n";
 
-        AnyValue any_value;
+        datatypes::AnyValue* any_value = new datatypes::AnyValue();
 
-        /*
         // execute all callbacks.
-        for (callback_system::CallbackObject callback_object : this->callback_objects)
+        for (uint32_t child_i = 0; child_i < this->callback_object_pointer_vector.size(); child_i++)
         {
-            any_value = callback_object.execute();
+            callback_system::CallbackObject* callback_object_pointer = static_cast<callback_system::CallbackObject*>(this->callback_object_pointer_vector[child_i]);
+            any_value = callback_object_pointer->execute();
         }
-        */
 
         return any_value;
     }

@@ -1,10 +1,5 @@
 #include "node.hpp"
-
-// Include GLEW
-#ifndef __GL_GLEW_H_INCLUDED
-#define __GL_GLEW_H_INCLUDED
-#include <GL/glew.h> // GLfloat, GLuint etc.
-#endif
+#include "cpp/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include standard headers
 #include <iostream> // std::cout, std::cin, std::cerr
@@ -13,7 +8,7 @@ namespace model
 {
     void Node::bind_to_parent()
     {
-        model::bind_child_to_parent<model::Node*>(this, this->parent_pointer->node_pointer_vector, this->parent_pointer->free_nodeID_queue);
+        hierarchy::bind_child_to_parent<model::Node*>(this, this->parent_pointer->node_pointer_vector, this->parent_pointer->free_nodeID_queue);
     }
 
     Node::Node(NodeStruct node_struct)
@@ -27,7 +22,7 @@ namespace model
         this->parent_pointer->set_node_pointer(this->childID, this);
 
         // create all bidirectional links between this node and neighbor nodes.
-        for (GLuint link_i = 0; link_i < this->neighbor_nodeIDs.size(); link_i++)
+        for (uint32_t link_i = 0; link_i < this->neighbor_nodeIDs.size(); link_i++)
         {
             this->create_bidirectional_link(this->neighbor_nodeIDs[link_i]);
         }
@@ -39,7 +34,7 @@ namespace model
         std::cout << "Node with childID " << this->childID << " will be destroyed.\n";
 
         // delete all bidirectional links.
-        for (GLuint link_i = 0; link_i < this->neighbor_nodeIDs.size(); link_i++)
+        for (uint32_t link_i = 0; link_i < this->neighbor_nodeIDs.size(); link_i++)
         {
             this->delete_bidirectional_link(this->neighbor_nodeIDs[link_i]);
         }
@@ -48,7 +43,7 @@ namespace model
         this->parent_pointer->set_node_pointer(this->childID, nullptr);
     }
 
-    void Node::create_unidirectional_link(GLuint nodeID)
+    void Node::create_unidirectional_link(uint32_t nodeID)
     {
         // this method creates an unidirectional link.
 
@@ -63,7 +58,7 @@ namespace model
         // this->neighbor_nodeIDs.push_back(nodeID);
     }
 
-    void Node::create_bidirectional_link(GLuint nodeID)
+    void Node::create_bidirectional_link(uint32_t nodeID)
     {
         // create a link from this node to destination node.
         this->create_unidirectional_link(nodeID);
@@ -72,13 +67,13 @@ namespace model
         static_cast<model::Node*>(this->parent_pointer->get_node_pointer(childID))->create_unidirectional_link(this->childID);
     }
 
-    void Node::delete_unidirectional_link(GLuint nodeID)
+    void Node::delete_unidirectional_link(uint32_t nodeID)
     {
         // this method deletes an unidirectional link.
         this->neighbor_nodeIDs.erase(std::remove(this->neighbor_nodeIDs.begin(), this->neighbor_nodeIDs.end(), nodeID), this->neighbor_nodeIDs.end());
     }
 
-    void Node::delete_bidirectional_link(GLuint nodeID)
+    void Node::delete_bidirectional_link(uint32_t nodeID)
     {
         // this method deletes a bidirectional link.
         this->delete_unidirectional_link(nodeID);
@@ -98,6 +93,6 @@ namespace model
 
     void Node::bind_to_new_parent(model::Graph *new_graph_pointer)
     {
-        model::bind_child_to_new_parent<model::Node*, model::Graph*>(this, new_graph_pointer, this->parent_pointer->node_pointer_vector, this->parent_pointer->free_nodeID_queue);
+        hierarchy::bind_child_to_new_parent<model::Node*, model::Graph*>(this, new_graph_pointer, this->parent_pointer->node_pointer_vector, this->parent_pointer->free_nodeID_queue);
     }
 }

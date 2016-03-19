@@ -20,8 +20,8 @@
 #endif
 
 // Include standard headers
-#include <cmath>     // NAN
-#include <vector>    // std::vector
+#include <cmath>  // NAN, std::isnan, std::pow
+#include <vector> // std::vector
 
 namespace model
 {

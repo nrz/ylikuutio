@@ -12,7 +12,7 @@ namespace model
 {
     void Material::bind_to_parent()
     {
-        model::bind_child_to_parent<model::Material*>(this, this->parent_pointer->texture_pointer_vector, this->parent_pointer->free_textureID_queue);
+        hierarchy::bind_child_to_parent<model::Material*>(this, this->parent_pointer->texture_pointer_vector, this->parent_pointer->free_textureID_queue);
     }
 
     Material::Material(MaterialStruct material_struct)
@@ -55,11 +55,11 @@ namespace model
 
         // destroy all species of this texture.
         std::cout << "All species of this texture will be destroyed.\n";
-        model::delete_children<model::Species*>(this->species_pointer_vector);
+        hierarchy::delete_children<model::Species*>(this->species_pointer_vector);
 
         // destroy all fonts of this texture.
         std::cout << "All fonts of this texture will be destroyed.\n";
-        model::delete_children<model::Font*>(this->font_pointer_vector);
+        hierarchy::delete_children<model::Font*>(this->font_pointer_vector);
 
         glDeleteTextures(1, &this->texture);
 
@@ -82,12 +82,12 @@ namespace model
 
     void Material::set_species_pointer(uint32_t childID, void* parent_pointer)
     {
-        set_child_pointer(childID, parent_pointer, this->species_pointer_vector, this->free_speciesID_queue);
+        hierarchy::set_child_pointer(childID, parent_pointer, this->species_pointer_vector, this->free_speciesID_queue);
     }
 
     void Material::bind_to_new_parent(model::Shader *new_shader_pointer)
     {
-        model::bind_child_to_new_parent<model::Material*, model::Shader*>(this, new_shader_pointer, this->parent_pointer->texture_pointer_vector, this->parent_pointer->free_textureID_queue);
+        hierarchy::bind_child_to_new_parent<model::Material*, model::Shader*>(this, new_shader_pointer, this->parent_pointer->texture_pointer_vector, this->parent_pointer->free_textureID_queue);
     }
 
     void Material::set_terrain_species_pointer(model::Species* terrain_species_pointer)

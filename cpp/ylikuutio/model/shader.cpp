@@ -11,7 +11,7 @@ namespace model
 {
     void Shader::bind_to_parent()
     {
-        model::bind_child_to_parent<model::Shader*>(this, this->parent_pointer->shader_pointer_vector, this->parent_pointer->free_shaderID_queue);
+        hierarchy::bind_child_to_parent<model::Shader*>(this, this->parent_pointer->shader_pointer_vector, this->parent_pointer->free_shaderID_queue);
     }
 
     Shader::Shader(ShaderStruct shader_struct)
@@ -44,7 +44,7 @@ namespace model
 
         // destroy all textures of this shader.
         std::cout << "All textures of this shader will be destroyed.\n";
-        model::delete_children<model::Material*>(this->texture_pointer_vector);
+        hierarchy::delete_children<model::Material*>(this->texture_pointer_vector);
 
         // set pointer to this shader to nullptr.
         this->parent_pointer->set_shader_pointer(this->childID, nullptr);
@@ -65,12 +65,12 @@ namespace model
 
     void Shader::set_texture_pointer(uint32_t childID, void* parent_pointer)
     {
-        set_child_pointer(childID, parent_pointer, this->texture_pointer_vector, this->free_textureID_queue);
+        hierarchy::set_child_pointer(childID, parent_pointer, this->texture_pointer_vector, this->free_textureID_queue);
     }
 
     void Shader::bind_to_new_parent(model::World *new_scene_pointer)
     {
-        model::bind_child_to_new_parent<model::Shader*, model::World*>(this, new_scene_pointer, this->parent_pointer->shader_pointer_vector, this->parent_pointer->free_shaderID_queue);
+        hierarchy::bind_child_to_new_parent<model::Shader*, model::World*>(this, new_scene_pointer, this->parent_pointer->shader_pointer_vector, this->parent_pointer->free_shaderID_queue);
     }
 
     void Shader::set_terrain_species_pointer(model::Species* terrain_species_pointer)

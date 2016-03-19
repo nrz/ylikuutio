@@ -90,17 +90,31 @@ std::string g_font_texture_filename = "Holstein.bmp";
 std::string g_font_file_format = "svg";
 std::string g_font_filename = "kongtext.svg";
 
-void full_cleanup(AnyValue any_value)
+datatypes::AnyValue* glfwTerminate_cleanup(std::vector<callback_system::CallbackParameter*> input_parameters)
+{
+    glfwTerminate();
+    return nullptr;
+}
+
+datatypes::AnyValue* full_cleanup(std::vector<callback_system::CallbackParameter*> input_parameters)
 {
     std::cout << "Cleaning up.\n";
 
-    if (any_value.type == datatypes::WORLD_POINTER)
+    if (input_parameters.size() != 1)
     {
-        delete static_cast<model::World*>(any_value.void_pointer);
+        std::cerr << "Invalid size of input_parameters: " << input_parameters.size() << ", should be 1.\n";
     }
     else
     {
-        std::cerr << "Invalid datatype for full_cleanup!\n";
+        datatypes::AnyValue* any_value = input_parameters.at(0)->get_any_value();
+        if (any_value->type == datatypes::WORLD_POINTER)
+        {
+            delete any_value->world_pointer;
+        }
+        else
+        {
+            std::cerr << "Invalid datatype: " << any_value->type << ", should be " << datatypes::WORLD_POINTER << "\n";
+        }
     }
 
     // Delete the text's VBO, the shader and the texture
@@ -108,6 +122,7 @@ void full_cleanup(AnyValue any_value)
 
     // Close OpenGL window and terminate GLFW
     glfwTerminate();
+    return nullptr;
 }
 
 int main(void)
@@ -134,7 +149,8 @@ int main(void)
     // initialFoV = 45.0f;
     initialFoV = 60.0f;
 
-    AnyValueToVoidCallback cleanup_callback = nullptr;
+    callback_system::CallbackEngine* callback_engine = new callback_system::CallbackEngine();
+    callback_system::CallbackObject* callback_object = new callback_system::CallbackObject(nullptr, callback_engine);
 
     bool does_suzanne_species_exist = true;
     bool does_suzanne_species_have_uvmap_texture = true;
@@ -153,10 +169,12 @@ int main(void)
 
     // Open a window and create its OpenGL context.
     window = glfwCreateWindow((GLuint) WINDOW_WIDTH, (GLuint) WINDOW_HEIGHT, "Ylikuutio", nullptr, nullptr);
+    callback_object->set_new_callback(&glfwTerminate_cleanup);
+
     if (window == nullptr)
     {
         std::cerr << "Failed to open GLFW window.\n";
-        glfwTerminate();
+        callback_engine->execute();
         return -1;
     }
     glfwMakeContextCurrent(window);
@@ -165,6 +183,7 @@ int main(void)
     if (glewInit() != GLEW_OK)
     {
         std::cerr << "Failed to initialize GLEW.\n";
+        callback_engine->execute();
         return -1;
     }
 
@@ -185,7 +204,10 @@ int main(void)
 
     // Create the world, store it in `my_world`.
     model::World* my_world = new model::World();
-    cleanup_callback = &full_cleanup;
+
+    datatypes::AnyValue* my_world_value = new datatypes::AnyValue(my_world);
+    callback_system::CallbackParameter* callback_parameter = new callback_system::CallbackParameter("", my_world_value, false, callback_object);
+    callback_object->set_new_callback(&full_cleanup);
 
     // Create the shader, store it in `my_shader`.
     ShaderStruct shader_struct;
@@ -481,7 +503,8 @@ int main(void)
             && (glfwWindowShouldClose(window) == 0));
 
     // do cleanup.
-    cleanup_callback(AnyValue(my_world));
+    callback_engine->execute();
+    delete my_world_value;
 
     return 0;
 }

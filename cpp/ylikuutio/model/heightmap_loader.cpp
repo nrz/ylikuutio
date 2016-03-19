@@ -20,7 +20,7 @@
 #endif
 
 // Include standard headers
-#include <cmath>    // NAN
+#include <cmath>    // NAN, std::isnan, std::pow
 #include <cstdio>   // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf etc.
 #include <cstring>  // std::memcmp, std::strcmp, std::strlen, std::strncmp
 #include <iomanip>  // std::setfill, std::setw
