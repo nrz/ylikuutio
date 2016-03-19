@@ -176,6 +176,7 @@ int main(void)
     if (glewInit() != GLEW_OK)
     {
         std::cerr << "Failed to initialize GLEW.\n";
+        glfwTerminate();
         return -1;
     }
 
