@@ -41,6 +41,14 @@ namespace datatypes
             AnyValue(void* void_pointer);
             AnyValue(model::World* world_pointer);
 
+            AnyValue(std::string type, bool bool_value);
+            AnyValue(std::string type, float float_value);
+            AnyValue(std::string type, double double_value);
+            AnyValue(std::string type, int32_t int32_t_value);
+            AnyValue(std::string type, uint32_t uint32_t_value);
+            AnyValue(std::string type, void* void_pointer);
+            AnyValue(std::string type, model::World* world_pointer);
+
             int type;
             bool bool_value;
             float float_value;
