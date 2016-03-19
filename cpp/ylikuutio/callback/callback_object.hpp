@@ -54,7 +54,7 @@ namespace callback_system
             void bind_child_to_parent(callback_system::CallbackParameter* child_pointer);
 
             // execute this callback.
-            datatypes::AnyValue execute();
+            datatypes::AnyValue* execute();
 
             uint32_t get_callback_parameterID(std::vector<callback_system::CallbackParameter*> &child_pointer_vector, std::queue<uint32_t> &free_childID_queue);
 

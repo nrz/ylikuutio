@@ -58,7 +58,7 @@ namespace callback_system
             ~CallbackEngine();
 
             // execute all callbacks.
-            datatypes::AnyValue execute();
+            datatypes::AnyValue* execute();
 
             friend class CallbackObject;
             template<class T1>

@@ -90,7 +90,7 @@ std::string g_font_texture_filename = "Holstein.bmp";
 std::string g_font_file_format = "svg";
 std::string g_font_filename = "kongtext.svg";
 
-datatypes::AnyValue full_cleanup(std::vector<callback_system::CallbackParameter*> input_parameters)
+datatypes::AnyValue* full_cleanup(std::vector<callback_system::CallbackParameter*> input_parameters)
 {
     std::cout << "Cleaning up.\n";
 
@@ -100,15 +100,14 @@ datatypes::AnyValue full_cleanup(std::vector<callback_system::CallbackParameter*
     }
     else
     {
-        datatypes::AnyValue any_value = input_parameters.at(0);
-
-        if (any_value.type == datatypes::WORLD_POINTER)
+        datatypes::AnyValue* any_value = input_parameters.at(0)->get_any_value();
+        if (any_value->type == datatypes::WORLD_POINTER)
         {
-            delete any_value.world_pointer;
+            delete any_value->world_pointer;
         }
         else
         {
-            std::cerr << "Invalid datatype: " << any_value.type << ", should be " << datatypes::WORLD_POINTER << "\n";
+            std::cerr << "Invalid datatype: " << any_value->type << ", should be " << datatypes::WORLD_POINTER << "\n";
         }
     }
 
@@ -117,7 +116,7 @@ datatypes::AnyValue full_cleanup(std::vector<callback_system::CallbackParameter*
 
     // Close OpenGL window and terminate GLFW
     glfwTerminate();
-    return datatypes::AnyValue();
+    return new datatypes::AnyValue();
 }
 
 int main(void)
@@ -146,7 +145,7 @@ int main(void)
 
     callback_system::CallbackEngine* callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* callback_object = new callback_system::CallbackObject(nullptr, callback_engine);
-    AnyValueToVoidCallback cleanup_callback = nullptr;
+    callback_object->set_new_callback(&full_cleanup);
 
     bool does_suzanne_species_exist = true;
     bool does_suzanne_species_have_uvmap_texture = true;
@@ -197,9 +196,9 @@ int main(void)
 
     // Create the world, store it in `my_world`.
     model::World* my_world = new model::World();
-    callback_object->set_new_callback(&full_cleanup);
 
-    callback_system::CallbackParameter* callback_parameter = new callback_system::CallbackParameter("", datatypes::AnyValue(my_world), false, callback_object);
+    datatypes::AnyValue* my_world_value = new datatypes::AnyValue(my_world);
+    callback_system::CallbackParameter* callback_parameter = new callback_system::CallbackParameter("", my_world_value, false, callback_object);
 
     // Create the shader, store it in `my_shader`.
     ShaderStruct shader_struct;

@@ -20,13 +20,13 @@ namespace callback_system
         public:
 
             // constructor.
-            CallbackParameter(std::string name, datatypes::AnyValue any_value, bool is_reference, callback_system::CallbackObject* parent_pointer);
+            CallbackParameter(std::string name, datatypes::AnyValue* any_value, bool is_reference, callback_system::CallbackObject* parent_pointer);
 
             // destructor.
             ~CallbackParameter();
 
             // getter.
-            datatypes::AnyValue get_any_value();
+            datatypes::AnyValue* get_any_value();
 
             friend class CallbackObject;
             template<class T1>
@@ -42,7 +42,7 @@ namespace callback_system
             callback_system::CallbackObject* parent_pointer; // pointer to the callback object.
 
             std::string name;
-            datatypes::AnyValue any_value;
+            datatypes::AnyValue* any_value;
             bool is_reference; // if true, the value is read from the hashmap. if false, then the value is read from the union.
     };
 

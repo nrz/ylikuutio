@@ -294,7 +294,7 @@ namespace callback_system
 {
     class CallbackParameter;
 }
-typedef datatypes::AnyValue (*InputParametersToAnyValueCallback)(std::vector<callback_system::CallbackParameter*>);
+typedef datatypes::AnyValue* (*InputParametersToAnyValueCallback)(std::vector<callback_system::CallbackParameter*>);
 
 extern SphericalCoordinatesStruct spherical_position;
 

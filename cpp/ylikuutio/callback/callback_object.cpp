@@ -152,7 +152,7 @@ namespace callback_system
         }
     }
 
-    datatypes::AnyValue CallbackObject::execute()
+    datatypes::AnyValue* CallbackObject::execute()
     {
         std::cout << "Hello from datatypes::AnyValue CallbackObject::execute()\n";
 
@@ -164,25 +164,25 @@ namespace callback_system
             // Don't store the variable into CallbackEngine-specific namespace if the variable name is an empty string.
             if (input_parameter_pointer->name.size() > 0)
             {
-                switch (input_parameter_pointer->any_value.type)
+                switch (input_parameter_pointer->any_value->type)
                 {
                     case datatypes::BOOL:
-                        this->parent_pointer->set_bool(input_parameter_pointer->name, input_parameter_pointer->any_value.bool_value);
+                        this->parent_pointer->set_bool(input_parameter_pointer->name, input_parameter_pointer->any_value->bool_value);
                         break;
                     case datatypes::FLOAT:
-                        this->parent_pointer->set_float(input_parameter_pointer->name, input_parameter_pointer->any_value.float_value);
+                        this->parent_pointer->set_float(input_parameter_pointer->name, input_parameter_pointer->any_value->float_value);
                         break;
                     case datatypes::DOUBLE:
-                        this->parent_pointer->set_double(input_parameter_pointer->name, input_parameter_pointer->any_value.double_value);
+                        this->parent_pointer->set_double(input_parameter_pointer->name, input_parameter_pointer->any_value->double_value);
                         break;
                     case datatypes::INT32_T:
-                        this->parent_pointer->set_int32_t(input_parameter_pointer->name, input_parameter_pointer->any_value.int32_t_value);
+                        this->parent_pointer->set_int32_t(input_parameter_pointer->name, input_parameter_pointer->any_value->int32_t_value);
                         break;
                     case datatypes::UINT32_T:
-                        this->parent_pointer->set_uint32_t(input_parameter_pointer->name, input_parameter_pointer->any_value.uint32_t_value);
+                        this->parent_pointer->set_uint32_t(input_parameter_pointer->name, input_parameter_pointer->any_value->uint32_t_value);
                         break;
                     case datatypes::VOID_POINTER:
-                        this->parent_pointer->set_void_pointer(input_parameter_pointer->name, input_parameter_pointer->any_value.void_pointer);
+                        this->parent_pointer->set_void_pointer(input_parameter_pointer->name, input_parameter_pointer->any_value->void_pointer);
                         break;
                     default:
                         break;
