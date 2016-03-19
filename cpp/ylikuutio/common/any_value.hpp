@@ -49,6 +49,9 @@ namespace datatypes
             uint32_t uint32_t_value;
             void* void_pointer;
             model::World* world_pointer;
+
+        private:
+            void set_default_values();
     } AnyValue;
 }
 

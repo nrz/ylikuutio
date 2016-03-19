@@ -13,6 +13,18 @@ namespace model
 
 namespace datatypes
 {
+    void AnyValue::set_default_values()
+    {
+        this->type = datatypes::UNKNOWN;
+        this->bool_value = false;
+        this->float_value = NAN;
+        this->double_value = NAN;
+        this->int32_t_value = 0;
+        this->uint32_t_value = 0;
+        this->void_pointer = nullptr;
+        this->world_pointer = nullptr;
+    }
+
     AnyValue::AnyValue()
         : type(datatypes::UNKNOWN), bool_value(false), float_value(NAN), double_value(NAN), int32_t_value(0), uint32_t_value(0), void_pointer(nullptr), world_pointer(nullptr)
     {
