@@ -29,12 +29,14 @@ namespace datatypes
     AnyValue::AnyValue()
     {
         // constructor.
+        std::cout << "creating AnyValue unknown value.\n";
         this->set_default_values();
     }
 
     AnyValue::AnyValue(bool bool_value)
     {
         // constructor.
+        std::cout << "creating AnyValue with bool value.\n";
         this->set_default_values();
         this->type = datatypes::BOOL;
         this->bool_value = bool_value;
@@ -43,6 +45,7 @@ namespace datatypes
     AnyValue::AnyValue(std::string type, bool bool_value)
     {
         // constructor.
+        std::cout << "creating AnyValue with bool value.\n";
         this->set_default_values();
 
         if (std::strcmp(type.c_str(), "bool"))
@@ -55,6 +58,7 @@ namespace datatypes
     AnyValue::AnyValue(float float_value)
     {
         // constructor.
+        std::cout << "creating AnyValue with float value.\n";
         this->set_default_values();
         this->type = datatypes::FLOAT;
         this->float_value = float_value;
@@ -63,6 +67,7 @@ namespace datatypes
     AnyValue::AnyValue(std::string type, float float_value)
     {
         // constructor.
+        std::cout << "creating AnyValue with float value.\n";
         this->set_default_values();
 
         if (std::strcmp(type.c_str(), "float"))
@@ -75,6 +80,7 @@ namespace datatypes
     AnyValue::AnyValue(double double_value)
     {
         // constructor.
+        std::cout << "creating AnyValue with double value.\n";
         this->set_default_values();
         this->type = datatypes::DOUBLE;
         this->double_value = double_value;
@@ -83,6 +89,7 @@ namespace datatypes
     AnyValue::AnyValue(std::string type, double double_value)
     {
         // constructor.
+        std::cout << "creating AnyValue with double value.\n";
         this->set_default_values();
         if (std::strcmp(type.c_str(), "double"))
         {
@@ -94,6 +101,7 @@ namespace datatypes
     AnyValue::AnyValue(int32_t int32_t_value)
     {
         // constructor.
+        std::cout << "creating AnyValue with int32_t value.\n";
         this->set_default_values();
         this->type = datatypes::INT32_T;
         this->int32_t_value = int32_t_value;
@@ -102,6 +110,7 @@ namespace datatypes
     AnyValue::AnyValue(std::string type, int32_t int32_t_value)
     {
         // constructor.
+        std::cout << "creating AnyValue with int32_t value.\n";
         this->set_default_values();
         if (std::strcmp(type.c_str(), "int32_t"))
         {
@@ -113,6 +122,7 @@ namespace datatypes
     AnyValue::AnyValue(uint32_t uint32_t_value)
     {
         // constructor.
+        std::cout << "creating AnyValue with uint32_t value.\n";
         this->set_default_values();
         this->type = datatypes::UINT32_T;
         this->uint32_t_value = uint32_t_value;
@@ -121,6 +131,7 @@ namespace datatypes
     AnyValue::AnyValue(std::string type, uint32_t uint32_t_value)
     {
         // constructor.
+        std::cout << "creating AnyValue with uint32_t value.\n";
         this->set_default_values();
         if (std::strcmp(type.c_str(), "uint32_t"))
         {
