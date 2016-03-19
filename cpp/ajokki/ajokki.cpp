@@ -90,6 +90,12 @@ std::string g_font_texture_filename = "Holstein.bmp";
 std::string g_font_file_format = "svg";
 std::string g_font_filename = "kongtext.svg";
 
+datatypes::AnyValue* glfwTerminate_cleanup(std::vector<callback_system::CallbackParameter*> input_parameters)
+{
+    glfwTerminate();
+    return nullptr;
+}
+
 datatypes::AnyValue* full_cleanup(std::vector<callback_system::CallbackParameter*> input_parameters)
 {
     std::cout << "Cleaning up.\n";
@@ -145,7 +151,6 @@ int main(void)
 
     callback_system::CallbackEngine* callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* callback_object = new callback_system::CallbackObject(nullptr, callback_engine);
-    callback_object->set_new_callback(&full_cleanup);
 
     bool does_suzanne_species_exist = true;
     bool does_suzanne_species_have_uvmap_texture = true;
@@ -164,10 +169,12 @@ int main(void)
 
     // Open a window and create its OpenGL context.
     window = glfwCreateWindow((GLuint) WINDOW_WIDTH, (GLuint) WINDOW_HEIGHT, "Ylikuutio", nullptr, nullptr);
+    callback_object->set_new_callback(&glfwTerminate_cleanup);
+
     if (window == nullptr)
     {
         std::cerr << "Failed to open GLFW window.\n";
-        glfwTerminate();
+        callback_engine->execute();
         return -1;
     }
     glfwMakeContextCurrent(window);
@@ -176,7 +183,7 @@ int main(void)
     if (glewInit() != GLEW_OK)
     {
         std::cerr << "Failed to initialize GLEW.\n";
-        glfwTerminate();
+        callback_engine->execute();
         return -1;
     }
 
@@ -200,6 +207,7 @@ int main(void)
 
     datatypes::AnyValue* my_world_value = new datatypes::AnyValue(my_world);
     callback_system::CallbackParameter* callback_parameter = new callback_system::CallbackParameter("", my_world_value, false, callback_object);
+    callback_object->set_new_callback(&full_cleanup);
 
     // Create the shader, store it in `my_shader`.
     ShaderStruct shader_struct;
