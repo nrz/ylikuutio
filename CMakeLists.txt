@@ -320,6 +320,8 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         cpp/ylikuutio/hierarchy/hierarchy.cpp
         cpp/ylikuutio/hierarchy/hierarchy.hpp
         cpp/ylikuutio/hierarchy/hierarchy_templates.hpp
+        cpp/ylikuutio/model/font_loader.cpp
+        cpp/ylikuutio/model/font_loader.hpp
         cpp/ylikuutio/string/ylikuutio_string.cpp
         cpp/ylikuutio/string/ylikuutio_string.hpp
         )
@@ -327,6 +329,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         cpp/ylikuutio/tests/googletest/test_any_value.cpp
         cpp/ylikuutio/tests/googletest/test_callback_system.cpp
         cpp/ylikuutio/tests/googletest/test_file_loader.cpp
+        cpp/ylikuutio/tests/googletest/test_font_loader.cpp
         cpp/ylikuutio/tests/googletest/test_globals.cpp
         cpp/ylikuutio/tests/googletest/test_heightmap_loader.cpp
         cpp/ylikuutio/tests/googletest/test_triangulation.cpp
