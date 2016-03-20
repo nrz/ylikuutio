@@ -1,6 +1,12 @@
 #include "gtest/gtest.h"
 #include "cpp/ylikuutio/common/triangulation.hpp"
 
+// Include GLEW
+#ifndef __GL_GLEW_H_INCLUDED
+#define __GL_GLEW_H_INCLUDED
+#include <GL/glew.h> // GLfloat, GLuint etc.
+#endif
+
 // Include standard headers
 #include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
