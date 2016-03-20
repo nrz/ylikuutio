@@ -149,8 +149,8 @@ int main(void)
     // initialFoV = 45.0f;
     initialFoV = 60.0f;
 
-    callback_system::CallbackEngine* callback_engine = new callback_system::CallbackEngine();
-    callback_system::CallbackObject* callback_object = new callback_system::CallbackObject(nullptr, callback_engine);
+    callback_system::CallbackEngine* cleanup_callback_engine = new callback_system::CallbackEngine();
+    callback_system::CallbackObject* callback_object = new callback_system::CallbackObject(nullptr, cleanup_callback_engine);
 
     bool does_suzanne_species_exist = true;
     bool does_suzanne_species_have_uvmap_texture = true;
@@ -174,7 +174,7 @@ int main(void)
     if (window == nullptr)
     {
         std::cerr << "Failed to open GLFW window.\n";
-        callback_engine->execute();
+        cleanup_callback_engine->execute();
         return -1;
     }
     glfwMakeContextCurrent(window);
@@ -183,7 +183,7 @@ int main(void)
     if (glewInit() != GLEW_OK)
     {
         std::cerr << "Failed to initialize GLEW.\n";
-        callback_engine->execute();
+        cleanup_callback_engine->execute();
         return -1;
     }
 
@@ -503,7 +503,7 @@ int main(void)
             && (glfwWindowShouldClose(window) == 0));
 
     // do cleanup.
-    callback_engine->execute();
+    cleanup_callback_engine->execute();
     delete my_world_value;
 
     return 0;
