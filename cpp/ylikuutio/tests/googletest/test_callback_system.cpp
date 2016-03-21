@@ -93,7 +93,7 @@ datatypes::AnyValue* expt(std::vector<callback_system::CallbackParameter*> input
     return new datatypes::AnyValue();
 }
 
-TEST(callback_engine_must_be_function_properly, int32_t_three_squared_equals_nine)
+TEST(callback_engine_must_function_properly, int32_t_three_squared_equals_nine)
 {
     callback_system::CallbackEngine* callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* callback_object = new callback_system::CallbackObject(nullptr, callback_engine);
@@ -111,7 +111,7 @@ TEST(callback_engine_must_be_function_properly, int32_t_three_squared_equals_nin
     delete callback_engine;
     delete three_value;
 }
-TEST(callback_engine_must_be_function_properly, uint32_t_three_squared_equals_nine)
+TEST(callback_engine_must_function_properly, uint32_t_three_squared_equals_nine)
 {
     callback_system::CallbackEngine* callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* callback_object = new callback_system::CallbackObject(nullptr, callback_engine);
@@ -129,7 +129,7 @@ TEST(callback_engine_must_be_function_properly, uint32_t_three_squared_equals_ni
     delete callback_engine;
     delete three_value;
 }
-TEST(callback_engine_must_be_function_properly, uint32_t_5_expt_7_equals_78125)
+TEST(callback_engine_must_function_properly, uint32_t_5_expt_7_equals_78125)
 {
     callback_system::CallbackEngine* callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* callback_object = new callback_system::CallbackObject(nullptr, callback_engine);
