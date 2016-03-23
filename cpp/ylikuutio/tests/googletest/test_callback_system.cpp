@@ -109,7 +109,6 @@ TEST(callback_engine_must_function_properly, int32_t_three_squared_equals_nine)
     ASSERT_EQ(result->int32_t_value, 9);
 
     delete callback_engine;
-    delete three_value;
 }
 TEST(callback_engine_must_function_properly, uint32_t_three_squared_equals_nine)
 {
@@ -127,7 +126,6 @@ TEST(callback_engine_must_function_properly, uint32_t_three_squared_equals_nine)
     ASSERT_EQ(result->uint32_t_value, 9);
 
     delete callback_engine;
-    delete three_value;
 }
 TEST(callback_engine_must_function_properly, uint32_t_5_expt_7_equals_78125)
 {
@@ -150,6 +148,4 @@ TEST(callback_engine_must_function_properly, uint32_t_5_expt_7_equals_78125)
     ASSERT_EQ(result->uint32_t_value, 78125);
 
     delete callback_engine;
-    delete five_value;
-    delete seven_value;
 }
