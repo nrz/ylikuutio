@@ -90,13 +90,13 @@ std::string g_font_texture_filename = "Holstein.bmp";
 std::string g_font_file_format = "svg";
 std::string g_font_filename = "kongtext.svg";
 
-datatypes::AnyValue* glfwTerminate_cleanup(std::vector<callback_system::CallbackParameter*> input_parameters)
+datatypes::AnyValue* glfwTerminate_cleanup(callback_system::CallbackEngine* callback_engine, std::vector<callback_system::CallbackParameter*> input_parameters)
 {
     glfwTerminate();
     return nullptr;
 }
 
-datatypes::AnyValue* full_cleanup(std::vector<callback_system::CallbackParameter*> input_parameters)
+datatypes::AnyValue* full_cleanup(callback_system::CallbackEngine* callback_engine, std::vector<callback_system::CallbackParameter*> input_parameters)
 {
     std::cout << "Cleaning up.\n";
 

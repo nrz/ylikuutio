@@ -292,9 +292,10 @@ typedef struct
 
 namespace callback_system
 {
+    class CallbackEngine;
     class CallbackParameter;
 }
-typedef datatypes::AnyValue* (*InputParametersToAnyValueCallback)(std::vector<callback_system::CallbackParameter*>);
+typedef datatypes::AnyValue* (*InputParametersToAnyValueCallback)(callback_system::CallbackEngine*, std::vector<callback_system::CallbackParameter*>);
 
 extern SphericalCoordinatesStruct spherical_position;
 

@@ -11,7 +11,7 @@
 #include <string>   // std::string
 #include <iostream> // std::cout, std::cin, std::cerr
 
-datatypes::AnyValue* square(std::vector<callback_system::CallbackParameter*> input_parameters)
+datatypes::AnyValue* square(callback_system::CallbackEngine* callback_engine, std::vector<callback_system::CallbackParameter*> input_parameters)
 {
     if (input_parameters.size() != 1)
     {
@@ -53,7 +53,7 @@ datatypes::AnyValue* square(std::vector<callback_system::CallbackParameter*> inp
     return new datatypes::AnyValue();
 }
 
-datatypes::AnyValue* expt(std::vector<callback_system::CallbackParameter*> input_parameters)
+datatypes::AnyValue* expt(callback_system::CallbackEngine* callback_engine, std::vector<callback_system::CallbackParameter*> input_parameters)
 {
     if (input_parameters.size() != 2)
     {
