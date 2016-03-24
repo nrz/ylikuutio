@@ -101,24 +101,62 @@ TEST(font_must_be_loaded_appropriately, kongtext_svg)
     ASSERT_EQ(glyph_names.size(), 217);
     ASSERT_EQ(glyph_vertex_data.size(), 217);
     ASSERT_EQ(std::strcmp(glyph_names.at(0).c_str(), "nonmarkingreturn"), 0);
+    ASSERT_EQ(glyph_vertex_data.at(0).size(), 0);
+
     ASSERT_EQ(std::strcmp(glyph_names.at(1).c_str(), "space"), 0);
+    ASSERT_EQ(glyph_vertex_data.at(1).size(), 0);
+
     ASSERT_EQ(std::strcmp(glyph_names.at(2).c_str(), "exclam"), 0);
+    ASSERT_EQ(glyph_vertex_data.at(2).size(), 5); // FIXME: 2 edge sections. d="M384 768h256v-512h-256v512zM384 128h256v-128h-256v128z"
+
     ASSERT_EQ(std::strcmp(glyph_names.at(3).c_str(), "quotedbl"), 0);
+    ASSERT_EQ(glyph_vertex_data.at(3).size(), 5); // FIXME: 2 edge sections. d="M256 768h128v-384h-128v384zM640 768h128v-384h-128v384z"
+
     ASSERT_EQ(std::strcmp(glyph_names.at(4).c_str(), "numbersign"), 0);
+    ASSERT_EQ(glyph_vertex_data.at(4).size(), 29); // FIXME: 2 edge sections. d="M256 768h128v-128h256v128h128v-128h128v-128h-128v-128h128v-128h-128v-128h-128v128h-256v-128h-128v128h-128v128h128v128h-128v128h128v128zM384 512v-128h256v128h-256z"
+
     ASSERT_EQ(std::strcmp(glyph_names.at(5).c_str(), "dollar"), 0);
+    ASSERT_EQ(glyph_vertex_data.at(5).size(), 29); // complex polygon!
+
     ASSERT_EQ(std::strcmp(glyph_names.at(6).c_str(), "percent"), 0);
+    ASSERT_EQ(glyph_vertex_data.at(6).size(), 5); // FIXME: 3 edge sections. d="M128 896h256v-256h-256v256zM768 896h128v-256h-128v-128h-128v-128h-128v-128h-128v-128h-128v-128h-256v128h128v128h128v128h128v128h128v128h128v128h128v128zM640 256h256v-256h-256v256z"
+
     ASSERT_EQ(std::strcmp(glyph_names.at(7).c_str(), "ampersand"), 0);
+    ASSERT_EQ(glyph_vertex_data.at(7).size(), 27); // FIXME: 3 edge sections. d="M256 768h384v-128h128v-128h256v-128h-128v-256h128v-128h-256v128h-128v-128h-512v128h-128v128h128v128h128v128h-128v128h128v128zM384 640v-128h128v128h-128zM640 512v-128h128v128h-128zM384 384v-128h-128v-128h384v128h-128v128h-128z"
+
     ASSERT_EQ(std::strcmp(glyph_names.at(8).c_str(), "quotesingle"), 0);
+    ASSERT_EQ(glyph_vertex_data.at(8).size(), 9);
+
     ASSERT_EQ(std::strcmp(glyph_names.at(9).c_str(), "parenleft"), 0);
+    ASSERT_EQ(glyph_vertex_data.at(9).size(), 13);
 
     ASSERT_EQ(std::strcmp(glyph_names.at(207).c_str(), "quotedblbase"), 0);
+    ASSERT_EQ(glyph_vertex_data.at(207).size(), 0);
+
     ASSERT_EQ(std::strcmp(glyph_names.at(208).c_str(), "dagger"), 0);
+    ASSERT_EQ(glyph_vertex_data.at(208).size(), 0);
+
     ASSERT_EQ(std::strcmp(glyph_names.at(209).c_str(), "daggerdbl"), 0);
+    ASSERT_EQ(glyph_vertex_data.at(209).size(), 0);
+
     ASSERT_EQ(std::strcmp(glyph_names.at(210).c_str(), "bullet"), 0);
+    ASSERT_EQ(glyph_vertex_data.at(210).size(), 0);
+
     ASSERT_EQ(std::strcmp(glyph_names.at(211).c_str(), "ellipsis"), 0);
+    ASSERT_EQ(glyph_vertex_data.at(211).size(), 0);
+
     ASSERT_EQ(std::strcmp(glyph_names.at(212).c_str(), "perthousand"), 0);
+    ASSERT_EQ(glyph_vertex_data.at(212).size(), 0);
+
     ASSERT_EQ(std::strcmp(glyph_names.at(213).c_str(), "guilsinglleft"), 0);
+    ASSERT_EQ(glyph_vertex_data.at(213).size(), 0);
+
     ASSERT_EQ(std::strcmp(glyph_names.at(214).c_str(), "guilsinglright"), 0);
+    ASSERT_EQ(glyph_vertex_data.at(214).size(), 0);
+
     ASSERT_EQ(std::strcmp(glyph_names.at(215).c_str(), "Euro"), 0);
+    ASSERT_EQ(glyph_vertex_data.at(215).size(), 0);
+
     ASSERT_EQ(std::strcmp(glyph_names.at(216).c_str(), "trademark"), 0);
+    ASSERT_EQ(glyph_vertex_data.at(216).size(), 9); // FIXME: 2 edge sections. d="M0 896h384v-128h-128v-256h-128v256h-128v128zM384 640h640v-384h-128v256h-128v-128h-128v128h-128v-256h-128v384z"
 }
