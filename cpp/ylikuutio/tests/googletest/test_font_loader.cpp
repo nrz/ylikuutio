@@ -88,8 +88,6 @@ TEST(font_must_be_loaded_appropriately, kongtext_svg)
     std::string font_filename = "kongtext.svg";
 
     std::vector<std::vector<glm::vec3>> glyph_vertex_data;
-    std::vector<std::vector<glm::vec2>> glyph_UV_data;
-    std::vector<std::vector<glm::vec3>> glyph_normal_data;
     std::vector<std::string> glyph_names;
     std::vector<std::string> unicode_strings;
     GLfloat vertex_scaling_factor = 1.0f;
@@ -97,8 +95,6 @@ TEST(font_must_be_loaded_appropriately, kongtext_svg)
     bool font_loading_result = model::load_SVG_font(
             font_filename,
             glyph_vertex_data,
-            glyph_UV_data,
-            glyph_normal_data,
             glyph_names,
             unicode_strings,
             vertex_scaling_factor);

@@ -132,8 +132,6 @@ namespace model
             const char* SVG_base_pointer,
             char*& SVG_data_pointer,
             std::vector<std::vector<glm::vec3>> &out_glyph_vertex_data,
-            std::vector<std::vector<glm::vec2>> &out_glyph_UV_data,
-            std::vector<std::vector<glm::vec3>> &out_glyph_normal_data,
             std::vector<std::string> &glyph_names,
             std::vector<std::string> &unicode_strings,
             float vertex_scaling_factor)
@@ -142,8 +140,6 @@ namespace model
         // SVG_base_pointer: pointer to the origin of the SVG data.
         // SVG_data_pointer: pointer to the current reading address (must point to a glyph!).
         // out_glyph_vertex_data: vector of 3D objects (glm::vec3 vectors each of which is a vertex of a glyph).
-        // out_glyph_vertex_data: vector of glm::vec2 vectors of UVs.
-        // out_glyph_normal_data: vector of glm::vec3 vectors of normals
         // glyph_names: vector of glyph names.
         // unicode_strings: vector of unicode strings.
         // vertex_scaling_factor: scaling factor by which the vertex coordinates are multiplied.
@@ -383,8 +379,6 @@ namespace model
     bool load_SVG_font(
             std::string font_file_path,
             std::vector<std::vector<glm::vec3>> &out_glyph_vertex_data,
-            std::vector<std::vector<glm::vec2>> &out_glyph_UV_data,
-            std::vector<std::vector<glm::vec3>> &out_glyph_normal_data,
             std::vector<std::string> &glyph_names,
             std::vector<std::string> &unicode_strings,
             float vertex_scaling_factor)
@@ -423,8 +417,6 @@ namespace model
                         SVG_base_pointer,
                         SVG_data_pointer,
                         out_glyph_vertex_data,
-                        out_glyph_UV_data,
-                        out_glyph_normal_data,
                         glyph_names,
                         unicode_strings,
                         vertex_scaling_factor);
