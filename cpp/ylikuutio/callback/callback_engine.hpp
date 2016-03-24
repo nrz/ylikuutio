@@ -71,6 +71,7 @@ namespace callback_system
             void set_callback_object_pointer(uint32_t childID, void* parent_pointer);
 
             // getter functions for callbacks and callback objects.
+            datatypes::AnyValue get_any_value(std::string name);
             bool get_bool(std::string name);
             float get_float(std::string name);
             double get_double(std::string name);
