@@ -159,9 +159,9 @@ namespace model
             float vertex_scaling_factor)
     {
         std::string file_content = file::slurp(font_file_path);
-        const uint32_t kongtext_svg_size = file_content.size();
-        char* SVG_data = new char[kongtext_svg_size];
-        std::strncpy(SVG_data, file_content.c_str(), kongtext_svg_size);
+        const uint32_t file_size = file_content.size();
+        char* SVG_data = new char[file_size];
+        std::strncpy(SVG_data, file_content.c_str(), file_size);
 
         bool is_first_glyph_found;
 
