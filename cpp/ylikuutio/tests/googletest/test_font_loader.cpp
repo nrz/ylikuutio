@@ -1,5 +1,6 @@
 #include "gtest/gtest.h"
 #include "cpp/ylikuutio/model/font_loader.hpp"
+#include "cpp/ylikuutio/file/file_loader.hpp"
 
 // Include GLEW
 #ifndef __GL_GLEW_H_INCLUDED
@@ -18,6 +19,27 @@
 #include <string>  // std::string
 #include <vector>  // std::vector
 
+TEST(first_glyph_must_be_found_appropriately, kongtext_svg)
+{
+    std::string font_filename = "kongtext.svg";
+
+    std::string file_content = file::slurp(font_filename);
+    const uint32_t file_size = file_content.size();
+    char* SVG_data = new char[file_size];
+    std::strncpy(SVG_data, file_content.c_str(), file_size);
+
+    bool is_first_glyph_found;
+
+    const char* SVG_base_pointer;
+    char* SVG_data_pointer;
+    SVG_base_pointer = SVG_data;
+    SVG_data_pointer = SVG_data;
+
+    // SVG files are XML files, so we just need to read until we find the data we need.
+    is_first_glyph_found = model::find_first_glyph_in_SVG(SVG_base_pointer, SVG_data_pointer);
+    ASSERT_TRUE(is_first_glyph_found);
+    ASSERT_EQ(SVG_data_pointer, SVG_base_pointer + 0x2e0);
+}
 TEST(font_must_be_loaded_appropriately, kongtext_svg)
 {
     std::string font_filename = "kongtext.svg";
