@@ -108,7 +108,7 @@ namespace model
             {
                 // OK, we are inside a block.
                 SVG_data_pointer = std::strchr(SVG_data_pointer, '>');
-                string::check_and_report_if_some_string_matches(SVG_base_pointer, SVG_data_pointer, std::vector<std::string> { '>' });
+                string::check_and_report_if_some_string_matches(SVG_base_pointer, SVG_data_pointer, std::vector<std::string> { ">" });
                 is_inside_block = false;
             }
         }
