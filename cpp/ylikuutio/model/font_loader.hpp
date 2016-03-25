@@ -24,7 +24,7 @@ namespace model
             char*& src_mem_pointer,
             char* char_end_string);
 
-    int32_t extract_value_from_string(const char* SVG_base_pointer, char*& vertex_data_pointer, char* char_end_string, const char* description);
+    int32_t extract_value_from_string(char*& vertex_data_pointer, char* char_end_string, const char* description);
 
     int32_t extract_value_from_string_with_standard_endings(const char* SVG_base_pointer, char*& vertex_data_pointer, const char* description);
 

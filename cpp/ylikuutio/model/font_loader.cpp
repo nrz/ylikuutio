@@ -54,7 +54,7 @@ namespace model
         }
     }
 
-    int32_t extract_value_from_string(const char* SVG_base_pointer, char*& vertex_data_pointer, char* char_end_string, const char* description)
+    int32_t extract_value_from_string(char*& vertex_data_pointer, char* char_end_string, const char* description)
     {
         vertex_data_pointer++;
         char char_number_buffer[1024];
@@ -68,7 +68,7 @@ namespace model
 
     int32_t extract_value_from_string_with_standard_endings(const char* SVG_base_pointer, char*& vertex_data_pointer, const char* description)
     {
-        return model::extract_value_from_string(SVG_base_pointer, vertex_data_pointer, (char*) " Mmhvz\">", description);
+        return model::extract_value_from_string(vertex_data_pointer, (char*) " Mmhvz\">", description);
     }
 
     bool find_first_glyph_in_SVG(const char* SVG_base_pointer, char*& SVG_data_pointer)
