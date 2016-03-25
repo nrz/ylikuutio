@@ -26,7 +26,7 @@ namespace model
 
     int32_t extract_value_from_string(char*& vertex_data_pointer, char* char_end_string, const char* description);
 
-    int32_t extract_value_from_string_with_standard_endings(const char* SVG_base_pointer, char*& vertex_data_pointer, const char* description);
+    int32_t extract_value_from_string_with_standard_endings(char*& vertex_data_pointer, const char* description);
 
     bool find_first_glyph_in_SVG(const char* SVG_base_pointer, char*& SVG_data_pointer);
 
