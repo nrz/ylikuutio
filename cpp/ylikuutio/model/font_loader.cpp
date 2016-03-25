@@ -25,7 +25,7 @@ namespace model
     int32_t extract_value_from_string(char*& vertex_data_pointer, char* char_end_string, const char* description)
     {
         vertex_data_pointer++;
-        char char_number_buffer[1024];
+        char char_number_buffer[1024]; // FIXME: risk of buffer overflow.
         char* dest_mem_pointer;
         dest_mem_pointer = char_number_buffer;
         string::extract_string_with_several_endings(dest_mem_pointer, vertex_data_pointer, char_end_string);
@@ -205,8 +205,8 @@ namespace model
 
         // A glyph was found!
         // std::printf("<glyph found at 0x%lx.\n", (uint64_t) SVG_data_pointer);
-        char char_glyph_name[1024];
-        char char_unicode[1024];
+        char char_glyph_name[1024]; // FIXME: risk of buffer overflow.
+        char char_unicode[1024];    // FIXME: risk of buffer overflow.
         std::vector<std::vector<glm::vec3>> current_glyph_vertices; // vertices of the current glyph.
         bool has_glyph_name = false;
         bool has_glyph_unicode = false;
