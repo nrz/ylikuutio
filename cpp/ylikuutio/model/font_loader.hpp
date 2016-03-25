@@ -14,7 +14,7 @@
 namespace model
 {
     bool load_SVG_font(std::string font_file_path,
-            std::vector<std::vector<glm::vec3>> &out_glyph_vertex_data,
+            std::vector<std::vector<std::vector<glm::vec3>>> &out_glyph_vertex_data,
             std::vector<std::string> &glyph_names,
             std::vector<std::string> &unicode_strings,
             float vertex_scaling_factor);
@@ -38,14 +38,14 @@ namespace model
     bool load_SVG_glyph(
             const char* SVG_base_pointer,
             char*& SVG_data_pointer,
-            std::vector<std::vector<glm::vec3>> &out_glyph_vertex_data,
+            std::vector<std::vector<std::vector<glm::vec3>>> &out_glyph_vertex_data,
             std::vector<std::string> &glyph_names,
             std::vector<std::string> &unicode_strings,
             float vertex_scaling_factor);
 
     bool load_SVG_font(
             std::string font_file_path,
-            std::vector<std::vector<glm::vec3>> &out_glyph_vertex_data,
+            std::vector<std::vector<std::vector<glm::vec3>>> &out_glyph_vertex_data,
             std::vector<std::string> &glyph_names,
             std::vector<std::string> &unicode_strings,
             float vertex_scaling_factor);

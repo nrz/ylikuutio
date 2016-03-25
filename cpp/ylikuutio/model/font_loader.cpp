@@ -131,7 +131,7 @@ namespace model
     bool load_SVG_glyph(
             const char* SVG_base_pointer,
             char*& SVG_data_pointer,
-            std::vector<std::vector<glm::vec3>> &out_glyph_vertex_data,
+            std::vector<std::vector<std::vector<glm::vec3>>> &out_glyph_vertex_data,
             std::vector<std::string> &glyph_names,
             std::vector<std::string> &unicode_strings,
             float vertex_scaling_factor)
@@ -139,7 +139,7 @@ namespace model
         // This function loads the next SVG glyph.
         // SVG_base_pointer: pointer to the origin of the SVG data.
         // SVG_data_pointer: pointer to the current reading address (must point to a glyph!).
-        // out_glyph_vertex_data: vector of 3D objects (glm::vec3 vectors each of which is a vertex of a glyph).
+        // out_glyph_vertex_data: vector of 3D objects consisting of 1 or more edge sections consisting of glm::vec3 vectors each of which is a vertex of a glyph.
         // glyph_names: vector of glyph names.
         // unicode_strings: vector of unicode strings.
         // vertex_scaling_factor: scaling factor by which the vertex coordinates are multiplied.
@@ -148,7 +148,7 @@ namespace model
         // std::printf("<glyph found at 0x%lx.\n", (uint64_t) SVG_data_pointer);
         char char_glyph_name[1024];
         char char_unicode[1024];
-        std::vector<glm::vec3> current_glyph_vertices; // vertices of the current glyph.
+        std::vector<std::vector<glm::vec3>> current_glyph_vertices; // vertices of the current glyph.
         bool has_glyph_name = false;
         bool has_glyph_unicode = false;
         bool has_glyph_vertices = false;
@@ -240,6 +240,7 @@ namespace model
             } // else if (std::strncmp(SVG_data_pointer, "unicode=", std::strlen("unicode=")) == 0)
             else if (std::strncmp(SVG_data_pointer, "d=", std::strlen("d=")) == 0)
             {
+                std::vector<glm::vec3> vertices_of_current_edge_section; // vertices of the current edge section.
                 // d=" was found.
                 // Follow the path and create the vertices accordingly.
                 // TODO: If the glyph does not have path, the vertex data will be empty (space is an example).
@@ -289,7 +290,7 @@ namespace model
                                     {
                                         current_vertex.y = model::extract_value_from_string_with_standard_endings(SVG_base_pointer, vertex_data_pointer,
                                                 (const char*) "space (moveto y coordinate)");
-                                        current_glyph_vertices.push_back(current_vertex);
+                                        vertices_of_current_edge_section.push_back(current_vertex);
                                         break;
                                     } // if (std::strncmp(vertex_data_pointer, " ", std::strlen(" ")) == 0)
                                     vertex_data_pointer++;
@@ -301,7 +302,7 @@ namespace model
                                 int32_t horizontal_lineto_value = model::extract_value_from_string_with_standard_endings(SVG_base_pointer, vertex_data_pointer,
                                         (const char*) "h (horizontal relative lineto)");
                                 current_vertex.x += horizontal_lineto_value;
-                                current_glyph_vertices.push_back(current_vertex);
+                                vertices_of_current_edge_section.push_back(current_vertex);
                             } // else if (std::strncmp(vertex_data_pointer, "h", std::strlen("h")) == 0)
                             else if (std::strncmp(vertex_data_pointer, "v", std::strlen("v")) == 0)
                             {
@@ -309,12 +310,14 @@ namespace model
                                 int32_t vertical_lineto_value = model::extract_value_from_string_with_standard_endings(SVG_base_pointer, vertex_data_pointer,
                                         (const char*) "v (vertical relative lineto)");
                                 current_vertex.y += vertical_lineto_value;
-                                current_glyph_vertices.push_back(current_vertex);
+                                vertices_of_current_edge_section.push_back(current_vertex);
                             } // else if (std::strncmp(vertex_data_pointer, "v", std::strlen("v")) == 0)
                             else if (std::strncmp(vertex_data_pointer, "z", std::strlen("z")) == 0)
                             {
                                 uint64_t offset = (uint64_t) vertex_data_pointer - (uint64_t) SVG_base_pointer;
                                 std::printf("z (closepath) found at file offset 0x%lx (memory address 0x%lx).\n", offset, (uint64_t) vertex_data_pointer);
+                                current_glyph_vertices.push_back(vertices_of_current_edge_section); // store the vertices of the current edge section.
+                                vertices_of_current_edge_section.clear();                           // clear the vector of vertices of the current edge section.
                                 keep_reading_path = false;
                                 break;
                             } // else if (std::strncmp(vertex_data_pointer, "z", std::strlen("z")) == 0)
@@ -378,7 +381,7 @@ namespace model
 
     bool load_SVG_font(
             std::string font_file_path,
-            std::vector<std::vector<glm::vec3>> &out_glyph_vertex_data,
+            std::vector<std::vector<std::vector<glm::vec3>>> &out_glyph_vertex_data,
             std::vector<std::string> &glyph_names,
             std::vector<std::string> &unicode_strings,
             float vertex_scaling_factor)
