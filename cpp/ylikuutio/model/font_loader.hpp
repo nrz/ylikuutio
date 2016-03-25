@@ -16,8 +16,7 @@ namespace model
     bool load_SVG_font(std::string font_file_path,
             std::vector<std::vector<std::vector<glm::vec3>>> &out_glyph_vertex_data,
             std::vector<std::string> &glyph_names,
-            std::vector<std::string> &unicode_strings,
-            float vertex_scaling_factor);
+            std::vector<std::string> &unicode_strings);
 
     int32_t extract_value_from_string(char*& vertex_data_pointer, char* char_end_string, const char* description);
 
@@ -40,15 +39,13 @@ namespace model
             char*& SVG_data_pointer,
             std::vector<std::vector<std::vector<glm::vec3>>> &out_glyph_vertex_data,
             std::vector<std::string> &glyph_names,
-            std::vector<std::string> &unicode_strings,
-            float vertex_scaling_factor);
+            std::vector<std::string> &unicode_strings);
 
     bool load_SVG_font(
             std::string font_file_path,
             std::vector<std::vector<std::vector<glm::vec3>>> &out_glyph_vertex_data,
             std::vector<std::string> &glyph_names,
-            std::vector<std::string> &unicode_strings,
-            float vertex_scaling_factor);
+            std::vector<std::string> &unicode_strings);
 }
 
 #endif

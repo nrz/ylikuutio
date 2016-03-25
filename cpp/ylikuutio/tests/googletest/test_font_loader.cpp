@@ -90,22 +90,12 @@ TEST(font_must_be_loaded_appropriately, kongtext_svg)
     std::vector<std::vector<std::vector<glm::vec3>>> glyph_vertex_data;
     std::vector<std::string> glyph_names;
     std::vector<std::string> unicode_strings;
-    GLfloat vertex_scaling_factor = 1.0f;
 
     bool font_loading_result = model::load_SVG_font(
             font_filename,
             glyph_vertex_data,
             glyph_names,
-            unicode_strings,
-            vertex_scaling_factor);
-
-    /*
-    std::cout << "test at(0).c_str(): " << glyph_names.at(0).c_str() << "\n";
-    ASSERT_EQ(std::strcmp(glyph_names.at(0).c_str(), "exclam"), 0);
-    ASSERT_EQ(glyph_vertex_data.at(0).size(), 2); // 2 edge sections. d="M384 768h256v-512h-256v512zM384 128h256v-128h-256v128z"
-    ASSERT_EQ(glyph_vertex_data.at(0).at(0).size(), 5); // d="M384 768h256v-512h-256v512z
-    ASSERT_EQ(glyph_vertex_data.at(0).at(1).size(), 5); // M384 128h256v-128h-256v128z"
-    */
+            unicode_strings);
 
     ASSERT_EQ(glyph_names.size(), 217);
     ASSERT_EQ(glyph_vertex_data.size(), 217);

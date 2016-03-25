@@ -192,8 +192,7 @@ namespace model
             char*& SVG_data_pointer,
             std::vector<std::vector<std::vector<glm::vec3>>> &out_glyph_vertex_data,
             std::vector<std::string> &glyph_names,
-            std::vector<std::string> &unicode_strings,
-            float vertex_scaling_factor)
+            std::vector<std::string> &unicode_strings)
     {
         // This function loads the next SVG glyph.
         // SVG_base_pointer: pointer to the origin of the SVG data.
@@ -201,7 +200,6 @@ namespace model
         // out_glyph_vertex_data: vector of 3D objects consisting of 1 or more edge sections consisting of glm::vec3 vectors each of which is a vertex of a glyph.
         // glyph_names: vector of glyph names.
         // unicode_strings: vector of unicode strings.
-        // vertex_scaling_factor: scaling factor by which the vertex coordinates are multiplied.
 
         // A glyph was found!
         // std::printf("<glyph found at 0x%lx.\n", (uint64_t) SVG_data_pointer);
@@ -345,8 +343,7 @@ namespace model
             std::string font_file_path,
             std::vector<std::vector<std::vector<glm::vec3>>> &out_glyph_vertex_data,
             std::vector<std::string> &glyph_names,
-            std::vector<std::string> &unicode_strings,
-            float vertex_scaling_factor)
+            std::vector<std::string> &unicode_strings)
     {
         std::string file_content = file::slurp(font_file_path);
         const uint32_t file_size = file_content.size();
@@ -383,8 +380,7 @@ namespace model
                         SVG_data_pointer,
                         out_glyph_vertex_data,
                         glyph_names,
-                        unicode_strings,
-                        vertex_scaling_factor);
+                        unicode_strings);
                 if (!result)
                 {
                     delete SVG_data;

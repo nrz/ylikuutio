@@ -38,8 +38,7 @@ namespace model
                     this->font_filename,
                     this->glyph_vertex_data,
                     this->glyph_names,
-                    this->unicode_strings,
-                    this->vertex_scaling_factor);
+                    this->unicode_strings);
         }
 
         // Font constructor also creates each Glyph and binds them to the Font.
