@@ -40,6 +40,8 @@ namespace model
             {
                 if (std::strncmp(src_mem_pointer, end_char_pointer, 1) == 0)
                 {
+                    // Copy the first matching character, then end copying (so that " can be matched).
+                    strncpy(dest_mem_pointer++, src_mem_pointer, 1);
                     *dest_mem_pointer = '\0';
                     return;
                 }
