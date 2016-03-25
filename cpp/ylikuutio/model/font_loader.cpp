@@ -206,7 +206,7 @@ namespace model
                     else if (std::strncmp(vertex_data_pointer, "z", std::strlen("z")) == 0)
                     {
                         uint64_t offset = (uint64_t) vertex_data_pointer - (uint64_t) SVG_base_pointer;
-                        std::printf("z (closepath) found at file offset 0x%lx (memory address 0x%lx).\n", offset, (uint64_t) vertex_data_pointer);
+                        std::printf("z (closepath)\n");
                         current_glyph_vertices.push_back(vertices_of_current_edge_section); // store the vertices of the current edge section.
                         vertices_of_current_edge_section.clear();                           // clear the vector of vertices of the current edge section.
                         keep_reading_path = false;
