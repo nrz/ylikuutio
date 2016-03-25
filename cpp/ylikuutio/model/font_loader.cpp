@@ -210,7 +210,6 @@ namespace model
         std::vector<std::vector<glm::vec3>> current_glyph_vertices; // vertices of the current glyph.
         bool has_glyph_name = false;
         bool has_glyph_unicode = false;
-        bool has_glyph_vertices = false;
 
         while (true)
         {
