@@ -40,8 +40,6 @@ namespace model
             {
                 if (std::strncmp(src_mem_pointer, end_char_pointer, 1) == 0)
                 {
-                    // Copy the first matching character, then end copying (so that " can be matched).
-                    strncpy(dest_mem_pointer++, src_mem_pointer, 1);
                     *dest_mem_pointer = '\0';
                     return;
                 }
@@ -119,9 +117,7 @@ namespace model
     {
         while (std::strncmp(src_mem_pointer, char_end_string, std::strlen(char_end_string)) != 0)
         {
-            strncpy(dest_mem_pointer, src_mem_pointer, 1);
-            dest_mem_pointer++;
-            src_mem_pointer++;
+            strncpy(dest_mem_pointer++, src_mem_pointer++, 1);
         }
         *dest_mem_pointer = '\0';
     }
@@ -157,7 +153,8 @@ namespace model
         current_vertex.z = 0; // z is not defined in the path (originally these are not 3D fonts!).
         char char_path[1024];
 
-        model::extract_string(char_path, opening_double_quote_pointer, (char*) "\"");
+        // copy from opening double quote to the next `"/"`.
+        model::extract_string(char_path, opening_double_quote_pointer, (char*) "/");
 
         std::printf("d: %s\n", char_path);
 
@@ -205,9 +202,14 @@ namespace model
                 std::printf("z (closepath)\n");
                 current_glyph_vertices.push_back(vertices_of_current_edge_section); // store the vertices of the current edge section.
                 vertices_of_current_edge_section.clear();                           // clear the vector of vertices of the current edge section.
+                vertex_data_pointer++;
+            } // else if (std::strncmp(vertex_data_pointer, "z", std::strlen("z")) == 0)
+            else if (std::strncmp(vertex_data_pointer, "\"", std::strlen("\"")) == 0)
+            {
+                std::printf("\" (end of vertex data)\n");
                 SVG_data_pointer = ++closing_double_quote_pointer;
                 return true;
-            } // else if (std::strncmp(vertex_data_pointer, "z", std::strlen("z")) == 0)
+            } // else if (std::strncmp(vertex_data_pointer, "\"", std::strlen("\"")) == 0)
             else
             {
                 vertex_data_pointer++;
