@@ -50,9 +50,7 @@ namespace model
 
             // OK, current character is not any of the ending characters.
             // Copy it and advance the pointers accordingly.
-            strncpy(dest_mem_pointer, src_mem_pointer, 1);
-            dest_mem_pointer++;
-            src_mem_pointer++;
+            strncpy(dest_mem_pointer++, src_mem_pointer++, 1);
         }
     }
 
