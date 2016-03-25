@@ -276,8 +276,6 @@ namespace model
                         // std::printf("closing \" found at 0x%lx.\n", (uint64_t) closing_double_quote_pointer);
                         has_glyph_unicode = true;
 
-                        closing_double_quote_pointer++;
-
                         model::extract_string(char_unicode, opening_double_quote_pointer, (char*) "\"");
 
                         std::printf("unicode: %s\n", char_unicode);
