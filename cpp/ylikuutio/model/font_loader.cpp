@@ -56,8 +56,6 @@ namespace model
 
     int32_t extract_value_from_string(const char* SVG_base_pointer, char*& vertex_data_pointer, char* char_end_string, const char* description)
     {
-        uint64_t offset = (uint64_t) vertex_data_pointer - (uint64_t) SVG_base_pointer;
-        std::printf("%s found at file offset 0x%lx (memory address 0x%lx).\n", description, offset, (uint64_t) vertex_data_pointer);
         vertex_data_pointer++;
         char char_number_buffer[1024];
         char* dest_mem_pointer;
