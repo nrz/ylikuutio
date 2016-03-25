@@ -128,6 +128,113 @@ namespace model
         *dest_mem_pointer = '\0';
     }
 
+    bool load_vertex_data(
+            const char* SVG_base_pointer,
+            char*& SVG_data_pointer,
+            std::vector<std::vector<glm::vec3>> &current_glyph_vertices)
+    {
+        // This function returns a pointer to vertex data of a single glyph and advances `SVG_data_pointer`.
+
+        std::vector<glm::vec3> vertices_of_current_edge_section;    // vertices of the current edge section.
+        // d=" was found.
+        // Follow the path and create the vertices accordingly.
+        // TODO: If the glyph does not have path, the vertex data will be empty (space is an example).
+        // std::printf("d=\" found at 0x%lx.\n", (uint64_t) SVG_data_pointer);
+
+        // Find the memory address of the opening double quote.
+        char* opening_double_quote_pointer = strchr(SVG_data_pointer, '"');
+        if (opening_double_quote_pointer != nullptr)
+        {
+            // std::printf("opening \" found at 0x%lx.\n", (uint64_t) opening_double_quote_pointer);
+
+            opening_double_quote_pointer++;
+
+            // Find the memory address of the closing double quote.
+            char* closing_double_quote_pointer = strchr(opening_double_quote_pointer, '"');
+            if (closing_double_quote_pointer != nullptr)
+            {
+                // std::printf("closing \" found at 0x%lx.\n", (uint64_t) closing_double_quote_pointer);
+                closing_double_quote_pointer++;
+
+                glm::vec3 current_vertex;
+                current_vertex.z = 0; // z is not defined in the path (originally these are not 3D fonts!).
+                char char_path[1024];
+
+                model::extract_string(char_path, opening_double_quote_pointer, (char*) "\"");
+
+                std::printf("d: %s\n", char_path);
+
+                // Loop through vertices and push them to `current_glyph_vertices`.
+                char* vertex_data_pointer;
+                vertex_data_pointer = char_path;
+
+                bool keep_reading_path = true;
+
+                while (keep_reading_path)
+                {
+                    if (std::strncmp(vertex_data_pointer, "M", std::strlen("M")) == 0)
+                    {
+                        current_vertex.x = model::extract_value_from_string_with_standard_endings(SVG_base_pointer, vertex_data_pointer,
+                                (const char*) "M (moveto)");
+
+                        while (true)
+                        {
+                            if (std::strncmp(vertex_data_pointer, " ", std::strlen(" ")) == 0)
+                            {
+                                current_vertex.y = model::extract_value_from_string_with_standard_endings(SVG_base_pointer, vertex_data_pointer,
+                                        (const char*) "space (moveto y coordinate)");
+                                vertices_of_current_edge_section.push_back(current_vertex);
+                                break;
+                            } // if (std::strncmp(vertex_data_pointer, " ", std::strlen(" ")) == 0)
+                            vertex_data_pointer++;
+                        } // while (true)
+                    } // if (std::strncmp(vertex_data_pointer, "M", std::strlen("M")) == 0)
+                    else if (std::strncmp(vertex_data_pointer, "h", std::strlen("h")) == 0)
+                    {
+                        // OK, this is horizontal relative lineto.
+                        int32_t horizontal_lineto_value = model::extract_value_from_string_with_standard_endings(SVG_base_pointer, vertex_data_pointer,
+                                (const char*) "h (horizontal relative lineto)");
+                        current_vertex.x += horizontal_lineto_value;
+                        vertices_of_current_edge_section.push_back(current_vertex);
+                    } // else if (std::strncmp(vertex_data_pointer, "h", std::strlen("h")) == 0)
+                    else if (std::strncmp(vertex_data_pointer, "v", std::strlen("v")) == 0)
+                    {
+                        // OK, this is vertical relative lineto.
+                        int32_t vertical_lineto_value = model::extract_value_from_string_with_standard_endings(SVG_base_pointer, vertex_data_pointer,
+                                (const char*) "v (vertical relative lineto)");
+                        current_vertex.y += vertical_lineto_value;
+                        vertices_of_current_edge_section.push_back(current_vertex);
+                    } // else if (std::strncmp(vertex_data_pointer, "v", std::strlen("v")) == 0)
+                    else if (std::strncmp(vertex_data_pointer, "z", std::strlen("z")) == 0)
+                    {
+                        uint64_t offset = (uint64_t) vertex_data_pointer - (uint64_t) SVG_base_pointer;
+                        std::printf("z (closepath) found at file offset 0x%lx (memory address 0x%lx).\n", offset, (uint64_t) vertex_data_pointer);
+                        current_glyph_vertices.push_back(vertices_of_current_edge_section); // store the vertices of the current edge section.
+                        vertices_of_current_edge_section.clear();                           // clear the vector of vertices of the current edge section.
+                        keep_reading_path = false;
+                        break;
+                    } // else if (std::strncmp(vertex_data_pointer, "z", std::strlen("z")) == 0)
+                    else
+                    {
+                        vertex_data_pointer++;
+                    }
+                } // while (keep_reading_path)
+                SVG_data_pointer = ++closing_double_quote_pointer;
+            } // if (closing_double_quote_pointer != nullptr)
+            else
+            {
+                std::cerr << "error: no closing double quote found for d=!\n";
+                return false;
+            }
+        } // if (opening_double_quote_pointer != nullptr)
+        else
+        {
+            std::cerr << "error: no opening double quote found for d=!\n";
+            return false;
+        }
+        return true;
+    }
+
     bool load_SVG_glyph(
             const char* SVG_base_pointer,
             char*& SVG_data_pointer,
@@ -240,103 +347,9 @@ namespace model
             } // else if (std::strncmp(SVG_data_pointer, "unicode=", std::strlen("unicode=")) == 0)
             else if (std::strncmp(SVG_data_pointer, "d=", std::strlen("d=")) == 0)
             {
-                std::vector<glm::vec3> vertices_of_current_edge_section; // vertices of the current edge section.
-                // d=" was found.
-                // Follow the path and create the vertices accordingly.
-                // TODO: If the glyph does not have path, the vertex data will be empty (space is an example).
-                // std::printf("d=\" found at 0x%lx.\n", (uint64_t) SVG_data_pointer);
-
-                // Find the memory address of the opening double quote.
-                char* opening_double_quote_pointer = strchr(SVG_data_pointer, '"');
-                if (opening_double_quote_pointer != nullptr)
+                bool result= model::load_vertex_data(SVG_base_pointer, SVG_data_pointer, current_glyph_vertices);
+                if (result == false)
                 {
-                    // std::printf("opening \" found at 0x%lx.\n", (uint64_t) opening_double_quote_pointer);
-
-                    opening_double_quote_pointer++;
-
-                    // Find the memory address of the closing double quote.
-                    char* closing_double_quote_pointer = strchr(opening_double_quote_pointer, '"');
-                    if (closing_double_quote_pointer != nullptr)
-                    {
-                        // std::printf("closing \" found at 0x%lx.\n", (uint64_t) closing_double_quote_pointer);
-                        has_glyph_vertices = true;
-
-                        closing_double_quote_pointer++;
-
-                        glm::vec3 current_vertex;
-                        current_vertex.z = 0; // z is not defined in the path (originally these are not 3D fonts!).
-                        char char_path[1024];
-
-                        model::extract_string(char_path, opening_double_quote_pointer, (char*) "\"");
-
-                        std::printf("d: %s\n", char_path);
-
-                        // Loop through vertices and push them to `current_glyph_vertices`.
-                        char* vertex_data_pointer;
-                        vertex_data_pointer = char_path;
-
-                        bool keep_reading_path = true;
-
-                        while (keep_reading_path)
-                        {
-                            if (std::strncmp(vertex_data_pointer, "M", std::strlen("M")) == 0)
-                            {
-                                current_vertex.x = model::extract_value_from_string_with_standard_endings(SVG_base_pointer, vertex_data_pointer,
-                                        (const char*) "M (moveto)");
-
-                                while (true)
-                                {
-                                    if (std::strncmp(vertex_data_pointer, " ", std::strlen(" ")) == 0)
-                                    {
-                                        current_vertex.y = model::extract_value_from_string_with_standard_endings(SVG_base_pointer, vertex_data_pointer,
-                                                (const char*) "space (moveto y coordinate)");
-                                        vertices_of_current_edge_section.push_back(current_vertex);
-                                        break;
-                                    } // if (std::strncmp(vertex_data_pointer, " ", std::strlen(" ")) == 0)
-                                    vertex_data_pointer++;
-                                } // while (true)
-                            } // if (std::strncmp(vertex_data_pointer, "M", std::strlen("M")) == 0)
-                            else if (std::strncmp(vertex_data_pointer, "h", std::strlen("h")) == 0)
-                            {
-                                // OK, this is horizontal relative lineto.
-                                int32_t horizontal_lineto_value = model::extract_value_from_string_with_standard_endings(SVG_base_pointer, vertex_data_pointer,
-                                        (const char*) "h (horizontal relative lineto)");
-                                current_vertex.x += horizontal_lineto_value;
-                                vertices_of_current_edge_section.push_back(current_vertex);
-                            } // else if (std::strncmp(vertex_data_pointer, "h", std::strlen("h")) == 0)
-                            else if (std::strncmp(vertex_data_pointer, "v", std::strlen("v")) == 0)
-                            {
-                                // OK, this is vertical relative lineto.
-                                int32_t vertical_lineto_value = model::extract_value_from_string_with_standard_endings(SVG_base_pointer, vertex_data_pointer,
-                                        (const char*) "v (vertical relative lineto)");
-                                current_vertex.y += vertical_lineto_value;
-                                vertices_of_current_edge_section.push_back(current_vertex);
-                            } // else if (std::strncmp(vertex_data_pointer, "v", std::strlen("v")) == 0)
-                            else if (std::strncmp(vertex_data_pointer, "z", std::strlen("z")) == 0)
-                            {
-                                uint64_t offset = (uint64_t) vertex_data_pointer - (uint64_t) SVG_base_pointer;
-                                std::printf("z (closepath) found at file offset 0x%lx (memory address 0x%lx).\n", offset, (uint64_t) vertex_data_pointer);
-                                current_glyph_vertices.push_back(vertices_of_current_edge_section); // store the vertices of the current edge section.
-                                vertices_of_current_edge_section.clear();                           // clear the vector of vertices of the current edge section.
-                                keep_reading_path = false;
-                                break;
-                            } // else if (std::strncmp(vertex_data_pointer, "z", std::strlen("z")) == 0)
-                            else
-                            {
-                                vertex_data_pointer++;
-                            }
-                        } // while (keep_reading_path)
-                        SVG_data_pointer = ++closing_double_quote_pointer;
-                    } // if (closing_double_quote_pointer != nullptr)
-                    else
-                    {
-                        std::cerr << "error: no closing double quote found for d=!\n";
-                        return false;
-                    }
-                } // if (opening_double_quote_pointer != nullptr)
-                else
-                {
-                    std::cerr << "error: no opening double quote found for d=!\n";
                     return false;
                 }
             } // else if (std::strncmp(SVG_data_pointer, "d=", std::strlen("d=")) == 0)

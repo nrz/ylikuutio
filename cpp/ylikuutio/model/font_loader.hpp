@@ -35,6 +35,11 @@ namespace model
             char* &src_mem_pointer,
             char* char_end_string);
 
+    bool load_vertex_data(
+            const char* SVG_base_pointer,
+            char*& SVG_data_pointer,
+            std::vector<std::vector<glm::vec3>> &current_glyph_vertices);
+
     bool load_SVG_glyph(
             const char* SVG_base_pointer,
             char*& SVG_data_pointer,
