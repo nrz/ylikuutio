@@ -344,7 +344,7 @@ namespace model
             } // else if (std::strncmp(SVG_data_pointer, "unicode=", std::strlen("unicode=")) == 0)
             else if (std::strncmp(SVG_data_pointer, "d=", std::strlen("d=")) == 0)
             {
-                bool result= model::load_vertex_data(SVG_base_pointer, SVG_data_pointer, current_glyph_vertices);
+                bool result = model::load_vertex_data(SVG_base_pointer, SVG_data_pointer, current_glyph_vertices);
                 if (result == false)
                 {
                     return false;
