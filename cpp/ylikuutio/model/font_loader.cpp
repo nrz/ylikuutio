@@ -127,17 +127,12 @@ namespace model
                 current_vertex.x = model::extract_value_from_string_with_standard_endings(vertex_data_pointer,
                         (const char*) "M (moveto)");
 
-                while (true)
-                {
-                    if (std::strncmp(vertex_data_pointer, " ", std::strlen(" ")) == 0)
-                    {
-                        current_vertex.y = model::extract_value_from_string_with_standard_endings(vertex_data_pointer,
-                                (const char*) "space (moveto y coordinate)");
-                        vertices_of_current_edge_section.push_back(current_vertex);
-                        break;
-                    } // if (std::strncmp(vertex_data_pointer, " ", std::strlen(" ")) == 0)
-                    vertex_data_pointer++;
-                } // while (true)
+                while (std::strncmp(vertex_data_pointer++, " ", std::strlen(" ")) != 0);
+
+                current_vertex.y = model::extract_value_from_string_with_standard_endings(vertex_data_pointer,
+                        (const char*) "space (moveto y coordinate)");
+                vertices_of_current_edge_section.push_back(current_vertex);
+
             } // if (std::strncmp(vertex_data_pointer, "M", std::strlen("M")) == 0)
             else if (std::strncmp(vertex_data_pointer, "h", std::strlen("h")) == 0)
             {
