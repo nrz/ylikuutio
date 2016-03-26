@@ -317,14 +317,13 @@ namespace model
                     out_glyph_vertex_data.push_back(current_glyph_vertices);
                 } // if (has_glyph_unicode)
                 SVG_data_pointer += std::strlen("/>");
-                break;
+                return true;
             } // else if (std::strncmp(SVG_data_pointer, ">", std::strlen(">")) == 0)
             else
             {
                 SVG_data_pointer++; // Advance to the next byte inside the glyph.
             }
         } // while (true)
-        return true;
     }
 
     bool load_SVG_font(
