@@ -1,6 +1,6 @@
 #include "bilinear_interpolation.hpp"
 #include "triangulation_macros.cpp"
-#include "globals.hpp"
+#include "cpp/ylikuutio/common/globals.hpp"
 
 // Include GLEW
 #ifndef __GL_GLEW_H_INCLUDED

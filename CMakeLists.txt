@@ -195,21 +195,23 @@ add_executable(ajokki
     # common, in alphabetical order
     cpp/ylikuutio/common/any_value.cpp
     cpp/ylikuutio/common/any_value.hpp
-    cpp/ylikuutio/common/bilinear_interpolation.cpp
-    cpp/ylikuutio/common/bilinear_interpolation.hpp
-    cpp/ylikuutio/common/indexing.cpp
-    cpp/ylikuutio/common/indexing.hpp
     cpp/ylikuutio/common/globals.cpp
     cpp/ylikuutio/common/globals.hpp
-    cpp/ylikuutio/common/transformation.cpp
-    cpp/ylikuutio/common/transformation.hpp
-    cpp/ylikuutio/common/triangulation.cpp
-    cpp/ylikuutio/common/triangulation.hpp
-    cpp/ylikuutio/common/triangulation_macros.cpp
 
     # file, in alphabetical order.
     cpp/ylikuutio/file/file_loader.cpp
     cpp/ylikuutio/file/file_loader.hpp
+
+    # geometry, in alphabetical order.
+    cpp/ylikuutio/geometry/bilinear_interpolation.cpp
+    cpp/ylikuutio/geometry/bilinear_interpolation.hpp
+    cpp/ylikuutio/geometry/indexing.cpp
+    cpp/ylikuutio/geometry/indexing.hpp
+    cpp/ylikuutio/geometry/transformation.cpp
+    cpp/ylikuutio/geometry/transformation.hpp
+    cpp/ylikuutio/geometry/triangulation.cpp
+    cpp/ylikuutio/geometry/triangulation.hpp
+    cpp/ylikuutio/geometry/triangulation_macros.cpp
 
     # graph, in alphabetical order.
     cpp/ylikuutio/graph/graph.cpp
@@ -307,16 +309,16 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         cpp/ylikuutio/common/any_value.hpp
         cpp/ylikuutio/common/globals.cpp
         cpp/ylikuutio/common/globals.hpp
-        cpp/ylikuutio/common/transformation.cpp
-        cpp/ylikuutio/common/transformation.hpp
-        cpp/ylikuutio/common/indexing.cpp
-        cpp/ylikuutio/common/indexing.hpp
-        cpp/ylikuutio/common/bilinear_interpolation.cpp
-        cpp/ylikuutio/common/bilinear_interpolation.hpp
-        cpp/ylikuutio/common/triangulation.cpp
-        cpp/ylikuutio/common/triangulation.hpp
         cpp/ylikuutio/file/file_loader.cpp
         cpp/ylikuutio/file/file_loader.hpp
+        cpp/ylikuutio/geometry/bilinear_interpolation.cpp
+        cpp/ylikuutio/geometry/bilinear_interpolation.hpp
+        cpp/ylikuutio/geometry/indexing.cpp
+        cpp/ylikuutio/geometry/indexing.hpp
+        cpp/ylikuutio/geometry/transformation.cpp
+        cpp/ylikuutio/geometry/transformation.hpp
+        cpp/ylikuutio/geometry/triangulation.cpp
+        cpp/ylikuutio/geometry/triangulation.hpp
         cpp/ylikuutio/hierarchy/hierarchy.cpp
         cpp/ylikuutio/hierarchy/hierarchy.hpp
         cpp/ylikuutio/hierarchy/hierarchy_templates.hpp

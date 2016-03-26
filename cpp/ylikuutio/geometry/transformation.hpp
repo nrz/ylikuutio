@@ -1,7 +1,7 @@
 #ifndef __TRANSFORMATION_HPP_INCLUDED
 #define __TRANSFORMATION_HPP_INCLUDED
 
-#include "globals.hpp"
+#include "cpp/ylikuutio/common/globals.hpp"
 
 // Include GLEW
 #ifndef __GL_GLEW_H_INCLUDED
