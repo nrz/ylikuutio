@@ -154,7 +154,42 @@ TEST(font_must_be_loaded_appropriately, kongtext_svg)
     ASSERT_EQ(glyph_vertex_data.at(4).at(0).at(8).y, 512); // v-128
     ASSERT_EQ(glyph_vertex_data.at(4).at(0).at(9).x, 768); // h-128
     ASSERT_EQ(glyph_vertex_data.at(4).at(0).at(9).y, 512);
-    // more vertices...
+    ASSERT_EQ(glyph_vertex_data.at(4).at(0).at(10).x, 768);
+    ASSERT_EQ(glyph_vertex_data.at(4).at(0).at(10).y, 384); // v-128
+    ASSERT_EQ(glyph_vertex_data.at(4).at(0).at(11).x, 896); // h128
+    ASSERT_EQ(glyph_vertex_data.at(4).at(0).at(11).y, 384);
+    ASSERT_EQ(glyph_vertex_data.at(4).at(0).at(12).x, 896);
+    ASSERT_EQ(glyph_vertex_data.at(4).at(0).at(12).y, 256); // v-128
+    ASSERT_EQ(glyph_vertex_data.at(4).at(0).at(13).x, 768); // h-128
+    ASSERT_EQ(glyph_vertex_data.at(4).at(0).at(13).y, 256);
+    ASSERT_EQ(glyph_vertex_data.at(4).at(0).at(14).x, 768);
+    ASSERT_EQ(glyph_vertex_data.at(4).at(0).at(14).y, 128); // v-128
+    ASSERT_EQ(glyph_vertex_data.at(4).at(0).at(15).x, 640); // h-128
+    ASSERT_EQ(glyph_vertex_data.at(4).at(0).at(15).y, 128);
+    ASSERT_EQ(glyph_vertex_data.at(4).at(0).at(16).x, 640);
+    ASSERT_EQ(glyph_vertex_data.at(4).at(0).at(16).y, 256); // v128
+    ASSERT_EQ(glyph_vertex_data.at(4).at(0).at(17).x, 384); // h-256
+    ASSERT_EQ(glyph_vertex_data.at(4).at(0).at(17).y, 256);
+    ASSERT_EQ(glyph_vertex_data.at(4).at(0).at(18).x, 384);
+    ASSERT_EQ(glyph_vertex_data.at(4).at(0).at(18).y, 128); // v-128
+    ASSERT_EQ(glyph_vertex_data.at(4).at(0).at(19).x, 256); // h-128
+    ASSERT_EQ(glyph_vertex_data.at(4).at(0).at(19).y, 128);
+    ASSERT_EQ(glyph_vertex_data.at(4).at(0).at(20).x, 256);
+    ASSERT_EQ(glyph_vertex_data.at(4).at(0).at(20).y, 256); // v128
+    ASSERT_EQ(glyph_vertex_data.at(4).at(0).at(21).x, 128); // h-128
+    ASSERT_EQ(glyph_vertex_data.at(4).at(0).at(21).y, 256);
+    ASSERT_EQ(glyph_vertex_data.at(4).at(0).at(22).x, 128);
+    ASSERT_EQ(glyph_vertex_data.at(4).at(0).at(22).y, 384); // v128
+    ASSERT_EQ(glyph_vertex_data.at(4).at(0).at(23).x, 256); // h128
+    ASSERT_EQ(glyph_vertex_data.at(4).at(0).at(23).y, 384);
+    ASSERT_EQ(glyph_vertex_data.at(4).at(0).at(24).x, 256);
+    ASSERT_EQ(glyph_vertex_data.at(4).at(0).at(24).y, 512); // v128
+    ASSERT_EQ(glyph_vertex_data.at(4).at(0).at(25).x, 128); // h-128
+    ASSERT_EQ(glyph_vertex_data.at(4).at(0).at(25).y, 512);
+    ASSERT_EQ(glyph_vertex_data.at(4).at(0).at(26).x, 128);
+    ASSERT_EQ(glyph_vertex_data.at(4).at(0).at(26).y, 640); // v128
+    ASSERT_EQ(glyph_vertex_data.at(4).at(0).at(27).x, 256); // h128
+    ASSERT_EQ(glyph_vertex_data.at(4).at(0).at(27).y, 640);
     ASSERT_EQ(glyph_vertex_data.at(4).at(0).at(28).x, 256);
     ASSERT_EQ(glyph_vertex_data.at(4).at(0).at(28).y, 768); // v128
     ASSERT_EQ(glyph_vertex_data.at(4).at(1).size(), 5);  // M384 512v-128h256v128h-256z"
