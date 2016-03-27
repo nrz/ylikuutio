@@ -83,11 +83,11 @@ namespace model
     bool load_vertex_data(
             const char* SVG_base_pointer,
             char*& SVG_data_pointer,
-            std::vector<std::vector<glm::vec3>> &current_glyph_vertices)
+            std::vector<std::vector<glm::vec2>> &current_glyph_vertices)
     {
         // This function returns a pointer to vertex data of a single glyph and advances `SVG_data_pointer`.
 
-        std::vector<glm::vec3> vertices_of_current_edge_section;    // vertices of the current edge section.
+        std::vector<glm::vec2> vertices_of_current_edge_section;    // vertices of the current edge section.
         // d=" was found.
         // Follow the path and create the vertices accordingly.
 
@@ -107,8 +107,7 @@ namespace model
             return false;
         }
 
-        glm::vec3 current_vertex;
-        current_vertex.z = 0; // z is not defined in the path (originally these are not 3D fonts!).
+        glm::vec2 current_vertex;
         char char_path[1024];
 
         // copy from opening double quote to the next `"/"`.
@@ -173,14 +172,14 @@ namespace model
     bool load_SVG_glyph(
             const char* SVG_base_pointer,
             char*& SVG_data_pointer,
-            std::vector<std::vector<std::vector<glm::vec3>>> &out_glyph_vertex_data,
+            std::vector<std::vector<std::vector<glm::vec2>>> &out_glyph_vertex_data,
             std::vector<std::string> &glyph_names,
             std::vector<std::string> &unicode_strings)
     {
         // This function loads the next SVG glyph.
         // SVG_base_pointer: pointer to the origin of the SVG data.
         // SVG_data_pointer: pointer to the current reading address (must point to a glyph!).
-        // out_glyph_vertex_data: vector of 3D objects consisting of 1 or more edge sections consisting of glm::vec3 vectors each of which is a vertex of a glyph.
+        // out_glyph_vertex_data: vector of 2D objects consisting of 1 or more edge sections consisting of glm::vec2 vectors each of which is a vertex of a glyph.
         // glyph_names: vector of glyph names.
         // unicode_strings: vector of unicode strings.
 
@@ -188,7 +187,7 @@ namespace model
         // std::printf("<glyph found at 0x%lx.\n", (uint64_t) SVG_data_pointer);
         char char_glyph_name[1024]; // FIXME: risk of buffer overflow.
         char char_unicode[1024];    // FIXME: risk of buffer overflow.
-        std::vector<std::vector<glm::vec3>> current_glyph_vertices; // vertices of the current glyph.
+        std::vector<std::vector<glm::vec2>> current_glyph_vertices; // vertices of the current glyph.
         bool has_glyph_name = false;
         bool has_glyph_unicode = false;
 
@@ -323,7 +322,7 @@ namespace model
 
     bool load_SVG_font(
             std::string font_file_path,
-            std::vector<std::vector<std::vector<glm::vec3>>> &out_glyph_vertex_data,
+            std::vector<std::vector<std::vector<glm::vec2>>> &out_glyph_vertex_data,
             std::vector<std::string> &glyph_names,
             std::vector<std::string> &unicode_strings)
     {

@@ -87,7 +87,7 @@ TEST(font_must_be_loaded_appropriately, kongtext_svg)
 {
     std::string font_filename = "kongtext.svg";
 
-    std::vector<std::vector<std::vector<glm::vec3>>> glyph_vertex_data;
+    std::vector<std::vector<std::vector<glm::vec2>>> glyph_vertex_data;
     std::vector<std::string> glyph_names;
     std::vector<std::string> unicode_strings;
 

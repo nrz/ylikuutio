@@ -14,7 +14,7 @@
 namespace model
 {
     bool load_SVG_font(std::string font_file_path,
-            std::vector<std::vector<std::vector<glm::vec3>>> &out_glyph_vertex_data,
+            std::vector<std::vector<std::vector<glm::vec2>>> &out_glyph_vertex_data,
             std::vector<std::string> &glyph_names,
             std::vector<std::string> &unicode_strings);
 
@@ -30,18 +30,18 @@ namespace model
     bool load_vertex_data(
             const char* SVG_base_pointer,
             char*& SVG_data_pointer,
-            std::vector<std::vector<glm::vec3>> &current_glyph_vertices);
+            std::vector<std::vector<glm::vec2>> &current_glyph_vertices);
 
     bool load_SVG_glyph(
             const char* SVG_base_pointer,
             char*& SVG_data_pointer,
-            std::vector<std::vector<std::vector<glm::vec3>>> &out_glyph_vertex_data,
+            std::vector<std::vector<std::vector<glm::vec2>>> &out_glyph_vertex_data,
             std::vector<std::string> &glyph_names,
             std::vector<std::string> &unicode_strings);
 
     bool load_SVG_font(
             std::string font_file_path,
-            std::vector<std::vector<std::vector<glm::vec3>>> &out_glyph_vertex_data,
+            std::vector<std::vector<std::vector<glm::vec2>>> &out_glyph_vertex_data,
             std::vector<std::string> &glyph_names,
             std::vector<std::string> &unicode_strings);
 }
