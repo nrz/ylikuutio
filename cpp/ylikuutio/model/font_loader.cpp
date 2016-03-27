@@ -128,7 +128,7 @@ namespace model
 
                 while (std::strncmp(vertex_data_pointer++, " ", std::strlen(" ")) != 0);
 
-                current_vertex.y = model::extract_value_from_string_with_standard_endings(vertex_data_pointer,
+                current_vertex.y = model::extract_value_from_string_with_standard_endings(--vertex_data_pointer,
                         (const char*) "space (moveto y coordinate)");
                 vertices_of_current_edge_section.push_back(current_vertex);
 
