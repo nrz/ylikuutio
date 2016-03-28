@@ -84,10 +84,6 @@ namespace model
 
             // The rest fields are created in the constructor.
             glm::mat4 model_matrix;                // model matrix.
-            std::vector<glm::vec3> vertices;       // vertices of the object.
-            std::vector<glm::vec2> UVs;            // UVs of the object.
-            std::vector<glm::vec3> normals;        // normals of the object. not used at the moment.
-
             glm::mat4 MVP_matrix;                  // model view projection matrix.
     };
 
