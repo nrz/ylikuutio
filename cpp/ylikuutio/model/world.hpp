@@ -21,9 +21,10 @@
 #include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
 
-// `World`, `Shader`, `Material`, `Species`, `Object`.
-// `World`, `Shader`, `Material`, `Font`, `Glyph`, `Object`.
-// `World` must be created before any `Shader`. `parent_pointer` must be given to each `Shader`.
+// `World`, `Scene`, `Shader`, `Material`, `Species`, `Object`.
+// `World`, `Scene`, `Shader`, `Material`, `Font`, `Glyph`, `Object`.
+// `World` must be created before any `Scene`. `parent_pointer` must be given to each `Scene`.
+// `Scene` must be created before any `Shader`. `parent_pointer` must be given to each `Shader`.
 // `Shader` must be created before any `Material`. `parent_pointer` must be given to each `Material`.
 // `Material` must be created before any `Species`. `parent_pointer` must be given to each `Species`.
 // `Species` must be create before any `Object` of that `Species`. `parent_pointer` must be given to each `Object` of the `Species`.
@@ -99,6 +100,7 @@
 
 namespace model
 {
+    class Scene;
     class Shader;
 
     class World
@@ -110,15 +112,16 @@ namespace model
             // destructor.
             ~World();
 
-            // this method renders the entire world, one shader at a time.
+            // this method renders the entire world, one scene at a time.
             void render();
 
+            friend class Scene;
             friend class Shader;
             friend class Species;
 
         private:
-            // this method sets a shader pointer.
-            void set_shader_pointer(uint32_t childID, void* parent_pointer);
+            // this method sets a scene pointer.
+            void set_scene_pointer(uint32_t childID, void* parent_pointer);
 
             // this method sets a world species pointer.
             void set_terrain_species_pointer(model::Species* terrain_species_pointer);
@@ -127,8 +130,8 @@ namespace model
 
             void* terrain_species_pointer;              // pointer to world species (used in collision detection).
 
-            std::vector<void*> shader_pointer_vector;
-            std::queue<uint32_t> free_shaderID_queue;
+            std::vector<void*> scene_pointer_vector;
+            std::queue<uint32_t> free_sceneID_queue;
     };
 }
 

@@ -25,7 +25,7 @@
 
 namespace model
 {
-    class World;
+    class Scene;
     class Object;
 
     class Shader
@@ -37,10 +37,10 @@ namespace model
             // destructor.
             ~Shader();
 
-            // this method sets pointer to this shader to nullptr, sets `parent_pointer` according to the input, and requests a new `childID` from the new world.
-            void bind_to_new_parent(model::World *new_scene_pointer);
+            // this method sets pointer to this shader to nullptr, sets `parent_pointer` according to the input, and requests a new `childID` from the new scene.
+            void bind_to_new_parent(model::Scene *new_scene_pointer);
 
-            friend class World;
+            friend class Scene;
             friend class Material;
             friend class Glyph;
             friend class Species;
@@ -60,10 +60,10 @@ namespace model
             // this method sets a texture pointer.
             void set_texture_pointer(uint32_t childID, void* parent_pointer);
 
-            // this method sets a world species pointer.
+            // this method sets a scene species pointer.
             void set_terrain_species_pointer(model::Species* terrain_species_pointer);
 
-            model::World* parent_pointer;         // pointer to the world.
+            model::Scene* parent_pointer;         // pointer to the scene.
 
             GLuint programID;                     // shaders' programID, returned by `LoadShaders`.
 
@@ -73,9 +73,9 @@ namespace model
 
             void bind_to_parent();
 
-            model::Species* terrain_species_pointer; // pointer to world species (used in collision detection).
+            model::Species* terrain_species_pointer; // pointer to scene species (used in collision detection).
 
-            uint32_t childID;                     // shader ID, returned by `model::World->get_shaderID()`.
+            uint32_t childID;                     // shader ID, returned by `model::Scene->get_shaderID()`.
 
             std::string vertex_shader;            // filename of vertex shader.
             std::string fragment_shader;          // filename of fragment shader.

@@ -27,7 +27,7 @@ namespace model
         this->char_fragment_shader = this->fragment_shader.c_str();
         this->parent_pointer       = shader_struct.parent_pointer;
 
-        // get childID from the World and set pointer to this Shader.
+        // get childID from the Scene and set pointer to this Shader.
         this->bind_to_parent();
 
         // Create and compile our GLSL program from the shaders.
@@ -70,14 +70,14 @@ namespace model
         hierarchy::set_child_pointer(childID, parent_pointer, this->texture_pointer_vector, this->free_textureID_queue);
     }
 
-    void Shader::bind_to_new_parent(model::World *new_scene_pointer)
+    void Shader::bind_to_new_parent(model::Scene *new_scene_pointer)
     {
-        hierarchy::bind_child_to_new_parent<model::Shader*, model::World*>(this, new_scene_pointer, this->parent_pointer->shader_pointer_vector, this->parent_pointer->free_shaderID_queue);
+        hierarchy::bind_child_to_new_parent<model::Shader*, model::Scene*>(this, new_scene_pointer, this->parent_pointer->shader_pointer_vector, this->parent_pointer->free_shaderID_queue);
     }
 
     void Shader::set_terrain_species_pointer(model::Species* terrain_species_pointer)
     {
         this->terrain_species_pointer = terrain_species_pointer;
-        this->parent_pointer->set_terrain_species_pointer(this->terrain_species_pointer);
+        this->parent_pointer->parent_pointer->set_terrain_species_pointer(this->terrain_species_pointer);
     }
 }

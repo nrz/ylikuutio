@@ -18,6 +18,7 @@
 #include "cpp/ylikuutio/model/text2D.hpp"
 #include "cpp/ylikuutio/model/text3D.hpp"
 #include "cpp/ylikuutio/model/world.hpp"
+#include "cpp/ylikuutio/model/scene.hpp"
 #include "cpp/ylikuutio/model/shader.hpp"
 #include "cpp/ylikuutio/model/material.hpp"
 #include "cpp/ylikuutio/model/font.hpp"
@@ -209,9 +210,11 @@ int main(void)
     callback_system::CallbackParameter* callback_parameter = new callback_system::CallbackParameter("", my_world_value, false, callback_object);
     callback_object->set_new_callback(&full_cleanup);
 
+    model::Scene* my_scene = new model::Scene(my_world);
+
     // Create the shader, store it in `my_shader`.
     ShaderStruct shader_struct;
-    shader_struct.parent_pointer = my_world;
+    shader_struct.parent_pointer = my_scene;
     shader_struct.vertex_shader = "StandardShading.vertexshader";
     shader_struct.fragment_shader = "StandardShading.fragmentshader";
     model::Shader* my_shader = new model::Shader(shader_struct);

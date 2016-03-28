@@ -246,6 +246,8 @@ add_executable(ajokki
     cpp/ylikuutio/model/objloader.cpp
     cpp/ylikuutio/model/objloader.hpp
     cpp/ylikuutio/model/render_templates.hpp
+    cpp/ylikuutio/model/scene.cpp
+    cpp/ylikuutio/model/scene.hpp
     cpp/ylikuutio/model/shader.cpp
     cpp/ylikuutio/model/shader.hpp
     cpp/ylikuutio/model/shader_loader.cpp

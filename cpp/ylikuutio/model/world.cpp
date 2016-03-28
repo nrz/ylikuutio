@@ -8,8 +8,8 @@
 #endif
 
 #include "world.hpp"
+#include "scene.hpp"
 #include "ground_level.hpp"
-#include "shader.hpp"
 #include "render_templates.hpp"
 #include "cpp/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
@@ -37,22 +37,22 @@ namespace model
         // destructor.
         std::cout << "This world will be destroyed.\n";
 
-        // destroy all shaders of this world.
-        std::cout << "All shaders of this world will be destroyed.\n";
-        hierarchy::delete_children<model::Shader*>(this->shader_pointer_vector);
+        // destroy all scenes of this world.
+        std::cout << "All scenes of this world will be destroyed.\n";
+        hierarchy::delete_children<model::Scene*>(this->scene_pointer_vector);
     }
 
     void World::render()
     {
         this->compute_matrices_from_inputs();
 
-        // render World by calling `render()` function of each Shader.
-        model::render_children<model::Shader*>(this->shader_pointer_vector);
+        // render World by calling `render()` function of each Scene.
+        model::render_children<model::Scene*>(this->scene_pointer_vector);
     }
 
-    void World::set_shader_pointer(uint32_t childID, void* parent_pointer)
+    void World::set_scene_pointer(uint32_t childID, void* parent_pointer)
     {
-        hierarchy::set_child_pointer(childID, parent_pointer, this->shader_pointer_vector, this->free_shaderID_queue);
+        hierarchy::set_child_pointer(childID, parent_pointer, this->scene_pointer_vector, this->free_sceneID_queue);
     }
 
     void World::set_terrain_species_pointer(model::Species* terrain_species_pointer)

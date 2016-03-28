@@ -107,6 +107,7 @@ extern glm::vec3 camera_position;
 namespace model
 {
     class World;
+    class Scene;
     class Shader;
     class Graph;
     class Material;
@@ -122,7 +123,7 @@ typedef struct ShaderStruct
     {
         // constructor.
     }
-    model::World* parent_pointer; // pointer to the world (draw list).
+    model::Scene* parent_pointer; // pointer to the scene (draw list).
     std::string vertex_shader;    // filename of vertex shader.
     std::string fragment_shader;  // filename of fragment shader.
 } ShaderStruct;
