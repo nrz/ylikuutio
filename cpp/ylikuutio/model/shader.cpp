@@ -1,10 +1,12 @@
 #include "shader.hpp"
-#include "world.hpp"
+#include "scene.hpp"
 #include "material.hpp"
 #include "render_templates.hpp"
 #include "cpp/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include standard headers
+#include <iostream> // std::cout, std::cin, std::cerr
+#include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 
 namespace model

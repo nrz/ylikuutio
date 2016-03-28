@@ -16,9 +16,10 @@
 #endif
 
 // Include standard headers
-#include <iostream>  // std::cout, std::cin, std::cerr
-#include <vector>    // std::vector
-#include <queue>     // std::queue
+#include <iostream> // std::cout, std::cin, std::cerr
+#include <queue>    // std::queue
+#include <stdint.h> // uint32_t etc.
+#include <vector>   // std::vector
 
 // `World`, `Shader`, `Material`, `Species`, `Object`.
 // `World`, `Shader`, `Material`, `Font`, `Glyph`, `Object`.

@@ -35,8 +35,9 @@
 #endif
 
 // Include standard headers
-#include <vector>    // std::vector
-#include <queue>     // std::queue
+#include <queue>    // std::queue
+#include <stdint.h> // uint32_t etc.
+#include <vector>   // std::vector
 
 namespace model
 {

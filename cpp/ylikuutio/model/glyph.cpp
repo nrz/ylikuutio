@@ -3,6 +3,10 @@
 #include "render_templates.hpp"
 #include "cpp/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
+// Include standard headers
+#include <stdint.h> // uint32_t etc.
+#include <iostream> // std::cout, std::cin, std::cerr
+
 namespace model
 {
     void Glyph::bind_to_parent()
