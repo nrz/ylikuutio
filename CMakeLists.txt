@@ -207,6 +207,8 @@ add_executable(ajokki
     cpp/ylikuutio/geometry/bilinear_interpolation.hpp
     cpp/ylikuutio/geometry/indexing.cpp
     cpp/ylikuutio/geometry/indexing.hpp
+    cpp/ylikuutio/geometry/line.cpp
+    cpp/ylikuutio/geometry/line.hpp
     cpp/ylikuutio/geometry/line_line_intersection.cpp
     cpp/ylikuutio/geometry/line_line_intersection.hpp
     cpp/ylikuutio/geometry/line_segment_intersection.cpp
