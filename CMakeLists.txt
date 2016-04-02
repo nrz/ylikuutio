@@ -209,6 +209,8 @@ add_executable(ajokki
     cpp/ylikuutio/geometry/indexing.hpp
     cpp/ylikuutio/geometry/line.cpp
     cpp/ylikuutio/geometry/line.hpp
+    cpp/ylikuutio/geometry/line2D.cpp
+    cpp/ylikuutio/geometry/line2D.hpp
     cpp/ylikuutio/geometry/line_line_intersection.cpp
     cpp/ylikuutio/geometry/line_line_intersection.hpp
     cpp/ylikuutio/geometry/line_segment.cpp
