@@ -33,6 +33,10 @@ namespace callback_system
     }
 
     // getter functions for callbacks and callback objects.
+    datatypes::AnyValue CallbackEngine::get_any_value(std::string name)
+    {
+        return this->anyvalue_hashmap[name];
+    }
 
     bool CallbackEngine::get_bool(std::string name)
     {

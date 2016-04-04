@@ -25,4 +25,42 @@ namespace string
         }
         return false;
     }
+
+    void extract_string_with_several_endings(char* dest_mem_pointer, char*& src_mem_pointer, char* char_end_string)
+    {
+        // This function copies characters from `src_mem_pointer` until a character matches.
+
+        while (true)
+        {
+            uint32_t n_of_ending_characters = std::strlen(char_end_string);
+            char* end_char_pointer;
+            end_char_pointer = char_end_string;
+
+            // Check if current character is any of the ending characters.
+            while (*end_char_pointer != '\0')
+            {
+                if (std::strncmp(src_mem_pointer, end_char_pointer, 1) == 0)
+                {
+                    *dest_mem_pointer = '\0';
+                    return;
+                }
+                end_char_pointer++;
+            }
+
+            // OK, current character is not any of the ending characters.
+            // Copy it and advance the pointers accordingly.
+            strncpy(dest_mem_pointer++, src_mem_pointer++, 1);
+        }
+    }
+
+    int32_t extract_value_from_string(char*& vertex_data_pointer, char* char_end_string, const char* description)
+    {
+        char char_number_buffer[1024]; // FIXME: risk of buffer overflow.
+        char* dest_mem_pointer;
+        dest_mem_pointer = char_number_buffer;
+        string::extract_string_with_several_endings(dest_mem_pointer, ++vertex_data_pointer, char_end_string);
+        uint32_t value = std::atoi(dest_mem_pointer);
+        std::printf("%s: %d\n", description, value);
+        return value;
+    }
 }

@@ -18,6 +18,7 @@
 #include "cpp/ylikuutio/model/text2D.hpp"
 #include "cpp/ylikuutio/model/text3D.hpp"
 #include "cpp/ylikuutio/model/world.hpp"
+#include "cpp/ylikuutio/model/scene.hpp"
 #include "cpp/ylikuutio/model/shader.hpp"
 #include "cpp/ylikuutio/model/material.hpp"
 #include "cpp/ylikuutio/model/font.hpp"
@@ -90,13 +91,13 @@ std::string g_font_texture_filename = "Holstein.bmp";
 std::string g_font_file_format = "svg";
 std::string g_font_filename = "kongtext.svg";
 
-datatypes::AnyValue* glfwTerminate_cleanup(std::vector<callback_system::CallbackParameter*> input_parameters)
+datatypes::AnyValue* glfwTerminate_cleanup(callback_system::CallbackEngine*, std::vector<callback_system::CallbackParameter*> input_parameters)
 {
     glfwTerminate();
     return nullptr;
 }
 
-datatypes::AnyValue* full_cleanup(std::vector<callback_system::CallbackParameter*> input_parameters)
+datatypes::AnyValue* full_cleanup(callback_system::CallbackEngine*, std::vector<callback_system::CallbackParameter*> input_parameters)
 {
     std::cout << "Cleaning up.\n";
 
@@ -149,8 +150,8 @@ int main(void)
     // initialFoV = 45.0f;
     initialFoV = 60.0f;
 
-    callback_system::CallbackEngine* callback_engine = new callback_system::CallbackEngine();
-    callback_system::CallbackObject* callback_object = new callback_system::CallbackObject(nullptr, callback_engine);
+    callback_system::CallbackEngine* cleanup_callback_engine = new callback_system::CallbackEngine();
+    callback_system::CallbackObject* callback_object = new callback_system::CallbackObject(nullptr, cleanup_callback_engine);
 
     bool does_suzanne_species_exist = true;
     bool does_suzanne_species_have_uvmap_texture = true;
@@ -174,7 +175,7 @@ int main(void)
     if (window == nullptr)
     {
         std::cerr << "Failed to open GLFW window.\n";
-        callback_engine->execute();
+        cleanup_callback_engine->execute();
         return -1;
     }
     glfwMakeContextCurrent(window);
@@ -183,7 +184,7 @@ int main(void)
     if (glewInit() != GLEW_OK)
     {
         std::cerr << "Failed to initialize GLEW.\n";
-        callback_engine->execute();
+        cleanup_callback_engine->execute();
         return -1;
     }
 
@@ -209,9 +210,11 @@ int main(void)
     callback_system::CallbackParameter* callback_parameter = new callback_system::CallbackParameter("", my_world_value, false, callback_object);
     callback_object->set_new_callback(&full_cleanup);
 
+    model::Scene* my_scene = new model::Scene(my_world);
+
     // Create the shader, store it in `my_shader`.
     ShaderStruct shader_struct;
-    shader_struct.parent_pointer = my_world;
+    shader_struct.parent_pointer = my_scene;
     shader_struct.vertex_shader = "StandardShading.vertexshader";
     shader_struct.fragment_shader = "StandardShading.fragmentshader";
     model::Shader* my_shader = new model::Shader(shader_struct);
@@ -503,8 +506,6 @@ int main(void)
             && (glfwWindowShouldClose(window) == 0));
 
     // do cleanup.
-    callback_engine->execute();
-    delete my_world_value;
-
+    cleanup_callback_engine->execute();
     return 0;
 }

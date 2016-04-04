@@ -195,21 +195,33 @@ add_executable(ajokki
     # common, in alphabetical order
     cpp/ylikuutio/common/any_value.cpp
     cpp/ylikuutio/common/any_value.hpp
-    cpp/ylikuutio/common/bilinear_interpolation.cpp
-    cpp/ylikuutio/common/bilinear_interpolation.hpp
-    cpp/ylikuutio/common/indexing.cpp
-    cpp/ylikuutio/common/indexing.hpp
     cpp/ylikuutio/common/globals.cpp
     cpp/ylikuutio/common/globals.hpp
-    cpp/ylikuutio/common/transformation.cpp
-    cpp/ylikuutio/common/transformation.hpp
-    cpp/ylikuutio/common/triangulation.cpp
-    cpp/ylikuutio/common/triangulation.hpp
-    cpp/ylikuutio/common/triangulation_macros.cpp
 
     # file, in alphabetical order.
     cpp/ylikuutio/file/file_loader.cpp
     cpp/ylikuutio/file/file_loader.hpp
+
+    # geometry, in alphabetical order.
+    cpp/ylikuutio/geometry/bilinear_interpolation.cpp
+    cpp/ylikuutio/geometry/bilinear_interpolation.hpp
+    cpp/ylikuutio/geometry/indexing.cpp
+    cpp/ylikuutio/geometry/indexing.hpp
+    cpp/ylikuutio/geometry/line.cpp
+    cpp/ylikuutio/geometry/line.hpp
+    cpp/ylikuutio/geometry/line2D.cpp
+    cpp/ylikuutio/geometry/line2D.hpp
+    cpp/ylikuutio/geometry/line_line_intersection.cpp
+    cpp/ylikuutio/geometry/line_line_intersection.hpp
+    cpp/ylikuutio/geometry/line_segment.cpp
+    cpp/ylikuutio/geometry/line_segment.hpp
+    cpp/ylikuutio/geometry/line_segment_intersection.cpp
+    cpp/ylikuutio/geometry/line_segment_intersection.hpp
+    cpp/ylikuutio/geometry/transformation.cpp
+    cpp/ylikuutio/geometry/transformation.hpp
+    cpp/ylikuutio/geometry/triangulation.cpp
+    cpp/ylikuutio/geometry/triangulation.hpp
+    cpp/ylikuutio/geometry/triangulation_macros.cpp
 
     # graph, in alphabetical order.
     cpp/ylikuutio/graph/graph.cpp
@@ -240,6 +252,8 @@ add_executable(ajokki
     cpp/ylikuutio/model/objloader.cpp
     cpp/ylikuutio/model/objloader.hpp
     cpp/ylikuutio/model/render_templates.hpp
+    cpp/ylikuutio/model/scene.cpp
+    cpp/ylikuutio/model/scene.hpp
     cpp/ylikuutio/model/shader.cpp
     cpp/ylikuutio/model/shader.hpp
     cpp/ylikuutio/model/shader_loader.cpp
@@ -307,19 +321,21 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         cpp/ylikuutio/common/any_value.hpp
         cpp/ylikuutio/common/globals.cpp
         cpp/ylikuutio/common/globals.hpp
-        cpp/ylikuutio/common/transformation.cpp
-        cpp/ylikuutio/common/transformation.hpp
-        cpp/ylikuutio/common/indexing.cpp
-        cpp/ylikuutio/common/indexing.hpp
-        cpp/ylikuutio/common/bilinear_interpolation.cpp
-        cpp/ylikuutio/common/bilinear_interpolation.hpp
-        cpp/ylikuutio/common/triangulation.cpp
-        cpp/ylikuutio/common/triangulation.hpp
         cpp/ylikuutio/file/file_loader.cpp
         cpp/ylikuutio/file/file_loader.hpp
+        cpp/ylikuutio/geometry/bilinear_interpolation.cpp
+        cpp/ylikuutio/geometry/bilinear_interpolation.hpp
+        cpp/ylikuutio/geometry/indexing.cpp
+        cpp/ylikuutio/geometry/indexing.hpp
+        cpp/ylikuutio/geometry/transformation.cpp
+        cpp/ylikuutio/geometry/transformation.hpp
+        cpp/ylikuutio/geometry/triangulation.cpp
+        cpp/ylikuutio/geometry/triangulation.hpp
         cpp/ylikuutio/hierarchy/hierarchy.cpp
         cpp/ylikuutio/hierarchy/hierarchy.hpp
         cpp/ylikuutio/hierarchy/hierarchy_templates.hpp
+        cpp/ylikuutio/model/font_loader.cpp
+        cpp/ylikuutio/model/font_loader.hpp
         cpp/ylikuutio/string/ylikuutio_string.cpp
         cpp/ylikuutio/string/ylikuutio_string.hpp
         )
@@ -327,6 +343,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         cpp/ylikuutio/tests/googletest/test_any_value.cpp
         cpp/ylikuutio/tests/googletest/test_callback_system.cpp
         cpp/ylikuutio/tests/googletest/test_file_loader.cpp
+        cpp/ylikuutio/tests/googletest/test_font_loader.cpp
         cpp/ylikuutio/tests/googletest/test_globals.cpp
         cpp/ylikuutio/tests/googletest/test_heightmap_loader.cpp
         cpp/ylikuutio/tests/googletest/test_triangulation.cpp

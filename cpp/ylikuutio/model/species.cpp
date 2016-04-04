@@ -3,6 +3,9 @@
 #include "heightmap_loader.hpp"
 #include "vboindexer.hpp"
 #include "world.hpp"
+#include "scene.hpp"
+#include "shader.hpp"
+#include "material.hpp"
 #include "object.hpp"
 #include "render_templates.hpp"
 #include "cpp/ylikuutio/hierarchy/hierarchy_templates.hpp"
@@ -14,7 +17,9 @@
 #endif
 
 // Include standard headers
-#include <cstring> // std::memcmp, std::strcmp, std::strlen, std::strncmp
+#include <cstring>  // std::memcmp, std::strcmp, std::strlen, std::strncmp
+#include <iostream> // std::cout, std::cin, std::cerr
+#include <stdint.h> // uint32_t etc.
 
 namespace model
 {
@@ -113,7 +118,7 @@ namespace model
         {
             // set world species pointer so that it points to this species.
             // currently there can be only one world species (used in collision detection).
-            this->parent_pointer->parent_pointer->parent_pointer->set_terrain_species_pointer(this);
+            this->parent_pointer->parent_pointer->parent_pointer->parent_pointer->set_terrain_species_pointer(this);
         }
 
         // Compute the graph of this object type.

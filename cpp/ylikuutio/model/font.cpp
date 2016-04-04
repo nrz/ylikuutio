@@ -6,7 +6,9 @@
 #include "glyph.hpp"
 
 // Include standard headers
-#include <cstring> // std::memcmp, std::strcmp, std::strlen, std::strncmp
+#include <cstring>  // std::memcmp, std::strcmp, std::strlen, std::strncmp
+#include <iostream> // std::cout, std::cin, std::cerr
+#include <stdint.h> // uint32_t etc.
 
 namespace model
 {
@@ -37,11 +39,8 @@ namespace model
             font_loading_result = model::load_SVG_font(
                     this->font_filename,
                     this->glyph_vertex_data,
-                    this->glyph_UV_data,
-                    this->glyph_normal_data,
                     this->glyph_names,
-                    this->unicode_strings,
-                    this->vertex_scaling_factor);
+                    this->unicode_strings);
         }
 
         // Font constructor also creates each Glyph and binds them to the Font.

@@ -8,9 +8,10 @@
 
 // Include standard headers
 #include <iostream> // std::cout, std::cin, std::cerr
+#include <queue>    // std::queue
+#include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 #include <vector>   // std::vector
-#include <queue>    // std::queue
 
 namespace model
 {
@@ -58,9 +59,9 @@ namespace model
             const char* char_font_file_format;
             const char* char_font_filename;
 
-            std::vector<std::vector<glm::vec3>> glyph_vertex_data;
+            std::vector<std::vector<std::vector<glm::vec2>>> glyph_vertex_data;
             std::vector<std::vector<glm::vec2>> glyph_UV_data;
-            std::vector<std::vector<glm::vec3>> glyph_normal_data;
+            std::vector<std::vector<glm::vec2>> glyph_normal_data;
             std::vector<std::string> glyph_names;
             std::vector<std::string> unicode_strings;
 

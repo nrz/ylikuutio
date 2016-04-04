@@ -12,6 +12,11 @@
 #include <GL/glew.h> // GLfloat, GLuint etc.
 #endif
 
+// Include standard headers
+#include <queue>    // std::queue
+#include <stdint.h> // uint32_t etc.
+#include <vector>   // std::vector
+
 namespace model
 {
     class Object;

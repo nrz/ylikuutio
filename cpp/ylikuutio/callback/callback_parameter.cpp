@@ -26,6 +26,9 @@ namespace callback_system
         // destructor.
         std::cout << "Callback parameter with childID " << this->childID << " will be destroyed.\n";
 
+        // destroy AnyValue.
+        delete this->any_value;
+
         // set pointer to this object to nullptr.
         this->parent_pointer->set_callback_parameter_pointer(this->childID, nullptr);
     }
