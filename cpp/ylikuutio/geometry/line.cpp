@@ -1,6 +1,7 @@
 #include "line.hpp"
 
 // Include standard headers
+#include <cmath>     // NAN, std::isnan, std::pow
 #include <string>    // std::string
 
 namespace geometry
@@ -10,6 +11,8 @@ namespace geometry
         if (point1 == point2)
         {
             this->is_valid = false; // two identical points do not define a line.
+            this->general_form_coefficients.push_back(NAN);
+            this->general_form_constant = NAN;
         }
         else
         {
