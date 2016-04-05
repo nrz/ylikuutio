@@ -1,12 +1,20 @@
 #include "line.hpp"
 
 // Include standard headers
-#include <string>   // std::string
+#include <string>    // std::string
 
 namespace geometry
 {
     Line::Line(std::vector<float> point1, std::vector<float> point2)
     {
+        if (point1 == point2)
+        {
+            this->is_valid = false; // two identical points do not define a line.
+        }
+        else
+        {
+            this->is_valid = true; // two distinct points define a line.
+        }
     }
 
     Line::Line(std::vector<float> general_form_coefficients, float general_form_constant)

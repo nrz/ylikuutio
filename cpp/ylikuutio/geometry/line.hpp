@@ -21,6 +21,7 @@ namespace geometry
         protected:
             std::vector<float> general_form_coefficients;
             float general_form_constant;
+            bool is_valid;
     };
 }
 
