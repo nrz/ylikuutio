@@ -66,7 +66,7 @@ namespace model
         glDeleteTextures(1, &this->texture);
 
         // set pointer to this material to nullptr.
-        this->parent_pointer->set_texture_pointer(this->childID, nullptr);
+        this->parent_pointer->set_material_pointer(this->childID, nullptr);
     }
 
     void Material::render()

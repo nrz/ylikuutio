@@ -58,7 +58,7 @@ namespace model
             void render();
 
             // this method sets a texture pointer.
-            void set_texture_pointer(uint32_t childID, void* parent_pointer);
+            void set_material_pointer(uint32_t childID, void* parent_pointer);
 
             // this method sets a scene species pointer.
             void set_terrain_species_pointer(model::Species* terrain_species_pointer);

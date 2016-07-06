@@ -65,7 +65,7 @@ namespace model
         model::render_children<model::Material*>(this->texture_pointer_vector);
     }
 
-    void Shader::set_texture_pointer(uint32_t childID, void* parent_pointer)
+    void Shader::set_material_pointer(uint32_t childID, void* parent_pointer)
     {
         hierarchy::set_child_pointer(childID, parent_pointer, this->texture_pointer_vector, this->free_textureID_queue);
     }
