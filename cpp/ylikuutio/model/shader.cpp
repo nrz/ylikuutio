@@ -45,7 +45,7 @@ namespace model
         std::cout << "Shader with childID " << this->childID << " will be destroyed.\n";
 
         // destroy all materials of this shader.
-        std::cout << "All textures of this shader will be destroyed.\n";
+        std::cout << "All materials of this shader will be destroyed.\n";
         hierarchy::delete_children<model::Material*>(this->texture_pointer_vector);
 
         // set pointer to this shader to nullptr.

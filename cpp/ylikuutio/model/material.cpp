@@ -56,11 +56,11 @@ namespace model
         std::cout << "Material with childID " << this->childID << " will be destroyed.\n";
 
         // destroy all species of this material.
-        std::cout << "All species of this texture will be destroyed.\n";
+        std::cout << "All species of this material will be destroyed.\n";
         hierarchy::delete_children<model::Species*>(this->species_pointer_vector);
 
         // destroy all fonts of this material.
-        std::cout << "All fonts of this texture will be destroyed.\n";
+        std::cout << "All fonts of this material will be destroyed.\n";
         hierarchy::delete_children<model::Font*>(this->font_pointer_vector);
 
         glDeleteTextures(1, &this->texture);
