@@ -55,26 +55,26 @@ namespace model
         // destructor.
         std::cout << "Material with childID " << this->childID << " will be destroyed.\n";
 
-        // destroy all species of this texture.
+        // destroy all species of this material.
         std::cout << "All species of this texture will be destroyed.\n";
         hierarchy::delete_children<model::Species*>(this->species_pointer_vector);
 
-        // destroy all fonts of this texture.
+        // destroy all fonts of this material.
         std::cout << "All fonts of this texture will be destroyed.\n";
         hierarchy::delete_children<model::Font*>(this->font_pointer_vector);
 
         glDeleteTextures(1, &this->texture);
 
-        // set pointer to this texture to nullptr.
+        // set pointer to this material to nullptr.
         this->parent_pointer->set_texture_pointer(this->childID, nullptr);
     }
 
     void Material::render()
     {
-        // Bind our texture in Material Unit 0.
+        // Bind our texture in Texture Unit 0.
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, this->texture);
-        // Set our "myTextureSampler" sampler to user Material Unit 0.
+        // Set our "myTextureSampler" sampler to user Texture Unit 0.
         glUniform1i(this->openGL_textureID, 0);
 
         // render Material by calling `render()` function of each Species and of each Font.
