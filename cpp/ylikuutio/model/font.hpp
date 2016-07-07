@@ -30,7 +30,7 @@ namespace model
             void set_glyph_pointer(uint32_t childID, void* parent_pointer);
 
             // this method sets pointer to this species to nullptr, sets `parent_pointer` according to the input, and requests a new `childID` from the new texture.
-            void bind_to_new_parent(model::Material *new_texture_pointer);
+            void bind_to_new_parent(model::Material *new_material_pointer);
 
             // The rest fields are created in the constructor.
             uint32_t image_width;

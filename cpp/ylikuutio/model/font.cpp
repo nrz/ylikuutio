@@ -68,8 +68,8 @@ namespace model
         hierarchy::set_child_pointer(childID, parent_pointer, this->glyph_pointer_vector, this->free_glyphID_queue);
     }
 
-    void Font::bind_to_new_parent(model::Material *new_texture_pointer)
+    void Font::bind_to_new_parent(model::Material *new_material_pointer)
     {
-        hierarchy::bind_child_to_new_parent<model::Font*, model::Material*>(this, new_texture_pointer, this->parent_pointer->font_pointer_vector, this->parent_pointer->free_fontID_queue);
+        hierarchy::bind_child_to_new_parent<model::Font*, model::Material*>(this, new_material_pointer, this->parent_pointer->font_pointer_vector, this->parent_pointer->free_fontID_queue);
     }
 }
