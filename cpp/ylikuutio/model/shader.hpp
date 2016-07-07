@@ -80,7 +80,7 @@ namespace model
             std::string vertex_shader;            // filename of vertex shader.
             std::string fragment_shader;          // filename of fragment shader.
 
-            std::vector<void*> texture_pointer_vector;
+            std::vector<void*> material_pointer_vector;
             std::queue<uint32_t> free_textureID_queue;
 
             const char* char_vertex_shader;
