@@ -54,10 +54,10 @@ namespace model
                 friend void render_this_object(model::Object* object_pointer, model::Shader* shader_pointer);
 
         private:
-            // this method renders all textures using this shader.
+            // this method renders all materials using this shader.
             void render();
 
-            // this method sets a texture pointer.
+            // this method sets a material pointer.
             void set_material_pointer(uint32_t childID, void* parent_pointer);
 
             // this method sets a scene species pointer.
