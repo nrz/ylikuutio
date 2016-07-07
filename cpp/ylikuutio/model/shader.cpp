@@ -67,7 +67,7 @@ namespace model
 
     void Shader::set_material_pointer(uint32_t childID, void* parent_pointer)
     {
-        hierarchy::set_child_pointer(childID, parent_pointer, this->material_pointer_vector, this->free_textureID_queue);
+        hierarchy::set_child_pointer(childID, parent_pointer, this->material_pointer_vector, this->free_materialID_queue);
     }
 
     void Shader::bind_to_new_parent(model::Scene *new_scene_pointer)

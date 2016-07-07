@@ -14,7 +14,7 @@ namespace model
 {
     void Material::bind_to_parent()
     {
-        hierarchy::bind_child_to_parent<model::Material*>(this, this->parent_pointer->material_pointer_vector, this->parent_pointer->free_textureID_queue);
+        hierarchy::bind_child_to_parent<model::Material*>(this, this->parent_pointer->material_pointer_vector, this->parent_pointer->free_materialID_queue);
     }
 
     Material::Material(MaterialStruct material_struct)
@@ -89,7 +89,7 @@ namespace model
 
     void Material::bind_to_new_parent(model::Shader *new_shader_pointer)
     {
-        hierarchy::bind_child_to_new_parent<model::Material*, model::Shader*>(this, new_shader_pointer, this->parent_pointer->material_pointer_vector, this->parent_pointer->free_textureID_queue);
+        hierarchy::bind_child_to_new_parent<model::Material*, model::Shader*>(this, new_shader_pointer, this->parent_pointer->material_pointer_vector, this->parent_pointer->free_materialID_queue);
     }
 
     void Material::set_terrain_species_pointer(model::Species* terrain_species_pointer)
