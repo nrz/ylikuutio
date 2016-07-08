@@ -43,7 +43,7 @@ namespace model
                     this->unicode_strings);
         }
 
-        // Font constructor also creates each Glyph and binds them to the Font.
+        // TODO: `Font` constructor also creates each `Glyph` and binds them to the `Font`.
         // TODO: implement creation of each Glyph!
     }
 

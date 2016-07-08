@@ -21,6 +21,7 @@ namespace model
     {
         public:
             // constructor.
+            // TODO: `Font` constructor also creates each `Glyph` and binds them to the `Font`.
             Font(FontStruct font_struct);
 
             // destructor.
@@ -29,14 +30,14 @@ namespace model
             // this method sets a glyph pointer.
             void set_glyph_pointer(uint32_t childID, void* parent_pointer);
 
-            // this method sets pointer to this species to nullptr, sets `parent_pointer` according to the input, and requests a new `childID` from the new texture.
+            // this method sets pointer to this species to nullptr, sets `parent_pointer` according to the input, and requests a new `childID` from the new material.
             void bind_to_new_parent(model::Material *new_material_pointer);
 
             // The rest fields are created in the constructor.
             uint32_t image_width;
             uint32_t image_height;
 
-            model::Material* parent_pointer;       // pointer to the texture.
+            model::Material* parent_pointer;       // pointer to the material.
 
             friend class Glyph;
             template<class T1>
