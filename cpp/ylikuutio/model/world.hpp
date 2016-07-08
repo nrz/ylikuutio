@@ -44,8 +44,30 @@
 //       ^
 //     Object
 //
+// Please note that for regular objects the hierarchy above is both the ontological hierarchy and the rendering hierarchy.
 //
-// Hierarchy of glyph (character) objects:
+// Ontological hierarchy of glyph (character) objects:
+//
+//     World
+//       ^
+//     Scene
+//       ^
+//     Shader
+//       ^
+//    Material
+//       ^
+//      Font
+//       ^
+//     Text3D
+//       ^
+//     Glyph
+//       ^
+//     Object
+//
+// Ontological hierarchy affects how objects can be created and how they can be destroyed,
+// though the precise ways how objects can be created depends on the functions available.
+//
+// Rendering hierarchy of glyph (character) objects:
 //
 //     World
 //       ^
@@ -61,6 +83,10 @@
 //       ^
 //     Object
 //
+// Please note that rendering hierarchy does not include `Text3D` at all, as each `Glyph` points directly to `Font`.
+// So, `render_species_or_glyph` is called only once for each glyph, and that call renders all the children of that `Glyph`,
+// even if the children (which are of type `Object`) may belong to many different `Text3D` objects.
+// `Text3D` is anyway needed in the ontological hierarchy, so that complete 3D texts can be destroyed and manipulated at once.
 //
 // Deleting a `World` also deletes all scenes, all shaders, materials, species, fonts, glyphs and objects that are binded to the same World.
 // Deleting a `Scene` also deletes all shaders, materials, species, fonts, glyphs and objects that are binded to the same World.
