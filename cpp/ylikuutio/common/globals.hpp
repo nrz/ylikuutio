@@ -210,6 +210,11 @@ typedef struct FontStruct
     std::string font_filename;              // filename of the font file.
 } FontStruct;
 
+typedef struct TextStruct
+{
+    std::string text_string;
+} TextStruct;
+
 typedef struct GlyphStruct
 {
     GlyphStruct()
