@@ -314,11 +314,11 @@ int main(void)
     suzanne_object_struct5.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
     model::Object* suzanne5 = new model::Object(suzanne_object_struct5);
 
-    VectorFontStruct kongtext_font_struct;
-    kongtext_font_struct.parent_pointer = grass_material;
-    kongtext_font_struct.font_file_format = g_font_file_format;
-    kongtext_font_struct.font_filename = g_font_filename;
-    model::Font* kongtext_font = new model::Font(kongtext_font_struct);
+    VectorFontStruct kongtext_vector_font_struct;
+    kongtext_vector_font_struct.parent_pointer = grass_material;
+    kongtext_vector_font_struct.font_file_format = g_font_file_format;
+    kongtext_vector_font_struct.font_filename = g_font_filename;
+    model::Font* kongtext_font = new model::Font(kongtext_vector_font_struct);
 
     // Initialize our little text library with the Holstein font
     const char* char_g_font_texture_filename = g_font_texture_filename.c_str();

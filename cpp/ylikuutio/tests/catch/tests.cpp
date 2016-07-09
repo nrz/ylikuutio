@@ -106,11 +106,11 @@ TEST_CASE("VectorFontStruct must be initialized appropriately", "[VectorFontStru
 {
     const float default_vertex_scaling_factor = 0.001f;
 
-    VectorFontStruct test_font_struct;
-    REQUIRE(test_font_struct.parent_pointer == nullptr);
-    REQUIRE(test_font_struct.vertex_scaling_factor == default_vertex_scaling_factor);
-    REQUIRE(test_font_struct.font_file_format.empty());
-    REQUIRE(test_font_struct.font_filename.empty());
+    VectorFontStruct test_vector_font_struct;
+    REQUIRE(test_vector_font_struct.parent_pointer == nullptr);
+    REQUIRE(test_vector_font_struct.vertex_scaling_factor == default_vertex_scaling_factor);
+    REQUIRE(test_vector_font_struct.font_file_format.empty());
+    REQUIRE(test_vector_font_struct.font_filename.empty());
 }
 
 TEST_CASE("GlyphStruct must be initialized appropriately", "[GlyphStruct]")

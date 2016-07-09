@@ -22,7 +22,7 @@ namespace model
         public:
             // constructor.
             // TODO: `Font` constructor also creates each `Glyph` and binds them to the `Font`.
-            Font(VectorFontStruct font_struct);
+            Font(VectorFontStruct vector_font_struct);
 
             // destructor.
             ~Font();
