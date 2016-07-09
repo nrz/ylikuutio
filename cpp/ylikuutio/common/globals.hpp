@@ -212,7 +212,18 @@ typedef struct FontStruct
 
 typedef struct Text3DStruct
 {
+    Text3DStruct()
+        : parent_pointer(nullptr), original_scale_vector(glm::vec3(1.0f, 1.0f, 1.0f)), rotate_angle(NAN)
+    {
+        // constructor.
+    }
     std::string text_string;
+    model::Font* parent_pointer;     // pointer to the parent `Font`.
+    glm::vec3 original_scale_vector; // original scale vector.
+    GLfloat rotate_angle;            // rotate angle.
+    glm::vec3 coordinate_vector;     // coordinate vector.
+    glm::vec3 rotate_vector;         // rotate vector.
+    glm::vec3 translate_vector;      // translate vector.
 } Text3DStruct;
 
 typedef struct GlyphStruct
