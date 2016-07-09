@@ -47,7 +47,7 @@ namespace model
             this->glyph_parent_pointer   = nullptr;
         }
 
-        // get childID from the Species and set pointer to this Object.
+        // get `childID` from the `Species` and set pointer to this `Object`.
         this->bind_to_parent();
 
         bool model_loading_result = false;

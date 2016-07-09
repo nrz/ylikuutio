@@ -50,6 +50,7 @@ namespace model
     VectorFont::~VectorFont()
     {
         // destructor.
+        // Destroying a `VectorFont` destroys also all `Text3D` entities, and after that all `Glyph` entities.
         std::cout << "This font will be destroyed.\n";
 
         // destroy all glyphs of this font.
@@ -59,7 +60,8 @@ namespace model
 
     void VectorFont::render()
     {
-        // render VectorFont by calling `render()` function of each Glyph.
+        // this method renders all glyphs of this `VectorFont`.
+        // render `VectorFont` by calling `render()` function of each `Glyph`.
         model::render_children<model::Glyph*>(this->glyph_pointer_vector);
     }
 

@@ -25,6 +25,7 @@ namespace model
             VectorFont(VectorFontStruct vector_font_struct);
 
             // destructor.
+            // Destroying a `VectorFont` destroys also all `Text3D` entities, and after that all `Glyph` entities.
             ~VectorFont();
 
             // this method sets a glyph pointer.
@@ -50,7 +51,7 @@ namespace model
         private:
             void bind_to_parent();
 
-            // this method renders all objects of this species.
+            // this method renders all glyphs of this `VectorFont`.
             void render();
 
             std::string font_file_format;          // type of the model file, eg. `"bmp"`.

@@ -42,7 +42,7 @@ namespace model
         this->char_model_file_format = this->model_file_format.c_str();
         this->char_model_filename    = this->model_filename.c_str();
 
-        // get childID from the Material and set pointer to this Species.
+        // get `childID` from the `Material` and set pointer to this `Species`.
         this->bind_to_parent();
 
         // Get a handle for our buffers.

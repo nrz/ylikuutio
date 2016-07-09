@@ -29,6 +29,7 @@ namespace model
             Glyph(GlyphStruct glyph_struct);
 
             // destructor.
+            // glyphs should be destroyed only by destroying the entire `VectorFont`.
             ~Glyph();
 
             // this method sets a object pointer.
@@ -61,7 +62,7 @@ namespace model
             GLuint normalbuffer;
             GLuint elementbuffer;
 
-            model::VectorFont* parent_pointer;             // pointer to the font.
+            model::VectorFont* parent_pointer;       // pointer to `VectorFont`.
 
             friend class Object;
             template<class T1>
