@@ -114,6 +114,7 @@ namespace model
     class VectorFont;
     class Species;
     class Glyph;
+    class Text3D;
 }
 
 typedef struct ShaderStruct
@@ -157,12 +158,13 @@ typedef struct NodeStruct
 typedef struct ObjectStruct
 {
     ObjectStruct()
-        : species_parent_pointer(nullptr), glyph_parent_pointer(nullptr), original_scale_vector(glm::vec3(1.0f, 1.0f, 1.0f)), rotate_angle(NAN), is_character(false)
+        : species_parent_pointer(nullptr), glyph_parent_pointer(nullptr), text3D_parent_pointer(nullptr), original_scale_vector(glm::vec3(1.0f, 1.0f, 1.0f)), rotate_angle(NAN), is_character(false)
     {
         // constructor.
     }
-    model::Species* species_parent_pointer; // pointer to the parent species.
-    model::Glyph* glyph_parent_pointer;     // pointer to the parent glyph.
+    model::Species* species_parent_pointer; // pointer to the parent `Species`.
+    model::Glyph* glyph_parent_pointer;     // pointer to the parent `Glyph`.
+    model::Text3D* text3D_parent_pointer;   // pointer to the parent `Text3D`.
     glm::vec3 original_scale_vector; // original scale vector.
     GLfloat rotate_angle;            // rotate angle.
     bool is_character;               // The parent of a character object is a Glyph. The parent of a regular object is a Species.
