@@ -1,6 +1,6 @@
 #include "material.hpp"
 #include "texture_loader.hpp"
-#include "font.hpp"
+#include "vector_font.hpp"
 #include "species.hpp"
 #include "render_templates.hpp"
 #include "cpp/ylikuutio/hierarchy/hierarchy_templates.hpp"

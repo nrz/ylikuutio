@@ -17,7 +17,7 @@
 #include "cpp/ylikuutio/model/world.hpp"
 #include "cpp/ylikuutio/model/shader.hpp"
 #include "cpp/ylikuutio/model/material.hpp"
-#include "cpp/ylikuutio/model/font.hpp"
+#include "cpp/ylikuutio/model/vector_font.hpp"
 #include "cpp/ylikuutio/model/glyph.hpp"
 #include "cpp/ylikuutio/model/species.hpp"
 #include "cpp/ylikuutio/model/object.hpp"

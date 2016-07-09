@@ -1,7 +1,7 @@
 #ifndef __GLYPH_HPP_INCLUDED
 #define __GLYPH_HPP_INCLUDED
 
-#include "font.hpp"
+#include "vector_font.hpp"
 #include "render_templates.hpp"
 #include "species_or_glyph.hpp"
 #include "cpp/ylikuutio/hierarchy/hierarchy_templates.hpp"

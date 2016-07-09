@@ -235,8 +235,6 @@ add_executable(ajokki
     cpp/ylikuutio/hierarchy/hierarchy_templates.hpp
 
     # model, in alphabetical order
-    cpp/ylikuutio/model/font.cpp
-    cpp/ylikuutio/model/font.hpp
     cpp/ylikuutio/model/font_loader.cpp
     cpp/ylikuutio/model/font_loader.hpp
     cpp/ylikuutio/model/glyph.cpp
@@ -267,6 +265,8 @@ add_executable(ajokki
     cpp/ylikuutio/model/text3D.cpp
     cpp/ylikuutio/model/texture_loader.cpp
     cpp/ylikuutio/model/texture_loader.hpp
+    cpp/ylikuutio/model/vector_font.cpp
+    cpp/ylikuutio/model/vector_font.hpp
     cpp/ylikuutio/model/vboindexer.cpp
     cpp/ylikuutio/model/vboindexer.hpp
     cpp/ylikuutio/model/world.cpp
