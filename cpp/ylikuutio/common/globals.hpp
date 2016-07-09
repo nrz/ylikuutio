@@ -196,9 +196,9 @@ typedef struct SpeciesStruct
 
 #define DEFAULT_VERTEX_SCALING_FACTOR (0.001f)
 
-typedef struct FontStruct
+typedef struct VectorFontStruct
 {
-    FontStruct()
+    VectorFontStruct()
         : parent_pointer(nullptr), vertex_scaling_factor(DEFAULT_VERTEX_SCALING_FACTOR)
     {
         // constructor.
@@ -208,7 +208,7 @@ typedef struct FontStruct
     GLfloat vertex_scaling_factor;
     std::string font_file_format;           // type of the font file. supported file formats so far: `"svg"`/`"SVG"`.
     std::string font_filename;              // filename of the font file.
-} FontStruct;
+} VectorFontStruct;
 
 typedef struct Text3DStruct
 {
