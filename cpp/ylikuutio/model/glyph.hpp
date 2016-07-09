@@ -13,6 +13,12 @@
 #include <GL/glew.h> // GLfloat, GLuint etc.
 #endif
 
+// Include GLM
+#ifndef __GLM_GLM_HPP_INCLUDED
+#define __GLM_GLM_HPP_INCLUDED
+#include <glm/glm.hpp> // glm
+#endif
+
 // Include standard headers
 #include <queue>    // std::queue
 #include <stdint.h> // uint32_t etc.
@@ -82,7 +88,9 @@ namespace model
             uint32_t childID;                      // glyph ID, returned by `model::VectorFont->get_glyphID()`.
             GLuint lightID;                        // light ID, returned by `glGetUniformLocation(programID, "LightPosition_worldspace");`.
 
-            std::string* glyph_name_pointer;
+            std::vector<std::vector<glm::vec2>>* glyph_vertex_data;
+            std::string* glyph_name_pointer;         // we need only a pointer, because glyphs are always created by the `VectorFont` constructor.
+            std::string* unicode_string_pointer;     // we need only a pointer, because glyphs are always created by the `VectorFont` constructor.
 
             std::vector<void*> object_pointer_vector;
             std::queue<uint32_t> free_objectID_queue;
