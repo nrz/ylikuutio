@@ -16,6 +16,7 @@
 // Include standard headers
 #include <queue>    // std::queue
 #include <stdint.h> // uint32_t etc.
+#include <string>   // std::string
 #include <vector>   // std::vector
 
 namespace model
@@ -80,6 +81,8 @@ namespace model
 
             uint32_t childID;                      // glyph ID, returned by `model::VectorFont->get_glyphID()`.
             GLuint lightID;                        // light ID, returned by `glGetUniformLocation(programID, "LightPosition_worldspace");`.
+
+            std::string* glyph_name_pointer;
 
             std::vector<void*> object_pointer_vector;
             std::queue<uint32_t> free_objectID_queue;
