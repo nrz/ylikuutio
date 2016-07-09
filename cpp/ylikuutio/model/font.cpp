@@ -31,7 +31,7 @@ namespace model
         // get childID from the Graph and set pointer to this font.
         this->bind_to_parent();
 
-        bool font_loading_result;
+        bool font_loading_result = false;
 
         if ((std::strcmp(this->char_font_file_format, "svg") == 0) || (std::strcmp(this->char_font_file_format, "SVG") == 0))
         {
