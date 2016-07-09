@@ -18,6 +18,9 @@ namespace model
     Glyph::Glyph(GlyphStruct glyph_struct)
     {
         // constructor.
+        this->glyph_vertex_data = glyph_struct.glyph_vertex_data;
+        this->glyph_name_pointer = glyph_struct.glyph_name_pointer;
+        this->unicode_string_pointer = glyph_struct.unicode_string_pointer;
         this->light_position = glyph_struct.light_position;
 
         // get childID from the Material and set pointer to this Species.
