@@ -7,15 +7,17 @@
 #include "cpp/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include standard headers
-#include <iostream> // std::cout, std::cin, std::cerr
-#include <queue>    // std::queue
-#include <stdint.h> // uint32_t etc.
-#include <string>   // std::string
-#include <vector>   // std::vector
+#include <iostream>      // std::cout, std::cin, std::cerr
+#include <queue>         // std::queue
+#include <stdint.h>      // uint32_t etc.
+#include <string>        // std::string
+#include <vector>        // std::vector
+#include <unordered_map> // std::unordered_map
 
 namespace model
 {
     class Material;
+    class Glyph;
 
     class VectorFont
     {
@@ -27,6 +29,9 @@ namespace model
             // destructor.
             // Destroying a `VectorFont` destroys also all `Text3D` entities, and after that all `Glyph` entities.
             ~VectorFont();
+
+            // this method sets a text3D pointer.
+            void set_text3D_pointer(uint32_t childID, void* parent_pointer);
 
             // this method sets a glyph pointer.
             void set_glyph_pointer(uint32_t childID, void* parent_pointer);
@@ -41,6 +46,7 @@ namespace model
             model::Material* parent_pointer; // pointer to `Material`.
 
             friend class Glyph;
+            friend class Text3D;
             template<class T1>
                 friend void render_children(std::vector<void*> &child_pointer_vector);
             template<class T1>
@@ -50,6 +56,10 @@ namespace model
 
         private:
             void bind_to_parent();
+
+            // this method returns a pointer to `Glyph` that matches the given `unicode_string`,
+            // and `nullptr` if this `VectorFont` does not such a `Glyph`.
+            model::Glyph* get_glyph_pointer(std::string unicode_string);
 
             // this method renders all glyphs of this `VectorFont`.
             void render();
@@ -68,7 +78,11 @@ namespace model
             std::vector<std::string> unicode_strings;
 
             std::vector<void*> glyph_pointer_vector;
+            std::vector<void*> text3D_pointer_vector;
             std::queue<uint32_t> free_glyphID_queue;
+            std::queue<uint32_t> free_text3D_ID_queue;
+
+            std::unordered_map<std::string, model::Glyph*> unicode_glyph_map;
     };
 }
 

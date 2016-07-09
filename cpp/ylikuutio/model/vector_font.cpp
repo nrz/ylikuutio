@@ -1,20 +1,36 @@
 #include "vector_font.hpp"
+#include "glyph.hpp"
 #include "cpp/ylikuutio/hierarchy/hierarchy.hpp"
 #include "render_templates.hpp"
 #include "cpp/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "font_loader.hpp"
-#include "glyph.hpp"
 
 // Include standard headers
-#include <cstring>  // std::memcmp, std::strcmp, std::strlen, std::strncmp
-#include <iostream> // std::cout, std::cin, std::cerr
-#include <stdint.h> // uint32_t etc.
+#include <cstring>       // std::memcmp, std::strcmp, std::strlen, std::strncmp
+#include <iostream>      // std::cout, std::cin, std::cerr
+#include <stdint.h>      // uint32_t etc.
+#include <unordered_map> // std::unordered_map
 
 namespace model
 {
+    class Text3D;
+
     void VectorFont::bind_to_parent()
     {
-        hierarchy::bind_child_to_parent<model::VectorFont*>(this, this->parent_pointer->font_pointer_vector, this->parent_pointer->free_fontID_queue);
+        hierarchy::bind_child_to_parent<model::VectorFont*>(this, this->parent_pointer->vector_font_pointer_vector, this->parent_pointer->free_vector_fontID_queue);
+    }
+
+    // this method returns a pointer to `Glyph` that matches the given `unicode_string`,
+    // and `nullptr` if this `VectorFont` does not such a `Glyph`.
+    model::Glyph* VectorFont::get_glyph_pointer(std::string unicode_string)
+    {
+        if (this->unicode_glyph_map.count(unicode_string) == 1)
+        {
+            return this->unicode_glyph_map[unicode_string];
+        }
+
+        // No matching `Glyph` found!
+        return nullptr;
     }
 
     VectorFont::VectorFont(VectorFontStruct vector_font_struct)
@@ -43,8 +59,29 @@ namespace model
                     this->unicode_strings);
         }
 
-        // TODO: `VectorFont` constructor also creates each `Glyph` and binds them to the `VectorFont`.
-        // TODO: implement creation of each Glyph!
+        if (font_loading_result)
+        {
+            // OK, `VectorFont` loading was successful.
+            // Create each `Glyph` and bind them to the `VectorFont`.
+
+            std::cout << "Number of glyphs to be created: " << this->glyph_vertex_data.size() << "\n";
+
+            for (uint32_t i = 0; i < this->glyph_vertex_data.size(); i++)
+            {
+                GlyphStruct glyph_struct;
+                glyph_struct.glyph_vertex_data = &this->glyph_vertex_data.at(i);
+                glyph_struct.glyph_name_pointer = &this->glyph_names.at(i);
+                glyph_struct.unicode_string_pointer = &this->unicode_strings.at(i);
+                glyph_struct.parent_pointer = this;
+
+                std::cout << "creating glyph " << *glyph_struct.glyph_name_pointer << ", Unicode: " << *glyph_struct.unicode_string_pointer << "\n";
+                model::Glyph* glyph = new model::Glyph(glyph_struct);
+
+                // so that each `Glyph` can be referred to,
+                // we need a hash map that points from Unicode string to `Glyph`.
+                this->unicode_glyph_map[*glyph_struct.unicode_string_pointer] = glyph;
+            }
+        }
     }
 
     VectorFont::~VectorFont()
@@ -53,9 +90,16 @@ namespace model
         // Destroying a `VectorFont` destroys also all `Text3D` entities, and after that all `Glyph` entities.
         std::cout << "This font will be destroyed.\n";
 
+        // destroy all 3D texts of this font.
+        std::cout << "All 3D texts of this font will be destroyed.\n";
+        hierarchy::delete_children<model::Text3D*>(this->text3D_pointer_vector);
+
         // destroy all glyphs of this font.
         std::cout << "All glyphs of this font will be destroyed.\n";
         hierarchy::delete_children<model::Glyph*>(this->glyph_pointer_vector);
+
+        // set pointer to this `VectorFont` to nullptr.
+        this->parent_pointer->set_vector_font_pointer(this->childID, nullptr);
     }
 
     void VectorFont::render()
@@ -72,6 +116,6 @@ namespace model
 
     void VectorFont::bind_to_new_parent(model::Material *new_material_pointer)
     {
-        hierarchy::bind_child_to_new_parent<model::VectorFont*, model::Material*>(this, new_material_pointer, this->parent_pointer->font_pointer_vector, this->parent_pointer->free_fontID_queue);
+        hierarchy::bind_child_to_new_parent<model::VectorFont*, model::Material*>(this, new_material_pointer, this->parent_pointer->vector_font_pointer_vector, this->parent_pointer->free_vector_fontID_queue);
     }
 }

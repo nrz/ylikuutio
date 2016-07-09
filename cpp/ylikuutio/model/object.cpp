@@ -13,8 +13,9 @@ namespace model
     {
         if (this->is_character)
         {
-            model::Glyph* parent_pointer;
-            parent_pointer = this->glyph_parent_pointer;
+            model::Text3D* parent_pointer;
+            parent_pointer = this->text3D_parent_pointer;
+            // for ontological hierarchy (rendering hierarchy does not use `childID`).
             hierarchy::bind_child_to_parent<model::Object*>(this, parent_pointer->object_pointer_vector, parent_pointer->free_objectID_queue);
         }
         else
@@ -40,6 +41,7 @@ namespace model
         {
             this->species_parent_pointer = nullptr;
             this->glyph_parent_pointer   = object_struct.glyph_parent_pointer;
+            this->text3D_parent_pointer  = object_struct.text3D_parent_pointer;
         }
         else
         {
@@ -56,15 +58,17 @@ namespace model
     Object::~Object()
     {
         // destructor.
-        std::cout << "Object with childID " << this->childID << " will be destroyed.\n";
 
         // set pointer to this object to nullptr.
         if (this->is_character)
         {
-            this->glyph_parent_pointer->set_object_pointer(this->childID, nullptr);
+            std::string unicode_string = *this->glyph_parent_pointer->unicode_string_pointer;
+            std::cout << "Object with childID " << this->childID << " (unicode string \"" << unicode_string << "\") will be destroyed.\n";
+            this->text3D_parent_pointer->set_object_pointer(this->childID, nullptr);
         }
         else
         {
+            std::cout << "Object with childID " << this->childID << " will be destroyed.\n";
             this->species_parent_pointer->set_object_pointer(this->childID, nullptr);
         }
     }

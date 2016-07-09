@@ -61,7 +61,7 @@ namespace model
 
         // destroy all fonts of this material.
         std::cout << "All fonts of this material will be destroyed.\n";
-        hierarchy::delete_children<model::VectorFont*>(this->font_pointer_vector);
+        hierarchy::delete_children<model::VectorFont*>(this->vector_font_pointer_vector);
 
         glDeleteTextures(1, &this->texture);
 
@@ -79,12 +79,17 @@ namespace model
 
         // render Material by calling `render()` function of each Species and of each VectorFont.
         model::render_children<model::Species*>(this->species_pointer_vector);
-        model::render_children<model::VectorFont*>(this->font_pointer_vector);
+        model::render_children<model::VectorFont*>(this->vector_font_pointer_vector);
     }
 
     void Material::set_species_pointer(uint32_t childID, void* parent_pointer)
     {
         hierarchy::set_child_pointer(childID, parent_pointer, this->species_pointer_vector, this->free_speciesID_queue);
+    }
+
+    void Material::set_vector_font_pointer(uint32_t childID, void* parent_pointer)
+    {
+        hierarchy::set_child_pointer(childID, parent_pointer, this->vector_font_pointer_vector, this->free_vector_fontID_queue);
     }
 
     void Material::bind_to_new_parent(model::Shader *new_shader_pointer)

@@ -55,8 +55,8 @@ namespace model
             // this method sets `Species` pointer.
             void set_species_pointer(uint32_t childID, void* parent_pointer);
 
-            // this method sets a font pointer.
-            void set_font_pointer(uint32_t childID, void* parent_pointer);
+            // this method sets `VectorFont` pointer.
+            void set_vector_font_pointer(uint32_t childID, void* parent_pointer);
 
             // this method sets a world species pointer.
             void set_terrain_species_pointer(model::Species* terrain_species_pointer);
@@ -71,9 +71,9 @@ namespace model
             GLuint openGL_textureID;               // texture ID, returned by `glGetUniformLocation(programID, "myTextureSampler");`.
 
             std::vector<void*> species_pointer_vector;
-            std::vector<void*> font_pointer_vector;
+            std::vector<void*> vector_font_pointer_vector;
             std::queue<uint32_t> free_speciesID_queue;
-            std::queue<uint32_t> free_fontID_queue;
+            std::queue<uint32_t> free_vector_fontID_queue;
 
             std::string texture_file_format;       // type of the model file, eg. `"bmp"`.
             std::string texture_filename;          // filename of the model file.

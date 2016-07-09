@@ -18,6 +18,8 @@ namespace model
     Glyph::Glyph(GlyphStruct glyph_struct)
     {
         // constructor.
+        this->parent_pointer = glyph_struct.parent_pointer;
+
         this->glyph_vertex_data = glyph_struct.glyph_vertex_data;
         this->glyph_name_pointer = glyph_struct.glyph_name_pointer;
         this->unicode_string_pointer = glyph_struct.unicode_string_pointer;
@@ -39,13 +41,12 @@ namespace model
     Glyph::~Glyph()
     {
         // destructor.
-        std::cout << "This glyph will be destroyed.\n";
+        std::cout << "This glyph (\"" << *this->glyph_name_pointer << "\", Unicode: \"" << *this->unicode_string_pointer << "\") will be destroyed.\n";
 
         // TODO: Cleanup VBO, shader and texture (copy these from `Species::~Species()`).
 
-        // destroy all objects of this glyph.
-        std::cout << "All objects of this glyph will be destroyed.\n";
-        hierarchy::delete_children<model::Object*>(this->object_pointer_vector);
+        // set pointer to this `Glyph` to nullptr.
+        this->parent_pointer->set_glyph_pointer(this->childID, nullptr);
     }
 
     void Glyph::render()

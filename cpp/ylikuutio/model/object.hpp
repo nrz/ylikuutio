@@ -70,8 +70,9 @@ namespace model
             // this method renders this object.
             void render();
 
-            model::Species* species_parent_pointer; // pointer to the species or glyph.
-            model::Glyph* glyph_parent_pointer;     // pointer to the species or glyph.
+            model::Species* species_parent_pointer; // pointer to `Species`.
+            model::Glyph* glyph_parent_pointer;     // pointer to `Glyph`.
+            model::Text3D* text3D_parent_pointer;   // pointer to `Text3D`.
             bool is_character;
 
             uint32_t childID;                      // object ID, returned by `model::Species->get_objectID()`.
