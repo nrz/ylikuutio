@@ -99,6 +99,7 @@ TEST(font_must_be_loaded_appropriately, kongtext_svg)
 
     ASSERT_EQ(glyph_names.size(), 217);
     ASSERT_EQ(glyph_vertex_data.size(), 217);
+    ASSERT_EQ(unicode_strings.size(), 217);
 
     ASSERT_EQ(std::strcmp(glyph_names.at(0).c_str(), "nonmarkingreturn"), 0);
     ASSERT_EQ(glyph_vertex_data.at(0).size(), 0);
