@@ -6,7 +6,7 @@
 // Include standard headers
 #include <queue>    // std::queue
 
-namespace text3D
+namespace model
 {
 }
 
