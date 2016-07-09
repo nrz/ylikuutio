@@ -235,9 +235,9 @@ typedef struct GlyphStruct
     }
     // used for all files (for all glyph).
     std::vector<std::vector<glm::vec2>>* glyph_vertex_data;
-    std::string* glyph_name;
-    std::string* unicode_string;
-    model::VectorFont* parent_pointer;             // pointer to the font object.
+    std::string* glyph_name_pointer;         // we need only a pointer, because glyphs are always created by the `VectorFont` constructor.
+    std::string* unicode_string_pointer;     // we need only a pointer, because glyphs are always created by the `VectorFont` constructor.
+    model::VectorFont* parent_pointer;       // pointer to the font object.
     glm::vec3 light_position;                // light position.
 } GlyphStruct;
 
