@@ -83,6 +83,8 @@ namespace model
         // destroy all objects of this `Text3D`.
         std::cout << "All objects (" << this->object_pointer_vector.size() << " pieces) of this 3D text will be destroyed.\n";
         hierarchy::delete_children<model::Object*>(this->object_pointer_vector);
+
+        this->parent_pointer->set_text3D_pointer(this->childID, nullptr);
     }
 
     void Text3D::set_object_pointer(uint32_t childID, void* parent_pointer)
