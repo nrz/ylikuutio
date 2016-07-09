@@ -56,7 +56,7 @@
 //       ^
 //    Material
 //       ^
-//      VectorFont
+//   VectorFont
 //       ^
 //     Text3D
 //       ^
@@ -77,7 +77,7 @@
 //       ^
 //    Material
 //       ^
-//      VectorFont
+//   VectorFont
 //       ^
 //     Glyph
 //       ^
