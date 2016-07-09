@@ -1,5 +1,5 @@
 #include "gtest/gtest.h"
-#include "cpp/ylikuutio/geometry/triangulation.hpp"
+#include "cpp/ylikuutio/geometry/quad_triangulation.hpp"
 
 // Include GLEW
 #ifndef __GL_GLEW_H_INCLUDED

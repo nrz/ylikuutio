@@ -3,7 +3,7 @@
 #define DEGREES_TO_RADIANS(x) (x * PI / 180.0f)
 #endif
 
-#include "triangulation.hpp"
+#include "quad_triangulation.hpp"
 #include "triangulation_macros.cpp"
 #include "transformation.hpp"
 #include "indexing.hpp"

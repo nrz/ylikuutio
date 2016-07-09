@@ -4,7 +4,7 @@
 #endif
 
 #include "heightmap_loader.hpp"
-#include "cpp/ylikuutio/geometry/triangulation.hpp"
+#include "cpp/ylikuutio/geometry/quad_triangulation.hpp"
 #include "cpp/ylikuutio/common/globals.hpp"
 
 // Include GLEW

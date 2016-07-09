@@ -27,8 +27,8 @@
 #include "cpp/ylikuutio/common/indexing.cpp"
 #include "cpp/ylikuutio/common/bilinear_interpolation.hpp"
 #include "cpp/ylikuutio/common/bilinear_interpolation.cpp"
-#include "cpp/ylikuutio/common/triangulation.hpp"
-#include "cpp/ylikuutio/common/triangulation.cpp"
+#include "cpp/ylikuutio/common/quad_triangulation.hpp"
+#include "cpp/ylikuutio/common/quad_triangulation.cpp"
 #include "cpp/ylikuutio/model/heightmap_loader.hpp"
 #include "cpp/ylikuutio/model/heightmap_loader.cpp"
 
