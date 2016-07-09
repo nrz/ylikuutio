@@ -320,6 +320,16 @@ int main(void)
     kongtext_vector_font_struct.font_filename = g_font_filename;
     model::VectorFont* kongtext_font = new model::VectorFont(kongtext_vector_font_struct);
 
+    Text3DStruct text3D_struct;
+    text3D_struct.parent_pointer = kongtext_font;
+    text3D_struct.text_string = "Hello world!";
+    text3D_struct.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
+    text3D_struct.coordinate_vector = glm::vec3(100.00f, 100.00f, 100.00f);
+    text3D_struct.rotate_angle = 0.0f;
+    text3D_struct.rotate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
+    text3D_struct.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
+    model::Text3D* hello_world_text3D = new model::Text3D(text3D_struct);
+
     // Initialize our little text library with the Holstein font
     const char* char_g_font_texture_filename = g_font_texture_filename.c_str();
     const char* char_g_font_texture_file_format = g_font_texture_file_format.c_str();
