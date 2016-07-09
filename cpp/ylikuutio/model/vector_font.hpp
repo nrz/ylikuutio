@@ -30,11 +30,11 @@ namespace model
             // Destroying a `VectorFont` destroys also all `Text3D` entities, and after that all `Glyph` entities.
             ~VectorFont();
 
-            // this method sets a text3D pointer.
-            void set_text3D_pointer(uint32_t childID, void* parent_pointer);
-
-            // this method sets a glyph pointer.
+            // this method sets `Glyph` pointer.
             void set_glyph_pointer(uint32_t childID, void* parent_pointer);
+
+            // this method sets `Text3D` pointer.
+            void set_text3D_pointer(uint32_t childID, void* parent_pointer);
 
             // this method sets pointer to this species to nullptr, sets `parent_pointer` according to the input, and requests a new `childID` from the new material.
             void bind_to_new_parent(model::Material *new_material_pointer);
