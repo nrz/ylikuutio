@@ -7,24 +7,24 @@
 #define RADIANS_TO_DEGREES(x) (x * 180.0f / PI)
 #endif
 
-#include "cpp/ylikuutio/common/globals.hpp"
-#include "cpp/ylikuutio/common/any_value.hpp"
-#include "cpp/ylikuutio/callback/callback_engine.hpp"
-#include "cpp/ylikuutio/callback/callback_object.hpp"
 #include "cpp/ylikuutio/callback/callback_parameter.hpp"
+#include "cpp/ylikuutio/callback/callback_object.hpp"
+#include "cpp/ylikuutio/callback/callback_engine.hpp"
 #include "cpp/ylikuutio/model/shader_loader.hpp"
 #include "cpp/ylikuutio/model/texture_loader.hpp"
 #include "cpp/ylikuutio/model/vboindexer.hpp"
 #include "cpp/ylikuutio/model/text2D.hpp"
-#include "cpp/ylikuutio/model/text3D.hpp"
-#include "cpp/ylikuutio/model/world.hpp"
-#include "cpp/ylikuutio/model/scene.hpp"
-#include "cpp/ylikuutio/model/shader.hpp"
-#include "cpp/ylikuutio/model/material.hpp"
-#include "cpp/ylikuutio/model/vector_font.hpp"
-#include "cpp/ylikuutio/model/glyph.hpp"
-#include "cpp/ylikuutio/model/species.hpp"
 #include "cpp/ylikuutio/model/object.hpp"
+#include "cpp/ylikuutio/model/species.hpp"
+#include "cpp/ylikuutio/model/glyph.hpp"
+#include "cpp/ylikuutio/model/text3D.hpp"
+#include "cpp/ylikuutio/model/vector_font.hpp"
+#include "cpp/ylikuutio/model/material.hpp"
+#include "cpp/ylikuutio/model/shader.hpp"
+#include "cpp/ylikuutio/model/scene.hpp"
+#include "cpp/ylikuutio/model/world.hpp"
+#include "cpp/ylikuutio/common/any_value.hpp"
+#include "cpp/ylikuutio/common/globals.hpp"
 
 // Include GLEW
 #ifndef __GL_GLEW_H_INCLUDED
