@@ -38,7 +38,7 @@ namespace model
             ~Shader();
 
             // this method sets pointer to this shader to nullptr, sets `parent_pointer` according to the input, and requests a new `childID` from the new scene.
-            void bind_to_new_parent(model::Scene *new_scene_pointer);
+            void bind_to_new_parent(model::Scene* new_scene_pointer);
 
             friend class Scene;
             friend class Material;
@@ -63,9 +63,9 @@ namespace model
             // this method sets a scene species pointer.
             void set_terrain_species_pointer(model::Species* terrain_species_pointer);
 
-            model::Scene* parent_pointer;         // pointer to the scene.
+            model::Scene* parent_pointer;         // pointer to `Scene`.
 
-            GLuint programID;                     // shaders' programID, returned by `LoadShaders`.
+            GLuint programID;                     // this `Shader`'s `programID`, returned by `LoadShaders`.
 
             GLuint MatrixID;
             GLuint ViewMatrixID;
