@@ -121,7 +121,7 @@ namespace model
             this->parent_pointer->parent_pointer->parent_pointer->parent_pointer->set_terrain_species_pointer(this);
         }
 
-        // Compute the graph of this object type.
+        // TODO: Compute the graph of this object type to enable object vertex modification!
     }
 
     Species::~Species()

@@ -23,19 +23,25 @@ namespace model
         this->unicode_string_pointer = glyph_struct.unicode_string_pointer;
         this->light_position = glyph_struct.light_position;
 
-        // get childID from the Material and set pointer to this Species.
+        // get `childID` from `VectorFont` and set pointer to this `Glyph`.
         this->bind_to_parent();
 
         // Get a handle for our buffers.
         this->vertexPosition_modelspaceID = glGetAttribLocation(this->parent_pointer->parent_pointer->parent_pointer->programID, "vertexPosition_modelspace");
         this->vertexUVID = glGetAttribLocation(this->parent_pointer->parent_pointer->parent_pointer->programID, "vertexUV");
         this->vertexNormal_modelspaceID = glGetAttribLocation(this->parent_pointer->parent_pointer->parent_pointer->programID, "vertexNormal_modelspace");
+
+        // TODO: triangulate the vertex data!
+
+        // TODO: load the vertex data the same way as in `model::Species::Species(SpeciesStruct species_struct)`!
     }
 
     Glyph::~Glyph()
     {
         // destructor.
         std::cout << "This glyph will be destroyed.\n";
+
+        // TODO: Cleanup VBO, shader and texture (copy these from `Species::~Species()`).
 
         // destroy all objects of this glyph.
         std::cout << "All objects of this glyph will be destroyed.\n";

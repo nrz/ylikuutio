@@ -69,7 +69,7 @@ namespace model
             GLuint normalbuffer;
             GLuint elementbuffer;
 
-            model::VectorFont* parent_pointer;       // pointer to `VectorFont`.
+            model::VectorFont* parent_pointer; // pointer to `VectorFont`.
 
             friend class Object;
             template<class T1>

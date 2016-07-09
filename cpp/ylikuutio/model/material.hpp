@@ -52,7 +52,7 @@ namespace model
             // this method renders all species using this texture.
             void render();
 
-            // this method sets a species pointer.
+            // this method sets `Species` pointer.
             void set_species_pointer(uint32_t childID, void* parent_pointer);
 
             // this method sets a font pointer.
