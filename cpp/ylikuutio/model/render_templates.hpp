@@ -2,7 +2,8 @@
 #define __RENDER_TEMPLATES_HPP_INCLUDED
 
 // Include standard headers
-#include <vector>    // std::vector
+#include <stdint.h> // uint32_t etc.
+#include <vector>   // std::vector
 
 namespace model
 {

@@ -3,6 +3,9 @@
 
 #include "cpp/ylikuutio/common/globals.hpp"
 
+// Include standard headers
+#include <queue>    // std::queue
+
 namespace text3D
 {
 }

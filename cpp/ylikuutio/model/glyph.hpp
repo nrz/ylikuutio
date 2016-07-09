@@ -1,9 +1,10 @@
 #ifndef __GLYPH_HPP_INCLUDED
 #define __GLYPH_HPP_INCLUDED
 
+#include "species_or_glyph.hpp"
+#include "text3D.hpp"
 #include "vector_font.hpp"
 #include "render_templates.hpp"
-#include "species_or_glyph.hpp"
 #include "cpp/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include GLEW
