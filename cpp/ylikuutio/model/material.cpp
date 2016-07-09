@@ -61,7 +61,7 @@ namespace model
 
         // destroy all fonts of this material.
         std::cout << "All fonts of this material will be destroyed.\n";
-        hierarchy::delete_children<model::Font*>(this->font_pointer_vector);
+        hierarchy::delete_children<model::VectorFont*>(this->font_pointer_vector);
 
         glDeleteTextures(1, &this->texture);
 
@@ -77,9 +77,9 @@ namespace model
         // Set our "myTextureSampler" sampler to user Texture Unit 0.
         glUniform1i(this->openGL_textureID, 0);
 
-        // render Material by calling `render()` function of each Species and of each Font.
+        // render Material by calling `render()` function of each Species and of each VectorFont.
         model::render_children<model::Species*>(this->species_pointer_vector);
-        model::render_children<model::Font*>(this->font_pointer_vector);
+        model::render_children<model::VectorFont*>(this->font_pointer_vector);
     }
 
     void Material::set_species_pointer(uint32_t childID, void* parent_pointer)

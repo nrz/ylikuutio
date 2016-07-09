@@ -60,7 +60,7 @@ namespace model
             GLuint normalbuffer;
             GLuint elementbuffer;
 
-            model::Font* parent_pointer;             // pointer to the font.
+            model::VectorFont* parent_pointer;             // pointer to the font.
 
             friend class Object;
             template<class T1>
@@ -76,7 +76,7 @@ namespace model
             // this method renders all objects of this species.
             void render();
 
-            uint32_t childID;                      // glyph ID, returned by `model::Font->get_glyphID()`.
+            uint32_t childID;                      // glyph ID, returned by `model::VectorFont->get_glyphID()`.
             GLuint lightID;                        // light ID, returned by `glGetUniformLocation(programID, "LightPosition_worldspace");`.
 
             std::vector<void*> object_pointer_vector;

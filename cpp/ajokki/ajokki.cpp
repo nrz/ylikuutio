@@ -318,7 +318,7 @@ int main(void)
     kongtext_vector_font_struct.parent_pointer = grass_material;
     kongtext_vector_font_struct.font_file_format = g_font_file_format;
     kongtext_vector_font_struct.font_filename = g_font_filename;
-    model::Font* kongtext_font = new model::Font(kongtext_vector_font_struct);
+    model::VectorFont* kongtext_font = new model::VectorFont(kongtext_vector_font_struct);
 
     // Initialize our little text library with the Holstein font
     const char* char_g_font_texture_filename = g_font_texture_filename.c_str();

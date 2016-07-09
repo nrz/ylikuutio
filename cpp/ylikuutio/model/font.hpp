@@ -17,15 +17,15 @@ namespace model
 {
     class Material;
 
-    class Font
+    class VectorFont
     {
         public:
             // constructor.
-            // TODO: `Font` constructor also creates each `Glyph` and binds them to the `Font`.
-            Font(VectorFontStruct vector_font_struct);
+            // TODO: `VectorFont` constructor also creates each `Glyph` and binds them to the `VectorFont`.
+            VectorFont(VectorFontStruct vector_font_struct);
 
             // destructor.
-            ~Font();
+            ~VectorFont();
 
             // this method sets a glyph pointer.
             void set_glyph_pointer(uint32_t childID, void* parent_pointer);

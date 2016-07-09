@@ -111,7 +111,7 @@ namespace model
     class Shader;
     class Graph;
     class Material;
-    class Font;
+    class VectorFont;
     class Species;
     class Glyph;
 }
@@ -218,7 +218,7 @@ typedef struct Text3DStruct
         // constructor.
     }
     std::string text_string;
-    model::Font* parent_pointer;     // pointer to the parent `Font`.
+    model::VectorFont* parent_pointer;     // pointer to the parent `VectorFont`.
     glm::vec3 original_scale_vector; // original scale vector.
     GLfloat rotate_angle;            // rotate angle.
     glm::vec3 coordinate_vector;     // coordinate vector.
@@ -237,7 +237,7 @@ typedef struct GlyphStruct
     std::vector<std::vector<glm::vec2>>* glyph_vertex_data;
     std::string* glyph_name;
     std::string* unicode_string;
-    model::Font* parent_pointer;             // pointer to the font object.
+    model::VectorFont* parent_pointer;             // pointer to the font object.
     glm::vec3 light_position;                // light position.
 } GlyphStruct;
 
