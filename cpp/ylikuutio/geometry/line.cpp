@@ -6,6 +6,8 @@
 
 namespace geometry
 {
+    // constructor.
+    // can be used for creating n-dimensional lines.
     Line::Line(std::vector<float> point1, std::vector<float> point2)
     {
         if (point1 == point2)
@@ -20,6 +22,8 @@ namespace geometry
         }
     }
 
+    // constructor.
+    // can be used for creating n-dimensional lines.
     Line::Line(std::vector<float> general_form_coefficients, float general_form_constant)
     {
         this->general_form_coefficients = general_form_coefficients;

@@ -7,6 +7,8 @@ namespace geometry
 {
     LineSegment::LineSegment()
     {
+        // constructor.
+        // can be used for creating n-dimensional line segments.
     }
 
     std::string LineSegment::get_equation()

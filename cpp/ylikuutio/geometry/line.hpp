@@ -11,9 +11,11 @@ namespace geometry
     {
         public:
             // constructor.
+            // can be used for creating n-dimensional lines.
             Line(std::vector<float> point1, std::vector<float> point2);
 
             // constructor.
+            // can be used for creating n-dimensional lines.
             Line(std::vector<float> general_form_coefficients, float general_form_constant);
 
             std::string get_general_form_equation();
