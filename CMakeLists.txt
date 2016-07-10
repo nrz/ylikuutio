@@ -58,6 +58,18 @@ include_directories(
     .
     )
 
+# Download and install Eigen
+ExternalProject_Add(
+    eigen
+    GIT_REPOSITORY https://github.com/RLovelett/eigen
+    PREFIX ${CMAKE_CURRENT_BINARY_DIR}/eigen
+    # Disable install step
+    INSTALL_COMMAND ""
+    LOG_DOWNLOAD ON
+    LOG_DOWNLOAD ON
+    LOG_BUILD ON
+    )
+
 if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
     include_directories(
         external/googletest/googletest/include/
