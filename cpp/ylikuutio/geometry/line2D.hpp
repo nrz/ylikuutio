@@ -9,16 +9,28 @@
 #include <glm/glm.hpp> // glm
 #endif
 
+// Include standard headers
+#include <iostream> // std::cout, std::cin, std::cerr
+#include <vector>   // std::vector
+
 namespace geometry
 {
     class Line2D : public Line
     {
         public:
             // constructor.
-            Line2D(std::vector<float> point1, std::vector<float> point2) : Line(point1, point2) {}
+            Line2D(std::vector<float> point1, std::vector<float> point2)
+                : Line(point1, point2)
+            {
+                std::cout << "Hello from Line2D constructor!\n";
+            }
 
             // constructor.
-            Line2D(glm::vec2 point1, glm::vec2 point2) : Line2D(std::vector<float> { point1.x, point1.y }, std::vector<float> { point2.x, point2.y }) {}
+            Line2D(std::vector<float> general_form_coefficients, float general_form_constant)
+                : Line(general_form_coefficients, general_form_constant)
+            {
+                std::cout << "Hello from Line2D constructor!\n";
+            }
     };
 }
 
