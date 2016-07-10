@@ -70,6 +70,10 @@ ExternalProject_Add(
     LOG_BUILD ON
     )
 
+include_directories(
+    ${CMAKE_CURRENT_BINARY_DIR}/eigen/src/eigen/src/eigen/
+    )
+
 if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
     include_directories(
         external/googletest/googletest/include/
@@ -363,6 +367,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
     set(UNIT_TESTS
         cpp/ylikuutio/tests/googletest/test_any_value.cpp
         cpp/ylikuutio/tests/googletest/test_callback_system.cpp
+        cpp/ylikuutio/tests/googletest/test_eigen.cpp
         cpp/ylikuutio/tests/googletest/test_file_loader.cpp
         cpp/ylikuutio/tests/googletest/test_font_loader.cpp
         cpp/ylikuutio/tests/googletest/test_globals.cpp
