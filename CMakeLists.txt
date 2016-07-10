@@ -55,7 +55,6 @@ include_directories(
     external/glfw-3.0.3/include/GLFW/
     external/glm-0.9.4.0/
     external/glew-1.9.0/include/
-    external/Catch/single_include/
     .
     )
 
@@ -303,6 +302,10 @@ create_target_launcher(ajokki WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/cpp
 
 # Tests
 if(DO_UNIT_TESTS_WITH_CATCH)
+    include_directories(
+        external/Catch/single_include/
+        )
+
     add_executable(unit_tests_with_Catch
         cpp/ylikuutio/tests/catch/tests.cpp
         )
