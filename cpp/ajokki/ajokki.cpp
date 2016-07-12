@@ -322,7 +322,7 @@ int main(void)
 
     Text3DStruct text3D_struct;
     text3D_struct.parent_pointer = kongtext_font;
-    text3D_struct.text_string = "Hello world!";
+    text3D_struct.text_string = "Hello world &#x26; its habitants!";
     text3D_struct.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
     text3D_struct.coordinate_vector = glm::vec3(100.00f, 100.00f, 100.00f);
     text3D_struct.rotate_angle = 0.0f;
