@@ -52,6 +52,10 @@ namespace geometry
 
             bool do_lines2D_intersect(geometry::Line2D* line1, geometry::Line2D* line2);
             bool do_lines2D_intersect(geometry::Line2D* line);
+
+        private:
+            glm::vec2 vec2_point1;
+            glm::vec2 vec2_point2;
     };
 }
 
