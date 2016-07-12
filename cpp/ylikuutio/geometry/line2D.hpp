@@ -31,6 +31,9 @@ namespace geometry
             {
                 std::cout << "Hello from Line2D constructor!\n";
             }
+
+            bool do_lines2D_intersect(geometry::Line2D* line1, geometry::Line2D* line2);
+            bool do_lines2D_intersect(geometry::Line2D* line);
     };
 }
 

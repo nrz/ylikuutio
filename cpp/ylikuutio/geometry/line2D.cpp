@@ -1,10 +1,15 @@
 #include "line2D.hpp"
 
-// Include standard headers
-#include <iostream> // std::cout, std::cin, std::cerr
-#include <string>   // std::string
-#include <vector>   // std::vector
-
 namespace geometry
 {
+    bool Line2D::do_lines2D_intersect(geometry::Line2D* line1, geometry::Line2D* line2)
+    {
+        // TODO: implement the function!
+        return false;
+    }
+
+    bool Line2D::do_lines2D_intersect(geometry::Line2D* line)
+    {
+        return geometry::Line2D::do_lines2D_intersect(line, this);
+    }
 }

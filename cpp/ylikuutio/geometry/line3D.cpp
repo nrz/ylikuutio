@@ -1,10 +1,15 @@
 #include "line3D.hpp"
 
-// Include standard headers
-#include <iostream> // std::cout, std::cin, std::cerr
-#include <string>   // std::string
-#include <vector>   // std::vector
-
 namespace geometry
 {
+    bool Line3D::do_lines3D_intersect(geometry::Line3D* line1, geometry::Line3D* line2)
+    {
+        // TODO: implement the function!
+        return false;
+    }
+
+    bool Line3D::do_lines3D_intersect(geometry::Line3D* line)
+    {
+        return geometry::Line3D::do_lines3D_intersect(line, this);
+    }
 }

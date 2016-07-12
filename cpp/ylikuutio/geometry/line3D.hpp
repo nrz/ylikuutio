@@ -31,6 +31,9 @@ namespace geometry
             {
                 std::cout << "Hello from Line3D constructor!\n";
             }
+
+            bool do_lines3D_intersect(geometry::Line3D* line1, geometry::Line3D* line2);
+            bool do_lines3D_intersect(geometry::Line3D* line);
     };
 }
 
