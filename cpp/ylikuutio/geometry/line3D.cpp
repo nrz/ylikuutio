@@ -7,18 +7,4 @@
 
 namespace geometry
 {
-    /*
-    Line3D::Line3D(std::vector<float> point1, std::vector<float> point2)
-    {
-        Line(std::vector<float> point1, std::vector<float> point2);
-    }
-    */
-
-    /*
-    Line3D::Line3D(std::vector<float> general_form_coefficients, float general_form_constant)
-    {
-        std::cout << "Hello from Line3D constructor!\n";
-        Line3D(std::vector<float> general_form_coefficients, float general_form_constant);
-    }
-    */
 }

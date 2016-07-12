@@ -7,10 +7,4 @@
 
 namespace geometry
 {
-    /*
-    LineSegment3D::LineSegment3D(std::vector<float> point1, std::vector<float> point2)
-    {
-        std::cout << "Hello from LineSegment3D constructor!\n";
-    }
-    */
 }
