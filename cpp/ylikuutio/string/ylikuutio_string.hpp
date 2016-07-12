@@ -13,7 +13,7 @@ namespace string
 
     int32_t extract_value_from_string(char*& vertex_data_pointer, char* char_end_string, const char* description);
 
-    int32_t extract_unicode_value_from_string(char*& unicode_string_pointer);
+    int32_t extract_unicode_value_from_string(const char*& unicode_string_pointer);
 }
 
 #endif

@@ -89,8 +89,8 @@ namespace model
             GLuint lightID;                        // light ID, returned by `glGetUniformLocation(programID, "LightPosition_worldspace");`.
 
             std::vector<std::vector<glm::vec2>>* glyph_vertex_data;
-            std::string* glyph_name_pointer;         // we need only a pointer, because glyphs are always created by the `VectorFont` constructor.
-            std::string* unicode_string_pointer;     // we need only a pointer, because glyphs are always created by the `VectorFont` constructor.
+            const char* glyph_name_pointer;        // we need only a pointer, because glyphs are always created by the `VectorFont` constructor.
+            const char* unicode_string_pointer;    // we need only a pointer, because glyphs are always created by the `VectorFont` constructor.
 
             std::vector<void*> object_pointer_vector;
             std::queue<uint32_t> free_objectID_queue;

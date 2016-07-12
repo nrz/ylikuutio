@@ -65,7 +65,7 @@ namespace string
         return value;
     }
 
-    int32_t extract_unicode_value_from_string(char*& unicode_string_pointer)
+    int32_t extract_unicode_value_from_string(const char*& unicode_string_pointer)
     {
         if (*unicode_string_pointer == '\0')
         {

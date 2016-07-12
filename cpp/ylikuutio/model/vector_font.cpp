@@ -4,6 +4,7 @@
 #include "render_templates.hpp"
 #include "cpp/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "font_loader.hpp"
+#include "cpp/ylikuutio/string/ylikuutio_string.hpp"
 
 // Include standard headers
 #include <cstring>       // std::memcmp, std::strcmp, std::strlen, std::strncmp
@@ -20,13 +21,13 @@ namespace model
         hierarchy::bind_child_to_parent<model::VectorFont*>(this, this->parent_pointer->vector_font_pointer_vector, this->parent_pointer->free_vector_fontID_queue);
     }
 
-    // this method returns a pointer to `Glyph` that matches the given `unicode_string`,
-    // and `nullptr` if this `VectorFont` does not such a `Glyph`.
-    model::Glyph* VectorFont::get_glyph_pointer(std::string unicode_string)
+    // this method returns a pointer to `Glyph` that matches the given `unicode_value`,
+    // and `nullptr` if this `VectorFont` does not contain such a `Glyph`.
+    model::Glyph* VectorFont::get_glyph_pointer(int32_t unicode_value)
     {
-        if (this->unicode_glyph_map.count(unicode_string) == 1)
+        if (this->unicode_glyph_map.count(unicode_value) == 1)
         {
-            return this->unicode_glyph_map[unicode_string];
+            return this->unicode_glyph_map[unicode_value];
         }
 
         // No matching `Glyph` found!
@@ -70,16 +71,26 @@ namespace model
             {
                 GlyphStruct glyph_struct;
                 glyph_struct.glyph_vertex_data = &this->glyph_vertex_data.at(i);
-                glyph_struct.glyph_name_pointer = &this->glyph_names.at(i);
-                glyph_struct.unicode_string_pointer = &this->unicode_strings.at(i);
+                glyph_struct.glyph_name_pointer = this->glyph_names.at(i).c_str();
+                glyph_struct.unicode_string_pointer = this->unicode_strings.at(i).c_str();
                 glyph_struct.parent_pointer = this;
 
-                std::cout << "creating glyph " << *glyph_struct.glyph_name_pointer << ", Unicode: " << *glyph_struct.unicode_string_pointer << "\n";
+                const char* unicode_string_pointer = glyph_struct.unicode_string_pointer;
+                int32_t unicode_value = string::extract_unicode_value_from_string(unicode_string_pointer);
+                if (unicode_value >= 0xd800 && unicode_value <= 0xdfff)
+                {
+                    // invalid Unicode, skip to next `Glyph`.
+                    continue;
+                }
+
+                std::string glyph_name_string = glyph_struct.glyph_name_pointer;
+                std::string unicode_string = glyph_struct.unicode_string_pointer;
+                std::cout << "Creating Glyph \"" << glyph_name_string << "\", Unicode: \"" << unicode_string << "\"\n";
                 model::Glyph* glyph = new model::Glyph(glyph_struct);
 
                 // so that each `Glyph` can be referred to,
                 // we need a hash map that points from Unicode string to `Glyph`.
-                this->unicode_glyph_map[*glyph_struct.unicode_string_pointer] = glyph;
+                this->unicode_glyph_map[unicode_value] = glyph;
             }
         }
     }

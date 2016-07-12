@@ -41,7 +41,9 @@ namespace model
     Glyph::~Glyph()
     {
         // destructor.
-        std::cout << "This glyph (\"" << *this->glyph_name_pointer << "\", Unicode: \"" << *this->unicode_string_pointer << "\") will be destroyed.\n";
+        std::string glyph_name_string = this->glyph_name_pointer;
+        std::string unicode_string = this->unicode_string_pointer;
+        std::cout << "This glyph (\"" << glyph_name_string << "\", Unicode: \"" << std::dec << unicode_string << "\") will be destroyed.\n";
 
         // TODO: Cleanup VBO, shader and texture (copy these from `Species::~Species()`).
 

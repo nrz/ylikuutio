@@ -2,6 +2,7 @@
 #include "vector_font.hpp"
 #include "object.hpp"
 #include "cpp/ylikuutio/hierarchy/hierarchy_templates.hpp"
+#include "cpp/ylikuutio/string/ylikuutio_string.hpp"
 
 // Include standard headers
 #include <iostream> // std::cout, std::cin, std::cerr
@@ -26,43 +27,35 @@ namespace model
         // get childID from `Font` and set pointer to this `Text3D`.
         this->bind_to_parent();
 
-        if (this->text_string.find("&"))
+        std::cout << "Creating the glyph Objects for the string \"" << this->text_string << "\"\n";
+
+        // Let's create each glyph Object in a loop.
+
+        const char* text_pointer = this->text_string.c_str();
+
+        while (*text_pointer != '\0')
         {
-            std::cout << "Creating the glyph Objects for the string \"" << this->text_string << "\"\n";
+            int32_t unicode_value = string::extract_unicode_value_from_string(text_pointer);
+            model::Glyph* glyph_pointer = this->parent_pointer->get_glyph_pointer(unicode_value);
 
-            // OK, there are no Unicode strings.
-            // Let's create each glyph Object in a loop.
-
-            for (uint32_t i = 0; i < this->text_string.size(); i++)
+            if (!glyph_pointer)
             {
-                // This way does not work for Unicode strings!
-                // FIXME: Fix this so that it works for Unicode strings!
-                std::string unicode_string = std::string(1, this->text_string.at(i));
-                model::Glyph* glyph_pointer = this->parent_pointer->get_glyph_pointer(unicode_string);
-
-                if (!glyph_pointer)
-                {
-                    // nullptr, so skip this character.
-                    std::cerr << "Error: no matching Glyph found for unicode_string: \"" << unicode_string << "\"\n";
-                    continue;
-                }
-
-                std::cout << "Creating the glyph Object for unicode_string: \"" << unicode_string << "\"\n";
-
-                ObjectStruct object_struct;
-                object_struct.glyph_parent_pointer = glyph_pointer;
-                object_struct.text3D_parent_pointer = this;
-                object_struct.original_scale_vector = this->original_scale_vector;
-                object_struct.rotate_angle = this->rotate_angle;
-                object_struct.is_character = true;
-                object_struct.coordinate_vector = this->coordinate_vector; // TODO: adjust this as needed.
-                object_struct.rotate_vector = this->rotate_vector;
-                model::Object* object = new model::Object(object_struct);
+                // nullptr, so skip this character.
+                std::cerr << "Error: no matching Glyph found for unicode_value 0x" << std::hex << unicode_value << "\n";
+                continue;
             }
-        }
-        else
-        {
-            std::cerr << "Error: Support for Unicode strings not yet implemented!\n";
+
+            std::cout << "Creating the glyph Object for unicode_value 0x" << std::hex << unicode_value << "\n";
+
+            ObjectStruct object_struct;
+            object_struct.glyph_parent_pointer = glyph_pointer;
+            object_struct.text3D_parent_pointer = this;
+            object_struct.original_scale_vector = this->original_scale_vector;
+            object_struct.rotate_angle = this->rotate_angle;
+            object_struct.is_character = true;
+            object_struct.coordinate_vector = this->coordinate_vector; // TODO: adjust this as needed.
+            object_struct.rotate_vector = this->rotate_vector;
+            model::Object* object = new model::Object(object_struct);
         }
 
         // TODO: Add support for Unicode strings.

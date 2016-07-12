@@ -57,9 +57,9 @@ namespace model
         private:
             void bind_to_parent();
 
-            // this method returns a pointer to `Glyph` that matches the given `unicode_string`,
-            // and `nullptr` if this `VectorFont` does not such a `Glyph`.
-            model::Glyph* get_glyph_pointer(std::string unicode_string);
+            // this method returns a pointer to `Glyph` that matches the given `unicode_value`,
+            // and `nullptr` if this `VectorFont` does not contain such a `Glyph`.
+            model::Glyph* get_glyph_pointer(int32_t unicode_value);
 
             // this method renders all glyphs of this `VectorFont`.
             void render();
@@ -82,7 +82,7 @@ namespace model
             std::queue<uint32_t> free_glyphID_queue;
             std::queue<uint32_t> free_text3D_ID_queue;
 
-            std::unordered_map<std::string, model::Glyph*> unicode_glyph_map;
+            std::unordered_map<int32_t, model::Glyph*> unicode_glyph_map;
     };
 }
 
