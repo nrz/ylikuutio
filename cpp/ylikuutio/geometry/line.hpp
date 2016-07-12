@@ -21,9 +21,13 @@ namespace geometry
             std::string get_general_form_equation();
 
         protected:
+            bool is_valid;
             std::vector<float> general_form_coefficients;
             float general_form_constant;
-            bool is_valid;
+
+            bool are_points_defined;
+            std::vector<float> point1;
+            std::vector<float> point2;
     };
 }
 
