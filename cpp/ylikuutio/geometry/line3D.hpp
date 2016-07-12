@@ -34,6 +34,10 @@ namespace geometry
 
             bool do_lines3D_intersect(geometry::Line3D* line1, geometry::Line3D* line2);
             bool do_lines3D_intersect(geometry::Line3D* line);
+
+        private:
+            glm::vec3 vec3_point1;
+            glm::vec3 vec3_point2;
     };
 }
 
