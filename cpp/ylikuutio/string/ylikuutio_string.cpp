@@ -4,6 +4,7 @@
 #include <cstdio>   // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf etc.
 #include <cstring>  // std::memcmp, std::strcmp, std::strlen, std::strncmp
 #include <iostream> // std::cout, std::cin, std::cerr
+#include <sstream>  // std::stringstream
 #include <string>   // std::string
 #include <vector>   // std::vector
 
@@ -62,5 +63,65 @@ namespace string
         uint32_t value = std::atoi(dest_mem_pointer);
         std::printf("%s: %d\n", description, value);
         return value;
+    }
+
+    int32_t extract_unicode_value_from_string(char*& unicode_string_pointer)
+    {
+        if (*unicode_string_pointer == '\0')
+        {
+            unicode_string_pointer++;
+            std::cerr << "Error: Unicode can not begin with \\0!\n";
+            return 0xdfff; // invalid unicode!
+        }
+
+        if (*unicode_string_pointer != '&')
+        {
+            // it's just a character, so return its value,
+            // and advance to the next character.
+            return (int32_t) *unicode_string_pointer++;
+        }
+
+        if (*++unicode_string_pointer != '#')
+        {
+            // not valid format, must begin `"&#x"`.
+            unicode_string_pointer++;
+            std::cerr << "Error: Unicode string format not supported!\n";
+            return 0xdfff; // invalid unicode!
+        }
+
+        if (*++unicode_string_pointer != 'x')
+        {
+            // not valid format, must begin `"&#x"`.
+            unicode_string_pointer++;
+            std::cerr << "Error: Unicode string format not supported!\n";
+            return 0xdfff; // invalid unicode!
+        }
+
+        // valid format.
+        std::string hex_string;
+
+        // unicode string beginning with '&'
+        while (*++unicode_string_pointer != ';')
+        {
+            if (*unicode_string_pointer == '\0')
+            {
+                std::cerr << "Error: Null character \\0 reached before end of Unicode string!\n";
+                return 0xdfff; // invalid unicode!
+            }
+
+            char current_char = *unicode_string_pointer;
+            hex_string.append(unicode_string_pointer);
+        }
+
+        // Advance to the next character.
+        unicode_string_pointer++;
+
+        // convert hexadecimal string to signed integer.
+        // http://stackoverflow.com/questions/1070497/c-convert-hex-string-to-signed-integer/1070499#1070499
+        uint32_t unicode_value;
+        std::stringstream unicode_stringstream;
+        unicode_stringstream << std::hex << hex_string;
+        unicode_stringstream >> unicode_value;
+        return unicode_value;
     }
 }

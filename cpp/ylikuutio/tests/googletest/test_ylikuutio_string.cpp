@@ -181,3 +181,57 @@ TEST(string_matching, no_string_must_match_when_there_are_three_1_character_stri
     std::vector<std::string> identifier_strings_vector = { "A", "b", "c" };
     ASSERT_FALSE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, identifier_strings_vector));
 }
+TEST(unicode_value_from_string, char_only_a)
+{
+    char text[] = "a";
+    char* text_pointer = text;
+    ASSERT_EQ(string::extract_unicode_value_from_string(text_pointer), 'a');
+}
+TEST(unicode_value_from_string, char_only_abc)
+{
+    char text[] = "abc";
+    char* text_pointer = text;
+    ASSERT_EQ(string::extract_unicode_value_from_string(text_pointer), 'a');
+    ASSERT_EQ(string::extract_unicode_value_from_string(text_pointer), 'b');
+    ASSERT_EQ(string::extract_unicode_value_from_string(text_pointer), 'c');
+}
+TEST(unicode_value_from_string, unicode_a)
+{
+    char text[] = "&#xa;";
+    char* text_pointer = text;
+    ASSERT_EQ(string::extract_unicode_value_from_string(text_pointer), 0xa);
+}
+TEST(unicode_value_from_string, unicode_deadbeef)
+{
+    char text[] = "&#xdeadbeef;";
+    char* text_pointer = text;
+    ASSERT_EQ(string::extract_unicode_value_from_string(text_pointer), 0xdeadbeef);
+}
+TEST(unicode_value_from_string, iloinen_10cc1_01c00_ja_c1e1ece_caace101_kaikkialle)
+{
+    char text[] = "iloinen&#x10cc1;&#x01c00;ja&#xc1e1ece;&#xcaace101;kaikkialle";
+    char* text_pointer = text;
+    ASSERT_EQ(string::extract_unicode_value_from_string(text_pointer), 'i');
+    ASSERT_EQ(string::extract_unicode_value_from_string(text_pointer), 'l');
+    ASSERT_EQ(string::extract_unicode_value_from_string(text_pointer), 'o');
+    ASSERT_EQ(string::extract_unicode_value_from_string(text_pointer), 'i');
+    ASSERT_EQ(string::extract_unicode_value_from_string(text_pointer), 'n');
+    ASSERT_EQ(string::extract_unicode_value_from_string(text_pointer), 'e');
+    ASSERT_EQ(string::extract_unicode_value_from_string(text_pointer), 'n');
+    ASSERT_EQ(string::extract_unicode_value_from_string(text_pointer), 0x10cc1);
+    ASSERT_EQ(string::extract_unicode_value_from_string(text_pointer), 0x01c00);
+    ASSERT_EQ(string::extract_unicode_value_from_string(text_pointer), 'j');
+    ASSERT_EQ(string::extract_unicode_value_from_string(text_pointer), 'a');
+    ASSERT_EQ(string::extract_unicode_value_from_string(text_pointer), 0xc1e1ece);
+    ASSERT_EQ(string::extract_unicode_value_from_string(text_pointer), 0xcaace101);
+    ASSERT_EQ(string::extract_unicode_value_from_string(text_pointer), 'k');
+    ASSERT_EQ(string::extract_unicode_value_from_string(text_pointer), 'a');
+    ASSERT_EQ(string::extract_unicode_value_from_string(text_pointer), 'i');
+    ASSERT_EQ(string::extract_unicode_value_from_string(text_pointer), 'k');
+    ASSERT_EQ(string::extract_unicode_value_from_string(text_pointer), 'k');
+    ASSERT_EQ(string::extract_unicode_value_from_string(text_pointer), 'i');
+    ASSERT_EQ(string::extract_unicode_value_from_string(text_pointer), 'a');
+    ASSERT_EQ(string::extract_unicode_value_from_string(text_pointer), 'l');
+    ASSERT_EQ(string::extract_unicode_value_from_string(text_pointer), 'l');
+    ASSERT_EQ(string::extract_unicode_value_from_string(text_pointer), 'e');
+}
