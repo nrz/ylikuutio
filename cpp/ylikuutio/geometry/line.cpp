@@ -20,6 +20,9 @@ namespace geometry
         else
         {
             this->is_valid = true; // two distinct points define a line.
+            this->are_points_defined = true;
+            this->point1 = point1;
+            this->point2 = point2;
         }
     }
 
