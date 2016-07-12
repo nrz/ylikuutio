@@ -33,6 +33,7 @@ namespace geometry
 
     std::string Line::get_general_form_equation()
     {
+        // TODO: implement this function!
         std::string line_equation;
         return line_equation;
     }
