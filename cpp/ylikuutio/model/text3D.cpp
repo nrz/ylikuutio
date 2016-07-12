@@ -78,7 +78,7 @@ namespace model
     Text3D::~Text3D()
     {
         // destructor.
-        std::cout << "This 3D text (\"" << this->text_string << "\") will be destroyed.\n";
+        std::cout << "This 3D text (\"" << this->text_string << "\", childID " << std::dec << this->childID << ") will be destroyed.\n";
 
         // destroy all objects of this `Text3D`.
         std::cout << "All objects (" << this->object_pointer_vector.size() << " pieces) of this 3D text will be destroyed.\n";

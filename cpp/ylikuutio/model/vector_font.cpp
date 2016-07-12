@@ -88,7 +88,7 @@ namespace model
     {
         // destructor.
         // Destroying a `VectorFont` destroys also all `Text3D` entities, and after that all `Glyph` entities.
-        std::cout << "This font will be destroyed.\n";
+        std::cout << "Font with childID " << std::dec << this->childID << " will be destroyed.\n";
 
         // destroy all 3D texts of this font.
         std::cout << "All 3D texts of this font will be destroyed.\n";

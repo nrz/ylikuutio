@@ -44,7 +44,7 @@ namespace model
     Scene::~Scene()
     {
         // destructor.
-        std::cout << "This scene will be destroyed.\n";
+        std::cout << "Scene with childID " << std::dec << this->childID << " will be destroyed.\n";
 
         // destroy all shaders of this scene.
         std::cout << "All shaders of this scene will be destroyed.\n";
