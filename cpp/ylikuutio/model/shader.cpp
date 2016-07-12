@@ -43,7 +43,7 @@ namespace model
     Shader::~Shader()
     {
         // destructor.
-        std::cout << "Shader with childID " << this->childID << " will be destroyed.\n";
+        std::cout << "Shader with childID " << std::dec << this->childID << " will be destroyed.\n";
 
         // destroy all materials of this shader.
         std::cout << "All materials of this shader will be destroyed.\n";

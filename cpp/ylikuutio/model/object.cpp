@@ -68,7 +68,7 @@ namespace model
         }
         else
         {
-            std::cout << "Object with childID " << this->childID << " will be destroyed.\n";
+            std::cout << "Object with childID " << std::dec << this->childID << " will be destroyed.\n";
             this->species_parent_pointer->set_object_pointer(this->childID, nullptr);
         }
     }

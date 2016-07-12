@@ -127,7 +127,7 @@ namespace model
     Species::~Species()
     {
         // destructor.
-        std::cout << "Species with childID " << this->childID << " will be destroyed.\n";
+        std::cout << "Species with childID " << std::dec << this->childID << " will be destroyed.\n";
 
         // destroy all objects of this species.
         std::cout << "All objects of this species will be destroyed.\n";

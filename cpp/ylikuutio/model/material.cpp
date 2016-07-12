@@ -53,7 +53,7 @@ namespace model
     Material::~Material()
     {
         // destructor.
-        std::cout << "Material with childID " << this->childID << " will be destroyed.\n";
+        std::cout << "Material with childID " << std::dec << this->childID << " will be destroyed.\n";
 
         // destroy all species of this material.
         std::cout << "All species of this material will be destroyed.\n";
