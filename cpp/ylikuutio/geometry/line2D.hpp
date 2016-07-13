@@ -37,8 +37,8 @@ namespace geometry
                 this->y1 = this->point1.at(1);
                 this->x2 = this->point2.at(0);
                 this->y2 = this->point2.at(1);
-                this->x1_minus_x2 = this->point1.at(0) - this->point2.at(0);
-                this->y1_minus_y2 = this->point1.at(1) - this->point2.at(1);
+                this->x1_minus_x2 = this->x1 - this->x2;
+                this->y1_minus_y2 = this->y1 - this->y2;
 
                 // The general form of a 2D line:
                 // Ax + By + C = 0
