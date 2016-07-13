@@ -1,4 +1,6 @@
 #include "gtest/gtest.h"
+
+// Include Eigen
 #include <Eigen/Dense>
 
 // Include standard headers
