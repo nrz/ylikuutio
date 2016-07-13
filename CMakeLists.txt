@@ -352,6 +352,10 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         cpp/ylikuutio/geometry/bilinear_interpolation.hpp
         cpp/ylikuutio/geometry/indexing.cpp
         cpp/ylikuutio/geometry/indexing.hpp
+        cpp/ylikuutio/geometry/line.cpp
+        cpp/ylikuutio/geometry/line.hpp
+        cpp/ylikuutio/geometry/line2D.cpp
+        cpp/ylikuutio/geometry/line2D.hpp
         cpp/ylikuutio/geometry/quad_triangulation.cpp
         cpp/ylikuutio/geometry/quad_triangulation.hpp
         cpp/ylikuutio/geometry/transformation.cpp
@@ -372,6 +376,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         cpp/ylikuutio/tests/googletest/test_font_loader.cpp
         cpp/ylikuutio/tests/googletest/test_globals.cpp
         cpp/ylikuutio/tests/googletest/test_heightmap_loader.cpp
+        cpp/ylikuutio/tests/googletest/test_line2D.cpp
         cpp/ylikuutio/tests/googletest/test_triangulation.cpp
         cpp/ylikuutio/tests/googletest/test_ylikuutio_string.cpp)
     set(MAIN_FILE cpp/ylikuutio/tests/googletest/main.cpp)
