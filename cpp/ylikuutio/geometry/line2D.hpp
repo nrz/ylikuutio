@@ -62,13 +62,12 @@ namespace geometry
             bool do_lines2D_intersect(geometry::Line2D* line1, geometry::Line2D* line2);
             bool do_lines2D_intersect(geometry::Line2D* line);
 
+            glm::vec2 vec2_point1;
+            glm::vec2 vec2_point2;
+
             // | x1 y1 |
             // | x2 y2 |
             float determinant;
-
-        private:
-            glm::vec2 vec2_point1;
-            glm::vec2 vec2_point2;
     };
 }
 
