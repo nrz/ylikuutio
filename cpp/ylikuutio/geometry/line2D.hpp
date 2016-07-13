@@ -13,7 +13,6 @@
 #include <Eigen/Dense>
 
 // Include standard headers
-#include <iostream> // std::cout, std::cin, std::cerr
 #include <vector>   // std::vector
 
 namespace geometry
@@ -25,8 +24,6 @@ namespace geometry
             Line2D(std::vector<float> point1, std::vector<float> point2)
                 : Line(point1, point2)
             {
-                std::cout << "Hello from Line2D constructor!\n";
-
                 Eigen::Matrix2f line_points_matrix;
                 line_points_matrix <<
                     this->point1.at(0), this->point1.at(1), \
@@ -54,15 +51,12 @@ namespace geometry
             Line2D(glm::vec2 point1, glm::vec2 point2)
                 : Line2D(std::vector<float>{ point1.x, point1.y }, std::vector<float>{ point2.x, point2.y })
                 {
-                    std::cout << "Hello from Line2D constructor!\n";
                 }
 
             // constructor.
             Line2D(std::vector<float> general_form_coefficients, float general_form_constant)
                 : Line(general_form_coefficients, general_form_constant)
             {
-                std::cout << "Hello from Line2D constructor!\n";
-
                 // The general form of a 2D line:
                 // Ax + By + C = 0
                 //

@@ -10,7 +10,6 @@
 #endif
 
 // Include standard headers
-#include <iostream> // std::cout, std::cin, std::cerr
 #include <vector>   // std::vector
 
 namespace geometry
@@ -22,14 +21,12 @@ namespace geometry
             Line3D(std::vector<float> point1, std::vector<float> point2)
                 : Line(point1, point2)
             {
-                std::cout << "Hello from Line3D constructor!\n";
             }
 
             // constructor.
             Line3D(std::vector<float> general_form_coefficients, float general_form_constant)
                 : Line(general_form_coefficients, general_form_constant)
             {
-                std::cout << "Hello from Line3D constructor!\n";
             }
 
             bool do_lines3D_intersect(geometry::Line3D* line1, geometry::Line3D* line2);

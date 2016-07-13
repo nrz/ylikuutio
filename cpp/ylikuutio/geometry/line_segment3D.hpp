@@ -21,7 +21,6 @@ namespace geometry
             LineSegment3D(std::vector<float> point1, std::vector<float> point2)
                 : LineSegment(point1, point2)
             {
-                std::cout << "Hello from LineSegment3D constructor!\n";
             }
     };
 }
