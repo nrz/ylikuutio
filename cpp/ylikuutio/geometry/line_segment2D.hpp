@@ -10,6 +10,9 @@
 #include <glm/glm.hpp> // glm
 #endif
 
+// Include standard headers
+#include <vector>   // std::vector
+
 namespace geometry
 {
     class LineSegment2D : public Line2D
