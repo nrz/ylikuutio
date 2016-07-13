@@ -11,7 +11,7 @@ namespace geometry
     // can be used for creating n-dimensional lines.
     Line::Line(std::vector<float> point1, std::vector<float> point2)
     {
-        if (point1 == point2)
+        if (point1 == point2 || point1.size() != point2.size())
         {
             this->is_valid = false; // two identical points do not define a line.
             this->general_form_coefficients.push_back(NAN);
