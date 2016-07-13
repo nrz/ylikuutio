@@ -9,6 +9,9 @@
 #include <glm/glm.hpp> // glm
 #endif
 
+// Include Eigen
+#include <Eigen/Dense>
+
 // Include standard headers
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <vector>   // std::vector
@@ -23,6 +26,12 @@ namespace geometry
                 : Line(point1, point2)
             {
                 std::cout << "Hello from Line2D constructor!\n";
+
+                Eigen::Matrix2f line_points_matrix;
+                line_points_matrix <<
+                    this->point1.at(0), this->point1.at(1), \
+                    this->point2.at(0), this->point2.at(1);
+                this->line_determinant = line_points_matrix.determinant();
 
                 // The general form of a 2D line:
                 // Ax + By + C = 0
@@ -52,6 +61,10 @@ namespace geometry
 
             bool do_lines2D_intersect(geometry::Line2D* line1, geometry::Line2D* line2);
             bool do_lines2D_intersect(geometry::Line2D* line);
+
+            // | x1 y1 |
+            // | x2 y2 |
+            float line_determinant;
 
         private:
             glm::vec2 vec2_point1;
