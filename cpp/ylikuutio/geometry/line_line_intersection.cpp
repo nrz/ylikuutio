@@ -16,14 +16,14 @@
 
 namespace geometry
 {
-    glm::vec2 get_intersection_point(geometry::Line2D line1, geometry::Line2D line2)
+    glm::vec2 get_intersection_point(geometry::Line2D* line1, geometry::Line2D* line2)
     {
         // See http://mathworld.wolfram.com/Line-LineIntersection.html
 
         Eigen::Matrix2f lower_matrix_for_solving_x_and_y;
         lower_matrix_for_solving_x_and_y <<
-            line1.x1_minus_x2, line1.y1_minus_y2,  \
-            line2.x1_minus_x2, line2.y1_minus_y2;
+            line1->x1_minus_x2, line1->y1_minus_y2,  \
+            line2->x1_minus_x2, line2->y1_minus_y2;
         float det_lower_matrix_for_solving_x_and_y = lower_matrix_for_solving_x_and_y.determinant();
 
         if (det_lower_matrix_for_solving_x_and_y == 0.0f)
@@ -37,14 +37,14 @@ namespace geometry
 
         Eigen::Matrix2f upper_matrix_for_solving_x;
         upper_matrix_for_solving_x <<
-            line1.determinant, line1.x1_minus_x2, \
-            line2.determinant, line2.x1_minus_x2;
+            line1->determinant, line1->x1_minus_x2, \
+            line2->determinant, line2->x1_minus_x2;
         float det_upper_matrix_for_solving_x = upper_matrix_for_solving_x.determinant();
 
         Eigen::Matrix2f upper_matrix_for_solving_y;
         upper_matrix_for_solving_y <<
-            line1.determinant, line1.y1_minus_y2, \
-            line2.determinant, line2.y1_minus_y2;
+            line1->determinant, line1->y1_minus_y2, \
+            line2->determinant, line2->y1_minus_y2;
         float det_upper_matrix_for_solving_y = upper_matrix_for_solving_y.determinant();
 
         // Compute x and y coordinates.
@@ -53,7 +53,7 @@ namespace geometry
         return glm::vec2(x, y);
     }
 
-    glm::vec3 get_intersection_point(geometry::Line3D line1, geometry::Line3D line2)
+    glm::vec3 get_intersection_point(geometry::Line3D* line1, geometry::Line3D* line2)
     {
         // TODO: implement this function!
         glm::vec3 intersection_point;
