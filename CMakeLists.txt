@@ -236,8 +236,8 @@ add_executable(ajokki
     cpp/ylikuutio/geometry/line_segment2D.hpp
     cpp/ylikuutio/geometry/line_segment3D.cpp
     cpp/ylikuutio/geometry/line_segment3D.hpp
-    cpp/ylikuutio/geometry/line_segment_intersection.cpp
-    cpp/ylikuutio/geometry/line_segment_intersection.hpp
+    cpp/ylikuutio/geometry/line_segment_line_segment_intersection.cpp
+    cpp/ylikuutio/geometry/line_segment_line_segment_intersection.hpp
     cpp/ylikuutio/geometry/quad_triangulation.cpp
     cpp/ylikuutio/geometry/quad_triangulation.hpp
     cpp/ylikuutio/geometry/transformation.cpp
@@ -358,6 +358,10 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         cpp/ylikuutio/geometry/line2D.hpp
         cpp/ylikuutio/geometry/line_line_intersection.cpp
         cpp/ylikuutio/geometry/line_line_intersection.hpp
+        cpp/ylikuutio/geometry/line_segment2D.cpp
+        cpp/ylikuutio/geometry/line_segment2D.hpp
+        cpp/ylikuutio/geometry/line_segment_line_segment_intersection.cpp
+        cpp/ylikuutio/geometry/line_segment_line_segment_intersection.hpp
         cpp/ylikuutio/geometry/quad_triangulation.cpp
         cpp/ylikuutio/geometry/quad_triangulation.hpp
         cpp/ylikuutio/geometry/transformation.cpp
@@ -380,6 +384,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         cpp/ylikuutio/tests/googletest/test_heightmap_loader.cpp
         cpp/ylikuutio/tests/googletest/test_line2D.cpp
         cpp/ylikuutio/tests/googletest/test_line_line_intersection.cpp
+        cpp/ylikuutio/tests/googletest/test_line_segment_line_segment_intersection.cpp
         cpp/ylikuutio/tests/googletest/test_triangulation.cpp
         cpp/ylikuutio/tests/googletest/test_ylikuutio_string.cpp)
     set(MAIN_FILE cpp/ylikuutio/tests/googletest/main.cpp)

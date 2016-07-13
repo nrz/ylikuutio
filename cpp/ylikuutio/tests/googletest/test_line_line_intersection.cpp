@@ -2,11 +2,14 @@
 #include "cpp/ylikuutio/geometry/line_line_intersection.hpp"
 #include "cpp/ylikuutio/geometry/line2D.hpp"
 
+// Include GLM
+#ifndef __GLM_GLM_HPP_INCLUDED
+#define __GLM_GLM_HPP_INCLUDED
+#include <glm/glm.hpp> // glm
+#endif
+
 // Include standard headers
 #include <cmath>    // NAN, std::isnan, std::pow
-
-// Include Eigen
-#include <Eigen/Dense>
 
 TEST(line2D_line2D_intersection, parallel_lines)
 {
