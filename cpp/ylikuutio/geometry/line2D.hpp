@@ -31,7 +31,7 @@ namespace geometry
                 line_points_matrix <<
                     this->point1.at(0), this->point1.at(1), \
                     this->point2.at(0), this->point2.at(1);
-                this->line_determinant = line_points_matrix.determinant();
+                this->determinant = line_points_matrix.determinant();
 
                 // The general form of a 2D line:
                 // Ax + By + C = 0
@@ -64,7 +64,7 @@ namespace geometry
 
             // | x1 y1 |
             // | x2 y2 |
-            float line_determinant;
+            float determinant;
 
         private:
             glm::vec2 vec2_point1;
