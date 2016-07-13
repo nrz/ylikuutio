@@ -1,4 +1,6 @@
 #include "line_line_intersection.hpp"
+#include "line2D.hpp"
+#include "line3D.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -8,9 +10,17 @@
 
 namespace geometry
 {
-    glm::vec2 do_lines_intersect(glm::vec2 line_1_vertex_1, glm::vec2 line_1_vertex_2, glm::vec2 line_2_vertex_1, glm::vec2 line_2_vertex_2)
+    glm::vec2 do_lines_intersect(geometry::Line2D line1, geometry::Line2D line2)
     {
+        // TODO: implement this function!
         glm::vec2 intersection_point;
+        return intersection_point;
+    }
+
+    glm::vec3 do_lines_intersect(geometry::Line3D line1, geometry::Line3D line2)
+    {
+        // TODO: implement this function!
+        glm::vec3 intersection_point;
         return intersection_point;
     }
 }

@@ -9,7 +9,11 @@
 
 namespace geometry
 {
-    glm::vec2 do_lines_intersect(glm::vec2 line_1_vertex_1, glm::vec2 line_1_vertex_2, glm::vec2 line_2_vertex_1, glm::vec2 line_2_vertex_2);
+    class Line2D;
+    class Line3D;
+
+    glm::vec2 do_lines_intersect(geometry::Line2D line1, geometry::Line2D line2);
+    glm::vec3 do_lines_intersect(geometry::Line3D line1, geometry::Line3D line2);
 }
 
 #endif
