@@ -153,7 +153,7 @@ namespace model
         hierarchy::set_child_pointer(childID, parent_pointer, this->object_pointer_vector, this->free_objectID_queue);
     }
 
-    void Species::bind_to_new_parent(model::Material *new_material_pointer)
+    void Species::bind_to_new_parent(model::Material* new_material_pointer)
     {
         hierarchy::bind_child_to_new_parent<model::Species*, model::Material*>(this, new_material_pointer, this->parent_pointer->species_pointer_vector, this->parent_pointer->free_speciesID_queue);
     }

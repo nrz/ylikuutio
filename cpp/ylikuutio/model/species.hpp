@@ -39,7 +39,7 @@ namespace model
             ~Species();
 
             // this method sets pointer to this species to nullptr, sets `parent_pointer` according to the input, and requests a new `childID` from the new texture.
-            void bind_to_new_parent(model::Material *new_material_pointer);
+            void bind_to_new_parent(model::Material* new_material_pointer);
 
             // this method sets a object pointer.
             void set_object_pointer(uint32_t childID, void* parent_pointer);

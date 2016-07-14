@@ -21,7 +21,7 @@ namespace model
             ~Scene();
 
             // this method sets pointer to this scene to nullptr, sets `parent_pointer` according to the input, and requests a new `childID` from the new world.
-            void bind_to_new_parent(model::World *new_world_pointer);
+            void bind_to_new_parent(model::World* new_world_pointer);
 
             friend class Shader;
             friend class Species;

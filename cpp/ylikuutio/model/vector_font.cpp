@@ -132,7 +132,7 @@ namespace model
         hierarchy::set_child_pointer(childID, parent_pointer, this->text3D_pointer_vector, this->free_text3D_ID_queue);
     }
 
-    void VectorFont::bind_to_new_parent(model::Material *new_material_pointer)
+    void VectorFont::bind_to_new_parent(model::Material* new_material_pointer)
     {
         hierarchy::bind_child_to_new_parent<model::VectorFont*, model::Material*>(this, new_material_pointer, this->parent_pointer->vector_font_pointer_vector, this->parent_pointer->free_vector_fontID_queue);
     }

@@ -57,7 +57,7 @@ namespace model
         model::render_children<model::Shader*>(this->shader_pointer_vector);
     }
 
-    void Scene::bind_to_new_parent(model::World *new_world_pointer)
+    void Scene::bind_to_new_parent(model::World* new_world_pointer)
     {
         hierarchy::bind_child_to_new_parent<model::Scene*, model::World*>(this, new_world_pointer, this->parent_pointer->scene_pointer_vector, this->parent_pointer->free_sceneID_queue);
     }

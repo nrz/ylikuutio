@@ -92,7 +92,7 @@ namespace model
         hierarchy::set_child_pointer(childID, parent_pointer, this->vector_font_pointer_vector, this->free_vector_fontID_queue);
     }
 
-    void Material::bind_to_new_parent(model::Shader *new_shader_pointer)
+    void Material::bind_to_new_parent(model::Shader* new_shader_pointer)
     {
         hierarchy::bind_child_to_new_parent<model::Material*, model::Shader*>(this, new_shader_pointer, this->parent_pointer->material_pointer_vector, this->parent_pointer->free_materialID_queue);
     }

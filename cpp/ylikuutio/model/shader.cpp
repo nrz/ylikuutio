@@ -71,7 +71,7 @@ namespace model
         hierarchy::set_child_pointer(childID, parent_pointer, this->material_pointer_vector, this->free_materialID_queue);
     }
 
-    void Shader::bind_to_new_parent(model::Scene *new_scene_pointer)
+    void Shader::bind_to_new_parent(model::Scene* new_scene_pointer)
     {
         hierarchy::bind_child_to_new_parent<model::Shader*, model::Scene*>(this, new_scene_pointer, this->parent_pointer->shader_pointer_vector, this->parent_pointer->free_shaderID_queue);
     }
