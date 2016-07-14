@@ -69,9 +69,9 @@ namespace model
 
             for (uint32_t i = 0; i < this->glyph_vertex_data.size(); i++)
             {
-                const char* unicode_string_pointer = this->unicode_strings.at(i).c_str();
+                const char* unicode_char_pointer = this->unicode_strings.at(i).c_str();
 
-                int32_t unicode_value = string::extract_unicode_value_from_string(unicode_string_pointer);
+                int32_t unicode_value = string::extract_unicode_value_from_string(unicode_char_pointer);
                 if (unicode_value >= 0xd800 && unicode_value <= 0xdfff)
                 {
                     // invalid Unicode, skip to next `Glyph`.
@@ -82,11 +82,11 @@ namespace model
                 GlyphStruct glyph_struct;
                 glyph_struct.glyph_vertex_data = &this->glyph_vertex_data.at(i);
                 glyph_struct.glyph_name_pointer = this->glyph_names.at(i).c_str();
-                glyph_struct.unicode_string_pointer = unicode_string_pointer;
+                glyph_struct.unicode_char_pointer = unicode_char_pointer;
                 glyph_struct.parent_pointer = this;
 
                 std::string glyph_name_string = glyph_struct.glyph_name_pointer;
-                std::string unicode_string = glyph_struct.unicode_string_pointer;
+                std::string unicode_string = glyph_struct.unicode_char_pointer;
                 std::cout << "Creating Glyph \"" << glyph_name_string << "\", Unicode: \"" << unicode_string << "\"\n";
                 model::Glyph* glyph = new model::Glyph(glyph_struct);
 

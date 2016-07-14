@@ -90,7 +90,7 @@ namespace model
 
             std::vector<std::vector<glm::vec2>>* glyph_vertex_data;
             const char* glyph_name_pointer;        // we need only a pointer, because glyphs are always created by the `VectorFont` constructor.
-            const char* unicode_string_pointer;    // we need only a pointer, because glyphs are always created by the `VectorFont` constructor.
+            const char* unicode_char_pointer;    // we need only a pointer, because glyphs are always created by the `VectorFont` constructor.
 
             std::vector<void*> object_pointer_vector;
             std::queue<uint32_t> free_objectID_queue;

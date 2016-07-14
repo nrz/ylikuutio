@@ -65,34 +65,34 @@ namespace string
         return value;
     }
 
-    int32_t extract_unicode_value_from_string(const char*& unicode_string_pointer)
+    int32_t extract_unicode_value_from_string(const char*& unicode_char_pointer)
     {
-        if (*unicode_string_pointer == '\0')
+        if (*unicode_char_pointer == '\0')
         {
-            unicode_string_pointer++;
+            unicode_char_pointer++;
             std::cerr << "Error: Unicode can not begin with \\0!\n";
             return 0xdfff; // invalid unicode!
         }
 
-        if (*unicode_string_pointer != '&')
+        if (*unicode_char_pointer != '&')
         {
             // it's just a character, so return its value,
             // and advance to the next character.
-            return (int32_t) *unicode_string_pointer++;
+            return (int32_t) *unicode_char_pointer++;
         }
 
-        if (*++unicode_string_pointer != '#')
+        if (*++unicode_char_pointer != '#')
         {
             // not valid format, must begin `"&#x"`.
-            unicode_string_pointer++;
+            unicode_char_pointer++;
             std::cerr << "Error: Unicode string format not supported!\n";
             return 0xdfff; // invalid unicode!
         }
 
-        if (*++unicode_string_pointer != 'x')
+        if (*++unicode_char_pointer != 'x')
         {
             // not valid format, must begin `"&#x"`.
-            unicode_string_pointer++;
+            unicode_char_pointer++;
             std::cerr << "Error: Unicode string format not supported!\n";
             return 0xdfff; // invalid unicode!
         }
@@ -101,20 +101,20 @@ namespace string
         std::string hex_string;
 
         // unicode string beginning with '&'
-        while (*++unicode_string_pointer != ';')
+        while (*++unicode_char_pointer != ';')
         {
-            if (*unicode_string_pointer == '\0')
+            if (*unicode_char_pointer == '\0')
             {
                 std::cerr << "Error: Null character \\0 reached before end of Unicode string!\n";
                 return 0xdfff; // invalid unicode!
             }
 
-            char current_char = *unicode_string_pointer;
-            hex_string.append(unicode_string_pointer);
+            char current_char = *unicode_char_pointer;
+            hex_string.append(unicode_char_pointer);
         }
 
         // Advance to the next character.
-        unicode_string_pointer++;
+        unicode_char_pointer++;
 
         // convert hexadecimal string to signed integer.
         // http://stackoverflow.com/questions/1070497/c-convert-hex-string-to-signed-integer/1070499#1070499

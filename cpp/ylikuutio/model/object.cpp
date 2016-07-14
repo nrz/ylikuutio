@@ -62,7 +62,7 @@ namespace model
         // set pointer to this object to nullptr.
         if (this->is_character)
         {
-            std::string unicode_string = this->glyph_parent_pointer->unicode_string_pointer;
+            std::string unicode_string = this->glyph_parent_pointer->unicode_char_pointer;
             std::cout << "Object with childID " << std::dec << this->childID << " (Unicode: \"" << unicode_string << "\") will be destroyed.\n";
             this->text3D_parent_pointer->set_object_pointer(this->childID, nullptr);
         }
