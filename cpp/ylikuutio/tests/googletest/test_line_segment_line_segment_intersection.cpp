@@ -122,7 +122,7 @@ TEST(line_segment2D_line_segment2D_intersection, intersection_at_other_lines_poi
     // |....*..*.... b1 = point 1 of line segment b at (3, 5).
     // |......x..... x = point 2 of line segment b at (7, 3).
     // |.....*......
-    // |...a1....... x = potential intersection point at (7, 3).
+    // |...a1....... x = intersection point at (7, 3).
     // +----------->
     geometry::LineSegment2D line_segment_a = geometry::LineSegment2D(glm::vec2(5.0f, 1.0f), glm::vec2(10.0f, 6.0f));
     ASSERT_EQ(line_segment_a.determinant, 20.0f);
@@ -147,7 +147,7 @@ TEST(line_segment2D_line_segment2D_intersection, intersection_at_both_lines_poin
     // |....*....... b1 = point 1 of line segment b at (3, 5).
     // |......x..... x = point 2 of line segment b at (7, 3).
     // |.....*......
-    // |...a1....... x = potential intersection point at (7, 3).
+    // |...a1....... x = intersection point at (7, 3).
     // +----------->
     geometry::LineSegment2D line_segment_a = geometry::LineSegment2D(glm::vec2(5.0f, 1.0f), glm::vec2(7.0f, 3.0f));
     ASSERT_EQ(line_segment_a.determinant, 8.0f);
