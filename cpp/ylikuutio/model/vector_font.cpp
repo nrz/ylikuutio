@@ -66,9 +66,9 @@ namespace model
 
             std::cout << "Number of glyphs to be created: " << this->glyph_vertex_data.size() << "\n";
 
-            for (uint32_t i = 0; i < this->glyph_vertex_data.size(); i++)
+            for (uint32_t glyph_i = 0; glyph_i < this->glyph_vertex_data.size(); glyph_i++)
             {
-                const char* unicode_char_pointer = this->unicode_strings.at(i).c_str();
+                const char* unicode_char_pointer = this->unicode_strings.at(glyph_i).c_str();
                 const char* temp_unicode_char_pointer = unicode_char_pointer;
 
                 int32_t unicode_value = string::extract_unicode_value_from_string(temp_unicode_char_pointer);
@@ -80,8 +80,8 @@ namespace model
                 }
 
                 GlyphStruct glyph_struct;
-                glyph_struct.glyph_vertex_data = &this->glyph_vertex_data.at(i);
-                glyph_struct.glyph_name_pointer = this->glyph_names.at(i).c_str();
+                glyph_struct.glyph_vertex_data = &this->glyph_vertex_data.at(glyph_i);
+                glyph_struct.glyph_name_pointer = this->glyph_names.at(glyph_i).c_str();
                 glyph_struct.unicode_char_pointer = unicode_char_pointer;
                 glyph_struct.parent_pointer = this;
 
