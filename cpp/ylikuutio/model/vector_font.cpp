@@ -80,6 +80,7 @@ namespace model
                 if (unicode_value >= 0xd800 && unicode_value <= 0xdfff)
                 {
                     // invalid Unicode, skip to next `Glyph`.
+                    std::cerr << std::dec << "Error: invalid Unicode: " << unicode_value << "\n";
                     continue;
                 }
 
