@@ -1,10 +1,10 @@
 #ifndef __FONT_HPP_INCLUDED
 #define __FONT_HPP_INCLUDED
 
-#include "cpp/ylikuutio/common/globals.hpp"
-#include "render_templates.hpp"
 #include "material.hpp"
+#include "render_templates.hpp"
 #include "cpp/ylikuutio/hierarchy/hierarchy_templates.hpp"
+#include "cpp/ylikuutio/common/globals.hpp"
 
 // Include standard headers
 #include <iostream>      // std::cout, std::cin, std::cerr

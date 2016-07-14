@@ -1,9 +1,9 @@
 #include "vector_font.hpp"
-#include "glyph.hpp"
-#include "cpp/ylikuutio/hierarchy/hierarchy.hpp"
-#include "render_templates.hpp"
-#include "cpp/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "font_loader.hpp"
+#include "glyph.hpp"
+#include "render_templates.hpp"
+#include "cpp/ylikuutio/hierarchy/hierarchy.hpp"
+#include "cpp/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "cpp/ylikuutio/string/ylikuutio_string.hpp"
 
 // Include standard headers
