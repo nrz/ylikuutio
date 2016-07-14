@@ -1,5 +1,5 @@
-#ifndef __TRIANGULATION_HPP_INCLUDED
-#define __TRIANGULATION_HPP_INCLUDED
+#ifndef __QUAD_TRIANGULATION_HPP_INCLUDED
+#define __QUAD_TRIANGULATION_HPP_INCLUDED
 
 #include "cpp/ylikuutio/common/globals.hpp"
 
