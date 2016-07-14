@@ -113,3 +113,53 @@ TEST(line_segment2D_line_segment2D_intersection, potentially_but_not_intersectin
     ASSERT_TRUE(isnan(intersection_point.x));
     ASSERT_TRUE(isnan(intersection_point.y));
 }
+
+TEST(line_segment2D_line_segment2D_intersection, intersection_at_other_lines_point2)
+{
+    // ^..........*. a1 = point 1 of line segment a at (5, 1).
+    // |*.......a2.. a2 = point 2 of line segment a at (10, 6).
+    // |.b1.....*...
+    // |....*..*.... b1 = point 1 of line segment b at (3, 5).
+    // |......x..... x = point 2 of line segment b at (7, 3).
+    // |.....*......
+    // |...a1....... x = potential intersection point at (7, 3).
+    // +----------->
+    geometry::LineSegment2D line_segment_a = geometry::LineSegment2D(glm::vec2(5.0f, 1.0f), glm::vec2(10.0f, 6.0f));
+    ASSERT_EQ(line_segment_a.determinant, 20.0f);
+    ASSERT_EQ(line_segment_a.x1_minus_x2, -5.0f);
+    ASSERT_EQ(line_segment_a.y1_minus_y2, -5.0f);
+
+    geometry::LineSegment2D line_segment_b = geometry::LineSegment2D(glm::vec2(3.0f, 5.0f), glm::vec2(7.0f, 3.0f));
+    ASSERT_EQ(line_segment_b.determinant, -26.0f);
+    ASSERT_EQ(line_segment_b.x1_minus_x2, -4.0f);
+    ASSERT_EQ(line_segment_b.y1_minus_y2, 2.0f);
+
+    glm::vec2 intersection_point = geometry::get_intersection_point(&line_segment_a, &line_segment_b);
+    ASSERT_EQ(intersection_point.x, 7.0f);
+    ASSERT_EQ(intersection_point.y, 3.0f);
+}
+
+TEST(line_segment2D_line_segment2D_intersection, intersection_at_both_lines_point2)
+{
+    // ^............ a1 = point 1 of line segment a at (5, 1).
+    // |*........... x = point 2 of line segment a at (7, 3).
+    // |.b1.........
+    // |....*....... b1 = point 1 of line segment b at (3, 5).
+    // |......x..... x = point 2 of line segment b at (7, 3).
+    // |.....*......
+    // |...a1....... x = potential intersection point at (7, 3).
+    // +----------->
+    geometry::LineSegment2D line_segment_a = geometry::LineSegment2D(glm::vec2(5.0f, 1.0f), glm::vec2(7.0f, 3.0f));
+    ASSERT_EQ(line_segment_a.determinant, 8.0f);
+    ASSERT_EQ(line_segment_a.x1_minus_x2, -2.0f);
+    ASSERT_EQ(line_segment_a.y1_minus_y2, -2.0f);
+
+    geometry::LineSegment2D line_segment_b = geometry::LineSegment2D(glm::vec2(3.0f, 5.0f), glm::vec2(7.0f, 3.0f));
+    ASSERT_EQ(line_segment_b.determinant, -26.0f);
+    ASSERT_EQ(line_segment_b.x1_minus_x2, -4.0f);
+    ASSERT_EQ(line_segment_b.y1_minus_y2, 2.0f);
+
+    glm::vec2 intersection_point = geometry::get_intersection_point(&line_segment_a, &line_segment_b);
+    ASSERT_EQ(intersection_point.x, 7.0f);
+    ASSERT_EQ(intersection_point.y, 3.0f);
+}
