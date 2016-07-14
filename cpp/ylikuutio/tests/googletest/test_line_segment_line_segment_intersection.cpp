@@ -96,8 +96,8 @@ TEST(line_segment2D_line_segment2D_intersection, potentially_but_not_intersectin
     // |.b1.....*...
     // |...b2..*.... b1 = point 1 of line segment b at (3, 5).
     // |......x..... b2 = point 2 of line segment b at (5, 4).
-    // |.....*..*...
-    // |...a1.....*. x = intersection point at (7, 3).
+    // |.....*......
+    // |...a1....... x = potential intersection point at (7, 3).
     // +----------->
     geometry::LineSegment2D line_segment_a = geometry::LineSegment2D(glm::vec2(5.0f, 1.0f), glm::vec2(10.0f, 6.0f));
     ASSERT_EQ(line_segment_a.determinant, 20.0f);
