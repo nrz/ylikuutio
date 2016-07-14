@@ -52,7 +52,6 @@ namespace model
 
         if ((std::strcmp(this->char_font_file_format, "svg") == 0) || (std::strcmp(this->char_font_file_format, "SVG") == 0))
         {
-            // TODO: implement `load_SVG_font`! It should read all necessary data to this VectorFont object.
             font_loading_result = model::load_SVG_font(
                     this->font_filename,
                     this->glyph_vertex_data,
