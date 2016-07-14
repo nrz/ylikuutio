@@ -296,6 +296,17 @@ typedef struct TriangulateQuadsStruct
     SphericalWorldStruct spherical_world_struct;
 } TriangulateQuadsStruct;
 
+typedef struct TriangulatePolygonsStruct
+{
+    TriangulatePolygonsStruct()
+        : should_ylikuutio_use_real_texture_coordinates(true)
+    {
+        // constructor.
+    }
+    std::vector<std::vector<glm::vec2>>* input_vertices;
+    bool should_ylikuutio_use_real_texture_coordinates;
+} TriangulatePolygonsStruct;
+
 typedef struct
 {
     uint32_t* input_vertex_pointer;
