@@ -104,7 +104,7 @@ extern GLfloat mouseSpeed;
 
 extern glm::vec3 camera_position;
 
-namespace model
+namespace ontology
 {
     class World;
     class Scene;
@@ -124,7 +124,7 @@ typedef struct ShaderStruct
     {
         // constructor.
     }
-    model::Scene* parent_pointer; // pointer to the scene (draw list).
+    ontology::Scene* parent_pointer; // pointer to the scene (draw list).
     std::string vertex_shader;    // filename of vertex shader.
     std::string fragment_shader;  // filename of fragment shader.
 } ShaderStruct;
@@ -136,7 +136,7 @@ typedef struct MaterialStruct
     {
         // constructor.
     }
-    model::Shader* parent_pointer;   // pointer to the shader.
+    ontology::Shader* parent_pointer;   // pointer to the shader.
     std::string texture_file_format; // type of the texture file. supported file formats so far: `"bmp"`/`"BMP"`, `"dds"`/`"DDS"`.
     std::string texture_filename;    // filename of the model file.
     std::string image_path;
@@ -150,7 +150,7 @@ typedef struct NodeStruct
         // constructor.
     }
     GLuint nodeID;
-    model::Graph* parent_pointer;
+    ontology::Graph* parent_pointer;
     glm::vec3 coordinate_vector;
     std::vector<uint32_t> neighbor_nodeIDs;
 } NodeStruct;
@@ -162,9 +162,9 @@ typedef struct ObjectStruct
     {
         // constructor.
     }
-    model::Species* species_parent_pointer; // pointer to the parent `Species`.
-    model::Glyph* glyph_parent_pointer;     // pointer to the parent `Glyph`.
-    model::Text3D* text3D_parent_pointer;   // pointer to the parent `Text3D`.
+    ontology::Species* species_parent_pointer; // pointer to the parent `Species`.
+    ontology::Glyph* glyph_parent_pointer;     // pointer to the parent `Glyph`.
+    ontology::Text3D* text3D_parent_pointer;   // pointer to the parent `Text3D`.
     glm::vec3 original_scale_vector; // original scale vector.
     GLfloat rotate_angle;            // rotate angle.
     bool is_character;               // The parent of a character object is a Glyph. The parent of a regular object is a Species.
@@ -181,7 +181,7 @@ typedef struct SpeciesStruct
         // constructor.
     }
     // used for all files (for all species).
-    model::Material* parent_pointer;         // pointer to the material object.
+    ontology::Material* parent_pointer;         // pointer to the material object.
     bool is_world;                           // worlds currently do not rotate nor translate.
     double world_radius;                     // radius of sea level in meters. used only for worlds.
     std::string model_file_format;           // type of the model file. supported file formats so far: `"bmp"`/`"BMP"`, `"obj"`/`"OBJ"`.
@@ -206,7 +206,7 @@ typedef struct VectorFontStruct
         // constructor.
     }
     // used for all files (for all font).
-    model::Material* parent_pointer;        // pointer to the material object.
+    ontology::Material* parent_pointer;        // pointer to the material object.
     GLfloat vertex_scaling_factor;
     std::string font_file_format;           // type of the font file. supported file formats so far: `"svg"`/`"SVG"`.
     std::string font_filename;              // filename of the font file.
@@ -219,7 +219,7 @@ typedef struct Text3DStruct
     {
         // constructor.
     }
-    model::VectorFont* parent_pointer; // pointer to the parent `VectorFont`.
+    ontology::VectorFont* parent_pointer; // pointer to the parent `VectorFont`.
     std::string text_string;
     const char* text_string_char;
     glm::vec3 original_scale_vector;   // original scale vector.
@@ -240,7 +240,7 @@ typedef struct GlyphStruct
     std::vector<std::vector<glm::vec2>>* glyph_vertex_data;
     const char* glyph_name_pointer;          // we need only a pointer, because glyphs are always created by the `VectorFont` constructor.
     const char* unicode_char_pointer;      // we need only a pointer, because glyphs are always created by the `VectorFont` constructor.
-    model::VectorFont* parent_pointer;       // pointer to the font object.
+    ontology::VectorFont* parent_pointer;       // pointer to the font object.
     glm::vec3 light_position;                // light position.
 } GlyphStruct;
 

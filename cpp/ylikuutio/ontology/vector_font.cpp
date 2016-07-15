@@ -12,18 +12,18 @@
 #include <stdint.h>      // uint32_t etc.
 #include <unordered_map> // std::unordered_map
 
-namespace model
+namespace ontology
 {
     class Text3D;
 
     void VectorFont::bind_to_parent()
     {
-        hierarchy::bind_child_to_parent<model::VectorFont*>(this, this->parent_pointer->vector_font_pointer_vector, this->parent_pointer->free_vector_fontID_queue);
+        hierarchy::bind_child_to_parent<ontology::VectorFont*>(this, this->parent_pointer->vector_font_pointer_vector, this->parent_pointer->free_vector_fontID_queue);
     }
 
     // this method returns a pointer to `Glyph` that matches the given `unicode_value`,
     // and `nullptr` if this `VectorFont` does not contain such a `Glyph`.
-    model::Glyph* VectorFont::get_glyph_pointer(int32_t unicode_value)
+    ontology::Glyph* VectorFont::get_glyph_pointer(int32_t unicode_value)
     {
         if (this->unicode_glyph_map.count(unicode_value) == 1)
         {
@@ -52,7 +52,7 @@ namespace model
 
         if ((std::strcmp(this->char_font_file_format, "svg") == 0) || (std::strcmp(this->char_font_file_format, "SVG") == 0))
         {
-            font_loading_result = model::load_SVG_font(
+            font_loading_result = ontology::load_SVG_font(
                     this->font_filename,
                     this->glyph_vertex_data,
                     this->glyph_names,
@@ -88,7 +88,7 @@ namespace model
                 std::string glyph_name_string = glyph_struct.glyph_name_pointer;
                 std::string unicode_string = glyph_struct.unicode_char_pointer;
                 std::cout << "Creating Glyph \"" << glyph_name_string << "\", Unicode: \"" << unicode_string << "\"\n";
-                model::Glyph* glyph = new model::Glyph(glyph_struct);
+                ontology::Glyph* glyph = new ontology::Glyph(glyph_struct);
 
                 // so that each `Glyph` can be referred to,
                 // we need a hash map that points from Unicode string to `Glyph`.
@@ -105,11 +105,11 @@ namespace model
 
         // destroy all 3D texts of this font.
         std::cout << "All 3D texts of this font will be destroyed.\n";
-        hierarchy::delete_children<model::Text3D*>(this->text3D_pointer_vector);
+        hierarchy::delete_children<ontology::Text3D*>(this->text3D_pointer_vector);
 
         // destroy all glyphs of this font.
         std::cout << "All glyphs of this font will be destroyed.\n";
-        hierarchy::delete_children<model::Glyph*>(this->glyph_pointer_vector);
+        hierarchy::delete_children<ontology::Glyph*>(this->glyph_pointer_vector);
 
         // set pointer to this `VectorFont` to nullptr.
         this->parent_pointer->set_vector_font_pointer(this->childID, nullptr);
@@ -119,7 +119,7 @@ namespace model
     {
         // this method renders all glyphs of this `VectorFont`.
         // render `VectorFont` by calling `render()` function of each `Glyph`.
-        model::render_children<model::Glyph*>(this->glyph_pointer_vector);
+        ontology::render_children<ontology::Glyph*>(this->glyph_pointer_vector);
     }
 
     void VectorFont::set_glyph_pointer(uint32_t childID, void* parent_pointer)
@@ -132,8 +132,8 @@ namespace model
         hierarchy::set_child_pointer(childID, parent_pointer, this->text3D_pointer_vector, this->free_text3D_ID_queue);
     }
 
-    void VectorFont::bind_to_new_parent(model::Material* new_material_pointer)
+    void VectorFont::bind_to_new_parent(ontology::Material* new_material_pointer)
     {
-        hierarchy::bind_child_to_new_parent<model::VectorFont*, model::Material*>(this, new_material_pointer, this->parent_pointer->vector_font_pointer_vector, this->parent_pointer->free_vector_fontID_queue);
+        hierarchy::bind_child_to_new_parent<ontology::VectorFont*, ontology::Material*>(this, new_material_pointer, this->parent_pointer->vector_font_pointer_vector, this->parent_pointer->free_vector_fontID_queue);
     }
 }

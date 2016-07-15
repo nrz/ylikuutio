@@ -204,34 +204,34 @@ int main(void)
     glEnable(GL_CULL_FACE);
 
     // Create the world, store it in `my_world`.
-    model::World* my_world = new model::World();
+    ontology::World* my_world = new ontology::World();
 
     datatypes::AnyValue* my_world_value = new datatypes::AnyValue(my_world);
     callback_system::CallbackParameter* callback_parameter = new callback_system::CallbackParameter("", my_world_value, false, callback_object);
     callback_object->set_new_callback(&full_cleanup);
 
-    model::Scene* my_scene = new model::Scene(my_world);
+    ontology::Scene* my_scene = new ontology::Scene(my_world);
 
     // Create the shader, store it in `my_shader`.
     ShaderStruct shader_struct;
     shader_struct.parent_pointer = my_scene;
     shader_struct.vertex_shader = "StandardShading.vertexshader";
     shader_struct.fragment_shader = "StandardShading.fragmentshader";
-    model::Shader* my_shader = new model::Shader(shader_struct);
+    ontology::Shader* my_shader = new ontology::Shader(shader_struct);
 
     // Create the material, store it in `grass_material`.
     MaterialStruct grass_material_struct;
     grass_material_struct.parent_pointer = my_shader;
     grass_material_struct.texture_file_format = g_texture_file_format;
     grass_material_struct.texture_filename = g_texture_filename;
-    model::Material* grass_material = new model::Material(grass_material_struct);
+    ontology::Material* grass_material = new ontology::Material(grass_material_struct);
 
     // Create the material, store it in `uvmap_material`.
     MaterialStruct uvmap_material_struct;
     uvmap_material_struct.parent_pointer = my_shader;
     uvmap_material_struct.texture_file_format = "dds";
     uvmap_material_struct.texture_filename = "uvmap.DDS";
-    model::Material* uvmap_material = new model::Material(uvmap_material_struct);
+    ontology::Material* uvmap_material = new ontology::Material(uvmap_material_struct);
 
 #ifdef TESTING_SPHERICAL_WORLD_IN_USE
     // Create the species, store it in `terrain_species`.
@@ -243,7 +243,7 @@ int main(void)
     SRTM_terrain_species_struct.color_channel = g_height_data_color_channel;
     SRTM_terrain_species_struct.light_position = glm::vec3(4, 4, 4);
     SRTM_terrain_species_struct.is_world = true;
-    model::Species* terrain_species = new model::Species(SRTM_terrain_species_struct);
+    ontology::Species* terrain_species = new ontology::Species(SRTM_terrain_species_struct);
 #else
     // Create the species, store it in `terrain_species`.
     SpeciesStruct bmp_terrain_species_struct;
@@ -253,7 +253,7 @@ int main(void)
     bmp_terrain_species_struct.color_channel = g_height_data_color_channel;
     bmp_terrain_species_struct.light_position = glm::vec3(4, 4, 4);
     bmp_terrain_species_struct.is_world = true;
-    model::Species* terrain_species = new model::Species(bmp_terrain_species_struct);
+    ontology::Species* terrain_species = new ontology::Species(bmp_terrain_species_struct);
 #endif
 
     // Create terrain1, store it in `terrain1`.
@@ -263,14 +263,14 @@ int main(void)
     terrain_object_struct1.rotate_angle = 0.0f;
     terrain_object_struct1.rotate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
     terrain_object_struct1.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
-    model::Object* terrain1 = new model::Object(terrain_object_struct1);
+    ontology::Object* terrain1 = new ontology::Object(terrain_object_struct1);
 
     SpeciesStruct suzanne_species_struct;
     suzanne_species_struct.parent_pointer = uvmap_material;
     suzanne_species_struct.model_file_format = "obj";
     suzanne_species_struct.model_filename = "suzanne.obj";
     suzanne_species_struct.light_position = glm::vec3(4, 4, 4);
-    model::Species* suzanne_species = new model::Species(suzanne_species_struct);
+    ontology::Species* suzanne_species = new ontology::Species(suzanne_species_struct);
 
     // Create suzanne1, store it in `suzanne1`.
     ObjectStruct suzanne_object_struct1;
@@ -279,7 +279,7 @@ int main(void)
     suzanne_object_struct1.rotate_angle = 0.10f;
     suzanne_object_struct1.rotate_vector = glm::vec3(1.0f, 0.0f, 0.0f);
     suzanne_object_struct1.translate_vector = glm::vec3(1.0f, 0.0f, 0.0f);
-    model::Object* suzanne1 = new model::Object(suzanne_object_struct1);
+    ontology::Object* suzanne1 = new ontology::Object(suzanne_object_struct1);
 
     ObjectStruct suzanne_object_struct2;
     suzanne_object_struct2.species_parent_pointer = suzanne_species;
@@ -287,7 +287,7 @@ int main(void)
     suzanne_object_struct2.rotate_angle = 0.20f;
     suzanne_object_struct2.rotate_vector = glm::vec3(1.0f, 0.0f, 0.0f);
     suzanne_object_struct2.translate_vector = glm::vec3(0.0f, 1.0f, 0.0f);
-    model::Object* suzanne2 = new model::Object(suzanne_object_struct2);
+    ontology::Object* suzanne2 = new ontology::Object(suzanne_object_struct2);
 
     ObjectStruct suzanne_object_struct3;
     suzanne_object_struct3.species_parent_pointer = suzanne_species;
@@ -295,7 +295,7 @@ int main(void)
     suzanne_object_struct3.rotate_angle = 0.05f;
     suzanne_object_struct3.rotate_vector = glm::vec3(1.0f, 0.0f, 0.0f);
     suzanne_object_struct3.translate_vector = glm::vec3(0.0f, 0.0f, 1.0f);
-    model::Object* suzanne3 = new model::Object(suzanne_object_struct3);
+    ontology::Object* suzanne3 = new ontology::Object(suzanne_object_struct3);
 
     ObjectStruct suzanne_object_struct4;
     suzanne_object_struct4.species_parent_pointer = suzanne_species;
@@ -303,7 +303,7 @@ int main(void)
     suzanne_object_struct4.rotate_angle = 0.15f;
     suzanne_object_struct4.rotate_vector = glm::vec3(1.0f, 0.0f, 0.0f);
     suzanne_object_struct4.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
-    model::Object* suzanne4 = new model::Object(suzanne_object_struct4);
+    ontology::Object* suzanne4 = new ontology::Object(suzanne_object_struct4);
 
     ObjectStruct suzanne_object_struct5;
     suzanne_object_struct5.species_parent_pointer = suzanne_species;
@@ -312,13 +312,13 @@ int main(void)
     suzanne_object_struct5.rotate_angle = 0.03f;
     suzanne_object_struct5.rotate_vector = glm::vec3(1.0f, 1.0f, 1.0f);
     suzanne_object_struct5.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
-    model::Object* suzanne5 = new model::Object(suzanne_object_struct5);
+    ontology::Object* suzanne5 = new ontology::Object(suzanne_object_struct5);
 
     VectorFontStruct kongtext_vector_font_struct;
     kongtext_vector_font_struct.parent_pointer = grass_material;
     kongtext_vector_font_struct.font_file_format = g_font_file_format;
     kongtext_vector_font_struct.font_filename = g_font_filename;
-    model::VectorFont* kongtext_font = new model::VectorFont(kongtext_vector_font_struct);
+    ontology::VectorFont* kongtext_font = new ontology::VectorFont(kongtext_vector_font_struct);
 
     Text3DStruct text3D_struct;
     text3D_struct.parent_pointer = kongtext_font;
@@ -328,7 +328,7 @@ int main(void)
     text3D_struct.rotate_angle = 0.0f;
     text3D_struct.rotate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
     text3D_struct.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
-    model::Text3D* hello_world_text3D = new model::Text3D(text3D_struct);
+    ontology::Text3D* hello_world_text3D = new ontology::Text3D(text3D_struct);
 
     // Initialize our little text library with the Holstein font
     const char* char_g_font_texture_filename = g_font_texture_filename.c_str();

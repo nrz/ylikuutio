@@ -6,7 +6,7 @@
 #include <vector>   // std::vector
 #include <queue>    // std::queue
 
-namespace model
+namespace ontology
 {
     class Node;
 

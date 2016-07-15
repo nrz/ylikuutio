@@ -23,7 +23,7 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
-namespace model
+namespace ontology
 {
     class Scene;
     class Object;
@@ -38,7 +38,7 @@ namespace model
             ~Shader();
 
             // this method sets pointer to this shader to nullptr, sets `parent_pointer` according to the input, and requests a new `childID` from the new scene.
-            void bind_to_new_parent(model::Scene* new_scene_pointer);
+            void bind_to_new_parent(ontology::Scene* new_scene_pointer);
 
             friend class Scene;
             friend class Material;
@@ -51,7 +51,7 @@ namespace model
             template<class T1, class T2>
                 friend void hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent_pointer, std::vector<void*> &old_child_pointer_vector, std::queue<uint32_t> &old_free_childID_queue);
             template<class T1>
-                friend void render_this_object(model::Object* object_pointer, model::Shader* shader_pointer);
+                friend void render_this_object(ontology::Object* object_pointer, ontology::Shader* shader_pointer);
 
         private:
             // this method renders all materials using this shader.
@@ -61,9 +61,9 @@ namespace model
             void set_material_pointer(uint32_t childID, void* parent_pointer);
 
             // this method sets a scene species pointer.
-            void set_terrain_species_pointer(model::Species* terrain_species_pointer);
+            void set_terrain_species_pointer(ontology::Species* terrain_species_pointer);
 
-            model::Scene* parent_pointer;         // pointer to `Scene`.
+            ontology::Scene* parent_pointer;         // pointer to `Scene`.
 
             GLuint programID;                     // this `Shader`'s `programID`, returned by `LoadShaders`.
 
@@ -73,9 +73,9 @@ namespace model
 
             void bind_to_parent();
 
-            model::Species* terrain_species_pointer; // pointer to scene species (used in collision detection).
+            ontology::Species* terrain_species_pointer; // pointer to scene species (used in collision detection).
 
-            uint32_t childID;                     // shader ID, returned by `model::Scene->get_shaderID()`.
+            uint32_t childID;                     // shader ID, returned by `ontology::Scene->get_shaderID()`.
 
             std::string vertex_shader;            // filename of vertex shader.
             std::string fragment_shader;          // filename of fragment shader.

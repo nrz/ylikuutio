@@ -19,7 +19,7 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
-namespace model
+namespace ontology
 {
     class Species;
     class Object;
@@ -34,7 +34,7 @@ namespace model
             ~Material();
 
             // this method sets pointer to this shader to nullptr, sets `parent_pointer` according to the input, and requests a new `childID` from the new shader.
-            void bind_to_new_parent(model::Shader* new_shader_pointer);
+            void bind_to_new_parent(ontology::Shader* new_shader_pointer);
 
             friend class Shader;
             friend class VectorFont;
@@ -59,13 +59,13 @@ namespace model
             void set_vector_font_pointer(uint32_t childID, void* parent_pointer);
 
             // this method sets a world species pointer.
-            void set_terrain_species_pointer(model::Species* terrain_species_pointer);
+            void set_terrain_species_pointer(ontology::Species* terrain_species_pointer);
 
-            model::Shader* parent_pointer;         // pointer to the shader.
+            ontology::Shader* parent_pointer;         // pointer to the shader.
 
             void bind_to_parent();
 
-            model::Species* terrain_species_pointer; // pointer to world species (used in collision detection).
+            ontology::Species* terrain_species_pointer; // pointer to world species (used in collision detection).
 
             GLuint texture;                        // Material, returned by `load_DDS_texture` or `load_BMP_texture`.
             GLuint openGL_textureID;               // texture ID, returned by `glGetUniformLocation(programID, "myTextureSampler");`.

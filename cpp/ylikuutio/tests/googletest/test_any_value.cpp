@@ -191,8 +191,8 @@ TEST(any_value_must_be_initialized_appropriately, void_pointer_1)
 }
 TEST(any_value_must_be_initialized_appropriately, world_pointer_zero)
 {
-    model::World* world_pointer_zero;
-    world_pointer_zero = (model::World*) 0;
+    ontology::World* world_pointer_zero;
+    world_pointer_zero = (ontology::World*) 0;
     datatypes::AnyValue world_pointer_zero_value = datatypes::AnyValue(world_pointer_zero);
     ASSERT_EQ(world_pointer_zero_value.type, datatypes::WORLD_POINTER);
     ASSERT_FALSE(world_pointer_zero_value.bool_value);
@@ -201,12 +201,12 @@ TEST(any_value_must_be_initialized_appropriately, world_pointer_zero)
     ASSERT_EQ(world_pointer_zero_value.int32_t_value, 0);
     ASSERT_EQ(world_pointer_zero_value.uint32_t_value, 0);
     ASSERT_EQ(world_pointer_zero_value.void_pointer, nullptr);
-    ASSERT_EQ(world_pointer_zero_value.world_pointer, (model::World*) 0);
+    ASSERT_EQ(world_pointer_zero_value.world_pointer, (ontology::World*) 0);
 }
 TEST(any_value_must_be_initialized_appropriately, world_pointer_1)
 {
-    model::World* world_pointer_1;
-    world_pointer_1 = (model::World*) 1;
+    ontology::World* world_pointer_1;
+    world_pointer_1 = (ontology::World*) 1;
     datatypes::AnyValue world_pointer_1_value = datatypes::AnyValue(world_pointer_1);
     ASSERT_EQ(world_pointer_1_value.type, datatypes::WORLD_POINTER);
     ASSERT_FALSE(world_pointer_1_value.bool_value);
@@ -215,5 +215,5 @@ TEST(any_value_must_be_initialized_appropriately, world_pointer_1)
     ASSERT_EQ(world_pointer_1_value.int32_t_value, 0);
     ASSERT_EQ(world_pointer_1_value.uint32_t_value, 0);
     ASSERT_EQ(world_pointer_1_value.void_pointer, nullptr);
-    ASSERT_EQ(world_pointer_1_value.world_pointer, (model::World*) 1);
+    ASSERT_EQ(world_pointer_1_value.world_pointer, (ontology::World*) 1);
 }

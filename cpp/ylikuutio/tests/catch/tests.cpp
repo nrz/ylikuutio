@@ -304,7 +304,7 @@ TEST_CASE("3x3 BMP world must be loaded appropriately", "[load_3x3_BMP_world]")
 
     std::string triangulation_type = "bilinear_interpolation";
 
-    bool model_loading_result = model::load_BMP_world(
+    bool model_loading_result = ontology::load_BMP_world(
             image_path,
             *&out_vertices,
             *&out_UVs,
@@ -335,7 +335,7 @@ TEST_CASE("256x256 BMP world must be loaded appropriately", "[load_256x256_BMP_w
     std::string color_channel = "mean";
     std::string triangulation_type = "bilinear_interpolation";
 
-    bool model_loading_result = model::load_BMP_world(
+    bool model_loading_result = ontology::load_BMP_world(
             image_path,
             *&out_vertices,
             *&out_UVs,

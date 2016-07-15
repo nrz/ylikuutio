@@ -30,7 +30,7 @@ void read_until_newline(std::FILE* file)
 // - More secure. Change another line and you can inject code.
 // - Loading from memory, stream, etc
 
-namespace model
+namespace ontology
 {
     bool load_OBJ(
             const char* path,

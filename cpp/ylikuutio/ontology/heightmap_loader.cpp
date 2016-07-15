@@ -33,7 +33,7 @@
 #define SRTM_FILENAME_N_OF_LATITUDE_CHARS 2
 #define SRTM_FILENAME_N_OF_LONGITUDE_CHARS 3
 
-namespace model
+namespace ontology
 {
     bool load_BMP_world(
             std::string image_path,

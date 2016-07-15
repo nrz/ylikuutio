@@ -25,14 +25,14 @@
 
 extern GLFWwindow* window; // The "extern" keyword here is to access the variable "window" declared in tutorialXXX.cpp. This is a hack to keep the tutorials simple. Please avoid this.
 
-namespace model
+namespace ontology
 {
     void Scene::bind_to_parent()
     {
-        hierarchy::bind_child_to_parent<model::Scene*>(this, this->parent_pointer->scene_pointer_vector, this->parent_pointer->free_sceneID_queue);
+        hierarchy::bind_child_to_parent<ontology::Scene*>(this, this->parent_pointer->scene_pointer_vector, this->parent_pointer->free_sceneID_queue);
     }
 
-    Scene::Scene(model::World* parent_pointer)
+    Scene::Scene(ontology::World* parent_pointer)
     {
         // constructor.
         this->parent_pointer = parent_pointer;
@@ -48,18 +48,18 @@ namespace model
 
         // destroy all shaders of this scene.
         std::cout << "All shaders of this scene will be destroyed.\n";
-        hierarchy::delete_children<model::Shader*>(this->shader_pointer_vector);
+        hierarchy::delete_children<ontology::Shader*>(this->shader_pointer_vector);
     }
 
     void Scene::render()
     {
         // render Scene by calling `render()` function of each Shader.
-        model::render_children<model::Shader*>(this->shader_pointer_vector);
+        ontology::render_children<ontology::Shader*>(this->shader_pointer_vector);
     }
 
-    void Scene::bind_to_new_parent(model::World* new_world_pointer)
+    void Scene::bind_to_new_parent(ontology::World* new_world_pointer)
     {
-        hierarchy::bind_child_to_new_parent<model::Scene*, model::World*>(this, new_world_pointer, this->parent_pointer->scene_pointer_vector, this->parent_pointer->free_sceneID_queue);
+        hierarchy::bind_child_to_new_parent<ontology::Scene*, ontology::World*>(this, new_world_pointer, this->parent_pointer->scene_pointer_vector, this->parent_pointer->free_sceneID_queue);
     }
 
     void Scene::set_shader_pointer(uint32_t childID, void* parent_pointer)

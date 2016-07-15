@@ -7,7 +7,7 @@
 #include <string>   // std::string
 #include <stdint.h> // uint32_t etc.
 
-namespace model
+namespace ontology
 {
     class World;
 }
@@ -161,21 +161,21 @@ namespace datatypes
         }
     }
 
-    AnyValue::AnyValue(model::World* world_pointer)
+    AnyValue::AnyValue(ontology::World* world_pointer)
     {
         // constructor.
-        std::cout << "creating AnyValue with model::World* value.\n";
+        std::cout << "creating AnyValue with ontology::World* value.\n";
         this->set_default_values();
         this->type = datatypes::WORLD_POINTER;
         this->world_pointer = world_pointer;
     }
 
-    AnyValue::AnyValue(std::string type, model::World* world_pointer)
+    AnyValue::AnyValue(std::string type, ontology::World* world_pointer)
     {
         // constructor.
-        std::cout << "creating AnyValue with model::World* value.\n";
+        std::cout << "creating AnyValue with ontology::World* value.\n";
         this->set_default_values();
-        if (std::strcmp(type.c_str(), "model::World*"))
+        if (std::strcmp(type.c_str(), "ontology::World*"))
         {
             this->type = datatypes::WORLD_POINTER;
             this->world_pointer = world_pointer;

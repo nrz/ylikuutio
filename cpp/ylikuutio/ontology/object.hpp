@@ -39,7 +39,7 @@
 #include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
 
-namespace model
+namespace ontology
 {
     class Species;
     class Glyph;
@@ -62,7 +62,7 @@ namespace model
             template<class T1>
                 friend void render_children(std::vector<void*> &child_pointer_vector);
             template<class T1>
-                friend void render_this_object(model::Object* object_pointer, model::Shader* shader_pointer);
+                friend void render_this_object(ontology::Object* object_pointer, ontology::Shader* shader_pointer);
 
         private:
             void bind_to_parent();
@@ -70,12 +70,12 @@ namespace model
             // this method renders this object.
             void render();
 
-            model::Species* species_parent_pointer; // pointer to `Species`.
-            model::Glyph* glyph_parent_pointer;     // pointer to `Glyph`.
-            model::Text3D* text3D_parent_pointer;   // pointer to `Text3D`.
+            ontology::Species* species_parent_pointer; // pointer to `Species`.
+            ontology::Glyph* glyph_parent_pointer;     // pointer to `Glyph`.
+            ontology::Text3D* text3D_parent_pointer;   // pointer to `Text3D`.
             bool is_character;
 
-            uint32_t childID;                      // object ID, returned by `model::Species->get_objectID()`.
+            uint32_t childID;                      // object ID, returned by `ontology::Species->get_objectID()`.
             bool has_entered;
 
             glm::vec3 coordinate_vector;           // coordinate vector.
@@ -90,7 +90,7 @@ namespace model
     };
 
     template<class T1>
-        void render_this_object(model::Object* object_pointer, model::Shader* shader_pointer)
+        void render_this_object(ontology::Object* object_pointer, ontology::Shader* shader_pointer)
         {
             if (!object_pointer->has_entered)
             {
@@ -139,7 +139,7 @@ namespace model
 
             if (object_pointer->is_character)
             {
-                model::Glyph* parent_glyph = object_pointer->glyph_parent_pointer;
+                ontology::Glyph* parent_glyph = object_pointer->glyph_parent_pointer;
                 vertexbuffer = parent_glyph->vertexbuffer;
                 vertexPosition_modelspaceID = parent_glyph->vertexPosition_modelspaceID;
                 uvbuffer = parent_glyph->uvbuffer;
@@ -151,7 +151,7 @@ namespace model
             }
             else
             {
-                model::Species* parent_species = object_pointer->species_parent_pointer;
+                ontology::Species* parent_species = object_pointer->species_parent_pointer;
                 vertexbuffer = parent_species->vertexbuffer;
                 vertexPosition_modelspaceID = parent_species->vertexPosition_modelspaceID;
                 uvbuffer = parent_species->uvbuffer;

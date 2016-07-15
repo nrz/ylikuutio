@@ -17,7 +17,7 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
-namespace model
+namespace ontology
 {
     bool load_BMP_world(
             std::string image_path,

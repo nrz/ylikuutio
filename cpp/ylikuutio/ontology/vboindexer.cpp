@@ -57,7 +57,7 @@ bool getSimilarVertexIndex(
     return false;
 }
 
-namespace model
+namespace ontology
 {
     void indexVBO_slow(
             std::vector<glm::vec3> &in_vertices,

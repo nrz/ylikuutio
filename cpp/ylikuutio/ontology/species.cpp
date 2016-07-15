@@ -21,11 +21,11 @@
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <stdint.h> // uint32_t etc.
 
-namespace model
+namespace ontology
 {
     void Species::bind_to_parent()
     {
-        hierarchy::bind_child_to_parent<model::Species*>(this, this->parent_pointer->species_pointer_vector, this->parent_pointer->free_speciesID_queue);
+        hierarchy::bind_child_to_parent<ontology::Species*>(this, this->parent_pointer->species_pointer_vector, this->parent_pointer->free_speciesID_queue);
     }
 
     Species::Species(SpeciesStruct species_struct)
@@ -54,7 +54,7 @@ namespace model
 
         if ((std::strcmp(this->char_model_file_format, "obj") == 0) || (std::strcmp(this->char_model_file_format, "OBJ") == 0))
         {
-            model_loading_result = model::load_OBJ(this->char_model_filename, this->vertices, this->UVs, this->normals);
+            model_loading_result = ontology::load_OBJ(this->char_model_filename, this->vertices, this->UVs, this->normals);
         }
         else if (std::strcmp(this->char_model_file_format, "SRTM") == 0)
         {
@@ -63,7 +63,7 @@ namespace model
             current_latitude_in_degrees = -16.50f;
             current_longitude_in_degrees = -68.15f;
 
-            model_loading_result = model::load_SRTM_world(
+            model_loading_result = ontology::load_SRTM_world(
                     this->model_filename,
                     current_latitude_in_degrees,
                     current_longitude_in_degrees,
@@ -74,7 +74,7 @@ namespace model
         }
         else if ((std::strcmp(this->char_model_file_format, "bmp") == 0) || (std::strcmp(this->char_model_file_format, "BMP") == 0))
         {
-            model_loading_result = model::load_BMP_world(
+            model_loading_result = ontology::load_BMP_world(
                     this->model_filename,
                     this->vertices,
                     this->UVs,
@@ -91,7 +91,7 @@ namespace model
         }
 
         // Fill the index buffer.
-        model::indexVBO(this->vertices, this->UVs, this->normals, this->indices, this->indexed_vertices, this->indexed_UVs, this->indexed_normals);
+        ontology::indexVBO(this->vertices, this->UVs, this->normals, this->indices, this->indexed_vertices, this->indexed_UVs, this->indexed_normals);
 
         // Load it into a VBO.
         glGenBuffers(1, &this->vertexbuffer);
@@ -131,7 +131,7 @@ namespace model
 
         // destroy all objects of this species.
         std::cout << "All objects of this species will be destroyed.\n";
-        hierarchy::delete_children<model::Object*>(this->object_pointer_vector);
+        hierarchy::delete_children<ontology::Object*>(this->object_pointer_vector);
 
         // Cleanup VBO, shader and texture.
         glDeleteBuffers(1, &this->vertexbuffer);
@@ -145,7 +145,7 @@ namespace model
 
     void Species::render()
     {
-        model::render_species_or_glyph<model::Species*>(this);
+        ontology::render_species_or_glyph<ontology::Species*>(this);
     }
 
     void Species::set_object_pointer(uint32_t childID, void* parent_pointer)
@@ -153,8 +153,8 @@ namespace model
         hierarchy::set_child_pointer(childID, parent_pointer, this->object_pointer_vector, this->free_objectID_queue);
     }
 
-    void Species::bind_to_new_parent(model::Material* new_material_pointer)
+    void Species::bind_to_new_parent(ontology::Material* new_material_pointer)
     {
-        hierarchy::bind_child_to_new_parent<model::Species*, model::Material*>(this, new_material_pointer, this->parent_pointer->species_pointer_vector, this->parent_pointer->free_speciesID_queue);
+        hierarchy::bind_child_to_new_parent<ontology::Species*, ontology::Material*>(this, new_material_pointer, this->parent_pointer->species_pointer_vector, this->parent_pointer->free_speciesID_queue);
     }
 }

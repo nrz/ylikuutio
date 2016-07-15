@@ -11,7 +11,7 @@
 #include <glm/glm.hpp> // glm
 #endif
 
-namespace model
+namespace ontology
 {
     bool load_SVG_font(std::string font_file_path,
             std::vector<std::vector<std::vector<glm::vec2>>> &out_glyph_vertex_data,

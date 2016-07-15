@@ -14,7 +14,7 @@
 #include <vector>        // std::vector
 #include <unordered_map> // std::unordered_map
 
-namespace model
+namespace ontology
 {
     class Material;
     class Glyph;
@@ -37,13 +37,13 @@ namespace model
             void set_text3D_pointer(uint32_t childID, void* parent_pointer);
 
             // this method sets pointer to this species to nullptr, sets `parent_pointer` according to the input, and requests a new `childID` from the new material.
-            void bind_to_new_parent(model::Material* new_material_pointer);
+            void bind_to_new_parent(ontology::Material* new_material_pointer);
 
             // The rest fields are created in the constructor.
             uint32_t image_width;
             uint32_t image_height;
 
-            model::Material* parent_pointer; // pointer to `Material`.
+            ontology::Material* parent_pointer; // pointer to `Material`.
 
             friend class Glyph;
             friend class Text3D;
@@ -59,7 +59,7 @@ namespace model
 
             // this method returns a pointer to `Glyph` that matches the given `unicode_value`,
             // and `nullptr` if this `VectorFont` does not contain such a `Glyph`.
-            model::Glyph* get_glyph_pointer(int32_t unicode_value);
+            ontology::Glyph* get_glyph_pointer(int32_t unicode_value);
 
             // this method renders all glyphs of this `VectorFont`.
             void render();
@@ -67,7 +67,7 @@ namespace model
             std::string font_file_format;          // type of the model file, eg. `"bmp"`.
             std::string font_filename;             // filename of the model file.
             GLfloat vertex_scaling_factor;
-            uint32_t childID;                      // species ID, returned by `model::Material->get_speciesID()`.
+            uint32_t childID;                      // species ID, returned by `ontology::Material->get_speciesID()`.
             const char* char_font_file_format;
             const char* char_font_filename;
 
@@ -82,7 +82,7 @@ namespace model
             std::queue<uint32_t> free_glyphID_queue;
             std::queue<uint32_t> free_text3D_ID_queue;
 
-            std::unordered_map<int32_t, model::Glyph*> unicode_glyph_map;
+            std::unordered_map<int32_t, ontology::Glyph*> unicode_glyph_map;
     };
 }
 

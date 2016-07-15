@@ -3,7 +3,7 @@
 #include "cpp/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "node.hpp"
 
-namespace model
+namespace ontology
 {
     Graph::Graph()
     {
@@ -32,6 +32,6 @@ namespace model
 
         // destroy all nodes of this graph.
         std::cout << "All nodes of this graph will be destroyed.\n";
-        hierarchy::delete_children<model::Node*>(this->node_pointer_vector);
+        hierarchy::delete_children<ontology::Node*>(this->node_pointer_vector);
     }
 }

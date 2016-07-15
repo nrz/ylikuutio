@@ -1,6 +1,6 @@
 #include "model.hpp"
 
-namespace model
+namespace ontology
 {
     Model::Model()
     {

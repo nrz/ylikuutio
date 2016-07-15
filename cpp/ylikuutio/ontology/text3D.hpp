@@ -20,7 +20,7 @@
 #include <queue>    // std::queue
 #include <vector>   // std::vector
 
-namespace model
+namespace ontology
 {
     class Text3D
     {
@@ -40,7 +40,7 @@ namespace model
             // requests a new `childID` from the new `VectorFont`,
             // and creates all glyph Objects of this `Text3D` with the font data.
             // Note: different fonts may provide glyphs for different Unicodes!
-            void bind_to_new_parent(model::VectorFont* new_vector_font_pointer);
+            void bind_to_new_parent(ontology::VectorFont* new_vector_font_pointer);
 
             // this method sets a object pointer.
             void set_object_pointer(uint32_t childID, void* parent_pointer);
@@ -54,9 +54,9 @@ namespace model
 
             std::string text_string;
 
-            model::VectorFont* parent_pointer; // pointer to `VectorFont`.
+            ontology::VectorFont* parent_pointer; // pointer to `VectorFont`.
 
-            uint32_t childID;                  // text3D ID, returned by `model::Material->get_childID()`.
+            uint32_t childID;                  // text3D ID, returned by `ontology::Material->get_childID()`.
 
             glm::vec3 original_scale_vector;   // original scale vector.
             GLfloat rotate_angle;              // rotate angle.

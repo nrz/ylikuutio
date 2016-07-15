@@ -23,10 +23,10 @@
 #include <cmath>  // NAN, std::isnan, std::pow
 #include <vector> // std::vector
 
-namespace model
+namespace ontology
 {
     GLfloat get_ground_level(
-            model::Species* terrain_species,
+            ontology::Species* terrain_species,
             glm::vec3 position)
     {
         if (!terrain_species->is_world)
@@ -93,7 +93,7 @@ namespace model
     }
 
     GLfloat get_floor_level(
-            model::Species* terrain_species,
+            ontology::Species* terrain_species,
             glm::vec3 position)
     {
         if (!terrain_species->is_world)

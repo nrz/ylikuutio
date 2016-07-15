@@ -122,7 +122,7 @@
 //    y-coordinates of these are compared. The piece with the smallest y-coordinate (lowest altitude) remains terrain, other pieces become
 //    regular objects. The pieces that become regular objects will be subject to gravity the same way as any regular object.
 
-namespace model
+namespace ontology
 {
     class Scene;
     class Shader;
@@ -148,7 +148,7 @@ namespace model
             void set_scene_pointer(uint32_t childID, void* parent_pointer);
 
             // this method sets a world species pointer.
-            void set_terrain_species_pointer(model::Species* terrain_species_pointer);
+            void set_terrain_species_pointer(ontology::Species* terrain_species_pointer);
 
             void compute_matrices_from_inputs();
 

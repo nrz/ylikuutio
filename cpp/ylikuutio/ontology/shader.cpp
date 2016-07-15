@@ -10,11 +10,11 @@
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 
-namespace model
+namespace ontology
 {
     void Shader::bind_to_parent()
     {
-        hierarchy::bind_child_to_parent<model::Shader*>(this, this->parent_pointer->shader_pointer_vector, this->parent_pointer->free_shaderID_queue);
+        hierarchy::bind_child_to_parent<ontology::Shader*>(this, this->parent_pointer->shader_pointer_vector, this->parent_pointer->free_shaderID_queue);
     }
 
     Shader::Shader(ShaderStruct shader_struct)
@@ -47,7 +47,7 @@ namespace model
 
         // destroy all materials of this shader.
         std::cout << "All materials of this shader will be destroyed.\n";
-        hierarchy::delete_children<model::Material*>(this->material_pointer_vector);
+        hierarchy::delete_children<ontology::Material*>(this->material_pointer_vector);
 
         // set pointer to this shader to nullptr.
         this->parent_pointer->set_shader_pointer(this->childID, nullptr);
@@ -63,7 +63,7 @@ namespace model
         glUniformMatrix4fv(this->ViewMatrixID, 1, GL_FALSE, &ViewMatrix[0][0]); // This one doesn't change between objects, so this can be done once for all objects that use "programID"
 
         // render Shader by calling `render()` function of each Material.
-        model::render_children<model::Material*>(this->material_pointer_vector);
+        ontology::render_children<ontology::Material*>(this->material_pointer_vector);
     }
 
     void Shader::set_material_pointer(uint32_t childID, void* parent_pointer)
@@ -71,12 +71,12 @@ namespace model
         hierarchy::set_child_pointer(childID, parent_pointer, this->material_pointer_vector, this->free_materialID_queue);
     }
 
-    void Shader::bind_to_new_parent(model::Scene* new_scene_pointer)
+    void Shader::bind_to_new_parent(ontology::Scene* new_scene_pointer)
     {
-        hierarchy::bind_child_to_new_parent<model::Shader*, model::Scene*>(this, new_scene_pointer, this->parent_pointer->shader_pointer_vector, this->parent_pointer->free_shaderID_queue);
+        hierarchy::bind_child_to_new_parent<ontology::Shader*, ontology::Scene*>(this, new_scene_pointer, this->parent_pointer->shader_pointer_vector, this->parent_pointer->free_shaderID_queue);
     }
 
-    void Shader::set_terrain_species_pointer(model::Species* terrain_species_pointer)
+    void Shader::set_terrain_species_pointer(ontology::Species* terrain_species_pointer)
     {
         this->terrain_species_pointer = terrain_species_pointer;
         this->parent_pointer->parent_pointer->set_terrain_species_pointer(this->terrain_species_pointer);

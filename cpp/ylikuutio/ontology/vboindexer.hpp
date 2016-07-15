@@ -16,7 +16,7 @@
 // Include standard headers
 #include <vector>    // std::vector
 
-namespace model
+namespace ontology
 {
     void indexVBO(
             std::vector<glm::vec3> &in_vertices,

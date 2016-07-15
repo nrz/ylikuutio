@@ -7,11 +7,11 @@
 // Include standard headers
 #include <iostream> // std::cout, std::cin, std::cerr
 
-namespace model
+namespace ontology
 {
     void Text3D::bind_to_parent()
     {
-        hierarchy::bind_child_to_parent<model::Text3D*>(this, this->parent_pointer->text3D_pointer_vector, this->parent_pointer->free_text3D_ID_queue);
+        hierarchy::bind_child_to_parent<ontology::Text3D*>(this, this->parent_pointer->text3D_pointer_vector, this->parent_pointer->free_text3D_ID_queue);
     }
 
     // constructor.
@@ -36,7 +36,7 @@ namespace model
         while (*text_pointer != '\0')
         {
             int32_t unicode_value = string::extract_unicode_value_from_string(text_pointer);
-            model::Glyph* glyph_pointer = this->parent_pointer->get_glyph_pointer(unicode_value);
+            ontology::Glyph* glyph_pointer = this->parent_pointer->get_glyph_pointer(unicode_value);
 
             if (!glyph_pointer)
             {
@@ -55,7 +55,7 @@ namespace model
             object_struct.is_character = true;
             object_struct.coordinate_vector = this->coordinate_vector; // TODO: adjust this as needed.
             object_struct.rotate_vector = this->rotate_vector;
-            model::Object* object = new model::Object(object_struct);
+            ontology::Object* object = new ontology::Object(object_struct);
         }
 
         // TODO: Add support for Unicode strings.
@@ -75,7 +75,7 @@ namespace model
 
         // destroy all objects of this `Text3D`.
         std::cout << "All objects (" << this->object_pointer_vector.size() << " pieces) of this 3D text will be destroyed.\n";
-        hierarchy::delete_children<model::Object*>(this->object_pointer_vector);
+        hierarchy::delete_children<ontology::Object*>(this->object_pointer_vector);
 
         this->parent_pointer->set_text3D_pointer(this->childID, nullptr);
     }

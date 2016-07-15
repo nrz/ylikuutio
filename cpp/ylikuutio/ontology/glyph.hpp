@@ -26,11 +26,11 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
-namespace model
+namespace ontology
 {
     class Object;
 
-    class Glyph: public model::Model
+    class Glyph: public ontology::Model
     {
         public:
             // constructor.
@@ -60,7 +60,7 @@ namespace model
             // this method renders all objects of this species.
             void render();
 
-            model::VectorFont* parent_pointer;     // pointer to `VectorFont`.
+            ontology::VectorFont* parent_pointer;     // pointer to `VectorFont`.
 
             std::vector<std::vector<glm::vec2>>* glyph_vertex_data;
             const char* glyph_name_pointer;        // we need only a pointer, because glyphs are always created by the `VectorFont` constructor.

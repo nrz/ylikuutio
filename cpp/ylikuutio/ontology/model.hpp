@@ -25,7 +25,7 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
-namespace model
+namespace ontology
 {
     class Material;
 
@@ -47,7 +47,7 @@ namespace model
             std::string color_channel;               // color channel in use: `"red"`, `"green"`, `"blue"`, `"mean"` or `"all"`.
             glm::vec3 light_position;                // light position.
 
-            uint32_t childID;                        // species ID, returned by `model::Material->get_speciesID()`.
+            uint32_t childID;                        // species ID, returned by `ontology::Material->get_speciesID()`.
             GLuint lightID;                          // light ID, returned by `glGetUniformLocation(programID, "LightPosition_worldspace");`.
 
             std::vector<void*> object_pointer_vector;

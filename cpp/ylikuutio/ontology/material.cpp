@@ -10,11 +10,11 @@
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <stdint.h> // uint32_t etc.
 
-namespace model
+namespace ontology
 {
     void Material::bind_to_parent()
     {
-        hierarchy::bind_child_to_parent<model::Material*>(this, this->parent_pointer->material_pointer_vector, this->parent_pointer->free_materialID_queue);
+        hierarchy::bind_child_to_parent<ontology::Material*>(this, this->parent_pointer->material_pointer_vector, this->parent_pointer->free_materialID_queue);
     }
 
     Material::Material(MaterialStruct material_struct)
@@ -57,11 +57,11 @@ namespace model
 
         // destroy all species of this material.
         std::cout << "All species of this material will be destroyed.\n";
-        hierarchy::delete_children<model::Species*>(this->species_pointer_vector);
+        hierarchy::delete_children<ontology::Species*>(this->species_pointer_vector);
 
         // destroy all fonts of this material.
         std::cout << "All fonts of this material will be destroyed.\n";
-        hierarchy::delete_children<model::VectorFont*>(this->vector_font_pointer_vector);
+        hierarchy::delete_children<ontology::VectorFont*>(this->vector_font_pointer_vector);
 
         glDeleteTextures(1, &this->texture);
 
@@ -78,8 +78,8 @@ namespace model
         glUniform1i(this->openGL_textureID, 0);
 
         // render Material by calling `render()` function of each Species and of each VectorFont.
-        model::render_children<model::Species*>(this->species_pointer_vector);
-        model::render_children<model::VectorFont*>(this->vector_font_pointer_vector);
+        ontology::render_children<ontology::Species*>(this->species_pointer_vector);
+        ontology::render_children<ontology::VectorFont*>(this->vector_font_pointer_vector);
     }
 
     void Material::set_species_pointer(uint32_t childID, void* parent_pointer)
@@ -92,12 +92,12 @@ namespace model
         hierarchy::set_child_pointer(childID, parent_pointer, this->vector_font_pointer_vector, this->free_vector_fontID_queue);
     }
 
-    void Material::bind_to_new_parent(model::Shader* new_shader_pointer)
+    void Material::bind_to_new_parent(ontology::Shader* new_shader_pointer)
     {
-        hierarchy::bind_child_to_new_parent<model::Material*, model::Shader*>(this, new_shader_pointer, this->parent_pointer->material_pointer_vector, this->parent_pointer->free_materialID_queue);
+        hierarchy::bind_child_to_new_parent<ontology::Material*, ontology::Shader*>(this, new_shader_pointer, this->parent_pointer->material_pointer_vector, this->parent_pointer->free_materialID_queue);
     }
 
-    void Material::set_terrain_species_pointer(model::Species* terrain_species_pointer)
+    void Material::set_terrain_species_pointer(ontology::Species* terrain_species_pointer)
     {
         this->terrain_species_pointer = terrain_species_pointer;
         this->parent_pointer->set_terrain_species_pointer(this->terrain_species_pointer);

@@ -9,11 +9,11 @@
 #include <stdint.h> // uint32_t etc.
 #include <iostream> // std::cout, std::cin, std::cerr
 
-namespace model
+namespace ontology
 {
     void Glyph::bind_to_parent()
     {
-        hierarchy::bind_child_to_parent<model::Glyph*>(this, this->parent_pointer->glyph_pointer_vector, this->parent_pointer->free_glyphID_queue);
+        hierarchy::bind_child_to_parent<ontology::Glyph*>(this, this->parent_pointer->glyph_pointer_vector, this->parent_pointer->free_glyphID_queue);
     }
 
     Glyph::Glyph(GlyphStruct glyph_struct)
@@ -45,7 +45,7 @@ namespace model
 
         // TODO: triangulate the vertex data!
 
-        // TODO: load the vertex data the same way as in `model::Species::Species(SpeciesStruct species_struct)`!
+        // TODO: load the vertex data the same way as in `ontology::Species::Species(SpeciesStruct species_struct)`!
     }
 
     Glyph::~Glyph()
@@ -63,7 +63,7 @@ namespace model
 
     void Glyph::render()
     {
-        model::render_species_or_glyph<model::Glyph*>(this);
+        ontology::render_species_or_glyph<ontology::Glyph*>(this);
     }
 
     void Glyph::set_object_pointer(uint32_t childID, void* parent_pointer)

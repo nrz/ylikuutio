@@ -100,7 +100,7 @@ namespace callback_system
         this->anyvalue_hashmap[name] = datatypes::AnyValue(value);
     }
 
-    void CallbackEngine::set_world_pointer(std::string name, model::World* value)
+    void CallbackEngine::set_world_pointer(std::string name, ontology::World* value)
     {
         this->anyvalue_hashmap[name] = datatypes::AnyValue(value);
     }

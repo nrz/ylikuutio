@@ -26,11 +26,11 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
-namespace model
+namespace ontology
 {
     class Material;
 
-    class Species: public model::Model
+    class Species: public ontology::Model
     {
         public:
             // constructor.
@@ -40,7 +40,7 @@ namespace model
             ~Species();
 
             // this method sets pointer to this species to nullptr, sets `parent_pointer` according to the input, and requests a new `childID` from the new texture.
-            void bind_to_new_parent(model::Material* new_material_pointer);
+            void bind_to_new_parent(ontology::Material* new_material_pointer);
 
             // this method sets a object pointer.
             void set_object_pointer(uint32_t childID, void* parent_pointer);
@@ -63,8 +63,8 @@ namespace model
             template<class T1>
                 friend void render_species_or_glyph(T1 species_or_glyph_pointer);
             template<class T1>
-                friend void render_this_object(model::Object* object_pointer, model::Shader* shader_pointer);
-            friend GLfloat get_ground_level(model::Species* terrain_species, glm::vec3 position);
+                friend void render_this_object(ontology::Object* object_pointer, ontology::Shader* shader_pointer);
+            friend GLfloat get_ground_level(ontology::Species* terrain_species, glm::vec3 position);
 
         private:
             void bind_to_parent();
@@ -72,7 +72,7 @@ namespace model
             // this method renders all objects of this species.
             void render();
 
-            model::Material* parent_pointer;         // pointer to the material.
+            ontology::Material* parent_pointer;         // pointer to the material.
 
             std::string model_file_format;           // type of the model file, eg. `"bmp"`.
             std::string model_filename;              // filename of the model file.

@@ -8,7 +8,7 @@
 // Include standard headers
 #include <string>        // std::string
 
-namespace model
+namespace ontology
 {
     class World;
 }

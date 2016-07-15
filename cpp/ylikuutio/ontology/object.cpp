@@ -7,22 +7,22 @@
 // Include standard headers
 #include <iostream> // std::cout, std::cin, std::cerr
 
-namespace model
+namespace ontology
 {
     void Object::bind_to_parent()
     {
         if (this->is_character)
         {
-            model::Text3D* parent_pointer;
+            ontology::Text3D* parent_pointer;
             parent_pointer = this->text3D_parent_pointer;
             // for ontological hierarchy (rendering hierarchy does not use `childID`).
-            hierarchy::bind_child_to_parent<model::Object*>(this, parent_pointer->object_pointer_vector, parent_pointer->free_objectID_queue);
+            hierarchy::bind_child_to_parent<ontology::Object*>(this, parent_pointer->object_pointer_vector, parent_pointer->free_objectID_queue);
         }
         else
         {
-            model::Species* parent_pointer;
+            ontology::Species* parent_pointer;
             parent_pointer = this->species_parent_pointer;
-            hierarchy::bind_child_to_parent<model::Object*>(this, parent_pointer->object_pointer_vector, parent_pointer->free_objectID_queue);
+            hierarchy::bind_child_to_parent<ontology::Object*>(this, parent_pointer->object_pointer_vector, parent_pointer->free_objectID_queue);
         }
     }
 
@@ -75,17 +75,17 @@ namespace model
 
     void Object::render()
     {
-        model::Shader* shader_pointer;
+        ontology::Shader* shader_pointer;
 
         if (this->is_character)
         {
             shader_pointer = this->glyph_parent_pointer->parent_pointer->parent_pointer->parent_pointer;
-            model::render_this_object<model::Glyph*>(this, shader_pointer);
+            ontology::render_this_object<ontology::Glyph*>(this, shader_pointer);
         }
         else
         {
             shader_pointer = this->species_parent_pointer->parent_pointer->parent_pointer;
-            model::render_this_object<model::Species*>(this, shader_pointer);
+            ontology::render_this_object<ontology::Species*>(this, shader_pointer);
         }
     }
 
@@ -93,23 +93,23 @@ namespace model
     {
         if (this->is_character)
         {
-            model::Glyph* parent_pointer;
+            ontology::Glyph* parent_pointer;
             parent_pointer = this->glyph_parent_pointer;
             // set pointer to this child to nullptr in the old parent.
             hierarchy::set_child_pointer(this->childID, nullptr, glyph_parent_pointer->object_pointer_vector, glyph_parent_pointer->free_objectID_queue);
             // set the new parent pointer.
-            this->glyph_parent_pointer = static_cast<model::Glyph*>(new_parent_pointer);
+            this->glyph_parent_pointer = static_cast<ontology::Glyph*>(new_parent_pointer);
             // bind to the new parent.
             this->bind_to_parent();
         }
         else
         {
-            model::Species* parent_pointer;
+            ontology::Species* parent_pointer;
             parent_pointer = this->species_parent_pointer;
             // set pointer to this child to nullptr in the old parent.
             hierarchy::set_child_pointer(this->childID, nullptr, species_parent_pointer->object_pointer_vector, species_parent_pointer->free_objectID_queue);
             // set the new parent pointer.
-            this->species_parent_pointer = static_cast<model::Species*>(new_parent_pointer);
+            this->species_parent_pointer = static_cast<ontology::Species*>(new_parent_pointer);
             // bind to the new parent.
             this->bind_to_parent();
         }

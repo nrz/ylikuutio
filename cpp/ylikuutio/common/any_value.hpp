@@ -7,7 +7,7 @@
 #include <string>   // std::string
 #include <stdint.h> // uint32_t etc.
 
-namespace model
+namespace ontology
 {
     class World;
 }
@@ -39,7 +39,7 @@ namespace datatypes
             AnyValue(int32_t int32_t_value);
             AnyValue(uint32_t uint32_t_value);
             AnyValue(void* void_pointer);
-            AnyValue(model::World* world_pointer);
+            AnyValue(ontology::World* world_pointer);
 
             AnyValue(std::string type, bool bool_value);
             AnyValue(std::string type, float float_value);
@@ -47,7 +47,7 @@ namespace datatypes
             AnyValue(std::string type, int32_t int32_t_value);
             AnyValue(std::string type, uint32_t uint32_t_value);
             AnyValue(std::string type, void* void_pointer);
-            AnyValue(std::string type, model::World* world_pointer);
+            AnyValue(std::string type, ontology::World* world_pointer);
 
             int type;
             bool bool_value;
@@ -56,7 +56,7 @@ namespace datatypes
             int32_t int32_t_value;
             uint32_t uint32_t_value;
             void* void_pointer;
-            model::World* world_pointer;
+            ontology::World* world_pointer;
 
         private:
             void set_default_values();

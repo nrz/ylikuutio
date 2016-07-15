@@ -25,7 +25,7 @@
 
 extern GLFWwindow* window; // The "extern" keyword here is to access the variable "window" declared in tutorialXXX.cpp. This is a hack to keep the tutorials simple. Please avoid this.
 
-namespace model
+namespace ontology
 {
     World::World()
     {
@@ -39,7 +39,7 @@ namespace model
 
         // destroy all scenes of this world.
         std::cout << "All scenes of this world will be destroyed.\n";
-        hierarchy::delete_children<model::Scene*>(this->scene_pointer_vector);
+        hierarchy::delete_children<ontology::Scene*>(this->scene_pointer_vector);
     }
 
     void World::render()
@@ -47,7 +47,7 @@ namespace model
         this->compute_matrices_from_inputs();
 
         // render World by calling `render()` function of each Scene.
-        model::render_children<model::Scene*>(this->scene_pointer_vector);
+        ontology::render_children<ontology::Scene*>(this->scene_pointer_vector);
     }
 
     void World::set_scene_pointer(uint32_t childID, void* parent_pointer)
@@ -55,7 +55,7 @@ namespace model
         hierarchy::set_child_pointer(childID, parent_pointer, this->scene_pointer_vector, this->free_sceneID_queue);
     }
 
-    void World::set_terrain_species_pointer(model::Species* terrain_species_pointer)
+    void World::set_terrain_species_pointer(ontology::Species* terrain_species_pointer)
     {
         this->terrain_species_pointer = terrain_species_pointer;
     }
@@ -249,7 +249,7 @@ namespace model
         {
             if (this->terrain_species_pointer != nullptr)
             {
-                GLfloat ground_y = model::get_floor_level(static_cast<model::Species*>(this->terrain_species_pointer), position);
+                GLfloat ground_y = ontology::get_floor_level(static_cast<ontology::Species*>(this->terrain_species_pointer), position);
 
                 if (!std::isnan(ground_y))
                 {

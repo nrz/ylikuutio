@@ -10,7 +10,7 @@
 #include "cpp/ylikuutio/hierarchy/hierarchy.hpp"
 #include "cpp/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
-namespace model
+namespace ontology
 {
     class Node
     {
@@ -43,10 +43,10 @@ namespace model
             // all nodes that are to be transferred must be transferred separately.
             // before transfering any node to a new graph,
             // all links to nodes that do not belong to the new graph of this node must be deleted with separate `delete_bidirectional_link` calls.
-            void bind_to_new_parent(model::Graph *new_graph_pointer);
+            void bind_to_new_parent(ontology::Graph *new_graph_pointer);
 
             uint32_t childID;
-            model::Graph* parent_pointer;
+            ontology::Graph* parent_pointer;
 
             // nodes do not keep pointers to neighbor nodes, because all pointer values are not known yet before all nodes are created.
             std::vector<uint32_t> neighbor_nodeIDs;

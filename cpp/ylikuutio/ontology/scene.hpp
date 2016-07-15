@@ -9,19 +9,19 @@
 #include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
 
-namespace model
+namespace ontology
 {
     class Scene
     {
         public:
             // constructor.
-            Scene(model::World* world_pointer);
+            Scene(ontology::World* world_pointer);
 
             // destructor.
             ~Scene();
 
             // this method sets pointer to this scene to nullptr, sets `parent_pointer` according to the input, and requests a new `childID` from the new world.
-            void bind_to_new_parent(model::World* new_world_pointer);
+            void bind_to_new_parent(ontology::World* new_world_pointer);
 
             friend class Shader;
             friend class Species;
@@ -39,11 +39,11 @@ namespace model
             // this method sets a shader pointer.
             void set_shader_pointer(uint32_t childID, void* parent_pointer);
 
-            model::World* parent_pointer;         // pointer to the world.
+            ontology::World* parent_pointer;         // pointer to the world.
 
             void bind_to_parent();
 
-            uint32_t childID;                     // scene ID, returned by `model::World->get_sceneID()`.
+            uint32_t childID;                     // scene ID, returned by `ontology::World->get_sceneID()`.
 
             std::vector<void*> shader_pointer_vector;
             std::queue<uint32_t> free_shaderID_queue;

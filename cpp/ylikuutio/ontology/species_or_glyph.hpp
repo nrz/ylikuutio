@@ -9,7 +9,7 @@
 #include <GL/glew.h> // GLfloat, GLuint etc.
 #endif
 
-namespace model
+namespace ontology
 {
     class Object;
 
@@ -33,7 +33,7 @@ namespace model
             glEnableVertexAttribArray(species_or_glyph_pointer->vertexNormal_modelspaceID);
 
             // render Species by calling `render()` function of each Object.
-            model::render_children<model::Object*>(species_or_glyph_pointer->object_pointer_vector);
+            ontology::render_children<ontology::Object*>(species_or_glyph_pointer->object_pointer_vector);
 
             glDisableVertexAttribArray(species_or_glyph_pointer->vertexPosition_modelspaceID);
             glDisableVertexAttribArray(species_or_glyph_pointer->vertexUVID);

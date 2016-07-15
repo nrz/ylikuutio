@@ -5,7 +5,7 @@
 #include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
 
-namespace model
+namespace ontology
 {
     template<class T1>
         void render_children(std::vector<void*> &child_pointer_vector)
