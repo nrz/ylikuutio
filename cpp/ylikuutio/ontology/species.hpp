@@ -1,6 +1,7 @@
 #ifndef __SPECIES_HPP_INCLUDED
 #define __SPECIES_HPP_INCLUDED
 
+#include "model.hpp"
 #include "material.hpp"
 #include "ground_level.hpp"
 #include "render_templates.hpp"
@@ -29,7 +30,7 @@ namespace model
 {
     class Material;
 
-    class Species
+    class Species: public model::Model
     {
         public:
             // constructor.
@@ -71,40 +72,18 @@ namespace model
             // this method renders all objects of this species.
             void render();
 
+            model::Material* parent_pointer;         // pointer to the material.
+
             std::string model_file_format;           // type of the model file, eg. `"bmp"`.
             std::string model_filename;              // filename of the model file.
-            uint32_t childID;                        // species ID, returned by `model::Material->get_speciesID()`.
-            GLuint lightID;                          // light ID, returned by `glGetUniformLocation(programID, "LightPosition_worldspace");`.
+
             const char* char_model_file_format;
             const char* char_model_filename;
-
-            std::vector<void*> object_pointer_vector;
-            std::queue<uint32_t> free_objectID_queue;
 
             std::string triangulation_type;
 
             uint32_t image_width;
             uint32_t image_height;
-
-            model::Material* parent_pointer;         // pointer to the material.
-
-            GLuint vertexPosition_modelspaceID;
-            GLuint vertexUVID;
-            GLuint vertexNormal_modelspaceID;
-
-            std::vector<glm::vec3> vertices;         // vertices of the object.
-            std::vector<glm::vec2> UVs;              // UVs of the object.
-            std::vector<glm::vec3> normals;          // normals of the object.
-
-            std::vector<uint32_t> indices;           // the deleted vertices will be reused (though it is not required, if there's enough memory).
-            std::vector<glm::vec3> indexed_vertices;
-            std::vector<glm::vec2> indexed_UVs;
-            std::vector<glm::vec3> indexed_normals;
-
-            GLuint vertexbuffer;
-            GLuint uvbuffer;
-            GLuint normalbuffer;
-            GLuint elementbuffer;
     };
 }
 

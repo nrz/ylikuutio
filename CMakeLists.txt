@@ -257,7 +257,7 @@ add_executable(ajokki
     cpp/ylikuutio/hierarchy/hierarchy.hpp
     cpp/ylikuutio/hierarchy/hierarchy_templates.hpp
 
-    # model, in alphabetical order
+    # ontology, in alphabetical order
     cpp/ylikuutio/ontology/font_loader.cpp
     cpp/ylikuutio/ontology/font_loader.hpp
     cpp/ylikuutio/ontology/glyph.cpp
@@ -268,6 +268,8 @@ add_executable(ajokki
     cpp/ylikuutio/ontology/heightmap_loader.hpp
     cpp/ylikuutio/ontology/material.cpp
     cpp/ylikuutio/ontology/material.hpp
+    cpp/ylikuutio/ontology/model.cpp
+    cpp/ylikuutio/ontology/model.hpp
     cpp/ylikuutio/ontology/object.cpp
     cpp/ylikuutio/ontology/object.hpp
     cpp/ylikuutio/ontology/objloader.cpp
