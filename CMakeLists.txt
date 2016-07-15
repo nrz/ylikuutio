@@ -258,42 +258,42 @@ add_executable(ajokki
     cpp/ylikuutio/hierarchy/hierarchy_templates.hpp
 
     # model, in alphabetical order
-    cpp/ylikuutio/model/font_loader.cpp
-    cpp/ylikuutio/model/font_loader.hpp
-    cpp/ylikuutio/model/glyph.cpp
-    cpp/ylikuutio/model/glyph.hpp
-    cpp/ylikuutio/model/ground_level.cpp
-    cpp/ylikuutio/model/ground_level.hpp
-    cpp/ylikuutio/model/heightmap_loader.cpp
-    cpp/ylikuutio/model/heightmap_loader.hpp
-    cpp/ylikuutio/model/material.cpp
-    cpp/ylikuutio/model/material.hpp
-    cpp/ylikuutio/model/object.cpp
-    cpp/ylikuutio/model/object.hpp
-    cpp/ylikuutio/model/objloader.cpp
-    cpp/ylikuutio/model/objloader.hpp
-    cpp/ylikuutio/model/render_templates.hpp
-    cpp/ylikuutio/model/scene.cpp
-    cpp/ylikuutio/model/scene.hpp
-    cpp/ylikuutio/model/shader.cpp
-    cpp/ylikuutio/model/shader.hpp
-    cpp/ylikuutio/model/shader_loader.cpp
-    cpp/ylikuutio/model/shader_loader.hpp
-    cpp/ylikuutio/model/species.cpp
-    cpp/ylikuutio/model/species.hpp
-    cpp/ylikuutio/model/species_or_glyph.hpp
-    cpp/ylikuutio/model/text2D.cpp
-    cpp/ylikuutio/model/text2D.hpp
-    cpp/ylikuutio/model/text3D.hpp
-    cpp/ylikuutio/model/text3D.cpp
-    cpp/ylikuutio/model/texture_loader.cpp
-    cpp/ylikuutio/model/texture_loader.hpp
-    cpp/ylikuutio/model/vector_font.cpp
-    cpp/ylikuutio/model/vector_font.hpp
-    cpp/ylikuutio/model/vboindexer.cpp
-    cpp/ylikuutio/model/vboindexer.hpp
-    cpp/ylikuutio/model/world.cpp
-    cpp/ylikuutio/model/world.hpp
+    cpp/ylikuutio/ontology/font_loader.cpp
+    cpp/ylikuutio/ontology/font_loader.hpp
+    cpp/ylikuutio/ontology/glyph.cpp
+    cpp/ylikuutio/ontology/glyph.hpp
+    cpp/ylikuutio/ontology/ground_level.cpp
+    cpp/ylikuutio/ontology/ground_level.hpp
+    cpp/ylikuutio/ontology/heightmap_loader.cpp
+    cpp/ylikuutio/ontology/heightmap_loader.hpp
+    cpp/ylikuutio/ontology/material.cpp
+    cpp/ylikuutio/ontology/material.hpp
+    cpp/ylikuutio/ontology/object.cpp
+    cpp/ylikuutio/ontology/object.hpp
+    cpp/ylikuutio/ontology/objloader.cpp
+    cpp/ylikuutio/ontology/objloader.hpp
+    cpp/ylikuutio/ontology/render_templates.hpp
+    cpp/ylikuutio/ontology/scene.cpp
+    cpp/ylikuutio/ontology/scene.hpp
+    cpp/ylikuutio/ontology/shader.cpp
+    cpp/ylikuutio/ontology/shader.hpp
+    cpp/ylikuutio/ontology/shader_loader.cpp
+    cpp/ylikuutio/ontology/shader_loader.hpp
+    cpp/ylikuutio/ontology/species.cpp
+    cpp/ylikuutio/ontology/species.hpp
+    cpp/ylikuutio/ontology/species_or_glyph.hpp
+    cpp/ylikuutio/ontology/text2D.cpp
+    cpp/ylikuutio/ontology/text2D.hpp
+    cpp/ylikuutio/ontology/text3D.hpp
+    cpp/ylikuutio/ontology/text3D.cpp
+    cpp/ylikuutio/ontology/texture_loader.cpp
+    cpp/ylikuutio/ontology/texture_loader.hpp
+    cpp/ylikuutio/ontology/vector_font.cpp
+    cpp/ylikuutio/ontology/vector_font.hpp
+    cpp/ylikuutio/ontology/vboindexer.cpp
+    cpp/ylikuutio/ontology/vboindexer.hpp
+    cpp/ylikuutio/ontology/world.cpp
+    cpp/ylikuutio/ontology/world.hpp
 
     # shaders, in alphabetical order
     cpp/ylikuutio/shaders/StandardShading.fragmentshader
@@ -371,8 +371,8 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         cpp/ylikuutio/hierarchy/hierarchy.cpp
         cpp/ylikuutio/hierarchy/hierarchy.hpp
         cpp/ylikuutio/hierarchy/hierarchy_templates.hpp
-        cpp/ylikuutio/model/font_loader.cpp
-        cpp/ylikuutio/model/font_loader.hpp
+        cpp/ylikuutio/ontology/font_loader.cpp
+        cpp/ylikuutio/ontology/font_loader.hpp
         cpp/ylikuutio/string/ylikuutio_string.cpp
         cpp/ylikuutio/string/ylikuutio_string.hpp
         )

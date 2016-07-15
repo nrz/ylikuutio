@@ -1,5 +1,5 @@
 #include "gtest/gtest.h"
-#include "cpp/ylikuutio/model/font_loader.hpp"
+#include "cpp/ylikuutio/ontology/font_loader.hpp"
 #include "cpp/ylikuutio/file/file_loader.hpp"
 
 // Include GLEW

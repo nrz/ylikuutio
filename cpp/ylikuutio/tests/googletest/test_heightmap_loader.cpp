@@ -1,6 +1,6 @@
 #include "gtest/gtest.h"
-#include "cpp/ylikuutio/model/heightmap_loader.hpp"
-#include "cpp/ylikuutio/model/heightmap_loader.cpp"
+#include "cpp/ylikuutio/ontology/heightmap_loader.hpp"
+#include "cpp/ylikuutio/ontology/heightmap_loader.cpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
