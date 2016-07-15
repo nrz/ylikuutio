@@ -238,6 +238,8 @@ add_executable(ajokki
     cpp/ylikuutio/geometry/line_segment3D.hpp
     cpp/ylikuutio/geometry/line_segment_line_segment_intersection.cpp
     cpp/ylikuutio/geometry/line_segment_line_segment_intersection.hpp
+    cpp/ylikuutio/geometry/polygon_triangulation.cpp
+    cpp/ylikuutio/geometry/polygon_triangulation.hpp
     cpp/ylikuutio/geometry/quad_triangulation.cpp
     cpp/ylikuutio/geometry/quad_triangulation.hpp
     cpp/ylikuutio/geometry/transformation.cpp

@@ -2,6 +2,7 @@
 #include "species_or_glyph.hpp"
 #include "object.hpp"
 #include "render_templates.hpp"
+#include "cpp/ylikuutio/geometry/polygon_triangulation.hpp"
 #include "cpp/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include standard headers
@@ -27,6 +28,15 @@ namespace model
 
         // get `childID` from `VectorFont` and set pointer to this `Glyph`.
         this->bind_to_parent();
+
+        // TODO: implement triangulation of `Glyph` objects!
+        TriangulatePolygonsStruct triangulate_polygons_struct;
+        triangulate_polygons_struct.input_vertices = this->glyph_vertex_data;
+        bool triangulating_result = geometry::triangulate_polygons(
+                triangulate_polygons_struct,
+                this->vertices,
+                this->UVs,
+                this->normals);
 
         // Get a handle for our buffers.
         this->vertexPosition_modelspaceID = glGetAttribLocation(this->parent_pointer->parent_pointer->parent_pointer->programID, "vertexPosition_modelspace");
