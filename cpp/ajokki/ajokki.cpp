@@ -176,10 +176,6 @@ int main(void)
     callback_system::CallbackEngine* cleanup_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* cleanup_callback_object = new callback_system::CallbackObject(nullptr, cleanup_callback_engine);
 
-    bool does_suzanne_species_exist = true;
-    bool does_suzanne_species_have_uvmap_texture = true;
-    bool has_suzanne_2_transformed_into_terrain = false;
-
     // Initialise GLFW
     if (!glfwInit())
     {
@@ -353,12 +349,14 @@ int main(void)
     text3D_struct.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
     ontology::Text3D* hello_world_text3D = new ontology::Text3D(text3D_struct);
 
+    bool does_suzanne_species_exist = true;
     callback_system::CallbackEngine* delete_suzanne_species_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* delete_suzanne_species_callback_object = new callback_system::CallbackObject(
             &delete_suzanne_species, delete_suzanne_species_callback_engine);
     callback_system::CallbackParameter* delete_suzanne_species_callback_parameter0 = new callback_system::CallbackParameter(
             "suzanne_species", new datatypes::AnyValue(suzanne_species), false, delete_suzanne_species_callback_object);
 
+    bool does_suzanne_species_have_uvmap_texture = true;
     callback_system::CallbackEngine* switch_to_grass_material_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* switch_to_grass_material_callback_object = new callback_system::CallbackObject(
             &switch_to_new_material, switch_to_grass_material_callback_engine);
@@ -375,6 +373,7 @@ int main(void)
     callback_system::CallbackParameter* switch_to_uvmap_material_callback_parameter1 = new callback_system::CallbackParameter(
             "uvmap_material", new datatypes::AnyValue(uvmap_material), false, switch_to_uvmap_material_callback_object);
 
+    bool has_suzanne_2_transformed_into_terrain = false;
     callback_system::CallbackEngine* transform_into_monkey_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* transform_into_monkey_callback_object = new callback_system::CallbackObject(
             &transform_into_new_species, transform_into_monkey_callback_engine);
