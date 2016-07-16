@@ -160,9 +160,19 @@ datatypes::AnyValue* switch_to_new_material(callback_system::CallbackEngine*, st
 
 datatypes::AnyValue* transform_into_new_species(callback_system::CallbackEngine*, std::vector<callback_system::CallbackParameter*> input_parameters)
 {
-    ontology::Object* object = static_cast<ontology::Object*>(input_parameters.at(0)->get_any_value()->void_pointer);
-    ontology::Species* species = static_cast<ontology::Species*>(input_parameters.at(1)->get_any_value()->void_pointer);
-    object->bind_to_new_parent(species);
+    bool* does_suzanne_species_exist = static_cast<bool*>(input_parameters.at(2)->get_any_value()->void_pointer);
+    bool* does_suzanne_species_belong_to_original_species = static_cast<bool*>(input_parameters.at(3)->get_any_value()->void_pointer);
+    bool* does_suzanne_species_belong_to_new_species = static_cast<bool*>(input_parameters.at(4)->get_any_value()->void_pointer);
+
+    if (*does_suzanne_species_exist && *does_suzanne_species_belong_to_original_species)
+    {
+        ontology::Object* object = static_cast<ontology::Object*>(input_parameters.at(0)->get_any_value()->void_pointer);
+        ontology::Species* species = static_cast<ontology::Species*>(input_parameters.at(1)->get_any_value()->void_pointer);
+        object->bind_to_new_parent(species);
+
+        *does_suzanne_species_belong_to_original_species = false;
+        *does_suzanne_species_belong_to_new_species = true;
+    }
     return nullptr;
 }
 
@@ -421,6 +431,8 @@ int main(void)
             switch_to_uvmap_material_callback_object);
 
     // Callback code for T: transform `suzanne2` into terrain.
+    bool has_suzanne_2_transformed_into_monkey = true;
+    bool has_suzanne_2_transformed_into_terrain = false;
     callback_system::CallbackEngine* transform_into_terrain_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* transform_into_terrain_callback_object = new callback_system::CallbackObject(
             &transform_into_new_species, transform_into_terrain_callback_engine);
@@ -428,10 +440,20 @@ int main(void)
             "suzanne2", new datatypes::AnyValue(suzanne2), false, transform_into_terrain_callback_object); // suzanne2!!!
     callback_system::CallbackParameter* transform_into_terrain_callback_parameter1 = new callback_system::CallbackParameter(
             "terrain_species", new datatypes::AnyValue(terrain_species), false, transform_into_terrain_callback_object);
+    callback_system::CallbackParameter* transform_into_terrain_callback_parameter2 = new callback_system::CallbackParameter(
+            "does_suzanne_species_exist", new datatypes::AnyValue(static_cast<void*>(&does_suzanne_species_exist)), false, transform_into_terrain_callback_object);
+    callback_system::CallbackParameter* transform_into_terrain_callback_parameter3 = new callback_system::CallbackParameter(
+            "has_suzanne_2_transformed_into_monkey",
+            new datatypes::AnyValue(static_cast<void*>(&has_suzanne_2_transformed_into_monkey)),
+            false,
+            transform_into_terrain_callback_object);
+    callback_system::CallbackParameter* transform_into_terrain_callback_parameter4 = new callback_system::CallbackParameter(
+            "has_suzanne_2_transformed_into_terrain",
+            new datatypes::AnyValue(static_cast<void*>(&has_suzanne_2_transformed_into_terrain)),
+            false,
+            transform_into_terrain_callback_object);
 
     // Callback code for A: transform `suzanne2` back into monkey.
-    bool has_suzanne_2_transformed_into_monkey = true;
-    bool has_suzanne_2_transformed_into_terrain = false;
     callback_system::CallbackEngine* transform_into_monkey_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* transform_into_monkey_callback_object = new callback_system::CallbackObject(
             &transform_into_new_species, transform_into_monkey_callback_engine);
@@ -439,6 +461,18 @@ int main(void)
             "suzanne2", new datatypes::AnyValue(suzanne2), false, transform_into_monkey_callback_object); // suzanne2!!!
     callback_system::CallbackParameter* transform_into_monkey_callback_parameter1 = new callback_system::CallbackParameter(
             "monkey_species", new datatypes::AnyValue(suzanne_species), false, transform_into_monkey_callback_object);
+    callback_system::CallbackParameter* transform_into_monkey_callback_parameter2 = new callback_system::CallbackParameter(
+            "does_suzanne_species_exist", new datatypes::AnyValue(static_cast<void*>(&does_suzanne_species_exist)), false, transform_into_monkey_callback_object);
+    callback_system::CallbackParameter* transform_into_monkey_callback_parameter3 = new callback_system::CallbackParameter(
+            "has_suzanne_2_transformed_into_terrain",
+            new datatypes::AnyValue(static_cast<void*>(&has_suzanne_2_transformed_into_terrain)),
+            false,
+            transform_into_monkey_callback_object);
+    callback_system::CallbackParameter* transform_into_monkey_callback_parameter4 = new callback_system::CallbackParameter(
+            "has_suzanne_2_transformed_into_monkey",
+            new datatypes::AnyValue(static_cast<void*>(&has_suzanne_2_transformed_into_monkey)),
+            false,
+            transform_into_monkey_callback_object);
 
     // Initialize our little text library with the Holstein font
     const char* char_g_font_texture_filename = g_font_texture_filename.c_str();
@@ -604,13 +638,13 @@ int main(void)
             switch_to_uvmap_material_callback_engine->execute();
         }
 
-        if (does_suzanne_species_exist && has_suzanne_2_transformed_into_terrain && (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS))
+        if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
         {
             // switch to suzanne species.
             transform_into_monkey_callback_engine->execute();
             has_suzanne_2_transformed_into_terrain = false;
         }
-        else if (does_suzanne_species_exist && !has_suzanne_2_transformed_into_terrain && (glfwGetKey(window, GLFW_KEY_T) == GLFW_PRESS))
+        else if (glfwGetKey(window, GLFW_KEY_T) == GLFW_PRESS)
         {
             // switch to terrain species.
             transform_into_terrain_callback_engine->execute();
