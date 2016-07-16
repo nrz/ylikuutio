@@ -642,13 +642,11 @@ int main(void)
         {
             // switch to suzanne species.
             transform_into_monkey_callback_engine->execute();
-            has_suzanne_2_transformed_into_terrain = false;
         }
         else if (glfwGetKey(window, GLFW_KEY_T) == GLFW_PRESS)
         {
             // switch to terrain species.
             transform_into_terrain_callback_engine->execute();
-            has_suzanne_2_transformed_into_terrain = true;
         }
 
         glfwPollEvents();
