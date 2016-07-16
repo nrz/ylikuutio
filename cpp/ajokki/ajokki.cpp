@@ -47,6 +47,7 @@ GLFWwindow* window;
 #endif
 
 // Include standard headers
+#include <array>    // std::array
 #include <cstdio>   // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf etc.
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <string>   // std::string
@@ -474,6 +475,16 @@ int main(void)
             false,
             transform_into_monkey_callback_object);
 
+    // keypress callbacks.
+    std::array<callback_system::CallbackEngine*, GLFW_KEY_LAST + 1> keypress_callback_engines;
+    keypress_callback_engines.fill(nullptr);
+
+    keypress_callback_engines[GLFW_KEY_D] = delete_suzanne_species_callback_engine;
+    keypress_callback_engines[GLFW_KEY_G] = switch_to_grass_material_callback_engine;
+    keypress_callback_engines[GLFW_KEY_U] = switch_to_uvmap_material_callback_engine;
+    keypress_callback_engines[GLFW_KEY_T] = transform_into_terrain_callback_engine;
+    keypress_callback_engines[GLFW_KEY_A] = transform_into_monkey_callback_engine;
+
     // Initialize our little text library with the Holstein font
     const char* char_g_font_texture_filename = g_font_texture_filename.c_str();
     const char* char_g_font_texture_file_format = g_font_texture_file_format.c_str();
@@ -622,31 +633,17 @@ int main(void)
             glfwSwapBuffers(window);
         }
 
-        if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+        // Check keypresses and call corresponding callbacks.
+        for (uint32_t i = 0; i < keypress_callback_engines.size(); i++)
         {
-            delete_suzanne_species_callback_engine->execute();
-        }
-
-        if (glfwGetKey(window, GLFW_KEY_G) == GLFW_PRESS)
-        {
-            // switch to grass material.
-            switch_to_grass_material_callback_engine->execute();
-        }
-        else if (glfwGetKey(window, GLFW_KEY_U) == GLFW_PRESS)
-        {
-            // switch to uvmap material.
-            switch_to_uvmap_material_callback_engine->execute();
-        }
-
-        if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-        {
-            // switch to suzanne species.
-            transform_into_monkey_callback_engine->execute();
-        }
-        else if (glfwGetKey(window, GLFW_KEY_T) == GLFW_PRESS)
-        {
-            // switch to terrain species.
-            transform_into_terrain_callback_engine->execute();
+            if (keypress_callback_engines[i] != nullptr)
+            {
+                if (glfwGetKey(window, i) == GLFW_PRESS)
+                {
+                    callback_system::CallbackEngine* callback_engine = keypress_callback_engines[i];
+                    callback_engine->execute();
+                }
+            }
         }
 
         glfwPollEvents();
