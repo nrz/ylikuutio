@@ -107,8 +107,6 @@ namespace callback_system
 
     datatypes::AnyValue* CallbackEngine::execute()
     {
-        std::cout << "Hello from datatypes::AnyValue CallbackEngine::execute()\n";
-
         datatypes::AnyValue* any_value = new datatypes::AnyValue();
 
         // execute all callbacks.

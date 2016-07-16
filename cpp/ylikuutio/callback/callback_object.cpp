@@ -154,8 +154,6 @@ namespace callback_system
 
     datatypes::AnyValue* CallbackObject::execute()
     {
-        std::cout << "Hello from datatypes::AnyValue CallbackObject::execute()\n";
-
         for (uint32_t child_i = 0; child_i < this->callback_parameter_pointer_vector.size(); child_i++)
         {
             void* void_input_parameter_pointer = this->callback_parameter_pointer_vector.at(child_i);
