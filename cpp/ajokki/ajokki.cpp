@@ -126,6 +126,29 @@ datatypes::AnyValue* full_cleanup(callback_system::CallbackEngine*, std::vector<
     return nullptr;
 }
 
+datatypes::AnyValue* delete_suzanne_species(callback_system::CallbackEngine*, std::vector<callback_system::CallbackParameter*> input_parameters)
+{
+    ontology::Species* species = static_cast<ontology::Species*>(input_parameters.at(0)->get_any_value()->void_pointer);
+    delete species;
+    return nullptr;
+}
+
+datatypes::AnyValue* switch_to_new_material(callback_system::CallbackEngine*, std::vector<callback_system::CallbackParameter*> input_parameters)
+{
+    ontology::Species* species = static_cast<ontology::Species*>(input_parameters.at(0)->get_any_value()->void_pointer);
+    ontology::Material* material = static_cast<ontology::Material*>(input_parameters.at(1)->get_any_value()->void_pointer);
+    species->bind_to_new_parent(material);
+    return nullptr;
+}
+
+datatypes::AnyValue* transform_into_new_species(callback_system::CallbackEngine*, std::vector<callback_system::CallbackParameter*> input_parameters)
+{
+    ontology::Object* object = static_cast<ontology::Object*>(input_parameters.at(0)->get_any_value()->void_pointer);
+    ontology::Species* species = static_cast<ontology::Species*>(input_parameters.at(1)->get_any_value()->void_pointer);
+    object->bind_to_new_parent(species);
+    return nullptr;
+}
+
 int main(void)
 {
     // Initial position : on +Z
@@ -330,6 +353,44 @@ int main(void)
     text3D_struct.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
     ontology::Text3D* hello_world_text3D = new ontology::Text3D(text3D_struct);
 
+    callback_system::CallbackEngine* delete_suzanne_species_callback_engine = new callback_system::CallbackEngine();
+    callback_system::CallbackObject* delete_suzanne_species_callback_object = new callback_system::CallbackObject(
+            &delete_suzanne_species, delete_suzanne_species_callback_engine);
+    callback_system::CallbackParameter* delete_suzanne_species_callback_parameter0 = new callback_system::CallbackParameter(
+            "suzanne_species", new datatypes::AnyValue(suzanne_species), false, delete_suzanne_species_callback_object);
+
+    callback_system::CallbackEngine* switch_to_grass_material_callback_engine = new callback_system::CallbackEngine();
+    callback_system::CallbackObject* switch_to_grass_material_callback_object = new callback_system::CallbackObject(
+            &switch_to_new_material, switch_to_grass_material_callback_engine);
+    callback_system::CallbackParameter* switch_to_grass_material_callback_parameter0 = new callback_system::CallbackParameter(
+            "suzanne_species", new datatypes::AnyValue(suzanne_species), false, switch_to_grass_material_callback_object);
+    callback_system::CallbackParameter* switch_to_grass_material_callback_parameter1 = new callback_system::CallbackParameter(
+            "grass_material", new datatypes::AnyValue(grass_material), false, switch_to_grass_material_callback_object);
+
+    callback_system::CallbackEngine* switch_to_uvmap_material_callback_engine = new callback_system::CallbackEngine();
+    callback_system::CallbackObject* switch_to_uvmap_material_callback_object = new callback_system::CallbackObject(
+            &switch_to_new_material, switch_to_uvmap_material_callback_engine);
+    callback_system::CallbackParameter* switch_to_uvmap_material_callback_parameter0 = new callback_system::CallbackParameter(
+            "suzanne_species", new datatypes::AnyValue(suzanne_species), false, switch_to_uvmap_material_callback_object);
+    callback_system::CallbackParameter* switch_to_uvmap_material_callback_parameter1 = new callback_system::CallbackParameter(
+            "uvmap_material", new datatypes::AnyValue(uvmap_material), false, switch_to_uvmap_material_callback_object);
+
+    callback_system::CallbackEngine* transform_into_monkey_callback_engine = new callback_system::CallbackEngine();
+    callback_system::CallbackObject* transform_into_monkey_callback_object = new callback_system::CallbackObject(
+            &transform_into_new_species, transform_into_monkey_callback_engine);
+    callback_system::CallbackParameter* transform_into_monkey_callback_parameter0 = new callback_system::CallbackParameter(
+            "suzanne2", new datatypes::AnyValue(suzanne2), false, transform_into_monkey_callback_object); // suzanne2!!!
+    callback_system::CallbackParameter* transform_into_monkey_callback_parameter1 = new callback_system::CallbackParameter(
+            "monkey_species", new datatypes::AnyValue(suzanne_species), false, transform_into_monkey_callback_object);
+
+    callback_system::CallbackEngine* transform_into_terrain_callback_engine = new callback_system::CallbackEngine();
+    callback_system::CallbackObject* transform_into_terrain_callback_object = new callback_system::CallbackObject(
+            &transform_into_new_species, transform_into_terrain_callback_engine);
+    callback_system::CallbackParameter* transform_into_terrain_callback_parameter0 = new callback_system::CallbackParameter(
+            "suzanne2", new datatypes::AnyValue(suzanne2), false, transform_into_terrain_callback_object); // suzanne2!!!
+    callback_system::CallbackParameter* transform_into_terrain_callback_parameter1 = new callback_system::CallbackParameter(
+            "terrain_species", new datatypes::AnyValue(terrain_species), false, transform_into_terrain_callback_object);
+
     // Initialize our little text library with the Holstein font
     const char* char_g_font_texture_filename = g_font_texture_filename.c_str();
     const char* char_g_font_texture_file_format = g_font_texture_file_format.c_str();
@@ -480,33 +541,35 @@ int main(void)
 
         if ((glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) && does_suzanne_species_exist)
         {
-            delete suzanne_species;
+            delete_suzanne_species_callback_engine->execute();
             does_suzanne_species_exist = false;
         }
 
         if (does_suzanne_species_exist && does_suzanne_species_have_uvmap_texture && (glfwGetKey(window, GLFW_KEY_G) == GLFW_PRESS))
         {
             // switch to grass material.
-            suzanne_species->bind_to_new_parent(grass_material);
+            switch_to_grass_material_callback_engine->execute();
             does_suzanne_species_have_uvmap_texture = false;
         }
         else if (does_suzanne_species_exist && !does_suzanne_species_have_uvmap_texture && (glfwGetKey(window, GLFW_KEY_U) == GLFW_PRESS))
         {
             // switch to uvmap material.
-            suzanne_species->bind_to_new_parent(uvmap_material);
+            switch_to_uvmap_material_callback_engine->execute();
             does_suzanne_species_have_uvmap_texture = true;
         }
 
         if (does_suzanne_species_exist && has_suzanne_2_transformed_into_terrain && (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS))
         {
             // switch to suzanne species.
-            suzanne2->bind_to_new_parent(suzanne_species);
+            // suzanne2->bind_to_new_parent(suzanne_species);
+            transform_into_monkey_callback_engine->execute();
             has_suzanne_2_transformed_into_terrain = false;
         }
         else if (does_suzanne_species_exist && !has_suzanne_2_transformed_into_terrain && (glfwGetKey(window, GLFW_KEY_T) == GLFW_PRESS))
         {
             // switch to terrain species.
-            suzanne2->bind_to_new_parent(terrain_species);
+            //suzanne2->bind_to_new_parent(terrain_species);
+            transform_into_terrain_callback_engine->execute();
             has_suzanne_2_transformed_into_terrain = true;
         }
 
