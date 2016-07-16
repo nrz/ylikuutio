@@ -561,14 +561,12 @@ int main(void)
         if (does_suzanne_species_exist && has_suzanne_2_transformed_into_terrain && (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS))
         {
             // switch to suzanne species.
-            // suzanne2->bind_to_new_parent(suzanne_species);
             transform_into_monkey_callback_engine->execute();
             has_suzanne_2_transformed_into_terrain = false;
         }
         else if (does_suzanne_species_exist && !has_suzanne_2_transformed_into_terrain && (glfwGetKey(window, GLFW_KEY_T) == GLFW_PRESS))
         {
             // switch to terrain species.
-            //suzanne2->bind_to_new_parent(terrain_species);
             transform_into_terrain_callback_engine->execute();
             has_suzanne_2_transformed_into_terrain = true;
         }
