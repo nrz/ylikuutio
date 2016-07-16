@@ -151,7 +151,7 @@ int main(void)
     initialFoV = 60.0f;
 
     callback_system::CallbackEngine* cleanup_callback_engine = new callback_system::CallbackEngine();
-    callback_system::CallbackObject* callback_object = new callback_system::CallbackObject(nullptr, cleanup_callback_engine);
+    callback_system::CallbackObject* cleanup_callback_object = new callback_system::CallbackObject(nullptr, cleanup_callback_engine);
 
     bool does_suzanne_species_exist = true;
     bool does_suzanne_species_have_uvmap_texture = true;
@@ -170,7 +170,7 @@ int main(void)
 
     // Open a window and create its OpenGL context.
     window = glfwCreateWindow((GLuint) WINDOW_WIDTH, (GLuint) WINDOW_HEIGHT, "Ylikuutio", nullptr, nullptr);
-    callback_object->set_new_callback(&glfwTerminate_cleanup);
+    cleanup_callback_object->set_new_callback(&glfwTerminate_cleanup);
 
     if (window == nullptr)
     {
@@ -207,8 +207,8 @@ int main(void)
     ontology::World* my_world = new ontology::World();
 
     datatypes::AnyValue* my_world_value = new datatypes::AnyValue(my_world);
-    callback_system::CallbackParameter* callback_parameter = new callback_system::CallbackParameter("", my_world_value, false, callback_object);
-    callback_object->set_new_callback(&full_cleanup);
+    callback_system::CallbackParameter* callback_parameter = new callback_system::CallbackParameter("", my_world_value, false, cleanup_callback_object);
+    cleanup_callback_object->set_new_callback(&full_cleanup);
 
     ontology::Scene* my_scene = new ontology::Scene(my_world);
 
