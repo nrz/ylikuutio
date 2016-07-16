@@ -130,6 +130,9 @@ datatypes::AnyValue* delete_suzanne_species(callback_system::CallbackEngine*, st
 {
     ontology::Species* species = static_cast<ontology::Species*>(input_parameters.at(0)->get_any_value()->void_pointer);
     delete species;
+
+    bool* does_suzanne_species_exist = static_cast<bool*>(input_parameters.at(1)->get_any_value()->void_pointer);
+    *does_suzanne_species_exist = false;
     return nullptr;
 }
 
@@ -355,6 +358,8 @@ int main(void)
             &delete_suzanne_species, delete_suzanne_species_callback_engine);
     callback_system::CallbackParameter* delete_suzanne_species_callback_parameter0 = new callback_system::CallbackParameter(
             "suzanne_species", new datatypes::AnyValue(suzanne_species), false, delete_suzanne_species_callback_object);
+    callback_system::CallbackParameter* delete_suzanne_species_callback_parameter1 = new callback_system::CallbackParameter(
+            "does_suzanne_species_exist", new datatypes::AnyValue(static_cast<void*>(&does_suzanne_species_exist)), false, delete_suzanne_species_callback_object);
 
     bool does_suzanne_species_have_uvmap_texture = true;
     callback_system::CallbackEngine* switch_to_grass_material_callback_engine = new callback_system::CallbackEngine();
@@ -541,7 +546,6 @@ int main(void)
         if ((glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) && does_suzanne_species_exist)
         {
             delete_suzanne_species_callback_engine->execute();
-            does_suzanne_species_exist = false;
         }
 
         if (does_suzanne_species_exist && does_suzanne_species_have_uvmap_texture && (glfwGetKey(window, GLFW_KEY_G) == GLFW_PRESS))
