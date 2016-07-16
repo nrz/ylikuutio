@@ -2,8 +2,6 @@ TEE-lista:
 Listaa tähän keskeneräiset asiat kiireellisyysjärjestyksessä kiireellisimmät ylös. Rasti ruutuun ja valmiit-osastolle kun on valmis.
 
 Ylikuution kehityksen kannalta välttämättömiä työvaiheita:
-[ ] Koodaa takaisinkutsut (callback) toimintakuntoon.
-[ ] Testaa takaisinkutsujen toimintaa.
 [ ] Lisää konsoli (aukeaa näppäimellä `).
 [ ] Luo graafi maailman vertekseistä ja särmistä.
 [ ] Lisää ray castingiä käyttävä toiminto verteksien valitsemiseen ja muokkaamiseen.
@@ -28,3 +26,5 @@ Valmiit:
 [x] `string.h` -> `cstring`.
 [x] `strcmp` -> `std::strcmp`.
 [x] `strlen` -> `std::strlen`.
+[x] Koodaa takaisinkutsut (callback) toimintakuntoon.
+[x] Testaa takaisinkutsujen toimintaa.
