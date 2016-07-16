@@ -421,6 +421,16 @@ int main(void)
             switch_to_uvmap_material_callback_object);
 
     // Callback code for T: transform `suzanne2` into terrain.
+    callback_system::CallbackEngine* transform_into_terrain_callback_engine = new callback_system::CallbackEngine();
+    callback_system::CallbackObject* transform_into_terrain_callback_object = new callback_system::CallbackObject(
+            &transform_into_new_species, transform_into_terrain_callback_engine);
+    callback_system::CallbackParameter* transform_into_terrain_callback_parameter0 = new callback_system::CallbackParameter(
+            "suzanne2", new datatypes::AnyValue(suzanne2), false, transform_into_terrain_callback_object); // suzanne2!!!
+    callback_system::CallbackParameter* transform_into_terrain_callback_parameter1 = new callback_system::CallbackParameter(
+            "terrain_species", new datatypes::AnyValue(terrain_species), false, transform_into_terrain_callback_object);
+
+    // Callback code for A: transform `suzanne2` back into monkey.
+    bool has_suzanne_2_transformed_into_monkey = true;
     bool has_suzanne_2_transformed_into_terrain = false;
     callback_system::CallbackEngine* transform_into_monkey_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* transform_into_monkey_callback_object = new callback_system::CallbackObject(
@@ -429,15 +439,6 @@ int main(void)
             "suzanne2", new datatypes::AnyValue(suzanne2), false, transform_into_monkey_callback_object); // suzanne2!!!
     callback_system::CallbackParameter* transform_into_monkey_callback_parameter1 = new callback_system::CallbackParameter(
             "monkey_species", new datatypes::AnyValue(suzanne_species), false, transform_into_monkey_callback_object);
-
-    // Callback code for A: transform `suzanne2` back into monkey.
-    callback_system::CallbackEngine* transform_into_terrain_callback_engine = new callback_system::CallbackEngine();
-    callback_system::CallbackObject* transform_into_terrain_callback_object = new callback_system::CallbackObject(
-            &transform_into_new_species, transform_into_terrain_callback_engine);
-    callback_system::CallbackParameter* transform_into_terrain_callback_parameter0 = new callback_system::CallbackParameter(
-            "suzanne2", new datatypes::AnyValue(suzanne2), false, transform_into_terrain_callback_object); // suzanne2!!!
-    callback_system::CallbackParameter* transform_into_terrain_callback_parameter1 = new callback_system::CallbackParameter(
-            "terrain_species", new datatypes::AnyValue(terrain_species), false, transform_into_terrain_callback_object);
 
     // Initialize our little text library with the Holstein font
     const char* char_g_font_texture_filename = g_font_texture_filename.c_str();
