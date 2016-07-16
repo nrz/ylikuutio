@@ -128,11 +128,15 @@ datatypes::AnyValue* full_cleanup(callback_system::CallbackEngine*, std::vector<
 
 datatypes::AnyValue* delete_suzanne_species(callback_system::CallbackEngine*, std::vector<callback_system::CallbackParameter*> input_parameters)
 {
-    ontology::Species* species = static_cast<ontology::Species*>(input_parameters.at(0)->get_any_value()->void_pointer);
-    delete species;
-
     bool* does_suzanne_species_exist = static_cast<bool*>(input_parameters.at(1)->get_any_value()->void_pointer);
-    *does_suzanne_species_exist = false;
+
+    if (*does_suzanne_species_exist)
+    {
+        ontology::Species* species = static_cast<ontology::Species*>(input_parameters.at(0)->get_any_value()->void_pointer);
+        delete species;
+
+        *does_suzanne_species_exist = false;
+    }
     return nullptr;
 }
 
@@ -543,7 +547,7 @@ int main(void)
             glfwSwapBuffers(window);
         }
 
-        if ((glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) && does_suzanne_species_exist)
+        if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
         {
             delete_suzanne_species_callback_engine->execute();
         }
