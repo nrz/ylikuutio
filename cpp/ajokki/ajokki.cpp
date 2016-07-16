@@ -142,9 +142,19 @@ datatypes::AnyValue* delete_suzanne_species(callback_system::CallbackEngine*, st
 
 datatypes::AnyValue* switch_to_new_material(callback_system::CallbackEngine*, std::vector<callback_system::CallbackParameter*> input_parameters)
 {
-    ontology::Species* species = static_cast<ontology::Species*>(input_parameters.at(0)->get_any_value()->void_pointer);
-    ontology::Material* material = static_cast<ontology::Material*>(input_parameters.at(1)->get_any_value()->void_pointer);
-    species->bind_to_new_parent(material);
+    bool* does_suzanne_species_exist = static_cast<bool*>(input_parameters.at(2)->get_any_value()->void_pointer);
+    bool* does_suzanne_species_have_original_texture = static_cast<bool*>(input_parameters.at(3)->get_any_value()->void_pointer);
+    bool* does_suzanne_species_have_new_texture = static_cast<bool*>(input_parameters.at(4)->get_any_value()->void_pointer);
+
+    if (*does_suzanne_species_exist && *does_suzanne_species_have_original_texture)
+    {
+        ontology::Species* species = static_cast<ontology::Species*>(input_parameters.at(0)->get_any_value()->void_pointer);
+        ontology::Material* material = static_cast<ontology::Material*>(input_parameters.at(1)->get_any_value()->void_pointer);
+        species->bind_to_new_parent(material);
+
+        *does_suzanne_species_have_original_texture = false;
+        *does_suzanne_species_have_new_texture = true;
+    }
     return nullptr;
 }
 
@@ -368,6 +378,7 @@ int main(void)
 
     // Callback code for G: switch to grass material.
     bool does_suzanne_species_have_uvmap_texture = true;
+    bool does_suzanne_species_have_grass_texture = false;
     callback_system::CallbackEngine* switch_to_grass_material_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* switch_to_grass_material_callback_object = new callback_system::CallbackObject(
             &switch_to_new_material, switch_to_grass_material_callback_engine);
@@ -375,6 +386,18 @@ int main(void)
             "suzanne_species", new datatypes::AnyValue(suzanne_species), false, switch_to_grass_material_callback_object);
     callback_system::CallbackParameter* switch_to_grass_material_callback_parameter1 = new callback_system::CallbackParameter(
             "grass_material", new datatypes::AnyValue(grass_material), false, switch_to_grass_material_callback_object);
+    callback_system::CallbackParameter* switch_to_grass_material_callback_parameter2 = new callback_system::CallbackParameter(
+            "does_suzanne_species_exist", new datatypes::AnyValue(static_cast<void*>(&does_suzanne_species_exist)), false, switch_to_grass_material_callback_object);
+    callback_system::CallbackParameter* switch_to_grass_material_callback_parameter3 = new callback_system::CallbackParameter(
+            "does_suzanne_species_have_uvmap_texture",
+            new datatypes::AnyValue(static_cast<void*>(&does_suzanne_species_have_uvmap_texture)),
+            false,
+            switch_to_grass_material_callback_object);
+    callback_system::CallbackParameter* switch_to_grass_material_callback_parameter4 = new callback_system::CallbackParameter(
+            "does_suzanne_species_have_grass_texture",
+            new datatypes::AnyValue(static_cast<void*>(&does_suzanne_species_have_grass_texture)),
+            false,
+            switch_to_grass_material_callback_object);
 
     // Callback code for U: switch back to uvmap material.
     callback_system::CallbackEngine* switch_to_uvmap_material_callback_engine = new callback_system::CallbackEngine();
@@ -384,6 +407,18 @@ int main(void)
             "suzanne_species", new datatypes::AnyValue(suzanne_species), false, switch_to_uvmap_material_callback_object);
     callback_system::CallbackParameter* switch_to_uvmap_material_callback_parameter1 = new callback_system::CallbackParameter(
             "uvmap_material", new datatypes::AnyValue(uvmap_material), false, switch_to_uvmap_material_callback_object);
+    callback_system::CallbackParameter* switch_to_uvmap_material_callback_parameter2 = new callback_system::CallbackParameter(
+            "does_suzanne_species_exist", new datatypes::AnyValue(static_cast<void*>(&does_suzanne_species_exist)), false, switch_to_uvmap_material_callback_object);
+    callback_system::CallbackParameter* switch_to_uvmap_material_callback_parameter3 = new callback_system::CallbackParameter(
+            "does_suzanne_species_have_grass_texture",
+            new datatypes::AnyValue(static_cast<void*>(&does_suzanne_species_have_grass_texture)),
+            false,
+            switch_to_uvmap_material_callback_object);
+    callback_system::CallbackParameter* switch_to_uvmap_material_callback_parameter4 = new callback_system::CallbackParameter(
+            "does_suzanne_species_have_uvmap_texture",
+            new datatypes::AnyValue(static_cast<void*>(&does_suzanne_species_have_uvmap_texture)),
+            false,
+            switch_to_uvmap_material_callback_object);
 
     // Callback code for T: transform `suzanne2` into terrain.
     bool has_suzanne_2_transformed_into_terrain = false;
@@ -557,17 +592,15 @@ int main(void)
             delete_suzanne_species_callback_engine->execute();
         }
 
-        if (does_suzanne_species_exist && does_suzanne_species_have_uvmap_texture && (glfwGetKey(window, GLFW_KEY_G) == GLFW_PRESS))
+        if (glfwGetKey(window, GLFW_KEY_G) == GLFW_PRESS)
         {
             // switch to grass material.
             switch_to_grass_material_callback_engine->execute();
-            does_suzanne_species_have_uvmap_texture = false;
         }
-        else if (does_suzanne_species_exist && !does_suzanne_species_have_uvmap_texture && (glfwGetKey(window, GLFW_KEY_U) == GLFW_PRESS))
+        else if (glfwGetKey(window, GLFW_KEY_U) == GLFW_PRESS)
         {
             // switch to uvmap material.
             switch_to_uvmap_material_callback_engine->execute();
-            does_suzanne_species_have_uvmap_texture = true;
         }
 
         if (does_suzanne_species_exist && has_suzanne_2_transformed_into_terrain && (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS))
