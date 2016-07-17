@@ -6,11 +6,6 @@
 #include <string>   // std::string
 #include <stdint.h> // uint32_t etc.
 
-namespace ontology
-{
-    class World;
-}
-
 namespace datatypes
 {
     void AnyValue::set_default_values()
@@ -22,7 +17,6 @@ namespace datatypes
         this->int32_t_value = 0;
         this->uint32_t_value = 0;
         this->void_pointer = nullptr;
-        this->world_pointer = nullptr;
     }
 
     AnyValue::AnyValue()
@@ -144,25 +138,6 @@ namespace datatypes
         {
             this->type = datatypes::VOID_POINTER;
             this->void_pointer = void_pointer;
-        }
-    }
-
-    AnyValue::AnyValue(ontology::World* world_pointer)
-    {
-        // constructor.
-        this->set_default_values();
-        this->type = datatypes::WORLD_POINTER;
-        this->world_pointer = world_pointer;
-    }
-
-    AnyValue::AnyValue(std::string type, ontology::World* world_pointer)
-    {
-        // constructor.
-        this->set_default_values();
-        if (std::strcmp(type.c_str(), "ontology::World*"))
-        {
-            this->type = datatypes::WORLD_POINTER;
-            this->world_pointer = world_pointer;
         }
     }
 }

@@ -109,13 +109,13 @@ datatypes::AnyValue* full_cleanup(callback_system::CallbackEngine*, std::vector<
     else
     {
         datatypes::AnyValue* any_value = input_parameters.at(0)->get_any_value();
-        if (any_value->type == datatypes::WORLD_POINTER)
+        if (any_value->type == datatypes::VOID_POINTER)
         {
-            delete any_value->world_pointer;
+            delete static_cast<ontology::World*>(any_value->void_pointer);
         }
         else
         {
-            std::cerr << "Invalid datatype: " << any_value->type << ", should be " << datatypes::WORLD_POINTER << "\n";
+            std::cerr << "Invalid datatype: " << any_value->type << ", should be " << datatypes::VOID_POINTER << "\n";
         }
     }
 
