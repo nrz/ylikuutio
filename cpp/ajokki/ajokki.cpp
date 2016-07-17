@@ -568,5 +568,14 @@ int main(void)
 
     // do cleanup.
     cleanup_callback_engine->execute();
+
+    // Delete all callback engines.
+    for (uint32_t i = 0; i < keypress_callback_engines.size(); i++)
+    {
+        delete keypress_callback_engines[i];
+    }
+
+    delete cleanup_callback_engine;
+
     return 0;
 }
