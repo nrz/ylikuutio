@@ -68,9 +68,6 @@ namespace callback_system
             std::vector<callback_system::CallbackParameter*> callback_parameter_pointer_vector;
             std::queue<uint32_t> free_callback_parameterID_queue;
 
-            std::string output_type;
-            std::string output_variable_name;
-
             InputParametersToAnyValueCallback callback;
     };
 }
