@@ -253,10 +253,6 @@ int main(void)
     // Create the world, store it in `my_world`.
     ontology::World* my_world = new ontology::World();
 
-    datatypes::AnyValue* my_world_value = new datatypes::AnyValue(my_world);
-    callback_system::CallbackParameter* callback_parameter = new callback_system::CallbackParameter("", my_world_value, false, cleanup_callback_object);
-    cleanup_callback_object->set_new_callback(&full_cleanup);
-
     ontology::Scene* my_scene = new ontology::Scene(my_world);
 
     // Create the shader, store it in `my_shader`.
@@ -474,6 +470,10 @@ int main(void)
             new datatypes::AnyValue(static_cast<void*>(&has_suzanne_2_transformed_into_monkey)),
             false,
             transform_into_monkey_callback_object);
+
+    datatypes::AnyValue* my_world_value = new datatypes::AnyValue(my_world);
+    callback_system::CallbackParameter* callback_parameter = new callback_system::CallbackParameter("", my_world_value, false, cleanup_callback_object);
+    cleanup_callback_object->set_new_callback(&full_cleanup);
 
     // keypress callbacks.
     std::array<callback_system::CallbackEngine*, GLFW_KEY_LAST + 1> keypress_callback_engines;
