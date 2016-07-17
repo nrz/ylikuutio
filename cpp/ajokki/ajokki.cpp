@@ -52,7 +52,6 @@ GLFWwindow* window;
 #include <cstdio>   // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf etc.
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <string>   // std::string
-#include <vector>   // std::vector
 #include <stdint.h> // uint32_t etc.
 
 // #define TESTING_SPHERICAL_WORLD_IN_USE
