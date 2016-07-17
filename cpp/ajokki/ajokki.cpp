@@ -92,89 +92,92 @@ std::string g_font_texture_filename = "Holstein.bmp";
 std::string g_font_file_format = "svg";
 std::string g_font_filename = "kongtext.svg";
 
-datatypes::AnyValue* glfwTerminate_cleanup(callback_system::CallbackEngine*, std::vector<callback_system::CallbackParameter*> input_parameters)
+namespace ajokki
 {
-    glfwTerminate();
-    return nullptr;
-}
-
-datatypes::AnyValue* full_cleanup(callback_system::CallbackEngine*, std::vector<callback_system::CallbackParameter*> input_parameters)
-{
-    std::cout << "Cleaning up.\n";
-
-    if (input_parameters.size() != 1)
+    datatypes::AnyValue* glfwTerminate_cleanup(callback_system::CallbackEngine*, std::vector<callback_system::CallbackParameter*> input_parameters)
     {
-        std::cerr << "Invalid size of input_parameters: " << input_parameters.size() << ", should be 1.\n";
+        glfwTerminate();
+        return nullptr;
     }
-    else
+
+    datatypes::AnyValue* full_cleanup(callback_system::CallbackEngine*, std::vector<callback_system::CallbackParameter*> input_parameters)
     {
-        datatypes::AnyValue* any_value = input_parameters.at(0)->get_any_value();
-        if (any_value->type == datatypes::VOID_POINTER)
+        std::cout << "Cleaning up.\n";
+
+        if (input_parameters.size() != 1)
         {
-            delete static_cast<ontology::World*>(any_value->void_pointer);
+            std::cerr << "Invalid size of input_parameters: " << input_parameters.size() << ", should be 1.\n";
         }
         else
         {
-            std::cerr << "Invalid datatype: " << any_value->type << ", should be " << datatypes::VOID_POINTER << "\n";
+            datatypes::AnyValue* any_value = input_parameters.at(0)->get_any_value();
+            if (any_value->type == datatypes::VOID_POINTER)
+            {
+                delete static_cast<ontology::World*>(any_value->void_pointer);
+            }
+            else
+            {
+                std::cerr << "Invalid datatype: " << any_value->type << ", should be " << datatypes::VOID_POINTER << "\n";
+            }
         }
+
+        // Delete the text's VBO, the shader and the texture
+        text2D::cleanupText2D();
+
+        // Close OpenGL window and terminate GLFW
+        glfwTerminate();
+        return nullptr;
     }
 
-    // Delete the text's VBO, the shader and the texture
-    text2D::cleanupText2D();
-
-    // Close OpenGL window and terminate GLFW
-    glfwTerminate();
-    return nullptr;
-}
-
-datatypes::AnyValue* delete_suzanne_species(callback_system::CallbackEngine*, std::vector<callback_system::CallbackParameter*> input_parameters)
-{
-    bool* does_suzanne_species_exist = static_cast<bool*>(input_parameters.at(1)->get_any_value()->void_pointer);
-
-    if (*does_suzanne_species_exist)
+    datatypes::AnyValue* delete_suzanne_species(callback_system::CallbackEngine*, std::vector<callback_system::CallbackParameter*> input_parameters)
     {
-        ontology::Species* species = static_cast<ontology::Species*>(input_parameters.at(0)->get_any_value()->void_pointer);
-        delete species;
+        bool* does_suzanne_species_exist = static_cast<bool*>(input_parameters.at(1)->get_any_value()->void_pointer);
 
-        *does_suzanne_species_exist = false;
+        if (*does_suzanne_species_exist)
+        {
+            ontology::Species* species = static_cast<ontology::Species*>(input_parameters.at(0)->get_any_value()->void_pointer);
+            delete species;
+
+            *does_suzanne_species_exist = false;
+        }
+        return nullptr;
     }
-    return nullptr;
-}
 
-datatypes::AnyValue* switch_to_new_material(callback_system::CallbackEngine*, std::vector<callback_system::CallbackParameter*> input_parameters)
-{
-    bool* does_suzanne_species_exist = static_cast<bool*>(input_parameters.at(2)->get_any_value()->void_pointer);
-    bool* does_suzanne_species_have_original_texture = static_cast<bool*>(input_parameters.at(3)->get_any_value()->void_pointer);
-    bool* does_suzanne_species_have_new_texture = static_cast<bool*>(input_parameters.at(4)->get_any_value()->void_pointer);
-
-    if (*does_suzanne_species_exist && *does_suzanne_species_have_original_texture)
+    datatypes::AnyValue* switch_to_new_material(callback_system::CallbackEngine*, std::vector<callback_system::CallbackParameter*> input_parameters)
     {
-        ontology::Species* species = static_cast<ontology::Species*>(input_parameters.at(0)->get_any_value()->void_pointer);
-        ontology::Material* material = static_cast<ontology::Material*>(input_parameters.at(1)->get_any_value()->void_pointer);
-        species->bind_to_new_parent(material);
+        bool* does_suzanne_species_exist = static_cast<bool*>(input_parameters.at(2)->get_any_value()->void_pointer);
+        bool* does_suzanne_species_have_original_texture = static_cast<bool*>(input_parameters.at(3)->get_any_value()->void_pointer);
+        bool* does_suzanne_species_have_new_texture = static_cast<bool*>(input_parameters.at(4)->get_any_value()->void_pointer);
 
-        *does_suzanne_species_have_original_texture = false;
-        *does_suzanne_species_have_new_texture = true;
+        if (*does_suzanne_species_exist && *does_suzanne_species_have_original_texture)
+        {
+            ontology::Species* species = static_cast<ontology::Species*>(input_parameters.at(0)->get_any_value()->void_pointer);
+            ontology::Material* material = static_cast<ontology::Material*>(input_parameters.at(1)->get_any_value()->void_pointer);
+            species->bind_to_new_parent(material);
+
+            *does_suzanne_species_have_original_texture = false;
+            *does_suzanne_species_have_new_texture = true;
+        }
+        return nullptr;
     }
-    return nullptr;
-}
 
-datatypes::AnyValue* transform_into_new_species(callback_system::CallbackEngine*, std::vector<callback_system::CallbackParameter*> input_parameters)
-{
-    bool* does_suzanne_species_exist = static_cast<bool*>(input_parameters.at(2)->get_any_value()->void_pointer);
-    bool* does_suzanne_species_belong_to_original_species = static_cast<bool*>(input_parameters.at(3)->get_any_value()->void_pointer);
-    bool* does_suzanne_species_belong_to_new_species = static_cast<bool*>(input_parameters.at(4)->get_any_value()->void_pointer);
-
-    if (*does_suzanne_species_exist && *does_suzanne_species_belong_to_original_species)
+    datatypes::AnyValue* transform_into_new_species(callback_system::CallbackEngine*, std::vector<callback_system::CallbackParameter*> input_parameters)
     {
-        ontology::Object* object = static_cast<ontology::Object*>(input_parameters.at(0)->get_any_value()->void_pointer);
-        ontology::Species* species = static_cast<ontology::Species*>(input_parameters.at(1)->get_any_value()->void_pointer);
-        object->bind_to_new_parent(species);
+        bool* does_suzanne_species_exist = static_cast<bool*>(input_parameters.at(2)->get_any_value()->void_pointer);
+        bool* does_suzanne_species_belong_to_original_species = static_cast<bool*>(input_parameters.at(3)->get_any_value()->void_pointer);
+        bool* does_suzanne_species_belong_to_new_species = static_cast<bool*>(input_parameters.at(4)->get_any_value()->void_pointer);
 
-        *does_suzanne_species_belong_to_original_species = false;
-        *does_suzanne_species_belong_to_new_species = true;
+        if (*does_suzanne_species_exist && *does_suzanne_species_belong_to_original_species)
+        {
+            ontology::Object* object = static_cast<ontology::Object*>(input_parameters.at(0)->get_any_value()->void_pointer);
+            ontology::Species* species = static_cast<ontology::Species*>(input_parameters.at(1)->get_any_value()->void_pointer);
+            object->bind_to_new_parent(species);
+
+            *does_suzanne_species_belong_to_original_species = false;
+            *does_suzanne_species_belong_to_new_species = true;
+        }
+        return nullptr;
     }
-    return nullptr;
 }
 
 int main(void)
@@ -217,7 +220,7 @@ int main(void)
 
     // Open a window and create its OpenGL context.
     window = glfwCreateWindow((GLuint) WINDOW_WIDTH, (GLuint) WINDOW_HEIGHT, "Ylikuutio", nullptr, nullptr);
-    cleanup_callback_object->set_new_callback(&glfwTerminate_cleanup);
+    cleanup_callback_object->set_new_callback(&ajokki::glfwTerminate_cleanup);
 
     if (window == nullptr)
     {
@@ -377,7 +380,7 @@ int main(void)
     bool does_suzanne_species_exist = true;
     callback_system::CallbackEngine* delete_suzanne_species_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* delete_suzanne_species_callback_object = new callback_system::CallbackObject(
-            &delete_suzanne_species, delete_suzanne_species_callback_engine);
+            &ajokki::delete_suzanne_species, delete_suzanne_species_callback_engine);
     callback_system::CallbackParameter* delete_suzanne_species_callback_parameter0 = new callback_system::CallbackParameter(
             "suzanne_species", new datatypes::AnyValue(suzanne_species), false, delete_suzanne_species_callback_object);
     callback_system::CallbackParameter* delete_suzanne_species_callback_parameter1 = new callback_system::CallbackParameter(
@@ -388,7 +391,7 @@ int main(void)
     bool does_suzanne_species_have_grass_texture = false;
     callback_system::CallbackEngine* switch_to_grass_material_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* switch_to_grass_material_callback_object = new callback_system::CallbackObject(
-            &switch_to_new_material, switch_to_grass_material_callback_engine);
+            &ajokki::switch_to_new_material, switch_to_grass_material_callback_engine);
     callback_system::CallbackParameter* switch_to_grass_material_callback_parameter0 = new callback_system::CallbackParameter(
             "suzanne_species", new datatypes::AnyValue(suzanne_species), false, switch_to_grass_material_callback_object);
     callback_system::CallbackParameter* switch_to_grass_material_callback_parameter1 = new callback_system::CallbackParameter(
@@ -409,7 +412,7 @@ int main(void)
     // Callback code for U: switch back to uvmap material.
     callback_system::CallbackEngine* switch_to_uvmap_material_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* switch_to_uvmap_material_callback_object = new callback_system::CallbackObject(
-            &switch_to_new_material, switch_to_uvmap_material_callback_engine);
+            &ajokki::switch_to_new_material, switch_to_uvmap_material_callback_engine);
     callback_system::CallbackParameter* switch_to_uvmap_material_callback_parameter0 = new callback_system::CallbackParameter(
             "suzanne_species", new datatypes::AnyValue(suzanne_species), false, switch_to_uvmap_material_callback_object);
     callback_system::CallbackParameter* switch_to_uvmap_material_callback_parameter1 = new callback_system::CallbackParameter(
@@ -432,7 +435,7 @@ int main(void)
     bool has_suzanne_2_transformed_into_terrain = false;
     callback_system::CallbackEngine* transform_into_terrain_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* transform_into_terrain_callback_object = new callback_system::CallbackObject(
-            &transform_into_new_species, transform_into_terrain_callback_engine);
+            &ajokki::transform_into_new_species, transform_into_terrain_callback_engine);
     callback_system::CallbackParameter* transform_into_terrain_callback_parameter0 = new callback_system::CallbackParameter(
             "suzanne2", new datatypes::AnyValue(suzanne2), false, transform_into_terrain_callback_object); // suzanne2!!!
     callback_system::CallbackParameter* transform_into_terrain_callback_parameter1 = new callback_system::CallbackParameter(
@@ -453,7 +456,7 @@ int main(void)
     // Callback code for A: transform `suzanne2` back into monkey.
     callback_system::CallbackEngine* transform_into_monkey_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* transform_into_monkey_callback_object = new callback_system::CallbackObject(
-            &transform_into_new_species, transform_into_monkey_callback_engine);
+            &ajokki::transform_into_new_species, transform_into_monkey_callback_engine);
     callback_system::CallbackParameter* transform_into_monkey_callback_parameter0 = new callback_system::CallbackParameter(
             "suzanne2", new datatypes::AnyValue(suzanne2), false, transform_into_monkey_callback_object); // suzanne2!!!
     callback_system::CallbackParameter* transform_into_monkey_callback_parameter1 = new callback_system::CallbackParameter(
@@ -473,7 +476,7 @@ int main(void)
 
     datatypes::AnyValue* my_world_value = new datatypes::AnyValue(my_world);
     callback_system::CallbackParameter* callback_parameter = new callback_system::CallbackParameter("", my_world_value, false, cleanup_callback_object);
-    cleanup_callback_object->set_new_callback(&full_cleanup);
+    cleanup_callback_object->set_new_callback(&ajokki::full_cleanup);
 
     // keypress callbacks.
     std::array<callback_system::CallbackEngine*, GLFW_KEY_LAST + 1> keypress_callback_engines;
