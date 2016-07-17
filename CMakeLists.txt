@@ -311,6 +311,8 @@ add_executable(ajokki
 
     # ajokki, in alphabetical order
     cpp/ajokki/ajokki.cpp
+    cpp/ajokki/ajokki_callbacks.cpp
+    cpp/ajokki/ajokki_callbacks.hpp
     )
 
 target_link_libraries(ajokki
