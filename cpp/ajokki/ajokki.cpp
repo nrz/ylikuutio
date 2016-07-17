@@ -552,9 +552,9 @@ int main(void)
             char off_text[] = "off";
             char in_use_text[] = " (in use)";
 
-            char help_text[1024];
+            char help_text_char[1024];
             std::sprintf(
-                    help_text,
+                    help_text_char,
                     "Ajokki v. 0.0.1\\n"
                     "\\n"
                     "F1-help mode\\n"
@@ -594,7 +594,7 @@ int main(void)
                 // print help text.
                 printing_struct.x = 0;
                 printing_struct.y = WINDOW_HEIGHT - (2 * TEXT_SIZE);
-                printing_struct.text = help_text;
+                printing_struct.text = help_text_char;
                 printing_struct.horizontal_alignment = "left";
                 printing_struct.vertical_alignment = "top";
                 text2D::printText2D(printing_struct);
