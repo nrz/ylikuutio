@@ -32,12 +32,6 @@ namespace callback_system
             // this method changes the callback without changing the parameters of CallbackObject.
             void set_new_callback(InputParametersToAnyValueCallback callback);
 
-            // add reference to an input variable.
-            // this does not store the value to an appropriate hashmap.
-            // storing the value must be done before or after this call.
-            // each type has its own namespace!
-            // void add_input_parameter(std::string name, datatypes::AnyValue any_value, bool is_reference);
-
             friend class CallbackEngine;
             friend class CallbackParameter;
             template<class T1>
