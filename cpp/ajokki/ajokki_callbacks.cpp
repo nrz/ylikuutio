@@ -21,13 +21,19 @@
 
 namespace ajokki
 {
-    datatypes::AnyValue* glfwTerminate_cleanup(callback_system::CallbackEngine*, callback_system::CallbackObject*, std::vector<callback_system::CallbackParameter*> input_parameters)
+    datatypes::AnyValue* glfwTerminate_cleanup(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject*,
+            std::vector<callback_system::CallbackParameter*> input_parameters)
     {
         glfwTerminate();
         return nullptr;
     }
 
-    datatypes::AnyValue* full_cleanup(callback_system::CallbackEngine*, callback_system::CallbackObject*, std::vector<callback_system::CallbackParameter*> input_parameters)
+    datatypes::AnyValue* full_cleanup(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject*,
+            std::vector<callback_system::CallbackParameter*> input_parameters)
     {
         std::cout << "Cleaning up.\n";
 
@@ -56,7 +62,10 @@ namespace ajokki
         return nullptr;
     }
 
-    datatypes::AnyValue* delete_suzanne_species(callback_system::CallbackEngine*, callback_system::CallbackObject*, std::vector<callback_system::CallbackParameter*> input_parameters)
+    datatypes::AnyValue* delete_suzanne_species(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject*,
+            std::vector<callback_system::CallbackParameter*> input_parameters)
     {
         bool* does_suzanne_species_exist = static_cast<bool*>(input_parameters.at(1)->get_any_value()->void_pointer);
 
@@ -70,7 +79,10 @@ namespace ajokki
         return nullptr;
     }
 
-    datatypes::AnyValue* switch_to_new_material(callback_system::CallbackEngine*, callback_system::CallbackObject*, std::vector<callback_system::CallbackParameter*> input_parameters)
+    datatypes::AnyValue* switch_to_new_material(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject*,
+            std::vector<callback_system::CallbackParameter*> input_parameters)
     {
         bool* does_suzanne_species_exist = static_cast<bool*>(input_parameters.at(2)->get_any_value()->void_pointer);
         bool* does_suzanne_species_have_original_texture = static_cast<bool*>(input_parameters.at(3)->get_any_value()->void_pointer);
@@ -88,7 +100,10 @@ namespace ajokki
         return nullptr;
     }
 
-    datatypes::AnyValue* transform_into_new_species(callback_system::CallbackEngine*, callback_system::CallbackObject*, std::vector<callback_system::CallbackParameter*> input_parameters)
+    datatypes::AnyValue* transform_into_new_species(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject*,
+            std::vector<callback_system::CallbackParameter*> input_parameters)
     {
         bool* does_suzanne_species_exist = static_cast<bool*>(input_parameters.at(2)->get_any_value()->void_pointer);
         bool* does_suzanne_species_belong_to_original_species = static_cast<bool*>(input_parameters.at(3)->get_any_value()->void_pointer);
