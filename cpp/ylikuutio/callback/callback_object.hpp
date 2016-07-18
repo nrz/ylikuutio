@@ -15,7 +15,7 @@ namespace callback_system
 {
     class CallbackParameter;
 
-    class CallbackObject: private CustomNamespace
+    class CallbackObject: public CustomNamespace
     {
         // CallbackObject is an object that contains a single callback.
 

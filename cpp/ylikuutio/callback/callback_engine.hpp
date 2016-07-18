@@ -26,7 +26,7 @@ namespace callback_system
 {
     class CallbackObject;
 
-    class CallbackEngine: private CustomNamespace
+    class CallbackEngine: public CustomNamespace
     {
         // `CallbackEngine` is an object that contains some callbacks and hashmaps that are used for input and output parameters.
         // `CallbackEngine` provides a way to create callback chains.
