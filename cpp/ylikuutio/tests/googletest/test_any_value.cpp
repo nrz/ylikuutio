@@ -1,6 +1,6 @@
 #include "gtest/gtest.h"
 #include "cpp/ylikuutio/common/any_value.hpp"
-#include "cpp/ylikuutio/ontology/world.hpp"
+#include "cpp/ylikuutio/ontology/universe.hpp"
 
 // Include standard headers
 #include <cmath>    // NAN, std::isnan, std::pow

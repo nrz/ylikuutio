@@ -290,12 +290,12 @@ add_executable(ajokki
     cpp/ylikuutio/ontology/text3D.cpp
     cpp/ylikuutio/ontology/texture_loader.cpp
     cpp/ylikuutio/ontology/texture_loader.hpp
+    cpp/ylikuutio/ontology/universe.cpp
+    cpp/ylikuutio/ontology/universe.hpp
     cpp/ylikuutio/ontology/vector_font.cpp
     cpp/ylikuutio/ontology/vector_font.hpp
     cpp/ylikuutio/ontology/vboindexer.cpp
     cpp/ylikuutio/ontology/vboindexer.hpp
-    cpp/ylikuutio/ontology/world.cpp
-    cpp/ylikuutio/ontology/world.hpp
 
     # shaders, in alphabetical order
     cpp/ylikuutio/shaders/StandardShading.fragmentshader

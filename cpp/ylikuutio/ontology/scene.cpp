@@ -32,7 +32,7 @@ namespace ontology
         hierarchy::bind_child_to_parent<ontology::Scene*>(this, this->parent_pointer->scene_pointer_vector, this->parent_pointer->free_sceneID_queue);
     }
 
-    Scene::Scene(ontology::World* parent_pointer)
+    Scene::Scene(ontology::Universe* parent_pointer)
     {
         // constructor.
         this->parent_pointer = parent_pointer;
@@ -57,9 +57,9 @@ namespace ontology
         ontology::render_children<ontology::Shader*>(this->shader_pointer_vector);
     }
 
-    void Scene::bind_to_new_parent(ontology::World* new_world_pointer)
+    void Scene::bind_to_new_parent(ontology::Universe* new_world_pointer)
     {
-        hierarchy::bind_child_to_new_parent<ontology::Scene*, ontology::World*>(this, new_world_pointer, this->parent_pointer->scene_pointer_vector, this->parent_pointer->free_sceneID_queue);
+        hierarchy::bind_child_to_new_parent<ontology::Scene*, ontology::Universe*>(this, new_world_pointer, this->parent_pointer->scene_pointer_vector, this->parent_pointer->free_sceneID_queue);
     }
 
     void Scene::set_shader_pointer(uint32_t childID, void* parent_pointer)

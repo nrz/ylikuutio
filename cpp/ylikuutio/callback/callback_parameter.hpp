@@ -10,7 +10,7 @@
 
 namespace ontology
 {
-    class World;
+    class Universe;
 }
 
 namespace callback_system

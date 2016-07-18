@@ -7,7 +7,7 @@
 #define DEGREES_TO_RADIANS(x) (x * PI / 180.0f)
 #endif
 
-#include "world.hpp"
+#include "universe.hpp"
 #include "scene.hpp"
 #include "ground_level.hpp"
 #include "render_templates.hpp"
@@ -27,12 +27,12 @@ extern GLFWwindow* window; // The "extern" keyword here is to access the variabl
 
 namespace ontology
 {
-    World::World()
+    Universe::Universe()
     {
         // constructor.
     }
 
-    World::~World()
+    Universe::~Universe()
     {
         // destructor.
         std::cout << "This world will be destroyed.\n";
@@ -42,25 +42,25 @@ namespace ontology
         hierarchy::delete_children<ontology::Scene*>(this->scene_pointer_vector);
     }
 
-    void World::render()
+    void Universe::render()
     {
         this->compute_matrices_from_inputs();
 
-        // render World by calling `render()` function of each Scene.
+        // render Universe by calling `render()` function of each Scene.
         ontology::render_children<ontology::Scene*>(this->scene_pointer_vector);
     }
 
-    void World::set_scene_pointer(uint32_t childID, void* parent_pointer)
+    void Universe::set_scene_pointer(uint32_t childID, void* parent_pointer)
     {
         hierarchy::set_child_pointer(childID, parent_pointer, this->scene_pointer_vector, this->free_sceneID_queue);
     }
 
-    void World::set_terrain_species_pointer(ontology::Species* terrain_species_pointer)
+    void Universe::set_terrain_species_pointer(ontology::Species* terrain_species_pointer)
     {
         this->terrain_species_pointer = terrain_species_pointer;
     }
 
-    void World::compute_matrices_from_inputs()
+    void Universe::compute_matrices_from_inputs()
     {
         // glfwGetTime is called only once, the first time this function is called
         static double lastTime = glfwGetTime();

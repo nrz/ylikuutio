@@ -2,7 +2,7 @@
 #include "objloader.hpp"
 #include "heightmap_loader.hpp"
 #include "vboindexer.hpp"
-#include "world.hpp"
+#include "universe.hpp"
 #include "scene.hpp"
 #include "shader.hpp"
 #include "material.hpp"

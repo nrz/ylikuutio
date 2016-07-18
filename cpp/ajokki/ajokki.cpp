@@ -23,7 +23,7 @@
 #include "cpp/ylikuutio/ontology/material.hpp"
 #include "cpp/ylikuutio/ontology/shader.hpp"
 #include "cpp/ylikuutio/ontology/scene.hpp"
-#include "cpp/ylikuutio/ontology/world.hpp"
+#include "cpp/ylikuutio/ontology/universe.hpp"
 #include "cpp/ylikuutio/common/any_value.hpp"
 #include "cpp/ylikuutio/common/globals.hpp"
 
@@ -166,7 +166,7 @@ int main(void)
     glEnable(GL_CULL_FACE);
 
     // Create the world, store it in `my_world`.
-    ontology::World* my_world = new ontology::World();
+    ontology::Universe* my_world = new ontology::Universe();
 
     ontology::Scene* my_scene = new ontology::Scene(my_world);
 

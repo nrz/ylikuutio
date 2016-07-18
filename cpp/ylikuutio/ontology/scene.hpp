@@ -1,7 +1,7 @@
 #ifndef __SCENE_HPP_INCLUDED
 #define __SCENE_HPP_INCLUDED
 
-#include "world.hpp"
+#include "universe.hpp"
 #include "cpp/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include standard headers
@@ -15,13 +15,13 @@ namespace ontology
     {
         public:
             // constructor.
-            Scene(ontology::World* world_pointer);
+            Scene(ontology::Universe* world_pointer);
 
             // destructor.
             ~Scene();
 
             // this method sets pointer to this scene to nullptr, sets `parent_pointer` according to the input, and requests a new `childID` from the new world.
-            void bind_to_new_parent(ontology::World* new_world_pointer);
+            void bind_to_new_parent(ontology::Universe* new_world_pointer);
 
             friend class Shader;
             friend class Species;
@@ -39,11 +39,11 @@ namespace ontology
             // this method sets a shader pointer.
             void set_shader_pointer(uint32_t childID, void* parent_pointer);
 
-            ontology::World* parent_pointer;         // pointer to the world.
+            ontology::Universe* parent_pointer;         // pointer to the world.
 
             void bind_to_parent();
 
-            uint32_t childID;                     // scene ID, returned by `ontology::World->get_sceneID()`.
+            uint32_t childID;                     // scene ID, returned by `ontology::Universe->get_sceneID()`.
 
             std::vector<void*> shader_pointer_vector;
             std::queue<uint32_t> free_shaderID_queue;

@@ -6,7 +6,7 @@
 #include "cpp/ylikuutio/ontology/object.hpp"
 #include "cpp/ylikuutio/ontology/species.hpp"
 #include "cpp/ylikuutio/ontology/material.hpp"
-#include "cpp/ylikuutio/ontology/world.hpp"
+#include "cpp/ylikuutio/ontology/universe.hpp"
 
 // Include GLFW
 #ifndef __GLFW3_H_INCLUDED
@@ -39,7 +39,7 @@ namespace ajokki
             datatypes::AnyValue* any_value = input_parameters.at(0)->get_any_value();
             if (any_value->type == datatypes::VOID_POINTER)
             {
-                delete static_cast<ontology::World*>(any_value->void_pointer);
+                delete static_cast<ontology::Universe*>(any_value->void_pointer);
             }
             else
             {

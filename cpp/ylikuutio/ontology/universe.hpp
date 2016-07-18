@@ -127,14 +127,14 @@ namespace ontology
     class Scene;
     class Shader;
 
-    class World
+    class Universe
     {
         public:
             // constructor.
-            World();
+            Universe();
 
             // destructor.
-            ~World();
+            ~Universe();
 
             // this method renders the entire world, one scene at a time.
             void render();

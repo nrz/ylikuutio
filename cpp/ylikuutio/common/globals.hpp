@@ -108,7 +108,7 @@ extern glm::vec3 camera_position;
 
 namespace ontology
 {
-    class World;
+    class Universe;
     class Scene;
     class Shader;
     class Graph;

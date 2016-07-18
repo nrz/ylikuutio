@@ -1,6 +1,6 @@
 #include "shader.hpp"
 #include "scene.hpp"
-#include "world.hpp"
+#include "universe.hpp"
 #include "material.hpp"
 #include "render_templates.hpp"
 #include "cpp/ylikuutio/hierarchy/hierarchy_templates.hpp"

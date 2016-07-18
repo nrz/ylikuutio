@@ -14,7 +14,7 @@
 #include "cpp/ylikuutio/ontology/vboindexer.hpp"
 #include "cpp/ylikuutio/ontology/text2D.hpp"
 #include "cpp/ylikuutio/ontology/text3D.hpp"
-#include "cpp/ylikuutio/ontology/world.hpp"
+#include "cpp/ylikuutio/ontology/universe.hpp"
 #include "cpp/ylikuutio/ontology/shader.hpp"
 #include "cpp/ylikuutio/ontology/material.hpp"
 #include "cpp/ylikuutio/ontology/vector_font.hpp"
