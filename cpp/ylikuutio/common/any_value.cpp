@@ -16,6 +16,12 @@ namespace datatypes
         this->double_value = NAN;
         this->int32_t_value = 0;
         this->uint32_t_value = 0;
+        this->bool_pointer = nullptr;
+        this->float_pointer = nullptr;
+        this->double_pointer = nullptr;
+        this->int32_t_pointer = nullptr;
+        this->uint32_t_pointer = nullptr;
+        this->universe_pointer = nullptr;
         this->void_pointer = nullptr;
     }
 
