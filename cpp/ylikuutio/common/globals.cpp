@@ -32,15 +32,13 @@ bool is_key_F_released;
 bool is_key_F1_released;
 bool is_world_loaded; // no more than one world object can be loaded. TODO: check that no more than one world is loaded!
 bool is_world_spherical;
+bool testing_spherical_world_in_use = false;
 
 GLfloat speed = 5.0f; // 5 units / second
-#ifdef TESTING_SPHERICAL_WORLD_IN_USE
-GLfloat turbo_factor = 100.0f;
-GLfloat twin_turbo_factor = 50000.0f;
-#else
-GLfloat turbo_factor = 5.0f;
-GLfloat twin_turbo_factor = 100.0f;
-#endif
+
+GLfloat turbo_factor;
+GLfloat twin_turbo_factor;
+
 GLfloat mouseSpeed = 0.005f;
 
 glm::vec3 camera_position;

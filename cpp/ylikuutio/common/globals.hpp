@@ -96,6 +96,7 @@ extern bool is_key_F_released;
 extern bool is_key_F1_released;
 extern bool is_world_loaded;        // no more than one world object can be loaded. TODO: check that no more than one world is loaded!
 extern bool is_world_spherical;
+extern bool testing_spherical_world_in_use;
 
 extern GLfloat speed;
 extern GLfloat turbo_factor;

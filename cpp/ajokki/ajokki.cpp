@@ -54,8 +54,6 @@ GLFWwindow* window;
 #include <string>   // std::string
 #include <stdint.h> // uint32_t etc.
 
-// #define TESTING_SPHERICAL_WORLD_IN_USE
-
 // model file format: obj/bmp/...
 std::string g_model_file_format = "bmp";
 
@@ -97,14 +95,17 @@ int main(void)
     // position = glm::vec3(100, 100, 100);
     // position = glm::vec3(100, 3900, 100);
     // position = glm::vec3(100.0f, 5000.0f, 100.0f);
-#ifdef TESTING_SPHERICAL_WORLD_IN_USE
-    // position = glm::vec3(100.0f, 5000.0f + EARTH_RADIUS, 100.0f);
-    // position = glm::vec3(100.0f, 5000.0f, 100.0f);
-    // position = glm::vec3(-5658223.00f, -1700825.12f, 2322764.00f);
-    position = glm::vec3(-5659377.50f, -1696985.38f, 2358353.25f);
-#else
-    position = glm::vec3(100.0f, 100.0f, 100.0f);
-#endif
+    if (testing_spherical_world_in_use)
+    {
+        // position = glm::vec3(100.0f, 5000.0f + EARTH_RADIUS, 100.0f);
+        // position = glm::vec3(100.0f, 5000.0f, 100.0f);
+        // position = glm::vec3(-5658223.00f, -1700825.12f, 2322764.00f);
+        position = glm::vec3(-5659377.50f, -1696985.38f, 2358353.25f);
+    }
+    else
+    {
+        position = glm::vec3(100.0f, 100.0f, 100.0f);
+    }
     // Initial horizontal angle : toward -Z
     // horizontalAngle = 0.0f;
     horizontalAngle = 42.42f;
@@ -190,28 +191,39 @@ int main(void)
     uvmap_material_struct.texture_filename = "uvmap.DDS";
     ontology::Material* uvmap_material = new ontology::Material(uvmap_material_struct);
 
-#ifdef TESTING_SPHERICAL_WORLD_IN_USE
-    // Create the species, store it in `terrain_species`.
-    SPECIESSTRUCT(SRTM_terrain_species_struct);
-    SRTM_terrain_species_struct.parent_pointer = grass_material;
-    SRTM_terrain_species_struct.model_file_format = "SRTM";
-    // SRTM_terrain_species_struct.model_filename = "/media/laatikko_4TB/satelliittikuvat/srtm/version3/data/";
-    SRTM_terrain_species_struct.model_filename = "./"; // for testing
-    SRTM_terrain_species_struct.color_channel = g_height_data_color_channel;
-    SRTM_terrain_species_struct.light_position = glm::vec3(4, 4, 4);
-    SRTM_terrain_species_struct.is_world = true;
-    ontology::Species* terrain_species = new ontology::Species(SRTM_terrain_species_struct);
-#else
-    // Create the species, store it in `terrain_species`.
-    SpeciesStruct bmp_terrain_species_struct;
-    bmp_terrain_species_struct.parent_pointer = grass_material;
-    bmp_terrain_species_struct.model_file_format = g_model_file_format;
-    bmp_terrain_species_struct.model_filename = g_model_filename;
-    bmp_terrain_species_struct.color_channel = g_height_data_color_channel;
-    bmp_terrain_species_struct.light_position = glm::vec3(4, 4, 4);
-    bmp_terrain_species_struct.is_world = true;
-    ontology::Species* terrain_species = new ontology::Species(bmp_terrain_species_struct);
-#endif
+    ontology::Species* terrain_species;
+
+    if (testing_spherical_world_in_use)
+    {
+        // Create the species, store it in `terrain_species`.
+        SpeciesStruct(SRTM_terrain_species_struct);
+        SRTM_terrain_species_struct.parent_pointer = grass_material;
+        SRTM_terrain_species_struct.model_file_format = "SRTM";
+        // SRTM_terrain_species_struct.model_filename = "/media/laatikko_4TB/satelliittikuvat/srtm/version3/data/";
+        SRTM_terrain_species_struct.model_filename = "./"; // for testing
+        SRTM_terrain_species_struct.color_channel = g_height_data_color_channel;
+        SRTM_terrain_species_struct.light_position = glm::vec3(4, 4, 4);
+        SRTM_terrain_species_struct.is_world = true;
+        terrain_species = new ontology::Species(SRTM_terrain_species_struct);
+
+        turbo_factor = 100.0f;
+        twin_turbo_factor = 50000.0f;
+    }
+    else
+    {
+        // Create the species, store it in `terrain_species`.
+        SpeciesStruct bmp_terrain_species_struct;
+        bmp_terrain_species_struct.parent_pointer = grass_material;
+        bmp_terrain_species_struct.model_file_format = g_model_file_format;
+        bmp_terrain_species_struct.model_filename = g_model_filename;
+        bmp_terrain_species_struct.color_channel = g_height_data_color_channel;
+        bmp_terrain_species_struct.light_position = glm::vec3(4, 4, 4);
+        bmp_terrain_species_struct.is_world = true;
+        terrain_species = new ontology::Species(bmp_terrain_species_struct);
+
+        turbo_factor = 5.0f;
+        twin_turbo_factor = 100.0f;
+    }
 
     // Create terrain1, store it in `terrain1`.
     ObjectStruct terrain_object_struct1;
@@ -490,10 +502,12 @@ int main(void)
                     (!does_suzanne_species_have_uvmap_texture ? in_use_text : null_text),
                     (does_suzanne_species_have_uvmap_texture ? in_use_text : null_text));
 
-#ifdef TESTING_SPHERICAL_WORLD_IN_USE
             char spherical_coordinates_text[256];
-            std::sprintf(spherical_coordinates_text, "rho:%.2f theta:%.2f phi:%.2f", spherical_position.rho, spherical_position.theta, spherical_position.phi);
-#endif
+
+            if (testing_spherical_world_in_use)
+            {
+                std::sprintf(spherical_coordinates_text, "rho:%.2f theta:%.2f phi:%.2f", spherical_position.rho, spherical_position.theta, spherical_position.phi);
+            }
 
             // print cartesian coordinates on bottom left corner.
             printing_struct.x = 0;
@@ -514,15 +528,16 @@ int main(void)
                 text2D::printText2D(printing_struct);
             }
 
-#ifdef TESTING_SPHERICAL_WORLD_IN_USE
-            // print spherical coordinates on bottom left corner.
-            printing_struct.x = 0;
-            printing_struct.y += 2 * TEXT_SIZE;
-            printing_struct.text = spherical_coordinates_text;
-            printing_struct.horizontal_alignment = "left";
-            printing_struct.vertical_alignment = "bottom";
-            text2D::printText2D(printing_struct);
-#endif
+            if (testing_spherical_world_in_use)
+            {
+                // print spherical coordinates on bottom left corner.
+                printing_struct.x = 0;
+                printing_struct.y += 2 * TEXT_SIZE;
+                printing_struct.text = spherical_coordinates_text;
+                printing_struct.horizontal_alignment = "left";
+                printing_struct.vertical_alignment = "bottom";
+                text2D::printText2D(printing_struct);
+            }
 
             // print time data on top left corner.
             printing_struct.x = 0;
