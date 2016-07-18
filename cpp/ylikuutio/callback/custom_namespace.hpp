@@ -12,7 +12,7 @@ namespace callback_system
 {
     class CustomNamespace
     {
-        protected:
+        public:
             // getter functions for callbacks and callback objects.
             datatypes::AnyValue* get_any_value(std::string name);
             bool get_bool(std::string name);
