@@ -8,6 +8,11 @@
 // Include standard headers
 #include <string>        // std::string
 
+namespace ontology
+{
+    class Universe;
+}
+
 namespace callback_system
 {
     class CallbackParameter
