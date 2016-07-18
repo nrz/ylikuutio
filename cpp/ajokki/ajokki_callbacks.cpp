@@ -43,14 +43,14 @@ namespace ajokki
         }
         else
         {
-            datatypes::AnyValue* any_value = input_parameters.at(0)->get_any_value();
-            if (any_value->type == datatypes::VOID_POINTER)
+            datatypes::AnyValue* any_value_void_pointer = input_parameters.at(0)->get_any_value();
+            if (any_value_void_pointer->type == datatypes::VOID_POINTER)
             {
-                delete static_cast<ontology::Universe*>(any_value->void_pointer);
+                delete static_cast<ontology::Universe*>(any_value_void_pointer->void_pointer);
             }
             else
             {
-                std::cerr << "Invalid datatype: " << any_value->type << ", should be " << datatypes::VOID_POINTER << "\n";
+                std::cerr << "Invalid datatype: " << any_value_void_pointer->type << ", should be " << datatypes::VOID_POINTER << "\n";
             }
         }
 
@@ -67,16 +67,16 @@ namespace ajokki
             callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*> input_parameters)
     {
-        datatypes::AnyValue* any_value = input_parameters.at(1)->get_any_value();
+        datatypes::AnyValue* any_value_bool_pointer = input_parameters.at(1)->get_any_value();
 
-        if (any_value->type != datatypes::BOOL_POINTER)
+        if (any_value_bool_pointer->type != datatypes::BOOL_POINTER)
         {
-            // `any_value` was not `bool*`.
+            // `any_value_bool_pointer` was not `bool*`.
             return nullptr;
         }
 
-        // OK, `any_value` is a `bool*`.
-        bool* does_suzanne_species_exist = any_value->bool_pointer;
+        // OK, `any_value_bool_pointer` is a `bool*`.
+        bool* does_suzanne_species_exist = any_value_bool_pointer->bool_pointer;
 
         if (*does_suzanne_species_exist)
         {
