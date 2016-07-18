@@ -78,6 +78,7 @@
 #define MAX_FPS 60
 #endif
 
+// global variables.
 extern glm::mat4 ProjectionMatrix;
 extern glm::mat4 ViewMatrix;
 extern glm::vec3 position;
