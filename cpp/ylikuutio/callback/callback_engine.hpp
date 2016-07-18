@@ -86,7 +86,7 @@ namespace callback_system
             void set_int32_t(std::string name, int32_t value);
             void set_uint32_t(std::string name, uint32_t value);
             void set_void_pointer(std::string name, void* value);
-            void set_world_pointer(std::string name, ontology::Universe* value);
+            void set_universe_pointer(std::string name, ontology::Universe* value);
 
             std::vector<void*> callback_object_pointer_vector;
             std::queue<uint32_t> free_callback_objectID_queue;

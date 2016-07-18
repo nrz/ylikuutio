@@ -15,13 +15,13 @@ namespace ontology
     {
         public:
             // constructor.
-            Scene(ontology::Universe* world_pointer);
+            Scene(ontology::Universe* universe_pointer);
 
             // destructor.
             ~Scene();
 
             // this method sets pointer to this scene to nullptr, sets `parent_pointer` according to the input, and requests a new `childID` from the new world.
-            void bind_to_new_parent(ontology::Universe* new_world_pointer);
+            void bind_to_new_parent(ontology::Universe* new_universe_pointer);
 
             friend class Shader;
             friend class Species;
