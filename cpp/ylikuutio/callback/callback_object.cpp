@@ -159,8 +159,8 @@ namespace callback_system
             void* void_input_parameter_pointer = this->callback_parameter_pointer_vector.at(child_i);
             callback_system::CallbackParameter* input_parameter_pointer = static_cast<callback_system::CallbackParameter*>(void_input_parameter_pointer);
 
-            // Don't store the variable into CallbackEngine-specific namespace if the variable name is an empty string.
-            if (input_parameter_pointer->name.size() > 0)
+            // Don't store the variable into `CallbackEngine`-specific namespace if the variable name is an empty string.
+            if (!input_parameter_pointer->name.empty())
             {
                 switch (input_parameter_pointer->any_value->type)
                 {
