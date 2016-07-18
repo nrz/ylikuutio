@@ -7,6 +7,11 @@
 #include <string>   // std::string
 #include <stdint.h> // uint32_t etc.
 
+namespace ontology
+{
+    class Universe;
+}
+
 namespace datatypes
 {
     enum datatype
@@ -17,12 +22,15 @@ namespace datatypes
         DOUBLE,
         INT32_T,
         UINT32_T,
-        VOID_POINTER
+        BOOL_POINTER,
+        FLOAT_POINTER,
+        DOUBLE_POINTER,
+        INT32_T_POINTER,
+        UINT32_T_POINTER,
+        VOID_POINTER,
+        UNIVERSE_POINTER
     };
-}
 
-namespace datatypes
-{
     typedef class AnyValue
     {
         public:
@@ -32,6 +40,12 @@ namespace datatypes
             AnyValue(double double_value);
             AnyValue(int32_t int32_t_value);
             AnyValue(uint32_t uint32_t_value);
+            AnyValue(bool* bool_pointer);
+            AnyValue(float* float_pointer);
+            AnyValue(double* double_pointer);
+            AnyValue(int32_t* int32_t_pointer);
+            AnyValue(uint32_t* uint32_t_pointer);
+            AnyValue(ontology::Universe* universe_pointer);
             AnyValue(void* void_pointer);
 
             AnyValue(std::string type, bool bool_value);
@@ -39,6 +53,12 @@ namespace datatypes
             AnyValue(std::string type, double double_value);
             AnyValue(std::string type, int32_t int32_t_value);
             AnyValue(std::string type, uint32_t uint32_t_value);
+            AnyValue(std::string type, bool* bool_pointer);
+            AnyValue(std::string type, float* float_pointer);
+            AnyValue(std::string type, double* double_pointer);
+            AnyValue(std::string type, int32_t* int32_t_pointer);
+            AnyValue(std::string type, uint32_t* uint32_t_pointer);
+            AnyValue(std::string type, ontology::Universe* universe_pointer);
             AnyValue(std::string type, void* void_pointer);
 
             int type;
@@ -47,6 +67,12 @@ namespace datatypes
             double double_value;
             int32_t int32_t_value;
             uint32_t uint32_t_value;
+            bool* bool_pointer;
+            float* float_pointer;
+            double* double_pointer;
+            int32_t* int32_t_pointer;
+            uint32_t* uint32_t_pointer;
+            ontology::Universe* universe_pointer;
             void* void_pointer;
 
         private:

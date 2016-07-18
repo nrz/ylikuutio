@@ -122,6 +122,120 @@ namespace datatypes
         }
     }
 
+    AnyValue::AnyValue(bool* bool_pointer)
+    {
+        // constructor.
+        this->set_default_values();
+        this->type = datatypes::BOOL_POINTER;
+        this->bool_pointer = bool_pointer;
+    }
+
+    AnyValue::AnyValue(std::string type, bool* bool_pointer)
+    {
+        // constructor.
+        this->set_default_values();
+        if (std::strcmp(type.c_str(), "bool*"))
+        {
+            this->type = datatypes::BOOL_POINTER;
+            this->bool_pointer = bool_pointer;
+        }
+    }
+
+    AnyValue::AnyValue(float* float_pointer)
+    {
+        // constructor.
+        this->set_default_values();
+        this->type = datatypes::FLOAT_POINTER;
+        this->float_pointer = float_pointer;
+    }
+
+    AnyValue::AnyValue(std::string type, float* float_pointer)
+    {
+        // constructor.
+        this->set_default_values();
+        if (std::strcmp(type.c_str(), "float*"))
+        {
+            this->type = datatypes::FLOAT_POINTER;
+            this->float_pointer = float_pointer;
+        }
+    }
+
+    AnyValue::AnyValue(double* double_pointer)
+    {
+        // constructor.
+        this->set_default_values();
+        this->type = datatypes::DOUBLE_POINTER;
+        this->double_pointer = double_pointer;
+    }
+
+    AnyValue::AnyValue(std::string type, double* double_pointer)
+    {
+        // constructor.
+        this->set_default_values();
+        if (std::strcmp(type.c_str(), "double*"))
+        {
+            this->type = datatypes::DOUBLE_POINTER;
+            this->double_pointer = double_pointer;
+        }
+    }
+
+    AnyValue::AnyValue(int32_t* int32_t_pointer)
+    {
+        // constructor.
+        this->set_default_values();
+        this->type = datatypes::INT32_T_POINTER;
+        this->int32_t_pointer = int32_t_pointer;
+    }
+
+    AnyValue::AnyValue(std::string type, int32_t* int32_t_pointer)
+    {
+        // constructor.
+        this->set_default_values();
+        if (std::strcmp(type.c_str(), "int32_t*"))
+        {
+            this->type = datatypes::INT32_T_POINTER;
+            this->int32_t_pointer = int32_t_pointer;
+        }
+    }
+
+    AnyValue::AnyValue(uint32_t* uint32_t_pointer)
+    {
+        // constructor.
+        this->set_default_values();
+        this->type = datatypes::UINT32_T_POINTER;
+        this->uint32_t_pointer = uint32_t_pointer;
+    }
+
+    AnyValue::AnyValue(std::string type, uint32_t* uint32_t_pointer)
+    {
+        // constructor.
+        this->set_default_values();
+        if (std::strcmp(type.c_str(), "uint32_t*"))
+        {
+            this->type = datatypes::UINT32_T_POINTER;
+            this->uint32_t_pointer = uint32_t_pointer;
+        }
+    }
+
+    AnyValue::AnyValue(ontology::Universe* universe_pointer)
+    {
+        // constructor.
+        this->set_default_values();
+        this->type = datatypes::UNIVERSE_POINTER;
+        this->universe_pointer = universe_pointer;
+    }
+
+    AnyValue::AnyValue(std::string type, ontology::Universe* universe_pointer)
+    {
+        // constructor.
+        this->set_default_values();
+        if (std::strcmp(type.c_str(), "ontology::Universe*"))
+        {
+            this->type = datatypes::UNIVERSE_POINTER;
+            this->universe_pointer = universe_pointer;
+        }
+    }
+
     AnyValue::AnyValue(void* void_pointer)
     {
         // constructor.
