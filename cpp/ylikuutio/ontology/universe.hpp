@@ -21,9 +21,9 @@
 #include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
 
-// `World`, `Scene`, `Shader`, `Material`, `Species`, `Object`.
-// `World`, `Scene`, `Shader`, `Material`, `VectorFont`, `Glyph`, `Object`.
-// `World` must be created before any `Scene`. `parent_pointer` must be given to each `Scene`.
+// `Universe`, `Scene`, `Shader`, `Material`, `Species`, `Object`.
+// `Universe`, `Scene`, `Shader`, `Material`, `VectorFont`, `Glyph`, `Object`.
+// `Universe` must be created before any `Scene`. `parent_pointer` must be given to each `Scene`.
 // `Scene` must be created before any `Shader`. `parent_pointer` must be given to each `Shader`.
 // `Shader` must be created before any `Material`. `parent_pointer` must be given to each `Material`.
 // `Material` must be created before any `Species`. `parent_pointer` must be given to each `Species`.
@@ -32,7 +32,7 @@
 //
 // Hierarchy of regular objects (including terrain species):
 //
-//     World
+//    Universe
 //       ^
 //     Scene
 //       ^
@@ -48,7 +48,7 @@
 //
 // Ontological hierarchy of glyph (character) objects:
 //
-//     World
+//    Universe
 //       ^
 //     Scene
 //       ^
@@ -67,7 +67,7 @@
 //
 // Rendering hierarchy of glyph (character) objects:
 //
-//     World
+//    Universe
 //       ^
 //     Scene
 //       ^
@@ -86,11 +86,11 @@
 // even if the children (which are of type `Object`) may belong to many different `Text3D` objects.
 // `Text3D` is anyway needed in the ontological hierarchy, so that complete 3D texts can be destroyed and manipulated at once.
 //
-// Deleting a `World` also deletes all scenes, all shaders, materials, species, fonts, glyphs and objects that are binded to the same World.
-// Deleting a `Scene` also deletes all shaders, materials, species, fonts, glyphs and objects that are binded to the same World.
-// Deleting a `Shader` also deletes all materials, species, fonts, glyphs and objects that are binded to the same Shader.
-// Deleting a `Material` also deletes all species, fonts, glyphs and objects that are binded to the same Material.
-// Deleting a `Species` also deletes all objects that are binded to the same Species.
+// Deleting a `Universe` also deletes all scenes, all shaders, materials, species, fonts, glyphs and objects that are bound to the same `Universe`.
+// Deleting a `Scene` also deletes all shaders, materials, species, fonts, glyphs and objects that are bound to the same `Universe`.
+// Deleting a `Shader` also deletes all materials, species, fonts, glyphs and objects that are bound to the same `Shader`.
+// Deleting a `Material` also deletes all species, fonts, glyphs and objects that are bound to the same `Material`.
+// Deleting a `Species` also deletes all objects that are bound to the same `Species`.
 // Deleting an `Object` only deletes the object.
 
 // Characteristics of object type graphs:
