@@ -57,7 +57,6 @@ GLFWwindow* window;
 // #define TESTING_SPHERICAL_WORLD_IN_USE
 
 // model file format: obj/bmp/...
-// std::string g_model_file_format = "bmp";
 std::string g_model_file_format = "bmp";
 
 // model filename.
