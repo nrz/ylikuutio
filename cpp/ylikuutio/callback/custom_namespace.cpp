@@ -8,9 +8,9 @@
 namespace callback_system
 {
     // getter function for callbacks and callback objects.
-    datatypes::AnyValue CustomNamespace::get_any_value(std::string name)
+    datatypes::AnyValue* CustomNamespace::get_any_value(std::string name)
     {
-        return this->anyvalue_hashmap[name];
+        return &this->anyvalue_hashmap[name];
     }
 
     // setter function for callbacks and callback objects.

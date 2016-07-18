@@ -14,7 +14,7 @@ namespace callback_system
     {
         protected:
             // getter functions for callbacks and callback objects.
-            datatypes::AnyValue get_any_value(std::string name);
+            datatypes::AnyValue* get_any_value(std::string name);
 
             // setter functions for callbacks and callback objects.
             void set_any_value(std::string name, datatypes::AnyValue any_value);
