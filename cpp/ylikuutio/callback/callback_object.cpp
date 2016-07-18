@@ -168,7 +168,7 @@ namespace callback_system
 
         if (this->callback != nullptr)
         {
-            return this->callback(this->parent_pointer, this->callback_parameter_pointer_vector);
+            return this->callback(this->parent_pointer, this, this->callback_parameter_pointer_vector);
         }
     }
 }
