@@ -67,7 +67,16 @@ namespace ajokki
             callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*> input_parameters)
     {
-        bool* does_suzanne_species_exist = static_cast<bool*>(input_parameters.at(1)->get_any_value()->void_pointer);
+        datatypes::AnyValue* any_value = input_parameters.at(1)->get_any_value();
+
+        if (any_value->type != datatypes::BOOL_POINTER)
+        {
+            // `any_value` was not `bool*`.
+            return nullptr;
+        }
+
+        // OK, `any_value` is a `bool*`.
+        bool* does_suzanne_species_exist = any_value->bool_pointer;
 
         if (*does_suzanne_species_exist)
         {

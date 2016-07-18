@@ -307,7 +307,7 @@ int main(void)
     callback_system::CallbackParameter* delete_suzanne_species_callback_parameter0 = new callback_system::CallbackParameter(
             "suzanne_species", new datatypes::AnyValue(suzanne_species), false, delete_suzanne_species_callback_object);
     callback_system::CallbackParameter* delete_suzanne_species_callback_parameter1 = new callback_system::CallbackParameter(
-            "does_suzanne_species_exist", new datatypes::AnyValue(static_cast<void*>(&does_suzanne_species_exist)), false, delete_suzanne_species_callback_object);
+            "does_suzanne_species_exist", new datatypes::AnyValue(&does_suzanne_species_exist), false, delete_suzanne_species_callback_object);
 
     // Callback code for G: switch to grass material.
     bool does_suzanne_species_have_uvmap_texture = true;
