@@ -100,11 +100,6 @@ namespace callback_system
         this->anyvalue_hashmap[name] = datatypes::AnyValue(value);
     }
 
-    void CallbackEngine::set_universe_pointer(std::string name, ontology::Universe* value)
-    {
-        this->anyvalue_hashmap[name] = datatypes::AnyValue(value);
-    }
-
     datatypes::AnyValue* CallbackEngine::execute()
     {
         datatypes::AnyValue* any_value = new datatypes::AnyValue();
