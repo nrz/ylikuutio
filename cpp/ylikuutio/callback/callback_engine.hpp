@@ -1,6 +1,7 @@
 #ifndef __CALLBACK_ENGINE_HPP_INCLUDED
 #define __CALLBACK_ENGINE_HPP_INCLUDED
 
+#include "custom_namespace.hpp"
 #include "cpp/ylikuutio/common/any_value.hpp"
 #include "cpp/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
@@ -8,7 +9,6 @@
 #include <queue>         // std::queue
 #include <stdint.h>      // uint32_t etc.
 #include <string>        // std::string
-#include <unordered_map> // std::unordered_map
 #include <vector>        // std::vector
 
 // callback typedefs in alphabetical order.
@@ -21,7 +21,7 @@ namespace callback_system
 {
     class CallbackObject;
 
-    class CallbackEngine
+    class CallbackEngine: public CustomNamespace
     {
         // `CallbackEngine` is an object that contains some callbacks and hashmaps that are used for input and output parameters.
         // `CallbackEngine` provides a way to create callback chains.
@@ -65,28 +65,8 @@ namespace callback_system
             // this method sets a callback object pointer.
             void set_callback_object_pointer(uint32_t childID, void* parent_pointer);
 
-            // getter functions for callbacks and callback objects.
-            datatypes::AnyValue get_any_value(std::string name);
-            bool get_bool(std::string name);
-            float get_float(std::string name);
-            double get_double(std::string name);
-            int32_t get_int32_t(std::string name);
-            uint32_t get_uint32_t(std::string name);
-            void* get_void_pointer(std::string name);
-
-            // setter functions for callbacks and callback objects.
-            void set_bool(std::string name, bool value);
-            void set_float(std::string name, float value);
-            void set_double(std::string name, double value);
-            void set_int32_t(std::string name, int32_t value);
-            void set_uint32_t(std::string name, uint32_t value);
-            void set_void_pointer(std::string name, void* value);
-
             std::vector<void*> callback_object_pointer_vector;
             std::queue<uint32_t> free_callback_objectID_queue;
-
-            // A hash map used to store variables.
-            std::unordered_map<std::string, datatypes::AnyValue> anyvalue_hashmap;
     };
 }
 

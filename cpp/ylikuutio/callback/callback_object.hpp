@@ -1,22 +1,21 @@
 #ifndef __CALLBACK_OBJECT_HPP_INCLUDED
 #define __CALLBACK_OBJECT_HPP_INCLUDED
 
-#include "cpp/ylikuutio/common/any_value.hpp"
 #include "callback_engine.hpp"
+#include "cpp/ylikuutio/common/any_value.hpp"
 #include "cpp/ylikuutio/common/globals.hpp"
 #include "cpp/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include standard headers
 #include <queue>         // std::queue
 #include <string>        // std::string
-#include <unordered_map> // std::unordered_map
 #include <vector>        // std::vector
 
 namespace callback_system
 {
     class CallbackParameter;
 
-    class CallbackObject
+    class CallbackObject: public CustomNamespace
     {
         // CallbackObject is an object that contains a single callback.
 
