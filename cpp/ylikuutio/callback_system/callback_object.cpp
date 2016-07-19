@@ -108,7 +108,7 @@ namespace callback_system
 
     CallbackObject::~CallbackObject()
     {
-        std::cout << "This callback object will be destroyed.\n";
+        std::cout << "Callback object with childID " << this->childID << " will be destroyed.\n";
 
         // destroy all callback parameters of this callback object.
         std::cout << "All callback parameters of this callback object will be destroyed.\n";
