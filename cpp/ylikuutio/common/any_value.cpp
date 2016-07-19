@@ -22,6 +22,14 @@ namespace datatypes
         this->int32_t_pointer = nullptr;
         this->uint32_t_pointer = nullptr;
         this->universe_pointer = nullptr;
+        this->scene_pointer = nullptr;
+        this->shader_pointer = nullptr;
+        this->material_pointer = nullptr;
+        this->species_pointer = nullptr;
+        this->object_pointer = nullptr;
+        this->vector_font_pointer = nullptr;
+        this->glyph_pointer = nullptr;
+        this->text3D_pointer = nullptr;
         this->void_pointer = nullptr;
     }
 
