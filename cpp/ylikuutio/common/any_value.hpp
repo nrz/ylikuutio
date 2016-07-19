@@ -43,7 +43,7 @@ namespace datatypes
         OBJECT_POINTER,
         VECTORFONT_POINTER,
         GLYPH_POINTER,
-        TEXT3D_POINTER,
+        TEXT3D_POINTER
     };
 
     typedef class AnyValue
