@@ -318,16 +318,16 @@ int main(void)
     callback_system::CallbackParameter* switch_to_grass_material_callback_parameter0 = new callback_system::CallbackParameter(
             "suzanne_species", new datatypes::AnyValue(suzanne_species), false, switch_to_grass_material_callback_object);
     callback_system::CallbackParameter* switch_to_grass_material_callback_parameter1 = new callback_system::CallbackParameter(
-            "grass_material", new datatypes::AnyValue(grass_material), false, switch_to_grass_material_callback_object);
+            "new_material", new datatypes::AnyValue(grass_material), false, switch_to_grass_material_callback_object);
     callback_system::CallbackParameter* switch_to_grass_material_callback_parameter2 = new callback_system::CallbackParameter(
             "does_suzanne_species_exist", new datatypes::AnyValue(&does_suzanne_species_exist), false, switch_to_grass_material_callback_object);
     callback_system::CallbackParameter* switch_to_grass_material_callback_parameter3 = new callback_system::CallbackParameter(
-            "does_suzanne_species_have_uvmap_texture",
+            "does_suzanne_species_have_old_texture",
             new datatypes::AnyValue(&does_suzanne_species_have_uvmap_texture),
             false,
             switch_to_grass_material_callback_object);
     callback_system::CallbackParameter* switch_to_grass_material_callback_parameter4 = new callback_system::CallbackParameter(
-            "does_suzanne_species_have_grass_texture",
+            "does_suzanne_species_have_new_texture",
             new datatypes::AnyValue(&does_suzanne_species_have_grass_texture),
             false,
             switch_to_grass_material_callback_object);
@@ -339,16 +339,16 @@ int main(void)
     callback_system::CallbackParameter* switch_to_uvmap_material_callback_parameter0 = new callback_system::CallbackParameter(
             "suzanne_species", new datatypes::AnyValue(suzanne_species), false, switch_to_uvmap_material_callback_object);
     callback_system::CallbackParameter* switch_to_uvmap_material_callback_parameter1 = new callback_system::CallbackParameter(
-            "uvmap_material", new datatypes::AnyValue(uvmap_material), false, switch_to_uvmap_material_callback_object);
+            "new_material", new datatypes::AnyValue(uvmap_material), false, switch_to_uvmap_material_callback_object);
     callback_system::CallbackParameter* switch_to_uvmap_material_callback_parameter2 = new callback_system::CallbackParameter(
             "does_suzanne_species_exist", new datatypes::AnyValue(&does_suzanne_species_exist), false, switch_to_uvmap_material_callback_object);
     callback_system::CallbackParameter* switch_to_uvmap_material_callback_parameter3 = new callback_system::CallbackParameter(
-            "does_suzanne_species_have_grass_texture",
+            "does_suzanne_species_have_old_texture",
             new datatypes::AnyValue(&does_suzanne_species_have_grass_texture),
             false,
             switch_to_uvmap_material_callback_object);
     callback_system::CallbackParameter* switch_to_uvmap_material_callback_parameter4 = new callback_system::CallbackParameter(
-            "does_suzanne_species_have_uvmap_texture",
+            "does_suzanne_species_have_new_texture",
             new datatypes::AnyValue(&does_suzanne_species_have_uvmap_texture),
             false,
             switch_to_uvmap_material_callback_object);

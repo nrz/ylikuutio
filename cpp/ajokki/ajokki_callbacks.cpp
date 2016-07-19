@@ -99,14 +99,14 @@ namespace ajokki
 
     datatypes::AnyValue* switch_to_new_material(
             callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*> input_parameters)
+            callback_system::CallbackObject* callback_object,
+            std::vector<callback_system::CallbackParameter*>)
     {
-        datatypes::AnyValue* any_value_species_pointer = input_parameters.at(0)->get_any_value();
-        datatypes::AnyValue* any_value_material_pointer = input_parameters.at(1)->get_any_value();
-        datatypes::AnyValue* any_value_does_suzanne_species_exist = input_parameters.at(2)->get_any_value();
-        datatypes::AnyValue* any_value_does_suzanne_species_have_original_texture = input_parameters.at(3)->get_any_value();
-        datatypes::AnyValue* any_value_does_suzanne_species_have_new_texture = input_parameters.at(4)->get_any_value();
+        datatypes::AnyValue* any_value_species_pointer = callback_object->get_any_value("suzanne_species");
+        datatypes::AnyValue* any_value_material_pointer = callback_object->get_any_value("new_material");
+        datatypes::AnyValue* any_value_does_suzanne_species_exist = callback_object->get_any_value("does_suzanne_species_exist");
+        datatypes::AnyValue* any_value_does_suzanne_species_have_original_texture = callback_object->get_any_value("does_suzanne_species_have_old_texture");
+        datatypes::AnyValue* any_value_does_suzanne_species_have_new_texture = callback_object->get_any_value("does_suzanne_species_have_new_texture");
 
         if (any_value_species_pointer->type != datatypes::SPECIES_POINTER)
         {
