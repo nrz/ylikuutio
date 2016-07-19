@@ -320,15 +320,15 @@ int main(void)
     callback_system::CallbackParameter* switch_to_grass_material_callback_parameter1 = new callback_system::CallbackParameter(
             "grass_material", new datatypes::AnyValue(grass_material), false, switch_to_grass_material_callback_object);
     callback_system::CallbackParameter* switch_to_grass_material_callback_parameter2 = new callback_system::CallbackParameter(
-            "does_suzanne_species_exist", new datatypes::AnyValue(static_cast<void*>(&does_suzanne_species_exist)), false, switch_to_grass_material_callback_object);
+            "does_suzanne_species_exist", new datatypes::AnyValue(&does_suzanne_species_exist), false, switch_to_grass_material_callback_object);
     callback_system::CallbackParameter* switch_to_grass_material_callback_parameter3 = new callback_system::CallbackParameter(
             "does_suzanne_species_have_uvmap_texture",
-            new datatypes::AnyValue(static_cast<void*>(&does_suzanne_species_have_uvmap_texture)),
+            new datatypes::AnyValue(&does_suzanne_species_have_uvmap_texture),
             false,
             switch_to_grass_material_callback_object);
     callback_system::CallbackParameter* switch_to_grass_material_callback_parameter4 = new callback_system::CallbackParameter(
             "does_suzanne_species_have_grass_texture",
-            new datatypes::AnyValue(static_cast<void*>(&does_suzanne_species_have_grass_texture)),
+            new datatypes::AnyValue(&does_suzanne_species_have_grass_texture),
             false,
             switch_to_grass_material_callback_object);
 
@@ -341,15 +341,15 @@ int main(void)
     callback_system::CallbackParameter* switch_to_uvmap_material_callback_parameter1 = new callback_system::CallbackParameter(
             "uvmap_material", new datatypes::AnyValue(uvmap_material), false, switch_to_uvmap_material_callback_object);
     callback_system::CallbackParameter* switch_to_uvmap_material_callback_parameter2 = new callback_system::CallbackParameter(
-            "does_suzanne_species_exist", new datatypes::AnyValue(static_cast<void*>(&does_suzanne_species_exist)), false, switch_to_uvmap_material_callback_object);
+            "does_suzanne_species_exist", new datatypes::AnyValue(&does_suzanne_species_exist), false, switch_to_uvmap_material_callback_object);
     callback_system::CallbackParameter* switch_to_uvmap_material_callback_parameter3 = new callback_system::CallbackParameter(
             "does_suzanne_species_have_grass_texture",
-            new datatypes::AnyValue(static_cast<void*>(&does_suzanne_species_have_grass_texture)),
+            new datatypes::AnyValue(&does_suzanne_species_have_grass_texture),
             false,
             switch_to_uvmap_material_callback_object);
     callback_system::CallbackParameter* switch_to_uvmap_material_callback_parameter4 = new callback_system::CallbackParameter(
             "does_suzanne_species_have_uvmap_texture",
-            new datatypes::AnyValue(static_cast<void*>(&does_suzanne_species_have_uvmap_texture)),
+            new datatypes::AnyValue(&does_suzanne_species_have_uvmap_texture),
             false,
             switch_to_uvmap_material_callback_object);
 
@@ -364,15 +364,15 @@ int main(void)
     callback_system::CallbackParameter* transform_into_terrain_callback_parameter1 = new callback_system::CallbackParameter(
             "terrain_species", new datatypes::AnyValue(terrain_species), false, transform_into_terrain_callback_object);
     callback_system::CallbackParameter* transform_into_terrain_callback_parameter2 = new callback_system::CallbackParameter(
-            "does_suzanne_species_exist", new datatypes::AnyValue(static_cast<void*>(&does_suzanne_species_exist)), false, transform_into_terrain_callback_object);
+            "does_suzanne_species_exist", new datatypes::AnyValue(&does_suzanne_species_exist), false, transform_into_terrain_callback_object);
     callback_system::CallbackParameter* transform_into_terrain_callback_parameter3 = new callback_system::CallbackParameter(
             "has_suzanne_2_transformed_into_monkey",
-            new datatypes::AnyValue(static_cast<void*>(&has_suzanne_2_transformed_into_monkey)),
+            new datatypes::AnyValue(&has_suzanne_2_transformed_into_monkey),
             false,
             transform_into_terrain_callback_object);
     callback_system::CallbackParameter* transform_into_terrain_callback_parameter4 = new callback_system::CallbackParameter(
             "has_suzanne_2_transformed_into_terrain",
-            new datatypes::AnyValue(static_cast<void*>(&has_suzanne_2_transformed_into_terrain)),
+            new datatypes::AnyValue(&has_suzanne_2_transformed_into_terrain),
             false,
             transform_into_terrain_callback_object);
 
@@ -385,15 +385,15 @@ int main(void)
     callback_system::CallbackParameter* transform_into_monkey_callback_parameter1 = new callback_system::CallbackParameter(
             "monkey_species", new datatypes::AnyValue(suzanne_species), false, transform_into_monkey_callback_object);
     callback_system::CallbackParameter* transform_into_monkey_callback_parameter2 = new callback_system::CallbackParameter(
-            "does_suzanne_species_exist", new datatypes::AnyValue(static_cast<void*>(&does_suzanne_species_exist)), false, transform_into_monkey_callback_object);
+            "does_suzanne_species_exist", new datatypes::AnyValue(&does_suzanne_species_exist), false, transform_into_monkey_callback_object);
     callback_system::CallbackParameter* transform_into_monkey_callback_parameter3 = new callback_system::CallbackParameter(
             "has_suzanne_2_transformed_into_terrain",
-            new datatypes::AnyValue(static_cast<void*>(&has_suzanne_2_transformed_into_terrain)),
+            new datatypes::AnyValue(&has_suzanne_2_transformed_into_terrain),
             false,
             transform_into_monkey_callback_object);
     callback_system::CallbackParameter* transform_into_monkey_callback_parameter4 = new callback_system::CallbackParameter(
             "has_suzanne_2_transformed_into_monkey",
-            new datatypes::AnyValue(static_cast<void*>(&has_suzanne_2_transformed_into_monkey)),
+            new datatypes::AnyValue(&has_suzanne_2_transformed_into_monkey),
             false,
             transform_into_monkey_callback_object);
 

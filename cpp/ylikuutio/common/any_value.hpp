@@ -10,6 +10,14 @@
 namespace ontology
 {
     class Universe;
+    class Scene;
+    class Shader;
+    class Material;
+    class Species;
+    class Object;
+    class VectorFont;
+    class Glyph;
+    class Text3D;
 }
 
 namespace datatypes
@@ -28,7 +36,15 @@ namespace datatypes
         INT32_T_POINTER,
         UINT32_T_POINTER,
         VOID_POINTER,
-        UNIVERSE_POINTER
+        UNIVERSE_POINTER,
+        SCENE_POINTER,
+        SHADER_POINTER,
+        MATERIAL_POINTER,
+        SPECIES_POINTER,
+        OBJECT_POINTER,
+        VECTORFONT_POINTER,
+        GLYPH_POINTER,
+        TEXT3D_POINTER,
     };
 
     typedef class AnyValue
@@ -46,6 +62,14 @@ namespace datatypes
             AnyValue(int32_t* int32_t_pointer);
             AnyValue(uint32_t* uint32_t_pointer);
             AnyValue(ontology::Universe* universe_pointer);
+            AnyValue(ontology::Scene* scene_pointer);
+            AnyValue(ontology::Shader* shader_pointer);
+            AnyValue(ontology::Material* material_pointer);
+            AnyValue(ontology::Species* species_pointer);
+            AnyValue(ontology::Object* object_pointer);
+            AnyValue(ontology::VectorFont* vector_font_pointer);
+            AnyValue(ontology::Glyph* glyph_pointer);
+            AnyValue(ontology::Text3D* text3D_pointer);
             AnyValue(void* void_pointer);
 
             AnyValue(std::string type, bool bool_value);
@@ -59,6 +83,14 @@ namespace datatypes
             AnyValue(std::string type, int32_t* int32_t_pointer);
             AnyValue(std::string type, uint32_t* uint32_t_pointer);
             AnyValue(std::string type, ontology::Universe* universe_pointer);
+            AnyValue(std::string type, ontology::Scene* scene_pointer);
+            AnyValue(std::string type, ontology::Shader* shader_pointer);
+            AnyValue(std::string type, ontology::Material* material_pointer);
+            AnyValue(std::string type, ontology::Species* species_pointer);
+            AnyValue(std::string type, ontology::Object* object_pointer);
+            AnyValue(std::string type, ontology::VectorFont* vector_font_pointer);
+            AnyValue(std::string type, ontology::Glyph* glyph_pointer);
+            AnyValue(std::string type, ontology::Text3D* text3D_pointer);
             AnyValue(std::string type, void* void_pointer);
 
             int type;
@@ -73,6 +105,14 @@ namespace datatypes
             int32_t* int32_t_pointer;
             uint32_t* uint32_t_pointer;
             ontology::Universe* universe_pointer;
+            ontology::Scene* scene_pointer;
+            ontology::Shader* shader_pointer;
+            ontology::Material* material_pointer;
+            ontology::Species* species_pointer;
+            ontology::Object* object_pointer;
+            ontology::VectorFont* vector_font_pointer;
+            ontology::Glyph* glyph_pointer;
+            ontology::Text3D* text3D_pointer;
             void* void_pointer;
 
         private:

@@ -43,14 +43,15 @@ namespace ajokki
         }
         else
         {
-            datatypes::AnyValue* any_value_void_pointer = input_parameters.at(0)->get_any_value();
-            if (any_value_void_pointer->type == datatypes::VOID_POINTER)
+            datatypes::AnyValue* any_value_universe_pointer = input_parameters.at(0)->get_any_value();
+
+            if (any_value_universe_pointer->type == datatypes::UNIVERSE_POINTER)
             {
-                delete static_cast<ontology::Universe*>(any_value_void_pointer->void_pointer);
+                delete any_value_universe_pointer->universe_pointer;
             }
             else
             {
-                std::cerr << "Invalid datatype: " << any_value_void_pointer->type << ", should be " << datatypes::VOID_POINTER << "\n";
+                std::cerr << "Invalid datatype: " << any_value_universe_pointer->type << ", should be " << datatypes::UNIVERSE_POINTER << "\n";
             }
         }
 
@@ -67,20 +68,28 @@ namespace ajokki
             callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*> input_parameters)
     {
+        datatypes::AnyValue* any_value_species_pointer = input_parameters.at(0)->get_any_value();
         datatypes::AnyValue* any_value_bool_pointer = input_parameters.at(1)->get_any_value();
 
-        if (any_value_bool_pointer->type != datatypes::BOOL_POINTER)
+        if (any_value_species_pointer->type != datatypes::SPECIES_POINTER)
         {
-            // `any_value_bool_pointer` was not `bool*`.
+            // `any_value_species_pointer` did not contain `ontology::Species*`.
             return nullptr;
         }
 
-        // OK, `any_value_bool_pointer` is a `bool*`.
+        if (any_value_bool_pointer->type != datatypes::BOOL_POINTER)
+        {
+            // `any_value_bool_pointer` did not contain `bool*`.
+            return nullptr;
+        }
+
+        // OK, `any_value_species_pointer` contained `ontology::Species*` and
+        // `any_value_bool_pointer` contained a `bool*`.
         bool* does_suzanne_species_exist = any_value_bool_pointer->bool_pointer;
 
         if (*does_suzanne_species_exist)
         {
-            ontology::Species* species = static_cast<ontology::Species*>(input_parameters.at(0)->get_any_value()->void_pointer);
+            ontology::Species* species = any_value_species_pointer->species_pointer;
             delete species;
 
             *does_suzanne_species_exist = false;
@@ -93,14 +102,50 @@ namespace ajokki
             callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*> input_parameters)
     {
-        bool* does_suzanne_species_exist = static_cast<bool*>(input_parameters.at(2)->get_any_value()->void_pointer);
-        bool* does_suzanne_species_have_original_texture = static_cast<bool*>(input_parameters.at(3)->get_any_value()->void_pointer);
-        bool* does_suzanne_species_have_new_texture = static_cast<bool*>(input_parameters.at(4)->get_any_value()->void_pointer);
+        datatypes::AnyValue* any_value_species_pointer = input_parameters.at(0)->get_any_value();
+        datatypes::AnyValue* any_value_material_pointer = input_parameters.at(1)->get_any_value();
+        datatypes::AnyValue* any_value_does_suzanne_species_exist = input_parameters.at(2)->get_any_value();
+        datatypes::AnyValue* any_value_does_suzanne_species_have_original_texture = input_parameters.at(3)->get_any_value();
+        datatypes::AnyValue* any_value_does_suzanne_species_have_new_texture = input_parameters.at(4)->get_any_value();
+
+        if (any_value_species_pointer->type != datatypes::SPECIES_POINTER)
+        {
+            // `any_value_species_pointer` did not contain `ontology::Species*`.
+            return nullptr;
+        }
+
+        if (any_value_material_pointer->type != datatypes::MATERIAL_POINTER)
+        {
+            // `any_value_material_pointer` did not contain `ontology::Material*`.
+            return nullptr;
+        }
+
+        if (any_value_does_suzanne_species_exist->type != datatypes::BOOL_POINTER)
+        {
+            // `any_value_does_suzanne_species_exist` did not contain `bool*`.
+            return nullptr;
+        }
+
+        if (any_value_does_suzanne_species_have_original_texture->type != datatypes::BOOL_POINTER)
+        {
+            // `any_value_does_suzanne_species_have_original_texture` did not contain `bool*`.
+            return nullptr;
+        }
+
+        if (any_value_does_suzanne_species_have_new_texture->type != datatypes::BOOL_POINTER)
+        {
+            // `any_value_does_suzanne_species_have_new_texture` did not contain `bool*`.
+            return nullptr;
+        }
+
+        bool* does_suzanne_species_exist = any_value_does_suzanne_species_exist->bool_pointer;
+        bool* does_suzanne_species_have_original_texture = any_value_does_suzanne_species_have_original_texture->bool_pointer;
+        bool* does_suzanne_species_have_new_texture = any_value_does_suzanne_species_have_new_texture->bool_pointer;
 
         if (*does_suzanne_species_exist && *does_suzanne_species_have_original_texture)
         {
-            ontology::Species* species = static_cast<ontology::Species*>(input_parameters.at(0)->get_any_value()->void_pointer);
-            ontology::Material* material = static_cast<ontology::Material*>(input_parameters.at(1)->get_any_value()->void_pointer);
+            ontology::Species* species = any_value_species_pointer->species_pointer;
+            ontology::Material* material = any_value_material_pointer->material_pointer;
             species->bind_to_new_parent(material);
 
             *does_suzanne_species_have_original_texture = false;
@@ -114,14 +159,50 @@ namespace ajokki
             callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*> input_parameters)
     {
-        bool* does_suzanne_species_exist = static_cast<bool*>(input_parameters.at(2)->get_any_value()->void_pointer);
-        bool* does_suzanne_species_belong_to_original_species = static_cast<bool*>(input_parameters.at(3)->get_any_value()->void_pointer);
-        bool* does_suzanne_species_belong_to_new_species = static_cast<bool*>(input_parameters.at(4)->get_any_value()->void_pointer);
+        datatypes::AnyValue* any_value_object_pointer = input_parameters.at(0)->get_any_value();
+        datatypes::AnyValue* any_value_species_pointer = input_parameters.at(1)->get_any_value();
+        datatypes::AnyValue* any_value_does_suzanne_species_exist = input_parameters.at(2)->get_any_value();
+        datatypes::AnyValue* any_value_does_suzanne_species_belong_to_original_species = input_parameters.at(3)->get_any_value();
+        datatypes::AnyValue* any_value_does_suzanne_species_belong_to_new_species = input_parameters.at(4)->get_any_value();
+
+        if (any_value_object_pointer->type != datatypes::OBJECT_POINTER)
+        {
+            // `any_value_object_pointer` did not contain `ontology::Object*`.
+            return nullptr;
+        }
+
+        if (any_value_species_pointer->type != datatypes::SPECIES_POINTER)
+        {
+            // `any_value_species_pointer` did not contain `ontology::Species*`.
+            return nullptr;
+        }
+
+        if (any_value_does_suzanne_species_exist->type != datatypes::BOOL_POINTER)
+        {
+            // `any_value_does_suzanne_species_exist` did not contain `bool*`.
+            return nullptr;
+        }
+
+        if (any_value_does_suzanne_species_belong_to_original_species->type != datatypes::BOOL_POINTER)
+        {
+            // `any_value_does_suzanne_species_belong_to_original_species` did not contain `bool*`.
+            return nullptr;
+        }
+
+        if (any_value_does_suzanne_species_belong_to_new_species->type != datatypes::BOOL_POINTER)
+        {
+            // `any_value_does_suzanne_species_belong_to_new_species` did not contain `bool*`.
+            return nullptr;
+        }
+
+        bool* does_suzanne_species_exist = any_value_does_suzanne_species_exist->bool_pointer;
+        bool* does_suzanne_species_belong_to_original_species = any_value_does_suzanne_species_belong_to_original_species->bool_pointer;
+        bool* does_suzanne_species_belong_to_new_species = any_value_does_suzanne_species_belong_to_new_species->bool_pointer;
 
         if (*does_suzanne_species_exist && *does_suzanne_species_belong_to_original_species)
         {
-            ontology::Object* object = static_cast<ontology::Object*>(input_parameters.at(0)->get_any_value()->void_pointer);
-            ontology::Species* species = static_cast<ontology::Species*>(input_parameters.at(1)->get_any_value()->void_pointer);
+            ontology::Object* object = any_value_object_pointer->object_pointer;
+            ontology::Species* species = any_value_species_pointer->species_pointer;
             object->bind_to_new_parent(species);
 
             *does_suzanne_species_belong_to_original_species = false;

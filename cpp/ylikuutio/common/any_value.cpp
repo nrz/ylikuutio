@@ -242,6 +242,158 @@ namespace datatypes
         }
     }
 
+    AnyValue::AnyValue(ontology::Scene* scene_pointer)
+    {
+        // constructor.
+        this->set_default_values();
+        this->type = datatypes::SCENE_POINTER;
+        this->scene_pointer = scene_pointer;
+    }
+
+    AnyValue::AnyValue(std::string type, ontology::Scene* scene_pointer)
+    {
+        // constructor.
+        this->set_default_values();
+        if (std::strcmp(type.c_str(), "ontology::Scene*"))
+        {
+            this->type = datatypes::SCENE_POINTER;
+            this->scene_pointer = scene_pointer;
+        }
+    }
+
+    AnyValue::AnyValue(ontology::Shader* shader_pointer)
+    {
+        // constructor.
+        this->set_default_values();
+        this->type = datatypes::SHADER_POINTER;
+        this->shader_pointer = shader_pointer;
+    }
+
+    AnyValue::AnyValue(std::string type, ontology::Shader* shader_pointer)
+    {
+        // constructor.
+        this->set_default_values();
+        if (std::strcmp(type.c_str(), "ontology::Shader*"))
+        {
+            this->type = datatypes::SHADER_POINTER;
+            this->shader_pointer = shader_pointer;
+        }
+    }
+
+    AnyValue::AnyValue(ontology::Material* material_pointer)
+    {
+        // constructor.
+        this->set_default_values();
+        this->type = datatypes::MATERIAL_POINTER;
+        this->material_pointer = material_pointer;
+    }
+
+    AnyValue::AnyValue(std::string type, ontology::Material* material_pointer)
+    {
+        // constructor.
+        this->set_default_values();
+        if (std::strcmp(type.c_str(), "ontology::Material*"))
+        {
+            this->type = datatypes::MATERIAL_POINTER;
+            this->material_pointer = material_pointer;
+        }
+    }
+
+    AnyValue::AnyValue(ontology::Species* species_pointer)
+    {
+        // constructor.
+        this->set_default_values();
+        this->type = datatypes::SPECIES_POINTER;
+        this->species_pointer = species_pointer;
+    }
+
+    AnyValue::AnyValue(std::string type, ontology::Species* species_pointer)
+    {
+        // constructor.
+        this->set_default_values();
+        if (std::strcmp(type.c_str(), "ontology::Species*"))
+        {
+            this->type = datatypes::SPECIES_POINTER;
+            this->species_pointer = species_pointer;
+        }
+    }
+
+    AnyValue::AnyValue(ontology::Object* object_pointer)
+    {
+        // constructor.
+        this->set_default_values();
+        this->type = datatypes::OBJECT_POINTER;
+        this->object_pointer = object_pointer;
+    }
+
+    AnyValue::AnyValue(std::string type, ontology::Object* object_pointer)
+    {
+        // constructor.
+        this->set_default_values();
+        if (std::strcmp(type.c_str(), "ontology::Object*"))
+        {
+            this->type = datatypes::OBJECT_POINTER;
+            this->object_pointer = object_pointer;
+        }
+    }
+
+    AnyValue::AnyValue(ontology::VectorFont* vector_font_pointer)
+    {
+        // constructor.
+        this->set_default_values();
+        this->type = datatypes::VECTORFONT_POINTER;
+        this->vector_font_pointer = vector_font_pointer;
+    }
+
+    AnyValue::AnyValue(std::string type, ontology::VectorFont* vector_font_pointer)
+    {
+        // constructor.
+        this->set_default_values();
+        if (std::strcmp(type.c_str(), "ontology::Vectorfont*"))
+        {
+            this->type = datatypes::VECTORFONT_POINTER;
+            this->vector_font_pointer = vector_font_pointer;
+        }
+    }
+
+    AnyValue::AnyValue(ontology::Glyph* glyph_pointer)
+    {
+        // constructor.
+        this->set_default_values();
+        this->type = datatypes::GLYPH_POINTER;
+        this->glyph_pointer = glyph_pointer;
+    }
+
+    AnyValue::AnyValue(std::string type, ontology::Glyph* glyph_pointer)
+    {
+        // constructor.
+        this->set_default_values();
+        if (std::strcmp(type.c_str(), "ontology::Glyph*"))
+        {
+            this->type = datatypes::GLYPH_POINTER;
+            this->glyph_pointer = glyph_pointer;
+        }
+    }
+
+    AnyValue::AnyValue(ontology::Text3D* text3D_pointer)
+    {
+        // constructor.
+        this->set_default_values();
+        this->type = datatypes::TEXT3D_POINTER;
+        this->text3D_pointer = text3D_pointer;
+    }
+
+    AnyValue::AnyValue(std::string type, ontology::Text3D* text3D_pointer)
+    {
+        // constructor.
+        this->set_default_values();
+        if (std::strcmp(type.c_str(), "ontology::Text3D*"))
+        {
+            this->type = datatypes::TEXT3D_POINTER;
+            this->text3D_pointer = text3D_pointer;
+        }
+    }
+
     AnyValue::AnyValue(void* void_pointer)
     {
         // constructor.
