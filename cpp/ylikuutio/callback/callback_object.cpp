@@ -11,6 +11,18 @@
 
 namespace callback_system
 {
+    // getter function for callbacks and callback objects.
+    datatypes::AnyValue* CallbackObject::get_any_value(std::string name)
+    {
+        return &this->anyvalue_hashmap[name];
+    }
+
+    // setter function for callbacks and callback objects.
+    void CallbackObject::set_any_value(std::string name, datatypes::AnyValue* any_value)
+    {
+        this->anyvalue_hashmap[name] = *any_value;
+    }
+
     void CallbackObject::bind_to_parent()
     {
         hierarchy::bind_child_to_parent<callback_system::CallbackObject*>(this, this->parent_pointer->callback_object_pointer_vector, this->parent_pointer->free_callback_objectID_queue);
@@ -154,18 +166,6 @@ namespace callback_system
 
     datatypes::AnyValue* CallbackObject::execute()
     {
-        for (uint32_t child_i = 0; child_i < this->callback_parameter_pointer_vector.size(); child_i++)
-        {
-            void* void_input_parameter_pointer = this->callback_parameter_pointer_vector.at(child_i);
-            callback_system::CallbackParameter* input_parameter_pointer = static_cast<callback_system::CallbackParameter*>(void_input_parameter_pointer);
-
-            // Don't store the variable into `CallbackEngine`-specific namespace if the variable name is an empty string.
-            if (!input_parameter_pointer->name.empty())
-            {
-                this->parent_pointer->set_any_value(input_parameter_pointer->name, input_parameter_pointer->get_any_value());
-            }
-        }
-
         if (this->callback != nullptr)
         {
             return this->callback(this->parent_pointer, this, this->callback_parameter_pointer_vector);

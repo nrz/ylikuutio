@@ -1,7 +1,6 @@
 #ifndef __CALLBACK_ENGINE_HPP_INCLUDED
 #define __CALLBACK_ENGINE_HPP_INCLUDED
 
-#include "custom_namespace.hpp"
 #include "cpp/ylikuutio/common/any_value.hpp"
 #include "cpp/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
@@ -26,7 +25,7 @@ namespace callback_system
 {
     class CallbackObject;
 
-    class CallbackEngine: public CustomNamespace
+    class CallbackEngine
     {
         // `CallbackEngine` is an object that contains some callbacks and hashmaps that are used for input and output parameters.
         // `CallbackEngine` provides a way to create callback chains.

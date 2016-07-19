@@ -206,8 +206,6 @@ add_executable(ajokki
     cpp/ylikuutio/callback/callback_object.hpp
     cpp/ylikuutio/callback/callback_parameter.cpp
     cpp/ylikuutio/callback/callback_parameter.hpp
-    cpp/ylikuutio/callback/custom_namespace.cpp
-    cpp/ylikuutio/callback/custom_namespace.cpp
 
     # common, in alphabetical order
     cpp/ylikuutio/common/any_value.cpp
@@ -350,8 +348,6 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         cpp/ylikuutio/callback/callback_object.hpp
         cpp/ylikuutio/callback/callback_parameter.cpp
         cpp/ylikuutio/callback/callback_parameter.hpp
-        cpp/ylikuutio/callback/custom_namespace.cpp
-        cpp/ylikuutio/callback/custom_namespace.hpp
         cpp/ylikuutio/common/any_value.cpp
         cpp/ylikuutio/common/any_value.hpp
         cpp/ylikuutio/common/globals.cpp

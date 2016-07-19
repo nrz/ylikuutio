@@ -9,13 +9,14 @@
 // Include standard headers
 #include <queue>         // std::queue
 #include <string>        // std::string
+#include <unordered_map> // std::unordered_map
 #include <vector>        // std::vector
 
 namespace callback_system
 {
     class CallbackParameter;
 
-    class CallbackObject: public CustomNamespace
+    class CallbackObject
     {
         // CallbackObject is an object that contains a single callback.
 
@@ -31,6 +32,12 @@ namespace callback_system
 
             // this method changes the callback without changing the parameters of CallbackObject.
             void set_new_callback(InputParametersToAnyValueCallback callback);
+
+            // getter function for callbacks and callback objects.
+            datatypes::AnyValue* get_any_value(std::string name);
+
+            // setter function for callbacks and callback objects.
+            void set_any_value(std::string name, datatypes::AnyValue* any_value);
 
             friend class CallbackEngine;
             friend class CallbackParameter;
@@ -62,6 +69,9 @@ namespace callback_system
             std::queue<uint32_t> free_callback_parameterID_queue;
 
             InputParametersToAnyValueCallback callback;
+
+            // A hash map used to store variables.
+            std::unordered_map<std::string, datatypes::AnyValue> anyvalue_hashmap;
     };
 }
 
