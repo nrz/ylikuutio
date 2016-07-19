@@ -48,9 +48,9 @@ GLFWwindow* window;
 #endif
 
 // Include standard headers
-#include <array>    // std::array
 #include <cstdio>   // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf etc.
 #include <iostream> // std::cout, std::cin, std::cerr
+#include <unordered_map> // std::unordered_map
 #include <string>   // std::string
 #include <stdint.h> // uint32_t etc.
 
@@ -402,8 +402,7 @@ int main(void)
     cleanup_callback_object->set_new_callback(&ajokki::full_cleanup);
 
     // keypress callbacks.
-    std::array<callback_system::CallbackEngine*, GLFW_KEY_LAST + 1> keypress_callback_engines;
-    keypress_callback_engines.fill(nullptr);
+    std::unordered_map<uint32_t, callback_system::CallbackEngine*> keypress_callback_engines;
 
     keypress_callback_engines[GLFW_KEY_D] = delete_suzanne_species_callback_engine;
     keypress_callback_engines[GLFW_KEY_G] = switch_to_grass_material_callback_engine;
@@ -563,15 +562,12 @@ int main(void)
         }
 
         // Check keypresses and call corresponding callbacks.
-        for (uint32_t i = 0; i < keypress_callback_engines.size(); i++)
+        for (auto it = keypress_callback_engines.begin(); it != keypress_callback_engines.end(); ++it)
         {
-            if (keypress_callback_engines[i] != nullptr)
+            if (glfwGetKey(window, it->first) == GLFW_PRESS)
             {
-                if (glfwGetKey(window, i) == GLFW_PRESS)
-                {
-                    callback_system::CallbackEngine* callback_engine = keypress_callback_engines[i];
-                    callback_engine->execute();
-                }
+                callback_system::CallbackEngine* callback_engine = it->second;
+                callback_engine->execute();
             }
         }
 
