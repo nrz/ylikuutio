@@ -15,6 +15,20 @@ TEST(any_value_must_be_initialized_appropriately, no_value)
     ASSERT_TRUE(isnan(no_value.double_value));
     ASSERT_EQ(no_value.int32_t_value, 0);
     ASSERT_EQ(no_value.uint32_t_value, 0);
+    ASSERT_EQ(no_value.bool_pointer, nullptr);
+    ASSERT_EQ(no_value.float_pointer, nullptr);
+    ASSERT_EQ(no_value.double_pointer, nullptr);
+    ASSERT_EQ(no_value.int32_t_pointer, nullptr);
+    ASSERT_EQ(no_value.uint32_t_pointer, nullptr);
+    ASSERT_EQ(no_value.universe_pointer, nullptr);
+    ASSERT_EQ(no_value.scene_pointer, nullptr);
+    ASSERT_EQ(no_value.shader_pointer, nullptr);
+    ASSERT_EQ(no_value.material_pointer, nullptr);
+    ASSERT_EQ(no_value.species_pointer, nullptr);
+    ASSERT_EQ(no_value.object_pointer, nullptr);
+    ASSERT_EQ(no_value.vector_font_pointer, nullptr);
+    ASSERT_EQ(no_value.glyph_pointer, nullptr);
+    ASSERT_EQ(no_value.text3D_pointer, nullptr);
     ASSERT_EQ(no_value.void_pointer, nullptr);
 }
 TEST(any_value_must_be_initialized_appropriately, bool_true)
@@ -27,6 +41,20 @@ TEST(any_value_must_be_initialized_appropriately, bool_true)
     ASSERT_TRUE(isnan(true_value.double_value));
     ASSERT_EQ(true_value.int32_t_value, 0);
     ASSERT_EQ(true_value.uint32_t_value, 0);
+    ASSERT_EQ(true_value.bool_pointer, nullptr);
+    ASSERT_EQ(true_value.float_pointer, nullptr);
+    ASSERT_EQ(true_value.double_pointer, nullptr);
+    ASSERT_EQ(true_value.int32_t_pointer, nullptr);
+    ASSERT_EQ(true_value.uint32_t_pointer, nullptr);
+    ASSERT_EQ(true_value.universe_pointer, nullptr);
+    ASSERT_EQ(true_value.scene_pointer, nullptr);
+    ASSERT_EQ(true_value.shader_pointer, nullptr);
+    ASSERT_EQ(true_value.material_pointer, nullptr);
+    ASSERT_EQ(true_value.species_pointer, nullptr);
+    ASSERT_EQ(true_value.object_pointer, nullptr);
+    ASSERT_EQ(true_value.vector_font_pointer, nullptr);
+    ASSERT_EQ(true_value.glyph_pointer, nullptr);
+    ASSERT_EQ(true_value.text3D_pointer, nullptr);
     ASSERT_EQ(true_value.void_pointer, nullptr);
 }
 TEST(any_value_must_be_initialized_appropriately, bool_false)
@@ -39,6 +67,20 @@ TEST(any_value_must_be_initialized_appropriately, bool_false)
     ASSERT_TRUE(isnan(false_value.double_value));
     ASSERT_EQ(false_value.int32_t_value, 0);
     ASSERT_EQ(false_value.uint32_t_value, 0);
+    ASSERT_EQ(false_value.bool_pointer, nullptr);
+    ASSERT_EQ(false_value.float_pointer, nullptr);
+    ASSERT_EQ(false_value.double_pointer, nullptr);
+    ASSERT_EQ(false_value.int32_t_pointer, nullptr);
+    ASSERT_EQ(false_value.uint32_t_pointer, nullptr);
+    ASSERT_EQ(false_value.universe_pointer, nullptr);
+    ASSERT_EQ(false_value.scene_pointer, nullptr);
+    ASSERT_EQ(false_value.shader_pointer, nullptr);
+    ASSERT_EQ(false_value.material_pointer, nullptr);
+    ASSERT_EQ(false_value.species_pointer, nullptr);
+    ASSERT_EQ(false_value.object_pointer, nullptr);
+    ASSERT_EQ(false_value.vector_font_pointer, nullptr);
+    ASSERT_EQ(false_value.glyph_pointer, nullptr);
+    ASSERT_EQ(false_value.text3D_pointer, nullptr);
     ASSERT_EQ(false_value.void_pointer, nullptr);
 }
 TEST(any_value_must_be_initialized_appropriately, float_0)
@@ -51,6 +93,20 @@ TEST(any_value_must_be_initialized_appropriately, float_0)
     ASSERT_TRUE(isnan(float_zero_value.double_value));
     ASSERT_EQ(float_zero_value.int32_t_value, 0);
     ASSERT_EQ(float_zero_value.uint32_t_value, 0);
+    ASSERT_EQ(float_zero_value.bool_pointer, nullptr);
+    ASSERT_EQ(float_zero_value.float_pointer, nullptr);
+    ASSERT_EQ(float_zero_value.double_pointer, nullptr);
+    ASSERT_EQ(float_zero_value.int32_t_pointer, nullptr);
+    ASSERT_EQ(float_zero_value.uint32_t_pointer, nullptr);
+    ASSERT_EQ(float_zero_value.universe_pointer, nullptr);
+    ASSERT_EQ(float_zero_value.scene_pointer, nullptr);
+    ASSERT_EQ(float_zero_value.shader_pointer, nullptr);
+    ASSERT_EQ(float_zero_value.material_pointer, nullptr);
+    ASSERT_EQ(float_zero_value.species_pointer, nullptr);
+    ASSERT_EQ(float_zero_value.object_pointer, nullptr);
+    ASSERT_EQ(float_zero_value.vector_font_pointer, nullptr);
+    ASSERT_EQ(float_zero_value.glyph_pointer, nullptr);
+    ASSERT_EQ(float_zero_value.text3D_pointer, nullptr);
     ASSERT_EQ(float_zero_value.void_pointer, nullptr);
 }
 TEST(any_value_must_be_initialized_appropriately, float_NAN)
@@ -63,6 +119,20 @@ TEST(any_value_must_be_initialized_appropriately, float_NAN)
     ASSERT_TRUE(isnan(float_NAN_value.double_value));
     ASSERT_EQ(float_NAN_value.int32_t_value, 0);
     ASSERT_EQ(float_NAN_value.uint32_t_value, 0);
+    ASSERT_EQ(float_NAN_value.bool_pointer, nullptr);
+    ASSERT_EQ(float_NAN_value.float_pointer, nullptr);
+    ASSERT_EQ(float_NAN_value.double_pointer, nullptr);
+    ASSERT_EQ(float_NAN_value.int32_t_pointer, nullptr);
+    ASSERT_EQ(float_NAN_value.uint32_t_pointer, nullptr);
+    ASSERT_EQ(float_NAN_value.universe_pointer, nullptr);
+    ASSERT_EQ(float_NAN_value.scene_pointer, nullptr);
+    ASSERT_EQ(float_NAN_value.shader_pointer, nullptr);
+    ASSERT_EQ(float_NAN_value.material_pointer, nullptr);
+    ASSERT_EQ(float_NAN_value.species_pointer, nullptr);
+    ASSERT_EQ(float_NAN_value.object_pointer, nullptr);
+    ASSERT_EQ(float_NAN_value.vector_font_pointer, nullptr);
+    ASSERT_EQ(float_NAN_value.glyph_pointer, nullptr);
+    ASSERT_EQ(float_NAN_value.text3D_pointer, nullptr);
     ASSERT_EQ(float_NAN_value.void_pointer, nullptr);
 }
 TEST(any_value_must_be_initialized_appropriately, double_0)
@@ -75,6 +145,20 @@ TEST(any_value_must_be_initialized_appropriately, double_0)
     ASSERT_EQ(double_zero_value.double_value, 0.0f);
     ASSERT_EQ(double_zero_value.int32_t_value, 0);
     ASSERT_EQ(double_zero_value.uint32_t_value, 0);
+    ASSERT_EQ(double_zero_value.bool_pointer, nullptr);
+    ASSERT_EQ(double_zero_value.float_pointer, nullptr);
+    ASSERT_EQ(double_zero_value.double_pointer, nullptr);
+    ASSERT_EQ(double_zero_value.int32_t_pointer, nullptr);
+    ASSERT_EQ(double_zero_value.uint32_t_pointer, nullptr);
+    ASSERT_EQ(double_zero_value.universe_pointer, nullptr);
+    ASSERT_EQ(double_zero_value.scene_pointer, nullptr);
+    ASSERT_EQ(double_zero_value.shader_pointer, nullptr);
+    ASSERT_EQ(double_zero_value.material_pointer, nullptr);
+    ASSERT_EQ(double_zero_value.species_pointer, nullptr);
+    ASSERT_EQ(double_zero_value.object_pointer, nullptr);
+    ASSERT_EQ(double_zero_value.vector_font_pointer, nullptr);
+    ASSERT_EQ(double_zero_value.glyph_pointer, nullptr);
+    ASSERT_EQ(double_zero_value.text3D_pointer, nullptr);
     ASSERT_EQ(double_zero_value.void_pointer, nullptr);
 }
 TEST(any_value_must_be_initialized_appropriately, double_NAN)
@@ -87,6 +171,20 @@ TEST(any_value_must_be_initialized_appropriately, double_NAN)
     ASSERT_TRUE(isnan(double_NAN_value.double_value));
     ASSERT_EQ(double_NAN_value.int32_t_value, 0);
     ASSERT_EQ(double_NAN_value.uint32_t_value, 0);
+    ASSERT_EQ(double_NAN_value.bool_pointer, nullptr);
+    ASSERT_EQ(double_NAN_value.float_pointer, nullptr);
+    ASSERT_EQ(double_NAN_value.double_pointer, nullptr);
+    ASSERT_EQ(double_NAN_value.int32_t_pointer, nullptr);
+    ASSERT_EQ(double_NAN_value.uint32_t_pointer, nullptr);
+    ASSERT_EQ(double_NAN_value.universe_pointer, nullptr);
+    ASSERT_EQ(double_NAN_value.scene_pointer, nullptr);
+    ASSERT_EQ(double_NAN_value.shader_pointer, nullptr);
+    ASSERT_EQ(double_NAN_value.material_pointer, nullptr);
+    ASSERT_EQ(double_NAN_value.species_pointer, nullptr);
+    ASSERT_EQ(double_NAN_value.object_pointer, nullptr);
+    ASSERT_EQ(double_NAN_value.vector_font_pointer, nullptr);
+    ASSERT_EQ(double_NAN_value.glyph_pointer, nullptr);
+    ASSERT_EQ(double_NAN_value.text3D_pointer, nullptr);
     ASSERT_EQ(double_NAN_value.void_pointer, nullptr);
 }
 TEST(any_value_must_be_initialized_appropriately, int32_t_zero)
@@ -99,6 +197,20 @@ TEST(any_value_must_be_initialized_appropriately, int32_t_zero)
     ASSERT_TRUE(isnan(int32_t_zero_value.double_value));
     ASSERT_EQ(int32_t_zero_value.int32_t_value, 0);
     ASSERT_EQ(int32_t_zero_value.uint32_t_value, 0);
+    ASSERT_EQ(int32_t_zero_value.bool_pointer, nullptr);
+    ASSERT_EQ(int32_t_zero_value.float_pointer, nullptr);
+    ASSERT_EQ(int32_t_zero_value.double_pointer, nullptr);
+    ASSERT_EQ(int32_t_zero_value.int32_t_pointer, nullptr);
+    ASSERT_EQ(int32_t_zero_value.uint32_t_pointer, nullptr);
+    ASSERT_EQ(int32_t_zero_value.universe_pointer, nullptr);
+    ASSERT_EQ(int32_t_zero_value.scene_pointer, nullptr);
+    ASSERT_EQ(int32_t_zero_value.shader_pointer, nullptr);
+    ASSERT_EQ(int32_t_zero_value.material_pointer, nullptr);
+    ASSERT_EQ(int32_t_zero_value.species_pointer, nullptr);
+    ASSERT_EQ(int32_t_zero_value.object_pointer, nullptr);
+    ASSERT_EQ(int32_t_zero_value.vector_font_pointer, nullptr);
+    ASSERT_EQ(int32_t_zero_value.glyph_pointer, nullptr);
+    ASSERT_EQ(int32_t_zero_value.text3D_pointer, nullptr);
     ASSERT_EQ(int32_t_zero_value.void_pointer, nullptr);
 }
 TEST(any_value_must_be_initialized_appropriately, int32_t_plus_1)
@@ -111,6 +223,20 @@ TEST(any_value_must_be_initialized_appropriately, int32_t_plus_1)
     ASSERT_TRUE(isnan(int32_t_plus_1_value.double_value));
     ASSERT_EQ(int32_t_plus_1_value.int32_t_value, 1);
     ASSERT_EQ(int32_t_plus_1_value.uint32_t_value, 0);
+    ASSERT_EQ(int32_t_plus_1_value.bool_pointer, nullptr);
+    ASSERT_EQ(int32_t_plus_1_value.float_pointer, nullptr);
+    ASSERT_EQ(int32_t_plus_1_value.double_pointer, nullptr);
+    ASSERT_EQ(int32_t_plus_1_value.int32_t_pointer, nullptr);
+    ASSERT_EQ(int32_t_plus_1_value.uint32_t_pointer, nullptr);
+    ASSERT_EQ(int32_t_plus_1_value.universe_pointer, nullptr);
+    ASSERT_EQ(int32_t_plus_1_value.scene_pointer, nullptr);
+    ASSERT_EQ(int32_t_plus_1_value.shader_pointer, nullptr);
+    ASSERT_EQ(int32_t_plus_1_value.material_pointer, nullptr);
+    ASSERT_EQ(int32_t_plus_1_value.species_pointer, nullptr);
+    ASSERT_EQ(int32_t_plus_1_value.object_pointer, nullptr);
+    ASSERT_EQ(int32_t_plus_1_value.vector_font_pointer, nullptr);
+    ASSERT_EQ(int32_t_plus_1_value.glyph_pointer, nullptr);
+    ASSERT_EQ(int32_t_plus_1_value.text3D_pointer, nullptr);
     ASSERT_EQ(int32_t_plus_1_value.void_pointer, nullptr);
 }
 TEST(any_value_must_be_initialized_appropriately, int32_t_minus_1)
@@ -123,6 +249,20 @@ TEST(any_value_must_be_initialized_appropriately, int32_t_minus_1)
     ASSERT_TRUE(isnan(int32_t_minus_1_value.double_value));
     ASSERT_EQ(int32_t_minus_1_value.int32_t_value, -1);
     ASSERT_EQ(int32_t_minus_1_value.uint32_t_value, 0);
+    ASSERT_EQ(int32_t_minus_1_value.bool_pointer, nullptr);
+    ASSERT_EQ(int32_t_minus_1_value.float_pointer, nullptr);
+    ASSERT_EQ(int32_t_minus_1_value.double_pointer, nullptr);
+    ASSERT_EQ(int32_t_minus_1_value.int32_t_pointer, nullptr);
+    ASSERT_EQ(int32_t_minus_1_value.uint32_t_pointer, nullptr);
+    ASSERT_EQ(int32_t_minus_1_value.universe_pointer, nullptr);
+    ASSERT_EQ(int32_t_minus_1_value.scene_pointer, nullptr);
+    ASSERT_EQ(int32_t_minus_1_value.shader_pointer, nullptr);
+    ASSERT_EQ(int32_t_minus_1_value.material_pointer, nullptr);
+    ASSERT_EQ(int32_t_minus_1_value.species_pointer, nullptr);
+    ASSERT_EQ(int32_t_minus_1_value.object_pointer, nullptr);
+    ASSERT_EQ(int32_t_minus_1_value.vector_font_pointer, nullptr);
+    ASSERT_EQ(int32_t_minus_1_value.glyph_pointer, nullptr);
+    ASSERT_EQ(int32_t_minus_1_value.text3D_pointer, nullptr);
     ASSERT_EQ(int32_t_minus_1_value.void_pointer, nullptr);
 }
 TEST(any_value_must_be_initialized_appropriately, uint32_t_zero)
@@ -135,6 +275,20 @@ TEST(any_value_must_be_initialized_appropriately, uint32_t_zero)
     ASSERT_TRUE(isnan(uint32_t_zero_value.double_value));
     ASSERT_EQ(uint32_t_zero_value.int32_t_value, 0);
     ASSERT_EQ(uint32_t_zero_value.uint32_t_value, 0);
+    ASSERT_EQ(uint32_t_zero_value.bool_pointer, nullptr);
+    ASSERT_EQ(uint32_t_zero_value.float_pointer, nullptr);
+    ASSERT_EQ(uint32_t_zero_value.double_pointer, nullptr);
+    ASSERT_EQ(uint32_t_zero_value.int32_t_pointer, nullptr);
+    ASSERT_EQ(uint32_t_zero_value.uint32_t_pointer, nullptr);
+    ASSERT_EQ(uint32_t_zero_value.universe_pointer, nullptr);
+    ASSERT_EQ(uint32_t_zero_value.scene_pointer, nullptr);
+    ASSERT_EQ(uint32_t_zero_value.shader_pointer, nullptr);
+    ASSERT_EQ(uint32_t_zero_value.material_pointer, nullptr);
+    ASSERT_EQ(uint32_t_zero_value.species_pointer, nullptr);
+    ASSERT_EQ(uint32_t_zero_value.object_pointer, nullptr);
+    ASSERT_EQ(uint32_t_zero_value.vector_font_pointer, nullptr);
+    ASSERT_EQ(uint32_t_zero_value.glyph_pointer, nullptr);
+    ASSERT_EQ(uint32_t_zero_value.text3D_pointer, nullptr);
     ASSERT_EQ(uint32_t_zero_value.void_pointer, nullptr);
 }
 TEST(any_value_must_be_initialized_appropriately, uint32_t_plus_1)
@@ -147,6 +301,20 @@ TEST(any_value_must_be_initialized_appropriately, uint32_t_plus_1)
     ASSERT_TRUE(isnan(uint32_t_plus_1_value.double_value));
     ASSERT_EQ(uint32_t_plus_1_value.int32_t_value, 0);
     ASSERT_EQ(uint32_t_plus_1_value.uint32_t_value, 1);
+    ASSERT_EQ(uint32_t_plus_1_value.bool_pointer, nullptr);
+    ASSERT_EQ(uint32_t_plus_1_value.float_pointer, nullptr);
+    ASSERT_EQ(uint32_t_plus_1_value.double_pointer, nullptr);
+    ASSERT_EQ(uint32_t_plus_1_value.int32_t_pointer, nullptr);
+    ASSERT_EQ(uint32_t_plus_1_value.uint32_t_pointer, nullptr);
+    ASSERT_EQ(uint32_t_plus_1_value.universe_pointer, nullptr);
+    ASSERT_EQ(uint32_t_plus_1_value.scene_pointer, nullptr);
+    ASSERT_EQ(uint32_t_plus_1_value.shader_pointer, nullptr);
+    ASSERT_EQ(uint32_t_plus_1_value.material_pointer, nullptr);
+    ASSERT_EQ(uint32_t_plus_1_value.species_pointer, nullptr);
+    ASSERT_EQ(uint32_t_plus_1_value.object_pointer, nullptr);
+    ASSERT_EQ(uint32_t_plus_1_value.vector_font_pointer, nullptr);
+    ASSERT_EQ(uint32_t_plus_1_value.glyph_pointer, nullptr);
+    ASSERT_EQ(uint32_t_plus_1_value.text3D_pointer, nullptr);
     ASSERT_EQ(uint32_t_plus_1_value.void_pointer, nullptr);
 }
 TEST(any_value_must_be_initialized_appropriately, void_pointer_zero)
@@ -160,6 +328,20 @@ TEST(any_value_must_be_initialized_appropriately, void_pointer_zero)
     ASSERT_TRUE(isnan(void_pointer_zero_value.double_value));
     ASSERT_EQ(void_pointer_zero_value.int32_t_value, 0);
     ASSERT_EQ(void_pointer_zero_value.uint32_t_value, 0);
+    ASSERT_EQ(void_pointer_zero_value.bool_pointer, nullptr);
+    ASSERT_EQ(void_pointer_zero_value.float_pointer, nullptr);
+    ASSERT_EQ(void_pointer_zero_value.double_pointer, nullptr);
+    ASSERT_EQ(void_pointer_zero_value.int32_t_pointer, nullptr);
+    ASSERT_EQ(void_pointer_zero_value.uint32_t_pointer, nullptr);
+    ASSERT_EQ(void_pointer_zero_value.universe_pointer, nullptr);
+    ASSERT_EQ(void_pointer_zero_value.scene_pointer, nullptr);
+    ASSERT_EQ(void_pointer_zero_value.shader_pointer, nullptr);
+    ASSERT_EQ(void_pointer_zero_value.material_pointer, nullptr);
+    ASSERT_EQ(void_pointer_zero_value.species_pointer, nullptr);
+    ASSERT_EQ(void_pointer_zero_value.object_pointer, nullptr);
+    ASSERT_EQ(void_pointer_zero_value.vector_font_pointer, nullptr);
+    ASSERT_EQ(void_pointer_zero_value.glyph_pointer, nullptr);
+    ASSERT_EQ(void_pointer_zero_value.text3D_pointer, nullptr);
     ASSERT_EQ(void_pointer_zero_value.void_pointer, (void*) 0);
 }
 TEST(any_value_must_be_initialized_appropriately, void_pointer_1)
@@ -173,5 +355,19 @@ TEST(any_value_must_be_initialized_appropriately, void_pointer_1)
     ASSERT_TRUE(isnan(void_pointer_1_value.double_value));
     ASSERT_EQ(void_pointer_1_value.int32_t_value, 0);
     ASSERT_EQ(void_pointer_1_value.uint32_t_value, 0);
+    ASSERT_EQ(void_pointer_1_value.bool_pointer, nullptr);
+    ASSERT_EQ(void_pointer_1_value.float_pointer, nullptr);
+    ASSERT_EQ(void_pointer_1_value.double_pointer, nullptr);
+    ASSERT_EQ(void_pointer_1_value.int32_t_pointer, nullptr);
+    ASSERT_EQ(void_pointer_1_value.uint32_t_pointer, nullptr);
+    ASSERT_EQ(void_pointer_1_value.universe_pointer, nullptr);
+    ASSERT_EQ(void_pointer_1_value.scene_pointer, nullptr);
+    ASSERT_EQ(void_pointer_1_value.shader_pointer, nullptr);
+    ASSERT_EQ(void_pointer_1_value.material_pointer, nullptr);
+    ASSERT_EQ(void_pointer_1_value.species_pointer, nullptr);
+    ASSERT_EQ(void_pointer_1_value.object_pointer, nullptr);
+    ASSERT_EQ(void_pointer_1_value.vector_font_pointer, nullptr);
+    ASSERT_EQ(void_pointer_1_value.glyph_pointer, nullptr);
+    ASSERT_EQ(void_pointer_1_value.text3D_pointer, nullptr);
     ASSERT_EQ(void_pointer_1_value.void_pointer, (void*) 1);
 }
