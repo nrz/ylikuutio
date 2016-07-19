@@ -43,5 +43,11 @@ namespace callback_system
         this->childID = this->parent_pointer->get_callback_parameterID(this->parent_pointer->callback_parameter_pointer_vector, this->parent_pointer->free_callback_parameterID_queue);
         // set pointer to the child in parent's child pointer vector so that parent knows about children's whereabouts!
         this->parent_pointer->set_child_pointer(this->childID, this);
+
+        if (!this->name.empty())
+        {
+            // This is a named variable, so store it in parent's `anyvalue_hashmap`.
+            this->parent_pointer->anyvalue_hashmap[name] = this->any_value;
+        }
     }
 }
