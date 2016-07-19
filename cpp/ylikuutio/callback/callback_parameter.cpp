@@ -47,7 +47,7 @@ namespace callback_system
         if (!this->name.empty())
         {
             // This is a named variable, so store it in parent's `anyvalue_hashmap`.
-            this->parent_pointer->anyvalue_hashmap[this->name] = this->any_value;
+            this->parent_pointer->set_any_value(this->name, this->any_value);
         }
     }
 }

@@ -162,26 +162,7 @@ namespace callback_system
             // Don't store the variable into `CallbackEngine`-specific namespace if the variable name is an empty string.
             if (!input_parameter_pointer->name.empty())
             {
-                switch (input_parameter_pointer->any_value->type)
-                {
-                    case datatypes::BOOL:
-                        this->parent_pointer->set_bool(input_parameter_pointer->name, input_parameter_pointer->any_value->bool_value);
-                        break;
-                    case datatypes::FLOAT:
-                        this->parent_pointer->set_float(input_parameter_pointer->name, input_parameter_pointer->any_value->float_value);
-                        break;
-                    case datatypes::DOUBLE:
-                        this->parent_pointer->set_double(input_parameter_pointer->name, input_parameter_pointer->any_value->double_value);
-                        break;
-                    case datatypes::INT32_T:
-                        this->parent_pointer->set_int32_t(input_parameter_pointer->name, input_parameter_pointer->any_value->int32_t_value);
-                        break;
-                    case datatypes::UINT32_T:
-                        this->parent_pointer->set_uint32_t(input_parameter_pointer->name, input_parameter_pointer->any_value->uint32_t_value);
-                        break;
-                    default:
-                        break;
-                }
+                this->parent_pointer->set_any_value(input_parameter_pointer->name, input_parameter_pointer->get_any_value());
             }
         }
 
