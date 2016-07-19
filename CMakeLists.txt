@@ -199,13 +199,13 @@ configure_file(res/textures/test3x3.bmp test3x3.bmp COPYONLY)
 
 # Ajokki
 add_executable(ajokki
-    # callback, in alphabetical order
-    cpp/ylikuutio/callback/callback_engine.cpp
-    cpp/ylikuutio/callback/callback_engine.hpp
-    cpp/ylikuutio/callback/callback_object.cpp
-    cpp/ylikuutio/callback/callback_object.hpp
-    cpp/ylikuutio/callback/callback_parameter.cpp
-    cpp/ylikuutio/callback/callback_parameter.hpp
+    # callback_system, in alphabetical order
+    cpp/ylikuutio/callback_system/callback_engine.cpp
+    cpp/ylikuutio/callback_system/callback_engine.hpp
+    cpp/ylikuutio/callback_system/callback_object.cpp
+    cpp/ylikuutio/callback_system/callback_object.hpp
+    cpp/ylikuutio/callback_system/callback_parameter.cpp
+    cpp/ylikuutio/callback_system/callback_parameter.hpp
 
     # common, in alphabetical order
     cpp/ylikuutio/common/any_value.cpp
@@ -342,12 +342,12 @@ endif()
 
 if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
     set(FILES_TO_TEST
-        cpp/ylikuutio/callback/callback_engine.cpp
-        cpp/ylikuutio/callback/callback_engine.hpp
-        cpp/ylikuutio/callback/callback_object.cpp
-        cpp/ylikuutio/callback/callback_object.hpp
-        cpp/ylikuutio/callback/callback_parameter.cpp
-        cpp/ylikuutio/callback/callback_parameter.hpp
+        cpp/ylikuutio/callback_system/callback_engine.cpp
+        cpp/ylikuutio/callback_system/callback_engine.hpp
+        cpp/ylikuutio/callback_system/callback_object.cpp
+        cpp/ylikuutio/callback_system/callback_object.hpp
+        cpp/ylikuutio/callback_system/callback_parameter.cpp
+        cpp/ylikuutio/callback_system/callback_parameter.hpp
         cpp/ylikuutio/common/any_value.cpp
         cpp/ylikuutio/common/any_value.hpp
         cpp/ylikuutio/common/globals.cpp

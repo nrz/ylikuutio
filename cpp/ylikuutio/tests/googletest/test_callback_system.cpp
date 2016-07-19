@@ -1,8 +1,8 @@
 #include "gtest/gtest.h"
 #include "cpp/ylikuutio/common/any_value.hpp"
-#include "cpp/ylikuutio/callback/callback_engine.hpp"
-#include "cpp/ylikuutio/callback/callback_object.hpp"
-#include "cpp/ylikuutio/callback/callback_parameter.hpp"
+#include "cpp/ylikuutio/callback_system/callback_engine.hpp"
+#include "cpp/ylikuutio/callback_system/callback_object.hpp"
+#include "cpp/ylikuutio/callback_system/callback_parameter.hpp"
 #include "cpp/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include standard headers

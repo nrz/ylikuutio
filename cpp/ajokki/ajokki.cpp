@@ -8,9 +8,9 @@
 #endif
 
 #include "ajokki_callbacks.hpp"
-#include "cpp/ylikuutio/callback/callback_parameter.hpp"
-#include "cpp/ylikuutio/callback/callback_object.hpp"
-#include "cpp/ylikuutio/callback/callback_engine.hpp"
+#include "cpp/ylikuutio/callback_system/callback_parameter.hpp"
+#include "cpp/ylikuutio/callback_system/callback_object.hpp"
+#include "cpp/ylikuutio/callback_system/callback_engine.hpp"
 #include "cpp/ylikuutio/ontology/shader_loader.hpp"
 #include "cpp/ylikuutio/ontology/texture_loader.hpp"
 #include "cpp/ylikuutio/ontology/vboindexer.hpp"
