@@ -68,6 +68,19 @@ namespace ajokki
             callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>)
     {
+        // Callbacks' input parameters can be accessed either through
+        // `callback_system::CallbackObject* callback_object`or
+        // `std::vector<callback_system::CallbackParameter*> input parameters`.
+        //
+        // To access named input variables:
+        // `datatypes::AnyValue* some_any_value = callback_object->get_any_value("foo");`
+        // where `"foo"` is the variable name.
+        //
+        // To access input variables without name (this works for named input variables too):
+        // `datatypes::AnyValue* some_any_value = input_parameters.at(foo)->get_any_value();`
+        // where `foo` is the zero-based index of the variable. First `CallbackParameter` of
+        // a `CallbackObject` gets index 0, second `CallbackParameter` gets index 1, etc.
+
         datatypes::AnyValue* any_value_species_pointer = callback_object->get_any_value("suzanne_species");
         datatypes::AnyValue* any_value_bool_pointer = callback_object->get_any_value("does_suzanne_species_exist");
 
