@@ -35,7 +35,6 @@ namespace datatypes
         DOUBLE_POINTER,
         INT32_T_POINTER,
         UINT32_T_POINTER,
-        VOID_POINTER,
         UNIVERSE_POINTER,
         SCENE_POINTER,
         SHADER_POINTER,
@@ -70,7 +69,6 @@ namespace datatypes
             AnyValue(ontology::VectorFont* vector_font_pointer);
             AnyValue(ontology::Glyph* glyph_pointer);
             AnyValue(ontology::Text3D* text3D_pointer);
-            AnyValue(void* void_pointer);
 
             AnyValue(std::string type, bool bool_value);
             AnyValue(std::string type, float float_value);
@@ -91,7 +89,6 @@ namespace datatypes
             AnyValue(std::string type, ontology::VectorFont* vector_font_pointer);
             AnyValue(std::string type, ontology::Glyph* glyph_pointer);
             AnyValue(std::string type, ontology::Text3D* text3D_pointer);
-            AnyValue(std::string type, void* void_pointer);
 
             int type;
             bool bool_value;
@@ -113,7 +110,6 @@ namespace datatypes
             ontology::VectorFont* vector_font_pointer;
             ontology::Glyph* glyph_pointer;
             ontology::Text3D* text3D_pointer;
-            void* void_pointer;
 
         private:
             void set_default_values();

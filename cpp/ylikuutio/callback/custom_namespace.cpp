@@ -38,13 +38,7 @@ namespace callback_system
         return this->anyvalue_hashmap[name].uint32_t_value;
     }
 
-    void* CustomNamespace::get_void_pointer(std::string name)
-    {
-        return this->anyvalue_hashmap[name].void_pointer;
-    }
-
     // setter functions for callbacks and callback objects.
-
     void CustomNamespace::set_bool(std::string name, bool value)
     {
         this->anyvalue_hashmap[name] = datatypes::AnyValue(value);
@@ -66,11 +60,6 @@ namespace callback_system
     }
 
     void CustomNamespace::set_uint32_t(std::string name, uint32_t value)
-    {
-        this->anyvalue_hashmap[name] = datatypes::AnyValue(value);
-    }
-
-    void CustomNamespace::set_void_pointer(std::string name, void* value)
     {
         this->anyvalue_hashmap[name] = datatypes::AnyValue(value);
     }

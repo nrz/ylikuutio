@@ -30,7 +30,6 @@ namespace datatypes
         this->vector_font_pointer = nullptr;
         this->glyph_pointer = nullptr;
         this->text3D_pointer = nullptr;
-        this->void_pointer = nullptr;
     }
 
     AnyValue::AnyValue()
@@ -399,25 +398,6 @@ namespace datatypes
         {
             this->type = datatypes::TEXT3D_POINTER;
             this->text3D_pointer = text3D_pointer;
-        }
-    }
-
-    AnyValue::AnyValue(void* void_pointer)
-    {
-        // constructor.
-        this->set_default_values();
-        this->type = datatypes::VOID_POINTER;
-        this->void_pointer = void_pointer;
-    }
-
-    AnyValue::AnyValue(std::string type, void* void_pointer)
-    {
-        // constructor.
-        this->set_default_values();
-        if (std::strcmp(type.c_str(), "void*"))
-        {
-            this->type = datatypes::VOID_POINTER;
-            this->void_pointer = void_pointer;
         }
     }
 }

@@ -179,9 +179,6 @@ namespace callback_system
                     case datatypes::UINT32_T:
                         this->parent_pointer->set_uint32_t(input_parameter_pointer->name, input_parameter_pointer->any_value->uint32_t_value);
                         break;
-                    case datatypes::VOID_POINTER:
-                        this->parent_pointer->set_void_pointer(input_parameter_pointer->name, input_parameter_pointer->any_value->void_pointer);
-                        break;
                     default:
                         break;
                 }
