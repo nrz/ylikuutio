@@ -50,7 +50,6 @@ GLFWwindow* window;
 // Include standard headers
 #include <cstdio>   // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf etc.
 #include <iostream> // std::cout, std::cin, std::cerr
-#include <unordered_map> // std::unordered_map
 #include <string>   // std::string
 #include <stdint.h> // uint32_t etc.
 
@@ -402,13 +401,13 @@ int main(void)
     cleanup_callback_object->set_new_callback(&ajokki::full_cleanup);
 
     // keypress callbacks.
-    std::unordered_map<uint32_t, callback_system::CallbackEngine*> keypress_callback_engines;
+    std::vector<KeyAndCallbackStruct> keypress_callback_engines;
 
-    keypress_callback_engines[GLFW_KEY_D] = delete_suzanne_species_callback_engine;
-    keypress_callback_engines[GLFW_KEY_G] = switch_to_grass_material_callback_engine;
-    keypress_callback_engines[GLFW_KEY_U] = switch_to_uvmap_material_callback_engine;
-    keypress_callback_engines[GLFW_KEY_T] = transform_into_terrain_callback_engine;
-    keypress_callback_engines[GLFW_KEY_A] = transform_into_monkey_callback_engine;
+    keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_D, delete_suzanne_species_callback_engine });
+    keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_G, switch_to_grass_material_callback_engine });
+    keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_U, switch_to_uvmap_material_callback_engine });
+    keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_T, transform_into_terrain_callback_engine });
+    keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_A, transform_into_monkey_callback_engine });
 
     // Initialize our little text library with the Holstein font
     const char* char_g_font_texture_filename = g_font_texture_filename.c_str();
@@ -561,12 +560,11 @@ int main(void)
             glfwSwapBuffers(window);
         }
 
-        // Check keypresses and call corresponding callbacks.
-        for (auto it = keypress_callback_engines.begin(); it != keypress_callback_engines.end(); ++it)
+        for (uint32_t i = 0; i < keypress_callback_engines.size(); i++)
         {
-            if (glfwGetKey(window, it->first) == GLFW_PRESS)
+            if (glfwGetKey(window, keypress_callback_engines.at(i).keycode) == GLFW_PRESS)
             {
-                callback_system::CallbackEngine* callback_engine = it->second;
+                callback_system::CallbackEngine* callback_engine = keypress_callback_engines.at(i).callback_engine;
                 callback_engine->execute();
             }
         }
@@ -582,7 +580,7 @@ int main(void)
     // Delete all callback engines.
     for (uint32_t i = 0; i < keypress_callback_engines.size(); i++)
     {
-        delete keypress_callback_engines[i];
+        delete keypress_callback_engines.at(i).callback_engine;
     }
 
     delete cleanup_callback_engine;
