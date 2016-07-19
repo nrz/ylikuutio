@@ -191,7 +191,7 @@ configure_file(res/height_maps/noise1024x1024.bmp noise1024x1024.bmp COPYONLY)
 configure_file(res/height_maps/noise256x256.bmp noise256x256.bmp COPYONLY)
 configure_file(res/height_maps/noise128x128.bmp noise128x128.bmp COPYONLY)
 configure_file(res/height_maps/S17W069.hgt S17W069.hgt COPYONLY)
-configure_file(res/fonts/kongtext.svg kongtext.svg COPYONLY)
+configure_file(res/fonts/kongtext/kongtext.svg kongtext.svg COPYONLY)
 
 # for tests.
 configure_file(res/height_maps/noise256x256.bmp noise256x256.bmp COPYONLY)
