@@ -65,11 +65,11 @@ namespace ajokki
 
     datatypes::AnyValue* delete_suzanne_species(
             callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
+            callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*> input_parameters)
     {
-        datatypes::AnyValue* any_value_species_pointer = input_parameters.at(0)->get_any_value();
-        datatypes::AnyValue* any_value_bool_pointer = input_parameters.at(1)->get_any_value();
+        datatypes::AnyValue* any_value_species_pointer = callback_object->get_any_value("suzanne_species");
+        datatypes::AnyValue* any_value_bool_pointer = callback_object->get_any_value("does_suzanne_species_exist");
 
         if (any_value_species_pointer->type != datatypes::SPECIES_POINTER)
         {
