@@ -24,7 +24,8 @@ Ylikuutio can be compiled with GCC, Clang or Visual Studio.
 C++11 support is required.
 OpenGL 3.0 or newer is required.
 CMake 2.6.2 or newer is needed for compiling process.
-CMake uses git for downloading Google Test testing framework.
+CMake uses git for downloading Google Test testing framework and Eigen,
+a C++ template library for linear algebra.
 
 In Linux it's simple.
 To compile with GCC, in Ylikuutio install directory:
@@ -69,13 +70,15 @@ If you compiled tests using Catch framework (they are deprecated):
 
 $ ./unit_tests_with_Catch
 
+Implemented functionality:
+o callbacks
+
 Future developments underway:
-o callbacks 
 o in-game console
 o partially transparent 2D text
 o 3D text
-o multiple scenes in the same world
-o coordinates relative to other objects, not only to world object
+o multiple scenes in the same Universe
+o coordinates relative to other objects, not only to Universe object
 o collision detection between objects
 o octree space partitioning
 o possibility to create scenes with different spatial scales
@@ -83,8 +86,8 @@ o objects (species in Ylikuutio terminology) with modifiable vertices
 o making holes in objects
 o splitting of objects into 2 or more pieces
 o cementing of 2 or more objects into one
-o morphing between objects (species in Ylikuutio terminology)
-o morphing between objects (species) and 3D text (glyphs)
+o morphing between objects (Species in Ylikuutio terminology)
+o morphing between objects (Species) and 3D text (Glyphs)
 o ray casting for vertex selection and vertex modifications
 o objects with 4 or more spatial dimensions,
   projected to 3D space before rendering to screen
