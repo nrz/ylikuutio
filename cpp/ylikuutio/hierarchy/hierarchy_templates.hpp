@@ -4,6 +4,8 @@
 #include "cpp/ylikuutio/hierarchy/hierarchy.hpp"
 
 // Include standard headers
+#include <queue>     // std::queue
+#include <stdint.h>  // uint32_t etc.
 #include <vector>    // std::vector
 
 namespace hierarchy
