@@ -27,9 +27,9 @@ namespace callback_system
         hierarchy::delete_children<callback_system::CallbackObject*>(this->callback_object_pointer_vector);
     }
 
-    void CallbackEngine::set_callback_object_pointer(uint32_t childID, void* parent_pointer)
+    void CallbackEngine::set_callback_object_pointer(uint32_t childID, void* child_pointer)
     {
-        hierarchy::set_child_pointer(childID, parent_pointer, this->callback_object_pointer_vector, this->free_callback_objectID_queue);
+        hierarchy::set_child_pointer(childID, child_pointer, this->callback_object_pointer_vector, this->free_callback_objectID_queue);
     }
 
     datatypes::AnyValue* CallbackEngine::execute()
