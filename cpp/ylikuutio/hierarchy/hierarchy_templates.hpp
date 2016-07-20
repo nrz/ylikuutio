@@ -14,7 +14,11 @@ namespace hierarchy
     template<class T1>
         void bind_child_to_parent(T1 child_pointer, std::vector<void*> &child_pointer_vector, std::queue<uint32_t> &free_childID_queue)
         {
-            // get childID from the parent, because every child deserves a unique ID!
+            // If a class' instances have parents, this function must be
+            // called in the constructor. The call must be done only once
+            // in each constructor, usually after setting
+            // `this->parent_pointer`. So, get `childID` from the parent,
+            // because every child deserves a unique ID!
             child_pointer->childID = get_childID(child_pointer_vector, free_childID_queue);
             // set pointer to the child in parent's child pointer vector so that parent knows about children's whereabouts!
             set_child_pointer(child_pointer->childID, child_pointer, child_pointer_vector, free_childID_queue);
