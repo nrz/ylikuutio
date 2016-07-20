@@ -22,7 +22,7 @@ namespace ontology
 
     uint32_t Graph::get_nodeID()
     {
-        return hierarchy::get_childID(node_pointer_vector, free_nodeID_queue);
+        return hierarchy::get_childID(this->node_pointer_vector, this->free_nodeID_queue);
     }
 
     Graph::~Graph()
