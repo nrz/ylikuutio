@@ -1,5 +1,5 @@
-#ifndef __MODEL_TEMPLATES_HPP_INCLUDED
-#define __MODEL_TEMPLATES_HPP_INCLUDED
+#ifndef __HIERARCHY_TEMPLATES_HPP_INCLUDED
+#define __HIERARCHY_TEMPLATES_HPP_INCLUDED
 
 #include "cpp/ylikuutio/hierarchy/hierarchy.hpp"
 
