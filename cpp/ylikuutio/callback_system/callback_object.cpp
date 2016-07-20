@@ -145,9 +145,9 @@ namespace callback_system
         return childID;
     }
 
-    void CallbackObject::set_callback_parameter_pointer(uint32_t childID, void* child_pointer)
+    void CallbackObject::set_callback_parameter_pointer(uint32_t childID, callback_system::CallbackParameter* child_pointer)
     {
-        this->callback_parameter_pointer_vector[childID] = static_cast<callback_system::CallbackParameter*>(child_pointer);
+        this->callback_parameter_pointer_vector[childID] = child_pointer;
 
         if (child_pointer == nullptr)
         {

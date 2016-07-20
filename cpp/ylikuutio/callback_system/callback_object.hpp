@@ -59,7 +59,7 @@ namespace callback_system
             uint32_t get_callback_parameterID(std::vector<callback_system::CallbackParameter*> &child_pointer_vector, std::queue<uint32_t> &free_childID_queue);
 
             // this method sets a callback parameter pointer.
-            void set_callback_parameter_pointer(uint32_t childID, void* child_pointer);
+            void set_callback_parameter_pointer(uint32_t childID, callback_system::CallbackParameter* child_pointer);
 
             callback_system::CallbackEngine* parent_pointer; // pointer to the callback engine.
 
