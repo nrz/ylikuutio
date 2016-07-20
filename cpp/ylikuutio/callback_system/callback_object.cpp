@@ -60,31 +60,12 @@ namespace callback_system
         return childID;
     }
 
-    void CallbackObject::set_child_pointer(uint32_t childID, callback_system::CallbackParameter* child_pointer)
-    {
-        this->callback_parameter_pointer_vector[childID] = child_pointer;
-
-        if (child_pointer == nullptr)
-        {
-            if (childID == this->callback_parameter_pointer_vector.size() - 1)
-            {
-                // OK, this is the biggest childID of all childID's of this 'object'.
-                // We can reduce the size of the child pointer vector at least by 1.
-                while ((!this->callback_parameter_pointer_vector.empty()) && (this->callback_parameter_pointer_vector.back() == nullptr))
-                {
-                    // Reduce the size of child pointer vector by 1.
-                    this->callback_parameter_pointer_vector.pop_back();
-                }
-            }
-        }
-    }
-
     void CallbackObject::bind_child_to_parent(callback_system::CallbackParameter* child_pointer)
     {
         // get childID from the parent, because every child deserves a unique ID!
         child_pointer->childID = this->get_childID();
         // set pointer to the child in parent's child pointer vector so that parent knows about children's whereabouts!
-        this->set_child_pointer(child_pointer->childID, child_pointer);
+        this->set_callback_parameter_pointer(child_pointer->childID, child_pointer);
     }
 
     CallbackObject::CallbackObject(callback_system::CallbackEngine* parent_pointer)

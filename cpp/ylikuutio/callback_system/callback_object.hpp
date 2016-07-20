@@ -50,16 +50,16 @@ namespace callback_system
             void bind_to_parent();
 
             uint32_t get_childID();
-            void set_child_pointer(uint32_t childID, callback_system::CallbackParameter* child_pointer);
+
+            // this method sets a callback parameter pointer.
+            void set_callback_parameter_pointer(uint32_t childID, callback_system::CallbackParameter* child_pointer);
+
             void bind_child_to_parent(callback_system::CallbackParameter* child_pointer);
 
             // execute this callback.
             datatypes::AnyValue* execute();
 
             uint32_t get_callback_parameterID(std::vector<callback_system::CallbackParameter*> &child_pointer_vector, std::queue<uint32_t> &free_childID_queue);
-
-            // this method sets a callback parameter pointer.
-            void set_callback_parameter_pointer(uint32_t childID, callback_system::CallbackParameter* child_pointer);
 
             callback_system::CallbackEngine* parent_pointer; // pointer to the callback engine.
 
