@@ -40,9 +40,7 @@ namespace callback_system
 
     void CallbackParameter::bind_to_parent()
     {
-        this->childID = this->parent_pointer->get_callback_parameterID(this->parent_pointer->callback_parameter_pointer_vector, this->parent_pointer->free_callback_parameterID_queue);
-        // set pointer to the child in parent's child pointer vector so that parent knows about children's whereabouts!
-        this->parent_pointer->set_callback_parameter_pointer(this->childID, this);
+        hierarchy::bind_child_to_parent<callback_system::CallbackParameter*>(this, this->parent_pointer->callback_parameter_pointer_vector, this->parent_pointer->free_callback_parameterID_queue);
 
         if (!this->name.empty())
         {

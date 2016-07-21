@@ -30,10 +30,10 @@ namespace callback_system
 
             friend class CallbackObject;
 
+            uint32_t childID;               // callback parameter ID, returned by `callback_system::CallbackObject->get_callback_parameterID()`.
+
         private:
             void bind_to_parent();
-
-            uint32_t childID;               // callback parameter ID, returned by `callback_system::CallbackObject->get_callback_parameterID()`.
 
             callback_system::CallbackObject* parent_pointer; // pointer to the callback object.
 
