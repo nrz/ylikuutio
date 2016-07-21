@@ -64,11 +64,11 @@ namespace ontology
             template<class T1>
                 friend void render_this_object(ontology::Object* object_pointer, ontology::Shader* shader_pointer);
 
-            // this method renders this object.
-            void render();
-
         private:
             void bind_to_parent();
+
+            // this method renders this object.
+            void render();
 
             ontology::Species* species_parent_pointer; // pointer to `Species`.
             ontology::Glyph* glyph_parent_pointer;     // pointer to `Glyph`.
