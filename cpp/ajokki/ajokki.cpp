@@ -403,6 +403,10 @@ int main(void)
     // keypress callbacks.
     std::vector<KeyAndCallbackStruct> keypress_callback_engines;
 
+    // This vector points to current callback engines vector.
+    std::vector<KeyAndCallbackStruct>* current_callback_engine_vector_pointer;
+    current_callback_engine_vector_pointer = &keypress_callback_engines;
+
     // This is one of the possible `std::vector<KeyAndCallbackStruct>`
     keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_D, delete_suzanne_species_callback_engine });
     keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_G, switch_to_grass_material_callback_engine });
@@ -561,11 +565,12 @@ int main(void)
             glfwSwapBuffers(window);
         }
 
-        for (uint32_t i = 0; i < keypress_callback_engines.size(); i++)
+        // Check for keypresses and call corresponding callbacks.
+        for (uint32_t i = 0; i < (*current_callback_engine_vector_pointer).size(); i++)
         {
-            if (glfwGetKey(window, keypress_callback_engines.at(i).keycode) == GLFW_PRESS)
+            if (glfwGetKey(window, (*current_callback_engine_vector_pointer).at(i).keycode) == GLFW_PRESS)
             {
-                callback_system::CallbackEngine* callback_engine = keypress_callback_engines.at(i).callback_engine;
+                callback_system::CallbackEngine* callback_engine = (*current_callback_engine_vector_pointer).at(i).callback_engine;
                 callback_engine->execute();
             }
         }
