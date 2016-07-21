@@ -226,6 +226,12 @@ add_executable(ajokki
     cpp/ylikuutio/common/globals.cpp
     cpp/ylikuutio/common/globals.hpp
 
+    # console, in alphabetical order.
+    cpp/ylikuutio/console/console_keypress_callbacks.cpp
+    cpp/ylikuutio/console/console_keypress_callbacks.hpp
+    cpp/ylikuutio/console/console.hpp
+    cpp/ylikuutio/console/console.hpp
+
     # file, in alphabetical order.
     cpp/ylikuutio/file/file_loader.cpp
     cpp/ylikuutio/file/file_loader.hpp
