@@ -55,7 +55,7 @@ namespace ontology
 
             friend class Object;
             template<class T1>
-                friend void render_children(std::vector<void*> &child_pointer_vector);
+                friend void render_children(std::vector<T1> &child_pointer_vector);
             template<class T1>
                 friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1> &child_pointer_vector, std::queue<uint32_t> &free_childID_queue);
             template<class T1, class T2>
@@ -66,11 +66,11 @@ namespace ontology
                 friend void render_this_object(ontology::Object* object_pointer, ontology::Shader* shader_pointer);
             friend GLfloat get_ground_level(ontology::Species* terrain_species, glm::vec3 position);
 
-            // this method renders all objects of this species.
-            void render();
-
         private:
             void bind_to_parent();
+
+            // this method renders all objects of this species.
+            void render();
 
             ontology::Material* parent_pointer;         // pointer to the material.
 
