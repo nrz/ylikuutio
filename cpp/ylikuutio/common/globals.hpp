@@ -54,21 +54,12 @@
 #define EARTH_RADIUS 6371000.0f
 #endif
 
-#ifndef TEXT_SIZE
-#define TEXT_SIZE 40
-#endif
-
-#ifndef FONT_SIZE
-#define FONT_SIZE 16
-#endif
-
-#ifndef MAX_FPS
-#define MAX_FPS 60
-#endif
-
 // global variables.
 extern uint32_t window_width;
 extern uint32_t window_height;
+extern uint32_t text_size;
+extern uint32_t font_size;
+extern uint32_t max_FPS;
 extern GLfloat aspect_ratio;
 extern glm::mat4 ProjectionMatrix;
 extern glm::mat4 ViewMatrix;

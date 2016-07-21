@@ -431,7 +431,7 @@ int main(void)
         // Measure speed
         double currentTime = glfwGetTime();
 
-        if (currentTime - last_time_for_display_sync >= (1.0f / MAX_FPS))
+        if (currentTime - last_time_for_display_sync >= (1.0f / max_FPS))
         {
             last_time_for_display_sync = glfwGetTime();
 
@@ -457,8 +457,8 @@ int main(void)
             PrintingStruct printing_struct;
             printing_struct.screen_width = (GLuint) window_width;
             printing_struct.screen_height = (GLuint) window_height;
-            printing_struct.text_size = TEXT_SIZE;
-            printing_struct.font_size = FONT_SIZE;
+            printing_struct.text_size = text_size;
+            printing_struct.font_size = font_size;
             printing_struct.char_font_texture_file_format = "bmp";
 
             char angles_and_coordinates_text[256];
@@ -524,7 +524,7 @@ int main(void)
             {
                 // print help text.
                 printing_struct.x = 0;
-                printing_struct.y = window_height - (2 * TEXT_SIZE);
+                printing_struct.y = window_height - (2 * text_size);
                 printing_struct.text = help_text_char;
                 printing_struct.horizontal_alignment = "left";
                 printing_struct.vertical_alignment = "top";
@@ -535,7 +535,7 @@ int main(void)
             {
                 // print spherical coordinates on bottom left corner.
                 printing_struct.x = 0;
-                printing_struct.y += 2 * TEXT_SIZE;
+                printing_struct.y += 2 * text_size;
                 printing_struct.text = spherical_coordinates_text;
                 printing_struct.horizontal_alignment = "left";
                 printing_struct.vertical_alignment = "bottom";

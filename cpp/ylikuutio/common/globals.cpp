@@ -14,6 +14,9 @@
 
 uint32_t window_width = 1600;
 uint32_t window_height = 900;
+uint32_t text_size = 40;
+uint32_t font_size = 16;
+uint32_t max_FPS = 60;
 GLfloat aspect_ratio = (GLfloat) window_width / window_height;
 glm::mat4 ProjectionMatrix;
 glm::mat4 ViewMatrix;
