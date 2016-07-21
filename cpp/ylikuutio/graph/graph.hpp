@@ -26,7 +26,7 @@ namespace ontology
             void set_node_pointer(uint32_t nodeID, ontology::Node* child_pointer);
 
             // this method gets a node pointer.
-            void* get_node_pointer(uint32_t nodeID);
+            ontology::Node* get_node_pointer(uint32_t nodeID);
 
             // this method gets a node ID and removes it from the `free_nodeID_queue` if it was popped from the queue.
             uint32_t get_nodeID();

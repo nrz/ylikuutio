@@ -14,7 +14,7 @@ namespace ontology
         hierarchy::set_child_pointer(childID, child_pointer, this->node_pointer_vector, this->free_nodeID_queue);
     }
 
-    void* Graph::get_node_pointer(uint32_t childID)
+    ontology::Node* Graph::get_node_pointer(uint32_t childID)
     {
         return this->node_pointer_vector[childID];
     }
