@@ -45,14 +45,6 @@ namespace callback_system
             datatypes::AnyValue* any_value; // this is `private` to make sure that someone does not overwrite it.
             bool is_reference;              // if true, the value is read from the hashmap. if false, then the value is read from the union.
     };
-
-    class BoolCallbackParameter : CallbackParameter
-    {
-        public:
-
-            // constructor.
-            BoolCallbackParameter();
-    };
 }
 
 #endif
