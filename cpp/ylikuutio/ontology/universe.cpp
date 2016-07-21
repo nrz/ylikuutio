@@ -74,25 +74,25 @@ namespace ontology
         glfwGetCursorPos(window, &xpos, &ypos);
 
         // Reset mouse position for next frame
-        glfwSetCursorPos(window, WINDOW_WIDTH/2, WINDOW_HEIGHT/2);
+        glfwSetCursorPos(window, window_width / 2, window_height / 2);
 
         if (hasMouseEverMoved || (abs(xpos) > 0.0001) || (abs(ypos) > 0.0001))
         {
             hasMouseEverMoved = true;
 
             // Compute new orientation
-            horizontalAngle += mouseSpeed * GLfloat(WINDOW_WIDTH/2 - xpos);
+            horizontalAngle += mouseSpeed * GLfloat(window_width / 2 - xpos);
             horizontalAngle = remainder(horizontalAngle, (2.0f * PI));
 
             if (is_invert_mouse_in_use)
             {
                 // invert mouse.
-                verticalAngle   -= mouseSpeed * GLfloat(WINDOW_HEIGHT/2 - ypos);
+                verticalAngle   -= mouseSpeed * GLfloat(window_height / 2 - ypos);
             }
             else
             {
                 // don't invert mouse.
-                verticalAngle   += mouseSpeed * GLfloat(WINDOW_HEIGHT/2 - ypos);
+                verticalAngle   += mouseSpeed * GLfloat(window_height / 2 - ypos);
             }
             verticalAngle = remainder(verticalAngle, (2.0f * PI));
         }
@@ -275,7 +275,7 @@ namespace ontology
         camera_position.y += 2.0f;
 
         // Projection matrix : 45° Field of View, aspect ratio, display range : 0.1 unit <-> 100 units
-        ProjectionMatrix = glm::perspective(FoV, ASPECT_RATIO, 0.001f, 5000.0f + 2.0f * (GLfloat) earth_radius);
+        ProjectionMatrix = glm::perspective(FoV, aspect_ratio, 0.001f, 5000.0f + 2.0f * (GLfloat) earth_radius);
         // Camera matrix
         ViewMatrix = glm::lookAt(
                 camera_position,           // Camera is here

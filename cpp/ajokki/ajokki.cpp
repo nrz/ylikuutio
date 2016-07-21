@@ -130,7 +130,7 @@ int main(void)
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
 
     // Open a window and create its OpenGL context.
-    window = glfwCreateWindow((GLuint) WINDOW_WIDTH, (GLuint) WINDOW_HEIGHT, "Ylikuutio", nullptr, nullptr);
+    window = glfwCreateWindow((GLuint) window_width, (GLuint) window_height, "Ylikuutio", nullptr, nullptr);
     cleanup_callback_object->set_new_callback(&ajokki::glfwTerminate_cleanup);
 
     if (window == nullptr)
@@ -151,7 +151,7 @@ int main(void)
 
     // Ensure we can capture the escape key being pressed below.
     glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
-    glfwSetCursorPos(window, ((GLuint) WINDOW_WIDTH / 2), ((GLuint) WINDOW_HEIGHT / 2));
+    glfwSetCursorPos(window, ((GLuint) window_width / 2), ((GLuint) window_height / 2));
 
     // Dark blue background.
     glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
@@ -417,7 +417,7 @@ int main(void)
     // Initialize our little text library with the Holstein font
     const char* char_g_font_texture_filename = g_font_texture_filename.c_str();
     const char* char_g_font_texture_file_format = g_font_texture_file_format.c_str();
-    text2D::initText2D((GLuint) WINDOW_WIDTH, (GLuint) WINDOW_HEIGHT, char_g_font_texture_filename, char_g_font_texture_file_format);
+    text2D::initText2D((GLuint) window_width, (GLuint) window_height, char_g_font_texture_filename, char_g_font_texture_file_format);
 
     // For speed computation
     double lastTime = glfwGetTime();
@@ -455,8 +455,8 @@ int main(void)
             my_world->render();
 
             PrintingStruct printing_struct;
-            printing_struct.screen_width = (GLuint) WINDOW_WIDTH;
-            printing_struct.screen_height = (GLuint) WINDOW_HEIGHT;
+            printing_struct.screen_width = (GLuint) window_width;
+            printing_struct.screen_height = (GLuint) window_height;
             printing_struct.text_size = TEXT_SIZE;
             printing_struct.font_size = FONT_SIZE;
             printing_struct.char_font_texture_file_format = "bmp";
@@ -524,7 +524,7 @@ int main(void)
             {
                 // print help text.
                 printing_struct.x = 0;
-                printing_struct.y = WINDOW_HEIGHT - (2 * TEXT_SIZE);
+                printing_struct.y = window_height - (2 * TEXT_SIZE);
                 printing_struct.text = help_text_char;
                 printing_struct.horizontal_alignment = "left";
                 printing_struct.vertical_alignment = "top";
@@ -544,7 +544,7 @@ int main(void)
 
             // print time data on top left corner.
             printing_struct.x = 0;
-            printing_struct.y = (GLuint) WINDOW_HEIGHT;
+            printing_struct.y = (GLuint) window_height;
             printing_struct.text = time_text;
             printing_struct.horizontal_alignment = "left";
             printing_struct.vertical_alignment = "top";
@@ -553,8 +553,8 @@ int main(void)
             if (ms_frame_text_ready)
             {
                 // print frame rate data on top right corner.
-                printing_struct.x = WINDOW_WIDTH;
-                printing_struct.y = WINDOW_HEIGHT;
+                printing_struct.x = window_width;
+                printing_struct.y = window_height;
                 printing_struct.text = ms_frame_text;
                 printing_struct.horizontal_alignment = "right";
                 printing_struct.vertical_alignment = "top";

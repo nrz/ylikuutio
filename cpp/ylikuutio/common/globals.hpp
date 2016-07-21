@@ -46,18 +46,6 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
-#ifndef WINDOW_WIDTH
-#define WINDOW_WIDTH (1600.0f)
-#endif
-
-#ifndef WINDOW_HEIGHT
-#define WINDOW_HEIGHT (900.0f)
-#endif
-
-#ifndef ASPECT_RATIO
-#define ASPECT_RATIO (WINDOW_WIDTH / WINDOW_HEIGHT)
-#endif
-
 #ifndef PI
 #define PI 3.14159265359f
 #endif
@@ -79,6 +67,9 @@
 #endif
 
 // global variables.
+extern uint32_t window_width;
+extern uint32_t window_height;
+extern GLfloat aspect_ratio;
 extern glm::mat4 ProjectionMatrix;
 extern glm::mat4 ViewMatrix;
 extern glm::vec3 position;

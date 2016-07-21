@@ -12,6 +12,9 @@
 #include <glm/glm.hpp> // glm
 #endif
 
+uint32_t window_width = 1600;
+uint32_t window_height = 900;
+GLfloat aspect_ratio = (GLfloat) window_width / window_height;
 glm::mat4 ProjectionMatrix;
 glm::mat4 ViewMatrix;
 glm::vec3 position;
