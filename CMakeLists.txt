@@ -4,6 +4,7 @@ project(ylikuutio)
 
 find_package(OpenGL REQUIRED)
 find_package(Threads REQUIRED)
+find_package(eigen)
 
 # Compile external dependencies
 add_subdirectory (external)
@@ -70,8 +71,20 @@ ExternalProject_Add(
     LOG_BUILD ON
     )
 
+# http://stackoverflow.com/questions/17446981/cmake-externalproject-add-and-findpackage/17473508#17473508
+if (NOT ${eigen_FOUND})
+    # Rerun CMake in initial build.
+    # Will update cmakecache/project files on first build.
+    # So you may have to reload project after first build.
+    add_custom_target(Rescan ${CMAKE_COMMAND} ${CMAKE_SOURCE_DIR} DEPENDS eigen)
+else()
+    # Rescan becomes a dummy target after first build.
+    # This prevents CMake from rebuilding cache/projects on subsequent builds.
+    add_custom_target(Rescan)
+endif()
+
 include_directories(
-    ${CMAKE_CURRENT_BINARY_DIR}/eigen/src/eigen/src/eigen/
+    ${CMAKE_CURRENT_BINARY_DIR}/eigen/src/eigen/
     )
 
 if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
@@ -312,10 +325,13 @@ add_executable(ajokki
     cpp/ajokki/ajokki_callbacks.cpp
     cpp/ajokki/ajokki_callbacks.hpp
     )
+add_dependencies(ajokki Rescan)
+target_link_libraries(ajokki ${ALL_LIBS})
+if(${eigen_FOUND})
+    # target_link_libraries(ajokki ${eigen_LIBRARY})
+    target_link_libraries(ajokki ${ALL_LIBS})
+endif()
 
-target_link_libraries(ajokki
-    ${ALL_LIBS}
-    )
 # Xcode and Visual working directories
 set_target_properties(ajokki PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/cpp/ajokki/")
 create_target_launcher(ajokki WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/cpp/ajokki/")
