@@ -22,6 +22,7 @@ namespace ontology
         {
             ontology::Species* parent_pointer;
             parent_pointer = this->species_parent_pointer;
+            // for ontological hierarchy (rendering hierarchy does not use `childID`).
             hierarchy::bind_child_to_parent<ontology::Object*>(this, parent_pointer->object_pointer_vector, parent_pointer->free_objectID_queue);
         }
     }
