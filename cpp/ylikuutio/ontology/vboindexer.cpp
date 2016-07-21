@@ -59,39 +59,6 @@ bool getSimilarVertexIndex(
 
 namespace ontology
 {
-    void indexVBO_slow(
-            std::vector<glm::vec3> &in_vertices,
-            std::vector<glm::vec2> &in_UVs,
-            std::vector<glm::vec3> &in_normals,
-
-            std::vector<GLuint> &out_indices,
-            std::vector<glm::vec3> &out_vertices,
-            std::vector<glm::vec2> &out_UVs,
-            std::vector<glm::vec3> &out_normals)
-    {
-        // For each input vertex
-        for (unsigned int i = 0; i < in_vertices.size(); i++)
-        {
-            // Try to find a similar vertex in out_XXXX
-            GLuint index;
-            bool found = getSimilarVertexIndex(in_vertices[i], in_UVs[i], in_normals[i], out_vertices, out_UVs, out_normals, index);
-
-            if (found)
-            {
-                // A similar vertex is already in the VBO, use it instead !
-                out_indices.push_back(index);
-            }
-            else
-            {
-                // If not, it needs to be added in the output data.
-                out_vertices.push_back(in_vertices[i]);
-                out_UVs.push_back(in_UVs[i]);
-                out_normals.push_back(in_normals[i]);
-                out_indices.push_back((GLuint) out_vertices.size() - 1);
-            }
-        }
-    }
-
     struct PackedVertex
     {
         glm::vec3 position;
