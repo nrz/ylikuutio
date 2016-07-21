@@ -23,6 +23,7 @@ namespace ontology
 {
     class Species;
     class Object;
+    class VectorFont;
 
     class Material
     {
@@ -44,19 +45,19 @@ namespace ontology
             template<class T1>
                 friend void render_children(std::vector<void*> &child_pointer_vector);
             template<class T1>
-                friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<void*> &child_pointer_vector, std::queue<uint32_t> &free_childID_queue);
+                friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1> &child_pointer_vector, std::queue<uint32_t> &free_childID_queue);
             template<class T1, class T2>
-                friend void hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent_pointer, std::vector<void*> &old_child_pointer_vector, std::queue<uint32_t> &old_free_childID_queue);
+                friend void hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent_pointer, std::vector<T1> &old_child_pointer_vector, std::queue<uint32_t> &old_free_childID_queue);
 
-        private:
             // this method renders all species using this texture.
             void render();
 
+        private:
             // this method sets `Species` pointer.
-            void set_species_pointer(uint32_t childID, void* parent_pointer);
+            void set_species_pointer(uint32_t childID, ontology::Species* child_pointer);
 
             // this method sets `VectorFont` pointer.
-            void set_vector_font_pointer(uint32_t childID, void* parent_pointer);
+            void set_vector_font_pointer(uint32_t childID, ontology::VectorFont* child_pointer);
 
             // this method sets a world species pointer.
             void set_terrain_species_pointer(ontology::Species* terrain_species_pointer);
@@ -70,8 +71,8 @@ namespace ontology
             GLuint texture;                        // Material, returned by `load_DDS_texture` or `load_BMP_texture`.
             GLuint openGL_textureID;               // texture ID, returned by `glGetUniformLocation(programID, "myTextureSampler");`.
 
-            std::vector<void*> species_pointer_vector;
-            std::vector<void*> vector_font_pointer_vector;
+            std::vector<ontology::Species*> species_pointer_vector;
+            std::vector<ontology::VectorFont*> vector_font_pointer_vector;
             std::queue<uint32_t> free_speciesID_queue;
             std::queue<uint32_t> free_vector_fontID_queue;
 

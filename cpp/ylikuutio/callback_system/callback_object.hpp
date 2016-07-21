@@ -42,9 +42,9 @@ namespace callback_system
             friend class CallbackEngine;
             friend class CallbackParameter;
             template<class T1>
-                friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<void*> &child_pointer_vector, std::queue<uint32_t> &free_childID_queue);
+                friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1> &child_pointer_vector, std::queue<uint32_t> &free_childID_queue);
             template<class T1, class T2>
-                friend void hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent_pointer, std::vector<void*> &old_child_pointer_vector, std::queue<uint32_t> &old_free_childID_queue);
+                friend void hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent_pointer, std::vector<T1> &old_child_pointer_vector, std::queue<uint32_t> &old_free_childID_queue);
 
         private:
             void bind_to_parent();

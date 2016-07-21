@@ -253,8 +253,6 @@ add_executable(ajokki
     cpp/ylikuutio/graph/node.hpp
 
     # hierarchy, in alphabetical order.
-    cpp/ylikuutio/hierarchy/hierarchy.cpp
-    cpp/ylikuutio/hierarchy/hierarchy.hpp
     cpp/ylikuutio/hierarchy/hierarchy_templates.hpp
 
     # ontology, in alphabetical order
@@ -372,8 +370,6 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         cpp/ylikuutio/geometry/quad_triangulation.hpp
         cpp/ylikuutio/geometry/transformation.cpp
         cpp/ylikuutio/geometry/transformation.hpp
-        cpp/ylikuutio/hierarchy/hierarchy.cpp
-        cpp/ylikuutio/hierarchy/hierarchy.hpp
         cpp/ylikuutio/hierarchy/hierarchy_templates.hpp
         cpp/ylikuutio/ontology/font_loader.cpp
         cpp/ylikuutio/ontology/font_loader.hpp

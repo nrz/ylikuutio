@@ -66,9 +66,9 @@ namespace ontology
         ontology::render_children<ontology::Material*>(this->material_pointer_vector);
     }
 
-    void Shader::set_material_pointer(uint32_t childID, void* parent_pointer)
+    void Shader::set_material_pointer(uint32_t childID, ontology::Material* child_pointer)
     {
-        hierarchy::set_child_pointer(childID, parent_pointer, this->material_pointer_vector, this->free_materialID_queue);
+        hierarchy::set_child_pointer(childID, child_pointer, this->material_pointer_vector, this->free_materialID_queue);
     }
 
     void Shader::bind_to_new_parent(ontology::Scene* new_scene_pointer)

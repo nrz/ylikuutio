@@ -1,8 +1,6 @@
 #ifndef __HIERARCHY_TEMPLATES_HPP_INCLUDED
 #define __HIERARCHY_TEMPLATES_HPP_INCLUDED
 
-#include "cpp/ylikuutio/hierarchy/hierarchy.hpp"
-
 // Include standard headers
 #include <queue>     // std::queue
 #include <stdint.h>  // uint32_t etc.
@@ -10,11 +8,58 @@
 
 namespace hierarchy
 {
-    void set_child_pointer(uint32_t childID, void* child_pointer, std::vector<void*> &child_pointer_vector, std::queue<uint32_t> &free_childID_queue);
-    uint32_t get_childID(std::vector<void*> &child_pointer_vector, std::queue<uint32_t> &free_childID_queue);
+    template<class T1>
+        void set_child_pointer(uint32_t childID, T1 child_pointer, std::vector<T1> &child_pointer_vector, std::queue<uint32_t> &free_childID_queue)
+        {
+            child_pointer_vector[childID] = child_pointer;
+
+            if (child_pointer == nullptr)
+            {
+                if (childID == child_pointer_vector.size() - 1)
+                {
+                    // OK, this is the biggest childID of all childID's of this 'object'.
+                    // We can reduce the size of the child pointer vector at least by 1.
+                    while ((!child_pointer_vector.empty()) && (child_pointer_vector.back() == nullptr))
+                    {
+                        // Reduce the size of child pointer vector by 1.
+                        child_pointer_vector.pop_back();
+                    }
+                }
+            }
+        }
 
     template<class T1>
-        void bind_child_to_parent(T1 child_pointer, std::vector<void*> &child_pointer_vector, std::queue<uint32_t> &free_childID_queue)
+        uint32_t get_childID(std::vector<T1> &child_pointer_vector, std::queue<uint32_t> &free_childID_queue)
+        {
+            // This function is called eg. from `bind_child_to_parent`,
+            // so that child instance gets an appropriate `childID`.
+            uint32_t childID;
+
+            while (!free_childID_queue.empty())
+            {
+                // return the first (oldest) free childID.
+                childID = free_childID_queue.front();
+                free_childID_queue.pop();
+
+                // check that the child index does not exceed current child pointer vector.
+                if (childID < child_pointer_vector.size())
+                {
+                    // OK, it does not exceed current child pointer vector.
+                    return childID;
+                }
+            }
+            // OK, the queue is empty.
+            // A new child index must be created.
+            childID = child_pointer_vector.size();
+
+            // child pointer vector must also be extended with an appropriate nullptr pointer.
+            child_pointer_vector.push_back(nullptr);
+
+            return childID;
+        }
+
+    template<class T1>
+        void bind_child_to_parent(T1 child_pointer, std::vector<T1> &child_pointer_vector, std::queue<uint32_t> &free_childID_queue)
         {
             // If a class' instances have parents, this function must be
             // called in the constructor. The call must be done only once
@@ -30,11 +75,12 @@ namespace hierarchy
         void bind_child_to_new_parent(
                 T1 child_pointer,
                 T2 new_parent_pointer,
-                std::vector<void*> &old_child_pointer_vector,
+                std::vector<T1> &old_child_pointer_vector,
                 std::queue<uint32_t> &old_free_childID_queue)
         {
-            // set pointer to this child to nullptr in the old parent.
-            set_child_pointer(child_pointer->childID, nullptr, old_child_pointer_vector, old_free_childID_queue);
+            // Set pointer to this child to `nullptr` in the old parent.
+            T1 dummy_child_pointer = nullptr;
+            set_child_pointer(child_pointer->childID, dummy_child_pointer, old_child_pointer_vector, old_free_childID_queue);
             // set the new parent pointer.
             child_pointer->parent_pointer = new_parent_pointer;
             // bind to the new parent.
@@ -42,11 +88,11 @@ namespace hierarchy
         }
 
     template<class T1>
-        void delete_children(std::vector<void*> &child_pointer_vector)
+        void delete_children(std::vector<T1> &child_pointer_vector)
         {
             for (uint32_t child_i = 0; child_i < child_pointer_vector.size(); child_i++)
             {
-                delete static_cast<T1>(child_pointer_vector[child_i]);
+                delete child_pointer_vector[child_i];
             }
         }
 }

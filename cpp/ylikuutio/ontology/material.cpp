@@ -82,14 +82,14 @@ namespace ontology
         ontology::render_children<ontology::VectorFont*>(this->vector_font_pointer_vector);
     }
 
-    void Material::set_species_pointer(uint32_t childID, void* parent_pointer)
+    void Material::set_species_pointer(uint32_t childID, ontology::Species* child_pointer)
     {
-        hierarchy::set_child_pointer(childID, parent_pointer, this->species_pointer_vector, this->free_speciesID_queue);
+        hierarchy::set_child_pointer(childID, child_pointer, this->species_pointer_vector, this->free_speciesID_queue);
     }
 
-    void Material::set_vector_font_pointer(uint32_t childID, void* parent_pointer)
+    void Material::set_vector_font_pointer(uint32_t childID, ontology::VectorFont* child_pointer)
     {
-        hierarchy::set_child_pointer(childID, parent_pointer, this->vector_font_pointer_vector, this->free_vector_fontID_queue);
+        hierarchy::set_child_pointer(childID, child_pointer, this->vector_font_pointer_vector, this->free_vector_fontID_queue);
     }
 
     void Material::bind_to_new_parent(ontology::Shader* new_shader_pointer)

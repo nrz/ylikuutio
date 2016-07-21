@@ -62,8 +62,8 @@ namespace ontology
         hierarchy::bind_child_to_new_parent<ontology::Scene*, ontology::Universe*>(this, new_universe_pointer, this->parent_pointer->scene_pointer_vector, this->parent_pointer->free_sceneID_queue);
     }
 
-    void Scene::set_shader_pointer(uint32_t childID, void* parent_pointer)
+    void Scene::set_shader_pointer(uint32_t childID, ontology::Shader* child_pointer)
     {
-        hierarchy::set_child_pointer(childID, parent_pointer, this->shader_pointer_vector, this->free_shaderID_queue);
+        hierarchy::set_child_pointer(childID, child_pointer, this->shader_pointer_vector, this->free_shaderID_queue);
     }
 }

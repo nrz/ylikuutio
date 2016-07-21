@@ -1,12 +1,6 @@
 #ifndef __MODEL_HPP_INCLUDED
 #define __MODEL_HPP_INCLUDED
 
-// #include "material.hpp"
-// #include "ground_level.hpp"
-// #include "render_templates.hpp"
-// #include "species_or_glyph.hpp"
-// #include "cpp/ylikuutio/hierarchy/hierarchy_templates.hpp"
-
 // Include GLEW
 #ifndef __GL_GLEW_H_INCLUDED
 #define __GL_GLEW_H_INCLUDED
@@ -28,6 +22,7 @@
 namespace ontology
 {
     class Material;
+    class Object;
 
     class Model
     {
@@ -39,7 +34,7 @@ namespace ontology
             ~Model();
 
             // this method sets a object pointer.
-            void set_object_pointer(uint32_t childID, void* parent_pointer);
+            void set_object_pointer(uint32_t childID, ontology::Object* child_pointer);
 
             // this method gets a object ID and removes it from the `free_objectID_queue` if it was popped from the queue.
             uint32_t get_objectID();
@@ -50,7 +45,7 @@ namespace ontology
             uint32_t childID;                        // species ID, returned by `ontology::Material->get_speciesID()`.
             GLuint lightID;                          // light ID, returned by `glGetUniformLocation(programID, "LightPosition_worldspace");`.
 
-            std::vector<void*> object_pointer_vector;
+            std::vector<ontology::Object*> object_pointer_vector;
             std::queue<uint32_t> free_objectID_queue;
 
             std::string triangulation_type;

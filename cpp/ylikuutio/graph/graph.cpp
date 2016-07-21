@@ -1,5 +1,4 @@
 #include "graph.hpp"
-#include "cpp/ylikuutio/hierarchy/hierarchy.hpp"
 #include "cpp/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "node.hpp"
 
@@ -10,9 +9,9 @@ namespace ontology
         // constructor.
     }
 
-    void Graph::set_node_pointer(uint32_t childID, void* parent_pointer)
+    void Graph::set_node_pointer(uint32_t childID, ontology::Node* child_pointer)
     {
-        hierarchy::set_child_pointer(childID, parent_pointer, this->node_pointer_vector, this->free_nodeID_queue);
+        hierarchy::set_child_pointer(childID, child_pointer, this->node_pointer_vector, this->free_nodeID_queue);
     }
 
     void* Graph::get_node_pointer(uint32_t childID)

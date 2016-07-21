@@ -148,9 +148,9 @@ namespace ontology
         ontology::render_species_or_glyph<ontology::Species*>(this);
     }
 
-    void Species::set_object_pointer(uint32_t childID, void* parent_pointer)
+    void Species::set_object_pointer(uint32_t childID, ontology::Object* child_pointer)
     {
-        hierarchy::set_child_pointer(childID, parent_pointer, this->object_pointer_vector, this->free_objectID_queue);
+        hierarchy::set_child_pointer(childID, child_pointer, this->object_pointer_vector, this->free_objectID_queue);
     }
 
     void Species::bind_to_new_parent(ontology::Material* new_material_pointer)

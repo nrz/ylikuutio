@@ -96,7 +96,8 @@ namespace ontology
             ontology::Glyph* parent_pointer;
             parent_pointer = this->glyph_parent_pointer;
             // set pointer to this child to nullptr in the old parent.
-            hierarchy::set_child_pointer(this->childID, nullptr, glyph_parent_pointer->object_pointer_vector, glyph_parent_pointer->free_objectID_queue);
+            ontology::Object* dummy_child_pointer = nullptr;
+            hierarchy::set_child_pointer(this->childID, dummy_child_pointer, glyph_parent_pointer->object_pointer_vector, glyph_parent_pointer->free_objectID_queue);
             // set the new parent pointer.
             this->glyph_parent_pointer = static_cast<ontology::Glyph*>(new_parent_pointer);
             // bind to the new parent.
@@ -107,7 +108,8 @@ namespace ontology
             ontology::Species* parent_pointer;
             parent_pointer = this->species_parent_pointer;
             // set pointer to this child to nullptr in the old parent.
-            hierarchy::set_child_pointer(this->childID, nullptr, species_parent_pointer->object_pointer_vector, species_parent_pointer->free_objectID_queue);
+            ontology::Object* dummy_child_pointer = nullptr;
+            hierarchy::set_child_pointer(this->childID, dummy_child_pointer, species_parent_pointer->object_pointer_vector, species_parent_pointer->free_objectID_queue);
             // set the new parent pointer.
             this->species_parent_pointer = static_cast<ontology::Species*>(new_parent_pointer);
             // bind to the new parent.

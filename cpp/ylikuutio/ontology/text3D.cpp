@@ -80,8 +80,8 @@ namespace ontology
         this->parent_pointer->set_text3D_pointer(this->childID, nullptr);
     }
 
-    void Text3D::set_object_pointer(uint32_t childID, void* parent_pointer)
+    void Text3D::set_object_pointer(uint32_t childID, ontology::Object* child_pointer)
     {
-        hierarchy::set_child_pointer(childID, parent_pointer, this->object_pointer_vector, this->free_objectID_queue);
+        hierarchy::set_child_pointer(childID, child_pointer, this->object_pointer_vector, this->free_objectID_queue);
     }
 }

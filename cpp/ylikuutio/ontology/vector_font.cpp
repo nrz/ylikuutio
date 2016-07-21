@@ -2,7 +2,6 @@
 #include "font_loader.hpp"
 #include "glyph.hpp"
 #include "render_templates.hpp"
-#include "cpp/ylikuutio/hierarchy/hierarchy.hpp"
 #include "cpp/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "cpp/ylikuutio/string/ylikuutio_string.hpp"
 
@@ -122,14 +121,14 @@ namespace ontology
         ontology::render_children<ontology::Glyph*>(this->glyph_pointer_vector);
     }
 
-    void VectorFont::set_glyph_pointer(uint32_t childID, void* parent_pointer)
+    void VectorFont::set_glyph_pointer(uint32_t childID, ontology::Glyph* child_pointer)
     {
-        hierarchy::set_child_pointer(childID, parent_pointer, this->glyph_pointer_vector, this->free_glyphID_queue);
+        hierarchy::set_child_pointer(childID, child_pointer, this->glyph_pointer_vector, this->free_glyphID_queue);
     }
 
-    void VectorFont::set_text3D_pointer(uint32_t childID, void* parent_pointer)
+    void VectorFont::set_text3D_pointer(uint32_t childID, ontology::Text3D* child_pointer)
     {
-        hierarchy::set_child_pointer(childID, parent_pointer, this->text3D_pointer_vector, this->free_text3D_ID_queue);
+        hierarchy::set_child_pointer(childID, child_pointer, this->text3D_pointer_vector, this->free_text3D_ID_queue);
     }
 
     void VectorFont::bind_to_new_parent(ontology::Material* new_material_pointer)

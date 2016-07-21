@@ -41,16 +41,16 @@ namespace ontology
             ~Glyph();
 
             // this method sets a object pointer.
-            void set_object_pointer(uint32_t childID, void* parent_pointer);
+            void set_object_pointer(uint32_t childID, ontology::Object* child_pointer);
 
             // this method gets a object ID and removes it from the `free_objectID_queue` if it was popped from the queue.
             uint32_t get_objectID();
 
             friend class Object;
             template<class T1>
-                friend void render_children(std::vector<void*> &child_pointer_vector);
+                friend void render_children(std::vector<T1> &child_pointer_vector);
             template<class T1>
-                friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<void*> &child_pointer_vector, std::queue<uint32_t> &free_childID_queue);
+                friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1> &child_pointer_vector, std::queue<uint32_t> &free_childID_queue);
             template<class T1>
                 friend void render_species_or_glyph(T1 species_or_glyph_pointer);
 

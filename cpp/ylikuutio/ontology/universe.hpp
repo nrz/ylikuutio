@@ -145,7 +145,7 @@ namespace ontology
 
         private:
             // this method sets a scene pointer.
-            void set_scene_pointer(uint32_t childID, void* parent_pointer);
+            void set_scene_pointer(uint32_t childID, ontology::Scene* child_pointer);
 
             // this method sets a world species pointer.
             void set_terrain_species_pointer(ontology::Species* terrain_species_pointer);
@@ -154,7 +154,7 @@ namespace ontology
 
             void* terrain_species_pointer;              // pointer to world species (used in collision detection).
 
-            std::vector<void*> scene_pointer_vector;
+            std::vector<ontology::Scene*> scene_pointer_vector;
             std::queue<uint32_t> free_sceneID_queue;
     };
 }

@@ -11,6 +11,9 @@
 
 namespace ontology
 {
+    class Shader;
+    class Species;
+
     class Scene
     {
         public:
@@ -26,18 +29,18 @@ namespace ontology
             friend class Shader;
             friend class Species;
             template<class T1>
-                friend void render_children(std::vector<void*> &child_pointer_vector);
+                friend void render_children(std::vector<T1> &child_pointer_vector);
             template<class T1>
-                friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<void*> &child_pointer_vector, std::queue<uint32_t> &free_childID_queue);
+                friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1> &child_pointer_vector, std::queue<uint32_t> &free_childID_queue);
             template<class T1, class T2>
-                friend void hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent_pointer, std::vector<void*> &old_child_pointer_vector, std::queue<uint32_t> &old_free_childID_queue);
+                friend void hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent_pointer, std::vector<T1> &old_child_pointer_vector, std::queue<uint32_t> &old_free_childID_queue);
 
-        private:
             // this method renders all shaders of this scene.
             void render();
 
+        private:
             // this method sets a shader pointer.
-            void set_shader_pointer(uint32_t childID, void* parent_pointer);
+            void set_shader_pointer(uint32_t childID, ontology::Shader* child_pointer);
 
             ontology::Universe* parent_pointer;         // pointer to the world.
 
@@ -45,7 +48,7 @@ namespace ontology
 
             uint32_t childID;                     // scene ID, returned by `ontology::Universe->get_sceneID()`.
 
-            std::vector<void*> shader_pointer_vector;
+            std::vector<ontology::Shader*> shader_pointer_vector;
             std::queue<uint32_t> free_shaderID_queue;
     };
 }

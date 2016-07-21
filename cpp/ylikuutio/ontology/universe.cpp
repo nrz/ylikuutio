@@ -50,9 +50,9 @@ namespace ontology
         ontology::render_children<ontology::Scene*>(this->scene_pointer_vector);
     }
 
-    void Universe::set_scene_pointer(uint32_t childID, void* parent_pointer)
+    void Universe::set_scene_pointer(uint32_t childID, ontology::Scene* child_pointer)
     {
-        hierarchy::set_child_pointer(childID, parent_pointer, this->scene_pointer_vector, this->free_sceneID_queue);
+        hierarchy::set_child_pointer(childID, child_pointer, this->scene_pointer_vector, this->free_sceneID_queue);
     }
 
     void Universe::set_terrain_species_pointer(ontology::Species* terrain_species_pointer)

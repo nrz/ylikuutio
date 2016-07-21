@@ -26,6 +26,7 @@
 namespace ontology
 {
     class Scene;
+    class Material;
     class Object;
 
     class Shader
@@ -45,11 +46,11 @@ namespace ontology
             friend class Glyph;
             friend class Species;
             template<class T1>
-                friend void render_children(std::vector<void*> &child_pointer_vector);
+                friend void render_children(std::vector<T1> &child_pointer_vector);
             template<class T1>
-                friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<void*> &child_pointer_vector, std::queue<uint32_t> &free_childID_queue);
+                friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1> &child_pointer_vector, std::queue<uint32_t> &free_childID_queue);
             template<class T1, class T2>
-                friend void hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent_pointer, std::vector<void*> &old_child_pointer_vector, std::queue<uint32_t> &old_free_childID_queue);
+                friend void hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent_pointer, std::vector<T1> &old_child_pointer_vector, std::queue<uint32_t> &old_free_childID_queue);
             template<class T1>
                 friend void render_this_object(ontology::Object* object_pointer, ontology::Shader* shader_pointer);
 
@@ -58,7 +59,7 @@ namespace ontology
             void render();
 
             // this method sets a material pointer.
-            void set_material_pointer(uint32_t childID, void* parent_pointer);
+            void set_material_pointer(uint32_t childID, ontology::Material* child_pointer);
 
             // this method sets a scene species pointer.
             void set_terrain_species_pointer(ontology::Species* terrain_species_pointer);
@@ -80,7 +81,7 @@ namespace ontology
             std::string vertex_shader;            // filename of vertex shader.
             std::string fragment_shader;          // filename of fragment shader.
 
-            std::vector<void*> material_pointer_vector;
+            std::vector<ontology::Material*> material_pointer_vector;
             std::queue<uint32_t> free_materialID_queue;
 
             const char* char_vertex_shader;
