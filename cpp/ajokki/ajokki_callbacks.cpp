@@ -172,6 +172,7 @@ namespace ajokki
             callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*> input_parameters)
     {
+        // This serves as an example of how to use indexed input parameters.
         datatypes::AnyValue* any_value_object_pointer = input_parameters.at(0)->get_any_value();
         datatypes::AnyValue* any_value_species_pointer = input_parameters.at(1)->get_any_value();
         datatypes::AnyValue* any_value_does_suzanne_species_exist = input_parameters.at(2)->get_any_value();

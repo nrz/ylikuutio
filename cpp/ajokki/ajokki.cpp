@@ -403,6 +403,7 @@ int main(void)
     // keypress callbacks.
     std::vector<KeyAndCallbackStruct> keypress_callback_engines;
 
+    // This is one of the possible `std::vector<KeyAndCallbackStruct>`
     keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_D, delete_suzanne_species_callback_engine });
     keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_G, switch_to_grass_material_callback_engine });
     keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_U, switch_to_uvmap_material_callback_engine });
