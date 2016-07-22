@@ -284,17 +284,34 @@ namespace text2D
 
     void printText2D(PrintingStruct printing_struct)
     {
-        printText2D(
-                printing_struct.screen_width,
-                printing_struct.screen_height,
-                printing_struct.x,
-                printing_struct.y,
-                printing_struct.text_size,
-                printing_struct.font_size,
-                printing_struct.text_char,
-                printing_struct.char_font_texture_file_format,
-                printing_struct.horizontal_alignment,
-                printing_struct.vertical_alignment);
+        if (printing_struct.text.empty())
+        {
+            printText2D(
+                    printing_struct.screen_width,
+                    printing_struct.screen_height,
+                    printing_struct.x,
+                    printing_struct.y,
+                    printing_struct.text_size,
+                    printing_struct.font_size,
+                    printing_struct.text_char,
+                    printing_struct.char_font_texture_file_format,
+                    printing_struct.horizontal_alignment,
+                    printing_struct.vertical_alignment);
+        }
+        else
+        {
+            printText2D(
+                    printing_struct.screen_width,
+                    printing_struct.screen_height,
+                    printing_struct.x,
+                    printing_struct.y,
+                    printing_struct.text_size,
+                    printing_struct.font_size,
+                    printing_struct.text.c_str(),
+                    printing_struct.char_font_texture_file_format,
+                    printing_struct.horizontal_alignment,
+                    printing_struct.vertical_alignment);
+        }
     }
 
     void printText2D(
