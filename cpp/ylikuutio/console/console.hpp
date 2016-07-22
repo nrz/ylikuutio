@@ -4,6 +4,7 @@
 // Include standard headers
 #include <list>     // std::list
 
+namespace console
 {
     class Console
     {
