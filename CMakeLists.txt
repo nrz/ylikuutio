@@ -8,6 +8,9 @@ project(ylikuutio)
 # comment the following line to disable unit tests with Google Test.
 set(DO_UNIT_TESTS_WITH_GOOGLE_TEST true)
 
+# uncomment the following line to disable updating of external projects.
+set(DISABLE_UPDATE_STEP)
+
 find_package(OpenGL REQUIRED)
 find_package(Threads REQUIRED)
 find_package(eigen)
@@ -59,17 +62,33 @@ include_directories(
     .
     )
 
-# Download and install Eigen
-ExternalProject_Add(
-    eigen
-    GIT_REPOSITORY https://github.com/RLovelett/eigen
-    PREFIX ${CMAKE_CURRENT_BINARY_DIR}/eigen
-    # Disable install step
-    INSTALL_COMMAND ""
-    LOG_DOWNLOAD ON
-    LOG_DOWNLOAD ON
-    LOG_BUILD ON
-    )
+if (DISABLE_UPDATE_STEP)
+    # Download and install Eigen
+    ExternalProject_Add(
+        eigen
+        GIT_REPOSITORY https://github.com/RLovelett/eigen
+        PREFIX ${CMAKE_CURRENT_BINARY_DIR}/eigen
+        # Disable install step
+        INSTALL_COMMAND ""
+        UPDATE_COMMAND ""
+        LOG_DOWNLOAD ON
+        LOG_DOWNLOAD ON
+        LOG_BUILD ON
+        )
+else()
+    # Download and install Eigen
+    ExternalProject_Add(
+        eigen
+        GIT_REPOSITORY https://github.com/RLovelett/eigen
+        PREFIX ${CMAKE_CURRENT_BINARY_DIR}/eigen
+        # Disable install step
+        INSTALL_COMMAND ""
+        UPDATE_COMMAND ""
+        LOG_DOWNLOAD ON
+        LOG_DOWNLOAD ON
+        LOG_BUILD ON
+        )
+endif()
 
 # http://stackoverflow.com/questions/17446981/cmake-externalproject-add-and-findpackage/17473508#17473508
 if (NOT ${eigen_FOUND})
