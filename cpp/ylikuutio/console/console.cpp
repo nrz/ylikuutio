@@ -7,40 +7,39 @@ namespace console
         this->cursor_index = 0;
     }
 
-    Console::add_character(char character)
-    {
-        this->current_input.insert
-    }
-
-    Console::move_cursor_left()
+    void Console::add_character(char character)
     {
     }
 
-    Console::move_cursor_right()
+    void Console::move_cursor_left()
     {
     }
 
-    Console::move_cursor_to_start_of_line()
+    void Console::move_cursor_right()
     {
     }
 
-    Console::move_cursor_to_end_of_line()
+    void Console::move_cursor_to_start_of_line()
     {
     }
 
-    Console::page_up()
+    void Console::move_cursor_to_end_of_line()
     {
     }
 
-    Console::page_down()
+    void Console::page_up()
     {
     }
 
-    Console::home()
+    void Console::page_down()
     {
     }
 
-    Console::end()
+    void Console::home()
+    {
+    }
+
+    void Console::end()
     {
     }
 }
