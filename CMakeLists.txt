@@ -277,7 +277,7 @@ add_executable(ajokki
     # console, in alphabetical order.
     cpp/ylikuutio/console/console_keypress_callbacks.cpp
     cpp/ylikuutio/console/console_keypress_callbacks.hpp
-    cpp/ylikuutio/console/console.hpp
+    cpp/ylikuutio/console/console.cpp
     cpp/ylikuutio/console/console.hpp
 
     # file, in alphabetical order.
