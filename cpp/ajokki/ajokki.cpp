@@ -587,8 +587,10 @@ int main(void)
                     // `current_callback_engine_vector_pointer` given that they
                     // signal it, eg. with `ENTER_CONSOLE_MAGIC_NUMBER`
                     // (as in this loop).
+                    delete any_value;
                     break;
                 }
+                delete any_value;
             }
         }
 
