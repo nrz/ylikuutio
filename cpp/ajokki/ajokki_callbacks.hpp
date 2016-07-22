@@ -1,3 +1,6 @@
+#ifndef __AJOKKI_CALLBACKS_HPP_INCLUDED
+#define __AJOKKI_CALLBACKS_HPP_INCLUDED
+
 #include "cpp/ylikuutio/common/any_value.hpp"
 #include "cpp/ylikuutio/callback_system/callback_parameter.hpp"
 #include "cpp/ylikuutio/callback_system/callback_object.hpp"
@@ -27,3 +30,4 @@ namespace ajokki
             std::vector<callback_system::CallbackParameter*> input_parameters);
 }
 
+#endif
