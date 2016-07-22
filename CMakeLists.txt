@@ -2,6 +2,12 @@
 cmake_minimum_required(VERSION 2.6.2)
 project(ylikuutio)
 
+# uncomment the following line to do unit tests also with Catch.
+# set(DO_UNIT_TESTS_WITH_CATCH true)
+
+# comment the following line to disable unit tests with Google Test.
+set(DO_UNIT_TESTS_WITH_GOOGLE_TEST true)
+
 find_package(OpenGL REQUIRED)
 find_package(Threads REQUIRED)
 find_package(eigen)
@@ -33,12 +39,6 @@ include(MSVCMultipleProcessCompile) # /MP
 if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE Release)
 endif()
-
-# uncomment the following line to do unit tests also with Catch.
-# set(DO_UNIT_TESTS_WITH_CATCH true)
-
-# comment the following line to disable unit tests with Google Test.
-set(DO_UNIT_TESTS_WITH_GOOGLE_TEST true)
 
 include(ExternalProject) # for ExternalProject_Add
 
