@@ -8,6 +8,7 @@
 #endif
 
 #include "ajokki_callbacks.hpp"
+#include "ajokki_magic_numbers.hpp"
 #include "cpp/ylikuutio/callback_system/callback_parameter.hpp"
 #include "cpp/ylikuutio/callback_system/callback_object.hpp"
 #include "cpp/ylikuutio/callback_system/callback_engine.hpp"
@@ -407,7 +408,8 @@ int main(void)
     std::vector<KeyAndCallbackStruct>* current_callback_engine_vector_pointer;
     current_callback_engine_vector_pointer = &keypress_callback_engines;
 
-    // This is one of the possible `std::vector<KeyAndCallbackStruct>`
+    // This is one of the possible `std::vector<KeyAndCallbackStruct>`.
+    // Keypresses are checked in the order of this struct.
     keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_D, delete_suzanne_species_callback_engine });
     keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_G, switch_to_grass_material_callback_engine });
     keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_U, switch_to_uvmap_material_callback_engine });
@@ -571,7 +573,22 @@ int main(void)
             if (glfwGetKey(window, (*current_callback_engine_vector_pointer).at(i).keycode) == GLFW_PRESS)
             {
                 callback_system::CallbackEngine* callback_engine = (*current_callback_engine_vector_pointer).at(i).callback_engine;
-                callback_engine->execute();
+                datatypes::AnyValue* any_value = callback_engine->execute();
+
+                if (any_value != nullptr &&
+                        any_value->type == datatypes::UINT32_T &&
+                        any_value->uint32_t_value == ENTER_CONSOLE_MAGIC_NUMBER)
+                {
+                    // Do not read more keys, we are entering the console now.
+                    // This is to make callback-related code simpler, we don't
+                    // need to worry about consecutive changes in program mode
+                    // or in `current_callback_engine_vector_pointer`.
+                    // That allows callbacks can change
+                    // `current_callback_engine_vector_pointer` given that they
+                    // signal it, eg. with `ENTER_CONSOLE_MAGIC_NUMBER`
+                    // (as in this loop).
+                    break;
+                }
             }
         }
 

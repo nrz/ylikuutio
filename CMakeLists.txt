@@ -330,6 +330,7 @@ add_executable(ajokki
     cpp/ajokki/ajokki.cpp
     cpp/ajokki/ajokki_callbacks.cpp
     cpp/ajokki/ajokki_callbacks.hpp
+    cpp/ajokki/ajokki_magic_numbers.hpp
     )
 add_dependencies(ajokki Rescan)
 target_link_libraries(ajokki ${ALL_LIBS})
