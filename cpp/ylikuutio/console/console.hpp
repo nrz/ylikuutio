@@ -1,5 +1,9 @@
 #ifndef __CONSOLE_HPP_INCLUDED
 #define __CONSOLE_HPP_INCLUDED
+
+// Include standard headers
+#include <list>     // std::list
+
 {
     class Console
     {
