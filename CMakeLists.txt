@@ -177,6 +177,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
             PREFIX ${CMAKE_CURRENT_BINARY_DIR}/gmock
             # Disable install step
             INSTALL_COMMAND ""
+            UPDATE_COMMAND ""
             LOG_DOWNLOAD ON
             LOG_DOWNLOAD ON
             LOG_BUILD ON
