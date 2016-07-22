@@ -114,17 +114,32 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         ${CMAKE_CURRENT_BINARY_DIR}/gmock/src/googletest/googletest/include/
         )
 
-    # Download and install GoogleTest
-    ExternalProject_Add(
-        googletest
-        GIT_REPOSITORY https://github.com/google/googletest
-        PREFIX ${CMAKE_CURRENT_BINARY_DIR}/gtest
-        # Disable install step
-        INSTALL_COMMAND ""
-        LOG_DOWNLOAD ON
-        LOG_DOWNLOAD ON
-        LOG_BUILD ON
-        )
+    if (DISABLE_UPDATE_STEP)
+        # Download and install GoogleTest
+        ExternalProject_Add(
+            googletest
+            GIT_REPOSITORY https://github.com/google/googletest
+            PREFIX ${CMAKE_CURRENT_BINARY_DIR}/gtest
+            # Disable install step
+            INSTALL_COMMAND ""
+            UPDATE_COMMAND ""
+            LOG_DOWNLOAD ON
+            LOG_DOWNLOAD ON
+            LOG_BUILD ON
+            )
+    else()
+        # Download and install GoogleTest
+        ExternalProject_Add(
+            googletest
+            GIT_REPOSITORY https://github.com/google/googletest
+            PREFIX ${CMAKE_CURRENT_BINARY_DIR}/gtest
+            # Disable install step
+            INSTALL_COMMAND ""
+            LOG_DOWNLOAD ON
+            LOG_DOWNLOAD ON
+            LOG_BUILD ON
+            )
+    endif()
 
     # Create a libgtest target to be used as a dependency by test programs
     add_library(libgtest IMPORTED STATIC GLOBAL)
@@ -154,17 +169,31 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         ${GTEST_LIBRARY_PATH} )
     add_dependencies(${GTEST_LIBRARY} googletest)
 
-    # Download and install GoogleMock
-    ExternalProject_Add(
-        googlemock
-        GIT_REPOSITORY https://github.com/google/googletest
-        PREFIX ${CMAKE_CURRENT_BINARY_DIR}/gmock
-        # Disable install step
-        INSTALL_COMMAND ""
-        LOG_DOWNLOAD ON
-        LOG_DOWNLOAD ON
-        LOG_BUILD ON
-        )
+    if (DISABLE_UPDATE_STEP)
+        # Download and install GoogleMock
+        ExternalProject_Add(
+            googlemock
+            GIT_REPOSITORY https://github.com/google/googletest
+            PREFIX ${CMAKE_CURRENT_BINARY_DIR}/gmock
+            # Disable install step
+            INSTALL_COMMAND ""
+            LOG_DOWNLOAD ON
+            LOG_DOWNLOAD ON
+            LOG_BUILD ON
+            )
+    else()
+        # Download and install GoogleMock
+        ExternalProject_Add(
+            googlemock
+            GIT_REPOSITORY https://github.com/google/googletest
+            PREFIX ${CMAKE_CURRENT_BINARY_DIR}/gmock
+            # Disable install step
+            INSTALL_COMMAND ""
+            LOG_DOWNLOAD ON
+            LOG_DOWNLOAD ON
+            LOG_BUILD ON
+            )
+    endif()
 
     # Create a libgmock target to be used as a dependency by test programs
     add_library(libgmock IMPORTED STATIC GLOBAL)
