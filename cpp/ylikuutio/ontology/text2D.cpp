@@ -82,7 +82,7 @@ namespace text2D
             GLuint y,
             GLuint text_size,
             GLuint font_size,
-            const char* text,
+            const char* text_char,
             const char* char_font_texture_file_format,
             const char* horizontal_alignment,
             const char* vertical_alignment)
@@ -94,7 +94,7 @@ namespace text2D
         //
         // If horizontal alignment is right, each line ends in the same x coordinate.
         // Newlines need to be checked beforehand.
-        uint32_t length = std::strlen(text);
+        uint32_t length = std::strlen(text_char);
 
         // Count the number of lines.
         uint32_t number_of_lines = 1;
@@ -103,12 +103,12 @@ namespace text2D
 
         while(i < length)
         {
-            char character = text[i++];
+            char character = text_char[i++];
 
             if (character == (char) '\\')
             {
                 // OK, this character was backslash, so read the next character.
-                character = text[i++];
+                character = text_char[i++];
 
                 if (character == 'n')
                 {
@@ -165,12 +165,12 @@ namespace text2D
             GLfloat vertex_down_right_x;
             GLfloat vertex_down_right_y;
 
-            char character = text[i++];
+            char character = text_char[i++];
 
             if (character == (char) '\\')
             {
                 // OK, this character was backslash, so read the next character.
-                character = text[i++];
+                character = text_char[i++];
 
                 if (character == 'n')
                 {
@@ -291,7 +291,7 @@ namespace text2D
                 printing_struct.y,
                 printing_struct.text_size,
                 printing_struct.font_size,
-                printing_struct.text,
+                printing_struct.text_char,
                 printing_struct.char_font_texture_file_format,
                 printing_struct.horizontal_alignment,
                 printing_struct.vertical_alignment);
@@ -304,10 +304,10 @@ namespace text2D
             GLuint y,
             GLuint text_size,
             GLuint font_size,
-            const char* text,
+            const char* text_char,
             const char* char_font_texture_file_format)
     {
-        printText2D(screen_width, screen_height, x, y, text_size, font_size, text, char_font_texture_file_format, "left", "bottom");
+        printText2D(screen_width, screen_height, x, y, text_size, font_size, text_char, char_font_texture_file_format, "left", "bottom");
     }
 
     void cleanupText2D()

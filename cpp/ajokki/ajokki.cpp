@@ -517,7 +517,7 @@ int main(void)
             // print cartesian coordinates on bottom left corner.
             printing_struct.x = 0;
             printing_struct.y = 0;
-            printing_struct.text = angles_and_coordinates_text;
+            printing_struct.text_char = angles_and_coordinates_text;
             printing_struct.horizontal_alignment = "left";
             printing_struct.vertical_alignment = "bottom";
             text2D::printText2D(printing_struct);
@@ -527,7 +527,7 @@ int main(void)
                 // print help text.
                 printing_struct.x = 0;
                 printing_struct.y = window_height - (2 * text_size);
-                printing_struct.text = help_text_char;
+                printing_struct.text_char = help_text_char;
                 printing_struct.horizontal_alignment = "left";
                 printing_struct.vertical_alignment = "top";
                 text2D::printText2D(printing_struct);
@@ -538,7 +538,7 @@ int main(void)
                 // print spherical coordinates on bottom left corner.
                 printing_struct.x = 0;
                 printing_struct.y += 2 * text_size;
-                printing_struct.text = spherical_coordinates_text;
+                printing_struct.text_char = spherical_coordinates_text;
                 printing_struct.horizontal_alignment = "left";
                 printing_struct.vertical_alignment = "bottom";
                 text2D::printText2D(printing_struct);
@@ -547,7 +547,7 @@ int main(void)
             // print time data on top left corner.
             printing_struct.x = 0;
             printing_struct.y = (GLuint) window_height;
-            printing_struct.text = time_text;
+            printing_struct.text_char = time_text;
             printing_struct.horizontal_alignment = "left";
             printing_struct.vertical_alignment = "top";
             text2D::printText2D(printing_struct);
@@ -557,7 +557,7 @@ int main(void)
                 // print frame rate data on top right corner.
                 printing_struct.x = window_width;
                 printing_struct.y = window_height;
-                printing_struct.text = ms_frame_text;
+                printing_struct.text_char = ms_frame_text;
                 printing_struct.horizontal_alignment = "right";
                 printing_struct.vertical_alignment = "top";
                 text2D::printText2D(printing_struct);

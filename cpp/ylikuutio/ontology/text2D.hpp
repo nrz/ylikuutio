@@ -24,7 +24,7 @@ namespace text2D
             GLuint y,
             GLuint text_size,
             GLuint font_size,
-            const char* text,
+            const char* text_char,
             const char* char_font_texture_file_format,
             const char* horizontal_alignment,
             const char* vertical_alignment);
@@ -38,7 +38,7 @@ namespace text2D
             GLuint y,
             GLuint text_size,
             GLuint font_size,
-            const char* text,
+            const char* text_char,
             const char* char_font_texture_file_format);
 
     void cleanupText2D();
