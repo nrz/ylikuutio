@@ -320,12 +320,6 @@ typedef datatypes::AnyValue* (*InputParametersToAnyValueCallback) (
         callback_system::CallbackObject*,
         std::vector<callback_system::CallbackParameter*>);
 
-typedef struct
-{
-    uint32_t keycode;
-    callback_system::CallbackEngine* callback_engine;
-} KeyAndCallbackStruct;
-
 extern SphericalCoordinatesStruct spherical_position;
 
 #endif

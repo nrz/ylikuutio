@@ -268,6 +268,7 @@ add_executable(ajokki
     cpp/ylikuutio/callback_system/callback_object.hpp
     cpp/ylikuutio/callback_system/callback_parameter.cpp
     cpp/ylikuutio/callback_system/callback_parameter.hpp
+    cpp/ylikuutio/callback_system/key_and_callback_struct.hpp
 
     # common, in alphabetical order
     cpp/ylikuutio/common/any_value.cpp
