@@ -524,7 +524,7 @@ int main(void)
             {
                 // print help text.
                 printing_struct.x = 0;
-                printing_struct.y = window_height - (4 * text_size);
+                printing_struct.y = window_height - (7 * text_size);
                 printing_struct.text_char = help_text_char;
                 printing_struct.horizontal_alignment = "left";
                 printing_struct.vertical_alignment = "top";
