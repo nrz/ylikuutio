@@ -55,8 +55,14 @@ if(INCLUDE_DISTRIB)
     add_subdirectory(distrib)
 endif(INCLUDE_DISTRIB)
 
+# Do not compile GLFW tests, examples and documentation.
+set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
+set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
+set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
+
 include_directories(
-    external/glfw-3.0.3/include/GLFW/
+    external/glfw-3.2/include/GLFW/
+    external/glfw-3.2/include/
     external/glm-0.9.4.0/
     external/glew-2.0.0/include/
     .
@@ -227,7 +233,6 @@ endif()
 
 set(ALL_LIBS
     ${OPENGL_LIBRARY}
-    GLFW_303
     GLEW_200
     )
 
@@ -385,7 +390,7 @@ add_executable(ajokki
     cpp/ajokki/ajokki_callbacks.hpp
     )
 add_dependencies(ajokki rescan)
-target_link_libraries(ajokki ${ALL_LIBS})
+target_link_libraries(ajokki ${ALL_LIBS} glfw)
 if(${eigen_FOUND})
     # target_link_libraries(ajokki ${eigen_LIBRARY})
     target_link_libraries(ajokki ${ALL_LIBS})
