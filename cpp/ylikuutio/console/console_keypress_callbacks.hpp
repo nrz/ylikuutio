@@ -8,6 +8,9 @@
 
 namespace console
 {
+    //void charmods_callback(GLFWwindow* window, unsigned int codepoint, int mods);
+    void character_callback(GLFWwindow* window, unsigned int codepoint);
+
     datatypes::AnyValue* exit_console(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject* callback_object,

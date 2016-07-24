@@ -1,7 +1,14 @@
 #include "console.hpp"
+#include "console_keypress_callbacks.hpp"
 #include "cpp/ylikuutio/ontology/text2D.hpp"
 #include "cpp/ylikuutio/common/globals.hpp"
 #include "cpp/ylikuutio/string/ylikuutio_string.hpp"
+
+// Include GLFW
+#ifndef __GLFW3_H_INCLUDED
+#define __GLFW3_H_INCLUDED
+#include <glfw3.h>
+#endif
 
 namespace console
 {
@@ -65,10 +72,12 @@ namespace console
 
             // Set new callback engine vector pointer.
             *this->current_callback_engine_vector_pointer_pointer = this->my_callback_engine_vector_pointer;
-
-            // Mark that we're in console.
-            this->in_console = true;
         }
+
+        // glfwSetCharModsCallback(window, console::charmods_callback);
+        glfwSetCharCallback(window, console::character_callback);
+        // Mark that we're in console.
+        this->in_console = true;
     }
 
     void Console::exit_console()
@@ -77,8 +86,10 @@ namespace console
         {
             // Restore previous callback engine vector pointer.
             *this->current_callback_engine_vector_pointer_pointer = this->previous_callback_engine_vector_pointer;
-            this->in_console = false;
         }
+
+        glfwSetCharCallback(window, nullptr);
+        this->in_console = false;
     }
 
     void Console::add_character(char character)

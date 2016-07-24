@@ -324,33 +324,6 @@ int main(void)
     callback_system::CallbackParameter* exit_console_parameter = new callback_system::CallbackParameter(
             "console_pointer", new datatypes::AnyValue(my_console), false, exit_console_callback_object);
 
-    // Callback code for A: add character `'a'` to current input in console.
-    callback_system::CallbackEngine* add_character_a_callback_engine = new callback_system::CallbackEngine();
-    callback_system::CallbackObject* add_character_a_callback_object = new callback_system::CallbackObject(
-            &console::add_character, add_character_a_callback_engine);
-    callback_system::CallbackParameter* add_character_a_console_pointer = new callback_system::CallbackParameter(
-            "console_pointer", new datatypes::AnyValue(my_console), false, add_character_a_callback_object);
-    callback_system::CallbackParameter* add_character_a_callback_parameter = new callback_system::CallbackParameter(
-            "character", new datatypes::AnyValue('a'), false, add_character_a_callback_object);
-
-    // Callback code for B: add character `'b'` to current input in console.
-    callback_system::CallbackEngine* add_character_b_callback_engine = new callback_system::CallbackEngine();
-    callback_system::CallbackObject* add_character_b_callback_object = new callback_system::CallbackObject(
-            &console::add_character, add_character_b_callback_engine);
-    callback_system::CallbackParameter* add_character_b_console_pointer = new callback_system::CallbackParameter(
-            "console_pointer", new datatypes::AnyValue(my_console), false, add_character_b_callback_object);
-    callback_system::CallbackParameter* add_character_b_callback_parameter = new callback_system::CallbackParameter(
-            "character", new datatypes::AnyValue('b'), false, add_character_b_callback_object);
-
-    // Callback code for C: add character `'c'` to current input in console.
-    callback_system::CallbackEngine* add_character_c_callback_engine = new callback_system::CallbackEngine();
-    callback_system::CallbackObject* add_character_c_callback_object = new callback_system::CallbackObject(
-            &console::add_character, add_character_c_callback_engine);
-    callback_system::CallbackParameter* add_character_c_console_pointer = new callback_system::CallbackParameter(
-            "console_pointer", new datatypes::AnyValue(my_console), false, add_character_c_callback_object);
-    callback_system::CallbackParameter* add_character_c_callback_parameter = new callback_system::CallbackParameter(
-            "character", new datatypes::AnyValue('c'), false, add_character_c_callback_object);
-
     // Callback code for backspace: delete character left of cursor from current input in console.
     callback_system::CallbackEngine* backspace_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* backspace_callback_object = new callback_system::CallbackObject(
@@ -473,9 +446,6 @@ int main(void)
     std::vector<KeyAndCallbackStruct> console_QWERTY_keypress_callback_engines;
     console_QWERTY_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_GRAVE_ACCENT, exit_console_callback_engine });
     console_QWERTY_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_BACKSPACE, backspace_callback_engine });
-    console_QWERTY_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_A, add_character_a_callback_engine });
-    console_QWERTY_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_B, add_character_b_callback_engine });
-    console_QWERTY_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_C, add_character_c_callback_engine });
     my_console->set_my_callback_engine_vector_pointer(&console_QWERTY_keypress_callback_engines);
 
     // Standard Dvorak keypress callbacks for console.
