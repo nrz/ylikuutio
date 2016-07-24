@@ -264,6 +264,7 @@ add_executable(ajokki
     # callback_system, in alphabetical order
     cpp/ylikuutio/callback_system/callback_engine.cpp
     cpp/ylikuutio/callback_system/callback_engine.hpp
+    cpp/ylikuutio/callback_system/callback_magic_numbers.hpp
     cpp/ylikuutio/callback_system/callback_object.cpp
     cpp/ylikuutio/callback_system/callback_object.hpp
     cpp/ylikuutio/callback_system/callback_parameter.cpp
@@ -380,7 +381,6 @@ add_executable(ajokki
     cpp/ajokki/ajokki.cpp
     cpp/ajokki/ajokki_callbacks.cpp
     cpp/ajokki/ajokki_callbacks.hpp
-    cpp/ajokki/ajokki_magic_numbers.hpp
     )
 add_dependencies(ajokki Rescan)
 target_link_libraries(ajokki ${ALL_LIBS})

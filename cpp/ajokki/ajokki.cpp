@@ -8,10 +8,10 @@
 #endif
 
 #include "ajokki_callbacks.hpp"
-#include "ajokki_magic_numbers.hpp"
 #include "cpp/ylikuutio/callback_system/callback_parameter.hpp"
 #include "cpp/ylikuutio/callback_system/callback_object.hpp"
 #include "cpp/ylikuutio/callback_system/callback_engine.hpp"
+#include "cpp/ylikuutio/callback_system/callback_magic_numbers.hpp"
 #include "cpp/ylikuutio/callback_system/key_and_callback_struct.hpp"
 #include "cpp/ylikuutio/ontology/shader_loader.hpp"
 #include "cpp/ylikuutio/ontology/texture_loader.hpp"
