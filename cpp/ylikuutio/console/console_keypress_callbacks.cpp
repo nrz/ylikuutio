@@ -21,7 +21,12 @@ namespace console
     // So: `unsigned int codepoint`, `int mods`.
     void charmods_callback(GLFWwindow* window, unsigned int codepoint, int mods)
     {
-        std::cout << "Hello from character_callback! codepoint: " << codepoint << "\n";
+        // `int mods` values:
+        // No modificators:       0x00
+        // Shift (left or right): 0x01
+        // Alt (not AltGr):       0x04
+        // Shift + Alt:           0x05
+        std::cout << "Hello from character_callback! codepoint: 0x" << std::hex << codepoint << ", mods: 0x" << mods << "\n";
 
         global_console_pointer->add_character(codepoint);
     }
