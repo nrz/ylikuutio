@@ -49,7 +49,6 @@ namespace ontology
 
         // Data read from the header of the BMP file
         unsigned char header[54];
-        uint32_t dataPos;
         uint32_t imageSize;
         // Actual RGB image data.
         uint8_t *image_data;
@@ -93,7 +92,6 @@ namespace ontology
         }
 
         // Read the information about the image
-        dataPos      = *(uint32_t*) & (header[0x0A]);
         imageSize    = *(uint32_t*) & (header[0x22]);
         image_width  = *(uint32_t*) & (header[0x12]);
         image_height = *(uint32_t*) & (header[0x16]);
@@ -105,11 +103,6 @@ namespace ontology
         if (imageSize == 0)
         {
             imageSize = image_width * image_height * 3; // 3 : one byte for each Red, Green and Blue component
-        }
-
-        if (dataPos == 0)
-        {
-            dataPos = 54; // The BMP header is done that way
         }
 
         // Create a buffer.
