@@ -20,6 +20,11 @@ namespace ontology
     class Text3D;
 }
 
+namespace console
+{
+    class Console;
+}
+
 namespace datatypes
 {
     enum datatype
@@ -44,7 +49,8 @@ namespace datatypes
         OBJECT_POINTER,
         VECTORFONT_POINTER,
         GLYPH_POINTER,
-        TEXT3D_POINTER
+        TEXT3D_POINTER,
+        CONSOLE_POINTER
     };
 
     typedef class AnyValue
@@ -71,6 +77,7 @@ namespace datatypes
             AnyValue(ontology::VectorFont* vector_font_pointer);
             AnyValue(ontology::Glyph* glyph_pointer);
             AnyValue(ontology::Text3D* text3D_pointer);
+            AnyValue(console::Console* console_pointer);
 
             AnyValue(std::string type, bool bool_value);
             AnyValue(std::string type, char char_value);
@@ -92,6 +99,7 @@ namespace datatypes
             AnyValue(std::string type, ontology::VectorFont* vector_font_pointer);
             AnyValue(std::string type, ontology::Glyph* glyph_pointer);
             AnyValue(std::string type, ontology::Text3D* text3D_pointer);
+            AnyValue(std::string type, console::Console* console_pointer);
 
             int type;
             bool bool_value;
@@ -114,6 +122,7 @@ namespace datatypes
             ontology::VectorFont* vector_font_pointer;
             ontology::Glyph* glyph_pointer;
             ontology::Text3D* text3D_pointer;
+            console::Console* console_pointer;
 
         private:
             void set_default_values();

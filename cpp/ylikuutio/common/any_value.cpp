@@ -6,6 +6,11 @@
 #include <string>   // std::string
 #include <stdint.h> // uint32_t etc.
 
+namespace console
+{
+    class Console;
+}
+
 namespace datatypes
 {
     void AnyValue::set_default_values()
@@ -31,6 +36,7 @@ namespace datatypes
         this->vector_font_pointer = nullptr;
         this->glyph_pointer = nullptr;
         this->text3D_pointer = nullptr;
+        this->console_pointer = nullptr;
     }
 
     AnyValue::AnyValue()
@@ -419,6 +425,25 @@ namespace datatypes
         {
             this->type = datatypes::TEXT3D_POINTER;
             this->text3D_pointer = text3D_pointer;
+        }
+    }
+
+    AnyValue::AnyValue(console::Console* console_pointer)
+    {
+        // constructor.
+        this->set_default_values();
+        this->type = datatypes::CONSOLE_POINTER;
+        this->console_pointer = console_pointer;
+    }
+
+    AnyValue::AnyValue(std::string type, console::Console* console_pointer)
+    {
+        // constructor.
+        this->set_default_values();
+        if (std::strcmp(type.c_str(), "console::Console*"))
+        {
+            this->type = datatypes::CONSOLE_POINTER;
+            this->console_pointer = console_pointer;
         }
     }
 }
