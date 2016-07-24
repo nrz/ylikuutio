@@ -50,3 +50,4 @@ GLfloat mouseSpeed = 0.005f;
 glm::vec3 camera_position;
 
 GLFWwindow* window;
+console::Console* global_console_pointer = nullptr;

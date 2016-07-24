@@ -89,6 +89,7 @@ extern GLfloat mouseSpeed;
 extern glm::vec3 camera_position;
 
 extern GLFWwindow* window;
+extern console::Console* global_console_pointer;
 
 namespace ontology
 {
