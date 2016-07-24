@@ -48,3 +48,5 @@ GLfloat twin_turbo_factor;
 GLfloat mouseSpeed = 0.005f;
 
 glm::vec3 camera_position;
+
+GLFWwindow* window;

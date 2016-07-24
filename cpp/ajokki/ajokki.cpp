@@ -43,8 +43,6 @@
 #include <glfw3.h>
 #endif
 
-GLFWwindow* window;
-
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
 #define __GLM_GLM_HPP_INCLUDED

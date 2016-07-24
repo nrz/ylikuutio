@@ -88,6 +88,8 @@ extern GLfloat mouseSpeed;
 
 extern glm::vec3 camera_position;
 
+extern GLFWwindow* window;
+
 namespace ontology
 {
     class Universe;
