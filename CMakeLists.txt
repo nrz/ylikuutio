@@ -9,7 +9,7 @@ project(ylikuutio)
 set(DO_UNIT_TESTS_WITH_GOOGLE_TEST true)
 
 # uncomment the following line to disable updating of external projects.
-set(DISABLE_UPDATE_STEP)
+# set(DISABLE_UPDATE_STEP)
 
 find_package(OpenGL REQUIRED)
 find_package(Threads REQUIRED)
