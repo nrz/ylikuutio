@@ -19,8 +19,7 @@ namespace console
 {
     // Keep these variable types as this is according to GLFW documentation!
     // So: `unsigned int codepoint`, `int mods`.
-    // void charmods_callback(GLFWwindow* window, unsigned int codepoint, int mods)
-    void character_callback(GLFWwindow* window, unsigned int codepoint)
+    void charmods_callback(GLFWwindow* window, unsigned int codepoint, int mods)
     {
         std::cout << "Hello from character_callback! codepoint: " << codepoint << "\n";
 

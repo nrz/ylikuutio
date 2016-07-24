@@ -74,8 +74,8 @@ namespace console
             *this->current_callback_engine_vector_pointer_pointer = this->my_callback_engine_vector_pointer;
         }
 
-        // glfwSetCharModsCallback(window, console::charmods_callback);
-        glfwSetCharCallback(window, console::character_callback);
+        glfwSetCharModsCallback(window, console::charmods_callback);
+
         // Mark that we're in console.
         this->in_console = true;
     }
@@ -88,7 +88,8 @@ namespace console
             *this->current_callback_engine_vector_pointer_pointer = this->previous_callback_engine_vector_pointer;
         }
 
-        glfwSetCharCallback(window, nullptr);
+        glfwSetCharModsCallback(window, nullptr);
+
         this->in_console = false;
     }
 
