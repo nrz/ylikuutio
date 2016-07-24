@@ -4,7 +4,16 @@ A hobby project of mine. Work in progress.
 
 Some code is based on http://www.opengl-tutorial.org/ and is
 under the license conditions stated on opengl-tutorial website:
-WTF Public License: "you just do what the f*** you want to".
+WTF Public License, version 2, December 2004:
+"You just DO WHAT THE FUCK YOU WANT TO. ```"
+http://www.opengl-tutorial.org/download/
+
+GLFW is licensed under the zlib/libpng license.
+http://www.glfw.org/license.html
+
+OpenGL Mathematics (GLM) is licensed under The Happy Bunny License
+and MIT License.
+http://glm.g-truc.net/copying.txt
 
 My own code is under The GNU General Public License 3, or
 (at your option) any later version. See LICENSE file.
