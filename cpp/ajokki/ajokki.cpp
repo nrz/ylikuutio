@@ -308,6 +308,7 @@ int main(void)
     current_callback_engine_vector_pointer = &keypress_callback_engines;
 
     console::Console* my_console = new console::Console(&current_callback_engine_vector_pointer); // create a console.
+    global_console_pointer = my_console;
 
     // Callback code for `GLFW_KEY_GRAVE_ACCENT` (tilde key above Tab, usually used for console).
     callback_system::CallbackEngine* enter_console_callback_engine = new callback_system::CallbackEngine();
