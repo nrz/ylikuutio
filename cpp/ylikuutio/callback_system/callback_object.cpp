@@ -151,5 +151,6 @@ namespace callback_system
         {
             return this->callback(this->parent_pointer, this, this->callback_parameter_pointer_vector);
         }
+        return nullptr;
     }
 }
