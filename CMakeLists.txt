@@ -70,6 +70,7 @@ if (DISABLE_UPDATE_STEP)
         PREFIX ${CMAKE_CURRENT_BINARY_DIR}/eigen
         # Disable install step
         INSTALL_COMMAND ""
+        # Disable update step
         UPDATE_COMMAND ""
         LOG_DOWNLOAD ON
         LOG_DOWNLOAD ON
@@ -121,6 +122,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
             PREFIX ${CMAKE_CURRENT_BINARY_DIR}/gtest
             # Disable install step
             INSTALL_COMMAND ""
+            # Disable update step
             UPDATE_COMMAND ""
             LOG_DOWNLOAD ON
             LOG_DOWNLOAD ON
@@ -176,6 +178,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
             PREFIX ${CMAKE_CURRENT_BINARY_DIR}/gmock
             # Disable install step
             INSTALL_COMMAND ""
+            # Disable update step
             UPDATE_COMMAND ""
             LOG_DOWNLOAD ON
             LOG_DOWNLOAD ON
