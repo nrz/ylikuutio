@@ -2,12 +2,14 @@
 #include "cpp/ylikuutio/callback_system/callback_parameter.hpp"
 #include "cpp/ylikuutio/callback_system/callback_object.hpp"
 #include "cpp/ylikuutio/callback_system/callback_engine.hpp"
-#include "cpp/ylikuutio/common/any_value.hpp"
+#include "cpp/ylikuutio/callback_system/callback_magic_numbers.hpp"
+#include "cpp/ylikuutio/console/console.hpp"
 #include "cpp/ylikuutio/ontology/text2D.hpp"
 #include "cpp/ylikuutio/ontology/object.hpp"
 #include "cpp/ylikuutio/ontology/species.hpp"
 #include "cpp/ylikuutio/ontology/material.hpp"
 #include "cpp/ylikuutio/ontology/universe.hpp"
+#include "cpp/ylikuutio/common/any_value.hpp"
 
 // Include GLFW
 #ifndef __GLFW3_H_INCLUDED
@@ -61,6 +63,27 @@ namespace ajokki
         // Close OpenGL window and terminate GLFW
         glfwTerminate();
         return nullptr;
+    }
+
+    datatypes::AnyValue* enter_console(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject* callback_object,
+            std::vector<callback_system::CallbackParameter*>)
+    {
+        datatypes::AnyValue* any_value_console = callback_object->get_any_value("console_pointer");
+
+        if (any_value_console->type != datatypes::CONSOLE_POINTER)
+        {
+            return nullptr;
+        }
+
+        console::Console* console = any_value_console->console_pointer;
+        console->enter_console();
+
+        // Signal to caller that we have entered the console.
+        uint32_t enter_console_magic_number = ENTER_CONSOLE_MAGIC_NUMBER;
+        datatypes::AnyValue* any_value_magic_number = new datatypes::AnyValue(enter_console_magic_number);
+        return any_value_magic_number;
     }
 
     datatypes::AnyValue* delete_suzanne_species(

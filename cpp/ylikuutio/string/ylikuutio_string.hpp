@@ -2,6 +2,7 @@
 #define __YLIKUUTIO_STRING_HPP_INCLUDED
 
 // Include standard headers
+#include <list>      // std::list
 #include <string>    // std::string
 #include <vector>    // std::vector
 
@@ -14,6 +15,8 @@ namespace string
     int32_t extract_value_from_string(char*& vertex_data_pointer, char* char_end_string, const char* description);
 
     int32_t extract_unicode_value_from_string(const char*& unicode_char_pointer);
+
+    std::string convert_std_list_char_to_std_string(const std::list<char>& std_list_char);
 }
 
 #endif

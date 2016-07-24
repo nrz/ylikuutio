@@ -8,13 +8,18 @@
 
 namespace console
 {
-    datatypes::AnyValue* console_keypress_a(
+    datatypes::AnyValue* exit_console(
             callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*> input_parameters);
+            callback_system::CallbackObject* callback_object,
+            std::vector<callback_system::CallbackParameter*>);
 
-    datatypes::AnyValue* console_keypress_b(
+    datatypes::AnyValue* add_character(
             callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*> input_parameters);
+            callback_system::CallbackObject* callback_object,
+            std::vector<callback_system::CallbackParameter*>);
+
+    datatypes::AnyValue* backspace(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject* callback_object,
+            std::vector<callback_system::CallbackParameter*>);
 }

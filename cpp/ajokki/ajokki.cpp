@@ -13,6 +13,8 @@
 #include "cpp/ylikuutio/callback_system/callback_engine.hpp"
 #include "cpp/ylikuutio/callback_system/callback_magic_numbers.hpp"
 #include "cpp/ylikuutio/callback_system/key_and_callback_struct.hpp"
+#include "cpp/ylikuutio/console/console.hpp"
+#include "cpp/ylikuutio/console/console_keypress_callbacks.hpp"
 #include "cpp/ylikuutio/ontology/shader_loader.hpp"
 #include "cpp/ylikuutio/ontology/texture_loader.hpp"
 #include "cpp/ylikuutio/ontology/vboindexer.hpp"
@@ -300,6 +302,63 @@ int main(void)
     text3D_struct.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
     ontology::Text3D* hello_world_text3D = new ontology::Text3D(text3D_struct);
 
+    // keypress callbacks.
+    std::vector<KeyAndCallbackStruct> keypress_callback_engines;
+
+    // This vector points to current callback engines vector.
+    std::vector<KeyAndCallbackStruct>* current_callback_engine_vector_pointer;
+    current_callback_engine_vector_pointer = &keypress_callback_engines;
+
+    console::Console* my_console = new console::Console(&current_callback_engine_vector_pointer); // create a console.
+
+    // Callback code for `GLFW_KEY_GRAVE_ACCENT` (tilde key above Tab, usually used for console).
+    callback_system::CallbackEngine* enter_console_callback_engine = new callback_system::CallbackEngine();
+    callback_system::CallbackObject* enter_console_callback_object = new callback_system::CallbackObject(
+            &ajokki::enter_console, enter_console_callback_engine);
+    callback_system::CallbackParameter* enter_console_parameter = new callback_system::CallbackParameter(
+            "console_pointer", new datatypes::AnyValue(my_console), false, enter_console_callback_object);
+
+    // Callback code for `GLFW_KEY_GRAVE_ACCENT` (tilde key above Tab, usually used for console).
+    callback_system::CallbackEngine* exit_console_callback_engine = new callback_system::CallbackEngine();
+    callback_system::CallbackObject* exit_console_callback_object = new callback_system::CallbackObject(
+            &console::exit_console, exit_console_callback_engine);
+    callback_system::CallbackParameter* exit_console_parameter = new callback_system::CallbackParameter(
+            "console_pointer", new datatypes::AnyValue(my_console), false, exit_console_callback_object);
+
+    // Callback code for A: add character `'a'` to current input in console.
+    callback_system::CallbackEngine* add_character_a_callback_engine = new callback_system::CallbackEngine();
+    callback_system::CallbackObject* add_character_a_callback_object = new callback_system::CallbackObject(
+            &console::add_character, add_character_a_callback_engine);
+    callback_system::CallbackParameter* add_character_a_console_pointer = new callback_system::CallbackParameter(
+            "console_pointer", new datatypes::AnyValue(my_console), false, add_character_a_callback_object);
+    callback_system::CallbackParameter* add_character_a_callback_parameter = new callback_system::CallbackParameter(
+            "character", new datatypes::AnyValue('a'), false, add_character_a_callback_object);
+
+    // Callback code for B: add character `'b'` to current input in console.
+    callback_system::CallbackEngine* add_character_b_callback_engine = new callback_system::CallbackEngine();
+    callback_system::CallbackObject* add_character_b_callback_object = new callback_system::CallbackObject(
+            &console::add_character, add_character_b_callback_engine);
+    callback_system::CallbackParameter* add_character_b_console_pointer = new callback_system::CallbackParameter(
+            "console_pointer", new datatypes::AnyValue(my_console), false, add_character_b_callback_object);
+    callback_system::CallbackParameter* add_character_b_callback_parameter = new callback_system::CallbackParameter(
+            "character", new datatypes::AnyValue('b'), false, add_character_b_callback_object);
+
+    // Callback code for C: add character `'c'` to current input in console.
+    callback_system::CallbackEngine* add_character_c_callback_engine = new callback_system::CallbackEngine();
+    callback_system::CallbackObject* add_character_c_callback_object = new callback_system::CallbackObject(
+            &console::add_character, add_character_c_callback_engine);
+    callback_system::CallbackParameter* add_character_c_console_pointer = new callback_system::CallbackParameter(
+            "console_pointer", new datatypes::AnyValue(my_console), false, add_character_c_callback_object);
+    callback_system::CallbackParameter* add_character_c_callback_parameter = new callback_system::CallbackParameter(
+            "character", new datatypes::AnyValue('c'), false, add_character_c_callback_object);
+
+    // Callback code for backspace: delete character left of cursor from current input in console.
+    callback_system::CallbackEngine* backspace_callback_engine = new callback_system::CallbackEngine();
+    callback_system::CallbackObject* backspace_callback_object = new callback_system::CallbackObject(
+            &console::backspace, backspace_callback_engine);
+    callback_system::CallbackParameter* backspace_console_pointer = new callback_system::CallbackParameter(
+            "console_pointer", new datatypes::AnyValue(my_console), false, backspace_callback_object);
+
     // Callback code for D: delete Suzanne species.
     bool does_suzanne_species_exist = true;
     callback_system::CallbackEngine* delete_suzanne_species_callback_engine = new callback_system::CallbackEngine();
@@ -402,20 +461,27 @@ int main(void)
     callback_system::CallbackParameter* callback_parameter = new callback_system::CallbackParameter("", my_world_value, false, cleanup_callback_object);
     cleanup_callback_object->set_new_callback(&ajokki::full_cleanup);
 
-    // keypress callbacks.
-    std::vector<KeyAndCallbackStruct> keypress_callback_engines;
-
-    // This vector points to current callback engines vector.
-    std::vector<KeyAndCallbackStruct>* current_callback_engine_vector_pointer;
-    current_callback_engine_vector_pointer = &keypress_callback_engines;
-
     // This is one of the possible `std::vector<KeyAndCallbackStruct>`.
     // Keypresses are checked in the order of this struct.
+    keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_GRAVE_ACCENT, enter_console_callback_engine });
     keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_D, delete_suzanne_species_callback_engine });
     keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_G, switch_to_grass_material_callback_engine });
     keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_U, switch_to_uvmap_material_callback_engine });
     keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_T, transform_into_terrain_callback_engine });
     keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_A, transform_into_monkey_callback_engine });
+
+    // QWERTY keypress callbacks for console.
+    std::vector<KeyAndCallbackStruct> console_QWERTY_keypress_callback_engines;
+    console_QWERTY_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_GRAVE_ACCENT, exit_console_callback_engine });
+    console_QWERTY_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_BACKSPACE, backspace_callback_engine });
+    console_QWERTY_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_A, add_character_a_callback_engine });
+    console_QWERTY_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_B, add_character_b_callback_engine });
+    console_QWERTY_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_C, add_character_c_callback_engine });
+    my_console->set_my_callback_engine_vector_pointer(&console_QWERTY_keypress_callback_engines);
+
+    // Standard Dvorak keypress callbacks for console.
+    std::vector<KeyAndCallbackStruct> console_Dvorak_keypress_callback_engines;
+    console_Dvorak_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_GRAVE_ACCENT, exit_console_callback_engine });
 
     // Initialize our little text library with the Holstein font
     const char* char_g_font_texture_filename = g_font_texture_filename.c_str();
@@ -456,6 +522,9 @@ int main(void)
 
             // Render the world.
             my_world->render();
+
+            // Draw the console (including current input).
+            my_console->draw_console();
 
             PrintingStruct printing_struct;
             printing_struct.screen_width = (GLuint) window_width;
@@ -574,19 +643,45 @@ int main(void)
                 datatypes::AnyValue* any_value = callback_engine->execute();
 
                 if (any_value != nullptr &&
-                        any_value->type == datatypes::UINT32_T &&
-                        any_value->uint32_t_value == ENTER_CONSOLE_MAGIC_NUMBER)
+                        any_value->type == datatypes::UINT32_T)
                 {
-                    // Do not read more keys, we are entering the console now.
-                    // This is to make callback-related code simpler, we don't
-                    // need to worry about consecutive changes in program mode
-                    // or in `current_callback_engine_vector_pointer`.
-                    // That allows callbacks can change
-                    // `current_callback_engine_vector_pointer` given that they
-                    // signal it, eg. with `ENTER_CONSOLE_MAGIC_NUMBER`
-                    // (as in this loop).
-                    delete any_value;
-                    break;
+                    if (any_value->uint32_t_value == ENTER_CONSOLE_MAGIC_NUMBER)
+                    {
+                        // Read all keys, but don't call any more callbacks,
+                        // as we are entering the console now. Reading all keys
+                        // is needed to flush the input. Not calling any more
+                        // callbacks is needed to make callback-related code
+                        // simpler, we don't need to worry about consecutive
+                        // changes in program mode or in
+                        // `current_callback_engine_vector_pointer`. That allows
+                        // callbacks to change eg.
+                        // `current_callback_engine_vector_pointer` given that
+                        // they signal it, eg. with `ENTER_CONSOLE_MAGIC_NUMBER`
+                        // (as in this loop).
+
+                        for (uint32_t key_code = 0; key_code <= GLFW_KEY_LAST; key_code++)
+                        {
+                            glfwGetKey(window, key_code);
+                        }
+
+                        delete any_value;
+                        break;
+                    }
+                    if (any_value->uint32_t_value == EXIT_CONSOLE_MAGIC_NUMBER)
+                    {
+                        // Read all keys, but don't call any more callbacks,
+                        // we are exiting the console now. The reasons for doing
+                        // this are the same as when entering the console.
+                        // See the above comment related to entering the console.
+
+                        for (uint32_t key_code = 0; key_code <= GLFW_KEY_LAST; key_code++)
+                        {
+                            glfwGetKey(window, key_code);
+                        }
+
+                        delete any_value;
+                        break;
+                    }
                 }
                 delete any_value;
             }
@@ -607,6 +702,7 @@ int main(void)
     }
 
     delete cleanup_callback_engine;
+    delete my_console;
 
     return 0;
 }

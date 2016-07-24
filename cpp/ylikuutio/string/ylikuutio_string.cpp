@@ -4,6 +4,7 @@
 #include <cstdio>   // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf etc.
 #include <cstring>  // std::memcmp, std::strcmp, std::strlen, std::strncmp
 #include <iostream> // std::cout, std::cin, std::cerr
+#include <list>     // std::list
 #include <sstream>  // std::stringstream
 #include <string>   // std::string
 #include <vector>   // std::vector
@@ -123,5 +124,17 @@ namespace string
         unicode_stringstream << std::hex << hex_string;
         unicode_stringstream >> unicode_value;
         return unicode_value;
+    }
+
+    std::string convert_std_list_char_to_std_string(const std::list<char>& std_list_char)
+    {
+        std::string my_string;
+
+        for (std::list<char>::const_iterator it = std_list_char.begin(); it != std_list_char.end(); it++)
+        {
+            my_string.push_back(*it);
+        }
+
+        return my_string;
     }
 }
