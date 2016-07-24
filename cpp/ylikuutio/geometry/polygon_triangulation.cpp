@@ -19,6 +19,7 @@ namespace geometry
             std::vector<glm::vec3> &out_normals)
     {
         // TODO: implement this function!
+        return false;
     }
 
     bool triangulate_polygons(
