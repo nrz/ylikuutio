@@ -95,11 +95,11 @@ if (NOT ${eigen_FOUND})
     # Rerun CMake in initial build.
     # Will update cmakecache/project files on first build.
     # So you may have to reload project after first build.
-    add_custom_target(Rescan ${CMAKE_COMMAND} ${CMAKE_SOURCE_DIR} DEPENDS eigen)
+    add_custom_target(rescan ${CMAKE_COMMAND} ${CMAKE_SOURCE_DIR} DEPENDS eigen)
 else()
-    # Rescan becomes a dummy target after first build.
+    # rescan becomes a dummy target after first build.
     # This prevents CMake from rebuilding cache/projects on subsequent builds.
-    add_custom_target(Rescan)
+    add_custom_target(rescan)
 endif()
 
 include_directories(
@@ -382,7 +382,7 @@ add_executable(ajokki
     cpp/ajokki/ajokki_callbacks.cpp
     cpp/ajokki/ajokki_callbacks.hpp
     )
-add_dependencies(ajokki Rescan)
+add_dependencies(ajokki rescan)
 target_link_libraries(ajokki ${ALL_LIBS})
 if(${eigen_FOUND})
     # target_link_libraries(ajokki ${eigen_LIBRARY})
