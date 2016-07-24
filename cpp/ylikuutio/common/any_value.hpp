@@ -26,6 +26,7 @@ namespace datatypes
     {
         UNKNOWN,
         BOOL,
+        CHAR,
         FLOAT,
         DOUBLE,
         INT32_T,
@@ -51,6 +52,7 @@ namespace datatypes
         public:
             AnyValue();
             AnyValue(bool bool_value);
+            AnyValue(char char_value);
             AnyValue(float float_value);
             AnyValue(double double_value);
             AnyValue(int32_t int32_t_value);
@@ -71,6 +73,7 @@ namespace datatypes
             AnyValue(ontology::Text3D* text3D_pointer);
 
             AnyValue(std::string type, bool bool_value);
+            AnyValue(std::string type, char char_value);
             AnyValue(std::string type, float float_value);
             AnyValue(std::string type, double double_value);
             AnyValue(std::string type, int32_t int32_t_value);
@@ -92,6 +95,7 @@ namespace datatypes
 
             int type;
             bool bool_value;
+            char char_value;
             float float_value;
             double double_value;
             int32_t int32_t_value;

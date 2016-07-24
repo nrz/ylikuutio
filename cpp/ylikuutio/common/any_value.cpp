@@ -12,6 +12,7 @@ namespace datatypes
     {
         this->type = datatypes::UNKNOWN;
         this->bool_value = false;
+        this->char_value = 0;
         this->float_value = NAN;
         this->double_value = NAN;
         this->int32_t_value = 0;
@@ -55,6 +56,26 @@ namespace datatypes
         {
             this->type = datatypes::BOOL;
             this->bool_value = bool_value;
+        }
+    }
+
+    AnyValue::AnyValue(char char_value)
+    {
+        // constructor.
+        this->set_default_values();
+        this->type = datatypes::CHAR;
+        this->char_value = char_value;
+    }
+
+    AnyValue::AnyValue(std::string type, char char_value)
+    {
+        // constructor.
+        this->set_default_values();
+
+        if (std::strcmp(type.c_str(), "char"))
+        {
+            this->type = datatypes::CHAR;
+            this->char_value = char_value;
         }
     }
 
