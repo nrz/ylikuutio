@@ -247,7 +247,6 @@ namespace ontology
 
         std::cout << "Loading SRTM file " << abs_image_path << " ...\n";
 
-        uint32_t dataPos;
         uint32_t imageSize;
         uint32_t true_image_width, true_image_height, image_width_in_use, image_height_in_use;
         // Actual 16-bit big-endian signed integer heightmap data.
