@@ -349,7 +349,7 @@ namespace ontology
         }
 
         uint64_t offset = (uint64_t) SVG_data_pointer - (uint64_t) SVG_base_pointer;
-        std::printf("First glyph found at file offset 0x%lx (memory address 0x%lx).\n", offset, (uint64_t) SVG_data_pointer);
+        std::printf("First glyph found at file offset 0x%llu (memory address 0x%llu).\n", offset, (uint64_t) SVG_data_pointer);
 
         // Create the vertex data for each glyph in a loop.
         while (true)
