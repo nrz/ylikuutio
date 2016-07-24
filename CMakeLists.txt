@@ -83,7 +83,6 @@ else()
         PREFIX ${CMAKE_CURRENT_BINARY_DIR}/eigen
         # Disable install step
         INSTALL_COMMAND ""
-        UPDATE_COMMAND ""
         LOG_DOWNLOAD ON
         LOG_DOWNLOAD ON
         LOG_BUILD ON
