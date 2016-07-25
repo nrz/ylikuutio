@@ -17,15 +17,15 @@ set(DO_UNIT_TESTS_WITH_GOOGLE_TEST true)
 if(CROSS_COMPILE_FOR_WINDOWS)
     # https://cmake.org/Wiki/CMake_Cross_Compiling
     # the name of the target operating system
-    SET(CMAKE_SYSTEM_NAME Windows)
+    set(CMAKE_SYSTEM_NAME Windows)
 
     # which compilers to use for C and C++
-    SET(CMAKE_C_COMPILER /usr/bin/i686-w64-mingw32-gcc)
-    SET(CMAKE_CXX_COMPILER /usr/bin/i686-w64-mingw32-g++)
-    SET(CMAKE_RC_COMPILER /usr/bin/686-w64-mingw32-windres)
+    set(CMAKE_C_COMPILER /usr/bin/i686-w64-mingw32-gcc)
+    set(CMAKE_CXX_COMPILER /usr/bin/i686-w64-mingw32-g++)
+    set(CMAKE_RC_COMPILER /usr/bin/686-w64-mingw32-windres)
 
     # here is the target environment located
-    SET(CMAKE_FIND_ROOT_PATH /usr/i686-w64-mingw32/)
+    set(CMAKE_FIND_ROOT_PATH /usr/i686-w64-mingw32/)
 
     # adjust the default behaviour of the FIND_XXX() commands:
     # search headers and libraries in the target environment, search
