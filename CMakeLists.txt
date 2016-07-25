@@ -14,7 +14,7 @@ set(DO_UNIT_TESTS_WITH_GOOGLE_TEST true)
 # uncomment the following line to disable updating of external projects.
 # set(DISABLE_UPDATE_STEP)
 
-if (CROSS_COMPILE_FOR_WINDOWS)
+if(CROSS_COMPILE_FOR_WINDOWS)
     # https://cmake.org/Wiki/CMake_Cross_Compiling
     # the name of the target operating system
     SET(CMAKE_SYSTEM_NAME Windows)
@@ -92,7 +92,7 @@ include_directories(
     .
     )
 
-if (DISABLE_UPDATE_STEP)
+if(DISABLE_UPDATE_STEP)
     # Download and install Eigen
     ExternalProject_Add(
         eigen
@@ -121,7 +121,7 @@ else()
 endif()
 
 # http://stackoverflow.com/questions/17446981/cmake-externalproject-add-and-findpackage/17473508#17473508
-if (NOT ${eigen_FOUND})
+if(NOT ${eigen_FOUND})
     # Rerun CMake in initial build.
     # Will update cmakecache/project files on first build.
     # So you may have to reload project after first build.
@@ -144,7 +144,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         ${CMAKE_CURRENT_BINARY_DIR}/gmock/src/googletest/googletest/include/
         )
 
-    if (DISABLE_UPDATE_STEP)
+    if(DISABLE_UPDATE_STEP)
         # Download and install GoogleTest
         ExternalProject_Add(
             googletest
@@ -200,7 +200,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         ${GTEST_LIBRARY_PATH} )
     add_dependencies(${GTEST_LIBRARY} googletest)
 
-    if (DISABLE_UPDATE_STEP)
+    if(DISABLE_UPDATE_STEP)
         # Download and install GoogleMock
         ExternalProject_Add(
             googlemock
