@@ -1,5 +1,5 @@
-#ifndef __AJOKKI_MAGIC_NUMBERS_HPP_INCLUDED
-#define __AJOKKI_MAGIC_NUMBERS_HPP_INCLUDED
+#ifndef __CALLBACK_MAGIC_NUMBERS_HPP_INCLUDED
+#define __CALLBACK_MAGIC_NUMBERS_HPP_INCLUDED
 
 #define ENTER_CONSOLE_MAGIC_NUMBER 0xc1e1ece  // "cielece" ~ "kieleke" in modern Finnish ortography, means "projecting part" in Finnish
 #define EXIT_CONSOLE_MAGIC_NUMBER 0xaa110cc0  // "aallocco" ~ "aallokko" in standard Finnish ortography, means "swell of the sea/lake" in Finnish
