@@ -472,7 +472,7 @@ int main(void)
 
     bool ms_frame_text_ready = false;
 
-    do
+    while (true)
     {
         // Measure speed
         double currentTime = glfwGetTime();
@@ -665,9 +665,19 @@ int main(void)
                 delete any_value;
             }
         }
-    } // Check if the ESC key was pressed or the window was closed
-    while ((glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS)
-            && (glfwWindowShouldClose(window) == 0));
+
+        // Check if the ESC key was pressed.
+        if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+        {
+            break;
+        }
+
+        // Check if the window was closed.
+        if (glfwWindowShouldClose(window) != 0)
+        {
+            break;
+        }
+    }
 
     // do cleanup.
     cleanup_callback_engine->execute();
