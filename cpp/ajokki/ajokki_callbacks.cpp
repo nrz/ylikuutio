@@ -65,6 +65,16 @@ namespace ajokki
         return nullptr;
     }
 
+    datatypes::AnyValue* exit_program(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject*,
+            std::vector<callback_system::CallbackParameter*>)
+    {
+        uint32_t exit_program_magic_number = EXIT_PROGRAM_MAGIC_NUMBER;
+        datatypes::AnyValue* any_value_exit_program = new datatypes::AnyValue(exit_program_magic_number);
+        return any_value_exit_program;
+    }
+
     datatypes::AnyValue* enter_console(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject* callback_object,

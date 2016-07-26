@@ -331,6 +331,11 @@ int main(void)
     callback_system::CallbackParameter* backspace_console_pointer = new callback_system::CallbackParameter(
             "console_pointer", new datatypes::AnyValue(my_console), false, backspace_callback_object);
 
+    // Callback code for esc: exit program.
+    callback_system::CallbackEngine* exit_program_callback_engine = new callback_system::CallbackEngine();
+    callback_system::CallbackObject* exit_program_callback_object = new callback_system::CallbackObject(
+            &ajokki::exit_program, exit_program_callback_engine);
+
     // Callback code for enter: delete character left of cursor from current input in console.
     callback_system::CallbackEngine* enter_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* enter_callback_object = new callback_system::CallbackObject(
@@ -443,6 +448,7 @@ int main(void)
     // This is one of the possible `std::vector<KeyAndCallbackStruct>`.
     // Keypresses are checked in the order of this struct.
     keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_GRAVE_ACCENT, enter_console_callback_engine });
+    keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_ESCAPE, exit_program_callback_engine });
     keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_D, delete_suzanne_species_callback_engine });
     keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_G, switch_to_grass_material_callback_engine });
     keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_U, switch_to_uvmap_material_callback_engine });
@@ -472,7 +478,9 @@ int main(void)
 
     bool ms_frame_text_ready = false;
 
-    while (true)
+    bool is_exit_requested = false;
+
+    while (!is_exit_requested)
     {
         // Measure speed
         double currentTime = glfwGetTime();
@@ -661,21 +669,31 @@ int main(void)
                         delete any_value;
                         break;
                     }
+                    if (any_value->uint32_t_value == EXIT_PROGRAM_MAGIC_NUMBER)
+                    {
+                        // Read all keys, but don't call any more callbacks,
+                        // we are exiting the program now. The reasons for doing
+                        // this are the same as when entering the console.
+                        // See the above comment related to entering the console.
+
+                        for (uint32_t key_code = 0; key_code <= GLFW_KEY_LAST; key_code++)
+                        {
+                            glfwGetKey(window, key_code);
+                        }
+
+                        is_exit_requested = true;
+                        delete any_value;
+                        break;
+                    }
                 }
                 delete any_value;
             }
         }
 
-        // Check if the ESC key was pressed.
-        if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-        {
-            break;
-        }
-
         // Check if the window was closed.
         if (glfwWindowShouldClose(window) != 0)
         {
-            break;
+            is_exit_requested = true;
         }
     }
 
