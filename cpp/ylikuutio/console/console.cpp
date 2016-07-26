@@ -104,8 +104,8 @@ namespace console
     {
         if (this->cursor_it != this->current_input.begin())
         {
-            this->cursor_index--;
             this->cursor_it = this->current_input.erase(--this->cursor_it);
+            this->cursor_index--;
         }
     }
 
