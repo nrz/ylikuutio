@@ -78,4 +78,26 @@ namespace console
         console->backspace();
         return nullptr;
     }
+
+    datatypes::AnyValue* enter_key(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject* callback_object,
+            std::vector<callback_system::CallbackParameter*>)
+    {
+        datatypes::AnyValue* any_value_console_pointer = callback_object->get_any_value("console_pointer");
+
+        if (any_value_console_pointer == nullptr)
+        {
+            return nullptr;
+        }
+
+        if (any_value_console_pointer->type != datatypes::CONSOLE_POINTER)
+        {
+            return nullptr;
+        }
+
+        console::Console* console = any_value_console_pointer->console_pointer;
+        console->enter_key();
+        return nullptr;
+    }
 }

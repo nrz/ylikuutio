@@ -26,6 +26,7 @@ namespace console
             void add_character(char character);
             void backspace();
             void delete_character();
+            void enter_key();
             void move_cursor_left();
             void move_cursor_right();
             void move_cursor_to_start_of_line();

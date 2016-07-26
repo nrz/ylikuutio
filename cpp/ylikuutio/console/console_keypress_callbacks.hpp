@@ -24,4 +24,9 @@ namespace console
             callback_system::CallbackEngine*,
             callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>);
+
+    datatypes::AnyValue* enter_key(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject* callback_object,
+            std::vector<callback_system::CallbackParameter*>);
 }

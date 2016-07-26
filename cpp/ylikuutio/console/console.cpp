@@ -114,6 +114,14 @@ namespace console
         this->current_input.erase(this->cursor_it);
     }
 
+    void Console::enter_key()
+    {
+        this->command_history.push_back(this->current_input);
+        this->current_input.clear();
+        this->cursor_it = this->current_input.begin();
+        this->cursor_index = 0;
+    }
+
     void Console::move_cursor_left()
     {
         if (this->cursor_it != this->current_input.begin())
