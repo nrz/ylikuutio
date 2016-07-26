@@ -611,6 +611,8 @@ int main(void)
             glfwSwapBuffers(window);
         }
 
+        glfwPollEvents();
+
         // Check for keypresses and call corresponding callbacks.
         for (uint32_t i = 0; i < (*current_callback_engine_vector_pointer).size(); i++)
         {
@@ -663,8 +665,6 @@ int main(void)
                 delete any_value;
             }
         }
-
-        glfwPollEvents();
     } // Check if the ESC key was pressed or the window was closed
     while ((glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS)
             && (glfwWindowShouldClose(window) == 0));
