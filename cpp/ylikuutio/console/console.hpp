@@ -40,6 +40,7 @@ namespace console
             std::list<char>::iterator cursor_it;
             uint32_t cursor_index;
             bool in_console;
+            std::vector<std::list<char>> command_history;
             std::vector<KeyAndCallbackStruct>** current_callback_engine_vector_pointer_pointer;
             std::vector<KeyAndCallbackStruct>* previous_callback_engine_vector_pointer;
             std::vector<KeyAndCallbackStruct>* my_callback_engine_vector_pointer;
