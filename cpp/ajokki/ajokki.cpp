@@ -307,6 +307,13 @@ int main(void)
     std::vector<KeyAndCallbackStruct>* current_callback_engine_vector_pointer;
     current_callback_engine_vector_pointer = &keypress_callback_engines;
 
+    // keyrelease callbacks.
+    std::vector<KeyAndCallbackStruct> keyrelease_callback_engines;
+
+    // This vector points to current keyrelease callback engines vector.
+    std::vector<KeyAndCallbackStruct>* current_keyrelease_callback_engine_vector_pointer;
+    current_keyrelease_callback_engine_vector_pointer = &keyrelease_callback_engines;
+
     console::Console* my_console = new console::Console(&current_callback_engine_vector_pointer); // create a console.
     global_console_pointer = my_console;
 
