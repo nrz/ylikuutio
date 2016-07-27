@@ -28,6 +28,7 @@
 #endif
 
 // Include standard headers
+#include <cmath>    // NAN, std::isnan, std::pow
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <stdint.h> // uint32_t etc.
 
@@ -70,8 +71,11 @@ namespace ontology
 
     void Universe::compute_matrices_from_inputs()
     {
-        // glfwGetTime is called only once, the first time this function is called
-        static double lastTime = glfwGetTime();
+        if (std::isnan(lastTime))
+        {
+            // `glfwGetTime()` is called here only once, the first time this function is called.
+            lastTime = glfwGetTime();
+        }
 
         // Compute time difference between current and last frame
         double currentTime = glfwGetTime();
