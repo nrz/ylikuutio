@@ -530,7 +530,7 @@ int main(void)
     text2D::initText2D((GLuint) window_width, (GLuint) window_height, char_g_font_texture_filename, char_g_font_texture_file_format);
 
     // For speed computation
-    double lastTime = glfwGetTime();
+    double last_time_to_display_FPS = glfwGetTime();
     double last_time_for_display_sync = glfwGetTime();
     int nbFrames = 0;
 
@@ -550,14 +550,14 @@ int main(void)
             char ms_frame_text[256];
             nbFrames++;
 
-            while (currentTime - lastTime >= 1.0f)
+            while (currentTime - last_time_to_display_FPS >= 1.0f)
             {
                 // If last `std::printf()` was more than 1 sec ago,
                 // `std::printf` and reset.
                 std::sprintf(ms_frame_text, "%.02f ms/frame; %.02f Hz", 1000.0f / ((double) nbFrames), 1000.0f / (1000.0f / ((double) nbFrames)));
                 ms_frame_text_ready = true;
                 nbFrames = 0;
-                lastTime += 1.0;
+                last_time_to_display_FPS += 1.0;
             }
 
             // Clear the screen.
