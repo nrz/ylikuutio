@@ -303,7 +303,7 @@ int main(void)
     // keypress callbacks.
     std::vector<KeyAndCallbackStruct> keypress_callback_engines;
 
-    // This vector points to current callback engines vector.
+    // This vector points to current keypress callback engines vector.
     std::vector<KeyAndCallbackStruct>* current_callback_engine_vector_pointer;
     current_callback_engine_vector_pointer = &keypress_callback_engines;
 
