@@ -73,11 +73,6 @@ namespace ajokki
             callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*>);
 
-    datatypes::AnyValue* exit_console(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*> input_parameters);
-
     datatypes::AnyValue* delete_suzanne_species(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,

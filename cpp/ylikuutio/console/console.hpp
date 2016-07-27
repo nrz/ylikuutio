@@ -14,15 +14,19 @@ namespace console
     {
         public:
             // constructor.
-            Console(std::vector<KeyAndCallbackStruct>** current_callback_engine_vector_pointer_pointer);
+            Console(std::vector<KeyAndCallbackStruct>** current_keypress_callback_engine_vector_pointer_pointer,
+                    std::vector<KeyAndCallbackStruct>** current_keyrelease_callback_engine_vector_pointer_pointer);
 
             // destructor.
             ~Console();
 
-            void set_my_callback_engine_vector_pointer(std::vector<KeyAndCallbackStruct>* my_callback_engine_vector_pointer);
+            void set_my_keypress_callback_engine_vector_pointer(std::vector<KeyAndCallbackStruct>* my_keypress_callback_engine_vector_pointer);
+            void set_my_keyrelease_callback_engine_vector_pointer(std::vector<KeyAndCallbackStruct>* my_keyrelease_callback_engine_vector_pointer);
             void draw_console();
-            void enter_console();
-            void exit_console();
+            void enable_enter_console();
+            void enable_exit_console();
+            bool enter_console();
+            bool exit_console();
             void add_character(char character);
             void backspace();
             void delete_character();
@@ -41,10 +45,19 @@ namespace console
             std::list<char>::iterator cursor_it;
             uint32_t cursor_index;
             bool in_console;
+            bool can_enter_console;
+            bool can_exit_console;
             std::vector<std::list<char>> command_history;
-            std::vector<KeyAndCallbackStruct>** current_callback_engine_vector_pointer_pointer;
-            std::vector<KeyAndCallbackStruct>* previous_callback_engine_vector_pointer;
-            std::vector<KeyAndCallbackStruct>* my_callback_engine_vector_pointer;
+
+            // These are related to keypress callbacks.
+            std::vector<KeyAndCallbackStruct>** current_keypress_callback_engine_vector_pointer_pointer;
+            std::vector<KeyAndCallbackStruct>* previous_keypress_callback_engine_vector_pointer;
+            std::vector<KeyAndCallbackStruct>* my_keypress_callback_engine_vector_pointer;
+
+            // These are related to keyrelease callbacks.
+            std::vector<KeyAndCallbackStruct>** current_keyrelease_callback_engine_vector_pointer_pointer;
+            std::vector<KeyAndCallbackStruct>* previous_keyrelease_callback_engine_vector_pointer;
+            std::vector<KeyAndCallbackStruct>* my_keyrelease_callback_engine_vector_pointer;
     };
 }
 

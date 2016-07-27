@@ -14,7 +14,6 @@
 
 // Include standard headers
 #include <vector>   // std::vector
-#include <iostream> // std::cout, std::cin, std::cerr
 
 namespace console
 {
@@ -27,9 +26,41 @@ namespace console
         // Shift (left or right): 0x01
         // Alt (not AltGr):       0x04
         // Shift + Alt:           0x05
-        std::cout << "Hello from character_callback! codepoint: 0x" << std::hex << codepoint << ", mods: 0x" << mods << "\n";
-
         global_console_pointer->add_character(codepoint);
+    }
+
+    datatypes::AnyValue* enable_enter_console(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject* callback_object,
+            std::vector<callback_system::CallbackParameter*>)
+    {
+        datatypes::AnyValue* any_value_console = callback_object->get_any_value("console_pointer");
+
+        if (any_value_console->type != datatypes::CONSOLE_POINTER)
+        {
+            return nullptr;
+        }
+
+        console::Console* console = any_value_console->console_pointer;
+        console->enable_enter_console();
+        return nullptr;
+    }
+
+    datatypes::AnyValue* enable_exit_console(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject* callback_object,
+            std::vector<callback_system::CallbackParameter*>)
+    {
+        datatypes::AnyValue* any_value_console = callback_object->get_any_value("console_pointer");
+
+        if (any_value_console->type != datatypes::CONSOLE_POINTER)
+        {
+            return nullptr;
+        }
+
+        console::Console* console = any_value_console->console_pointer;
+        console->enable_exit_console();
+        return nullptr;
     }
 
     datatypes::AnyValue* enter_console(
@@ -45,7 +76,13 @@ namespace console
         }
 
         console::Console* console = any_value_console->console_pointer;
-        console->enter_console();
+        bool result = console->enter_console();
+
+        if (result == false)
+        {
+            // We did not enter the console.
+            return nullptr;
+        }
 
         // Signal to caller that we have entered the console.
         uint32_t enter_console_magic_number = ENTER_CONSOLE_MAGIC_NUMBER;
@@ -71,7 +108,13 @@ namespace console
         }
 
         console::Console* console_pointer = any_value_console_pointer->console_pointer;
-        console_pointer->exit_console();
+        bool result = console_pointer->exit_console();
+
+        if (result == false)
+        {
+            // We did not exit the console.
+            return nullptr;
+        }
 
         // Signal to caller that we have exited the console.
         uint32_t exit_console_magic_number = EXIT_CONSOLE_MAGIC_NUMBER;

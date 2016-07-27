@@ -304,8 +304,8 @@ int main(void)
     std::vector<KeyAndCallbackStruct> keypress_callback_engines;
 
     // This vector points to current keypress callback engines vector.
-    std::vector<KeyAndCallbackStruct>* current_callback_engine_vector_pointer;
-    current_callback_engine_vector_pointer = &keypress_callback_engines;
+    std::vector<KeyAndCallbackStruct>* current_keypress_callback_engine_vector_pointer;
+    current_keypress_callback_engine_vector_pointer = &keypress_callback_engines;
 
     // keyrelease callbacks.
     std::vector<KeyAndCallbackStruct> keyrelease_callback_engines;
@@ -314,8 +314,17 @@ int main(void)
     std::vector<KeyAndCallbackStruct>* current_keyrelease_callback_engine_vector_pointer;
     current_keyrelease_callback_engine_vector_pointer = &keyrelease_callback_engines;
 
-    console::Console* my_console = new console::Console(&current_callback_engine_vector_pointer); // create a console.
+    console::Console* my_console = new console::Console(
+            &current_keypress_callback_engine_vector_pointer,
+            &current_keyrelease_callback_engine_vector_pointer); // create a console.
     global_console_pointer = my_console;
+
+    // Callback code for `GLFW_KEY_GRAVE_ACCENT` release: enable enter console.
+    callback_system::CallbackEngine* enable_enter_console_callback_engine = new callback_system::CallbackEngine();
+    callback_system::CallbackObject* enable_enter_console_callback_object = new callback_system::CallbackObject(
+            &console::enable_enter_console, enable_enter_console_callback_engine);
+    callback_system::CallbackParameter* enable_enter_console_parameter = new callback_system::CallbackParameter(
+            "console_pointer", new datatypes::AnyValue(my_console), false, enable_enter_console_callback_object);
 
     // Callback code for left control release: release first turbo.
     callback_system::CallbackEngine* release_first_turbo_callback_engine = new callback_system::CallbackEngine();
@@ -333,6 +342,13 @@ int main(void)
             &console::enter_console, enter_console_callback_engine);
     callback_system::CallbackParameter* enter_console_parameter = new callback_system::CallbackParameter(
             "console_pointer", new datatypes::AnyValue(my_console), false, enter_console_callback_object);
+
+    // Callback code for `GLFW_KEY_GRAVE_ACCENT` release: enable exit console.
+    callback_system::CallbackEngine* enable_exit_console_callback_engine = new callback_system::CallbackEngine();
+    callback_system::CallbackObject* enable_exit_console_callback_object = new callback_system::CallbackObject(
+            &console::enable_exit_console, enable_exit_console_callback_engine);
+    callback_system::CallbackParameter* enable_exit_console_parameter = new callback_system::CallbackParameter(
+            "console_pointer", new datatypes::AnyValue(my_console), false, enable_exit_console_callback_object);
 
     // Callback code for `GLFW_KEY_GRAVE_ACCENT` (tilde key above Tab, usually used for console).
     callback_system::CallbackEngine* exit_console_callback_engine = new callback_system::CallbackEngine();
@@ -504,6 +520,7 @@ int main(void)
 
     // This is one of the possible `std::vector<KeyAndCallbackStruct>`.
     // Key releases are checked in the order of this struct.
+    keyrelease_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_GRAVE_ACCENT, enable_enter_console_callback_engine });
     keyrelease_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_LEFT_CONTROL, release_first_turbo_callback_engine });
     keyrelease_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_RIGHT_CONTROL, release_second_turbo_callback_engine });
 
@@ -525,16 +542,17 @@ int main(void)
     keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_T, transform_into_terrain_callback_engine });
     keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_A, transform_into_monkey_callback_engine });
 
-    // QWERTY keypress callbacks for console.
-    std::vector<KeyAndCallbackStruct> console_QWERTY_keypress_callback_engines;
-    console_QWERTY_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_GRAVE_ACCENT, exit_console_callback_engine });
-    console_QWERTY_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_BACKSPACE, backspace_callback_engine });
-    console_QWERTY_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_ENTER, enter_callback_engine });
-    my_console->set_my_callback_engine_vector_pointer(&console_QWERTY_keypress_callback_engines);
+    // Keyrelease callbacks for console.
+    std::vector<KeyAndCallbackStruct> console_keyrelease_callback_engines;
+    console_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_GRAVE_ACCENT, enable_exit_console_callback_engine });
+    my_console->set_my_keyrelease_callback_engine_vector_pointer(&console_keyrelease_callback_engines);
 
-    // Standard Dvorak keypress callbacks for console.
-    std::vector<KeyAndCallbackStruct> console_Dvorak_keypress_callback_engines;
-    console_Dvorak_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_GRAVE_ACCENT, exit_console_callback_engine });
+    // Keypress callbacks for console.
+    std::vector<KeyAndCallbackStruct> console_keypress_callback_engines;
+    console_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_GRAVE_ACCENT, exit_console_callback_engine });
+    console_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_BACKSPACE, backspace_callback_engine });
+    console_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_ENTER, enter_callback_engine });
+    my_console->set_my_keypress_callback_engine_vector_pointer(&console_keypress_callback_engines);
 
     // Initialize our little text library with the Holstein font
     const char* char_g_font_texture_filename = g_font_texture_filename.c_str();
@@ -647,11 +665,11 @@ int main(void)
             }
 
             // Check for keypresses and call corresponding callbacks.
-            for (uint32_t i = 0; i < (*current_callback_engine_vector_pointer).size(); i++)
+            for (uint32_t i = 0; i < (*current_keypress_callback_engine_vector_pointer).size(); i++)
             {
-                if (glfwGetKey(window, (*current_callback_engine_vector_pointer).at(i).keycode) == GLFW_PRESS)
+                if (glfwGetKey(window, (*current_keypress_callback_engine_vector_pointer).at(i).keycode) == GLFW_PRESS)
                 {
-                    callback_system::CallbackEngine* callback_engine = (*current_callback_engine_vector_pointer).at(i).callback_engine;
+                    callback_system::CallbackEngine* callback_engine = (*current_keypress_callback_engine_vector_pointer).at(i).callback_engine;
                     datatypes::AnyValue* any_value = callback_engine->execute();
 
                     if (any_value != nullptr &&

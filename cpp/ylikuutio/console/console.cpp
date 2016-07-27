@@ -13,17 +13,26 @@
 
 namespace console
 {
-    Console::Console(std::vector<KeyAndCallbackStruct>** current_callback_engine_vector_pointer_pointer)
+    Console::Console(
+            std::vector<KeyAndCallbackStruct>** current_keypress_callback_engine_vector_pointer_pointer,
+            std::vector<KeyAndCallbackStruct>** current_keyrelease_callback_engine_vector_pointer_pointer)
     {
         // constructor.
         this->cursor_it = this->current_input.begin();
         this->cursor_index = 0;
         this->in_console = false;
-        this->previous_callback_engine_vector_pointer = nullptr;
-        this->my_callback_engine_vector_pointer = nullptr;
+        this->can_enter_console = true;
+        this->can_exit_console = false;
+        this->previous_keypress_callback_engine_vector_pointer = nullptr;
+        this->my_keypress_callback_engine_vector_pointer = nullptr;
+        this->previous_keyrelease_callback_engine_vector_pointer = nullptr;
+        this->my_keyrelease_callback_engine_vector_pointer = nullptr;
 
         // This is a pointer to `std::vector<KeyAndCallbackStruct>*` that controls keypress callbacks.
-        this->current_callback_engine_vector_pointer_pointer = current_callback_engine_vector_pointer_pointer;
+        this->current_keypress_callback_engine_vector_pointer_pointer = current_keypress_callback_engine_vector_pointer_pointer;
+
+        // This is a pointer to `std::vector<KeyAndCallbackStruct>*` that controls keyrelease callbacks.
+        this->current_keyrelease_callback_engine_vector_pointer_pointer = current_keyrelease_callback_engine_vector_pointer_pointer;
     }
 
     Console::~Console()
@@ -32,9 +41,14 @@ namespace console
         this->exit_console();
     }
 
-    void Console::set_my_callback_engine_vector_pointer(std::vector<KeyAndCallbackStruct>* my_callback_engine_vector_pointer)
+    void Console::set_my_keypress_callback_engine_vector_pointer(std::vector<KeyAndCallbackStruct>* my_keypress_callback_engine_vector_pointer)
     {
-        this->my_callback_engine_vector_pointer = my_callback_engine_vector_pointer;
+        this->my_keypress_callback_engine_vector_pointer = my_keypress_callback_engine_vector_pointer;
+    }
+
+    void Console::set_my_keyrelease_callback_engine_vector_pointer(std::vector<KeyAndCallbackStruct>* my_keyrelease_callback_engine_vector_pointer)
+    {
+        this->my_keyrelease_callback_engine_vector_pointer = my_keyrelease_callback_engine_vector_pointer;
     }
 
     void Console::draw_console()
@@ -64,34 +78,74 @@ namespace console
         }
     }
 
-    void Console::enter_console()
+    void Console::enable_enter_console()
     {
-        if (this->my_callback_engine_vector_pointer != nullptr)
-        {
-            // Store previous callback engine vector pointer.
-            this->previous_callback_engine_vector_pointer = *this->current_callback_engine_vector_pointer_pointer;
-
-            // Set new callback engine vector pointer.
-            *this->current_callback_engine_vector_pointer_pointer = this->my_callback_engine_vector_pointer;
-        }
-
-        glfwSetCharModsCallback(window, console::charmods_callback);
-
-        // Mark that we're in console.
-        this->in_console = true;
+        this->can_enter_console = true;
     }
 
-    void Console::exit_console()
+    void Console::enable_exit_console()
     {
-        if (this->in_console)
+        this->can_exit_console = true;
+    }
+
+    bool Console::enter_console()
+    {
+        if (!this->in_console &&
+                this->can_enter_console &&
+                this->my_keypress_callback_engine_vector_pointer != nullptr &&
+                this->my_keyrelease_callback_engine_vector_pointer != nullptr &&
+                this->current_keypress_callback_engine_vector_pointer_pointer != nullptr &&
+                this->current_keyrelease_callback_engine_vector_pointer_pointer != nullptr)
         {
-            // Restore previous callback engine vector pointer.
-            *this->current_callback_engine_vector_pointer_pointer = this->previous_callback_engine_vector_pointer;
+            // Store previous keypress callback engine vector pointer.
+            this->previous_keypress_callback_engine_vector_pointer = *this->current_keypress_callback_engine_vector_pointer_pointer;
+
+            // Set new keypress callback engine vector pointer.
+            *this->current_keypress_callback_engine_vector_pointer_pointer = this->my_keypress_callback_engine_vector_pointer;
+
+            // Store previous keyrelease callback engine vector pointer.
+            this->previous_keyrelease_callback_engine_vector_pointer = *this->current_keyrelease_callback_engine_vector_pointer_pointer;
+
+            // Set new keyrelease callback engine vector pointer.
+            *this->current_keyrelease_callback_engine_vector_pointer_pointer = this->my_keyrelease_callback_engine_vector_pointer;
+
+            glfwSetCharModsCallback(window, console::charmods_callback);
+
+            // Mark that we're in console.
+            this->in_console = true;
+
+            // Usually key release is required to enable enter console.
+            this->can_exit_console = false;
+            this->can_enter_console = false;
+            return true;
         }
+        return false;
+    }
 
-        glfwSetCharModsCallback(window, nullptr);
+    bool Console::exit_console()
+    {
+        if (this->in_console &&
+                this->can_exit_console &&
+                this->previous_keypress_callback_engine_vector_pointer != nullptr &&
+                this->previous_keyrelease_callback_engine_vector_pointer != nullptr)
+        {
+            // Restore previous keypress callback engine vector pointer.
+            *this->current_keypress_callback_engine_vector_pointer_pointer = this->previous_keypress_callback_engine_vector_pointer;
 
-        this->in_console = false;
+            // Restore previous keyrelease callback engine vector pointer.
+            *this->current_keyrelease_callback_engine_vector_pointer_pointer = this->previous_keyrelease_callback_engine_vector_pointer;
+
+            glfwSetCharModsCallback(window, nullptr);
+
+            // Mark that we have exited the console.
+            this->in_console = false;
+
+            // Usually key release is required to enable exit console.
+            this->can_enter_console = false;
+            this->can_exit_console = false;
+            return true;
+        }
+        return false;
     }
 
     void Console::add_character(char character)
