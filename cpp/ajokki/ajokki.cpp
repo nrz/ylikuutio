@@ -563,6 +563,87 @@ int main(void)
             // Clear the screen.
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+            glfwPollEvents();
+
+            // Check for key releases and call corresponding callbacks.
+            for (uint32_t i = 0; i < (*current_keyrelease_callback_engine_vector_pointer).size(); i++)
+            {
+                if (glfwGetKey(window, (*current_keyrelease_callback_engine_vector_pointer).at(i).keycode) == GLFW_RELEASE)
+                {
+                    callback_system::CallbackEngine* callback_engine = (*current_keyrelease_callback_engine_vector_pointer).at(i).callback_engine;
+                    datatypes::AnyValue* any_value = callback_engine->execute();
+                }
+            }
+
+            // Check for keypresses and call corresponding callbacks.
+            for (uint32_t i = 0; i < (*current_callback_engine_vector_pointer).size(); i++)
+            {
+                if (glfwGetKey(window, (*current_callback_engine_vector_pointer).at(i).keycode) == GLFW_PRESS)
+                {
+                    callback_system::CallbackEngine* callback_engine = (*current_callback_engine_vector_pointer).at(i).callback_engine;
+                    datatypes::AnyValue* any_value = callback_engine->execute();
+
+                    if (any_value != nullptr &&
+                            any_value->type == datatypes::UINT32_T)
+                    {
+                        if (any_value->uint32_t_value == ENTER_CONSOLE_MAGIC_NUMBER)
+                        {
+                            // Read all keys, but don't call any more callbacks,
+                            // as we are entering the console now. Reading all keys
+                            // is needed to flush the input. Not calling any more
+                            // callbacks is needed to make callback-related code
+                            // simpler, we don't need to worry about consecutive
+                            // changes in program mode or in
+                            // `current_callback_engine_vector_pointer`. That allows
+                            // callbacks to change eg.
+                            // `current_callback_engine_vector_pointer` given that
+                            // they signal it, eg. with `ENTER_CONSOLE_MAGIC_NUMBER`
+                            // (as in this loop).
+
+                            for (uint32_t key_code = 0; key_code <= GLFW_KEY_LAST; key_code++)
+                            {
+                                glfwGetKey(window, key_code);
+                            }
+
+                            delete any_value;
+                            break;
+                        }
+                        if (any_value->uint32_t_value == EXIT_CONSOLE_MAGIC_NUMBER)
+                        {
+                            // Read all keys, but don't call any more callbacks,
+                            // we are exiting the console now. The reasons for doing
+                            // this are the same as when entering the console.
+                            // See the above comment related to entering the console.
+
+                            for (uint32_t key_code = 0; key_code <= GLFW_KEY_LAST; key_code++)
+                            {
+                                glfwGetKey(window, key_code);
+                            }
+
+                            delete any_value;
+                            break;
+                        }
+                        if (any_value->uint32_t_value == EXIT_PROGRAM_MAGIC_NUMBER)
+                        {
+                            // Read all keys, but don't call any more callbacks,
+                            // we are exiting the program now. The reasons for doing
+                            // this are the same as when entering the console.
+                            // See the above comment related to entering the console.
+
+                            for (uint32_t key_code = 0; key_code <= GLFW_KEY_LAST; key_code++)
+                            {
+                                glfwGetKey(window, key_code);
+                            }
+
+                            is_exit_requested = true;
+                            delete any_value;
+                            break;
+                        }
+                    }
+                    delete any_value;
+                }
+            }
+
             // Render the world.
             my_world->render();
 
@@ -675,87 +756,6 @@ int main(void)
 
             // Swap buffers.
             glfwSwapBuffers(window);
-        }
-
-        glfwPollEvents();
-
-        // Check for key releases and call corresponding callbacks.
-        for (uint32_t i = 0; i < (*current_keyrelease_callback_engine_vector_pointer).size(); i++)
-        {
-            if (glfwGetKey(window, (*current_keyrelease_callback_engine_vector_pointer).at(i).keycode) == GLFW_RELEASE)
-            {
-                callback_system::CallbackEngine* callback_engine = (*current_keyrelease_callback_engine_vector_pointer).at(i).callback_engine;
-                datatypes::AnyValue* any_value = callback_engine->execute();
-            }
-        }
-
-        // Check for keypresses and call corresponding callbacks.
-        for (uint32_t i = 0; i < (*current_callback_engine_vector_pointer).size(); i++)
-        {
-            if (glfwGetKey(window, (*current_callback_engine_vector_pointer).at(i).keycode) == GLFW_PRESS)
-            {
-                callback_system::CallbackEngine* callback_engine = (*current_callback_engine_vector_pointer).at(i).callback_engine;
-                datatypes::AnyValue* any_value = callback_engine->execute();
-
-                if (any_value != nullptr &&
-                        any_value->type == datatypes::UINT32_T)
-                {
-                    if (any_value->uint32_t_value == ENTER_CONSOLE_MAGIC_NUMBER)
-                    {
-                        // Read all keys, but don't call any more callbacks,
-                        // as we are entering the console now. Reading all keys
-                        // is needed to flush the input. Not calling any more
-                        // callbacks is needed to make callback-related code
-                        // simpler, we don't need to worry about consecutive
-                        // changes in program mode or in
-                        // `current_callback_engine_vector_pointer`. That allows
-                        // callbacks to change eg.
-                        // `current_callback_engine_vector_pointer` given that
-                        // they signal it, eg. with `ENTER_CONSOLE_MAGIC_NUMBER`
-                        // (as in this loop).
-
-                        for (uint32_t key_code = 0; key_code <= GLFW_KEY_LAST; key_code++)
-                        {
-                            glfwGetKey(window, key_code);
-                        }
-
-                        delete any_value;
-                        break;
-                    }
-                    if (any_value->uint32_t_value == EXIT_CONSOLE_MAGIC_NUMBER)
-                    {
-                        // Read all keys, but don't call any more callbacks,
-                        // we are exiting the console now. The reasons for doing
-                        // this are the same as when entering the console.
-                        // See the above comment related to entering the console.
-
-                        for (uint32_t key_code = 0; key_code <= GLFW_KEY_LAST; key_code++)
-                        {
-                            glfwGetKey(window, key_code);
-                        }
-
-                        delete any_value;
-                        break;
-                    }
-                    if (any_value->uint32_t_value == EXIT_PROGRAM_MAGIC_NUMBER)
-                    {
-                        // Read all keys, but don't call any more callbacks,
-                        // we are exiting the program now. The reasons for doing
-                        // this are the same as when entering the console.
-                        // See the above comment related to entering the console.
-
-                        for (uint32_t key_code = 0; key_code <= GLFW_KEY_LAST; key_code++)
-                        {
-                            glfwGetKey(window, key_code);
-                        }
-
-                        is_exit_requested = true;
-                        delete any_value;
-                        break;
-                    }
-                }
-                delete any_value;
-            }
         }
 
         // Check if the window was closed.
