@@ -56,9 +56,7 @@ GLfloat gravity = 9.81f / 60.0f;
 GLfloat fallSpeed = gravity;
 
 // Variables related to timing of events.
-double lastTime = NAN;
-double currentTime;
-float deltaTime;
+float delta_time;
 uint32_t max_FPS = 60;
 
 // Variables related to the current `Scene`.

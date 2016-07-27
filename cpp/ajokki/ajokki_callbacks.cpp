@@ -25,7 +25,7 @@
 
 namespace ajokki
 {
-    void move_to_direction(glm::vec3 direction)
+    void move_to_direction(glm::vec3 moving_direction)
     {
         GLfloat temp_speed;
 
@@ -41,7 +41,7 @@ namespace ajokki
         {
             temp_speed = speed;
         }
-        position += direction * deltaTime * temp_speed;
+        position += temp_speed * delta_time * moving_direction;
     }
 
     datatypes::AnyValue* glfwTerminate_cleanup(
@@ -165,6 +165,24 @@ namespace ajokki
             std::vector<callback_system::CallbackParameter*>)
     {
         move_to_direction(right);
+        return nullptr;
+    }
+
+    datatypes::AnyValue* ascent(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject*,
+            std::vector<callback_system::CallbackParameter*>)
+    {
+        move_to_direction(up);
+        return nullptr;
+    }
+
+    datatypes::AnyValue* descent(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject*,
+            std::vector<callback_system::CallbackParameter*>)
+    {
+        move_to_direction(-up);
         return nullptr;
     }
 

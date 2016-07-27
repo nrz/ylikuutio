@@ -63,6 +63,16 @@ namespace ajokki
             callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*>);
 
+    datatypes::AnyValue* ascent(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject*,
+            std::vector<callback_system::CallbackParameter*>);
+
+    datatypes::AnyValue* descent(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject*,
+            std::vector<callback_system::CallbackParameter*>);
+
     datatypes::AnyValue* exit_console(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,

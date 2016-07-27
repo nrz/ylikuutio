@@ -383,6 +383,16 @@ int main(void)
     callback_system::CallbackObject* strafe_right_callback_object = new callback_system::CallbackObject(
             &ajokki::strafe_right, strafe_right_callback_engine);
 
+    // Callback code for space: ascent.
+    callback_system::CallbackEngine* ascent_callback_engine = new callback_system::CallbackEngine();
+    callback_system::CallbackObject* ascent_callback_object = new callback_system::CallbackObject(
+            &ajokki::ascent, ascent_callback_engine);
+
+    // Callback code for enter: descent.
+    callback_system::CallbackEngine* descent_callback_engine = new callback_system::CallbackEngine();
+    callback_system::CallbackObject* descent_callback_object = new callback_system::CallbackObject(
+            &ajokki::descent, descent_callback_engine);
+
     // Callback code for enter: delete character left of cursor from current input in console.
     callback_system::CallbackEngine* enter_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* enter_callback_object = new callback_system::CallbackObject(
@@ -507,6 +517,8 @@ int main(void)
     keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_DOWN, move_backward_callback_engine });
     keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_LEFT, strafe_left_callback_engine });
     keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_RIGHT, strafe_right_callback_engine });
+    keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_SPACE, ascent_callback_engine });
+    keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_ENTER, descent_callback_engine });
     keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_D, delete_suzanne_species_callback_engine });
     keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_G, switch_to_grass_material_callback_engine });
     keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_U, switch_to_uvmap_material_callback_engine });
@@ -538,9 +550,12 @@ int main(void)
 
     bool is_exit_requested = false;
 
+    // Measure speed
+    double last_time_before_reading_keyboard = NAN;
+    double current_time_before_reading_keyboard = NAN;
+
     while (!is_exit_requested)
     {
-        // Measure speed
         double current_time_in_main_loop = glfwGetTime();
 
         if (current_time_in_main_loop - last_time_for_display_sync >= (1.0f / max_FPS))
@@ -564,6 +579,62 @@ int main(void)
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
             glfwPollEvents();
+
+            if (std::isnan(last_time_before_reading_keyboard))
+            {
+                // `glfwGetTime()` is called here only once, the first time this function is called.
+                last_time_before_reading_keyboard = glfwGetTime();
+            }
+
+            double current_time_before_reading_keyboard = glfwGetTime();
+            delta_time = float(current_time_before_reading_keyboard - last_time_before_reading_keyboard);
+
+            // Get mouse position
+            double xpos, ypos;
+            glfwGetCursorPos(window, &xpos, &ypos);
+
+            // Reset mouse position for next frame
+            glfwSetCursorPos(window, window_width / 2, window_height / 2);
+
+            if (hasMouseEverMoved || (abs(xpos) > 0.0001) || (abs(ypos) > 0.0001))
+            {
+                hasMouseEverMoved = true;
+
+                // Compute new orientation
+                horizontalAngle += mouseSpeed * GLfloat(window_width / 2 - xpos);
+                horizontalAngle = remainder(horizontalAngle, (2.0f * PI));
+
+                if (is_invert_mouse_in_use)
+                {
+                    // invert mouse.
+                    verticalAngle   -= mouseSpeed * GLfloat(window_height / 2 - ypos);
+                }
+                else
+                {
+                    // don't invert mouse.
+                    verticalAngle   += mouseSpeed * GLfloat(window_height / 2 - ypos);
+                }
+                verticalAngle = remainder(verticalAngle, (2.0f * PI));
+            }
+
+            // Direction : Spherical coordinates to Cartesian coordinates conversion
+            direction = glm::vec3(
+                    cos(verticalAngle) * sin(horizontalAngle),
+                    sin(verticalAngle),
+                    cos(verticalAngle) * cos(horizontalAngle)
+                    );
+
+            // Right vector
+            right = glm::vec3(
+                    sin(horizontalAngle - PI/2.0f),
+                    0,
+                    cos(horizontalAngle - PI/2.0f)
+                    );
+
+            // Up vector
+            up = glm::cross(right, direction);
+
+            // GLfloat temp_speed;
 
             // Check for key releases and call corresponding callbacks.
             for (uint32_t i = 0; i < (*current_keyrelease_callback_engine_vector_pointer).size(); i++)
@@ -756,6 +827,8 @@ int main(void)
 
             // Swap buffers.
             glfwSwapBuffers(window);
+
+            last_time_before_reading_keyboard = current_time_before_reading_keyboard;
         }
 
         // Check if the window was closed.
