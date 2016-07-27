@@ -305,7 +305,8 @@ add_executable(ajokki
     # common, in alphabetical order
     cpp/ylikuutio/common/any_value.cpp
     cpp/ylikuutio/common/any_value.hpp
-    cpp/ylikuutio/common/globals.cpp
+    cpp/ylikuutio/common/global_variables.cpp
+    cpp/ylikuutio/common/global_variables.hpp
     cpp/ylikuutio/common/globals.hpp
 
     # console, in alphabetical order.
@@ -452,7 +453,6 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         cpp/ylikuutio/callback_system/callback_parameter.hpp
         cpp/ylikuutio/common/any_value.cpp
         cpp/ylikuutio/common/any_value.hpp
-        cpp/ylikuutio/common/globals.cpp
         cpp/ylikuutio/common/globals.hpp
         cpp/ylikuutio/file/file_loader.cpp
         cpp/ylikuutio/file/file_loader.hpp

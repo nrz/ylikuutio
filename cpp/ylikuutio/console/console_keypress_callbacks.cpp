@@ -4,6 +4,7 @@
 #include "cpp/ylikuutio/callback_system/callback_engine.hpp"
 #include "cpp/ylikuutio/callback_system/callback_magic_numbers.hpp"
 #include "cpp/ylikuutio/common/any_value.hpp"
+#include "cpp/ylikuutio/common/global_variables.hpp"
 
 // Include GLFW
 #ifndef __GLFW3_H_INCLUDED

@@ -4,6 +4,8 @@
 #include "material.hpp"
 #include "render_templates.hpp"
 #include "cpp/ylikuutio/hierarchy/hierarchy_templates.hpp"
+#include "cpp/ylikuutio/common/global_variables.hpp"
+#include "cpp/ylikuutio/common/globals.hpp"
 
 // Include standard headers
 #include <iostream> // std::cout, std::cin, std::cerr

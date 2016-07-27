@@ -1,6 +1,7 @@
 #include "console.hpp"
 #include "console_keypress_callbacks.hpp"
 #include "cpp/ylikuutio/ontology/text2D.hpp"
+#include "cpp/ylikuutio/common/global_variables.hpp"
 #include "cpp/ylikuutio/common/globals.hpp"
 #include "cpp/ylikuutio/string/ylikuutio_string.hpp"
 

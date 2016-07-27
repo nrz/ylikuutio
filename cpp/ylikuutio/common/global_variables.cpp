@@ -1,4 +1,4 @@
-#include "globals.hpp"
+#include "global_variables.hpp"
 
 // Include GLEW
 #ifndef __GL_GLEW_H_INCLUDED
