@@ -18,7 +18,47 @@ namespace ajokki
             callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*> input_parameters);
 
+    datatypes::AnyValue* release_first_turbo(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject*,
+            std::vector<callback_system::CallbackParameter*>);
+
+    datatypes::AnyValue* release_second_turbo(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject*,
+            std::vector<callback_system::CallbackParameter*>);
+
     datatypes::AnyValue* exit_program(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject*,
+            std::vector<callback_system::CallbackParameter*>);
+
+    datatypes::AnyValue* first_turbo(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject*,
+            std::vector<callback_system::CallbackParameter*>);
+
+    datatypes::AnyValue* second_turbo(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject*,
+            std::vector<callback_system::CallbackParameter*>);
+
+    datatypes::AnyValue* move_forward(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject*,
+            std::vector<callback_system::CallbackParameter*>);
+
+    datatypes::AnyValue* move_backward(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject*,
+            std::vector<callback_system::CallbackParameter*>);
+
+    datatypes::AnyValue* strafe_left(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject*,
+            std::vector<callback_system::CallbackParameter*>);
+
+    datatypes::AnyValue* strafe_right(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*>);

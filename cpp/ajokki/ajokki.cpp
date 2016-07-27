@@ -317,6 +317,16 @@ int main(void)
     console::Console* my_console = new console::Console(&current_callback_engine_vector_pointer); // create a console.
     global_console_pointer = my_console;
 
+    // Callback code for left control release: release first turbo.
+    callback_system::CallbackEngine* release_first_turbo_callback_engine = new callback_system::CallbackEngine();
+    callback_system::CallbackObject* release_first_turbo_callback_object = new callback_system::CallbackObject(
+            &ajokki::release_first_turbo, release_first_turbo_callback_engine);
+
+    // Callback code for right control release: release second turbo.
+    callback_system::CallbackEngine* release_second_turbo_callback_engine = new callback_system::CallbackEngine();
+    callback_system::CallbackObject* release_second_turbo_callback_object = new callback_system::CallbackObject(
+            &ajokki::release_second_turbo, release_second_turbo_callback_engine);
+
     // Callback code for `GLFW_KEY_GRAVE_ACCENT` (tilde key above Tab, usually used for console).
     callback_system::CallbackEngine* enter_console_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* enter_console_callback_object = new callback_system::CallbackObject(
@@ -342,6 +352,36 @@ int main(void)
     callback_system::CallbackEngine* exit_program_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* exit_program_callback_object = new callback_system::CallbackObject(
             &ajokki::exit_program, exit_program_callback_engine);
+
+    // Callback code for left control: first turbo.
+    callback_system::CallbackEngine* first_turbo_callback_engine = new callback_system::CallbackEngine();
+    callback_system::CallbackObject* first_turbo_callback_object = new callback_system::CallbackObject(
+            &ajokki::first_turbo, first_turbo_callback_engine);
+
+    // Callback code for right control: second turbo.
+    callback_system::CallbackEngine* second_turbo_callback_engine = new callback_system::CallbackEngine();
+    callback_system::CallbackObject* second_turbo_callback_object = new callback_system::CallbackObject(
+            &ajokki::second_turbo, second_turbo_callback_engine);
+
+    // Callback code for key up: move forward.
+    callback_system::CallbackEngine* move_forward_callback_engine = new callback_system::CallbackEngine();
+    callback_system::CallbackObject* move_forward_callback_object = new callback_system::CallbackObject(
+            &ajokki::move_forward, move_forward_callback_engine);
+
+    // Callback code for key down: move backward.
+    callback_system::CallbackEngine* move_backward_callback_engine = new callback_system::CallbackEngine();
+    callback_system::CallbackObject* move_backward_callback_object = new callback_system::CallbackObject(
+            &ajokki::move_backward, move_backward_callback_engine);
+
+    // Callback code for key left: strafe left.
+    callback_system::CallbackEngine* strafe_left_callback_engine = new callback_system::CallbackEngine();
+    callback_system::CallbackObject* strafe_left_callback_object = new callback_system::CallbackObject(
+            &ajokki::strafe_left, strafe_left_callback_engine);
+
+    // Callback code for key right: strafe right.
+    callback_system::CallbackEngine* strafe_right_callback_engine = new callback_system::CallbackEngine();
+    callback_system::CallbackObject* strafe_right_callback_object = new callback_system::CallbackObject(
+            &ajokki::strafe_right, strafe_right_callback_engine);
 
     // Callback code for enter: delete character left of cursor from current input in console.
     callback_system::CallbackEngine* enter_callback_engine = new callback_system::CallbackEngine();

@@ -10,6 +10,8 @@
 #include "cpp/ylikuutio/ontology/material.hpp"
 #include "cpp/ylikuutio/ontology/universe.hpp"
 #include "cpp/ylikuutio/common/any_value.hpp"
+#include "cpp/ylikuutio/common/global_variables.hpp"
+#include "cpp/ylikuutio/common/globals.hpp"
 
 // Include GLFW
 #ifndef __GLFW3_H_INCLUDED
@@ -23,6 +25,25 @@
 
 namespace ajokki
 {
+    void move_to_direction(glm::vec3 direction)
+    {
+        GLfloat temp_speed;
+
+        if (is_first_turbo_pressed && is_second_turbo_pressed)
+        {
+            temp_speed = twin_turbo_factor * speed;
+        }
+        else if (is_first_turbo_pressed || is_second_turbo_pressed)
+        {
+            temp_speed = turbo_factor * speed;
+        }
+        else
+        {
+            temp_speed = speed;
+        }
+        position += direction * deltaTime * temp_speed;
+    }
+
     datatypes::AnyValue* glfwTerminate_cleanup(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
@@ -65,6 +86,24 @@ namespace ajokki
         return nullptr;
     }
 
+    datatypes::AnyValue* release_first_turbo(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject* callback_object,
+            std::vector<callback_system::CallbackParameter*>)
+    {
+        is_first_turbo_pressed = false;
+        return nullptr;
+    }
+
+    datatypes::AnyValue* release_second_turbo(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject* callback_object,
+            std::vector<callback_system::CallbackParameter*>)
+    {
+        is_second_turbo_pressed = false;
+        return nullptr;
+    }
+
     datatypes::AnyValue* exit_program(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
@@ -73,6 +112,60 @@ namespace ajokki
         uint32_t exit_program_magic_number = EXIT_PROGRAM_MAGIC_NUMBER;
         datatypes::AnyValue* any_value_exit_program = new datatypes::AnyValue(exit_program_magic_number);
         return any_value_exit_program;
+    }
+
+    datatypes::AnyValue* first_turbo(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject*,
+            std::vector<callback_system::CallbackParameter*>)
+    {
+        is_first_turbo_pressed = true;
+        return nullptr;
+    }
+
+    datatypes::AnyValue* second_turbo(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject* callback_object,
+            std::vector<callback_system::CallbackParameter*>)
+    {
+        is_second_turbo_pressed = true;
+        return nullptr;
+    }
+
+    datatypes::AnyValue* move_forward(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject* callback_object,
+            std::vector<callback_system::CallbackParameter*>)
+    {
+        move_to_direction(direction);
+        return nullptr;
+    }
+
+    datatypes::AnyValue* move_backward(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject*,
+            std::vector<callback_system::CallbackParameter*>)
+    {
+        move_to_direction(-direction);
+        return nullptr;
+    }
+
+    datatypes::AnyValue* strafe_left(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject*,
+            std::vector<callback_system::CallbackParameter*>)
+    {
+        move_to_direction(-right);
+        return nullptr;
+    }
+
+    datatypes::AnyValue* strafe_right(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject*,
+            std::vector<callback_system::CallbackParameter*>)
+    {
+        move_to_direction(right);
+        return nullptr;
     }
 
     datatypes::AnyValue* delete_suzanne_species(

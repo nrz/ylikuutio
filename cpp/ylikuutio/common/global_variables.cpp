@@ -21,6 +21,9 @@ GLfloat aspect_ratio = (GLfloat) window_width / window_height;
 glm::mat4 ProjectionMatrix;
 glm::mat4 ViewMatrix;
 glm::vec3 position;
+glm::vec3 direction;
+glm::vec3 right;
+glm::vec3 up;
 GLfloat gravity = 9.81f / 60.0f;
 bool is_flight_mode_in_use;
 bool in_help_mode = true;
@@ -51,3 +54,7 @@ glm::vec3 camera_position;
 
 GLFWwindow* window;
 console::Console* global_console_pointer = nullptr;
+
+bool is_first_turbo_pressed = false;
+bool is_second_turbo_pressed = false;
+float deltaTime;

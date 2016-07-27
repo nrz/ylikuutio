@@ -44,6 +44,9 @@ extern uint32_t font_size;
 
 // Variable related to voluntary movement.
 extern glm::vec3 position;
+extern glm::vec3 direction;
+extern glm::vec3 right;
+extern glm::vec3 up;
 extern SphericalCoordinatesStruct spherical_position;
 extern double horizontalAngle;
 extern double verticalAngle;
@@ -54,6 +57,8 @@ extern GLfloat mouseSpeed;
 extern bool hasMouseEverMoved;
 extern bool is_invert_mouse_in_use;
 extern bool is_flight_mode_in_use;
+extern bool is_first_turbo_pressed;
+extern bool is_second_turbo_pressed;
 
 // Variables related to physics.
 extern GLfloat gravity;
@@ -61,6 +66,7 @@ extern GLfloat fallSpeed;
 
 // Variables related to timing of events.
 extern uint32_t max_FPS;
+extern float deltaTime;
 
 // Variables related to the current `Scene`.
 extern double earth_radius;
