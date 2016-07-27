@@ -668,6 +668,16 @@ int main(void)
 
         glfwPollEvents();
 
+        // Check for key releases and call corresponding callbacks.
+        for (uint32_t i = 0; i < (*current_keyrelease_callback_engine_vector_pointer).size(); i++)
+        {
+            if (glfwGetKey(window, (*current_keyrelease_callback_engine_vector_pointer).at(i).keycode) == GLFW_RELEASE)
+            {
+                callback_system::CallbackEngine* callback_engine = (*current_keyrelease_callback_engine_vector_pointer).at(i).callback_engine;
+                datatypes::AnyValue* any_value = callback_engine->execute();
+            }
+        }
+
         // Check for keypresses and call corresponding callbacks.
         for (uint32_t i = 0; i < (*current_callback_engine_vector_pointer).size(); i++)
         {
