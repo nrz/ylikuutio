@@ -110,7 +110,7 @@ namespace ontology
         }
 
         // Direction : Spherical coordinates to Cartesian coordinates conversion
-        glm::vec3 direction(
+        glm::vec3 direction = glm::vec3(
                 cos(verticalAngle) * sin(horizontalAngle),
                 sin(verticalAngle),
                 cos(verticalAngle) * cos(horizontalAngle)
