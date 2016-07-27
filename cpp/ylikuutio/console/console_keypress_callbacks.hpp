@@ -10,6 +10,11 @@ namespace console
 {
     void charmods_callback(GLFWwindow* window, unsigned int codepoint, int mods);
 
+    datatypes::AnyValue* enter_console(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject*,
+            std::vector<callback_system::CallbackParameter*> input_parameters);
+
     datatypes::AnyValue* exit_console(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject* callback_object,

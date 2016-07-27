@@ -313,7 +313,7 @@ int main(void)
     // Callback code for `GLFW_KEY_GRAVE_ACCENT` (tilde key above Tab, usually used for console).
     callback_system::CallbackEngine* enter_console_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* enter_console_callback_object = new callback_system::CallbackObject(
-            &ajokki::enter_console, enter_console_callback_engine);
+            &console::enter_console, enter_console_callback_engine);
     callback_system::CallbackParameter* enter_console_parameter = new callback_system::CallbackParameter(
             "console_pointer", new datatypes::AnyValue(my_console), false, enter_console_callback_object);
 
