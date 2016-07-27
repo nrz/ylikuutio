@@ -65,6 +65,9 @@ extern GLfloat gravity;
 extern GLfloat fallSpeed;
 
 // Variables related to timing of events.
+extern double lastTime;
+extern double currentTime;
+extern float deltaTime;
 extern uint32_t max_FPS;
 extern float deltaTime;
 
