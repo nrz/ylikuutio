@@ -29,7 +29,6 @@
 #include "cpp/ylikuutio/ontology/scene.hpp"
 #include "cpp/ylikuutio/ontology/universe.hpp"
 #include "cpp/ylikuutio/common/any_value.hpp"
-#include "cpp/ylikuutio/common/global_variables.hpp"
 #include "cpp/ylikuutio/common/globals.hpp"
 
 // Include GLEW
