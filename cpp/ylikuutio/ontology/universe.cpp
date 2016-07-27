@@ -110,21 +110,21 @@ namespace ontology
         }
 
         // Direction : Spherical coordinates to Cartesian coordinates conversion
-        glm::vec3 direction = glm::vec3(
+        direction = glm::vec3(
                 cos(verticalAngle) * sin(horizontalAngle),
                 sin(verticalAngle),
                 cos(verticalAngle) * cos(horizontalAngle)
                 );
 
         // Right vector
-        glm::vec3 right = glm::vec3(
+        right = glm::vec3(
                 sin(horizontalAngle - PI/2.0f),
                 0,
                 cos(horizontalAngle - PI/2.0f)
                 );
 
         // Up vector
-        glm::vec3 up = glm::cross(right, direction);
+        up = glm::cross(right, direction);
 
         GLfloat temp_speed;
 
