@@ -541,16 +541,16 @@ int main(void)
     while (!is_exit_requested)
     {
         // Measure speed
-        double currentTime = glfwGetTime();
+        double current_time_in_main_loop = glfwGetTime();
 
-        if (currentTime - last_time_for_display_sync >= (1.0f / max_FPS))
+        if (current_time_in_main_loop - last_time_for_display_sync >= (1.0f / max_FPS))
         {
             last_time_for_display_sync = glfwGetTime();
 
             char ms_frame_text[256];
             nbFrames++;
 
-            while (currentTime - last_time_to_display_FPS >= 1.0f)
+            while (current_time_in_main_loop - last_time_to_display_FPS >= 1.0f)
             {
                 // If last `std::printf()` was more than 1 sec ago,
                 // `std::printf` and reset.
