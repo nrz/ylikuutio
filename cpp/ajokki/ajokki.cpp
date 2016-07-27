@@ -550,7 +550,7 @@ int main(void)
             char ms_frame_text[256];
             nbFrames++;
 
-            if (currentTime - lastTime >= 1.0f)
+            while (currentTime - lastTime >= 1.0f)
             {
                 // If last `std::printf()` was more than 1 sec ago,
                 // `std::printf` and reset.
