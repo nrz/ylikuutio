@@ -25,43 +25,43 @@ TEST(line2D_line2D_intersection, parallel_lines)
     geometry::Line2D line_b = geometry::Line2D(glm::vec2(7.0f, 6.0f), glm::vec2(4.0f, 5.0f));
 
     glm::vec2 intersection_point_a_a = geometry::get_intersection_point(&line_a, &line_a);
-    ASSERT_TRUE(isnan(intersection_point_a_a.x));
-    ASSERT_TRUE(isnan(intersection_point_a_a.y));
+    ASSERT_TRUE(std::isnan(intersection_point_a_a.x));
+    ASSERT_TRUE(std::isnan(intersection_point_a_a.y));
 
     glm::vec2 intersection_point_a_b = geometry::get_intersection_point(&line_a, &line_b);
-    ASSERT_TRUE(isnan(intersection_point_a_b.x));
-    ASSERT_TRUE(isnan(intersection_point_a_b.y));
+    ASSERT_TRUE(std::isnan(intersection_point_a_b.x));
+    ASSERT_TRUE(std::isnan(intersection_point_a_b.y));
 
     glm::vec2 intersection_point_b_a = geometry::get_intersection_point(&line_b, &line_a);
-    ASSERT_TRUE(isnan(intersection_point_b_a.x));
-    ASSERT_TRUE(isnan(intersection_point_b_a.y));
+    ASSERT_TRUE(std::isnan(intersection_point_b_a.x));
+    ASSERT_TRUE(std::isnan(intersection_point_b_a.y));
 
     glm::vec2 intersection_point_b_b = geometry::get_intersection_point(&line_b, &line_b);
-    ASSERT_TRUE(isnan(intersection_point_b_b.x));
-    ASSERT_TRUE(isnan(intersection_point_b_b.y));
+    ASSERT_TRUE(std::isnan(intersection_point_b_b.x));
+    ASSERT_TRUE(std::isnan(intersection_point_b_b.y));
 
     // Line c is same as but point order is changed.
     geometry::Line2D line_c = geometry::Line2D(glm::vec2(11.0f, 5.0f), glm::vec2(2.0f, 2.0f));
 
     glm::vec2 intersection_point_a_c = geometry::get_intersection_point(&line_a, &line_c);
-    ASSERT_TRUE(isnan(intersection_point_a_c.x));
-    ASSERT_TRUE(isnan(intersection_point_a_c.y));
+    ASSERT_TRUE(std::isnan(intersection_point_a_c.x));
+    ASSERT_TRUE(std::isnan(intersection_point_a_c.y));
 
     glm::vec2 intersection_point_b_c = geometry::get_intersection_point(&line_b, &line_c);
-    ASSERT_TRUE(isnan(intersection_point_b_c.x));
-    ASSERT_TRUE(isnan(intersection_point_b_c.y));
+    ASSERT_TRUE(std::isnan(intersection_point_b_c.x));
+    ASSERT_TRUE(std::isnan(intersection_point_b_c.y));
 
     glm::vec2 intersection_point_c_c = geometry::get_intersection_point(&line_c, &line_c);
-    ASSERT_TRUE(isnan(intersection_point_c_c.x));
-    ASSERT_TRUE(isnan(intersection_point_c_c.y));
+    ASSERT_TRUE(std::isnan(intersection_point_c_c.x));
+    ASSERT_TRUE(std::isnan(intersection_point_c_c.y));
 
     glm::vec2 intersection_point_c_a = geometry::get_intersection_point(&line_c, &line_a);
-    ASSERT_TRUE(isnan(intersection_point_c_a.x));
-    ASSERT_TRUE(isnan(intersection_point_c_a.y));
+    ASSERT_TRUE(std::isnan(intersection_point_c_a.x));
+    ASSERT_TRUE(std::isnan(intersection_point_c_a.y));
 
     glm::vec2 intersection_point_c_b = geometry::get_intersection_point(&line_c, &line_b);
-    ASSERT_TRUE(isnan(intersection_point_c_b.x));
-    ASSERT_TRUE(isnan(intersection_point_c_b.y));
+    ASSERT_TRUE(std::isnan(intersection_point_c_b.x));
+    ASSERT_TRUE(std::isnan(intersection_point_c_b.y));
 }
 
 TEST(line2D_line2D_intersection, intersecting_lines)
