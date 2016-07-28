@@ -319,6 +319,10 @@ int main(void)
             &current_keyrelease_callback_engine_vector_pointer); // create a console.
     global_console_pointer = my_console;
 
+    /*********************************************************************\
+     *  Callback engines for action mode keyreleases begin here.         *
+    \*********************************************************************/
+
     // Callback code for `GLFW_KEY_GRAVE_ACCENT` release: enable enter console.
     callback_system::CallbackEngine* enable_enter_console_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* enable_enter_console_callback_object = new callback_system::CallbackObject(
@@ -336,6 +340,10 @@ int main(void)
     callback_system::CallbackObject* release_second_turbo_callback_object = new callback_system::CallbackObject(
             &ajokki::release_second_turbo, release_second_turbo_callback_engine);
 
+    /*********************************************************************\
+     *  Callback engines for action mode keypresses begin here.          *
+    \*********************************************************************/
+
     // Callback code for `GLFW_KEY_GRAVE_ACCENT` (tilde key above Tab, usually used for console).
     callback_system::CallbackEngine* enter_console_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* enter_console_callback_object = new callback_system::CallbackObject(
@@ -343,12 +351,20 @@ int main(void)
     callback_system::CallbackParameter* enter_console_parameter = new callback_system::CallbackParameter(
             "console_pointer", new datatypes::AnyValue(my_console), false, enter_console_callback_object);
 
+    /*********************************************************************\
+     *  Callback engines for console keyreleases begin here.             *
+    \*********************************************************************/
+
     // Callback code for `GLFW_KEY_GRAVE_ACCENT` release: enable exit console.
     callback_system::CallbackEngine* enable_exit_console_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* enable_exit_console_callback_object = new callback_system::CallbackObject(
             &console::enable_exit_console, enable_exit_console_callback_engine);
     callback_system::CallbackParameter* enable_exit_console_parameter = new callback_system::CallbackParameter(
             "console_pointer", new datatypes::AnyValue(my_console), false, enable_exit_console_callback_object);
+
+    /*********************************************************************\
+     *  Callback engines for console keypresses begin here.              *
+    \*********************************************************************/
 
     // Callback code for `GLFW_KEY_GRAVE_ACCENT` (tilde key above Tab, usually used for console).
     callback_system::CallbackEngine* exit_console_callback_engine = new callback_system::CallbackEngine();
