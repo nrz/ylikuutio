@@ -69,12 +69,12 @@ namespace console
 
             printing_struct.x = 0;
             printing_struct.y = window_height - (2 * text_size);
+            printing_struct.horizontal_alignment = "left";
+            printing_struct.vertical_alignment = "top";
             printing_struct.text =
                 "Welcome! Please write \"help\"\\n"
                 "for more information.\\n"
                 "$ " + current_input_string;
-            printing_struct.horizontal_alignment = "left";
-            printing_struct.vertical_alignment = "top";
             text2D::printText2D(printing_struct);
         }
     }
