@@ -34,6 +34,9 @@ namespace console
             callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>)
     {
+        // FIXME: This is a keyrelease callback function with a named parameter (a hash map lookup).
+        // It is more efficient to get the input parameters using their index instead of their variable name.
+
         datatypes::AnyValue* any_value_console = callback_object->get_any_value("console_pointer");
 
         if (any_value_console->type != datatypes::CONSOLE_POINTER)
