@@ -773,7 +773,6 @@ int main(void)
                     "\\n"
                     "F1-help mode\\n"
                     "arrow keys\\n"
-                    "N-north S-south W-west E-east\\n"
                     "I-invert mouse (%s)\\n"
                     "F-flight mode (%s)\\n"
                     "G-grass texture%s\\n"
