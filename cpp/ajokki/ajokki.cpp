@@ -654,8 +654,6 @@ int main(void)
             // Up vector
             up = glm::cross(right, direction);
 
-            // GLfloat temp_speed;
-
             // Check for key releases and call corresponding callbacks.
             for (uint32_t i = 0; i < (*current_keyrelease_callback_engine_vector_pointer).size(); i++)
             {
