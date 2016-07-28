@@ -396,42 +396,6 @@ int main(void)
     callback_system::CallbackObject* descent_callback_object = new callback_system::CallbackObject(
             &ajokki::descent, descent_callback_engine);
 
-    /*********************************************************************\
-     *  Callback engines for console keyreleases begin here.             *
-    \*********************************************************************/
-
-    // Callback code for `GLFW_KEY_GRAVE_ACCENT` release: enable exit console.
-    callback_system::CallbackEngine* enable_exit_console_callback_engine = new callback_system::CallbackEngine();
-    callback_system::CallbackObject* enable_exit_console_callback_object = new callback_system::CallbackObject(
-            &console::enable_exit_console, enable_exit_console_callback_engine);
-    callback_system::CallbackParameter* enable_exit_console_parameter = new callback_system::CallbackParameter(
-            "console_pointer", new datatypes::AnyValue(my_console), false, enable_exit_console_callback_object);
-
-    /*********************************************************************\
-     *  Callback engines for console keypresses begin here.              *
-    \*********************************************************************/
-
-    // Callback code for `GLFW_KEY_GRAVE_ACCENT` (tilde key above Tab, usually used for console).
-    callback_system::CallbackEngine* exit_console_callback_engine = new callback_system::CallbackEngine();
-    callback_system::CallbackObject* exit_console_callback_object = new callback_system::CallbackObject(
-            &console::exit_console, exit_console_callback_engine);
-    callback_system::CallbackParameter* exit_console_parameter = new callback_system::CallbackParameter(
-            "console_pointer", new datatypes::AnyValue(my_console), false, exit_console_callback_object);
-
-    // Callback code for backspace: delete character left of cursor from current input in console.
-    callback_system::CallbackEngine* backspace_callback_engine = new callback_system::CallbackEngine();
-    callback_system::CallbackObject* backspace_callback_object = new callback_system::CallbackObject(
-            &console::backspace, backspace_callback_engine);
-    callback_system::CallbackParameter* backspace_callback_parameter = new callback_system::CallbackParameter(
-            "console_pointer", new datatypes::AnyValue(my_console), false, backspace_callback_object);
-
-    // Callback code for enter: delete character left of cursor from current input in console.
-    callback_system::CallbackEngine* enter_callback_engine = new callback_system::CallbackEngine();
-    callback_system::CallbackObject* enter_callback_object = new callback_system::CallbackObject(
-            &console::enter_key, enter_callback_engine);
-    callback_system::CallbackParameter* enter_console_callback_parameter = new callback_system::CallbackParameter(
-            "console_pointer", new datatypes::AnyValue(my_console), false, enter_callback_object);
-
     // Callback code for D: delete Suzanne species.
     bool does_suzanne_species_exist = true;
     callback_system::CallbackEngine* delete_suzanne_species_callback_engine = new callback_system::CallbackEngine();
@@ -529,6 +493,42 @@ int main(void)
             new datatypes::AnyValue(&has_suzanne_2_transformed_into_monkey),
             false,
             transform_into_monkey_callback_object);
+
+    /*********************************************************************\
+     *  Callback engines for console keyreleases begin here.             *
+    \*********************************************************************/
+
+    // Callback code for `GLFW_KEY_GRAVE_ACCENT` release: enable exit console.
+    callback_system::CallbackEngine* enable_exit_console_callback_engine = new callback_system::CallbackEngine();
+    callback_system::CallbackObject* enable_exit_console_callback_object = new callback_system::CallbackObject(
+            &console::enable_exit_console, enable_exit_console_callback_engine);
+    callback_system::CallbackParameter* enable_exit_console_parameter = new callback_system::CallbackParameter(
+            "console_pointer", new datatypes::AnyValue(my_console), false, enable_exit_console_callback_object);
+
+    /*********************************************************************\
+     *  Callback engines for console keypresses begin here.              *
+    \*********************************************************************/
+
+    // Callback code for `GLFW_KEY_GRAVE_ACCENT` (tilde key above Tab, usually used for console).
+    callback_system::CallbackEngine* exit_console_callback_engine = new callback_system::CallbackEngine();
+    callback_system::CallbackObject* exit_console_callback_object = new callback_system::CallbackObject(
+            &console::exit_console, exit_console_callback_engine);
+    callback_system::CallbackParameter* exit_console_parameter = new callback_system::CallbackParameter(
+            "console_pointer", new datatypes::AnyValue(my_console), false, exit_console_callback_object);
+
+    // Callback code for backspace: delete character left of cursor from current input in console.
+    callback_system::CallbackEngine* backspace_callback_engine = new callback_system::CallbackEngine();
+    callback_system::CallbackObject* backspace_callback_object = new callback_system::CallbackObject(
+            &console::backspace, backspace_callback_engine);
+    callback_system::CallbackParameter* backspace_callback_parameter = new callback_system::CallbackParameter(
+            "console_pointer", new datatypes::AnyValue(my_console), false, backspace_callback_object);
+
+    // Callback code for enter: delete character left of cursor from current input in console.
+    callback_system::CallbackEngine* enter_callback_engine = new callback_system::CallbackEngine();
+    callback_system::CallbackObject* enter_callback_object = new callback_system::CallbackObject(
+            &console::enter_key, enter_callback_engine);
+    callback_system::CallbackParameter* enter_console_callback_parameter = new callback_system::CallbackParameter(
+            "console_pointer", new datatypes::AnyValue(my_console), false, enter_callback_object);
 
     datatypes::AnyValue* my_world_value = new datatypes::AnyValue(my_world);
     callback_system::CallbackParameter* callback_parameter = new callback_system::CallbackParameter("", my_world_value, false, cleanup_callback_object);
