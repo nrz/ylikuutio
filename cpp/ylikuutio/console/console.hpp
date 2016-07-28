@@ -2,6 +2,16 @@
 #define __CONSOLE_HPP_INCLUDED
 
 #include "cpp/ylikuutio/callback_system/key_and_callback_struct.hpp"
+#include "cpp/ylikuutio/callback_system/callback_parameter.hpp"
+#include "cpp/ylikuutio/callback_system/callback_object.hpp"
+#include "cpp/ylikuutio/callback_system/callback_engine.hpp"
+#include "cpp/ylikuutio/common/any_value.hpp"
+
+// Include GLFW
+#ifndef __GLFW3_H_INCLUDED
+#define __GLFW3_H_INCLUDED
+#include <glfw3.h>
+#endif
 
 // Include standard headers
 #include <list>     // std::list
@@ -23,6 +33,38 @@ namespace console
             void set_my_keypress_callback_engine_vector_pointer(std::vector<KeyAndCallbackStruct>* my_keypress_callback_engine_vector_pointer);
             void set_my_keyrelease_callback_engine_vector_pointer(std::vector<KeyAndCallbackStruct>* my_keyrelease_callback_engine_vector_pointer);
             void draw_console();
+
+            friend void charmods_callback(GLFWwindow* window, unsigned int codepoint, int mods);
+            friend datatypes::AnyValue* enable_enter_console(
+                    callback_system::CallbackEngine*,
+                    callback_system::CallbackObject*,
+                    std::vector<callback_system::CallbackParameter*>);
+            friend datatypes::AnyValue* enable_exit_console(
+                    callback_system::CallbackEngine*,
+                    callback_system::CallbackObject*,
+                    std::vector<callback_system::CallbackParameter*>);
+            friend datatypes::AnyValue* enter_console(
+                    callback_system::CallbackEngine*,
+                    callback_system::CallbackObject*,
+                    std::vector<callback_system::CallbackParameter*>);
+            friend datatypes::AnyValue* exit_console(
+                    callback_system::CallbackEngine*,
+                    callback_system::CallbackObject*,
+                    std::vector<callback_system::CallbackParameter*>);
+            friend datatypes::AnyValue* add_character(
+                    callback_system::CallbackEngine*,
+                    callback_system::CallbackObject*,
+                    std::vector<callback_system::CallbackParameter*>);
+            friend datatypes::AnyValue* backspace(
+                    callback_system::CallbackEngine*,
+                    callback_system::CallbackObject*,
+                    std::vector<callback_system::CallbackParameter*>);
+            friend datatypes::AnyValue* enter_key(
+                    callback_system::CallbackEngine*,
+                    callback_system::CallbackObject*,
+                    std::vector<callback_system::CallbackParameter*>);
+
+        private:
             void enable_enter_console();
             void enable_exit_console();
             bool enter_console();
@@ -40,7 +82,6 @@ namespace console
             void home();
             void end();
 
-        private:
             std::list<char> current_input;
             std::list<char>::iterator cursor_it;
             uint32_t cursor_index;
