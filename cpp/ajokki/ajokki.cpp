@@ -518,13 +518,13 @@ int main(void)
     callback_system::CallbackParameter* callback_parameter = new callback_system::CallbackParameter("", my_world_value, false, cleanup_callback_object);
     cleanup_callback_object->set_new_callback(&ajokki::full_cleanup);
 
-    // This is one of the possible `std::vector<KeyAndCallbackStruct>`.
+    // Keyrelease callbacks for action mode.
     // Key releases are checked in the order of this struct.
     keyrelease_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_GRAVE_ACCENT, enable_enter_console_callback_engine });
     keyrelease_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_LEFT_CONTROL, release_first_turbo_callback_engine });
     keyrelease_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_RIGHT_CONTROL, release_second_turbo_callback_engine });
 
-    // This is one of the possible `std::vector<KeyAndCallbackStruct>`.
+    // Keypress callbacks for action mode.
     // Keypresses are checked in the order of this struct.
     keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_GRAVE_ACCENT, enter_console_callback_engine });
     keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_ESCAPE, exit_program_callback_engine });
@@ -543,11 +543,13 @@ int main(void)
     keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_A, transform_into_monkey_callback_engine });
 
     // Keyrelease callbacks for console.
+    // Key releases are checked in the order of this struct.
     std::vector<KeyAndCallbackStruct> console_keyrelease_callback_engines;
     console_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_GRAVE_ACCENT, enable_exit_console_callback_engine });
     my_console->set_my_keyrelease_callback_engine_vector_pointer(&console_keyrelease_callback_engines);
 
     // Keypress callbacks for console.
+    // Keypresses are checked in the order of this struct.
     std::vector<KeyAndCallbackStruct> console_keypress_callback_engines;
     console_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_GRAVE_ACCENT, exit_console_callback_engine });
     console_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_BACKSPACE, backspace_callback_engine });
