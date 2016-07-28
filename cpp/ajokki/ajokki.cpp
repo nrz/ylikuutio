@@ -422,14 +422,14 @@ int main(void)
     callback_system::CallbackEngine* backspace_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* backspace_callback_object = new callback_system::CallbackObject(
             &console::backspace, backspace_callback_engine);
-    callback_system::CallbackParameter* backspace_console_pointer = new callback_system::CallbackParameter(
+    callback_system::CallbackParameter* backspace_callback_parameter = new callback_system::CallbackParameter(
             "console_pointer", new datatypes::AnyValue(my_console), false, backspace_callback_object);
 
     // Callback code for enter: delete character left of cursor from current input in console.
     callback_system::CallbackEngine* enter_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* enter_callback_object = new callback_system::CallbackObject(
             &console::enter_key, enter_callback_engine);
-    callback_system::CallbackParameter* enter_console_pointer = new callback_system::CallbackParameter(
+    callback_system::CallbackParameter* enter_console_callback_parameter = new callback_system::CallbackParameter(
             "console_pointer", new datatypes::AnyValue(my_console), false, enter_callback_object);
 
     // Callback code for D: delete Suzanne species.
