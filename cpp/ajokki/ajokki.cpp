@@ -351,35 +351,6 @@ int main(void)
     callback_system::CallbackParameter* enter_console_parameter = new callback_system::CallbackParameter(
             "console_pointer", new datatypes::AnyValue(my_console), false, enter_console_callback_object);
 
-    /*********************************************************************\
-     *  Callback engines for console keyreleases begin here.             *
-    \*********************************************************************/
-
-    // Callback code for `GLFW_KEY_GRAVE_ACCENT` release: enable exit console.
-    callback_system::CallbackEngine* enable_exit_console_callback_engine = new callback_system::CallbackEngine();
-    callback_system::CallbackObject* enable_exit_console_callback_object = new callback_system::CallbackObject(
-            &console::enable_exit_console, enable_exit_console_callback_engine);
-    callback_system::CallbackParameter* enable_exit_console_parameter = new callback_system::CallbackParameter(
-            "console_pointer", new datatypes::AnyValue(my_console), false, enable_exit_console_callback_object);
-
-    /*********************************************************************\
-     *  Callback engines for console keypresses begin here.              *
-    \*********************************************************************/
-
-    // Callback code for `GLFW_KEY_GRAVE_ACCENT` (tilde key above Tab, usually used for console).
-    callback_system::CallbackEngine* exit_console_callback_engine = new callback_system::CallbackEngine();
-    callback_system::CallbackObject* exit_console_callback_object = new callback_system::CallbackObject(
-            &console::exit_console, exit_console_callback_engine);
-    callback_system::CallbackParameter* exit_console_parameter = new callback_system::CallbackParameter(
-            "console_pointer", new datatypes::AnyValue(my_console), false, exit_console_callback_object);
-
-    // Callback code for backspace: delete character left of cursor from current input in console.
-    callback_system::CallbackEngine* backspace_callback_engine = new callback_system::CallbackEngine();
-    callback_system::CallbackObject* backspace_callback_object = new callback_system::CallbackObject(
-            &console::backspace, backspace_callback_engine);
-    callback_system::CallbackParameter* backspace_console_pointer = new callback_system::CallbackParameter(
-            "console_pointer", new datatypes::AnyValue(my_console), false, backspace_callback_object);
-
     // Callback code for esc: exit program.
     callback_system::CallbackEngine* exit_program_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* exit_program_callback_object = new callback_system::CallbackObject(
@@ -424,6 +395,35 @@ int main(void)
     callback_system::CallbackEngine* descent_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* descent_callback_object = new callback_system::CallbackObject(
             &ajokki::descent, descent_callback_engine);
+
+    /*********************************************************************\
+     *  Callback engines for console keyreleases begin here.             *
+    \*********************************************************************/
+
+    // Callback code for `GLFW_KEY_GRAVE_ACCENT` release: enable exit console.
+    callback_system::CallbackEngine* enable_exit_console_callback_engine = new callback_system::CallbackEngine();
+    callback_system::CallbackObject* enable_exit_console_callback_object = new callback_system::CallbackObject(
+            &console::enable_exit_console, enable_exit_console_callback_engine);
+    callback_system::CallbackParameter* enable_exit_console_parameter = new callback_system::CallbackParameter(
+            "console_pointer", new datatypes::AnyValue(my_console), false, enable_exit_console_callback_object);
+
+    /*********************************************************************\
+     *  Callback engines for console keypresses begin here.              *
+    \*********************************************************************/
+
+    // Callback code for `GLFW_KEY_GRAVE_ACCENT` (tilde key above Tab, usually used for console).
+    callback_system::CallbackEngine* exit_console_callback_engine = new callback_system::CallbackEngine();
+    callback_system::CallbackObject* exit_console_callback_object = new callback_system::CallbackObject(
+            &console::exit_console, exit_console_callback_engine);
+    callback_system::CallbackParameter* exit_console_parameter = new callback_system::CallbackParameter(
+            "console_pointer", new datatypes::AnyValue(my_console), false, exit_console_callback_object);
+
+    // Callback code for backspace: delete character left of cursor from current input in console.
+    callback_system::CallbackEngine* backspace_callback_engine = new callback_system::CallbackEngine();
+    callback_system::CallbackObject* backspace_callback_object = new callback_system::CallbackObject(
+            &console::backspace, backspace_callback_engine);
+    callback_system::CallbackParameter* backspace_console_pointer = new callback_system::CallbackParameter(
+            "console_pointer", new datatypes::AnyValue(my_console), false, backspace_callback_object);
 
     // Callback code for enter: delete character left of cursor from current input in console.
     callback_system::CallbackEngine* enter_callback_engine = new callback_system::CallbackEngine();
