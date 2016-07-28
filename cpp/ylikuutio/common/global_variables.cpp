@@ -45,11 +45,13 @@ GLfloat speed = 5.0f; // 5 units / second
 GLfloat turbo_factor;
 GLfloat twin_turbo_factor;
 GLfloat mouseSpeed = 0.005f;
-bool hasMouseEverMoved;
-bool is_invert_mouse_in_use;
-bool is_flight_mode_in_use;
-bool is_first_turbo_pressed;
-bool is_second_turbo_pressed;
+bool hasMouseEverMoved = false;
+bool can_toggle_invert_mouse = false;
+bool is_invert_mouse_in_use = false;
+bool can_toggle_flight_mode = false;
+bool is_flight_mode_in_use = false;
+bool is_first_turbo_pressed = false;
+bool is_second_turbo_pressed = false;
 
 // Variables related to physics.
 GLfloat gravity = 9.81f / 60.0f;

@@ -340,6 +340,16 @@ int main(void)
     callback_system::CallbackObject* release_second_turbo_callback_object = new callback_system::CallbackObject(
             &ajokki::release_second_turbo, release_second_turbo_callback_engine);
 
+    // Callback code for I release: enable_toggle invert mouse.
+    callback_system::CallbackEngine* enable_toggle_invert_mouse_callback_engine = new callback_system::CallbackEngine();
+    callback_system::CallbackObject* enable_toggle_invert_mouse_callback_object = new callback_system::CallbackObject(
+            &ajokki::enable_toggle_invert_mouse, enable_toggle_invert_mouse_callback_engine);
+
+    // Callback code for F release: enable_toggle flight mode.
+    callback_system::CallbackEngine* enable_toggle_flight_mode_callback_engine = new callback_system::CallbackEngine();
+    callback_system::CallbackObject* enable_toggle_flight_mode_callback_object = new callback_system::CallbackObject(
+            &ajokki::enable_toggle_flight_mode, enable_toggle_flight_mode_callback_engine);
+
     /*********************************************************************\
      *  Callback engines for action mode keypresses begin here.          *
     \*********************************************************************/
@@ -395,6 +405,16 @@ int main(void)
     callback_system::CallbackEngine* descent_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* descent_callback_object = new callback_system::CallbackObject(
             &ajokki::descent, descent_callback_engine);
+
+    // Callback code for I: toggle invert mouse.
+    callback_system::CallbackEngine* toggle_invert_mouse_callback_engine = new callback_system::CallbackEngine();
+    callback_system::CallbackObject* toggle_invert_mouse_callback_object = new callback_system::CallbackObject(
+            &ajokki::toggle_invert_mouse, toggle_invert_mouse_callback_engine);
+
+    // Callback code for F: toggle flight mode.
+    callback_system::CallbackEngine* toggle_flight_mode_callback_engine = new callback_system::CallbackEngine();
+    callback_system::CallbackObject* toggle_flight_mode_callback_object = new callback_system::CallbackObject(
+            &ajokki::toggle_flight_mode, toggle_flight_mode_callback_engine);
 
     // Callback code for D: delete Suzanne species.
     bool does_suzanne_species_exist = true;
@@ -539,6 +559,8 @@ int main(void)
     keyrelease_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_GRAVE_ACCENT, enable_enter_console_callback_engine });
     keyrelease_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_LEFT_CONTROL, release_first_turbo_callback_engine });
     keyrelease_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_RIGHT_CONTROL, release_second_turbo_callback_engine });
+    keyrelease_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_I, enable_toggle_invert_mouse_callback_engine });
+    keyrelease_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_F, enable_toggle_flight_mode_callback_engine });
 
     // Keypress callbacks for action mode.
     // Keypresses are checked in the order of this struct.
@@ -552,6 +574,8 @@ int main(void)
     keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_RIGHT, strafe_right_callback_engine });
     keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_SPACE, ascent_callback_engine });
     keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_ENTER, descent_callback_engine });
+    keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_I, toggle_invert_mouse_callback_engine });
+    keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_F, toggle_flight_mode_callback_engine });
     keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_D, delete_suzanne_species_callback_engine });
     keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_G, switch_to_grass_material_callback_engine });
     keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_U, switch_to_uvmap_material_callback_engine });

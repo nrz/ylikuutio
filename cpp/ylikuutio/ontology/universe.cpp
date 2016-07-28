@@ -92,21 +92,6 @@ namespace ontology
             is_key_F1_released = true;
         }
 
-        // Flight mode on.
-        if (glfwGetKey(window, GLFW_KEY_F) == GLFW_PRESS)
-        {
-            if (is_key_F_released)
-            {
-                is_flight_mode_in_use = (is_flight_mode_in_use ? false : true);
-                fallSpeed = 0.0f;
-                is_key_F_released = false;
-            }
-        }
-        else if (glfwGetKey(window, GLFW_KEY_F) == GLFW_RELEASE)
-        {
-            is_key_F_released = true;
-        }
-
         if (!is_flight_mode_in_use)
         {
             fallSpeed += gravity;
@@ -114,19 +99,6 @@ namespace ontology
         }
 
         GLfloat FoV = initialFoV;// - 5 * glfwGetMouseWheel(); // Now GLFW 3 requires setting up a callback for this. It's a bit too complicated for this beginner's tutorial, so it's disabled instead.
-
-        if (glfwGetKey(window, GLFW_KEY_I) == GLFW_PRESS)
-        {
-            if (is_key_I_released)
-            {
-                is_invert_mouse_in_use = (is_invert_mouse_in_use ? false : true);
-                is_key_I_released = false;
-            }
-        }
-        else if (glfwGetKey(window, GLFW_KEY_I) == GLFW_RELEASE)
-        {
-            is_key_I_released = true;
-        }
 
         // adjust position according to the ground.
         if (!is_flight_mode_in_use)

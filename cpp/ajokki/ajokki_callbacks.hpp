@@ -32,6 +32,16 @@ namespace ajokki
             callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*>);
 
+    datatypes::AnyValue* enable_toggle_invert_mouse(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject*,
+            std::vector<callback_system::CallbackParameter*>);
+
+    datatypes::AnyValue* enable_toggle_flight_mode(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject*,
+            std::vector<callback_system::CallbackParameter*>);
+
     /*********************************************************************\
      *  Callback engines for action mode keypresses begin here.          *
     \*********************************************************************/
@@ -77,6 +87,16 @@ namespace ajokki
             std::vector<callback_system::CallbackParameter*>);
 
     datatypes::AnyValue* descent(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject*,
+            std::vector<callback_system::CallbackParameter*>);
+
+    datatypes::AnyValue* toggle_invert_mouse(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject*,
+            std::vector<callback_system::CallbackParameter*>);
+
+    datatypes::AnyValue* toggle_flight_mode(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*>);
