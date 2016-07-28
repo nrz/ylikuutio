@@ -57,7 +57,6 @@ namespace console
         {
             // Convert current input into std::string.
             uint32_t characters_for_line = window_width / text_size;
-            std::string current_input_string = string::convert_std_list_char_to_std_string(this->current_input, characters_for_line - 2, characters_for_line);
 
             // Draw the console to screen using `text2D::printText2D`.
             PrintingStruct printing_struct;
