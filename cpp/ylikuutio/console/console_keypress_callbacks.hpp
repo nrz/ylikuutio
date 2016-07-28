@@ -3,6 +3,12 @@
 #include "cpp/ylikuutio/callback_system/callback_engine.hpp"
 #include "cpp/ylikuutio/common/any_value.hpp"
 
+// Include GLFW
+#ifndef __GLFW3_H_INCLUDED
+#define __GLFW3_H_INCLUDED
+#include <glfw3.h>
+#endif
+
 // Include standard headers
 #include <vector>   // std::vector
 
