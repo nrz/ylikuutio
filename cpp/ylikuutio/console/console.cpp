@@ -73,8 +73,15 @@ namespace console
             printing_struct.vertical_alignment = "top";
             printing_struct.text =
                 "Welcome! Please write \"help\"\\n"
-                "for more information.\\n"
-                "$ " + current_input_string;
+                "for more information.\\n";
+
+            for (uint32_t historical_input_i = 0; historical_input_i < this->command_history.size(); historical_input_i++)
+            {
+                std::list<char> historical_input = this->command_history.at(historical_input_i);
+                printing_struct.text += "$ " + string::convert_std_list_char_to_std_string(historical_input, characters_for_line - 2, characters_for_line) + "\\n";
+            }
+            printing_struct.text += "$ " + string::convert_std_list_char_to_std_string(this->current_input, characters_for_line - 2, characters_for_line);
+
             text2D::printText2D(printing_struct);
         }
     }
