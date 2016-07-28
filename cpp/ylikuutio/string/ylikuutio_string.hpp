@@ -17,6 +17,8 @@ namespace string
     int32_t extract_unicode_value_from_string(const char*& unicode_char_pointer);
 
     std::string convert_std_list_char_to_std_string(const std::list<char>& std_list_char);
+
+    std::string convert_std_list_char_to_std_string(const std::list<char>& std_list_char, uint32_t first_line_length, uint32_t line_length);
 }
 
 #endif

@@ -137,4 +137,23 @@ namespace string
 
         return my_string;
     }
+
+    std::string convert_std_list_char_to_std_string(const std::list<char>& std_list_char, uint32_t first_line_length, uint32_t line_length)
+    {
+        std::string my_string;
+        uint32_t remaining_characters_on_this_line = first_line_length;
+
+        for (std::list<char>::const_iterator it = std_list_char.begin(); it != std_list_char.end(); it++)
+        {
+            if (remaining_characters_on_this_line == 0)
+            {
+                my_string.push_back('\\');
+                my_string.push_back('n');
+                remaining_characters_on_this_line = line_length;
+            }
+            my_string.push_back(*it);
+            remaining_characters_on_this_line--;
+        }
+        return my_string;
+    }
 }
