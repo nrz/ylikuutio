@@ -18,6 +18,10 @@ namespace ajokki
             callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*> input_parameters);
 
+    /*********************************************************************\
+     *  Callback engines for action mode keyreleases begin here.         *
+    \*********************************************************************/
+
     datatypes::AnyValue* release_first_turbo(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
@@ -27,6 +31,10 @@ namespace ajokki
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*>);
+
+    /*********************************************************************\
+     *  Callback engines for action mode keypresses begin here.          *
+    \*********************************************************************/
 
     datatypes::AnyValue* exit_program(
             callback_system::CallbackEngine*,

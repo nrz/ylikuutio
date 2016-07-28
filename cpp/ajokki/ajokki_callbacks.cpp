@@ -86,6 +86,10 @@ namespace ajokki
         return nullptr;
     }
 
+    /*********************************************************************\
+     *  Callback engines for action mode keyreleases begin here.         *
+    \*********************************************************************/
+
     datatypes::AnyValue* release_first_turbo(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject* callback_object,
@@ -103,6 +107,11 @@ namespace ajokki
         is_second_turbo_pressed = false;
         return nullptr;
     }
+
+
+    /*********************************************************************\
+     *  Callback engines for action mode keypresses begin here.          *
+    \*********************************************************************/
 
     datatypes::AnyValue* exit_program(
             callback_system::CallbackEngine*,
