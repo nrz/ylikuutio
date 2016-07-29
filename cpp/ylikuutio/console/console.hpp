@@ -91,7 +91,7 @@ namespace console
 
             std::vector<std::list<char>> command_history;
             bool in_historical_input;
-            uint32_t historical_input_index;
+            uint32_t historical_input_i;
             std::list<char> temp_input;    // This is used for temporary storage of new input while modifying historical inputs.
 
             // These are related to keypress callbacks.
