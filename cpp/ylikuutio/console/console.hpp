@@ -89,6 +89,7 @@ namespace console
             bool can_enter_console;
             bool can_exit_console;
             std::vector<std::list<char>> command_history;
+            bool in_historical_input;
 
             // These are related to keypress callbacks.
             std::vector<KeyAndCallbackStruct>** current_keypress_callback_engine_vector_pointer_pointer;

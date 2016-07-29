@@ -20,6 +20,7 @@ namespace console
         // constructor.
         this->cursor_it = this->current_input.begin();
         this->cursor_index = 0;
+        this->in_historical_input = false;
         this->in_console = false;
         this->can_enter_console = true;
         this->can_exit_console = false;
@@ -120,6 +121,7 @@ namespace console
 
             // Mark that we're in console.
             this->in_console = true;
+            this->in_historical_input = false;
 
             // Usually key release is required to enable enter console.
             this->can_exit_console = false;
