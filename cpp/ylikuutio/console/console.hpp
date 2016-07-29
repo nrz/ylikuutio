@@ -82,7 +82,7 @@ namespace console
             void home();
             void end();
 
-            std::list<char> current_input;
+            std::list<char> current_input; // This is used for actual inputs.
             std::list<char>::iterator cursor_it;
             uint32_t cursor_index;
             bool in_console;
