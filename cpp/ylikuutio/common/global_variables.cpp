@@ -70,5 +70,7 @@ bool is_world_spherical;
 // Variables related to debug & testing keys.
 bool is_key_I_released;
 bool is_key_F_released;
-bool is_key_F1_released;
+
+// Variables related to help mode.
 bool in_help_mode = true;
+bool can_toggle_help_mode = false;

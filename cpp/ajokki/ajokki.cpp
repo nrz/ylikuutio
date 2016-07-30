@@ -350,6 +350,13 @@ int main(void)
     callback_system::CallbackObject* enable_toggle_flight_mode_callback_object = new callback_system::CallbackObject(
             &ajokki::enable_toggle_flight_mode, enable_toggle_flight_mode_callback_engine);
 
+    // Callback code for F1 release: enable toggle help mode.
+    callback_system::CallbackEngine* enable_toggle_help_mode_callback_engine = new callback_system::CallbackEngine();
+    callback_system::CallbackObject* enable_toggle_help_mode_callback_object = new callback_system::CallbackObject(
+            &ajokki::enable_toggle_help_mode, enable_toggle_help_mode_callback_engine);
+    callback_system::CallbackParameter* enable_toggle_help_mode_parameter = new callback_system::CallbackParameter(
+            "console_pointer", new datatypes::AnyValue(my_console), false, enable_toggle_help_mode_callback_object);
+
     /*********************************************************************\
      *  Callback engines for action mode keypresses begin here.          *
     \*********************************************************************/
@@ -415,6 +422,13 @@ int main(void)
     callback_system::CallbackEngine* toggle_flight_mode_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* toggle_flight_mode_callback_object = new callback_system::CallbackObject(
             &ajokki::toggle_flight_mode, toggle_flight_mode_callback_engine);
+
+    // Callback code for F1: toggle help mode.
+    callback_system::CallbackEngine* toggle_help_mode_callback_engine = new callback_system::CallbackEngine();
+    callback_system::CallbackObject* toggle_help_mode_callback_object = new callback_system::CallbackObject(
+            &ajokki::toggle_help_mode, toggle_help_mode_callback_engine);
+    callback_system::CallbackParameter* toggle_help_mode_parameter = new callback_system::CallbackParameter(
+            "console_pointer", new datatypes::AnyValue(my_console), false, toggle_help_mode_callback_object);
 
     // Callback code for D: delete Suzanne species.
     bool does_suzanne_species_exist = true;
@@ -603,6 +617,7 @@ int main(void)
     keyrelease_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_RIGHT_CONTROL, release_second_turbo_callback_engine });
     keyrelease_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_I, enable_toggle_invert_mouse_callback_engine });
     keyrelease_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_F, enable_toggle_flight_mode_callback_engine });
+    keyrelease_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_F1, enable_toggle_help_mode_callback_engine });
 
     // Keypress callbacks for action mode.
     // Keypresses are checked in the order of this struct.
@@ -618,6 +633,7 @@ int main(void)
     keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_ENTER, descent_callback_engine });
     keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_I, toggle_invert_mouse_callback_engine });
     keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_F, toggle_flight_mode_callback_engine });
+    keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_F1, toggle_help_mode_callback_engine });
     keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_D, delete_suzanne_species_callback_engine });
     keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_G, switch_to_grass_material_callback_engine });
     keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_U, switch_to_uvmap_material_callback_engine });

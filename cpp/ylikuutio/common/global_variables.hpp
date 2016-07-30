@@ -79,7 +79,9 @@ extern bool is_world_spherical;
 // Variables related to debug & testing keys.
 extern bool is_key_I_released;
 extern bool is_key_F_released;
-extern bool is_key_F1_released;
+
+// Variables related to help mode.
 extern bool in_help_mode;
+extern bool can_toggle_help_mode;
 
 #endif

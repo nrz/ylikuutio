@@ -126,6 +126,15 @@ namespace ajokki
         return nullptr;
     }
 
+    datatypes::AnyValue* enable_toggle_help_mode(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject*,
+            std::vector<callback_system::CallbackParameter*>)
+    {
+        can_toggle_help_mode = true;
+        return nullptr;
+    }
+
     /*********************************************************************\
      *  Callback engines for action mode keypresses begin here.          *
     \*********************************************************************/
@@ -235,6 +244,19 @@ namespace ajokki
             is_flight_mode_in_use = !is_flight_mode_in_use;
             fallSpeed = 0.0f;
             can_toggle_flight_mode = false;
+        }
+        return nullptr;
+    }
+
+    datatypes::AnyValue* toggle_help_mode(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject*,
+            std::vector<callback_system::CallbackParameter*>)
+    {
+        if (can_toggle_help_mode)
+        {
+            in_help_mode = !in_help_mode;
+            can_toggle_help_mode = false;
         }
         return nullptr;
     }

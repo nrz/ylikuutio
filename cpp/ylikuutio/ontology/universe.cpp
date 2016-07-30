@@ -71,27 +71,6 @@ namespace ontology
 
     void Universe::compute_matrices_from_inputs()
     {
-        // Help mode on.
-        if (glfwGetKey(window, GLFW_KEY_F1) == GLFW_PRESS)
-        {
-            if (is_key_F1_released)
-            {
-                if (in_help_mode)
-                {
-                    in_help_mode = false;
-                }
-                else
-                {
-                    in_help_mode = true;
-                }
-                is_key_F1_released = false;
-            }
-        }
-        else if (glfwGetKey(window, GLFW_KEY_F1) == GLFW_RELEASE)
-        {
-            is_key_F1_released = true;
-        }
-
         if (!is_flight_mode_in_use)
         {
             fallSpeed += gravity;
