@@ -15,7 +15,8 @@ namespace console
 {
     Console::Console(
             std::vector<KeyAndCallbackStruct>** current_keypress_callback_engine_vector_pointer_pointer,
-            std::vector<KeyAndCallbackStruct>** current_keyrelease_callback_engine_vector_pointer_pointer)
+            std::vector<KeyAndCallbackStruct>** current_keyrelease_callback_engine_vector_pointer_pointer,
+            text2D::Text2D* text2D_pointer)
     {
         // constructor.
         this->cursor_it = this->current_input.begin();
@@ -38,6 +39,9 @@ namespace console
 
         // This is a pointer to `std::vector<KeyAndCallbackStruct>*` that controls keyrelease callbacks.
         this->current_keyrelease_callback_engine_vector_pointer_pointer = current_keyrelease_callback_engine_vector_pointer_pointer;
+
+        // This is a pointer to `text2D::Text2D` instance that is used for printing.
+        this->text2D_pointer = text2D_pointer;
     }
 
     Console::~Console()
@@ -86,7 +90,7 @@ namespace console
             }
             printing_struct.text += "$ " + string::convert_std_list_char_to_std_string(this->current_input, characters_for_line - 2, characters_for_line);
 
-            text2D::printText2D(printing_struct);
+            this->text2D_pointer->printText2D(printing_struct);
         }
     }
 

@@ -314,9 +314,15 @@ int main(void)
     std::vector<KeyAndCallbackStruct>* current_keyrelease_callback_engine_vector_pointer;
     current_keyrelease_callback_engine_vector_pointer = &keyrelease_callback_engines;
 
+    // Initialize our little text library with the Holstein font
+    const char* char_g_font_texture_filename = g_font_texture_filename.c_str();
+    const char* char_g_font_texture_file_format = g_font_texture_file_format.c_str();
+    text2D::Text2D* my_text2D = new text2D::Text2D(window_width, window_height, char_g_font_texture_filename, char_g_font_texture_file_format);
+
     console::Console* my_console = new console::Console(
             &current_keypress_callback_engine_vector_pointer,
-            &current_keyrelease_callback_engine_vector_pointer); // create a console.
+            &current_keyrelease_callback_engine_vector_pointer,
+            my_text2D); // create a console.
     global_console_pointer = my_console;
 
     /*********************************************************************\
@@ -660,11 +666,6 @@ int main(void)
     console_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_ENTER, enter_callback_engine });
     my_console->set_my_keypress_callback_engine_vector_pointer(&console_keypress_callback_engines);
 
-    // Initialize our little text library with the Holstein font
-    const char* char_g_font_texture_filename = g_font_texture_filename.c_str();
-    const char* char_g_font_texture_file_format = g_font_texture_file_format.c_str();
-    text2D::initText2D((GLuint) window_width, (GLuint) window_height, char_g_font_texture_filename, char_g_font_texture_file_format);
-
     // For speed computation
     double last_time_to_display_FPS = glfwGetTime();
     double last_time_for_display_sync = glfwGetTime();
@@ -909,7 +910,7 @@ int main(void)
             printing_struct.text_char = angles_and_coordinates_text;
             printing_struct.horizontal_alignment = "left";
             printing_struct.vertical_alignment = "bottom";
-            text2D::printText2D(printing_struct);
+            my_text2D->printText2D(printing_struct);
 
             if (in_help_mode && can_display_help_screen)
             {
@@ -919,7 +920,7 @@ int main(void)
                 printing_struct.text_char = help_text_char;
                 printing_struct.horizontal_alignment = "left";
                 printing_struct.vertical_alignment = "top";
-                text2D::printText2D(printing_struct);
+                my_text2D->printText2D(printing_struct);
             }
 
             if (testing_spherical_world_in_use)
@@ -930,7 +931,7 @@ int main(void)
                 printing_struct.text_char = spherical_coordinates_text;
                 printing_struct.horizontal_alignment = "left";
                 printing_struct.vertical_alignment = "bottom";
-                text2D::printText2D(printing_struct);
+                my_text2D->printText2D(printing_struct);
             }
 
             // print time data on top left corner.
@@ -939,7 +940,7 @@ int main(void)
             printing_struct.text_char = time_text;
             printing_struct.horizontal_alignment = "left";
             printing_struct.vertical_alignment = "top";
-            text2D::printText2D(printing_struct);
+            my_text2D->printText2D(printing_struct);
 
             if (ms_frame_text_ready)
             {
@@ -949,7 +950,7 @@ int main(void)
                 printing_struct.text_char = ms_frame_text;
                 printing_struct.horizontal_alignment = "right";
                 printing_struct.vertical_alignment = "top";
-                text2D::printText2D(printing_struct);
+                my_text2D->printText2D(printing_struct);
             }
 
             // Swap buffers.

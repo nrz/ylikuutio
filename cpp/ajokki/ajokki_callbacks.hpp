@@ -15,8 +15,8 @@ namespace ajokki
 
     datatypes::AnyValue* full_cleanup(
             callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*> input_parameters);
+            callback_system::CallbackObject* callback_object,
+            std::vector<callback_system::CallbackParameter*>);
 
     /*********************************************************************\
      *  Callback engines for action mode keyreleases begin here.         *

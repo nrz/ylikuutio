@@ -55,31 +55,32 @@ namespace ajokki
 
     datatypes::AnyValue* full_cleanup(
             callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*> input_parameters)
+            callback_system::CallbackObject* callback_object,
+            std::vector<callback_system::CallbackParameter*>)
     {
         std::cout << "Cleaning up.\n";
 
-        if (input_parameters.size() != 1)
+        datatypes::AnyValue* any_value_universe_pointer = callback_object->get_any_value("universe_pointer");
+        datatypes::AnyValue* any_value_text2D_pointer = callback_object->get_any_value("text2D_pointer");
+
+        if (any_value_universe_pointer->type == datatypes::UNIVERSE_POINTER)
         {
-            std::cerr << "Invalid size of input_parameters: " << input_parameters.size() << ", should be 1.\n";
+            delete any_value_universe_pointer->universe_pointer;
         }
         else
         {
-            datatypes::AnyValue* any_value_universe_pointer = input_parameters.at(0)->get_any_value();
-
-            if (any_value_universe_pointer->type == datatypes::UNIVERSE_POINTER)
-            {
-                delete any_value_universe_pointer->universe_pointer;
-            }
-            else
-            {
-                std::cerr << "Invalid datatype: " << any_value_universe_pointer->type << ", should be " << datatypes::UNIVERSE_POINTER << "\n";
-            }
+            std::cerr << "Invalid datatype: " << any_value_universe_pointer->type << ", should be " << datatypes::UNIVERSE_POINTER << "\n";
         }
 
-        // Delete the text's VBO, the shader and the texture
-        text2D::cleanupText2D();
+        if (any_value_text2D_pointer->type == datatypes::TEXT2D_POINTER)
+        {
+            // Delete the text's VBO, the shader and the texture
+            delete any_value_text2D_pointer->text2D_pointer;
+        }
+        else
+        {
+            std::cerr << "Invalid datatype: " << any_value_text2D_pointer->type << ", should be " << datatypes::TEXT2D_POINTER << "\n";
+        }
 
         // Close OpenGL window and terminate GLFW
         glfwTerminate();

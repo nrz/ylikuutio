@@ -24,24 +24,16 @@
 #include <cstring>  // std::memcmp, std::strcmp, std::strlen, std::strncmp
 #include <stdint.h> // uint32_t etc.
 
-GLuint Text2DTextureID;              // Material containing the font
-GLuint Text2DVertexBufferID;         // Buffer containing the vertices
-GLuint Text2DUVBufferID;             // Buffer containing the UVs
-GLuint Text2DShaderID;               // Shader program used to display the text
-GLuint vertexPosition_screenspaceID; // Location of the program's "vertexPosition_screenspace" attribute
-GLuint vertexUVID;                   // Location of the program's "vertexUV" attribute
-GLuint Text2DUniformID;              // Location of the program's texture attribute
-GLuint screen_width_uniform_ID;      // Location of the program's window width uniform.
-GLuint screen_height_uniform_ID;     // Location of the program's window height uniform.
-
 namespace text2D
 {
-    void initText2D(
+    Text2D::Text2D(
             GLuint screen_width,
             GLuint screen_height,
             const char* texturePath,
             const char* char_font_texture_file_format)
     {
+        // constructor.
+
         // Initialize texture
         if ((std::strcmp(char_font_texture_file_format, "bmp") == 0) || (std::strcmp(char_font_texture_file_format, "BMP") == 0))
         {
@@ -75,7 +67,22 @@ namespace text2D
         glUniform1i(screen_height_uniform_ID, screen_height);
     }
 
-    void printText2D(
+    Text2D::~Text2D()
+    {
+        // destructor.
+
+        // Delete buffers
+        glDeleteBuffers(1, &Text2DVertexBufferID);
+        glDeleteBuffers(1, &Text2DUVBufferID);
+
+        // Delete texture
+        glDeleteTextures(1, &Text2DTextureID);
+
+        // Delete shader
+        glDeleteProgram(Text2DShaderID);
+    }
+
+    void Text2D::printText2D(
             GLuint screen_width,
             GLuint screen_height,
             GLuint x,
@@ -283,7 +290,7 @@ namespace text2D
         glDisableVertexAttribArray(vertexUVID);
     }
 
-    void printText2D(PrintingStruct printing_struct)
+    void Text2D::printText2D(PrintingStruct printing_struct)
     {
         if (printing_struct.text.empty())
         {
@@ -315,7 +322,7 @@ namespace text2D
         }
     }
 
-    void printText2D(
+    void Text2D::printText2D(
             GLuint screen_width,
             GLuint screen_height,
             GLuint x,
@@ -326,18 +333,5 @@ namespace text2D
             const char* char_font_texture_file_format)
     {
         printText2D(screen_width, screen_height, x, y, text_size, font_size, text_char, char_font_texture_file_format, "left", "bottom");
-    }
-
-    void cleanupText2D()
-    {
-        // Delete buffers
-        glDeleteBuffers(1, &Text2DVertexBufferID);
-        glDeleteBuffers(1, &Text2DUVBufferID);
-
-        // Delete texture
-        glDeleteTextures(1, &Text2DTextureID);
-
-        // Delete shader
-        glDeleteProgram(Text2DShaderID);
     }
 }
