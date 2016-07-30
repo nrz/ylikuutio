@@ -6,6 +6,11 @@
 #include <string>   // std::string
 #include <stdint.h> // uint32_t etc.
 
+namespace text2D
+{
+    class Text2D;
+}
+
 namespace console
 {
     class Console;
