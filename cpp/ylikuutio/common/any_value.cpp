@@ -36,6 +36,7 @@ namespace datatypes
         this->vector_font_pointer = nullptr;
         this->glyph_pointer = nullptr;
         this->text3D_pointer = nullptr;
+        this->text2D_pointer = nullptr;
         this->console_pointer = nullptr;
     }
 
@@ -425,6 +426,25 @@ namespace datatypes
         {
             this->type = datatypes::TEXT3D_POINTER;
             this->text3D_pointer = text3D_pointer;
+        }
+    }
+
+    AnyValue::AnyValue(text2D::Text2D* text2D_pointer)
+    {
+        // constructor.
+        this->set_default_values();
+        this->type = datatypes::TEXT2D_POINTER;
+        this->text2D_pointer = text2D_pointer;
+    }
+
+    AnyValue::AnyValue(std::string type, text2D::Text2D* text2D_pointer)
+    {
+        // constructor.
+        this->set_default_values();
+        if (std::strcmp(type.c_str(), "text2D::Text2D*"))
+        {
+            this->type = datatypes::TEXT2D_POINTER;
+            this->text2D_pointer = text2D_pointer;
         }
     }
 

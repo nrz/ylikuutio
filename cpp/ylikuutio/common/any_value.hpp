@@ -20,6 +20,11 @@ namespace ontology
     class Text3D;
 }
 
+namespace text2D
+{
+    class Text2D;
+}
+
 namespace console
 {
     class Console;
@@ -50,6 +55,7 @@ namespace datatypes
         VECTORFONT_POINTER,
         GLYPH_POINTER,
         TEXT3D_POINTER,
+        TEXT2D_POINTER,
         CONSOLE_POINTER
     };
 
@@ -77,6 +83,7 @@ namespace datatypes
             AnyValue(ontology::VectorFont* vector_font_pointer);
             AnyValue(ontology::Glyph* glyph_pointer);
             AnyValue(ontology::Text3D* text3D_pointer);
+            AnyValue(text2D::Text2D* text2D_pointer);
             AnyValue(console::Console* console_pointer);
 
             AnyValue(std::string type, bool bool_value);
@@ -99,6 +106,7 @@ namespace datatypes
             AnyValue(std::string type, ontology::VectorFont* vector_font_pointer);
             AnyValue(std::string type, ontology::Glyph* glyph_pointer);
             AnyValue(std::string type, ontology::Text3D* text3D_pointer);
+            AnyValue(std::string type, text2D::Text2D* text2D_pointer);
             AnyValue(std::string type, console::Console* console_pointer);
 
             int type;
@@ -122,6 +130,7 @@ namespace datatypes
             ontology::VectorFont* vector_font_pointer;
             ontology::Glyph* glyph_pointer;
             ontology::Text3D* text3D_pointer;
+            text2D::Text2D* text2D_pointer;
             console::Console* console_pointer;
 
         private:
