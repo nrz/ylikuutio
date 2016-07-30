@@ -90,7 +90,7 @@ namespace console
 
     void Console::copy_historical_input_into_current_input()
     {
-        // Copy the new historical input into current input.
+        // Copy selected historical input into current input.
         this->current_input.clear();
         std::copy(this->command_history.at(this->historical_input_i).begin(),
                 this->command_history.at(this->historical_input_i).end(),
@@ -280,7 +280,7 @@ namespace console
                 // OK, we moved from the last historical input to the new input.
                 this->in_historical_input = false;
 
-                // Copy the new historical input into current input.
+                // Copy temp input into current input.
                 std::copy(this->temp_input.begin(), this->temp_input.end(), std::back_inserter(this->current_input));
                 // this->current_input.assign(this->temp_input.begin(), this->temp_input.end());
 
