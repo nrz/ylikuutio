@@ -83,5 +83,6 @@ extern bool is_key_F_released;
 // Variables related to help mode.
 extern bool in_help_mode;
 extern bool can_toggle_help_mode;
+extern bool can_display_help_screen;
 
 #endif

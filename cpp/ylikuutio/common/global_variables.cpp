@@ -74,3 +74,4 @@ bool is_key_F_released;
 // Variables related to help mode.
 bool in_help_mode = true;
 bool can_toggle_help_mode = false;
+bool can_display_help_screen = true;

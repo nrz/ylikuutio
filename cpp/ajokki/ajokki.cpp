@@ -798,6 +798,9 @@ int main(void)
                                 glfwGetKey(window, key_code);
                             }
 
+                            // Do not display help screen when in console.
+                            can_display_help_screen = false;
+
                             delete any_value;
                             break;
                         }
@@ -812,6 +815,9 @@ int main(void)
                             {
                                 glfwGetKey(window, key_code);
                             }
+
+                            // Enable display help screen when not in console.
+                            can_display_help_screen = true;
 
                             delete any_value;
                             break;
@@ -905,7 +911,7 @@ int main(void)
             printing_struct.vertical_alignment = "bottom";
             text2D::printText2D(printing_struct);
 
-            if (in_help_mode)
+            if (in_help_mode && can_display_help_screen)
             {
                 // print help text.
                 printing_struct.x = 0;
