@@ -36,6 +36,16 @@ namespace console
             callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>);
 
+    datatypes::AnyValue* enable_backspace(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject* callback_object,
+            std::vector<callback_system::CallbackParameter*>);
+
+    datatypes::AnyValue* enable_enter_key(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject* callback_object,
+            std::vector<callback_system::CallbackParameter*>);
+
     datatypes::AnyValue* enter_console(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,

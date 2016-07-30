@@ -539,6 +539,20 @@ int main(void)
     callback_system::CallbackParameter* enable_move_to_next_input_parameter = new callback_system::CallbackParameter(
             "console_pointer", new datatypes::AnyValue(my_console), false, enable_move_to_next_input_callback_object);
 
+    // Callback code for backspace release: enable backspace.
+    callback_system::CallbackEngine* enable_backspace_callback_engine = new callback_system::CallbackEngine();
+    callback_system::CallbackObject* enable_backspace_callback_object = new callback_system::CallbackObject(
+            &console::enable_backspace, enable_backspace_callback_engine);
+    callback_system::CallbackParameter* enable_backspace_parameter = new callback_system::CallbackParameter(
+            "console_pointer", new datatypes::AnyValue(my_console), false, enable_backspace_callback_object);
+
+    // Callback code for enter release: enable enter key.
+    callback_system::CallbackEngine* enable_enter_key_callback_engine = new callback_system::CallbackEngine();
+    callback_system::CallbackObject* enable_enter_key_callback_object = new callback_system::CallbackObject(
+            &console::enable_enter_key, enable_enter_key_callback_engine);
+    callback_system::CallbackParameter* enable_enter_key_parameter = new callback_system::CallbackParameter(
+            "console_pointer", new datatypes::AnyValue(my_console), false, enable_enter_key_callback_object);
+
     /*********************************************************************\
      *  Callback engines for console keypresses begin here.              *
     \*********************************************************************/
@@ -616,6 +630,8 @@ int main(void)
     console_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_GRAVE_ACCENT, enable_exit_console_callback_engine });
     console_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_UP, enable_move_to_previous_input_callback_engine });
     console_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_DOWN, enable_move_to_next_input_callback_engine });
+    console_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_BACKSPACE, enable_backspace_callback_engine });
+    console_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_ENTER, enable_enter_key_callback_engine });
     my_console->set_my_keyrelease_callback_engine_vector_pointer(&console_keyrelease_callback_engines);
 
     // Keypress callbacks for console.

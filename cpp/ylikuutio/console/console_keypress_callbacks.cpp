@@ -100,6 +100,40 @@ namespace console
         return nullptr;
     }
 
+    datatypes::AnyValue* enable_backspace(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject* callback_object,
+            std::vector<callback_system::CallbackParameter*>)
+    {
+        datatypes::AnyValue* any_value_console = callback_object->get_any_value("console_pointer");
+
+        if (any_value_console->type != datatypes::CONSOLE_POINTER)
+        {
+            return nullptr;
+        }
+
+        console::Console* console = any_value_console->console_pointer;
+        console->enable_backspace();
+        return nullptr;
+    }
+
+    datatypes::AnyValue* enable_enter_key(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject* callback_object,
+            std::vector<callback_system::CallbackParameter*>)
+    {
+        datatypes::AnyValue* any_value_console = callback_object->get_any_value("console_pointer");
+
+        if (any_value_console->type != datatypes::CONSOLE_POINTER)
+        {
+            return nullptr;
+        }
+
+        console::Console* console = any_value_console->console_pointer;
+        console->enable_enter_key();
+        return nullptr;
+    }
+
     datatypes::AnyValue* enter_console(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject* callback_object,

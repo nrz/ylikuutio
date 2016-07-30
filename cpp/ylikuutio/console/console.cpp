@@ -26,6 +26,8 @@ namespace console
         this->can_exit_console = false;
         this->can_move_to_previous_input = false;
         this->can_move_to_next_input = false;
+        this->can_backspace = false;
+        this->can_enter_key = false;
         this->previous_keypress_callback_engine_vector_pointer = nullptr;
         this->my_keypress_callback_engine_vector_pointer = nullptr;
         this->previous_keyrelease_callback_engine_vector_pointer = nullptr;
@@ -117,6 +119,16 @@ namespace console
         this->can_move_to_next_input = true;
     }
 
+    void Console::enable_backspace()
+    {
+        this->can_backspace = true;
+    }
+
+    void Console::enable_enter_key()
+    {
+        this->can_enter_key = true;
+    }
+
     bool Console::enter_console()
     {
         if (!this->in_console &&
@@ -187,10 +199,13 @@ namespace console
 
     void Console::backspace()
     {
-        if (this->cursor_it != this->current_input.begin())
+        if (this->in_console &&
+                this->can_backspace &&
+                this->cursor_it != this->current_input.begin())
         {
             this->cursor_it = this->current_input.erase(--this->cursor_it);
             this->cursor_index--;
+            this->can_backspace = false;
         }
     }
 
@@ -201,11 +216,16 @@ namespace console
 
     void Console::enter_key()
     {
-        this->command_history.push_back(this->current_input);
-        this->current_input.clear();
-        this->in_historical_input = false;
-        this->cursor_it = this->current_input.begin();
-        this->cursor_index = 0;
+        if (this->in_console &&
+                this->can_enter_key)
+        {
+            this->command_history.push_back(this->current_input);
+            this->current_input.clear();
+            this->in_historical_input = false;
+            this->cursor_it = this->current_input.begin();
+            this->cursor_index = 0;
+            this->can_enter_key = false;
+        }
     }
 
     void Console::move_cursor_left()

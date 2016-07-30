@@ -51,6 +51,14 @@ namespace console
                     callback_system::CallbackEngine*,
                     callback_system::CallbackObject*,
                     std::vector<callback_system::CallbackParameter*>);
+            friend datatypes::AnyValue* enable_backspace(
+                    callback_system::CallbackEngine*,
+                    callback_system::CallbackObject*,
+                    std::vector<callback_system::CallbackParameter*>);
+            friend datatypes::AnyValue* enable_enter_key(
+                    callback_system::CallbackEngine*,
+                    callback_system::CallbackObject*,
+                    std::vector<callback_system::CallbackParameter*>);
             friend datatypes::AnyValue* enter_console(
                     callback_system::CallbackEngine*,
                     callback_system::CallbackObject*,
@@ -86,6 +94,8 @@ namespace console
             void enable_exit_console();
             void enable_move_to_previous_input();
             void enable_move_to_next_input();
+            void enable_backspace();
+            void enable_enter_key();
             bool enter_console();
             bool exit_console();
             void add_character(char character);
@@ -111,6 +121,8 @@ namespace console
             bool can_exit_console;
             bool can_move_to_previous_input;
             bool can_move_to_next_input;
+            bool can_backspace;
+            bool can_enter_key;
 
             std::vector<std::list<char>> command_history;
             bool in_historical_input;
