@@ -101,7 +101,7 @@ namespace text2D
 
         uint32_t i = 0;
 
-        while(i < length)
+        while (i < length)
         {
             char character = text_char[i++];
 
@@ -152,7 +152,7 @@ namespace text2D
 
         i = 0;
 
-        while(i < length)
+        while (i < length)
         {
             // Print to the right side of X (so far there is no check for input length).
             // Print up of Y.
@@ -188,7 +188,7 @@ namespace text2D
             current_left_x += text_size;
 
             vertex_down_left_y = vertex_down_right_y = current_top_y - text_size;
-            vertex_up_left_y   = vertex_up_right_y   = current_top_y;
+            vertex_up_left_y = vertex_up_right_y = current_top_y;
 
             glm::vec2 vertex_up_left = glm::vec2(vertex_up_left_x, vertex_up_left_y);
             glm::vec2 vertex_up_right = glm::vec2(vertex_up_right_x, vertex_up_right_y);
@@ -216,20 +216,21 @@ namespace text2D
                 uv_y = 1 - (character / font_size) / (GLfloat) font_size;
             }
 
-            glm::vec2 uv_up_left    = glm::vec2(uv_x                 , uv_y);
-            glm::vec2 uv_up_right   = glm::vec2(uv_x + (1.0f / (GLfloat) font_size), uv_y);
+            glm::vec2 uv_up_left = glm::vec2(uv_x, uv_y);
+            glm::vec2 uv_up_right = glm::vec2(uv_x + (1.0f / (GLfloat) font_size), uv_y);
             glm::vec2 uv_down_right;
             glm::vec2 uv_down_left;
+
             if ((std::strcmp(char_font_texture_file_format, "dds") == 0) || (std::strcmp(char_font_texture_file_format, "DDS") == 0))
             {
                 uv_down_right = glm::vec2(uv_x + (1.0f / (GLfloat) font_size), (uv_y + 1.0f / (GLfloat) font_size));
-                uv_down_left  = glm::vec2(uv_x                               , (uv_y + 1.0f / (GLfloat) font_size));
+                uv_down_left = glm::vec2(uv_x, (uv_y + 1.0f / (GLfloat) font_size));
             }
             else if ((std::strcmp(char_font_texture_file_format, "bmp") == 0) || (std::strcmp(char_font_texture_file_format, "BMP") == 0))
             {
                 // BMP is stored in the file beginning from the bottom line.
                 uv_down_right = glm::vec2(uv_x + (1.0f / (GLfloat) font_size), (uv_y - 1.0f / (GLfloat) font_size));
-                uv_down_left  = glm::vec2(uv_x                               , (uv_y - 1.0f / (GLfloat) font_size));
+                uv_down_left = glm::vec2(uv_x, (uv_y - 1.0f / (GLfloat) font_size));
             }
             UVs.push_back(uv_up_left);
             UVs.push_back(uv_down_left);
