@@ -249,9 +249,11 @@ namespace console
                 this->historical_input_i = this->command_history.size() - 1;
 
                 // Copy the new input into temp input.
+                this->temp_input.clear();
                 std::copy(this->current_input.begin(), this->current_input.end(), std::back_inserter(this->temp_input));
 
                 // Copy the historical input into current input.
+                this->current_input.clear();
                 this->copy_historical_input_into_current_input();
 
                 this->move_cursor_to_end_of_line();
@@ -281,6 +283,7 @@ namespace console
                 this->in_historical_input = false;
 
                 // Copy temp input into current input.
+                this->current_input.clear();
                 std::copy(this->temp_input.begin(), this->temp_input.end(), std::back_inserter(this->current_input));
                 // this->current_input.assign(this->temp_input.begin(), this->temp_input.end());
 
