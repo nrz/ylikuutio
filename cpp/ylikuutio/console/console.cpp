@@ -16,7 +16,7 @@ namespace console
     Console::Console(
             std::vector<KeyAndCallbackStruct>** current_keypress_callback_engine_vector_pointer_pointer,
             std::vector<KeyAndCallbackStruct>** current_keyrelease_callback_engine_vector_pointer_pointer,
-            text2D::Text2D* text2D_pointer)
+            ontology::Text2D* text2D_pointer)
     {
         // constructor.
         this->cursor_it = this->current_input.begin();

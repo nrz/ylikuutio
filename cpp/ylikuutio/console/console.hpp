@@ -27,7 +27,7 @@ namespace console
             // constructor.
             Console(std::vector<KeyAndCallbackStruct>** current_keypress_callback_engine_vector_pointer_pointer,
                     std::vector<KeyAndCallbackStruct>** current_keyrelease_callback_engine_vector_pointer_pointer,
-                    text2D::Text2D* text2D_pointer);
+                    ontology::Text2D* text2D_pointer);
 
             // destructor.
             ~Console();
@@ -142,7 +142,7 @@ namespace console
             std::vector<KeyAndCallbackStruct>* my_keyrelease_callback_engine_vector_pointer;
 
             // This is a pointer to `text2D::Text2D` instance that is used for printing.
-            text2D::Text2D* text2D_pointer;
+            ontology::Text2D* text2D_pointer;
     };
 }
 

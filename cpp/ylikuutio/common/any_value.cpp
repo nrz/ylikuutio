@@ -447,7 +447,7 @@ namespace datatypes
         }
     }
 
-    AnyValue::AnyValue(text2D::Text2D* text2D_pointer)
+    AnyValue::AnyValue(ontology::Text2D* text2D_pointer)
     {
         // constructor.
         this->set_default_values();
@@ -455,11 +455,11 @@ namespace datatypes
         this->text2D_pointer = text2D_pointer;
     }
 
-    AnyValue::AnyValue(std::string type, text2D::Text2D* text2D_pointer)
+    AnyValue::AnyValue(std::string type, ontology::Text2D* text2D_pointer)
     {
         // constructor.
         this->set_default_values();
-        if (std::strcmp(type.c_str(), "text2D::Text2D*"))
+        if (std::strcmp(type.c_str(), "ontology::Text2D*"))
         {
             this->type = datatypes::TEXT2D_POINTER;
             this->text2D_pointer = text2D_pointer;

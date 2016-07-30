@@ -24,7 +24,7 @@
 #include <cstring>  // std::memcmp, std::strcmp, std::strlen, std::strncmp
 #include <stdint.h> // uint32_t etc.
 
-namespace text2D
+namespace ontology
 {
     Text2D::Text2D(
             GLuint screen_width,

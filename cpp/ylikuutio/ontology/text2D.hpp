@@ -9,7 +9,7 @@
 #include <GL/glew.h> // GLfloat, GLuint etc.
 #endif
 
-namespace text2D
+namespace ontology
 {
     class Text2D
     {

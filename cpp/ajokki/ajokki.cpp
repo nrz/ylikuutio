@@ -317,7 +317,7 @@ int main(void)
     // Initialize our little text library with the Holstein font
     const char* char_g_font_texture_filename = g_font_texture_filename.c_str();
     const char* char_g_font_texture_file_format = g_font_texture_file_format.c_str();
-    text2D::Text2D* my_text2D = new text2D::Text2D(window_width, window_height, char_g_font_texture_filename, char_g_font_texture_file_format);
+    ontology::Text2D* my_text2D = new ontology::Text2D(window_width, window_height, char_g_font_texture_filename, char_g_font_texture_file_format);
 
     console::Console* my_console = new console::Console(
             &current_keypress_callback_engine_vector_pointer,
