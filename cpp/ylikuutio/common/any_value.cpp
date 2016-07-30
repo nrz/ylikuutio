@@ -6,6 +6,19 @@
 #include <string>   // std::string
 #include <stdint.h> // uint32_t etc.
 
+namespace ontology
+{
+    class Universe;
+    class Scene;
+    class Shader;
+    class Material;
+    class Species;
+    class Object;
+    class VectorFont;
+    class Glyph;
+    class Text3D;
+}
+
 namespace text2D
 {
     class Text2D;
