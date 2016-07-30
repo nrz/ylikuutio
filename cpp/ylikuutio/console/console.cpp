@@ -24,6 +24,8 @@ namespace console
         this->in_console = false;
         this->can_enter_console = true;
         this->can_exit_console = false;
+        this->can_move_to_previous_input = false;
+        this->can_move_to_next_input = false;
         this->previous_keypress_callback_engine_vector_pointer = nullptr;
         this->my_keypress_callback_engine_vector_pointer = nullptr;
         this->previous_keyrelease_callback_engine_vector_pointer = nullptr;
@@ -86,6 +88,15 @@ namespace console
         }
     }
 
+    void Console::copy_historical_input_into_current_input()
+    {
+        // Copy the new historical input into current input.
+        this->current_input.clear();
+        std::copy(this->command_history.at(this->historical_input_i).begin(),
+                this->command_history.at(this->historical_input_i).end(),
+                std::back_inserter(this->current_input));
+    }
+
     void Console::enable_enter_console()
     {
         this->can_enter_console = true;
@@ -94,6 +105,16 @@ namespace console
     void Console::enable_exit_console()
     {
         this->can_exit_console = true;
+    }
+
+    void Console::enable_move_to_previous_input()
+    {
+        this->can_move_to_previous_input = true;
+    }
+
+    void Console::enable_move_to_next_input()
+    {
+        this->can_move_to_next_input = true;
     }
 
     bool Console::enter_console()
@@ -182,6 +203,7 @@ namespace console
     {
         this->command_history.push_back(this->current_input);
         this->current_input.clear();
+        this->in_historical_input = false;
         this->cursor_it = this->current_input.begin();
         this->cursor_index = 0;
     }
@@ -214,6 +236,69 @@ namespace console
     {
         this->cursor_it = this->current_input.end();
         this->cursor_index = this->current_input.size();
+    }
+
+    void Console::move_to_previous_input()
+    {
+        if (this->in_console && this->can_move_to_previous_input)
+        {
+            if (!this->in_historical_input && this->command_history.size() > 0)
+            {
+                // OK, we moved from the new input to the last historical input.
+                this->in_historical_input = true;
+                this->historical_input_i = this->command_history.size() - 1;
+
+                // Copy the new input into temp input.
+                std::copy(this->current_input.begin(), this->current_input.end(), std::back_inserter(this->temp_input));
+
+                // Copy the historical input into current input.
+                this->copy_historical_input_into_current_input();
+
+                this->move_cursor_to_end_of_line();
+                this->can_move_to_previous_input = false;
+            }
+            else if (this->in_historical_input && this->historical_input_i > 0)
+            {
+                // OK, we moved to the previous historical input.
+                this->historical_input_i--;
+
+                // Copy the historical input into current input.
+                this->copy_historical_input_into_current_input();
+
+                this->move_cursor_to_end_of_line();
+                this->can_move_to_previous_input = false;
+            }
+        }
+    }
+
+    void Console::move_to_next_input()
+    {
+        if (this->in_console && this->can_move_to_next_input)
+        {
+            if (this->in_historical_input && this->historical_input_i == this->command_history.size() - 1)
+            {
+                // OK, we moved from the last historical input to the new input.
+                this->in_historical_input = false;
+
+                // Copy the new historical input into current input.
+                std::copy(this->temp_input.begin(), this->temp_input.end(), std::back_inserter(this->current_input));
+                // this->current_input.assign(this->temp_input.begin(), this->temp_input.end());
+
+                this->move_cursor_to_end_of_line();
+                this->can_move_to_next_input = false;
+            }
+            else if (this->in_historical_input && this->historical_input_i < this->command_history.size() - 1)
+            {
+                // OK, we moved to the next historical input.
+                this->historical_input_i++;
+
+                // Copy the historical input into current input.
+                this->copy_historical_input_into_current_input();
+
+                this->move_cursor_to_end_of_line();
+                this->can_move_to_next_input = false;
+            }
+        }
     }
 
     void Console::page_up()

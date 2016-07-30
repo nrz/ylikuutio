@@ -525,6 +525,20 @@ int main(void)
     callback_system::CallbackParameter* enable_exit_console_parameter = new callback_system::CallbackParameter(
             "console_pointer", new datatypes::AnyValue(my_console), false, enable_exit_console_callback_object);
 
+    // Callback code for key up release: enable move to previous input.
+    callback_system::CallbackEngine* enable_move_to_previous_input_callback_engine = new callback_system::CallbackEngine();
+    callback_system::CallbackObject* enable_move_to_previous_input_callback_object = new callback_system::CallbackObject(
+            &console::enable_move_to_previous_input, enable_move_to_previous_input_callback_engine);
+    callback_system::CallbackParameter* enable_move_to_previous_input_parameter = new callback_system::CallbackParameter(
+            "console_pointer", new datatypes::AnyValue(my_console), false, enable_move_to_previous_input_callback_object);
+
+    // Callback code for key down release: enable move to next input.
+    callback_system::CallbackEngine* enable_move_to_next_input_callback_engine = new callback_system::CallbackEngine();
+    callback_system::CallbackObject* enable_move_to_next_input_callback_object = new callback_system::CallbackObject(
+            &console::enable_move_to_next_input, enable_move_to_next_input_callback_engine);
+    callback_system::CallbackParameter* enable_move_to_next_input_parameter = new callback_system::CallbackParameter(
+            "console_pointer", new datatypes::AnyValue(my_console), false, enable_move_to_next_input_callback_object);
+
     /*********************************************************************\
      *  Callback engines for console keypresses begin here.              *
     \*********************************************************************/
@@ -535,6 +549,20 @@ int main(void)
             &console::exit_console, exit_console_callback_engine);
     callback_system::CallbackParameter* exit_console_parameter = new callback_system::CallbackParameter(
             "console_pointer", new datatypes::AnyValue(my_console), false, exit_console_callback_object);
+
+    // Callback code for key up: move to previous input.
+    callback_system::CallbackEngine* move_to_previous_input_callback_engine = new callback_system::CallbackEngine();
+    callback_system::CallbackObject* move_to_previous_input_callback_object = new callback_system::CallbackObject(
+            &console::move_to_previous_input, move_to_previous_input_callback_engine);
+    callback_system::CallbackParameter* move_to_previous_input_parameter = new callback_system::CallbackParameter(
+            "console_pointer", new datatypes::AnyValue(my_console), false, move_to_previous_input_callback_object);
+
+    // Callback code for key down: move to next input.
+    callback_system::CallbackEngine* move_to_next_input_callback_engine = new callback_system::CallbackEngine();
+    callback_system::CallbackObject* move_to_next_input_callback_object = new callback_system::CallbackObject(
+            &console::move_to_next_input, move_to_next_input_callback_engine);
+    callback_system::CallbackParameter* move_to_next_input_parameter = new callback_system::CallbackParameter(
+            "console_pointer", new datatypes::AnyValue(my_console), false, move_to_next_input_callback_object);
 
     // Callback code for backspace: delete character left of cursor from current input in console.
     callback_system::CallbackEngine* backspace_callback_engine = new callback_system::CallbackEngine();
@@ -586,12 +614,16 @@ int main(void)
     // Key releases are checked in the order of this struct.
     std::vector<KeyAndCallbackStruct> console_keyrelease_callback_engines;
     console_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_GRAVE_ACCENT, enable_exit_console_callback_engine });
+    console_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_UP, enable_move_to_previous_input_callback_engine });
+    console_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_DOWN, enable_move_to_next_input_callback_engine });
     my_console->set_my_keyrelease_callback_engine_vector_pointer(&console_keyrelease_callback_engines);
 
     // Keypress callbacks for console.
     // Keypresses are checked in the order of this struct.
     std::vector<KeyAndCallbackStruct> console_keypress_callback_engines;
     console_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_GRAVE_ACCENT, exit_console_callback_engine });
+    console_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_UP, move_to_previous_input_callback_engine });
+    console_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_DOWN, move_to_next_input_callback_engine });
     console_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_BACKSPACE, backspace_callback_engine });
     console_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_ENTER, enter_callback_engine });
     my_console->set_my_keypress_callback_engine_vector_pointer(&console_keypress_callback_engines);

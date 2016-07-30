@@ -26,12 +26,32 @@ namespace console
             callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>);
 
+    datatypes::AnyValue* enable_move_to_previous_input(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject* callback_object,
+            std::vector<callback_system::CallbackParameter*>);
+
+    datatypes::AnyValue* enable_move_to_next_input(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject* callback_object,
+            std::vector<callback_system::CallbackParameter*>);
+
     datatypes::AnyValue* enter_console(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*> input_parameters);
 
     datatypes::AnyValue* exit_console(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject* callback_object,
+            std::vector<callback_system::CallbackParameter*>);
+
+    datatypes::AnyValue* move_to_previous_input(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject* callback_object,
+            std::vector<callback_system::CallbackParameter*>);
+
+    datatypes::AnyValue* move_to_next_input(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>);

@@ -43,11 +43,27 @@ namespace console
                     callback_system::CallbackEngine*,
                     callback_system::CallbackObject*,
                     std::vector<callback_system::CallbackParameter*>);
+            friend datatypes::AnyValue* enable_move_to_previous_input(
+                    callback_system::CallbackEngine*,
+                    callback_system::CallbackObject*,
+                    std::vector<callback_system::CallbackParameter*>);
+            friend datatypes::AnyValue* enable_move_to_next_input(
+                    callback_system::CallbackEngine*,
+                    callback_system::CallbackObject*,
+                    std::vector<callback_system::CallbackParameter*>);
             friend datatypes::AnyValue* enter_console(
                     callback_system::CallbackEngine*,
                     callback_system::CallbackObject*,
                     std::vector<callback_system::CallbackParameter*>);
             friend datatypes::AnyValue* exit_console(
+                    callback_system::CallbackEngine*,
+                    callback_system::CallbackObject*,
+                    std::vector<callback_system::CallbackParameter*>);
+            friend datatypes::AnyValue* move_to_previous_input(
+                    callback_system::CallbackEngine*,
+                    callback_system::CallbackObject*,
+                    std::vector<callback_system::CallbackParameter*>);
+            friend datatypes::AnyValue* move_to_next_input(
                     callback_system::CallbackEngine*,
                     callback_system::CallbackObject*,
                     std::vector<callback_system::CallbackParameter*>);
@@ -65,8 +81,11 @@ namespace console
                     std::vector<callback_system::CallbackParameter*>);
 
         private:
+            void copy_historical_input_into_current_input();
             void enable_enter_console();
             void enable_exit_console();
+            void enable_move_to_previous_input();
+            void enable_move_to_next_input();
             bool enter_console();
             bool exit_console();
             void add_character(char character);
@@ -77,6 +96,8 @@ namespace console
             void move_cursor_right();
             void move_cursor_to_start_of_line();
             void move_cursor_to_end_of_line();
+            void move_to_previous_input();
+            void move_to_next_input();
             void page_up();
             void page_down();
             void home();
@@ -88,6 +109,8 @@ namespace console
             bool in_console;
             bool can_enter_console;
             bool can_exit_console;
+            bool can_move_to_previous_input;
+            bool can_move_to_next_input;
 
             std::vector<std::list<char>> command_history;
             bool in_historical_input;

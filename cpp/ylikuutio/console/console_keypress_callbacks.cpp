@@ -66,6 +66,40 @@ namespace console
         return nullptr;
     }
 
+    datatypes::AnyValue* enable_move_to_previous_input(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject* callback_object,
+            std::vector<callback_system::CallbackParameter*>)
+    {
+        datatypes::AnyValue* any_value_console = callback_object->get_any_value("console_pointer");
+
+        if (any_value_console->type != datatypes::CONSOLE_POINTER)
+        {
+            return nullptr;
+        }
+
+        console::Console* console = any_value_console->console_pointer;
+        console->enable_move_to_previous_input();
+        return nullptr;
+    }
+
+    datatypes::AnyValue* enable_move_to_next_input(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject* callback_object,
+            std::vector<callback_system::CallbackParameter*>)
+    {
+        datatypes::AnyValue* any_value_console = callback_object->get_any_value("console_pointer");
+
+        if (any_value_console->type != datatypes::CONSOLE_POINTER)
+        {
+            return nullptr;
+        }
+
+        console::Console* console = any_value_console->console_pointer;
+        console->enable_move_to_next_input();
+        return nullptr;
+    }
+
     datatypes::AnyValue* enter_console(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject* callback_object,
@@ -123,6 +157,40 @@ namespace console
         uint32_t exit_console_magic_number = EXIT_CONSOLE_MAGIC_NUMBER;
         datatypes::AnyValue* any_value_magic_number = new datatypes::AnyValue(exit_console_magic_number);
         return any_value_magic_number;
+    }
+
+    datatypes::AnyValue* move_to_previous_input(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject* callback_object,
+            std::vector<callback_system::CallbackParameter*>)
+    {
+        datatypes::AnyValue* any_value_console = callback_object->get_any_value("console_pointer");
+
+        if (any_value_console->type != datatypes::CONSOLE_POINTER)
+        {
+            return nullptr;
+        }
+
+        console::Console* console = any_value_console->console_pointer;
+        console->move_to_previous_input();
+        return nullptr;
+    }
+
+    datatypes::AnyValue* move_to_next_input(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject* callback_object,
+            std::vector<callback_system::CallbackParameter*>)
+    {
+        datatypes::AnyValue* any_value_console = callback_object->get_any_value("console_pointer");
+
+        if (any_value_console->type != datatypes::CONSOLE_POINTER)
+        {
+            return nullptr;
+        }
+
+        console::Console* console = any_value_console->console_pointer;
+        console->move_to_next_input();
+        return nullptr;
     }
 
     datatypes::AnyValue* backspace(
