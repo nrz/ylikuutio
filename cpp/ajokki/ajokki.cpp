@@ -615,6 +615,13 @@ int main(void)
     callback_system::CallbackParameter* enable_enter_key_parameter = new callback_system::CallbackParameter(
             "console_pointer", new datatypes::AnyValue(my_console), false, enable_enter_key_callback_object);
 
+    // Callback code for C release: enable Control-C.
+    callback_system::CallbackEngine* enable_ctrl_c_callback_engine = new callback_system::CallbackEngine();
+    callback_system::CallbackObject* enable_ctrl_c_callback_object = new callback_system::CallbackObject(
+            &console::enable_ctrl_c, enable_ctrl_c_callback_engine);
+    callback_system::CallbackParameter* enable_ctrl_c_parameter = new callback_system::CallbackParameter(
+            "console_pointer", new datatypes::AnyValue(my_console), false, enable_ctrl_c_callback_object);
+
     /*********************************************************************\
      *  Callback engines for console keypresses begin here.              *
     \*********************************************************************/
@@ -696,6 +703,13 @@ int main(void)
     callback_system::CallbackParameter* enter_console_callback_parameter = new callback_system::CallbackParameter(
             "console_pointer", new datatypes::AnyValue(my_console), false, enter_callback_object);
 
+    // Callback code for C release: enable Control-C.
+    callback_system::CallbackEngine* ctrl_c_callback_engine = new callback_system::CallbackEngine();
+    callback_system::CallbackObject* ctrl_c_callback_object = new callback_system::CallbackObject(
+            &console::ctrl_c, ctrl_c_callback_engine);
+    callback_system::CallbackParameter* ctrl_c_parameter = new callback_system::CallbackParameter(
+            "console_pointer", new datatypes::AnyValue(my_console), false, ctrl_c_callback_object);
+
     datatypes::AnyValue* my_world_value = new datatypes::AnyValue(my_world);
     callback_system::CallbackParameter* callback_parameter = new callback_system::CallbackParameter("", my_world_value, false, cleanup_callback_object);
     cleanup_callback_object->set_new_callback(&ajokki::full_cleanup);
@@ -744,6 +758,7 @@ int main(void)
     console_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_DOWN, enable_move_to_next_input_callback_engine });
     console_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_BACKSPACE, enable_backspace_callback_engine });
     console_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_ENTER, enable_enter_key_callback_engine });
+    console_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_C, enable_ctrl_c_callback_engine });
     my_console->set_my_keyrelease_callback_engine_vector_pointer(&console_keyrelease_callback_engines);
 
     // Keypress callbacks for console.
@@ -760,6 +775,7 @@ int main(void)
     console_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_DOWN, move_to_next_input_callback_engine });
     console_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_BACKSPACE, backspace_callback_engine });
     console_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_ENTER, enter_callback_engine });
+    console_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_C, ctrl_c_callback_engine });
     my_console->set_my_keypress_callback_engine_vector_pointer(&console_keypress_callback_engines);
 
     // For speed computation

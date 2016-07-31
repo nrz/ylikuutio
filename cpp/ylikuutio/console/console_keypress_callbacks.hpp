@@ -76,6 +76,11 @@ namespace console
             callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>);
 
+    datatypes::AnyValue* enable_ctrl_c(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject* callback_object,
+            std::vector<callback_system::CallbackParameter*>);
+
     datatypes::AnyValue* enter_console(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
@@ -132,6 +137,11 @@ namespace console
             std::vector<callback_system::CallbackParameter*>);
 
     datatypes::AnyValue* backspace(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject* callback_object,
+            std::vector<callback_system::CallbackParameter*>);
+
+    datatypes::AnyValue* ctrl_c(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>);

@@ -32,6 +32,7 @@ namespace console
         this->can_move_to_next_input = false;
         this->can_backspace = false;
         this->can_enter_key = false;
+        this->can_ctrl_c = false;
         this->is_left_control_pressed = false;
         this->is_right_control_pressed = false;
         this->is_left_alt_pressed = false;
@@ -172,6 +173,11 @@ namespace console
         this->can_enter_key = true;
     }
 
+    void Console::enable_ctrl_c()
+    {
+        this->can_ctrl_c = true;
+    }
+
     bool Console::enter_console()
     {
         if (!this->in_console &&
@@ -304,6 +310,22 @@ namespace console
             this->cursor_it = this->current_input.begin();
             this->cursor_index = 0;
             this->can_enter_key = false;
+        }
+    }
+
+    void Console::ctrl_c()
+    {
+        if (this->in_console &&
+                this->can_ctrl_c &&
+                (this->is_left_control_pressed || this->is_right_control_pressed) &&
+                !this->is_left_alt_pressed && !this->is_right_alt_pressed &&
+                !this->is_left_shift_pressed && !this->is_right_shift_pressed)
+        {
+            this->current_input.clear();
+            this->in_historical_input = false;
+            this->cursor_it = this->current_input.begin();
+            this->cursor_index = 0;
+            this->can_ctrl_c = false;
         }
     }
 

@@ -85,6 +85,10 @@ namespace console
                     callback_system::CallbackEngine*,
                     callback_system::CallbackObject*,
                     std::vector<callback_system::CallbackParameter*>);
+            friend datatypes::AnyValue* enable_ctrl_c(
+                    callback_system::CallbackEngine*,
+                    callback_system::CallbackObject*,
+                    std::vector<callback_system::CallbackParameter*>);
             friend datatypes::AnyValue* enter_console(
                     callback_system::CallbackEngine*,
                     callback_system::CallbackObject*,
@@ -137,6 +141,10 @@ namespace console
                     callback_system::CallbackEngine*,
                     callback_system::CallbackObject*,
                     std::vector<callback_system::CallbackParameter*>);
+            friend datatypes::AnyValue* ctrl_c(
+                    callback_system::CallbackEngine*,
+                    callback_system::CallbackObject*,
+                    std::vector<callback_system::CallbackParameter*>);
 
         private:
             void copy_historical_input_into_current_input();
@@ -152,6 +160,7 @@ namespace console
             void enable_move_to_next_input();
             void enable_backspace();
             void enable_enter_key();
+            void enable_ctrl_c();
             bool enter_console();
             bool exit_console();
             void press_left_control_in_console();
@@ -164,6 +173,7 @@ namespace console
             void backspace();
             void delete_character();
             void enter_key();
+            void ctrl_c();
             void move_cursor_left();
             void move_cursor_right();
             void move_cursor_to_start_of_line();
@@ -185,6 +195,7 @@ namespace console
             bool can_move_to_next_input;
             bool can_backspace;
             bool can_enter_key;
+            bool can_ctrl_c;
             bool is_left_control_pressed;
             bool is_right_control_pressed;
             bool is_left_alt_pressed;
