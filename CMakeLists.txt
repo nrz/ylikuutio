@@ -14,6 +14,10 @@ set(ENABLE_SCRIPTING_WITH_CHIBI_SCHEME true)
 # comment the following line to disable unit tests with Google Test.
 set(DO_UNIT_TESTS_WITH_GOOGLE_TEST true)
 
+# uncomment the following line to download the latest versions of external projects
+# instead of using the versions carried in Ylikuutio repository (in `external/`).
+# set(ENABLE_DOWNLOAD_LATEST_VERSIONS_OF_EXTERNAL_PROJECTS)
+
 # uncomment the following line to disable updating of external projects.
 # set(DISABLE_UPDATE_STEP true)
 
@@ -101,30 +105,42 @@ if(ENABLE_SCRIPTING_WITH_CHIBI_SCHEME)
         )
 endif()
 
-if(DISABLE_UPDATE_STEP)
-    # Download and install Eigen
-    ExternalProject_Add(
-        eigen
-        GIT_REPOSITORY https://github.com/RLovelett/eigen
-        PREFIX ${CMAKE_CURRENT_BINARY_DIR}/eigen
-        # Disable install step
-        INSTALL_COMMAND ""
-        # Disable update step
-        UPDATE_COMMAND ""
-        LOG_DOWNLOAD ON
-        LOG_DOWNLOAD ON
-        LOG_BUILD ON
-        )
+if(ENABLE_DOWNLOAD_LATEST_VERSIONS_OF_EXTERNAL_PROJECTS)
+    if(DISABLE_UPDATE_STEP)
+        # Download and install Eigen
+        ExternalProject_Add(
+            eigen
+            GIT_REPOSITORY https://github.com/RLovelett/eigen
+            PREFIX ${CMAKE_CURRENT_BINARY_DIR}/eigen
+            # Disable install step
+            INSTALL_COMMAND ""
+            # Disable update step
+            UPDATE_COMMAND ""
+            LOG_DOWNLOAD ON
+            LOG_DOWNLOAD ON
+            LOG_BUILD ON
+            )
+    else()
+        # Download and install Eigen
+        ExternalProject_Add(
+            eigen
+            GIT_REPOSITORY https://github.com/RLovelett/eigen
+            PREFIX ${CMAKE_CURRENT_BINARY_DIR}/eigen
+            # Disable install step
+            INSTALL_COMMAND ""
+            LOG_DOWNLOAD ON
+            LOG_DOWNLOAD ON
+            LOG_BUILD ON
+            )
+    endif()
 else()
-    # Download and install Eigen
+    # Use Eigen 3.2.9 provided in the Ylikuutio repository.
     ExternalProject_Add(
         eigen
-        GIT_REPOSITORY https://github.com/RLovelett/eigen
+        URL "file://${CMAKE_SOURCE_DIR}/external/eigen-3.2.9"
         PREFIX ${CMAKE_CURRENT_BINARY_DIR}/eigen
         # Disable install step
         INSTALL_COMMAND ""
-        LOG_DOWNLOAD ON
-        LOG_DOWNLOAD ON
         LOG_BUILD ON
         )
 endif()
