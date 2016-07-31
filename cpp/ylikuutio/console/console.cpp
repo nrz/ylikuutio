@@ -265,8 +265,7 @@ namespace console
         if ((mods == 0 || mods == 1) &&
                 !this->is_left_control_pressed &&
                 !this->is_right_control_pressed &&
-                !this->is_left_alt_pressed &&
-                !this->is_right_alt_pressed)
+                !this->is_left_alt_pressed)
         {
             this->cursor_it = this->current_input.insert(this->cursor_it, character);
             this->cursor_it++;
