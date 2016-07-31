@@ -5,6 +5,9 @@
 #include "cpp/ylikuutio/common/globals.hpp"
 #include "cpp/ylikuutio/string/ylikuutio_string.hpp"
 
+// Include standard headers
+#include <stdint.h> // uint32_t etc.
+
 // Include GLFW
 #ifndef __GLFW3_H_INCLUDED
 #define __GLFW3_H_INCLUDED

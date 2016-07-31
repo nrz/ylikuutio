@@ -14,6 +14,7 @@
 
 // Include standard headers
 #include <vector>   // std::vector
+#include <stdint.h> // uint32_t etc.
 
 namespace console
 {
