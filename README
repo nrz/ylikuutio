@@ -8,6 +8,11 @@ WTF Public License, version 2, December 2004:
 "You just DO WHAT THE FUCK YOU WANT TO. ```"
 http://www.opengl-tutorial.org/download/
 
+The OpenGL Extension Wrangler Library (GLEW) is licensed
+under the Modified BSD License, the Mesa 3-D License (MIT)
+and the Khronos License (MIT).
+https://github.com/nigels-com/glew#copyright-and-licensing
+
 GLFW is licensed under the zlib/libpng license.
 http://www.glfw.org/license.html
 
