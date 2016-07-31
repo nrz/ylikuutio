@@ -66,6 +66,108 @@ namespace console
         return nullptr;
     }
 
+    datatypes::AnyValue* release_left_control_in_console(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject* callback_object,
+            std::vector<callback_system::CallbackParameter*>)
+    {
+        datatypes::AnyValue* any_value_console = callback_object->get_any_value("console_pointer");
+
+        if (any_value_console->type != datatypes::CONSOLE_POINTER)
+        {
+            return nullptr;
+        }
+
+        console::Console* console = any_value_console->console_pointer;
+        console->release_left_control_in_console();
+        return nullptr;
+    }
+
+    datatypes::AnyValue* release_right_control_in_console(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject* callback_object,
+            std::vector<callback_system::CallbackParameter*>)
+    {
+        datatypes::AnyValue* any_value_console = callback_object->get_any_value("console_pointer");
+
+        if (any_value_console->type != datatypes::CONSOLE_POINTER)
+        {
+            return nullptr;
+        }
+
+        console::Console* console = any_value_console->console_pointer;
+        console->release_right_control_in_console();
+        return nullptr;
+    }
+
+    datatypes::AnyValue* release_left_alt_in_console(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject* callback_object,
+            std::vector<callback_system::CallbackParameter*>)
+    {
+        datatypes::AnyValue* any_value_console = callback_object->get_any_value("console_pointer");
+
+        if (any_value_console->type != datatypes::CONSOLE_POINTER)
+        {
+            return nullptr;
+        }
+
+        console::Console* console = any_value_console->console_pointer;
+        console->release_left_alt_in_console();
+        return nullptr;
+    }
+
+    datatypes::AnyValue* release_right_alt_in_console(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject* callback_object,
+            std::vector<callback_system::CallbackParameter*>)
+    {
+        datatypes::AnyValue* any_value_console = callback_object->get_any_value("console_pointer");
+
+        if (any_value_console->type != datatypes::CONSOLE_POINTER)
+        {
+            return nullptr;
+        }
+
+        console::Console* console = any_value_console->console_pointer;
+        console->release_right_alt_in_console();
+        return nullptr;
+    }
+
+    datatypes::AnyValue* release_left_shift_in_console(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject* callback_object,
+            std::vector<callback_system::CallbackParameter*>)
+    {
+        datatypes::AnyValue* any_value_console = callback_object->get_any_value("console_pointer");
+
+        if (any_value_console->type != datatypes::CONSOLE_POINTER)
+        {
+            return nullptr;
+        }
+
+        console::Console* console = any_value_console->console_pointer;
+        console->release_left_shift_in_console();
+        return nullptr;
+    }
+
+    datatypes::AnyValue* release_right_shift_in_console(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject* callback_object,
+            std::vector<callback_system::CallbackParameter*>)
+    {
+        datatypes::AnyValue* any_value_console = callback_object->get_any_value("console_pointer");
+
+        if (any_value_console->type != datatypes::CONSOLE_POINTER)
+        {
+            return nullptr;
+        }
+
+        console::Console* console = any_value_console->console_pointer;
+        console->release_right_shift_in_console();
+        return nullptr;
+    }
+
     datatypes::AnyValue* enable_move_to_previous_input(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject* callback_object,
@@ -207,6 +309,108 @@ namespace console
 
         console::Console* console = any_value_console->console_pointer;
         console->move_to_previous_input();
+        return nullptr;
+    }
+
+    datatypes::AnyValue* press_left_control_in_console(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject* callback_object,
+            std::vector<callback_system::CallbackParameter*>)
+    {
+        datatypes::AnyValue* any_value_console = callback_object->get_any_value("console_pointer");
+
+        if (any_value_console->type != datatypes::CONSOLE_POINTER)
+        {
+            return nullptr;
+        }
+
+        console::Console* console = any_value_console->console_pointer;
+        console->press_left_control_in_console();
+        return nullptr;
+    }
+
+    datatypes::AnyValue* press_right_control_in_console(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject* callback_object,
+            std::vector<callback_system::CallbackParameter*>)
+    {
+        datatypes::AnyValue* any_value_console = callback_object->get_any_value("console_pointer");
+
+        if (any_value_console->type != datatypes::CONSOLE_POINTER)
+        {
+            return nullptr;
+        }
+
+        console::Console* console = any_value_console->console_pointer;
+        console->press_right_control_in_console();
+        return nullptr;
+    }
+
+    datatypes::AnyValue* press_left_alt_in_console(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject* callback_object,
+            std::vector<callback_system::CallbackParameter*>)
+    {
+        datatypes::AnyValue* any_value_console = callback_object->get_any_value("console_pointer");
+
+        if (any_value_console->type != datatypes::CONSOLE_POINTER)
+        {
+            return nullptr;
+        }
+
+        console::Console* console = any_value_console->console_pointer;
+        console->press_left_alt_in_console();
+        return nullptr;
+    }
+
+    datatypes::AnyValue* press_right_alt_in_console(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject* callback_object,
+            std::vector<callback_system::CallbackParameter*>)
+    {
+        datatypes::AnyValue* any_value_console = callback_object->get_any_value("console_pointer");
+
+        if (any_value_console->type != datatypes::CONSOLE_POINTER)
+        {
+            return nullptr;
+        }
+
+        console::Console* console = any_value_console->console_pointer;
+        console->press_right_alt_in_console();
+        return nullptr;
+    }
+
+    datatypes::AnyValue* press_left_shift_in_console(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject* callback_object,
+            std::vector<callback_system::CallbackParameter*>)
+    {
+        datatypes::AnyValue* any_value_console = callback_object->get_any_value("console_pointer");
+
+        if (any_value_console->type != datatypes::CONSOLE_POINTER)
+        {
+            return nullptr;
+        }
+
+        console::Console* console = any_value_console->console_pointer;
+        console->press_left_shift_in_console();
+        return nullptr;
+    }
+
+    datatypes::AnyValue* press_right_shift_in_console(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject* callback_object,
+            std::vector<callback_system::CallbackParameter*>)
+    {
+        datatypes::AnyValue* any_value_console = callback_object->get_any_value("console_pointer");
+
+        if (any_value_console->type != datatypes::CONSOLE_POINTER)
+        {
+            return nullptr;
+        }
+
+        console::Console* console = any_value_console->console_pointer;
+        console->press_right_shift_in_console();
         return nullptr;
     }
 

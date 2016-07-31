@@ -29,6 +29,12 @@ namespace console
         this->can_move_to_next_input = false;
         this->can_backspace = false;
         this->can_enter_key = false;
+        this->is_left_control_pressed = false;
+        this->is_right_control_pressed = false;
+        this->is_left_alt_pressed = false;
+        this->is_right_alt_pressed = false;
+        this->is_left_shift_pressed = false;
+        this->is_right_shift_pressed = false;
         this->previous_keypress_callback_engine_vector_pointer = nullptr;
         this->my_keypress_callback_engine_vector_pointer = nullptr;
         this->previous_keyrelease_callback_engine_vector_pointer = nullptr;
@@ -113,6 +119,36 @@ namespace console
         this->can_exit_console = true;
     }
 
+    void Console::release_left_control_in_console()
+    {
+        this->is_left_control_pressed = false;
+    }
+
+    void Console::release_right_control_in_console()
+    {
+        this->is_right_control_pressed = false;
+    }
+
+    void Console::release_left_alt_in_console()
+    {
+        this->is_left_alt_pressed = false;
+    }
+
+    void Console::release_right_alt_in_console()
+    {
+        this->is_right_alt_pressed = false;
+    }
+
+    void Console::release_left_shift_in_console()
+    {
+        this->is_left_shift_pressed = false;
+    }
+
+    void Console::release_right_shift_in_console()
+    {
+        this->is_right_shift_pressed = false;
+    }
+
     void Console::enable_move_to_previous_input()
     {
         this->can_move_to_previous_input = true;
@@ -194,9 +230,43 @@ namespace console
         return false;
     }
 
+    void Console::press_left_control_in_console()
+    {
+        this->is_left_control_pressed = true;
+    }
+
+    void Console::press_right_control_in_console()
+    {
+        this->is_right_control_pressed = true;
+    }
+
+    void Console::press_left_alt_in_console()
+    {
+        this->is_left_alt_pressed = true;
+    }
+
+    void Console::press_right_alt_in_console()
+    {
+        this->is_right_alt_pressed = true;
+    }
+
+    void Console::press_left_shift_in_console()
+    {
+        this->is_left_shift_pressed = true;
+    }
+
+    void Console::press_right_shift_in_console()
+    {
+        this->is_right_shift_pressed = true;
+    }
+
     void Console::add_character(char character, uint32_t mods)
     {
-        if (mods == 0 || mods == 1)
+        if ((mods == 0 || mods == 1) &&
+                !this->is_left_control_pressed &&
+                !this->is_right_control_pressed &&
+                !this->is_left_alt_pressed &&
+                !this->is_right_alt_pressed)
         {
             this->cursor_it = this->current_input.insert(this->cursor_it, character);
             this->cursor_it++;

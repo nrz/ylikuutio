@@ -26,6 +26,36 @@ namespace console
             callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>);
 
+    datatypes::AnyValue* release_left_control_in_console(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject* callback_object,
+            std::vector<callback_system::CallbackParameter*>);
+
+    datatypes::AnyValue* release_right_control_in_console(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject* callback_object,
+            std::vector<callback_system::CallbackParameter*>);
+
+    datatypes::AnyValue* release_left_alt_in_console(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject* callback_object,
+            std::vector<callback_system::CallbackParameter*>);
+
+    datatypes::AnyValue* release_right_alt_in_console(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject* callback_object,
+            std::vector<callback_system::CallbackParameter*>);
+
+    datatypes::AnyValue* release_left_shift_in_console(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject* callback_object,
+            std::vector<callback_system::CallbackParameter*>);
+
+    datatypes::AnyValue* release_right_shift_in_console(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject* callback_object,
+            std::vector<callback_system::CallbackParameter*>);
+
     datatypes::AnyValue* enable_move_to_previous_input(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject* callback_object,
@@ -52,6 +82,36 @@ namespace console
             std::vector<callback_system::CallbackParameter*> input_parameters);
 
     datatypes::AnyValue* exit_console(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject* callback_object,
+            std::vector<callback_system::CallbackParameter*>);
+
+    datatypes::AnyValue* press_left_control_in_console(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject* callback_object,
+            std::vector<callback_system::CallbackParameter*>);
+
+    datatypes::AnyValue* press_right_control_in_console(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject* callback_object,
+            std::vector<callback_system::CallbackParameter*>);
+
+    datatypes::AnyValue* press_left_alt_in_console(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject* callback_object,
+            std::vector<callback_system::CallbackParameter*>);
+
+    datatypes::AnyValue* press_right_alt_in_console(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject* callback_object,
+            std::vector<callback_system::CallbackParameter*>);
+
+    datatypes::AnyValue* press_left_shift_in_console(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject* callback_object,
+            std::vector<callback_system::CallbackParameter*>);
+
+    datatypes::AnyValue* press_right_shift_in_console(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>);

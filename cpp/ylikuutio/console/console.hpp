@@ -45,6 +45,30 @@ namespace console
                     callback_system::CallbackEngine*,
                     callback_system::CallbackObject*,
                     std::vector<callback_system::CallbackParameter*>);
+            friend datatypes::AnyValue* release_left_control_in_console(
+                    callback_system::CallbackEngine*,
+                    callback_system::CallbackObject*,
+                    std::vector<callback_system::CallbackParameter*>);
+            friend datatypes::AnyValue* release_right_control_in_console(
+                    callback_system::CallbackEngine*,
+                    callback_system::CallbackObject*,
+                    std::vector<callback_system::CallbackParameter*>);
+            friend datatypes::AnyValue* release_left_alt_in_console(
+                    callback_system::CallbackEngine*,
+                    callback_system::CallbackObject*,
+                    std::vector<callback_system::CallbackParameter*>);
+            friend datatypes::AnyValue* release_right_alt_in_console(
+                    callback_system::CallbackEngine*,
+                    callback_system::CallbackObject*,
+                    std::vector<callback_system::CallbackParameter*>);
+            friend datatypes::AnyValue* release_left_shift_in_console(
+                    callback_system::CallbackEngine*,
+                    callback_system::CallbackObject*,
+                    std::vector<callback_system::CallbackParameter*>);
+            friend datatypes::AnyValue* release_right_shift_in_console(
+                    callback_system::CallbackEngine*,
+                    callback_system::CallbackObject*,
+                    std::vector<callback_system::CallbackParameter*>);
             friend datatypes::AnyValue* enable_move_to_previous_input(
                     callback_system::CallbackEngine*,
                     callback_system::CallbackObject*,
@@ -66,6 +90,30 @@ namespace console
                     callback_system::CallbackObject*,
                     std::vector<callback_system::CallbackParameter*>);
             friend datatypes::AnyValue* exit_console(
+                    callback_system::CallbackEngine*,
+                    callback_system::CallbackObject*,
+                    std::vector<callback_system::CallbackParameter*>);
+            friend datatypes::AnyValue* press_left_control_in_console(
+                    callback_system::CallbackEngine*,
+                    callback_system::CallbackObject*,
+                    std::vector<callback_system::CallbackParameter*>);
+            friend datatypes::AnyValue* press_right_control_in_console(
+                    callback_system::CallbackEngine*,
+                    callback_system::CallbackObject*,
+                    std::vector<callback_system::CallbackParameter*>);
+            friend datatypes::AnyValue* press_left_alt_in_console(
+                    callback_system::CallbackEngine*,
+                    callback_system::CallbackObject*,
+                    std::vector<callback_system::CallbackParameter*>);
+            friend datatypes::AnyValue* press_right_alt_in_console(
+                    callback_system::CallbackEngine*,
+                    callback_system::CallbackObject*,
+                    std::vector<callback_system::CallbackParameter*>);
+            friend datatypes::AnyValue* press_left_shift_in_console(
+                    callback_system::CallbackEngine*,
+                    callback_system::CallbackObject*,
+                    std::vector<callback_system::CallbackParameter*>);
+            friend datatypes::AnyValue* press_right_shift_in_console(
                     callback_system::CallbackEngine*,
                     callback_system::CallbackObject*,
                     std::vector<callback_system::CallbackParameter*>);
@@ -94,12 +142,24 @@ namespace console
             void copy_historical_input_into_current_input();
             void enable_enter_console();
             void enable_exit_console();
+            void release_left_control_in_console();
+            void release_right_control_in_console();
+            void release_left_alt_in_console();
+            void release_right_alt_in_console();
+            void release_left_shift_in_console();
+            void release_right_shift_in_console();
             void enable_move_to_previous_input();
             void enable_move_to_next_input();
             void enable_backspace();
             void enable_enter_key();
             bool enter_console();
             bool exit_console();
+            void press_left_control_in_console();
+            void press_right_control_in_console();
+            void press_left_alt_in_console();
+            void press_right_alt_in_console();
+            void press_left_shift_in_console();
+            void press_right_shift_in_console();
             void add_character(char character, uint32_t mods);
             void backspace();
             void delete_character();
@@ -125,6 +185,12 @@ namespace console
             bool can_move_to_next_input;
             bool can_backspace;
             bool can_enter_key;
+            bool is_left_control_pressed;
+            bool is_right_control_pressed;
+            bool is_left_alt_pressed;
+            bool is_right_alt_pressed;
+            bool is_left_shift_pressed;
+            bool is_right_shift_pressed;
 
             std::vector<std::list<char>> command_history;
             bool in_historical_input;
