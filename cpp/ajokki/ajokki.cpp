@@ -336,12 +336,12 @@ int main(void)
     callback_system::CallbackParameter* enable_enter_console_parameter = new callback_system::CallbackParameter(
             "console_pointer", new datatypes::AnyValue(my_console), false, enable_enter_console_callback_object);
 
-    // Callback code for left control release: release first turbo.
+    // Callback code for left Control release: release first turbo.
     callback_system::CallbackEngine* release_first_turbo_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* release_first_turbo_callback_object = new callback_system::CallbackObject(
             &ajokki::release_first_turbo, release_first_turbo_callback_engine);
 
-    // Callback code for right control release: release second turbo.
+    // Callback code for right Control release: release second turbo.
     callback_system::CallbackEngine* release_second_turbo_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* release_second_turbo_callback_object = new callback_system::CallbackObject(
             &ajokki::release_second_turbo, release_second_turbo_callback_engine);
@@ -379,12 +379,12 @@ int main(void)
     callback_system::CallbackObject* exit_program_callback_object = new callback_system::CallbackObject(
             &ajokki::exit_program, exit_program_callback_engine);
 
-    // Callback code for left control: first turbo.
+    // Callback code for left Control: first turbo.
     callback_system::CallbackEngine* first_turbo_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* first_turbo_callback_object = new callback_system::CallbackObject(
             &ajokki::first_turbo, first_turbo_callback_engine);
 
-    // Callback code for right control: second turbo.
+    // Callback code for right Control: second turbo.
     callback_system::CallbackEngine* second_turbo_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* second_turbo_callback_object = new callback_system::CallbackObject(
             &ajokki::second_turbo, second_turbo_callback_engine);
@@ -545,42 +545,42 @@ int main(void)
     callback_system::CallbackParameter* enable_exit_console_parameter = new callback_system::CallbackParameter(
             "console_pointer", new datatypes::AnyValue(my_console), false, enable_exit_console_callback_object);
 
-    // Callback code for left control release.
+    // Callback code for left Control release.
     callback_system::CallbackEngine* release_left_control_in_console_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* release_left_control_in_console_callback_object = new callback_system::CallbackObject(
             &console::release_left_control_in_console, release_left_control_in_console_callback_engine);
     callback_system::CallbackParameter* release_left_control_in_console_parameter = new callback_system::CallbackParameter(
             "console_pointer", new datatypes::AnyValue(my_console), false, release_left_control_in_console_callback_object);
 
-    // Callback code for right control release.
+    // Callback code for right Control release.
     callback_system::CallbackEngine* release_right_control_in_console_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* release_right_control_in_console_callback_object = new callback_system::CallbackObject(
             &console::release_right_control_in_console, release_right_control_in_console_callback_engine);
     callback_system::CallbackParameter* release_right_control_in_console_parameter = new callback_system::CallbackParameter(
             "console_pointer", new datatypes::AnyValue(my_console), false, release_right_control_in_console_callback_object);
 
-    // Callback code for left alt release.
+    // Callback code for left Alt release.
     callback_system::CallbackEngine* release_left_alt_in_console_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* release_left_alt_in_console_callback_object = new callback_system::CallbackObject(
             &console::release_left_alt_in_console, release_left_alt_in_console_callback_engine);
     callback_system::CallbackParameter* release_left_alt_in_console_parameter = new callback_system::CallbackParameter(
             "console_pointer", new datatypes::AnyValue(my_console), false, release_left_alt_in_console_callback_object);
 
-    // Callback code for right alt release.
+    // Callback code for right Alt release.
     callback_system::CallbackEngine* release_right_alt_in_console_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* release_right_alt_in_console_callback_object = new callback_system::CallbackObject(
             &console::release_right_alt_in_console, release_right_alt_in_console_callback_engine);
     callback_system::CallbackParameter* release_right_alt_in_console_parameter = new callback_system::CallbackParameter(
             "console_pointer", new datatypes::AnyValue(my_console), false, release_right_alt_in_console_callback_object);
 
-    // Callback code for left shift release.
+    // Callback code for left Shift release.
     callback_system::CallbackEngine* release_left_shift_in_console_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* release_left_shift_in_console_callback_object = new callback_system::CallbackObject(
             &console::release_left_shift_in_console, release_left_shift_in_console_callback_engine);
     callback_system::CallbackParameter* release_left_shift_in_console_parameter = new callback_system::CallbackParameter(
             "console_pointer", new datatypes::AnyValue(my_console), false, release_left_shift_in_console_callback_object);
 
-    // Callback code for right shift release.
+    // Callback code for right Shift release.
     callback_system::CallbackEngine* release_right_shift_in_console_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* release_right_shift_in_console_callback_object = new callback_system::CallbackObject(
             &console::release_right_shift_in_console, release_right_shift_in_console_callback_engine);
@@ -608,7 +608,7 @@ int main(void)
     callback_system::CallbackParameter* enable_backspace_parameter = new callback_system::CallbackParameter(
             "console_pointer", new datatypes::AnyValue(my_console), false, enable_backspace_callback_object);
 
-    // Callback code for enter release: enable enter key.
+    // Callback code for enter release: enable Enter key.
     callback_system::CallbackEngine* enable_enter_key_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* enable_enter_key_callback_object = new callback_system::CallbackObject(
             &console::enable_enter_key, enable_enter_key_callback_engine);
@@ -626,42 +626,42 @@ int main(void)
     callback_system::CallbackParameter* exit_console_parameter = new callback_system::CallbackParameter(
             "console_pointer", new datatypes::AnyValue(my_console), false, exit_console_callback_object);
 
-    // Callback code for left control press.
+    // Callback code for left Control press.
     callback_system::CallbackEngine* press_left_control_in_console_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* press_left_control_in_console_callback_object = new callback_system::CallbackObject(
             &console::press_left_control_in_console, press_left_control_in_console_callback_engine);
     callback_system::CallbackParameter* press_left_control_in_console_parameter = new callback_system::CallbackParameter(
             "console_pointer", new datatypes::AnyValue(my_console), false, press_left_control_in_console_callback_object);
 
-    // Callback code for right control press.
+    // Callback code for right Control press.
     callback_system::CallbackEngine* press_right_control_in_console_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* press_right_control_in_console_callback_object = new callback_system::CallbackObject(
             &console::press_right_control_in_console, press_right_control_in_console_callback_engine);
     callback_system::CallbackParameter* press_right_control_in_console_parameter = new callback_system::CallbackParameter(
             "console_pointer", new datatypes::AnyValue(my_console), false, press_right_control_in_console_callback_object);
 
-    // Callback code for left alt press.
+    // Callback code for left Alt press.
     callback_system::CallbackEngine* press_left_alt_in_console_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* press_left_alt_in_console_callback_object = new callback_system::CallbackObject(
             &console::press_left_alt_in_console, press_left_alt_in_console_callback_engine);
     callback_system::CallbackParameter* press_left_alt_in_console_parameter = new callback_system::CallbackParameter(
             "console_pointer", new datatypes::AnyValue(my_console), false, press_left_alt_in_console_callback_object);
 
-    // Callback code for right alt press.
+    // Callback code for right Alt press.
     callback_system::CallbackEngine* press_right_alt_in_console_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* press_right_alt_in_console_callback_object = new callback_system::CallbackObject(
             &console::press_right_alt_in_console, press_right_alt_in_console_callback_engine);
     callback_system::CallbackParameter* press_right_alt_in_console_parameter = new callback_system::CallbackParameter(
             "console_pointer", new datatypes::AnyValue(my_console), false, press_right_alt_in_console_callback_object);
 
-    // Callback code for left shift press.
+    // Callback code for left Shift press.
     callback_system::CallbackEngine* press_left_shift_in_console_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* press_left_shift_in_console_callback_object = new callback_system::CallbackObject(
             &console::press_left_shift_in_console, press_left_shift_in_console_callback_engine);
     callback_system::CallbackParameter* press_left_shift_in_console_parameter = new callback_system::CallbackParameter(
             "console_pointer", new datatypes::AnyValue(my_console), false, press_left_shift_in_console_callback_object);
 
-    // Callback code for right shift press.
+    // Callback code for right Shift press.
     callback_system::CallbackEngine* press_right_shift_in_console_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* press_right_shift_in_console_callback_object = new callback_system::CallbackObject(
             &console::press_right_shift_in_console, press_right_shift_in_console_callback_engine);
@@ -689,7 +689,7 @@ int main(void)
     callback_system::CallbackParameter* backspace_callback_parameter = new callback_system::CallbackParameter(
             "console_pointer", new datatypes::AnyValue(my_console), false, backspace_callback_object);
 
-    // Callback code for enter: delete character left of cursor from current input in console.
+    // Callback code for Enter key.
     callback_system::CallbackEngine* enter_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* enter_callback_object = new callback_system::CallbackObject(
             &console::enter_key, enter_callback_engine);
