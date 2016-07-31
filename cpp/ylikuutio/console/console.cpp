@@ -98,7 +98,8 @@ namespace console
         }
 
         console::Console* console = any_value_console->console_pointer;
-        console->enable_enter_console();
+        console->can_enter_console = true;
+
         return nullptr;
     }
 
@@ -618,11 +619,6 @@ namespace console
         std::copy(this->command_history.at(this->historical_input_i).begin(),
                 this->command_history.at(this->historical_input_i).end(),
                 std::back_inserter(this->current_input));
-    }
-
-    void Console::enable_enter_console()
-    {
-        this->can_enter_console = true;
     }
 
     void Console::enable_exit_console()
