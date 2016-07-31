@@ -36,114 +36,143 @@ namespace console
             void set_my_keyrelease_callback_engine_vector_pointer(std::vector<KeyAndCallbackStruct>* my_keyrelease_callback_engine_vector_pointer);
             void draw_console();
 
-            friend void charmods_callback(GLFWwindow* window, unsigned int codepoint, int mods);
-            friend datatypes::AnyValue* enable_enter_console(
+            // callbacks.
+
+            static void charmods_callback(GLFWwindow* window, unsigned int codepoint, int mods);
+
+            static datatypes::AnyValue* enable_enter_console(
                     callback_system::CallbackEngine*,
-                    callback_system::CallbackObject*,
+                    callback_system::CallbackObject* callback_object,
                     std::vector<callback_system::CallbackParameter*>);
-            friend datatypes::AnyValue* enable_exit_console(
+
+            static datatypes::AnyValue* enable_exit_console(
                     callback_system::CallbackEngine*,
-                    callback_system::CallbackObject*,
+                    callback_system::CallbackObject* callback_object,
                     std::vector<callback_system::CallbackParameter*>);
-            friend datatypes::AnyValue* release_left_control_in_console(
+
+            static datatypes::AnyValue* release_left_control_in_console(
                     callback_system::CallbackEngine*,
-                    callback_system::CallbackObject*,
+                    callback_system::CallbackObject* callback_object,
                     std::vector<callback_system::CallbackParameter*>);
-            friend datatypes::AnyValue* release_right_control_in_console(
+
+            static datatypes::AnyValue* release_right_control_in_console(
                     callback_system::CallbackEngine*,
-                    callback_system::CallbackObject*,
+                    callback_system::CallbackObject* callback_object,
                     std::vector<callback_system::CallbackParameter*>);
-            friend datatypes::AnyValue* release_left_alt_in_console(
+
+            static datatypes::AnyValue* release_left_alt_in_console(
                     callback_system::CallbackEngine*,
-                    callback_system::CallbackObject*,
+                    callback_system::CallbackObject* callback_object,
                     std::vector<callback_system::CallbackParameter*>);
-            friend datatypes::AnyValue* release_right_alt_in_console(
+
+            static datatypes::AnyValue* release_right_alt_in_console(
                     callback_system::CallbackEngine*,
-                    callback_system::CallbackObject*,
+                    callback_system::CallbackObject* callback_object,
                     std::vector<callback_system::CallbackParameter*>);
-            friend datatypes::AnyValue* release_left_shift_in_console(
+
+            static datatypes::AnyValue* release_left_shift_in_console(
                     callback_system::CallbackEngine*,
-                    callback_system::CallbackObject*,
+                    callback_system::CallbackObject* callback_object,
                     std::vector<callback_system::CallbackParameter*>);
-            friend datatypes::AnyValue* release_right_shift_in_console(
+
+            static datatypes::AnyValue* release_right_shift_in_console(
                     callback_system::CallbackEngine*,
-                    callback_system::CallbackObject*,
+                    callback_system::CallbackObject* callback_object,
                     std::vector<callback_system::CallbackParameter*>);
-            friend datatypes::AnyValue* enable_move_to_previous_input(
+
+            static datatypes::AnyValue* enable_move_to_previous_input(
                     callback_system::CallbackEngine*,
-                    callback_system::CallbackObject*,
+                    callback_system::CallbackObject* callback_object,
                     std::vector<callback_system::CallbackParameter*>);
-            friend datatypes::AnyValue* enable_move_to_next_input(
+
+            static datatypes::AnyValue* enable_move_to_next_input(
                     callback_system::CallbackEngine*,
-                    callback_system::CallbackObject*,
+                    callback_system::CallbackObject* callback_object,
                     std::vector<callback_system::CallbackParameter*>);
-            friend datatypes::AnyValue* enable_backspace(
+
+            static datatypes::AnyValue* enable_backspace(
                     callback_system::CallbackEngine*,
-                    callback_system::CallbackObject*,
+                    callback_system::CallbackObject* callback_object,
                     std::vector<callback_system::CallbackParameter*>);
-            friend datatypes::AnyValue* enable_enter_key(
+
+            static datatypes::AnyValue* enable_enter_key(
                     callback_system::CallbackEngine*,
-                    callback_system::CallbackObject*,
+                    callback_system::CallbackObject* callback_object,
                     std::vector<callback_system::CallbackParameter*>);
-            friend datatypes::AnyValue* enable_ctrl_c(
+
+            static datatypes::AnyValue* enable_ctrl_c(
                     callback_system::CallbackEngine*,
-                    callback_system::CallbackObject*,
+                    callback_system::CallbackObject* callback_object,
                     std::vector<callback_system::CallbackParameter*>);
-            friend datatypes::AnyValue* enter_console(
+
+            static datatypes::AnyValue* enter_console(
                     callback_system::CallbackEngine*,
                     callback_system::CallbackObject*,
+                    std::vector<callback_system::CallbackParameter*> input_parameters);
+
+            static datatypes::AnyValue* exit_console(
+                    callback_system::CallbackEngine*,
+                    callback_system::CallbackObject* callback_object,
                     std::vector<callback_system::CallbackParameter*>);
-            friend datatypes::AnyValue* exit_console(
+
+            static datatypes::AnyValue* press_left_control_in_console(
                     callback_system::CallbackEngine*,
-                    callback_system::CallbackObject*,
+                    callback_system::CallbackObject* callback_object,
                     std::vector<callback_system::CallbackParameter*>);
-            friend datatypes::AnyValue* press_left_control_in_console(
+
+            static datatypes::AnyValue* press_right_control_in_console(
                     callback_system::CallbackEngine*,
-                    callback_system::CallbackObject*,
+                    callback_system::CallbackObject* callback_object,
                     std::vector<callback_system::CallbackParameter*>);
-            friend datatypes::AnyValue* press_right_control_in_console(
+
+            static datatypes::AnyValue* press_left_alt_in_console(
                     callback_system::CallbackEngine*,
-                    callback_system::CallbackObject*,
+                    callback_system::CallbackObject* callback_object,
                     std::vector<callback_system::CallbackParameter*>);
-            friend datatypes::AnyValue* press_left_alt_in_console(
+
+            static datatypes::AnyValue* press_right_alt_in_console(
                     callback_system::CallbackEngine*,
-                    callback_system::CallbackObject*,
+                    callback_system::CallbackObject* callback_object,
                     std::vector<callback_system::CallbackParameter*>);
-            friend datatypes::AnyValue* press_right_alt_in_console(
+
+            static datatypes::AnyValue* press_left_shift_in_console(
                     callback_system::CallbackEngine*,
-                    callback_system::CallbackObject*,
+                    callback_system::CallbackObject* callback_object,
                     std::vector<callback_system::CallbackParameter*>);
-            friend datatypes::AnyValue* press_left_shift_in_console(
+
+            static datatypes::AnyValue* press_right_shift_in_console(
                     callback_system::CallbackEngine*,
-                    callback_system::CallbackObject*,
+                    callback_system::CallbackObject* callback_object,
                     std::vector<callback_system::CallbackParameter*>);
-            friend datatypes::AnyValue* press_right_shift_in_console(
+
+            static datatypes::AnyValue* move_to_previous_input(
                     callback_system::CallbackEngine*,
-                    callback_system::CallbackObject*,
+                    callback_system::CallbackObject* callback_object,
                     std::vector<callback_system::CallbackParameter*>);
-            friend datatypes::AnyValue* move_to_previous_input(
+
+            static datatypes::AnyValue* move_to_next_input(
                     callback_system::CallbackEngine*,
-                    callback_system::CallbackObject*,
+                    callback_system::CallbackObject* callback_object,
                     std::vector<callback_system::CallbackParameter*>);
-            friend datatypes::AnyValue* move_to_next_input(
+
+            static datatypes::AnyValue* add_character(
                     callback_system::CallbackEngine*,
-                    callback_system::CallbackObject*,
+                    callback_system::CallbackObject* callback_object,
                     std::vector<callback_system::CallbackParameter*>);
-            friend datatypes::AnyValue* add_character(
+
+            static datatypes::AnyValue* backspace(
                     callback_system::CallbackEngine*,
-                    callback_system::CallbackObject*,
+                    callback_system::CallbackObject* callback_object,
                     std::vector<callback_system::CallbackParameter*>);
-            friend datatypes::AnyValue* backspace(
+
+            static datatypes::AnyValue* ctrl_c(
                     callback_system::CallbackEngine*,
-                    callback_system::CallbackObject*,
+                    callback_system::CallbackObject* callback_object,
                     std::vector<callback_system::CallbackParameter*>);
-            friend datatypes::AnyValue* enter_key(
+
+            static datatypes::AnyValue* enter_key(
                     callback_system::CallbackEngine*,
-                    callback_system::CallbackObject*,
-                    std::vector<callback_system::CallbackParameter*>);
-            friend datatypes::AnyValue* ctrl_c(
-                    callback_system::CallbackEngine*,
-                    callback_system::CallbackObject*,
+                    callback_system::CallbackObject* callback_object,
                     std::vector<callback_system::CallbackParameter*>);
 
         private:
