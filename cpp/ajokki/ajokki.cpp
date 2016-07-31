@@ -1024,10 +1024,28 @@ int main(void)
     // do cleanup.
     cleanup_callback_engine->execute();
 
-    // Delete all callback engines.
+    // Delete all keyrelease callback engines.
+    for (uint32_t i = 0; i < keyrelease_callback_engines.size(); i++)
+    {
+        delete keyrelease_callback_engines.at(i).callback_engine;
+    }
+
+    // Delete all keypress callback engines.
     for (uint32_t i = 0; i < keypress_callback_engines.size(); i++)
     {
         delete keypress_callback_engines.at(i).callback_engine;
+    }
+
+    // Delete all console keyrelease callback engines.
+    for (uint32_t i = 0; i < console_keyrelease_callback_engines.size(); i++)
+    {
+        delete console_keyrelease_callback_engines.at(i).callback_engine;
+    }
+
+    // Delete all console keypress callback engines.
+    for (uint32_t i = 0; i < console_keypress_callback_engines.size(); i++)
+    {
+        delete console_keypress_callback_engines.at(i).callback_engine;
     }
 
     delete cleanup_callback_engine;
