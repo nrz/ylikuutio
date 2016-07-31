@@ -26,7 +26,7 @@ namespace console
         // Shift (left or right): 0x01
         // Alt (not AltGr):       0x04
         // Shift + Alt:           0x05
-        global_console_pointer->add_character(codepoint);
+        global_console_pointer->add_character(static_cast<char>(codepoint), static_cast<uint32_t>(mods));
     }
 
     datatypes::AnyValue* enable_enter_console(

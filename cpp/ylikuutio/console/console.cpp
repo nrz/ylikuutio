@@ -194,11 +194,14 @@ namespace console
         return false;
     }
 
-    void Console::add_character(char character)
+    void Console::add_character(char character, uint32_t mods)
     {
-        this->cursor_it = this->current_input.insert(this->cursor_it, character);
-        this->cursor_it++;
-        this->cursor_index++;
+        if (mods == 0 || mods == 1)
+        {
+            this->cursor_it = this->current_input.insert(this->cursor_it, character);
+            this->cursor_it++;
+            this->cursor_index++;
+        }
     }
 
     void Console::backspace()

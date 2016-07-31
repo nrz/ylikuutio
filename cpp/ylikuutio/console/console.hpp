@@ -100,7 +100,7 @@ namespace console
             void enable_enter_key();
             bool enter_console();
             bool exit_console();
-            void add_character(char character);
+            void add_character(char character, uint32_t mods);
             void backspace();
             void delete_character();
             void enter_key();
