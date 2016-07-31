@@ -28,7 +28,7 @@ namespace callback_system
             CallbackObject(InputParametersToAnyValueCallback callback, callback_system::CallbackEngine* parent_pointer);
 
             // destructor.
-            ~CallbackObject();
+            virtual ~CallbackObject();
 
             // this method changes the callback without changing the parameters of CallbackObject.
             void set_new_callback(InputParametersToAnyValueCallback callback);
@@ -46,7 +46,7 @@ namespace callback_system
             template<class T1, class T2>
                 friend void hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent_pointer, std::vector<T1> &old_child_pointer_vector, std::queue<uint32_t> &old_free_childID_queue);
 
-        private:
+        protected:
             void bind_to_parent();
 
             uint32_t get_childID();
@@ -57,7 +57,7 @@ namespace callback_system
             void bind_child_to_parent(callback_system::CallbackParameter* child_pointer);
 
             // execute this callback.
-            datatypes::AnyValue* execute();
+            virtual datatypes::AnyValue* execute();
 
             uint32_t get_callback_parameterID(std::vector<callback_system::CallbackParameter*> &child_pointer_vector, std::queue<uint32_t> &free_childID_queue);
 

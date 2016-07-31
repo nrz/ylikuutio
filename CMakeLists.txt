@@ -337,6 +337,8 @@ add_executable(ajokki
     # console, in alphabetical order.
     cpp/ylikuutio/console/console.cpp
     cpp/ylikuutio/console/console.hpp
+    cpp/ylikuutio/console/console_callback_object.cpp
+    cpp/ylikuutio/console/console_callback_object.hpp
 
     # file, in alphabetical order.
     cpp/ylikuutio/file/file_loader.cpp
