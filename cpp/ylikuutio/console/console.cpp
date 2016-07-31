@@ -84,283 +84,158 @@ namespace console
 
     datatypes::AnyValue* Console::enable_enter_console(
             callback_system::CallbackEngine*,
-            callback_system::CallbackObject* callback_object,
+            callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*>)
     {
-        // FIXME: This is a keyrelease callback function with a named parameter (a hash map lookup).
-        // It is more efficient to get the input parameters using their index instead of their variable name.
-
-        datatypes::AnyValue* any_value_console = callback_object->get_any_value("console_pointer");
-
-        if (any_value_console->type != datatypes::CONSOLE_POINTER)
-        {
-            return nullptr;
-        }
-
-        console::Console* console = any_value_console->console_pointer;
-        console->can_enter_console = true;
-
+        global_console_pointer->can_enter_console = true;
         return nullptr;
     }
 
     datatypes::AnyValue* Console::enable_exit_console(
             callback_system::CallbackEngine*,
-            callback_system::CallbackObject* callback_object,
+            callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*>)
     {
-        datatypes::AnyValue* any_value_console = callback_object->get_any_value("console_pointer");
-
-        if (any_value_console->type != datatypes::CONSOLE_POINTER)
-        {
-            return nullptr;
-        }
-
-        console::Console* console = any_value_console->console_pointer;
-        console->can_exit_console = true;
-
+        global_console_pointer->can_exit_console = true;
         return nullptr;
     }
 
     datatypes::AnyValue* Console::release_left_control_in_console(
             callback_system::CallbackEngine*,
-            callback_system::CallbackObject* callback_object,
+            callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*>)
     {
-        datatypes::AnyValue* any_value_console = callback_object->get_any_value("console_pointer");
-
-        if (any_value_console->type != datatypes::CONSOLE_POINTER)
-        {
-            return nullptr;
-        }
-
-        console::Console* console = any_value_console->console_pointer;
-        console->is_left_control_pressed = false;
-
+        global_console_pointer->is_left_control_pressed = false;
         return nullptr;
     }
 
     datatypes::AnyValue* Console::release_right_control_in_console(
             callback_system::CallbackEngine*,
-            callback_system::CallbackObject* callback_object,
+            callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*>)
     {
-        datatypes::AnyValue* any_value_console = callback_object->get_any_value("console_pointer");
-
-        if (any_value_console->type != datatypes::CONSOLE_POINTER)
-        {
-            return nullptr;
-        }
-
-        console::Console* console = any_value_console->console_pointer;
-        console->is_right_control_pressed = false;
-
+        global_console_pointer->is_right_control_pressed = false;
         return nullptr;
     }
 
     datatypes::AnyValue* Console::release_left_alt_in_console(
             callback_system::CallbackEngine*,
-            callback_system::CallbackObject* callback_object,
+            callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*>)
     {
-        datatypes::AnyValue* any_value_console = callback_object->get_any_value("console_pointer");
-
-        if (any_value_console->type != datatypes::CONSOLE_POINTER)
-        {
-            return nullptr;
-        }
-
-        console::Console* console = any_value_console->console_pointer;
-        console->is_left_alt_pressed = false;
-
+        global_console_pointer->is_left_alt_pressed = false;
         return nullptr;
     }
 
     datatypes::AnyValue* Console::release_right_alt_in_console(
             callback_system::CallbackEngine*,
-            callback_system::CallbackObject* callback_object,
+            callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*>)
     {
-        datatypes::AnyValue* any_value_console = callback_object->get_any_value("console_pointer");
-
-        if (any_value_console->type != datatypes::CONSOLE_POINTER)
-        {
-            return nullptr;
-        }
-
-        console::Console* console = any_value_console->console_pointer;
-        console->is_right_alt_pressed = false;
-
+        global_console_pointer->is_right_alt_pressed = false;
         return nullptr;
     }
 
     datatypes::AnyValue* Console::release_left_shift_in_console(
             callback_system::CallbackEngine*,
-            callback_system::CallbackObject* callback_object,
+            callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*>)
     {
-        datatypes::AnyValue* any_value_console = callback_object->get_any_value("console_pointer");
-
-        if (any_value_console->type != datatypes::CONSOLE_POINTER)
-        {
-            return nullptr;
-        }
-
-        console::Console* console = any_value_console->console_pointer;
-        console->is_left_shift_pressed = false;
-
+        global_console_pointer->is_left_shift_pressed = false;
         return nullptr;
     }
 
     datatypes::AnyValue* Console::release_right_shift_in_console(
             callback_system::CallbackEngine*,
-            callback_system::CallbackObject* callback_object,
+            callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*>)
     {
-        datatypes::AnyValue* any_value_console = callback_object->get_any_value("console_pointer");
-
-        if (any_value_console->type != datatypes::CONSOLE_POINTER)
-        {
-            return nullptr;
-        }
-
-        console::Console* console = any_value_console->console_pointer;
-        console->is_right_shift_pressed = false;
-
+        global_console_pointer->is_right_shift_pressed = false;
         return nullptr;
     }
 
     datatypes::AnyValue* Console::enable_move_to_previous_input(
             callback_system::CallbackEngine*,
-            callback_system::CallbackObject* callback_object,
+            callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*>)
     {
-        datatypes::AnyValue* any_value_console = callback_object->get_any_value("console_pointer");
-
-        if (any_value_console->type != datatypes::CONSOLE_POINTER)
-        {
-            return nullptr;
-        }
-
-        console::Console* console = any_value_console->console_pointer;
-        console->can_move_to_previous_input = true;
-
+        global_console_pointer->can_move_to_previous_input = true;
         return nullptr;
     }
 
     datatypes::AnyValue* Console::enable_move_to_next_input(
             callback_system::CallbackEngine*,
-            callback_system::CallbackObject* callback_object,
+            callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*>)
     {
-        datatypes::AnyValue* any_value_console = callback_object->get_any_value("console_pointer");
-
-        if (any_value_console->type != datatypes::CONSOLE_POINTER)
-        {
-            return nullptr;
-        }
-
-        console::Console* console = any_value_console->console_pointer;
-        console->can_move_to_next_input = true;
-
+        global_console_pointer->can_move_to_next_input = true;
         return nullptr;
     }
 
     datatypes::AnyValue* Console::enable_backspace(
             callback_system::CallbackEngine*,
-            callback_system::CallbackObject* callback_object,
+            callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*>)
     {
-        datatypes::AnyValue* any_value_console = callback_object->get_any_value("console_pointer");
-
-        if (any_value_console->type != datatypes::CONSOLE_POINTER)
-        {
-            return nullptr;
-        }
-
-        console::Console* console = any_value_console->console_pointer;
-        console->can_backspace = true;
-
+        global_console_pointer->can_backspace = true;
         return nullptr;
     }
 
     datatypes::AnyValue* Console::enable_enter_key(
             callback_system::CallbackEngine*,
-            callback_system::CallbackObject* callback_object,
+            callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*>)
     {
-        datatypes::AnyValue* any_value_console = callback_object->get_any_value("console_pointer");
-
-        if (any_value_console->type != datatypes::CONSOLE_POINTER)
-        {
-            return nullptr;
-        }
-
-        console::Console* console = any_value_console->console_pointer;
-        console->can_enter_key = true;
-
+        global_console_pointer->can_enter_key = true;
         return nullptr;
     }
 
     datatypes::AnyValue* Console::enable_ctrl_c(
             callback_system::CallbackEngine*,
-            callback_system::CallbackObject* callback_object,
+            callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*>)
     {
-        datatypes::AnyValue* any_value_console = callback_object->get_any_value("console_pointer");
-
-        if (any_value_console->type != datatypes::CONSOLE_POINTER)
-        {
-            return nullptr;
-        }
-
-        console::Console* console = any_value_console->console_pointer;
-        console->can_ctrl_c = true;
-
+        global_console_pointer->can_ctrl_c = true;
         return nullptr;
     }
 
     datatypes::AnyValue* Console::enter_console(
             callback_system::CallbackEngine*,
-            callback_system::CallbackObject* callback_object,
+            callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*>)
     {
-        datatypes::AnyValue* any_value_console = callback_object->get_any_value("console_pointer");
-
-        if (any_value_console->type != datatypes::CONSOLE_POINTER)
-        {
-            return nullptr;
-        }
-
-        console::Console* console = any_value_console->console_pointer;
-
-        if (!console->in_console &&
-                console->can_enter_console &&
-                console->my_keypress_callback_engine_vector_pointer != nullptr &&
-                console->my_keyrelease_callback_engine_vector_pointer != nullptr &&
-                console->current_keypress_callback_engine_vector_pointer_pointer != nullptr &&
-                console->current_keyrelease_callback_engine_vector_pointer_pointer != nullptr)
+        if (!global_console_pointer->in_console &&
+                global_console_pointer->can_enter_console &&
+                global_console_pointer->my_keypress_callback_engine_vector_pointer != nullptr &&
+                global_console_pointer->my_keyrelease_callback_engine_vector_pointer != nullptr &&
+                global_console_pointer->current_keypress_callback_engine_vector_pointer_pointer != nullptr &&
+                global_console_pointer->current_keyrelease_callback_engine_vector_pointer_pointer != nullptr)
         {
             // Store previous keypress callback engine vector pointer.
-            console->previous_keypress_callback_engine_vector_pointer = *console->current_keypress_callback_engine_vector_pointer_pointer;
+            global_console_pointer->previous_keypress_callback_engine_vector_pointer =
+                *global_console_pointer->current_keypress_callback_engine_vector_pointer_pointer;
 
             // Set new keypress callback engine vector pointer.
-            *console->current_keypress_callback_engine_vector_pointer_pointer = console->my_keypress_callback_engine_vector_pointer;
+            *global_console_pointer->current_keypress_callback_engine_vector_pointer_pointer =
+                global_console_pointer->my_keypress_callback_engine_vector_pointer;
 
             // Store previous keyrelease callback engine vector pointer.
-            console->previous_keyrelease_callback_engine_vector_pointer = *console->current_keyrelease_callback_engine_vector_pointer_pointer;
+            global_console_pointer->previous_keyrelease_callback_engine_vector_pointer =
+                *global_console_pointer->current_keyrelease_callback_engine_vector_pointer_pointer;
 
             // Set new keyrelease callback engine vector pointer.
-            *console->current_keyrelease_callback_engine_vector_pointer_pointer = console->my_keyrelease_callback_engine_vector_pointer;
+            *global_console_pointer->current_keyrelease_callback_engine_vector_pointer_pointer =
+                global_console_pointer->my_keyrelease_callback_engine_vector_pointer;
 
             glfwSetCharModsCallback(window, Console::charmods_callback);
 
             // Mark that we're in console.
-            console->in_console = true;
-            console->in_historical_input = false;
+            global_console_pointer->in_console = true;
+            global_console_pointer->in_historical_input = false;
 
             // Usually key release is required to enable enter console.
-            console->can_exit_console = false;
-            console->can_enter_console = false;
+            global_console_pointer->can_exit_console = false;
+            global_console_pointer->can_enter_console = false;
 
             // Signal to caller that we have entered the console.
             uint32_t enter_console_magic_number = ENTER_CONSOLE_MAGIC_NUMBER;
@@ -374,24 +249,10 @@ namespace console
 
     datatypes::AnyValue* Console::exit_console(
             callback_system::CallbackEngine*,
-            callback_system::CallbackObject* callback_object,
+            callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*>)
     {
-        datatypes::AnyValue* any_value_console_pointer = callback_object->get_any_value("console_pointer");
-
-        if (any_value_console_pointer == nullptr)
-        {
-            return nullptr;
-        }
-
-        if (any_value_console_pointer->type != datatypes::CONSOLE_POINTER)
-        {
-            return nullptr;
-        }
-
-        console::Console* console = any_value_console_pointer->console_pointer;
-
-        if (console->exit_console())
+        if (global_console_pointer->exit_console())
         {
             // Signal to caller that we have exited the console.
             uint32_t exit_console_magic_number = EXIT_CONSOLE_MAGIC_NUMBER;
@@ -405,47 +266,38 @@ namespace console
 
     datatypes::AnyValue* Console::move_to_previous_input(
             callback_system::CallbackEngine*,
-            callback_system::CallbackObject* callback_object,
+            callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*>)
     {
-        datatypes::AnyValue* any_value_console = callback_object->get_any_value("console_pointer");
-
-        if (any_value_console->type != datatypes::CONSOLE_POINTER)
+        if (global_console_pointer->in_console && global_console_pointer->can_move_to_previous_input)
         {
-            return nullptr;
-        }
-
-        console::Console* console = any_value_console->console_pointer;
-
-        if (console->in_console && console->can_move_to_previous_input)
-        {
-            if (!console->in_historical_input && console->command_history.size() > 0)
+            if (!global_console_pointer->in_historical_input && global_console_pointer->command_history.size() > 0)
             {
                 // OK, we moved from the new input to the last historical input.
-                console->in_historical_input = true;
-                console->historical_input_i = console->command_history.size() - 1;
+                global_console_pointer->in_historical_input = true;
+                global_console_pointer->historical_input_i = global_console_pointer->command_history.size() - 1;
 
                 // Copy the new input into temp input.
-                console->temp_input.clear();
-                std::copy(console->current_input.begin(), console->current_input.end(), std::back_inserter(console->temp_input));
+                global_console_pointer->temp_input.clear();
+                std::copy(global_console_pointer->current_input.begin(), global_console_pointer->current_input.end(), std::back_inserter(global_console_pointer->temp_input));
 
                 // Copy the historical input into current input.
-                console->current_input.clear();
-                console->copy_historical_input_into_current_input();
+                global_console_pointer->current_input.clear();
+                global_console_pointer->copy_historical_input_into_current_input();
 
-                console->move_cursor_to_end_of_line();
-                console->can_move_to_previous_input = false;
+                global_console_pointer->move_cursor_to_end_of_line();
+                global_console_pointer->can_move_to_previous_input = false;
             }
-            else if (console->in_historical_input && console->historical_input_i > 0)
+            else if (global_console_pointer->in_historical_input && global_console_pointer->historical_input_i > 0)
             {
                 // OK, we moved to the previous historical input.
-                console->historical_input_i--;
+                global_console_pointer->historical_input_i--;
 
                 // Copy the historical input into current input.
-                console->copy_historical_input_into_current_input();
+                global_console_pointer->copy_historical_input_into_current_input();
 
-                console->move_cursor_to_end_of_line();
-                console->can_move_to_previous_input = false;
+                global_console_pointer->move_cursor_to_end_of_line();
+                global_console_pointer->can_move_to_previous_input = false;
             }
         }
         return nullptr;
@@ -453,150 +305,87 @@ namespace console
 
     datatypes::AnyValue* Console::press_left_control_in_console(
             callback_system::CallbackEngine*,
-            callback_system::CallbackObject* callback_object,
+            callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*>)
     {
-        datatypes::AnyValue* any_value_console = callback_object->get_any_value("console_pointer");
-
-        if (any_value_console->type != datatypes::CONSOLE_POINTER)
-        {
-            return nullptr;
-        }
-
-        console::Console* console = any_value_console->console_pointer;
-        console->is_left_control_pressed = true;
-
+        global_console_pointer->is_left_control_pressed = true;
         return nullptr;
     }
 
     datatypes::AnyValue* Console::press_right_control_in_console(
             callback_system::CallbackEngine*,
-            callback_system::CallbackObject* callback_object,
+            callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*>)
     {
-        datatypes::AnyValue* any_value_console = callback_object->get_any_value("console_pointer");
-
-        if (any_value_console->type != datatypes::CONSOLE_POINTER)
-        {
-            return nullptr;
-        }
-
-        console::Console* console = any_value_console->console_pointer;
-        console->is_right_control_pressed = true;
-
+        global_console_pointer->is_right_control_pressed = true;
         return nullptr;
     }
 
     datatypes::AnyValue* Console::press_left_alt_in_console(
             callback_system::CallbackEngine*,
-            callback_system::CallbackObject* callback_object,
+            callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*>)
     {
-        datatypes::AnyValue* any_value_console = callback_object->get_any_value("console_pointer");
-
-        if (any_value_console->type != datatypes::CONSOLE_POINTER)
-        {
-            return nullptr;
-        }
-
-        console::Console* console = any_value_console->console_pointer;
-        console->is_left_alt_pressed = true;
-
+        global_console_pointer->is_left_alt_pressed = true;
         return nullptr;
     }
 
     datatypes::AnyValue* Console::press_right_alt_in_console(
             callback_system::CallbackEngine*,
-            callback_system::CallbackObject* callback_object,
+            callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*>)
     {
-        datatypes::AnyValue* any_value_console = callback_object->get_any_value("console_pointer");
-
-        if (any_value_console->type != datatypes::CONSOLE_POINTER)
-        {
-            return nullptr;
-        }
-
-        console::Console* console = any_value_console->console_pointer;
-        console->is_right_alt_pressed = true;
-
+        global_console_pointer->is_right_alt_pressed = true;
         return nullptr;
     }
 
     datatypes::AnyValue* Console::press_left_shift_in_console(
             callback_system::CallbackEngine*,
-            callback_system::CallbackObject* callback_object,
+            callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*>)
     {
-        datatypes::AnyValue* any_value_console = callback_object->get_any_value("console_pointer");
-
-        if (any_value_console->type != datatypes::CONSOLE_POINTER)
-        {
-            return nullptr;
-        }
-
-        console::Console* console = any_value_console->console_pointer;
-        console->is_left_shift_pressed = true;
-
+        global_console_pointer->is_left_shift_pressed = true;
         return nullptr;
     }
 
     datatypes::AnyValue* Console::press_right_shift_in_console(
             callback_system::CallbackEngine*,
-            callback_system::CallbackObject* callback_object,
+            callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*>)
     {
-        datatypes::AnyValue* any_value_console = callback_object->get_any_value("console_pointer");
-
-        if (any_value_console->type != datatypes::CONSOLE_POINTER)
-        {
-            return nullptr;
-        }
-
-        console::Console* console = any_value_console->console_pointer;
-        console->is_right_shift_pressed = true;
-
+        global_console_pointer->is_right_shift_pressed = true;
         return nullptr;
     }
 
     datatypes::AnyValue* Console::move_to_next_input(
             callback_system::CallbackEngine*,
-            callback_system::CallbackObject* callback_object,
+            callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*>)
     {
-        datatypes::AnyValue* any_value_console = callback_object->get_any_value("console_pointer");
-
-        if (any_value_console->type != datatypes::CONSOLE_POINTER)
+        if (global_console_pointer->in_console && global_console_pointer->can_move_to_next_input)
         {
-            return nullptr;
-        }
-
-        console::Console* console = any_value_console->console_pointer;
-
-        if (console->in_console && console->can_move_to_next_input)
-        {
-            if (console->in_historical_input && console->historical_input_i == console->command_history.size() - 1)
+            if (global_console_pointer->in_historical_input && global_console_pointer->historical_input_i == global_console_pointer->command_history.size() - 1)
             {
                 // OK, we moved from the last historical input to the new input.
-                console->in_historical_input = false;
+                global_console_pointer->in_historical_input = false;
 
                 // Copy temp input into current input.
-                console->current_input.clear();
-                std::copy(console->temp_input.begin(), console->temp_input.end(), std::back_inserter(console->current_input));
+                global_console_pointer->current_input.clear();
+                std::copy(global_console_pointer->temp_input.begin(), global_console_pointer->temp_input.end(), std::back_inserter(global_console_pointer->current_input));
 
-                console->move_cursor_to_end_of_line();
-                console->can_move_to_next_input = false;
+                global_console_pointer->move_cursor_to_end_of_line();
+                global_console_pointer->can_move_to_next_input = false;
             }
-            else if (console->in_historical_input && console->historical_input_i < console->command_history.size() - 1)
+            else if (global_console_pointer->in_historical_input && global_console_pointer->historical_input_i < global_console_pointer->command_history.size() - 1)
             {
                 // OK, we moved to the next historical input.
-                console->historical_input_i++;
+                global_console_pointer->historical_input_i++;
 
                 // Copy the historical input into current input.
-                console->copy_historical_input_into_current_input();
+                global_console_pointer->copy_historical_input_into_current_input();
 
-                console->move_cursor_to_end_of_line();
-                console->can_move_to_next_input = false;
+                global_console_pointer->move_cursor_to_end_of_line();
+                global_console_pointer->can_move_to_next_input = false;
             }
         }
         return nullptr;
@@ -604,96 +393,54 @@ namespace console
 
     datatypes::AnyValue* Console::backspace(
             callback_system::CallbackEngine*,
-            callback_system::CallbackObject* callback_object,
+            callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*>)
     {
-        datatypes::AnyValue* any_value_console_pointer = callback_object->get_any_value("console_pointer");
-
-        if (any_value_console_pointer == nullptr)
+        if (global_console_pointer->in_console &&
+                global_console_pointer->can_backspace &&
+                global_console_pointer->cursor_it != global_console_pointer->current_input.begin())
         {
-            return nullptr;
-        }
-
-        if (any_value_console_pointer->type != datatypes::CONSOLE_POINTER)
-        {
-            return nullptr;
-        }
-
-        console::Console* console = any_value_console_pointer->console_pointer;
-
-        if (console->in_console &&
-                console->can_backspace &&
-                console->cursor_it != console->current_input.begin())
-        {
-            console->cursor_it = console->current_input.erase(--console->cursor_it);
-            console->cursor_index--;
-            console->can_backspace = false;
+            global_console_pointer->cursor_it = global_console_pointer->current_input.erase(--global_console_pointer->cursor_it);
+            global_console_pointer->cursor_index--;
+            global_console_pointer->can_backspace = false;
         }
         return nullptr;
     }
 
     datatypes::AnyValue* Console::enter_key(
             callback_system::CallbackEngine*,
-            callback_system::CallbackObject* callback_object,
+            callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*>)
     {
-        datatypes::AnyValue* any_value_console_pointer = callback_object->get_any_value("console_pointer");
-
-        if (any_value_console_pointer == nullptr)
+        if (global_console_pointer->in_console &&
+                global_console_pointer->can_enter_key)
         {
-            return nullptr;
-        }
-
-        if (any_value_console_pointer->type != datatypes::CONSOLE_POINTER)
-        {
-            return nullptr;
-        }
-
-        console::Console* console = any_value_console_pointer->console_pointer;
-
-        if (console->in_console &&
-                console->can_enter_key)
-        {
-            console->command_history.push_back(console->current_input);
-            console->current_input.clear();
-            console->in_historical_input = false;
-            console->cursor_it = console->current_input.begin();
-            console->cursor_index = 0;
-            console->can_enter_key = false;
+            global_console_pointer->command_history.push_back(global_console_pointer->current_input);
+            global_console_pointer->current_input.clear();
+            global_console_pointer->in_historical_input = false;
+            global_console_pointer->cursor_it = global_console_pointer->current_input.begin();
+            global_console_pointer->cursor_index = 0;
+            global_console_pointer->can_enter_key = false;
         }
         return nullptr;
     }
 
     datatypes::AnyValue* Console::ctrl_c(
             callback_system::CallbackEngine*,
-            callback_system::CallbackObject* callback_object,
+            callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*>)
     {
-        datatypes::AnyValue* any_value_console_pointer = callback_object->get_any_value("console_pointer");
-
-        if (any_value_console_pointer == nullptr)
+        if (global_console_pointer->in_console &&
+                global_console_pointer->can_ctrl_c &&
+                (global_console_pointer->is_left_control_pressed || global_console_pointer->is_right_control_pressed) &&
+                !global_console_pointer->is_left_alt_pressed && !global_console_pointer->is_right_alt_pressed &&
+                !global_console_pointer->is_left_shift_pressed && !global_console_pointer->is_right_shift_pressed)
         {
-            return nullptr;
-        }
-
-        if (any_value_console_pointer->type != datatypes::CONSOLE_POINTER)
-        {
-            return nullptr;
-        }
-
-        console::Console* console = any_value_console_pointer->console_pointer;
-
-        if (console->in_console &&
-                console->can_ctrl_c &&
-                (console->is_left_control_pressed || console->is_right_control_pressed) &&
-                !console->is_left_alt_pressed && !console->is_right_alt_pressed &&
-                !console->is_left_shift_pressed && !console->is_right_shift_pressed)
-        {
-            console->current_input.clear();
-            console->in_historical_input = false;
-            console->cursor_it = console->current_input.begin();
-            console->cursor_index = 0;
-            console->can_ctrl_c = false;
+            global_console_pointer->current_input.clear();
+            global_console_pointer->in_historical_input = false;
+            global_console_pointer->cursor_it = global_console_pointer->current_input.begin();
+            global_console_pointer->cursor_index = 0;
+            global_console_pointer->can_ctrl_c = false;
         }
         return nullptr;
     }
