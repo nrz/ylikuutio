@@ -172,7 +172,6 @@ namespace console
 
         private:
             void copy_historical_input_into_current_input();
-            void enable_exit_console();
             void release_left_control_in_console();
             void release_right_control_in_console();
             void release_left_alt_in_console();

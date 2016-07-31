@@ -116,7 +116,8 @@ namespace console
         }
 
         console::Console* console = any_value_console->console_pointer;
-        console->enable_exit_console();
+        console->can_exit_console = true;
+
         return nullptr;
     }
 
@@ -619,11 +620,6 @@ namespace console
         std::copy(this->command_history.at(this->historical_input_i).begin(),
                 this->command_history.at(this->historical_input_i).end(),
                 std::back_inserter(this->current_input));
-    }
-
-    void Console::enable_exit_console()
-    {
-        this->can_exit_console = true;
     }
 
     void Console::release_left_control_in_console()
