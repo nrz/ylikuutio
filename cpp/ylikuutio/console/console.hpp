@@ -155,11 +155,6 @@ namespace console
                     callback_system::CallbackObject* callback_object,
                     std::vector<callback_system::CallbackParameter*>);
 
-            static datatypes::AnyValue* add_character(
-                    callback_system::CallbackEngine*,
-                    callback_system::CallbackObject* callback_object,
-                    std::vector<callback_system::CallbackParameter*>);
-
             static datatypes::AnyValue* backspace(
                     callback_system::CallbackEngine*,
                     callback_system::CallbackObject* callback_object,

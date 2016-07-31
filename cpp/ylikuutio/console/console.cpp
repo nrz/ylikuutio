@@ -71,7 +71,15 @@ namespace console
         // Shift (left or right): 0x01
         // Alt (not AltGr):       0x04
         // Shift + Alt:           0x05
-        global_console_pointer->add_character(static_cast<char>(codepoint), static_cast<uint32_t>(mods));
+        if ((mods == 0 || mods == 1) &&
+                !global_console_pointer->is_left_control_pressed &&
+                !global_console_pointer->is_right_control_pressed &&
+                !global_console_pointer->is_left_alt_pressed)
+        {
+            global_console_pointer->cursor_it = global_console_pointer->current_input.insert(global_console_pointer->cursor_it, static_cast<char>(codepoint));
+            global_console_pointer->cursor_it++;
+            global_console_pointer->cursor_index++;
+        }
     }
 
     datatypes::AnyValue* Console::enable_enter_console(
@@ -766,19 +774,6 @@ namespace console
     void Console::press_right_shift_in_console()
     {
         this->is_right_shift_pressed = true;
-    }
-
-    void Console::add_character(char character, uint32_t mods)
-    {
-        if ((mods == 0 || mods == 1) &&
-                !this->is_left_control_pressed &&
-                !this->is_right_control_pressed &&
-                !this->is_left_alt_pressed)
-        {
-            this->cursor_it = this->current_input.insert(this->cursor_it, character);
-            this->cursor_it++;
-            this->cursor_index++;
-        }
     }
 
     void Console::backspace()
