@@ -5,6 +5,9 @@ project(ylikuutio)
 # uncomment the following line to cross-compile for Windows under Linux using mingw64.
 # set(CROSS_COMPILE_FOR_WINDOWS true)
 
+# comment the following line to disable scripting with Chibi Scheme.
+set(ENABLE_SCRIPTING_WITH_CHIBI_SCHEME true)
+
 # uncomment the following line to do unit tests also with Catch.
 # set(DO_UNIT_TESTS_WITH_CATCH true)
 
@@ -91,6 +94,12 @@ include_directories(
     external/glew-2.0.0/include/
     .
     )
+
+if(ENABLE_SCRIPTING_WITH_CHIBI_SCHEME)
+    include_directories(
+        external/chibi-scheme/include/
+        )
+endif()
 
 if(DISABLE_UPDATE_STEP)
     # Download and install Eigen
