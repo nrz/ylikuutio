@@ -172,36 +172,12 @@ namespace console
 
         private:
             void copy_historical_input_into_current_input();
-            void release_left_control_in_console();
-            void release_right_control_in_console();
-            void release_left_alt_in_console();
-            void release_right_alt_in_console();
-            void release_left_shift_in_console();
-            void release_right_shift_in_console();
-            void enable_move_to_previous_input();
-            void enable_move_to_next_input();
-            void enable_backspace();
-            void enable_enter_key();
-            void enable_ctrl_c();
-            bool enter_console();
             bool exit_console();
-            void press_left_control_in_console();
-            void press_right_control_in_console();
-            void press_left_alt_in_console();
-            void press_right_alt_in_console();
-            void press_left_shift_in_console();
-            void press_right_shift_in_console();
-            void add_character(char character, uint32_t mods);
-            void backspace();
             void delete_character();
-            void enter_key();
-            void ctrl_c();
             void move_cursor_left();
             void move_cursor_right();
             void move_cursor_to_start_of_line();
             void move_cursor_to_end_of_line();
-            void move_to_previous_input();
-            void move_to_next_input();
             void page_up();
             void page_down();
             void home();

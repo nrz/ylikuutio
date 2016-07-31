@@ -134,7 +134,8 @@ namespace console
         }
 
         console::Console* console = any_value_console->console_pointer;
-        console->release_left_control_in_console();
+        console->is_left_control_pressed = false;
+
         return nullptr;
     }
 
@@ -151,7 +152,8 @@ namespace console
         }
 
         console::Console* console = any_value_console->console_pointer;
-        console->release_right_control_in_console();
+        console->is_right_control_pressed = false;
+
         return nullptr;
     }
 
@@ -168,7 +170,8 @@ namespace console
         }
 
         console::Console* console = any_value_console->console_pointer;
-        console->release_left_alt_in_console();
+        console->is_left_alt_pressed = false;
+
         return nullptr;
     }
 
@@ -185,7 +188,8 @@ namespace console
         }
 
         console::Console* console = any_value_console->console_pointer;
-        console->release_right_alt_in_console();
+        console->is_right_alt_pressed = false;
+
         return nullptr;
     }
 
@@ -202,7 +206,8 @@ namespace console
         }
 
         console::Console* console = any_value_console->console_pointer;
-        console->release_left_shift_in_console();
+        console->is_left_shift_pressed = false;
+
         return nullptr;
     }
 
@@ -219,7 +224,8 @@ namespace console
         }
 
         console::Console* console = any_value_console->console_pointer;
-        console->release_right_shift_in_console();
+        console->is_right_shift_pressed = false;
+
         return nullptr;
     }
 
@@ -236,7 +242,8 @@ namespace console
         }
 
         console::Console* console = any_value_console->console_pointer;
-        console->enable_move_to_previous_input();
+        console->can_move_to_previous_input = true;
+
         return nullptr;
     }
 
@@ -253,7 +260,8 @@ namespace console
         }
 
         console::Console* console = any_value_console->console_pointer;
-        console->enable_move_to_next_input();
+        console->can_move_to_next_input = true;
+
         return nullptr;
     }
 
@@ -270,7 +278,8 @@ namespace console
         }
 
         console::Console* console = any_value_console->console_pointer;
-        console->enable_backspace();
+        console->can_backspace = true;
+
         return nullptr;
     }
 
@@ -287,7 +296,8 @@ namespace console
         }
 
         console::Console* console = any_value_console->console_pointer;
-        console->enable_enter_key();
+        console->can_enter_key = true;
+
         return nullptr;
     }
 
@@ -304,7 +314,8 @@ namespace console
         }
 
         console::Console* console = any_value_console->console_pointer;
-        console->enable_ctrl_c();
+        console->can_ctrl_c = true;
+
         return nullptr;
     }
 
@@ -321,18 +332,44 @@ namespace console
         }
 
         console::Console* console = any_value_console->console_pointer;
-        bool result = console->enter_console();
 
-        if (result == false)
+        if (!console->in_console &&
+                console->can_enter_console &&
+                console->my_keypress_callback_engine_vector_pointer != nullptr &&
+                console->my_keyrelease_callback_engine_vector_pointer != nullptr &&
+                console->current_keypress_callback_engine_vector_pointer_pointer != nullptr &&
+                console->current_keyrelease_callback_engine_vector_pointer_pointer != nullptr)
         {
-            // We did not enter the console.
-            return nullptr;
+            // Store previous keypress callback engine vector pointer.
+            console->previous_keypress_callback_engine_vector_pointer = *console->current_keypress_callback_engine_vector_pointer_pointer;
+
+            // Set new keypress callback engine vector pointer.
+            *console->current_keypress_callback_engine_vector_pointer_pointer = console->my_keypress_callback_engine_vector_pointer;
+
+            // Store previous keyrelease callback engine vector pointer.
+            console->previous_keyrelease_callback_engine_vector_pointer = *console->current_keyrelease_callback_engine_vector_pointer_pointer;
+
+            // Set new keyrelease callback engine vector pointer.
+            *console->current_keyrelease_callback_engine_vector_pointer_pointer = console->my_keyrelease_callback_engine_vector_pointer;
+
+            glfwSetCharModsCallback(window, Console::charmods_callback);
+
+            // Mark that we're in console.
+            console->in_console = true;
+            console->in_historical_input = false;
+
+            // Usually key release is required to enable enter console.
+            console->can_exit_console = false;
+            console->can_enter_console = false;
+
+            // Signal to caller that we have entered the console.
+            uint32_t enter_console_magic_number = ENTER_CONSOLE_MAGIC_NUMBER;
+            datatypes::AnyValue* any_value_magic_number = new datatypes::AnyValue(enter_console_magic_number);
+            return any_value_magic_number;
         }
 
-        // Signal to caller that we have entered the console.
-        uint32_t enter_console_magic_number = ENTER_CONSOLE_MAGIC_NUMBER;
-        datatypes::AnyValue* any_value_magic_number = new datatypes::AnyValue(enter_console_magic_number);
-        return any_value_magic_number;
+        // We did not enter the console.
+        return nullptr;
     }
 
     datatypes::AnyValue* Console::exit_console(
@@ -352,19 +389,18 @@ namespace console
             return nullptr;
         }
 
-        console::Console* console_pointer = any_value_console_pointer->console_pointer;
-        bool result = console_pointer->exit_console();
+        console::Console* console = any_value_console_pointer->console_pointer;
 
-        if (result == false)
+        if (console->exit_console())
         {
-            // We did not exit the console.
-            return nullptr;
+            // Signal to caller that we have exited the console.
+            uint32_t exit_console_magic_number = EXIT_CONSOLE_MAGIC_NUMBER;
+            datatypes::AnyValue* any_value_magic_number = new datatypes::AnyValue(exit_console_magic_number);
+            return any_value_magic_number;
         }
 
-        // Signal to caller that we have exited the console.
-        uint32_t exit_console_magic_number = EXIT_CONSOLE_MAGIC_NUMBER;
-        datatypes::AnyValue* any_value_magic_number = new datatypes::AnyValue(exit_console_magic_number);
-        return any_value_magic_number;
+        // We did not exit the console.
+        return nullptr;
     }
 
     datatypes::AnyValue* Console::move_to_previous_input(
@@ -380,7 +416,38 @@ namespace console
         }
 
         console::Console* console = any_value_console->console_pointer;
-        console->move_to_previous_input();
+
+        if (console->in_console && console->can_move_to_previous_input)
+        {
+            if (!console->in_historical_input && console->command_history.size() > 0)
+            {
+                // OK, we moved from the new input to the last historical input.
+                console->in_historical_input = true;
+                console->historical_input_i = console->command_history.size() - 1;
+
+                // Copy the new input into temp input.
+                console->temp_input.clear();
+                std::copy(console->current_input.begin(), console->current_input.end(), std::back_inserter(console->temp_input));
+
+                // Copy the historical input into current input.
+                console->current_input.clear();
+                console->copy_historical_input_into_current_input();
+
+                console->move_cursor_to_end_of_line();
+                console->can_move_to_previous_input = false;
+            }
+            else if (console->in_historical_input && console->historical_input_i > 0)
+            {
+                // OK, we moved to the previous historical input.
+                console->historical_input_i--;
+
+                // Copy the historical input into current input.
+                console->copy_historical_input_into_current_input();
+
+                console->move_cursor_to_end_of_line();
+                console->can_move_to_previous_input = false;
+            }
+        }
         return nullptr;
     }
 
@@ -397,7 +464,8 @@ namespace console
         }
 
         console::Console* console = any_value_console->console_pointer;
-        console->press_left_control_in_console();
+        console->is_left_control_pressed = true;
+
         return nullptr;
     }
 
@@ -414,7 +482,8 @@ namespace console
         }
 
         console::Console* console = any_value_console->console_pointer;
-        console->press_right_control_in_console();
+        console->is_right_control_pressed = true;
+
         return nullptr;
     }
 
@@ -431,7 +500,8 @@ namespace console
         }
 
         console::Console* console = any_value_console->console_pointer;
-        console->press_left_alt_in_console();
+        console->is_left_alt_pressed = true;
+
         return nullptr;
     }
 
@@ -448,7 +518,8 @@ namespace console
         }
 
         console::Console* console = any_value_console->console_pointer;
-        console->press_right_alt_in_console();
+        console->is_right_alt_pressed = true;
+
         return nullptr;
     }
 
@@ -465,7 +536,8 @@ namespace console
         }
 
         console::Console* console = any_value_console->console_pointer;
-        console->press_left_shift_in_console();
+        console->is_left_shift_pressed = true;
+
         return nullptr;
     }
 
@@ -482,7 +554,8 @@ namespace console
         }
 
         console::Console* console = any_value_console->console_pointer;
-        console->press_right_shift_in_console();
+        console->is_right_shift_pressed = true;
+
         return nullptr;
     }
 
@@ -499,7 +572,33 @@ namespace console
         }
 
         console::Console* console = any_value_console->console_pointer;
-        console->move_to_next_input();
+
+        if (console->in_console && console->can_move_to_next_input)
+        {
+            if (console->in_historical_input && console->historical_input_i == console->command_history.size() - 1)
+            {
+                // OK, we moved from the last historical input to the new input.
+                console->in_historical_input = false;
+
+                // Copy temp input into current input.
+                console->current_input.clear();
+                std::copy(console->temp_input.begin(), console->temp_input.end(), std::back_inserter(console->current_input));
+
+                console->move_cursor_to_end_of_line();
+                console->can_move_to_next_input = false;
+            }
+            else if (console->in_historical_input && console->historical_input_i < console->command_history.size() - 1)
+            {
+                // OK, we moved to the next historical input.
+                console->historical_input_i++;
+
+                // Copy the historical input into current input.
+                console->copy_historical_input_into_current_input();
+
+                console->move_cursor_to_end_of_line();
+                console->can_move_to_next_input = false;
+            }
+        }
         return nullptr;
     }
 
@@ -521,7 +620,15 @@ namespace console
         }
 
         console::Console* console = any_value_console_pointer->console_pointer;
-        console->backspace();
+
+        if (console->in_console &&
+                console->can_backspace &&
+                console->cursor_it != console->current_input.begin())
+        {
+            console->cursor_it = console->current_input.erase(--console->cursor_it);
+            console->cursor_index--;
+            console->can_backspace = false;
+        }
         return nullptr;
     }
 
@@ -543,7 +650,17 @@ namespace console
         }
 
         console::Console* console = any_value_console_pointer->console_pointer;
-        console->enter_key();
+
+        if (console->in_console &&
+                console->can_enter_key)
+        {
+            console->command_history.push_back(console->current_input);
+            console->current_input.clear();
+            console->in_historical_input = false;
+            console->cursor_it = console->current_input.begin();
+            console->cursor_index = 0;
+            console->can_enter_key = false;
+        }
         return nullptr;
     }
 
@@ -565,7 +682,19 @@ namespace console
         }
 
         console::Console* console = any_value_console_pointer->console_pointer;
-        console->ctrl_c();
+
+        if (console->in_console &&
+                console->can_ctrl_c &&
+                (console->is_left_control_pressed || console->is_right_control_pressed) &&
+                !console->is_left_alt_pressed && !console->is_right_alt_pressed &&
+                !console->is_left_shift_pressed && !console->is_right_shift_pressed)
+        {
+            console->current_input.clear();
+            console->in_historical_input = false;
+            console->cursor_it = console->current_input.begin();
+            console->cursor_index = 0;
+            console->can_ctrl_c = false;
+        }
         return nullptr;
     }
 
@@ -622,96 +751,6 @@ namespace console
                 std::back_inserter(this->current_input));
     }
 
-    void Console::release_left_control_in_console()
-    {
-        this->is_left_control_pressed = false;
-    }
-
-    void Console::release_right_control_in_console()
-    {
-        this->is_right_control_pressed = false;
-    }
-
-    void Console::release_left_alt_in_console()
-    {
-        this->is_left_alt_pressed = false;
-    }
-
-    void Console::release_right_alt_in_console()
-    {
-        this->is_right_alt_pressed = false;
-    }
-
-    void Console::release_left_shift_in_console()
-    {
-        this->is_left_shift_pressed = false;
-    }
-
-    void Console::release_right_shift_in_console()
-    {
-        this->is_right_shift_pressed = false;
-    }
-
-    void Console::enable_move_to_previous_input()
-    {
-        this->can_move_to_previous_input = true;
-    }
-
-    void Console::enable_move_to_next_input()
-    {
-        this->can_move_to_next_input = true;
-    }
-
-    void Console::enable_backspace()
-    {
-        this->can_backspace = true;
-    }
-
-    void Console::enable_enter_key()
-    {
-        this->can_enter_key = true;
-    }
-
-    void Console::enable_ctrl_c()
-    {
-        this->can_ctrl_c = true;
-    }
-
-    bool Console::enter_console()
-    {
-        if (!this->in_console &&
-                this->can_enter_console &&
-                this->my_keypress_callback_engine_vector_pointer != nullptr &&
-                this->my_keyrelease_callback_engine_vector_pointer != nullptr &&
-                this->current_keypress_callback_engine_vector_pointer_pointer != nullptr &&
-                this->current_keyrelease_callback_engine_vector_pointer_pointer != nullptr)
-        {
-            // Store previous keypress callback engine vector pointer.
-            this->previous_keypress_callback_engine_vector_pointer = *this->current_keypress_callback_engine_vector_pointer_pointer;
-
-            // Set new keypress callback engine vector pointer.
-            *this->current_keypress_callback_engine_vector_pointer_pointer = this->my_keypress_callback_engine_vector_pointer;
-
-            // Store previous keyrelease callback engine vector pointer.
-            this->previous_keyrelease_callback_engine_vector_pointer = *this->current_keyrelease_callback_engine_vector_pointer_pointer;
-
-            // Set new keyrelease callback engine vector pointer.
-            *this->current_keyrelease_callback_engine_vector_pointer_pointer = this->my_keyrelease_callback_engine_vector_pointer;
-
-            glfwSetCharModsCallback(window, Console::charmods_callback);
-
-            // Mark that we're in console.
-            this->in_console = true;
-            this->in_historical_input = false;
-
-            // Usually key release is required to enable enter console.
-            this->can_exit_console = false;
-            this->can_enter_console = false;
-            return true;
-        }
-        return false;
-    }
-
     bool Console::exit_console()
     {
         if (this->in_console &&
@@ -737,82 +776,9 @@ namespace console
         }
         return false;
     }
-
-    void Console::press_left_control_in_console()
-    {
-        this->is_left_control_pressed = true;
-    }
-
-    void Console::press_right_control_in_console()
-    {
-        this->is_right_control_pressed = true;
-    }
-
-    void Console::press_left_alt_in_console()
-    {
-        this->is_left_alt_pressed = true;
-    }
-
-    void Console::press_right_alt_in_console()
-    {
-        this->is_right_alt_pressed = true;
-    }
-
-    void Console::press_left_shift_in_console()
-    {
-        this->is_left_shift_pressed = true;
-    }
-
-    void Console::press_right_shift_in_console()
-    {
-        this->is_right_shift_pressed = true;
-    }
-
-    void Console::backspace()
-    {
-        if (this->in_console &&
-                this->can_backspace &&
-                this->cursor_it != this->current_input.begin())
-        {
-            this->cursor_it = this->current_input.erase(--this->cursor_it);
-            this->cursor_index--;
-            this->can_backspace = false;
-        }
-    }
-
     void Console::delete_character()
     {
         this->current_input.erase(this->cursor_it);
-    }
-
-    void Console::enter_key()
-    {
-        if (this->in_console &&
-                this->can_enter_key)
-        {
-            this->command_history.push_back(this->current_input);
-            this->current_input.clear();
-            this->in_historical_input = false;
-            this->cursor_it = this->current_input.begin();
-            this->cursor_index = 0;
-            this->can_enter_key = false;
-        }
-    }
-
-    void Console::ctrl_c()
-    {
-        if (this->in_console &&
-                this->can_ctrl_c &&
-                (this->is_left_control_pressed || this->is_right_control_pressed) &&
-                !this->is_left_alt_pressed && !this->is_right_alt_pressed &&
-                !this->is_left_shift_pressed && !this->is_right_shift_pressed)
-        {
-            this->current_input.clear();
-            this->in_historical_input = false;
-            this->cursor_it = this->current_input.begin();
-            this->cursor_index = 0;
-            this->can_ctrl_c = false;
-        }
     }
 
     void Console::move_cursor_left()
@@ -843,72 +809,6 @@ namespace console
     {
         this->cursor_it = this->current_input.end();
         this->cursor_index = this->current_input.size();
-    }
-
-    void Console::move_to_previous_input()
-    {
-        if (this->in_console && this->can_move_to_previous_input)
-        {
-            if (!this->in_historical_input && this->command_history.size() > 0)
-            {
-                // OK, we moved from the new input to the last historical input.
-                this->in_historical_input = true;
-                this->historical_input_i = this->command_history.size() - 1;
-
-                // Copy the new input into temp input.
-                this->temp_input.clear();
-                std::copy(this->current_input.begin(), this->current_input.end(), std::back_inserter(this->temp_input));
-
-                // Copy the historical input into current input.
-                this->current_input.clear();
-                this->copy_historical_input_into_current_input();
-
-                this->move_cursor_to_end_of_line();
-                this->can_move_to_previous_input = false;
-            }
-            else if (this->in_historical_input && this->historical_input_i > 0)
-            {
-                // OK, we moved to the previous historical input.
-                this->historical_input_i--;
-
-                // Copy the historical input into current input.
-                this->copy_historical_input_into_current_input();
-
-                this->move_cursor_to_end_of_line();
-                this->can_move_to_previous_input = false;
-            }
-        }
-    }
-
-    void Console::move_to_next_input()
-    {
-        if (this->in_console && this->can_move_to_next_input)
-        {
-            if (this->in_historical_input && this->historical_input_i == this->command_history.size() - 1)
-            {
-                // OK, we moved from the last historical input to the new input.
-                this->in_historical_input = false;
-
-                // Copy temp input into current input.
-                this->current_input.clear();
-                std::copy(this->temp_input.begin(), this->temp_input.end(), std::back_inserter(this->current_input));
-                // this->current_input.assign(this->temp_input.begin(), this->temp_input.end());
-
-                this->move_cursor_to_end_of_line();
-                this->can_move_to_next_input = false;
-            }
-            else if (this->in_historical_input && this->historical_input_i < this->command_history.size() - 1)
-            {
-                // OK, we moved to the next historical input.
-                this->historical_input_i++;
-
-                // Copy the historical input into current input.
-                this->copy_historical_input_into_current_input();
-
-                this->move_cursor_to_end_of_line();
-                this->can_move_to_next_input = false;
-            }
-        }
     }
 
     void Console::page_up()
