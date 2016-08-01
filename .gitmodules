@@ -1,3 +1,6 @@
 [submodule "external/googletest"]
 	path = external/googletest
 	url = https://github.com/google/googletest
+[submodule "external/chibi-scheme"]
+	path = external/chibi-scheme
+	url = https://github.com/ashinn/chibi-scheme
