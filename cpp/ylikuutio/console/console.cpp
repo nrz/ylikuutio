@@ -85,7 +85,7 @@ namespace console
     datatypes::AnyValue* Console::enable_enter_console(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>,
+            std::vector<callback_system::CallbackParameter*>&,
             console::Console* console)
     {
         console->can_enter_console = true;
@@ -95,7 +95,7 @@ namespace console
     datatypes::AnyValue* Console::enable_exit_console(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>,
+            std::vector<callback_system::CallbackParameter*>&,
             console::Console* console)
     {
         console->can_exit_console = true;
@@ -105,7 +105,7 @@ namespace console
     datatypes::AnyValue* Console::release_left_control_in_console(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>,
+            std::vector<callback_system::CallbackParameter*>&,
             console::Console* console)
     {
         console->is_left_control_pressed = false;
@@ -115,7 +115,7 @@ namespace console
     datatypes::AnyValue* Console::release_right_control_in_console(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>,
+            std::vector<callback_system::CallbackParameter*>&,
             console::Console* console)
     {
         console->is_right_control_pressed = false;
@@ -125,7 +125,7 @@ namespace console
     datatypes::AnyValue* Console::release_left_alt_in_console(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>,
+            std::vector<callback_system::CallbackParameter*>&,
             console::Console* console)
     {
         console->is_left_alt_pressed = false;
@@ -135,7 +135,7 @@ namespace console
     datatypes::AnyValue* Console::release_right_alt_in_console(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>,
+            std::vector<callback_system::CallbackParameter*>&,
             console::Console* console)
     {
         console->is_right_alt_pressed = false;
@@ -145,7 +145,7 @@ namespace console
     datatypes::AnyValue* Console::release_left_shift_in_console(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>,
+            std::vector<callback_system::CallbackParameter*>&,
             console::Console* console)
     {
         console->is_left_shift_pressed = false;
@@ -155,7 +155,7 @@ namespace console
     datatypes::AnyValue* Console::release_right_shift_in_console(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>,
+            std::vector<callback_system::CallbackParameter*>&,
             console::Console* console)
     {
         console->is_right_shift_pressed = false;
@@ -165,7 +165,7 @@ namespace console
     datatypes::AnyValue* Console::enable_move_to_previous_input(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>,
+            std::vector<callback_system::CallbackParameter*>&,
             console::Console* console)
     {
         console->can_move_to_previous_input = true;
@@ -175,7 +175,7 @@ namespace console
     datatypes::AnyValue* Console::enable_move_to_next_input(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>,
+            std::vector<callback_system::CallbackParameter*>&,
             console::Console* console)
     {
         console->can_move_to_next_input = true;
@@ -185,7 +185,7 @@ namespace console
     datatypes::AnyValue* Console::enable_backspace(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>,
+            std::vector<callback_system::CallbackParameter*>&,
             console::Console* console)
     {
         console->can_backspace = true;
@@ -195,7 +195,7 @@ namespace console
     datatypes::AnyValue* Console::enable_enter_key(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>,
+            std::vector<callback_system::CallbackParameter*>&,
             console::Console* console)
     {
         console->can_enter_key = true;
@@ -205,7 +205,7 @@ namespace console
     datatypes::AnyValue* Console::enable_ctrl_c(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>,
+            std::vector<callback_system::CallbackParameter*>&,
             console::Console* console)
     {
         console->can_ctrl_c = true;
@@ -215,7 +215,7 @@ namespace console
     datatypes::AnyValue* Console::enter_console(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>,
+            std::vector<callback_system::CallbackParameter*>&,
             console::Console* console)
     {
         if (!console->in_console &&
@@ -264,7 +264,7 @@ namespace console
     datatypes::AnyValue* Console::exit_console(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>,
+            std::vector<callback_system::CallbackParameter*>&,
             console::Console* console)
     {
         if (console->exit_console())
@@ -282,7 +282,7 @@ namespace console
     datatypes::AnyValue* Console::move_to_previous_input(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>,
+            std::vector<callback_system::CallbackParameter*>&,
             console::Console* console)
     {
         if (console->in_console && console->can_move_to_previous_input)
@@ -322,7 +322,7 @@ namespace console
     datatypes::AnyValue* Console::press_left_control_in_console(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>,
+            std::vector<callback_system::CallbackParameter*>&,
             console::Console* console)
     {
         console->is_left_control_pressed = true;
@@ -332,7 +332,7 @@ namespace console
     datatypes::AnyValue* Console::press_right_control_in_console(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>,
+            std::vector<callback_system::CallbackParameter*>&,
             console::Console* console)
     {
         console->is_right_control_pressed = true;
@@ -342,7 +342,7 @@ namespace console
     datatypes::AnyValue* Console::press_left_alt_in_console(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>,
+            std::vector<callback_system::CallbackParameter*>&,
             console::Console* console)
     {
         console->is_left_alt_pressed = true;
@@ -352,7 +352,7 @@ namespace console
     datatypes::AnyValue* Console::press_right_alt_in_console(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>,
+            std::vector<callback_system::CallbackParameter*>&,
             console::Console* console)
     {
         console->is_right_alt_pressed = true;
@@ -362,7 +362,7 @@ namespace console
     datatypes::AnyValue* Console::press_left_shift_in_console(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>,
+            std::vector<callback_system::CallbackParameter*>&,
             console::Console* console)
     {
         console->is_left_shift_pressed = true;
@@ -372,7 +372,7 @@ namespace console
     datatypes::AnyValue* Console::press_right_shift_in_console(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>,
+            std::vector<callback_system::CallbackParameter*>&,
             console::Console* console)
     {
         console->is_right_shift_pressed = true;
@@ -382,7 +382,7 @@ namespace console
     datatypes::AnyValue* Console::move_to_next_input(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>,
+            std::vector<callback_system::CallbackParameter*>&,
             console::Console* console)
     {
         if (console->in_console && console->can_move_to_next_input)
@@ -417,7 +417,7 @@ namespace console
     datatypes::AnyValue* Console::backspace(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>,
+            std::vector<callback_system::CallbackParameter*>&,
             console::Console* console)
     {
         if (console->in_console &&
@@ -434,7 +434,7 @@ namespace console
     datatypes::AnyValue* Console::enter_key(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>,
+            std::vector<callback_system::CallbackParameter*>&,
             console::Console* console)
     {
         if (console->in_console &&
@@ -453,7 +453,7 @@ namespace console
     datatypes::AnyValue* Console::ctrl_c(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>,
+            std::vector<callback_system::CallbackParameter*>&,
             console::Console* console)
     {
         if (console->in_console &&

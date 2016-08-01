@@ -293,6 +293,6 @@ namespace console
 typedef datatypes::AnyValue* (*InputParametersToAnyValueCallbackWithConsole) (
         callback_system::CallbackEngine*,
         callback_system::CallbackObject*,
-        std::vector<callback_system::CallbackParameter*>,
+        std::vector<callback_system::CallbackParameter*>&,
         console::Console*);
 #endif
