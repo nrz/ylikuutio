@@ -303,6 +303,7 @@ configure_file(cpp/ylikuutio/shaders/TextVertexShader.fragmentshader TextVertexS
 configure_file(res/objects/suzanne.obj suzanne.obj COPYONLY)
 configure_file(res/textures/uvmap.DDS uvmap.DDS COPYONLY)
 configure_file(res/textures/GrassGreenTexture0002.bmp GrassGreenTexture0002.bmp COPYONLY)
+configure_file(res/textures/pavers1b2.bmp pavers1b2.bmp COPYONLY)
 configure_file(res/fonts/Holstein.DDS Holstein.DDS COPYONLY)
 configure_file(res/fonts/Holstein.bmp Holstein.bmp COPYONLY)
 configure_file(res/height_maps/noise1024x1024.bmp noise1024x1024.bmp COPYONLY)
