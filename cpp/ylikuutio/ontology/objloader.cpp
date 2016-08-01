@@ -12,6 +12,7 @@
 #include <cstdio>   // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf etc.
 #include <cstring>  // std::memcmp, std::strcmp, std::strlen, std::strncmp
 #include <iostream> // std::cout, std::cin, std::cerr
+#include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 #include <vector>   // std::vector
 
@@ -40,7 +41,7 @@ namespace ontology
     {
         std::cout << "Loading OBJ file " << path << " ...\n";
 
-        std::vector<unsigned int> vertexIndices, uvIndices, normalIndices;
+        std::vector<uint32_t> vertexIndices, uvIndices, normalIndices;
         std::vector<glm::vec3> temp_vertices;
         std::vector<glm::vec2> temp_UVs;
         std::vector<glm::vec3> temp_normals;
