@@ -142,7 +142,7 @@ namespace ontology
                 if (matches != 9)
                 {
                     std::printf("File can't be read by our simple parser :-( Try exporting with other options\n");
-                    return false;
+                    continue;
                 }
                 vertexIndices.push_back(vertexIndex[0]);
                 vertexIndices.push_back(vertexIndex[1]);
