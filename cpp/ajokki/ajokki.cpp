@@ -192,6 +192,13 @@ int main(void)
     uvmap_material_struct.texture_filename = "uvmap.DDS";
     ontology::Material* uvmap_material = new ontology::Material(uvmap_material_struct);
 
+    // Create the material, store it in `pink_geometric_tiles_material`.
+    MaterialStruct pink_geometric_tiles_material_struct;
+    pink_geometric_tiles_material_struct.parent_pointer = my_shader;
+    pink_geometric_tiles_material_struct.texture_file_format = "bmp";
+    pink_geometric_tiles_material_struct.texture_filename = "pavers1b2.bmp";
+    ontology::Material* pink_geometric_tiles_material = new ontology::Material(pink_geometric_tiles_material_struct);
+
     ontology::Species* terrain_species;
 
     if (testing_spherical_world_in_use)
@@ -234,6 +241,24 @@ int main(void)
     terrain_object_struct1.rotate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
     terrain_object_struct1.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
     ontology::Object* terrain1 = new ontology::Object(terrain_object_struct1);
+
+    // Create the species, store it in `snow_cottage_species`.
+    SpeciesStruct snow_cottage_species_struct;
+    snow_cottage_species_struct.parent_pointer = pink_geometric_tiles_material;
+    snow_cottage_species_struct.model_file_format = "obj";
+    snow_cottage_species_struct.model_filename = "snow_cottage_triangulated.obj";
+    snow_cottage_species_struct.light_position = glm::vec3(4, 4, 4);
+    ontology::Species* snow_cottage_species = new ontology::Species(snow_cottage_species_struct);
+
+    // Create snow cottage, store it in `snow_cottage1`.
+    ObjectStruct snow_cottage_object_struct1;
+    snow_cottage_object_struct1.species_parent_pointer = snow_cottage_species;
+    snow_cottage_object_struct1.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
+    snow_cottage_object_struct1.coordinate_vector = glm::vec3(121.50f, 126.50f, 63.70f);
+    snow_cottage_object_struct1.rotate_angle = 0.10f;
+    snow_cottage_object_struct1.rotate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
+    snow_cottage_object_struct1.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
+    ontology::Object* snow_cottage1 = new ontology::Object(snow_cottage_object_struct1);
 
     SpeciesStruct suzanne_species_struct;
     suzanne_species_struct.parent_pointer = uvmap_material;
