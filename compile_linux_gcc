@@ -1,4 +1,13 @@
 #!/bin/bash
+# http://stackoverflow.com/questions/59895/can-a-bash-script-tell-which-directory-it-is-stored-in
+dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+cd $dir/external/gdal-2.1.1
+./configure
+make
+cd $dir
+mkdir -p build
+cd build
 export CC='/usr/bin/gcc'
 export CXX='/usr/bin/g++'
 cmake ..
+make
