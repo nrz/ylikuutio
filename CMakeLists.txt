@@ -347,6 +347,8 @@ add_executable(ajokki
     # geometry, in alphabetical order.
     cpp/ylikuutio/geometry/bilinear_interpolation.cpp
     cpp/ylikuutio/geometry/bilinear_interpolation.hpp
+    cpp/ylikuutio/geometry/chunk.cpp
+    cpp/ylikuutio/geometry/chunk.hpp
     cpp/ylikuutio/geometry/indexing.cpp
     cpp/ylikuutio/geometry/indexing.hpp
     cpp/ylikuutio/geometry/line.cpp
