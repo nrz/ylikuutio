@@ -11,7 +11,7 @@
 #include <string>   // std::string
 #include <iostream> // std::cout, std::cin, std::cerr
 
-datatypes::AnyValue* square(callback_system::CallbackEngine*, callback_system::CallbackObject*, std::vector<callback_system::CallbackParameter*> input_parameters)
+datatypes::AnyValue* square(callback_system::CallbackEngine*, callback_system::CallbackObject*, std::vector<callback_system::CallbackParameter*>& input_parameters)
 {
     if (input_parameters.size() != 1)
     {
@@ -53,7 +53,7 @@ datatypes::AnyValue* square(callback_system::CallbackEngine*, callback_system::C
     return new datatypes::AnyValue();
 }
 
-datatypes::AnyValue* expt(callback_system::CallbackEngine*, callback_system::CallbackObject*, std::vector<callback_system::CallbackParameter*> input_parameters)
+datatypes::AnyValue* expt(callback_system::CallbackEngine*, callback_system::CallbackObject*, std::vector<callback_system::CallbackParameter*>& input_parameters)
 {
     if (input_parameters.size() != 2)
     {
@@ -96,7 +96,7 @@ datatypes::AnyValue* expt(callback_system::CallbackEngine*, callback_system::Cal
 datatypes::AnyValue* expt_with_named_inputs(
         callback_system::CallbackEngine*,
         callback_system::CallbackObject* callback_object,
-        std::vector<callback_system::CallbackParameter*>)
+        std::vector<callback_system::CallbackParameter*>&)
 {
     datatypes::AnyValue* base = callback_object->get_any_value("base");
     datatypes::AnyValue* exponent = callback_object->get_any_value("exponent");

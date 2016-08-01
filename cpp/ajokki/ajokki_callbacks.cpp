@@ -47,7 +47,7 @@ namespace ajokki
     datatypes::AnyValue* glfwTerminate_cleanup(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*> input_parameters)
+            std::vector<callback_system::CallbackParameter*>& input_parameters)
     {
         glfwTerminate();
         return nullptr;
@@ -56,7 +56,7 @@ namespace ajokki
     datatypes::AnyValue* full_cleanup(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject* callback_object,
-            std::vector<callback_system::CallbackParameter*>)
+            std::vector<callback_system::CallbackParameter*>&)
     {
         std::cout << "Cleaning up.\n";
 
@@ -94,7 +94,7 @@ namespace ajokki
     datatypes::AnyValue* release_first_turbo(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject* callback_object,
-            std::vector<callback_system::CallbackParameter*>)
+            std::vector<callback_system::CallbackParameter*>&)
     {
         is_first_turbo_pressed = false;
         return nullptr;
@@ -103,7 +103,7 @@ namespace ajokki
     datatypes::AnyValue* release_second_turbo(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject* callback_object,
-            std::vector<callback_system::CallbackParameter*>)
+            std::vector<callback_system::CallbackParameter*>&)
     {
         is_second_turbo_pressed = false;
         return nullptr;
@@ -112,7 +112,7 @@ namespace ajokki
     datatypes::AnyValue* enable_toggle_invert_mouse(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>)
+            std::vector<callback_system::CallbackParameter*>&)
     {
         can_toggle_invert_mouse = true;
         return nullptr;
@@ -121,7 +121,7 @@ namespace ajokki
     datatypes::AnyValue* enable_toggle_flight_mode(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>)
+            std::vector<callback_system::CallbackParameter*>&)
     {
         can_toggle_flight_mode = true;
         return nullptr;
@@ -130,7 +130,7 @@ namespace ajokki
     datatypes::AnyValue* enable_toggle_help_mode(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>)
+            std::vector<callback_system::CallbackParameter*>&)
     {
         can_toggle_help_mode = true;
         return nullptr;
@@ -143,7 +143,7 @@ namespace ajokki
     datatypes::AnyValue* exit_program(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>)
+            std::vector<callback_system::CallbackParameter*>&)
     {
         uint32_t exit_program_magic_number = EXIT_PROGRAM_MAGIC_NUMBER;
         datatypes::AnyValue* any_value_exit_program = new datatypes::AnyValue(exit_program_magic_number);
@@ -153,7 +153,7 @@ namespace ajokki
     datatypes::AnyValue* first_turbo(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>)
+            std::vector<callback_system::CallbackParameter*>&)
     {
         is_first_turbo_pressed = true;
         return nullptr;
@@ -162,7 +162,7 @@ namespace ajokki
     datatypes::AnyValue* second_turbo(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject* callback_object,
-            std::vector<callback_system::CallbackParameter*>)
+            std::vector<callback_system::CallbackParameter*>&)
     {
         is_second_turbo_pressed = true;
         return nullptr;
@@ -171,7 +171,7 @@ namespace ajokki
     datatypes::AnyValue* move_forward(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject* callback_object,
-            std::vector<callback_system::CallbackParameter*>)
+            std::vector<callback_system::CallbackParameter*>&)
     {
         move_to_direction(direction);
         return nullptr;
@@ -180,7 +180,7 @@ namespace ajokki
     datatypes::AnyValue* move_backward(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>)
+            std::vector<callback_system::CallbackParameter*>&)
     {
         move_to_direction(-direction);
         return nullptr;
@@ -189,7 +189,7 @@ namespace ajokki
     datatypes::AnyValue* strafe_left(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>)
+            std::vector<callback_system::CallbackParameter*>&)
     {
         move_to_direction(-right);
         return nullptr;
@@ -198,7 +198,7 @@ namespace ajokki
     datatypes::AnyValue* strafe_right(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>)
+            std::vector<callback_system::CallbackParameter*>&)
     {
         move_to_direction(right);
         return nullptr;
@@ -207,7 +207,7 @@ namespace ajokki
     datatypes::AnyValue* ascent(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>)
+            std::vector<callback_system::CallbackParameter*>&)
     {
         move_to_direction(up);
         return nullptr;
@@ -216,7 +216,7 @@ namespace ajokki
     datatypes::AnyValue* descent(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>)
+            std::vector<callback_system::CallbackParameter*>&)
     {
         move_to_direction(-up);
         return nullptr;
@@ -225,7 +225,7 @@ namespace ajokki
     datatypes::AnyValue* toggle_invert_mouse(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>)
+            std::vector<callback_system::CallbackParameter*>&)
     {
         if (can_toggle_invert_mouse)
         {
@@ -238,7 +238,7 @@ namespace ajokki
     datatypes::AnyValue* toggle_flight_mode(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>)
+            std::vector<callback_system::CallbackParameter*>&)
     {
         if (can_toggle_flight_mode)
         {
@@ -252,7 +252,7 @@ namespace ajokki
     datatypes::AnyValue* toggle_help_mode(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>)
+            std::vector<callback_system::CallbackParameter*>&)
     {
         if (can_toggle_help_mode)
         {
@@ -265,11 +265,11 @@ namespace ajokki
     datatypes::AnyValue* delete_suzanne_species(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject* callback_object,
-            std::vector<callback_system::CallbackParameter*>)
+            std::vector<callback_system::CallbackParameter*>&)
     {
         // Callbacks' input parameters can be accessed either through
         // `callback_system::CallbackObject* callback_object`or
-        // `std::vector<callback_system::CallbackParameter*> input parameters`.
+        // `std::vector<callback_system::CallbackParameter*>& input parameters`.
         //
         // To access named input variables:
         // `datatypes::AnyValue* some_any_value = callback_object->get_any_value("foo");`
@@ -312,7 +312,7 @@ namespace ajokki
     datatypes::AnyValue* switch_to_new_material(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject* callback_object,
-            std::vector<callback_system::CallbackParameter*>)
+            std::vector<callback_system::CallbackParameter*>&)
     {
         datatypes::AnyValue* any_value_species_pointer = callback_object->get_any_value("suzanne_species");
         datatypes::AnyValue* any_value_material_pointer = callback_object->get_any_value("new_material");
@@ -369,7 +369,7 @@ namespace ajokki
     datatypes::AnyValue* transform_into_new_species(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*> input_parameters)
+            std::vector<callback_system::CallbackParameter*>& input_parameters)
     {
         // This serves as an example of how to use indexed input parameters.
         datatypes::AnyValue* any_value_object_pointer = input_parameters.at(0)->get_any_value();
