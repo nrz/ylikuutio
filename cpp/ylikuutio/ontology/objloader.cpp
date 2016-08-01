@@ -47,10 +47,10 @@ namespace ontology
         std::vector<glm::vec3> temp_normals;
 
         std::FILE* file = std::fopen(path, "r");
+
         if (file == nullptr)
         {
-            std::printf("Impossible to open the file ! Are you in the right path ? See Tutorial 1 for details\n");
-            std::getchar();
+            std::printf("Opening file %s failed!\n", path);
             return false;
         }
 
