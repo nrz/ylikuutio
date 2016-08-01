@@ -1,0 +1,6 @@
+namespace geometry
+{
+    class Triangle
+    {
+    };
+}

@@ -373,6 +373,8 @@ add_executable(ajokki
     cpp/ylikuutio/geometry/quad_triangulation.hpp
     cpp/ylikuutio/geometry/transformation.cpp
     cpp/ylikuutio/geometry/transformation.hpp
+    cpp/ylikuutio/geometry/triangle.cpp
+    cpp/ylikuutio/geometry/triangle.hpp
     cpp/ylikuutio/geometry/triangulation_macros.cpp
 
     # graph, in alphabetical order.
