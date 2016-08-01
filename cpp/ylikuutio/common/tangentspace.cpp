@@ -11,12 +11,12 @@
 
 void computeTangentBasis(
         // inputs
-        std::vector<glm::vec3> &vertices,
-        std::vector<glm::vec2> &UVs,
-        std::vector<glm::vec3> &normals,
+        std::vector<glm::vec3>& vertices,
+        std::vector<glm::vec2>& UVs,
+        std::vector<glm::vec3>& normals,
         // outputs
-        std::vector<glm::vec3> &tangents,
-        std::vector<glm::vec3> &bitangents
+        std::vector<glm::vec3>& tangents,
+        std::vector<glm::vec3>& bitangents
         )
 {
     for (unsigned int i = 0; i < vertices.size(); i += 3)

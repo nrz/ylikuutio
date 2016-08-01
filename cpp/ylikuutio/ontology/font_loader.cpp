@@ -83,7 +83,7 @@ namespace ontology
     bool load_vertex_data(
             const char* SVG_base_pointer,
             char*& SVG_data_pointer,
-            std::vector<std::vector<glm::vec2>> &current_glyph_vertices)
+            std::vector<std::vector<glm::vec2>>& current_glyph_vertices)
     {
         // This function returns a pointer to vertex data of a single glyph and advances `SVG_data_pointer`.
 
@@ -172,9 +172,9 @@ namespace ontology
     bool load_SVG_glyph(
             const char* SVG_base_pointer,
             char*& SVG_data_pointer,
-            std::vector<std::vector<std::vector<glm::vec2>>> &out_glyph_vertex_data,
-            std::vector<std::string> &glyph_names,
-            std::vector<std::string> &unicode_strings)
+            std::vector<std::vector<std::vector<glm::vec2>>>& out_glyph_vertex_data,
+            std::vector<std::string>& glyph_names,
+            std::vector<std::string>& unicode_strings)
     {
         // This function loads the next SVG glyph.
         // SVG_base_pointer: pointer to the origin of the SVG data.
@@ -322,9 +322,9 @@ namespace ontology
 
     bool load_SVG_font(
             std::string font_file_path,
-            std::vector<std::vector<std::vector<glm::vec2>>> &out_glyph_vertex_data,
-            std::vector<std::string> &glyph_names,
-            std::vector<std::string> &unicode_strings)
+            std::vector<std::vector<std::vector<glm::vec2>>>& out_glyph_vertex_data,
+            std::vector<std::string>& glyph_names,
+            std::vector<std::string>& unicode_strings)
     {
         std::string file_content = file::slurp(font_file_path);
         const uint32_t file_size = file_content.size();

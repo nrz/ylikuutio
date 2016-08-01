@@ -23,7 +23,7 @@ namespace geometry
 
     void transform_coordinates_to_curved_surface(
             TransformationStruct transformation_struct,
-            std::vector<glm::vec3> &temp_vertices);
+            std::vector<glm::vec3>& temp_vertices);
 }
 
 #endif

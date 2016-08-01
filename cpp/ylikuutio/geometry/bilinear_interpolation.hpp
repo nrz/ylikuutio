@@ -26,7 +26,7 @@ namespace geometry
 
     // for bilinear interpolation.
     glm::vec3 get_face_normal(
-            std::vector<glm::vec3> &face_normal_data,
+            std::vector<glm::vec3>& face_normal_data,
             uint32_t x,
             uint32_t z,
             BilinearDirections compass_point_code,
@@ -34,8 +34,8 @@ namespace geometry
 
     void interpolate_vertices_using_bilinear_interpolation(
             BilinearInterpolationStruct bilinear_interpolation_struct,
-            std::vector<glm::vec3> &temp_vertices,
-            std::vector<glm::vec2> &temp_UVs);
+            std::vector<glm::vec3>& temp_vertices,
+            std::vector<glm::vec2>& temp_UVs);
 }
 
 #endif

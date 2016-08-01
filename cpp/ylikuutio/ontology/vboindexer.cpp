@@ -31,9 +31,9 @@ bool getSimilarVertexIndex(
         glm::vec3 &in_vertex,
         glm::vec2 &in_uv,
         glm::vec3 &in_normal,
-        std::vector<glm::vec3> &out_vertices,
-        std::vector<glm::vec2> &out_UVs,
-        std::vector<glm::vec3> &out_normals,
+        std::vector<glm::vec3>& out_vertices,
+        std::vector<glm::vec2>& out_UVs,
+        std::vector<glm::vec3>& out_normals,
         GLuint &result)
 {
     // Lame linear search
@@ -72,7 +72,7 @@ namespace ontology
 
     bool getSimilarVertexIndex_fast(
             PackedVertex &packed,
-            std::map<PackedVertex, GLuint> &VertexToOutIndex,
+            std::map<PackedVertex, GLuint>& VertexToOutIndex,
             GLuint &result)
     {
         std::map<PackedVertex, GLuint>::iterator it = VertexToOutIndex.find(packed);
@@ -88,14 +88,14 @@ namespace ontology
     }
 
     void indexVBO(
-            std::vector<glm::vec3> &in_vertices,
-            std::vector<glm::vec2> &in_UVs,
-            std::vector<glm::vec3> &in_normals,
+            std::vector<glm::vec3>& in_vertices,
+            std::vector<glm::vec2>& in_UVs,
+            std::vector<glm::vec3>& in_normals,
 
-            std::vector<GLuint> &out_indices,
-            std::vector<glm::vec3> &out_vertices,
-            std::vector<glm::vec2> &out_UVs,
-            std::vector<glm::vec3> &out_normals)
+            std::vector<GLuint>& out_indices,
+            std::vector<glm::vec3>& out_vertices,
+            std::vector<glm::vec2>& out_UVs,
+            std::vector<glm::vec3>& out_normals)
     {
         std::map<PackedVertex, GLuint> VertexToOutIndex;
 
@@ -127,17 +127,17 @@ namespace ontology
     }
 
     void indexVBO_TBN(
-            std::vector<glm::vec3> &in_vertices,
-            std::vector<glm::vec2> &in_UVs,
-            std::vector<glm::vec3> &in_normals,
-            std::vector<glm::vec3> &in_tangents,
-            std::vector<glm::vec3> &in_bitangents,
-            std::vector<GLuint> &out_indices,
-            std::vector<glm::vec3> &out_vertices,
-            std::vector<glm::vec2> &out_UVs,
-            std::vector<glm::vec3> &out_normals,
-            std::vector<glm::vec3> &out_tangents,
-            std::vector<glm::vec3> &out_bitangents)
+            std::vector<glm::vec3>& in_vertices,
+            std::vector<glm::vec2>& in_UVs,
+            std::vector<glm::vec3>& in_normals,
+            std::vector<glm::vec3>& in_tangents,
+            std::vector<glm::vec3>& in_bitangents,
+            std::vector<GLuint>& out_indices,
+            std::vector<glm::vec3>& out_vertices,
+            std::vector<glm::vec2>& out_UVs,
+            std::vector<glm::vec3>& out_normals,
+            std::vector<glm::vec3>& out_tangents,
+            std::vector<glm::vec3>& out_bitangents)
     {
         // For each input vertex
         for (unsigned int i = 0; i < in_vertices.size(); i++)

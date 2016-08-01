@@ -44,7 +44,7 @@ namespace geometry
 
     void transform_coordinates_to_curved_surface(
             TransformationStruct transformation_struct,
-            std::vector<glm::vec3> &temp_vertices)
+            std::vector<glm::vec3>& temp_vertices)
     {
         uint32_t image_width = transformation_struct.image_width;
         uint32_t image_height = transformation_struct.image_height;

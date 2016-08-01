@@ -36,7 +36,7 @@ namespace geometry
 
     // for southeast-northwest edges.
     glm::vec3 get_face_normal_for_SE_NW(
-            std::vector<glm::vec3> &face_normal_data,
+            std::vector<glm::vec3>& face_normal_data,
             uint32_t x,
             uint32_t z,
             SoutheastNorthwestEdgesDirections compass_point_code,
@@ -72,15 +72,15 @@ namespace geometry
     }
 
     void output_triangle_vertices(
-            std::vector<glm::vec3> &temp_vertices,
-            std::vector<glm::vec2> &temp_UVs,
-            std::vector<glm::vec3> &temp_normals,
+            std::vector<glm::vec3>& temp_vertices,
+            std::vector<glm::vec2>& temp_UVs,
+            std::vector<glm::vec3>& temp_normals,
             GLuint vertexIndex[3],
             GLuint uvIndex[3],
             GLuint normalIndex[3],
-            std::vector<glm::vec3> &out_vertices,
-            std::vector<glm::vec2> &out_UVs,
-            std::vector<glm::vec3> &out_normals,
+            std::vector<glm::vec3>& out_vertices,
+            std::vector<glm::vec2>& out_UVs,
+            std::vector<glm::vec3>& out_normals,
             uint32_t triangle_i)
     {
         out_vertices.push_back(temp_vertices[vertexIndex[0]]);
@@ -104,9 +104,9 @@ namespace geometry
 
     bool triangulate_quads(
             TriangulateQuadsStruct triangulate_quads_struct,
-            std::vector<glm::vec3> &out_vertices,
-            std::vector<glm::vec2> &out_UVs,
-            std::vector<glm::vec3> &out_normals)
+            std::vector<glm::vec3>& out_vertices,
+            std::vector<glm::vec2>& out_UVs,
+            std::vector<glm::vec3>& out_normals)
     {
         GLuint* input_vertex_pointer = triangulate_quads_struct.input_vertex_pointer;
         uint32_t image_width = triangulate_quads_struct.image_width;

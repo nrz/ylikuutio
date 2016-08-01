@@ -37,9 +37,9 @@ namespace ontology
 {
     bool load_BMP_world(
             std::string image_path,
-            std::vector<glm::vec3> &out_vertices,
-            std::vector<glm::vec2> &out_UVs,
-            std::vector<glm::vec3> &out_normals,
+            std::vector<glm::vec3>& out_vertices,
+            std::vector<glm::vec2>& out_UVs,
+            std::vector<glm::vec3>& out_normals,
             GLuint &image_width,
             GLuint &image_height,
             std::string color_channel,
@@ -177,9 +177,9 @@ namespace ontology
             std::string image_path,
             double latitude,
             double longitude,
-            std::vector<glm::vec3> &out_vertices,
-            std::vector<glm::vec2> &out_UVs,
-            std::vector<glm::vec3> &out_normals,
+            std::vector<glm::vec3>& out_vertices,
+            std::vector<glm::vec2>& out_UVs,
+            std::vector<glm::vec3>& out_normals,
             std::string triangulation_type)
     {
         // For SRTM worlds, the right heightmap filename must be resolved first.

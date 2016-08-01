@@ -9,7 +9,7 @@
 namespace hierarchy
 {
     template<class T1>
-        void set_child_pointer(uint32_t childID, T1 child_pointer, std::vector<T1> &child_pointer_vector, std::queue<uint32_t> &free_childID_queue)
+        void set_child_pointer(uint32_t childID, T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<uint32_t>& free_childID_queue)
         {
             child_pointer_vector[childID] = child_pointer;
 
@@ -29,7 +29,7 @@ namespace hierarchy
         }
 
     template<class T1>
-        uint32_t get_childID(std::vector<T1> &child_pointer_vector, std::queue<uint32_t> &free_childID_queue)
+        uint32_t get_childID(std::vector<T1>& child_pointer_vector, std::queue<uint32_t>& free_childID_queue)
         {
             // This function is called eg. from `bind_child_to_parent`,
             // so that child instance gets an appropriate `childID`.
@@ -59,7 +59,7 @@ namespace hierarchy
         }
 
     template<class T1>
-        void bind_child_to_parent(T1 child_pointer, std::vector<T1> &child_pointer_vector, std::queue<uint32_t> &free_childID_queue)
+        void bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<uint32_t>& free_childID_queue)
         {
             // If a class' instances have parents, this function must be
             // called in the constructor. The call must be done only once
@@ -75,8 +75,8 @@ namespace hierarchy
         void bind_child_to_new_parent(
                 T1 child_pointer,
                 T2 new_parent_pointer,
-                std::vector<T1> &old_child_pointer_vector,
-                std::queue<uint32_t> &old_free_childID_queue)
+                std::vector<T1>& old_child_pointer_vector,
+                std::queue<uint32_t>& old_free_childID_queue)
         {
             // Set pointer to this child to `nullptr` in the old parent.
             T1 dummy_child_pointer = nullptr;
@@ -88,7 +88,7 @@ namespace hierarchy
         }
 
     template<class T1>
-        void delete_children(std::vector<T1> &child_pointer_vector)
+        void delete_children(std::vector<T1>& child_pointer_vector)
         {
             for (uint32_t child_i = 0; child_i < child_pointer_vector.size(); child_i++)
             {

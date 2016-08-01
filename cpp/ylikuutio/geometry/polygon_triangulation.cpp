@@ -14,9 +14,9 @@ namespace geometry
 {
     bool triangulate_simple_polygon(
             TriangulatePolygonsStruct triangulate_polygons_struct,
-            std::vector<glm::vec3> &out_vertices,
-            std::vector<glm::vec2> &out_UVs,
-            std::vector<glm::vec3> &out_normals)
+            std::vector<glm::vec3>& out_vertices,
+            std::vector<glm::vec2>& out_UVs,
+            std::vector<glm::vec3>& out_normals)
     {
         // TODO: implement this function!
         return false;
@@ -24,9 +24,9 @@ namespace geometry
 
     bool triangulate_polygons(
             TriangulatePolygonsStruct triangulate_polygons_struct,
-            std::vector<glm::vec3> &out_vertices,
-            std::vector<glm::vec2> &out_UVs,
-            std::vector<glm::vec3> &out_normals)
+            std::vector<glm::vec3>& out_vertices,
+            std::vector<glm::vec2>& out_UVs,
+            std::vector<glm::vec3>& out_normals)
     {
         // TODO: implement this function!
 

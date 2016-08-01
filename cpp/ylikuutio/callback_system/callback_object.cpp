@@ -99,7 +99,7 @@ namespace callback_system
         }
     }
 
-    uint32_t CallbackObject::get_callback_parameterID(std::vector<callback_system::CallbackParameter*> &child_pointer_vector, std::queue<uint32_t> &free_childID_queue)
+    uint32_t CallbackObject::get_callback_parameterID(std::vector<callback_system::CallbackParameter*>& child_pointer_vector, std::queue<uint32_t>& free_childID_queue)
     {
         uint32_t childID;
 
