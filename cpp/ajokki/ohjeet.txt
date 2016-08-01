@@ -39,6 +39,10 @@ http://www.mars.asu.edu/data/
 Mars Global Data Sets - MOLA Shaded Relief (46080 x 23040 pikseliä):
 http://www.mars.asu.edu/data/mola_color/
 
+Hyviä ilmaisia, vapaita 3U-objekteja:
+http://www.blendswap.com/
+http://tf3dm.com/
+
 Hyviä ilmaisia, vapaita tekstuureja:
 http://www.myfreetextures.com/
 
