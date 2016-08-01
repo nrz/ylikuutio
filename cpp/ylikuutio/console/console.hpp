@@ -121,7 +121,7 @@ namespace console
             static datatypes::AnyValue* enter_console(
                     callback_system::CallbackEngine*,
                     callback_system::CallbackObject*,
-                    std::vector<callback_system::CallbackParameter*>& input_parameters,
+                    std::vector<callback_system::CallbackParameter*>&,
                     console::Console* console);
 
             static datatypes::AnyValue* exit_console(
