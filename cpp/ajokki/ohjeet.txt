@@ -39,6 +39,9 @@ http://www.mars.asu.edu/data/
 Mars Global Data Sets - MOLA Shaded Relief (46080 x 23040 pikseliä):
 http://www.mars.asu.edu/data/mola_color/
 
+Hyviä ilmaisia, vapaita tekstuureja:
+http://www.myfreetextures.com/
+
 HGT-tiedostoformaatti:
 http://gis.stackexchange.com/questions/43743/how-to-extract-elevation-from-hgt-file
 
