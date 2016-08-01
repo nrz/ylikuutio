@@ -66,8 +66,30 @@ namespace ontology
 
             // else : parse lineHeader
 
-            if (std::strcmp(lineHeader, "o") == 0)
+            if (std::strcmp(lineHeader, "#") == 0)
             {
+                read_until_newline(file);
+            }
+            else if (std::strcmp(lineHeader, "l") == 0)
+            {
+                read_until_newline(file);
+            }
+            else if (std::strcmp(lineHeader, "mtllib") == 0)
+            {
+                // TODO: Add support for `mtllib`!
+                read_until_newline(file);
+            }
+            else if (std::strcmp(lineHeader, "o") == 0)
+            {
+                read_until_newline(file);
+            }
+            else if (std::strcmp(lineHeader, "s") == 0)
+            {
+                read_until_newline(file);
+            }
+            else if (std::strcmp(lineHeader, "usemtl") == 0)
+            {
+                // TODO: Add support for `usemtl`!
                 read_until_newline(file);
             }
             else if (std::strcmp(lineHeader, "v") == 0)
