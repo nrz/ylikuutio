@@ -8,6 +8,9 @@ project(ylikuutio)
 # comment the following line to disable scripting with Chibi Scheme.
 set(ENABLE_SCRIPTING_WITH_CHIBI_SCHEME true)
 
+# comment the following line to disable OpenStreetMap (OSM) PBF file loading.
+set(COMPILE_GDAL_OGR true)
+
 # uncomment the following line to do unit tests also with Catch.
 # set(DO_UNIT_TESTS_WITH_CATCH true)
 
@@ -141,6 +144,23 @@ else()
         PREFIX ${CMAKE_CURRENT_BINARY_DIR}/eigen
         # Disable install step
         INSTALL_COMMAND ""
+        LOG_BUILD ON
+        )
+endif()
+
+if(COMPILE_GDAL_OGR)
+    ExternalProject_Add(
+        gdal
+        URL "file://${CMAKE_SOURCE_DIR}/external/gdal-2.1.1"
+        # SOURCE_DIR "${CMAKE_SOURCE_DIR}/external/gdal-2.1.1"
+        CONFIGURE_COMMAND "${CMAKE_SOURCE_DIR}/external/gdal-2.1.1/configure"
+        PREFIX ${CMAKE_CURRENT_BINARY_DIR}/gdal
+        # Disable build step
+        BUILD_COMMAND ""
+        # Disable install step
+        INSTALL_COMMAND ""
+        # Disable update step
+        UPDATE_COMMAND ""
         LOG_BUILD ON
         )
 endif()
