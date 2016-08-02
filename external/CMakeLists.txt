@@ -320,6 +320,13 @@ set(GDAL_211_SOURCE
     gdal-2.1.1/ogr/ogrsf_frmts/geojson/ogrgeojsonwritelayer.cpp
     gdal-2.1.1/ogr/ogrsf_frmts/geojson/ogrgeojsonwriter.cpp
     gdal-2.1.1/ogr/ogrsf_frmts/geojson/ogrtopojsonreader.cpp
+    gdal-2.1.1/ogr/ogrsf_frmts/xplane/ogr_xplane_apt_reader.h
+    gdal-2.1.1/ogr/ogrsf_frmts/xplane/ogr_xplane_awy_reader.h
+    gdal-2.1.1/ogr/ogrsf_frmts/xplane/ogr_xplane_fix_reader.h
+    gdal-2.1.1/ogr/ogrsf_frmts/xplane/ogr_xplane_geo_utils.h
+    gdal-2.1.1/ogr/ogrsf_frmts/xplane/ogr_xplane.h
+    gdal-2.1.1/ogr/ogrsf_frmts/xplane/ogr_xplane_nav_reader.h
+    gdal-2.1.1/ogr/ogrsf_frmts/xplane/ogr_xplane_reader.h
 
     # libjson seems to be written in C.
     gdal-2.1.1/ogr/ogrsf_frmts/geojson/libjson/arraylist.c
@@ -335,6 +342,16 @@ set(GDAL_211_SOURCE
     gdal-2.1.1/ogr/ogrsf_frmts/mem/ogrmemdatasource.cpp
     gdal-2.1.1/ogr/ogrsf_frmts/mem/ogrmemdriver.cpp
     gdal-2.1.1/ogr/ogrsf_frmts/mem/ogrmemlayer.cpp
+    gdal-2.1.1/ogr/ogrsf_frmts/xplane/ogr_xplane_apt_reader.cpp
+    gdal-2.1.1/ogr/ogrsf_frmts/xplane/ogr_xplane_awy_reader.cpp
+    gdal-2.1.1/ogr/ogrsf_frmts/xplane/ogrxplanedatasource.cpp
+    gdal-2.1.1/ogr/ogrsf_frmts/xplane/ogrxplanedriver.cpp
+    gdal-2.1.1/ogr/ogrsf_frmts/xplane/ogr_xplane_fix_reader.cpp
+    gdal-2.1.1/ogr/ogrsf_frmts/xplane/ogr_xplane_geo_utils.cpp
+    gdal-2.1.1/ogr/ogrsf_frmts/xplane/ogrxplanelayer.cpp
+    gdal-2.1.1/ogr/ogrsf_frmts/xplane/ogr_xplane_nav_reader.cpp
+    gdal-2.1.1/ogr/ogrsf_frmts/xplane/ogr_xplane_reader.cpp
+    gdal-2.1.1/ogr/ogrsf_frmts/xplane/test_geo_utils.cpp
     gdal-2.1.1/port/cpl_atomic_ops.cpp
     gdal-2.1.1/port/cpl_aws.cpp
     gdal-2.1.1/port/cpl_base64.cpp
@@ -626,6 +643,7 @@ include_directories(
     gdal-2.1.1/ogr/ogrsf_frmts/
     gdal-2.1.1/ogr/ogrsf_frmts/generic/
     gdal-2.1.1/ogr/ogrsf_frmts/geojson/
+    gdal-2.1.1/ogr/ogrsf_frmts/xplane/
 
     # libjson seems to be written in C.
     gdal-2.1.1/ogr/ogrsf_frmts/geojson/libjson/
