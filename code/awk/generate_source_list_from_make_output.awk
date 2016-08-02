@@ -3,6 +3,8 @@ BEGIN{
     # This program generates source list to be used in `CMakeLists.txt`
     # or elsewhere using `foo.txt` produced by `make >foo.txt 2>&1` as input.
 
+    array_index = 0;
+    split("", dir_array);
     current_dir = "";
     new_filename = "";
     current_filename = "";
@@ -50,6 +52,9 @@ function get_filename()
 
         # read current dir.
         current_dir = substr($0, junk_part_length, length($0) - junk_part_length);
+
+        # store current dir into array.
+        dir_array[array_index++] = current_dir "/";
     }
     else if (cpp_match_index > 0)
     {
@@ -62,3 +67,15 @@ function get_filename()
         get_filename();
     }
 }
+END{
+    n_dirs = array_index;
+    asort(dir_array);
+
+    print "";
+    print "include_directories(";
+
+    for (i = 0; i < n_dirs; i++)
+    {
+        print dir_array[i];
+    }
+} # END
