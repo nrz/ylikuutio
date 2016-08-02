@@ -354,12 +354,12 @@ add_definitions(
     )
 
 # for general use.
-configure_file(cpp/ylikuutio/shaders/TransformVertexShader.vertexshader TransformVertexShader.vertexshader COPYONLY)
-configure_file(cpp/ylikuutio/shaders/TextureFragmentShader.fragmentshader TextureFragmentShader.fragmentshader COPYONLY)
-configure_file(cpp/ylikuutio/shaders/StandardShading.vertexshader StandardShading.vertexshader COPYONLY)
-configure_file(cpp/ylikuutio/shaders/StandardShading.fragmentshader StandardShading.fragmentshader COPYONLY)
-configure_file(cpp/ylikuutio/shaders/TextVertexShader.vertexshader TextVertexShader.vertexshader COPYONLY)
-configure_file(cpp/ylikuutio/shaders/TextVertexShader.fragmentshader TextVertexShader.fragmentshader COPYONLY)
+configure_file(code/ylikuutio/shaders/TransformVertexShader.vertexshader TransformVertexShader.vertexshader COPYONLY)
+configure_file(code/ylikuutio/shaders/TextureFragmentShader.fragmentshader TextureFragmentShader.fragmentshader COPYONLY)
+configure_file(code/ylikuutio/shaders/StandardShading.vertexshader StandardShading.vertexshader COPYONLY)
+configure_file(code/ylikuutio/shaders/StandardShading.fragmentshader StandardShading.fragmentshader COPYONLY)
+configure_file(code/ylikuutio/shaders/TextVertexShader.vertexshader TextVertexShader.vertexshader COPYONLY)
+configure_file(code/ylikuutio/shaders/TextVertexShader.fragmentshader TextVertexShader.fragmentshader COPYONLY)
 configure_file(res/objects/suzanne.obj suzanne.obj COPYONLY)
 configure_file(res/objects/snow_cottage_triangulated.obj snow_cottage_triangulated.obj COPYONLY)
 configure_file(res/textures/uvmap.DDS uvmap.DDS COPYONLY)
@@ -380,130 +380,130 @@ configure_file(res/textures/test3x3.bmp test3x3.bmp COPYONLY)
 # Ajokki
 add_executable(ajokki
     # callback_system, in alphabetical order
-    cpp/ylikuutio/callback_system/callback_engine.cpp
-    cpp/ylikuutio/callback_system/callback_engine.hpp
-    cpp/ylikuutio/callback_system/callback_magic_numbers.hpp
-    cpp/ylikuutio/callback_system/callback_object.cpp
-    cpp/ylikuutio/callback_system/callback_object.hpp
-    cpp/ylikuutio/callback_system/callback_parameter.cpp
-    cpp/ylikuutio/callback_system/callback_parameter.hpp
-    cpp/ylikuutio/callback_system/key_and_callback_struct.hpp
+    code/ylikuutio/callback_system/callback_engine.cpp
+    code/ylikuutio/callback_system/callback_engine.hpp
+    code/ylikuutio/callback_system/callback_magic_numbers.hpp
+    code/ylikuutio/callback_system/callback_object.cpp
+    code/ylikuutio/callback_system/callback_object.hpp
+    code/ylikuutio/callback_system/callback_parameter.cpp
+    code/ylikuutio/callback_system/callback_parameter.hpp
+    code/ylikuutio/callback_system/key_and_callback_struct.hpp
 
     # common, in alphabetical order
-    cpp/ylikuutio/common/any_value.cpp
-    cpp/ylikuutio/common/any_value.hpp
-    cpp/ylikuutio/common/global_variables.cpp
-    cpp/ylikuutio/common/global_variables.hpp
-    cpp/ylikuutio/common/globals.hpp
+    code/ylikuutio/common/any_value.cpp
+    code/ylikuutio/common/any_value.hpp
+    code/ylikuutio/common/global_variables.cpp
+    code/ylikuutio/common/global_variables.hpp
+    code/ylikuutio/common/globals.hpp
 
     # console, in alphabetical order.
-    cpp/ylikuutio/console/console.cpp
-    cpp/ylikuutio/console/console.hpp
-    cpp/ylikuutio/console/console_callback_object.cpp
-    cpp/ylikuutio/console/console_callback_object.hpp
+    code/ylikuutio/console/console.cpp
+    code/ylikuutio/console/console.hpp
+    code/ylikuutio/console/console_callback_object.cpp
+    code/ylikuutio/console/console_callback_object.hpp
 
     # file, in alphabetical order.
-    cpp/ylikuutio/file/file_loader.cpp
-    cpp/ylikuutio/file/file_loader.hpp
+    code/ylikuutio/file/file_loader.cpp
+    code/ylikuutio/file/file_loader.hpp
 
     # geometry, in alphabetical order.
-    cpp/ylikuutio/geometry/bilinear_interpolation.cpp
-    cpp/ylikuutio/geometry/bilinear_interpolation.hpp
-    cpp/ylikuutio/geometry/chunk.cpp
-    cpp/ylikuutio/geometry/chunk.hpp
-    cpp/ylikuutio/geometry/indexing.cpp
-    cpp/ylikuutio/geometry/indexing.hpp
-    cpp/ylikuutio/geometry/line.cpp
-    cpp/ylikuutio/geometry/line.hpp
-    cpp/ylikuutio/geometry/line2D.cpp
-    cpp/ylikuutio/geometry/line2D.hpp
-    cpp/ylikuutio/geometry/line3D.cpp
-    cpp/ylikuutio/geometry/line3D.hpp
-    cpp/ylikuutio/geometry/line_line_intersection.cpp
-    cpp/ylikuutio/geometry/line_line_intersection.hpp
-    cpp/ylikuutio/geometry/line_segment.cpp
-    cpp/ylikuutio/geometry/line_segment.hpp
-    cpp/ylikuutio/geometry/line_segment2D.cpp
-    cpp/ylikuutio/geometry/line_segment2D.hpp
-    cpp/ylikuutio/geometry/line_segment3D.cpp
-    cpp/ylikuutio/geometry/line_segment3D.hpp
-    cpp/ylikuutio/geometry/line_segment_line_segment_intersection.cpp
-    cpp/ylikuutio/geometry/line_segment_line_segment_intersection.hpp
-    cpp/ylikuutio/geometry/polygon_triangulation.cpp
-    cpp/ylikuutio/geometry/polygon_triangulation.hpp
-    cpp/ylikuutio/geometry/quad_triangulation.cpp
-    cpp/ylikuutio/geometry/quad_triangulation.hpp
-    cpp/ylikuutio/geometry/transformation.cpp
-    cpp/ylikuutio/geometry/transformation.hpp
-    cpp/ylikuutio/geometry/triangle.cpp
-    cpp/ylikuutio/geometry/triangle.hpp
-    cpp/ylikuutio/geometry/triangulation_macros.cpp
+    code/ylikuutio/geometry/bilinear_interpolation.cpp
+    code/ylikuutio/geometry/bilinear_interpolation.hpp
+    code/ylikuutio/geometry/chunk.cpp
+    code/ylikuutio/geometry/chunk.hpp
+    code/ylikuutio/geometry/indexing.cpp
+    code/ylikuutio/geometry/indexing.hpp
+    code/ylikuutio/geometry/line.cpp
+    code/ylikuutio/geometry/line.hpp
+    code/ylikuutio/geometry/line2D.cpp
+    code/ylikuutio/geometry/line2D.hpp
+    code/ylikuutio/geometry/line3D.cpp
+    code/ylikuutio/geometry/line3D.hpp
+    code/ylikuutio/geometry/line_line_intersection.cpp
+    code/ylikuutio/geometry/line_line_intersection.hpp
+    code/ylikuutio/geometry/line_segment.cpp
+    code/ylikuutio/geometry/line_segment.hpp
+    code/ylikuutio/geometry/line_segment2D.cpp
+    code/ylikuutio/geometry/line_segment2D.hpp
+    code/ylikuutio/geometry/line_segment3D.cpp
+    code/ylikuutio/geometry/line_segment3D.hpp
+    code/ylikuutio/geometry/line_segment_line_segment_intersection.cpp
+    code/ylikuutio/geometry/line_segment_line_segment_intersection.hpp
+    code/ylikuutio/geometry/polygon_triangulation.cpp
+    code/ylikuutio/geometry/polygon_triangulation.hpp
+    code/ylikuutio/geometry/quad_triangulation.cpp
+    code/ylikuutio/geometry/quad_triangulation.hpp
+    code/ylikuutio/geometry/transformation.cpp
+    code/ylikuutio/geometry/transformation.hpp
+    code/ylikuutio/geometry/triangle.cpp
+    code/ylikuutio/geometry/triangle.hpp
+    code/ylikuutio/geometry/triangulation_macros.cpp
 
     # graph, in alphabetical order.
-    cpp/ylikuutio/graph/graph.cpp
-    cpp/ylikuutio/graph/graph.hpp
-    cpp/ylikuutio/graph/node.cpp
-    cpp/ylikuutio/graph/node.hpp
+    code/ylikuutio/graph/graph.cpp
+    code/ylikuutio/graph/graph.hpp
+    code/ylikuutio/graph/node.cpp
+    code/ylikuutio/graph/node.hpp
 
     # hierarchy, in alphabetical order.
-    cpp/ylikuutio/hierarchy/hierarchy_templates.hpp
+    code/ylikuutio/hierarchy/hierarchy_templates.hpp
 
     # ontology, in alphabetical order
-    cpp/ylikuutio/ontology/font_loader.cpp
-    cpp/ylikuutio/ontology/font_loader.hpp
-    cpp/ylikuutio/ontology/glyph.cpp
-    cpp/ylikuutio/ontology/glyph.hpp
-    cpp/ylikuutio/ontology/ground_level.cpp
-    cpp/ylikuutio/ontology/ground_level.hpp
-    cpp/ylikuutio/ontology/heightmap_loader.cpp
-    cpp/ylikuutio/ontology/heightmap_loader.hpp
-    cpp/ylikuutio/ontology/material.cpp
-    cpp/ylikuutio/ontology/material.hpp
-    cpp/ylikuutio/ontology/model.cpp
-    cpp/ylikuutio/ontology/model.hpp
-    cpp/ylikuutio/ontology/object.cpp
-    cpp/ylikuutio/ontology/object.hpp
-    cpp/ylikuutio/ontology/objloader.cpp
-    cpp/ylikuutio/ontology/objloader.hpp
-    cpp/ylikuutio/ontology/render_templates.hpp
-    cpp/ylikuutio/ontology/scene.cpp
-    cpp/ylikuutio/ontology/scene.hpp
-    cpp/ylikuutio/ontology/shader.cpp
-    cpp/ylikuutio/ontology/shader.hpp
-    cpp/ylikuutio/ontology/shader_loader.cpp
-    cpp/ylikuutio/ontology/shader_loader.hpp
-    cpp/ylikuutio/ontology/species.cpp
-    cpp/ylikuutio/ontology/species.hpp
-    cpp/ylikuutio/ontology/species_or_glyph.hpp
-    cpp/ylikuutio/ontology/text2D.cpp
-    cpp/ylikuutio/ontology/text2D.hpp
-    cpp/ylikuutio/ontology/text3D.hpp
-    cpp/ylikuutio/ontology/text3D.cpp
-    cpp/ylikuutio/ontology/texture_loader.cpp
-    cpp/ylikuutio/ontology/texture_loader.hpp
-    cpp/ylikuutio/ontology/universe.cpp
-    cpp/ylikuutio/ontology/universe.hpp
-    cpp/ylikuutio/ontology/vector_font.cpp
-    cpp/ylikuutio/ontology/vector_font.hpp
-    cpp/ylikuutio/ontology/vboindexer.cpp
-    cpp/ylikuutio/ontology/vboindexer.hpp
+    code/ylikuutio/ontology/font_loader.cpp
+    code/ylikuutio/ontology/font_loader.hpp
+    code/ylikuutio/ontology/glyph.cpp
+    code/ylikuutio/ontology/glyph.hpp
+    code/ylikuutio/ontology/ground_level.cpp
+    code/ylikuutio/ontology/ground_level.hpp
+    code/ylikuutio/ontology/heightmap_loader.cpp
+    code/ylikuutio/ontology/heightmap_loader.hpp
+    code/ylikuutio/ontology/material.cpp
+    code/ylikuutio/ontology/material.hpp
+    code/ylikuutio/ontology/model.cpp
+    code/ylikuutio/ontology/model.hpp
+    code/ylikuutio/ontology/object.cpp
+    code/ylikuutio/ontology/object.hpp
+    code/ylikuutio/ontology/objloader.cpp
+    code/ylikuutio/ontology/objloader.hpp
+    code/ylikuutio/ontology/render_templates.hpp
+    code/ylikuutio/ontology/scene.cpp
+    code/ylikuutio/ontology/scene.hpp
+    code/ylikuutio/ontology/shader.cpp
+    code/ylikuutio/ontology/shader.hpp
+    code/ylikuutio/ontology/shader_loader.cpp
+    code/ylikuutio/ontology/shader_loader.hpp
+    code/ylikuutio/ontology/species.cpp
+    code/ylikuutio/ontology/species.hpp
+    code/ylikuutio/ontology/species_or_glyph.hpp
+    code/ylikuutio/ontology/text2D.cpp
+    code/ylikuutio/ontology/text2D.hpp
+    code/ylikuutio/ontology/text3D.hpp
+    code/ylikuutio/ontology/text3D.cpp
+    code/ylikuutio/ontology/texture_loader.cpp
+    code/ylikuutio/ontology/texture_loader.hpp
+    code/ylikuutio/ontology/universe.cpp
+    code/ylikuutio/ontology/universe.hpp
+    code/ylikuutio/ontology/vector_font.cpp
+    code/ylikuutio/ontology/vector_font.hpp
+    code/ylikuutio/ontology/vboindexer.cpp
+    code/ylikuutio/ontology/vboindexer.hpp
 
     # shaders, in alphabetical order
-    cpp/ylikuutio/shaders/StandardShading.fragmentshader
-    cpp/ylikuutio/shaders/StandardShading.vertexshader
-    cpp/ylikuutio/shaders/TransformVertexShader.vertexshader
-    cpp/ylikuutio/shaders/TextureFragmentShader.fragmentshader
-    cpp/ylikuutio/shaders/TextVertexShader.fragmentshader
-    cpp/ylikuutio/shaders/TextVertexShader.vertexshader
+    code/ylikuutio/shaders/StandardShading.fragmentshader
+    code/ylikuutio/shaders/StandardShading.vertexshader
+    code/ylikuutio/shaders/TransformVertexShader.vertexshader
+    code/ylikuutio/shaders/TextureFragmentShader.fragmentshader
+    code/ylikuutio/shaders/TextVertexShader.fragmentshader
+    code/ylikuutio/shaders/TextVertexShader.vertexshader
 
     # string, in alphabetical order
-    cpp/ylikuutio/string/ylikuutio_string.cpp
-    cpp/ylikuutio/string/ylikuutio_string.hpp
+    code/ylikuutio/string/ylikuutio_string.cpp
+    code/ylikuutio/string/ylikuutio_string.hpp
 
     # ajokki, in alphabetical order
-    cpp/ajokki/ajokki.cpp
-    cpp/ajokki/ajokki_callbacks.cpp
-    cpp/ajokki/ajokki_callbacks.hpp
+    code/ajokki/ajokki.cpp
+    code/ajokki/ajokki_callbacks.cpp
+    code/ajokki/ajokki_callbacks.hpp
     )
 add_dependencies(ajokki rescan)
 target_link_libraries(ajokki ${ALL_LIBS} glfw)
@@ -513,8 +513,8 @@ if(${eigen_FOUND})
 endif()
 
 # Xcode and Visual working directories
-set_target_properties(ajokki PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/cpp/ajokki/")
-create_target_launcher(ajokki WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/cpp/ajokki/")
+set_target_properties(ajokki PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/code/ajokki/")
+create_target_launcher(ajokki WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/code/ajokki/")
 
 # Tests
 if(DO_UNIT_TESTS_WITH_CATCH)
@@ -523,81 +523,81 @@ if(DO_UNIT_TESTS_WITH_CATCH)
         )
 
     add_executable(unit_tests_with_Catch
-        cpp/ylikuutio/tests/catch/tests.cpp
+        code/ylikuutio/tests/catch/tests.cpp
         )
 
     target_link_libraries(unit_tests_with_Catch
         ${ALL_LIBS}
         )
     # Xcode and Visual working directories
-    set_target_properties(unit_tests_with_Catch PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/cpp/tests/catch/")
-    create_target_launcher(unit_tests_with_Catch WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/cpp/tests/catch/")
+    set_target_properties(unit_tests_with_Catch PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/code/tests/catch/")
+    create_target_launcher(unit_tests_with_Catch WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/code/tests/catch/")
 endif()
 
 if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
     set(FILES_TO_TEST
-        cpp/ylikuutio/callback_system/callback_engine.cpp
-        cpp/ylikuutio/callback_system/callback_engine.hpp
-        cpp/ylikuutio/callback_system/callback_object.cpp
-        cpp/ylikuutio/callback_system/callback_object.hpp
-        cpp/ylikuutio/callback_system/callback_parameter.cpp
-        cpp/ylikuutio/callback_system/callback_parameter.hpp
-        cpp/ylikuutio/common/any_value.cpp
-        cpp/ylikuutio/common/any_value.hpp
-        cpp/ylikuutio/common/globals.hpp
-        cpp/ylikuutio/file/file_loader.cpp
-        cpp/ylikuutio/file/file_loader.hpp
-        cpp/ylikuutio/geometry/bilinear_interpolation.cpp
-        cpp/ylikuutio/geometry/bilinear_interpolation.hpp
-        cpp/ylikuutio/geometry/indexing.cpp
-        cpp/ylikuutio/geometry/indexing.hpp
-        cpp/ylikuutio/geometry/line.cpp
-        cpp/ylikuutio/geometry/line.hpp
-        cpp/ylikuutio/geometry/line2D.cpp
-        cpp/ylikuutio/geometry/line2D.hpp
-        cpp/ylikuutio/geometry/line_line_intersection.cpp
-        cpp/ylikuutio/geometry/line_line_intersection.hpp
-        cpp/ylikuutio/geometry/line_segment2D.cpp
-        cpp/ylikuutio/geometry/line_segment2D.hpp
-        cpp/ylikuutio/geometry/line_segment_line_segment_intersection.cpp
-        cpp/ylikuutio/geometry/line_segment_line_segment_intersection.hpp
-        cpp/ylikuutio/geometry/quad_triangulation.cpp
-        cpp/ylikuutio/geometry/quad_triangulation.hpp
-        cpp/ylikuutio/geometry/transformation.cpp
-        cpp/ylikuutio/geometry/transformation.hpp
-        cpp/ylikuutio/hierarchy/hierarchy_templates.hpp
-        cpp/ylikuutio/ontology/font_loader.cpp
-        cpp/ylikuutio/ontology/font_loader.hpp
-        cpp/ylikuutio/string/ylikuutio_string.cpp
-        cpp/ylikuutio/string/ylikuutio_string.hpp
+        code/ylikuutio/callback_system/callback_engine.cpp
+        code/ylikuutio/callback_system/callback_engine.hpp
+        code/ylikuutio/callback_system/callback_object.cpp
+        code/ylikuutio/callback_system/callback_object.hpp
+        code/ylikuutio/callback_system/callback_parameter.cpp
+        code/ylikuutio/callback_system/callback_parameter.hpp
+        code/ylikuutio/common/any_value.cpp
+        code/ylikuutio/common/any_value.hpp
+        code/ylikuutio/common/globals.hpp
+        code/ylikuutio/file/file_loader.cpp
+        code/ylikuutio/file/file_loader.hpp
+        code/ylikuutio/geometry/bilinear_interpolation.cpp
+        code/ylikuutio/geometry/bilinear_interpolation.hpp
+        code/ylikuutio/geometry/indexing.cpp
+        code/ylikuutio/geometry/indexing.hpp
+        code/ylikuutio/geometry/line.cpp
+        code/ylikuutio/geometry/line.hpp
+        code/ylikuutio/geometry/line2D.cpp
+        code/ylikuutio/geometry/line2D.hpp
+        code/ylikuutio/geometry/line_line_intersection.cpp
+        code/ylikuutio/geometry/line_line_intersection.hpp
+        code/ylikuutio/geometry/line_segment2D.cpp
+        code/ylikuutio/geometry/line_segment2D.hpp
+        code/ylikuutio/geometry/line_segment_line_segment_intersection.cpp
+        code/ylikuutio/geometry/line_segment_line_segment_intersection.hpp
+        code/ylikuutio/geometry/quad_triangulation.cpp
+        code/ylikuutio/geometry/quad_triangulation.hpp
+        code/ylikuutio/geometry/transformation.cpp
+        code/ylikuutio/geometry/transformation.hpp
+        code/ylikuutio/hierarchy/hierarchy_templates.hpp
+        code/ylikuutio/ontology/font_loader.cpp
+        code/ylikuutio/ontology/font_loader.hpp
+        code/ylikuutio/string/ylikuutio_string.cpp
+        code/ylikuutio/string/ylikuutio_string.hpp
         )
     set(UNIT_TESTS
-        cpp/ylikuutio/tests/googletest/test_any_value.cpp
-        cpp/ylikuutio/tests/googletest/test_callback_system.cpp
-        cpp/ylikuutio/tests/googletest/test_eigen.cpp
-        cpp/ylikuutio/tests/googletest/test_file_loader.cpp
-        cpp/ylikuutio/tests/googletest/test_font_loader.cpp
-        cpp/ylikuutio/tests/googletest/test_globals.cpp
-        cpp/ylikuutio/tests/googletest/test_heightmap_loader.cpp
-        cpp/ylikuutio/tests/googletest/test_line2D.cpp
-        cpp/ylikuutio/tests/googletest/test_line_line_intersection.cpp
-        cpp/ylikuutio/tests/googletest/test_line_segment_line_segment_intersection.cpp
-        cpp/ylikuutio/tests/googletest/test_triangulation.cpp
-        cpp/ylikuutio/tests/googletest/test_ylikuutio_string.cpp)
-    set(MAIN_FILE cpp/ylikuutio/tests/googletest/main.cpp)
+        code/ylikuutio/tests/googletest/test_any_value.cpp
+        code/ylikuutio/tests/googletest/test_callback_system.cpp
+        code/ylikuutio/tests/googletest/test_eigen.cpp
+        code/ylikuutio/tests/googletest/test_file_loader.cpp
+        code/ylikuutio/tests/googletest/test_font_loader.cpp
+        code/ylikuutio/tests/googletest/test_globals.cpp
+        code/ylikuutio/tests/googletest/test_heightmap_loader.cpp
+        code/ylikuutio/tests/googletest/test_line2D.cpp
+        code/ylikuutio/tests/googletest/test_line_line_intersection.cpp
+        code/ylikuutio/tests/googletest/test_line_segment_line_segment_intersection.cpp
+        code/ylikuutio/tests/googletest/test_triangulation.cpp
+        code/ylikuutio/tests/googletest/test_ylikuutio_string.cpp)
+    set(MAIN_FILE code/ylikuutio/tests/googletest/main.cpp)
 
     add_library(codeToTest ${FILES_TO_TEST})
 
     add_executable(do_tests_googletest ${MAIN_FILE})
     target_link_libraries(do_tests_googletest codeToTest)
 
-    add_executable(unit_tests_with_Google_Test cpp/ylikuutio/tests/googletest/test_main.cpp ${UNIT_TESTS})
+    add_executable(unit_tests_with_Google_Test code/ylikuutio/tests/googletest/test_main.cpp ${UNIT_TESTS})
     target_link_libraries(unit_tests_with_Google_Test gtest libgtest rt pthread codeToTest)
 
     # Xcode and Visual working directories
-    set_target_properties(unit_tests_with_Google_Test PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/cpp/tests/googletest/")
-    create_target_launcher(unit_tests_with_Google_Test WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/cpp/tests/googletest/")
+    set_target_properties(unit_tests_with_Google_Test PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/code/tests/googletest/")
+    create_target_launcher(unit_tests_with_Google_Test WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/code/tests/googletest/")
 endif()
 
-source_group(common REGULAR_EXPRESSION ".*/cpp/common/.*" )
+source_group(common REGULAR_EXPRESSION ".*/code/common/.*" )
 source_group(shaders REGULAR_EXPRESSION ".*/.*shader$" )
