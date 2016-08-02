@@ -99,6 +99,38 @@ include_directories(
     external/glfw-3.2/include/
     external/glm-0.9.4.0/
     external/glew-2.0.0/include/
+
+    external/gdal-2.1.1/alg/
+
+    # in-source build seems to populate `external/gdal-2.1.1/apps/` with `*.c`,
+    # but it has already before that `*.cpp` & `*.h` (I'm not sure about all of them).
+    external/gdal-2.1.1/apps/
+
+    external/gdal-2.1.1/frmts/gtiff/
+
+    # libgeotiff seems to be written in C.
+    external/gdal-2.1.1/frmts/gtiff/libgeotiff/
+
+    # libtiff seems to be written in C.
+    external/gdal-2.1.1/frmts/gtiff/libtiff/
+
+    external/gdal-2.1.1/frmts/mem/
+    external/gdal-2.1.1/frmts/raw/
+    external/gdal-2.1.1/frmts/vrt/
+    external/gdal-2.1.1/gnm/
+    external/gdal-2.1.1/ogr/
+    external/gdal-2.1.1/ogr/ogrsf_frmts/
+    external/gdal-2.1.1/ogr/ogrsf_frmts/generic/
+    external/gdal-2.1.1/ogr/ogrsf_frmts/geojson/
+
+    # libjson seems to be written in C.
+    external/gdal-2.1.1/ogr/ogrsf_frmts/geojson/libjson/
+
+    external/gdal-2.1.1/port/
+    external/gdal-2.1.1/gcore/
+    external/gdal-2.1.1/gcore/mdreader/
+    external/gdal-2.1.1/ogr/ogrsf_frmts/mem/
+    external/gdal-2.1.1/frmts/zlib/
     .
     )
 
@@ -164,6 +196,13 @@ if(COMPILE_GDAL_OGR)
         LOG_BUILD ON
         )
 endif()
+
+include_directories(
+    external/gdal-2.1.1/ogr/
+    external/gdal-2.1.1/port/
+    external/gdal-2.1.1/gcore/
+    external/gdal-2.1.1/gcore/mdreader/
+    )
 
 # http://stackoverflow.com/questions/17446981/cmake-externalproject-add-and-findpackage/17473508#17473508
 if(NOT ${eigen_FOUND})
@@ -303,6 +342,7 @@ endif()
 set(ALL_LIBS
     ${OPENGL_LIBRARY}
     GLEW_200
+    GDAL_211
     )
 
 add_definitions(
