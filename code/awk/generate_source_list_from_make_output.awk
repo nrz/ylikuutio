@@ -27,7 +27,7 @@ function get_filename()
         # find out if there's a matching `*.h` header file too.
         header_filename = gensub(/(^.*\.)c(|pp)$/, "\\1h", "g", current_filename);
 
-        if (system("test -f " header_filename))
+        if (system("test -f " header_filename) == 0)
         {
             # header exists, so print its filename too!
             print header_filename;
