@@ -68,14 +68,10 @@ function get_filename()
     }
 }
 END{
-    n_dirs = array_index;
     asort(dir_array);
 
     print "";
     print "include_directories(";
 
-    for (i = 0; i < n_dirs; i++)
-    {
-        print dir_array[i];
-    }
+    for (i in dir_array) print dir_array[i];
 } # END
