@@ -21,8 +21,12 @@ function get_filename()
     {
         current_filename = new_filename;
 
-        # print the filename.
-        print current_filename;
+        # find out if there's a matching source file.
+        if (system("test -f " current_filename) == 0)
+        {
+            # print the filename.
+            print current_filename;
+        }
 
         # find out if there's a matching `*.h` header file too.
         header_filename = gensub(/(^.*\.)c(|pp)$/, "\\1h", "g", current_filename);
