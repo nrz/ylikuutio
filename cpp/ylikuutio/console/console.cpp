@@ -72,6 +72,7 @@ namespace console
         // Alt (not AltGr):       0x04
         // Shift + Alt:           0x05
         if ((mods == 0 || mods == 1) &&
+                global_console_pointer->in_console &&
                 !global_console_pointer->is_left_control_pressed &&
                 !global_console_pointer->is_right_control_pressed &&
                 !global_console_pointer->is_left_alt_pressed)
@@ -88,7 +89,10 @@ namespace console
             std::vector<callback_system::CallbackParameter*>&,
             console::Console* console)
     {
-        console->can_enter_console = true;
+        if (!console->in_console)
+        {
+            console->can_enter_console = true;
+        }
         return nullptr;
     }
 
@@ -98,7 +102,10 @@ namespace console
             std::vector<callback_system::CallbackParameter*>&,
             console::Console* console)
     {
-        console->can_exit_console = true;
+        if (console->in_console)
+        {
+            console->can_exit_console = true;
+        }
         return nullptr;
     }
 
@@ -108,7 +115,10 @@ namespace console
             std::vector<callback_system::CallbackParameter*>&,
             console::Console* console)
     {
-        console->is_left_control_pressed = false;
+        if (console->in_console)
+        {
+            console->is_left_control_pressed = false;
+        }
         return nullptr;
     }
 
@@ -118,7 +128,10 @@ namespace console
             std::vector<callback_system::CallbackParameter*>&,
             console::Console* console)
     {
-        console->is_right_control_pressed = false;
+        if (console->in_console)
+        {
+            console->is_right_control_pressed = false;
+        }
         return nullptr;
     }
 
@@ -128,7 +141,10 @@ namespace console
             std::vector<callback_system::CallbackParameter*>&,
             console::Console* console)
     {
-        console->is_left_alt_pressed = false;
+        if (console->in_console)
+        {
+            console->is_left_alt_pressed = false;
+        }
         return nullptr;
     }
 
@@ -138,7 +154,10 @@ namespace console
             std::vector<callback_system::CallbackParameter*>&,
             console::Console* console)
     {
-        console->is_right_alt_pressed = false;
+        if (console->in_console)
+        {
+            console->is_right_alt_pressed = false;
+        }
         return nullptr;
     }
 
@@ -148,7 +167,10 @@ namespace console
             std::vector<callback_system::CallbackParameter*>&,
             console::Console* console)
     {
-        console->is_left_shift_pressed = false;
+        if (console->in_console)
+        {
+            console->is_left_shift_pressed = false;
+        }
         return nullptr;
     }
 
@@ -158,7 +180,10 @@ namespace console
             std::vector<callback_system::CallbackParameter*>&,
             console::Console* console)
     {
-        console->is_right_shift_pressed = false;
+        if (console->in_console)
+        {
+            console->is_right_shift_pressed = false;
+        }
         return nullptr;
     }
 
@@ -168,7 +193,10 @@ namespace console
             std::vector<callback_system::CallbackParameter*>&,
             console::Console* console)
     {
-        console->can_move_to_previous_input = true;
+        if (console->in_console)
+        {
+            console->can_move_to_previous_input = true;
+        }
         return nullptr;
     }
 
@@ -178,7 +206,10 @@ namespace console
             std::vector<callback_system::CallbackParameter*>&,
             console::Console* console)
     {
-        console->can_move_to_next_input = true;
+        if (console->in_console)
+        {
+            console->can_move_to_next_input = true;
+        }
         return nullptr;
     }
 
@@ -188,7 +219,10 @@ namespace console
             std::vector<callback_system::CallbackParameter*>&,
             console::Console* console)
     {
-        console->can_backspace = true;
+        if (console->in_console)
+        {
+            console->can_backspace = true;
+        }
         return nullptr;
     }
 
@@ -198,7 +232,10 @@ namespace console
             std::vector<callback_system::CallbackParameter*>&,
             console::Console* console)
     {
-        console->can_enter_key = true;
+        if (console->in_console)
+        {
+            console->can_enter_key = true;
+        }
         return nullptr;
     }
 
@@ -208,7 +245,10 @@ namespace console
             std::vector<callback_system::CallbackParameter*>&,
             console::Console* console)
     {
-        console->can_ctrl_c = true;
+        if (console->in_console)
+        {
+            console->can_ctrl_c = true;
+        }
         return nullptr;
     }
 
@@ -267,7 +307,7 @@ namespace console
             std::vector<callback_system::CallbackParameter*>&,
             console::Console* console)
     {
-        if (console->exit_console())
+        if (console->in_console && console->exit_console())
         {
             // Signal to caller that we have exited the console.
             uint32_t exit_console_magic_number = EXIT_CONSOLE_MAGIC_NUMBER;
@@ -325,7 +365,10 @@ namespace console
             std::vector<callback_system::CallbackParameter*>&,
             console::Console* console)
     {
-        console->is_left_control_pressed = true;
+        if (console->in_console)
+        {
+            console->is_left_control_pressed = true;
+        }
         return nullptr;
     }
 
@@ -335,7 +378,10 @@ namespace console
             std::vector<callback_system::CallbackParameter*>&,
             console::Console* console)
     {
-        console->is_right_control_pressed = true;
+        if (console->in_console)
+        {
+            console->is_right_control_pressed = true;
+        }
         return nullptr;
     }
 
@@ -345,7 +391,10 @@ namespace console
             std::vector<callback_system::CallbackParameter*>&,
             console::Console* console)
     {
-        console->is_left_alt_pressed = true;
+        if (console->in_console)
+        {
+            console->is_left_alt_pressed = true;
+        }
         return nullptr;
     }
 
@@ -355,7 +404,10 @@ namespace console
             std::vector<callback_system::CallbackParameter*>&,
             console::Console* console)
     {
-        console->is_right_alt_pressed = true;
+        if (console->in_console)
+        {
+            console->is_right_alt_pressed = true;
+        }
         return nullptr;
     }
 
@@ -365,7 +417,10 @@ namespace console
             std::vector<callback_system::CallbackParameter*>&,
             console::Console* console)
     {
-        console->is_left_shift_pressed = true;
+        if (console->in_console)
+        {
+            console->is_left_shift_pressed = true;
+        }
         return nullptr;
     }
 
@@ -375,7 +430,10 @@ namespace console
             std::vector<callback_system::CallbackParameter*>&,
             console::Console* console)
     {
-        console->is_right_shift_pressed = true;
+        if (console->in_console)
+        {
+            console->is_right_shift_pressed = true;
+        }
         return nullptr;
     }
 
@@ -517,11 +575,14 @@ namespace console
 
     void Console::copy_historical_input_into_current_input()
     {
-        // Copy selected historical input into current input.
-        this->current_input.clear();
-        std::copy(this->command_history.at(this->historical_input_i).begin(),
-                this->command_history.at(this->historical_input_i).end(),
-                std::back_inserter(this->current_input));
+        if (this->in_console)
+        {
+            // Copy selected historical input into current input.
+            this->current_input.clear();
+            std::copy(this->command_history.at(this->historical_input_i).begin(),
+                    this->command_history.at(this->historical_input_i).end(),
+                    std::back_inserter(this->current_input));
+        }
     }
 
     bool Console::exit_console()
@@ -551,7 +612,10 @@ namespace console
     }
     void Console::delete_character()
     {
-        this->current_input.erase(this->cursor_it);
+        if (this->in_console)
+        {
+            this->current_input.erase(this->cursor_it);
+        }
     }
 
     void Console::move_cursor_left()
@@ -565,7 +629,7 @@ namespace console
 
     void Console::move_cursor_right()
     {
-        if (this->cursor_it != this->current_input.end())
+        if (this->in_console && this->cursor_it != this->current_input.end())
         {
             this->cursor_it++;
             this->cursor_index++;
@@ -574,33 +638,51 @@ namespace console
 
     void Console::move_cursor_to_start_of_line()
     {
-        this->cursor_it = this->current_input.begin();
-        this->cursor_index = 0;
+        if (this->in_console)
+        {
+            this->cursor_it = this->current_input.begin();
+            this->cursor_index = 0;
+        }
     }
 
     void Console::move_cursor_to_end_of_line()
     {
-        this->cursor_it = this->current_input.end();
-        this->cursor_index = this->current_input.size();
+        if (this->in_console)
+        {
+            this->cursor_it = this->current_input.end();
+            this->cursor_index = this->current_input.size();
+        }
     }
 
     void Console::page_up()
     {
-        // TODO: implement this function!
+        if (this->in_console)
+        {
+            // TODO: implement this function!
+        }
     }
 
     void Console::page_down()
     {
-        // TODO: implement this function!
+        if (this->in_console)
+        {
+            // TODO: implement this function!
+        }
     }
 
     void Console::home()
     {
-        // TODO: implement this function!
+        if (this->in_console)
+        {
+            // TODO: implement this function!
+        }
     }
 
     void Console::end()
     {
-        // TODO: implement this function!
+        if (this->in_console)
+        {
+            // TODO: implement this function!
+        }
     }
 }
