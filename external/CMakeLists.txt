@@ -261,11 +261,11 @@ set(GDAL_211_SOURCE
     gdal-2.1.1/ogr/ogr_geocoding.cpp
     gdal-2.1.1/ogr/ogrgeomediageometry.cpp
     # gdal-2.1.1/ogr/ogrgeometrycollection.cpp
-    # gdal-2.1.1/ogr/ogrgeometry.cpp
+    # gdal-2.1.1/ogr/ogrgeometry.cpp # `error: ‘wkb25DBitInternalUse’ was not declared in this scope`
     gdal-2.1.1/ogr/ogrgeometryfactory.cpp
     gdal-2.1.1/ogr/ogrgeomfielddefn.cpp
     gdal-2.1.1/ogr/ogrlinearring.cpp
-    # gdal-2.1.1/ogr/ogrlinestring.cpp
+    # gdal-2.1.1/ogr/ogrlinestring.cpp # `error: ‘wkb25DBitInternalUse’ was not declared in this scope`
     gdal-2.1.1/ogr/ogrmulticurve.cpp
     gdal-2.1.1/ogr/ogrmultilinestring.cpp
     gdal-2.1.1/ogr/ogrmultipoint.cpp
