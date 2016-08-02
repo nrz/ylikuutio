@@ -19,7 +19,7 @@ function get_filename()
     cpp_filename = substr($0, RSTART, RLENGTH);
     new_filename = current_dir "/" cpp_filename;
 
-    if (new_filename != current_filename)
+    if (new_filename != current_filename && new_filename != "")
     {
         current_filename = new_filename;
 
