@@ -815,12 +815,12 @@ int main(void)
                 if (is_invert_mouse_in_use)
                 {
                     // invert mouse.
-                    verticalAngle   -= mouseSpeed * GLfloat(window_height / 2 - ypos);
+                    verticalAngle -= mouseSpeed * GLfloat(window_height / 2 - ypos);
                 }
                 else
                 {
                     // don't invert mouse.
-                    verticalAngle   += mouseSpeed * GLfloat(window_height / 2 - ypos);
+                    verticalAngle += mouseSpeed * GLfloat(window_height / 2 - ypos);
                 }
                 verticalAngle = remainder(verticalAngle, (2.0f * PI));
             }
