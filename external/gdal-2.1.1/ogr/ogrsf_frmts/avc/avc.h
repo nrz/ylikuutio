@@ -121,7 +121,8 @@
 #ifdef GDAL_COMPILATION
 #include "shapefil.h"
 #else
-#include "dbfopen.h"
+//#include "dbfopen.h"
+#include "shapefil.h" // Fix to enable CMake build, by Antti Nuortimo 2016-08-03.
 #endif
 
 #include "avc_mbyte.h"

@@ -174,8 +174,10 @@ void Msg_reader_core::read_metadata_block(FILE* fin) {
 
     unsigned int i;
 
-    CPL_IGNORE_RET_VAL(VSIFRead(&_main_header, sizeof(_main_header), 1, fin));
-    CPL_IGNORE_RET_VAL(VSIFRead(&_sec_header, sizeof(_sec_header), 1, fin));
+    // The next line commented out by Antti Nuortimo 2016-08-03.
+    // CPL_IGNORE_RET_VAL(VSIFRead(&_main_header, sizeof(_main_header), 1, fin));
+    // The next line commented out by Antti Nuortimo 2016-08-03.
+    // CPL_IGNORE_RET_VAL(VSIFRead(&_sec_header, sizeof(_sec_header), 1, fin));
 
 #ifdef DEBUG
     // print out all the fields in the header
@@ -257,8 +259,10 @@ void Msg_reader_core::read_metadata_block(FILE* fin) {
     // read radiometric block
     RADIOMETRIC_PROCESSING_RECORD rad;
     off_t offset = RADIOMETRICPROCESSING_RECORD_OFFSET + _f_header_offset + sizeof(GP_PK_HEADER) + sizeof(GP_PK_SH1) + 1;
-    CPL_IGNORE_RET_VAL(VSIFSeek(fin, offset, SEEK_SET));
-    CPL_IGNORE_RET_VAL(VSIFRead(&rad, sizeof(RADIOMETRIC_PROCESSING_RECORD), 1, fin));
+    // The next line commented out by Antti Nuortimo 2016-08-03.
+    // CPL_IGNORE_RET_VAL(VSIFSeek(fin, offset, SEEK_SET));
+    // The next line commented out by Antti Nuortimo 2016-08-03.
+    // CPL_IGNORE_RET_VAL(VSIFRead(&rad, sizeof(RADIOMETRIC_PROCESSING_RECORD), 1, fin));
     to_native(rad);
     memcpy((void*)_calibration, (void*)&rad.level1_5ImageCalibration,sizeof(_calibration));
 
@@ -277,8 +281,10 @@ void Msg_reader_core::read_metadata_block(FILE* fin) {
     // read image description block
     IMAGE_DESCRIPTION_RECORD idr;
     offset = RADIOMETRICPROCESSING_RECORD_OFFSET  - IMAGEDESCRIPTION_RECORD_LENGTH + _f_header_offset + sizeof(GP_PK_HEADER) + sizeof(GP_PK_SH1) + 1;
-    CPL_IGNORE_RET_VAL(VSIFSeek(fin, offset, SEEK_SET));
-    CPL_IGNORE_RET_VAL(VSIFRead(&idr, sizeof(IMAGE_DESCRIPTION_RECORD), 1, fin));
+    // The next line commented out by Antti Nuortimo 2016-08-03.
+    // CPL_IGNORE_RET_VAL(VSIFSeek(fin, offset, SEEK_SET));
+    // The next line commented out by Antti Nuortimo 2016-08-03.
+    // CPL_IGNORE_RET_VAL(VSIFRead(&idr, sizeof(IMAGE_DESCRIPTION_RECORD), 1, fin));
     to_native(idr);
     _line_dir_step = idr.referencegrid_visir.lineDirGridStep;
     _col_dir_step = idr.referencegrid_visir.columnDirGridStep;
@@ -290,7 +296,8 @@ void Msg_reader_core::read_metadata_block(FILE* fin) {
     GP_PK_SH1    sub_header;
     SUB_VISIRLINE visir_line;
 
-    CPL_IGNORE_RET_VAL(VSIFSeek(fin, _f_data_offset, SEEK_SET));
+    // The next line commented out by Antti Nuortimo 2016-08-03.
+    // CPL_IGNORE_RET_VAL(VSIFSeek(fin, _f_data_offset, SEEK_SET));
 
     _hrv_packet_size = 0;
     _interline_spacing = 0;
@@ -304,17 +311,23 @@ void Msg_reader_core::read_metadata_block(FILE* fin) {
     }
 
     do {
-        CPL_IGNORE_RET_VAL(VSIFRead(&gp_header, sizeof(GP_PK_HEADER), 1, fin));
-        CPL_IGNORE_RET_VAL(VSIFRead(&sub_header, sizeof(GP_PK_SH1), 1, fin));
-        CPL_IGNORE_RET_VAL(VSIFRead(&visir_line, sizeof(SUB_VISIRLINE), 1, fin));
+        // The next lines commented out by Antti Nuortimo 2016-08-03.
+        // CPL_IGNORE_RET_VAL(VSIFRead(&gp_header, sizeof(GP_PK_HEADER), 1, fin));
+        // The next lines commented out by Antti Nuortimo 2016-08-03.
+        // CPL_IGNORE_RET_VAL(VSIFRead(&sub_header, sizeof(GP_PK_SH1), 1, fin));
+        // The next lines commented out by Antti Nuortimo 2016-08-03.
+        // CPL_IGNORE_RET_VAL(VSIFRead(&visir_line, sizeof(SUB_VISIRLINE), 1, fin));
         to_native(visir_line);
         to_native(gp_header);
 
         // skip over the actual line data
+        // The next lines commented out by Antti Nuortimo 2016-08-03.
+        /*
         CPL_IGNORE_RET_VAL(VSIFSeek(fin,
             gp_header.packetLength - (sizeof(GP_PK_SH1) + sizeof(SUB_VISIRLINE) - 1),
             SEEK_CUR
         ));
+            */
 
         if (visir_line.channelId == 0 || visir_line.channelId > MSG_NUM_CHANNELS) {
             _open_success = false;
@@ -333,7 +346,8 @@ void Msg_reader_core::read_metadata_block(FILE* fin) {
                 _hrv_bytes_per_line = gp_header.packetLength - (unsigned int)(sizeof(GP_PK_SH1) + sizeof(SUB_VISIRLINE) - 1);
                 _hrv_packet_size = gp_header.packetLength + (unsigned int)sizeof(GP_PK_HEADER) + 1;
                 _interline_spacing +=  3*_hrv_packet_size;
-                CPL_IGNORE_RET_VAL(VSIFSeek(fin, 2*gp_header.packetLength, SEEK_CUR ));
+                // The next line commented out by Antti Nuortimo 2016-08-03.
+                // CPL_IGNORE_RET_VAL(VSIFSeek(fin, 2*gp_header.packetLength, SEEK_CUR ));
             }
         }
     } while (band_count > 0);

@@ -177,7 +177,8 @@ SHP_CVSID("$Id: dbfopen.c,v 1.89 2011-07-24 05:59:25 fwarmerdam Exp $")
 #  define TRUE		1
 #endif
 
-CPL_INLINE static void CPL_IGNORE_RET_VAL_INT(CPL_UNUSED int unused) {}
+// The next line commented out by Antti Nuortimo 2016-08-03.
+// CPL_INLINE static void CPL_IGNORE_RET_VAL_INT(CPL_UNUSED int unused) {}
 
 /************************************************************************/
 /*                             SfRealloc()                              */

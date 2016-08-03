@@ -67,8 +67,10 @@ public:
     bool get_open_success(void) { return _open_success; }
 
     #ifndef GDAL_SUPPORT
-    virtual void radiance_to_blackbody(int using_chan_no = 0) = 0;   // can override which channel's parameters to use
-    virtual double* get_data(int chan_no=0) = 0;
+    // The next line commented out by Antti Nuortimo 2016-08-03.
+    // virtual void radiance_to_blackbody(int using_chan_no = 0) = 0;   // can override which channel's parameters to use
+    // The next line commented out by Antti Nuortimo 2016-08-03.
+    // virtual double* get_data(int chan_no=0) = 0;
     #endif
 
     unsigned int get_lines(void) { return _lines; }

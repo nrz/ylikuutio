@@ -826,18 +826,24 @@ SHPSearchDiskTreeNode( SHPTreeDiskHandle hDiskTree, double *padfBoundsMin, doubl
     }
 
     /* Sanity checks to avoid int overflows in later computation */
+    // The next lines commented out by Antti Nuortimo 2016-08-03.
+    /*
     if( offset > INT_MAX - sizeof(int) )
     {
         hDiskTree->sHooks.Error("Invalid value for offset");
         return FALSE;
     }
+    */
 
+    // The next lines commented out by Antti Nuortimo 2016-08-03.
+    /*
     if( numshapes > (INT_MAX - offset - sizeof(int)) / sizeof(int) ||
         numshapes > INT_MAX / sizeof(int) - *pnResultCount )
     {
         hDiskTree->sHooks.Error("Invalid value for numshapes");
         return FALSE;
     }
+    */
 
 /* -------------------------------------------------------------------- */
 /*      If we don't overlap this node at all, we can just fseek()       */
@@ -862,8 +868,11 @@ SHPSearchDiskTreeNode( SHPTreeDiskHandle hDiskTree, double *padfBoundsMin, doubl
 
             *pnBufferMax = (*pnResultCount + numshapes + 100) * 5 / 4;
 
+            // The next lines commented out by Antti Nuortimo 2016-08-03.
+            /*
             if( (size_t)*pnBufferMax > INT_MAX / sizeof(int) )
                 *pnBufferMax = *pnResultCount + numshapes;
+                */
 
             pNewBuffer = (int *)
                 SfRealloc( *ppanResultBuffer, *pnBufferMax * sizeof(int) );

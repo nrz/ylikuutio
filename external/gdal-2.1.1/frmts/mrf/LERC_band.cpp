@@ -224,6 +224,8 @@ template <typename T> void UnMask(BitMask2 &bitMask, T *arr, const ILImage &img)
     return;
 }
 
+// The next lines commented out by Antti Nuortimo 2016-08-03.
+/*
 CPLErr LERC_Band::Decompress(buf_mgr &dst, buf_mgr &src)
 {
     const Byte *ptr = (Byte *)(src.buffer);
@@ -296,6 +298,6 @@ LERC_Band::LERC_Band(GDALMRFDataset *pDS, const ILImage &image, int b, int level
 LERC_Band::~LERC_Band()
 {
 }
-
+*/
 
 NAMESPACE_MRF_END
