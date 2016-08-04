@@ -792,7 +792,8 @@ set(GDAL_211_SOURCE
     apps/testepsg.cpp
     apps/gdalbuildvrt_bin.cpp
 
-    # BUILD_UNTIL_SUCCESS_SOURCE_FILES
+    # BUILD_UNTIL_SUCCESS_SOURCE_FILES_BEGIN
+    # BUILD_UNTIL_SUCCESS_SOURCE_FILES_END
     )
 
 include_directories(
