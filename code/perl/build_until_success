@@ -166,6 +166,7 @@ while ($keep_building)
 
                 my $class_function_regex = '([a-zA-Z0-9_]+)::(~|)[a-zA-Z0-9_]+';
                 my $regular_function_regex = '([a-zA-Z0-9_]+)\(';
+                my $error_foo_was_not_declared_in_this_scope_regex = '\berror: ‘([a-zA-Z0-9_]+)’ was not declared in this scope';
 
                 my $global_target;
 
@@ -179,6 +180,12 @@ while ($keep_building)
                 {
                     my $global_target = $1;
                     # printf("Reference to regular function: %s\n", $global_target);
+                    push @global_targets, $global_target;
+                }
+                elsif ($function_reference =~ $error_foo_was_not_declared_in_this_scope_regex)
+                {
+                    my $global_target = $1;
+                    # printf("Reference to undeclared token %s\n", $global_target);
                     push @global_targets, $global_target;
                 }
             }
