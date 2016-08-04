@@ -96,6 +96,7 @@ include_directories(
     external/glfw-3.2/include/
     external/glm-0.9.4.0/
     external/glew-2.0.0/include/
+    external/pugixml/src/
 
     external/gdal-2.1.1/
     external/gdal-2.1.1/alg/
@@ -664,6 +665,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/googletest/test_line2D.cpp
         code/ylikuutio/tests/googletest/test_line_line_intersection.cpp
         code/ylikuutio/tests/googletest/test_line_segment_line_segment_intersection.cpp
+        code/ylikuutio/tests/googletest/test_pugixml.cpp
         code/ylikuutio/tests/googletest/test_triangulation.cpp
         code/ylikuutio/tests/googletest/test_ylikuutio_string.cpp)
     set(MAIN_FILE code/ylikuutio/tests/googletest/main.cpp)
