@@ -137,6 +137,12 @@ while ($keep_building)
     }
     else
     {
+        if ($build_attempt_count > 1)
+        {
+            # delete the previous output file.
+            unlink($previous_output_filename);
+        }
+
         # the current output filename becomes the previous one for the next time.
         $previous_output_filename = $output_filename;
 
@@ -236,6 +242,8 @@ while ($keep_building)
                     }
                 }
             }
+
+            unlink $result_files_filename; # delete result files file.
         }
 
         # Remove duplicates of `@source_files`.
