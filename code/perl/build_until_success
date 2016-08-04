@@ -61,7 +61,6 @@ my @make_with_args;            # arguments for `system`.
 my $return_value;              # `make` return value.
 my $output_fh;                 # `make` output file handle.
 my $output_filename;           # `make` output file.
-my $output_redirection;        # `make` output redirection.
 
 my $keep_building = 1;         # 0: do not keep building, 1: keep building.
 my $build_attempt_count = 0;   # count of build attempts so far.
@@ -69,6 +68,9 @@ my $build_attempt_count = 0;   # count of build attempts so far.
 my @global_targets;
 my @source_files;
 my @duplicate_declarations;
+
+my $result_files_fh;           # `make` output file handle.
+my $result_files_filename;     # `make` output file.
 
 my $result_source_file;
 my $header_file;
@@ -80,11 +82,10 @@ while ($keep_building)
     $build_attempt_count++;
     my $timestamp_string = localtime; # get timestamp into `timestamp_array`.
 
-    (undef, $output_filename) = tempfile("make_output_build_'${build_attempt_count}_XXXXXX", OPEN => 0, UNLINK => 0, DIR => $script_dir); # generate random
-
     printf("Start of build attempt %d at %s\n", $build_attempt_count, $timestamp_string);
 
     chdir($build_dir);                # change to build directory.
+    (undef, $output_filename) = tempfile("make_output_build_'${build_attempt_count}_XXXXXX", OPEN => 0, UNLINK => 0, DIR => $script_dir); # generate random
     open($output_fh, '>', $output_filename) or die "Can't open > $output_filename: $!";
 
     # execute `make`.
@@ -97,9 +98,11 @@ while ($keep_building)
         break;
     }
 
+    close($output_fh) or warn "Error closing > $output_filename";
     open($output_fh, '<', $output_filename) or die "Can't open < $output_filename: $!";
 
-    while (my $row = <$output_fh>) {
+    while (my $row = <$output_fh>)
+    {
         chomp $row;
 
         my $undefined_reference_to_regex = ': undefined reference to `([^\']*)';
@@ -156,18 +159,38 @@ while ($keep_building)
     foreach (@filtered_and_sorted_global_targets)
     {
         # current target is in `$_`.
-        $result_source_file = `global $_ 2>&1`;
-        chomp $result_source_file;
-        printf("Target %s is located in %s\n", $_, $result_source_file);
-        push(@source_files, $result_source_file);
+        (undef, $result_files_filename) = tempfile("result_files_'${build_attempt_count}_XXXXXX", OPEN => 0, UNLINK => 0, DIR => $script_dir); # generate random
+        open($result_files_fh, '>', $result_files_filename) or die "Can't open > $result_files_filename $!";
 
-        $header_file = $result_source_file;
-        $header_file =~ s/\.(c|cpp)$/.h/g;
-        # printf("Possible header file: %s\n", $header_file);
+        # execute `global`.
+        print $result_files_fh capture_merged { system("global $_") };
 
-        if (-f $header_file)
+        if ($? == -1)
         {
-            push(@source_files, $header_file);
+            printf("Failed to execute: $!\n");
+            close($result_files_fh) or warn "Error closing > $result_files_filename";
+            break;
+        }
+
+        close($result_files_fh) or warn "Error closing > $result_files_filename";
+        open($result_files_fh, '<', $result_files_filename) or die "Can't open < $result_files_filename $!";
+
+        while (my $result_source_file = <$result_files_fh>)
+        {
+            chomp $result_source_file;
+            if ($result_source_file ne '0') # for some reason there appears filename `'0'`.
+            {
+                printf("Target %s is located in %s\n", $_, $result_source_file);
+                push(@source_files, $result_source_file);
+
+                $header_file = $result_source_file;
+                $header_file =~ s/\.(c|cpp)$/.h/g;
+
+                if (-f $header_file)
+                {
+                    push(@source_files, $header_file);
+                }
+            }
         }
     }
 
