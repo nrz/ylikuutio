@@ -1,0 +1,117 @@
+#!/usr/bin/env perl
+
+# usage:
+# build_until_success <build_dir> <CMakeLists.txt_dir>
+
+use strict;
+use warnings;
+use 5.10.1;
+
+use autodie;
+
+use Cwd;            # cwd()
+use Cwd 'abs_path'; # abs_path
+
+use File::Temp qw/tempfile/; # tempfile
+
+use Capture::Tiny 'capture_merged'; # capture_merged (to get both STDOUT and STDERR output).
+
+my $n_args = $#ARGV + 1; # number of command line argumenst.
+
+my $error_code_for_no_arguments = 1;
+my $error_code_for_only_one_argument = 2;
+my $error_code_for_more_than_two_argument = 3;
+
+if ($n_args == 0)
+{
+    printf("Error: No command line arguments given!\n");
+    printf("syntax: build_until_success <build_dir> <CMakeLists.txt_dir>\n");
+    exit($error_code_for_no_arguments);
+}
+if ($n_args == 1)
+{
+    printf("Error: Only 1 command line argument given!\n");
+    printf("syntax: build_until_success <build_dir> <CMakeLists.txt_dir>\n");
+    exit($error_code_for_only_one_argument);
+}
+if ($n_args > 2)
+{
+    printf("Error: More than 2 command line arguments given!\n");
+    printf("syntax: build_until_success <build_dir> <CMakeLists.txt_dir>\n");
+    exit($error_code_for_more_than_two_argument);
+}
+
+# OK, we have exactly 2 command line arguments.
+# The first is the build directory.
+
+my $build_dir = $ARGV[0];
+my $cmakelists_txt_dir = $ARGV[1];
+
+my ($volume, $script_dir, $file) = File::Spec->splitpath(__FILE__); # get directory of this script.
+$script_dir = File::Spec->rel2abs($script_dir);                     # convert the directory to absolute.
+
+printf("The script directory is %s\n", $script_dir);
+
+my $current_dir = cwd();       # current directory.
+printf("The current directory is %s\n", $current_dir);
+
+my @make_with_args;            # arguments for `system`.
+my $return_value;              # `make` return value.
+my $output_fh;                 # `make` output file handle.
+my $output_filename;           # `make` output file.
+my $output_redirection;        # `make` output redirection.
+
+my $keep_building = 1;         # 0: do not keep building, 1: keep building.
+my $build_attempt_count = 0;   # count of build attempts so far.
+
+(undef, $output_filename) = tempfile('tmpXXXXXX', OPEN => 0, UNLINK => 0, DIR => $script_dir); # generate random
+
+my $action; # for testing: read user input.
+
+while ($keep_building)
+{
+    $build_attempt_count++;
+    my $timestamp_string = localtime; # get timestamp into `timestamp_array`.
+
+    printf("Start of build attempt %d at %s\n", $build_attempt_count, $timestamp_string);
+
+    chdir($build_dir);                # change to build directory.
+    open($output_fh, '>', $output_filename);
+
+    # execute `make`.
+    print $output_fh capture_merged { system('make') };
+
+    if ($? == -1)
+    {
+        printf("Failed to execute: $!\n");
+        break;
+    }
+
+    $return_value = ($? >> 8); # get the exit status of the command.
+
+    if ($return_value == 0)
+    {
+        printf("Build attempt %d at %s was successful!\n", $build_attempt_count, $timestamp_string);
+        last;
+    }
+
+    while (1)  # for testing: read user input.
+    {
+        printf "break/continue: ";
+        $action = <STDIN>; # read user input.
+        chomp $action;     # get rid of newline at the end of the string.
+
+        if ($action eq "break")
+        {
+            $keep_building = 0;
+            last;
+        }
+        if ($action eq "continue")
+        {
+            last;
+        }
+    }
+}
+
+# OK, the build was successful.
+chdir($current_dir);
