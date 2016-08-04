@@ -246,6 +246,10 @@ if(ENABLE_SCRIPTING_WITH_CHIBI_SCHEME)
         )
 endif()
 
+include_directories(
+    external/pugixml/src/
+    )
+
 if(ENABLE_DOWNLOAD_LATEST_VERSIONS_OF_EXTERNAL_PROJECTS)
     if(DISABLE_UPDATE_STEP)
         # Download and install Eigen
@@ -455,6 +459,8 @@ configure_file(res/height_maps/noise256x256.bmp noise256x256.bmp COPYONLY)
 configure_file(res/height_maps/noise128x128.bmp noise128x128.bmp COPYONLY)
 configure_file(res/height_maps/S17W069.hgt S17W069.hgt COPYONLY)
 configure_file(res/fonts/kongtext/kongtext.svg kongtext.svg COPYONLY)
+configure_file(res/maps/Hofinkatu_Isafjordinkatu_Joensuu_Finland.osm Hofinkatu_Isafjordinkatu_Joensuu_Finland.osm COPYONLY)
+configure_file(res/maps/Exactum_Physicum_Helsinki_Finland.osm Exactum_Physicum_Helsinki_Finland.osm COPYONLY)
 
 # for tests.
 configure_file(res/height_maps/noise256x256.bmp noise256x256.bmp COPYONLY)
