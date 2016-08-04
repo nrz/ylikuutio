@@ -12,6 +12,8 @@ use autodie;
 use Cwd;            # cwd()
 use Cwd 'abs_path'; # abs_path
 
+use File::Copy qw(move); # copy
+
 use File::Temp qw/tempfile/; # tempfile
 
 use Capture::Tiny 'capture_merged'; # capture_merged (to get both STDOUT and STDERR output).
@@ -60,7 +62,6 @@ printf("The script directory is %s\n", $script_dir);
 my $current_dir = cwd();       # current directory.
 printf("The current directory is %s\n", $current_dir);
 
-my @make_with_args;            # arguments for `system`.
 my $return_value;              # `make` return value.
 my $output_fh;                 # `make` output file handle.
 my $output_filename;           # `make` output file.
@@ -82,6 +83,11 @@ my $action; # for testing: read user input.
 
 while ($keep_building)
 {
+    # clear arrays.
+    @global_targets = ();
+    @source_files = ();
+    @duplicate_declarations = ();
+
     $build_attempt_count++;
     my $timestamp_string = localtime; # get timestamp into `timestamp_array`.
 
@@ -217,14 +223,24 @@ while ($keep_building)
     {
         if ($_ =~ $build_until_success_source_files_end_regex)
         {
-            print $output "Build attempt " . $build_attempt_count . " at " . $timestamp_string . "\n";
-            print $output $source_files_string;
+            my $comment_char = '#';
+            my $number_of_spaces = index($_, $comment_char);
+            print $output ' ' x $number_of_spaces;
+            print $output '# Build attempt ' . $build_attempt_count . ' at ' . $timestamp_string . "\n";
+
+            for my $i (0 .. $#filtered_and_sorted_source_files)
+            {
+                print $output ' ' x $number_of_spaces;
+                print $output $filtered_and_sorted_source_files[$i] . "\n";
+            }
         }
         print $output $_;
     }
 
     close $input;
     close $output;
+
+    move($new_cmakelists_txt_filename, $cmakelists_txt_filename);
 
     while (1)  # for testing: read user input.
     {
