@@ -288,30 +288,6 @@ else()
         )
 endif()
 
-if(COMPILE_GDAL_OGR)
-    ExternalProject_Add(
-        gdal
-        URL "file://${CMAKE_SOURCE_DIR}/external/gdal-2.1.1"
-        # SOURCE_DIR "${CMAKE_SOURCE_DIR}/external/gdal-2.1.1"
-        CONFIGURE_COMMAND "${CMAKE_SOURCE_DIR}/external/gdal-2.1.1/configure"
-        PREFIX ${CMAKE_CURRENT_BINARY_DIR}/gdal
-        # Disable build step
-        BUILD_COMMAND ""
-        # Disable install step
-        INSTALL_COMMAND ""
-        # Disable update step
-        UPDATE_COMMAND ""
-        LOG_BUILD ON
-        )
-endif()
-
-include_directories(
-    external/gdal-2.1.1/ogr/
-    external/gdal-2.1.1/port/
-    external/gdal-2.1.1/gcore/
-    external/gdal-2.1.1/gcore/mdreader/
-    )
-
 # http://stackoverflow.com/questions/17446981/cmake-externalproject-add-and-findpackage/17473508#17473508
 if(NOT ${eigen_FOUND})
     # Rerun CMake in initial build.
