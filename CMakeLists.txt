@@ -424,6 +424,7 @@ set(ALL_LIBS
     ${OPENGL_LIBRARY}
     GLEW_200
     GDAL_211
+    pugixml
     )
 
 add_definitions(
