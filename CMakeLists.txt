@@ -8,9 +8,6 @@ project(ylikuutio)
 # comment the following line to disable scripting with Chibi Scheme.
 set(ENABLE_SCRIPTING_WITH_CHIBI_SCHEME true)
 
-# comment the following line to disable OpenStreetMap (OSM) PBF file loading.
-set(COMPILE_GDAL_OGR true)
-
 # uncomment the following line to do unit tests also with Catch.
 # set(DO_UNIT_TESTS_WITH_CATCH true)
 
