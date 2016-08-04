@@ -14,6 +14,8 @@ use Cwd 'abs_path'; # abs_path
 
 use File::Copy qw(move); # copy
 
+use File::Compare; # compare
+
 use File::Temp qw/tempfile/; # tempfile
 
 use Capture::Tiny 'capture_merged'; # capture_merged (to get both STDOUT and STDERR output).
@@ -65,6 +67,7 @@ printf("The current directory is %s\n", $current_dir);
 my $return_value;              # `make` return value.
 my $output_fh;                 # `make` output file handle.
 my $output_filename;           # `make` output file.
+my $previous_output_filename;  # previous `make` output file.
 
 my $keep_building = 1;         # 0: do not keep building, 1: keep building.
 my $build_attempt_count = 0;   # count of build attempts so far.
@@ -108,155 +111,171 @@ while ($keep_building)
     }
 
     close($output_fh) or warn "Error closing > $output_filename";
-    open($output_fh, '<', $output_filename) or die "Can't open < $output_filename: $!";
 
-    while (my $row = <$output_fh>)
+    # check if `make` output this time is identical to the last time.
+    if ($build_attempt_count > 1 && compare($output_filename, $previous_output_filename) == 0)
     {
-        chomp $row;
+        # the current output filename becomes the previous one for the next time.
+        $previous_output_filename = $output_filename;
 
-        my $undefined_reference_to_regex = ': undefined reference to `([^\']*)';
-        if ($row =~ $undefined_reference_to_regex)
+        while (1)  # for testing: read user input.
         {
-            # print "$row\n"; # print make output
-            my $function_reference = $1;
-            # printf("Function reference: %s\n", $function_reference);
+            printf "make output is identical to the last time! break/continue: ";
+            $action = <STDIN>; # read user input.
+            chomp $action;     # get rid of newline at the end of the string.
 
-            # attempt to find the file[s] containing the function reference.
-
-            my $class_function_regex = '([a-zA-Z0-9_]+)::(~|)[a-zA-Z0-9_]+';
-            my $regular_function_regex = '([a-zA-Z0-9_]+)\(';
-
-            my $global_target;
-
-            if ($function_reference =~ $class_function_regex)
+            if ($action eq "break")
             {
-                my $global_target = $1;
-                # printf("Reference to class: %s\n", $global_target);
-                push @global_targets, $global_target;
+                $keep_building = 0;
+                last;
             }
-            elsif ($function_reference =~ $regular_function_regex)
+            if ($action eq "continue")
             {
-                my $global_target = $1;
-                # printf("Reference to regular function: %s\n", $global_target);
-                push @global_targets, $global_target;
+                last;
             }
         }
     }
-    close($output_fh) or warn "Error closing < $output_filename";
-
-    $return_value = ($? >> 8); # get the exit status of the command.
-
-    if ($return_value == 0)
+    else
     {
-        printf("Build attempt %d at %s was successful!\n", $build_attempt_count, $timestamp_string);
-        last;
-    }
+        # the current output filename becomes the previous one for the next time.
+        $previous_output_filename = $output_filename;
 
-    # Remove duplicates of `@global_targets`.
-    my @filtered_global_targets = uniq(@global_targets);
+        # OK, this is the 1st time, or  make outputs are not identical.
 
-    # Sort `@filtered_global_targets`.
-    my @filtered_and_sorted_global_targets = sort @filtered_global_targets;
+        open($output_fh, '<', $output_filename) or die "Can't open < $output_filename: $!";
 
-    # print "Global targets in alphabetical order:\n";
-    # print join("\n", @filtered_and_sorted_global_targets) . "\n";
-
-    chdir($cmakelists_txt_dir); # change to CMakeLists.txt directory.
-
-    # Loop through `@filtered_and_sorted_global_targets` and find the file where they are located.
-
-    foreach (@filtered_and_sorted_global_targets)
-    {
-        # current target is in `$_`.
-        (undef, $result_files_filename) = tempfile("result_files_'${build_attempt_count}_XXXXXX", OPEN => 0, UNLINK => 0, DIR => $script_dir); # generate random
-        open($result_files_fh, '>', $result_files_filename) or die "Can't open > $result_files_filename $!";
-
-        # execute `global`.
-        print $result_files_fh capture_merged { system("global $_") };
-
-        if ($? == -1)
+        while (my $row = <$output_fh>)
         {
-            printf("Failed to execute: $!\n");
-            close($result_files_fh) or warn "Error closing > $result_files_filename";
-            break;
-        }
+            print $row;
+            chomp $row;
 
-        close($result_files_fh) or warn "Error closing > $result_files_filename";
-        open($result_files_fh, '<', $result_files_filename) or die "Can't open < $result_files_filename $!";
-
-        while (my $result_source_file = <$result_files_fh>)
-        {
-            chomp $result_source_file;
-            if ($result_source_file ne '0') # for some reason there appears filename `'0'`.
+            my $undefined_reference_to_regex = ': undefined reference to `([^\']*)';
+            if ($row =~ $undefined_reference_to_regex)
             {
-                printf("Target %s is located in %s\n", $_, $result_source_file);
-                push(@source_files, $result_source_file);
+                # print "$row\n"; # print make output
+                my $function_reference = $1;
+                # printf("Function reference: %s\n", $function_reference);
 
-                $header_file = $result_source_file;
-                $header_file =~ s/\.(c|cpp)$/.h/g;
+                # attempt to find the file[s] containing the function reference.
 
-                if (-f $header_file)
+                my $class_function_regex = '([a-zA-Z0-9_]+)::(~|)[a-zA-Z0-9_]+';
+                my $regular_function_regex = '([a-zA-Z0-9_]+)\(';
+
+                my $global_target;
+
+                if ($function_reference =~ $class_function_regex)
                 {
-                    push(@source_files, $header_file);
+                    my $global_target = $1;
+                    # printf("Reference to class: %s\n", $global_target);
+                    push @global_targets, $global_target;
+                }
+                elsif ($function_reference =~ $regular_function_regex)
+                {
+                    my $global_target = $1;
+                    # printf("Reference to regular function: %s\n", $global_target);
+                    push @global_targets, $global_target;
                 }
             }
         }
-    }
+        close($output_fh) or warn "Error closing < $output_filename";
 
-    # Remove duplicates of `@source_files`.
-    my @filtered_source_files = uniq(@source_files);
+        $return_value = ($? >> 8); # get the exit status of the command.
 
-    # Sort `@filtered_source_files`.
-    my @filtered_and_sorted_source_files = sort @filtered_source_files;
-
-    my $source_files_string = join("\n", @filtered_and_sorted_source_files) . "\n";
-    printf("Source files in targets in alphabetical order:\n%s\n", $source_files_string);
-
-    # Do regex replace in `CMakeLists.txt`.
-    my $cmakelists_txt_filename = 'CMakeLists.txt';
-    my $new_cmakelists_txt_filename = 'new' . $cmakelists_txt_filename;
-    my $build_until_success_source_files_end_regex = 'BUILD_UNTIL_SUCCESS_SOURCE_FILES_END';
-    open my $input, '<', $cmakelists_txt_filename or die "can't open $cmakelists_txt_filename: $!";
-    open my $output, '>', $new_cmakelists_txt_filename or die "can't open $new_cmakelists_txt_filename: $!";
-
-    while (<$input>)
-    {
-        if ($_ =~ $build_until_success_source_files_end_regex)
+        if ($return_value == 0)
         {
-            my $comment_char = '#';
-            my $number_of_spaces = index($_, $comment_char);
-            print $output ' ' x $number_of_spaces;
-            print $output '# Build attempt ' . $build_attempt_count . ' at ' . $timestamp_string . "\n";
+            printf("Build attempt %d at %s was successful!\n", $build_attempt_count, $timestamp_string);
+            last;
+        }
 
-            for my $i (0 .. $#filtered_and_sorted_source_files)
+        # Remove duplicates of `@global_targets`.
+        my @filtered_global_targets = uniq(@global_targets);
+
+        # Sort `@filtered_global_targets`.
+        my @filtered_and_sorted_global_targets = sort @filtered_global_targets;
+
+        # print "Global targets in alphabetical order:\n";
+        # print join("\n", @filtered_and_sorted_global_targets) . "\n";
+
+        chdir($cmakelists_txt_dir); # change to CMakeLists.txt directory.
+
+        # Loop through `@filtered_and_sorted_global_targets` and find the file where they are located.
+
+        foreach (@filtered_and_sorted_global_targets)
+        {
+            # current target is in `$_`.
+            (undef, $result_files_filename) = tempfile("result_files_'${build_attempt_count}_XXXXXX", OPEN => 0, UNLINK => 0, DIR => $script_dir); # generate random
+            open($result_files_fh, '>', $result_files_filename) or die "Can't open > $result_files_filename $!";
+
+            # execute `global`.
+            print $result_files_fh capture_merged { system("global $_") };
+
+            if ($? == -1)
             {
-                print $output ' ' x $number_of_spaces;
-                print $output $filtered_and_sorted_source_files[$i] . "\n";
+                printf("Failed to execute: $!\n");
+                close($result_files_fh) or warn "Error closing > $result_files_filename";
+                break;
+            }
+
+            close($result_files_fh) or warn "Error closing > $result_files_filename";
+            open($result_files_fh, '<', $result_files_filename) or die "Can't open < $result_files_filename $!";
+
+            while (my $result_source_file = <$result_files_fh>)
+            {
+                chomp $result_source_file;
+                if ($result_source_file ne '0') # for some reason there appears filename `'0'`.
+                {
+                    printf("Target %s is located in %s\n", $_, $result_source_file);
+                    push(@source_files, $result_source_file);
+
+                    $header_file = $result_source_file;
+                    $header_file =~ s/\.(c|cpp)$/.h/g;
+
+                    if (-f $header_file)
+                    {
+                        push(@source_files, $header_file);
+                    }
+                }
             }
         }
-        print $output $_;
-    }
 
-    close $input;
-    close $output;
+        # Remove duplicates of `@source_files`.
+        my @filtered_source_files = uniq(@source_files);
 
-    move($new_cmakelists_txt_filename, $cmakelists_txt_filename);
+        # Sort `@filtered_source_files`.
+        my @filtered_and_sorted_source_files = sort @filtered_source_files;
 
-    while (1)  # for testing: read user input.
-    {
-        printf "break/continue: ";
-        $action = <STDIN>; # read user input.
-        chomp $action;     # get rid of newline at the end of the string.
+        my $source_files_string = join("\n", @filtered_and_sorted_source_files) . "\n";
+        printf("Source files in targets in alphabetical order:\n%s\n", $source_files_string);
 
-        if ($action eq "break")
+        # Do regex replace in `CMakeLists.txt`.
+        my $cmakelists_txt_filename = 'CMakeLists.txt';
+        my $new_cmakelists_txt_filename = 'new' . $cmakelists_txt_filename;
+        my $build_until_success_source_files_end_regex = 'BUILD_UNTIL_SUCCESS_SOURCE_FILES_END';
+        open my $input, '<', $cmakelists_txt_filename or die "can't open $cmakelists_txt_filename: $!";
+        open my $output, '>', $new_cmakelists_txt_filename or die "can't open $new_cmakelists_txt_filename: $!";
+
+        while (<$input>)
         {
-            $keep_building = 0;
-            last;
+            if ($_ =~ $build_until_success_source_files_end_regex)
+            {
+                my $comment_char = '#';
+                my $number_of_spaces = index($_, $comment_char);
+                print $output ' ' x $number_of_spaces;
+                print $output '# Build attempt ' . $build_attempt_count . ' at ' . $timestamp_string . "\n";
+
+                for my $i (0 .. $#filtered_and_sorted_source_files)
+                {
+                    print $output ' ' x $number_of_spaces;
+                    print $output $filtered_and_sorted_source_files[$i] . "\n";
+                }
+            }
+            print $output $_;
         }
-        if ($action eq "continue")
-        {
-            last;
-        }
+
+        close $input;
+        close $output;
+
+        move($new_cmakelists_txt_filename, $cmakelists_txt_filename);
     }
 }
 
