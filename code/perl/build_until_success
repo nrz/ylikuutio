@@ -16,6 +16,8 @@ use File::Temp qw/tempfile/; # tempfile
 
 use Capture::Tiny 'capture_merged'; # capture_merged (to get both STDOUT and STDERR output).
 
+use List::MoreUtils qw(any uniq); # uniq
+
 my $n_args = $#ARGV + 1; # number of command line argumenst.
 
 my $error_code_for_no_arguments = 1;
@@ -64,7 +66,11 @@ my $output_redirection;        # `make` output redirection.
 my $keep_building = 1;         # 0: do not keep building, 1: keep building.
 my $build_attempt_count = 0;   # count of build attempts so far.
 
-(undef, $output_filename) = tempfile('tmpXXXXXX', OPEN => 0, UNLINK => 0, DIR => $script_dir); # generate random
+my @global_targets;
+my @source_files;
+my @duplicate_declarations;
+
+my $result;
 
 my $action; # for testing: read user input.
 
@@ -73,10 +79,12 @@ while ($keep_building)
     $build_attempt_count++;
     my $timestamp_string = localtime; # get timestamp into `timestamp_array`.
 
+    (undef, $output_filename) = tempfile("make_output_build_'${build_attempt_count}_XXXXXX", OPEN => 0, UNLINK => 0, DIR => $script_dir); # generate random
+
     printf("Start of build attempt %d at %s\n", $build_attempt_count, $timestamp_string);
 
     chdir($build_dir);                # change to build directory.
-    open($output_fh, '>', $output_filename);
+    open($output_fh, '>', $output_filename) or die "Can't open > $output_filename: $!";
 
     # execute `make`.
     print $output_fh capture_merged { system('make') };
@@ -84,8 +92,44 @@ while ($keep_building)
     if ($? == -1)
     {
         printf("Failed to execute: $!\n");
+        close($output_fh) or warn "Error closing > $output_filename";
         break;
     }
+
+    open($output_fh, '<', $output_filename) or die "Can't open < $output_filename: $!";
+
+    while (my $row = <$output_fh>) {
+        chomp $row;
+
+        my $undefined_reference_to_regex = ': undefined reference to `([^\']*)';
+        if ($row =~ $undefined_reference_to_regex)
+        {
+            # print "$row\n"; # print make output
+            my $function_reference = $1;
+            # printf("Function reference: %s\n", $function_reference);
+
+            # attempt to find the file[s] containing the function reference.
+
+            my $class_function_regex = '([a-zA-Z0-9_]+)::(~|)[a-zA-Z0-9_]+';
+            my $regular_function_regex = '([a-zA-Z0-9_]+)\(';
+
+            my $global_target;
+
+            if ($function_reference =~ $class_function_regex)
+            {
+                my $global_target = $1;
+                # printf("Reference to class: %s\n", $global_target);
+                push @global_targets, $global_target;
+            }
+            elsif ($function_reference =~ $regular_function_regex)
+            {
+                my $global_target = $1;
+                # printf("Reference to regular function: %s\n", $global_target);
+                push @global_targets, $global_target;
+            }
+        }
+    }
+    close($output_fh) or warn "Error closing < $output_filename";
 
     $return_value = ($? >> 8); # get the exit status of the command.
 
@@ -94,6 +138,37 @@ while ($keep_building)
         printf("Build attempt %d at %s was successful!\n", $build_attempt_count, $timestamp_string);
         last;
     }
+
+    # Remove duplicates of `@global_targets`.
+    my @filtered_global_targets = uniq(@global_targets);
+
+    # Sort `@filtered_global_targets`.
+    my @filtered_and_sorted_global_targets = sort @filtered_global_targets;
+
+    # print "Global targets in alphabetical order:\n";
+    # print join("\n", @filtered_and_sorted_global_targets) . "\n";
+
+    chdir($cmakelists_txt_dir); # change to CMakeLists.txt directory.
+
+    # Loop through `@filtered_and_sorted_global_targets` and find the file where they are located.
+
+    foreach (@filtered_and_sorted_global_targets)
+    {
+        # current target is in `$_`.
+        $result = `global $_ 2>&1`;
+        chomp $result;
+        printf("Target %s is located in %s\n", $_, $result);
+        push(@source_files, $result);
+    }
+
+    # Remove duplicates of `@source_files`.
+    my @filtered_source_files = uniq(@source_files);
+
+    # Sort `@filtered_source_files`.
+    my @filtered_and_sorted_source_files = sort @filtered_source_files;
+
+    print "Source files in targets in alphabetical order:\n";
+    print join("\n", @filtered_and_sorted_source_files) . "\n";
 
     while (1)  # for testing: read user input.
     {
