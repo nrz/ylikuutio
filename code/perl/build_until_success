@@ -47,7 +47,10 @@ if ($n_args > 2)
 # The first is the build directory.
 
 my $build_dir = $ARGV[0];
+$build_dir = File::Spec->rel2abs($build_dir);                       # convert the directory to absolute.
+
 my $cmakelists_txt_dir = $ARGV[1];
+$cmakelists_txt_dir = File::Spec->rel2abs($cmakelists_txt_dir);     # convert the directory to absolute.
 
 my ($volume, $script_dir, $file) = File::Spec->splitpath(__FILE__); # get directory of this script.
 $script_dir = File::Spec->rel2abs($script_dir);                     # convert the directory to absolute.
@@ -200,8 +203,28 @@ while ($keep_building)
     # Sort `@filtered_source_files`.
     my @filtered_and_sorted_source_files = sort @filtered_source_files;
 
-    print "Source files in targets in alphabetical order:\n";
-    print join("\n", @filtered_and_sorted_source_files) . "\n";
+    my $source_files_string = join("\n", @filtered_and_sorted_source_files) . "\n";
+    printf("Source files in targets in alphabetical order:\n%s\n", $source_files_string);
+
+    # Do regex replace in `CMakeLists.txt`.
+    my $cmakelists_txt_filename = 'CMakeLists.txt';
+    my $new_cmakelists_txt_filename = 'new' . $cmakelists_txt_filename;
+    my $build_until_success_source_files_end_regex = 'BUILD_UNTIL_SUCCESS_SOURCE_FILES_END';
+    open my $input, '<', $cmakelists_txt_filename or die "can't open $cmakelists_txt_filename: $!";
+    open my $output, '>', $new_cmakelists_txt_filename or die "can't open $new_cmakelists_txt_filename: $!";
+
+    while (<$input>)
+    {
+        if ($_ =~ $build_until_success_source_files_end_regex)
+        {
+            print $output "Build attempt " . $build_attempt_count . " at " . $timestamp_string . "\n";
+            print $output $source_files_string;
+        }
+        print $output $_;
+    }
+
+    close $input;
+    close $output;
 
     while (1)  # for testing: read user input.
     {
