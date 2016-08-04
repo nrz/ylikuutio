@@ -799,8 +799,17 @@ set(GDAL_211_SOURCE
 include_directories(
     .
     alg/
+    alg/libqhull/
     apps/
-    apps/
+    bridge/
+    data/
+    doc/
+    doc/br/
+    doc/grid/
+    doc/grid/src/
+    doc/images/
+    doc/ogr/
+    doc/ru/
     frmts/
     frmts/aaigrid/
     frmts/adrg/
@@ -809,6 +818,7 @@ include_directories(
     frmts/arg/
     frmts/blx/
     frmts/bmp/
+    frmts/bpg/
     frmts/bsb/
     frmts/cals/
     frmts/ceos/
@@ -816,21 +826,37 @@ include_directories(
     frmts/coasp/
     frmts/cosar/
     frmts/ctg/
+    frmts/dds/
     frmts/dimap/
+    frmts/dods/
     frmts/dted/
     frmts/e00grid/
+    frmts/ecw/
     frmts/elas/
     frmts/envisat/
+    frmts/epsilon/
     frmts/ers/
     frmts/fit/
+    frmts/fits/
+    frmts/georaster/
     frmts/gff/
     frmts/gif/
+    frmts/gif/giflib/
+    frmts/grass/
+    frmts/grass/pkg/
     frmts/grib/
+    frmts/grib/degrib18/
+    frmts/grib/degrib18/degrib/
+    frmts/grib/degrib18/g2clib-1.0.4/
     frmts/gsg/
+    frmts/gta/
     frmts/gtiff/
     frmts/gtiff/libgeotiff/
     frmts/gtiff/libtiff/
     frmts/gxf/
+    frmts/hdf4/
+    frmts/hdf4/hdf-eos/
+    frmts/hdf5/
     frmts/hf2/
     frmts/hfa/
     frmts/idrisi/
@@ -840,33 +866,59 @@ include_directories(
     frmts/iso8211/
     frmts/jaxapalsar/
     frmts/jdem/
+    frmts/jp2kak/
     frmts/jpeg/
-    frmts/jpeg/
-    frmts/jpeg/
+    frmts/jpeg2000/
+    frmts/jpeg/libjpeg/
+    frmts/jpeg/libjpeg12/
+    frmts/jpegls/
+    frmts/jpipkak/
+    frmts/kea/
     frmts/kmlsuperoverlay/
     frmts/l1b/
     frmts/leveller/
     frmts/map/
+    frmts/mbtiles/
     frmts/mem/
     frmts/mrf/
     frmts/mrf/libLERC/
+    frmts/mrsid/
+    frmts/mrsid_lidar/
+    frmts/msg/
     frmts/msgn/
+    frmts/netcdf/
     frmts/ngsgeoid/
     frmts/nitf/
     frmts/northwood/
+    frmts/o/
+    frmts/ogdi/
+    frmts/o/.libs/
+    frmts/openjpeg/
     frmts/ozi/
     frmts/pcidsk/
+    frmts/pcidsk/sdk/
+    frmts/pcidsk/sdk/channel/
+    frmts/pcidsk/sdk/core/
+    frmts/pcidsk/sdk/port/
+    frmts/pcidsk/sdk/segment/
     frmts/pcraster/
+    frmts/pcraster/libcsf/
     frmts/pdf/
     frmts/pds/
+    frmts/plmosaic/
     frmts/png/
+    frmts/png/libpng/
+    frmts/postgisraster/
     frmts/r/
+    frmts/rasdaman/
+    frmts/rasterlite/
     frmts/raw/
     frmts/rik/
     frmts/rmf/
     frmts/rs2/
     frmts/safe/
     frmts/saga/
+    frmts/sde/
     frmts/sdts/
     frmts/sentinel2/
     frmts/sgi/
@@ -876,66 +928,159 @@ include_directories(
     frmts/tsx/
     frmts/usgsdem/
     frmts/vrt/
+    frmts/wcs/
+    frmts/webp/
+    frmts/wms/
+    frmts/wmts/
     frmts/xpm/
     frmts/xyz/
     frmts/zlib/
     frmts/zmap/
     gcore/
     gcore/mdreader/
+    gnm/
+    gnm/gnm_frmts/
+    gnm/gnm_frmts/db/
+    gnm/gnm_frmts/file/
+    gnm/gnm_frmts/o/
+    html/
+    m4/
+    man/
+    man/man1/
     ogr/
     ogr/ogrsf_frmts/
     ogr/ogrsf_frmts/aeronavfaa/
+    ogr/ogrsf_frmts/amigocloud/
+    ogr/ogrsf_frmts/amigocloud/pkg/
     ogr/ogrsf_frmts/arcgen/
+    ogr/ogrsf_frmts/arcobjects/
     ogr/ogrsf_frmts/avc/
     ogr/ogrsf_frmts/bna/
+    ogr/ogrsf_frmts/cartodb/
+    ogr/ogrsf_frmts/cloudant/
+    ogr/ogrsf_frmts/couchdb/
     ogr/ogrsf_frmts/csv/
+    ogr/ogrsf_frmts/csw/
+    ogr/ogrsf_frmts/db2/
     ogr/ogrsf_frmts/dgn/
+    ogr/ogrsf_frmts/dgn/dist/
+    ogr/ogrsf_frmts/dgn/web/
+    ogr/ogrsf_frmts/dods/
+    ogr/ogrsf_frmts/dwg/
     ogr/ogrsf_frmts/dxf/
     ogr/ogrsf_frmts/edigeo/
+    ogr/ogrsf_frmts/elastic/
+    ogr/ogrsf_frmts/filegdb/
+    ogr/ogrsf_frmts/fme/
     ogr/ogrsf_frmts/generic/
     ogr/ogrsf_frmts/geoconcept/
     ogr/ogrsf_frmts/geojson/
     ogr/ogrsf_frmts/geojson/libjson/
+    ogr/ogrsf_frmts/geomedia/
     ogr/ogrsf_frmts/georss/
+    ogr/ogrsf_frmts/gft/
     ogr/ogrsf_frmts/gml/
     ogr/ogrsf_frmts/gmt/
+    ogr/ogrsf_frmts/gpkg/
     ogr/ogrsf_frmts/gpsbabel/
     ogr/ogrsf_frmts/gpx/
+    ogr/ogrsf_frmts/grass/
     ogr/ogrsf_frmts/gtm/
     ogr/ogrsf_frmts/htf/
+    ogr/ogrsf_frmts/idb/
     ogr/ogrsf_frmts/idrisi/
+    ogr/ogrsf_frmts/ili/
+    ogr/ogrsf_frmts/ingres/
     ogr/ogrsf_frmts/jml/
     ogr/ogrsf_frmts/kml/
+    ogr/ogrsf_frmts/libkml/
+    ogr/ogrsf_frmts/mdb/
     ogr/ogrsf_frmts/mem/
     ogr/ogrsf_frmts/mitab/
+    ogr/ogrsf_frmts/mongodb/
+    ogr/ogrsf_frmts/mssqlspatial/
+    ogr/ogrsf_frmts/mysql/
+    ogr/ogrsf_frmts/nas/
     ogr/ogrsf_frmts/ntf/
+    ogr/ogrsf_frmts/null/
+    ogr/ogrsf_frmts/o/
+    ogr/ogrsf_frmts/oci/
+    ogr/ogrsf_frmts/odbc/
+    ogr/ogrsf_frmts/ods/
+    ogr/ogrsf_frmts/ogdi/
     ogr/ogrsf_frmts/openair/
     ogr/ogrsf_frmts/openfilegdb/
+    ogr/ogrsf_frmts/osm/
     ogr/ogrsf_frmts/pds/
+    ogr/ogrsf_frmts/pg/
     ogr/ogrsf_frmts/pgdump/
+    ogr/ogrsf_frmts/pgeo/
+    ogr/ogrsf_frmts/plscenes/
     ogr/ogrsf_frmts/rec/
     ogr/ogrsf_frmts/s57/
+    ogr/ogrsf_frmts/sde/
     ogr/ogrsf_frmts/sdts/
     ogr/ogrsf_frmts/segukooa/
     ogr/ogrsf_frmts/segy/
     ogr/ogrsf_frmts/selafin/
     ogr/ogrsf_frmts/shape/
+    ogr/ogrsf_frmts/sosi/
+    ogr/ogrsf_frmts/sosi/tools/
+    ogr/ogrsf_frmts/sqlite/
     ogr/ogrsf_frmts/sua/
     ogr/ogrsf_frmts/svg/
     ogr/ogrsf_frmts/sxf/
     ogr/ogrsf_frmts/tiger/
     ogr/ogrsf_frmts/vdv/
+    ogr/ogrsf_frmts/vfk/
     ogr/ogrsf_frmts/vrt/
+    ogr/ogrsf_frmts/walk/
     ogr/ogrsf_frmts/wasp/
+    ogr/ogrsf_frmts/wfs/
+    ogr/ogrsf_frmts/xls/
+    ogr/ogrsf_frmts/xlsx/
     ogr/ogrsf_frmts/xplane/
     port/
-
-    # manually added due to builds failed due to missing files.
-    frmts/jpeg/libjpeg/
-    frmts/png/libpng/
-    frmts/gif/giflib/
-    frmts/pcraster/libcsf/
-    frmts/pcidsk/sdk/
+    scripts/
+    scripts/vagrant/
+    scripts/vce2008_wine/
+    swig/
+    swig/csharp/
+    swig/csharp/apps/
+    swig/csharp/const/
+    swig/csharp/gdal/
+    swig/csharp/ogr/
+    swig/csharp/osr/
+    swig/include/
+    swig/include/csharp/
+    swig/include/java/
+    swig/include/perl/
+    swig/include/php/
+    swig/include/python/
+    swig/include/python/docs/
+    swig/include/ruby/
+    swig/java/
+    swig/java/apps/
+    swig/java/const/
+    swig/java/gdal/
+    swig/java/gnm/
+    swig/java/ogr/
+    swig/java/osr/
+    swig/java/test_data/
+    swig/perl/
+    swig/perl/lib/
+    swig/perl/lib/Geo/
+    swig/perl/lib/Geo/GDAL/
+    swig/perl/t/
+    swig/php/
+    swig/python/
+    swig/python/extensions/
+    swig/python/osgeo/
+    swig/python/samples/
+    swig/python/scripts/
+    swig/ruby/
+    vb6/
+    vb6/test/
     )
 
 add_library(GDAL_211 STATIC
