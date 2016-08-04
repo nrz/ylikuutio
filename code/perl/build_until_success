@@ -70,7 +70,8 @@ my @global_targets;
 my @source_files;
 my @duplicate_declarations;
 
-my $result;
+my $result_source_file;
+my $header_file;
 
 my $action; # for testing: read user input.
 
@@ -155,10 +156,19 @@ while ($keep_building)
     foreach (@filtered_and_sorted_global_targets)
     {
         # current target is in `$_`.
-        $result = `global $_ 2>&1`;
-        chomp $result;
-        printf("Target %s is located in %s\n", $_, $result);
-        push(@source_files, $result);
+        $result_source_file = `global $_ 2>&1`;
+        chomp $result_source_file;
+        printf("Target %s is located in %s\n", $_, $result_source_file);
+        push(@source_files, $result_source_file);
+
+        $header_file = $result_source_file;
+        $header_file =~ s/\.(c|cpp)$/.h/g;
+        # printf("Possible header file: %s\n", $header_file);
+
+        if (-f $header_file)
+        {
+            push(@source_files, $header_file);
+        }
     }
 
     # Remove duplicates of `@source_files`.
