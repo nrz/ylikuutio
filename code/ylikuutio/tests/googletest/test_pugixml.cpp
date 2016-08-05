@@ -47,5 +47,5 @@ TEST(xml_must_be_loaded_as_expected, hofinkatu_and_isafjordinkatu)
     }
 
     std::cout << "Number of buildings: " << n_buildings << "\n";
-    ASSERT_EQ(n_buildings, 80);
+    ASSERT_EQ(n_buildings, 85);
 }
