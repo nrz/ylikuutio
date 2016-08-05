@@ -5,6 +5,7 @@
 #include "pugixml.cpp"
 
 // Include standard headers
+#include <cstring>  // std::memcmp, std::strcmp, std::strlen, std::strncmp
 #include <iostream> // std::cout, std::cin, std::cerr
 
 TEST(xml_must_be_loaded_as_expected, exactum_and_physicum)
@@ -24,6 +25,12 @@ TEST(xml_must_be_loaded_as_expected, exactum_and_physicum)
 
     std::cout << "Number of restaurants: " << n_restaurants << "\n";
     ASSERT_EQ(n_restaurants, 2);
+
+    pugi::xpath_node exactum_tag = doc.select_node("/osm/way/tag[@k='name' and @v='Exactum']");
+    ASSERT_TRUE(exactum_tag != nullptr);
+    pugi::xml_node exactum_way = exactum_tag.parent();
+    ASSERT_TRUE(exactum_way != nullptr);
+    ASSERT_EQ(strcmp(exactum_way.attribute("id").value(), "16790295"), 0);
 }
 TEST(xml_must_be_loaded_as_expected, hofinkatu_and_isafjordinkatu)
 {
