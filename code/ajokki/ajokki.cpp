@@ -103,7 +103,8 @@ int main(void)
         // position = glm::vec3(100.0f, 5000.0f + EARTH_RADIUS, 100.0f);
         // position = glm::vec3(100.0f, 5000.0f, 100.0f);
         // position = glm::vec3(-5658223.00f, -1700825.12f, 2322764.00f);
-        position = glm::vec3(-5659377.50f, -1696985.38f, 2358353.25f);
+        // position = glm::vec3(-5659377.50f, -1696985.38f, 2358353.25f);
+        position = glm::vec3(-8990.35f, -2710.92f, 3527.29f);
     }
     else
     {

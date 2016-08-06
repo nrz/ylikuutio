@@ -51,7 +51,8 @@
 #endif
 
 #ifndef EARTH_RADIUS
-#define EARTH_RADIUS 6371000.0f
+// #define EARTH_RADIUS 6371000.0f // in metres
+#define EARTH_RADIUS 6371.0f // in kilometres
 #endif
 
 namespace ontology
