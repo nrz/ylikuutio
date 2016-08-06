@@ -4,12 +4,28 @@
 #include "indexing.hpp"
 
 // for bilinear interpolation, southeast-northwest edges, and southwest-northeast edges.
-#define SOUTHWEST (current_vertex_i - image_width - 1)
-#define SOUTHEAST (current_vertex_i - image_width)
-#define NORTHWEST (current_vertex_i - 1)
-#define NORTHEAST (current_vertex_i)
+inline GLuint southwest(uint32_t current_vertex_i, uint32_t image_width)
+{
+    return current_vertex_i - image_width - 1;
+}
+inline GLuint southeast(uint32_t current_vertex_i, uint32_t image_width)
+{
+    return current_vertex_i - image_width;
+}
+inline GLuint northwest(uint32_t current_vertex_i, uint32_t image_width)
+{
+    return current_vertex_i - 1;
+}
+inline GLuint northeast(uint32_t current_vertex_i, uint32_t image_width)
+{
+    return current_vertex_i;
+}
+
 // for bilinear interpolation.
-#define CENTER (current_interpolated_vertex_i)
+inline GLuint center(uint32_t current_interpolated_vertex_i)
+{
+    return current_interpolated_vertex_i;
+}
 
 // for bilinear interpolation.
 #define SOUTHWEST_Y (geometry::get_y(input_vertex_pointer, x - 1, z - 1, image_width))
