@@ -262,7 +262,6 @@ if(ENABLE_DOWNLOAD_LATEST_VERSIONS_OF_EXTERNAL_PROJECTS)
             # Disable update step
             UPDATE_COMMAND ""
             LOG_DOWNLOAD ON
-            LOG_DOWNLOAD ON
             LOG_BUILD ON
             )
     else()
@@ -273,7 +272,6 @@ if(ENABLE_DOWNLOAD_LATEST_VERSIONS_OF_EXTERNAL_PROJECTS)
             PREFIX ${CMAKE_CURRENT_BINARY_DIR}/eigen
             # Disable install step
             INSTALL_COMMAND ""
-            LOG_DOWNLOAD ON
             LOG_DOWNLOAD ON
             LOG_BUILD ON
             )
@@ -325,7 +323,6 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
             # Disable update step
             UPDATE_COMMAND ""
             LOG_DOWNLOAD ON
-            LOG_DOWNLOAD ON
             LOG_BUILD ON
             )
     else()
@@ -336,7 +333,6 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
             PREFIX ${CMAKE_CURRENT_BINARY_DIR}/gtest
             # Disable install step
             INSTALL_COMMAND ""
-            LOG_DOWNLOAD ON
             LOG_DOWNLOAD ON
             LOG_BUILD ON
             )
@@ -381,7 +377,6 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
             # Disable update step
             UPDATE_COMMAND ""
             LOG_DOWNLOAD ON
-            LOG_DOWNLOAD ON
             LOG_BUILD ON
             )
     else()
@@ -392,7 +387,6 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
             PREFIX ${CMAKE_CURRENT_BINARY_DIR}/gmock
             # Disable install step
             INSTALL_COMMAND ""
-            LOG_DOWNLOAD ON
             LOG_DOWNLOAD ON
             LOG_BUILD ON
             )
