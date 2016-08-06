@@ -583,6 +583,7 @@ add_library(ylikuutio
     code/ylikuutio/string/ylikuutio_string.cpp
     code/ylikuutio/string/ylikuutio_string.hpp
     )
+add_dependencies(ylikuutio rescan)
 
 # Ajokki
 add_executable(ajokki
