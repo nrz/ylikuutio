@@ -42,7 +42,6 @@ TEST(a_2x2_world_must_be_triangulated_appropriately, bilinear_interpolation)
     std::vector<glm::vec3> normals;  // normals of the object.
 
     TriangulateQuadsStruct triangulate_quads_struct;
-    triangulate_quads_struct.input_vertex_pointer = vertex_data;
     triangulate_quads_struct.image_width = image_width;
     triangulate_quads_struct.image_height = image_height;
     triangulate_quads_struct.sphere_radius = NAN;
@@ -50,7 +49,7 @@ TEST(a_2x2_world_must_be_triangulated_appropriately, bilinear_interpolation)
 
     triangulate_quads_struct.triangulation_type = "bilinear_interpolation";
 
-    bool is_success = geometry::triangulate_quads(triangulate_quads_struct, vertices, UVs, normals);
+    bool is_success = geometry::triangulate_quads(vertex_data, triangulate_quads_struct, vertices, UVs, normals);
     ASSERT_TRUE(is_success);
     ASSERT_EQ(vertices.size(), 12);
     ASSERT_EQ(UVs.size(), 12);
@@ -147,7 +146,6 @@ TEST(a_2x2_world_must_be_triangulated_appropriately, southeast_northwest_edges)
     std::vector<glm::vec3> normals;  // normals of the object.
 
     TriangulateQuadsStruct triangulate_quads_struct;
-    triangulate_quads_struct.input_vertex_pointer = vertex_data;
     triangulate_quads_struct.image_width = image_width;
     triangulate_quads_struct.image_height = image_height;
     triangulate_quads_struct.sphere_radius = NAN;
@@ -155,7 +153,7 @@ TEST(a_2x2_world_must_be_triangulated_appropriately, southeast_northwest_edges)
 
     triangulate_quads_struct.triangulation_type = "southeast_northwest_edges";
 
-    bool is_success = geometry::triangulate_quads(triangulate_quads_struct, vertices, UVs, normals);
+    bool is_success = geometry::triangulate_quads(vertex_data, triangulate_quads_struct, vertices, UVs, normals);
     ASSERT_TRUE(is_success);
     ASSERT_EQ(vertices.size(), 6);
     ASSERT_EQ(UVs.size(), 6);

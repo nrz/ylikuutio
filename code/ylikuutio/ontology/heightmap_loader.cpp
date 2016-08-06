@@ -163,14 +163,13 @@ namespace ontology
         std::cout << "color channel in use: " << color_channel << "\n";
 
         TriangulateQuadsStruct triangulate_quads_struct;
-        triangulate_quads_struct.input_vertex_pointer = vertex_data;
         triangulate_quads_struct.image_width = image_width;
         triangulate_quads_struct.image_height = image_height;
         triangulate_quads_struct.triangulation_type = triangulation_type;
         triangulate_quads_struct.sphere_radius = NAN;
         triangulate_quads_struct.spherical_world_struct = SphericalWorldStruct(); // not used, but is needed in the function call.
 
-        return geometry::triangulate_quads(triangulate_quads_struct, out_vertices, out_UVs, out_normals);
+        return geometry::triangulate_quads(vertex_data, triangulate_quads_struct, out_vertices, out_UVs, out_normals);
     }
 
     bool load_SRTM_world(
@@ -304,13 +303,12 @@ namespace ontology
         spherical_world_struct.eastern_longitude = eastern_longitude; // must be double, though SRTM data is split between full degrees.
 
         TriangulateQuadsStruct triangulate_quads_struct;
-        triangulate_quads_struct.input_vertex_pointer = vertex_data;
         triangulate_quads_struct.image_width = image_width_in_use;
         triangulate_quads_struct.image_height = image_height_in_use;
         triangulate_quads_struct.triangulation_type = triangulation_type;
         triangulate_quads_struct.sphere_radius = EARTH_RADIUS;
         triangulate_quads_struct.spherical_world_struct = spherical_world_struct;
 
-        return geometry::triangulate_quads(triangulate_quads_struct, out_vertices, out_UVs, out_normals);
+        return geometry::triangulate_quads(vertex_data, triangulate_quads_struct, out_vertices, out_UVs, out_normals);
     }
 }

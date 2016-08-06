@@ -103,12 +103,12 @@ namespace geometry
     }
 
     bool triangulate_quads(
+            GLuint* input_vertex_pointer,
             TriangulateQuadsStruct triangulate_quads_struct,
             std::vector<glm::vec3>& out_vertices,
             std::vector<glm::vec2>& out_UVs,
             std::vector<glm::vec3>& out_normals)
     {
-        GLuint* input_vertex_pointer = triangulate_quads_struct.input_vertex_pointer;
         uint32_t image_width = triangulate_quads_struct.image_width;
         uint32_t image_height = triangulate_quads_struct.image_height;
         std::string triangulation_type = triangulate_quads_struct.triangulation_type;
