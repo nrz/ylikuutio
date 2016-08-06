@@ -98,6 +98,8 @@ int main(void)
     // position = glm::vec3(100.0f, 5000.0f, 100.0f);
     if (testing_spherical_world_in_use)
     {
+        is_flight_mode_in_use = true;
+
         // position = glm::vec3(100.0f, 5000.0f + EARTH_RADIUS, 100.0f);
         // position = glm::vec3(100.0f, 5000.0f, 100.0f);
         // position = glm::vec3(-5658223.00f, -1700825.12f, 2322764.00f);
