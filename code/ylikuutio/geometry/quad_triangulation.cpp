@@ -103,7 +103,7 @@ namespace geometry
     }
 
     bool triangulate_quads(
-            GLuint* input_vertex_pointer,
+            uint32_t* input_vertex_pointer,
             TriangulateQuadsStruct triangulate_quads_struct,
             std::vector<glm::vec3>& out_vertices,
             std::vector<glm::vec2>& out_UVs,
