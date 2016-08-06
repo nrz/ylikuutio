@@ -466,8 +466,8 @@ configure_file(res/maps/Exactum_Physicum_Helsinki_Finland.osm Exactum_Physicum_H
 configure_file(res/height_maps/noise256x256.bmp noise256x256.bmp COPYONLY)
 configure_file(res/textures/test3x3.bmp test3x3.bmp COPYONLY)
 
-# Ajokki
-add_executable(ajokki
+# Ylikuutio
+add_library(ylikuutio
     # callback_system, in alphabetical order
     code/ylikuutio/callback_system/callback_engine.cpp
     code/ylikuutio/callback_system/callback_engine.hpp
@@ -588,14 +588,17 @@ add_executable(ajokki
     # string, in alphabetical order
     code/ylikuutio/string/ylikuutio_string.cpp
     code/ylikuutio/string/ylikuutio_string.hpp
+    )
 
+# Ajokki
+add_executable(ajokki
     # ajokki, in alphabetical order
     code/ajokki/ajokki.cpp
     code/ajokki/ajokki_callbacks.cpp
     code/ajokki/ajokki_callbacks.hpp
     )
 add_dependencies(ajokki rescan)
-target_link_libraries(ajokki ${ALL_LIBS} glfw)
+target_link_libraries(ajokki ylikuutio ${ALL_LIBS} glfw)
 if(${eigen_FOUND})
     # target_link_libraries(ajokki ${eigen_LIBRARY})
     target_link_libraries(ajokki ${ALL_LIBS})
