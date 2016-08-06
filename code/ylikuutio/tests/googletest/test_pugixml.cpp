@@ -48,4 +48,10 @@ TEST(xml_must_be_loaded_as_expected, hofinkatu_and_isafjordinkatu)
 
     std::cout << "Number of buildings: " << n_buildings << "\n";
     ASSERT_EQ(n_buildings, 85);
+
+    pugi::xpath_node playground_tag = doc.select_node("/osm/way/tag[@k='leisure' and @v='playground']");
+    ASSERT_TRUE(playground_tag != nullptr);
+    pugi::xml_node playground_way = playground_tag.parent();
+    ASSERT_TRUE(playground_way != nullptr);
+    ASSERT_EQ(strcmp(playground_way.attribute("id").value(), "435869079"), 0);
 }
