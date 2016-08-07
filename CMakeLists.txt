@@ -16,6 +16,7 @@ set(DO_UNIT_TESTS_WITH_GOOGLE_TEST true)
 
 # uncomment the following line to download the latest versions of external projects
 # instead of using the versions carried in Ylikuutio repository (in `external/`).
+# at the moment this affects only Eigen, not Google Test & Google Mock.
 # set(ENABLE_DOWNLOAD_LATEST_VERSIONS_OF_EXTERNAL_PROJECTS)
 
 # uncomment the following line to disable updating of external projects.
