@@ -5,6 +5,7 @@
 
 #include "quad_triangulation.hpp"
 #include "triangulation_macros.cpp"
+#include "triangulation_macros.hpp"
 #include "transformation.hpp"
 #include "bilinear_interpolation.hpp"
 
@@ -275,9 +276,9 @@ namespace geometry
                         }
                         else
                         {
-                            uvIndex[0] = SOUTHWEST_Y;
-                            uvIndex[1] = NORTHEAST_Y;
-                            uvIndex[2] = SOUTHEAST_Y;
+                            uvIndex[0] = southwest_y(x, z, input_vertex_pointer, image_width);
+                            uvIndex[1] = northeast_y(x, z, input_vertex_pointer, image_width);
+                            uvIndex[2] = southeast_y(x, z, input_vertex_pointer, image_width);
                         }
                     }
                     else if (is_southeast_northwest_edges_in_use)
@@ -308,9 +309,9 @@ namespace geometry
                         }
                         else
                         {
-                            uvIndex[0] = SOUTHEAST_Y;
-                            uvIndex[1] = SOUTHWEST_Y;
-                            uvIndex[2] = NORTHWEST_Y;
+                            uvIndex[0] = southeast_y(x, z, input_vertex_pointer, image_width);
+                            uvIndex[1] = southwest_y(x, z, input_vertex_pointer, image_width);
+                            uvIndex[2] = northwest_y(x, z, input_vertex_pointer, image_width);
 
                         }
                     }
@@ -338,9 +339,9 @@ namespace geometry
                         }
                         else
                         {
-                            uvIndex[0] = SOUTHWEST_Y;
-                            uvIndex[1] = NORTHWEST_Y;
-                            uvIndex[2] = NORTHEAST_Y;
+                            uvIndex[0] = southwest_y(x, z, input_vertex_pointer, image_width);
+                            uvIndex[1] = northwest_y(x, z, input_vertex_pointer, image_width);
+                            uvIndex[2] = northeast_y(x, z, input_vertex_pointer, image_width);
                         }
                     }
                     else if (is_southeast_northwest_edges_in_use)
@@ -362,9 +363,9 @@ namespace geometry
                         }
                         else
                         {
-                            uvIndex[0] = SOUTHEAST_Y;
-                            uvIndex[1] = NORTHWEST_Y;
-                            uvIndex[2] = NORTHEAST_Y;
+                            uvIndex[0] = southeast_y(x, z, input_vertex_pointer, image_width);
+                            uvIndex[1] = northwest_y(x, z, input_vertex_pointer, image_width);
+                            uvIndex[2] = northeast_y(x, z, input_vertex_pointer, image_width);
                         }
                     }
 
@@ -714,9 +715,9 @@ namespace geometry
                     }
                     else
                     {
-                        uvIndex[0] = CENTER_Y;
-                        uvIndex[1] = SOUTHEAST_Y;
-                        uvIndex[2] = SOUTHWEST_Y;
+                        uvIndex[0] = center_y(x, z, input_vertex_pointer, image_width);
+                        uvIndex[1] = southeast_y(x, z, input_vertex_pointer, image_width);
+                        uvIndex[2] = southwest_y(x, z, input_vertex_pointer, image_width);
                     }
 
                     normalIndex[0] = 0; // TODO: add proper normal index.
@@ -749,9 +750,9 @@ namespace geometry
                     }
                     else
                     {
-                        uvIndex[0] = CENTER_Y;
-                        uvIndex[1] = SOUTHWEST_Y;
-                        uvIndex[2] = NORTHWEST_Y;
+                        uvIndex[0] = center_y(x, z, input_vertex_pointer, image_width);
+                        uvIndex[1] = southwest_y(x, z, input_vertex_pointer, image_width);
+                        uvIndex[2] = northwest_y(x, z, input_vertex_pointer, image_width);
                     }
 
                     normalIndex[0] = 0; // TODO: add proper normal index.
@@ -784,9 +785,9 @@ namespace geometry
                     }
                     else
                     {
-                        uvIndex[0] = CENTER_Y;
-                        uvIndex[1] = NORTHWEST_Y;
-                        uvIndex[2] = NORTHEAST_Y;
+                        uvIndex[0] = center_y(x, z, input_vertex_pointer, image_width);
+                        uvIndex[1] = northwest_y(x, z, input_vertex_pointer, image_width);
+                        uvIndex[2] = northeast_y(x, z, input_vertex_pointer, image_width);
                     }
 
                     normalIndex[0] = 0; // TODO: add proper normal index.
@@ -819,9 +820,9 @@ namespace geometry
                     }
                     else
                     {
-                        uvIndex[0] = CENTER_Y;
-                        uvIndex[1] = NORTHEAST_Y;
-                        uvIndex[2] = SOUTHEAST_Y;
+                        uvIndex[0] = center_y(x, z, input_vertex_pointer, image_width);
+                        uvIndex[1] = northeast_y(x, z, input_vertex_pointer, image_width);
+                        uvIndex[2] = southeast_y(x, z, input_vertex_pointer, image_width);
                     }
 
                     normalIndex[0] = 0; // TODO: add proper normal index.
@@ -884,9 +885,9 @@ namespace geometry
                     }
                     else
                     {
-                        uvIndex[0] = SOUTHWEST_Y;
-                        uvIndex[1] = NORTHWEST_Y;
-                        uvIndex[2] = SOUTHEAST_Y;
+                        uvIndex[0] = southwest_y(x, z, input_vertex_pointer, image_width);
+                        uvIndex[1] = northwest_y(x, z, input_vertex_pointer, image_width);
+                        uvIndex[2] = southeast_y(x, z, input_vertex_pointer, image_width);
                     }
 
                     normalIndex[0] = 0; // TODO: add proper normal index.
@@ -919,9 +920,9 @@ namespace geometry
                     }
                     else
                     {
-                        uvIndex[0] = NORTHEAST_Y;
-                        uvIndex[1] = SOUTHEAST_Y;
-                        uvIndex[2] = NORTHWEST_Y;
+                        uvIndex[0] = northeast_y(x, z, input_vertex_pointer, image_width);
+                        uvIndex[1] = southeast_y(x, z, input_vertex_pointer, image_width);
+                        uvIndex[2] = northwest_y(x, z, input_vertex_pointer, image_width);
                     }
 
                     normalIndex[0] = 0; // TODO: add proper normal index.

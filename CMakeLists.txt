@@ -519,6 +519,7 @@ add_library(ylikuutio
     code/ylikuutio/geometry/triangle.cpp
     code/ylikuutio/geometry/triangle.hpp
     code/ylikuutio/geometry/triangulation_macros.cpp
+    code/ylikuutio/geometry/triangulation_macros.hpp
 
     # graph, in alphabetical order.
     code/ylikuutio/graph/graph.cpp

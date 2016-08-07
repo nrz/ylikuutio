@@ -31,11 +31,6 @@ namespace geometry
             uint32_t z,
             BilinearDirections compass_point_code,
             uint32_t image_width);
-
-    void interpolate_vertices_using_bilinear_interpolation(
-            BilinearInterpolationStruct bilinear_interpolation_struct,
-            std::vector<glm::vec3>& temp_vertices,
-            std::vector<glm::vec2>& temp_UVs);
 }
 
 #endif
