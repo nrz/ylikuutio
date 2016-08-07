@@ -6,7 +6,6 @@
 #include "quad_triangulation.hpp"
 #include "triangulation_macros.cpp"
 #include "transformation.hpp"
-#include "indexing.hpp"
 #include "bilinear_interpolation.hpp"
 
 // Include GLEW

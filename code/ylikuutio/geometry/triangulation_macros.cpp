@@ -1,10 +1,27 @@
 #ifndef __TRIANGULATION_MACROS_CPP_INCLUDED
 #define __TRIANGULATION_MACROS_CPP_INCLUDED
 
-#include "indexing.hpp"
+// Include GLEW
+#ifndef __GL_GLEW_H_INCLUDED
+#define __GL_GLEW_H_INCLUDED
+#include <GL/glew.h> // GLfloat, GLuint etc.
+#endif
 
 namespace geometry
 {
+    inline GLuint get_y(
+            GLuint* vertex_data,
+            uint32_t x,
+            uint32_t z,
+            uint32_t image_width)
+    {
+        // This function returns the altitude value based on x & z coordinates.
+        // This works only for a raw heightmap data (for a 2D array of altitudes).
+        GLuint* vertex_pointer;
+        vertex_pointer = vertex_data + z * image_width + x;
+        return *vertex_pointer;
+    }
+
     // for bilinear interpolation, southeast-northwest edges, and southwest-northeast edges.
     inline GLuint southwest(uint32_t current_vertex_i, uint32_t image_width)
     {

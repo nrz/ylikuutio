@@ -494,8 +494,6 @@ add_library(ylikuutio
     code/ylikuutio/geometry/bilinear_interpolation.hpp
     code/ylikuutio/geometry/chunk.cpp
     code/ylikuutio/geometry/chunk.hpp
-    code/ylikuutio/geometry/indexing.cpp
-    code/ylikuutio/geometry/indexing.hpp
     code/ylikuutio/geometry/line.cpp
     code/ylikuutio/geometry/line.hpp
     code/ylikuutio/geometry/line2D.cpp
@@ -636,8 +634,6 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/file/file_loader.hpp
         code/ylikuutio/geometry/bilinear_interpolation.cpp
         code/ylikuutio/geometry/bilinear_interpolation.hpp
-        code/ylikuutio/geometry/indexing.cpp
-        code/ylikuutio/geometry/indexing.hpp
         code/ylikuutio/geometry/line.cpp
         code/ylikuutio/geometry/line.hpp
         code/ylikuutio/geometry/line2D.cpp
