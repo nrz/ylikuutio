@@ -1,5 +1,5 @@
 #include "bilinear_interpolation.hpp"
-#include "triangulation_macros.hpp"
+#include "triangulation_helper_functions.hpp"
 #include "code/ylikuutio/common/globals.hpp"
 
 // Include GLEW

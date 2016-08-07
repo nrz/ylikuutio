@@ -4,8 +4,8 @@
 #endif
 
 #include "quad_triangulation.hpp"
-#include "triangulation_macros.cpp"
-#include "triangulation_macros.hpp"
+#include "triangulation_helper_functions.cpp"
+#include "triangulation_helper_functions.hpp"
 #include "transformation.hpp"
 #include "bilinear_interpolation.hpp"
 
