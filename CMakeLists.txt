@@ -20,7 +20,7 @@ set(DO_UNIT_TESTS_WITH_GOOGLE_TEST true)
 # set(ENABLE_DOWNLOAD_LATEST_VERSIONS_OF_EXTERNAL_PROJECTS)
 
 # uncomment the following line to disable updating of external projects.
-# set(DISABLE_UPDATE_STEP true)
+set(DISABLE_UPDATE_STEP true)
 
 if(CROSS_COMPILE_FOR_WINDOWS)
     # https://cmake.org/Wiki/CMake_Cross_Compiling
