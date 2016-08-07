@@ -126,8 +126,9 @@ namespace geometry
         return face_normal_data[face_normal_i];
     }
 
+    template<class T1>
     void interpolate_vertices_using_bilinear_interpolation(
-            uint32_t* input_vertex_pointer,
+            T1* input_vertex_pointer,
             BilinearInterpolationStruct bilinear_interpolation_struct,
             std::vector<glm::vec3>& temp_vertices,
             std::vector<glm::vec2>& temp_UVs)
