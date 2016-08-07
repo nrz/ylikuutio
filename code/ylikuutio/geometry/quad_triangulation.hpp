@@ -69,33 +69,33 @@ namespace geometry
 
     // for bilinear interpolation.
     template<class T1>
-    T1 southwest_y(uint32_t x, uint32_t z, T1* input_vertex_pointer, uint32_t image_width)
-    {
-        return geometry::get_y(input_vertex_pointer, x - 1, z - 1, image_width);
-    }
+        T1 southwest_y(uint32_t x, uint32_t z, T1* input_vertex_pointer, uint32_t image_width)
+        {
+            return geometry::get_y(input_vertex_pointer, x - 1, z - 1, image_width);
+        }
     template<class T1>
-    T1 southeast_y(uint32_t x, uint32_t z, T1* input_vertex_pointer, uint32_t image_width)
-    {
-        return geometry::get_y(input_vertex_pointer, x, z - 1, image_width);
-    }
+        T1 southeast_y(uint32_t x, uint32_t z, T1* input_vertex_pointer, uint32_t image_width)
+        {
+            return geometry::get_y(input_vertex_pointer, x, z - 1, image_width);
+        }
     template<class T1>
-    T1 northwest_y(uint32_t x, uint32_t z, T1* input_vertex_pointer, uint32_t image_width)
-    {
-        return geometry::get_y(input_vertex_pointer, x - 1, z, image_width);
-    }
+        T1 northwest_y(uint32_t x, uint32_t z, T1* input_vertex_pointer, uint32_t image_width)
+        {
+            return geometry::get_y(input_vertex_pointer, x - 1, z, image_width);
+        }
     template<class T1>
-    T1 northeast_y(uint32_t x, uint32_t z, T1* input_vertex_pointer, uint32_t image_width)
-    {
-        return geometry::get_y(input_vertex_pointer, x, z, image_width);
-    }
+        T1 northeast_y(uint32_t x, uint32_t z, T1* input_vertex_pointer, uint32_t image_width)
+        {
+            return geometry::get_y(input_vertex_pointer, x, z, image_width);
+        }
     template<class T1>
-    T1 center_y(uint32_t x, uint32_t z, T1* input_vertex_pointer, uint32_t image_width)
-    {
-        return (southwest_y(x, z, input_vertex_pointer, image_width) +
-                southeast_y(x, z, input_vertex_pointer, image_width) +
-                northwest_y(x, z, input_vertex_pointer, image_width) +
-                northeast_y(x, z, input_vertex_pointer, image_width)) / 4;
-    }
+        T1 center_y(uint32_t x, uint32_t z, T1* input_vertex_pointer, uint32_t image_width)
+        {
+            return (southwest_y(x, z, input_vertex_pointer, image_width) +
+                    southeast_y(x, z, input_vertex_pointer, image_width) +
+                    northwest_y(x, z, input_vertex_pointer, image_width) +
+                    northeast_y(x, z, input_vertex_pointer, image_width)) / 4;
+        }
 
     // for bilinear interpolation.
     glm::vec3 get_face_normal(
