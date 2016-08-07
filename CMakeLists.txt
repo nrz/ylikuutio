@@ -511,14 +511,11 @@ add_library(ylikuutio
     code/ylikuutio/geometry/line_segment_line_segment_intersection.hpp
     code/ylikuutio/geometry/polygon_triangulation.cpp
     code/ylikuutio/geometry/polygon_triangulation.hpp
-    code/ylikuutio/geometry/quad_triangulation.cpp
     code/ylikuutio/geometry/quad_triangulation.hpp
     code/ylikuutio/geometry/transformation.cpp
     code/ylikuutio/geometry/transformation.hpp
     code/ylikuutio/geometry/triangle.cpp
     code/ylikuutio/geometry/triangle.hpp
-    code/ylikuutio/geometry/triangulation_helper_functions.cpp
-    code/ylikuutio/geometry/triangulation_helper_functions.hpp
 
     # graph, in alphabetical order.
     code/ylikuutio/graph/graph.cpp
@@ -642,7 +639,6 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/geometry/line_segment2D.hpp
         code/ylikuutio/geometry/line_segment_line_segment_intersection.cpp
         code/ylikuutio/geometry/line_segment_line_segment_intersection.hpp
-        code/ylikuutio/geometry/quad_triangulation.cpp
         code/ylikuutio/geometry/quad_triangulation.hpp
         code/ylikuutio/geometry/transformation.cpp
         code/ylikuutio/geometry/transformation.hpp
@@ -664,7 +660,6 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/googletest/test_line_line_intersection.cpp
         code/ylikuutio/tests/googletest/test_line_segment_line_segment_intersection.cpp
         code/ylikuutio/tests/googletest/test_pugixml.cpp
-        code/ylikuutio/tests/googletest/test_triangulation.cpp
         code/ylikuutio/tests/googletest/test_ylikuutio_string.cpp)
     set(MAIN_FILE code/ylikuutio/tests/googletest/main.cpp)
 

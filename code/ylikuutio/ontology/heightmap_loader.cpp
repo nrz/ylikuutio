@@ -1,3 +1,6 @@
+#ifndef __HEIGHTMAP_LOADER_CPP_INCLUDED
+#define __HEIGHTMAP_LOADER_CPP_INCLUDED
+
 #ifndef GLM_FORCE_RADIANS
 #define GLM_FORCE_RADIANS
 #define DEGREES_TO_RADIANS(x) (x * PI / 180.0f)
@@ -312,3 +315,5 @@ namespace ontology
         return geometry::triangulate_quads(vertex_data, triangulate_quads_struct, out_vertices, out_UVs, out_normals);
     }
 }
+
+#endif
