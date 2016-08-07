@@ -1,6 +1,9 @@
 #ifndef __TRIANGULATION_TEMPLATES_HPP_INCLUDED
 #define __TRIANGULATION_TEMPLATES_HPP_INCLUDED
 
+// Include standard headers
+#include <stdint.h> // uint32_t etc.
+
 namespace geometry
 {
     template<class T1>
