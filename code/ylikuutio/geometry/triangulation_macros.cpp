@@ -3,22 +3,25 @@
 
 #include "indexing.hpp"
 
-// for bilinear interpolation, southeast-northwest edges, and southwest-northeast edges.
-inline GLuint southwest(uint32_t current_vertex_i, uint32_t image_width)
+namespace geometry
 {
-    return current_vertex_i - image_width - 1;
-}
-inline GLuint southeast(uint32_t current_vertex_i, uint32_t image_width)
-{
-    return current_vertex_i - image_width;
-}
-inline GLuint northwest(uint32_t current_vertex_i, uint32_t image_width)
-{
-    return current_vertex_i - 1;
-}
-inline GLuint northeast(uint32_t current_vertex_i, uint32_t image_width)
-{
-    return current_vertex_i;
+    // for bilinear interpolation, southeast-northwest edges, and southwest-northeast edges.
+    inline GLuint southwest(uint32_t current_vertex_i, uint32_t image_width)
+    {
+        return current_vertex_i - image_width - 1;
+    }
+    inline GLuint southeast(uint32_t current_vertex_i, uint32_t image_width)
+    {
+        return current_vertex_i - image_width;
+    }
+    inline GLuint northwest(uint32_t current_vertex_i, uint32_t image_width)
+    {
+        return current_vertex_i - 1;
+    }
+    inline GLuint northeast(uint32_t current_vertex_i, uint32_t image_width)
+    {
+        return current_vertex_i;
+    }
 }
 
 // for bilinear interpolation.
