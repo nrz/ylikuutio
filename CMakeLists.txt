@@ -516,6 +516,7 @@ add_library(ylikuutio
     code/ylikuutio/geometry/transformation.hpp
     code/ylikuutio/geometry/triangle.cpp
     code/ylikuutio/geometry/triangle.hpp
+    code/ylikuutio/geometry/triangulation_enums.hpp
 
     # graph, in alphabetical order.
     code/ylikuutio/graph/graph.cpp

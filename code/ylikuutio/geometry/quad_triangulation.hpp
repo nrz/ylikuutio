@@ -6,6 +6,7 @@
 #define DEGREES_TO_RADIANS(x) (x * PI / 180.0f)
 #endif
 
+#include "triangulation_enums.hpp"
 #include "transformation.hpp"
 #include "code/ylikuutio/common/globals.hpp"
 
@@ -28,12 +29,6 @@
 
 namespace geometry
 {
-    // for bilinear interpolation.
-    enum BilinearDirections { SSW, WSW, WNW, NNW, NNE, ENE, ESE, SSE };
-
-    // for southeast-northwest edges.
-    enum SoutheastNorthwestEdgesDirections { SSE_CODE_FOR_SE_NW, WNW_CODE_FOR_SE_NW, ESE_CODE_FOR_SE_NW, NNW_CODE_FOR_SE_NW, SW_CODE_FOR_SE_NW, NE_CODE_FOR_SE_NW };
-
     template<class T1>
         T1 get_y(
                 T1* vertex_data,
