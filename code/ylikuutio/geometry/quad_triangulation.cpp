@@ -31,9 +31,6 @@
 namespace geometry
 {
     // for southeast-northwest edges.
-    enum SoutheastNorthwestEdgesDirections { SSE_CODE_FOR_SE_NW, WNW_CODE_FOR_SE_NW, ESE_CODE_FOR_SE_NW, NNW_CODE_FOR_SE_NW, SW_CODE_FOR_SE_NW, NE_CODE_FOR_SE_NW };
-
-    // for southeast-northwest edges.
     glm::vec3 get_face_normal_for_SE_NW(
             std::vector<glm::vec3>& face_normal_data,
             uint32_t x,
