@@ -373,7 +373,7 @@ namespace geometry
             for (uint32_t x = 0; x < image_width; x++)
             {
                 // current x,z coordinates).
-                GLfloat y = (GLfloat) geometry::get_y(input_vertex_pointer, x, z, image_width);
+                GLfloat y = static_cast<GLfloat>(geometry::get_y(input_vertex_pointer, x, z, image_width));
 
                 // This corresponds to "v": specify one vertex.
                 glm::vec3 vertex;
