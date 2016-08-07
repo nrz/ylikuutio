@@ -260,7 +260,6 @@ typedef struct TriangulatePolygonsStruct
 
 typedef struct
 {
-    uint32_t* input_vertex_pointer;
     uint32_t image_width;
     uint32_t image_height;
     bool should_ylikuutio_use_real_texture_coordinates;

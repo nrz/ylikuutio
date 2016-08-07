@@ -127,11 +127,11 @@ namespace geometry
     }
 
     void interpolate_vertices_using_bilinear_interpolation(
+            uint32_t* input_vertex_pointer,
             BilinearInterpolationStruct bilinear_interpolation_struct,
             std::vector<glm::vec3>& temp_vertices,
             std::vector<glm::vec2>& temp_UVs)
     {
-        uint32_t* input_vertex_pointer = bilinear_interpolation_struct.input_vertex_pointer;
         uint32_t image_width = bilinear_interpolation_struct.image_width;
         uint32_t image_height = bilinear_interpolation_struct.image_height;
 
@@ -389,11 +389,11 @@ namespace geometry
             if (is_bilinear_interpolation_in_use)
             {
                 BilinearInterpolationStruct bilinear_interpolation_struct;
-                bilinear_interpolation_struct.input_vertex_pointer = input_vertex_pointer;
                 bilinear_interpolation_struct.image_width = image_width;
                 bilinear_interpolation_struct.image_height = image_height;
                 bilinear_interpolation_struct.should_ylikuutio_use_real_texture_coordinates = triangulate_quads_struct.should_ylikuutio_use_real_texture_coordinates;
                 geometry::interpolate_vertices_using_bilinear_interpolation(
+                        input_vertex_pointer,
                         bilinear_interpolation_struct,
                         temp_vertices,
                         temp_UVs);
