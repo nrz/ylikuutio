@@ -39,12 +39,12 @@ namespace geometry
     {
         return current_vertex_i;
     }
-}
 
-// for bilinear interpolation.
-inline GLuint center(uint32_t current_interpolated_vertex_i)
-{
-    return current_interpolated_vertex_i;
+    // for bilinear interpolation.
+    inline GLuint center(uint32_t current_interpolated_vertex_i)
+    {
+        return current_interpolated_vertex_i;
+    }
 }
 
 // for bilinear interpolation.
