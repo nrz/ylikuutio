@@ -30,9 +30,6 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
-#define SRTM_FILENAME_N_OF_LATITUDE_CHARS 2
-#define SRTM_FILENAME_N_OF_LONGITUDE_CHARS 3
-
 namespace ontology
 {
     bool load_BMP_world(
@@ -227,8 +224,11 @@ namespace ontology
         std::stringstream latitude_stringstream;
         std::stringstream longitude_stringstream;
 
-        latitude_stringstream << std::setw(SRTM_FILENAME_N_OF_LATITUDE_CHARS) << std::setfill('0') << abs(filename_latitude);
-        longitude_stringstream << std::setw(SRTM_FILENAME_N_OF_LONGITUDE_CHARS) << std::setfill('0') << abs(filename_longitude);
+        uint32_t SRTM_filename_n_of_latitude_chars = 2;
+        uint32_t SRTM_filename_n_of_longitude_chars = 3;
+
+        latitude_stringstream << std::setw(SRTM_filename_n_of_latitude_chars) << std::setfill('0') << abs(filename_latitude);
+        longitude_stringstream << std::setw(SRTM_filename_n_of_longitude_chars) << std::setfill('0') << abs(filename_longitude);
 
         std::string latitude_string = latitude_stringstream.str();
         std::string longitude_string = longitude_stringstream.str();
