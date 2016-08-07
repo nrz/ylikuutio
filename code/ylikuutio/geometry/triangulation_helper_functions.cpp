@@ -14,6 +14,8 @@
 #endif
 
 // Include standard headers
+#include <cmath>    // NAN, std::isnan, std::pow
+#include <iostream> // std::cout, std::cin, std::cerr
 #include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
 
@@ -81,6 +83,77 @@ namespace geometry
                 northeast_y(x, z, input_vertex_pointer, image_width)) / 4;
     }
 
+    // for bilinear interpolation.
+    glm::vec3 get_face_normal(
+            std::vector<glm::vec3>& face_normal_data,
+            uint32_t x,
+            uint32_t z,
+            BilinearDirections compass_point_code,
+            uint32_t image_width)
+    {
+        uint32_t face_normal_i;
+
+        switch (compass_point_code)
+        {
+            case SSW:
+                face_normal_i = 4 * (z - 1) * (image_width - 1) + (4 * x) - 1;
+                break;
+            case WSW:
+                face_normal_i = 4 * (z - 1) * (image_width - 1) + (4 * x) - 2;
+                break;
+            case WNW:
+                face_normal_i = 4 * z * (image_width - 1) + (4 * x) - 4;
+                break;
+            case NNW:
+                face_normal_i = 4 * z * (image_width - 1) + (4 * x) - 1;
+                break;
+            case NNE:
+                face_normal_i = 4 * z * (image_width - 1) + (4 * x) + 1;
+                break;
+            case ENE:
+                face_normal_i = 4 * z * (image_width - 1) + (4 * x);
+                break;
+            case ESE:
+                face_normal_i = 4 * (z - 1) * (image_width - 1) + (4 * x) + 2;
+                break;
+            case SSE:
+                face_normal_i = 4 * (z - 1) * (image_width - 1) + (4 * x) + 1;
+                break;
+            default:
+                std::cerr << "invalid compass point code!\n";
+                return glm::vec3(NAN, NAN, NAN);
+        }
+        return face_normal_data[face_normal_i];
+    }
+
+    // Face indices example for a 4x4 image file and bilinear interpolation.
+    //
+    //  +-------+-------+-------+
+    //  |\ 26  /|\ 30  /|\ 34  /|
+    //  | \   / | \   / | \   / |
+    //  |  \ /  |  \ /  |  \ /  |
+    //  |25 x 27|29 x 31|33 x 35|
+    //  |  / \  |  / \  |  / \  |
+    //  | /   \ | /   \ | /   \ |
+    //  |/ 24  \|/ 28  \|/ 32  \|
+    //  +-------+-------+-------+
+    //  |\ 14  /|\ 18  /|\ 22  /|
+    //  | \   / | \   / | \   / |
+    //  |  \ /  |  \ /  |  \ /  |
+    //  |13 x 15|17 x 19|21 x 23|
+    //  |  / \  |  / \  |  / \  |
+    //  | /   \ | /   \ | /   \ |
+    //  |/ 12  \|/ 16  \|/ 20  \|
+    //  +-------+-------+-------+
+    //  |\  3  /|\  6  /|\ 10  /|
+    //  | \   / | \   / | \   / |
+    //  |  \ /  |  \ /  |  \ /  |
+    //  |1  x  2|5  x  7|9  x 11|
+    //  |  / \  |  / \  |  / \  |
+    //  | /   \ | /   \ | /   \ |
+    //  |/  0  \|/  4  \|/  8  \|
+    //  +-------+-------+-------+
+
     void interpolate_vertices_using_bilinear_interpolation(
             BilinearInterpolationStruct bilinear_interpolation_struct,
             std::vector<glm::vec3>& temp_vertices,
@@ -135,5 +208,57 @@ namespace geometry
                 temp_UVs.push_back(uv);
             }
         }
+    }
+
+    // for bilinear interpolation.
+    inline glm::vec3 ssw_face_normal(std::vector<glm::vec3>& face_normal_vector_vec3, uint32_t x, uint32_t z, uint32_t image_width)
+    {
+        geometry::get_face_normal(face_normal_vector_vec3, x, z, SSW, image_width);
+    }
+    inline glm::vec3 wsw_face_normal(std::vector<glm::vec3>& face_normal_vector_vec3, uint32_t x, uint32_t z, uint32_t image_width)
+    {
+        geometry::get_face_normal(face_normal_vector_vec3, x, z, WSW, image_width);
+    }
+    inline glm::vec3 wnw_face_normal(std::vector<glm::vec3>& face_normal_vector_vec3, uint32_t x, uint32_t z, uint32_t image_width)
+    {
+        geometry::get_face_normal(face_normal_vector_vec3, x, z, WNW, image_width);
+    }
+    inline glm::vec3 nnw_face_normal(std::vector<glm::vec3>& face_normal_vector_vec3, uint32_t x, uint32_t z, uint32_t image_width)
+    {
+        geometry::get_face_normal(face_normal_vector_vec3, x, z, NNW, image_width);
+    }
+    inline glm::vec3 nne_face_normal(std::vector<glm::vec3>& face_normal_vector_vec3, uint32_t x, uint32_t z, uint32_t image_width)
+    {
+        geometry::get_face_normal(face_normal_vector_vec3, x, z, NNE, image_width);
+    }
+    inline glm::vec3 ene_face_normal(std::vector<glm::vec3>& face_normal_vector_vec3, uint32_t x, uint32_t z, uint32_t image_width)
+    {
+        geometry::get_face_normal(face_normal_vector_vec3, x, z, ENE, image_width);
+    }
+    inline glm::vec3 ese_face_normal(std::vector<glm::vec3>& face_normal_vector_vec3, uint32_t x, uint32_t z, uint32_t image_width)
+    {
+        geometry::get_face_normal(face_normal_vector_vec3, x, z, ESE, image_width);
+    }
+    inline glm::vec3 sse_face_normal(std::vector<glm::vec3>& face_normal_vector_vec3, uint32_t x, uint32_t z, uint32_t image_width)
+    {
+        geometry::get_face_normal(face_normal_vector_vec3, x, z, SSE, image_width);
+    }
+
+    // for bilinear interpolation.
+    inline glm::vec3 s_face_normal(std::vector<glm::vec3>& face_normal_vector_vec3, uint32_t x, uint32_t z, uint32_t image_width)
+    {
+        geometry::get_face_normal(face_normal_vector_vec3, x - 1, z - 1, ENE, image_width);
+    }
+    inline glm::vec3 w_face_normal(std::vector<glm::vec3>& face_normal_vector_vec3, uint32_t x, uint32_t z, uint32_t image_width)
+    {
+        geometry::get_face_normal(face_normal_vector_vec3, x - 1, z - 1, NNE, image_width);
+    }
+    inline glm::vec3 n_face_normal(std::vector<glm::vec3>& face_normal_vector_vec3, uint32_t x, uint32_t z, uint32_t image_width)
+    {
+        geometry::get_face_normal(face_normal_vector_vec3, x, z, WSW, image_width);
+    }
+    inline glm::vec3 e_face_normal(std::vector<glm::vec3>& face_normal_vector_vec3, uint32_t x, uint32_t z, uint32_t image_width)
+    {
+        geometry::get_face_normal(face_normal_vector_vec3, x, z, SSW, image_width);
     }
 }

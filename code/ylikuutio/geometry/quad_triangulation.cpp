@@ -7,7 +7,6 @@
 #include "triangulation_helper_functions.cpp"
 #include "triangulation_helper_functions.hpp"
 #include "transformation.hpp"
-#include "bilinear_interpolation.hpp"
 
 // Include GLEW
 #ifndef __GL_GLEW_H_INCLUDED
@@ -515,7 +514,7 @@ namespace geometry
             // Number of adjacent faces: 2.
             glm::vec3 vertex_normal;
 
-            vertex_normal = NNE_FACE_NORMAL + ENE_FACE_NORMAL;
+            vertex_normal = nne_face_normal(face_normal_vector_vec3, x, z, image_width) + ene_face_normal(face_normal_vector_vec3, x, z, image_width);
             temp_normals.push_back(vertex_normal);
 
             // Compute the normals of southern vertices.
@@ -523,14 +522,14 @@ namespace geometry
             {
                 // Compute the normal of a southern vertex.
                 // Number of adjacent faces: 4.
-                vertex_normal = WNW_FACE_NORMAL + NNW_FACE_NORMAL + NNE_FACE_NORMAL + ENE_FACE_NORMAL;
+                vertex_normal = wnw_face_normal(face_normal_vector_vec3, x, z, image_width) + nnw_face_normal(face_normal_vector_vec3, x, z, image_width) + nne_face_normal(face_normal_vector_vec3, x, z, image_width) + ene_face_normal(face_normal_vector_vec3, x, z, image_width);
                 temp_normals.push_back(vertex_normal);
             }
 
             // Compute the normal of the southeasternmost vertex.
             // Number of adjacent faces: 2.
             x = image_width - 1;
-            vertex_normal = WNW_FACE_NORMAL + NNW_FACE_NORMAL;
+            vertex_normal = wnw_face_normal(face_normal_vector_vec3, x, z, image_width) + nnw_face_normal(face_normal_vector_vec3, x, z, image_width);
             temp_normals.push_back(vertex_normal);
 
             // Then, define most normals in a double loop.
@@ -539,7 +538,7 @@ namespace geometry
                 // Compute the normal of a western vertex.
                 // Number of adjacent faces: 4.
                 x = 0;
-                vertex_normal = NNE_FACE_NORMAL + ENE_FACE_NORMAL + ESE_FACE_NORMAL + SSE_FACE_NORMAL;
+                vertex_normal = nne_face_normal(face_normal_vector_vec3, x, z, image_width) + ene_face_normal(face_normal_vector_vec3, x, z, image_width) + ese_face_normal(face_normal_vector_vec3, x, z, image_width) + sse_face_normal(face_normal_vector_vec3, x, z, image_width);
                 temp_normals.push_back(vertex_normal);
 
                 for (x = 1; x < (image_width - 1); x++)
@@ -548,7 +547,7 @@ namespace geometry
 
                     // Compute the normal of a central vertex.
                     // Number of adjacent faces: 8.
-                    vertex_normal = SSW_FACE_NORMAL + WSW_FACE_NORMAL + WNW_FACE_NORMAL + NNW_FACE_NORMAL + NNE_FACE_NORMAL + ENE_FACE_NORMAL + ESE_FACE_NORMAL + SSE_FACE_NORMAL;
+                    vertex_normal = ssw_face_normal(face_normal_vector_vec3, x, z, image_width) + wsw_face_normal(face_normal_vector_vec3, x, z, image_width) + wnw_face_normal(face_normal_vector_vec3, x, z, image_width) + nnw_face_normal(face_normal_vector_vec3, x, z, image_width) + nne_face_normal(face_normal_vector_vec3, x, z, image_width) + ene_face_normal(face_normal_vector_vec3, x, z, image_width) + ese_face_normal(face_normal_vector_vec3, x, z, image_width) + sse_face_normal(face_normal_vector_vec3, x, z, image_width);
                     temp_normals.push_back(vertex_normal);
                 }
 
@@ -556,14 +555,14 @@ namespace geometry
 
                 // Compute the normal of an eastern vertex.
                 // Number of adjacent faces: 4.
-                vertex_normal = SSW_FACE_NORMAL + WSW_FACE_NORMAL + WNW_FACE_NORMAL + NNW_FACE_NORMAL;
+                vertex_normal = ssw_face_normal(face_normal_vector_vec3, x, z, image_width) + wsw_face_normal(face_normal_vector_vec3, x, z, image_width) + wnw_face_normal(face_normal_vector_vec3, x, z, image_width) + nnw_face_normal(face_normal_vector_vec3, x, z, image_width);
                 temp_normals.push_back(vertex_normal);
             }
 
             // Compute the normal of the northwesternmost vertex.
             // Number of adjacent faces: 2.
             x = 0;
-            vertex_normal = SSE_FACE_NORMAL + ESE_FACE_NORMAL;
+            vertex_normal = sse_face_normal(face_normal_vector_vec3, x, z, image_width) + ese_face_normal(face_normal_vector_vec3, x, z, image_width);
             temp_normals.push_back(vertex_normal);
 
             // Compute the normals of northern vertices.
@@ -571,14 +570,14 @@ namespace geometry
             {
                 // Compute the normal of a northern vertex.
                 // Number of adjacent faces: 4.
-                vertex_normal = SSW_FACE_NORMAL + WSW_FACE_NORMAL + ESE_FACE_NORMAL + SSE_FACE_NORMAL;
+                vertex_normal = ssw_face_normal(face_normal_vector_vec3, x, z, image_width) + wsw_face_normal(face_normal_vector_vec3, x, z, image_width) + ese_face_normal(face_normal_vector_vec3, x, z, image_width) + sse_face_normal(face_normal_vector_vec3, x, z, image_width);
                 temp_normals.push_back(vertex_normal);
             }
 
             // Compute the normal of the northeasternmost vertex.
             // Number of adjacent faces: 2.
             x = image_width - 1;
-            vertex_normal = SSW_FACE_NORMAL + WSW_FACE_NORMAL;
+            vertex_normal = ssw_face_normal(face_normal_vector_vec3, x, z, image_width) + wsw_face_normal(face_normal_vector_vec3, x, z, image_width);
             temp_normals.push_back(vertex_normal);
 
             // 6. Compute the vertices between, `push_back` to `temp_normals`.
@@ -588,7 +587,7 @@ namespace geometry
             {
                 for (x = 1; x < image_width; x++)
                 {
-                    vertex_normal = S_FACE_NORMAL + W_FACE_NORMAL + N_FACE_NORMAL + E_FACE_NORMAL;
+                    vertex_normal = s_face_normal(face_normal_vector_vec3, x, z, image_width) + w_face_normal(face_normal_vector_vec3, x, z, image_width) + n_face_normal(face_normal_vector_vec3, x, z, image_width) + e_face_normal(face_normal_vector_vec3, x, z, image_width);
                     temp_normals.push_back(vertex_normal);
                 }
             }

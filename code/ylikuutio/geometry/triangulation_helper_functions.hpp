@@ -21,6 +21,9 @@
 
 namespace geometry
 {
+    // for bilinear interpolation.
+    enum BilinearDirections { SSW, WSW, WNW, NNW, NNE, ENE, ESE, SSE };
+
     inline GLuint get_y(
             uint32_t* vertex_data,
             uint32_t x,
@@ -39,27 +42,34 @@ namespace geometry
     inline uint32_t northeast_y(uint32_t x, uint32_t z, uint32_t* input_vertex_pointer, uint32_t image_width);
     inline uint32_t center_y(uint32_t x, uint32_t z, uint32_t* input_vertex_pointer, uint32_t image_width);
 
+    // for bilinear interpolation.
+    glm::vec3 get_face_normal(
+            std::vector<glm::vec3>& face_normal_data,
+            uint32_t x,
+            uint32_t z,
+            BilinearDirections compass_point_code,
+            uint32_t image_width);
+
     void interpolate_vertices_using_bilinear_interpolation(
             BilinearInterpolationStruct bilinear_interpolation_struct,
             std::vector<glm::vec3>& temp_vertices,
             std::vector<glm::vec2>& temp_UVs);
+
+    inline glm::vec3 ssw_face_normal(std::vector<glm::vec3>& face_normal_vector_vec3, uint32_t x, uint32_t z, uint32_t image_width);
+    inline glm::vec3 wsw_face_normal(std::vector<glm::vec3>& face_normal_vector_vec3, uint32_t x, uint32_t z, uint32_t image_width);
+    inline glm::vec3 wnw_face_normal(std::vector<glm::vec3>& face_normal_vector_vec3, uint32_t x, uint32_t z, uint32_t image_width);
+    inline glm::vec3 nnw_face_normal(std::vector<glm::vec3>& face_normal_vector_vec3, uint32_t x, uint32_t z, uint32_t image_width);
+    inline glm::vec3 nne_face_normal(std::vector<glm::vec3>& face_normal_vector_vec3, uint32_t x, uint32_t z, uint32_t image_width);
+    inline glm::vec3 ene_face_normal(std::vector<glm::vec3>& face_normal_vector_vec3, uint32_t x, uint32_t z, uint32_t image_width);
+    inline glm::vec3 ese_face_normal(std::vector<glm::vec3>& face_normal_vector_vec3, uint32_t x, uint32_t z, uint32_t image_width);
+    inline glm::vec3 sse_face_normal(std::vector<glm::vec3>& face_normal_vector_vec3, uint32_t x, uint32_t z, uint32_t image_width);
+
+    // for bilinear interpolation.
+    inline glm::vec3 s_face_normal(std::vector<glm::vec3>& face_normal_vector_vec3, uint32_t x, uint32_t z, uint32_t image_width);
+    inline glm::vec3 w_face_normal(std::vector<glm::vec3>& face_normal_vector_vec3, uint32_t x, uint32_t z, uint32_t image_width);
+    inline glm::vec3 n_face_normal(std::vector<glm::vec3>& face_normal_vector_vec3, uint32_t x, uint32_t z, uint32_t image_width);
+    inline glm::vec3 e_face_normal(std::vector<glm::vec3>& face_normal_vector_vec3, uint32_t x, uint32_t z, uint32_t image_width);
 }
-
-// for bilinear interpolation.
-#define SSW_FACE_NORMAL (geometry::get_face_normal(face_normal_vector_vec3, x, z, SSW, image_width))
-#define WSW_FACE_NORMAL (geometry::get_face_normal(face_normal_vector_vec3, x, z, WSW, image_width))
-#define WNW_FACE_NORMAL (geometry::get_face_normal(face_normal_vector_vec3, x, z, WNW, image_width))
-#define NNW_FACE_NORMAL (geometry::get_face_normal(face_normal_vector_vec3, x, z, NNW, image_width))
-#define NNE_FACE_NORMAL (geometry::get_face_normal(face_normal_vector_vec3, x, z, NNE, image_width))
-#define ENE_FACE_NORMAL (geometry::get_face_normal(face_normal_vector_vec3, x, z, ENE, image_width))
-#define ESE_FACE_NORMAL (geometry::get_face_normal(face_normal_vector_vec3, x, z, ESE, image_width))
-#define SSE_FACE_NORMAL (geometry::get_face_normal(face_normal_vector_vec3, x, z, SSE, image_width))
-
-// for bilinear interpolation.
-#define S_FACE_NORMAL (geometry::get_face_normal(face_normal_vector_vec3, x - 1, z - 1, ENE, image_width))
-#define W_FACE_NORMAL (geometry::get_face_normal(face_normal_vector_vec3, x - 1, z - 1, NNE, image_width))
-#define N_FACE_NORMAL (geometry::get_face_normal(face_normal_vector_vec3, x, z, WSW, image_width))
-#define E_FACE_NORMAL (geometry::get_face_normal(face_normal_vector_vec3, x, z, SSW, image_width))
 
 // for southeast-northwest edges.
 #define SSE_FACE_NORMAL_FOR_SE_NW (geometry::get_face_normal_for_SE_NW(face_normal_vector_vec3, x, z, SSE_CODE_FOR_SE_NW, image_width))

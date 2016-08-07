@@ -490,8 +490,6 @@ add_library(ylikuutio
     code/ylikuutio/file/file_loader.hpp
 
     # geometry, in alphabetical order.
-    code/ylikuutio/geometry/bilinear_interpolation.cpp
-    code/ylikuutio/geometry/bilinear_interpolation.hpp
     code/ylikuutio/geometry/chunk.cpp
     code/ylikuutio/geometry/chunk.hpp
     code/ylikuutio/geometry/line.cpp
@@ -633,8 +631,6 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/common/globals.hpp
         code/ylikuutio/file/file_loader.cpp
         code/ylikuutio/file/file_loader.hpp
-        code/ylikuutio/geometry/bilinear_interpolation.cpp
-        code/ylikuutio/geometry/bilinear_interpolation.hpp
         code/ylikuutio/geometry/line.cpp
         code/ylikuutio/geometry/line.hpp
         code/ylikuutio/geometry/line2D.cpp
