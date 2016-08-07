@@ -149,17 +149,17 @@ namespace geometry
                 uint32_t current_vertex_i = image_width * z + x;
 
                 // Interpolate y coordinate (altitude).
-                GLfloat y = ((GLfloat) southwest_y(x, z, input_vertex_pointer, image_width) +
+                GLfloat y = static_cast<GLfloat>(southwest_y(x, z, input_vertex_pointer, image_width) +
                         southeast_y(x, z, input_vertex_pointer, image_width) +
                         northwest_y(x, z, input_vertex_pointer, image_width) +
-                        northeast_y(x, z, input_vertex_pointer, image_width)) / 4;
+                        northeast_y(x, z, input_vertex_pointer, image_width)) / 4.0f;
 
                 // Create a new vertex using bilinear interpolation.
                 // This corresponds to "v": specify one vertex.
                 glm::vec3 vertex;
-                vertex.x = (GLfloat) x - 0.5f;
+                vertex.x = static_cast<GLfloat>(x) - 0.5f;
                 vertex.y = y;
-                vertex.z = (GLfloat) z - 0.5f;
+                vertex.z = static_cast<GLfloat>(z) - 0.5f;
                 temp_vertices.push_back(vertex);
 
                 // This corresponds to "vt": specify texture coordinates of one vertex.
