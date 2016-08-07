@@ -55,16 +55,9 @@ namespace geometry
             std::vector<glm::vec3>& temp_vertices,
             std::vector<glm::vec2>& temp_UVs);
 
-    inline glm::vec3 ssw_face_normal(std::vector<glm::vec3>& face_normal_vector_vec3, uint32_t x, uint32_t z, uint32_t image_width);
-    inline glm::vec3 wsw_face_normal(std::vector<glm::vec3>& face_normal_vector_vec3, uint32_t x, uint32_t z, uint32_t image_width);
-    inline glm::vec3 wnw_face_normal(std::vector<glm::vec3>& face_normal_vector_vec3, uint32_t x, uint32_t z, uint32_t image_width);
-    inline glm::vec3 nnw_face_normal(std::vector<glm::vec3>& face_normal_vector_vec3, uint32_t x, uint32_t z, uint32_t image_width);
-    inline glm::vec3 nne_face_normal(std::vector<glm::vec3>& face_normal_vector_vec3, uint32_t x, uint32_t z, uint32_t image_width);
-    inline glm::vec3 ene_face_normal(std::vector<glm::vec3>& face_normal_vector_vec3, uint32_t x, uint32_t z, uint32_t image_width);
-    inline glm::vec3 ese_face_normal(std::vector<glm::vec3>& face_normal_vector_vec3, uint32_t x, uint32_t z, uint32_t image_width);
-    inline glm::vec3 sse_face_normal(std::vector<glm::vec3>& face_normal_vector_vec3, uint32_t x, uint32_t z, uint32_t image_width);
-
     // for bilinear interpolation.
+    // These `inline` functions exist to avoid need to remember
+    // the array order when calling `geometry::get_face_normal`.
     inline glm::vec3 s_face_normal(std::vector<glm::vec3>& face_normal_vector_vec3, uint32_t x, uint32_t z, uint32_t image_width);
     inline glm::vec3 w_face_normal(std::vector<glm::vec3>& face_normal_vector_vec3, uint32_t x, uint32_t z, uint32_t image_width);
     inline glm::vec3 n_face_normal(std::vector<glm::vec3>& face_normal_vector_vec3, uint32_t x, uint32_t z, uint32_t image_width);

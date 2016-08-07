@@ -211,40 +211,8 @@ namespace geometry
     }
 
     // for bilinear interpolation.
-    inline glm::vec3 ssw_face_normal(std::vector<glm::vec3>& face_normal_vector_vec3, uint32_t x, uint32_t z, uint32_t image_width)
-    {
-        geometry::get_face_normal(face_normal_vector_vec3, x, z, SSW, image_width);
-    }
-    inline glm::vec3 wsw_face_normal(std::vector<glm::vec3>& face_normal_vector_vec3, uint32_t x, uint32_t z, uint32_t image_width)
-    {
-        geometry::get_face_normal(face_normal_vector_vec3, x, z, WSW, image_width);
-    }
-    inline glm::vec3 wnw_face_normal(std::vector<glm::vec3>& face_normal_vector_vec3, uint32_t x, uint32_t z, uint32_t image_width)
-    {
-        geometry::get_face_normal(face_normal_vector_vec3, x, z, WNW, image_width);
-    }
-    inline glm::vec3 nnw_face_normal(std::vector<glm::vec3>& face_normal_vector_vec3, uint32_t x, uint32_t z, uint32_t image_width)
-    {
-        geometry::get_face_normal(face_normal_vector_vec3, x, z, NNW, image_width);
-    }
-    inline glm::vec3 nne_face_normal(std::vector<glm::vec3>& face_normal_vector_vec3, uint32_t x, uint32_t z, uint32_t image_width)
-    {
-        geometry::get_face_normal(face_normal_vector_vec3, x, z, NNE, image_width);
-    }
-    inline glm::vec3 ene_face_normal(std::vector<glm::vec3>& face_normal_vector_vec3, uint32_t x, uint32_t z, uint32_t image_width)
-    {
-        geometry::get_face_normal(face_normal_vector_vec3, x, z, ENE, image_width);
-    }
-    inline glm::vec3 ese_face_normal(std::vector<glm::vec3>& face_normal_vector_vec3, uint32_t x, uint32_t z, uint32_t image_width)
-    {
-        geometry::get_face_normal(face_normal_vector_vec3, x, z, ESE, image_width);
-    }
-    inline glm::vec3 sse_face_normal(std::vector<glm::vec3>& face_normal_vector_vec3, uint32_t x, uint32_t z, uint32_t image_width)
-    {
-        geometry::get_face_normal(face_normal_vector_vec3, x, z, SSE, image_width);
-    }
-
-    // for bilinear interpolation.
+    // These `inline` functions exist to avoid need to remember
+    // the array order when calling `geometry::get_face_normal`.
     inline glm::vec3 s_face_normal(std::vector<glm::vec3>& face_normal_vector_vec3, uint32_t x, uint32_t z, uint32_t image_width)
     {
         geometry::get_face_normal(face_normal_vector_vec3, x - 1, z - 1, ENE, image_width);
