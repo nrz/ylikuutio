@@ -440,9 +440,9 @@ namespace geometry
                             }
                             else
                             {
-                                uvIndex[0] = southwest_y(x, z, input_vertex_pointer, image_width);
-                                uvIndex[1] = northeast_y(x, z, input_vertex_pointer, image_width);
-                                uvIndex[2] = southeast_y(x, z, input_vertex_pointer, image_width);
+                                uvIndex[0] = static_cast<GLuint>(southwest_y(x, z, input_vertex_pointer, image_width));
+                                uvIndex[1] = static_cast<GLuint>(northeast_y(x, z, input_vertex_pointer, image_width));
+                                uvIndex[2] = static_cast<GLuint>(southeast_y(x, z, input_vertex_pointer, image_width));
                             }
                         }
                         else if (is_southeast_northwest_edges_in_use)
@@ -473,9 +473,9 @@ namespace geometry
                             }
                             else
                             {
-                                uvIndex[0] = southeast_y(x, z, input_vertex_pointer, image_width);
-                                uvIndex[1] = southwest_y(x, z, input_vertex_pointer, image_width);
-                                uvIndex[2] = northwest_y(x, z, input_vertex_pointer, image_width);
+                                uvIndex[0] = static_cast<GLuint>(southeast_y(x, z, input_vertex_pointer, image_width));
+                                uvIndex[1] = static_cast<GLuint>(southwest_y(x, z, input_vertex_pointer, image_width));
+                                uvIndex[2] = static_cast<GLuint>(northwest_y(x, z, input_vertex_pointer, image_width));
 
                             }
                         }
@@ -503,9 +503,9 @@ namespace geometry
                             }
                             else
                             {
-                                uvIndex[0] = southwest_y(x, z, input_vertex_pointer, image_width);
-                                uvIndex[1] = northwest_y(x, z, input_vertex_pointer, image_width);
-                                uvIndex[2] = northeast_y(x, z, input_vertex_pointer, image_width);
+                                uvIndex[0] = static_cast<GLuint>(southwest_y(x, z, input_vertex_pointer, image_width));
+                                uvIndex[1] = static_cast<GLuint>(northwest_y(x, z, input_vertex_pointer, image_width));
+                                uvIndex[2] = static_cast<GLuint>(northeast_y(x, z, input_vertex_pointer, image_width));
                             }
                         }
                         else if (is_southeast_northwest_edges_in_use)
@@ -527,9 +527,9 @@ namespace geometry
                             }
                             else
                             {
-                                uvIndex[0] = southeast_y(x, z, input_vertex_pointer, image_width);
-                                uvIndex[1] = northwest_y(x, z, input_vertex_pointer, image_width);
-                                uvIndex[2] = northeast_y(x, z, input_vertex_pointer, image_width);
+                                uvIndex[0] = static_cast<GLuint>(southeast_y(x, z, input_vertex_pointer, image_width));
+                                uvIndex[1] = static_cast<GLuint>(northwest_y(x, z, input_vertex_pointer, image_width));
+                                uvIndex[2] = static_cast<GLuint>(northeast_y(x, z, input_vertex_pointer, image_width));
                             }
                         }
 
@@ -902,9 +902,9 @@ namespace geometry
                         }
                         else
                         {
-                            uvIndex[0] = center_y(x, z, input_vertex_pointer, image_width);
-                            uvIndex[1] = southeast_y(x, z, input_vertex_pointer, image_width);
-                            uvIndex[2] = southwest_y(x, z, input_vertex_pointer, image_width);
+                            uvIndex[0] = static_cast<GLuint>(center_y(x, z, input_vertex_pointer, image_width));
+                            uvIndex[1] = static_cast<GLuint>(southeast_y(x, z, input_vertex_pointer, image_width));
+                            uvIndex[2] = static_cast<GLuint>(southwest_y(x, z, input_vertex_pointer, image_width));
                         }
 
                         normalIndex[0] = 0; // TODO: add proper normal index.
@@ -937,9 +937,9 @@ namespace geometry
                         }
                         else
                         {
-                            uvIndex[0] = center_y(x, z, input_vertex_pointer, image_width);
-                            uvIndex[1] = southwest_y(x, z, input_vertex_pointer, image_width);
-                            uvIndex[2] = northwest_y(x, z, input_vertex_pointer, image_width);
+                            uvIndex[0] = static_cast<GLuint>(center_y(x, z, input_vertex_pointer, image_width));
+                            uvIndex[1] = static_cast<GLuint>(southwest_y(x, z, input_vertex_pointer, image_width));
+                            uvIndex[2] = static_cast<GLuint>(northwest_y(x, z, input_vertex_pointer, image_width));
                         }
 
                         normalIndex[0] = 0; // TODO: add proper normal index.
@@ -972,9 +972,9 @@ namespace geometry
                         }
                         else
                         {
-                            uvIndex[0] = center_y(x, z, input_vertex_pointer, image_width);
-                            uvIndex[1] = northwest_y(x, z, input_vertex_pointer, image_width);
-                            uvIndex[2] = northeast_y(x, z, input_vertex_pointer, image_width);
+                            uvIndex[0] = static_cast<GLuint>(center_y(x, z, input_vertex_pointer, image_width));
+                            uvIndex[1] = static_cast<GLuint>(northwest_y(x, z, input_vertex_pointer, image_width));
+                            uvIndex[2] = static_cast<GLuint>(northeast_y(x, z, input_vertex_pointer, image_width));
                         }
 
                         normalIndex[0] = 0; // TODO: add proper normal index.
@@ -1007,9 +1007,9 @@ namespace geometry
                         }
                         else
                         {
-                            uvIndex[0] = center_y(x, z, input_vertex_pointer, image_width);
-                            uvIndex[1] = northeast_y(x, z, input_vertex_pointer, image_width);
-                            uvIndex[2] = southeast_y(x, z, input_vertex_pointer, image_width);
+                            uvIndex[0] = static_cast<GLuint>(center_y(x, z, input_vertex_pointer, image_width));
+                            uvIndex[1] = static_cast<GLuint>(northeast_y(x, z, input_vertex_pointer, image_width));
+                            uvIndex[2] = static_cast<GLuint>(southeast_y(x, z, input_vertex_pointer, image_width));
                         }
 
                         normalIndex[0] = 0; // TODO: add proper normal index.
@@ -1072,9 +1072,9 @@ namespace geometry
                         }
                         else
                         {
-                            uvIndex[0] = southwest_y(x, z, input_vertex_pointer, image_width);
-                            uvIndex[1] = northwest_y(x, z, input_vertex_pointer, image_width);
-                            uvIndex[2] = southeast_y(x, z, input_vertex_pointer, image_width);
+                            uvIndex[0] = static_cast<GLuint>(southwest_y(x, z, input_vertex_pointer, image_width));
+                            uvIndex[1] = static_cast<GLuint>(northwest_y(x, z, input_vertex_pointer, image_width));
+                            uvIndex[2] = static_cast<GLuint>(southeast_y(x, z, input_vertex_pointer, image_width));
                         }
 
                         normalIndex[0] = 0; // TODO: add proper normal index.
@@ -1107,9 +1107,9 @@ namespace geometry
                         }
                         else
                         {
-                            uvIndex[0] = northeast_y(x, z, input_vertex_pointer, image_width);
-                            uvIndex[1] = southeast_y(x, z, input_vertex_pointer, image_width);
-                            uvIndex[2] = northwest_y(x, z, input_vertex_pointer, image_width);
+                            uvIndex[0] = static_cast<GLuint>(northeast_y(x, z, input_vertex_pointer, image_width));
+                            uvIndex[1] = static_cast<GLuint>(southeast_y(x, z, input_vertex_pointer, image_width));
+                            uvIndex[2] = static_cast<GLuint>(northwest_y(x, z, input_vertex_pointer, image_width));
                         }
 
                         normalIndex[0] = 0; // TODO: add proper normal index.
