@@ -27,11 +27,11 @@ namespace geometry
             uint32_t z,
             uint32_t image_width);
 
-    GLuint southwest(uint32_t current_vertex_i, uint32_t image_width);
-    GLuint southeast(uint32_t current_vertex_i, uint32_t image_width);
-    GLuint northwest(uint32_t current_vertex_i, uint32_t image_width);
-    GLuint northeast(uint32_t current_vertex_i, uint32_t image_width);
-    GLuint center(uint32_t current_interpolated_vertex_i);
+    inline GLuint southwest(uint32_t current_vertex_i, uint32_t image_width);
+    inline GLuint southeast(uint32_t current_vertex_i, uint32_t image_width);
+    inline GLuint northwest(uint32_t current_vertex_i, uint32_t image_width);
+    inline GLuint northeast(uint32_t current_vertex_i, uint32_t image_width);
+    inline GLuint center(uint32_t current_interpolated_vertex_i);
 
     inline uint32_t southwest_y(uint32_t x, uint32_t z, uint32_t* input_vertex_pointer, uint32_t image_width);
     inline uint32_t southeast_y(uint32_t x, uint32_t z, uint32_t* input_vertex_pointer, uint32_t image_width);
