@@ -76,22 +76,22 @@ namespace ontology
         }
 
         // Make sure this is a 24bpp file
-        if (*(uint32_t*) & (header[0x1E]) != 0)
+        if (*(uint32_t*) &header[0x1E] != 0)
         {
             std::cerr << "not a correct BMP file.\n";
             return false;
         }
 
-        if (*(uint32_t*) & (header[0x1C]) != 24)
+        if (*(uint32_t*) &header[0x1C] != 24)
         {
             std::cerr << "not a correct BMP file.\n";
             return false;
         }
 
         // Read the information about the image
-        imageSize    = *(uint32_t*) & (header[0x22]);
-        image_width  = *(uint32_t*) & (header[0x12]);
-        image_height = *(uint32_t*) & (header[0x16]);
+        imageSize    = *(uint32_t*) &header[0x22];
+        image_width  = *(uint32_t*) &header[0x12];
+        image_height = *(uint32_t*) &header[0x16];
 
         // Define world size.
         uint32_t world_size = image_width * image_height;
