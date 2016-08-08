@@ -479,6 +479,7 @@ add_library(ylikuutio
     code/ylikuutio/common/global_variables.cpp
     code/ylikuutio/common/global_variables.hpp
     code/ylikuutio/common/globals.hpp
+    code/ylikuutio/common/template_helpers.hpp
 
     # console, in alphabetical order.
     code/ylikuutio/console/console.cpp
