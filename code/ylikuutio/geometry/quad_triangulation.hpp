@@ -383,6 +383,7 @@ namespace geometry
                             }
                             else
                             {
+                                // Use altitude as texture coordinate (useful for elevation maps).
                                 uvIndex[0] = static_cast<GLuint>(southwest_y(x, z, input_vertex_pointer, image_width));
                                 uvIndex[1] = static_cast<GLuint>(northeast_y(x, z, input_vertex_pointer, image_width));
                                 uvIndex[2] = static_cast<GLuint>(southeast_y(x, z, input_vertex_pointer, image_width));
@@ -416,6 +417,7 @@ namespace geometry
                             }
                             else
                             {
+                                // Use altitude as texture coordinate (useful for elevation maps).
                                 uvIndex[0] = static_cast<GLuint>(southeast_y(x, z, input_vertex_pointer, image_width));
                                 uvIndex[1] = static_cast<GLuint>(southwest_y(x, z, input_vertex_pointer, image_width));
                                 uvIndex[2] = static_cast<GLuint>(northwest_y(x, z, input_vertex_pointer, image_width));
@@ -446,6 +448,7 @@ namespace geometry
                             }
                             else
                             {
+                                // Use altitude as texture coordinate (useful for elevation maps).
                                 uvIndex[0] = static_cast<GLuint>(southwest_y(x, z, input_vertex_pointer, image_width));
                                 uvIndex[1] = static_cast<GLuint>(northwest_y(x, z, input_vertex_pointer, image_width));
                                 uvIndex[2] = static_cast<GLuint>(northeast_y(x, z, input_vertex_pointer, image_width));
@@ -470,6 +473,7 @@ namespace geometry
                             }
                             else
                             {
+                                // Use altitude as texture coordinate (useful for elevation maps).
                                 uvIndex[0] = static_cast<GLuint>(southeast_y(x, z, input_vertex_pointer, image_width));
                                 uvIndex[1] = static_cast<GLuint>(northwest_y(x, z, input_vertex_pointer, image_width));
                                 uvIndex[2] = static_cast<GLuint>(northeast_y(x, z, input_vertex_pointer, image_width));
@@ -863,6 +867,7 @@ namespace geometry
                         }
                         else
                         {
+                            // Use altitude as texture coordinate (useful for elevation maps).
                             uvIndex[0] = static_cast<GLuint>(center_y(x, z, input_vertex_pointer, image_width));
                             uvIndex[1] = static_cast<GLuint>(southeast_y(x, z, input_vertex_pointer, image_width));
                             uvIndex[2] = static_cast<GLuint>(southwest_y(x, z, input_vertex_pointer, image_width));
@@ -898,6 +903,7 @@ namespace geometry
                         }
                         else
                         {
+                            // Use altitude as texture coordinate (useful for elevation maps).
                             uvIndex[0] = static_cast<GLuint>(center_y(x, z, input_vertex_pointer, image_width));
                             uvIndex[1] = static_cast<GLuint>(southwest_y(x, z, input_vertex_pointer, image_width));
                             uvIndex[2] = static_cast<GLuint>(northwest_y(x, z, input_vertex_pointer, image_width));
@@ -933,6 +939,7 @@ namespace geometry
                         }
                         else
                         {
+                            // Use altitude as texture coordinate (useful for elevation maps).
                             uvIndex[0] = static_cast<GLuint>(center_y(x, z, input_vertex_pointer, image_width));
                             uvIndex[1] = static_cast<GLuint>(northwest_y(x, z, input_vertex_pointer, image_width));
                             uvIndex[2] = static_cast<GLuint>(northeast_y(x, z, input_vertex_pointer, image_width));
@@ -968,6 +975,7 @@ namespace geometry
                         }
                         else
                         {
+                            // Use altitude as texture coordinate (useful for elevation maps).
                             uvIndex[0] = static_cast<GLuint>(center_y(x, z, input_vertex_pointer, image_width));
                             uvIndex[1] = static_cast<GLuint>(northeast_y(x, z, input_vertex_pointer, image_width));
                             uvIndex[2] = static_cast<GLuint>(southeast_y(x, z, input_vertex_pointer, image_width));
@@ -1033,6 +1041,7 @@ namespace geometry
                         }
                         else
                         {
+                            // Use altitude as texture coordinate (useful for elevation maps).
                             uvIndex[0] = static_cast<GLuint>(southwest_y(x, z, input_vertex_pointer, image_width));
                             uvIndex[1] = static_cast<GLuint>(northwest_y(x, z, input_vertex_pointer, image_width));
                             uvIndex[2] = static_cast<GLuint>(southeast_y(x, z, input_vertex_pointer, image_width));
@@ -1068,6 +1077,7 @@ namespace geometry
                         }
                         else
                         {
+                            // Use altitude as texture coordinate (useful for elevation maps).
                             uvIndex[0] = static_cast<GLuint>(northeast_y(x, z, input_vertex_pointer, image_width));
                             uvIndex[1] = static_cast<GLuint>(southeast_y(x, z, input_vertex_pointer, image_width));
                             uvIndex[2] = static_cast<GLuint>(northwest_y(x, z, input_vertex_pointer, image_width));
