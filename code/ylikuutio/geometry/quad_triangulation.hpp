@@ -281,9 +281,9 @@ namespace geometry
 
                     // This corresponds to "v": specify one vertex.
                     glm::vec3 vertex;
-                    vertex.x = (GLfloat) x;
+                    vertex.x = static_cast<GLfloat>(x);
                     vertex.y = y;
-                    vertex.z = (GLfloat) z;
+                    vertex.z = static_cast<GLfloat>(z);
                     temp_vertices.push_back(vertex);
 
                     // This corresponds to "vt": specify texture coordinates of one vertex.
@@ -291,8 +291,8 @@ namespace geometry
 
                     if (triangulate_quads_struct.should_ylikuutio_use_real_texture_coordinates)
                     {
-                        uv.x = round((GLfloat) texture_x);
-                        uv.y = round((GLfloat) texture_y);
+                        uv.x = round(static_cast<GLfloat>(texture_x));
+                        uv.y = round(static_cast<GLfloat>(texture_y));
                     }
                     else
                     {
