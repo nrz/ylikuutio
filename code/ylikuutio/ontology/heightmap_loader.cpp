@@ -187,11 +187,11 @@ namespace ontology
         // and positive value mean north for latitude and east for longitude.
         // Therefore the SRTM heightmap filename can be resolved by rounding both latitude and longitude down (towards negative infinity).
 
-        int32_t filename_latitude = floor(latitude);
-        int32_t filename_longitude = floor(longitude);
+        int32_t filename_latitude = std::floor(latitude);
+        int32_t filename_longitude = std::floor(longitude);
 
-        double southern_latitude = floor(latitude);
-        double western_longitude = floor(longitude);
+        double southern_latitude = std::floor(latitude);
+        double western_longitude = std::floor(longitude);
 
         double northern_latitude = southern_latitude + 1.0f;
         double eastern_longitude = western_longitude + 1.0f;
