@@ -833,7 +833,7 @@ namespace geometry
                 for (uint32_t z = 1; z < image_height; z++)
                 {
                     // show progress in percents.
-                    current_percent = (int32_t) floor(100.0f * ((double) z / (double) (image_height - 1)));
+                    current_percent = static_cast<int32_t>(floor(100.0f * ((double) z / (double) (image_height - 1))));
                     std::cout << current_percent << "% ";
 
                     for (uint32_t x = 1; x < image_width; x++)
