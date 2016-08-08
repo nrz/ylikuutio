@@ -288,7 +288,7 @@ namespace ontology
             for (GLuint x = 0; x < image_width_in_use; x++)
             {
                 GLuint y;
-                y = ((((GLuint) *image_pointer) << 8) | ((GLuint) *(image_pointer + 1)));
+                y = static_cast<GLuint>(*image_pointer) << 8 | static_cast<GLuint>(*(image_pointer + 1));
 
                 image_pointer += sizeof(int16_t);
                 *vertex_pointer++ = y;
