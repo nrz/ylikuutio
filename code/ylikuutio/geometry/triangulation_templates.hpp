@@ -113,7 +113,7 @@ namespace geometry
                     }
                     else
                     {
-                        uv.x = y / 256;
+                        uv.x = y / 256.0f;
                         uv.y = 0.0f;
                     }
 
