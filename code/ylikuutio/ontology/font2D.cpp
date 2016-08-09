@@ -45,7 +45,7 @@ namespace ontology
         }
 
         // Initialize VBO
-        glGenBuffers(1, &Text2DVertexBufferID);
+        glGenBuffers(1, &vertexbuffer);
         glGenBuffers(1, &Text2DUVBufferID);
 
         // Initialize Shader
@@ -72,7 +72,7 @@ namespace ontology
         // destructor.
 
         // Delete buffers
-        glDeleteBuffers(1, &Text2DVertexBufferID);
+        glDeleteBuffers(1, &vertexbuffer);
         glDeleteBuffers(1, &Text2DUVBufferID);
 
         // Delete texture
@@ -248,7 +248,7 @@ namespace ontology
             UVs.push_back(uv_down_left);
         }
 
-        glBindBuffer(GL_ARRAY_BUFFER, Text2DVertexBufferID);
+        glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
         glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(glm::vec2), &vertices[0], GL_STATIC_DRAW);
         glBindBuffer(GL_ARRAY_BUFFER, Text2DUVBufferID);
         glBufferData(GL_ARRAY_BUFFER, UVs.size() * sizeof(glm::vec2), &UVs[0], GL_STATIC_DRAW);
@@ -270,7 +270,7 @@ namespace ontology
 
         // 1st attribute buffer : vertices
         glEnableVertexAttribArray(vertexPosition_screenspaceID);
-        glBindBuffer(GL_ARRAY_BUFFER, Text2DVertexBufferID);
+        glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
         glVertexAttribPointer(vertexPosition_screenspaceID, 2, GL_FLOAT, GL_FALSE, 0, (void*) 0);
 
         // 2nd attribute buffer : UVs
