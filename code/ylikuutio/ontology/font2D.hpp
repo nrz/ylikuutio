@@ -51,7 +51,7 @@ namespace ontology
         private:
             GLuint text2D_textureID;              // Material containing the font
             GLuint vertexbuffer;         // Buffer containing the vertices
-            GLuint Text2DUVBufferID;             // Buffer containing the UVs
+            GLuint uvbuffer;             // Buffer containing the UVs
             GLuint Text2DShaderID;               // Shader program used to display the text
             GLuint vertexPosition_screenspaceID; // Location of the program's "vertexPosition_screenspace" attribute
             GLuint vertexUVID;                   // Location of the program's "vertexUV" attribute

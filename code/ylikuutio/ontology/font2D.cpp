@@ -46,7 +46,7 @@ namespace ontology
 
         // Initialize VBO
         glGenBuffers(1, &vertexbuffer);
-        glGenBuffers(1, &Text2DUVBufferID);
+        glGenBuffers(1, &uvbuffer);
 
         // Initialize Shader
         Text2DShaderID = LoadShaders("TextVertexShader.vertexshader", "TextVertexShader.fragmentshader");
@@ -73,7 +73,7 @@ namespace ontology
 
         // Delete buffers
         glDeleteBuffers(1, &vertexbuffer);
-        glDeleteBuffers(1, &Text2DUVBufferID);
+        glDeleteBuffers(1, &uvbuffer);
 
         // Delete texture
         glDeleteTextures(1, &text2D_textureID);
@@ -250,7 +250,7 @@ namespace ontology
 
         glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
         glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(glm::vec2), &vertices[0], GL_STATIC_DRAW);
-        glBindBuffer(GL_ARRAY_BUFFER, Text2DUVBufferID);
+        glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
         glBufferData(GL_ARRAY_BUFFER, UVs.size() * sizeof(glm::vec2), &UVs[0], GL_STATIC_DRAW);
 
         // Bind shader
@@ -275,7 +275,7 @@ namespace ontology
 
         // 2nd attribute buffer : UVs
         glEnableVertexAttribArray(vertexUVID);
-        glBindBuffer(GL_ARRAY_BUFFER, Text2DUVBufferID);
+        glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
         glVertexAttribPointer(vertexUVID, 2, GL_FLOAT, GL_FALSE, 0, (void*) 0);
 
         glEnable(GL_BLEND);
