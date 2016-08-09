@@ -1,12 +1,6 @@
 #ifndef __HEIGHTMAP_LOADER_HPP_INCLUDED
 #define __HEIGHTMAP_LOADER_HPP_INCLUDED
 
-// Include GLEW
-#ifndef __GL_GLEW_H_INCLUDED
-#define __GL_GLEW_H_INCLUDED
-#include <GL/glew.h> // GLfloat, GLuint etc.
-#endif
-
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
 #define __GLM_GLM_HPP_INCLUDED
@@ -24,8 +18,8 @@ namespace ontology
             std::vector<glm::vec3>& out_vertices,
             std::vector<glm::vec2>& out_UVs,
             std::vector<glm::vec3>& out_normals,
-            GLuint &image_width,
-            GLuint &image_height,
+            uint32_t &image_width,
+            uint32_t &image_height,
             std::string color_channel,
             std::string triangulation_type);
 

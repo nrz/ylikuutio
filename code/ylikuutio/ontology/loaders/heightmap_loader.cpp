@@ -7,12 +7,6 @@
 #include "code/ylikuutio/geometry/quad_triangulation.hpp"
 #include "code/ylikuutio/common/globals.hpp"
 
-// Include GLEW
-#ifndef __GL_GLEW_H_INCLUDED
-#define __GL_GLEW_H_INCLUDED
-#include <GL/glew.h> // GLfloat, GLuint etc.
-#endif
-
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
 #define __GLM_GLM_HPP_INCLUDED
@@ -37,8 +31,8 @@ namespace ontology
             std::vector<glm::vec3>& out_vertices,
             std::vector<glm::vec2>& out_UVs,
             std::vector<glm::vec3>& out_normals,
-            GLuint &image_width,
-            GLuint &image_height,
+            uint32_t &image_width,
+            uint32_t &image_height,
             std::string color_channel,
             std::string triangulation_type)
     {
@@ -111,40 +105,40 @@ namespace ontology
         // Everything is in memory now, the file can be closed
         std::fclose(file);
 
-        GLuint* vertex_data;
-        vertex_data = new GLuint [world_size];
+        uint32_t* vertex_data;
+        vertex_data = new uint32_t [world_size];
 
         uint8_t *image_pointer;
         image_pointer = image_data;
 
-        GLuint* vertex_pointer;
+        uint32_t* vertex_pointer;
         vertex_pointer = vertex_data;
 
         const char* char_color_channel = color_channel.c_str();
 
         // start processing image_data.
-        for (GLuint z = 0; z < image_height; z++)
+        for (uint32_t z = 0; z < image_height; z++)
         {
-            for (GLuint x = 0; x < image_width; x++)
+            for (uint32_t x = 0; x < image_width; x++)
             {
-                GLuint y;
+                uint32_t y;
 
                 if (std::strcmp(char_color_channel, "blue") == 0)
                 {
-                    y = static_cast<GLuint>(*image_pointer);       // y-coordinate is the blue (B) value.
+                    y = static_cast<uint32_t>(*image_pointer);       // y-coordinate is the blue (B) value.
                 }
                 else if (std::strcmp(char_color_channel, "green") == 0)
                 {
-                    y = static_cast<GLuint>(*(image_pointer + 1)); // y-coordinate is the green (G) value.
+                    y = static_cast<uint32_t>(*(image_pointer + 1)); // y-coordinate is the green (G) value.
                 }
                 else if (std::strcmp(char_color_channel, "red") == 0)
                 {
-                    y = static_cast<GLuint>(*(image_pointer + 2)); // y-coordinate is the red (R) value.
+                    y = static_cast<uint32_t>(*(image_pointer + 2)); // y-coordinate is the red (R) value.
                 }
                 // y-coordinate is the mean of R, G, & B.
                 else if ((std::strcmp(char_color_channel, "mean") == 0) || (std::strcmp(char_color_channel, "all") == 0))
                 {
-                    y = (static_cast<GLuint>(*image_pointer) + static_cast<GLuint>(*(image_pointer + 1)) + static_cast<GLuint>(*(image_pointer + 2))) / 3;
+                    y = (static_cast<uint32_t>(*image_pointer) + static_cast<uint32_t>(*(image_pointer + 1)) + static_cast<uint32_t>(*(image_pointer + 2))) / 3;
                 }
                 else
                 {
@@ -268,13 +262,13 @@ namespace ontology
         // Everything is in memory now, the file can be closed
         std::fclose(file);
 
-        GLuint* vertex_data;
-        vertex_data = new GLuint [image_width_in_use * image_height_in_use];
+        uint32_t* vertex_data;
+        vertex_data = new uint32_t [image_width_in_use * image_height_in_use];
 
         uint8_t *image_pointer;
         image_pointer = image_data + sizeof(int16_t) * (true_image_height - 1) * true_image_width; // start from southwestern corner.
 
-        GLuint* vertex_pointer;
+        uint32_t* vertex_pointer;
         vertex_pointer = vertex_data;
 
         // start processing image_data.
@@ -283,12 +277,12 @@ namespace ontology
         // FIXME: this is a temporary testing code with a hardcoded start from the southwestern corner.
         // TODO: write a proper code for loading the appropriate chunks (based on real spherical coordinates) into VBOs!
 
-        for (GLuint z = 0; z < image_height_in_use; z++)
+        for (uint32_t z = 0; z < image_height_in_use; z++)
         {
-            for (GLuint x = 0; x < image_width_in_use; x++)
+            for (uint32_t x = 0; x < image_width_in_use; x++)
             {
-                GLuint y;
-                y = static_cast<GLuint>(*image_pointer) << 8 | static_cast<GLuint>(*(image_pointer + 1));
+                uint32_t y;
+                y = static_cast<uint32_t>(*image_pointer) << 8 | static_cast<uint32_t>(*(image_pointer + 1));
 
                 image_pointer += sizeof(int16_t);
                 *vertex_pointer++ = y;
