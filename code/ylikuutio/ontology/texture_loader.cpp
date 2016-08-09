@@ -174,7 +174,6 @@ namespace texture
         if (fp == nullptr)
         {
             std::printf("%s could not be opened. Are you in the right directory ? Don't forget to read the FAQ !\n", imagepath);
-            std::getchar();
             return 0;
         }
 
