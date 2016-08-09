@@ -58,23 +58,23 @@ namespace texture
         }
 
         // Make sure this is a 24bpp file
-        if (*(int*) & (header[0x1E]) != 0)
+        if (*(int*) &header[0x1E] != 0)
         {
             std::printf("Not a correct BMP file\n");
             return 0;
         }
 
-        if (*(int*) & (header[0x1C]) != 24)
+        if (*(int*) &header[0x1C] != 24)
         {
             std::printf("Not a correct BMP file\n");
             return 0;
         }
 
         // Read the information about the image
-        dataPos    = *(int*) & (header[0x0A]);
-        imageSize  = *(int*) & (header[0x22]);
-        width      = *(int*) & (header[0x12]);
-        height     = *(int*) & (header[0x16]);
+        dataPos    = *(int*) &header[0x0A];
+        imageSize  = *(int*) &header[0x22];
+        width      = *(int*) &header[0x12];
+        height     = *(int*) &header[0x16];
 
         // Some BMP files are misformatted, guess missing information
         if (imageSize == 0)
@@ -190,13 +190,13 @@ namespace texture
         /* get the surface desc */
         std::fread(&header, 124, 1, fp);
 
-        uint32_t height      = *(uint32_t*) & (header[8 ]);
-        uint32_t width       = *(uint32_t*) & (header[12]);
-        uint32_t linearSize  = *(uint32_t*) & (header[16]);
-        uint32_t mipMapCount = *(uint32_t*) & (header[24]);
-        uint32_t fourCC      = *(uint32_t*) & (header[80]);
+        uint32_t height      = *(uint32_t*) &header[8];
+        uint32_t width       = *(uint32_t*) &header[12];
+        uint32_t linearSize  = *(uint32_t*) &header[16];
+        uint32_t mipMapCount = *(uint32_t*) &header[24];
+        uint32_t fourCC      = *(uint32_t*) &header[80];
 
-        unsigned char*  buffer;
+        unsigned char* buffer;
         uint32_t bufsize;
         /* how big is it going to be including all mipmaps? */
         bufsize = mipMapCount > 1 ? linearSize * 2 : linearSize;
