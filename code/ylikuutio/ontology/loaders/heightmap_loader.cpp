@@ -89,8 +89,8 @@ namespace ontology
         }
 
         // Read the information about the image
-        image_size    = *(uint32_t*) &header[0x22];
-        image_width  = *(uint32_t*) &header[0x12];
+        image_size = *(uint32_t*) &header[0x22];
+        image_width = *(uint32_t*) &header[0x12];
         image_height = *(uint32_t*) &header[0x16];
 
         // Define world size.
@@ -253,9 +253,9 @@ namespace ontology
             return false;
         }
 
-        true_image_width  = 1201;
+        true_image_width = 1201;
         true_image_height = 1201;
-        image_width_in_use  = 1200;
+        image_width_in_use = 1200;
         image_height_in_use = 1200;
         image_size = sizeof(int16_t) * true_image_width * true_image_height;
 
