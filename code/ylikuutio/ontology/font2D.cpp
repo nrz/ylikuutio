@@ -49,21 +49,21 @@ namespace ontology
         glGenBuffers(1, &uvbuffer);
 
         // Initialize Shader
-        Text2DShaderID = LoadShaders("TextVertexShader.vertexshader", "TextVertexShader.fragmentshader");
+        programID = LoadShaders("TextVertexShader.vertexshader", "TextVertexShader.fragmentshader");
 
         // Get a handle for our buffers
-        vertexPosition_screenspaceID = glGetAttribLocation(Text2DShaderID, "vertexPosition_screenspace");
-        vertexUVID = glGetAttribLocation(Text2DShaderID, "vertexUV");
+        vertexPosition_screenspaceID = glGetAttribLocation(programID, "vertexPosition_screenspace");
+        vertexUVID = glGetAttribLocation(programID, "vertexUV");
 
         // Initialize uniforms' IDs
-        Text2DUniformID = glGetUniformLocation(Text2DShaderID, "myTextureSampler");
+        Text2DUniformID = glGetUniformLocation(programID, "myTextureSampler");
 
         // Initialize uniform window width.
-        screen_width_uniform_ID = glGetUniformLocation(Text2DShaderID, "screen_width");
+        screen_width_uniform_ID = glGetUniformLocation(programID, "screen_width");
         glUniform1i(screen_width_uniform_ID, screen_width);
 
         // Initialize uniform window height.
-        screen_height_uniform_ID = glGetUniformLocation(Text2DShaderID, "screen_height");
+        screen_height_uniform_ID = glGetUniformLocation(programID, "screen_height");
         glUniform1i(screen_height_uniform_ID, screen_height);
     }
 
@@ -79,7 +79,7 @@ namespace ontology
         glDeleteTextures(1, &text2D_textureID);
 
         // Delete shader
-        glDeleteProgram(Text2DShaderID);
+        glDeleteProgram(programID);
     }
 
     void Font2D::printText2D(
@@ -254,7 +254,7 @@ namespace ontology
         glBufferData(GL_ARRAY_BUFFER, UVs.size() * sizeof(glm::vec2), &UVs[0], GL_STATIC_DRAW);
 
         // Bind shader
-        glUseProgram(Text2DShaderID);
+        glUseProgram(programID);
 
         // Bind texture
         glActiveTexture(GL_TEXTURE0);
