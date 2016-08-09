@@ -216,6 +216,8 @@ namespace geometry
                 std::vector<glm::vec2>& out_UVs,
                 std::vector<glm::vec3>& out_normals)
         {
+            // Input vertices (`T1* input_vertex_pointer`)
+            // can be `float`, `int32_t` or `uint32_t`.
             uint32_t image_width = triangulate_quads_struct.image_width;
             uint32_t image_height = triangulate_quads_struct.image_height;
             std::string triangulation_type = triangulate_quads_struct.triangulation_type;
