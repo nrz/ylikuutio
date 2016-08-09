@@ -36,9 +36,7 @@ namespace console
             void set_my_keyrelease_callback_engine_vector_pointer(std::vector<KeyAndCallbackStruct>* my_keyrelease_callback_engine_vector_pointer);
             void draw_console();
 
-            // Callbacks.
-
-            static void charmods_callback(GLFWwindow* window, unsigned int codepoint, int mods);
+            // Public callbacks.
 
             // Action mode keyrelease callbacks begin here.
 
@@ -204,9 +202,13 @@ namespace console
                     std::vector<callback_system::CallbackParameter*>&,
                     console::Console* console);
 
-            // Callbacks end here.
+            // Public callbacks end here.
 
         private:
+            static void charmods_callback(GLFWwindow* window, unsigned int codepoint, int mods);
+
+            // Callbacks end here.
+
             void copy_historical_input_into_current_input();
             bool exit_console();
             void delete_character();
