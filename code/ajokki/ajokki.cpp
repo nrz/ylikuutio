@@ -15,8 +15,6 @@
 #include "code/ylikuutio/callback_system/key_and_callback_struct.hpp"
 #include "code/ylikuutio/console/console.hpp"
 #include "code/ylikuutio/console/console_callback_object.hpp"
-#include "code/ylikuutio/ontology/shader_loader.hpp"
-#include "code/ylikuutio/ontology/texture_loader.hpp"
 #include "code/ylikuutio/ontology/vboindexer.hpp"
 #include "code/ylikuutio/ontology/font2D.hpp"
 #include "code/ylikuutio/ontology/object.hpp"
