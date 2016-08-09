@@ -37,11 +37,11 @@ namespace ontology
         // Initialize texture
         if ((std::strcmp(char_font_texture_file_format, "bmp") == 0) || (std::strcmp(char_font_texture_file_format, "BMP") == 0))
         {
-            text2DTextureID = texture::load_BMP_texture(texturePath);
+            text2D_textureID = texture::load_BMP_texture(texturePath);
         }
         else if ((std::strcmp(char_font_texture_file_format, "dds") == 0) || (std::strcmp(char_font_texture_file_format, "DDS") == 0))
         {
-            text2DTextureID = texture::load_DDS_texture(texturePath);
+            text2D_textureID = texture::load_DDS_texture(texturePath);
         }
 
         // Initialize VBO
@@ -76,7 +76,7 @@ namespace ontology
         glDeleteBuffers(1, &Text2DUVBufferID);
 
         // Delete texture
-        glDeleteTextures(1, &text2DTextureID);
+        glDeleteTextures(1, &text2D_textureID);
 
         // Delete shader
         glDeleteProgram(Text2DShaderID);
@@ -258,7 +258,7 @@ namespace ontology
 
         // Bind texture
         glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, text2DTextureID);
+        glBindTexture(GL_TEXTURE_2D, text2D_textureID);
         // Set our "myTextureSampler" sampler to user Material Unit 0
         glUniform1i(Text2DUniformID, 0);
 

@@ -49,7 +49,7 @@ namespace ontology
                     const char* char_font_texture_file_format);
 
         private:
-            GLuint text2DTextureID;              // Material containing the font
+            GLuint text2D_textureID;              // Material containing the font
             GLuint Text2DVertexBufferID;         // Buffer containing the vertices
             GLuint Text2DUVBufferID;             // Buffer containing the UVs
             GLuint Text2DShaderID;               // Shader program used to display the text
