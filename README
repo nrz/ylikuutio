@@ -20,9 +20,11 @@ OpenGL Mathematics (GLM) is licensed under The Happy Bunny License
 and MIT License.
 http://glm.g-truc.net/copying.txt
 
-My own code is under The GNU General Public License 3, or
-(at your option) any later version. See LICENSE file.
-All my code copyright (C) 2016 Antti Nuortimo.
+Ylikuutio 3D engine is under The GNU General Public License 3, or
+(at your option) any later version. See LICENSE file. Please note that
+my software products which use Ylikuutio 3D engine are not necessarily
+under The GNU General Public License 3 and may have more restrictive
+licenses. All my code copyright (C) 2016 Antti Nuortimo.
 
 Other resources are under their respective licenses.
 
