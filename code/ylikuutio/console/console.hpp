@@ -36,15 +36,27 @@ namespace console
             void set_my_keyrelease_callback_engine_vector_pointer(std::vector<KeyAndCallbackStruct>* my_keyrelease_callback_engine_vector_pointer);
             void draw_console();
 
-            // callbacks.
+            // Callbacks.
 
             static void charmods_callback(GLFWwindow* window, unsigned int codepoint, int mods);
+
+            // Action mode keyrelease callbacks begin here.
 
             static datatypes::AnyValue* enable_enter_console(
                     callback_system::CallbackEngine*,
                     callback_system::CallbackObject*,
                     std::vector<callback_system::CallbackParameter*>&,
                     console::Console* console);
+
+            // Action mode keypress callbacks begin here.
+
+            static datatypes::AnyValue* enter_console(
+                    callback_system::CallbackEngine*,
+                    callback_system::CallbackObject*,
+                    std::vector<callback_system::CallbackParameter*>&,
+                    console::Console* console);
+
+            // Console mode keyrelease callbacks begin here.
 
             static datatypes::AnyValue* enable_exit_console(
                     callback_system::CallbackEngine*,
@@ -118,11 +130,7 @@ namespace console
                     std::vector<callback_system::CallbackParameter*>&,
                     console::Console* console);
 
-            static datatypes::AnyValue* enter_console(
-                    callback_system::CallbackEngine*,
-                    callback_system::CallbackObject*,
-                    std::vector<callback_system::CallbackParameter*>&,
-                    console::Console* console);
+            // Console mode keypress callbacks begin here.
 
             static datatypes::AnyValue* exit_console(
                     callback_system::CallbackEngine*,
@@ -184,17 +192,19 @@ namespace console
                     std::vector<callback_system::CallbackParameter*>&,
                     console::Console* console);
 
+            static datatypes::AnyValue* enter_key(
+                    callback_system::CallbackEngine*,
+                    callback_system::CallbackObject*,
+                    std::vector<callback_system::CallbackParameter*>&,
+                    console::Console* console);
+
             static datatypes::AnyValue* ctrl_c(
                     callback_system::CallbackEngine*,
                     callback_system::CallbackObject*,
                     std::vector<callback_system::CallbackParameter*>&,
                     console::Console* console);
 
-            static datatypes::AnyValue* enter_key(
-                    callback_system::CallbackEngine*,
-                    callback_system::CallbackObject*,
-                    std::vector<callback_system::CallbackParameter*>&,
-                    console::Console* console);
+            // Callbacks end here.
 
         private:
             void copy_historical_input_into_current_input();
