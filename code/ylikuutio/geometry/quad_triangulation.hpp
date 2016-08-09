@@ -329,8 +329,6 @@ namespace geometry
 
             uint32_t vertexIndex[3], uvIndex[3], normalIndex[3];
 
-            uint32_t triangle_i = 0;
-
             // 2. Interpolate the vertices between, using bilinear interpolation, `push_back` to `temp_vertices`.
             if (is_bilinear_interpolation_in_use)
             {
@@ -833,7 +831,7 @@ namespace geometry
             {
                 int32_t current_percent = 0;
 
-                triangle_i = 0;
+                uint32_t triangle_i = 0;
                 current_interpolated_vertex_i = image_width * image_height;
 
                 for (uint32_t z = 1; z < image_height; z++)
@@ -1014,7 +1012,7 @@ namespace geometry
                 uint32_t x;
                 uint32_t z;
 
-                triangle_i = 0;
+                uint32_t triangle_i = 0;
 
                 for (z = 1; z < image_height; z++)
                 {
