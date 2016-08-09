@@ -57,20 +57,20 @@ namespace texture
         }
 
         // Make sure this is a 24bpp file
-        if (*(int*) &header[0x1E] != 0)
+        if (*(int*) &header[0x1e] != 0)
         {
             std::printf("Not a correct BMP file\n");
             return 0;
         }
 
-        if (*(int*) &header[0x1C] != 24)
+        if (*(int*) &header[0x1c] != 24)
         {
             std::printf("Not a correct BMP file\n");
             return 0;
         }
 
         // Read the information about the image
-        dataPos    = *(int*) &header[0x0A];
+        dataPos    = *(int*) &header[0x0a];
         imageSize  = *(int*) &header[0x22];
         width      = *(int*) &header[0x12];
         height     = *(int*) &header[0x16];

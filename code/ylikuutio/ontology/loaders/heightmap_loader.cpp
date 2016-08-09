@@ -70,13 +70,13 @@ namespace ontology
         }
 
         // Make sure this is a 24bpp file
-        if (*(uint32_t*) &header[0x1E] != 0)
+        if (*(uint32_t*) &header[0x1e] != 0)
         {
             std::cerr << "not a correct BMP file.\n";
             return false;
         }
 
-        if (*(uint32_t*) &header[0x1C] != 24)
+        if (*(uint32_t*) &header[0x1c] != 24)
         {
             std::cerr << "not a correct BMP file.\n";
             return false;
