@@ -63,7 +63,7 @@ namespace geometry
             BilinearDirections compass_point_code,
             uint32_t image_width)
     {
-        // Face indices example for a 4x4 image file and bilinear interpolation.
+        // Face indices example for a 4x4 image file using bilinear interpolation.
         //
         //  +-------+-------+-------+
         //  |\ 26  /|\ 30  /|\ 34  /|
@@ -82,10 +82,10 @@ namespace geometry
         //  | /   \ | /   \ | /   \ |
         //  |/ 12  \|/ 16  \|/ 20  \|
         //  +-------+-------+-------+
-        //  |\  3  /|\  6  /|\ 10  /|
+        //  |\  2  /|\  6  /|\ 10  /|
         //  | \   / | \   / | \   / |
         //  |  \ /  |  \ /  |  \ /  |
-        //  |1  x  2|5  x  7|9  x 11|
+        //  |1  x  3|5  x  7|9  x 11|
         //  |  / \  |  / \  |  / \  |
         //  | /   \ | /   \ | /   \ |
         //  |/  0  \|/  4  \|/  8  \|
