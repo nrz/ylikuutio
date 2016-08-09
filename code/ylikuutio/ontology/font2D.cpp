@@ -52,7 +52,7 @@ namespace ontology
         programID = LoadShaders("TextVertexShader.vertexshader", "TextVertexShader.fragmentshader");
 
         // Get a handle for our buffers
-        vertexPosition_screenspaceID = glGetAttribLocation(programID, "vertexPosition_screenspace");
+        vertex_position_in_screenspaceID = glGetAttribLocation(programID, "vertexPosition_screenspace");
         vertexUVID = glGetAttribLocation(programID, "vertexUV");
 
         // Initialize uniforms' IDs
@@ -269,9 +269,9 @@ namespace ontology
         glUniform1i(screen_height_uniform_ID, screen_height);
 
         // 1st attribute buffer : vertices
-        glEnableVertexAttribArray(vertexPosition_screenspaceID);
+        glEnableVertexAttribArray(vertex_position_in_screenspaceID);
         glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
-        glVertexAttribPointer(vertexPosition_screenspaceID, 2, GL_FLOAT, GL_FALSE, 0, (void*) 0);
+        glVertexAttribPointer(vertex_position_in_screenspaceID, 2, GL_FLOAT, GL_FALSE, 0, (void*) 0);
 
         // 2nd attribute buffer : UVs
         glEnableVertexAttribArray(vertexUVID);
@@ -286,7 +286,7 @@ namespace ontology
 
         glDisable(GL_BLEND);
 
-        glDisableVertexAttribArray(vertexPosition_screenspaceID);
+        glDisableVertexAttribArray(vertex_position_in_screenspaceID);
         glDisableVertexAttribArray(vertexUVID);
     }
 
