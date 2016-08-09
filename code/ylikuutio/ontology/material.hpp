@@ -68,7 +68,7 @@ namespace ontology
 
             ontology::Species* terrain_species_pointer; // pointer to world species (used in collision detection).
 
-            GLuint texture;                        // Material, returned by `load_DDS_texture` or `load_BMP_texture`.
+            GLuint texture;                        // Texture of this `Material`, returned by `load_BMP_texture` or `load_DDS_texture` (used for `glGenTextures` etc.).
             GLuint openGL_textureID;               // texture ID, returned by `glGetUniformLocation(programID, "myTextureSampler");`.
 
             std::vector<ontology::Species*> species_pointer_vector;
