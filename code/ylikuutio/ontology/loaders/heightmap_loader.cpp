@@ -165,8 +165,8 @@ namespace ontology
 
     bool load_SRTM_world(
             std::string image_path,
-            double latitude,
-            double longitude,
+            float latitude,
+            float longitude,
             std::vector<glm::vec3>& out_vertices,
             std::vector<glm::vec2>& out_UVs,
             std::vector<glm::vec3>& out_normals,
@@ -184,11 +184,11 @@ namespace ontology
         int32_t filename_latitude = std::floor(latitude);
         int32_t filename_longitude = std::floor(longitude);
 
-        double southern_latitude = std::floor(latitude);
-        double western_longitude = std::floor(longitude);
+        float southern_latitude = std::floor(latitude);
+        float western_longitude = std::floor(longitude);
 
-        double northern_latitude = southern_latitude + 1.0f;
-        double eastern_longitude = western_longitude + 1.0f;
+        float northern_latitude = southern_latitude + 1.0f;
+        float eastern_longitude = western_longitude + 1.0f;
 
         std::string south_north_char;
         std::string west_east_char;
@@ -291,10 +291,10 @@ namespace ontology
         }
 
         SphericalWorldStruct spherical_world_struct;
-        spherical_world_struct.southern_latitude = southern_latitude; // must be double, though SRTM data is split between full degrees.
-        spherical_world_struct.northern_latitude = northern_latitude; // must be double, though SRTM data is split between full degrees.
-        spherical_world_struct.western_longitude = western_longitude; // must be double, though SRTM data is split between full degrees.
-        spherical_world_struct.eastern_longitude = eastern_longitude; // must be double, though SRTM data is split between full degrees.
+        spherical_world_struct.southern_latitude = southern_latitude; // must be float, though SRTM data is split between full degrees.
+        spherical_world_struct.northern_latitude = northern_latitude; // must be float, though SRTM data is split between full degrees.
+        spherical_world_struct.western_longitude = western_longitude; // must be float, though SRTM data is split between full degrees.
+        spherical_world_struct.eastern_longitude = eastern_longitude; // must be float, though SRTM data is split between full degrees.
 
         TriangulateQuadsStruct triangulate_quads_struct;
         triangulate_quads_struct.image_width = image_width_in_use;
