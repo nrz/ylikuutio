@@ -887,8 +887,7 @@ namespace geometry
                                 out_vertices,
                                 out_UVs,
                                 out_normals,
-                                triangle_i);
-                        triangle_i++;
+                                triangle_i++);
 
                         // Define the second triangle, W: center, southwest, northwest.
                         vertexIndex[0] = center(current_interpolated_vertex_i);
@@ -923,8 +922,7 @@ namespace geometry
                                 out_vertices,
                                 out_UVs,
                                 out_normals,
-                                triangle_i);
-                        triangle_i++;
+                                triangle_i++);
 
                         // Define the third triangle, N: center, northwest, northeast.
                         vertexIndex[0] = center(current_interpolated_vertex_i);
@@ -959,8 +957,7 @@ namespace geometry
                                 out_vertices,
                                 out_UVs,
                                 out_normals,
-                                triangle_i);
-                        triangle_i++;
+                                triangle_i++);
 
                         // Define the fourth triangle, E: center, northeast, southeast.
                         vertexIndex[0] = center(current_interpolated_vertex_i);
@@ -995,8 +992,7 @@ namespace geometry
                                 out_vertices,
                                 out_UVs,
                                 out_normals,
-                                triangle_i);
-                        triangle_i++;
+                                triangle_i++);
 
                         current_interpolated_vertex_i++;
                     }
@@ -1061,8 +1057,7 @@ namespace geometry
                                 out_vertices,
                                 out_UVs,
                                 out_normals,
-                                triangle_i);
-                        triangle_i++;
+                                triangle_i++);
 
                         // Define the second triangle, NW: northeast, southeast, northwest.
                         vertexIndex[0] = northeast(current_vertex_i, image_width);
@@ -1097,8 +1092,7 @@ namespace geometry
                                 out_vertices,
                                 out_UVs,
                                 out_normals,
-                                triangle_i);
-                        triangle_i++;
+                                triangle_i++);
                     }
                 }
             }
