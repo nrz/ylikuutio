@@ -45,7 +45,7 @@ namespace ontology
         std::cout << "Loading BMP file " << image_path << " ...\n";
 
         // Data read from the header of the BMP file
-        unsigned char header[54];
+        uint8_t header[54];
         uint32_t image_size;
         // Actual RGB image data.
         uint8_t *image_data;
