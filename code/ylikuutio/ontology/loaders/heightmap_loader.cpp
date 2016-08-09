@@ -46,7 +46,7 @@ namespace ontology
 
         // Data read from the header of the BMP file
         unsigned char header[54];
-        uint32_t imageSize;
+        uint32_t image_size;
         // Actual RGB image data.
         uint8_t *image_data;
 
@@ -89,7 +89,7 @@ namespace ontology
         }
 
         // Read the information about the image
-        imageSize    = *(uint32_t*) &header[0x22];
+        image_size    = *(uint32_t*) &header[0x22];
         image_width  = *(uint32_t*) &header[0x12];
         image_height = *(uint32_t*) &header[0x16];
 
@@ -97,16 +97,16 @@ namespace ontology
         uint32_t world_size = image_width * image_height;
 
         // Some BMP files are misformatted, guess missing information
-        if (imageSize == 0)
+        if (image_size == 0)
         {
-            imageSize = image_width * image_height * 3; // 3 : one byte for each Red, Green and Blue component
+            image_size = image_width * image_height * 3; // 3 : one byte for each Red, Green and Blue component
         }
 
         // Create a buffer.
-        image_data = new uint8_t [imageSize];
+        image_data = new uint8_t [image_size];
 
         // Read the actual image data from the file into the buffer.
-        std::fread(image_data, 1, imageSize, file);
+        std::fread(image_data, 1, image_size, file);
 
         // Everything is in memory now, the file can be closed
         std::fclose(file);
@@ -239,7 +239,7 @@ namespace ontology
 
         std::cout << "Loading SRTM file " << abs_image_path << " ...\n";
 
-        uint32_t imageSize;
+        uint32_t image_size;
         uint32_t true_image_width, true_image_height, image_width_in_use, image_height_in_use;
         // Actual 16-bit big-endian signed integer heightmap data.
         uint8_t *image_data;
@@ -257,13 +257,13 @@ namespace ontology
         true_image_height = 1201;
         image_width_in_use  = 1200;
         image_height_in_use = 1200;
-        imageSize = sizeof(int16_t) * true_image_width * true_image_height;
+        image_size = sizeof(int16_t) * true_image_width * true_image_height;
 
         // Create a buffer.
-        image_data = new uint8_t [imageSize];
+        image_data = new uint8_t [image_size];
 
         // Read the actual image data from the file into the buffer.
-        std::fread(image_data, 1, imageSize, file);
+        std::fread(image_data, 1, image_size, file);
 
         // Everything is in memory now, the file can be closed
         std::fclose(file);
