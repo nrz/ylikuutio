@@ -32,6 +32,9 @@ http://www.brusheezy.com/textures/20185-seamless-green-grass-textures
 UV map texture is from opengl-tutorial:
 http://www.opengl-tutorial.org/beginners-tutorials/tutorial-8-basic-shading/
 
+kongtext font is made by codeman38 (http://zone38.net/), see
+res/fonts/kongtext/license.txt for the license.
+
 Suzanne the monkey is a standard Blender object.
 
 Ylikuutio can be compiled with GCC, Clang or Visual Studio.
