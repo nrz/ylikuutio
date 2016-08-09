@@ -532,36 +532,36 @@ add_library(ylikuutio
     # ontology, in alphabetical order
     code/ylikuutio/ontology/font2D.cpp
     code/ylikuutio/ontology/font2D.hpp
-    code/ylikuutio/ontology/font_loader.cpp
-    code/ylikuutio/ontology/font_loader.hpp
+    code/ylikuutio/ontology/loaders/font_loader.cpp
+    code/ylikuutio/ontology/loaders/font_loader.hpp
     code/ylikuutio/ontology/glyph.cpp
     code/ylikuutio/ontology/glyph.hpp
     code/ylikuutio/ontology/ground_level.cpp
     code/ylikuutio/ontology/ground_level.hpp
-    code/ylikuutio/ontology/heightmap_loader.cpp
-    code/ylikuutio/ontology/heightmap_loader.hpp
+    code/ylikuutio/ontology/loaders/heightmap_loader.cpp
+    code/ylikuutio/ontology/loaders/heightmap_loader.hpp
     code/ylikuutio/ontology/material.cpp
     code/ylikuutio/ontology/material.hpp
     code/ylikuutio/ontology/model.cpp
     code/ylikuutio/ontology/model.hpp
     code/ylikuutio/ontology/object.cpp
     code/ylikuutio/ontology/object.hpp
-    code/ylikuutio/ontology/objloader.cpp
-    code/ylikuutio/ontology/objloader.hpp
+    code/ylikuutio/ontology/loaders/objloader.cpp
+    code/ylikuutio/ontology/loaders/objloader.hpp
     code/ylikuutio/ontology/render_templates.hpp
     code/ylikuutio/ontology/scene.cpp
     code/ylikuutio/ontology/scene.hpp
     code/ylikuutio/ontology/shader.cpp
     code/ylikuutio/ontology/shader.hpp
-    code/ylikuutio/ontology/shader_loader.cpp
-    code/ylikuutio/ontology/shader_loader.hpp
+    code/ylikuutio/ontology/loaders/shader_loader.cpp
+    code/ylikuutio/ontology/loaders/shader_loader.hpp
     code/ylikuutio/ontology/species.cpp
     code/ylikuutio/ontology/species.hpp
     code/ylikuutio/ontology/species_or_glyph.hpp
     code/ylikuutio/ontology/text3D.hpp
     code/ylikuutio/ontology/text3D.cpp
-    code/ylikuutio/ontology/texture_loader.cpp
-    code/ylikuutio/ontology/texture_loader.hpp
+    code/ylikuutio/ontology/loaders/texture_loader.cpp
+    code/ylikuutio/ontology/loaders/texture_loader.hpp
     code/ylikuutio/ontology/universe.cpp
     code/ylikuutio/ontology/universe.hpp
     code/ylikuutio/ontology/vector_font.cpp
@@ -646,8 +646,8 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/geometry/transformation.cpp
         code/ylikuutio/geometry/transformation.hpp
         code/ylikuutio/hierarchy/hierarchy_templates.hpp
-        code/ylikuutio/ontology/font_loader.cpp
-        code/ylikuutio/ontology/font_loader.hpp
+        code/ylikuutio/ontology/loaders/font_loader.cpp
+        code/ylikuutio/ontology/loaders/font_loader.hpp
         code/ylikuutio/string/ylikuutio_string.cpp
         code/ylikuutio/string/ylikuutio_string.hpp
         )

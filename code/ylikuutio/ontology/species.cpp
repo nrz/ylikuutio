@@ -1,6 +1,6 @@
 #include "species.hpp"
-#include "objloader.hpp"
-#include "heightmap_loader.hpp"
+#include "loaders/objloader.hpp"
+#include "loaders/heightmap_loader.hpp"
 #include "vboindexer.hpp"
 #include "universe.hpp"
 #include "scene.hpp"

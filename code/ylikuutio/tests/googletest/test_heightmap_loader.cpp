@@ -1,6 +1,6 @@
 #include "gtest/gtest.h"
-#include "code/ylikuutio/ontology/heightmap_loader.hpp"
-#include "code/ylikuutio/ontology/heightmap_loader.cpp"
+#include "code/ylikuutio/ontology/loaders/heightmap_loader.hpp"
+#include "code/ylikuutio/ontology/loaders/heightmap_loader.cpp"
 #include "code/ylikuutio/geometry/quad_triangulation.hpp"
 
 // Include GLEW

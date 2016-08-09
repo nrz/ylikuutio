@@ -1,5 +1,5 @@
 #include "vector_font.hpp"
-#include "font_loader.hpp"
+#include "loaders/font_loader.hpp"
 #include "glyph.hpp"
 #include "render_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"

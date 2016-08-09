@@ -1,5 +1,5 @@
 #include "material.hpp"
-#include "texture_loader.hpp"
+#include "loaders/texture_loader.hpp"
 #include "vector_font.hpp"
 #include "species.hpp"
 #include "render_templates.hpp"

@@ -7,7 +7,7 @@
 #endif
 
 #include "code/ylikuutio/common/globals.hpp"
-#include "shader_loader.hpp"
+#include "loaders/shader_loader.hpp"
 #include "render_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/common/global_variables.hpp"
