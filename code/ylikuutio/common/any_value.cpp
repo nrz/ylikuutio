@@ -19,9 +19,9 @@ namespace ontology
     class Text3D;
 }
 
-namespace text2D
+namespace font2D
 {
-    class Text2D;
+    class Font2D;
 }
 
 namespace console
@@ -447,7 +447,7 @@ namespace datatypes
         }
     }
 
-    AnyValue::AnyValue(ontology::Text2D* text2D_pointer)
+    AnyValue::AnyValue(ontology::Font2D* text2D_pointer)
     {
         // constructor.
         this->set_default_values();
@@ -455,11 +455,11 @@ namespace datatypes
         this->text2D_pointer = text2D_pointer;
     }
 
-    AnyValue::AnyValue(std::string type, ontology::Text2D* text2D_pointer)
+    AnyValue::AnyValue(std::string type, ontology::Font2D* text2D_pointer)
     {
         // constructor.
         this->set_default_values();
-        if (std::strcmp(type.c_str(), "ontology::Text2D*"))
+        if (std::strcmp(type.c_str(), "ontology::Font2D*"))
         {
             this->type = datatypes::TEXT2D_POINTER;
             this->text2D_pointer = text2D_pointer;

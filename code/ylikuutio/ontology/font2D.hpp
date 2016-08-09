@@ -11,18 +11,18 @@
 
 namespace ontology
 {
-    class Text2D
+    class Font2D
     {
         public:
             // constructor.
-            Text2D(
+            Font2D(
                     GLuint screen_width,
                     GLuint screen_height,
                     const char* texturePath,
                     const char* char_font_texture_file_format);
 
             // destructor.
-            ~Text2D();
+            ~Font2D();
 
             void printText2D(
                     GLuint screen_width,

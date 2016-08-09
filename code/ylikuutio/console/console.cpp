@@ -1,5 +1,5 @@
 #include "console.hpp"
-#include "code/ylikuutio/ontology/text2D.hpp"
+#include "code/ylikuutio/ontology/font2D.hpp"
 #include "code/ylikuutio/callback_system/callback_magic_numbers.hpp"
 #include "code/ylikuutio/common/global_variables.hpp"
 #include "code/ylikuutio/common/globals.hpp"
@@ -19,7 +19,7 @@ namespace console
     Console::Console(
             std::vector<KeyAndCallbackStruct>** current_keypress_callback_engine_vector_pointer_pointer,
             std::vector<KeyAndCallbackStruct>** current_keyrelease_callback_engine_vector_pointer_pointer,
-            ontology::Text2D* text2D_pointer)
+            ontology::Font2D* text2D_pointer)
     {
         // constructor.
         this->cursor_it = this->current_input.begin();
@@ -50,7 +50,7 @@ namespace console
         // This is a pointer to `std::vector<KeyAndCallbackStruct>*` that controls keyrelease callbacks.
         this->current_keyrelease_callback_engine_vector_pointer_pointer = current_keyrelease_callback_engine_vector_pointer_pointer;
 
-        // This is a pointer to `text2D::Text2D` instance that is used for printing.
+        // This is a pointer to `font2D::Font2D` instance that is used for printing.
         this->text2D_pointer = text2D_pointer;
     }
 
@@ -546,7 +546,7 @@ namespace console
             // Convert current input into std::string.
             uint32_t characters_for_line = window_width / text_size;
 
-            // Draw the console to screen using `text2D::printText2D`.
+            // Draw the console to screen using `font2D::printText2D`.
             PrintingStruct printing_struct;
             printing_struct.screen_width = (GLuint) window_width;
             printing_struct.screen_height = (GLuint) window_height;

@@ -12,7 +12,7 @@
 #include "code/ylikuutio/ontology/shader_loader.hpp"
 #include "code/ylikuutio/ontology/texture_loader.hpp"
 #include "code/ylikuutio/ontology/vboindexer.hpp"
-#include "code/ylikuutio/ontology/text2D.hpp"
+#include "code/ylikuutio/ontology/font2D.hpp"
 #include "code/ylikuutio/ontology/text3D.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/shader.hpp"

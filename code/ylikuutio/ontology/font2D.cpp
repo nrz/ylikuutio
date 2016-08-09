@@ -1,4 +1,4 @@
-#include "text2D.hpp"
+#include "font2D.hpp"
 #include "shader_loader.hpp"
 #include "texture_loader.hpp"
 
@@ -26,7 +26,7 @@
 
 namespace ontology
 {
-    Text2D::Text2D(
+    Font2D::Font2D(
             GLuint screen_width,
             GLuint screen_height,
             const char* texturePath,
@@ -67,7 +67,7 @@ namespace ontology
         glUniform1i(screen_height_uniform_ID, screen_height);
     }
 
-    Text2D::~Text2D()
+    Font2D::~Font2D()
     {
         // destructor.
 
@@ -82,7 +82,7 @@ namespace ontology
         glDeleteProgram(Text2DShaderID);
     }
 
-    void Text2D::printText2D(
+    void Font2D::printText2D(
             GLuint screen_width,
             GLuint screen_height,
             GLuint x,
@@ -290,7 +290,7 @@ namespace ontology
         glDisableVertexAttribArray(vertexUVID);
     }
 
-    void Text2D::printText2D(PrintingStruct printing_struct)
+    void Font2D::printText2D(PrintingStruct printing_struct)
     {
         if (printing_struct.text.empty())
         {
@@ -322,7 +322,7 @@ namespace ontology
         }
     }
 
-    void Text2D::printText2D(
+    void Font2D::printText2D(
             GLuint screen_width,
             GLuint screen_height,
             GLuint x,

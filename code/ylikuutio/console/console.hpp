@@ -6,7 +6,7 @@
 #include "code/ylikuutio/callback_system/callback_object.hpp"
 #include "code/ylikuutio/callback_system/callback_engine.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
-#include "code/ylikuutio/ontology/text2D.hpp"
+#include "code/ylikuutio/ontology/font2D.hpp"
 
 // Include GLFW
 #ifndef __GLFW3_H_INCLUDED
@@ -27,7 +27,7 @@ namespace console
             // constructor.
             Console(std::vector<KeyAndCallbackStruct>** current_keypress_callback_engine_vector_pointer_pointer,
                     std::vector<KeyAndCallbackStruct>** current_keyrelease_callback_engine_vector_pointer_pointer,
-                    ontology::Text2D* text2D_pointer);
+                    ontology::Font2D* text2D_pointer);
 
             // destructor.
             ~Console();
@@ -242,8 +242,8 @@ namespace console
             std::vector<KeyAndCallbackStruct>* previous_keyrelease_callback_engine_vector_pointer;
             std::vector<KeyAndCallbackStruct>* my_keyrelease_callback_engine_vector_pointer;
 
-            // This is a pointer to `text2D::Text2D` instance that is used for printing.
-            ontology::Text2D* text2D_pointer;
+            // This is a pointer to `font2D::Font2D` instance that is used for printing.
+            ontology::Font2D* text2D_pointer;
     };
 }
 

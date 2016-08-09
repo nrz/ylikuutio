@@ -4,7 +4,7 @@
 #include "code/ylikuutio/callback_system/callback_engine.hpp"
 #include "code/ylikuutio/callback_system/callback_magic_numbers.hpp"
 #include "code/ylikuutio/console/console.hpp"
-#include "code/ylikuutio/ontology/text2D.hpp"
+#include "code/ylikuutio/ontology/font2D.hpp"
 #include "code/ylikuutio/ontology/object.hpp"
 #include "code/ylikuutio/ontology/species.hpp"
 #include "code/ylikuutio/ontology/material.hpp"

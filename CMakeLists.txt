@@ -530,6 +530,8 @@ add_library(ylikuutio
     code/ylikuutio/hierarchy/hierarchy_templates.hpp
 
     # ontology, in alphabetical order
+    code/ylikuutio/ontology/font2D.cpp
+    code/ylikuutio/ontology/font2D.hpp
     code/ylikuutio/ontology/font_loader.cpp
     code/ylikuutio/ontology/font_loader.hpp
     code/ylikuutio/ontology/glyph.cpp
@@ -556,8 +558,6 @@ add_library(ylikuutio
     code/ylikuutio/ontology/species.cpp
     code/ylikuutio/ontology/species.hpp
     code/ylikuutio/ontology/species_or_glyph.hpp
-    code/ylikuutio/ontology/text2D.cpp
-    code/ylikuutio/ontology/text2D.hpp
     code/ylikuutio/ontology/text3D.hpp
     code/ylikuutio/ontology/text3D.cpp
     code/ylikuutio/ontology/texture_loader.cpp
