@@ -131,20 +131,20 @@ namespace ontology
 
                 if (std::strcmp(char_color_channel, "blue") == 0)
                 {
-                    y = (GLuint) *image_pointer;       // y-coordinate is the blue (B) value.
+                    y = static_cast<GLuint>(*image_pointer);       // y-coordinate is the blue (B) value.
                 }
                 else if (std::strcmp(char_color_channel, "green") == 0)
                 {
-                    y = (GLuint) *(image_pointer + 1); // y-coordinate is the green (G) value.
+                    y = static_cast<GLuint>(*(image_pointer + 1)); // y-coordinate is the green (G) value.
                 }
                 else if (std::strcmp(char_color_channel, "red") == 0)
                 {
-                    y = (GLuint) *(image_pointer + 2); // y-coordinate is the red (R) value.
+                    y = static_cast<GLuint>(*(image_pointer + 2)); // y-coordinate is the red (R) value.
                 }
                 // y-coordinate is the mean of R, G, & B.
                 else if ((std::strcmp(char_color_channel, "mean") == 0) || (std::strcmp(char_color_channel, "all") == 0))
                 {
-                    y = (((GLuint) *image_pointer) + ((GLuint) *(image_pointer + 1)) + ((GLuint) *(image_pointer + 2))) / 3;
+                    y = (static_cast<GLuint>(*image_pointer) + static_cast<GLuint>(*(image_pointer + 1)) + static_cast<GLuint>(*(image_pointer + 2))) / 3;
                 }
                 else
                 {
