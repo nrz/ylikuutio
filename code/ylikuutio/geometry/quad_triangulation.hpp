@@ -868,17 +868,17 @@ namespace geometry
                         // Fourth triangle: center, northeast, southeast.
 
                         // Define the first triangle, S: center, southeast, southwest.
-                        vertexIndex[0] = center(current_interpolated_vertex_i);
+                        vertexIndex[0] = current_interpolated_vertex_i;
                         vertexIndex[1] = southeast(current_vertex_i, image_width);
                         vertexIndex[2] = southwest(current_vertex_i, image_width);
 
-                        normalIndex[0] = center(current_interpolated_vertex_i);
+                        normalIndex[0] = current_interpolated_vertex_i;
                         normalIndex[1] = southeast(current_vertex_i, image_width);
                         normalIndex[2] = southwest(current_vertex_i, image_width);
 
                         if (triangulate_quads_struct.should_ylikuutio_use_real_texture_coordinates)
                         {
-                            uvIndex[0] = center(current_interpolated_vertex_i);
+                            uvIndex[0] = current_interpolated_vertex_i;
                             uvIndex[1] = southeast(current_vertex_i, image_width);
                             uvIndex[2] = southwest(current_vertex_i, image_width);
                         }
@@ -902,17 +902,17 @@ namespace geometry
                                 out_normals);
 
                         // Define the second triangle, W: center, southwest, northwest.
-                        vertexIndex[0] = center(current_interpolated_vertex_i);
+                        vertexIndex[0] = current_interpolated_vertex_i;
                         vertexIndex[1] = southwest(current_vertex_i, image_width);
                         vertexIndex[2] = northwest(current_vertex_i, image_width);
 
-                        normalIndex[0] = center(current_interpolated_vertex_i);
+                        normalIndex[0] = current_interpolated_vertex_i;
                         normalIndex[1] = southwest(current_vertex_i, image_width);
                         normalIndex[2] = northwest(current_vertex_i, image_width);
 
                         if (triangulate_quads_struct.should_ylikuutio_use_real_texture_coordinates)
                         {
-                            uvIndex[0] = center(current_interpolated_vertex_i);
+                            uvIndex[0] = current_interpolated_vertex_i;
                             uvIndex[1] = southwest(current_vertex_i, image_width);
                             uvIndex[2] = northwest(current_vertex_i, image_width);
                         }
@@ -936,17 +936,17 @@ namespace geometry
                                 out_normals);
 
                         // Define the third triangle, N: center, northwest, northeast.
-                        vertexIndex[0] = center(current_interpolated_vertex_i);
+                        vertexIndex[0] = current_interpolated_vertex_i;
                         vertexIndex[1] = northwest(current_vertex_i, image_width);
                         vertexIndex[2] = northeast(current_vertex_i, image_width);
 
-                        normalIndex[0] = center(current_interpolated_vertex_i);
+                        normalIndex[0] = current_interpolated_vertex_i;
                         normalIndex[1] = northwest(current_vertex_i, image_width);
                         normalIndex[2] = northeast(current_vertex_i, image_width);
 
                         if (triangulate_quads_struct.should_ylikuutio_use_real_texture_coordinates)
                         {
-                            uvIndex[0] = center(current_interpolated_vertex_i);
+                            uvIndex[0] = current_interpolated_vertex_i;
                             uvIndex[1] = northwest(current_vertex_i, image_width);
                             uvIndex[2] = northeast(current_vertex_i, image_width);
                         }
@@ -970,17 +970,17 @@ namespace geometry
                                 out_normals);
 
                         // Define the fourth triangle, E: center, northeast, southeast.
-                        vertexIndex[0] = center(current_interpolated_vertex_i);
+                        vertexIndex[0] = current_interpolated_vertex_i;
                         vertexIndex[1] = northeast(current_vertex_i, image_width);
                         vertexIndex[2] = southeast(current_vertex_i, image_width);
 
-                        normalIndex[0] = center(current_interpolated_vertex_i);
+                        normalIndex[0] = current_interpolated_vertex_i;
                         normalIndex[1] = northeast(current_vertex_i, image_width);
                         normalIndex[2] = southeast(current_vertex_i, image_width);
 
                         if (triangulate_quads_struct.should_ylikuutio_use_real_texture_coordinates)
                         {
-                            uvIndex[0] = center(current_interpolated_vertex_i);
+                            uvIndex[0] = current_interpolated_vertex_i;
                             uvIndex[1] = northeast(current_vertex_i, image_width);
                             uvIndex[2] = southeast(current_vertex_i, image_width);
                         }
