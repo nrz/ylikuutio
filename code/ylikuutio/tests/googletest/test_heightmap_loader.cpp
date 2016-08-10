@@ -128,7 +128,7 @@ TEST(a_2x2_world_must_be_triangulated_appropriately, bilinear_interpolation)
     // 1st vertex is the center vertex of the 1st triangle.
     ASSERT_EQ(vertices[0].x, center_x);
     ASSERT_EQ(vertices[0].z, center_z);
-    ASSERT_EQ(vertices[0].y, (GLfloat) (southwest_height + southeast_height + northwest_height + northeast_height) / 4);
+    ASSERT_EQ(vertices[0].y, static_cast<GLfloat>(southwest_height + southeast_height + northwest_height + northeast_height) / 4.0f);
 
     // 2nd vertex is the southwest vertex of the 1st triangle.
     ASSERT_EQ(vertices[1].x, 1.0f);
@@ -143,7 +143,7 @@ TEST(a_2x2_world_must_be_triangulated_appropriately, bilinear_interpolation)
     // 4th vertex is the center vertex of the 2nd triangle.
     ASSERT_EQ(vertices[3].x, center_x);
     ASSERT_EQ(vertices[3].z, center_z);
-    ASSERT_EQ(vertices[3].y, (GLfloat) (southwest_height + southeast_height + northwest_height + northeast_height) / 4);
+    ASSERT_EQ(vertices[3].y, static_cast<GLfloat>(southwest_height + southeast_height + northwest_height + northeast_height) / 4.0f);
 
     // 5th vertex is the southwest vertex of the 2nd triangle.
     ASSERT_EQ(vertices[4].x, 0.0f);
@@ -158,7 +158,7 @@ TEST(a_2x2_world_must_be_triangulated_appropriately, bilinear_interpolation)
     // 7th vertex is the center vertex of the 3rd triangle.
     ASSERT_EQ(vertices[6].x, center_x);
     ASSERT_EQ(vertices[6].z, center_z);
-    ASSERT_EQ(vertices[6].y, (GLfloat) (southwest_height + southeast_height + northwest_height + northeast_height) / 4);
+    ASSERT_EQ(vertices[6].y, static_cast<GLfloat>(southwest_height + southeast_height + northwest_height + northeast_height) / 4.0f);
 
     // 8th vertex is the northwest vertex of the 3rd triangle.
     ASSERT_EQ(vertices[7].x, 0.0f);
@@ -173,7 +173,7 @@ TEST(a_2x2_world_must_be_triangulated_appropriately, bilinear_interpolation)
     // 10th vertex is the center vertex of the 4th triangle.
     ASSERT_EQ(vertices[9].x, center_x);
     ASSERT_EQ(vertices[9].z, center_z);
-    ASSERT_EQ(vertices[9].y, (GLfloat) (southwest_height + southeast_height + northwest_height + northeast_height) / 4);
+    ASSERT_EQ(vertices[9].y, static_cast<GLfloat>(southwest_height + southeast_height + northwest_height + northeast_height) / 4);
 
     // 11th vertex is the northeast vertex of the 4th triangle.
     ASSERT_EQ(vertices[10].x, 1.0f);
