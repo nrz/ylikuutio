@@ -50,12 +50,6 @@ namespace geometry
     }
 
     // for bilinear interpolation.
-    GLuint center(uint32_t current_interpolated_vertex_i)
-    {
-        return current_interpolated_vertex_i;
-    }
-
-    // for bilinear interpolation.
     uint32_t get_face_normal_i(
             uint32_t x,
             uint32_t z,
@@ -557,26 +551,26 @@ namespace geometry
                         glm::vec3 face_normal;
 
                         // Compute the normal of S face.
-                        edge1 = temp_vertices[southeast(current_vertex_i, image_width)] - temp_vertices[center(current_interpolated_vertex_i)];
-                        edge2 = temp_vertices[southwest(current_vertex_i, image_width)] - temp_vertices[center(current_interpolated_vertex_i)];
+                        edge1 = temp_vertices[southeast(current_vertex_i, image_width)] - temp_vertices[current_interpolated_vertex_i];
+                        edge2 = temp_vertices[southwest(current_vertex_i, image_width)] - temp_vertices[current_interpolated_vertex_i];
                         face_normal = glm::normalize(glm::cross(edge1, edge2));
                         face_normal_vector_vec3.push_back(face_normal);
 
                         // Compute the normal of W face.
-                        edge1 = temp_vertices[southwest(current_vertex_i, image_width)] - temp_vertices[center(current_interpolated_vertex_i)];
-                        edge2 = temp_vertices[northwest(current_vertex_i, image_width)] - temp_vertices[center(current_interpolated_vertex_i)];
+                        edge1 = temp_vertices[southwest(current_vertex_i, image_width)] - temp_vertices[current_interpolated_vertex_i];
+                        edge2 = temp_vertices[northwest(current_vertex_i, image_width)] - temp_vertices[current_interpolated_vertex_i];
                         face_normal = glm::normalize(glm::cross(edge1, edge2));
                         face_normal_vector_vec3.push_back(face_normal);
 
                         // Compute the normal of N face.
-                        edge1 = temp_vertices[northwest(current_vertex_i, image_width)] - temp_vertices[center(current_interpolated_vertex_i)];
-                        edge2 = temp_vertices[northeast(current_vertex_i, image_width)] - temp_vertices[center(current_interpolated_vertex_i)];
+                        edge1 = temp_vertices[northwest(current_vertex_i, image_width)] - temp_vertices[current_interpolated_vertex_i];
+                        edge2 = temp_vertices[northeast(current_vertex_i, image_width)] - temp_vertices[current_interpolated_vertex_i];
                         face_normal = glm::normalize(glm::cross(edge1, edge2));
                         face_normal_vector_vec3.push_back(face_normal);
 
                         // Compute the normal of E face.
-                        edge1 = temp_vertices[northeast(current_vertex_i, image_width)] - temp_vertices[center(current_interpolated_vertex_i)];
-                        edge2 = temp_vertices[southeast(current_vertex_i, image_width)] - temp_vertices[center(current_interpolated_vertex_i)];
+                        edge1 = temp_vertices[northeast(current_vertex_i, image_width)] - temp_vertices[current_interpolated_vertex_i];
+                        edge2 = temp_vertices[southeast(current_vertex_i, image_width)] - temp_vertices[current_interpolated_vertex_i];
                         face_normal = glm::normalize(glm::cross(edge1, edge2));
                         face_normal_vector_vec3.push_back(face_normal);
                     }
