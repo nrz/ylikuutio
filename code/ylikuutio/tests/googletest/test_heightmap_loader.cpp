@@ -131,8 +131,13 @@ TEST(a_BMP_world_must_be_loaded_appropriately, load_3x3_BMP_world)
     const uint32_t n_width_of_image_file = 3;
     const uint32_t n_height_of_image_file = 3;
 
+    //                         48 =                  3 *                                  4 * (                    3 - 1) * (                     3 - 1)
     ASSERT_EQ(out_vertices.size(), n_vertices_for_face * n_faces_for_bilinear_triangulation * (n_width_of_image_file - 1) * (n_height_of_image_file - 1));
+
+    //                    48 =                  3  *                                 4 * (                    3 - 1) * (                     3 - 1)
     ASSERT_EQ(out_UVs.size(), n_vertices_for_face * n_faces_for_bilinear_triangulation * (n_width_of_image_file - 1) * (n_height_of_image_file - 1));
+
+    //                        48 =                  3  *                                 4 * (                    3 - 1) * (                     3 - 1)
     ASSERT_EQ(out_normals.size(), n_vertices_for_face * n_faces_for_bilinear_triangulation * (n_width_of_image_file - 1) * (n_height_of_image_file - 1));
 
     // test3x3.bmp colors:
@@ -140,11 +145,11 @@ TEST(a_BMP_world_must_be_loaded_appropriately, load_3x3_BMP_world)
     // |  4, 4, 4   8, 8, 8   16, 16, 16 |
     // |  0, 0, 0   1, 1, 1    2,  2,  2 |
     //
-    // Or simply as graycolor:
+    // Or simply as graycolor (BMP):
     // |  32 64 128 |
     // |   4  8  16 |
     // |   0  1   2 |
-    //
+
     // TODO: add assertions for vertices, UVs and normals!
 }
 TEST(a_BMP_world_must_be_loaded_appropriately, load_256x256_BMP_world)
