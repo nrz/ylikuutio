@@ -50,7 +50,7 @@ namespace geometry
     }
 
     // for bilinear interpolation.
-    uint32_t get_face_normal_i(
+    int32_t get_face_normal_i(
             uint32_t x,
             uint32_t z,
             BilinearDirections compass_point_code,
@@ -115,7 +115,7 @@ namespace geometry
             BilinearDirections compass_point_code,
             uint32_t image_width)
     {
-        uint32_t face_normal_i = get_face_normal_i(x, z, compass_point_code, image_width);
+        int32_t face_normal_i = get_face_normal_i(x, z, compass_point_code, image_width);
 
         if (face_normal_i == -1)
         {
