@@ -117,9 +117,12 @@ namespace ontology
         const char* char_color_channel = color_channel.c_str();
 
         // start processing image_data.
-        for (uint32_t z = 0; z < image_height; z++)
+        for (int32_t z = image_height - 1; z >= 0; z--)
         {
-            for (uint32_t x = 0; x < image_width; x++)
+            uint32_t image_width_in_bytes = 3 * image_width;
+            image_pointer = image_data + z * image_width_in_bytes;
+
+            for (int32_t x = 0; x < image_width; x++)
             {
                 uint32_t y;
 
