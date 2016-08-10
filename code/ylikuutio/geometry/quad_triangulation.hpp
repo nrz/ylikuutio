@@ -375,6 +375,10 @@ namespace geometry
                             vertexIndex[1] = northeast(current_vertex_i, image_width);
                             vertexIndex[2] = southeast(current_vertex_i, image_width);
 
+                            normalIndex[0] = southwest(current_vertex_i, image_width);
+                            normalIndex[1] = northeast(current_vertex_i, image_width);
+                            normalIndex[2] = southeast(current_vertex_i, image_width);
+
                             if (triangulate_quads_struct.should_ylikuutio_use_real_texture_coordinates)
                             {
                                 uvIndex[0] = southwest(current_vertex_i, image_width);
@@ -409,6 +413,10 @@ namespace geometry
                             vertexIndex[1] = southwest(current_vertex_i, image_width);
                             vertexIndex[2] = northwest(current_vertex_i, image_width);
 
+                            normalIndex[0] = southeast(current_vertex_i, image_width);
+                            normalIndex[1] = southwest(current_vertex_i, image_width);
+                            normalIndex[2] = northwest(current_vertex_i, image_width);
+
                             if (triangulate_quads_struct.should_ylikuutio_use_real_texture_coordinates)
                             {
                                 uvIndex[0] = southeast(current_vertex_i, image_width);
@@ -421,13 +429,8 @@ namespace geometry
                                 uvIndex[0] = static_cast<GLuint>(southeast_y(x, z, input_vertex_pointer, image_width));
                                 uvIndex[1] = static_cast<GLuint>(southwest_y(x, z, input_vertex_pointer, image_width));
                                 uvIndex[2] = static_cast<GLuint>(northwest_y(x, z, input_vertex_pointer, image_width));
-
                             }
                         }
-
-                        normalIndex[0] = 0; // TODO: add proper normal index.
-                        normalIndex[1] = 0; // TODO: add proper normal index.
-                        normalIndex[2] = 0; // TODO: add proper normal index.
 
                         if (is_southwest_northeast_edges_in_use)
                         {
@@ -439,6 +442,10 @@ namespace geometry
                             vertexIndex[0] = southwest(current_vertex_i, image_width);
                             vertexIndex[1] = northwest(current_vertex_i, image_width);
                             vertexIndex[2] = northeast(current_vertex_i, image_width);
+
+                            normalIndex[0] = southwest(current_vertex_i, image_width);
+                            normalIndex[1] = northwest(current_vertex_i, image_width);
+                            normalIndex[2] = northeast(current_vertex_i, image_width);
 
                             if (triangulate_quads_struct.should_ylikuutio_use_real_texture_coordinates)
                             {
@@ -465,6 +472,10 @@ namespace geometry
                             vertexIndex[1] = northwest(current_vertex_i, image_width);
                             vertexIndex[2] = northeast(current_vertex_i, image_width);
 
+                            normalIndex[0] = southeast(current_vertex_i, image_width);
+                            normalIndex[1] = northwest(current_vertex_i, image_width);
+                            normalIndex[2] = northeast(current_vertex_i, image_width);
+
                             if (triangulate_quads_struct.should_ylikuutio_use_real_texture_coordinates)
                             {
                                 uvIndex[0] = southeast(current_vertex_i, image_width);
@@ -479,10 +490,6 @@ namespace geometry
                                 uvIndex[2] = static_cast<GLuint>(northeast_y(x, z, input_vertex_pointer, image_width));
                             }
                         }
-
-                        normalIndex[0] = 0; // TODO: add proper normal index.
-                        normalIndex[1] = 0; // TODO: add proper normal index.
-                        normalIndex[2] = 0; // TODO: add proper normal index.
                     }
                 }
             }
@@ -859,6 +866,10 @@ namespace geometry
                         vertexIndex[1] = southeast(current_vertex_i, image_width);
                         vertexIndex[2] = southwest(current_vertex_i, image_width);
 
+                        normalIndex[0] = center(current_interpolated_vertex_i);
+                        normalIndex[1] = southeast(current_vertex_i, image_width);
+                        normalIndex[2] = southwest(current_vertex_i, image_width);
+
                         if (triangulate_quads_struct.should_ylikuutio_use_real_texture_coordinates)
                         {
                             uvIndex[0] = center(current_interpolated_vertex_i);
@@ -872,10 +883,6 @@ namespace geometry
                             uvIndex[1] = static_cast<GLuint>(southeast_y(x, z, input_vertex_pointer, image_width));
                             uvIndex[2] = static_cast<GLuint>(southwest_y(x, z, input_vertex_pointer, image_width));
                         }
-
-                        normalIndex[0] = 0; // TODO: add proper normal index.
-                        normalIndex[1] = 0; // TODO: add proper normal index.
-                        normalIndex[2] = 0; // TODO: add proper normal index.
 
                         geometry::output_triangle_vertices(
                                 temp_vertices,
@@ -894,6 +901,10 @@ namespace geometry
                         vertexIndex[1] = southwest(current_vertex_i, image_width);
                         vertexIndex[2] = northwest(current_vertex_i, image_width);
 
+                        normalIndex[0] = center(current_interpolated_vertex_i);
+                        normalIndex[1] = southwest(current_vertex_i, image_width);
+                        normalIndex[2] = northwest(current_vertex_i, image_width);
+
                         if (triangulate_quads_struct.should_ylikuutio_use_real_texture_coordinates)
                         {
                             uvIndex[0] = center(current_interpolated_vertex_i);
@@ -907,10 +918,6 @@ namespace geometry
                             uvIndex[1] = static_cast<GLuint>(southwest_y(x, z, input_vertex_pointer, image_width));
                             uvIndex[2] = static_cast<GLuint>(northwest_y(x, z, input_vertex_pointer, image_width));
                         }
-
-                        normalIndex[0] = 0; // TODO: add proper normal index.
-                        normalIndex[1] = 0; // TODO: add proper normal index.
-                        normalIndex[2] = 0; // TODO: add proper normal index.
 
                         geometry::output_triangle_vertices(
                                 temp_vertices,
@@ -929,6 +936,10 @@ namespace geometry
                         vertexIndex[1] = northwest(current_vertex_i, image_width);
                         vertexIndex[2] = northeast(current_vertex_i, image_width);
 
+                        normalIndex[0] = center(current_interpolated_vertex_i);
+                        normalIndex[1] = northwest(current_vertex_i, image_width);
+                        normalIndex[2] = northeast(current_vertex_i, image_width);
+
                         if (triangulate_quads_struct.should_ylikuutio_use_real_texture_coordinates)
                         {
                             uvIndex[0] = center(current_interpolated_vertex_i);
@@ -942,10 +953,6 @@ namespace geometry
                             uvIndex[1] = static_cast<GLuint>(northwest_y(x, z, input_vertex_pointer, image_width));
                             uvIndex[2] = static_cast<GLuint>(northeast_y(x, z, input_vertex_pointer, image_width));
                         }
-
-                        normalIndex[0] = 0; // TODO: add proper normal index.
-                        normalIndex[1] = 0; // TODO: add proper normal index.
-                        normalIndex[2] = 0; // TODO: add proper normal index.
 
                         geometry::output_triangle_vertices(
                                 temp_vertices,
@@ -964,6 +971,10 @@ namespace geometry
                         vertexIndex[1] = northeast(current_vertex_i, image_width);
                         vertexIndex[2] = southeast(current_vertex_i, image_width);
 
+                        normalIndex[0] = center(current_interpolated_vertex_i);
+                        normalIndex[1] = northeast(current_vertex_i, image_width);
+                        normalIndex[2] = southeast(current_vertex_i, image_width);
+
                         if (triangulate_quads_struct.should_ylikuutio_use_real_texture_coordinates)
                         {
                             uvIndex[0] = center(current_interpolated_vertex_i);
@@ -977,10 +988,6 @@ namespace geometry
                             uvIndex[1] = static_cast<GLuint>(northeast_y(x, z, input_vertex_pointer, image_width));
                             uvIndex[2] = static_cast<GLuint>(southeast_y(x, z, input_vertex_pointer, image_width));
                         }
-
-                        normalIndex[0] = 0; // TODO: add proper normal index.
-                        normalIndex[1] = 0; // TODO: add proper normal index.
-                        normalIndex[2] = 0; // TODO: add proper normal index.
 
                         geometry::output_triangle_vertices(
                                 temp_vertices,
@@ -1029,6 +1036,10 @@ namespace geometry
                         vertexIndex[1] = northwest(current_vertex_i, image_width);
                         vertexIndex[2] = southeast(current_vertex_i, image_width);
 
+                        normalIndex[0] = southwest(current_vertex_i, image_width);
+                        normalIndex[1] = northwest(current_vertex_i, image_width);
+                        normalIndex[2] = southeast(current_vertex_i, image_width);
+
                         if (triangulate_quads_struct.should_ylikuutio_use_real_texture_coordinates)
                         {
                             uvIndex[0] = southwest(current_vertex_i, image_width);
@@ -1042,10 +1053,6 @@ namespace geometry
                             uvIndex[1] = static_cast<GLuint>(northwest_y(x, z, input_vertex_pointer, image_width));
                             uvIndex[2] = static_cast<GLuint>(southeast_y(x, z, input_vertex_pointer, image_width));
                         }
-
-                        normalIndex[0] = 0; // TODO: add proper normal index.
-                        normalIndex[1] = 0; // TODO: add proper normal index.
-                        normalIndex[2] = 0; // TODO: add proper normal index.
 
                         geometry::output_triangle_vertices(
                                 temp_vertices,
@@ -1064,6 +1071,10 @@ namespace geometry
                         vertexIndex[1] = southeast(current_vertex_i, image_width);
                         vertexIndex[2] = northwest(current_vertex_i, image_width);
 
+                        normalIndex[0] = northeast(current_vertex_i, image_width);
+                        normalIndex[1] = southeast(current_vertex_i, image_width);
+                        normalIndex[2] = northwest(current_vertex_i, image_width);
+
                         if (triangulate_quads_struct.should_ylikuutio_use_real_texture_coordinates)
                         {
                             uvIndex[0] = northeast(current_vertex_i, image_width);
@@ -1077,10 +1088,6 @@ namespace geometry
                             uvIndex[1] = static_cast<GLuint>(southeast_y(x, z, input_vertex_pointer, image_width));
                             uvIndex[2] = static_cast<GLuint>(northwest_y(x, z, input_vertex_pointer, image_width));
                         }
-
-                        normalIndex[0] = 0; // TODO: add proper normal index.
-                        normalIndex[1] = 0; // TODO: add proper normal index.
-                        normalIndex[2] = 0; // TODO: add proper normal index.
 
                         geometry::output_triangle_vertices(
                                 temp_vertices,
