@@ -90,10 +90,7 @@ namespace geometry
                     uint32_t current_vertex_i = image_width * z + x;
 
                     // Interpolate y coordinate (altitude).
-                    GLfloat y = static_cast<GLfloat>(southwest_y(x, z, input_vertex_pointer, image_width) +
-                            southeast_y(x, z, input_vertex_pointer, image_width) +
-                            northwest_y(x, z, input_vertex_pointer, image_width) +
-                            northeast_y(x, z, input_vertex_pointer, image_width)) / 4.0f;
+                    GLfloat y = center_y(x, z, input_vertex_pointer, image_width);
 
                     // Create a new vertex using bilinear interpolation.
                     // This corresponds to "v": specify one vertex.
