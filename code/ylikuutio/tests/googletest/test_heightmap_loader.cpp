@@ -1,6 +1,7 @@
 #include "gtest/gtest.h"
 #include "code/ylikuutio/ontology/loaders/heightmap_loader.hpp"
 #include "code/ylikuutio/ontology/loaders/heightmap_loader.cpp"
+#include "code/ylikuutio/geometry/triangulation_enums.hpp"
 #include "code/ylikuutio/geometry/quad_triangulation.hpp"
 
 // Include GLEW
@@ -20,6 +21,89 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
+TEST(face_indices_must_be_computed_appropriately, a_4x4_world)
+{
+    // Face indices example for a 4x4 image file using bilinear interpolation.
+    //
+    //  +-------+-------+-------+
+    //  |\ 26  /|\ 30  /|\ 34  /|
+    //  | \   / | \   / | \   / |
+    //  |  \ /  |  \ /  |  \ /  |
+    //  |25 x 27|29 x 31|33 x 35|
+    //  |  / \  |  / \  |  / \  |
+    //  | /   \ | /   \ | /   \ |
+    //  |/ 24  \|/ 28  \|/ 32  \|
+    //  +-------+-------+-------+
+    //  |\ 14  /|\ 18  /|\ 22  /|
+    //  | \   / | \   / | \   / |
+    //  |  \ /  |  \ /  |  \ /  |
+    //  |13 x 15|17 x 19|21 x 23|
+    //  |  / \  |  / \  |  / \  |
+    //  | /   \ | /   \ | /   \ |
+    //  |/ 12  \|/ 16  \|/ 20  \|
+    //  +-------+-------+-------+
+    //  |\  2  /|\  6  /|\ 10  /|
+    //  | \   / | \   / | \   / |
+    //  |  \ /  |  \ /  |  \ /  |
+    //  |1  x  3|5  x  7|9  x 11|
+    //  |  / \  |  / \  |  / \  |
+    //  | /   \ | /   \ | /   \ |
+    //  |/  0  \|/  4  \|/  8  \|
+    //  +-------+-------+-------+
+
+    const uint32_t example_width = 4;
+    // x = 0, z = 0.
+    ASSERT_EQ(geometry::get_face_normal_i(0, 0, geometry::ENE, example_width), 0);
+    ASSERT_EQ(geometry::get_face_normal_i(0, 0, geometry::NNE, example_width), 1);
+
+    // x = 1, z = 0.
+    ASSERT_EQ(geometry::get_face_normal_i(1, 0, geometry::WNW, example_width), 0);
+    ASSERT_EQ(geometry::get_face_normal_i(1, 0, geometry::NNW, example_width), 3);
+    ASSERT_EQ(geometry::get_face_normal_i(1, 0, geometry::NNE, example_width), 5);
+    ASSERT_EQ(geometry::get_face_normal_i(1, 0, geometry::ENE, example_width), 4);
+
+    // x = 2, z = 0.
+    ASSERT_EQ(geometry::get_face_normal_i(2, 0, geometry::WNW, example_width), 4);
+    ASSERT_EQ(geometry::get_face_normal_i(2, 0, geometry::NNW, example_width), 7);
+    ASSERT_EQ(geometry::get_face_normal_i(2, 0, geometry::NNE, example_width), 9);
+    ASSERT_EQ(geometry::get_face_normal_i(2, 0, geometry::ENE, example_width), 8);
+
+    // x = 3, z = 0.
+    ASSERT_EQ(geometry::get_face_normal_i(3, 0, geometry::WNW, example_width), 8);
+    ASSERT_EQ(geometry::get_face_normal_i(3, 0, geometry::NNW, example_width), 11);
+
+    // x = 0, z = 1.
+    ASSERT_EQ(geometry::get_face_normal_i(0, 1, geometry::NNE, example_width), 13);
+    ASSERT_EQ(geometry::get_face_normal_i(0, 1, geometry::ENE, example_width), 12);
+    ASSERT_EQ(geometry::get_face_normal_i(0, 1, geometry::ESE, example_width), 2);
+    ASSERT_EQ(geometry::get_face_normal_i(0, 1, geometry::SSE, example_width), 1);
+
+    // x = 1, z = 1.
+    ASSERT_EQ(geometry::get_face_normal_i(1, 1, geometry::NNE, example_width), 17);
+    ASSERT_EQ(geometry::get_face_normal_i(1, 1, geometry::ENE, example_width), 16);
+    ASSERT_EQ(geometry::get_face_normal_i(1, 1, geometry::ESE, example_width), 6);
+    ASSERT_EQ(geometry::get_face_normal_i(1, 1, geometry::SSE, example_width), 5);
+    ASSERT_EQ(geometry::get_face_normal_i(1, 1, geometry::SSW, example_width), 3);
+    ASSERT_EQ(geometry::get_face_normal_i(1, 1, geometry::WSW, example_width), 2);
+    ASSERT_EQ(geometry::get_face_normal_i(1, 1, geometry::WNW, example_width), 12);
+    ASSERT_EQ(geometry::get_face_normal_i(1, 1, geometry::NNW, example_width), 15);
+
+    // x = 2, z = 1.
+    ASSERT_EQ(geometry::get_face_normal_i(2, 1, geometry::NNE, example_width), 21);
+    ASSERT_EQ(geometry::get_face_normal_i(2, 1, geometry::ENE, example_width), 20);
+    ASSERT_EQ(geometry::get_face_normal_i(2, 1, geometry::ESE, example_width), 10);
+    ASSERT_EQ(geometry::get_face_normal_i(2, 1, geometry::SSE, example_width), 9);
+    ASSERT_EQ(geometry::get_face_normal_i(2, 1, geometry::SSW, example_width), 7);
+    ASSERT_EQ(geometry::get_face_normal_i(2, 1, geometry::WSW, example_width), 6);
+    ASSERT_EQ(geometry::get_face_normal_i(2, 1, geometry::WNW, example_width), 16);
+    ASSERT_EQ(geometry::get_face_normal_i(2, 1, geometry::NNW, example_width), 19);
+
+    // x = 3, z = 1.
+    ASSERT_EQ(geometry::get_face_normal_i(3, 1, geometry::SSW, example_width), 11);
+    ASSERT_EQ(geometry::get_face_normal_i(3, 1, geometry::WSW, example_width), 10);
+    ASSERT_EQ(geometry::get_face_normal_i(3, 1, geometry::WNW, example_width), 20);
+    ASSERT_EQ(geometry::get_face_normal_i(3, 1, geometry::NNW, example_width), 23);
+}
 TEST(a_BMP_world_must_be_loaded_appropriately, load_3x3_BMP_world)
 {
     std::string image_path = "test3x3.bmp";

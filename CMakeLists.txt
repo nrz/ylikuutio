@@ -645,6 +645,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/geometry/quad_triangulation.hpp
         code/ylikuutio/geometry/transformation.cpp
         code/ylikuutio/geometry/transformation.hpp
+        code/ylikuutio/geometry/triangulation_enums.hpp
         code/ylikuutio/hierarchy/hierarchy_templates.hpp
         code/ylikuutio/ontology/loaders/font_loader.cpp
         code/ylikuutio/ontology/loaders/font_loader.hpp
