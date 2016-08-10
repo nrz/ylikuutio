@@ -56,8 +56,7 @@ namespace geometry
     }
 
     // for bilinear interpolation.
-    glm::vec3 get_face_normal(
-            std::vector<glm::vec3>& face_normal_data,
+    uint32_t get_face_normal_i(
             uint32_t x,
             uint32_t z,
             BilinearDirections compass_point_code,
@@ -91,38 +90,45 @@ namespace geometry
         //  |/  0  \|/  4  \|/  8  \|
         //  +-------+-------+-------+
 
-        uint32_t face_normal_i;
-
         switch (compass_point_code)
         {
             case SSW:
-                face_normal_i = 4 * (z - 1) * (image_width - 1) + (4 * x) - 1;
-                break;
+                return 4 * (z - 1) * (image_width - 1) + (4 * x) - 1;
             case WSW:
-                face_normal_i = 4 * (z - 1) * (image_width - 1) + (4 * x) - 2;
-                break;
+                return 4 * (z - 1) * (image_width - 1) + (4 * x) - 2;
             case WNW:
-                face_normal_i = 4 * z * (image_width - 1) + (4 * x) - 4;
-                break;
+                return 4 * z * (image_width - 1) + (4 * x) - 4;
             case NNW:
-                face_normal_i = 4 * z * (image_width - 1) + (4 * x) - 1;
-                break;
+                return 4 * z * (image_width - 1) + (4 * x) - 1;
             case NNE:
-                face_normal_i = 4 * z * (image_width - 1) + (4 * x) + 1;
-                break;
+                return 4 * z * (image_width - 1) + (4 * x) + 1;
             case ENE:
-                face_normal_i = 4 * z * (image_width - 1) + (4 * x);
-                break;
+                return 4 * z * (image_width - 1) + (4 * x);
             case ESE:
-                face_normal_i = 4 * (z - 1) * (image_width - 1) + (4 * x) + 2;
-                break;
+                return 4 * (z - 1) * (image_width - 1) + (4 * x) + 2;
             case SSE:
-                face_normal_i = 4 * (z - 1) * (image_width - 1) + (4 * x) + 1;
-                break;
+                return 4 * (z - 1) * (image_width - 1) + (4 * x) + 1;
             default:
-                std::cerr << "invalid compass point code!\n";
-                return glm::vec3(NAN, NAN, NAN);
+                return -1;
         }
+    }
+
+    // for bilinear interpolation.
+    glm::vec3 get_face_normal(
+            std::vector<glm::vec3>& face_normal_data,
+            uint32_t x,
+            uint32_t z,
+            BilinearDirections compass_point_code,
+            uint32_t image_width)
+    {
+        uint32_t face_normal_i = get_face_normal_i(x, z, compass_point_code, image_width);
+
+        if (face_normal_i == -1)
+        {
+            std::cerr << "invalid compass point code!\n";
+            return glm::vec3(NAN, NAN, NAN);
+        }
+
         return face_normal_data[face_normal_i];
     }
 
