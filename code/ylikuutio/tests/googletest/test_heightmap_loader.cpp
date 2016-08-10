@@ -150,6 +150,9 @@ TEST(a_BMP_world_must_be_loaded_appropriately, load_3x3_BMP_world)
     // |   4  8  16 |
     // |   0  1   2 |
 
+    ASSERT_EQ(out_vertices[0].x, 0.5f); // first vertex (center) of first triangle.
+    ASSERT_EQ(out_vertices[0].z, 0.5f);
+
     // TODO: add assertions for vertices, UVs and normals!
 }
 TEST(a_BMP_world_must_be_loaded_appropriately, load_256x256_BMP_world)
