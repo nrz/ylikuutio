@@ -447,6 +447,7 @@ configure_file(res/objects/snow_cottage_triangulated.obj snow_cottage_triangulat
 configure_file(res/textures/uvmap.DDS uvmap.DDS COPYONLY)
 configure_file(res/textures/GrassGreenTexture0002.bmp GrassGreenTexture0002.bmp COPYONLY)
 configure_file(res/textures/pavers1b2.bmp pavers1b2.bmp COPYONLY)
+configure_file(res/textures/numbers_123456_black_and_white.bmp numbers_123456_black_and_white.bmp COPYONLY)
 configure_file(res/fonts/Holstein.DDS Holstein.DDS COPYONLY)
 configure_file(res/fonts/Holstein.bmp Holstein.bmp COPYONLY)
 configure_file(res/height_maps/noise1024x1024.bmp noise1024x1024.bmp COPYONLY)
