@@ -94,7 +94,6 @@ int main(void)
     // position = glm::vec3(100, 100, 100);
     // position = glm::vec3(100, 3900, 100);
     // position = glm::vec3(100.0f, 5000.0f, 100.0f);
-    testing_spherical_world_in_use = true;
 
     if (testing_spherical_world_in_use)
     {
