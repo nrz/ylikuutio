@@ -129,7 +129,7 @@ typedef struct SpeciesStruct
     // used for all files (for all species).
     ontology::Material* parent_pointer;         // pointer to the material object.
     bool is_world;                           // worlds currently do not rotate nor translate.
-    double world_radius;                     // radius of sea level in meters. used only for worlds.
+    float world_radius;                      // radius of sea level in kilometers. used only for worlds.
     std::string model_file_format;           // type of the model file. supported file formats so far: `"bmp"`/`"BMP"`, `"obj"`/`"OBJ"`.
                                              // TODO: add support for `"SRTM"`.
     std::string model_filename;              // filename of the model file.
