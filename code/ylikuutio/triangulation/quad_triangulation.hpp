@@ -121,41 +121,14 @@ namespace geometry
             // 7. Loop through all vertices and `geometry::output_triangle_vertices`.
 
             // 1. Define the vertices for vertices loaded from file, `push_back` to `temp_vertices`.
-            // First, define the temporary vertices in a double loop.
-            for (uint32_t z = 0; z < image_height; z++)
-            {
-                for (uint32_t x = 0; x < image_width; x++)
-                {
-                    // current x,z coordinates).
-                    float y = static_cast<float>(geometry::get_y(input_vertex_pointer, x, z, image_width));
 
-                    // This corresponds to "v": specify one vertex.
-                    glm::vec3 vertex;
-                    vertex.x = static_cast<GLfloat>(x);
-                    vertex.y = static_cast<GLfloat>(y);
-                    vertex.z = static_cast<GLfloat>(z);
-                    temp_vertices.push_back(vertex);
-
-                    // This corresponds to "vt": specify texture coordinates of one vertex.
-                    glm::vec2 uv;
-
-                    if (triangulate_quads_struct.should_ylikuutio_use_real_texture_coordinates)
-                    {
-                        uv.x = round(static_cast<GLfloat>(texture_x));
-                        uv.y = round(static_cast<GLfloat>(texture_y));
-                    }
-                    else
-                    {
-                        uv.x = static_cast<GLfloat>(y) / 256.0f;
-                        uv.y = 0.0f;
-                    }
-
-                    temp_UVs.push_back(uv);
-
-                    texture_x ^= 1;
-                }
-                texture_y ^= 1;
-            }
+            define_vertices(
+                    input_vertex_pointer,
+                    image_width,
+                    image_height,
+                    triangulate_quads_struct.should_ylikuutio_use_real_texture_coordinates,
+                    temp_vertices,
+                    temp_UVs);
 
             uint32_t n_faces_for_each_vertex;
             uint32_t n_faces;

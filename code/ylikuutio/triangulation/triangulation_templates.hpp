@@ -66,6 +66,55 @@ namespace geometry
         }
 
     template<class T1>
+        void define_vertices(
+                T1* input_vertex_pointer,
+                uint32_t image_width,
+                uint32_t image_height,
+                bool should_ylikuutio_use_real_texture_coordinates,
+                std::vector<glm::vec3>& temp_vertices,
+                std::vector<glm::vec2>& temp_UVs)
+        {
+            // Define the temporary vertices in a double loop.
+            uint32_t texture_x = 0;
+            uint32_t texture_y = 0;
+
+            for (uint32_t z = 0; z < image_height; z++)
+            {
+                for (uint32_t x = 0; x < image_width; x++)
+                {
+                    // current x,z coordinates).
+                    float y = static_cast<float>(geometry::get_y(input_vertex_pointer, x, z, image_width));
+
+                    // This corresponds to "v": specify one vertex.
+                    glm::vec3 vertex;
+                    vertex.x = static_cast<GLfloat>(x);
+                    vertex.y = static_cast<GLfloat>(y);
+                    vertex.z = static_cast<GLfloat>(z);
+                    temp_vertices.push_back(vertex);
+
+                    // This corresponds to "vt": specify texture coordinates of one vertex.
+                    glm::vec2 uv;
+
+                    if (should_ylikuutio_use_real_texture_coordinates)
+                    {
+                        uv.x = round(static_cast<GLfloat>(texture_x));
+                        uv.y = round(static_cast<GLfloat>(texture_y));
+                    }
+                    else
+                    {
+                        uv.x = static_cast<GLfloat>(y) / 256.0f;
+                        uv.y = 0.0f;
+                    }
+
+                    temp_UVs.push_back(uv);
+
+                    texture_x ^= 1;
+                }
+                texture_y ^= 1;
+            }
+        }
+
+    template<class T1>
         void interpolate_vertices_using_bilinear_interpolation(
                 T1* input_vertex_pointer,
                 BilinearInterpolationStruct bilinear_interpolation_struct,
