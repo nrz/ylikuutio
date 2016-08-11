@@ -31,25 +31,6 @@
 
 namespace geometry
 {
-    // For bilinear interpolation, southeast-northwest edges, and southwest-northeast edges.
-    // These functions return indices.
-    GLuint southwest(uint32_t current_vertex_i, uint32_t image_width)
-    {
-        return current_vertex_i - image_width - 1;
-    }
-    GLuint southeast(uint32_t current_vertex_i, uint32_t image_width)
-    {
-        return current_vertex_i - image_width;
-    }
-    GLuint northwest(uint32_t current_vertex_i, uint32_t image_width)
-    {
-        return current_vertex_i - 1;
-    }
-    GLuint northeast(uint32_t current_vertex_i, uint32_t image_width)
-    {
-        return current_vertex_i;
-    }
-
     bool compute_face_normals(
             std::vector<glm::vec3>& temp_vertices,
             std::vector<glm::vec3>& face_normal_vector_vec3,
