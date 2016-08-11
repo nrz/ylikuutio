@@ -112,7 +112,7 @@ namespace geometry
             uint32_t texture_y = 0;
 
             // Processing stages:
-            // 1. Define the (GLfloat) vertices for vertices loaded from file, `push_back` to `temp_vertices`.
+            // 1. Define the (GLfloat) vertices for vertices loaded from file, `push_back` to `temp_vertices` and `temp_UVs`.
             // 2. Interpolate the (GLfloat) vertices between, using bilinear interpolation, `push_back` to `temp_vertices` and `temp_UVs`.
             // 3. Transform spherical coordinates loaded from file (and computed this far as being in horizontal plane) to a curved surface.
             // 4. For bilinear interpolation: Transform interpolated coordinates (and computed this far as being in horizontal plane) to a curved surface.
