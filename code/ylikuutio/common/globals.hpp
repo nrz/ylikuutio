@@ -50,11 +50,6 @@
 #define PI 3.14159265359f
 #endif
 
-#ifndef EARTH_RADIUS
-// #define EARTH_RADIUS 6371000.0f // in metres
-#define EARTH_RADIUS 6371.0f // in kilometres
-#endif
-
 namespace ontology
 {
     class Universe;

@@ -104,8 +104,6 @@ namespace ontology
         spherical_position.phi = RADIANS_TO_DEGREES(atan2(position.y, position.x));
 #endif
 
-        earth_radius = EARTH_RADIUS;
-
         camera_position = position;
         camera_position.y += 2.0f;
 

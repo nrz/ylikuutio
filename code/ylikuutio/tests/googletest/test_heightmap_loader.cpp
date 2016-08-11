@@ -4,6 +4,8 @@
 #include "code/ylikuutio/triangulation/quad_triangulation.hpp"
 #include "code/ylikuutio/ontology/loaders/heightmap_loader.hpp"
 #include "code/ylikuutio/ontology/loaders/heightmap_loader.cpp"
+#include "code/ylikuutio/common/global_variables.hpp"
+#include "code/ylikuutio/common/global_variables.cpp"
 
 // Include GLEW
 #ifndef __GL_GLEW_H_INCLUDED

@@ -6,6 +6,7 @@
 #include "heightmap_loader.hpp"
 #include "code/ylikuutio/triangulation/quad_triangulation.hpp"
 #include "code/ylikuutio/common/globals.hpp"
+#include "code/ylikuutio/common/global_variables.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -301,7 +302,7 @@ namespace ontology
         triangulate_quads_struct.image_width = image_width_in_use;
         triangulate_quads_struct.image_height = image_height_in_use;
         triangulate_quads_struct.triangulation_type = triangulation_type;
-        triangulate_quads_struct.sphere_radius = EARTH_RADIUS;
+        triangulate_quads_struct.sphere_radius = earth_radius;
         triangulate_quads_struct.spherical_world_struct = spherical_world_struct;
 
         return geometry::triangulate_quads(vertex_data, triangulate_quads_struct, out_vertices, out_UVs, out_normals);
