@@ -62,46 +62,64 @@ TEST(vertices_must_be_defined_appropriately, a_3x3_world)
     ASSERT_EQ(temp_vertices[0].x, 0.0f);
     ASSERT_EQ(temp_vertices[0].z, 0.0f);
     ASSERT_EQ(temp_vertices[0].y, 0.0f);
+    ASSERT_EQ(temp_UVs[0].x, 0.0f);
+    ASSERT_EQ(temp_UVs[0].y, 0.0f);
 
     // x = 1, z = 0, y = 1.
     ASSERT_EQ(temp_vertices[1].x, 1.0f);
     ASSERT_EQ(temp_vertices[1].z, 0.0f);
     ASSERT_EQ(temp_vertices[1].y, 1.0f);
+    ASSERT_EQ(temp_UVs[1].x, 1.0f);
+    ASSERT_EQ(temp_UVs[1].y, 0.0f);
 
     // x = 2, z = 0, y = 2.
     ASSERT_EQ(temp_vertices[2].x, 2.0f);
     ASSERT_EQ(temp_vertices[2].z, 0.0f);
     ASSERT_EQ(temp_vertices[2].y, 2.0f);
+    ASSERT_EQ(temp_UVs[2].x, 0.0f);
+    ASSERT_EQ(temp_UVs[2].y, 0.0f);
 
     // x = 0, z = 1, y = 4.
     ASSERT_EQ(temp_vertices[3].x, 0.0f);
     ASSERT_EQ(temp_vertices[3].z, 1.0f);
     ASSERT_EQ(temp_vertices[3].y, 4.0f);
+    ASSERT_EQ(temp_UVs[3].x, 0.0f);
+    ASSERT_EQ(temp_UVs[3].y, 1.0f);
 
     // x = 1, z = 1, y = 8.
     ASSERT_EQ(temp_vertices[4].x, 1.0f);
     ASSERT_EQ(temp_vertices[4].z, 1.0f);
     ASSERT_EQ(temp_vertices[4].y, 8.0f);
+    ASSERT_EQ(temp_UVs[4].x, 1.0f);
+    ASSERT_EQ(temp_UVs[4].y, 1.0f);
 
     // x = 2, z = 1, y = 16.
     ASSERT_EQ(temp_vertices[5].x, 2.0f);
     ASSERT_EQ(temp_vertices[5].z, 1.0f);
     ASSERT_EQ(temp_vertices[5].y, 16.0f);
+    ASSERT_EQ(temp_UVs[5].x, 0.0f);
+    ASSERT_EQ(temp_UVs[5].y, 1.0f);
 
     // x = 0, z = 2, y = 32.
     ASSERT_EQ(temp_vertices[6].x, 0.0f);
     ASSERT_EQ(temp_vertices[6].z, 2.0f);
     ASSERT_EQ(temp_vertices[6].y, 32.0f);
+    ASSERT_EQ(temp_UVs[6].x, 0.0f);
+    ASSERT_EQ(temp_UVs[6].y, 0.0f);
 
     // x = 1, z = 2, y = 64.
     ASSERT_EQ(temp_vertices[7].x, 1.0f);
     ASSERT_EQ(temp_vertices[7].z, 2.0f);
     ASSERT_EQ(temp_vertices[7].y, 64.0f);
+    ASSERT_EQ(temp_UVs[7].x, 1.0f);
+    ASSERT_EQ(temp_UVs[7].y, 0.0f);
 
     // x = 2, z = 2, y = 128.
     ASSERT_EQ(temp_vertices[8].x, 2.0f);
     ASSERT_EQ(temp_vertices[8].z, 2.0f);
     ASSERT_EQ(temp_vertices[8].y, 128.0f);
+    ASSERT_EQ(temp_UVs[8].x, 0.0f);
+    ASSERT_EQ(temp_UVs[8].y, 0.0f);
 }
 TEST(face_indices_must_be_computed_appropriately, a_4x4_world)
 {
