@@ -75,11 +75,12 @@ namespace geometry
                 std::vector<glm::vec2>& temp_UVs)
         {
             // Define the temporary vertices in a double loop.
-            uint32_t texture_x = 0;
             uint32_t texture_y = 0;
 
             for (uint32_t z = 0; z < image_height; z++)
             {
+                uint32_t texture_x = 0;
+
                 for (uint32_t x = 0; x < image_width; x++)
                 {
                     // current x,z coordinates).
