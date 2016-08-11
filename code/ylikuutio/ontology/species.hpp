@@ -49,6 +49,7 @@ namespace ontology
             uint32_t get_objectID();
 
             bool is_world;                           // worlds currently do not rotate nor translate.
+            float world_radius;                      // radius of sea level in kilometers. used only for worlds.
             float divisor;                           // value by which SRTM values are divided to convert them to kilometers.
 
             std::string color_channel;               // color channel in use: `"red"`, `"green"`, `"blue"`, `"mean"` or `"all"`.

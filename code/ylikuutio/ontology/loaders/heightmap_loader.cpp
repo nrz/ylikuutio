@@ -171,6 +171,7 @@ namespace ontology
             std::string image_path,
             float latitude,
             float longitude,
+            float world_radius,
             float divisor,
             std::vector<glm::vec3>& out_vertices,
             std::vector<glm::vec2>& out_UVs,
@@ -303,7 +304,7 @@ namespace ontology
         triangulate_quads_struct.image_width = image_width_in_use;
         triangulate_quads_struct.image_height = image_height_in_use;
         triangulate_quads_struct.triangulation_type = triangulation_type;
-        triangulate_quads_struct.sphere_radius = earth_radius;
+        triangulate_quads_struct.sphere_radius = world_radius;
         triangulate_quads_struct.spherical_world_struct = spherical_world_struct;
 
         return geometry::triangulate_quads(vertex_data, triangulate_quads_struct, out_vertices, out_UVs, out_normals);

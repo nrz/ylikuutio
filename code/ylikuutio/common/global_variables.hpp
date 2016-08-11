@@ -71,7 +71,6 @@ extern float delta_time;
 extern uint32_t max_FPS;
 
 // Variables related to the current `Scene`.
-extern float earth_radius;
 extern bool testing_spherical_world_in_use;
 extern bool is_world_loaded;        // no more than one world object can be loaded. TODO: check that no more than one world is loaded!
 extern bool is_world_spherical;

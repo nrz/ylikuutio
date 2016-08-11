@@ -90,10 +90,7 @@ std::string g_font_filename = "kongtext.svg";
 
 int main(void)
 {
-    // Initial position : on +Z
-    // position = glm::vec3(100, 100, 100);
-    // position = glm::vec3(100, 3900, 100);
-    // position = glm::vec3(100.0f, 5000.0f, 100.0f);
+    float earth_radius = 6371.0f; // in kilometres
 
     testing_spherical_world_in_use = true;
 
@@ -167,7 +164,7 @@ int main(void)
     glEnable(GL_CULL_FACE);
 
     // Create the world, store it in `my_world`.
-    ontology::Universe* my_world = new ontology::Universe();
+    ontology::Universe* my_world = new ontology::Universe(earth_radius);
 
     ontology::Scene* my_scene = new ontology::Scene(my_world);
 
@@ -212,6 +209,7 @@ int main(void)
         SRTM_terrain_species_struct.color_channel = g_height_data_color_channel;
         SRTM_terrain_species_struct.light_position = glm::vec3(4, 4, 4);
         SRTM_terrain_species_struct.is_world = true;
+        SRTM_terrain_species_struct.world_radius = earth_radius;
         SRTM_terrain_species_struct.divisor = 1000.0f;
         terrain_species = new ontology::Species(SRTM_terrain_species_struct);
 
