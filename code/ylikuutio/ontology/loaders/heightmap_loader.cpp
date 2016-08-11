@@ -108,10 +108,10 @@ namespace ontology
         uint8_t *image_pointer;
         image_pointer = image_data;
 
-        uint32_t* vertex_data;
-        vertex_data = new uint32_t[world_size];
+        float* vertex_data;
+        vertex_data = new float[world_size];
 
-        uint32_t* vertex_pointer;
+        float* vertex_pointer;
         vertex_pointer = vertex_data;
 
         const char* char_color_channel = color_channel.c_str();
@@ -128,20 +128,20 @@ namespace ontology
 
                 if (std::strcmp(char_color_channel, "blue") == 0)
                 {
-                    y = static_cast<uint32_t>(*image_pointer);       // y-coordinate is the blue (B) value.
+                    y = static_cast<float>(*image_pointer);       // y-coordinate is the blue (B) value.
                 }
                 else if (std::strcmp(char_color_channel, "green") == 0)
                 {
-                    y = static_cast<uint32_t>(*(image_pointer + 1)); // y-coordinate is the green (G) value.
+                    y = static_cast<float>(*(image_pointer + 1)); // y-coordinate is the green (G) value.
                 }
                 else if (std::strcmp(char_color_channel, "red") == 0)
                 {
-                    y = static_cast<uint32_t>(*(image_pointer + 2)); // y-coordinate is the red (R) value.
+                    y = static_cast<float>(*(image_pointer + 2)); // y-coordinate is the red (R) value.
                 }
                 // y-coordinate is the mean of R, G, & B.
                 else if ((std::strcmp(char_color_channel, "mean") == 0) || (std::strcmp(char_color_channel, "all") == 0))
                 {
-                    y = (static_cast<uint32_t>(*image_pointer) + static_cast<uint32_t>(*(image_pointer + 1)) + static_cast<uint32_t>(*(image_pointer + 2))) / 3;
+                    y = (static_cast<float>(*image_pointer) + static_cast<float>(*(image_pointer + 1)) + static_cast<float>(*(image_pointer + 2))) / 3.0f;
                 }
                 else
                 {
