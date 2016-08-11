@@ -265,13 +265,13 @@ namespace ontology
         // Everything is in memory now, the file can be closed
         std::fclose(file);
 
-        uint32_t* vertex_data;
-        vertex_data = new uint32_t[image_width_in_use * image_height_in_use];
+        float* vertex_data;
+        vertex_data = new float[image_width_in_use * image_height_in_use];
 
         uint8_t *image_pointer;
         image_pointer = image_data + sizeof(int16_t) * (true_image_height - 1) * true_image_width; // start from southwestern corner.
 
-        uint32_t* vertex_pointer;
+        float* vertex_pointer;
         vertex_pointer = vertex_data;
 
         // start processing image_data.
@@ -288,7 +288,7 @@ namespace ontology
                 y = static_cast<uint32_t>(*image_pointer) << 8 | static_cast<uint32_t>(*(image_pointer + 1));
 
                 image_pointer += sizeof(int16_t);
-                *vertex_pointer++ = y;
+                *vertex_pointer++ = static_cast<float>(y);
             }
             image_pointer -= sizeof(int16_t) * (image_width_in_use + true_image_width);
         }
