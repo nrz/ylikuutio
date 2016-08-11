@@ -578,6 +578,8 @@ add_library(ylikuutio
     code/ylikuutio/string/ylikuutio_string.hpp
 
     # triangulation, in alphabetical order
+    code/ylikuutio/triangulation/face_normals.cpp
+    code/ylikuutio/triangulation/face_normals.hpp
     code/ylikuutio/triangulation/indexing.cpp
     code/ylikuutio/triangulation/indexing.hpp
     code/ylikuutio/triangulation/polygon_triangulation.cpp
@@ -654,6 +656,8 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/ontology/loaders/font_loader.hpp
         code/ylikuutio/string/ylikuutio_string.cpp
         code/ylikuutio/string/ylikuutio_string.hpp
+        code/ylikuutio/triangulation/face_normals.cpp
+        code/ylikuutio/triangulation/face_normals.hpp
         code/ylikuutio/triangulation/indexing.cpp
         code/ylikuutio/triangulation/indexing.hpp
         code/ylikuutio/triangulation/quad_triangulation.hpp
