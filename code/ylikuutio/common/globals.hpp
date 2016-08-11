@@ -122,7 +122,7 @@ typedef struct ObjectStruct
 typedef struct SpeciesStruct
 {
     SpeciesStruct()
-        : parent_pointer(nullptr), is_world(false), world_radius(NAN), triangulation_type("bilinear_interpolation")
+        : parent_pointer(nullptr), is_world(false), world_radius(NAN), divisor(1.0f), triangulation_type("bilinear_interpolation")
     {
         // constructor.
     }
@@ -130,6 +130,7 @@ typedef struct SpeciesStruct
     ontology::Material* parent_pointer;      // pointer to the material object.
     bool is_world;                           // worlds currently do not rotate nor translate.
     float world_radius;                      // radius of sea level in kilometers. used only for worlds.
+    float divisor;                           // value by which SRTM values are divided to convert them to kilometers.
     std::string model_file_format;           // type of the model file. supported file formats so far: `"bmp"`/`"BMP"`, `"obj"`/`"OBJ"`.
                                              // TODO: add support for `"SRTM"`.
     std::string model_filename;              // filename of the model file.

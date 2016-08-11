@@ -27,6 +27,7 @@ namespace ontology
             std::string image_path,
             float latitude,
             float longitude,
+            float divisor,
             std::vector<glm::vec3>& out_vertices,
             std::vector<glm::vec2>& out_UVs,
             std::vector<glm::vec3>& out_normals,

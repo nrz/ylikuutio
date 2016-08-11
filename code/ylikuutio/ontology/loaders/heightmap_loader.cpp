@@ -171,6 +171,7 @@ namespace ontology
             std::string image_path,
             float latitude,
             float longitude,
+            float divisor,
             std::vector<glm::vec3>& out_vertices,
             std::vector<glm::vec2>& out_UVs,
             std::vector<glm::vec3>& out_normals,
@@ -287,7 +288,7 @@ namespace ontology
                 y = static_cast<uint32_t>(*image_pointer) << 8 | static_cast<uint32_t>(*(image_pointer + 1));
 
                 image_pointer += sizeof(int16_t);
-                *vertex_pointer++ = static_cast<float>(y) / 1000.0f;
+                *vertex_pointer++ = static_cast<float>(y) / divisor;
             }
             image_pointer -= sizeof(int16_t) * (image_width_in_use + true_image_width);
         }

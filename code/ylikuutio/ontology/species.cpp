@@ -32,6 +32,7 @@ namespace ontology
     {
         // constructor.
         this->is_world          = species_struct.is_world;
+        this->divisor           = species_struct.divisor;
         this->model_file_format = species_struct.model_file_format;
         this->model_filename    = species_struct.model_filename;
         this->color_channel     = species_struct.color_channel;
@@ -67,6 +68,7 @@ namespace ontology
                     this->model_filename,
                     current_latitude_in_degrees,
                     current_longitude_in_degrees,
+                    this->divisor,
                     this->vertices,
                     this->UVs,
                     this->normals,

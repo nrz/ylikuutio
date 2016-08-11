@@ -212,6 +212,7 @@ int main(void)
         SRTM_terrain_species_struct.color_channel = g_height_data_color_channel;
         SRTM_terrain_species_struct.light_position = glm::vec3(4, 4, 4);
         SRTM_terrain_species_struct.is_world = true;
+        SRTM_terrain_species_struct.divisor = 1000.0f;
         terrain_species = new ontology::Species(SRTM_terrain_species_struct);
 
         turbo_factor = 100.0f;
