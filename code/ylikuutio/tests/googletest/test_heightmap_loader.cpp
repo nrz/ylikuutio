@@ -154,7 +154,7 @@ TEST(vertices_must_be_defined_and_interpolated_appropriately, a_3x3_world)
     ASSERT_EQ(temp_UVs[11].x, 0.5f);
     ASSERT_EQ(temp_UVs[11].y, 0.5f);
 
-    // x = 1.5, z = 1.5, y = 3.25.
+    // x = 1.5, z = 1.5, y = 54.
     ASSERT_EQ(temp_vertices[12].x, 1.5f);
     ASSERT_EQ(temp_vertices[12].z, 1.5f);
     ASSERT_EQ(temp_vertices[12].y, 54.0f);
