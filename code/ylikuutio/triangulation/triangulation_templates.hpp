@@ -117,13 +117,12 @@ namespace geometry
     template<class T1>
         void interpolate_and_define_vertices_using_bilinear_interpolation(
                 T1* input_vertex_pointer,
-                BilinearInterpolationStruct bilinear_interpolation_struct,
+                uint32_t image_width,
+                uint32_t image_height,
+                bool should_ylikuutio_use_real_texture_coordinates,
                 std::vector<glm::vec3>& temp_vertices,
                 std::vector<glm::vec2>& temp_UVs)
         {
-            uint32_t image_width = bilinear_interpolation_struct.image_width;
-            uint32_t image_height = bilinear_interpolation_struct.image_height;
-
             std::cout << "interpolating center vertices.\n";
 
             // Then, define the faces in a double loop.
@@ -152,7 +151,7 @@ namespace geometry
                     // This corresponds to "vt": specify texture coordinates of one vertex.
                     glm::vec2 uv;
 
-                    if (bilinear_interpolation_struct.should_ylikuutio_use_real_texture_coordinates)
+                    if (should_ylikuutio_use_real_texture_coordinates)
                     {
                         uv.x = 0.5f;
                         uv.y = 0.5f;

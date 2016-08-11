@@ -153,13 +153,11 @@ namespace geometry
             // 2. Interpolate the vertices between, using bilinear interpolation, `push_back` to `temp_vertices`.
             if (is_bilinear_interpolation_in_use)
             {
-                BilinearInterpolationStruct bilinear_interpolation_struct;
-                bilinear_interpolation_struct.image_width = image_width;
-                bilinear_interpolation_struct.image_height = image_height;
-                bilinear_interpolation_struct.should_ylikuutio_use_real_texture_coordinates = triangulate_quads_struct.should_ylikuutio_use_real_texture_coordinates;
                 geometry::interpolate_and_define_vertices_using_bilinear_interpolation(
                         input_vertex_pointer,
-                        bilinear_interpolation_struct,
+                        image_width,
+                        image_height,
+                        triangulate_quads_struct.should_ylikuutio_use_real_texture_coordinates,
                         temp_vertices,
                         temp_UVs);
             }
