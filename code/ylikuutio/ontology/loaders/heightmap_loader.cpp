@@ -105,11 +105,11 @@ namespace ontology
         // Everything is in memory now, the file can be closed
         std::fclose(file);
 
-        uint32_t* vertex_data;
-        vertex_data = new uint32_t[world_size];
-
         uint8_t *image_pointer;
         image_pointer = image_data;
+
+        uint32_t* vertex_data;
+        vertex_data = new uint32_t[world_size];
 
         uint32_t* vertex_pointer;
         vertex_pointer = vertex_data;
