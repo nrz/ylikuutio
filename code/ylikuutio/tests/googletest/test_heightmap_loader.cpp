@@ -103,6 +103,38 @@ TEST(face_indices_must_be_computed_appropriately, a_4x4_world)
     ASSERT_EQ(geometry::get_face_normal_i(3, 1, geometry::WSW, example_width), 10);
     ASSERT_EQ(geometry::get_face_normal_i(3, 1, geometry::WNW, example_width), 20);
     ASSERT_EQ(geometry::get_face_normal_i(3, 1, geometry::NNW, example_width), 23);
+
+    // x = 0, z = 2.
+    ASSERT_EQ(geometry::get_face_normal_i(0, 2, geometry::NNE, example_width), 25);
+    ASSERT_EQ(geometry::get_face_normal_i(0, 2, geometry::ENE, example_width), 24);
+    ASSERT_EQ(geometry::get_face_normal_i(0, 2, geometry::ESE, example_width), 14);
+    ASSERT_EQ(geometry::get_face_normal_i(0, 2, geometry::SSE, example_width), 13);
+
+    // x = 1, z = 2.
+    ASSERT_EQ(geometry::get_face_normal_i(1, 2, geometry::NNE, example_width), 29);
+    ASSERT_EQ(geometry::get_face_normal_i(1, 2, geometry::ENE, example_width), 28);
+    ASSERT_EQ(geometry::get_face_normal_i(1, 2, geometry::ESE, example_width), 18);
+    ASSERT_EQ(geometry::get_face_normal_i(1, 2, geometry::SSE, example_width), 17);
+    ASSERT_EQ(geometry::get_face_normal_i(1, 2, geometry::SSW, example_width), 15);
+    ASSERT_EQ(geometry::get_face_normal_i(1, 2, geometry::WSW, example_width), 14);
+    ASSERT_EQ(geometry::get_face_normal_i(1, 2, geometry::WNW, example_width), 24);
+    ASSERT_EQ(geometry::get_face_normal_i(1, 2, geometry::NNW, example_width), 27);
+
+    // x = 2, z = 2.
+    ASSERT_EQ(geometry::get_face_normal_i(2, 2, geometry::NNE, example_width), 33);
+    ASSERT_EQ(geometry::get_face_normal_i(2, 2, geometry::ENE, example_width), 32);
+    ASSERT_EQ(geometry::get_face_normal_i(2, 2, geometry::ESE, example_width), 22);
+    ASSERT_EQ(geometry::get_face_normal_i(2, 2, geometry::SSE, example_width), 21);
+    ASSERT_EQ(geometry::get_face_normal_i(2, 2, geometry::SSW, example_width), 19);
+    ASSERT_EQ(geometry::get_face_normal_i(2, 2, geometry::WSW, example_width), 18);
+    ASSERT_EQ(geometry::get_face_normal_i(2, 2, geometry::WNW, example_width), 28);
+    ASSERT_EQ(geometry::get_face_normal_i(2, 2, geometry::NNW, example_width), 31);
+
+    // x = 3, z = 2.
+    ASSERT_EQ(geometry::get_face_normal_i(3, 2, geometry::SSW, example_width), 23);
+    ASSERT_EQ(geometry::get_face_normal_i(3, 2, geometry::WSW, example_width), 22);
+    ASSERT_EQ(geometry::get_face_normal_i(3, 2, geometry::WNW, example_width), 32);
+    ASSERT_EQ(geometry::get_face_normal_i(3, 2, geometry::NNW, example_width), 35);
 }
 TEST(a_BMP_world_must_be_loaded_appropriately, load_3x3_BMP_world)
 {
