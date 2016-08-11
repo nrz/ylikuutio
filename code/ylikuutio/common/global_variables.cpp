@@ -62,7 +62,7 @@ float delta_time;
 uint32_t max_FPS = 60;
 
 // Variables related to the current `Scene`.
-double earth_radius;
+float earth_radius;
 bool testing_spherical_world_in_use = false;
 bool is_world_loaded; // no more than one world object can be loaded. TODO: check that no more than one world is loaded!
 bool is_world_spherical;
