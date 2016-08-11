@@ -157,7 +157,7 @@ namespace geometry
                 bilinear_interpolation_struct.image_width = image_width;
                 bilinear_interpolation_struct.image_height = image_height;
                 bilinear_interpolation_struct.should_ylikuutio_use_real_texture_coordinates = triangulate_quads_struct.should_ylikuutio_use_real_texture_coordinates;
-                geometry::interpolate_vertices_using_bilinear_interpolation(
+                geometry::interpolate_and_define_vertices_using_bilinear_interpolation(
                         input_vertex_pointer,
                         bilinear_interpolation_struct,
                         temp_vertices,

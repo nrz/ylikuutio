@@ -115,7 +115,7 @@ namespace geometry
         }
 
     template<class T1>
-        void interpolate_vertices_using_bilinear_interpolation(
+        void interpolate_and_define_vertices_using_bilinear_interpolation(
                 T1* input_vertex_pointer,
                 BilinearInterpolationStruct bilinear_interpolation_struct,
                 std::vector<glm::vec3>& temp_vertices,
