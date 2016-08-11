@@ -127,12 +127,12 @@ namespace geometry
                 for (uint32_t x = 0; x < image_width; x++)
                 {
                     // current x,z coordinates).
-                    GLfloat y = static_cast<GLfloat>(geometry::get_y(input_vertex_pointer, x, z, image_width));
+                    float y = static_cast<float>(geometry::get_y(input_vertex_pointer, x, z, image_width));
 
                     // This corresponds to "v": specify one vertex.
                     glm::vec3 vertex;
                     vertex.x = static_cast<GLfloat>(x);
-                    vertex.y = y;
+                    vertex.y = static_cast<GLfloat>(y);
                     vertex.z = static_cast<GLfloat>(z);
                     temp_vertices.push_back(vertex);
 
@@ -146,7 +146,7 @@ namespace geometry
                     }
                     else
                     {
-                        uv.x = y / 256.0f;
+                        uv.x = static_cast<GLfloat>(y) / 256.0f;
                         uv.y = 0.0f;
                     }
 
