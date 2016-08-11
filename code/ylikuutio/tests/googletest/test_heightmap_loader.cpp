@@ -22,7 +22,7 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
-TEST(vertices_must_be_defined_appropriately, a_3x3_world)
+TEST(vertices_must_be_defined_and_interpolated_appropriately, a_3x3_world)
 {
     uint32_t image_width = 3;
     uint32_t image_height = 3;
@@ -57,6 +57,16 @@ TEST(vertices_must_be_defined_appropriately, a_3x3_world)
             should_ylikuutio_use_real_texture_coordinates,
             temp_vertices,
             temp_UVs);
+
+    geometry::interpolate_and_define_vertices_using_bilinear_interpolation(
+            input_vertex_data,
+            image_width,
+            image_height,
+            should_ylikuutio_use_real_texture_coordinates,
+            temp_vertices,
+            temp_UVs);
+
+    // Predefined vertices.
 
     // x = 0, z = 0, y = 0.
     ASSERT_EQ(temp_vertices[0].x, 0.0f);
@@ -120,6 +130,36 @@ TEST(vertices_must_be_defined_appropriately, a_3x3_world)
     ASSERT_EQ(temp_vertices[8].y, 128.0f);
     ASSERT_EQ(temp_UVs[8].x, 0.0f);
     ASSERT_EQ(temp_UVs[8].y, 0.0f);
+
+    // Interpolated vertices.
+
+    // x = 0.5, z = 0.5, y = 3.25.
+    ASSERT_EQ(temp_vertices[9].x, 0.5f);
+    ASSERT_EQ(temp_vertices[9].z, 0.5f);
+    ASSERT_EQ(temp_vertices[9].y, 3.25f);
+    ASSERT_EQ(temp_UVs[9].x, 0.5f);
+    ASSERT_EQ(temp_UVs[9].y, 0.5f);
+
+    // x = 1.5, z = 0.5, y = 6.75.
+    ASSERT_EQ(temp_vertices[10].x, 1.5f);
+    ASSERT_EQ(temp_vertices[10].z, 0.5f);
+    ASSERT_EQ(temp_vertices[10].y, 6.75f);
+    ASSERT_EQ(temp_UVs[10].x, 0.5f);
+    ASSERT_EQ(temp_UVs[10].y, 0.5f);
+
+    // x = 0.5, z = 1.5, y = 27.
+    ASSERT_EQ(temp_vertices[11].x, 0.5f);
+    ASSERT_EQ(temp_vertices[11].z, 1.5f);
+    ASSERT_EQ(temp_vertices[11].y, 27.0f);
+    ASSERT_EQ(temp_UVs[11].x, 0.5f);
+    ASSERT_EQ(temp_UVs[11].y, 0.5f);
+
+    // x = 1.5, z = 1.5, y = 3.25.
+    ASSERT_EQ(temp_vertices[12].x, 1.5f);
+    ASSERT_EQ(temp_vertices[12].z, 1.5f);
+    ASSERT_EQ(temp_vertices[12].y, 54.0f);
+    ASSERT_EQ(temp_UVs[12].x, 0.5f);
+    ASSERT_EQ(temp_UVs[12].y, 0.5f);
 }
 TEST(face_indices_must_be_computed_appropriately, a_4x4_world)
 {
