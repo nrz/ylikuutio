@@ -1,8 +1,9 @@
 #include "gtest/gtest.h"
+#include "code/ylikuutio/triangulation/triangulation_enums.hpp"
+#include "code/ylikuutio/triangulation/triangulation_templates.hpp"
+#include "code/ylikuutio/triangulation/quad_triangulation.hpp"
 #include "code/ylikuutio/ontology/loaders/heightmap_loader.hpp"
 #include "code/ylikuutio/ontology/loaders/heightmap_loader.cpp"
-#include "code/ylikuutio/triangulation/triangulation_enums.hpp"
-#include "code/ylikuutio/triangulation/quad_triangulation.hpp"
 
 // Include GLEW
 #ifndef __GL_GLEW_H_INCLUDED
@@ -21,6 +22,87 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
+TEST(vertices_must_be_defined_appropriately, a_3x3_world)
+{
+    uint32_t image_width = 3;
+    uint32_t image_height = 3;
+    bool should_ylikuutio_use_real_texture_coordinates = true;
+
+    float* input_vertex_data = new float[image_width * image_height];
+    float* input_vertex_pointer = input_vertex_data;
+
+    // Fill input vertex data with values.
+    // |  32 64 128 |
+    // |   4  8  16 |
+    // |   0  1   2 |
+    *input_vertex_pointer++ = 0.0f;
+    *input_vertex_pointer++ = 1.0f;
+    *input_vertex_pointer++ = 2.0f;
+    *input_vertex_pointer++ = 4.0f;
+    *input_vertex_pointer++ = 8.0f;
+    *input_vertex_pointer++ = 16.0f;
+    *input_vertex_pointer++ = 32.0f;
+    *input_vertex_pointer++ = 64.0f;
+    *input_vertex_pointer++ = 128.0f;
+
+    std::vector<GLuint> vertexIndices, uvIndices, normalIndices;
+    std::vector<glm::vec3> temp_vertices;
+    std::vector<glm::vec2> temp_UVs;
+    std::vector<glm::vec3> temp_normals;
+
+    geometry::define_vertices(
+            input_vertex_data,
+            image_width,
+            image_height,
+            should_ylikuutio_use_real_texture_coordinates,
+            temp_vertices,
+            temp_UVs);
+
+    // x = 0, z = 0, y = 0.
+    ASSERT_EQ(temp_vertices[0].x, 0.0f);
+    ASSERT_EQ(temp_vertices[0].z, 0.0f);
+    ASSERT_EQ(temp_vertices[0].y, 0.0f);
+
+    // x = 1, z = 0, y = 1.
+    ASSERT_EQ(temp_vertices[1].x, 1.0f);
+    ASSERT_EQ(temp_vertices[1].z, 0.0f);
+    ASSERT_EQ(temp_vertices[1].y, 1.0f);
+
+    // x = 2, z = 0, y = 2.
+    ASSERT_EQ(temp_vertices[2].x, 2.0f);
+    ASSERT_EQ(temp_vertices[2].z, 0.0f);
+    ASSERT_EQ(temp_vertices[2].y, 2.0f);
+
+    // x = 0, z = 1, y = 4.
+    ASSERT_EQ(temp_vertices[3].x, 0.0f);
+    ASSERT_EQ(temp_vertices[3].z, 1.0f);
+    ASSERT_EQ(temp_vertices[3].y, 4.0f);
+
+    // x = 1, z = 1, y = 8.
+    ASSERT_EQ(temp_vertices[4].x, 1.0f);
+    ASSERT_EQ(temp_vertices[4].z, 1.0f);
+    ASSERT_EQ(temp_vertices[4].y, 8.0f);
+
+    // x = 2, z = 1, y = 16.
+    ASSERT_EQ(temp_vertices[5].x, 2.0f);
+    ASSERT_EQ(temp_vertices[5].z, 1.0f);
+    ASSERT_EQ(temp_vertices[5].y, 16.0f);
+
+    // x = 0, z = 2, y = 32.
+    ASSERT_EQ(temp_vertices[6].x, 0.0f);
+    ASSERT_EQ(temp_vertices[6].z, 2.0f);
+    ASSERT_EQ(temp_vertices[6].y, 32.0f);
+
+    // x = 1, z = 2, y = 64.
+    ASSERT_EQ(temp_vertices[7].x, 1.0f);
+    ASSERT_EQ(temp_vertices[7].z, 2.0f);
+    ASSERT_EQ(temp_vertices[7].y, 64.0f);
+
+    // x = 2, z = 2, y = 128.
+    ASSERT_EQ(temp_vertices[8].x, 2.0f);
+    ASSERT_EQ(temp_vertices[8].z, 2.0f);
+    ASSERT_EQ(temp_vertices[8].y, 128.0f);
+}
 TEST(face_indices_must_be_computed_appropriately, a_4x4_world)
 {
     // Face indices example for a 4x4 image file using bilinear interpolation.
