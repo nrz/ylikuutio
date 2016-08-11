@@ -260,7 +260,7 @@ int main(void)
     snow_cottage_object_struct1.rotate_angle = 0.10f;
     snow_cottage_object_struct1.rotate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
     snow_cottage_object_struct1.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
-    ontology::Object* snow_cottage1 = new ontology::Object(snow_cottage_object_struct1);
+    // ontology::Object* snow_cottage1 = new ontology::Object(snow_cottage_object_struct1);
 
     SpeciesStruct suzanne_species_struct;
     suzanne_species_struct.parent_pointer = uvmap_material;
