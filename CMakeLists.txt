@@ -511,15 +511,10 @@ add_library(ylikuutio
     code/ylikuutio/geometry/line_segment3D.hpp
     code/ylikuutio/geometry/line_segment_line_segment_intersection.cpp
     code/ylikuutio/geometry/line_segment_line_segment_intersection.hpp
-    code/ylikuutio/geometry/polygon_triangulation.cpp
-    code/ylikuutio/geometry/polygon_triangulation.hpp
-    code/ylikuutio/geometry/quad_triangulation.hpp
     code/ylikuutio/geometry/transformation.cpp
     code/ylikuutio/geometry/transformation.hpp
     code/ylikuutio/geometry/triangle.cpp
     code/ylikuutio/geometry/triangle.hpp
-    code/ylikuutio/geometry/triangulation_enums.hpp
-    code/ylikuutio/geometry/triangulation_templates.hpp
 
     # graph, in alphabetical order.
     code/ylikuutio/graph/graph.cpp
@@ -581,6 +576,13 @@ add_library(ylikuutio
     # string, in alphabetical order
     code/ylikuutio/string/ylikuutio_string.cpp
     code/ylikuutio/string/ylikuutio_string.hpp
+
+    # triangulation, in alphabetical order
+    code/ylikuutio/triangulation/polygon_triangulation.cpp
+    code/ylikuutio/triangulation/polygon_triangulation.hpp
+    code/ylikuutio/triangulation/quad_triangulation.hpp
+    code/ylikuutio/triangulation/triangulation_enums.hpp
+    code/ylikuutio/triangulation/triangulation_templates.hpp
     )
 add_dependencies(ylikuutio rescan)
 
@@ -643,15 +645,15 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/geometry/line_segment2D.hpp
         code/ylikuutio/geometry/line_segment_line_segment_intersection.cpp
         code/ylikuutio/geometry/line_segment_line_segment_intersection.hpp
-        code/ylikuutio/geometry/quad_triangulation.hpp
         code/ylikuutio/geometry/transformation.cpp
         code/ylikuutio/geometry/transformation.hpp
-        code/ylikuutio/geometry/triangulation_enums.hpp
         code/ylikuutio/hierarchy/hierarchy_templates.hpp
         code/ylikuutio/ontology/loaders/font_loader.cpp
         code/ylikuutio/ontology/loaders/font_loader.hpp
         code/ylikuutio/string/ylikuutio_string.cpp
         code/ylikuutio/string/ylikuutio_string.hpp
+        code/ylikuutio/triangulation/quad_triangulation.hpp
+        code/ylikuutio/triangulation/triangulation_enums.hpp
         )
     set(UNIT_TESTS
         code/ylikuutio/tests/googletest/test_any_value.cpp

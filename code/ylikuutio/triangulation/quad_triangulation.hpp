@@ -8,7 +8,7 @@
 
 #include "triangulation_enums.hpp"
 #include "triangulation_templates.hpp"
-#include "transformation.hpp"
+#include "code/ylikuutio/geometry/transformation.hpp"
 #include "code/ylikuutio/common/globals.hpp"
 
 // Include GLEW

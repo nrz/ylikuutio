@@ -4,7 +4,7 @@
 #endif
 
 #include "heightmap_loader.hpp"
-#include "code/ylikuutio/geometry/quad_triangulation.hpp"
+#include "code/ylikuutio/triangulation/quad_triangulation.hpp"
 #include "code/ylikuutio/common/globals.hpp"
 
 // Include GLM
