@@ -1,5 +1,5 @@
-#ifndef __INDEXING__HPP_INCLUDED
-#define __INDEXING__HPP_INCLUDED
+#ifndef __INDEXING_HPP_INCLUDED
+#define __INDEXING_HPP_INCLUDED
 
 #include "triangulation_enums.hpp"
 #include "code/ylikuutio/common/globals.hpp"
