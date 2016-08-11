@@ -224,7 +224,6 @@ int main(void)
         // Create the species, store it in `terrain_species`.
         SpeciesStruct bmp_terrain_species_struct;
         bmp_terrain_species_struct.parent_pointer = grass_material;
-        bmp_terrain_species_struct.triangulation_type = "southeast_northwest_edges";
         bmp_terrain_species_struct.model_file_format = g_model_file_format;
         bmp_terrain_species_struct.model_filename = g_model_filename;
         bmp_terrain_species_struct.color_channel = g_height_data_color_channel;
