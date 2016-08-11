@@ -95,15 +95,13 @@ int main(void)
     // position = glm::vec3(100, 3900, 100);
     // position = glm::vec3(100.0f, 5000.0f, 100.0f);
 
+    testing_spherical_world_in_use = true;
+
     if (testing_spherical_world_in_use)
     {
         is_flight_mode_in_use = true;
 
-        // position = glm::vec3(100.0f, 5000.0f + EARTH_RADIUS, 100.0f);
-        // position = glm::vec3(100.0f, 5000.0f, 100.0f);
-        // position = glm::vec3(-5658223.00f, -1700825.12f, 2322764.00f);
-        // position = glm::vec3(-5659377.50f, -1696985.38f, 2358353.25f);
-        position = glm::vec3(-8990.35f, -2710.92f, 3527.29f);
+        position = glm::vec3(-5682.32f, -1641.20f, 2376.45f);
     }
     else
     {

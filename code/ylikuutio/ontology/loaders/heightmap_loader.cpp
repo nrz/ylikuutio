@@ -288,7 +288,7 @@ namespace ontology
                 y = static_cast<uint32_t>(*image_pointer) << 8 | static_cast<uint32_t>(*(image_pointer + 1));
 
                 image_pointer += sizeof(int16_t);
-                *vertex_pointer++ = static_cast<float>(y);
+                *vertex_pointer++ = static_cast<float>(y) / 1000.0f;
             }
             image_pointer -= sizeof(int16_t) * (image_width_in_use + true_image_width);
         }
