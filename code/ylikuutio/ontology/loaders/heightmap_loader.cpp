@@ -97,7 +97,7 @@ namespace ontology
         }
 
         // Create a buffer.
-        image_data = new uint8_t [image_size];
+        image_data = new uint8_t[image_size];
 
         // Read the actual image data from the file into the buffer.
         std::fread(image_data, 1, image_size, file);
@@ -106,7 +106,7 @@ namespace ontology
         std::fclose(file);
 
         uint32_t* vertex_data;
-        vertex_data = new uint32_t [world_size];
+        vertex_data = new uint32_t[world_size];
 
         uint8_t *image_pointer;
         image_pointer = image_data;
@@ -257,7 +257,7 @@ namespace ontology
         image_size = sizeof(int16_t) * true_image_width * true_image_height;
 
         // Create a buffer.
-        image_data = new uint8_t [image_size];
+        image_data = new uint8_t[image_size];
 
         // Read the actual image data from the file into the buffer.
         std::fread(image_data, 1, image_size, file);
@@ -266,7 +266,7 @@ namespace ontology
         std::fclose(file);
 
         uint32_t* vertex_data;
-        vertex_data = new uint32_t [image_width_in_use * image_height_in_use];
+        vertex_data = new uint32_t[image_width_in_use * image_height_in_use];
 
         uint8_t *image_pointer;
         image_pointer = image_data + sizeof(int16_t) * (true_image_height - 1) * true_image_width; // start from southwestern corner.
