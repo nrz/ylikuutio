@@ -1,6 +1,11 @@
 #ifndef __FACE_NORMALS_HPP_INCLUDED
 #define __FACE_NORMALS_HPP_INCLUDED
 
+#ifndef GLM_FORCE_RADIANS
+#define GLM_FORCE_RADIANS
+#define DEGREES_TO_RADIANS(x) (x * PI / 180.0f)
+#endif
+
 #include "triangulation_enums.hpp"
 
 // Include GLM
