@@ -110,7 +110,7 @@ namespace ontology
         camera_position.y += 2.0f;
 
         // Projection matrix : 45° Field of View, aspect ratio, display range : 0.1 unit <-> 100 units
-        ProjectionMatrix = glm::perspective(FoV, aspect_ratio, 0.001f, 5000.0f + 2.0f * (GLfloat) earth_radius);
+        ProjectionMatrix = glm::perspective(FoV, aspect_ratio, 0.001f, 5000.0f + 2.0f * static_cast<GLfloat>(earth_radius));
         // Camera matrix
         ViewMatrix = glm::lookAt(
                 camera_position,           // Camera is here
