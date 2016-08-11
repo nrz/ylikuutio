@@ -7,6 +7,10 @@
 #define DEGREES_TO_RADIANS(x) (x * PI / 180.0f)
 #endif
 
+#ifndef RADIANS_TO_DEGREES
+#define RADIANS_TO_DEGREES(x) (x * 180.0f / PI)
+#endif
+
 #include "universe.hpp"
 #include "scene.hpp"
 #include "ground_level.hpp"
@@ -97,12 +101,13 @@ namespace ontology
             }
         }
 
-#ifdef TESTING_SPHERICAL_WORLD_IN_USE
-        // compute spherical coordinates.
-        spherical_position.rho = sqrt((position.x * position.x) + (position.y * position.y) + (position.z * position.z));
-        spherical_position.theta = RADIANS_TO_DEGREES(atan2(sqrt((position.x * position.x) + (position.y * position.y)), position.z));
-        spherical_position.phi = RADIANS_TO_DEGREES(atan2(position.y, position.x));
-#endif
+        if (testing_spherical_world_in_use)
+        {
+            // compute spherical coordinates.
+            spherical_position.rho = sqrt((position.x * position.x) + (position.y * position.y) + (position.z * position.z));
+            spherical_position.theta = RADIANS_TO_DEGREES(atan2(sqrt((position.x * position.x) + (position.y * position.y)), position.z));
+            spherical_position.phi = RADIANS_TO_DEGREES(atan2(position.y, position.x));
+        }
 
         camera_position = position;
         camera_position.y += 2.0f;
