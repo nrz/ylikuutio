@@ -1,3 +1,0 @@
-namespace text3D
-{
-}

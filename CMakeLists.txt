@@ -2,8 +2,50 @@
 cmake_minimum_required(VERSION 2.6.2)
 project(ylikuutio)
 
+# uncomment the following line to cross-compile for Windows under Linux using mingw64.
+# set(CROSS_COMPILE_FOR_WINDOWS true)
+
+# comment the following line to disable scripting with Chibi Scheme.
+set(ENABLE_SCRIPTING_WITH_CHIBI_SCHEME true)
+
+# uncomment the following line to do unit tests also with Catch.
+# set(DO_UNIT_TESTS_WITH_CATCH true)
+
+# comment the following line to disable unit tests with Google Test.
+set(DO_UNIT_TESTS_WITH_GOOGLE_TEST true)
+
+# uncomment the following line to download the latest versions of external projects
+# instead of using the versions carried in Ylikuutio repository (in `external/`).
+# at the moment this affects only Eigen, not Google Test & Google Mock.
+# set(ENABLE_DOWNLOAD_LATEST_VERSIONS_OF_EXTERNAL_PROJECTS)
+
+# uncomment the following line to disable updating of external projects.
+set(DISABLE_UPDATE_STEP true)
+
+if(CROSS_COMPILE_FOR_WINDOWS)
+    # https://cmake.org/Wiki/CMake_Cross_Compiling
+    # the name of the target operating system
+    set(CMAKE_SYSTEM_NAME Windows)
+
+    # which compilers to use for C and C++
+    set(CMAKE_C_COMPILER /usr/bin/i686-w64-mingw32-gcc)
+    set(CMAKE_CXX_COMPILER /usr/bin/i686-w64-mingw32-g++)
+    set(CMAKE_RC_COMPILER /usr/bin/686-w64-mingw32-windres)
+
+    # here is the target environment located
+    set(CMAKE_FIND_ROOT_PATH /usr/i686-w64-mingw32/)
+
+    # adjust the default behaviour of the FIND_XXX() commands:
+    # search headers and libraries in the target environment, search
+    # programs in the host environment
+    set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
+    set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
+    set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
+endif()
+
 find_package(OpenGL REQUIRED)
 find_package(Threads REQUIRED)
+find_package(eigen)
 
 # Compile external dependencies
 add_subdirectory (external)
@@ -33,12 +75,6 @@ if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE Release)
 endif()
 
-# uncomment the following line to do unit tests also with Catch.
-# set(DO_UNIT_TESTS_WITH_CATCH true)
-
-# comment the following line to disable unit tests with Google Test.
-set(DO_UNIT_TESTS_WITH_GOOGLE_TEST true)
-
 include(ExternalProject) # for ExternalProject_Add
 
 # for Google Test.
@@ -51,12 +87,222 @@ if(INCLUDE_DISTRIB)
     add_subdirectory(distrib)
 endif(INCLUDE_DISTRIB)
 
+# Do not compile GLFW tests, examples and documentation.
+set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
+set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
+set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
+
 include_directories(
-    external/glfw-3.0.3/include/GLFW/
+    external/glfw-3.2/include/GLFW/
+    external/glfw-3.2/include/
     external/glm-0.9.4.0/
-    external/glew-1.9.0/include/
-    external/Catch/single_include/
+    external/glew-2.0.0/include/
+    external/pugixml/src/
+
+    external/gdal-2.1.1/
+    external/gdal-2.1.1/alg/
+    external/gdal-2.1.1/apps/
+    external/gdal-2.1.1/apps/
+    external/gdal-2.1.1/frmts/
+    external/gdal-2.1.1/frmts/aaigrid/
+    external/gdal-2.1.1/frmts/adrg/
+    external/gdal-2.1.1/frmts/aigrid/
+    external/gdal-2.1.1/frmts/airsar/
+    external/gdal-2.1.1/frmts/arg/
+    external/gdal-2.1.1/frmts/blx/
+    external/gdal-2.1.1/frmts/bmp/
+    external/gdal-2.1.1/frmts/bsb/
+    external/gdal-2.1.1/frmts/cals/
+    external/gdal-2.1.1/frmts/ceos/
+    external/gdal-2.1.1/frmts/ceos2/
+    external/gdal-2.1.1/frmts/coasp/
+    external/gdal-2.1.1/frmts/cosar/
+    external/gdal-2.1.1/frmts/ctg/
+    external/gdal-2.1.1/frmts/dimap/
+    external/gdal-2.1.1/frmts/dted/
+    external/gdal-2.1.1/frmts/e00grid/
+    external/gdal-2.1.1/frmts/elas/
+    external/gdal-2.1.1/frmts/envisat/
+    external/gdal-2.1.1/frmts/ers/
+    external/gdal-2.1.1/frmts/fit/
+    external/gdal-2.1.1/frmts/gff/
+    external/gdal-2.1.1/frmts/gif/
+    external/gdal-2.1.1/frmts/grib/
+    external/gdal-2.1.1/frmts/gsg/
+    external/gdal-2.1.1/frmts/gtiff/
+    external/gdal-2.1.1/frmts/gtiff/libgeotiff/
+    external/gdal-2.1.1/frmts/gtiff/libtiff/
+    external/gdal-2.1.1/frmts/gxf/
+    external/gdal-2.1.1/frmts/hf2/
+    external/gdal-2.1.1/frmts/hfa/
+    external/gdal-2.1.1/frmts/idrisi/
+    external/gdal-2.1.1/frmts/ilwis/
+    external/gdal-2.1.1/frmts/ingr/
+    external/gdal-2.1.1/frmts/iris/
+    external/gdal-2.1.1/frmts/iso8211/
+    external/gdal-2.1.1/frmts/jaxapalsar/
+    external/gdal-2.1.1/frmts/jdem/
+    external/gdal-2.1.1/frmts/jpeg/
+    external/gdal-2.1.1/frmts/jpeg/
+    external/gdal-2.1.1/frmts/jpeg/
+    external/gdal-2.1.1/frmts/kmlsuperoverlay/
+    external/gdal-2.1.1/frmts/l1b/
+    external/gdal-2.1.1/frmts/leveller/
+    external/gdal-2.1.1/frmts/map/
+    external/gdal-2.1.1/frmts/mem/
+    external/gdal-2.1.1/frmts/mrf/
+    external/gdal-2.1.1/frmts/mrf/libLERC/
+    external/gdal-2.1.1/frmts/msgn/
+    external/gdal-2.1.1/frmts/ngsgeoid/
+    external/gdal-2.1.1/frmts/nitf/
+    external/gdal-2.1.1/frmts/northwood/
+    external/gdal-2.1.1/frmts/ozi/
+    external/gdal-2.1.1/frmts/pcidsk/
+    external/gdal-2.1.1/frmts/pcraster/
+    external/gdal-2.1.1/frmts/pdf/
+    external/gdal-2.1.1/frmts/pds/
+    external/gdal-2.1.1/frmts/png/
+    external/gdal-2.1.1/frmts/r/
+    external/gdal-2.1.1/frmts/raw/
+    external/gdal-2.1.1/frmts/rik/
+    external/gdal-2.1.1/frmts/rmf/
+    external/gdal-2.1.1/frmts/rs2/
+    external/gdal-2.1.1/frmts/safe/
+    external/gdal-2.1.1/frmts/saga/
+    external/gdal-2.1.1/frmts/sdts/
+    external/gdal-2.1.1/frmts/sentinel2/
+    external/gdal-2.1.1/frmts/sgi/
+    external/gdal-2.1.1/frmts/srtmhgt/
+    external/gdal-2.1.1/frmts/terragen/
+    external/gdal-2.1.1/frmts/til/
+    external/gdal-2.1.1/frmts/tsx/
+    external/gdal-2.1.1/frmts/usgsdem/
+    external/gdal-2.1.1/frmts/vrt/
+    external/gdal-2.1.1/frmts/xpm/
+    external/gdal-2.1.1/frmts/xyz/
+    external/gdal-2.1.1/frmts/zlib/
+    external/gdal-2.1.1/frmts/zmap/
+    external/gdal-2.1.1/gcore/
+    external/gdal-2.1.1/gcore/mdreader/
+    external/gdal-2.1.1/ogr/
+    external/gdal-2.1.1/ogr/ogrsf_frmts/
+    external/gdal-2.1.1/ogr/ogrsf_frmts/aeronavfaa/
+    external/gdal-2.1.1/ogr/ogrsf_frmts/arcgen/
+    external/gdal-2.1.1/ogr/ogrsf_frmts/avc/
+    external/gdal-2.1.1/ogr/ogrsf_frmts/bna/
+    external/gdal-2.1.1/ogr/ogrsf_frmts/csv/
+    external/gdal-2.1.1/ogr/ogrsf_frmts/dgn/
+    external/gdal-2.1.1/ogr/ogrsf_frmts/dxf/
+    external/gdal-2.1.1/ogr/ogrsf_frmts/edigeo/
+    external/gdal-2.1.1/ogr/ogrsf_frmts/generic/
+    external/gdal-2.1.1/ogr/ogrsf_frmts/geoconcept/
+    external/gdal-2.1.1/ogr/ogrsf_frmts/geojson/
+    external/gdal-2.1.1/ogr/ogrsf_frmts/geojson/libjson/
+    external/gdal-2.1.1/ogr/ogrsf_frmts/georss/
+    external/gdal-2.1.1/ogr/ogrsf_frmts/gml/
+    external/gdal-2.1.1/ogr/ogrsf_frmts/gmt/
+    external/gdal-2.1.1/ogr/ogrsf_frmts/gpsbabel/
+    external/gdal-2.1.1/ogr/ogrsf_frmts/gpx/
+    external/gdal-2.1.1/ogr/ogrsf_frmts/gtm/
+    external/gdal-2.1.1/ogr/ogrsf_frmts/htf/
+    external/gdal-2.1.1/ogr/ogrsf_frmts/idrisi/
+    external/gdal-2.1.1/ogr/ogrsf_frmts/jml/
+    external/gdal-2.1.1/ogr/ogrsf_frmts/kml/
+    external/gdal-2.1.1/ogr/ogrsf_frmts/mem/
+    external/gdal-2.1.1/ogr/ogrsf_frmts/mitab/
+    external/gdal-2.1.1/ogr/ogrsf_frmts/ntf/
+    external/gdal-2.1.1/ogr/ogrsf_frmts/openair/
+    external/gdal-2.1.1/ogr/ogrsf_frmts/openfilegdb/
+    external/gdal-2.1.1/ogr/ogrsf_frmts/pds/
+    external/gdal-2.1.1/ogr/ogrsf_frmts/pgdump/
+    external/gdal-2.1.1/ogr/ogrsf_frmts/rec/
+    external/gdal-2.1.1/ogr/ogrsf_frmts/s57/
+    external/gdal-2.1.1/ogr/ogrsf_frmts/sdts/
+    external/gdal-2.1.1/ogr/ogrsf_frmts/segukooa/
+    external/gdal-2.1.1/ogr/ogrsf_frmts/segy/
+    external/gdal-2.1.1/ogr/ogrsf_frmts/selafin/
+    external/gdal-2.1.1/ogr/ogrsf_frmts/shape/
+    external/gdal-2.1.1/ogr/ogrsf_frmts/sua/
+    external/gdal-2.1.1/ogr/ogrsf_frmts/svg/
+    external/gdal-2.1.1/ogr/ogrsf_frmts/sxf/
+    external/gdal-2.1.1/ogr/ogrsf_frmts/tiger/
+    external/gdal-2.1.1/ogr/ogrsf_frmts/vdv/
+    external/gdal-2.1.1/ogr/ogrsf_frmts/vrt/
+    external/gdal-2.1.1/ogr/ogrsf_frmts/wasp/
+    external/gdal-2.1.1/ogr/ogrsf_frmts/xplane/
+    external/gdal-2.1.1/port/
+
+    # manually added due to builds failed due to missing files.
+    external/gdal-2.1.1/frmts/jpeg/libjpeg/
+    external/gdal-2.1.1/frmts/png/libpng/
+    external/gdal-2.1.1/frmts/gif/giflib/
+    external/gdal-2.1.1/frmts/pcraster/libcsf/
+    external/gdal-2.1.1/frmts/pcidsk/sdk/
     .
+    )
+
+if(ENABLE_SCRIPTING_WITH_CHIBI_SCHEME)
+    include_directories(
+        external/chibi-scheme/include/
+        )
+endif()
+
+include_directories(
+    external/pugixml/src/
+    )
+
+if(ENABLE_DOWNLOAD_LATEST_VERSIONS_OF_EXTERNAL_PROJECTS)
+    if(DISABLE_UPDATE_STEP)
+        # Download and install Eigen
+        ExternalProject_Add(
+            eigen
+            GIT_REPOSITORY https://github.com/RLovelett/eigen
+            PREFIX ${CMAKE_CURRENT_BINARY_DIR}/eigen
+            # Disable install step
+            INSTALL_COMMAND ""
+            # Disable update step
+            UPDATE_COMMAND ""
+            LOG_DOWNLOAD ON
+            LOG_BUILD ON
+            )
+    else()
+        # Download and install Eigen
+        ExternalProject_Add(
+            eigen
+            GIT_REPOSITORY https://github.com/RLovelett/eigen
+            PREFIX ${CMAKE_CURRENT_BINARY_DIR}/eigen
+            # Disable install step
+            INSTALL_COMMAND ""
+            LOG_DOWNLOAD ON
+            LOG_BUILD ON
+            )
+    endif()
+else()
+    # Use Eigen 3.2.9 provided in the Ylikuutio repository.
+    ExternalProject_Add(
+        eigen
+        URL "file://${CMAKE_SOURCE_DIR}/external/eigen-3.2.9"
+        PREFIX ${CMAKE_CURRENT_BINARY_DIR}/eigen
+        # Disable install step
+        INSTALL_COMMAND ""
+        LOG_BUILD ON
+        )
+endif()
+
+# http://stackoverflow.com/questions/17446981/cmake-externalproject-add-and-findpackage/17473508#17473508
+if(NOT ${eigen_FOUND})
+    # Rerun CMake in initial build.
+    # Will update cmakecache/project files on first build.
+    # So you may have to reload project after first build.
+    add_custom_target(rescan ${CMAKE_COMMAND} ${CMAKE_SOURCE_DIR} DEPENDS eigen)
+else()
+    # rescan becomes a dummy target after first build.
+    # This prevents CMake from rebuilding cache/projects on subsequent builds.
+    add_custom_target(rescan)
+endif()
+
+include_directories(
+    ${CMAKE_CURRENT_BINARY_DIR}/eigen/src/eigen/
     )
 
 if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
@@ -67,17 +313,31 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         ${CMAKE_CURRENT_BINARY_DIR}/gmock/src/googletest/googletest/include/
         )
 
-    # Download and install GoogleTest
-    ExternalProject_Add(
-        googletest
-        GIT_REPOSITORY https://github.com/google/googletest
-        PREFIX ${CMAKE_CURRENT_BINARY_DIR}/gtest
-        # Disable install step
-        INSTALL_COMMAND ""
-        LOG_DOWNLOAD ON
-        LOG_DOWNLOAD ON
-        LOG_BUILD ON
-        )
+    if(DISABLE_UPDATE_STEP)
+        # Download and install GoogleTest
+        ExternalProject_Add(
+            googletest
+            GIT_REPOSITORY https://github.com/google/googletest
+            PREFIX ${CMAKE_CURRENT_BINARY_DIR}/gtest
+            # Disable install step
+            INSTALL_COMMAND ""
+            # Disable update step
+            UPDATE_COMMAND ""
+            LOG_DOWNLOAD ON
+            LOG_BUILD ON
+            )
+    else()
+        # Download and install GoogleTest
+        ExternalProject_Add(
+            googletest
+            GIT_REPOSITORY https://github.com/google/googletest
+            PREFIX ${CMAKE_CURRENT_BINARY_DIR}/gtest
+            # Disable install step
+            INSTALL_COMMAND ""
+            LOG_DOWNLOAD ON
+            LOG_BUILD ON
+            )
+    endif()
 
     # Create a libgtest target to be used as a dependency by test programs
     add_library(libgtest IMPORTED STATIC GLOBAL)
@@ -107,17 +367,31 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         ${GTEST_LIBRARY_PATH} )
     add_dependencies(${GTEST_LIBRARY} googletest)
 
-    # Download and install GoogleMock
-    ExternalProject_Add(
-        googlemock
-        GIT_REPOSITORY https://github.com/google/googletest
-        PREFIX ${CMAKE_CURRENT_BINARY_DIR}/gmock
-        # Disable install step
-        INSTALL_COMMAND ""
-        LOG_DOWNLOAD ON
-        LOG_DOWNLOAD ON
-        LOG_BUILD ON
-        )
+    if(DISABLE_UPDATE_STEP)
+        # Download and install GoogleMock
+        ExternalProject_Add(
+            googlemock
+            GIT_REPOSITORY https://github.com/google/googletest
+            PREFIX ${CMAKE_CURRENT_BINARY_DIR}/gmock
+            # Disable install step
+            INSTALL_COMMAND ""
+            # Disable update step
+            UPDATE_COMMAND ""
+            LOG_DOWNLOAD ON
+            LOG_BUILD ON
+            )
+    else()
+        # Download and install GoogleMock
+        ExternalProject_Add(
+            googlemock
+            GIT_REPOSITORY https://github.com/google/googletest
+            PREFIX ${CMAKE_CURRENT_BINARY_DIR}/gmock
+            # Disable install step
+            INSTALL_COMMAND ""
+            LOG_DOWNLOAD ON
+            LOG_BUILD ON
+            )
+    endif()
 
     # Create a libgmock target to be used as a dependency by test programs
     add_library(libgmock IMPORTED STATIC GLOBAL)
@@ -148,8 +422,9 @@ endif()
 
 set(ALL_LIBS
     ${OPENGL_LIBRARY}
-    GLFW_303
-    GLEW_190
+    GLEW_200
+    GDAL_211
+    pugixml
     )
 
 add_definitions(
@@ -161,207 +436,260 @@ add_definitions(
     )
 
 # for general use.
-configure_file(cpp/ylikuutio/shaders/TransformVertexShader.vertexshader TransformVertexShader.vertexshader COPYONLY)
-configure_file(cpp/ylikuutio/shaders/TextureFragmentShader.fragmentshader TextureFragmentShader.fragmentshader COPYONLY)
-configure_file(cpp/ylikuutio/shaders/StandardShading.vertexshader StandardShading.vertexshader COPYONLY)
-configure_file(cpp/ylikuutio/shaders/StandardShading.fragmentshader StandardShading.fragmentshader COPYONLY)
-configure_file(cpp/ylikuutio/shaders/TextVertexShader.vertexshader TextVertexShader.vertexshader COPYONLY)
-configure_file(cpp/ylikuutio/shaders/TextVertexShader.fragmentshader TextVertexShader.fragmentshader COPYONLY)
+configure_file(code/ylikuutio/shaders/TransformVertexShader.vertexshader TransformVertexShader.vertexshader COPYONLY)
+configure_file(code/ylikuutio/shaders/TextureFragmentShader.fragmentshader TextureFragmentShader.fragmentshader COPYONLY)
+configure_file(code/ylikuutio/shaders/StandardShading.vertexshader StandardShading.vertexshader COPYONLY)
+configure_file(code/ylikuutio/shaders/StandardShading.fragmentshader StandardShading.fragmentshader COPYONLY)
+configure_file(code/ylikuutio/shaders/TextVertexShader.vertexshader TextVertexShader.vertexshader COPYONLY)
+configure_file(code/ylikuutio/shaders/TextVertexShader.fragmentshader TextVertexShader.fragmentshader COPYONLY)
 configure_file(res/objects/suzanne.obj suzanne.obj COPYONLY)
+configure_file(res/objects/snow_cottage_triangulated.obj snow_cottage_triangulated.obj COPYONLY)
 configure_file(res/textures/uvmap.DDS uvmap.DDS COPYONLY)
 configure_file(res/textures/GrassGreenTexture0002.bmp GrassGreenTexture0002.bmp COPYONLY)
+configure_file(res/textures/pavers1b2.bmp pavers1b2.bmp COPYONLY)
+configure_file(res/textures/numbers_123456_black_and_white.bmp numbers_123456_black_and_white.bmp COPYONLY)
 configure_file(res/fonts/Holstein.DDS Holstein.DDS COPYONLY)
 configure_file(res/fonts/Holstein.bmp Holstein.bmp COPYONLY)
 configure_file(res/height_maps/noise1024x1024.bmp noise1024x1024.bmp COPYONLY)
 configure_file(res/height_maps/noise256x256.bmp noise256x256.bmp COPYONLY)
 configure_file(res/height_maps/noise128x128.bmp noise128x128.bmp COPYONLY)
 configure_file(res/height_maps/S17W069.hgt S17W069.hgt COPYONLY)
-configure_file(res/fonts/kongtext.svg kongtext.svg COPYONLY)
+configure_file(res/fonts/kongtext/kongtext.svg kongtext.svg COPYONLY)
+configure_file(res/maps/Hofinkatu_Isafjordinkatu_Joensuu_Finland.osm Hofinkatu_Isafjordinkatu_Joensuu_Finland.osm COPYONLY)
+configure_file(res/maps/Exactum_Physicum_Helsinki_Finland.osm Exactum_Physicum_Helsinki_Finland.osm COPYONLY)
 
 # for tests.
 configure_file(res/height_maps/noise256x256.bmp noise256x256.bmp COPYONLY)
 configure_file(res/textures/test3x3.bmp test3x3.bmp COPYONLY)
 
-# Ajokki
-add_executable(ajokki
-    # callback, in alphabetical order
-    cpp/ylikuutio/callback/callback_engine.cpp
-    cpp/ylikuutio/callback/callback_engine.hpp
-    cpp/ylikuutio/callback/callback_object.cpp
-    cpp/ylikuutio/callback/callback_object.hpp
-    cpp/ylikuutio/callback/callback_parameter.cpp
-    cpp/ylikuutio/callback/callback_parameter.hpp
+# Ylikuutio
+add_library(ylikuutio
+    # callback_system, in alphabetical order
+    code/ylikuutio/callback_system/callback_engine.cpp
+    code/ylikuutio/callback_system/callback_engine.hpp
+    code/ylikuutio/callback_system/callback_magic_numbers.hpp
+    code/ylikuutio/callback_system/callback_object.cpp
+    code/ylikuutio/callback_system/callback_object.hpp
+    code/ylikuutio/callback_system/callback_parameter.cpp
+    code/ylikuutio/callback_system/callback_parameter.hpp
+    code/ylikuutio/callback_system/key_and_callback_struct.hpp
 
     # common, in alphabetical order
-    cpp/ylikuutio/common/any_value.cpp
-    cpp/ylikuutio/common/any_value.hpp
-    cpp/ylikuutio/common/globals.cpp
-    cpp/ylikuutio/common/globals.hpp
+    code/ylikuutio/common/any_value.cpp
+    code/ylikuutio/common/any_value.hpp
+    code/ylikuutio/common/global_variables.cpp
+    code/ylikuutio/common/global_variables.hpp
+    code/ylikuutio/common/globals.hpp
+    code/ylikuutio/common/template_helpers.hpp
+
+    # console, in alphabetical order.
+    code/ylikuutio/console/console.cpp
+    code/ylikuutio/console/console.hpp
+    code/ylikuutio/console/console_callback_object.cpp
+    code/ylikuutio/console/console_callback_object.hpp
 
     # file, in alphabetical order.
-    cpp/ylikuutio/file/file_loader.cpp
-    cpp/ylikuutio/file/file_loader.hpp
+    code/ylikuutio/file/file_loader.cpp
+    code/ylikuutio/file/file_loader.hpp
 
     # geometry, in alphabetical order.
-    cpp/ylikuutio/geometry/bilinear_interpolation.cpp
-    cpp/ylikuutio/geometry/bilinear_interpolation.hpp
-    cpp/ylikuutio/geometry/indexing.cpp
-    cpp/ylikuutio/geometry/indexing.hpp
-    cpp/ylikuutio/geometry/line.cpp
-    cpp/ylikuutio/geometry/line.hpp
-    cpp/ylikuutio/geometry/line2D.cpp
-    cpp/ylikuutio/geometry/line2D.hpp
-    cpp/ylikuutio/geometry/line_line_intersection.cpp
-    cpp/ylikuutio/geometry/line_line_intersection.hpp
-    cpp/ylikuutio/geometry/line_segment.cpp
-    cpp/ylikuutio/geometry/line_segment.hpp
-    cpp/ylikuutio/geometry/line_segment_intersection.cpp
-    cpp/ylikuutio/geometry/line_segment_intersection.hpp
-    cpp/ylikuutio/geometry/transformation.cpp
-    cpp/ylikuutio/geometry/transformation.hpp
-    cpp/ylikuutio/geometry/triangulation.cpp
-    cpp/ylikuutio/geometry/triangulation.hpp
-    cpp/ylikuutio/geometry/triangulation_macros.cpp
+    code/ylikuutio/geometry/chunk.cpp
+    code/ylikuutio/geometry/chunk.hpp
+    code/ylikuutio/geometry/line.cpp
+    code/ylikuutio/geometry/line.hpp
+    code/ylikuutio/geometry/line2D.cpp
+    code/ylikuutio/geometry/line2D.hpp
+    code/ylikuutio/geometry/line3D.cpp
+    code/ylikuutio/geometry/line3D.hpp
+    code/ylikuutio/geometry/line_line_intersection.cpp
+    code/ylikuutio/geometry/line_line_intersection.hpp
+    code/ylikuutio/geometry/line_segment.cpp
+    code/ylikuutio/geometry/line_segment.hpp
+    code/ylikuutio/geometry/line_segment2D.cpp
+    code/ylikuutio/geometry/line_segment2D.hpp
+    code/ylikuutio/geometry/line_segment3D.cpp
+    code/ylikuutio/geometry/line_segment3D.hpp
+    code/ylikuutio/geometry/line_segment_line_segment_intersection.cpp
+    code/ylikuutio/geometry/line_segment_line_segment_intersection.hpp
+    code/ylikuutio/geometry/transformation.cpp
+    code/ylikuutio/geometry/transformation.hpp
+    code/ylikuutio/geometry/triangle.cpp
+    code/ylikuutio/geometry/triangle.hpp
 
     # graph, in alphabetical order.
-    cpp/ylikuutio/graph/graph.cpp
-    cpp/ylikuutio/graph/graph.hpp
-    cpp/ylikuutio/graph/node.cpp
-    cpp/ylikuutio/graph/node.hpp
+    code/ylikuutio/graph/graph.cpp
+    code/ylikuutio/graph/graph.hpp
+    code/ylikuutio/graph/node.cpp
+    code/ylikuutio/graph/node.hpp
 
     # hierarchy, in alphabetical order.
-    cpp/ylikuutio/hierarchy/hierarchy.cpp
-    cpp/ylikuutio/hierarchy/hierarchy.hpp
-    cpp/ylikuutio/hierarchy/hierarchy_templates.hpp
+    code/ylikuutio/hierarchy/hierarchy_templates.hpp
 
-    # model, in alphabetical order
-    cpp/ylikuutio/model/font.cpp
-    cpp/ylikuutio/model/font.hpp
-    cpp/ylikuutio/model/font_loader.cpp
-    cpp/ylikuutio/model/font_loader.hpp
-    cpp/ylikuutio/model/glyph.cpp
-    cpp/ylikuutio/model/glyph.hpp
-    cpp/ylikuutio/model/ground_level.cpp
-    cpp/ylikuutio/model/ground_level.hpp
-    cpp/ylikuutio/model/heightmap_loader.cpp
-    cpp/ylikuutio/model/heightmap_loader.hpp
-    cpp/ylikuutio/model/material.cpp
-    cpp/ylikuutio/model/material.hpp
-    cpp/ylikuutio/model/object.cpp
-    cpp/ylikuutio/model/object.hpp
-    cpp/ylikuutio/model/objloader.cpp
-    cpp/ylikuutio/model/objloader.hpp
-    cpp/ylikuutio/model/render_templates.hpp
-    cpp/ylikuutio/model/scene.cpp
-    cpp/ylikuutio/model/scene.hpp
-    cpp/ylikuutio/model/shader.cpp
-    cpp/ylikuutio/model/shader.hpp
-    cpp/ylikuutio/model/shader_loader.cpp
-    cpp/ylikuutio/model/shader_loader.hpp
-    cpp/ylikuutio/model/species.cpp
-    cpp/ylikuutio/model/species.hpp
-    cpp/ylikuutio/model/species_or_glyph.hpp
-    cpp/ylikuutio/model/text2D.cpp
-    cpp/ylikuutio/model/text2D.hpp
-    cpp/ylikuutio/model/text3D.hpp
-    cpp/ylikuutio/model/text3D.cpp
-    cpp/ylikuutio/model/texture_loader.cpp
-    cpp/ylikuutio/model/texture_loader.hpp
-    cpp/ylikuutio/model/vboindexer.cpp
-    cpp/ylikuutio/model/vboindexer.hpp
-    cpp/ylikuutio/model/world.cpp
-    cpp/ylikuutio/model/world.hpp
+    # ontology, in alphabetical order
+    code/ylikuutio/ontology/font2D.cpp
+    code/ylikuutio/ontology/font2D.hpp
+    code/ylikuutio/ontology/loaders/font_loader.cpp
+    code/ylikuutio/ontology/loaders/font_loader.hpp
+    code/ylikuutio/ontology/glyph.cpp
+    code/ylikuutio/ontology/glyph.hpp
+    code/ylikuutio/ontology/ground_level.cpp
+    code/ylikuutio/ontology/ground_level.hpp
+    code/ylikuutio/ontology/loaders/heightmap_loader.cpp
+    code/ylikuutio/ontology/loaders/heightmap_loader.hpp
+    code/ylikuutio/ontology/material.cpp
+    code/ylikuutio/ontology/material.hpp
+    code/ylikuutio/ontology/model.cpp
+    code/ylikuutio/ontology/model.hpp
+    code/ylikuutio/ontology/object.cpp
+    code/ylikuutio/ontology/object.hpp
+    code/ylikuutio/ontology/loaders/objloader.cpp
+    code/ylikuutio/ontology/loaders/objloader.hpp
+    code/ylikuutio/ontology/render_templates.hpp
+    code/ylikuutio/ontology/scene.cpp
+    code/ylikuutio/ontology/scene.hpp
+    code/ylikuutio/ontology/shader.cpp
+    code/ylikuutio/ontology/shader.hpp
+    code/ylikuutio/ontology/loaders/shader_loader.cpp
+    code/ylikuutio/ontology/loaders/shader_loader.hpp
+    code/ylikuutio/ontology/species.cpp
+    code/ylikuutio/ontology/species.hpp
+    code/ylikuutio/ontology/species_or_glyph.hpp
+    code/ylikuutio/ontology/text3D.hpp
+    code/ylikuutio/ontology/text3D.cpp
+    code/ylikuutio/ontology/loaders/texture_loader.cpp
+    code/ylikuutio/ontology/loaders/texture_loader.hpp
+    code/ylikuutio/ontology/universe.cpp
+    code/ylikuutio/ontology/universe.hpp
+    code/ylikuutio/ontology/vector_font.cpp
+    code/ylikuutio/ontology/vector_font.hpp
+    code/ylikuutio/ontology/vboindexer.cpp
+    code/ylikuutio/ontology/vboindexer.hpp
 
     # shaders, in alphabetical order
-    cpp/ylikuutio/shaders/StandardShading.fragmentshader
-    cpp/ylikuutio/shaders/StandardShading.vertexshader
-    cpp/ylikuutio/shaders/TransformVertexShader.vertexshader
-    cpp/ylikuutio/shaders/TextureFragmentShader.fragmentshader
-    cpp/ylikuutio/shaders/TextVertexShader.fragmentshader
-    cpp/ylikuutio/shaders/TextVertexShader.vertexshader
+    code/ylikuutio/shaders/StandardShading.fragmentshader
+    code/ylikuutio/shaders/StandardShading.vertexshader
+    code/ylikuutio/shaders/TransformVertexShader.vertexshader
+    code/ylikuutio/shaders/TextureFragmentShader.fragmentshader
+    code/ylikuutio/shaders/TextVertexShader.fragmentshader
+    code/ylikuutio/shaders/TextVertexShader.vertexshader
 
     # string, in alphabetical order
-    cpp/ylikuutio/string/ylikuutio_string.cpp
-    cpp/ylikuutio/string/ylikuutio_string.hpp
+    code/ylikuutio/string/ylikuutio_string.cpp
+    code/ylikuutio/string/ylikuutio_string.hpp
 
+    # triangulation, in alphabetical order
+    code/ylikuutio/triangulation/face_normals.cpp
+    code/ylikuutio/triangulation/face_normals.hpp
+    code/ylikuutio/triangulation/indexing.cpp
+    code/ylikuutio/triangulation/indexing.hpp
+    code/ylikuutio/triangulation/polygon_triangulation.cpp
+    code/ylikuutio/triangulation/polygon_triangulation.hpp
+    code/ylikuutio/triangulation/quad_triangulation.hpp
+    code/ylikuutio/triangulation/triangulation_enums.hpp
+    code/ylikuutio/triangulation/triangulation_templates.hpp
+    )
+add_dependencies(ylikuutio rescan)
+
+# Ajokki
+add_executable(ajokki
     # ajokki, in alphabetical order
-    cpp/ajokki/ajokki.cpp
+    code/ajokki/ajokki.cpp
+    code/ajokki/ajokki_callbacks.cpp
+    code/ajokki/ajokki_callbacks.hpp
     )
+add_dependencies(ajokki rescan)
+target_link_libraries(ajokki ylikuutio ${ALL_LIBS} glfw)
+if(${eigen_FOUND})
+    # target_link_libraries(ajokki ${eigen_LIBRARY})
+    target_link_libraries(ajokki ${ALL_LIBS})
+endif()
 
-target_link_libraries(ajokki
-    ${ALL_LIBS}
-    )
 # Xcode and Visual working directories
-set_target_properties(ajokki PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/cpp/ajokki/")
-create_target_launcher(ajokki WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/cpp/ajokki/")
+set_target_properties(ajokki PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/code/ajokki/")
+create_target_launcher(ajokki WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/code/ajokki/")
 
 # Tests
 if(DO_UNIT_TESTS_WITH_CATCH)
+    include_directories(
+        external/Catch/single_include/
+        )
+
     add_executable(unit_tests_with_Catch
-        cpp/ylikuutio/tests/catch/tests.cpp
+        code/ylikuutio/tests/catch/tests.cpp
         )
 
     target_link_libraries(unit_tests_with_Catch
         ${ALL_LIBS}
         )
     # Xcode and Visual working directories
-    set_target_properties(unit_tests_with_Catch PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/cpp/tests/catch/")
-    create_target_launcher(unit_tests_with_Catch WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/cpp/tests/catch/")
+    set_target_properties(unit_tests_with_Catch PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/code/tests/catch/")
+    create_target_launcher(unit_tests_with_Catch WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/code/tests/catch/")
 endif()
 
 if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
     set(FILES_TO_TEST
-        cpp/ylikuutio/callback/callback_engine.cpp
-        cpp/ylikuutio/callback/callback_engine.hpp
-        cpp/ylikuutio/callback/callback_object.cpp
-        cpp/ylikuutio/callback/callback_object.hpp
-        cpp/ylikuutio/callback/callback_parameter.cpp
-        cpp/ylikuutio/callback/callback_parameter.hpp
-        cpp/ylikuutio/common/any_value.cpp
-        cpp/ylikuutio/common/any_value.hpp
-        cpp/ylikuutio/common/globals.cpp
-        cpp/ylikuutio/common/globals.hpp
-        cpp/ylikuutio/file/file_loader.cpp
-        cpp/ylikuutio/file/file_loader.hpp
-        cpp/ylikuutio/geometry/bilinear_interpolation.cpp
-        cpp/ylikuutio/geometry/bilinear_interpolation.hpp
-        cpp/ylikuutio/geometry/indexing.cpp
-        cpp/ylikuutio/geometry/indexing.hpp
-        cpp/ylikuutio/geometry/transformation.cpp
-        cpp/ylikuutio/geometry/transformation.hpp
-        cpp/ylikuutio/geometry/triangulation.cpp
-        cpp/ylikuutio/geometry/triangulation.hpp
-        cpp/ylikuutio/hierarchy/hierarchy.cpp
-        cpp/ylikuutio/hierarchy/hierarchy.hpp
-        cpp/ylikuutio/hierarchy/hierarchy_templates.hpp
-        cpp/ylikuutio/model/font_loader.cpp
-        cpp/ylikuutio/model/font_loader.hpp
-        cpp/ylikuutio/string/ylikuutio_string.cpp
-        cpp/ylikuutio/string/ylikuutio_string.hpp
+        code/ylikuutio/callback_system/callback_engine.cpp
+        code/ylikuutio/callback_system/callback_engine.hpp
+        code/ylikuutio/callback_system/callback_object.cpp
+        code/ylikuutio/callback_system/callback_object.hpp
+        code/ylikuutio/callback_system/callback_parameter.cpp
+        code/ylikuutio/callback_system/callback_parameter.hpp
+        code/ylikuutio/common/any_value.cpp
+        code/ylikuutio/common/any_value.hpp
+        code/ylikuutio/common/globals.hpp
+        code/ylikuutio/file/file_loader.cpp
+        code/ylikuutio/file/file_loader.hpp
+        code/ylikuutio/geometry/line.cpp
+        code/ylikuutio/geometry/line.hpp
+        code/ylikuutio/geometry/line2D.cpp
+        code/ylikuutio/geometry/line2D.hpp
+        code/ylikuutio/geometry/line_line_intersection.cpp
+        code/ylikuutio/geometry/line_line_intersection.hpp
+        code/ylikuutio/geometry/line_segment2D.cpp
+        code/ylikuutio/geometry/line_segment2D.hpp
+        code/ylikuutio/geometry/line_segment_line_segment_intersection.cpp
+        code/ylikuutio/geometry/line_segment_line_segment_intersection.hpp
+        code/ylikuutio/geometry/transformation.cpp
+        code/ylikuutio/geometry/transformation.hpp
+        code/ylikuutio/hierarchy/hierarchy_templates.hpp
+        code/ylikuutio/ontology/loaders/font_loader.cpp
+        code/ylikuutio/ontology/loaders/font_loader.hpp
+        code/ylikuutio/string/ylikuutio_string.cpp
+        code/ylikuutio/string/ylikuutio_string.hpp
+        code/ylikuutio/triangulation/face_normals.cpp
+        code/ylikuutio/triangulation/face_normals.hpp
+        code/ylikuutio/triangulation/indexing.cpp
+        code/ylikuutio/triangulation/indexing.hpp
+        code/ylikuutio/triangulation/quad_triangulation.hpp
+        code/ylikuutio/triangulation/triangulation_enums.hpp
         )
     set(UNIT_TESTS
-        cpp/ylikuutio/tests/googletest/test_any_value.cpp
-        cpp/ylikuutio/tests/googletest/test_callback_system.cpp
-        cpp/ylikuutio/tests/googletest/test_file_loader.cpp
-        cpp/ylikuutio/tests/googletest/test_font_loader.cpp
-        cpp/ylikuutio/tests/googletest/test_globals.cpp
-        cpp/ylikuutio/tests/googletest/test_heightmap_loader.cpp
-        cpp/ylikuutio/tests/googletest/test_triangulation.cpp
-        cpp/ylikuutio/tests/googletest/test_ylikuutio_string.cpp)
-    set(MAIN_FILE cpp/ylikuutio/tests/googletest/main.cpp)
+        code/ylikuutio/tests/googletest/test_any_value.cpp
+        code/ylikuutio/tests/googletest/test_callback_system.cpp
+        code/ylikuutio/tests/googletest/test_eigen.cpp
+        code/ylikuutio/tests/googletest/test_file_loader.cpp
+        code/ylikuutio/tests/googletest/test_font_loader.cpp
+        code/ylikuutio/tests/googletest/test_globals.cpp
+        code/ylikuutio/tests/googletest/test_heightmap_loader.cpp
+        code/ylikuutio/tests/googletest/test_line2D.cpp
+        code/ylikuutio/tests/googletest/test_line_line_intersection.cpp
+        code/ylikuutio/tests/googletest/test_line_segment_line_segment_intersection.cpp
+        code/ylikuutio/tests/googletest/test_pugixml.cpp
+        code/ylikuutio/tests/googletest/test_ylikuutio_string.cpp)
+    set(MAIN_FILE code/ylikuutio/tests/googletest/main.cpp)
 
     add_library(codeToTest ${FILES_TO_TEST})
 
     add_executable(do_tests_googletest ${MAIN_FILE})
     target_link_libraries(do_tests_googletest codeToTest)
 
-    add_executable(unit_tests_with_Google_Test cpp/ylikuutio/tests/googletest/test_main.cpp ${UNIT_TESTS})
+    add_executable(unit_tests_with_Google_Test code/ylikuutio/tests/googletest/test_main.cpp ${UNIT_TESTS})
     target_link_libraries(unit_tests_with_Google_Test gtest libgtest rt pthread codeToTest)
 
     # Xcode and Visual working directories
-    set_target_properties(unit_tests_with_Google_Test PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/cpp/tests/googletest/")
-    create_target_launcher(unit_tests_with_Google_Test WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/cpp/tests/googletest/")
+    set_target_properties(unit_tests_with_Google_Test PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/code/tests/googletest/")
+    create_target_launcher(unit_tests_with_Google_Test WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/code/tests/googletest/")
 endif()
 
-source_group(common REGULAR_EXPRESSION ".*/cpp/common/.*" )
+source_group(common REGULAR_EXPRESSION ".*/code/common/.*" )
 source_group(shaders REGULAR_EXPRESSION ".*/.*shader$" )

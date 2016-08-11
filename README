@@ -4,11 +4,27 @@ A hobby project of mine. Work in progress.
 
 Some code is based on http://www.opengl-tutorial.org/ and is
 under the license conditions stated on opengl-tutorial website:
-WTF Public License: "you just do what the f*** you want to".
+WTF Public License, version 2, December 2004:
+"You just DO WHAT THE FUCK YOU WANT TO. ```"
+http://www.opengl-tutorial.org/download/
 
-My own code is under The GNU General Public License 3, or
-(at your option) any later version. See LICENSE file.
-All my code copyright (C) 2016 Antti Nuortimo.
+The OpenGL Extension Wrangler Library (GLEW) is licensed
+under the Modified BSD License, the Mesa 3-D License (MIT)
+and the Khronos License (MIT).
+https://github.com/nigels-com/glew#copyright-and-licensing
+
+GLFW is licensed under the zlib/libpng license.
+http://www.glfw.org/license.html
+
+OpenGL Mathematics (GLM) is licensed under The Happy Bunny License
+and MIT License.
+http://glm.g-truc.net/copying.txt
+
+Ylikuutio 3D engine is under The GNU General Public License 3, or
+(at your option) any later version. See LICENSE file. Please note that
+my software products which use Ylikuutio 3D engine are not necessarily
+under The GNU General Public License 3 and may have more restrictive
+licenses. All my code copyright (C) 2016 Antti Nuortimo.
 
 Other resources are under their respective licenses.
 
@@ -18,16 +34,28 @@ http://www.brusheezy.com/textures/20185-seamless-green-grass-textures
 UV map texture is from opengl-tutorial:
 http://www.opengl-tutorial.org/beginners-tutorials/tutorial-8-basic-shading/
 
+kongtext font is made by codeman38 (http://zone38.net/), see
+res/fonts/kongtext/license.txt for the license.
+
 Suzanne the monkey is a standard Blender object.
 
 Ylikuutio can be compiled with GCC, Clang or Visual Studio.
 C++11 support is required.
 OpenGL 3.0 or newer is required.
 CMake 2.6.2 or newer is needed for compiling process.
-CMake uses git for downloading Google Test testing framework.
+CMake uses git for downloading Google Test testing framework and Eigen,
+a C++ template library for linear algebra.
 
 In Linux it's simple.
-To compile with GCC, in Ylikuutio install directory:
+
+First, install all the necessary compilers, tools and libs. You may use
+your favorite package manager such as aptitude, apt-get, yum etc.
+You all need these packages: cmake make g++ gcc libx11-dev libxi-dev libgl1-mesa-dev libglu1-mesa-dev libxcursor-dev libxrandr-dev libxext-dev libxi-dev libxinerama-dev
+Eg. with aptitude:
+
+$ sudo aptitude install cmake make g++ gcc libx11-dev libxi-dev libgl1-mesa-dev libglu1-mesa-dev libxcursor-dev libxrandr-dev libxext-dev libxi-dev libxinerama-dev
+
+Then, to compile with GCC, in Ylikuutio install directory:
 
 $ mkdir build
 $ cd build
@@ -69,13 +97,15 @@ If you compiled tests using Catch framework (they are deprecated):
 
 $ ./unit_tests_with_Catch
 
+Implemented functionality:
+o callbacks
+
 Future developments underway:
-o callbacks 
 o in-game console
 o partially transparent 2D text
 o 3D text
-o multiple scenes in the same world
-o coordinates relative to other objects, not only to world object
+o multiple scenes in the same Universe
+o coordinates relative to other objects, not only to Universe object
 o collision detection between objects
 o octree space partitioning
 o possibility to create scenes with different spatial scales
@@ -83,8 +113,8 @@ o objects (species in Ylikuutio terminology) with modifiable vertices
 o making holes in objects
 o splitting of objects into 2 or more pieces
 o cementing of 2 or more objects into one
-o morphing between objects (species in Ylikuutio terminology)
-o morphing between objects (species) and 3D text (glyphs)
+o morphing between objects (Species in Ylikuutio terminology)
+o morphing between objects (Species) and 3D text (Glyphs)
 o ray casting for vertex selection and vertex modifications
 o objects with 4 or more spatial dimensions,
   projected to 3D space before rendering to screen
@@ -93,7 +123,7 @@ o sky dome
 o water
 o more physics
 o artificial intelligence (AI) creatures
-o scripting language, possibly Bigloo
+o scripting language, possibly ChibiScheme
 o visual pattern recognition for AI
 
 contact info (found bugs and suggestions are welcome):

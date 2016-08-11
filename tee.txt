@@ -2,8 +2,6 @@ TEE-lista:
 Listaa tähän keskeneräiset asiat kiireellisyysjärjestyksessä kiireellisimmät ylös. Rasti ruutuun ja valmiit-osastolle kun on valmis.
 
 Ylikuution kehityksen kannalta välttämättömiä työvaiheita:
-[ ] Koodaa takaisinkutsut (callback) toimintakuntoon.
-[ ] Testaa takaisinkutsujen toimintaa.
 [ ] Lisää konsoli (aukeaa näppäimellä `).
 [ ] Luo graafi maailman vertekseistä ja särmistä.
 [ ] Lisää ray castingiä käyttävä toiminto verteksien valitsemiseen ja muokkaamiseen.
@@ -12,14 +10,14 @@ Ylikuution kehityksen kannalta välttämättömiä työvaiheita:
 [ ] Lisää tekoälyoliot (robotit).
 [ ] Lisää Bigloo-tuki tekoälyolioiden ohjelmointiin (Bigloo Scheme).
 [ ] Tallenna kunkin robotin senhetkinen näkymä taulukkoon, josta robotti voi käsitellä sitä ohjelmallisesti C++- ja/tai GLSL-koodilla.
-[ ] Toteuta V1:n simulointi.
-[ ] Toteuta V2:n simulointi.
 
 Vähemmän kiireellisiä:
-[ ] Lisää Bigloo-tuki konsoliin (Bigloo Scheme).
+[ ] Lisää ChibiScheme-tuki konsoliin.
 [ ] Lisää tuki kolmiulotteiselle tekstille.
 [ ] Lisää tuki osittain läpinäkyvälle tekstille.
 [ ] Lisää tuki yli 3-ulotteisille kappaleille (projisoidaan `Object::render()`-metodissa 3-ulotteiseen avaruuteen).
+[ ] Toteuta V1:n simulointi.
+[ ] Toteuta V2:n simulointi.
 
 Valmiit:
 [x] Lisää testi-VBO, vaikka jonkinlainen partikkeliobjekti.
@@ -28,3 +26,5 @@ Valmiit:
 [x] `string.h` -> `cstring`.
 [x] `strcmp` -> `std::strcmp`.
 [x] `strlen` -> `std::strlen`.
+[x] Koodaa takaisinkutsut (callback) toimintakuntoon.
+[x] Testaa takaisinkutsujen toimintaa.
