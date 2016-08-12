@@ -147,6 +147,8 @@ namespace ontology
                 else
                 {
                     std::cerr << "invalid color channel!\n";
+                    delete image_data;
+                    delete vertex_data;
                     return false;
                 }
 
@@ -155,6 +157,9 @@ namespace ontology
                 image_pointer += 3; // R, G, & B.
             }
         }
+
+        delete image_data;
+
         std::cout << "color channel in use: " << color_channel << "\n";
 
         TriangulateQuadsStruct triangulate_quads_struct;
@@ -164,7 +169,9 @@ namespace ontology
         triangulate_quads_struct.sphere_radius = NAN;
         triangulate_quads_struct.spherical_world_struct = SphericalWorldStruct(); // not used, but is needed in the function call.
 
-        return geometry::triangulate_quads(vertex_data, triangulate_quads_struct, out_vertices, out_UVs, out_normals);
+        bool result = geometry::triangulate_quads(vertex_data, triangulate_quads_struct, out_vertices, out_UVs, out_normals);
+        delete vertex_data;
+        return result;
     }
 
     bool load_SRTM_world(
