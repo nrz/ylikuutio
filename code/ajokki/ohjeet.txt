@@ -5,12 +5,6 @@ Ladataan .png GIMP:ssä.
 
 Ladataan toistaiseksi funktiolla `GLuint load_BMP_texture(const char* imagepath)`:
 
-Tekstuuritiedoston ('diffuse texture') exporttaus GIMP:ssä (`*.bmp`):
-* Toistaiseksi, siis ennen kuvan peilaus tehdään funktiossa `load_BMP_texture`, se on tehtävä käsin GIMP:ssä, siis:
-  -> Image
-  -> Transform
-  -> Flip Vertically
-
 Tiedoston tallennus `*.bmp`-formaatissa (toistaiseksi pitää olla 24-bittinen BMP):
 * -> Export
   -> Windows BMP Image (*.bmp)
