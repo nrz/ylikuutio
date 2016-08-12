@@ -301,6 +301,8 @@ namespace ontology
             image_pointer -= sizeof(int16_t) * (image_width_in_use + true_image_width);
         }
 
+        delete image_data;
+
         SphericalWorldStruct spherical_world_struct;
         spherical_world_struct.southern_latitude = southern_latitude; // must be float, though SRTM data is split between full degrees.
         spherical_world_struct.northern_latitude = northern_latitude; // must be float, though SRTM data is split between full degrees.
@@ -314,6 +316,8 @@ namespace ontology
         triangulate_quads_struct.sphere_radius = world_radius;
         triangulate_quads_struct.spherical_world_struct = spherical_world_struct;
 
-        return geometry::triangulate_quads(vertex_data, triangulate_quads_struct, out_vertices, out_UVs, out_normals);
+        bool result = geometry::triangulate_quads(vertex_data, triangulate_quads_struct, out_vertices, out_UVs, out_normals);
+        delete vertex_data;
+        return result;
     }
 }
