@@ -33,6 +33,10 @@ namespace ontology
             std::vector<glm::vec2>& out_UVs,
             std::vector<glm::vec3>& out_normals,
             std::string triangulation_type);
+
+    bool load_LASF_data(
+            std::string laser_scaling_file_name,
+            std::vector<glm::vec3>& laser_points);
 }
 
 #endif
