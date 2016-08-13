@@ -1,8 +1,8 @@
 #include "material.hpp"
-#include "loaders/texture_loader.hpp"
 #include "vector_font.hpp"
 #include "species.hpp"
 #include "render_templates.hpp"
+#include "code/ylikuutio/loaders/texture_loader.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include standard headers

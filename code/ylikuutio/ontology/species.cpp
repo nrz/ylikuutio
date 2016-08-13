@@ -1,6 +1,4 @@
 #include "species.hpp"
-#include "loaders/objloader.hpp"
-#include "loaders/heightmap_loader.hpp"
 #include "vboindexer.hpp"
 #include "universe.hpp"
 #include "scene.hpp"
@@ -8,6 +6,8 @@
 #include "material.hpp"
 #include "object.hpp"
 #include "render_templates.hpp"
+#include "code/ylikuutio/loaders/objloader.hpp"
+#include "code/ylikuutio/loaders/heightmap_loader.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include GLEW

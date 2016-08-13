@@ -6,9 +6,9 @@
 #define DEGREES_TO_RADIANS(x) (x * PI / 180.0f)
 #endif
 
-#include "code/ylikuutio/common/globals.hpp"
-#include "loaders/shader_loader.hpp"
 #include "render_templates.hpp"
+#include "code/ylikuutio/common/globals.hpp"
+#include "code/ylikuutio/loaders/shader_loader.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/common/global_variables.hpp"
 #include "code/ylikuutio/common/globals.hpp"

@@ -1,7 +1,7 @@
 #include "vector_font.hpp"
-#include "loaders/font_loader.hpp"
 #include "glyph.hpp"
 #include "render_templates.hpp"
+#include "code/ylikuutio/loaders/font_loader.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
 

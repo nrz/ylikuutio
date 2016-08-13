@@ -1,6 +1,6 @@
 #include "font2D.hpp"
-#include "loaders/shader_loader.hpp"
-#include "loaders/texture_loader.hpp"
+#include "code/ylikuutio/loaders/shader_loader.hpp"
+#include "code/ylikuutio/loaders/texture_loader.hpp"
 
 // Include GLEW
 #ifndef __GL_GLEW_H_INCLUDED
