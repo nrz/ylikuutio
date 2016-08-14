@@ -71,7 +71,10 @@ namespace string
         dest_mem_pointer = char_number_buffer;
         string::extract_string_with_several_endings(dest_mem_pointer, ++data_pointer, char_end_string);
         uint32_t value = std::atoi(dest_mem_pointer);
-        std::printf("%s: %d\n", description, value);
+        if (description != nullptr)
+        {
+            std::printf("%s: %d\n", description, value);
+        }
         return value;
     }
 
@@ -82,7 +85,11 @@ namespace string
         dest_mem_pointer = char_number_buffer;
         string::extract_string_with_several_endings(dest_mem_pointer, ++data_pointer, char_end_string);
         float value = std::atof(dest_mem_pointer);
-        std::printf("%s: %f\n", description, value);
+
+        if (description != nullptr)
+        {
+            std::printf("%s: %f\n", description, value);
+        }
         return value;
     }
 
