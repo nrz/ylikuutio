@@ -7,7 +7,8 @@
 #include "object.hpp"
 #include "render_templates.hpp"
 #include "code/ylikuutio/loaders/obj_loader.hpp"
-#include "code/ylikuutio/loaders/heightmap_loader.hpp"
+#include "code/ylikuutio/loaders/bmp_heightmap_loader.hpp"
+#include "code/ylikuutio/loaders/srtm_heightmap_loader.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include GLEW

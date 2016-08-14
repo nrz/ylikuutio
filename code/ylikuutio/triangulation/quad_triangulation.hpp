@@ -41,20 +41,7 @@ namespace geometry
             GLuint normalIndex[3],
             std::vector<glm::vec3>& out_vertices,
             std::vector<glm::vec2>& out_UVs,
-            std::vector<glm::vec3>& out_normals)
-    {
-        out_vertices.push_back(temp_vertices[vertexIndex[0]]);
-        out_UVs.push_back(temp_UVs[uvIndex[0]]);
-        out_normals.push_back(temp_normals[normalIndex[0]]);
-
-        out_vertices.push_back(temp_vertices[vertexIndex[1]]);
-        out_UVs.push_back(temp_UVs[uvIndex[1]]);
-        out_normals.push_back(temp_normals[normalIndex[1]]);
-
-        out_vertices.push_back(temp_vertices[vertexIndex[2]]);
-        out_UVs.push_back(temp_UVs[uvIndex[2]]);
-        out_normals.push_back(temp_normals[normalIndex[2]]);
-    }
+            std::vector<glm::vec3>& out_normals);
 
     template<class T1>
         bool triangulate_quads(

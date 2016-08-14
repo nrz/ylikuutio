@@ -528,14 +528,18 @@ add_library(ylikuutio
     code/ylikuutio/hierarchy/hierarchy_templates.hpp
 
     # loaders, in alphabetical order.
+    code/ylikuutio/loaders/bmp_heightmap_loader.cpp
+    code/ylikuutio/loaders/bmp_heightmap_loader.hpp
     code/ylikuutio/loaders/font_loader.cpp
     code/ylikuutio/loaders/font_loader.hpp
-    code/ylikuutio/loaders/heightmap_loader.cpp
-    code/ylikuutio/loaders/heightmap_loader.hpp
+    code/ylikuutio/loaders/las_loader.cpp
+    code/ylikuutio/loaders/las_loader.hpp
     code/ylikuutio/loaders/obj_loader.cpp
     code/ylikuutio/loaders/obj_loader.hpp
     code/ylikuutio/loaders/shader_loader.cpp
     code/ylikuutio/loaders/shader_loader.hpp
+    code/ylikuutio/loaders/srtm_heightmap_loader.cpp
+    code/ylikuutio/loaders/srtm_heightmap_loader.hpp
     code/ylikuutio/loaders/texture_loader.cpp
     code/ylikuutio/loaders/texture_loader.hpp
 
@@ -588,6 +592,7 @@ add_library(ylikuutio
     code/ylikuutio/triangulation/indexing.hpp
     code/ylikuutio/triangulation/polygon_triangulation.cpp
     code/ylikuutio/triangulation/polygon_triangulation.hpp
+    code/ylikuutio/triangulation/quad_triangulation.cpp
     code/ylikuutio/triangulation/quad_triangulation.hpp
     code/ylikuutio/triangulation/triangulation_enums.hpp
     code/ylikuutio/triangulation/triangulation_templates.hpp
@@ -666,6 +671,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/triangulation/face_normals.hpp
         code/ylikuutio/triangulation/indexing.cpp
         code/ylikuutio/triangulation/indexing.hpp
+        code/ylikuutio/triangulation/quad_triangulation.cpp
         code/ylikuutio/triangulation/quad_triangulation.hpp
         code/ylikuutio/triangulation/triangulation_enums.hpp
         )
