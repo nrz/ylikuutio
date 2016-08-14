@@ -58,6 +58,7 @@ namespace loaders
         if (std::fread(header, 1, 54, file) != 54)
         {
             std::cerr << "not a correct BMP file.\n";
+            std::fclose(file);
             return false;
         }
 
