@@ -74,6 +74,8 @@ namespace loaders
         if (header_size_in_bytes != 227)
         {
             std::cerr << "Invalid header size in file " << laser_scaling_file_name << " (" << header_size_in_bytes << " bytes). Header size must be 227 bytes.\n";
+            std::fclose(file);
+            return false;
         }
 
         uint32_t* pointer_to_32_bit_header_data = (uint32_t*) (header + 96);
