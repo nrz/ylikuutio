@@ -133,8 +133,10 @@ namespace loaders
         // Move file pointer to the beginning of point data.
         if (fseek(file, offset_to_point_data, SEEK_SET) != 0)
         {
-            delete point_data;
             std::cerr << "moving file pointer of file " << laser_scaling_file_name << " failed!\n";
+            delete point_data;
+            std::fclose(file);
+            return false;
         }
 
         // Read the actual image data from the file into the buffer.
