@@ -90,6 +90,7 @@ namespace loaders
         if (point_data_formatID > 3)
         {
             std::cerr << "invalid point data format ID: " << static_cast<int16_t>(point_data_formatID) << " in file " << laser_scaling_file_name << "\n";
+            std::fclose(file);
             return false;
         }
 
