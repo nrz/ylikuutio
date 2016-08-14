@@ -56,6 +56,7 @@ namespace loaders
         if ((header[0] != 'L') || (header[1] != 'A') || (header[2] != 'S') || (header[3] != 'F'))
         {
             std::cerr << "No LASF signature. " << laser_scaling_file_name << " is not a correct LASF file.\n";
+            std::fclose(file);
             return false;
         }
 
