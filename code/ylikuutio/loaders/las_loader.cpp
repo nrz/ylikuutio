@@ -44,7 +44,7 @@ namespace loaders
 
         // Read the header, i.e. the 227 first bytes
 
-        // If less than 54 bytes are read, it's a problem.
+        // If less than 227 bytes are read, it's a problem.
         if (std::fread(header, 1, 227, file) != 227)
         {
             std::cerr << "Too few bytes read when reading the file header. " << laser_scaling_file_name << " is not a correct LASF file.\n";
