@@ -12,7 +12,7 @@ add_definitions(
     )
 
 # Compile external dependencies
-add_subdirectory(gdal-2.1.1)
+# add_subdirectory(gdal-2.1.1)
 
 # Compile external dependencies
 add_subdirectory(pugixml)

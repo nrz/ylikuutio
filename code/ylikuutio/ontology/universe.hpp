@@ -131,7 +131,7 @@ namespace ontology
     {
         public:
             // constructor.
-            Universe();
+            Universe(float world_radius);
 
             // destructor.
             ~Universe();
@@ -153,6 +153,8 @@ namespace ontology
             void compute_matrices_from_inputs();
 
             void* terrain_species_pointer;              // pointer to world species (used in collision detection).
+
+            float world_radius;
 
             std::vector<ontology::Scene*> scene_pointer_vector;
             std::queue<uint32_t> free_sceneID_queue;

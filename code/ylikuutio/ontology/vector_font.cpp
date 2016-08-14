@@ -1,7 +1,7 @@
 #include "vector_font.hpp"
-#include "loaders/font_loader.hpp"
 #include "glyph.hpp"
 #include "render_templates.hpp"
+#include "code/ylikuutio/loaders/font_loader.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
 
@@ -51,7 +51,7 @@ namespace ontology
 
         if ((std::strcmp(this->char_font_file_format, "svg") == 0) || (std::strcmp(this->char_font_file_format, "SVG") == 0))
         {
-            font_loading_result = ontology::load_SVG_font(
+            font_loading_result = loaders::load_SVG_font(
                     this->font_filename,
                     this->glyph_vertex_data,
                     this->glyph_names,

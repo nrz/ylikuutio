@@ -7,6 +7,10 @@
 #define DEGREES_TO_RADIANS(x) (x * PI / 180.0f)
 #endif
 
+#ifndef RADIANS_TO_DEGREES
+#define RADIANS_TO_DEGREES(x) (x * 180.0f / PI)
+#endif
+
 #include "universe.hpp"
 #include "scene.hpp"
 #include "ground_level.hpp"
@@ -36,9 +40,10 @@ extern GLFWwindow* window; // The "extern" keyword here is to access the variabl
 
 namespace ontology
 {
-    Universe::Universe()
+    Universe::Universe(float world_radius)
     {
         // constructor.
+        this->world_radius = world_radius;
     }
 
     Universe::~Universe()
@@ -97,20 +102,19 @@ namespace ontology
             }
         }
 
-#ifdef TESTING_SPHERICAL_WORLD_IN_USE
-        // compute spherical coordinates.
-        spherical_position.rho = sqrt((position.x * position.x) + (position.y * position.y) + (position.z * position.z));
-        spherical_position.theta = RADIANS_TO_DEGREES(atan2(sqrt((position.x * position.x) + (position.y * position.y)), position.z));
-        spherical_position.phi = RADIANS_TO_DEGREES(atan2(position.y, position.x));
-#endif
-
-        earth_radius = EARTH_RADIUS;
+        if (testing_spherical_world_in_use)
+        {
+            // compute spherical coordinates.
+            spherical_position.rho = sqrt((position.x * position.x) + (position.y * position.y) + (position.z * position.z));
+            spherical_position.theta = RADIANS_TO_DEGREES(atan2(sqrt((position.x * position.x) + (position.y * position.y)), position.z));
+            spherical_position.phi = RADIANS_TO_DEGREES(atan2(position.y, position.x));
+        }
 
         camera_position = position;
         camera_position.y += 2.0f;
 
         // Projection matrix : 45° Field of View, aspect ratio, display range : 0.1 unit <-> 100 units
-        ProjectionMatrix = glm::perspective(FoV, aspect_ratio, 0.001f, 5000.0f + 2.0f * (GLfloat) earth_radius);
+        ProjectionMatrix = glm::perspective(FoV, aspect_ratio, 0.001f, 5000.0f + 2.0f * static_cast<GLfloat>(this->world_radius));
         // Camera matrix
         ViewMatrix = glm::lookAt(
                 camera_position,           // Camera is here

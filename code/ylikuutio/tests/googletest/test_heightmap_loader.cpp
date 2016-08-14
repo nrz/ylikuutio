@@ -2,8 +2,12 @@
 #include "code/ylikuutio/triangulation/triangulation_enums.hpp"
 #include "code/ylikuutio/triangulation/triangulation_templates.hpp"
 #include "code/ylikuutio/triangulation/quad_triangulation.hpp"
-#include "code/ylikuutio/ontology/loaders/heightmap_loader.hpp"
-#include "code/ylikuutio/ontology/loaders/heightmap_loader.cpp"
+#include "code/ylikuutio/loaders/bmp_heightmap_loader.hpp"
+#include "code/ylikuutio/loaders/bmp_heightmap_loader.cpp"
+#include "code/ylikuutio/loaders/srtm_heightmap_loader.hpp"
+#include "code/ylikuutio/loaders/srtm_heightmap_loader.cpp"
+#include "code/ylikuutio/common/global_variables.hpp"
+#include "code/ylikuutio/common/global_variables.cpp"
 
 // Include GLEW
 #ifndef __GL_GLEW_H_INCLUDED
@@ -350,7 +354,7 @@ TEST(a_BMP_world_must_be_loaded_appropriately, load_3x3_BMP_world)
 
     std::string triangulation_type = "bilinear_interpolation";
 
-    bool model_loading_result = ontology::load_BMP_world(
+    bool model_loading_result = loaders::load_BMP_world(
             image_path,
             *&out_vertices,
             *&out_UVs,
@@ -400,7 +404,7 @@ TEST(a_BMP_world_must_be_loaded_appropriately, load_256x256_BMP_world)
     std::string color_channel = "mean";
     std::string triangulation_type = "bilinear_interpolation";
 
-    bool model_loading_result = ontology::load_BMP_world(
+    bool model_loading_result = loaders::load_BMP_world(
             image_path,
             *&out_vertices,
             *&out_UVs,

@@ -50,11 +50,6 @@
 #define PI 3.14159265359f
 #endif
 
-#ifndef EARTH_RADIUS
-// #define EARTH_RADIUS 6371000.0f // in metres
-#define EARTH_RADIUS 6371.0f // in kilometres
-#endif
-
 namespace ontology
 {
     class Universe;
@@ -127,14 +122,15 @@ typedef struct ObjectStruct
 typedef struct SpeciesStruct
 {
     SpeciesStruct()
-        : parent_pointer(nullptr), is_world(false), world_radius(NAN), triangulation_type("bilinear_interpolation")
+        : parent_pointer(nullptr), is_world(false), world_radius(NAN), divisor(1.0f), triangulation_type("bilinear_interpolation")
     {
         // constructor.
     }
     // used for all files (for all species).
-    ontology::Material* parent_pointer;         // pointer to the material object.
+    ontology::Material* parent_pointer;      // pointer to the material object.
     bool is_world;                           // worlds currently do not rotate nor translate.
-    double world_radius;                     // radius of sea level in meters. used only for worlds.
+    float world_radius;                      // radius of sea level in kilometers. used only for worlds.
+    float divisor;                           // value by which SRTM values are divided to convert them to kilometers.
     std::string model_file_format;           // type of the model file. supported file formats so far: `"bmp"`/`"BMP"`, `"obj"`/`"OBJ"`.
                                              // TODO: add support for `"SRTM"`.
     std::string model_filename;              // filename of the model file.

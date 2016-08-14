@@ -52,7 +52,7 @@ namespace ontology
             GLuint texture;     // Texture containing the glyphs, reterned by `load_BMP_texture` or `load_DDS_texture` (used for `glGenTextures` etc.).
             GLuint vertexbuffer;         // Buffer containing the vertices
             GLuint uvbuffer;             // Buffer containing the UVs
-            GLuint programID;               // The `programID` of the shader used to display the text, returned by `LoadShaders`.
+            GLuint programID;               // The `programID` of the shader used to display the text, returned by `load_shaders`.
             GLuint vertex_position_in_screenspaceID; // Location of the program's "vertexPosition_screenspace" attribute
             GLuint vertexUVID;                   // Location of the program's "vertexUV" attribute
             GLuint Text2DUniformID;              // Location of the program's texture attribute

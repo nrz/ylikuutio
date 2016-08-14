@@ -55,6 +55,7 @@
 
 // model file format: obj/bmp/...
 std::string g_model_file_format = "bmp";
+std::string ascii_grid_model_file_format = "ascii_grid";
 
 // model filename.
 // std::string g_model_filename = "cube.obj";
@@ -63,6 +64,9 @@ std::string g_model_file_format = "bmp";
 // std::string g_model_filename = "noise1024x1024.bmp";
 std::string g_model_filename = "noise256x256.bmp";
 // std::string g_model_filename = "noise128x128.bmp";
+
+std::string ascii_grid_model_filename = "N5424G.asc"; // Joensuu center & western.
+// std::string ascii_grid_model_filename = "L4133D.asc"; // Helsinki eastern downtown.
 
 // texture file format: bmp/...
 std::string g_texture_file_format = "bmp";
@@ -90,20 +94,15 @@ std::string g_font_filename = "kongtext.svg";
 
 int main(void)
 {
-    // Initial position : on +Z
-    // position = glm::vec3(100, 100, 100);
-    // position = glm::vec3(100, 3900, 100);
-    // position = glm::vec3(100.0f, 5000.0f, 100.0f);
+    float earth_radius = 6371.0f; // in kilometres
+
+    // testing_spherical_world_in_use = true;
 
     if (testing_spherical_world_in_use)
     {
         is_flight_mode_in_use = true;
 
-        // position = glm::vec3(100.0f, 5000.0f + EARTH_RADIUS, 100.0f);
-        // position = glm::vec3(100.0f, 5000.0f, 100.0f);
-        // position = glm::vec3(-5658223.00f, -1700825.12f, 2322764.00f);
-        // position = glm::vec3(-5659377.50f, -1696985.38f, 2358353.25f);
-        position = glm::vec3(-8990.35f, -2710.92f, 3527.29f);
+        position = glm::vec3(-5682.32f, -1641.20f, 2376.45f);
     }
     else
     {
@@ -169,7 +168,7 @@ int main(void)
     glEnable(GL_CULL_FACE);
 
     // Create the world, store it in `my_world`.
-    ontology::Universe* my_world = new ontology::Universe();
+    ontology::Universe* my_world = new ontology::Universe(earth_radius);
 
     ontology::Scene* my_scene = new ontology::Scene(my_world);
 
@@ -214,6 +213,8 @@ int main(void)
         SRTM_terrain_species_struct.color_channel = g_height_data_color_channel;
         SRTM_terrain_species_struct.light_position = glm::vec3(4, 4, 4);
         SRTM_terrain_species_struct.is_world = true;
+        SRTM_terrain_species_struct.world_radius = earth_radius;
+        SRTM_terrain_species_struct.divisor = 1000.0f;
         terrain_species = new ontology::Species(SRTM_terrain_species_struct);
 
         turbo_factor = 100.0f;
@@ -222,15 +223,26 @@ int main(void)
     else
     {
         // Create the species, store it in `terrain_species`.
+        /*
         SpeciesStruct bmp_terrain_species_struct;
         bmp_terrain_species_struct.parent_pointer = grass_material;
-        bmp_terrain_species_struct.triangulation_type = "southeast_northwest_edges";
         bmp_terrain_species_struct.model_file_format = g_model_file_format;
         bmp_terrain_species_struct.model_filename = g_model_filename;
         bmp_terrain_species_struct.color_channel = g_height_data_color_channel;
         bmp_terrain_species_struct.light_position = glm::vec3(4, 4, 4);
         bmp_terrain_species_struct.is_world = true;
         terrain_species = new ontology::Species(bmp_terrain_species_struct);
+        */
+
+        SpeciesStruct ascii_grid_terrain_species_struct;
+        ascii_grid_terrain_species_struct.parent_pointer = grass_material;
+        ascii_grid_terrain_species_struct.model_file_format = ascii_grid_model_file_format;
+        ascii_grid_terrain_species_struct.model_filename = ascii_grid_model_filename;
+        ascii_grid_terrain_species_struct.light_position = glm::vec3(4, 4, 4);
+        ascii_grid_terrain_species_struct.is_world = true;
+        terrain_species = new ontology::Species(ascii_grid_terrain_species_struct);
+
+        is_flight_mode_in_use = true;
 
         turbo_factor = 5.0f;
         twin_turbo_factor = 100.0f;
@@ -261,7 +273,7 @@ int main(void)
     snow_cottage_object_struct1.rotate_angle = 0.10f;
     snow_cottage_object_struct1.rotate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
     snow_cottage_object_struct1.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
-    ontology::Object* snow_cottage1 = new ontology::Object(snow_cottage_object_struct1);
+    // ontology::Object* snow_cottage1 = new ontology::Object(snow_cottage_object_struct1);
 
     SpeciesStruct suzanne_species_struct;
     suzanne_species_struct.parent_pointer = uvmap_material;

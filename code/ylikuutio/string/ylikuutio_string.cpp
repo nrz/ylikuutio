@@ -11,21 +11,29 @@
 
 namespace string
 {
-    bool check_and_report_if_some_string_matches(const char* SVG_base_pointer, char* SVG_data_pointer, std::vector<std::string> identifier_strings_vector)
+    bool check_and_report_if_some_string_matches(const char* file_base_pointer, char* file_data_pointer, std::vector<std::string> identifier_strings_vector)
     {
         for (std::string identifier_string : identifier_strings_vector)
         {
             const char* identifier_string_char = identifier_string.c_str();
 
-            if (std::strncmp(SVG_data_pointer, identifier_string_char, std::strlen(identifier_string_char)) == 0)
+            if (std::strncmp(file_data_pointer, identifier_string_char, std::strlen(identifier_string_char)) == 0)
             {
                 const char* identifier_string_char = identifier_string.c_str();
-                uint64_t offset = (uint64_t) SVG_data_pointer - (uint64_t) SVG_base_pointer;
-                std::printf("%s found at file offset 0x%llu (memory address 0x%llu).\n", identifier_string_char, offset, (uint64_t) SVG_data_pointer);
+                uint64_t offset = (uint64_t) file_data_pointer - (uint64_t) file_base_pointer;
                 return true;
             }
         }
         return false;
+    }
+
+    void extract_string(char* dest_mem_pointer, char* &src_mem_pointer, char* char_end_string)
+    {
+        while (std::strncmp(src_mem_pointer, char_end_string, std::strlen(char_end_string)) != 0)
+        {
+            strncpy(dest_mem_pointer++, src_mem_pointer++, 1);
+        }
+        *dest_mem_pointer = '\0';
     }
 
     void extract_string_with_several_endings(char* dest_mem_pointer, char*& src_mem_pointer, char* char_end_string)
@@ -55,14 +63,32 @@ namespace string
         }
     }
 
-    int32_t extract_value_from_string(char*& vertex_data_pointer, char* char_end_string, const char* description)
+    int32_t extract_int32_t_value_from_string(char*& data_pointer, char* char_end_string, const char* description)
     {
         char char_number_buffer[1024]; // FIXME: risk of buffer overflow.
         char* dest_mem_pointer;
         dest_mem_pointer = char_number_buffer;
-        string::extract_string_with_several_endings(dest_mem_pointer, ++vertex_data_pointer, char_end_string);
+        string::extract_string_with_several_endings(dest_mem_pointer, ++data_pointer, char_end_string);
         uint32_t value = std::atoi(dest_mem_pointer);
-        std::printf("%s: %d\n", description, value);
+        if (description != nullptr)
+        {
+            std::printf("%s: %d\n", description, value);
+        }
+        return value;
+    }
+
+    float extract_float_value_from_string(char*& data_pointer, char* char_end_string, const char* description)
+    {
+        char char_number_buffer[1024]; // FIXME: risk of buffer overflow.
+        char* dest_mem_pointer;
+        dest_mem_pointer = char_number_buffer;
+        string::extract_string_with_several_endings(dest_mem_pointer, ++data_pointer, char_end_string);
+        float value = std::atof(dest_mem_pointer);
+
+        if (description != nullptr)
+        {
+            std::printf("%s: %f\n", description, value);
+        }
         return value;
     }
 

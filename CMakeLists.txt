@@ -423,7 +423,7 @@ endif()
 set(ALL_LIBS
     ${OPENGL_LIBRARY}
     GLEW_200
-    GDAL_211
+    # GDAL_211
     pugixml
     )
 
@@ -454,6 +454,9 @@ configure_file(res/height_maps/noise1024x1024.bmp noise1024x1024.bmp COPYONLY)
 configure_file(res/height_maps/noise256x256.bmp noise256x256.bmp COPYONLY)
 configure_file(res/height_maps/noise128x128.bmp noise128x128.bmp COPYONLY)
 configure_file(res/height_maps/S17W069.hgt S17W069.hgt COPYONLY)
+configure_file(res/height_maps/L4133D.asc L4133D.asc COPYONLY)
+configure_file(res/height_maps/N5424G.asc N5424G.asc COPYONLY)
+configure_file(res/laser_scanning_data/L4133D1.laz L4133D1.laz COPYONLY)
 configure_file(res/fonts/kongtext/kongtext.svg kongtext.svg COPYONLY)
 configure_file(res/maps/Hofinkatu_Isafjordinkatu_Joensuu_Finland.osm Hofinkatu_Isafjordinkatu_Joensuu_Finland.osm COPYONLY)
 configure_file(res/maps/Exactum_Physicum_Helsinki_Finland.osm Exactum_Physicum_Helsinki_Finland.osm COPYONLY)
@@ -525,39 +528,47 @@ add_library(ylikuutio
     # hierarchy, in alphabetical order.
     code/ylikuutio/hierarchy/hierarchy_templates.hpp
 
+    # loaders, in alphabetical order.
+    code/ylikuutio/loaders/ascii_grid_loader.cpp
+    code/ylikuutio/loaders/ascii_grid_loader.hpp
+    code/ylikuutio/loaders/bmp_heightmap_loader.cpp
+    code/ylikuutio/loaders/bmp_heightmap_loader.hpp
+    code/ylikuutio/loaders/font_loader.cpp
+    code/ylikuutio/loaders/font_loader.hpp
+    code/ylikuutio/loaders/las_loader.cpp
+    code/ylikuutio/loaders/las_loader.hpp
+    code/ylikuutio/loaders/obj_loader.cpp
+    code/ylikuutio/loaders/obj_loader.hpp
+    code/ylikuutio/loaders/shader_loader.cpp
+    code/ylikuutio/loaders/shader_loader.hpp
+    code/ylikuutio/loaders/srtm_heightmap_loader.cpp
+    code/ylikuutio/loaders/srtm_heightmap_loader.hpp
+    code/ylikuutio/loaders/texture_loader.cpp
+    code/ylikuutio/loaders/texture_loader.hpp
+
     # ontology, in alphabetical order
     code/ylikuutio/ontology/font2D.cpp
     code/ylikuutio/ontology/font2D.hpp
-    code/ylikuutio/ontology/loaders/font_loader.cpp
-    code/ylikuutio/ontology/loaders/font_loader.hpp
     code/ylikuutio/ontology/glyph.cpp
     code/ylikuutio/ontology/glyph.hpp
     code/ylikuutio/ontology/ground_level.cpp
     code/ylikuutio/ontology/ground_level.hpp
-    code/ylikuutio/ontology/loaders/heightmap_loader.cpp
-    code/ylikuutio/ontology/loaders/heightmap_loader.hpp
     code/ylikuutio/ontology/material.cpp
     code/ylikuutio/ontology/material.hpp
     code/ylikuutio/ontology/model.cpp
     code/ylikuutio/ontology/model.hpp
     code/ylikuutio/ontology/object.cpp
     code/ylikuutio/ontology/object.hpp
-    code/ylikuutio/ontology/loaders/objloader.cpp
-    code/ylikuutio/ontology/loaders/objloader.hpp
     code/ylikuutio/ontology/render_templates.hpp
     code/ylikuutio/ontology/scene.cpp
     code/ylikuutio/ontology/scene.hpp
     code/ylikuutio/ontology/shader.cpp
     code/ylikuutio/ontology/shader.hpp
-    code/ylikuutio/ontology/loaders/shader_loader.cpp
-    code/ylikuutio/ontology/loaders/shader_loader.hpp
     code/ylikuutio/ontology/species.cpp
     code/ylikuutio/ontology/species.hpp
     code/ylikuutio/ontology/species_or_glyph.hpp
     code/ylikuutio/ontology/text3D.hpp
     code/ylikuutio/ontology/text3D.cpp
-    code/ylikuutio/ontology/loaders/texture_loader.cpp
-    code/ylikuutio/ontology/loaders/texture_loader.hpp
     code/ylikuutio/ontology/universe.cpp
     code/ylikuutio/ontology/universe.hpp
     code/ylikuutio/ontology/vector_font.cpp
@@ -584,6 +595,7 @@ add_library(ylikuutio
     code/ylikuutio/triangulation/indexing.hpp
     code/ylikuutio/triangulation/polygon_triangulation.cpp
     code/ylikuutio/triangulation/polygon_triangulation.hpp
+    code/ylikuutio/triangulation/quad_triangulation.cpp
     code/ylikuutio/triangulation/quad_triangulation.hpp
     code/ylikuutio/triangulation/triangulation_enums.hpp
     code/ylikuutio/triangulation/triangulation_templates.hpp
@@ -636,6 +648,8 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/callback_system/callback_parameter.hpp
         code/ylikuutio/common/any_value.cpp
         code/ylikuutio/common/any_value.hpp
+        code/ylikuutio/common/global_variables.cpp
+        code/ylikuutio/common/global_variables.hpp
         code/ylikuutio/common/globals.hpp
         code/ylikuutio/file/file_loader.cpp
         code/ylikuutio/file/file_loader.hpp
@@ -652,14 +666,15 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/geometry/transformation.cpp
         code/ylikuutio/geometry/transformation.hpp
         code/ylikuutio/hierarchy/hierarchy_templates.hpp
-        code/ylikuutio/ontology/loaders/font_loader.cpp
-        code/ylikuutio/ontology/loaders/font_loader.hpp
+        code/ylikuutio/loaders/font_loader.cpp
+        code/ylikuutio/loaders/font_loader.hpp
         code/ylikuutio/string/ylikuutio_string.cpp
         code/ylikuutio/string/ylikuutio_string.hpp
         code/ylikuutio/triangulation/face_normals.cpp
         code/ylikuutio/triangulation/face_normals.hpp
         code/ylikuutio/triangulation/indexing.cpp
         code/ylikuutio/triangulation/indexing.hpp
+        code/ylikuutio/triangulation/quad_triangulation.cpp
         code/ylikuutio/triangulation/quad_triangulation.hpp
         code/ylikuutio/triangulation/triangulation_enums.hpp
         )
