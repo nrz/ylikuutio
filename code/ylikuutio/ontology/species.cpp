@@ -7,6 +7,7 @@
 #include "object.hpp"
 #include "render_templates.hpp"
 #include "code/ylikuutio/loaders/obj_loader.hpp"
+#include "code/ylikuutio/loaders/ascii_grid_loader.hpp"
 #include "code/ylikuutio/loaders/bmp_heightmap_loader.hpp"
 #include "code/ylikuutio/loaders/srtm_heightmap_loader.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
@@ -87,6 +88,15 @@ namespace ontology
                     this->image_width,
                     this->image_height,
                     this->color_channel,
+                    this->triangulation_type);
+        }
+        else if (std::strcmp(this->char_model_file_format, "ascii_grid") == 0)
+        {
+            model_loading_result = loaders::load_ascii_grid(
+                    this->model_filename,
+                    this->vertices,
+                    this->UVs,
+                    this->normals,
                     this->triangulation_type);
         }
         else

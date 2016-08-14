@@ -55,6 +55,7 @@
 
 // model file format: obj/bmp/...
 std::string g_model_file_format = "bmp";
+std::string ascii_grid_model_file_format = "ascii_grid";
 
 // model filename.
 // std::string g_model_filename = "cube.obj";
@@ -63,6 +64,9 @@ std::string g_model_file_format = "bmp";
 // std::string g_model_filename = "noise1024x1024.bmp";
 std::string g_model_filename = "noise256x256.bmp";
 // std::string g_model_filename = "noise128x128.bmp";
+
+std::string ascii_grid_model_filename = "N5424G.asc"; // Joensuu center & western.
+// std::string ascii_grid_model_filename = "L4133D.asc"; // Helsinki eastern downtown.
 
 // texture file format: bmp/...
 std::string g_texture_file_format = "bmp";
@@ -92,7 +96,7 @@ int main(void)
 {
     float earth_radius = 6371.0f; // in kilometres
 
-    testing_spherical_world_in_use = true;
+    // testing_spherical_world_in_use = true;
 
     if (testing_spherical_world_in_use)
     {
@@ -219,6 +223,7 @@ int main(void)
     else
     {
         // Create the species, store it in `terrain_species`.
+        /*
         SpeciesStruct bmp_terrain_species_struct;
         bmp_terrain_species_struct.parent_pointer = grass_material;
         bmp_terrain_species_struct.model_file_format = g_model_file_format;
@@ -227,6 +232,17 @@ int main(void)
         bmp_terrain_species_struct.light_position = glm::vec3(4, 4, 4);
         bmp_terrain_species_struct.is_world = true;
         terrain_species = new ontology::Species(bmp_terrain_species_struct);
+        */
+
+        SpeciesStruct ascii_grid_terrain_species_struct;
+        ascii_grid_terrain_species_struct.parent_pointer = grass_material;
+        ascii_grid_terrain_species_struct.model_file_format = ascii_grid_model_file_format;
+        ascii_grid_terrain_species_struct.model_filename = ascii_grid_model_filename;
+        ascii_grid_terrain_species_struct.light_position = glm::vec3(4, 4, 4);
+        ascii_grid_terrain_species_struct.is_world = true;
+        terrain_species = new ontology::Species(ascii_grid_terrain_species_struct);
+
+        is_flight_mode_in_use = true;
 
         turbo_factor = 5.0f;
         twin_turbo_factor = 100.0f;
