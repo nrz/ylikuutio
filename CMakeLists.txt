@@ -531,8 +531,8 @@ add_library(ylikuutio
     code/ylikuutio/loaders/font_loader.hpp
     code/ylikuutio/loaders/heightmap_loader.cpp
     code/ylikuutio/loaders/heightmap_loader.hpp
-    code/ylikuutio/loaders/objloader.cpp
-    code/ylikuutio/loaders/objloader.hpp
+    code/ylikuutio/loaders/obj_loader.cpp
+    code/ylikuutio/loaders/obj_loader.hpp
     code/ylikuutio/loaders/shader_loader.cpp
     code/ylikuutio/loaders/shader_loader.hpp
     code/ylikuutio/loaders/texture_loader.cpp

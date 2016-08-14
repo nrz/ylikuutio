@@ -6,7 +6,7 @@
 #include <glm/glm.hpp>
 #endif
 
-#include "objloader.hpp"
+#include "obj_loader.hpp"
 
 // Include standard headers
 #include <cstdio>   // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf etc.

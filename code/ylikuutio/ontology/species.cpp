@@ -6,7 +6,7 @@
 #include "material.hpp"
 #include "object.hpp"
 #include "render_templates.hpp"
-#include "code/ylikuutio/loaders/objloader.hpp"
+#include "code/ylikuutio/loaders/obj_loader.hpp"
 #include "code/ylikuutio/loaders/heightmap_loader.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
