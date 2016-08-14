@@ -48,6 +48,7 @@ namespace loaders
         if (std::fread(header, 1, 227, file) != 227)
         {
             std::cerr << "Too few bytes read when reading the file header. " << laser_scaling_file_name << " is not a correct LASF file.\n";
+            std::fclose(file);
             return false;
         }
 
