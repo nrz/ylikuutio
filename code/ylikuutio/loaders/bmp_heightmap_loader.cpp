@@ -74,12 +74,14 @@ namespace loaders
         if (*(uint32_t*) &header[0x1e] != 0)
         {
             std::cerr << "not a correct BMP file.\n";
+            std::fclose(file);
             return false;
         }
 
         if (*(uint32_t*) &header[0x1c] != 24)
         {
             std::cerr << "not a correct BMP file.\n";
+            std::fclose(file);
             return false;
         }
 
