@@ -28,6 +28,15 @@ namespace string
         return false;
     }
 
+    void extract_string(char* dest_mem_pointer, char* &src_mem_pointer, char* char_end_string)
+    {
+        while (std::strncmp(src_mem_pointer, char_end_string, std::strlen(char_end_string)) != 0)
+        {
+            strncpy(dest_mem_pointer++, src_mem_pointer++, 1);
+        }
+        *dest_mem_pointer = '\0';
+    }
+
     void extract_string_with_several_endings(char* dest_mem_pointer, char*& src_mem_pointer, char* char_end_string)
     {
         // This function copies characters from `src_mem_pointer` until a character matches.

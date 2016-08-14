@@ -68,18 +68,6 @@ namespace loaders
         }
     }
 
-    void extract_string(
-            char* dest_mem_pointer,
-            char* &src_mem_pointer,
-            char* char_end_string)
-    {
-        while (std::strncmp(src_mem_pointer, char_end_string, std::strlen(char_end_string)) != 0)
-        {
-            strncpy(dest_mem_pointer++, src_mem_pointer++, 1);
-        }
-        *dest_mem_pointer = '\0';
-    }
-
     bool load_vertex_data(
             const char* SVG_base_pointer,
             char*& SVG_data_pointer,
@@ -111,7 +99,7 @@ namespace loaders
         char char_path[1024];
 
         // copy from opening double quote to the next `"/"`.
-        loaders::extract_string(char_path, opening_double_quote_pointer, (char*) "/");
+        string::extract_string(char_path, opening_double_quote_pointer, (char*) "/");
 
         std::printf("d: %s\n", char_path);
 
@@ -217,7 +205,7 @@ namespace loaders
 
                         closing_double_quote_pointer++;
 
-                        loaders::extract_string(char_glyph_name, opening_double_quote_pointer, (char*) "\"");
+                        string::extract_string(char_glyph_name, opening_double_quote_pointer, (char*) "\"");
 
                         std::printf("glyph name: %s\n", char_glyph_name);
 
@@ -256,7 +244,7 @@ namespace loaders
                         // std::printf("closing \" found at 0x%lx.\n", (uint64_t) closing_double_quote_pointer);
                         has_glyph_unicode = true;
 
-                        loaders::extract_string(char_unicode, opening_double_quote_pointer, (char*) "\"");
+                        string::extract_string(char_unicode, opening_double_quote_pointer, (char*) "\"");
 
                         std::printf("unicode: %s\n", char_unicode);
 

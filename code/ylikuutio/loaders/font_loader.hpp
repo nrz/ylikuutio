@@ -22,11 +22,6 @@ namespace loaders
 
     bool find_first_glyph_in_SVG(const char* SVG_base_pointer, char*& SVG_data_pointer);
 
-    void extract_string(
-            char* dest_mem_pointer,
-            char* &src_mem_pointer,
-            char* char_end_string);
-
     bool load_vertex_data(
             const char* SVG_base_pointer,
             char*& SVG_data_pointer,
