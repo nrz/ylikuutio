@@ -11,17 +11,17 @@
 
 namespace string
 {
-    bool check_and_report_if_some_string_matches(const char* file_base_pointer, char* SVG_data_pointer, std::vector<std::string> identifier_strings_vector)
+    bool check_and_report_if_some_string_matches(const char* file_base_pointer, char* file_data_pointer, std::vector<std::string> identifier_strings_vector)
     {
         for (std::string identifier_string : identifier_strings_vector)
         {
             const char* identifier_string_char = identifier_string.c_str();
 
-            if (std::strncmp(SVG_data_pointer, identifier_string_char, std::strlen(identifier_string_char)) == 0)
+            if (std::strncmp(file_data_pointer, identifier_string_char, std::strlen(identifier_string_char)) == 0)
             {
                 const char* identifier_string_char = identifier_string.c_str();
-                uint64_t offset = (uint64_t) SVG_data_pointer - (uint64_t) file_base_pointer;
-                std::printf("%s found at file offset 0x%llu (memory address 0x%llu).\n", identifier_string_char, offset, (uint64_t) SVG_data_pointer);
+                uint64_t offset = (uint64_t) file_data_pointer - (uint64_t) file_base_pointer;
+                std::printf("%s found at file offset 0x%llu (memory address 0x%llu).\n", identifier_string_char, offset, (uint64_t) file_data_pointer);
                 return true;
             }
         }
