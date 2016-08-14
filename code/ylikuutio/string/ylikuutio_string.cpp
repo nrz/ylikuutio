@@ -75,6 +75,17 @@ namespace string
         return value;
     }
 
+    float extract_float_value_from_string(char*& data_pointer, char* char_end_string, const char* description)
+    {
+        char char_number_buffer[1024]; // FIXME: risk of buffer overflow.
+        char* dest_mem_pointer;
+        dest_mem_pointer = char_number_buffer;
+        string::extract_string_with_several_endings(dest_mem_pointer, ++data_pointer, char_end_string);
+        float value = std::atof(dest_mem_pointer);
+        std::printf("%s: %f\n", description, value);
+        return value;
+    }
+
     int32_t extract_unicode_value_from_string(const char*& unicode_char_pointer)
     {
         if (*unicode_char_pointer == '\0')
