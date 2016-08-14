@@ -121,7 +121,7 @@ namespace loaders
         float nodata_value = string::extract_float_value_from_string(point_data_pointer, (char*) " \n", (const char*) "nodata_value");
 
         uint32_t image_width_in_use = 3000; // should be 3000.
-        uint32_t image_height_in_use = 1000;
+        uint32_t image_height_in_use = 2000;
 
         float* vertex_data;
         vertex_data = new float[image_width_in_use * image_height_in_use];
