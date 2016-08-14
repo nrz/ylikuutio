@@ -51,7 +51,7 @@ namespace ontology
 
         if ((std::strcmp(this->char_font_file_format, "svg") == 0) || (std::strcmp(this->char_font_file_format, "SVG") == 0))
         {
-            font_loading_result = ontology::load_SVG_font(
+            font_loading_result = loaders::load_SVG_font(
                     this->font_filename,
                     this->glyph_vertex_data,
                     this->glyph_names,

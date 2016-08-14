@@ -56,7 +56,7 @@ namespace ontology
 
         if ((std::strcmp(this->char_model_file_format, "obj") == 0) || (std::strcmp(this->char_model_file_format, "OBJ") == 0))
         {
-            model_loading_result = ontology::load_OBJ(this->char_model_filename, this->vertices, this->UVs, this->normals);
+            model_loading_result = loaders::load_OBJ(this->char_model_filename, this->vertices, this->UVs, this->normals);
         }
         else if (std::strcmp(this->char_model_file_format, "SRTM") == 0)
         {
@@ -65,7 +65,7 @@ namespace ontology
             current_latitude_in_degrees = -16.50f;
             current_longitude_in_degrees = -68.15f;
 
-            model_loading_result = ontology::load_SRTM_world(
+            model_loading_result = loaders::load_SRTM_world(
                     this->model_filename,
                     current_latitude_in_degrees,
                     current_longitude_in_degrees,
@@ -78,7 +78,7 @@ namespace ontology
         }
         else if ((std::strcmp(this->char_model_file_format, "bmp") == 0) || (std::strcmp(this->char_model_file_format, "BMP") == 0))
         {
-            model_loading_result = ontology::load_BMP_world(
+            model_loading_result = loaders::load_BMP_world(
                     this->model_filename,
                     this->vertices,
                     this->UVs,

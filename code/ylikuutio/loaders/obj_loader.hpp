@@ -10,7 +10,7 @@
 // Include standard headers
 #include <vector>    // std::vector
 
-namespace ontology
+namespace loaders
 {
     bool load_OBJ(
             const char* path,

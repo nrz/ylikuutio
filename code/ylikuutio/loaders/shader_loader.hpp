@@ -24,6 +24,9 @@
 #include <glm/gtc/matrix_transform.hpp>
 #endif
 
-GLuint LoadShaders(const char*  vertex_file_path,const char*  fragment_file_path);
+namespace loaders
+{
+    GLuint LoadShaders(const char*  vertex_file_path,const char*  fragment_file_path);
+}
 
 #endif

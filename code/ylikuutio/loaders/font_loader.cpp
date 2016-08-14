@@ -9,7 +9,7 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
-namespace ontology
+namespace loaders
 {
     bool check_if_we_are_inside_block(const char* SVG_base_pointer, char*& SVG_data_pointer)
     {
@@ -55,7 +55,7 @@ namespace ontology
                     return false;
                 }
 
-                is_inside_block = ontology::check_if_we_are_inside_block(SVG_base_pointer, SVG_data_pointer);
+                is_inside_block = loaders::check_if_we_are_inside_block(SVG_base_pointer, SVG_data_pointer);
                 SVG_data_pointer++;
             }
             else
@@ -111,7 +111,7 @@ namespace ontology
         char char_path[1024];
 
         // copy from opening double quote to the next `"/"`.
-        ontology::extract_string(char_path, opening_double_quote_pointer, (char*) "/");
+        loaders::extract_string(char_path, opening_double_quote_pointer, (char*) "/");
 
         std::printf("d: %s\n", char_path);
 
@@ -123,12 +123,12 @@ namespace ontology
         {
             if (std::strncmp(vertex_data_pointer, "M", std::strlen("M")) == 0)
             {
-                current_vertex.x = ontology::extract_value_from_string_with_standard_endings(vertex_data_pointer,
+                current_vertex.x = loaders::extract_value_from_string_with_standard_endings(vertex_data_pointer,
                         (const char*) "M (moveto)");
 
                 while (std::strncmp(vertex_data_pointer++, " ", std::strlen(" ")) != 0);
 
-                current_vertex.y = ontology::extract_value_from_string_with_standard_endings(--vertex_data_pointer,
+                current_vertex.y = loaders::extract_value_from_string_with_standard_endings(--vertex_data_pointer,
                         (const char*) "space (moveto y coordinate)");
                 vertices_of_current_edge_section.push_back(current_vertex);
 
@@ -136,7 +136,7 @@ namespace ontology
             else if (std::strncmp(vertex_data_pointer, "h", std::strlen("h")) == 0)
             {
                 // OK, this is horizontal relative lineto.
-                int32_t horizontal_lineto_value = ontology::extract_value_from_string_with_standard_endings(vertex_data_pointer,
+                int32_t horizontal_lineto_value = loaders::extract_value_from_string_with_standard_endings(vertex_data_pointer,
                         (const char*) "h (horizontal relative lineto)");
                 current_vertex.x += horizontal_lineto_value;
                 vertices_of_current_edge_section.push_back(current_vertex);
@@ -144,7 +144,7 @@ namespace ontology
             else if (std::strncmp(vertex_data_pointer, "v", std::strlen("v")) == 0)
             {
                 // OK, this is vertical relative lineto.
-                int32_t vertical_lineto_value = ontology::extract_value_from_string_with_standard_endings(vertex_data_pointer,
+                int32_t vertical_lineto_value = loaders::extract_value_from_string_with_standard_endings(vertex_data_pointer,
                         (const char*) "v (vertical relative lineto)");
                 current_vertex.y += vertical_lineto_value;
                 vertices_of_current_edge_section.push_back(current_vertex);
@@ -217,7 +217,7 @@ namespace ontology
 
                         closing_double_quote_pointer++;
 
-                        ontology::extract_string(char_glyph_name, opening_double_quote_pointer, (char*) "\"");
+                        loaders::extract_string(char_glyph_name, opening_double_quote_pointer, (char*) "\"");
 
                         std::printf("glyph name: %s\n", char_glyph_name);
 
@@ -256,7 +256,7 @@ namespace ontology
                         // std::printf("closing \" found at 0x%lx.\n", (uint64_t) closing_double_quote_pointer);
                         has_glyph_unicode = true;
 
-                        ontology::extract_string(char_unicode, opening_double_quote_pointer, (char*) "\"");
+                        loaders::extract_string(char_unicode, opening_double_quote_pointer, (char*) "\"");
 
                         std::printf("unicode: %s\n", char_unicode);
 
@@ -276,7 +276,7 @@ namespace ontology
             } // else if (std::strncmp(SVG_data_pointer, "unicode=", std::strlen("unicode=")) == 0)
             else if (std::strncmp(SVG_data_pointer, "d=", std::strlen("d=")) == 0)
             {
-                bool result = ontology::load_vertex_data(SVG_base_pointer, SVG_data_pointer, current_glyph_vertices);
+                bool result = loaders::load_vertex_data(SVG_base_pointer, SVG_data_pointer, current_glyph_vertices);
                 if (result == false)
                 {
                     return false;
@@ -339,7 +339,7 @@ namespace ontology
         SVG_data_pointer = SVG_data;
 
         // SVG files are XML files, so we just need to read until we find the data we need.
-        is_first_glyph_found = ontology::find_first_glyph_in_SVG(SVG_base_pointer, SVG_data_pointer);
+        is_first_glyph_found = loaders::find_first_glyph_in_SVG(SVG_base_pointer, SVG_data_pointer);
 
         if (!is_first_glyph_found || SVG_data_pointer == nullptr)
         {
@@ -356,7 +356,7 @@ namespace ontology
         {
             if (std::strncmp(SVG_data_pointer, "<glyph", std::strlen("<glyph")) == 0)
             {
-                bool result = ontology::load_SVG_glyph(
+                bool result = loaders::load_SVG_glyph(
                         SVG_base_pointer,
                         SVG_data_pointer,
                         out_glyph_vertex_data,

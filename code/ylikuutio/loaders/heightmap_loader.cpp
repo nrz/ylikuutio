@@ -25,7 +25,7 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
-namespace ontology
+namespace loaders
 {
     bool load_BMP_world(
             std::string image_path,

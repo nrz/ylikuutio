@@ -7,7 +7,7 @@
 #include <GL/glew.h> // GLfloat, GLuint etc.
 #endif
 
-namespace texture
+namespace loaders
 {
     // Load a .BMP file using our custom loader
     GLuint load_BMP_texture(const char* imagepath);

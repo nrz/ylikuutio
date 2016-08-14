@@ -18,7 +18,7 @@
 #include <stdint.h> // uint32_t etc.
 #include <stdlib.h> // free, malloc
 
-namespace texture
+namespace loaders
 {
     GLuint load_BMP_texture(const char* imagepath)
     {

@@ -37,11 +37,11 @@ namespace ontology
         // Initialize texture
         if ((std::strcmp(char_font_texture_file_format, "bmp") == 0) || (std::strcmp(char_font_texture_file_format, "BMP") == 0))
         {
-            texture = texture::load_BMP_texture(texturePath);
+            texture = loaders::load_BMP_texture(texturePath);
         }
         else if ((std::strcmp(char_font_texture_file_format, "dds") == 0) || (std::strcmp(char_font_texture_file_format, "DDS") == 0))
         {
-            texture = texture::load_DDS_texture(texturePath);
+            texture = loaders::load_DDS_texture(texturePath);
         }
 
         // Initialize VBO
@@ -49,7 +49,7 @@ namespace ontology
         glGenBuffers(1, &uvbuffer);
 
         // Initialize Shader
-        programID = LoadShaders("TextVertexShader.vertexshader", "TextVertexShader.fragmentshader");
+        programID = loaders::LoadShaders("TextVertexShader.vertexshader", "TextVertexShader.fragmentshader");
 
         // Get a handle for our buffers
         vertex_position_in_screenspaceID = glGetAttribLocation(programID, "vertexPosition_screenspace");
