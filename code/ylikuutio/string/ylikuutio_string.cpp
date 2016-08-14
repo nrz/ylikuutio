@@ -21,7 +21,6 @@ namespace string
             {
                 const char* identifier_string_char = identifier_string.c_str();
                 uint64_t offset = (uint64_t) file_data_pointer - (uint64_t) file_base_pointer;
-                // std::printf("%s found at file offset 0x%llu (memory address 0x%llu).\n", identifier_string_char, offset, (uint64_t) file_data_pointer);
                 return true;
             }
         }
