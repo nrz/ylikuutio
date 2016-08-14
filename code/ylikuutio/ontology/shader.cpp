@@ -34,7 +34,7 @@ namespace ontology
         this->bind_to_parent();
 
         // Create and compile our GLSL program from the shaders.
-        this->programID = loaders::LoadShaders(this->char_vertex_shader, this->char_fragment_shader);
+        this->programID = loaders::load_shaders(this->char_vertex_shader, this->char_fragment_shader);
 
         // Get a handle for our "MVP" uniform.
         this->MatrixID = glGetUniformLocation(this->programID, "MVP");

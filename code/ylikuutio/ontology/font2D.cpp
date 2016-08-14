@@ -49,7 +49,7 @@ namespace ontology
         glGenBuffers(1, &uvbuffer);
 
         // Initialize Shader
-        programID = loaders::LoadShaders("TextVertexShader.vertexshader", "TextVertexShader.fragmentshader");
+        programID = loaders::load_shaders("TextVertexShader.vertexshader", "TextVertexShader.fragmentshader");
 
         // Get a handle for our buffers
         vertex_position_in_screenspaceID = glGetAttribLocation(programID, "vertexPosition_screenspace");

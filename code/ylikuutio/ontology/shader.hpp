@@ -68,7 +68,7 @@ namespace ontology
 
             ontology::Scene* parent_pointer;         // pointer to `Scene`.
 
-            GLuint programID;                     // this `Shader`'s `programID`, returned by `LoadShaders`.
+            GLuint programID;                     // this `Shader`'s `programID`, returned by `load_shaders`.
 
             GLuint MatrixID;
             GLuint ViewMatrixID;
