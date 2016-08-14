@@ -24,7 +24,7 @@ namespace loaders
 
     int32_t extract_value_from_string_with_standard_endings(char*& vertex_data_pointer, const char* description)
     {
-        return string::extract_value_from_string(vertex_data_pointer, (char*) " Mmhvz\">", description);
+        return string::extract_int32_t_value_from_string(vertex_data_pointer, (char*) " Mmhvz\">", description);
     }
 
     bool find_first_glyph_in_SVG(const char* SVG_base_pointer, char*& SVG_data_pointer)

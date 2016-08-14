@@ -64,7 +64,7 @@ namespace string
         }
     }
 
-    int32_t extract_value_from_string(char*& data_pointer, char* char_end_string, const char* description)
+    int32_t extract_int32_t_value_from_string(char*& data_pointer, char* char_end_string, const char* description)
     {
         char char_number_buffer[1024]; // FIXME: risk of buffer overflow.
         char* dest_mem_pointer;
