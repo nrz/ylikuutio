@@ -66,6 +66,7 @@ namespace loaders
         if ((header[0] != 'B') || (header[1] != 'M'))
         {
             std::cerr << "not a correct BMP file.\n";
+            std::fclose(file);
             return false;
         }
 
