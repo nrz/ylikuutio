@@ -64,12 +64,12 @@ namespace string
         }
     }
 
-    int32_t extract_value_from_string(char*& vertex_data_pointer, char* char_end_string, const char* description)
+    int32_t extract_value_from_string(char*& data_pointer, char* char_end_string, const char* description)
     {
         char char_number_buffer[1024]; // FIXME: risk of buffer overflow.
         char* dest_mem_pointer;
         dest_mem_pointer = char_number_buffer;
-        string::extract_string_with_several_endings(dest_mem_pointer, ++vertex_data_pointer, char_end_string);
+        string::extract_string_with_several_endings(dest_mem_pointer, ++data_pointer, char_end_string);
         uint32_t value = std::atoi(dest_mem_pointer);
         std::printf("%s: %d\n", description, value);
         return value;

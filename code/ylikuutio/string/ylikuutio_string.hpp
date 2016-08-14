@@ -14,7 +14,7 @@ namespace string
 
     void extract_string_with_several_endings(char* dest_mem_pointer, char*& src_mem_pointer, char* char_end_string);
 
-    int32_t extract_value_from_string(char*& vertex_data_pointer, char* char_end_string, const char* description);
+    int32_t extract_value_from_string(char*& data_pointer, char* char_end_string, const char* description);
 
     int32_t extract_unicode_value_from_string(const char*& unicode_char_pointer);
 
