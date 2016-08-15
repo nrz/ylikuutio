@@ -121,6 +121,14 @@ namespace loaders
         float* vertex_data;
         vertex_data = new float[world_size];
 
+        if (vertex_data == nullptr)
+        {
+            std::cerr << "Reserving memory for vertex data failed.\n";
+            delete image_data;
+            std::fclose(file);
+            return false;
+        }
+
         float* vertex_pointer;
         vertex_pointer = vertex_data;
 
