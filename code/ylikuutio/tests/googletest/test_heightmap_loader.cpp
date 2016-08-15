@@ -33,6 +33,7 @@ TEST(vertices_must_be_defined_and_interpolated_appropriately, a_3x3_world)
     bool should_ylikuutio_use_real_texture_coordinates = true;
 
     float* input_vertex_data = new float[image_width * image_height];
+    ASSERT_NE(input_vertex_data, nullptr);
     float* input_vertex_pointer = input_vertex_data;
 
     // Fill input vertex data with values.
@@ -431,6 +432,7 @@ TEST(a_2x2_world_must_be_triangulated_appropriately, bilinear_interpolation)
 
     GLuint* vertex_data;
     vertex_data = new GLuint [world_size];
+    ASSERT_NE(vertex_data, nullptr);
     GLuint* vertex_pointer = vertex_data;
     // x, z: height (y).
     GLuint southwest_height = 1;
@@ -535,6 +537,7 @@ TEST(a_2x2_world_must_be_triangulated_appropriately, southeast_northwest_edges)
 
     GLuint* vertex_data;
     vertex_data = new GLuint [world_size];
+    ASSERT_NE(vertex_data, nullptr);
     GLuint* vertex_pointer = vertex_data;
     // x, z: height (y).
     GLuint southwest_height = 1;
