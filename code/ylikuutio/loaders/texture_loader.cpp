@@ -15,6 +15,7 @@
 // Include standard headers
 #include <cstdio>   // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf etc.
 #include <cstring>  // std::memcmp, std::strcmp, std::strlen, std::strncmp
+#include <iostream> // std::cout, std::cin, std::cerr
 #include <stdint.h> // uint32_t etc.
 #include <stdlib.h> // free, malloc
 
@@ -88,6 +89,13 @@ namespace loaders
 
         // Create a buffer
         data = new unsigned char [imageSize];
+
+        if (data == nullptr)
+        {
+            std::cerr << "Reserving memory for texture data failed.\n";
+            std::fclose(file);
+            return 0;
+        }
 
         // Read the actual data from the file into the buffer
         std::fread(data, 1, imageSize, file);
