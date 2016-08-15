@@ -134,6 +134,13 @@ namespace loaders
         float* vertex_data;
         vertex_data = new float[image_width_in_use * image_height_in_use];
 
+        if (vertex_data == nullptr)
+        {
+            std::cerr << "Reserving memory for vertex data failed.\n";
+            delete point_data;
+            return false;
+        }
+
         float* vertex_pointer;
         vertex_pointer = vertex_data;
 
