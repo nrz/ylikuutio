@@ -130,6 +130,13 @@ namespace loaders
         uint32_t point_data_size = number_of_point_records * size_of_point_data_record;
         uint8_t* point_data = new uint8_t[point_data_size];
 
+        if (point_data == nullptr)
+        {
+            std::cerr << "Reserving memory for point data failed.\n";
+            std::fclose(file);
+            return false;
+        }
+
         // Move file pointer to the beginning of point data.
         if (fseek(file, offset_to_point_data, SEEK_SET) != 0)
         {
