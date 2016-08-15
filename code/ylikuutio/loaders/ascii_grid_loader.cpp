@@ -90,7 +90,7 @@ namespace loaders
         std::fclose(file);
 
         // All possible block identifier strings.
-        std::vector<std::string> number_strings_vector = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+        std::vector<std::string> number_strings_vector = { "-", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
         while (!string::check_and_report_if_some_string_matches(point_data, point_data_pointer, number_strings_vector))
         {
@@ -126,7 +126,7 @@ namespace loaders
         {
             point_data_pointer++;
         }
-        float nodata_value = string::extract_float_value_from_string(point_data_pointer, (char*) " \n", (const char*) "nodata_value");
+        float nodata_value = string::extract_float_value_from_string(--point_data_pointer, (char*) " \n", (const char*) "nodata_value");
 
         uint32_t image_width_in_use = 3000; // should be 3000.
         uint32_t image_height_in_use = 2000;
