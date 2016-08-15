@@ -92,40 +92,22 @@ namespace loaders
         // All possible block identifier strings.
         std::vector<std::string> number_strings_vector = { "-", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
-        while (!string::check_and_report_if_some_string_matches(point_data, point_data_pointer, number_strings_vector))
-        {
-            point_data_pointer++;
-        }
+        while (!string::check_and_report_if_some_string_matches(point_data, ++point_data_pointer, number_strings_vector));
         int32_t image_width = string::extract_int32_t_value_from_string(--point_data_pointer, (char*) " \n", (const char*) "ncols");
 
-        while (!string::check_and_report_if_some_string_matches(point_data, point_data_pointer, number_strings_vector))
-        {
-            point_data_pointer++;
-        }
+        while (!string::check_and_report_if_some_string_matches(point_data, ++point_data_pointer, number_strings_vector));
         int32_t image_height = string::extract_int32_t_value_from_string(--point_data_pointer, (char*) " \n", (const char*) "nrows");
 
-        while (!string::check_and_report_if_some_string_matches(point_data, point_data_pointer, number_strings_vector))
-        {
-            point_data_pointer++;
-        }
+        while (!string::check_and_report_if_some_string_matches(point_data, ++point_data_pointer, number_strings_vector));
         float xllcorner = string::extract_float_value_from_string(--point_data_pointer, (char*) " \n", (const char*) "xllcorner");
 
-        while (!string::check_and_report_if_some_string_matches(point_data, point_data_pointer, number_strings_vector))
-        {
-            point_data_pointer++;
-        }
+        while (!string::check_and_report_if_some_string_matches(point_data, ++point_data_pointer, number_strings_vector));
         float yllcorner = string::extract_float_value_from_string(--point_data_pointer, (char*) " \n", (const char*) "yllcorner");
 
-        while (!string::check_and_report_if_some_string_matches(point_data, point_data_pointer, number_strings_vector))
-        {
-            point_data_pointer++;
-        }
+        while (!string::check_and_report_if_some_string_matches(point_data, ++point_data_pointer, number_strings_vector));
         float cellsize = string::extract_float_value_from_string(--point_data_pointer, (char*) " \n", (const char*) "cellsize");
 
-        while (!string::check_and_report_if_some_string_matches(point_data, point_data_pointer, number_strings_vector))
-        {
-            point_data_pointer++;
-        }
+        while (!string::check_and_report_if_some_string_matches(point_data, ++point_data_pointer, number_strings_vector));
         float nodata_value = string::extract_float_value_from_string(--point_data_pointer, (char*) " \n", (const char*) "nodata_value");
 
         uint32_t image_height_in_use = 2000;
