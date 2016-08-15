@@ -128,11 +128,10 @@ namespace loaders
         }
         float nodata_value = string::extract_float_value_from_string(--point_data_pointer, (char*) " \n", (const char*) "nodata_value");
 
-        uint32_t image_width_in_use = 3000; // should be 3000.
         uint32_t image_height_in_use = 2000;
 
         float* vertex_data;
-        vertex_data = new float[image_width_in_use * image_height_in_use];
+        vertex_data = new float[image_width * image_height_in_use];
 
         if (vertex_data == nullptr)
         {
@@ -148,7 +147,7 @@ namespace loaders
 
         for (uint32_t z = 0; z < image_height_in_use; z++)
         {
-            for (uint32_t x = 0; x < image_width_in_use; x++)
+            for (uint32_t x = 0; x < image_width; x++)
             {
                 while (!string::check_and_report_if_some_string_matches(point_data, point_data_pointer, number_strings_vector))
                 {
@@ -163,8 +162,7 @@ namespace loaders
         std::cout << "Triangulating ascii grid data.\n";
 
         TriangulateQuadsStruct triangulate_quads_struct;
-        // triangulate_quads_struct.image_width = image_width;
-        triangulate_quads_struct.image_width = image_width_in_use;
+        triangulate_quads_struct.image_width = image_width;
         triangulate_quads_struct.image_height = image_height_in_use;
         triangulate_quads_struct.triangulation_type = triangulation_type;
         triangulate_quads_struct.sphere_radius = NAN;
