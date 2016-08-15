@@ -73,6 +73,14 @@ namespace loaders
 
         // Reserve enough memory.
         char* point_data = new char[file_size];
+
+        if (point_data == nullptr)
+        {
+            std::cerr << "Reserving memory for point data failed.\n";
+            std::fclose(file);
+            return false;
+        }
+
         char* point_data_pointer = point_data;
 
         // Read the point data from the file into the buffer.
