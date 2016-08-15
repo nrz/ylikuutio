@@ -96,7 +96,7 @@ namespace loaders
         {
             point_data_pointer++;
         }
-        int32_t image_width = string::extract_int32_t_value_from_string(point_data_pointer, (char*) " \n", (const char*) "ncols");
+        int32_t image_width = string::extract_int32_t_value_from_string(--point_data_pointer, (char*) " \n", (const char*) "ncols");
 
         while (!string::check_and_report_if_some_string_matches(point_data, point_data_pointer, number_strings_vector))
         {
