@@ -108,7 +108,7 @@ namespace loaders
         {
             point_data_pointer++;
         }
-        float xllcorner = string::extract_float_value_from_string(point_data_pointer, (char*) " \n", (const char*) "xllcorner");
+        float xllcorner = string::extract_float_value_from_string(--point_data_pointer, (char*) " \n", (const char*) "xllcorner");
 
         while (!string::check_and_report_if_some_string_matches(point_data, point_data_pointer, number_strings_vector))
         {
