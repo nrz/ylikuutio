@@ -317,6 +317,13 @@ namespace loaders
         std::string file_content = file::slurp(font_file_path);
         const uint32_t file_size = file_content.size();
         char* SVG_data = new char[file_size];
+
+        if (SVG_data == nullptr)
+        {
+            std::cerr << "Reserving memory for SVG font data failed.\n";
+            return false;
+        }
+
         std::strncpy(SVG_data, file_content.c_str(), file_size);
 
         bool is_first_glyph_found;

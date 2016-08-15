@@ -102,6 +102,13 @@ namespace loaders
         // Create a buffer.
         image_data = new uint8_t[image_size];
 
+        if (image_data == nullptr)
+        {
+            std::cerr << "Reserving memory for image data failed.\n";
+            std::fclose(file);
+            return false;
+        }
+
         // Read the actual image data from the file into the buffer.
         std::fread(image_data, 1, image_size, file);
 
@@ -113,6 +120,14 @@ namespace loaders
 
         float* vertex_data;
         vertex_data = new float[world_size];
+
+        if (vertex_data == nullptr)
+        {
+            std::cerr << "Reserving memory for vertex data failed.\n";
+            delete image_data;
+            std::fclose(file);
+            return false;
+        }
 
         float* vertex_pointer;
         vertex_pointer = vertex_data;

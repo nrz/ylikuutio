@@ -73,6 +73,14 @@ namespace loaders
 
         // Reserve enough memory.
         char* point_data = new char[file_size];
+
+        if (point_data == nullptr)
+        {
+            std::cerr << "Reserving memory for point data failed.\n";
+            std::fclose(file);
+            return false;
+        }
+
         char* point_data_pointer = point_data;
 
         // Read the point data from the file into the buffer.
@@ -82,49 +90,55 @@ namespace loaders
         std::fclose(file);
 
         // All possible block identifier strings.
-        std::vector<std::string> number_strings_vector = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+        std::vector<std::string> number_strings_vector = { "-", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
         while (!string::check_and_report_if_some_string_matches(point_data, point_data_pointer, number_strings_vector))
         {
             point_data_pointer++;
         }
-        int32_t image_width = string::extract_int32_t_value_from_string(point_data_pointer, (char*) " \n", (const char*) "ncols");
+        int32_t image_width = string::extract_int32_t_value_from_string(--point_data_pointer, (char*) " \n", (const char*) "ncols");
 
         while (!string::check_and_report_if_some_string_matches(point_data, point_data_pointer, number_strings_vector))
         {
             point_data_pointer++;
         }
-        int32_t image_height = string::extract_int32_t_value_from_string(point_data_pointer, (char*) " \n", (const char*) "nrows");
+        int32_t image_height = string::extract_int32_t_value_from_string(--point_data_pointer, (char*) " \n", (const char*) "nrows");
 
         while (!string::check_and_report_if_some_string_matches(point_data, point_data_pointer, number_strings_vector))
         {
             point_data_pointer++;
         }
-        float xllcorner = string::extract_float_value_from_string(point_data_pointer, (char*) " \n", (const char*) "xllcorner");
+        float xllcorner = string::extract_float_value_from_string(--point_data_pointer, (char*) " \n", (const char*) "xllcorner");
 
         while (!string::check_and_report_if_some_string_matches(point_data, point_data_pointer, number_strings_vector))
         {
             point_data_pointer++;
         }
-        float yllcorner = string::extract_float_value_from_string(point_data_pointer, (char*) " \n", (const char*) "yllcorner");
+        float yllcorner = string::extract_float_value_from_string(--point_data_pointer, (char*) " \n", (const char*) "yllcorner");
 
         while (!string::check_and_report_if_some_string_matches(point_data, point_data_pointer, number_strings_vector))
         {
             point_data_pointer++;
         }
-        float cellsize = string::extract_float_value_from_string(point_data_pointer, (char*) " \n", (const char*) "cellsize");
+        float cellsize = string::extract_float_value_from_string(--point_data_pointer, (char*) " \n", (const char*) "cellsize");
 
         while (!string::check_and_report_if_some_string_matches(point_data, point_data_pointer, number_strings_vector))
         {
             point_data_pointer++;
         }
-        float nodata_value = string::extract_float_value_from_string(point_data_pointer, (char*) " \n", (const char*) "nodata_value");
+        float nodata_value = string::extract_float_value_from_string(--point_data_pointer, (char*) " \n", (const char*) "nodata_value");
 
-        uint32_t image_width_in_use = 3000; // should be 3000.
         uint32_t image_height_in_use = 2000;
 
         float* vertex_data;
-        vertex_data = new float[image_width_in_use * image_height_in_use];
+        vertex_data = new float[image_width * image_height_in_use];
+
+        if (vertex_data == nullptr)
+        {
+            std::cerr << "Reserving memory for vertex data failed.\n";
+            delete point_data;
+            return false;
+        }
 
         float* vertex_pointer;
         vertex_pointer = vertex_data;
@@ -133,7 +147,7 @@ namespace loaders
 
         for (uint32_t z = 0; z < image_height_in_use; z++)
         {
-            for (uint32_t x = 0; x < image_width_in_use; x++)
+            for (uint32_t x = 0; x < image_width; x++)
             {
                 while (!string::check_and_report_if_some_string_matches(point_data, point_data_pointer, number_strings_vector))
                 {
@@ -148,8 +162,7 @@ namespace loaders
         std::cout << "Triangulating ascii grid data.\n";
 
         TriangulateQuadsStruct triangulate_quads_struct;
-        // triangulate_quads_struct.image_width = image_width;
-        triangulate_quads_struct.image_width = image_width_in_use;
+        triangulate_quads_struct.image_width = image_width;
         triangulate_quads_struct.image_height = image_height_in_use;
         triangulate_quads_struct.triangulation_type = triangulation_type;
         triangulate_quads_struct.sphere_radius = NAN;
