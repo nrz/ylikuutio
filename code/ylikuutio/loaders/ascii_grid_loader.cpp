@@ -120,7 +120,7 @@ namespace loaders
         {
             point_data_pointer++;
         }
-        float cellsize = string::extract_float_value_from_string(point_data_pointer, (char*) " \n", (const char*) "cellsize");
+        float cellsize = string::extract_float_value_from_string(--point_data_pointer, (char*) " \n", (const char*) "cellsize");
 
         while (!string::check_and_report_if_some_string_matches(point_data, point_data_pointer, number_strings_vector))
         {
