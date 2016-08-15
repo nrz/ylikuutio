@@ -102,7 +102,7 @@ namespace loaders
         {
             point_data_pointer++;
         }
-        int32_t image_height = string::extract_int32_t_value_from_string(point_data_pointer, (char*) " \n", (const char*) "nrows");
+        int32_t image_height = string::extract_int32_t_value_from_string(--point_data_pointer, (char*) " \n", (const char*) "nrows");
 
         while (!string::check_and_report_if_some_string_matches(point_data, point_data_pointer, number_strings_vector))
         {
