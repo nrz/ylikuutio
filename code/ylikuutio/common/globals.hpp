@@ -22,7 +22,10 @@
 #endif
 #endif
 
-// Include GLEW
+// GLEW must be included here, because `globals.hpp` may be compiled
+// first, and if `GL/glew.h` is not included before `glfw3.h` (?),
+// then g++ prints the following error:
+// `error: #error gl.h included before glew.h`
 #ifndef __GL_GLEW_H_INCLUDED
 #define __GL_GLEW_H_INCLUDED
 #include <GL/glew.h> // GLfloat, GLuint etc.
