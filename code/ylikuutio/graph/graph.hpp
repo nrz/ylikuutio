@@ -1,8 +1,15 @@
 #ifndef __GRAPH_HPP_INCLUDED
 #define __GRAPH_HPP_INCLUDED
 
+// Include GLM
+#ifndef __GLM_GLM_HPP_INCLUDED
+#define __GLM_GLM_HPP_INCLUDED
+#include <glm/glm.hpp> // glm
+#endif
+
 // Include standard headers
 #include <iostream> // std::cout, std::cin, std::cerr
+#include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
 #include <queue>    // std::queue
 
@@ -14,7 +21,7 @@ namespace ontology
     {
         public:
             // constructor.
-            Graph();
+            Graph(std::vector<glm::vec3>& in_vertices, uint32_t image_width, uint32_t image_height, std::string triangulation_type);
 
             // destructor.
             ~Graph();

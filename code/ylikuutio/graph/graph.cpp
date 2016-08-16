@@ -1,12 +1,24 @@
 #include "graph.hpp"
-#include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "node.hpp"
+#include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
+
+// Include GLM
+#ifndef __GLM_GLM_HPP_INCLUDED
+#define __GLM_GLM_HPP_INCLUDED
+#include <glm/glm.hpp> // glm
+#endif
+
+// Include standard headers
+#include <stdint.h> // uint32_t etc.
+#include <vector>   // std::vector
 
 namespace ontology
 {
-    Graph::Graph()
+    Graph::Graph(std::vector<glm::vec3>& in_vertices, uint32_t image_width, uint32_t image_height, std::string triangulation_type)
     {
         // constructor.
+
+        // This constructor creates a graph from vertex data produced eg. by `bool triangulate_quads`.
     }
 
     void Graph::set_node_pointer(uint32_t childID, ontology::Node* child_pointer)
