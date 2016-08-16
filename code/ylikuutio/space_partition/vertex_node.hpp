@@ -14,17 +14,15 @@ namespace space_partition
     {
         public:
             // constructor.
-            VertexNode(glm::vec3 vertex, std::vector<VertexNode*>& neighbor_node_pointers)
-                : graph::Node()
+            VertexNode(glm::vec3 coordinate_vector, NodeStruct node_struct)
+                : graph::Node(node_struct)
             {
                 // constructor.
-                this->vertex = vertex;
-                this->neighbor_node_pointers = neighbor_node_pointers;
+                this->coordinate_vector = coordinate_vector;
             }
 
         private:
-            glm::vec3 vertex;
-            std::vector<space_partition::VertexNode*> neighbor_node_pointers;
+            glm::vec3 coordinate_vector;
     };
 }
 

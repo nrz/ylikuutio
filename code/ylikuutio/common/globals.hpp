@@ -104,7 +104,6 @@ typedef struct NodeStruct
     }
     uint32_t nodeID;
     graph::Graph* parent_pointer;
-    glm::vec3 coordinate_vector;
     std::vector<uint32_t> neighbor_nodeIDs;
 } NodeStruct;
 

@@ -15,9 +15,6 @@ namespace graph
     {
         public:
             // constructor.
-            Node();
-
-            // constructor.
             Node(NodeStruct node_struct);
 
             // destructor.
@@ -59,8 +56,6 @@ namespace graph
 
             // this method deletes an unidirectional link.
             void delete_unidirectional_link(uint32_t nodeID);
-
-            glm::vec3 coordinate_vector;
     };
 }
 

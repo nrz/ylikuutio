@@ -11,15 +11,10 @@ namespace graph
         hierarchy::bind_child_to_parent<graph::Node*>(this, this->parent_pointer->node_pointer_vector, this->parent_pointer->free_nodeID_queue);
     }
 
-    Node::Node()
-    {
-    }
-
     Node::Node(NodeStruct node_struct)
     {
         // constructor.
         this->childID = node_struct.nodeID;
-        this->coordinate_vector = node_struct.coordinate_vector;
         this->parent_pointer = node_struct.parent_pointer;
 
         // set pointer to this node.
