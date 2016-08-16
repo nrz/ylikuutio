@@ -584,6 +584,12 @@ add_library(ylikuutio
     code/ylikuutio/shaders/TextVertexShader.fragmentshader
     code/ylikuutio/shaders/TextVertexShader.vertexshader
 
+    # space partition, in alphabetical order.
+    code/ylikuutio/space_partition/vertex_graph.cpp
+    code/ylikuutio/space_partition/vertex_graph.hpp
+    code/ylikuutio/space_partition/vertex_node.cpp
+    code/ylikuutio/space_partition/vertex_node.hpp
+
     # string, in alphabetical order
     code/ylikuutio/string/ylikuutio_string.cpp
     code/ylikuutio/string/ylikuutio_string.hpp
