@@ -23,9 +23,6 @@ namespace graph
             // constructor.
             Graph();
 
-            // constructor.
-            Graph(std::vector<glm::vec3>& in_vertices, uint32_t image_width, uint32_t image_height, std::string triangulation_type);
-
             // destructor.
             ~Graph();
 

@@ -19,13 +19,6 @@ namespace graph
         // constructor.
     }
 
-    Graph::Graph(std::vector<glm::vec3>& in_vertices, uint32_t image_width, uint32_t image_height, std::string triangulation_type)
-    {
-        // constructor.
-
-        // This constructor creates a graph from vertex data produced eg. by `bool triangulate_quads`.
-    }
-
     void Graph::set_node_pointer(uint32_t childID, graph::Node* child_pointer)
     {
         hierarchy::set_child_pointer(childID, child_pointer, this->node_pointer_vector, this->free_nodeID_queue);

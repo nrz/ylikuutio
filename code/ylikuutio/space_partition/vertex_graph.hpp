@@ -14,7 +14,9 @@ namespace space_partition
     {
         public:
             // constructor.
-            VertexGraph()
+
+            // This constructor creates a graph from vertex data produced eg. by `bool triangulate_quads`.
+            VertexGraph(std::vector<glm::vec3>& in_vertices, uint32_t image_width, uint32_t image_height, std::string triangulation_type)
                 : graph::Graph()
             {
                 // constructor.
