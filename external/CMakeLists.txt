@@ -15,6 +15,8 @@ add_definitions(
 # add_subdirectory(gdal-2.1.1)
 
 # Compile external dependencies
+
+# pugixml
 add_subdirectory(pugixml)
 
 ### GLFW ###
