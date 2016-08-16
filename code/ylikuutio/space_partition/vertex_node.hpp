@@ -3,11 +3,6 @@
 
 #include "code/ylikuutio/graph/node.hpp"
 
-namespace graph
-{
-    class Node;
-}
-
 namespace space_partition
 {
     class VertexNode : public graph::Node
