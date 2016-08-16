@@ -15,6 +15,9 @@ namespace graph
     {
         public:
             // constructor.
+            Node();
+
+            // constructor.
             Node(NodeStruct node_struct);
 
             // destructor.
