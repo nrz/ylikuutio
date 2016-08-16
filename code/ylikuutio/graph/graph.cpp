@@ -12,7 +12,7 @@
 #include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
 
-namespace ontology
+namespace graph
 {
     Graph::Graph(std::vector<glm::vec3>& in_vertices, uint32_t image_width, uint32_t image_height, std::string triangulation_type)
     {
@@ -21,12 +21,12 @@ namespace ontology
         // This constructor creates a graph from vertex data produced eg. by `bool triangulate_quads`.
     }
 
-    void Graph::set_node_pointer(uint32_t childID, ontology::Node* child_pointer)
+    void Graph::set_node_pointer(uint32_t childID, graph::Node* child_pointer)
     {
         hierarchy::set_child_pointer(childID, child_pointer, this->node_pointer_vector, this->free_nodeID_queue);
     }
 
-    ontology::Node* Graph::get_node_pointer(uint32_t childID)
+    graph::Node* Graph::get_node_pointer(uint32_t childID)
     {
         return this->node_pointer_vector[childID];
     }
@@ -43,6 +43,6 @@ namespace ontology
 
         // destroy all nodes of this graph.
         std::cout << "All nodes of this graph will be destroyed.\n";
-        hierarchy::delete_children<ontology::Node*>(this->node_pointer_vector);
+        hierarchy::delete_children<graph::Node*>(this->node_pointer_vector);
     }
 }

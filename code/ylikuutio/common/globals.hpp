@@ -50,12 +50,16 @@
 #define PI 3.14159265359f
 #endif
 
+namespace graph
+{
+    class Graph;
+}
+
 namespace ontology
 {
     class Universe;
     class Scene;
     class Shader;
-    class Graph;
     class Material;
     class VectorFont;
     class Species;
@@ -96,7 +100,7 @@ typedef struct NodeStruct
         // constructor.
     }
     GLuint nodeID;
-    ontology::Graph* parent_pointer;
+    graph::Graph* parent_pointer;
     glm::vec3 coordinate_vector;
     std::vector<uint32_t> neighbor_nodeIDs;
 } NodeStruct;

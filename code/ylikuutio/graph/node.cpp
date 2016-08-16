@@ -4,11 +4,11 @@
 // Include standard headers
 #include <iostream> // std::cout, std::cin, std::cerr
 
-namespace ontology
+namespace graph
 {
     void Node::bind_to_parent()
     {
-        hierarchy::bind_child_to_parent<ontology::Node*>(this, this->parent_pointer->node_pointer_vector, this->parent_pointer->free_nodeID_queue);
+        hierarchy::bind_child_to_parent<graph::Node*>(this, this->parent_pointer->node_pointer_vector, this->parent_pointer->free_nodeID_queue);
     }
 
     Node::Node(NodeStruct node_struct)
@@ -64,7 +64,7 @@ namespace ontology
         this->create_unidirectional_link(nodeID);
 
         // create a link from destination node to this node.
-        static_cast<ontology::Node*>(this->parent_pointer->get_node_pointer(childID))->create_unidirectional_link(this->childID);
+        static_cast<graph::Node*>(this->parent_pointer->get_node_pointer(childID))->create_unidirectional_link(this->childID);
     }
 
     void Node::delete_unidirectional_link(uint32_t nodeID)
@@ -79,7 +79,7 @@ namespace ontology
         this->delete_unidirectional_link(nodeID);
 
         // delete a link from destination node to this node.
-        static_cast<ontology::Node*>(this->parent_pointer->get_node_pointer(childID))->delete_unidirectional_link(this->childID);
+        static_cast<graph::Node*>(this->parent_pointer->get_node_pointer(childID))->delete_unidirectional_link(this->childID);
     }
 
     // Transfering a Node to a new Graph is similar to `bind_to_new_parent`, but there is one important difference:
@@ -91,8 +91,8 @@ namespace ontology
     // If `Node::bind_to_parent` would cause overflow (2^32 = 4 294 967 295), it will instead give smallest current `childID` of the graph and
     // decrement `childID_bias` by 1.
 
-    void Node::bind_to_new_parent(ontology::Graph *new_graph_pointer)
+    void Node::bind_to_new_parent(graph::Graph *new_graph_pointer)
     {
-        hierarchy::bind_child_to_new_parent<ontology::Node*, ontology::Graph*>(this, new_graph_pointer, this->parent_pointer->node_pointer_vector, this->parent_pointer->free_nodeID_queue);
+        hierarchy::bind_child_to_new_parent<graph::Node*, graph::Graph*>(this, new_graph_pointer, this->parent_pointer->node_pointer_vector, this->parent_pointer->free_nodeID_queue);
     }
 }
