@@ -2,4 +2,7 @@
 
 namespace space_partition
 {
+    VertexNode::~VertexNode()
+    {
+    }
 }

@@ -16,6 +16,8 @@ namespace space_partition
                 this->coordinate_vector = coordinate_vector;
             }
 
+            ~VertexNode();
+
         private:
             glm::vec3 coordinate_vector;
     };
