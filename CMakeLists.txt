@@ -496,8 +496,6 @@ add_library(ylikuutio
     code/ylikuutio/file/file_loader.hpp
 
     # geometry, in alphabetical order.
-    code/ylikuutio/geometry/chunk.cpp
-    code/ylikuutio/geometry/chunk.hpp
     code/ylikuutio/geometry/line.cpp
     code/ylikuutio/geometry/line.hpp
     code/ylikuutio/geometry/line2D.cpp
@@ -585,6 +583,8 @@ add_library(ylikuutio
     code/ylikuutio/shaders/TextVertexShader.vertexshader
 
     # space partition, in alphabetical order.
+    code/ylikuutio/space_partition/chunk.cpp
+    code/ylikuutio/space_partition/chunk.hpp
     code/ylikuutio/space_partition/vertex_graph.cpp
     code/ylikuutio/space_partition/vertex_graph.hpp
     code/ylikuutio/space_partition/vertex_node.cpp
