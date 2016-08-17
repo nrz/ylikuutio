@@ -1,3 +1,6 @@
+#ifndef __CHUNK_HPP_INCLUDED
+#define __CHUNK_HPP_INCLUDED
+
 namespace space_partition
 {
     class Chunk
@@ -13,3 +16,5 @@ namespace space_partition
             void render();
     };
 }
+
+#endif
