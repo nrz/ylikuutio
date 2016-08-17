@@ -133,7 +133,7 @@ int main(void)
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
 
     // Open a window and create its OpenGL context.
-    window = glfwCreateWindow((GLuint) window_width, (GLuint) window_height, "Ylikuutio", nullptr, nullptr);
+    window = glfwCreateWindow((GLuint) window_width, (GLuint) window_height, "Ajokki, powered by Ylikuutio v. 0.0.1", nullptr, nullptr);
     cleanup_callback_object->set_new_callback(&ajokki::glfwTerminate_cleanup);
 
     if (window == nullptr)
