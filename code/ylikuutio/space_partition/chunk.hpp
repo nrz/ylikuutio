@@ -8,5 +8,8 @@ namespace space_partition
 
             // destructor.
             ~Chunk();
+
+        private:
+            void render();
     };
 }

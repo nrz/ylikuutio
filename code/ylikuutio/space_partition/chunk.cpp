@@ -11,4 +11,8 @@ namespace space_partition
     {
         // destructor.
     }
+
+    void Chunk::render()
+    {
+    }
 }
