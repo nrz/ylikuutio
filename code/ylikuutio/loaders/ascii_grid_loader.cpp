@@ -140,7 +140,7 @@ namespace loaders
                 {
                     point_data_pointer++;
                 }
-                *vertex_pointer++ = string::extract_float_value_from_string(point_data_pointer, (char*) " \n", (const char*) nullptr);
+                *vertex_pointer++ = string::extract_float_value_from_string(--point_data_pointer, (char*) " \n", (const char*) nullptr);
             }
         }
 
