@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 2.6.2)
 project(ylikuutio)
 
 # uncomment the following line to cross-compile for Windows under Linux using mingw64.
-set(CROSS_COMPILE_FOR_WINDOWS true)
+# set(CROSS_COMPILE_FOR_WINDOWS true)
 
 # comment the following line to disable scripting with Chibi Scheme.
 set(ENABLE_SCRIPTING_WITH_CHIBI_SCHEME true)
@@ -537,8 +537,8 @@ add_library(ylikuutio
     # code/ylikuutio/geometry/line_segment3D.hpp
     # code/ylikuutio/geometry/line_segment_line_segment_intersection.cpp
     # code/ylikuutio/geometry/line_segment_line_segment_intersection.hpp
-    # code/ylikuutio/geometry/transformation.cpp
-    # code/ylikuutio/geometry/transformation.hpp
+    code/ylikuutio/geometry/transformation.cpp
+    code/ylikuutio/geometry/transformation.hpp
 
     # graph, in alphabetical order.
     code/ylikuutio/graph/graph.cpp
@@ -688,14 +688,14 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/file/file_loader.hpp
         code/ylikuutio/geometry/line.cpp
         code/ylikuutio/geometry/line.hpp
-        code/ylikuutio/geometry/line2D.cpp
-        code/ylikuutio/geometry/line2D.hpp
-        code/ylikuutio/geometry/line_line_intersection.cpp
-        code/ylikuutio/geometry/line_line_intersection.hpp
-        code/ylikuutio/geometry/line_segment2D.cpp
-        code/ylikuutio/geometry/line_segment2D.hpp
-        code/ylikuutio/geometry/line_segment_line_segment_intersection.cpp
-        code/ylikuutio/geometry/line_segment_line_segment_intersection.hpp
+        # code/ylikuutio/geometry/line2D.cpp
+        # code/ylikuutio/geometry/line2D.hpp
+        # code/ylikuutio/geometry/line_line_intersection.cpp
+        # code/ylikuutio/geometry/line_line_intersection.hpp
+        # code/ylikuutio/geometry/line_segment2D.cpp
+        # code/ylikuutio/geometry/line_segment2D.hpp
+        # code/ylikuutio/geometry/line_segment_line_segment_intersection.cpp
+        # code/ylikuutio/geometry/line_segment_line_segment_intersection.hpp
         code/ylikuutio/geometry/transformation.cpp
         code/ylikuutio/geometry/transformation.hpp
         code/ylikuutio/hierarchy/hierarchy_templates.hpp
@@ -719,9 +719,9 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/googletest/test_font_loader.cpp
         code/ylikuutio/tests/googletest/test_globals.cpp
         code/ylikuutio/tests/googletest/test_heightmap_loader.cpp
-        code/ylikuutio/tests/googletest/test_line2D.cpp
-        code/ylikuutio/tests/googletest/test_line_line_intersection.cpp
-        code/ylikuutio/tests/googletest/test_line_segment_line_segment_intersection.cpp
+        # code/ylikuutio/tests/googletest/test_line2D.cpp
+        # code/ylikuutio/tests/googletest/test_line_line_intersection.cpp
+        # code/ylikuutio/tests/googletest/test_line_segment_line_segment_intersection.cpp
         code/ylikuutio/tests/googletest/test_pugixml.cpp
         code/ylikuutio/tests/googletest/test_ylikuutio_string.cpp)
     set(MAIN_FILE code/ylikuutio/tests/googletest/main.cpp)
