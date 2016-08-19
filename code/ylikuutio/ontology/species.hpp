@@ -74,7 +74,7 @@ namespace ontology
             // this method renders all objects of this species.
             void render();
 
-            ontology::Material* parent_pointer;         // pointer to the material.
+            ontology::Material* parent_pointer;      // pointer to the material.
 
             std::string model_file_format;           // type of the model file, eg. `"bmp"`.
             std::string model_filename;              // filename of the model file.
