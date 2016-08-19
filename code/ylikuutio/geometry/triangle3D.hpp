@@ -1,6 +1,6 @@
 namespace geometry
 {
-    class Triangle
+    class Triangle3D
     {
     };
 }

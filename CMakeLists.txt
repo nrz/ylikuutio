@@ -514,8 +514,8 @@ add_library(ylikuutio
     code/ylikuutio/geometry/line_segment_line_segment_intersection.hpp
     code/ylikuutio/geometry/transformation.cpp
     code/ylikuutio/geometry/transformation.hpp
-    code/ylikuutio/geometry/triangle.cpp
-    code/ylikuutio/geometry/triangle.hpp
+    code/ylikuutio/geometry/triangle3D.cpp
+    code/ylikuutio/geometry/triangle3D.hpp
 
     # graph, in alphabetical order.
     code/ylikuutio/graph/graph.cpp
