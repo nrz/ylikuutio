@@ -549,6 +549,10 @@ add_library(ylikuutio
     # hierarchy, in alphabetical order.
     code/ylikuutio/hierarchy/hierarchy_templates.hpp
 
+    # linear algebra, in alphabetical order.
+    code/ylikuutio/linear_algebra/matrix.cpp
+    code/ylikuutio/linear_algebra/matrix.hpp
+
     # loaders, in alphabetical order.
     code/ylikuutio/loaders/ascii_grid_loader.cpp
     code/ylikuutio/loaders/ascii_grid_loader.hpp
