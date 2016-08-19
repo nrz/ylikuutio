@@ -514,8 +514,6 @@ add_library(ylikuutio
     code/ylikuutio/geometry/line_segment_line_segment_intersection.hpp
     code/ylikuutio/geometry/transformation.cpp
     code/ylikuutio/geometry/transformation.hpp
-    code/ylikuutio/geometry/triangle3D.cpp
-    code/ylikuutio/geometry/triangle3D.hpp
 
     # graph, in alphabetical order.
     code/ylikuutio/graph/graph.cpp
@@ -585,6 +583,8 @@ add_library(ylikuutio
     # space partition, in alphabetical order.
     code/ylikuutio/space_partition/chunk.cpp
     code/ylikuutio/space_partition/chunk.hpp
+    code/ylikuutio/space_partition/triangle3D.cpp
+    code/ylikuutio/space_partition/triangle3D.hpp
     code/ylikuutio/space_partition/vertex_graph.cpp
     code/ylikuutio/space_partition/vertex_graph.hpp
     code/ylikuutio/space_partition/vertex_node.cpp
