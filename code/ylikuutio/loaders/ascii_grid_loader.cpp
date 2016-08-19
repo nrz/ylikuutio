@@ -126,9 +126,14 @@ namespace loaders
         vertex_pointer = vertex_data;
 
         // start processing image_data.
+        std::cout << "Processing image data.\n";
 
         for (uint32_t z = 0; z < image_height_in_use; z++)
         {
+            // show progress in percents.
+            int32_t current_percent = static_cast<int32_t>(floor(100.0f * ((double) z / (double) (image_height_in_use - 1))));
+            std::cout << current_percent << "% ";
+
             for (uint32_t x = 0; x < image_width; x++)
             {
                 while (!string::check_and_report_if_some_string_matches(point_data, point_data_pointer, number_strings_vector))
