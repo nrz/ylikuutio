@@ -12,6 +12,7 @@
 #endif
 
 // Include standard headers
+#include <iterator> // std::back_inserter
 #include <list>     // std::list
 #include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
