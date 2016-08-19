@@ -5,7 +5,7 @@
 
 namespace space_partition
 {
-    class VertexNode : public graph::Node
+    class VertexNode: public graph::Node
     {
         public:
             // constructor.
