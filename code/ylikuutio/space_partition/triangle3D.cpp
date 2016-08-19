@@ -1,5 +1,5 @@
 #include "triangle3D.hpp"
 
-namespace geometry
+namespace space_partition
 {
 }
