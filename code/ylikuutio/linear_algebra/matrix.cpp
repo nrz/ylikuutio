@@ -34,7 +34,7 @@ namespace linear_algebra
 
     Matrix::~Matrix()
     {
-        delete this->array_of_arrays;
+        delete[] this->array_of_arrays;
     }
 
     void Matrix::operator<<(const float rhs)
