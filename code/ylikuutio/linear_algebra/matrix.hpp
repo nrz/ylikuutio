@@ -20,18 +20,14 @@ namespace linear_algebra
 
         private:
             bool is_square;
-            uint32_t square_size;
             uint32_t width;
             uint32_t height;
+            uint32_t array_size;
 
             bool is_fully_populated;
-            int32_t next_row_i_to_populate;
-            int32_t next_column_i_to_populate;
+            int32_t next_i_to_populate;
 
-            float array_1x1[1][1];
-            float array_2x2[2][2];
-            float array_3x3[3][3];
-            float array_4x4[4][4];
+            float* array;
     };
 
 }
