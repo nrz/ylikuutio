@@ -62,4 +62,15 @@ namespace linear_algebra
             }
         }
     }
+
+    float* Matrix::operator()(const uint32_t y, const uint32_t x)
+    {
+        if (y >= this->height || x >= this->width)
+        {
+            return nullptr;
+        }
+
+        uint32_t array_i = y * this->width + x;
+        return this->array + array_i;
+    }
 }

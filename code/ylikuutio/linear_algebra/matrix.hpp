@@ -17,6 +17,7 @@ namespace linear_algebra
 
             void operator<<(float rhs);
             bool operator==(const Matrix& rhs);
+            float* operator()(const uint32_t y, const uint32_t x);
 
         private:
             bool is_square;
