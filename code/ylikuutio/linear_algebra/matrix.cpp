@@ -1,6 +1,7 @@
 #include "matrix.hpp"
 
 // Include standard headers
+#include <cmath>    // NAN, std::isnan, std::pow
 #include <stdint.h> // uint32_t etc.
 
 namespace linear_algebra
@@ -35,6 +36,40 @@ namespace linear_algebra
     Matrix::~Matrix()
     {
         delete[] this->array_of_arrays;
+    }
+
+    float Matrix::det()
+    {
+        if (!this->is_square)
+        {
+            // Non-square matrices do not have determinant.
+            return NAN;
+        }
+
+        switch (this->width)
+        {
+            case 1:
+                // det(scalar) = scalar
+                return this->array_of_arrays[0][0];
+            case 2:
+                //     | a b |
+                // det |     | = ad - bc
+                //     | c d |
+                return this->array_of_arrays[0][0] * this->array_of_arrays[1][1] - this->array_of_arrays[0][1] * this->array_of_arrays[1][0];
+            case 3:
+                //     | a b c |
+                // det | d e f | = aei + bfg + cdh - ceg - bdi - afh
+                //     | g h i |
+                return this->array_of_arrays[0][0] * this->array_of_arrays[1][1] * this->array_of_arrays[2][2] + // aei +
+                    this->array_of_arrays[0][1] * this->array_of_arrays[1][2] * this->array_of_arrays[2][0] +    // bfg +
+                    this->array_of_arrays[0][2] * this->array_of_arrays[1][0] * this->array_of_arrays[2][1] -    // cdh -
+                    this->array_of_arrays[0][2] * this->array_of_arrays[1][1] * this->array_of_arrays[2][0] -    // ceg -
+                    this->array_of_arrays[0][1] * this->array_of_arrays[1][0] * this->array_of_arrays[2][2] -    // bdi -
+                    this->array_of_arrays[0][0] * this->array_of_arrays[1][2] * this->array_of_arrays[2][1];     // afh
+            default:
+                // TODO: implement determinant for larger matrices!
+                return NAN;
+        }
     }
 
     void Matrix::operator<<(const float rhs)

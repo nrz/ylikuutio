@@ -37,6 +37,8 @@ namespace linear_algebra
                 return Proxy(array_of_arrays[index]);
             }
 
+            float det();
+
         private:
             bool is_square;
             uint32_t width;
