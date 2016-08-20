@@ -15,6 +15,7 @@ namespace linear_algebra
             // destructor.
             ~Matrix();
 
+            friend void operator<<(Matrix& lhs, float rhs);
             friend bool operator==(const Matrix& lhs, const Matrix& rhs);
 
         private:
@@ -23,12 +24,17 @@ namespace linear_algebra
             uint32_t width;
             uint32_t height;
 
+            bool is_fully_populated;
+            int32_t next_row_i_to_populate;
+            int32_t next_column_i_to_populate;
+
             float array_1x1[1][1];
             float array_2x2[2][2];
             float array_3x3[3][3];
             float array_4x4[4][4];
     };
 
+    void operator<<(Matrix& lhs, float rhs);
     bool operator==(const Matrix& lhs, const Matrix& rhs);
 }
 

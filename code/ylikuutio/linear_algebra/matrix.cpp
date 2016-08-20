@@ -10,6 +10,9 @@ namespace linear_algebra
         // constructor.
         this->width = width;
         this->height = height;
+        this->next_row_i_to_populate = 0;
+        this->next_column_i_to_populate = 0;
+        this->is_fully_populated = false;
 
         if (this->width == this->height)
         {
@@ -25,6 +28,70 @@ namespace linear_algebra
 
     Matrix::~Matrix()
     {
+    }
+
+    void operator<<(Matrix& lhs, float rhs)
+    {
+        if (!lhs.is_square)
+        {
+            // TODO: Add support for non-square matrices!
+            return;
+        }
+
+        while (!lhs.is_fully_populated)
+        {
+            switch (lhs.square_size)
+            {
+                case 1:
+                    lhs.array_1x1[0][0] = rhs;
+                    lhs.is_fully_populated = true;
+                    return;
+                case 2:
+                    lhs.array_2x2[lhs.next_row_i_to_populate][lhs.next_column_i_to_populate++] = rhs;
+
+                    if (lhs.next_column_i_to_populate >= lhs.width)
+                    {
+                        lhs.next_column_i_to_populate = 0;
+
+                        if (++lhs.next_row_i_to_populate >= lhs.height)
+                        {
+                            lhs.is_fully_populated = true;
+                            return;
+                        }
+                    }
+                    break;
+                case 3:
+                    lhs.array_3x3[lhs.next_row_i_to_populate][lhs.next_column_i_to_populate++] = rhs;
+
+                    if (lhs.next_column_i_to_populate >= lhs.width)
+                    {
+                        lhs.next_column_i_to_populate = 0;
+
+                        if (++lhs.next_row_i_to_populate >= lhs.height)
+                        {
+                            lhs.is_fully_populated = true;
+                            return;
+                        }
+                    }
+                    break;
+                case 4:
+                    lhs.array_4x4[lhs.next_row_i_to_populate][lhs.next_column_i_to_populate++] = rhs;
+
+                    if (lhs.next_column_i_to_populate >= lhs.width)
+                    {
+                        lhs.next_column_i_to_populate = 0;
+
+                        if (++lhs.next_row_i_to_populate >= lhs.height)
+                        {
+                            lhs.is_fully_populated = true;
+                            return;
+                        }
+                    }
+                    break;
+                default:
+                    return;
+            }
+        }
     }
 
     bool operator==(const Matrix& lhs, const Matrix& rhs)
