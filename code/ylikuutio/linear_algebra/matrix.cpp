@@ -12,6 +12,12 @@ namespace linear_algebra
         this->height = height;
         this->array_size = this->width * this->height;
         this->array_of_arrays = new float*[this->height];
+
+        for (uint32_t i = 0; i < this->height; i++)
+        {
+            this->array_of_arrays[i] = new float[this->width];
+        }
+
         this->is_fully_populated = false;
 
         if (this->width == this->height)
