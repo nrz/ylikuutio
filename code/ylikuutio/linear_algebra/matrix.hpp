@@ -1,16 +1,26 @@
 #ifndef __MATRIX_HPP_INCLUDED
 #define __MATRIX_HPP_INCLUDED
 
+// Include standard headers
+#include <stdint.h> // uint32_t etc.
+
 namespace linear_algebra
 {
     class Matrix
     {
         public:
             // constructor.
-            Matrix();
+            Matrix(uint32_t width, uint32_t height);
 
             // destructor.
             ~Matrix();
+
+        private:
+            uint32_t width;
+            uint32_t height;
+
+            bool is_square;
+            uint32_t square_size;
     };
 }
 
