@@ -15,8 +15,8 @@ namespace linear_algebra
             // destructor.
             ~Matrix();
 
-            friend void operator<<(Matrix& lhs, float rhs);
-            friend bool operator==(const Matrix& lhs, const Matrix& rhs);
+            void operator<<(float rhs);
+            bool operator==(const Matrix& rhs);
 
         private:
             bool is_square;
@@ -34,8 +34,6 @@ namespace linear_algebra
             float array_4x4[4][4];
     };
 
-    void operator<<(Matrix& lhs, float rhs);
-    bool operator==(const Matrix& lhs, const Matrix& rhs);
 }
 
 #endif
