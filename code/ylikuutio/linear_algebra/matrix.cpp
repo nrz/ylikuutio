@@ -11,7 +11,7 @@ namespace linear_algebra
         this->width = width;
         this->height = height;
         this->array_size = this->width * this->height;
-        this->array_of_arrays = new float*[this->array_size];
+        this->array_of_arrays = new float*[this->height];
         this->is_fully_populated = false;
 
         if (this->width == this->height)
