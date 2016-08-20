@@ -7,10 +7,10 @@ namespace linear_algebra
 {
     Matrix::Matrix(uint32_t width, uint32_t height)
     {
+        // constructor.
         this->width = width;
         this->height = height;
 
-        // constructor.
         if (this->width == this->height)
         {
             this->is_square = true;
