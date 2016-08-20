@@ -11,7 +11,7 @@ namespace linear_algebra
         this->width = width;
         this->height = height;
         this->array_size = this->width * this->height;
-        this->array = new float[this->array_size];
+        this->array_of_arrays = new float*[this->array_size];
         this->is_fully_populated = false;
 
         if (this->width == this->height)
@@ -26,21 +26,31 @@ namespace linear_algebra
 
     Matrix::~Matrix()
     {
-        delete this->array;
+        delete this->array_of_arrays;
     }
 
-    void Matrix::operator<<(float rhs)
+    void Matrix::operator<<(const float rhs)
     {
         if (this->is_fully_populated)
         {
+            // Array is already fully populated. Nothing to do.
             return;
         }
 
-        this->array[this->next_i_to_populate++] = rhs;
+        // First, get the slice.
+        float* my_array = this->array_of_arrays[this->next_y_to_populate];
 
-        if (this->next_i_to_populate >= this->array_size)
+        // Then store the value.
+        my_array[this->next_x_to_populate++] = rhs;
+
+        if (this->next_x_to_populate >= this->width)
         {
-            this->is_fully_populated = true;
+            this->next_x_to_populate = 0;
+
+            if (++this->next_y_to_populate >= this->height)
+            {
+                this->is_fully_populated = true;
+            }
         }
     }
 
@@ -54,23 +64,24 @@ namespace linear_algebra
             return false;
         }
 
-        for (uint32_t i = 0; i < this->array_size; i++)
+
+        for (uint32_t y = 0; y < this->height; y++)
         {
-            if (this->array[i] != rhs.array[i])
+            // Get the slices of both arrays.
+            float* my_array = this->array_of_arrays[y];
+            float* other_array = rhs.array_of_arrays[y];
+
+            for (uint32_t x = 0; x < this->width; x++)
             {
-                return false;
+                if (my_array[x] != other_array[x])
+                {
+                    // Arrays are not identical.
+                    return false;
+                }
             }
         }
-    }
 
-    float* Matrix::operator()(const uint32_t y, const uint32_t x)
-    {
-        if (y >= this->height || x >= this->width)
-        {
-            return nullptr;
-        }
-
-        uint32_t array_i = y * this->width + x;
-        return this->array + array_i;
+        // Everything matches. Arrays are identical.
+        return true;
     }
 }

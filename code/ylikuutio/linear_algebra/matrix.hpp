@@ -15,9 +15,27 @@ namespace linear_algebra
             // destructor.
             ~Matrix();
 
-            void operator<<(float rhs);
+            // Inspired by http://stackoverflow.com/questions/6969881/operator-overload/6969904#6969904
+            class Proxy
+            {
+                public:
+                    Proxy(float* proxy_array) : proxy_array(proxy_array) { }
+
+                    float& operator[](const uint32_t index)
+                    {
+                        return proxy_array[index];
+                    }
+
+                private:
+                    float* proxy_array;
+            };
+
+            void operator<<(const float rhs);
             bool operator==(const Matrix& rhs);
-            float* operator()(const uint32_t y, const uint32_t x);
+            Proxy operator[](uint32_t index)
+            {
+                return Proxy(array_of_arrays[index]);
+            }
 
         private:
             bool is_square;
@@ -26,9 +44,10 @@ namespace linear_algebra
             uint32_t array_size;
 
             bool is_fully_populated;
-            int32_t next_i_to_populate;
+            int32_t next_y_to_populate;
+            int32_t next_x_to_populate;
 
-            float* array;
+            float** array_of_arrays;
     };
 
 }
