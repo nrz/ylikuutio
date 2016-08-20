@@ -16,11 +16,11 @@ namespace linear_algebra
             ~Matrix();
 
         private:
+            bool is_square;
+            uint32_t square_size;
             uint32_t width;
             uint32_t height;
 
-            bool is_square;
-            uint32_t square_size;
     };
 }
 
