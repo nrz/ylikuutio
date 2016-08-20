@@ -72,7 +72,6 @@ namespace linear_algebra
             return false;
         }
 
-
         for (uint32_t y = 0; y < this->height; y++)
         {
             // Get the slices of both arrays.
@@ -88,7 +87,6 @@ namespace linear_algebra
                 }
             }
         }
-
         // Everything matches. Arrays are identical.
         return true;
     }
