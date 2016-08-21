@@ -5,6 +5,7 @@
 #include "shader.hpp"
 #include "material.hpp"
 #include "object.hpp"
+#include "species_or_glyph.hpp"
 #include "render_templates.hpp"
 #include "code/ylikuutio/loaders/obj_loader.hpp"
 #include "code/ylikuutio/loaders/ascii_grid_loader.hpp"
