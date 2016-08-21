@@ -3,12 +3,12 @@
 
 #include "code/ylikuutio/ontology/model.hpp"
 
-// Each `Chunk` contains `Triangle` objects.
-// The `Chunk` in which a given `Triangle` belongs to is based on either
-// on its center or its centroid. Each `Triangle` belongs to exactly one
-// `Chunk`. Moving the vertices of the `Triangle` may move it to some
+// Each `Chunk` contains `Triangle3D` objects.
+// The `Chunk` in which a given `Triangle3D` belongs to is based on either
+// on its center or its centroid. Each `Triangle3D` belongs to exactly one
+// `Chunk`. Moving the vertices of the `Triangle3D` may move it to some
 // other `Chunk` (to an adjacent `Chunk` or to a farther `Chunk`), as
-// moving vertices moves the centroid and the center of the `Triangle`.
+// moving vertices moves the centroid and the center of the `Triangle3D`.
 //
 // The content of any `Chunk` can be based either on some predefined
 // data (eg. height map data, laser scanning data etc.) or procedurally
