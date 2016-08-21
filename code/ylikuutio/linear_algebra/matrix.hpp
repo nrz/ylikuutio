@@ -12,6 +12,9 @@ namespace linear_algebra
             // constructor.
             Matrix(uint32_t width, uint32_t height);
 
+            // copy constructor.
+            Matrix(Matrix& old_matrix);
+
             // destructor.
             ~Matrix();
 

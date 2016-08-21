@@ -33,6 +33,47 @@ namespace linear_algebra
         }
     }
 
+    Matrix::Matrix(Matrix& old_matrix)
+    {
+        // copy constructor.
+        this->width = old_matrix.width;
+        this->height = old_matrix.height;
+        this->array_size = this->width * this->height;
+        this->array_of_arrays = new float*[this->height];
+
+        for (uint32_t i = 0; i < this->height; i++)
+        {
+            this->array_of_arrays[i] = new float[this->width];
+        }
+
+        this->next_y_to_populate = old_matrix.next_y_to_populate;
+        this->next_x_to_populate = old_matrix.next_x_to_populate;
+        this->is_fully_populated = old_matrix.is_fully_populated;
+
+        // Copy values from old matrix (deep copy).
+        // Don't care whether `old_matrix` is fully populated or not.
+        for (uint32_t y = 0; y < this->height; y++)
+        {
+            // Get the slices of both arrays.
+            float* my_array = this->array_of_arrays[y];
+            float* other_array = old_matrix.array_of_arrays[y];
+
+            for (uint32_t x = 0; x < this->width; x++)
+            {
+                my_array[x] = other_array[x];
+            }
+        }
+
+        if (this->width == this->height)
+        {
+            this->is_square = true;
+        }
+        else
+        {
+            this->is_square = false;
+        }
+    }
+
     Matrix::~Matrix()
     {
         delete[] this->array_of_arrays;
