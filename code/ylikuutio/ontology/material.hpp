@@ -19,6 +19,11 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
+namespace space_partition
+{
+    class Chunk;
+}
+
 namespace ontology
 {
     class Species;
@@ -73,8 +78,10 @@ namespace ontology
 
             std::vector<ontology::Species*> species_pointer_vector;
             std::vector<ontology::VectorFont*> vector_font_pointer_vector;
+            std::vector<space_partition::Chunk*> chunk_pointer_vector;
             std::queue<uint32_t> free_speciesID_queue;
             std::queue<uint32_t> free_vector_fontID_queue;
+            std::queue<uint32_t> free_chunkID_queue;
 
             std::string texture_file_format;       // type of the model file, eg. `"bmp"`.
             std::string texture_filename;          // filename of the model file.
