@@ -2,6 +2,9 @@
 #define __CHUNK_HPP_INCLUDED
 
 #include "code/ylikuutio/ontology/model.hpp"
+#include "code/ylikuutio/ontology/material.hpp"
+#include "code/ylikuutio/ontology/render_templates.hpp"
+#include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Each `Chunk` contains `Triangle3D` objects.
 // The `Chunk` in which a given `Triangle3D` belongs to is based on either
@@ -34,6 +37,25 @@ namespace space_partition
 
             // destructor.
             ~Chunk();
+
+            // this method sets pointer to this species to nullptr, sets `parent_pointer` according to the input, and requests a new `childID` from the new texture.
+            void bind_to_new_parent(ontology::Material* new_material_pointer);
+
+            // this method sets a object pointer.
+            void set_object_pointer(uint32_t childID, ontology::Object* child_pointer);
+
+            // this method gets a object ID and removes it from the `free_objectID_queue` if it was popped from the queue.
+            uint32_t get_objectID();
+
+            glm::vec3 light_position;            // light position.
+
+            friend class Object;
+            template<class T1>
+                friend void ontology::render_children(std::vector<T1>& child_pointer_vector);
+            template<class T1>
+                friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<uint32_t>& free_childID_queue);
+            template<class T1, class T2>
+                friend void hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent_pointer, std::vector<T1>& old_child_pointer_vector, std::queue<uint32_t>& old_free_childID_queue);
 
         private:
             void bind_to_parent();

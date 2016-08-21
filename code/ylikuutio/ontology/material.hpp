@@ -47,6 +47,7 @@ namespace ontology
             friend class Glyph;
             friend class Species;
             friend class Object;
+            friend class space_partition::Chunk;
             template<class T1>
                 friend void render_children(std::vector<T1>& child_pointer_vector);
             template<class T1>
@@ -63,6 +64,9 @@ namespace ontology
 
             // this method sets `VectorFont` pointer.
             void set_vector_font_pointer(uint32_t childID, ontology::VectorFont* child_pointer);
+
+            // this method sets `Chunk` pointer.
+            void set_chunk_pointer(uint32_t childID, space_partition::Chunk* child_pointer);
 
             // this method sets a world species pointer.
             void set_terrain_species_pointer(ontology::Species* terrain_species_pointer);
