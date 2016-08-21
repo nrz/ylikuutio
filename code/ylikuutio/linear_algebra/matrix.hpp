@@ -53,6 +53,7 @@ namespace linear_algebra
             float det();
 
             friend Matrix linear_algebra::operator+(Matrix& lhs, Matrix& rhs);
+            friend Matrix linear_algebra::operator-(Matrix& lhs, Matrix& rhs);
             friend Matrix linear_algebra::operator*(Matrix& lhs, Matrix& rhs);
 
         private:
@@ -69,6 +70,7 @@ namespace linear_algebra
     };
 
     Matrix operator+(const Matrix& lhs, const Matrix& rhs);
+    Matrix operator-(const Matrix& lhs, const Matrix& rhs);
     Matrix operator*(const Matrix& lhs, const Matrix& rhs);
 }
 

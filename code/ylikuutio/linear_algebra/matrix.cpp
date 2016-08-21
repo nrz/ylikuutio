@@ -333,6 +333,35 @@ namespace linear_algebra
         return result_matrix;
     }
 
+    Matrix operator-(Matrix& lhs, Matrix& rhs)
+    {
+        // Matrix subtraction.
+        if (lhs.height != rhs.height || lhs.width != rhs.width)
+        {
+            // Matrix dimensions do not match!
+            // Matrix addition is not defined.
+            // Populate `lhs` with NAN to signal error.
+            std::cerr << "Matrix dimensions do not match!\n";
+            Matrix result_matrix(1, 1);
+            result_matrix << NAN;
+            return result_matrix;
+        }
+
+        // OK, dimensions match.
+        uint32_t target_height = lhs.height;
+        uint32_t target_width = lhs.width;
+        Matrix result_matrix(target_height, target_width);
+
+        for (uint32_t y = 0; y < target_height; y++)
+        {
+            for (uint32_t x = 0; x < target_width; x++)
+            {
+                result_matrix << lhs.operator[](y).operator[](x) - rhs.operator[](y).operator[](x);
+            }
+        }
+        return result_matrix;
+    }
+
     Matrix operator*(Matrix& lhs, Matrix& rhs)
     {
         // Matrix multiplication.
