@@ -521,8 +521,8 @@ add_library(ylikuutio
     code/ylikuutio/file/file_loader.hpp
 
     # geometry, in alphabetical order.
-    # code/ylikuutio/geometry/line.cpp
-    # code/ylikuutio/geometry/line.hpp
+    code/ylikuutio/geometry/line.cpp
+    code/ylikuutio/geometry/line.hpp
     code/ylikuutio/geometry/line2D.cpp
     code/ylikuutio/geometry/line2D.hpp
     # code/ylikuutio/geometry/line3D.cpp
