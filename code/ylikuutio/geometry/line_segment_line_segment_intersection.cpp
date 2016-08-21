@@ -10,9 +10,6 @@
 #include <glm/glm.hpp> // glm
 #endif
 
-// Include Eigen
-#include <Eigen/Dense>
-
 // Include standard headers
 #include <cmath>    // NAN, std::isnan, std::pow
 
