@@ -36,6 +36,8 @@ namespace space_partition
             ~Chunk();
 
         private:
+            void bind_to_parent();
+
             void render();
     };
 }
