@@ -240,4 +240,20 @@ namespace linear_algebra
         }
         return *this;
     }
+
+    Matrix& Matrix::operator+=(const Matrix& rhs)
+    {
+        for (uint32_t y = 0; y < this->height; y++)
+        {
+            // Get the slices of both arrays.
+            float* my_array = this->array_of_arrays[y];
+            float* other_array = rhs.array_of_arrays[y];
+
+            for (uint32_t x = 0; x < this->width; x++)
+            {
+                my_array[x] += other_array[x];
+            }
+        }
+        return *this;
+    }
 }
