@@ -10,7 +10,7 @@ namespace linear_algebra
     {
         public:
             // constructor.
-            Matrix(uint32_t width, uint32_t height);
+            Matrix(uint32_t height, uint32_t width);
 
             // copy constructor.
             Matrix(Matrix& old_matrix);
