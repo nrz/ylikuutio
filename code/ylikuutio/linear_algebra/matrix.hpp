@@ -42,6 +42,7 @@ namespace linear_algebra
             Matrix& operator+=(const float rhs);
             Matrix& operator-=(const float rhs);
             Matrix& operator*=(const float rhs);
+            Matrix& operator/=(const float rhs);
             Matrix& operator+=(const Matrix& rhs);
             Matrix& operator-=(const Matrix& rhs);
             Proxy operator[](const uint32_t index)
