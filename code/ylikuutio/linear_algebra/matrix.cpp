@@ -76,7 +76,7 @@ namespace linear_algebra
 
     Matrix::~Matrix()
     {
-        delete[] this->array_of_arrays;
+        // delete this->array_of_arrays;
     }
 
     float Matrix::det()
