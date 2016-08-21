@@ -1,15 +1,13 @@
 #include "line_line_intersection.hpp"
 #include "line2D.hpp"
 #include "line3D.hpp"
+#include "code/ylikuutio/linear_algebra/matrix.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
 #define __GLM_GLM_HPP_INCLUDED
 #include <glm/glm.hpp> // glm
 #endif
-
-// Include Eigen
-#include <Eigen/Dense>
 
 // Include standard headers
 #include <cmath>    // NAN, std::isnan, std::pow
@@ -20,11 +18,10 @@ namespace geometry
     {
         // See http://mathworld.wolfram.com/Line-LineIntersection.html
 
-        Eigen::Matrix2f lower_matrix_for_solving_x_and_y;
-        lower_matrix_for_solving_x_and_y <<
-            line1->x1_minus_x2, line1->y1_minus_y2,  \
-            line2->x1_minus_x2, line2->y1_minus_y2;
-        float det_lower_matrix_for_solving_x_and_y = lower_matrix_for_solving_x_and_y.determinant();
+        linear_algebra::Matrix lower_matrix_for_solving_x_and_y(2, 2);
+        lower_matrix_for_solving_x_and_y << line1->x1_minus_x2; lower_matrix_for_solving_x_and_y << line1->y1_minus_y2;
+        lower_matrix_for_solving_x_and_y << line2->x1_minus_x2; lower_matrix_for_solving_x_and_y << line2->y1_minus_y2;
+        float det_lower_matrix_for_solving_x_and_y = lower_matrix_for_solving_x_and_y.det();
 
         if (det_lower_matrix_for_solving_x_and_y == 0.0f)
         {
@@ -35,17 +32,15 @@ namespace geometry
         // Lines do intersect, so let's compute where!
         // TODO: Implement support for vertical lines!
 
-        Eigen::Matrix2f upper_matrix_for_solving_x;
-        upper_matrix_for_solving_x <<
-            line1->determinant, line1->x1_minus_x2, \
-            line2->determinant, line2->x1_minus_x2;
-        float det_upper_matrix_for_solving_x = upper_matrix_for_solving_x.determinant();
+        linear_algebra::Matrix upper_matrix_for_solving_x(2, 2);
+        upper_matrix_for_solving_x << line1->determinant; upper_matrix_for_solving_x << line1->x1_minus_x2;
+        upper_matrix_for_solving_x << line2->determinant; upper_matrix_for_solving_x << line2->x1_minus_x2;
+        float det_upper_matrix_for_solving_x = upper_matrix_for_solving_x.det();
 
-        Eigen::Matrix2f upper_matrix_for_solving_y;
-        upper_matrix_for_solving_y <<
-            line1->determinant, line1->y1_minus_y2, \
-            line2->determinant, line2->y1_minus_y2;
-        float det_upper_matrix_for_solving_y = upper_matrix_for_solving_y.determinant();
+        linear_algebra::Matrix upper_matrix_for_solving_y(2, 2);
+        upper_matrix_for_solving_y << line1->determinant; upper_matrix_for_solving_y << line1->y1_minus_y2;
+        upper_matrix_for_solving_y << line2->determinant; upper_matrix_for_solving_y << line2->y1_minus_y2;
+        float det_upper_matrix_for_solving_y = upper_matrix_for_solving_y.det();
 
         // Compute x and y coordinates.
         float x = det_upper_matrix_for_solving_x / det_lower_matrix_for_solving_x_and_y;

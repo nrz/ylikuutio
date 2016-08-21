@@ -527,8 +527,8 @@ add_library(ylikuutio
     code/ylikuutio/geometry/line2D.hpp
     code/ylikuutio/geometry/line3D.cpp
     code/ylikuutio/geometry/line3D.hpp
-    # code/ylikuutio/geometry/line_line_intersection.cpp
-    # code/ylikuutio/geometry/line_line_intersection.hpp
+    code/ylikuutio/geometry/line_line_intersection.cpp
+    code/ylikuutio/geometry/line_line_intersection.hpp
     # code/ylikuutio/geometry/line_segment.cpp
     # code/ylikuutio/geometry/line_segment.hpp
     # code/ylikuutio/geometry/line_segment2D.cpp
@@ -694,8 +694,8 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/geometry/line.hpp
         code/ylikuutio/geometry/line2D.cpp
         code/ylikuutio/geometry/line2D.hpp
-        # code/ylikuutio/geometry/line_line_intersection.cpp
-        # code/ylikuutio/geometry/line_line_intersection.hpp
+        code/ylikuutio/geometry/line_line_intersection.cpp
+        code/ylikuutio/geometry/line_line_intersection.hpp
         # code/ylikuutio/geometry/line_segment2D.cpp
         # code/ylikuutio/geometry/line_segment2D.hpp
         # code/ylikuutio/geometry/line_segment_line_segment_intersection.cpp
@@ -726,7 +726,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/googletest/test_globals.cpp
         code/ylikuutio/tests/googletest/test_heightmap_loader.cpp
         code/ylikuutio/tests/googletest/test_line2D.cpp
-        # code/ylikuutio/tests/googletest/test_line_line_intersection.cpp
+        code/ylikuutio/tests/googletest/test_line_line_intersection.cpp
         # code/ylikuutio/tests/googletest/test_line_segment_line_segment_intersection.cpp
         code/ylikuutio/tests/googletest/test_matrix.cpp
         code/ylikuutio/tests/googletest/test_pugixml.cpp
