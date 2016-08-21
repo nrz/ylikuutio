@@ -39,6 +39,8 @@ namespace space_partition
             void bind_to_parent();
 
             void render();
+
+            ontology::Material* parent_pointer;  // pointer to `Material`.
     };
 }
 
