@@ -40,6 +40,7 @@ namespace linear_algebra
             Matrix& operator--();
             Matrix operator--(int);
             Matrix& operator+=(float rhs);
+            Matrix& operator-=(float rhs);
             Proxy operator[](const uint32_t index)
             {
                 return Proxy(array_of_arrays[index]);
