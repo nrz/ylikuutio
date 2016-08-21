@@ -35,6 +35,8 @@ namespace linear_algebra
 
             void operator<<(const float rhs);
             bool operator==(const Matrix& rhs);
+            Matrix& operator++();
+            Matrix operator++(int);
             Proxy operator[](const uint32_t index)
             {
                 return Proxy(array_of_arrays[index]);

@@ -166,4 +166,26 @@ namespace linear_algebra
         // Everything matches. Arrays are identical.
         return true;
     }
+
+    Matrix& Matrix::operator++()
+    {
+        for (uint32_t y = 0; y < this->height; y++)
+        {
+            // Get the slice.
+            float* my_array = this->array_of_arrays[y];
+
+            for (uint32_t x = 0; x < this->width; x++)
+            {
+                my_array[x]++;
+            }
+        }
+        return *this;
+    }
+
+    Matrix Matrix::operator++(int)
+    {
+        Matrix tmp(*this); // Make a copy.
+        this->operator++();
+        return tmp; // Return old matrix.
+    }
 }
