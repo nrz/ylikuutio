@@ -430,7 +430,7 @@ if(CROSS_COMPILE_FOR_WINDOWS)
 endif()
 
 # Ylikuutio
-add_library(ylikuutio
+add_library(ylikuutio STATIC
     # callback_system, in alphabetical order
     code/ylikuutio/callback_system/callback_engine.cpp
     code/ylikuutio/callback_system/callback_engine.hpp
