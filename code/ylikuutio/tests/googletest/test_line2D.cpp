@@ -1,14 +1,12 @@
 #include "gtest/gtest.h"
 #include "code/ylikuutio/geometry/line2D.hpp"
+#include "code/ylikuutio/linear_algebra/matrix.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
 #define __GLM_GLM_HPP_INCLUDED
 #include <glm/glm.hpp> // glm
 #endif
-
-// Include Eigen
-#include <Eigen/Dense>
 
 // Include standard headers
 #include <iostream> // std::cout, std::cin, std::cerr

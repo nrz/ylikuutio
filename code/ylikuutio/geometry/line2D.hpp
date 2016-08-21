@@ -2,15 +2,13 @@
 #define __LINE2D_HPP_INCLUDED
 
 #include "line.hpp"
+#include "code/ylikuutio/linear_algebra/matrix.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
 #define __GLM_GLM_HPP_INCLUDED
 #include <glm/glm.hpp> // glm
 #endif
-
-// Include Eigen
-#include <Eigen/Dense>
 
 // Include standard headers
 #include <vector>   // std::vector
@@ -24,11 +22,10 @@ namespace geometry
             Line2D(std::vector<float> point1, std::vector<float> point2)
                 : Line(point1, point2)
             {
-                Eigen::Matrix2f line_points_matrix;
-                line_points_matrix <<
-                    this->point1.at(0), this->point1.at(1), \
-                    this->point2.at(0), this->point2.at(1);
-                this->determinant = line_points_matrix.determinant();
+                linear_algebra::Matrix line_points_matrix(2, 2);
+                line_points_matrix << this->point1.at(0); line_points_matrix << this->point1.at(1);
+                line_points_matrix << this->point2.at(0); line_points_matrix << this->point2.at(1);
+                this->determinant = line_points_matrix.det();
 
                 this->x1 = this->point1.at(0);
                 this->y1 = this->point1.at(1);
