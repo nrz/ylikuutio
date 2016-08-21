@@ -525,8 +525,8 @@ add_library(ylikuutio
     code/ylikuutio/geometry/line.hpp
     code/ylikuutio/geometry/line2D.cpp
     code/ylikuutio/geometry/line2D.hpp
-    # code/ylikuutio/geometry/line3D.cpp
-    # code/ylikuutio/geometry/line3D.hpp
+    code/ylikuutio/geometry/line3D.cpp
+    code/ylikuutio/geometry/line3D.hpp
     # code/ylikuutio/geometry/line_line_intersection.cpp
     # code/ylikuutio/geometry/line_line_intersection.hpp
     # code/ylikuutio/geometry/line_segment.cpp
