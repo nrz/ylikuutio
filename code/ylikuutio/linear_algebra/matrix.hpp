@@ -52,6 +52,8 @@ namespace linear_algebra
 
             float det();
 
+            friend Matrix linear_algebra::operator*(Matrix& lhs, Matrix& rhs);
+
         private:
             bool is_square;
             uint32_t width;
@@ -65,6 +67,7 @@ namespace linear_algebra
             float** array_of_arrays;
     };
 
+    Matrix operator*(const Matrix& lhs, const Matrix& rhs);
 }
 
 #endif

@@ -2,6 +2,7 @@
 
 // Include standard headers
 #include <cmath>    // NAN, std::isnan, std::pow
+#include <iostream> // std::cout, std::cin, std::cerr
 #include <stdint.h> // uint32_t etc.
 
 namespace linear_algebra
@@ -301,5 +302,42 @@ namespace linear_algebra
             }
         }
         return *this;
+    }
+
+    Matrix operator*(Matrix& lhs, Matrix& rhs)
+    {
+        // Matrix multiplication.
+        if (lhs.width != rhs.height)
+        {
+            // Matrix dimensions do not match!
+            // Matrix multiplication is not defined.
+            // Populate `lhs` with NAN to signal error.
+            std::cerr << "Matrix dimensions do not match!\n";
+            Matrix result_matrix(1, 1);
+            result_matrix << NAN;
+            return result_matrix;
+        }
+
+        // OK, dimensions match.
+        uint32_t target_height = lhs.height;
+        uint32_t target_width = rhs.width;
+        Matrix result_matrix(target_height, target_width);
+
+        for (uint32_t target_y = 0; target_y < target_height; target_y++)
+        {
+            for (uint32_t target_x = 0; target_x < target_width; target_x++)
+            {
+                float target_value = 0.0f;
+
+                for (uint32_t lhs_x = 0, rhs_y = 0; lhs_x < lhs.width && rhs_y < rhs.height; lhs_x++, rhs_y++)
+                {
+                    // target_value += lhs[target_y][lhs_x] * rhs[rhs_y][target_x];
+
+                    target_value += lhs.operator[](target_y).operator[](lhs_x) * rhs.operator[](rhs_y).operator[](target_x);
+                }
+                result_matrix << target_value;
+            }
+        }
+        return result_matrix;
     }
 }
