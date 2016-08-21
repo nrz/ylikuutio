@@ -182,7 +182,7 @@ namespace linear_algebra
         return *this;
     }
 
-    Matrix Matrix::operator++(int)
+    Matrix Matrix::operator++(const int)
     {
         Matrix tmp(*this); // Make a copy.
         this->operator++();
@@ -204,7 +204,7 @@ namespace linear_algebra
         return *this;
     }
 
-    Matrix Matrix::operator--(int)
+    Matrix Matrix::operator--(const int)
     {
         Matrix tmp(*this); // Make a copy.
         this->operator--();

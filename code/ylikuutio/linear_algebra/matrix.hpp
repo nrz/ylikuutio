@@ -36,11 +36,11 @@ namespace linear_algebra
             void operator<<(const float rhs);
             bool operator==(const Matrix& rhs);
             Matrix& operator++();
-            Matrix operator++(int);
+            Matrix operator++(const int);
             Matrix& operator--();
-            Matrix operator--(int);
-            Matrix& operator+=(float rhs);
-            Matrix& operator-=(float rhs);
+            Matrix operator--(const int);
+            Matrix& operator+=(const float rhs);
+            Matrix& operator-=(const float rhs);
             Matrix& operator+=(const Matrix& rhs);
             Matrix& operator-=(const Matrix& rhs);
             Proxy operator[](const uint32_t index)
