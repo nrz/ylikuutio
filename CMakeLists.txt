@@ -551,6 +551,8 @@ add_library(ylikuutio STATIC
     # space partition, in alphabetical order.
     code/ylikuutio/space_partition/chunk.cpp
     code/ylikuutio/space_partition/chunk.hpp
+    code/ylikuutio/space_partition/chunk_master.cpp
+    code/ylikuutio/space_partition/chunk_master.hpp
     code/ylikuutio/space_partition/triangle3D.cpp
     code/ylikuutio/space_partition/triangle3D.hpp
     code/ylikuutio/space_partition/vertex_graph.cpp
