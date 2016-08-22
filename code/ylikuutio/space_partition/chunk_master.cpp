@@ -6,6 +6,14 @@
 
 namespace space_partition
 {
+    void ChunkMaster::bind_to_parent()
+    {
+        hierarchy::bind_child_to_parent<space_partition::ChunkMaster*>(
+                this,
+                this->parent_pointer->chunk_master_pointer_vector,
+                this->parent_pointer->free_chunk_masterID_queue);
+    }
+
     ChunkMaster::ChunkMaster(InputParametersToAnyValueCallback callback)
     {
         // constructor.
@@ -19,6 +27,9 @@ namespace space_partition
         // destroy all chunks of this material.
         std::cout << "All chunks of this material will be destroyed.\n";
         hierarchy::delete_children<space_partition::Chunk*>(this->chunk_pointer_vector);
+
+        // set pointer to this `ChunkMaster` to nullptr.
+        this->parent_pointer->set_chunk_master_pointer(this->childID, nullptr);
     }
 
     void ChunkMaster::set_chunk_pointer(uint32_t childID, space_partition::Chunk* child_pointer)

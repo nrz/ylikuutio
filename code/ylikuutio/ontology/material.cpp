@@ -92,6 +92,11 @@ namespace ontology
         hierarchy::set_child_pointer(childID, child_pointer, this->vector_font_pointer_vector, this->free_vector_fontID_queue);
     }
 
+    void Material::set_chunk_master_pointer(uint32_t childID, space_partition::ChunkMaster* child_pointer)
+    {
+        hierarchy::set_child_pointer(childID, child_pointer, this->chunk_master_pointer_vector, this->free_chunk_masterID_queue);
+    }
+
     void Material::bind_to_new_parent(ontology::Shader* new_shader_pointer)
     {
         hierarchy::bind_child_to_new_parent<ontology::Material*, ontology::Shader*>(this, new_shader_pointer, this->parent_pointer->material_pointer_vector, this->parent_pointer->free_materialID_queue);
