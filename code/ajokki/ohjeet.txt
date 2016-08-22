@@ -14,6 +14,9 @@ Tiedoston tallennus `*.bmp`-formaatissa (toistaiseksi pitää olla 24-bittinen B
   -> 24 bits (R8 G8 B8)
   -> Export
 
+Marching cubes algorithm
+Marching tetrahedra algorithm
+
 Maapallon korkeusdataa:
 http://wiki.openstreetmap.org/wiki/SRTM
 http://e4ftl01.cr.usgs.gov/SRTM/SRTMGL3.003/
