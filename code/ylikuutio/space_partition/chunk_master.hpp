@@ -26,7 +26,15 @@ namespace space_partition
             // destructor.
             ~ChunkMaster();
 
+            friend class Chunk;
+
         private:
+            // this method renders all `Chunk`s bound to this `ChunkMaster`.
+            void render();
+
+            // this method sets `Chunk` pointer.
+            void set_chunk_pointer(uint32_t childID, space_partition::Chunk* child_pointer);
+
             // Callback used to get the content based on x, y, z.
             InputParametersToAnyValueCallback callback;
 

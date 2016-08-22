@@ -19,11 +19,6 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
-namespace space_partition
-{
-    class Chunk;
-}
-
 namespace ontology
 {
     class Species;
@@ -47,7 +42,6 @@ namespace ontology
             friend class Glyph;
             friend class Species;
             friend class Object;
-            friend class space_partition::Chunk;
             template<class T1>
                 friend void render_children(std::vector<T1>& child_pointer_vector);
             template<class T1>
@@ -65,9 +59,6 @@ namespace ontology
             // this method sets `VectorFont` pointer.
             void set_vector_font_pointer(uint32_t childID, ontology::VectorFont* child_pointer);
 
-            // this method sets `Chunk` pointer.
-            void set_chunk_pointer(uint32_t childID, space_partition::Chunk* child_pointer);
-
             // this method sets a world species pointer.
             void set_terrain_species_pointer(ontology::Species* terrain_species_pointer);
 
@@ -82,10 +73,8 @@ namespace ontology
 
             std::vector<ontology::Species*> species_pointer_vector;
             std::vector<ontology::VectorFont*> vector_font_pointer_vector;
-            std::vector<space_partition::Chunk*> chunk_pointer_vector;
             std::queue<uint32_t> free_speciesID_queue;
             std::queue<uint32_t> free_vector_fontID_queue;
-            std::queue<uint32_t> free_chunkID_queue;
 
             std::string texture_file_format;       // type of the model file, eg. `"bmp"`.
             std::string texture_filename;          // filename of the model file.

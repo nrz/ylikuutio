@@ -32,9 +32,4 @@ namespace space_partition
     {
         hierarchy::set_child_pointer(childID, child_pointer, this->object_pointer_vector, this->free_objectID_queue);
     }
-
-    void Chunk::bind_to_new_parent(ontology::Material* new_material_pointer)
-    {
-        hierarchy::bind_child_to_new_parent<space_partition::Chunk*, ontology::Material*>(this, new_material_pointer, this->parent_pointer->chunk_pointer_vector, this->parent_pointer->free_chunkID_queue);
-    }
 }

@@ -2,7 +2,6 @@
 #include "vector_font.hpp"
 #include "species.hpp"
 #include "render_templates.hpp"
-#include "code/ylikuutio/space_partition/chunk.hpp"
 #include "code/ylikuutio/loaders/texture_loader.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
@@ -64,10 +63,6 @@ namespace ontology
         std::cout << "All fonts of this material will be destroyed.\n";
         hierarchy::delete_children<ontology::VectorFont*>(this->vector_font_pointer_vector);
 
-        // destroy all chunks of this material.
-        std::cout << "All chunks of this material will be destroyed.\n";
-        hierarchy::delete_children<space_partition::Chunk*>(this->chunk_pointer_vector);
-
         glDeleteTextures(1, &this->texture);
 
         // set pointer to this material to nullptr.
@@ -82,8 +77,7 @@ namespace ontology
         // Set our "myTextureSampler" sampler to user Texture Unit 0.
         glUniform1i(this->openGL_textureID, 0);
 
-        // render Material by calling `render()` function of each `Chunk`, of each `Species` and of each `VectorFont`.
-        ontology::render_children<space_partition::Chunk*>(this->chunk_pointer_vector);
+        // render `Material` by calling `render()` function of  each `Species` and of each `VectorFont`.
         ontology::render_children<ontology::Species*>(this->species_pointer_vector);
         ontology::render_children<ontology::VectorFont*>(this->vector_font_pointer_vector);
     }
@@ -96,11 +90,6 @@ namespace ontology
     void Material::set_vector_font_pointer(uint32_t childID, ontology::VectorFont* child_pointer)
     {
         hierarchy::set_child_pointer(childID, child_pointer, this->vector_font_pointer_vector, this->free_vector_fontID_queue);
-    }
-
-    void Material::set_chunk_pointer(uint32_t childID, space_partition::Chunk* child_pointer)
-    {
-        hierarchy::set_child_pointer(childID, child_pointer, this->chunk_pointer_vector, this->free_chunkID_queue);
     }
 
     void Material::bind_to_new_parent(ontology::Shader* new_shader_pointer)

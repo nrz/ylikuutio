@@ -1,6 +1,7 @@
 #ifndef __CHUNK_HPP_INCLUDED
 #define __CHUNK_HPP_INCLUDED
 
+#include "chunk_master.hpp"
 #include "code/ylikuutio/ontology/model.hpp"
 #include "code/ylikuutio/ontology/material.hpp"
 #include "code/ylikuutio/ontology/render_templates.hpp"
@@ -38,9 +39,6 @@ namespace space_partition
             // destructor.
             ~Chunk();
 
-            // this method sets pointer to this species to nullptr, sets `parent_pointer` according to the input, and requests a new `childID` from the new texture.
-            void bind_to_new_parent(ontology::Material* new_material_pointer);
-
             // this method sets a object pointer.
             void set_object_pointer(uint32_t childID, ontology::Object* child_pointer);
 
@@ -62,7 +60,7 @@ namespace space_partition
 
             void render();
 
-            ontology::Material* parent_pointer;  // pointer to `Material`.
+            space_partition::ChunkMaster* parent_pointer;  // pointer to `ChunkMaster`.
     };
 }
 
