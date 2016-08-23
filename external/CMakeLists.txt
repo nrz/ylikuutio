@@ -18,6 +18,9 @@ add_definitions(
 # pugixml
 add_subdirectory(pugixml)
 
+# FastNoiseSIMD
+add_subdirectory(FastNoiseSIMD)
+
 ### GLFW ###
 
 add_subdirectory(glfw-3.2)
@@ -25,6 +28,7 @@ add_subdirectory(glfw-3.2)
 include_directories(
     glfw-3.2/include/GLFW/
     glew-2.0.0/include/
+    FastNoiseSIMD/
 
     gdal-2.1.1/
     gdal-2.1.1/alg/

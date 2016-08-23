@@ -78,6 +78,7 @@ include_directories(
     external/glfw-3.2/include/
     external/glm-0.9.4.0/
     external/glew-2.0.0/include/
+    external/FastNoiseSIMD/
     external/pugixml/src/
 
     external/gdal-2.1.1/
@@ -555,6 +556,8 @@ add_library(ylikuutio STATIC
     code/ylikuutio/space_partition/chunk.hpp
     code/ylikuutio/space_partition/chunk_master.cpp
     code/ylikuutio/space_partition/chunk_master.hpp
+    code/ylikuutio/space_partition/terrain_generation_callbacks.cpp
+    code/ylikuutio/space_partition/terrain_generation_callbacks.hpp
     code/ylikuutio/space_partition/triangle3D.cpp
     code/ylikuutio/space_partition/triangle3D.hpp
     code/ylikuutio/space_partition/vertex_graph.cpp
