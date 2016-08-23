@@ -66,6 +66,8 @@ namespace space_partition
 
             std::vector<space_partition::Triangle3D*> triangle3D_pointer_vector;
             std::queue<uint32_t> free_triangle3D_ID_queue;
+
+            bool is_original; // If `Chunk` is original, if can be reconstructed using `get_content_callback`.
     };
 }
 

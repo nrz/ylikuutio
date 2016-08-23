@@ -14,6 +14,7 @@ namespace space_partition
     Chunk::Chunk()
     {
         // constructor.
+        this->is_original = true;
     }
 
     Chunk::~Chunk()
