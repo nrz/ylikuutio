@@ -41,15 +41,15 @@ namespace space_partition
             // destructor.
             ~Chunk();
 
-            // this method sets a object pointer.
-            void set_object_pointer(uint32_t childID, ontology::Object* child_pointer);
+            // this method sets a `triangle3D` pointer.
+            void set_triangle3D_pointer(uint32_t childID, space_partition::Triangle3D* child_pointer);
 
-            // this method gets a object ID and removes it from the `free_objectID_queue` if it was popped from the queue.
-            uint32_t get_objectID();
+            // this method gets a `triangle3D` ID and removes it from the `free_triangle3D_ID_queue` if it was popped from the queue.
+            uint32_t get_triangle3D_ID();
 
             glm::vec3 light_position;            // light position.
 
-            friend class Object;
+            friend class Triangle3D;
             template<class T1>
                 friend void ontology::render_children(std::vector<T1>& child_pointer_vector);
             template<class T1>
