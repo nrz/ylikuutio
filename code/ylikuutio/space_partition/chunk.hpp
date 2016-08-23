@@ -30,6 +30,8 @@
 
 namespace space_partition
 {
+    class Triangle3D;
+
     class Chunk: ontology::Model
     {
         public:
@@ -61,6 +63,9 @@ namespace space_partition
             void render();
 
             space_partition::ChunkMaster* parent_pointer;  // pointer to `ChunkMaster`.
+
+            std::vector<space_partition::Triangle3D*> triangle3D_pointer_vector;
+            std::queue<uint32_t> free_triangle3D_ID_queue;
     };
 }
 
