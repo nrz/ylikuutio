@@ -2,6 +2,7 @@
 #include "vector_font.hpp"
 #include "species.hpp"
 #include "render_templates.hpp"
+#include "code/ylikuutio/space_partition/chunk_master.hpp"
 #include "code/ylikuutio/loaders/texture_loader.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
@@ -62,6 +63,10 @@ namespace ontology
         // destroy all fonts of this material.
         std::cout << "All fonts of this material will be destroyed.\n";
         hierarchy::delete_children<ontology::VectorFont*>(this->vector_font_pointer_vector);
+
+        // destroy all chunk masters of this material.
+        std::cout << "All chunk masters of this material will be destroyed.\n";
+        hierarchy::delete_children<space_partition::ChunkMaster*>(this->chunk_master_pointer_vector);
 
         glDeleteTextures(1, &this->texture);
 
