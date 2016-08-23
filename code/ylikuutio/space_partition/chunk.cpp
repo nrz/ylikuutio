@@ -25,7 +25,15 @@ namespace space_partition
 
     void Chunk::render()
     {
-        // ontology::render_species_or_glyph<space_partition::Chunk*>(this);
+        // Render this `Chunk`.
+        // If any `Triangle3D` of the `Chunk` has changed,
+        // the vertex data of the `Chunk` needs to be reconstructed
+        // before rendering. Reconstruction (or concatenation) of
+        // vertex data may also be necessary even if the vertices of
+        // the `Triangle3D` objects of the `Chunk` are not modified, if
+        // vertices of some other `Triangle3D` are modified so that
+        // the center or centroid of that `Triangle3D` becomes part of
+        // this `Chunk`.
     }
 
     void Chunk::set_object_pointer(uint32_t childID, ontology::Object* child_pointer)
