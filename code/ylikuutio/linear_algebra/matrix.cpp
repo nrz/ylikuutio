@@ -12,7 +12,6 @@ namespace linear_algebra
         // constructor.
         this->width = width;
         this->height = height;
-        this->array_size = this->width * this->height;
         this->array_of_arrays = new float*[this->height];
 
         for (uint32_t i = 0; i < this->height; i++)
@@ -39,7 +38,6 @@ namespace linear_algebra
         // copy constructor.
         this->width = old_matrix.width;
         this->height = old_matrix.height;
-        this->array_size = this->width * this->height;
         this->array_of_arrays = new float*[this->height];
 
         for (uint32_t i = 0; i < this->height; i++)

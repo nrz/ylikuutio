@@ -60,7 +60,6 @@ namespace linear_algebra
             bool is_square;
             uint32_t width;
             uint32_t height;
-            uint32_t array_size;
 
             bool is_fully_populated;
             int32_t next_y_to_populate;
