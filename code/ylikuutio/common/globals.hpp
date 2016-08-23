@@ -22,7 +22,10 @@
 #endif
 #endif
 
-// Include GLEW
+// GLEW must be included here, because `globals.hpp` may be compiled
+// first, and if `GL/glew.h` is not included before `glfw3.h` (?),
+// then g++ prints the following error:
+// `error: #error gl.h included before glew.h`
 #ifndef __GL_GLEW_H_INCLUDED
 #define __GL_GLEW_H_INCLUDED
 #include <GL/glew.h> // GLfloat, GLuint etc.
@@ -50,12 +53,16 @@
 #define PI 3.14159265359f
 #endif
 
+namespace graph
+{
+    class Graph;
+}
+
 namespace ontology
 {
     class Universe;
     class Scene;
     class Shader;
-    class Graph;
     class Material;
     class VectorFont;
     class Species;
@@ -95,9 +102,8 @@ typedef struct NodeStruct
     {
         // constructor.
     }
-    GLuint nodeID;
-    ontology::Graph* parent_pointer;
-    glm::vec3 coordinate_vector;
+    uint32_t nodeID;
+    graph::Graph* parent_pointer;
     std::vector<uint32_t> neighbor_nodeIDs;
 } NodeStruct;
 
@@ -112,7 +118,7 @@ typedef struct ObjectStruct
     ontology::Glyph* glyph_parent_pointer;     // pointer to the parent `Glyph`.
     ontology::Text3D* text3D_parent_pointer;   // pointer to the parent `Text3D`.
     glm::vec3 original_scale_vector; // original scale vector.
-    GLfloat rotate_angle;            // rotate angle.
+    float rotate_angle;              // rotate angle.
     bool is_character;               // The parent of a character object is a Glyph. The parent of a regular object is a Species.
     glm::vec3 coordinate_vector;     // coordinate vector.
     glm::vec3 rotate_vector;         // rotate vector.
@@ -170,7 +176,7 @@ typedef struct Text3DStruct
     std::string text_string;
     const char* text_string_char;
     glm::vec3 original_scale_vector;   // original scale vector.
-    GLfloat rotate_angle;              // rotate angle.
+    float rotate_angle;                // rotate angle.
     glm::vec3 coordinate_vector;       // coordinate vector.
     glm::vec3 rotate_vector;           // rotate vector.
     glm::vec3 translate_vector;        // translate vector.
@@ -193,12 +199,12 @@ typedef struct GlyphStruct
 
 typedef struct
 {
-    GLuint screen_width;
-    GLuint screen_height;
-    GLuint x;
-    GLuint y;
-    GLuint text_size;
-    GLuint font_size;
+    uint32_t screen_width;
+    uint32_t screen_height;
+    uint32_t x;
+    uint32_t y;
+    uint32_t text_size;
+    uint32_t font_size;
     std::string text;
     const char* text_char;
     const char* char_font_texture_file_format;

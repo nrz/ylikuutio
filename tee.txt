@@ -8,14 +8,14 @@ Ylikuution kehityksen kannalta välttämättömiä työvaiheita:
 [ ] Lisää verteksien muokkaaminen.
 [ ] Lisää octree-segmentointi.
 [ ] Lisää tekoälyoliot (robotit).
-[ ] Lisää Bigloo-tuki tekoälyolioiden ohjelmointiin (Bigloo Scheme).
-[ ] Tallenna kunkin robotin senhetkinen näkymä taulukkoon, josta robotti voi käsitellä sitä ohjelmallisesti C++- ja/tai GLSL-koodilla.
+[ ] Lisää Chibi-Scheme -tuki tekoälyolioiden ohjelmointiin.
 
 Vähemmän kiireellisiä:
-[ ] Lisää ChibiScheme-tuki konsoliin.
+[ ] Lisää Chibi-Scheme-tuki konsoliin.
 [ ] Lisää tuki kolmiulotteiselle tekstille.
 [ ] Lisää tuki osittain läpinäkyvälle tekstille.
 [ ] Lisää tuki yli 3-ulotteisille kappaleille (projisoidaan `Object::render()`-metodissa 3-ulotteiseen avaruuteen).
+[ ] Tallenna kunkin robotin senhetkinen näkymä taulukkoon, josta robotti voi käsitellä sitä ohjelmallisesti C++- ja/tai GLSL-koodilla.
 [ ] Toteuta V1:n simulointi.
 [ ] Toteuta V2:n simulointi.
 

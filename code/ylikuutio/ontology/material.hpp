@@ -19,6 +19,11 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
+namespace space_partition
+{
+    class ChunkMaster;
+}
+
 namespace ontology
 {
     class Species;
@@ -34,7 +39,7 @@ namespace ontology
             // destructor.
             ~Material();
 
-            // this method sets pointer to this shader to nullptr, sets `parent_pointer` according to the input, and requests a new `childID` from the new shader.
+            // this method sets pointer to this `Material` to nullptr, sets `parent_pointer` according to the input, and requests a new `childID` from the new `Shader`.
             void bind_to_new_parent(ontology::Shader* new_shader_pointer);
 
             friend class Shader;
@@ -42,6 +47,7 @@ namespace ontology
             friend class Glyph;
             friend class Species;
             friend class Object;
+            friend class space_partition::ChunkMaster;
             template<class T1>
                 friend void render_children(std::vector<T1>& child_pointer_vector);
             template<class T1>
@@ -59,6 +65,9 @@ namespace ontology
             // this method sets `VectorFont` pointer.
             void set_vector_font_pointer(uint32_t childID, ontology::VectorFont* child_pointer);
 
+            // this method sets `ChunkMaster` pointer.
+            void set_chunk_master_pointer(uint32_t childID, space_partition::ChunkMaster* child_pointer);
+
             // this method sets a world species pointer.
             void set_terrain_species_pointer(ontology::Species* terrain_species_pointer);
 
@@ -73,8 +82,10 @@ namespace ontology
 
             std::vector<ontology::Species*> species_pointer_vector;
             std::vector<ontology::VectorFont*> vector_font_pointer_vector;
+            std::vector<space_partition::ChunkMaster*> chunk_master_pointer_vector;
             std::queue<uint32_t> free_speciesID_queue;
             std::queue<uint32_t> free_vector_fontID_queue;
+            std::queue<uint32_t> free_chunk_masterID_queue;
 
             std::string texture_file_format;       // type of the model file, eg. `"bmp"`.
             std::string texture_filename;          // filename of the model file.

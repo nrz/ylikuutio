@@ -5,14 +5,17 @@
 #include "code/ylikuutio/common/globals.hpp"
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
 
-// Include standard headers
-#include <stdint.h> // uint32_t etc.
-
 // Include GLFW
 #ifndef __GLFW3_H_INCLUDED
 #define __GLFW3_H_INCLUDED
 #include <glfw3.h>
 #endif
+
+// Include standard headers
+#include <iterator> // std::back_inserter
+#include <list>     // std::list
+#include <stdint.h> // uint32_t etc.
+#include <vector>   // std::vector
 
 namespace console
 {

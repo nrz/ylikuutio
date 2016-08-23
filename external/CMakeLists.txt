@@ -2,7 +2,6 @@ if(MSVC AND NOT "${MSVC_VERSION}" LESS 1400)
     add_definitions( "/MP" )
 endif()
 
-
 add_definitions(
     -DTW_STATIC
     -DTW_NO_LIB_PRAGMA
@@ -15,11 +14,13 @@ add_definitions(
 # add_subdirectory(gdal-2.1.1)
 
 # Compile external dependencies
+
+# pugixml
 add_subdirectory(pugixml)
 
 ### GLFW ###
 
-add_subdirectory (glfw-3.2)
+add_subdirectory(glfw-3.2)
 
 include_directories(
     glfw-3.2/include/GLFW/
@@ -168,12 +169,14 @@ include_directories(
     )
 
 if(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
-    set(OPENGL_LIBRARY
-        ${OPENGL_LIBRARY}
-        -lGL -lGLU -lXrandr -lXext -lX11 -lrt
-        ${CMAKE_DL_LIBS}
-        ${GLFW_LIBRARIES}
-        )
+    if(NOT CROSS_COMPILE_FOR_WINDOWS)
+        set(OPENGL_LIBRARY
+            ${OPENGL_LIBRARY}
+            -lGL -lGLU -lXrandr -lXext -lX11 -lrt
+            ${CMAKE_DL_LIBS}
+            ${GLFW_LIBRARIES}
+            )
+    endif()
 elseif(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     set(OPENGL_LIBRARY
         ${OPENGL_LIBRARY}
@@ -191,8 +194,7 @@ set(GLEW_SOURCE
 set(GLEW_HEADERS
     )
 
-
-add_library( GLEW_200 STATIC
+add_library(GLEW_200 STATIC
     ${GLEW_SOURCE}
     ${GLEW_INCLUDE}
     )
@@ -261,7 +263,6 @@ target_link_libraries(GLEW_200
 # 
 # endif(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 # 
-# 
 # set(ANTTWEAKBAR_HEADERS
 # 	AntTweakBar-1.16/src/AntPerfTimer.h
 # 	AntTweakBar-1.16/src/LoadOGL.h
@@ -313,7 +314,6 @@ target_link_libraries(GLEW_200
 # #set(ZLIB_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/zlib)
 # add_subdirectory( assimp-3.0.1270/code )
 
-
 ### BULLET ###
 # Bullet already has a CMakeLists.txt so let's use these
 # 
@@ -321,8 +321,7 @@ target_link_libraries(GLEW_200
 # include_directories(
 # 	bullet-2.81-rev2613/src
 # )
-# add_subdirectory( bullet-2.81-rev2613/src/BulletSoftBody )
-# add_subdirectory( bullet-2.81-rev2613/src/BulletCollision )
-# add_subdirectory( bullet-2.81-rev2613/src/BulletDynamics )
-# add_subdirectory( bullet-2.81-rev2613/src/LinearMath )
-
+# add_subdirectory( bullet-2.81-rev2613/src/BulletSoftBody)
+# add_subdirectory( bullet-2.81-rev2613/src/BulletCollision)
+# add_subdirectory( bullet-2.81-rev2613/src/BulletDynamics)
+# add_subdirectory( bullet-2.81-rev2613/src/LinearMath)

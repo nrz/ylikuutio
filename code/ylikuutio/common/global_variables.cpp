@@ -6,6 +6,12 @@
 #include <GL/glew.h> // GLfloat, GLuint etc.
 #endif
 
+// Include GLFW
+#ifndef __GLFW3_H_INCLUDED
+#define __GLFW3_H_INCLUDED
+#include <glfw3.h>
+#endif
+
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
 #define __GLM_GLM_HPP_INCLUDED

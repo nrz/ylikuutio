@@ -5,6 +5,7 @@
 #include "shader.hpp"
 #include "material.hpp"
 #include "object.hpp"
+#include "species_or_glyph.hpp"
 #include "render_templates.hpp"
 #include "code/ylikuutio/loaders/obj_loader.hpp"
 #include "code/ylikuutio/loaders/ascii_grid_loader.hpp"
@@ -27,6 +28,7 @@ namespace ontology
 {
     void Species::bind_to_parent()
     {
+        // get `childID` from the `Material` and set pointer to this `Species`.
         hierarchy::bind_child_to_parent<ontology::Species*>(this, this->parent_pointer->species_pointer_vector, this->parent_pointer->free_speciesID_queue);
     }
 
@@ -170,6 +172,7 @@ namespace ontology
 
     void Species::bind_to_new_parent(ontology::Material* new_material_pointer)
     {
+        // this method sets pointer to this `Species` to nullptr, sets `parent_pointer` according to the input, and requests a new `childID` from the new `Material`.
         hierarchy::bind_child_to_new_parent<ontology::Species*, ontology::Material*>(this, new_material_pointer, this->parent_pointer->species_pointer_vector, this->parent_pointer->free_speciesID_queue);
     }
 }

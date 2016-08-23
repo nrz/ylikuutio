@@ -9,7 +9,7 @@
 #include "graph.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
-namespace ontology
+namespace graph
 {
     class Node
     {
@@ -42,10 +42,10 @@ namespace ontology
             // all nodes that are to be transferred must be transferred separately.
             // before transfering any node to a new graph,
             // all links to nodes that do not belong to the new graph of this node must be deleted with separate `delete_bidirectional_link` calls.
-            void bind_to_new_parent(ontology::Graph *new_graph_pointer);
+            void bind_to_new_parent(graph::Graph *new_graph_pointer);
 
             uint32_t childID;
-            ontology::Graph* parent_pointer;
+            graph::Graph* parent_pointer;
 
             // nodes do not keep pointers to neighbor nodes, because all pointer values are not known yet before all nodes are created.
             std::vector<uint32_t> neighbor_nodeIDs;
@@ -56,8 +56,6 @@ namespace ontology
 
             // this method deletes an unidirectional link.
             void delete_unidirectional_link(uint32_t nodeID);
-
-            glm::vec3 coordinate_vector;
     };
 }
 

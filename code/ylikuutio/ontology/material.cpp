@@ -2,6 +2,7 @@
 #include "vector_font.hpp"
 #include "species.hpp"
 #include "render_templates.hpp"
+#include "code/ylikuutio/space_partition/chunk_master.hpp"
 #include "code/ylikuutio/loaders/texture_loader.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
@@ -14,6 +15,7 @@ namespace ontology
 {
     void Material::bind_to_parent()
     {
+        // get `childID` from the `Shader` and set pointer to this `Material`.
         hierarchy::bind_child_to_parent<ontology::Material*>(this, this->parent_pointer->material_pointer_vector, this->parent_pointer->free_materialID_queue);
     }
 
@@ -28,7 +30,7 @@ namespace ontology
         this->char_texture_file_format = this->texture_file_format.c_str();
         this->char_texture_filename    = this->texture_filename.c_str();
 
-        // get `childID` from `Shader` and set pointer to this `Material`.
+        // get `childID` from the `Shader` and set pointer to this `Material`.
         this->bind_to_parent();
 
         // Load the texture.
@@ -63,6 +65,10 @@ namespace ontology
         std::cout << "All fonts of this material will be destroyed.\n";
         hierarchy::delete_children<ontology::VectorFont*>(this->vector_font_pointer_vector);
 
+        // destroy all chunk masters of this material.
+        std::cout << "All chunk masters of this material will be destroyed.\n";
+        hierarchy::delete_children<space_partition::ChunkMaster*>(this->chunk_master_pointer_vector);
+
         glDeleteTextures(1, &this->texture);
 
         // set pointer to this material to nullptr.
@@ -77,7 +83,7 @@ namespace ontology
         // Set our "myTextureSampler" sampler to user Texture Unit 0.
         glUniform1i(this->openGL_textureID, 0);
 
-        // render Material by calling `render()` function of each Species and of each VectorFont.
+        // render `Material` by calling `render()` function of  each `Species` and of each `VectorFont`.
         ontology::render_children<ontology::Species*>(this->species_pointer_vector);
         ontology::render_children<ontology::VectorFont*>(this->vector_font_pointer_vector);
     }
@@ -92,8 +98,14 @@ namespace ontology
         hierarchy::set_child_pointer(childID, child_pointer, this->vector_font_pointer_vector, this->free_vector_fontID_queue);
     }
 
+    void Material::set_chunk_master_pointer(uint32_t childID, space_partition::ChunkMaster* child_pointer)
+    {
+        hierarchy::set_child_pointer(childID, child_pointer, this->chunk_master_pointer_vector, this->free_chunk_masterID_queue);
+    }
+
     void Material::bind_to_new_parent(ontology::Shader* new_shader_pointer)
     {
+        // this method sets pointer to this `Material` to nullptr, sets `parent_pointer` according to the input, and requests a new `childID` from the new `Shader`.
         hierarchy::bind_child_to_new_parent<ontology::Material*, ontology::Shader*>(this, new_shader_pointer, this->parent_pointer->material_pointer_vector, this->parent_pointer->free_materialID_queue);
     }
 

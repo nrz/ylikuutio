@@ -65,8 +65,8 @@ std::string ascii_grid_model_file_format = "ascii_grid";
 std::string g_model_filename = "noise256x256.bmp";
 // std::string g_model_filename = "noise128x128.bmp";
 
-std::string ascii_grid_model_filename = "N5424G.asc"; // Joensuu center & western.
-// std::string ascii_grid_model_filename = "L4133D.asc"; // Helsinki eastern downtown.
+// std::string ascii_grid_model_filename = "N5424G.asc"; // Joensuu center & western.
+std::string ascii_grid_model_filename = "L4133D.asc"; // Helsinki eastern downtown.
 
 // texture file format: bmp/...
 std::string g_texture_file_format = "bmp";
@@ -133,7 +133,7 @@ int main(void)
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
 
     // Open a window and create its OpenGL context.
-    window = glfwCreateWindow((GLuint) window_width, (GLuint) window_height, "Ylikuutio", nullptr, nullptr);
+    window = glfwCreateWindow((GLuint) window_width, (GLuint) window_height, "Ajokki, powered by Ylikuutio v. 0.0.1", nullptr, nullptr);
     cleanup_callback_object->set_new_callback(&ajokki::glfwTerminate_cleanup);
 
     if (window == nullptr)

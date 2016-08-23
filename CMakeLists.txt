@@ -16,36 +16,17 @@ set(DO_UNIT_TESTS_WITH_GOOGLE_TEST true)
 
 # uncomment the following line to download the latest versions of external projects
 # instead of using the versions carried in Ylikuutio repository (in `external/`).
-# at the moment this affects only Eigen, not Google Test & Google Mock.
+# this does not affect any library at the moment (did affect Eigen earlier, though).
 # set(ENABLE_DOWNLOAD_LATEST_VERSIONS_OF_EXTERNAL_PROJECTS)
 
 # uncomment the following line to disable updating of external projects.
 set(DISABLE_UPDATE_STEP true)
 
-if(CROSS_COMPILE_FOR_WINDOWS)
-    # https://cmake.org/Wiki/CMake_Cross_Compiling
-    # the name of the target operating system
-    set(CMAKE_SYSTEM_NAME Windows)
-
-    # which compilers to use for C and C++
-    set(CMAKE_C_COMPILER /usr/bin/i686-w64-mingw32-gcc)
-    set(CMAKE_CXX_COMPILER /usr/bin/i686-w64-mingw32-g++)
-    set(CMAKE_RC_COMPILER /usr/bin/686-w64-mingw32-windres)
-
-    # here is the target environment located
-    set(CMAKE_FIND_ROOT_PATH /usr/i686-w64-mingw32/)
-
-    # adjust the default behaviour of the FIND_XXX() commands:
-    # search headers and libraries in the target environment, search
-    # programs in the host environment
-    set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
-    set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
-    set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
+if(NOT CROSS_COMPILE_FOR_WINDOWS)
+    find_package(OpenGL REQUIRED)
 endif()
 
-find_package(OpenGL REQUIRED)
 find_package(Threads REQUIRED)
-find_package(eigen)
 
 # Compile external dependencies
 add_subdirectory (external)
@@ -251,59 +232,11 @@ include_directories(
     external/pugixml/src/
     )
 
-if(ENABLE_DOWNLOAD_LATEST_VERSIONS_OF_EXTERNAL_PROJECTS)
-    if(DISABLE_UPDATE_STEP)
-        # Download and install Eigen
-        ExternalProject_Add(
-            eigen
-            GIT_REPOSITORY https://github.com/RLovelett/eigen
-            PREFIX ${CMAKE_CURRENT_BINARY_DIR}/eigen
-            # Disable install step
-            INSTALL_COMMAND ""
-            # Disable update step
-            UPDATE_COMMAND ""
-            LOG_DOWNLOAD ON
-            LOG_BUILD ON
-            )
-    else()
-        # Download and install Eigen
-        ExternalProject_Add(
-            eigen
-            GIT_REPOSITORY https://github.com/RLovelett/eigen
-            PREFIX ${CMAKE_CURRENT_BINARY_DIR}/eigen
-            # Disable install step
-            INSTALL_COMMAND ""
-            LOG_DOWNLOAD ON
-            LOG_BUILD ON
-            )
-    endif()
-else()
-    # Use Eigen 3.2.9 provided in the Ylikuutio repository.
-    ExternalProject_Add(
-        eigen
-        URL "file://${CMAKE_SOURCE_DIR}/external/eigen-3.2.9"
-        PREFIX ${CMAKE_CURRENT_BINARY_DIR}/eigen
-        # Disable install step
-        INSTALL_COMMAND ""
-        LOG_BUILD ON
+if(CROSS_COMPILE_FOR_WINDOWS)
+    include_directories(
+        cross-tools/x86_64-w64-mingw32/include/
         )
 endif()
-
-# http://stackoverflow.com/questions/17446981/cmake-externalproject-add-and-findpackage/17473508#17473508
-if(NOT ${eigen_FOUND})
-    # Rerun CMake in initial build.
-    # Will update cmakecache/project files on first build.
-    # So you may have to reload project after first build.
-    add_custom_target(rescan ${CMAKE_COMMAND} ${CMAKE_SOURCE_DIR} DEPENDS eigen)
-else()
-    # rescan becomes a dummy target after first build.
-    # This prevents CMake from rebuilding cache/projects on subsequent builds.
-    add_custom_target(rescan)
-endif()
-
-include_directories(
-    ${CMAKE_CURRENT_BINARY_DIR}/eigen/src/eigen/
-    )
 
 if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
     include_directories(
@@ -465,8 +398,39 @@ configure_file(res/maps/Exactum_Physicum_Helsinki_Finland.osm Exactum_Physicum_H
 configure_file(res/height_maps/noise256x256.bmp noise256x256.bmp COPYONLY)
 configure_file(res/textures/test3x3.bmp test3x3.bmp COPYONLY)
 
+if(CROSS_COMPILE_FOR_WINDOWS)
+    # https://cmake.org/Wiki/CMake_Cross_Compiling
+    # http://www.glfw.org/docs/latest/compile.html#compile_deps_mingw_cross
+    # the name of the target operating system
+    set(CMAKE_SYSTEM_NAME Windows)
+    set(CMAKE_SYSTEM_VERSION 1)
+
+    # which compilers to use for C and C++
+    set(CMAKE_C_COMPILER /usr/bin/i686-w64-mingw32-gcc)
+    set(CMAKE_CXX_COMPILER /usr/bin/i686-w64-mingw32-g++)
+    set(CMAKE_RC_COMPILER /usr/bin/686-w64-mingw32-windres)
+    set(CMAKE_RANLIB /usr/bin/i686-w64-mingw32-gcc-ranlib)
+
+    # here is the target environment located
+    set(CMAKE_FIND_ROOT_PATH /usr/i686-w64-mingw32/)
+
+    # adjust the default behaviour of the FIND_XXX() commands:
+    # search headers and libraries in the target environment, search
+    # programs in the host environment
+    set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
+    set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
+    set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
+
+    # https://cmake.org/Bug/view.php?id=9985
+    set(CMAKE_SHARED_LIBRARY_LINK_C_FLAGS "")
+    set(CMAKE_SHARED_LIBRARY_LINK_CXX_FLAGS "")
+
+    # http://stackoverflow.com/questions/17721619/cmake-cross-compile-libraries-are-not-found
+    set(CMAKE_LIBRARY_PATH ../cross-tools/include/)
+endif()
+
 # Ylikuutio
-add_library(ylikuutio
+add_library(ylikuutio STATIC
     # callback_system, in alphabetical order
     code/ylikuutio/callback_system/callback_engine.cpp
     code/ylikuutio/callback_system/callback_engine.hpp
@@ -496,8 +460,6 @@ add_library(ylikuutio
     code/ylikuutio/file/file_loader.hpp
 
     # geometry, in alphabetical order.
-    code/ylikuutio/geometry/chunk.cpp
-    code/ylikuutio/geometry/chunk.hpp
     code/ylikuutio/geometry/line.cpp
     code/ylikuutio/geometry/line.hpp
     code/ylikuutio/geometry/line2D.cpp
@@ -516,8 +478,6 @@ add_library(ylikuutio
     code/ylikuutio/geometry/line_segment_line_segment_intersection.hpp
     code/ylikuutio/geometry/transformation.cpp
     code/ylikuutio/geometry/transformation.hpp
-    code/ylikuutio/geometry/triangle.cpp
-    code/ylikuutio/geometry/triangle.hpp
 
     # graph, in alphabetical order.
     code/ylikuutio/graph/graph.cpp
@@ -527,6 +487,12 @@ add_library(ylikuutio
 
     # hierarchy, in alphabetical order.
     code/ylikuutio/hierarchy/hierarchy_templates.hpp
+
+    # linear algebra, in alphabetical order.
+    code/ylikuutio/linear_algebra/matrix.cpp
+    code/ylikuutio/linear_algebra/matrix.hpp
+    code/ylikuutio/linear_algebra/tensor3.cpp
+    code/ylikuutio/linear_algebra/tensor3.hpp
 
     # loaders, in alphabetical order.
     code/ylikuutio/loaders/ascii_grid_loader.cpp
@@ -584,6 +550,18 @@ add_library(ylikuutio
     code/ylikuutio/shaders/TextVertexShader.fragmentshader
     code/ylikuutio/shaders/TextVertexShader.vertexshader
 
+    # space partition, in alphabetical order.
+    code/ylikuutio/space_partition/chunk.cpp
+    code/ylikuutio/space_partition/chunk.hpp
+    code/ylikuutio/space_partition/chunk_master.cpp
+    code/ylikuutio/space_partition/chunk_master.hpp
+    code/ylikuutio/space_partition/triangle3D.cpp
+    code/ylikuutio/space_partition/triangle3D.hpp
+    code/ylikuutio/space_partition/vertex_graph.cpp
+    code/ylikuutio/space_partition/vertex_graph.hpp
+    code/ylikuutio/space_partition/vertex_node.cpp
+    code/ylikuutio/space_partition/vertex_node.hpp
+
     # string, in alphabetical order
     code/ylikuutio/string/ylikuutio_string.cpp
     code/ylikuutio/string/ylikuutio_string.hpp
@@ -600,7 +578,7 @@ add_library(ylikuutio
     code/ylikuutio/triangulation/triangulation_enums.hpp
     code/ylikuutio/triangulation/triangulation_templates.hpp
     )
-add_dependencies(ylikuutio rescan)
+# add_dependencies(ylikuutio rescan)
 
 # Ajokki
 add_executable(ajokki
@@ -611,10 +589,6 @@ add_executable(ajokki
     )
 add_dependencies(ajokki rescan)
 target_link_libraries(ajokki ylikuutio ${ALL_LIBS} glfw)
-if(${eigen_FOUND})
-    # target_link_libraries(ajokki ${eigen_LIBRARY})
-    target_link_libraries(ajokki ${ALL_LIBS})
-endif()
 
 # Xcode and Visual working directories
 set_target_properties(ajokki PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/code/ajokki/")
@@ -666,6 +640,8 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/geometry/transformation.cpp
         code/ylikuutio/geometry/transformation.hpp
         code/ylikuutio/hierarchy/hierarchy_templates.hpp
+        code/ylikuutio/linear_algebra/matrix.cpp
+        code/ylikuutio/linear_algebra/matrix.hpp
         code/ylikuutio/loaders/font_loader.cpp
         code/ylikuutio/loaders/font_loader.hpp
         code/ylikuutio/string/ylikuutio_string.cpp
@@ -681,7 +657,6 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
     set(UNIT_TESTS
         code/ylikuutio/tests/googletest/test_any_value.cpp
         code/ylikuutio/tests/googletest/test_callback_system.cpp
-        code/ylikuutio/tests/googletest/test_eigen.cpp
         code/ylikuutio/tests/googletest/test_file_loader.cpp
         code/ylikuutio/tests/googletest/test_font_loader.cpp
         code/ylikuutio/tests/googletest/test_globals.cpp
@@ -689,6 +664,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/googletest/test_line2D.cpp
         code/ylikuutio/tests/googletest/test_line_line_intersection.cpp
         code/ylikuutio/tests/googletest/test_line_segment_line_segment_intersection.cpp
+        code/ylikuutio/tests/googletest/test_matrix.cpp
         code/ylikuutio/tests/googletest/test_pugixml.cpp
         code/ylikuutio/tests/googletest/test_ylikuutio_string.cpp)
     set(MAIN_FILE code/ylikuutio/tests/googletest/main.cpp)
