@@ -105,6 +105,7 @@ namespace ontology
 
     void Material::bind_to_new_parent(ontology::Shader* new_shader_pointer)
     {
+        // this method sets pointer to this `Material` to nullptr, sets `parent_pointer` according to the input, and requests a new `childID` from the new `Shader`.
         hierarchy::bind_child_to_new_parent<ontology::Material*, ontology::Shader*>(this, new_shader_pointer, this->parent_pointer->material_pointer_vector, this->parent_pointer->free_materialID_queue);
     }
 

@@ -4,5 +4,6 @@ namespace space_partition
 {
     VertexNode::~VertexNode()
     {
+        // destructor.
     }
 }

@@ -39,7 +39,7 @@ namespace ontology
             // destructor.
             ~Material();
 
-            // this method sets pointer to this shader to nullptr, sets `parent_pointer` according to the input, and requests a new `childID` from the new shader.
+            // this method sets pointer to this `Material` to nullptr, sets `parent_pointer` according to the input, and requests a new `childID` from the new `Shader`.
             void bind_to_new_parent(ontology::Shader* new_shader_pointer);
 
             friend class Shader;

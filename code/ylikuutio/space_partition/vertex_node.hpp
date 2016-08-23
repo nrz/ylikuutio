@@ -16,6 +16,7 @@ namespace space_partition
                 this->coordinate_vector = coordinate_vector;
             }
 
+            // destructor.
             ~VertexNode();
 
         private:

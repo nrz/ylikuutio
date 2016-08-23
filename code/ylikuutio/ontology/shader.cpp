@@ -76,6 +76,7 @@ namespace ontology
 
     void Shader::bind_to_new_parent(ontology::Scene* new_scene_pointer)
     {
+        // this method sets pointer to this `Shader` to nullptr, sets `parent_pointer` according to the input, and requests a new `childID` from the new `Scene`.
         hierarchy::bind_child_to_new_parent<ontology::Shader*, ontology::Scene*>(this, new_scene_pointer, this->parent_pointer->shader_pointer_vector, this->parent_pointer->free_shaderID_queue);
     }
 

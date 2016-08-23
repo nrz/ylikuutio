@@ -39,7 +39,7 @@ namespace ontology
             // destructor.
             ~Species();
 
-            // this method sets pointer to this species to nullptr, sets `parent_pointer` according to the input, and requests a new `childID` from the new texture.
+            // this method sets pointer to this `Species` to nullptr, sets `parent_pointer` according to the input, and requests a new `childID` from the new `Material`.
             void bind_to_new_parent(ontology::Material* new_material_pointer);
 
             // this method sets a object pointer.

@@ -23,7 +23,7 @@ namespace ontology
             // destructor.
             ~Scene();
 
-            // this method sets pointer to this scene to nullptr, sets `parent_pointer` according to the input, and requests a new `childID` from the new world.
+            // this method sets pointer to this `Scene` to nullptr, sets `parent_pointer` according to the input, and requests a new `childID` from the new `Universe`.
             void bind_to_new_parent(ontology::Universe* new_universe_pointer);
 
             friend class Shader;

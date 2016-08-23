@@ -60,6 +60,7 @@ namespace ontology
 
     void Scene::bind_to_new_parent(ontology::Universe* new_universe_pointer)
     {
+        // this method sets pointer to this `Scene` to nullptr, sets `parent_pointer` according to the input, and requests a new `childID` from the new `Universe`.
         hierarchy::bind_child_to_new_parent<ontology::Scene*, ontology::Universe*>(this, new_universe_pointer, this->parent_pointer->scene_pointer_vector, this->parent_pointer->free_sceneID_queue);
     }
 

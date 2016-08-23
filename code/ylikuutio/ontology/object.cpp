@@ -96,6 +96,9 @@ namespace ontology
 
     void Object::bind_to_new_parent(void* new_parent_pointer)
     {
+        // this method sets pointer to this `Object` to nullptr, sets `parent_pointer` according to the input,
+        // and requests a new `childID` from the new `Species` or from the new `Glyph`.
+
         if (this->is_character)
         {
             ontology::Glyph* parent_pointer;

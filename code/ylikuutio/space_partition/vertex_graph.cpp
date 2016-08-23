@@ -4,5 +4,6 @@ namespace space_partition
 {
     VertexGraph::~VertexGraph()
     {
+        // destructor.
     }
 }

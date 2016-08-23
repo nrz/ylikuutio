@@ -55,7 +55,8 @@ namespace ontology
             // destructor.
             ~Object();
 
-            // this method sets pointer to this object to nullptr, sets `parent_pointer` according to the input, and requests a new `childID` from the new species.
+            // this method sets pointer to this `Object` to nullptr, sets `parent_pointer` according to the input,
+            // and requests a new `childID` from the new `Species` or from the new `Glyph`.
             void bind_to_new_parent(void* new_parent_pointer);
             template<class T1>
                 friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<uint32_t>& free_childID_queue);
