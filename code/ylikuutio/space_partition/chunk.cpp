@@ -8,6 +8,7 @@ namespace space_partition
 {
     void Chunk::bind_to_parent()
     {
+        // get `childID` from the `ChunkMaster` and set pointer to this `Chunk`.
         hierarchy::bind_child_to_parent<space_partition::Chunk*>(this, this->parent_pointer->chunk_pointer_vector, this->parent_pointer->free_chunkID_queue);
     }
 

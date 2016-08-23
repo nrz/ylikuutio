@@ -17,6 +17,7 @@ namespace ontology
 
     void VectorFont::bind_to_parent()
     {
+        // get `childID` from the `Material` and set pointer to this `VectorFont`.
         hierarchy::bind_child_to_parent<ontology::VectorFont*>(this, this->parent_pointer->vector_font_pointer_vector, this->parent_pointer->free_vector_fontID_queue);
     }
 
@@ -44,7 +45,7 @@ namespace ontology
         this->char_font_file_format = this->font_file_format.c_str();
         this->char_font_filename    = this->font_filename.c_str();
 
-        // get childID from the Graph and set pointer to this font.
+        // get `childID` from the `Material` and set pointer to this `VectorFont`.
         this->bind_to_parent();
 
         bool font_loading_result = false;

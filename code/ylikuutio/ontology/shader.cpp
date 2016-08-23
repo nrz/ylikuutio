@@ -16,6 +16,7 @@ namespace ontology
 {
     void Shader::bind_to_parent()
     {
+        // get `childID` from the `Scene` and set pointer to this `Shader`.
         hierarchy::bind_child_to_parent<ontology::Shader*>(this, this->parent_pointer->shader_pointer_vector, this->parent_pointer->free_shaderID_queue);
     }
 
@@ -30,7 +31,7 @@ namespace ontology
         this->char_fragment_shader = this->fragment_shader.c_str();
         this->parent_pointer       = shader_struct.parent_pointer;
 
-        // get childID from the Scene and set pointer to this Shader.
+        // get `childID` from the `Scene` and set pointer to this `Shader`.
         this->bind_to_parent();
 
         // Create and compile our GLSL program from the shaders.

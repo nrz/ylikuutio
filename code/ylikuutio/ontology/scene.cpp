@@ -29,6 +29,7 @@ namespace ontology
 {
     void Scene::bind_to_parent()
     {
+        // get `childID` from the `Universe` and set pointer to this `Scene`.
         hierarchy::bind_child_to_parent<ontology::Scene*>(this, this->parent_pointer->scene_pointer_vector, this->parent_pointer->free_sceneID_queue);
     }
 
@@ -37,7 +38,7 @@ namespace ontology
         // constructor.
         this->parent_pointer = parent_pointer;
 
-        // get childID from the World and set pointer to this Scene.
+        // get `childID` from the `Universe` and set pointer to this `Scene`.
         this->bind_to_parent();
     }
 

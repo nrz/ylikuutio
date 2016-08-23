@@ -15,6 +15,7 @@ namespace ontology
 {
     void Material::bind_to_parent()
     {
+        // get `childID` from the `Shader` and set pointer to this `Material`.
         hierarchy::bind_child_to_parent<ontology::Material*>(this, this->parent_pointer->material_pointer_vector, this->parent_pointer->free_materialID_queue);
     }
 
@@ -29,7 +30,7 @@ namespace ontology
         this->char_texture_file_format = this->texture_file_format.c_str();
         this->char_texture_filename    = this->texture_filename.c_str();
 
-        // get `childID` from `Shader` and set pointer to this `Material`.
+        // get `childID` from the `Shader` and set pointer to this `Material`.
         this->bind_to_parent();
 
         // Load the texture.

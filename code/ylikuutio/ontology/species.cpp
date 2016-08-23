@@ -28,6 +28,7 @@ namespace ontology
 {
     void Species::bind_to_parent()
     {
+        // get `childID` from the `Material` and set pointer to this `Species`.
         hierarchy::bind_child_to_parent<ontology::Species*>(this, this->parent_pointer->species_pointer_vector, this->parent_pointer->free_speciesID_queue);
     }
 
