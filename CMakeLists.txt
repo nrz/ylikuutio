@@ -491,6 +491,8 @@ add_library(ylikuutio STATIC
     # linear algebra, in alphabetical order.
     code/ylikuutio/linear_algebra/matrix.cpp
     code/ylikuutio/linear_algebra/matrix.hpp
+    code/ylikuutio/linear_algebra/tensor3.cpp
+    code/ylikuutio/linear_algebra/tensor3.hpp
 
     # loaders, in alphabetical order.
     code/ylikuutio/loaders/ascii_grid_loader.cpp
