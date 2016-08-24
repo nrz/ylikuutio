@@ -33,7 +33,7 @@ namespace linear_algebra
         }
     }
 
-    Matrix::Matrix(Matrix& old_matrix)
+    Matrix::Matrix(const Matrix& old_matrix)
     {
         // copy constructor.
         this->width = old_matrix.width;
@@ -76,6 +76,20 @@ namespace linear_algebra
     Matrix::~Matrix()
     {
         // delete this->array_of_arrays;
+    }
+
+    Matrix Matrix::transpose()
+    {
+        Matrix new_matrix(this->width, this->height); // Flip width and height.
+
+        for (uint32_t x = 0; x < this->width; x++)
+        {
+            for (uint32_t y = 0; y < this->height; y++)
+            {
+                new_matrix.operator<<(this->operator[](y).operator[](x));
+            }
+        }
+        return new_matrix;
     }
 
     float Matrix::det()
@@ -133,6 +147,30 @@ namespace linear_algebra
             if (++this->next_y_to_populate >= this->height)
             {
                 this->is_fully_populated = true;
+            }
+        }
+    }
+
+    void Matrix::operator<<(const std::vector<float>& rhs)
+    {
+        uint32_t rhs_i = 0;
+
+        while (!this->is_fully_populated && rhs_i < rhs.size())
+        {
+            // First, get the slice.
+            float* my_array = this->array_of_arrays[this->next_y_to_populate];
+
+            // Then store the value.
+            my_array[this->next_x_to_populate++] = rhs.at(rhs_i++);
+
+            if (this->next_x_to_populate >= this->width)
+            {
+                this->next_x_to_populate = 0;
+
+                if (++this->next_y_to_populate >= this->height)
+                {
+                    this->is_fully_populated = true;
+                }
             }
         }
     }

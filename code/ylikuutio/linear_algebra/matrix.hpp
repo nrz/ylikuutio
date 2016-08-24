@@ -3,6 +3,7 @@
 
 // Include standard headers
 #include <stdint.h> // uint32_t etc.
+#include <vector>   // std::vector
 
 namespace linear_algebra
 {
@@ -13,7 +14,7 @@ namespace linear_algebra
             Matrix(uint32_t height, uint32_t width);
 
             // copy constructor.
-            Matrix(Matrix& old_matrix);
+            Matrix(const Matrix& old_matrix);
 
             // destructor.
             ~Matrix();
@@ -34,6 +35,7 @@ namespace linear_algebra
             };
 
             void operator<<(const float rhs);
+            void operator<<(const std::vector<float>& rhs);
             bool operator==(const Matrix& rhs);
             Matrix& operator++();
             Matrix operator++(const int);
@@ -50,6 +52,7 @@ namespace linear_algebra
                 return Proxy(array_of_arrays[index]);
             }
 
+            Matrix transpose();
             float det();
 
             friend Matrix linear_algebra::operator+(Matrix& lhs, Matrix& rhs);
