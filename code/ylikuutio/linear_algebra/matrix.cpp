@@ -33,7 +33,7 @@ namespace linear_algebra
         }
     }
 
-    Matrix::Matrix(Matrix& old_matrix)
+    Matrix::Matrix(const Matrix& old_matrix)
     {
         // copy constructor.
         this->width = old_matrix.width;
