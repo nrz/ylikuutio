@@ -86,7 +86,7 @@ namespace linear_algebra
         {
             for (uint32_t y = 0; y < this->height; y++)
             {
-                new_matrix.operator<<(this->operator[](y).operator[](x));
+                new_matrix << this->operator[](y).operator[](x);
             }
         }
         return new_matrix;
