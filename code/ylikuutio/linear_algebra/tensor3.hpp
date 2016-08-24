@@ -53,6 +53,7 @@ namespace linear_algebra
             };
 
             void operator<<(const float rhs);
+            void operator<<(const std::vector<float>& rhs);
             Proxy2D operator[](const uint32_t index)
             {
                 return Proxy2D(array_of_arrays_of_arrays[index]);
