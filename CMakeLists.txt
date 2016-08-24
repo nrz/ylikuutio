@@ -671,7 +671,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/googletest/test_line2D.cpp
         code/ylikuutio/tests/googletest/test_line_line_intersection.cpp
         code/ylikuutio/tests/googletest/test_line_segment_line_segment_intersection.cpp
-        code/ylikuutio/tests/googletest/test_matrix.cpp
+        code/ylikuutio/tests/googletest/test_linear_algebra.cpp
         code/ylikuutio/tests/googletest/test_pugixml.cpp
         code/ylikuutio/tests/googletest/test_ylikuutio_string.cpp)
     set(MAIN_FILE code/ylikuutio/tests/googletest/main.cpp)
