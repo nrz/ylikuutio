@@ -23,6 +23,40 @@ namespace linear_algebra
             // destructor.
             ~Tensor3();
 
+            // Inspired by http://stackoverflow.com/questions/6969881/operator-overload/6969904#6969904
+            class Proxy2D
+            {
+                public:
+                    Proxy2D(float** array_of_arrays) : array_of_arrays(array_of_arrays) { }
+
+                    class Proxy
+                    {
+                        public:
+                            Proxy(float* proxy_array) : proxy_array(proxy_array) { }
+
+                            float& operator[](const uint32_t index)
+                            {
+                                return proxy_array[index];
+                            }
+
+                        private:
+                            float* proxy_array;
+                    };
+
+                    Proxy operator[](const uint32_t index)
+                    {
+                        return array_of_arrays[index];
+                    }
+
+                private:
+                    float** array_of_arrays;
+            };
+
+            Proxy2D operator[](const uint32_t index)
+            {
+                return Proxy2D(array_of_arrays_of_arrays[index]);
+            }
+
         private:
             bool is_cube;
             uint32_t width;
