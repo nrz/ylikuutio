@@ -58,6 +58,7 @@ namespace linear_algebra
             friend Matrix linear_algebra::operator+(Matrix& lhs, Matrix& rhs);
             friend Matrix linear_algebra::operator-(Matrix& lhs, Matrix& rhs);
             friend Matrix linear_algebra::operator*(Matrix& lhs, Matrix& rhs);
+            friend Matrix cat(uint32_t dimension, Matrix& old_matrix1, Matrix& old_matrix2);
 
         private:
             bool is_square;

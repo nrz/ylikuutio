@@ -492,6 +492,8 @@ add_library(ylikuutio STATIC
     # linear algebra, in alphabetical order.
     code/ylikuutio/linear_algebra/matrix.cpp
     code/ylikuutio/linear_algebra/matrix.hpp
+    code/ylikuutio/linear_algebra/matrix_functions.cpp
+    code/ylikuutio/linear_algebra/matrix_functions.hpp
     code/ylikuutio/linear_algebra/tensor3.cpp
     code/ylikuutio/linear_algebra/tensor3.hpp
 
@@ -645,6 +647,8 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/hierarchy/hierarchy_templates.hpp
         code/ylikuutio/linear_algebra/matrix.cpp
         code/ylikuutio/linear_algebra/matrix.hpp
+        code/ylikuutio/linear_algebra/matrix_functions.cpp
+        code/ylikuutio/linear_algebra/matrix_functions.hpp
         code/ylikuutio/loaders/font_loader.cpp
         code/ylikuutio/loaders/font_loader.hpp
         code/ylikuutio/string/ylikuutio_string.cpp

@@ -1,5 +1,6 @@
 #include "gtest/gtest.h"
 #include "code/ylikuutio/linear_algebra/matrix.hpp"
+#include "code/ylikuutio/linear_algebra/matrix_functions.hpp"
 
 // Include standard headers
 #include <iostream> // std::cout, std::cin, std::cerr
@@ -213,4 +214,60 @@ TEST(matrices_must_function_as_expected, matrices)
     ASSERT_EQ(magic3x3squared[0][2], 67);
     ASSERT_EQ(magic3x3squared[1][2], 67);
     ASSERT_EQ(magic3x3squared[2][2], 91);
+
+    // matrix transpose.
+    linear_algebra::Matrix magic3x3transposed = magic3x3.transpose();
+    ASSERT_EQ(magic3x3transposed[0][0], 8);
+    ASSERT_EQ(magic3x3transposed[1][0], 1);
+    ASSERT_EQ(magic3x3transposed[2][0], 6);
+    ASSERT_EQ(magic3x3transposed[0][1], 3);
+    ASSERT_EQ(magic3x3transposed[1][1], 5);
+    ASSERT_EQ(magic3x3transposed[2][1], 7);
+    ASSERT_EQ(magic3x3transposed[0][2], 4);
+    ASSERT_EQ(magic3x3transposed[1][2], 9);
+    ASSERT_EQ(magic3x3transposed[2][2], 2);
+
+    // matrix concatenation.
+
+    linear_algebra::Matrix magic3x3_above_magic3x3_transposed_below(cat(1, magic3x3, magic3x3_transposed));
+    ASSERT_EQ(magic3x3_above_magic3x3_transposed_below[0][0], 8);
+    ASSERT_EQ(magic3x3_above_magic3x3_transposed_below[1][0], 3);
+    ASSERT_EQ(magic3x3_above_magic3x3_transposed_below[2][0], 4);
+    ASSERT_EQ(magic3x3_above_magic3x3_transposed_below[3][0], 8);
+    ASSERT_EQ(magic3x3_above_magic3x3_transposed_below[4][0], 1);
+    ASSERT_EQ(magic3x3_above_magic3x3_transposed_below[5][0], 6);
+    ASSERT_EQ(magic3x3_above_magic3x3_transposed_below[0][1], 1);
+    ASSERT_EQ(magic3x3_above_magic3x3_transposed_below[1][1], 5);
+    ASSERT_EQ(magic3x3_above_magic3x3_transposed_below[2][1], 9);
+    ASSERT_EQ(magic3x3_above_magic3x3_transposed_below[3][1], 3);
+    ASSERT_EQ(magic3x3_above_magic3x3_transposed_below[4][1], 5);
+    ASSERT_EQ(magic3x3_above_magic3x3_transposed_below[5][1], 7);
+    ASSERT_EQ(magic3x3_above_magic3x3_transposed_below[0][2], 6);
+    ASSERT_EQ(magic3x3_above_magic3x3_transposed_below[1][2], 7);
+    ASSERT_EQ(magic3x3_above_magic3x3_transposed_below[2][2], 2);
+    ASSERT_EQ(magic3x3_above_magic3x3_transposed_below[3][2], 4);
+    ASSERT_EQ(magic3x3_above_magic3x3_transposed_below[4][2], 9);
+    ASSERT_EQ(magic3x3_above_magic3x3_transposed_below[5][2], 2);
+
+    // matrix concatenation.
+
+    linear_algebra::Matrix magic3x3_left_magic3x3_transposed_right(cat(2, magic3x3, magic3x3_transposed));
+    ASSERT_EQ(magic3x3_left_magic3x3_transposed_right[0][0], 8);
+    ASSERT_EQ(magic3x3_left_magic3x3_transposed_right[1][0], 3);
+    ASSERT_EQ(magic3x3_left_magic3x3_transposed_right[2][0], 4);
+    ASSERT_EQ(magic3x3_left_magic3x3_transposed_right[0][1], 1);
+    ASSERT_EQ(magic3x3_left_magic3x3_transposed_right[1][1], 5);
+    ASSERT_EQ(magic3x3_left_magic3x3_transposed_right[2][1], 9);
+    ASSERT_EQ(magic3x3_left_magic3x3_transposed_right[0][2], 6);
+    ASSERT_EQ(magic3x3_left_magic3x3_transposed_right[1][2], 7);
+    ASSERT_EQ(magic3x3_left_magic3x3_transposed_right[2][2], 2);
+    ASSERT_EQ(magic3x3_left_magic3x3_transposed_right[0][3], 8);
+    ASSERT_EQ(magic3x3_left_magic3x3_transposed_right[1][3], 1);
+    ASSERT_EQ(magic3x3_left_magic3x3_transposed_right[2][3], 6);
+    ASSERT_EQ(magic3x3_left_magic3x3_transposed_right[0][4], 3);
+    ASSERT_EQ(magic3x3_left_magic3x3_transposed_right[1][4], 5);
+    ASSERT_EQ(magic3x3_left_magic3x3_transposed_right[2][4], 7);
+    ASSERT_EQ(magic3x3_left_magic3x3_transposed_right[0][5], 4);
+    ASSERT_EQ(magic3x3_left_magic3x3_transposed_right[1][5], 9);
+    ASSERT_EQ(magic3x3_left_magic3x3_transposed_right[2][5], 2);
 }
