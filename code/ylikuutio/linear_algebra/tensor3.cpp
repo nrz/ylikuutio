@@ -77,4 +77,34 @@ namespace linear_algebra
     Tensor3::~Tensor3()
     {
     }
+
+    void Tensor3::operator<<(const float rhs)
+    {
+        if (this->is_fully_populated)
+        {
+            // Array is already fully populated. Nothing to do.
+            return;
+        }
+
+        // First, get the slice.
+        float** my_array_of_arrays = this->array_of_arrays_of_arrays[this->next_y_to_populate];
+        float* my_array = my_array_of_arrays[this->next_x_to_populate];
+
+        // Then store the value.
+        my_array[this->next_z_to_populate] = rhs;
+
+        if (this->next_x_to_populate >= this->width)
+        {
+            this->next_x_to_populate = 0;
+
+            if (++this->next_y_to_populate >= this->height)
+            {
+                if (++this->next_z_to_populate >= this->depth)
+                {
+                    this->is_fully_populated = true;
+                }
+            }
+        }
+    }
+
 }
