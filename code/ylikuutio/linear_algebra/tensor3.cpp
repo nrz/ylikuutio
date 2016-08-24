@@ -93,7 +93,7 @@ namespace linear_algebra
         // Then store the value.
         my_array[this->next_z_to_populate] = rhs;
 
-        if (this->next_x_to_populate >= this->width)
+        if (++this->next_x_to_populate >= this->width)
         {
             this->next_x_to_populate = 0;
 
