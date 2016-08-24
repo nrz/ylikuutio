@@ -52,6 +52,7 @@ namespace linear_algebra
                 return Proxy(array_of_arrays[index]);
             }
 
+            Matrix transpose();
             float det();
 
             friend Matrix linear_algebra::operator+(Matrix& lhs, Matrix& rhs);

@@ -67,6 +67,19 @@ TEST(matrices_must_function_as_expected, matrices)
     ASSERT_EQ(magic3x3[1][2], 7);
     ASSERT_EQ(magic3x3[2][2], 2);
 
+    // transpose.
+
+    linear_algebra::Matrix magic3x3_transposed(magic3x3.transpose());
+    ASSERT_EQ(magic3x3_transposed[0][0], 8);
+    ASSERT_EQ(magic3x3_transposed[1][0], 1);
+    ASSERT_EQ(magic3x3_transposed[2][0], 6);
+    ASSERT_EQ(magic3x3_transposed[0][1], 3);
+    ASSERT_EQ(magic3x3_transposed[1][1], 5);
+    ASSERT_EQ(magic3x3_transposed[2][1], 7);
+    ASSERT_EQ(magic3x3_transposed[0][2], 4);
+    ASSERT_EQ(magic3x3_transposed[1][2], 9);
+    ASSERT_EQ(magic3x3_transposed[2][2], 2);
+
     // determinants.
 
     int32_t det_identity3x3 = identity3x3.det();

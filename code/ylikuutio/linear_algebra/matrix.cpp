@@ -78,6 +78,20 @@ namespace linear_algebra
         // delete this->array_of_arrays;
     }
 
+    Matrix Matrix::transpose()
+    {
+        Matrix new_matrix(this->width, this->height); // Flip width and height.
+
+        for (uint32_t x = 0; x < this->width; x++)
+        {
+            for (uint32_t y = 0; y < this->height; y++)
+            {
+                new_matrix.operator<<(this->operator[](y).operator[](x));
+            }
+        }
+        return new_matrix;
+    }
+
     float Matrix::det()
     {
         if (!this->is_square)
