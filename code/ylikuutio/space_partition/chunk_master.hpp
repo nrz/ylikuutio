@@ -22,7 +22,7 @@ namespace space_partition
     {
         public:
             // constructor.
-            ChunkMaster(InputParametersToAnyValueCallback get_content_callback);
+            ChunkMaster(GetContentCallback get_content_callback);
 
             // destructor.
             ~ChunkMaster();
@@ -47,7 +47,7 @@ namespace space_partition
             uint32_t childID;                     // `ChunkMaster` ID, returned by `ontology::Material->get_chunk_masterID()`.
 
             // Callback used to get the content based on x, y, z.
-            InputParametersToAnyValueCallback get_content_callback;
+            GetContentCallback get_content_callback;
 
             ontology::Material* parent_pointer;  // pointer to `Material`.
 

@@ -14,7 +14,7 @@ namespace space_partition
                 this->parent_pointer->free_chunk_masterID_queue);
     }
 
-    ChunkMaster::ChunkMaster(InputParametersToAnyValueCallback get_content_callback)
+    ChunkMaster::ChunkMaster(GetContentCallback get_content_callback)
     {
         // constructor.
         this->get_content_callback = get_content_callback;

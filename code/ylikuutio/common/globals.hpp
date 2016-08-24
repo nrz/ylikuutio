@@ -296,4 +296,16 @@ typedef datatypes::AnyValue* (*InputParametersToAnyValueCallbackWithConsole) (
         callback_system::CallbackObject*,
         std::vector<callback_system::CallbackParameter*>&,
         console::Console*);
+
+typedef datatypes::AnyValue* (*GetContentCallback) (
+        callback_system::CallbackEngine*,
+        callback_system::CallbackObject*,
+        std::vector<callback_system::CallbackParameter*>&,
+        uint32_t x_start,
+        uint32_t y_start,
+        uint32_t z_start,
+        uint32_t x_size,
+        uint32_t y_size,
+        uint32_t z_size);
+
 #endif
