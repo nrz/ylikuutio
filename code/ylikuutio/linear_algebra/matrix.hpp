@@ -7,6 +7,8 @@
 
 namespace linear_algebra
 {
+    class Tensor3;
+
     class Matrix
     {
         public:
@@ -55,6 +57,7 @@ namespace linear_algebra
             Matrix transpose();
             float det();
 
+            friend class Tensor3;
             friend Matrix linear_algebra::operator+(Matrix& lhs, Matrix& rhs);
             friend Matrix linear_algebra::operator-(Matrix& lhs, Matrix& rhs);
             friend Matrix linear_algebra::operator*(Matrix& lhs, Matrix& rhs);

@@ -49,6 +49,29 @@ namespace linear_algebra
 
     Tensor3::Tensor3(Matrix& old_matrix)
     {
+        // constructor.
+
+        this->width = old_matrix.width;
+        this->height = old_matrix.height;
+        this->depth = 1;
+        this->array_of_arrays_of_arrays = new float**[this->height];
+
+        for (uint32_t y = 0; y < this->height; y++)
+        {
+            this->array_of_arrays_of_arrays[y] = new float*[this->width];
+
+            for (uint32_t x = 0; x < this->width; x++)
+            {
+                this->array_of_arrays_of_arrays[y][x] = new float[this->depth];
+            }
+        }
+
+        this->next_y_to_populate = 0;
+        this->next_x_to_populate = 0;
+        this->next_z_to_populate = 0;
+        this->is_fully_populated = false;
+
+        this->is_cube = false;
     }
 
     Tensor3::~Tensor3()
