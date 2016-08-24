@@ -137,6 +137,30 @@ namespace linear_algebra
         }
     }
 
+    void Matrix::operator<<(const std::vector<float>& rhs)
+    {
+        uint32_t rhs_i = 0;
+
+        while (!this->is_fully_populated && rhs_i < rhs.size())
+        {
+            // First, get the slice.
+            float* my_array = this->array_of_arrays[this->next_y_to_populate];
+
+            // Then store the value.
+            my_array[this->next_x_to_populate++] = rhs.at(rhs_i++);
+
+            if (this->next_x_to_populate >= this->width)
+            {
+                this->next_x_to_populate = 0;
+
+                if (++this->next_y_to_populate >= this->height)
+                {
+                    this->is_fully_populated = true;
+                }
+            }
+        }
+    }
+
     bool Matrix::operator==(const Matrix& rhs)
     {
         // compare if matrices are equal.

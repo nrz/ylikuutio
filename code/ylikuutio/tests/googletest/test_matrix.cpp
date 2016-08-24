@@ -3,30 +3,59 @@
 
 // Include standard headers
 #include <iostream> // std::cout, std::cin, std::cerr
+#include <vector>   // std::vector
 
 TEST(matrices_must_function_as_expected, matrices)
 {
-    // populate matrices.
+    // populate matrices and matrix equality.
 
     linear_algebra::Matrix identity3x3(3, 3);
     identity3x3 << 1; identity3x3 << 0; identity3x3 << 0;
     identity3x3 << 0; identity3x3 << 1; identity3x3 << 0;
     identity3x3 << 0; identity3x3 << 0; identity3x3 << 1;
 
+    linear_algebra::Matrix identity3x3_populate_with_vector(3, 3);
+    identity3x3_populate_with_vector << std::vector<float> {
+            1, 0, 0,
+            0, 1, 0,
+            0, 0, 1 };
+    ASSERT_TRUE(identity3x3 == identity3x3_populate_with_vector);
+
     linear_algebra::Matrix zeros3x3(3, 3);
     zeros3x3 << 0; zeros3x3 << 0; zeros3x3 << 0;
     zeros3x3 << 0; zeros3x3 << 0; zeros3x3 << 0;
     zeros3x3 << 0; zeros3x3 << 0; zeros3x3 << 0;
+
+    linear_algebra::Matrix zeros3x3_populate_with_vector(3, 3);
+    zeros3x3_populate_with_vector << std::vector<float> {
+            0, 0, 0,
+            0, 0, 0,
+            0, 0, 0 };
+    ASSERT_TRUE(zeros3x3 == zeros3x3_populate_with_vector);
 
     linear_algebra::Matrix ones3x3(3, 3);
     ones3x3 << 1; ones3x3 << 1; ones3x3 << 1;
     ones3x3 << 1; ones3x3 << 1; ones3x3 << 1;
     ones3x3 << 1; ones3x3 << 1; ones3x3 << 1;
 
+    linear_algebra::Matrix ones3x3_populate_with_vector(3, 3);
+    ones3x3_populate_with_vector << std::vector<float> {
+            1, 1, 1,
+            1, 1, 1,
+            1, 1, 1 };
+    ASSERT_TRUE(ones3x3 == ones3x3_populate_with_vector);
+
     linear_algebra::Matrix magic3x3(3, 3);
     magic3x3 << 8; magic3x3 << 1; magic3x3 << 6;
     magic3x3 << 3; magic3x3 << 5; magic3x3 << 7;
     magic3x3 << 4; magic3x3 << 9; magic3x3 << 2;
+
+    linear_algebra::Matrix magic3x3_populate_with_vector(3, 3);
+    magic3x3_populate_with_vector << std::vector<float> {
+            8, 1, 6,
+            3, 5, 7,
+            4, 9, 2 };
+    ASSERT_TRUE(magic3x3 == magic3x3_populate_with_vector);
 
     ASSERT_EQ(magic3x3[0][0], 8);
     ASSERT_EQ(magic3x3[1][0], 3);
