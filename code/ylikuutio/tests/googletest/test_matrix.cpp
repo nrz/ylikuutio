@@ -6,6 +6,8 @@
 
 TEST(matrices_must_function_as_expected, matrices)
 {
+    // populate matrices.
+
     linear_algebra::Matrix identity3x3(3, 3);
     identity3x3 << 1; identity3x3 << 0; identity3x3 << 0;
     identity3x3 << 0; identity3x3 << 1; identity3x3 << 0;
