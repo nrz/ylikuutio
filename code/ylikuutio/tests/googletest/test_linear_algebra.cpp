@@ -21,6 +21,7 @@ TEST(matrices_must_function_as_expected, matrices)
             0, 1, 0,
             0, 0, 1 };
     ASSERT_TRUE(identity3x3 == identity3x3_populate_with_vector);
+    ASSERT_FALSE(identity3x3 != identity3x3_populate_with_vector);
 
     linear_algebra::Matrix zeros3x3(3, 3);
     zeros3x3 << 0; zeros3x3 << 0; zeros3x3 << 0;
@@ -33,6 +34,7 @@ TEST(matrices_must_function_as_expected, matrices)
             0, 0, 0,
             0, 0, 0 };
     ASSERT_TRUE(zeros3x3 == zeros3x3_populate_with_vector);
+    ASSERT_FALSE(zeros3x3 != zeros3x3_populate_with_vector);
 
     linear_algebra::Matrix ones3x3(3, 3);
     ones3x3 << 1; ones3x3 << 1; ones3x3 << 1;
@@ -45,6 +47,7 @@ TEST(matrices_must_function_as_expected, matrices)
             1, 1, 1,
             1, 1, 1 };
     ASSERT_TRUE(ones3x3 == ones3x3_populate_with_vector);
+    ASSERT_FALSE(ones3x3 != ones3x3_populate_with_vector);
 
     linear_algebra::Matrix magic3x3(3, 3);
     magic3x3 << 8; magic3x3 << 1; magic3x3 << 6;
@@ -57,6 +60,7 @@ TEST(matrices_must_function_as_expected, matrices)
             3, 5, 7,
             4, 9, 2 };
     ASSERT_TRUE(magic3x3 == magic3x3_populate_with_vector);
+    ASSERT_FALSE(magic3x3 != magic3x3_populate_with_vector);
 
     ASSERT_EQ(magic3x3[0][0], 8);
     ASSERT_EQ(magic3x3[1][0], 3);
@@ -98,14 +102,19 @@ TEST(matrices_must_function_as_expected, matrices)
     // matrix equality, increment, and decrement.
 
     ASSERT_FALSE(zeros3x3 == ones3x3);
+    ASSERT_TRUE(zeros3x3 != ones3x3);
     zeros3x3++;
     ASSERT_TRUE(zeros3x3 == ones3x3);
+    ASSERT_FALSE(zeros3x3 != ones3x3);
     zeros3x3--;
     ASSERT_FALSE(zeros3x3 == ones3x3);
+    ASSERT_TRUE(zeros3x3 != ones3x3);
     ones3x3--;
     ASSERT_TRUE(zeros3x3 == ones3x3);
+    ASSERT_FALSE(zeros3x3 != ones3x3);
     ones3x3++;
     ASSERT_FALSE(zeros3x3 == ones3x3);
+    ASSERT_TRUE(zeros3x3 != ones3x3);
 
     // copy constructor.
 
@@ -302,6 +311,7 @@ TEST(tensors_must_function_as_expected, tensors)
         22, 23, 24,
         25, 26, 27 };
     ASSERT_TRUE(some_tensor3x3x3 == some_tensor3x3x3_populate_with_vector);
+    ASSERT_FALSE(some_tensor3x3x3 != some_tensor3x3x3_populate_with_vector);
 
     ASSERT_EQ(some_tensor3x3x3_populate_with_vector[0][0][0], 1);
     ASSERT_EQ(some_tensor3x3x3_populate_with_vector[1][0][0], 4);

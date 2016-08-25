@@ -205,4 +205,40 @@ namespace linear_algebra
         // Everything matches. Arrays are identical.
         return true;
     }
+
+    bool Tensor3::operator!=(const Tensor3& rhs)
+    {
+        // compare if tensors are equal.
+        if (this->width != rhs.width ||
+                this->height != rhs.height ||
+                this->depth != rhs.depth)
+        {
+            // Tensors are not equal, if they have different sizes.
+            return true;
+        }
+
+        for (uint32_t y = 0; y < this->height; y++)
+        {
+            // Get the slices of both arrays.
+            float** my_array_of_arrays = this->array_of_arrays_of_arrays[y];
+            float** other_array_of_arrays = rhs.array_of_arrays_of_arrays[y];
+
+            for (uint32_t x = 0; x < this->width; x++)
+            {
+                float* my_array = my_array_of_arrays[x];
+                float* other_array = other_array_of_arrays[x];
+
+                for (uint32_t z = 0; z < this->depth; z++)
+                {
+                    if (my_array[z] != other_array[z])
+                    {
+                        // Arrays are not identical.
+                        return true;
+                    }
+                }
+            }
+        }
+        // Everything matches. Arrays are identical.
+        return false;
+    }
 }

@@ -39,6 +39,7 @@ namespace linear_algebra
             void operator<<(const float rhs);
             void operator<<(const std::vector<float>& rhs);
             bool operator==(const Matrix& rhs);
+            bool operator!=(const Matrix& rhs);
             Matrix& operator++();
             Matrix operator++(const int);
             Matrix& operator--();
