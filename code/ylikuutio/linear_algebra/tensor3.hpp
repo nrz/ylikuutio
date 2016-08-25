@@ -10,6 +10,12 @@ namespace linear_algebra
 {
     class Tensor3
     {
+        // `class Tensor3` uses the same coordinate order as MATLAB,
+        // to make testing easier. So: y, x, z.
+        // y = 0 is the uppermost slice
+        // x = 0 is the leftmost slice.
+        // z = 0 is the front slice.
+
         public:
             // constructor.
             Tensor3(uint32_t height, uint32_t width, uint32_t depth);
