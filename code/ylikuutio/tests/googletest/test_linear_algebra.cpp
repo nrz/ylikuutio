@@ -3,7 +3,6 @@
 #include "code/ylikuutio/linear_algebra/matrix_functions.hpp"
 
 // Include standard headers
-#include <iostream> // std::cout, std::cin, std::cerr
 #include <vector>   // std::vector
 
 TEST(matrices_must_function_as_expected, matrices)
