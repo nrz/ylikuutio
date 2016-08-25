@@ -67,10 +67,11 @@ namespace linear_algebra
 
             bool is_fully_populated;
 
-            // `class Tensor3` uses the same coordinate order as MATLAB,
-            // to make testing easier. So: y, x, z.
-            int32_t next_y_to_populate;
+            // For populating, the order of coordinates from
+            // the one changing fastest to the one changing slowest is:
+            // x, y, z
             int32_t next_x_to_populate;
+            int32_t next_y_to_populate;
             int32_t next_z_to_populate;
 
             float*** array_of_arrays_of_arrays;

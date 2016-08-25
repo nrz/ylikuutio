@@ -32,8 +32,8 @@ namespace linear_algebra
             }
         }
 
-        this->next_y_to_populate = 0;
         this->next_x_to_populate = 0;
+        this->next_y_to_populate = 0;
         this->next_z_to_populate = 0;
         this->is_fully_populated = false;
 
@@ -66,8 +66,8 @@ namespace linear_algebra
             }
         }
 
-        this->next_y_to_populate = 0;
         this->next_x_to_populate = 0;
+        this->next_y_to_populate = 0;
         this->next_z_to_populate = 0;
         this->is_fully_populated = false;
 

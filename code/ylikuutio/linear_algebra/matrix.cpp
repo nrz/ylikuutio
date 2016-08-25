@@ -19,8 +19,8 @@ namespace linear_algebra
             this->array_of_arrays[i] = new float[this->width];
         }
 
-        this->next_y_to_populate = 0;
         this->next_x_to_populate = 0;
+        this->next_y_to_populate = 0;
         this->is_fully_populated = false;
 
         if (this->width == this->height)
@@ -45,8 +45,8 @@ namespace linear_algebra
             this->array_of_arrays[i] = new float[this->width];
         }
 
-        this->next_y_to_populate = old_matrix.next_y_to_populate;
         this->next_x_to_populate = old_matrix.next_x_to_populate;
+        this->next_y_to_populate = old_matrix.next_y_to_populate;
         this->is_fully_populated = old_matrix.is_fully_populated;
 
         // Copy values from old matrix (deep copy).
