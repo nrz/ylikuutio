@@ -273,10 +273,23 @@ TEST(matrices_must_function_as_expected, matrices)
 }
 TEST(tensors_must_function_as_expected, tensors)
 {
-    // populate tensors.
+    // populate tensors and tensor equality.
 
     linear_algebra::Tensor3 some_tensor3x3x3(3, 3, 3);
-    some_tensor3x3x3 << std::vector<float> {
+    some_tensor3x3x3 << 1; some_tensor3x3x3 << 2; some_tensor3x3x3 << 3;
+    some_tensor3x3x3 << 4; some_tensor3x3x3 << 5; some_tensor3x3x3 << 6;
+    some_tensor3x3x3 << 7; some_tensor3x3x3 << 8; some_tensor3x3x3 << 9;
+
+    some_tensor3x3x3 << 10; some_tensor3x3x3 << 11; some_tensor3x3x3 << 12;
+    some_tensor3x3x3 << 13; some_tensor3x3x3 << 14; some_tensor3x3x3 << 15;
+    some_tensor3x3x3 << 16; some_tensor3x3x3 << 17; some_tensor3x3x3 << 18;
+
+    some_tensor3x3x3 << 19; some_tensor3x3x3 << 20; some_tensor3x3x3 << 21;
+    some_tensor3x3x3 << 22; some_tensor3x3x3 << 23; some_tensor3x3x3 << 24;
+    some_tensor3x3x3 << 25; some_tensor3x3x3 << 26; some_tensor3x3x3 << 27;
+
+    linear_algebra::Tensor3 some_tensor3x3x3_populate_with_vector(3, 3, 3);
+    some_tensor3x3x3_populate_with_vector << std::vector<float> {
         1, 2, 3,
         4, 5, 6,
         7, 8, 9,
@@ -288,40 +301,41 @@ TEST(tensors_must_function_as_expected, tensors)
         19, 20, 21,
         22, 23, 24,
         25, 26, 27 };
+    ASSERT_TRUE(some_tensor3x3x3 == some_tensor3x3x3_populate_with_vector);
 
-    ASSERT_EQ(some_tensor3x3x3[0][0][0], 1);
-    ASSERT_EQ(some_tensor3x3x3[1][0][0], 4);
-    ASSERT_EQ(some_tensor3x3x3[2][0][0], 7);
+    ASSERT_EQ(some_tensor3x3x3_populate_with_vector[0][0][0], 1);
+    ASSERT_EQ(some_tensor3x3x3_populate_with_vector[1][0][0], 4);
+    ASSERT_EQ(some_tensor3x3x3_populate_with_vector[2][0][0], 7);
 
-    ASSERT_EQ(some_tensor3x3x3[0][1][0], 2);
-    ASSERT_EQ(some_tensor3x3x3[1][1][0], 5);
-    ASSERT_EQ(some_tensor3x3x3[2][1][0], 8);
+    ASSERT_EQ(some_tensor3x3x3_populate_with_vector[0][1][0], 2);
+    ASSERT_EQ(some_tensor3x3x3_populate_with_vector[1][1][0], 5);
+    ASSERT_EQ(some_tensor3x3x3_populate_with_vector[2][1][0], 8);
 
-    ASSERT_EQ(some_tensor3x3x3[0][2][0], 3);
-    ASSERT_EQ(some_tensor3x3x3[1][2][0], 6);
-    ASSERT_EQ(some_tensor3x3x3[2][2][0], 9);
+    ASSERT_EQ(some_tensor3x3x3_populate_with_vector[0][2][0], 3);
+    ASSERT_EQ(some_tensor3x3x3_populate_with_vector[1][2][0], 6);
+    ASSERT_EQ(some_tensor3x3x3_populate_with_vector[2][2][0], 9);
 
-    ASSERT_EQ(some_tensor3x3x3[0][0][1], 10);
-    ASSERT_EQ(some_tensor3x3x3[1][0][1], 13);
-    ASSERT_EQ(some_tensor3x3x3[2][0][1], 16);
+    ASSERT_EQ(some_tensor3x3x3_populate_with_vector[0][0][1], 10);
+    ASSERT_EQ(some_tensor3x3x3_populate_with_vector[1][0][1], 13);
+    ASSERT_EQ(some_tensor3x3x3_populate_with_vector[2][0][1], 16);
 
-    ASSERT_EQ(some_tensor3x3x3[0][1][1], 11);
-    ASSERT_EQ(some_tensor3x3x3[1][1][1], 14);
-    ASSERT_EQ(some_tensor3x3x3[2][1][1], 17);
+    ASSERT_EQ(some_tensor3x3x3_populate_with_vector[0][1][1], 11);
+    ASSERT_EQ(some_tensor3x3x3_populate_with_vector[1][1][1], 14);
+    ASSERT_EQ(some_tensor3x3x3_populate_with_vector[2][1][1], 17);
 
-    ASSERT_EQ(some_tensor3x3x3[0][2][1], 12);
-    ASSERT_EQ(some_tensor3x3x3[1][2][1], 15);
-    ASSERT_EQ(some_tensor3x3x3[2][2][1], 18);
+    ASSERT_EQ(some_tensor3x3x3_populate_with_vector[0][2][1], 12);
+    ASSERT_EQ(some_tensor3x3x3_populate_with_vector[1][2][1], 15);
+    ASSERT_EQ(some_tensor3x3x3_populate_with_vector[2][2][1], 18);
 
-    ASSERT_EQ(some_tensor3x3x3[0][0][2], 19);
-    ASSERT_EQ(some_tensor3x3x3[1][0][2], 22);
-    ASSERT_EQ(some_tensor3x3x3[2][0][2], 25);
+    ASSERT_EQ(some_tensor3x3x3_populate_with_vector[0][0][2], 19);
+    ASSERT_EQ(some_tensor3x3x3_populate_with_vector[1][0][2], 22);
+    ASSERT_EQ(some_tensor3x3x3_populate_with_vector[2][0][2], 25);
 
-    ASSERT_EQ(some_tensor3x3x3[0][1][2], 20);
-    ASSERT_EQ(some_tensor3x3x3[1][1][2], 23);
-    ASSERT_EQ(some_tensor3x3x3[2][1][2], 26);
+    ASSERT_EQ(some_tensor3x3x3_populate_with_vector[0][1][2], 20);
+    ASSERT_EQ(some_tensor3x3x3_populate_with_vector[1][1][2], 23);
+    ASSERT_EQ(some_tensor3x3x3_populate_with_vector[2][1][2], 26);
 
-    ASSERT_EQ(some_tensor3x3x3[0][2][2], 21);
-    ASSERT_EQ(some_tensor3x3x3[1][2][2], 24);
-    ASSERT_EQ(some_tensor3x3x3[2][2][2], 27);
+    ASSERT_EQ(some_tensor3x3x3_populate_with_vector[0][2][2], 21);
+    ASSERT_EQ(some_tensor3x3x3_populate_with_vector[1][2][2], 24);
+    ASSERT_EQ(some_tensor3x3x3_populate_with_vector[2][2][2], 27);
 }
