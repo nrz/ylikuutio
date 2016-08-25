@@ -99,6 +99,8 @@ namespace linear_algebra
 
             if (++this->next_y_to_populate >= this->height)
             {
+                this->next_y_to_populate = 0;
+
                 if (++this->next_z_to_populate >= this->depth)
                 {
                     this->is_fully_populated = true;
@@ -130,6 +132,8 @@ namespace linear_algebra
 
             if (++this->next_y_to_populate >= this->height)
             {
+                this->next_y_to_populate = 0;
+
                 if (++this->next_z_to_populate >= this->depth)
                 {
                     this->is_fully_populated = true;
