@@ -1,6 +1,7 @@
 #include "gtest/gtest.h"
 #include "code/ylikuutio/linear_algebra/matrix.hpp"
 #include "code/ylikuutio/linear_algebra/matrix_functions.hpp"
+#include "code/ylikuutio/linear_algebra/tensor3.hpp"
 
 // Include standard headers
 #include <vector>   // std::vector
@@ -269,4 +270,58 @@ TEST(matrices_must_function_as_expected, matrices)
     ASSERT_EQ(magic3x3_left_magic3x3_transposed_right[0][5], 4);
     ASSERT_EQ(magic3x3_left_magic3x3_transposed_right[1][5], 9);
     ASSERT_EQ(magic3x3_left_magic3x3_transposed_right[2][5], 2);
+}
+TEST(tensors_must_function_as_expected, tensors)
+{
+    // populate tensors.
+
+    linear_algebra::Tensor3 some_tensor3x3x3(3, 3, 3);
+    some_tensor3x3x3 << std::vector<float> {
+        1, 2, 3,
+        4, 5, 6,
+        7, 8, 9,
+
+        10, 11, 12,
+        13, 14, 15,
+        16, 17, 18,
+
+        19, 20, 21,
+        22, 23, 24,
+        25, 26, 27 };
+
+    ASSERT_EQ(some_tensor3x3x3[0][0][0], 1);
+    ASSERT_EQ(some_tensor3x3x3[1][0][0], 4);
+    ASSERT_EQ(some_tensor3x3x3[2][0][0], 7);
+
+    ASSERT_EQ(some_tensor3x3x3[0][1][0], 2);
+    ASSERT_EQ(some_tensor3x3x3[1][1][0], 5);
+    ASSERT_EQ(some_tensor3x3x3[2][1][0], 8);
+
+    ASSERT_EQ(some_tensor3x3x3[0][2][0], 3);
+    ASSERT_EQ(some_tensor3x3x3[1][2][0], 6);
+    ASSERT_EQ(some_tensor3x3x3[2][2][0], 9);
+
+    ASSERT_EQ(some_tensor3x3x3[0][0][1], 10);
+    ASSERT_EQ(some_tensor3x3x3[1][0][1], 13);
+    ASSERT_EQ(some_tensor3x3x3[2][0][1], 16);
+
+    ASSERT_EQ(some_tensor3x3x3[0][1][1], 11);
+    ASSERT_EQ(some_tensor3x3x3[1][1][1], 14);
+    ASSERT_EQ(some_tensor3x3x3[2][1][1], 17);
+
+    ASSERT_EQ(some_tensor3x3x3[0][2][1], 12);
+    ASSERT_EQ(some_tensor3x3x3[1][2][1], 15);
+    ASSERT_EQ(some_tensor3x3x3[2][2][1], 18);
+
+    ASSERT_EQ(some_tensor3x3x3[0][0][2], 19);
+    ASSERT_EQ(some_tensor3x3x3[1][0][2], 22);
+    ASSERT_EQ(some_tensor3x3x3[2][0][2], 25);
+
+    ASSERT_EQ(some_tensor3x3x3[0][1][2], 20);
+    ASSERT_EQ(some_tensor3x3x3[1][1][2], 23);
+    ASSERT_EQ(some_tensor3x3x3[2][1][2], 26);
+
+    ASSERT_EQ(some_tensor3x3x3[0][2][2], 21);
+    ASSERT_EQ(some_tensor3x3x3[1][2][2], 24);
+    ASSERT_EQ(some_tensor3x3x3[2][2][2], 27);
 }
