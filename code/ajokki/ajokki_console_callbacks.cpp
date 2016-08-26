@@ -1,4 +1,5 @@
 #include "ajokki_console_callbacks.hpp"
+#include "code/ylikuutio/console/command_and_callback_struct.hpp"
 #include "code/ylikuutio/common/globals.hpp"
 
 // Include standard headers

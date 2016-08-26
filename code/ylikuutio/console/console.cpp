@@ -1,4 +1,5 @@
 #include "console.hpp"
+#include "command_and_callback_struct.hpp"
 #include "code/ylikuutio/ontology/font2D.hpp"
 #include "code/ylikuutio/callback_system/callback_magic_numbers.hpp"
 #include "code/ylikuutio/common/global_variables.hpp"
@@ -15,6 +16,7 @@
 #include <iterator> // std::back_inserter
 #include <list>     // std::list
 #include <stdint.h> // uint32_t etc.
+#include <unordered_map> // std::unordered_map
 #include <vector>   // std::vector
 
 namespace console
@@ -22,6 +24,7 @@ namespace console
     Console::Console(
             std::vector<KeyAndCallbackStruct>** current_keypress_callback_engine_vector_pointer_pointer,
             std::vector<KeyAndCallbackStruct>** current_keyrelease_callback_engine_vector_pointer_pointer,
+            std::unordered_map<std::string, ConsoleCommandCallback>* command_callback_map_pointer,
             ontology::Font2D* text2D_pointer)
     {
         // constructor.
@@ -52,6 +55,9 @@ namespace console
 
         // This is a pointer to `std::vector<KeyAndCallbackStruct>*` that controls keyrelease callbacks.
         this->current_keyrelease_callback_engine_vector_pointer_pointer = current_keyrelease_callback_engine_vector_pointer_pointer;
+
+        // This is a pointer to `std::unordered_map<std::string, bool>` that contains console command callbacks.
+        this->command_callback_map_pointer = command_callback_map_pointer;
 
         // This is a pointer to `font2D::Font2D` instance that is used for printing.
         this->text2D_pointer = text2D_pointer;

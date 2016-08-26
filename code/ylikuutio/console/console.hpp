@@ -1,6 +1,7 @@
 #ifndef __CONSOLE_HPP_INCLUDED
 #define __CONSOLE_HPP_INCLUDED
 
+#include "command_and_callback_struct.hpp"
 #include "code/ylikuutio/callback_system/key_and_callback_struct.hpp"
 #include "code/ylikuutio/callback_system/callback_parameter.hpp"
 #include "code/ylikuutio/callback_system/callback_object.hpp"
@@ -17,6 +18,7 @@
 // Include standard headers
 #include <list>     // std::list
 #include <stdint.h> // uint32_t etc.
+#include <unordered_map> // std::unordered_map
 #include <vector>   // std::vector
 
 namespace console
@@ -27,6 +29,7 @@ namespace console
             // constructor.
             Console(std::vector<KeyAndCallbackStruct>** current_keypress_callback_engine_vector_pointer_pointer,
                     std::vector<KeyAndCallbackStruct>** current_keyrelease_callback_engine_vector_pointer_pointer,
+                    std::unordered_map<std::string, ConsoleCommandCallback>* command_callback_map_pointer,
                     ontology::Font2D* text2D_pointer);
 
             // destructor.
@@ -253,6 +256,9 @@ namespace console
             std::vector<KeyAndCallbackStruct>** current_keyrelease_callback_engine_vector_pointer_pointer;
             std::vector<KeyAndCallbackStruct>* previous_keyrelease_callback_engine_vector_pointer;
             std::vector<KeyAndCallbackStruct>* my_keyrelease_callback_engine_vector_pointer;
+
+            // This is a pointer to `std::unordered_map<std::string, bool>` that contains console command callbacks.
+            std::unordered_map<std::string, ConsoleCommandCallback>* command_callback_map_pointer;
 
             // This is a pointer to `font2D::Font2D` instance that is used for printing.
             ontology::Font2D* text2D_pointer;

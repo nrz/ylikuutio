@@ -363,6 +363,7 @@ int main(void)
     console::Console* my_console = new console::Console(
             &current_keypress_callback_engine_vector_pointer,
             &current_keyrelease_callback_engine_vector_pointer,
+            nullptr,
             my_text2D); // create a console.
     global_console_pointer = my_console;
 
