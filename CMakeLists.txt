@@ -589,8 +589,8 @@ add_library(ylikuutio STATIC
 add_executable(ajokki
     # ajokki, in alphabetical order
     code/ajokki/ajokki.cpp
-    code/ajokki/ajokki_callbacks.cpp
-    code/ajokki/ajokki_callbacks.hpp
+    code/ajokki/ajokki_keyboard_callbacks.cpp
+    code/ajokki/ajokki_keyboard_callbacks.hpp
     )
 add_dependencies(ajokki rescan)
 target_link_libraries(ajokki ylikuutio ${ALL_LIBS} glfw)
