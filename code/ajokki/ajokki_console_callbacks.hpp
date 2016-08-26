@@ -3,6 +3,10 @@
 
 #include "code/ylikuutio/common/globals.hpp"
 
+// Include standard headers
+#include <string>   // std::string
+#include <vector>   // std::vector
+
 namespace ajokki
 {
     datatypes::AnyValue* version(
