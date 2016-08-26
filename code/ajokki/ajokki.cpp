@@ -980,16 +980,20 @@ int main(void)
                     help_text_char,
                     "Ajokki v. 0.0.1\\n"
                     "\\n"
-                    "F1-help mode\\n"
                     "arrow keys\\n"
-                    "I-invert mouse (%s)\\n"
-                    "F-flight mode (%s)\\n"
-                    "G-grass texture%s\\n"
-                    "U-uvmap texture%s\\n"
-                    "T-terrain species\\n"
-                    "A-suzanne species\\n"
-                    "Ctrl     -turbo\\n"
-                    "Ctrl+Ctrl-extra turbo\\n",
+                    "space jump\\n"
+                    "enter duck\\n"
+                    "F1 help mode\\n"
+                    "`  enter console\\n"
+                    "I  invert mouse (%s)\\n"
+                    "F  flight mode (%s)\\n"
+                    "Ctrl      turbo\\n"
+                    "Ctrl+Ctrl extra turbo\\n"
+                    "for debugging:\\n"
+                    "G  grass texture%s\\n"
+                    "U  uvmap texture%s\\n"
+                    "T  terrain species\\n"
+                    "A  suzanne species\\n",
                     (is_invert_mouse_in_use ? on_text : off_text),
                     (is_flight_mode_in_use ? on_text : off_text),
                     (!does_suzanne_species_have_uvmap_texture ? in_use_text : null_text),
@@ -1014,7 +1018,7 @@ int main(void)
             {
                 // print help text.
                 printing_struct.x = 0;
-                printing_struct.y = window_height - (7 * text_size);
+                printing_struct.y = window_height - (3 * text_size);
                 printing_struct.text_char = help_text_char;
                 printing_struct.horizontal_alignment = "left";
                 printing_struct.vertical_alignment = "top";
