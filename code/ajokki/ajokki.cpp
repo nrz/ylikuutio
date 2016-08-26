@@ -7,6 +7,7 @@
 #define RADIANS_TO_DEGREES(x) (x * 180.0f / PI)
 #endif
 
+#include "ajokki_console_callbacks.hpp"
 #include "ajokki_keyboard_callbacks.hpp"
 #include "code/ylikuutio/callback_system/callback_parameter.hpp"
 #include "code/ylikuutio/callback_system/callback_object.hpp"
