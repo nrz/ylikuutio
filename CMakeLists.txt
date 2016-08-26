@@ -451,6 +451,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/common/template_helpers.hpp
 
     # console, in alphabetical order.
+    code/ylikuutio/console/command_and_callback_struct.hpp
     code/ylikuutio/console/console.cpp
     code/ylikuutio/console/console.hpp
     code/ylikuutio/console/console_callback_object.cpp
