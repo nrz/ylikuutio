@@ -26,12 +26,12 @@ namespace loaders
         std::printf("Reading image %s\n", imagepath);
 
         // Data read from the header of the BMP file
-        unsigned char header[54];
+        uint8_t header[54];
         uint32_t dataPos;
         uint32_t imageSize;
         uint32_t width, height;
         // Actual RGB data
-        unsigned char* data;
+        uint8_t* data;
 
         // Open the file
         std::FILE* file = std::fopen(imagepath,"rb");
@@ -88,7 +88,7 @@ namespace loaders
         }
 
         // Create a buffer
-        data = new unsigned char [imageSize];
+        data = new uint8_t [imageSize];
 
         if (data == nullptr)
         {
@@ -173,7 +173,7 @@ namespace loaders
 
     GLuint load_DDS_texture(const char* imagepath)
     {
-        unsigned char header[124];
+        uint8_t header[124];
         std::FILE* fp;
 
         /* try to open the file */
@@ -202,11 +202,11 @@ namespace loaders
         uint32_t mipMapCount = *(uint32_t*) &header[24];
         uint32_t fourCC      = *(uint32_t*) &header[80];
 
-        unsigned char* buffer;
+        uint8_t* buffer;
         uint32_t bufsize;
         /* how big is it going to be including all mipmaps? */
         bufsize = mipMapCount > 1 ? linearSize * 2 : linearSize;
-        buffer = (unsigned char*) malloc(bufsize * sizeof(unsigned char));
+        buffer = (uint8_t*) malloc(bufsize * sizeof(uint8_t));
         std::fread(buffer, 1, bufsize, fp);
         /* close the file pointer */
         std::fclose(fp);

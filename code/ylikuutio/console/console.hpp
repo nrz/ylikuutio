@@ -1,6 +1,7 @@
 #ifndef __CONSOLE_HPP_INCLUDED
 #define __CONSOLE_HPP_INCLUDED
 
+#include "command_and_callback_struct.hpp"
 #include "code/ylikuutio/callback_system/key_and_callback_struct.hpp"
 #include "code/ylikuutio/callback_system/callback_parameter.hpp"
 #include "code/ylikuutio/callback_system/callback_object.hpp"
@@ -15,9 +16,10 @@
 #endif
 
 // Include standard headers
-#include <list>     // std::list
-#include <stdint.h> // uint32_t etc.
-#include <vector>   // std::vector
+#include <list>          // std::list
+#include <stdint.h>      // uint32_t etc.
+#include <unordered_map> // std::unordered_map
+#include <vector>        // std::vector
 
 namespace console
 {
@@ -27,6 +29,8 @@ namespace console
             // constructor.
             Console(std::vector<KeyAndCallbackStruct>** current_keypress_callback_engine_vector_pointer_pointer,
                     std::vector<KeyAndCallbackStruct>** current_keyrelease_callback_engine_vector_pointer_pointer,
+                    std::unordered_map<std::string, ConsoleCommandCallback>* command_callback_map_pointer,
+                    ontology::Universe* universe_pointer,
                     ontology::Font2D* text2D_pointer);
 
             // destructor.
@@ -34,6 +38,8 @@ namespace console
 
             void set_my_keypress_callback_engine_vector_pointer(std::vector<KeyAndCallbackStruct>* my_keypress_callback_engine_vector_pointer);
             void set_my_keyrelease_callback_engine_vector_pointer(std::vector<KeyAndCallbackStruct>* my_keyrelease_callback_engine_vector_pointer);
+            void print_text(std::string text);
+            void print_help();
             void draw_console();
 
             // Public callbacks.
@@ -240,6 +246,8 @@ namespace console
             bool is_right_shift_pressed;
 
             std::vector<std::list<char>> command_history;
+            std::vector<std::list<char>> console_history;
+
             bool in_historical_input;
             uint32_t historical_input_i;
             std::list<char> temp_input;    // This is used for temporary storage of new input while modifying historical inputs.
@@ -253,6 +261,12 @@ namespace console
             std::vector<KeyAndCallbackStruct>** current_keyrelease_callback_engine_vector_pointer_pointer;
             std::vector<KeyAndCallbackStruct>* previous_keyrelease_callback_engine_vector_pointer;
             std::vector<KeyAndCallbackStruct>* my_keyrelease_callback_engine_vector_pointer;
+
+            // This is a pointer to `std::unordered_map<std::string, bool>` that contains console command callbacks.
+            std::unordered_map<std::string, ConsoleCommandCallback>* command_callback_map_pointer;
+
+            // This is a pointer to `ontology::Universe`.
+            ontology::Universe* universe_pointer;
 
             // This is a pointer to `font2D::Font2D` instance that is used for printing.
             ontology::Font2D* text2D_pointer;

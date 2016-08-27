@@ -19,8 +19,8 @@ namespace linear_algebra
             this->array_of_arrays[i] = new float[this->width];
         }
 
-        this->next_y_to_populate = 0;
         this->next_x_to_populate = 0;
+        this->next_y_to_populate = 0;
         this->is_fully_populated = false;
 
         if (this->width == this->height)
@@ -45,8 +45,8 @@ namespace linear_algebra
             this->array_of_arrays[i] = new float[this->width];
         }
 
-        this->next_y_to_populate = old_matrix.next_y_to_populate;
         this->next_x_to_populate = old_matrix.next_x_to_populate;
+        this->next_y_to_populate = old_matrix.next_y_to_populate;
         this->is_fully_populated = old_matrix.is_fully_populated;
 
         // Copy values from old matrix (deep copy).
@@ -86,7 +86,7 @@ namespace linear_algebra
         {
             for (uint32_t y = 0; y < this->height; y++)
             {
-                new_matrix.operator<<(this->operator[](y).operator[](x));
+                new_matrix << this->operator[](y).operator[](x);
             }
         }
         return new_matrix;
@@ -202,6 +202,35 @@ namespace linear_algebra
         }
         // Everything matches. Arrays are identical.
         return true;
+    }
+
+    bool Matrix::operator!=(const Matrix& rhs)
+    {
+        // compare if matrices are equal.
+        if (this->width != rhs.width ||
+                this->height != rhs.height)
+        {
+            // Matrices are not equal, if they have different sizes.
+            return true;
+        }
+
+        for (uint32_t y = 0; y < this->height; y++)
+        {
+            // Get the slices of both arrays.
+            float* my_array = this->array_of_arrays[y];
+            float* other_array = rhs.array_of_arrays[y];
+
+            for (uint32_t x = 0; x < this->width; x++)
+            {
+                if (my_array[x] != other_array[x])
+                {
+                    // Arrays are not identical.
+                    return true;
+                }
+            }
+        }
+        // Everything matches. Arrays are identical.
+        return false;
     }
 
     Matrix& Matrix::operator++()

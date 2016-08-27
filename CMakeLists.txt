@@ -451,6 +451,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/common/template_helpers.hpp
 
     # console, in alphabetical order.
+    code/ylikuutio/console/command_and_callback_struct.hpp
     code/ylikuutio/console/console.cpp
     code/ylikuutio/console/console.hpp
     code/ylikuutio/console/console_callback_object.cpp
@@ -492,6 +493,8 @@ add_library(ylikuutio STATIC
     # linear algebra, in alphabetical order.
     code/ylikuutio/linear_algebra/matrix.cpp
     code/ylikuutio/linear_algebra/matrix.hpp
+    code/ylikuutio/linear_algebra/matrix_functions.cpp
+    code/ylikuutio/linear_algebra/matrix_functions.hpp
     code/ylikuutio/linear_algebra/tensor3.cpp
     code/ylikuutio/linear_algebra/tensor3.hpp
 
@@ -587,8 +590,10 @@ add_library(ylikuutio STATIC
 add_executable(ajokki
     # ajokki, in alphabetical order
     code/ajokki/ajokki.cpp
-    code/ajokki/ajokki_callbacks.cpp
-    code/ajokki/ajokki_callbacks.hpp
+    code/ajokki/ajokki_console_callbacks.cpp
+    code/ajokki/ajokki_console_callbacks.hpp
+    code/ajokki/ajokki_keyboard_callbacks.cpp
+    code/ajokki/ajokki_keyboard_callbacks.hpp
     )
 add_dependencies(ajokki rescan)
 target_link_libraries(ajokki ylikuutio ${ALL_LIBS} glfw)
@@ -645,6 +650,10 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/hierarchy/hierarchy_templates.hpp
         code/ylikuutio/linear_algebra/matrix.cpp
         code/ylikuutio/linear_algebra/matrix.hpp
+        code/ylikuutio/linear_algebra/matrix_functions.cpp
+        code/ylikuutio/linear_algebra/matrix_functions.hpp
+        code/ylikuutio/linear_algebra/tensor3.cpp
+        code/ylikuutio/linear_algebra/tensor3.hpp
         code/ylikuutio/loaders/font_loader.cpp
         code/ylikuutio/loaders/font_loader.hpp
         code/ylikuutio/string/ylikuutio_string.cpp
@@ -667,7 +676,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/googletest/test_line2D.cpp
         code/ylikuutio/tests/googletest/test_line_line_intersection.cpp
         code/ylikuutio/tests/googletest/test_line_segment_line_segment_intersection.cpp
-        code/ylikuutio/tests/googletest/test_matrix.cpp
+        code/ylikuutio/tests/googletest/test_linear_algebra.cpp
         code/ylikuutio/tests/googletest/test_pugixml.cpp
         code/ylikuutio/tests/googletest/test_ylikuutio_string.cpp)
     set(MAIN_FILE code/ylikuutio/tests/googletest/main.cpp)

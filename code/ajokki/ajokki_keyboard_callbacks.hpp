@@ -1,5 +1,5 @@
-#ifndef __AJOKKI_CALLBACKS_HPP_INCLUDED
-#define __AJOKKI_CALLBACKS_HPP_INCLUDED
+#ifndef __AJOKKI_KEYBOARD_CALLBACKS_HPP_INCLUDED
+#define __AJOKKI_KEYBOARD_CALLBACKS_HPP_INCLUDED
 
 #include "code/ylikuutio/common/any_value.hpp"
 #include "code/ylikuutio/callback_system/callback_parameter.hpp"

@@ -1,8 +1,9 @@
 #include "gtest/gtest.h"
 #include "code/ylikuutio/linear_algebra/matrix.hpp"
+#include "code/ylikuutio/linear_algebra/matrix_functions.hpp"
+#include "code/ylikuutio/linear_algebra/tensor3.hpp"
 
 // Include standard headers
-#include <iostream> // std::cout, std::cin, std::cerr
 #include <vector>   // std::vector
 
 TEST(matrices_must_function_as_expected, matrices)
@@ -20,6 +21,7 @@ TEST(matrices_must_function_as_expected, matrices)
             0, 1, 0,
             0, 0, 1 };
     ASSERT_TRUE(identity3x3 == identity3x3_populate_with_vector);
+    ASSERT_FALSE(identity3x3 != identity3x3_populate_with_vector);
 
     linear_algebra::Matrix zeros3x3(3, 3);
     zeros3x3 << 0; zeros3x3 << 0; zeros3x3 << 0;
@@ -32,6 +34,7 @@ TEST(matrices_must_function_as_expected, matrices)
             0, 0, 0,
             0, 0, 0 };
     ASSERT_TRUE(zeros3x3 == zeros3x3_populate_with_vector);
+    ASSERT_FALSE(zeros3x3 != zeros3x3_populate_with_vector);
 
     linear_algebra::Matrix ones3x3(3, 3);
     ones3x3 << 1; ones3x3 << 1; ones3x3 << 1;
@@ -44,6 +47,7 @@ TEST(matrices_must_function_as_expected, matrices)
             1, 1, 1,
             1, 1, 1 };
     ASSERT_TRUE(ones3x3 == ones3x3_populate_with_vector);
+    ASSERT_FALSE(ones3x3 != ones3x3_populate_with_vector);
 
     linear_algebra::Matrix magic3x3(3, 3);
     magic3x3 << 8; magic3x3 << 1; magic3x3 << 6;
@@ -56,6 +60,7 @@ TEST(matrices_must_function_as_expected, matrices)
             3, 5, 7,
             4, 9, 2 };
     ASSERT_TRUE(magic3x3 == magic3x3_populate_with_vector);
+    ASSERT_FALSE(magic3x3 != magic3x3_populate_with_vector);
 
     ASSERT_EQ(magic3x3[0][0], 8);
     ASSERT_EQ(magic3x3[1][0], 3);
@@ -97,14 +102,19 @@ TEST(matrices_must_function_as_expected, matrices)
     // matrix equality, increment, and decrement.
 
     ASSERT_FALSE(zeros3x3 == ones3x3);
+    ASSERT_TRUE(zeros3x3 != ones3x3);
     zeros3x3++;
     ASSERT_TRUE(zeros3x3 == ones3x3);
+    ASSERT_FALSE(zeros3x3 != ones3x3);
     zeros3x3--;
     ASSERT_FALSE(zeros3x3 == ones3x3);
+    ASSERT_TRUE(zeros3x3 != ones3x3);
     ones3x3--;
     ASSERT_TRUE(zeros3x3 == ones3x3);
+    ASSERT_FALSE(zeros3x3 != ones3x3);
     ones3x3++;
     ASSERT_FALSE(zeros3x3 == ones3x3);
+    ASSERT_TRUE(zeros3x3 != ones3x3);
 
     // copy constructor.
 
@@ -213,4 +223,129 @@ TEST(matrices_must_function_as_expected, matrices)
     ASSERT_EQ(magic3x3squared[0][2], 67);
     ASSERT_EQ(magic3x3squared[1][2], 67);
     ASSERT_EQ(magic3x3squared[2][2], 91);
+
+    // matrix transpose.
+    linear_algebra::Matrix magic3x3transposed = magic3x3.transpose();
+    ASSERT_EQ(magic3x3transposed[0][0], 8);
+    ASSERT_EQ(magic3x3transposed[1][0], 1);
+    ASSERT_EQ(magic3x3transposed[2][0], 6);
+    ASSERT_EQ(magic3x3transposed[0][1], 3);
+    ASSERT_EQ(magic3x3transposed[1][1], 5);
+    ASSERT_EQ(magic3x3transposed[2][1], 7);
+    ASSERT_EQ(magic3x3transposed[0][2], 4);
+    ASSERT_EQ(magic3x3transposed[1][2], 9);
+    ASSERT_EQ(magic3x3transposed[2][2], 2);
+
+    // matrix concatenation.
+
+    linear_algebra::Matrix magic3x3_above_magic3x3_transposed_below(cat(1, magic3x3, magic3x3_transposed));
+    ASSERT_EQ(magic3x3_above_magic3x3_transposed_below[0][0], 8);
+    ASSERT_EQ(magic3x3_above_magic3x3_transposed_below[1][0], 3);
+    ASSERT_EQ(magic3x3_above_magic3x3_transposed_below[2][0], 4);
+    ASSERT_EQ(magic3x3_above_magic3x3_transposed_below[3][0], 8);
+    ASSERT_EQ(magic3x3_above_magic3x3_transposed_below[4][0], 1);
+    ASSERT_EQ(magic3x3_above_magic3x3_transposed_below[5][0], 6);
+    ASSERT_EQ(magic3x3_above_magic3x3_transposed_below[0][1], 1);
+    ASSERT_EQ(magic3x3_above_magic3x3_transposed_below[1][1], 5);
+    ASSERT_EQ(magic3x3_above_magic3x3_transposed_below[2][1], 9);
+    ASSERT_EQ(magic3x3_above_magic3x3_transposed_below[3][1], 3);
+    ASSERT_EQ(magic3x3_above_magic3x3_transposed_below[4][1], 5);
+    ASSERT_EQ(magic3x3_above_magic3x3_transposed_below[5][1], 7);
+    ASSERT_EQ(magic3x3_above_magic3x3_transposed_below[0][2], 6);
+    ASSERT_EQ(magic3x3_above_magic3x3_transposed_below[1][2], 7);
+    ASSERT_EQ(magic3x3_above_magic3x3_transposed_below[2][2], 2);
+    ASSERT_EQ(magic3x3_above_magic3x3_transposed_below[3][2], 4);
+    ASSERT_EQ(magic3x3_above_magic3x3_transposed_below[4][2], 9);
+    ASSERT_EQ(magic3x3_above_magic3x3_transposed_below[5][2], 2);
+
+    // matrix concatenation.
+
+    linear_algebra::Matrix magic3x3_left_magic3x3_transposed_right(cat(2, magic3x3, magic3x3_transposed));
+    ASSERT_EQ(magic3x3_left_magic3x3_transposed_right[0][0], 8);
+    ASSERT_EQ(magic3x3_left_magic3x3_transposed_right[1][0], 3);
+    ASSERT_EQ(magic3x3_left_magic3x3_transposed_right[2][0], 4);
+    ASSERT_EQ(magic3x3_left_magic3x3_transposed_right[0][1], 1);
+    ASSERT_EQ(magic3x3_left_magic3x3_transposed_right[1][1], 5);
+    ASSERT_EQ(magic3x3_left_magic3x3_transposed_right[2][1], 9);
+    ASSERT_EQ(magic3x3_left_magic3x3_transposed_right[0][2], 6);
+    ASSERT_EQ(magic3x3_left_magic3x3_transposed_right[1][2], 7);
+    ASSERT_EQ(magic3x3_left_magic3x3_transposed_right[2][2], 2);
+    ASSERT_EQ(magic3x3_left_magic3x3_transposed_right[0][3], 8);
+    ASSERT_EQ(magic3x3_left_magic3x3_transposed_right[1][3], 1);
+    ASSERT_EQ(magic3x3_left_magic3x3_transposed_right[2][3], 6);
+    ASSERT_EQ(magic3x3_left_magic3x3_transposed_right[0][4], 3);
+    ASSERT_EQ(magic3x3_left_magic3x3_transposed_right[1][4], 5);
+    ASSERT_EQ(magic3x3_left_magic3x3_transposed_right[2][4], 7);
+    ASSERT_EQ(magic3x3_left_magic3x3_transposed_right[0][5], 4);
+    ASSERT_EQ(magic3x3_left_magic3x3_transposed_right[1][5], 9);
+    ASSERT_EQ(magic3x3_left_magic3x3_transposed_right[2][5], 2);
+}
+TEST(tensors_must_function_as_expected, tensors)
+{
+    // populate tensors and tensor equality.
+
+    linear_algebra::Tensor3 some_tensor3x3x3(3, 3, 3);
+    some_tensor3x3x3 << 1; some_tensor3x3x3 << 2; some_tensor3x3x3 << 3;
+    some_tensor3x3x3 << 4; some_tensor3x3x3 << 5; some_tensor3x3x3 << 6;
+    some_tensor3x3x3 << 7; some_tensor3x3x3 << 8; some_tensor3x3x3 << 9;
+
+    some_tensor3x3x3 << 10; some_tensor3x3x3 << 11; some_tensor3x3x3 << 12;
+    some_tensor3x3x3 << 13; some_tensor3x3x3 << 14; some_tensor3x3x3 << 15;
+    some_tensor3x3x3 << 16; some_tensor3x3x3 << 17; some_tensor3x3x3 << 18;
+
+    some_tensor3x3x3 << 19; some_tensor3x3x3 << 20; some_tensor3x3x3 << 21;
+    some_tensor3x3x3 << 22; some_tensor3x3x3 << 23; some_tensor3x3x3 << 24;
+    some_tensor3x3x3 << 25; some_tensor3x3x3 << 26; some_tensor3x3x3 << 27;
+
+    linear_algebra::Tensor3 some_tensor3x3x3_populate_with_vector(3, 3, 3);
+    some_tensor3x3x3_populate_with_vector << std::vector<float> {
+        1, 2, 3,
+        4, 5, 6,
+        7, 8, 9,
+
+        10, 11, 12,
+        13, 14, 15,
+        16, 17, 18,
+
+        19, 20, 21,
+        22, 23, 24,
+        25, 26, 27 };
+    ASSERT_TRUE(some_tensor3x3x3 == some_tensor3x3x3_populate_with_vector);
+    ASSERT_FALSE(some_tensor3x3x3 != some_tensor3x3x3_populate_with_vector);
+
+    ASSERT_EQ(some_tensor3x3x3_populate_with_vector[0][0][0], 1);
+    ASSERT_EQ(some_tensor3x3x3_populate_with_vector[1][0][0], 4);
+    ASSERT_EQ(some_tensor3x3x3_populate_with_vector[2][0][0], 7);
+
+    ASSERT_EQ(some_tensor3x3x3_populate_with_vector[0][1][0], 2);
+    ASSERT_EQ(some_tensor3x3x3_populate_with_vector[1][1][0], 5);
+    ASSERT_EQ(some_tensor3x3x3_populate_with_vector[2][1][0], 8);
+
+    ASSERT_EQ(some_tensor3x3x3_populate_with_vector[0][2][0], 3);
+    ASSERT_EQ(some_tensor3x3x3_populate_with_vector[1][2][0], 6);
+    ASSERT_EQ(some_tensor3x3x3_populate_with_vector[2][2][0], 9);
+
+    ASSERT_EQ(some_tensor3x3x3_populate_with_vector[0][0][1], 10);
+    ASSERT_EQ(some_tensor3x3x3_populate_with_vector[1][0][1], 13);
+    ASSERT_EQ(some_tensor3x3x3_populate_with_vector[2][0][1], 16);
+
+    ASSERT_EQ(some_tensor3x3x3_populate_with_vector[0][1][1], 11);
+    ASSERT_EQ(some_tensor3x3x3_populate_with_vector[1][1][1], 14);
+    ASSERT_EQ(some_tensor3x3x3_populate_with_vector[2][1][1], 17);
+
+    ASSERT_EQ(some_tensor3x3x3_populate_with_vector[0][2][1], 12);
+    ASSERT_EQ(some_tensor3x3x3_populate_with_vector[1][2][1], 15);
+    ASSERT_EQ(some_tensor3x3x3_populate_with_vector[2][2][1], 18);
+
+    ASSERT_EQ(some_tensor3x3x3_populate_with_vector[0][0][2], 19);
+    ASSERT_EQ(some_tensor3x3x3_populate_with_vector[1][0][2], 22);
+    ASSERT_EQ(some_tensor3x3x3_populate_with_vector[2][0][2], 25);
+
+    ASSERT_EQ(some_tensor3x3x3_populate_with_vector[0][1][2], 20);
+    ASSERT_EQ(some_tensor3x3x3_populate_with_vector[1][1][2], 23);
+    ASSERT_EQ(some_tensor3x3x3_populate_with_vector[2][1][2], 26);
+
+    ASSERT_EQ(some_tensor3x3x3_populate_with_vector[0][2][2], 21);
+    ASSERT_EQ(some_tensor3x3x3_populate_with_vector[1][2][2], 24);
+    ASSERT_EQ(some_tensor3x3x3_populate_with_vector[2][2][2], 27);
 }

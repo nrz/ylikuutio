@@ -7,7 +7,8 @@
 #define RADIANS_TO_DEGREES(x) (x * 180.0f / PI)
 #endif
 
-#include "ajokki_callbacks.hpp"
+#include "ajokki_console_callbacks.hpp"
+#include "ajokki_keyboard_callbacks.hpp"
 #include "code/ylikuutio/callback_system/callback_parameter.hpp"
 #include "code/ylikuutio/callback_system/callback_object.hpp"
 #include "code/ylikuutio/callback_system/callback_engine.hpp"
@@ -133,7 +134,7 @@ int main(void)
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
 
     // Open a window and create its OpenGL context.
-    window = glfwCreateWindow((GLuint) window_width, (GLuint) window_height, "Ajokki, powered by Ylikuutio v. 0.0.1", nullptr, nullptr);
+    window = glfwCreateWindow((GLuint) window_width, (GLuint) window_height, "Ajokki v. 0.0.1, powered by Ylikuutio v. 0.0.1", nullptr, nullptr);
     cleanup_callback_object->set_new_callback(&ajokki::glfwTerminate_cleanup);
 
     if (window == nullptr)
@@ -156,9 +157,6 @@ int main(void)
     glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
     glfwSetCursorPos(window, ((GLuint) window_width / 2), ((GLuint) window_height / 2));
 
-    // Dark blue background.
-    glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
-
     // Enable depth test.
     glEnable(GL_DEPTH_TEST);
     // Accept fragment if it closer to the camera than the former one.
@@ -167,10 +165,12 @@ int main(void)
     // Cull triangles which normal is not towards the camera.
     glEnable(GL_CULL_FACE);
 
-    // Create the world, store it in `my_world`.
-    ontology::Universe* my_world = new ontology::Universe(earth_radius);
+    // Create the world, store it in `my_universe`.
+    ontology::Universe* my_universe = new ontology::Universe(earth_radius);
+    // Blue background.
+    my_universe->set_background_color(0.0f, 0.0f, 1.0f, 0.0f);
 
-    ontology::Scene* my_scene = new ontology::Scene(my_world);
+    ontology::Scene* my_scene = new ontology::Scene(my_universe);
 
     // Create the shader, store it in `my_shader`.
     ShaderStruct shader_struct;
@@ -341,27 +341,31 @@ int main(void)
     ontology::Text3D* hello_world_text3D = new ontology::Text3D(text3D_struct);
 
     // keypress callbacks.
-    std::vector<KeyAndCallbackStruct> keypress_callback_engines;
+    std::vector<KeyAndCallbackStruct> action_mode_keypress_callback_engines;
 
     // This vector points to current keypress callback engines vector.
     std::vector<KeyAndCallbackStruct>* current_keypress_callback_engine_vector_pointer;
-    current_keypress_callback_engine_vector_pointer = &keypress_callback_engines;
+    current_keypress_callback_engine_vector_pointer = &action_mode_keypress_callback_engines;
 
     // keyrelease callbacks.
-    std::vector<KeyAndCallbackStruct> keyrelease_callback_engines;
+    std::vector<KeyAndCallbackStruct> action_mode_keyrelease_callback_engines;
 
     // This vector points to current keyrelease callback engines vector.
     std::vector<KeyAndCallbackStruct>* current_keyrelease_callback_engine_vector_pointer;
-    current_keyrelease_callback_engine_vector_pointer = &keyrelease_callback_engines;
+    current_keyrelease_callback_engine_vector_pointer = &action_mode_keyrelease_callback_engines;
 
     // Initialize our little text library with the Holstein font
     const char* char_g_font_texture_filename = g_font_texture_filename.c_str();
     const char* char_g_font_texture_file_format = g_font_texture_file_format.c_str();
     ontology::Font2D* my_text2D = new ontology::Font2D(window_width, window_height, char_g_font_texture_filename, char_g_font_texture_file_format);
 
+    std::unordered_map<std::string, ConsoleCommandCallback> command_callback_map;
+
     console::Console* my_console = new console::Console(
             &current_keypress_callback_engine_vector_pointer,
             &current_keyrelease_callback_engine_vector_pointer,
+            &command_callback_map,
+            my_universe,
             my_text2D); // create a console.
     global_console_pointer = my_console;
 
@@ -695,40 +699,40 @@ int main(void)
             &console::Console::ctrl_c, ctrl_c_callback_engine, my_console);
 
     callback_system::CallbackParameter* cleanup_callback_universe_pointer =
-        new callback_system::CallbackParameter("universe_pointer", new datatypes::AnyValue(my_world), false, cleanup_callback_object);
+        new callback_system::CallbackParameter("universe_pointer", new datatypes::AnyValue(my_universe), false, cleanup_callback_object);
     callback_system::CallbackParameter* cleanup_callback_text2D_pointer =
         new callback_system::CallbackParameter("text2D_pointer", new datatypes::AnyValue(my_text2D), false, cleanup_callback_object);
     cleanup_callback_object->set_new_callback(&ajokki::full_cleanup);
 
     // Keyrelease callbacks for action mode.
     // Key releases are checked in the order of this struct.
-    keyrelease_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_GRAVE_ACCENT, enable_enter_console_callback_engine });
-    keyrelease_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_LEFT_CONTROL, release_first_turbo_callback_engine });
-    keyrelease_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_RIGHT_CONTROL, release_second_turbo_callback_engine });
-    keyrelease_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_I, enable_toggle_invert_mouse_callback_engine });
-    keyrelease_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_F, enable_toggle_flight_mode_callback_engine });
-    keyrelease_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_F1, enable_toggle_help_mode_callback_engine });
+    action_mode_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_GRAVE_ACCENT, enable_enter_console_callback_engine });
+    action_mode_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_LEFT_CONTROL, release_first_turbo_callback_engine });
+    action_mode_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_RIGHT_CONTROL, release_second_turbo_callback_engine });
+    action_mode_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_I, enable_toggle_invert_mouse_callback_engine });
+    action_mode_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_F, enable_toggle_flight_mode_callback_engine });
+    action_mode_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_F1, enable_toggle_help_mode_callback_engine });
 
     // Keypress callbacks for action mode.
     // Keypresses are checked in the order of this struct.
-    keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_GRAVE_ACCENT, enter_console_callback_engine });
-    keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_ESCAPE, exit_program_callback_engine });
-    keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_LEFT_CONTROL, first_turbo_callback_engine });
-    keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_RIGHT_CONTROL, second_turbo_callback_engine });
-    keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_UP, move_forward_callback_engine });
-    keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_DOWN, move_backward_callback_engine });
-    keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_LEFT, strafe_left_callback_engine });
-    keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_RIGHT, strafe_right_callback_engine });
-    keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_SPACE, ascent_callback_engine });
-    keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_ENTER, descent_callback_engine });
-    keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_I, toggle_invert_mouse_callback_engine });
-    keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_F, toggle_flight_mode_callback_engine });
-    keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_F1, toggle_help_mode_callback_engine });
-    keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_D, delete_suzanne_species_callback_engine });
-    keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_G, switch_to_grass_material_callback_engine });
-    keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_U, switch_to_uvmap_material_callback_engine });
-    keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_T, transform_into_terrain_callback_engine });
-    keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_A, transform_into_monkey_callback_engine });
+    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_GRAVE_ACCENT, enter_console_callback_engine });
+    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_ESCAPE, exit_program_callback_engine });
+    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_LEFT_CONTROL, first_turbo_callback_engine });
+    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_RIGHT_CONTROL, second_turbo_callback_engine });
+    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_UP, move_forward_callback_engine });
+    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_DOWN, move_backward_callback_engine });
+    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_LEFT, strafe_left_callback_engine });
+    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_RIGHT, strafe_right_callback_engine });
+    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_SPACE, ascent_callback_engine });
+    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_ENTER, descent_callback_engine });
+    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_I, toggle_invert_mouse_callback_engine });
+    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_F, toggle_flight_mode_callback_engine });
+    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_F1, toggle_help_mode_callback_engine });
+    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_D, delete_suzanne_species_callback_engine });
+    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_G, switch_to_grass_material_callback_engine });
+    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_U, switch_to_uvmap_material_callback_engine });
+    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_T, transform_into_terrain_callback_engine });
+    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_A, transform_into_monkey_callback_engine });
 
     // Keyrelease callbacks for console.
     // Key releases are checked in the order of this struct.
@@ -763,6 +767,27 @@ int main(void)
     console_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_ENTER, enter_callback_engine });
     console_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_C, ctrl_c_callback_engine });
     my_console->set_my_keypress_callback_engine_vector_pointer(&console_keypress_callback_engines);
+
+    /*********************************************************************\
+     *  Callback engines for console commands begin here.                 *
+    \*********************************************************************/
+
+    // Exit program callbacks.
+    command_callback_map["bye"] = &ajokki::quit;
+    command_callback_map["chau"] = &ajokki::quit;
+    command_callback_map["ciao"] = &ajokki::quit;
+    command_callback_map["heippa"] = &ajokki::quit;
+    command_callback_map["quit"] = &ajokki::quit;
+    command_callback_map["sayonara"] = &ajokki::quit;
+
+    // Adjust background color callbacks.
+    command_callback_map["red"] = &ajokki::red;
+    command_callback_map["green"] = &ajokki::green;
+    command_callback_map["blue"] = &ajokki::blue;
+
+    // Other callbacks.
+    command_callback_map["help"] = &ajokki::help;
+    command_callback_map["version"] = &ajokki::version;
 
     // For speed computation
     double last_time_to_display_FPS = glfwGetTime();
@@ -943,7 +968,7 @@ int main(void)
             }
 
             // Render the world.
-            my_world->render();
+            my_universe->render();
 
             // Draw the console (including current input).
             my_console->draw_console();
@@ -980,16 +1005,20 @@ int main(void)
                     help_text_char,
                     "Ajokki v. 0.0.1\\n"
                     "\\n"
-                    "F1-help mode\\n"
                     "arrow keys\\n"
-                    "I-invert mouse (%s)\\n"
-                    "F-flight mode (%s)\\n"
-                    "G-grass texture%s\\n"
-                    "U-uvmap texture%s\\n"
-                    "T-terrain species\\n"
-                    "A-suzanne species\\n"
-                    "Ctrl     -turbo\\n"
-                    "Ctrl+Ctrl-extra turbo\\n",
+                    "space jump\\n"
+                    "enter duck\\n"
+                    "F1 help mode\\n"
+                    "`  enter console\\n"
+                    "I  invert mouse (%s)\\n"
+                    "F  flight mode (%s)\\n"
+                    "Ctrl      turbo\\n"
+                    "Ctrl+Ctrl extra turbo\\n"
+                    "for debugging:\\n"
+                    "G  grass texture%s\\n"
+                    "U  uvmap texture%s\\n"
+                    "T  terrain species\\n"
+                    "A  suzanne species\\n",
                     (is_invert_mouse_in_use ? on_text : off_text),
                     (is_flight_mode_in_use ? on_text : off_text),
                     (!does_suzanne_species_have_uvmap_texture ? in_use_text : null_text),
@@ -1014,7 +1043,7 @@ int main(void)
             {
                 // print help text.
                 printing_struct.x = 0;
-                printing_struct.y = window_height - (7 * text_size);
+                printing_struct.y = window_height - (3 * text_size);
                 printing_struct.text_char = help_text_char;
                 printing_struct.horizontal_alignment = "left";
                 printing_struct.vertical_alignment = "top";
@@ -1068,15 +1097,15 @@ int main(void)
     cleanup_callback_engine->execute();
 
     // Delete all keyrelease callback engines.
-    for (uint32_t i = 0; i < keyrelease_callback_engines.size(); i++)
+    for (uint32_t i = 0; i < action_mode_keyrelease_callback_engines.size(); i++)
     {
-        delete keyrelease_callback_engines.at(i).callback_engine;
+        delete action_mode_keyrelease_callback_engines.at(i).callback_engine;
     }
 
     // Delete all keypress callback engines.
-    for (uint32_t i = 0; i < keypress_callback_engines.size(); i++)
+    for (uint32_t i = 0; i < action_mode_keypress_callback_engines.size(); i++)
     {
-        delete keypress_callback_engines.at(i).callback_engine;
+        delete action_mode_keypress_callback_engines.at(i).callback_engine;
     }
 
     // Delete all console keyrelease callback engines.

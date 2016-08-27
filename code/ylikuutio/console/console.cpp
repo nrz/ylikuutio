@@ -1,5 +1,7 @@
 #include "console.hpp"
+#include "command_and_callback_struct.hpp"
 #include "code/ylikuutio/ontology/font2D.hpp"
+#include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/callback_system/callback_magic_numbers.hpp"
 #include "code/ylikuutio/common/global_variables.hpp"
 #include "code/ylikuutio/common/globals.hpp"
@@ -12,16 +14,22 @@
 #endif
 
 // Include standard headers
-#include <iterator> // std::back_inserter
-#include <list>     // std::list
-#include <stdint.h> // uint32_t etc.
-#include <vector>   // std::vector
+#include <algorithm>     // std::sort
+#include <iterator>      // std::back_inserter
+#include <list>          // std::list
+#include <sstream>       // std::otringstream, std::istringstream, std::ostringstream
+#include <stdint.h>      // uint32_t etc.
+#include <string.h>      // strlen
+#include <unordered_map> // std::unordered_map
+#include <vector>        // std::vector
 
 namespace console
 {
     Console::Console(
             std::vector<KeyAndCallbackStruct>** current_keypress_callback_engine_vector_pointer_pointer,
             std::vector<KeyAndCallbackStruct>** current_keyrelease_callback_engine_vector_pointer_pointer,
+            std::unordered_map<std::string, ConsoleCommandCallback>* command_callback_map_pointer,
+            ontology::Universe* universe_pointer,
             ontology::Font2D* text2D_pointer)
     {
         // constructor.
@@ -53,8 +61,17 @@ namespace console
         // This is a pointer to `std::vector<KeyAndCallbackStruct>*` that controls keyrelease callbacks.
         this->current_keyrelease_callback_engine_vector_pointer_pointer = current_keyrelease_callback_engine_vector_pointer_pointer;
 
+        // This is a pointer to `std::unordered_map<std::string, bool>` that contains console command callbacks.
+        this->command_callback_map_pointer = command_callback_map_pointer;
+
+        // This is a pointer to `ontology::Universe`.
+        this->universe_pointer = universe_pointer;
+
         // This is a pointer to `font2D::Font2D` instance that is used for printing.
         this->text2D_pointer = text2D_pointer;
+
+        this->print_text("Welcome! Please write \"help\" for more");
+        this->print_text("information.");
     }
 
     Console::~Console()
@@ -71,6 +88,93 @@ namespace console
     void Console::set_my_keyrelease_callback_engine_vector_pointer(std::vector<KeyAndCallbackStruct>* my_keyrelease_callback_engine_vector_pointer)
     {
         this->my_keyrelease_callback_engine_vector_pointer = my_keyrelease_callback_engine_vector_pointer;
+    }
+
+    void Console::print_text(std::string text)
+    {
+        // This function is to be called from console command callbacks to print text on console.
+        // Please not that it is not necessary to be in console to be able to print in console.
+        const char* text_char = text.c_str();
+
+        uint32_t characters_for_line = window_width / text_size;
+
+        std::list<char> text_char_list;
+        uint32_t current_line_length = 0;
+
+        for (char& my_char : text)
+        {
+            if (my_char == '\n')
+            {
+                // A newline.
+                this->console_history.push_back(text_char_list);
+                text_char_list.clear();
+                current_line_length = 0;
+            }
+            else if (current_line_length < characters_for_line)
+            {
+                // Normal case.
+                text_char_list.push_back(my_char);
+                current_line_length++;
+            }
+            else
+            {
+                // Newline is needed due to too long line.
+                this->console_history.push_back(text_char_list);
+                text_char_list.clear();
+                text_char_list.push_back(my_char);
+                current_line_length = 1;
+            }
+        }
+
+        if (text_char_list.size() > 0)
+        {
+            this->console_history.push_back(text_char_list);
+        }
+    }
+
+    void Console::print_help()
+    {
+        std::vector<std::string> command_vector;
+        command_vector.reserve(this->command_callback_map_pointer->size());
+
+        for (auto key_and_value : *this->command_callback_map_pointer)
+        {
+            command_vector.push_back(key_and_value.first); // key (command).
+        }
+
+        // sort command vector alphabetically.
+        std::sort(command_vector.begin(), command_vector.end());
+
+        uint32_t characters_for_line = window_width / text_size;
+
+        std::string commands_text;
+
+        for (std::string command : command_vector)
+        {
+            if (commands_text.size() > 0 &&
+                    commands_text.size() + command.size() >= characters_for_line)
+            {
+                // Not enough space for this command on this line.
+                // Print this line.
+                this->print_text(commands_text);
+                commands_text = command;
+            }
+            else if (commands_text.size() > 0)
+            {
+                // There is space, and this is not the first command on this line.
+                commands_text += " " + command;
+            }
+            else
+            {
+                // This is the first command on this line.
+                commands_text += command;
+            }
+        }
+        if (commands_text.size() > 0)
+        {
+            // Print the last line.
+            this->print_text(commands_text);
+        }
     }
 
     void Console::draw_console()
@@ -92,14 +196,11 @@ namespace console
             printing_struct.y = window_height - (2 * text_size);
             printing_struct.horizontal_alignment = "left";
             printing_struct.vertical_alignment = "top";
-            printing_struct.text =
-                "Welcome! Please write \"help\"\\n"
-                "for more information.\\n";
 
-            for (uint32_t historical_input_i = 0; historical_input_i < this->command_history.size(); historical_input_i++)
+            for (uint32_t history_i = 0; history_i < this->console_history.size(); history_i++)
             {
-                std::list<char> historical_input = this->command_history.at(historical_input_i);
-                printing_struct.text += "$ " + string::convert_std_list_char_to_std_string(historical_input, characters_for_line - 2, characters_for_line) + "\\n";
+                std::list<char> historical_text = this->console_history.at(history_i);
+                printing_struct.text += string::convert_std_list_char_to_std_string(historical_text, characters_for_line, characters_for_line) + "\\n";
             }
             printing_struct.text += "$ " + string::convert_std_list_char_to_std_string(this->current_input, characters_for_line - 2, characters_for_line);
 
@@ -529,17 +630,58 @@ namespace console
             std::vector<callback_system::CallbackParameter*>&,
             console::Console* console)
     {
+        datatypes::AnyValue* any_value = nullptr;
+
         if (console->in_console &&
                 console->can_enter_key)
         {
+            // Parse input into vector.
+            std::string input_string(console->current_input.begin(), console->current_input.end());
+            std::istringstream input_stringstream(input_string);
+            std::string command;
+
             console->command_history.push_back(console->current_input);
+            std::list<char>::iterator it = console->current_input.begin();
+            console->current_input.insert(it, '$');
+            console->current_input.insert(it, ' ');
+            console->console_history.push_back(console->current_input);
+
+            if (std::getline(input_stringstream, command, ' '))
+            {
+                // OK, there was a command.
+                std::vector<std::string> parameter_vector;
+
+                // Now read the command parameters.
+                while (true)
+                {
+                    std::string parameter;
+
+                    if (std::getline(input_stringstream, parameter, ' '))
+                    {
+                        parameter_vector.push_back(parameter);
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+
+                // Call the corresponding console command callback, if there is one.
+                if (console->command_callback_map_pointer != nullptr &&
+                        console->command_callback_map_pointer->count(command) == 1)
+                {
+                    ConsoleCommandCallback callback = console->command_callback_map_pointer->at(command);
+                    any_value = callback(console, console->universe_pointer, parameter_vector);
+                }
+            }
+
             console->current_input.clear();
             console->in_historical_input = false;
             console->cursor_it = console->current_input.begin();
             console->cursor_index = 0;
             console->can_enter_key = false;
         }
-        return nullptr;
+        return any_value;
     }
 
     datatypes::AnyValue* Console::ctrl_c(

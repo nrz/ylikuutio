@@ -139,6 +139,8 @@ namespace ontology
             // this method renders the entire world, one scene at a time.
             void render();
 
+            void set_background_color(GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha);
+
             friend class Scene;
             friend class Shader;
             friend class Species;
@@ -158,6 +160,11 @@ namespace ontology
 
             std::vector<ontology::Scene*> scene_pointer_vector;
             std::queue<uint32_t> free_sceneID_queue;
+
+            GLclampf background_red;
+            GLclampf background_green;
+            GLclampf background_blue;
+            GLclampf background_alpha;
     };
 }
 

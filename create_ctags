@@ -1,0 +1,17 @@
+#!/bin/bash
+
+ctags -R --languages=c++ \
+    --exclude=.git \
+    --exclude=build \
+    --exclude=build1 \
+    --exclude=build2 \
+    --exclude=build3 \
+    --exclude=build4 \
+    --exclude=build5 \
+    --exclude=build6 \
+    --exclude=build7 \
+    --exclude=build8 \
+    --exclude=build9 \
+    --exclude=build10 \
+    .
+
