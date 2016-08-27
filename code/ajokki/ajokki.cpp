@@ -157,9 +157,6 @@ int main(void)
     glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
     glfwSetCursorPos(window, ((GLuint) window_width / 2), ((GLuint) window_height / 2));
 
-    // Dark blue background.
-    glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
-
     // Enable depth test.
     glEnable(GL_DEPTH_TEST);
     // Accept fragment if it closer to the camera than the former one.
@@ -170,6 +167,8 @@ int main(void)
 
     // Create the world, store it in `my_universe`.
     ontology::Universe* my_universe = new ontology::Universe(earth_radius);
+    // Blue background.
+    my_universe->set_background_color(0.0f, 0.0f, 1.0f, 0.0f);
 
     ontology::Scene* my_scene = new ontology::Scene(my_universe);
 
