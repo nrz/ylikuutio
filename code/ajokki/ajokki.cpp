@@ -780,6 +780,7 @@ int main(void)
     command_callback_map["quit"] = &ajokki::quit;
     command_callback_map["sayonara"] = &ajokki::quit;
 
+    // Adjust background color callbacks.
     command_callback_map["red"] = &ajokki::red;
     command_callback_map["green"] = &ajokki::green;
     command_callback_map["blue"] = &ajokki::blue;
