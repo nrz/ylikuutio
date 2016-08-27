@@ -31,4 +31,40 @@ namespace ajokki
     {
         return new datatypes::AnyValue(EXIT_PROGRAM_MAGIC_NUMBER);
     }
+
+    datatypes::AnyValue* red(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject*,
+            std::vector<callback_system::CallbackParameter*>& input_parameters,
+            console::Console*,
+            ontology::Universe* universe,
+            std::vector<std::string>& command_parameters)
+    {
+        universe->set_background_color(1.0f, 0.0f, 0.0f, 0.0f);
+        return nullptr;
+    }
+
+    datatypes::AnyValue* green(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject*,
+            std::vector<callback_system::CallbackParameter*>& input_parameters,
+            console::Console*,
+            ontology::Universe* universe,
+            std::vector<std::string>& command_parameters)
+    {
+        universe->set_background_color(0.0f, 1.0f, 0.0f, 0.0f);
+        return nullptr;
+    }
+
+    datatypes::AnyValue* blue(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject*,
+            std::vector<callback_system::CallbackParameter*>& input_parameters,
+            console::Console*,
+            ontology::Universe* universe,
+            std::vector<std::string>& command_parameters)
+    {
+        universe->set_background_color(0.0f, 0.0f, 1.0f, 0.0f);
+        return nullptr;
+    }
 }
