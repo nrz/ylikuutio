@@ -23,7 +23,8 @@ namespace ajokki
             ontology::Universe*,
             std::vector<std::string>& command_parameters)
     {
-        return new datatypes::AnyValue(EXIT_PROGRAM_MAGIC_NUMBER);
+        uint32_t exit_program_magic_number = EXIT_PROGRAM_MAGIC_NUMBER;
+        return new datatypes::AnyValue(exit_program_magic_number);
     }
 
     datatypes::AnyValue* red(
