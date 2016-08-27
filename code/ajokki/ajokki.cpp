@@ -771,6 +771,7 @@ int main(void)
     /*********************************************************************\
      *  Callback engines for console commands begin here.                 *
     \*********************************************************************/
+    command_callback_map["quit"] = &ajokki::quit;
     command_callback_map["red"] = &ajokki::red;
     command_callback_map["green"] = &ajokki::green;
     command_callback_map["blue"] = &ajokki::blue;
