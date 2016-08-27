@@ -16,7 +16,7 @@ namespace ajokki
             ontology::Universe*,
             std::vector<std::string>& command_parameters)
     {
-        console->print_text("Ajokki 0.0.1 / Ylikuutio 0.0.1\n");
+        console->print_text("Ajokki 0.0.1 / Ylikuutio 0.0.1");
         return nullptr;
     }
 
