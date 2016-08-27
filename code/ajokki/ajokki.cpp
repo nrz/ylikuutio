@@ -348,11 +348,11 @@ int main(void)
     current_keypress_callback_engine_vector_pointer = &keypress_callback_engines;
 
     // keyrelease callbacks.
-    std::vector<KeyAndCallbackStruct> keyrelease_callback_engines;
+    std::vector<KeyAndCallbackStruct> action_mode_keyrelease_callback_engines;
 
     // This vector points to current keyrelease callback engines vector.
     std::vector<KeyAndCallbackStruct>* current_keyrelease_callback_engine_vector_pointer;
-    current_keyrelease_callback_engine_vector_pointer = &keyrelease_callback_engines;
+    current_keyrelease_callback_engine_vector_pointer = &action_mode_keyrelease_callback_engines;
 
     // Initialize our little text library with the Holstein font
     const char* char_g_font_texture_filename = g_font_texture_filename.c_str();
@@ -706,12 +706,12 @@ int main(void)
 
     // Keyrelease callbacks for action mode.
     // Key releases are checked in the order of this struct.
-    keyrelease_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_GRAVE_ACCENT, enable_enter_console_callback_engine });
-    keyrelease_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_LEFT_CONTROL, release_first_turbo_callback_engine });
-    keyrelease_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_RIGHT_CONTROL, release_second_turbo_callback_engine });
-    keyrelease_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_I, enable_toggle_invert_mouse_callback_engine });
-    keyrelease_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_F, enable_toggle_flight_mode_callback_engine });
-    keyrelease_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_F1, enable_toggle_help_mode_callback_engine });
+    action_mode_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_GRAVE_ACCENT, enable_enter_console_callback_engine });
+    action_mode_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_LEFT_CONTROL, release_first_turbo_callback_engine });
+    action_mode_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_RIGHT_CONTROL, release_second_turbo_callback_engine });
+    action_mode_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_I, enable_toggle_invert_mouse_callback_engine });
+    action_mode_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_F, enable_toggle_flight_mode_callback_engine });
+    action_mode_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_F1, enable_toggle_help_mode_callback_engine });
 
     // Keypress callbacks for action mode.
     // Keypresses are checked in the order of this struct.
@@ -1092,9 +1092,9 @@ int main(void)
     cleanup_callback_engine->execute();
 
     // Delete all keyrelease callback engines.
-    for (uint32_t i = 0; i < keyrelease_callback_engines.size(); i++)
+    for (uint32_t i = 0; i < action_mode_keyrelease_callback_engines.size(); i++)
     {
-        delete keyrelease_callback_engines.at(i).callback_engine;
+        delete action_mode_keyrelease_callback_engines.at(i).callback_engine;
     }
 
     // Delete all keypress callback engines.
