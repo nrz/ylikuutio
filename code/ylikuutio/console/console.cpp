@@ -18,6 +18,7 @@
 #include <list>          // std::list
 #include <sstream>       // std::otringstream, std::istringstream, std::ostringstream
 #include <stdint.h>      // uint32_t etc.
+#include <string.h>      // strlen
 #include <unordered_map> // std::unordered_map
 #include <vector>        // std::vector
 
@@ -85,6 +86,17 @@ namespace console
         this->my_keyrelease_callback_engine_vector_pointer = my_keyrelease_callback_engine_vector_pointer;
     }
 
+    void Console::print_text(std::string text)
+    {
+        // This function is to be called from console command callbacks to print text on console.
+        const char* text_char = text.c_str();
+
+        // http://stackoverflow.com/questions/15034705/c-how-to-convert-char-to-stdlistchar/15034743#15034743
+        std::list<char> text_char_list(text_char, text_char + strlen(text_char));
+
+        this->console_history.push_back(text_char_list);
+    }
+
     void Console::draw_console()
     {
         if (this->in_console)
@@ -108,10 +120,10 @@ namespace console
                 "Welcome! Please write \"help\"\\n"
                 "for more information.\\n";
 
-            for (uint32_t historical_input_i = 0; historical_input_i < this->command_history.size(); historical_input_i++)
+            for (uint32_t history_i = 0; history_i < this->console_history.size(); history_i++)
             {
-                std::list<char> historical_input = this->command_history.at(historical_input_i);
-                printing_struct.text += "$ " + string::convert_std_list_char_to_std_string(historical_input, characters_for_line - 2, characters_for_line) + "\\n";
+                std::list<char> historical_text = this->console_history.at(history_i);
+                printing_struct.text += string::convert_std_list_char_to_std_string(historical_text, characters_for_line, characters_for_line) + "\\n";
             }
             printing_struct.text += "$ " + string::convert_std_list_char_to_std_string(this->current_input, characters_for_line - 2, characters_for_line);
 
@@ -551,6 +563,12 @@ namespace console
             std::istringstream input_stringstream(input_string);
             std::string command;
 
+            console->command_history.push_back(console->current_input);
+            std::list<char>::iterator it = console->current_input.begin();
+            console->current_input.insert(it, '$');
+            console->current_input.insert(it, ' ');
+            console->console_history.push_back(console->current_input);
+
             if (std::getline(input_stringstream, command, ' '))
             {
                 // OK, there was a command.
@@ -580,7 +598,6 @@ namespace console
                 }
             }
 
-            console->command_history.push_back(console->current_input);
             console->current_input.clear();
             console->in_historical_input = false;
             console->cursor_it = console->current_input.begin();

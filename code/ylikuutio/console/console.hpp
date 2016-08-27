@@ -38,6 +38,7 @@ namespace console
 
             void set_my_keypress_callback_engine_vector_pointer(std::vector<KeyAndCallbackStruct>* my_keypress_callback_engine_vector_pointer);
             void set_my_keyrelease_callback_engine_vector_pointer(std::vector<KeyAndCallbackStruct>* my_keyrelease_callback_engine_vector_pointer);
+            void print_text(std::string text);
             void draw_console();
 
             // Public callbacks.
@@ -244,6 +245,8 @@ namespace console
             bool is_right_shift_pressed;
 
             std::vector<std::list<char>> command_history;
+            std::vector<std::list<char>> console_history;
+
             bool in_historical_input;
             uint32_t historical_input_i;
             std::list<char> temp_input;    // This is used for temporary storage of new input while modifying historical inputs.
