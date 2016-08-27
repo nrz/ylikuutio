@@ -786,6 +786,7 @@ int main(void)
     command_callback_map["blue"] = &ajokki::blue;
 
     // Other callbacks.
+    command_callback_map["help"] = &ajokki::help;
     command_callback_map["version"] = &ajokki::version;
 
     // For speed computation

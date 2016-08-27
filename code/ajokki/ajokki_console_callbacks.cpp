@@ -30,10 +30,11 @@ namespace ajokki
     }
 
     datatypes::AnyValue* help(
-            console::Console*,
+            console::Console* console,
             ontology::Universe*,
             std::vector<std::string>& command_parameters)
     {
+        console->print_help();
         return nullptr;
     }
 
