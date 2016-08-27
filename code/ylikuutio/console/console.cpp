@@ -92,10 +92,41 @@ namespace console
         // Please not that it is not necessary to be in console to be able to print in console.
         const char* text_char = text.c_str();
 
-        // http://stackoverflow.com/questions/15034705/c-how-to-convert-char-to-stdlistchar/15034743#15034743
-        std::list<char> text_char_list(text_char, text_char + strlen(text_char));
+        uint32_t characters_for_line = window_width / text_size;
 
-        this->console_history.push_back(text_char_list);
+        std::list<char> text_char_list;
+        uint32_t current_line_length = 0;
+
+        for (char& my_char : text)
+        {
+            if (my_char == '\n')
+            {
+                // A newline.
+                this->console_history.push_back(text_char_list);
+                text_char_list.clear();
+                current_line_length = 0;
+            }
+            else if (current_line_length < characters_for_line)
+            {
+                // Normal case.
+                text_char_list.push_back(my_char);
+                current_line_length++;
+            }
+            else
+            {
+                // Newline is needed due to too long line.
+                this->console_history.push_back(text_char_list);
+                text_char_list.clear();
+                text_char_list.push_back(my_char);
+                current_line_length = 1;
+            }
+        }
+
+        if (text_char_list.size() > 0)
+        {
+            this->console_history.push_back(text_char_list);
+        }
+
     }
 
     void Console::draw_console()
