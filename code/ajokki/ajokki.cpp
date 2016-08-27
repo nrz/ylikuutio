@@ -168,10 +168,10 @@ int main(void)
     // Cull triangles which normal is not towards the camera.
     glEnable(GL_CULL_FACE);
 
-    // Create the world, store it in `my_world`.
-    ontology::Universe* my_world = new ontology::Universe(earth_radius);
+    // Create the world, store it in `my_universe`.
+    ontology::Universe* my_universe = new ontology::Universe(earth_radius);
 
-    ontology::Scene* my_scene = new ontology::Scene(my_world);
+    ontology::Scene* my_scene = new ontology::Scene(my_universe);
 
     // Create the shader, store it in `my_shader`.
     ShaderStruct shader_struct;
@@ -697,7 +697,7 @@ int main(void)
             &console::Console::ctrl_c, ctrl_c_callback_engine, my_console);
 
     callback_system::CallbackParameter* cleanup_callback_universe_pointer =
-        new callback_system::CallbackParameter("universe_pointer", new datatypes::AnyValue(my_world), false, cleanup_callback_object);
+        new callback_system::CallbackParameter("universe_pointer", new datatypes::AnyValue(my_universe), false, cleanup_callback_object);
     callback_system::CallbackParameter* cleanup_callback_text2D_pointer =
         new callback_system::CallbackParameter("text2D_pointer", new datatypes::AnyValue(my_text2D), false, cleanup_callback_object);
     cleanup_callback_object->set_new_callback(&ajokki::full_cleanup);
@@ -945,7 +945,7 @@ int main(void)
             }
 
             // Render the world.
-            my_world->render();
+            my_universe->render();
 
             // Draw the console (including current input).
             my_console->draw_console();
