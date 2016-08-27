@@ -69,6 +69,9 @@ namespace console
 
         // This is a pointer to `font2D::Font2D` instance that is used for printing.
         this->text2D_pointer = text2D_pointer;
+
+        this->print_text("Welcome! Please write \"help\" for more");
+        this->print_text("information.");
     }
 
     Console::~Console()
@@ -193,9 +196,6 @@ namespace console
             printing_struct.y = window_height - (2 * text_size);
             printing_struct.horizontal_alignment = "left";
             printing_struct.vertical_alignment = "top";
-            printing_struct.text =
-                "Welcome! Please write \"help\"\\n"
-                "for more information.\\n";
 
             for (uint32_t history_i = 0; history_i < this->console_history.size(); history_i++)
             {
