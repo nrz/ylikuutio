@@ -341,11 +341,11 @@ int main(void)
     ontology::Text3D* hello_world_text3D = new ontology::Text3D(text3D_struct);
 
     // keypress callbacks.
-    std::vector<KeyAndCallbackStruct> keypress_callback_engines;
+    std::vector<KeyAndCallbackStruct> action_mode_keypress_callback_engines;
 
     // This vector points to current keypress callback engines vector.
     std::vector<KeyAndCallbackStruct>* current_keypress_callback_engine_vector_pointer;
-    current_keypress_callback_engine_vector_pointer = &keypress_callback_engines;
+    current_keypress_callback_engine_vector_pointer = &action_mode_keypress_callback_engines;
 
     // keyrelease callbacks.
     std::vector<KeyAndCallbackStruct> action_mode_keyrelease_callback_engines;
@@ -715,24 +715,24 @@ int main(void)
 
     // Keypress callbacks for action mode.
     // Keypresses are checked in the order of this struct.
-    keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_GRAVE_ACCENT, enter_console_callback_engine });
-    keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_ESCAPE, exit_program_callback_engine });
-    keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_LEFT_CONTROL, first_turbo_callback_engine });
-    keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_RIGHT_CONTROL, second_turbo_callback_engine });
-    keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_UP, move_forward_callback_engine });
-    keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_DOWN, move_backward_callback_engine });
-    keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_LEFT, strafe_left_callback_engine });
-    keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_RIGHT, strafe_right_callback_engine });
-    keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_SPACE, ascent_callback_engine });
-    keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_ENTER, descent_callback_engine });
-    keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_I, toggle_invert_mouse_callback_engine });
-    keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_F, toggle_flight_mode_callback_engine });
-    keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_F1, toggle_help_mode_callback_engine });
-    keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_D, delete_suzanne_species_callback_engine });
-    keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_G, switch_to_grass_material_callback_engine });
-    keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_U, switch_to_uvmap_material_callback_engine });
-    keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_T, transform_into_terrain_callback_engine });
-    keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_A, transform_into_monkey_callback_engine });
+    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_GRAVE_ACCENT, enter_console_callback_engine });
+    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_ESCAPE, exit_program_callback_engine });
+    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_LEFT_CONTROL, first_turbo_callback_engine });
+    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_RIGHT_CONTROL, second_turbo_callback_engine });
+    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_UP, move_forward_callback_engine });
+    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_DOWN, move_backward_callback_engine });
+    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_LEFT, strafe_left_callback_engine });
+    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_RIGHT, strafe_right_callback_engine });
+    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_SPACE, ascent_callback_engine });
+    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_ENTER, descent_callback_engine });
+    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_I, toggle_invert_mouse_callback_engine });
+    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_F, toggle_flight_mode_callback_engine });
+    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_F1, toggle_help_mode_callback_engine });
+    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_D, delete_suzanne_species_callback_engine });
+    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_G, switch_to_grass_material_callback_engine });
+    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_U, switch_to_uvmap_material_callback_engine });
+    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_T, transform_into_terrain_callback_engine });
+    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_A, transform_into_monkey_callback_engine });
 
     // Keyrelease callbacks for console.
     // Key releases are checked in the order of this struct.
@@ -1098,9 +1098,9 @@ int main(void)
     }
 
     // Delete all keypress callback engines.
-    for (uint32_t i = 0; i < keypress_callback_engines.size(); i++)
+    for (uint32_t i = 0; i < action_mode_keypress_callback_engines.size(); i++)
     {
-        delete keypress_callback_engines.at(i).callback_engine;
+        delete action_mode_keypress_callback_engines.at(i).callback_engine;
     }
 
     // Delete all console keyrelease callback engines.
