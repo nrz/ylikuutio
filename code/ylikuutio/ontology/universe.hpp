@@ -158,6 +158,11 @@ namespace ontology
 
             std::vector<ontology::Scene*> scene_pointer_vector;
             std::queue<uint32_t> free_sceneID_queue;
+
+            GLclampf background_red;
+            GLclampf background_green;
+            GLclampf background_blue;
+            GLclampf background_alpha;
     };
 }
 
