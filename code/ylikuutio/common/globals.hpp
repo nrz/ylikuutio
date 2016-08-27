@@ -298,9 +298,6 @@ typedef datatypes::AnyValue* (*InputParametersToAnyValueCallbackWithConsole) (
         console::Console*);
 
 typedef datatypes::AnyValue* (*ConsoleCommandCallback) (
-        callback_system::CallbackEngine*,
-        callback_system::CallbackObject*,
-        std::vector<callback_system::CallbackParameter*>&,
         console::Console*,
         ontology::Universe*,
         std::vector<std::string>& command_parameters);

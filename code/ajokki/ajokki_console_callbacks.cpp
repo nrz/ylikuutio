@@ -11,9 +11,6 @@
 namespace ajokki
 {
     datatypes::AnyValue* version(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>& input_parameters,
             console::Console*,
             ontology::Universe*,
             std::vector<std::string>& command_parameters)
@@ -22,9 +19,6 @@ namespace ajokki
     }
 
     datatypes::AnyValue* quit(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>& input_parameters,
             console::Console*,
             ontology::Universe*,
             std::vector<std::string>& command_parameters)
@@ -33,9 +27,6 @@ namespace ajokki
     }
 
     datatypes::AnyValue* red(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>& input_parameters,
             console::Console*,
             ontology::Universe* universe,
             std::vector<std::string>& command_parameters)
@@ -45,9 +36,6 @@ namespace ajokki
     }
 
     datatypes::AnyValue* green(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>& input_parameters,
             console::Console*,
             ontology::Universe* universe,
             std::vector<std::string>& command_parameters)
@@ -57,9 +45,6 @@ namespace ajokki
     }
 
     datatypes::AnyValue* blue(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>& input_parameters,
             console::Console*,
             ontology::Universe* universe,
             std::vector<std::string>& command_parameters)
