@@ -89,6 +89,7 @@ namespace console
     void Console::print_text(std::string text)
     {
         // This function is to be called from console command callbacks to print text on console.
+        // Please not that it is not necessary to be in console to be able to print in console.
         const char* text_char = text.c_str();
 
         // http://stackoverflow.com/questions/15034705/c-how-to-convert-char-to-stdlistchar/15034743#15034743
