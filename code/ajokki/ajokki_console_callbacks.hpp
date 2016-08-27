@@ -12,10 +12,12 @@ namespace ajokki
 {
     datatypes::AnyValue* version(
             console::Console*,
+            ontology::Universe*,
             std::vector<std::string>& command_parameters);
 
     datatypes::AnyValue* quit(
             console::Console*,
+            ontology::Universe*,
             std::vector<std::string>& command_parameters);
 }
 
