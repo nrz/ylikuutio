@@ -27,6 +27,14 @@ namespace ajokki
         return new datatypes::AnyValue(exit_program_magic_number);
     }
 
+    datatypes::AnyValue* help(
+            console::Console*,
+            ontology::Universe*,
+            std::vector<std::string>& command_parameters)
+    {
+        return nullptr;
+    }
+
     datatypes::AnyValue* red(
             console::Console*,
             ontology::Universe* universe,

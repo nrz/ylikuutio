@@ -20,6 +20,11 @@ namespace ajokki
             ontology::Universe*,
             std::vector<std::string>& command_parameters);
 
+    datatypes::AnyValue* help(
+            console::Console*,
+            ontology::Universe*,
+            std::vector<std::string>& command_parameters);
+
     datatypes::AnyValue* red(
             console::Console*,
             ontology::Universe*,
