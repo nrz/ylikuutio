@@ -14,6 +14,7 @@
 #endif
 
 // Include standard headers
+#include <algorithm>     // std::sort
 #include <iterator>      // std::back_inserter
 #include <list>          // std::list
 #include <sstream>       // std::otringstream, std::istringstream, std::ostringstream
@@ -126,7 +127,51 @@ namespace console
         {
             this->console_history.push_back(text_char_list);
         }
+    }
 
+    void Console::print_help()
+    {
+        std::vector<std::string> command_vector;
+        command_vector.reserve(this->command_callback_map_pointer->size());
+
+        for (auto key_and_value : *this->command_callback_map_pointer)
+        {
+            command_vector.push_back(key_and_value.first); // key (command).
+        }
+
+        // sort command vector alphabetically.
+        std::sort(command_vector.begin(), command_vector.end());
+
+        uint32_t characters_for_line = window_width / text_size;
+
+        std::string commands_text;
+
+        for (std::string command : command_vector)
+        {
+            if (commands_text.size() > 0 &&
+                    commands_text.size() + command.size() >= characters_for_line)
+            {
+                // Not enough space for this command on this line.
+                // Print this line.
+                this->print_text(commands_text);
+                commands_text = command;
+            }
+            else if (commands_text.size() > 0)
+            {
+                // There is space, and this is not the first command on this line.
+                commands_text += " " + command;
+            }
+            else
+            {
+                // This is the first command on this line.
+                commands_text += command;
+            }
+        }
+        if (commands_text.size() > 0)
+        {
+            // Print the last line.
+            this->print_text(commands_text);
+        }
     }
 
     void Console::draw_console()
