@@ -785,6 +785,9 @@ int main(void)
     command_callback_map["green"] = &ajokki::green;
     command_callback_map["blue"] = &ajokki::blue;
 
+    // Other callbacks.
+    command_callback_map["version"] = &ajokki::version;
+
     // For speed computation
     double last_time_to_display_FPS = glfwGetTime();
     double last_time_for_display_sync = glfwGetTime();

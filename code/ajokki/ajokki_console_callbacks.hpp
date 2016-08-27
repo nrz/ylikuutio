@@ -11,7 +11,7 @@
 namespace ajokki
 {
     datatypes::AnyValue* version(
-            console::Console*,
+            console::Console* console,
             ontology::Universe*,
             std::vector<std::string>& command_parameters);
 

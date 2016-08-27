@@ -1,4 +1,5 @@
 #include "ajokki_console_callbacks.hpp"
+#include "code/ylikuutio/console/console.hpp"
 #include "code/ylikuutio/console/command_and_callback_struct.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/callback_system/callback_magic_numbers.hpp"
@@ -11,10 +12,11 @@
 namespace ajokki
 {
     datatypes::AnyValue* version(
-            console::Console*,
+            console::Console* console,
             ontology::Universe*,
             std::vector<std::string>& command_parameters)
     {
+        console->print_text("Ajokki 0.0.1 / Ylikuutio 0.0.1\n");
         return nullptr;
     }
 
