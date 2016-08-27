@@ -1,6 +1,7 @@
 #include "console.hpp"
 #include "command_and_callback_struct.hpp"
 #include "code/ylikuutio/ontology/font2D.hpp"
+#include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/callback_system/callback_magic_numbers.hpp"
 #include "code/ylikuutio/common/global_variables.hpp"
 #include "code/ylikuutio/common/globals.hpp"
@@ -15,6 +16,7 @@
 // Include standard headers
 #include <iterator>      // std::back_inserter
 #include <list>          // std::list
+#include <sstream>       // std::otringstream, std::istringstream, std::ostringstream
 #include <stdint.h>      // uint32_t etc.
 #include <unordered_map> // std::unordered_map
 #include <vector>        // std::vector
@@ -25,6 +27,7 @@ namespace console
             std::vector<KeyAndCallbackStruct>** current_keypress_callback_engine_vector_pointer_pointer,
             std::vector<KeyAndCallbackStruct>** current_keyrelease_callback_engine_vector_pointer_pointer,
             std::unordered_map<std::string, ConsoleCommandCallback>* command_callback_map_pointer,
+            ontology::Universe* universe_pointer,
             ontology::Font2D* text2D_pointer)
     {
         // constructor.
@@ -58,6 +61,9 @@ namespace console
 
         // This is a pointer to `std::unordered_map<std::string, bool>` that contains console command callbacks.
         this->command_callback_map_pointer = command_callback_map_pointer;
+
+        // This is a pointer to `ontology::Universe`.
+        this->universe_pointer = universe_pointer;
 
         // This is a pointer to `font2D::Font2D` instance that is used for printing.
         this->text2D_pointer = text2D_pointer;
@@ -535,9 +541,45 @@ namespace console
             std::vector<callback_system::CallbackParameter*>&,
             console::Console* console)
     {
+        datatypes::AnyValue* any_value = nullptr;
+
         if (console->in_console &&
                 console->can_enter_key)
         {
+            // Parse input into vector.
+            std::string input_string(console->current_input.begin(), console->current_input.end());
+            std::istringstream input_stringstream(input_string);
+            std::string command;
+
+            if (std::getline(input_stringstream, command, ' '))
+            {
+                // OK, there was a command.
+                std::vector<std::string> parameter_vector;
+
+                // Now read the command parameters.
+                while (true)
+                {
+                    std::string parameter;
+
+                    if (std::getline(input_stringstream, parameter, ' '))
+                    {
+                        parameter_vector.push_back(parameter);
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+
+                // Call the corresponding console command callback, if there is one.
+                if (console->command_callback_map_pointer != nullptr &&
+                        console->command_callback_map_pointer->count(command) == 1)
+                {
+                    ConsoleCommandCallback callback = console->command_callback_map_pointer->at(command);
+                    any_value = callback(console, console->universe_pointer, parameter_vector);
+                }
+            }
+
             console->command_history.push_back(console->current_input);
             console->current_input.clear();
             console->in_historical_input = false;
@@ -545,7 +587,7 @@ namespace console
             console->cursor_index = 0;
             console->can_enter_key = false;
         }
-        return nullptr;
+        return any_value;
     }
 
     datatypes::AnyValue* Console::ctrl_c(

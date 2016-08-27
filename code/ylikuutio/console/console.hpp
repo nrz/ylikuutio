@@ -30,6 +30,7 @@ namespace console
             Console(std::vector<KeyAndCallbackStruct>** current_keypress_callback_engine_vector_pointer_pointer,
                     std::vector<KeyAndCallbackStruct>** current_keyrelease_callback_engine_vector_pointer_pointer,
                     std::unordered_map<std::string, ConsoleCommandCallback>* command_callback_map_pointer,
+                    ontology::Universe* universe_pointer,
                     ontology::Font2D* text2D_pointer);
 
             // destructor.
@@ -259,6 +260,9 @@ namespace console
 
             // This is a pointer to `std::unordered_map<std::string, bool>` that contains console command callbacks.
             std::unordered_map<std::string, ConsoleCommandCallback>* command_callback_map_pointer;
+
+            // This is a pointer to `ontology::Universe`.
+            ontology::Universe* universe_pointer;
 
             // This is a pointer to `font2D::Font2D` instance that is used for printing.
             ontology::Font2D* text2D_pointer;

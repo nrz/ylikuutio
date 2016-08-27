@@ -360,10 +360,13 @@ int main(void)
     const char* char_g_font_texture_file_format = g_font_texture_file_format.c_str();
     ontology::Font2D* my_text2D = new ontology::Font2D(window_width, window_height, char_g_font_texture_filename, char_g_font_texture_file_format);
 
+    std::unordered_map<std::string, ConsoleCommandCallback> command_callback_map;
+
     console::Console* my_console = new console::Console(
             &current_keypress_callback_engine_vector_pointer,
             &current_keyrelease_callback_engine_vector_pointer,
-            nullptr,
+            &command_callback_map,
+            my_universe,
             my_text2D); // create a console.
     global_console_pointer = my_console;
 
@@ -765,6 +768,13 @@ int main(void)
     console_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_ENTER, enter_callback_engine });
     console_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_C, ctrl_c_callback_engine });
     my_console->set_my_keypress_callback_engine_vector_pointer(&console_keypress_callback_engines);
+
+    /*********************************************************************\
+     *  Callback engines for console commands begin here.                 *
+    \*********************************************************************/
+    command_callback_map["red"] = &ajokki::red;
+    command_callback_map["green"] = &ajokki::green;
+    command_callback_map["blue"] = &ajokki::blue;
 
     // For speed computation
     double last_time_to_display_FPS = glfwGetTime();
