@@ -1,5 +1,6 @@
 #include "ajokki_console_callbacks.hpp"
 #include "code/ylikuutio/console/command_and_callback_struct.hpp"
+#include "code/ylikuutio/callback_system/callback_magic_numbers.hpp"
 #include "code/ylikuutio/common/globals.hpp"
 
 // Include standard headers
@@ -15,6 +16,7 @@ namespace ajokki
             console::Console*,
             std::vector<std::string>& command_parameters)
     {
+        return nullptr;
     }
 
     datatypes::AnyValue* quit(
@@ -24,5 +26,6 @@ namespace ajokki
             console::Console*,
             std::vector<std::string>& command_parameters)
     {
+        return new datatypes::AnyValue(EXIT_PROGRAM_MAGIC_NUMBER);
     }
 }
