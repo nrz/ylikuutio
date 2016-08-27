@@ -64,6 +64,15 @@ namespace ontology
         ontology::render_children<ontology::Scene*>(this->scene_pointer_vector);
     }
 
+    void Universe::set_background_color(GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha)
+    {
+        this->background_red = red;
+        this->background_green = green;
+        this->background_blue = blue;
+        this->background_alpha = alpha;
+        glClearColor(this->background_red, this->background_green, this->background_blue, this->background_alpha);
+    }
+
     void Universe::set_scene_pointer(uint32_t childID, ontology::Scene* child_pointer)
     {
         hierarchy::set_child_pointer(childID, child_pointer, this->scene_pointer_vector, this->free_sceneID_queue);
