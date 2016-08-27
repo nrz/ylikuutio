@@ -19,6 +19,21 @@ namespace ajokki
             console::Console*,
             ontology::Universe*,
             std::vector<std::string>& command_parameters);
+
+    datatypes::AnyValue* red(
+            console::Console*,
+            ontology::Universe*,
+            std::vector<std::string>& command_parameters);
+
+    datatypes::AnyValue* green(
+            console::Console*,
+            ontology::Universe*,
+            std::vector<std::string>& command_parameters);
+
+    datatypes::AnyValue* blue(
+            console::Console*,
+            ontology::Universe*,
+            std::vector<std::string>& command_parameters);
 }
 
 #endif
