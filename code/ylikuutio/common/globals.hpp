@@ -53,6 +53,13 @@
 #define PI 3.14159265359f
 #endif
 
+namespace callback_system
+{
+    class CallbackEngine;
+    class CallbackObject;
+    class CallbackParameter;
+}
+
 namespace graph
 {
     class Graph;
@@ -276,12 +283,6 @@ typedef struct
     SphericalWorldStruct spherical_world_struct;
 } TransformationStruct;
 
-namespace callback_system
-{
-    class CallbackEngine;
-    class CallbackObject;
-    class CallbackParameter;
-}
 typedef datatypes::AnyValue* (*InputParametersToAnyValueCallback) (
         callback_system::CallbackEngine*,
         callback_system::CallbackObject*,
