@@ -450,6 +450,12 @@ add_library(ylikuutio STATIC
     code/ylikuutio/common/globals.hpp
     code/ylikuutio/common/template_helpers.hpp
 
+    # config, in alphabetical order.
+    code/ylikuutio/config/setting.cpp
+    code/ylikuutio/config/setting.hpp
+    code/ylikuutio/config/setting_master.cpp
+    code/ylikuutio/config/setting_master.hpp
+
     # console, in alphabetical order.
     code/ylikuutio/console/command_and_callback_struct.hpp
     code/ylikuutio/console/console.cpp
