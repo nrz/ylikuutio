@@ -50,10 +50,10 @@
 #endif
 
 // Include standard headers
-#include <cstdio>   // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf etc.
-#include <iostream> // std::cout, std::cin, std::cerr
-#include <string>   // std::string
-#include <stdint.h> // uint32_t etc.
+#include <cstdio>        // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf etc.
+#include <iostream>      // std::cout, std::cin, std::cerr
+#include <string>        // std::string
+#include <stdint.h>      // uint32_t etc.
 #include <unordered_map> // std::unordered_map
 
 // model file format: obj/bmp/...
