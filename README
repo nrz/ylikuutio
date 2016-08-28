@@ -43,8 +43,7 @@ Ylikuutio can be compiled with GCC, Clang or Visual Studio.
 C++11 support is required.
 OpenGL 3.0 or newer is required.
 CMake 2.6.2 or newer is needed for compiling process.
-CMake uses git for downloading Google Test testing framework and Eigen,
-a C++ template library for linear algebra.
+CMake uses git for downloading Google Test testing framework.
 
 In Linux it's simple.
 
@@ -87,8 +86,8 @@ Ylikuutio. Tests using Catch have been disabled by default but can be
 compiled by uncommenting the corresponding line in CMakeLists.txt:
 # set(DO_UNIT_TESTS_WITH_CATCH true)
 
-If you cross compiling for Windows under Linux, you need to uncomment
-the corresponding line in CMakeLists.txt:
+If you are cross compiling for Windows under Linux, you need to
+uncomment the corresponding line in CMakeLists.txt:
 # set(CROSS_COMPILE_FOR_WINDOWS true)
 
 To run Ajokki (working title based on Finnish bus body manufacturer),
