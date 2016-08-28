@@ -2,10 +2,10 @@
 #define __HIERARCHY_TEMPLATES_HPP_INCLUDED
 
 // Include standard headers
-#include <queue>     // std::queue
-#include <stdint.h>  // uint32_t etc.
+#include <queue>         // std::queue
+#include <stdint.h>      // uint32_t etc.
 #include <unordered_map> // std::unordered_map
-#include <vector>    // std::vector
+#include <vector>        // std::vector
 
 namespace hierarchy
 {
