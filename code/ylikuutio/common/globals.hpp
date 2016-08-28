@@ -53,6 +53,12 @@
 #define PI 3.14159265359f
 #endif
 
+namespace config
+{
+    class SettingMaster;
+    class Setting;
+}
+
 namespace callback_system
 {
     class CallbackEngine;
@@ -203,6 +209,13 @@ typedef struct GlyphStruct
     ontology::VectorFont* parent_pointer;       // pointer to the font object.
     glm::vec3 light_position;                // light position.
 } GlyphStruct;
+
+typedef struct SettingStruct
+{
+    std::string name;
+    config::SettingMaster* parent_pointer;
+    callback_system::CallbackEngine* activate_callback_engine_pointer;
+} SettingStruct;
 
 typedef struct
 {
