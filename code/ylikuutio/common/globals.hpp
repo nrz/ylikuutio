@@ -91,8 +91,8 @@ typedef struct ShaderStruct
         // constructor.
     }
     ontology::Scene* parent_pointer; // pointer to the scene (draw list).
-    std::string vertex_shader;    // filename of vertex shader.
-    std::string fragment_shader;  // filename of fragment shader.
+    std::string vertex_shader;       // filename of vertex shader.
+    std::string fragment_shader;     // filename of fragment shader.
 } ShaderStruct;
 
 typedef struct MaterialStruct
@@ -102,9 +102,9 @@ typedef struct MaterialStruct
     {
         // constructor.
     }
-    ontology::Shader* parent_pointer;   // pointer to the shader.
-    std::string texture_file_format; // type of the texture file. supported file formats so far: `"bmp"`/`"BMP"`, `"dds"`/`"DDS"`.
-    std::string texture_filename;    // filename of the model file.
+    ontology::Shader* parent_pointer; // pointer to the shader.
+    std::string texture_file_format;  // type of the texture file. supported file formats so far: `"bmp"`/`"BMP"`, `"dds"`/`"DDS"`.
+    std::string texture_filename;     // filename of the model file.
     std::string image_path;
 } MaterialStruct;
 
@@ -172,7 +172,7 @@ typedef struct VectorFontStruct
         // constructor.
     }
     // used for all files (for all font).
-    ontology::Material* parent_pointer;        // pointer to the material object.
+    ontology::Material* parent_pointer;     // pointer to the material object.
     GLfloat vertex_scaling_factor;
     std::string font_file_format;           // type of the font file. supported file formats so far: `"svg"`/`"SVG"`.
     std::string font_filename;              // filename of the font file.
@@ -188,11 +188,11 @@ typedef struct Text3DStruct
     ontology::VectorFont* parent_pointer; // pointer to the parent `VectorFont`.
     std::string text_string;
     const char* text_string_char;
-    glm::vec3 original_scale_vector;   // original scale vector.
-    float rotate_angle;                // rotate angle.
-    glm::vec3 coordinate_vector;       // coordinate vector.
-    glm::vec3 rotate_vector;           // rotate vector.
-    glm::vec3 translate_vector;        // translate vector.
+    glm::vec3 original_scale_vector;      // original scale vector.
+    float rotate_angle;                   // rotate angle.
+    glm::vec3 coordinate_vector;          // coordinate vector.
+    glm::vec3 rotate_vector;              // rotate vector.
+    glm::vec3 translate_vector;           // translate vector.
 } Text3DStruct;
 
 typedef struct GlyphStruct
@@ -204,10 +204,10 @@ typedef struct GlyphStruct
     }
     // used for all files (for all glyph).
     std::vector<std::vector<glm::vec2>>* glyph_vertex_data;
-    const char* glyph_name_pointer;          // we need only a pointer, because glyphs are always created by the `VectorFont` constructor.
-    const char* unicode_char_pointer;      // we need only a pointer, because glyphs are always created by the `VectorFont` constructor.
-    ontology::VectorFont* parent_pointer;       // pointer to the font object.
-    glm::vec3 light_position;                // light position.
+    const char* glyph_name_pointer;       // we need only a pointer, because glyphs are always created by the `VectorFont` constructor.
+    const char* unicode_char_pointer;     // we need only a pointer, because glyphs are always created by the `VectorFont` constructor.
+    ontology::VectorFont* parent_pointer; // pointer to the font object.
+    glm::vec3 light_position;             // light position.
 } GlyphStruct;
 
 typedef struct SettingStruct
