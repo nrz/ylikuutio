@@ -131,7 +131,7 @@ namespace ontology
     {
         public:
             // constructor.
-            Universe(float world_radius);
+            Universe(config::SettingMaster* setting_master_pointer, float world_radius);
 
             // destructor.
             ~Universe();
@@ -160,6 +160,8 @@ namespace ontology
 
             std::vector<ontology::Scene*> scene_pointer_vector;
             std::queue<uint32_t> free_sceneID_queue;
+
+            config::SettingMaster* setting_master_pointer;
 
             GLclampf background_red;
             GLclampf background_green;

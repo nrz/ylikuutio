@@ -15,6 +15,7 @@
 #include "scene.hpp"
 #include "ground_level.hpp"
 #include "render_templates.hpp"
+#include "code/ylikuutio/config/setting_master.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/common/global_variables.hpp"
 #include "code/ylikuutio/common/globals.hpp"
@@ -40,9 +41,10 @@ extern GLFWwindow* window; // The "extern" keyword here is to access the variabl
 
 namespace ontology
 {
-    Universe::Universe(float world_radius)
+    Universe::Universe(config::SettingMaster* setting_master_pointer, float world_radius)
     {
         // constructor.
+        this->setting_master_pointer = setting_master_pointer;
         this->world_radius = world_radius;
     }
 
@@ -54,6 +56,9 @@ namespace ontology
         // destroy all scenes of this world.
         std::cout << "All scenes of this world will be destroyed.\n";
         hierarchy::delete_children<ontology::Scene*>(this->scene_pointer_vector);
+
+        std::cout << "The setting master of this universe will be destroyed.\n";
+        delete this->setting_master_pointer;
     }
 
     void Universe::render()

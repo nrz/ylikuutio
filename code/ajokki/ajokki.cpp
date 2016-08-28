@@ -27,6 +27,7 @@
 #include "code/ylikuutio/ontology/shader.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
+#include "code/ylikuutio/config/setting_master.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
 #include "code/ylikuutio/common/globals.hpp"
 
@@ -165,8 +166,11 @@ int main(void)
     // Cull triangles which normal is not towards the camera.
     glEnable(GL_CULL_FACE);
 
+    // Create the setting master, store it in `my_setting_master`.
+    config::SettingMaster* my_setting_master = new config::SettingMaster();
+
     // Create the world, store it in `my_universe`.
-    ontology::Universe* my_universe = new ontology::Universe(earth_radius);
+    ontology::Universe* my_universe = new ontology::Universe(my_setting_master, earth_radius);
     // Blue background.
     my_universe->set_background_color(0.0f, 0.0f, 1.0f, 0.0f);
 
