@@ -2,7 +2,6 @@
 #define __SETTING_HPP_INCLUDED
 
 #include "setting_master.hpp"
-#include "code/ylikuutio/callback_system/callback_engine.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/common/globals.hpp"
 
@@ -35,8 +34,8 @@ namespace config
             // The setting value (may be a pointer a some datatype).
             datatypes::AnyValue setting_value;
 
-            // pointer to `CallbackEngine` used to activate the new value after setting it.
-            callback_system::CallbackEngine* activate_callback_engine_pointer;
+            // pointer to `ActivateCallback` used to activate the new value after setting it.
+            ActivateCallback* activate_callback_engine_pointer;
 
             config::SettingMaster* parent_pointer; // pointer to `SettingMaster`.
 

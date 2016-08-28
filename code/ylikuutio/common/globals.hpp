@@ -214,9 +214,16 @@ typedef datatypes::AnyValue* (*ActivateCallback) ();
 
 typedef struct SettingStruct
 {
+    SettingStruct()
+        : should_ylikuutio_call_activate_callback_now(true)
+    {
+        // constructor.
+    }
     std::string name;
+    datatypes::AnyValue* initial_value;
     config::SettingMaster* parent_pointer;
-    callback_system::CallbackEngine* activate_callback_engine_pointer;
+    ActivateCallback* activate_callback_engine_pointer;
+    bool should_ylikuutio_call_activate_callback_now;
 } SettingStruct;
 
 typedef struct
