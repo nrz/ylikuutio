@@ -15,12 +15,10 @@
 #endif
 
 // Include standard headers
-#include <algorithm>     // std::sort
 #include <iterator>      // std::back_inserter
 #include <list>          // std::list
 #include <sstream>       // std::otringstream, std::istringstream, std::ostringstream
 #include <stdint.h>      // uint32_t etc.
-#include <string.h>      // strlen
 #include <unordered_map> // std::unordered_map
 #include <vector>        // std::vector
 
