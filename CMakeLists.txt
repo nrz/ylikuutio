@@ -522,6 +522,9 @@ add_library(ylikuutio STATIC
     code/ylikuutio/loaders/texture_loader.cpp
     code/ylikuutio/loaders/texture_loader.hpp
 
+    # map, in alphabetical order
+    code/ylikuutio/map/ylikuutio_map.hpp
+
     # ontology, in alphabetical order
     code/ylikuutio/ontology/font2D.cpp
     code/ylikuutio/ontology/font2D.hpp
