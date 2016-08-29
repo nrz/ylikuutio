@@ -228,7 +228,6 @@ int main(void)
     else
     {
         // Create the species, store it in `terrain_species`.
-        /*
         SpeciesStruct bmp_terrain_species_struct;
         bmp_terrain_species_struct.parent_pointer = grass_material;
         bmp_terrain_species_struct.model_file_format = g_model_file_format;
@@ -237,8 +236,8 @@ int main(void)
         bmp_terrain_species_struct.light_position = glm::vec3(4, 4, 4);
         bmp_terrain_species_struct.is_world = true;
         terrain_species = new ontology::Species(bmp_terrain_species_struct);
-        */
 
+        /*
         SpeciesStruct ascii_grid_terrain_species_struct;
         ascii_grid_terrain_species_struct.parent_pointer = grass_material;
         ascii_grid_terrain_species_struct.model_file_format = ascii_grid_model_file_format;
@@ -246,6 +245,7 @@ int main(void)
         ascii_grid_terrain_species_struct.light_position = glm::vec3(4, 4, 4);
         ascii_grid_terrain_species_struct.is_world = true;
         terrain_species = new ontology::Species(ascii_grid_terrain_species_struct);
+        */
 
         is_flight_mode_in_use = true;
 
