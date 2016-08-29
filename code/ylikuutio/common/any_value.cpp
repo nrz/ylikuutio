@@ -31,6 +31,63 @@ namespace console
 
 namespace datatypes
 {
+    std::string AnyValue::get_datatype()
+    {
+        std::string datatype_string;
+
+        switch (this->type)
+        {
+            case (UNKNOWN):
+                return "unknown";
+            case (BOOL):
+                return "bool";
+            case (CHAR):
+                return "char";
+            case (FLOAT):
+                return "float";
+            case (DOUBLE):
+                return "double";
+            case (INT32_T):
+                return "int32_t";
+            case (UINT32_T):
+                return "uint32_t";
+            case (BOOL_POINTER):
+                return "bool*";
+            case (FLOAT_POINTER):
+                return "float*";
+            case (DOUBLE_POINTER):
+                return "double*";
+            case (INT32_T_POINTER):
+                return "int32_t*";
+            case (UINT32_T_POINTER):
+                return "uint32_t*";
+            case (UNIVERSE_POINTER):
+                return "ontology::Universe*";
+            case (SCENE_POINTER):
+                return "ontology::Scene*";
+            case (SHADER_POINTER):
+                return "ontology::Shader*";
+            case (MATERIAL_POINTER):
+                return "ontology::Material*";
+            case (SPECIES_POINTER):
+                return "ontology::Species*";
+            case (OBJECT_POINTER):
+                return "ontology::Object*";
+            case (VECTORFONT_POINTER):
+                return "ontology::VectorFont*";
+            case (GLYPH_POINTER):
+                return "ontology::Glyph*";
+            case (TEXT3D_POINTER):
+                return "ontology::Text3D*";
+            case (TEXT2D_POINTER):
+                return "ontology::Text2D*";
+            case (CONSOLE_POINTER):
+                return "console::Console*";
+            default:
+                return "TODO: define string for this datatype!";
+        }
+    }
+
     void AnyValue::set_default_values()
     {
         this->type = datatypes::UNKNOWN;
