@@ -221,8 +221,8 @@ typedef struct SettingStruct
     }
     std::string name;
     datatypes::AnyValue* initial_value;
-    config::SettingMaster* parent_pointer;
-    ActivateCallback* activate_callback_engine_pointer;
+    ontology::Universe* universe_pointer;
+    ActivateCallback activate_callback_pointer;
     bool should_ylikuutio_call_activate_callback_now;
 } SettingStruct;
 

@@ -35,8 +35,9 @@ namespace config
             datatypes::AnyValue setting_value;
 
             // pointer to `ActivateCallback` used to activate the new value after setting it.
-            ActivateCallback* activate_callback_engine_pointer;
+            ActivateCallback activate_callback_pointer;
 
+            ontology::Universe* universe_pointer;  // pointer to `Universe`.
             config::SettingMaster* parent_pointer; // pointer to `SettingMaster`.
 
             uint32_t childID;                      // setting ID, returned by `config::SettingMaster->get_settingID()`.
