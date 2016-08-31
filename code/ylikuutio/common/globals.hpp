@@ -210,7 +210,7 @@ typedef struct GlyphStruct
     glm::vec3 light_position;             // light position.
 } GlyphStruct;
 
-typedef datatypes::AnyValue* (*ActivateCallback) ();
+typedef datatypes::AnyValue* (*ActivateCallback) (ontology::Universe* universe_pointer);
 
 typedef struct SettingStruct
 {
