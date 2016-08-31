@@ -17,7 +17,7 @@
 // Include standard headers
 #include <iterator>      // std::back_inserter
 #include <list>          // std::list
-#include <sstream>       // std::otringstream, std::istringstream, std::ostringstream
+#include <sstream>       // std::istringstream, std::ostringstream, std::stringstream
 #include <stdint.h>      // uint32_t etc.
 #include <unordered_map> // std::unordered_map
 #include <vector>        // std::vector
