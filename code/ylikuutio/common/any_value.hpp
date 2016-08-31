@@ -59,6 +59,7 @@ namespace datatypes
     {
         public:
             std::string get_datatype();
+            std::string get_string();
 
             AnyValue();
             AnyValue(bool bool_value);
