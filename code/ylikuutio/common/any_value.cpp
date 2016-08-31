@@ -1,6 +1,7 @@
 #include "any_value.hpp"
 
 // Include standard headers
+#include <cerrno>   // errno
 #include <cmath>    // NAN, std::isnan, std::pow
 #include <cstring>  // std::memcmp, std::strcmp, std::strlen, std::strncmp
 #include <stdio.h>  // printf, snprintf, sprintf
@@ -165,6 +166,72 @@ namespace datatypes
                 return std::string(buffer);
             default:
                 return "TODO: define string for this datatype!";
+        }
+    }
+
+    bool AnyValue::set_value(std::string value_string)
+    {
+        bool success = false;
+        char* end;
+
+        switch (this->type)
+        {
+            case (UNKNOWN):
+                return false;
+            case (BOOL):
+                return false;
+            case (CHAR):
+                return false;
+            case (FLOAT):
+                {
+                    float float_value = std::strtof(value_string.c_str(), &end);
+                    if (errno == ERANGE)
+                    {
+                        return false;
+                    }
+                    this->float_value = float_value;
+                    return true;
+                }
+            case (DOUBLE):
+                return false;
+            case (INT32_T):
+                return false;
+            case (UINT32_T):
+                return false;
+            case (BOOL_POINTER):
+                return false;
+            case (FLOAT_POINTER):
+                return false;
+            case (DOUBLE_POINTER):
+                return false;
+            case (INT32_T_POINTER):
+                return false;
+            case (UINT32_T_POINTER):
+                return false;
+            case (UNIVERSE_POINTER):
+                return false;
+            case (SCENE_POINTER):
+                return false;
+            case (SHADER_POINTER):
+                return false;
+            case (MATERIAL_POINTER):
+                return false;
+            case (SPECIES_POINTER):
+                return false;
+            case (OBJECT_POINTER):
+                return false;
+            case (VECTORFONT_POINTER):
+                return false;
+            case (GLYPH_POINTER):
+                return false;
+            case (TEXT3D_POINTER):
+                return false;
+            case (TEXT2D_POINTER):
+                return false;
+            case (CONSOLE_POINTER):
+                return false;
+            default:
+                return false;
         }
     }
 
