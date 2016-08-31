@@ -18,7 +18,7 @@ namespace config
         this->name = setting_struct.name;
         this->setting_value = setting_struct.initial_value;
         this->universe_pointer = setting_struct.universe_pointer;
-        this->activate_callback_pointer = setting_struct.activate_callback_pointer;
+        this->activate_callback = setting_struct.activate_callback;
 
         // get `childID` from the `SettingMaster` and set pointer to this `Setting`.
         this->bind_to_parent();
