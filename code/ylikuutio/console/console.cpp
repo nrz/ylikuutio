@@ -24,12 +24,7 @@
 
 namespace console
 {
-    Console::Console(
-            std::vector<KeyAndCallbackStruct>** current_keypress_callback_engine_vector_pointer_pointer,
-            std::vector<KeyAndCallbackStruct>** current_keyrelease_callback_engine_vector_pointer_pointer,
-            std::unordered_map<std::string, ConsoleCommandCallback>* command_callback_map_pointer,
-            ontology::Universe* universe_pointer,
-            ontology::Font2D* text2D_pointer)
+    Console::Console(ConsoleStruct console_struct)
     {
         // constructor.
         this->cursor_it = this->current_input.begin();
@@ -55,19 +50,19 @@ namespace console
         this->my_keyrelease_callback_engine_vector_pointer = nullptr;
 
         // This is a pointer to `std::vector<KeyAndCallbackStruct>*` that controls keypress callbacks.
-        this->current_keypress_callback_engine_vector_pointer_pointer = current_keypress_callback_engine_vector_pointer_pointer;
+        this->current_keypress_callback_engine_vector_pointer_pointer = console_struct.current_keypress_callback_engine_vector_pointer_pointer;
 
         // This is a pointer to `std::vector<KeyAndCallbackStruct>*` that controls keyrelease callbacks.
-        this->current_keyrelease_callback_engine_vector_pointer_pointer = current_keyrelease_callback_engine_vector_pointer_pointer;
+        this->current_keyrelease_callback_engine_vector_pointer_pointer = console_struct.current_keyrelease_callback_engine_vector_pointer_pointer;
 
         // This is a pointer to `std::unordered_map<std::string, bool>` that contains console command callbacks.
-        this->command_callback_map_pointer = command_callback_map_pointer;
+        this->command_callback_map_pointer = console_struct.command_callback_map_pointer;
 
         // This is a pointer to `ontology::Universe`.
-        this->universe_pointer = universe_pointer;
+        this->universe_pointer = console_struct.universe_pointer;
 
         // This is a pointer to `font2D::Font2D` instance that is used for printing.
-        this->text2D_pointer = text2D_pointer;
+        this->text2D_pointer = console_struct.text2D_pointer;
 
         this->print_text("Welcome! Please write \"help\" for more");
         this->print_text("information.");

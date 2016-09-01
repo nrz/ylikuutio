@@ -402,12 +402,14 @@ int main(void)
 
     std::unordered_map<std::string, ConsoleCommandCallback> command_callback_map;
 
-    console::Console* my_console = new console::Console(
-            &current_keypress_callback_engine_vector_pointer,
-            &current_keyrelease_callback_engine_vector_pointer,
-            &command_callback_map,
-            my_universe,
-            my_text2D); // create a console.
+    ConsoleStruct console_struct;
+    console_struct.current_keypress_callback_engine_vector_pointer_pointer = &current_keypress_callback_engine_vector_pointer;
+    console_struct.current_keyrelease_callback_engine_vector_pointer_pointer = &current_keyrelease_callback_engine_vector_pointer;
+    console_struct.command_callback_map_pointer = &command_callback_map;
+    console_struct.universe_pointer = my_universe;
+    console_struct.text2D_pointer = my_text2D;
+
+    console::Console* my_console = new console::Console(console_struct); // create a console.
     global_console_pointer = my_console;
 
     /*********************************************************************\
