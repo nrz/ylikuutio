@@ -1,6 +1,7 @@
 #ifndef __GLOBALS_HPP_INCLUDED
 #define __GLOBALS_HPP_INCLUDED
 
+#include "code/ylikuutio/callback_system/key_and_callback_struct.hpp"
 #include "any_value.hpp"
 
 // GCC (at least g++ 4.7.2) and Visual Studio 2015 do support
@@ -47,6 +48,7 @@
 #include <cmath>    // NAN, std::isnan, std::pow
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
+#include <unordered_map> // std::unordered_map
 #include <vector>   // std::vector
 
 #ifndef PI
@@ -210,6 +212,20 @@ typedef struct GlyphStruct
     glm::vec3 light_position;             // light position.
 } GlyphStruct;
 
+typedef datatypes::AnyValue* (*ConsoleCommandCallback) (
+        console::Console*,
+        ontology::Universe*,
+        std::vector<std::string>& command_parameters);
+
+typedef struct ConsoleStruct
+{
+    std::vector<KeyAndCallbackStruct>** current_keypress_callback_engine_vector_pointer_pointer;
+    std::vector<KeyAndCallbackStruct>** current_keyrelease_callback_engine_vector_pointer_pointer;
+    std::unordered_map<std::string, ConsoleCommandCallback>* command_callback_map_pointer;
+    ontology::Universe* universe_pointer;
+    ontology::Font2D* text2D_pointer;
+} ConsoleStruct;
+
 typedef datatypes::AnyValue* (*ActivateCallback) (ontology::Universe* universe_pointer);
 
 typedef struct SettingStruct
@@ -319,11 +335,6 @@ typedef datatypes::AnyValue* (*InputParametersToAnyValueCallbackWithConsole) (
         callback_system::CallbackObject*,
         std::vector<callback_system::CallbackParameter*>&,
         console::Console*);
-
-typedef datatypes::AnyValue* (*ConsoleCommandCallback) (
-        console::Console*,
-        ontology::Universe*,
-        std::vector<std::string>& command_parameters);
 
 typedef datatypes::AnyValue* (*GetContentCallback) (
         callback_system::CallbackEngine*,
