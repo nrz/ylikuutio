@@ -7,6 +7,7 @@
 #include <stdio.h>  // printf, snprintf, sprintf
 #include <string>   // std::string
 #include <stdint.h> // uint32_t etc.
+#include <stdlib.h> // std::strtol, std::strtoll, std::strtoul
 
 namespace ontology
 {
@@ -179,9 +180,28 @@ namespace datatypes
             case (UNKNOWN):
                 return false;
             case (BOOL):
-                return false;
+                {
+                    if (strcmp(value_string.c_str(), "true")) // Ylikuutio is case sensitive!
+                    {
+                        this->bool_value = true;
+                        return true;
+                    }
+                    else if (strcmp(value_string.c_str(), "false")) // Ylikuutio is case sensitive!
+                    {
+                        this->bool_value = false;
+                        return true;
+                    }
+                    return false;
+                }
             case (CHAR):
-                return false;
+                {
+                    if (value_string.size() == 1)
+                    {
+                        this->char_value = value_string[0];
+                        return true;
+                    }
+                    return false;
+                }
             case (FLOAT):
                 {
                     float float_value = std::strtof(value_string.c_str(), &end);
@@ -193,43 +213,229 @@ namespace datatypes
                     return true;
                 }
             case (DOUBLE):
-                return false;
+                {
+                    double double_value = std::strtod(value_string.c_str(), &end);
+                    if (errno == ERANGE)
+                    {
+                        return false;
+                    }
+                    this->double_value = double_value;
+                    return true;
+                }
             case (INT32_T):
-                return false;
+                {
+                    // 0 means that the base is determined by the format given in string.
+                    int32_t int32_t_value = std::strtol(value_string.c_str(), &end, 0);
+                    if (errno == ERANGE)
+                    {
+                        return false;
+                    }
+                    this->int32_t_value = int32_t_value;
+                    return true;
+                }
             case (UINT32_T):
-                return false;
+                {
+                    // 0 means that the base is determined by the format given in string.
+                    uint32_t uint32_t_value = std::strtoul(value_string.c_str(), &end, 0);
+                    if (errno == ERANGE)
+                    {
+                        return false;
+                    }
+                    this->uint32_t_value = uint32_t_value;
+                    return true;
+                }
             case (BOOL_POINTER):
-                return false;
+                {
+                    // 0 means that the base is determined by the format given in string.
+                    // The size of the pointer is assumed to be 64 bits.
+                    bool* bool_pointer = (bool*) (std::strtoll(value_string.c_str(), &end, 0));
+                    if (errno == ERANGE)
+                    {
+                        return false;
+                    }
+                    this->bool_pointer = bool_pointer;
+                    return true;
+                }
             case (FLOAT_POINTER):
-                return false;
+                {
+                    // 0 means that the base is determined by the format given in string.
+                    // The size of the pointer is assumed to be 64 bits.
+                    float* float_pointer = (float*) (std::strtoll(value_string.c_str(), &end, 0));
+                    if (errno == ERANGE)
+                    {
+                        return false;
+                    }
+                    this->float_pointer = float_pointer;
+                    return true;
+                }
             case (DOUBLE_POINTER):
-                return false;
+                {
+                    // 0 means that the base is determined by the format given in string.
+                    // The size of the pointer is assumed to be 64 bits.
+                    double* double_pointer = (double*) (std::strtoll(value_string.c_str(), &end, 0));
+                    if (errno == ERANGE)
+                    {
+                        return false;
+                    }
+                    this->double_pointer = double_pointer;
+                    return true;
+                }
             case (INT32_T_POINTER):
-                return false;
+                {
+                    // 0 means that the base is determined by the format given in string.
+                    // The size of the pointer is assumed to be 64 bits.
+                    int32_t* int32_t_pointer = (int32_t*) (std::strtoll(value_string.c_str(), &end, 0));
+                    if (errno == ERANGE)
+                    {
+                        return false;
+                    }
+                    this->int32_t_pointer = int32_t_pointer;
+                    return true;
+                }
             case (UINT32_T_POINTER):
-                return false;
+                {
+                    // 0 means that the base is determined by the format given in string.
+                    // The size of the pointer is assumed to be 64 bits.
+                    uint32_t* uint32_t_pointer = (uint32_t*) (std::strtoll(value_string.c_str(), &end, 0));
+                    if (errno == ERANGE)
+                    {
+                        return false;
+                    }
+                    this->uint32_t_pointer = uint32_t_pointer;
+                    return true;
+                }
             case (UNIVERSE_POINTER):
-                return false;
+                {
+                    // 0 means that the base is determined by the format given in string.
+                    // The size of the pointer is assumed to be 64 bits.
+                    ontology::Universe* universe_pointer = (ontology::Universe*) (std::strtoll(value_string.c_str(), &end, 0));
+                    if (errno == ERANGE)
+                    {
+                        return false;
+                    }
+                    this->universe_pointer = universe_pointer;
+                    return true;
+                }
             case (SCENE_POINTER):
-                return false;
+                {
+                    // 0 means that the base is determined by the format given in string.
+                    // The size of the pointer is assumed to be 64 bits.
+                    ontology::Scene* scene_pointer = (ontology::Scene*) (std::strtoll(value_string.c_str(), &end, 0));
+                    if (errno == ERANGE)
+                    {
+                        return false;
+                    }
+                    this->scene_pointer = scene_pointer;
+                    return true;
+                }
             case (SHADER_POINTER):
-                return false;
+                {
+                    // 0 means that the base is determined by the format given in string.
+                    // The size of the pointer is assumed to be 64 bits.
+                    ontology::Shader* shader_pointer = (ontology::Shader*) (std::strtoll(value_string.c_str(), &end, 0));
+                    if (errno == ERANGE)
+                    {
+                        return false;
+                    }
+                    this->shader_pointer = shader_pointer;
+                    return true;
+                }
             case (MATERIAL_POINTER):
-                return false;
+                {
+                    // 0 means that the base is determined by the format given in string.
+                    // The size of the pointer is assumed to be 64 bits.
+                    ontology::Material* material_pointer = (ontology::Material*) (std::strtoll(value_string.c_str(), &end, 0));
+                    if (errno == ERANGE)
+                    {
+                        return false;
+                    }
+                    this->material_pointer = material_pointer;
+                    return true;
+                }
             case (SPECIES_POINTER):
-                return false;
+                {
+                    // 0 means that the base is determined by the format given in string.
+                    // The size of the pointer is assumed to be 64 bits.
+                    ontology::Species* species_pointer = (ontology::Species*) (std::strtoll(value_string.c_str(), &end, 0));
+                    if (errno == ERANGE)
+                    {
+                        return false;
+                    }
+                    this->species_pointer = species_pointer;
+                    return true;
+                }
             case (OBJECT_POINTER):
-                return false;
+                {
+                    // 0 means that the base is determined by the format given in string.
+                    // The size of the pointer is assumed to be 64 bits.
+                    ontology::Object* object_pointer = (ontology::Object*) (std::strtoll(value_string.c_str(), &end, 0));
+                    if (errno == ERANGE)
+                    {
+                        return false;
+                    }
+                    this->object_pointer = object_pointer;
+                    return true;
+                }
             case (VECTORFONT_POINTER):
-                return false;
+                {
+                    // 0 means that the base is determined by the format given in string.
+                    // The size of the pointer is assumed to be 64 bits.
+                    ontology::VectorFont* vector_font_pointer = (ontology::VectorFont*) (std::strtoll(value_string.c_str(), &end, 0));
+                    if (errno == ERANGE)
+                    {
+                        return false;
+                    }
+                    this->vector_font_pointer = vector_font_pointer;
+                    return true;
+                }
             case (GLYPH_POINTER):
-                return false;
+                {
+                    // 0 means that the base is determined by the format given in string.
+                    // The size of the pointer is assumed to be 64 bits.
+                    ontology::Glyph* glyph_pointer = (ontology::Glyph*) (std::strtoll(value_string.c_str(), &end, 0));
+                    if (errno == ERANGE)
+                    {
+                        return false;
+                    }
+                    this->glyph_pointer = glyph_pointer;
+                    return true;
+                }
             case (TEXT3D_POINTER):
-                return false;
+                {
+                    // 0 means that the base is determined by the format given in string.
+                    // The size of the pointer is assumed to be 64 bits.
+                    ontology::Text3D* text3D_pointer = (ontology::Text3D*) (std::strtoll(value_string.c_str(), &end, 0));
+                    if (errno == ERANGE)
+                    {
+                        return false;
+                    }
+                    this->text3D_pointer = text3D_pointer;
+                    return true;
+                }
             case (TEXT2D_POINTER):
-                return false;
+                {
+                    // 0 means that the base is determined by the format given in string.
+                    // The size of the pointer is assumed to be 64 bits.
+                    ontology::Font2D* font2D_pointer = (ontology::Font2D*) (std::strtoll(value_string.c_str(), &end, 0));
+                    if (errno == ERANGE)
+                    {
+                        return false;
+                    }
+                    this->text2D_pointer = font2D_pointer;
+                    return true;
+                }
             case (CONSOLE_POINTER):
-                return false;
+                {
+                    // 0 means that the base is determined by the format given in string.
+                    // The size of the pointer is assumed to be 64 bits.
+                    console::Console* console_pointer = (console::Console*) (std::strtoll(value_string.c_str(), &end, 0));
+                    if (errno == ERANGE)
+                    {
+                        return false;
+                    }
+                    this->console_pointer = console_pointer;
+                    return true;
+                }
             default:
                 return false;
         }
