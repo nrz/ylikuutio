@@ -122,6 +122,12 @@
 //    y-coordinates of these are compared. The piece with the smallest y-coordinate (lowest altitude) remains terrain, other pieces become
 //    regular objects. The pieces that become regular objects will be subject to gravity the same way as any regular object.
 
+namespace config
+{
+    class Setting;
+    class SettingMaster;
+}
+
 namespace ontology
 {
     class Scene;
@@ -144,6 +150,8 @@ namespace ontology
             friend class Scene;
             friend class Shader;
             friend class Species;
+            friend class config::Setting;
+            friend class config::SettingMaster;
 
         private:
             // this method sets a scene pointer.
