@@ -1,6 +1,10 @@
 #ifndef __SETTING_MASTER_HPP_INCLUDED
 #define __SETTING_MASTER_HPP_INCLUDED
 
+#include "code/ylikuutio/console/console.hpp"
+#include "code/ylikuutio/ontology/universe.hpp"
+#include "code/ylikuutio/common/any_value.hpp"
+
 // Include standard headers
 #include <queue>         // std::queue
 #include <string>        // std::string
@@ -21,10 +25,29 @@ namespace config
             ~SettingMaster();
 
             // does setting `setting` exist?
-            bool is_setting(std::string setting);
+            bool is_setting(std::string setting_name);
+
+            // this function returns general help.
+            std::string help();
 
             // this function returns help string for setting `setting`.
-            std::string help(std::string setting);
+            std::string help(std::string setting_name);
+
+            // Public callbacks.
+
+            static datatypes::AnyValue* set(
+                    console::Console* console,
+                    ontology::Universe* universe,
+                    std::vector<std::string>& command_parameters);
+
+            static datatypes::AnyValue* get(
+                    console::Console* console,
+                    ontology::Universe* universe,
+                    std::vector<std::string>& command_parameters);
+
+            static datatypes::AnyValue* activate_background_color(ontology::Universe* universe_pointer);
+
+            // Public callbacks end here.
 
             friend class Setting;
 

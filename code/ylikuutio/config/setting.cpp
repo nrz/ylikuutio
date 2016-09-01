@@ -1,4 +1,5 @@
 #include "setting.hpp"
+#include "setting_master.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/common/globals.hpp"
 
@@ -20,8 +21,27 @@ namespace config
         this->universe_pointer = setting_struct.universe_pointer;
         this->activate_callback = setting_struct.activate_callback;
 
+        if (this->universe_pointer == nullptr)
+        {
+            return;
+        }
+
+        this->parent_pointer = this->universe_pointer->setting_master_pointer;
+
+        if (this->parent_pointer == nullptr)
+        {
+            return;
+        }
+
         // get `childID` from the `SettingMaster` and set pointer to this `Setting`.
         this->bind_to_parent();
+
+        this->parent_pointer->setting_pointer_map[this->name] = this;
+
+        if (setting_struct.should_ylikuutio_call_activate_callback_now)
+        {
+            this->activate_callback(this->universe_pointer);
+        }
     }
 
     Setting::~Setting()
@@ -29,8 +49,10 @@ namespace config
         // destructor.
     }
 
-    std::string help()
+    std::string Setting::help()
     {
         // this function returns the help string for this setting.
+        std::string help_string = this->name + " TODO: create helptext for " + this->name;
+        return help_string;
     }
 }

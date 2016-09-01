@@ -27,6 +27,7 @@
 #include "code/ylikuutio/ontology/shader.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
+#include "code/ylikuutio/config/setting.hpp"
 #include "code/ylikuutio/config/setting_master.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
 #include "code/ylikuutio/common/globals.hpp"
@@ -172,8 +173,43 @@ int main(void)
 
     // Create the world, store it in `my_universe`.
     ontology::Universe* my_universe = new ontology::Universe(my_setting_master, earth_radius);
+
     // Blue background.
-    my_universe->set_background_color(0.0f, 0.0f, 1.0f, 0.0f);
+
+    float float_zero = 0.0f;
+    datatypes::AnyValue any_value_float_zero = datatypes::AnyValue(float_zero);
+
+    float float_one = 1.0f;
+    datatypes::AnyValue any_value_float_one = datatypes::AnyValue(float_one);
+
+    SettingStruct red_setting_struct(any_value_float_zero);
+    red_setting_struct.name = "red";
+    red_setting_struct.universe_pointer = my_universe;
+    red_setting_struct.activate_callback = &config::SettingMaster::activate_background_color;
+    red_setting_struct.should_ylikuutio_call_activate_callback_now = false;
+    config::Setting* my_background_red = new config::Setting(red_setting_struct);
+
+    SettingStruct green_setting_struct(any_value_float_zero);
+    green_setting_struct.name = "green";
+    green_setting_struct.universe_pointer = my_universe;
+    green_setting_struct.activate_callback = &config::SettingMaster::activate_background_color;
+    green_setting_struct.should_ylikuutio_call_activate_callback_now = false;
+    config::Setting* my_background_green = new config::Setting(green_setting_struct);
+
+    SettingStruct blue_setting_struct(any_value_float_one);
+    blue_setting_struct.name = "blue";
+    blue_setting_struct.universe_pointer = my_universe;
+    blue_setting_struct.activate_callback = &config::SettingMaster::activate_background_color;
+    blue_setting_struct.should_ylikuutio_call_activate_callback_now = false;
+    config::Setting* my_background_blue = new config::Setting(blue_setting_struct);
+
+    SettingStruct alpha_setting_struct(any_value_float_zero);
+    alpha_setting_struct.name = "alpha";
+    alpha_setting_struct.initial_value = any_value_float_zero;
+    alpha_setting_struct.universe_pointer = my_universe;
+    alpha_setting_struct.activate_callback = &config::SettingMaster::activate_background_color;
+    alpha_setting_struct.should_ylikuutio_call_activate_callback_now = true;
+    config::Setting* my_background_alpha = new config::Setting(alpha_setting_struct);
 
     ontology::Scene* my_scene = new ontology::Scene(my_universe);
 
@@ -776,6 +812,10 @@ int main(void)
     /*********************************************************************\
      *  Callback engines for console commands begin here.                 *
     \*********************************************************************/
+
+    // Config callbacks.
+    command_callback_map["set"] = &config::SettingMaster::set;
+    command_callback_map["get"] = &config::SettingMaster::get;
 
     // Exit program callbacks.
     command_callback_map["bye"] = &ajokki::quit;

@@ -1,7 +1,7 @@
 #ifndef __SETTING_HPP_INCLUDED
 #define __SETTING_HPP_INCLUDED
 
-#include "setting_master.hpp"
+#include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/common/globals.hpp"
 
@@ -10,6 +10,8 @@
 
 namespace config
 {
+    class SettingMaster;
+
     class Setting
     {
         public:
@@ -20,6 +22,8 @@ namespace config
             ~Setting();
 
             std::string help();
+
+            friend SettingMaster;
 
             template<class T1>
                 friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<uint32_t>& free_childID_queue);
