@@ -4,9 +4,9 @@
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/callback_system/callback_magic_numbers.hpp"
 #include "code/ylikuutio/common/global_variables.hpp"
-#include "code/ylikuutio/common/globals.hpp"
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
 #include "code/ylikuutio/map/ylikuutio_map.hpp"
+#include "code/ylikuutio/common/globals.hpp"
 
 // Include GLFW
 #ifndef __GLFW3_H_INCLUDED
