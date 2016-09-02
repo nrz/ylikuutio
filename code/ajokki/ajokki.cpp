@@ -98,7 +98,13 @@ std::string g_font_filename = "kongtext.svg";
 
 int main(void)
 {
+    // Create the setting master, store it in `my_setting_master`.
+    config::SettingMaster* my_setting_master = new config::SettingMaster();
+
     float earth_radius = 6371.0f; // in kilometres
+
+    // Create the world, store it in `my_universe`.
+    ontology::Universe* my_universe = new ontology::Universe(my_setting_master, earth_radius);
 
     // testing_spherical_world_in_use = true;
 
@@ -167,12 +173,6 @@ int main(void)
 
     // Cull triangles which normal is not towards the camera.
     glEnable(GL_CULL_FACE);
-
-    // Create the setting master, store it in `my_setting_master`.
-    config::SettingMaster* my_setting_master = new config::SettingMaster();
-
-    // Create the world, store it in `my_universe`.
-    ontology::Universe* my_universe = new ontology::Universe(my_setting_master, earth_radius);
 
     // Blue background.
 
