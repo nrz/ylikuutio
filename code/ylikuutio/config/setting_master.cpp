@@ -106,12 +106,18 @@ namespace config
                 // Set the variable value and activate it by
                 // calling the corresponding activate callback.
                 config::Setting* setting = setting_master->setting_pointer_map[setting_name];
-                std::string setting_value = command_parameters.at(1);
-                bool success = setting->setting_value.set_value(setting_value);
+
+                // create empty `AnyValue` (there is no suitable constructor yet).
+                datatypes::AnyValue setting_any_value = datatypes::AnyValue();
+                setting_any_value.type = datatypes::FLOAT;
+
+                // set a new value.
+                bool success = setting_any_value.set_value(command_parameters.at(1));
 
                 if (success)
                 {
-                    setting->activate_callback(universe);
+                    setting->setting_value = setting_any_value;
+                    setting->activate_callback(universe, setting_master);
                 }
             }
             else
@@ -172,14 +178,37 @@ namespace config
         return nullptr;
     }
 
-    datatypes::AnyValue* SettingMaster::activate_background_color(ontology::Universe* universe_pointer)
+    datatypes::AnyValue* SettingMaster::activate_world_radius(ontology::Universe* universe, config::SettingMaster* setting_master)
     {
-        if (universe_pointer == nullptr)
+        if (universe == nullptr)
         {
             return nullptr;
         }
 
-        SettingMaster* setting_master_pointer = universe_pointer->setting_master_pointer;
+        if (setting_master->setting_pointer_map.count("world_radius") != 1)
+        {
+            return nullptr;
+        }
+
+        datatypes::AnyValue* world_radius_any_value = &setting_master->setting_pointer_map["world_radius"]->setting_value;
+
+        if (world_radius_any_value == nullptr || world_radius_any_value->type != datatypes::FLOAT)
+        {
+            return nullptr;
+        }
+
+        universe->world_radius = world_radius_any_value->float_value;
+        return nullptr;
+    }
+
+    datatypes::AnyValue* SettingMaster::activate_background_color(ontology::Universe* universe, config::SettingMaster* setting_master)
+    {
+        if (universe == nullptr)
+        {
+            return nullptr;
+        }
+
+        SettingMaster* setting_master_pointer = universe->setting_master_pointer;
 
         if (setting_master_pointer == nullptr)
         {
@@ -235,5 +264,6 @@ namespace config
         GLclampf alpha = static_cast<GLclampf>(alpha_any_value->float_value);
 
         glClearColor(red, green, blue, alpha);
+        return nullptr;
     }
 }

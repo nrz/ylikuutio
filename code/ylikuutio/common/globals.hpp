@@ -226,18 +226,18 @@ typedef struct ConsoleStruct
     ontology::Font2D* text2D_pointer;
 } ConsoleStruct;
 
-typedef datatypes::AnyValue* (*ActivateCallback) (ontology::Universe* universe_pointer);
+typedef datatypes::AnyValue* (*ActivateCallback) (ontology::Universe* universe, config::SettingMaster* setting_master);
 
 typedef struct SettingStruct
 {
     SettingStruct(datatypes::AnyValue& initial_value)
-        : initial_value(initial_value), should_ylikuutio_call_activate_callback_now(true), universe_pointer(nullptr), activate_callback(nullptr)
+        : initial_value(initial_value), should_ylikuutio_call_activate_callback_now(true), setting_master_pointer(nullptr), activate_callback(nullptr)
     {
         // constructor.
     }
     std::string name;
     datatypes::AnyValue& initial_value;
-    ontology::Universe* universe_pointer;
+    config::SettingMaster* setting_master_pointer;
     ActivateCallback activate_callback;
     bool should_ylikuutio_call_activate_callback_now;
 } SettingStruct;

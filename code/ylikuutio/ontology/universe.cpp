@@ -15,6 +15,7 @@
 #include "scene.hpp"
 #include "ground_level.hpp"
 #include "render_templates.hpp"
+#include "code/ylikuutio/config/setting.hpp"
 #include "code/ylikuutio/config/setting_master.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/common/global_variables.hpp"
@@ -41,10 +42,11 @@ extern GLFWwindow* window; // The "extern" keyword here is to access the variabl
 
 namespace ontology
 {
-    Universe::Universe(float world_radius)
+    Universe::Universe()
     {
         // constructor.
-        this->world_radius = world_radius;
+        this->world_radius = NAN; // world radius is NAN as long it doesn't get `set` by `SettingMaster`.
+        this->setting_master_pointer = nullptr;
     }
 
     Universe::~Universe()

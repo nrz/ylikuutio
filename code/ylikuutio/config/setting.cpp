@@ -18,15 +18,8 @@ namespace config
         // constructor.
         this->name = setting_struct.name;
         this->setting_value = setting_struct.initial_value;
-        this->universe_pointer = setting_struct.universe_pointer;
+        this->parent_pointer = setting_struct.setting_master_pointer;
         this->activate_callback = setting_struct.activate_callback;
-
-        if (this->universe_pointer == nullptr)
-        {
-            return;
-        }
-
-        this->parent_pointer = this->universe_pointer->setting_master_pointer;
 
         if (this->parent_pointer == nullptr)
         {
@@ -40,7 +33,7 @@ namespace config
 
         if (setting_struct.should_ylikuutio_call_activate_callback_now)
         {
-            this->activate_callback(this->universe_pointer);
+            this->activate_callback(this->parent_pointer->parent_pointer, this->parent_pointer);
         }
     }
 

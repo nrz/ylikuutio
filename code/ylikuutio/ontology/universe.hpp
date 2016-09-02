@@ -137,7 +137,7 @@ namespace ontology
     {
         public:
             // constructor.
-            Universe(float world_radius);
+            Universe();
 
             // destructor.
             ~Universe();

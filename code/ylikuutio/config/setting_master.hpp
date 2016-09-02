@@ -45,11 +45,14 @@ namespace config
                     ontology::Universe* universe,
                     std::vector<std::string>& command_parameters);
 
-            static datatypes::AnyValue* activate_background_color(ontology::Universe* universe_pointer);
+            static datatypes::AnyValue* activate_world_radius(ontology::Universe* universe, config::SettingMaster* setting_master);
+
+            static datatypes::AnyValue* activate_background_color(ontology::Universe* universe, config::SettingMaster* setting_master);
 
             // Public callbacks end here.
 
             friend class Setting;
+            friend class ontology::Universe;
 
         private:
             ontology::Universe* parent_pointer;

@@ -1,7 +1,6 @@
 #ifndef __SETTING_HPP_INCLUDED
 #define __SETTING_HPP_INCLUDED
 
-#include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/common/globals.hpp"
 
@@ -41,7 +40,6 @@ namespace config
             // pointer to `ActivateCallback` used to activate the new value after setting it.
             ActivateCallback activate_callback;
 
-            ontology::Universe* universe_pointer;  // pointer to `Universe`.
             config::SettingMaster* parent_pointer; // pointer to `SettingMaster`.
 
             uint32_t childID;                      // setting ID, returned by `config::SettingMaster->get_settingID()`.
