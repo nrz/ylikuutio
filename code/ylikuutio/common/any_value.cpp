@@ -1,10 +1,13 @@
 #include "any_value.hpp"
 
 // Include standard headers
+#include <cerrno>   // errno
 #include <cmath>    // NAN, std::isnan, std::pow
 #include <cstring>  // std::memcmp, std::strcmp, std::strlen, std::strncmp
+#include <stdio.h>  // printf, snprintf, sprintf
 #include <string>   // std::string
 #include <stdint.h> // uint32_t etc.
+#include <stdlib.h> // std::strtol, std::strtoll, std::strtoul
 
 namespace ontology
 {
@@ -31,6 +34,413 @@ namespace console
 
 namespace datatypes
 {
+    std::string AnyValue::get_datatype()
+    {
+        std::string datatype_string;
+
+        switch (this->type)
+        {
+            case (UNKNOWN):
+                return "unknown";
+            case (BOOL):
+                return "bool";
+            case (CHAR):
+                return "char";
+            case (FLOAT):
+                return "float";
+            case (DOUBLE):
+                return "double";
+            case (INT32_T):
+                return "int32_t";
+            case (UINT32_T):
+                return "uint32_t";
+            case (BOOL_POINTER):
+                return "bool*";
+            case (FLOAT_POINTER):
+                return "float*";
+            case (DOUBLE_POINTER):
+                return "double*";
+            case (INT32_T_POINTER):
+                return "int32_t*";
+            case (UINT32_T_POINTER):
+                return "uint32_t*";
+            case (UNIVERSE_POINTER):
+                return "ontology::Universe*";
+            case (SCENE_POINTER):
+                return "ontology::Scene*";
+            case (SHADER_POINTER):
+                return "ontology::Shader*";
+            case (MATERIAL_POINTER):
+                return "ontology::Material*";
+            case (SPECIES_POINTER):
+                return "ontology::Species*";
+            case (OBJECT_POINTER):
+                return "ontology::Object*";
+            case (VECTORFONT_POINTER):
+                return "ontology::VectorFont*";
+            case (GLYPH_POINTER):
+                return "ontology::Glyph*";
+            case (TEXT3D_POINTER):
+                return "ontology::Text3D*";
+            case (TEXT2D_POINTER):
+                return "ontology::Text2D*";
+            case (CONSOLE_POINTER):
+                return "console::Console*";
+            default:
+                return "TODO: define string for this datatype!";
+        }
+    }
+
+    std::string AnyValue::get_string()
+    {
+        uint32_t buffer_size = 128;
+        char buffer[buffer_size];
+
+        switch (this->type)
+        {
+            case (UNKNOWN):
+                return "unknown";
+            case (BOOL):
+                return (this->bool_value ? "true" : "false");
+            case (CHAR):
+                snprintf(buffer, buffer_size, "%c", this->char_value);
+                return std::string(buffer);
+            case (FLOAT):
+                snprintf(buffer, buffer_size, "%f", this->float_value);
+                return std::string(buffer);
+            case (DOUBLE):
+                snprintf(buffer, buffer_size, "%f", this->double_value);
+                return std::string(buffer);
+            case (INT32_T):
+                snprintf(buffer, buffer_size, "%f", this->int32_t_value);
+                return std::string(buffer);
+            case (UINT32_T):
+                snprintf(buffer, buffer_size, "%lu", this->uint32_t_value);
+                return std::string(buffer);
+            case (BOOL_POINTER):
+                snprintf(buffer, buffer_size, "%llu", static_cast<void*>(this->bool_pointer));
+                return std::string(buffer);
+            case (FLOAT_POINTER):
+                snprintf(buffer, buffer_size, "%llu", static_cast<void*>(this->float_pointer));
+                return std::string(buffer);
+            case (DOUBLE_POINTER):
+                snprintf(buffer, buffer_size, "%llu", static_cast<void*>(this->double_pointer));
+                return std::string(buffer);
+            case (INT32_T_POINTER):
+                snprintf(buffer, buffer_size, "%llu", static_cast<void*>(this->int32_t_pointer));
+                return std::string(buffer);
+            case (UINT32_T_POINTER):
+                snprintf(buffer, buffer_size, "%llu", static_cast<void*>(this->uint32_t_pointer));
+                return std::string(buffer);
+            case (UNIVERSE_POINTER):
+                snprintf(buffer, buffer_size, "%llu", static_cast<void*>(this->universe_pointer));
+                return std::string(buffer);
+            case (SCENE_POINTER):
+                snprintf(buffer, buffer_size, "%llu", static_cast<void*>(this->scene_pointer));
+                return std::string(buffer);
+            case (SHADER_POINTER):
+                snprintf(buffer, buffer_size, "%llu", static_cast<void*>(this->shader_pointer));
+                return std::string(buffer);
+            case (MATERIAL_POINTER):
+                snprintf(buffer, buffer_size, "%llu", static_cast<void*>(this->material_pointer));
+                return std::string(buffer);
+            case (SPECIES_POINTER):
+                snprintf(buffer, buffer_size, "%llu", static_cast<void*>(this->species_pointer));
+                return std::string(buffer);
+            case (OBJECT_POINTER):
+                snprintf(buffer, buffer_size, "%llu", static_cast<void*>(this->object_pointer));
+                return std::string(buffer);
+            case (VECTORFONT_POINTER):
+                snprintf(buffer, buffer_size, "%llu", static_cast<void*>(this->vector_font_pointer));
+                return std::string(buffer);
+            case (GLYPH_POINTER):
+                snprintf(buffer, buffer_size, "%llu", static_cast<void*>(this->glyph_pointer));
+                return std::string(buffer);
+            case (TEXT3D_POINTER):
+                snprintf(buffer, buffer_size, "%llu", static_cast<void*>(this->text3D_pointer));
+                return std::string(buffer);
+            case (TEXT2D_POINTER):
+                snprintf(buffer, buffer_size, "%llu", static_cast<void*>(this->text2D_pointer));
+                return std::string(buffer);
+            case (CONSOLE_POINTER):
+                snprintf(buffer, buffer_size, "%llu", static_cast<void*>(this->console_pointer));
+                return std::string(buffer);
+            default:
+                return "TODO: define string for this datatype!";
+        }
+    }
+
+    bool AnyValue::set_value(std::string value_string)
+    {
+        bool success = false;
+        char* end;
+
+        switch (this->type)
+        {
+            case (UNKNOWN):
+                return false;
+            case (BOOL):
+                {
+                    if (strcmp(value_string.c_str(), "true")) // Ylikuutio is case sensitive!
+                    {
+                        this->bool_value = true;
+                        return true;
+                    }
+                    else if (strcmp(value_string.c_str(), "false")) // Ylikuutio is case sensitive!
+                    {
+                        this->bool_value = false;
+                        return true;
+                    }
+                    return false;
+                }
+            case (CHAR):
+                {
+                    if (value_string.size() == 1)
+                    {
+                        this->char_value = value_string[0];
+                        return true;
+                    }
+                    return false;
+                }
+            case (FLOAT):
+                {
+                    float float_value = std::strtof(value_string.c_str(), &end);
+                    if (errno == ERANGE)
+                    {
+                        return false;
+                    }
+                    this->float_value = float_value;
+                    return true;
+                }
+            case (DOUBLE):
+                {
+                    double double_value = std::strtod(value_string.c_str(), &end);
+                    if (errno == ERANGE)
+                    {
+                        return false;
+                    }
+                    this->double_value = double_value;
+                    return true;
+                }
+            case (INT32_T):
+                {
+                    // 0 means that the base is determined by the format given in string.
+                    int32_t int32_t_value = std::strtol(value_string.c_str(), &end, 0);
+                    if (errno == ERANGE)
+                    {
+                        return false;
+                    }
+                    this->int32_t_value = int32_t_value;
+                    return true;
+                }
+            case (UINT32_T):
+                {
+                    // 0 means that the base is determined by the format given in string.
+                    uint32_t uint32_t_value = std::strtoul(value_string.c_str(), &end, 0);
+                    if (errno == ERANGE)
+                    {
+                        return false;
+                    }
+                    this->uint32_t_value = uint32_t_value;
+                    return true;
+                }
+            case (BOOL_POINTER):
+                {
+                    // 0 means that the base is determined by the format given in string.
+                    // The size of the pointer is assumed to be 64 bits.
+                    bool* bool_pointer = (bool*) (std::strtoll(value_string.c_str(), &end, 0));
+                    if (errno == ERANGE)
+                    {
+                        return false;
+                    }
+                    this->bool_pointer = bool_pointer;
+                    return true;
+                }
+            case (FLOAT_POINTER):
+                {
+                    // 0 means that the base is determined by the format given in string.
+                    // The size of the pointer is assumed to be 64 bits.
+                    float* float_pointer = (float*) (std::strtoll(value_string.c_str(), &end, 0));
+                    if (errno == ERANGE)
+                    {
+                        return false;
+                    }
+                    this->float_pointer = float_pointer;
+                    return true;
+                }
+            case (DOUBLE_POINTER):
+                {
+                    // 0 means that the base is determined by the format given in string.
+                    // The size of the pointer is assumed to be 64 bits.
+                    double* double_pointer = (double*) (std::strtoll(value_string.c_str(), &end, 0));
+                    if (errno == ERANGE)
+                    {
+                        return false;
+                    }
+                    this->double_pointer = double_pointer;
+                    return true;
+                }
+            case (INT32_T_POINTER):
+                {
+                    // 0 means that the base is determined by the format given in string.
+                    // The size of the pointer is assumed to be 64 bits.
+                    int32_t* int32_t_pointer = (int32_t*) (std::strtoll(value_string.c_str(), &end, 0));
+                    if (errno == ERANGE)
+                    {
+                        return false;
+                    }
+                    this->int32_t_pointer = int32_t_pointer;
+                    return true;
+                }
+            case (UINT32_T_POINTER):
+                {
+                    // 0 means that the base is determined by the format given in string.
+                    // The size of the pointer is assumed to be 64 bits.
+                    uint32_t* uint32_t_pointer = (uint32_t*) (std::strtoll(value_string.c_str(), &end, 0));
+                    if (errno == ERANGE)
+                    {
+                        return false;
+                    }
+                    this->uint32_t_pointer = uint32_t_pointer;
+                    return true;
+                }
+            case (UNIVERSE_POINTER):
+                {
+                    // 0 means that the base is determined by the format given in string.
+                    // The size of the pointer is assumed to be 64 bits.
+                    ontology::Universe* universe_pointer = (ontology::Universe*) (std::strtoll(value_string.c_str(), &end, 0));
+                    if (errno == ERANGE)
+                    {
+                        return false;
+                    }
+                    this->universe_pointer = universe_pointer;
+                    return true;
+                }
+            case (SCENE_POINTER):
+                {
+                    // 0 means that the base is determined by the format given in string.
+                    // The size of the pointer is assumed to be 64 bits.
+                    ontology::Scene* scene_pointer = (ontology::Scene*) (std::strtoll(value_string.c_str(), &end, 0));
+                    if (errno == ERANGE)
+                    {
+                        return false;
+                    }
+                    this->scene_pointer = scene_pointer;
+                    return true;
+                }
+            case (SHADER_POINTER):
+                {
+                    // 0 means that the base is determined by the format given in string.
+                    // The size of the pointer is assumed to be 64 bits.
+                    ontology::Shader* shader_pointer = (ontology::Shader*) (std::strtoll(value_string.c_str(), &end, 0));
+                    if (errno == ERANGE)
+                    {
+                        return false;
+                    }
+                    this->shader_pointer = shader_pointer;
+                    return true;
+                }
+            case (MATERIAL_POINTER):
+                {
+                    // 0 means that the base is determined by the format given in string.
+                    // The size of the pointer is assumed to be 64 bits.
+                    ontology::Material* material_pointer = (ontology::Material*) (std::strtoll(value_string.c_str(), &end, 0));
+                    if (errno == ERANGE)
+                    {
+                        return false;
+                    }
+                    this->material_pointer = material_pointer;
+                    return true;
+                }
+            case (SPECIES_POINTER):
+                {
+                    // 0 means that the base is determined by the format given in string.
+                    // The size of the pointer is assumed to be 64 bits.
+                    ontology::Species* species_pointer = (ontology::Species*) (std::strtoll(value_string.c_str(), &end, 0));
+                    if (errno == ERANGE)
+                    {
+                        return false;
+                    }
+                    this->species_pointer = species_pointer;
+                    return true;
+                }
+            case (OBJECT_POINTER):
+                {
+                    // 0 means that the base is determined by the format given in string.
+                    // The size of the pointer is assumed to be 64 bits.
+                    ontology::Object* object_pointer = (ontology::Object*) (std::strtoll(value_string.c_str(), &end, 0));
+                    if (errno == ERANGE)
+                    {
+                        return false;
+                    }
+                    this->object_pointer = object_pointer;
+                    return true;
+                }
+            case (VECTORFONT_POINTER):
+                {
+                    // 0 means that the base is determined by the format given in string.
+                    // The size of the pointer is assumed to be 64 bits.
+                    ontology::VectorFont* vector_font_pointer = (ontology::VectorFont*) (std::strtoll(value_string.c_str(), &end, 0));
+                    if (errno == ERANGE)
+                    {
+                        return false;
+                    }
+                    this->vector_font_pointer = vector_font_pointer;
+                    return true;
+                }
+            case (GLYPH_POINTER):
+                {
+                    // 0 means that the base is determined by the format given in string.
+                    // The size of the pointer is assumed to be 64 bits.
+                    ontology::Glyph* glyph_pointer = (ontology::Glyph*) (std::strtoll(value_string.c_str(), &end, 0));
+                    if (errno == ERANGE)
+                    {
+                        return false;
+                    }
+                    this->glyph_pointer = glyph_pointer;
+                    return true;
+                }
+            case (TEXT3D_POINTER):
+                {
+                    // 0 means that the base is determined by the format given in string.
+                    // The size of the pointer is assumed to be 64 bits.
+                    ontology::Text3D* text3D_pointer = (ontology::Text3D*) (std::strtoll(value_string.c_str(), &end, 0));
+                    if (errno == ERANGE)
+                    {
+                        return false;
+                    }
+                    this->text3D_pointer = text3D_pointer;
+                    return true;
+                }
+            case (TEXT2D_POINTER):
+                {
+                    // 0 means that the base is determined by the format given in string.
+                    // The size of the pointer is assumed to be 64 bits.
+                    ontology::Font2D* font2D_pointer = (ontology::Font2D*) (std::strtoll(value_string.c_str(), &end, 0));
+                    if (errno == ERANGE)
+                    {
+                        return false;
+                    }
+                    this->text2D_pointer = font2D_pointer;
+                    return true;
+                }
+            case (CONSOLE_POINTER):
+                {
+                    // 0 means that the base is determined by the format given in string.
+                    // The size of the pointer is assumed to be 64 bits.
+                    console::Console* console_pointer = (console::Console*) (std::strtoll(value_string.c_str(), &end, 0));
+                    if (errno == ERANGE)
+                    {
+                        return false;
+                    }
+                    this->console_pointer = console_pointer;
+                    return true;
+                }
+            default:
+                return false;
+        }
+    }
+
     void AnyValue::set_default_values()
     {
         this->type = datatypes::UNKNOWN;
@@ -56,6 +466,126 @@ namespace datatypes
         this->text3D_pointer = nullptr;
         this->text2D_pointer = nullptr;
         this->console_pointer = nullptr;
+    }
+
+    AnyValue::AnyValue(std::string type, std::string value_string)
+    {
+        this->set_default_values();
+
+        if (std::strcmp(type.c_str(), "bool"))
+        {
+            this->type = datatypes::BOOL;
+            this->set_value(value_string);
+        }
+        else if (std::strcmp(type.c_str(), "char"))
+        {
+            this->type = datatypes::CHAR;
+            this->set_value(value_string);
+        }
+        else if (std::strcmp(type.c_str(), "float"))
+        {
+            this->type = datatypes::FLOAT;
+            this->set_value(value_string);
+        }
+        else if (std::strcmp(type.c_str(), "double"))
+        {
+            this->type = datatypes::DOUBLE;
+            this->set_value(value_string);
+        }
+        else if (std::strcmp(type.c_str(), "int32_t"))
+        {
+            this->type = datatypes::INT32_T;
+            this->set_value(value_string);
+        }
+        else if (std::strcmp(type.c_str(), "uint32_t"))
+        {
+            this->type = datatypes::UINT32_T;
+            this->set_value(value_string);
+        }
+        else if (std::strcmp(type.c_str(), "bool*"))
+        {
+            this->type = datatypes::BOOL_POINTER;
+            this->set_value(value_string);
+        }
+        else if (std::strcmp(type.c_str(), "float*"))
+        {
+            this->type = datatypes::FLOAT_POINTER;
+            this->set_value(value_string);
+        }
+        else if (std::strcmp(type.c_str(), "double*"))
+        {
+            this->type = datatypes::FLOAT_POINTER;
+            this->set_value(value_string);
+        }
+        else if (std::strcmp(type.c_str(), "int32_t*"))
+        {
+            this->type = datatypes::INT32_T_POINTER;
+            this->set_value(value_string);
+        }
+        else if (std::strcmp(type.c_str(), "uint32_t*"))
+        {
+            this->type = datatypes::UINT32_T_POINTER;
+            this->set_value(value_string);
+        }
+        else if (std::strcmp(type.c_str(), "ontology::Universe*"))
+        {
+            this->type = datatypes::UNIVERSE_POINTER;
+            this->set_value(value_string);
+        }
+        else if (std::strcmp(type.c_str(), "ontology::Scene*"))
+        {
+            this->type = datatypes::SCENE_POINTER;
+            this->set_value(value_string);
+        }
+        else if (std::strcmp(type.c_str(), "ontology::Shader*"))
+        {
+            this->type = datatypes::SHADER_POINTER;
+            this->set_value(value_string);
+        }
+        else if (std::strcmp(type.c_str(), "ontology::Material*"))
+        {
+            this->type = datatypes::MATERIAL_POINTER;
+            this->set_value(value_string);
+        }
+        else if (std::strcmp(type.c_str(), "ontology::Species*"))
+        {
+            this->type = datatypes::SPECIES_POINTER;
+            this->set_value(value_string);
+        }
+        else if (std::strcmp(type.c_str(), "ontology::Object*"))
+        {
+            this->type = datatypes::OBJECT_POINTER;
+            this->set_value(value_string);
+        }
+        else if (std::strcmp(type.c_str(), "ontology::VectorFont*"))
+        {
+            this->type = datatypes::VECTORFONT_POINTER;
+            this->set_value(value_string);
+        }
+        else if (std::strcmp(type.c_str(), "ontology::Glyph*"))
+        {
+            this->type = datatypes::GLYPH_POINTER;
+            this->set_value(value_string);
+        }
+        else if (std::strcmp(type.c_str(), "ontology::Text3D"))
+        {
+            this->type = datatypes::TEXT3D_POINTER;
+            this->set_value(value_string);
+        }
+        else if (std::strcmp(type.c_str(), "ontology::Text2D"))
+        {
+            this->type = datatypes::TEXT2D_POINTER;
+            this->set_value(value_string);
+        }
+        else if (std::strcmp(type.c_str(), "console::Console*"))
+        {
+            this->type = datatypes::CONSOLE_POINTER;
+            this->set_value(value_string);
+        }
+        else
+        {
+            this->type = datatypes::UNKNOWN;
+        }
     }
 
     AnyValue::AnyValue()

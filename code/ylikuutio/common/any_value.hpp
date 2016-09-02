@@ -58,6 +58,11 @@ namespace datatypes
     typedef class AnyValue
     {
         public:
+            std::string get_datatype();
+            std::string get_string();
+            bool set_value(std::string value_string);
+
+            AnyValue(std::string type, std::string value_string);
             AnyValue();
             AnyValue(bool bool_value);
             AnyValue(char char_value);

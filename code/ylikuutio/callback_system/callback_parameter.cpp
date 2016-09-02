@@ -9,6 +9,17 @@
 
 namespace callback_system
 {
+    void CallbackParameter::bind_to_parent()
+    {
+        hierarchy::bind_child_to_parent<callback_system::CallbackParameter*>(this, this->parent_pointer->callback_parameter_pointer_vector, this->parent_pointer->free_callback_parameterID_queue);
+
+        if (!this->name.empty())
+        {
+            // This is a named variable, so store it in parent's `anyvalue_hashmap`.
+            this->parent_pointer->set_any_value(this->name, this->any_value);
+        }
+    }
+
     CallbackParameter::CallbackParameter(std::string name, datatypes::AnyValue* any_value, bool is_reference, callback_system::CallbackObject* parent_pointer)
     {
         // constructor.
@@ -36,16 +47,5 @@ namespace callback_system
     datatypes::AnyValue* CallbackParameter::get_any_value()
     {
         return this->any_value;
-    }
-
-    void CallbackParameter::bind_to_parent()
-    {
-        hierarchy::bind_child_to_parent<callback_system::CallbackParameter*>(this, this->parent_pointer->callback_parameter_pointer_vector, this->parent_pointer->free_callback_parameterID_queue);
-
-        if (!this->name.empty())
-        {
-            // This is a named variable, so store it in parent's `anyvalue_hashmap`.
-            this->parent_pointer->set_any_value(this->name, this->any_value);
-        }
     }
 }

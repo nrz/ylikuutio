@@ -43,6 +43,12 @@ namespace ontology
         {
             this->texture = loaders::load_DDS_texture(texturePath);
         }
+        else
+        {
+            printf("Invalid font texture file format: `%s`. Supported font texture file formats: bmp, BMP, dds, DDS.\n", char_font_texture_file_format);
+            this->texture = 0;
+            return;
+        }
 
         // Initialize VBO
         glGenBuffers(1, &vertexbuffer);

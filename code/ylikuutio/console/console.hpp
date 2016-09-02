@@ -8,6 +8,7 @@
 #include "code/ylikuutio/callback_system/callback_engine.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
 #include "code/ylikuutio/ontology/font2D.hpp"
+#include "code/ylikuutio/common/globals.hpp"
 
 // Include GLFW
 #ifndef __GLFW3_H_INCLUDED
@@ -27,11 +28,7 @@ namespace console
     {
         public:
             // constructor.
-            Console(std::vector<KeyAndCallbackStruct>** current_keypress_callback_engine_vector_pointer_pointer,
-                    std::vector<KeyAndCallbackStruct>** current_keyrelease_callback_engine_vector_pointer_pointer,
-                    std::unordered_map<std::string, ConsoleCommandCallback>* command_callback_map_pointer,
-                    ontology::Universe* universe_pointer,
-                    ontology::Font2D* text2D_pointer);
+            Console(ConsoleStruct console_struct);
 
             // destructor.
             ~Console();

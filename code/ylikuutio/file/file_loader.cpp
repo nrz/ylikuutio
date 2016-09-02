@@ -3,7 +3,7 @@
 // Include standard headers
 #include <fstream>  // std::ifstream
 #include <iostream> // std::cout, std::cin, std::cerr
-#include <sstream>  // std::stringstream
+#include <sstream>  // std::istringstream, std::ostringstream, std::stringstream
 #include <string>   // std::string
 
 namespace file

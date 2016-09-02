@@ -5,7 +5,7 @@
 #include <cstring>  // std::memcmp, std::strcmp, std::strlen, std::strncmp
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <list>     // std::list
-#include <sstream>  // std::stringstream
+#include <sstream>  // std::istringstream, std::ostringstream, std::stringstream
 #include <string>   // std::string
 #include <vector>   // std::vector
 

@@ -1,6 +1,7 @@
 #ifndef __GLOBALS_HPP_INCLUDED
 #define __GLOBALS_HPP_INCLUDED
 
+#include "code/ylikuutio/callback_system/key_and_callback_struct.hpp"
 #include "any_value.hpp"
 
 // GCC (at least g++ 4.7.2) and Visual Studio 2015 do support
@@ -47,11 +48,25 @@
 #include <cmath>    // NAN, std::isnan, std::pow
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
+#include <unordered_map> // std::unordered_map
 #include <vector>   // std::vector
 
 #ifndef PI
 #define PI 3.14159265359f
 #endif
+
+namespace config
+{
+    class SettingMaster;
+    class Setting;
+}
+
+namespace callback_system
+{
+    class CallbackEngine;
+    class CallbackObject;
+    class CallbackParameter;
+}
 
 namespace graph
 {
@@ -78,8 +93,8 @@ typedef struct ShaderStruct
         // constructor.
     }
     ontology::Scene* parent_pointer; // pointer to the scene (draw list).
-    std::string vertex_shader;    // filename of vertex shader.
-    std::string fragment_shader;  // filename of fragment shader.
+    std::string vertex_shader;       // filename of vertex shader.
+    std::string fragment_shader;     // filename of fragment shader.
 } ShaderStruct;
 
 typedef struct MaterialStruct
@@ -89,9 +104,9 @@ typedef struct MaterialStruct
     {
         // constructor.
     }
-    ontology::Shader* parent_pointer;   // pointer to the shader.
-    std::string texture_file_format; // type of the texture file. supported file formats so far: `"bmp"`/`"BMP"`, `"dds"`/`"DDS"`.
-    std::string texture_filename;    // filename of the model file.
+    ontology::Shader* parent_pointer; // pointer to the shader.
+    std::string texture_file_format;  // type of the texture file. supported file formats so far: `"bmp"`/`"BMP"`, `"dds"`/`"DDS"`.
+    std::string texture_filename;     // filename of the model file.
     std::string image_path;
 } MaterialStruct;
 
@@ -159,7 +174,7 @@ typedef struct VectorFontStruct
         // constructor.
     }
     // used for all files (for all font).
-    ontology::Material* parent_pointer;        // pointer to the material object.
+    ontology::Material* parent_pointer;     // pointer to the material object.
     GLfloat vertex_scaling_factor;
     std::string font_file_format;           // type of the font file. supported file formats so far: `"svg"`/`"SVG"`.
     std::string font_filename;              // filename of the font file.
@@ -175,11 +190,11 @@ typedef struct Text3DStruct
     ontology::VectorFont* parent_pointer; // pointer to the parent `VectorFont`.
     std::string text_string;
     const char* text_string_char;
-    glm::vec3 original_scale_vector;   // original scale vector.
-    float rotate_angle;                // rotate angle.
-    glm::vec3 coordinate_vector;       // coordinate vector.
-    glm::vec3 rotate_vector;           // rotate vector.
-    glm::vec3 translate_vector;        // translate vector.
+    glm::vec3 original_scale_vector;      // original scale vector.
+    float rotate_angle;                   // rotate angle.
+    glm::vec3 coordinate_vector;          // coordinate vector.
+    glm::vec3 rotate_vector;              // rotate vector.
+    glm::vec3 translate_vector;           // translate vector.
 } Text3DStruct;
 
 typedef struct GlyphStruct
@@ -191,11 +206,41 @@ typedef struct GlyphStruct
     }
     // used for all files (for all glyph).
     std::vector<std::vector<glm::vec2>>* glyph_vertex_data;
-    const char* glyph_name_pointer;          // we need only a pointer, because glyphs are always created by the `VectorFont` constructor.
-    const char* unicode_char_pointer;      // we need only a pointer, because glyphs are always created by the `VectorFont` constructor.
-    ontology::VectorFont* parent_pointer;       // pointer to the font object.
-    glm::vec3 light_position;                // light position.
+    const char* glyph_name_pointer;       // we need only a pointer, because glyphs are always created by the `VectorFont` constructor.
+    const char* unicode_char_pointer;     // we need only a pointer, because glyphs are always created by the `VectorFont` constructor.
+    ontology::VectorFont* parent_pointer; // pointer to the font object.
+    glm::vec3 light_position;             // light position.
 } GlyphStruct;
+
+typedef datatypes::AnyValue* (*ConsoleCommandCallback) (
+        console::Console*,
+        ontology::Universe*,
+        std::vector<std::string>& command_parameters);
+
+typedef struct ConsoleStruct
+{
+    std::vector<KeyAndCallbackStruct>** current_keypress_callback_engine_vector_pointer_pointer;
+    std::vector<KeyAndCallbackStruct>** current_keyrelease_callback_engine_vector_pointer_pointer;
+    std::unordered_map<std::string, ConsoleCommandCallback>* command_callback_map_pointer;
+    ontology::Universe* universe_pointer;
+    ontology::Font2D* text2D_pointer;
+} ConsoleStruct;
+
+typedef datatypes::AnyValue* (*ActivateCallback) (ontology::Universe* universe, config::SettingMaster* setting_master);
+
+typedef struct SettingStruct
+{
+    SettingStruct(datatypes::AnyValue& initial_value)
+        : initial_value(initial_value), should_ylikuutio_call_activate_callback_now(true), setting_master_pointer(nullptr), activate_callback(nullptr)
+    {
+        // constructor.
+    }
+    std::string name;
+    datatypes::AnyValue& initial_value;
+    config::SettingMaster* setting_master_pointer;
+    ActivateCallback activate_callback;
+    bool should_ylikuutio_call_activate_callback_now;
+} SettingStruct;
 
 typedef struct
 {
@@ -276,12 +321,6 @@ typedef struct
     SphericalWorldStruct spherical_world_struct;
 } TransformationStruct;
 
-namespace callback_system
-{
-    class CallbackEngine;
-    class CallbackObject;
-    class CallbackParameter;
-}
 typedef datatypes::AnyValue* (*InputParametersToAnyValueCallback) (
         callback_system::CallbackEngine*,
         callback_system::CallbackObject*,
@@ -296,11 +335,6 @@ typedef datatypes::AnyValue* (*InputParametersToAnyValueCallbackWithConsole) (
         callback_system::CallbackObject*,
         std::vector<callback_system::CallbackParameter*>&,
         console::Console*);
-
-typedef datatypes::AnyValue* (*ConsoleCommandCallback) (
-        console::Console*,
-        ontology::Universe*,
-        std::vector<std::string>& command_parameters);
 
 typedef datatypes::AnyValue* (*GetContentCallback) (
         callback_system::CallbackEngine*,

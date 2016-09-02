@@ -4,8 +4,9 @@
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/callback_system/callback_magic_numbers.hpp"
 #include "code/ylikuutio/common/global_variables.hpp"
-#include "code/ylikuutio/common/globals.hpp"
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
+#include "code/ylikuutio/map/ylikuutio_map.hpp"
+#include "code/ylikuutio/common/globals.hpp"
 
 // Include GLFW
 #ifndef __GLFW3_H_INCLUDED
@@ -14,23 +15,16 @@
 #endif
 
 // Include standard headers
-#include <algorithm>     // std::sort
 #include <iterator>      // std::back_inserter
 #include <list>          // std::list
-#include <sstream>       // std::otringstream, std::istringstream, std::ostringstream
+#include <sstream>       // std::istringstream, std::ostringstream, std::stringstream
 #include <stdint.h>      // uint32_t etc.
-#include <string.h>      // strlen
 #include <unordered_map> // std::unordered_map
 #include <vector>        // std::vector
 
 namespace console
 {
-    Console::Console(
-            std::vector<KeyAndCallbackStruct>** current_keypress_callback_engine_vector_pointer_pointer,
-            std::vector<KeyAndCallbackStruct>** current_keyrelease_callback_engine_vector_pointer_pointer,
-            std::unordered_map<std::string, ConsoleCommandCallback>* command_callback_map_pointer,
-            ontology::Universe* universe_pointer,
-            ontology::Font2D* text2D_pointer)
+    Console::Console(ConsoleStruct console_struct)
     {
         // constructor.
         this->cursor_it = this->current_input.begin();
@@ -56,19 +50,19 @@ namespace console
         this->my_keyrelease_callback_engine_vector_pointer = nullptr;
 
         // This is a pointer to `std::vector<KeyAndCallbackStruct>*` that controls keypress callbacks.
-        this->current_keypress_callback_engine_vector_pointer_pointer = current_keypress_callback_engine_vector_pointer_pointer;
+        this->current_keypress_callback_engine_vector_pointer_pointer = console_struct.current_keypress_callback_engine_vector_pointer_pointer;
 
         // This is a pointer to `std::vector<KeyAndCallbackStruct>*` that controls keyrelease callbacks.
-        this->current_keyrelease_callback_engine_vector_pointer_pointer = current_keyrelease_callback_engine_vector_pointer_pointer;
+        this->current_keyrelease_callback_engine_vector_pointer_pointer = console_struct.current_keyrelease_callback_engine_vector_pointer_pointer;
 
         // This is a pointer to `std::unordered_map<std::string, bool>` that contains console command callbacks.
-        this->command_callback_map_pointer = command_callback_map_pointer;
+        this->command_callback_map_pointer = console_struct.command_callback_map_pointer;
 
         // This is a pointer to `ontology::Universe`.
-        this->universe_pointer = universe_pointer;
+        this->universe_pointer = console_struct.universe_pointer;
 
         // This is a pointer to `font2D::Font2D` instance that is used for printing.
-        this->text2D_pointer = text2D_pointer;
+        this->text2D_pointer = console_struct.text2D_pointer;
 
         this->print_text("Welcome! Please write \"help\" for more");
         this->print_text("information.");
@@ -134,47 +128,8 @@ namespace console
 
     void Console::print_help()
     {
-        std::vector<std::string> command_vector;
-        command_vector.reserve(this->command_callback_map_pointer->size());
-
-        for (auto key_and_value : *this->command_callback_map_pointer)
-        {
-            command_vector.push_back(key_and_value.first); // key (command).
-        }
-
-        // sort command vector alphabetically.
-        std::sort(command_vector.begin(), command_vector.end());
-
-        uint32_t characters_for_line = window_width / text_size;
-
-        std::string commands_text;
-
-        for (std::string command : command_vector)
-        {
-            if (commands_text.size() > 0 &&
-                    commands_text.size() + command.size() >= characters_for_line)
-            {
-                // Not enough space for this command on this line.
-                // Print this line.
-                this->print_text(commands_text);
-                commands_text = command;
-            }
-            else if (commands_text.size() > 0)
-            {
-                // There is space, and this is not the first command on this line.
-                commands_text += " " + command;
-            }
-            else
-            {
-                // This is the first command on this line.
-                commands_text += command;
-            }
-        }
-        if (commands_text.size() > 0)
-        {
-            // Print the last line.
-            this->print_text(commands_text);
-        }
+        this->print_text("Available commands:");
+        map::print_keys_to_console(this->command_callback_map_pointer, this);
     }
 
     void Console::draw_console()
