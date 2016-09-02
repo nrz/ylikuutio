@@ -137,7 +137,7 @@ namespace ontology
     {
         public:
             // constructor.
-            Universe(config::SettingMaster* setting_master_pointer, float world_radius);
+            Universe(float world_radius);
 
             // destructor.
             ~Universe();

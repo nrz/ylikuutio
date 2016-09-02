@@ -41,10 +41,9 @@ extern GLFWwindow* window; // The "extern" keyword here is to access the variabl
 
 namespace ontology
 {
-    Universe::Universe(config::SettingMaster* setting_master_pointer, float world_radius)
+    Universe::Universe(float world_radius)
     {
         // constructor.
-        this->setting_master_pointer = setting_master_pointer;
         this->world_radius = world_radius;
     }
 

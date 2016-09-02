@@ -98,13 +98,13 @@ std::string g_font_filename = "kongtext.svg";
 
 int main(void)
 {
-    // Create the setting master, store it in `my_setting_master`.
-    config::SettingMaster* my_setting_master = new config::SettingMaster();
-
     float earth_radius = 6371.0f; // in kilometres
 
     // Create the world, store it in `my_universe`.
-    ontology::Universe* my_universe = new ontology::Universe(my_setting_master, earth_radius);
+    ontology::Universe* my_universe = new ontology::Universe(earth_radius);
+
+    // Create the setting master, store it in `my_setting_master`.
+    config::SettingMaster* my_setting_master = new config::SettingMaster(my_universe);
 
     // testing_spherical_world_in_use = true;
 

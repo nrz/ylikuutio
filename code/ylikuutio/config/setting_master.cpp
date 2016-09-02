@@ -11,9 +11,14 @@
 
 namespace config
 {
-    SettingMaster::SettingMaster()
+    SettingMaster::SettingMaster(ontology::Universe* universe_pointer)
     {
         // costructor.
+        this->parent_pointer = universe_pointer;
+
+        // bind to parent.
+        // there can be only 1 `SettingMaster`.
+        this->parent_pointer->setting_master_pointer = this;
     }
 
     SettingMaster::~SettingMaster()
