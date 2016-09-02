@@ -128,6 +128,7 @@ namespace console
 
     void Console::print_help()
     {
+        this->print_text("Available commands:");
         map::print_keys_to_console(this->command_callback_map_pointer, this);
     }
 
