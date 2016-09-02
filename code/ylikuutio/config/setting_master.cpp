@@ -109,7 +109,7 @@ namespace config
 
                 // create empty `AnyValue` (there is no suitable constructor yet).
                 datatypes::AnyValue setting_any_value = datatypes::AnyValue();
-                setting_any_value.type = datatypes::FLOAT;
+                setting_any_value.type = setting->setting_value.type;
 
                 // set a new value.
                 bool success = setting_any_value.set_value(command_parameters.at(1));
