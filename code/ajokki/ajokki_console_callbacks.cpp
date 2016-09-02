@@ -37,31 +37,4 @@ namespace ajokki
         console->print_help();
         return nullptr;
     }
-
-    datatypes::AnyValue* red(
-            console::Console*,
-            ontology::Universe* universe,
-            std::vector<std::string>& command_parameters)
-    {
-        universe->set_background_color(1.0f, 0.0f, 0.0f, 0.0f);
-        return nullptr;
-    }
-
-    datatypes::AnyValue* green(
-            console::Console*,
-            ontology::Universe* universe,
-            std::vector<std::string>& command_parameters)
-    {
-        universe->set_background_color(0.0f, 1.0f, 0.0f, 0.0f);
-        return nullptr;
-    }
-
-    datatypes::AnyValue* blue(
-            console::Console*,
-            ontology::Universe* universe,
-            std::vector<std::string>& command_parameters)
-    {
-        universe->set_background_color(0.0f, 0.0f, 1.0f, 0.0f);
-        return nullptr;
-    }
 }
