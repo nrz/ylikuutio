@@ -468,6 +468,126 @@ namespace datatypes
         this->console_pointer = nullptr;
     }
 
+    AnyValue::AnyValue(std::string type, std::string value_string)
+    {
+        this->set_default_values();
+
+        if (std::strcmp(type.c_str(), "bool"))
+        {
+            this->type = datatypes::BOOL;
+            this->set_value(value_string);
+        }
+        else if (std::strcmp(type.c_str(), "char"))
+        {
+            this->type = datatypes::CHAR;
+            this->set_value(value_string);
+        }
+        else if (std::strcmp(type.c_str(), "float"))
+        {
+            this->type = datatypes::FLOAT;
+            this->set_value(value_string);
+        }
+        else if (std::strcmp(type.c_str(), "double"))
+        {
+            this->type = datatypes::DOUBLE;
+            this->set_value(value_string);
+        }
+        else if (std::strcmp(type.c_str(), "int32_t"))
+        {
+            this->type = datatypes::INT32_T;
+            this->set_value(value_string);
+        }
+        else if (std::strcmp(type.c_str(), "uint32_t"))
+        {
+            this->type = datatypes::UINT32_T;
+            this->set_value(value_string);
+        }
+        else if (std::strcmp(type.c_str(), "bool*"))
+        {
+            this->type = datatypes::BOOL_POINTER;
+            this->set_value(value_string);
+        }
+        else if (std::strcmp(type.c_str(), "float*"))
+        {
+            this->type = datatypes::FLOAT_POINTER;
+            this->set_value(value_string);
+        }
+        else if (std::strcmp(type.c_str(), "double*"))
+        {
+            this->type = datatypes::FLOAT_POINTER;
+            this->set_value(value_string);
+        }
+        else if (std::strcmp(type.c_str(), "int32_t*"))
+        {
+            this->type = datatypes::INT32_T_POINTER;
+            this->set_value(value_string);
+        }
+        else if (std::strcmp(type.c_str(), "uint32_t*"))
+        {
+            this->type = datatypes::UINT32_T_POINTER;
+            this->set_value(value_string);
+        }
+        else if (std::strcmp(type.c_str(), "ontology::Universe*"))
+        {
+            this->type = datatypes::UNIVERSE_POINTER;
+            this->set_value(value_string);
+        }
+        else if (std::strcmp(type.c_str(), "ontology::Scene*"))
+        {
+            this->type = datatypes::SCENE_POINTER;
+            this->set_value(value_string);
+        }
+        else if (std::strcmp(type.c_str(), "ontology::Shader*"))
+        {
+            this->type = datatypes::SHADER_POINTER;
+            this->set_value(value_string);
+        }
+        else if (std::strcmp(type.c_str(), "ontology::Material*"))
+        {
+            this->type = datatypes::MATERIAL_POINTER;
+            this->set_value(value_string);
+        }
+        else if (std::strcmp(type.c_str(), "ontology::Species*"))
+        {
+            this->type = datatypes::SPECIES_POINTER;
+            this->set_value(value_string);
+        }
+        else if (std::strcmp(type.c_str(), "ontology::Object*"))
+        {
+            this->type = datatypes::OBJECT_POINTER;
+            this->set_value(value_string);
+        }
+        else if (std::strcmp(type.c_str(), "ontology::VectorFont*"))
+        {
+            this->type = datatypes::VECTORFONT_POINTER;
+            this->set_value(value_string);
+        }
+        else if (std::strcmp(type.c_str(), "ontology::Glyph*"))
+        {
+            this->type = datatypes::GLYPH_POINTER;
+            this->set_value(value_string);
+        }
+        else if (std::strcmp(type.c_str(), "ontology::Text3D"))
+        {
+            this->type = datatypes::TEXT3D_POINTER;
+            this->set_value(value_string);
+        }
+        else if (std::strcmp(type.c_str(), "ontology::Text2D"))
+        {
+            this->type = datatypes::TEXT2D_POINTER;
+            this->set_value(value_string);
+        }
+        else if (std::strcmp(type.c_str(), "console::Console*"))
+        {
+            this->type = datatypes::CONSOLE_POINTER;
+            this->set_value(value_string);
+        }
+        else
+        {
+            this->type = datatypes::UNKNOWN;
+        }
+    }
+
     AnyValue::AnyValue()
     {
         // constructor.
