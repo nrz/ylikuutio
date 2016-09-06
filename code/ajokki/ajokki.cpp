@@ -151,7 +151,7 @@ int main(void)
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
 
     // Open a window and create its OpenGL context.
-    window = glfwCreateWindow((GLuint) window_width, (GLuint) window_height, "Ajokki v. 0.0.1, powered by Ylikuutio v. 0.0.1", nullptr, nullptr);
+    window = glfwCreateWindow(static_cast<GLuint>(window_width), static_cast<GLuint>(window_height), "Ajokki v. 0.0.1, powered by Ylikuutio v. 0.0.1", nullptr, nullptr);
     cleanup_callback_object->set_new_callback(&ajokki::glfwTerminate_cleanup);
 
     if (window == nullptr)
@@ -172,7 +172,7 @@ int main(void)
 
     // Ensure we can capture the escape key being pressed below.
     glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
-    glfwSetCursorPos(window, ((GLuint) window_width / 2), ((GLuint) window_height / 2));
+    glfwSetCursorPos(window, (static_cast<GLuint>(window_width) / 2), (static_cast<GLuint>(window_height) / 2));
 
     // Enable depth test.
     glEnable(GL_DEPTH_TEST);
@@ -1024,8 +1024,8 @@ int main(void)
             my_console->draw_console();
 
             PrintingStruct printing_struct;
-            printing_struct.screen_width = (GLuint) window_width;
-            printing_struct.screen_height = (GLuint) window_height;
+            printing_struct.screen_width = static_cast<GLuint>(window_width);
+            printing_struct.screen_height = static_cast<GLuint>(window_height);
             printing_struct.text_size = text_size;
             printing_struct.font_size = font_size;
             printing_struct.char_font_texture_file_format = "bmp";
@@ -1113,7 +1113,7 @@ int main(void)
 
             // print time data on top left corner.
             printing_struct.x = 0;
-            printing_struct.y = (GLuint) window_height;
+            printing_struct.y = static_cast<GLuint>(window_height);
             printing_struct.text_char = time_text;
             printing_struct.horizontal_alignment = "left";
             printing_struct.vertical_alignment = "top";
