@@ -99,12 +99,6 @@ If you have problems compiling tests or for some other reason don't want
 to compile tests, in CMakeLists.txt comment out the line that says:
 set(DO_UNIT_TESTS_WITH_GOOGLE_TEST true)
 
-There are also tests which use Catch testing framework but those are now
-considered deprecated and Catch will not be used for further testing in
-Ylikuutio. Tests using Catch have been disabled by default but can be
-compiled by uncommenting the corresponding line in CMakeLists.txt:
-# set(DO_UNIT_TESTS_WITH_CATCH true)
-
 If you are cross compiling for Windows under Linux, you need to
 uncomment the corresponding line in CMakeLists.txt:
 # set(CROSS_COMPILE_FOR_WINDOWS true)
@@ -120,10 +114,6 @@ F1 toggles help display and there you'll see some more options to try.
 To run tests (coverage is still quite limited but underway):
 
 $ ./unit_tests_with_Google_Test
-
-If you compiled tests using Catch framework (they are deprecated):
-
-$ ./unit_tests_with_Catch
 
 Implemented functionality:
 o callbacks
