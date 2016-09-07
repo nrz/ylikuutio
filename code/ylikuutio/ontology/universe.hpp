@@ -152,6 +152,7 @@ namespace ontology
             friend class Species;
             friend class config::Setting;
             friend class config::SettingMaster;
+            friend class console::Console;
 
         private:
             // this method sets a scene pointer.

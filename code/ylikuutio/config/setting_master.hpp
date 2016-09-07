@@ -53,6 +53,7 @@ namespace config
 
             friend class Setting;
             friend class ontology::Universe;
+            friend class console::Console;
 
         private:
             ontology::Universe* parent_pointer;

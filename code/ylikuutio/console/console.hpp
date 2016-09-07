@@ -267,6 +267,14 @@ namespace console
 
             // This is a pointer to `font2D::Font2D` instance that is used for printing.
             ontology::Font2D* font2D_pointer;
+
+            uint32_t console_top_y;
+            uint32_t console_bottom_y;
+            uint32_t console_left_x;
+            uint32_t console_right_x;
+
+            uint32_t n_columns;
+            uint32_t n_rows;
     };
 }
 

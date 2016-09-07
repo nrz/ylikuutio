@@ -1,6 +1,8 @@
 #include "console.hpp"
 #include "command_and_callback_struct.hpp"
 #include "code/ylikuutio/ontology/font2D.hpp"
+#include "code/ylikuutio/config/setting.hpp"
+#include "code/ylikuutio/config/setting_master.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/callback_system/callback_magic_numbers.hpp"
 #include "code/ylikuutio/common/global_variables.hpp"
@@ -63,6 +65,90 @@ namespace console
 
         // This is a pointer to `font2D::Font2D` instance that is used for printing.
         this->font2D_pointer = console_struct.font2D_pointer;
+
+        if (this->universe_pointer->setting_master_pointer->is_setting("console_top_y"))
+        {
+            // OK, there is a setting for `console_top_y`.
+            datatypes::AnyValue& console_top_y_any_value = universe_pointer->setting_master_pointer->setting_pointer_map["console_top_y"]->setting_value;
+
+            if (console_top_y_any_value.type == datatypes::UINT32_T)
+            {
+                this->console_top_y = console_top_y_any_value.uint32_t_value;
+            }
+            else
+            {
+                // console_top_y` not `datatypes::UINT32_T`, so set `console_top_y` to zero 0.
+                this->console_top_y = 0;
+            }
+        }
+        else
+        {
+            // console_top_y` not defined, so set `console_top_y` to zero 0.
+            this->console_top_y = 0;
+        }
+
+        if (this->universe_pointer->setting_master_pointer->is_setting("console_bottom_y"))
+        {
+            // OK, there is a setting for `console_bottom_y`.
+            datatypes::AnyValue& console_bottom_y_any_value = universe_pointer->setting_master_pointer->setting_pointer_map["console_bottom_y"]->setting_value;
+
+            if (console_bottom_y_any_value.type == datatypes::UINT32_T)
+            {
+                this->console_bottom_y = console_bottom_y_any_value.uint32_t_value;
+            }
+            else
+            {
+                // console_bottom_y` not `datatypes::UINT32_T`, so set `console_bottom_y` to zero 0.
+                this->console_bottom_y = 0;
+            }
+        }
+        else
+        {
+            // console_bottom_y` not defined, so set `console_bottom_y` to zero 0.
+            this->console_bottom_y = 0;
+        }
+
+        if (this->universe_pointer->setting_master_pointer->is_setting("console_left_x"))
+        {
+            // OK, there is a setting for `console_left_x`.
+            datatypes::AnyValue& console_left_x_any_value = universe_pointer->setting_master_pointer->setting_pointer_map["console_left_x"]->setting_value;
+
+            if (console_left_x_any_value.type == datatypes::UINT32_T)
+            {
+                this->console_left_x = console_left_x_any_value.uint32_t_value;
+            }
+            else
+            {
+                // console_left_x` not `datatypes::UINT32_T`, so set `console_left_x` to zero 0.
+                this->console_left_x = 0;
+            }
+        }
+        else
+        {
+            // console_left_x` not defined, so set `console_left_x` to zero 0.
+            this->console_left_x = 0;
+        }
+
+        if (this->universe_pointer->setting_master_pointer->is_setting("console_right_x"))
+        {
+            // OK, there is a setting for `console_right_x`.
+            datatypes::AnyValue& console_right_x_any_value = universe_pointer->setting_master_pointer->setting_pointer_map["console_right_x"]->setting_value;
+
+            if (console_right_x_any_value.type == datatypes::UINT32_T)
+            {
+                this->console_right_x = console_right_x_any_value.uint32_t_value;
+            }
+            else
+            {
+                // console_right_x` not `datatypes::UINT32_T`, so set `console_right_x` to zero 0.
+                this->console_right_x = 0;
+            }
+        }
+        else
+        {
+            // console_right_x` not defined, so set `console_right_x` to zero 0.
+            this->console_right_x = 0;
+        }
 
         this->print_text("Welcome! Please write \"help\" for more");
         this->print_text("information.");
