@@ -266,7 +266,7 @@ namespace console
             ontology::Universe* universe_pointer;
 
             // This is a pointer to `font2D::Font2D` instance that is used for printing.
-            ontology::Font2D* text2D_pointer;
+            ontology::Font2D* font2D_pointer;
     };
 }
 

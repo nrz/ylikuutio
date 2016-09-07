@@ -62,7 +62,7 @@ namespace console
         this->universe_pointer = console_struct.universe_pointer;
 
         // This is a pointer to `font2D::Font2D` instance that is used for printing.
-        this->text2D_pointer = console_struct.text2D_pointer;
+        this->font2D_pointer = console_struct.font2D_pointer;
 
         this->print_text("Welcome! Please write \"help\" for more");
         this->print_text("information.");
@@ -159,7 +159,7 @@ namespace console
             }
             printing_struct.text += "$ " + string::convert_std_list_char_to_std_string(this->current_input, characters_for_line - 2, characters_for_line);
 
-            this->text2D_pointer->printText2D(printing_struct);
+            this->font2D_pointer->printText2D(printing_struct);
         }
     }
 

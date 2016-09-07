@@ -415,7 +415,7 @@ int main(void)
     console_struct.current_keyrelease_callback_engine_vector_pointer_pointer = &current_keyrelease_callback_engine_vector_pointer;
     console_struct.command_callback_map_pointer = &command_callback_map;
     console_struct.universe_pointer = my_universe;
-    console_struct.text2D_pointer = my_text2D;
+    console_struct.font2D_pointer = my_text2D;
 
     console::Console* my_console = new console::Console(console_struct); // create a console.
     global_console_pointer = my_console;
@@ -751,8 +751,8 @@ int main(void)
 
     callback_system::CallbackParameter* cleanup_callback_universe_pointer =
         new callback_system::CallbackParameter("universe_pointer", new datatypes::AnyValue(my_universe), false, cleanup_callback_object);
-    callback_system::CallbackParameter* cleanup_callback_text2D_pointer =
-        new callback_system::CallbackParameter("text2D_pointer", new datatypes::AnyValue(my_text2D), false, cleanup_callback_object);
+    callback_system::CallbackParameter* cleanup_callback_font2D_pointer =
+        new callback_system::CallbackParameter("font2D_pointer", new datatypes::AnyValue(my_text2D), false, cleanup_callback_object);
     cleanup_callback_object->set_new_callback(&ajokki::full_cleanup);
 
     // Keyrelease callbacks for action mode.

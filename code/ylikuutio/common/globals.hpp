@@ -223,7 +223,7 @@ typedef struct ConsoleStruct
     std::vector<KeyAndCallbackStruct>** current_keyrelease_callback_engine_vector_pointer_pointer;
     std::unordered_map<std::string, ConsoleCommandCallback>* command_callback_map_pointer;
     ontology::Universe* universe_pointer;
-    ontology::Font2D* text2D_pointer;
+    ontology::Font2D* font2D_pointer;
 } ConsoleStruct;
 
 typedef datatypes::AnyValue* (*ActivateCallback) (ontology::Universe* universe, config::SettingMaster* setting_master);
