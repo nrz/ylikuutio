@@ -37,7 +37,26 @@ http://www.opengl-tutorial.org/beginners-tutorials/tutorial-8-basic-shading/
 kongtext font is made by codeman38 (http://zone38.net/), see
 res/fonts/kongtext/license.txt for the license.
 
-Suzanne the monkey is a standard Blender object.
+Laser scanning data of Helsinki, Joensuu, and other Finnish cities is
+licensed under a Creative Commons Attribution 4.0 International License (CC-BY).
+Contains data from the open data of the National Land Survey of Finland.
+Reference system is ETRS-TM35FIN and distribution format is LAZ.
+http://www.maanmittauslaitos.fi/en/professionals/digital-products/datasets-free-charge/terms-use-license/national-land-survey-open-data-cc-40-licence
+
+Shuttle Radar Topography Mission (SRTM) data around Bolivian altiplano and
+elsewhere in the world between 56° S and 60° N is in the public domain.
+SRTM is a NASA (National Aeronautics and Space Administration) mission.
+SRTM data shipped with Ylikuutio belongs to SRTMGL3 dataset.
+OpenStreetMap Wiki provides information about different SRTM datasets:
+http://wiki.openstreetmap.org/wiki/SRTM
+
+Suzanne the monkey is a standard Blender object. According to Blender
+license information: "All your artwork – images or movie files –
+including the .blend files and other data files Blender can write,
+is free for you to use as you like." Ylikuutio does not contain
+any code from Blender, however. Blender itself is released under
+the GNU General Public License (GPL) 2 or later.
+https://www.blender.org/about/license/
 
 Ylikuutio can be compiled with GCC, Clang or Visual Studio.
 C++11 support is required.
