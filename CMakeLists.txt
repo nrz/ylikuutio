@@ -8,9 +8,6 @@ project(ylikuutio)
 # comment the following line to disable scripting with Chibi Scheme.
 set(ENABLE_SCRIPTING_WITH_CHIBI_SCHEME true)
 
-# uncomment the following line to do unit tests also with Catch.
-# set(DO_UNIT_TESTS_WITH_CATCH true)
-
 # comment the following line to disable unit tests with Google Test.
 set(DO_UNIT_TESTS_WITH_GOOGLE_TEST true)
 
@@ -612,23 +609,6 @@ set_target_properties(ajokki PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR 
 create_target_launcher(ajokki WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/code/ajokki/")
 
 # Tests
-if(DO_UNIT_TESTS_WITH_CATCH)
-    include_directories(
-        external/Catch/single_include/
-        )
-
-    add_executable(unit_tests_with_Catch
-        code/ylikuutio/tests/catch/tests.cpp
-        )
-
-    target_link_libraries(unit_tests_with_Catch
-        ${ALL_LIBS}
-        )
-    # Xcode and Visual working directories
-    set_target_properties(unit_tests_with_Catch PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/code/tests/catch/")
-    create_target_launcher(unit_tests_with_Catch WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/code/tests/catch/")
-endif()
-
 if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
     set(FILES_TO_TEST
         code/ylikuutio/callback_system/callback_engine.cpp

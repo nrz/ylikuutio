@@ -160,7 +160,7 @@ namespace datatypes
                 snprintf(buffer, buffer_size, "%llu", static_cast<void*>(this->text3D_pointer));
                 return std::string(buffer);
             case (TEXT2D_POINTER):
-                snprintf(buffer, buffer_size, "%llu", static_cast<void*>(this->text2D_pointer));
+                snprintf(buffer, buffer_size, "%llu", static_cast<void*>(this->font2D_pointer));
                 return std::string(buffer);
             case (CONSOLE_POINTER):
                 snprintf(buffer, buffer_size, "%llu", static_cast<void*>(this->console_pointer));
@@ -421,7 +421,7 @@ namespace datatypes
                     {
                         return false;
                     }
-                    this->text2D_pointer = font2D_pointer;
+                    this->font2D_pointer = font2D_pointer;
                     return true;
                 }
             case (CONSOLE_POINTER):
@@ -464,7 +464,7 @@ namespace datatypes
         this->vector_font_pointer = nullptr;
         this->glyph_pointer = nullptr;
         this->text3D_pointer = nullptr;
-        this->text2D_pointer = nullptr;
+        this->font2D_pointer = nullptr;
         this->console_pointer = nullptr;
     }
 
@@ -977,22 +977,22 @@ namespace datatypes
         }
     }
 
-    AnyValue::AnyValue(ontology::Font2D* text2D_pointer)
+    AnyValue::AnyValue(ontology::Font2D* font2D_pointer)
     {
         // constructor.
         this->set_default_values();
         this->type = datatypes::TEXT2D_POINTER;
-        this->text2D_pointer = text2D_pointer;
+        this->font2D_pointer = font2D_pointer;
     }
 
-    AnyValue::AnyValue(std::string type, ontology::Font2D* text2D_pointer)
+    AnyValue::AnyValue(std::string type, ontology::Font2D* font2D_pointer)
     {
         // constructor.
         this->set_default_values();
         if (std::strcmp(type.c_str(), "ontology::Font2D*"))
         {
             this->type = datatypes::TEXT2D_POINTER;
-            this->text2D_pointer = text2D_pointer;
+            this->font2D_pointer = font2D_pointer;
         }
     }
 

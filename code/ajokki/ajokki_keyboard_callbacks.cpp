@@ -61,7 +61,7 @@ namespace ajokki
         std::cout << "Cleaning up.\n";
 
         datatypes::AnyValue* any_value_universe_pointer = callback_object->get_any_value("universe_pointer");
-        datatypes::AnyValue* any_value_text2D_pointer = callback_object->get_any_value("text2D_pointer");
+        datatypes::AnyValue* any_value_font2D_pointer = callback_object->get_any_value("font2D_pointer");
 
         if (any_value_universe_pointer->type == datatypes::UNIVERSE_POINTER)
         {
@@ -72,14 +72,14 @@ namespace ajokki
             std::cerr << "Invalid datatype: " << any_value_universe_pointer->type << ", should be " << datatypes::UNIVERSE_POINTER << "\n";
         }
 
-        if (any_value_text2D_pointer->type == datatypes::TEXT2D_POINTER)
+        if (any_value_font2D_pointer->type == datatypes::TEXT2D_POINTER)
         {
             // Delete the text's VBO, the shader and the texture
-            delete any_value_text2D_pointer->text2D_pointer;
+            delete any_value_font2D_pointer->font2D_pointer;
         }
         else
         {
-            std::cerr << "Invalid datatype: " << any_value_text2D_pointer->type << ", should be " << datatypes::TEXT2D_POINTER << "\n";
+            std::cerr << "Invalid datatype: " << any_value_font2D_pointer->type << ", should be " << datatypes::TEXT2D_POINTER << "\n";
         }
 
         // Close OpenGL window and terminate GLFW

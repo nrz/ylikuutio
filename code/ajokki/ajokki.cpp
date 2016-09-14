@@ -151,7 +151,7 @@ int main(void)
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
 
     // Open a window and create its OpenGL context.
-    window = glfwCreateWindow((GLuint) window_width, (GLuint) window_height, "Ajokki v. 0.0.1, powered by Ylikuutio v. 0.0.1", nullptr, nullptr);
+    window = glfwCreateWindow(static_cast<GLuint>(window_width), static_cast<GLuint>(window_height), "Ajokki v. 0.0.1, powered by Ylikuutio v. 0.0.1", nullptr, nullptr);
     cleanup_callback_object->set_new_callback(&ajokki::glfwTerminate_cleanup);
 
     if (window == nullptr)
@@ -172,7 +172,7 @@ int main(void)
 
     // Ensure we can capture the escape key being pressed below.
     glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
-    glfwSetCursorPos(window, ((GLuint) window_width / 2), ((GLuint) window_height / 2));
+    glfwSetCursorPos(window, (static_cast<GLuint>(window_width) / 2), (static_cast<GLuint>(window_height) / 2));
 
     // Enable depth test.
     glEnable(GL_DEPTH_TEST);
@@ -406,7 +406,7 @@ int main(void)
     // Initialize our little text library with the Holstein font
     const char* char_g_font_texture_filename = g_font_texture_filename.c_str();
     const char* char_g_font_texture_file_format = g_font_texture_file_format.c_str();
-    ontology::Font2D* my_text2D = new ontology::Font2D(window_width, window_height, char_g_font_texture_filename, char_g_font_texture_file_format);
+    ontology::Font2D* my_font2D = new ontology::Font2D(window_width, window_height, char_g_font_texture_filename, char_g_font_texture_file_format);
 
     std::unordered_map<std::string, ConsoleCommandCallback> command_callback_map;
 
@@ -415,7 +415,7 @@ int main(void)
     console_struct.current_keyrelease_callback_engine_vector_pointer_pointer = &current_keyrelease_callback_engine_vector_pointer;
     console_struct.command_callback_map_pointer = &command_callback_map;
     console_struct.universe_pointer = my_universe;
-    console_struct.text2D_pointer = my_text2D;
+    console_struct.font2D_pointer = my_font2D;
 
     console::Console* my_console = new console::Console(console_struct); // create a console.
     global_console_pointer = my_console;
@@ -751,8 +751,8 @@ int main(void)
 
     callback_system::CallbackParameter* cleanup_callback_universe_pointer =
         new callback_system::CallbackParameter("universe_pointer", new datatypes::AnyValue(my_universe), false, cleanup_callback_object);
-    callback_system::CallbackParameter* cleanup_callback_text2D_pointer =
-        new callback_system::CallbackParameter("text2D_pointer", new datatypes::AnyValue(my_text2D), false, cleanup_callback_object);
+    callback_system::CallbackParameter* cleanup_callback_font2D_pointer =
+        new callback_system::CallbackParameter("font2D_pointer", new datatypes::AnyValue(my_font2D), false, cleanup_callback_object);
     cleanup_callback_object->set_new_callback(&ajokki::full_cleanup);
 
     // Keyrelease callbacks for action mode.
@@ -1024,8 +1024,8 @@ int main(void)
             my_console->draw_console();
 
             PrintingStruct printing_struct;
-            printing_struct.screen_width = (GLuint) window_width;
-            printing_struct.screen_height = (GLuint) window_height;
+            printing_struct.screen_width = static_cast<GLuint>(window_width);
+            printing_struct.screen_height = static_cast<GLuint>(window_height);
             printing_struct.text_size = text_size;
             printing_struct.font_size = font_size;
             printing_struct.char_font_texture_file_format = "bmp";
@@ -1087,7 +1087,7 @@ int main(void)
             printing_struct.text_char = angles_and_coordinates_text;
             printing_struct.horizontal_alignment = "left";
             printing_struct.vertical_alignment = "bottom";
-            my_text2D->printText2D(printing_struct);
+            my_font2D->printText2D(printing_struct);
 
             if (in_help_mode && can_display_help_screen)
             {
@@ -1097,7 +1097,7 @@ int main(void)
                 printing_struct.text_char = help_text_char;
                 printing_struct.horizontal_alignment = "left";
                 printing_struct.vertical_alignment = "top";
-                my_text2D->printText2D(printing_struct);
+                my_font2D->printText2D(printing_struct);
             }
 
             if (testing_spherical_world_in_use)
@@ -1108,16 +1108,16 @@ int main(void)
                 printing_struct.text_char = spherical_coordinates_text;
                 printing_struct.horizontal_alignment = "left";
                 printing_struct.vertical_alignment = "bottom";
-                my_text2D->printText2D(printing_struct);
+                my_font2D->printText2D(printing_struct);
             }
 
             // print time data on top left corner.
             printing_struct.x = 0;
-            printing_struct.y = (GLuint) window_height;
+            printing_struct.y = static_cast<GLuint>(window_height);
             printing_struct.text_char = time_text;
             printing_struct.horizontal_alignment = "left";
             printing_struct.vertical_alignment = "top";
-            my_text2D->printText2D(printing_struct);
+            my_font2D->printText2D(printing_struct);
 
             if (ms_frame_text_ready)
             {
@@ -1127,7 +1127,7 @@ int main(void)
                 printing_struct.text_char = ms_frame_text;
                 printing_struct.horizontal_alignment = "right";
                 printing_struct.vertical_alignment = "top";
-                my_text2D->printText2D(printing_struct);
+                my_font2D->printText2D(printing_struct);
             }
 
             // Swap buffers.

@@ -7,6 +7,11 @@
 // Include standard headers
 #include <string>   // std::string
 
+namespace console
+{
+    class Console;
+}
+
 namespace config
 {
     class SettingMaster;
@@ -23,6 +28,7 @@ namespace config
             std::string help();
 
             friend SettingMaster;
+            friend console::Console;
 
             template<class T1>
                 friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<uint32_t>& free_childID_queue);
