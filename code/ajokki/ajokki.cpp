@@ -110,7 +110,7 @@ int main(void)
     SettingStruct world_radius_setting_struct(any_value_float_earth_radius);
     world_radius_setting_struct.name = "world_radius";
     world_radius_setting_struct.setting_master_pointer = my_setting_master;
-    world_radius_setting_struct.activate_callback = &config::SettingMaster::activate_world_radius; // world may be planet or moon.
+    world_radius_setting_struct.activate_callback = &config::SettingMaster::activate_world_radius; // world may be a planet or a moon.
     world_radius_setting_struct.should_ylikuutio_call_activate_callback_now = true;
     config::Setting* my_world_radius = new config::Setting(world_radius_setting_struct);
 
