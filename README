@@ -116,10 +116,15 @@ To run tests (coverage is still quite limited but underway):
 $ ./unit_tests_with_Google_Test
 
 Implemented functionality:
+o 3D rendering
+o 2D text
+o support for different height map formats
+o instant rebinding of instances of classes belonging to rendering hierchy
 o callbacks
 
 Future developments underway:
 o in-game console
+o mipmapping
 o partially transparent 2D text
 o 3D text
 o multiple scenes in the same Universe
