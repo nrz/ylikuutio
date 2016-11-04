@@ -14,6 +14,13 @@ WTF Public License, version 2, December 2004:
 "You just DO WHAT THE FUCK YOU WANT TO. ```"
 http://www.opengl-tutorial.org/download/
 
+Chibi-Scheme is licensed under the license conditions stated on
+Chibi-Scheme website:
+https://github.com/ashinn/chibi-scheme/blob/master/COPYING
+
+FastNoiseSIMD is licensed under the MIT license.
+https://github.com/Auburns/FastNoiseSIMD/blob/master/LICENSE
+
 The OpenGL Extension Wrangler Library (GLEW) is licensed
 under the Modified BSD License, the Mesa 3-D License (MIT)
 and the Khronos License (MIT).
@@ -30,6 +37,12 @@ Other resources are under their respective licenses.
 
 Grass texture is from Free Seamless Green Grass Textures:
 http://www.brusheezy.com/textures/20185-seamless-green-grass-textures
+
+Pink Marble Pavers Or Tiles Background Texture is from www.myfreetextures.com .
+pavers1b2.bmp is scaled down and converted into BMP from the original pavers1b2.jpg .
+http://www.myfreetextures.com/marbles-pavers-tiles-background-texture/
+License conditions are available on www.myfreetextures.com website:
+http://www.myfreetextures.com/sample-page/
 
 UV map texture is from opengl-tutorial:
 http://www.opengl-tutorial.org/beginners-tutorials/tutorial-8-basic-shading/
