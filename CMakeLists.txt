@@ -609,6 +609,11 @@ add_executable(ajokki
 add_dependencies(ajokki rescan)
 target_link_libraries(ajokki ylikuutio ${ALL_LIBS} glfw)
 
+# Chibi-test
+add_executable(chibitest code/chibi-scheme/chibi_test.cpp
+    )
+target_link_libraries(chibitest chibischeme "-ldl")
+
 # Xcode and Visual working directories
 set_target_properties(ajokki PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/code/ajokki/")
 create_target_launcher(ajokki WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/code/ajokki/")

@@ -1,3 +1,7 @@
+// The following `#include` lines added by Antti Nuortimo 2016-11-05.
+#include "chibi/sexp.h"
+// `#include` lines added by Antti Nuortimo 2016-11-05 end here.
+
 /* sha2.c -- SHA-2 digest algorithms native implementations  */
 /* Copyright (c) 2015 Alexei Lozovsky.  All rights reserved. */
 /* BSD-style license: http://synthcode.com/license.txt       */
