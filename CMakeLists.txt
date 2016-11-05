@@ -2,6 +2,11 @@
 cmake_minimum_required(VERSION 2.6.2)
 project(ylikuutio)
 
+# http://stackoverflow.com/questions/11783932/how-to-add-linker-or-compile-flag-in-cmake-file/11797272#11797272
+# SET(GCC_COVERAGE_LINK_FLAGS "-ldl")
+# SET(CMAKE_C_FLAGS  "${CMAKE_C_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS}")
+# SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS}")
+
 # uncomment the following line to cross-compile for Windows under Linux using mingw64.
 # set(CROSS_COMPILE_FOR_WINDOWS true)
 
