@@ -7,12 +7,14 @@
 // Include standard headers
 #include <queue>    // std::queue
 #include <stdint.h> // uint32_t etc.
+#include <unordered_map> // std::unordered_map
 #include <vector>   // std::vector
 
 namespace ontology
 {
     class Shader;
     class Species;
+    class Object;
 
     class Scene
     {
@@ -50,6 +52,9 @@ namespace ontology
 
             std::vector<ontology::Shader*> shader_pointer_vector;
             std::queue<uint32_t> free_shaderID_queue;
+
+            // For finding any `Object`s of this `Scene` by using its name.
+            std::unordered_map<std::string, ontology::Object*> name_map;
     };
 }
 
