@@ -192,6 +192,8 @@ namespace ontology
             glm::vec3 rotate_vector;               // rotate vector.
             glm::vec3 translate_vector;            // translate vector.
 
+            glm::vec3 dest_vector;                 // destination vector.
+
             // The rest fields are created in the constructor.
             glm::mat4 model_matrix;                // model matrix.
             glm::mat4 MVP_matrix;                  // model view projection matrix.
