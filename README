@@ -3,7 +3,7 @@ Ylikuutio. A 3D game and simulation engine.
 A hobby project of mine. Work in progress.
 
 Ylikuutio 3D engine is under The GNU General Public License 3, or
-(at your option) any later version. See LICENSE file. Please note that
+(at your option) any later version. See COPYING file. Please note that
 my other software products which use Ylikuutio 3D engine are not
 necessarily under The GNU General Public License 3 and may have more
 restrictive licenses. All my code copyright (C) 2016 Antti Nuortimo.
@@ -128,15 +128,25 @@ To run tests (coverage is still quite limited but underway):
 
 $ ./unit_tests_with_Google_Test
 
+Ylikuutio usage:
+This part reflects the current usage of Ylikuutio and will change as new
+functionality is implemented.
+
+At the moment, you need a main class (for an example, please see
+code/ajokki/ajokki.cpp) which starts your game/simulation (initialization),
+runs the game/simulation (the main loop) and ends the program (cleaning-up).
+In all these phases mentioned above Ylikuutio library functions may be used.
+
 Implemented functionality:
 o 3D rendering
 o 2D text
-o support for different height map formats
+o support for different height map formats (SRTM, LAZ)
 o instant rebinding of instances of classes belonging to rendering hierchy
 o callbacks
 
 Future developments underway:
 o in-game console
+o full support for different keyboard layouts in console
 o mipmapping
 o partially transparent 2D text
 o 3D text
@@ -161,6 +171,7 @@ o more physics
 o artificial intelligence (AI) creatures
 o scripting language, possibly ChibiScheme
 o visual pattern recognition for AI
+o GUI for scripting, asset creaation etc.
 
 contact info (found bugs and suggestions are very welcome!):
 name:           Antti Nuortimo
