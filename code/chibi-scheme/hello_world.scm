@@ -1,1 +1,1 @@
-(display "Hello world!\n")
+(display "Hello from hello_world.scm!\n")
