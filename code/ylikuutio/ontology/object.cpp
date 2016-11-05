@@ -129,4 +129,50 @@ namespace ontology
             this->bind_to_parent();
         }
     }
+
+    // Public callbacks (to be called from AI scripts written in Chibi-Scheme).
+
+    void Object::set_dest(ontology::Object* object, float x, float y, float z)
+    {
+        // Set target towards which to move.
+        object->dest_vector = glm::vec3(x, y, z);
+    }
+
+    float Object::get_x(ontology::Object* object)
+    {
+        // Get x coordinate of `object`.
+        return object->coordinate_vector.x;
+    }
+
+    float Object::get_y(ontology::Object* object)
+    {
+        // Get y coordinate of `object`.
+        return object->coordinate_vector.x;
+    }
+
+    float Object::get_z(ontology::Object* object)
+    {
+        // Get z coordinate of `object`.
+        return object->coordinate_vector.x;
+    }
+
+    float Object::get_dest_x(ontology::Object* object)
+    {
+        // Get x destination coordinate of `object`.
+        return object->dest_vector.x;
+    }
+
+    float Object::get_dest_y(ontology::Object* object)
+    {
+        // Get y destination coordinate of `object`.
+        return object->dest_vector.x;
+    }
+
+    float Object::get_dest_z(ontology::Object* object)
+    {
+        // Get z destination coordinate of `object`.
+        return object->dest_vector.x;
+    }
+
+    // Public callbacks end here.
 }
