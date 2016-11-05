@@ -78,6 +78,11 @@ namespace ontology
         }
     }
 
+    void Object::act()
+    {
+        // act according to this game/simulation object's programming.
+    }
+
     void Object::render()
     {
         ontology::Shader* shader_pointer;

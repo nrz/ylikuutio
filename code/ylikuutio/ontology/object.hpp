@@ -70,6 +70,9 @@ namespace ontology
         private:
             void bind_to_parent();
 
+            // act according to this game/simulation object's programming.
+            void act();
+
             // this method renders this object.
             void render();
 
