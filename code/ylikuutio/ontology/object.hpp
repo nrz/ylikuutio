@@ -58,6 +58,108 @@ namespace ontology
             // this method sets pointer to this `Object` to nullptr, sets `parent_pointer` according to the input,
             // and requests a new `childID` from the new `Species` or from the new `Glyph`.
             void bind_to_new_parent(void* new_parent_pointer);
+
+            // Public callbacks (to be called from AI scripts written in Chibi-Scheme).
+
+            // Command callbacks.
+
+            // Set target towards which to move.
+            static void set_dest(ontology::Object* object, float x, float y, float z);
+
+            // Allied-object-centric-information callbacks.
+
+            // Get x coordinate of `object`.
+            static float get_dest_x(ontology::Object* object);
+
+            // Get y coordinate of `object`.
+            static float get_dest_y(ontology::Object* object);
+
+            // Get z coordinate of `object`.
+            static float get_dest_z(ontology::Object* object);
+
+            // Allied-object-centric path and map information callbacks.
+
+            // this method returns `true` if destination is visible, `false` otherwise.
+            // destination may be visible directly (line of sight) or eg. by radar (without line of sight).
+            static bool is_visible(float x, float y, float z);
+
+            // this method returns `true` if destination is visible with a line of sight for any own `Object`, `false` otherwise.
+            static bool is_line_of_sight_for_any(float x, float y, float z);
+
+            // this method returns `true` if destination is visible with a line of sight for any own `Object`, `false` otherwise.
+            static bool is_line_of_sight(ontology::Object* object, float x, float y, float z);
+
+            // this method returns `true` if there is any known ground path between `Object` and (x, y, z),  `false` otherwise.
+            static bool is_ground_path_known(ontology::Object* object, float x, float y, float z);
+
+            // this method returns `true` if there is any known rail path between `Object` and (x, y, z),  `false` otherwise.
+            static bool is_rail_path_known(ontology::Object* object, float x, float y, float z);
+
+            // this method returns `true` if there is known air path between objects, `false` otherwise.
+            static bool is_air_path_known(ontology::Object* object, float x, float y, float z);
+
+            // this method returns `true` if there is known ballistic path between `Object` and (x, y, z), `false` otherwise.
+            static bool is_ballistic_path_known(ontology::Object* object, float x, float y, float z);
+
+            // this method returns `true` if there may be ballistic path between objects, `false` otherwise.
+            static bool may_have_ballistic_path(ontology::Object* object, float x, float y, float z);
+
+            // these functions return the coordinates of the farthest point
+            static float get_closest_visible_ground_dest_x_towards(ontology::Object* object, float x, float y, float z);
+            static float get_closest_visible_ground_dest_y_towards(ontology::Object* object, float x, float y, float z);
+            static float get_closest_visible_ground_dest_z_towards(ontology::Object* object, float x, float y, float z);
+
+            // this method returns `true` if complete path is visible, `false` otherwise.
+            static bool is_complete_ground_path_visible(ontology::Object* object, float x, float y, float z);
+            static bool is_complete_rail_path_visible(ontology::Object* object, float x, float y, float z);
+            static bool is_complete_air_path_visible(ontology::Object* object, float x, float y, float z);
+            static bool is_complete_ballistic_path_visible(ontology::Object* object, float x, float y, float z);
+
+            // these methods return the coordinates of the point closest to `object` from which there is known ballistic path to (x, y, z).
+            static float get_nearest_known_ballistic_launch_site_x(ontology::Object* object, float x, float y, float z);
+            static float get_nearest_known_ballistic_launch_site_y(ontology::Object* object, float x, float y, float z);
+            static float get_nearest_known_ballistic_launch_site_z(ontology::Object* object, float x, float y, float z);
+
+            // these methods return the coordinates of the point closest to `object` from which there may be a ballistic path to (x, y, z).
+            static float get_nearest_possible_ballistic_launch_site_x(ontology::Object* object, float x, float y, float z);
+            static float get_nearest_possible_ballistic_launch_site_y(ontology::Object* object, float x, float y, float z);
+            static float get_nearest_possible_ballistic_launch_site_z(ontology::Object* object, float x, float y, float z);
+
+            // this method returns `true` if there is known line of sight between (x1, y1, z1) and (x2, y2, z2).
+
+            // Coordinate-centric path and map information callbacks.
+            // The conditions for returning `true` match the conditions of the corresponding allied-object-centric callbacks.
+
+            static bool is_line_of_sight_between_from(float x1, float y1, float z1, float x2, float y2, float z2);
+            static bool may_have_line_of_sight_between(float x1, float y1, float z1, float x2, float y2, float z2);
+            static bool is_ground_path_known_between(float x1, float y1, float z1, float x2, float y2, float z2);
+            static bool is_rail_path_known_between(float x1, float y1, float z1, float x2, float y2, float z2);
+            static bool is_air_path_known_between(float x1, float y1, float z1, float x2, float y2, float z2);
+            static bool is_ballistic_path_known(float x1, float y1, float z1, float x2, float y2, float z2);
+            static bool may_have_ballistic_path_between(float x1, float y1, float z1, float x2, float y2, float z2);
+
+            static float get_nearest_known_ballistic_launch_site_x(float x1, float y1, float z1, float x2, float y2, float z2);
+            static float get_nearest_known_ballistic_launch_site_y(float x1, float y1, float z1, float x2, float y2, float z2);
+            static float get_nearest_known_ballistic_launch_site_z(float x1, float y1, float z1, float x2, float y2, float z2);
+
+            static float get_nearest_possible_ballistic_launch_site_x(float x1, float y1, float z1, float x2, float y2, float z2);
+            static float get_nearest_possible_ballistic_launch_site_y(float x1, float y1, float z1, float x2, float y2, float z2);
+            static float get_nearest_possible_ballistic_launch_site_z(float x1, float y1, float z1, float x2, float y2, float z2);
+
+            static float get_closest_visible_dest_x_towards(float x1, float y1, float z1, float x2, float y2, float z2);
+            static float get_closest_visible_dest_y_towards(float x1, float y1, float z1, float x2, float y2, float z2);
+            static float get_closest_visible_dest_z_towards(float x1, float y1, float z1, float x2, float y2, float z2);
+
+            // Callbacks for going through objects.
+            static void* get_first_allied_object();       // point `allied_iterator` to first object.
+            static void* get_next_allied_object();        // advance `allied_iterator`.
+            static void* get_first_other_allied_object(); // point `allied_other_iterator` to first object.
+            static void* get_next_other_allied_object();  // advance `allied_other_iterator`.
+            static void* get_first_opponent_object();     // point `opponent_iterator` to first opponent.
+            static void* get_next_opponent_object();      // advance `opponent_iterator`.
+
+            // Public callbacks end here.
+
             template<class T1>
                 friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<uint32_t>& free_childID_queue);
             template<class T1, class T2>
