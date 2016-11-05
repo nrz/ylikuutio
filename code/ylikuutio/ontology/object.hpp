@@ -69,9 +69,18 @@ namespace ontology
             // Allied-object-centric-information callbacks.
 
             // Get x coordinate of `object`.
-            static float get_dest_x(ontology::Object* object);
+            static float get_x(ontology::Object* object);
 
             // Get y coordinate of `object`.
+            static float get_y(ontology::Object* object);
+
+            // Get z destination coordinate of `object`.
+            static float get_z(ontology::Object* object);
+
+            // Get x destination coordinate of `object`.
+            static float get_dest_x(ontology::Object* object);
+
+            // Get y destination coordinate of `object`.
             static float get_dest_y(ontology::Object* object);
 
             // Get z coordinate of `object`.
