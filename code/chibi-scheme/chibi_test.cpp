@@ -16,7 +16,7 @@ void dostuff(sexp ctx)
     sexp_load(ctx, obj1, NULL);
 
     /* eval a C string as Scheme code */
-    sexp_eval_string(ctx, "(some scheme expression)", -1, NULL);
+    sexp_eval_string(ctx, "(display \"Hello from chibi_test.cpp!\n\")", -1, NULL);
 
     /* construct a Scheme expression to eval */
     obj1 = sexp_intern(ctx, "my-procedure", -1);
