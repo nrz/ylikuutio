@@ -150,13 +150,13 @@ namespace ontology
             static float get_closest_visible_dest_y_towards(float x1, float y1, float z1, float x2, float y2, float z2);
             static float get_closest_visible_dest_z_towards(float x1, float y1, float z1, float x2, float y2, float z2);
 
-            // Callbacks for going through objects.
-            static void* get_first_allied_object();       // point `allied_iterator` to first object.
-            static void* get_next_allied_object();        // advance `allied_iterator`.
-            static void* get_first_other_allied_object(); // point `allied_other_iterator` to first object.
-            static void* get_next_other_allied_object();  // advance `allied_other_iterator`.
-            static void* get_first_opponent_object();     // point `opponent_iterator` to first opponent.
-            static void* get_next_opponent_object();      // advance `opponent_iterator`.
+            // Callbacks for looping through objects.
+            static void* get_first_allied_object(ontology::Object* object);       // point `allied_iterator` to the first object, `nullptr` if N/A.
+            static void* get_next_allied_object(ontology::Object* object);        // advance `allied_iterator`, `nullptr` if N/A.
+            static void* get_first_other_allied_object(ontology::Object* object); // point `allied_other_iterator` to the first other object, `nullptr` if N/A.
+            static void* get_next_other_allied_object(ontology::Object* object);  // advance `allied_other_iterator`, `nullptr` if N/A.
+            static void* get_first_opponent_object(ontology::Object* object);     // point `opponent_iterator` to the first opponent, `nullptr` if N/A.
+            static void* get_next_opponent_object(ontology::Object* object);      // advance `opponent_iterator`, `nullptr` if N/A.
 
             // Public callbacks end here.
 
