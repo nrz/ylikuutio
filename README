@@ -140,6 +140,46 @@ code/ajokki/ajokki.cpp) which starts your game/simulation (initialization),
 runs the game/simulation (the main loop) and ends the program (cleaning-up).
 In all these phases mentioned above Ylikuutio library functions may be used.
 
+FAQ:
+
+Q: How is Ylikuutio software developed?
+A: In Debian GNU/Linux (Debian Jessie at the moment), using Vim.
+
+Q: For what kinds of software Ylikuutio can be used?
+A: Ylikuutio can be used for all kinds of 3D games and simulations.
+   At the moment no specific support for 2D is available, but naturally
+   3D graphics can also be used to present a 2D world.
+
+Q: What the design goals for Ylikuutio?
+A: Ylikuutio aims to be a fast and flexible 3D game/simulation engine
+   and fulfil my own requirements for my own indie game projects.
+
+Q: What are the target platforms of Ylikuutio?
+A: Ylikuutio targets Linux, Windows and Android, in this order.
+   Cross-compiling for Windows does not work yet.
+   Cross-compiling for Android is not implemented yet.
+
+Q: What graphics APIs Ylikuutio uses?
+A: Ylikuutio uses OpenGL version 3.1.
+
+Q: Is there plans to support other graphics APIs?
+A: Newer OpenGL versions may be supported in the future, but so far
+   OpenGL 3.1 fulfils my requirements.
+
+Q: Does Ylikuutio use modern OpenGL (VBOs)?
+A: Yes, Ylikuutio uses VBOs (vertex buffer objects) and VBO indexing.
+
+Q: Is Ylikuutio based on some other 3D engine?
+A: Some parts of Ylikuutio (shaders, file loaders, etc.) are based on
+http://www.opengl-tutorial.org/ , which I really recommend for anyone
+interested in learning OpenGL programming. Ylikuutio also uses external
+libraries such as Chibi-Scheme, FastNoiseSIMD, GLEW, GLFW, GLM, and
+pugixml. The rest is written from scratch.
+
+Q: Why Chibi-Scheme is chosen as the scripting language of Ylikuutio?
+A: I like Lisp-family languages and Chibi-Scheme fulfils my
+   requirements related to a small size and a suitable license.
+
 Implemented functionality:
 o 3D rendering
 o 2D text
