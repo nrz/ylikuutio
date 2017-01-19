@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ctags -R --languages=c++ \
+ctags -R --fields=+l --languages=c++ \
     --exclude=.git \
     --exclude=build \
     --exclude=build1 \
