@@ -194,6 +194,7 @@ namespace ontology
 
             uint32_t childID;                      // object ID, returned by `ontology::Species->get_objectID()`.
             bool has_entered;
+            bool should_ylikuutio_render_this_object;
 
             glm::vec3 coordinate_vector;           // coordinate vector.
             glm::vec3 original_scale_vector;       // original scale vector.

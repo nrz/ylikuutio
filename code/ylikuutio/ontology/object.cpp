@@ -40,6 +40,11 @@ namespace ontology
         this->rotate_vector         = object_struct.rotate_vector;
         this->translate_vector      = object_struct.translate_vector;
         this->has_entered           = false;
+
+        // enable rendering of a recently entered Object.
+        // TODO: enable entering without enabling rendering.
+        this->should_ylikuutio_render_this_object = true;
+
         this->is_character          = object_struct.is_character;
 
         if (this->is_character)
@@ -85,17 +90,20 @@ namespace ontology
 
     void Object::render()
     {
-        ontology::Shader* shader_pointer;
+        if (this->should_ylikuutio_render_this_object)
+        {
+            ontology::Shader* shader_pointer;
 
-        if (this->is_character)
-        {
-            shader_pointer = this->glyph_parent_pointer->parent_pointer->parent_pointer->parent_pointer;
-            ontology::render_this_object<ontology::Glyph*>(this, shader_pointer);
-        }
-        else
-        {
-            shader_pointer = this->species_parent_pointer->parent_pointer->parent_pointer;
-            ontology::render_this_object<ontology::Species*>(this, shader_pointer);
+            if (this->is_character)
+            {
+                shader_pointer = this->glyph_parent_pointer->parent_pointer->parent_pointer->parent_pointer;
+                ontology::render_this_object<ontology::Glyph*>(this, shader_pointer);
+            }
+            else
+            {
+                shader_pointer = this->species_parent_pointer->parent_pointer->parent_pointer;
+                ontology::render_this_object<ontology::Species*>(this, shader_pointer);
+            }
         }
     }
 
