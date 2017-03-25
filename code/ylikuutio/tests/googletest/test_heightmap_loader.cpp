@@ -426,6 +426,12 @@ TEST(a_BMP_world_must_be_loaded_appropriately, load_256x256_BMP_world)
 }
 TEST(a_2x2_world_must_be_triangulated_appropriately, bilinear_interpolation)
 {
+    // *---*
+    // |\ /|
+    // | * |
+    // |/ \|
+    // *---*
+    // bilinear interpolation.
     uint32_t image_width = 2;
     uint32_t image_height = 2;
     uint32_t world_size = image_width * image_height;
@@ -531,6 +537,12 @@ TEST(a_2x2_world_must_be_triangulated_appropriately, bilinear_interpolation)
 }
 TEST(a_2x2_world_must_be_triangulated_appropriately, southeast_northwest_edges)
 {
+    // *---*
+    // |\  |
+    // | \ |
+    // |  \|
+    // *---*
+    // southeast northwest edges.
     uint32_t image_width = 2;
     uint32_t image_height = 2;
     uint32_t world_size = image_width * image_height;

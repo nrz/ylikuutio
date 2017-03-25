@@ -68,16 +68,31 @@ namespace geometry
 
             if (std::strcmp(char_triangulation_type, "bilinear_interpolation") == 0)
             {
+                // *---*
+                // |\ /|
+                // | * |
+                // |/ \|
+                // *---*
                 is_bilinear_interpolation_in_use = true;
                 is_triangulation_type_valid = true;
             }
             else if ((std::strcmp(char_triangulation_type, "southwest_northeast_edges") == 0) || (std::strcmp(char_triangulation_type, "northeast_southwest_edges") == 0))
             {
+                // *---*
+                // |  /|
+                // | / |
+                // |/  |
+                // *---*
                 is_southwest_northeast_edges_in_use = true;
                 is_triangulation_type_valid = true;
             }
             else if ((std::strcmp(char_triangulation_type, "southeast_northwest_edges") == 0) || (std::strcmp(char_triangulation_type, "northwest_southeast_edges") == 0))
             {
+                // *---*
+                // |\  |
+                // | \ |
+                // |  \|
+                // *---*
                 is_southeast_northwest_edges_in_use = true;
                 is_triangulation_type_valid = true;
             }
