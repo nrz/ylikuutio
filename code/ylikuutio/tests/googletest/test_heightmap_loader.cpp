@@ -9,12 +9,6 @@
 #include "code/ylikuutio/common/global_variables.hpp"
 #include "code/ylikuutio/common/global_variables.cpp"
 
-// Include GLEW
-#ifndef __GL_GLEW_H_INCLUDED
-#define __GL_GLEW_H_INCLUDED
-#include <GL/glew.h> // GLfloat, GLuint etc.
-#endif
-
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
 #define __GLM_GLM_HPP_INCLUDED
@@ -50,7 +44,6 @@ TEST(vertices_must_be_defined_and_interpolated_appropriately, a_3x3_world)
     *input_vertex_pointer++ = 64.0f;
     *input_vertex_pointer++ = 128.0f;
 
-    std::vector<GLuint> vertexIndices, uvIndices, normalIndices;
     std::vector<glm::vec3> temp_vertices;
     std::vector<glm::vec2> temp_UVs;
     std::vector<glm::vec3> temp_normals;
@@ -436,17 +429,17 @@ TEST(a_2x2_world_must_be_triangulated_appropriately, bilinear_interpolation)
     uint32_t image_height = 2;
     uint32_t world_size = image_width * image_height;
 
-    GLuint* vertex_data;
-    vertex_data = new GLuint [world_size];
+    uint32_t* vertex_data;
+    vertex_data = new uint32_t[world_size];
     ASSERT_NE(vertex_data, nullptr);
-    GLuint* vertex_pointer = vertex_data;
+    uint32_t* vertex_pointer = vertex_data;
     // x, z: height (y).
-    GLuint southwest_height = 1;
-    GLuint southeast_height = 2;
-    GLuint northwest_height = 4;
-    GLuint northeast_height = 8;
-    GLfloat center_x = 0.5f;
-    GLfloat center_z = 0.5f;
+    uint32_t southwest_height = 1;
+    uint32_t southeast_height = 2;
+    uint32_t northwest_height = 4;
+    uint32_t northeast_height = 8;
+    float center_x = 0.5f;
+    float center_z = 0.5f;
 
     // 0, 0: 1.
     *vertex_pointer++ = southwest_height;
@@ -478,7 +471,7 @@ TEST(a_2x2_world_must_be_triangulated_appropriately, bilinear_interpolation)
     // 1st vertex is the center vertex of the 1st triangle.
     ASSERT_EQ(vertices[0].x, center_x);
     ASSERT_EQ(vertices[0].z, center_z);
-    ASSERT_EQ(vertices[0].y, static_cast<GLfloat>(southwest_height + southeast_height + northwest_height + northeast_height) / 4.0f);
+    ASSERT_EQ(vertices[0].y, static_cast<float>(southwest_height + southeast_height + northwest_height + northeast_height) / 4.0f);
 
     // 2nd vertex is the southwest vertex of the 1st triangle.
     ASSERT_EQ(vertices[1].x, 1.0f);
@@ -493,7 +486,7 @@ TEST(a_2x2_world_must_be_triangulated_appropriately, bilinear_interpolation)
     // 4th vertex is the center vertex of the 2nd triangle.
     ASSERT_EQ(vertices[3].x, center_x);
     ASSERT_EQ(vertices[3].z, center_z);
-    ASSERT_EQ(vertices[3].y, static_cast<GLfloat>(southwest_height + southeast_height + northwest_height + northeast_height) / 4.0f);
+    ASSERT_EQ(vertices[3].y, static_cast<float>(southwest_height + southeast_height + northwest_height + northeast_height) / 4.0f);
 
     // 5th vertex is the southwest vertex of the 2nd triangle.
     ASSERT_EQ(vertices[4].x, 0.0f);
@@ -508,7 +501,7 @@ TEST(a_2x2_world_must_be_triangulated_appropriately, bilinear_interpolation)
     // 7th vertex is the center vertex of the 3rd triangle.
     ASSERT_EQ(vertices[6].x, center_x);
     ASSERT_EQ(vertices[6].z, center_z);
-    ASSERT_EQ(vertices[6].y, static_cast<GLfloat>(southwest_height + southeast_height + northwest_height + northeast_height) / 4.0f);
+    ASSERT_EQ(vertices[6].y, static_cast<float>(southwest_height + southeast_height + northwest_height + northeast_height) / 4.0f);
 
     // 8th vertex is the northwest vertex of the 3rd triangle.
     ASSERT_EQ(vertices[7].x, 0.0f);
@@ -523,7 +516,7 @@ TEST(a_2x2_world_must_be_triangulated_appropriately, bilinear_interpolation)
     // 10th vertex is the center vertex of the 4th triangle.
     ASSERT_EQ(vertices[9].x, center_x);
     ASSERT_EQ(vertices[9].z, center_z);
-    ASSERT_EQ(vertices[9].y, static_cast<GLfloat>(southwest_height + southeast_height + northwest_height + northeast_height) / 4);
+    ASSERT_EQ(vertices[9].y, static_cast<float>(southwest_height + southeast_height + northwest_height + northeast_height) / 4);
 
     // 11th vertex is the northeast vertex of the 4th triangle.
     ASSERT_EQ(vertices[10].x, 1.0f);
@@ -547,17 +540,15 @@ TEST(a_2x2_world_must_be_triangulated_appropriately, southeast_northwest_edges)
     uint32_t image_height = 2;
     uint32_t world_size = image_width * image_height;
 
-    GLuint* vertex_data;
-    vertex_data = new GLuint [world_size];
+    uint32_t* vertex_data;
+    vertex_data = new uint32_t[world_size];
     ASSERT_NE(vertex_data, nullptr);
-    GLuint* vertex_pointer = vertex_data;
+    uint32_t* vertex_pointer = vertex_data;
     // x, z: height (y).
-    GLuint southwest_height = 1;
-    GLuint southeast_height = 2;
-    GLuint northwest_height = 4;
-    GLuint northeast_height = 8;
-    GLfloat center_x = 0.5f;
-    GLfloat center_z = 0.5f;
+    uint32_t southwest_height = 1;
+    uint32_t southeast_height = 2;
+    uint32_t northwest_height = 4;
+    uint32_t northeast_height = 8;
 
     // 0, 0: 1.
     *vertex_pointer++ = southwest_height;
