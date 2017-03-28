@@ -121,6 +121,15 @@ namespace geometry
             // 5. Compute the face normals, `push_back` to `face_normals`.
             // 6. Compute the vertex normals for vertices loaded from file and for interpolated vertices (for `"bilinear_interpolation"`), `push_back` to `temp_normals`.
             // 7. Loop through all vertices and `geometry::output_triangle_vertices`.
+            //
+            // stg. `"bilinear_interpolation"`                                      `"southwest_northeast_edges"`               `"southeast_northwest_edges"`
+            // 1.   `define_vertices`                                               `define_vertices`                           `define_vertices`
+            // 2.   `interpolate_and_define_vertices_using_bilinear_interpolation`  N/A                                         N/A
+            // 3.   `transform_coordinates_to_curved_surface`                       `transform_coordinates_to_curved_surface`   `transform_coordinates_to_curved_surface`
+            // 4.   `transform_coordinates_to_curved_surface`                       N/A                                         N/A
+            // 5.   not refactored yet                                              not refactored yet                          not refactored yet
+            // 6.   not refactored yet                                              not refactored yet                          not refactored yet
+            // 7.   not refactored yet                                              not refactored yet                          not refactored yet
 
             // 1. Define the vertices for vertices loaded from file, `push_back` to `temp_vertices`.
 
