@@ -124,8 +124,8 @@ namespace geometry
             // 1.   `define_vertices`                                               `define_vertices`                           `define_vertices`
             // 2.   `interpolate_and_define_vertices_using_bilinear_interpolation`  N/A                                         N/A
             // 3.   `transform_coordinates_to_curved_surface`                       `transform_coordinates_to_curved_surface`   `transform_coordinates_to_curved_surface`
-            // 4.   not refactored yet                                              not refactored yet                          not refactored yet
-            // 5.   not refactored yet                                              not refactored yet                          not refactored yet
+            // 4.   `compute_face_normals`                                          `compute_face_normals`                      `compute_face_normals`
+            // 5.   `compute_vertex_normals`                                        `compute_vertex_normals`                    `compute_vertex_normals`
             // 6.   not refactored yet                                              not refactored yet                          not refactored yet
             //
             // stg. = stage
