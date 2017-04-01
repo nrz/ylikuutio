@@ -116,20 +116,21 @@ namespace geometry
             // Processing stages:
             // 1. Define the (GLfloat) vertices for vertices loaded from file, `push_back` to `temp_vertices` and `temp_UVs`.
             // 2. Interpolate the (GLfloat) vertices between, using bilinear interpolation, `push_back` to `temp_vertices` and `temp_UVs`.
-            // 3. Transform spherical coordinates loaded from file (and computed this far as being in horizontal plane) to a curved surface.
-            // 4. For bilinear interpolation: Transform interpolated coordinates (and computed this far as being in horizontal plane) to a curved surface.
-            // 5. Compute the face normals, `push_back` to `face_normals`.
-            // 6. Compute the vertex normals for vertices loaded from file and for interpolated vertices (for `"bilinear_interpolation"`), `push_back` to `temp_normals`.
-            // 7. Loop through all vertices and `geometry::output_triangle_vertices`.
+            // 3a. Transform spherical coordinates loaded from file (and computed this far as being in horizontal plane) to a curved surface.
+            // 3b. For bilinear interpolation: Transform interpolated coordinates (and computed this far as being in horizontal plane) to a curved surface.
+            // 4. Compute the face normals, `push_back` to `face_normals`.
+            // 5. Compute the vertex normals for vertices loaded from file and for interpolated vertices (for `"bilinear_interpolation"`), `push_back` to `temp_normals`.
+            // 6. Loop through all vertices and `geometry::output_triangle_vertices`.
             //
             // stg. `"bilinear_interpolation"`                                      `"southwest_northeast_edges"`               `"southeast_northwest_edges"`
             // 1.   `define_vertices`                                               `define_vertices`                           `define_vertices`
             // 2.   `interpolate_and_define_vertices_using_bilinear_interpolation`  N/A                                         N/A
             // 3.   `transform_coordinates_to_curved_surface`                       `transform_coordinates_to_curved_surface`   `transform_coordinates_to_curved_surface`
-            // 4.   `transform_coordinates_to_curved_surface`                       N/A                                         N/A
+            // 4.   not refactored yet                                              not refactored yet                          not refactored yet
             // 5.   not refactored yet                                              not refactored yet                          not refactored yet
             // 6.   not refactored yet                                              not refactored yet                          not refactored yet
-            // 7.   not refactored yet                                              not refactored yet                          not refactored yet
+            //
+            // stg. = stage
 
             // 1. Define the vertices for vertices loaded from file, `push_back` to `temp_vertices`.
 
@@ -161,9 +162,9 @@ namespace geometry
 
             uint32_t vertexIndex[3], uvIndex[3], normalIndex[3];
 
-            // 2. Interpolate the vertices between, using bilinear interpolation, `push_back` to `temp_vertices`.
             if (is_bilinear_interpolation_in_use)
             {
+                // 2. Interpolate the vertices between, using bilinear interpolation, `push_back` to `temp_vertices`.
                 geometry::interpolate_and_define_vertices_using_bilinear_interpolation(
                         input_vertex_pointer,
                         image_width,
@@ -175,7 +176,8 @@ namespace geometry
 
             if (!std::isnan(sphere_radius))
             {
-                // 3. Transform spherical coordinates loaded from file (and computed this far as being in horizontal plane) to a curved surface.
+                // 3a. Transform spherical coordinates loaded from file (and computed this far as being in horizontal plane) to a curved surface.
+                // 3b. For bilinear interpolation: Transform interpolated coordinates (and computed this far as being in horizontal plane) to a curved surface.
                 //
                 // Wikipedia:
                 // https://en.wikipedia.org/wiki/List_of_common_coordinate_transformations#From_spherical_coordinates
@@ -197,7 +199,7 @@ namespace geometry
                 std::cout << "no coordinate transformation is needed.\n";
             }
 
-            // 5. Compute the face normals, `push_back` to `face_normals`.
+            // 4. Compute the face normals, `push_back` to `face_normals`.
             // Triangle order: S - W - N - E.
             //
             // First triangle: center, southeast, southwest.
@@ -220,7 +222,7 @@ namespace geometry
                 return false;
             }
 
-            // 6. Compute the vertex normals for vertices loaded from file, `push_back` to `temp_normals`.
+            // 5. Compute the vertex normals for vertices loaded from file, `push_back` to `temp_normals`.
             std::cout << "computing vertex normals for vertices loaded from file.\n";
 
             if (is_bilinear_interpolation_in_use)
@@ -450,7 +452,7 @@ namespace geometry
                 temp_normals.push_back(vertex_normal);
             }
 
-            // 7. Loop through all vertices and `geometry::output_triangle_vertices`.
+            // 6. Loop through all vertices and `geometry::output_triangle_vertices`.
             std::cout << "defining output vertices, UVs and normals.\n";
 
             if (is_bilinear_interpolation_in_use)
