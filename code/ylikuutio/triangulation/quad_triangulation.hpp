@@ -110,9 +110,6 @@ namespace geometry
             std::vector<glm::vec2> temp_UVs;
             std::vector<glm::vec3> temp_normals;
 
-            uint32_t texture_x = 0;
-            uint32_t texture_y = 0;
-
             // Processing stages:
             // 1. Define the (GLfloat) vertices for vertices loaded from file, `push_back` to `temp_vertices` and `temp_UVs`.
             // 2. Interpolate the (GLfloat) vertices between, using bilinear interpolation, `push_back` to `temp_vertices` and `temp_UVs`.
