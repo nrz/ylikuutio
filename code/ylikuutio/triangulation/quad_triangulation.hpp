@@ -116,7 +116,7 @@ namespace geometry
             // 3.   `transform_coordinates_to_curved_surface`                       `transform_coordinates_to_curved_surface`   `transform_coordinates_to_curved_surface`
             // 4.   `compute_face_normals`                                          `compute_face_normals`                      `compute_face_normals`
             // 5.   `compute_vertex_normals`                                        `compute_vertex_normals`                    `compute_vertex_normals`
-            // 6.   not refactored yet                                              not refactored yet                          not refactored yet
+            // 6.   `define_vertices_UVs_and_normals`                               `define_vertices_UVs_and_normals`           `define_vertices_UVs_and_normals`
             //
             // stg. = stage
 
