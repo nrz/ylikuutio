@@ -596,6 +596,8 @@ add_library(ylikuutio STATIC
     code/ylikuutio/triangulation/triangulation_templates.hpp
     code/ylikuutio/triangulation/vertex_normals.cpp
     code/ylikuutio/triangulation/vertex_normals.hpp
+    code/ylikuutio/triangulation/vertices.cpp
+    code/ylikuutio/triangulation/vertices.hpp
     )
 # add_dependencies(ylikuutio rescan)
 
@@ -668,6 +670,8 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/triangulation/triangulation_enums.hpp
         code/ylikuutio/triangulation/vertex_normals.cpp
         code/ylikuutio/triangulation/vertex_normals.hpp
+        code/ylikuutio/triangulation/vertices.cpp
+        code/ylikuutio/triangulation/vertices.hpp
         )
     set(UNIT_TESTS
         code/ylikuutio/tests/googletest/test_any_value.cpp
