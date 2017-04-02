@@ -6,7 +6,7 @@ Ylikuutio 3D engine is under The GNU General Public License 3, or
 (at your option) any later version. See COPYING file. Please note that
 my other software products which use Ylikuutio 3D engine are not
 necessarily under The GNU General Public License 3 and may have more
-restrictive licenses. All my code copyright (C) 2016 Antti Nuortimo.
+restrictive licenses. All my code copyright (C) 2016-2017 Antti Nuortimo.
 
 The code from http://www.opengl-tutorial.org/ is under
 the license conditions stated on opengl-tutorial website:
@@ -186,9 +186,9 @@ o 2D text
 o support for different height map formats (SRTM, LAZ)
 o instant rebinding of instances of classes belonging to rendering hierchy
 o callbacks
+o in-game console
 
 Future developments underway:
-o in-game console
 o full support for different keyboard layouts in console
 o mipmapping
 o partially transparent 2D text
@@ -212,7 +212,7 @@ o sky dome
 o water
 o more physics
 o artificial intelligence (AI) creatures
-o scripting language, possibly ChibiScheme
+o ChibiScheme as scripting language
 o visual pattern recognition for AI
 o GUI for scripting, asset creation etc.
 o Internet gaming
@@ -222,7 +222,7 @@ contact info (found bugs and suggestions are very welcome!):
 name:           Antti Nuortimo
 GitHub:         https://github.com/nrz
 Stack Overflow: http://stackoverflow.com/users/1310991/nrz
-email:          ylikuutio at gmail dot com
+email:          antti dot nuortimo at gmail dot com
                 (please write 'ylikuutio' to email title to escape /dev/null)
 
 Work offers are also very welcome!
