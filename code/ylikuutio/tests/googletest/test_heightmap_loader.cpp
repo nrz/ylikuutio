@@ -473,12 +473,12 @@ TEST(a_2x2_world_must_be_triangulated_appropriately, bilinear_interpolation)
     ASSERT_EQ(vertices[0].z, center_z);
     ASSERT_EQ(vertices[0].y, static_cast<float>(southwest_height + southeast_height + northwest_height + northeast_height) / 4.0f);
 
-    // 2nd vertex is the southwest vertex of the 1st triangle.
+    // 2nd vertex is the southeast vertex of the 1st triangle.
     ASSERT_EQ(vertices[1].x, 1.0f);
     ASSERT_EQ(vertices[1].z, 0.0f);
     ASSERT_EQ(vertices[1].y, southeast_height);
 
-    // 3rd vertex is the northwest vertex of the 1st triangle.
+    // 3rd vertex is the southwest vertex of the 1st triangle.
     ASSERT_EQ(vertices[2].x, 0.0f);
     ASSERT_EQ(vertices[2].z, 0.0f);
     ASSERT_EQ(vertices[2].y, southwest_height);
