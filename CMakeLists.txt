@@ -560,6 +560,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/universe.hpp
     code/ylikuutio/ontology/vector_font.cpp
     code/ylikuutio/ontology/vector_font.hpp
+    code/ylikuutio/ontology/vector_font_struct.hpp
     code/ylikuutio/ontology/vboindexer.cpp
     code/ylikuutio/ontology/vboindexer.hpp
 
@@ -671,6 +672,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/ontology/ontology_structs.hpp
         code/ylikuutio/ontology/shader_struct.hpp
         code/ylikuutio/ontology/species_struct.hpp
+        code/ylikuutio/ontology/vector_font_struct.hpp
         code/ylikuutio/string/ylikuutio_string.cpp
         code/ylikuutio/string/ylikuutio_string.hpp
         code/ylikuutio/triangulation/face_normals.cpp

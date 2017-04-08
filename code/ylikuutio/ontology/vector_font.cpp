@@ -1,6 +1,7 @@
 #include "vector_font.hpp"
 #include "glyph.hpp"
 #include "render_templates.hpp"
+#include "vector_font_struct.hpp"
 #include "ontology_structs.hpp"
 #include "code/ylikuutio/loaders/font_loader.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
