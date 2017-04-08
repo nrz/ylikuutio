@@ -36,7 +36,6 @@ namespace graph
 namespace ontology
 {
     class Universe;
-    class Scene;
     class Shader;
     class Material;
     class VectorFont;
@@ -44,18 +43,6 @@ namespace ontology
     class Glyph;
     class Text3D;
 }
-
-typedef struct ShaderStruct
-{
-    ShaderStruct()
-        : parent_pointer(nullptr)
-    {
-        // constructor.
-    }
-    ontology::Scene* parent_pointer; // pointer to the scene (draw list).
-    std::string vertex_shader;       // filename of vertex shader.
-    std::string fragment_shader;     // filename of fragment shader.
-} ShaderStruct;
 
 typedef struct MaterialStruct
 {

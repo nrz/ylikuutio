@@ -3,10 +3,9 @@
 #include "universe.hpp"
 #include "material.hpp"
 #include "render_templates.hpp"
-#include "ontology_structs.hpp"
+#include "shader_struct.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/common/global_variables.hpp"
-#include "code/ylikuutio/common/globals.hpp"
 
 // Include standard headers
 #include <iostream> // std::cout, std::cin, std::cerr

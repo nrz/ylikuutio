@@ -546,6 +546,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/scene.hpp
     code/ylikuutio/ontology/shader.cpp
     code/ylikuutio/ontology/shader.hpp
+    code/ylikuutio/ontology/shader_struct.hpp
     code/ylikuutio/ontology/species.cpp
     code/ylikuutio/ontology/species.hpp
     code/ylikuutio/ontology/species_or_glyph.hpp
@@ -661,6 +662,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/loaders/font_loader.cpp
         code/ylikuutio/loaders/font_loader.hpp
         code/ylikuutio/ontology/ontology_structs.hpp
+        code/ylikuutio/ontology/shader_struct.hpp
         code/ylikuutio/string/ylikuutio_string.cpp
         code/ylikuutio/string/ylikuutio_string.hpp
         code/ylikuutio/triangulation/face_normals.cpp
