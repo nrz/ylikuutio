@@ -3,6 +3,7 @@
 #include "code/ylikuutio/ontology/material_struct.hpp"
 #include "code/ylikuutio/ontology/species_struct.hpp"
 #include "code/ylikuutio/ontology/vector_font_struct.hpp"
+#include "code/ylikuutio/ontology/text3D_struct.hpp"
 #include "code/ylikuutio/ontology/object_struct.hpp"
 #include "code/ylikuutio/ontology/ontology_structs.hpp"
 
