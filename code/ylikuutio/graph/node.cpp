@@ -1,5 +1,6 @@
 #include "node.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
+#include "code/ylikuutio/ontology/ontology_structs.hpp"
 
 // Include standard headers
 #include <iostream> // std::cout, std::cin, std::cerr

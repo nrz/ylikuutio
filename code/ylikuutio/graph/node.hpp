@@ -5,8 +5,9 @@
 #include <queue>     // std::queue
 #include <algorithm> // std::find
 
-#include "code/ylikuutio/common/globals.hpp"
 #include "graph.hpp"
+#include "code/ylikuutio/ontology/ontology_structs.hpp"
+#include "code/ylikuutio/common/globals.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 namespace graph

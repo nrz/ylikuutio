@@ -3,6 +3,7 @@
 
 #include "material.hpp"
 #include "render_templates.hpp"
+#include "ontology_structs.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/common/globals.hpp"
 

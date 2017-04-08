@@ -1,5 +1,5 @@
 #include "gtest/gtest.h"
-#include "code/ylikuutio/common/globals.hpp"
+#include "code/ylikuutio/ontology/ontology_structs.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED

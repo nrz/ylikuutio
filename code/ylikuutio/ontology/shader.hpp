@@ -7,6 +7,7 @@
 #endif
 
 #include "render_templates.hpp"
+#include "ontology_structs.hpp"
 #include "code/ylikuutio/common/globals.hpp"
 #include "code/ylikuutio/loaders/shader_loader.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"

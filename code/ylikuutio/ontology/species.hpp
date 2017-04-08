@@ -5,6 +5,7 @@
 #include "material.hpp"
 #include "ground_level.hpp"
 #include "render_templates.hpp"
+#include "ontology_structs.hpp"
 #include "species_or_glyph.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
