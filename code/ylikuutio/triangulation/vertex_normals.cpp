@@ -42,7 +42,7 @@ namespace geometry
                 temp_normals.push_back(vertex_normal);
 
                 // Compute the normals of southern vertices.
-                for (x = 1; x < (image_width - 1); x++)
+                for (x = 1; x < image_width - 1; x++)
                 {
                     // Compute the normal of a southern vertex.
                     // Number of adjacent faces: 4.
@@ -63,7 +63,7 @@ namespace geometry
                 temp_normals.push_back(vertex_normal);
 
                 // Then, define most normals in a double loop.
-                for (z = 1; z < (image_height - 1); z++)
+                for (z = 1; z < image_height - 1; z++)
                 {
                     // Compute the normal of a western vertex.
                     // Number of adjacent faces: 4.
@@ -75,7 +75,7 @@ namespace geometry
                             get_face_normal(face_normal_vector_vec3, x, z, SSE, image_width));
                     temp_normals.push_back(vertex_normal);
 
-                    for (x = 1; x < (image_width - 1); x++)
+                    for (x = 1; x < image_width - 1; x++)
                     {
                         uint32_t current_vertex_i = image_width * z + x;
 
@@ -114,7 +114,7 @@ namespace geometry
                 temp_normals.push_back(vertex_normal);
 
                 // Compute the normals of northern vertices.
-                for (x = 1; x < (image_width - 1); x++)
+                for (x = 1; x < image_width - 1; x++)
                 {
                     // Compute the normal of a northern vertex.
                     // Number of adjacent faces: 4.
@@ -167,7 +167,7 @@ namespace geometry
                 temp_normals.push_back(vertex_normal);
 
                 // Compute the normals of southern vertices.
-                for (x = 1; x < (image_width - 1); x++)
+                for (x = 1; x < image_width - 1; x++)
                 {
                     // Compute the normal of a southern vertex.
                     // Number of adjacent faces: 3.
@@ -187,7 +187,7 @@ namespace geometry
                 temp_normals.push_back(vertex_normal);
 
                 // Then, define most normals in a double loop.
-                for (z = 1; z < (image_height - 1); z++)
+                for (z = 1; z < image_height - 1; z++)
                 {
                     // Compute the normal of a western vertex.
                     // Number of adjacent faces: 3.
@@ -198,7 +198,7 @@ namespace geometry
                             get_face_normal_for_SE_NW(face_normal_vector_vec3, x, z, SSE_CODE_FOR_SE_NW, image_width));
                     temp_normals.push_back(vertex_normal);
 
-                    for (x = 1; x < (image_width - 1); x++)
+                    for (x = 1; x < image_width - 1; x++)
                     {
                         uint32_t current_vertex_i = image_width * z + x;
 
@@ -234,7 +234,7 @@ namespace geometry
                 temp_normals.push_back(vertex_normal);
 
                 // Compute the normals of northern vertices.
-                for (x = 1; x < (image_width - 1); x++)
+                for (x = 1; x < image_width - 1; x++)
                 {
                     // Compute the normal of a northern vertex.
                     // Number of adjacent faces: 3.
