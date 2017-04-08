@@ -36,26 +36,12 @@ namespace graph
 namespace ontology
 {
     class Universe;
-    class Shader;
     class Material;
     class VectorFont;
     class Species;
     class Glyph;
     class Text3D;
 }
-
-typedef struct MaterialStruct
-{
-    MaterialStruct()
-        : parent_pointer(nullptr)
-    {
-        // constructor.
-    }
-    ontology::Shader* parent_pointer; // pointer to the shader.
-    std::string texture_file_format;  // type of the texture file. supported file formats so far: `"bmp"`/`"BMP"`, `"dds"`/`"DDS"`.
-    std::string texture_filename;     // filename of the model file.
-    std::string image_path;
-} MaterialStruct;
 
 typedef struct NodeStruct
 {

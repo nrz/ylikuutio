@@ -1,5 +1,6 @@
 #include "gtest/gtest.h"
 #include "code/ylikuutio/ontology/shader_struct.hpp"
+#include "code/ylikuutio/ontology/material_struct.hpp"
 #include "code/ylikuutio/ontology/ontology_structs.hpp"
 
 // Include GLM

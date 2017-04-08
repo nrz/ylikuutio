@@ -536,6 +536,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/ground_level.hpp
     code/ylikuutio/ontology/material.cpp
     code/ylikuutio/ontology/material.hpp
+    code/ylikuutio/ontology/material_struct.hpp
     code/ylikuutio/ontology/model.cpp
     code/ylikuutio/ontology/model.hpp
     code/ylikuutio/ontology/object.cpp
@@ -661,6 +662,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/linear_algebra/tensor3.hpp
         code/ylikuutio/loaders/font_loader.cpp
         code/ylikuutio/loaders/font_loader.hpp
+        code/ylikuutio/ontology/material_struct.hpp
         code/ylikuutio/ontology/ontology_structs.hpp
         code/ylikuutio/ontology/shader_struct.hpp
         code/ylikuutio/string/ylikuutio_string.cpp
