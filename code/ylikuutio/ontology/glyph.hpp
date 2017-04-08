@@ -5,8 +5,8 @@
 #include "model.hpp"
 #include "text3D.hpp"
 #include "vector_font.hpp"
+#include "glyph_struct.hpp"
 #include "render_templates.hpp"
-#include "ontology_structs.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include GLEW

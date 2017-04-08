@@ -1,8 +1,8 @@
 #include "glyph.hpp"
 #include "species_or_glyph.hpp"
 #include "object.hpp"
+#include "glyph_struct.hpp"
 #include "render_templates.hpp"
-#include "ontology_structs.hpp"
 #include "code/ylikuutio/triangulation/polygon_triangulation.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 

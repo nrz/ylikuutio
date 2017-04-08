@@ -4,8 +4,8 @@
 #include "code/ylikuutio/ontology/species_struct.hpp"
 #include "code/ylikuutio/ontology/vector_font_struct.hpp"
 #include "code/ylikuutio/ontology/text3D_struct.hpp"
+#include "code/ylikuutio/ontology/glyph_struct.hpp"
 #include "code/ylikuutio/ontology/object_struct.hpp"
-#include "code/ylikuutio/ontology/ontology_structs.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED

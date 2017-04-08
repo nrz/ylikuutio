@@ -533,6 +533,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/font2D.hpp
     code/ylikuutio/ontology/glyph.cpp
     code/ylikuutio/ontology/glyph.hpp
+    code/ylikuutio/ontology/glyph_struct.hpp
     code/ylikuutio/ontology/ground_level.cpp
     code/ylikuutio/ontology/ground_level.hpp
     code/ylikuutio/ontology/material.cpp
@@ -543,7 +544,6 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/object.cpp
     code/ylikuutio/ontology/object.hpp
     code/ylikuutio/ontology/object_struct.hpp
-    code/ylikuutio/ontology/ontology_structs.hpp
     code/ylikuutio/ontology/render_templates.hpp
     code/ylikuutio/ontology/scene.cpp
     code/ylikuutio/ontology/scene.hpp
@@ -668,9 +668,9 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/linear_algebra/tensor3.hpp
         code/ylikuutio/loaders/font_loader.cpp
         code/ylikuutio/loaders/font_loader.hpp
+        code/ylikuutio/ontology/glyph_struct.hpp
         code/ylikuutio/ontology/material_struct.hpp
         code/ylikuutio/ontology/object_struct.hpp
-        code/ylikuutio/ontology/ontology_structs.hpp
         code/ylikuutio/ontology/shader_struct.hpp
         code/ylikuutio/ontology/species_struct.hpp
         code/ylikuutio/ontology/text3D_struct.hpp
