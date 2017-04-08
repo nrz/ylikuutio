@@ -173,7 +173,7 @@ namespace geometry
                 face_normal_i = 2 * z * (image_width - 1) + 2 * x - 1;
                 break;
             case SW_CODE_FOR_SE_NW:
-                face_normal_i = 2 * (z - 1) * (image_width - 1) + 2 * (x - 1) + 1;
+                face_normal_i = 2 * (z - 1) * (image_width - 1) + 2 * x - 1;
                 break;
             case NE_CODE_FOR_SE_NW:
                 face_normal_i = 2 * z * (image_width - 1) + 2 * x;
