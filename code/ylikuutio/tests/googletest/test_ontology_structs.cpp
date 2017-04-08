@@ -30,13 +30,6 @@ TEST(MaterialStruct_must_be_initialized_appropriately, MaterialStruct)
     ASSERT_TRUE(test_material_struct.image_path.empty());
 }
 
-TEST(NodeStruct_must_be_initialized_appropriately, NodeStruct)
-{
-    NodeStruct test_node_struct;
-    ASSERT_EQ(test_node_struct.parent_pointer, nullptr);
-    ASSERT_EQ(test_node_struct.neighbor_nodeIDs.size(), 0);
-}
-
 TEST(ObjectStruct_must_be_initialized_appropriately, ObjectStruct)
 {
     ObjectStruct test_object_struct;

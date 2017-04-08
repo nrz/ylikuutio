@@ -6,7 +6,7 @@
 #include <algorithm> // std::find
 
 #include "graph.hpp"
-#include "code/ylikuutio/ontology/ontology_structs.hpp"
+#include "node_struct.hpp"
 #include "code/ylikuutio/common/globals.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 

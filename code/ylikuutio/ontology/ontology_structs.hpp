@@ -28,11 +28,6 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
-namespace graph
-{
-    class Graph;
-}
-
 namespace ontology
 {
     class Universe;
@@ -42,18 +37,6 @@ namespace ontology
     class Glyph;
     class Text3D;
 }
-
-typedef struct NodeStruct
-{
-    NodeStruct()
-        : parent_pointer(nullptr)
-    {
-        // constructor.
-    }
-    uint32_t nodeID;
-    graph::Graph* parent_pointer;
-    std::vector<uint32_t> neighbor_nodeIDs;
-} NodeStruct;
 
 typedef struct ObjectStruct
 {

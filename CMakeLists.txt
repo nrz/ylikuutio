@@ -494,6 +494,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/graph/graph.hpp
     code/ylikuutio/graph/node.cpp
     code/ylikuutio/graph/node.hpp
+    code/ylikuutio/graph/node_struct.hpp
 
     # hierarchy, in alphabetical order.
     code/ylikuutio/hierarchy/hierarchy_templates.hpp
@@ -653,6 +654,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/geometry/line_segment_line_segment_intersection.hpp
         code/ylikuutio/geometry/transformation.cpp
         code/ylikuutio/geometry/transformation.hpp
+        code/ylikuutio/graph/node_struct.hpp
         code/ylikuutio/hierarchy/hierarchy_templates.hpp
         code/ylikuutio/linear_algebra/matrix.cpp
         code/ylikuutio/linear_algebra/matrix.hpp
@@ -684,6 +686,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/googletest/test_callback_system.cpp
         code/ylikuutio/tests/googletest/test_file_loader.cpp
         code/ylikuutio/tests/googletest/test_font_loader.cpp
+        code/ylikuutio/tests/googletest/test_node_struct.cpp
         code/ylikuutio/tests/googletest/test_ontology_structs.cpp
         code/ylikuutio/tests/googletest/test_heightmap_loader.cpp
         code/ylikuutio/tests/googletest/test_line2D.cpp
