@@ -264,6 +264,23 @@ namespace geometry
         }
         else if (is_southeast_northwest_edges_in_use)
         {
+            // Face indices example for a 4x4 image file using southeast-northwest edges.
+            //
+            // +---+---+---+
+            // |\13|\15|\17|
+            // | \ | \ | \ |
+            // |12\|14\|16\|
+            // +---+---+---+
+            // |\ 7|\ 9|\11|
+            // | \ | \ | \ |
+            // |6 \|8 \|10\|
+            // +---+---+---+
+            // |\ 1|\ 3|\ 5|
+            // | \ | \ | \ |
+            // |0 \|2 \|4 \|
+            // +---+---+---+
+            // southeast northwest edges.
+
             uint32_t x;
             uint32_t z;
 
