@@ -598,7 +598,6 @@ add_library(ylikuutio STATIC
     code/ylikuutio/triangulation/indexing.hpp
     code/ylikuutio/triangulation/polygon_triangulation.cpp
     code/ylikuutio/triangulation/polygon_triangulation.hpp
-    code/ylikuutio/triangulation/quad_triangulation.cpp
     code/ylikuutio/triangulation/quad_triangulation.hpp
     code/ylikuutio/triangulation/triangulation_enums.hpp
     code/ylikuutio/triangulation/triangulation_templates.hpp
@@ -681,7 +680,6 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/triangulation/face_normals.hpp
         code/ylikuutio/triangulation/indexing.cpp
         code/ylikuutio/triangulation/indexing.hpp
-        code/ylikuutio/triangulation/quad_triangulation.cpp
         code/ylikuutio/triangulation/quad_triangulation.hpp
         code/ylikuutio/triangulation/triangulation_enums.hpp
         code/ylikuutio/triangulation/vertex_normals.cpp
