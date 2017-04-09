@@ -69,14 +69,14 @@ namespace geometry
                     glm::vec3 face_normal;
 
                     // Compute the normal of SE face.
-                    edge1 = temp_vertices[southeast(current_vertex_i, image_width)] - temp_vertices[northeast(current_vertex_i, image_width)];
-                    edge2 = temp_vertices[southwest(current_vertex_i, image_width)] - temp_vertices[northeast(current_vertex_i, image_width)];
+                    edge1 = temp_vertices[southwest(current_vertex_i, image_width)] - temp_vertices[southeast(current_vertex_i, image_width)];
+                    edge2 = temp_vertices[northeast(current_vertex_i, image_width)] - temp_vertices[southeast(current_vertex_i, image_width)];
                     face_normal = glm::normalize(glm::cross(edge1, edge2));
                     face_normal_vector_vec3.push_back(face_normal);
 
                     // Compute the normal of NW face.
-                    edge1 = temp_vertices[southwest(current_vertex_i, image_width)] - temp_vertices[northeast(current_vertex_i, image_width)];
-                    edge2 = temp_vertices[northwest(current_vertex_i, image_width)] - temp_vertices[northeast(current_vertex_i, image_width)];
+                    edge1 = temp_vertices[northeast(current_vertex_i, image_width)] - temp_vertices[northwest(current_vertex_i, image_width)];
+                    edge2 = temp_vertices[southwest(current_vertex_i, image_width)] - temp_vertices[northwest(current_vertex_i, image_width)];
                     face_normal = glm::normalize(glm::cross(edge1, edge2));
                     face_normal_vector_vec3.push_back(face_normal);
                 }
@@ -87,14 +87,14 @@ namespace geometry
                     glm::vec3 face_normal;
 
                     // Compute the normal of SW face.
-                    edge1 = temp_vertices[southeast(current_vertex_i, image_width)] - temp_vertices[northwest(current_vertex_i, image_width)];
-                    edge2 = temp_vertices[southwest(current_vertex_i, image_width)] - temp_vertices[northwest(current_vertex_i, image_width)];
+                    edge1 = temp_vertices[northwest(current_vertex_i, image_width)] - temp_vertices[southwest(current_vertex_i, image_width)];
+                    edge2 = temp_vertices[southeast(current_vertex_i, image_width)] - temp_vertices[southwest(current_vertex_i, image_width)];
                     face_normal = glm::normalize(glm::cross(edge1, edge2));
                     face_normal_vector_vec3.push_back(face_normal);
 
                     // Compute the normal of NE face.
-                    edge1 = temp_vertices[northeast(current_vertex_i, image_width)] - temp_vertices[northwest(current_vertex_i, image_width)];
-                    edge2 = temp_vertices[southeast(current_vertex_i, image_width)] - temp_vertices[northwest(current_vertex_i, image_width)];
+                    edge1 = temp_vertices[southeast(current_vertex_i, image_width)] - temp_vertices[northeast(current_vertex_i, image_width)];
+                    edge2 = temp_vertices[northwest(current_vertex_i, image_width)] - temp_vertices[northeast(current_vertex_i, image_width)];
                     face_normal = glm::normalize(glm::cross(edge1, edge2));
                     face_normal_vector_vec3.push_back(face_normal);
                 }
