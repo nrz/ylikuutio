@@ -185,4 +185,40 @@ namespace geometry
         return face_normal_data[face_normal_i];
     }
 
+    // for southwest-northeast edges.
+    glm::vec3 get_face_normal_for_SW_NE(
+            std::vector<glm::vec3>& face_normal_data,
+            uint32_t x,
+            uint32_t z,
+            SouthwestNortheastEdgesDirections compass_point_code,
+            uint32_t image_width)
+    {
+        uint32_t face_normal_i;
+
+        switch (compass_point_code)
+        {
+            case SSW_CODE_FOR_SW_NE:
+                face_normal_i = 2 * (z - 1) * (image_width - 1) + 2 * x - 2;
+                break;
+            case ENE_CODE_FOR_SW_NE:
+                face_normal_i = 2 * z * (image_width - 1) + 2 * x;
+                break;
+            case WSW_CODE_FOR_SW_NE:
+                face_normal_i = 2 * (z - 1) * (image_width - 1) + 2 * x - 1;
+                break;
+            case NNE_CODE_FOR_SW_NE:
+                face_normal_i = 2 * z * (image_width - 1) + 2 * x + 1;
+                break;
+            case SE_CODE_FOR_SW_NE:
+                face_normal_i = 2 * (z - 1) * (image_width - 1) + 2 * x + 1;
+                break;
+            case NW_CODE_FOR_SW_NE:
+                face_normal_i = 2 * z * (image_width - 1) + 2 * x - 1;
+                break;
+            default:
+                std::cerr << "invalid compass point code!\n";
+                return glm::vec3(NAN, NAN, NAN);
+        }
+        return face_normal_data[face_normal_i];
+    }
 }

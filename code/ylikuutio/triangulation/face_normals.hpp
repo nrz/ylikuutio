@@ -51,6 +51,14 @@ namespace geometry
             uint32_t z,
             SoutheastNorthwestEdgesDirections compass_point_code,
             uint32_t image_width);
+
+    // for southwest-northeast edges.
+    glm::vec3 get_face_normal_for_SW_NE(
+            std::vector<glm::vec3>& face_normal_data,
+            uint32_t x,
+            uint32_t z,
+            SouthwestNortheastEdgesDirections compass_point_code,
+            uint32_t image_width);
 }
 
 #endif
