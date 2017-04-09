@@ -607,6 +607,85 @@ TEST(a_2x2_world_must_be_triangulated_appropriately, southeast_northwest_edges)
     ASSERT_EQ(vertices[5].z, 1.0f);
     ASSERT_EQ(vertices[5].y, northwest_height);
 }
+TEST(a_2x2_world_must_be_triangulated_appropriately, southwest_northeast_edges)
+{
+    // *---*
+    // |  /|
+    // | / |
+    // |/  |
+    // *---*
+    // southwest northeast edges.
+    uint32_t image_width = 2;
+    uint32_t image_height = 2;
+    uint32_t world_size = image_width * image_height;
+
+    uint32_t* vertex_data;
+    vertex_data = new uint32_t[world_size];
+    ASSERT_NE(vertex_data, nullptr);
+    uint32_t* vertex_pointer = vertex_data;
+    // x, z: height (y).
+    uint32_t southwest_height = 1;
+    uint32_t southeast_height = 2;
+    uint32_t northwest_height = 4;
+    uint32_t northeast_height = 8;
+
+    // 0, 0: 1.
+    *vertex_pointer++ = southwest_height;
+    // 1, 0: 2.
+    *vertex_pointer++ = southeast_height;
+    // 0, 1: 4.
+    *vertex_pointer++ = northwest_height;
+    // 1, 1: 8.
+    *vertex_pointer++ = northeast_height;
+
+    std::vector<glm::vec3> vertices; // vertices of the object.
+    std::vector<glm::vec2> UVs;      // UVs of the object.
+    std::vector<glm::vec3> normals;  // normals of the object.
+
+    TriangulateQuadsStruct triangulate_quads_struct;
+    triangulate_quads_struct.image_width = image_width;
+    triangulate_quads_struct.image_height = image_height;
+    triangulate_quads_struct.sphere_radius = NAN;
+    triangulate_quads_struct.spherical_world_struct = SphericalWorldStruct(); // not used, but is needed in the function call.
+
+    triangulate_quads_struct.triangulation_type = "southwest_northeast_edges";
+
+    bool is_success = geometry::triangulate_quads(vertex_data, triangulate_quads_struct, vertices, UVs, normals);
+    ASSERT_TRUE(is_success);
+    ASSERT_EQ(vertices.size(), 6);
+    ASSERT_EQ(UVs.size(), 6);
+    ASSERT_EQ(normals.size(), 6);
+
+    // 1st vertex is the southeast vertex of the 1st triangle.
+    ASSERT_EQ(vertices[0].x, 1.0f);
+    ASSERT_EQ(vertices[0].z, 0.0f);
+    ASSERT_EQ(vertices[0].y, southeast_height);
+
+    // 2nd vertex is the southwest vertex of the 1st triangle.
+    ASSERT_EQ(vertices[1].x, 0.0f);
+    ASSERT_EQ(vertices[1].z, 0.0f);
+    ASSERT_EQ(vertices[1].y, southwest_height);
+
+    // 3rd vertex is the northeast vertex of the 1st triangle.
+    ASSERT_EQ(vertices[2].x, 1.0f);
+    ASSERT_EQ(vertices[2].z, 1.0f);
+    ASSERT_EQ(vertices[2].y, northeast_height);
+
+    // 4th vertex is the northwest vertex of the 2nd triangle.
+    ASSERT_EQ(vertices[3].x, 0.0f);
+    ASSERT_EQ(vertices[3].z, 1.0f);
+    ASSERT_EQ(vertices[3].y, northwest_height);
+
+    // 5th vertex is the northeast vertex of the 2nd triangle.
+    ASSERT_EQ(vertices[4].x, 1.0f);
+    ASSERT_EQ(vertices[4].z, 1.0f);
+    ASSERT_EQ(vertices[4].y, northeast_height);
+
+    // 6th vertex is the southwest vertex of the 2nd triangle.
+    ASSERT_EQ(vertices[5].x, 0.0f);
+    ASSERT_EQ(vertices[5].z, 0.0f);
+    ASSERT_EQ(vertices[5].y, southwest_height);
+}
 TEST(a_3x3_world_must_be_triangulated_appropriately, southeast_northwest_edges)
 {
     // *---*---*
