@@ -826,8 +826,10 @@ int main(void)
     my_console->set_my_keypress_callback_engine_vector_pointer(&console_keypress_callback_engines);
 
     /*********************************************************************\
-     *  Callback engines for console commands begin here.                 *
-    \*********************************************************************/
+     * Callback engines for console commands begin here.                 *
+     * These define what commands there are available in the console     *
+     * and what each command does.                                       *
+     \********************************************************************/
 
     // Config callbacks.
     command_callback_map["set"] = &config::SettingMaster::set;
