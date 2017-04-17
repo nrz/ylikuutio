@@ -106,13 +106,10 @@ namespace ontology
             {
                 GLfloat ground_y = ontology::get_floor_level(static_cast<ontology::Species*>(this->terrain_species_pointer), position);
 
-                if (!std::isnan(ground_y))
+                if (!std::isnan(ground_y) && position.y < ground_y)
                 {
-                    if (position.y < ground_y)
-                    {
-                        position.y = ground_y;
-                        fallSpeed = 0.0f;
-                    }
+                    position.y = ground_y;
+                    fallSpeed = 0.0f;
                 }
             }
         }
