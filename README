@@ -8,14 +8,11 @@ my other software products which use Ylikuutio 3D engine are not
 necessarily under The GNU General Public License 3 and may have more
 restrictive licenses. All my code copyright (C) 2016-2017 Antti Nuortimo.
 
-The code from http://www.opengl-tutorial.org/ is under
-the license conditions stated on opengl-tutorial website:
-WTF Public License, version 2, December 2004:
-"You just DO WHAT THE FUCK YOU WANT TO. ```"
+The source code from http://www.opengl-tutorial.org/ is licensed
+under WTFPL Public Licence version 2.
 http://www.opengl-tutorial.org/download/
 
-Chibi-Scheme is licensed under the license conditions stated on
-Chibi-Scheme website:
+Chibi-Scheme is licensed under the 3-clause BSD license.
 https://github.com/ashinn/chibi-scheme/blob/master/COPYING
 
 FastNoiseSIMD is licensed under the MIT license.
@@ -30,7 +27,7 @@ GLFW is licensed under the zlib/libpng license.
 http://www.glfw.org/license.html
 
 OpenGL Mathematics (GLM) is licensed under The Happy Bunny License
-and MIT License.
+(Modified MIT License) and MIT License.
 http://glm.g-truc.net/copying.txt
 
 pugixml is licensed under MIT license.
