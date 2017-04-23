@@ -499,6 +499,9 @@ add_library(ylikuutio STATIC
     # hierarchy, in alphabetical order.
     code/ylikuutio/hierarchy/hierarchy_templates.hpp
 
+    # interpolation, in alphabetical order
+    code/ylikuutio/interpolation/bilinear_interpolation2D.hpp
+
     # linear algebra, in alphabetical order.
     code/ylikuutio/linear_algebra/matrix.cpp
     code/ylikuutio/linear_algebra/matrix.hpp
@@ -659,6 +662,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/geometry/transformation.hpp
         code/ylikuutio/graph/node_struct.hpp
         code/ylikuutio/hierarchy/hierarchy_templates.hpp
+        code/ylikuutio/interpolation/bilinear_interpolation2D.hpp
         code/ylikuutio/linear_algebra/matrix.cpp
         code/ylikuutio/linear_algebra/matrix.hpp
         code/ylikuutio/linear_algebra/matrix_functions.cpp
@@ -689,6 +693,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         )
     set(UNIT_TESTS
         code/ylikuutio/tests/googletest/test_any_value.cpp
+        code/ylikuutio/tests/googletest/test_bilinear_interpolation2D.cpp
         code/ylikuutio/tests/googletest/test_callback_system.cpp
         code/ylikuutio/tests/googletest/test_file_loader.cpp
         code/ylikuutio/tests/googletest/test_font_loader.cpp
