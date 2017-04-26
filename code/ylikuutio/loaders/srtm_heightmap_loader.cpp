@@ -34,6 +34,8 @@ namespace loaders
             std::vector<glm::vec3>& out_vertices,
             std::vector<glm::vec2>& out_UVs,
             std::vector<glm::vec3>& out_normals,
+            uint32_t x_step,
+            uint32_t z_step,
             std::string triangulation_type)
     {
         // For SRTM worlds, the right heightmap filename must be resolved first.

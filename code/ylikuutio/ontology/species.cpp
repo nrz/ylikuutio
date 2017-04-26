@@ -81,6 +81,8 @@ namespace ontology
                     this->vertices,
                     this->UVs,
                     this->normals,
+                    this->x_step,
+                    this->z_step,
                     this->triangulation_type);
         }
         else if ((std::strcmp(this->char_model_file_format, "bmp") == 0) || (std::strcmp(this->char_model_file_format, "BMP") == 0))
