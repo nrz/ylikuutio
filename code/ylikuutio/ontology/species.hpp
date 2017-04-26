@@ -83,6 +83,9 @@ namespace ontology
             const char* char_model_file_format;
             const char* char_model_filename;
 
+            uint32_t x_step;
+            uint32_t z_step;
+
             std::string triangulation_type;
 
             uint32_t image_width;
