@@ -33,6 +33,8 @@ namespace loaders
             uint32_t &image_width,
             uint32_t &image_height,
             std::string color_channel,
+            uint32_t x_step,
+            uint32_t z_step,
             std::string triangulation_type)
     {
         std::cout << "Loading BMP file " << image_path << " ...\n";

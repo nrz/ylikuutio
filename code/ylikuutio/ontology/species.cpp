@@ -95,6 +95,8 @@ namespace ontology
                     this->image_width,
                     this->image_height,
                     this->color_channel,
+                    this->x_step,
+                    this->z_step,
                     this->triangulation_type);
         }
         else if (std::strcmp(this->char_model_file_format, "ascii_grid") == 0)

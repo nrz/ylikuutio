@@ -345,7 +345,8 @@ TEST(a_BMP_world_must_be_loaded_appropriately, load_3x3_BMP_world)
     uint32_t image_width = 0;
     uint32_t image_height = 0;
     std::string color_channel = "mean";
-
+    uint32_t x_step = 1;
+    uint32_t z_step = 1;
     std::string triangulation_type = "bilinear_interpolation";
 
     bool model_loading_result = loaders::load_BMP_world(
@@ -356,6 +357,8 @@ TEST(a_BMP_world_must_be_loaded_appropriately, load_3x3_BMP_world)
             *&image_width,
             *&image_height,
             color_channel,
+            x_step,
+            z_step,
             triangulation_type);
 
     const uint32_t n_vertices_for_face = 3;
@@ -396,6 +399,8 @@ TEST(a_BMP_world_must_be_loaded_appropriately, load_256x256_BMP_world)
     uint32_t image_width = 0;
     uint32_t image_height = 0;
     std::string color_channel = "mean";
+    uint32_t x_step = 1;
+    uint32_t z_step = 1;
     std::string triangulation_type = "bilinear_interpolation";
 
     bool model_loading_result = loaders::load_BMP_world(
@@ -406,6 +411,8 @@ TEST(a_BMP_world_must_be_loaded_appropriately, load_256x256_BMP_world)
             *&image_width,
             *&image_height,
             color_channel,
+            x_step,
+            z_step,
             triangulation_type);
 
     const uint32_t n_vertices_for_face = 3;
