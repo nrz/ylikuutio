@@ -18,7 +18,7 @@ namespace ontology
 typedef struct SpeciesStruct
 {
     SpeciesStruct()
-        : parent_pointer(nullptr), is_world(false), world_radius(NAN), divisor(1.0f), triangulation_type("bilinear_interpolation")
+        : parent_pointer(nullptr), is_world(false), world_radius(NAN), divisor(1.0f), x_step(1), z_step(1), triangulation_type("bilinear_interpolation")
     {
         // constructor.
     }
@@ -36,6 +36,8 @@ typedef struct SpeciesStruct
     glm::vec3 light_position;                // light position.
     std::string coordinate_system;           // used only for worlds (`is_world` == `true`). valid values: `"cartesian"`.
                                              // TODO: add support for `"spherical"`. `"spherical"` is used eg. in SRTM heightmaps.
+    uint32_t x_step;
+    uint32_t z_step;
     std::string triangulation_type;
 } SpeciesStruct;
 
