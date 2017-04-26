@@ -268,6 +268,8 @@ int main(void)
         SRTM_terrain_species_struct.color_channel = g_height_data_color_channel;
         SRTM_terrain_species_struct.light_position = glm::vec3(4, 4, 4);
         SRTM_terrain_species_struct.is_world = true;
+        SRTM_terrain_species_struct.x_step = 1;
+        SRTM_terrain_species_struct.z_step = 1;
         SRTM_terrain_species_struct.world_radius = earth_radius;
         SRTM_terrain_species_struct.divisor = 1000.0f;
         terrain_species = new ontology::Species(SRTM_terrain_species_struct);
@@ -295,6 +297,8 @@ int main(void)
         ascii_grid_terrain_species_struct.model_filename = ascii_grid_model_filename;
         ascii_grid_terrain_species_struct.light_position = glm::vec3(4, 4, 4);
         ascii_grid_terrain_species_struct.is_world = true;
+        ascii_grid_terrain_species_struct.x_step = 4;
+        ascii_grid_terrain_species_struct.z_step = 4;
         terrain_species = new ontology::Species(ascii_grid_terrain_species_struct);
 
         is_flight_mode_in_use = true;
