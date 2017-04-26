@@ -153,6 +153,8 @@ namespace loaders
         TriangulateQuadsStruct triangulate_quads_struct;
         triangulate_quads_struct.image_width = image_width;
         triangulate_quads_struct.image_height = image_height_in_use;
+        triangulate_quads_struct.x_step = x_step;
+        triangulate_quads_struct.z_step = z_step;
         triangulate_quads_struct.triangulation_type = triangulation_type;
         triangulate_quads_struct.sphere_radius = NAN;
         triangulate_quads_struct.spherical_world_struct = SphericalWorldStruct(); // not used, but is needed in the function call.
