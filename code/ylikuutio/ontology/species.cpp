@@ -106,6 +106,8 @@ namespace ontology
                     this->vertices,
                     this->UVs,
                     this->normals,
+                    this->x_step,
+                    this->z_step,
                     this->triangulation_type);
         }
         else
