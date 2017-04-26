@@ -142,12 +142,14 @@ typedef struct SphericalWorldStruct
 typedef struct TriangulateQuadsStruct
 {
     TriangulateQuadsStruct()
-        : should_ylikuutio_use_real_texture_coordinates(true)
+        : should_ylikuutio_use_real_texture_coordinates(true), x_step(1), z_step(1)
     {
         // constructor.
     }
     uint32_t image_width;
     uint32_t image_height;
+    uint32_t x_step;
+    uint32_t z_step;
     std::string triangulation_type;
     bool should_ylikuutio_use_real_texture_coordinates;
     double sphere_radius;
