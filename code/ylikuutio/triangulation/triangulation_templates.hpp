@@ -37,32 +37,32 @@ namespace geometry
 
     // for bilinear interpolation.
     template<class T1>
-        float southwest_y(uint32_t x, uint32_t z, T1* input_vertex_pointer, uint32_t image_width)
+        float southwest_y(uint32_t x, uint32_t z, T1* input_vertex_pointer, uint32_t image_width, uint32_t x_step, uint32_t z_step)
         {
             return static_cast<float>(geometry::get_y(input_vertex_pointer, x - 1, z - 1, image_width));
         }
     template<class T1>
-        float southeast_y(uint32_t x, uint32_t z, T1* input_vertex_pointer, uint32_t image_width)
+        float southeast_y(uint32_t x, uint32_t z, T1* input_vertex_pointer, uint32_t image_width, uint32_t x_step, uint32_t z_step)
         {
             return static_cast<float>(geometry::get_y(input_vertex_pointer, x, z - 1, image_width));
         }
     template<class T1>
-        float northwest_y(uint32_t x, uint32_t z, T1* input_vertex_pointer, uint32_t image_width)
+        float northwest_y(uint32_t x, uint32_t z, T1* input_vertex_pointer, uint32_t image_width, uint32_t x_step, uint32_t z_step)
         {
             return static_cast<float>(geometry::get_y(input_vertex_pointer, x - 1, z, image_width));
         }
     template<class T1>
-        float northeast_y(uint32_t x, uint32_t z, T1* input_vertex_pointer, uint32_t image_width)
+        float northeast_y(uint32_t x, uint32_t z, T1* input_vertex_pointer, uint32_t image_width, uint32_t x_step, uint32_t z_step)
         {
             return static_cast<float>(geometry::get_y(input_vertex_pointer, x, z, image_width));
         }
     template<class T1>
         float center_y(uint32_t x, uint32_t z, T1* input_vertex_pointer, uint32_t image_width, uint32_t x_step, uint32_t z_step)
         {
-            return static_cast<float>(southwest_y(x, z, input_vertex_pointer, image_width) +
-                    southeast_y(x, z, input_vertex_pointer, image_width) +
-                    northwest_y(x, z, input_vertex_pointer, image_width) +
-                    northeast_y(x, z, input_vertex_pointer, image_width)) / 4.0f;
+            return static_cast<float>(southwest_y(x, z, input_vertex_pointer, image_width, x_step, z_step) +
+                    southeast_y(x, z, input_vertex_pointer, image_width, x_step, z_step) +
+                    northwest_y(x, z, input_vertex_pointer, image_width, x_step, z_step) +
+                    northeast_y(x, z, input_vertex_pointer, image_width, x_step, z_step)) / 4.0f;
         }
 
     template<class T1>
