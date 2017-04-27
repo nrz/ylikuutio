@@ -57,7 +57,7 @@ namespace geometry
             return static_cast<float>(geometry::get_y(input_vertex_pointer, x, z, image_width));
         }
     template<class T1>
-        float center_y(uint32_t x, uint32_t z, T1* input_vertex_pointer, uint32_t image_width)
+        float center_y(uint32_t x, uint32_t z, T1* input_vertex_pointer, uint32_t image_width, uint32_t x_step, uint32_t z_step)
         {
             return static_cast<float>(southwest_y(x, z, input_vertex_pointer, image_width) +
                     southeast_y(x, z, input_vertex_pointer, image_width) +
@@ -143,7 +143,7 @@ namespace geometry
                     uint32_t current_vertex_i = image_width * z + x;
 
                     // Interpolate y coordinate (altitude).
-                    float y = center_y(x, z, input_vertex_pointer, image_width);
+                    float y = center_y(x, z, input_vertex_pointer, image_width, x_step, z_step);
 
                     // Create a new vertex using bilinear interpolation.
                     // This corresponds to "v": specify one vertex.
