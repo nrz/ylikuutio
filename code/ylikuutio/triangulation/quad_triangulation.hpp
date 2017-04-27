@@ -161,6 +161,8 @@ namespace geometry
                         input_vertex_pointer,
                         image_width,
                         image_height,
+                        x_step,
+                        z_step,
                         triangulate_quads_struct.should_ylikuutio_use_real_texture_coordinates,
                         temp_vertices,
                         temp_UVs);
