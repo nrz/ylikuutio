@@ -209,6 +209,8 @@ namespace geometry
                         face_normal_vector_vec3,
                         image_width,
                         image_height,
+                        x_step,
+                        z_step,
                         is_bilinear_interpolation_in_use,
                         is_southwest_northeast_edges_in_use,
                         is_southeast_northwest_edges_in_use))
