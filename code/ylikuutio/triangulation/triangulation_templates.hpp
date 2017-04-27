@@ -140,8 +140,6 @@ namespace geometry
                     // This corresponds to "f": specify a face (but here we specify 2 faces instead!).
                     // std::cout << "Processing coordinate (" << x << ", " << z << ").\n";
 
-                    uint32_t current_vertex_i = image_width * z + x;
-
                     // Interpolate y coordinate (altitude).
                     float y = center_y(x, z, input_vertex_pointer, image_width, x_step, z_step);
 
