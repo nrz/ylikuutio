@@ -60,7 +60,15 @@ namespace ontology
             // and requests a new `childID` from the new `Species` or from the new `Glyph`.
             void bind_to_new_parent(void* new_parent_pointer);
 
-            // Public callbacks (to be called from AI scripts written in Chibi-Scheme).
+            // Public callbacks (to be called from AI scripts written in
+            // Chibi-Scheme). These are the functions that are available
+            // for AI scripts. Ylikuutio will support scripting of game
+            // agents using Chibi-Scheme. Ylikuutio does not predefine what
+            // kind of games can be done with it. However, the callbacks
+            // Ylikuutio provides mean these is more support for features
+            // needing such callbacks. In particular, Ylikuutio supports
+            // simulations of real-life phenomena.
+            // TODO: implement public AI callbacks!
 
             // Command callbacks.
 
