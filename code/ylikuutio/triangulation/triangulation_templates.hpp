@@ -70,6 +70,8 @@ namespace geometry
                 T1* input_vertex_pointer,
                 uint32_t image_width,
                 uint32_t image_height,
+                uint32_t x_step,
+                uint32_t z_step,
                 bool should_ylikuutio_use_real_texture_coordinates,
                 std::vector<glm::vec3>& temp_vertices,
                 std::vector<glm::vec2>& temp_UVs)

@@ -48,10 +48,15 @@ TEST(vertices_must_be_defined_and_interpolated_appropriately, a_3x3_world)
     std::vector<glm::vec2> temp_UVs;
     std::vector<glm::vec3> temp_normals;
 
+    uint32_t x_step = 1;
+    uint32_t z_step = 1;
+
     geometry::define_vertices(
             input_vertex_data,
             image_width,
             image_height,
+            x_step,
+            z_step,
             should_ylikuutio_use_real_texture_coordinates,
             temp_vertices,
             temp_UVs);

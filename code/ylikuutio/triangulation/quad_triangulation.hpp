@@ -46,6 +46,8 @@ namespace geometry
             // can be `float`, `int32_t` or `uint32_t`.
             uint32_t image_width = triangulate_quads_struct.image_width;
             uint32_t image_height = triangulate_quads_struct.image_height;
+            uint32_t x_step = triangulate_quads_struct.x_step;
+            uint32_t z_step = triangulate_quads_struct.z_step;
             std::string triangulation_type = triangulate_quads_struct.triangulation_type;
             double sphere_radius = triangulate_quads_struct.sphere_radius;
             SphericalWorldStruct spherical_world_struct = triangulate_quads_struct.spherical_world_struct;
@@ -126,6 +128,8 @@ namespace geometry
                     input_vertex_pointer,
                     image_width,
                     image_height,
+                    x_step,
+                    z_step,
                     triangulate_quads_struct.should_ylikuutio_use_real_texture_coordinates,
                     temp_vertices,
                     temp_UVs);
