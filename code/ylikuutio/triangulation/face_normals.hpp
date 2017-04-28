@@ -36,7 +36,7 @@ namespace geometry
             uint32_t x,
             uint32_t z,
             BilinearDirections compass_point_code,
-            uint32_t image_width);
+            uint32_t actual_image_width);
 
     // for bilinear interpolation.
     // These functions exist to avoid need to remember
