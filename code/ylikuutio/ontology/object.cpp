@@ -1,6 +1,7 @@
 #include "object.hpp"
 #include "glyph.hpp"
 #include "species.hpp"
+#include "object_struct.hpp"
 #include "render_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
@@ -40,6 +41,11 @@ namespace ontology
         this->rotate_vector         = object_struct.rotate_vector;
         this->translate_vector      = object_struct.translate_vector;
         this->has_entered           = false;
+
+        // enable rendering of a recently entered Object.
+        // TODO: enable entering without enabling rendering.
+        this->should_ylikuutio_render_this_object = true;
+
         this->is_character          = object_struct.is_character;
 
         if (this->is_character)
@@ -78,19 +84,27 @@ namespace ontology
         }
     }
 
+    void Object::act()
+    {
+        // act according to this game/simulation object's programming.
+    }
+
     void Object::render()
     {
-        ontology::Shader* shader_pointer;
+        if (this->should_ylikuutio_render_this_object)
+        {
+            ontology::Shader* shader_pointer;
 
-        if (this->is_character)
-        {
-            shader_pointer = this->glyph_parent_pointer->parent_pointer->parent_pointer->parent_pointer;
-            ontology::render_this_object<ontology::Glyph*>(this, shader_pointer);
-        }
-        else
-        {
-            shader_pointer = this->species_parent_pointer->parent_pointer->parent_pointer;
-            ontology::render_this_object<ontology::Species*>(this, shader_pointer);
+            if (this->is_character)
+            {
+                shader_pointer = this->glyph_parent_pointer->parent_pointer->parent_pointer->parent_pointer;
+                ontology::render_this_object<ontology::Glyph*>(this, shader_pointer);
+            }
+            else
+            {
+                shader_pointer = this->species_parent_pointer->parent_pointer->parent_pointer;
+                ontology::render_this_object<ontology::Species*>(this, shader_pointer);
+            }
         }
     }
 
@@ -124,4 +138,50 @@ namespace ontology
             this->bind_to_parent();
         }
     }
+
+    // Public callbacks (to be called from AI scripts written in Chibi-Scheme).
+
+    void Object::set_dest(ontology::Object* object, float x, float y, float z)
+    {
+        // Set target towards which to move.
+        object->dest_vector = glm::vec3(x, y, z);
+    }
+
+    float Object::get_x(ontology::Object* object)
+    {
+        // Get x coordinate of `object`.
+        return object->coordinate_vector.x;
+    }
+
+    float Object::get_y(ontology::Object* object)
+    {
+        // Get y coordinate of `object`.
+        return object->coordinate_vector.x;
+    }
+
+    float Object::get_z(ontology::Object* object)
+    {
+        // Get z coordinate of `object`.
+        return object->coordinate_vector.x;
+    }
+
+    float Object::get_dest_x(ontology::Object* object)
+    {
+        // Get x destination coordinate of `object`.
+        return object->dest_vector.x;
+    }
+
+    float Object::get_dest_y(ontology::Object* object)
+    {
+        // Get y destination coordinate of `object`.
+        return object->dest_vector.x;
+    }
+
+    float Object::get_dest_z(ontology::Object* object)
+    {
+        // Get z destination coordinate of `object`.
+        return object->dest_vector.x;
+    }
+
+    // Public callbacks end here.
 }

@@ -1,6 +1,7 @@
 #ifndef __VERTEX_NODE_HPP_INCLUDED
 #define __VERTEX_NODE_HPP_INCLUDED
 
+#include "code/ylikuutio/graph/node_struct.hpp"
 #include "code/ylikuutio/graph/node.hpp"
 
 namespace space_partition

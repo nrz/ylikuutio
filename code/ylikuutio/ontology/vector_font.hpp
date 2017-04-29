@@ -2,6 +2,7 @@
 #define __FONT_HPP_INCLUDED
 
 #include "material.hpp"
+#include "vector_font_struct.hpp"
 #include "render_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/common/globals.hpp"

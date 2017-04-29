@@ -1,3 +1,6 @@
+// The following `#include` lines added by Antti Nuortimo 2016-11-05.
+#include "chibi/sexp.h"
+// `#include` lines added by Antti Nuortimo 2016-11-05 end here.
 
 typedef sexp (*sexp_proc8) (sexp, sexp, sexp_sint_t, sexp, sexp, sexp, sexp, sexp, sexp, sexp);
 typedef sexp (*sexp_proc9) (sexp, sexp, sexp_sint_t, sexp, sexp, sexp, sexp, sexp, sexp, sexp, sexp);

@@ -32,7 +32,7 @@ namespace geometry
             uint32_t x,
             uint32_t z,
             BilinearDirections compass_point_code,
-            uint32_t image_width)
+            uint32_t actual_image_width)
     {
         // Face indices example for a 4x4 image file using bilinear interpolation.
         //
@@ -65,21 +65,21 @@ namespace geometry
         switch (compass_point_code)
         {
             case SSW:
-                return 4 * (z - 1) * (image_width - 1) + (4 * x) - 1;
+                return 4 * (z - 1) * (actual_image_width - 1) + (4 * x) - 1;
             case WSW:
-                return 4 * (z - 1) * (image_width - 1) + (4 * x) - 2;
+                return 4 * (z - 1) * (actual_image_width - 1) + (4 * x) - 2;
             case WNW:
-                return 4 * z * (image_width - 1) + (4 * x) - 4;
+                return 4 * z * (actual_image_width - 1) + (4 * x) - 4;
             case NNW:
-                return 4 * z * (image_width - 1) + (4 * x) - 1;
+                return 4 * z * (actual_image_width - 1) + (4 * x) - 1;
             case NNE:
-                return 4 * z * (image_width - 1) + (4 * x) + 1;
+                return 4 * z * (actual_image_width - 1) + (4 * x) + 1;
             case ENE:
-                return 4 * z * (image_width - 1) + (4 * x);
+                return 4 * z * (actual_image_width - 1) + (4 * x);
             case ESE:
-                return 4 * (z - 1) * (image_width - 1) + (4 * x) + 2;
+                return 4 * (z - 1) * (actual_image_width - 1) + (4 * x) + 2;
             case SSE:
-                return 4 * (z - 1) * (image_width - 1) + (4 * x) + 1;
+                return 4 * (z - 1) * (actual_image_width - 1) + (4 * x) + 1;
             default:
                 return -1;
         }

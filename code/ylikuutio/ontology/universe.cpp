@@ -106,13 +106,10 @@ namespace ontology
             {
                 GLfloat ground_y = ontology::get_floor_level(static_cast<ontology::Species*>(this->terrain_species_pointer), position);
 
-                if (!std::isnan(ground_y))
+                if (!std::isnan(ground_y) && position.y < ground_y)
                 {
-                    if (position.y < ground_y)
-                    {
-                        position.y = ground_y;
-                        fallSpeed = 0.0f;
-                    }
+                    position.y = ground_y;
+                    fallSpeed = 0.0f;
                 }
             }
         }
@@ -132,9 +129,9 @@ namespace ontology
         ProjectionMatrix = glm::perspective(FoV, aspect_ratio, 0.001f, 5000.0f + 2.0f * static_cast<GLfloat>(this->world_radius));
         // Camera matrix
         ViewMatrix = glm::lookAt(
-                camera_position,           // Camera is here
-                camera_position+direction, // and looks here : at the same position, plus "direction"
-                up                         // Head is up (set to 0,-1,0 to look upside-down)
+                camera_position,             // Camera is here
+                camera_position + direction, // and looks here : at the same position, plus "direction"
+                up                           // Head is up (set to 0,-1,0 to look upside-down)
                 );
     }
 }

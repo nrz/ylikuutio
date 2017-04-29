@@ -4,6 +4,7 @@
 #include "model.hpp"
 #include "material.hpp"
 #include "ground_level.hpp"
+#include "species_struct.hpp"
 #include "render_templates.hpp"
 #include "species_or_glyph.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
@@ -81,6 +82,9 @@ namespace ontology
 
             const char* char_model_file_format;
             const char* char_model_filename;
+
+            uint32_t x_step;
+            uint32_t z_step;
 
             std::string triangulation_type;
 

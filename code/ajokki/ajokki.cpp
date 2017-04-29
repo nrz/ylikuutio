@@ -19,12 +19,18 @@
 #include "code/ylikuutio/ontology/vboindexer.hpp"
 #include "code/ylikuutio/ontology/font2D.hpp"
 #include "code/ylikuutio/ontology/object.hpp"
+#include "code/ylikuutio/ontology/object_struct.hpp"
 #include "code/ylikuutio/ontology/species.hpp"
+#include "code/ylikuutio/ontology/species_struct.hpp"
 #include "code/ylikuutio/ontology/glyph.hpp"
 #include "code/ylikuutio/ontology/text3D.hpp"
+#include "code/ylikuutio/ontology/text3D_struct.hpp"
 #include "code/ylikuutio/ontology/vector_font.hpp"
+#include "code/ylikuutio/ontology/vector_font_struct.hpp"
 #include "code/ylikuutio/ontology/material.hpp"
+#include "code/ylikuutio/ontology/material_struct.hpp"
 #include "code/ylikuutio/ontology/shader.hpp"
+#include "code/ylikuutio/ontology/shader_struct.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/config/setting.hpp"
@@ -110,7 +116,7 @@ int main(void)
     SettingStruct world_radius_setting_struct(any_value_float_earth_radius);
     world_radius_setting_struct.name = "world_radius";
     world_radius_setting_struct.setting_master_pointer = my_setting_master;
-    world_radius_setting_struct.activate_callback = &config::SettingMaster::activate_world_radius; // world may be planet or moon.
+    world_radius_setting_struct.activate_callback = &config::SettingMaster::activate_world_radius; // world may be a planet or a moon.
     world_radius_setting_struct.should_ylikuutio_call_activate_callback_now = true;
     config::Setting* my_world_radius = new config::Setting(world_radius_setting_struct);
 
@@ -262,6 +268,8 @@ int main(void)
         SRTM_terrain_species_struct.color_channel = g_height_data_color_channel;
         SRTM_terrain_species_struct.light_position = glm::vec3(4, 4, 4);
         SRTM_terrain_species_struct.is_world = true;
+        SRTM_terrain_species_struct.x_step = 1;
+        SRTM_terrain_species_struct.z_step = 1;
         SRTM_terrain_species_struct.world_radius = earth_radius;
         SRTM_terrain_species_struct.divisor = 1000.0f;
         terrain_species = new ontology::Species(SRTM_terrain_species_struct);
@@ -289,6 +297,8 @@ int main(void)
         ascii_grid_terrain_species_struct.model_filename = ascii_grid_model_filename;
         ascii_grid_terrain_species_struct.light_position = glm::vec3(4, 4, 4);
         ascii_grid_terrain_species_struct.is_world = true;
+        ascii_grid_terrain_species_struct.x_step = 4;
+        ascii_grid_terrain_species_struct.z_step = 4;
         terrain_species = new ontology::Species(ascii_grid_terrain_species_struct);
 
         is_flight_mode_in_use = true;
@@ -820,8 +830,10 @@ int main(void)
     my_console->set_my_keypress_callback_engine_vector_pointer(&console_keypress_callback_engines);
 
     /*********************************************************************\
-     *  Callback engines for console commands begin here.                 *
-    \*********************************************************************/
+     * Callback engines for console commands begin here.                 *
+     * These define what commands there are available in the console     *
+     * and what each command does.                                       *
+     \********************************************************************/
 
     // Config callbacks.
     command_callback_map["set"] = &config::SettingMaster::set;

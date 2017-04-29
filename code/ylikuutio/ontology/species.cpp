@@ -6,6 +6,7 @@
 #include "material.hpp"
 #include "object.hpp"
 #include "species_or_glyph.hpp"
+#include "species_struct.hpp"
 #include "render_templates.hpp"
 #include "code/ylikuutio/loaders/obj_loader.hpp"
 #include "code/ylikuutio/loaders/ascii_grid_loader.hpp"
@@ -43,6 +44,8 @@ namespace ontology
         this->color_channel     = species_struct.color_channel;
         this->light_position    = species_struct.light_position;
         this->parent_pointer    = species_struct.parent_pointer;
+        this->x_step            = species_struct.x_step;
+        this->z_step            = species_struct.z_step;
         this->triangulation_type = species_struct.triangulation_type;
 
         this->char_model_file_format = this->model_file_format.c_str();
@@ -78,6 +81,8 @@ namespace ontology
                     this->vertices,
                     this->UVs,
                     this->normals,
+                    this->x_step,
+                    this->z_step,
                     this->triangulation_type);
         }
         else if ((std::strcmp(this->char_model_file_format, "bmp") == 0) || (std::strcmp(this->char_model_file_format, "BMP") == 0))
@@ -90,6 +95,8 @@ namespace ontology
                     this->image_width,
                     this->image_height,
                     this->color_channel,
+                    this->x_step,
+                    this->z_step,
                     this->triangulation_type);
         }
         else if (std::strcmp(this->char_model_file_format, "ascii_grid") == 0)
@@ -99,6 +106,8 @@ namespace ontology
                     this->vertices,
                     this->UVs,
                     this->normals,
+                    this->x_step,
+                    this->z_step,
                     this->triangulation_type);
         }
         else

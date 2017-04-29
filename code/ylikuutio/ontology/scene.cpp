@@ -22,11 +22,14 @@
 // Include standard headers
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <stdint.h> // uint32_t etc.
+#include <unordered_map> // std::unordered_map
 
 extern GLFWwindow* window; // The "extern" keyword here is to access the variable "window" declared in tutorialXXX.cpp. This is a hack to keep the tutorials simple. Please avoid this.
 
 namespace ontology
 {
+    class Object;
+
     void Scene::bind_to_parent()
     {
         // get `childID` from the `Universe` and set pointer to this `Scene`.
@@ -62,6 +65,12 @@ namespace ontology
     {
         // this method sets pointer to this `Scene` to nullptr, sets `parent_pointer` according to the input, and requests a new `childID` from the new `Universe`.
         hierarchy::bind_child_to_new_parent<ontology::Scene*, ontology::Universe*>(this, new_universe_pointer, this->parent_pointer->scene_pointer_vector, this->parent_pointer->free_sceneID_queue);
+    }
+
+    // this method returns a pointer to an `Object` using the name as key.
+    ontology::Object* Scene::get_object(std::string name)
+    {
+        return this->name_map[name];
     }
 
     void Scene::set_shader_pointer(uint32_t childID, ontology::Shader* child_pointer)

@@ -34,6 +34,8 @@ namespace loaders
             std::vector<glm::vec3>& out_vertices,
             std::vector<glm::vec2>& out_UVs,
             std::vector<glm::vec3>& out_normals,
+            uint32_t x_step,
+            uint32_t z_step,
             std::string triangulation_type)
     {
         // For SRTM worlds, the right heightmap filename must be resolved first.
@@ -178,6 +180,8 @@ namespace loaders
         TriangulateQuadsStruct triangulate_quads_struct;
         triangulate_quads_struct.image_width = image_width_in_use;
         triangulate_quads_struct.image_height = image_height_in_use;
+        triangulate_quads_struct.x_step = x_step;
+        triangulate_quads_struct.z_step = z_step;
         triangulate_quads_struct.triangulation_type = triangulation_type;
         triangulate_quads_struct.sphere_radius = world_radius;
         triangulate_quads_struct.spherical_world_struct = spherical_world_struct;

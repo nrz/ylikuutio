@@ -7,12 +7,14 @@
 // Include standard headers
 #include <queue>    // std::queue
 #include <stdint.h> // uint32_t etc.
+#include <unordered_map> // std::unordered_map
 #include <vector>   // std::vector
 
 namespace ontology
 {
     class Shader;
     class Species;
+    class Object;
 
     class Scene
     {
@@ -25,6 +27,9 @@ namespace ontology
 
             // this method sets pointer to this `Scene` to nullptr, sets `parent_pointer` according to the input, and requests a new `childID` from the new `Universe`.
             void bind_to_new_parent(ontology::Universe* new_universe_pointer);
+
+            // this method returns a pointer to an `Object` using the name as key.
+            ontology::Object* get_object(std::string);
 
             friend class Shader;
             friend class Species;
@@ -50,6 +55,9 @@ namespace ontology
 
             std::vector<ontology::Shader*> shader_pointer_vector;
             std::queue<uint32_t> free_shaderID_queue;
+
+            // For finding any `Object`s of this `Scene` by using its name.
+            std::unordered_map<std::string, ontology::Object*> name_map;
     };
 }
 

@@ -2,6 +2,11 @@
 cmake_minimum_required(VERSION 2.6.2)
 project(ylikuutio)
 
+# http://stackoverflow.com/questions/11783932/how-to-add-linker-or-compile-flag-in-cmake-file/11797272#11797272
+# SET(GCC_COVERAGE_LINK_FLAGS "-ldl")
+# SET(CMAKE_C_FLAGS  "${CMAKE_C_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS}")
+# SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS}")
+
 # uncomment the following line to cross-compile for Windows under Linux using mingw64.
 # set(CROSS_COMPILE_FOR_WINDOWS true)
 
@@ -489,9 +494,13 @@ add_library(ylikuutio STATIC
     code/ylikuutio/graph/graph.hpp
     code/ylikuutio/graph/node.cpp
     code/ylikuutio/graph/node.hpp
+    code/ylikuutio/graph/node_struct.hpp
 
     # hierarchy, in alphabetical order.
     code/ylikuutio/hierarchy/hierarchy_templates.hpp
+
+    # interpolation, in alphabetical order
+    code/ylikuutio/interpolation/bilinear_interpolation2D.hpp
 
     # linear algebra, in alphabetical order.
     code/ylikuutio/linear_algebra/matrix.cpp
@@ -527,28 +536,35 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/font2D.hpp
     code/ylikuutio/ontology/glyph.cpp
     code/ylikuutio/ontology/glyph.hpp
+    code/ylikuutio/ontology/glyph_struct.hpp
     code/ylikuutio/ontology/ground_level.cpp
     code/ylikuutio/ontology/ground_level.hpp
     code/ylikuutio/ontology/material.cpp
     code/ylikuutio/ontology/material.hpp
+    code/ylikuutio/ontology/material_struct.hpp
     code/ylikuutio/ontology/model.cpp
     code/ylikuutio/ontology/model.hpp
     code/ylikuutio/ontology/object.cpp
     code/ylikuutio/ontology/object.hpp
+    code/ylikuutio/ontology/object_struct.hpp
     code/ylikuutio/ontology/render_templates.hpp
     code/ylikuutio/ontology/scene.cpp
     code/ylikuutio/ontology/scene.hpp
     code/ylikuutio/ontology/shader.cpp
     code/ylikuutio/ontology/shader.hpp
+    code/ylikuutio/ontology/shader_struct.hpp
     code/ylikuutio/ontology/species.cpp
     code/ylikuutio/ontology/species.hpp
     code/ylikuutio/ontology/species_or_glyph.hpp
+    code/ylikuutio/ontology/species_struct.hpp
     code/ylikuutio/ontology/text3D.hpp
     code/ylikuutio/ontology/text3D.cpp
+    code/ylikuutio/ontology/text3D_struct.hpp
     code/ylikuutio/ontology/universe.cpp
     code/ylikuutio/ontology/universe.hpp
     code/ylikuutio/ontology/vector_font.cpp
     code/ylikuutio/ontology/vector_font.hpp
+    code/ylikuutio/ontology/vector_font_struct.hpp
     code/ylikuutio/ontology/vboindexer.cpp
     code/ylikuutio/ontology/vboindexer.hpp
 
@@ -585,10 +601,13 @@ add_library(ylikuutio STATIC
     code/ylikuutio/triangulation/indexing.hpp
     code/ylikuutio/triangulation/polygon_triangulation.cpp
     code/ylikuutio/triangulation/polygon_triangulation.hpp
-    code/ylikuutio/triangulation/quad_triangulation.cpp
     code/ylikuutio/triangulation/quad_triangulation.hpp
     code/ylikuutio/triangulation/triangulation_enums.hpp
     code/ylikuutio/triangulation/triangulation_templates.hpp
+    code/ylikuutio/triangulation/vertex_normals.cpp
+    code/ylikuutio/triangulation/vertex_normals.hpp
+    code/ylikuutio/triangulation/vertices.cpp
+    code/ylikuutio/triangulation/vertices.hpp
     )
 # add_dependencies(ylikuutio rescan)
 
@@ -603,6 +622,11 @@ add_executable(ajokki
     )
 add_dependencies(ajokki rescan)
 target_link_libraries(ajokki ylikuutio ${ALL_LIBS} glfw)
+
+# Chibi-test
+add_executable(chibitest code/chibi-scheme/chibi_test.cpp
+    )
+target_link_libraries(chibitest chibischeme "-ldl")
 
 # Xcode and Visual working directories
 set_target_properties(ajokki PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/code/ajokki/")
@@ -636,7 +660,9 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/geometry/line_segment_line_segment_intersection.hpp
         code/ylikuutio/geometry/transformation.cpp
         code/ylikuutio/geometry/transformation.hpp
+        code/ylikuutio/graph/node_struct.hpp
         code/ylikuutio/hierarchy/hierarchy_templates.hpp
+        code/ylikuutio/interpolation/bilinear_interpolation2D.hpp
         code/ylikuutio/linear_algebra/matrix.cpp
         code/ylikuutio/linear_algebra/matrix.hpp
         code/ylikuutio/linear_algebra/matrix_functions.cpp
@@ -645,22 +671,39 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/linear_algebra/tensor3.hpp
         code/ylikuutio/loaders/font_loader.cpp
         code/ylikuutio/loaders/font_loader.hpp
+        code/ylikuutio/ontology/glyph_struct.hpp
+        code/ylikuutio/ontology/material_struct.hpp
+        code/ylikuutio/ontology/object_struct.hpp
+        code/ylikuutio/ontology/shader_struct.hpp
+        code/ylikuutio/ontology/species_struct.hpp
+        code/ylikuutio/ontology/text3D_struct.hpp
+        code/ylikuutio/ontology/vector_font_struct.hpp
         code/ylikuutio/string/ylikuutio_string.cpp
         code/ylikuutio/string/ylikuutio_string.hpp
         code/ylikuutio/triangulation/face_normals.cpp
         code/ylikuutio/triangulation/face_normals.hpp
         code/ylikuutio/triangulation/indexing.cpp
         code/ylikuutio/triangulation/indexing.hpp
-        code/ylikuutio/triangulation/quad_triangulation.cpp
         code/ylikuutio/triangulation/quad_triangulation.hpp
         code/ylikuutio/triangulation/triangulation_enums.hpp
+        code/ylikuutio/triangulation/vertex_normals.cpp
+        code/ylikuutio/triangulation/vertex_normals.hpp
+        code/ylikuutio/triangulation/vertices.cpp
+        code/ylikuutio/triangulation/vertices.hpp
         )
     set(UNIT_TESTS
         code/ylikuutio/tests/googletest/test_any_value.cpp
+        code/ylikuutio/tests/googletest/test_bilinear_interpolation2D.cpp
         code/ylikuutio/tests/googletest/test_callback_system.cpp
         code/ylikuutio/tests/googletest/test_file_loader.cpp
         code/ylikuutio/tests/googletest/test_font_loader.cpp
-        code/ylikuutio/tests/googletest/test_globals.cpp
+        code/ylikuutio/tests/googletest/test_node_struct.cpp
+        code/ylikuutio/tests/googletest/test_shader_struct.cpp
+        code/ylikuutio/tests/googletest/test_material_struct.cpp
+        code/ylikuutio/tests/googletest/test_species_struct.cpp
+        code/ylikuutio/tests/googletest/test_vector_font_struct.cpp
+        code/ylikuutio/tests/googletest/test_glyph_struct.cpp
+        code/ylikuutio/tests/googletest/test_object_struct.cpp
         code/ylikuutio/tests/googletest/test_heightmap_loader.cpp
         code/ylikuutio/tests/googletest/test_line2D.cpp
         code/ylikuutio/tests/googletest/test_line_line_intersection.cpp
