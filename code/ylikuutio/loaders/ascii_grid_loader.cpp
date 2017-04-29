@@ -112,7 +112,8 @@ namespace loaders
         while (!string::check_and_report_if_some_string_matches(point_data, ++point_data_pointer, number_strings_vector));
         float nodata_value = string::extract_float_value_from_string(--point_data_pointer, (char*) " \n", (const char*) "nodata_value");
 
-        uint32_t image_height_in_use = 2000;
+        // note: the value of `image_height_in_use` can be adjusted here (for testing purposes).
+        uint32_t image_height_in_use = image_height;
 
         float* vertex_data;
         vertex_data = new float[image_width * image_height_in_use];
