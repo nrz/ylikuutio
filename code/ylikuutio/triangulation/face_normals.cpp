@@ -19,8 +19,6 @@ namespace geometry
             std::vector<glm::vec3>& face_normal_vector_vec3,
             uint32_t actual_image_width,
             uint32_t actual_image_height,
-            uint32_t x_step,
-            uint32_t z_step,
             bool is_bilinear_interpolation_in_use,
             bool is_southwest_northeast_edges_in_use,
             bool is_southeast_northwest_edges_in_use)

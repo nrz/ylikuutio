@@ -39,17 +39,17 @@ namespace geometry
     template<class T1>
         float southwest_y(uint32_t x, uint32_t z, T1* input_vertex_pointer, uint32_t image_width, uint32_t x_step, uint32_t z_step)
         {
-            return static_cast<float>(geometry::get_y(input_vertex_pointer, x - 1, z - 1, image_width));
+            return static_cast<float>(geometry::get_y(input_vertex_pointer, x - x_step, z - z_step, image_width));
         }
     template<class T1>
         float southeast_y(uint32_t x, uint32_t z, T1* input_vertex_pointer, uint32_t image_width, uint32_t x_step, uint32_t z_step)
         {
-            return static_cast<float>(geometry::get_y(input_vertex_pointer, x, z - 1, image_width));
+            return static_cast<float>(geometry::get_y(input_vertex_pointer, x, z - z_step, image_width));
         }
     template<class T1>
         float northwest_y(uint32_t x, uint32_t z, T1* input_vertex_pointer, uint32_t image_width, uint32_t x_step, uint32_t z_step)
         {
-            return static_cast<float>(geometry::get_y(input_vertex_pointer, x - 1, z, image_width));
+            return static_cast<float>(geometry::get_y(input_vertex_pointer, x - x_step, z, image_width));
         }
     template<class T1>
         float northeast_y(uint32_t x, uint32_t z, T1* input_vertex_pointer, uint32_t image_width, uint32_t x_step, uint32_t z_step)
@@ -79,11 +79,11 @@ namespace geometry
             // Define the temporary vertices in a double loop.
             uint32_t texture_y = 0;
 
-            for (uint32_t z = 0; z < image_height; z++)
+            for (uint32_t z = 0; z < image_height; z += z_step)
             {
                 uint32_t texture_x = 0;
 
-                for (uint32_t x = 0; x < image_width; x++)
+                for (uint32_t x = 0; x < image_width; x += x_step)
                 {
                     // current x,z coordinates).
                     float y = static_cast<float>(geometry::get_y(input_vertex_pointer, x, z, image_width));
@@ -131,11 +131,11 @@ namespace geometry
             std::cout << "interpolating center vertices.\n";
 
             // Then, define the faces in a double loop.
-            // Begin from index 1.
-            for (uint32_t z = 1; z < image_height; z++)
+            // Begin from index `z_step`.
+            for (uint32_t z = z_step; z < image_height; z += z_step)
             {
-                // Begin from index 1.
-                for (uint32_t x = 1; x < image_width; x++)
+                // Begin from index `x_step`.
+                for (uint32_t x = x_step; x < image_width; x += x_step)
                 {
                     // This corresponds to "f": specify a face (but here we specify 2 faces instead!).
                     // std::cout << "Processing coordinate (" << x << ", " << z << ").\n";

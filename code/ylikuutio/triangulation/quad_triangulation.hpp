@@ -48,6 +48,8 @@ namespace geometry
             uint32_t image_height = triangulate_quads_struct.image_height;
             uint32_t x_step = triangulate_quads_struct.x_step;
             uint32_t z_step = triangulate_quads_struct.z_step;
+            uint32_t actual_image_width = (image_width - 1) / x_step + 1;
+            uint32_t actual_image_height = (image_height - 1) / z_step + 1;
             std::string triangulation_type = triangulate_quads_struct.triangulation_type;
             double sphere_radius = triangulate_quads_struct.sphere_radius;
             SphericalWorldStruct spherical_world_struct = triangulate_quads_struct.spherical_world_struct;
@@ -146,11 +148,14 @@ namespace geometry
                 n_faces_for_each_vertex = 2;
             }
 
-            n_faces = n_faces_for_each_vertex * (image_width - 1) * (image_height - 1);
-
             std::cout << "image width: " << image_width << " pixels.\n";
             std::cout << "image height: " << image_height << " pixels.\n";
+
+            std::cout << "actual image width: " << image_width << " pixels.\n";
+            std::cout << "actual image height: " << image_height << " pixels.\n";
             std::cout << "number of faces: " << n_faces << ".\n";
+
+            n_faces = n_faces_for_each_vertex * (actual_image_width - 1) * (actual_image_height - 1);
 
             uint32_t vertexIndex[3], uvIndex[3], normalIndex[3];
 
@@ -207,10 +212,8 @@ namespace geometry
             if (!compute_face_normals(
                         temp_vertices,
                         face_normal_vector_vec3,
-                        image_width,
-                        image_height,
-                        x_step,
-                        z_step,
+                        actual_image_width,
+                        actual_image_height,
                         is_bilinear_interpolation_in_use,
                         is_southwest_northeast_edges_in_use,
                         is_southeast_northwest_edges_in_use))
@@ -222,8 +225,8 @@ namespace geometry
             compute_vertex_normals(
                         temp_normals,
                         face_normal_vector_vec3,
-                        image_width,
-                        image_height,
+                        actual_image_width,
+                        actual_image_height,
                         is_bilinear_interpolation_in_use,
                         is_southwest_northeast_edges_in_use,
                         is_southeast_northwest_edges_in_use);
@@ -241,8 +244,8 @@ namespace geometry
                     out_vertices,
                     out_UVs,
                     out_normals,
-                    image_width,
-                    image_height,
+                    actual_image_width,
+                    actual_image_height,
                     is_bilinear_interpolation_in_use,
                     is_southwest_northeast_edges_in_use,
                     is_southeast_northwest_edges_in_use);

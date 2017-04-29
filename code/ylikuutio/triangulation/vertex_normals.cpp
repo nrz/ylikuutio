@@ -17,8 +17,8 @@ namespace geometry
     void compute_vertex_normals(
             std::vector<glm::vec3>& temp_normals,
             std::vector<glm::vec3>& face_normal_vector_vec3,
-            uint32_t image_width,
-            uint32_t image_height,
+            uint32_t actual_image_width,
+            uint32_t actual_image_height,
             bool is_bilinear_interpolation_in_use,
             bool is_southwest_northeast_edges_in_use,
             bool is_southeast_northwest_edges_in_use)
@@ -28,7 +28,7 @@ namespace geometry
 
             if (is_bilinear_interpolation_in_use)
             {
-                uint32_t current_interpolated_vertex_i = image_width * image_height;
+                uint32_t current_interpolated_vertex_i = actual_image_width * actual_image_height;
                 uint32_t x = 0;
                 uint32_t z = 0;
 
@@ -37,71 +37,71 @@ namespace geometry
                 glm::vec3 vertex_normal;
 
                 vertex_normal = glm::normalize(
-                        get_face_normal(face_normal_vector_vec3, x, z, NNE, image_width) +
-                        get_face_normal(face_normal_vector_vec3, x, z, ENE, image_width));
+                        get_face_normal(face_normal_vector_vec3, x, z, NNE, actual_image_width) +
+                        get_face_normal(face_normal_vector_vec3, x, z, ENE, actual_image_width));
                 temp_normals.push_back(vertex_normal);
 
                 // Compute the normals of southern vertices.
-                for (x = 1; x < image_width - 1; x++)
+                for (x = 1; x < actual_image_width - 1; x++)
                 {
                     // Compute the normal of a southern vertex.
                     // Number of adjacent faces: 4.
                     vertex_normal = glm::normalize(
-                            get_face_normal(face_normal_vector_vec3, x, z, WNW, image_width) +
-                            get_face_normal(face_normal_vector_vec3, x, z, NNW, image_width) +
-                            get_face_normal(face_normal_vector_vec3, x, z, NNE, image_width) +
-                            get_face_normal(face_normal_vector_vec3, x, z, ENE, image_width));
+                            get_face_normal(face_normal_vector_vec3, x, z, WNW, actual_image_width) +
+                            get_face_normal(face_normal_vector_vec3, x, z, NNW, actual_image_width) +
+                            get_face_normal(face_normal_vector_vec3, x, z, NNE, actual_image_width) +
+                            get_face_normal(face_normal_vector_vec3, x, z, ENE, actual_image_width));
                     temp_normals.push_back(vertex_normal);
                 }
 
                 // Compute the normal of the southeasternmost vertex.
                 // Number of adjacent faces: 2.
-                x = image_width - 1;
+                x = actual_image_width - 1;
                 vertex_normal = glm::normalize(
-                        get_face_normal(face_normal_vector_vec3, x, z, WNW, image_width) +
-                        get_face_normal(face_normal_vector_vec3, x, z, NNW, image_width));
+                        get_face_normal(face_normal_vector_vec3, x, z, WNW, actual_image_width) +
+                        get_face_normal(face_normal_vector_vec3, x, z, NNW, actual_image_width));
                 temp_normals.push_back(vertex_normal);
 
                 // Then, define most normals in a double loop.
-                for (z = 1; z < image_height - 1; z++)
+                for (z = 1; z < actual_image_height - 1; z++)
                 {
                     // Compute the normal of a western vertex.
                     // Number of adjacent faces: 4.
                     x = 0;
                     vertex_normal = glm::normalize(
-                            get_face_normal(face_normal_vector_vec3, x, z, NNE, image_width) +
-                            get_face_normal(face_normal_vector_vec3, x, z, ENE, image_width) +
-                            get_face_normal(face_normal_vector_vec3, x, z, ESE, image_width) +
-                            get_face_normal(face_normal_vector_vec3, x, z, SSE, image_width));
+                            get_face_normal(face_normal_vector_vec3, x, z, NNE, actual_image_width) +
+                            get_face_normal(face_normal_vector_vec3, x, z, ENE, actual_image_width) +
+                            get_face_normal(face_normal_vector_vec3, x, z, ESE, actual_image_width) +
+                            get_face_normal(face_normal_vector_vec3, x, z, SSE, actual_image_width));
                     temp_normals.push_back(vertex_normal);
 
-                    for (x = 1; x < image_width - 1; x++)
+                    for (x = 1; x < actual_image_width - 1; x++)
                     {
-                        uint32_t current_vertex_i = image_width * z + x;
+                        uint32_t current_vertex_i = actual_image_width * z + x;
 
                         // Compute the normal of a central vertex.
                         // Number of adjacent faces: 8.
                         vertex_normal = glm::normalize(
-                                get_face_normal(face_normal_vector_vec3, x, z, SSW, image_width) +
-                                get_face_normal(face_normal_vector_vec3, x, z, WSW, image_width) +
-                                get_face_normal(face_normal_vector_vec3, x, z, WNW, image_width) +
-                                get_face_normal(face_normal_vector_vec3, x, z, NNW, image_width) +
-                                get_face_normal(face_normal_vector_vec3, x, z, NNE, image_width) +
-                                get_face_normal(face_normal_vector_vec3, x, z, ENE, image_width) +
-                                get_face_normal(face_normal_vector_vec3, x, z, ESE, image_width) +
-                                get_face_normal(face_normal_vector_vec3, x, z, SSE, image_width));
+                                get_face_normal(face_normal_vector_vec3, x, z, SSW, actual_image_width) +
+                                get_face_normal(face_normal_vector_vec3, x, z, WSW, actual_image_width) +
+                                get_face_normal(face_normal_vector_vec3, x, z, WNW, actual_image_width) +
+                                get_face_normal(face_normal_vector_vec3, x, z, NNW, actual_image_width) +
+                                get_face_normal(face_normal_vector_vec3, x, z, NNE, actual_image_width) +
+                                get_face_normal(face_normal_vector_vec3, x, z, ENE, actual_image_width) +
+                                get_face_normal(face_normal_vector_vec3, x, z, ESE, actual_image_width) +
+                                get_face_normal(face_normal_vector_vec3, x, z, SSE, actual_image_width));
                         temp_normals.push_back(vertex_normal);
                     }
 
-                    x = image_width - 1;
+                    x = actual_image_width - 1;
 
                     // Compute the normal of an eastern vertex.
                     // Number of adjacent faces: 4.
                     vertex_normal = glm::normalize(
-                            get_face_normal(face_normal_vector_vec3, x, z, SSW, image_width) +
-                            get_face_normal(face_normal_vector_vec3, x, z, WSW, image_width) +
-                            get_face_normal(face_normal_vector_vec3, x, z, WNW, image_width) +
-                            get_face_normal(face_normal_vector_vec3, x, z, NNW, image_width));
+                            get_face_normal(face_normal_vector_vec3, x, z, SSW, actual_image_width) +
+                            get_face_normal(face_normal_vector_vec3, x, z, WSW, actual_image_width) +
+                            get_face_normal(face_normal_vector_vec3, x, z, WNW, actual_image_width) +
+                            get_face_normal(face_normal_vector_vec3, x, z, NNW, actual_image_width));
                     temp_normals.push_back(vertex_normal);
                 }
 
@@ -109,44 +109,44 @@ namespace geometry
                 // Number of adjacent faces: 2.
                 x = 0;
                 vertex_normal = glm::normalize(
-                        get_face_normal(face_normal_vector_vec3, x, z, SSE, image_width) +
-                        get_face_normal(face_normal_vector_vec3, x, z, ESE, image_width));
+                        get_face_normal(face_normal_vector_vec3, x, z, SSE, actual_image_width) +
+                        get_face_normal(face_normal_vector_vec3, x, z, ESE, actual_image_width));
                 temp_normals.push_back(vertex_normal);
 
                 // Compute the normals of northern vertices.
-                for (x = 1; x < image_width - 1; x++)
+                for (x = 1; x < actual_image_width - 1; x++)
                 {
                     // Compute the normal of a northern vertex.
                     // Number of adjacent faces: 4.
                     vertex_normal = glm::normalize(
-                            get_face_normal(face_normal_vector_vec3, x, z, SSW, image_width) +
-                            get_face_normal(face_normal_vector_vec3, x, z, WSW, image_width) +
-                            get_face_normal(face_normal_vector_vec3, x, z, ESE, image_width) +
-                            get_face_normal(face_normal_vector_vec3, x, z, SSE, image_width));
+                            get_face_normal(face_normal_vector_vec3, x, z, SSW, actual_image_width) +
+                            get_face_normal(face_normal_vector_vec3, x, z, WSW, actual_image_width) +
+                            get_face_normal(face_normal_vector_vec3, x, z, ESE, actual_image_width) +
+                            get_face_normal(face_normal_vector_vec3, x, z, SSE, actual_image_width));
                     temp_normals.push_back(vertex_normal);
                 }
 
                 // Compute the normal of the northeasternmost vertex.
                 // Number of adjacent faces: 2.
-                x = image_width - 1;
+                x = actual_image_width - 1;
                 vertex_normal = glm::normalize(
-                        get_face_normal(face_normal_vector_vec3, x, z, SSW, image_width) +
-                        get_face_normal(face_normal_vector_vec3, x, z, WSW, image_width));
+                        get_face_normal(face_normal_vector_vec3, x, z, SSW, actual_image_width) +
+                        get_face_normal(face_normal_vector_vec3, x, z, WSW, actual_image_width));
                 temp_normals.push_back(vertex_normal);
 
                 // 6. Compute the vertices between, `push_back` to `temp_normals`.
                 // Number of adjacent faces: 4.
                 // std::cout << "computing vertex normals for interpolated vertices.\n";
 
-                for (z = 1; z < image_height; z++)
+                for (z = 1; z < actual_image_height; z++)
                 {
-                    for (x = 1; x < image_width; x++)
+                    for (x = 1; x < actual_image_width; x++)
                     {
                         vertex_normal = glm::normalize(
-                                s_face_normal(face_normal_vector_vec3, x, z, image_width) +
-                                w_face_normal(face_normal_vector_vec3, x, z, image_width) +
-                                n_face_normal(face_normal_vector_vec3, x, z, image_width) +
-                                e_face_normal(face_normal_vector_vec3, x, z, image_width));
+                                s_face_normal(face_normal_vector_vec3, x, z, actual_image_width) +
+                                w_face_normal(face_normal_vector_vec3, x, z, actual_image_width) +
+                                n_face_normal(face_normal_vector_vec3, x, z, actual_image_width) +
+                                e_face_normal(face_normal_vector_vec3, x, z, actual_image_width));
                         temp_normals.push_back(vertex_normal);
                     }
                 }
@@ -161,91 +161,91 @@ namespace geometry
                 glm::vec3 vertex_normal;
 
                 vertex_normal = glm::normalize(
-                        get_face_normal_for_SW_NE(face_normal_vector_vec3, x, z, ENE_CODE_FOR_SW_NE, image_width) +
-                        get_face_normal_for_SW_NE(face_normal_vector_vec3, x, z, NNE_CODE_FOR_SW_NE, image_width));
+                        get_face_normal_for_SW_NE(face_normal_vector_vec3, x, z, ENE_CODE_FOR_SW_NE, actual_image_width) +
+                        get_face_normal_for_SW_NE(face_normal_vector_vec3, x, z, NNE_CODE_FOR_SW_NE, actual_image_width));
                 temp_normals.push_back(vertex_normal);
 
                 // Compute the normals of southern vertices.
-                for (x = 1; x < image_width - 1; x++)
+                for (x = 1; x < actual_image_width - 1; x++)
                 {
                     // Compute the normal of a southern vertex.
                     // Number of adjacent faces: 3.
                     vertex_normal = glm::normalize(
-                            get_face_normal_for_SW_NE(face_normal_vector_vec3, x, z, ENE_CODE_FOR_SW_NE, image_width) +
-                            get_face_normal_for_SW_NE(face_normal_vector_vec3, x, z, NNE_CODE_FOR_SW_NE, image_width) +
-                            get_face_normal_for_SW_NE(face_normal_vector_vec3, x, z, NW_CODE_FOR_SW_NE, image_width));
+                            get_face_normal_for_SW_NE(face_normal_vector_vec3, x, z, ENE_CODE_FOR_SW_NE, actual_image_width) +
+                            get_face_normal_for_SW_NE(face_normal_vector_vec3, x, z, NNE_CODE_FOR_SW_NE, actual_image_width) +
+                            get_face_normal_for_SW_NE(face_normal_vector_vec3, x, z, NW_CODE_FOR_SW_NE, actual_image_width));
                     temp_normals.push_back(vertex_normal);
                 }
 
                 // Compute the normal of the southeasternmost vertex.
                 // Number of adjacent faces: 1.
-                x = image_width - 1;
-                vertex_normal = get_face_normal_for_SW_NE(face_normal_vector_vec3, x, z, NW_CODE_FOR_SW_NE, image_width);
+                x = actual_image_width - 1;
+                vertex_normal = get_face_normal_for_SW_NE(face_normal_vector_vec3, x, z, NW_CODE_FOR_SW_NE, actual_image_width);
                 temp_normals.push_back(vertex_normal);
 
                 // Then, define most normals in a double loop.
-                for (z = 1; z < image_height - 1; z++)
+                for (z = 1; z < actual_image_height - 1; z++)
                 {
                     // Compute the normal of a western vertex.
                     // Number of adjacent faces: 3.
                     x = 0;
                     vertex_normal = glm::normalize(
-                            get_face_normal_for_SW_NE(face_normal_vector_vec3, x, z, SE_CODE_FOR_SW_NE, image_width) +
-                            get_face_normal_for_SW_NE(face_normal_vector_vec3, x, z, ENE_CODE_FOR_SW_NE, image_width) +
-                            get_face_normal_for_SW_NE(face_normal_vector_vec3, x, z, NNE_CODE_FOR_SW_NE, image_width));
+                            get_face_normal_for_SW_NE(face_normal_vector_vec3, x, z, SE_CODE_FOR_SW_NE, actual_image_width) +
+                            get_face_normal_for_SW_NE(face_normal_vector_vec3, x, z, ENE_CODE_FOR_SW_NE, actual_image_width) +
+                            get_face_normal_for_SW_NE(face_normal_vector_vec3, x, z, NNE_CODE_FOR_SW_NE, actual_image_width));
                     temp_normals.push_back(vertex_normal);
 
-                    for (x = 1; x < image_width - 1; x++)
+                    for (x = 1; x < actual_image_width - 1; x++)
                     {
-                        uint32_t current_vertex_i = image_width * z + x;
+                        uint32_t current_vertex_i = actual_image_width * z + x;
 
                         // Compute the normal of a central vertex.
                         // Number of adjacent faces: 6.
                         vertex_normal = glm::normalize(
-                                get_face_normal_for_SW_NE(face_normal_vector_vec3, x, z, SE_CODE_FOR_SW_NE, image_width) +
-                                get_face_normal_for_SW_NE(face_normal_vector_vec3, x, z, SSW_CODE_FOR_SW_NE, image_width) +
-                                get_face_normal_for_SW_NE(face_normal_vector_vec3, x, z, WSW_CODE_FOR_SW_NE, image_width) +
-                                get_face_normal_for_SW_NE(face_normal_vector_vec3, x, z, NW_CODE_FOR_SW_NE, image_width) +
-                                get_face_normal_for_SW_NE(face_normal_vector_vec3, x, z, NNE_CODE_FOR_SW_NE, image_width) +
-                                get_face_normal_for_SW_NE(face_normal_vector_vec3, x, z, ENE_CODE_FOR_SW_NE, image_width));
+                                get_face_normal_for_SW_NE(face_normal_vector_vec3, x, z, SE_CODE_FOR_SW_NE, actual_image_width) +
+                                get_face_normal_for_SW_NE(face_normal_vector_vec3, x, z, SSW_CODE_FOR_SW_NE, actual_image_width) +
+                                get_face_normal_for_SW_NE(face_normal_vector_vec3, x, z, WSW_CODE_FOR_SW_NE, actual_image_width) +
+                                get_face_normal_for_SW_NE(face_normal_vector_vec3, x, z, NW_CODE_FOR_SW_NE, actual_image_width) +
+                                get_face_normal_for_SW_NE(face_normal_vector_vec3, x, z, NNE_CODE_FOR_SW_NE, actual_image_width) +
+                                get_face_normal_for_SW_NE(face_normal_vector_vec3, x, z, ENE_CODE_FOR_SW_NE, actual_image_width));
                         temp_normals.push_back(vertex_normal);
                     }
 
-                    x = image_width - 1;
+                    x = actual_image_width - 1;
 
                     // Compute the normal of an eastern vertex.
                     // Number of adjacent faces: 3.
                     vertex_normal = glm::normalize(
-                            get_face_normal_for_SW_NE(face_normal_vector_vec3, x, z, SSW_CODE_FOR_SW_NE, image_width) +
-                            get_face_normal_for_SW_NE(face_normal_vector_vec3, x, z, WSW_CODE_FOR_SW_NE, image_width) +
-                            get_face_normal_for_SW_NE(face_normal_vector_vec3, x, z, NW_CODE_FOR_SW_NE, image_width));
+                            get_face_normal_for_SW_NE(face_normal_vector_vec3, x, z, SSW_CODE_FOR_SW_NE, actual_image_width) +
+                            get_face_normal_for_SW_NE(face_normal_vector_vec3, x, z, WSW_CODE_FOR_SW_NE, actual_image_width) +
+                            get_face_normal_for_SW_NE(face_normal_vector_vec3, x, z, NW_CODE_FOR_SW_NE, actual_image_width));
                     temp_normals.push_back(vertex_normal);
                 }
 
                 // Compute the normal of the northwesternmost vertex.
                 // Number of adjacent faces: 1.
                 x = 0;
-                vertex_normal = get_face_normal_for_SW_NE(face_normal_vector_vec3, x, z, SE_CODE_FOR_SW_NE, image_width);
+                vertex_normal = get_face_normal_for_SW_NE(face_normal_vector_vec3, x, z, SE_CODE_FOR_SW_NE, actual_image_width);
                 temp_normals.push_back(vertex_normal);
 
                 // Compute the normals of northern vertices.
-                for (x = 1; x < image_width - 1; x++)
+                for (x = 1; x < actual_image_width - 1; x++)
                 {
                     // Compute the normal of a northern vertex.
                     // Number of adjacent faces: 3.
                     vertex_normal = glm::normalize(
-                            get_face_normal_for_SW_NE(face_normal_vector_vec3, x, z, SE_CODE_FOR_SW_NE, image_width) +
-                            get_face_normal_for_SW_NE(face_normal_vector_vec3, x, z, SSW_CODE_FOR_SW_NE, image_width) +
-                            get_face_normal_for_SW_NE(face_normal_vector_vec3, x, z, WSW_CODE_FOR_SW_NE, image_width));
+                            get_face_normal_for_SW_NE(face_normal_vector_vec3, x, z, SE_CODE_FOR_SW_NE, actual_image_width) +
+                            get_face_normal_for_SW_NE(face_normal_vector_vec3, x, z, SSW_CODE_FOR_SW_NE, actual_image_width) +
+                            get_face_normal_for_SW_NE(face_normal_vector_vec3, x, z, WSW_CODE_FOR_SW_NE, actual_image_width));
                     temp_normals.push_back(vertex_normal);
                 }
 
                 // Compute the normal of the northeasternmost vertex.
                 // Number of adjacent faces: 2.
-                x = image_width - 1;
+                x = actual_image_width - 1;
                 vertex_normal = glm::normalize(
-                        get_face_normal_for_SW_NE(face_normal_vector_vec3, x, z, SSW_CODE_FOR_SW_NE, image_width) +
-                        get_face_normal_for_SW_NE(face_normal_vector_vec3, x, z, WSW_CODE_FOR_SW_NE, image_width));
+                        get_face_normal_for_SW_NE(face_normal_vector_vec3, x, z, SSW_CODE_FOR_SW_NE, actual_image_width) +
+                        get_face_normal_for_SW_NE(face_normal_vector_vec3, x, z, WSW_CODE_FOR_SW_NE, actual_image_width));
                 temp_normals.push_back(vertex_normal);
             }
             else if (is_southeast_northwest_edges_in_use)
@@ -256,65 +256,65 @@ namespace geometry
                 // Compute the normal of the southwesternmost vertex.
                 // Number of adjacent faces: 1.
                 glm::vec3 vertex_normal;
-                vertex_normal = get_face_normal_for_SE_NW(face_normal_vector_vec3, x, z, NE_CODE_FOR_SE_NW, image_width);
+                vertex_normal = get_face_normal_for_SE_NW(face_normal_vector_vec3, x, z, NE_CODE_FOR_SE_NW, actual_image_width);
                 temp_normals.push_back(vertex_normal);
 
                 // Compute the normals of southern vertices.
-                for (x = 1; x < image_width - 1; x++)
+                for (x = 1; x < actual_image_width - 1; x++)
                 {
                     // Compute the normal of a southern vertex.
                     // Number of adjacent faces: 3.
                     vertex_normal = glm::normalize(
-                            get_face_normal_for_SE_NW(face_normal_vector_vec3, x, z, WNW_CODE_FOR_SE_NW, image_width) +
-                            get_face_normal_for_SE_NW(face_normal_vector_vec3, x, z, NNW_CODE_FOR_SE_NW, image_width) +
-                            get_face_normal_for_SE_NW(face_normal_vector_vec3, x, z, NE_CODE_FOR_SE_NW, image_width));
+                            get_face_normal_for_SE_NW(face_normal_vector_vec3, x, z, WNW_CODE_FOR_SE_NW, actual_image_width) +
+                            get_face_normal_for_SE_NW(face_normal_vector_vec3, x, z, NNW_CODE_FOR_SE_NW, actual_image_width) +
+                            get_face_normal_for_SE_NW(face_normal_vector_vec3, x, z, NE_CODE_FOR_SE_NW, actual_image_width));
                     temp_normals.push_back(vertex_normal);
                 }
 
                 // Compute the normal of the southeasternmost vertex.
                 // Number of adjacent faces: 2.
-                x = image_width - 1;
+                x = actual_image_width - 1;
                 vertex_normal = glm::normalize(
-                        get_face_normal_for_SE_NW(face_normal_vector_vec3, x, z, WNW_CODE_FOR_SE_NW, image_width) +
-                        get_face_normal_for_SE_NW(face_normal_vector_vec3, x, z, NNW_CODE_FOR_SE_NW, image_width));
+                        get_face_normal_for_SE_NW(face_normal_vector_vec3, x, z, WNW_CODE_FOR_SE_NW, actual_image_width) +
+                        get_face_normal_for_SE_NW(face_normal_vector_vec3, x, z, NNW_CODE_FOR_SE_NW, actual_image_width));
                 temp_normals.push_back(vertex_normal);
 
                 // Then, define most normals in a double loop.
-                for (z = 1; z < image_height - 1; z++)
+                for (z = 1; z < actual_image_height - 1; z++)
                 {
                     // Compute the normal of a western vertex.
                     // Number of adjacent faces: 3.
                     x = 0;
                     vertex_normal = glm::normalize(
-                            get_face_normal_for_SE_NW(face_normal_vector_vec3, x, z, NE_CODE_FOR_SE_NW, image_width) +
-                            get_face_normal_for_SE_NW(face_normal_vector_vec3, x, z, ESE_CODE_FOR_SE_NW, image_width) +
-                            get_face_normal_for_SE_NW(face_normal_vector_vec3, x, z, SSE_CODE_FOR_SE_NW, image_width));
+                            get_face_normal_for_SE_NW(face_normal_vector_vec3, x, z, NE_CODE_FOR_SE_NW, actual_image_width) +
+                            get_face_normal_for_SE_NW(face_normal_vector_vec3, x, z, ESE_CODE_FOR_SE_NW, actual_image_width) +
+                            get_face_normal_for_SE_NW(face_normal_vector_vec3, x, z, SSE_CODE_FOR_SE_NW, actual_image_width));
                     temp_normals.push_back(vertex_normal);
 
-                    for (x = 1; x < image_width - 1; x++)
+                    for (x = 1; x < actual_image_width - 1; x++)
                     {
-                        uint32_t current_vertex_i = image_width * z + x;
+                        uint32_t current_vertex_i = actual_image_width * z + x;
 
                         // Compute the normal of a central vertex.
                         // Number of adjacent faces: 6.
                         vertex_normal = glm::normalize(
-                                get_face_normal_for_SE_NW(face_normal_vector_vec3, x, z, SSE_CODE_FOR_SE_NW, image_width) +
-                                get_face_normal_for_SE_NW(face_normal_vector_vec3, x, z, SW_CODE_FOR_SE_NW, image_width) +
-                                get_face_normal_for_SE_NW(face_normal_vector_vec3, x, z, WNW_CODE_FOR_SE_NW, image_width) +
-                                get_face_normal_for_SE_NW(face_normal_vector_vec3, x, z, NNW_CODE_FOR_SE_NW, image_width) +
-                                get_face_normal_for_SE_NW(face_normal_vector_vec3, x, z, NE_CODE_FOR_SE_NW, image_width) +
-                                get_face_normal_for_SE_NW(face_normal_vector_vec3, x, z, ESE_CODE_FOR_SE_NW, image_width));
+                                get_face_normal_for_SE_NW(face_normal_vector_vec3, x, z, SSE_CODE_FOR_SE_NW, actual_image_width) +
+                                get_face_normal_for_SE_NW(face_normal_vector_vec3, x, z, SW_CODE_FOR_SE_NW, actual_image_width) +
+                                get_face_normal_for_SE_NW(face_normal_vector_vec3, x, z, WNW_CODE_FOR_SE_NW, actual_image_width) +
+                                get_face_normal_for_SE_NW(face_normal_vector_vec3, x, z, NNW_CODE_FOR_SE_NW, actual_image_width) +
+                                get_face_normal_for_SE_NW(face_normal_vector_vec3, x, z, NE_CODE_FOR_SE_NW, actual_image_width) +
+                                get_face_normal_for_SE_NW(face_normal_vector_vec3, x, z, ESE_CODE_FOR_SE_NW, actual_image_width));
                         temp_normals.push_back(vertex_normal);
                     }
 
-                    x = image_width - 1;
+                    x = actual_image_width - 1;
 
                     // Compute the normal of an eastern vertex.
                     // Number of adjacent faces: 3.
                     vertex_normal = glm::normalize(
-                            get_face_normal_for_SE_NW(face_normal_vector_vec3, x, z, SW_CODE_FOR_SE_NW, image_width) +
-                            get_face_normal_for_SE_NW(face_normal_vector_vec3, x, z, WNW_CODE_FOR_SE_NW, image_width) +
-                            get_face_normal_for_SE_NW(face_normal_vector_vec3, x, z, NNW_CODE_FOR_SE_NW, image_width));
+                            get_face_normal_for_SE_NW(face_normal_vector_vec3, x, z, SW_CODE_FOR_SE_NW, actual_image_width) +
+                            get_face_normal_for_SE_NW(face_normal_vector_vec3, x, z, WNW_CODE_FOR_SE_NW, actual_image_width) +
+                            get_face_normal_for_SE_NW(face_normal_vector_vec3, x, z, NNW_CODE_FOR_SE_NW, actual_image_width));
                     temp_normals.push_back(vertex_normal);
                 }
 
@@ -322,27 +322,27 @@ namespace geometry
                 // Number of adjacent faces: 2.
                 x = 0;
                 vertex_normal = glm::normalize(
-                        get_face_normal_for_SE_NW(face_normal_vector_vec3, x, z, SSE_CODE_FOR_SE_NW, image_width) +
-                        get_face_normal_for_SE_NW(face_normal_vector_vec3, x, z, ESE_CODE_FOR_SE_NW, image_width));
+                        get_face_normal_for_SE_NW(face_normal_vector_vec3, x, z, SSE_CODE_FOR_SE_NW, actual_image_width) +
+                        get_face_normal_for_SE_NW(face_normal_vector_vec3, x, z, ESE_CODE_FOR_SE_NW, actual_image_width));
                 temp_normals.push_back(vertex_normal);
 
                 // Compute the normals of northern vertices.
-                for (x = 1; x < image_width - 1; x++)
+                for (x = 1; x < actual_image_width - 1; x++)
                 {
                     // Compute the normal of a northern vertex.
                     // Number of adjacent faces: 3.
                     vertex_normal = glm::normalize(
-                            get_face_normal_for_SE_NW(face_normal_vector_vec3, x, z, SW_CODE_FOR_SE_NW, image_width) +
-                            get_face_normal_for_SE_NW(face_normal_vector_vec3, x, z, ESE_CODE_FOR_SE_NW, image_width) +
-                            get_face_normal_for_SE_NW(face_normal_vector_vec3, x, z, SSE_CODE_FOR_SE_NW, image_width));
+                            get_face_normal_for_SE_NW(face_normal_vector_vec3, x, z, SW_CODE_FOR_SE_NW, actual_image_width) +
+                            get_face_normal_for_SE_NW(face_normal_vector_vec3, x, z, ESE_CODE_FOR_SE_NW, actual_image_width) +
+                            get_face_normal_for_SE_NW(face_normal_vector_vec3, x, z, SSE_CODE_FOR_SE_NW, actual_image_width));
                     temp_normals.push_back(vertex_normal);
                 }
 
                 // Compute the normal of the northeasternmost vertex.
                 // Number of adjacent faces: 1.
-                x = image_width - 1;
+                x = actual_image_width - 1;
                 vertex_normal = glm::normalize(
-                        get_face_normal_for_SE_NW(face_normal_vector_vec3, x, z, SW_CODE_FOR_SE_NW, image_width));
+                        get_face_normal_for_SE_NW(face_normal_vector_vec3, x, z, SW_CODE_FOR_SE_NW, actual_image_width));
                 temp_normals.push_back(vertex_normal);
             }
     }
