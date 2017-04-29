@@ -151,8 +151,8 @@ namespace geometry
             std::cout << "image width: " << image_width << " pixels.\n";
             std::cout << "image height: " << image_height << " pixels.\n";
 
-            std::cout << "actual image width: " << image_width << " pixels.\n";
-            std::cout << "actual image height: " << image_height << " pixels.\n";
+            std::cout << "actual image width: " << actual_image_width << " pixels.\n";
+            std::cout << "actual image height: " << actual_image_height << " pixels.\n";
             std::cout << "number of faces: " << n_faces << ".\n";
 
             n_faces = n_faces_for_each_vertex * (actual_image_width - 1) * (actual_image_height - 1);
