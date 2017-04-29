@@ -146,9 +146,9 @@ namespace geometry
                     // Create a new vertex using bilinear interpolation.
                     // This corresponds to "v": specify one vertex.
                     glm::vec3 vertex;
-                    vertex.x = static_cast<GLfloat>(x) - 0.5f;
+                    vertex.x = static_cast<GLfloat>(x) - 0.5f * x_step;
                     vertex.y = static_cast<GLfloat>(y);
-                    vertex.z = static_cast<GLfloat>(z) - 0.5f;
+                    vertex.z = static_cast<GLfloat>(z) - 0.5f * z_step;
                     temp_vertices.push_back(vertex);
 
                     // This corresponds to "vt": specify texture coordinates of one vertex.
