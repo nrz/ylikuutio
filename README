@@ -74,7 +74,7 @@ https://www.blender.org/about/license/
 Ylikuutio can be compiled with GCC, Clang or Visual Studio.
 C++11 support is required.
 OpenGL 3.0 or newer is required.
-CMake 2.6.2 or newer is needed for compiling process.
+CMake 2.6.2 or newer is needed for the compiling process.
 CMake uses git for downloading Google Test testing framework.
 
 In Linux it's simple.
@@ -147,7 +147,7 @@ A: Ylikuutio can be used for all kinds of 3D games and simulations.
    At the moment no specific support for 2D is available, but naturally
    3D graphics can also be used to present a 2D world.
 
-Q: What the design goals for Ylikuutio?
+Q: What are the design goals for Ylikuutio?
 A: Ylikuutio aims to be a fast and flexible 3D game/simulation engine
    and fulfil my own requirements for my own indie game projects.
 
@@ -159,7 +159,7 @@ A: Ylikuutio targets Linux, Windows and Android, in this order.
 Q: What graphics APIs Ylikuutio uses?
 A: Ylikuutio uses OpenGL version 3.1.
 
-Q: Is there plans to support other graphics APIs?
+Q: Are there plans to support other graphics APIs?
 A: Newer OpenGL versions may be supported in the future, but so far
    OpenGL 3.1 fulfils my requirements.
 
