@@ -193,7 +193,7 @@ namespace ontology
             // act according to this game/simulation object's programming.
             void act();
 
-            // this method renders this object.
+            // this method renders this `Object`.
             void render();
 
             ontology::Species* species_parent_pointer; // pointer to `Species`.

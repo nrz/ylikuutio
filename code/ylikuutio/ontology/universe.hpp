@@ -142,7 +142,7 @@ namespace ontology
             // destructor.
             ~Universe();
 
-            // this method renders the entire world, one scene at a time.
+            // this method renders the entire `Universe`, one `Scene` at a time.
             void render();
 
             void set_background_color(GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha);

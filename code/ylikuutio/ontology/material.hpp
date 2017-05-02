@@ -57,7 +57,7 @@ namespace ontology
                 friend void hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent_pointer, std::vector<T1>& old_child_pointer_vector, std::queue<uint32_t>& old_free_childID_queue);
 
         private:
-            // this method renders all species using this texture.
+            // this method renders all `Species` using this `Material`.
             void render();
 
             // this method sets `Species` pointer.

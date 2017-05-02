@@ -57,7 +57,7 @@ namespace ontology
                 friend void render_this_object(ontology::Object* object_pointer, ontology::Shader* shader_pointer);
 
         private:
-            // this method renders all materials using this shader.
+            // this method renders all materials using this `Shader`.
             void render();
 
             // this method sets a material pointer.

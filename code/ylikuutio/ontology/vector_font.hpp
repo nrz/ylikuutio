@@ -62,7 +62,7 @@ namespace ontology
             // and `nullptr` if this `VectorFont` does not contain such a `Glyph`.
             ontology::Glyph* get_glyph_pointer(int32_t unicode_value);
 
-            // this method renders all glyphs of this `VectorFont`.
+            // this method renders all `Glyph`s of this `VectorFont`.
             void render();
 
             std::string font_file_format;          // type of the model file, eg. `"bmp"`.

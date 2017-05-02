@@ -72,7 +72,7 @@ namespace ontology
         private:
             void bind_to_parent();
 
-            // this method renders all objects of this species.
+            // this method renders all `Object`s of this `Species`.
             void render();
 
             ontology::Material* parent_pointer;      // pointer to the material.

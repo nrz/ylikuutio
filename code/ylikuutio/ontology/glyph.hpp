@@ -58,7 +58,7 @@ namespace ontology
         private:
             void bind_to_parent();
 
-            // this method renders all objects of this species.
+            // this method renders all `Object`s of this `Glyph`.
             void render();
 
             ontology::VectorFont* parent_pointer;  // pointer to `VectorFont`.
