@@ -1,6 +1,7 @@
 #ifndef __FONT_HPP_INCLUDED
 #define __FONT_HPP_INCLUDED
 
+#include "entity.hpp"
 #include "material.hpp"
 #include "vector_font_struct.hpp"
 #include "render_templates.hpp"
@@ -20,7 +21,7 @@ namespace ontology
     class Material;
     class Glyph;
 
-    class VectorFont
+    class VectorFont: public Entity
     {
         public:
             // constructor.

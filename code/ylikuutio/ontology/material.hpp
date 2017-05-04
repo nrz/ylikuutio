@@ -1,6 +1,7 @@
 #ifndef __TEXTURE_HPP_INCLUDED
 #define __TEXTURE_HPP_INCLUDED
 
+#include "entity.hpp"
 #include "code/ylikuutio/common/globals.hpp"
 #include "shader.hpp"
 #include "render_templates.hpp"
@@ -31,7 +32,7 @@ namespace ontology
     class Object;
     class VectorFont;
 
-    class Material
+    class Material: public Entity
     {
         public:
             // constructor.

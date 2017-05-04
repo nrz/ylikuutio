@@ -1,6 +1,7 @@
 #ifndef __SPECIES_HPP_INCLUDED
 #define __SPECIES_HPP_INCLUDED
 
+#include "entity.hpp"
 #include "model.hpp"
 #include "material.hpp"
 #include "ground_level.hpp"
@@ -31,7 +32,7 @@ namespace ontology
 {
     class Material;
 
-    class Species: public ontology::Model
+    class Species: public Entity, public ontology::Model
     {
         public:
             // constructor.
