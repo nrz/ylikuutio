@@ -2,8 +2,13 @@ TEE-lista:
 Listaa tähän keskeneräiset asiat kiireellisyysjärjestyksessä kiireellisimmät ylös. Rasti ruutuun ja valmiit-osastolle kun on valmis.
 
 Ylikuution kehityksen kannalta välttämättömiä työvaiheita:
-[ ] Lisää konsoli (aukeaa näppäimellä `).
+[ ] Lisää mahdollisuus nimetä entiteettihierarkian minkä tahansa tason olioita.
+[ ] Lisää konsoliin komento objektien informaation tarkastelua varten (`object`).
+[ ] Lisää konsoliin skenejen (`Scene`) latauskomento `load`.
+[ ] Koodaa konsoliin tekstin vieritys kun 'ikkuna' tulee täyteen.
+[ ] Lisää konsoliin objektien listauskomento `objects`.
 [ ] Luo graafi maailman vertekseistä ja särmistä.
+[ ] Lisää konsoliin infokomento `info` (kertoo verteksien lukumäärän ym. tietoja).
 [ ] Lisää ray castingiä käyttävä toiminto verteksien valitsemiseen ja muokkaamiseen.
 [ ] Lisää verteksien muokkaaminen.
 [ ] Lisää octree-segmentointi.
@@ -28,3 +33,4 @@ Valmiit:
 [x] `strlen` -> `std::strlen`.
 [x] Koodaa takaisinkutsut (callback) toimintakuntoon.
 [x] Testaa takaisinkutsujen toimintaa.
+[x] Lisää konsoli (aukeaa näppäimellä `).
