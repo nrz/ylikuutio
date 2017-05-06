@@ -1,13 +1,13 @@
 #ifndef __SPECIES_HPP_INCLUDED
 #define __SPECIES_HPP_INCLUDED
 
+#include "species_or_glyph.hpp"
 #include "entity.hpp"
 #include "model.hpp"
 #include "material.hpp"
 #include "ground_level.hpp"
 #include "species_struct.hpp"
 #include "render_templates.hpp"
-#include "species_or_glyph.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include GLEW

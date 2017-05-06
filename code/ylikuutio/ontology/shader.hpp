@@ -7,8 +7,8 @@
 #endif
 
 #include "entity.hpp"
-#include "render_templates.hpp"
 #include "shader_struct.hpp"
+#include "render_templates.hpp"
 #include "code/ylikuutio/loaders/shader_loader.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/common/global_variables.hpp"
