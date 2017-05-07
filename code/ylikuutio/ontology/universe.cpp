@@ -13,12 +13,20 @@
 
 #include "universe.hpp"
 #include "scene.hpp"
+#include "shader.hpp"
+#include "material.hpp"
+#include "species.hpp"
+#include "object.hpp"
+#include "vector_font.hpp"
+#include "glyph.hpp"
+#include "text3D.hpp"
 #include "ground_level.hpp"
 #include "render_templates.hpp"
 #include "code/ylikuutio/config/setting.hpp"
 #include "code/ylikuutio/config/setting_master.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/common/global_variables.hpp"
+#include "code/ylikuutio/common/any_value.hpp"
 #include "code/ylikuutio/common/globals.hpp"
 
 // Include GLEW
@@ -37,6 +45,7 @@
 #include <cmath>    // NAN, std::isnan, std::pow
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <stdint.h> // uint32_t etc.
+#include <unordered_map> // std::unordered_map
 
 extern GLFWwindow* window; // The "extern" keyword here is to access the variable "window" declared in tutorialXXX.cpp. This is a hack to keep the tutorials simple. Please avoid this.
 
@@ -77,6 +86,49 @@ namespace ontology
         this->background_blue = blue;
         this->background_alpha = alpha;
         glClearColor(this->background_red, this->background_green, this->background_blue, this->background_alpha);
+    }
+
+    void Universe::delete_entity(std::string name)
+    {
+        datatypes::AnyValue* any_value = this->entity_anyvalue_map[name];
+
+        if (any_value == nullptr)
+        {
+            return;
+        }
+
+        switch (any_value->type)
+        {
+            case (datatypes::datatype::UNIVERSE_POINTER):
+                // OK, this is an `Universe` to be deleted.
+                delete static_cast<ontology::Universe*>(any_value->universe_pointer);
+            case (datatypes::datatype::SCENE_POINTER):
+                // OK, this is a `Scene` to be deleted.
+                delete static_cast<ontology::Scene*>(any_value->scene_pointer);
+            case (datatypes::datatype::SHADER_POINTER):
+                // OK, this is a `Shader` to be deleted.
+                delete static_cast<ontology::Shader*>(any_value->shader_pointer);
+            case (datatypes::datatype::MATERIAL_POINTER):
+                // OK, this is a `Material` to be deleted.
+                delete static_cast<ontology::Material*>(any_value->material_pointer);
+            case (datatypes::datatype::SPECIES_POINTER):
+                // OK, this is a `Species` to be deleted.
+                delete static_cast<ontology::Species*>(any_value->species_pointer);
+            case (datatypes::datatype::OBJECT_POINTER):
+                // OK, this is a `Object` to be deleted.
+                delete static_cast<ontology::Object*>(any_value->object_pointer);
+            case (datatypes::datatype::VECTORFONT_POINTER):
+                // OK, this is a `VectorFont` to be deleted.
+                delete static_cast<ontology::VectorFont*>(any_value->vector_font_pointer);
+            case (datatypes::datatype::GLYPH_POINTER):
+                // OK, this is a `Glyph` to be deleted.
+                delete static_cast<ontology::Glyph*>(any_value->glyph_pointer);
+            case (datatypes::datatype::TEXT3D_POINTER):
+                // OK, this is a `Text3D` to be deleted.
+                delete static_cast<ontology::Text3D*>(any_value->text3D_pointer);
+            default:
+                return;
+        }
     }
 
     void Universe::set_scene_pointer(uint32_t childID, ontology::Scene* child_pointer)

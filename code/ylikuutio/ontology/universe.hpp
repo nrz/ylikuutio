@@ -149,6 +149,8 @@ namespace ontology
 
             void set_background_color(GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha);
 
+            void delete_entity(std::string name);
+
             friend class Scene;
             friend class Shader;
             friend class Species;
