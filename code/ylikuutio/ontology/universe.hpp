@@ -1,6 +1,7 @@
 #ifndef __WORLD_HPP_INCLUDED
 #define __WORLD_HPP_INCLUDED
 
+#include "code/ylikuutio/common/any_value.hpp"
 #include "code/ylikuutio/common/globals.hpp"
 
 // Include GLFW
@@ -18,6 +19,7 @@
 // Include standard headers
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <queue>    // std::queue
+#include <unordered_map> // std::unordered_map
 #include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
 
@@ -171,6 +173,9 @@ namespace ontology
             std::queue<uint32_t> free_sceneID_queue;
 
             config::SettingMaster* setting_master_pointer;
+
+            // Named entities are stored here so that they can be recalled, if needed.
+            std::unordered_map<std::string, datatypes::AnyValue*> entity_anyvalue_map;
 
             GLclampf background_red;
             GLclampf background_green;
