@@ -43,6 +43,7 @@ namespace ontology
         this->font_filename         = vector_font_struct.font_filename;
         this->vertex_scaling_factor = vector_font_struct.vertex_scaling_factor;
         this->parent_pointer        = vector_font_struct.parent_pointer;
+        this->universe_pointer      = this->parent_pointer->universe_pointer;
 
         this->char_font_file_format = this->font_file_format.c_str();
         this->char_font_filename    = this->font_filename.c_str();

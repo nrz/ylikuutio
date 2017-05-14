@@ -26,7 +26,10 @@
 
 namespace ontology
 {
+    class Universe;
+
     Font2D::Font2D(
+            ontology::Universe* universe_pointer,
             GLuint screen_width,
             GLuint screen_height,
             const char* texturePath,
@@ -71,6 +74,8 @@ namespace ontology
         // Initialize uniform window height.
         screen_height_uniform_ID = glGetUniformLocation(programID, "screen_height");
         glUniform1i(screen_height_uniform_ID, screen_height);
+
+        this->universe_pointer = universe_pointer;
     }
 
     Font2D::~Font2D()

@@ -30,6 +30,7 @@ namespace ontology
         this->char_vertex_shader   = this->vertex_shader.c_str();
         this->char_fragment_shader = this->fragment_shader.c_str();
         this->parent_pointer       = shader_struct.parent_pointer;
+        this->universe_pointer     = this->parent_pointer->universe_pointer;
 
         // get `childID` from the `Scene` and set pointer to this `Shader`.
         this->bind_to_parent();

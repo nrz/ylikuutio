@@ -19,6 +19,7 @@ namespace ontology
         public:
             // constructor.
             Font2D(
+                    ontology::Universe* universe_pointer,
                     GLuint screen_width,
                     GLuint screen_height,
                     const char* texturePath,

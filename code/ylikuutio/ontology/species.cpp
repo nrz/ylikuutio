@@ -44,6 +44,7 @@ namespace ontology
         this->color_channel     = species_struct.color_channel;
         this->light_position    = species_struct.light_position;
         this->parent_pointer    = species_struct.parent_pointer;
+        this->universe_pointer  = this->parent_pointer->universe_pointer;
         this->x_step            = species_struct.x_step;
         this->z_step            = species_struct.z_step;
         this->triangulation_type = species_struct.triangulation_type;

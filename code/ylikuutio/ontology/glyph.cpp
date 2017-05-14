@@ -22,6 +22,7 @@ namespace ontology
     {
         // constructor.
         this->parent_pointer = glyph_struct.parent_pointer;
+        this->universe_pointer = this->parent_pointer->universe_pointer;
 
         this->glyph_vertex_data = glyph_struct.glyph_vertex_data;
         this->glyph_name_pointer = glyph_struct.glyph_name_pointer;

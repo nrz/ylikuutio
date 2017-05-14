@@ -39,6 +39,7 @@ namespace ontology
     Scene::Scene(ontology::Universe* parent_pointer)
     {
         // constructor.
+        this->universe_pointer = parent_pointer;
         this->parent_pointer = parent_pointer;
 
         // get `childID` from the `Universe` and set pointer to this `Scene`.

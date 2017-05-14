@@ -416,7 +416,7 @@ int main(void)
     // Initialize our little text library with the Holstein font
     const char* char_g_font_texture_filename = g_font_texture_filename.c_str();
     const char* char_g_font_texture_file_format = g_font_texture_file_format.c_str();
-    ontology::Font2D* my_font2D = new ontology::Font2D(window_width, window_height, char_g_font_texture_filename, char_g_font_texture_file_format);
+    ontology::Font2D* my_font2D = new ontology::Font2D(my_universe, window_width, window_height, char_g_font_texture_filename, char_g_font_texture_file_format);
 
     std::unordered_map<std::string, ConsoleCommandCallback> command_callback_map;
 

@@ -25,6 +25,7 @@ namespace ontology
         // constructor.
         this->text_string = text3D_struct.text_string;
         this->parent_pointer = text3D_struct.parent_pointer;
+        this->universe_pointer = this->parent_pointer->universe_pointer;
 
         // get childID from `Font` and set pointer to this `Text3D`.
         this->bind_to_parent();
