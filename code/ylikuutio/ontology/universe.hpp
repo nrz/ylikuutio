@@ -159,15 +159,15 @@ namespace ontology
             friend class console::Console;
 
         private:
-            // this method sets a scene pointer.
+            // this method sets a `Scene` pointer.
             void set_scene_pointer(uint32_t childID, ontology::Scene* child_pointer);
 
-            // this method sets a world species pointer.
+            // this method sets a terrain `Species` pointer.
             void set_terrain_species_pointer(ontology::Species* terrain_species_pointer);
 
             void compute_matrices_from_inputs();
 
-            void* terrain_species_pointer;              // pointer to world species (used in collision detection).
+            void* terrain_species_pointer;              // pointer to terrain `Species` (used in collision detection).
 
             float world_radius;
 

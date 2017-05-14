@@ -44,7 +44,7 @@ namespace ontology
             // this method sets pointer to this `Species` to nullptr, sets `parent_pointer` according to the input, and requests a new `childID` from the new `Material`.
             void bind_to_new_parent(ontology::Material* new_material_pointer);
 
-            // this method sets a object pointer.
+            // this method sets an `Object` pointer.
             void set_object_pointer(uint32_t childID, ontology::Object* child_pointer);
 
             // this method gets a object ID and removes it from the `free_objectID_queue` if it was popped from the queue.
@@ -76,7 +76,7 @@ namespace ontology
             // this method renders all `Object`s of this `Species`.
             void render();
 
-            ontology::Material* parent_pointer;      // pointer to the material.
+            ontology::Material* parent_pointer;      // pointer to the `Material`.
 
             std::string model_file_format;           // type of the model file, eg. `"bmp"`.
             std::string model_filename;              // filename of the model file.

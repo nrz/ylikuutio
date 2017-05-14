@@ -70,14 +70,14 @@ namespace ontology
             // this method sets `ChunkMaster` pointer.
             void set_chunk_master_pointer(uint32_t childID, space_partition::ChunkMaster* child_pointer);
 
-            // this method sets a world species pointer.
+            // this method sets a terrain `Species` pointer.
             void set_terrain_species_pointer(ontology::Species* terrain_species_pointer);
 
-            ontology::Shader* parent_pointer;         // pointer to the shader.
+            ontology::Shader* parent_pointer;         // pointer to the `Shader`.
 
             void bind_to_parent();
 
-            ontology::Species* terrain_species_pointer; // pointer to world species (used in collision detection).
+            ontology::Species* terrain_species_pointer; // pointer to terrain `Species` (used in collision detection).
 
             GLuint texture;                        // Texture of this `Material`, returned by `load_BMP_texture` or `load_DDS_texture` (used for `glGenTextures` etc.).
             GLuint openGL_textureID;               // texture ID, returned by `glGetUniformLocation(programID, "myTextureSampler");`.
