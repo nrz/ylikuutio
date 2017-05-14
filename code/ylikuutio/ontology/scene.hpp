@@ -27,9 +27,6 @@ namespace ontology
             // destructor.
             ~Scene();
 
-            // this method sets pointer to this `Scene` to nullptr, sets `parent_pointer` according to the input, and requests a new `childID` from the new `Universe`.
-            void bind_to_new_parent(ontology::Universe* new_universe_pointer);
-
             // this method returns a pointer to an `Object` using the name as key.
             ontology::Object* get_object(std::string);
 
