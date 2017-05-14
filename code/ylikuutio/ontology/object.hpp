@@ -1,6 +1,7 @@
 #ifndef __OBJECT_HPP_INCLUDED
 #define __OBJECT_HPP_INCLUDED
 
+#include "entity_templates.hpp"
 #include "shader.hpp"
 #include "species.hpp"
 #include "glyph.hpp"

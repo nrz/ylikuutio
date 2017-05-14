@@ -6,6 +6,7 @@
 #define DEGREES_TO_RADIANS(x) (x * PI / 180.0f)
 #endif
 
+#include "entity_templates.hpp"
 #include "shader_struct.hpp"
 #include "render_templates.hpp"
 #include "code/ylikuutio/loaders/shader_loader.hpp"

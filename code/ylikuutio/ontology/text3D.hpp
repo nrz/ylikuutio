@@ -1,6 +1,7 @@
 #ifndef TEXT3D_HPP
 #define TEXT3D_HPP
 
+#include "entity_templates.hpp"
 #include "text3D_struct.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/common/globals.hpp"

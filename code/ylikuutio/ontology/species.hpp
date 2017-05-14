@@ -2,6 +2,7 @@
 #define __SPECIES_HPP_INCLUDED
 
 #include "species_or_glyph.hpp"
+#include "entity_templates.hpp"
 #include "model.hpp"
 #include "material.hpp"
 #include "ground_level.hpp"

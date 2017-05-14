@@ -1,6 +1,7 @@
 #ifndef TEXT2D_HPP
 #define TEXT2D_HPP
 
+#include "entity_templates.hpp"
 #include "code/ylikuutio/common/globals.hpp"
 
 // Include GLEW
