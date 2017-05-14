@@ -1,7 +1,6 @@
 #ifndef TEXT2D_HPP
 #define TEXT2D_HPP
 
-#include "entity.hpp"
 #include "code/ylikuutio/common/globals.hpp"
 
 // Include GLEW
@@ -12,7 +11,7 @@
 
 namespace ontology
 {
-    class Font2D: public Entity
+    class Font2D
     {
         public:
             // constructor.

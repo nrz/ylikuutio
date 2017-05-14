@@ -2,7 +2,6 @@
 #define __SPECIES_HPP_INCLUDED
 
 #include "species_or_glyph.hpp"
-#include "entity.hpp"
 #include "model.hpp"
 #include "material.hpp"
 #include "ground_level.hpp"
@@ -32,7 +31,7 @@ namespace ontology
 {
     class Material;
 
-    class Species: public Entity, public ontology::Model
+    class Species: public ontology::Model
     {
         public:
             // constructor.

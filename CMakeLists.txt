@@ -532,8 +532,6 @@ add_library(ylikuutio STATIC
     code/ylikuutio/map/ylikuutio_map.hpp
 
     # ontology, in alphabetical order
-    code/ylikuutio/ontology/entity.cpp
-    code/ylikuutio/ontology/entity.hpp
     code/ylikuutio/ontology/font2D.cpp
     code/ylikuutio/ontology/font2D.hpp
     code/ylikuutio/ontology/glyph.cpp

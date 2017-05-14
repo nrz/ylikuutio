@@ -6,7 +6,6 @@
 #define DEGREES_TO_RADIANS(x) (x * PI / 180.0f)
 #endif
 
-#include "entity.hpp"
 #include "shader_struct.hpp"
 #include "render_templates.hpp"
 #include "code/ylikuutio/loaders/shader_loader.hpp"
@@ -32,7 +31,7 @@ namespace ontology
     class Material;
     class Object;
 
-    class Shader: public Entity
+    class Shader
     {
         public:
             // constructor.

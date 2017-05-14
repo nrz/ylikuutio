@@ -2,7 +2,6 @@
 #define __GLYPH_HPP_INCLUDED
 
 #include "species_or_glyph.hpp"
-#include "entity.hpp"
 #include "model.hpp"
 #include "text3D.hpp"
 #include "vector_font.hpp"
@@ -32,7 +31,7 @@ namespace ontology
 {
     class Object;
 
-    class Glyph: public Entity, public ontology::Model
+    class Glyph: public ontology::Model
     {
         public:
             // constructor.
