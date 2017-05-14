@@ -28,6 +28,7 @@
 
 namespace ontology
 {
+    class Universe;
     class Scene;
     class Material;
     class Object;
@@ -89,6 +90,8 @@ namespace ontology
 
             const char* char_vertex_shader;
             const char* char_fragment_shader;
+
+            ontology::Universe* universe_pointer;
     };
 }
 

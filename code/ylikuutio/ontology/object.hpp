@@ -45,6 +45,7 @@
 
 namespace ontology
 {
+    class Universe;
     class Species;
     class Glyph;
 
@@ -217,6 +218,8 @@ namespace ontology
             // The rest fields are created in the constructor.
             glm::mat4 model_matrix;                // model matrix.
             glm::mat4 MVP_matrix;                  // model view projection matrix.
+
+            ontology::Universe* universe_pointer;
     };
 
     template<class T1>

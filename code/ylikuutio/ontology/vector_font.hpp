@@ -18,6 +18,7 @@
 
 namespace ontology
 {
+    class Universe;
     class Material;
     class Glyph;
 
@@ -85,6 +86,8 @@ namespace ontology
             std::queue<uint32_t> free_text3D_ID_queue;
 
             std::unordered_map<int32_t, ontology::Glyph*> unicode_glyph_map;
+
+            ontology::Universe* universe_pointer;
     };
 }
 

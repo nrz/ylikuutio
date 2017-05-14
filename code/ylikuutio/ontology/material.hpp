@@ -28,6 +28,7 @@ namespace space_partition
 
 namespace ontology
 {
+    class Universe;
     class Species;
     class Object;
     class VectorFont;
@@ -94,6 +95,8 @@ namespace ontology
             uint32_t childID;                      // texture ID, returned by `Shader::get_textureID`.
             const char* char_texture_file_format;
             const char* char_texture_filename;
+
+            ontology::Universe* universe_pointer;
     };
 }
 

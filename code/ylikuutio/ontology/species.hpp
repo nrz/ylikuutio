@@ -30,6 +30,7 @@
 
 namespace ontology
 {
+    class Universe;
     class Material;
 
     class Species: public ontology::Model
@@ -91,6 +92,8 @@ namespace ontology
 
             uint32_t image_width;
             uint32_t image_height;
+
+            ontology::Universe* universe_pointer;
     };
 }
 

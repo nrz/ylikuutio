@@ -13,6 +13,7 @@
 
 namespace ontology
 {
+    class Universe;
     class Shader;
     class Species;
     class Object;
@@ -59,6 +60,8 @@ namespace ontology
 
             // For finding any `Object`s of this `Scene` by using its name.
             std::unordered_map<std::string, ontology::Object*> name_map;
+
+            ontology::Universe* universe_pointer;
     };
 }
 

@@ -24,6 +24,8 @@
 
 namespace ontology
 {
+    class Universe;
+
     class Text3D
     {
         public:
@@ -68,6 +70,8 @@ namespace ontology
 
             std::vector<ontology::Object*> object_pointer_vector;
             std::queue<uint32_t> free_objectID_queue;
+
+            ontology::Universe* universe_pointer;
     };
 }
 
