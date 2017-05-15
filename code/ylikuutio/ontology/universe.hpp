@@ -149,14 +149,30 @@ namespace ontology
 
             void set_background_color(GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha);
 
-            void delete_entity(std::string name);
+            // Public callbacks.
+
+            static datatypes::AnyValue* delete_entity(
+                    console::Console* console,
+                    ontology::Universe* universe,
+                    std::vector<std::string>& command_parameters);
+
+            // Public callbacks end here.
 
             friend class Scene;
             friend class Shader;
+            friend class Material;
             friend class Species;
+            friend class Object;
+            friend class VectorFont;
+            friend class Glyph;
+            friend class Text3D;
+            friend class Font2D;
             friend class config::Setting;
             friend class config::SettingMaster;
             friend class console::Console;
+
+            template<class T1>
+                friend void set_name(std::string name, T1 entity);
 
         private:
             // this method sets a `Scene` pointer.

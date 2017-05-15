@@ -75,6 +75,12 @@ namespace ontology
 
         // set pointer to this material to nullptr.
         this->parent_pointer->set_material_pointer(this->childID, nullptr);
+
+        if (!this->name.empty() && this->universe_pointer != nullptr)
+        {
+            delete this->universe_pointer->entity_anyvalue_map[this->name];
+            this->universe_pointer->entity_anyvalue_map[this->name] = nullptr;
+        }
     }
 
     void Material::render()
@@ -109,6 +115,11 @@ namespace ontology
     {
         // this method sets pointer to this `Material` to nullptr, sets `parent_pointer` according to the input, and requests a new `childID` from the new `Shader`.
         hierarchy::bind_child_to_new_parent<ontology::Material*, ontology::Shader*>(this, new_shader_pointer, this->parent_pointer->material_pointer_vector, this->parent_pointer->free_materialID_queue);
+    }
+
+    void Material::set_name(std::string name)
+    {
+        ontology::set_name(name, this);
     }
 
     void Material::set_terrain_species_pointer(ontology::Species* terrain_species_pointer)

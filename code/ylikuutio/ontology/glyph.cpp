@@ -62,6 +62,12 @@ namespace ontology
 
         // set pointer to this `Glyph` to nullptr.
         this->parent_pointer->set_glyph_pointer(this->childID, nullptr);
+
+        if (!this->name.empty() && this->universe_pointer != nullptr)
+        {
+            delete this->universe_pointer->entity_anyvalue_map[this->name];
+            this->universe_pointer->entity_anyvalue_map[this->name] = nullptr;
+        }
     }
 
     void Glyph::render()
@@ -72,5 +78,10 @@ namespace ontology
     void Glyph::set_object_pointer(uint32_t childID, ontology::Object* child_pointer)
     {
         hierarchy::set_child_pointer(childID, child_pointer, this->object_pointer_vector, this->free_objectID_queue);
+    }
+
+    void Glyph::set_name(std::string name)
+    {
+        ontology::set_name(name, this);
     }
 }

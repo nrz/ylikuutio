@@ -1,4 +1,5 @@
 #include "font2D.hpp"
+#include "entity_templates.hpp"
 #include "code/ylikuutio/loaders/shader_loader.hpp"
 #include "code/ylikuutio/loaders/texture_loader.hpp"
 
@@ -91,6 +92,12 @@ namespace ontology
 
         // Delete shader
         glDeleteProgram(programID);
+
+        if (!this->name.empty() && this->universe_pointer != nullptr)
+        {
+            delete this->universe_pointer->entity_anyvalue_map[this->name];
+            this->universe_pointer->entity_anyvalue_map[this->name] = nullptr;
+        }
     }
 
     void Font2D::printText2D(
@@ -344,5 +351,10 @@ namespace ontology
             const char* char_font_texture_file_format)
     {
         printText2D(screen_width, screen_height, x, y, text_size, font_size, text_char, char_font_texture_file_format, "left", "bottom");
+    }
+
+    void Font2D::set_name(std::string name)
+    {
+        ontology::set_name(name, this);
     }
 }

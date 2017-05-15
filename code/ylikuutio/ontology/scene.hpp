@@ -31,10 +31,14 @@ namespace ontology
             // this method returns a pointer to an `Object` using the name as key.
             ontology::Object* get_object(std::string);
 
+            void set_name(std::string name);
+
             friend class Shader;
             friend class Species;
             template<class T1>
                 friend void render_children(std::vector<T1>& child_pointer_vector);
+            template<class T1>
+                friend void set_name(std::string name, T1 entity);
             template<class T1>
                 friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<uint32_t>& free_childID_queue);
             template<class T1, class T2>

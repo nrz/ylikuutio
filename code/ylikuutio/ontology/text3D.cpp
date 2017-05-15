@@ -81,10 +81,21 @@ namespace ontology
         hierarchy::delete_children<ontology::Object*>(this->object_pointer_vector);
 
         this->parent_pointer->set_text3D_pointer(this->childID, nullptr);
+
+        if (!this->name.empty() && this->universe_pointer != nullptr)
+        {
+            delete this->universe_pointer->entity_anyvalue_map[this->name];
+            this->universe_pointer->entity_anyvalue_map[this->name] = nullptr;
+        }
     }
 
     void Text3D::set_object_pointer(uint32_t childID, ontology::Object* child_pointer)
     {
         hierarchy::set_child_pointer(childID, child_pointer, this->object_pointer_vector, this->free_objectID_queue);
+    }
+
+    void Text3D::set_name(std::string name)
+    {
+        ontology::set_name(name, this);
     }
 }

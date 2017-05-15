@@ -301,6 +301,8 @@ int main(void)
         ascii_grid_terrain_species_struct.z_step = 4;
         terrain_species = new ontology::Species(ascii_grid_terrain_species_struct);
 
+        terrain_species->set_name("Helsinki");
+
         is_flight_mode_in_use = true;
 
         turbo_factor = 5.0f;
@@ -838,6 +840,9 @@ int main(void)
     // Config callbacks.
     command_callback_map["set"] = &config::SettingMaster::set;
     command_callback_map["get"] = &config::SettingMaster::get;
+
+    // Object handling callbacks.
+    command_callback_map["delete"] = &ontology::Universe::delete_entity;
 
     // Exit program callbacks.
     command_callback_map["bye"] = &ajokki::quit;

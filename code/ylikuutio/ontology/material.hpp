@@ -45,6 +45,8 @@ namespace ontology
             // this method sets pointer to this `Material` to nullptr, sets `parent_pointer` according to the input, and requests a new `childID` from the new `Shader`.
             void bind_to_new_parent(ontology::Shader* new_shader_pointer);
 
+            void set_name(std::string name);
+
             friend class Shader;
             friend class VectorFont;
             friend class Glyph;
@@ -53,6 +55,8 @@ namespace ontology
             friend class space_partition::ChunkMaster;
             template<class T1>
                 friend void render_children(std::vector<T1>& child_pointer_vector);
+            template<class T1>
+                friend void set_name(std::string name, T1 entity);
             template<class T1>
                 friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<uint32_t>& free_childID_queue);
             template<class T1, class T2>

@@ -84,6 +84,12 @@ namespace ontology
             std::cout << "Object with childID " << std::dec << this->childID << " will be destroyed.\n";
             this->species_parent_pointer->set_object_pointer(this->childID, nullptr);
         }
+
+        if (!this->name.empty() && this->universe_pointer != nullptr)
+        {
+            delete this->universe_pointer->entity_anyvalue_map[this->name];
+            this->universe_pointer->entity_anyvalue_map[this->name] = nullptr;
+        }
     }
 
     void Object::act()
@@ -139,6 +145,11 @@ namespace ontology
             // bind to the new parent.
             this->bind_to_parent();
         }
+    }
+
+    void Object::set_name(std::string name)
+    {
+        ontology::set_name(name, this);
     }
 
     // Public callbacks (to be called from AI scripts written in Chibi-Scheme).

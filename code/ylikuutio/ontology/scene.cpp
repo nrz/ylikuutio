@@ -54,6 +54,12 @@ namespace ontology
         // destroy all shaders of this scene.
         std::cout << "All shaders of this scene will be destroyed.\n";
         hierarchy::delete_children<ontology::Shader*>(this->shader_pointer_vector);
+
+        if (!this->name.empty() && this->universe_pointer != nullptr)
+        {
+            delete this->universe_pointer->entity_anyvalue_map[this->name];
+            this->universe_pointer->entity_anyvalue_map[this->name] = nullptr;
+        }
     }
 
     void Scene::render()
@@ -66,6 +72,11 @@ namespace ontology
     ontology::Object* Scene::get_object(std::string name)
     {
         return this->name_map[name];
+    }
+
+    void Scene::set_name(std::string name)
+    {
+        ontology::set_name(name, this);
     }
 
     void Scene::set_shader_pointer(uint32_t childID, ontology::Shader* child_pointer)

@@ -168,6 +168,12 @@ namespace ontology
 
         // set pointer to this species to nullptr.
         this->parent_pointer->set_species_pointer(this->childID, nullptr);
+
+        if (!this->name.empty() && this->universe_pointer != nullptr)
+        {
+            delete this->universe_pointer->entity_anyvalue_map[this->name];
+            this->universe_pointer->entity_anyvalue_map[this->name] = nullptr;
+        }
     }
 
     void Species::render()
@@ -178,6 +184,11 @@ namespace ontology
     void Species::set_object_pointer(uint32_t childID, ontology::Object* child_pointer)
     {
         hierarchy::set_child_pointer(childID, child_pointer, this->object_pointer_vector, this->free_objectID_queue);
+    }
+
+    void Species::set_name(std::string name)
+    {
+        ontology::set_name(name, this);
     }
 
     void Species::bind_to_new_parent(ontology::Material* new_material_pointer)

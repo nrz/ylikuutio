@@ -63,6 +63,8 @@ namespace ontology
             // and requests a new `childID` from the new `Species` or from the new `Glyph`.
             void bind_to_new_parent(void* new_parent_pointer);
 
+            void set_name(std::string name);
+
             // Public callbacks (to be called from AI scripts written in
             // Chibi-Scheme). These are the functions that are available
             // for AI scripts. Ylikuutio will support scripting of game
@@ -189,6 +191,8 @@ namespace ontology
                 friend void render_children(std::vector<T1>& child_pointer_vector);
             template<class T1>
                 friend void render_this_object(ontology::Object* object_pointer, ontology::Shader* shader_pointer);
+            template<class T1>
+                friend void set_name(std::string name, T1 entity);
 
         private:
             void bind_to_parent();

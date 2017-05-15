@@ -45,12 +45,16 @@ namespace ontology
             // this method sets pointer to this `Shader` to nullptr, sets `parent_pointer` according to the input, and requests a new `childID` from the new `Scene`.
             void bind_to_new_parent(ontology::Scene* new_scene_pointer);
 
+            void set_name(std::string name);
+
             friend class Scene;
             friend class Material;
             friend class Glyph;
             friend class Species;
             template<class T1>
                 friend void render_children(std::vector<T1>& child_pointer_vector);
+            template<class T1>
+                friend void set_name(std::string name, T1 entity);
             template<class T1>
                 friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<uint32_t>& free_childID_queue);
             template<class T1, class T2>

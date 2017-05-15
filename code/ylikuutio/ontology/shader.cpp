@@ -57,6 +57,12 @@ namespace ontology
         this->parent_pointer->set_shader_pointer(this->childID, nullptr);
 
         glDeleteProgram(this->programID);
+
+        if (!this->name.empty() && this->universe_pointer != nullptr)
+        {
+            delete this->universe_pointer->entity_anyvalue_map[this->name];
+            this->universe_pointer->entity_anyvalue_map[this->name] = nullptr;
+        }
     }
 
     void Shader::render()
@@ -79,6 +85,11 @@ namespace ontology
     {
         // this method sets pointer to this `Shader` to nullptr, sets `parent_pointer` according to the input, and requests a new `childID` from the new `Scene`.
         hierarchy::bind_child_to_new_parent<ontology::Shader*, ontology::Scene*>(this, new_scene_pointer, this->parent_pointer->shader_pointer_vector, this->parent_pointer->free_shaderID_queue);
+    }
+
+    void Shader::set_name(std::string name)
+    {
+        ontology::set_name(name, this);
     }
 
     void Shader::set_terrain_species_pointer(ontology::Species* terrain_species_pointer)

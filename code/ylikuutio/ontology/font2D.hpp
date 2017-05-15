@@ -55,6 +55,11 @@ namespace ontology
                     const char* text_char,
                     const char* char_font_texture_file_format);
 
+            void set_name(std::string name);
+
+            template<class T1>
+                friend void set_name(std::string name, T1 entity);
+
         private:
             GLuint texture;     // Texture containing the glyphs, reterned by `load_BMP_texture` or `load_DDS_texture` (used for `glGenTextures` etc.).
             GLuint vertexbuffer;         // Buffer containing the vertices

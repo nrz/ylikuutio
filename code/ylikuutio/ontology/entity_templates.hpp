@@ -10,10 +10,28 @@
 namespace ontology
 {
     template<class T1>
-        void set_name(std::string name, T1* entity)
+        void set_name(std::string name, T1 entity)
         {
-            datatypes::AnyValue* entity_any_value = new datatypes::AnyValue(entity);
             ontology::Universe* universe = entity->universe_pointer;
+
+            if (universe == nullptr)
+            {
+                return;
+            }
+
+            datatypes::AnyValue* entity_any_value = new datatypes::AnyValue(entity);
+
+            if (entity_any_value == nullptr)
+            {
+                return;
+            }
+
+            if (universe->entity_anyvalue_map[name] != nullptr)
+            {
+                return;
+            }
+
+            entity->name = name;
             universe->entity_anyvalue_map[name] = entity_any_value;
         }
 }

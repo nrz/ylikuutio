@@ -50,7 +50,11 @@ namespace ontology
             // this method sets a object pointer.
             void set_object_pointer(uint32_t childID, ontology::Object* child_pointer);
 
+            void set_name(std::string name);
+
             friend class Object;
+            template<class T1>
+                friend void set_name(std::string name, T1 entity);
             template<class T1>
                 friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<uint32_t>& free_childID_queue);
 

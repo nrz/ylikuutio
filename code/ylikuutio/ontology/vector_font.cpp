@@ -116,6 +116,12 @@ namespace ontology
 
         // set pointer to this `VectorFont` to nullptr.
         this->parent_pointer->set_vector_font_pointer(this->childID, nullptr);
+
+        if (!this->name.empty() && this->universe_pointer != nullptr)
+        {
+            delete this->universe_pointer->entity_anyvalue_map[this->name];
+            this->universe_pointer->entity_anyvalue_map[this->name] = nullptr;
+        }
     }
 
     void VectorFont::render()
@@ -138,5 +144,10 @@ namespace ontology
     void VectorFont::bind_to_new_parent(ontology::Material* new_material_pointer)
     {
         hierarchy::bind_child_to_new_parent<ontology::VectorFont*, ontology::Material*>(this, new_material_pointer, this->parent_pointer->vector_font_pointer_vector, this->parent_pointer->free_vector_fontID_queue);
+    }
+
+    void VectorFont::set_name(std::string name)
+    {
+        ontology::set_name(name, this);
     }
 }
