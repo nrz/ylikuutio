@@ -127,7 +127,7 @@ namespace ontology
     void VectorFont::render()
     {
         // this method renders all glyphs of this `VectorFont`.
-        // render `VectorFont` by calling `render()` function of each `Glyph`.
+        // render this `VectorFont` by calling `render()` function of each `Glyph`.
         ontology::render_children<ontology::Glyph*>(this->glyph_pointer_vector);
     }
 

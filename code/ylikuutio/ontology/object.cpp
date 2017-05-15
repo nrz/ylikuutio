@@ -94,11 +94,13 @@ namespace ontology
 
     void Object::act()
     {
-        // act according to this game/simulation object's programming.
+        // TODO: act according to this game/simulation object's programming.
     }
 
     void Object::render()
     {
+        // render this `Object`.
+
         if (this->should_ylikuutio_render_this_object)
         {
             ontology::Shader* shader_pointer;

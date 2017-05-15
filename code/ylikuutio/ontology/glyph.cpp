@@ -72,6 +72,7 @@ namespace ontology
 
     void Glyph::render()
     {
+        // render this `Glyph`.
         ontology::render_species_or_glyph<ontology::Glyph*>(this);
     }
 

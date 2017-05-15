@@ -72,7 +72,7 @@ namespace ontology
 
         glUniformMatrix4fv(this->ViewMatrixID, 1, GL_FALSE, &ViewMatrix[0][0]); // This one doesn't change between objects, so this can be done once for all objects that use "programID"
 
-        // render Shader by calling `render()` function of each Material.
+        // render this `Shader` by calling `render()` function of each `Material`.
         ontology::render_children<ontology::Material*>(this->material_pointer_vector);
     }
 

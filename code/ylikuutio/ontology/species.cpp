@@ -178,6 +178,7 @@ namespace ontology
 
     void Species::render()
     {
+        // render this `Species`.
         ontology::render_species_or_glyph<ontology::Species*>(this);
     }
 
