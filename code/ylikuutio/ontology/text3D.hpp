@@ -20,6 +20,7 @@
 
 // Include standard headers
 #include <queue>    // std::queue
+#include <string>   // std::string
 #include <vector>   // std::vector
 
 namespace ontology
@@ -72,6 +73,7 @@ namespace ontology
             std::queue<uint32_t> free_objectID_queue;
 
             ontology::Universe* universe_pointer;
+            std::string name;
     };
 }
 

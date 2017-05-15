@@ -97,6 +97,7 @@ namespace ontology
             const char* char_texture_filename;
 
             ontology::Universe* universe_pointer;
+            std::string name;
     };
 }
 

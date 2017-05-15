@@ -41,6 +41,7 @@
 // Include standard headers
 #include <queue>    // std::queue
 #include <stdint.h> // uint32_t etc.
+#include <string>   // std::string
 #include <vector>   // std::vector
 
 namespace ontology
@@ -220,6 +221,7 @@ namespace ontology
             glm::mat4 MVP_matrix;                  // model view projection matrix.
 
             ontology::Universe* universe_pointer;
+            std::string name;
     };
 
     template<class T1>

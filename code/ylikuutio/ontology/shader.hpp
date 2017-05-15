@@ -92,6 +92,7 @@ namespace ontology
             const char* char_fragment_shader;
 
             ontology::Universe* universe_pointer;
+            std::string name;
     };
 }
 

@@ -8,6 +8,7 @@
 // Include standard headers
 #include <queue>    // std::queue
 #include <stdint.h> // uint32_t etc.
+#include <string>   // std::string
 #include <unordered_map> // std::unordered_map
 #include <vector>   // std::vector
 
@@ -59,6 +60,7 @@ namespace ontology
             std::unordered_map<std::string, ontology::Object*> name_map;
 
             ontology::Universe* universe_pointer;
+            std::string name;
     };
 }
 

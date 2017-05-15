@@ -94,6 +94,7 @@ namespace ontology
             uint32_t image_height;
 
             ontology::Universe* universe_pointer;
+            std::string name;
     };
 }
 

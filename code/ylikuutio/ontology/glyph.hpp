@@ -70,6 +70,7 @@ namespace ontology
             const char* unicode_char_pointer;      // we need only a pointer, because glyphs are always created by the `VectorFont` constructor.
 
             ontology::Universe* universe_pointer;
+            std::string name;
     };
 }
 

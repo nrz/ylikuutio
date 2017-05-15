@@ -88,6 +88,7 @@ namespace ontology
             std::unordered_map<int32_t, ontology::Glyph*> unicode_glyph_map;
 
             ontology::Universe* universe_pointer;
+            std::string name;
     };
 }
 
