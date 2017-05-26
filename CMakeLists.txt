@@ -540,6 +540,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/glyph_struct.hpp
     code/ylikuutio/ontology/ground_level.cpp
     code/ylikuutio/ontology/ground_level.hpp
+    code/ylikuutio/ontology/info_struct.hpp
     code/ylikuutio/ontology/material.cpp
     code/ylikuutio/ontology/material.hpp
     code/ylikuutio/ontology/material_struct.hpp
