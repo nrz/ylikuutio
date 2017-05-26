@@ -20,6 +20,7 @@ namespace ontology
     class VectorFont;
     class Glyph;
     class Text3D;
+    class Symbiosis;
 }
 
 namespace font2D
@@ -464,6 +465,7 @@ namespace datatypes
         this->vector_font_pointer = nullptr;
         this->glyph_pointer = nullptr;
         this->text3D_pointer = nullptr;
+        this->symbiosis_pointer = nullptr;
         this->font2D_pointer = nullptr;
         this->console_pointer = nullptr;
     }
@@ -570,6 +572,11 @@ namespace datatypes
         else if (std::strcmp(type.c_str(), "ontology::Text3D"))
         {
             this->type = datatypes::TEXT3D_POINTER;
+            this->set_value(value_string);
+        }
+        else if (std::strcmp(type.c_str(), "ontology::Symbiosis"))
+        {
+            this->type = datatypes::SYMBIOSIS_POINTER;
             this->set_value(value_string);
         }
         else if (std::strcmp(type.c_str(), "ontology::Text2D"))
