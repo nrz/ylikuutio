@@ -45,15 +45,19 @@ namespace ontology
                 friend void hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent_pointer, std::vector<T1>& old_child_pointer_vector, std::queue<uint32_t>& old_free_childID_queue);
 
         private:
+            void bind_to_parent();
+
             // this method renders all `Shader`s of this `Scene`.
             void render();
 
             // this method sets a `Shader` pointer.
             void set_shader_pointer(uint32_t childID, ontology::Shader* child_pointer);
 
-            ontology::Universe* parent_pointer;         // pointer to the `Universe`.
+            // this method sets a `Symbiosis` pointer.
+            void set_symbiosis_pointer(uint32_t childID, ontology::Symbiosis* child_pointer);
 
-            void bind_to_parent();
+            ontology::Universe* universe_pointer; // pointer to the `Universe`.
+            ontology::Universe* parent_pointer;   // pointer to the `Universe`.
 
             uint32_t childID;                     // scene ID, returned by `ontology::Universe->get_sceneID()`.
 
@@ -63,8 +67,7 @@ namespace ontology
             // For finding any `Object`s of this `Scene` by using its name.
             std::unordered_map<std::string, ontology::Object*> name_map;
 
-            ontology::Universe* universe_pointer;
-            std::string name;
+            std::string name;                      // name of this entity.
     };
 }
 

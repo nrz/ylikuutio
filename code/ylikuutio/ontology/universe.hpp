@@ -190,7 +190,7 @@ namespace ontology
             std::vector<ontology::Scene*> scene_pointer_vector;
             std::queue<uint32_t> free_sceneID_queue;
 
-            config::SettingMaster* setting_master_pointer;
+            config::SettingMaster* setting_master_pointer; // pointer to `SettingMaster`.
 
             // Named entities are stored here so that they can be recalled, if needed.
             std::unordered_map<std::string, datatypes::AnyValue*> entity_anyvalue_map;

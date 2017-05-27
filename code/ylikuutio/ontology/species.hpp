@@ -81,10 +81,11 @@ namespace ontology
             // this method renders all `Object`s of this `Species`.
             void render();
 
-            ontology::Material* parent_pointer;      // pointer to the `Material`.
+            ontology::Universe* universe_pointer; // pointer to `Universe`.
+            ontology::Material* parent_pointer;   // pointer to `Material`.
 
-            std::string model_file_format;           // type of the model file, eg. `"bmp"`.
-            std::string model_filename;              // filename of the model file.
+            std::string model_file_format;        // type of the model file, eg. `"bmp"`.
+            std::string model_filename;           // filename of the model file.
 
             const char* char_model_file_format;
             const char* char_model_filename;
@@ -97,8 +98,7 @@ namespace ontology
             uint32_t image_width;
             uint32_t image_height;
 
-            ontology::Universe* universe_pointer;
-            std::string name;
+            std::string name;                     // name of this entity.
     };
 }
 

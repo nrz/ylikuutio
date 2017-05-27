@@ -64,17 +64,19 @@ namespace ontology
         private:
             void bind_to_parent();
 
+            // this method renders all `Glyph`s of this `VectorFont`.
+            void render();
+
             // this method returns a pointer to `Glyph` that matches the given `unicode_value`,
             // and `nullptr` if this `VectorFont` does not contain such a `Glyph`.
             ontology::Glyph* get_glyph_pointer(int32_t unicode_value);
 
-            // this method renders all `Glyph`s of this `VectorFont`.
-            void render();
+            ontology::Universe* universe_pointer; // pointer to `Universe`.
 
-            std::string font_file_format;          // type of the model file, eg. `"bmp"`.
-            std::string font_filename;             // filename of the model file.
+            std::string font_file_format;         // type of the model file, eg. `"bmp"`.
+            std::string font_filename;            // filename of the model file.
             GLfloat vertex_scaling_factor;
-            uint32_t childID;                      // species ID, returned by `ontology::Material->get_speciesID()`.
+            uint32_t childID;                     // species ID, returned by `ontology::Material->get_speciesID()`.
             const char* char_font_file_format;
             const char* char_font_filename;
 
@@ -91,8 +93,7 @@ namespace ontology
 
             std::unordered_map<int32_t, ontology::Glyph*> unicode_glyph_map;
 
-            ontology::Universe* universe_pointer;
-            std::string name;
+            std::string name;                     // name of this entity.
     };
 }
 

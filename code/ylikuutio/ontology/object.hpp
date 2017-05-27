@@ -197,12 +197,13 @@ namespace ontology
         private:
             void bind_to_parent();
 
-            // act according to this game/simulation object's programming.
-            void act();
-
             // this method renders this `Object`.
             void render();
 
+            // act according to this game/simulation object's programming.
+            void act();
+
+            ontology::Universe* universe_pointer;      // pointer to `Universe`.
             ontology::Species* species_parent_pointer; // pointer to `Species`.
             ontology::Glyph* glyph_parent_pointer;     // pointer to `Glyph`.
             ontology::Text3D* text3D_parent_pointer;   // pointer to `Text3D`.
@@ -224,8 +225,7 @@ namespace ontology
             glm::mat4 model_matrix;                // model matrix.
             glm::mat4 MVP_matrix;                  // model view projection matrix.
 
-            ontology::Universe* universe_pointer;
-            std::string name;
+            std::string name;                      // name of this entity.
     };
 
     template<class T1>

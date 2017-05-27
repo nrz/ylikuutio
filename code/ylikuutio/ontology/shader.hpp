@@ -63,6 +63,8 @@ namespace ontology
                 friend void render_this_object(ontology::Object* object_pointer, ontology::Shader* shader_pointer);
 
         private:
+            void bind_to_parent();
+
             // this method renders all materials using this `Shader`.
             void render();
 
@@ -72,15 +74,14 @@ namespace ontology
             // this method sets a scene species pointer.
             void set_terrain_species_pointer(ontology::Species* terrain_species_pointer);
 
-            ontology::Scene* parent_pointer;         // pointer to `Scene`.
+            ontology::Universe* universe_pointer; // pointer to `Universe`.
+            ontology::Scene* parent_pointer;      // pointer to `Scene`.
 
             GLuint programID;                     // this `Shader`'s `programID`, returned by `load_shaders`.
 
             GLuint MatrixID;
             GLuint ViewMatrixID;
             GLuint ModelMatrixID;
-
-            void bind_to_parent();
 
             ontology::Species* terrain_species_pointer; // pointer to scene species (used in collision detection).
 
@@ -95,8 +96,7 @@ namespace ontology
             const char* char_vertex_shader;
             const char* char_fragment_shader;
 
-            ontology::Universe* universe_pointer;
-            std::string name;
+            std::string name;                      // name of this entity.
     };
 }
 

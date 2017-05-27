@@ -63,21 +63,21 @@ namespace ontology
 
             std::string text_string;
 
+            ontology::Universe* universe_pointer; // pointer to `Universe`.
             ontology::VectorFont* parent_pointer; // pointer to `VectorFont`.
 
-            uint32_t childID;                  // text3D ID, returned by `ontology::Material->get_childID()`.
+            uint32_t childID;                     // text3D ID, returned by `ontology::Material->get_childID()`.
 
-            glm::vec3 original_scale_vector;   // original scale vector.
-            GLfloat rotate_angle;              // rotate angle.
-            glm::vec3 coordinate_vector;       // coordinate vector.
-            glm::vec3 rotate_vector;           // rotate vector.
-            glm::vec3 translate_vector;        // translate vector.
+            glm::vec3 original_scale_vector;      // original scale vector.
+            GLfloat rotate_angle;                 // rotate angle.
+            glm::vec3 coordinate_vector;          // coordinate vector.
+            glm::vec3 rotate_vector;              // rotate vector.
+            glm::vec3 translate_vector;           // translate vector.
 
             std::vector<ontology::Object*> object_pointer_vector;
             std::queue<uint32_t> free_objectID_queue;
 
-            ontology::Universe* universe_pointer;
-            std::string name;
+            std::string name;                     // name of this entity.
     };
 }
 

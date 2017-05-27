@@ -61,15 +61,15 @@ namespace ontology
                 friend void set_name(std::string name, T1 entity);
 
         private:
-            GLuint texture;     // Texture containing the glyphs, reterned by `load_BMP_texture` or `load_DDS_texture` (used for `glGenTextures` etc.).
-            GLuint vertexbuffer;         // Buffer containing the vertices
-            GLuint uvbuffer;             // Buffer containing the UVs
-            GLuint programID;               // The `programID` of the shader used to display the text, returned by `load_shaders`.
-            GLuint vertex_position_in_screenspaceID; // Location of the program's "vertexPosition_screenspace" attribute
-            GLuint vertexUVID;                   // Location of the program's "vertexUV" attribute
-            GLuint Text2DUniformID;              // Location of the program's texture attribute
-            GLuint screen_width_uniform_ID;      // Location of the program's window width uniform.
-            GLuint screen_height_uniform_ID;     // Location of the program's window height uniform.
+            GLuint texture;      // Texture containing the glyphs, reterned by `load_BMP_texture` or `load_DDS_texture` (used for `glGenTextures` etc.).
+            GLuint vertexbuffer; // Buffer containing the vertices
+            GLuint uvbuffer;     // Buffer containing the UVs
+            GLuint programID;    // The `programID` of the shader used to display the text, returned by `load_shaders`.
+            GLuint vertex_position_in_screenspaceID; // Location of the program's `vertexPosition_screenspace` attribute.
+            GLuint vertexUVID;                       // Location of the program's `vertexUV` attribute.
+            GLuint Text2DUniformID;                  // Location of the program's texture attribute.
+            GLuint screen_width_uniform_ID;          // Location of the program's window width uniform.
+            GLuint screen_height_uniform_ID;         // Location of the program's window height uniform.
 
             ontology::Universe* universe_pointer;
             std::string name;

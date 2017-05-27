@@ -63,6 +63,8 @@ namespace ontology
                 friend void hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent_pointer, std::vector<T1>& old_child_pointer_vector, std::queue<uint32_t>& old_free_childID_queue);
 
         private:
+            void bind_to_parent();
+
             // this method renders all `Species` using this `Material`.
             void render();
 
@@ -78,9 +80,8 @@ namespace ontology
             // this method sets a terrain `Species` pointer.
             void set_terrain_species_pointer(ontology::Species* terrain_species_pointer);
 
-            ontology::Shader* parent_pointer;         // pointer to the `Shader`.
-
-            void bind_to_parent();
+            ontology::Universe* universe_pointer;  // pointer to `Universe`.
+            ontology::Shader* parent_pointer;      // pointer to `Shader`.
 
             ontology::Species* terrain_species_pointer; // pointer to terrain `Species` (used in collision detection).
 
@@ -100,8 +101,7 @@ namespace ontology
             const char* char_texture_file_format;
             const char* char_texture_filename;
 
-            ontology::Universe* universe_pointer;
-            std::string name;
+            std::string name;                      // name of this entity.
     };
 }
 

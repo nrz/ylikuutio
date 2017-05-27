@@ -67,14 +67,14 @@ namespace ontology
             // this method renders all `Object`s of this `Glyph`.
             void render();
 
+            ontology::Universe* universe_pointer;  // pointer to `Universe`.
             ontology::VectorFont* parent_pointer;  // pointer to `VectorFont`.
 
             std::vector<std::vector<glm::vec2>>* glyph_vertex_data;
             const char* glyph_name_pointer;        // we need only a pointer, because glyphs are always created by the `VectorFont` constructor.
             const char* unicode_char_pointer;      // we need only a pointer, because glyphs are always created by the `VectorFont` constructor.
 
-            ontology::Universe* universe_pointer;
-            std::string name;
+            std::string name;                      // name of this entity.
     };
 }
 
