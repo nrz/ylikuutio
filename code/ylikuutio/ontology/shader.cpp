@@ -81,6 +81,11 @@ namespace ontology
         hierarchy::set_child_pointer(childID, child_pointer, this->material_pointer_vector, this->free_materialID_queue);
     }
 
+    void Shader::set_symbiosis_pointer(uint32_t childID, ontology::Symbiosis* child_pointer)
+    {
+        hierarchy::set_child_pointer(childID, child_pointer, this->symbiosis_pointer_vector, this->free_symbiosisID_queue);
+    }
+
     void Shader::bind_to_new_parent(ontology::Scene* new_scene_pointer)
     {
         // this method sets pointer to this `Shader` to nullptr, sets `parent_pointer` according to the input, and requests a new `childID` from the new `Scene`.

@@ -32,6 +32,7 @@ namespace ontology
     class Scene;
     class Material;
     class Object;
+    class Symbiosis;
 
     class Shader
     {
@@ -71,6 +72,9 @@ namespace ontology
             // this method sets a `Material` pointer.
             void set_material_pointer(uint32_t childID, ontology::Material* child_pointer);
 
+            // this method sets a `Symbiosis` pointer.
+            void set_symbiosis_pointer(uint32_t childID, ontology::Symbiosis* child_pointer);
+
             // this method sets a scene species pointer.
             void set_terrain_species_pointer(ontology::Species* terrain_species_pointer);
 
@@ -91,7 +95,9 @@ namespace ontology
             std::string fragment_shader;          // filename of fragment shader.
 
             std::vector<ontology::Material*> material_pointer_vector;
+            std::vector<ontology::Symbiosis*> symbiosis_pointer_vector;
             std::queue<uint32_t> free_materialID_queue;
+            std::queue<uint32_t> free_symbiosisID_queue;
 
             const char* char_vertex_shader;
             const char* char_fragment_shader;
