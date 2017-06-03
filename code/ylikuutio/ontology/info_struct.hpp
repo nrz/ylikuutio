@@ -29,6 +29,7 @@ typedef struct InfoStruct
     uint32_t childID;
     std::string name;
     glm::vec3 coordinate_vector;
+    int32_t number_of_children;
 } InfoStruct;
 
 #endif
