@@ -4,6 +4,7 @@ Listaa tähän keskeneräiset asiat kiireellisyysjärjestyksessä kiireellisimm�
 Ylikuution kehityksen kannalta välttämättömiä työvaiheita:
 [ ] Lisää konsoliin infokomento `info` (kertoo entiteeteistä, esim. objekteista verteksien lukumäärän ym. tietoja).
 [ ] Lisää konsoliin skenejen (`Scene`) latauskomento `load`.
+[ ] Koodaa taustalla toimiva skenejen (`Scene`) lataus.
 [ ] Koodaa konsoliin tekstin vieritys kun 'ikkuna' tulee täyteen.
 [ ] Lisää konsoliin objektien listauskomento `objects`.
 [ ] Luo graafi maailman vertekseistä ja särmistä.
