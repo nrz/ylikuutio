@@ -2,12 +2,12 @@
 #define __GLYPH_HPP_INCLUDED
 
 #include "species_or_glyph.hpp"
-#include "entity_templates.hpp"
 #include "model.hpp"
 #include "text3D.hpp"
 #include "vector_font.hpp"
 #include "glyph_struct.hpp"
 #include "render_templates.hpp"
+#include "entity_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include GLEW

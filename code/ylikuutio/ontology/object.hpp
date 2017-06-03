@@ -1,12 +1,12 @@
 #ifndef __OBJECT_HPP_INCLUDED
 #define __OBJECT_HPP_INCLUDED
 
-#include "entity_templates.hpp"
 #include "shader.hpp"
 #include "species.hpp"
 #include "glyph.hpp"
 #include "object_struct.hpp"
 #include "render_templates.hpp"
+#include "entity_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/common/global_variables.hpp"
 #include "code/ylikuutio/common/globals.hpp"

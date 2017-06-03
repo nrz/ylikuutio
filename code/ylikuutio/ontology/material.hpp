@@ -1,10 +1,10 @@
 #ifndef __TEXTURE_HPP_INCLUDED
 #define __TEXTURE_HPP_INCLUDED
 
-#include "entity_templates.hpp"
 #include "shader.hpp"
 #include "material_struct.hpp"
 #include "render_templates.hpp"
+#include "entity_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/common/globals.hpp"
 

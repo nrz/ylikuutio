@@ -1,8 +1,8 @@
 #ifndef __SCENE_HPP_INCLUDED
 #define __SCENE_HPP_INCLUDED
 
-#include "entity_templates.hpp"
 #include "universe.hpp"
+#include "entity_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include standard headers
