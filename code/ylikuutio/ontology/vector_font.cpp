@@ -98,6 +98,9 @@ namespace ontology
                 this->unicode_glyph_map[unicode_value] = glyph;
             }
         }
+
+        this->child_vector_pointers_vector.push_back(&this->glyph_pointer_vector);
+        this->child_vector_pointers_vector.push_back(&this->text3D_pointer_vector);
     }
 
     VectorFont::~VectorFont()

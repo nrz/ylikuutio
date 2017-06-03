@@ -52,6 +52,10 @@ namespace ontology
 
         // Get a handle for our "myTextureSampler" uniform.
         this->openGL_textureID = glGetUniformLocation(this->parent_pointer->programID, "myTextureSampler");
+
+        this->child_vector_pointers_vector.push_back(&this->species_pointer_vector);
+        this->child_vector_pointers_vector.push_back(&this->vector_font_pointer_vector);
+        this->child_vector_pointers_vector.push_back(&this->chunk_master_pointer_vector);
     }
 
     Material::~Material()

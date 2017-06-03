@@ -44,6 +44,8 @@ namespace ontology
 
         // get `childID` from the `Universe` and set pointer to this `Scene`.
         this->bind_to_parent();
+
+        this->child_vector_pointers_vector.push_back(&this->shader_pointer_vector);
     }
 
     Scene::~Scene()

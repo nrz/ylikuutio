@@ -42,6 +42,9 @@ namespace ontology
         this->MatrixID = glGetUniformLocation(this->programID, "MVP");
         this->ViewMatrixID = glGetUniformLocation(this->programID, "V");
         this->ModelMatrixID = glGetUniformLocation(this->programID, "M");
+
+        this->child_vector_pointers_vector.push_back(&this->material_pointer_vector);
+        this->child_vector_pointers_vector.push_back(&this->symbiosis_pointer_vector);
     }
 
     Shader::~Shader()

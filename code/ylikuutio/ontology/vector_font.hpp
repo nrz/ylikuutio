@@ -86,6 +86,8 @@ namespace ontology
             std::vector<std::string> glyph_names;
             std::vector<std::string> unicode_strings;
 
+            std::vector<void*> child_vector_pointers_vector;
+
             std::vector<ontology::Glyph*> glyph_pointer_vector;
             std::vector<ontology::Text3D*> text3D_pointer_vector;
             std::queue<uint32_t> free_glyphID_queue;

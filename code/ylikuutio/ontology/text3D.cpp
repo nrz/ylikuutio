@@ -69,6 +69,8 @@ namespace ontology
         //
         // TODO: If the Unicode exists in the hash map, create the corresponding glyph `Object`.
         //       If not, continue from the next Unicode of `text_string`.
+
+        this->child_vector_pointers_vector.push_back(&this->object_pointer_vector);
     }
 
     Text3D::~Text3D()

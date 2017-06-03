@@ -88,6 +88,8 @@ namespace ontology
             GLuint texture;                        // Texture of this `Material`, returned by `load_BMP_texture` or `load_DDS_texture` (used for `glGenTextures` etc.).
             GLuint openGL_textureID;               // texture ID, returned by `glGetUniformLocation(programID, "myTextureSampler");`.
 
+            std::vector<void*> child_vector_pointers_vector;
+
             std::vector<ontology::Species*> species_pointer_vector;
             std::vector<ontology::VectorFont*> vector_font_pointer_vector;
             std::vector<space_partition::ChunkMaster*> chunk_master_pointer_vector;

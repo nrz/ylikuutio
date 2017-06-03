@@ -61,6 +61,8 @@ namespace ontology
 
             uint32_t childID;                     // scene ID, returned by `ontology::Universe->get_sceneID()`.
 
+            std::vector<void*> child_vector_pointers_vector;
+
             std::vector<ontology::Shader*> shader_pointer_vector;
             std::queue<uint32_t> free_shaderID_queue;
 

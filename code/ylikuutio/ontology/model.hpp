@@ -45,6 +45,8 @@ namespace ontology
             uint32_t childID;                        // species ID, returned by `ontology::Material->get_speciesID()`.
             GLuint lightID;                          // light ID, returned by `glGetUniformLocation(programID, "LightPosition_worldspace");`.
 
+            std::vector<void*> child_vector_pointers_vector;
+
             std::vector<ontology::Object*> object_pointer_vector;
             std::queue<uint32_t> free_objectID_queue;
 

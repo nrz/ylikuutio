@@ -56,6 +56,8 @@ namespace ontology
         // constructor.
         this->world_radius = NAN; // world radius is NAN as long it doesn't get `set` by `SettingMaster`.
         this->setting_master_pointer = nullptr;
+
+        this->child_vector_pointers_vector.push_back(&this->scene_pointer_vector);
     }
 
     Universe::~Universe()

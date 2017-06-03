@@ -222,6 +222,8 @@ namespace ontology
 
             float world_radius;
 
+            std::vector<void*> child_vector_pointers_vector;
+
             std::vector<ontology::Scene*> scene_pointer_vector;
             std::queue<uint32_t> free_sceneID_queue;
 
