@@ -68,7 +68,7 @@ namespace ontology
             // this method renders all materials using this `Shader`.
             void render();
 
-            // this method sets a material pointer.
+            // this method sets a `Material` pointer.
             void set_material_pointer(uint32_t childID, ontology::Material* child_pointer);
 
             // this method sets a scene species pointer.
