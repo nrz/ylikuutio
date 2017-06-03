@@ -21,14 +21,14 @@ namespace ontology
 typedef struct InfoStruct
 {
     InfoStruct()
-        : memory_address(nullptr), childID(-1), name(""), coordinates(glm::vec3(NAN, NAN, NAN))
+        : memory_address(nullptr), childID(-1), name(""), coordinate_vector(glm::vec3(NAN, NAN, NAN))
     {
         // constructor.
     }
     datatypes::AnyValue* memory_address;
     uint32_t childID;
     std::string name;
-    glm::vec3 coordinates;
+    glm::vec3 coordinate_vector;
 } InfoStruct;
 
 #endif
