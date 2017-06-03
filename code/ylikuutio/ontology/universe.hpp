@@ -32,7 +32,7 @@
 // `Species` must be create before any `Object` of that `Species`. `parent_pointer` must be given to each `Object` of the `Species`.
 //
 //
-// Hierarchy of regular objects (including terrain species):
+// Hierarchy of regular `Object`s (including terrain species):
 //
 //    Universe
 //       ^
@@ -46,9 +46,9 @@
 //       ^
 //     Object
 //
-// Please note that for regular objects the hierarchy above is both the ontological hierarchy and the rendering hierarchy.
+// Please note that for regular `Object`s the hierarchy above is both the ontological hierarchy and the rendering hierarchy.
 //
-// Ontological hierarchy of glyph (character) objects:
+// Ontological hierarchy of `Glyph` (character) objects:
 //
 //    Universe
 //       ^
@@ -67,7 +67,7 @@
 // Ontological hierarchy affects how objects can be created and how they can be destroyed,
 // though the precise ways how objects can be created depends on the functions available.
 //
-// Rendering hierarchy of glyph (character) objects:
+// Rendering hierarchy of `Glyph` (character) objects:
 //
 //    Universe
 //       ^
@@ -87,6 +87,41 @@
 // So, `render_species_or_glyph` is called only once for each glyph, and that call renders all the children of that `Glyph`,
 // even if the children (which are of type `Object`) may belong to many different `Text3D` objects.
 // `Text3D` is anyway needed in the ontological hierarchy, so that complete 3D texts can be destroyed and manipulated at once.
+//
+// Ontological hierarchy of `Symbiosis` objects:
+//
+//    Universe
+//       ^
+//     Scene
+//       ^
+//   Symbiosis
+//       ^
+//     Shader
+//       ^
+//    Material
+//       ^
+//    Species
+//       ^
+//     Object
+//
+// Ontological hierarchy affects how objects can be created and how they can be destroyed,
+// though the precise ways how objects can be created depends on the functions available.
+//
+// Rendering hierarchy of `Symbiosis` objects:
+//
+//    Universe
+//       ^
+//     Scene
+//       ^
+//     Shader
+//       ^
+//    Material
+//       ^
+//    Species
+//       ^
+//     Object
+//
+// Please note that `Symbiosis` is ignored completely in rendering hierarchy.
 //
 // Deleting a `Universe` also deletes all scenes, all shaders, materials, species, fonts, glyphs and objects that are bound to the same `Universe`.
 // Deleting a `Scene` also deletes all shaders, materials, species, fonts, glyphs and objects that are bound to the same `Universe`.
