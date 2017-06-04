@@ -104,67 +104,67 @@ namespace datatypes
             case (BOOL):
                 return (this->bool_value ? "true" : "false");
             case (CHAR):
-                snprintf(buffer, buffer_size, "%c", this->char_value);
+                snprintf(buffer, sizeof(buffer), "%c", this->char_value);
                 return std::string(buffer);
             case (FLOAT):
-                snprintf(buffer, buffer_size, "%f", this->float_value);
+                snprintf(buffer, sizeof(buffer), "%f", this->float_value);
                 return std::string(buffer);
             case (DOUBLE):
-                snprintf(buffer, buffer_size, "%f", this->double_value);
+                snprintf(buffer, sizeof(buffer), "%f", this->double_value);
                 return std::string(buffer);
             case (INT32_T):
-                snprintf(buffer, buffer_size, "%f", this->int32_t_value);
+                snprintf(buffer, sizeof(buffer), "%f", this->int32_t_value);
                 return std::string(buffer);
             case (UINT32_T):
-                snprintf(buffer, buffer_size, "%lu", this->uint32_t_value);
+                snprintf(buffer, sizeof(buffer), "%lu", this->uint32_t_value);
                 return std::string(buffer);
             case (BOOL_POINTER):
-                snprintf(buffer, buffer_size, "%llu", static_cast<void*>(this->bool_pointer));
+                snprintf(buffer, sizeof(buffer), "%llu", static_cast<void*>(this->bool_pointer));
                 return std::string(buffer);
             case (FLOAT_POINTER):
-                snprintf(buffer, buffer_size, "%llu", static_cast<void*>(this->float_pointer));
+                snprintf(buffer, sizeof(buffer), "%llu", static_cast<void*>(this->float_pointer));
                 return std::string(buffer);
             case (DOUBLE_POINTER):
-                snprintf(buffer, buffer_size, "%llu", static_cast<void*>(this->double_pointer));
+                snprintf(buffer, sizeof(buffer), "%llu", static_cast<void*>(this->double_pointer));
                 return std::string(buffer);
             case (INT32_T_POINTER):
-                snprintf(buffer, buffer_size, "%llu", static_cast<void*>(this->int32_t_pointer));
+                snprintf(buffer, sizeof(buffer), "%llu", static_cast<void*>(this->int32_t_pointer));
                 return std::string(buffer);
             case (UINT32_T_POINTER):
-                snprintf(buffer, buffer_size, "%llu", static_cast<void*>(this->uint32_t_pointer));
+                snprintf(buffer, sizeof(buffer), "%llu", static_cast<void*>(this->uint32_t_pointer));
                 return std::string(buffer);
             case (UNIVERSE_POINTER):
-                snprintf(buffer, buffer_size, "%llu", static_cast<void*>(this->universe_pointer));
+                snprintf(buffer, sizeof(buffer), "%llu", static_cast<void*>(this->universe_pointer));
                 return std::string(buffer);
             case (SCENE_POINTER):
-                snprintf(buffer, buffer_size, "%llu", static_cast<void*>(this->scene_pointer));
+                snprintf(buffer, sizeof(buffer), "%llu", static_cast<void*>(this->scene_pointer));
                 return std::string(buffer);
             case (SHADER_POINTER):
-                snprintf(buffer, buffer_size, "%llu", static_cast<void*>(this->shader_pointer));
+                snprintf(buffer, sizeof(buffer), "%llu", static_cast<void*>(this->shader_pointer));
                 return std::string(buffer);
             case (MATERIAL_POINTER):
-                snprintf(buffer, buffer_size, "%llu", static_cast<void*>(this->material_pointer));
+                snprintf(buffer, sizeof(buffer), "%llu", static_cast<void*>(this->material_pointer));
                 return std::string(buffer);
             case (SPECIES_POINTER):
-                snprintf(buffer, buffer_size, "%llu", static_cast<void*>(this->species_pointer));
+                snprintf(buffer, sizeof(buffer), "%llu", static_cast<void*>(this->species_pointer));
                 return std::string(buffer);
             case (OBJECT_POINTER):
-                snprintf(buffer, buffer_size, "%llu", static_cast<void*>(this->object_pointer));
+                snprintf(buffer, sizeof(buffer), "%llu", static_cast<void*>(this->object_pointer));
                 return std::string(buffer);
             case (VECTORFONT_POINTER):
-                snprintf(buffer, buffer_size, "%llu", static_cast<void*>(this->vector_font_pointer));
+                snprintf(buffer, sizeof(buffer), "%llu", static_cast<void*>(this->vector_font_pointer));
                 return std::string(buffer);
             case (GLYPH_POINTER):
-                snprintf(buffer, buffer_size, "%llu", static_cast<void*>(this->glyph_pointer));
+                snprintf(buffer, sizeof(buffer), "%llu", static_cast<void*>(this->glyph_pointer));
                 return std::string(buffer);
             case (TEXT3D_POINTER):
-                snprintf(buffer, buffer_size, "%llu", static_cast<void*>(this->text3D_pointer));
+                snprintf(buffer, sizeof(buffer), "%llu", static_cast<void*>(this->text3D_pointer));
                 return std::string(buffer);
             case (TEXT2D_POINTER):
-                snprintf(buffer, buffer_size, "%llu", static_cast<void*>(this->font2D_pointer));
+                snprintf(buffer, sizeof(buffer), "%llu", static_cast<void*>(this->font2D_pointer));
                 return std::string(buffer);
             case (CONSOLE_POINTER):
-                snprintf(buffer, buffer_size, "%llu", static_cast<void*>(this->console_pointer));
+                snprintf(buffer, sizeof(buffer), "%llu", static_cast<void*>(this->console_pointer));
                 return std::string(buffer);
             default:
                 return "TODO: define string for this datatype!";
