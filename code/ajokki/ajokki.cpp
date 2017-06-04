@@ -884,7 +884,7 @@ int main(void)
             {
                 // If last `std::printf()` was more than 1 sec ago,
                 // `std::printf` and reset.
-                std::sprintf(ms_frame_text, "%.02f ms/frame; %.02f Hz", 1000.0f / ((double) nbFrames), 1000.0f / (1000.0f / ((double) nbFrames)));
+                std::snprintf(ms_frame_text, sizeof(ms_frame_text), "%.02f ms/frame; %.02f Hz", 1000.0f / ((double) nbFrames), 1000.0f / (1000.0f / ((double) nbFrames)));
                 ms_frame_text_ready = true;
                 nbFrames = 0;
                 last_time_to_display_FPS += 1.0;
@@ -1048,8 +1048,9 @@ int main(void)
             printing_struct.char_font_texture_file_format = "bmp";
 
             char angles_and_coordinates_text[256];
-            std::sprintf(
+            std::snprintf(
                     angles_and_coordinates_text,
+                    sizeof(angles_and_coordinates_text),
                     "%.2f,%.2f rad; %.2f,%.2f deg\\n(%.2f,%.2f,%.2f)",
                     horizontalAngle,
                     verticalAngle,
@@ -1060,7 +1061,7 @@ int main(void)
                     position.z);
 
             char time_text[256];
-            std::sprintf(time_text, "%.2f sec", glfwGetTime());
+            std::snprintf(time_text, sizeof(time_text), "%.2f sec", glfwGetTime());
 
             char null_text[] = "";
             char on_text[] = "on";
@@ -1068,8 +1069,9 @@ int main(void)
             char in_use_text[] = " (in use)";
 
             char help_text_char[1024];
-            std::sprintf(
+            std::snprintf(
                     help_text_char,
+                    sizeof(help_text_char),
                     "Ajokki v. 0.0.1\\n"
                     "\\n"
                     "arrow keys\\n"
@@ -1095,7 +1097,7 @@ int main(void)
 
             if (testing_spherical_world_in_use)
             {
-                std::sprintf(spherical_coordinates_text, "rho:%.2f theta:%.2f phi:%.2f", spherical_position.rho, spherical_position.theta, spherical_position.phi);
+                std::snprintf(spherical_coordinates_text, sizeof(spherical_coordinates_text), "rho:%.2f theta:%.2f phi:%.2f", spherical_position.rho, spherical_position.theta, spherical_position.phi);
             }
 
             // print cartesian coordinates on bottom left corner.
