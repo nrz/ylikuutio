@@ -49,6 +49,7 @@ namespace ontology
             void set_name(std::string name);
 
             friend class Scene;
+            friend class Symbiosis;
             friend class Material;
             friend class Glyph;
             friend class Species;
