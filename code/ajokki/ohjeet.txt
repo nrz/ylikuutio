@@ -85,3 +85,6 @@ http://www.rockthe3d.com/category/models/
 
 85 Free 3D Rigged Beautiful Girl Models:
 http://www.rockthe3d.com/free-3d-rigged-beautiful-girl-models/
+
+Git Large File Storage:
+https://git-lfs.github.com/
