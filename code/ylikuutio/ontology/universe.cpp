@@ -77,7 +77,7 @@ namespace ontology
     {
         this->compute_matrices_from_inputs();
 
-        // render Universe by calling `render()` function of each Scene.
+        // render this `Universe` by calling `render()` function of each `Scene`.
         ontology::render_children<ontology::Scene*>(this->scene_pointer_vector);
     }
 

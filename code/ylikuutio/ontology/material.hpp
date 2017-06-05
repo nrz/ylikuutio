@@ -99,7 +99,7 @@ namespace ontology
 
             std::string texture_file_format;       // type of the model file, eg. `"bmp"`.
             std::string texture_filename;          // filename of the model file.
-            uint32_t childID;                      // texture ID, returned by `Shader::get_textureID`.
+            uint32_t childID;                      // material ID, set by `this->bind_to_parent()`.
             const char* char_texture_file_format;
             const char* char_texture_filename;
 

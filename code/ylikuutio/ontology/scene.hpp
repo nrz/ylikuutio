@@ -59,7 +59,7 @@ namespace ontology
             ontology::Universe* universe_pointer; // pointer to the `Universe`.
             ontology::Universe* parent_pointer;   // pointer to the `Universe`.
 
-            uint32_t childID;                     // scene ID, returned by `ontology::Universe->get_sceneID()`.
+            uint32_t childID;                     // scene ID, set by `this->bind_to_parent()`.
 
             std::vector<void*> child_vector_pointers_vector;
 

@@ -23,7 +23,7 @@ typedef struct SpeciesStruct
         // constructor.
     }
     // used for all files (for all species).
-    ontology::Material* parent_pointer;      // pointer to the material object.
+    ontology::Material* parent_pointer;      // pointer to `Material` object.
     bool is_world;                           // worlds currently do not rotate nor translate.
     float world_radius;                      // radius of sea level in kilometers. used only for worlds.
     float divisor;                           // value by which SRTM values are divided to convert them to kilometers.
@@ -36,9 +36,9 @@ typedef struct SpeciesStruct
     glm::vec3 light_position;                // light position.
     std::string coordinate_system;           // used only for worlds (`is_world` == `true`). valid values: `"cartesian"`.
                                              // TODO: add support for `"spherical"`. `"spherical"` is used eg. in SRTM heightmaps.
-    uint32_t x_step;
-    uint32_t z_step;
-    std::string triangulation_type;
+    uint32_t x_step;                         // Step in x-dimension for input data (set to 1 to load all data points/measurements).
+    uint32_t z_step;                         // Step in z-dimension for input data (set to 1 to load all data points/measurements).
+    std::string triangulation_type;          // `"bilinear_interpolation"`, `"southwest_northeast_edges"`, `"southeast_northwest_edges"`.
 } SpeciesStruct;
 
 #endif

@@ -16,7 +16,7 @@ namespace ontology
 {
     void Material::bind_to_parent()
     {
-        // get `childID` from the `Shader` and set pointer to this `Material`.
+        // get `childID` from `Shader` and set pointer to this `Material`.
         hierarchy::bind_child_to_parent<ontology::Material*>(this, this->parent_pointer->material_pointer_vector, this->parent_pointer->free_materialID_queue);
     }
 

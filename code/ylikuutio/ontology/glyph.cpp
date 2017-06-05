@@ -14,7 +14,7 @@ namespace ontology
 {
     void Glyph::bind_to_parent()
     {
-        // get `childID` from the `VectorFont` and set pointer to this `Glyph`.
+        // get `childID` from `VectorFont` and set pointer to this `Glyph`.
         hierarchy::bind_child_to_parent<ontology::Glyph*>(this, this->parent_pointer->glyph_pointer_vector, this->parent_pointer->free_glyphID_queue);
     }
 
@@ -29,7 +29,7 @@ namespace ontology
         this->unicode_char_pointer = glyph_struct.unicode_char_pointer;
         this->light_position = glyph_struct.light_position;
 
-        // get `childID` from the `VectorFont` and set pointer to this `Glyph`.
+        // get `childID` from `VectorFont` and set pointer to this `Glyph`.
         this->bind_to_parent();
 
         // TODO: implement triangulation of `Glyph` objects!

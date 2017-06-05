@@ -12,14 +12,14 @@ namespace ontology
 {
     void Object::bind_to_parent()
     {
-        // get `childID` from the `Species` or the `Glyph` and set pointer to this `Object`.
+        // get `childID` from `Species` or `Glyph` and set pointer to this `Object`.
 
         if (this->is_character)
         {
             ontology::Text3D* parent_pointer;
             parent_pointer = this->text3D_parent_pointer;
             // for ontological hierarchy (rendering hierarchy does not use `childID`).
-            // get `childID` from the `Glyph` and set pointer to this `Object`.
+            // get `childID` from `Glyph` and set pointer to this `Object`.
             hierarchy::bind_child_to_parent<ontology::Object*>(this, parent_pointer->object_pointer_vector, parent_pointer->free_objectID_queue);
         }
         else
@@ -27,7 +27,7 @@ namespace ontology
             ontology::Species* parent_pointer;
             parent_pointer = this->species_parent_pointer;
             // for ontological hierarchy (rendering hierarchy does not use `childID`).
-            // get `childID` from the `Species` and set pointer to this `Object`.
+            // get `childID` from `Species` and set pointer to this `Object`.
             hierarchy::bind_child_to_parent<ontology::Object*>(this, parent_pointer->object_pointer_vector, parent_pointer->free_objectID_queue);
         }
     }
@@ -62,7 +62,7 @@ namespace ontology
             this->glyph_parent_pointer   = nullptr;
         }
 
-        // get `childID` from the `Species` or the `Glyph` and set pointer to this `Object`.
+        // get `childID` from `Species` or `Glyph` and set pointer to this `Object`.
         this->bind_to_parent();
 
         bool model_loading_result = false;

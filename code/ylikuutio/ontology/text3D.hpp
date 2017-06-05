@@ -66,7 +66,7 @@ namespace ontology
             ontology::Universe* universe_pointer; // pointer to `Universe`.
             ontology::VectorFont* parent_pointer; // pointer to `VectorFont`.
 
-            uint32_t childID;                     // text3D ID, returned by `ontology::Material->get_childID()`.
+            uint32_t childID;                     // text3D ID, set by `this->bind_to_parent()`.
 
             glm::vec3 original_scale_vector;      // original scale vector.
             GLfloat rotate_angle;                 // rotate angle.

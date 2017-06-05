@@ -29,7 +29,7 @@ namespace ontology
 {
     void Species::bind_to_parent()
     {
-        // get `childID` from the `Material` and set pointer to this `Species`.
+        // get `childID` from `Material` and set pointer to this `Species`.
         hierarchy::bind_child_to_parent<ontology::Species*>(this, this->parent_pointer->species_pointer_vector, this->parent_pointer->free_speciesID_queue);
     }
 
@@ -52,7 +52,7 @@ namespace ontology
         this->char_model_file_format = this->model_file_format.c_str();
         this->char_model_filename    = this->model_filename.c_str();
 
-        // get `childID` from the `Material` and set pointer to this `Species`.
+        // get `childID` from `Material` and set pointer to this `Species`.
         this->bind_to_parent();
 
         // Get a handle for our buffers.

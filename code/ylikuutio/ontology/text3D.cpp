@@ -13,6 +13,7 @@ namespace ontology
 {
     void Text3D::bind_to_parent()
     {
+        // get `childID` from `VectorFont` and set pointer to this `Text3D`.
         hierarchy::bind_child_to_parent<ontology::Text3D*>(this, this->parent_pointer->text3D_pointer_vector, this->parent_pointer->free_text3D_ID_queue);
     }
 
@@ -27,12 +28,12 @@ namespace ontology
         this->parent_pointer = text3D_struct.parent_pointer;
         this->universe_pointer = this->parent_pointer->universe_pointer;
 
-        // get childID from `Font` and set pointer to this `Text3D`.
+        // get childID from `VectorFont` and set pointer to this `Text3D`.
         this->bind_to_parent();
 
         std::cout << "Creating the glyph Objects for the string \"" << this->text_string << "\"\n";
 
-        // Let's create each glyph Object in a loop.
+        // Let's create each glyph `Object` in a loop.
 
         const char* text_pointer = this->text_string.c_str();
 
