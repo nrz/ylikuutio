@@ -95,9 +95,10 @@ namespace ontology
         // Set our "myTextureSampler" sampler to user Texture Unit 0.
         glUniform1i(this->openGL_textureID, 0);
 
-        // render this `Material` by calling `render()` function of each `Species` and of each `VectorFont`.
+        // render this `Material` by calling `render()` function of each `Species`, each `VectorFont`, and each `ChunkMaster`.
         ontology::render_children<ontology::Species*>(this->species_pointer_vector);
         ontology::render_children<ontology::VectorFont*>(this->vector_font_pointer_vector);
+        ontology::render_children<space_partition::ChunkMaster*>(this->chunk_master_pointer_vector);
     }
 
     void Material::set_species_pointer(uint32_t childID, ontology::Species* child_pointer)
