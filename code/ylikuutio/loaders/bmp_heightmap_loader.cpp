@@ -39,8 +39,10 @@ namespace loaders
     {
         std::cout << "Loading BMP file " << image_path << " ...\n";
 
+        uint8_t header_size = 54;
+
         // Data read from the header of the BMP file
-        uint8_t header[54];
+        uint8_t header[header_size];
         uint32_t image_size;
         // Actual RGB image data.
         uint8_t *image_data;
@@ -57,7 +59,7 @@ namespace loaders
         // Read the header, i.e. the 54 first bytes
 
         // If less than 54 bytes are read, it's a problem.
-        if (std::fread(header, 1, 54, file) != 54)
+        if (std::fread(header, 1, sizeof(header), file) != sizeof(header))
         {
             std::cerr << "not a correct BMP file.\n";
             std::fclose(file);
@@ -112,7 +114,7 @@ namespace loaders
         }
 
         // Read the actual image data from the file into the buffer.
-        std::fread(image_data, 1, image_size, file);
+        std::fread(image_data, 1, sizeof(image_data), file);
 
         // Everything is in memory now, the file can be closed
         std::fclose(file);
