@@ -3,8 +3,8 @@
 // Include standard headers
 #include <cerrno>   // errno
 #include <cmath>    // NAN, std::isnan, std::pow
+#include <cstdio>   // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf etc.
 #include <cstring>  // std::memcmp, std::strcmp, std::strlen, std::strncmp
-#include <stdio.h>  // printf, snprintf, sprintf
 #include <string>   // std::string
 #include <stdint.h> // uint32_t etc.
 #include <stdlib.h> // std::strtol, std::strtoll, std::strtoul
