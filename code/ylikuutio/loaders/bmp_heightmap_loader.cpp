@@ -129,7 +129,6 @@ namespace loaders
         {
             std::cerr << "Reserving memory for vertex data failed.\n";
             delete image_data;
-            std::fclose(file);
             return false;
         }
 
