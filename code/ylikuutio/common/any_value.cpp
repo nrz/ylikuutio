@@ -579,7 +579,7 @@ namespace datatypes
             this->type = datatypes::SYMBIOSIS_POINTER;
             this->set_value(value_string);
         }
-        else if (std::strcmp(type.c_str(), "ontology::Text2D"))
+        else if (std::strcmp(type.c_str(), "ontology::Text2D*"))
         {
             this->type = datatypes::TEXT2D_POINTER;
             this->set_value(value_string);
