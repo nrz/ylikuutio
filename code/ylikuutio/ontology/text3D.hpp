@@ -75,8 +75,6 @@ namespace ontology
             glm::vec3 rotate_vector;              // rotate vector.
             glm::vec3 translate_vector;           // translate vector.
 
-            std::vector<void*> child_vector_pointers_vector;
-
             std::vector<ontology::Object*> object_pointer_vector;
             std::queue<uint32_t> free_objectID_queue;
 

@@ -96,8 +96,6 @@ namespace ontology
             std::string vertex_shader;            // filename of vertex shader.
             std::string fragment_shader;          // filename of fragment shader.
 
-            std::vector<void*> child_vector_pointers_vector;
-
             std::vector<ontology::Material*> material_pointer_vector;
             std::vector<ontology::Symbiosis*> symbiosis_pointer_vector;
             std::queue<uint32_t> free_materialID_queue;
