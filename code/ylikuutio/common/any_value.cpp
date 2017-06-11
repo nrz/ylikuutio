@@ -113,10 +113,22 @@ namespace datatypes
                 std::snprintf(buffer, sizeof(buffer), "%f", this->double_value);
                 return std::string(buffer);
             case (INT32_T):
+#ifdef __linux__
+                // in Linux `int` is 32 bits, `long` is 64 bits, `long long` is also 64 bits.
+                std::snprintf(buffer, sizeof(buffer), "%d", this->int32_t_value);
+#elif defined(_WIN32) || defined(WIN32)
+                // in Windows `int` is 32 bits, `long` is also 32 bits, `long long` is 64 bits.
                 std::snprintf(buffer, sizeof(buffer), "%ld", this->int32_t_value);
+#endif
                 return std::string(buffer);
             case (UINT32_T):
+#ifdef __linux__
+                // in Linux `int` is 32 bits, `long` is 64 bits, `long long` is also 64 bits.
+                std::snprintf(buffer, sizeof(buffer), "%u", this->uint32_t_value);
+#elif defined(_WIN32) || defined(WIN32)
+                // in Windows `int` is 32 bits, `long` is also 32 bits, `long long` is 64 bits.
                 std::snprintf(buffer, sizeof(buffer), "%lu", this->uint32_t_value);
+#endif
                 return std::string(buffer);
             case (BOOL_POINTER):
                 std::snprintf(buffer, sizeof(buffer), "%llu", static_cast<void*>(this->bool_pointer));
