@@ -569,7 +569,7 @@ namespace datatypes
             this->type = datatypes::GLYPH_POINTER;
             this->set_value(value_string);
         }
-        else if (std::strcmp(type.c_str(), "ontology::Text3D"))
+        else if (std::strcmp(type.c_str(), "ontology::Text3D*"))
         {
             this->type = datatypes::TEXT3D_POINTER;
             this->set_value(value_string);
