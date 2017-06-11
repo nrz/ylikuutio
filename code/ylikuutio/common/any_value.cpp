@@ -574,7 +574,7 @@ namespace datatypes
             this->type = datatypes::TEXT3D_POINTER;
             this->set_value(value_string);
         }
-        else if (std::strcmp(type.c_str(), "ontology::Symbiosis"))
+        else if (std::strcmp(type.c_str(), "ontology::Symbiosis*"))
         {
             this->type = datatypes::SYMBIOSIS_POINTER;
             this->set_value(value_string);
