@@ -19,7 +19,6 @@
 
 namespace ontology
 {
-    class Universe;
     class Material;
     class Glyph;
 
@@ -71,8 +70,6 @@ namespace ontology
             // this method returns a pointer to `Glyph` that matches the given `unicode_value`,
             // and `nullptr` if this `VectorFont` does not contain such a `Glyph`.
             ontology::Glyph* get_glyph_pointer(int32_t unicode_value);
-
-            ontology::Universe* universe_pointer; // pointer to `Universe`.
 
             std::string font_file_format;         // type of the model file, eg. `"bmp"`.
             std::string font_filename;            // filename of the model file.

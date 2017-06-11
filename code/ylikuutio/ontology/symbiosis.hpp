@@ -17,7 +17,6 @@
 
 namespace ontology
 {
-    class Universe;
     class Shader;
     class Material;
     class Species;
@@ -44,7 +43,6 @@ namespace ontology
 
             // no `render()` member function in `Symbiosis` because `Symbiosis` is not present in the rendering hierarchy.
 
-            ontology::Universe* universe_pointer; // pointer to `Universe`.
             ontology::Shader* parent_pointer;     // pointer to `Scene`.
 
             uint32_t childID;                     // symbiosis ID, set by `this->bind_to_parent()`.

@@ -30,7 +30,6 @@
 
 namespace ontology
 {
-    class Universe;
     class Object;
 
     class Glyph: public ontology::Model
@@ -67,7 +66,6 @@ namespace ontology
             // this method renders all `Object`s of this `Glyph`.
             void render();
 
-            ontology::Universe* universe_pointer;  // pointer to `Universe`.
             ontology::VectorFont* parent_pointer;  // pointer to `VectorFont`.
 
             std::vector<std::vector<glm::vec2>>* glyph_vertex_data;

@@ -57,7 +57,6 @@ namespace ontology
             // this method sets a `Symbiosis` pointer.
             void set_symbiosis_pointer(uint32_t childID, ontology::Symbiosis* child_pointer);
 
-            ontology::Universe* universe_pointer; // pointer to the `Universe`.
             ontology::Universe* parent_pointer;   // pointer to the `Universe`.
 
             uint32_t childID;                     // scene ID, set by `this->bind_to_parent()`.

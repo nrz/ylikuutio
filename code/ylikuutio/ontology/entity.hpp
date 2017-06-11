@@ -6,6 +6,8 @@
 
 namespace ontology
 {
+    class Universe;
+
     class Entity
     {
         public:
@@ -16,6 +18,7 @@ namespace ontology
             ~Entity();
 
         protected:
+            ontology::Universe* universe_pointer;            // pointer to the `Universe`.
             std::vector<void*> child_vector_pointers_vector;
     };
 }

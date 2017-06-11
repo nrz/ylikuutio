@@ -29,7 +29,6 @@ namespace space_partition
 
 namespace ontology
 {
-    class Universe;
     class Species;
     class Object;
     class VectorFont;
@@ -81,7 +80,6 @@ namespace ontology
             // this method sets a terrain `Species` pointer.
             void set_terrain_species_pointer(ontology::Species* terrain_species_pointer);
 
-            ontology::Universe* universe_pointer;  // pointer to `Universe`.
             ontology::Shader* parent_pointer;      // pointer to `Shader`.
 
             ontology::Species* terrain_species_pointer; // pointer to terrain `Species` (used in collision detection).

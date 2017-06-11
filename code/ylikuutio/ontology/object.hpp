@@ -47,7 +47,6 @@
 
 namespace ontology
 {
-    class Universe;
     class Species;
     class Glyph;
 
@@ -204,7 +203,6 @@ namespace ontology
             // act according to this game/simulation object's programming.
             void act();
 
-            ontology::Universe* universe_pointer;      // pointer to `Universe`.
             ontology::Species* species_parent_pointer; // pointer to `Species`.
             ontology::Glyph* glyph_parent_pointer;     // pointer to `Glyph`.
             ontology::Text3D* text3D_parent_pointer;   // pointer to `Text3D`.

@@ -26,8 +26,6 @@
 
 namespace ontology
 {
-    class Universe;
-
     class Text3D: public ontology::Entity
     {
         public:
@@ -64,7 +62,6 @@ namespace ontology
 
             std::string text_string;
 
-            ontology::Universe* universe_pointer; // pointer to `Universe`.
             ontology::VectorFont* parent_pointer; // pointer to `VectorFont`.
 
             uint32_t childID;                     // text3D ID, set by `this->bind_to_parent()`.

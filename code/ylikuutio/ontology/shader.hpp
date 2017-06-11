@@ -29,7 +29,6 @@
 
 namespace ontology
 {
-    class Universe;
     class Scene;
     class Material;
     class Object;
@@ -80,7 +79,6 @@ namespace ontology
             // this method sets a scene species pointer.
             void set_terrain_species_pointer(ontology::Species* terrain_species_pointer);
 
-            ontology::Universe* universe_pointer; // pointer to `Universe`.
             ontology::Scene* parent_pointer;      // pointer to `Scene`.
 
             GLuint programID;                     // this `Shader`'s `programID`, returned by `load_shaders`.
