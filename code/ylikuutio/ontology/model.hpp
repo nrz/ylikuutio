@@ -1,6 +1,8 @@
 #ifndef __MODEL_HPP_INCLUDED
 #define __MODEL_HPP_INCLUDED
 
+#include "entity.hpp"
+
 // Include GLEW
 #ifndef __GL_GLEW_H_INCLUDED
 #define __GL_GLEW_H_INCLUDED
@@ -24,7 +26,7 @@ namespace ontology
     class Material;
     class Object;
 
-    class Model
+    class Model: public ontology::Entity
     {
         public:
             // constructor.

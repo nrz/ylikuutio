@@ -1,6 +1,7 @@
 #ifndef __OBJECT_HPP_INCLUDED
 #define __OBJECT_HPP_INCLUDED
 
+#include "entity.hpp"
 #include "shader.hpp"
 #include "species.hpp"
 #include "glyph.hpp"
@@ -50,7 +51,7 @@ namespace ontology
     class Species;
     class Glyph;
 
-    class Object
+    class Object: public ontology::Entity
     {
         public:
             // constructor.

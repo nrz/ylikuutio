@@ -1,6 +1,7 @@
 #ifndef __SCENE_HPP_INCLUDED
 #define __SCENE_HPP_INCLUDED
 
+#include "entity.hpp"
 #include "universe.hpp"
 #include "entity_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
@@ -19,7 +20,7 @@ namespace ontology
     class Species;
     class Object;
 
-    class Scene
+    class Scene: public ontology::Entity
     {
         public:
             // constructor.

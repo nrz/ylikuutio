@@ -1,6 +1,7 @@
 #ifndef TEXT3D_HPP
 #define TEXT3D_HPP
 
+#include "entity.hpp"
 #include "text3D_struct.hpp"
 #include "entity_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
@@ -27,7 +28,7 @@ namespace ontology
 {
     class Universe;
 
-    class Text3D
+    class Text3D: public ontology::Entity
     {
         public:
             // constructor.

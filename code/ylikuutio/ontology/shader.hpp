@@ -6,6 +6,7 @@
 #define DEGREES_TO_RADIANS(x) (x * PI / 180.0f)
 #endif
 
+#include "entity.hpp"
 #include "shader_struct.hpp"
 #include "render_templates.hpp"
 #include "entity_templates.hpp"
@@ -34,7 +35,7 @@ namespace ontology
     class Object;
     class Symbiosis;
 
-    class Shader
+    class Shader: public ontology::Entity
     {
         public:
             // constructor.

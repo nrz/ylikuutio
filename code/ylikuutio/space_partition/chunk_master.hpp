@@ -1,6 +1,7 @@
 #ifndef __CHUNK_MASTER_HPP_INCLUDED
 #define __CHUNK_MASTER_HPP_INCLUDED
 
+#include "code/ylikuutio/ontology/entity.hpp"
 #include "code/ylikuutio/ontology/material.hpp"
 #include "code/ylikuutio/common/globals.hpp"
 
@@ -18,7 +19,7 @@ namespace space_partition
 {
     class Chunk;
 
-    class ChunkMaster
+    class ChunkMaster: public ontology::Entity
     {
         public:
             // constructor.

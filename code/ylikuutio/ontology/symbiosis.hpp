@@ -4,6 +4,7 @@
 // Symbiont `Species` use the same `Shader`. In the future, a new class `ShaderSymbiosis` may be crated should need for such class arise.
 // `ShaderSymbiosis` is like `Symbiosis`, but it contains also `Shader`s in addition to `Material`s and `Species`.
 
+#include "entity.hpp"
 #include "symbiosis_struct.hpp"
 #include "entity_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
@@ -21,7 +22,7 @@ namespace ontology
     class Material;
     class Species;
 
-    class Symbiosis
+    class Symbiosis: public ontology::Entity
     {
         public:
             // constructor.

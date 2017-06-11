@@ -1,6 +1,7 @@
 #ifndef __WORLD_HPP_INCLUDED
 #define __WORLD_HPP_INCLUDED
 
+#include "entity.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
 #include "code/ylikuutio/common/globals.hpp"
 
@@ -170,7 +171,7 @@ namespace ontology
     class Scene;
     class Shader;
 
-    class Universe
+    class Universe: public ontology::Entity
     {
         public:
             // constructor.
