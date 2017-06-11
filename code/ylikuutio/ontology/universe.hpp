@@ -191,6 +191,11 @@ namespace ontology
                     ontology::Universe* universe,
                     std::vector<std::string>& command_parameters);
 
+            static datatypes::AnyValue* info(
+                    console::Console* console,
+                    ontology::Universe* universe,
+                    std::vector<std::string>& command_parameters);
+
             // Public callbacks end here.
 
             friend class Scene;

@@ -165,6 +165,51 @@ namespace ontology
         }
     }
 
+    datatypes::AnyValue* Universe::info(
+            console::Console* console,
+            ontology::Universe* universe,
+            std::vector<std::string>& command_parameters)
+    {
+        if (console == nullptr || universe == nullptr || command_parameters.size() == 0)
+        {
+            return nullptr;
+        }
+
+        config::SettingMaster* setting_master = universe->setting_master_pointer;
+
+        if (setting_master == nullptr)
+        {
+            return nullptr;
+        }
+
+        if (command_parameters.size() == 0)
+        {
+            // No command parameters.
+            // Print variable names.
+            console->print_text(setting_master->help());
+        }
+        else if (command_parameters.size() == 1)
+        {
+            std::string name = command_parameters[0];
+            datatypes::AnyValue* any_value = universe->entity_anyvalue_map[name];
+
+            if (any_value == nullptr)
+            {
+                return nullptr;
+            }
+
+            // OK, let's find out information about the entity.
+
+            // TODO: get info about the entity.
+            delete any_value;
+            return nullptr;
+        }
+        else
+        {
+            return nullptr;
+        }
+    }
+
     // Public callbacks end here.
 
     void Universe::set_scene_pointer(uint32_t childID, ontology::Scene* child_pointer)
