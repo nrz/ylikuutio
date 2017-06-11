@@ -113,7 +113,7 @@ namespace datatypes
                 std::snprintf(buffer, sizeof(buffer), "%f", this->double_value);
                 return std::string(buffer);
             case (INT32_T):
-                std::snprintf(buffer, sizeof(buffer), "%f", this->int32_t_value);
+                std::snprintf(buffer, sizeof(buffer), "%ld", this->int32_t_value);
                 return std::string(buffer);
             case (UINT32_T):
                 std::snprintf(buffer, sizeof(buffer), "%lu", this->uint32_t_value);
