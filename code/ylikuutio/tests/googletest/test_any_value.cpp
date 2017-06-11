@@ -4,6 +4,7 @@
 
 // Include standard headers
 #include <cmath>    // NAN, std::isnan, std::pow
+#include <cstring>  // std::memcmp, std::strcmp, std::strlen, std::strncmp
 #include <stdint.h> // uint32_t etc.
 
 TEST(any_value_must_be_initialized_appropriately, no_value)
@@ -29,6 +30,13 @@ TEST(any_value_must_be_initialized_appropriately, no_value)
     ASSERT_EQ(no_value.vector_font_pointer, nullptr);
     ASSERT_EQ(no_value.glyph_pointer, nullptr);
     ASSERT_EQ(no_value.text3D_pointer, nullptr);
+    ASSERT_EQ(no_value.symbiosis_pointer, nullptr);
+    ASSERT_EQ(no_value.font2D_pointer, nullptr);
+    ASSERT_EQ(no_value.console_pointer, nullptr);
+    ASSERT_EQ(std::strlen(no_value.get_datatype().c_str()), strlen("unknown"));
+    ASSERT_EQ(std::strcmp(no_value.get_datatype().c_str(), "unknown"), 0);
+    ASSERT_EQ(std::strlen(no_value.get_string().c_str()), strlen("unknown"));
+    ASSERT_EQ(std::strcmp(no_value.get_string().c_str(), "unknown"), 0);
 }
 TEST(any_value_must_be_initialized_appropriately, bool_true)
 {
@@ -54,6 +62,13 @@ TEST(any_value_must_be_initialized_appropriately, bool_true)
     ASSERT_EQ(true_value.vector_font_pointer, nullptr);
     ASSERT_EQ(true_value.glyph_pointer, nullptr);
     ASSERT_EQ(true_value.text3D_pointer, nullptr);
+    ASSERT_EQ(true_value.symbiosis_pointer, nullptr);
+    ASSERT_EQ(true_value.font2D_pointer, nullptr);
+    ASSERT_EQ(true_value.console_pointer, nullptr);
+    ASSERT_EQ(std::strlen(true_value.get_datatype().c_str()), strlen("bool"));
+    ASSERT_EQ(std::strcmp(true_value.get_datatype().c_str(), "bool"), 0);
+    ASSERT_EQ(std::strlen(true_value.get_string().c_str()), strlen("bool"));
+    ASSERT_EQ(std::strcmp(true_value.get_string().c_str(), "true"), 0);
 }
 TEST(any_value_must_be_initialized_appropriately, bool_false)
 {
@@ -79,6 +94,13 @@ TEST(any_value_must_be_initialized_appropriately, bool_false)
     ASSERT_EQ(false_value.vector_font_pointer, nullptr);
     ASSERT_EQ(false_value.glyph_pointer, nullptr);
     ASSERT_EQ(false_value.text3D_pointer, nullptr);
+    ASSERT_EQ(false_value.symbiosis_pointer, nullptr);
+    ASSERT_EQ(false_value.font2D_pointer, nullptr);
+    ASSERT_EQ(false_value.console_pointer, nullptr);
+    ASSERT_EQ(std::strlen(false_value.get_datatype().c_str()), strlen("bool"));
+    ASSERT_EQ(std::strcmp(false_value.get_datatype().c_str(), "bool"), 0);
+    ASSERT_EQ(std::strlen(false_value.get_string().c_str()), strlen("false"));
+    ASSERT_EQ(std::strcmp(false_value.get_string().c_str(), "false"), 0);
 }
 TEST(any_value_must_be_initialized_appropriately, float_0)
 {
@@ -104,6 +126,14 @@ TEST(any_value_must_be_initialized_appropriately, float_0)
     ASSERT_EQ(float_zero_value.vector_font_pointer, nullptr);
     ASSERT_EQ(float_zero_value.glyph_pointer, nullptr);
     ASSERT_EQ(float_zero_value.text3D_pointer, nullptr);
+    ASSERT_EQ(float_zero_value.symbiosis_pointer, nullptr);
+    ASSERT_EQ(float_zero_value.font2D_pointer, nullptr);
+    ASSERT_EQ(float_zero_value.console_pointer, nullptr);
+    ASSERT_EQ(std::strlen(float_zero_value.get_datatype().c_str()), strlen("float"));
+    ASSERT_EQ(std::strcmp(float_zero_value.get_datatype().c_str(), "float"), 0);
+    ASSERT_EQ(std::strlen(float_zero_value.get_string().c_str()), strlen("0.000000"));
+    ASSERT_EQ(std::strlen(float_zero_value.get_string().c_str()), 8);
+    ASSERT_EQ(std::strcmp(float_zero_value.get_string().c_str(), "0.000000"), 0);
 }
 TEST(any_value_must_be_initialized_appropriately, float_NAN)
 {
@@ -129,6 +159,13 @@ TEST(any_value_must_be_initialized_appropriately, float_NAN)
     ASSERT_EQ(float_NAN_value.vector_font_pointer, nullptr);
     ASSERT_EQ(float_NAN_value.glyph_pointer, nullptr);
     ASSERT_EQ(float_NAN_value.text3D_pointer, nullptr);
+    ASSERT_EQ(float_NAN_value.symbiosis_pointer, nullptr);
+    ASSERT_EQ(float_NAN_value.font2D_pointer, nullptr);
+    ASSERT_EQ(float_NAN_value.console_pointer, nullptr);
+    ASSERT_EQ(std::strlen(float_NAN_value.get_datatype().c_str()), strlen("float"));
+    ASSERT_EQ(std::strcmp(float_NAN_value.get_datatype().c_str(), "float"), 0);
+    ASSERT_EQ(std::strlen(float_NAN_value.get_string().c_str()), strlen("nan"));
+    ASSERT_EQ(std::strcmp(float_NAN_value.get_string().c_str(), "nan"), 0);
 }
 TEST(any_value_must_be_initialized_appropriately, double_0)
 {
@@ -154,6 +191,14 @@ TEST(any_value_must_be_initialized_appropriately, double_0)
     ASSERT_EQ(double_zero_value.vector_font_pointer, nullptr);
     ASSERT_EQ(double_zero_value.glyph_pointer, nullptr);
     ASSERT_EQ(double_zero_value.text3D_pointer, nullptr);
+    ASSERT_EQ(double_zero_value.symbiosis_pointer, nullptr);
+    ASSERT_EQ(double_zero_value.font2D_pointer, nullptr);
+    ASSERT_EQ(double_zero_value.console_pointer, nullptr);
+    ASSERT_EQ(std::strlen(double_zero_value.get_datatype().c_str()), strlen("double"));
+    ASSERT_EQ(std::strcmp(double_zero_value.get_datatype().c_str(), "double"), 0);
+    ASSERT_EQ(std::strlen(double_zero_value.get_string().c_str()), strlen("0.000000"));
+    ASSERT_EQ(std::strlen(double_zero_value.get_string().c_str()), 8);
+    ASSERT_EQ(std::strcmp(double_zero_value.get_string().c_str(), "0.000000"), 0);
 }
 TEST(any_value_must_be_initialized_appropriately, double_NAN)
 {
@@ -179,6 +224,13 @@ TEST(any_value_must_be_initialized_appropriately, double_NAN)
     ASSERT_EQ(double_NAN_value.vector_font_pointer, nullptr);
     ASSERT_EQ(double_NAN_value.glyph_pointer, nullptr);
     ASSERT_EQ(double_NAN_value.text3D_pointer, nullptr);
+    ASSERT_EQ(double_NAN_value.symbiosis_pointer, nullptr);
+    ASSERT_EQ(double_NAN_value.font2D_pointer, nullptr);
+    ASSERT_EQ(double_NAN_value.console_pointer, nullptr);
+    ASSERT_EQ(std::strlen(double_NAN_value.get_datatype().c_str()), strlen("double"));
+    ASSERT_EQ(std::strcmp(double_NAN_value.get_datatype().c_str(), "double"), 0);
+    ASSERT_EQ(std::strlen(double_NAN_value.get_string().c_str()), strlen("nan"));
+    ASSERT_EQ(std::strcmp(double_NAN_value.get_string().c_str(), "nan"), 0);
 }
 TEST(any_value_must_be_initialized_appropriately, int32_t_zero)
 {
@@ -204,6 +256,13 @@ TEST(any_value_must_be_initialized_appropriately, int32_t_zero)
     ASSERT_EQ(int32_t_zero_value.vector_font_pointer, nullptr);
     ASSERT_EQ(int32_t_zero_value.glyph_pointer, nullptr);
     ASSERT_EQ(int32_t_zero_value.text3D_pointer, nullptr);
+    ASSERT_EQ(int32_t_zero_value.symbiosis_pointer, nullptr);
+    ASSERT_EQ(int32_t_zero_value.font2D_pointer, nullptr);
+    ASSERT_EQ(int32_t_zero_value.console_pointer, nullptr);
+    ASSERT_EQ(std::strlen(int32_t_zero_value.get_datatype().c_str()), strlen("int32_t"));
+    ASSERT_EQ(std::strcmp(int32_t_zero_value.get_datatype().c_str(), "int32_t"), 0);
+    ASSERT_EQ(std::strlen(int32_t_zero_value.get_string().c_str()), strlen("0"));
+    ASSERT_EQ(std::strcmp(int32_t_zero_value.get_string().c_str(), "0"), 0);
 }
 TEST(any_value_must_be_initialized_appropriately, int32_t_plus_1)
 {
@@ -229,6 +288,13 @@ TEST(any_value_must_be_initialized_appropriately, int32_t_plus_1)
     ASSERT_EQ(int32_t_plus_1_value.vector_font_pointer, nullptr);
     ASSERT_EQ(int32_t_plus_1_value.glyph_pointer, nullptr);
     ASSERT_EQ(int32_t_plus_1_value.text3D_pointer, nullptr);
+    ASSERT_EQ(int32_t_plus_1_value.symbiosis_pointer, nullptr);
+    ASSERT_EQ(int32_t_plus_1_value.font2D_pointer, nullptr);
+    ASSERT_EQ(int32_t_plus_1_value.console_pointer, nullptr);
+    ASSERT_EQ(std::strlen(int32_t_plus_1_value.get_datatype().c_str()), strlen("int32_t"));
+    ASSERT_EQ(std::strcmp(int32_t_plus_1_value.get_datatype().c_str(), "int32_t"), 0);
+    ASSERT_EQ(std::strlen(int32_t_plus_1_value.get_string().c_str()), strlen("1"));
+    ASSERT_EQ(std::strcmp(int32_t_plus_1_value.get_string().c_str(), "1"), 0);
 }
 TEST(any_value_must_be_initialized_appropriately, int32_t_minus_1)
 {
@@ -254,6 +320,13 @@ TEST(any_value_must_be_initialized_appropriately, int32_t_minus_1)
     ASSERT_EQ(int32_t_minus_1_value.vector_font_pointer, nullptr);
     ASSERT_EQ(int32_t_minus_1_value.glyph_pointer, nullptr);
     ASSERT_EQ(int32_t_minus_1_value.text3D_pointer, nullptr);
+    ASSERT_EQ(int32_t_minus_1_value.symbiosis_pointer, nullptr);
+    ASSERT_EQ(int32_t_minus_1_value.font2D_pointer, nullptr);
+    ASSERT_EQ(int32_t_minus_1_value.console_pointer, nullptr);
+    ASSERT_EQ(std::strlen(int32_t_minus_1_value.get_datatype().c_str()), strlen("int32_t"));
+    ASSERT_EQ(std::strcmp(int32_t_minus_1_value.get_datatype().c_str(), "int32_t"), 0);
+    ASSERT_EQ(std::strlen(int32_t_minus_1_value.get_string().c_str()), strlen("-1"));
+    ASSERT_EQ(std::strcmp(int32_t_minus_1_value.get_string().c_str(), "-1"), 0);
 }
 TEST(any_value_must_be_initialized_appropriately, uint32_t_zero)
 {
@@ -279,6 +352,13 @@ TEST(any_value_must_be_initialized_appropriately, uint32_t_zero)
     ASSERT_EQ(uint32_t_zero_value.vector_font_pointer, nullptr);
     ASSERT_EQ(uint32_t_zero_value.glyph_pointer, nullptr);
     ASSERT_EQ(uint32_t_zero_value.text3D_pointer, nullptr);
+    ASSERT_EQ(uint32_t_zero_value.symbiosis_pointer, nullptr);
+    ASSERT_EQ(uint32_t_zero_value.font2D_pointer, nullptr);
+    ASSERT_EQ(uint32_t_zero_value.console_pointer, nullptr);
+    ASSERT_EQ(std::strlen(uint32_t_zero_value.get_datatype().c_str()), strlen("uint32_t"));
+    ASSERT_EQ(std::strcmp(uint32_t_zero_value.get_datatype().c_str(), "uint32_t"), 0);
+    ASSERT_EQ(std::strlen(uint32_t_zero_value.get_string().c_str()), strlen("0"));
+    ASSERT_EQ(std::strcmp(uint32_t_zero_value.get_string().c_str(), "0"), 0);
 }
 TEST(any_value_must_be_initialized_appropriately, uint32_t_plus_1)
 {
@@ -304,4 +384,11 @@ TEST(any_value_must_be_initialized_appropriately, uint32_t_plus_1)
     ASSERT_EQ(uint32_t_plus_1_value.vector_font_pointer, nullptr);
     ASSERT_EQ(uint32_t_plus_1_value.glyph_pointer, nullptr);
     ASSERT_EQ(uint32_t_plus_1_value.text3D_pointer, nullptr);
+    ASSERT_EQ(uint32_t_plus_1_value.symbiosis_pointer, nullptr);
+    ASSERT_EQ(uint32_t_plus_1_value.font2D_pointer, nullptr);
+    ASSERT_EQ(uint32_t_plus_1_value.console_pointer, nullptr);
+    ASSERT_EQ(std::strlen(uint32_t_plus_1_value.get_datatype().c_str()), strlen("uint32_t"));
+    ASSERT_EQ(std::strcmp(uint32_t_plus_1_value.get_datatype().c_str(), "uint32_t"), 0);
+    ASSERT_EQ(std::strlen(uint32_t_plus_1_value.get_string().c_str()), strlen("1"));
+    ASSERT_EQ(std::strcmp(uint32_t_plus_1_value.get_string().c_str(), "1"), 0);
 }
