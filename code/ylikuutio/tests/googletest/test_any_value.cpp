@@ -5,6 +5,7 @@
 // Include standard headers
 #include <cmath>    // NAN, std::isnan, std::pow
 #include <cstring>  // std::memcmp, std::strcmp, std::strlen, std::strncmp
+#include <limits>   // std::numeric_limits
 #include <stdint.h> // uint32_t etc.
 
 TEST(any_value_must_be_initialized_appropriately, no_value)
@@ -332,6 +333,88 @@ TEST(any_value_must_be_initialized_appropriately, int32_t_minus_1)
     ASSERT_EQ(std::strlen(int32_t_minus_1_value.get_string().c_str()), strlen("-1"));
     ASSERT_EQ(std::strcmp(int32_t_minus_1_value.get_string().c_str(), "-1"), 0);
 }
+TEST(any_value_must_be_initialized_appropriately, int32_t_max)
+{
+    int32_t int32_t_max = std::numeric_limits<int32_t>::max();
+    datatypes::AnyValue int32_t_max_value = datatypes::AnyValue(int32_t_max);
+    ASSERT_EQ(int32_t_max_value.type, datatypes::INT32_T);
+    ASSERT_FALSE(int32_t_max_value.bool_value);
+    ASSERT_TRUE(std::isnan(int32_t_max_value.float_value));
+    ASSERT_TRUE(std::isnan(int32_t_max_value.double_value));
+    ASSERT_EQ(int32_t_max_value.int32_t_value, 2147483647);
+    ASSERT_EQ(static_cast<uint32_t>(int32_t_max_value.int32_t_value), 2147483647);
+    ASSERT_EQ(static_cast<uint32_t>(int32_t_max_value.int32_t_value), 0x7fffffff);
+    ASSERT_EQ(int32_t_max_value.int32_t_value, std::numeric_limits<int32_t>::max());
+    ASSERT_EQ(int32_t_max_value.uint32_t_value, 0);
+#ifdef __linux__
+    ASSERT_EQ(int32_t_max_value.int32_t_value, std::numeric_limits<int>::max());
+#elif defined(_WIN32) || defined(WIN32)
+    ASSERT_EQ(int32_t_max_value.int32_t_value, std::numeric_limits<int>::max());
+    ASSERT_EQ(int32_t_max_value.int32_t_value, std::numeric_limits<long>::max());
+#endif
+    ASSERT_EQ(int32_t_max_value.bool_pointer, nullptr);
+    ASSERT_EQ(int32_t_max_value.float_pointer, nullptr);
+    ASSERT_EQ(int32_t_max_value.double_pointer, nullptr);
+    ASSERT_EQ(int32_t_max_value.int32_t_pointer, nullptr);
+    ASSERT_EQ(int32_t_max_value.int32_t_pointer, nullptr);
+    ASSERT_EQ(int32_t_max_value.universe_pointer, nullptr);
+    ASSERT_EQ(int32_t_max_value.scene_pointer, nullptr);
+    ASSERT_EQ(int32_t_max_value.shader_pointer, nullptr);
+    ASSERT_EQ(int32_t_max_value.material_pointer, nullptr);
+    ASSERT_EQ(int32_t_max_value.species_pointer, nullptr);
+    ASSERT_EQ(int32_t_max_value.object_pointer, nullptr);
+    ASSERT_EQ(int32_t_max_value.vector_font_pointer, nullptr);
+    ASSERT_EQ(int32_t_max_value.glyph_pointer, nullptr);
+    ASSERT_EQ(int32_t_max_value.text3D_pointer, nullptr);
+    ASSERT_EQ(int32_t_max_value.symbiosis_pointer, nullptr);
+    ASSERT_EQ(int32_t_max_value.font2D_pointer, nullptr);
+    ASSERT_EQ(int32_t_max_value.console_pointer, nullptr);
+    ASSERT_EQ(std::strlen(int32_t_max_value.get_datatype().c_str()), strlen("int32_t"));
+    ASSERT_EQ(std::strcmp(int32_t_max_value.get_datatype().c_str(), "int32_t"), 0);
+    ASSERT_EQ(std::strlen(int32_t_max_value.get_string().c_str()), strlen("2147483647"));
+    ASSERT_EQ(std::strcmp(int32_t_max_value.get_string().c_str(), "2147483647"), 0);
+}
+TEST(any_value_must_be_initialized_appropriately, int32_t_min)
+{
+    int32_t int32_t_min = std::numeric_limits<int32_t>::min();
+    datatypes::AnyValue int32_t_min_value = datatypes::AnyValue(int32_t_min);
+    ASSERT_EQ(int32_t_min_value.type, datatypes::INT32_T);
+    ASSERT_FALSE(int32_t_min_value.bool_value);
+    ASSERT_TRUE(std::isnan(int32_t_min_value.float_value));
+    ASSERT_TRUE(std::isnan(int32_t_min_value.double_value));
+    ASSERT_EQ(int32_t_min_value.int32_t_value, -2147483648);
+    ASSERT_EQ(static_cast<uint32_t>(int32_t_min_value.int32_t_value), 2147483648);
+    ASSERT_EQ(static_cast<uint32_t>(int32_t_min_value.int32_t_value), 0x80000000);
+    ASSERT_EQ(int32_t_min_value.int32_t_value, std::numeric_limits<int32_t>::min());
+    ASSERT_EQ(int32_t_min_value.uint32_t_value, 0);
+#ifdef __linux__
+    ASSERT_EQ(int32_t_min_value.int32_t_value, std::numeric_limits<int>::min());
+#elif defined(_WIN32) || defined(WIN32)
+    ASSERT_EQ(int32_t_min_value.int32_t_value, std::numeric_limits<int>::min());
+    ASSERT_EQ(int32_t_min_value.int32_t_value, std::numeric_limits<long>::min());
+#endif
+    ASSERT_EQ(int32_t_min_value.bool_pointer, nullptr);
+    ASSERT_EQ(int32_t_min_value.float_pointer, nullptr);
+    ASSERT_EQ(int32_t_min_value.double_pointer, nullptr);
+    ASSERT_EQ(int32_t_min_value.int32_t_pointer, nullptr);
+    ASSERT_EQ(int32_t_min_value.int32_t_pointer, nullptr);
+    ASSERT_EQ(int32_t_min_value.universe_pointer, nullptr);
+    ASSERT_EQ(int32_t_min_value.scene_pointer, nullptr);
+    ASSERT_EQ(int32_t_min_value.shader_pointer, nullptr);
+    ASSERT_EQ(int32_t_min_value.material_pointer, nullptr);
+    ASSERT_EQ(int32_t_min_value.species_pointer, nullptr);
+    ASSERT_EQ(int32_t_min_value.object_pointer, nullptr);
+    ASSERT_EQ(int32_t_min_value.vector_font_pointer, nullptr);
+    ASSERT_EQ(int32_t_min_value.glyph_pointer, nullptr);
+    ASSERT_EQ(int32_t_min_value.text3D_pointer, nullptr);
+    ASSERT_EQ(int32_t_min_value.symbiosis_pointer, nullptr);
+    ASSERT_EQ(int32_t_min_value.font2D_pointer, nullptr);
+    ASSERT_EQ(int32_t_min_value.console_pointer, nullptr);
+    ASSERT_EQ(std::strlen(int32_t_min_value.get_datatype().c_str()), strlen("int32_t"));
+    ASSERT_EQ(std::strcmp(int32_t_min_value.get_datatype().c_str(), "int32_t"), 0);
+    ASSERT_EQ(std::strlen(int32_t_min_value.get_string().c_str()), strlen("-2147483648"));
+    ASSERT_EQ(std::strcmp(int32_t_min_value.get_string().c_str(), "-2147483648"), 0);
+}
 TEST(any_value_must_be_initialized_appropriately, uint32_t_zero)
 {
     uint32_t uint32_t_zero = 0;
@@ -395,4 +478,45 @@ TEST(any_value_must_be_initialized_appropriately, uint32_t_plus_1)
     ASSERT_EQ(std::strcmp(uint32_t_plus_1_value.get_datatype().c_str(), "uint32_t"), 0);
     ASSERT_EQ(std::strlen(uint32_t_plus_1_value.get_string().c_str()), strlen("1"));
     ASSERT_EQ(std::strcmp(uint32_t_plus_1_value.get_string().c_str(), "1"), 0);
+}
+TEST(any_value_must_be_initialized_appropriately, uint32_t_max)
+{
+    uint32_t uint32_t_max = std::numeric_limits<uint32_t>::max();
+    datatypes::AnyValue uint32_t_max_value = datatypes::AnyValue(uint32_t_max);
+    ASSERT_EQ(uint32_t_max_value.type, datatypes::UINT32_T);
+    ASSERT_FALSE(uint32_t_max_value.bool_value);
+    ASSERT_TRUE(std::isnan(uint32_t_max_value.float_value));
+    ASSERT_TRUE(std::isnan(uint32_t_max_value.double_value));
+    ASSERT_EQ(uint32_t_max_value.int32_t_value, 0);
+    ASSERT_EQ(uint32_t_max_value.uint32_t_value, std::numeric_limits<uint32_t>::max());
+    ASSERT_EQ(uint32_t_max_value.uint32_t_value, 4294967295);
+    ASSERT_EQ(uint32_t_max_value.uint32_t_value, 0xffffffff);
+    ASSERT_EQ(static_cast<int32_t>(uint32_t_max_value.uint32_t_value), -1);
+#ifdef __linux__
+    ASSERT_EQ(uint32_t_max_value.uint32_t_value, std::numeric_limits<unsigned int>::max());
+#elif defined(_WIN32) || defined(WIN32)
+    ASSERT_EQ(uint32_t_max_value.uint32_t_value, std::numeric_limits<unsigned int>::max());
+    ASSERT_EQ(uint32_t_max_value.uint32_t_value, std::numeric_limits<unsigned long>::max());
+#endif
+    ASSERT_EQ(uint32_t_max_value.bool_pointer, nullptr);
+    ASSERT_EQ(uint32_t_max_value.float_pointer, nullptr);
+    ASSERT_EQ(uint32_t_max_value.double_pointer, nullptr);
+    ASSERT_EQ(uint32_t_max_value.int32_t_pointer, nullptr);
+    ASSERT_EQ(uint32_t_max_value.uint32_t_pointer, nullptr);
+    ASSERT_EQ(uint32_t_max_value.universe_pointer, nullptr);
+    ASSERT_EQ(uint32_t_max_value.scene_pointer, nullptr);
+    ASSERT_EQ(uint32_t_max_value.shader_pointer, nullptr);
+    ASSERT_EQ(uint32_t_max_value.material_pointer, nullptr);
+    ASSERT_EQ(uint32_t_max_value.species_pointer, nullptr);
+    ASSERT_EQ(uint32_t_max_value.object_pointer, nullptr);
+    ASSERT_EQ(uint32_t_max_value.vector_font_pointer, nullptr);
+    ASSERT_EQ(uint32_t_max_value.glyph_pointer, nullptr);
+    ASSERT_EQ(uint32_t_max_value.text3D_pointer, nullptr);
+    ASSERT_EQ(uint32_t_max_value.symbiosis_pointer, nullptr);
+    ASSERT_EQ(uint32_t_max_value.font2D_pointer, nullptr);
+    ASSERT_EQ(uint32_t_max_value.console_pointer, nullptr);
+    ASSERT_EQ(std::strlen(uint32_t_max_value.get_datatype().c_str()), strlen("uint32_t"));
+    ASSERT_EQ(std::strcmp(uint32_t_max_value.get_datatype().c_str(), "uint32_t"), 0);
+    ASSERT_EQ(std::strlen(uint32_t_max_value.get_string().c_str()), strlen("4294967295"));
+    ASSERT_EQ(std::strcmp(uint32_t_max_value.get_string().c_str(), "4294967295"), 0);
 }
