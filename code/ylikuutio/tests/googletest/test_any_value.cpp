@@ -206,7 +206,7 @@ TEST(any_value_must_be_initialized_appropriately, double_NAN)
     datatypes::AnyValue double_NAN_value = datatypes::AnyValue(double_NAN);
     ASSERT_EQ(double_NAN_value.type, datatypes::DOUBLE);
     ASSERT_FALSE(double_NAN_value.bool_value);
-    ASSERT_TRUE(std::isnan(double_NAN_value.double_value));
+    ASSERT_TRUE(std::isnan(double_NAN_value.float_value));
     ASSERT_TRUE(std::isnan(double_NAN_value.double_value));
     ASSERT_EQ(double_NAN_value.int32_t_value, 0);
     ASSERT_EQ(double_NAN_value.uint32_t_value, 0);
@@ -238,7 +238,7 @@ TEST(any_value_must_be_initialized_appropriately, int32_t_zero)
     datatypes::AnyValue int32_t_zero_value = datatypes::AnyValue(int32_t_zero);
     ASSERT_EQ(int32_t_zero_value.type, datatypes::INT32_T);
     ASSERT_FALSE(int32_t_zero_value.bool_value);
-    ASSERT_TRUE(std::isnan(int32_t_zero_value.double_value));
+    ASSERT_TRUE(std::isnan(int32_t_zero_value.float_value));
     ASSERT_TRUE(std::isnan(int32_t_zero_value.double_value));
     ASSERT_EQ(int32_t_zero_value.int32_t_value, 0);
     ASSERT_EQ(int32_t_zero_value.uint32_t_value, 0);
@@ -270,7 +270,7 @@ TEST(any_value_must_be_initialized_appropriately, int32_t_plus_1)
     datatypes::AnyValue int32_t_plus_1_value = datatypes::AnyValue(int32_t_plus_1);
     ASSERT_EQ(int32_t_plus_1_value.type, datatypes::INT32_T);
     ASSERT_FALSE(int32_t_plus_1_value.bool_value);
-    ASSERT_TRUE(std::isnan(int32_t_plus_1_value.double_value));
+    ASSERT_TRUE(std::isnan(int32_t_plus_1_value.float_value));
     ASSERT_TRUE(std::isnan(int32_t_plus_1_value.double_value));
     ASSERT_EQ(int32_t_plus_1_value.int32_t_value, 1);
     ASSERT_EQ(int32_t_plus_1_value.uint32_t_value, 0);
@@ -302,7 +302,7 @@ TEST(any_value_must_be_initialized_appropriately, int32_t_minus_1)
     datatypes::AnyValue int32_t_minus_1_value = datatypes::AnyValue(int32_t_minus_1);
     ASSERT_EQ(int32_t_minus_1_value.type, datatypes::INT32_T);
     ASSERT_FALSE(int32_t_minus_1_value.bool_value);
-    ASSERT_TRUE(std::isnan(int32_t_minus_1_value.double_value));
+    ASSERT_TRUE(std::isnan(int32_t_minus_1_value.float_value));
     ASSERT_TRUE(std::isnan(int32_t_minus_1_value.double_value));
     ASSERT_EQ(int32_t_minus_1_value.int32_t_value, -1);
     ASSERT_EQ(int32_t_minus_1_value.uint32_t_value, 0);
@@ -334,7 +334,7 @@ TEST(any_value_must_be_initialized_appropriately, uint32_t_zero)
     datatypes::AnyValue uint32_t_zero_value = datatypes::AnyValue(uint32_t_zero);
     ASSERT_EQ(uint32_t_zero_value.type, datatypes::UINT32_T);
     ASSERT_FALSE(uint32_t_zero_value.bool_value);
-    ASSERT_TRUE(std::isnan(uint32_t_zero_value.double_value));
+    ASSERT_TRUE(std::isnan(uint32_t_zero_value.float_value));
     ASSERT_TRUE(std::isnan(uint32_t_zero_value.double_value));
     ASSERT_EQ(uint32_t_zero_value.int32_t_value, 0);
     ASSERT_EQ(uint32_t_zero_value.uint32_t_value, 0);
@@ -366,7 +366,7 @@ TEST(any_value_must_be_initialized_appropriately, uint32_t_plus_1)
     datatypes::AnyValue uint32_t_plus_1_value = datatypes::AnyValue(uint32_t_plus_1);
     ASSERT_EQ(uint32_t_plus_1_value.type, datatypes::UINT32_T);
     ASSERT_FALSE(uint32_t_plus_1_value.bool_value);
-    ASSERT_TRUE(std::isnan(uint32_t_plus_1_value.double_value));
+    ASSERT_TRUE(std::isnan(uint32_t_plus_1_value.float_value));
     ASSERT_TRUE(std::isnan(uint32_t_plus_1_value.double_value));
     ASSERT_EQ(uint32_t_plus_1_value.int32_t_value, 0);
     ASSERT_EQ(uint32_t_plus_1_value.uint32_t_value, 1);
