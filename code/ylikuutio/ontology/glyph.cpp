@@ -6,6 +6,18 @@
 #include "code/ylikuutio/triangulation/polygon_triangulation.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
+// Include GLEW
+#ifndef __GL_GLEW_H_INCLUDED
+#define __GL_GLEW_H_INCLUDED
+#include <GL/glew.h> // GLfloat, GLuint etc.
+#endif
+
+// Include GLFW
+#ifndef __GLFW3_H_INCLUDED
+#define __GLFW3_H_INCLUDED
+#include <glfw3.h>
+#endif
+
 // Include standard headers
 #include <stdint.h> // uint32_t etc.
 #include <iostream> // std::cout, std::cin, std::cerr
