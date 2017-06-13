@@ -520,3 +520,35 @@ TEST(any_value_must_be_initialized_appropriately, uint32_t_max)
     ASSERT_EQ(std::strlen(uint32_t_max_value.get_string().c_str()), strlen("4294967295"));
     ASSERT_EQ(std::strcmp(uint32_t_max_value.get_string().c_str(), "4294967295"), 0);
 }
+TEST(any_value_must_be_initialized_appropriately, universe)
+{
+    ontology::Universe* universe = static_cast<ontology::Universe*>((void*) 0xdeadbeef);
+    datatypes::AnyValue universe_pointer_any_value = datatypes::AnyValue(universe);
+    ASSERT_EQ(universe_pointer_any_value.type, datatypes::UNIVERSE_POINTER);
+    ASSERT_FALSE(universe_pointer_any_value.bool_value);
+    ASSERT_TRUE(std::isnan(universe_pointer_any_value.float_value));
+    ASSERT_TRUE(std::isnan(universe_pointer_any_value.double_value));
+    ASSERT_EQ(universe_pointer_any_value.int32_t_value, 0);
+    ASSERT_EQ(universe_pointer_any_value.uint32_t_value, 0);
+    ASSERT_EQ(universe_pointer_any_value.bool_pointer, nullptr);
+    ASSERT_EQ(universe_pointer_any_value.float_pointer, nullptr);
+    ASSERT_EQ(universe_pointer_any_value.double_pointer, nullptr);
+    ASSERT_EQ(universe_pointer_any_value.int32_t_pointer, nullptr);
+    ASSERT_EQ(universe_pointer_any_value.uint32_t_pointer, nullptr);
+    ASSERT_EQ(universe_pointer_any_value.universe_pointer, universe);
+    ASSERT_EQ(universe_pointer_any_value.scene_pointer, nullptr);
+    ASSERT_EQ(universe_pointer_any_value.shader_pointer, nullptr);
+    ASSERT_EQ(universe_pointer_any_value.material_pointer, nullptr);
+    ASSERT_EQ(universe_pointer_any_value.species_pointer, nullptr);
+    ASSERT_EQ(universe_pointer_any_value.object_pointer, nullptr);
+    ASSERT_EQ(universe_pointer_any_value.vector_font_pointer, nullptr);
+    ASSERT_EQ(universe_pointer_any_value.glyph_pointer, nullptr);
+    ASSERT_EQ(universe_pointer_any_value.text3D_pointer, nullptr);
+    ASSERT_EQ(universe_pointer_any_value.symbiosis_pointer, nullptr);
+    ASSERT_EQ(universe_pointer_any_value.font2D_pointer, nullptr);
+    ASSERT_EQ(universe_pointer_any_value.console_pointer, nullptr);
+    ASSERT_EQ(std::strlen(universe_pointer_any_value.get_datatype().c_str()), strlen("ontology::Universe*"));
+    ASSERT_EQ(std::strcmp(universe_pointer_any_value.get_datatype().c_str(), "ontology::Universe*"), 0);
+    ASSERT_EQ(std::strlen(universe_pointer_any_value.get_string().c_str()), strlen("deadbeef"));
+    ASSERT_EQ(std::strcmp(universe_pointer_any_value.get_string().c_str(), "deadbeef"), 0);
+}
