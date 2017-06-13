@@ -241,6 +241,7 @@ TEST(any_value_must_be_initialized_appropriately, int32_t_zero)
     ASSERT_TRUE(std::isnan(int32_t_zero_value.float_value));
     ASSERT_TRUE(std::isnan(int32_t_zero_value.double_value));
     ASSERT_EQ(int32_t_zero_value.int32_t_value, 0);
+    ASSERT_EQ(static_cast<uint32_t>(int32_t_zero_value.int32_t_value), 0);
     ASSERT_EQ(int32_t_zero_value.uint32_t_value, 0);
     ASSERT_EQ(int32_t_zero_value.bool_pointer, nullptr);
     ASSERT_EQ(int32_t_zero_value.float_pointer, nullptr);
@@ -273,6 +274,7 @@ TEST(any_value_must_be_initialized_appropriately, int32_t_plus_1)
     ASSERT_TRUE(std::isnan(int32_t_plus_1_value.float_value));
     ASSERT_TRUE(std::isnan(int32_t_plus_1_value.double_value));
     ASSERT_EQ(int32_t_plus_1_value.int32_t_value, 1);
+    ASSERT_EQ(static_cast<uint32_t>(int32_t_plus_1_value.int32_t_value), 1);
     ASSERT_EQ(int32_t_plus_1_value.uint32_t_value, 0);
     ASSERT_EQ(int32_t_plus_1_value.bool_pointer, nullptr);
     ASSERT_EQ(int32_t_plus_1_value.float_pointer, nullptr);
@@ -305,6 +307,8 @@ TEST(any_value_must_be_initialized_appropriately, int32_t_minus_1)
     ASSERT_TRUE(std::isnan(int32_t_minus_1_value.float_value));
     ASSERT_TRUE(std::isnan(int32_t_minus_1_value.double_value));
     ASSERT_EQ(int32_t_minus_1_value.int32_t_value, -1);
+    ASSERT_EQ(static_cast<uint32_t>(int32_t_minus_1_value.int32_t_value), 4294967295);
+    ASSERT_EQ(static_cast<uint32_t>(int32_t_minus_1_value.int32_t_value), 0xffffffff);
     ASSERT_EQ(int32_t_minus_1_value.uint32_t_value, 0);
     ASSERT_EQ(int32_t_minus_1_value.bool_pointer, nullptr);
     ASSERT_EQ(int32_t_minus_1_value.float_pointer, nullptr);
