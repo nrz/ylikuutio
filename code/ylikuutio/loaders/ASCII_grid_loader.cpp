@@ -162,6 +162,6 @@ namespace loaders
 
         bool result = geometry::triangulate_quads(vertex_data, triangulate_quads_struct, out_vertices, out_UVs, out_normals);
         delete vertex_data;
-        return true;
+        return result;
     }
 }
