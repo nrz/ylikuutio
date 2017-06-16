@@ -368,6 +368,8 @@ TEST(a_BMP_world_must_be_loaded_appropriately, load_3x3_BMP_world)
             z_step,
             triangulation_type);
 
+    ASSERT_TRUE(model_loading_result);
+
     const uint32_t n_vertices_for_face = 3;
     const uint32_t n_faces_for_bilinear_triangulation = 4;
     const uint32_t n_width_of_image_file = 3;
