@@ -3,7 +3,7 @@
 #define DEGREES_TO_RADIANS(x) (x * PI / 180.0f)
 #endif
 
-#include "ascii_grid_loader.hpp"
+#include "ASCII_grid_loader.hpp"
 #include "code/ylikuutio/triangulation/quad_triangulation.hpp"
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
 #include "code/ylikuutio/common/globals.hpp"
@@ -25,8 +25,8 @@
 
 namespace loaders
 {
-    bool load_ascii_grid(
-            std::string ascii_grid_file_name,
+    bool load_ASCII_grid(
+            std::string ASCII_grid_file_name,
             std::vector<glm::vec3>& out_vertices,
             std::vector<glm::vec2>& out_UVs,
             std::vector<glm::vec3>& out_normals,
@@ -44,21 +44,21 @@ namespace loaders
         // NODATA_value  -9999.000
         // 34.315 34.467 34.441 34.260 33.972 33.564 33.229 33.130 33.102 33.024 32.902 32.669 32.305 32.013 31.937 31.893 31.831 31.832 
 
-        std::cout << "Loading ascii grid file " << ascii_grid_file_name << " ...\n";
+        std::cout << "Loading ascii grid file " << ASCII_grid_file_name << " ...\n";
 
         // Open the file
-        const char* char_ascii_grid_file_name = ascii_grid_file_name.c_str();
-        std::FILE* file = std::fopen(char_ascii_grid_file_name, "rb");
+        const char* char_ASCII_grid_file_name = ASCII_grid_file_name.c_str();
+        std::FILE* file = std::fopen(char_ASCII_grid_file_name, "rb");
         if (!file)
         {
-            std::cerr << ascii_grid_file_name << " could not be opened.\n";
+            std::cerr << ASCII_grid_file_name << " could not be opened.\n";
             return false;
         }
 
         // Find out file size.
         if (std::fseek(file, 0, SEEK_END) != 0)
         {
-            std::cerr << "moving file pointer of file " << ascii_grid_file_name << " failed!\n";
+            std::cerr << "moving file pointer of file " << ASCII_grid_file_name << " failed!\n";
             std::fclose(file);
             return false;
         }
@@ -68,7 +68,7 @@ namespace loaders
         // Move file pointer to the beginning of file.
         if (fseek(file, 0, SEEK_SET) != 0)
         {
-            std::cerr << "moving file pointer of file " << ascii_grid_file_name << " failed!\n";
+            std::cerr << "moving file pointer of file " << ASCII_grid_file_name << " failed!\n";
             std::fclose(file);
             return false;
         }

@@ -9,7 +9,7 @@
 #include "species_struct.hpp"
 #include "render_templates.hpp"
 #include "code/ylikuutio/loaders/obj_loader.hpp"
-#include "code/ylikuutio/loaders/ascii_grid_loader.hpp"
+#include "code/ylikuutio/loaders/ASCII_grid_loader.hpp"
 #include "code/ylikuutio/loaders/bmp_heightmap_loader.hpp"
 #include "code/ylikuutio/loaders/srtm_heightmap_loader.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
@@ -106,9 +106,9 @@ namespace ontology
                     this->z_step,
                     this->triangulation_type);
         }
-        else if (std::strcmp(this->char_model_file_format, "ascii_grid") == 0)
+        else if (std::strcmp(this->char_model_file_format, "ASCII_grid") == 0)
         {
-            model_loading_result = loaders::load_ascii_grid(
+            model_loading_result = loaders::load_ASCII_grid(
                     this->model_filename,
                     this->vertices,
                     this->UVs,

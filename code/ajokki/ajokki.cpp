@@ -65,7 +65,7 @@
 
 // model file format: obj/bmp/...
 std::string g_model_file_format = "bmp";
-std::string ascii_grid_model_file_format = "ascii_grid";
+std::string ASCII_grid_model_file_format = "ASCII_grid";
 
 // model filename.
 // std::string g_model_filename = "cube.obj";
@@ -75,8 +75,8 @@ std::string ascii_grid_model_file_format = "ascii_grid";
 std::string g_model_filename = "noise256x256.bmp";
 // std::string g_model_filename = "noise128x128.bmp";
 
-// std::string ascii_grid_model_filename = "N5424G.asc"; // Joensuu center & western.
-std::string ascii_grid_model_filename = "L4133D.asc"; // Helsinki eastern downtown.
+// std::string ASCII_grid_model_filename = "N5424G.asc"; // Joensuu center & western.
+std::string ASCII_grid_model_filename = "L4133D.asc"; // Helsinki eastern downtown.
 
 // texture file format: bmp/...
 std::string g_texture_file_format = "bmp";
@@ -291,15 +291,15 @@ int main(void)
         terrain_species = new ontology::Species(bmp_terrain_species_struct);
         */
 
-        SpeciesStruct ascii_grid_terrain_species_struct;
-        ascii_grid_terrain_species_struct.parent_pointer = grass_material;
-        ascii_grid_terrain_species_struct.model_file_format = ascii_grid_model_file_format;
-        ascii_grid_terrain_species_struct.model_filename = ascii_grid_model_filename;
-        ascii_grid_terrain_species_struct.light_position = glm::vec3(4, 4, 4);
-        ascii_grid_terrain_species_struct.is_world = true;
-        ascii_grid_terrain_species_struct.x_step = 4;
-        ascii_grid_terrain_species_struct.z_step = 4;
-        terrain_species = new ontology::Species(ascii_grid_terrain_species_struct);
+        SpeciesStruct ASCII_grid_terrain_species_struct;
+        ASCII_grid_terrain_species_struct.parent_pointer = grass_material;
+        ASCII_grid_terrain_species_struct.model_file_format = ASCII_grid_model_file_format;
+        ASCII_grid_terrain_species_struct.model_filename = ASCII_grid_model_filename;
+        ASCII_grid_terrain_species_struct.light_position = glm::vec3(4, 4, 4);
+        ASCII_grid_terrain_species_struct.is_world = true;
+        ASCII_grid_terrain_species_struct.x_step = 4;
+        ASCII_grid_terrain_species_struct.z_step = 4;
+        terrain_species = new ontology::Species(ASCII_grid_terrain_species_struct);
 
         terrain_species->set_name("Helsinki");
 

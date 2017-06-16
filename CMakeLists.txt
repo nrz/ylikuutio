@@ -511,8 +511,8 @@ add_library(ylikuutio STATIC
     code/ylikuutio/linear_algebra/tensor3.hpp
 
     # loaders, in alphabetical order.
-    code/ylikuutio/loaders/ascii_grid_loader.cpp
-    code/ylikuutio/loaders/ascii_grid_loader.hpp
+    code/ylikuutio/loaders/ASCII_grid_loader.cpp
+    code/ylikuutio/loaders/ASCII_grid_loader.hpp
     code/ylikuutio/loaders/bmp_heightmap_loader.cpp
     code/ylikuutio/loaders/bmp_heightmap_loader.hpp
     code/ylikuutio/loaders/font_loader.cpp
