@@ -138,6 +138,74 @@ TEST(any_value_must_be_initialized_appropriately, float_0)
     ASSERT_EQ(std::strlen(float_zero_value.get_string().c_str()), 8);
     ASSERT_EQ(std::strcmp(float_zero_value.get_string().c_str(), "0.000000"), 0);
 }
+TEST(any_value_must_be_initialized_appropriately, float_positive_infinity)
+{
+    float float_positive_infinity = std::numeric_limits<float>::infinity();
+    datatypes::AnyValue float_positive_infinity_value = datatypes::AnyValue(float_positive_infinity);
+    ASSERT_EQ(float_positive_infinity_value.type, datatypes::FLOAT);
+    ASSERT_FALSE(float_positive_infinity_value.bool_value);
+    ASSERT_EQ(float_positive_infinity_value.float_value, std::numeric_limits<float>::infinity());
+    uint32_t* IEEE_754_0_uint32_t_pointer = reinterpret_cast<uint32_t*>(&float_positive_infinity_value.float_value);
+    ASSERT_EQ(*IEEE_754_0_uint32_t_pointer, 0x7f800000);
+    ASSERT_TRUE(std::isnan(float_positive_infinity_value.double_value));
+    ASSERT_EQ(float_positive_infinity_value.int32_t_value, 0);
+    ASSERT_EQ(float_positive_infinity_value.uint32_t_value, 0);
+    ASSERT_EQ(float_positive_infinity_value.bool_pointer, nullptr);
+    ASSERT_EQ(float_positive_infinity_value.float_pointer, nullptr);
+    ASSERT_EQ(float_positive_infinity_value.double_pointer, nullptr);
+    ASSERT_EQ(float_positive_infinity_value.int32_t_pointer, nullptr);
+    ASSERT_EQ(float_positive_infinity_value.uint32_t_pointer, nullptr);
+    ASSERT_EQ(float_positive_infinity_value.universe_pointer, nullptr);
+    ASSERT_EQ(float_positive_infinity_value.scene_pointer, nullptr);
+    ASSERT_EQ(float_positive_infinity_value.shader_pointer, nullptr);
+    ASSERT_EQ(float_positive_infinity_value.material_pointer, nullptr);
+    ASSERT_EQ(float_positive_infinity_value.species_pointer, nullptr);
+    ASSERT_EQ(float_positive_infinity_value.object_pointer, nullptr);
+    ASSERT_EQ(float_positive_infinity_value.vector_font_pointer, nullptr);
+    ASSERT_EQ(float_positive_infinity_value.glyph_pointer, nullptr);
+    ASSERT_EQ(float_positive_infinity_value.text3D_pointer, nullptr);
+    ASSERT_EQ(float_positive_infinity_value.symbiosis_pointer, nullptr);
+    ASSERT_EQ(float_positive_infinity_value.font2D_pointer, nullptr);
+    ASSERT_EQ(float_positive_infinity_value.console_pointer, nullptr);
+    ASSERT_EQ(std::strlen(float_positive_infinity_value.get_datatype().c_str()), strlen("float"));
+    ASSERT_EQ(std::strcmp(float_positive_infinity_value.get_datatype().c_str(), "float"), 0);
+    ASSERT_EQ(std::strlen(float_positive_infinity_value.get_string().c_str()), strlen("inf"));
+    ASSERT_EQ(std::strcmp(float_positive_infinity_value.get_string().c_str(), "inf"), 0);
+}
+TEST(any_value_must_be_initialized_appropriately, float_negative_infinity)
+{
+    float float_negative_infinity = -1.0f * std::numeric_limits<float>::infinity();
+    datatypes::AnyValue float_negative_infinity_value = datatypes::AnyValue(float_negative_infinity);
+    ASSERT_EQ(float_negative_infinity_value.type, datatypes::FLOAT);
+    ASSERT_FALSE(float_negative_infinity_value.bool_value);
+    ASSERT_EQ(float_negative_infinity_value.float_value, float_negative_infinity);
+    uint32_t* IEEE_754_0_uint32_t_pointer = reinterpret_cast<uint32_t*>(&float_negative_infinity_value.float_value);
+    ASSERT_EQ(*IEEE_754_0_uint32_t_pointer, 0xff800000);
+    ASSERT_TRUE(std::isnan(float_negative_infinity_value.double_value));
+    ASSERT_EQ(float_negative_infinity_value.int32_t_value, 0);
+    ASSERT_EQ(float_negative_infinity_value.uint32_t_value, 0);
+    ASSERT_EQ(float_negative_infinity_value.bool_pointer, nullptr);
+    ASSERT_EQ(float_negative_infinity_value.float_pointer, nullptr);
+    ASSERT_EQ(float_negative_infinity_value.double_pointer, nullptr);
+    ASSERT_EQ(float_negative_infinity_value.int32_t_pointer, nullptr);
+    ASSERT_EQ(float_negative_infinity_value.uint32_t_pointer, nullptr);
+    ASSERT_EQ(float_negative_infinity_value.universe_pointer, nullptr);
+    ASSERT_EQ(float_negative_infinity_value.scene_pointer, nullptr);
+    ASSERT_EQ(float_negative_infinity_value.shader_pointer, nullptr);
+    ASSERT_EQ(float_negative_infinity_value.material_pointer, nullptr);
+    ASSERT_EQ(float_negative_infinity_value.species_pointer, nullptr);
+    ASSERT_EQ(float_negative_infinity_value.object_pointer, nullptr);
+    ASSERT_EQ(float_negative_infinity_value.vector_font_pointer, nullptr);
+    ASSERT_EQ(float_negative_infinity_value.glyph_pointer, nullptr);
+    ASSERT_EQ(float_negative_infinity_value.text3D_pointer, nullptr);
+    ASSERT_EQ(float_negative_infinity_value.symbiosis_pointer, nullptr);
+    ASSERT_EQ(float_negative_infinity_value.font2D_pointer, nullptr);
+    ASSERT_EQ(float_negative_infinity_value.console_pointer, nullptr);
+    ASSERT_EQ(std::strlen(float_negative_infinity_value.get_datatype().c_str()), strlen("float"));
+    ASSERT_EQ(std::strcmp(float_negative_infinity_value.get_datatype().c_str(), "float"), 0);
+    ASSERT_EQ(std::strlen(float_negative_infinity_value.get_string().c_str()), strlen("-inf"));
+    ASSERT_EQ(std::strcmp(float_negative_infinity_value.get_string().c_str(), "-inf"), 0);
+}
 TEST(any_value_must_be_initialized_appropriately, float_NAN)
 {
     float float_NAN = NAN;
@@ -206,6 +274,74 @@ TEST(any_value_must_be_initialized_appropriately, double_0)
     ASSERT_EQ(std::strlen(double_zero_value.get_string().c_str()), strlen("0.000000"));
     ASSERT_EQ(std::strlen(double_zero_value.get_string().c_str()), 8);
     ASSERT_EQ(std::strcmp(double_zero_value.get_string().c_str(), "0.000000"), 0);
+}
+TEST(any_value_must_be_initialized_appropriately, double_positive_infinity)
+{
+    double double_positive_infinity = std::numeric_limits<double>::infinity();
+    datatypes::AnyValue double_positive_infinity_value = datatypes::AnyValue(double_positive_infinity);
+    ASSERT_EQ(double_positive_infinity_value.type, datatypes::DOUBLE);
+    ASSERT_FALSE(double_positive_infinity_value.bool_value);
+    ASSERT_TRUE(std::isnan(double_positive_infinity_value.float_value));
+    ASSERT_EQ(double_positive_infinity_value.double_value, std::numeric_limits<double>::infinity());
+    uint64_t* IEEE_754_NAN_uint64_t_pointer = reinterpret_cast<uint64_t*>(&double_positive_infinity_value.double_value);
+    ASSERT_EQ(*IEEE_754_NAN_uint64_t_pointer, 0x7ff0000000000000);
+    ASSERT_EQ(double_positive_infinity_value.int32_t_value, 0);
+    ASSERT_EQ(double_positive_infinity_value.uint32_t_value, 0);
+    ASSERT_EQ(double_positive_infinity_value.bool_pointer, nullptr);
+    ASSERT_EQ(double_positive_infinity_value.float_pointer, nullptr);
+    ASSERT_EQ(double_positive_infinity_value.double_pointer, nullptr);
+    ASSERT_EQ(double_positive_infinity_value.int32_t_pointer, nullptr);
+    ASSERT_EQ(double_positive_infinity_value.uint32_t_pointer, nullptr);
+    ASSERT_EQ(double_positive_infinity_value.universe_pointer, nullptr);
+    ASSERT_EQ(double_positive_infinity_value.scene_pointer, nullptr);
+    ASSERT_EQ(double_positive_infinity_value.shader_pointer, nullptr);
+    ASSERT_EQ(double_positive_infinity_value.material_pointer, nullptr);
+    ASSERT_EQ(double_positive_infinity_value.species_pointer, nullptr);
+    ASSERT_EQ(double_positive_infinity_value.object_pointer, nullptr);
+    ASSERT_EQ(double_positive_infinity_value.vector_font_pointer, nullptr);
+    ASSERT_EQ(double_positive_infinity_value.glyph_pointer, nullptr);
+    ASSERT_EQ(double_positive_infinity_value.text3D_pointer, nullptr);
+    ASSERT_EQ(double_positive_infinity_value.symbiosis_pointer, nullptr);
+    ASSERT_EQ(double_positive_infinity_value.font2D_pointer, nullptr);
+    ASSERT_EQ(double_positive_infinity_value.console_pointer, nullptr);
+    ASSERT_EQ(std::strlen(double_positive_infinity_value.get_datatype().c_str()), strlen("double"));
+    ASSERT_EQ(std::strcmp(double_positive_infinity_value.get_datatype().c_str(), "double"), 0);
+    ASSERT_EQ(std::strlen(double_positive_infinity_value.get_string().c_str()), strlen("inf"));
+    ASSERT_EQ(std::strcmp(double_positive_infinity_value.get_string().c_str(), "inf"), 0);
+}
+TEST(any_value_must_be_initialized_appropriately, double_negative_infinity)
+{
+    double double_negative_infinity = -1 * std::numeric_limits<double>::infinity();
+    datatypes::AnyValue double_negative_infinity_value = datatypes::AnyValue(double_negative_infinity);
+    ASSERT_EQ(double_negative_infinity_value.type, datatypes::DOUBLE);
+    ASSERT_FALSE(double_negative_infinity_value.bool_value);
+    ASSERT_TRUE(std::isnan(double_negative_infinity_value.float_value));
+    ASSERT_EQ(double_negative_infinity_value.double_value, double_negative_infinity);
+    uint64_t* IEEE_754_NAN_uint64_t_pointer = reinterpret_cast<uint64_t*>(&double_negative_infinity_value.double_value);
+    ASSERT_EQ(*IEEE_754_NAN_uint64_t_pointer, 0xfff0000000000000);
+    ASSERT_EQ(double_negative_infinity_value.int32_t_value, 0);
+    ASSERT_EQ(double_negative_infinity_value.uint32_t_value, 0);
+    ASSERT_EQ(double_negative_infinity_value.bool_pointer, nullptr);
+    ASSERT_EQ(double_negative_infinity_value.float_pointer, nullptr);
+    ASSERT_EQ(double_negative_infinity_value.double_pointer, nullptr);
+    ASSERT_EQ(double_negative_infinity_value.int32_t_pointer, nullptr);
+    ASSERT_EQ(double_negative_infinity_value.uint32_t_pointer, nullptr);
+    ASSERT_EQ(double_negative_infinity_value.universe_pointer, nullptr);
+    ASSERT_EQ(double_negative_infinity_value.scene_pointer, nullptr);
+    ASSERT_EQ(double_negative_infinity_value.shader_pointer, nullptr);
+    ASSERT_EQ(double_negative_infinity_value.material_pointer, nullptr);
+    ASSERT_EQ(double_negative_infinity_value.species_pointer, nullptr);
+    ASSERT_EQ(double_negative_infinity_value.object_pointer, nullptr);
+    ASSERT_EQ(double_negative_infinity_value.vector_font_pointer, nullptr);
+    ASSERT_EQ(double_negative_infinity_value.glyph_pointer, nullptr);
+    ASSERT_EQ(double_negative_infinity_value.text3D_pointer, nullptr);
+    ASSERT_EQ(double_negative_infinity_value.symbiosis_pointer, nullptr);
+    ASSERT_EQ(double_negative_infinity_value.font2D_pointer, nullptr);
+    ASSERT_EQ(double_negative_infinity_value.console_pointer, nullptr);
+    ASSERT_EQ(std::strlen(double_negative_infinity_value.get_datatype().c_str()), strlen("double"));
+    ASSERT_EQ(std::strcmp(double_negative_infinity_value.get_datatype().c_str(), "double"), 0);
+    ASSERT_EQ(std::strlen(double_negative_infinity_value.get_string().c_str()), strlen("-inf"));
+    ASSERT_EQ(std::strcmp(double_negative_infinity_value.get_string().c_str(), "-inf"), 0);
 }
 TEST(any_value_must_be_initialized_appropriately, double_NAN)
 {
