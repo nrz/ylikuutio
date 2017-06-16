@@ -551,3 +551,163 @@ TEST(any_value_must_be_initialized_appropriately, universe)
     ASSERT_EQ(std::strlen(universe_pointer_any_value.get_string().c_str()), strlen("deadbeef"));
     ASSERT_EQ(std::strcmp(universe_pointer_any_value.get_string().c_str(), "deadbeef"), 0);
 }
+TEST(any_value_must_be_initialized_appropriately, scene)
+{
+    ontology::Scene* scene = static_cast<ontology::Scene*>((void*) 0xbad5ce6e);
+    datatypes::AnyValue scene_pointer_any_value = datatypes::AnyValue(scene);
+    ASSERT_EQ(scene_pointer_any_value.type, datatypes::SCENE_POINTER);
+    ASSERT_FALSE(scene_pointer_any_value.bool_value);
+    ASSERT_TRUE(std::isnan(scene_pointer_any_value.float_value));
+    ASSERT_TRUE(std::isnan(scene_pointer_any_value.double_value));
+    ASSERT_EQ(scene_pointer_any_value.int32_t_value, 0);
+    ASSERT_EQ(scene_pointer_any_value.uint32_t_value, 0);
+    ASSERT_EQ(scene_pointer_any_value.bool_pointer, nullptr);
+    ASSERT_EQ(scene_pointer_any_value.float_pointer, nullptr);
+    ASSERT_EQ(scene_pointer_any_value.double_pointer, nullptr);
+    ASSERT_EQ(scene_pointer_any_value.int32_t_pointer, nullptr);
+    ASSERT_EQ(scene_pointer_any_value.uint32_t_pointer, nullptr);
+    ASSERT_EQ(scene_pointer_any_value.universe_pointer, nullptr);
+    ASSERT_EQ(scene_pointer_any_value.scene_pointer, scene);
+    ASSERT_EQ(scene_pointer_any_value.shader_pointer, nullptr);
+    ASSERT_EQ(scene_pointer_any_value.material_pointer, nullptr);
+    ASSERT_EQ(scene_pointer_any_value.species_pointer, nullptr);
+    ASSERT_EQ(scene_pointer_any_value.object_pointer, nullptr);
+    ASSERT_EQ(scene_pointer_any_value.vector_font_pointer, nullptr);
+    ASSERT_EQ(scene_pointer_any_value.glyph_pointer, nullptr);
+    ASSERT_EQ(scene_pointer_any_value.text3D_pointer, nullptr);
+    ASSERT_EQ(scene_pointer_any_value.symbiosis_pointer, nullptr);
+    ASSERT_EQ(scene_pointer_any_value.font2D_pointer, nullptr);
+    ASSERT_EQ(scene_pointer_any_value.console_pointer, nullptr);
+    ASSERT_EQ(std::strlen(scene_pointer_any_value.get_datatype().c_str()), strlen("ontology::Scene*"));
+    ASSERT_EQ(std::strcmp(scene_pointer_any_value.get_datatype().c_str(), "ontology::Scene*"), 0);
+    ASSERT_EQ(std::strlen(scene_pointer_any_value.get_string().c_str()), strlen("bad5ce6e"));
+    ASSERT_EQ(std::strcmp(scene_pointer_any_value.get_string().c_str(), "bad5ce6e"), 0);
+}
+TEST(any_value_must_be_initialized_appropriately, shader)
+{
+    ontology::Shader* shader = static_cast<ontology::Shader*>((void*) 0xbad5bade7);
+    datatypes::AnyValue shader_pointer_any_value = datatypes::AnyValue(shader);
+    ASSERT_EQ(shader_pointer_any_value.type, datatypes::SHADER_POINTER);
+    ASSERT_FALSE(shader_pointer_any_value.bool_value);
+    ASSERT_TRUE(std::isnan(shader_pointer_any_value.float_value));
+    ASSERT_TRUE(std::isnan(shader_pointer_any_value.double_value));
+    ASSERT_EQ(shader_pointer_any_value.int32_t_value, 0);
+    ASSERT_EQ(shader_pointer_any_value.uint32_t_value, 0);
+    ASSERT_EQ(shader_pointer_any_value.bool_pointer, nullptr);
+    ASSERT_EQ(shader_pointer_any_value.float_pointer, nullptr);
+    ASSERT_EQ(shader_pointer_any_value.double_pointer, nullptr);
+    ASSERT_EQ(shader_pointer_any_value.int32_t_pointer, nullptr);
+    ASSERT_EQ(shader_pointer_any_value.uint32_t_pointer, nullptr);
+    ASSERT_EQ(shader_pointer_any_value.universe_pointer, nullptr);
+    ASSERT_EQ(shader_pointer_any_value.scene_pointer, nullptr);
+    ASSERT_EQ(shader_pointer_any_value.shader_pointer, shader);
+    ASSERT_EQ(shader_pointer_any_value.material_pointer, nullptr);
+    ASSERT_EQ(shader_pointer_any_value.species_pointer, nullptr);
+    ASSERT_EQ(shader_pointer_any_value.object_pointer, nullptr);
+    ASSERT_EQ(shader_pointer_any_value.vector_font_pointer, nullptr);
+    ASSERT_EQ(shader_pointer_any_value.glyph_pointer, nullptr);
+    ASSERT_EQ(shader_pointer_any_value.text3D_pointer, nullptr);
+    ASSERT_EQ(shader_pointer_any_value.symbiosis_pointer, nullptr);
+    ASSERT_EQ(shader_pointer_any_value.font2D_pointer, nullptr);
+    ASSERT_EQ(shader_pointer_any_value.console_pointer, nullptr);
+    ASSERT_EQ(std::strlen(shader_pointer_any_value.get_datatype().c_str()), strlen("ontology::Shader*"));
+    ASSERT_EQ(std::strcmp(shader_pointer_any_value.get_datatype().c_str(), "ontology::Shader*"), 0);
+    ASSERT_EQ(std::strlen(shader_pointer_any_value.get_string().c_str()), strlen("bad5bade7"));
+    ASSERT_EQ(std::strcmp(shader_pointer_any_value.get_string().c_str(), "bad5bade7"), 0);
+}
+TEST(any_value_must_be_initialized_appropriately, material)
+{
+    ontology::Material* material = static_cast<ontology::Material*>((void*) 0xbad6a7e71a1);
+    datatypes::AnyValue material_pointer_any_value = datatypes::AnyValue(material);
+    ASSERT_EQ(material_pointer_any_value.type, datatypes::MATERIAL_POINTER);
+    ASSERT_FALSE(material_pointer_any_value.bool_value);
+    ASSERT_TRUE(std::isnan(material_pointer_any_value.float_value));
+    ASSERT_TRUE(std::isnan(material_pointer_any_value.double_value));
+    ASSERT_EQ(material_pointer_any_value.int32_t_value, 0);
+    ASSERT_EQ(material_pointer_any_value.uint32_t_value, 0);
+    ASSERT_EQ(material_pointer_any_value.bool_pointer, nullptr);
+    ASSERT_EQ(material_pointer_any_value.float_pointer, nullptr);
+    ASSERT_EQ(material_pointer_any_value.double_pointer, nullptr);
+    ASSERT_EQ(material_pointer_any_value.int32_t_pointer, nullptr);
+    ASSERT_EQ(material_pointer_any_value.uint32_t_pointer, nullptr);
+    ASSERT_EQ(material_pointer_any_value.universe_pointer, nullptr);
+    ASSERT_EQ(material_pointer_any_value.scene_pointer, nullptr);
+    ASSERT_EQ(material_pointer_any_value.shader_pointer, nullptr);
+    ASSERT_EQ(material_pointer_any_value.material_pointer, material);
+    ASSERT_EQ(material_pointer_any_value.species_pointer, nullptr);
+    ASSERT_EQ(material_pointer_any_value.object_pointer, nullptr);
+    ASSERT_EQ(material_pointer_any_value.vector_font_pointer, nullptr);
+    ASSERT_EQ(material_pointer_any_value.glyph_pointer, nullptr);
+    ASSERT_EQ(material_pointer_any_value.text3D_pointer, nullptr);
+    ASSERT_EQ(material_pointer_any_value.symbiosis_pointer, nullptr);
+    ASSERT_EQ(material_pointer_any_value.font2D_pointer, nullptr);
+    ASSERT_EQ(material_pointer_any_value.console_pointer, nullptr);
+    ASSERT_EQ(std::strlen(material_pointer_any_value.get_datatype().c_str()), strlen("ontology::Material*"));
+    ASSERT_EQ(std::strcmp(material_pointer_any_value.get_datatype().c_str(), "ontology::Material*"), 0);
+    ASSERT_EQ(std::strlen(material_pointer_any_value.get_string().c_str()), strlen("bad6a7e71a1"));
+    ASSERT_EQ(std::strcmp(material_pointer_any_value.get_string().c_str(), "bad6a7e71a1"), 0);
+}
+TEST(any_value_must_be_initialized_appropriately, species)
+{
+    ontology::Species* species = static_cast<ontology::Species*>((void*) 0xbad5bec1e5);
+    datatypes::AnyValue species_pointer_any_value = datatypes::AnyValue(species);
+    ASSERT_EQ(species_pointer_any_value.type, datatypes::SPECIES_POINTER);
+    ASSERT_FALSE(species_pointer_any_value.bool_value);
+    ASSERT_TRUE(std::isnan(species_pointer_any_value.float_value));
+    ASSERT_TRUE(std::isnan(species_pointer_any_value.double_value));
+    ASSERT_EQ(species_pointer_any_value.int32_t_value, 0);
+    ASSERT_EQ(species_pointer_any_value.uint32_t_value, 0);
+    ASSERT_EQ(species_pointer_any_value.bool_pointer, nullptr);
+    ASSERT_EQ(species_pointer_any_value.float_pointer, nullptr);
+    ASSERT_EQ(species_pointer_any_value.double_pointer, nullptr);
+    ASSERT_EQ(species_pointer_any_value.int32_t_pointer, nullptr);
+    ASSERT_EQ(species_pointer_any_value.uint32_t_pointer, nullptr);
+    ASSERT_EQ(species_pointer_any_value.universe_pointer, nullptr);
+    ASSERT_EQ(species_pointer_any_value.scene_pointer, nullptr);
+    ASSERT_EQ(species_pointer_any_value.shader_pointer, nullptr);
+    ASSERT_EQ(species_pointer_any_value.material_pointer, nullptr);
+    ASSERT_EQ(species_pointer_any_value.species_pointer, species);
+    ASSERT_EQ(species_pointer_any_value.object_pointer, nullptr);
+    ASSERT_EQ(species_pointer_any_value.vector_font_pointer, nullptr);
+    ASSERT_EQ(species_pointer_any_value.glyph_pointer, nullptr);
+    ASSERT_EQ(species_pointer_any_value.text3D_pointer, nullptr);
+    ASSERT_EQ(species_pointer_any_value.symbiosis_pointer, nullptr);
+    ASSERT_EQ(species_pointer_any_value.font2D_pointer, nullptr);
+    ASSERT_EQ(species_pointer_any_value.console_pointer, nullptr);
+    ASSERT_EQ(std::strlen(species_pointer_any_value.get_datatype().c_str()), strlen("ontology::Species*"));
+    ASSERT_EQ(std::strcmp(species_pointer_any_value.get_datatype().c_str(), "ontology::Species*"), 0);
+    ASSERT_EQ(std::strlen(species_pointer_any_value.get_string().c_str()), strlen("bad5bec1e5"));
+    ASSERT_EQ(std::strcmp(species_pointer_any_value.get_string().c_str(), "bad5bec1e5"), 0);
+}
+TEST(any_value_must_be_initialized_appropriately, object)
+{
+    ontology::Object* object = static_cast<ontology::Object*>((void*) 0xbad0b1ec7);
+    datatypes::AnyValue object_pointer_any_value = datatypes::AnyValue(object);
+    ASSERT_EQ(object_pointer_any_value.type, datatypes::OBJECT_POINTER);
+    ASSERT_FALSE(object_pointer_any_value.bool_value);
+    ASSERT_TRUE(std::isnan(object_pointer_any_value.float_value));
+    ASSERT_TRUE(std::isnan(object_pointer_any_value.double_value));
+    ASSERT_EQ(object_pointer_any_value.int32_t_value, 0);
+    ASSERT_EQ(object_pointer_any_value.uint32_t_value, 0);
+    ASSERT_EQ(object_pointer_any_value.bool_pointer, nullptr);
+    ASSERT_EQ(object_pointer_any_value.float_pointer, nullptr);
+    ASSERT_EQ(object_pointer_any_value.double_pointer, nullptr);
+    ASSERT_EQ(object_pointer_any_value.int32_t_pointer, nullptr);
+    ASSERT_EQ(object_pointer_any_value.uint32_t_pointer, nullptr);
+    ASSERT_EQ(object_pointer_any_value.universe_pointer, nullptr);
+    ASSERT_EQ(object_pointer_any_value.scene_pointer, nullptr);
+    ASSERT_EQ(object_pointer_any_value.shader_pointer, nullptr);
+    ASSERT_EQ(object_pointer_any_value.material_pointer, nullptr);
+    ASSERT_EQ(object_pointer_any_value.species_pointer, nullptr);
+    ASSERT_EQ(object_pointer_any_value.object_pointer, object);
+    ASSERT_EQ(object_pointer_any_value.vector_font_pointer, nullptr);
+    ASSERT_EQ(object_pointer_any_value.glyph_pointer, nullptr);
+    ASSERT_EQ(object_pointer_any_value.text3D_pointer, nullptr);
+    ASSERT_EQ(object_pointer_any_value.symbiosis_pointer, nullptr);
+    ASSERT_EQ(object_pointer_any_value.font2D_pointer, nullptr);
+    ASSERT_EQ(object_pointer_any_value.console_pointer, nullptr);
+    ASSERT_EQ(std::strlen(object_pointer_any_value.get_datatype().c_str()), strlen("ontology::Object*"));
+    ASSERT_EQ(std::strcmp(object_pointer_any_value.get_datatype().c_str(), "ontology::Object*"), 0);
+    ASSERT_EQ(std::strlen(object_pointer_any_value.get_string().c_str()), strlen("bad0b1ec7"));
+    ASSERT_EQ(std::strcmp(object_pointer_any_value.get_string().c_str(), "bad0b1ec7"), 0);
+}
