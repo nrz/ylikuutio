@@ -58,14 +58,21 @@ TEST(lines2D_defined_with_std_vector_float_and_glm_vec2_must_be_identical, x1_0_
 TEST(line2D_must_be_defined_as_expected, line2D_x1_340_y1_150_x2_100_y2_50)
 {
     std::vector<float> point1;
-    point1.push_back(340.0f); // x = 340.0
-    point1.push_back(150.0f); // y = 150.0
+    float x1 = 340.0f;
+    float y1 = 150.0f;
+    point1.push_back(x1); // x = 340.0
+    point1.push_back(y1); // y = 150.0
 
     std::vector<float> point2;
-    point2.push_back(100.0f); // x = 100.0
-    point2.push_back(50.0f); // y = 50.0
+    float x2 = 100.0f;
+    float y2 = 50.0f;
+    point2.push_back(x2); // x = 100.0
+    point2.push_back(y2); // y = 50.0
 
     geometry::Line2D* line1 = new geometry::Line2D(point1, point2);
+    geometry::Line2D* line2 = new geometry::Line2D(std::vector<float>{ x1, y1 }, std::vector<float>{ x2, y2 });
+    ASSERT_TRUE(line1->is_identical_with(line2));
     ASSERT_EQ(line1->determinant, 2000.0f);
     delete line1;
+    delete line2;
 }
