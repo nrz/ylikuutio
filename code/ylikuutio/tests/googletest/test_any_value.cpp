@@ -109,6 +109,9 @@ TEST(any_value_must_be_initialized_appropriately, float_0)
     ASSERT_EQ(float_zero_value.type, datatypes::FLOAT);
     ASSERT_FALSE(float_zero_value.bool_value);
     ASSERT_EQ(float_zero_value.float_value, 0.0f);
+    uint32_t* IEEE_754_0_uint32_t_pointer = reinterpret_cast<uint32_t*>(&float_zero_value.float_value);
+    ASSERT_EQ(*IEEE_754_0_uint32_t_pointer, 0);
+    ASSERT_EQ(float_zero_value.float_value, 0.0f);
     ASSERT_TRUE(std::isnan(float_zero_value.double_value));
     ASSERT_EQ(float_zero_value.int32_t_value, 0);
     ASSERT_EQ(float_zero_value.uint32_t_value, 0);
@@ -142,6 +145,8 @@ TEST(any_value_must_be_initialized_appropriately, float_NAN)
     ASSERT_EQ(float_NAN_value.type, datatypes::FLOAT);
     ASSERT_FALSE(float_NAN_value.bool_value);
     ASSERT_TRUE(std::isnan(float_NAN_value.float_value));
+    uint32_t* IEEE_754_NAN_uint32_t_pointer = reinterpret_cast<uint32_t*>(&float_NAN_value.float_value);
+    ASSERT_GT(*IEEE_754_NAN_uint32_t_pointer & 0x7fffffff, 0x7f800000);
     ASSERT_TRUE(std::isnan(float_NAN_value.double_value));
     ASSERT_EQ(float_NAN_value.int32_t_value, 0);
     ASSERT_EQ(float_NAN_value.uint32_t_value, 0);
@@ -175,6 +180,8 @@ TEST(any_value_must_be_initialized_appropriately, double_0)
     ASSERT_FALSE(double_zero_value.bool_value);
     ASSERT_TRUE(std::isnan(double_zero_value.float_value));
     ASSERT_EQ(double_zero_value.double_value, 0.0f);
+    uint64_t* IEEE_754_0_uint64_t_pointer = reinterpret_cast<uint64_t*>(&double_zero_value.double_value);
+    ASSERT_EQ(*IEEE_754_0_uint64_t_pointer, 0);
     ASSERT_EQ(double_zero_value.int32_t_value, 0);
     ASSERT_EQ(double_zero_value.uint32_t_value, 0);
     ASSERT_EQ(double_zero_value.bool_pointer, nullptr);
@@ -208,6 +215,8 @@ TEST(any_value_must_be_initialized_appropriately, double_NAN)
     ASSERT_FALSE(double_NAN_value.bool_value);
     ASSERT_TRUE(std::isnan(double_NAN_value.float_value));
     ASSERT_TRUE(std::isnan(double_NAN_value.double_value));
+    uint64_t* IEEE_754_NAN_uint64_t_pointer = reinterpret_cast<uint64_t*>(&double_NAN_value.double_value);
+    ASSERT_GT(*IEEE_754_NAN_uint64_t_pointer & 0x7fffffffffffffff, 0x7ff0000000000000);
     ASSERT_EQ(double_NAN_value.int32_t_value, 0);
     ASSERT_EQ(double_NAN_value.uint32_t_value, 0);
     ASSERT_EQ(double_NAN_value.bool_pointer, nullptr);
