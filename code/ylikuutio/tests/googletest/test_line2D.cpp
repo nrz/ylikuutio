@@ -34,7 +34,6 @@ TEST(line2D_must_be_defined_as_expected, line2D_std_vector_float_x1_0_y1_0_x2_1_
     geometry::Line2D line2 = geometry::Line2D(std::vector<float>{ 0.0f, 0.0f }, std::vector<float>{ 1.0f, 1.0f });
     ASSERT_EQ(line2.determinant, 0.0f);
 }
-
 TEST(line2D_must_be_defined_as_expected, line2D_glm_vec2_x1_0_y1_0_x2_1_y2_1)
 {
     glm::vec2 point1 = glm::vec2(0.0f, 0.0f); // x = 0.0, y = 0.0
@@ -49,7 +48,6 @@ TEST(line2D_must_be_defined_as_expected, line2D_glm_vec2_x1_0_y1_0_x2_1_y2_1)
     ASSERT_EQ(line1.y1_minus_y2, -1.0f);
     ASSERT_EQ(line1.determinant, 0.0f);
 }
-
 TEST(lines2D_defined_with_std_vector_float_and_glm_vec2_must_be_identical, x1_0_y1_0_x2_1_y2_1)
 {
     geometry::Line2D line_std_vector_float = geometry::Line2D(std::vector<float>{ 0.0f, 0.0f }, std::vector<float>{ 1.0f, 1.0f });
@@ -57,7 +55,6 @@ TEST(lines2D_defined_with_std_vector_float_and_glm_vec2_must_be_identical, x1_0_
     ASSERT_TRUE(line_std_vector_float.is_identical_with(&line_glm_vec2));
     ASSERT_TRUE(line_glm_vec2.is_identical_with(&line_std_vector_float));
 }
-
 TEST(line2D_must_be_defined_as_expected, line2D_x1_340_y1_150_x2_100_y2_50)
 {
     std::vector<float> point1;
