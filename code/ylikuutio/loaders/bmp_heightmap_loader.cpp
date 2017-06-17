@@ -102,6 +102,8 @@ namespace loaders
 
         uint32_t line_size_in_bytes = image_size / image_height;
 
+        std::cout << "image size is " << image_size << " bytes.\n";
+
         // Some BMP files are misformatted, guess missing information
         if (image_size == 0)
         {
