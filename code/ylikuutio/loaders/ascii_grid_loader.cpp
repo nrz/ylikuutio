@@ -86,6 +86,7 @@ namespace loaders
         char* point_data_pointer = point_data;
 
         // Read the point data from the file into the buffer.
+        // TODO: add check for file reading!
         std::fread(point_data, 1, file_size, file);
 
         // Everything is in memory now, the file can be closed

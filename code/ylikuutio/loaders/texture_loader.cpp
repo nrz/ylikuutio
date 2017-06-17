@@ -23,6 +23,7 @@ namespace loaders
 {
     GLuint load_BMP_texture(const char* imagepath)
     {
+        // TODO: change imagepath to std::string
         std::printf("Reading image %s\n", imagepath);
 
         // Data read from the header of the BMP file
@@ -37,6 +38,7 @@ namespace loaders
         std::FILE* file = std::fopen(imagepath,"rb");
         if (!file)
         {
+            // TODO: change std::printf to std::cerr (after changing imagepath to std::string).
             std::printf("%s could not be opened. Are you in the right directory ? Don't forget to read the FAQ !\n", imagepath);
             return 0;
         }
@@ -44,6 +46,7 @@ namespace loaders
         // Read the header, i.e. the 54 first bytes
 
         // If less than 54 bytes are read, problem
+        // TODO: move hardcoded value 54 to variable.
         if (std::fread(header, 1, 54, file) != 54)
         {
             std::printf("Not a correct BMP file\n");
@@ -98,6 +101,8 @@ namespace loaders
         }
 
         // Read the actual data from the file into the buffer
+        // TODO: add check for file reading!
+        // TODO: rename imageSize to image_size
         std::fread(data, 1, imageSize, file);
 
         // Everything is in memory now, the file can be closed
@@ -186,6 +191,8 @@ namespace loaders
 
         /* verify the type of file */
         char filecode[4];
+        // TODO: add check for file reading!
+        // TODO: store hardcoded value 4 into a variable.
         std::fread(filecode, 1, 4, fp);
         if (std::strncmp(filecode, "DDS ", 4) != 0)
         {
@@ -194,6 +201,8 @@ namespace loaders
         }
 
         /* get the surface desc */
+        // TODO: add check for file reading!
+        // TODO: store hardcoded value 4 into a variable.
         std::fread(&header, 124, 1, fp);
 
         uint32_t height      = *(uint32_t*) &header[8];
@@ -207,6 +216,9 @@ namespace loaders
         /* how big is it going to be including all mipmaps? */
         bufsize = mipMapCount > 1 ? linearSize * 2 : linearSize;
         buffer = (uint8_t*) malloc(bufsize * sizeof(uint8_t));
+
+        // TODO: add check for file reading!
+        // TODO: store hardcoded value 4 into a variable.
         std::fread(buffer, 1, bufsize, fp);
         /* close the file pointer */
         std::fclose(fp);
