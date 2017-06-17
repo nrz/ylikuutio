@@ -138,7 +138,7 @@ namespace loaders
             return false;
         }
 
-        // Everything is in memory now, the file can be closed
+        // Everything is in memory now, so the file can be closed.
         std::fclose(file);
 
         uint8_t *image_pointer;
