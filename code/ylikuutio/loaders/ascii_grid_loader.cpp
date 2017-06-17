@@ -3,7 +3,7 @@
 #define DEGREES_TO_RADIANS(x) (x * PI / 180.0f)
 #endif
 
-#include "ASCII_grid_loader.hpp"
+#include "ascii_grid_loader.hpp"
 #include "code/ylikuutio/triangulation/quad_triangulation.hpp"
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
 #include "code/ylikuutio/common/globals.hpp"

@@ -9,7 +9,7 @@
 #include "species_struct.hpp"
 #include "render_templates.hpp"
 #include "code/ylikuutio/loaders/obj_loader.hpp"
-#include "code/ylikuutio/loaders/ASCII_grid_loader.hpp"
+#include "code/ylikuutio/loaders/ascii_grid_loader.hpp"
 #include "code/ylikuutio/loaders/bmp_heightmap_loader.hpp"
 #include "code/ylikuutio/loaders/srtm_heightmap_loader.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
