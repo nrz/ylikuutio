@@ -114,7 +114,7 @@ namespace loaders
         }
 
         // Read the actual image data from the file into the buffer.
-        if (std::fread(image_data, 1, sizeof(image_data), file) != sizeof(image_data))
+        if (std::fread(image_data, 1, image_size, file) != image_size)
         {
             std::cerr << "Reading image data from file failed.\n";
             std::fclose(file);
