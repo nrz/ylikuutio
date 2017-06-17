@@ -93,3 +93,53 @@ TEST(a_2x2_world_must_be_interpolated_appropriately, halfway_points)
     ASSERT_TRUE(*output_vertex_pointer++ == (345.25f + 456.25f) / 2.0f);                     // 0.5, 1.0
     ASSERT_TRUE(*output_vertex_pointer++ == 456.25f);                                        // 1.0, 1.0 
 }
+TEST(a_2x2_world_must_be_interpolated_appropriately, quarter_points)
+{
+    uint32_t image_width = 2;
+    uint32_t image_height = 2;
+    float* input_vertex_data = new float[image_width * image_height];
+    float* input_vertex_pointer = input_vertex_data;
+
+    *input_vertex_pointer++ = 123.25f;
+    *input_vertex_pointer++ = 234.25f;
+    *input_vertex_pointer++ = 345.25f;
+    *input_vertex_pointer++ = 456.25f;
+
+    uint32_t interpolated_image_width = 5;
+    uint32_t interpolated_image_height = 5;
+    float* output_vertex_pointer = new float[interpolated_image_width * interpolated_image_height];
+
+    float x1 = 0.0f;
+    float z1 = 0.0f;
+    float x2 = 1.0f;
+    float z2 = 1.0f;
+    float delta_x = 0.25f;
+    float delta_z = 0.25f;
+
+    ASSERT_TRUE(interpolation::interpolate_bilinearly2D(input_vertex_data, output_vertex_pointer, image_width, image_height, x1, z1, x2, z2, delta_x, delta_z));
+    ASSERT_TRUE(*output_vertex_pointer++ == 123.25f);                                                                                   // 0.00, 0.00
+    ASSERT_TRUE(*output_vertex_pointer++ == 0.75f * 123.25f + 0.25f * 234.25f);                                                         // 0.25, 0.00
+    ASSERT_TRUE(*output_vertex_pointer++ == 0.5f * 123.25f + 0.5f * 234.25f);                                                           // 0.50, 0.00
+    ASSERT_TRUE(*output_vertex_pointer++ == 0.25f * 123.25f + 0.75f * 234.25f);                                                         // 0.75, 0.00
+    ASSERT_TRUE(*output_vertex_pointer++ == 234.25f);                                                                                   // 1.00, 0.00
+    ASSERT_TRUE(*output_vertex_pointer++ == 0.75f * 123.25f + 0.25f * 345.25f);                                                         // 0.00, 0.25
+    ASSERT_TRUE(*output_vertex_pointer++ == 0.75f * (0.75f * 123.25f + 0.25f * 234.25f) + 0.25f * (0.75f * 345.25f + 0.25f * 456.25f)); // 0.25, 0.25
+    ASSERT_TRUE(*output_vertex_pointer++ == 0.75f * (0.5f * 123.25f + 0.5f * 234.25f) + 0.25f * (0.5f * 345.25f + 0.5f * 456.25f));     // 0.50, 0.25
+    ASSERT_TRUE(*output_vertex_pointer++ == 0.75f * (0.25f * 123.25f + 0.75f * 234.25f) + 0.25f * (0.25f * 345.25f + 0.75f * 456.25f)); // 0.75, 0.25
+    ASSERT_TRUE(*output_vertex_pointer++ == 0.75f * 234.25f + 0.25f * 456.25f);                                                         // 1.00, 0.25
+    ASSERT_TRUE(*output_vertex_pointer++ == 0.5f * 123.25f + 0.5f * 345.25f);                                                           // 0.00, 0.50
+    ASSERT_TRUE(*output_vertex_pointer++ == 0.5f * (0.75f * 123.25f + 0.25f * 234.25f) + 0.5f * (0.75f * 345.25f + 0.25f * 456.25f));   // 0.25, 0.50
+    ASSERT_TRUE(*output_vertex_pointer++ == 0.5f * (0.5f * 123.25f + 0.5f * 234.25f) + 0.5f * (0.5f * 345.25f + 0.5f * 456.25f));       // 0.50, 0.50
+    ASSERT_TRUE(*output_vertex_pointer++ == 0.5f * (0.25f * 123.25f + 0.75f * 234.25f) + 0.5f * (0.25f * 345.25f + 0.75f * 456.25f));   // 0.75, 0.50
+    ASSERT_TRUE(*output_vertex_pointer++ == 0.5f * 234.25f + 0.5f * 456.25f);                                                           // 1.00, 0.50
+    ASSERT_TRUE(*output_vertex_pointer++ == 0.25f * 123.25f + 0.75f * 345.25f);                                                         // 0.00, 0.75
+    ASSERT_TRUE(*output_vertex_pointer++ == 0.25f * (0.75f * 123.25f + 0.25f * 234.25f) + 0.75f * (0.75f * 345.25f + 0.25f * 456.25f)); // 0.25, 0.75
+    ASSERT_TRUE(*output_vertex_pointer++ == 0.25f * (0.5f * 123.25f + 0.5f * 234.25f) + 0.75f * (0.5f * 345.25f + 0.5f * 456.25f));     // 0.50, 0.75
+    ASSERT_TRUE(*output_vertex_pointer++ == 0.25f * (0.25f * 123.25f + 0.75f * 234.25f) + 0.75f * (0.25f * 345.25f + 0.75f * 456.25f)); // 0.75, 0.75
+    ASSERT_TRUE(*output_vertex_pointer++ == 0.25f * 234.25f + 0.75f * 456.25f);                                                         // 1.00, 0.75
+    ASSERT_TRUE(*output_vertex_pointer++ == 345.25f);                                                                                   // 0.00, 1.00
+    ASSERT_TRUE(*output_vertex_pointer++ == 0.75f * 345.25f + 0.25f * 456.25f);                                                         // 0.25, 1.00
+    ASSERT_TRUE(*output_vertex_pointer++ == 0.5f * 345.25f + 0.5f * 456.25f);                                                           // 0.50, 1.00
+    ASSERT_TRUE(*output_vertex_pointer++ == 0.25f * 345.25f + 0.75f * 456.25f);                                                         // 0.75, 1.00
+    ASSERT_TRUE(*output_vertex_pointer++ == 456.25f);                                                                                   // 1.00, 1.00
+}
