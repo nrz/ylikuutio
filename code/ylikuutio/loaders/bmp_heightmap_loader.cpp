@@ -178,7 +178,6 @@ namespace loaders
                     return false;
                 }
 
-                // std::cout << color_channel << " color channel value at (" << x << ", " << z << "): " << y << ".\n";
                 *vertex_pointer++ = y;
                 image_pointer += 3; // R, G, & B.
             }
