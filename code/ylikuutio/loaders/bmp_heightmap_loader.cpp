@@ -94,8 +94,8 @@ namespace loaders
 
         // Read the information about the image
         image_size = *(uint32_t*) &header[0x22];
-        image_width = *(uint32_t*) &header[0x12];
-        image_height = *(uint32_t*) &header[0x16];
+        image_width = *(int32_t*) &header[0x12];
+        image_height = *(int32_t*) &header[0x16];
 
         // Define world size.
         uint32_t world_size = image_width * image_height;
