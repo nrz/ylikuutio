@@ -100,6 +100,8 @@ namespace loaders
         // Define world size.
         uint32_t world_size = image_width * image_height;
 
+        uint32_t line_size_in_bytes = image_size / image_height;
+
         // Some BMP files are misformatted, guess missing information
         if (image_size == 0)
         {
@@ -156,10 +158,9 @@ namespace loaders
         const char* char_color_channel = color_channel.c_str();
 
         // start processing image_data.
-        for (int32_t z = image_height - 1; z >= 0; z--)
+        for (uint32_t z = 0; z < image_height; z++)
         {
-            uint32_t image_width_in_bytes = 3 * image_width;
-            image_pointer = image_data + z * image_width_in_bytes;
+            image_pointer = image_data + z * line_size_in_bytes;
 
             for (int32_t x = 0; x < image_width; x++)
             {
