@@ -59,7 +59,7 @@ namespace loaders
         // Read the header, i.e. the 54 first bytes
 
         // If less than 54 bytes are read, it's a problem.
-        if (std::fread(header, 1, sizeof(header), file) != sizeof(header))
+        if (std::fread(header, 1, header_size, file) != header_size)
         {
             std::cerr << "not a correct BMP file.\n";
             std::fclose(file);
