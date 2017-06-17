@@ -66,6 +66,9 @@ namespace loaders
             return false;
         }
 
+        // The start offset of pixel array in file.
+        uint32_t pixel_array_start_offset = header[0x0a];
+
         // A BMP files always begins with "BM"
         if ((header[0] != 'B') || (header[1] != 'M'))
         {
@@ -110,6 +113,15 @@ namespace loaders
         {
             std::cerr << "Reserving memory for image data failed.\n";
             std::fclose(file);
+            return false;
+        }
+
+        // Move file pointer to the start of the pixel array.
+        if (std::fseek(file, pixel_array_start_offset, SEEK_SET) != 0)
+        {
+            std::cerr << "Moving BMP file position indicator failed.\n";
+            std::fclose(file);
+            delete image_data;
             return false;
         }
 
