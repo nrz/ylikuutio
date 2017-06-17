@@ -190,11 +190,12 @@ namespace loaders
         }
 
         /* verify the type of file */
-        char filecode[4];
+        uint32_t dds_magic_number_size_in_bytes = 4; // "DDS "
+        char filecode[dds_magic_number_size_in_bytes];
+
         // TODO: add check for file reading!
-        // TODO: store hardcoded value 4 into a variable.
-        std::fread(filecode, 1, 4, fp);
-        if (std::strncmp(filecode, "DDS ", 4) != 0)
+        std::fread(filecode, 1, dds_magic_number_size_in_bytes, fp);
+        if (std::strncmp(filecode, "DDS ", dds_magic_number_size_in_bytes) != 0)
         {
             std::fclose(fp);
             return 0;
