@@ -1,4 +1,5 @@
 #include "texture_loader.hpp"
+#include "bmp_loader.hpp"
 
 // Include GLEW
 #ifndef __GL_GLEW_H_INCLUDED
@@ -24,91 +25,13 @@ namespace loaders
 {
     GLuint load_BMP_texture(std::string filename)
     {
-        const char* imagepath = filename.c_str();
+        int32_t image_width;
+        int32_t image_height;
 
-        std::printf("Reading image %s\n", imagepath);
+        uint32_t x_step = 1;
+        uint32_t z_step = 1;
 
-        // Data read from the header of the BMP file
-        uint8_t header[54];
-        uint32_t dataPos;
-        uint32_t imageSize;
-        uint32_t width, height;
-        // Actual RGB data
-        uint8_t* data;
-
-        // Open the file
-        std::FILE* file = std::fopen(imagepath,"rb");
-        if (!file)
-        {
-            // TODO: change std::printf to std::cerr (after changing imagepath to std::string).
-            std::printf("%s could not be opened. Are you in the right directory ? Don't forget to read the FAQ !\n", imagepath);
-            return 0;
-        }
-
-        // Read the header, i.e. the 54 first bytes
-
-        // If less than 54 bytes are read, problem
-        // TODO: move hardcoded value 54 to variable.
-        if (std::fread(header, 1, 54, file) != 54)
-        {
-            std::printf("Not a correct BMP file\n");
-            return 0;
-        }
-
-        // A BMP files always begins with "BM"
-        if ((header[0] != 'B') || (header[1] != 'M'))
-        {
-            std::printf("Not a correct BMP file\n");
-            return 0;
-        }
-
-        // Make sure this is a 24bpp file
-        if (*(int*) &header[0x1e] != 0)
-        {
-            std::printf("Not a correct BMP file\n");
-            return 0;
-        }
-
-        if (*(int*) &header[0x1c] != 24)
-        {
-            std::printf("Not a correct BMP file\n");
-            return 0;
-        }
-
-        // Read the information about the image
-        dataPos    = *(int*) &header[0x0a];
-        imageSize  = *(int*) &header[0x22];
-        width      = *(int*) &header[0x12];
-        height     = *(int*) &header[0x16];
-
-        // Some BMP files are misformatted, guess missing information
-        if (imageSize == 0)
-        {
-            imageSize = width * height * 3; // 3 : one byte for each Red, Green and Blue component
-        }
-
-        if (dataPos == 0)
-        {
-            dataPos = 54; // The BMP header is done that way
-        }
-
-        // Create a buffer
-        data = new uint8_t [imageSize];
-
-        if (data == nullptr)
-        {
-            std::cerr << "Reserving memory for texture data failed.\n";
-            std::fclose(file);
-            return 0;
-        }
-
-        // Read the actual data from the file into the buffer
-        // TODO: add check for file reading!
-        // TODO: rename imageSize to image_size
-        std::fread(data, 1, imageSize, file);
-
-        // Everything is in memory now, the file can be closed
-        std::fclose(file);
+        uint8_t* image_data = load_BMP_file(filename, image_width, image_height);
 
         // Create one OpenGL texture
         GLuint textureID;
@@ -118,10 +41,10 @@ namespace loaders
         glBindTexture(GL_TEXTURE_2D, textureID);
 
         // Give the image to OpenGL
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_BGR, GL_UNSIGNED_BYTE, data);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, image_width, image_height, 0, GL_BGR, GL_UNSIGNED_BYTE, image_data);
 
         // OpenGL has now copied the data. Free our own version
-        delete[] data;
+        delete[] image_data;
 
         // Poor filtering, or ...
         //glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);

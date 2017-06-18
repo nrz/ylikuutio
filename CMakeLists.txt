@@ -515,6 +515,8 @@ add_library(ylikuutio STATIC
     code/ylikuutio/loaders/ascii_grid_loader.hpp
     code/ylikuutio/loaders/bmp_heightmap_loader.cpp
     code/ylikuutio/loaders/bmp_heightmap_loader.hpp
+    code/ylikuutio/loaders/bmp_loader.cpp
+    code/ylikuutio/loaders/bmp_loader.hpp
     code/ylikuutio/loaders/font_loader.cpp
     code/ylikuutio/loaders/font_loader.hpp
     code/ylikuutio/loaders/las_loader.cpp
