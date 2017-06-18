@@ -7,10 +7,13 @@
 #include <GL/glew.h> // GLfloat, GLuint etc.
 #endif
 
+// Include standard headers
+#include <string>   // std::string
+
 namespace loaders
 {
     // Load a .BMP file using our custom loader
-    GLuint load_BMP_texture(const char* imagepath);
+    GLuint load_BMP_texture(std::string filename);
 
     //// Since GLFW 3, glfwLoadTexture2D() has been removed. You have to use another texture loading library, 
     //// or do it yourself (just like load_BMP_texture and load_DDS_texture)

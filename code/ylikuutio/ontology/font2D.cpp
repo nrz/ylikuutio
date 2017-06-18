@@ -44,7 +44,7 @@ namespace ontology
         // Initialize texture
         if ((std::strcmp(char_font_texture_file_format, "bmp") == 0) || (std::strcmp(char_font_texture_file_format, "BMP") == 0))
         {
-            this->texture = loaders::load_BMP_texture(texturePath);
+            this->texture = loaders::load_BMP_texture(texture_filename);
         }
         else if ((std::strcmp(char_font_texture_file_format, "dds") == 0) || (std::strcmp(char_font_texture_file_format, "DDS") == 0))
         {

@@ -18,12 +18,14 @@
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <stdint.h> // uint32_t etc.
 #include <stdlib.h> // free, malloc
+#include <string>   // std::string
 
 namespace loaders
 {
-    GLuint load_BMP_texture(const char* imagepath)
+    GLuint load_BMP_texture(std::string filename)
     {
-        // TODO: change imagepath to std::string
+        const char* imagepath = filename.c_str();
+
         std::printf("Reading image %s\n", imagepath);
 
         // Data read from the header of the BMP file
