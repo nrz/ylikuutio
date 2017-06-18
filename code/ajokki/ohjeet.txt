@@ -3,7 +3,7 @@ UV layoutin exporttaus Blenderissä:
 
 Ladataan .png GIMP:ssä.
 
-Ladataan toistaiseksi funktiolla `GLuint load_BMP_texture(const char* imagepath)`:
+Ladataan toistaiseksi funktiolla `GLuint load_BMP_texture(std::string filename)`:
 
 Tiedoston tallennus `*.bmp`-formaatissa (toistaiseksi pitää olla 24-bittinen BMP):
 * -> Export
