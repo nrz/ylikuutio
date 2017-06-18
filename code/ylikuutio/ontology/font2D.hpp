@@ -25,8 +25,8 @@ namespace ontology
                     ontology::Universe* universe_pointer,
                     GLuint screen_width,
                     GLuint screen_height,
-                    const char* texturePath,
-                    const char* char_font_texture_file_format);
+                    std::string texture_filename,
+                    std::string font_texture_file_format);
 
             // destructor.
             ~Font2D();

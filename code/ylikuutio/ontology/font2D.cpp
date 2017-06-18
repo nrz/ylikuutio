@@ -24,6 +24,7 @@
 #include <vector>   // std::vector
 #include <cstring>  // std::memcmp, std::strcmp, std::strlen, std::strncmp
 #include <stdint.h> // uint32_t etc.
+#include <string>   // std::string
 
 namespace ontology
 {
@@ -33,10 +34,12 @@ namespace ontology
             ontology::Universe* universe_pointer,
             GLuint screen_width,
             GLuint screen_height,
-            const char* texturePath,
-            const char* char_font_texture_file_format)
+            std::string texture_filename,
+            std::string font_texture_file_format)
     {
         // constructor.
+        const char* texturePath = texture_filename.c_str();
+        const char* char_font_texture_file_format = font_texture_file_format.c_str();
 
         // Initialize texture
         if ((std::strcmp(char_font_texture_file_format, "bmp") == 0) || (std::strcmp(char_font_texture_file_format, "BMP") == 0))
