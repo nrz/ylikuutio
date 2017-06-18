@@ -21,7 +21,7 @@ namespace loaders
     //GLuint loadTGA_glfw(const char*  imagepath);
 
     // Load a .DDS file using GLFW's own loader
-    GLuint load_DDS_texture(const char* imagepath);
+    GLuint load_DDS_texture(std::string filename);
 }
 
 #endif

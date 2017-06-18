@@ -178,8 +178,10 @@ namespace loaders
 #define FOURCC_DXT3 0x33545844 // Equivalent to "DXT3" in ASCII
 #define FOURCC_DXT5 0x35545844 // Equivalent to "DXT5" in ASCII
 
-    GLuint load_DDS_texture(const char* imagepath)
+    GLuint load_DDS_texture(std::string filename)
     {
+        const char* imagepath = filename.c_str();
+
         uint8_t header[124];
         std::FILE* fp;
 

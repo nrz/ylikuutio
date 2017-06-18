@@ -48,7 +48,7 @@ namespace ontology
         }
         else if ((std::strcmp(char_font_texture_file_format, "dds") == 0) || (std::strcmp(char_font_texture_file_format, "DDS") == 0))
         {
-            this->texture = loaders::load_DDS_texture(texturePath);
+            this->texture = loaders::load_DDS_texture(texture_filename);
         }
         else
         {
