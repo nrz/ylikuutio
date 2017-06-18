@@ -235,3 +235,38 @@ TEST(unicode_value_from_string, iloinen_10cc1_01c00_ja_c1e1ece_caace101_kaikkial
     ASSERT_EQ(string::extract_unicode_value_from_string(text_pointer), 'l');
     ASSERT_EQ(string::extract_unicode_value_from_string(text_pointer), 'e');
 }
+TEST(extract_string_from_memory, iloinen_lokki_laulaa_ja_nukkuu)
+{
+    char text[] = "iloinen lokki laulaa ja nukkuu";
+    char* text_pointer = text;
+
+    char end_string[] = "ja";
+    char* end_string_pointer = end_string;
+
+    uint32_t array_size = 128;
+    char* dest_array = new char[array_size];
+
+    string::extract_string(dest_array, text_pointer, end_string);
+    ASSERT_EQ(*dest_array++, 'i');
+    ASSERT_EQ(*dest_array++, 'l');
+    ASSERT_EQ(*dest_array++, 'o');
+    ASSERT_EQ(*dest_array++, 'i');
+    ASSERT_EQ(*dest_array++, 'n');
+    ASSERT_EQ(*dest_array++, 'e');
+    ASSERT_EQ(*dest_array++, 'n');
+    ASSERT_EQ(*dest_array++, ' ');
+    ASSERT_EQ(*dest_array++, 'l');
+    ASSERT_EQ(*dest_array++, 'o');
+    ASSERT_EQ(*dest_array++, 'k');
+    ASSERT_EQ(*dest_array++, 'k');
+    ASSERT_EQ(*dest_array++, 'i');
+    ASSERT_EQ(*dest_array++, ' ');
+    ASSERT_EQ(*dest_array++, 'l');
+    ASSERT_EQ(*dest_array++, 'a');
+    ASSERT_EQ(*dest_array++, 'u');
+    ASSERT_EQ(*dest_array++, 'l');
+    ASSERT_EQ(*dest_array++, 'a');
+    ASSERT_EQ(*dest_array++, 'a');
+    ASSERT_EQ(*dest_array++, ' ');
+    ASSERT_EQ(*dest_array++, 0);
+}
