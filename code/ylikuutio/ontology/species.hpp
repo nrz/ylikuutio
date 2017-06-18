@@ -94,8 +94,8 @@ namespace ontology
 
             std::string triangulation_type;
 
-            uint32_t image_width;
-            uint32_t image_height;
+            int32_t image_width;
+            int32_t image_height;
 
             std::string name;                     // name of this entity.
     };

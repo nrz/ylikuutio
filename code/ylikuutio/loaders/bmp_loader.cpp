@@ -11,7 +11,8 @@ namespace loaders
     uint8_t* load_BMP_file(
             std::string image_path,
             int32_t& image_width,
-            int32_t& image_height)
+            int32_t& image_height,
+            uint32_t& image_size)
     {
         std::cout << "Loading BMP file " << image_path << " ...\n";
 
@@ -19,7 +20,6 @@ namespace loaders
 
         // Data read from the header of the BMP file
         uint8_t header[header_size];
-        uint32_t image_size;
         // Actual RGB image data.
         uint8_t *image_data;
 

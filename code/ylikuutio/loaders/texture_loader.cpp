@@ -27,11 +27,12 @@ namespace loaders
     {
         int32_t image_width;
         int32_t image_height;
+        uint32_t image_size;
 
         uint32_t x_step = 1;
         uint32_t z_step = 1;
 
-        uint8_t* image_data = load_BMP_file(filename, image_width, image_height);
+        uint8_t* image_data = load_BMP_file(filename, image_width, image_height, image_size);
 
         // Create one OpenGL texture
         GLuint textureID;

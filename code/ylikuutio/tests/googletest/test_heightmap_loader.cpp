@@ -4,6 +4,8 @@
 #include "code/ylikuutio/triangulation/quad_triangulation.hpp"
 #include "code/ylikuutio/loaders/bmp_heightmap_loader.hpp"
 #include "code/ylikuutio/loaders/bmp_heightmap_loader.cpp"
+#include "code/ylikuutio/loaders/bmp_loader.hpp"
+#include "code/ylikuutio/loaders/bmp_loader.cpp"
 #include "code/ylikuutio/loaders/srtm_heightmap_loader.hpp"
 #include "code/ylikuutio/loaders/srtm_heightmap_loader.cpp"
 #include "code/ylikuutio/common/global_variables.hpp"
@@ -22,8 +24,8 @@
 
 TEST(vertices_must_be_defined_and_interpolated_appropriately, a_3x3_world)
 {
-    uint32_t image_width = 3;
-    uint32_t image_height = 3;
+    int32_t image_width = 3;
+    int32_t image_height = 3;
     bool should_ylikuutio_use_real_texture_coordinates = true;
 
     float* input_vertex_data = new float[image_width * image_height];
@@ -349,8 +351,8 @@ TEST(a_BMP_world_must_be_loaded_appropriately, load_3x3_BMP_world)
     std::vector<glm::vec3> out_vertices;
     std::vector<glm::vec2> out_UVs;
     std::vector<glm::vec3> out_normals;
-    uint32_t image_width = 0;
-    uint32_t image_height = 0;
+    int32_t image_width = 0;
+    int32_t image_height = 0;
     std::string color_channel = "mean";
     uint32_t x_step = 1;
     uint32_t z_step = 1;
@@ -594,8 +596,8 @@ TEST(a_BMP_world_must_be_loaded_appropriately, load_256x256_BMP_world)
     std::vector<glm::vec3> out_vertices;
     std::vector<glm::vec2> out_UVs;
     std::vector<glm::vec3> out_normals;
-    uint32_t image_width = 0;
-    uint32_t image_height = 0;
+    int32_t image_width = 0;
+    int32_t image_height = 0;
     std::string color_channel = "mean";
     uint32_t x_step = 1;
     uint32_t z_step = 1;
@@ -632,8 +634,8 @@ TEST(a_2x2_world_must_be_triangulated_appropriately, bilinear_interpolation)
     // |/ \|
     // *---*
     // bilinear interpolation.
-    uint32_t image_width = 2;
-    uint32_t image_height = 2;
+    int32_t image_width = 2;
+    int32_t image_height = 2;
     uint32_t world_size = image_width * image_height;
 
     uint32_t* vertex_data;
@@ -743,8 +745,8 @@ TEST(a_2x2_world_must_be_triangulated_appropriately, southeast_northwest_edges)
     // |  \|
     // *---*
     // southeast northwest edges.
-    uint32_t image_width = 2;
-    uint32_t image_height = 2;
+    int32_t image_width = 2;
+    int32_t image_height = 2;
     uint32_t world_size = image_width * image_height;
 
     uint32_t* vertex_data;
@@ -822,8 +824,8 @@ TEST(a_2x2_world_must_be_triangulated_appropriately, southwest_northeast_edges)
     // |/  |
     // *---*
     // southwest northeast edges.
-    uint32_t image_width = 2;
-    uint32_t image_height = 2;
+    int32_t image_width = 2;
+    int32_t image_height = 2;
     uint32_t world_size = image_width * image_height;
 
     uint32_t* vertex_data;
@@ -905,8 +907,8 @@ TEST(a_3x3_world_must_be_triangulated_appropriately, southeast_northwest_edges)
     // |  \|  \|
     // *---*---*
     // southeast northwest edges.
-    uint32_t image_width = 3;
-    uint32_t image_height = 3;
+    int32_t image_width = 3;
+    int32_t image_height = 3;
     uint32_t world_size = image_width * image_height;
 
     uint32_t* vertex_data;
