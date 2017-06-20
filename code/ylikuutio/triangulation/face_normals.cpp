@@ -25,6 +25,12 @@ namespace geometry
     {
         uint32_t current_interpolated_vertex_i = actual_image_width * actual_image_height;
 
+        if (actual_image_width < 2 || actual_image_height < 2)
+        {
+            // If width or height is < 2, there are no faces.
+            return false;
+        }
+
         for (uint32_t z = 1; z < actual_image_height; z++)
         {
             for (uint32_t x = 1; x < actual_image_width; x++)
