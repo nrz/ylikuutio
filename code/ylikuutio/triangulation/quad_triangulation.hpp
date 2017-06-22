@@ -136,15 +136,18 @@ namespace geometry
 
             // 1. Define the vertices for vertices loaded from file, `push_back` to `temp_vertices`.
 
-            define_vertices(
-                    input_vertex_pointer,
-                    image_width,
-                    image_height,
-                    x_step,
-                    z_step,
-                    triangulate_quads_struct.should_ylikuutio_use_real_texture_coordinates,
-                    temp_vertices,
-                    temp_UVs);
+            if (!define_vertices(
+                        input_vertex_pointer,
+                        image_width,
+                        image_height,
+                        x_step,
+                        z_step,
+                        triangulate_quads_struct.should_ylikuutio_use_real_texture_coordinates,
+                        temp_vertices,
+                        temp_UVs))
+            {
+                return false;
+            }
 
             int32_t n_faces_for_each_vertex;
             int32_t n_faces;

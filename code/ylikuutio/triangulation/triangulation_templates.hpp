@@ -66,7 +66,7 @@ namespace geometry
         }
 
     template<class T1>
-        void define_vertices(
+        bool define_vertices(
                 T1* input_vertex_pointer,
                 int32_t image_width,
                 int32_t image_height,
@@ -76,6 +76,12 @@ namespace geometry
                 std::vector<glm::vec3>& temp_vertices,
                 std::vector<glm::vec2>& temp_UVs)
         {
+            if (image_width < 0 || image_height < 0)
+            {
+                // Can not define vertices if image width < 0 or image height < 0.
+                return false;
+            }
+
             // Define the temporary vertices in a double loop.
             int32_t texture_y = 0;
 
@@ -115,6 +121,8 @@ namespace geometry
                 }
                 texture_y ^= 1;
             }
+
+            return true;
         }
 
     template<class T1>
