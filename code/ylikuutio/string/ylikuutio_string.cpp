@@ -11,7 +11,7 @@
 
 namespace string
 {
-    bool check_and_report_if_some_string_matches(const char* const file_base_pointer, char* file_data_pointer, std::vector<std::string> identifier_strings_vector)
+    bool check_and_report_if_some_string_matches(const char* const file_base_pointer, const char* file_data_pointer, std::vector<std::string> identifier_strings_vector)
     {
         for (std::string identifier_string : identifier_strings_vector)
         {
