@@ -118,7 +118,7 @@ namespace geometry
         }
 
     template<class T1>
-        void interpolate_and_define_vertices_using_bilinear_interpolation(
+        bool interpolate_and_define_vertices_using_bilinear_interpolation(
                 T1* input_vertex_pointer,
                 int32_t image_width,
                 int32_t image_height,
@@ -129,6 +129,12 @@ namespace geometry
                 std::vector<glm::vec2>& temp_UVs)
         {
             std::cout << "interpolating center vertices.\n";
+
+            if (image_width < 2 || image_height < 2)
+            {
+                // Can not interpolate center vertices if image width < 2 or image height < 2.
+                return false;
+            }
 
             // Then, define the faces in a double loop.
             // Begin from index `z_step`.
@@ -168,6 +174,8 @@ namespace geometry
                     temp_UVs.push_back(uv);
                 }
             }
+
+            return true;
         }
 }
 

@@ -172,7 +172,7 @@ namespace geometry
             if (is_bilinear_interpolation_in_use)
             {
                 // 2. Interpolate the vertices between, using bilinear interpolation, `push_back` to `temp_vertices`.
-                geometry::interpolate_and_define_vertices_using_bilinear_interpolation(
+                if (!geometry::interpolate_and_define_vertices_using_bilinear_interpolation(
                         input_vertex_pointer,
                         image_width,
                         image_height,
@@ -180,7 +180,10 @@ namespace geometry
                         z_step,
                         triangulate_quads_struct.should_ylikuutio_use_real_texture_coordinates,
                         temp_vertices,
-                        temp_UVs);
+                        temp_UVs))
+                {
+                    return false;
+                }
             }
 
             if (!std::isnan(sphere_radius))
