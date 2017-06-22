@@ -136,6 +136,12 @@ namespace geometry
                 return false;
             }
 
+            if (x_step <= 0 || z_step <= 0)
+            {
+                // Can not interpolate center vertices if x_step <= 0 or z_step <= 0.
+                return false;
+            }
+
             // Then, define the faces in a double loop.
             // Begin from index `z_step`.
             for (int32_t z = z_step; z < image_height; z += z_step)
