@@ -15,11 +15,11 @@ namespace string
     {
         for (std::string identifier_string : identifier_strings_vector)
         {
-            const char* identifier_string_char = identifier_string.c_str();
+            const char* const identifier_string_char = identifier_string.c_str();
 
             if (std::strncmp(file_data_pointer, identifier_string_char, std::strlen(identifier_string_char)) == 0)
             {
-                const char* identifier_string_char = identifier_string.c_str();
+                const char* const identifier_string_char = identifier_string.c_str();
                 uint64_t offset = (uint64_t) file_data_pointer - (uint64_t) file_base_pointer;
                 return true;
             }
