@@ -54,6 +54,16 @@ namespace geometry
             double sphere_radius = triangulate_quads_struct.sphere_radius;
             SphericalWorldStruct spherical_world_struct = triangulate_quads_struct.spherical_world_struct;
 
+            if (image_width < 2 || image_height < 2 || actual_image_width < 2 || actual_image_height < 2)
+            {
+                return false;
+            }
+
+            if (x_step < 1 || z_step < 1)
+            {
+                return false;
+            }
+
             const char* char_triangulation_type = triangulation_type.c_str();
 
             bool is_bilinear_interpolation_in_use = false;
