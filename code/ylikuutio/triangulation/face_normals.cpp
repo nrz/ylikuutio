@@ -230,6 +230,13 @@ namespace geometry
                 std::cerr << "invalid compass point code!\n";
                 return glm::vec3(NAN, NAN, NAN);
         }
+
+        if (face_normal_i < 0)
+        {
+            // Face normal index can not be negative.
+            return glm::vec3(NAN, NAN, NAN);
+        }
+
         return face_normal_data[face_normal_i];
     }
 }
