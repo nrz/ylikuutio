@@ -16,7 +16,7 @@ namespace string
 
     int32_t extract_int32_t_value_from_string(char*& data_pointer, char* char_end_string, const char* const description);
 
-    float extract_float_value_from_string(char*& data_pointer, char* char_end_string, const char* description);
+    float extract_float_value_from_string(char*& data_pointer, char* char_end_string, const char* const description);
 
     int32_t extract_unicode_value_from_string(const char*& unicode_char_pointer);
 
