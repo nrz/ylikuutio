@@ -36,7 +36,7 @@ namespace string
         *dest_mem_pointer = '\0';
     }
 
-    void extract_string_with_several_endings(char* dest_mem_pointer, char*& src_mem_pointer, char* char_end_string)
+    void extract_string_with_several_endings(char* dest_mem_pointer, char*& src_mem_pointer, const char* const char_end_string)
     {
         // This function copies characters from `src_mem_pointer` until a character matches.
 
