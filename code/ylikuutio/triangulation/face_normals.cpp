@@ -123,6 +123,11 @@ namespace geometry
             BilinearDirections compass_point_code,
             int32_t actual_image_width)
     {
+        if (x < 0 || z < 0)
+        {
+            std::cerr << "negative coordinates are not supported!";
+        }
+
         int32_t face_normal_i = get_face_normal_i(x, z, compass_point_code, actual_image_width);
 
         if (face_normal_i == -1)
