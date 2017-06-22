@@ -176,14 +176,14 @@ namespace geometry
             {
                 // 2. Interpolate the vertices between, using bilinear interpolation, `push_back` to `temp_vertices`.
                 if (!geometry::interpolate_and_define_vertices_using_bilinear_interpolation(
-                        input_vertex_pointer,
-                        image_width,
-                        image_height,
-                        x_step,
-                        z_step,
-                        triangulate_quads_struct.should_ylikuutio_use_real_texture_coordinates,
-                        temp_vertices,
-                        temp_UVs))
+                            input_vertex_pointer,
+                            image_width,
+                            image_height,
+                            x_step,
+                            z_step,
+                            triangulate_quads_struct.should_ylikuutio_use_real_texture_coordinates,
+                            temp_vertices,
+                            temp_UVs))
                 {
                     return false;
                 }
@@ -239,13 +239,13 @@ namespace geometry
 
             // 5. Compute the vertex normals for vertices loaded from file, `push_back` to `temp_normals`.
             geometry::compute_vertex_normals(
-                        temp_normals,
-                        face_normal_vector_vec3,
-                        actual_image_width,
-                        actual_image_height,
-                        is_bilinear_interpolation_in_use,
-                        is_southwest_northeast_edges_in_use,
-                        is_southeast_northwest_edges_in_use);
+                    temp_normals,
+                    face_normal_vector_vec3,
+                    actual_image_width,
+                    actual_image_height,
+                    is_bilinear_interpolation_in_use,
+                    is_southwest_northeast_edges_in_use,
+                    is_southeast_northwest_edges_in_use);
 
             // 6. Loop through all vertices and `geometry::output_triangle_vertices`.
 
