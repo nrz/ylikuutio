@@ -136,7 +136,7 @@ namespace geometry
 
             // 1. Define the vertices for vertices loaded from file, `push_back` to `temp_vertices`.
 
-            if (!define_vertices(
+            if (!geometry::define_vertices(
                         input_vertex_pointer,
                         image_width,
                         image_height,
@@ -225,7 +225,7 @@ namespace geometry
 
             std::vector<glm::vec3> face_normal_vector_vec3;
 
-            if (!compute_face_normals(
+            if (!geometry::compute_face_normals(
                         temp_vertices,
                         face_normal_vector_vec3,
                         actual_image_width,
@@ -238,7 +238,7 @@ namespace geometry
             }
 
             // 5. Compute the vertex normals for vertices loaded from file, `push_back` to `temp_normals`.
-            compute_vertex_normals(
+            geometry::compute_vertex_normals(
                         temp_normals,
                         face_normal_vector_vec3,
                         actual_image_width,
@@ -249,7 +249,7 @@ namespace geometry
 
             // 6. Loop through all vertices and `geometry::output_triangle_vertices`.
 
-            define_vertices_UVs_and_normals(
+            geometry::define_vertices_UVs_and_normals(
                     triangulate_quads_struct,
                     temp_vertices,
                     temp_UVs,
