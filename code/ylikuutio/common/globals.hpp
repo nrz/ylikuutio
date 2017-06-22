@@ -79,6 +79,11 @@ typedef datatypes::AnyValue* (*ConsoleCommandCallback) (
 
 typedef struct ConsoleStruct
 {
+    ConsoleStruct()
+        : universe_pointer(nullptr), font2D_pointer(nullptr)
+    {
+        // constructor.
+    }
     std::vector<KeyAndCallbackStruct>** current_keypress_callback_engine_vector_pointer_pointer;
     std::vector<KeyAndCallbackStruct>** current_keyrelease_callback_engine_vector_pointer_pointer;
     std::unordered_map<std::string, ConsoleCommandCallback>* command_callback_map_pointer;
