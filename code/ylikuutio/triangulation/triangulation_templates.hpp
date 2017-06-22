@@ -24,9 +24,9 @@ namespace geometry
     template<class T1>
         T1 get_y(
                 T1* vertex_data,
-                uint32_t x,
-                uint32_t z,
-                uint32_t image_width)
+                int32_t x,
+                int32_t z,
+                int32_t image_width)
         {
             // This function returns the altitude value based on x & z coordinates.
             // This works only for a raw heightmap data (for a 2D array of altitudes).
@@ -37,27 +37,27 @@ namespace geometry
 
     // for bilinear interpolation.
     template<class T1>
-        float southwest_y(uint32_t x, uint32_t z, T1* input_vertex_pointer, uint32_t image_width, uint32_t x_step, uint32_t z_step)
+        float southwest_y(int32_t x, int32_t z, T1* input_vertex_pointer, int32_t image_width, int32_t x_step, int32_t z_step)
         {
             return static_cast<float>(geometry::get_y(input_vertex_pointer, x - x_step, z - z_step, image_width));
         }
     template<class T1>
-        float southeast_y(uint32_t x, uint32_t z, T1* input_vertex_pointer, uint32_t image_width, uint32_t x_step, uint32_t z_step)
+        float southeast_y(int32_t x, int32_t z, T1* input_vertex_pointer, int32_t image_width, int32_t x_step, int32_t z_step)
         {
             return static_cast<float>(geometry::get_y(input_vertex_pointer, x, z - z_step, image_width));
         }
     template<class T1>
-        float northwest_y(uint32_t x, uint32_t z, T1* input_vertex_pointer, uint32_t image_width, uint32_t x_step, uint32_t z_step)
+        float northwest_y(int32_t x, int32_t z, T1* input_vertex_pointer, int32_t image_width, int32_t x_step, int32_t z_step)
         {
             return static_cast<float>(geometry::get_y(input_vertex_pointer, x - x_step, z, image_width));
         }
     template<class T1>
-        float northeast_y(uint32_t x, uint32_t z, T1* input_vertex_pointer, uint32_t image_width, uint32_t x_step, uint32_t z_step)
+        float northeast_y(int32_t x, int32_t z, T1* input_vertex_pointer, int32_t image_width, int32_t x_step, int32_t z_step)
         {
             return static_cast<float>(geometry::get_y(input_vertex_pointer, x, z, image_width));
         }
     template<class T1>
-        float center_y(uint32_t x, uint32_t z, T1* input_vertex_pointer, uint32_t image_width, uint32_t x_step, uint32_t z_step)
+        float center_y(int32_t x, int32_t z, T1* input_vertex_pointer, int32_t image_width, int32_t x_step, int32_t z_step)
         {
             return static_cast<float>(southwest_y(x, z, input_vertex_pointer, image_width, x_step, z_step) +
                     southeast_y(x, z, input_vertex_pointer, image_width, x_step, z_step) +
@@ -68,22 +68,22 @@ namespace geometry
     template<class T1>
         void define_vertices(
                 T1* input_vertex_pointer,
-                uint32_t image_width,
-                uint32_t image_height,
-                uint32_t x_step,
-                uint32_t z_step,
+                int32_t image_width,
+                int32_t image_height,
+                int32_t x_step,
+                int32_t z_step,
                 bool should_ylikuutio_use_real_texture_coordinates,
                 std::vector<glm::vec3>& temp_vertices,
                 std::vector<glm::vec2>& temp_UVs)
         {
             // Define the temporary vertices in a double loop.
-            uint32_t texture_y = 0;
+            int32_t texture_y = 0;
 
-            for (uint32_t z = 0; z < image_height; z += z_step)
+            for (int32_t z = 0; z < image_height; z += z_step)
             {
-                uint32_t texture_x = 0;
+                int32_t texture_x = 0;
 
-                for (uint32_t x = 0; x < image_width; x += x_step)
+                for (int32_t x = 0; x < image_width; x += x_step)
                 {
                     // current x,z coordinates).
                     float y = static_cast<float>(geometry::get_y(input_vertex_pointer, x, z, image_width));
@@ -120,10 +120,10 @@ namespace geometry
     template<class T1>
         void interpolate_and_define_vertices_using_bilinear_interpolation(
                 T1* input_vertex_pointer,
-                uint32_t image_width,
-                uint32_t image_height,
-                uint32_t x_step,
-                uint32_t z_step,
+                int32_t image_width,
+                int32_t image_height,
+                int32_t x_step,
+                int32_t z_step,
                 bool should_ylikuutio_use_real_texture_coordinates,
                 std::vector<glm::vec3>& temp_vertices,
                 std::vector<glm::vec2>& temp_UVs)
@@ -132,10 +132,10 @@ namespace geometry
 
             // Then, define the faces in a double loop.
             // Begin from index `z_step`.
-            for (uint32_t z = z_step; z < image_height; z += z_step)
+            for (int32_t z = z_step; z < image_height; z += z_step)
             {
                 // Begin from index `x_step`.
-                for (uint32_t x = x_step; x < image_width; x += x_step)
+                for (int32_t x = x_step; x < image_width; x += x_step)
                 {
                     // This corresponds to "f": specify a face (but here we specify 2 faces instead!).
                     // std::cout << "Processing coordinate (" << x << ", " << z << ").\n";
