@@ -55,8 +55,8 @@ namespace geometry
             std::vector<glm::vec3>& out_vertices,
             std::vector<glm::vec2>& out_UVs,
             std::vector<glm::vec3>& out_normals,
-            uint32_t actual_image_width,
-            uint32_t actual_image_height,
+            int32_t actual_image_width,
+            int32_t actual_image_height,
             bool is_bilinear_interpolation_in_use,
             bool is_southwest_northeast_edges_in_use,
             bool is_southeast_northwest_edges_in_use)

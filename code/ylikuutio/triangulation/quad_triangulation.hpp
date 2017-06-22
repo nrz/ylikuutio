@@ -44,12 +44,12 @@ namespace geometry
         {
             // Input vertices (`T1* input_vertex_pointer`)
             // can be `float`, `int32_t` or `uint32_t`.
-            uint32_t image_width = triangulate_quads_struct.image_width;
-            uint32_t image_height = triangulate_quads_struct.image_height;
-            uint32_t x_step = triangulate_quads_struct.x_step;
-            uint32_t z_step = triangulate_quads_struct.z_step;
-            uint32_t actual_image_width = (image_width - 1) / x_step + 1;
-            uint32_t actual_image_height = (image_height - 1) / z_step + 1;
+            int32_t image_width = triangulate_quads_struct.image_width;
+            int32_t image_height = triangulate_quads_struct.image_height;
+            int32_t x_step = triangulate_quads_struct.x_step;
+            int32_t z_step = triangulate_quads_struct.z_step;
+            int32_t actual_image_width = (image_width - 1) / x_step + 1;
+            int32_t actual_image_height = (image_height - 1) / z_step + 1;
             std::string triangulation_type = triangulate_quads_struct.triangulation_type;
             double sphere_radius = triangulate_quads_struct.sphere_radius;
             SphericalWorldStruct spherical_world_struct = triangulate_quads_struct.spherical_world_struct;
@@ -136,8 +136,8 @@ namespace geometry
                     temp_vertices,
                     temp_UVs);
 
-            uint32_t n_faces_for_each_vertex;
-            uint32_t n_faces;
+            int32_t n_faces_for_each_vertex;
+            int32_t n_faces;
 
             if (is_bilinear_interpolation_in_use)
             {
