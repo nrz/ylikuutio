@@ -176,10 +176,10 @@ namespace console
         // Please note that it is not necessary to be in console to be able to print in console.
         const char* text_char = text.c_str();
 
-        uint32_t characters_for_line = window_width / text_size;
+        int32_t characters_for_line = window_width / text_size;
 
         std::list<char> text_char_list;
-        uint32_t current_line_length = 0;
+        int32_t current_line_length = 0;
 
         for (char& my_char : text)
         {
