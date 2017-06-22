@@ -8,7 +8,7 @@
 
 namespace string
 {
-    bool check_and_report_if_some_string_matches(const char* const file_base_pointer, const char* file_data_pointer, std::vector<std::string> identifier_strings_vector);
+    bool check_and_report_if_some_string_matches(const char* const file_base_pointer, const char* const file_data_pointer, std::vector<std::string> identifier_strings_vector);
 
     void extract_string(char* dest_mem_pointer, char*& src_mem_pointer, char* char_end_string);
 
