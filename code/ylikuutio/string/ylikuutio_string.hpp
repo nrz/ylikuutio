@@ -10,7 +10,7 @@ namespace string
 {
     bool check_and_report_if_some_string_matches(const char* file_base_pointer, char* file_data_pointer, std::vector<std::string> identifier_strings_vector);
 
-    void extract_string(char* dest_mem_pointer, char* &src_mem_pointer, char* char_end_string);
+    void extract_string(char* dest_mem_pointer, char*& src_mem_pointer, char* char_end_string);
 
     void extract_string_with_several_endings(char* dest_mem_pointer, char*& src_mem_pointer, char* char_end_string);
 

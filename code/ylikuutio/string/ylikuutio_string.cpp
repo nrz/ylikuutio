@@ -27,7 +27,7 @@ namespace string
         return false;
     }
 
-    void extract_string(char* dest_mem_pointer, char* &src_mem_pointer, char* char_end_string)
+    void extract_string(char* dest_mem_pointer, char*& src_mem_pointer, char* char_end_string)
     {
         while (std::strncmp(src_mem_pointer, char_end_string, std::strlen(char_end_string)) != 0)
         {
