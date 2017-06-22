@@ -63,15 +63,15 @@ TEST(vertices_must_be_defined_and_interpolated_appropriately, a_3x3_world)
             temp_vertices,
             temp_UVs);
 
-    geometry::interpolate_and_define_vertices_using_bilinear_interpolation(
-            input_vertex_data,
-            image_width,
-            image_height,
-            x_step,
-            z_step,
-            should_ylikuutio_use_real_texture_coordinates,
-            temp_vertices,
-            temp_UVs);
+    ASSERT_TRUE(geometry::interpolate_and_define_vertices_using_bilinear_interpolation(
+                input_vertex_data,
+                image_width,
+                image_height,
+                x_step,
+                z_step,
+                should_ylikuutio_use_real_texture_coordinates,
+                temp_vertices,
+                temp_UVs));
 
     // Predefined vertices.
 
