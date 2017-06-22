@@ -227,8 +227,8 @@ namespace console
 
             // Draw the console to screen using `font2D::printText2D`.
             PrintingStruct printing_struct;
-            printing_struct.screen_width = (GLuint) window_width;
-            printing_struct.screen_height = (GLuint) window_height;
+            printing_struct.screen_width = static_cast<GLuint>(window_width);
+            printing_struct.screen_height = static_cast<GLuint>(window_height);
             printing_struct.text_size = text_size;
             printing_struct.font_size = font_size;
             printing_struct.char_font_texture_file_format = "bmp";
