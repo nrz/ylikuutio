@@ -43,7 +43,7 @@ namespace string
         while (true)
         {
             uint32_t n_of_ending_characters = std::strlen(char_end_string);
-            char* end_char_pointer;
+            const char* end_char_pointer;
             end_char_pointer = char_end_string;
 
             // Check if current character is any of the ending characters.
