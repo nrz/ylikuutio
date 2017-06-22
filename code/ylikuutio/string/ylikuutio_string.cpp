@@ -164,7 +164,7 @@ namespace string
         return my_string;
     }
 
-    std::string convert_std_list_char_to_std_string(const std::list<char>& std_list_char, uint32_t first_line_length, uint32_t line_length)
+    std::string convert_std_list_char_to_std_string(const std::list<char>& std_list_char, const uint32_t first_line_length, const uint32_t line_length)
     {
         std::string my_string;
         uint32_t remaining_characters_on_this_line = first_line_length;
