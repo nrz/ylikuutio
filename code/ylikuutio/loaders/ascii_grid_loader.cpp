@@ -30,8 +30,8 @@ namespace loaders
             std::vector<glm::vec3>& out_vertices,
             std::vector<glm::vec2>& out_UVs,
             std::vector<glm::vec3>& out_normals,
-            uint32_t x_step,
-            uint32_t z_step,
+            int32_t x_step,
+            int32_t z_step,
             std::string triangulation_type)
     {
         // Beginning of `L4133D.asc`.
@@ -114,7 +114,7 @@ namespace loaders
         float nodata_value = string::extract_float_value_from_string(--point_data_pointer, (char*) " \n", (const char*) "nodata_value");
 
         // note: the value of `image_height_in_use` can be adjusted here (for testing purposes).
-        uint32_t image_height_in_use = image_height;
+        int32_t image_height_in_use = image_height;
 
         float* vertex_data;
         vertex_data = new float[image_width * image_height_in_use];
@@ -132,13 +132,13 @@ namespace loaders
         // start processing image_data.
         std::cout << "Processing image data.\n";
 
-        for (uint32_t z = 0; z < image_height_in_use; z++)
+        for (int32_t z = 0; z < image_height_in_use; z++)
         {
             // show progress in percents.
             int32_t current_percent = static_cast<int32_t>(floor(100.0f * ((double) z / (double) (image_height_in_use - 1))));
             std::cout << current_percent << "% ";
 
-            for (uint32_t x = 0; x < image_width; x++)
+            for (int32_t x = 0; x < image_width; x++)
             {
                 while (!string::check_and_report_if_some_string_matches(point_data, point_data_pointer, number_strings_vector))
                 {

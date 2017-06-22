@@ -17,13 +17,13 @@ namespace geometry
     bool compute_face_normals(
             std::vector<glm::vec3>& temp_vertices,
             std::vector<glm::vec3>& face_normal_vector_vec3,
-            uint32_t actual_image_width,
-            uint32_t actual_image_height,
+            int32_t actual_image_width,
+            int32_t actual_image_height,
             bool is_bilinear_interpolation_in_use,
             bool is_southwest_northeast_edges_in_use,
             bool is_southeast_northwest_edges_in_use)
     {
-        uint32_t current_interpolated_vertex_i = actual_image_width * actual_image_height;
+        int32_t current_interpolated_vertex_i = actual_image_width * actual_image_height;
 
         if (actual_image_width < 2 || actual_image_height < 2)
         {
@@ -31,11 +31,11 @@ namespace geometry
             return false;
         }
 
-        for (uint32_t z = 1; z < actual_image_height; z++)
+        for (int32_t z = 1; z < actual_image_height; z++)
         {
-            for (uint32_t x = 1; x < actual_image_width; x++)
+            for (int32_t x = 1; x < actual_image_width; x++)
             {
-                uint32_t current_vertex_i = actual_image_width * z + x;
+                int32_t current_vertex_i = actual_image_width * z + x;
 
                 // Computing of face normals depends on triangulation type.
                 if (is_bilinear_interpolation_in_use)
@@ -118,10 +118,10 @@ namespace geometry
     // for bilinear interpolation.
     glm::vec3 get_face_normal(
             std::vector<glm::vec3>& face_normal_data,
-            uint32_t x,
-            uint32_t z,
+            int32_t x,
+            int32_t z,
             BilinearDirections compass_point_code,
-            uint32_t actual_image_width)
+            int32_t actual_image_width)
     {
         int32_t face_normal_i = get_face_normal_i(x, z, compass_point_code, actual_image_width);
 
@@ -137,19 +137,19 @@ namespace geometry
     // for bilinear interpolation.
     // These functions exist to avoid need to remember
     // the array order when calling `geometry::get_face_normal`.
-    glm::vec3 s_face_normal(std::vector<glm::vec3>& face_normal_vector_vec3, uint32_t x, uint32_t z, uint32_t image_width)
+    glm::vec3 s_face_normal(std::vector<glm::vec3>& face_normal_vector_vec3, int32_t x, int32_t z, int32_t image_width)
     {
         return geometry::get_face_normal(face_normal_vector_vec3, x - 1, z - 1, ENE, image_width);
     }
-    glm::vec3 w_face_normal(std::vector<glm::vec3>& face_normal_vector_vec3, uint32_t x, uint32_t z, uint32_t image_width)
+    glm::vec3 w_face_normal(std::vector<glm::vec3>& face_normal_vector_vec3, int32_t x, int32_t z, int32_t image_width)
     {
         return geometry::get_face_normal(face_normal_vector_vec3, x - 1, z - 1, NNE, image_width);
     }
-    glm::vec3 n_face_normal(std::vector<glm::vec3>& face_normal_vector_vec3, uint32_t x, uint32_t z, uint32_t image_width)
+    glm::vec3 n_face_normal(std::vector<glm::vec3>& face_normal_vector_vec3, int32_t x, int32_t z, int32_t image_width)
     {
         return geometry::get_face_normal(face_normal_vector_vec3, x, z, WSW, image_width);
     }
-    glm::vec3 e_face_normal(std::vector<glm::vec3>& face_normal_vector_vec3, uint32_t x, uint32_t z, uint32_t image_width)
+    glm::vec3 e_face_normal(std::vector<glm::vec3>& face_normal_vector_vec3, int32_t x, int32_t z, int32_t image_width)
     {
         return geometry::get_face_normal(face_normal_vector_vec3, x, z, SSW, image_width);
     }
@@ -157,12 +157,12 @@ namespace geometry
     // for southeast-northwest edges.
     glm::vec3 get_face_normal_for_SE_NW(
             std::vector<glm::vec3>& face_normal_data,
-            uint32_t x,
-            uint32_t z,
+            int32_t x,
+            int32_t z,
             SoutheastNorthwestEdgesDirections compass_point_code,
-            uint32_t image_width)
+            int32_t image_width)
     {
-        uint32_t face_normal_i;
+        int32_t face_normal_i;
 
         switch (compass_point_code)
         {
@@ -194,12 +194,12 @@ namespace geometry
     // for southwest-northeast edges.
     glm::vec3 get_face_normal_for_SW_NE(
             std::vector<glm::vec3>& face_normal_data,
-            uint32_t x,
-            uint32_t z,
+            int32_t x,
+            int32_t z,
             SouthwestNortheastEdgesDirections compass_point_code,
-            uint32_t image_width)
+            int32_t image_width)
     {
-        uint32_t face_normal_i;
+        int32_t face_normal_i;
 
         switch (compass_point_code)
         {
