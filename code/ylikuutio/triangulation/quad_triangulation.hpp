@@ -36,8 +36,8 @@ namespace geometry
 {
     template<class T1>
         bool triangulate_quads(
-                T1* input_vertex_pointer,
-                TriangulateQuadsStruct triangulate_quads_struct,
+                const T1* input_vertex_pointer,
+                const TriangulateQuadsStruct triangulate_quads_struct,
                 std::vector<glm::vec3>& out_vertices,
                 std::vector<glm::vec2>& out_UVs,
                 std::vector<glm::vec3>& out_normals)

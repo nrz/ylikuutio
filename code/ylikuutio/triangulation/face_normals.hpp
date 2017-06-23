@@ -23,18 +23,18 @@ namespace geometry
     bool compute_face_normals(
             std::vector<glm::vec3>& temp_vertices,
             std::vector<glm::vec3>& face_normal_vector_vec3,
-            int32_t actual_image_width,
-            int32_t actual_image_height,
-            bool is_bilinear_interpolation_in_use,
-            bool is_southwest_northeast_edges_in_use,
-            bool is_southeast_northwest_edges_in_use);
+            const int32_t actual_image_width,
+            const int32_t actual_image_height,
+            const bool is_bilinear_interpolation_in_use,
+            const bool is_southwest_northeast_edges_in_use,
+            const bool is_southeast_northwest_edges_in_use);
 
     glm::vec3 get_face_normal(
-            std::vector<glm::vec3>& face_normal_data,
-            int32_t x,
-            int32_t z,
-            BilinearDirections compass_point_code,
-            int32_t actual_image_width);
+            const std::vector<glm::vec3>& face_normal_data,
+            const int32_t x,
+            const int32_t z,
+            const BilinearDirections compass_point_code,
+            const int32_t actual_image_width);
 
     // for bilinear interpolation.
     // These functions exist to avoid need to remember

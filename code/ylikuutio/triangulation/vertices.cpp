@@ -45,7 +45,7 @@ namespace geometry
     }
 
     void define_vertices_UVs_and_normals(
-            TriangulateQuadsStruct triangulate_quads_struct,
+            const TriangulateQuadsStruct triangulate_quads_struct,
             std::vector<glm::vec3>& temp_vertices,
             std::vector<glm::vec2>& temp_UVs,
             std::vector<glm::vec3>& temp_normals,
@@ -55,11 +55,11 @@ namespace geometry
             std::vector<glm::vec3>& out_vertices,
             std::vector<glm::vec2>& out_UVs,
             std::vector<glm::vec3>& out_normals,
-            int32_t actual_image_width,
-            int32_t actual_image_height,
-            bool is_bilinear_interpolation_in_use,
-            bool is_southwest_northeast_edges_in_use,
-            bool is_southeast_northwest_edges_in_use)
+            const int32_t actual_image_width,
+            const int32_t actual_image_height,
+            const bool is_bilinear_interpolation_in_use,
+            const bool is_southwest_northeast_edges_in_use,
+            const bool is_southeast_northwest_edges_in_use)
     {
         // 6. Loop through all vertices and `geometry::output_triangle_vertices`.
         // std::cout << "defining output vertices, UVs and normals.\n";
