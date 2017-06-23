@@ -176,10 +176,10 @@ namespace console
         // Please note that it is not necessary to be in console to be able to print in console.
         const char* text_char = text.c_str();
 
-        uint32_t characters_for_line = window_width / text_size;
+        int32_t characters_for_line = window_width / text_size;
 
         std::list<char> text_char_list;
-        uint32_t current_line_length = 0;
+        int32_t current_line_length = 0;
 
         for (char& my_char : text)
         {
@@ -227,8 +227,8 @@ namespace console
 
             // Draw the console to screen using `font2D::printText2D`.
             PrintingStruct printing_struct;
-            printing_struct.screen_width = (GLuint) window_width;
-            printing_struct.screen_height = (GLuint) window_height;
+            printing_struct.screen_width = static_cast<GLuint>(window_width);
+            printing_struct.screen_height = static_cast<GLuint>(window_height);
             printing_struct.text_size = text_size;
             printing_struct.font_size = font_size;
             printing_struct.char_font_texture_file_format = "bmp";

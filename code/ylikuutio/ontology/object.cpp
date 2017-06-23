@@ -5,6 +5,12 @@
 #include "render_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
+// Include GLM
+#ifndef __GLM_GLM_HPP_INCLUDED
+#define __GLM_GLM_HPP_INCLUDED
+#include <glm/glm.hpp> // glm
+#endif
+
 // Include standard headers
 #include <iostream> // std::cout, std::cin, std::cerr
 
@@ -12,14 +18,14 @@ namespace ontology
 {
     void Object::bind_to_parent()
     {
-        // get `childID` from the `Species` or the `Glyph` and set pointer to this `Object`.
+        // get `childID` from `Species` or `Glyph` and set pointer to this `Object`.
 
         if (this->is_character)
         {
             ontology::Text3D* parent_pointer;
             parent_pointer = this->text3D_parent_pointer;
             // for ontological hierarchy (rendering hierarchy does not use `childID`).
-            // get `childID` from the `Glyph` and set pointer to this `Object`.
+            // get `childID` from `Glyph` and set pointer to this `Object`.
             hierarchy::bind_child_to_parent<ontology::Object*>(this, parent_pointer->object_pointer_vector, parent_pointer->free_objectID_queue);
         }
         else
@@ -27,7 +33,7 @@ namespace ontology
             ontology::Species* parent_pointer;
             parent_pointer = this->species_parent_pointer;
             // for ontological hierarchy (rendering hierarchy does not use `childID`).
-            // get `childID` from the `Species` and set pointer to this `Object`.
+            // get `childID` from `Species` and set pointer to this `Object`.
             hierarchy::bind_child_to_parent<ontology::Object*>(this, parent_pointer->object_pointer_vector, parent_pointer->free_objectID_queue);
         }
     }
@@ -53,14 +59,16 @@ namespace ontology
             this->species_parent_pointer = nullptr;
             this->glyph_parent_pointer   = object_struct.glyph_parent_pointer;
             this->text3D_parent_pointer  = object_struct.text3D_parent_pointer;
+            this->universe_pointer       = this->text3D_parent_pointer->universe_pointer;
         }
         else
         {
             this->species_parent_pointer = object_struct.species_parent_pointer;
+            this->universe_pointer       = this->species_parent_pointer->universe_pointer;
             this->glyph_parent_pointer   = nullptr;
         }
 
-        // get `childID` from the `Species` or the `Glyph` and set pointer to this `Object`.
+        // get `childID` from `Species` or `Glyph` and set pointer to this `Object`.
         this->bind_to_parent();
 
         bool model_loading_result = false;
@@ -82,15 +90,23 @@ namespace ontology
             std::cout << "Object with childID " << std::dec << this->childID << " will be destroyed.\n";
             this->species_parent_pointer->set_object_pointer(this->childID, nullptr);
         }
+
+        if (!this->name.empty() && this->universe_pointer != nullptr)
+        {
+            delete this->universe_pointer->entity_anyvalue_map[this->name];
+            this->universe_pointer->entity_anyvalue_map[this->name] = nullptr;
+        }
     }
 
     void Object::act()
     {
-        // act according to this game/simulation object's programming.
+        // TODO: act according to this game/simulation object's programming.
     }
 
     void Object::render()
     {
+        // render this `Object`.
+
         if (this->should_ylikuutio_render_this_object)
         {
             ontology::Shader* shader_pointer;
@@ -137,6 +153,11 @@ namespace ontology
             // bind to the new parent.
             this->bind_to_parent();
         }
+    }
+
+    void Object::set_name(std::string name)
+    {
+        ontology::set_name(name, this);
     }
 
     // Public callbacks (to be called from AI scripts written in Chibi-Scheme).

@@ -25,13 +25,13 @@
 
 namespace loaders
 {
-    bool load_ascii_grid(
-            std::string ascii_grid_file_name,
+    bool load_ASCII_grid(
+            const std::string ASCII_grid_file_name,
             std::vector<glm::vec3>& out_vertices,
             std::vector<glm::vec2>& out_UVs,
             std::vector<glm::vec3>& out_normals,
-            uint32_t x_step,
-            uint32_t z_step,
+            int32_t x_step,
+            int32_t z_step,
             std::string triangulation_type)
     {
         // Beginning of `L4133D.asc`.
@@ -42,23 +42,23 @@ namespace loaders
         // yllcorner    6672000.000000000000
         // cellsize     2.000000000000
         // NODATA_value  -9999.000
-        // 34.315 34.467 34.441 34.260 33.972 33.564 33.229 33.130 33.102 33.024 32.902 32.669 32.305 32.013 31.937 31.893 31.831 31.832 
+        // 34.315 34.467 34.441 34.260 33.972 33.564 33.229 33.130 33.102 33.024 32.902 32.669 32.305 32.013 31.937 31.893 31.831 31.832
 
-        std::cout << "Loading ascii grid file " << ascii_grid_file_name << " ...\n";
+        std::cout << "Loading ascii grid file " << ASCII_grid_file_name << " ...\n";
 
         // Open the file
-        const char* char_ascii_grid_file_name = ascii_grid_file_name.c_str();
-        std::FILE* file = std::fopen(char_ascii_grid_file_name, "rb");
+        const char* char_ASCII_grid_file_name = ASCII_grid_file_name.c_str();
+        std::FILE* file = std::fopen(char_ASCII_grid_file_name, "rb");
         if (!file)
         {
-            std::cerr << ascii_grid_file_name << " could not be opened.\n";
+            std::cerr << ASCII_grid_file_name << " could not be opened.\n";
             return false;
         }
 
         // Find out file size.
         if (std::fseek(file, 0, SEEK_END) != 0)
         {
-            std::cerr << "moving file pointer of file " << ascii_grid_file_name << " failed!\n";
+            std::cerr << "moving file pointer of file " << ASCII_grid_file_name << " failed!\n";
             std::fclose(file);
             return false;
         }
@@ -68,7 +68,7 @@ namespace loaders
         // Move file pointer to the beginning of file.
         if (fseek(file, 0, SEEK_SET) != 0)
         {
-            std::cerr << "moving file pointer of file " << ascii_grid_file_name << " failed!\n";
+            std::cerr << "moving file pointer of file " << ASCII_grid_file_name << " failed!\n";
             std::fclose(file);
             return false;
         }
@@ -86,6 +86,7 @@ namespace loaders
         char* point_data_pointer = point_data;
 
         // Read the point data from the file into the buffer.
+        // TODO: add check for file reading!
         std::fread(point_data, 1, file_size, file);
 
         // Everything is in memory now, the file can be closed
@@ -113,7 +114,7 @@ namespace loaders
         float nodata_value = string::extract_float_value_from_string(--point_data_pointer, (char*) " \n", (const char*) "nodata_value");
 
         // note: the value of `image_height_in_use` can be adjusted here (for testing purposes).
-        uint32_t image_height_in_use = image_height;
+        int32_t image_height_in_use = image_height;
 
         float* vertex_data;
         vertex_data = new float[image_width * image_height_in_use];
@@ -131,13 +132,13 @@ namespace loaders
         // start processing image_data.
         std::cout << "Processing image data.\n";
 
-        for (uint32_t z = 0; z < image_height_in_use; z++)
+        for (int32_t z = 0; z < image_height_in_use; z++)
         {
             // show progress in percents.
             int32_t current_percent = static_cast<int32_t>(floor(100.0f * ((double) z / (double) (image_height_in_use - 1))));
             std::cout << current_percent << "% ";
 
-            for (uint32_t x = 0; x < image_width; x++)
+            for (int32_t x = 0; x < image_width; x++)
             {
                 while (!string::check_and_report_if_some_string_matches(point_data, point_data_pointer, number_strings_vector))
                 {
@@ -162,6 +163,6 @@ namespace loaders
 
         bool result = geometry::triangulate_quads(vertex_data, triangulate_quads_struct, out_vertices, out_UVs, out_normals);
         delete vertex_data;
-        return true;
+        return result;
     }
 }

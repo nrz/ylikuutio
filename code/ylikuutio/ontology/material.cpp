@@ -7,6 +7,18 @@
 #include "code/ylikuutio/loaders/texture_loader.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
+// Include GLEW
+#ifndef __GL_GLEW_H_INCLUDED
+#define __GL_GLEW_H_INCLUDED
+#include <GL/glew.h> // GLfloat, GLuint etc.
+#endif
+
+// Include GLFW
+#ifndef __GLFW3_H_INCLUDED
+#define __GLFW3_H_INCLUDED
+#include <glfw3.h>
+#endif
+
 // Include standard headers
 #include <cstring>  // std::memcmp, std::strcmp, std::strlen, std::strncmp
 #include <iostream> // std::cout, std::cin, std::cerr
@@ -16,7 +28,7 @@ namespace ontology
 {
     void Material::bind_to_parent()
     {
-        // get `childID` from the `Shader` and set pointer to this `Material`.
+        // get `childID` from `Shader` and set pointer to this `Material`.
         hierarchy::bind_child_to_parent<ontology::Material*>(this, this->parent_pointer->material_pointer_vector, this->parent_pointer->free_materialID_queue);
     }
 
@@ -24,6 +36,7 @@ namespace ontology
     {
         // constructor.
         this->parent_pointer = material_struct.parent_pointer;
+        this->universe_pointer = this->parent_pointer->universe_pointer;
 
         this->texture_file_format = material_struct.texture_file_format;
         this->texture_filename    = material_struct.texture_filename;
@@ -37,11 +50,11 @@ namespace ontology
         // Load the texture.
         if ((std::strcmp(this->char_texture_file_format, "bmp") == 0) || (std::strcmp(this->char_texture_file_format, "BMP") == 0))
         {
-            this->texture = loaders::load_BMP_texture(this->char_texture_filename);
+            this->texture = loaders::load_BMP_texture(this->texture_filename);
         }
         else if ((std::strcmp(this->char_texture_file_format, "dds") == 0) || (std::strcmp(this->char_texture_file_format, "DDS") == 0))
         {
-            this->texture = loaders::load_DDS_texture(this->char_texture_filename);
+            this->texture = loaders::load_DDS_texture(this->texture_filename);
         }
         else
         {
@@ -51,6 +64,10 @@ namespace ontology
 
         // Get a handle for our "myTextureSampler" uniform.
         this->openGL_textureID = glGetUniformLocation(this->parent_pointer->programID, "myTextureSampler");
+
+        this->child_vector_pointers_vector.push_back(&this->species_pointer_vector);
+        this->child_vector_pointers_vector.push_back(&this->vector_font_pointer_vector);
+        this->child_vector_pointers_vector.push_back(&this->chunk_master_pointer_vector);
     }
 
     Material::~Material()
@@ -74,6 +91,12 @@ namespace ontology
 
         // set pointer to this material to nullptr.
         this->parent_pointer->set_material_pointer(this->childID, nullptr);
+
+        if (!this->name.empty() && this->universe_pointer != nullptr)
+        {
+            delete this->universe_pointer->entity_anyvalue_map[this->name];
+            this->universe_pointer->entity_anyvalue_map[this->name] = nullptr;
+        }
     }
 
     void Material::render()
@@ -84,9 +107,10 @@ namespace ontology
         // Set our "myTextureSampler" sampler to user Texture Unit 0.
         glUniform1i(this->openGL_textureID, 0);
 
-        // render `Material` by calling `render()` function of  each `Species` and of each `VectorFont`.
+        // render this `Material` by calling `render()` function of each `Species`, each `VectorFont`, and each `ChunkMaster`.
         ontology::render_children<ontology::Species*>(this->species_pointer_vector);
         ontology::render_children<ontology::VectorFont*>(this->vector_font_pointer_vector);
+        ontology::render_children<space_partition::ChunkMaster*>(this->chunk_master_pointer_vector);
     }
 
     void Material::set_species_pointer(uint32_t childID, ontology::Species* child_pointer)
@@ -108,6 +132,11 @@ namespace ontology
     {
         // this method sets pointer to this `Material` to nullptr, sets `parent_pointer` according to the input, and requests a new `childID` from the new `Shader`.
         hierarchy::bind_child_to_new_parent<ontology::Material*, ontology::Shader*>(this, new_shader_pointer, this->parent_pointer->material_pointer_vector, this->parent_pointer->free_materialID_queue);
+    }
+
+    void Material::set_name(std::string name)
+    {
+        ontology::set_name(name, this);
     }
 
     void Material::set_terrain_species_pointer(ontology::Species* terrain_species_pointer)

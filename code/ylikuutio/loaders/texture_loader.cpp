@@ -1,4 +1,5 @@
 #include "texture_loader.hpp"
+#include "bmp_loader.hpp"
 
 // Include GLEW
 #ifndef __GL_GLEW_H_INCLUDED
@@ -18,90 +19,20 @@
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <stdint.h> // uint32_t etc.
 #include <stdlib.h> // free, malloc
+#include <string>   // std::string
 
 namespace loaders
 {
-    GLuint load_BMP_texture(const char* imagepath)
+    GLuint load_BMP_texture(std::string filename)
     {
-        std::printf("Reading image %s\n", imagepath);
+        int32_t image_width;
+        int32_t image_height;
+        uint32_t image_size;
 
-        // Data read from the header of the BMP file
-        uint8_t header[54];
-        uint32_t dataPos;
-        uint32_t imageSize;
-        uint32_t width, height;
-        // Actual RGB data
-        uint8_t* data;
+        uint32_t x_step = 1;
+        uint32_t z_step = 1;
 
-        // Open the file
-        std::FILE* file = std::fopen(imagepath,"rb");
-        if (!file)
-        {
-            std::printf("%s could not be opened. Are you in the right directory ? Don't forget to read the FAQ !\n", imagepath);
-            return 0;
-        }
-
-        // Read the header, i.e. the 54 first bytes
-
-        // If less than 54 bytes are read, problem
-        if (std::fread(header, 1, 54, file) != 54)
-        {
-            std::printf("Not a correct BMP file\n");
-            return 0;
-        }
-
-        // A BMP files always begins with "BM"
-        if ((header[0] != 'B') || (header[1] != 'M'))
-        {
-            std::printf("Not a correct BMP file\n");
-            return 0;
-        }
-
-        // Make sure this is a 24bpp file
-        if (*(int*) &header[0x1e] != 0)
-        {
-            std::printf("Not a correct BMP file\n");
-            return 0;
-        }
-
-        if (*(int*) &header[0x1c] != 24)
-        {
-            std::printf("Not a correct BMP file\n");
-            return 0;
-        }
-
-        // Read the information about the image
-        dataPos    = *(int*) &header[0x0a];
-        imageSize  = *(int*) &header[0x22];
-        width      = *(int*) &header[0x12];
-        height     = *(int*) &header[0x16];
-
-        // Some BMP files are misformatted, guess missing information
-        if (imageSize == 0)
-        {
-            imageSize = width * height * 3; // 3 : one byte for each Red, Green and Blue component
-        }
-
-        if (dataPos == 0)
-        {
-            dataPos = 54; // The BMP header is done that way
-        }
-
-        // Create a buffer
-        data = new uint8_t [imageSize];
-
-        if (data == nullptr)
-        {
-            std::cerr << "Reserving memory for texture data failed.\n";
-            std::fclose(file);
-            return 0;
-        }
-
-        // Read the actual data from the file into the buffer
-        std::fread(data, 1, imageSize, file);
-
-        // Everything is in memory now, the file can be closed
-        std::fclose(file);
+        uint8_t* image_data = load_BMP_file(filename, image_width, image_height, image_size);
 
         // Create one OpenGL texture
         GLuint textureID;
@@ -111,10 +42,10 @@ namespace loaders
         glBindTexture(GL_TEXTURE_2D, textureID);
 
         // Give the image to OpenGL
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_BGR, GL_UNSIGNED_BYTE, data);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, image_width, image_height, 0, GL_BGR, GL_UNSIGNED_BYTE, image_data);
 
         // OpenGL has now copied the data. Free our own version
-        delete[] data;
+        delete[] image_data;
 
         // Poor filtering, or ...
         //glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
@@ -171,8 +102,10 @@ namespace loaders
 #define FOURCC_DXT3 0x33545844 // Equivalent to "DXT3" in ASCII
 #define FOURCC_DXT5 0x35545844 // Equivalent to "DXT5" in ASCII
 
-    GLuint load_DDS_texture(const char* imagepath)
+    GLuint load_DDS_texture(std::string filename)
     {
+        const char* imagepath = filename.c_str();
+
         uint8_t header[124];
         std::FILE* fp;
 
@@ -185,15 +118,20 @@ namespace loaders
         }
 
         /* verify the type of file */
-        char filecode[4];
-        std::fread(filecode, 1, 4, fp);
-        if (std::strncmp(filecode, "DDS ", 4) != 0)
+        uint32_t dds_magic_number_size_in_bytes = 4; // "DDS "
+        char filecode[dds_magic_number_size_in_bytes];
+
+        // TODO: add check for file reading!
+        std::fread(filecode, 1, dds_magic_number_size_in_bytes, fp);
+        if (std::strncmp(filecode, "DDS ", dds_magic_number_size_in_bytes) != 0)
         {
             std::fclose(fp);
             return 0;
         }
 
         /* get the surface desc */
+        // TODO: add check for file reading!
+        // TODO: store hardcoded value 4 into a variable.
         std::fread(&header, 124, 1, fp);
 
         uint32_t height      = *(uint32_t*) &header[8];
@@ -207,6 +145,9 @@ namespace loaders
         /* how big is it going to be including all mipmaps? */
         bufsize = mipMapCount > 1 ? linearSize * 2 : linearSize;
         buffer = (uint8_t*) malloc(bufsize * sizeof(uint8_t));
+
+        // TODO: add check for file reading!
+        // TODO: store hardcoded value 4 into a variable.
         std::fread(buffer, 1, bufsize, fp);
         /* close the file pointer */
         std::fclose(fp);

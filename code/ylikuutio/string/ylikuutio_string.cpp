@@ -11,15 +11,15 @@
 
 namespace string
 {
-    bool check_and_report_if_some_string_matches(const char* file_base_pointer, char* file_data_pointer, std::vector<std::string> identifier_strings_vector)
+    bool check_and_report_if_some_string_matches(const char* const file_base_pointer, const char* const file_data_pointer, const std::vector<std::string> identifier_strings_vector)
     {
         for (std::string identifier_string : identifier_strings_vector)
         {
-            const char* identifier_string_char = identifier_string.c_str();
+            const char* const identifier_string_char = identifier_string.c_str();
 
             if (std::strncmp(file_data_pointer, identifier_string_char, std::strlen(identifier_string_char)) == 0)
             {
-                const char* identifier_string_char = identifier_string.c_str();
+                const char* const identifier_string_char = identifier_string.c_str();
                 uint64_t offset = (uint64_t) file_data_pointer - (uint64_t) file_base_pointer;
                 return true;
             }
@@ -27,7 +27,7 @@ namespace string
         return false;
     }
 
-    void extract_string(char* dest_mem_pointer, char* &src_mem_pointer, char* char_end_string)
+    void extract_string(char* dest_mem_pointer, char*& src_mem_pointer, const char* const char_end_string)
     {
         while (std::strncmp(src_mem_pointer, char_end_string, std::strlen(char_end_string)) != 0)
         {
@@ -36,14 +36,14 @@ namespace string
         *dest_mem_pointer = '\0';
     }
 
-    void extract_string_with_several_endings(char* dest_mem_pointer, char*& src_mem_pointer, char* char_end_string)
+    void extract_string_with_several_endings(char* dest_mem_pointer, char*& src_mem_pointer, const char* const char_end_string)
     {
         // This function copies characters from `src_mem_pointer` until a character matches.
 
         while (true)
         {
             uint32_t n_of_ending_characters = std::strlen(char_end_string);
-            char* end_char_pointer;
+            const char* end_char_pointer;
             end_char_pointer = char_end_string;
 
             // Check if current character is any of the ending characters.
@@ -63,7 +63,7 @@ namespace string
         }
     }
 
-    int32_t extract_int32_t_value_from_string(char*& data_pointer, char* char_end_string, const char* description)
+    int32_t extract_int32_t_value_from_string(char*& data_pointer, char* char_end_string, const char* const description)
     {
         char char_number_buffer[1024]; // FIXME: risk of buffer overflow.
         char* dest_mem_pointer;
@@ -77,7 +77,7 @@ namespace string
         return value;
     }
 
-    float extract_float_value_from_string(char*& data_pointer, char* char_end_string, const char* description)
+    float extract_float_value_from_string(char*& data_pointer, char* char_end_string, const char* const description)
     {
         char char_number_buffer[1024]; // FIXME: risk of buffer overflow.
         char* dest_mem_pointer;
@@ -164,7 +164,7 @@ namespace string
         return my_string;
     }
 
-    std::string convert_std_list_char_to_std_string(const std::list<char>& std_list_char, uint32_t first_line_length, uint32_t line_length)
+    std::string convert_std_list_char_to_std_string(const std::list<char>& std_list_char, const uint32_t first_line_length, const uint32_t line_length)
     {
         std::string my_string;
         uint32_t remaining_characters_on_this_line = first_line_length;

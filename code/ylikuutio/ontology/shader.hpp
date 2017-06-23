@@ -6,8 +6,10 @@
 #define DEGREES_TO_RADIANS(x) (x * PI / 180.0f)
 #endif
 
-#include "render_templates.hpp"
+#include "entity.hpp"
 #include "shader_struct.hpp"
+#include "render_templates.hpp"
+#include "entity_templates.hpp"
 #include "code/ylikuutio/loaders/shader_loader.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/common/global_variables.hpp"
@@ -30,8 +32,9 @@ namespace ontology
     class Scene;
     class Material;
     class Object;
+    class Symbiosis;
 
-    class Shader
+    class Shader: public ontology::Entity
     {
         public:
             // constructor.
@@ -43,12 +46,17 @@ namespace ontology
             // this method sets pointer to this `Shader` to nullptr, sets `parent_pointer` according to the input, and requests a new `childID` from the new `Scene`.
             void bind_to_new_parent(ontology::Scene* new_scene_pointer);
 
+            void set_name(std::string name);
+
             friend class Scene;
+            friend class Symbiosis;
             friend class Material;
             friend class Glyph;
             friend class Species;
             template<class T1>
                 friend void render_children(std::vector<T1>& child_pointer_vector);
+            template<class T1>
+                friend void set_name(std::string name, T1 entity);
             template<class T1>
                 friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<uint32_t>& free_childID_queue);
             template<class T1, class T2>
@@ -57,16 +65,21 @@ namespace ontology
                 friend void render_this_object(ontology::Object* object_pointer, ontology::Shader* shader_pointer);
 
         private:
-            // this method renders all materials using this shader.
+            void bind_to_parent();
+
+            // this method renders all materials using this `Shader`.
             void render();
 
-            // this method sets a material pointer.
+            // this method sets a `Material` pointer.
             void set_material_pointer(uint32_t childID, ontology::Material* child_pointer);
+
+            // this method sets a `Symbiosis` pointer.
+            void set_symbiosis_pointer(uint32_t childID, ontology::Symbiosis* child_pointer);
 
             // this method sets a scene species pointer.
             void set_terrain_species_pointer(ontology::Species* terrain_species_pointer);
 
-            ontology::Scene* parent_pointer;         // pointer to `Scene`.
+            ontology::Scene* parent_pointer;      // pointer to `Scene`.
 
             GLuint programID;                     // this `Shader`'s `programID`, returned by `load_shaders`.
 
@@ -74,20 +87,22 @@ namespace ontology
             GLuint ViewMatrixID;
             GLuint ModelMatrixID;
 
-            void bind_to_parent();
-
             ontology::Species* terrain_species_pointer; // pointer to scene species (used in collision detection).
 
-            uint32_t childID;                     // shader ID, returned by `ontology::Scene->get_shaderID()`.
+            uint32_t childID;                     // shader ID, set by `this->bind_to_parent()`.
 
             std::string vertex_shader;            // filename of vertex shader.
             std::string fragment_shader;          // filename of fragment shader.
 
             std::vector<ontology::Material*> material_pointer_vector;
+            std::vector<ontology::Symbiosis*> symbiosis_pointer_vector;
             std::queue<uint32_t> free_materialID_queue;
+            std::queue<uint32_t> free_symbiosisID_queue;
 
             const char* char_vertex_shader;
             const char* char_fragment_shader;
+
+            std::string name;                      // name of this entity.
     };
 }
 

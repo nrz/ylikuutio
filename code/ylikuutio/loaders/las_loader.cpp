@@ -45,6 +45,7 @@ namespace loaders
         // Read the header, i.e. the 227 first bytes
 
         // If less than 227 bytes are read, it's a problem.
+        // TODO: move hard-coded value 227 to a variable.
         if (std::fread(header, 1, 227, file) != 227)
         {
             std::cerr << "Too few bytes read when reading the file header. " << laser_scaling_file_name << " is not a correct LASF file.\n";
@@ -147,6 +148,7 @@ namespace loaders
         }
 
         // Read the actual image data from the file into the buffer.
+        // TODO: add check for file reading!
         std::fread(point_data, 1, point_data_size, file);
 
         // Everything is in memory now, the file can be closed

@@ -32,7 +32,7 @@ namespace ontology
             // 3rd attribute buffer : normals.
             glEnableVertexAttribArray(species_or_glyph_pointer->vertexNormal_modelspaceID);
 
-            // render Species by calling `render()` function of each Object.
+            // render this `Species` or `Glyph` by calling `render()` function of each `Object`.
             ontology::render_children<ontology::Object*>(species_or_glyph_pointer->object_pointer_vector);
 
             glDisableVertexAttribArray(species_or_glyph_pointer->vertexPosition_modelspaceID);

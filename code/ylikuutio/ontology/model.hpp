@@ -1,6 +1,10 @@
 #ifndef __MODEL_HPP_INCLUDED
 #define __MODEL_HPP_INCLUDED
 
+#include "entity.hpp"
+#include "species_or_glyph.hpp"
+#include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
+
 // Include GLEW
 #ifndef __GL_GLEW_H_INCLUDED
 #define __GL_GLEW_H_INCLUDED
@@ -19,12 +23,19 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
+namespace space_partition
+{
+    class Chunk;
+}
+
 namespace ontology
 {
+    class Shader;
     class Material;
+    class Species;
     class Object;
 
-    class Model
+    class Model: public ontology::Entity
     {
         public:
             // constructor.
@@ -33,6 +44,21 @@ namespace ontology
             // destructor.
             ~Model();
 
+            friend class Glyph;
+            friend class Species;
+            friend class Object;
+            friend class space_partition::Chunk;
+            template<class T1>
+                friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<uint32_t>& free_childID_queue);
+            template<class T1, class T2>
+                friend void hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent_pointer, std::vector<T1>& old_child_pointer_vector, std::queue<uint32_t>& old_free_childID_queue);
+            template<class T1>
+                friend void render_species_or_glyph(T1 species_or_glyph_pointer);
+            template<class T1>
+                friend void render_this_object(ontology::Object* object_pointer, ontology::Shader* shader_pointer);
+            friend GLfloat get_ground_level(ontology::Species* terrain_species, glm::vec3 position);
+
+        private:
             // this method sets a object pointer.
             void set_object_pointer(uint32_t childID, ontology::Object* child_pointer);
 
@@ -42,7 +68,7 @@ namespace ontology
             std::string color_channel;               // color channel in use: `"red"`, `"green"`, `"blue"`, `"mean"` or `"all"`.
             glm::vec3 light_position;                // light position.
 
-            uint32_t childID;                        // species ID, returned by `ontology::Material->get_speciesID()`.
+            uint32_t childID;                        // species ID/text3D ID/glyph ID, set by corresponding `bind_to_parent()`.
             GLuint lightID;                          // light ID, returned by `glGetUniformLocation(programID, "LightPosition_worldspace");`.
 
             std::vector<ontology::Object*> object_pointer_vector;

@@ -1,6 +1,8 @@
 #ifndef __WORLD_HPP_INCLUDED
 #define __WORLD_HPP_INCLUDED
 
+#include "entity.hpp"
+#include "code/ylikuutio/common/any_value.hpp"
 #include "code/ylikuutio/common/globals.hpp"
 
 // Include GLFW
@@ -18,6 +20,7 @@
 // Include standard headers
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <queue>    // std::queue
+#include <unordered_map> // std::unordered_map
 #include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
 
@@ -30,7 +33,7 @@
 // `Species` must be create before any `Object` of that `Species`. `parent_pointer` must be given to each `Object` of the `Species`.
 //
 //
-// Hierarchy of regular objects (including terrain species):
+// Hierarchy of regular `Object`s (including terrain species):
 //
 //    Universe
 //       ^
@@ -44,9 +47,9 @@
 //       ^
 //     Object
 //
-// Please note that for regular objects the hierarchy above is both the ontological hierarchy and the rendering hierarchy.
+// Please note that for regular `Object`s the hierarchy above is both the ontological hierarchy and the rendering hierarchy.
 //
-// Ontological hierarchy of glyph (character) objects:
+// Ontological hierarchy of `Glyph` (character) objects:
 //
 //    Universe
 //       ^
@@ -65,7 +68,7 @@
 // Ontological hierarchy affects how objects can be created and how they can be destroyed,
 // though the precise ways how objects can be created depends on the functions available.
 //
-// Rendering hierarchy of glyph (character) objects:
+// Rendering hierarchy of `Glyph` (character) objects:
 //
 //    Universe
 //       ^
@@ -85,6 +88,41 @@
 // So, `render_species_or_glyph` is called only once for each glyph, and that call renders all the children of that `Glyph`,
 // even if the children (which are of type `Object`) may belong to many different `Text3D` objects.
 // `Text3D` is anyway needed in the ontological hierarchy, so that complete 3D texts can be destroyed and manipulated at once.
+//
+// Ontological hierarchy of `Symbiosis` objects:
+//
+//    Universe
+//       ^
+//     Scene
+//       ^
+//   Symbiosis
+//       ^
+//     Shader
+//       ^
+//    Material
+//       ^
+//    Species
+//       ^
+//     Object
+//
+// Ontological hierarchy affects how objects can be created and how they can be destroyed,
+// though the precise ways how objects can be created depends on the functions available.
+//
+// Rendering hierarchy of `Symbiosis` objects:
+//
+//    Universe
+//       ^
+//     Scene
+//       ^
+//     Shader
+//       ^
+//    Material
+//       ^
+//    Species
+//       ^
+//     Object
+//
+// Please note that `Symbiosis` is ignored completely in rendering hierarchy.
 //
 // Deleting a `Universe` also deletes all scenes, all shaders, materials, species, fonts, glyphs and objects that are bound to the same `Universe`.
 // Deleting a `Scene` also deletes all shaders, materials, species, fonts, glyphs and objects that are bound to the same `Universe`.
@@ -133,7 +171,7 @@ namespace ontology
     class Scene;
     class Shader;
 
-    class Universe
+    class Universe: public ontology::Entity
     {
         public:
             // constructor.
@@ -142,35 +180,61 @@ namespace ontology
             // destructor.
             ~Universe();
 
-            // this method renders the entire world, one scene at a time.
+            // this method renders the entire `Universe`, one `Scene` at a time.
             void render();
 
             void set_background_color(GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha);
 
+            // Public callbacks.
+
+            static datatypes::AnyValue* delete_entity(
+                    console::Console* console,
+                    ontology::Universe* universe,
+                    std::vector<std::string>& command_parameters);
+
+            static datatypes::AnyValue* info(
+                    console::Console* console,
+                    ontology::Universe* universe,
+                    std::vector<std::string>& command_parameters);
+
+            // Public callbacks end here.
+
             friend class Scene;
             friend class Shader;
+            friend class Material;
             friend class Species;
+            friend class Object;
+            friend class VectorFont;
+            friend class Glyph;
+            friend class Text3D;
+            friend class Font2D;
             friend class config::Setting;
             friend class config::SettingMaster;
             friend class console::Console;
 
+            template<class T1>
+                friend void set_name(std::string name, T1 entity);
+
         private:
-            // this method sets a scene pointer.
+            // this method sets a `Scene` pointer.
             void set_scene_pointer(uint32_t childID, ontology::Scene* child_pointer);
 
-            // this method sets a world species pointer.
+            // this method sets a terrain `Species` pointer.
             void set_terrain_species_pointer(ontology::Species* terrain_species_pointer);
 
             void compute_matrices_from_inputs();
 
-            void* terrain_species_pointer;              // pointer to world species (used in collision detection).
+            void* terrain_species_pointer;              // pointer to terrain `Species` (used in collision detection).
 
             float world_radius;
 
             std::vector<ontology::Scene*> scene_pointer_vector;
             std::queue<uint32_t> free_sceneID_queue;
 
-            config::SettingMaster* setting_master_pointer;
+            config::SettingMaster* setting_master_pointer; // pointer to `SettingMaster`.
+
+            // Named entities are stored here so that they can be recalled, if needed.
+            std::unordered_map<std::string, datatypes::AnyValue*> entity_anyvalue_map;
 
             GLclampf background_red;
             GLclampf background_green;

@@ -18,6 +18,7 @@ namespace ontology
     class VectorFont;
     class Glyph;
     class Text3D;
+    class Symbiosis;
     class Font2D;
 }
 
@@ -51,6 +52,7 @@ namespace datatypes
         VECTORFONT_POINTER,
         GLYPH_POINTER,
         TEXT3D_POINTER,
+        SYMBIOSIS_POINTER,
         TEXT2D_POINTER,
         CONSOLE_POINTER
     };
@@ -84,6 +86,7 @@ namespace datatypes
             AnyValue(ontology::VectorFont* vector_font_pointer);
             AnyValue(ontology::Glyph* glyph_pointer);
             AnyValue(ontology::Text3D* text3D_pointer);
+            AnyValue(ontology::Symbiosis* symbiosis_pointer);
             AnyValue(ontology::Font2D* font2D_pointer);
             AnyValue(console::Console* console_pointer);
 
@@ -107,6 +110,7 @@ namespace datatypes
             AnyValue(std::string type, ontology::VectorFont* vector_font_pointer);
             AnyValue(std::string type, ontology::Glyph* glyph_pointer);
             AnyValue(std::string type, ontology::Text3D* text3D_pointer);
+            AnyValue(std::string type, ontology::Symbiosis* symbiosis_pointer);
             AnyValue(std::string type, ontology::Font2D* font2D_pointer);
             AnyValue(std::string type, console::Console* console_pointer);
 
@@ -131,6 +135,7 @@ namespace datatypes
             ontology::VectorFont* vector_font_pointer;
             ontology::Glyph* glyph_pointer;
             ontology::Text3D* text3D_pointer;
+            ontology::Symbiosis* symbiosis_pointer;
             ontology::Font2D* font2D_pointer;
             console::Console* console_pointer;
 

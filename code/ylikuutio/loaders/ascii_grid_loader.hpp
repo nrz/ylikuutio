@@ -14,13 +14,13 @@
 
 namespace loaders
 {
-    bool load_ascii_grid(
-            std::string ascii_grid_file_name,
+    bool load_ASCII_grid(
+            const std::string ASCII_grid_file_name,
             std::vector<glm::vec3>& out_vertices,
             std::vector<glm::vec2>& out_UVs,
             std::vector<glm::vec3>& out_normals,
-            uint32_t x_step,
-            uint32_t z_step,
+            int32_t x_step,
+            int32_t z_step,
             std::string triangulation_type);
 }
 

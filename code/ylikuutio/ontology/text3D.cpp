@@ -13,6 +13,7 @@ namespace ontology
 {
     void Text3D::bind_to_parent()
     {
+        // get `childID` from `VectorFont` and set pointer to this `Text3D`.
         hierarchy::bind_child_to_parent<ontology::Text3D*>(this, this->parent_pointer->text3D_pointer_vector, this->parent_pointer->free_text3D_ID_queue);
     }
 
@@ -25,13 +26,14 @@ namespace ontology
         // constructor.
         this->text_string = text3D_struct.text_string;
         this->parent_pointer = text3D_struct.parent_pointer;
+        this->universe_pointer = this->parent_pointer->universe_pointer;
 
-        // get childID from `Font` and set pointer to this `Text3D`.
+        // get childID from `VectorFont` and set pointer to this `Text3D`.
         this->bind_to_parent();
 
         std::cout << "Creating the glyph Objects for the string \"" << this->text_string << "\"\n";
 
-        // Let's create each glyph Object in a loop.
+        // Let's create each glyph `Object` in a loop.
 
         const char* text_pointer = this->text_string.c_str();
 
@@ -68,6 +70,8 @@ namespace ontology
         //
         // TODO: If the Unicode exists in the hash map, create the corresponding glyph `Object`.
         //       If not, continue from the next Unicode of `text_string`.
+
+        this->child_vector_pointers_vector.push_back(&this->object_pointer_vector);
     }
 
     Text3D::~Text3D()
@@ -80,10 +84,21 @@ namespace ontology
         hierarchy::delete_children<ontology::Object*>(this->object_pointer_vector);
 
         this->parent_pointer->set_text3D_pointer(this->childID, nullptr);
+
+        if (!this->name.empty() && this->universe_pointer != nullptr)
+        {
+            delete this->universe_pointer->entity_anyvalue_map[this->name];
+            this->universe_pointer->entity_anyvalue_map[this->name] = nullptr;
+        }
     }
 
     void Text3D::set_object_pointer(uint32_t childID, ontology::Object* child_pointer)
     {
         hierarchy::set_child_pointer(childID, child_pointer, this->object_pointer_vector, this->free_objectID_queue);
+    }
+
+    void Text3D::set_name(std::string name)
+    {
+        ontology::set_name(name, this);
     }
 }

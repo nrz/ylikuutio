@@ -1,11 +1,13 @@
 #ifndef __OBJECT_HPP_INCLUDED
 #define __OBJECT_HPP_INCLUDED
 
+#include "entity.hpp"
 #include "shader.hpp"
 #include "species.hpp"
 #include "glyph.hpp"
 #include "object_struct.hpp"
 #include "render_templates.hpp"
+#include "entity_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/common/global_variables.hpp"
 #include "code/ylikuutio/common/globals.hpp"
@@ -40,6 +42,7 @@
 // Include standard headers
 #include <queue>    // std::queue
 #include <stdint.h> // uint32_t etc.
+#include <string>   // std::string
 #include <vector>   // std::vector
 
 namespace ontology
@@ -47,7 +50,7 @@ namespace ontology
     class Species;
     class Glyph;
 
-    class Object
+    class Object: public ontology::Entity
     {
         public:
             // constructor.
@@ -59,6 +62,8 @@ namespace ontology
             // this method sets pointer to this `Object` to nullptr, sets `parent_pointer` according to the input,
             // and requests a new `childID` from the new `Species` or from the new `Glyph`.
             void bind_to_new_parent(void* new_parent_pointer);
+
+            void set_name(std::string name);
 
             // Public callbacks (to be called from AI scripts written in
             // Chibi-Scheme). These are the functions that are available
@@ -186,22 +191,24 @@ namespace ontology
                 friend void render_children(std::vector<T1>& child_pointer_vector);
             template<class T1>
                 friend void render_this_object(ontology::Object* object_pointer, ontology::Shader* shader_pointer);
+            template<class T1>
+                friend void set_name(std::string name, T1 entity);
 
         private:
             void bind_to_parent();
 
+            // this method renders this `Object`.
+            void render();
+
             // act according to this game/simulation object's programming.
             void act();
-
-            // this method renders this object.
-            void render();
 
             ontology::Species* species_parent_pointer; // pointer to `Species`.
             ontology::Glyph* glyph_parent_pointer;     // pointer to `Glyph`.
             ontology::Text3D* text3D_parent_pointer;   // pointer to `Text3D`.
             bool is_character;
 
-            uint32_t childID;                      // object ID, returned by `ontology::Species->get_objectID()`.
+            uint32_t childID;                      // object ID, set by `this->bind_to_parent()`.
             bool has_entered;
             bool should_ylikuutio_render_this_object;
 
@@ -216,6 +223,8 @@ namespace ontology
             // The rest fields are created in the constructor.
             glm::mat4 model_matrix;                // model matrix.
             glm::mat4 MVP_matrix;                  // model view projection matrix.
+
+            std::string name;                      // name of this entity.
     };
 
     template<class T1>

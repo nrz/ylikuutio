@@ -7,6 +7,18 @@
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
 
+// Include GLEW
+#ifndef __GL_GLEW_H_INCLUDED
+#define __GL_GLEW_H_INCLUDED
+#include <GL/glew.h> // GLfloat, GLuint etc.
+#endif
+
+// Include GLFW
+#ifndef __GLFW3_H_INCLUDED
+#define __GLFW3_H_INCLUDED
+#include <glfw3.h>
+#endif
+
 // Include standard headers
 #include <cstring>       // std::memcmp, std::strcmp, std::strlen, std::strncmp
 #include <iostream>      // std::cout, std::cin, std::cerr
@@ -19,7 +31,7 @@ namespace ontology
 
     void VectorFont::bind_to_parent()
     {
-        // get `childID` from the `Material` and set pointer to this `VectorFont`.
+        // get `childID` from `Material` and set pointer to this `VectorFont`.
         hierarchy::bind_child_to_parent<ontology::VectorFont*>(this, this->parent_pointer->vector_font_pointer_vector, this->parent_pointer->free_vector_fontID_queue);
     }
 
@@ -43,11 +55,12 @@ namespace ontology
         this->font_filename         = vector_font_struct.font_filename;
         this->vertex_scaling_factor = vector_font_struct.vertex_scaling_factor;
         this->parent_pointer        = vector_font_struct.parent_pointer;
+        this->universe_pointer      = this->parent_pointer->universe_pointer;
 
         this->char_font_file_format = this->font_file_format.c_str();
         this->char_font_filename    = this->font_filename.c_str();
 
-        // get `childID` from the `Material` and set pointer to this `VectorFont`.
+        // get `childID` from `Material` and set pointer to this `VectorFont`.
         this->bind_to_parent();
 
         bool font_loading_result = false;
@@ -64,7 +77,7 @@ namespace ontology
         if (font_loading_result)
         {
             // OK, `VectorFont` loading was successful.
-            // Create each `Glyph` and bind them to the `VectorFont`.
+            // Create each `Glyph` and bind them to `VectorFont`.
 
             std::cout << "Number of glyphs to be created: " << this->glyph_vertex_data.size() << "\n";
 
@@ -97,6 +110,9 @@ namespace ontology
                 this->unicode_glyph_map[unicode_value] = glyph;
             }
         }
+
+        this->child_vector_pointers_vector.push_back(&this->glyph_pointer_vector);
+        this->child_vector_pointers_vector.push_back(&this->text3D_pointer_vector);
     }
 
     VectorFont::~VectorFont()
@@ -105,22 +121,27 @@ namespace ontology
         // Destroying a `VectorFont` destroys also all `Text3D` entities, and after that all `Glyph` entities.
         std::cout << "Font with childID " << std::dec << this->childID << " will be destroyed.\n";
 
-        // destroy all 3D texts of this font.
+        // destroy all 3D texts (`Text3D`) of this font.
         std::cout << "All 3D texts of this font will be destroyed.\n";
         hierarchy::delete_children<ontology::Text3D*>(this->text3D_pointer_vector);
 
-        // destroy all glyphs of this font.
+        // destroy all `Glyph`s of this font.
         std::cout << "All glyphs of this font will be destroyed.\n";
         hierarchy::delete_children<ontology::Glyph*>(this->glyph_pointer_vector);
 
         // set pointer to this `VectorFont` to nullptr.
         this->parent_pointer->set_vector_font_pointer(this->childID, nullptr);
+
+        if (!this->name.empty() && this->universe_pointer != nullptr)
+        {
+            delete this->universe_pointer->entity_anyvalue_map[this->name];
+            this->universe_pointer->entity_anyvalue_map[this->name] = nullptr;
+        }
     }
 
     void VectorFont::render()
     {
-        // this method renders all glyphs of this `VectorFont`.
-        // render `VectorFont` by calling `render()` function of each `Glyph`.
+        // render this `VectorFont` by calling `render()` function of each `Glyph`.
         ontology::render_children<ontology::Glyph*>(this->glyph_pointer_vector);
     }
 
@@ -137,5 +158,10 @@ namespace ontology
     void VectorFont::bind_to_new_parent(ontology::Material* new_material_pointer)
     {
         hierarchy::bind_child_to_new_parent<ontology::VectorFont*, ontology::Material*>(this, new_material_pointer, this->parent_pointer->vector_font_pointer_vector, this->parent_pointer->free_vector_fontID_queue);
+    }
+
+    void VectorFont::set_name(std::string name)
+    {
+        ontology::set_name(name, this);
     }
 }

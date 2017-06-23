@@ -226,7 +226,7 @@ namespace console
 
             std::list<char> current_input; // This is used for actual inputs.
             std::list<char>::iterator cursor_it;
-            uint32_t cursor_index;
+            int32_t cursor_index;
             bool in_console;
             bool can_enter_console;
             bool can_exit_console;
@@ -246,7 +246,7 @@ namespace console
             std::vector<std::list<char>> console_history;
 
             bool in_historical_input;
-            uint32_t historical_input_i;
+            int32_t historical_input_i;
             std::list<char> temp_input;    // This is used for temporary storage of new input while modifying historical inputs.
 
             // These are related to keypress callbacks.
@@ -268,13 +268,13 @@ namespace console
             // This is a pointer to `font2D::Font2D` instance that is used for printing.
             ontology::Font2D* font2D_pointer;
 
-            uint32_t console_top_y;
-            uint32_t console_bottom_y;
-            uint32_t console_left_x;
-            uint32_t console_right_x;
+            int32_t console_top_y;
+            int32_t console_bottom_y;
+            int32_t console_left_x;
+            int32_t console_right_x;
 
-            uint32_t n_columns;
-            uint32_t n_rows;
+            int32_t n_columns;
+            int32_t n_rows;
     };
 }
 

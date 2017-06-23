@@ -7,6 +7,7 @@
 #include "vector_font.hpp"
 #include "glyph_struct.hpp"
 #include "render_templates.hpp"
+#include "entity_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include GLEW
@@ -47,9 +48,13 @@ namespace ontology
             // this method gets a object ID and removes it from the `free_objectID_queue` if it was popped from the queue.
             uint32_t get_objectID();
 
+            void set_name(std::string name);
+
             friend class Object;
             template<class T1>
                 friend void render_children(std::vector<T1>& child_pointer_vector);
+            template<class T1>
+                friend void set_name(std::string name, T1 entity);
             template<class T1>
                 friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<uint32_t>& free_childID_queue);
             template<class T1>
@@ -58,7 +63,7 @@ namespace ontology
         private:
             void bind_to_parent();
 
-            // this method renders all objects of this species.
+            // this method renders all `Object`s of this `Glyph`.
             void render();
 
             ontology::VectorFont* parent_pointer;  // pointer to `VectorFont`.
@@ -66,6 +71,8 @@ namespace ontology
             std::vector<std::vector<glm::vec2>>* glyph_vertex_data;
             const char* glyph_name_pointer;        // we need only a pointer, because glyphs are always created by the `VectorFont` constructor.
             const char* unicode_char_pointer;      // we need only a pointer, because glyphs are always created by the `VectorFont` constructor.
+
+            std::string name;                      // name of this entity.
     };
 }
 

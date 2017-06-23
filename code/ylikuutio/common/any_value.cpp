@@ -3,8 +3,8 @@
 // Include standard headers
 #include <cerrno>   // errno
 #include <cmath>    // NAN, std::isnan, std::pow
+#include <cstdio>   // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf etc.
 #include <cstring>  // std::memcmp, std::strcmp, std::strlen, std::strncmp
-#include <stdio.h>  // printf, snprintf, sprintf
 #include <string>   // std::string
 #include <stdint.h> // uint32_t etc.
 #include <stdlib.h> // std::strtol, std::strtoll, std::strtoul
@@ -20,6 +20,7 @@ namespace ontology
     class VectorFont;
     class Glyph;
     class Text3D;
+    class Symbiosis;
 }
 
 namespace font2D
@@ -103,67 +104,79 @@ namespace datatypes
             case (BOOL):
                 return (this->bool_value ? "true" : "false");
             case (CHAR):
-                snprintf(buffer, buffer_size, "%c", this->char_value);
+                std::snprintf(buffer, sizeof(buffer), "%c", this->char_value);
                 return std::string(buffer);
             case (FLOAT):
-                snprintf(buffer, buffer_size, "%f", this->float_value);
+                std::snprintf(buffer, sizeof(buffer), "%f", this->float_value);
                 return std::string(buffer);
             case (DOUBLE):
-                snprintf(buffer, buffer_size, "%f", this->double_value);
+                std::snprintf(buffer, sizeof(buffer), "%f", this->double_value);
                 return std::string(buffer);
             case (INT32_T):
-                snprintf(buffer, buffer_size, "%f", this->int32_t_value);
+#ifdef __linux__
+                // in Linux `int` is 32 bits, `long` is 64 bits, `long long` is also 64 bits.
+                std::snprintf(buffer, sizeof(buffer), "%d", this->int32_t_value);
+#elif defined(_WIN32) || defined(WIN32)
+                // in Windows `int` is 32 bits, `long` is also 32 bits, `long long` is 64 bits.
+                std::snprintf(buffer, sizeof(buffer), "%ld", this->int32_t_value);
+#endif
                 return std::string(buffer);
             case (UINT32_T):
-                snprintf(buffer, buffer_size, "%lu", this->uint32_t_value);
+#ifdef __linux__
+                // in Linux `int` is 32 bits, `long` is 64 bits, `long long` is also 64 bits.
+                std::snprintf(buffer, sizeof(buffer), "%u", this->uint32_t_value);
+#elif defined(_WIN32) || defined(WIN32)
+                // in Windows `int` is 32 bits, `long` is also 32 bits, `long long` is 64 bits.
+                std::snprintf(buffer, sizeof(buffer), "%lu", this->uint32_t_value);
+#endif
                 return std::string(buffer);
             case (BOOL_POINTER):
-                snprintf(buffer, buffer_size, "%llu", static_cast<void*>(this->bool_pointer));
+                std::snprintf(buffer, sizeof(buffer), "%llx", static_cast<void*>(this->bool_pointer));
                 return std::string(buffer);
             case (FLOAT_POINTER):
-                snprintf(buffer, buffer_size, "%llu", static_cast<void*>(this->float_pointer));
+                std::snprintf(buffer, sizeof(buffer), "%llx", static_cast<void*>(this->float_pointer));
                 return std::string(buffer);
             case (DOUBLE_POINTER):
-                snprintf(buffer, buffer_size, "%llu", static_cast<void*>(this->double_pointer));
+                std::snprintf(buffer, sizeof(buffer), "%llx", static_cast<void*>(this->double_pointer));
                 return std::string(buffer);
             case (INT32_T_POINTER):
-                snprintf(buffer, buffer_size, "%llu", static_cast<void*>(this->int32_t_pointer));
+                std::snprintf(buffer, sizeof(buffer), "%llx", static_cast<void*>(this->int32_t_pointer));
                 return std::string(buffer);
             case (UINT32_T_POINTER):
-                snprintf(buffer, buffer_size, "%llu", static_cast<void*>(this->uint32_t_pointer));
+                std::snprintf(buffer, sizeof(buffer), "%llx", static_cast<void*>(this->uint32_t_pointer));
                 return std::string(buffer);
             case (UNIVERSE_POINTER):
-                snprintf(buffer, buffer_size, "%llu", static_cast<void*>(this->universe_pointer));
+                std::snprintf(buffer, sizeof(buffer), "%llx", static_cast<void*>(this->universe_pointer));
                 return std::string(buffer);
             case (SCENE_POINTER):
-                snprintf(buffer, buffer_size, "%llu", static_cast<void*>(this->scene_pointer));
+                std::snprintf(buffer, sizeof(buffer), "%llx", static_cast<void*>(this->scene_pointer));
                 return std::string(buffer);
             case (SHADER_POINTER):
-                snprintf(buffer, buffer_size, "%llu", static_cast<void*>(this->shader_pointer));
+                std::snprintf(buffer, sizeof(buffer), "%llx", static_cast<void*>(this->shader_pointer));
                 return std::string(buffer);
             case (MATERIAL_POINTER):
-                snprintf(buffer, buffer_size, "%llu", static_cast<void*>(this->material_pointer));
+                std::snprintf(buffer, sizeof(buffer), "%llx", static_cast<void*>(this->material_pointer));
                 return std::string(buffer);
             case (SPECIES_POINTER):
-                snprintf(buffer, buffer_size, "%llu", static_cast<void*>(this->species_pointer));
+                std::snprintf(buffer, sizeof(buffer), "%llx", static_cast<void*>(this->species_pointer));
                 return std::string(buffer);
             case (OBJECT_POINTER):
-                snprintf(buffer, buffer_size, "%llu", static_cast<void*>(this->object_pointer));
+                std::snprintf(buffer, sizeof(buffer), "%llx", static_cast<void*>(this->object_pointer));
                 return std::string(buffer);
             case (VECTORFONT_POINTER):
-                snprintf(buffer, buffer_size, "%llu", static_cast<void*>(this->vector_font_pointer));
+                std::snprintf(buffer, sizeof(buffer), "%llx", static_cast<void*>(this->vector_font_pointer));
                 return std::string(buffer);
             case (GLYPH_POINTER):
-                snprintf(buffer, buffer_size, "%llu", static_cast<void*>(this->glyph_pointer));
+                std::snprintf(buffer, sizeof(buffer), "%llx", static_cast<void*>(this->glyph_pointer));
                 return std::string(buffer);
             case (TEXT3D_POINTER):
-                snprintf(buffer, buffer_size, "%llu", static_cast<void*>(this->text3D_pointer));
+                std::snprintf(buffer, sizeof(buffer), "%llx", static_cast<void*>(this->text3D_pointer));
                 return std::string(buffer);
             case (TEXT2D_POINTER):
-                snprintf(buffer, buffer_size, "%llu", static_cast<void*>(this->font2D_pointer));
+                std::snprintf(buffer, sizeof(buffer), "%llx", static_cast<void*>(this->font2D_pointer));
                 return std::string(buffer);
             case (CONSOLE_POINTER):
-                snprintf(buffer, buffer_size, "%llu", static_cast<void*>(this->console_pointer));
+                std::snprintf(buffer, sizeof(buffer), "%llx", static_cast<void*>(this->console_pointer));
                 return std::string(buffer);
             default:
                 return "TODO: define string for this datatype!";
@@ -464,6 +477,7 @@ namespace datatypes
         this->vector_font_pointer = nullptr;
         this->glyph_pointer = nullptr;
         this->text3D_pointer = nullptr;
+        this->symbiosis_pointer = nullptr;
         this->font2D_pointer = nullptr;
         this->console_pointer = nullptr;
     }
@@ -567,12 +581,17 @@ namespace datatypes
             this->type = datatypes::GLYPH_POINTER;
             this->set_value(value_string);
         }
-        else if (std::strcmp(type.c_str(), "ontology::Text3D"))
+        else if (std::strcmp(type.c_str(), "ontology::Text3D*"))
         {
             this->type = datatypes::TEXT3D_POINTER;
             this->set_value(value_string);
         }
-        else if (std::strcmp(type.c_str(), "ontology::Text2D"))
+        else if (std::strcmp(type.c_str(), "ontology::Symbiosis*"))
+        {
+            this->type = datatypes::SYMBIOSIS_POINTER;
+            this->set_value(value_string);
+        }
+        else if (std::strcmp(type.c_str(), "ontology::Text2D*"))
         {
             this->type = datatypes::TEXT2D_POINTER;
             this->set_value(value_string);

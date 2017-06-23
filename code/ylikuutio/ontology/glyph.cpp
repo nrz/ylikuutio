@@ -6,6 +6,18 @@
 #include "code/ylikuutio/triangulation/polygon_triangulation.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
+// Include GLEW
+#ifndef __GL_GLEW_H_INCLUDED
+#define __GL_GLEW_H_INCLUDED
+#include <GL/glew.h> // GLfloat, GLuint etc.
+#endif
+
+// Include GLFW
+#ifndef __GLFW3_H_INCLUDED
+#define __GLFW3_H_INCLUDED
+#include <glfw3.h>
+#endif
+
 // Include standard headers
 #include <stdint.h> // uint32_t etc.
 #include <iostream> // std::cout, std::cin, std::cerr
@@ -14,7 +26,7 @@ namespace ontology
 {
     void Glyph::bind_to_parent()
     {
-        // get `childID` from the `VectorFont` and set pointer to this `Glyph`.
+        // get `childID` from `VectorFont` and set pointer to this `Glyph`.
         hierarchy::bind_child_to_parent<ontology::Glyph*>(this, this->parent_pointer->glyph_pointer_vector, this->parent_pointer->free_glyphID_queue);
     }
 
@@ -22,13 +34,14 @@ namespace ontology
     {
         // constructor.
         this->parent_pointer = glyph_struct.parent_pointer;
+        this->universe_pointer = this->parent_pointer->universe_pointer;
 
         this->glyph_vertex_data = glyph_struct.glyph_vertex_data;
         this->glyph_name_pointer = glyph_struct.glyph_name_pointer;
         this->unicode_char_pointer = glyph_struct.unicode_char_pointer;
         this->light_position = glyph_struct.light_position;
 
-        // get `childID` from the `VectorFont` and set pointer to this `Glyph`.
+        // get `childID` from `VectorFont` and set pointer to this `Glyph`.
         this->bind_to_parent();
 
         // TODO: implement triangulation of `Glyph` objects!
@@ -61,15 +74,27 @@ namespace ontology
 
         // set pointer to this `Glyph` to nullptr.
         this->parent_pointer->set_glyph_pointer(this->childID, nullptr);
+
+        if (!this->name.empty() && this->universe_pointer != nullptr)
+        {
+            delete this->universe_pointer->entity_anyvalue_map[this->name];
+            this->universe_pointer->entity_anyvalue_map[this->name] = nullptr;
+        }
     }
 
     void Glyph::render()
     {
+        // render this `Glyph`.
         ontology::render_species_or_glyph<ontology::Glyph*>(this);
     }
 
     void Glyph::set_object_pointer(uint32_t childID, ontology::Object* child_pointer)
     {
         hierarchy::set_child_pointer(childID, child_pointer, this->object_pointer_vector, this->free_objectID_queue);
+    }
+
+    void Glyph::set_name(std::string name)
+    {
+        ontology::set_name(name, this);
     }
 }

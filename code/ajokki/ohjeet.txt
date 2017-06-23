@@ -3,7 +3,7 @@ UV layoutin exporttaus Blenderissä:
 
 Ladataan .png GIMP:ssä.
 
-Ladataan toistaiseksi funktiolla `GLuint load_BMP_texture(const char* imagepath)`:
+Ladataan toistaiseksi funktiolla `GLuint load_BMP_texture(std::string filename)`:
 
 Tiedoston tallennus `*.bmp`-formaatissa (toistaiseksi pitää olla 24-bittinen BMP):
 * -> Export
@@ -40,6 +40,9 @@ Hyviä ilmaisia, vapaita 3U-objekteja:
 http://www.blendswap.com/
 http://tf3dm.com/
 
+Paras hevosmalli tähän mennessä:
+https://www.blendswap.com/blends/view/76528
+
 Hyviä ilmaisia, vapaita tekstuureja:
 http://www.myfreetextures.com/
 
@@ -73,3 +76,18 @@ http://far-cry.ubi.com/en-GB/media/index.aspx
 
 The Elder Scrolls V - Skyrim:
 http://www.elderscrolls.com/skyrim/media/
+
+3D model of Helsinki / Helsingin 3D-kaupunkimalli:
+http://www.hri.fi/fi/dataset/helsingin-3d-kaupunkimalli
+http://www.hri.fi/en/dataset/helsingin-3d-kaupunkimalli
+http://3d.hel.ninja/data/citygml/
+http://3d.hel.ninja/data/mesh/
+
+RockThe3D Free 3D Collections:
+http://www.rockthe3d.com/category/models/
+
+85 Free 3D Rigged Beautiful Girl Models:
+http://www.rockthe3d.com/free-3d-rigged-beautiful-girl-models/
+
+Git Large File Storage:
+https://git-lfs.github.com/

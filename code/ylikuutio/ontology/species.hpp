@@ -1,12 +1,13 @@
 #ifndef __SPECIES_HPP_INCLUDED
 #define __SPECIES_HPP_INCLUDED
 
+#include "species_or_glyph.hpp"
 #include "model.hpp"
 #include "material.hpp"
 #include "ground_level.hpp"
 #include "species_struct.hpp"
 #include "render_templates.hpp"
-#include "species_or_glyph.hpp"
+#include "entity_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include GLEW
@@ -29,6 +30,7 @@
 
 namespace ontology
 {
+    class Universe;
     class Material;
 
     class Species: public ontology::Model
@@ -43,11 +45,13 @@ namespace ontology
             // this method sets pointer to this `Species` to nullptr, sets `parent_pointer` according to the input, and requests a new `childID` from the new `Material`.
             void bind_to_new_parent(ontology::Material* new_material_pointer);
 
-            // this method sets a object pointer.
+            // this method sets an `Object` pointer.
             void set_object_pointer(uint32_t childID, ontology::Object* child_pointer);
 
             // this method gets a object ID and removes it from the `free_objectID_queue` if it was popped from the queue.
             uint32_t get_objectID();
+
+            void set_name(std::string name);
 
             bool is_world;                           // worlds currently do not rotate nor translate.
             float world_radius;                      // radius of sea level in kilometers. used only for worlds.
@@ -67,18 +71,20 @@ namespace ontology
                 friend void render_species_or_glyph(T1 species_or_glyph_pointer);
             template<class T1>
                 friend void render_this_object(ontology::Object* object_pointer, ontology::Shader* shader_pointer);
+            template<class T1>
+                friend void set_name(std::string name, T1 entity);
             friend GLfloat get_ground_level(ontology::Species* terrain_species, glm::vec3 position);
 
         private:
             void bind_to_parent();
 
-            // this method renders all objects of this species.
+            // this method renders all `Object`s of this `Species`.
             void render();
 
-            ontology::Material* parent_pointer;      // pointer to the material.
+            ontology::Material* parent_pointer;   // pointer to `Material`.
 
-            std::string model_file_format;           // type of the model file, eg. `"bmp"`.
-            std::string model_filename;              // filename of the model file.
+            std::string model_file_format;        // type of the model file, eg. `"bmp"`.
+            std::string model_filename;           // filename of the model file.
 
             const char* char_model_file_format;
             const char* char_model_filename;
@@ -88,8 +94,10 @@ namespace ontology
 
             std::string triangulation_type;
 
-            uint32_t image_width;
-            uint32_t image_height;
+            int32_t image_width;
+            int32_t image_height;
+
+            std::string name;                     // name of this entity.
     };
 }
 

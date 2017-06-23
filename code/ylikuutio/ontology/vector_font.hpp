@@ -1,9 +1,11 @@
 #ifndef __FONT_HPP_INCLUDED
 #define __FONT_HPP_INCLUDED
 
+#include "entity.hpp"
 #include "material.hpp"
 #include "vector_font_struct.hpp"
 #include "render_templates.hpp"
+#include "entity_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/common/globals.hpp"
 
@@ -20,7 +22,7 @@ namespace ontology
     class Material;
     class Glyph;
 
-    class VectorFont
+    class VectorFont: public ontology::Entity
     {
         public:
             // constructor.
@@ -40,6 +42,8 @@ namespace ontology
             // this method sets pointer to this species to nullptr, sets `parent_pointer` according to the input, and requests a new `childID` from the new material.
             void bind_to_new_parent(ontology::Material* new_material_pointer);
 
+            void set_name(std::string name);
+
             // The rest fields are created in the constructor.
             uint32_t image_width;
             uint32_t image_height;
@@ -51,6 +55,8 @@ namespace ontology
             template<class T1>
                 friend void render_children(std::vector<T1>& child_pointer_vector);
             template<class T1>
+                friend void set_name(std::string name, T1 entity);
+            template<class T1>
                 friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<uint32_t>& free_childID_queue);
             template<class T1, class T2>
                 friend void hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent_pointer, std::vector<T1>& old_child_pointer_vector, std::queue<uint32_t>& old_free_childID_queue);
@@ -58,17 +64,17 @@ namespace ontology
         private:
             void bind_to_parent();
 
+            // this method renders all `Glyph`s of this `VectorFont`.
+            void render();
+
             // this method returns a pointer to `Glyph` that matches the given `unicode_value`,
             // and `nullptr` if this `VectorFont` does not contain such a `Glyph`.
             ontology::Glyph* get_glyph_pointer(int32_t unicode_value);
 
-            // this method renders all glyphs of this `VectorFont`.
-            void render();
-
-            std::string font_file_format;          // type of the model file, eg. `"bmp"`.
-            std::string font_filename;             // filename of the model file.
+            std::string font_file_format;         // type of the model file, eg. `"bmp"`.
+            std::string font_filename;            // filename of the model file.
             GLfloat vertex_scaling_factor;
-            uint32_t childID;                      // species ID, returned by `ontology::Material->get_speciesID()`.
+            uint32_t childID;                     // vector font ID, set by `this->bind_to_parent()`.
             const char* char_font_file_format;
             const char* char_font_filename;
 
@@ -84,6 +90,8 @@ namespace ontology
             std::queue<uint32_t> free_text3D_ID_queue;
 
             std::unordered_map<int32_t, ontology::Glyph*> unicode_glyph_map;
+
+            std::string name;                     // name of this entity.
     };
 }
 

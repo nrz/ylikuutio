@@ -515,6 +515,8 @@ add_library(ylikuutio STATIC
     code/ylikuutio/loaders/ascii_grid_loader.hpp
     code/ylikuutio/loaders/bmp_heightmap_loader.cpp
     code/ylikuutio/loaders/bmp_heightmap_loader.hpp
+    code/ylikuutio/loaders/bmp_loader.cpp
+    code/ylikuutio/loaders/bmp_loader.hpp
     code/ylikuutio/loaders/font_loader.cpp
     code/ylikuutio/loaders/font_loader.hpp
     code/ylikuutio/loaders/las_loader.cpp
@@ -532,6 +534,9 @@ add_library(ylikuutio STATIC
     code/ylikuutio/map/ylikuutio_map.hpp
 
     # ontology, in alphabetical order
+    code/ylikuutio/ontology/entity.cpp
+    code/ylikuutio/ontology/entity.hpp
+    code/ylikuutio/ontology/entity_templates.hpp
     code/ylikuutio/ontology/font2D.cpp
     code/ylikuutio/ontology/font2D.hpp
     code/ylikuutio/ontology/glyph.cpp
@@ -539,6 +544,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/glyph_struct.hpp
     code/ylikuutio/ontology/ground_level.cpp
     code/ylikuutio/ontology/ground_level.hpp
+    code/ylikuutio/ontology/info_struct.hpp
     code/ylikuutio/ontology/material.cpp
     code/ylikuutio/ontology/material.hpp
     code/ylikuutio/ontology/material_struct.hpp
@@ -557,6 +563,9 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/species.hpp
     code/ylikuutio/ontology/species_or_glyph.hpp
     code/ylikuutio/ontology/species_struct.hpp
+    code/ylikuutio/ontology/symbiosis.cpp
+    code/ylikuutio/ontology/symbiosis.hpp
+    code/ylikuutio/ontology/symbiosis_struct.hpp
     code/ylikuutio/ontology/text3D.hpp
     code/ylikuutio/ontology/text3D.cpp
     code/ylikuutio/ontology/text3D_struct.hpp

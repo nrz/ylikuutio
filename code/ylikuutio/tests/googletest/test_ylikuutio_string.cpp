@@ -235,3 +235,108 @@ TEST(unicode_value_from_string, iloinen_10cc1_01c00_ja_c1e1ece_caace101_kaikkial
     ASSERT_EQ(string::extract_unicode_value_from_string(text_pointer), 'l');
     ASSERT_EQ(string::extract_unicode_value_from_string(text_pointer), 'e');
 }
+TEST(extract_string_from_memory, nothing_must_be_extracted_when_source_string_is_empty_string_and_end_string_is_empty_string)
+{
+    char text[] = "";
+    char* text_pointer = text;
+
+    char end_string[] = "";
+    char* end_string_pointer = end_string;
+
+    uint32_t array_size = 128;
+    char* dest_array = new char[array_size];
+
+    string::extract_string(dest_array, text_pointer, end_string);
+    ASSERT_EQ(*dest_array, 0);
+}
+TEST(extract_string_from_memory, nothing_must_be_extracted_when_source_string_is_empty_string_and_end_string_is_1_char)
+{
+    char text[] = "";
+    char* text_pointer = text;
+
+    char end_string[] = "a";
+    char* end_string_pointer = end_string;
+
+    uint32_t array_size = 128;
+    char* dest_array = new char[array_size];
+
+    string::extract_string(dest_array, text_pointer, end_string);
+    ASSERT_EQ(*dest_array, 0);
+}
+TEST(extract_string_from_memory, nothing_must_be_extracted_when_source_string_is_empty_string_and_end_string_is_2_same_chars)
+{
+    char text[] = "";
+    char* text_pointer = text;
+
+    char end_string[] = "aa";
+    char* end_string_pointer = end_string;
+
+    uint32_t array_size = 128;
+    char* dest_array = new char[array_size];
+
+    string::extract_string(dest_array, text_pointer, end_string);
+    ASSERT_EQ(*dest_array, 0);
+}
+TEST(extract_string_from_memory, nothing_must_be_extracted_when_source_string_is_empty_string_and_end_string_is_2_different_chars)
+{
+    char text[] = "";
+    char* text_pointer = text;
+
+    char end_string[] = "ab";
+    char* end_string_pointer = end_string;
+
+    uint32_t array_size = 128;
+    char* dest_array = new char[array_size];
+
+    string::extract_string(dest_array, text_pointer, end_string);
+    ASSERT_EQ(*dest_array, 0);
+}
+TEST(extract_string_from_memory, 1_char_must_be_extracted_when_source_string_is_1_char_and_end_string_is_1_char)
+{
+    char text[] = "a";
+    char* text_pointer = text;
+
+    char end_string[] = "a";
+    char* end_string_pointer = end_string;
+
+    uint32_t array_size = 128;
+    char* dest_array = new char[array_size];
+
+    string::extract_string(dest_array, text_pointer, end_string);
+    ASSERT_EQ(*dest_array, 0);
+}
+TEST(extract_string_from_memory, iloinen_lokki_laulaa_ja_nukkuu)
+{
+    char text[] = "iloinen lokki laulaa ja nukkuu";
+    char* text_pointer = text;
+
+    char end_string[] = "ja";
+    char* end_string_pointer = end_string;
+
+    uint32_t array_size = 128;
+    char* dest_array = new char[array_size];
+
+    string::extract_string(dest_array, text_pointer, end_string);
+    ASSERT_EQ(*dest_array++, 'i');
+    ASSERT_EQ(*dest_array++, 'l');
+    ASSERT_EQ(*dest_array++, 'o');
+    ASSERT_EQ(*dest_array++, 'i');
+    ASSERT_EQ(*dest_array++, 'n');
+    ASSERT_EQ(*dest_array++, 'e');
+    ASSERT_EQ(*dest_array++, 'n');
+    ASSERT_EQ(*dest_array++, ' ');
+    ASSERT_EQ(*dest_array++, 'l');
+    ASSERT_EQ(*dest_array++, 'o');
+    ASSERT_EQ(*dest_array++, 'k');
+    ASSERT_EQ(*dest_array++, 'k');
+    ASSERT_EQ(*dest_array++, 'i');
+    ASSERT_EQ(*dest_array++, ' ');
+    ASSERT_EQ(*dest_array++, 'l');
+    ASSERT_EQ(*dest_array++, 'a');
+    ASSERT_EQ(*dest_array++, 'u');
+    ASSERT_EQ(*dest_array++, 'l');
+    ASSERT_EQ(*dest_array++, 'a');
+    ASSERT_EQ(*dest_array++, 'a');
+    ASSERT_EQ(*dest_array++, ' ');
+    ASSERT_EQ(*dest_array++, 0);
+}

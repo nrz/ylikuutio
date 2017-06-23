@@ -36,23 +36,33 @@ namespace geometry
 {
     template<class T1>
         bool triangulate_quads(
-                T1* input_vertex_pointer,
-                TriangulateQuadsStruct triangulate_quads_struct,
+                const T1* input_vertex_pointer,
+                const TriangulateQuadsStruct triangulate_quads_struct,
                 std::vector<glm::vec3>& out_vertices,
                 std::vector<glm::vec2>& out_UVs,
                 std::vector<glm::vec3>& out_normals)
         {
             // Input vertices (`T1* input_vertex_pointer`)
             // can be `float`, `int32_t` or `uint32_t`.
-            uint32_t image_width = triangulate_quads_struct.image_width;
-            uint32_t image_height = triangulate_quads_struct.image_height;
-            uint32_t x_step = triangulate_quads_struct.x_step;
-            uint32_t z_step = triangulate_quads_struct.z_step;
-            uint32_t actual_image_width = (image_width - 1) / x_step + 1;
-            uint32_t actual_image_height = (image_height - 1) / z_step + 1;
+            int32_t image_width = triangulate_quads_struct.image_width;
+            int32_t image_height = triangulate_quads_struct.image_height;
+            int32_t x_step = triangulate_quads_struct.x_step;
+            int32_t z_step = triangulate_quads_struct.z_step;
+            int32_t actual_image_width = (image_width - 1) / x_step + 1;
+            int32_t actual_image_height = (image_height - 1) / z_step + 1;
             std::string triangulation_type = triangulate_quads_struct.triangulation_type;
             double sphere_radius = triangulate_quads_struct.sphere_radius;
             SphericalWorldStruct spherical_world_struct = triangulate_quads_struct.spherical_world_struct;
+
+            if (image_width < 2 || image_height < 2 || actual_image_width < 2 || actual_image_height < 2)
+            {
+                return false;
+            }
+
+            if (x_step < 1 || z_step < 1)
+            {
+                return false;
+            }
 
             const char* char_triangulation_type = triangulation_type.c_str();
 
@@ -126,18 +136,21 @@ namespace geometry
 
             // 1. Define the vertices for vertices loaded from file, `push_back` to `temp_vertices`.
 
-            define_vertices(
-                    input_vertex_pointer,
-                    image_width,
-                    image_height,
-                    x_step,
-                    z_step,
-                    triangulate_quads_struct.should_ylikuutio_use_real_texture_coordinates,
-                    temp_vertices,
-                    temp_UVs);
+            if (!geometry::define_vertices(
+                        input_vertex_pointer,
+                        image_width,
+                        image_height,
+                        x_step,
+                        z_step,
+                        triangulate_quads_struct.should_ylikuutio_use_real_texture_coordinates,
+                        temp_vertices,
+                        temp_UVs))
+            {
+                return false;
+            }
 
-            uint32_t n_faces_for_each_vertex;
-            uint32_t n_faces;
+            int32_t n_faces_for_each_vertex;
+            int32_t n_faces;
 
             if (is_bilinear_interpolation_in_use)
             {
@@ -162,15 +175,18 @@ namespace geometry
             if (is_bilinear_interpolation_in_use)
             {
                 // 2. Interpolate the vertices between, using bilinear interpolation, `push_back` to `temp_vertices`.
-                geometry::interpolate_and_define_vertices_using_bilinear_interpolation(
-                        input_vertex_pointer,
-                        image_width,
-                        image_height,
-                        x_step,
-                        z_step,
-                        triangulate_quads_struct.should_ylikuutio_use_real_texture_coordinates,
-                        temp_vertices,
-                        temp_UVs);
+                if (!geometry::interpolate_and_define_vertices_using_bilinear_interpolation(
+                            input_vertex_pointer,
+                            image_width,
+                            image_height,
+                            x_step,
+                            z_step,
+                            triangulate_quads_struct.should_ylikuutio_use_real_texture_coordinates,
+                            temp_vertices,
+                            temp_UVs))
+                {
+                    return false;
+                }
             }
 
             if (!std::isnan(sphere_radius))
@@ -209,7 +225,7 @@ namespace geometry
 
             std::vector<glm::vec3> face_normal_vector_vec3;
 
-            if (!compute_face_normals(
+            if (!geometry::compute_face_normals(
                         temp_vertices,
                         face_normal_vector_vec3,
                         actual_image_width,
@@ -222,18 +238,18 @@ namespace geometry
             }
 
             // 5. Compute the vertex normals for vertices loaded from file, `push_back` to `temp_normals`.
-            compute_vertex_normals(
-                        temp_normals,
-                        face_normal_vector_vec3,
-                        actual_image_width,
-                        actual_image_height,
-                        is_bilinear_interpolation_in_use,
-                        is_southwest_northeast_edges_in_use,
-                        is_southeast_northwest_edges_in_use);
+            geometry::compute_vertex_normals(
+                    temp_normals,
+                    face_normal_vector_vec3,
+                    actual_image_width,
+                    actual_image_height,
+                    is_bilinear_interpolation_in_use,
+                    is_southwest_northeast_edges_in_use,
+                    is_southeast_northwest_edges_in_use);
 
             // 6. Loop through all vertices and `geometry::output_triangle_vertices`.
 
-            define_vertices_UVs_and_normals(
+            geometry::define_vertices_UVs_and_normals(
                     triangulate_quads_struct,
                     temp_vertices,
                     temp_UVs,

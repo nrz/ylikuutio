@@ -128,6 +128,7 @@ namespace loaders
         }
 
         // Read the actual image data from the file into the buffer.
+        // TODO: add check for file reading!
         std::fread(image_data, 1, image_size, file);
 
         // Everything is in memory now, the file can be closed

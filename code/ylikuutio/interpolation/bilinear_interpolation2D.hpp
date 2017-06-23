@@ -20,10 +20,10 @@ namespace interpolation
                 float delta_x,
                 float delta_z)
         {
-            if (start_x < 0.0f || start_x > (float) image_width ||
-                    end_x < 0.0f || end_x > (float) image_width ||
-                    start_z < 0.0f || start_z > (float) image_height ||
-                    end_z < 0.0f || end_z > (float) image_height)
+            if (start_x < 0.0f || start_x > static_cast<float>(image_width) ||
+                    end_x < 0.0f || end_x > static_cast<float>(image_width) ||
+                    start_z < 0.0f || start_z > static_cast<float>(image_height) ||
+                    end_z < 0.0f || end_z > static_cast<float>(image_height))
             {
                 // invalid value in some input variable.
                 return false;

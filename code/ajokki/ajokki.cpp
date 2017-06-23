@@ -65,7 +65,7 @@
 
 // model file format: obj/bmp/...
 std::string g_model_file_format = "bmp";
-std::string ascii_grid_model_file_format = "ascii_grid";
+std::string ASCII_grid_model_file_format = "ASCII_grid";
 
 // model filename.
 // std::string g_model_filename = "cube.obj";
@@ -75,8 +75,8 @@ std::string ascii_grid_model_file_format = "ascii_grid";
 std::string g_model_filename = "noise256x256.bmp";
 // std::string g_model_filename = "noise128x128.bmp";
 
-// std::string ascii_grid_model_filename = "N5424G.asc"; // Joensuu center & western.
-std::string ascii_grid_model_filename = "L4133D.asc"; // Helsinki eastern downtown.
+// std::string ASCII_grid_model_filename = "N5424G.asc"; // Joensuu center & western.
+std::string ASCII_grid_model_filename = "L4133D.asc"; // Helsinki eastern downtown.
 
 // texture file format: bmp/...
 std::string g_texture_file_format = "bmp";
@@ -291,15 +291,17 @@ int main(void)
         terrain_species = new ontology::Species(bmp_terrain_species_struct);
         */
 
-        SpeciesStruct ascii_grid_terrain_species_struct;
-        ascii_grid_terrain_species_struct.parent_pointer = grass_material;
-        ascii_grid_terrain_species_struct.model_file_format = ascii_grid_model_file_format;
-        ascii_grid_terrain_species_struct.model_filename = ascii_grid_model_filename;
-        ascii_grid_terrain_species_struct.light_position = glm::vec3(4, 4, 4);
-        ascii_grid_terrain_species_struct.is_world = true;
-        ascii_grid_terrain_species_struct.x_step = 4;
-        ascii_grid_terrain_species_struct.z_step = 4;
-        terrain_species = new ontology::Species(ascii_grid_terrain_species_struct);
+        SpeciesStruct ASCII_grid_terrain_species_struct;
+        ASCII_grid_terrain_species_struct.parent_pointer = grass_material;
+        ASCII_grid_terrain_species_struct.model_file_format = ASCII_grid_model_file_format;
+        ASCII_grid_terrain_species_struct.model_filename = ASCII_grid_model_filename;
+        ASCII_grid_terrain_species_struct.light_position = glm::vec3(4, 4, 4);
+        ASCII_grid_terrain_species_struct.is_world = true;
+        ASCII_grid_terrain_species_struct.x_step = 4;
+        ASCII_grid_terrain_species_struct.z_step = 4;
+        terrain_species = new ontology::Species(ASCII_grid_terrain_species_struct);
+
+        terrain_species->set_name("Helsinki");
 
         is_flight_mode_in_use = true;
 
@@ -416,7 +418,7 @@ int main(void)
     // Initialize our little text library with the Holstein font
     const char* char_g_font_texture_filename = g_font_texture_filename.c_str();
     const char* char_g_font_texture_file_format = g_font_texture_file_format.c_str();
-    ontology::Font2D* my_font2D = new ontology::Font2D(window_width, window_height, char_g_font_texture_filename, char_g_font_texture_file_format);
+    ontology::Font2D* my_font2D = new ontology::Font2D(my_universe, window_width, window_height, char_g_font_texture_filename, char_g_font_texture_file_format);
 
     std::unordered_map<std::string, ConsoleCommandCallback> command_callback_map;
 
@@ -839,6 +841,9 @@ int main(void)
     command_callback_map["set"] = &config::SettingMaster::set;
     command_callback_map["get"] = &config::SettingMaster::get;
 
+    // Object handling callbacks.
+    command_callback_map["delete"] = &ontology::Universe::delete_entity;
+
     // Exit program callbacks.
     command_callback_map["bye"] = &ajokki::quit;
     command_callback_map["chau"] = &ajokki::quit;
@@ -879,7 +884,7 @@ int main(void)
             {
                 // If last `std::printf()` was more than 1 sec ago,
                 // `std::printf` and reset.
-                std::sprintf(ms_frame_text, "%.02f ms/frame; %.02f Hz", 1000.0f / ((double) nbFrames), 1000.0f / (1000.0f / ((double) nbFrames)));
+                std::snprintf(ms_frame_text, sizeof(ms_frame_text), "%.02f ms/frame; %.02f Hz", 1000.0f / ((double) nbFrames), 1000.0f / (1000.0f / ((double) nbFrames)));
                 ms_frame_text_ready = true;
                 nbFrames = 0;
                 last_time_to_display_FPS += 1.0;
@@ -1043,8 +1048,9 @@ int main(void)
             printing_struct.char_font_texture_file_format = "bmp";
 
             char angles_and_coordinates_text[256];
-            std::sprintf(
+            std::snprintf(
                     angles_and_coordinates_text,
+                    sizeof(angles_and_coordinates_text),
                     "%.2f,%.2f rad; %.2f,%.2f deg\\n(%.2f,%.2f,%.2f)",
                     horizontalAngle,
                     verticalAngle,
@@ -1055,7 +1061,7 @@ int main(void)
                     position.z);
 
             char time_text[256];
-            std::sprintf(time_text, "%.2f sec", glfwGetTime());
+            std::snprintf(time_text, sizeof(time_text), "%.2f sec", glfwGetTime());
 
             char null_text[] = "";
             char on_text[] = "on";
@@ -1063,8 +1069,9 @@ int main(void)
             char in_use_text[] = " (in use)";
 
             char help_text_char[1024];
-            std::sprintf(
+            std::snprintf(
                     help_text_char,
+                    sizeof(help_text_char),
                     "Ajokki v. 0.0.1\\n"
                     "\\n"
                     "arrow keys\\n"
@@ -1090,7 +1097,7 @@ int main(void)
 
             if (testing_spherical_world_in_use)
             {
-                std::sprintf(spherical_coordinates_text, "rho:%.2f theta:%.2f phi:%.2f", spherical_position.rho, spherical_position.theta, spherical_position.phi);
+                std::snprintf(spherical_coordinates_text, sizeof(spherical_coordinates_text), "rho:%.2f theta:%.2f phi:%.2f", spherical_position.rho, spherical_position.theta, spherical_position.phi);
             }
 
             // print cartesian coordinates on bottom left corner.

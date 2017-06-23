@@ -20,6 +20,12 @@
 #include <GL/glew.h> // GLfloat, GLuint etc.
 #endif
 
+// Include GLFW
+#ifndef __GLFW3_H_INCLUDED
+#define __GLFW3_H_INCLUDED
+#include <glfw3.h>
+#endif
+
 // Include standard headers
 #include <cstring>  // std::memcmp, std::strcmp, std::strlen, std::strncmp
 #include <iostream> // std::cout, std::cin, std::cerr
@@ -29,7 +35,7 @@ namespace ontology
 {
     void Species::bind_to_parent()
     {
-        // get `childID` from the `Material` and set pointer to this `Species`.
+        // get `childID` from `Material` and set pointer to this `Species`.
         hierarchy::bind_child_to_parent<ontology::Species*>(this, this->parent_pointer->species_pointer_vector, this->parent_pointer->free_speciesID_queue);
     }
 
@@ -44,6 +50,7 @@ namespace ontology
         this->color_channel     = species_struct.color_channel;
         this->light_position    = species_struct.light_position;
         this->parent_pointer    = species_struct.parent_pointer;
+        this->universe_pointer  = this->parent_pointer->universe_pointer;
         this->x_step            = species_struct.x_step;
         this->z_step            = species_struct.z_step;
         this->triangulation_type = species_struct.triangulation_type;
@@ -51,7 +58,7 @@ namespace ontology
         this->char_model_file_format = this->model_file_format.c_str();
         this->char_model_filename    = this->model_filename.c_str();
 
-        // get `childID` from the `Material` and set pointer to this `Species`.
+        // get `childID` from `Material` and set pointer to this `Species`.
         this->bind_to_parent();
 
         // Get a handle for our buffers.
@@ -99,9 +106,9 @@ namespace ontology
                     this->z_step,
                     this->triangulation_type);
         }
-        else if (std::strcmp(this->char_model_file_format, "ascii_grid") == 0)
+        else if (std::strcmp(this->char_model_file_format, "ASCII_grid") == 0)
         {
-            model_loading_result = loaders::load_ascii_grid(
+            model_loading_result = loaders::load_ASCII_grid(
                     this->model_filename,
                     this->vertices,
                     this->UVs,
@@ -167,16 +174,28 @@ namespace ontology
 
         // set pointer to this species to nullptr.
         this->parent_pointer->set_species_pointer(this->childID, nullptr);
+
+        if (!this->name.empty() && this->universe_pointer != nullptr)
+        {
+            delete this->universe_pointer->entity_anyvalue_map[this->name];
+            this->universe_pointer->entity_anyvalue_map[this->name] = nullptr;
+        }
     }
 
     void Species::render()
     {
+        // render this `Species`.
         ontology::render_species_or_glyph<ontology::Species*>(this);
     }
 
     void Species::set_object_pointer(uint32_t childID, ontology::Object* child_pointer)
     {
         hierarchy::set_child_pointer(childID, child_pointer, this->object_pointer_vector, this->free_objectID_queue);
+    }
+
+    void Species::set_name(std::string name)
+    {
+        ontology::set_name(name, this);
     }
 
     void Species::bind_to_new_parent(ontology::Material* new_material_pointer)

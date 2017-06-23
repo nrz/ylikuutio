@@ -1,4 +1,5 @@
 #include "font2D.hpp"
+#include "entity_templates.hpp"
 #include "code/ylikuutio/loaders/shader_loader.hpp"
 #include "code/ylikuutio/loaders/texture_loader.hpp"
 
@@ -23,25 +24,31 @@
 #include <vector>   // std::vector
 #include <cstring>  // std::memcmp, std::strcmp, std::strlen, std::strncmp
 #include <stdint.h> // uint32_t etc.
+#include <string>   // std::string
 
 namespace ontology
 {
+    class Universe;
+
     Font2D::Font2D(
+            ontology::Universe* universe_pointer,
             GLuint screen_width,
             GLuint screen_height,
-            const char* texturePath,
-            const char* char_font_texture_file_format)
+            std::string texture_filename,
+            std::string font_texture_file_format)
     {
         // constructor.
+        const char* texturePath = texture_filename.c_str();
+        const char* char_font_texture_file_format = font_texture_file_format.c_str();
 
         // Initialize texture
         if ((std::strcmp(char_font_texture_file_format, "bmp") == 0) || (std::strcmp(char_font_texture_file_format, "BMP") == 0))
         {
-            this->texture = loaders::load_BMP_texture(texturePath);
+            this->texture = loaders::load_BMP_texture(texture_filename);
         }
         else if ((std::strcmp(char_font_texture_file_format, "dds") == 0) || (std::strcmp(char_font_texture_file_format, "DDS") == 0))
         {
-            this->texture = loaders::load_DDS_texture(texturePath);
+            this->texture = loaders::load_DDS_texture(texture_filename);
         }
         else
         {
@@ -71,6 +78,8 @@ namespace ontology
         // Initialize uniform window height.
         screen_height_uniform_ID = glGetUniformLocation(programID, "screen_height");
         glUniform1i(screen_height_uniform_ID, screen_height);
+
+        this->universe_pointer = universe_pointer;
     }
 
     Font2D::~Font2D()
@@ -86,6 +95,12 @@ namespace ontology
 
         // Delete shader
         glDeleteProgram(programID);
+
+        if (!this->name.empty() && this->universe_pointer != nullptr)
+        {
+            delete this->universe_pointer->entity_anyvalue_map[this->name];
+            this->universe_pointer->entity_anyvalue_map[this->name] = nullptr;
+        }
     }
 
     void Font2D::printText2D(
@@ -339,5 +354,10 @@ namespace ontology
             const char* char_font_texture_file_format)
     {
         printText2D(screen_width, screen_height, x, y, text_size, font_size, text_char, char_font_texture_file_format, "left", "bottom");
+    }
+
+    void Font2D::set_name(std::string name)
+    {
+        ontology::set_name(name, this);
     }
 }

@@ -1,11 +1,13 @@
 #ifndef __TEXTURE_HPP_INCLUDED
 #define __TEXTURE_HPP_INCLUDED
 
-#include "code/ylikuutio/common/globals.hpp"
+#include "entity.hpp"
 #include "shader.hpp"
-#include "render_templates.hpp"
 #include "material_struct.hpp"
+#include "render_templates.hpp"
+#include "entity_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
+#include "code/ylikuutio/common/globals.hpp"
 
 // Include GLEW
 #ifndef __GL_GLEW_H_INCLUDED
@@ -31,7 +33,7 @@ namespace ontology
     class Object;
     class VectorFont;
 
-    class Material
+    class Material: public ontology::Entity
     {
         public:
             // constructor.
@@ -43,6 +45,8 @@ namespace ontology
             // this method sets pointer to this `Material` to nullptr, sets `parent_pointer` according to the input, and requests a new `childID` from the new `Shader`.
             void bind_to_new_parent(ontology::Shader* new_shader_pointer);
 
+            void set_name(std::string name);
+
             friend class Shader;
             friend class VectorFont;
             friend class Glyph;
@@ -52,12 +56,16 @@ namespace ontology
             template<class T1>
                 friend void render_children(std::vector<T1>& child_pointer_vector);
             template<class T1>
+                friend void set_name(std::string name, T1 entity);
+            template<class T1>
                 friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<uint32_t>& free_childID_queue);
             template<class T1, class T2>
                 friend void hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent_pointer, std::vector<T1>& old_child_pointer_vector, std::queue<uint32_t>& old_free_childID_queue);
 
         private:
-            // this method renders all species using this texture.
+            void bind_to_parent();
+
+            // this method renders all `Species` using this `Material`.
             void render();
 
             // this method sets `Species` pointer.
@@ -69,14 +77,12 @@ namespace ontology
             // this method sets `ChunkMaster` pointer.
             void set_chunk_master_pointer(uint32_t childID, space_partition::ChunkMaster* child_pointer);
 
-            // this method sets a world species pointer.
+            // this method sets a terrain `Species` pointer.
             void set_terrain_species_pointer(ontology::Species* terrain_species_pointer);
 
-            ontology::Shader* parent_pointer;         // pointer to the shader.
+            ontology::Shader* parent_pointer;      // pointer to `Shader`.
 
-            void bind_to_parent();
-
-            ontology::Species* terrain_species_pointer; // pointer to world species (used in collision detection).
+            ontology::Species* terrain_species_pointer; // pointer to terrain `Species` (used in collision detection).
 
             GLuint texture;                        // Texture of this `Material`, returned by `load_BMP_texture` or `load_DDS_texture` (used for `glGenTextures` etc.).
             GLuint openGL_textureID;               // texture ID, returned by `glGetUniformLocation(programID, "myTextureSampler");`.
@@ -90,9 +96,11 @@ namespace ontology
 
             std::string texture_file_format;       // type of the model file, eg. `"bmp"`.
             std::string texture_filename;          // filename of the model file.
-            uint32_t childID;                      // texture ID, returned by `Shader::get_textureID`.
+            uint32_t childID;                      // material ID, set by `this->bind_to_parent()`.
             const char* char_texture_file_format;
             const char* char_texture_filename;
+
+            std::string name;                      // name of this entity.
     };
 }
 

@@ -5,6 +5,7 @@ namespace ontology
     Model::Model()
     {
         // constructor.
+        this->child_vector_pointers_vector.push_back(&this->object_pointer_vector);
     }
 
     Model::~Model()

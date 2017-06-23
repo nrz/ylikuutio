@@ -32,17 +32,20 @@ namespace ontology
 
     void Scene::bind_to_parent()
     {
-        // get `childID` from the `Universe` and set pointer to this `Scene`.
+        // get `childID` from `Universe` and set pointer to this `Scene`.
         hierarchy::bind_child_to_parent<ontology::Scene*>(this, this->parent_pointer->scene_pointer_vector, this->parent_pointer->free_sceneID_queue);
     }
 
     Scene::Scene(ontology::Universe* parent_pointer)
     {
         // constructor.
+        this->universe_pointer = parent_pointer;
         this->parent_pointer = parent_pointer;
 
-        // get `childID` from the `Universe` and set pointer to this `Scene`.
+        // get `childID` from `Universe` and set pointer to this `Scene`.
         this->bind_to_parent();
+
+        this->child_vector_pointers_vector.push_back(&this->shader_pointer_vector);
     }
 
     Scene::~Scene()
@@ -53,24 +56,29 @@ namespace ontology
         // destroy all shaders of this scene.
         std::cout << "All shaders of this scene will be destroyed.\n";
         hierarchy::delete_children<ontology::Shader*>(this->shader_pointer_vector);
+
+        if (!this->name.empty() && this->universe_pointer != nullptr)
+        {
+            delete this->universe_pointer->entity_anyvalue_map[this->name];
+            this->universe_pointer->entity_anyvalue_map[this->name] = nullptr;
+        }
     }
 
     void Scene::render()
     {
-        // render Scene by calling `render()` function of each Shader.
+        // render this `Scene` by calling `render()` function of each `Shader`.
         ontology::render_children<ontology::Shader*>(this->shader_pointer_vector);
-    }
-
-    void Scene::bind_to_new_parent(ontology::Universe* new_universe_pointer)
-    {
-        // this method sets pointer to this `Scene` to nullptr, sets `parent_pointer` according to the input, and requests a new `childID` from the new `Universe`.
-        hierarchy::bind_child_to_new_parent<ontology::Scene*, ontology::Universe*>(this, new_universe_pointer, this->parent_pointer->scene_pointer_vector, this->parent_pointer->free_sceneID_queue);
     }
 
     // this method returns a pointer to an `Object` using the name as key.
     ontology::Object* Scene::get_object(std::string name)
     {
         return this->name_map[name];
+    }
+
+    void Scene::set_name(std::string name)
+    {
+        ontology::set_name(name, this);
     }
 
     void Scene::set_shader_pointer(uint32_t childID, ontology::Shader* child_pointer)
