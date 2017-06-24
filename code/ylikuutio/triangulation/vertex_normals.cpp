@@ -14,7 +14,7 @@
 
 namespace geometry
 {
-    void compute_vertex_normals(
+    bool compute_vertex_normals(
             std::vector<glm::vec3>& temp_normals,
             std::vector<glm::vec3>& face_normal_vector_vec3,
             const int32_t actual_image_width,
@@ -24,7 +24,12 @@ namespace geometry
             const bool is_southeast_northwest_edges_in_use)
     {
         // 5. Compute the vertex normals for vertices loaded from file, `push_back` to `temp_normals`.
-        // std::cout << "computing vertex normals for vertices loaded from file.\n";
+
+        if (actual_image_width < 2 || actual_image_height < 2)
+        {
+            // If width or height is < 2, there are no faces.
+            return false;
+        }
 
         if (is_bilinear_interpolation_in_use)
         {
@@ -315,5 +320,7 @@ namespace geometry
             temp_normals.push_back(glm::normalize(
                         get_face_normal_for_SE_NW(face_normal_vector_vec3, x, z, SW_CODE_FOR_SE_NW, actual_image_width)));
         }
+
+        return true;
     }
 }
