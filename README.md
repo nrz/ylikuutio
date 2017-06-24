@@ -85,29 +85,29 @@ your favorite package manager such as aptitude, apt-get, yum etc.
 You all need these packages: cmake make g++ gcc libx11-dev libgl1-mesa-dev libglu1-mesa-dev libxcursor-dev libxrandr-dev libxext-dev libxi-dev libxinerama-dev
 Eg. with aptitude:
 
-`$ sudo aptitude install cmake build-essential libx11-dev libgl1-mesa-dev libglu1-mesa-dev libxcursor-dev libxrandr-dev libxext-dev libxi-dev libxinerama-dev`
+    $ sudo aptitude install cmake build-essential libx11-dev libgl1-mesa-dev libglu1-mesa-dev libxcursor-dev libxrandr-dev libxext-dev libxi-dev libxinerama-dev
 
 If you are doing a cross compile for Windows under Linux, you need also:
 
-`$ sudo aptitude install gcc-mingw-w64 gcc-multilib`
+    $ sudo aptitude install gcc-mingw-w64 gcc-multilib
 
 However, cross compiling does not work yet!
 
 Then, to compile with GCC, in Ylikuutio install directory:
 
-`$ mkdir build`
-`$ cd build`
-`$ cmake ..`
-`$ make`
+    $ mkdir build
+    $ cd build
+    $ cmake ..
+    $ make
 
 Or, to compile with Clang, again in Ylikuutio install directory:
 
-`$ mkdir build`
-`$ cd build`
-`$ export CC='/usr/bin/clang'`
-`$ export CXX='/usr/bin/clang++'`
-`$ cmake ..`
-`$ make`
+    $ mkdir build
+    $ cd build
+    $ export CC='/usr/bin/clang'
+    $ export CXX='/usr/bin/clang++'
+    $ cmake ..
+    $ make
 
 If you have problems compiling tests or for some other reason don't want
 to compile tests, in CMakeLists.txt comment out the line that says:
@@ -115,6 +115,7 @@ to compile tests, in CMakeLists.txt comment out the line that says:
 
 If you are cross compiling for Windows under Linux, you need to
 uncomment the corresponding line in CMakeLists.txt:
+
 `# set(CROSS_COMPILE_FOR_WINDOWS true)`
 
 To run Ajokki (working title based on Finnish bus body manufacturer),
@@ -216,11 +217,14 @@ A: I like Lisp-family languages and Chibi-Scheme fulfils my
 * Internet gaming
 * sound
 
-contact info (found bugs and suggestions are very welcome!):
-name:           Antti Nuortimo
-GitHub:         https://github.com/nrz
-Stack Overflow: http://stackoverflow.com/users/1310991/nrz
-email:          antti dot nuortimo at gmail dot com
-                (please write 'ylikuutio' to email title to escape /dev/null)
+## Contact info
+(found bugs and suggestions are very welcome!)
+
+|:--------------- |:------------------------------------------------------------- |
+| name:           | Antti Nuortimo                                                |
+| GitHub:         | https://github.com/nrz                                        |
+| Stack Overflow: | http://stackoverflow.com/users/1310991/nrz                    |
+| email:          | antti dot nuortimo at gmail dot com                           |
+|                 | (please write 'ylikuutio' to email title to escape /dev/null) |
 
 Work offers are also very welcome!
