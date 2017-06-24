@@ -126,6 +126,7 @@ namespace geometry
         if (x < 0 || z < 0)
         {
             std::cerr << "negative coordinates are not supported!";
+            return glm::vec3(NAN, NAN, NAN);
         }
 
         int32_t face_normal_i = get_face_normal_i(x, z, compass_point_code, actual_image_width);
