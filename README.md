@@ -220,11 +220,12 @@ A: I like Lisp-family languages and Chibi-Scheme fulfils my
 ## Contact info
 (found bugs and suggestions are very welcome!)
 
-|:--------------- |:------------------------------------------------------------- |
-| name:           | Antti Nuortimo                                                |
-| GitHub:         | https://github.com/nrz                                        |
-| Stack Overflow: | http://stackoverflow.com/users/1310991/nrz                    |
-| email:          | antti dot nuortimo at gmail dot com                           |
-|                 | (please write 'ylikuutio' to email title to escape /dev/null) |
+| variable       | value                                                         |
+|:-------------- |:------------------------------------------------------------- |
+| name           | Antti Nuortimo                                                |
+| GitHub         | https://github.com/nrz                                        |
+| Stack Overflow | http://stackoverflow.com/users/1310991/nrz                    |
+| email          | antti dot nuortimo at gmail dot com                           |
+|                | (please write 'ylikuutio' to email title to escape /dev/null) |
 
 Work offers are also very welcome!
