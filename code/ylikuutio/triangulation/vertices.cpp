@@ -44,7 +44,7 @@ namespace geometry
         out_normals.push_back(temp_normals[normalIndex[2]]);
     }
 
-    void define_vertices_UVs_and_normals(
+    bool define_vertices_UVs_and_normals(
             const TriangulateQuadsStruct triangulate_quads_struct,
             std::vector<glm::vec3>& temp_vertices,
             std::vector<glm::vec2>& temp_UVs,
@@ -62,7 +62,12 @@ namespace geometry
             const bool is_southeast_northwest_edges_in_use)
     {
         // 6. Loop through all vertices and `geometry::output_triangle_vertices`.
-        // std::cout << "defining output vertices, UVs and normals.\n";
+
+        if (actual_image_width < 2 || actual_image_height < 2)
+        {
+            // If width or height is < 2, there are no faces.
+            return false;
+        }
 
         if (is_bilinear_interpolation_in_use)
         {
@@ -474,5 +479,7 @@ namespace geometry
                 }
             }
         }
+
+        return true;
     }
 }
