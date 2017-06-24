@@ -22,7 +22,7 @@ namespace ontology
     class Text3D;
 
     template<class T1>
-        void set_name(std::string name, T1 entity)
+        void set_name(const std::string name, T1 entity)
         {
             ontology::Universe* universe = entity->universe_pointer;
 
@@ -48,13 +48,13 @@ namespace ontology
         }
 
     template<class T1>
-        int32_t get_number_of_child_types(T1 entity)
+        int32_t get_number_of_child_types(const T1 entity)
         {
             return entity->child_vector_pointers_vector.size();
         }
 
     template<class T1>
-        int32_t get_number_of_children(T1 entity)
+        int32_t get_number_of_children(const T1 entity)
         {
             switch (typeid(entity))
             {
@@ -80,7 +80,7 @@ namespace ontology
         }
 
     template<class T1>
-        uint32_t get_number_of_descendants(std::vector<T1> child_pointer_vector)
+        uint32_t get_number_of_descendants(const std::vector<T1> child_pointer_vector)
         {
             uint32_t number_of_descendants = 0;
 
@@ -94,7 +94,7 @@ namespace ontology
         }
 
     template<class T1>
-        uint32_t get_number_of_descendants_of_entity(T1 entity)
+        uint32_t get_number_of_descendants_of_entity(const T1 entity)
         {
             switch (typeid(entity))
             {
@@ -124,7 +124,7 @@ namespace ontology
         }
 
     template<class T1>
-        InfoStruct* get_info(T1 entity)
+        InfoStruct* get_info(const T1 entity)
         {
             InfoStruct* info_struct = new InfoStruct();
 
