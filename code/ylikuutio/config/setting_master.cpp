@@ -26,7 +26,7 @@ namespace config
         // destructor.
     }
 
-    bool SettingMaster::is_setting(std::string setting_name)
+    bool SettingMaster::is_setting(const std::string setting_name)
     {
         return (this->setting_pointer_map.count(setting_name) == 1);
     }
@@ -37,7 +37,7 @@ namespace config
         return help_string;
     }
 
-    std::string SettingMaster::help(std::string setting_name)
+    std::string SettingMaster::help(const std::string setting_name)
     {
         if (this->is_setting(setting_name))
         {

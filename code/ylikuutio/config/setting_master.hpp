@@ -25,13 +25,13 @@ namespace config
             ~SettingMaster();
 
             // does setting `setting` exist?
-            bool is_setting(std::string setting_name);
+            bool is_setting(const std::string setting_name);
 
             // this function returns general help.
             std::string help();
 
             // this function returns help string for setting `setting`.
-            std::string help(std::string setting_name);
+            std::string help(const std::string setting_name);
 
             // Public callbacks.
 
