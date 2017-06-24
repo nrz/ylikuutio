@@ -131,7 +131,7 @@ namespace geometry
 
         int32_t face_normal_i = get_face_normal_i(x, z, compass_point_code, actual_image_width);
 
-        if (face_normal_i == -1)
+        if (face_normal_i < 0)
         {
             std::cerr << "invalid compass point code!\n";
             return glm::vec3(NAN, NAN, NAN);
