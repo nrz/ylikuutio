@@ -5,6 +5,12 @@
 #include "code/ylikuutio/common/any_value.hpp"
 #include "code/ylikuutio/common/globals.hpp"
 
+// Include GLEW
+#ifndef __GL_GLEW_H_INCLUDED
+#define __GL_GLEW_H_INCLUDED
+#include <GL/glew.h> // GLfloat, GLuint etc.
+#endif
+
 // Include GLFW
 #ifndef __GLFW3_H_INCLUDED
 #define __GLFW3_H_INCLUDED
@@ -170,6 +176,7 @@ namespace ontology
 {
     class Scene;
     class Shader;
+    class Object;
 
     class Universe: public ontology::Entity
     {
@@ -236,6 +243,8 @@ namespace ontology
 
             template<class T1>
                 friend void set_name(std::string name, T1 entity);
+            template<class T1>
+                friend void render_this_object(ontology::Object* object_pointer, ontology::Shader* shader_pointer);
 
         private:
             // this method sets a `Scene` pointer.
@@ -267,7 +276,13 @@ namespace ontology
             GLFWwindow* window;
             uint32_t window_width;
             uint32_t window_height;
+
+            // Variables related to the camera.
+            glm::vec3 camera_position;
+            glm::mat4 ProjectionMatrix;
+            glm::mat4 ViewMatrix;
             GLfloat aspect_ratio;
+            GLfloat initialFoV;
 
             // Variables related to timing of events.
             uint32_t max_FPS;

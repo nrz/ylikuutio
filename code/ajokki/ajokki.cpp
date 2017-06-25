@@ -138,9 +138,6 @@ int main(void)
     // Initial vertical angle : none
     // verticalAngle = PI / 2;
     verticalAngle = 7.44f;
-    // Initial Field of View
-    // initialFoV = 45.0f;
-    initialFoV = 60.0f;
 
     callback_system::CallbackEngine* cleanup_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* cleanup_callback_object = new callback_system::CallbackObject(nullptr, cleanup_callback_engine);

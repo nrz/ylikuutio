@@ -57,10 +57,14 @@ namespace ontology
         this->world_radius = NAN; // world radius is NAN as long it doesn't get `set` by `SettingMaster`.
         this->setting_master_pointer = nullptr;
 
+        // Variables related to the window.
         this->window = nullptr;
         this->window_width = 1600; // default width.
         this->window_height = 900; // default height.
+
+        // Variables related to the camera.
         this->aspect_ratio = static_cast<GLfloat>(this->window_width / this->window_height);
+        this->initialFoV = 60.0f;
 
         this->max_FPS = 60; // default value max 60 frames per second.
         this->delta_time = NAN;
@@ -280,7 +284,7 @@ namespace ontology
             position.y -= fallSpeed;
         }
 
-        GLfloat FoV = initialFoV;// - 5 * glfwGetMouseWheel(); // Now GLFW 3 requires setting up a callback for this. It's a bit too complicated for this beginner's tutorial, so it's disabled instead.
+        GLfloat FoV = this->initialFoV;// - 5 * glfwGetMouseWheel(); // Now GLFW 3 requires setting up a callback for this. It's a bit too complicated for this beginner's tutorial, so it's disabled instead.
 
         // adjust position according to the ground.
         if (!is_flight_mode_in_use)

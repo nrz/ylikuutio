@@ -20,12 +20,6 @@
 
 // Global variables.
 
-// Variables related to the camera.
-glm::vec3 camera_position;
-glm::mat4 ProjectionMatrix;
-glm::mat4 ViewMatrix;
-GLfloat initialFoV;
-
 // Variables related to the console.
 console::Console* global_console_pointer = nullptr;
 
