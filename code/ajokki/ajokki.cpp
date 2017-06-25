@@ -157,16 +157,22 @@ int main(void)
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
 
     // Open a window and create its OpenGL context.
-    window = glfwCreateWindow(static_cast<GLuint>(window_width), static_cast<GLuint>(window_height), "Ajokki v. 0.0.1, powered by Ylikuutio v. 0.0.1", nullptr, nullptr);
+    my_universe->set_window(
+            glfwCreateWindow(
+                static_cast<GLuint>(my_universe->get_window_width()),
+                static_cast<GLuint>(my_universe->get_window_height()),
+                "Ajokki v. 0.0.1, powered by Ylikuutio v. 0.0.1",
+                nullptr,
+                nullptr));
     cleanup_callback_object->set_new_callback(&ajokki::glfwTerminate_cleanup);
 
-    if (window == nullptr)
+    if (my_universe->get_window() == nullptr)
     {
         std::cerr << "Failed to open GLFW window.\n";
         cleanup_callback_engine->execute();
         return -1;
     }
-    glfwMakeContextCurrent(window);
+    glfwMakeContextCurrent(my_universe->get_window());
 
     // Initialize GLEW.
     if (glewInit() != GLEW_OK)
@@ -177,8 +183,8 @@ int main(void)
     }
 
     // Ensure we can capture the escape key being pressed below.
-    glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
-    glfwSetCursorPos(window, (static_cast<GLuint>(window_width) / 2), (static_cast<GLuint>(window_height) / 2));
+    glfwSetInputMode(my_universe->get_window(), GLFW_STICKY_KEYS, GL_TRUE);
+    glfwSetCursorPos(my_universe->get_window(), (static_cast<GLuint>(my_universe->get_window_width()) / 2), (static_cast<GLuint>(my_universe->get_window_height()) / 2));
 
     // Enable depth test.
     glEnable(GL_DEPTH_TEST);
@@ -418,7 +424,7 @@ int main(void)
     // Initialize our little text library with the Holstein font
     const char* char_g_font_texture_filename = g_font_texture_filename.c_str();
     const char* char_g_font_texture_file_format = g_font_texture_file_format.c_str();
-    ontology::Font2D* my_font2D = new ontology::Font2D(my_universe, window_width, window_height, char_g_font_texture_filename, char_g_font_texture_file_format);
+    ontology::Font2D* my_font2D = new ontology::Font2D(my_universe, my_universe->get_window_width(), my_universe->get_window_height(), char_g_font_texture_filename, char_g_font_texture_file_format);
 
     std::unordered_map<std::string, ConsoleCommandCallback> command_callback_map;
 
@@ -911,28 +917,28 @@ int main(void)
 
             // Get mouse position
             double xpos, ypos;
-            glfwGetCursorPos(window, &xpos, &ypos);
+            glfwGetCursorPos(my_universe->get_window(), &xpos, &ypos);
 
             // Reset mouse position for next frame
-            glfwSetCursorPos(window, window_width / 2, window_height / 2);
+            glfwSetCursorPos(my_universe->get_window(), my_universe->get_window_width() / 2, my_universe->get_window_height() / 2);
 
             if (hasMouseEverMoved || (abs(xpos) > 0.0001) || (abs(ypos) > 0.0001))
             {
                 hasMouseEverMoved = true;
 
                 // Compute new orientation
-                horizontalAngle += mouseSpeed * GLfloat(window_width / 2 - xpos);
+                horizontalAngle += mouseSpeed * GLfloat(my_universe->get_window_width() / 2 - xpos);
                 horizontalAngle = remainder(horizontalAngle, (2.0f * PI));
 
                 if (is_invert_mouse_in_use)
                 {
                     // invert mouse.
-                    verticalAngle -= mouseSpeed * GLfloat(window_height / 2 - ypos);
+                    verticalAngle -= mouseSpeed * GLfloat(my_universe->get_window_height() / 2 - ypos);
                 }
                 else
                 {
                     // don't invert mouse.
-                    verticalAngle += mouseSpeed * GLfloat(window_height / 2 - ypos);
+                    verticalAngle += mouseSpeed * GLfloat(my_universe->get_window_height() / 2 - ypos);
                 }
                 verticalAngle = remainder(verticalAngle, (2.0f * PI));
             }
@@ -957,7 +963,7 @@ int main(void)
             // Check for key releases and call corresponding callbacks.
             for (uint32_t i = 0; i < (*current_keyrelease_callback_engine_vector_pointer).size(); i++)
             {
-                if (glfwGetKey(window, (*current_keyrelease_callback_engine_vector_pointer).at(i).keycode) == GLFW_RELEASE)
+                if (glfwGetKey(my_universe->get_window(), (*current_keyrelease_callback_engine_vector_pointer).at(i).keycode) == GLFW_RELEASE)
                 {
                     callback_system::CallbackEngine* callback_engine = (*current_keyrelease_callback_engine_vector_pointer).at(i).callback_engine;
                     datatypes::AnyValue* any_value = callback_engine->execute();
@@ -967,7 +973,7 @@ int main(void)
             // Check for keypresses and call corresponding callbacks.
             for (uint32_t i = 0; i < (*current_keypress_callback_engine_vector_pointer).size(); i++)
             {
-                if (glfwGetKey(window, (*current_keypress_callback_engine_vector_pointer).at(i).keycode) == GLFW_PRESS)
+                if (glfwGetKey(my_universe->get_window(), (*current_keypress_callback_engine_vector_pointer).at(i).keycode) == GLFW_PRESS)
                 {
                     callback_system::CallbackEngine* callback_engine = (*current_keypress_callback_engine_vector_pointer).at(i).callback_engine;
                     datatypes::AnyValue* any_value = callback_engine->execute();
@@ -991,7 +997,7 @@ int main(void)
 
                             for (uint32_t key_code = 0; key_code <= GLFW_KEY_LAST; key_code++)
                             {
-                                glfwGetKey(window, key_code);
+                                glfwGetKey(my_universe->get_window(), key_code);
                             }
 
                             // Do not display help screen when in console.
@@ -1009,7 +1015,7 @@ int main(void)
 
                             for (uint32_t key_code = 0; key_code <= GLFW_KEY_LAST; key_code++)
                             {
-                                glfwGetKey(window, key_code);
+                                glfwGetKey(my_universe->get_window(), key_code);
                             }
 
                             // Enable display help screen when not in console.
@@ -1027,7 +1033,7 @@ int main(void)
 
                             for (uint32_t key_code = 0; key_code <= GLFW_KEY_LAST; key_code++)
                             {
-                                glfwGetKey(window, key_code);
+                                glfwGetKey(my_universe->get_window(), key_code);
                             }
 
                             is_exit_requested = true;
@@ -1046,8 +1052,8 @@ int main(void)
             my_console->draw_console();
 
             PrintingStruct printing_struct;
-            printing_struct.screen_width = static_cast<GLuint>(window_width);
-            printing_struct.screen_height = static_cast<GLuint>(window_height);
+            printing_struct.screen_width = static_cast<GLuint>(my_universe->get_window_width());
+            printing_struct.screen_height = static_cast<GLuint>(my_universe->get_window_height());
             printing_struct.text_size = text_size;
             printing_struct.font_size = font_size;
             printing_struct.char_font_texture_file_format = "bmp";
@@ -1117,7 +1123,7 @@ int main(void)
             {
                 // print help text.
                 printing_struct.x = 0;
-                printing_struct.y = window_height - (3 * text_size);
+                printing_struct.y = my_universe->get_window_height() - (3 * text_size);
                 printing_struct.text_char = help_text_char;
                 printing_struct.horizontal_alignment = "left";
                 printing_struct.vertical_alignment = "top";
@@ -1137,7 +1143,7 @@ int main(void)
 
             // print time data on top left corner.
             printing_struct.x = 0;
-            printing_struct.y = static_cast<GLuint>(window_height);
+            printing_struct.y = static_cast<GLuint>(my_universe->get_window_height());
             printing_struct.text_char = time_text;
             printing_struct.horizontal_alignment = "left";
             printing_struct.vertical_alignment = "top";
@@ -1146,8 +1152,8 @@ int main(void)
             if (ms_frame_text_ready)
             {
                 // print frame rate data on top right corner.
-                printing_struct.x = window_width;
-                printing_struct.y = window_height;
+                printing_struct.x = my_universe->get_window_width();
+                printing_struct.y = my_universe->get_window_height();
                 printing_struct.text_char = ms_frame_text;
                 printing_struct.horizontal_alignment = "right";
                 printing_struct.vertical_alignment = "top";
@@ -1155,13 +1161,13 @@ int main(void)
             }
 
             // Swap buffers.
-            glfwSwapBuffers(window);
+            glfwSwapBuffers(my_universe->get_window());
 
             my_universe->finalize_delta_time_loop();
         }
 
         // Check if the window was closed.
-        if (glfwWindowShouldClose(window) != 0)
+        if (glfwWindowShouldClose(my_universe->get_window()) != 0)
         {
             is_exit_requested = true;
         }

@@ -57,6 +57,11 @@ namespace ontology
         this->world_radius = NAN; // world radius is NAN as long it doesn't get `set` by `SettingMaster`.
         this->setting_master_pointer = nullptr;
 
+        this->window = nullptr;
+        this->window_width = 1600; // default width.
+        this->window_height = 900; // default height.
+        this->aspect_ratio = static_cast<GLfloat>(this->window_width / this->window_height);
+
         this->max_FPS = 60; // default value max 60 frames per second.
         this->delta_time = NAN;
         this->last_time_before_reading_keyboard = NAN;
@@ -84,6 +89,26 @@ namespace ontology
 
         // render this `Universe` by calling `render()` function of each `Scene`.
         ontology::render_children<ontology::Scene*>(this->scene_pointer_vector);
+    }
+
+    void Universe::set_window(GLFWwindow* window)
+    {
+        this->window = window;
+    }
+
+    GLFWwindow* Universe::get_window()
+    {
+        return this->window;
+    }
+
+    uint32_t Universe::get_window_width()
+    {
+        return this->window_width;
+    }
+
+    uint32_t Universe::get_window_height()
+    {
+        return this->window_height;
     }
 
     float Universe::compute_delta_time()

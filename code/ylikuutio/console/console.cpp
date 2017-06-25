@@ -176,7 +176,7 @@ namespace console
         // Please note that it is not necessary to be in console to be able to print in console.
         const char* text_char = text.c_str();
 
-        int32_t characters_for_line = window_width / text_size;
+        int32_t characters_for_line = this->universe_pointer->get_window_width() / text_size;
 
         std::list<char> text_char_list;
         int32_t current_line_length = 0;
@@ -223,18 +223,18 @@ namespace console
         if (this->in_console)
         {
             // Convert current input into std::string.
-            uint32_t characters_for_line = window_width / text_size;
+            uint32_t characters_for_line = this->universe_pointer->get_window_width() / text_size;
 
             // Draw the console to screen using `font2D::printText2D`.
             PrintingStruct printing_struct;
-            printing_struct.screen_width = static_cast<GLuint>(window_width);
-            printing_struct.screen_height = static_cast<GLuint>(window_height);
+            printing_struct.screen_width = static_cast<GLuint>(this->universe_pointer->get_window_width());
+            printing_struct.screen_height = static_cast<GLuint>(this->universe_pointer->get_window_height());
             printing_struct.text_size = text_size;
             printing_struct.font_size = font_size;
             printing_struct.char_font_texture_file_format = "bmp";
 
             printing_struct.x = 0;
-            printing_struct.y = window_height - (2 * text_size);
+            printing_struct.y = this->universe_pointer->get_window_height() - (2 * text_size);
             printing_struct.horizontal_alignment = "left";
             printing_struct.vertical_alignment = "top";
 
@@ -247,6 +247,11 @@ namespace console
 
             this->font2D_pointer->printText2D(printing_struct);
         }
+    }
+
+    ontology::Universe* Console::get_universe()
+    {
+        return this->universe_pointer;
     }
 
     // Public callbacks.
@@ -297,7 +302,7 @@ namespace console
             *console->current_keyrelease_callback_engine_vector_pointer_pointer =
                 console->my_keyrelease_callback_engine_vector_pointer;
 
-            glfwSetCharModsCallback(window, Console::charmods_callback);
+            glfwSetCharModsCallback(console->universe_pointer->get_window(), Console::charmods_callback);
 
             // Mark that we're in console.
             console->in_console = true;
@@ -796,7 +801,7 @@ namespace console
             // Restore previous keyrelease callback engine vector pointer.
             *this->current_keyrelease_callback_engine_vector_pointer_pointer = this->previous_keyrelease_callback_engine_vector_pointer;
 
-            glfwSetCharModsCallback(window, nullptr);
+            glfwSetCharModsCallback(this->universe_pointer->get_window(), nullptr);
 
             // Mark that we have exited the console.
             this->in_console = false;

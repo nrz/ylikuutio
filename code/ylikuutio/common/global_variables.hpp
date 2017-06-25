@@ -23,16 +23,10 @@
 
 // Global variables.
 
-// Variables related to the window.
-extern GLFWwindow* window;
-extern uint32_t window_width;
-extern uint32_t window_height;
-
 // Variables related to the camera.
 extern glm::vec3 camera_position;
 extern glm::mat4 ProjectionMatrix;
 extern glm::mat4 ViewMatrix;
-extern GLfloat aspect_ratio;
 extern GLfloat initialFoV;
 
 // Variables related to the console.

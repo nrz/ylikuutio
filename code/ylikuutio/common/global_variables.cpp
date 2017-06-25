@@ -20,16 +20,10 @@
 
 // Global variables.
 
-// Variables related to the window.
-GLFWwindow* window;
-uint32_t window_width = 1600;
-uint32_t window_height = 900;
-
 // Variables related to the camera.
 glm::vec3 camera_position;
 glm::mat4 ProjectionMatrix;
 glm::mat4 ViewMatrix;
-GLfloat aspect_ratio = (GLfloat) window_width / window_height;
 GLfloat initialFoV;
 
 // Variables related to the console.

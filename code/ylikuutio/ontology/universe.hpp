@@ -183,6 +183,18 @@ namespace ontology
             // this method renders the entire `Universe`, one `Scene` at a time.
             void render();
 
+            // this method sets a new `window`.
+            void set_window(GLFWwindow* window);
+
+            // this method returns current `window`.
+            GLFWwindow* get_window();
+
+            // this method returns current `window_width`.
+            uint32_t get_window_width();
+
+            // this method returns current `window_height`.
+            uint32_t get_window_height();
+
             // this method computes the new delta time and returns it.
             float compute_delta_time();
 
@@ -250,6 +262,12 @@ namespace ontology
             GLclampf background_green;
             GLclampf background_blue;
             GLclampf background_alpha;
+
+            // Variables related to the window.
+            GLFWwindow* window;
+            uint32_t window_width;
+            uint32_t window_height;
+            GLfloat aspect_ratio;
 
             // Variables related to timing of events.
             uint32_t max_FPS;

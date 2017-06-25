@@ -38,6 +38,7 @@ namespace console
             void print_text(std::string text);
             void print_help();
             void draw_console();
+            ontology::Universe* get_universe();
 
             // Public callbacks.
 
