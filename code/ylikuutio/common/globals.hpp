@@ -72,6 +72,12 @@ namespace graph
     class Graph;
 }
 
+namespace ontology
+{
+    class Universe;
+    class Font2D;
+}
+
 typedef datatypes::AnyValue* (*ConsoleCommandCallback) (
         console::Console*,
         ontology::Universe*,
