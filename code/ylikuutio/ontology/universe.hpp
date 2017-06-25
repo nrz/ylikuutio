@@ -192,6 +192,9 @@ namespace ontology
             // this method stores `current_time_before_reading_keyboard` into `last_time_before_reading_keyboard`.
             void finalize_delta_time_loop();
 
+            // this method returns current `max_FPS`.
+            uint32_t get_max_FPS();
+
             // Public callbacks.
 
             static datatypes::AnyValue* delete_entity(
@@ -248,7 +251,10 @@ namespace ontology
             GLclampf background_blue;
             GLclampf background_alpha;
 
+            // Variables related to timing of events.
+            uint32_t max_FPS;
             float delta_time;
+
             double last_time_before_reading_keyboard;
             double current_time_before_reading_keyboard;
     };

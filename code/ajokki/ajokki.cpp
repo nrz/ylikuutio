@@ -885,7 +885,7 @@ int main(void)
     {
         double current_time_in_main_loop = glfwGetTime();
 
-        if (current_time_in_main_loop - last_time_for_display_sync >= (1.0f / max_FPS))
+        if (current_time_in_main_loop - last_time_for_display_sync >= (1.0f / my_universe->get_max_FPS()))
         {
             last_time_for_display_sync = glfwGetTime();
 

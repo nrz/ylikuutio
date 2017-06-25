@@ -63,9 +63,6 @@ bool is_second_turbo_pressed = false;
 GLfloat gravity = 9.81f / 60.0f;
 GLfloat fallSpeed = gravity;
 
-// Variables related to timing of events.
-uint32_t max_FPS = 60;
-
 // Variables related to the current `Scene`.
 bool testing_spherical_world_in_use = false;
 

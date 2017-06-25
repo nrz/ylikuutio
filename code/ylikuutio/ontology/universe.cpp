@@ -57,6 +57,7 @@ namespace ontology
         this->world_radius = NAN; // world radius is NAN as long it doesn't get `set` by `SettingMaster`.
         this->setting_master_pointer = nullptr;
 
+        this->max_FPS = 60; // default value max 60 frames per second.
         this->delta_time = NAN;
         this->last_time_before_reading_keyboard = NAN;
         this->current_time_before_reading_keyboard = NAN;
@@ -107,6 +108,11 @@ namespace ontology
     void Universe::finalize_delta_time_loop()
     {
         this->last_time_before_reading_keyboard = this->current_time_before_reading_keyboard;
+    }
+
+    uint32_t Universe::get_max_FPS()
+    {
+        return this->max_FPS;
     }
 
     // Public callbacks.

@@ -66,9 +66,6 @@ extern bool is_second_turbo_pressed;
 extern GLfloat gravity;
 extern GLfloat fallSpeed;
 
-// Variables related to timing of events.
-extern uint32_t max_FPS;
-
 // Variables related to the current `Scene`.
 extern bool testing_spherical_world_in_use;
 
