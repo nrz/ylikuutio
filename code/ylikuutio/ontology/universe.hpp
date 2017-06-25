@@ -185,6 +185,15 @@ namespace ontology
 
             void set_background_color(GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha);
 
+            // this method computes the new delta time and returns it.
+            float compute_delta_time();
+
+            // this method returns the last computed delta time.
+            float get_delta_time();
+
+            // this method stores `current_time_before_reading_keyboard` into `last_time_before_reading_keyboard`.
+            void finalize_delta_time_loop();
+
             // Public callbacks.
 
             static datatypes::AnyValue* delete_entity(
@@ -240,6 +249,10 @@ namespace ontology
             GLclampf background_green;
             GLclampf background_blue;
             GLclampf background_alpha;
+
+            float delta_time;
+            double last_time_before_reading_keyboard;
+            double current_time_before_reading_keyboard;
     };
 }
 

@@ -25,8 +25,29 @@
 
 namespace ajokki
 {
-    void move_to_direction(glm::vec3 moving_direction)
+    bool move_to_direction(callback_system::CallbackObject* callback_object, glm::vec3 moving_direction)
     {
+        datatypes::AnyValue* any_value_universe_pointer = callback_object->get_any_value("universe_pointer");
+
+        if (any_value_universe_pointer == nullptr)
+        {
+            std::cerr << "Error: universe_pointer not found!\n";
+            return false;
+        }
+
+        if (any_value_universe_pointer->type != datatypes::UNIVERSE_POINTER)
+        {
+            std::cerr << "Invalid datatype: " << any_value_universe_pointer->type << ", should be " << datatypes::UNIVERSE_POINTER << "\n";
+            return false;
+        }
+
+        ontology::Universe* universe = any_value_universe_pointer->universe_pointer;
+
+        if (universe == nullptr)
+        {
+            return false;
+        }
+
         GLfloat temp_speed;
 
         if (is_first_turbo_pressed && is_second_turbo_pressed)
@@ -41,7 +62,9 @@ namespace ajokki
         {
             temp_speed = speed;
         }
-        position += temp_speed * delta_time * moving_direction;
+        position += temp_speed * universe->get_delta_time() * moving_direction;
+
+        return true;
     }
 
     datatypes::AnyValue* glfwTerminate_cleanup(
@@ -173,52 +196,52 @@ namespace ajokki
             callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>&)
     {
-        move_to_direction(direction);
+        move_to_direction(callback_object, direction);
         return nullptr;
     }
 
     datatypes::AnyValue* move_backward(
             callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
+            callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>&)
     {
-        move_to_direction(-direction);
+        move_to_direction(callback_object, -direction);
         return nullptr;
     }
 
     datatypes::AnyValue* strafe_left(
             callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
+            callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>&)
     {
-        move_to_direction(-right);
+        move_to_direction(callback_object, -right);
         return nullptr;
     }
 
     datatypes::AnyValue* strafe_right(
             callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
+            callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>&)
     {
-        move_to_direction(right);
+        move_to_direction(callback_object, right);
         return nullptr;
     }
 
     datatypes::AnyValue* ascent(
             callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
+            callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>&)
     {
-        move_to_direction(up);
+        move_to_direction(callback_object, up);
         return nullptr;
     }
 
     datatypes::AnyValue* descent(
             callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
+            callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>&)
     {
-        move_to_direction(-up);
+        move_to_direction(callback_object, -up);
         return nullptr;
     }
 

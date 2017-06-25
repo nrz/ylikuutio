@@ -68,32 +68,32 @@ namespace ajokki
 
     datatypes::AnyValue* move_forward(
             callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
+            callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>&);
 
     datatypes::AnyValue* move_backward(
             callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
+            callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>&);
 
     datatypes::AnyValue* strafe_left(
             callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
+            callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>&);
 
     datatypes::AnyValue* strafe_right(
             callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
+            callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>&);
 
     datatypes::AnyValue* ascent(
             callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
+            callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>&);
 
     datatypes::AnyValue* descent(
             callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
+            callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>&);
 
     datatypes::AnyValue* toggle_invert_mouse(

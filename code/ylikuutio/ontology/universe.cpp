@@ -57,6 +57,10 @@ namespace ontology
         this->world_radius = NAN; // world radius is NAN as long it doesn't get `set` by `SettingMaster`.
         this->setting_master_pointer = nullptr;
 
+        this->delta_time = NAN;
+        this->last_time_before_reading_keyboard = NAN;
+        this->current_time_before_reading_keyboard = NAN;
+
         this->child_vector_pointers_vector.push_back(&this->scene_pointer_vector);
     }
 
@@ -88,6 +92,30 @@ namespace ontology
         this->background_blue = blue;
         this->background_alpha = alpha;
         glClearColor(this->background_red, this->background_green, this->background_blue, this->background_alpha);
+    }
+
+    float Universe::compute_delta_time()
+    {
+        if (std::isnan(this->last_time_before_reading_keyboard))
+        {
+            // `glfwGetTime()` is called here only once, the first time this function is called.
+            this->last_time_before_reading_keyboard = glfwGetTime();
+        }
+
+        this->current_time_before_reading_keyboard = glfwGetTime();
+
+        this->delta_time = static_cast<float>(current_time_before_reading_keyboard - last_time_before_reading_keyboard);
+        return this->delta_time;
+    }
+
+    float Universe::get_delta_time()
+    {
+        return this->delta_time;
+    }
+
+    void Universe::finalize_delta_time_loop()
+    {
+        this->last_time_before_reading_keyboard = this->current_time_before_reading_keyboard;
     }
 
     // Public callbacks.

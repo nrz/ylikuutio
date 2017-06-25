@@ -494,31 +494,43 @@ int main(void)
     callback_system::CallbackEngine* move_forward_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* move_forward_callback_object = new callback_system::CallbackObject(
             &ajokki::move_forward, move_forward_callback_engine);
+    callback_system::CallbackParameter* move_forward_callback_parameter = new callback_system::CallbackParameter(
+            "universe_pointer", new datatypes::AnyValue(my_universe), false, move_forward_callback_object);
 
     // Callback code for key down: move backward.
     callback_system::CallbackEngine* move_backward_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* move_backward_callback_object = new callback_system::CallbackObject(
             &ajokki::move_backward, move_backward_callback_engine);
+    callback_system::CallbackParameter* move_backward_callback_parameter = new callback_system::CallbackParameter(
+            "universe_pointer", new datatypes::AnyValue(my_universe), false, move_backward_callback_object);
 
     // Callback code for key left: strafe left.
     callback_system::CallbackEngine* strafe_left_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* strafe_left_callback_object = new callback_system::CallbackObject(
             &ajokki::strafe_left, strafe_left_callback_engine);
+    callback_system::CallbackParameter* strafe_left_callback_parameter = new callback_system::CallbackParameter(
+            "universe_pointer", new datatypes::AnyValue(my_universe), false, strafe_left_callback_object);
 
     // Callback code for key right: strafe right.
     callback_system::CallbackEngine* strafe_right_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* strafe_right_callback_object = new callback_system::CallbackObject(
             &ajokki::strafe_right, strafe_right_callback_engine);
+    callback_system::CallbackParameter* strafe_right_callback_parameter = new callback_system::CallbackParameter(
+            "universe_pointer", new datatypes::AnyValue(my_universe), false, strafe_right_callback_object);
 
     // Callback code for space: ascent.
     callback_system::CallbackEngine* ascent_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* ascent_callback_object = new callback_system::CallbackObject(
             &ajokki::ascent, ascent_callback_engine);
+    callback_system::CallbackParameter* ascent_callback_parameter = new callback_system::CallbackParameter(
+            "universe_pointer", new datatypes::AnyValue(my_universe), false, ascent_callback_object);
 
     // Callback code for enter: descent.
     callback_system::CallbackEngine* descent_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* descent_callback_object = new callback_system::CallbackObject(
             &ajokki::descent, descent_callback_engine);
+    callback_system::CallbackParameter* descent_callback_parameter = new callback_system::CallbackParameter(
+            "universe_pointer", new datatypes::AnyValue(my_universe), false, descent_callback_object);
 
     // Callback code for I: toggle invert mouse.
     callback_system::CallbackEngine* toggle_invert_mouse_callback_engine = new callback_system::CallbackEngine();
@@ -895,14 +907,7 @@ int main(void)
 
             glfwPollEvents();
 
-            if (std::isnan(last_time_before_reading_keyboard))
-            {
-                // `glfwGetTime()` is called here only once, the first time this function is called.
-                last_time_before_reading_keyboard = glfwGetTime();
-            }
-
-            double current_time_before_reading_keyboard = glfwGetTime();
-            delta_time = float(current_time_before_reading_keyboard - last_time_before_reading_keyboard);
+            my_universe->compute_delta_time();
 
             // Get mouse position
             double xpos, ypos;
@@ -1152,7 +1157,7 @@ int main(void)
             // Swap buffers.
             glfwSwapBuffers(window);
 
-            last_time_before_reading_keyboard = current_time_before_reading_keyboard;
+            my_universe->finalize_delta_time_loop();
         }
 
         // Check if the window was closed.
