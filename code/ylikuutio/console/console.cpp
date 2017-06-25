@@ -176,7 +176,7 @@ namespace console
         // Please note that it is not necessary to be in console to be able to print in console.
         const char* text_char = text.c_str();
 
-        int32_t characters_for_line = this->universe_pointer->get_window_width() / text_size;
+        int32_t characters_for_line = this->universe_pointer->get_window_width() / this->universe_pointer->get_text_size();
 
         std::list<char> text_char_list;
         int32_t current_line_length = 0;
@@ -223,18 +223,18 @@ namespace console
         if (this->in_console)
         {
             // Convert current input into std::string.
-            uint32_t characters_for_line = this->universe_pointer->get_window_width() / text_size;
+            uint32_t characters_for_line = this->universe_pointer->get_window_width() / this->universe_pointer->get_text_size();
 
             // Draw the console to screen using `font2D::printText2D`.
             PrintingStruct printing_struct;
             printing_struct.screen_width = static_cast<GLuint>(this->universe_pointer->get_window_width());
             printing_struct.screen_height = static_cast<GLuint>(this->universe_pointer->get_window_height());
-            printing_struct.text_size = text_size;
-            printing_struct.font_size = font_size;
+            printing_struct.text_size = this->universe_pointer->get_text_size();
+            printing_struct.font_size = this->universe_pointer->get_font_size();
             printing_struct.char_font_texture_file_format = "bmp";
 
             printing_struct.x = 0;
-            printing_struct.y = this->universe_pointer->get_window_height() - (2 * text_size);
+            printing_struct.y = this->universe_pointer->get_window_height() - (2 * this->universe_pointer->get_text_size());
             printing_struct.horizontal_alignment = "left";
             printing_struct.vertical_alignment = "top";
 

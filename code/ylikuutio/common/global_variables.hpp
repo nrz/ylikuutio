@@ -31,10 +31,6 @@
 // without changing GLFW code, which I want to avoid, if possible.
 extern console::Console* global_console_pointer;
 
-// Variables related to the fonts and texts used.
-extern uint32_t text_size;
-extern uint32_t font_size;
-
 // Variable related to voluntary movement.
 extern glm::vec3 position;
 extern glm::vec3 direction;

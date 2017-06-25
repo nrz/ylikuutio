@@ -66,6 +66,9 @@ namespace ontology
         this->aspect_ratio = static_cast<GLfloat>(this->window_width / this->window_height);
         this->initialFoV = 60.0f;
 
+        this->text_size = 40; // default text size.
+        this->font_size = 16; // default font size.
+
         this->max_FPS = 60; // default value max 60 frames per second.
         this->delta_time = NAN;
         this->last_time_before_reading_keyboard = NAN;
@@ -113,6 +116,16 @@ namespace ontology
     uint32_t Universe::get_window_height()
     {
         return this->window_height;
+    }
+
+    uint32_t Universe::get_text_size()
+    {
+        return this->text_size;
+    }
+
+    uint32_t Universe::get_font_size()
+    {
+        return this->font_size;
     }
 
     float Universe::compute_delta_time()

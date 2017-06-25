@@ -207,6 +207,12 @@ namespace ontology
             // this method returns current `window_height`.
             uint32_t get_window_height();
 
+            // this method returns current `text_size`.
+            uint32_t get_text_size();
+
+            // this method returns current `font_size`.
+            uint32_t get_font_size();
+
             // this method computes the new delta time and returns it.
             float compute_delta_time();
 
@@ -288,6 +294,10 @@ namespace ontology
             glm::mat4 ViewMatrix;
             GLfloat aspect_ratio;
             GLfloat initialFoV;
+
+            // Variables related to the fonts and texts used.
+            uint32_t text_size;
+            uint32_t font_size;
 
             // Variables related to timing of events.
             uint32_t max_FPS;

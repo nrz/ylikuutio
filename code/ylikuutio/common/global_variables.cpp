@@ -28,10 +28,6 @@
 // without changing GLFW code, which I want to avoid, if possible.
 console::Console* global_console_pointer = nullptr;
 
-// Variables related to the fonts and texts used.
-uint32_t text_size = 40;
-uint32_t font_size = 16;
-
 // Variable related to voluntary movement.
 glm::vec3 position;
 glm::vec3 direction;
