@@ -172,6 +172,11 @@ namespace config
     class SettingMaster;
 }
 
+namespace console
+{
+    class Console;
+}
+
 namespace ontology
 {
     class Scene;
