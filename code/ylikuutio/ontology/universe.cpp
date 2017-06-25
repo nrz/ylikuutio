@@ -85,15 +85,6 @@ namespace ontology
         ontology::render_children<ontology::Scene*>(this->scene_pointer_vector);
     }
 
-    void Universe::set_background_color(GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha)
-    {
-        this->background_red = red;
-        this->background_green = green;
-        this->background_blue = blue;
-        this->background_alpha = alpha;
-        glClearColor(this->background_red, this->background_green, this->background_blue, this->background_alpha);
-    }
-
     float Universe::compute_delta_time()
     {
         if (std::isnan(this->last_time_before_reading_keyboard))

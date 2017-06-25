@@ -183,8 +183,6 @@ namespace ontology
             // this method renders the entire `Universe`, one `Scene` at a time.
             void render();
 
-            void set_background_color(GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha);
-
             // this method computes the new delta time and returns it.
             float compute_delta_time();
 
