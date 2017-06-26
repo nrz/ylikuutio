@@ -192,7 +192,7 @@ namespace ontology
             // destructor.
             ~Universe();
 
-            // this method renders the entire `Universe`, one `Scene` at a time.
+            // this method renders the active `Scene` of this `Universe`.
             void render();
 
             // this method sets a new `window`.
@@ -261,6 +261,9 @@ namespace ontology
             // this method sets a `Scene` pointer.
             void set_scene_pointer(uint32_t childID, ontology::Scene* child_pointer);
 
+            // this method stes the active `Scene`.
+            void set_active_scene(ontology::Scene* scene);
+
             // this method sets a terrain `Species` pointer.
             void set_terrain_species_pointer(ontology::Species* terrain_species_pointer);
 
@@ -272,6 +275,7 @@ namespace ontology
 
             std::vector<ontology::Scene*> scene_pointer_vector;
             std::queue<uint32_t> free_sceneID_queue;
+            ontology::Scene* active_scene;
 
             config::SettingMaster* setting_master_pointer; // pointer to `SettingMaster`.
             console::Console* console_pointer;             // pointer to `Console`.

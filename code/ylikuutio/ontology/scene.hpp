@@ -34,6 +34,7 @@ namespace ontology
 
             void set_name(std::string name);
 
+            friend class Universe;
             friend class Shader;
             friend class Species;
             template<class T1>
