@@ -433,7 +433,6 @@ int main(void)
     console_struct.font2D_pointer = my_font2D;
 
     console::Console* my_console = new console::Console(console_struct); // create a console.
-    global_console_pointer = my_console;
 
     /*********************************************************************\
      *  Callback engines for action mode keyreleases begin here.         *

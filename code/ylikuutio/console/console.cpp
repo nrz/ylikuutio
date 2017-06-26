@@ -62,6 +62,7 @@ namespace console
 
         // This is a pointer to `ontology::Universe`.
         this->universe_pointer = console_struct.universe_pointer;
+        this->universe_pointer->console_pointer = this;
 
         // This is a pointer to `font2D::Font2D` instance that is used for printing.
         this->font2D_pointer = console_struct.font2D_pointer;
@@ -762,15 +763,29 @@ namespace console
         // Shift (left or right): 0x01
         // Alt (not AltGr):       0x04
         // Shift + Alt:           0x05
-        if ((mods == 0 || mods == 1) &&
-                global_console_pointer->in_console &&
-                !global_console_pointer->is_left_control_pressed &&
-                !global_console_pointer->is_right_control_pressed &&
-                !global_console_pointer->is_left_alt_pressed)
+        ontology::Universe* universe = static_cast<ontology::Universe*>(glfwGetWindowUserPointer(window));
+
+        if (universe == nullptr)
         {
-            global_console_pointer->cursor_it = global_console_pointer->current_input.insert(global_console_pointer->cursor_it, static_cast<char>(codepoint));
-            global_console_pointer->cursor_it++;
-            global_console_pointer->cursor_index++;
+            return;
+        }
+
+        console::Console* console = universe->console_pointer;
+
+        if (console == nullptr)
+        {
+            return;
+        }
+
+        if ((mods == 0 || mods == 1) &&
+                console->in_console &&
+                !console->is_left_control_pressed &&
+                !console->is_right_control_pressed &&
+                !console->is_left_alt_pressed)
+        {
+            console->cursor_it = console->current_input.insert(console->cursor_it, static_cast<char>(codepoint));
+            console->cursor_it++;
+            console->cursor_index++;
         }
     }
 

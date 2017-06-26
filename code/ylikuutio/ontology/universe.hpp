@@ -274,6 +274,7 @@ namespace ontology
             std::queue<uint32_t> free_sceneID_queue;
 
             config::SettingMaster* setting_master_pointer; // pointer to `SettingMaster`.
+            console::Console* console_pointer;             // pointer to `Console`.
 
             // Named entities are stored here so that they can be recalled, if needed.
             std::unordered_map<std::string, datatypes::AnyValue*> entity_anyvalue_map;

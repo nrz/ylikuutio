@@ -56,6 +56,7 @@ namespace ontology
         // constructor.
         this->world_radius = NAN; // world radius is NAN as long it doesn't get `set` by `SettingMaster`.
         this->setting_master_pointer = nullptr;
+        this->console_pointer = nullptr;
 
         // Variables related to the window.
         this->window = nullptr;
@@ -101,6 +102,7 @@ namespace ontology
     void Universe::set_window(GLFWwindow* window)
     {
         this->window = window;
+        glfwSetWindowUserPointer(this->window, this);
     }
 
     GLFWwindow* Universe::get_window()

@@ -23,14 +23,6 @@
 
 // Global variables.
 
-// Variables related to the console.
-// `global_console_pointer` can not be converted into a non-global
-// variable, because the console object needs to be accessed from
-// `void Console::charmods_callback(GLFWwindow* window, unsigned int codepoint, int mods)`
-// and as far as I know there is no way to pass `Universe*` pointer to `charmods_callback`
-// without changing GLFW code, which I want to avoid, if possible.
-extern console::Console* global_console_pointer;
-
 // Variable related to voluntary movement.
 extern glm::vec3 position;
 extern glm::vec3 direction;
