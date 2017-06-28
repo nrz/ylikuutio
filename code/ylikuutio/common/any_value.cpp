@@ -1,4 +1,5 @@
 #include "any_value.hpp"
+#include "spherical_coordinates_struct.hpp"
 
 // Include standard headers
 #include <cerrno>   // errno
@@ -87,6 +88,8 @@ namespace datatypes
                 return "ontology::Text2D*";
             case (CONSOLE_POINTER):
                 return "console::Console*";
+            case (SPHERICAL_COORDINATES_STRUCT_POINTER):
+                return "SphericalCoordinatesStruct*";
             default:
                 return "TODO: define string for this datatype!";
         }
@@ -449,6 +452,16 @@ namespace datatypes
                     this->console_pointer = console_pointer;
                     return true;
                 }
+            case (SPHERICAL_COORDINATES_STRUCT_POINTER):
+                {
+                    SphericalCoordinatesStruct* spherical_coordinates_struct_pointer = (SphericalCoordinatesStruct*) (std::strtoll(value_string.c_str(), &end, 0));
+                    if (errno == ERANGE)
+                    {
+                        return false;
+                    }
+                    this->spherical_coordinates_struct_pointer = spherical_coordinates_struct_pointer;
+                    return true;
+                }
             default:
                 return false;
         }
@@ -480,6 +493,7 @@ namespace datatypes
         this->symbiosis_pointer = nullptr;
         this->font2D_pointer = nullptr;
         this->console_pointer = nullptr;
+        this->spherical_coordinates_struct_pointer = nullptr;
     }
 
     AnyValue::AnyValue(std::string type, std::string value_string)
@@ -1031,6 +1045,25 @@ namespace datatypes
         {
             this->type = datatypes::CONSOLE_POINTER;
             this->console_pointer = console_pointer;
+        }
+    }
+
+    AnyValue::AnyValue(SphericalCoordinatesStruct* spherical_coordinates_struct_pointer)
+    {
+        // constructor.
+        this->set_default_values();
+        this->type = datatypes::SPHERICAL_COORDINATES_STRUCT_POINTER;
+        this->spherical_coordinates_struct_pointer = spherical_coordinates_struct_pointer;
+    }
+
+    AnyValue::AnyValue(std::string type, SphericalCoordinatesStruct* spherical_coordinates_struct_pointer)
+    {
+        // constructor.
+        this->set_default_values();
+        if (std::strcmp(type.c_str(), "SphericalCoordinatesStruct*"))
+        {
+            this->type = datatypes::SPHERICAL_COORDINATES_STRUCT_POINTER;
+            this->spherical_coordinates_struct_pointer = spherical_coordinates_struct_pointer;
         }
     }
 }
