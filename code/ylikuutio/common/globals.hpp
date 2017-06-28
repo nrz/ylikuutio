@@ -138,7 +138,7 @@ typedef struct
 typedef struct SphericalWorldStruct
 {
     SphericalWorldStruct()
-        :SRTM_latitude_step_in_degrees(1.0f/1200.0f), SRTM_longitude_step_in_degrees(1.0f/1200.0f)
+        : SRTM_latitude_step_in_degrees(1.0f/1200.0f), SRTM_longitude_step_in_degrees(1.0f/1200.0f)
     {
         // constructor.
     }
