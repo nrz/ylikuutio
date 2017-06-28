@@ -45,6 +45,7 @@
 #endif
 
 // Include standard headers
+#include <cmath>    // NAN, std::isnan, std::pow
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 #include <unordered_map> // std::unordered_map
@@ -128,8 +129,13 @@ typedef struct
     const char* vertical_alignment;
 } PrintingStruct;
 
-typedef struct
+typedef struct SphericalCoordinatesStruct
 {
+    SphericalCoordinatesStruct()
+        : rho(NAN), theta(NAN), phi(NAN)
+    {
+        // constructor.
+    }
     double rho;
     double theta;
     double phi;
