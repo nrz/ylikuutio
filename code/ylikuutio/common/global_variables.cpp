@@ -1,4 +1,5 @@
 #include "global_variables.hpp"
+#include "spherical_coordinates_struct.hpp"
 
 // Include GLEW
 #ifndef __GL_GLEW_H_INCLUDED

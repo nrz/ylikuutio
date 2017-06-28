@@ -2,6 +2,7 @@
 #define __GLOBAL_VARIABLES_HPP_INCLUDED
 
 #include "globals.hpp"
+#include "spherical_coordinates_struct.hpp"
 
 // Include GLEW
 #ifndef __GL_GLEW_H_INCLUDED

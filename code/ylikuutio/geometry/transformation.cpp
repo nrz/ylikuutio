@@ -4,6 +4,7 @@
 #endif
 
 #include "transformation.hpp"
+#include "code/ylikuutio/common/spherical_coordinates_struct.hpp"
 #include "code/ylikuutio/common/globals.hpp"
 
 // Include GLEW

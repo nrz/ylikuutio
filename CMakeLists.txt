@@ -450,6 +450,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/common/global_variables.cpp
     code/ylikuutio/common/global_variables.hpp
     code/ylikuutio/common/globals.hpp
+    code/ylikuutio/common/spherical_coordinates_struct.hpp
     code/ylikuutio/common/template_helpers.hpp
 
     # config, in alphabetical order.
