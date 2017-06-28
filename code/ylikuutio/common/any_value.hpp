@@ -3,6 +3,12 @@
 
 #include "spherical_coordinates_struct.hpp"
 
+// Include GLM
+#ifndef __GLM_GLM_HPP_INCLUDED
+#define __GLM_GLM_HPP_INCLUDED
+#include <glm/glm.hpp> // glm
+#endif
+
 // Include standard headers
 #include <cmath>    // NAN, std::isnan, std::pow
 #include <iostream> // std::cout, std::cin, std::cerr
@@ -57,7 +63,8 @@ namespace datatypes
         SYMBIOSIS_POINTER,
         TEXT2D_POINTER,
         CONSOLE_POINTER,
-        SPHERICAL_COORDINATES_STRUCT_POINTER
+        SPHERICAL_COORDINATES_STRUCT_POINTER,
+        GLM_VEC3_POINTER
     };
 
     typedef class AnyValue
@@ -93,6 +100,7 @@ namespace datatypes
             AnyValue(ontology::Font2D* font2D_pointer);
             AnyValue(console::Console* console_pointer);
             AnyValue(SphericalCoordinatesStruct* spherical_coordinates_struct_pointer);
+            AnyValue(glm::vec3* glm_vec3_pointer);
 
             AnyValue(std::string type, bool bool_value);
             AnyValue(std::string type, char char_value);
@@ -118,6 +126,7 @@ namespace datatypes
             AnyValue(std::string type, ontology::Font2D* font2D_pointer);
             AnyValue(std::string type, console::Console* console_pointer);
             AnyValue(std::string type, SphericalCoordinatesStruct* spherical_coordinates_struct_pointer);
+            AnyValue(std::string type, glm::vec3* glm_vec3_pointer);
 
             int type;
             bool bool_value;
@@ -144,6 +153,7 @@ namespace datatypes
             ontology::Font2D* font2D_pointer;
             console::Console* console_pointer;
             SphericalCoordinatesStruct* spherical_coordinates_struct_pointer;
+            glm::vec3* glm_vec3_pointer;
 
         private:
             void set_default_values();

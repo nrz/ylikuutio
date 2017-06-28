@@ -1,6 +1,12 @@
 #include "any_value.hpp"
 #include "spherical_coordinates_struct.hpp"
 
+// Include GLM
+#ifndef __GLM_GLM_HPP_INCLUDED
+#define __GLM_GLM_HPP_INCLUDED
+#include <glm/glm.hpp> // glm
+#endif
+
 // Include standard headers
 #include <cerrno>   // errno
 #include <cmath>    // NAN, std::isnan, std::pow
@@ -90,6 +96,8 @@ namespace datatypes
                 return "console::Console*";
             case (SPHERICAL_COORDINATES_STRUCT_POINTER):
                 return "SphericalCoordinatesStruct*";
+            case (GLM_VEC3_POINTER):
+                return "glm::vec3*";
             default:
                 return "TODO: define string for this datatype!";
         }
@@ -460,6 +468,16 @@ namespace datatypes
                         return false;
                     }
                     this->spherical_coordinates_struct_pointer = spherical_coordinates_struct_pointer;
+                    return true;
+                }
+            case (GLM_VEC3_POINTER):
+                {
+                    glm::vec3* glm_vec3_pointer = (glm::vec3*) (std::strtoll(value_string.c_str(), &end, 0));
+                    if (errno == ERANGE)
+                    {
+                        return false;
+                    }
+                    this->glm_vec3_pointer = glm_vec3_pointer;
                     return true;
                 }
             default:
