@@ -21,21 +21,21 @@ namespace ajokki
         red_setting_struct.setting_master_pointer = setting_master;
         red_setting_struct.activate_callback = &config::SettingMaster::activate_background_color;
         red_setting_struct.should_ylikuutio_call_activate_callback_now = false;
-        config::Setting* my_background_red = new config::Setting(red_setting_struct);
+        new config::Setting(red_setting_struct);
 
         SettingStruct green_setting_struct(any_value_float_zero);
         green_setting_struct.name = "green";
         green_setting_struct.setting_master_pointer = setting_master;
         green_setting_struct.activate_callback = &config::SettingMaster::activate_background_color;
         green_setting_struct.should_ylikuutio_call_activate_callback_now = false;
-        config::Setting* my_background_green = new config::Setting(green_setting_struct);
+        new config::Setting(green_setting_struct);
 
         SettingStruct blue_setting_struct(any_value_float_one);
         blue_setting_struct.name = "blue";
         blue_setting_struct.setting_master_pointer = setting_master;
         blue_setting_struct.activate_callback = &config::SettingMaster::activate_background_color;
         blue_setting_struct.should_ylikuutio_call_activate_callback_now = false;
-        config::Setting* my_background_blue = new config::Setting(blue_setting_struct);
+        new config::Setting(blue_setting_struct);
 
         SettingStruct alpha_setting_struct(any_value_float_zero);
         alpha_setting_struct.name = "alpha";
@@ -43,6 +43,6 @@ namespace ajokki
         alpha_setting_struct.setting_master_pointer = setting_master;
         alpha_setting_struct.activate_callback = &config::SettingMaster::activate_background_color;
         alpha_setting_struct.should_ylikuutio_call_activate_callback_now = true;
-        config::Setting* my_background_alpha = new config::Setting(alpha_setting_struct);
+        new config::Setting(alpha_setting_struct);
     }
 }

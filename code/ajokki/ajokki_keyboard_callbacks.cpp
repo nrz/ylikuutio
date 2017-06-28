@@ -169,8 +169,7 @@ namespace ajokki
             std::vector<callback_system::CallbackParameter*>&)
     {
         uint32_t exit_program_magic_number = EXIT_PROGRAM_MAGIC_NUMBER;
-        datatypes::AnyValue* any_value_exit_program = new datatypes::AnyValue(exit_program_magic_number);
-        return any_value_exit_program;
+        return new datatypes::AnyValue(exit_program_magic_number);
     }
 
     datatypes::AnyValue* first_turbo(
