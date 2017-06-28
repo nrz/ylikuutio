@@ -28,6 +28,7 @@
 #include <queue>    // std::queue
 #include <unordered_map> // std::unordered_map
 #include <stdint.h> // uint32_t etc.
+#include <string>   // std::string
 #include <vector>   // std::vector
 
 // `Universe`, `Scene`, `Shader`, `Material`, `Species`, `Object`.
