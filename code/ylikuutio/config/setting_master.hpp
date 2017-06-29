@@ -35,12 +35,12 @@ namespace config
 
             // Public callbacks.
 
-            static datatypes::AnyValue* set(
+            static datatypes::AnyValue* set_and_print(
                     console::Console* console,
                     ontology::Universe* universe,
                     std::vector<std::string>& command_parameters);
 
-            static datatypes::AnyValue* get(
+            static datatypes::AnyValue* get_and_print(
                     console::Console* console,
                     ontology::Universe* universe,
                     std::vector<std::string>& command_parameters);

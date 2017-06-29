@@ -760,8 +760,8 @@ int main(void)
      \********************************************************************/
 
     // Config callbacks.
-    command_callback_map["set"] = &config::SettingMaster::set;
-    command_callback_map["get"] = &config::SettingMaster::get;
+    command_callback_map["set"] = &config::SettingMaster::set_and_print;
+    command_callback_map["get"] = &config::SettingMaster::get_and_print;
 
     // Object handling callbacks.
     command_callback_map["delete"] = &ontology::Universe::delete_entity;

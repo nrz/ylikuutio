@@ -53,7 +53,7 @@ namespace config
 
     // public callbacks.
 
-    datatypes::AnyValue* SettingMaster::set(
+    datatypes::AnyValue* SettingMaster::set_and_print(
             console::Console* console,
             ontology::Universe* universe,
             std::vector<std::string>& command_parameters)
@@ -129,7 +129,7 @@ namespace config
         return nullptr;
     }
 
-    datatypes::AnyValue* SettingMaster::get(
+    datatypes::AnyValue* SettingMaster::get_and_print(
             console::Console* console,
             ontology::Universe* universe,
             std::vector<std::string>& command_parameters)
