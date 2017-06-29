@@ -51,6 +51,11 @@ namespace config
         return this->help();
     }
 
+    config::Setting* SettingMaster::get(ontology::Universe* universe, std::string& setting_name)
+    {
+        return this->setting_pointer_map[setting_name];
+    }
+
     // public callbacks.
 
     datatypes::AnyValue* SettingMaster::set_and_print(
@@ -79,7 +84,7 @@ namespace config
             // Check the validity of the variable name.
             if (setting_master->is_setting(setting_name))
             {
-                config::Setting* setting = setting_master->setting_pointer_map[setting_name];
+                config::Setting* setting = setting_master->get(universe, setting_name);
 
                 if (setting != nullptr)
                 {
