@@ -69,6 +69,36 @@ namespace ontology
             std::unordered_map<std::string, ontology::Object*> name_map;
 
             std::string name;                      // name of this entity.
+
+            // Variables related to location and orientation.
+
+            // `cartesian_coordinates` can be accessed as a vector or as single coordinates `x`, `y`, `z`.
+            glm::vec3 cartesian_coordinates;
+            double x;
+            double y;
+            double z;
+
+            // `direction` can be accessed as a vector or as single coordinates `pitch`, `roll`, `yaw`.
+            glm::vec3 direction;
+            float pitch;
+            float roll;
+            float yaw;
+
+            glm::vec3 right; // note: `right` can not be set directly using console.
+            glm::vec3 up;    // note: `up` can not be set directly using console.
+
+            // `spherical_coordinates` can be accessed as a vector or as single coordinates `rho`, `theta`, `phi`.
+            SphericalCoordinatesStruct* spherical_coordinates;
+            double rho;
+            double theta;
+            double phi;
+
+            double horizontal_angle;
+            double vertical_angle;
+
+            // Variables related to physics.
+            float gravity;
+            float fall_speed;
     };
 }
 
