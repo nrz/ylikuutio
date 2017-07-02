@@ -298,47 +298,47 @@ namespace ontology
 
     void Universe::compute_matrices_from_inputs()
     {
-        if (!is_flight_mode_in_use)
+        if (!globals::is_flight_mode_in_use)
         {
-            fallSpeed += gravity;
-            position.y -= fallSpeed;
+            globals::fallSpeed += globals::gravity;
+            globals::position.y -= globals::fallSpeed;
         }
 
         GLfloat FoV = this->initialFoV;// - 5 * glfwGetMouseWheel(); // Now GLFW 3 requires setting up a callback for this. It's a bit too complicated for this beginner's tutorial, so it's disabled instead.
 
         // adjust position according to the ground.
-        if (!is_flight_mode_in_use)
+        if (!globals::is_flight_mode_in_use)
         {
             if (this->terrain_species_pointer != nullptr)
             {
-                GLfloat ground_y = ontology::get_floor_level(static_cast<ontology::Species*>(this->terrain_species_pointer), position);
+                GLfloat ground_y = ontology::get_floor_level(static_cast<ontology::Species*>(this->terrain_species_pointer), globals::position);
 
-                if (!std::isnan(ground_y) && position.y < ground_y)
+                if (!std::isnan(ground_y) && globals::position.y < ground_y)
                 {
-                    position.y = ground_y;
-                    fallSpeed = 0.0f;
+                    globals::position.y = ground_y;
+                    globals::fallSpeed = 0.0f;
                 }
             }
         }
 
-        if (testing_spherical_world_in_use)
+        if (globals::testing_spherical_world_in_use)
         {
             // compute spherical coordinates.
-            spherical_position.rho = sqrt((position.x * position.x) + (position.y * position.y) + (position.z * position.z));
-            spherical_position.theta = RADIANS_TO_DEGREES(atan2(sqrt((position.x * position.x) + (position.y * position.y)), position.z));
-            spherical_position.phi = RADIANS_TO_DEGREES(atan2(position.y, position.x));
+            globals::spherical_position.rho = sqrt((globals::position.x * globals::position.x) + (globals::position.y * globals::position.y) + (globals::position.z * globals::position.z));
+            globals::spherical_position.theta = RADIANS_TO_DEGREES(atan2(sqrt((globals::position.x * globals::position.x) + (globals::position.y * globals::position.y)), globals::position.z));
+            globals::spherical_position.phi = RADIANS_TO_DEGREES(atan2(globals::position.y, globals::position.x));
         }
 
-        camera_position = position;
+        camera_position = globals::position;
         camera_position.y += 2.0f;
 
         // Projection matrix : 45° Field of View, aspect ratio, display range : 0.1 unit <-> 100 units
         ProjectionMatrix = glm::perspective(FoV, aspect_ratio, 0.001f, 5000.0f + 2.0f * static_cast<GLfloat>(this->world_radius));
         // Camera matrix
         ViewMatrix = glm::lookAt(
-                camera_position,             // Camera is here
-                camera_position + direction, // and looks here : at the same position, plus "direction"
-                up                           // Head is up (set to 0,-1,0 to look upside-down)
+                camera_position,                      // Camera is here
+                camera_position + globals::direction, // and looks here : at the same position, plus "direction"
+                globals::up                           // Head is up (set to 0,-1,0 to look upside-down)
                 );
     }
 }

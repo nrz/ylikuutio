@@ -124,22 +124,22 @@ int main(void)
 
     // testing_spherical_world_in_use = true;
 
-    if (testing_spherical_world_in_use)
+    if (globals::testing_spherical_world_in_use)
     {
-        is_flight_mode_in_use = true;
+        globals::is_flight_mode_in_use = true;
 
-        position = glm::vec3(-5682.32f, -1641.20f, 2376.45f);
+        globals::position = glm::vec3(-5682.32f, -1641.20f, 2376.45f);
     }
     else
     {
-        position = glm::vec3(100.0f, 100.0f, 100.0f);
+        globals::position = glm::vec3(100.0f, 100.0f, 100.0f);
     }
     // Initial horizontal angle : toward -Z
     // horizontalAngle = 0.0f;
-    horizontalAngle = 42.42f;
+    globals::horizontalAngle = 42.42f;
     // Initial vertical angle : none
     // verticalAngle = PI / 2;
-    verticalAngle = 7.44f;
+    globals::verticalAngle = 7.44f;
 
     callback_system::CallbackEngine* cleanup_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* cleanup_callback_object = new callback_system::CallbackObject(nullptr, cleanup_callback_engine);
@@ -227,7 +227,7 @@ int main(void)
 
     ontology::Species* terrain_species;
 
-    if (testing_spherical_world_in_use)
+    if (globals::testing_spherical_world_in_use)
     {
         // Create the species, store it in `terrain_species`.
         SpeciesStruct(SRTM_terrain_species_struct);
@@ -244,8 +244,8 @@ int main(void)
         SRTM_terrain_species_struct.divisor = 1000.0f;
         terrain_species = new ontology::Species(SRTM_terrain_species_struct);
 
-        turbo_factor = 100.0f;
-        twin_turbo_factor = 50000.0f;
+        globals::turbo_factor = 100.0f;
+        globals::twin_turbo_factor = 50000.0f;
     }
     else
     {
@@ -273,10 +273,10 @@ int main(void)
 
         terrain_species->set_name("Helsinki");
 
-        is_flight_mode_in_use = true;
+        globals::is_flight_mode_in_use = true;
 
-        turbo_factor = 5.0f;
-        twin_turbo_factor = 100.0f;
+        globals::turbo_factor = 5.0f;
+        globals::twin_turbo_factor = 100.0f;
     }
 
     // Create terrain1, store it in `terrain1`.
@@ -826,43 +826,43 @@ int main(void)
             // Reset mouse position for next frame
             glfwSetCursorPos(my_universe->get_window(), my_universe->get_window_width() / 2, my_universe->get_window_height() / 2);
 
-            if (hasMouseEverMoved || (abs(xpos) > 0.0001) || (abs(ypos) > 0.0001))
+            if (globals::hasMouseEverMoved || (abs(xpos) > 0.0001) || (abs(ypos) > 0.0001))
             {
-                hasMouseEverMoved = true;
+                globals::hasMouseEverMoved = true;
 
                 // Compute new orientation
-                horizontalAngle += mouseSpeed * GLfloat(my_universe->get_window_width() / 2 - xpos);
-                horizontalAngle = remainder(horizontalAngle, (2.0f * PI));
+                globals::horizontalAngle += globals::mouseSpeed * GLfloat(my_universe->get_window_width() / 2 - xpos);
+                globals::horizontalAngle = remainder(globals::horizontalAngle, (2.0f * PI));
 
-                if (is_invert_mouse_in_use)
+                if (globals::is_invert_mouse_in_use)
                 {
                     // invert mouse.
-                    verticalAngle -= mouseSpeed * GLfloat(my_universe->get_window_height() / 2 - ypos);
+                    globals::verticalAngle -= globals::mouseSpeed * GLfloat(my_universe->get_window_height() / 2 - ypos);
                 }
                 else
                 {
                     // don't invert mouse.
-                    verticalAngle += mouseSpeed * GLfloat(my_universe->get_window_height() / 2 - ypos);
+                    globals::verticalAngle += globals::mouseSpeed * GLfloat(my_universe->get_window_height() / 2 - ypos);
                 }
-                verticalAngle = remainder(verticalAngle, (2.0f * PI));
+                globals::verticalAngle = remainder(globals::verticalAngle, (2.0f * PI));
             }
 
             // Direction : Spherical coordinates to Cartesian coordinates conversion
-            direction = glm::vec3(
-                    cos(verticalAngle) * sin(horizontalAngle),
-                    sin(verticalAngle),
-                    cos(verticalAngle) * cos(horizontalAngle)
+            globals::direction = glm::vec3(
+                    cos(globals::verticalAngle) * sin(globals::horizontalAngle),
+                    sin(globals::verticalAngle),
+                    cos(globals::verticalAngle) * cos(globals::horizontalAngle)
                     );
 
             // Right vector
-            right = glm::vec3(
-                    sin(horizontalAngle - PI/2.0f),
+            globals::right = glm::vec3(
+                    sin(globals::horizontalAngle - PI/2.0f),
                     0,
-                    cos(horizontalAngle - PI/2.0f)
+                    cos(globals::horizontalAngle - PI/2.0f)
                     );
 
             // Up vector
-            up = glm::cross(right, direction);
+            globals::up = glm::cross(globals::right, globals::direction);
 
             // Check for key releases and call corresponding callbacks.
             for (uint32_t i = 0; i < (*current_keyrelease_callback_engine_vector_pointer).size(); i++)
@@ -905,7 +905,7 @@ int main(void)
                             }
 
                             // Do not display help screen when in console.
-                            can_display_help_screen = false;
+                            globals::can_display_help_screen = false;
 
                             delete any_value;
                             break;
@@ -923,7 +923,7 @@ int main(void)
                             }
 
                             // Enable display help screen when not in console.
-                            can_display_help_screen = true;
+                            globals::can_display_help_screen = true;
 
                             delete any_value;
                             break;
@@ -967,13 +967,13 @@ int main(void)
                     angles_and_coordinates_text,
                     sizeof(angles_and_coordinates_text),
                     "%.2f,%.2f rad; %.2f,%.2f deg\\n(%.2f,%.2f,%.2f)",
-                    horizontalAngle,
-                    verticalAngle,
-                    RADIANS_TO_DEGREES(horizontalAngle),
-                    RADIANS_TO_DEGREES(verticalAngle),
-                    position.x,
-                    position.y,
-                    position.z);
+                    globals::horizontalAngle,
+                    globals::verticalAngle,
+                    RADIANS_TO_DEGREES(globals::horizontalAngle),
+                    RADIANS_TO_DEGREES(globals::verticalAngle),
+                    globals::position.x,
+                    globals::position.y,
+                    globals::position.z);
 
             char time_text[256];
             std::snprintf(time_text, sizeof(time_text), "%.2f sec", glfwGetTime());
@@ -1003,16 +1003,16 @@ int main(void)
                     "U  uvmap texture%s\\n"
                     "T  terrain species\\n"
                     "A  suzanne species\\n",
-                    (is_invert_mouse_in_use ? on_text : off_text),
-                    (is_flight_mode_in_use ? on_text : off_text),
+                    (globals::is_invert_mouse_in_use ? on_text : off_text),
+                    (globals::is_flight_mode_in_use ? on_text : off_text),
                     (!does_suzanne_species_have_uvmap_texture ? in_use_text : null_text),
                     (does_suzanne_species_have_uvmap_texture ? in_use_text : null_text));
 
             char spherical_coordinates_text[256];
 
-            if (testing_spherical_world_in_use)
+            if (globals::testing_spherical_world_in_use)
             {
-                std::snprintf(spherical_coordinates_text, sizeof(spherical_coordinates_text), "rho:%.2f theta:%.2f phi:%.2f", spherical_position.rho, spherical_position.theta, spherical_position.phi);
+                std::snprintf(spherical_coordinates_text, sizeof(spherical_coordinates_text), "rho:%.2f theta:%.2f phi:%.2f", globals::spherical_position.rho, globals::spherical_position.theta, globals::spherical_position.phi);
             }
 
             // print cartesian coordinates on bottom left corner.
@@ -1023,7 +1023,7 @@ int main(void)
             printing_struct.vertical_alignment = "bottom";
             my_font2D->printText2D(printing_struct);
 
-            if (in_help_mode && can_display_help_screen)
+            if (globals::in_help_mode && globals::can_display_help_screen)
             {
                 // print help text.
                 printing_struct.x = 0;
@@ -1034,7 +1034,7 @@ int main(void)
                 my_font2D->printText2D(printing_struct);
             }
 
-            if (testing_spherical_world_in_use)
+            if (globals::testing_spherical_world_in_use)
             {
                 // print spherical coordinates on bottom left corner.
                 printing_struct.x = 0;

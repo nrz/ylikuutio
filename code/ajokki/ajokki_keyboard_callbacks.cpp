@@ -50,19 +50,19 @@ namespace ajokki
 
         GLfloat temp_speed;
 
-        if (is_first_turbo_pressed && is_second_turbo_pressed)
+        if (globals::is_first_turbo_pressed && globals::is_second_turbo_pressed)
         {
-            temp_speed = twin_turbo_factor * speed;
+            temp_speed = globals::twin_turbo_factor * globals::speed;
         }
-        else if (is_first_turbo_pressed || is_second_turbo_pressed)
+        else if (globals::is_first_turbo_pressed || globals::is_second_turbo_pressed)
         {
-            temp_speed = turbo_factor * speed;
+            temp_speed = globals::turbo_factor * globals::speed;
         }
         else
         {
-            temp_speed = speed;
+            temp_speed = globals::speed;
         }
-        position += temp_speed * universe->get_delta_time() * moving_direction;
+        globals::position += temp_speed * universe->get_delta_time() * moving_direction;
 
         return true;
     }
@@ -119,7 +119,7 @@ namespace ajokki
             callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>&)
     {
-        is_first_turbo_pressed = false;
+        globals::is_first_turbo_pressed = false;
         return nullptr;
     }
 
@@ -128,7 +128,7 @@ namespace ajokki
             callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>&)
     {
-        is_second_turbo_pressed = false;
+        globals::is_second_turbo_pressed = false;
         return nullptr;
     }
 
@@ -137,7 +137,7 @@ namespace ajokki
             callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*>&)
     {
-        can_toggle_invert_mouse = true;
+        globals::can_toggle_invert_mouse = true;
         return nullptr;
     }
 
@@ -146,7 +146,7 @@ namespace ajokki
             callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*>&)
     {
-        can_toggle_flight_mode = true;
+        globals::can_toggle_flight_mode = true;
         return nullptr;
     }
 
@@ -155,7 +155,7 @@ namespace ajokki
             callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*>&)
     {
-        can_toggle_help_mode = true;
+        globals::can_toggle_help_mode = true;
         return nullptr;
     }
 
@@ -177,7 +177,7 @@ namespace ajokki
             callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*>&)
     {
-        is_first_turbo_pressed = true;
+        globals::is_first_turbo_pressed = true;
         return nullptr;
     }
 
@@ -186,7 +186,7 @@ namespace ajokki
             callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>&)
     {
-        is_second_turbo_pressed = true;
+        globals::is_second_turbo_pressed = true;
         return nullptr;
     }
 
@@ -195,7 +195,7 @@ namespace ajokki
             callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>&)
     {
-        move_to_direction(callback_object, direction);
+        move_to_direction(callback_object, globals::direction);
         return nullptr;
     }
 
@@ -204,7 +204,7 @@ namespace ajokki
             callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>&)
     {
-        move_to_direction(callback_object, -direction);
+        move_to_direction(callback_object, -globals::direction);
         return nullptr;
     }
 
@@ -213,7 +213,7 @@ namespace ajokki
             callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>&)
     {
-        move_to_direction(callback_object, -right);
+        move_to_direction(callback_object, -globals::right);
         return nullptr;
     }
 
@@ -222,7 +222,7 @@ namespace ajokki
             callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>&)
     {
-        move_to_direction(callback_object, right);
+        move_to_direction(callback_object, globals::right);
         return nullptr;
     }
 
@@ -231,7 +231,7 @@ namespace ajokki
             callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>&)
     {
-        move_to_direction(callback_object, up);
+        move_to_direction(callback_object, globals::up);
         return nullptr;
     }
 
@@ -240,7 +240,7 @@ namespace ajokki
             callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>&)
     {
-        move_to_direction(callback_object, -up);
+        move_to_direction(callback_object, -globals::up);
         return nullptr;
     }
 
@@ -249,10 +249,10 @@ namespace ajokki
             callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*>&)
     {
-        if (can_toggle_invert_mouse)
+        if (globals::can_toggle_invert_mouse)
         {
-            is_invert_mouse_in_use = !is_invert_mouse_in_use;
-            can_toggle_invert_mouse = false;
+            globals::is_invert_mouse_in_use = !globals::is_invert_mouse_in_use;
+            globals::can_toggle_invert_mouse = false;
         }
         return nullptr;
     }
@@ -262,11 +262,11 @@ namespace ajokki
             callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*>&)
     {
-        if (can_toggle_flight_mode)
+        if (globals::can_toggle_flight_mode)
         {
-            is_flight_mode_in_use = !is_flight_mode_in_use;
-            fallSpeed = 0.0f;
-            can_toggle_flight_mode = false;
+            globals::is_flight_mode_in_use = !globals::is_flight_mode_in_use;
+            globals::fallSpeed = 0.0f;
+            globals::can_toggle_flight_mode = false;
         }
         return nullptr;
     }
@@ -276,10 +276,10 @@ namespace ajokki
             callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*>&)
     {
-        if (can_toggle_help_mode)
+        if (globals::can_toggle_help_mode)
         {
-            in_help_mode = !in_help_mode;
-            can_toggle_help_mode = false;
+            globals::in_help_mode = !globals::in_help_mode;
+            globals::can_toggle_help_mode = false;
         }
         return nullptr;
     }
