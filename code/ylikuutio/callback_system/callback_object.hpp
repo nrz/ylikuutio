@@ -57,8 +57,6 @@ namespace callback_system
             // execute this callback.
             virtual datatypes::AnyValue* execute();
 
-            uint32_t get_callback_parameterID(std::vector<callback_system::CallbackParameter*>& child_pointer_vector, std::queue<uint32_t>& free_childID_queue);
-
             callback_system::CallbackEngine* parent_pointer; // pointer to the callback engine.
 
             uint32_t childID;                     // callback object ID, returned by `callback_system::CallbackEngine->get_callback_objectID()`.
