@@ -7,7 +7,6 @@
 #include "code/ylikuutio/triangulation/quad_triangulation.hpp"
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
 #include "code/ylikuutio/common/globals.hpp"
-#include "code/ylikuutio/common/global_variables.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED

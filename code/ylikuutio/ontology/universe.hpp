@@ -226,9 +226,6 @@ namespace ontology
             // this method returns current `max_FPS`.
             uint32_t get_max_FPS();
 
-            // this method computes new location and orientation.
-            void compute_new_location_and_orientation();
-
             bool set(std::string& setting_name, datatypes::AnyValue* setting_any_value);
 
             // this method returns a pointer to `config::Setting` corresponding to the given `key`.
@@ -250,6 +247,51 @@ namespace ontology
                     std::vector<std::string>& command_parameters);
 
             // Public callbacks end here.
+
+            // Variables related to location and orientation.
+
+            // `cartesian_coordinates` can be accessed as a vector or as single coordinates `x`, `y`, `z`.
+            glm::vec3 cartesian_coordinates;
+
+            // `direction` can be accessed as a vector or as single coordinates `pitch`, `roll`, `yaw`.
+            glm::vec3 direction;
+
+            glm::vec3 right; // note: `right` can not be set directly using console.
+            glm::vec3 up;    // note: `up` can not be set directly using console.
+
+            // `spherical_coordinates` can be accessed as a vector or as single coordinates `rho`, `theta`, `phi`.
+            SphericalCoordinatesStruct* spherical_coordinates;
+
+            double horizontal_angle;
+            double vertical_angle;
+
+            float speed;
+            float turbo_factor;
+            float twin_turbo_factor;
+            float mouse_speed;
+            bool has_mouse_ever_moved;
+            bool can_toggle_invert_mouse;
+            bool is_invert_mouse_in_use;
+            bool can_toggle_flight_mode;
+            bool is_flight_mode_in_use;
+            bool is_first_turbo_pressed;
+            bool is_second_turbo_pressed;
+
+            // Variables related to physics.
+            float gravity;
+            float fall_speed;
+
+            // Variables related to the current `Scene`.
+            bool testing_spherical_world_in_use;
+
+            // Variables related to debug & testing keys.
+            bool is_key_I_released;
+            bool is_key_F_released;
+
+            // Variables related to help mode.
+            bool in_help_mode;
+            bool can_toggle_help_mode;
+            bool can_display_help_screen;
 
             friend class Scene;
             friend class Shader;
@@ -306,7 +348,6 @@ namespace ontology
             uint32_t window_height;
 
             // Variables related to the camera.
-            glm::vec3 camera_cartesian_coordinates;
             glm::mat4 ProjectionMatrix;
             glm::mat4 ViewMatrix;
             GLfloat aspect_ratio;
@@ -322,56 +363,6 @@ namespace ontology
 
             double last_time_before_reading_keyboard;
             double current_time_before_reading_keyboard;
-
-            // Variables related to location and orientation.
-
-            // `cartesian_coordinates` can be accessed as a vector or as single coordinates `x`, `y`, `z`.
-            glm::vec3 cartesian_coordinates;
-            double x;
-            double y;
-            double z;
-
-            // `direction` can be accessed as a vector or as single coordinates `pitch`, `roll`, `yaw`.
-            glm::vec3 direction;
-            float pitch;
-            float roll;
-            float yaw;
-
-            glm::vec3 right; // note: `right` can not be set directly using console.
-            glm::vec3 up;    // note: `up` can not be set directly using console.
-
-            // `spherical_coordinates` can be accessed as a vector or as single coordinates `rho`, `theta`, `phi`.
-            SphericalCoordinatesStruct* spherical_coordinates;
-            double rho;
-            double theta;
-            double phi;
-
-            double horizontal_angle;
-            double vertical_angle;
-
-            float speed;
-            float turbo_factor;
-            float twin_turbo_factor;
-            float mouse_speed;
-            bool has_mouse_ever_moved;
-            bool can_toggle_invert_mouse;
-            bool is_invert_mouse_in_use;
-            bool can_toggle_flight_mode;
-            bool is_flight_mode_in_use;
-            bool is_first_turbo_pressed;
-            bool is_second_turbo_pressed;
-
-            // Variables related to the current `Scene`.
-            bool testing_spherical_world_in_use;
-
-            // Variables related to debug & testing keys.
-            bool is_key_I_released;
-            bool is_key_F_released;
-
-            // Variables related to help mode.
-            bool in_help_mode;
-            bool can_toggle_help_mode;
-            bool can_display_help_screen;
     };
 }
 

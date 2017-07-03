@@ -25,7 +25,6 @@
 #include "code/ylikuutio/config/setting.hpp"
 #include "code/ylikuutio/config/setting_master.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
-#include "code/ylikuutio/common/global_variables.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
 #include "code/ylikuutio/common/globals.hpp"
 
@@ -83,6 +82,19 @@ namespace ontology
         this->is_first_turbo_pressed = false;
         this->is_second_turbo_pressed = false;
 
+        this->speed = 5.0f; // 5.0 units / second
+        this->mouse_speed = 0.005f;
+
+        this->gravity = 9.81f / 60.0f;
+        this->fall_speed = this->gravity;
+
+        this->testing_spherical_world_in_use = false;
+        this->is_key_I_released = true;
+        this->is_key_F_released = true;
+        this->in_help_mode = true;
+        this->can_toggle_help_mode = false;
+        this->can_display_help_screen = true;
+
         this->child_vector_pointers_vector.push_back(&this->scene_pointer_vector);
     }
 
@@ -112,13 +124,6 @@ namespace ontology
 
     void Universe::set_active_scene(ontology::Scene* scene)
     {
-        this->cartesian_coordinates = scene->cartesian_coordinates;
-        this->direction = scene->direction;
-        this->right = scene->right;
-        this->up = scene->up;
-        this->spherical_coordinates = scene->spherical_coordinates;
-        this->horizontal_angle = scene->horizontal_angle;
-        this->vertical_angle = scene->vertical_angle;
         this->active_scene = scene;
     }
 
@@ -180,6 +185,21 @@ namespace ontology
     uint32_t Universe::get_max_FPS()
     {
         return this->max_FPS;
+    }
+
+    bool Universe::set(std::string& setting_name, datatypes::AnyValue* setting_any_value)
+    {
+        this->setting_master_pointer->set(setting_name, setting_any_value);
+    }
+
+    config::Setting* Universe::get(std::string key)
+    {
+        return this->setting_master_pointer->get(key);
+    }
+
+    datatypes::AnyValue* Universe::get_value(std::string key)
+    {
+        return this->setting_master_pointer->get_value(key);
     }
 
     // Public callbacks.
@@ -316,47 +336,47 @@ namespace ontology
 
     bool Universe::compute_matrices_from_inputs()
     {
-        if (!globals::is_flight_mode_in_use)
+        if (!this->is_flight_mode_in_use)
         {
-            globals::fall_speed += globals::gravity;
-            globals::position.y -= globals::fall_speed;
+            this->fall_speed += this->gravity;
+            this->cartesian_coordinates.y -= this->fall_speed;
         }
 
         GLfloat FoV = this->initialFoV;// - 5 * glfwGetMouseWheel(); // Now GLFW 3 requires setting up a callback for this. It's a bit too complicated for this beginner's tutorial, so it's disabled instead.
 
         // adjust position according to the ground.
-        if (!globals::is_flight_mode_in_use)
+        if (!this->is_flight_mode_in_use)
         {
             if (this->terrain_species_pointer != nullptr)
             {
-                GLfloat ground_y = ontology::get_floor_level(static_cast<ontology::Species*>(this->terrain_species_pointer), globals::position);
+                GLfloat ground_y = ontology::get_floor_level(static_cast<ontology::Species*>(this->terrain_species_pointer), this->cartesian_coordinates);
 
-                if (!std::isnan(ground_y) && globals::position.y < ground_y)
+                if (!std::isnan(ground_y) && this->cartesian_coordinates.y < ground_y)
                 {
-                    globals::position.y = ground_y;
-                    globals::fall_speed = 0.0f;
+                    this->cartesian_coordinates.y = ground_y;
+                    this->fall_speed = 0.0f;
                 }
             }
         }
 
-        if (globals::testing_spherical_world_in_use)
+        if (this->testing_spherical_world_in_use)
         {
             // compute spherical coordinates.
-            globals::spherical_position.rho = sqrt((globals::position.x * globals::position.x) + (globals::position.y * globals::position.y) + (globals::position.z * globals::position.z));
-            globals::spherical_position.theta = RADIANS_TO_DEGREES(atan2(sqrt((globals::position.x * globals::position.x) + (globals::position.y * globals::position.y)), globals::position.z));
-            globals::spherical_position.phi = RADIANS_TO_DEGREES(atan2(globals::position.y, globals::position.x));
+            this->spherical_coordinates->rho = sqrt((this->cartesian_coordinates.x * this->cartesian_coordinates.x) + (this->cartesian_coordinates.y * this->cartesian_coordinates.y) + (this->cartesian_coordinates.z * this->cartesian_coordinates.z));
+            this->spherical_coordinates->theta = RADIANS_TO_DEGREES(atan2(sqrt((this->cartesian_coordinates.x * this->cartesian_coordinates.x) + (this->cartesian_coordinates.y * this->cartesian_coordinates.y)), this->cartesian_coordinates.z));
+            this->spherical_coordinates->phi = RADIANS_TO_DEGREES(atan2(this->cartesian_coordinates.y, this->cartesian_coordinates.x));
         }
 
-        camera_cartesian_coordinates = globals::position;
+        glm::vec3 camera_cartesian_coordinates = this->cartesian_coordinates;
         camera_cartesian_coordinates.y += 2.0f;
 
         // Projection matrix : 45° Field of View, aspect ratio, display range : 0.1 unit <-> 100 units
         this->ProjectionMatrix = glm::perspective(FoV, aspect_ratio, 0.001f, 5000.0f + 2.0f * static_cast<GLfloat>(this->world_radius));
         // Camera matrix
         this->ViewMatrix = glm::lookAt(
-                camera_cartesian_coordinates,                      // Camera is here
-                camera_cartesian_coordinates + globals::direction, // and looks here : at the same position, plus "direction"
-                globals::up                                        // Head is up (set to 0,-1,0 to look upside-down)
+                camera_cartesian_coordinates,                   // Camera is here
+                camera_cartesian_coordinates + this->direction, // and looks here : at the same position, plus "direction"
+                this->up                                        // Head is up (set to 0,-1,0 to look upside-down)
                 );
 
         return true;

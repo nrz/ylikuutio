@@ -5,7 +5,6 @@
 #include "render_templates.hpp"
 #include "shader_struct.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
-#include "code/ylikuutio/common/global_variables.hpp"
 
 // Include GLEW
 #ifndef __GL_GLEW_H_INCLUDED

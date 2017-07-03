@@ -66,22 +66,13 @@ namespace ontology
         if (this->universe_pointer->active_scene == this)
         {
             this->universe_pointer->cartesian_coordinates = glm::vec3(NAN, NAN, NAN);
-            this->universe_pointer->x = NAN;
-            this->universe_pointer->y = NAN;
-            this->universe_pointer->z = NAN;
 
             this->universe_pointer->direction = glm::vec3(NAN, NAN, NAN);
-            this->universe_pointer->pitch = NAN;
-            this->universe_pointer->roll = NAN;
-            this->universe_pointer->yaw = NAN;
 
             this->universe_pointer->right = glm::vec3(NAN, NAN, NAN);
             this->universe_pointer->up = glm::vec3(NAN, NAN, NAN);
 
             this->universe_pointer->spherical_coordinates = nullptr;
-            this->universe_pointer->rho = NAN;
-            this->universe_pointer->theta = NAN;
-            this->universe_pointer->phi = NAN;
 
             this->universe_pointer->horizontal_angle = NAN;
             this->universe_pointer->vertical_angle = NAN;

@@ -447,8 +447,6 @@ add_library(ylikuutio STATIC
     # common, in alphabetical order
     code/ylikuutio/common/any_value.cpp
     code/ylikuutio/common/any_value.hpp
-    code/ylikuutio/common/global_variables.cpp
-    code/ylikuutio/common/global_variables.hpp
     code/ylikuutio/common/globals.hpp
     code/ylikuutio/common/spherical_coordinates_struct.hpp
     code/ylikuutio/common/template_helpers.hpp
@@ -655,8 +653,6 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/callback_system/callback_parameter.hpp
         code/ylikuutio/common/any_value.cpp
         code/ylikuutio/common/any_value.hpp
-        code/ylikuutio/common/global_variables.cpp
-        code/ylikuutio/common/global_variables.hpp
         code/ylikuutio/common/globals.hpp
         code/ylikuutio/file/file_loader.cpp
         code/ylikuutio/file/file_loader.hpp

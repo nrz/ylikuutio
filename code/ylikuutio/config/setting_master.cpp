@@ -226,12 +226,14 @@ namespace config
             return nullptr;
         }
 
-        if (setting_master->setting_pointer_map.count("world_radius") != 1)
+        SettingMaster* setting_master_pointer = universe->setting_master_pointer;
+
+        if (setting_master_pointer->setting_pointer_map.count("world_radius") != 1)
         {
             return nullptr;
         }
 
-        datatypes::AnyValue* world_radius_any_value = setting_master->setting_pointer_map["world_radius"]->setting_value;
+        datatypes::AnyValue* world_radius_any_value = setting_master_pointer->setting_pointer_map["world_radius"]->setting_value;
 
         if (world_radius_any_value == nullptr || world_radius_any_value->type != datatypes::FLOAT)
         {
@@ -305,98 +307,6 @@ namespace config
         GLclampf alpha = static_cast<GLclampf>(alpha_any_value->float_value);
 
         glClearColor(red, green, blue, alpha);
-        return nullptr;
-    }
-
-    datatypes::AnyValue* SettingMaster::activate_spherical_coordinates(ontology::Universe* universe, config::SettingMaster* setting_master)
-    {
-        if (universe == nullptr)
-        {
-            return nullptr;
-        }
-
-        SettingMaster* setting_master_pointer = universe->setting_master_pointer;
-
-        if (setting_master_pointer == nullptr)
-        {
-            return nullptr;
-        }
-
-        if (setting_master_pointer->setting_pointer_map.count("rho") != 1 ||
-                setting_master_pointer->setting_pointer_map.count("theta") != 1 ||
-                setting_master_pointer->setting_pointer_map.count("phi") != 1)
-        {
-            return nullptr;
-        }
-
-        datatypes::AnyValue* rho_any_value = setting_master_pointer->setting_pointer_map["rho"]->setting_value;
-        datatypes::AnyValue* theta_any_value = setting_master_pointer->setting_pointer_map["theta"]->setting_value;
-        datatypes::AnyValue* phi_any_value = setting_master_pointer->setting_pointer_map["phi"]->setting_value;
-
-        if (rho_any_value == nullptr || rho_any_value->type != datatypes::FLOAT)
-        {
-            return nullptr;
-        }
-
-        if (theta_any_value == nullptr || theta_any_value->type != datatypes::FLOAT)
-        {
-            return nullptr;
-        }
-
-        if (phi_any_value == nullptr || phi_any_value->type != datatypes::FLOAT)
-        {
-            return nullptr;
-        }
-
-        universe->rho = rho_any_value->float_value;
-        universe->theta = theta_any_value->float_value;
-        universe->phi = phi_any_value->float_value;
-        return nullptr;
-    }
-
-    datatypes::AnyValue* SettingMaster::activate_cartesian_coordinates(ontology::Universe* universe, config::SettingMaster* setting_master)
-    {
-        if (universe == nullptr)
-        {
-            return nullptr;
-        }
-
-        SettingMaster* setting_master_pointer = universe->setting_master_pointer;
-
-        if (setting_master_pointer == nullptr)
-        {
-            return nullptr;
-        }
-
-        if (setting_master_pointer->setting_pointer_map.count("x") != 1 ||
-                setting_master_pointer->setting_pointer_map.count("y") != 1 ||
-                setting_master_pointer->setting_pointer_map.count("z") != 1)
-        {
-            return nullptr;
-        }
-
-        datatypes::AnyValue* x_any_value = setting_master_pointer->setting_pointer_map["x"]->setting_value;
-        datatypes::AnyValue* y_any_value = setting_master_pointer->setting_pointer_map["y"]->setting_value;
-        datatypes::AnyValue* z_any_value = setting_master_pointer->setting_pointer_map["z"]->setting_value;
-
-        if (x_any_value == nullptr || x_any_value->type != datatypes::FLOAT)
-        {
-            return nullptr;
-        }
-
-        if (y_any_value == nullptr || y_any_value->type != datatypes::FLOAT)
-        {
-            return nullptr;
-        }
-
-        if (z_any_value == nullptr || z_any_value->type != datatypes::FLOAT)
-        {
-            return nullptr;
-        }
-
-        universe->x = x_any_value->float_value;
-        universe->y = y_any_value->float_value;
-        universe->z = z_any_value->float_value;
         return nullptr;
     }
 

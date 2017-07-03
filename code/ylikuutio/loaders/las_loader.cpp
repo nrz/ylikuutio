@@ -6,7 +6,6 @@
 #include "las_loader.hpp"
 #include "code/ylikuutio/triangulation/quad_triangulation.hpp"
 #include "code/ylikuutio/common/globals.hpp"
-#include "code/ylikuutio/common/global_variables.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED

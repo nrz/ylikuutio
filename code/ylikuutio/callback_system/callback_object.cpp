@@ -6,6 +6,7 @@
 
 // Include standard headers
 #include <iostream> // std::cout, std::cin, std::cerr
+#include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 #include <vector>   // std::vector
 
@@ -15,6 +16,25 @@ namespace callback_system
     datatypes::AnyValue* CallbackObject::get_any_value(std::string name)
     {
         return &this->anyvalue_hashmap[name];
+    }
+
+    datatypes::AnyValue* CallbackObject::get_arg(uint32_t arg_i)
+    {
+        if (arg_i >= this->callback_parameter_pointer_vector.size())
+        {
+            std::cerr << "virhe 1!";
+            return nullptr;
+        }
+
+        callback_system::CallbackParameter* callback_parameter = this->callback_parameter_pointer_vector.at(arg_i);
+
+        if (callback_parameter == nullptr)
+        {
+            std::cerr << "virhe 2!";
+            return nullptr;
+        }
+
+        return callback_parameter->any_value;
     }
 
     // setter function for callbacks and callback objects.

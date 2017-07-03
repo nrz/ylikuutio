@@ -113,9 +113,8 @@ int main(void)
     config::SettingMaster* my_setting_master = new config::SettingMaster(my_universe);
 
     float earth_radius = 6371.0f; // in kilometres
-    datatypes::AnyValue* any_value_float_earth_radius = new datatypes::AnyValue(earth_radius);
 
-    SettingStruct world_radius_setting_struct(any_value_float_earth_radius);
+    SettingStruct world_radius_setting_struct(new datatypes::AnyValue(earth_radius));
     world_radius_setting_struct.name = "world_radius";
     world_radius_setting_struct.setting_master_pointer = my_setting_master;
     world_radius_setting_struct.activate_callback = &config::SettingMaster::activate_world_radius; // world may be a planet or a moon.
@@ -124,22 +123,22 @@ int main(void)
 
     // testing_spherical_world_in_use = true;
 
-    if (globals::testing_spherical_world_in_use)
+    if (my_universe->testing_spherical_world_in_use)
     {
-        globals::is_flight_mode_in_use = true;
+        my_universe->is_flight_mode_in_use = true;
 
-        globals::position = glm::vec3(-5682.32f, -1641.20f, 2376.45f);
+        my_universe->cartesian_coordinates = glm::vec3(-5682.32f, -1641.20f, 2376.45f);
     }
     else
     {
-        globals::position = glm::vec3(100.0f, 100.0f, 100.0f);
+        my_universe->cartesian_coordinates = glm::vec3(100.0f, 100.0f, 100.0f);
     }
     // Initial horizontal angle : toward -Z
     // horizontal_angle = 0.0f;
-    globals::horizontal_angle = 42.42f;
+    my_universe->horizontal_angle = 42.42f;
     // Initial vertical angle : none
     // vertical_angle = PI / 2;
-    globals::vertical_angle = 7.44f;
+    my_universe->vertical_angle = 7.44f;
 
     callback_system::CallbackEngine* cleanup_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* cleanup_callback_object = new callback_system::CallbackObject(nullptr, cleanup_callback_engine);
@@ -227,7 +226,7 @@ int main(void)
 
     ontology::Species* terrain_species;
 
-    if (globals::testing_spherical_world_in_use)
+    if (my_universe->testing_spherical_world_in_use)
     {
         // Create the species, store it in `terrain_species`.
         SpeciesStruct(SRTM_terrain_species_struct);
@@ -244,8 +243,8 @@ int main(void)
         SRTM_terrain_species_struct.divisor = 1000.0f;
         terrain_species = new ontology::Species(SRTM_terrain_species_struct);
 
-        globals::turbo_factor = 100.0f;
-        globals::twin_turbo_factor = 50000.0f;
+        my_universe->turbo_factor = 100.0f;
+        my_universe->twin_turbo_factor = 50000.0f;
     }
     else
     {
@@ -273,10 +272,10 @@ int main(void)
 
         terrain_species->set_name("Helsinki");
 
-        globals::is_flight_mode_in_use = true;
+        my_universe->is_flight_mode_in_use = true;
 
-        globals::turbo_factor = 5.0f;
-        globals::twin_turbo_factor = 100.0f;
+        my_universe->turbo_factor = 5.0f;
+        my_universe->twin_turbo_factor = 100.0f;
     }
 
     // Create terrain1, store it in `terrain1`.
@@ -411,23 +410,28 @@ int main(void)
 
     // Callback code for left Control release: release first turbo.
     callback_system::CallbackEngine* release_first_turbo_callback_engine = new callback_system::CallbackEngine();
-    new callback_system::CallbackObject(&ajokki::release_first_turbo, release_first_turbo_callback_engine);
+    callback_system::CallbackObject* release_first_turbo_callback_object = new callback_system::CallbackObject(&ajokki::release_first_turbo, release_first_turbo_callback_engine);
+    new callback_system::CallbackParameter("", new datatypes::AnyValue(my_universe), false, release_first_turbo_callback_object);
 
     // Callback code for right Control release: release second turbo.
     callback_system::CallbackEngine* release_second_turbo_callback_engine = new callback_system::CallbackEngine();
-    new callback_system::CallbackObject(&ajokki::release_second_turbo, release_second_turbo_callback_engine);
+    callback_system::CallbackObject* release_second_turbo_callback_object = new callback_system::CallbackObject(&ajokki::release_second_turbo, release_second_turbo_callback_engine);
+    new callback_system::CallbackParameter("", new datatypes::AnyValue(my_universe), false, release_second_turbo_callback_object);
 
     // Callback code for I release: enable_toggle invert mouse.
     callback_system::CallbackEngine* enable_toggle_invert_mouse_callback_engine = new callback_system::CallbackEngine();
-    new callback_system::CallbackObject(&ajokki::enable_toggle_invert_mouse, enable_toggle_invert_mouse_callback_engine);
+    callback_system::CallbackObject* enable_toggle_invert_mouse_callback_object = new callback_system::CallbackObject(&ajokki::enable_toggle_invert_mouse, enable_toggle_invert_mouse_callback_engine);
+    new callback_system::CallbackParameter("", new datatypes::AnyValue(my_universe), false, enable_toggle_invert_mouse_callback_object);
 
     // Callback code for F release: enable_toggle flight mode.
     callback_system::CallbackEngine* enable_toggle_flight_mode_callback_engine = new callback_system::CallbackEngine();
-    new callback_system::CallbackObject(&ajokki::enable_toggle_flight_mode, enable_toggle_flight_mode_callback_engine);
+    callback_system::CallbackObject* enable_toggle_flight_mode_callback_object = new callback_system::CallbackObject(&ajokki::enable_toggle_flight_mode, enable_toggle_flight_mode_callback_engine);
+    new callback_system::CallbackParameter("", new datatypes::AnyValue(my_universe), false, enable_toggle_flight_mode_callback_object);
 
     // Callback code for F1 release: enable toggle help mode.
     callback_system::CallbackEngine* enable_toggle_help_mode_callback_engine = new callback_system::CallbackEngine();
-    new callback_system::CallbackObject(&ajokki::enable_toggle_help_mode, enable_toggle_help_mode_callback_engine);
+    callback_system::CallbackObject* enable_toggle_help_mode_callback_object = new callback_system::CallbackObject(&ajokki::enable_toggle_help_mode, enable_toggle_help_mode_callback_engine);
+    new callback_system::CallbackParameter("", new datatypes::AnyValue(my_universe), false, enable_toggle_help_mode_callback_object);
 
     /*********************************************************************\
      *  Callback engines for action mode keypresses begin here.          *
@@ -443,59 +447,64 @@ int main(void)
 
     // Callback code for left Control: first turbo.
     callback_system::CallbackEngine* first_turbo_callback_engine = new callback_system::CallbackEngine();
-    new callback_system::CallbackObject(&ajokki::first_turbo, first_turbo_callback_engine);
+    callback_system::CallbackObject* first_turbo_callback_object = new callback_system::CallbackObject(&ajokki::first_turbo, first_turbo_callback_engine);
+    new callback_system::CallbackParameter("", new datatypes::AnyValue(my_universe), false, first_turbo_callback_object);
 
     // Callback code for right Control: second turbo.
     callback_system::CallbackEngine* second_turbo_callback_engine = new callback_system::CallbackEngine();
-    new callback_system::CallbackObject(&ajokki::second_turbo, second_turbo_callback_engine);
+    callback_system::CallbackObject* second_turbo_callback_object = new callback_system::CallbackObject(&ajokki::second_turbo, second_turbo_callback_engine);
+    new callback_system::CallbackParameter("", new datatypes::AnyValue(my_universe), false, second_turbo_callback_object);
 
     // Callback code for key up: move forward.
     callback_system::CallbackEngine* move_forward_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* move_forward_callback_object = new callback_system::CallbackObject(
             &ajokki::move_forward, move_forward_callback_engine);
-    new callback_system::CallbackParameter("universe_pointer", new datatypes::AnyValue(my_universe), false, move_forward_callback_object);
+    new callback_system::CallbackParameter("", new datatypes::AnyValue(my_universe), false, move_forward_callback_object);
 
     // Callback code for key down: move backward.
     callback_system::CallbackEngine* move_backward_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* move_backward_callback_object = new callback_system::CallbackObject(
             &ajokki::move_backward, move_backward_callback_engine);
-    new callback_system::CallbackParameter("universe_pointer", new datatypes::AnyValue(my_universe), false, move_backward_callback_object);
+    new callback_system::CallbackParameter("", new datatypes::AnyValue(my_universe), false, move_backward_callback_object);
 
     // Callback code for key left: strafe left.
     callback_system::CallbackEngine* strafe_left_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* strafe_left_callback_object = new callback_system::CallbackObject(
             &ajokki::strafe_left, strafe_left_callback_engine);
-    new callback_system::CallbackParameter("universe_pointer", new datatypes::AnyValue(my_universe), false, strafe_left_callback_object);
+    new callback_system::CallbackParameter("", new datatypes::AnyValue(my_universe), false, strafe_left_callback_object);
 
     // Callback code for key right: strafe right.
     callback_system::CallbackEngine* strafe_right_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* strafe_right_callback_object = new callback_system::CallbackObject(
             &ajokki::strafe_right, strafe_right_callback_engine);
-    new callback_system::CallbackParameter("universe_pointer", new datatypes::AnyValue(my_universe), false, strafe_right_callback_object);
+    new callback_system::CallbackParameter("", new datatypes::AnyValue(my_universe), false, strafe_right_callback_object);
 
     // Callback code for space: ascent.
     callback_system::CallbackEngine* ascent_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* ascent_callback_object = new callback_system::CallbackObject(
             &ajokki::ascent, ascent_callback_engine);
-    new callback_system::CallbackParameter("universe_pointer", new datatypes::AnyValue(my_universe), false, ascent_callback_object);
+    new callback_system::CallbackParameter("", new datatypes::AnyValue(my_universe), false, ascent_callback_object);
 
     // Callback code for enter: descent.
     callback_system::CallbackEngine* descent_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* descent_callback_object = new callback_system::CallbackObject(
             &ajokki::descent, descent_callback_engine);
-    new callback_system::CallbackParameter("universe_pointer", new datatypes::AnyValue(my_universe), false, descent_callback_object);
+    new callback_system::CallbackParameter("", new datatypes::AnyValue(my_universe), false, descent_callback_object);
 
     // Callback code for I: toggle invert mouse.
     callback_system::CallbackEngine* toggle_invert_mouse_callback_engine = new callback_system::CallbackEngine();
-    new callback_system::CallbackObject(&ajokki::toggle_invert_mouse, toggle_invert_mouse_callback_engine);
+    callback_system::CallbackObject* toggle_invert_mouse_callback_object = new callback_system::CallbackObject(&ajokki::toggle_invert_mouse, toggle_invert_mouse_callback_engine);
+    new callback_system::CallbackParameter("", new datatypes::AnyValue(my_universe), false, toggle_invert_mouse_callback_object);
 
     // Callback code for F: toggle flight mode.
     callback_system::CallbackEngine* toggle_flight_mode_callback_engine = new callback_system::CallbackEngine();
-    new callback_system::CallbackObject(&ajokki::toggle_flight_mode, toggle_flight_mode_callback_engine);
+    callback_system::CallbackObject* toggle_flight_mode_callback_object = new callback_system::CallbackObject(&ajokki::toggle_flight_mode, toggle_flight_mode_callback_engine);
+    new callback_system::CallbackParameter("", new datatypes::AnyValue(my_universe), false, toggle_flight_mode_callback_object);
 
     // Callback code for F1: toggle help mode.
     callback_system::CallbackEngine* toggle_help_mode_callback_engine = new callback_system::CallbackEngine();
-    new callback_system::CallbackObject(&ajokki::toggle_help_mode, toggle_help_mode_callback_engine);
+    callback_system::CallbackObject* toggle_help_mode_callback_object = new callback_system::CallbackObject(&ajokki::toggle_help_mode, toggle_help_mode_callback_engine);
+    new callback_system::CallbackParameter("", new datatypes::AnyValue(my_universe), false, toggle_help_mode_callback_object);
 
     // Callback code for D: delete Suzanne species.
     bool does_suzanne_species_exist = true;
@@ -685,7 +694,7 @@ int main(void)
     callback_system::CallbackEngine* ctrl_c_callback_engine = new callback_system::CallbackEngine();
     new console::ConsoleCallbackObject(&console::Console::ctrl_c, ctrl_c_callback_engine, my_console);
 
-    new callback_system::CallbackParameter("universe_pointer", new datatypes::AnyValue(my_universe), false, cleanup_callback_object);
+    new callback_system::CallbackParameter("", new datatypes::AnyValue(my_universe), false, cleanup_callback_object);
     new callback_system::CallbackParameter("font2D_pointer", new datatypes::AnyValue(my_font2D), false, cleanup_callback_object);
     cleanup_callback_object->set_new_callback(&ajokki::full_cleanup);
 
@@ -826,43 +835,43 @@ int main(void)
             // Reset mouse position for next frame
             glfwSetCursorPos(my_universe->get_window(), my_universe->get_window_width() / 2, my_universe->get_window_height() / 2);
 
-            if (globals::has_mouse_ever_moved || (abs(xpos) > 0.0001) || (abs(ypos) > 0.0001))
+            if (my_universe->has_mouse_ever_moved || (abs(xpos) > 0.0001) || (abs(ypos) > 0.0001))
             {
-                globals::has_mouse_ever_moved = true;
+                my_universe->has_mouse_ever_moved = true;
 
                 // Compute new orientation
-                globals::horizontal_angle += globals::mouse_speed * GLfloat(my_universe->get_window_width() / 2 - xpos);
-                globals::horizontal_angle = remainder(globals::horizontal_angle, (2.0f * PI));
+                my_universe->horizontal_angle += my_universe->mouse_speed * GLfloat(my_universe->get_window_width() / 2 - xpos);
+                my_universe->horizontal_angle = remainder(my_universe->horizontal_angle, (2.0f * PI));
 
-                if (globals::is_invert_mouse_in_use)
+                if (my_universe->is_invert_mouse_in_use)
                 {
                     // invert mouse.
-                    globals::vertical_angle -= globals::mouse_speed * GLfloat(my_universe->get_window_height() / 2 - ypos);
+                    my_universe->vertical_angle -= my_universe->mouse_speed * GLfloat(my_universe->get_window_height() / 2 - ypos);
                 }
                 else
                 {
                     // don't invert mouse.
-                    globals::vertical_angle += globals::mouse_speed * GLfloat(my_universe->get_window_height() / 2 - ypos);
+                    my_universe->vertical_angle += my_universe->mouse_speed * GLfloat(my_universe->get_window_height() / 2 - ypos);
                 }
-                globals::vertical_angle = remainder(globals::vertical_angle, (2.0f * PI));
+                my_universe->vertical_angle = remainder(my_universe->vertical_angle, (2.0f * PI));
             }
 
             // Direction : Spherical coordinates to Cartesian coordinates conversion
-            globals::direction = glm::vec3(
-                    cos(globals::vertical_angle) * sin(globals::horizontal_angle),
-                    sin(globals::vertical_angle),
-                    cos(globals::vertical_angle) * cos(globals::horizontal_angle)
+            my_universe->direction = glm::vec3(
+                    cos(my_universe->vertical_angle) * sin(my_universe->horizontal_angle),
+                    sin(my_universe->vertical_angle),
+                    cos(my_universe->vertical_angle) * cos(my_universe->horizontal_angle)
                     );
 
             // Right vector
-            globals::right = glm::vec3(
-                    sin(globals::horizontal_angle - PI/2.0f),
+            my_universe->right = glm::vec3(
+                    sin(my_universe->horizontal_angle - PI/2.0f),
                     0,
-                    cos(globals::horizontal_angle - PI/2.0f)
+                    cos(my_universe->horizontal_angle - PI/2.0f)
                     );
 
             // Up vector
-            globals::up = glm::cross(globals::right, globals::direction);
+            my_universe->up = glm::cross(my_universe->right, my_universe->direction);
 
             // Check for key releases and call corresponding callbacks.
             for (uint32_t i = 0; i < (*current_keyrelease_callback_engine_vector_pointer).size(); i++)
@@ -905,7 +914,7 @@ int main(void)
                             }
 
                             // Do not display help screen when in console.
-                            globals::can_display_help_screen = false;
+                            my_universe->can_display_help_screen = false;
 
                             delete any_value;
                             break;
@@ -923,7 +932,7 @@ int main(void)
                             }
 
                             // Enable display help screen when not in console.
-                            globals::can_display_help_screen = true;
+                            my_universe->can_display_help_screen = true;
 
                             delete any_value;
                             break;
@@ -967,13 +976,13 @@ int main(void)
                     angles_and_coordinates_text,
                     sizeof(angles_and_coordinates_text),
                     "%.2f,%.2f rad; %.2f,%.2f deg\\n(%.2f,%.2f,%.2f)",
-                    globals::horizontal_angle,
-                    globals::vertical_angle,
-                    RADIANS_TO_DEGREES(globals::horizontal_angle),
-                    RADIANS_TO_DEGREES(globals::vertical_angle),
-                    globals::position.x,
-                    globals::position.y,
-                    globals::position.z);
+                    my_universe->horizontal_angle,
+                    my_universe->vertical_angle,
+                    RADIANS_TO_DEGREES(my_universe->horizontal_angle),
+                    RADIANS_TO_DEGREES(my_universe->vertical_angle),
+                    my_universe->cartesian_coordinates.x,
+                    my_universe->cartesian_coordinates.y,
+                    my_universe->cartesian_coordinates.z);
 
             char time_text[256];
             std::snprintf(time_text, sizeof(time_text), "%.2f sec", glfwGetTime());
@@ -1003,16 +1012,16 @@ int main(void)
                     "U  uvmap texture%s\\n"
                     "T  terrain species\\n"
                     "A  suzanne species\\n",
-                    (globals::is_invert_mouse_in_use ? on_text : off_text),
-                    (globals::is_flight_mode_in_use ? on_text : off_text),
+                    (my_universe->is_invert_mouse_in_use ? on_text : off_text),
+                    (my_universe->is_flight_mode_in_use ? on_text : off_text),
                     (!does_suzanne_species_have_uvmap_texture ? in_use_text : null_text),
                     (does_suzanne_species_have_uvmap_texture ? in_use_text : null_text));
 
             char spherical_coordinates_text[256];
 
-            if (globals::testing_spherical_world_in_use)
+            if (my_universe->testing_spherical_world_in_use)
             {
-                std::snprintf(spherical_coordinates_text, sizeof(spherical_coordinates_text), "rho:%.2f theta:%.2f phi:%.2f", globals::spherical_position.rho, globals::spherical_position.theta, globals::spherical_position.phi);
+                std::snprintf(spherical_coordinates_text, sizeof(spherical_coordinates_text), "rho:%.2f theta:%.2f phi:%.2f", my_universe->spherical_coordinates->rho, my_universe->spherical_coordinates->theta, my_universe->spherical_coordinates->phi);
             }
 
             // print cartesian coordinates on bottom left corner.
@@ -1023,7 +1032,7 @@ int main(void)
             printing_struct.vertical_alignment = "bottom";
             my_font2D->printText2D(printing_struct);
 
-            if (globals::in_help_mode && globals::can_display_help_screen)
+            if (my_universe->in_help_mode && my_universe->can_display_help_screen)
             {
                 // print help text.
                 printing_struct.x = 0;
@@ -1034,7 +1043,7 @@ int main(void)
                 my_font2D->printText2D(printing_struct);
             }
 
-            if (globals::testing_spherical_world_in_use)
+            if (my_universe->testing_spherical_world_in_use)
             {
                 // print spherical coordinates on bottom left corner.
                 printing_struct.x = 0;

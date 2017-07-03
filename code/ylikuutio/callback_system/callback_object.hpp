@@ -8,6 +8,7 @@
 
 // Include standard headers
 #include <queue>         // std::queue
+#include <stdint.h>      // uint32_t etc.
 #include <string>        // std::string
 #include <unordered_map> // std::unordered_map
 #include <vector>        // std::vector
@@ -33,8 +34,9 @@ namespace callback_system
             // this method changes the callback without changing the parameters of CallbackObject.
             void set_new_callback(InputParametersToAnyValueCallback callback);
 
-            // getter function for callbacks and callback objects.
+            // getter functions for callbacks and callback objects.
             datatypes::AnyValue* get_any_value(std::string name);
+            datatypes::AnyValue* get_arg(uint32_t arg_i);
 
             // setter function for callbacks and callback objects.
             void set_any_value(std::string name, datatypes::AnyValue* any_value);
