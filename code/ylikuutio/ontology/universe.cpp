@@ -75,6 +75,14 @@ namespace ontology
         this->last_time_before_reading_keyboard = NAN;
         this->current_time_before_reading_keyboard = NAN;
 
+        this->has_mouse_ever_moved = false;
+        this->can_toggle_invert_mouse = false;
+        this->is_invert_mouse_in_use = false;
+        this->can_toggle_flight_mode = false;
+        this->is_flight_mode_in_use = false;
+        this->is_first_turbo_pressed = false;
+        this->is_second_turbo_pressed = false;
+
         this->child_vector_pointers_vector.push_back(&this->scene_pointer_vector);
     }
 
