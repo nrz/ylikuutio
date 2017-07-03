@@ -109,6 +109,13 @@ namespace ontology
 
     void Universe::set_active_scene(ontology::Scene* scene)
     {
+        this->cartesian_coordinates = scene->cartesian_coordinates;
+        this->direction = scene->direction;
+        this->right = scene->right;
+        this->up = scene->up;
+        this->spherical_coordinates = scene->spherical_coordinates;
+        this->horizontal_angle = scene->horizontal_angle;
+        this->vertical_angle = scene->vertical_angle;
         this->active_scene = scene;
     }
 
