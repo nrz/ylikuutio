@@ -226,6 +226,17 @@ namespace ontology
             // this method returns current `max_FPS`.
             uint32_t get_max_FPS();
 
+            // this method computes new location and orientation.
+            void compute_new_location_and_orientation();
+
+            bool set(std::string& setting_name, datatypes::AnyValue* setting_any_value);
+
+            // this method returns a pointer to `config::Setting` corresponding to the given `key`.
+            config::Setting* get(std::string key);
+
+            // this method returns a pointer to `datatypes::AnyValue` corresponding to the given `key`.
+            datatypes::AnyValue* get_value(std::string key);
+
             // Public callbacks.
 
             static datatypes::AnyValue* delete_entity(
