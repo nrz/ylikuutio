@@ -20,6 +20,7 @@
 #endif
 
 // Include standard headers
+#include <cmath>    // NAN, std::isnan, std::pow
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <stdint.h> // uint32_t etc.
 #include <unordered_map> // std::unordered_map
@@ -60,6 +61,34 @@ namespace ontology
         // destroy all shaders of this scene.
         std::cout << "All shaders of this scene will be destroyed.\n";
         hierarchy::delete_children<ontology::Shader*>(this->shader_pointer_vector);
+
+        // If this is the active `Scene`, set all `Scene`-related variables to `nullptr` or invalid.
+        if (this->universe_pointer->active_scene == this)
+        {
+            this->universe_pointer->cartesian_coordinates = glm::vec3(NAN, NAN, NAN);
+            this->universe_pointer->x = NAN;
+            this->universe_pointer->y = NAN;
+            this->universe_pointer->z = NAN;
+
+            this->universe_pointer->direction = glm::vec3(NAN, NAN, NAN);
+            this->universe_pointer->pitch = NAN;
+            this->universe_pointer->roll = NAN;
+            this->universe_pointer->yaw = NAN;
+
+            this->universe_pointer->right = glm::vec3(NAN, NAN, NAN);
+            this->universe_pointer->up = glm::vec3(NAN, NAN, NAN);
+
+            this->universe_pointer->spherical_coordinates = nullptr;
+            this->universe_pointer->rho = NAN;
+            this->universe_pointer->theta = NAN;
+            this->universe_pointer->phi = NAN;
+
+            this->universe_pointer->horizontal_angle = NAN;
+            this->universe_pointer->vertical_angle = NAN;
+
+            // Make this `Scene` no more the active `Scene`.
+            this->universe_pointer->active_scene = nullptr;
+        }
 
         if (!this->name.empty() && this->universe_pointer != nullptr)
         {
