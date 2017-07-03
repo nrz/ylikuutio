@@ -31,13 +31,13 @@ namespace globals
     extern glm::vec3 right;
     extern glm::vec3 up;
     extern SphericalCoordinatesStruct spherical_position;
-    extern double horizontalAngle;
-    extern double verticalAngle;
+    extern double horizontal_angle;
+    extern double vertical_angle;
     extern GLfloat speed;
     extern GLfloat turbo_factor;
     extern GLfloat twin_turbo_factor;
-    extern GLfloat mouseSpeed;
-    extern bool hasMouseEverMoved;
+    extern GLfloat mouse_speed;
+    extern bool has_mouse_ever_moved;
     extern bool can_toggle_invert_mouse;
     extern bool is_invert_mouse_in_use;
     extern bool can_toggle_flight_mode;
@@ -47,7 +47,7 @@ namespace globals
 
     // Variables related to physics.
     extern GLfloat gravity;
-    extern GLfloat fallSpeed;
+    extern GLfloat fall_speed;
 
     // Variables related to the current `Scene`.
     extern bool testing_spherical_world_in_use;

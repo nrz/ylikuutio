@@ -28,13 +28,13 @@ namespace globals
     glm::vec3 right;
     glm::vec3 up;
     SphericalCoordinatesStruct spherical_position;
-    double horizontalAngle;
-    double verticalAngle;
+    double horizontal_angle;
+    double vertical_angle;
     GLfloat speed = 5.0f; // 5 units / second
     GLfloat turbo_factor;
     GLfloat twin_turbo_factor;
-    GLfloat mouseSpeed = 0.005f;
-    bool hasMouseEverMoved = false;
+    GLfloat mouse_speed = 0.005f;
+    bool has_mouse_ever_moved = false;
     bool can_toggle_invert_mouse = false;
     bool is_invert_mouse_in_use = false;
     bool can_toggle_flight_mode = false;
@@ -44,7 +44,7 @@ namespace globals
 
     // Variables related to physics.
     GLfloat gravity = 9.81f / 60.0f;
-    GLfloat fallSpeed = gravity;
+    GLfloat fall_speed = gravity;
 
     // Variables related to the current `Scene`.
     bool testing_spherical_world_in_use = false;

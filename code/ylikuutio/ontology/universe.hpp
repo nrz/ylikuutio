@@ -306,7 +306,7 @@ namespace ontology
             uint32_t window_height;
 
             // Variables related to the camera.
-            glm::vec3 camera_position;
+            glm::vec3 camera_cartesian_coordinates;
             glm::mat4 ProjectionMatrix;
             glm::mat4 ViewMatrix;
             GLfloat aspect_ratio;

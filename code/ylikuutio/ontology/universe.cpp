@@ -318,8 +318,8 @@ namespace ontology
     {
         if (!globals::is_flight_mode_in_use)
         {
-            globals::fallSpeed += globals::gravity;
-            globals::position.y -= globals::fallSpeed;
+            globals::fall_speed += globals::gravity;
+            globals::position.y -= globals::fall_speed;
         }
 
         GLfloat FoV = this->initialFoV;// - 5 * glfwGetMouseWheel(); // Now GLFW 3 requires setting up a callback for this. It's a bit too complicated for this beginner's tutorial, so it's disabled instead.
@@ -334,7 +334,7 @@ namespace ontology
                 if (!std::isnan(ground_y) && globals::position.y < ground_y)
                 {
                     globals::position.y = ground_y;
-                    globals::fallSpeed = 0.0f;
+                    globals::fall_speed = 0.0f;
                 }
             }
         }
@@ -347,16 +347,16 @@ namespace ontology
             globals::spherical_position.phi = RADIANS_TO_DEGREES(atan2(globals::position.y, globals::position.x));
         }
 
-        camera_position = globals::position;
-        camera_position.y += 2.0f;
+        camera_cartesian_coordinates = globals::position;
+        camera_cartesian_coordinates.y += 2.0f;
 
         // Projection matrix : 45° Field of View, aspect ratio, display range : 0.1 unit <-> 100 units
         this->ProjectionMatrix = glm::perspective(FoV, aspect_ratio, 0.001f, 5000.0f + 2.0f * static_cast<GLfloat>(this->world_radius));
         // Camera matrix
         this->ViewMatrix = glm::lookAt(
-                camera_position,                      // Camera is here
-                camera_position + globals::direction, // and looks here : at the same position, plus "direction"
-                globals::up                           // Head is up (set to 0,-1,0 to look upside-down)
+                camera_cartesian_coordinates,                      // Camera is here
+                camera_cartesian_coordinates + globals::direction, // and looks here : at the same position, plus "direction"
+                globals::up                                        // Head is up (set to 0,-1,0 to look upside-down)
                 );
 
         return true;

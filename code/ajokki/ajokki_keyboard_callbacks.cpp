@@ -265,7 +265,7 @@ namespace ajokki
         if (globals::can_toggle_flight_mode)
         {
             globals::is_flight_mode_in_use = !globals::is_flight_mode_in_use;
-            globals::fallSpeed = 0.0f;
+            globals::fall_speed = 0.0f;
             globals::can_toggle_flight_mode = false;
         }
         return nullptr;

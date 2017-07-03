@@ -135,11 +135,11 @@ int main(void)
         globals::position = glm::vec3(100.0f, 100.0f, 100.0f);
     }
     // Initial horizontal angle : toward -Z
-    // horizontalAngle = 0.0f;
-    globals::horizontalAngle = 42.42f;
+    // horizontal_angle = 0.0f;
+    globals::horizontal_angle = 42.42f;
     // Initial vertical angle : none
-    // verticalAngle = PI / 2;
-    globals::verticalAngle = 7.44f;
+    // vertical_angle = PI / 2;
+    globals::vertical_angle = 7.44f;
 
     callback_system::CallbackEngine* cleanup_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* cleanup_callback_object = new callback_system::CallbackObject(nullptr, cleanup_callback_engine);
@@ -826,39 +826,39 @@ int main(void)
             // Reset mouse position for next frame
             glfwSetCursorPos(my_universe->get_window(), my_universe->get_window_width() / 2, my_universe->get_window_height() / 2);
 
-            if (globals::hasMouseEverMoved || (abs(xpos) > 0.0001) || (abs(ypos) > 0.0001))
+            if (globals::has_mouse_ever_moved || (abs(xpos) > 0.0001) || (abs(ypos) > 0.0001))
             {
-                globals::hasMouseEverMoved = true;
+                globals::has_mouse_ever_moved = true;
 
                 // Compute new orientation
-                globals::horizontalAngle += globals::mouseSpeed * GLfloat(my_universe->get_window_width() / 2 - xpos);
-                globals::horizontalAngle = remainder(globals::horizontalAngle, (2.0f * PI));
+                globals::horizontal_angle += globals::mouse_speed * GLfloat(my_universe->get_window_width() / 2 - xpos);
+                globals::horizontal_angle = remainder(globals::horizontal_angle, (2.0f * PI));
 
                 if (globals::is_invert_mouse_in_use)
                 {
                     // invert mouse.
-                    globals::verticalAngle -= globals::mouseSpeed * GLfloat(my_universe->get_window_height() / 2 - ypos);
+                    globals::vertical_angle -= globals::mouse_speed * GLfloat(my_universe->get_window_height() / 2 - ypos);
                 }
                 else
                 {
                     // don't invert mouse.
-                    globals::verticalAngle += globals::mouseSpeed * GLfloat(my_universe->get_window_height() / 2 - ypos);
+                    globals::vertical_angle += globals::mouse_speed * GLfloat(my_universe->get_window_height() / 2 - ypos);
                 }
-                globals::verticalAngle = remainder(globals::verticalAngle, (2.0f * PI));
+                globals::vertical_angle = remainder(globals::vertical_angle, (2.0f * PI));
             }
 
             // Direction : Spherical coordinates to Cartesian coordinates conversion
             globals::direction = glm::vec3(
-                    cos(globals::verticalAngle) * sin(globals::horizontalAngle),
-                    sin(globals::verticalAngle),
-                    cos(globals::verticalAngle) * cos(globals::horizontalAngle)
+                    cos(globals::vertical_angle) * sin(globals::horizontal_angle),
+                    sin(globals::vertical_angle),
+                    cos(globals::vertical_angle) * cos(globals::horizontal_angle)
                     );
 
             // Right vector
             globals::right = glm::vec3(
-                    sin(globals::horizontalAngle - PI/2.0f),
+                    sin(globals::horizontal_angle - PI/2.0f),
                     0,
-                    cos(globals::horizontalAngle - PI/2.0f)
+                    cos(globals::horizontal_angle - PI/2.0f)
                     );
 
             // Up vector
@@ -967,10 +967,10 @@ int main(void)
                     angles_and_coordinates_text,
                     sizeof(angles_and_coordinates_text),
                     "%.2f,%.2f rad; %.2f,%.2f deg\\n(%.2f,%.2f,%.2f)",
-                    globals::horizontalAngle,
-                    globals::verticalAngle,
-                    RADIANS_TO_DEGREES(globals::horizontalAngle),
-                    RADIANS_TO_DEGREES(globals::verticalAngle),
+                    globals::horizontal_angle,
+                    globals::vertical_angle,
+                    RADIANS_TO_DEGREES(globals::horizontal_angle),
+                    RADIANS_TO_DEGREES(globals::vertical_angle),
                     globals::position.x,
                     globals::position.y,
                     globals::position.z);
