@@ -37,6 +37,9 @@ namespace ontology
     Scene::Scene(ontology::Universe* parent_pointer)
     {
         // constructor.
+        this->gravity = 9.81f / 60.0f;
+        this->fall_speed = this->gravity;
+
         this->universe_pointer = parent_pointer;
         this->parent_pointer = parent_pointer;
 
