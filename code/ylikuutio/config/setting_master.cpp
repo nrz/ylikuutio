@@ -51,9 +51,44 @@ namespace config
         return this->help();
     }
 
-    config::Setting* SettingMaster::get(ontology::Universe* universe, std::string& setting_name)
+    bool SettingMaster::set(std::string& setting_name, datatypes::AnyValue* setting_new_any_value)
+    {
+        if (!this->is_setting(setting_name))
+        {
+            return false;
+        }
+
+        // OK, this is a valid variable name.
+        // Set the variable value and activate it by
+        // calling the corresponding activate callback.
+        config::Setting* setting = this->setting_pointer_map[setting_name];
+
+        // create empty `AnyValue` (there is no suitable constructor yet).
+        setting_new_any_value->type = setting->setting_value->type;
+
+        // Delete the old `datatypes::AnyValue`.
+        delete setting->setting_value;
+
+        setting->setting_value = setting_new_any_value;
+        setting->activate_callback(this->parent_pointer, this);
+        return true;
+    }
+
+    config::Setting* SettingMaster::get(std::string& setting_name)
     {
         return this->setting_pointer_map[setting_name];
+    }
+
+    datatypes::AnyValue* SettingMaster::get_value(std::string& setting_name)
+    {
+        config::Setting* setting = this->get(setting_name);
+
+        if (setting == nullptr)
+        {
+            return nullptr;
+        }
+
+        return setting->setting_value;
     }
 
     // public callbacks.
@@ -84,7 +119,7 @@ namespace config
             // Check the validity of the variable name.
             if (setting_master->is_setting(setting_name))
             {
-                config::Setting* setting = setting_master->get(universe, setting_name);
+                config::Setting* setting = setting_master->get(setting_name);
 
                 if (setting != nullptr)
                 {
@@ -271,5 +306,335 @@ namespace config
 
         glClearColor(red, green, blue, alpha);
         return nullptr;
+    }
+
+    datatypes::AnyValue* SettingMaster::activate_spherical_coordinates(ontology::Universe* universe, config::SettingMaster* setting_master)
+    {
+        if (universe == nullptr)
+        {
+            return nullptr;
+        }
+
+        SettingMaster* setting_master_pointer = universe->setting_master_pointer;
+
+        if (setting_master_pointer == nullptr)
+        {
+            return nullptr;
+        }
+
+        if (setting_master_pointer->setting_pointer_map.count("rho") != 1 ||
+                setting_master_pointer->setting_pointer_map.count("theta") != 1 ||
+                setting_master_pointer->setting_pointer_map.count("phi") != 1)
+        {
+            return nullptr;
+        }
+
+        datatypes::AnyValue* rho_any_value = setting_master_pointer->setting_pointer_map["rho"]->setting_value;
+        datatypes::AnyValue* theta_any_value = setting_master_pointer->setting_pointer_map["theta"]->setting_value;
+        datatypes::AnyValue* phi_any_value = setting_master_pointer->setting_pointer_map["phi"]->setting_value;
+
+        if (rho_any_value == nullptr || rho_any_value->type != datatypes::FLOAT)
+        {
+            return nullptr;
+        }
+
+        if (theta_any_value == nullptr || theta_any_value->type != datatypes::FLOAT)
+        {
+            return nullptr;
+        }
+
+        if (phi_any_value == nullptr || phi_any_value->type != datatypes::FLOAT)
+        {
+            return nullptr;
+        }
+
+        universe->rho = rho_any_value->float_value;
+        universe->theta = theta_any_value->float_value;
+        universe->phi = phi_any_value->float_value;
+        return nullptr;
+    }
+
+    datatypes::AnyValue* SettingMaster::activate_cartesian_coordinates(ontology::Universe* universe, config::SettingMaster* setting_master)
+    {
+        if (universe == nullptr)
+        {
+            return nullptr;
+        }
+
+        SettingMaster* setting_master_pointer = universe->setting_master_pointer;
+
+        if (setting_master_pointer == nullptr)
+        {
+            return nullptr;
+        }
+
+        if (setting_master_pointer->setting_pointer_map.count("x") != 1 ||
+                setting_master_pointer->setting_pointer_map.count("y") != 1 ||
+                setting_master_pointer->setting_pointer_map.count("z") != 1)
+        {
+            return nullptr;
+        }
+
+        datatypes::AnyValue* x_any_value = setting_master_pointer->setting_pointer_map["x"]->setting_value;
+        datatypes::AnyValue* y_any_value = setting_master_pointer->setting_pointer_map["y"]->setting_value;
+        datatypes::AnyValue* z_any_value = setting_master_pointer->setting_pointer_map["z"]->setting_value;
+
+        if (x_any_value == nullptr || x_any_value->type != datatypes::FLOAT)
+        {
+            return nullptr;
+        }
+
+        if (y_any_value == nullptr || y_any_value->type != datatypes::FLOAT)
+        {
+            return nullptr;
+        }
+
+        if (z_any_value == nullptr || z_any_value->type != datatypes::FLOAT)
+        {
+            return nullptr;
+        }
+
+        universe->x = x_any_value->float_value;
+        universe->y = y_any_value->float_value;
+        universe->z = z_any_value->float_value;
+        return nullptr;
+    }
+
+    datatypes::AnyValue* SettingMaster::activate_horizontal_angle(ontology::Universe* universe, config::SettingMaster* setting_master)
+    {
+        if (universe == nullptr)
+        {
+            return nullptr;
+        }
+
+        SettingMaster* setting_master_pointer = universe->setting_master_pointer;
+
+        if (setting_master_pointer == nullptr)
+        {
+            return nullptr;
+        }
+
+        if (setting_master_pointer->setting_pointer_map.count("horizontal_angle") != 1)
+        {
+            return nullptr;
+        }
+
+        datatypes::AnyValue* horizontal_angle_any_value = setting_master_pointer->setting_pointer_map["horizontal_angle"]->setting_value;
+
+        if (horizontal_angle_any_value == nullptr || horizontal_angle_any_value->type != datatypes::DOUBLE)
+        {
+            return nullptr;
+        }
+
+        universe->horizontal_angle = horizontal_angle_any_value->double_value;
+        return nullptr;
+    }
+
+    datatypes::AnyValue* SettingMaster::activate_vertical_angle(ontology::Universe* universe, config::SettingMaster* setting_master)
+    {
+        if (universe == nullptr)
+        {
+            return nullptr;
+        }
+
+        SettingMaster* setting_master_pointer = universe->setting_master_pointer;
+
+        if (setting_master_pointer == nullptr)
+        {
+            return nullptr;
+        }
+
+        if (setting_master_pointer->setting_pointer_map.count("vertical_angle") != 1)
+        {
+            return nullptr;
+        }
+
+        datatypes::AnyValue* vertical_angle_any_value = setting_master_pointer->setting_pointer_map["vertical_angle"]->setting_value;
+
+        if (vertical_angle_any_value == nullptr || vertical_angle_any_value->type != datatypes::DOUBLE)
+        {
+            return nullptr;
+        }
+
+        universe->vertical_angle = vertical_angle_any_value->double_value;
+        return nullptr;
+    }
+
+    datatypes::AnyValue* SettingMaster::activate_speed(ontology::Universe* universe, config::SettingMaster* setting_master)
+    {
+        if (universe == nullptr)
+        {
+            return nullptr;
+        }
+
+        SettingMaster* setting_master_pointer = universe->setting_master_pointer;
+
+        if (setting_master_pointer == nullptr)
+        {
+            return nullptr;
+        }
+
+        if (setting_master_pointer->setting_pointer_map.count("speed") != 1)
+        {
+            return nullptr;
+        }
+
+        datatypes::AnyValue* speed_any_value = setting_master_pointer->setting_pointer_map["speed"]->setting_value;
+
+        if (speed_any_value == nullptr || speed_any_value->type != datatypes::FLOAT)
+        {
+            return nullptr;
+        }
+
+        universe->speed = speed_any_value->double_value;
+        return nullptr;
+    }
+
+    datatypes::AnyValue* SettingMaster::activate_turbo_factor(ontology::Universe* universe, config::SettingMaster* setting_master)
+    {
+        if (universe == nullptr)
+        {
+            return nullptr;
+        }
+
+        SettingMaster* setting_master_pointer = universe->setting_master_pointer;
+
+        if (setting_master_pointer == nullptr)
+        {
+            return nullptr;
+        }
+
+        if (setting_master_pointer->setting_pointer_map.count("turbo_factor") != 1)
+        {
+            return nullptr;
+        }
+
+        datatypes::AnyValue* turbo_factor_any_value = setting_master_pointer->setting_pointer_map["turbo_factor"]->setting_value;
+
+        if (turbo_factor_any_value == nullptr || turbo_factor_any_value->type != datatypes::FLOAT)
+        {
+            return nullptr;
+        }
+
+        universe->turbo_factor = turbo_factor_any_value->double_value;
+        return nullptr;
+    }
+
+    datatypes::AnyValue* SettingMaster::activate_twin_turbo_factor(ontology::Universe* universe, config::SettingMaster* setting_master)
+    {
+        if (universe == nullptr)
+        {
+            return nullptr;
+        }
+
+        SettingMaster* setting_master_pointer = universe->setting_master_pointer;
+
+        if (setting_master_pointer == nullptr)
+        {
+            return nullptr;
+        }
+
+        if (setting_master_pointer->setting_pointer_map.count("twin_turbo_factor") != 1)
+        {
+            return nullptr;
+        }
+
+        datatypes::AnyValue* twin_turbo_factor_any_value = setting_master_pointer->setting_pointer_map["twin_turbo_factor"]->setting_value;
+
+        if (twin_turbo_factor_any_value == nullptr || twin_turbo_factor_any_value->type != datatypes::FLOAT)
+        {
+            return nullptr;
+        }
+
+        universe->twin_turbo_factor = twin_turbo_factor_any_value->double_value;
+        return nullptr;
+    }
+
+    datatypes::AnyValue* SettingMaster::activate_mouse_speed(ontology::Universe* universe, config::SettingMaster* setting_master)
+    {
+        if (universe == nullptr)
+        {
+            return nullptr;
+        }
+
+        SettingMaster* setting_master_pointer = universe->setting_master_pointer;
+
+        if (setting_master_pointer == nullptr)
+        {
+            return nullptr;
+        }
+
+        if (setting_master_pointer->setting_pointer_map.count("mouse_speed") != 1)
+        {
+            return nullptr;
+        }
+
+        datatypes::AnyValue* mouse_speed_any_value = setting_master_pointer->setting_pointer_map["mouse_speed"]->setting_value;
+
+        if (mouse_speed_any_value == nullptr || mouse_speed_any_value->type != datatypes::FLOAT)
+        {
+            return nullptr;
+        }
+
+        universe->mouse_speed = mouse_speed_any_value->double_value;
+        return nullptr;
+    }
+
+    datatypes::AnyValue* SettingMaster::activate_is_flight_mode_in_use(ontology::Universe* universe, config::SettingMaster* setting_master)
+    {
+        if (universe == nullptr)
+        {
+            return nullptr;
+        }
+
+        SettingMaster* setting_master_pointer = universe->setting_master_pointer;
+
+        if (setting_master_pointer == nullptr)
+        {
+            return nullptr;
+        }
+
+        if (setting_master_pointer->setting_pointer_map.count("is_flight_mode_in_use") != 1)
+        {
+            return nullptr;
+        }
+
+        datatypes::AnyValue* is_flight_mode_in_use_any_value = setting_master_pointer->setting_pointer_map["x"]->setting_value;
+
+        if (is_flight_mode_in_use_any_value == nullptr || is_flight_mode_in_use_any_value->type != datatypes::BOOL)
+        {
+            return nullptr;
+        }
+
+        universe->is_flight_mode_in_use = is_flight_mode_in_use_any_value->bool_value;
+    }
+
+    datatypes::AnyValue* SettingMaster::activate_testing_spherical_world_in_use(ontology::Universe* universe, config::SettingMaster* setting_master)
+    {
+        if (universe == nullptr)
+        {
+            return nullptr;
+        }
+
+        SettingMaster* setting_master_pointer = universe->setting_master_pointer;
+
+        if (setting_master_pointer == nullptr)
+        {
+            return nullptr;
+        }
+
+        if (setting_master_pointer->setting_pointer_map.count("testing_spherical_world_in_use") != 1)
+        {
+            return nullptr;
+        }
+
+        datatypes::AnyValue* testing_spherical_world_in_use_any_value = setting_master_pointer->setting_pointer_map["x"]->setting_value;
+
+        if (testing_spherical_world_in_use_any_value == nullptr || testing_spherical_world_in_use_any_value->type != datatypes::BOOL)
+        {
+            return nullptr;
+        }
+
+        universe->testing_spherical_world_in_use = testing_spherical_world_in_use_any_value->bool_value;
     }
 }

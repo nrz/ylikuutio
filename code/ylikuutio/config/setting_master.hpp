@@ -33,7 +33,11 @@ namespace config
             // this function returns help string for setting `setting`.
             std::string help(const std::string setting_name);
 
-            config::Setting* get(ontology::Universe* universe, std::string& setting_name);
+            datatypes::AnyValue* get_value(std::string& setting_name);
+
+            bool set(std::string& setting_name, datatypes::AnyValue* setting_new_any_value);
+
+            config::Setting* get(std::string& setting_name);
 
             // Public callbacks.
 
@@ -50,6 +54,26 @@ namespace config
             static datatypes::AnyValue* activate_world_radius(ontology::Universe* universe, config::SettingMaster* setting_master);
 
             static datatypes::AnyValue* activate_background_color(ontology::Universe* universe, config::SettingMaster* setting_master);
+
+            static datatypes::AnyValue* activate_spherical_coordinates(ontology::Universe* universe, config::SettingMaster* setting_master);
+
+            static datatypes::AnyValue* activate_cartesian_coordinates(ontology::Universe* universe, config::SettingMaster* setting_master);
+
+            static datatypes::AnyValue* activate_horizontal_angle(ontology::Universe* universe, config::SettingMaster* setting_master);
+
+            static datatypes::AnyValue* activate_vertical_angle(ontology::Universe* universe, config::SettingMaster* setting_master);
+
+            static datatypes::AnyValue* activate_speed(ontology::Universe* universe, config::SettingMaster* setting_master);
+
+            static datatypes::AnyValue* activate_turbo_factor(ontology::Universe* universe, config::SettingMaster* setting_master);
+
+            static datatypes::AnyValue* activate_twin_turbo_factor(ontology::Universe* universe, config::SettingMaster* setting_master);
+
+            static datatypes::AnyValue* activate_mouse_speed(ontology::Universe* universe, config::SettingMaster* setting_master);
+
+            static datatypes::AnyValue* activate_is_flight_mode_in_use(ontology::Universe* universe, config::SettingMaster* setting_master);
+
+            static datatypes::AnyValue* activate_testing_spherical_world_in_use(ontology::Universe* universe, config::SettingMaster* setting_master);
 
             // Public callbacks end here.
 
