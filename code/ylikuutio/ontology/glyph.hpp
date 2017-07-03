@@ -45,9 +45,6 @@ namespace ontology
             // this method sets a object pointer.
             void set_object_pointer(uint32_t childID, ontology::Object* child_pointer);
 
-            // this method gets a object ID and removes it from the `free_objectID_queue` if it was popped from the queue.
-            uint32_t get_objectID();
-
             void set_name(std::string name);
 
             friend class Object;

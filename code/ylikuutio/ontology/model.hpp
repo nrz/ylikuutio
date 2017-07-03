@@ -62,9 +62,6 @@ namespace ontology
             // this method sets a object pointer.
             void set_object_pointer(uint32_t childID, ontology::Object* child_pointer);
 
-            // this method gets a object ID and removes it from the `free_objectID_queue` if it was popped from the queue.
-            uint32_t get_objectID();
-
             std::string color_channel;               // color channel in use: `"red"`, `"green"`, `"blue"`, `"mean"` or `"all"`.
             glm::vec3 light_position;                // light position.
 
