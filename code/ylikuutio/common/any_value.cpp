@@ -1084,4 +1084,23 @@ namespace datatypes
             this->spherical_coordinates_struct_pointer = spherical_coordinates_struct_pointer;
         }
     }
+
+    AnyValue::AnyValue(glm::vec3* glm_vec3_pointer)
+    {
+        // constructor.
+        this->set_default_values();
+        this->type = datatypes::GLM_VEC3_POINTER;
+        this->glm_vec3_pointer = glm_vec3_pointer;
+    }
+
+    AnyValue::AnyValue(std::string type, glm::vec3* glm_vec3_pointer)
+    {
+        // constructor.
+        this->set_default_values();
+        if (std::strcmp(type.c_str(), "glm::vec3*"))
+        {
+            this->type = datatypes::GLM_VEC3_POINTER;
+            this->glm_vec3_pointer = glm_vec3_pointer;
+        }
+    }
 }
