@@ -49,8 +49,6 @@ namespace callback_system
         protected:
             void bind_to_parent();
 
-            uint32_t get_childID();
-
             // this method sets a callback parameter pointer.
             void set_callback_parameter_pointer(uint32_t childID, callback_system::CallbackParameter* child_pointer);
 
