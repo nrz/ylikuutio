@@ -279,7 +279,7 @@ namespace ontology
             // this method sets a terrain `Species` pointer.
             void set_terrain_species_pointer(ontology::Species* terrain_species_pointer);
 
-            void compute_matrices_from_inputs();
+            bool compute_matrices_from_inputs();
 
             void* terrain_species_pointer;              // pointer to terrain `Species` (used in collision detection).
 

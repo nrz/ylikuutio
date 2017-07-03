@@ -101,7 +101,10 @@ namespace ontology
 
     void Universe::render()
     {
-        this->compute_matrices_from_inputs();
+        if (!this->compute_matrices_from_inputs())
+        {
+            return;
+        }
 
         // render this `Universe` by calling `render()` function of the active `Scene`.
         this->active_scene->render();
@@ -311,7 +314,7 @@ namespace ontology
         this->terrain_species_pointer = terrain_species_pointer;
     }
 
-    void Universe::compute_matrices_from_inputs()
+    bool Universe::compute_matrices_from_inputs()
     {
         if (!globals::is_flight_mode_in_use)
         {
@@ -348,12 +351,14 @@ namespace ontology
         camera_position.y += 2.0f;
 
         // Projection matrix : 45° Field of View, aspect ratio, display range : 0.1 unit <-> 100 units
-        ProjectionMatrix = glm::perspective(FoV, aspect_ratio, 0.001f, 5000.0f + 2.0f * static_cast<GLfloat>(this->world_radius));
+        this->ProjectionMatrix = glm::perspective(FoV, aspect_ratio, 0.001f, 5000.0f + 2.0f * static_cast<GLfloat>(this->world_radius));
         // Camera matrix
-        ViewMatrix = glm::lookAt(
+        this->ViewMatrix = glm::lookAt(
                 camera_position,                      // Camera is here
                 camera_position + globals::direction, // and looks here : at the same position, plus "direction"
                 globals::up                           // Head is up (set to 0,-1,0 to look upside-down)
                 );
+
+        return true;
     }
 }
