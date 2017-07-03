@@ -34,6 +34,9 @@ namespace ontology
 
             void set_name(std::string name);
 
+            // this method returns a pointer to `datatypes::AnyValue` corresponding to the given `key`.
+            datatypes::AnyValue* get_variable(std::string key);
+
             friend class Universe;
             friend class Shader;
             friend class Species;
