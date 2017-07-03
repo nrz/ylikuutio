@@ -41,7 +41,7 @@ namespace config
             std::string name;
 
             // The setting value (may be a pointer a some datatype).
-            datatypes::AnyValue setting_value;
+            datatypes::AnyValue* setting_value;
 
             // pointer to `ActivateCallback` used to activate the new value after setting it.
             ActivateCallback activate_callback;

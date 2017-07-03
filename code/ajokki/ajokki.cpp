@@ -113,7 +113,7 @@ int main(void)
     config::SettingMaster* my_setting_master = new config::SettingMaster(my_universe);
 
     float earth_radius = 6371.0f; // in kilometres
-    datatypes::AnyValue any_value_float_earth_radius = datatypes::AnyValue(earth_radius);
+    datatypes::AnyValue* any_value_float_earth_radius = new datatypes::AnyValue(earth_radius);
 
     SettingStruct world_radius_setting_struct(any_value_float_earth_radius);
     world_radius_setting_struct.name = "world_radius";

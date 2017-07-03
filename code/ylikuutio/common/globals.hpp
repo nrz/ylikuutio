@@ -101,13 +101,13 @@ typedef datatypes::AnyValue* (*ActivateCallback) (ontology::Universe* universe, 
 
 typedef struct SettingStruct
 {
-    SettingStruct(datatypes::AnyValue& initial_value)
+    SettingStruct(datatypes::AnyValue* initial_value)
         : initial_value(initial_value), should_ylikuutio_call_activate_callback_now(true), setting_master_pointer(nullptr), activate_callback(nullptr)
     {
         // constructor.
     }
     std::string name;
-    datatypes::AnyValue& initial_value;
+    datatypes::AnyValue* initial_value;
     config::SettingMaster* setting_master_pointer;
     ActivateCallback activate_callback;
     bool should_ylikuutio_call_activate_callback_now;

@@ -89,7 +89,7 @@ namespace config
                 if (setting != nullptr)
                 {
                     // Print variable value.
-                    console->print_text(setting->setting_value.get_string());
+                    console->print_text(setting->setting_value->get_string());
                 }
             }
             else
@@ -113,14 +113,15 @@ namespace config
                 config::Setting* setting = setting_master->setting_pointer_map[setting_name];
 
                 // create empty `AnyValue` (there is no suitable constructor yet).
-                datatypes::AnyValue setting_any_value = datatypes::AnyValue();
-                setting_any_value.type = setting->setting_value.type;
+                datatypes::AnyValue* setting_any_value = new datatypes::AnyValue();
+                setting_any_value->type = setting->setting_value->type;
 
                 // set a new value.
-                bool success = setting_any_value.set_value(command_parameters.at(1));
+                bool success = setting_any_value->set_value(command_parameters.at(1));
 
                 if (success)
                 {
+                    delete setting->setting_value; // delete the old value.
                     setting->setting_value = setting_any_value;
                     setting->activate_callback(universe, setting_master);
                 }
@@ -163,7 +164,7 @@ namespace config
                 if (setting != nullptr)
                 {
                     // Print variable value.
-                    console->print_text(setting->setting_value.get_string());
+                    console->print_text(setting->setting_value->get_string());
                 }
             }
             else
@@ -195,7 +196,7 @@ namespace config
             return nullptr;
         }
 
-        datatypes::AnyValue* world_radius_any_value = &setting_master->setting_pointer_map["world_radius"]->setting_value;
+        datatypes::AnyValue* world_radius_any_value = setting_master->setting_pointer_map["world_radius"]->setting_value;
 
         if (world_radius_any_value == nullptr || world_radius_any_value->type != datatypes::FLOAT)
         {
@@ -229,7 +230,7 @@ namespace config
         }
 
         // red.
-        datatypes::AnyValue* red_any_value = &setting_master_pointer->setting_pointer_map["red"]->setting_value;
+        datatypes::AnyValue* red_any_value = setting_master_pointer->setting_pointer_map["red"]->setting_value;
 
         if (red_any_value == nullptr || red_any_value->type != datatypes::FLOAT)
         {
@@ -239,7 +240,7 @@ namespace config
         GLclampf red = static_cast<GLclampf>(red_any_value->float_value);
 
         // green.
-        datatypes::AnyValue* green_any_value = &setting_master_pointer->setting_pointer_map["green"]->setting_value;
+        datatypes::AnyValue* green_any_value = setting_master_pointer->setting_pointer_map["green"]->setting_value;
 
         if (green_any_value == nullptr || green_any_value->type != datatypes::FLOAT)
         {
@@ -249,7 +250,7 @@ namespace config
         GLclampf green = static_cast<GLclampf>(green_any_value->float_value);
 
         // blue.
-        datatypes::AnyValue* blue_any_value = &setting_master_pointer->setting_pointer_map["blue"]->setting_value;
+        datatypes::AnyValue* blue_any_value = setting_master_pointer->setting_pointer_map["blue"]->setting_value;
 
         if (blue_any_value == nullptr || blue_any_value->type != datatypes::FLOAT)
         {
@@ -259,7 +260,7 @@ namespace config
         GLclampf blue = static_cast<GLclampf>(blue_any_value->float_value);
 
         // alpha.
-        datatypes::AnyValue* alpha_any_value = &setting_master_pointer->setting_pointer_map["alpha"]->setting_value;
+        datatypes::AnyValue* alpha_any_value = setting_master_pointer->setting_pointer_map["alpha"]->setting_value;
 
         if (alpha_any_value == nullptr || alpha_any_value->type != datatypes::FLOAT)
         {

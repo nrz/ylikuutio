@@ -70,11 +70,11 @@ namespace console
         if (this->universe_pointer->setting_master_pointer->is_setting("console_top_y"))
         {
             // OK, there is a setting for `console_top_y`.
-            datatypes::AnyValue& console_top_y_any_value = universe_pointer->setting_master_pointer->setting_pointer_map["console_top_y"]->setting_value;
+            datatypes::AnyValue* console_top_y_any_value = universe_pointer->setting_master_pointer->setting_pointer_map["console_top_y"]->setting_value;
 
-            if (console_top_y_any_value.type == datatypes::UINT32_T)
+            if (console_top_y_any_value->type == datatypes::UINT32_T)
             {
-                this->console_top_y = console_top_y_any_value.uint32_t_value;
+                this->console_top_y = console_top_y_any_value->uint32_t_value;
             }
             else
             {
@@ -91,11 +91,11 @@ namespace console
         if (this->universe_pointer->setting_master_pointer->is_setting("console_bottom_y"))
         {
             // OK, there is a setting for `console_bottom_y`.
-            datatypes::AnyValue& console_bottom_y_any_value = universe_pointer->setting_master_pointer->setting_pointer_map["console_bottom_y"]->setting_value;
+            datatypes::AnyValue* console_bottom_y_any_value = universe_pointer->setting_master_pointer->setting_pointer_map["console_bottom_y"]->setting_value;
 
-            if (console_bottom_y_any_value.type == datatypes::UINT32_T)
+            if (console_bottom_y_any_value->type == datatypes::UINT32_T)
             {
-                this->console_bottom_y = console_bottom_y_any_value.uint32_t_value;
+                this->console_bottom_y = console_bottom_y_any_value->uint32_t_value;
             }
             else
             {
@@ -112,11 +112,11 @@ namespace console
         if (this->universe_pointer->setting_master_pointer->is_setting("console_left_x"))
         {
             // OK, there is a setting for `console_left_x`.
-            datatypes::AnyValue& console_left_x_any_value = universe_pointer->setting_master_pointer->setting_pointer_map["console_left_x"]->setting_value;
+            datatypes::AnyValue* console_left_x_any_value = universe_pointer->setting_master_pointer->setting_pointer_map["console_left_x"]->setting_value;
 
-            if (console_left_x_any_value.type == datatypes::UINT32_T)
+            if (console_left_x_any_value->type == datatypes::UINT32_T)
             {
-                this->console_left_x = console_left_x_any_value.uint32_t_value;
+                this->console_left_x = console_left_x_any_value->uint32_t_value;
             }
             else
             {
@@ -133,11 +133,11 @@ namespace console
         if (this->universe_pointer->setting_master_pointer->is_setting("console_right_x"))
         {
             // OK, there is a setting for `console_right_x`.
-            datatypes::AnyValue& console_right_x_any_value = universe_pointer->setting_master_pointer->setting_pointer_map["console_right_x"]->setting_value;
+            datatypes::AnyValue* console_right_x_any_value = universe_pointer->setting_master_pointer->setting_pointer_map["console_right_x"]->setting_value;
 
-            if (console_right_x_any_value.type == datatypes::UINT32_T)
+            if (console_right_x_any_value->type == datatypes::UINT32_T)
             {
-                this->console_right_x = console_right_x_any_value.uint32_t_value;
+                this->console_right_x = console_right_x_any_value->uint32_t_value;
             }
             else
             {
