@@ -32,7 +32,7 @@ namespace ontology
         hierarchy::bind_child_to_parent<ontology::Material*>(this, this->parent_pointer->material_pointer_vector, this->parent_pointer->free_materialID_queue);
     }
 
-    Material::Material(MaterialStruct material_struct)
+    Material::Material(const MaterialStruct material_struct)
     {
         // constructor.
         this->parent_pointer = material_struct.parent_pointer;
@@ -113,33 +113,33 @@ namespace ontology
         ontology::render_children<space_partition::ChunkMaster*>(this->chunk_master_pointer_vector);
     }
 
-    void Material::set_species_pointer(uint32_t childID, ontology::Species* child_pointer)
+    void Material::set_species_pointer(const uint32_t childID, ontology::Species* const child_pointer)
     {
         hierarchy::set_child_pointer(childID, child_pointer, this->species_pointer_vector, this->free_speciesID_queue);
     }
 
-    void Material::set_vector_font_pointer(uint32_t childID, ontology::VectorFont* child_pointer)
+    void Material::set_vector_font_pointer(const uint32_t childID, ontology::VectorFont* const child_pointer)
     {
         hierarchy::set_child_pointer(childID, child_pointer, this->vector_font_pointer_vector, this->free_vector_fontID_queue);
     }
 
-    void Material::set_chunk_master_pointer(uint32_t childID, space_partition::ChunkMaster* child_pointer)
+    void Material::set_chunk_master_pointer(const uint32_t childID, space_partition::ChunkMaster* const child_pointer)
     {
         hierarchy::set_child_pointer(childID, child_pointer, this->chunk_master_pointer_vector, this->free_chunk_masterID_queue);
     }
 
-    void Material::bind_to_new_parent(ontology::Shader* new_shader_pointer)
+    void Material::bind_to_new_parent(ontology::Shader* const new_shader_pointer)
     {
         // this method sets pointer to this `Material` to nullptr, sets `parent_pointer` according to the input, and requests a new `childID` from the new `Shader`.
         hierarchy::bind_child_to_new_parent<ontology::Material*, ontology::Shader*>(this, new_shader_pointer, this->parent_pointer->material_pointer_vector, this->parent_pointer->free_materialID_queue);
     }
 
-    void Material::set_name(std::string name)
+    void Material::set_name(const std::string name)
     {
         ontology::set_name(name, this);
     }
 
-    void Material::set_terrain_species_pointer(ontology::Species* terrain_species_pointer)
+    void Material::set_terrain_species_pointer(ontology::Species* const terrain_species_pointer)
     {
         this->terrain_species_pointer = terrain_species_pointer;
         this->parent_pointer->set_terrain_species_pointer(this->terrain_species_pointer);

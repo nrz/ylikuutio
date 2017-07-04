@@ -35,7 +35,7 @@ namespace ontology
         hierarchy::bind_child_to_parent<ontology::Scene*>(this, this->parent_pointer->scene_pointer_vector, this->parent_pointer->free_sceneID_queue);
     }
 
-    Scene::Scene(ontology::Universe* parent_pointer)
+    Scene::Scene(ontology::Universe* const parent_pointer)
     {
         // constructor.
         this->gravity = 9.81f / 60.0f;
@@ -95,17 +95,17 @@ namespace ontology
     }
 
     // this method returns a pointer to an `Object` using the name as key.
-    ontology::Object* Scene::get_object(std::string name)
+    ontology::Object* Scene::get_object(const std::string name)
     {
         return this->name_map[name];
     }
 
-    void Scene::set_name(std::string name)
+    void Scene::set_name(const std::string name)
     {
         ontology::set_name(name, this);
     }
 
-    void Scene::set_shader_pointer(uint32_t childID, ontology::Shader* child_pointer)
+    void Scene::set_shader_pointer(const uint32_t childID, ontology::Shader* const child_pointer)
     {
         hierarchy::set_child_pointer(childID, child_pointer, this->shader_pointer_vector, this->free_shaderID_queue);
     }

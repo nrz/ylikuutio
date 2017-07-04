@@ -33,7 +33,7 @@ namespace ontology
             // TODO: `Text3D` constructor also creates each `Object`,
             // and binds each to its corresponding `Glyph` for rendering hierarchy,
             // and also binds each to this `Text3D` for ontological hierarchy.
-            Text3D(Text3DStruct text3D_struct);
+            Text3D(const Text3DStruct text3D_struct);
 
             // destructor.
             ~Text3D();
@@ -44,12 +44,12 @@ namespace ontology
             // requests a new `childID` from the new `VectorFont`,
             // and creates all glyph Objects of this `Text3D` with the font data.
             // Note: different fonts may provide glyphs for different Unicodes!
-            void bind_to_new_parent(ontology::VectorFont* new_vector_font_pointer);
+            void bind_to_new_parent(ontology::VectorFont* const new_vector_font_pointer);
 
             // this method sets a object pointer.
-            void set_object_pointer(uint32_t childID, ontology::Object* child_pointer);
+            void set_object_pointer(const uint32_t childID, ontology::Object* const child_pointer);
 
-            void set_name(std::string name);
+            void set_name(const std::string name);
 
             friend class Object;
             template<class T1>

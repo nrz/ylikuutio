@@ -24,13 +24,13 @@ namespace ontology
     {
         public:
             // constructor.
-            Scene(ontology::Universe* universe_pointer);
+            Scene(ontology::Universe* const universe_pointer);
 
             // destructor.
             ~Scene();
 
             // this method returns a pointer to an `Object` using the name as key.
-            ontology::Object* get_object(std::string);
+            ontology::Object* get_object(const std::string);
 
             void set_name(std::string name);
 
@@ -56,10 +56,10 @@ namespace ontology
             void render();
 
             // this method sets a `Shader` pointer.
-            void set_shader_pointer(uint32_t childID, ontology::Shader* child_pointer);
+            void set_shader_pointer(const uint32_t childID, ontology::Shader* const child_pointer);
 
             // this method sets a `Symbiosis` pointer.
-            void set_symbiosis_pointer(uint32_t childID, ontology::Symbiosis* child_pointer);
+            void set_symbiosis_pointer(const uint32_t childID, ontology::Symbiosis* const child_pointer);
 
             ontology::Universe* parent_pointer;   // pointer to the `Universe`.
 

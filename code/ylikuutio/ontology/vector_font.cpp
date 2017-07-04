@@ -48,7 +48,7 @@ namespace ontology
         return nullptr;
     }
 
-    VectorFont::VectorFont(VectorFontStruct vector_font_struct)
+    VectorFont::VectorFont(const VectorFontStruct vector_font_struct)
     {
         // constructor.
         this->font_file_format      = vector_font_struct.font_file_format;
@@ -145,22 +145,22 @@ namespace ontology
         ontology::render_children<ontology::Glyph*>(this->glyph_pointer_vector);
     }
 
-    void VectorFont::set_glyph_pointer(uint32_t childID, ontology::Glyph* child_pointer)
+    void VectorFont::set_glyph_pointer(const uint32_t childID, ontology::Glyph* const child_pointer)
     {
         hierarchy::set_child_pointer(childID, child_pointer, this->glyph_pointer_vector, this->free_glyphID_queue);
     }
 
-    void VectorFont::set_text3D_pointer(uint32_t childID, ontology::Text3D* child_pointer)
+    void VectorFont::set_text3D_pointer(const uint32_t childID, ontology::Text3D* const child_pointer)
     {
         hierarchy::set_child_pointer(childID, child_pointer, this->text3D_pointer_vector, this->free_text3D_ID_queue);
     }
 
-    void VectorFont::bind_to_new_parent(ontology::Material* new_material_pointer)
+    void VectorFont::bind_to_new_parent(ontology::Material* const new_material_pointer)
     {
         hierarchy::bind_child_to_new_parent<ontology::VectorFont*, ontology::Material*>(this, new_material_pointer, this->parent_pointer->vector_font_pointer_vector, this->parent_pointer->free_vector_fontID_queue);
     }
 
-    void VectorFont::set_name(std::string name)
+    void VectorFont::set_name(const std::string name)
     {
         ontology::set_name(name, this);
     }

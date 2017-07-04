@@ -36,16 +36,16 @@ namespace ontology
     {
         public:
             // constructor.
-            Glyph(GlyphStruct glyph_struct);
+            Glyph(const GlyphStruct glyph_struct);
 
             // destructor.
             // glyphs should be destroyed only by destroying the entire `VectorFont`.
             ~Glyph();
 
             // this method sets a object pointer.
-            void set_object_pointer(uint32_t childID, ontology::Object* child_pointer);
+            void set_object_pointer(const uint32_t childID, ontology::Object* const child_pointer);
 
-            void set_name(std::string name);
+            void set_name(const std::string name);
 
             friend class Object;
             template<class T1>

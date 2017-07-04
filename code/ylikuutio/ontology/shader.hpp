@@ -37,13 +37,13 @@ namespace ontology
     {
         public:
             // constructor.
-            Shader(ShaderStruct shader_struct);
+            Shader(const ShaderStruct shader_struct);
 
             // destructor.
             ~Shader();
 
             // this method sets pointer to this `Shader` to nullptr, sets `parent_pointer` according to the input, and requests a new `childID` from the new `Scene`.
-            void bind_to_new_parent(ontology::Scene* new_scene_pointer);
+            void bind_to_new_parent(ontology::Scene* const new_scene_pointer);
 
             void set_name(std::string name);
 
@@ -70,10 +70,10 @@ namespace ontology
             void render();
 
             // this method sets a `Material` pointer.
-            void set_material_pointer(uint32_t childID, ontology::Material* child_pointer);
+            void set_material_pointer(const uint32_t childID, ontology::Material* const child_pointer);
 
             // this method sets a `Symbiosis` pointer.
-            void set_symbiosis_pointer(uint32_t childID, ontology::Symbiosis* child_pointer);
+            void set_symbiosis_pointer(const uint32_t childID, ontology::Symbiosis* const child_pointer);
 
             // this method sets a scene species pointer.
             void set_terrain_species_pointer(ontology::Species* terrain_species_pointer);

@@ -205,8 +205,8 @@ namespace ontology
     // Public callbacks.
 
     datatypes::AnyValue* Universe::delete_entity(
-            console::Console* console,
-            ontology::Universe* universe,
+            console::Console* const console,
+            ontology::Universe* const universe,
             std::vector<std::string>& command_parameters)
     {
         if (console == nullptr || universe == nullptr || command_parameters.size() == 0)
@@ -278,8 +278,8 @@ namespace ontology
     }
 
     datatypes::AnyValue* Universe::info(
-            console::Console* console,
-            ontology::Universe* universe,
+            console::Console* const console,
+            ontology::Universe* const universe,
             std::vector<std::string>& command_parameters)
     {
         if (console == nullptr || universe == nullptr || command_parameters.size() == 0)

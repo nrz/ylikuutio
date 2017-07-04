@@ -237,13 +237,13 @@ namespace ontology
             // Public callbacks.
 
             static datatypes::AnyValue* delete_entity(
-                    console::Console* console,
-                    ontology::Universe* universe,
+                    console::Console* const console,
+                    ontology::Universe* const universe,
                     std::vector<std::string>& command_parameters);
 
             static datatypes::AnyValue* info(
-                    console::Console* console,
-                    ontology::Universe* universe,
+                    console::Console* const console,
+                    ontology::Universe* const universe,
                     std::vector<std::string>& command_parameters);
 
             // Public callbacks end here.
