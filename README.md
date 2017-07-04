@@ -182,7 +182,7 @@ A: I like Lisp-family languages and Chibi-Scheme fulfils my
 * 3D rendering
 * 2D text
 * support for different height map formats (SRTM, LAZ)
-* instant rebinding of instances of classes belonging to rendering hierchy
+* instant rebinding of instances of classes belonging to rendering hierarchy
 * callbacks
 * in-game console
 * mipmapping

@@ -181,7 +181,7 @@ Implemented functionality:
 o 3D rendering
 o 2D text
 o support for different height map formats (SRTM, LAZ)
-o instant rebinding of instances of classes belonging to rendering hierchy
+o instant rebinding of instances of classes belonging to rendering hierarchy
 o callbacks
 o in-game console
 
