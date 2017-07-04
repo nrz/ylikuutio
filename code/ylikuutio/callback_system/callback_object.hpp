@@ -39,7 +39,7 @@ namespace callback_system
             datatypes::AnyValue* get_arg(uint32_t arg_i);
 
             // setter function for callbacks and callback objects.
-            void set_any_value(std::string name, datatypes::AnyValue* any_value);
+            void set_any_value(const std::string name, const datatypes::AnyValue* const any_value);
 
             friend class CallbackEngine;
             friend class CallbackParameter;
@@ -52,7 +52,7 @@ namespace callback_system
             void bind_to_parent();
 
             // this method sets a callback parameter pointer.
-            void set_callback_parameter_pointer(uint32_t childID, callback_system::CallbackParameter* child_pointer);
+            void set_callback_parameter_pointer(const uint32_t childID, callback_system::CallbackParameter* const child_pointer);
 
             void bind_child_to_parent(callback_system::CallbackParameter* child_pointer);
 

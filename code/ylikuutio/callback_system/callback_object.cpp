@@ -38,7 +38,7 @@ namespace callback_system
     }
 
     // setter function for callbacks and callback objects.
-    void CallbackObject::set_any_value(std::string name, datatypes::AnyValue* any_value)
+    void CallbackObject::set_any_value(const std::string name, const datatypes::AnyValue* const any_value)
     {
         this->anyvalue_hashmap[name] = *any_value;
     }
@@ -84,7 +84,7 @@ namespace callback_system
         }
     }
 
-    void CallbackObject::set_callback_parameter_pointer(uint32_t childID, callback_system::CallbackParameter* child_pointer)
+    void CallbackObject::set_callback_parameter_pointer(const uint32_t childID, callback_system::CallbackParameter* const child_pointer)
     {
         this->callback_parameter_pointer_vector[childID] = child_pointer;
 
