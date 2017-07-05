@@ -22,7 +22,7 @@ namespace loaders
         return string::check_and_report_if_some_string_matches(SVG_base_pointer, SVG_data_pointer, identifier_strings_vector);
     }
 
-    int32_t extract_value_from_string_with_standard_endings(char*& vertex_data_pointer, const char* description)
+    int32_t extract_value_from_string_with_standard_endings(char*& vertex_data_pointer, const char* const description)
     {
         return string::extract_int32_t_value_from_string(vertex_data_pointer, (char*) " Mmhvz\">", description);
     }
@@ -158,7 +158,7 @@ namespace loaders
     }
 
     bool load_SVG_glyph(
-            const char* SVG_base_pointer,
+            const char* const SVG_base_pointer,
             char*& SVG_data_pointer,
             std::vector<std::vector<std::vector<glm::vec2>>>& out_glyph_vertex_data,
             std::vector<std::string>& glyph_names,
@@ -309,7 +309,7 @@ namespace loaders
     }
 
     bool load_SVG_font(
-            std::string font_file_path,
+            const std::string font_file_path,
             std::vector<std::vector<std::vector<glm::vec2>>>& out_glyph_vertex_data,
             std::vector<std::string>& glyph_names,
             std::vector<std::string>& unicode_strings)

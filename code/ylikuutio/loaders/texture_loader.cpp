@@ -23,7 +23,7 @@
 
 namespace loaders
 {
-    GLuint load_BMP_texture(std::string filename)
+    GLuint load_BMP_texture(const std::string filename)
     {
         int32_t image_width;
         int32_t image_height;
@@ -102,7 +102,7 @@ namespace loaders
 #define FOURCC_DXT3 0x33545844 // Equivalent to "DXT3" in ASCII
 #define FOURCC_DXT5 0x35545844 // Equivalent to "DXT5" in ASCII
 
-    GLuint load_DDS_texture(std::string filename)
+    GLuint load_DDS_texture(const std::string filename)
     {
         const char* imagepath = filename.c_str();
 

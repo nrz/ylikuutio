@@ -29,9 +29,9 @@ namespace loaders
             std::vector<glm::vec3>& out_vertices,
             std::vector<glm::vec2>& out_UVs,
             std::vector<glm::vec3>& out_normals,
-            int32_t x_step,
-            int32_t z_step,
-            std::string triangulation_type)
+            const int32_t x_step,
+            const int32_t z_step,
+            const std::string triangulation_type)
     {
         // Beginning of `L4133D.asc`.
         //

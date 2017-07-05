@@ -18,7 +18,7 @@ namespace loaders
             std::vector<std::string>& glyph_names,
             std::vector<std::string>& unicode_strings);
 
-    int32_t extract_value_from_string_with_standard_endings(char*& vertex_data_pointer, const char* description);
+    int32_t extract_value_from_string_with_standard_endings(char*& vertex_data_pointer, const char* const description);
 
     bool find_first_glyph_in_SVG(const char* SVG_base_pointer, char*& SVG_data_pointer);
 
@@ -28,14 +28,14 @@ namespace loaders
             std::vector<std::vector<glm::vec2>>& current_glyph_vertices);
 
     bool load_SVG_glyph(
-            const char* SVG_base_pointer,
+            const char* const SVG_base_pointer,
             char*& SVG_data_pointer,
             std::vector<std::vector<std::vector<glm::vec2>>>& out_glyph_vertex_data,
             std::vector<std::string>& glyph_names,
             std::vector<std::string>& unicode_strings);
 
     bool load_SVG_font(
-            std::string font_file_path,
+            const std::string font_file_path,
             std::vector<std::vector<std::vector<glm::vec2>>>& out_glyph_vertex_data,
             std::vector<std::string>& glyph_names,
             std::vector<std::string>& unicode_strings);

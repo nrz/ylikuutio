@@ -14,7 +14,7 @@
 namespace loaders
 {
     bool load_LASF_data(
-            std::string laser_scaling_file_name,
+            const std::string laser_scaling_file_name,
             std::vector<glm::vec3>& laser_points);
 }
 
