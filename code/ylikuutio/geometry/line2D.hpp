@@ -19,7 +19,7 @@ namespace geometry
     {
         public:
             // constructor.
-            Line2D(std::vector<float> point1, std::vector<float> point2)
+            Line2D(const std::vector<float> point1, const std::vector<float> point2)
                 : Line(point1, point2)
             {
                 linear_algebra::Matrix line_points_matrix(2, 2);
@@ -45,13 +45,13 @@ namespace geometry
             }
 
             // constructor (delegate the constructor).
-            Line2D(glm::vec2 point1, glm::vec2 point2)
+            Line2D(const glm::vec2 point1, const glm::vec2 point2)
                 : Line2D(std::vector<float>{ point1.x, point1.y }, std::vector<float>{ point2.x, point2.y })
                 {
                 }
 
             // constructor.
-            Line2D(std::vector<float> general_form_coefficients, float general_form_constant)
+            Line2D(const std::vector<float> general_form_coefficients, const float general_form_constant)
                 : Line(general_form_coefficients, general_form_constant)
             {
                 // The general form of a 2D line:
@@ -64,10 +64,10 @@ namespace geometry
                 // y - y1 = m(x - x1)
             }
 
-            bool is_identical_with(geometry::Line2D* line);   // Here, identical means that points are identical.
+            bool is_identical_with(const geometry::Line2D* const line);   // Here, identical means that points are identical.
 
-            bool do_lines2D_intersect(geometry::Line2D* line1, geometry::Line2D* line2);
-            bool do_lines2D_intersect(geometry::Line2D* line);
+            bool do_lines2D_intersect(const geometry::Line2D* const line1, const geometry::Line2D* const line2);
+            bool do_lines2D_intersect(const geometry::Line2D* const line);
 
             glm::vec2 vec2_point1;
             glm::vec2 vec2_point2;

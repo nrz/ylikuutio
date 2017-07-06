@@ -18,7 +18,7 @@ namespace geometry
     {
         public:
             // constructor.
-            LineSegment3D(std::vector<float> point1, std::vector<float> point2)
+            LineSegment3D(const std::vector<float> point1, const std::vector<float> point2)
                 : LineSegment(point1, point2)
             {
             }

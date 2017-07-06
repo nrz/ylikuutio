@@ -14,7 +14,7 @@
 
 namespace geometry
 {
-    glm::vec2 get_intersection_point(geometry::Line2D* line1, geometry::Line2D* line2)
+    glm::vec2 get_intersection_point(const geometry::Line2D* const line1, const geometry::Line2D* const line2)
     {
         // See http://mathworld.wolfram.com/Line-LineIntersection.html
 
@@ -48,7 +48,7 @@ namespace geometry
         return glm::vec2(x, y);
     }
 
-    glm::vec3 get_intersection_point(geometry::Line3D* line1, geometry::Line3D* line2)
+    glm::vec3 get_intersection_point(const geometry::Line3D* const line1, const geometry::Line3D* const line2)
     {
         // TODO: implement this function!
         glm::vec3 intersection_point;

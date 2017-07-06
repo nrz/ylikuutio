@@ -9,7 +9,7 @@ namespace geometry
 {
     // constructor.
     // can be used for creating n-dimensional lines.
-    Line::Line(std::vector<float> point1, std::vector<float> point2)
+    Line::Line(const std::vector<float> point1, const std::vector<float> point2)
     {
         if (point1 == point2 || point1.size() != point2.size())
         {
@@ -28,7 +28,7 @@ namespace geometry
 
     // constructor.
     // can be used for creating n-dimensional lines.
-    Line::Line(std::vector<float> general_form_coefficients, float general_form_constant)
+    Line::Line(const std::vector<float> general_form_coefficients, const float general_form_constant)
     {
         this->general_form_coefficients = general_form_coefficients;
         this->general_form_constant = general_form_constant;
