@@ -13,7 +13,7 @@ namespace config
         hierarchy::bind_child_to_parent<config::Setting*>(this, this->parent_pointer->setting_pointer_vector, this->parent_pointer->free_settingID_queue);
     }
 
-    Setting::Setting(SettingStruct setting_struct)
+    Setting::Setting(const SettingStruct setting_struct)
     {
         // constructor.
         this->name = setting_struct.name;

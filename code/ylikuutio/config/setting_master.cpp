@@ -11,7 +11,7 @@
 
 namespace config
 {
-    SettingMaster::SettingMaster(ontology::Universe* universe_pointer)
+    SettingMaster::SettingMaster(ontology::Universe* const universe_pointer)
     {
         // costructor.
         this->parent_pointer = universe_pointer;
@@ -51,7 +51,7 @@ namespace config
         return this->help();
     }
 
-    bool SettingMaster::set(std::string& setting_name, datatypes::AnyValue* setting_new_any_value)
+    bool SettingMaster::set(std::string& setting_name, datatypes::AnyValue* const setting_new_any_value)
     {
         if (!this->is_setting(setting_name))
         {
@@ -94,8 +94,8 @@ namespace config
     // public callbacks.
 
     datatypes::AnyValue* SettingMaster::set_and_print(
-            console::Console* console,
-            ontology::Universe* universe,
+            console::Console* const console,
+            ontology::Universe* const universe,
             std::vector<std::string>& command_parameters)
     {
         // Usage:
@@ -171,8 +171,8 @@ namespace config
     }
 
     datatypes::AnyValue* SettingMaster::get_and_print(
-            console::Console* console,
-            ontology::Universe* universe,
+            console::Console* const console,
+            ontology::Universe* const universe,
             std::vector<std::string>& command_parameters)
     {
         // Usage:
@@ -219,7 +219,7 @@ namespace config
         return nullptr;
     }
 
-    datatypes::AnyValue* SettingMaster::activate_world_radius(ontology::Universe* universe, config::SettingMaster* setting_master)
+    datatypes::AnyValue* SettingMaster::activate_world_radius(ontology::Universe* const universe, config::SettingMaster* const setting_master)
     {
         if (universe == nullptr)
         {
@@ -244,7 +244,7 @@ namespace config
         return nullptr;
     }
 
-    datatypes::AnyValue* SettingMaster::activate_background_color(ontology::Universe* universe, config::SettingMaster* setting_master)
+    datatypes::AnyValue* SettingMaster::activate_background_color(ontology::Universe* const universe, config::SettingMaster* const setting_master)
     {
         if (universe == nullptr)
         {
@@ -310,7 +310,7 @@ namespace config
         return nullptr;
     }
 
-    datatypes::AnyValue* SettingMaster::activate_horizontal_angle(ontology::Universe* universe, config::SettingMaster* setting_master)
+    datatypes::AnyValue* SettingMaster::activate_horizontal_angle(ontology::Universe* const universe, config::SettingMaster* const setting_master)
     {
         if (universe == nullptr)
         {
@@ -340,7 +340,7 @@ namespace config
         return nullptr;
     }
 
-    datatypes::AnyValue* SettingMaster::activate_vertical_angle(ontology::Universe* universe, config::SettingMaster* setting_master)
+    datatypes::AnyValue* SettingMaster::activate_vertical_angle(ontology::Universe* const universe, config::SettingMaster* const setting_master)
     {
         if (universe == nullptr)
         {
@@ -370,7 +370,7 @@ namespace config
         return nullptr;
     }
 
-    datatypes::AnyValue* SettingMaster::activate_speed(ontology::Universe* universe, config::SettingMaster* setting_master)
+    datatypes::AnyValue* SettingMaster::activate_speed(ontology::Universe* const universe, config::SettingMaster* const setting_master)
     {
         if (universe == nullptr)
         {
@@ -400,7 +400,7 @@ namespace config
         return nullptr;
     }
 
-    datatypes::AnyValue* SettingMaster::activate_turbo_factor(ontology::Universe* universe, config::SettingMaster* setting_master)
+    datatypes::AnyValue* SettingMaster::activate_turbo_factor(ontology::Universe* const universe, config::SettingMaster* const setting_master)
     {
         if (universe == nullptr)
         {
@@ -430,7 +430,7 @@ namespace config
         return nullptr;
     }
 
-    datatypes::AnyValue* SettingMaster::activate_twin_turbo_factor(ontology::Universe* universe, config::SettingMaster* setting_master)
+    datatypes::AnyValue* SettingMaster::activate_twin_turbo_factor(ontology::Universe* const universe, config::SettingMaster* const setting_master)
     {
         if (universe == nullptr)
         {
@@ -460,7 +460,7 @@ namespace config
         return nullptr;
     }
 
-    datatypes::AnyValue* SettingMaster::activate_mouse_speed(ontology::Universe* universe, config::SettingMaster* setting_master)
+    datatypes::AnyValue* SettingMaster::activate_mouse_speed(ontology::Universe* const universe, config::SettingMaster* const setting_master)
     {
         if (universe == nullptr)
         {
@@ -490,7 +490,7 @@ namespace config
         return nullptr;
     }
 
-    datatypes::AnyValue* SettingMaster::activate_is_flight_mode_in_use(ontology::Universe* universe, config::SettingMaster* setting_master)
+    datatypes::AnyValue* SettingMaster::activate_is_flight_mode_in_use(ontology::Universe* const universe, config::SettingMaster* const setting_master)
     {
         if (universe == nullptr)
         {
@@ -519,7 +519,7 @@ namespace config
         universe->is_flight_mode_in_use = is_flight_mode_in_use_any_value->bool_value;
     }
 
-    datatypes::AnyValue* SettingMaster::activate_testing_spherical_world_in_use(ontology::Universe* universe, config::SettingMaster* setting_master)
+    datatypes::AnyValue* SettingMaster::activate_testing_spherical_world_in_use(ontology::Universe* const universe, config::SettingMaster* const setting_master)
     {
         if (universe == nullptr)
         {

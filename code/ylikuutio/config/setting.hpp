@@ -20,7 +20,7 @@ namespace config
     {
         public:
             // constructor.
-            Setting(SettingStruct setting_struct);
+            Setting(const SettingStruct setting_struct);
 
             // destructor.
             ~Setting();
