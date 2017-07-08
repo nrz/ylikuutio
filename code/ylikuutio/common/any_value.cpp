@@ -512,6 +512,7 @@ namespace datatypes
         this->font2D_pointer = nullptr;
         this->console_pointer = nullptr;
         this->spherical_coordinates_struct_pointer = nullptr;
+        this->glm_vec3_pointer = nullptr;
     }
 
     AnyValue::AnyValue(const std::string type, const std::string value_string)
