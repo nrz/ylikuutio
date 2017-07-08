@@ -396,7 +396,7 @@ namespace config
             return nullptr;
         }
 
-        universe->speed = speed_any_value->double_value;
+        universe->speed = speed_any_value->float_value;
         return nullptr;
     }
 
@@ -426,7 +426,7 @@ namespace config
             return nullptr;
         }
 
-        universe->turbo_factor = turbo_factor_any_value->double_value;
+        universe->turbo_factor = turbo_factor_any_value->float_value;
         return nullptr;
     }
 
@@ -456,7 +456,7 @@ namespace config
             return nullptr;
         }
 
-        universe->twin_turbo_factor = twin_turbo_factor_any_value->double_value;
+        universe->twin_turbo_factor = twin_turbo_factor_any_value->float_value;
         return nullptr;
     }
 
@@ -486,7 +486,7 @@ namespace config
             return nullptr;
         }
 
-        universe->mouse_speed = mouse_speed_any_value->double_value;
+        universe->mouse_speed = mouse_speed_any_value->float_value;
         return nullptr;
     }
 
