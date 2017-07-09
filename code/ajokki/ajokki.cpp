@@ -11,6 +11,7 @@
 #include "ajokki_console_callbacks.hpp"
 #include "ajokki_keyboard_callbacks.hpp"
 #include "ajokki_debug.hpp"
+#include "ajokki_console.hpp"
 #include "ajokki_movement.hpp"
 #include "ajokki_location_and_orientation.hpp"
 #include "code/ylikuutio/callback_system/callback_parameter.hpp"
@@ -180,6 +181,7 @@ int main(void)
     ajokki::set_movement(my_setting_master);
     ajokki::set_location_and_orientation(my_setting_master);
     ajokki::set_debug_variables(my_setting_master);
+    ajokki::set_console(my_setting_master);
 
     ontology::Scene* my_scene = new ontology::Scene(my_universe);
 

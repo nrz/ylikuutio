@@ -150,6 +150,9 @@ namespace console
             this->console_right_x = 0;
         }
 
+        this->n_rows = this->console_top_y - this->console_bottom_y;
+        this->n_columns = this->console_right_x - this->console_left_x;
+
         this->print_text("Welcome! Please write \"help\" for more");
         this->print_text("information.");
     }
@@ -238,7 +241,9 @@ namespace console
             printing_struct.horizontal_alignment = "left";
             printing_struct.vertical_alignment = "top";
 
-            for (uint32_t history_i = 0; history_i < this->console_history.size(); history_i++)
+            int32_t history_start_i = (this->console_history.size() > this->n_rows ? this->console_history.size() - this->n_rows : 0);
+
+            for (int32_t history_i = history_start_i; history_i < this->console_history.size(); history_i++)
             {
                 std::list<char> historical_text = this->console_history.at(history_i);
                 printing_struct.text += string::convert_std_list_char_to_std_string(historical_text, characters_for_line, characters_for_line) + "\\n";
