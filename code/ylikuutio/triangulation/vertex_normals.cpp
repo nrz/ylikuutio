@@ -130,7 +130,6 @@ namespace geometry
 
             // 6. Compute the vertices between, `push_back` to `temp_normals`.
             // Number of adjacent faces: 4.
-            // std::cout << "computing vertex normals for interpolated vertices.\n";
 
             for (z = 1; z < actual_image_height; z++)
             {

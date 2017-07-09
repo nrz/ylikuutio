@@ -106,7 +106,6 @@ namespace geometry
             {
                 // show progress in percents.
                 int32_t current_percent = static_cast<int32_t>(floor(100.0f * ((double) z / (double) (actual_image_height - 1))));
-                // std::cout << current_percent << "% ";
 
                 for (uint32_t x = 1; x < actual_image_width; x++)
                 {
@@ -261,7 +260,6 @@ namespace geometry
                     current_interpolated_vertex_i++;
                 }
             }
-            // std::cout << "\n"; // a newline after percent progress meter.
         }
         else if (is_southwest_northeast_edges_in_use)
         {
