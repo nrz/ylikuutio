@@ -10,6 +10,9 @@
 #include "ajokki_background_colors.hpp"
 #include "ajokki_console_callbacks.hpp"
 #include "ajokki_keyboard_callbacks.hpp"
+#include "ajokki_debug.hpp"
+#include "ajokki_movement.hpp"
+#include "ajokki_location_and_orientation.hpp"
 #include "code/ylikuutio/callback_system/callback_parameter.hpp"
 #include "code/ylikuutio/callback_system/callback_object.hpp"
 #include "code/ylikuutio/callback_system/callback_engine.hpp"
@@ -121,25 +124,6 @@ int main(void)
     world_radius_setting_struct.should_ylikuutio_call_activate_callback_now = true;
     new config::Setting(world_radius_setting_struct);
 
-    // testing_spherical_world_in_use = true;
-
-    if (my_universe->testing_spherical_world_in_use)
-    {
-        my_universe->is_flight_mode_in_use = true;
-
-        my_universe->cartesian_coordinates = glm::vec3(-5682.32f, -1641.20f, 2376.45f);
-    }
-    else
-    {
-        my_universe->cartesian_coordinates = glm::vec3(100.0f, 100.0f, 100.0f);
-    }
-    // Initial horizontal angle : toward -Z
-    // horizontal_angle = 0.0f;
-    my_universe->horizontal_angle = 42.42f;
-    // Initial vertical angle : none
-    // vertical_angle = PI / 2;
-    my_universe->vertical_angle = 7.44f;
-
     callback_system::CallbackEngine* cleanup_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* cleanup_callback_object = new callback_system::CallbackObject(nullptr, cleanup_callback_engine);
 
@@ -193,6 +177,9 @@ int main(void)
     glEnable(GL_CULL_FACE);
 
     ajokki::set_background_colors(my_setting_master);
+    ajokki::set_movement(my_setting_master);
+    ajokki::set_location_and_orientation(my_setting_master);
+    ajokki::set_debug_variables(my_setting_master);
 
     ontology::Scene* my_scene = new ontology::Scene(my_universe);
 
@@ -971,96 +958,99 @@ int main(void)
             printing_struct.font_size = my_universe->get_font_size();
             printing_struct.char_font_texture_file_format = "bmp";
 
-            char angles_and_coordinates_text[256];
-            std::snprintf(
-                    angles_and_coordinates_text,
-                    sizeof(angles_and_coordinates_text),
-                    "%.2f,%.2f rad; %.2f,%.2f deg\\n(%.2f,%.2f,%.2f)",
-                    my_universe->horizontal_angle,
-                    my_universe->vertical_angle,
-                    RADIANS_TO_DEGREES(my_universe->horizontal_angle),
-                    RADIANS_TO_DEGREES(my_universe->vertical_angle),
-                    my_universe->cartesian_coordinates.x,
-                    my_universe->cartesian_coordinates.y,
-                    my_universe->cartesian_coordinates.z);
-
-            char time_text[256];
-            std::snprintf(time_text, sizeof(time_text), "%.2f sec", glfwGetTime());
-
-            char null_text[] = "";
-            char on_text[] = "on";
-            char off_text[] = "off";
-            char in_use_text[] = " (in use)";
-
-            char help_text_char[1024];
-            std::snprintf(
-                    help_text_char,
-                    sizeof(help_text_char),
-                    "Ajokki v. 0.0.1\\n"
-                    "\\n"
-                    "arrow keys\\n"
-                    "space jump\\n"
-                    "enter duck\\n"
-                    "F1 help mode\\n"
-                    "`  enter console\\n"
-                    "I  invert mouse (%s)\\n"
-                    "F  flight mode (%s)\\n"
-                    "Ctrl      turbo\\n"
-                    "Ctrl+Ctrl extra turbo\\n"
-                    "for debugging:\\n"
-                    "G  grass texture%s\\n"
-                    "U  uvmap texture%s\\n"
-                    "T  terrain species\\n"
-                    "A  suzanne species\\n",
-                    (my_universe->is_invert_mouse_in_use ? on_text : off_text),
-                    (my_universe->is_flight_mode_in_use ? on_text : off_text),
-                    (!does_suzanne_species_have_uvmap_texture ? in_use_text : null_text),
-                    (does_suzanne_species_have_uvmap_texture ? in_use_text : null_text));
-
-            char spherical_coordinates_text[256];
-
-            if (my_universe->testing_spherical_world_in_use)
+            if (my_universe != nullptr && my_universe->cartesian_coordinates != nullptr)
             {
-                std::snprintf(spherical_coordinates_text, sizeof(spherical_coordinates_text), "rho:%.2f theta:%.2f phi:%.2f", my_universe->spherical_coordinates->rho, my_universe->spherical_coordinates->theta, my_universe->spherical_coordinates->phi);
-            }
+                char angles_and_coordinates_text[256];
+                std::snprintf(
+                        angles_and_coordinates_text,
+                        sizeof(angles_and_coordinates_text),
+                        "%.2f,%.2f rad; %.2f,%.2f deg\\n(%.2f,%.2f,%.2f)",
+                        my_universe->horizontal_angle,
+                        my_universe->vertical_angle,
+                        RADIANS_TO_DEGREES(my_universe->horizontal_angle),
+                        RADIANS_TO_DEGREES(my_universe->vertical_angle),
+                        my_universe->cartesian_coordinates->x,
+                        my_universe->cartesian_coordinates->y,
+                        my_universe->cartesian_coordinates->z);
 
-            // print cartesian coordinates on bottom left corner.
-            printing_struct.x = 0;
-            printing_struct.y = 0;
-            printing_struct.text_char = angles_and_coordinates_text;
-            printing_struct.horizontal_alignment = "left";
-            printing_struct.vertical_alignment = "bottom";
-            my_font2D->printText2D(printing_struct);
+                char time_text[256];
+                std::snprintf(time_text, sizeof(time_text), "%.2f sec", glfwGetTime());
 
-            if (my_universe->in_help_mode && my_universe->can_display_help_screen)
-            {
-                // print help text.
+                char null_text[] = "";
+                char on_text[] = "on";
+                char off_text[] = "off";
+                char in_use_text[] = " (in use)";
+
+                char help_text_char[1024];
+                std::snprintf(
+                        help_text_char,
+                        sizeof(help_text_char),
+                        "Ajokki v. 0.0.1\\n"
+                        "\\n"
+                        "arrow keys\\n"
+                        "space jump\\n"
+                        "enter duck\\n"
+                        "F1 help mode\\n"
+                        "`  enter console\\n"
+                        "I  invert mouse (%s)\\n"
+                        "F  flight mode (%s)\\n"
+                        "Ctrl      turbo\\n"
+                        "Ctrl+Ctrl extra turbo\\n"
+                        "for debugging:\\n"
+                        "G  grass texture%s\\n"
+                        "U  uvmap texture%s\\n"
+                        "T  terrain species\\n"
+                        "A  suzanne species\\n",
+                        (my_universe->is_invert_mouse_in_use ? on_text : off_text),
+                        (my_universe->is_flight_mode_in_use ? on_text : off_text),
+                        (!does_suzanne_species_have_uvmap_texture ? in_use_text : null_text),
+                        (does_suzanne_species_have_uvmap_texture ? in_use_text : null_text));
+
+                char spherical_coordinates_text[256];
+
+                if (my_universe != nullptr && my_universe->testing_spherical_world_in_use)
+                {
+                    std::snprintf(spherical_coordinates_text, sizeof(spherical_coordinates_text), "rho:%.2f theta:%.2f phi:%.2f", my_universe->spherical_coordinates->rho, my_universe->spherical_coordinates->theta, my_universe->spherical_coordinates->phi);
+                }
+
+                // print cartesian coordinates on bottom left corner.
                 printing_struct.x = 0;
-                printing_struct.y = my_universe->get_window_height() - (3 * my_universe->get_text_size());
-                printing_struct.text_char = help_text_char;
+                printing_struct.y = 0;
+                printing_struct.text_char = angles_and_coordinates_text;
+                printing_struct.horizontal_alignment = "left";
+                printing_struct.vertical_alignment = "bottom";
+                my_font2D->printText2D(printing_struct);
+
+                if (my_universe != nullptr && my_universe->in_help_mode && my_universe->can_display_help_screen)
+                {
+                    // print help text.
+                    printing_struct.x = 0;
+                    printing_struct.y = my_universe->get_window_height() - (3 * my_universe->get_text_size());
+                    printing_struct.text_char = help_text_char;
+                    printing_struct.horizontal_alignment = "left";
+                    printing_struct.vertical_alignment = "top";
+                    my_font2D->printText2D(printing_struct);
+                }
+
+                if (my_universe != nullptr && my_universe->testing_spherical_world_in_use)
+                {
+                    // print spherical coordinates on bottom left corner.
+                    printing_struct.x = 0;
+                    printing_struct.y += 2 * my_universe->get_text_size();
+                    printing_struct.text_char = spherical_coordinates_text;
+                    printing_struct.horizontal_alignment = "left";
+                    printing_struct.vertical_alignment = "bottom";
+                    my_font2D->printText2D(printing_struct);
+                }
+
+                // print time data on top left corner.
+                printing_struct.x = 0;
+                printing_struct.y = static_cast<GLuint>(my_universe->get_window_height());
+                printing_struct.text_char = time_text;
                 printing_struct.horizontal_alignment = "left";
                 printing_struct.vertical_alignment = "top";
                 my_font2D->printText2D(printing_struct);
             }
-
-            if (my_universe->testing_spherical_world_in_use)
-            {
-                // print spherical coordinates on bottom left corner.
-                printing_struct.x = 0;
-                printing_struct.y += 2 * my_universe->get_text_size();
-                printing_struct.text_char = spherical_coordinates_text;
-                printing_struct.horizontal_alignment = "left";
-                printing_struct.vertical_alignment = "bottom";
-                my_font2D->printText2D(printing_struct);
-            }
-
-            // print time data on top left corner.
-            printing_struct.x = 0;
-            printing_struct.y = static_cast<GLuint>(my_universe->get_window_height());
-            printing_struct.text_char = time_text;
-            printing_struct.horizontal_alignment = "left";
-            printing_struct.vertical_alignment = "top";
-            my_font2D->printText2D(printing_struct);
 
             if (ms_frame_text_ready)
             {

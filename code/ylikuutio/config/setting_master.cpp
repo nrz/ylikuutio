@@ -79,16 +79,24 @@ namespace config
         return this->setting_pointer_map[setting_name];
     }
 
-    datatypes::AnyValue* SettingMaster::get_value(std::string& setting_name)
+    datatypes::AnyValue* SettingMaster::get_value(
+            ontology::Universe* const universe,
+            config::SettingMaster* const setting_master,
+            std::string& setting_name)
     {
-        config::Setting* setting = this->get(setting_name);
+        config::Setting* setting = setting_master->get(setting_name);
 
         if (setting == nullptr)
         {
             return nullptr;
         }
 
-        return setting->setting_value;
+        if (setting->read_callback == nullptr)
+        {
+            return new datatypes::AnyValue(setting->setting_value); // create a new `AnyValue`.
+        }
+
+        return setting->read_callback(universe, setting_master);
     }
 
     // public callbacks.
@@ -194,12 +202,13 @@ namespace config
             // Print valid values of the given variable.
             if (setting_master->is_setting(setting_name))
             {
-                config::Setting* setting = setting_master->setting_pointer_map[setting_name];
+                datatypes::AnyValue* setting_any_value = setting_master->get_value(universe, setting_master, setting_name);
 
-                if (setting != nullptr)
+                if (setting_any_value != nullptr)
                 {
                     // Print variable value.
-                    console->print_text(setting->setting_value->get_string());
+                    console->print_text(setting_any_value->get_string());
+                    delete setting_any_value;
                 }
             }
             else
@@ -308,6 +317,242 @@ namespace config
 
         glClearColor(red, green, blue, alpha);
         return nullptr;
+    }
+
+    datatypes::AnyValue* SettingMaster::activate_spherical_coordinates(ontology::Universe* const universe, config::SettingMaster* const setting_master)
+    {
+        if (universe == nullptr)
+        {
+            return nullptr;
+        }
+
+        SettingMaster* setting_master_pointer = universe->setting_master_pointer;
+
+        if (setting_master_pointer == nullptr)
+        {
+            return nullptr;
+        }
+
+        if (setting_master_pointer->setting_pointer_map.count("spherical_coordinates") != 1)
+        {
+            return nullptr;
+        }
+
+        datatypes::AnyValue* spherical_coordinates_any_value = setting_master_pointer->setting_pointer_map["spherical_coordinates"]->setting_value;
+
+        if (spherical_coordinates_any_value == nullptr || spherical_coordinates_any_value->type != datatypes::GLM_VEC3_POINTER)
+        {
+            return nullptr;
+        }
+
+        delete universe->spherical_coordinates; // delete the old `SphericalCoordinatesStruct`.
+        universe->spherical_coordinates = spherical_coordinates_any_value->spherical_coordinates_struct_pointer;
+        return nullptr;
+    }
+
+    datatypes::AnyValue* SettingMaster::activate_rho(ontology::Universe* const universe, config::SettingMaster* const setting_master)
+    {
+        if (universe == nullptr || universe->spherical_coordinates == nullptr)
+        {
+            return nullptr;
+        }
+
+        SettingMaster* setting_master_pointer = universe->setting_master_pointer;
+
+        if (setting_master_pointer == nullptr)
+        {
+            return nullptr;
+        }
+
+        if (setting_master_pointer->setting_pointer_map.count("spherical_coordinates") != 1)
+        {
+            return nullptr;
+        }
+
+        datatypes::AnyValue* rho_any_value = setting_master_pointer->setting_pointer_map["rho"]->setting_value;
+
+        if (rho_any_value == nullptr || rho_any_value->type != datatypes::FLOAT)
+        {
+            return nullptr;
+        }
+
+        universe->spherical_coordinates->rho = rho_any_value->float_value;
+    }
+
+    datatypes::AnyValue* SettingMaster::activate_theta(ontology::Universe* const universe, config::SettingMaster* const setting_master)
+    {
+        if (universe == nullptr || universe->spherical_coordinates == nullptr)
+        {
+            return nullptr;
+        }
+
+        SettingMaster* setting_master_pointer = universe->setting_master_pointer;
+
+        if (setting_master_pointer == nullptr)
+        {
+            return nullptr;
+        }
+
+        if (setting_master_pointer->setting_pointer_map.count("spherical_coordinates") != 1)
+        {
+            return nullptr;
+        }
+
+        datatypes::AnyValue* theta_any_value = setting_master_pointer->setting_pointer_map["theta"]->setting_value;
+
+        if (theta_any_value == nullptr || theta_any_value->type != datatypes::FLOAT)
+        {
+            return nullptr;
+        }
+
+        universe->spherical_coordinates->theta = theta_any_value->float_value;
+    }
+
+    datatypes::AnyValue* SettingMaster::activate_phi(ontology::Universe* const universe, config::SettingMaster* const setting_master)
+    {
+        if (universe == nullptr || universe->spherical_coordinates == nullptr)
+        {
+            return nullptr;
+        }
+
+        SettingMaster* setting_master_pointer = universe->setting_master_pointer;
+
+        if (setting_master_pointer == nullptr)
+        {
+            return nullptr;
+        }
+
+        if (setting_master_pointer->setting_pointer_map.count("spherical_coordinates") != 1)
+        {
+            return nullptr;
+        }
+
+        datatypes::AnyValue* phi_any_value = setting_master_pointer->setting_pointer_map["phi"]->setting_value;
+
+        if (phi_any_value == nullptr || phi_any_value->type != datatypes::FLOAT)
+        {
+            return nullptr;
+        }
+
+        universe->spherical_coordinates->phi = phi_any_value->float_value;
+    }
+
+    datatypes::AnyValue* SettingMaster::activate_cartesian_coordinates(ontology::Universe* const universe, config::SettingMaster* const setting_master)
+    {
+        if (universe == nullptr)
+        {
+            return nullptr;
+        }
+
+        SettingMaster* setting_master_pointer = universe->setting_master_pointer;
+
+        if (setting_master_pointer == nullptr)
+        {
+            return nullptr;
+        }
+
+        if (setting_master_pointer->setting_pointer_map.count("cartesian_coordinates") != 1)
+        {
+            return nullptr;
+        }
+
+        datatypes::AnyValue* cartesian_coordinates_any_value = setting_master_pointer->setting_pointer_map["cartesian_coordinates"]->setting_value;
+
+        if (cartesian_coordinates_any_value == nullptr || cartesian_coordinates_any_value->type != datatypes::GLM_VEC3_POINTER)
+        {
+            return nullptr;
+        }
+
+        delete universe->cartesian_coordinates; // delete the old `glm::vec3`.
+        universe->cartesian_coordinates = cartesian_coordinates_any_value->glm_vec3_pointer;
+        return nullptr;
+    }
+
+    datatypes::AnyValue* SettingMaster::activate_x(ontology::Universe* const universe, config::SettingMaster* const setting_master)
+    {
+        if (universe == nullptr || universe->cartesian_coordinates == nullptr)
+        {
+            return nullptr;
+        }
+
+        SettingMaster* setting_master_pointer = universe->setting_master_pointer;
+
+        if (setting_master_pointer == nullptr)
+        {
+            return nullptr;
+        }
+
+        if (setting_master_pointer->setting_pointer_map.count("x") != 1)
+        {
+            return nullptr;
+        }
+
+        datatypes::AnyValue* x_any_value = setting_master_pointer->setting_pointer_map["x"]->setting_value;
+
+        if (x_any_value == nullptr || x_any_value->type != datatypes::FLOAT)
+        {
+            return nullptr;
+        }
+
+        universe->cartesian_coordinates->x = x_any_value->float_value;
+    }
+
+    datatypes::AnyValue* SettingMaster::activate_y(ontology::Universe* const universe, config::SettingMaster* const setting_master)
+    {
+        if (universe == nullptr || universe->cartesian_coordinates == nullptr)
+        {
+            return nullptr;
+        }
+
+        SettingMaster* setting_master_pointer = universe->setting_master_pointer;
+
+        if (setting_master_pointer == nullptr)
+        {
+            return nullptr;
+        }
+
+        if (setting_master_pointer->setting_pointer_map.count("y") != 1)
+        {
+            return nullptr;
+        }
+
+        datatypes::AnyValue* y_any_value = setting_master_pointer->setting_pointer_map["y"]->setting_value;
+
+        if (y_any_value == nullptr || y_any_value->type != datatypes::FLOAT)
+        {
+            return nullptr;
+        }
+
+        universe->cartesian_coordinates->y = y_any_value->float_value;
+    }
+
+    datatypes::AnyValue* SettingMaster::activate_z(ontology::Universe* const universe, config::SettingMaster* const setting_master)
+    {
+        if (universe == nullptr || universe->cartesian_coordinates == nullptr)
+        {
+            return nullptr;
+        }
+
+        SettingMaster* setting_master_pointer = universe->setting_master_pointer;
+
+        if (setting_master_pointer == nullptr)
+        {
+            return nullptr;
+        }
+
+        if (setting_master_pointer->setting_pointer_map.count("z") != 1)
+        {
+            return nullptr;
+        }
+
+        datatypes::AnyValue* z_any_value = setting_master_pointer->setting_pointer_map["z"]->setting_value;
+
+        if (z_any_value == nullptr || z_any_value->type != datatypes::FLOAT)
+        {
+            return nullptr;
+        }
+
+        universe->cartesian_coordinates->z = z_any_value->float_value;
     }
 
     datatypes::AnyValue* SettingMaster::activate_horizontal_angle(ontology::Universe* const universe, config::SettingMaster* const setting_master)
@@ -546,5 +791,65 @@ namespace config
         }
 
         universe->testing_spherical_world_in_use = testing_spherical_world_in_use_any_value->bool_value;
+    }
+
+    datatypes::AnyValue* SettingMaster::read_x(ontology::Universe* const universe, config::SettingMaster* const setting_master)
+    {
+        if (universe == nullptr || universe->cartesian_coordinates == nullptr)
+        {
+            return nullptr;
+        }
+
+        return new datatypes::AnyValue(universe->cartesian_coordinates->x);
+    }
+
+    datatypes::AnyValue* SettingMaster::read_y(ontology::Universe* const universe, config::SettingMaster* const setting_master)
+    {
+        if (universe == nullptr || universe->cartesian_coordinates == nullptr)
+        {
+            return nullptr;
+        }
+
+        return new datatypes::AnyValue(universe->cartesian_coordinates->y);
+    }
+
+    datatypes::AnyValue* SettingMaster::read_z(ontology::Universe* const universe, config::SettingMaster* const setting_master)
+    {
+        if (universe == nullptr || universe->cartesian_coordinates == nullptr)
+        {
+            return nullptr;
+        }
+
+        return new datatypes::AnyValue(universe->cartesian_coordinates->z);
+    }
+
+    datatypes::AnyValue* SettingMaster::read_rho(ontology::Universe* const universe, config::SettingMaster* const setting_master)
+    {
+        if (universe == nullptr || universe->spherical_coordinates == nullptr)
+        {
+            return nullptr;
+        }
+
+        return new datatypes::AnyValue(universe->spherical_coordinates->rho);
+    }
+
+    datatypes::AnyValue* SettingMaster::read_theta(ontology::Universe* const universe, config::SettingMaster* const setting_master)
+    {
+        if (universe == nullptr || universe->spherical_coordinates == nullptr)
+        {
+            return nullptr;
+        }
+
+        return new datatypes::AnyValue(universe->spherical_coordinates->theta);
+    }
+
+    datatypes::AnyValue* SettingMaster::read_phi(ontology::Universe* const universe, config::SettingMaster* const setting_master)
+    {
+        if (universe == nullptr || universe->spherical_coordinates == nullptr)
+        {
+            return nullptr;
+        }
+
+        return new datatypes::AnyValue(universe->spherical_coordinates->phi);
     }
 }

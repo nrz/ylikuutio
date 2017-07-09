@@ -62,7 +62,7 @@ namespace ajokki
         {
             temp_speed = universe->speed;
         }
-        universe->cartesian_coordinates += temp_speed * universe->get_delta_time() * moving_direction;
+        *universe->cartesian_coordinates += temp_speed * universe->get_delta_time() * moving_direction;
 
         return true;
     }

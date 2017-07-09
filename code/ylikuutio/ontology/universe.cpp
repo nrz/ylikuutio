@@ -52,6 +52,9 @@ namespace ontology
 {
     Universe::Universe()
     {
+        this->cartesian_coordinates = nullptr;
+        this->spherical_coordinates = nullptr;
+
         // constructor.
         this->world_radius = NAN; // world radius is NAN as long it doesn't get `set` by `SettingMaster`.
         this->setting_master_pointer = nullptr;
@@ -199,7 +202,7 @@ namespace ontology
 
     datatypes::AnyValue* Universe::get_value(std::string key)
     {
-        return this->setting_master_pointer->get_value(key);
+        return this->setting_master_pointer->get_value(this, this->setting_master_pointer, key);
     }
 
     // Public callbacks.
@@ -336,10 +339,15 @@ namespace ontology
 
     bool Universe::compute_matrices_from_inputs()
     {
+        if (this->cartesian_coordinates == nullptr)
+        {
+            return false;
+        }
+
         if (!this->is_flight_mode_in_use)
         {
             this->fall_speed += this->gravity;
-            this->cartesian_coordinates.y -= this->fall_speed;
+            this->cartesian_coordinates->y -= this->fall_speed;
         }
 
         GLfloat FoV = this->initialFoV;// - 5 * glfwGetMouseWheel(); // Now GLFW 3 requires setting up a callback for this. It's a bit too complicated for this beginner's tutorial, so it's disabled instead.
@@ -351,9 +359,9 @@ namespace ontology
             {
                 GLfloat ground_y = ontology::get_floor_level(static_cast<ontology::Species*>(this->terrain_species_pointer), this->cartesian_coordinates);
 
-                if (!std::isnan(ground_y) && this->cartesian_coordinates.y < ground_y)
+                if (!std::isnan(ground_y) && this->cartesian_coordinates->y < ground_y)
                 {
-                    this->cartesian_coordinates.y = ground_y;
+                    this->cartesian_coordinates->y = ground_y;
                     this->fall_speed = 0.0f;
                 }
             }
@@ -361,13 +369,21 @@ namespace ontology
 
         if (this->testing_spherical_world_in_use)
         {
+            if (this->spherical_coordinates == nullptr)
+            {
+                return false;
+            }
+
             // compute spherical coordinates.
-            this->spherical_coordinates->rho = sqrt((this->cartesian_coordinates.x * this->cartesian_coordinates.x) + (this->cartesian_coordinates.y * this->cartesian_coordinates.y) + (this->cartesian_coordinates.z * this->cartesian_coordinates.z));
-            this->spherical_coordinates->theta = RADIANS_TO_DEGREES(atan2(sqrt((this->cartesian_coordinates.x * this->cartesian_coordinates.x) + (this->cartesian_coordinates.y * this->cartesian_coordinates.y)), this->cartesian_coordinates.z));
-            this->spherical_coordinates->phi = RADIANS_TO_DEGREES(atan2(this->cartesian_coordinates.y, this->cartesian_coordinates.x));
+            this->spherical_coordinates->rho = sqrt((this->cartesian_coordinates->x * this->cartesian_coordinates->x) + (this->cartesian_coordinates->y * this->cartesian_coordinates->y) + (this->cartesian_coordinates->z * this->cartesian_coordinates->z));
+            this->spherical_coordinates->theta = RADIANS_TO_DEGREES(atan2(sqrt((this->cartesian_coordinates->x * this->cartesian_coordinates->x) + (this->cartesian_coordinates->y * this->cartesian_coordinates->y)), this->cartesian_coordinates->z));
+            this->spherical_coordinates->phi = RADIANS_TO_DEGREES(atan2(this->cartesian_coordinates->y, this->cartesian_coordinates->x));
         }
 
-        glm::vec3 camera_cartesian_coordinates = this->cartesian_coordinates;
+        glm::vec3 camera_cartesian_coordinates;
+        camera_cartesian_coordinates.x = this->cartesian_coordinates->x;
+        camera_cartesian_coordinates.y = this->cartesian_coordinates->y;
+        camera_cartesian_coordinates.z = this->cartesian_coordinates->z;
         camera_cartesian_coordinates.y += 2.0f;
 
         // Projection matrix : 45° Field of View, aspect ratio, display range : 0.1 unit <-> 100 units

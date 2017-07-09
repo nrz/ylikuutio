@@ -65,7 +65,7 @@ namespace ontology
         // If this is the active `Scene`, set all `Scene`-related variables to `nullptr` or invalid.
         if (this->universe_pointer->active_scene == this)
         {
-            this->universe_pointer->cartesian_coordinates = glm::vec3(NAN, NAN, NAN);
+            this->universe_pointer->cartesian_coordinates = nullptr;
 
             this->universe_pointer->direction = glm::vec3(NAN, NAN, NAN);
 

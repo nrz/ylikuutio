@@ -251,16 +251,16 @@ namespace ontology
             // Variables related to location and orientation.
 
             // `cartesian_coordinates` can be accessed as a vector or as single coordinates `x`, `y`, `z`.
-            glm::vec3 cartesian_coordinates;
+            glm::vec3* cartesian_coordinates;
+
+            // `spherical_coordinates` can be accessed as a vector or as single coordinates `rho`, `theta`, `phi`.
+            SphericalCoordinatesStruct* spherical_coordinates;
 
             // `direction` can be accessed as a vector or as single coordinates `pitch`, `roll`, `yaw`.
             glm::vec3 direction;
 
             glm::vec3 right; // note: `right` can not be set directly using console.
             glm::vec3 up;    // note: `up` can not be set directly using console.
-
-            // `spherical_coordinates` can be accessed as a vector or as single coordinates `rho`, `theta`, `phi`.
-            SphericalCoordinatesStruct* spherical_coordinates;
 
             double horizontal_angle;
             double vertical_angle;

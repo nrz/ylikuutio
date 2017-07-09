@@ -33,7 +33,10 @@ namespace config
             // this function returns help string for setting `setting`.
             std::string help(const std::string setting_name);
 
-            datatypes::AnyValue* get_value(std::string& setting_name);
+            static datatypes::AnyValue* get_value(
+                    ontology::Universe* const universe,
+                    config::SettingMaster* const setting_master,
+                    std::string& setting_name);
 
             bool set(std::string& setting_name, datatypes::AnyValue* const setting_new_any_value);
 
@@ -56,8 +59,14 @@ namespace config
             static datatypes::AnyValue* activate_background_color(ontology::Universe* const universe, config::SettingMaster* const setting_master);
 
             static datatypes::AnyValue* activate_spherical_coordinates(ontology::Universe* const universe, config::SettingMaster* const setting_master);
+            static datatypes::AnyValue* activate_rho(ontology::Universe* const universe, config::SettingMaster* const setting_master);
+            static datatypes::AnyValue* activate_theta(ontology::Universe* const universe, config::SettingMaster* const setting_master);
+            static datatypes::AnyValue* activate_phi(ontology::Universe* const universe, config::SettingMaster* const setting_master);
 
             static datatypes::AnyValue* activate_cartesian_coordinates(ontology::Universe* const universe, config::SettingMaster* const setting_master);
+            static datatypes::AnyValue* activate_x(ontology::Universe* const universe, config::SettingMaster* const setting_master);
+            static datatypes::AnyValue* activate_y(ontology::Universe* const universe, config::SettingMaster* const setting_master);
+            static datatypes::AnyValue* activate_z(ontology::Universe* const universe, config::SettingMaster* const setting_master);
 
             static datatypes::AnyValue* activate_horizontal_angle(ontology::Universe* const universe, config::SettingMaster* const setting_master);
 
@@ -74,6 +83,14 @@ namespace config
             static datatypes::AnyValue* activate_is_flight_mode_in_use(ontology::Universe* const universe, config::SettingMaster* const setting_master);
 
             static datatypes::AnyValue* activate_testing_spherical_world_in_use(ontology::Universe* const universe, config::SettingMaster* const setting_master);
+
+            static datatypes::AnyValue* read_x(ontology::Universe* const universe, config::SettingMaster* const setting_master);
+            static datatypes::AnyValue* read_y(ontology::Universe* const universe, config::SettingMaster* const setting_master);
+            static datatypes::AnyValue* read_z(ontology::Universe* const universe, config::SettingMaster* const setting_master);
+
+            static datatypes::AnyValue* read_rho(ontology::Universe* const universe, config::SettingMaster* const setting_master);
+            static datatypes::AnyValue* read_theta(ontology::Universe* const universe, config::SettingMaster* const setting_master);
+            static datatypes::AnyValue* read_phi(ontology::Universe* const universe, config::SettingMaster* const setting_master);
 
             // Public callbacks end here.
 

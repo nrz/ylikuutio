@@ -76,7 +76,7 @@ namespace ontology
             // Variables related to location and orientation.
 
             // `cartesian_coordinates` can be accessed as a vector or as single coordinates `x`, `y`, `z`.
-            glm::vec3 cartesian_coordinates;
+            glm::vec3* cartesian_coordinates;
 
             // `direction` can be accessed as a vector or as single coordinates `pitch`, `roll`, `yaw`.
             glm::vec3 direction;

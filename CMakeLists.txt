@@ -627,8 +627,14 @@ add_executable(ajokki
     code/ajokki/ajokki_background_colors.hpp
     code/ajokki/ajokki_console_callbacks.cpp
     code/ajokki/ajokki_console_callbacks.hpp
+    code/ajokki/ajokki_debug.cpp
+    code/ajokki/ajokki_debug.hpp
     code/ajokki/ajokki_keyboard_callbacks.cpp
     code/ajokki/ajokki_keyboard_callbacks.hpp
+    code/ajokki/ajokki_location_and_orientation.cpp
+    code/ajokki/ajokki_location_and_orientation.hpp
+    code/ajokki/ajokki_movement.cpp
+    code/ajokki/ajokki_movement.hpp
     )
 add_dependencies(ajokki rescan)
 target_link_libraries(ajokki ylikuutio ${ALL_LIBS} glfw)
