@@ -131,11 +131,19 @@ namespace loaders
         // start processing image_data.
         std::cout << "Processing image data.\n";
 
+        int32_t last_percent = -1;
+        int32_t current_percent = -1;
+
         for (int32_t z = 0; z < image_height_in_use; z++)
         {
             // show progress in percents.
-            int32_t current_percent = static_cast<int32_t>(floor(100.0f * ((double) z / (double) (image_height_in_use - 1))));
-            std::cout << current_percent << "% ";
+            current_percent = static_cast<int32_t>(floor(100.0f * ((double) z / (double) (image_height_in_use - 1))));
+
+            if (current_percent > last_percent)
+            {
+                std::cout << current_percent << "% ";
+                last_percent = current_percent;
+            }
 
             for (int32_t x = 0; x < image_width; x++)
             {
