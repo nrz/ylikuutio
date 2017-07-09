@@ -37,15 +37,15 @@ namespace ontology
     {
         public:
             // constructor.
-            Material(MaterialStruct material_struct);
+            Material(const MaterialStruct material_struct);
 
             // destructor.
             ~Material();
 
             // this method sets pointer to this `Material` to nullptr, sets `parent_pointer` according to the input, and requests a new `childID` from the new `Shader`.
-            void bind_to_new_parent(ontology::Shader* new_shader_pointer);
+            void bind_to_new_parent(ontology::Shader* const new_shader_pointer);
 
-            void set_name(std::string name);
+            void set_name(const std::string name);
 
             friend class Shader;
             friend class VectorFont;
@@ -69,16 +69,16 @@ namespace ontology
             void render();
 
             // this method sets `Species` pointer.
-            void set_species_pointer(uint32_t childID, ontology::Species* child_pointer);
+            void set_species_pointer(const uint32_t childID, ontology::Species* const child_pointer);
 
             // this method sets `VectorFont` pointer.
-            void set_vector_font_pointer(uint32_t childID, ontology::VectorFont* child_pointer);
+            void set_vector_font_pointer(const uint32_t childID, ontology::VectorFont* const child_pointer);
 
             // this method sets `ChunkMaster` pointer.
-            void set_chunk_master_pointer(uint32_t childID, space_partition::ChunkMaster* child_pointer);
+            void set_chunk_master_pointer(const uint32_t childID, space_partition::ChunkMaster* const child_pointer);
 
             // this method sets a terrain `Species` pointer.
-            void set_terrain_species_pointer(ontology::Species* terrain_species_pointer);
+            void set_terrain_species_pointer(ontology::Species* const terrain_species_pointer);
 
             ontology::Shader* parent_pointer;      // pointer to `Shader`.
 

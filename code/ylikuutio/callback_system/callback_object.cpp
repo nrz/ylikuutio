@@ -6,6 +6,7 @@
 
 // Include standard headers
 #include <iostream> // std::cout, std::cin, std::cerr
+#include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 #include <vector>   // std::vector
 
@@ -17,8 +18,27 @@ namespace callback_system
         return &this->anyvalue_hashmap[name];
     }
 
+    datatypes::AnyValue* CallbackObject::get_arg(uint32_t arg_i)
+    {
+        if (arg_i >= this->callback_parameter_pointer_vector.size())
+        {
+            std::cerr << "virhe 1!";
+            return nullptr;
+        }
+
+        callback_system::CallbackParameter* callback_parameter = this->callback_parameter_pointer_vector.at(arg_i);
+
+        if (callback_parameter == nullptr)
+        {
+            std::cerr << "virhe 2!";
+            return nullptr;
+        }
+
+        return callback_parameter->any_value;
+    }
+
     // setter function for callbacks and callback objects.
-    void CallbackObject::set_any_value(std::string name, datatypes::AnyValue* any_value)
+    void CallbackObject::set_any_value(const std::string name, const datatypes::AnyValue* const any_value)
     {
         this->anyvalue_hashmap[name] = *any_value;
     }
@@ -31,41 +51,6 @@ namespace callback_system
     void CallbackObject::set_new_callback(InputParametersToAnyValueCallback callback)
     {
         this->callback = callback;
-    }
-
-    uint32_t CallbackObject::get_childID()
-    {
-        uint32_t childID;
-
-        while (!this->free_callback_parameterID_queue.empty())
-        {
-            // return the first (oldest) free childID.
-            childID = this->free_callback_parameterID_queue.front();
-            this->free_callback_parameterID_queue.pop();
-
-            // check that the child index does not exceed current child pointer vector.
-            if (childID < this->callback_parameter_pointer_vector.size())
-            {
-                // OK, it does not exceed current child pointer vector.
-                return childID;
-            }
-        }
-        // OK, the queue is empty.
-        // A new child index must be created.
-        childID = this->callback_parameter_pointer_vector.size();
-
-        // child pointer vector must also be extended with an appropriate nullptr pointer.
-        this->callback_parameter_pointer_vector.push_back(nullptr);
-
-        return childID;
-    }
-
-    void CallbackObject::bind_child_to_parent(callback_system::CallbackParameter* child_pointer)
-    {
-        // get childID from the parent, because every child deserves a unique ID!
-        child_pointer->childID = this->get_childID();
-        // set pointer to the child in parent's child pointer vector so that parent knows about children's whereabouts!
-        this->set_callback_parameter_pointer(child_pointer->childID, child_pointer);
     }
 
     CallbackObject::CallbackObject(callback_system::CallbackEngine* parent_pointer)
@@ -99,34 +84,7 @@ namespace callback_system
         }
     }
 
-    uint32_t CallbackObject::get_callback_parameterID(std::vector<callback_system::CallbackParameter*>& child_pointer_vector, std::queue<uint32_t>& free_childID_queue)
-    {
-        uint32_t childID;
-
-        while (!free_childID_queue.empty())
-        {
-            // return the first (oldest) free childID.
-            childID = free_childID_queue.front();
-            free_childID_queue.pop();
-
-            // check that the child index does not exceed current child pointer vector.
-            if (childID < child_pointer_vector.size())
-            {
-                // OK, it does not exceed current child pointer vector.
-                return childID;
-            }
-        }
-        // OK, the queue is empty.
-        // A new child index must be created.
-        childID = child_pointer_vector.size();
-
-        // child pointer vector must also be extended with an appropriate nullptr pointer.
-        child_pointer_vector.push_back(nullptr);
-
-        return childID;
-    }
-
-    void CallbackObject::set_callback_parameter_pointer(uint32_t childID, callback_system::CallbackParameter* child_pointer)
+    void CallbackObject::set_callback_parameter_pointer(const uint32_t childID, callback_system::CallbackParameter* const child_pointer)
     {
         this->callback_parameter_pointer_vector[childID] = child_pointer;
 

@@ -10,7 +10,7 @@ namespace ajokki
 {
     datatypes::AnyValue* glfwTerminate_cleanup(
             callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
+            callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>& input_parameters);
 
     datatypes::AnyValue* full_cleanup(
@@ -24,27 +24,27 @@ namespace ajokki
 
     datatypes::AnyValue* release_first_turbo(
             callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
+            callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>&);
 
     datatypes::AnyValue* release_second_turbo(
             callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
+            callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>&);
 
     datatypes::AnyValue* enable_toggle_invert_mouse(
             callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
+            callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>&);
 
     datatypes::AnyValue* enable_toggle_flight_mode(
             callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
+            callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>&);
 
     datatypes::AnyValue* enable_toggle_help_mode(
             callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
+            callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>&);
 
     /*********************************************************************\
@@ -58,72 +58,72 @@ namespace ajokki
 
     datatypes::AnyValue* first_turbo(
             callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
+            callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>&);
 
     datatypes::AnyValue* second_turbo(
             callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
+            callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>&);
 
     datatypes::AnyValue* move_forward(
             callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
+            callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>&);
 
     datatypes::AnyValue* move_backward(
             callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
+            callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>&);
 
     datatypes::AnyValue* strafe_left(
             callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
+            callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>&);
 
     datatypes::AnyValue* strafe_right(
             callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
+            callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>&);
 
     datatypes::AnyValue* ascent(
             callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
+            callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>&);
 
     datatypes::AnyValue* descent(
             callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
+            callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>&);
 
     datatypes::AnyValue* toggle_invert_mouse(
             callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
+            callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>&);
 
     datatypes::AnyValue* toggle_flight_mode(
             callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
+            callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>&);
 
     datatypes::AnyValue* toggle_help_mode(
             callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
+            callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>&);
 
     datatypes::AnyValue* delete_suzanne_species(
             callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
+            callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>& input_parameters);
 
     datatypes::AnyValue* switch_to_new_material(
             callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
+            callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>& input_parameters);
 
     datatypes::AnyValue* transform_into_new_species(
             callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
+            callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>& input_parameters);
 }
 

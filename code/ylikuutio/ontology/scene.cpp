@@ -20,11 +20,10 @@
 #endif
 
 // Include standard headers
+#include <cmath>    // NAN, std::isnan, std::pow
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <stdint.h> // uint32_t etc.
 #include <unordered_map> // std::unordered_map
-
-extern GLFWwindow* window; // The "extern" keyword here is to access the variable "window" declared in tutorialXXX.cpp. This is a hack to keep the tutorials simple. Please avoid this.
 
 namespace ontology
 {
@@ -36,9 +35,12 @@ namespace ontology
         hierarchy::bind_child_to_parent<ontology::Scene*>(this, this->parent_pointer->scene_pointer_vector, this->parent_pointer->free_sceneID_queue);
     }
 
-    Scene::Scene(ontology::Universe* parent_pointer)
+    Scene::Scene(ontology::Universe* const parent_pointer)
     {
         // constructor.
+        this->gravity = 9.81f / 60.0f;
+        this->fall_speed = this->gravity;
+
         this->universe_pointer = parent_pointer;
         this->parent_pointer = parent_pointer;
 
@@ -46,6 +48,9 @@ namespace ontology
         this->bind_to_parent();
 
         this->child_vector_pointers_vector.push_back(&this->shader_pointer_vector);
+
+        // make this `Scene` the active `Scene`.
+        this->parent_pointer->set_active_scene(this);
     }
 
     Scene::~Scene()
@@ -56,6 +61,25 @@ namespace ontology
         // destroy all shaders of this scene.
         std::cout << "All shaders of this scene will be destroyed.\n";
         hierarchy::delete_children<ontology::Shader*>(this->shader_pointer_vector);
+
+        // If this is the active `Scene`, set all `Scene`-related variables to `nullptr` or invalid.
+        if (this->universe_pointer->active_scene == this)
+        {
+            this->universe_pointer->cartesian_coordinates = nullptr;
+
+            this->universe_pointer->direction = glm::vec3(NAN, NAN, NAN);
+
+            this->universe_pointer->right = glm::vec3(NAN, NAN, NAN);
+            this->universe_pointer->up = glm::vec3(NAN, NAN, NAN);
+
+            this->universe_pointer->spherical_coordinates = nullptr;
+
+            this->universe_pointer->horizontal_angle = NAN;
+            this->universe_pointer->vertical_angle = NAN;
+
+            // Make this `Scene` no more the active `Scene`.
+            this->universe_pointer->active_scene = nullptr;
+        }
 
         if (!this->name.empty() && this->universe_pointer != nullptr)
         {
@@ -71,17 +95,17 @@ namespace ontology
     }
 
     // this method returns a pointer to an `Object` using the name as key.
-    ontology::Object* Scene::get_object(std::string name)
+    ontology::Object* Scene::get_object(const std::string name)
     {
         return this->name_map[name];
     }
 
-    void Scene::set_name(std::string name)
+    void Scene::set_name(const std::string name)
     {
         ontology::set_name(name, this);
     }
 
-    void Scene::set_shader_pointer(uint32_t childID, ontology::Shader* child_pointer)
+    void Scene::set_shader_pointer(const uint32_t childID, ontology::Shader* const child_pointer)
     {
         hierarchy::set_child_pointer(childID, child_pointer, this->shader_pointer_vector, this->free_shaderID_queue);
     }

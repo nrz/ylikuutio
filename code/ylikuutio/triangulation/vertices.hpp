@@ -32,7 +32,7 @@ namespace geometry
             std::vector<glm::vec2>& out_UVs,
             std::vector<glm::vec3>& out_normals);
 
-    void define_vertices_UVs_and_normals(
+    bool define_vertices_UVs_and_normals(
             const TriangulateQuadsStruct triangulate_quads_struct,
             std::vector<glm::vec3>& temp_vertices,
             std::vector<glm::vec2>& temp_UVs,

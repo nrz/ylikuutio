@@ -21,7 +21,7 @@ namespace ontology
     // TODO: `Text3D` constructor also creates each `Object`,
     // and binds each to its corresponding `Glyph` for rendering hierarchy,
     // and also binds each to this `Text3D` for ontological hierarchy.
-    Text3D::Text3D(Text3DStruct text3D_struct)
+    Text3D::Text3D(const Text3DStruct text3D_struct)
     {
         // constructor.
         this->text_string = text3D_struct.text_string;
@@ -92,12 +92,12 @@ namespace ontology
         }
     }
 
-    void Text3D::set_object_pointer(uint32_t childID, ontology::Object* child_pointer)
+    void Text3D::set_object_pointer(const uint32_t childID, ontology::Object* const child_pointer)
     {
         hierarchy::set_child_pointer(childID, child_pointer, this->object_pointer_vector, this->free_objectID_queue);
     }
 
-    void Text3D::set_name(std::string name)
+    void Text3D::set_name(const std::string name)
     {
         ontology::set_name(name, this);
     }

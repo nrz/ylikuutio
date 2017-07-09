@@ -18,19 +18,19 @@ namespace geometry
     {
         public:
             // constructor.
-            Line3D(std::vector<float> point1, std::vector<float> point2)
+            Line3D(const std::vector<float> point1, const std::vector<float> point2)
                 : Line(point1, point2)
             {
             }
 
             // constructor.
-            Line3D(std::vector<float> general_form_coefficients, float general_form_constant)
+            Line3D(const std::vector<float> general_form_coefficients, const float general_form_constant)
                 : Line(general_form_coefficients, general_form_constant)
             {
             }
 
-            bool do_lines3D_intersect(geometry::Line3D* line1, geometry::Line3D* line2);
-            bool do_lines3D_intersect(geometry::Line3D* line);
+            bool do_lines3D_intersect(const geometry::Line3D* const line1, const geometry::Line3D* const line2);
+            bool do_lines3D_intersect(const geometry::Line3D* const line);
 
         private:
             glm::vec3 vec3_point1;

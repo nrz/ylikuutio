@@ -24,16 +24,20 @@ namespace ontology
     {
         public:
             // constructor.
-            Scene(ontology::Universe* universe_pointer);
+            Scene(ontology::Universe* const universe_pointer);
 
             // destructor.
             ~Scene();
 
             // this method returns a pointer to an `Object` using the name as key.
-            ontology::Object* get_object(std::string);
+            ontology::Object* get_object(const std::string);
 
             void set_name(std::string name);
 
+            // this method returns a pointer to `datatypes::AnyValue` corresponding to the given `key`.
+            datatypes::AnyValue* get_variable(std::string key);
+
+            friend class Universe;
             friend class Shader;
             friend class Species;
             template<class T1>
@@ -52,10 +56,10 @@ namespace ontology
             void render();
 
             // this method sets a `Shader` pointer.
-            void set_shader_pointer(uint32_t childID, ontology::Shader* child_pointer);
+            void set_shader_pointer(const uint32_t childID, ontology::Shader* const child_pointer);
 
             // this method sets a `Symbiosis` pointer.
-            void set_symbiosis_pointer(uint32_t childID, ontology::Symbiosis* child_pointer);
+            void set_symbiosis_pointer(const uint32_t childID, ontology::Symbiosis* const child_pointer);
 
             ontology::Universe* parent_pointer;   // pointer to the `Universe`.
 
@@ -68,6 +72,27 @@ namespace ontology
             std::unordered_map<std::string, ontology::Object*> name_map;
 
             std::string name;                      // name of this entity.
+
+            // Variables related to location and orientation.
+
+            // `cartesian_coordinates` can be accessed as a vector or as single coordinates `x`, `y`, `z`.
+            glm::vec3* cartesian_coordinates;
+
+            // `direction` can be accessed as a vector or as single coordinates `pitch`, `roll`, `yaw`.
+            glm::vec3 direction;
+
+            glm::vec3 right; // note: `right` can not be set directly using console.
+            glm::vec3 up;    // note: `up` can not be set directly using console.
+
+            // `spherical_coordinates` can be accessed as a vector or as single coordinates `rho`, `theta`, `phi`.
+            SphericalCoordinatesStruct* spherical_coordinates;
+
+            double horizontal_angle;
+            double vertical_angle;
+
+            // Variables related to physics.
+            float gravity;
+            float fall_speed;
     };
 }
 

@@ -36,27 +36,27 @@ namespace geometry
 
     // for bilinear interpolation.
     template<class T1>
-        float southwest_y(const int32_t x, const int32_t z, const T1* input_vertex_pointer, const int32_t image_width, const int32_t x_step, const int32_t z_step)
+        float southwest_y(const int32_t x, const int32_t z, const T1* const input_vertex_pointer, const int32_t image_width, const int32_t x_step, const int32_t z_step)
         {
             return static_cast<float>(geometry::get_y(input_vertex_pointer, x - x_step, z - z_step, image_width));
         }
     template<class T1>
-        float southeast_y(const int32_t x, const int32_t z, const T1* input_vertex_pointer, const int32_t image_width, const int32_t x_step, const int32_t z_step)
+        float southeast_y(const int32_t x, const int32_t z, const T1* const input_vertex_pointer, const int32_t image_width, const int32_t x_step, const int32_t z_step)
         {
             return static_cast<float>(geometry::get_y(input_vertex_pointer, x, z - z_step, image_width));
         }
     template<class T1>
-        float northwest_y(const int32_t x, const int32_t z, const T1* input_vertex_pointer, const int32_t image_width, const int32_t x_step, const int32_t z_step)
+        float northwest_y(const int32_t x, const int32_t z, const T1* const input_vertex_pointer, const int32_t image_width, const int32_t x_step, const int32_t z_step)
         {
             return static_cast<float>(geometry::get_y(input_vertex_pointer, x - x_step, z, image_width));
         }
     template<class T1>
-        float northeast_y(const int32_t x, const int32_t z, const T1* input_vertex_pointer, const int32_t image_width, const int32_t x_step, const int32_t z_step)
+        float northeast_y(const int32_t x, const int32_t z, const T1* const input_vertex_pointer, const int32_t image_width, const int32_t x_step, const int32_t z_step)
         {
             return static_cast<float>(geometry::get_y(input_vertex_pointer, x, z, image_width));
         }
     template<class T1>
-        float center_y(const int32_t x, const int32_t z, const T1* input_vertex_pointer, const int32_t image_width, const int32_t x_step, const int32_t z_step)
+        float center_y(const int32_t x, const int32_t z, const T1* const input_vertex_pointer, const int32_t image_width, const int32_t x_step, const int32_t z_step)
         {
             return static_cast<float>(southwest_y(x, z, input_vertex_pointer, image_width, x_step, z_step) +
                     southeast_y(x, z, input_vertex_pointer, image_width, x_step, z_step) +
@@ -66,7 +66,7 @@ namespace geometry
 
     template<class T1>
         bool define_vertices(
-                const T1* input_vertex_pointer,
+                const T1* const input_vertex_pointer,
                 const int32_t image_width,
                 const int32_t image_height,
                 const int32_t x_step,
@@ -126,7 +126,7 @@ namespace geometry
 
     template<class T1>
         const bool interpolate_and_define_vertices_using_bilinear_interpolation(
-                const T1* input_vertex_pointer,
+                const T1* const input_vertex_pointer,
                 const int32_t image_width,
                 const int32_t image_height,
                 const int32_t x_step,
@@ -157,7 +157,6 @@ namespace geometry
                 for (int32_t x = x_step; x < image_width; x += x_step)
                 {
                     // This corresponds to "f": specify a face (but here we specify 2 faces instead!).
-                    // std::cout << "Processing coordinate (" << x << ", " << z << ").\n";
 
                     // Interpolate y coordinate (altitude).
                     const float y = center_y(x, z, input_vertex_pointer, image_width, x_step, z_step);

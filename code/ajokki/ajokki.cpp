@@ -7,8 +7,12 @@
 #define RADIANS_TO_DEGREES(x) (x * 180.0f / PI)
 #endif
 
+#include "ajokki_background_colors.hpp"
 #include "ajokki_console_callbacks.hpp"
 #include "ajokki_keyboard_callbacks.hpp"
+#include "ajokki_debug.hpp"
+#include "ajokki_movement.hpp"
+#include "ajokki_location_and_orientation.hpp"
 #include "code/ylikuutio/callback_system/callback_parameter.hpp"
 #include "code/ylikuutio/callback_system/callback_object.hpp"
 #include "code/ylikuutio/callback_system/callback_engine.hpp"
@@ -57,6 +61,7 @@
 #endif
 
 // Include standard headers
+#include <cmath>         // NAN, std::isnan, std::pow
 #include <cstdio>        // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf etc.
 #include <iostream>      // std::cout, std::cin, std::cerr
 #include <string>        // std::string
@@ -111,36 +116,13 @@ int main(void)
     config::SettingMaster* my_setting_master = new config::SettingMaster(my_universe);
 
     float earth_radius = 6371.0f; // in kilometres
-    datatypes::AnyValue any_value_float_earth_radius = datatypes::AnyValue(earth_radius);
 
-    SettingStruct world_radius_setting_struct(any_value_float_earth_radius);
+    SettingStruct world_radius_setting_struct(new datatypes::AnyValue(earth_radius));
     world_radius_setting_struct.name = "world_radius";
     world_radius_setting_struct.setting_master_pointer = my_setting_master;
     world_radius_setting_struct.activate_callback = &config::SettingMaster::activate_world_radius; // world may be a planet or a moon.
     world_radius_setting_struct.should_ylikuutio_call_activate_callback_now = true;
-    config::Setting* my_world_radius = new config::Setting(world_radius_setting_struct);
-
-    // testing_spherical_world_in_use = true;
-
-    if (testing_spherical_world_in_use)
-    {
-        is_flight_mode_in_use = true;
-
-        position = glm::vec3(-5682.32f, -1641.20f, 2376.45f);
-    }
-    else
-    {
-        position = glm::vec3(100.0f, 100.0f, 100.0f);
-    }
-    // Initial horizontal angle : toward -Z
-    // horizontalAngle = 0.0f;
-    horizontalAngle = 42.42f;
-    // Initial vertical angle : none
-    // verticalAngle = PI / 2;
-    verticalAngle = 7.44f;
-    // Initial Field of View
-    // initialFoV = 45.0f;
-    initialFoV = 60.0f;
+    new config::Setting(world_radius_setting_struct);
 
     callback_system::CallbackEngine* cleanup_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* cleanup_callback_object = new callback_system::CallbackObject(nullptr, cleanup_callback_engine);
@@ -157,16 +139,22 @@ int main(void)
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
 
     // Open a window and create its OpenGL context.
-    window = glfwCreateWindow(static_cast<GLuint>(window_width), static_cast<GLuint>(window_height), "Ajokki v. 0.0.1, powered by Ylikuutio v. 0.0.1", nullptr, nullptr);
+    my_universe->set_window(
+            glfwCreateWindow(
+                static_cast<GLuint>(my_universe->get_window_width()),
+                static_cast<GLuint>(my_universe->get_window_height()),
+                "Ajokki v. 0.0.1, powered by Ylikuutio v. 0.0.1",
+                nullptr,
+                nullptr));
     cleanup_callback_object->set_new_callback(&ajokki::glfwTerminate_cleanup);
 
-    if (window == nullptr)
+    if (my_universe->get_window() == nullptr)
     {
         std::cerr << "Failed to open GLFW window.\n";
         cleanup_callback_engine->execute();
         return -1;
     }
-    glfwMakeContextCurrent(window);
+    glfwMakeContextCurrent(my_universe->get_window());
 
     // Initialize GLEW.
     if (glewInit() != GLEW_OK)
@@ -177,8 +165,8 @@ int main(void)
     }
 
     // Ensure we can capture the escape key being pressed below.
-    glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
-    glfwSetCursorPos(window, (static_cast<GLuint>(window_width) / 2), (static_cast<GLuint>(window_height) / 2));
+    glfwSetInputMode(my_universe->get_window(), GLFW_STICKY_KEYS, GL_TRUE);
+    glfwSetCursorPos(my_universe->get_window(), (static_cast<GLuint>(my_universe->get_window_width()) / 2), (static_cast<GLuint>(my_universe->get_window_height()) / 2));
 
     // Enable depth test.
     glEnable(GL_DEPTH_TEST);
@@ -188,42 +176,10 @@ int main(void)
     // Cull triangles which normal is not towards the camera.
     glEnable(GL_CULL_FACE);
 
-    // Blue background.
-
-    float float_zero = 0.0f;
-    datatypes::AnyValue any_value_float_zero = datatypes::AnyValue(float_zero);
-
-    float float_one = 1.0f;
-    datatypes::AnyValue any_value_float_one = datatypes::AnyValue(float_one);
-
-    SettingStruct red_setting_struct(any_value_float_zero);
-    red_setting_struct.name = "red";
-    red_setting_struct.setting_master_pointer = my_setting_master;
-    red_setting_struct.activate_callback = &config::SettingMaster::activate_background_color;
-    red_setting_struct.should_ylikuutio_call_activate_callback_now = false;
-    config::Setting* my_background_red = new config::Setting(red_setting_struct);
-
-    SettingStruct green_setting_struct(any_value_float_zero);
-    green_setting_struct.name = "green";
-    green_setting_struct.setting_master_pointer = my_setting_master;
-    green_setting_struct.activate_callback = &config::SettingMaster::activate_background_color;
-    green_setting_struct.should_ylikuutio_call_activate_callback_now = false;
-    config::Setting* my_background_green = new config::Setting(green_setting_struct);
-
-    SettingStruct blue_setting_struct(any_value_float_one);
-    blue_setting_struct.name = "blue";
-    blue_setting_struct.setting_master_pointer = my_setting_master;
-    blue_setting_struct.activate_callback = &config::SettingMaster::activate_background_color;
-    blue_setting_struct.should_ylikuutio_call_activate_callback_now = false;
-    config::Setting* my_background_blue = new config::Setting(blue_setting_struct);
-
-    SettingStruct alpha_setting_struct(any_value_float_zero);
-    alpha_setting_struct.name = "alpha";
-    alpha_setting_struct.initial_value = any_value_float_zero;
-    alpha_setting_struct.setting_master_pointer = my_setting_master;
-    alpha_setting_struct.activate_callback = &config::SettingMaster::activate_background_color;
-    alpha_setting_struct.should_ylikuutio_call_activate_callback_now = true;
-    config::Setting* my_background_alpha = new config::Setting(alpha_setting_struct);
+    ajokki::set_background_colors(my_setting_master);
+    ajokki::set_movement(my_setting_master);
+    ajokki::set_location_and_orientation(my_setting_master);
+    ajokki::set_debug_variables(my_setting_master);
 
     ontology::Scene* my_scene = new ontology::Scene(my_universe);
 
@@ -257,7 +213,7 @@ int main(void)
 
     ontology::Species* terrain_species;
 
-    if (testing_spherical_world_in_use)
+    if (my_universe->testing_spherical_world_in_use)
     {
         // Create the species, store it in `terrain_species`.
         SpeciesStruct(SRTM_terrain_species_struct);
@@ -274,8 +230,8 @@ int main(void)
         SRTM_terrain_species_struct.divisor = 1000.0f;
         terrain_species = new ontology::Species(SRTM_terrain_species_struct);
 
-        turbo_factor = 100.0f;
-        twin_turbo_factor = 50000.0f;
+        my_universe->turbo_factor = 100.0f;
+        my_universe->twin_turbo_factor = 50000.0f;
     }
     else
     {
@@ -303,10 +259,10 @@ int main(void)
 
         terrain_species->set_name("Helsinki");
 
-        is_flight_mode_in_use = true;
+        my_universe->is_flight_mode_in_use = true;
 
-        turbo_factor = 5.0f;
-        twin_turbo_factor = 100.0f;
+        my_universe->turbo_factor = 5.0f;
+        my_universe->twin_turbo_factor = 100.0f;
     }
 
     // Create terrain1, store it in `terrain1`.
@@ -316,7 +272,7 @@ int main(void)
     terrain_object_struct1.rotate_angle = 0.0f;
     terrain_object_struct1.rotate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
     terrain_object_struct1.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
-    ontology::Object* terrain1 = new ontology::Object(terrain_object_struct1);
+    new ontology::Object(terrain_object_struct1);
 
     // Create the species, store it in `snow_cottage_species`.
     SpeciesStruct snow_cottage_species_struct;
@@ -334,7 +290,7 @@ int main(void)
     snow_cottage_object_struct1.rotate_angle = 0.10f;
     snow_cottage_object_struct1.rotate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
     snow_cottage_object_struct1.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
-    // ontology::Object* snow_cottage1 = new ontology::Object(snow_cottage_object_struct1);
+    // new ontology::Object(snow_cottage_object_struct1);
 
     SpeciesStruct suzanne_species_struct;
     suzanne_species_struct.parent_pointer = uvmap_material;
@@ -350,7 +306,7 @@ int main(void)
     suzanne_object_struct1.rotate_angle = 0.10f;
     suzanne_object_struct1.rotate_vector = glm::vec3(1.0f, 0.0f, 0.0f);
     suzanne_object_struct1.translate_vector = glm::vec3(1.0f, 0.0f, 0.0f);
-    ontology::Object* suzanne1 = new ontology::Object(suzanne_object_struct1);
+    new ontology::Object(suzanne_object_struct1);
 
     ObjectStruct suzanne_object_struct2;
     suzanne_object_struct2.species_parent_pointer = suzanne_species;
@@ -366,7 +322,7 @@ int main(void)
     suzanne_object_struct3.rotate_angle = 0.05f;
     suzanne_object_struct3.rotate_vector = glm::vec3(1.0f, 0.0f, 0.0f);
     suzanne_object_struct3.translate_vector = glm::vec3(0.0f, 0.0f, 1.0f);
-    ontology::Object* suzanne3 = new ontology::Object(suzanne_object_struct3);
+    new ontology::Object(suzanne_object_struct3);
 
     ObjectStruct suzanne_object_struct4;
     suzanne_object_struct4.species_parent_pointer = suzanne_species;
@@ -374,7 +330,7 @@ int main(void)
     suzanne_object_struct4.rotate_angle = 0.15f;
     suzanne_object_struct4.rotate_vector = glm::vec3(1.0f, 0.0f, 0.0f);
     suzanne_object_struct4.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
-    ontology::Object* suzanne4 = new ontology::Object(suzanne_object_struct4);
+    new ontology::Object(suzanne_object_struct4);
 
     ObjectStruct suzanne_object_struct5;
     suzanne_object_struct5.species_parent_pointer = suzanne_species;
@@ -383,7 +339,7 @@ int main(void)
     suzanne_object_struct5.rotate_angle = 0.03f;
     suzanne_object_struct5.rotate_vector = glm::vec3(1.0f, 1.0f, 1.0f);
     suzanne_object_struct5.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
-    ontology::Object* suzanne5 = new ontology::Object(suzanne_object_struct5);
+    new ontology::Object(suzanne_object_struct5);
 
     VectorFontStruct kongtext_vector_font_struct;
     kongtext_vector_font_struct.parent_pointer = grass_material;
@@ -399,7 +355,7 @@ int main(void)
     text3D_struct.rotate_angle = 0.0f;
     text3D_struct.rotate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
     text3D_struct.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
-    ontology::Text3D* hello_world_text3D = new ontology::Text3D(text3D_struct);
+    new ontology::Text3D(text3D_struct);
 
     // keypress callbacks.
     std::vector<KeyAndCallbackStruct> action_mode_keypress_callback_engines;
@@ -418,7 +374,7 @@ int main(void)
     // Initialize our little text library with the Holstein font
     const char* char_g_font_texture_filename = g_font_texture_filename.c_str();
     const char* char_g_font_texture_file_format = g_font_texture_file_format.c_str();
-    ontology::Font2D* my_font2D = new ontology::Font2D(my_universe, window_width, window_height, char_g_font_texture_filename, char_g_font_texture_file_format);
+    ontology::Font2D* my_font2D = new ontology::Font2D(my_universe, my_universe->get_window_width(), my_universe->get_window_height(), char_g_font_texture_filename, char_g_font_texture_file_format);
 
     std::unordered_map<std::string, ConsoleCommandCallback> command_callback_map;
 
@@ -430,7 +386,6 @@ int main(void)
     console_struct.font2D_pointer = my_font2D;
 
     console::Console* my_console = new console::Console(console_struct); // create a console.
-    global_console_pointer = my_console;
 
     /*********************************************************************\
      *  Callback engines for action mode keyreleases begin here.         *
@@ -438,33 +393,32 @@ int main(void)
 
     // Callback code for `GLFW_KEY_GRAVE_ACCENT` release: enable enter console.
     callback_system::CallbackEngine* enable_enter_console_callback_engine = new callback_system::CallbackEngine();
-    console::ConsoleCallbackObject* enable_enter_console_callback_object = new console::ConsoleCallbackObject(
-            &console::Console::enable_enter_console, enable_enter_console_callback_engine, my_console);
+    new console::ConsoleCallbackObject(&console::Console::enable_enter_console, enable_enter_console_callback_engine, my_console);
 
     // Callback code for left Control release: release first turbo.
     callback_system::CallbackEngine* release_first_turbo_callback_engine = new callback_system::CallbackEngine();
-    callback_system::CallbackObject* release_first_turbo_callback_object = new callback_system::CallbackObject(
-            &ajokki::release_first_turbo, release_first_turbo_callback_engine);
+    callback_system::CallbackObject* release_first_turbo_callback_object = new callback_system::CallbackObject(&ajokki::release_first_turbo, release_first_turbo_callback_engine);
+    new callback_system::CallbackParameter("", new datatypes::AnyValue(my_universe), false, release_first_turbo_callback_object);
 
     // Callback code for right Control release: release second turbo.
     callback_system::CallbackEngine* release_second_turbo_callback_engine = new callback_system::CallbackEngine();
-    callback_system::CallbackObject* release_second_turbo_callback_object = new callback_system::CallbackObject(
-            &ajokki::release_second_turbo, release_second_turbo_callback_engine);
+    callback_system::CallbackObject* release_second_turbo_callback_object = new callback_system::CallbackObject(&ajokki::release_second_turbo, release_second_turbo_callback_engine);
+    new callback_system::CallbackParameter("", new datatypes::AnyValue(my_universe), false, release_second_turbo_callback_object);
 
     // Callback code for I release: enable_toggle invert mouse.
     callback_system::CallbackEngine* enable_toggle_invert_mouse_callback_engine = new callback_system::CallbackEngine();
-    callback_system::CallbackObject* enable_toggle_invert_mouse_callback_object = new callback_system::CallbackObject(
-            &ajokki::enable_toggle_invert_mouse, enable_toggle_invert_mouse_callback_engine);
+    callback_system::CallbackObject* enable_toggle_invert_mouse_callback_object = new callback_system::CallbackObject(&ajokki::enable_toggle_invert_mouse, enable_toggle_invert_mouse_callback_engine);
+    new callback_system::CallbackParameter("", new datatypes::AnyValue(my_universe), false, enable_toggle_invert_mouse_callback_object);
 
     // Callback code for F release: enable_toggle flight mode.
     callback_system::CallbackEngine* enable_toggle_flight_mode_callback_engine = new callback_system::CallbackEngine();
-    callback_system::CallbackObject* enable_toggle_flight_mode_callback_object = new callback_system::CallbackObject(
-            &ajokki::enable_toggle_flight_mode, enable_toggle_flight_mode_callback_engine);
+    callback_system::CallbackObject* enable_toggle_flight_mode_callback_object = new callback_system::CallbackObject(&ajokki::enable_toggle_flight_mode, enable_toggle_flight_mode_callback_engine);
+    new callback_system::CallbackParameter("", new datatypes::AnyValue(my_universe), false, enable_toggle_flight_mode_callback_object);
 
     // Callback code for F1 release: enable toggle help mode.
     callback_system::CallbackEngine* enable_toggle_help_mode_callback_engine = new callback_system::CallbackEngine();
-    callback_system::CallbackObject* enable_toggle_help_mode_callback_object = new callback_system::CallbackObject(
-            &ajokki::enable_toggle_help_mode, enable_toggle_help_mode_callback_engine);
+    callback_system::CallbackObject* enable_toggle_help_mode_callback_object = new callback_system::CallbackObject(&ajokki::enable_toggle_help_mode, enable_toggle_help_mode_callback_engine);
+    new callback_system::CallbackParameter("", new datatypes::AnyValue(my_universe), false, enable_toggle_help_mode_callback_object);
 
     /*********************************************************************\
      *  Callback engines for action mode keypresses begin here.          *
@@ -472,78 +426,80 @@ int main(void)
 
     // Callback code for `GLFW_KEY_GRAVE_ACCENT` (tilde key above Tab, usually used for console).
     callback_system::CallbackEngine* enter_console_callback_engine = new callback_system::CallbackEngine();
-    console::ConsoleCallbackObject* enter_console_callback_object = new console::ConsoleCallbackObject(
-            &console::Console::enter_console, enter_console_callback_engine, my_console);
+    new console::ConsoleCallbackObject(&console::Console::enter_console, enter_console_callback_engine, my_console);
 
     // Callback code for esc: exit program.
     callback_system::CallbackEngine* exit_program_callback_engine = new callback_system::CallbackEngine();
-    callback_system::CallbackObject* exit_program_callback_object = new callback_system::CallbackObject(
-            &ajokki::exit_program, exit_program_callback_engine);
+    new callback_system::CallbackObject(&ajokki::exit_program, exit_program_callback_engine);
 
     // Callback code for left Control: first turbo.
     callback_system::CallbackEngine* first_turbo_callback_engine = new callback_system::CallbackEngine();
-    callback_system::CallbackObject* first_turbo_callback_object = new callback_system::CallbackObject(
-            &ajokki::first_turbo, first_turbo_callback_engine);
+    callback_system::CallbackObject* first_turbo_callback_object = new callback_system::CallbackObject(&ajokki::first_turbo, first_turbo_callback_engine);
+    new callback_system::CallbackParameter("", new datatypes::AnyValue(my_universe), false, first_turbo_callback_object);
 
     // Callback code for right Control: second turbo.
     callback_system::CallbackEngine* second_turbo_callback_engine = new callback_system::CallbackEngine();
-    callback_system::CallbackObject* second_turbo_callback_object = new callback_system::CallbackObject(
-            &ajokki::second_turbo, second_turbo_callback_engine);
+    callback_system::CallbackObject* second_turbo_callback_object = new callback_system::CallbackObject(&ajokki::second_turbo, second_turbo_callback_engine);
+    new callback_system::CallbackParameter("", new datatypes::AnyValue(my_universe), false, second_turbo_callback_object);
 
     // Callback code for key up: move forward.
     callback_system::CallbackEngine* move_forward_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* move_forward_callback_object = new callback_system::CallbackObject(
             &ajokki::move_forward, move_forward_callback_engine);
+    new callback_system::CallbackParameter("", new datatypes::AnyValue(my_universe), false, move_forward_callback_object);
 
     // Callback code for key down: move backward.
     callback_system::CallbackEngine* move_backward_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* move_backward_callback_object = new callback_system::CallbackObject(
             &ajokki::move_backward, move_backward_callback_engine);
+    new callback_system::CallbackParameter("", new datatypes::AnyValue(my_universe), false, move_backward_callback_object);
 
     // Callback code for key left: strafe left.
     callback_system::CallbackEngine* strafe_left_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* strafe_left_callback_object = new callback_system::CallbackObject(
             &ajokki::strafe_left, strafe_left_callback_engine);
+    new callback_system::CallbackParameter("", new datatypes::AnyValue(my_universe), false, strafe_left_callback_object);
 
     // Callback code for key right: strafe right.
     callback_system::CallbackEngine* strafe_right_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* strafe_right_callback_object = new callback_system::CallbackObject(
             &ajokki::strafe_right, strafe_right_callback_engine);
+    new callback_system::CallbackParameter("", new datatypes::AnyValue(my_universe), false, strafe_right_callback_object);
 
     // Callback code for space: ascent.
     callback_system::CallbackEngine* ascent_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* ascent_callback_object = new callback_system::CallbackObject(
             &ajokki::ascent, ascent_callback_engine);
+    new callback_system::CallbackParameter("", new datatypes::AnyValue(my_universe), false, ascent_callback_object);
 
     // Callback code for enter: descent.
     callback_system::CallbackEngine* descent_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* descent_callback_object = new callback_system::CallbackObject(
             &ajokki::descent, descent_callback_engine);
+    new callback_system::CallbackParameter("", new datatypes::AnyValue(my_universe), false, descent_callback_object);
 
     // Callback code for I: toggle invert mouse.
     callback_system::CallbackEngine* toggle_invert_mouse_callback_engine = new callback_system::CallbackEngine();
-    callback_system::CallbackObject* toggle_invert_mouse_callback_object = new callback_system::CallbackObject(
-            &ajokki::toggle_invert_mouse, toggle_invert_mouse_callback_engine);
+    callback_system::CallbackObject* toggle_invert_mouse_callback_object = new callback_system::CallbackObject(&ajokki::toggle_invert_mouse, toggle_invert_mouse_callback_engine);
+    new callback_system::CallbackParameter("", new datatypes::AnyValue(my_universe), false, toggle_invert_mouse_callback_object);
 
     // Callback code for F: toggle flight mode.
     callback_system::CallbackEngine* toggle_flight_mode_callback_engine = new callback_system::CallbackEngine();
-    callback_system::CallbackObject* toggle_flight_mode_callback_object = new callback_system::CallbackObject(
-            &ajokki::toggle_flight_mode, toggle_flight_mode_callback_engine);
+    callback_system::CallbackObject* toggle_flight_mode_callback_object = new callback_system::CallbackObject(&ajokki::toggle_flight_mode, toggle_flight_mode_callback_engine);
+    new callback_system::CallbackParameter("", new datatypes::AnyValue(my_universe), false, toggle_flight_mode_callback_object);
 
     // Callback code for F1: toggle help mode.
     callback_system::CallbackEngine* toggle_help_mode_callback_engine = new callback_system::CallbackEngine();
-    callback_system::CallbackObject* toggle_help_mode_callback_object = new callback_system::CallbackObject(
-            &ajokki::toggle_help_mode, toggle_help_mode_callback_engine);
+    callback_system::CallbackObject* toggle_help_mode_callback_object = new callback_system::CallbackObject(&ajokki::toggle_help_mode, toggle_help_mode_callback_engine);
+    new callback_system::CallbackParameter("", new datatypes::AnyValue(my_universe), false, toggle_help_mode_callback_object);
 
     // Callback code for D: delete Suzanne species.
     bool does_suzanne_species_exist = true;
     callback_system::CallbackEngine* delete_suzanne_species_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* delete_suzanne_species_callback_object = new callback_system::CallbackObject(
             &ajokki::delete_suzanne_species, delete_suzanne_species_callback_engine);
-    callback_system::CallbackParameter* delete_suzanne_species_callback_parameter0 = new callback_system::CallbackParameter(
-            "suzanne_species", new datatypes::AnyValue(suzanne_species), false, delete_suzanne_species_callback_object);
-    callback_system::CallbackParameter* delete_suzanne_species_callback_parameter1 = new callback_system::CallbackParameter(
-            "does_suzanne_species_exist", new datatypes::AnyValue(&does_suzanne_species_exist), false, delete_suzanne_species_callback_object);
+    new callback_system::CallbackParameter("suzanne_species", new datatypes::AnyValue(suzanne_species), false, delete_suzanne_species_callback_object);
+    new callback_system::CallbackParameter("does_suzanne_species_exist", new datatypes::AnyValue(&does_suzanne_species_exist), false, delete_suzanne_species_callback_object);
 
     // Callback code for G: switch to grass material.
     bool does_suzanne_species_have_uvmap_texture = true;
@@ -551,18 +507,15 @@ int main(void)
     callback_system::CallbackEngine* switch_to_grass_material_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* switch_to_grass_material_callback_object = new callback_system::CallbackObject(
             &ajokki::switch_to_new_material, switch_to_grass_material_callback_engine);
-    callback_system::CallbackParameter* switch_to_grass_material_callback_parameter0 = new callback_system::CallbackParameter(
-            "suzanne_species", new datatypes::AnyValue(suzanne_species), false, switch_to_grass_material_callback_object);
-    callback_system::CallbackParameter* switch_to_grass_material_callback_parameter1 = new callback_system::CallbackParameter(
-            "new_material", new datatypes::AnyValue(grass_material), false, switch_to_grass_material_callback_object);
-    callback_system::CallbackParameter* switch_to_grass_material_callback_parameter2 = new callback_system::CallbackParameter(
-            "does_suzanne_species_exist", new datatypes::AnyValue(&does_suzanne_species_exist), false, switch_to_grass_material_callback_object);
-    callback_system::CallbackParameter* switch_to_grass_material_callback_parameter3 = new callback_system::CallbackParameter(
+    new callback_system::CallbackParameter("suzanne_species", new datatypes::AnyValue(suzanne_species), false, switch_to_grass_material_callback_object);
+    new callback_system::CallbackParameter("new_material", new datatypes::AnyValue(grass_material), false, switch_to_grass_material_callback_object);
+    new callback_system::CallbackParameter("does_suzanne_species_exist", new datatypes::AnyValue(&does_suzanne_species_exist), false, switch_to_grass_material_callback_object);
+    new callback_system::CallbackParameter(
             "does_suzanne_species_have_old_texture",
             new datatypes::AnyValue(&does_suzanne_species_have_uvmap_texture),
             false,
             switch_to_grass_material_callback_object);
-    callback_system::CallbackParameter* switch_to_grass_material_callback_parameter4 = new callback_system::CallbackParameter(
+    new callback_system::CallbackParameter(
             "does_suzanne_species_have_new_texture",
             new datatypes::AnyValue(&does_suzanne_species_have_grass_texture),
             false,
@@ -572,18 +525,15 @@ int main(void)
     callback_system::CallbackEngine* switch_to_uvmap_material_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* switch_to_uvmap_material_callback_object = new callback_system::CallbackObject(
             &ajokki::switch_to_new_material, switch_to_uvmap_material_callback_engine);
-    callback_system::CallbackParameter* switch_to_uvmap_material_callback_parameter0 = new callback_system::CallbackParameter(
-            "suzanne_species", new datatypes::AnyValue(suzanne_species), false, switch_to_uvmap_material_callback_object);
-    callback_system::CallbackParameter* switch_to_uvmap_material_callback_parameter1 = new callback_system::CallbackParameter(
-            "new_material", new datatypes::AnyValue(uvmap_material), false, switch_to_uvmap_material_callback_object);
-    callback_system::CallbackParameter* switch_to_uvmap_material_callback_parameter2 = new callback_system::CallbackParameter(
-            "does_suzanne_species_exist", new datatypes::AnyValue(&does_suzanne_species_exist), false, switch_to_uvmap_material_callback_object);
-    callback_system::CallbackParameter* switch_to_uvmap_material_callback_parameter3 = new callback_system::CallbackParameter(
+    new callback_system::CallbackParameter("suzanne_species", new datatypes::AnyValue(suzanne_species), false, switch_to_uvmap_material_callback_object);
+    new callback_system::CallbackParameter("new_material", new datatypes::AnyValue(uvmap_material), false, switch_to_uvmap_material_callback_object);
+    new callback_system::CallbackParameter("does_suzanne_species_exist", new datatypes::AnyValue(&does_suzanne_species_exist), false, switch_to_uvmap_material_callback_object);
+    new callback_system::CallbackParameter(
             "does_suzanne_species_have_old_texture",
             new datatypes::AnyValue(&does_suzanne_species_have_grass_texture),
             false,
             switch_to_uvmap_material_callback_object);
-    callback_system::CallbackParameter* switch_to_uvmap_material_callback_parameter4 = new callback_system::CallbackParameter(
+    new callback_system::CallbackParameter(
             "does_suzanne_species_have_new_texture",
             new datatypes::AnyValue(&does_suzanne_species_have_uvmap_texture),
             false,
@@ -595,18 +545,15 @@ int main(void)
     callback_system::CallbackEngine* transform_into_terrain_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* transform_into_terrain_callback_object = new callback_system::CallbackObject(
             &ajokki::transform_into_new_species, transform_into_terrain_callback_engine);
-    callback_system::CallbackParameter* transform_into_terrain_callback_parameter0 = new callback_system::CallbackParameter(
-            "suzanne2", new datatypes::AnyValue(suzanne2), false, transform_into_terrain_callback_object); // suzanne2!!!
-    callback_system::CallbackParameter* transform_into_terrain_callback_parameter1 = new callback_system::CallbackParameter(
-            "terrain_species", new datatypes::AnyValue(terrain_species), false, transform_into_terrain_callback_object);
-    callback_system::CallbackParameter* transform_into_terrain_callback_parameter2 = new callback_system::CallbackParameter(
-            "does_suzanne_species_exist", new datatypes::AnyValue(&does_suzanne_species_exist), false, transform_into_terrain_callback_object);
-    callback_system::CallbackParameter* transform_into_terrain_callback_parameter3 = new callback_system::CallbackParameter(
+    new callback_system::CallbackParameter("suzanne2", new datatypes::AnyValue(suzanne2), false, transform_into_terrain_callback_object); // suzanne2!!!
+    new callback_system::CallbackParameter("terrain_species", new datatypes::AnyValue(terrain_species), false, transform_into_terrain_callback_object);
+    new callback_system::CallbackParameter("does_suzanne_species_exist", new datatypes::AnyValue(&does_suzanne_species_exist), false, transform_into_terrain_callback_object);
+    new callback_system::CallbackParameter(
             "has_suzanne_2_transformed_into_monkey",
             new datatypes::AnyValue(&has_suzanne_2_transformed_into_monkey),
             false,
             transform_into_terrain_callback_object);
-    callback_system::CallbackParameter* transform_into_terrain_callback_parameter4 = new callback_system::CallbackParameter(
+    new callback_system::CallbackParameter(
             "has_suzanne_2_transformed_into_terrain",
             new datatypes::AnyValue(&has_suzanne_2_transformed_into_terrain),
             false,
@@ -616,18 +563,15 @@ int main(void)
     callback_system::CallbackEngine* transform_into_monkey_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* transform_into_monkey_callback_object = new callback_system::CallbackObject(
             &ajokki::transform_into_new_species, transform_into_monkey_callback_engine);
-    callback_system::CallbackParameter* transform_into_monkey_callback_parameter0 = new callback_system::CallbackParameter(
-            "suzanne2", new datatypes::AnyValue(suzanne2), false, transform_into_monkey_callback_object); // suzanne2!!!
-    callback_system::CallbackParameter* transform_into_monkey_callback_parameter1 = new callback_system::CallbackParameter(
-            "monkey_species", new datatypes::AnyValue(suzanne_species), false, transform_into_monkey_callback_object);
-    callback_system::CallbackParameter* transform_into_monkey_callback_parameter2 = new callback_system::CallbackParameter(
-            "does_suzanne_species_exist", new datatypes::AnyValue(&does_suzanne_species_exist), false, transform_into_monkey_callback_object);
-    callback_system::CallbackParameter* transform_into_monkey_callback_parameter3 = new callback_system::CallbackParameter(
+    new callback_system::CallbackParameter("suzanne2", new datatypes::AnyValue(suzanne2), false, transform_into_monkey_callback_object); // suzanne2!!!
+    new callback_system::CallbackParameter("monkey_species", new datatypes::AnyValue(suzanne_species), false, transform_into_monkey_callback_object);
+    new callback_system::CallbackParameter("does_suzanne_species_exist", new datatypes::AnyValue(&does_suzanne_species_exist), false, transform_into_monkey_callback_object);
+    new callback_system::CallbackParameter(
             "has_suzanne_2_transformed_into_terrain",
             new datatypes::AnyValue(&has_suzanne_2_transformed_into_terrain),
             false,
             transform_into_monkey_callback_object);
-    callback_system::CallbackParameter* transform_into_monkey_callback_parameter4 = new callback_system::CallbackParameter(
+    new callback_system::CallbackParameter(
             "has_suzanne_2_transformed_into_monkey",
             new datatypes::AnyValue(&has_suzanne_2_transformed_into_monkey),
             false,
@@ -639,63 +583,51 @@ int main(void)
 
     // Callback code for `GLFW_KEY_GRAVE_ACCENT` release: enable exit console.
     callback_system::CallbackEngine* enable_exit_console_callback_engine = new callback_system::CallbackEngine();
-    console::ConsoleCallbackObject* enable_exit_console_callback_object = new console::ConsoleCallbackObject(
-            &console::Console::enable_exit_console, enable_exit_console_callback_engine, my_console);
+    new console::ConsoleCallbackObject(&console::Console::enable_exit_console, enable_exit_console_callback_engine, my_console);
 
     // Callback code for left Control release.
     callback_system::CallbackEngine* release_left_control_in_console_callback_engine = new callback_system::CallbackEngine();
-    console::ConsoleCallbackObject* release_left_control_in_console_callback_object = new console::ConsoleCallbackObject(
-            &console::Console::release_left_control_in_console, release_left_control_in_console_callback_engine, my_console);
+    new console::ConsoleCallbackObject(&console::Console::release_left_control_in_console, release_left_control_in_console_callback_engine, my_console);
 
     // Callback code for right Control release.
     callback_system::CallbackEngine* release_right_control_in_console_callback_engine = new callback_system::CallbackEngine();
-    console::ConsoleCallbackObject* release_right_control_in_console_callback_object = new console::ConsoleCallbackObject(
-            &console::Console::release_right_control_in_console, release_right_control_in_console_callback_engine, my_console);
+    new console::ConsoleCallbackObject(&console::Console::release_right_control_in_console, release_right_control_in_console_callback_engine, my_console);
 
     // Callback code for left Alt release.
     callback_system::CallbackEngine* release_left_alt_in_console_callback_engine = new callback_system::CallbackEngine();
-    console::ConsoleCallbackObject* release_left_alt_in_console_callback_object = new console::ConsoleCallbackObject(
-            &console::Console::release_left_alt_in_console, release_left_alt_in_console_callback_engine, my_console);
+    new console::ConsoleCallbackObject(&console::Console::release_left_alt_in_console, release_left_alt_in_console_callback_engine, my_console);
 
     // Callback code for right Alt release.
     callback_system::CallbackEngine* release_right_alt_in_console_callback_engine = new callback_system::CallbackEngine();
-    console::ConsoleCallbackObject* release_right_alt_in_console_callback_object = new console::ConsoleCallbackObject(
-            &console::Console::release_right_alt_in_console, release_right_alt_in_console_callback_engine, my_console);
+    new console::ConsoleCallbackObject(&console::Console::release_right_alt_in_console, release_right_alt_in_console_callback_engine, my_console);
 
     // Callback code for left Shift release.
     callback_system::CallbackEngine* release_left_shift_in_console_callback_engine = new callback_system::CallbackEngine();
-    console::ConsoleCallbackObject* release_left_shift_in_console_callback_object = new console::ConsoleCallbackObject(
-            &console::Console::release_left_shift_in_console, release_left_shift_in_console_callback_engine, my_console);
+    new console::ConsoleCallbackObject(&console::Console::release_left_shift_in_console, release_left_shift_in_console_callback_engine, my_console);
 
     // Callback code for right Shift release.
     callback_system::CallbackEngine* release_right_shift_in_console_callback_engine = new callback_system::CallbackEngine();
-    console::ConsoleCallbackObject* release_right_shift_in_console_callback_object = new console::ConsoleCallbackObject(
-            &console::Console::release_right_shift_in_console, release_right_shift_in_console_callback_engine, my_console);
+    new console::ConsoleCallbackObject(&console::Console::release_right_shift_in_console, release_right_shift_in_console_callback_engine, my_console);
 
     // Callback code for key up release: enable move to previous input.
     callback_system::CallbackEngine* enable_move_to_previous_input_callback_engine = new callback_system::CallbackEngine();
-    console::ConsoleCallbackObject* enable_move_to_previous_input_callback_object = new console::ConsoleCallbackObject(
-            &console::Console::enable_move_to_previous_input, enable_move_to_previous_input_callback_engine, my_console);
+    new console::ConsoleCallbackObject(&console::Console::enable_move_to_previous_input, enable_move_to_previous_input_callback_engine, my_console);
 
     // Callback code for key down release: enable move to next input.
     callback_system::CallbackEngine* enable_move_to_next_input_callback_engine = new callback_system::CallbackEngine();
-    console::ConsoleCallbackObject* enable_move_to_next_input_callback_object = new console::ConsoleCallbackObject(
-            &console::Console::enable_move_to_next_input, enable_move_to_next_input_callback_engine, my_console);
+    new console::ConsoleCallbackObject(&console::Console::enable_move_to_next_input, enable_move_to_next_input_callback_engine, my_console);
 
     // Callback code for backspace release: enable backspace.
     callback_system::CallbackEngine* enable_backspace_callback_engine = new callback_system::CallbackEngine();
-    console::ConsoleCallbackObject* enable_backspace_callback_object = new console::ConsoleCallbackObject(
-            &console::Console::enable_backspace, enable_backspace_callback_engine, my_console);
+    new console::ConsoleCallbackObject(&console::Console::enable_backspace, enable_backspace_callback_engine, my_console);
 
     // Callback code for enter release: enable Enter key.
     callback_system::CallbackEngine* enable_enter_key_callback_engine = new callback_system::CallbackEngine();
-    console::ConsoleCallbackObject* enable_enter_key_callback_object = new console::ConsoleCallbackObject(
-            &console::Console::enable_enter_key, enable_enter_key_callback_engine, my_console);
+    new console::ConsoleCallbackObject(&console::Console::enable_enter_key, enable_enter_key_callback_engine, my_console);
 
     // Callback code for C release: enable Control-C.
     callback_system::CallbackEngine* enable_ctrl_c_callback_engine = new callback_system::CallbackEngine();
-    console::ConsoleCallbackObject* enable_ctrl_c_callback_object = new console::ConsoleCallbackObject(
-            &console::Console::enable_ctrl_c, enable_ctrl_c_callback_engine, my_console);
+    new console::ConsoleCallbackObject(&console::Console::enable_ctrl_c, enable_ctrl_c_callback_engine, my_console);
 
     /*********************************************************************\
      *  Callback engines for console keypresses begin here.              *
@@ -703,68 +635,54 @@ int main(void)
 
     // Callback code for `GLFW_KEY_GRAVE_ACCENT` (tilde key above Tab, usually used for console).
     callback_system::CallbackEngine* exit_console_callback_engine = new callback_system::CallbackEngine();
-    console::ConsoleCallbackObject* exit_console_callback_object = new console::ConsoleCallbackObject(
-            &console::Console::exit_console, exit_console_callback_engine, my_console);
+    new console::ConsoleCallbackObject(&console::Console::exit_console, exit_console_callback_engine, my_console);
 
     // Callback code for left Control press.
     callback_system::CallbackEngine* press_left_control_in_console_callback_engine = new callback_system::CallbackEngine();
-    console::ConsoleCallbackObject* press_left_control_in_console_callback_object = new console::ConsoleCallbackObject(
-            &console::Console::press_left_control_in_console, press_left_control_in_console_callback_engine, my_console);
+    new console::ConsoleCallbackObject(&console::Console::press_left_control_in_console, press_left_control_in_console_callback_engine, my_console);
 
     // Callback code for right Control press.
     callback_system::CallbackEngine* press_right_control_in_console_callback_engine = new callback_system::CallbackEngine();
-    console::ConsoleCallbackObject* press_right_control_in_console_callback_object = new console::ConsoleCallbackObject(
-            &console::Console::press_right_control_in_console, press_right_control_in_console_callback_engine, my_console);
+    new console::ConsoleCallbackObject(&console::Console::press_right_control_in_console, press_right_control_in_console_callback_engine, my_console);
 
     // Callback code for left Alt press.
     callback_system::CallbackEngine* press_left_alt_in_console_callback_engine = new callback_system::CallbackEngine();
-    console::ConsoleCallbackObject* press_left_alt_in_console_callback_object = new console::ConsoleCallbackObject(
-            &console::Console::press_left_alt_in_console, press_left_alt_in_console_callback_engine, my_console);
+    new console::ConsoleCallbackObject(&console::Console::press_left_alt_in_console, press_left_alt_in_console_callback_engine, my_console);
 
     // Callback code for right Alt press.
     callback_system::CallbackEngine* press_right_alt_in_console_callback_engine = new callback_system::CallbackEngine();
-    console::ConsoleCallbackObject* press_right_alt_in_console_callback_object = new console::ConsoleCallbackObject(
-            &console::Console::press_right_alt_in_console, press_right_alt_in_console_callback_engine, my_console);
+    new console::ConsoleCallbackObject(&console::Console::press_right_alt_in_console, press_right_alt_in_console_callback_engine, my_console);
 
     // Callback code for left Shift press.
     callback_system::CallbackEngine* press_left_shift_in_console_callback_engine = new callback_system::CallbackEngine();
-    console::ConsoleCallbackObject* press_left_shift_in_console_callback_object = new console::ConsoleCallbackObject(
-            &console::Console::press_left_shift_in_console, press_left_shift_in_console_callback_engine, my_console);
+    new console::ConsoleCallbackObject(&console::Console::press_left_shift_in_console, press_left_shift_in_console_callback_engine, my_console);
 
     // Callback code for right Shift press.
     callback_system::CallbackEngine* press_right_shift_in_console_callback_engine = new callback_system::CallbackEngine();
-    console::ConsoleCallbackObject* press_right_shift_in_console_callback_object = new console::ConsoleCallbackObject(
-            &console::Console::press_right_shift_in_console, press_right_shift_in_console_callback_engine, my_console);
+    new console::ConsoleCallbackObject(&console::Console::press_right_shift_in_console, press_right_shift_in_console_callback_engine, my_console);
 
     // Callback code for key up: move to previous input.
     callback_system::CallbackEngine* move_to_previous_input_callback_engine = new callback_system::CallbackEngine();
-    console::ConsoleCallbackObject* move_to_previous_input_callback_object = new console::ConsoleCallbackObject(
-            &console::Console::move_to_previous_input, move_to_previous_input_callback_engine, my_console);
+    new console::ConsoleCallbackObject(&console::Console::move_to_previous_input, move_to_previous_input_callback_engine, my_console);
 
     // Callback code for key down: move to next input.
     callback_system::CallbackEngine* move_to_next_input_callback_engine = new callback_system::CallbackEngine();
-    console::ConsoleCallbackObject* move_to_next_input_callback_object = new console::ConsoleCallbackObject(
-            &console::Console::move_to_next_input, move_to_next_input_callback_engine, my_console);
+    new console::ConsoleCallbackObject(&console::Console::move_to_next_input, move_to_next_input_callback_engine, my_console);
 
     // Callback code for backspace: delete character left of cursor from current input in console.
     callback_system::CallbackEngine* backspace_callback_engine = new callback_system::CallbackEngine();
-    console::ConsoleCallbackObject* backspace_callback_object = new console::ConsoleCallbackObject(
-            &console::Console::backspace, backspace_callback_engine, my_console);
+    new console::ConsoleCallbackObject(&console::Console::backspace, backspace_callback_engine, my_console);
 
     // Callback code for Enter key.
     callback_system::CallbackEngine* enter_callback_engine = new callback_system::CallbackEngine();
-    console::ConsoleCallbackObject* enter_callback_object = new console::ConsoleCallbackObject(
-            &console::Console::enter_key, enter_callback_engine, my_console);
+    new console::ConsoleCallbackObject(&console::Console::enter_key, enter_callback_engine, my_console);
 
     // Callback code for C release: enable Control-C.
     callback_system::CallbackEngine* ctrl_c_callback_engine = new callback_system::CallbackEngine();
-    console::ConsoleCallbackObject* ctrl_c_callback_object = new console::ConsoleCallbackObject(
-            &console::Console::ctrl_c, ctrl_c_callback_engine, my_console);
+    new console::ConsoleCallbackObject(&console::Console::ctrl_c, ctrl_c_callback_engine, my_console);
 
-    callback_system::CallbackParameter* cleanup_callback_universe_pointer =
-        new callback_system::CallbackParameter("universe_pointer", new datatypes::AnyValue(my_universe), false, cleanup_callback_object);
-    callback_system::CallbackParameter* cleanup_callback_font2D_pointer =
-        new callback_system::CallbackParameter("font2D_pointer", new datatypes::AnyValue(my_font2D), false, cleanup_callback_object);
+    new callback_system::CallbackParameter("", new datatypes::AnyValue(my_universe), false, cleanup_callback_object);
+    new callback_system::CallbackParameter("font2D_pointer", new datatypes::AnyValue(my_font2D), false, cleanup_callback_object);
     cleanup_callback_object->set_new_callback(&ajokki::full_cleanup);
 
     // Keyrelease callbacks for action mode.
@@ -838,8 +756,8 @@ int main(void)
      \********************************************************************/
 
     // Config callbacks.
-    command_callback_map["set"] = &config::SettingMaster::set;
-    command_callback_map["get"] = &config::SettingMaster::get;
+    command_callback_map["set"] = &config::SettingMaster::set_and_print;
+    command_callback_map["get"] = &config::SettingMaster::get_and_print;
 
     // Object handling callbacks.
     command_callback_map["delete"] = &ontology::Universe::delete_entity;
@@ -873,7 +791,7 @@ int main(void)
     {
         double current_time_in_main_loop = glfwGetTime();
 
-        if (current_time_in_main_loop - last_time_for_display_sync >= (1.0f / max_FPS))
+        if (current_time_in_main_loop - last_time_for_display_sync >= (1.0f / my_universe->get_max_FPS()))
         {
             last_time_for_display_sync = glfwGetTime();
 
@@ -895,64 +813,57 @@ int main(void)
 
             glfwPollEvents();
 
-            if (std::isnan(last_time_before_reading_keyboard))
-            {
-                // `glfwGetTime()` is called here only once, the first time this function is called.
-                last_time_before_reading_keyboard = glfwGetTime();
-            }
-
-            double current_time_before_reading_keyboard = glfwGetTime();
-            delta_time = float(current_time_before_reading_keyboard - last_time_before_reading_keyboard);
+            my_universe->compute_delta_time();
 
             // Get mouse position
             double xpos, ypos;
-            glfwGetCursorPos(window, &xpos, &ypos);
+            glfwGetCursorPos(my_universe->get_window(), &xpos, &ypos);
 
             // Reset mouse position for next frame
-            glfwSetCursorPos(window, window_width / 2, window_height / 2);
+            glfwSetCursorPos(my_universe->get_window(), my_universe->get_window_width() / 2, my_universe->get_window_height() / 2);
 
-            if (hasMouseEverMoved || (abs(xpos) > 0.0001) || (abs(ypos) > 0.0001))
+            if (my_universe->has_mouse_ever_moved || (abs(xpos) > 0.0001) || (abs(ypos) > 0.0001))
             {
-                hasMouseEverMoved = true;
+                my_universe->has_mouse_ever_moved = true;
 
                 // Compute new orientation
-                horizontalAngle += mouseSpeed * GLfloat(window_width / 2 - xpos);
-                horizontalAngle = remainder(horizontalAngle, (2.0f * PI));
+                my_universe->horizontal_angle += my_universe->mouse_speed * GLfloat(my_universe->get_window_width() / 2 - xpos);
+                my_universe->horizontal_angle = remainder(my_universe->horizontal_angle, (2.0f * PI));
 
-                if (is_invert_mouse_in_use)
+                if (my_universe->is_invert_mouse_in_use)
                 {
                     // invert mouse.
-                    verticalAngle -= mouseSpeed * GLfloat(window_height / 2 - ypos);
+                    my_universe->vertical_angle -= my_universe->mouse_speed * GLfloat(my_universe->get_window_height() / 2 - ypos);
                 }
                 else
                 {
                     // don't invert mouse.
-                    verticalAngle += mouseSpeed * GLfloat(window_height / 2 - ypos);
+                    my_universe->vertical_angle += my_universe->mouse_speed * GLfloat(my_universe->get_window_height() / 2 - ypos);
                 }
-                verticalAngle = remainder(verticalAngle, (2.0f * PI));
+                my_universe->vertical_angle = remainder(my_universe->vertical_angle, (2.0f * PI));
             }
 
             // Direction : Spherical coordinates to Cartesian coordinates conversion
-            direction = glm::vec3(
-                    cos(verticalAngle) * sin(horizontalAngle),
-                    sin(verticalAngle),
-                    cos(verticalAngle) * cos(horizontalAngle)
+            my_universe->direction = glm::vec3(
+                    cos(my_universe->vertical_angle) * sin(my_universe->horizontal_angle),
+                    sin(my_universe->vertical_angle),
+                    cos(my_universe->vertical_angle) * cos(my_universe->horizontal_angle)
                     );
 
             // Right vector
-            right = glm::vec3(
-                    sin(horizontalAngle - PI/2.0f),
+            my_universe->right = glm::vec3(
+                    sin(my_universe->horizontal_angle - PI/2.0f),
                     0,
-                    cos(horizontalAngle - PI/2.0f)
+                    cos(my_universe->horizontal_angle - PI/2.0f)
                     );
 
             // Up vector
-            up = glm::cross(right, direction);
+            my_universe->up = glm::cross(my_universe->right, my_universe->direction);
 
             // Check for key releases and call corresponding callbacks.
             for (uint32_t i = 0; i < (*current_keyrelease_callback_engine_vector_pointer).size(); i++)
             {
-                if (glfwGetKey(window, (*current_keyrelease_callback_engine_vector_pointer).at(i).keycode) == GLFW_RELEASE)
+                if (glfwGetKey(my_universe->get_window(), (*current_keyrelease_callback_engine_vector_pointer).at(i).keycode) == GLFW_RELEASE)
                 {
                     callback_system::CallbackEngine* callback_engine = (*current_keyrelease_callback_engine_vector_pointer).at(i).callback_engine;
                     datatypes::AnyValue* any_value = callback_engine->execute();
@@ -962,7 +873,7 @@ int main(void)
             // Check for keypresses and call corresponding callbacks.
             for (uint32_t i = 0; i < (*current_keypress_callback_engine_vector_pointer).size(); i++)
             {
-                if (glfwGetKey(window, (*current_keypress_callback_engine_vector_pointer).at(i).keycode) == GLFW_PRESS)
+                if (glfwGetKey(my_universe->get_window(), (*current_keypress_callback_engine_vector_pointer).at(i).keycode) == GLFW_PRESS)
                 {
                     callback_system::CallbackEngine* callback_engine = (*current_keypress_callback_engine_vector_pointer).at(i).callback_engine;
                     datatypes::AnyValue* any_value = callback_engine->execute();
@@ -986,11 +897,11 @@ int main(void)
 
                             for (uint32_t key_code = 0; key_code <= GLFW_KEY_LAST; key_code++)
                             {
-                                glfwGetKey(window, key_code);
+                                glfwGetKey(my_universe->get_window(), key_code);
                             }
 
                             // Do not display help screen when in console.
-                            can_display_help_screen = false;
+                            my_universe->can_display_help_screen = false;
 
                             delete any_value;
                             break;
@@ -1004,11 +915,11 @@ int main(void)
 
                             for (uint32_t key_code = 0; key_code <= GLFW_KEY_LAST; key_code++)
                             {
-                                glfwGetKey(window, key_code);
+                                glfwGetKey(my_universe->get_window(), key_code);
                             }
 
                             // Enable display help screen when not in console.
-                            can_display_help_screen = true;
+                            my_universe->can_display_help_screen = true;
 
                             delete any_value;
                             break;
@@ -1022,7 +933,7 @@ int main(void)
 
                             for (uint32_t key_code = 0; key_code <= GLFW_KEY_LAST; key_code++)
                             {
-                                glfwGetKey(window, key_code);
+                                glfwGetKey(my_universe->get_window(), key_code);
                             }
 
                             is_exit_requested = true;
@@ -1041,108 +952,111 @@ int main(void)
             my_console->draw_console();
 
             PrintingStruct printing_struct;
-            printing_struct.screen_width = static_cast<GLuint>(window_width);
-            printing_struct.screen_height = static_cast<GLuint>(window_height);
-            printing_struct.text_size = text_size;
-            printing_struct.font_size = font_size;
+            printing_struct.screen_width = static_cast<GLuint>(my_universe->get_window_width());
+            printing_struct.screen_height = static_cast<GLuint>(my_universe->get_window_height());
+            printing_struct.text_size = my_universe->get_text_size();
+            printing_struct.font_size = my_universe->get_font_size();
             printing_struct.char_font_texture_file_format = "bmp";
 
-            char angles_and_coordinates_text[256];
-            std::snprintf(
-                    angles_and_coordinates_text,
-                    sizeof(angles_and_coordinates_text),
-                    "%.2f,%.2f rad; %.2f,%.2f deg\\n(%.2f,%.2f,%.2f)",
-                    horizontalAngle,
-                    verticalAngle,
-                    RADIANS_TO_DEGREES(horizontalAngle),
-                    RADIANS_TO_DEGREES(verticalAngle),
-                    position.x,
-                    position.y,
-                    position.z);
-
-            char time_text[256];
-            std::snprintf(time_text, sizeof(time_text), "%.2f sec", glfwGetTime());
-
-            char null_text[] = "";
-            char on_text[] = "on";
-            char off_text[] = "off";
-            char in_use_text[] = " (in use)";
-
-            char help_text_char[1024];
-            std::snprintf(
-                    help_text_char,
-                    sizeof(help_text_char),
-                    "Ajokki v. 0.0.1\\n"
-                    "\\n"
-                    "arrow keys\\n"
-                    "space jump\\n"
-                    "enter duck\\n"
-                    "F1 help mode\\n"
-                    "`  enter console\\n"
-                    "I  invert mouse (%s)\\n"
-                    "F  flight mode (%s)\\n"
-                    "Ctrl      turbo\\n"
-                    "Ctrl+Ctrl extra turbo\\n"
-                    "for debugging:\\n"
-                    "G  grass texture%s\\n"
-                    "U  uvmap texture%s\\n"
-                    "T  terrain species\\n"
-                    "A  suzanne species\\n",
-                    (is_invert_mouse_in_use ? on_text : off_text),
-                    (is_flight_mode_in_use ? on_text : off_text),
-                    (!does_suzanne_species_have_uvmap_texture ? in_use_text : null_text),
-                    (does_suzanne_species_have_uvmap_texture ? in_use_text : null_text));
-
-            char spherical_coordinates_text[256];
-
-            if (testing_spherical_world_in_use)
+            if (my_universe != nullptr && my_universe->cartesian_coordinates != nullptr)
             {
-                std::snprintf(spherical_coordinates_text, sizeof(spherical_coordinates_text), "rho:%.2f theta:%.2f phi:%.2f", spherical_position.rho, spherical_position.theta, spherical_position.phi);
-            }
+                char angles_and_coordinates_text[256];
+                std::snprintf(
+                        angles_and_coordinates_text,
+                        sizeof(angles_and_coordinates_text),
+                        "%.2f,%.2f rad; %.2f,%.2f deg\\n(%.2f,%.2f,%.2f)",
+                        my_universe->horizontal_angle,
+                        my_universe->vertical_angle,
+                        RADIANS_TO_DEGREES(my_universe->horizontal_angle),
+                        RADIANS_TO_DEGREES(my_universe->vertical_angle),
+                        my_universe->cartesian_coordinates->x,
+                        my_universe->cartesian_coordinates->y,
+                        my_universe->cartesian_coordinates->z);
 
-            // print cartesian coordinates on bottom left corner.
-            printing_struct.x = 0;
-            printing_struct.y = 0;
-            printing_struct.text_char = angles_and_coordinates_text;
-            printing_struct.horizontal_alignment = "left";
-            printing_struct.vertical_alignment = "bottom";
-            my_font2D->printText2D(printing_struct);
+                char time_text[256];
+                std::snprintf(time_text, sizeof(time_text), "%.2f sec", glfwGetTime());
 
-            if (in_help_mode && can_display_help_screen)
-            {
-                // print help text.
+                char null_text[] = "";
+                char on_text[] = "on";
+                char off_text[] = "off";
+                char in_use_text[] = " (in use)";
+
+                char help_text_char[1024];
+                std::snprintf(
+                        help_text_char,
+                        sizeof(help_text_char),
+                        "Ajokki v. 0.0.1\\n"
+                        "\\n"
+                        "arrow keys\\n"
+                        "space jump\\n"
+                        "enter duck\\n"
+                        "F1 help mode\\n"
+                        "`  enter console\\n"
+                        "I  invert mouse (%s)\\n"
+                        "F  flight mode (%s)\\n"
+                        "Ctrl      turbo\\n"
+                        "Ctrl+Ctrl extra turbo\\n"
+                        "for debugging:\\n"
+                        "G  grass texture%s\\n"
+                        "U  uvmap texture%s\\n"
+                        "T  terrain species\\n"
+                        "A  suzanne species\\n",
+                        (my_universe->is_invert_mouse_in_use ? on_text : off_text),
+                        (my_universe->is_flight_mode_in_use ? on_text : off_text),
+                        (!does_suzanne_species_have_uvmap_texture ? in_use_text : null_text),
+                        (does_suzanne_species_have_uvmap_texture ? in_use_text : null_text));
+
+                char spherical_coordinates_text[256];
+
+                if (my_universe != nullptr && my_universe->testing_spherical_world_in_use)
+                {
+                    std::snprintf(spherical_coordinates_text, sizeof(spherical_coordinates_text), "rho:%.2f theta:%.2f phi:%.2f", my_universe->spherical_coordinates->rho, my_universe->spherical_coordinates->theta, my_universe->spherical_coordinates->phi);
+                }
+
+                // print cartesian coordinates on bottom left corner.
                 printing_struct.x = 0;
-                printing_struct.y = window_height - (3 * text_size);
-                printing_struct.text_char = help_text_char;
+                printing_struct.y = 0;
+                printing_struct.text_char = angles_and_coordinates_text;
+                printing_struct.horizontal_alignment = "left";
+                printing_struct.vertical_alignment = "bottom";
+                my_font2D->printText2D(printing_struct);
+
+                if (my_universe != nullptr && my_universe->in_help_mode && my_universe->can_display_help_screen)
+                {
+                    // print help text.
+                    printing_struct.x = 0;
+                    printing_struct.y = my_universe->get_window_height() - (3 * my_universe->get_text_size());
+                    printing_struct.text_char = help_text_char;
+                    printing_struct.horizontal_alignment = "left";
+                    printing_struct.vertical_alignment = "top";
+                    my_font2D->printText2D(printing_struct);
+                }
+
+                if (my_universe != nullptr && my_universe->testing_spherical_world_in_use)
+                {
+                    // print spherical coordinates on bottom left corner.
+                    printing_struct.x = 0;
+                    printing_struct.y += 2 * my_universe->get_text_size();
+                    printing_struct.text_char = spherical_coordinates_text;
+                    printing_struct.horizontal_alignment = "left";
+                    printing_struct.vertical_alignment = "bottom";
+                    my_font2D->printText2D(printing_struct);
+                }
+
+                // print time data on top left corner.
+                printing_struct.x = 0;
+                printing_struct.y = static_cast<GLuint>(my_universe->get_window_height());
+                printing_struct.text_char = time_text;
                 printing_struct.horizontal_alignment = "left";
                 printing_struct.vertical_alignment = "top";
                 my_font2D->printText2D(printing_struct);
             }
 
-            if (testing_spherical_world_in_use)
-            {
-                // print spherical coordinates on bottom left corner.
-                printing_struct.x = 0;
-                printing_struct.y += 2 * text_size;
-                printing_struct.text_char = spherical_coordinates_text;
-                printing_struct.horizontal_alignment = "left";
-                printing_struct.vertical_alignment = "bottom";
-                my_font2D->printText2D(printing_struct);
-            }
-
-            // print time data on top left corner.
-            printing_struct.x = 0;
-            printing_struct.y = static_cast<GLuint>(window_height);
-            printing_struct.text_char = time_text;
-            printing_struct.horizontal_alignment = "left";
-            printing_struct.vertical_alignment = "top";
-            my_font2D->printText2D(printing_struct);
-
             if (ms_frame_text_ready)
             {
                 // print frame rate data on top right corner.
-                printing_struct.x = window_width;
-                printing_struct.y = window_height;
+                printing_struct.x = my_universe->get_window_width();
+                printing_struct.y = my_universe->get_window_height();
                 printing_struct.text_char = ms_frame_text;
                 printing_struct.horizontal_alignment = "right";
                 printing_struct.vertical_alignment = "top";
@@ -1150,13 +1064,13 @@ int main(void)
             }
 
             // Swap buffers.
-            glfwSwapBuffers(window);
+            glfwSwapBuffers(my_universe->get_window());
 
-            last_time_before_reading_keyboard = current_time_before_reading_keyboard;
+            my_universe->finalize_delta_time_loop();
         }
 
         // Check if the window was closed.
-        if (glfwWindowShouldClose(window) != 0)
+        if (glfwWindowShouldClose(my_universe->get_window()) != 0)
         {
             is_exit_requested = true;
         }

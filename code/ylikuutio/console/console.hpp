@@ -19,8 +19,15 @@
 // Include standard headers
 #include <list>          // std::list
 #include <stdint.h>      // uint32_t etc.
+#include <string>        // std::string
 #include <unordered_map> // std::unordered_map
 #include <vector>        // std::vector
+
+namespace map
+{
+    template <class T1>
+        void print_keys_to_console(std::unordered_map<std::string, T1>* unordered_map_pointer, console::Console* console);
+}
 
 namespace console
 {
@@ -207,10 +214,15 @@ namespace console
 
             // Public callbacks end here.
 
+            template <class T1>
+                friend void map::print_keys_to_console(std::unordered_map<std::string, T1>* unordered_map_pointer, console::Console* console);
+
         private:
             static void charmods_callback(GLFWwindow* window, unsigned int codepoint, int mods);
 
             // Callbacks end here.
+
+            ontology::Universe* get_universe();
 
             void copy_historical_input_into_current_input();
             bool exit_console();

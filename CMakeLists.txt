@@ -447,9 +447,8 @@ add_library(ylikuutio STATIC
     # common, in alphabetical order
     code/ylikuutio/common/any_value.cpp
     code/ylikuutio/common/any_value.hpp
-    code/ylikuutio/common/global_variables.cpp
-    code/ylikuutio/common/global_variables.hpp
     code/ylikuutio/common/globals.hpp
+    code/ylikuutio/common/spherical_coordinates_struct.hpp
     code/ylikuutio/common/template_helpers.hpp
 
     # config, in alphabetical order.
@@ -624,10 +623,18 @@ add_library(ylikuutio STATIC
 add_executable(ajokki
     # ajokki, in alphabetical order
     code/ajokki/ajokki.cpp
+    code/ajokki/ajokki_background_colors.cpp
+    code/ajokki/ajokki_background_colors.hpp
     code/ajokki/ajokki_console_callbacks.cpp
     code/ajokki/ajokki_console_callbacks.hpp
+    code/ajokki/ajokki_debug.cpp
+    code/ajokki/ajokki_debug.hpp
     code/ajokki/ajokki_keyboard_callbacks.cpp
     code/ajokki/ajokki_keyboard_callbacks.hpp
+    code/ajokki/ajokki_location_and_orientation.cpp
+    code/ajokki/ajokki_location_and_orientation.hpp
+    code/ajokki/ajokki_movement.cpp
+    code/ajokki/ajokki_movement.hpp
     )
 add_dependencies(ajokki rescan)
 target_link_libraries(ajokki ylikuutio ${ALL_LIBS} glfw)
@@ -652,8 +659,6 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/callback_system/callback_parameter.hpp
         code/ylikuutio/common/any_value.cpp
         code/ylikuutio/common/any_value.hpp
-        code/ylikuutio/common/global_variables.cpp
-        code/ylikuutio/common/global_variables.hpp
         code/ylikuutio/common/globals.hpp
         code/ylikuutio/file/file_loader.cpp
         code/ylikuutio/file/file_loader.hpp

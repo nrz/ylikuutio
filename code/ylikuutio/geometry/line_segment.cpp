@@ -7,7 +7,7 @@
 namespace geometry
 {
     /*
-    LineSegment::LineSegment(std::vector<float> point1, std::vector<float> point2)
+    LineSegment::LineSegment(const std::vector<float> point1, const std::vector<float> point2)
     {
         // constructor.
         // can be used for creating n-dimensional line segments.

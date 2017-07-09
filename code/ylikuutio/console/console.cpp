@@ -5,7 +5,6 @@
 #include "code/ylikuutio/config/setting_master.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/callback_system/callback_magic_numbers.hpp"
-#include "code/ylikuutio/common/global_variables.hpp"
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
 #include "code/ylikuutio/map/ylikuutio_map.hpp"
 #include "code/ylikuutio/common/globals.hpp"
@@ -62,6 +61,7 @@ namespace console
 
         // This is a pointer to `ontology::Universe`.
         this->universe_pointer = console_struct.universe_pointer;
+        this->universe_pointer->console_pointer = this;
 
         // This is a pointer to `font2D::Font2D` instance that is used for printing.
         this->font2D_pointer = console_struct.font2D_pointer;
@@ -69,11 +69,11 @@ namespace console
         if (this->universe_pointer->setting_master_pointer->is_setting("console_top_y"))
         {
             // OK, there is a setting for `console_top_y`.
-            datatypes::AnyValue& console_top_y_any_value = universe_pointer->setting_master_pointer->setting_pointer_map["console_top_y"]->setting_value;
+            datatypes::AnyValue* console_top_y_any_value = universe_pointer->setting_master_pointer->setting_pointer_map["console_top_y"]->setting_value;
 
-            if (console_top_y_any_value.type == datatypes::UINT32_T)
+            if (console_top_y_any_value->type == datatypes::UINT32_T)
             {
-                this->console_top_y = console_top_y_any_value.uint32_t_value;
+                this->console_top_y = console_top_y_any_value->uint32_t_value;
             }
             else
             {
@@ -90,11 +90,11 @@ namespace console
         if (this->universe_pointer->setting_master_pointer->is_setting("console_bottom_y"))
         {
             // OK, there is a setting for `console_bottom_y`.
-            datatypes::AnyValue& console_bottom_y_any_value = universe_pointer->setting_master_pointer->setting_pointer_map["console_bottom_y"]->setting_value;
+            datatypes::AnyValue* console_bottom_y_any_value = universe_pointer->setting_master_pointer->setting_pointer_map["console_bottom_y"]->setting_value;
 
-            if (console_bottom_y_any_value.type == datatypes::UINT32_T)
+            if (console_bottom_y_any_value->type == datatypes::UINT32_T)
             {
-                this->console_bottom_y = console_bottom_y_any_value.uint32_t_value;
+                this->console_bottom_y = console_bottom_y_any_value->uint32_t_value;
             }
             else
             {
@@ -111,11 +111,11 @@ namespace console
         if (this->universe_pointer->setting_master_pointer->is_setting("console_left_x"))
         {
             // OK, there is a setting for `console_left_x`.
-            datatypes::AnyValue& console_left_x_any_value = universe_pointer->setting_master_pointer->setting_pointer_map["console_left_x"]->setting_value;
+            datatypes::AnyValue* console_left_x_any_value = universe_pointer->setting_master_pointer->setting_pointer_map["console_left_x"]->setting_value;
 
-            if (console_left_x_any_value.type == datatypes::UINT32_T)
+            if (console_left_x_any_value->type == datatypes::UINT32_T)
             {
-                this->console_left_x = console_left_x_any_value.uint32_t_value;
+                this->console_left_x = console_left_x_any_value->uint32_t_value;
             }
             else
             {
@@ -132,11 +132,11 @@ namespace console
         if (this->universe_pointer->setting_master_pointer->is_setting("console_right_x"))
         {
             // OK, there is a setting for `console_right_x`.
-            datatypes::AnyValue& console_right_x_any_value = universe_pointer->setting_master_pointer->setting_pointer_map["console_right_x"]->setting_value;
+            datatypes::AnyValue* console_right_x_any_value = universe_pointer->setting_master_pointer->setting_pointer_map["console_right_x"]->setting_value;
 
-            if (console_right_x_any_value.type == datatypes::UINT32_T)
+            if (console_right_x_any_value->type == datatypes::UINT32_T)
             {
-                this->console_right_x = console_right_x_any_value.uint32_t_value;
+                this->console_right_x = console_right_x_any_value->uint32_t_value;
             }
             else
             {
@@ -176,7 +176,7 @@ namespace console
         // Please note that it is not necessary to be in console to be able to print in console.
         const char* text_char = text.c_str();
 
-        int32_t characters_for_line = window_width / text_size;
+        int32_t characters_for_line = this->universe_pointer->get_window_width() / this->universe_pointer->get_text_size();
 
         std::list<char> text_char_list;
         int32_t current_line_length = 0;
@@ -223,18 +223,18 @@ namespace console
         if (this->in_console)
         {
             // Convert current input into std::string.
-            uint32_t characters_for_line = window_width / text_size;
+            uint32_t characters_for_line = this->universe_pointer->get_window_width() / this->universe_pointer->get_text_size();
 
             // Draw the console to screen using `font2D::printText2D`.
             PrintingStruct printing_struct;
-            printing_struct.screen_width = static_cast<GLuint>(window_width);
-            printing_struct.screen_height = static_cast<GLuint>(window_height);
-            printing_struct.text_size = text_size;
-            printing_struct.font_size = font_size;
+            printing_struct.screen_width = static_cast<GLuint>(this->universe_pointer->get_window_width());
+            printing_struct.screen_height = static_cast<GLuint>(this->universe_pointer->get_window_height());
+            printing_struct.text_size = this->universe_pointer->get_text_size();
+            printing_struct.font_size = this->universe_pointer->get_font_size();
             printing_struct.char_font_texture_file_format = "bmp";
 
             printing_struct.x = 0;
-            printing_struct.y = window_height - (2 * text_size);
+            printing_struct.y = this->universe_pointer->get_window_height() - (2 * this->universe_pointer->get_text_size());
             printing_struct.horizontal_alignment = "left";
             printing_struct.vertical_alignment = "top";
 
@@ -247,6 +247,11 @@ namespace console
 
             this->font2D_pointer->printText2D(printing_struct);
         }
+    }
+
+    ontology::Universe* Console::get_universe()
+    {
+        return this->universe_pointer;
     }
 
     // Public callbacks.
@@ -297,7 +302,7 @@ namespace console
             *console->current_keyrelease_callback_engine_vector_pointer_pointer =
                 console->my_keyrelease_callback_engine_vector_pointer;
 
-            glfwSetCharModsCallback(window, Console::charmods_callback);
+            glfwSetCharModsCallback(console->universe_pointer->get_window(), Console::charmods_callback);
 
             // Mark that we're in console.
             console->in_console = true;
@@ -757,15 +762,29 @@ namespace console
         // Shift (left or right): 0x01
         // Alt (not AltGr):       0x04
         // Shift + Alt:           0x05
-        if ((mods == 0 || mods == 1) &&
-                global_console_pointer->in_console &&
-                !global_console_pointer->is_left_control_pressed &&
-                !global_console_pointer->is_right_control_pressed &&
-                !global_console_pointer->is_left_alt_pressed)
+        ontology::Universe* universe = static_cast<ontology::Universe*>(glfwGetWindowUserPointer(window));
+
+        if (universe == nullptr)
         {
-            global_console_pointer->cursor_it = global_console_pointer->current_input.insert(global_console_pointer->cursor_it, static_cast<char>(codepoint));
-            global_console_pointer->cursor_it++;
-            global_console_pointer->cursor_index++;
+            return;
+        }
+
+        console::Console* console = universe->console_pointer;
+
+        if (console == nullptr)
+        {
+            return;
+        }
+
+        if ((mods == 0 || mods == 1) &&
+                console->in_console &&
+                !console->is_left_control_pressed &&
+                !console->is_right_control_pressed &&
+                !console->is_left_alt_pressed)
+        {
+            console->cursor_it = console->current_input.insert(console->cursor_it, static_cast<char>(codepoint));
+            console->cursor_it++;
+            console->cursor_index++;
         }
     }
 
@@ -796,7 +815,7 @@ namespace console
             // Restore previous keyrelease callback engine vector pointer.
             *this->current_keyrelease_callback_engine_vector_pointer_pointer = this->previous_keyrelease_callback_engine_vector_pointer;
 
-            glfwSetCharModsCallback(window, nullptr);
+            glfwSetCharModsCallback(this->universe_pointer->get_window(), nullptr);
 
             // Mark that we have exited the console.
             this->in_console = false;

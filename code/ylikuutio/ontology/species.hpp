@@ -37,21 +37,18 @@ namespace ontology
     {
         public:
             // constructor.
-            Species(SpeciesStruct species_struct);
+            Species(const SpeciesStruct species_struct);
 
             // destructor.
             ~Species();
 
             // this method sets pointer to this `Species` to nullptr, sets `parent_pointer` according to the input, and requests a new `childID` from the new `Material`.
-            void bind_to_new_parent(ontology::Material* new_material_pointer);
+            void bind_to_new_parent(ontology::Material* const new_material_pointer);
 
             // this method sets an `Object` pointer.
-            void set_object_pointer(uint32_t childID, ontology::Object* child_pointer);
+            void set_object_pointer(const uint32_t childID, ontology::Object* const child_pointer);
 
-            // this method gets a object ID and removes it from the `free_objectID_queue` if it was popped from the queue.
-            uint32_t get_objectID();
-
-            void set_name(std::string name);
+            void set_name(const std::string name);
 
             bool is_world;                           // worlds currently do not rotate nor translate.
             float world_radius;                      // radius of sea level in kilometers. used only for worlds.
@@ -73,7 +70,7 @@ namespace ontology
                 friend void render_this_object(ontology::Object* object_pointer, ontology::Shader* shader_pointer);
             template<class T1>
                 friend void set_name(std::string name, T1 entity);
-            friend GLfloat get_ground_level(ontology::Species* terrain_species, glm::vec3 position);
+            friend GLfloat get_ground_level(ontology::Species* terrain_species, glm::vec3* position);
 
         private:
             void bind_to_parent();

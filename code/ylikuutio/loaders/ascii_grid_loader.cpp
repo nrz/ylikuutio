@@ -7,7 +7,6 @@
 #include "code/ylikuutio/triangulation/quad_triangulation.hpp"
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
 #include "code/ylikuutio/common/globals.hpp"
-#include "code/ylikuutio/common/global_variables.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -30,9 +29,9 @@ namespace loaders
             std::vector<glm::vec3>& out_vertices,
             std::vector<glm::vec2>& out_UVs,
             std::vector<glm::vec3>& out_normals,
-            int32_t x_step,
-            int32_t z_step,
-            std::string triangulation_type)
+            const int32_t x_step,
+            const int32_t z_step,
+            const std::string triangulation_type)
     {
         // Beginning of `L4133D.asc`.
         //
@@ -132,11 +131,19 @@ namespace loaders
         // start processing image_data.
         std::cout << "Processing image data.\n";
 
+        int32_t last_percent = -1;
+        int32_t current_percent = -1;
+
         for (int32_t z = 0; z < image_height_in_use; z++)
         {
             // show progress in percents.
-            int32_t current_percent = static_cast<int32_t>(floor(100.0f * ((double) z / (double) (image_height_in_use - 1))));
-            std::cout << current_percent << "% ";
+            current_percent = static_cast<int32_t>(floor(100.0f * ((double) z / (double) (image_height_in_use - 1))));
+
+            if (current_percent > last_percent)
+            {
+                std::cout << current_percent << "% ";
+                last_percent = current_percent;
+            }
 
             for (int32_t x = 0; x < image_width; x++)
             {

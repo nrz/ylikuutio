@@ -2,18 +2,18 @@
 
 namespace geometry
 {
-    bool Line2D::do_lines2D_intersect(geometry::Line2D* line1, geometry::Line2D* line2)
+    bool Line2D::do_lines2D_intersect(const geometry::Line2D* const line1, const geometry::Line2D* const line2)
     {
         // TODO: implement the function!
         return false;
     }
 
-    bool Line2D::do_lines2D_intersect(geometry::Line2D* line)
+    bool Line2D::do_lines2D_intersect(const geometry::Line2D* const line)
     {
         return geometry::Line2D::do_lines2D_intersect(line, this);
     }
 
-    bool Line2D::is_identical_with(geometry::Line2D* line)
+    bool Line2D::is_identical_with(const geometry::Line2D* const line)
     {
         if (this->x1 && line->x1 ||
                 this->y1 && line->y1 ||

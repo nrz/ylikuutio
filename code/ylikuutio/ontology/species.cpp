@@ -39,7 +39,7 @@ namespace ontology
         hierarchy::bind_child_to_parent<ontology::Species*>(this, this->parent_pointer->species_pointer_vector, this->parent_pointer->free_speciesID_queue);
     }
 
-    Species::Species(SpeciesStruct species_struct)
+    Species::Species(const SpeciesStruct species_struct)
     {
         // constructor.
         this->is_world          = species_struct.is_world;
@@ -188,17 +188,17 @@ namespace ontology
         ontology::render_species_or_glyph<ontology::Species*>(this);
     }
 
-    void Species::set_object_pointer(uint32_t childID, ontology::Object* child_pointer)
+    void Species::set_object_pointer(const uint32_t childID, ontology::Object* const child_pointer)
     {
         hierarchy::set_child_pointer(childID, child_pointer, this->object_pointer_vector, this->free_objectID_queue);
     }
 
-    void Species::set_name(std::string name)
+    void Species::set_name(const std::string name)
     {
         ontology::set_name(name, this);
     }
 
-    void Species::bind_to_new_parent(ontology::Material* new_material_pointer)
+    void Species::bind_to_new_parent(ontology::Material* const new_material_pointer)
     {
         // this method sets pointer to this `Species` to nullptr, sets `parent_pointer` according to the input, and requests a new `childID` from the new `Material`.
         hierarchy::bind_child_to_new_parent<ontology::Species*, ontology::Material*>(this, new_material_pointer, this->parent_pointer->species_pointer_vector, this->parent_pointer->free_speciesID_queue);

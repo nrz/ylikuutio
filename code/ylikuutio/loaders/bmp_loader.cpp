@@ -9,7 +9,7 @@
 namespace loaders
 {
     uint8_t* load_BMP_file(
-            std::string image_path,
+            const std::string image_path,
             int32_t& image_width,
             int32_t& image_height,
             uint32_t& image_size)

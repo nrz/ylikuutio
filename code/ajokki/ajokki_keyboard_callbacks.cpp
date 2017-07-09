@@ -10,7 +10,6 @@
 #include "code/ylikuutio/ontology/material.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
-#include "code/ylikuutio/common/global_variables.hpp"
 #include "code/ylikuutio/common/globals.hpp"
 
 // Include GLFW
@@ -25,23 +24,47 @@
 
 namespace ajokki
 {
-    void move_to_direction(glm::vec3 moving_direction)
+    bool move_to_direction(callback_system::CallbackObject* callback_object, glm::vec3 moving_direction)
     {
+        datatypes::AnyValue* any_value_universe_pointer = callback_object->get_arg(0);
+
+        if (any_value_universe_pointer == nullptr)
+        {
+            std::cerr << "Error: universe_pointer not found!\n";
+            return false;
+        }
+
+        if (any_value_universe_pointer->type != datatypes::UNIVERSE_POINTER)
+        {
+            std::cerr << "Invalid datatype: " << any_value_universe_pointer->type << ", should be " << datatypes::UNIVERSE_POINTER << "\n";
+            return false;
+        }
+
+        ontology::Universe* universe = any_value_universe_pointer->universe_pointer;
+
+        if (universe == nullptr)
+        {
+            std::cerr << "Error: universe_pointer is nullptr!\n";
+            return false;
+        }
+
         GLfloat temp_speed;
 
-        if (is_first_turbo_pressed && is_second_turbo_pressed)
+        if (universe->is_first_turbo_pressed && universe->is_second_turbo_pressed)
         {
-            temp_speed = twin_turbo_factor * speed;
+            temp_speed = universe->twin_turbo_factor * universe->speed;
         }
-        else if (is_first_turbo_pressed || is_second_turbo_pressed)
+        else if (universe->is_first_turbo_pressed || universe->is_second_turbo_pressed)
         {
-            temp_speed = turbo_factor * speed;
+            temp_speed = universe->turbo_factor * universe->speed;
         }
         else
         {
-            temp_speed = speed;
+            temp_speed = universe->speed;
         }
-        position += temp_speed * delta_time * moving_direction;
+        *universe->cartesian_coordinates += temp_speed * universe->get_delta_time() * moving_direction;
+
+        return true;
     }
 
     datatypes::AnyValue* glfwTerminate_cleanup(
@@ -60,7 +83,7 @@ namespace ajokki
     {
         std::cout << "Cleaning up.\n";
 
-        datatypes::AnyValue* any_value_universe_pointer = callback_object->get_any_value("universe_pointer");
+        datatypes::AnyValue* any_value_universe_pointer = callback_object->get_arg(0);
         datatypes::AnyValue* any_value_font2D_pointer = callback_object->get_any_value("font2D_pointer");
 
         if (any_value_universe_pointer->type == datatypes::UNIVERSE_POINTER)
@@ -96,7 +119,29 @@ namespace ajokki
             callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>&)
     {
-        is_first_turbo_pressed = false;
+        datatypes::AnyValue* any_value_universe_pointer = callback_object->get_arg(0);
+
+        if (any_value_universe_pointer == nullptr)
+        {
+            std::cerr << "Error: universe_pointer not found!\n";
+            return nullptr;
+        }
+
+        if (any_value_universe_pointer->type != datatypes::UNIVERSE_POINTER)
+        {
+            std::cerr << "Invalid datatype: " << any_value_universe_pointer->type << ", should be " << datatypes::UNIVERSE_POINTER << "\n";
+            return nullptr;
+        }
+
+        ontology::Universe* universe = any_value_universe_pointer->universe_pointer;
+
+        if (universe == nullptr)
+        {
+            std::cerr << "Error: universe_pointer is nullptr!\n";
+            return nullptr;
+        }
+
+        universe->is_first_turbo_pressed = false;
         return nullptr;
     }
 
@@ -105,34 +150,122 @@ namespace ajokki
             callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>&)
     {
-        is_second_turbo_pressed = false;
+        datatypes::AnyValue* any_value_universe_pointer = callback_object->get_arg(0);
+
+        if (any_value_universe_pointer == nullptr)
+        {
+            std::cerr << "Error: universe_pointer not found!\n";
+            return nullptr;
+        }
+
+        if (any_value_universe_pointer->type != datatypes::UNIVERSE_POINTER)
+        {
+            std::cerr << "Invalid datatype: " << any_value_universe_pointer->type << ", should be " << datatypes::UNIVERSE_POINTER << "\n";
+            return nullptr;
+        }
+
+        ontology::Universe* universe = any_value_universe_pointer->universe_pointer;
+
+        if (universe == nullptr)
+        {
+            std::cerr << "Error: universe_pointer is nullptr!\n";
+            return nullptr;
+        }
+
+        universe->is_second_turbo_pressed = false;
         return nullptr;
     }
 
     datatypes::AnyValue* enable_toggle_invert_mouse(
             callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
+            callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>&)
     {
-        can_toggle_invert_mouse = true;
+        datatypes::AnyValue* any_value_universe_pointer = callback_object->get_arg(0);
+
+        if (any_value_universe_pointer == nullptr)
+        {
+            std::cerr << "Error: universe_pointer not found!\n";
+            return nullptr;
+        }
+
+        if (any_value_universe_pointer->type != datatypes::UNIVERSE_POINTER)
+        {
+            std::cerr << "Invalid datatype: " << any_value_universe_pointer->type << ", should be " << datatypes::UNIVERSE_POINTER << "\n";
+            return nullptr;
+        }
+
+        ontology::Universe* universe = any_value_universe_pointer->universe_pointer;
+
+        if (universe == nullptr)
+        {
+            std::cerr << "Error: universe_pointer is nullptr!\n";
+            return nullptr;
+        }
+
+        universe->can_toggle_invert_mouse = true;
         return nullptr;
     }
 
     datatypes::AnyValue* enable_toggle_flight_mode(
             callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
+            callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>&)
     {
-        can_toggle_flight_mode = true;
+        datatypes::AnyValue* any_value_universe_pointer = callback_object->get_arg(0);
+
+        if (any_value_universe_pointer == nullptr)
+        {
+            std::cerr << "Error: universe_pointer not found!\n";
+            return nullptr;
+        }
+
+        if (any_value_universe_pointer->type != datatypes::UNIVERSE_POINTER)
+        {
+            std::cerr << "Invalid datatype: " << any_value_universe_pointer->type << ", should be " << datatypes::UNIVERSE_POINTER << "\n";
+            return nullptr;
+        }
+
+        ontology::Universe* universe = any_value_universe_pointer->universe_pointer;
+
+        if (universe == nullptr)
+        {
+            std::cerr << "Error: universe_pointer is nullptr!\n";
+            return nullptr;
+        }
+
+        universe->can_toggle_flight_mode = true;
         return nullptr;
     }
 
     datatypes::AnyValue* enable_toggle_help_mode(
             callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
+            callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>&)
     {
-        can_toggle_help_mode = true;
+        datatypes::AnyValue* any_value_universe_pointer = callback_object->get_arg(0);
+
+        if (any_value_universe_pointer == nullptr)
+        {
+            std::cerr << "Error: universe_pointer not found!\n";
+            return nullptr;
+        }
+
+        if (any_value_universe_pointer->type != datatypes::UNIVERSE_POINTER)
+        {
+            std::cerr << "Invalid datatype: " << any_value_universe_pointer->type << ", should be " << datatypes::UNIVERSE_POINTER << "\n";
+            return nullptr;
+        }
+
+        ontology::Universe* universe = any_value_universe_pointer->universe_pointer;
+
+        if (universe == nullptr)
+        {
+            std::cerr << "Error: universe_pointer is nullptr!\n";
+            return nullptr;
+        }
+
+        universe->can_toggle_help_mode = true;
         return nullptr;
     }
 
@@ -146,16 +279,37 @@ namespace ajokki
             std::vector<callback_system::CallbackParameter*>&)
     {
         uint32_t exit_program_magic_number = EXIT_PROGRAM_MAGIC_NUMBER;
-        datatypes::AnyValue* any_value_exit_program = new datatypes::AnyValue(exit_program_magic_number);
-        return any_value_exit_program;
+        return new datatypes::AnyValue(exit_program_magic_number);
     }
 
     datatypes::AnyValue* first_turbo(
             callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
+            callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>&)
     {
-        is_first_turbo_pressed = true;
+        datatypes::AnyValue* any_value_universe_pointer = callback_object->get_arg(0);
+
+        if (any_value_universe_pointer == nullptr)
+        {
+            std::cerr << "Error: universe_pointer not found!\n";
+            return nullptr;
+        }
+
+        if (any_value_universe_pointer->type != datatypes::UNIVERSE_POINTER)
+        {
+            std::cerr << "Invalid datatype: " << any_value_universe_pointer->type << ", should be " << datatypes::UNIVERSE_POINTER << "\n";
+            return nullptr;
+        }
+
+        ontology::Universe* universe = any_value_universe_pointer->universe_pointer;
+
+        if (universe == nullptr)
+        {
+            std::cerr << "Error: universe_pointer is nullptr!\n";
+            return nullptr;
+        }
+
+        universe->is_first_turbo_pressed = true;
         return nullptr;
     }
 
@@ -164,7 +318,29 @@ namespace ajokki
             callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>&)
     {
-        is_second_turbo_pressed = true;
+        datatypes::AnyValue* any_value_universe_pointer = callback_object->get_arg(0);
+
+        if (any_value_universe_pointer == nullptr)
+        {
+            std::cerr << "Error: universe_pointer not found!\n";
+            return nullptr;
+        }
+
+        if (any_value_universe_pointer->type != datatypes::UNIVERSE_POINTER)
+        {
+            std::cerr << "Invalid datatype: " << any_value_universe_pointer->type << ", should be " << datatypes::UNIVERSE_POINTER << "\n";
+            return nullptr;
+        }
+
+        ontology::Universe* universe = any_value_universe_pointer->universe_pointer;
+
+        if (universe == nullptr)
+        {
+            std::cerr << "Error: universe_pointer is nullptr!\n";
+            return nullptr;
+        }
+
+        universe->is_second_turbo_pressed = true;
         return nullptr;
     }
 
@@ -173,91 +349,289 @@ namespace ajokki
             callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>&)
     {
-        move_to_direction(direction);
+        datatypes::AnyValue* any_value_universe_pointer = callback_object->get_arg(0);
+
+        if (any_value_universe_pointer == nullptr)
+        {
+            std::cerr << "Error: universe_pointer not found!\n";
+            return nullptr;
+        }
+
+        if (any_value_universe_pointer->type != datatypes::UNIVERSE_POINTER)
+        {
+            std::cerr << "Invalid datatype: " << any_value_universe_pointer->type << ", should be " << datatypes::UNIVERSE_POINTER << "\n";
+            return nullptr;
+        }
+
+        ontology::Universe* universe = any_value_universe_pointer->universe_pointer;
+
+        if (universe == nullptr)
+        {
+            std::cerr << "Error: universe_pointer is nullptr!\n";
+            return nullptr;
+        }
+
+        ajokki::move_to_direction(callback_object, universe->direction);
         return nullptr;
     }
 
     datatypes::AnyValue* move_backward(
             callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
+            callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>&)
     {
-        move_to_direction(-direction);
+        datatypes::AnyValue* any_value_universe_pointer = callback_object->get_arg(0);
+
+        if (any_value_universe_pointer == nullptr)
+        {
+            std::cerr << "Error: universe_pointer not found!\n";
+            return nullptr;
+        }
+
+        if (any_value_universe_pointer->type != datatypes::UNIVERSE_POINTER)
+        {
+            std::cerr << "Invalid datatype: " << any_value_universe_pointer->type << ", should be " << datatypes::UNIVERSE_POINTER << "\n";
+            return nullptr;
+        }
+
+        ontology::Universe* universe = any_value_universe_pointer->universe_pointer;
+
+        if (universe == nullptr)
+        {
+            std::cerr << "Error: universe_pointer is nullptr!\n";
+            return nullptr;
+        }
+
+        ajokki::move_to_direction(callback_object, -universe->direction);
         return nullptr;
     }
 
     datatypes::AnyValue* strafe_left(
             callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
+            callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>&)
     {
-        move_to_direction(-right);
+        datatypes::AnyValue* any_value_universe_pointer = callback_object->get_arg(0);
+
+        if (any_value_universe_pointer == nullptr)
+        {
+            std::cerr << "Error: universe_pointer not found!\n";
+            return nullptr;
+        }
+
+        if (any_value_universe_pointer->type != datatypes::UNIVERSE_POINTER)
+        {
+            std::cerr << "Invalid datatype: " << any_value_universe_pointer->type << ", should be " << datatypes::UNIVERSE_POINTER << "\n";
+            return nullptr;
+        }
+
+        ontology::Universe* universe = any_value_universe_pointer->universe_pointer;
+
+        if (universe == nullptr)
+        {
+            std::cerr << "Error: universe_pointer is nullptr!\n";
+            return nullptr;
+        }
+
+        ajokki::move_to_direction(callback_object, -universe->right);
         return nullptr;
     }
 
     datatypes::AnyValue* strafe_right(
             callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
+            callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>&)
     {
-        move_to_direction(right);
+        datatypes::AnyValue* any_value_universe_pointer = callback_object->get_arg(0);
+
+        if (any_value_universe_pointer == nullptr)
+        {
+            std::cerr << "Error: universe_pointer not found!\n";
+            return nullptr;
+        }
+
+        if (any_value_universe_pointer->type != datatypes::UNIVERSE_POINTER)
+        {
+            std::cerr << "Invalid datatype: " << any_value_universe_pointer->type << ", should be " << datatypes::UNIVERSE_POINTER << "\n";
+            return nullptr;
+        }
+
+        ontology::Universe* universe = any_value_universe_pointer->universe_pointer;
+
+        if (universe == nullptr)
+        {
+            std::cerr << "Error: universe_pointer is nullptr!\n";
+            return nullptr;
+        }
+
+        ajokki::move_to_direction(callback_object, universe->right);
         return nullptr;
     }
 
     datatypes::AnyValue* ascent(
             callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
+            callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>&)
     {
-        move_to_direction(up);
+        datatypes::AnyValue* any_value_universe_pointer = callback_object->get_arg(0);
+
+        if (any_value_universe_pointer == nullptr)
+        {
+            std::cerr << "Error: universe_pointer not found!\n";
+            return nullptr;
+        }
+
+        if (any_value_universe_pointer->type != datatypes::UNIVERSE_POINTER)
+        {
+            std::cerr << "Invalid datatype: " << any_value_universe_pointer->type << ", should be " << datatypes::UNIVERSE_POINTER << "\n";
+            return nullptr;
+        }
+
+        ontology::Universe* universe = any_value_universe_pointer->universe_pointer;
+
+        if (universe == nullptr)
+        {
+            std::cerr << "Error: universe_pointer is nullptr!\n";
+            return nullptr;
+        }
+
+        ajokki::move_to_direction(callback_object, universe->up);
         return nullptr;
     }
 
     datatypes::AnyValue* descent(
             callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
+            callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>&)
     {
-        move_to_direction(-up);
+        datatypes::AnyValue* any_value_universe_pointer = callback_object->get_arg(0);
+
+        if (any_value_universe_pointer == nullptr)
+        {
+            std::cerr << "Error: universe_pointer not found!\n";
+            return nullptr;
+        }
+
+        if (any_value_universe_pointer->type != datatypes::UNIVERSE_POINTER)
+        {
+            std::cerr << "Invalid datatype: " << any_value_universe_pointer->type << ", should be " << datatypes::UNIVERSE_POINTER << "\n";
+            return nullptr;
+        }
+
+        ontology::Universe* universe = any_value_universe_pointer->universe_pointer;
+
+        if (universe == nullptr)
+        {
+            std::cerr << "Error: universe_pointer is nullptr!\n";
+            return nullptr;
+        }
+
+        ajokki::move_to_direction(callback_object, -universe->up);
         return nullptr;
     }
 
     datatypes::AnyValue* toggle_invert_mouse(
             callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
+            callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>&)
     {
-        if (can_toggle_invert_mouse)
+        datatypes::AnyValue* any_value_universe_pointer = callback_object->get_arg(0);
+
+        if (any_value_universe_pointer == nullptr)
         {
-            is_invert_mouse_in_use = !is_invert_mouse_in_use;
-            can_toggle_invert_mouse = false;
+            std::cerr << "Error: universe_pointer not found!\n";
+            return nullptr;
+        }
+
+        if (any_value_universe_pointer->type != datatypes::UNIVERSE_POINTER)
+        {
+            std::cerr << "Invalid datatype: " << any_value_universe_pointer->type << ", should be " << datatypes::UNIVERSE_POINTER << "\n";
+            return nullptr;
+        }
+
+        ontology::Universe* universe = any_value_universe_pointer->universe_pointer;
+
+        if (universe == nullptr)
+        {
+            std::cerr << "Error: universe_pointer is nullptr!\n";
+            return nullptr;
+        }
+
+        if (universe->can_toggle_invert_mouse)
+        {
+            universe->is_invert_mouse_in_use = !universe->is_invert_mouse_in_use;
+            universe->can_toggle_invert_mouse = false;
         }
         return nullptr;
     }
 
     datatypes::AnyValue* toggle_flight_mode(
             callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
+            callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>&)
     {
-        if (can_toggle_flight_mode)
+        datatypes::AnyValue* any_value_universe_pointer = callback_object->get_arg(0);
+
+        if (any_value_universe_pointer == nullptr)
         {
-            is_flight_mode_in_use = !is_flight_mode_in_use;
-            fallSpeed = 0.0f;
-            can_toggle_flight_mode = false;
+            std::cerr << "Error: universe_pointer not found!\n";
+            return nullptr;
+        }
+
+        if (any_value_universe_pointer->type != datatypes::UNIVERSE_POINTER)
+        {
+            std::cerr << "Invalid datatype: " << any_value_universe_pointer->type << ", should be " << datatypes::UNIVERSE_POINTER << "\n";
+            return nullptr;
+        }
+
+        ontology::Universe* universe = any_value_universe_pointer->universe_pointer;
+
+        if (universe == nullptr)
+        {
+            std::cerr << "Error: universe_pointer is nullptr!\n";
+            return nullptr;
+        }
+
+        if (universe->can_toggle_flight_mode)
+        {
+            universe->is_flight_mode_in_use = !universe->is_flight_mode_in_use;
+            universe->fall_speed = 0.0f;
+            universe->can_toggle_flight_mode = false;
         }
         return nullptr;
     }
 
     datatypes::AnyValue* toggle_help_mode(
             callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
+            callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>&)
     {
-        if (can_toggle_help_mode)
+        datatypes::AnyValue* any_value_universe_pointer = callback_object->get_arg(0);
+
+        if (any_value_universe_pointer == nullptr)
         {
-            in_help_mode = !in_help_mode;
-            can_toggle_help_mode = false;
+            std::cerr << "Error: universe_pointer not found!\n";
+            return nullptr;
+        }
+
+        if (any_value_universe_pointer->type != datatypes::UNIVERSE_POINTER)
+        {
+            std::cerr << "Invalid datatype: " << any_value_universe_pointer->type << ", should be " << datatypes::UNIVERSE_POINTER << "\n";
+            return nullptr;
+        }
+
+        ontology::Universe* universe = any_value_universe_pointer->universe_pointer;
+
+        if (universe == nullptr)
+        {
+            std::cerr << "Error: universe_pointer is nullptr!\n";
+            return nullptr;
+        }
+
+        if (universe->can_toggle_help_mode)
+        {
+            universe->in_help_mode = !universe->in_help_mode;
+            universe->can_toggle_help_mode = false;
         }
         return nullptr;
     }

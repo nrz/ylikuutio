@@ -67,7 +67,7 @@ namespace callback_system
 
         private:
             // this method sets a callback object pointer.
-            void set_callback_object_pointer(uint32_t childID, callback_system::CallbackObject* child_pointer);
+            void set_callback_object_pointer(const uint32_t childID, callback_system::CallbackObject* const child_pointer);
 
             std::vector<callback_system::CallbackObject*> callback_object_pointer_vector;
             std::queue<uint32_t> free_callback_objectID_queue;

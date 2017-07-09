@@ -10,7 +10,7 @@
 namespace hierarchy
 {
     template<class T1>
-        void set_child_pointer(uint32_t childID, T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<uint32_t>& free_childID_queue)
+        void set_child_pointer(const uint32_t childID, const T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<uint32_t>& free_childID_queue)
         {
             child_pointer_vector[childID] = child_pointer;
 
@@ -60,7 +60,7 @@ namespace hierarchy
         }
 
     template<class T1>
-        void bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<uint32_t>& free_childID_queue)
+        void bind_child_to_parent(const T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<uint32_t>& free_childID_queue)
         {
             // If a class' instances have parents, this function must be
             // called in the constructor. The call must be done only once
@@ -74,9 +74,9 @@ namespace hierarchy
 
     template<class T1>
         void bind_child_to_parent(
-                std::string child_name,
+                const std::string child_name,
                 std::unordered_map<std::string, T1>& child_hash_map,
-                T1 child_pointer,
+                const T1 child_pointer,
                 std::vector<T1>& child_pointer_vector,
                 std::queue<uint32_t>& free_childID_queue)
         {
@@ -99,8 +99,8 @@ namespace hierarchy
 
     template <class T1, class T2>
         void bind_child_to_new_parent(
-                T1 child_pointer,
-                T2 new_parent_pointer,
+                const T1 child_pointer,
+                const T2 new_parent_pointer,
                 std::vector<T1>& old_child_pointer_vector,
                 std::queue<uint32_t>& old_free_childID_queue)
         {

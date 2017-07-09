@@ -38,7 +38,7 @@ namespace ontology
         }
     }
 
-    Object::Object(ObjectStruct object_struct)
+    Object::Object(const ObjectStruct object_struct)
     {
         // constructor.
         this->coordinate_vector     = object_struct.coordinate_vector;
@@ -124,7 +124,7 @@ namespace ontology
         }
     }
 
-    void Object::bind_to_new_parent(void* new_parent_pointer)
+    void Object::bind_to_new_parent(void* const new_parent_pointer)
     {
         // this method sets pointer to this `Object` to nullptr, sets `parent_pointer` according to the input,
         // and requests a new `childID` from the new `Species` or from the new `Glyph`.
@@ -155,50 +155,50 @@ namespace ontology
         }
     }
 
-    void Object::set_name(std::string name)
+    void Object::set_name(const std::string name)
     {
         ontology::set_name(name, this);
     }
 
     // Public callbacks (to be called from AI scripts written in Chibi-Scheme).
 
-    void Object::set_dest(ontology::Object* object, float x, float y, float z)
+    void Object::set_dest(ontology::Object* const object, const float x, const float y, const float z)
     {
         // Set target towards which to move.
         object->dest_vector = glm::vec3(x, y, z);
     }
 
-    float Object::get_x(ontology::Object* object)
+    float Object::get_x(const ontology::Object* const object)
     {
         // Get x coordinate of `object`.
         return object->coordinate_vector.x;
     }
 
-    float Object::get_y(ontology::Object* object)
+    float Object::get_y(const ontology::Object* const object)
     {
         // Get y coordinate of `object`.
         return object->coordinate_vector.x;
     }
 
-    float Object::get_z(ontology::Object* object)
+    float Object::get_z(const ontology::Object* const object)
     {
         // Get z coordinate of `object`.
         return object->coordinate_vector.x;
     }
 
-    float Object::get_dest_x(ontology::Object* object)
+    float Object::get_dest_x(const ontology::Object* const object)
     {
         // Get x destination coordinate of `object`.
         return object->dest_vector.x;
     }
 
-    float Object::get_dest_y(ontology::Object* object)
+    float Object::get_dest_y(const ontology::Object* const object)
     {
         // Get y destination coordinate of `object`.
         return object->dest_vector.x;
     }
 
-    float Object::get_dest_z(ontology::Object* object)
+    float Object::get_dest_z(const ontology::Object* const object)
     {
         // Get z destination coordinate of `object`.
         return object->dest_vector.x;

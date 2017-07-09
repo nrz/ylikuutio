@@ -72,6 +72,12 @@ namespace graph
     class Graph;
 }
 
+namespace ontology
+{
+    class Universe;
+    class Font2D;
+}
+
 typedef datatypes::AnyValue* (*ConsoleCommandCallback) (
         console::Console*,
         ontology::Universe*,
@@ -91,19 +97,21 @@ typedef struct ConsoleStruct
     ontology::Font2D* font2D_pointer;
 } ConsoleStruct;
 
+typedef datatypes::AnyValue* (*ReadCallback) (ontology::Universe* universe, config::SettingMaster* setting_master);
 typedef datatypes::AnyValue* (*ActivateCallback) (ontology::Universe* universe, config::SettingMaster* setting_master);
 
 typedef struct SettingStruct
 {
-    SettingStruct(datatypes::AnyValue& initial_value)
-        : initial_value(initial_value), should_ylikuutio_call_activate_callback_now(true), setting_master_pointer(nullptr), activate_callback(nullptr)
+    SettingStruct(datatypes::AnyValue* initial_value)
+        : initial_value(initial_value), should_ylikuutio_call_activate_callback_now(true), setting_master_pointer(nullptr), activate_callback(nullptr), read_callback(nullptr)
     {
         // constructor.
     }
     std::string name;
-    datatypes::AnyValue& initial_value;
+    datatypes::AnyValue* initial_value;
     config::SettingMaster* setting_master_pointer;
     ActivateCallback activate_callback;
+    ReadCallback read_callback;
     bool should_ylikuutio_call_activate_callback_now;
 } SettingStruct;
 
@@ -122,17 +130,10 @@ typedef struct
     const char* vertical_alignment;
 } PrintingStruct;
 
-typedef struct
-{
-    double rho;
-    double theta;
-    double phi;
-} SphericalCoordinatesStruct;
-
 typedef struct SphericalWorldStruct
 {
     SphericalWorldStruct()
-        :SRTM_latitude_step_in_degrees(1.0f/1200.0f), SRTM_longitude_step_in_degrees(1.0f/1200.0f)
+        : SRTM_latitude_step_in_degrees(1.0f/1200.0f), SRTM_longitude_step_in_degrees(1.0f/1200.0f)
     {
         // constructor.
     }

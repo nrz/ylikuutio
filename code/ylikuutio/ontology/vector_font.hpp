@@ -27,22 +27,22 @@ namespace ontology
         public:
             // constructor.
             // TODO: `VectorFont` constructor also creates each `Glyph` and binds them to the `VectorFont`.
-            VectorFont(VectorFontStruct vector_font_struct);
+            VectorFont(const VectorFontStruct vector_font_struct);
 
             // destructor.
             // Destroying a `VectorFont` destroys also all `Text3D` entities, and after that all `Glyph` entities.
             ~VectorFont();
 
             // this method sets `Glyph` pointer.
-            void set_glyph_pointer(uint32_t childID, ontology::Glyph* child_pointer);
+            void set_glyph_pointer(const uint32_t childID, ontology::Glyph* const child_pointer);
 
             // this method sets `Text3D` pointer.
-            void set_text3D_pointer(uint32_t childID, ontology::Text3D* child_pointer);
+            void set_text3D_pointer(const uint32_t childID, ontology::Text3D* const child_pointer);
 
             // this method sets pointer to this species to nullptr, sets `parent_pointer` according to the input, and requests a new `childID` from the new material.
-            void bind_to_new_parent(ontology::Material* new_material_pointer);
+            void bind_to_new_parent(ontology::Material* const new_material_pointer);
 
-            void set_name(std::string name);
+            void set_name(const std::string name);
 
             // The rest fields are created in the constructor.
             uint32_t image_width;

@@ -26,7 +26,7 @@ namespace map
             // sort key vector alphabetically.
             std::sort(key_vector.begin(), key_vector.end());
 
-            uint32_t characters_for_line = window_width / text_size;
+            uint32_t characters_for_line = console->get_universe()->get_window_width() / console->get_universe()->get_text_size();
 
             std::string keys_text;
 

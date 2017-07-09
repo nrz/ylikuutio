@@ -8,8 +8,6 @@
 #include "code/ylikuutio/loaders/bmp_loader.cpp"
 #include "code/ylikuutio/loaders/srtm_heightmap_loader.hpp"
 #include "code/ylikuutio/loaders/srtm_heightmap_loader.cpp"
-#include "code/ylikuutio/common/global_variables.hpp"
-#include "code/ylikuutio/common/global_variables.cpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED

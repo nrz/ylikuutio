@@ -18,7 +18,7 @@
 
 namespace geometry
 {
-    void compute_vertex_normals(
+    bool compute_vertex_normals(
             std::vector<glm::vec3>& temp_normals,
             std::vector<glm::vec3>& face_normal_vector_vec3,
             const int32_t actual_image_width,

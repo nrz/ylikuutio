@@ -5,7 +5,6 @@
 #include "render_templates.hpp"
 #include "shader_struct.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
-#include "code/ylikuutio/common/global_variables.hpp"
 
 // Include GLEW
 #ifndef __GL_GLEW_H_INCLUDED
@@ -32,7 +31,7 @@ namespace ontology
         hierarchy::bind_child_to_parent<ontology::Shader*>(this, this->parent_pointer->shader_pointer_vector, this->parent_pointer->free_shaderID_queue);
     }
 
-    Shader::Shader(ShaderStruct shader_struct)
+    Shader::Shader(const ShaderStruct shader_struct)
     {
         // constructor.
 
@@ -85,23 +84,23 @@ namespace ontology
         // [re]bind `programID` shader.
         glUseProgram(this->programID);
 
-        glUniformMatrix4fv(this->ViewMatrixID, 1, GL_FALSE, &ViewMatrix[0][0]); // This one doesn't change between objects, so this can be done once for all objects that use "programID"
+        glUniformMatrix4fv(this->ViewMatrixID, 1, GL_FALSE, &this->universe_pointer->ViewMatrix[0][0]); // This one doesn't change between objects, so this can be done once for all objects that use "programID"
 
         // render this `Shader` by calling `render()` function of each `Material`.
         ontology::render_children<ontology::Material*>(this->material_pointer_vector);
     }
 
-    void Shader::set_material_pointer(uint32_t childID, ontology::Material* child_pointer)
+    void Shader::set_material_pointer(const uint32_t childID, ontology::Material* const child_pointer)
     {
         hierarchy::set_child_pointer(childID, child_pointer, this->material_pointer_vector, this->free_materialID_queue);
     }
 
-    void Shader::set_symbiosis_pointer(uint32_t childID, ontology::Symbiosis* child_pointer)
+    void Shader::set_symbiosis_pointer(const uint32_t childID, ontology::Symbiosis* const child_pointer)
     {
         hierarchy::set_child_pointer(childID, child_pointer, this->symbiosis_pointer_vector, this->free_symbiosisID_queue);
     }
 
-    void Shader::bind_to_new_parent(ontology::Scene* new_scene_pointer)
+    void Shader::bind_to_new_parent(ontology::Scene* const new_scene_pointer)
     {
         // this method sets pointer to this `Shader` to nullptr, sets `parent_pointer` according to the input, and requests a new `childID` from the new `Scene`.
         hierarchy::bind_child_to_new_parent<ontology::Shader*, ontology::Scene*>(this, new_scene_pointer, this->parent_pointer->shader_pointer_vector, this->parent_pointer->free_shaderID_queue);
@@ -112,7 +111,7 @@ namespace ontology
         ontology::set_name(name, this);
     }
 
-    void Shader::set_terrain_species_pointer(ontology::Species* terrain_species_pointer)
+    void Shader::set_terrain_species_pointer(ontology::Species* const terrain_species_pointer)
     {
         this->terrain_species_pointer = terrain_species_pointer;
         this->parent_pointer->parent_pointer->set_terrain_species_pointer(this->terrain_species_pointer);

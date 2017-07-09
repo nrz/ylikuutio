@@ -238,18 +238,21 @@ namespace geometry
             }
 
             // 5. Compute the vertex normals for vertices loaded from file, `push_back` to `temp_normals`.
-            geometry::compute_vertex_normals(
+            if (!geometry::compute_vertex_normals(
                     temp_normals,
                     face_normal_vector_vec3,
                     actual_image_width,
                     actual_image_height,
                     is_bilinear_interpolation_in_use,
                     is_southwest_northeast_edges_in_use,
-                    is_southeast_northwest_edges_in_use);
+                    is_southeast_northwest_edges_in_use))
+            {
+                return false;
+            }
 
             // 6. Loop through all vertices and `geometry::output_triangle_vertices`.
 
-            geometry::define_vertices_UVs_and_normals(
+            if (!geometry::define_vertices_UVs_and_normals(
                     triangulate_quads_struct,
                     temp_vertices,
                     temp_UVs,
@@ -264,7 +267,10 @@ namespace geometry
                     actual_image_height,
                     is_bilinear_interpolation_in_use,
                     is_southwest_northeast_edges_in_use,
-                    is_southeast_northwest_edges_in_use);
+                    is_southeast_northwest_edges_in_use))
+            {
+                return false;
+            }
 
             std::cout << "number of vertices: " << out_vertices.size() << ".\n";
             std::cout << "number of UVs: " << out_UVs.size() << ".\n";

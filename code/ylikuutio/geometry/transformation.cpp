@@ -4,6 +4,8 @@
 #endif
 
 #include "transformation.hpp"
+#include "code/ylikuutio/common/spherical_coordinates_struct.hpp"
+#include "code/ylikuutio/common/globals.hpp"
 
 // Include GLEW
 #ifndef __GL_GLEW_H_INCLUDED
@@ -38,7 +40,6 @@ namespace geometry
         cartesian_vertex.y = (GLfloat) (spherical_vertex.rho * sin(spherical_vertex.theta) * sin(spherical_vertex.phi));
         cartesian_vertex.z = (GLfloat) (spherical_vertex.rho * cos(spherical_vertex.theta));
 
-        // std::cout << "cartesian vertex, x: " << cartesian_vertex.x << ", y: " << cartesian_vertex.y << ", z: " << cartesian_vertex.z << "\n";
         return cartesian_vertex;
     }
 

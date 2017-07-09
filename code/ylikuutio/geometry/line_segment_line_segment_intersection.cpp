@@ -15,7 +15,7 @@
 
 namespace geometry
 {
-    glm::vec2 get_intersection_point(geometry::LineSegment2D* line_segment1, geometry::LineSegment2D* line_segment2)
+    glm::vec2 get_intersection_point(const geometry::LineSegment2D* const line_segment1, const geometry::LineSegment2D* const line_segment2)
     {
         // See http://mathworld.wolfram.com/Line-LineIntersection.html
 

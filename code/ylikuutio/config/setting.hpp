@@ -20,7 +20,7 @@ namespace config
     {
         public:
             // constructor.
-            Setting(SettingStruct setting_struct);
+            Setting(const SettingStruct setting_struct);
 
             // destructor.
             ~Setting();
@@ -41,10 +41,13 @@ namespace config
             std::string name;
 
             // The setting value (may be a pointer a some datatype).
-            datatypes::AnyValue setting_value;
+            datatypes::AnyValue* setting_value;
 
             // pointer to `ActivateCallback` used to activate the new value after setting it.
             ActivateCallback activate_callback;
+
+            // pointer to `ReadCallback` used to read the value. Leave to `nullptr` to read the value from `setting_value` of `class Setting`.
+            ReadCallback read_callback;
 
             config::SettingMaster* parent_pointer; // pointer to `SettingMaster`.
 

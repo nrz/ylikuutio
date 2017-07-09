@@ -8,6 +8,7 @@
 
 // Include standard headers
 #include <queue>         // std::queue
+#include <stdint.h>      // uint32_t etc.
 #include <string>        // std::string
 #include <unordered_map> // std::unordered_map
 #include <vector>        // std::vector
@@ -33,11 +34,12 @@ namespace callback_system
             // this method changes the callback without changing the parameters of CallbackObject.
             void set_new_callback(InputParametersToAnyValueCallback callback);
 
-            // getter function for callbacks and callback objects.
+            // getter functions for callbacks and callback objects.
             datatypes::AnyValue* get_any_value(std::string name);
+            datatypes::AnyValue* get_arg(uint32_t arg_i);
 
             // setter function for callbacks and callback objects.
-            void set_any_value(std::string name, datatypes::AnyValue* any_value);
+            void set_any_value(const std::string name, const datatypes::AnyValue* const any_value);
 
             friend class CallbackEngine;
             friend class CallbackParameter;
@@ -49,17 +51,13 @@ namespace callback_system
         protected:
             void bind_to_parent();
 
-            uint32_t get_childID();
-
             // this method sets a callback parameter pointer.
-            void set_callback_parameter_pointer(uint32_t childID, callback_system::CallbackParameter* child_pointer);
+            void set_callback_parameter_pointer(const uint32_t childID, callback_system::CallbackParameter* const child_pointer);
 
             void bind_child_to_parent(callback_system::CallbackParameter* child_pointer);
 
             // execute this callback.
             virtual datatypes::AnyValue* execute();
-
-            uint32_t get_callback_parameterID(std::vector<callback_system::CallbackParameter*>& child_pointer_vector, std::queue<uint32_t>& free_childID_queue);
 
             callback_system::CallbackEngine* parent_pointer; // pointer to the callback engine.
 
