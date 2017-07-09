@@ -46,6 +46,9 @@ namespace config
             // pointer to `ActivateCallback` used to activate the new value after setting it.
             ActivateCallback activate_callback;
 
+            // pointer to `ReadCallback` used to read the value. Leave to `nullptr` to read the value from `setting_value` of `class Setting`.
+            ReadCallback read_callback;
+
             config::SettingMaster* parent_pointer; // pointer to `SettingMaster`.
 
             uint32_t childID;                      // setting ID, returned by `config::SettingMaster->get_settingID()`.
