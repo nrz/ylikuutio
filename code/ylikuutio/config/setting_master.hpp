@@ -51,29 +51,29 @@ namespace config
                     ontology::Universe* universe,
                     std::vector<std::string>& command_parameters);
 
-            static datatypes::AnyValue* activate_world_radius(ontology::Universe* const universe, config::SettingMaster* const  setting_master);
+            static datatypes::AnyValue* activate_world_radius(ontology::Universe* const universe, config::SettingMaster* const setting_master);
 
-            static datatypes::AnyValue* activate_background_color(ontology::Universe* const universe, config::SettingMaster* const  setting_master);
+            static datatypes::AnyValue* activate_background_color(ontology::Universe* const universe, config::SettingMaster* const setting_master);
 
-            static datatypes::AnyValue* activate_spherical_coordinates(ontology::Universe* const universe, config::SettingMaster* const  setting_master);
+            static datatypes::AnyValue* activate_spherical_coordinates(ontology::Universe* const universe, config::SettingMaster* const setting_master);
 
-            static datatypes::AnyValue* activate_cartesian_coordinates(ontology::Universe* const universe, config::SettingMaster* const  setting_master);
+            static datatypes::AnyValue* activate_cartesian_coordinates(ontology::Universe* const universe, config::SettingMaster* const setting_master);
 
-            static datatypes::AnyValue* activate_horizontal_angle(ontology::Universe* const universe, config::SettingMaster* const  setting_master);
+            static datatypes::AnyValue* activate_horizontal_angle(ontology::Universe* const universe, config::SettingMaster* const setting_master);
 
-            static datatypes::AnyValue* activate_vertical_angle(ontology::Universe* const universe, config::SettingMaster* const  setting_master);
+            static datatypes::AnyValue* activate_vertical_angle(ontology::Universe* const universe, config::SettingMaster* const setting_master);
 
-            static datatypes::AnyValue* activate_speed(ontology::Universe* const universe, config::SettingMaster* const  setting_master);
+            static datatypes::AnyValue* activate_speed(ontology::Universe* const universe, config::SettingMaster* const setting_master);
 
-            static datatypes::AnyValue* activate_turbo_factor(ontology::Universe* const universe, config::SettingMaster* const  setting_master);
+            static datatypes::AnyValue* activate_turbo_factor(ontology::Universe* const universe, config::SettingMaster* const setting_master);
 
-            static datatypes::AnyValue* activate_twin_turbo_factor(ontology::Universe* const universe, config::SettingMaster* const  setting_master);
+            static datatypes::AnyValue* activate_twin_turbo_factor(ontology::Universe* const universe, config::SettingMaster* const setting_master);
 
-            static datatypes::AnyValue* activate_mouse_speed(ontology::Universe* const universe, config::SettingMaster* const  setting_master);
+            static datatypes::AnyValue* activate_mouse_speed(ontology::Universe* const universe, config::SettingMaster* const setting_master);
 
-            static datatypes::AnyValue* activate_is_flight_mode_in_use(ontology::Universe* const universe, config::SettingMaster* const  setting_master);
+            static datatypes::AnyValue* activate_is_flight_mode_in_use(ontology::Universe* const universe, config::SettingMaster* const setting_master);
 
-            static datatypes::AnyValue* activate_testing_spherical_world_in_use(ontology::Universe* const universe, config::SettingMaster* const  setting_master);
+            static datatypes::AnyValue* activate_testing_spherical_world_in_use(ontology::Universe* const universe, config::SettingMaster* const setting_master);
 
             // Public callbacks end here.
 
