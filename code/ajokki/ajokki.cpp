@@ -679,7 +679,7 @@ int main(void)
     callback_system::CallbackEngine* enter_callback_engine = new callback_system::CallbackEngine();
     new console::ConsoleCallbackObject(&console::Console::enter_key, enter_callback_engine, my_console);
 
-    // Callback code for C release: enable Control-C.
+    // Callback code for C: Control-C.
     callback_system::CallbackEngine* ctrl_c_callback_engine = new callback_system::CallbackEngine();
     new console::ConsoleCallbackObject(&console::Console::ctrl_c, ctrl_c_callback_engine, my_console);
 
