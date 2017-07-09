@@ -285,8 +285,8 @@ namespace console
             int32_t console_left_x;
             int32_t console_right_x;
 
-            int32_t n_columns;
             int32_t n_rows;
+            int32_t n_columns;
     };
 }
 
