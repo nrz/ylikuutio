@@ -21,6 +21,7 @@
 
 // Include standard headers
 #include <cmath>  // NAN, std::isnan, std::pow
+#include <math.h> // fmax
 #include <vector> // std::vector
 
 namespace ontology
