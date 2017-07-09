@@ -97,12 +97,13 @@ typedef struct ConsoleStruct
     ontology::Font2D* font2D_pointer;
 } ConsoleStruct;
 
+typedef datatypes::AnyValue* (*ReadCallback) (ontology::Universe* universe, config::SettingMaster* setting_master);
 typedef datatypes::AnyValue* (*ActivateCallback) (ontology::Universe* universe, config::SettingMaster* setting_master);
 
 typedef struct SettingStruct
 {
     SettingStruct(datatypes::AnyValue* initial_value)
-        : initial_value(initial_value), should_ylikuutio_call_activate_callback_now(true), setting_master_pointer(nullptr), activate_callback(nullptr)
+        : initial_value(initial_value), should_ylikuutio_call_activate_callback_now(true), setting_master_pointer(nullptr), activate_callback(nullptr), read_callback(nullptr)
     {
         // constructor.
     }
@@ -110,6 +111,7 @@ typedef struct SettingStruct
     datatypes::AnyValue* initial_value;
     config::SettingMaster* setting_master_pointer;
     ActivateCallback activate_callback;
+    ReadCallback read_callback;
     bool should_ylikuutio_call_activate_callback_now;
 } SettingStruct;
 
