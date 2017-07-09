@@ -30,6 +30,7 @@ namespace console
         // constructor.
         this->cursor_it = this->current_input.begin();
         this->cursor_index = 0;
+        this->in_history = false;
         this->in_historical_input = false;
         this->in_console = false;
         this->can_enter_console = true;
@@ -39,6 +40,10 @@ namespace console
         this->can_backspace = false;
         this->can_enter_key = false;
         this->can_ctrl_c = false;
+        this->can_page_up = false;
+        this->can_page_down = false;
+        this->can_home = false;
+        this->can_end = false;
         this->is_left_control_pressed = false;
         this->is_right_control_pressed = false;
         this->is_left_alt_pressed = false;
@@ -241,14 +246,27 @@ namespace console
             printing_struct.horizontal_alignment = "left";
             printing_struct.vertical_alignment = "top";
 
-            int32_t history_start_i = (this->console_history.size() > this->n_rows ? this->console_history.size() - this->n_rows : 0);
-
-            for (int32_t history_i = history_start_i; history_i < this->console_history.size(); history_i++)
+            if (this->in_history)
             {
-                std::list<char> historical_text = this->console_history.at(history_i);
-                printing_struct.text += string::convert_std_list_char_to_std_string(historical_text, characters_for_line, characters_for_line) + "\\n";
+                int32_t history_end_i = history_line_i + this->n_rows + 1;
+
+                for (int32_t history_i = history_line_i; history_i < history_end_i && history_i < this->console_history.size(); history_i++)
+                {
+                    std::list<char> historical_text = this->console_history.at(history_i);
+                    printing_struct.text += string::convert_std_list_char_to_std_string(historical_text, characters_for_line, characters_for_line) + "\\n";
+                }
             }
-            printing_struct.text += "$ " + string::convert_std_list_char_to_std_string(this->current_input, characters_for_line - 2, characters_for_line);
+            else
+            {
+                int32_t history_start_i = (this->console_history.size() > this->n_rows ? this->console_history.size() - this->n_rows : 0);
+
+                for (int32_t history_i = history_start_i; history_i < this->console_history.size(); history_i++)
+                {
+                    std::list<char> historical_text = this->console_history.at(history_i);
+                    printing_struct.text += string::convert_std_list_char_to_std_string(historical_text, characters_for_line, characters_for_line) + "\\n";
+                }
+                printing_struct.text += "$ " + string::convert_std_list_char_to_std_string(this->current_input, characters_for_line - 2, characters_for_line);
+            }
 
             this->font2D_pointer->printText2D(printing_struct);
         }
@@ -481,6 +499,58 @@ namespace console
         if (console->in_console)
         {
             console->can_ctrl_c = true;
+        }
+        return nullptr;
+    }
+
+    datatypes::AnyValue* Console::enable_page_up(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject*,
+            std::vector<callback_system::CallbackParameter*>&,
+            console::Console* console)
+    {
+        if (console->in_console)
+        {
+            console->can_page_up = true;
+        }
+        return nullptr;
+    }
+
+    datatypes::AnyValue* Console::enable_page_down(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject*,
+            std::vector<callback_system::CallbackParameter*>&,
+            console::Console* console)
+    {
+        if (console->in_console)
+        {
+            console->can_page_down = true;
+        }
+        return nullptr;
+    }
+
+    datatypes::AnyValue* Console::enable_home(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject*,
+            std::vector<callback_system::CallbackParameter*>&,
+            console::Console* console)
+    {
+        if (console->in_console)
+        {
+            console->can_home = true;
+        }
+        return nullptr;
+    }
+
+    datatypes::AnyValue* Console::enable_end(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject*,
+            std::vector<callback_system::CallbackParameter*>&,
+            console::Console* console)
+    {
+        if (console->in_console)
+        {
+            console->can_end = true;
         }
         return nullptr;
     }
@@ -756,6 +826,101 @@ namespace console
         return nullptr;
     }
 
+    datatypes::AnyValue* Console::page_up(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject*,
+            std::vector<callback_system::CallbackParameter*>&,
+            console::Console* console)
+    {
+        if (console->in_console && console->can_page_up)
+        {
+            if (console->in_history)
+            {
+                console->history_line_i -= console->n_rows;
+            }
+            else
+            {
+                console->in_history = true;
+                console->history_line_i = console->console_history.size() - 2 * console->n_rows;
+            }
+
+            if (console->history_line_i < 0)
+            {
+                console->history_line_i = 0;
+            }
+
+            if (console->history_line_i + console->n_rows >= console->console_history.size())
+            {
+                console->in_history = false;
+            }
+
+            console->can_page_up = false;
+        }
+
+        return nullptr;
+    }
+
+    datatypes::AnyValue* Console::page_down(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject*,
+            std::vector<callback_system::CallbackParameter*>&,
+            console::Console* console)
+    {
+        if (console->in_console && console->can_page_down)
+        {
+            if (console->in_history)
+            {
+                console->history_line_i += console->n_rows;
+
+                if (console->history_line_i + console->n_rows >= console->console_history.size())
+                {
+                    console->in_history = false;
+                }
+            }
+
+            console->can_page_down = false;
+        }
+        return nullptr;
+    }
+
+    datatypes::AnyValue* Console::home(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject*,
+            std::vector<callback_system::CallbackParameter*>&,
+            console::Console* console)
+    {
+        if (console->in_console && console->can_home)
+        {
+            console->history_line_i = 0;
+
+            if (console->history_line_i + console->n_rows >= console->console_history.size())
+            {
+                console->in_history = false;
+            }
+            else
+            {
+                console->in_history = true;
+            }
+
+            console->can_home = false;
+        }
+        return nullptr;
+    }
+
+    datatypes::AnyValue* Console::end(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject*,
+            std::vector<callback_system::CallbackParameter*>&,
+            console::Console* console)
+    {
+        if (console->in_console && console->can_end)
+        {
+            console->in_history = false;
+            console->can_home = false;
+        }
+        return nullptr;
+    }
+
     // Public callbacks end here.
 
     // Keep these variable types as this is according to GLFW documentation!
@@ -787,6 +952,7 @@ namespace console
                 !console->is_right_control_pressed &&
                 !console->is_left_alt_pressed)
         {
+            console->in_history = false;
             console->cursor_it = console->current_input.insert(console->cursor_it, static_cast<char>(codepoint));
             console->cursor_it++;
             console->cursor_index++;
@@ -843,19 +1009,29 @@ namespace console
 
     void Console::move_cursor_left()
     {
-        if (this->cursor_it != this->current_input.begin())
+        if (this->in_console)
         {
-            this->cursor_it--;
-            this->cursor_index--;
+            this->in_history = false;
+
+            if (this->cursor_it != this->current_input.begin())
+            {
+                this->cursor_it--;
+                this->cursor_index--;
+            }
         }
     }
 
     void Console::move_cursor_right()
     {
-        if (this->in_console && this->cursor_it != this->current_input.end())
+        if (this->in_console)
         {
-            this->cursor_it++;
-            this->cursor_index++;
+            this->in_history = false;
+
+            if (this->cursor_it != this->current_input.end())
+            {
+                this->cursor_it++;
+                this->cursor_index++;
+            }
         }
     }
 
@@ -863,6 +1039,7 @@ namespace console
     {
         if (this->in_console)
         {
+            this->in_history = false;
             this->cursor_it = this->current_input.begin();
             this->cursor_index = 0;
         }
@@ -872,40 +1049,9 @@ namespace console
     {
         if (this->in_console)
         {
+            this->in_history = false;
             this->cursor_it = this->current_input.end();
             this->cursor_index = this->current_input.size();
-        }
-    }
-
-    void Console::page_up()
-    {
-        if (this->in_console)
-        {
-            // TODO: implement this function!
-        }
-    }
-
-    void Console::page_down()
-    {
-        if (this->in_console)
-        {
-            // TODO: implement this function!
-        }
-    }
-
-    void Console::home()
-    {
-        if (this->in_console)
-        {
-            // TODO: implement this function!
-        }
-    }
-
-    void Console::end()
-    {
-        if (this->in_console)
-        {
-            // TODO: implement this function!
         }
     }
 }

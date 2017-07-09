@@ -631,6 +631,22 @@ int main(void)
     callback_system::CallbackEngine* enable_ctrl_c_callback_engine = new callback_system::CallbackEngine();
     new console::ConsoleCallbackObject(&console::Console::enable_ctrl_c, enable_ctrl_c_callback_engine, my_console);
 
+    // Callback code for PgUp release: enable PgUp.
+    callback_system::CallbackEngine* enable_page_up_callback_engine = new callback_system::CallbackEngine();
+    new console::ConsoleCallbackObject(&console::Console::enable_page_up, enable_page_up_callback_engine, my_console);
+
+    // Callback code for PgDn release: enable PgDn.
+    callback_system::CallbackEngine* enable_page_down_callback_engine = new callback_system::CallbackEngine();
+    new console::ConsoleCallbackObject(&console::Console::enable_page_down, enable_page_down_callback_engine, my_console);
+
+    // Callback code for Home release: enable Home.
+    callback_system::CallbackEngine* enable_home_callback_engine = new callback_system::CallbackEngine();
+    new console::ConsoleCallbackObject(&console::Console::enable_home, enable_home_callback_engine, my_console);
+
+    // Callback code for End release: enable End.
+    callback_system::CallbackEngine* enable_end_callback_engine = new callback_system::CallbackEngine();
+    new console::ConsoleCallbackObject(&console::Console::enable_end, enable_end_callback_engine, my_console);
+
     /*********************************************************************\
      *  Callback engines for console keypresses begin here.              *
     \*********************************************************************/
@@ -683,6 +699,22 @@ int main(void)
     callback_system::CallbackEngine* ctrl_c_callback_engine = new callback_system::CallbackEngine();
     new console::ConsoleCallbackObject(&console::Console::ctrl_c, ctrl_c_callback_engine, my_console);
 
+    // Callback code for PgUp.
+    callback_system::CallbackEngine* page_up_callback_engine = new callback_system::CallbackEngine();
+    new console::ConsoleCallbackObject(&console::Console::page_up, page_up_callback_engine, my_console);
+
+    // Callback code for PgDn.
+    callback_system::CallbackEngine* page_down_callback_engine = new callback_system::CallbackEngine();
+    new console::ConsoleCallbackObject(&console::Console::page_down, page_down_callback_engine, my_console);
+
+    // Callback code for Home.
+    callback_system::CallbackEngine* home_callback_engine = new callback_system::CallbackEngine();
+    new console::ConsoleCallbackObject(&console::Console::home, home_callback_engine, my_console);
+
+    // Callback code for End.
+    callback_system::CallbackEngine* end_callback_engine = new callback_system::CallbackEngine();
+    new console::ConsoleCallbackObject(&console::Console::end, end_callback_engine, my_console);
+
     new callback_system::CallbackParameter("", new datatypes::AnyValue(my_universe), false, cleanup_callback_object);
     new callback_system::CallbackParameter("font2D_pointer", new datatypes::AnyValue(my_font2D), false, cleanup_callback_object);
     cleanup_callback_object->set_new_callback(&ajokki::full_cleanup);
@@ -732,6 +764,10 @@ int main(void)
     console_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_BACKSPACE, enable_backspace_callback_engine });
     console_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_ENTER, enable_enter_key_callback_engine });
     console_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_C, enable_ctrl_c_callback_engine });
+    console_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_PAGE_UP, enable_page_up_callback_engine });
+    console_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_PAGE_DOWN, enable_page_down_callback_engine });
+    console_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_HOME, enable_home_callback_engine });
+    console_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_END, enable_end_callback_engine });
     my_console->set_my_keyrelease_callback_engine_vector_pointer(&console_keyrelease_callback_engines);
 
     // Keypress callbacks for console.
@@ -749,6 +785,10 @@ int main(void)
     console_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_BACKSPACE, backspace_callback_engine });
     console_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_ENTER, enter_callback_engine });
     console_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_C, ctrl_c_callback_engine });
+    console_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_PAGE_UP, page_up_callback_engine });
+    console_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_PAGE_DOWN, page_down_callback_engine });
+    console_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_HOME, home_callback_engine });
+    console_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_END, end_callback_engine });
     my_console->set_my_keypress_callback_engine_vector_pointer(&console_keypress_callback_engines);
 
     /*********************************************************************\
