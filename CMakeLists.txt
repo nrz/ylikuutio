@@ -625,6 +625,8 @@ add_executable(ajokki
     code/ajokki/ajokki.cpp
     code/ajokki/ajokki_background_colors.cpp
     code/ajokki/ajokki_background_colors.hpp
+    code/ajokki/ajokki_console.cpp
+    code/ajokki/ajokki_console.hpp
     code/ajokki/ajokki_console_callbacks.cpp
     code/ajokki/ajokki_console_callbacks.hpp
     code/ajokki/ajokki_debug.cpp

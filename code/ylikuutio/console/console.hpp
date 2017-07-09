@@ -138,6 +138,30 @@ namespace console
                     std::vector<callback_system::CallbackParameter*>&,
                     console::Console* console);
 
+            static datatypes::AnyValue* enable_page_up(
+                    callback_system::CallbackEngine*,
+                    callback_system::CallbackObject*,
+                    std::vector<callback_system::CallbackParameter*>&,
+                    console::Console* console);
+
+            static datatypes::AnyValue* enable_page_down(
+                    callback_system::CallbackEngine*,
+                    callback_system::CallbackObject*,
+                    std::vector<callback_system::CallbackParameter*>&,
+                    console::Console* console);
+
+            static datatypes::AnyValue* enable_home(
+                    callback_system::CallbackEngine*,
+                    callback_system::CallbackObject*,
+                    std::vector<callback_system::CallbackParameter*>&,
+                    console::Console* console);
+
+            static datatypes::AnyValue* enable_end(
+                    callback_system::CallbackEngine*,
+                    callback_system::CallbackObject*,
+                    std::vector<callback_system::CallbackParameter*>&,
+                    console::Console* console);
+
             // Console mode keypress callbacks begin here.
 
             static datatypes::AnyValue* exit_console(
@@ -212,6 +236,30 @@ namespace console
                     std::vector<callback_system::CallbackParameter*>&,
                     console::Console* console);
 
+            static datatypes::AnyValue* page_up(
+                    callback_system::CallbackEngine*,
+                    callback_system::CallbackObject*,
+                    std::vector<callback_system::CallbackParameter*>&,
+                    console::Console* console);
+
+            static datatypes::AnyValue* page_down(
+                    callback_system::CallbackEngine*,
+                    callback_system::CallbackObject*,
+                    std::vector<callback_system::CallbackParameter*>&,
+                    console::Console* console);
+
+            static datatypes::AnyValue* home(
+                    callback_system::CallbackEngine*,
+                    callback_system::CallbackObject*,
+                    std::vector<callback_system::CallbackParameter*>&,
+                    console::Console* console);
+
+            static datatypes::AnyValue* end(
+                    callback_system::CallbackEngine*,
+                    callback_system::CallbackObject*,
+                    std::vector<callback_system::CallbackParameter*>&,
+                    console::Console* console);
+
             // Public callbacks end here.
 
             template <class T1>
@@ -231,10 +279,6 @@ namespace console
             void move_cursor_right();
             void move_cursor_to_start_of_line();
             void move_cursor_to_end_of_line();
-            void page_up();
-            void page_down();
-            void home();
-            void end();
 
             std::list<char> current_input; // This is used for actual inputs.
             std::list<char>::iterator cursor_it;
@@ -247,6 +291,10 @@ namespace console
             bool can_backspace;
             bool can_enter_key;
             bool can_ctrl_c;
+            bool can_page_up;
+            bool can_page_down;
+            bool can_home;
+            bool can_end;
             bool is_left_control_pressed;
             bool is_right_control_pressed;
             bool is_left_alt_pressed;
@@ -257,7 +305,9 @@ namespace console
             std::vector<std::list<char>> command_history;
             std::vector<std::list<char>> console_history;
 
+            bool in_history;
             bool in_historical_input;
+            int32_t history_line_i;
             int32_t historical_input_i;
             std::list<char> temp_input;    // This is used for temporary storage of new input while modifying historical inputs.
 
@@ -285,8 +335,8 @@ namespace console
             int32_t console_left_x;
             int32_t console_right_x;
 
-            int32_t n_columns;
             int32_t n_rows;
+            int32_t n_columns;
     };
 }
 
