@@ -184,11 +184,9 @@ A: I like Lisp-family languages and Chibi-Scheme fulfils my
 * support for different height map formats (SRTM, LAZ)
 * instant rebinding of instances of classes belonging to rendering hierarchy
 * callbacks
-* in-game console
-* mipmapping
+* fully functioning in-game console
 
 ## Future developments underway:
-* fully functioning in-game console
 * full support for different keyboard layouts in console
 * partially transparent 2D text
 * 3D text
