@@ -12,18 +12,18 @@
 namespace string
 {
     bool check_and_report_if_some_string_matches(
-            const char* const file_base_pointer,
-            const char* const file_data_pointer,
+            const char* const base_pointer,
+            const char* const data_pointer,
             const std::vector<std::string> identifier_strings_vector)
     {
         for (std::string identifier_string : identifier_strings_vector)
         {
             const char* const identifier_string_char = identifier_string.c_str();
 
-            if (std::strncmp(file_data_pointer, identifier_string_char, std::strlen(identifier_string_char)) == 0)
+            if (std::strncmp(data_pointer, identifier_string_char, std::strlen(identifier_string_char)) == 0)
             {
                 const char* const identifier_string_char = identifier_string.c_str();
-                uint64_t offset = (uint64_t) file_data_pointer - (uint64_t) file_base_pointer;
+                uint64_t offset = (uint64_t) data_pointer - (uint64_t) base_pointer;
                 return true;
             }
         }

@@ -9,8 +9,8 @@
 namespace string
 {
     bool check_and_report_if_some_string_matches(
-            const char* const file_base_pointer,
-            const char* const file_data_pointer,
+            const char* const base_pointer,
+            const char* const data_pointer,
             const std::vector<std::string> identifier_strings_vector);
 
     void extract_string(
