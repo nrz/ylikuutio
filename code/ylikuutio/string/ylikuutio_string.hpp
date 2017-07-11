@@ -41,6 +41,12 @@ namespace string
             const std::list<char>& std_list_char,
             const uint32_t first_line_length,
             const uint32_t line_length);
+
+    bool check_if_float_string(const std::string& my_string);
+
+    bool check_if_signed_integer_string(const std::string& my_string);
+
+    bool check_if_unsigned_integer_string(const std::string& my_string);
 }
 
 #endif
