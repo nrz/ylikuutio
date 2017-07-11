@@ -196,7 +196,6 @@ namespace datatypes
 
     bool AnyValue::set_value(const std::string value_string)
     {
-        bool success = false;
         char* end;
 
         switch (this->type)
