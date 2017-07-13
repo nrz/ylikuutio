@@ -93,7 +93,12 @@ namespace config
 
         if (setting->read_callback == nullptr)
         {
-            return new datatypes::AnyValue(setting->setting_value); // create a new `AnyValue`.
+            if (setting_master->setting_pointer_map.count(setting_name) != 1)
+            {
+                return nullptr;
+            }
+
+            return new datatypes::AnyValue(setting_master->setting_pointer_map[setting_name]->setting_value); // create a new `AnyValue`.
         }
 
         return setting->read_callback(universe, setting_master);
@@ -166,7 +171,11 @@ namespace config
                 {
                     delete setting->setting_value; // delete the old value.
                     setting->setting_value = setting_any_value;
-                    setting->activate_callback(universe, setting_master);
+
+                    if (setting->activate_callback != nullptr)
+                    {
+                        setting->activate_callback(universe, setting_master);
+                    }
                 }
             }
             else
@@ -202,13 +211,22 @@ namespace config
             // Print valid values of the given variable.
             if (setting_master->is_setting(setting_name))
             {
-                datatypes::AnyValue* setting_any_value = setting_master->get_value(universe, setting_master, setting_name);
+                config::Setting* setting = setting_master->get(setting_name);
 
-                if (setting_any_value != nullptr)
+                if (setting != nullptr && setting->setting_value != nullptr && setting->read_callback == nullptr)
                 {
                     // Print variable value.
-                    console->print_text(setting_any_value->get_string());
-                    delete setting_any_value;
+                    console->print_text(setting->setting_value->get_string());
+                }
+                else if (setting != nullptr && setting->setting_value != nullptr)
+                {
+                    console->print_text(setting->read_callback(universe, setting_master)->get_string());
+                }
+                else
+                {
+                    // Invalid variable name.
+                    console->print_text("invalid variable name");
+                    console->print_text(setting_master->help());
                 }
             }
             else
