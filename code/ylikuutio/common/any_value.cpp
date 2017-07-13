@@ -1,5 +1,6 @@
 #include "any_value.hpp"
 #include "spherical_coordinates_struct.hpp"
+#include "code/ylikuutio/string/ylikuutio_string.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -196,7 +197,6 @@ namespace datatypes
 
     bool AnyValue::set_value(const std::string value_string)
     {
-        bool success = false;
         char* end;
 
         switch (this->type)
@@ -228,6 +228,11 @@ namespace datatypes
                 }
             case (FLOAT):
                 {
+                    if (!string::check_if_float_string(value_string))
+                    {
+                        return false;
+                    }
+
                     float float_value = std::strtof(value_string.c_str(), &end);
                     if (errno == ERANGE)
                     {
@@ -238,6 +243,11 @@ namespace datatypes
                 }
             case (DOUBLE):
                 {
+                    if (!string::check_if_float_string(value_string))
+                    {
+                        return false;
+                    }
+
                     double double_value = std::strtod(value_string.c_str(), &end);
                     if (errno == ERANGE)
                     {
@@ -248,6 +258,11 @@ namespace datatypes
                 }
             case (INT32_T):
                 {
+                    if (!string::check_if_signed_integer_string(value_string))
+                    {
+                        return false;
+                    }
+
                     // 0 means that the base is determined by the format given in string.
                     int32_t int32_t_value = std::strtol(value_string.c_str(), &end, 0);
                     if (errno == ERANGE)
@@ -259,6 +274,11 @@ namespace datatypes
                 }
             case (UINT32_T):
                 {
+                    if (!string::check_if_unsigned_integer_string(value_string))
+                    {
+                        return false;
+                    }
+
                     // 0 means that the base is determined by the format given in string.
                     uint32_t uint32_t_value = std::strtoul(value_string.c_str(), &end, 0);
                     if (errno == ERANGE)
@@ -270,6 +290,11 @@ namespace datatypes
                 }
             case (BOOL_POINTER):
                 {
+                    if (!string::check_if_unsigned_integer_string(value_string))
+                    {
+                        return false;
+                    }
+
                     // 0 means that the base is determined by the format given in string.
                     // The size of the pointer is assumed to be 64 bits.
                     bool* bool_pointer = (bool*) (std::strtoll(value_string.c_str(), &end, 0));
@@ -282,6 +307,11 @@ namespace datatypes
                 }
             case (FLOAT_POINTER):
                 {
+                    if (!string::check_if_unsigned_integer_string(value_string))
+                    {
+                        return false;
+                    }
+
                     // 0 means that the base is determined by the format given in string.
                     // The size of the pointer is assumed to be 64 bits.
                     float* float_pointer = (float*) (std::strtoll(value_string.c_str(), &end, 0));
@@ -294,6 +324,11 @@ namespace datatypes
                 }
             case (DOUBLE_POINTER):
                 {
+                    if (!string::check_if_unsigned_integer_string(value_string))
+                    {
+                        return false;
+                    }
+
                     // 0 means that the base is determined by the format given in string.
                     // The size of the pointer is assumed to be 64 bits.
                     double* double_pointer = (double*) (std::strtoll(value_string.c_str(), &end, 0));
@@ -306,6 +341,11 @@ namespace datatypes
                 }
             case (INT32_T_POINTER):
                 {
+                    if (!string::check_if_unsigned_integer_string(value_string))
+                    {
+                        return false;
+                    }
+
                     // 0 means that the base is determined by the format given in string.
                     // The size of the pointer is assumed to be 64 bits.
                     int32_t* int32_t_pointer = (int32_t*) (std::strtoll(value_string.c_str(), &end, 0));
@@ -318,6 +358,11 @@ namespace datatypes
                 }
             case (UINT32_T_POINTER):
                 {
+                    if (!string::check_if_unsigned_integer_string(value_string))
+                    {
+                        return false;
+                    }
+
                     // 0 means that the base is determined by the format given in string.
                     // The size of the pointer is assumed to be 64 bits.
                     uint32_t* uint32_t_pointer = (uint32_t*) (std::strtoll(value_string.c_str(), &end, 0));
@@ -330,6 +375,11 @@ namespace datatypes
                 }
             case (UNIVERSE_POINTER):
                 {
+                    if (!string::check_if_unsigned_integer_string(value_string))
+                    {
+                        return false;
+                    }
+
                     // 0 means that the base is determined by the format given in string.
                     // The size of the pointer is assumed to be 64 bits.
                     ontology::Universe* universe_pointer = (ontology::Universe*) (std::strtoll(value_string.c_str(), &end, 0));
@@ -342,6 +392,11 @@ namespace datatypes
                 }
             case (SCENE_POINTER):
                 {
+                    if (!string::check_if_unsigned_integer_string(value_string))
+                    {
+                        return false;
+                    }
+
                     // 0 means that the base is determined by the format given in string.
                     // The size of the pointer is assumed to be 64 bits.
                     ontology::Scene* scene_pointer = (ontology::Scene*) (std::strtoll(value_string.c_str(), &end, 0));
@@ -354,6 +409,11 @@ namespace datatypes
                 }
             case (SHADER_POINTER):
                 {
+                    if (!string::check_if_unsigned_integer_string(value_string))
+                    {
+                        return false;
+                    }
+
                     // 0 means that the base is determined by the format given in string.
                     // The size of the pointer is assumed to be 64 bits.
                     ontology::Shader* shader_pointer = (ontology::Shader*) (std::strtoll(value_string.c_str(), &end, 0));
@@ -366,6 +426,11 @@ namespace datatypes
                 }
             case (MATERIAL_POINTER):
                 {
+                    if (!string::check_if_unsigned_integer_string(value_string))
+                    {
+                        return false;
+                    }
+
                     // 0 means that the base is determined by the format given in string.
                     // The size of the pointer is assumed to be 64 bits.
                     ontology::Material* material_pointer = (ontology::Material*) (std::strtoll(value_string.c_str(), &end, 0));
@@ -378,6 +443,11 @@ namespace datatypes
                 }
             case (SPECIES_POINTER):
                 {
+                    if (!string::check_if_unsigned_integer_string(value_string))
+                    {
+                        return false;
+                    }
+
                     // 0 means that the base is determined by the format given in string.
                     // The size of the pointer is assumed to be 64 bits.
                     ontology::Species* species_pointer = (ontology::Species*) (std::strtoll(value_string.c_str(), &end, 0));
@@ -390,6 +460,11 @@ namespace datatypes
                 }
             case (OBJECT_POINTER):
                 {
+                    if (!string::check_if_unsigned_integer_string(value_string))
+                    {
+                        return false;
+                    }
+
                     // 0 means that the base is determined by the format given in string.
                     // The size of the pointer is assumed to be 64 bits.
                     ontology::Object* object_pointer = (ontology::Object*) (std::strtoll(value_string.c_str(), &end, 0));
@@ -402,6 +477,11 @@ namespace datatypes
                 }
             case (VECTORFONT_POINTER):
                 {
+                    if (!string::check_if_unsigned_integer_string(value_string))
+                    {
+                        return false;
+                    }
+
                     // 0 means that the base is determined by the format given in string.
                     // The size of the pointer is assumed to be 64 bits.
                     ontology::VectorFont* vector_font_pointer = (ontology::VectorFont*) (std::strtoll(value_string.c_str(), &end, 0));
@@ -414,6 +494,11 @@ namespace datatypes
                 }
             case (GLYPH_POINTER):
                 {
+                    if (!string::check_if_unsigned_integer_string(value_string))
+                    {
+                        return false;
+                    }
+
                     // 0 means that the base is determined by the format given in string.
                     // The size of the pointer is assumed to be 64 bits.
                     ontology::Glyph* glyph_pointer = (ontology::Glyph*) (std::strtoll(value_string.c_str(), &end, 0));
@@ -426,6 +511,11 @@ namespace datatypes
                 }
             case (TEXT3D_POINTER):
                 {
+                    if (!string::check_if_unsigned_integer_string(value_string))
+                    {
+                        return false;
+                    }
+
                     // 0 means that the base is determined by the format given in string.
                     // The size of the pointer is assumed to be 64 bits.
                     ontology::Text3D* text3D_pointer = (ontology::Text3D*) (std::strtoll(value_string.c_str(), &end, 0));
@@ -438,6 +528,11 @@ namespace datatypes
                 }
             case (TEXT2D_POINTER):
                 {
+                    if (!string::check_if_unsigned_integer_string(value_string))
+                    {
+                        return false;
+                    }
+
                     // 0 means that the base is determined by the format given in string.
                     // The size of the pointer is assumed to be 64 bits.
                     ontology::Font2D* font2D_pointer = (ontology::Font2D*) (std::strtoll(value_string.c_str(), &end, 0));
@@ -450,6 +545,11 @@ namespace datatypes
                 }
             case (CONSOLE_POINTER):
                 {
+                    if (!string::check_if_unsigned_integer_string(value_string))
+                    {
+                        return false;
+                    }
+
                     // 0 means that the base is determined by the format given in string.
                     // The size of the pointer is assumed to be 64 bits.
                     console::Console* console_pointer = (console::Console*) (std::strtoll(value_string.c_str(), &end, 0));
@@ -462,6 +562,11 @@ namespace datatypes
                 }
             case (SPHERICAL_COORDINATES_STRUCT_POINTER):
                 {
+                    if (!string::check_if_unsigned_integer_string(value_string))
+                    {
+                        return false;
+                    }
+
                     SphericalCoordinatesStruct* spherical_coordinates_struct_pointer = (SphericalCoordinatesStruct*) (std::strtoll(value_string.c_str(), &end, 0));
                     if (errno == ERANGE)
                     {
@@ -472,6 +577,11 @@ namespace datatypes
                 }
             case (GLM_VEC3_POINTER):
                 {
+                    if (!string::check_if_unsigned_integer_string(value_string))
+                    {
+                        return false;
+                    }
+
                     glm::vec3* glm_vec3_pointer = (glm::vec3*) (std::strtoll(value_string.c_str(), &end, 0));
                     if (errno == ERANGE)
                     {

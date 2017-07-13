@@ -12,18 +12,18 @@
 namespace string
 {
     bool check_and_report_if_some_string_matches(
-            const char* const file_base_pointer,
-            const char* const file_data_pointer,
+            const char* const base_pointer,
+            const char* const data_pointer,
             const std::vector<std::string> identifier_strings_vector)
     {
         for (std::string identifier_string : identifier_strings_vector)
         {
             const char* const identifier_string_char = identifier_string.c_str();
 
-            if (std::strncmp(file_data_pointer, identifier_string_char, std::strlen(identifier_string_char)) == 0)
+            if (std::strncmp(data_pointer, identifier_string_char, std::strlen(identifier_string_char)) == 0)
             {
                 const char* const identifier_string_char = identifier_string.c_str();
-                uint64_t offset = (uint64_t) file_data_pointer - (uint64_t) file_base_pointer;
+                uint64_t offset = (uint64_t) data_pointer - (uint64_t) base_pointer;
                 return true;
             }
         }
@@ -199,5 +199,102 @@ namespace string
             remaining_characters_on_this_line--;
         }
         return my_string;
+    }
+
+    bool check_if_float_string(const std::string& my_string)
+    {
+        if (my_string.empty())
+        {
+            return false;
+        }
+
+        bool is_dot_found = false;
+
+        for (int32_t i = 0; i < my_string.length(); i++)
+        {
+            // Each of the characters must be one of the following:
+            // 0123456789.-
+            //
+            // Besides, there may be only 1 dot. The dot may not be the last character.
+            // Besides, there may be only 1 minus sign. The minus sign must be the first character.
+
+            if (my_string.at(i) == '-' && i == 0)
+            {
+                // Minus sign is OK.
+                continue;
+            }
+
+            if (my_string.at(i) == '.')
+            {
+                if (is_dot_found)
+                {
+                    // Two or more dots.
+                    return false;
+                }
+
+                if (i == my_string.length() - 1)
+                {
+                    // Last character is dot.
+                    return false;
+                }
+
+                // OK, decimal point here.
+                is_dot_found = true;
+            }
+
+            else if (my_string.at(i) < '0' || my_string.at(i) > '9')
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    bool check_if_signed_integer_string(const std::string& my_string)
+    {
+        if (my_string.empty())
+        {
+            return false;
+        }
+
+        for (int32_t i = 0; i < my_string.length(); i++)
+        {
+            // Each of the characters must be one of the following:
+            // 0123456789
+            if (my_string.at(i) == '-' && i == 0)
+            {
+                // Minus sign is OK.
+                continue;
+            }
+
+            if (my_string.at(i) < '0' || my_string.at(i) > '9')
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    bool check_if_unsigned_integer_string(const std::string& my_string)
+    {
+        if (my_string.empty())
+        {
+            return false;
+        }
+
+        for (int32_t i = 0; i < my_string.length(); i++)
+        {
+            // Each of the characters must be one of the following:
+            // 0123456789
+
+            if (my_string.at(i) < '0' || my_string.at(i) > '9')
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

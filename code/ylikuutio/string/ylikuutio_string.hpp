@@ -9,8 +9,8 @@
 namespace string
 {
     bool check_and_report_if_some_string_matches(
-            const char* const file_base_pointer,
-            const char* const file_data_pointer,
+            const char* const base_pointer,
+            const char* const data_pointer,
             const std::vector<std::string> identifier_strings_vector);
 
     void extract_string(
@@ -41,6 +41,12 @@ namespace string
             const std::list<char>& std_list_char,
             const uint32_t first_line_length,
             const uint32_t line_length);
+
+    bool check_if_float_string(const std::string& my_string);
+
+    bool check_if_signed_integer_string(const std::string& my_string);
+
+    bool check_if_unsigned_integer_string(const std::string& my_string);
 }
 
 #endif
