@@ -45,6 +45,7 @@
 #include <iostream>      // std::cout, std::cin, std::cerr
 #include <stdint.h>      // uint32_t etc.
 #include <unordered_map> // std::unordered_map
+#include <vector>        // std::vector
 
 extern GLFWwindow* window; // The "extern" keyword here is to access the variable "window" declared in tutorialXXX.cpp. This is a hack to keep the tutorials simple. Please avoid this.
 
@@ -198,6 +199,26 @@ namespace ontology
     config::Setting* Universe::get(std::string key)
     {
         return this->setting_master_pointer->get(key);
+    }
+
+    std::string Universe::get_entity_names()
+    {
+        std::string entity_names = "";
+
+        std::vector<std::string> keys;
+        keys.reserve(this->entity_anyvalue_map.size());
+
+        for (auto it : this->entity_anyvalue_map)
+        {
+            if (!entity_names.empty())
+            {
+                entity_names += " ";
+            }
+            std::string key = static_cast<std::string>(it.first);
+            entity_names += key;
+        }
+
+        return entity_names;
     }
 
     // Public callbacks.
