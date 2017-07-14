@@ -297,6 +297,7 @@ namespace ontology
             // No command parameters.
             // Print variable names.
             console->print_text(setting_master->help());
+            return nullptr;
         }
         else if (command_parameters.size() == 1)
         {
