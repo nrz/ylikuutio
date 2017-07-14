@@ -333,7 +333,7 @@ namespace config
 
         datatypes::AnyValue* spherical_coordinates_any_value = setting_master_pointer->setting_pointer_map["spherical_coordinates"]->setting_value;
 
-        if (spherical_coordinates_any_value == nullptr || spherical_coordinates_any_value->type != datatypes::GLM_VEC3_POINTER)
+        if (spherical_coordinates_any_value == nullptr || spherical_coordinates_any_value->type != datatypes::SPHERICAL_COORDINATES_STRUCT_POINTER)
         {
             return nullptr;
         }
