@@ -284,6 +284,8 @@ int main(void)
     snow_cottage_species_struct.light_position = glm::vec3(4, 4, 4);
     ontology::Species* snow_cottage_species = new ontology::Species(snow_cottage_species_struct);
 
+    snow_cottage_species->set_name("snow_cottage");
+
     // Create snow cottage, store it in `snow_cottage1`.
     ObjectStruct snow_cottage_object_struct1;
     snow_cottage_object_struct1.species_parent_pointer = snow_cottage_species;
