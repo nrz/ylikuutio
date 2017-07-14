@@ -301,7 +301,7 @@ namespace ontology
             ontology::Universe* const universe,
             std::vector<std::string>& command_parameters)
     {
-        if (console == nullptr || universe == nullptr || command_parameters.size() == 0)
+        if (console == nullptr || universe == nullptr)
         {
             return nullptr;
         }
@@ -316,8 +316,8 @@ namespace ontology
         if (command_parameters.size() == 0)
         {
             // No command parameters.
-            // Print variable names.
-            console->print_text(setting_master->help());
+            // Print names of named entities.
+            console->print_text(universe->get_entity_names());
             return nullptr;
         }
         else if (command_parameters.size() == 1)
