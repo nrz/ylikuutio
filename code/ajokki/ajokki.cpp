@@ -284,6 +284,8 @@ int main(void)
     snow_cottage_species_struct.light_position = glm::vec3(4, 4, 4);
     ontology::Species* snow_cottage_species = new ontology::Species(snow_cottage_species_struct);
 
+    snow_cottage_species->set_name("snow_cottage");
+
     // Create snow cottage, store it in `snow_cottage1`.
     ObjectStruct snow_cottage_object_struct1;
     snow_cottage_object_struct1.species_parent_pointer = snow_cottage_species;
@@ -802,6 +804,7 @@ int main(void)
     command_callback_map["get"] = &config::SettingMaster::get_and_print;
 
     // Object handling callbacks.
+    command_callback_map["info"] = &ontology::Universe::info;
     command_callback_map["delete"] = &ontology::Universe::delete_entity;
 
     // Exit program callbacks.

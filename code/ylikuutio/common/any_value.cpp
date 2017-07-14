@@ -625,6 +625,37 @@ namespace datatypes
         this->glm_vec3_pointer = nullptr;
     }
 
+    AnyValue::AnyValue(const datatypes::AnyValue& original)
+    {
+        // copy constructor.
+        this->type = original.type;
+        this->bool_value = original.bool_value;
+        this->char_value = original.char_value;
+        this->float_value = original.float_value;
+        this->double_value = original.double_value;
+        this->int32_t_value = original.int32_t_value;
+        this->uint32_t_value = original.uint32_t_value;
+        this->bool_pointer = original.bool_pointer;
+        this->float_pointer = original.float_pointer;
+        this->double_pointer = original.double_pointer;
+        this->int32_t_pointer = original.int32_t_pointer;
+        this->uint32_t_pointer = original.uint32_t_pointer;
+        this->universe_pointer = original.universe_pointer;
+        this->scene_pointer = original.scene_pointer;
+        this->shader_pointer = original.shader_pointer;
+        this->material_pointer = original.material_pointer;
+        this->species_pointer = original.species_pointer;
+        this->object_pointer = original.object_pointer;
+        this->vector_font_pointer = original.vector_font_pointer;
+        this->glyph_pointer = original.glyph_pointer;
+        this->text3D_pointer = original.text3D_pointer;
+        this->symbiosis_pointer = original.symbiosis_pointer;
+        this->font2D_pointer = original.font2D_pointer;
+        this->console_pointer = original.console_pointer;
+        this->spherical_coordinates_struct_pointer = original.spherical_coordinates_struct_pointer;
+        this->glm_vec3_pointer = original.glm_vec3_pointer;
+    }
+
     AnyValue::AnyValue(const std::string type, const std::string value_string)
     {
         this->set_default_values();

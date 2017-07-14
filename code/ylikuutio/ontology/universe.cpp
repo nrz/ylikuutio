@@ -41,10 +41,11 @@
 #endif
 
 // Include standard headers
-#include <cmath>    // NAN, std::isnan, std::pow
-#include <iostream> // std::cout, std::cin, std::cerr
-#include <stdint.h> // uint32_t etc.
+#include <cmath>         // NAN, std::isnan, std::pow
+#include <iostream>      // std::cout, std::cin, std::cerr
+#include <stdint.h>      // uint32_t etc.
 #include <unordered_map> // std::unordered_map
+#include <vector>        // std::vector
 
 extern GLFWwindow* window; // The "extern" keyword here is to access the variable "window" declared in tutorialXXX.cpp. This is a hack to keep the tutorials simple. Please avoid this.
 
@@ -200,9 +201,24 @@ namespace ontology
         return this->setting_master_pointer->get(key);
     }
 
-    datatypes::AnyValue* Universe::get_value(std::string key)
+    std::string Universe::get_entity_names()
     {
-        return this->setting_master_pointer->get_value(this, this->setting_master_pointer, key);
+        std::string entity_names = "";
+
+        std::vector<std::string> keys;
+        keys.reserve(this->entity_anyvalue_map.size());
+
+        for (auto it : this->entity_anyvalue_map)
+        {
+            if (!entity_names.empty())
+            {
+                entity_names += " ";
+            }
+            std::string key = static_cast<std::string>(it.first);
+            entity_names += key;
+        }
+
+        return entity_names;
     }
 
     // Public callbacks.
@@ -285,14 +301,9 @@ namespace ontology
             ontology::Universe* const universe,
             std::vector<std::string>& command_parameters)
     {
-        if (console == nullptr || universe == nullptr || command_parameters.size() == 0)
-        {
-            return nullptr;
-        }
-
-        config::SettingMaster* setting_master = universe->setting_master_pointer;
-
-        if (setting_master == nullptr)
+        if (console == nullptr ||
+                universe == nullptr ||
+                universe->setting_master_pointer == nullptr)
         {
             return nullptr;
         }
@@ -300,8 +311,8 @@ namespace ontology
         if (command_parameters.size() == 0)
         {
             // No command parameters.
-            // Print variable names.
-            console->print_text(setting_master->help());
+            // Print names of named entities.
+            console->print_text(universe->get_entity_names());
         }
         else if (command_parameters.size() == 1)
         {
@@ -317,12 +328,8 @@ namespace ontology
 
             // TODO: get info about the entity.
             delete any_value;
-            return nullptr;
         }
-        else
-        {
-            return nullptr;
-        }
+        return nullptr;
     }
 
     // Public callbacks end here.

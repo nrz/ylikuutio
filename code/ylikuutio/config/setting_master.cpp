@@ -79,31 +79,6 @@ namespace config
         return this->setting_pointer_map[setting_name];
     }
 
-    datatypes::AnyValue* SettingMaster::get_value(
-            ontology::Universe* const universe,
-            config::SettingMaster* const setting_master,
-            std::string& setting_name)
-    {
-        config::Setting* setting = setting_master->get(setting_name);
-
-        if (setting == nullptr)
-        {
-            return nullptr;
-        }
-
-        if (setting->read_callback == nullptr)
-        {
-            if (setting_master->setting_pointer_map.count(setting_name) != 1)
-            {
-                return nullptr;
-            }
-
-            return new datatypes::AnyValue(setting_master->setting_pointer_map[setting_name]->setting_value); // create a new `AnyValue`.
-        }
-
-        return setting->read_callback(universe, setting_master);
-    }
-
     // public callbacks.
 
     datatypes::AnyValue* SettingMaster::set_and_print(
@@ -358,7 +333,7 @@ namespace config
 
         datatypes::AnyValue* spherical_coordinates_any_value = setting_master_pointer->setting_pointer_map["spherical_coordinates"]->setting_value;
 
-        if (spherical_coordinates_any_value == nullptr || spherical_coordinates_any_value->type != datatypes::GLM_VEC3_POINTER)
+        if (spherical_coordinates_any_value == nullptr || spherical_coordinates_any_value->type != datatypes::SPHERICAL_COORDINATES_STRUCT_POINTER)
         {
             return nullptr;
         }

@@ -231,8 +231,7 @@ namespace ontology
             // this method returns a pointer to `config::Setting` corresponding to the given `key`.
             config::Setting* get(std::string key);
 
-            // this method returns a pointer to `datatypes::AnyValue` corresponding to the given `key`.
-            datatypes::AnyValue* get_value(std::string key);
+            std::string get_entity_names();
 
             // Public callbacks.
 
