@@ -41,9 +41,9 @@
 #endif
 
 // Include standard headers
-#include <cmath>    // NAN, std::isnan, std::pow
-#include <iostream> // std::cout, std::cin, std::cerr
-#include <stdint.h> // uint32_t etc.
+#include <cmath>         // NAN, std::isnan, std::pow
+#include <iostream>      // std::cout, std::cin, std::cerr
+#include <stdint.h>      // uint32_t etc.
 #include <unordered_map> // std::unordered_map
 
 extern GLFWwindow* window; // The "extern" keyword here is to access the variable "window" declared in tutorialXXX.cpp. This is a hack to keep the tutorials simple. Please avoid this.
