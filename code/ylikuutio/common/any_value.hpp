@@ -74,6 +74,9 @@ namespace datatypes
             std::string get_string();
             bool set_value(const std::string value_string);
 
+            // copy constructor.
+            AnyValue(const datatypes::AnyValue& original);
+
             AnyValue(const std::string type, const std::string value_string);
             AnyValue();
             AnyValue(const bool bool_value);
