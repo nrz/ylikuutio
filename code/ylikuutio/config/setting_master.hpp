@@ -33,11 +33,6 @@ namespace config
             // this function returns help string for setting `setting`.
             std::string help(const std::string setting_name);
 
-            static datatypes::AnyValue* get_value(
-                    ontology::Universe* const universe,
-                    config::SettingMaster* const setting_master,
-                    std::string& setting_name);
-
             bool set(std::string& setting_name, datatypes::AnyValue* const setting_new_any_value);
 
             config::Setting* get(std::string& setting_name);

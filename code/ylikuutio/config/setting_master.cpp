@@ -79,31 +79,6 @@ namespace config
         return this->setting_pointer_map[setting_name];
     }
 
-    datatypes::AnyValue* SettingMaster::get_value(
-            ontology::Universe* const universe,
-            config::SettingMaster* const setting_master,
-            std::string& setting_name)
-    {
-        config::Setting* setting = setting_master->get(setting_name);
-
-        if (setting == nullptr)
-        {
-            return nullptr;
-        }
-
-        if (setting->read_callback == nullptr)
-        {
-            if (setting_master->setting_pointer_map.count(setting_name) != 1)
-            {
-                return nullptr;
-            }
-
-            return new datatypes::AnyValue(setting_master->setting_pointer_map[setting_name]->setting_value); // create a new `AnyValue`.
-        }
-
-        return setting->read_callback(universe, setting_master);
-    }
-
     // public callbacks.
 
     datatypes::AnyValue* SettingMaster::set_and_print(

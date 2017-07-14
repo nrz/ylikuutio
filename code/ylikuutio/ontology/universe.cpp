@@ -200,11 +200,6 @@ namespace ontology
         return this->setting_master_pointer->get(key);
     }
 
-    datatypes::AnyValue* Universe::get_value(std::string key)
-    {
-        return this->setting_master_pointer->get_value(this, this->setting_master_pointer, key);
-    }
-
     // Public callbacks.
 
     datatypes::AnyValue* Universe::delete_entity(
