@@ -113,10 +113,12 @@ If you have problems compiling tests or for some other reason don't want
 to compile tests, in CMakeLists.txt comment out the line that says:
 `set(DO_UNIT_TESTS_WITH_GOOGLE_TEST true)`
 
-If you are cross compiling for Windows under Linux, you need to
-uncomment the corresponding line in CMakeLists.txt:
+To cross compile for Windows under Linux:
 
-`# set(CROSS_COMPILE_FOR_WINDOWS true)`
+    $ mkdir build
+    $ cd build
+    $ cmake -DCMAKE_TOOLCHAIN_FILE=../w64.cmake ..
+    $ make
 
 To run Ajokki (working title based on Finnish bus body manufacturer),
 a demo program to check out some properties of Ylikuutio 3D engine:
