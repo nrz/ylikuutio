@@ -27,3 +27,8 @@ set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
 
 # http://stackoverflow.com/questions/17721619/cmake-cross-compile-libraries-are-not-found
 # set(CMAKE_LIBRARY_PATH ../cross-tools/include/)
+
+set(CMAKE_CXX_FLAGS "-std=c++11 -static-libgcc -static-libstdc++ -static -O3 -s")
+set(CMAKE_C_FLAGS "-static-libgcc -static-libstdc++ -static -O3 -s")
+set(CMAKE_SHARED_LIBRARY_LINK_C_FLAGS "-static-libgcc -static-libstdc++ -static -O3 -s")
+set(CMAKE_SHARED_LIBRARY_LINK_CXX_FLAGS "-std=c++11 -static-libgcc -static-libstdc++ -static -O3 -s")
