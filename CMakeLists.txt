@@ -7,9 +7,6 @@ project(ylikuutio)
 # SET(CMAKE_C_FLAGS  "${CMAKE_C_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS}")
 # SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS}")
 
-# uncomment the following line to cross-compile for Windows under Linux using mingw64.
-# set(CROSS_COMPILE_FOR_WINDOWS true)
-
 # comment the following line to disable scripting with Chibi Scheme.
 set(ENABLE_SCRIPTING_WITH_CHIBI_SCHEME true)
 
@@ -24,10 +21,7 @@ set(DO_UNIT_TESTS_WITH_GOOGLE_TEST true)
 # uncomment the following line to disable updating of external projects.
 set(DISABLE_UPDATE_STEP true)
 
-if(NOT CROSS_COMPILE_FOR_WINDOWS)
-    find_package(OpenGL REQUIRED)
-endif()
-
+find_package(OpenGL REQUIRED)
 find_package(Threads REQUIRED)
 
 # Compile external dependencies
@@ -235,12 +229,6 @@ include_directories(
     external/pugixml/src/
     )
 
-if(CROSS_COMPILE_FOR_WINDOWS)
-    include_directories(
-        cross-tools/x86_64-w64-mingw32/include/
-        )
-endif()
-
 if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
     include_directories(
         external/googletest/googletest/include/
@@ -400,37 +388,6 @@ configure_file(res/maps/Exactum_Physicum_Helsinki_Finland.osm Exactum_Physicum_H
 # for tests.
 configure_file(res/height_maps/noise256x256.bmp noise256x256.bmp COPYONLY)
 configure_file(res/textures/test3x3.bmp test3x3.bmp COPYONLY)
-
-if(CROSS_COMPILE_FOR_WINDOWS)
-    # https://cmake.org/Wiki/CMake_Cross_Compiling
-    # http://www.glfw.org/docs/latest/compile.html#compile_deps_mingw_cross
-    # the name of the target operating system
-    set(CMAKE_SYSTEM_NAME Windows)
-    set(CMAKE_SYSTEM_VERSION 1)
-
-    # which compilers to use for C and C++
-    set(CMAKE_C_COMPILER /usr/bin/x86_64-w64-mingw32-gcc)
-    set(CMAKE_CXX_COMPILER /usr/bin/x86_64-w64-mingw32-g++)
-    set(CMAKE_RC_COMPILER /usr/bin/x86_64-w64-mingw32-windres)
-    set(CMAKE_RANLIB /usr/bin/x86_64-w64-mingw32-gcc-ranlib)
-
-    # here is the target environment located
-    set(CMAKE_FIND_ROOT_PATH /usr/x86_64-w64-mingw32/)
-
-    # adjust the default behaviour of the FIND_XXX() commands:
-    # search headers and libraries in the target environment, search
-    # programs in the host environment
-    set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
-    set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
-    set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
-
-    # https://cmake.org/Bug/view.php?id=9985
-    set(CMAKE_SHARED_LIBRARY_LINK_C_FLAGS "")
-    set(CMAKE_SHARED_LIBRARY_LINK_CXX_FLAGS "")
-
-    # http://stackoverflow.com/questions/17721619/cmake-cross-compile-libraries-are-not-found
-    set(CMAKE_LIBRARY_PATH ../cross-tools/include/)
-endif()
 
 # Ylikuutio
 add_library(ylikuutio STATIC
