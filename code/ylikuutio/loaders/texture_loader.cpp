@@ -118,7 +118,7 @@ namespace loaders
         }
 
         /* verify the type of file */
-        uint32_t dds_magic_number_size_in_bytes = 4; // "DDS "
+        const uint32_t dds_magic_number_size_in_bytes = 4; // "DDS "
         char filecode[dds_magic_number_size_in_bytes];
 
         // TODO: add check for file reading!
