@@ -67,12 +67,12 @@ namespace linear_algebra
                 return Proxy2D(array_of_arrays_of_arrays[index]);
             }
 
-        private:
             bool is_cube;
             uint32_t width;
             uint32_t height;
             uint32_t depth;
 
+        private:
             bool is_fully_populated;
 
             // For populating, the order of coordinates from

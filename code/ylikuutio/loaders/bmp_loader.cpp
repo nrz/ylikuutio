@@ -16,7 +16,7 @@ namespace loaders
     {
         std::cout << "Loading BMP file " << image_path << " ...\n";
 
-        uint8_t header_size = 54;
+        const uint32_t header_size = 54;
 
         // Data read from the header of the BMP file
         uint8_t header[header_size];

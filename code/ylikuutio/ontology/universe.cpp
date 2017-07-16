@@ -191,7 +191,7 @@ namespace ontology
         return this->max_FPS;
     }
 
-    bool Universe::set(std::string& setting_name, datatypes::AnyValue* setting_any_value)
+    void Universe::set(std::string& setting_name, datatypes::AnyValue* setting_any_value)
     {
         this->setting_master_pointer->set(setting_name, setting_any_value);
     }

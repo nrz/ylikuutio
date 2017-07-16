@@ -226,7 +226,7 @@ namespace ontology
             // this method returns current `max_FPS`.
             uint32_t get_max_FPS();
 
-            bool set(std::string& setting_name, datatypes::AnyValue* setting_any_value);
+            void set(std::string& setting_name, datatypes::AnyValue* setting_any_value);
 
             // this method returns a pointer to `config::Setting` corresponding to the given `key`.
             config::Setting* get(std::string key);

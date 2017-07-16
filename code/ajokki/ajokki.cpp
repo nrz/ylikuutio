@@ -224,7 +224,7 @@ int main(void)
         // SRTM_terrain_species_struct.model_filename = "/media/laatikko_4TB/satelliittikuvat/srtm/version3/data/";
         SRTM_terrain_species_struct.model_filename = "./"; // for testing
         SRTM_terrain_species_struct.color_channel = g_height_data_color_channel;
-        SRTM_terrain_species_struct.light_position = glm::vec3(4, 4, 4);
+        SRTM_terrain_species_struct.light_position = glm::vec3(0, 100000, 100000);
         SRTM_terrain_species_struct.is_world = true;
         SRTM_terrain_species_struct.x_step = 1;
         SRTM_terrain_species_struct.z_step = 1;
@@ -244,7 +244,7 @@ int main(void)
         bmp_terrain_species_struct.model_file_format = g_model_file_format;
         bmp_terrain_species_struct.model_filename = g_model_filename;
         bmp_terrain_species_struct.color_channel = g_height_data_color_channel;
-        bmp_terrain_species_struct.light_position = glm::vec3(4, 4, 4);
+        bmp_terrain_species_struct.light_position = glm::vec3(0, 100000, 100000);
         bmp_terrain_species_struct.is_world = true;
         terrain_species = new ontology::Species(bmp_terrain_species_struct);
         */
@@ -253,7 +253,7 @@ int main(void)
         ASCII_grid_terrain_species_struct.parent_pointer = grass_material;
         ASCII_grid_terrain_species_struct.model_file_format = ASCII_grid_model_file_format;
         ASCII_grid_terrain_species_struct.model_filename = ASCII_grid_model_filename;
-        ASCII_grid_terrain_species_struct.light_position = glm::vec3(4, 4, 4);
+        ASCII_grid_terrain_species_struct.light_position = glm::vec3(0, 100000, 100000);
         ASCII_grid_terrain_species_struct.is_world = true;
         ASCII_grid_terrain_species_struct.x_step = 4;
         ASCII_grid_terrain_species_struct.z_step = 4;
@@ -281,7 +281,7 @@ int main(void)
     snow_cottage_species_struct.parent_pointer = pink_geometric_tiles_material;
     snow_cottage_species_struct.model_file_format = "obj";
     snow_cottage_species_struct.model_filename = "snow_cottage_triangulated.obj";
-    snow_cottage_species_struct.light_position = glm::vec3(4, 4, 4);
+    snow_cottage_species_struct.light_position = glm::vec3(0, 100000, 100000);
     ontology::Species* snow_cottage_species = new ontology::Species(snow_cottage_species_struct);
 
     snow_cottage_species->set_name("snow_cottage");
@@ -300,7 +300,7 @@ int main(void)
     suzanne_species_struct.parent_pointer = uvmap_material;
     suzanne_species_struct.model_file_format = "obj";
     suzanne_species_struct.model_filename = "suzanne.obj";
-    suzanne_species_struct.light_position = glm::vec3(4, 4, 4);
+    suzanne_species_struct.light_position = glm::vec3(0, 100000, 100000);
     ontology::Species* suzanne_species = new ontology::Species(suzanne_species_struct);
 
     // Create suzanne1, store it in `suzanne1`.

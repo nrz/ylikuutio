@@ -106,7 +106,7 @@ namespace datatypes
 
     std::string AnyValue::get_string()
     {
-        uint32_t buffer_size = 128;
+        const uint32_t buffer_size = 128;
         char buffer[buffer_size];
 
         switch (this->type)
