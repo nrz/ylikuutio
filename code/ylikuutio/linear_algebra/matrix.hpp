@@ -64,11 +64,11 @@ namespace linear_algebra
             friend Matrix linear_algebra::operator*(Matrix& lhs, Matrix& rhs);
             friend Matrix cat(uint32_t dimension, Matrix& old_matrix1, Matrix& old_matrix2);
 
-        private:
             bool is_square;
             uint32_t width;
             uint32_t height;
 
+        private:
             bool is_fully_populated;
             int32_t next_y_to_populate;
             int32_t next_x_to_populate;
