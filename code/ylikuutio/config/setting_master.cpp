@@ -109,10 +109,20 @@ namespace config
             {
                 config::Setting* setting = setting_master->get(setting_name);
 
-                if (setting != nullptr)
+                if (setting != nullptr && setting->setting_value != nullptr && setting->read_callback == nullptr)
                 {
                     // Print variable value.
                     console->print_text(setting->setting_value->get_string());
+                }
+                else if (setting != nullptr && setting->setting_value != nullptr)
+                {
+                    console->print_text(setting->read_callback(universe, setting_master)->get_string());
+                }
+                else
+                {
+                    // Invalid variable name.
+                    console->print_text("invalid variable name");
+                    console->print_text(setting_master->help());
                 }
             }
             else
