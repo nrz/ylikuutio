@@ -183,7 +183,7 @@ int main(void)
     ajokki::set_debug_variables(my_setting_master);
     ajokki::set_console(my_setting_master);
 
-    ontology::Scene* my_scene = new ontology::Scene(my_universe);
+    ontology::Scene* my_scene = new ontology::Scene(my_universe, 0.9f);
 
     // Create the shader, store it in `my_shader`.
     ShaderStruct shader_struct;

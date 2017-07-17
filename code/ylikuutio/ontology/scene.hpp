@@ -24,7 +24,7 @@ namespace ontology
     {
         public:
             // constructor.
-            Scene(ontology::Universe* const universe_pointer);
+            Scene(ontology::Universe* const universe_pointer, const float water_level);
 
             // destructor.
             ~Scene();
@@ -93,6 +93,8 @@ namespace ontology
             // Variables related to physics.
             float gravity;
             float fall_speed;
+
+            GLfloat water_level;
     };
 }
 

@@ -11,6 +11,7 @@ varying vec3 LightDirection_cameraspace;
 uniform sampler2D myTextureSampler;
 uniform mat4 MV;
 uniform vec3 LightPosition_worldspace;
+uniform float water_level;
 
 void main()
 {
@@ -18,6 +19,11 @@ void main()
     // You probably want to put them as uniforms
     vec3 LightColor = vec3(1, 1, 1);
     float LightPower = 20000.0f;
+
+    if (Position_worldspace.y < water_level)
+    {
+        LightColor = vec3(0, 0, 1);
+    }
 
     // Material properties
     vec3 MaterialDiffuseColor = texture2D(myTextureSampler, UV).rgb;
