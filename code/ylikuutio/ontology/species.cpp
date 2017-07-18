@@ -154,6 +154,10 @@ namespace ontology
             this->parent_pointer->parent_pointer->parent_pointer->parent_pointer->set_terrain_species_pointer(this);
         }
 
+        // water level.
+        GLuint water_level_uniform_location = glGetUniformLocation(this->parent_pointer->parent_pointer->programID, "water_level");
+        glUniform1f(water_level_uniform_location, this->universe_pointer->active_scene->water_level);
+
         // TODO: Compute the graph of this object type to enable object vertex modification!
     }
 

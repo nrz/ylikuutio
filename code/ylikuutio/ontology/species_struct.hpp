@@ -8,6 +8,7 @@
 #endif
 
 // Include standard headers
+#include <limits>   // std::numeric_limits
 #include <string>   // std::string
 
 namespace ontology
@@ -18,7 +19,7 @@ namespace ontology
 typedef struct SpeciesStruct
 {
     SpeciesStruct()
-        : parent_pointer(nullptr), is_world(false), world_radius(NAN), divisor(1.0f), x_step(1), z_step(1), triangulation_type("bilinear_interpolation")
+        : parent_pointer(nullptr), is_world(false), world_radius(NAN), divisor(1.0f), water_level(-1.0f * std::numeric_limits<float>::infinity()), x_step(1), z_step(1), triangulation_type("bilinear_interpolation")
     {
         // constructor.
     }
@@ -27,6 +28,7 @@ typedef struct SpeciesStruct
     bool is_world;                           // worlds currently do not rotate nor translate.
     float world_radius;                      // radius of sea level in kilometers. used only for worlds.
     float divisor;                           // value by which SRTM values are divided to convert them to kilometers.
+    float water_level;                       // water level in meters.
     std::string model_file_format;           // type of the model file. supported file formats so far: `"bmp"`/`"BMP"`, `"obj"`/`"OBJ"`.
                                              // TODO: add support for `"SRTM"`.
     std::string model_filename;              // filename of the model file.

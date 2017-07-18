@@ -104,15 +104,25 @@ namespace config
             std::string setting_name = command_parameters.at(0);
 
             // One (1) command parameter.
-            // Check the validity of the variable name.
+            // Print current value of the given variable.
             if (setting_master->is_setting(setting_name))
             {
                 config::Setting* setting = setting_master->get(setting_name);
 
-                if (setting != nullptr)
+                if (setting != nullptr && setting->setting_value != nullptr && setting->read_callback == nullptr)
                 {
                     // Print variable value.
                     console->print_text(setting->setting_value->get_string());
+                }
+                else if (setting != nullptr && setting->setting_value != nullptr)
+                {
+                    console->print_text(setting->read_callback(universe, setting_master)->get_string());
+                }
+                else
+                {
+                    // Invalid variable name.
+                    console->print_text("invalid variable name");
+                    console->print_text(setting_master->help());
                 }
             }
             else

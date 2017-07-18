@@ -17,6 +17,7 @@
 
 namespace ontology
 {
+    class Entity;
     class Universe;
     class Scene;
     class Shader;
@@ -72,6 +73,7 @@ namespace datatypes
         public:
             std::string get_datatype();
             std::string get_string();
+            ontology::Entity* get_entity_pointer();
             bool set_value(const std::string value_string);
 
             // copy constructor.

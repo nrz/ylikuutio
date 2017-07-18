@@ -73,6 +73,9 @@ https://www.blender.org/about/license/
 
 ## Compiling
 Ylikuutio can be compiled with GCC, Clang or Visual Studio.
+GCC is the primary compiler of Ylikuutio. For Clang and Visual Studio
+the compiling may break due to compiler-specific bugs.
+Cross compiling for Windows under Linux using GCC works fine.
 C++11 support is required.
 OpenGL 3.0 or newer is required.
 CMake 2.6.2 or newer is needed for the compiling process.
@@ -90,8 +93,6 @@ Eg. with aptitude:
 If you are doing a cross compile for Windows under Linux, you need also:
 
     $ sudo aptitude install gcc-mingw-w64 gcc-multilib
-
-However, cross compiling does not work yet!
 
 Then, to compile with GCC, in Ylikuutio install directory:
 
@@ -115,22 +116,31 @@ to compile tests, in CMakeLists.txt comment out the line that says:
 
 To cross compile for Windows under Linux:
 
-    $ mkdir build
-    $ cd build
+    $ mkdir build_windows
+    $ cd build_windows
     $ cmake -DCMAKE_TOOLCHAIN_FILE=../w64.cmake ..
     $ make
+
+Compiling in Visual Studio is more difficult. The recommended way to
+get a binary for Windows is to cross compile for Windows under Linux.
 
 To run Ajokki (working title based on Finnish bus body manufacturer),
 a demo program to check out some properties of Ylikuutio 3D engine:
 
-`$ ./ajokki`
+In Linux:
+
+    $ ./ajokki
+
+In Windows:
+
+    > ajokki.exe
 
 F to toggle flying on off, arrow keys work too.
 F1 toggles help display and there you'll see some more options to try.
 
 To run tests (coverage is still quite limited but underway):
 
-`$ ./unit_tests_with_Google_Test`
+    $ ./unit_tests_with_Google_Test
 
 ## Ylikuutio usage
 This part reflects the current usage of Ylikuutio and will change as new
@@ -156,7 +166,7 @@ A: Ylikuutio aims to be a fast and flexible 3D game/simulation engine
 
 Q: What are the target platforms of Ylikuutio?
 A: Ylikuutio targets Linux, Windows and Android, in this order.
-   Cross-compiling for Windows does not work yet.
+   Cross-compiling for Windows works!
    Cross-compiling for Android is not implemented yet.
 
 Q: What graphics APIs Ylikuutio uses?

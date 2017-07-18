@@ -1,5 +1,15 @@
 #include "any_value.hpp"
 #include "spherical_coordinates_struct.hpp"
+#include "code/ylikuutio/ontology/entity.hpp"
+#include "code/ylikuutio/ontology/universe.hpp"
+#include "code/ylikuutio/ontology/scene.hpp"
+#include "code/ylikuutio/ontology/shader.hpp"
+#include "code/ylikuutio/ontology/material.hpp"
+#include "code/ylikuutio/ontology/species.hpp"
+#include "code/ylikuutio/ontology/object.hpp"
+#include "code/ylikuutio/ontology/vector_font.hpp"
+#include "code/ylikuutio/ontology/glyph.hpp"
+#include "code/ylikuutio/ontology/text3D.hpp"
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
 
 // Include GLM
@@ -192,6 +202,33 @@ namespace datatypes
                 return std::string(buffer);
             default:
                 return "TODO: define string for this datatype!";
+        }
+    }
+
+    ontology::Entity* AnyValue::get_entity_pointer()
+    {
+        switch (this->type)
+        {
+            case (UNIVERSE_POINTER):
+                return this->universe_pointer;
+            case (SCENE_POINTER):
+                return this->scene_pointer;
+            case (SHADER_POINTER):
+                return this->shader_pointer;
+            case (MATERIAL_POINTER):
+                return this->material_pointer;
+            case (SPECIES_POINTER):
+                return this->species_pointer;
+            case (OBJECT_POINTER):
+                return this->object_pointer;
+            case (VECTORFONT_POINTER):
+                return this->vector_font_pointer;
+            case (GLYPH_POINTER):
+                return this->glyph_pointer;
+            case (TEXT3D_POINTER):
+                return this->text3D_pointer;
+            default:
+                return nullptr;
         }
     }
 

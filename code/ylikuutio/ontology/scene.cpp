@@ -35,11 +35,12 @@ namespace ontology
         hierarchy::bind_child_to_parent<ontology::Scene*>(this, this->parent_pointer->scene_pointer_vector, this->parent_pointer->free_sceneID_queue);
     }
 
-    Scene::Scene(ontology::Universe* const parent_pointer)
+    Scene::Scene(ontology::Universe* const parent_pointer, const float water_level)
     {
         // constructor.
         this->gravity = 9.81f / 60.0f;
         this->fall_speed = this->gravity;
+        this->water_level = static_cast<GLfloat>(water_level);
 
         this->universe_pointer = parent_pointer;
         this->parent_pointer = parent_pointer;

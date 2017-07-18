@@ -11,6 +11,7 @@
 #define RADIANS_TO_DEGREES(x) (x * 180.0f / PI)
 #endif
 
+#include "entity.hpp"
 #include "universe.hpp"
 #include "scene.hpp"
 #include "shader.hpp"
@@ -325,8 +326,15 @@ namespace ontology
             }
 
             // OK, let's find out information about the entity.
+            ontology::Entity* entity = any_value->get_entity_pointer();
+            uint64_t memory_address = reinterpret_cast<uint64_t>((void*) entity);
+            char memory_address_char_array[256];
+            snprintf(memory_address_char_array, sizeof(memory_address_char_array), "0x%08x", memory_address);
 
-            // TODO: get info about the entity.
+            std::string entity_info = "memory address: ";
+            entity_info += std::string(memory_address_char_array);
+            console->print_text(entity_info);
+
             delete any_value;
         }
         return nullptr;
@@ -357,7 +365,7 @@ namespace ontology
             this->cartesian_coordinates->y -= this->fall_speed;
         }
 
-        GLfloat FoV = this->initialFoV;// - 5 * glfwGetMouseWheel(); // Now GLFW 3 requires setting up a callback for this. It's a bit too complicated for this beginner's tutorial, so it's disabled instead.
+        GLfloat FoV = this->initialFoV;
 
         // adjust position according to the ground.
         if (!this->is_flight_mode_in_use)
