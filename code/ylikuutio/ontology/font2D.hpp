@@ -1,5 +1,5 @@
-#ifndef TEXT2D_HPP
-#define TEXT2D_HPP
+#ifndef __FONT2D_HPP_INCLUDED
+#define __FONT2D_HPP_INCLUDED
 
 #include "entity_templates.hpp"
 #include "code/ylikuutio/common/globals.hpp"
