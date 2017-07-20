@@ -1,5 +1,5 @@
-#ifndef __WORLD_HPP_INCLUDED
-#define __WORLD_HPP_INCLUDED
+#ifndef __UNIVERSE_HPP_INCLUDED
+#define __UNIVERSE_HPP_INCLUDED
 
 #include "entity.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
