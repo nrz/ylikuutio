@@ -88,6 +88,16 @@ namespace ontology
         ontology::render_species_or_glyph<ontology::Glyph*>(this);
     }
 
+    int32_t Glyph::get_number_of_children()
+    {
+        return this->object_pointer_vector.size();
+    }
+
+    int32_t Glyph::get_number_of_descendants()
+    {
+        return -1;
+    }
+
     void Glyph::set_object_pointer(const uint32_t childID, ontology::Object* const child_pointer)
     {
         hierarchy::set_child_pointer(childID, child_pointer, this->object_pointer_vector, this->free_objectID_queue);

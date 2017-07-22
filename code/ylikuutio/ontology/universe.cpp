@@ -127,6 +127,16 @@ namespace ontology
         this->active_scene->render();
     }
 
+    int32_t Universe::get_number_of_children()
+    {
+        return this->scene_pointer_vector.size();
+    }
+
+    int32_t Universe::get_number_of_descendants()
+    {
+        return -1;
+    }
+
     void Universe::set_active_scene(ontology::Scene* scene)
     {
         this->active_scene = scene;
@@ -334,6 +344,14 @@ namespace ontology
             std::string entity_info = "memory address: ";
             entity_info += std::string(memory_address_char_array);
             console->print_text(entity_info);
+
+            int32_t number_of_children = entity->get_number_of_children();
+            char number_of_children_char_array[256];
+            snprintf(number_of_children_char_array, sizeof(number_of_children_char_array), "%d", number_of_children);
+
+            std::string children_info = "number of children: ";
+            children_info += std::string(number_of_children_char_array);
+            console->print_text(children_info);
 
             delete any_value;
         }

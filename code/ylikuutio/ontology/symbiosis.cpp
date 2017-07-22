@@ -23,4 +23,14 @@ namespace ontology
     {
         // destructor.
     }
+
+    int32_t Symbiosis::get_number_of_children()
+    {
+        return -1;
+    }
+
+    int32_t Symbiosis::get_number_of_descendants()
+    {
+        return -1;
+    }
 }

@@ -90,6 +90,16 @@ namespace ontology
         ontology::render_children<ontology::Material*>(this->material_pointer_vector);
     }
 
+    int32_t Shader::get_number_of_children()
+    {
+        return this->material_pointer_vector.size() + this->symbiosis_pointer_vector.size();
+    }
+
+    int32_t Shader::get_number_of_descendants()
+    {
+        return -1;
+    }
+
     void Shader::set_material_pointer(const uint32_t childID, ontology::Material* const child_pointer)
     {
         hierarchy::set_child_pointer(childID, child_pointer, this->material_pointer_vector, this->free_materialID_queue);

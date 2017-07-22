@@ -103,6 +103,16 @@ namespace ontology
         }
     }
 
+    int32_t Font2D::get_number_of_children()
+    {
+        return -1;
+    }
+
+    int32_t Font2D::get_number_of_descendants()
+    {
+        return -1;
+    }
+
     void Font2D::printText2D(
             GLuint screen_width,
             GLuint screen_height,

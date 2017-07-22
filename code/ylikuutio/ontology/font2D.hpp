@@ -32,6 +32,10 @@ namespace ontology
             // destructor.
             ~Font2D();
 
+            int32_t get_number_of_children() override;
+
+            int32_t get_number_of_descendants() override;
+
             void printText2D(
                     GLuint screen_width,
                     GLuint screen_height,

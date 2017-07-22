@@ -63,6 +63,10 @@ namespace ontology
             // this method renders all `Object`s of this `Glyph`.
             void render();
 
+            int32_t get_number_of_children() override;
+
+            int32_t get_number_of_descendants() override;
+
             ontology::VectorFont* parent_pointer;  // pointer to `VectorFont`.
 
             std::vector<std::vector<glm::vec2>>* glyph_vertex_data;

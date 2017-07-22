@@ -38,6 +38,10 @@ namespace ontology
             // destructor.
             ~Text3D();
 
+            int32_t get_number_of_children() override;
+
+            int32_t get_number_of_descendants() override;
+
             // this method deletes all glyph Objects of this `Text3D`,
             // sets pointer to this `Text3D` to nullptr,
             // sets `parent_pointer` according to the input (the new `VectorFont`),

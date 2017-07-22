@@ -12,4 +12,14 @@ namespace ontology
     {
         // destructor.
     }
+
+    int32_t Model::get_number_of_children()
+    {
+        return 0;
+    }
+
+    int32_t Model::get_number_of_descendants()
+    {
+        return 0;
+    }
 }

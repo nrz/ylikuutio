@@ -44,6 +44,10 @@ namespace ontology
             // destructor.
             ~Model();
 
+            int32_t get_number_of_children() override;
+
+            int32_t get_number_of_descendants() override;
+
             friend class Glyph;
             friend class Species;
             friend class Object;

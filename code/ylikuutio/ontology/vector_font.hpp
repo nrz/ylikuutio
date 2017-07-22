@@ -67,6 +67,10 @@ namespace ontology
             // this method renders all `Glyph`s of this `VectorFont`.
             void render();
 
+            int32_t get_number_of_children() override;
+
+            int32_t get_number_of_descendants() override;
+
             // this method returns a pointer to `Glyph` that matches the given `unicode_value`,
             // and `nullptr` if this `VectorFont` does not contain such a `Glyph`.
             ontology::Glyph* get_glyph_pointer(int32_t unicode_value);

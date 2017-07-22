@@ -68,6 +68,10 @@ namespace ontology
             // this method renders all `Species` using this `Material`.
             void render();
 
+            int32_t get_number_of_children() override;
+
+            int32_t get_number_of_descendants() override;
+
             // this method sets `Species` pointer.
             void set_species_pointer(const uint32_t childID, ontology::Species* const child_pointer);
 

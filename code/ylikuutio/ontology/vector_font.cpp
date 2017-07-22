@@ -145,6 +145,16 @@ namespace ontology
         ontology::render_children<ontology::Glyph*>(this->glyph_pointer_vector);
     }
 
+    int32_t VectorFont::get_number_of_children()
+    {
+        return this->glyph_pointer_vector.size() + this->text3D_pointer_vector.size();
+    }
+
+    int32_t VectorFont::get_number_of_descendants()
+    {
+        return -1;
+    }
+
     void VectorFont::set_glyph_pointer(const uint32_t childID, ontology::Glyph* const child_pointer)
     {
         hierarchy::set_child_pointer(childID, child_pointer, this->glyph_pointer_vector, this->free_glyphID_queue);

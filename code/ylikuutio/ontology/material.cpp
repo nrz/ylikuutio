@@ -113,6 +113,16 @@ namespace ontology
         ontology::render_children<space_partition::ChunkMaster*>(this->chunk_master_pointer_vector);
     }
 
+    int32_t Material::get_number_of_children()
+    {
+        return this->species_pointer_vector.size() + this->vector_font_pointer_vector.size() + this->chunk_master_pointer_vector.size();
+    }
+
+    int32_t Material::get_number_of_descendants()
+    {
+        return -1;
+    }
+
     void Material::set_species_pointer(const uint32_t childID, ontology::Species* const child_pointer)
     {
         hierarchy::set_child_pointer(childID, child_pointer, this->species_pointer_vector, this->free_speciesID_queue);

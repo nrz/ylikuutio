@@ -124,6 +124,16 @@ namespace ontology
         }
     }
 
+    int32_t Object::get_number_of_children()
+    {
+        return -1;
+    }
+
+    int32_t Object::get_number_of_descendants()
+    {
+        return -1;
+    }
+
     void Object::bind_to_new_parent(void* const new_parent_pointer)
     {
         // this method sets pointer to this `Object` to nullptr, sets `parent_pointer` according to the input,

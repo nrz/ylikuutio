@@ -196,6 +196,10 @@ namespace ontology
             // this method renders the active `Scene` of this `Universe`.
             void render();
 
+            int32_t get_number_of_children() override;
+
+            int32_t get_number_of_descendants() override;
+
             // this method sets a new `window`.
             void set_window(GLFWwindow* window);
 

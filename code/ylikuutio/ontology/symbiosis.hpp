@@ -30,6 +30,11 @@ namespace ontology
             // destructor.
             ~Symbiosis();
 
+            int32_t get_number_of_children() override;
+
+            int32_t get_number_of_descendants() override;
+
+
             // this method sets pointer to this `Symbiosis` to nullptr, sets `parent_pointer` according to the input, and requests a new `childID` from the new `Shader`.
             void bind_to_new_parent(ontology::Shader* new_shader_pointer);
 

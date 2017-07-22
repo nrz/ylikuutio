@@ -69,6 +69,10 @@ namespace ontology
             // this method renders all materials using this `Shader`.
             void render();
 
+            int32_t get_number_of_children() override;
+
+            int32_t get_number_of_descendants() override;
+
             // this method sets a `Material` pointer.
             void set_material_pointer(const uint32_t childID, ontology::Material* const child_pointer);
 

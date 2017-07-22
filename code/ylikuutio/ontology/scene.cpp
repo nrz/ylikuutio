@@ -95,6 +95,16 @@ namespace ontology
         ontology::render_children<ontology::Shader*>(this->shader_pointer_vector);
     }
 
+    int32_t Scene::get_number_of_children()
+    {
+        return this->shader_pointer_vector.size();
+    }
+
+    int32_t Scene::get_number_of_descendants()
+    {
+        return -1;
+    }
+
     // this method returns a pointer to an `Object` using the name as key.
     ontology::Object* Scene::get_object(const std::string name)
     {

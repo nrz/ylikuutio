@@ -55,6 +55,10 @@ namespace ontology
             // this method renders all `Shader`s of this `Scene`.
             void render();
 
+            int32_t get_number_of_children() override;
+
+            int32_t get_number_of_descendants() override;
+
             // this method sets a `Shader` pointer.
             void set_shader_pointer(const uint32_t childID, ontology::Shader* const child_pointer);
 
