@@ -353,8 +353,6 @@ namespace ontology
             std::string children_info = "number of children: ";
             children_info += std::string(number_of_children_char_array);
             console->print_text(children_info);
-
-            delete any_value;
         }
         return nullptr;
     }
