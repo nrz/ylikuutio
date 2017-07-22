@@ -38,7 +38,7 @@ namespace ontology
                 return;
             }
 
-            if (universe->entity_anyvalue_map[name] != nullptr)
+            if (universe->entity_anyvalue_map.count(name) != 0)
             {
                 return;
             }
