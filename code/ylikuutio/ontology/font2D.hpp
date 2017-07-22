@@ -1,6 +1,7 @@
 #ifndef __FONT2D_HPP_INCLUDED
 #define __FONT2D_HPP_INCLUDED
 
+#include "entity.hpp"
 #include "entity_templates.hpp"
 #include "code/ylikuutio/common/globals.hpp"
 
@@ -17,7 +18,7 @@ namespace ontology
 {
     class Universe;
 
-    class Font2D
+    class Font2D: public ontology::Entity
     {
         public:
             // constructor.
