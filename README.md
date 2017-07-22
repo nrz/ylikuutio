@@ -75,7 +75,7 @@ https://www.blender.org/about/license/
 Ylikuutio can be compiled with GCC, Clang or Visual Studio.
 GCC is the primary compiler of Ylikuutio. For Clang and Visual Studio
 the compiling may break due to compiler-specific bugs.
-Cross compiling for Windows under Linux using GCC works fine.
+Cross compiling from Linux to Windows using GCC works fine.
 C++11 support is required.
 OpenGL 3.0 or newer is required.
 CMake 2.6.2 or newer is needed for the compiling process.
@@ -90,7 +90,7 @@ Eg. with aptitude:
 
     $ sudo aptitude install cmake build-essential libx11-dev libgl1-mesa-dev libglu1-mesa-dev libxcursor-dev libxrandr-dev libxext-dev libxi-dev libxinerama-dev
 
-If you are doing a cross compile for Windows under Linux, you need also:
+If you are doing a cross compile from Linux to Windows, you need also:
 
     $ sudo aptitude install gcc-mingw-w64 gcc-multilib
 
@@ -114,7 +114,7 @@ If you have problems compiling tests or for some other reason don't want
 to compile tests, in CMakeLists.txt comment out the line that says:
 `set(DO_UNIT_TESTS_WITH_GOOGLE_TEST true)`
 
-To cross compile for Windows under Linux:
+To cross compile from Linux to Windows:
 
     $ mkdir build_windows
     $ cd build_windows
@@ -122,7 +122,7 @@ To cross compile for Windows under Linux:
     $ make
 
 Compiling in Visual Studio is more difficult. The recommended way to
-get a binary for Windows is to cross compile for Windows under Linux.
+get a binary for Windows is to cross compile from Linux to Windows.
 
 To run Ajokki (working title based on Finnish bus body manufacturer),
 a demo program to check out some properties of Ylikuutio 3D engine:
@@ -147,7 +147,7 @@ This part reflects the current usage of Ylikuutio and will change as new
 functionality is implemented.
 
 At the moment, you need a main class (for an example, please see
-code/ajokki/ajokki.cpp) which starts your game/simulation (initialization),
+`code/ajokki/ajokki.cpp`) which starts your game/simulation (initialization),
 runs the game/simulation (the main loop) and ends the program (cleaning-up).
 In all these phases mentioned above Ylikuutio library functions may be used.
 
@@ -166,11 +166,13 @@ A: Ylikuutio aims to be a fast and flexible 3D game/simulation engine
 
 Q: What are the target platforms of Ylikuutio?
 A: Ylikuutio targets Linux, Windows and Android, in this order.
-   Cross-compiling for Windows works!
+   Cross-compiling from Linux to Windows works!
    Cross-compiling for Android is not implemented yet.
+   Currently only 64-bit environments are supported.
 
 Q: What graphics APIs Ylikuutio uses?
-A: Ylikuutio uses OpenGL version 3.1.
+A: Ylikuutio targets OpenGL version 3.1, but so far 3.0 works too,
+   ie. all currently used functionality is available in OpenGL 3.0.
 
 Q: Are there plans to support other graphics APIs?
 A: Newer OpenGL versions may be supported in the future, but so far
