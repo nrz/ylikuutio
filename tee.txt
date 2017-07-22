@@ -5,6 +5,14 @@ Ylikuution kehityksen kannalta välttämättömiä työvaiheita:
 [ ] Lisää konsoliin infokomento `info` (kertoo entiteeteistä, esim. objekteista verteksien lukumäärän ym. tietoja).
 [ ] Lisää konsoliin skenejen (`Scene`) latauskomento `load`.
 [ ] Lisää muuttuja `wireframe`: `set wireframe on` / `set wireframe off`.
+[ ] Lisää muuttuja `window_width`.
+[ ] Lisää muuttuja `window_height`.
+[ ] Lisää muuttuja `text_size`.
+[ ] Lisää muuttuja `direction`.
+[ ] Lisää muuttuja `right`.
+[ ] Lisää muuttuja `up`.
+[ ] Lisää muuttuja `horizontal_angle`.
+[ ] Lisää muuttuja `vertical_angle`.
 [ ] Lisää bicubic-interpolointi.
 [ ] Lisää muuttuja `triangulation`: `set triangulation bilinear` / `set triangulation bicubic` / `set triangulation southwest_northeast` / `set triangulation southeast_northwest`.
 [ ] Koodaa taustalla toimiva skenejen (`Scene`) lataus.
