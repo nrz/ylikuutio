@@ -296,6 +296,7 @@ namespace ontology
             bool can_toggle_help_mode;
             bool can_display_help_screen;
 
+            friend class Entity;
             friend class Scene;
             friend class Shader;
             friend class Material;
