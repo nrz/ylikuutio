@@ -25,6 +25,7 @@
 #include "render_templates.hpp"
 #include "code/ylikuutio/config/setting.hpp"
 #include "code/ylikuutio/config/setting_master.hpp"
+#include "code/ylikuutio/console/console.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
 #include "code/ylikuutio/common/globals.hpp"
