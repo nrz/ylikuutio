@@ -75,8 +75,6 @@ namespace ontology
             // For finding any `Object`s of this `Scene` by using its name.
             std::unordered_map<std::string, ontology::Object*> name_map;
 
-            std::string name;                      // name of this entity.
-
             // Variables related to location and orientation.
 
             // `cartesian_coordinates` can be accessed as a vector or as single coordinates `x`, `y`, `z`.

@@ -94,8 +94,6 @@ namespace ontology
             std::queue<uint32_t> free_text3D_ID_queue;
 
             std::unordered_map<int32_t, ontology::Glyph*> unicode_glyph_map;
-
-            std::string name;                     // name of this entity.
     };
 }
 

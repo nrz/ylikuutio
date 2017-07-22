@@ -103,8 +103,6 @@ namespace ontology
             uint32_t childID;                      // material ID, set by `this->bind_to_parent()`.
             const char* char_texture_file_format;
             const char* char_texture_filename;
-
-            std::string name;                      // name of this entity.
     };
 }
 

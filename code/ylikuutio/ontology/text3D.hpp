@@ -78,8 +78,6 @@ namespace ontology
 
             std::vector<ontology::Object*> object_pointer_vector;
             std::queue<uint32_t> free_objectID_queue;
-
-            std::string name;                     // name of this entity.
     };
 }
 

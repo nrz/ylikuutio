@@ -3,6 +3,7 @@
 
 // Include standard headers
 #include <stdint.h> // uint32_t etc.
+#include <string>   // std::string
 #include <vector>   // std::vector
 
 namespace ontology
@@ -24,6 +25,8 @@ namespace ontology
         protected:
             ontology::Universe* universe_pointer;            // pointer to the `Universe`.
             std::vector<void*> child_vector_pointers_vector;
+
+            std::string name; // name of this entity.
     };
 }
 #endif

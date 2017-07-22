@@ -77,7 +77,6 @@ namespace ontology
             GLuint screen_height_uniform_ID;         // Location of the program's window height uniform.
 
             ontology::Universe* universe_pointer;
-            std::string name;
     };
 }
 

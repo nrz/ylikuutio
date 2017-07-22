@@ -56,8 +56,6 @@ namespace ontology
             std::vector<ontology::Species*> species_pointer_vector;
             std::queue<uint32_t> free_materialID_queue;
             std::queue<uint32_t> free_speciesID_queue;
-
-            std::string name;                     // name of this entity.
     };
 }
 #endif
