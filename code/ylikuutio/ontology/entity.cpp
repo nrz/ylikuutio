@@ -8,8 +8,6 @@ namespace ontology
     Entity::Entity()
     {
         // constructor.
-
-        this->name = "";
     }
 
     Entity::~Entity()
