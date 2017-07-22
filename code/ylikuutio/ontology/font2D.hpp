@@ -75,8 +75,6 @@ namespace ontology
             GLuint Text2DUniformID;                  // Location of the program's texture attribute.
             GLuint screen_width_uniform_ID;          // Location of the program's window width uniform.
             GLuint screen_height_uniform_ID;         // Location of the program's window height uniform.
-
-            ontology::Universe* universe_pointer;
     };
 }
 
