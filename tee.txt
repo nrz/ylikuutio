@@ -2,7 +2,6 @@ TEE-lista:
 Listaa tähän keskeneräiset asiat kiireellisyysjärjestyksessä kiireellisimmät ylös. Rasti ruutuun ja valmiit-osastolle kun on valmis.
 
 Ylikuution kehityksen kannalta välttämättömiä työvaiheita:
-[ ] Lisää konsoliin infokomento `info` (kertoo entiteeteistä, esim. objekteista verteksien lukumäärän ym. tietoja).
 [ ] Lisää konsoliin skenejen (`Scene`) latauskomento `load`.
 [ ] Lisää muuttuja `wireframe`: `set wireframe on` / `set wireframe off`.
 [ ] Lisää muuttuja `window_width`.
@@ -21,6 +20,7 @@ Ylikuution kehityksen kannalta välttämättömiä työvaiheita:
 [ ] Lisää ray castingiä käyttävä toiminto verteksien valitsemiseen ja muokkaamiseen.
 [ ] Lisää verteksien muokkaaminen.
 [ ] Lisää octree-segmentointi.
+[ ] Lisää tuki vektorifonteille.
 [ ] Lisää tekoälyoliot (robotit).
 [ ] Lisää Chibi-Scheme -tuki tekoälyolioiden ohjelmointiin.
 
@@ -45,3 +45,4 @@ Valmiit:
 [x] Lisää konsoli (aukeaa näppäimellä `).
 [x] Lisää mahdollisuus nimetä entiteettihierarkian minkä tahansa tason olioita.
 [x] Koodaa konsoliin tekstin vieritys kun 'ikkuna' tulee täyteen.
+[x] Lisää konsoliin infokomento `info` (kertoo entiteeteistä, esim. objekteista verteksien lukumäärän ym. tietoja).
