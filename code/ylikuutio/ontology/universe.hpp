@@ -204,38 +204,38 @@ namespace ontology
             void set_window(GLFWwindow* window);
 
             // this method returns current `window`.
-            GLFWwindow* get_window();
+            GLFWwindow* get_window() const;
 
             // this method returns current `window_width`.
-            uint32_t get_window_width();
+            uint32_t get_window_width() const;
 
             // this method returns current `window_height`.
-            uint32_t get_window_height();
+            uint32_t get_window_height() const;
 
             // this method returns current `text_size`.
-            uint32_t get_text_size();
+            uint32_t get_text_size() const;
 
             // this method returns current `font_size`.
-            uint32_t get_font_size();
+            uint32_t get_font_size() const;
 
             // this method computes the new delta time and returns it.
             float compute_delta_time();
 
             // this method returns the last computed delta time.
-            float get_delta_time();
+            float get_delta_time() const;
 
             // this method stores `current_time_before_reading_keyboard` into `last_time_before_reading_keyboard`.
             void finalize_delta_time_loop();
 
             // this method returns current `max_FPS`.
-            uint32_t get_max_FPS();
+            uint32_t get_max_FPS() const;
 
             void set(std::string& setting_name, datatypes::AnyValue* setting_any_value);
 
             // this method returns a pointer to `config::Setting` corresponding to the given `key`.
-            config::Setting* get(std::string key);
+            config::Setting* get(std::string key) const;
 
-            std::string get_entity_names();
+            std::string get_entity_names() const;
 
             // Public callbacks.
 

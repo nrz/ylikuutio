@@ -149,27 +149,27 @@ namespace ontology
         glfwSetWindowUserPointer(this->window, this);
     }
 
-    GLFWwindow* Universe::get_window()
+    GLFWwindow* Universe::get_window() const
     {
         return this->window;
     }
 
-    uint32_t Universe::get_window_width()
+    uint32_t Universe::get_window_width() const
     {
         return this->window_width;
     }
 
-    uint32_t Universe::get_window_height()
+    uint32_t Universe::get_window_height() const
     {
         return this->window_height;
     }
 
-    uint32_t Universe::get_text_size()
+    uint32_t Universe::get_text_size() const
     {
         return this->text_size;
     }
 
-    uint32_t Universe::get_font_size()
+    uint32_t Universe::get_font_size() const
     {
         return this->font_size;
     }
@@ -188,7 +188,7 @@ namespace ontology
         return this->delta_time;
     }
 
-    float Universe::get_delta_time()
+    float Universe::get_delta_time() const
     {
         return this->delta_time;
     }
@@ -198,7 +198,7 @@ namespace ontology
         this->last_time_before_reading_keyboard = this->current_time_before_reading_keyboard;
     }
 
-    uint32_t Universe::get_max_FPS()
+    uint32_t Universe::get_max_FPS() const
     {
         return this->max_FPS;
     }
@@ -208,12 +208,12 @@ namespace ontology
         this->setting_master_pointer->set(setting_name, setting_any_value);
     }
 
-    config::Setting* Universe::get(std::string key)
+    config::Setting* Universe::get(std::string key) const
     {
         return this->setting_master_pointer->get(key);
     }
 
-    std::string Universe::get_entity_names()
+    std::string Universe::get_entity_names() const
     {
         std::string entity_names = "";
 
