@@ -12,8 +12,8 @@ The source code from http://www.opengl-tutorial.org/ is licensed
 under WTFPL Public Licence version 2.
 http://www.opengl-tutorial.org/download/
 
-Chibi-Scheme is licensed under the 3-clause BSD license.
-https://github.com/ashinn/chibi-scheme/blob/master/COPYING
+TinyScheme is licensed under BSD-style license.
+http://tinyscheme.sourceforge.net/license.txt
 
 FastNoiseSIMD is licensed under the MIT license.
 https://github.com/Auburns/FastNoiseSIMD/blob/master/LICENSE
@@ -193,11 +193,11 @@ Q: Is Ylikuutio based on some other 3D engine?
 A: Some parts of Ylikuutio (shaders, some file loaders, etc.) are based
 on http://www.opengl-tutorial.org/ , which I really recommend for anyone
 interested in learning OpenGL programming. Ylikuutio also uses external
-libraries such as Chibi-Scheme, FastNoiseSIMD, GLEW, GLFW, GLM, and
+libraries such as TinyScheme, FastNoiseSIMD, GLEW, GLFW, GLM, and
 pugixml. The rest is written from scratch.
 
-Q: Why Chibi-Scheme is chosen as the scripting language of Ylikuutio?
-A: I like Lisp-family languages and Chibi-Scheme fulfils my
+Q: Why TinyScheme is chosen as the scripting language of Ylikuutio?
+A: I like Lisp-family languages and TinyScheme fulfils my
    requirements related to a small size and a suitable license.
 
 ## Implemented functionality
@@ -231,7 +231,7 @@ A: I like Lisp-family languages and Chibi-Scheme fulfils my
 * water
 * more physics
 * artificial intelligence (AI) creatures
-* ChibiScheme as scripting language
+* TinyScheme as scripting language
 * visual pattern recognition for AI
 * GUI for scripting, asset creation etc.
 * Internet gaming
