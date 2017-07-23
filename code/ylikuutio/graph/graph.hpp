@@ -40,6 +40,7 @@ namespace graph
 
             std::vector<graph::Node*> node_pointer_vector;
             std::queue<uint32_t> free_nodeID_queue;
+            int32_t number_of_nodes;
     };
 }
 

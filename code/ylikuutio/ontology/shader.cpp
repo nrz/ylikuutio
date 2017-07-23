@@ -28,7 +28,7 @@ namespace ontology
     void Shader::bind_to_parent()
     {
         // get `childID` from `Scene` and set pointer to this `Shader`.
-        hierarchy::bind_child_to_parent<ontology::Shader*>(this, this->parent_pointer->shader_pointer_vector, this->parent_pointer->free_shaderID_queue);
+        hierarchy::bind_child_to_parent<ontology::Shader*>(this, this->parent_pointer->shader_pointer_vector, this->parent_pointer->free_shaderID_queue, &this->parent_pointer->number_of_shaders);
     }
 
     Shader::Shader(const ShaderStruct shader_struct)
@@ -42,6 +42,9 @@ namespace ontology
         this->char_fragment_shader = this->fragment_shader.c_str();
         this->parent_pointer       = shader_struct.parent_pointer;
         this->universe_pointer     = this->parent_pointer->universe_pointer;
+
+        this->number_of_materials = 0;
+        this->number_of_symbioses = 0;
 
         // get `childID` from `Scene` and set pointer to this `Shader`.
         this->bind_to_parent();
@@ -65,7 +68,7 @@ namespace ontology
 
         // destroy all materials of this shader.
         std::cout << "All materials of this shader will be destroyed.\n";
-        hierarchy::delete_children<ontology::Material*>(this->material_pointer_vector);
+        hierarchy::delete_children<ontology::Material*>(this->material_pointer_vector, &this->number_of_materials);
 
         // set pointer to this shader to nullptr.
         this->parent_pointer->set_shader_pointer(this->childID, nullptr);
@@ -92,7 +95,7 @@ namespace ontology
 
     int32_t Shader::get_number_of_children()
     {
-        return this->material_pointer_vector.size() + this->symbiosis_pointer_vector.size();
+        return this->number_of_materials + this->number_of_symbioses;
     }
 
     int32_t Shader::get_number_of_descendants()
@@ -102,18 +105,18 @@ namespace ontology
 
     void Shader::set_material_pointer(const uint32_t childID, ontology::Material* const child_pointer)
     {
-        hierarchy::set_child_pointer(childID, child_pointer, this->material_pointer_vector, this->free_materialID_queue);
+        hierarchy::set_child_pointer(childID, child_pointer, this->material_pointer_vector, this->free_materialID_queue, &this->number_of_materials);
     }
 
     void Shader::set_symbiosis_pointer(const uint32_t childID, ontology::Symbiosis* const child_pointer)
     {
-        hierarchy::set_child_pointer(childID, child_pointer, this->symbiosis_pointer_vector, this->free_symbiosisID_queue);
+        hierarchy::set_child_pointer(childID, child_pointer, this->symbiosis_pointer_vector, this->free_symbiosisID_queue, &this->number_of_symbioses);
     }
 
     void Shader::bind_to_new_parent(ontology::Scene* const new_scene_pointer)
     {
         // this method sets pointer to this `Shader` to nullptr, sets `parent_pointer` according to the input, and requests a new `childID` from the new `Scene`.
-        hierarchy::bind_child_to_new_parent<ontology::Shader*, ontology::Scene*>(this, new_scene_pointer, this->parent_pointer->shader_pointer_vector, this->parent_pointer->free_shaderID_queue);
+        hierarchy::bind_child_to_new_parent<ontology::Shader*, ontology::Scene*>(this, new_scene_pointer, this->parent_pointer->shader_pointer_vector, this->parent_pointer->free_shaderID_queue, &this->parent_pointer->number_of_shaders);
     }
 
     void Shader::set_name(std::string name)

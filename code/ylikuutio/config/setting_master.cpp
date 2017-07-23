@@ -15,6 +15,7 @@ namespace config
     {
         // costructor.
         this->parent_pointer = universe_pointer;
+        this->number_of_settings = 0;
 
         // bind to parent.
         // there can be only 1 `SettingMaster`.

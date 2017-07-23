@@ -11,7 +11,7 @@ namespace callback_system
 {
     void CallbackParameter::bind_to_parent()
     {
-        hierarchy::bind_child_to_parent<callback_system::CallbackParameter*>(this, this->parent_pointer->callback_parameter_pointer_vector, this->parent_pointer->free_callback_parameterID_queue);
+        hierarchy::bind_child_to_parent<callback_system::CallbackParameter*>(this, this->parent_pointer->callback_parameter_pointer_vector, this->parent_pointer->free_callback_parameterID_queue, &this->parent_pointer->number_of_callback_parameters);
 
         if (!this->name.empty())
         {

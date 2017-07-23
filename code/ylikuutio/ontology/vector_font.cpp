@@ -32,7 +32,7 @@ namespace ontology
     void VectorFont::bind_to_parent()
     {
         // get `childID` from `Material` and set pointer to this `VectorFont`.
-        hierarchy::bind_child_to_parent<ontology::VectorFont*>(this, this->parent_pointer->vector_font_pointer_vector, this->parent_pointer->free_vector_fontID_queue);
+        hierarchy::bind_child_to_parent<ontology::VectorFont*>(this, this->parent_pointer->vector_font_pointer_vector, this->parent_pointer->free_vector_fontID_queue, &this->parent_pointer->number_of_vector_fonts);
     }
 
     // this method returns a pointer to `Glyph` that matches the given `unicode_value`,
@@ -59,6 +59,9 @@ namespace ontology
 
         this->char_font_file_format = this->font_file_format.c_str();
         this->char_font_filename    = this->font_filename.c_str();
+
+        this->number_of_glyphs = 0;
+        this->number_of_text3Ds = 0;
 
         // get `childID` from `Material` and set pointer to this `VectorFont`.
         this->bind_to_parent();
@@ -123,11 +126,11 @@ namespace ontology
 
         // destroy all 3D texts (`Text3D`) of this font.
         std::cout << "All 3D texts of this font will be destroyed.\n";
-        hierarchy::delete_children<ontology::Text3D*>(this->text3D_pointer_vector);
+        hierarchy::delete_children<ontology::Text3D*>(this->text3D_pointer_vector, &this->number_of_text3Ds);
 
         // destroy all `Glyph`s of this font.
         std::cout << "All glyphs of this font will be destroyed.\n";
-        hierarchy::delete_children<ontology::Glyph*>(this->glyph_pointer_vector);
+        hierarchy::delete_children<ontology::Glyph*>(this->glyph_pointer_vector, &this->number_of_glyphs);
 
         // set pointer to this `VectorFont` to nullptr.
         this->parent_pointer->set_vector_font_pointer(this->childID, nullptr);
@@ -147,7 +150,7 @@ namespace ontology
 
     int32_t VectorFont::get_number_of_children()
     {
-        return this->glyph_pointer_vector.size() + this->text3D_pointer_vector.size();
+        return this->number_of_glyphs + this->number_of_text3Ds;
     }
 
     int32_t VectorFont::get_number_of_descendants()
@@ -157,17 +160,17 @@ namespace ontology
 
     void VectorFont::set_glyph_pointer(const uint32_t childID, ontology::Glyph* const child_pointer)
     {
-        hierarchy::set_child_pointer(childID, child_pointer, this->glyph_pointer_vector, this->free_glyphID_queue);
+        hierarchy::set_child_pointer(childID, child_pointer, this->glyph_pointer_vector, this->free_glyphID_queue, &this->number_of_glyphs);
     }
 
     void VectorFont::set_text3D_pointer(const uint32_t childID, ontology::Text3D* const child_pointer)
     {
-        hierarchy::set_child_pointer(childID, child_pointer, this->text3D_pointer_vector, this->free_text3D_ID_queue);
+        hierarchy::set_child_pointer(childID, child_pointer, this->text3D_pointer_vector, this->free_text3D_ID_queue, &this->number_of_text3Ds);
     }
 
     void VectorFont::bind_to_new_parent(ontology::Material* const new_material_pointer)
     {
-        hierarchy::bind_child_to_new_parent<ontology::VectorFont*, ontology::Material*>(this, new_material_pointer, this->parent_pointer->vector_font_pointer_vector, this->parent_pointer->free_vector_fontID_queue);
+        hierarchy::bind_child_to_new_parent<ontology::VectorFont*, ontology::Material*>(this, new_material_pointer, this->parent_pointer->vector_font_pointer_vector, this->parent_pointer->free_vector_fontID_queue, &this->parent_pointer->number_of_vector_fonts);
     }
 
     void VectorFont::set_name(const std::string name)

@@ -101,6 +101,8 @@ namespace ontology
         this->can_toggle_help_mode = false;
         this->can_display_help_screen = true;
 
+        this->number_of_scenes = 0;
+
         this->child_vector_pointers_vector.push_back(&this->scene_pointer_vector);
     }
 
@@ -111,7 +113,7 @@ namespace ontology
 
         // destroy all scenes of this world.
         std::cout << "All scenes of this world will be destroyed.\n";
-        hierarchy::delete_children<ontology::Scene*>(this->scene_pointer_vector);
+        hierarchy::delete_children<ontology::Scene*>(this->scene_pointer_vector, &this->number_of_scenes);
 
         std::cout << "The setting master of this universe will be destroyed.\n";
         delete this->setting_master_pointer;
@@ -130,7 +132,7 @@ namespace ontology
 
     int32_t Universe::get_number_of_children()
     {
-        return this->scene_pointer_vector.size();
+        return this->number_of_scenes;
     }
 
     int32_t Universe::get_number_of_descendants()
@@ -361,7 +363,7 @@ namespace ontology
 
     void Universe::set_scene_pointer(uint32_t childID, ontology::Scene* child_pointer)
     {
-        hierarchy::set_child_pointer(childID, child_pointer, this->scene_pointer_vector, this->free_sceneID_queue);
+        hierarchy::set_child_pointer(childID, child_pointer, this->scene_pointer_vector, this->free_sceneID_queue, &this->number_of_scenes);
     }
 
     void Universe::set_terrain_species_pointer(ontology::Species* terrain_species_pointer)

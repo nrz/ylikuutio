@@ -32,7 +32,7 @@ namespace ontology
     void Scene::bind_to_parent()
     {
         // get `childID` from `Universe` and set pointer to this `Scene`.
-        hierarchy::bind_child_to_parent<ontology::Scene*>(this, this->parent_pointer->scene_pointer_vector, this->parent_pointer->free_sceneID_queue);
+        hierarchy::bind_child_to_parent<ontology::Scene*>(this, this->parent_pointer->scene_pointer_vector, this->parent_pointer->free_sceneID_queue, &this->parent_pointer->number_of_scenes);
     }
 
     Scene::Scene(ontology::Universe* const parent_pointer, const float water_level)
@@ -44,6 +44,8 @@ namespace ontology
 
         this->universe_pointer = parent_pointer;
         this->parent_pointer = parent_pointer;
+
+        this->number_of_shaders = 0;
 
         // get `childID` from `Universe` and set pointer to this `Scene`.
         this->bind_to_parent();
@@ -61,7 +63,7 @@ namespace ontology
 
         // destroy all shaders of this scene.
         std::cout << "All shaders of this scene will be destroyed.\n";
-        hierarchy::delete_children<ontology::Shader*>(this->shader_pointer_vector);
+        hierarchy::delete_children<ontology::Shader*>(this->shader_pointer_vector, &this->number_of_shaders);
 
         // If this is the active `Scene`, set all `Scene`-related variables to `nullptr` or invalid.
         if (this->universe_pointer->active_scene == this)
@@ -97,7 +99,7 @@ namespace ontology
 
     int32_t Scene::get_number_of_children()
     {
-        return this->shader_pointer_vector.size();
+        return this->number_of_shaders;
     }
 
     int32_t Scene::get_number_of_descendants()
@@ -118,6 +120,6 @@ namespace ontology
 
     void Scene::set_shader_pointer(const uint32_t childID, ontology::Shader* const child_pointer)
     {
-        hierarchy::set_child_pointer(childID, child_pointer, this->shader_pointer_vector, this->free_shaderID_queue);
+        hierarchy::set_child_pointer(childID, child_pointer, this->shader_pointer_vector, this->free_shaderID_queue, &this->number_of_shaders);
     }
 }

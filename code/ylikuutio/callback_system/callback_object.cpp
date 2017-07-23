@@ -45,7 +45,7 @@ namespace callback_system
 
     void CallbackObject::bind_to_parent()
     {
-        hierarchy::bind_child_to_parent<callback_system::CallbackObject*>(this, this->parent_pointer->callback_object_pointer_vector, this->parent_pointer->free_callback_objectID_queue);
+        hierarchy::bind_child_to_parent<callback_system::CallbackObject*>(this, this->parent_pointer->callback_object_pointer_vector, this->parent_pointer->free_callback_objectID_queue, &this->parent_pointer->number_of_callback_objects);
     }
 
     void CallbackObject::set_new_callback(InputParametersToAnyValueCallback callback)
@@ -67,6 +67,8 @@ namespace callback_system
         // constructor.
         this->callback = callback;
         this->parent_pointer = parent_pointer;
+
+        this->number_of_callback_parameters = 0;
 
         // get childID from the CallbackEngine and set pointer to this CallbackObject.
         this->bind_to_parent();

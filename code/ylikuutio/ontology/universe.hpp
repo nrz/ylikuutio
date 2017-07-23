@@ -333,6 +333,8 @@ namespace ontology
 
             std::vector<ontology::Scene*> scene_pointer_vector;
             std::queue<uint32_t> free_sceneID_queue;
+            int32_t number_of_scenes;
+
             ontology::Scene* active_scene;
 
             config::SettingMaster* setting_master_pointer; // pointer to `SettingMaster`.

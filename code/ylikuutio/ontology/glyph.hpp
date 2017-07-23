@@ -53,7 +53,7 @@ namespace ontology
             template<class T1>
                 friend void set_name(std::string name, T1 entity);
             template<class T1>
-                friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<uint32_t>& free_childID_queue);
+                friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<uint32_t>& free_childID_queue, int32_t* number_of_children);
             template<class T1>
                 friend void render_species_or_glyph(T1 species_or_glyph_pointer);
 
@@ -62,10 +62,6 @@ namespace ontology
 
             // this method renders all `Object`s of this `Glyph`.
             void render();
-
-            int32_t get_number_of_children() override;
-
-            int32_t get_number_of_descendants() override;
 
             ontology::VectorFont* parent_pointer;  // pointer to `VectorFont`.
 

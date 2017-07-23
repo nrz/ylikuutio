@@ -9,13 +9,14 @@ namespace space_partition
     void Chunk::bind_to_parent()
     {
         // get `childID` from the `ChunkMaster` and set pointer to this `Chunk`.
-        hierarchy::bind_child_to_parent<space_partition::Chunk*>(this, this->parent_pointer->chunk_pointer_vector, this->parent_pointer->free_chunkID_queue);
+        hierarchy::bind_child_to_parent<space_partition::Chunk*>(this, this->parent_pointer->chunk_pointer_vector, this->parent_pointer->free_chunkID_queue, &this->parent_pointer->number_of_chunks);
     }
 
     Chunk::Chunk()
     {
         // constructor.
         this->is_original = true;
+        this->number_of_triangle3Ds = 0;
     }
 
     Chunk::~Chunk()
@@ -41,6 +42,6 @@ namespace space_partition
 
     void Chunk::set_triangle3D_pointer(uint32_t childID, space_partition::Triangle3D* child_pointer)
     {
-        hierarchy::set_child_pointer(childID, child_pointer, this->triangle3D_pointer_vector, this->free_triangle3D_ID_queue);
+        hierarchy::set_child_pointer(childID, child_pointer, this->triangle3D_pointer_vector, this->free_triangle3D_ID_queue, &this->number_of_triangle3Ds);
     }
 }
