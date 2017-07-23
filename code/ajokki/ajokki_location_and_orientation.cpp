@@ -101,6 +101,7 @@ namespace ajokki
         horizontal_angle_setting_struct.name = "horizontal_angle";
         horizontal_angle_setting_struct.setting_master_pointer = setting_master;
         horizontal_angle_setting_struct.activate_callback = &config::SettingMaster::activate_horizontal_angle;
+        horizontal_angle_setting_struct.read_callback = &config::SettingMaster::read_horizontal_angle;
         horizontal_angle_setting_struct.should_ylikuutio_call_activate_callback_now = true;
         new config::Setting(horizontal_angle_setting_struct);
 
@@ -109,6 +110,7 @@ namespace ajokki
         vertical_angle_setting_struct.name = "vertical_angle";
         vertical_angle_setting_struct.setting_master_pointer = setting_master;
         vertical_angle_setting_struct.activate_callback = &config::SettingMaster::activate_vertical_angle;
+        vertical_angle_setting_struct.read_callback = &config::SettingMaster::read_vertical_angle;
         vertical_angle_setting_struct.should_ylikuutio_call_activate_callback_now = true;
         new config::Setting(vertical_angle_setting_struct);
     }

@@ -856,4 +856,24 @@ namespace config
 
         return new datatypes::AnyValue(universe->spherical_coordinates->phi);
     }
+
+    datatypes::AnyValue* SettingMaster::read_horizontal_angle(ontology::Universe* const universe, config::SettingMaster* const setting_master)
+    {
+        if (universe == nullptr)
+        {
+            return nullptr;
+        }
+
+        return new datatypes::AnyValue(universe->horizontal_angle);
+    }
+
+    datatypes::AnyValue* SettingMaster::read_vertical_angle(ontology::Universe* const universe, config::SettingMaster* const setting_master)
+    {
+        if (universe == nullptr)
+        {
+            return nullptr;
+        }
+
+        return new datatypes::AnyValue(universe->vertical_angle);
+    }
 }
