@@ -25,10 +25,14 @@ add_subdirectory(FastNoiseSIMD)
 
 add_subdirectory(glfw-3.2)
 
+# TinySceme #
+add_subdirectory(tinyscheme-1.41)
+
 include_directories(
     glfw-3.2/include/GLFW/
     glew-2.0.0/include/
     FastNoiseSIMD/
+    tinyscheme-1.41/
 
     gdal-2.1.1/
     gdal-2.1.1/alg/
@@ -208,66 +212,15 @@ target_link_libraries(GLEW_200
     ${EXTRA_LIBS}
     )
 
-include_directories(
-    chibi-scheme/include/
+add_library(tinyscheme
+    tinyscheme-1.41/dynload.c
+    tinyscheme-1.41/dynload.h
+    tinyscheme-1.41/opdefines.h
+    tinyscheme-1.41/scheme.c
+    tinyscheme-1.41/scheme.h
+    tinyscheme-1.41/scheme-private.h
     )
-
-add_library(chibischeme
-    chibi-scheme/bignum.c
-    chibi-scheme/eval.c
-    chibi-scheme/gc.c
-    chibi-scheme/gc_heap.c
-    chibi-scheme/include/chibi/bignum.h
-    chibi-scheme/include/chibi/eval.h
-    chibi-scheme/include/chibi/features.h
-    chibi-scheme/include/chibi/gc_heap.h
-    chibi-scheme/include/chibi/install.h
-    chibi-scheme/include/chibi/sexp.h
-    chibi-scheme/include/chibi/sexp-huff.h
-    chibi-scheme/include/chibi/sexp-hufftabdefs.h
-    chibi-scheme/include/chibi/sexp-hufftabs.c
-    chibi-scheme/include/chibi/sexp-hufftabs.h
-    chibi-scheme/include/chibi/sexp-unhuff.h
-    # chibi-scheme/lib/chibi/accept.c
-    chibi-scheme/lib/chibi/ast.c
-    chibi-scheme/lib/chibi/crypto/crypto.c
-    chibi-scheme/lib/chibi/crypto/sha2.c
-    chibi-scheme/lib/chibi/disasm.c
-    chibi-scheme/lib/chibi/emscripten.c
-    chibi-scheme/lib/chibi/filesystem.c
-    chibi-scheme/lib/chibi/heap-stats.c
-    chibi-scheme/lib/chibi/io/io.c
-    chibi-scheme/lib/chibi/io/port.c
-    chibi-scheme/lib/chibi/net.c
-    chibi-scheme/lib/chibi/optimize/profile.c
-    chibi-scheme/lib/chibi/optimize/rest.c
-    chibi-scheme/lib/chibi/process.c
-    # chibi-scheme/lib/chibi/signal.c
-    chibi-scheme/lib/chibi/stty.c
-    chibi-scheme/lib/chibi/system.c
-    chibi-scheme/lib/chibi/time.c
-    chibi-scheme/lib/chibi/weak.c
-    chibi-scheme/lib/scheme/time.c
-    chibi-scheme/lib/srfi/18/threads.c
-    chibi-scheme/lib/srfi/27/rand.c
-    chibi-scheme/lib/srfi/33/bit.c
-    chibi-scheme/lib/srfi/39/param.c
-    chibi-scheme/lib/srfi/69/hash.c
-    chibi-scheme/lib/srfi/95/qsort.c
-    chibi-scheme/lib/srfi/98/env.c
-    chibi-scheme/main.c
-    chibi-scheme/opcodes.c
-    chibi-scheme/opt/fcall.c
-    chibi-scheme/opt/opcode_names.h
-    # chibi-scheme/opt/plan9-opcodes.c
-    # chibi-scheme/plan9.c
-    chibi-scheme/sexp.c
-    chibi-scheme/simplify.c
-    chibi-scheme/tests/foreign/apply-loop.c
-    chibi-scheme/tests/foreign/typeid.c
-    chibi-scheme/tests/snow/repo3/pythagoras/hyp.c
-    chibi-scheme/vm.c
-    )
+set_property(TARGET tinyscheme PROPERTY COMPILE_FLAGS "-DSTANDALONE=0 -DUSE_INTERFACE=1")
 
 # GDAL/OGR 2.1.1
 

@@ -7,8 +7,8 @@ project(ylikuutio)
 # SET(CMAKE_C_FLAGS  "${CMAKE_C_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS}")
 # SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS}")
 
-# comment the following line to disable scripting with Chibi Scheme.
-set(ENABLE_SCRIPTING_WITH_CHIBI_SCHEME true)
+# comment the following line to disable scripting with TinyScheme.
+set(ENABLE_SCRIPTING_WITH_TINYSCHEME true)
 
 # comment the following line to disable unit tests with Google Test.
 set(DO_UNIT_TESTS_WITH_GOOGLE_TEST true)
@@ -76,6 +76,7 @@ include_directories(
     external/glew-2.0.0/include/
     external/FastNoiseSIMD/
     external/pugixml/src/
+    external/tinyscheme-1.41/
 
     external/gdal-2.1.1/
     external/gdal-2.1.1/alg/
@@ -219,9 +220,9 @@ include_directories(
     .
     )
 
-if(ENABLE_SCRIPTING_WITH_CHIBI_SCHEME)
+if(ENABLE_SCRIPTING_WITH_TINYSCHEME)
     include_directories(
-        external/chibi-scheme/include/
+        external/tinyscheme/include/
         )
 endif()
 
@@ -366,6 +367,8 @@ configure_file(code/ylikuutio/shaders/StandardShading.vertexshader StandardShadi
 configure_file(code/ylikuutio/shaders/StandardShading.fragmentshader StandardShading.fragmentshader COPYONLY)
 configure_file(code/ylikuutio/shaders/TextVertexShader.vertexshader TextVertexShader.vertexshader COPYONLY)
 configure_file(code/ylikuutio/shaders/TextVertexShader.fragmentshader TextVertexShader.fragmentshader COPYONLY)
+configure_file(code/tinyscheme/hello_world.scm hello_world.scm COPYONLY)
+configure_file(external/tinyscheme-1.41/init.scm init.scm COPYONLY)
 configure_file(res/objects/suzanne.obj suzanne.obj COPYONLY)
 configure_file(res/objects/snow_cottage_triangulated.obj snow_cottage_triangulated.obj COPYONLY)
 configure_file(res/textures/uvmap.DDS uvmap.DDS COPYONLY)
@@ -598,11 +601,11 @@ add_executable(ajokki
 add_dependencies(ajokki rescan)
 target_link_libraries(ajokki ylikuutio ${ALL_LIBS} glfw)
 
-if (ENABLE_SCRIPTING_WITH_CHIBI_SCHEME)
-    # Chibi-test
-    add_executable(chibitest code/chibi-scheme/chibi_test.cpp
+if (ENABLE_SCRIPTING_WITH_TINYSCHEME)
+    # TinyScheme-test
+    add_executable(tinyscheme_test code/tinyscheme/tinyscheme_test.cpp
         )
-    target_link_libraries(chibitest chibischeme "-ldl")
+    target_link_libraries(tinyscheme_test tinyscheme)
 endif()
 
 # Xcode and Visual working directories
