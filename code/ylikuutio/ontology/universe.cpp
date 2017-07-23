@@ -11,8 +11,8 @@
 #define RADIANS_TO_DEGREES(x) (x * 180.0f / PI)
 #endif
 
-#include "entity.hpp"
 #include "universe.hpp"
+#include "entity.hpp"
 #include "scene.hpp"
 #include "shader.hpp"
 #include "material.hpp"
@@ -25,6 +25,7 @@
 #include "render_templates.hpp"
 #include "code/ylikuutio/config/setting.hpp"
 #include "code/ylikuutio/config/setting_master.hpp"
+#include "code/ylikuutio/console/console.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
 #include "code/ylikuutio/common/globals.hpp"
@@ -100,6 +101,8 @@ namespace ontology
         this->can_toggle_help_mode = false;
         this->can_display_help_screen = true;
 
+        this->number_of_scenes = 0;
+
         this->child_vector_pointers_vector.push_back(&this->scene_pointer_vector);
     }
 
@@ -110,7 +113,7 @@ namespace ontology
 
         // destroy all scenes of this world.
         std::cout << "All scenes of this world will be destroyed.\n";
-        hierarchy::delete_children<ontology::Scene*>(this->scene_pointer_vector);
+        hierarchy::delete_children<ontology::Scene*>(this->scene_pointer_vector, &this->number_of_scenes);
 
         std::cout << "The setting master of this universe will be destroyed.\n";
         delete this->setting_master_pointer;
@@ -127,6 +130,16 @@ namespace ontology
         this->active_scene->render();
     }
 
+    int32_t Universe::get_number_of_children()
+    {
+        return this->number_of_scenes;
+    }
+
+    int32_t Universe::get_number_of_descendants()
+    {
+        return -1;
+    }
+
     void Universe::set_active_scene(ontology::Scene* scene)
     {
         this->active_scene = scene;
@@ -138,27 +151,27 @@ namespace ontology
         glfwSetWindowUserPointer(this->window, this);
     }
 
-    GLFWwindow* Universe::get_window()
+    GLFWwindow* Universe::get_window() const
     {
         return this->window;
     }
 
-    uint32_t Universe::get_window_width()
+    uint32_t Universe::get_window_width() const
     {
         return this->window_width;
     }
 
-    uint32_t Universe::get_window_height()
+    uint32_t Universe::get_window_height() const
     {
         return this->window_height;
     }
 
-    uint32_t Universe::get_text_size()
+    uint32_t Universe::get_text_size() const
     {
         return this->text_size;
     }
 
-    uint32_t Universe::get_font_size()
+    uint32_t Universe::get_font_size() const
     {
         return this->font_size;
     }
@@ -177,7 +190,7 @@ namespace ontology
         return this->delta_time;
     }
 
-    float Universe::get_delta_time()
+    float Universe::get_delta_time() const
     {
         return this->delta_time;
     }
@@ -187,7 +200,7 @@ namespace ontology
         this->last_time_before_reading_keyboard = this->current_time_before_reading_keyboard;
     }
 
-    uint32_t Universe::get_max_FPS()
+    uint32_t Universe::get_max_FPS() const
     {
         return this->max_FPS;
     }
@@ -197,12 +210,12 @@ namespace ontology
         this->setting_master_pointer->set(setting_name, setting_any_value);
     }
 
-    config::Setting* Universe::get(std::string key)
+    config::Setting* Universe::get(std::string key) const
     {
         return this->setting_master_pointer->get(key);
     }
 
-    std::string Universe::get_entity_names()
+    std::string Universe::get_entity_names() const
     {
         std::string entity_names = "";
 
@@ -335,7 +348,13 @@ namespace ontology
             entity_info += std::string(memory_address_char_array);
             console->print_text(entity_info);
 
-            delete any_value;
+            int32_t number_of_children = entity->get_number_of_children();
+            char number_of_children_char_array[256];
+            snprintf(number_of_children_char_array, sizeof(number_of_children_char_array), "%d", number_of_children);
+
+            std::string children_info = "number of children: ";
+            children_info += std::string(number_of_children_char_array);
+            console->print_text(children_info);
         }
         return nullptr;
     }
@@ -344,7 +363,7 @@ namespace ontology
 
     void Universe::set_scene_pointer(uint32_t childID, ontology::Scene* child_pointer)
     {
-        hierarchy::set_child_pointer(childID, child_pointer, this->scene_pointer_vector, this->free_sceneID_queue);
+        hierarchy::set_child_pointer(childID, child_pointer, this->scene_pointer_vector, this->free_sceneID_queue, &this->number_of_scenes);
     }
 
     void Universe::set_terrain_species_pointer(ontology::Species* terrain_species_pointer)

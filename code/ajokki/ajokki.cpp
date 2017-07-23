@@ -303,6 +303,8 @@ int main(void)
     suzanne_species_struct.light_position = glm::vec3(0, 100000, 100000);
     ontology::Species* suzanne_species = new ontology::Species(suzanne_species_struct);
 
+    suzanne_species->set_name("Suzanne");
+
     // Create suzanne1, store it in `suzanne1`.
     ObjectStruct suzanne_object_struct1;
     suzanne_object_struct1.species_parent_pointer = suzanne_species;

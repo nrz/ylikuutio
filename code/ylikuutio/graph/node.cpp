@@ -9,7 +9,7 @@ namespace graph
 {
     void Node::bind_to_parent()
     {
-        hierarchy::bind_child_to_parent<graph::Node*>(this, this->parent_pointer->node_pointer_vector, this->parent_pointer->free_nodeID_queue);
+        hierarchy::bind_child_to_parent<graph::Node*>(this, this->parent_pointer->node_pointer_vector, this->parent_pointer->free_nodeID_queue, &this->parent_pointer->number_of_nodes);
     }
 
     Node::Node(NodeStruct node_struct)
@@ -93,6 +93,6 @@ namespace graph
 
     void Node::bind_to_new_parent(graph::Graph *new_graph_pointer)
     {
-        hierarchy::bind_child_to_new_parent<graph::Node*, graph::Graph*>(this, new_graph_pointer, this->parent_pointer->node_pointer_vector, this->parent_pointer->free_nodeID_queue);
+        hierarchy::bind_child_to_new_parent<graph::Node*, graph::Graph*>(this, new_graph_pointer, this->parent_pointer->node_pointer_vector, this->parent_pointer->free_nodeID_queue, &this->parent_pointer->number_of_nodes);
     }
 }

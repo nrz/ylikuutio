@@ -38,7 +38,7 @@ namespace ontology
                 return;
             }
 
-            if (universe->entity_anyvalue_map[name] != nullptr)
+            if (universe->entity_anyvalue_map.count(name) != 0)
             {
                 return;
             }
@@ -51,32 +51,6 @@ namespace ontology
         int32_t get_number_of_child_types(const T1 entity)
         {
             return entity->child_vector_pointers_vector.size();
-        }
-
-    template<class T1>
-        int32_t get_number_of_children(const T1 entity)
-        {
-            switch (typeid(entity))
-            {
-                case typeid(ontology::Universe*):
-                    return entity->scene_pointer_vector.size();
-                case typeid(ontology::Scene*):
-                    return entity->shader_pointer_vector.size();
-                case typeid(ontology::Material*):
-                    return entity->shader_pointer_vector.size();
-                case typeid(ontology::Species*):
-                    return entity->shader_pointer_vector.size();
-                case typeid(ontology::Object*):
-                    return 0;
-                case typeid(ontology::VectorFont*):
-                    return entity->glyph_pointer_vector.size() + entity->text3D_pointer_vector.size();
-                case typeid(ontology::Glyph*):
-                    return entity->object_pointer_vector.size();
-                case typeid(ontology::Text3D*):
-                    return entity->object_pointer_vector.size();
-                default:
-                    return -1;
-            }
         }
 
     template<class T1>

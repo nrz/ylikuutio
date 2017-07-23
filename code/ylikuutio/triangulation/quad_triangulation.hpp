@@ -44,15 +44,15 @@ namespace geometry
         {
             // Input vertices (`T1* input_vertex_pointer`)
             // can be `float`, `int32_t` or `uint32_t`.
-            int32_t image_width = triangulate_quads_struct.image_width;
-            int32_t image_height = triangulate_quads_struct.image_height;
-            int32_t x_step = triangulate_quads_struct.x_step;
-            int32_t z_step = triangulate_quads_struct.z_step;
-            int32_t actual_image_width = (image_width - 1) / x_step + 1;
-            int32_t actual_image_height = (image_height - 1) / z_step + 1;
-            std::string triangulation_type = triangulate_quads_struct.triangulation_type;
+            const int32_t image_width = triangulate_quads_struct.image_width;
+            const int32_t image_height = triangulate_quads_struct.image_height;
+            const int32_t x_step = triangulate_quads_struct.x_step;
+            const int32_t z_step = triangulate_quads_struct.z_step;
+            const int32_t actual_image_width = (image_width - 1) / x_step + 1;
+            const int32_t actual_image_height = (image_height - 1) / z_step + 1;
+            const std::string triangulation_type = triangulate_quads_struct.triangulation_type;
             double sphere_radius = triangulate_quads_struct.sphere_radius;
-            SphericalWorldStruct spherical_world_struct = triangulate_quads_struct.spherical_world_struct;
+            const SphericalWorldStruct spherical_world_struct = triangulate_quads_struct.spherical_world_struct;
 
             if (image_width < 2 || image_height < 2 || actual_image_width < 2 || actual_image_height < 2)
             {
@@ -150,7 +150,6 @@ namespace geometry
             }
 
             int32_t n_faces_for_each_vertex;
-            int32_t n_faces;
 
             if (is_bilinear_interpolation_in_use)
             {
@@ -166,9 +165,10 @@ namespace geometry
 
             std::cout << "actual image width: " << actual_image_width << " pixels.\n";
             std::cout << "actual image height: " << actual_image_height << " pixels.\n";
-            std::cout << "number of faces: " << n_faces << ".\n";
 
-            n_faces = n_faces_for_each_vertex * (actual_image_width - 1) * (actual_image_height - 1);
+            const int32_t n_faces = n_faces_for_each_vertex * (actual_image_width - 1) * (actual_image_height - 1);
+
+            std::cout << "number of faces: " << n_faces << ".\n";
 
             uint32_t vertexIndex[3], uvIndex[3], normalIndex[3];
 

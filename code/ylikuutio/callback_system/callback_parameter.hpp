@@ -20,13 +20,13 @@ namespace callback_system
         public:
 
             // constructor.
-            CallbackParameter(std::string name, datatypes::AnyValue* any_value, bool is_reference, callback_system::CallbackObject* parent_pointer);
+            CallbackParameter(const std::string& name, datatypes::AnyValue* const any_value, const bool is_reference, callback_system::CallbackObject* const parent_pointer);
 
             // destructor.
             ~CallbackParameter();
 
             // getter.
-            datatypes::AnyValue* get_any_value();
+            datatypes::AnyValue* get_any_value() const;
 
             friend class CallbackObject;
 

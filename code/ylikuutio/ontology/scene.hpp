@@ -45,15 +45,19 @@ namespace ontology
             template<class T1>
                 friend void set_name(std::string name, T1 entity);
             template<class T1>
-                friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<uint32_t>& free_childID_queue);
+                friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<uint32_t>& free_childID_queue, int32_t* number_of_children);
             template<class T1, class T2>
-                friend void hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent_pointer, std::vector<T1>& old_child_pointer_vector, std::queue<uint32_t>& old_free_childID_queue);
+                friend void hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent_pointer, std::vector<T1>& old_child_pointer_vector, std::queue<uint32_t>& old_free_childID_queue, int32_t* old_number_of_children);
 
         private:
             void bind_to_parent();
 
             // this method renders all `Shader`s of this `Scene`.
             void render();
+
+            int32_t get_number_of_children() override;
+
+            int32_t get_number_of_descendants() override;
 
             // this method sets a `Shader` pointer.
             void set_shader_pointer(const uint32_t childID, ontology::Shader* const child_pointer);
@@ -67,11 +71,10 @@ namespace ontology
 
             std::vector<ontology::Shader*> shader_pointer_vector;
             std::queue<uint32_t> free_shaderID_queue;
+            int32_t number_of_shaders;
 
             // For finding any `Object`s of this `Scene` by using its name.
             std::unordered_map<std::string, ontology::Object*> name_map;
-
-            std::string name;                      // name of this entity.
 
             // Variables related to location and orientation.
 

@@ -36,7 +36,7 @@ namespace ontology
     void Species::bind_to_parent()
     {
         // get `childID` from `Material` and set pointer to this `Species`.
-        hierarchy::bind_child_to_parent<ontology::Species*>(this, this->parent_pointer->species_pointer_vector, this->parent_pointer->free_speciesID_queue);
+        hierarchy::bind_child_to_parent<ontology::Species*>(this, this->parent_pointer->species_pointer_vector, this->parent_pointer->free_speciesID_queue, &this->parent_pointer->number_of_species);
     }
 
     Species::Species(const SpeciesStruct species_struct)
@@ -168,7 +168,7 @@ namespace ontology
 
         // destroy all objects of this species.
         std::cout << "All objects of this species will be destroyed.\n";
-        hierarchy::delete_children<ontology::Object*>(this->object_pointer_vector);
+        hierarchy::delete_children<ontology::Object*>(this->object_pointer_vector, &this->number_of_objects);
 
         // Cleanup VBO, shader and texture.
         glDeleteBuffers(1, &this->vertexbuffer);
@@ -194,7 +194,7 @@ namespace ontology
 
     void Species::set_object_pointer(const uint32_t childID, ontology::Object* const child_pointer)
     {
-        hierarchy::set_child_pointer(childID, child_pointer, this->object_pointer_vector, this->free_objectID_queue);
+        hierarchy::set_child_pointer(childID, child_pointer, this->object_pointer_vector, this->free_objectID_queue, &this->number_of_objects);
     }
 
     void Species::set_name(const std::string name)
@@ -205,6 +205,6 @@ namespace ontology
     void Species::bind_to_new_parent(ontology::Material* const new_material_pointer)
     {
         // this method sets pointer to this `Species` to nullptr, sets `parent_pointer` according to the input, and requests a new `childID` from the new `Material`.
-        hierarchy::bind_child_to_new_parent<ontology::Species*, ontology::Material*>(this, new_material_pointer, this->parent_pointer->species_pointer_vector, this->parent_pointer->free_speciesID_queue);
+        hierarchy::bind_child_to_new_parent<ontology::Species*, ontology::Material*>(this, new_material_pointer, this->parent_pointer->species_pointer_vector, this->parent_pointer->free_speciesID_queue, &this->parent_pointer->number_of_species);
     }
 }

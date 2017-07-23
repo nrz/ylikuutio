@@ -30,13 +30,18 @@ namespace ontology
             // destructor.
             ~Symbiosis();
 
+            int32_t get_number_of_children() override;
+
+            int32_t get_number_of_descendants() override;
+
+
             // this method sets pointer to this `Symbiosis` to nullptr, sets `parent_pointer` according to the input, and requests a new `childID` from the new `Shader`.
             void bind_to_new_parent(ontology::Shader* new_shader_pointer);
 
             void set_name(std::string name);
 
             template<class T1>
-                friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<uint32_t>& free_childID_queue);
+                friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<uint32_t>& free_childID_queue, int32_t* number_of_children);
 
         private:
             void bind_to_parent();
@@ -51,8 +56,8 @@ namespace ontology
             std::vector<ontology::Species*> species_pointer_vector;
             std::queue<uint32_t> free_materialID_queue;
             std::queue<uint32_t> free_speciesID_queue;
-
-            std::string name;                     // name of this entity.
+            int32_t number_of_materials;
+            int32_t number_of_species;
     };
 }
 #endif

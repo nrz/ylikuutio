@@ -2,9 +2,16 @@ TEE-lista:
 Listaa tähän keskeneräiset asiat kiireellisyysjärjestyksessä kiireellisimmät ylös. Rasti ruutuun ja valmiit-osastolle kun on valmis.
 
 Ylikuution kehityksen kannalta välttämättömiä työvaiheita:
-[ ] Lisää konsoliin infokomento `info` (kertoo entiteeteistä, esim. objekteista verteksien lukumäärän ym. tietoja).
 [ ] Lisää konsoliin skenejen (`Scene`) latauskomento `load`.
 [ ] Lisää muuttuja `wireframe`: `set wireframe on` / `set wireframe off`.
+[ ] Lisää muuttuja `window_width`.
+[ ] Lisää muuttuja `window_height`.
+[ ] Lisää muuttuja `text_size`.
+[ ] Lisää muuttuja `direction`.
+[ ] Lisää muuttuja `right`.
+[ ] Lisää muuttuja `up`.
+[ ] Lisää muuttuja `horizontal_angle`.
+[ ] Lisää muuttuja `vertical_angle`.
 [ ] Lisää bicubic-interpolointi.
 [ ] Lisää muuttuja `triangulation`: `set triangulation bilinear` / `set triangulation bicubic` / `set triangulation southwest_northeast` / `set triangulation southeast_northwest`.
 [ ] Koodaa taustalla toimiva skenejen (`Scene`) lataus.
@@ -13,11 +20,12 @@ Ylikuution kehityksen kannalta välttämättömiä työvaiheita:
 [ ] Lisää ray castingiä käyttävä toiminto verteksien valitsemiseen ja muokkaamiseen.
 [ ] Lisää verteksien muokkaaminen.
 [ ] Lisää octree-segmentointi.
+[ ] Lisää tuki vektorifonteille.
 [ ] Lisää tekoälyoliot (robotit).
-[ ] Lisää Chibi-Scheme -tuki tekoälyolioiden ohjelmointiin.
+[ ] Lisää TinyScheme-tuki tekoälyolioiden ohjelmointiin.
 
 Vähemmän kiireellisiä:
-[ ] Lisää Chibi-Scheme-tuki konsoliin.
+[ ] Lisää TinyScheme-tuki konsoliin.
 [ ] Lisää tuki kolmiulotteiselle tekstille.
 [ ] Lisää tuki osittain läpinäkyvälle tekstille.
 [ ] Lisää tuki yli 3-ulotteisille kappaleille (projisoidaan `Object::render()`-metodissa 3-ulotteiseen avaruuteen).
@@ -37,3 +45,4 @@ Valmiit:
 [x] Lisää konsoli (aukeaa näppäimellä `).
 [x] Lisää mahdollisuus nimetä entiteettihierarkian minkä tahansa tason olioita.
 [x] Koodaa konsoliin tekstin vieritys kun 'ikkuna' tulee täyteen.
+[x] Lisää konsoliin infokomento `info` (kertoo entiteeteistä, esim. objekteista verteksien lukumäärän ym. tietoja).

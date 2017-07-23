@@ -26,7 +26,7 @@ namespace ontology
             parent_pointer = this->text3D_parent_pointer;
             // for ontological hierarchy (rendering hierarchy does not use `childID`).
             // get `childID` from `Glyph` and set pointer to this `Object`.
-            hierarchy::bind_child_to_parent<ontology::Object*>(this, parent_pointer->object_pointer_vector, parent_pointer->free_objectID_queue);
+            hierarchy::bind_child_to_parent<ontology::Object*>(this, parent_pointer->object_pointer_vector, parent_pointer->free_objectID_queue, &parent_pointer->number_of_objects);
         }
         else
         {
@@ -34,7 +34,7 @@ namespace ontology
             parent_pointer = this->species_parent_pointer;
             // for ontological hierarchy (rendering hierarchy does not use `childID`).
             // get `childID` from `Species` and set pointer to this `Object`.
-            hierarchy::bind_child_to_parent<ontology::Object*>(this, parent_pointer->object_pointer_vector, parent_pointer->free_objectID_queue);
+            hierarchy::bind_child_to_parent<ontology::Object*>(this, parent_pointer->object_pointer_vector, parent_pointer->free_objectID_queue, &parent_pointer->number_of_objects);
         }
     }
 
@@ -70,8 +70,6 @@ namespace ontology
 
         // get `childID` from `Species` or `Glyph` and set pointer to this `Object`.
         this->bind_to_parent();
-
-        bool model_loading_result = false;
     }
 
     Object::~Object()
@@ -124,6 +122,16 @@ namespace ontology
         }
     }
 
+    int32_t Object::get_number_of_children()
+    {
+        return 0;
+    }
+
+    int32_t Object::get_number_of_descendants()
+    {
+        return 0;
+    }
+
     void Object::bind_to_new_parent(void* const new_parent_pointer)
     {
         // this method sets pointer to this `Object` to nullptr, sets `parent_pointer` according to the input,
@@ -135,7 +143,7 @@ namespace ontology
             parent_pointer = this->glyph_parent_pointer;
             // set pointer to this child to nullptr in the old parent.
             ontology::Object* dummy_child_pointer = nullptr;
-            hierarchy::set_child_pointer(this->childID, dummy_child_pointer, glyph_parent_pointer->object_pointer_vector, glyph_parent_pointer->free_objectID_queue);
+            hierarchy::set_child_pointer(this->childID, dummy_child_pointer, glyph_parent_pointer->object_pointer_vector, glyph_parent_pointer->free_objectID_queue, &glyph_parent_pointer->number_of_objects);
             // set the new parent pointer.
             this->glyph_parent_pointer = static_cast<ontology::Glyph*>(new_parent_pointer);
             // bind to the new parent.
@@ -147,7 +155,7 @@ namespace ontology
             parent_pointer = this->species_parent_pointer;
             // set pointer to this child to nullptr in the old parent.
             ontology::Object* dummy_child_pointer = nullptr;
-            hierarchy::set_child_pointer(this->childID, dummy_child_pointer, species_parent_pointer->object_pointer_vector, species_parent_pointer->free_objectID_queue);
+            hierarchy::set_child_pointer(this->childID, dummy_child_pointer, species_parent_pointer->object_pointer_vector, species_parent_pointer->free_objectID_queue, &species_parent_pointer->number_of_objects);
             // set the new parent pointer.
             this->species_parent_pointer = static_cast<ontology::Species*>(new_parent_pointer);
             // bind to the new parent.

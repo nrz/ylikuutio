@@ -1,6 +1,7 @@
-#ifndef TEXT2D_HPP
-#define TEXT2D_HPP
+#ifndef __FONT2D_HPP_INCLUDED
+#define __FONT2D_HPP_INCLUDED
 
+#include "entity.hpp"
 #include "entity_templates.hpp"
 #include "code/ylikuutio/common/globals.hpp"
 
@@ -17,7 +18,7 @@ namespace ontology
 {
     class Universe;
 
-    class Font2D
+    class Font2D: public ontology::Entity
     {
         public:
             // constructor.
@@ -30,6 +31,10 @@ namespace ontology
 
             // destructor.
             ~Font2D();
+
+            int32_t get_number_of_children() override;
+
+            int32_t get_number_of_descendants() override;
 
             void printText2D(
                     GLuint screen_width,
@@ -70,9 +75,6 @@ namespace ontology
             GLuint Text2DUniformID;                  // Location of the program's texture attribute.
             GLuint screen_width_uniform_ID;          // Location of the program's window width uniform.
             GLuint screen_height_uniform_ID;         // Location of the program's window height uniform.
-
-            ontology::Universe* universe_pointer;
-            std::string name;
     };
 }
 

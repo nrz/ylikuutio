@@ -11,7 +11,7 @@ namespace callback_system
 {
     void CallbackParameter::bind_to_parent()
     {
-        hierarchy::bind_child_to_parent<callback_system::CallbackParameter*>(this, this->parent_pointer->callback_parameter_pointer_vector, this->parent_pointer->free_callback_parameterID_queue);
+        hierarchy::bind_child_to_parent<callback_system::CallbackParameter*>(this, this->parent_pointer->callback_parameter_pointer_vector, this->parent_pointer->free_callback_parameterID_queue, &this->parent_pointer->number_of_callback_parameters);
 
         if (!this->name.empty())
         {
@@ -20,7 +20,7 @@ namespace callback_system
         }
     }
 
-    CallbackParameter::CallbackParameter(std::string name, datatypes::AnyValue* any_value, bool is_reference, callback_system::CallbackObject* parent_pointer)
+    CallbackParameter::CallbackParameter(const std::string& name, datatypes::AnyValue* const any_value, const bool is_reference, callback_system::CallbackObject* const parent_pointer)
     {
         // constructor.
         this->name = name;
@@ -44,7 +44,7 @@ namespace callback_system
         this->parent_pointer->set_callback_parameter_pointer(this->childID, nullptr);
     }
 
-    datatypes::AnyValue* CallbackParameter::get_any_value()
+    datatypes::AnyValue* CallbackParameter::get_any_value() const
     {
         return this->any_value;
     }

@@ -10,7 +10,7 @@ namespace config
 {
     void Setting::bind_to_parent()
     {
-        hierarchy::bind_child_to_parent<config::Setting*>(this, this->parent_pointer->setting_pointer_vector, this->parent_pointer->free_settingID_queue);
+        hierarchy::bind_child_to_parent<config::Setting*>(this, this->parent_pointer->setting_pointer_vector, this->parent_pointer->free_settingID_queue, &this->parent_pointer->number_of_settings);
     }
 
     Setting::Setting(const SettingStruct setting_struct)

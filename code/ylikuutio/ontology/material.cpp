@@ -29,7 +29,7 @@ namespace ontology
     void Material::bind_to_parent()
     {
         // get `childID` from `Shader` and set pointer to this `Material`.
-        hierarchy::bind_child_to_parent<ontology::Material*>(this, this->parent_pointer->material_pointer_vector, this->parent_pointer->free_materialID_queue);
+        hierarchy::bind_child_to_parent<ontology::Material*>(this, this->parent_pointer->material_pointer_vector, this->parent_pointer->free_materialID_queue, &this->parent_pointer->number_of_materials);
     }
 
     Material::Material(const MaterialStruct material_struct)
@@ -43,6 +43,10 @@ namespace ontology
 
         this->char_texture_file_format = this->texture_file_format.c_str();
         this->char_texture_filename    = this->texture_filename.c_str();
+
+        this->number_of_species = 0;
+        this->number_of_vector_fonts = 0;
+        this->number_of_chunk_masters = 0;
 
         // get `childID` from the `Shader` and set pointer to this `Material`.
         this->bind_to_parent();
@@ -77,15 +81,15 @@ namespace ontology
 
         // destroy all species of this material.
         std::cout << "All species of this material will be destroyed.\n";
-        hierarchy::delete_children<ontology::Species*>(this->species_pointer_vector);
+        hierarchy::delete_children<ontology::Species*>(this->species_pointer_vector, &this->number_of_species);
 
         // destroy all fonts of this material.
         std::cout << "All fonts of this material will be destroyed.\n";
-        hierarchy::delete_children<ontology::VectorFont*>(this->vector_font_pointer_vector);
+        hierarchy::delete_children<ontology::VectorFont*>(this->vector_font_pointer_vector, &this->number_of_vector_fonts);
 
         // destroy all chunk masters of this material.
         std::cout << "All chunk masters of this material will be destroyed.\n";
-        hierarchy::delete_children<space_partition::ChunkMaster*>(this->chunk_master_pointer_vector);
+        hierarchy::delete_children<space_partition::ChunkMaster*>(this->chunk_master_pointer_vector, &this->number_of_chunk_masters);
 
         glDeleteTextures(1, &this->texture);
 
@@ -113,25 +117,35 @@ namespace ontology
         ontology::render_children<space_partition::ChunkMaster*>(this->chunk_master_pointer_vector);
     }
 
+    int32_t Material::get_number_of_children()
+    {
+        return this->number_of_species + this->number_of_vector_fonts + this->number_of_chunk_masters;
+    }
+
+    int32_t Material::get_number_of_descendants()
+    {
+        return -1;
+    }
+
     void Material::set_species_pointer(const uint32_t childID, ontology::Species* const child_pointer)
     {
-        hierarchy::set_child_pointer(childID, child_pointer, this->species_pointer_vector, this->free_speciesID_queue);
+        hierarchy::set_child_pointer(childID, child_pointer, this->species_pointer_vector, this->free_speciesID_queue, &this->number_of_species);
     }
 
     void Material::set_vector_font_pointer(const uint32_t childID, ontology::VectorFont* const child_pointer)
     {
-        hierarchy::set_child_pointer(childID, child_pointer, this->vector_font_pointer_vector, this->free_vector_fontID_queue);
+        hierarchy::set_child_pointer(childID, child_pointer, this->vector_font_pointer_vector, this->free_vector_fontID_queue, &this->number_of_vector_fonts);
     }
 
     void Material::set_chunk_master_pointer(const uint32_t childID, space_partition::ChunkMaster* const child_pointer)
     {
-        hierarchy::set_child_pointer(childID, child_pointer, this->chunk_master_pointer_vector, this->free_chunk_masterID_queue);
+        hierarchy::set_child_pointer(childID, child_pointer, this->chunk_master_pointer_vector, this->free_chunk_masterID_queue, &this->number_of_chunk_masters);
     }
 
     void Material::bind_to_new_parent(ontology::Shader* const new_shader_pointer)
     {
         // this method sets pointer to this `Material` to nullptr, sets `parent_pointer` according to the input, and requests a new `childID` from the new `Shader`.
-        hierarchy::bind_child_to_new_parent<ontology::Material*, ontology::Shader*>(this, new_shader_pointer, this->parent_pointer->material_pointer_vector, this->parent_pointer->free_materialID_queue);
+        hierarchy::bind_child_to_new_parent<ontology::Material*, ontology::Shader*>(this, new_shader_pointer, this->parent_pointer->material_pointer_vector, this->parent_pointer->free_materialID_queue, &this->parent_pointer->number_of_materials);
     }
 
     void Material::set_name(const std::string name)

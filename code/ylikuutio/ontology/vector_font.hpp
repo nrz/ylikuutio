@@ -57,15 +57,19 @@ namespace ontology
             template<class T1>
                 friend void set_name(std::string name, T1 entity);
             template<class T1>
-                friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<uint32_t>& free_childID_queue);
+                friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<uint32_t>& free_childID_queue, int32_t* number_of_children);
             template<class T1, class T2>
-                friend void hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent_pointer, std::vector<T1>& old_child_pointer_vector, std::queue<uint32_t>& old_free_childID_queue);
+                friend void hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent_pointer, std::vector<T1>& old_child_pointer_vector, std::queue<uint32_t>& old_free_childID_queue, int32_t* old_number_of_children);
 
         private:
             void bind_to_parent();
 
             // this method renders all `Glyph`s of this `VectorFont`.
             void render();
+
+            int32_t get_number_of_children() override;
+
+            int32_t get_number_of_descendants() override;
 
             // this method returns a pointer to `Glyph` that matches the given `unicode_value`,
             // and `nullptr` if this `VectorFont` does not contain such a `Glyph`.
@@ -88,10 +92,10 @@ namespace ontology
             std::vector<ontology::Text3D*> text3D_pointer_vector;
             std::queue<uint32_t> free_glyphID_queue;
             std::queue<uint32_t> free_text3D_ID_queue;
+            int32_t number_of_glyphs;
+            int32_t number_of_text3Ds;
 
             std::unordered_map<int32_t, ontology::Glyph*> unicode_glyph_map;
-
-            std::string name;                     // name of this entity.
     };
 }
 
