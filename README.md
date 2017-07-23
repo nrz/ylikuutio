@@ -150,8 +150,16 @@ At the moment, you need a main class (for an example, please see
 `code/ajokki/ajokki.cpp`) which starts your game/simulation (initialization),
 runs the game/simulation (the main loop) and ends the program (cleaning-up).
 In all these phases mentioned above Ylikuutio library functions may be used.
+Ylikuutio library code is located in `code/ylikuutio/` tree. Ylikuutio code
+may change a lot and so far no API has been defined. Ajokki and Ylikuutio
+code itself are the best references on how to use Ylikuutio in practice.
 
 ## FAQ
+Q: What is "Ylikuutio"?
+A: In Finnish, "yli" means "over", and "kuutio" means "cube".
+   So, "Ylikuutio" is a reference to a hypercube.
+   https://en.wikipedia.org/wiki/Hypercube
+
 Q: How is Ylikuutio software developed?
 A: In Debian GNU/Linux (Debian Jessie at the moment), using Vim.
 
