@@ -70,8 +70,6 @@ namespace ontology
 
         // get `childID` from `Species` or `Glyph` and set pointer to this `Object`.
         this->bind_to_parent();
-
-        bool model_loading_result = false;
     }
 
     Object::~Object()
