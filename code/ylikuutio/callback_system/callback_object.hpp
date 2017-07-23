@@ -26,20 +26,20 @@ namespace callback_system
             CallbackObject(callback_system::CallbackEngine* parent_pointer);
 
             // constructor.
-            CallbackObject(InputParametersToAnyValueCallback callback, callback_system::CallbackEngine* parent_pointer);
+            CallbackObject(const InputParametersToAnyValueCallback callback, callback_system::CallbackEngine* parent_pointer);
 
             // destructor.
             virtual ~CallbackObject();
 
             // this method changes the callback without changing the parameters of CallbackObject.
-            void set_new_callback(InputParametersToAnyValueCallback callback);
+            void set_new_callback(const InputParametersToAnyValueCallback callback);
 
             // getter functions for callbacks and callback objects.
-            datatypes::AnyValue* get_any_value(std::string name);
-            datatypes::AnyValue* get_arg(uint32_t arg_i);
+            datatypes::AnyValue* get_any_value(const std::string& name);
+            datatypes::AnyValue* get_arg(const uint32_t arg_i) const;
 
             // setter function for callbacks and callback objects.
-            void set_any_value(const std::string name, const datatypes::AnyValue* const any_value);
+            void set_any_value(const std::string& name, const datatypes::AnyValue* const any_value);
 
             friend class CallbackEngine;
             friend class CallbackParameter;

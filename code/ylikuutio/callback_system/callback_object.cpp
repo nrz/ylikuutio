@@ -13,16 +13,16 @@
 namespace callback_system
 {
     // getter function for callbacks and callback objects.
-    datatypes::AnyValue* CallbackObject::get_any_value(std::string name)
+    datatypes::AnyValue* CallbackObject::get_any_value(const std::string& name)
     {
         return &this->anyvalue_hashmap[name];
     }
 
-    datatypes::AnyValue* CallbackObject::get_arg(uint32_t arg_i)
+    datatypes::AnyValue* CallbackObject::get_arg(const uint32_t arg_i) const
     {
         if (arg_i >= this->callback_parameter_pointer_vector.size())
         {
-            std::cerr << "virhe 1!";
+            std::cerr << "error #1 in CallbackObject code.\n";
             return nullptr;
         }
 
@@ -30,7 +30,7 @@ namespace callback_system
 
         if (callback_parameter == nullptr)
         {
-            std::cerr << "virhe 2!";
+            std::cerr << "error #2 in CallbackObject code.\n";
             return nullptr;
         }
 
@@ -38,7 +38,7 @@ namespace callback_system
     }
 
     // setter function for callbacks and callback objects.
-    void CallbackObject::set_any_value(const std::string name, const datatypes::AnyValue* const any_value)
+    void CallbackObject::set_any_value(const std::string& name, const datatypes::AnyValue* const any_value)
     {
         this->anyvalue_hashmap[name] = *any_value;
     }
@@ -48,7 +48,7 @@ namespace callback_system
         hierarchy::bind_child_to_parent<callback_system::CallbackObject*>(this, this->parent_pointer->callback_object_pointer_vector, this->parent_pointer->free_callback_objectID_queue, &this->parent_pointer->number_of_callback_objects);
     }
 
-    void CallbackObject::set_new_callback(InputParametersToAnyValueCallback callback)
+    void CallbackObject::set_new_callback(const InputParametersToAnyValueCallback callback)
     {
         this->callback = callback;
     }
@@ -62,7 +62,7 @@ namespace callback_system
         this->bind_to_parent();
     }
 
-    CallbackObject::CallbackObject(InputParametersToAnyValueCallback callback, callback_system::CallbackEngine* parent_pointer)
+    CallbackObject::CallbackObject(const InputParametersToAnyValueCallback callback, callback_system::CallbackEngine* parent_pointer)
     {
         // constructor.
         this->callback = callback;

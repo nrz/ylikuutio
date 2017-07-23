@@ -20,7 +20,7 @@ namespace callback_system
         }
     }
 
-    CallbackParameter::CallbackParameter(std::string name, datatypes::AnyValue* any_value, bool is_reference, callback_system::CallbackObject* parent_pointer)
+    CallbackParameter::CallbackParameter(const std::string& name, datatypes::AnyValue* const any_value, const bool is_reference, callback_system::CallbackObject* const parent_pointer)
     {
         // constructor.
         this->name = name;
@@ -44,7 +44,7 @@ namespace callback_system
         this->parent_pointer->set_callback_parameter_pointer(this->childID, nullptr);
     }
 
-    datatypes::AnyValue* CallbackParameter::get_any_value()
+    datatypes::AnyValue* CallbackParameter::get_any_value() const
     {
         return this->any_value;
     }
