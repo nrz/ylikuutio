@@ -22,10 +22,10 @@ Ylikuution kehityksen kannalta välttämättömiä työvaiheita:
 [ ] Lisää octree-segmentointi.
 [ ] Lisää tuki vektorifonteille.
 [ ] Lisää tekoälyoliot (robotit).
-[ ] Lisää Chibi-Scheme -tuki tekoälyolioiden ohjelmointiin.
+[ ] Lisää TinyScheme-tuki tekoälyolioiden ohjelmointiin.
 
 Vähemmän kiireellisiä:
-[ ] Lisää Chibi-Scheme-tuki konsoliin.
+[ ] Lisää TinyScheme-tuki konsoliin.
 [ ] Lisää tuki kolmiulotteiselle tekstille.
 [ ] Lisää tuki osittain läpinäkyvälle tekstille.
 [ ] Lisää tuki yli 3-ulotteisille kappaleille (projisoidaan `Object::render()`-metodissa 3-ulotteiseen avaruuteen).
