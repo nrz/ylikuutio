@@ -150,7 +150,6 @@ namespace geometry
             }
 
             int32_t n_faces_for_each_vertex;
-            int32_t n_faces;
 
             if (is_bilinear_interpolation_in_use)
             {
@@ -166,9 +165,10 @@ namespace geometry
 
             std::cout << "actual image width: " << actual_image_width << " pixels.\n";
             std::cout << "actual image height: " << actual_image_height << " pixels.\n";
-            std::cout << "number of faces: " << n_faces << ".\n";
 
-            n_faces = n_faces_for_each_vertex * (actual_image_width - 1) * (actual_image_height - 1);
+            const int32_t n_faces = n_faces_for_each_vertex * (actual_image_width - 1) * (actual_image_height - 1);
+
+            std::cout << "number of faces: " << n_faces << ".\n";
 
             uint32_t vertexIndex[3], uvIndex[3], normalIndex[3];
 
