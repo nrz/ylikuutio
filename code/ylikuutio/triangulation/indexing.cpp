@@ -10,29 +10,29 @@ namespace geometry
 {
     // For bilinear interpolation, southeast-northwest edges, and southwest-northeast edges.
     // These functions return indices.
-    GLuint southwest(int32_t current_vertex_i, int32_t image_width)
+    GLuint southwest(const int32_t current_vertex_i, const int32_t image_width)
     {
         return current_vertex_i - image_width - 1;
     }
-    GLuint southeast(int32_t current_vertex_i, int32_t image_width)
+    GLuint southeast(const int32_t current_vertex_i, const int32_t image_width)
     {
         return current_vertex_i - image_width;
     }
-    GLuint northwest(int32_t current_vertex_i, int32_t image_width)
+    GLuint northwest(const int32_t current_vertex_i, const int32_t image_width)
     {
         return current_vertex_i - 1;
     }
-    GLuint northeast(int32_t current_vertex_i, int32_t image_width)
+    GLuint northeast(const int32_t current_vertex_i, const int32_t image_width)
     {
         return current_vertex_i;
     }
 
     // for bilinear interpolation.
     int32_t get_face_normal_i(
-            int32_t x,
-            int32_t z,
-            BilinearDirections compass_point_code,
-            int32_t actual_image_width)
+            const int32_t x,
+            const int32_t z,
+            const BilinearDirections compass_point_code,
+            const int32_t actual_image_width)
     {
         // Face indices example for a 4x4 image file using bilinear interpolation.
         //
