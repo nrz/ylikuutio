@@ -84,8 +84,12 @@ namespace ontology
 
     void Glyph::render()
     {
+        this->prerender();
+
         // render this `Glyph`.
         ontology::render_species_or_glyph<ontology::Glyph*>(this);
+
+        this->postrender();
     }
 
     void Glyph::set_object_pointer(const uint32_t childID, ontology::Object* const child_pointer)

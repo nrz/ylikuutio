@@ -84,6 +84,8 @@ namespace ontology
 
     void Shader::render()
     {
+        this->prerender();
+
         // [re]bind `programID` shader.
         glUseProgram(this->programID);
 
@@ -91,6 +93,8 @@ namespace ontology
 
         // render this `Shader` by calling `render()` function of each `Material`.
         ontology::render_children<ontology::Material*>(this->material_pointer_vector);
+
+        this->postrender();
     }
 
     int32_t Shader::get_number_of_children()

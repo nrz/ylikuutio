@@ -107,6 +107,8 @@ namespace ontology
 
         if (this->should_ylikuutio_render_this_object)
         {
+            this->prerender();
+
             ontology::Shader* shader_pointer;
 
             if (this->is_character)
@@ -119,6 +121,8 @@ namespace ontology
                 shader_pointer = this->species_parent_pointer->parent_pointer->parent_pointer;
                 ontology::render_this_object<ontology::Species*>(this, shader_pointer);
             }
+
+            this->postrender();
         }
     }
 

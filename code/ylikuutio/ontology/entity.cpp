@@ -10,6 +10,8 @@ namespace ontology
     Entity::Entity()
     {
         // constructor.
+        this->prerender_callback = nullptr;
+        this->postrender_callback = nullptr;
     }
 
     Entity::~Entity()
@@ -25,6 +27,26 @@ namespace ontology
                 delete this->universe_pointer->entity_anyvalue_map[this->name];
                 this->universe_pointer->entity_anyvalue_map.erase(this->name);
             }
+        }
+    }
+
+    void Entity::prerender()
+    {
+        if (this->prerender_callback != nullptr &&
+                this->universe_pointer != nullptr &&
+                this->universe_pointer->setting_master_pointer != nullptr)
+        {
+            this->prerender_callback(this->universe_pointer, this->universe_pointer->setting_master_pointer);
+        }
+    }
+
+    void Entity::postrender()
+    {
+        if (this->postrender_callback != nullptr &&
+                this->universe_pointer != nullptr &&
+                this->universe_pointer->setting_master_pointer != nullptr)
+        {
+            this->postrender_callback(this->universe_pointer, this->universe_pointer->setting_master_pointer);
         }
     }
 }

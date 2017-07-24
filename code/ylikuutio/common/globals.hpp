@@ -99,6 +99,8 @@ typedef struct ConsoleStruct
 
 typedef datatypes::AnyValue* (*ActivateCallback) (ontology::Universe* universe, config::SettingMaster* setting_master);
 typedef datatypes::AnyValue* (*ReadCallback) (ontology::Universe* universe, config::SettingMaster* setting_master);
+typedef datatypes::AnyValue* (*PreRenderCallback) (ontology::Universe* universe, config::SettingMaster* setting_master);
+typedef datatypes::AnyValue* (*PostRenderCallback) (ontology::Universe* universe, config::SettingMaster* setting_master);
 
 typedef struct SettingStruct
 {
