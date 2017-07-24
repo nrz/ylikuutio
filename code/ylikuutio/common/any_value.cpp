@@ -114,7 +114,7 @@ namespace datatypes
         }
     }
 
-    std::string AnyValue::get_string()
+    std::string AnyValue::get_string() const
     {
         const uint32_t buffer_size = 128;
         char buffer[buffer_size];
@@ -205,7 +205,7 @@ namespace datatypes
         }
     }
 
-    ontology::Entity* AnyValue::get_entity_pointer()
+    ontology::Entity* AnyValue::get_entity_pointer() const
     {
         switch (this->type)
         {
@@ -232,7 +232,7 @@ namespace datatypes
         }
     }
 
-    bool AnyValue::set_value(const std::string value_string)
+    bool AnyValue::set_value(const std::string& value_string)
     {
         char* end;
 
@@ -693,7 +693,7 @@ namespace datatypes
         this->glm_vec3_pointer = original.glm_vec3_pointer;
     }
 
-    AnyValue::AnyValue(const std::string type, const std::string value_string)
+    AnyValue::AnyValue(const std::string& type, const std::string& value_string)
     {
         this->set_default_values();
 
@@ -832,7 +832,7 @@ namespace datatypes
         this->bool_value = bool_value;
     }
 
-    AnyValue::AnyValue(const std::string type, const bool bool_value)
+    AnyValue::AnyValue(const std::string& type, const bool bool_value)
     {
         // constructor.
         this->set_default_values();
@@ -852,7 +852,7 @@ namespace datatypes
         this->char_value = char_value;
     }
 
-    AnyValue::AnyValue(const std::string type, const char char_value)
+    AnyValue::AnyValue(const std::string& type, const char char_value)
     {
         // constructor.
         this->set_default_values();
@@ -872,7 +872,7 @@ namespace datatypes
         this->float_value = float_value;
     }
 
-    AnyValue::AnyValue(const std::string type, const float float_value)
+    AnyValue::AnyValue(const std::string& type, const float float_value)
     {
         // constructor.
         this->set_default_values();
@@ -892,7 +892,7 @@ namespace datatypes
         this->double_value = double_value;
     }
 
-    AnyValue::AnyValue(const std::string type, const double double_value)
+    AnyValue::AnyValue(const std::string& type, const double double_value)
     {
         // constructor.
         this->set_default_values();
@@ -912,7 +912,7 @@ namespace datatypes
         this->int32_t_value = int32_t_value;
     }
 
-    AnyValue::AnyValue(const std::string type, const int32_t int32_t_value)
+    AnyValue::AnyValue(const std::string& type, const int32_t int32_t_value)
     {
         // constructor.
         this->set_default_values();
@@ -932,7 +932,7 @@ namespace datatypes
         this->uint32_t_value = uint32_t_value;
     }
 
-    AnyValue::AnyValue(const std::string type, const uint32_t uint32_t_value)
+    AnyValue::AnyValue(const std::string& type, const uint32_t uint32_t_value)
     {
         // constructor.
         this->set_default_values();
@@ -952,7 +952,7 @@ namespace datatypes
         this->bool_pointer = bool_pointer;
     }
 
-    AnyValue::AnyValue(const std::string type, bool* const bool_pointer)
+    AnyValue::AnyValue(const std::string& type, bool* const bool_pointer)
     {
         // constructor.
         this->set_default_values();
@@ -972,7 +972,7 @@ namespace datatypes
         this->float_pointer = float_pointer;
     }
 
-    AnyValue::AnyValue(const std::string type, float* const float_pointer)
+    AnyValue::AnyValue(const std::string& type, float* const float_pointer)
     {
         // constructor.
         this->set_default_values();
@@ -992,7 +992,7 @@ namespace datatypes
         this->double_pointer = double_pointer;
     }
 
-    AnyValue::AnyValue(const std::string type, double* const double_pointer)
+    AnyValue::AnyValue(const std::string& type, double* const double_pointer)
     {
         // constructor.
         this->set_default_values();
@@ -1012,7 +1012,7 @@ namespace datatypes
         this->int32_t_pointer = int32_t_pointer;
     }
 
-    AnyValue::AnyValue(const std::string type, int32_t* const int32_t_pointer)
+    AnyValue::AnyValue(const std::string& type, int32_t* const int32_t_pointer)
     {
         // constructor.
         this->set_default_values();
@@ -1032,7 +1032,7 @@ namespace datatypes
         this->uint32_t_pointer = uint32_t_pointer;
     }
 
-    AnyValue::AnyValue(const std::string type, uint32_t* const uint32_t_pointer)
+    AnyValue::AnyValue(const std::string& type, uint32_t* const uint32_t_pointer)
     {
         // constructor.
         this->set_default_values();
@@ -1052,7 +1052,7 @@ namespace datatypes
         this->universe_pointer = universe_pointer;
     }
 
-    AnyValue::AnyValue(const std::string type, ontology::Universe* const universe_pointer)
+    AnyValue::AnyValue(const std::string& type, ontology::Universe* const universe_pointer)
     {
         // constructor.
         this->set_default_values();
@@ -1072,7 +1072,7 @@ namespace datatypes
         this->scene_pointer = scene_pointer;
     }
 
-    AnyValue::AnyValue(const std::string type, ontology::Scene* const scene_pointer)
+    AnyValue::AnyValue(const std::string& type, ontology::Scene* const scene_pointer)
     {
         // constructor.
         this->set_default_values();
@@ -1092,7 +1092,7 @@ namespace datatypes
         this->shader_pointer = shader_pointer;
     }
 
-    AnyValue::AnyValue(const std::string type, ontology::Shader* const shader_pointer)
+    AnyValue::AnyValue(const std::string& type, ontology::Shader* const shader_pointer)
     {
         // constructor.
         this->set_default_values();
@@ -1112,7 +1112,7 @@ namespace datatypes
         this->material_pointer = material_pointer;
     }
 
-    AnyValue::AnyValue(const std::string type, ontology::Material* const material_pointer)
+    AnyValue::AnyValue(const std::string& type, ontology::Material* const material_pointer)
     {
         // constructor.
         this->set_default_values();
@@ -1132,7 +1132,7 @@ namespace datatypes
         this->species_pointer = species_pointer;
     }
 
-    AnyValue::AnyValue(const std::string type, ontology::Species* const species_pointer)
+    AnyValue::AnyValue(const std::string& type, ontology::Species* const species_pointer)
     {
         // constructor.
         this->set_default_values();
@@ -1152,7 +1152,7 @@ namespace datatypes
         this->object_pointer = object_pointer;
     }
 
-    AnyValue::AnyValue(const std::string type, ontology::Object* const object_pointer)
+    AnyValue::AnyValue(const std::string& type, ontology::Object* const object_pointer)
     {
         // constructor.
         this->set_default_values();
@@ -1172,7 +1172,7 @@ namespace datatypes
         this->vector_font_pointer = vector_font_pointer;
     }
 
-    AnyValue::AnyValue(const std::string type, ontology::VectorFont* const vector_font_pointer)
+    AnyValue::AnyValue(const std::string& type, ontology::VectorFont* const vector_font_pointer)
     {
         // constructor.
         this->set_default_values();
@@ -1192,7 +1192,7 @@ namespace datatypes
         this->glyph_pointer = glyph_pointer;
     }
 
-    AnyValue::AnyValue(const std::string type, ontology::Glyph* const glyph_pointer)
+    AnyValue::AnyValue(const std::string& type, ontology::Glyph* const glyph_pointer)
     {
         // constructor.
         this->set_default_values();
@@ -1212,7 +1212,7 @@ namespace datatypes
         this->text3D_pointer = text3D_pointer;
     }
 
-    AnyValue::AnyValue(const std::string type, ontology::Text3D* const text3D_pointer)
+    AnyValue::AnyValue(const std::string& type, ontology::Text3D* const text3D_pointer)
     {
         // constructor.
         this->set_default_values();
@@ -1232,7 +1232,7 @@ namespace datatypes
         this->font2D_pointer = font2D_pointer;
     }
 
-    AnyValue::AnyValue(const std::string type, ontology::Font2D* const font2D_pointer)
+    AnyValue::AnyValue(const std::string& type, ontology::Font2D* const font2D_pointer)
     {
         // constructor.
         this->set_default_values();
@@ -1252,7 +1252,7 @@ namespace datatypes
         this->console_pointer = console_pointer;
     }
 
-    AnyValue::AnyValue(const std::string type, console::Console* const console_pointer)
+    AnyValue::AnyValue(const std::string& type, console::Console* const console_pointer)
     {
         // constructor.
         this->set_default_values();
@@ -1272,7 +1272,7 @@ namespace datatypes
         this->spherical_coordinates_struct_pointer = spherical_coordinates_struct_pointer;
     }
 
-    AnyValue::AnyValue(const std::string type, SphericalCoordinatesStruct* const spherical_coordinates_struct_pointer)
+    AnyValue::AnyValue(const std::string& type, SphericalCoordinatesStruct* const spherical_coordinates_struct_pointer)
     {
         // constructor.
         this->set_default_values();
@@ -1292,7 +1292,7 @@ namespace datatypes
         this->glm_vec3_pointer = glm_vec3_pointer;
     }
 
-    AnyValue::AnyValue(const std::string type, glm::vec3* const glm_vec3_pointer)
+    AnyValue::AnyValue(const std::string& type, glm::vec3* const glm_vec3_pointer)
     {
         // constructor.
         this->set_default_values();
