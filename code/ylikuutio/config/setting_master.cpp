@@ -787,7 +787,7 @@ namespace config
             return nullptr;
         }
 
-        datatypes::AnyValue* testing_spherical_world_in_use_any_value = setting_master_pointer->setting_pointer_map["x"]->setting_value;
+        datatypes::AnyValue* testing_spherical_world_in_use_any_value = setting_master_pointer->setting_pointer_map["testing_spherical_world_in_use"]->setting_value;
 
         if (testing_spherical_world_in_use_any_value == nullptr || testing_spherical_world_in_use_any_value->type != datatypes::BOOL)
         {
