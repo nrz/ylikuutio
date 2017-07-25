@@ -90,6 +90,9 @@ namespace config
             static datatypes::AnyValue* read_horizontal_angle(ontology::Universe* const universe, config::SettingMaster* const setting_master);
             static datatypes::AnyValue* read_vertical_angle(ontology::Universe* const universe, config::SettingMaster* const setting_master);
 
+            static datatypes::AnyValue* read_is_flight_mode_in_use(ontology::Universe* const universe, config::SettingMaster* const setting_master);
+            static datatypes::AnyValue* read_testing_spherical_world_in_use(ontology::Universe* const universe, config::SettingMaster* const setting_master);
+
             // Public callbacks end here.
 
             friend class Setting;

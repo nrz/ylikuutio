@@ -876,4 +876,24 @@ namespace config
 
         return new datatypes::AnyValue(universe->vertical_angle);
     }
+
+    datatypes::AnyValue* SettingMaster::read_is_flight_mode_in_use(ontology::Universe* const universe, config::SettingMaster* const setting_master)
+    {
+        if (universe == nullptr)
+        {
+            return nullptr;
+        }
+
+        return new datatypes::AnyValue(universe->is_flight_mode_in_use);
+    }
+
+    datatypes::AnyValue* SettingMaster::read_testing_spherical_world_in_use(ontology::Universe* const universe, config::SettingMaster* const setting_master)
+    {
+        if (universe == nullptr)
+        {
+            return nullptr;
+        }
+
+        return new datatypes::AnyValue(universe->testing_spherical_world_in_use);
+    }
 }
