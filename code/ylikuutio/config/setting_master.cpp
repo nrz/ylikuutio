@@ -758,7 +758,7 @@ namespace config
             return nullptr;
         }
 
-        datatypes::AnyValue* is_flight_mode_in_use_any_value = setting_master_pointer->setting_pointer_map["x"]->setting_value;
+        datatypes::AnyValue* is_flight_mode_in_use_any_value = setting_master_pointer->setting_pointer_map["is_flight_mode_in_use"]->setting_value;
 
         if (is_flight_mode_in_use_any_value == nullptr || is_flight_mode_in_use_any_value->type != datatypes::BOOL)
         {
