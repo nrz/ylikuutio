@@ -18,7 +18,7 @@ namespace ajokki
         is_flight_mode_in_use_setting_struct.should_ylikuutio_call_activate_callback_now = false;
         new config::Setting(is_flight_mode_in_use_setting_struct);
 
-        bool testing_spherical_world_in_use = true;
+        bool testing_spherical_world_in_use = false;
         datatypes::AnyValue* any_value_testing_spherical_world_in_use = new datatypes::AnyValue(testing_spherical_world_in_use);
         SettingStruct testing_spherical_world_in_use_setting_struct(any_value_testing_spherical_world_in_use);
         testing_spherical_world_in_use_setting_struct.name = "testing_spherical_world_in_use";
