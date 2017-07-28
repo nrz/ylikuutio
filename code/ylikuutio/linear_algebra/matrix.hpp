@@ -76,9 +76,9 @@ namespace linear_algebra
             float** array_of_arrays;
     };
 
-    Matrix operator+(const Matrix& lhs, const Matrix& rhs);
-    Matrix operator-(const Matrix& lhs, const Matrix& rhs);
-    Matrix operator*(const Matrix& lhs, const Matrix& rhs);
+    Matrix operator+(Matrix& lhs, Matrix& rhs);
+    Matrix operator-(Matrix& lhs, Matrix& rhs);
+    Matrix operator*(Matrix& lhs, Matrix& rhs);
 }
 
 #endif
