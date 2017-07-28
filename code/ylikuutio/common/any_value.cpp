@@ -114,7 +114,7 @@ namespace datatypes
         }
     }
 
-    std::string AnyValue::get_string()
+    std::string AnyValue::get_string() const
     {
         const uint32_t buffer_size = 128;
         char buffer[buffer_size];
@@ -205,7 +205,7 @@ namespace datatypes
         }
     }
 
-    ontology::Entity* AnyValue::get_entity_pointer()
+    ontology::Entity* AnyValue::get_entity_pointer() const
     {
         switch (this->type)
         {
@@ -232,7 +232,7 @@ namespace datatypes
         }
     }
 
-    bool AnyValue::set_value(const std::string value_string)
+    bool AnyValue::set_value(const std::string& value_string)
     {
         char* end;
 
@@ -242,12 +242,12 @@ namespace datatypes
                 return false;
             case (BOOL):
                 {
-                    if (strcmp(value_string.c_str(), "true")) // Ylikuutio is case sensitive!
+                    if (strcmp(value_string.c_str(), "true") == 0) // Ylikuutio is case sensitive!
                     {
                         this->bool_value = true;
                         return true;
                     }
-                    else if (strcmp(value_string.c_str(), "false")) // Ylikuutio is case sensitive!
+                    else if (strcmp(value_string.c_str(), "false") == 0) // Ylikuutio is case sensitive!
                     {
                         this->bool_value = false;
                         return true;
@@ -693,121 +693,121 @@ namespace datatypes
         this->glm_vec3_pointer = original.glm_vec3_pointer;
     }
 
-    AnyValue::AnyValue(const std::string type, const std::string value_string)
+    AnyValue::AnyValue(const std::string& type, const std::string& value_string)
     {
         this->set_default_values();
 
-        if (std::strcmp(type.c_str(), "bool"))
+        if (std::strcmp(type.c_str(), "bool") == 0)
         {
             this->type = datatypes::BOOL;
             this->set_value(value_string);
         }
-        else if (std::strcmp(type.c_str(), "char"))
+        else if (std::strcmp(type.c_str(), "char") == 0)
         {
             this->type = datatypes::CHAR;
             this->set_value(value_string);
         }
-        else if (std::strcmp(type.c_str(), "float"))
+        else if (std::strcmp(type.c_str(), "float") == 0)
         {
             this->type = datatypes::FLOAT;
             this->set_value(value_string);
         }
-        else if (std::strcmp(type.c_str(), "double"))
+        else if (std::strcmp(type.c_str(), "double") == 0)
         {
             this->type = datatypes::DOUBLE;
             this->set_value(value_string);
         }
-        else if (std::strcmp(type.c_str(), "int32_t"))
+        else if (std::strcmp(type.c_str(), "int32_t") == 0)
         {
             this->type = datatypes::INT32_T;
             this->set_value(value_string);
         }
-        else if (std::strcmp(type.c_str(), "uint32_t"))
+        else if (std::strcmp(type.c_str(), "uint32_t") == 0)
         {
             this->type = datatypes::UINT32_T;
             this->set_value(value_string);
         }
-        else if (std::strcmp(type.c_str(), "bool*"))
+        else if (std::strcmp(type.c_str(), "bool*") == 0)
         {
             this->type = datatypes::BOOL_POINTER;
             this->set_value(value_string);
         }
-        else if (std::strcmp(type.c_str(), "float*"))
+        else if (std::strcmp(type.c_str(), "float*") == 0)
         {
             this->type = datatypes::FLOAT_POINTER;
             this->set_value(value_string);
         }
-        else if (std::strcmp(type.c_str(), "double*"))
+        else if (std::strcmp(type.c_str(), "double*") == 0)
         {
             this->type = datatypes::FLOAT_POINTER;
             this->set_value(value_string);
         }
-        else if (std::strcmp(type.c_str(), "int32_t*"))
+        else if (std::strcmp(type.c_str(), "int32_t*") == 0)
         {
             this->type = datatypes::INT32_T_POINTER;
             this->set_value(value_string);
         }
-        else if (std::strcmp(type.c_str(), "uint32_t*"))
+        else if (std::strcmp(type.c_str(), "uint32_t*") == 0)
         {
             this->type = datatypes::UINT32_T_POINTER;
             this->set_value(value_string);
         }
-        else if (std::strcmp(type.c_str(), "ontology::Universe*"))
+        else if (std::strcmp(type.c_str(), "ontology::Universe*") == 0)
         {
             this->type = datatypes::UNIVERSE_POINTER;
             this->set_value(value_string);
         }
-        else if (std::strcmp(type.c_str(), "ontology::Scene*"))
+        else if (std::strcmp(type.c_str(), "ontology::Scene*") == 0)
         {
             this->type = datatypes::SCENE_POINTER;
             this->set_value(value_string);
         }
-        else if (std::strcmp(type.c_str(), "ontology::Shader*"))
+        else if (std::strcmp(type.c_str(), "ontology::Shader*") == 0)
         {
             this->type = datatypes::SHADER_POINTER;
             this->set_value(value_string);
         }
-        else if (std::strcmp(type.c_str(), "ontology::Material*"))
+        else if (std::strcmp(type.c_str(), "ontology::Material*") == 0)
         {
             this->type = datatypes::MATERIAL_POINTER;
             this->set_value(value_string);
         }
-        else if (std::strcmp(type.c_str(), "ontology::Species*"))
+        else if (std::strcmp(type.c_str(), "ontology::Species*") == 0)
         {
             this->type = datatypes::SPECIES_POINTER;
             this->set_value(value_string);
         }
-        else if (std::strcmp(type.c_str(), "ontology::Object*"))
+        else if (std::strcmp(type.c_str(), "ontology::Object*") == 0)
         {
             this->type = datatypes::OBJECT_POINTER;
             this->set_value(value_string);
         }
-        else if (std::strcmp(type.c_str(), "ontology::VectorFont*"))
+        else if (std::strcmp(type.c_str(), "ontology::VectorFont*") == 0)
         {
             this->type = datatypes::VECTORFONT_POINTER;
             this->set_value(value_string);
         }
-        else if (std::strcmp(type.c_str(), "ontology::Glyph*"))
+        else if (std::strcmp(type.c_str(), "ontology::Glyph*") == 0)
         {
             this->type = datatypes::GLYPH_POINTER;
             this->set_value(value_string);
         }
-        else if (std::strcmp(type.c_str(), "ontology::Text3D*"))
+        else if (std::strcmp(type.c_str(), "ontology::Text3D*") == 0)
         {
             this->type = datatypes::TEXT3D_POINTER;
             this->set_value(value_string);
         }
-        else if (std::strcmp(type.c_str(), "ontology::Symbiosis*"))
+        else if (std::strcmp(type.c_str(), "ontology::Symbiosis*") == 0)
         {
             this->type = datatypes::SYMBIOSIS_POINTER;
             this->set_value(value_string);
         }
-        else if (std::strcmp(type.c_str(), "ontology::Text2D*"))
+        else if (std::strcmp(type.c_str(), "ontology::Text2D*") == 0)
         {
             this->type = datatypes::TEXT2D_POINTER;
             this->set_value(value_string);
         }
-        else if (std::strcmp(type.c_str(), "console::Console*"))
+        else if (std::strcmp(type.c_str(), "console::Console*") == 0)
         {
             this->type = datatypes::CONSOLE_POINTER;
             this->set_value(value_string);
@@ -832,12 +832,12 @@ namespace datatypes
         this->bool_value = bool_value;
     }
 
-    AnyValue::AnyValue(const std::string type, const bool bool_value)
+    AnyValue::AnyValue(const std::string& type, const bool bool_value)
     {
         // constructor.
         this->set_default_values();
 
-        if (std::strcmp(type.c_str(), "bool"))
+        if (std::strcmp(type.c_str(), "bool") == 0)
         {
             this->type = datatypes::BOOL;
             this->bool_value = bool_value;
@@ -852,12 +852,12 @@ namespace datatypes
         this->char_value = char_value;
     }
 
-    AnyValue::AnyValue(const std::string type, const char char_value)
+    AnyValue::AnyValue(const std::string& type, const char char_value)
     {
         // constructor.
         this->set_default_values();
 
-        if (std::strcmp(type.c_str(), "char"))
+        if (std::strcmp(type.c_str(), "char") == 0)
         {
             this->type = datatypes::CHAR;
             this->char_value = char_value;
@@ -872,12 +872,12 @@ namespace datatypes
         this->float_value = float_value;
     }
 
-    AnyValue::AnyValue(const std::string type, const float float_value)
+    AnyValue::AnyValue(const std::string& type, const float float_value)
     {
         // constructor.
         this->set_default_values();
 
-        if (std::strcmp(type.c_str(), "float"))
+        if (std::strcmp(type.c_str(), "float") == 0)
         {
             this->type = datatypes::FLOAT;
             this->float_value = float_value;
@@ -892,12 +892,12 @@ namespace datatypes
         this->double_value = double_value;
     }
 
-    AnyValue::AnyValue(const std::string type, const double double_value)
+    AnyValue::AnyValue(const std::string& type, const double double_value)
     {
         // constructor.
         this->set_default_values();
 
-        if (std::strcmp(type.c_str(), "double"))
+        if (std::strcmp(type.c_str(), "double") == 0)
         {
             this->type = datatypes::DOUBLE;
             this->double_value = double_value;
@@ -912,12 +912,12 @@ namespace datatypes
         this->int32_t_value = int32_t_value;
     }
 
-    AnyValue::AnyValue(const std::string type, const int32_t int32_t_value)
+    AnyValue::AnyValue(const std::string& type, const int32_t int32_t_value)
     {
         // constructor.
         this->set_default_values();
 
-        if (std::strcmp(type.c_str(), "int32_t"))
+        if (std::strcmp(type.c_str(), "int32_t") == 0)
         {
             this->type = datatypes::INT32_T;
             this->int32_t_value = int32_t_value;
@@ -932,12 +932,12 @@ namespace datatypes
         this->uint32_t_value = uint32_t_value;
     }
 
-    AnyValue::AnyValue(const std::string type, const uint32_t uint32_t_value)
+    AnyValue::AnyValue(const std::string& type, const uint32_t uint32_t_value)
     {
         // constructor.
         this->set_default_values();
 
-        if (std::strcmp(type.c_str(), "uint32_t"))
+        if (std::strcmp(type.c_str(), "uint32_t") == 0)
         {
             this->type = datatypes::UINT32_T;
             this->uint32_t_value = uint32_t_value;
@@ -952,12 +952,12 @@ namespace datatypes
         this->bool_pointer = bool_pointer;
     }
 
-    AnyValue::AnyValue(const std::string type, bool* const bool_pointer)
+    AnyValue::AnyValue(const std::string& type, bool* const bool_pointer)
     {
         // constructor.
         this->set_default_values();
 
-        if (std::strcmp(type.c_str(), "bool*"))
+        if (std::strcmp(type.c_str(), "bool*") == 0)
         {
             this->type = datatypes::BOOL_POINTER;
             this->bool_pointer = bool_pointer;
@@ -972,12 +972,12 @@ namespace datatypes
         this->float_pointer = float_pointer;
     }
 
-    AnyValue::AnyValue(const std::string type, float* const float_pointer)
+    AnyValue::AnyValue(const std::string& type, float* const float_pointer)
     {
         // constructor.
         this->set_default_values();
 
-        if (std::strcmp(type.c_str(), "float*"))
+        if (std::strcmp(type.c_str(), "float*") == 0)
         {
             this->type = datatypes::FLOAT_POINTER;
             this->float_pointer = float_pointer;
@@ -992,12 +992,12 @@ namespace datatypes
         this->double_pointer = double_pointer;
     }
 
-    AnyValue::AnyValue(const std::string type, double* const double_pointer)
+    AnyValue::AnyValue(const std::string& type, double* const double_pointer)
     {
         // constructor.
         this->set_default_values();
 
-        if (std::strcmp(type.c_str(), "double*"))
+        if (std::strcmp(type.c_str(), "double*") == 0)
         {
             this->type = datatypes::DOUBLE_POINTER;
             this->double_pointer = double_pointer;
@@ -1012,12 +1012,12 @@ namespace datatypes
         this->int32_t_pointer = int32_t_pointer;
     }
 
-    AnyValue::AnyValue(const std::string type, int32_t* const int32_t_pointer)
+    AnyValue::AnyValue(const std::string& type, int32_t* const int32_t_pointer)
     {
         // constructor.
         this->set_default_values();
 
-        if (std::strcmp(type.c_str(), "int32_t*"))
+        if (std::strcmp(type.c_str(), "int32_t*") == 0)
         {
             this->type = datatypes::INT32_T_POINTER;
             this->int32_t_pointer = int32_t_pointer;
@@ -1032,12 +1032,12 @@ namespace datatypes
         this->uint32_t_pointer = uint32_t_pointer;
     }
 
-    AnyValue::AnyValue(const std::string type, uint32_t* const uint32_t_pointer)
+    AnyValue::AnyValue(const std::string& type, uint32_t* const uint32_t_pointer)
     {
         // constructor.
         this->set_default_values();
 
-        if (std::strcmp(type.c_str(), "uint32_t*"))
+        if (std::strcmp(type.c_str(), "uint32_t*") == 0)
         {
             this->type = datatypes::UINT32_T_POINTER;
             this->uint32_t_pointer = uint32_t_pointer;
@@ -1052,12 +1052,12 @@ namespace datatypes
         this->universe_pointer = universe_pointer;
     }
 
-    AnyValue::AnyValue(const std::string type, ontology::Universe* const universe_pointer)
+    AnyValue::AnyValue(const std::string& type, ontology::Universe* const universe_pointer)
     {
         // constructor.
         this->set_default_values();
 
-        if (std::strcmp(type.c_str(), "ontology::Universe*"))
+        if (std::strcmp(type.c_str(), "ontology::Universe*") == 0)
         {
             this->type = datatypes::UNIVERSE_POINTER;
             this->universe_pointer = universe_pointer;
@@ -1072,12 +1072,12 @@ namespace datatypes
         this->scene_pointer = scene_pointer;
     }
 
-    AnyValue::AnyValue(const std::string type, ontology::Scene* const scene_pointer)
+    AnyValue::AnyValue(const std::string& type, ontology::Scene* const scene_pointer)
     {
         // constructor.
         this->set_default_values();
 
-        if (std::strcmp(type.c_str(), "ontology::Scene*"))
+        if (std::strcmp(type.c_str(), "ontology::Scene*") == 0)
         {
             this->type = datatypes::SCENE_POINTER;
             this->scene_pointer = scene_pointer;
@@ -1092,12 +1092,12 @@ namespace datatypes
         this->shader_pointer = shader_pointer;
     }
 
-    AnyValue::AnyValue(const std::string type, ontology::Shader* const shader_pointer)
+    AnyValue::AnyValue(const std::string& type, ontology::Shader* const shader_pointer)
     {
         // constructor.
         this->set_default_values();
 
-        if (std::strcmp(type.c_str(), "ontology::Shader*"))
+        if (std::strcmp(type.c_str(), "ontology::Shader*") == 0)
         {
             this->type = datatypes::SHADER_POINTER;
             this->shader_pointer = shader_pointer;
@@ -1112,12 +1112,12 @@ namespace datatypes
         this->material_pointer = material_pointer;
     }
 
-    AnyValue::AnyValue(const std::string type, ontology::Material* const material_pointer)
+    AnyValue::AnyValue(const std::string& type, ontology::Material* const material_pointer)
     {
         // constructor.
         this->set_default_values();
 
-        if (std::strcmp(type.c_str(), "ontology::Material*"))
+        if (std::strcmp(type.c_str(), "ontology::Material*") == 0)
         {
             this->type = datatypes::MATERIAL_POINTER;
             this->material_pointer = material_pointer;
@@ -1132,12 +1132,12 @@ namespace datatypes
         this->species_pointer = species_pointer;
     }
 
-    AnyValue::AnyValue(const std::string type, ontology::Species* const species_pointer)
+    AnyValue::AnyValue(const std::string& type, ontology::Species* const species_pointer)
     {
         // constructor.
         this->set_default_values();
 
-        if (std::strcmp(type.c_str(), "ontology::Species*"))
+        if (std::strcmp(type.c_str(), "ontology::Species*") == 0)
         {
             this->type = datatypes::SPECIES_POINTER;
             this->species_pointer = species_pointer;
@@ -1152,12 +1152,12 @@ namespace datatypes
         this->object_pointer = object_pointer;
     }
 
-    AnyValue::AnyValue(const std::string type, ontology::Object* const object_pointer)
+    AnyValue::AnyValue(const std::string& type, ontology::Object* const object_pointer)
     {
         // constructor.
         this->set_default_values();
 
-        if (std::strcmp(type.c_str(), "ontology::Object*"))
+        if (std::strcmp(type.c_str(), "ontology::Object*") == 0)
         {
             this->type = datatypes::OBJECT_POINTER;
             this->object_pointer = object_pointer;
@@ -1172,12 +1172,12 @@ namespace datatypes
         this->vector_font_pointer = vector_font_pointer;
     }
 
-    AnyValue::AnyValue(const std::string type, ontology::VectorFont* const vector_font_pointer)
+    AnyValue::AnyValue(const std::string& type, ontology::VectorFont* const vector_font_pointer)
     {
         // constructor.
         this->set_default_values();
 
-        if (std::strcmp(type.c_str(), "ontology::Vectorfont*"))
+        if (std::strcmp(type.c_str(), "ontology::Vectorfont*") == 0)
         {
             this->type = datatypes::VECTORFONT_POINTER;
             this->vector_font_pointer = vector_font_pointer;
@@ -1192,12 +1192,12 @@ namespace datatypes
         this->glyph_pointer = glyph_pointer;
     }
 
-    AnyValue::AnyValue(const std::string type, ontology::Glyph* const glyph_pointer)
+    AnyValue::AnyValue(const std::string& type, ontology::Glyph* const glyph_pointer)
     {
         // constructor.
         this->set_default_values();
 
-        if (std::strcmp(type.c_str(), "ontology::Glyph*"))
+        if (std::strcmp(type.c_str(), "ontology::Glyph*") == 0)
         {
             this->type = datatypes::GLYPH_POINTER;
             this->glyph_pointer = glyph_pointer;
@@ -1212,12 +1212,12 @@ namespace datatypes
         this->text3D_pointer = text3D_pointer;
     }
 
-    AnyValue::AnyValue(const std::string type, ontology::Text3D* const text3D_pointer)
+    AnyValue::AnyValue(const std::string& type, ontology::Text3D* const text3D_pointer)
     {
         // constructor.
         this->set_default_values();
 
-        if (std::strcmp(type.c_str(), "ontology::Text3D*"))
+        if (std::strcmp(type.c_str(), "ontology::Text3D*") == 0)
         {
             this->type = datatypes::TEXT3D_POINTER;
             this->text3D_pointer = text3D_pointer;
@@ -1232,12 +1232,12 @@ namespace datatypes
         this->font2D_pointer = font2D_pointer;
     }
 
-    AnyValue::AnyValue(const std::string type, ontology::Font2D* const font2D_pointer)
+    AnyValue::AnyValue(const std::string& type, ontology::Font2D* const font2D_pointer)
     {
         // constructor.
         this->set_default_values();
 
-        if (std::strcmp(type.c_str(), "ontology::Font2D*"))
+        if (std::strcmp(type.c_str(), "ontology::Font2D*") == 0)
         {
             this->type = datatypes::TEXT2D_POINTER;
             this->font2D_pointer = font2D_pointer;
@@ -1252,12 +1252,12 @@ namespace datatypes
         this->console_pointer = console_pointer;
     }
 
-    AnyValue::AnyValue(const std::string type, console::Console* const console_pointer)
+    AnyValue::AnyValue(const std::string& type, console::Console* const console_pointer)
     {
         // constructor.
         this->set_default_values();
 
-        if (std::strcmp(type.c_str(), "console::Console*"))
+        if (std::strcmp(type.c_str(), "console::Console*") == 0)
         {
             this->type = datatypes::CONSOLE_POINTER;
             this->console_pointer = console_pointer;
@@ -1272,12 +1272,12 @@ namespace datatypes
         this->spherical_coordinates_struct_pointer = spherical_coordinates_struct_pointer;
     }
 
-    AnyValue::AnyValue(const std::string type, SphericalCoordinatesStruct* const spherical_coordinates_struct_pointer)
+    AnyValue::AnyValue(const std::string& type, SphericalCoordinatesStruct* const spherical_coordinates_struct_pointer)
     {
         // constructor.
         this->set_default_values();
 
-        if (std::strcmp(type.c_str(), "SphericalCoordinatesStruct*"))
+        if (std::strcmp(type.c_str(), "SphericalCoordinatesStruct*") == 0)
         {
             this->type = datatypes::SPHERICAL_COORDINATES_STRUCT_POINTER;
             this->spherical_coordinates_struct_pointer = spherical_coordinates_struct_pointer;
@@ -1292,12 +1292,12 @@ namespace datatypes
         this->glm_vec3_pointer = glm_vec3_pointer;
     }
 
-    AnyValue::AnyValue(const std::string type, glm::vec3* const glm_vec3_pointer)
+    AnyValue::AnyValue(const std::string& type, glm::vec3* const glm_vec3_pointer)
     {
         // constructor.
         this->set_default_values();
 
-        if (std::strcmp(type.c_str(), "glm::vec3*"))
+        if (std::strcmp(type.c_str(), "glm::vec3*") == 0)
         {
             this->type = datatypes::GLM_VEC3_POINTER;
             this->glm_vec3_pointer = glm_vec3_pointer;

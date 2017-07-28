@@ -188,8 +188,12 @@ namespace ontology
 
     void Species::render()
     {
+        this->prerender();
+
         // render this `Species`.
         ontology::render_species_or_glyph<ontology::Species*>(this);
+
+        this->postrender();
     }
 
     void Species::set_object_pointer(const uint32_t childID, ontology::Object* const child_pointer)

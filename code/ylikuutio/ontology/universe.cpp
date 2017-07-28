@@ -121,13 +121,15 @@ namespace ontology
 
     void Universe::render()
     {
-        if (!this->compute_matrices_from_inputs())
+        this->prerender();
+
+        if (this->compute_matrices_from_inputs())
         {
-            return;
+            // render this `Universe` by calling `render()` function of the active `Scene`.
+            this->active_scene->render();
         }
 
-        // render this `Universe` by calling `render()` function of the active `Scene`.
-        this->active_scene->render();
+        this->postrender();
     }
 
     int32_t Universe::get_number_of_children()

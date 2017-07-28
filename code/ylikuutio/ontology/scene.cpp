@@ -93,8 +93,12 @@ namespace ontology
 
     void Scene::render()
     {
+        this->prerender();
+
         // render this `Scene` by calling `render()` function of each `Shader`.
         ontology::render_children<ontology::Shader*>(this->shader_pointer_vector);
+
+        this->postrender();
     }
 
     int32_t Scene::get_number_of_children()

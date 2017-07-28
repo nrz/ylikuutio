@@ -758,7 +758,7 @@ namespace config
             return nullptr;
         }
 
-        datatypes::AnyValue* is_flight_mode_in_use_any_value = setting_master_pointer->setting_pointer_map["x"]->setting_value;
+        datatypes::AnyValue* is_flight_mode_in_use_any_value = setting_master_pointer->setting_pointer_map["is_flight_mode_in_use"]->setting_value;
 
         if (is_flight_mode_in_use_any_value == nullptr || is_flight_mode_in_use_any_value->type != datatypes::BOOL)
         {
@@ -787,7 +787,7 @@ namespace config
             return nullptr;
         }
 
-        datatypes::AnyValue* testing_spherical_world_in_use_any_value = setting_master_pointer->setting_pointer_map["x"]->setting_value;
+        datatypes::AnyValue* testing_spherical_world_in_use_any_value = setting_master_pointer->setting_pointer_map["testing_spherical_world_in_use"]->setting_value;
 
         if (testing_spherical_world_in_use_any_value == nullptr || testing_spherical_world_in_use_any_value->type != datatypes::BOOL)
         {
@@ -855,5 +855,45 @@ namespace config
         }
 
         return new datatypes::AnyValue(universe->spherical_coordinates->phi);
+    }
+
+    datatypes::AnyValue* SettingMaster::read_horizontal_angle(ontology::Universe* const universe, config::SettingMaster* const setting_master)
+    {
+        if (universe == nullptr)
+        {
+            return nullptr;
+        }
+
+        return new datatypes::AnyValue(universe->horizontal_angle);
+    }
+
+    datatypes::AnyValue* SettingMaster::read_vertical_angle(ontology::Universe* const universe, config::SettingMaster* const setting_master)
+    {
+        if (universe == nullptr)
+        {
+            return nullptr;
+        }
+
+        return new datatypes::AnyValue(universe->vertical_angle);
+    }
+
+    datatypes::AnyValue* SettingMaster::read_is_flight_mode_in_use(ontology::Universe* const universe, config::SettingMaster* const setting_master)
+    {
+        if (universe == nullptr)
+        {
+            return nullptr;
+        }
+
+        return new datatypes::AnyValue(universe->is_flight_mode_in_use);
+    }
+
+    datatypes::AnyValue* SettingMaster::read_testing_spherical_world_in_use(ontology::Universe* const universe, config::SettingMaster* const setting_master)
+    {
+        if (universe == nullptr)
+        {
+            return nullptr;
+        }
+
+        return new datatypes::AnyValue(universe->testing_spherical_world_in_use);
     }
 }

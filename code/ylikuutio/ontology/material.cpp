@@ -105,6 +105,8 @@ namespace ontology
 
     void Material::render()
     {
+        this->prerender();
+
         // Bind our texture in Texture Unit 0.
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, this->texture);
@@ -115,6 +117,8 @@ namespace ontology
         ontology::render_children<ontology::Species*>(this->species_pointer_vector);
         ontology::render_children<ontology::VectorFont*>(this->vector_font_pointer_vector);
         ontology::render_children<space_partition::ChunkMaster*>(this->chunk_master_pointer_vector);
+
+        this->postrender();
     }
 
     int32_t Material::get_number_of_children()

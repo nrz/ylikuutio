@@ -144,8 +144,12 @@ namespace ontology
 
     void VectorFont::render()
     {
+        this->prerender();
+
         // render this `VectorFont` by calling `render()` function of each `Glyph`.
         ontology::render_children<ontology::Glyph*>(this->glyph_pointer_vector);
+
+        this->postrender();
     }
 
     int32_t VectorFont::get_number_of_children()

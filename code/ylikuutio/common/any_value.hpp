@@ -72,14 +72,14 @@ namespace datatypes
     {
         public:
             std::string get_datatype();
-            std::string get_string();
-            ontology::Entity* get_entity_pointer();
-            bool set_value(const std::string value_string);
+            std::string get_string() const;
+            ontology::Entity* get_entity_pointer() const;
+            bool set_value(const std::string& value_string);
 
             // copy constructor.
             AnyValue(const datatypes::AnyValue& original);
 
-            AnyValue(const std::string type, const std::string value_string);
+            AnyValue(const std::string& type, const std::string& value_string);
             AnyValue();
             AnyValue(const bool bool_value);
             AnyValue(const char char_value);
@@ -107,31 +107,31 @@ namespace datatypes
             AnyValue(SphericalCoordinatesStruct* const spherical_coordinates_struct_pointer);
             AnyValue(glm::vec3* const glm_vec3_pointer);
 
-            AnyValue(const std::string type, const bool bool_value);
-            AnyValue(const std::string type, const char char_value);
-            AnyValue(const std::string type, const float float_value);
-            AnyValue(const std::string type, const double double_value);
-            AnyValue(const std::string type, const int32_t int32_t_value);
-            AnyValue(const std::string type, const uint32_t uint32_t_value);
-            AnyValue(const std::string type, bool* const bool_pointer);
-            AnyValue(const std::string type, float* const float_pointer);
-            AnyValue(const std::string type, double* const double_pointer);
-            AnyValue(const std::string type, int32_t* const int32_t_pointer);
-            AnyValue(const std::string type, uint32_t* const uint32_t_pointer);
-            AnyValue(const std::string type, ontology::Universe* const universe_pointer);
-            AnyValue(const std::string type, ontology::Scene* const scene_pointer);
-            AnyValue(const std::string type, ontology::Shader* const shader_pointer);
-            AnyValue(const std::string type, ontology::Material* const material_pointer);
-            AnyValue(const std::string type, ontology::Species* const species_pointer);
-            AnyValue(const std::string type, ontology::Object* const object_pointer);
-            AnyValue(const std::string type, ontology::VectorFont* const vector_font_pointer);
-            AnyValue(const std::string type, ontology::Glyph* const glyph_pointer);
-            AnyValue(const std::string type, ontology::Text3D* const text3D_pointer);
-            AnyValue(const std::string type, ontology::Symbiosis* const symbiosis_pointer);
-            AnyValue(const std::string type, ontology::Font2D* const font2D_pointer);
-            AnyValue(const std::string type, console::Console* const console_pointer);
-            AnyValue(const std::string type, SphericalCoordinatesStruct* const spherical_coordinates_struct_pointer);
-            AnyValue(const std::string type, glm::vec3* const glm_vec3_pointer);
+            AnyValue(const std::string& type, const bool bool_value);
+            AnyValue(const std::string& type, const char char_value);
+            AnyValue(const std::string& type, const float float_value);
+            AnyValue(const std::string& type, const double double_value);
+            AnyValue(const std::string& type, const int32_t int32_t_value);
+            AnyValue(const std::string& type, const uint32_t uint32_t_value);
+            AnyValue(const std::string& type, bool* const bool_pointer);
+            AnyValue(const std::string& type, float* const float_pointer);
+            AnyValue(const std::string& type, double* const double_pointer);
+            AnyValue(const std::string& type, int32_t* const int32_t_pointer);
+            AnyValue(const std::string& type, uint32_t* const uint32_t_pointer);
+            AnyValue(const std::string& type, ontology::Universe* const universe_pointer);
+            AnyValue(const std::string& type, ontology::Scene* const scene_pointer);
+            AnyValue(const std::string& type, ontology::Shader* const shader_pointer);
+            AnyValue(const std::string& type, ontology::Material* const material_pointer);
+            AnyValue(const std::string& type, ontology::Species* const species_pointer);
+            AnyValue(const std::string& type, ontology::Object* const object_pointer);
+            AnyValue(const std::string& type, ontology::VectorFont* const vector_font_pointer);
+            AnyValue(const std::string& type, ontology::Glyph* const glyph_pointer);
+            AnyValue(const std::string& type, ontology::Text3D* const text3D_pointer);
+            AnyValue(const std::string& type, ontology::Symbiosis* const symbiosis_pointer);
+            AnyValue(const std::string& type, ontology::Font2D* const font2D_pointer);
+            AnyValue(const std::string& type, console::Console* const console_pointer);
+            AnyValue(const std::string& type, SphericalCoordinatesStruct* const spherical_coordinates_struct_pointer);
+            AnyValue(const std::string& type, glm::vec3* const glm_vec3_pointer);
 
             int type;
             bool bool_value;

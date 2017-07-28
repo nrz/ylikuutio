@@ -10,12 +10,13 @@ Ylikuution kehityksen kannalta välttämättömiä työvaiheita:
 [ ] Lisää muuttuja `direction`.
 [ ] Lisää muuttuja `right`.
 [ ] Lisää muuttuja `up`.
-[ ] Lisää muuttuja `horizontal_angle`.
-[ ] Lisää muuttuja `vertical_angle`.
+[ ] Ota käyttöön TinySpline.
 [ ] Lisää bicubic-interpolointi.
+[ ] Lisää spline-interpolointi.
 [ ] Lisää muuttuja `triangulation`: `set triangulation bilinear` / `set triangulation bicubic` / `set triangulation southwest_northeast` / `set triangulation southeast_northwest`.
 [ ] Koodaa taustalla toimiva skenejen (`Scene`) lataus.
 [ ] Lisää konsoliin objektien listauskomento `objects`.
+[ ] Lisää entiteettikohtaiset pre- ja post-render-takaisinkutsut `prerender_callback ja `postrender_callback`.
 [ ] Luo graafi maailman vertekseistä ja särmistä.
 [ ] Lisää ray castingiä käyttävä toiminto verteksien valitsemiseen ja muokkaamiseen.
 [ ] Lisää verteksien muokkaaminen.
@@ -46,3 +47,5 @@ Valmiit:
 [x] Lisää mahdollisuus nimetä entiteettihierarkian minkä tahansa tason olioita.
 [x] Koodaa konsoliin tekstin vieritys kun 'ikkuna' tulee täyteen.
 [x] Lisää konsoliin infokomento `info` (kertoo entiteeteistä, esim. objekteista verteksien lukumäärän ym. tietoja).
+[x] Lisää muuttuja `horizontal_angle`.
+[x] Lisää muuttuja `vertical_angle`.
