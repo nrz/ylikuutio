@@ -12,7 +12,7 @@ namespace loaders
             const std::string image_path,
             int32_t& image_width,
             int32_t& image_height,
-            uint32_t& image_size)
+            int32_t& image_size)
     {
         std::cout << "Loading BMP file " << image_path << " ...\n";
 
@@ -69,7 +69,7 @@ namespace loaders
         }
 
         // Read the information about the image
-        image_size = *(uint32_t*) &header[0x22];
+        image_size = static_cast<int32_t>(*(uint32_t*) &header[0x22]);
         image_width = *(int32_t*) &header[0x12];
         image_height = *(int32_t*) &header[0x16];
 

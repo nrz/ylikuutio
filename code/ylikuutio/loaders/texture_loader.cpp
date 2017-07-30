@@ -27,7 +27,7 @@ namespace loaders
     {
         int32_t image_width;
         int32_t image_height;
-        uint32_t image_size;
+        int32_t image_size;
 
         uint32_t x_step = 1;
         uint32_t z_step = 1;
