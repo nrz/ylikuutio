@@ -38,7 +38,6 @@ namespace ontology
             std::string font_texture_file_format)
     {
         // constructor.
-        const char* texturePath = texture_filename.c_str();
         const char* char_font_texture_file_format = font_texture_file_format.c_str();
 
         // Initialize texture

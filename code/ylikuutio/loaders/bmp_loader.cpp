@@ -73,11 +73,6 @@ namespace loaders
         image_width = *(int32_t*) &header[0x12];
         image_height = *(int32_t*) &header[0x16];
 
-        // Define world size.
-        uint32_t world_size = image_width * image_height;
-
-        uint32_t line_size_in_bytes = image_size / image_height;
-
         std::cout << "image size is " << image_size << " bytes.\n";
 
         // Some BMP files are misformatted, guess missing information

@@ -182,8 +182,6 @@ namespace console
     {
         // This function is to be called from console command callbacks to print text on console.
         // Please note that it is not necessary to be in console to be able to print in console.
-        const char* text_char = text.c_str();
-
         int32_t characters_for_line = this->universe_pointer->get_window_width() / this->universe_pointer->get_text_size();
 
         std::list<char> text_char_list;
