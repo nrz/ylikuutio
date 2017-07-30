@@ -92,7 +92,7 @@ Eg. with aptitude:
 
 If you are doing a cross compile from Linux to Windows, you need also:
 
-    $ sudo aptitude install gcc-mingw-w64 gcc-multilib
+    $ sudo aptitude install g++-mingw-w64 gcc-mingw-w64 binutils-mingw-w64
 
 Then, to compile with GCC, in Ylikuutio install directory:
 
@@ -161,7 +161,7 @@ A: In Finnish, "yli" means "over", and "kuutio" means "cube".
    https://en.wikipedia.org/wiki/Hypercube
 
 Q: How is Ylikuutio software developed?
-A: In Debian GNU/Linux (Debian Jessie at the moment), using Vim.
+A: In Debian GNU/Linux (Debian Stretch at the moment), using Vim.
 
 Q: For what kinds of software Ylikuutio can be used?
 A: Ylikuutio can be used for all kinds of 3D games and simulations.
