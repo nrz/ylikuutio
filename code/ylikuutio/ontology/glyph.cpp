@@ -53,6 +53,11 @@ namespace ontology
                 this->UVs,
                 this->normals);
 
+        if (!triangulating_result)
+        {
+            std::cerr << "triangulation failed!\n";
+        }
+
         // Get a handle for our buffers.
         this->vertexPosition_modelspaceID = glGetAttribLocation(this->parent_pointer->parent_pointer->parent_pointer->programID, "vertexPosition_modelspace");
         this->vertexUVID = glGetAttribLocation(this->parent_pointer->parent_pointer->parent_pointer->programID, "vertexUV");
