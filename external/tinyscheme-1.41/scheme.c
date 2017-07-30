@@ -86,7 +86,7 @@ static int stricmp(const char *s1, const char *s2)
 #endif /* __APPLE__ */
 
 #if USE_STRLWR
-static const char *strlwr(char *s) {
+static const char *tinyscheme_strlwr(char *s) {
   const char *p=s;
   while(*s) {
     *s=tolower(*s);
@@ -1084,7 +1084,7 @@ static pointer mk_atom(scheme *sc, char *q) {
                               cons(sc,
                                    sc->QUOTE,
                                    cons(sc, mk_atom(sc,p+2), sc->NIL)),
-                              cons(sc, mk_symbol(sc,strlwr(q)), sc->NIL)));
+                              cons(sc, mk_symbol(sc,tinyscheme_strlwr(q)), sc->NIL)));
      }
 #endif
 
@@ -1097,16 +1097,16 @@ static pointer mk_atom(scheme *sc, char *q) {
          c = *p++;
        }
        if (!isdigit(c)) {
-         return (mk_symbol(sc, strlwr(q)));
+         return (mk_symbol(sc, tinyscheme_strlwr(q)));
        }
      } else if (c == '.') {
        has_dec_point=1;
        c = *p++;
        if (!isdigit(c)) {
-         return (mk_symbol(sc, strlwr(q)));
+         return (mk_symbol(sc, tinyscheme_strlwr(q)));
        }
      } else if (!isdigit(c)) {
-       return (mk_symbol(sc, strlwr(q)));
+       return (mk_symbol(sc, tinyscheme_strlwr(q)));
      }
 
      for ( ; (c = *p) != 0; ++p) {
@@ -1127,7 +1127,7 @@ static pointer mk_atom(scheme *sc, char *q) {
                           }
                        }
                }
-               return (mk_symbol(sc, strlwr(q)));
+               return (mk_symbol(sc, tinyscheme_strlwr(q)));
           }
      }
      if(has_dec_point) {
