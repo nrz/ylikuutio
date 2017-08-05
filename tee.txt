@@ -3,6 +3,8 @@ Listaa tähän keskeneräiset asiat kiireellisyysjärjestyksessä kiireellisimm�
 
 Ylikuution kehityksen kannalta välttämättömiä työvaiheita:
 [ ] Lisää konsoliin skenejen (`Scene`) latauskomento `load`.
+[ ] Siirrä pääsilmukka pois `main`-funktiosta ja Ajokista Ylikuution `ontology::Universe`-luokkaan.
+[ ] Ota käyttöön GLFM-kirjasto, ainoastaan Android-käännöksiä varten. https://github.com/brackeen/glfm
 [ ] Lisää muuttuja `wireframe`: `set wireframe on` / `set wireframe off`.
 [ ] Lisää muuttuja `window_width`.
 [ ] Lisää muuttuja `window_height`.
