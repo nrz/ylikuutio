@@ -21,13 +21,6 @@ set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
 set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
 set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
 
-# https://cmake.org/Bug/view.php?id=9985
-# set(CMAKE_SHARED_LIBRARY_LINK_C_FLAGS "")
-# set(CMAKE_SHARED_LIBRARY_LINK_CXX_FLAGS "")
-
-# http://stackoverflow.com/questions/17721619/cmake-cross-compile-libraries-are-not-found
-# set(CMAKE_LIBRARY_PATH ../cross-tools/include/)
-
 set(CMAKE_CXX_FLAGS "-std=c++11 -static-libgcc -static-libstdc++ -static -O3 -s")
 set(CMAKE_C_FLAGS "-static-libgcc -static-libstdc++ -static -O3 -s")
 set(CMAKE_SHARED_LIBRARY_LINK_C_FLAGS "-static-libgcc -static-libstdc++ -static -O3 -s")
