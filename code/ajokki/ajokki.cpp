@@ -1140,20 +1140,6 @@ int main(void)
     }
     delete action_mode_keypress_callback_engines;
 
-    // Delete all console keyrelease callback engines.
-    for (uint32_t i = 0; i < console_keyrelease_callback_engines->size(); i++)
-    {
-        delete console_keyrelease_callback_engines->at(i).callback_engine;
-    }
-    delete console_keyrelease_callback_engines;
-
-    // Delete all console keypress callback engines.
-    for (uint32_t i = 0; i < console_keypress_callback_engines->size(); i++)
-    {
-        delete console_keypress_callback_engines->at(i).callback_engine;
-    }
-    delete console_keypress_callback_engines;
-
     delete cleanup_callback_engine;
     delete my_console;
 
