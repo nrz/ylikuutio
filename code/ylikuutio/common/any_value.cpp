@@ -201,16 +201,30 @@ namespace datatypes
                 std::snprintf(buffer, sizeof(buffer), "%llx", static_cast<void*>(this->console_pointer));
                 return std::string(buffer);
             case (SPHERICAL_COORDINATES_STRUCT_POINTER):
-                std::snprintf(buffer, sizeof(buffer), "{ %f, %f, %f }",
-                        this->spherical_coordinates_struct_pointer->rho,
-                        this->spherical_coordinates_struct_pointer->theta,
-                        this->spherical_coordinates_struct_pointer->phi);
+                if (this->spherical_coordinates_struct_pointer == nullptr)
+                {
+                    std::snprintf(buffer, sizeof(buffer), "nullptr");
+                }
+                else
+                {
+                    std::snprintf(buffer, sizeof(buffer), "{ %f, %f, %f }",
+                            this->spherical_coordinates_struct_pointer->rho,
+                            this->spherical_coordinates_struct_pointer->theta,
+                            this->spherical_coordinates_struct_pointer->phi);
+                }
                 return std::string(buffer);
             case (GLM_VEC3_POINTER):
-                std::snprintf(buffer, sizeof(buffer), "{ %f, %f, %f }",
-                        this->glm_vec3_pointer->x,
-                        this->glm_vec3_pointer->y,
-                        this->glm_vec3_pointer->z);
+                if (this->glm_vec3_pointer == nullptr)
+                {
+                    std::snprintf(buffer, sizeof(buffer), "nullptr");
+                }
+                else
+                {
+                    std::snprintf(buffer, sizeof(buffer), "{ %f, %f, %f }",
+                            this->glm_vec3_pointer->x,
+                            this->glm_vec3_pointer->y,
+                            this->glm_vec3_pointer->z);
+                }
                 return std::string(buffer);
             default:
                 return "TODO: define string for this datatype!";
