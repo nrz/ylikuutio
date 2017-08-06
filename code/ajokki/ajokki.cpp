@@ -364,17 +364,17 @@ int main(void)
     new ontology::Text3D(text3D_struct);
 
     // keypress callbacks.
-    std::vector<KeyAndCallbackStruct> action_mode_keypress_callback_engines;
+    std::vector<KeyAndCallbackStruct>* action_mode_keypress_callback_engines = new std::vector<KeyAndCallbackStruct>();
 
     // This vector points to current keypress callback engines vector.
-    std::vector<KeyAndCallbackStruct>* current_keypress_callback_engine_vector_pointer;
+    std::vector<KeyAndCallbackStruct>** current_keypress_callback_engine_vector_pointer;
     current_keypress_callback_engine_vector_pointer = &action_mode_keypress_callback_engines;
 
     // keyrelease callbacks.
-    std::vector<KeyAndCallbackStruct> action_mode_keyrelease_callback_engines;
+    std::vector<KeyAndCallbackStruct>* action_mode_keyrelease_callback_engines = new std::vector<KeyAndCallbackStruct>();
 
     // This vector points to current keyrelease callback engines vector.
-    std::vector<KeyAndCallbackStruct>* current_keyrelease_callback_engine_vector_pointer;
+    std::vector<KeyAndCallbackStruct>** current_keyrelease_callback_engine_vector_pointer;
     current_keyrelease_callback_engine_vector_pointer = &action_mode_keyrelease_callback_engines;
 
     // Initialize our little text library with the Holstein font
@@ -385,8 +385,8 @@ int main(void)
     std::unordered_map<std::string, ConsoleCommandCallback> command_callback_map;
 
     ConsoleStruct console_struct;
-    console_struct.current_keypress_callback_engine_vector_pointer_pointer = &current_keypress_callback_engine_vector_pointer;
-    console_struct.current_keyrelease_callback_engine_vector_pointer_pointer = &current_keyrelease_callback_engine_vector_pointer;
+    console_struct.current_keypress_callback_engine_vector_pointer_pointer = &*current_keypress_callback_engine_vector_pointer;
+    console_struct.current_keyrelease_callback_engine_vector_pointer_pointer = &*current_keyrelease_callback_engine_vector_pointer;
     console_struct.command_callback_map_pointer = &command_callback_map;
     console_struct.universe_pointer = my_universe;
     console_struct.font2D_pointer = my_font2D;
@@ -725,75 +725,75 @@ int main(void)
 
     // Keyrelease callbacks for action mode.
     // Key releases are checked in the order of this struct.
-    action_mode_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_GRAVE_ACCENT, enable_enter_console_callback_engine });
-    action_mode_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_LEFT_CONTROL, release_first_turbo_callback_engine });
-    action_mode_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_RIGHT_CONTROL, release_second_turbo_callback_engine });
-    action_mode_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_I, enable_toggle_invert_mouse_callback_engine });
-    action_mode_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_F, enable_toggle_flight_mode_callback_engine });
-    action_mode_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_F1, enable_toggle_help_mode_callback_engine });
+    action_mode_keyrelease_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_GRAVE_ACCENT, enable_enter_console_callback_engine });
+    action_mode_keyrelease_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_LEFT_CONTROL, release_first_turbo_callback_engine });
+    action_mode_keyrelease_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_RIGHT_CONTROL, release_second_turbo_callback_engine });
+    action_mode_keyrelease_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_I, enable_toggle_invert_mouse_callback_engine });
+    action_mode_keyrelease_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_F, enable_toggle_flight_mode_callback_engine });
+    action_mode_keyrelease_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_F1, enable_toggle_help_mode_callback_engine });
 
     // Keypress callbacks for action mode.
     // Keypresses are checked in the order of this struct.
-    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_GRAVE_ACCENT, enter_console_callback_engine });
-    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_ESCAPE, exit_program_callback_engine });
-    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_LEFT_CONTROL, first_turbo_callback_engine });
-    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_RIGHT_CONTROL, second_turbo_callback_engine });
-    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_UP, move_forward_callback_engine });
-    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_DOWN, move_backward_callback_engine });
-    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_LEFT, strafe_left_callback_engine });
-    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_RIGHT, strafe_right_callback_engine });
-    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_SPACE, ascent_callback_engine });
-    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_ENTER, descent_callback_engine });
-    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_I, toggle_invert_mouse_callback_engine });
-    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_F, toggle_flight_mode_callback_engine });
-    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_F1, toggle_help_mode_callback_engine });
-    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_D, delete_suzanne_species_callback_engine });
-    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_G, switch_to_grass_material_callback_engine });
-    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_U, switch_to_uvmap_material_callback_engine });
-    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_T, transform_into_terrain_callback_engine });
-    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_A, transform_into_monkey_callback_engine });
+    action_mode_keypress_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_GRAVE_ACCENT, enter_console_callback_engine });
+    action_mode_keypress_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_ESCAPE, exit_program_callback_engine });
+    action_mode_keypress_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_LEFT_CONTROL, first_turbo_callback_engine });
+    action_mode_keypress_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_RIGHT_CONTROL, second_turbo_callback_engine });
+    action_mode_keypress_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_UP, move_forward_callback_engine });
+    action_mode_keypress_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_DOWN, move_backward_callback_engine });
+    action_mode_keypress_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_LEFT, strafe_left_callback_engine });
+    action_mode_keypress_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_RIGHT, strafe_right_callback_engine });
+    action_mode_keypress_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_SPACE, ascent_callback_engine });
+    action_mode_keypress_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_ENTER, descent_callback_engine });
+    action_mode_keypress_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_I, toggle_invert_mouse_callback_engine });
+    action_mode_keypress_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_F, toggle_flight_mode_callback_engine });
+    action_mode_keypress_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_F1, toggle_help_mode_callback_engine });
+    action_mode_keypress_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_D, delete_suzanne_species_callback_engine });
+    action_mode_keypress_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_G, switch_to_grass_material_callback_engine });
+    action_mode_keypress_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_U, switch_to_uvmap_material_callback_engine });
+    action_mode_keypress_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_T, transform_into_terrain_callback_engine });
+    action_mode_keypress_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_A, transform_into_monkey_callback_engine });
 
     // Keyrelease callbacks for console.
     // Key releases are checked in the order of this struct.
-    std::vector<KeyAndCallbackStruct> console_keyrelease_callback_engines;
-    console_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_GRAVE_ACCENT, enable_exit_console_callback_engine });
-    console_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_LEFT_CONTROL, release_left_control_in_console_callback_engine });
-    console_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_RIGHT_CONTROL, release_right_control_in_console_callback_engine });
-    console_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_LEFT_ALT, release_left_alt_in_console_callback_engine });
-    console_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_RIGHT_ALT, release_right_alt_in_console_callback_engine });
-    console_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_LEFT_SHIFT, release_left_shift_in_console_callback_engine });
-    console_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_RIGHT_SHIFT, release_right_shift_in_console_callback_engine });
-    console_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_UP, enable_move_to_previous_input_callback_engine });
-    console_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_DOWN, enable_move_to_next_input_callback_engine });
-    console_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_BACKSPACE, enable_backspace_callback_engine });
-    console_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_ENTER, enable_enter_key_callback_engine });
-    console_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_C, enable_ctrl_c_callback_engine });
-    console_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_PAGE_UP, enable_page_up_callback_engine });
-    console_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_PAGE_DOWN, enable_page_down_callback_engine });
-    console_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_HOME, enable_home_callback_engine });
-    console_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_END, enable_end_callback_engine });
-    my_console->set_my_keyrelease_callback_engine_vector_pointer(&console_keyrelease_callback_engines);
+    std::vector<KeyAndCallbackStruct>* console_keyrelease_callback_engines = new std::vector<KeyAndCallbackStruct>();
+    console_keyrelease_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_GRAVE_ACCENT, enable_exit_console_callback_engine });
+    console_keyrelease_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_LEFT_CONTROL, release_left_control_in_console_callback_engine });
+    console_keyrelease_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_RIGHT_CONTROL, release_right_control_in_console_callback_engine });
+    console_keyrelease_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_LEFT_ALT, release_left_alt_in_console_callback_engine });
+    console_keyrelease_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_RIGHT_ALT, release_right_alt_in_console_callback_engine });
+    console_keyrelease_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_LEFT_SHIFT, release_left_shift_in_console_callback_engine });
+    console_keyrelease_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_RIGHT_SHIFT, release_right_shift_in_console_callback_engine });
+    console_keyrelease_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_UP, enable_move_to_previous_input_callback_engine });
+    console_keyrelease_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_DOWN, enable_move_to_next_input_callback_engine });
+    console_keyrelease_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_BACKSPACE, enable_backspace_callback_engine });
+    console_keyrelease_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_ENTER, enable_enter_key_callback_engine });
+    console_keyrelease_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_C, enable_ctrl_c_callback_engine });
+    console_keyrelease_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_PAGE_UP, enable_page_up_callback_engine });
+    console_keyrelease_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_PAGE_DOWN, enable_page_down_callback_engine });
+    console_keyrelease_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_HOME, enable_home_callback_engine });
+    console_keyrelease_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_END, enable_end_callback_engine });
+    my_console->set_my_keyrelease_callback_engine_vector_pointer(&*console_keyrelease_callback_engines);
 
     // Keypress callbacks for console.
     // Keypresses are checked in the order of this struct.
-    std::vector<KeyAndCallbackStruct> console_keypress_callback_engines;
-    console_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_GRAVE_ACCENT, exit_console_callback_engine });
-    console_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_LEFT_CONTROL, press_left_control_in_console_callback_engine });
-    console_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_RIGHT_CONTROL, press_right_control_in_console_callback_engine });
-    console_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_LEFT_ALT, press_left_alt_in_console_callback_engine });
-    console_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_RIGHT_ALT, press_right_alt_in_console_callback_engine });
-    console_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_LEFT_SHIFT, press_left_shift_in_console_callback_engine });
-    console_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_RIGHT_SHIFT, press_right_shift_in_console_callback_engine });
-    console_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_UP, move_to_previous_input_callback_engine });
-    console_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_DOWN, move_to_next_input_callback_engine });
-    console_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_BACKSPACE, backspace_callback_engine });
-    console_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_ENTER, enter_callback_engine });
-    console_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_C, ctrl_c_callback_engine });
-    console_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_PAGE_UP, page_up_callback_engine });
-    console_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_PAGE_DOWN, page_down_callback_engine });
-    console_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_HOME, home_callback_engine });
-    console_keypress_callback_engines.push_back(KeyAndCallbackStruct { GLFW_KEY_END, end_callback_engine });
-    my_console->set_my_keypress_callback_engine_vector_pointer(&console_keypress_callback_engines);
+    std::vector<KeyAndCallbackStruct>* console_keypress_callback_engines = new std::vector<KeyAndCallbackStruct>();
+    console_keypress_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_GRAVE_ACCENT, exit_console_callback_engine });
+    console_keypress_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_LEFT_CONTROL, press_left_control_in_console_callback_engine });
+    console_keypress_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_RIGHT_CONTROL, press_right_control_in_console_callback_engine });
+    console_keypress_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_LEFT_ALT, press_left_alt_in_console_callback_engine });
+    console_keypress_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_RIGHT_ALT, press_right_alt_in_console_callback_engine });
+    console_keypress_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_LEFT_SHIFT, press_left_shift_in_console_callback_engine });
+    console_keypress_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_RIGHT_SHIFT, press_right_shift_in_console_callback_engine });
+    console_keypress_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_UP, move_to_previous_input_callback_engine });
+    console_keypress_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_DOWN, move_to_next_input_callback_engine });
+    console_keypress_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_BACKSPACE, backspace_callback_engine });
+    console_keypress_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_ENTER, enter_callback_engine });
+    console_keypress_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_C, ctrl_c_callback_engine });
+    console_keypress_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_PAGE_UP, page_up_callback_engine });
+    console_keypress_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_PAGE_DOWN, page_down_callback_engine });
+    console_keypress_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_HOME, home_callback_engine });
+    console_keypress_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_END, end_callback_engine });
+    my_console->set_my_keypress_callback_engine_vector_pointer(&*console_keypress_callback_engines);
 
     /*********************************************************************\
      * Callback engines for console commands begin here.                 *
@@ -908,21 +908,21 @@ int main(void)
             my_universe->up = glm::cross(my_universe->right, my_universe->direction);
 
             // Check for key releases and call corresponding callbacks.
-            for (uint32_t i = 0; i < (*current_keyrelease_callback_engine_vector_pointer).size(); i++)
+            for (uint32_t i = 0; i < (*current_keyrelease_callback_engine_vector_pointer)->size(); i++)
             {
-                if (glfwGetKey(my_universe->get_window(), (*current_keyrelease_callback_engine_vector_pointer).at(i).keycode) == GLFW_RELEASE)
+                if (glfwGetKey(my_universe->get_window(), (*current_keyrelease_callback_engine_vector_pointer)->at(i).keycode) == GLFW_RELEASE)
                 {
-                    callback_system::CallbackEngine* callback_engine = (*current_keyrelease_callback_engine_vector_pointer).at(i).callback_engine;
+                    callback_system::CallbackEngine* callback_engine = (*current_keyrelease_callback_engine_vector_pointer)->at(i).callback_engine;
                     datatypes::AnyValue* any_value = callback_engine->execute();
                 }
             }
 
             // Check for keypresses and call corresponding callbacks.
-            for (uint32_t i = 0; i < (*current_keypress_callback_engine_vector_pointer).size(); i++)
+            for (uint32_t i = 0; i < (*current_keypress_callback_engine_vector_pointer)->size(); i++)
             {
-                if (glfwGetKey(my_universe->get_window(), (*current_keypress_callback_engine_vector_pointer).at(i).keycode) == GLFW_PRESS)
+                if (glfwGetKey(my_universe->get_window(), (*current_keypress_callback_engine_vector_pointer)->at(i).keycode) == GLFW_PRESS)
                 {
-                    callback_system::CallbackEngine* callback_engine = (*current_keypress_callback_engine_vector_pointer).at(i).callback_engine;
+                    callback_system::CallbackEngine* callback_engine = (*current_keypress_callback_engine_vector_pointer)->at(i).callback_engine;
                     datatypes::AnyValue* any_value = callback_engine->execute();
 
                     if (any_value != nullptr &&
@@ -1127,28 +1127,32 @@ int main(void)
     cleanup_callback_engine->execute();
 
     // Delete all keyrelease callback engines.
-    for (uint32_t i = 0; i < action_mode_keyrelease_callback_engines.size(); i++)
+    for (uint32_t i = 0; i < action_mode_keyrelease_callback_engines->size(); i++)
     {
-        delete action_mode_keyrelease_callback_engines.at(i).callback_engine;
+        delete action_mode_keyrelease_callback_engines->at(i).callback_engine;
     }
+    delete action_mode_keyrelease_callback_engines;
 
     // Delete all keypress callback engines.
-    for (uint32_t i = 0; i < action_mode_keypress_callback_engines.size(); i++)
+    for (uint32_t i = 0; i < action_mode_keypress_callback_engines->size(); i++)
     {
-        delete action_mode_keypress_callback_engines.at(i).callback_engine;
+        delete action_mode_keypress_callback_engines->at(i).callback_engine;
     }
+    delete action_mode_keypress_callback_engines;
 
     // Delete all console keyrelease callback engines.
-    for (uint32_t i = 0; i < console_keyrelease_callback_engines.size(); i++)
+    for (uint32_t i = 0; i < console_keyrelease_callback_engines->size(); i++)
     {
-        delete console_keyrelease_callback_engines.at(i).callback_engine;
+        delete console_keyrelease_callback_engines->at(i).callback_engine;
     }
+    delete console_keyrelease_callback_engines;
 
     // Delete all console keypress callback engines.
-    for (uint32_t i = 0; i < console_keypress_callback_engines.size(); i++)
+    for (uint32_t i = 0; i < console_keypress_callback_engines->size(); i++)
     {
-        delete console_keypress_callback_engines.at(i).callback_engine;
+        delete console_keypress_callback_engines->at(i).callback_engine;
     }
+    delete console_keypress_callback_engines;
 
     delete cleanup_callback_engine;
     delete my_console;
