@@ -10,8 +10,6 @@ Ylikuution kehityksen kannalta välttämättömiä työvaiheita:
 [ ] Lisää muuttuja `window_height`.
 [ ] Lisää muuttuja `text_size`.
 [ ] Lisää muuttuja `direction`.
-[ ] Lisää muuttuja `right`.
-[ ] Lisää muuttuja `up`.
 [ ] Ota käyttöön TinySpline.
 [ ] Lisää bicubic-interpolointi.
 [ ] Lisää spline-interpolointi.
@@ -26,6 +24,8 @@ Ylikuution kehityksen kannalta välttämättömiä työvaiheita:
 [ ] Lisää tuki vektorifonteille.
 [ ] Lisää tekoälyoliot (robotit).
 [ ] Lisää TinyScheme-tuki tekoälyolioiden ohjelmointiin.
+[ ] Lisää muuttujan `up` arvon asettaminen konsolissa komennolla `set up`.
+[ ] Lisää muuttujan `right` arvon asettaminen konsolissa komennolla `set right`.
 
 Vähemmän kiireellisiä:
 [ ] Lisää TinyScheme-tuki konsoliin.
@@ -51,3 +51,5 @@ Valmiit:
 [x] Lisää konsoliin infokomento `info` (kertoo entiteeteistä, esim. objekteista verteksien lukumäärän ym. tietoja).
 [x] Lisää muuttuja `horizontal_angle`.
 [x] Lisää muuttuja `vertical_angle`.
+[x] Lisää muuttuja `right`.
+[x] Lisää muuttuja `up`.
