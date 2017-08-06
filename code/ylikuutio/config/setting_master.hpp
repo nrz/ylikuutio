@@ -87,6 +87,9 @@ namespace config
             static datatypes::AnyValue* read_theta(ontology::Universe* const universe, config::SettingMaster* const setting_master);
             static datatypes::AnyValue* read_phi(ontology::Universe* const universe, config::SettingMaster* const setting_master);
 
+            static datatypes::AnyValue* read_up(ontology::Universe* const universe, config::SettingMaster* const setting_master);
+            static datatypes::AnyValue* read_right(ontology::Universe* const universe, config::SettingMaster* const setting_master);
+
             static datatypes::AnyValue* read_horizontal_angle(ontology::Universe* const universe, config::SettingMaster* const setting_master);
             static datatypes::AnyValue* read_vertical_angle(ontology::Universe* const universe, config::SettingMaster* const setting_master);
 

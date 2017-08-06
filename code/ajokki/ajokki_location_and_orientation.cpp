@@ -11,6 +11,7 @@
 #include <glm/glm.hpp> // glm
 #endif
 
+#include <cmath>         // NAN, std::isnan, std::pow
 #include <iostream>      // std::cout, std::cin, std::cerr
 
 namespace config
@@ -113,5 +114,21 @@ namespace ajokki
         vertical_angle_setting_struct.read_callback = &config::SettingMaster::read_vertical_angle;
         vertical_angle_setting_struct.should_ylikuutio_call_activate_callback_now = true;
         new config::Setting(vertical_angle_setting_struct);
+
+        float right = NAN; // the value does not matter, `right` is read with a read callback.
+        SettingStruct right_setting_struct(new datatypes::AnyValue(vertical_angle));
+        right_setting_struct.name = "right";
+        right_setting_struct.setting_master_pointer = setting_master;
+        right_setting_struct.read_callback = &config::SettingMaster::read_right;
+        right_setting_struct.should_ylikuutio_call_activate_callback_now = false;
+        new config::Setting(right_setting_struct);
+
+        float up = NAN; // the value does not matter, `up` is read with a read callback.
+        SettingStruct up_setting_struct(new datatypes::AnyValue(vertical_angle));
+        up_setting_struct.name = "up";
+        up_setting_struct.setting_master_pointer = setting_master;
+        up_setting_struct.read_callback = &config::SettingMaster::read_up;
+        up_setting_struct.should_ylikuutio_call_activate_callback_now = false;
+        new config::Setting(up_setting_struct);
     }
 }
