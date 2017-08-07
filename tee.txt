@@ -6,8 +6,6 @@ Ylikuution kehityksen kannalta välttämättömiä työvaiheita:
 [ ] Siirrä pääsilmukka pois `main`-funktiosta ja Ajokista Ylikuution `ontology::Universe`-luokkaan.
 [ ] Ota käyttöön GLFM-kirjasto, ainoastaan Android-käännöksiä varten. https://github.com/brackeen/glfm
 [ ] Lisää muuttuja `wireframe`: `set wireframe on` / `set wireframe off`.
-[ ] Lisää muuttuja `window_width`.
-[ ] Lisää muuttuja `window_height`.
 [ ] Lisää muuttuja `text_size`.
 [ ] Lisää muuttuja `direction`.
 [ ] Ota käyttöön TinySpline.
@@ -53,3 +51,5 @@ Valmiit:
 [x] Lisää muuttuja `vertical_angle`.
 [x] Lisää muuttuja `right`.
 [x] Lisää muuttuja `up`.
+[x] Lisää muuttuja `window_width`.
+[x] Lisää muuttuja `window_height`.
