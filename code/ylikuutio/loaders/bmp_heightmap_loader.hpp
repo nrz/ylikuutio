@@ -22,8 +22,8 @@ namespace loaders
             int32_t& image_width,
             int32_t& image_height,
             const std::string color_channel,
-            const uint32_t x_step,
-            const uint32_t z_step,
+            const int32_t x_step,
+            const int32_t z_step,
             const std::string triangulation_type);
 }
 

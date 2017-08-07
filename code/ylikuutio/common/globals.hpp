@@ -154,10 +154,10 @@ typedef struct TriangulateQuadsStruct
     {
         // constructor.
     }
-    uint32_t image_width;
-    uint32_t image_height;
-    uint32_t x_step;
-    uint32_t z_step;
+    int32_t image_width;
+    int32_t image_height;
+    int32_t x_step;
+    int32_t z_step;
     std::string triangulation_type;
     bool should_ylikuutio_use_real_texture_coordinates;
     double sphere_radius;

@@ -159,6 +159,11 @@ namespace geometry
             {
                 n_faces_for_each_vertex = 2;
             }
+            else
+            {
+                // triangulation type not defined!
+                return false;
+            }
 
             std::cout << "image width: " << image_width << " pixels.\n";
             std::cout << "image height: " << image_height << " pixels.\n";

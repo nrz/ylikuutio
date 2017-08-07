@@ -92,7 +92,13 @@ Eg. with aptitude:
 
 If you are doing a cross compile from Linux to Windows, you need also:
 
-    $ sudo aptitude install gcc-mingw-w64 gcc-multilib
+    $ sudo aptitude install g++-mingw-w64 gcc-mingw-w64 binutils-mingw-w64
+
+If you are doing a cross compile from Linux to Android(TM), you need also:
+
+    $ sudo aptitude install google-android-ndk-installer
+
+However, cross compiling from Linux to Android does not work yet!
 
 Then, to compile with GCC, in Ylikuutio install directory:
 
@@ -120,6 +126,15 @@ To cross compile from Linux to Windows:
     $ cd build_windows
     $ cmake -DCMAKE_TOOLCHAIN_FILE=../w64.cmake ..
     $ make
+
+To cross compile from Linux to Android(TM) (using Android(TM) NDK):
+
+    $ mkdir build_android
+    $ cd build_android
+    $ cmake -DCMAKE_TOOLCHAIN_FILE=../android.cmake ..
+    $ make
+
+However, cross compiling from Linux to Android does not work yet!
 
 Compiling in Visual Studio is more difficult. The recommended way to
 get a binary for Windows is to cross compile from Linux to Windows.
@@ -161,7 +176,7 @@ A: In Finnish, "yli" means "over", and "kuutio" means "cube".
    https://en.wikipedia.org/wiki/Hypercube
 
 Q: How is Ylikuutio software developed?
-A: In Debian GNU/Linux (Debian Jessie at the moment), using Vim.
+A: In Debian GNU/Linux (Debian Stretch at the moment), using Vim.
 
 Q: For what kinds of software Ylikuutio can be used?
 A: Ylikuutio can be used for all kinds of 3D games and simulations.
@@ -236,6 +251,9 @@ A: I like Lisp-family languages and TinyScheme fulfils my
 * GUI for scripting, asset creation etc.
 * Internet gaming
 * sound
+
+## Trademarks:
+Android is a trademark of Google Inc. See https://developer.android.com/legal.html .
 
 ## Contact info
 (found bugs and suggestions are very welcome!)

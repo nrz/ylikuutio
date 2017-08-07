@@ -11,7 +11,7 @@ namespace loaders
             const std::string image_path,
             int32_t& image_width,
             int32_t& image_height,
-            uint32_t& image_size);
+            int32_t& image_size);
 }
 
 #endif

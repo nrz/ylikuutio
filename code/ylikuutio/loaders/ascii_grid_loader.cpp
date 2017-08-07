@@ -101,16 +101,16 @@ namespace loaders
         int32_t image_height = string::extract_int32_t_value_from_string(--point_data_pointer, (char*) " \n", (const char*) "nrows");
 
         while (!string::check_and_report_if_some_string_matches(point_data, ++point_data_pointer, number_strings_vector));
-        float xllcorner = string::extract_float_value_from_string(--point_data_pointer, (char*) " \n", (const char*) "xllcorner");
+        string::extract_float_value_from_string(--point_data_pointer, (char*) " \n", (const char*) "xllcorner");
 
         while (!string::check_and_report_if_some_string_matches(point_data, ++point_data_pointer, number_strings_vector));
-        float yllcorner = string::extract_float_value_from_string(--point_data_pointer, (char*) " \n", (const char*) "yllcorner");
+        string::extract_float_value_from_string(--point_data_pointer, (char*) " \n", (const char*) "yllcorner");
 
         while (!string::check_and_report_if_some_string_matches(point_data, ++point_data_pointer, number_strings_vector));
-        float cellsize = string::extract_float_value_from_string(--point_data_pointer, (char*) " \n", (const char*) "cellsize");
+        string::extract_float_value_from_string(--point_data_pointer, (char*) " \n", (const char*) "cellsize");
 
         while (!string::check_and_report_if_some_string_matches(point_data, ++point_data_pointer, number_strings_vector));
-        float nodata_value = string::extract_float_value_from_string(--point_data_pointer, (char*) " \n", (const char*) "nodata_value");
+        string::extract_float_value_from_string(--point_data_pointer, (char*) " \n", (const char*) "nodata_value");
 
         // note: the value of `image_height_in_use` can be adjusted here (for testing purposes).
         int32_t image_height_in_use = image_height;

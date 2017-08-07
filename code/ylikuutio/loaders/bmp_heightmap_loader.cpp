@@ -33,18 +33,18 @@ namespace loaders
             int32_t& image_width,
             int32_t& image_height,
             const std::string color_channel,
-            const uint32_t x_step,
-            const uint32_t z_step,
+            const int32_t x_step,
+            const int32_t z_step,
             const std::string triangulation_type)
     {
-        uint32_t image_size;
+        int32_t image_size;
 
         uint8_t* image_data = load_BMP_file(image_path, image_width, image_height, image_size);
 
         // Define world size.
-        uint32_t world_size = image_width * image_height;
+        int32_t world_size = image_width * image_height;
 
-        uint32_t line_size_in_bytes = image_size / image_height;
+        int32_t line_size_in_bytes = image_size / image_height;
 
         uint8_t *image_pointer;
         image_pointer = image_data;
@@ -65,7 +65,7 @@ namespace loaders
         const char* char_color_channel = color_channel.c_str();
 
         // start processing image_data.
-        for (uint32_t z = 0; z < image_height; z++)
+        for (int32_t z = 0; z < image_height; z++)
         {
             image_pointer = image_data + z * line_size_in_bytes;
 
