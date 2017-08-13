@@ -409,7 +409,6 @@ add_library(ylikuutio STATIC
     code/ylikuutio/common/any_value.hpp
     code/ylikuutio/common/globals.hpp
     code/ylikuutio/common/spherical_coordinates_struct.hpp
-    code/ylikuutio/common/template_helpers.hpp
 
     # config, in alphabetical order.
     code/ylikuutio/config/setting.cpp
