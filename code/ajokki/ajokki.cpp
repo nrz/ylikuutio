@@ -8,6 +8,7 @@
 #endif
 
 #include "ajokki_background_colors.hpp"
+#include "ajokki_cleanup_callbacks.hpp"
 #include "ajokki_console_callbacks.hpp"
 #include "ajokki_keyboard_callbacks.hpp"
 #include "ajokki_debug.hpp"
