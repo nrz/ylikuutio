@@ -67,6 +67,18 @@ http://tulrich.com/geekstuff/partitioning.html
 Octree-ohjeita:
 http://www.gamedev.net/page/resources/_/technical/game-programming/introduction-to-octrees-r3529
 
+A Real-Time Procedural Universe, Part Three: Matters of Scale:
+http://www.gamasutra.com/view/feature/2984/a_realtime_procedural_universe_.php
+
+Large Coordinate Systems:
+https://www.gamedev.net/forums/topic/268861-large-coordinate-systems/
+
+Theta*: Any-Angle Path Planning for Smoother Trajectories in Continuous Environments
+http://aigamedev.com/open/tutorials/theta-star-any-angle-paths/
+
+Pathfinding in 3D space - A*, Theta*, lazy Theta* in octree structure:
+https://ascane.github.io/assets/portfolio/pathfinding3d-report.pdf
+
 GPU Gems:
 http://http.developer.nvidia.com/GPUGems/gpugems_pref01.html
 
