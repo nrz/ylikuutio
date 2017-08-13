@@ -2,8 +2,12 @@ TEE-lista:
 Listaa tähän keskeneräiset asiat kiireellisyysjärjestyksessä kiireellisimmät ylös. Rasti ruutuun ja valmiit-osastolle kun on valmis.
 
 Ylikuution kehityksen kannalta välttämättömiä työvaiheita:
+[ ] Lisää vokselimaailma.
+[ ] Lisää tekoälyobjektit.
 [ ] Lisää konsoliin skenejen (`Scene`) latauskomento `load`.
 [ ] Siirrä pääsilmukka pois `main`-funktiosta ja Ajokista Ylikuution `ontology::Universe`-luokkaan.
+[ ] Ota käyttöön vapaavalintaiset näppäinasetukset.
+[ ] Ota käyttöön kamera-objektit.
 [ ] Ota käyttöön GLFM-kirjasto, ainoastaan Android-käännöksiä varten. https://github.com/brackeen/glfm
 [ ] Lisää muuttuja `wireframe`: `set wireframe on` / `set wireframe off`.
 [ ] Lisää muuttuja `text_size`.
@@ -24,6 +28,10 @@ Ylikuution kehityksen kannalta välttämättömiä työvaiheita:
 [ ] Lisää TinyScheme-tuki tekoälyolioiden ohjelmointiin.
 [ ] Lisää muuttujan `up` arvon asettaminen konsolissa komennolla `set up`.
 [ ] Lisää muuttujan `right` arvon asettaminen konsolissa komennolla `set right`.
+[ ] Lisää dynaaminen paikallaan oleva vesi.
+[ ] Lisää fysiikkamallinnus.
+[ ] Lisää virtaava vesi (serverillä laskettava).
+[ ] Lisää Internet-koodi (ASIO).
 
 Vähemmän kiireellisiä:
 [ ] Lisää TinyScheme-tuki konsoliin.
