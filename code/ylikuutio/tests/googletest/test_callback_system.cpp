@@ -306,7 +306,7 @@ TEST(callback_engine_must_function_properly, int32_t_three_squared_equals_nine)
     int32_t three = 3;
     bool is_reference_3 = false;
     datatypes::AnyValue* three_value = new datatypes::AnyValue(three);
-    callback_system::CallbackParameter* callback_parameter_3 = new callback_system::CallbackParameter("foo", three_value, is_reference_3, callback_object);
+    new callback_system::CallbackParameter("foo", three_value, is_reference_3, callback_object);
 
     datatypes::AnyValue* result = callback_engine->execute();
     ASSERT_EQ(result->type, datatypes::INT32_T);
@@ -323,7 +323,7 @@ TEST(callback_engine_must_function_properly, uint32_t_three_squared_equals_nine)
     uint32_t three = 3;
     bool is_reference_3 = false;
     datatypes::AnyValue* three_value = new datatypes::AnyValue(three);
-    callback_system::CallbackParameter* callback_parameter_3 = new callback_system::CallbackParameter("foo", three_value, is_reference_3, callback_object);
+    new callback_system::CallbackParameter("foo", three_value, is_reference_3, callback_object);
 
     datatypes::AnyValue* result = callback_engine->execute();
     ASSERT_EQ(result->type, datatypes::UINT32_T);
@@ -340,12 +340,12 @@ TEST(callback_engine_must_function_properly, uint32_t_5_expt_7_equals_78125)
     uint32_t five = 5;
     bool is_reference_5 = false;
     datatypes::AnyValue* five_value = new datatypes::AnyValue(five);
-    callback_system::CallbackParameter* callback_parameter_5 = new callback_system::CallbackParameter("foo", five_value, is_reference_5, callback_object);
+    new callback_system::CallbackParameter("foo", five_value, is_reference_5, callback_object);
 
     uint32_t seven = 7;
     bool is_reference_7 = false;
     datatypes::AnyValue* seven_value = new datatypes::AnyValue(seven);
-    callback_system::CallbackParameter* callback_parameter_3 = new callback_system::CallbackParameter("foo", seven_value, is_reference_7, callback_object);
+    new callback_system::CallbackParameter("foo", seven_value, is_reference_7, callback_object);
 
     datatypes::AnyValue* result = callback_engine->execute();
     ASSERT_EQ(result->type, datatypes::UINT32_T);
@@ -362,14 +362,14 @@ TEST(callback_engine_must_function_properly, uint32_t_5_expt_7_equals_78125_with
     uint32_t five = 5;
     bool is_reference_5 = false;
     datatypes::AnyValue* five_value = new datatypes::AnyValue(five);
-    callback_system::CallbackParameter* callback_parameter_5 = new callback_system::CallbackParameter("base", five_value, is_reference_5, callback_object);
+    new callback_system::CallbackParameter("base", five_value, is_reference_5, callback_object);
     datatypes::AnyValue* anyvalue_base = callback_object->get_any_value("base");
     ASSERT_EQ(anyvalue_base->type, datatypes::UINT32_T);
 
     uint32_t seven = 7;
     bool is_reference_7 = false;
     datatypes::AnyValue* seven_value = new datatypes::AnyValue(seven);
-    callback_system::CallbackParameter* callback_parameter_3 = new callback_system::CallbackParameter("exponent", seven_value, is_reference_7, callback_object);
+    new callback_system::CallbackParameter("exponent", seven_value, is_reference_7, callback_object);
 
     datatypes::AnyValue* result = callback_engine->execute();
     ASSERT_EQ(result->type, datatypes::UINT32_T);
@@ -410,7 +410,7 @@ TEST(callback_engine_must_function_properly, two_squared_four_times_equals_65536
     uint32_t two = 2;
     bool is_reference_2 = false;
     datatypes::AnyValue* two_value = new datatypes::AnyValue(two);
-    callback_system::CallbackParameter* callback_parameter_2 = new callback_system::CallbackParameter("", two_value, is_reference_2, callback_object_1st_square);
+    new callback_system::CallbackParameter("", two_value, is_reference_2, callback_object_1st_square);
 
     callback_system::CallbackObject* callback_object_2nd_square = new callback_system::CallbackObject(nullptr, callback_engine);
     callback_object_2nd_square->set_new_callback(&square_last);
