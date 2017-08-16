@@ -41,9 +41,16 @@ namespace callback_system
         for (uint32_t child_i = 0; child_i < this->callback_object_pointer_vector.size(); child_i++)
         {
             callback_system::CallbackObject* callback_object_pointer = static_cast<callback_system::CallbackObject*>(this->callback_object_pointer_vector[child_i]);
-            any_value = callback_object_pointer->execute();
 
-            this->return_values.push_back(any_value);
+            if (callback_object_pointer != nullptr)
+            {
+                any_value = callback_object_pointer->execute();
+                this->return_values.push_back(any_value);
+            }
+            else
+            {
+                this->return_values.push_back(nullptr);
+            }
         }
 
         this->return_values.clear();
