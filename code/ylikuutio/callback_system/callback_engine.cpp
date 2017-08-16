@@ -35,7 +35,7 @@ namespace callback_system
 
     datatypes::AnyValue* CallbackEngine::execute()
     {
-        datatypes::AnyValue* any_value = new datatypes::AnyValue();
+        datatypes::AnyValue* any_value = nullptr;
 
         // execute all callbacks.
         for (uint32_t child_i = 0; child_i < this->callback_object_pointer_vector.size(); child_i++)
