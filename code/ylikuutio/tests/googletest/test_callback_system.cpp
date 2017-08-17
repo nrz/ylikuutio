@@ -7,6 +7,7 @@
 
 // Include standard headers
 #include <cmath>    // NAN, std::isnan, std::pow
+#include <memory>   // std::shared_ptr
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 #include <iostream> // std::cout, std::cin, std::cerr
@@ -223,7 +224,8 @@ TEST(callback_engine_must_function_properly, int32_t_zero_negated_equals_zero)
     datatypes::AnyValue* zero_value = new datatypes::AnyValue(zero);
     new callback_system::CallbackParameter("", zero_value, is_reference_0, callback_object);
 
-    datatypes::AnyValue* result = callback_engine->execute();
+    std::shared_ptr<datatypes::AnyValue> result = callback_engine->execute();
+    ASSERT_NE(result, nullptr);
     ASSERT_EQ(result->type, datatypes::INT32_T);
     ASSERT_EQ(result->int32_t_value, 0);
 
@@ -240,7 +242,8 @@ TEST(callback_engine_must_function_properly, int32_t_one_negated_equals_minus_on
     datatypes::AnyValue* one_value = new datatypes::AnyValue(one);
     new callback_system::CallbackParameter("", one_value, is_reference_1, callback_object);
 
-    datatypes::AnyValue* result = callback_engine->execute();
+    std::shared_ptr<datatypes::AnyValue> result = callback_engine->execute();
+    ASSERT_NE(result, nullptr);
     ASSERT_EQ(result->type, datatypes::INT32_T);
     ASSERT_EQ(result->int32_t_value, -1);
 
@@ -257,7 +260,8 @@ TEST(callback_engine_must_function_properly, int32_t_two_negated_equals_minus_tw
     datatypes::AnyValue* two_value = new datatypes::AnyValue(two);
     new callback_system::CallbackParameter("", two_value, is_reference_2, callback_object);
 
-    datatypes::AnyValue* result = callback_engine->execute();
+    std::shared_ptr<datatypes::AnyValue> result = callback_engine->execute();
+    ASSERT_NE(result, nullptr);
     ASSERT_EQ(result->type, datatypes::INT32_T);
     ASSERT_EQ(result->int32_t_value, -2);
 
@@ -274,7 +278,8 @@ TEST(callback_engine_must_function_properly, int32_t_minus_one_negated_equals_on
     datatypes::AnyValue* minus_one_value = new datatypes::AnyValue(minus_one);
     new callback_system::CallbackParameter("", minus_one_value, is_reference_minus_1, callback_object);
 
-    datatypes::AnyValue* result = callback_engine->execute();
+    std::shared_ptr<datatypes::AnyValue> result = callback_engine->execute();
+    ASSERT_NE(result, nullptr);
     ASSERT_EQ(result->type, datatypes::INT32_T);
     ASSERT_EQ(result->int32_t_value, 1);
 
@@ -291,7 +296,8 @@ TEST(callback_engine_must_function_properly, int32_t_minus_two_negated_equals_tw
     datatypes::AnyValue* minus_two_value = new datatypes::AnyValue(minus_two);
     new callback_system::CallbackParameter("", minus_two_value, is_reference_minus_2, callback_object);
 
-    datatypes::AnyValue* result = callback_engine->execute();
+    std::shared_ptr<datatypes::AnyValue> result = callback_engine->execute();
+    ASSERT_NE(result, nullptr);
     ASSERT_EQ(result->type, datatypes::INT32_T);
     ASSERT_EQ(result->int32_t_value, 2);
 
@@ -308,7 +314,8 @@ TEST(callback_engine_must_function_properly, int32_t_three_squared_equals_nine)
     datatypes::AnyValue* three_value = new datatypes::AnyValue(three);
     new callback_system::CallbackParameter("foo", three_value, is_reference_3, callback_object);
 
-    datatypes::AnyValue* result = callback_engine->execute();
+    std::shared_ptr<datatypes::AnyValue> result = callback_engine->execute();
+    ASSERT_NE(result, nullptr);
     ASSERT_EQ(result->type, datatypes::INT32_T);
     ASSERT_EQ(result->int32_t_value, 9);
 
@@ -325,7 +332,8 @@ TEST(callback_engine_must_function_properly, uint32_t_three_squared_equals_nine)
     datatypes::AnyValue* three_value = new datatypes::AnyValue(three);
     new callback_system::CallbackParameter("foo", three_value, is_reference_3, callback_object);
 
-    datatypes::AnyValue* result = callback_engine->execute();
+    std::shared_ptr<datatypes::AnyValue> result = callback_engine->execute();
+    ASSERT_NE(result, nullptr);
     ASSERT_EQ(result->type, datatypes::UINT32_T);
     ASSERT_EQ(result->uint32_t_value, 9);
 
@@ -347,7 +355,8 @@ TEST(callback_engine_must_function_properly, uint32_t_5_expt_7_equals_78125)
     datatypes::AnyValue* seven_value = new datatypes::AnyValue(seven);
     new callback_system::CallbackParameter("foo", seven_value, is_reference_7, callback_object);
 
-    datatypes::AnyValue* result = callback_engine->execute();
+    std::shared_ptr<datatypes::AnyValue> result = callback_engine->execute();
+    ASSERT_NE(result, nullptr);
     ASSERT_EQ(result->type, datatypes::UINT32_T);
     ASSERT_EQ(result->uint32_t_value, 78125);
 
@@ -371,7 +380,8 @@ TEST(callback_engine_must_function_properly, uint32_t_5_expt_7_equals_78125_with
     datatypes::AnyValue* seven_value = new datatypes::AnyValue(seven);
     new callback_system::CallbackParameter("exponent", seven_value, is_reference_7, callback_object);
 
-    datatypes::AnyValue* result = callback_engine->execute();
+    std::shared_ptr<datatypes::AnyValue> result = callback_engine->execute();
+    ASSERT_NE(result, nullptr);
     ASSERT_EQ(result->type, datatypes::UINT32_T);
     ASSERT_EQ(result->uint32_t_value, 78125);
 
@@ -395,7 +405,8 @@ TEST(callback_engine_must_function_properly, uint32_t_7_expt_5_then_squared_equa
     datatypes::AnyValue* five_value = new datatypes::AnyValue(five);
     new callback_system::CallbackParameter("", five_value, is_reference_5, callback_object_expt);
 
-    datatypes::AnyValue* result = callback_engine->execute();
+    std::shared_ptr<datatypes::AnyValue> result = callback_engine->execute();
+    ASSERT_NE(result, nullptr);
     ASSERT_EQ(result->type, datatypes::UINT32_T);
     ASSERT_EQ(result->uint32_t_value, 282475249);
 
@@ -419,7 +430,8 @@ TEST(callback_engine_must_function_properly, two_squared_four_times_equals_65536
     callback_system::CallbackObject* callback_object_4th_square = new callback_system::CallbackObject(nullptr, callback_engine);
     callback_object_4th_square->set_new_callback(&square_last);
 
-    datatypes::AnyValue* result = callback_engine->execute();
+    std::shared_ptr<datatypes::AnyValue> result = callback_engine->execute();
+    ASSERT_NE(result, nullptr);
     ASSERT_EQ(result->type, datatypes::UINT32_T);
     ASSERT_EQ(result->uint32_t_value, 65536);
 

@@ -66,6 +66,7 @@
 #include <cmath>         // NAN, std::isnan, std::pow
 #include <cstdio>        // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf etc.
 #include <iostream>      // std::cout, std::cin, std::cerr
+#include <memory>        // std::shared_ptr
 #include <string>        // std::string
 #include <stdint.h>      // uint32_t etc.
 #include <unordered_map> // std::unordered_map
@@ -914,7 +915,7 @@ int main(void)
                 if (glfwGetKey(my_universe->get_window(), (*current_keyrelease_callback_engine_vector_pointer)->at(i).keycode) == GLFW_RELEASE)
                 {
                     callback_system::CallbackEngine* callback_engine = (*current_keyrelease_callback_engine_vector_pointer)->at(i).callback_engine;
-                    datatypes::AnyValue* any_value = callback_engine->execute();
+                    std::shared_ptr<datatypes::AnyValue> any_value = callback_engine->execute();
                 }
             }
 
@@ -924,7 +925,7 @@ int main(void)
                 if (glfwGetKey(my_universe->get_window(), (*current_keypress_callback_engine_vector_pointer)->at(i).keycode) == GLFW_PRESS)
                 {
                     callback_system::CallbackEngine* callback_engine = (*current_keypress_callback_engine_vector_pointer)->at(i).callback_engine;
-                    datatypes::AnyValue* any_value = callback_engine->execute();
+                    std::shared_ptr<datatypes::AnyValue> any_value = callback_engine->execute();
 
                     if (any_value != nullptr &&
                             any_value->type == datatypes::UINT32_T)
@@ -950,8 +951,6 @@ int main(void)
 
                             // Do not display help screen when in console.
                             my_universe->can_display_help_screen = false;
-
-                            delete any_value;
                             break;
                         }
                         if (any_value->uint32_t_value == EXIT_CONSOLE_MAGIC_NUMBER)
@@ -968,8 +967,6 @@ int main(void)
 
                             // Enable display help screen when not in console.
                             my_universe->can_display_help_screen = true;
-
-                            delete any_value;
                             break;
                         }
                         if (any_value->uint32_t_value == EXIT_PROGRAM_MAGIC_NUMBER)
@@ -985,11 +982,9 @@ int main(void)
                             }
 
                             is_exit_requested = true;
-                            delete any_value;
                             break;
                         }
                     }
-                    delete any_value;
                 }
             }
 

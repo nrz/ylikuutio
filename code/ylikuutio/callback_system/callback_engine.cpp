@@ -5,6 +5,7 @@
 
 // Include standard headers
 #include <iostream> // std::cout, std::cin, std::cerr
+#include <memory>   // std::shared_ptr
 #include <queue>    // std::queue
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
@@ -33,7 +34,7 @@ namespace callback_system
         hierarchy::set_child_pointer(childID, child_pointer, this->callback_object_pointer_vector, this->free_callback_objectID_queue, &this->number_of_callback_objects);
     }
 
-    datatypes::AnyValue* CallbackEngine::execute()
+    std::shared_ptr<datatypes::AnyValue> CallbackEngine::execute()
     {
         datatypes::AnyValue* any_value = nullptr;
 
@@ -54,7 +55,7 @@ namespace callback_system
         }
 
         this->return_values.clear();
-        return any_value;
+        return std::shared_ptr<datatypes::AnyValue>(any_value);
     }
 
     uint32_t CallbackEngine::get_n_of_return_values()
