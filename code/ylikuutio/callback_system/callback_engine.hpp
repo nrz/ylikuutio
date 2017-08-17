@@ -61,8 +61,8 @@ namespace callback_system
             std::shared_ptr<datatypes::AnyValue> execute();
 
             uint32_t get_n_of_return_values();
-            datatypes::AnyValue* get_nth_return_value(uint32_t n);
-            datatypes::AnyValue* get_previous_return_value();
+            std::shared_ptr<datatypes::AnyValue> get_nth_return_value(uint32_t n);
+            std::shared_ptr<datatypes::AnyValue> get_previous_return_value();
 
             friend class CallbackObject;
             template<class T1>
@@ -78,7 +78,7 @@ namespace callback_system
             std::queue<uint32_t> free_callback_objectID_queue;
             int32_t number_of_callback_objects;
 
-            std::vector<datatypes::AnyValue*> return_values;
+            std::vector<std::shared_ptr<datatypes::AnyValue>> return_values;
     };
 }
 

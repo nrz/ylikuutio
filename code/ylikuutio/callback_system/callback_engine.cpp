@@ -36,7 +36,7 @@ namespace callback_system
 
     std::shared_ptr<datatypes::AnyValue> CallbackEngine::execute()
     {
-        datatypes::AnyValue* any_value = nullptr;
+        std::shared_ptr<datatypes::AnyValue> any_value = nullptr;
 
         // execute all callbacks.
         for (uint32_t child_i = 0; child_i < this->callback_object_pointer_vector.size(); child_i++)
@@ -63,7 +63,7 @@ namespace callback_system
         return this->return_values.size();
     }
 
-    datatypes::AnyValue* CallbackEngine::get_nth_return_value(uint32_t n)
+    std::shared_ptr<datatypes::AnyValue> CallbackEngine::get_nth_return_value(uint32_t n)
     {
         // note: indexing of `n` begins from 0.
 
@@ -77,7 +77,7 @@ namespace callback_system
         return this->return_values.at(n_of_return_values - 1);
     }
 
-    datatypes::AnyValue* CallbackEngine::get_previous_return_value()
+    std::shared_ptr<datatypes::AnyValue> CallbackEngine::get_previous_return_value()
     {
         uint32_t n_of_return_values = this->get_n_of_return_values();
 

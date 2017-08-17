@@ -64,7 +64,7 @@ datatypes::AnyValue* square_last(callback_system::CallbackEngine* callback_engin
         return new datatypes::AnyValue();
     }
 
-    datatypes::AnyValue* return_value_any_value = callback_engine->get_previous_return_value();
+    std::shared_ptr<datatypes::AnyValue> return_value_any_value = callback_engine->get_previous_return_value();
 
     if (return_value_any_value == nullptr)
     {
