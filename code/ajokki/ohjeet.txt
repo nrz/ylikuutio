@@ -82,6 +82,9 @@ https://ascane.github.io/assets/portfolio/pathfinding3d-report.pdf
 GPU Gems:
 http://http.developer.nvidia.com/GPUGems/gpugems_pref01.html
 
+GPGPU::Basic Math Tutorial:
+http://www.mathematik.uni-dortmund.de/~goeddeke/gpgpu/tutorial.html
+
 Nykyajan 3U-peligrafiikan esimerkkejä:
 Far Cry 4:
 http://far-cry.ubi.com/en-GB/media/index.aspx
