@@ -5,6 +5,7 @@
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include standard headers
+#include <memory>        // std::shared_ptr
 #include <queue>         // std::queue
 #include <stdint.h>      // uint32_t etc.
 #include <string>        // std::string
@@ -57,7 +58,11 @@ namespace callback_system
             ~CallbackEngine();
 
             // execute all callbacks.
-            datatypes::AnyValue* execute();
+            std::shared_ptr<datatypes::AnyValue> execute();
+
+            uint32_t get_n_of_return_values();
+            std::shared_ptr<datatypes::AnyValue> get_nth_return_value(uint32_t n);
+            std::shared_ptr<datatypes::AnyValue> get_previous_return_value();
 
             friend class CallbackObject;
             template<class T1>
@@ -72,6 +77,8 @@ namespace callback_system
             std::vector<callback_system::CallbackObject*> callback_object_pointer_vector;
             std::queue<uint32_t> free_callback_objectID_queue;
             int32_t number_of_callback_objects;
+
+            std::vector<std::shared_ptr<datatypes::AnyValue>> return_values;
     };
 }
 

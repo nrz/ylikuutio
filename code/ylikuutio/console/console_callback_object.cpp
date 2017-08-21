@@ -2,6 +2,7 @@
 
 // Include standard headers
 #include <iostream> // std::cout, std::cin, std::cerr
+#include <memory>   // std::shared_ptr
 #include <stdint.h> // uint32_t etc.
 
 namespace console
@@ -18,11 +19,11 @@ namespace console
         }
     }
 
-    datatypes::AnyValue* ConsoleCallbackObject::execute()
+    std::shared_ptr<datatypes::AnyValue> ConsoleCallbackObject::execute()
     {
         if (this->console_callback != nullptr)
         {
-            return this->console_callback(this->parent_pointer, this, this->callback_parameter_pointer_vector, this->console_pointer);
+            return std::shared_ptr<datatypes::AnyValue>(this->console_callback(this->parent_pointer, this, this->callback_parameter_pointer_vector, this->console_pointer));
         }
         return nullptr;
     }

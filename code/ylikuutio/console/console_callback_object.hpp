@@ -6,6 +6,9 @@
 #include "code/ylikuutio/callback_system/callback_engine.hpp"
 #include "code/ylikuutio/common/globals.hpp"
 
+// Include standard headers
+#include <memory>   // std::shared_ptr
+
 namespace callback_system
 {
     class CallbackParameter;
@@ -32,7 +35,7 @@ namespace console
 
         private:
             // execute this callback.
-            datatypes::AnyValue* execute();
+            std::shared_ptr<datatypes::AnyValue> execute();
 
             InputParametersToAnyValueCallbackWithConsole console_callback;
             console::Console* console_pointer;

@@ -7,6 +7,7 @@
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include standard headers
+#include <memory>        // std::shared_ptr
 #include <queue>         // std::queue
 #include <stdint.h>      // uint32_t etc.
 #include <string>        // std::string
@@ -57,7 +58,7 @@ namespace callback_system
             void bind_child_to_parent(callback_system::CallbackParameter* child_pointer);
 
             // execute this callback.
-            virtual datatypes::AnyValue* execute();
+            virtual std::shared_ptr<datatypes::AnyValue> execute();
 
             callback_system::CallbackEngine* parent_pointer; // pointer to the callback engine.
 

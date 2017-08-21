@@ -5,6 +5,7 @@
 
 // Include standard headers
 #include <iostream> // std::cout, std::cin, std::cerr
+#include <memory>   // std::shared_ptr
 #include <queue>    // std::queue
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
@@ -33,17 +34,58 @@ namespace callback_system
         hierarchy::set_child_pointer(childID, child_pointer, this->callback_object_pointer_vector, this->free_callback_objectID_queue, &this->number_of_callback_objects);
     }
 
-    datatypes::AnyValue* CallbackEngine::execute()
+    std::shared_ptr<datatypes::AnyValue> CallbackEngine::execute()
     {
-        datatypes::AnyValue* any_value = new datatypes::AnyValue();
+        std::shared_ptr<datatypes::AnyValue> any_value = nullptr;
 
         // execute all callbacks.
         for (uint32_t child_i = 0; child_i < this->callback_object_pointer_vector.size(); child_i++)
         {
             callback_system::CallbackObject* callback_object_pointer = static_cast<callback_system::CallbackObject*>(this->callback_object_pointer_vector[child_i]);
-            any_value = callback_object_pointer->execute();
+
+            if (callback_object_pointer != nullptr)
+            {
+                any_value = callback_object_pointer->execute();
+                this->return_values.push_back(any_value);
+            }
+            else
+            {
+                this->return_values.push_back(nullptr);
+            }
         }
 
-        return any_value;
+        this->return_values.clear();
+        return std::shared_ptr<datatypes::AnyValue>(any_value);
+    }
+
+    uint32_t CallbackEngine::get_n_of_return_values()
+    {
+        return this->return_values.size();
+    }
+
+    std::shared_ptr<datatypes::AnyValue> CallbackEngine::get_nth_return_value(uint32_t n)
+    {
+        // note: indexing of `n` begins from 0.
+
+        uint32_t n_of_return_values = this->get_n_of_return_values();
+
+        if (n_of_return_values <= n)
+        {
+            return nullptr;
+        }
+
+        return this->return_values.at(n_of_return_values - 1);
+    }
+
+    std::shared_ptr<datatypes::AnyValue> CallbackEngine::get_previous_return_value()
+    {
+        uint32_t n_of_return_values = this->get_n_of_return_values();
+
+        if (n_of_return_values == 0)
+        {
+            return nullptr;
+        }
+
+        return this->return_values.at(this->return_values.size() - 1);
     }
 }

@@ -105,11 +105,11 @@ namespace callback_system
         }
     }
 
-    datatypes::AnyValue* CallbackObject::execute()
+    std::shared_ptr<datatypes::AnyValue> CallbackObject::execute()
     {
         if (this->callback != nullptr)
         {
-            return this->callback(this->parent_pointer, this, this->callback_parameter_pointer_vector);
+            return std::shared_ptr<datatypes::AnyValue>(this->callback(this->parent_pointer, this, this->callback_parameter_pointer_vector));
         }
         return nullptr;
     }

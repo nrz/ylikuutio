@@ -409,7 +409,6 @@ add_library(ylikuutio STATIC
     code/ylikuutio/common/any_value.hpp
     code/ylikuutio/common/globals.hpp
     code/ylikuutio/common/spherical_coordinates_struct.hpp
-    code/ylikuutio/common/template_helpers.hpp
 
     # config, in alphabetical order.
     code/ylikuutio/config/setting.cpp
@@ -421,6 +420,8 @@ add_library(ylikuutio STATIC
     code/ylikuutio/console/command_and_callback_struct.hpp
     code/ylikuutio/console/console.cpp
     code/ylikuutio/console/console.hpp
+    code/ylikuutio/console/console_command_callback.hpp
+    code/ylikuutio/console/console_struct.hpp
     code/ylikuutio/console/console_callback_object.cpp
     code/ylikuutio/console/console_callback_object.hpp
 
@@ -585,6 +586,8 @@ add_executable(ajokki
     code/ajokki/ajokki.cpp
     code/ajokki/ajokki_background_colors.cpp
     code/ajokki/ajokki_background_colors.hpp
+    code/ajokki/ajokki_cleanup_callbacks.cpp
+    code/ajokki/ajokki_cleanup_callbacks.hpp
     code/ajokki/ajokki_console.cpp
     code/ajokki/ajokki_console.hpp
     code/ajokki/ajokki_console_callbacks.cpp
