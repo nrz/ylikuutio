@@ -21,6 +21,8 @@
 #include "code/ylikuutio/callback_system/callback_magic_numbers.hpp"
 #include "code/ylikuutio/callback_system/key_and_callback_struct.hpp"
 #include "code/ylikuutio/console/console.hpp"
+#include "code/ylikuutio/console/console_command_callback.hpp"
+#include "code/ylikuutio/console/console_struct.hpp"
 #include "code/ylikuutio/console/console_callback_object.hpp"
 #include "code/ylikuutio/ontology/vboindexer.hpp"
 #include "code/ylikuutio/ontology/font2D.hpp"

@@ -1,4 +1,5 @@
 #include "console.hpp"
+#include "console_struct.hpp"
 #include "command_and_callback_struct.hpp"
 #include "code/ylikuutio/ontology/font2D.hpp"
 #include "code/ylikuutio/config/setting.hpp"
