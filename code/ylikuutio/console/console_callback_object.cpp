@@ -2,7 +2,7 @@
 
 // Include standard headers
 #include <iostream> // std::cout, std::cin, std::cerr
-#include <memory>   // std::shared_ptr
+#include <memory>   // std::make_shared, std::shared_ptr
 #include <stdint.h> // uint32_t etc.
 
 namespace console

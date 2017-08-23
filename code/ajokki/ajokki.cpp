@@ -68,7 +68,7 @@
 #include <cmath>         // NAN, std::isnan, std::pow
 #include <cstdio>        // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf etc.
 #include <iostream>      // std::cout, std::cin, std::cerr
-#include <memory>        // std::shared_ptr
+#include <memory>        // std::make_shared, std::shared_ptr
 #include <string>        // std::string
 #include <stdint.h>      // uint32_t etc.
 #include <unordered_map> // std::unordered_map

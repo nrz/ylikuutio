@@ -7,7 +7,7 @@
 #include "code/ylikuutio/common/globals.hpp"
 
 // Include standard headers
-#include <memory>   // std::shared_ptr
+#include <memory>   // std::make_shared, std::shared_ptr
 
 namespace callback_system
 {
