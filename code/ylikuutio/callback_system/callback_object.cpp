@@ -6,6 +6,7 @@
 
 // Include standard headers
 #include <iostream> // std::cout, std::cin, std::cerr
+#include <memory>   // std::make_shared, std::shared_ptr
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 #include <vector>   // std::vector
