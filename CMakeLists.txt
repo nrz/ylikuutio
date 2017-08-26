@@ -21,7 +21,12 @@ set(DO_UNIT_TESTS_WITH_GOOGLE_TEST true)
 # uncomment the following line to disable updating of external projects.
 set(DISABLE_UPDATE_STEP true)
 
-find_library(OpenGL REQUIRED)
+if(CMAKE_CROSSCOMPILING AND CMAKE_SYSTEM_NAME STREQUAL "Android")
+    find_library(OpenGL REQUIRED)
+else()
+    find_package(OpenGL REQUIRED)
+endif()
+
 find_package(Threads REQUIRED)
 
 # Compile external dependencies
