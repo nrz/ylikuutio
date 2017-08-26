@@ -86,12 +86,6 @@ namespace ontology
         hierarchy::delete_children<ontology::Object*>(this->object_pointer_vector, &this->number_of_objects);
 
         this->parent_pointer->set_text3D_pointer(this->childID, nullptr);
-
-        if (!this->name.empty() && this->universe_pointer != nullptr)
-        {
-            delete this->universe_pointer->entity_anyvalue_map[this->name];
-            this->universe_pointer->entity_anyvalue_map[this->name] = nullptr;
-        }
     }
 
     int32_t Text3D::get_number_of_children()

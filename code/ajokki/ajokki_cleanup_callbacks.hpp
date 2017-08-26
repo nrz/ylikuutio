@@ -8,16 +8,17 @@
 #include "code/ylikuutio/common/any_value.hpp"
 
 // Include standard headers
+#include <memory>   // std::make_shared, std::shared_ptr
 #include <vector>   // std::vector
 
 namespace ajokki
 {
-    datatypes::AnyValue* glfwTerminate_cleanup(
+    std::shared_ptr<datatypes::AnyValue> glfwTerminate_cleanup(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*>& input_parameters);
 
-    datatypes::AnyValue* full_cleanup(
+    std::shared_ptr<datatypes::AnyValue> full_cleanup(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>&);

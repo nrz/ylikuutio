@@ -21,11 +21,12 @@
 
 // Include standard headers
 #include <iostream> // std::cout, std::cin, std::cerr
+#include <memory>   // std::make_shared, std::shared_ptr
 #include <vector>   // std::vector
 
 namespace ajokki
 {
-    datatypes::AnyValue* glfwTerminate_cleanup(
+    std::shared_ptr<datatypes::AnyValue> glfwTerminate_cleanup(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*>& input_parameters)
@@ -34,15 +35,15 @@ namespace ajokki
         return nullptr;
     }
 
-    datatypes::AnyValue* full_cleanup(
+    std::shared_ptr<datatypes::AnyValue> full_cleanup(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>&)
     {
         std::cout << "Cleaning up.\n";
 
-        datatypes::AnyValue* any_value_universe_pointer = callback_object->get_arg(0);
-        datatypes::AnyValue* any_value_font2D_pointer = callback_object->get_any_value("font2D_pointer");
+        std::shared_ptr<datatypes::AnyValue> any_value_universe_pointer = std::make_shared<datatypes::AnyValue>(*callback_object->get_arg(0));
+        std::shared_ptr<datatypes::AnyValue> any_value_font2D_pointer = std::make_shared<datatypes::AnyValue>(*callback_object->get_any_value("font2D_pointer"));
 
         if (any_value_universe_pointer->type == datatypes::UNIVERSE_POINTER)
         {

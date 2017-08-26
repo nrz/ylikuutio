@@ -4,6 +4,9 @@
 #include "code/ylikuutio/common/any_value.hpp"
 #include "code/ylikuutio/common/globals.hpp"
 
+// Include standard headers
+#include <memory> // std::make_shared, std::shared_ptr
+
 namespace config
 {
     class SettingMaster;
@@ -15,7 +18,7 @@ namespace ajokki
     {
         // Variables related to console.
         uint32_t console_top_y = 15.0f;
-        datatypes::AnyValue* any_value_console_top_y = new datatypes::AnyValue(console_top_y);
+        std::shared_ptr<datatypes::AnyValue> any_value_console_top_y = std::make_shared<datatypes::AnyValue>(console_top_y);
         SettingStruct console_top_y_setting_struct(any_value_console_top_y);
         console_top_y_setting_struct.name = "console_top_y";
         console_top_y_setting_struct.setting_master_pointer = setting_master;
@@ -24,7 +27,7 @@ namespace ajokki
         new config::Setting(console_top_y_setting_struct);
 
         uint32_t console_bottom_y = 0.0f;
-        datatypes::AnyValue* any_value_console_bottom_y = new datatypes::AnyValue(console_bottom_y);
+        std::shared_ptr<datatypes::AnyValue> any_value_console_bottom_y = std::make_shared<datatypes::AnyValue>(console_bottom_y);
         SettingStruct console_bottom_y_setting_struct(any_value_console_bottom_y);
         console_bottom_y_setting_struct.name = "console_bottom_y";
         console_bottom_y_setting_struct.setting_master_pointer = setting_master;

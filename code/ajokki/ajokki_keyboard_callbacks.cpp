@@ -19,13 +19,14 @@
 
 // Include standard headers
 #include <iostream> // std::cout, std::cin, std::cerr
+#include <memory>   // std::make_shared, std::shared_ptr
 #include <vector>   // std::vector
 
 namespace ajokki
 {
     bool move_to_direction(callback_system::CallbackObject* callback_object, glm::vec3 moving_direction)
     {
-        datatypes::AnyValue* any_value_universe_pointer = callback_object->get_arg(0);
+        std::shared_ptr<datatypes::AnyValue> any_value_universe_pointer = std::make_shared<datatypes::AnyValue>(*callback_object->get_arg(0));
 
         if (any_value_universe_pointer == nullptr)
         {
@@ -70,12 +71,12 @@ namespace ajokki
      *  Callback engines for action mode keyreleases begin here.         *
     \*********************************************************************/
 
-    datatypes::AnyValue* release_first_turbo(
+    std::shared_ptr<datatypes::AnyValue> release_first_turbo(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>&)
     {
-        datatypes::AnyValue* any_value_universe_pointer = callback_object->get_arg(0);
+        std::shared_ptr<datatypes::AnyValue> any_value_universe_pointer = std::make_shared<datatypes::AnyValue>(*callback_object->get_arg(0));
 
         if (any_value_universe_pointer == nullptr)
         {
@@ -101,12 +102,12 @@ namespace ajokki
         return nullptr;
     }
 
-    datatypes::AnyValue* release_second_turbo(
+    std::shared_ptr<datatypes::AnyValue> release_second_turbo(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>&)
     {
-        datatypes::AnyValue* any_value_universe_pointer = callback_object->get_arg(0);
+        std::shared_ptr<datatypes::AnyValue> any_value_universe_pointer = std::make_shared<datatypes::AnyValue>(*callback_object->get_arg(0));
 
         if (any_value_universe_pointer == nullptr)
         {
@@ -132,12 +133,12 @@ namespace ajokki
         return nullptr;
     }
 
-    datatypes::AnyValue* enable_toggle_invert_mouse(
+    std::shared_ptr<datatypes::AnyValue> enable_toggle_invert_mouse(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>&)
     {
-        datatypes::AnyValue* any_value_universe_pointer = callback_object->get_arg(0);
+        std::shared_ptr<datatypes::AnyValue> any_value_universe_pointer = std::make_shared<datatypes::AnyValue>(*callback_object->get_arg(0));
 
         if (any_value_universe_pointer == nullptr)
         {
@@ -163,12 +164,12 @@ namespace ajokki
         return nullptr;
     }
 
-    datatypes::AnyValue* enable_toggle_flight_mode(
+    std::shared_ptr<datatypes::AnyValue> enable_toggle_flight_mode(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>&)
     {
-        datatypes::AnyValue* any_value_universe_pointer = callback_object->get_arg(0);
+        std::shared_ptr<datatypes::AnyValue> any_value_universe_pointer = std::make_shared<datatypes::AnyValue>(*callback_object->get_arg(0));
 
         if (any_value_universe_pointer == nullptr)
         {
@@ -194,12 +195,12 @@ namespace ajokki
         return nullptr;
     }
 
-    datatypes::AnyValue* enable_toggle_help_mode(
+    std::shared_ptr<datatypes::AnyValue> enable_toggle_help_mode(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>&)
     {
-        datatypes::AnyValue* any_value_universe_pointer = callback_object->get_arg(0);
+        std::shared_ptr<datatypes::AnyValue> any_value_universe_pointer = std::make_shared<datatypes::AnyValue>(*callback_object->get_arg(0));
 
         if (any_value_universe_pointer == nullptr)
         {
@@ -229,21 +230,21 @@ namespace ajokki
      *  Callback engines for action mode keypresses begin here.          *
     \*********************************************************************/
 
-    datatypes::AnyValue* exit_program(
+    std::shared_ptr<datatypes::AnyValue> exit_program(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*>&)
     {
         uint32_t exit_program_magic_number = EXIT_PROGRAM_MAGIC_NUMBER;
-        return new datatypes::AnyValue(exit_program_magic_number);
+        return std::make_shared<datatypes::AnyValue>(exit_program_magic_number);
     }
 
-    datatypes::AnyValue* first_turbo(
+    std::shared_ptr<datatypes::AnyValue> first_turbo(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>&)
     {
-        datatypes::AnyValue* any_value_universe_pointer = callback_object->get_arg(0);
+        std::shared_ptr<datatypes::AnyValue> any_value_universe_pointer = std::make_shared<datatypes::AnyValue>(*callback_object->get_arg(0));
 
         if (any_value_universe_pointer == nullptr)
         {
@@ -269,12 +270,12 @@ namespace ajokki
         return nullptr;
     }
 
-    datatypes::AnyValue* second_turbo(
+    std::shared_ptr<datatypes::AnyValue> second_turbo(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>&)
     {
-        datatypes::AnyValue* any_value_universe_pointer = callback_object->get_arg(0);
+        std::shared_ptr<datatypes::AnyValue> any_value_universe_pointer = std::make_shared<datatypes::AnyValue>(*callback_object->get_arg(0));
 
         if (any_value_universe_pointer == nullptr)
         {
@@ -300,12 +301,12 @@ namespace ajokki
         return nullptr;
     }
 
-    datatypes::AnyValue* move_forward(
+    std::shared_ptr<datatypes::AnyValue> move_forward(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>&)
     {
-        datatypes::AnyValue* any_value_universe_pointer = callback_object->get_arg(0);
+        std::shared_ptr<datatypes::AnyValue> any_value_universe_pointer = std::make_shared<datatypes::AnyValue>(*callback_object->get_arg(0));
 
         if (any_value_universe_pointer == nullptr)
         {
@@ -331,12 +332,12 @@ namespace ajokki
         return nullptr;
     }
 
-    datatypes::AnyValue* move_backward(
+    std::shared_ptr<datatypes::AnyValue> move_backward(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>&)
     {
-        datatypes::AnyValue* any_value_universe_pointer = callback_object->get_arg(0);
+        std::shared_ptr<datatypes::AnyValue> any_value_universe_pointer = std::make_shared<datatypes::AnyValue>(*callback_object->get_arg(0));
 
         if (any_value_universe_pointer == nullptr)
         {
@@ -362,12 +363,12 @@ namespace ajokki
         return nullptr;
     }
 
-    datatypes::AnyValue* strafe_left(
+    std::shared_ptr<datatypes::AnyValue> strafe_left(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>&)
     {
-        datatypes::AnyValue* any_value_universe_pointer = callback_object->get_arg(0);
+        std::shared_ptr<datatypes::AnyValue> any_value_universe_pointer = std::make_shared<datatypes::AnyValue>(*callback_object->get_arg(0));
 
         if (any_value_universe_pointer == nullptr)
         {
@@ -393,12 +394,12 @@ namespace ajokki
         return nullptr;
     }
 
-    datatypes::AnyValue* strafe_right(
+    std::shared_ptr<datatypes::AnyValue> strafe_right(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>&)
     {
-        datatypes::AnyValue* any_value_universe_pointer = callback_object->get_arg(0);
+        std::shared_ptr<datatypes::AnyValue> any_value_universe_pointer = std::make_shared<datatypes::AnyValue>(*callback_object->get_arg(0));
 
         if (any_value_universe_pointer == nullptr)
         {
@@ -424,12 +425,12 @@ namespace ajokki
         return nullptr;
     }
 
-    datatypes::AnyValue* ascent(
+    std::shared_ptr<datatypes::AnyValue> ascent(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>&)
     {
-        datatypes::AnyValue* any_value_universe_pointer = callback_object->get_arg(0);
+        std::shared_ptr<datatypes::AnyValue> any_value_universe_pointer = std::make_shared<datatypes::AnyValue>(*callback_object->get_arg(0));
 
         if (any_value_universe_pointer == nullptr)
         {
@@ -455,12 +456,12 @@ namespace ajokki
         return nullptr;
     }
 
-    datatypes::AnyValue* descent(
+    std::shared_ptr<datatypes::AnyValue> descent(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>&)
     {
-        datatypes::AnyValue* any_value_universe_pointer = callback_object->get_arg(0);
+        std::shared_ptr<datatypes::AnyValue> any_value_universe_pointer = std::make_shared<datatypes::AnyValue>(*callback_object->get_arg(0));
 
         if (any_value_universe_pointer == nullptr)
         {
@@ -486,12 +487,12 @@ namespace ajokki
         return nullptr;
     }
 
-    datatypes::AnyValue* toggle_invert_mouse(
+    std::shared_ptr<datatypes::AnyValue> toggle_invert_mouse(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>&)
     {
-        datatypes::AnyValue* any_value_universe_pointer = callback_object->get_arg(0);
+        std::shared_ptr<datatypes::AnyValue> any_value_universe_pointer = std::make_shared<datatypes::AnyValue>(*callback_object->get_arg(0));
 
         if (any_value_universe_pointer == nullptr)
         {
@@ -521,12 +522,12 @@ namespace ajokki
         return nullptr;
     }
 
-    datatypes::AnyValue* toggle_flight_mode(
+    std::shared_ptr<datatypes::AnyValue> toggle_flight_mode(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>&)
     {
-        datatypes::AnyValue* any_value_universe_pointer = callback_object->get_arg(0);
+        std::shared_ptr<datatypes::AnyValue> any_value_universe_pointer = std::make_shared<datatypes::AnyValue>(*callback_object->get_arg(0));
 
         if (any_value_universe_pointer == nullptr)
         {
@@ -557,12 +558,12 @@ namespace ajokki
         return nullptr;
     }
 
-    datatypes::AnyValue* toggle_help_mode(
+    std::shared_ptr<datatypes::AnyValue> toggle_help_mode(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>&)
     {
-        datatypes::AnyValue* any_value_universe_pointer = callback_object->get_arg(0);
+        std::shared_ptr<datatypes::AnyValue> any_value_universe_pointer = std::make_shared<datatypes::AnyValue>(*callback_object->get_arg(0));
 
         if (any_value_universe_pointer == nullptr)
         {
@@ -592,7 +593,7 @@ namespace ajokki
         return nullptr;
     }
 
-    datatypes::AnyValue* delete_suzanne_species(
+    std::shared_ptr<datatypes::AnyValue> delete_suzanne_species(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>&)
@@ -610,8 +611,8 @@ namespace ajokki
         // where `foo` is the zero-based index of the variable. First `CallbackParameter` of
         // a `CallbackObject` gets index 0, second `CallbackParameter` gets index 1, etc.
 
-        datatypes::AnyValue* any_value_species_pointer = callback_object->get_any_value("suzanne_species");
-        datatypes::AnyValue* any_value_bool_pointer = callback_object->get_any_value("does_suzanne_species_exist");
+        std::shared_ptr<datatypes::AnyValue> any_value_species_pointer = std::make_shared<datatypes::AnyValue>(*callback_object->get_any_value("suzanne_species"));
+        std::shared_ptr<datatypes::AnyValue> any_value_bool_pointer = std::make_shared<datatypes::AnyValue>(*callback_object->get_any_value("does_suzanne_species_exist"));
 
         if (any_value_species_pointer->type != datatypes::SPECIES_POINTER)
         {
@@ -639,16 +640,16 @@ namespace ajokki
         return nullptr;
     }
 
-    datatypes::AnyValue* switch_to_new_material(
+    std::shared_ptr<datatypes::AnyValue> switch_to_new_material(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>&)
     {
-        datatypes::AnyValue* any_value_species_pointer = callback_object->get_any_value("suzanne_species");
-        datatypes::AnyValue* any_value_material_pointer = callback_object->get_any_value("new_material");
-        datatypes::AnyValue* any_value_does_suzanne_species_exist = callback_object->get_any_value("does_suzanne_species_exist");
-        datatypes::AnyValue* any_value_does_suzanne_species_have_original_texture = callback_object->get_any_value("does_suzanne_species_have_old_texture");
-        datatypes::AnyValue* any_value_does_suzanne_species_have_new_texture = callback_object->get_any_value("does_suzanne_species_have_new_texture");
+        std::shared_ptr<datatypes::AnyValue> any_value_species_pointer = std::make_shared<datatypes::AnyValue>(*callback_object->get_any_value("suzanne_species"));
+        std::shared_ptr<datatypes::AnyValue> any_value_material_pointer = std::make_shared<datatypes::AnyValue>(*callback_object->get_any_value("new_material"));
+        std::shared_ptr<datatypes::AnyValue> any_value_does_suzanne_species_exist = std::make_shared<datatypes::AnyValue>(*callback_object->get_any_value("does_suzanne_species_exist"));
+        std::shared_ptr<datatypes::AnyValue> any_value_does_suzanne_species_have_original_texture = std::make_shared<datatypes::AnyValue>(*callback_object->get_any_value("does_suzanne_species_have_old_texture"));
+        std::shared_ptr<datatypes::AnyValue> any_value_does_suzanne_species_have_new_texture = std::make_shared<datatypes::AnyValue>(*callback_object->get_any_value("does_suzanne_species_have_new_texture"));
 
         if (any_value_species_pointer->type != datatypes::SPECIES_POINTER)
         {
@@ -696,17 +697,17 @@ namespace ajokki
         return nullptr;
     }
 
-    datatypes::AnyValue* transform_into_new_species(
+    std::shared_ptr<datatypes::AnyValue> transform_into_new_species(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*>& input_parameters)
     {
         // This serves as an example of how to use indexed input parameters.
-        datatypes::AnyValue* any_value_object_pointer = input_parameters.at(0)->get_any_value();
-        datatypes::AnyValue* any_value_species_pointer = input_parameters.at(1)->get_any_value();
-        datatypes::AnyValue* any_value_does_suzanne_species_exist = input_parameters.at(2)->get_any_value();
-        datatypes::AnyValue* any_value_does_suzanne_species_belong_to_original_species = input_parameters.at(3)->get_any_value();
-        datatypes::AnyValue* any_value_does_suzanne_species_belong_to_new_species = input_parameters.at(4)->get_any_value();
+        std::shared_ptr<datatypes::AnyValue> any_value_object_pointer = std::make_shared<datatypes::AnyValue>(*input_parameters.at(0)->get_any_value());
+        std::shared_ptr<datatypes::AnyValue> any_value_species_pointer = std::make_shared<datatypes::AnyValue>(*input_parameters.at(1)->get_any_value());
+        std::shared_ptr<datatypes::AnyValue> any_value_does_suzanne_species_exist = std::make_shared<datatypes::AnyValue>(*input_parameters.at(2)->get_any_value());
+        std::shared_ptr<datatypes::AnyValue> any_value_does_suzanne_species_belong_to_original_species = std::make_shared<datatypes::AnyValue>(*input_parameters.at(3)->get_any_value());
+        std::shared_ptr<datatypes::AnyValue> any_value_does_suzanne_species_belong_to_new_species = std::make_shared<datatypes::AnyValue>(*input_parameters.at(4)->get_any_value());
 
         if (any_value_object_pointer->type != datatypes::OBJECT_POINTER)
         {

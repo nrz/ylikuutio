@@ -10,6 +10,7 @@
 #endif
 
 // Include standard headers
+#include <memory>   // std::make_shared, std::shared_ptr
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 
@@ -25,7 +26,7 @@ typedef struct InfoStruct
     {
         // constructor.
     }
-    datatypes::AnyValue* memory_address;
+    std::shared_ptr<datatypes::AnyValue> memory_address;
     uint32_t childID;
     std::string name;
     glm::vec3 coordinate_vector;

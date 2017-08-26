@@ -7,6 +7,7 @@
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include standard headers
+#include <memory>   // std::make_shared, std::shared_ptr
 #include <queue>    // std::queue
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
@@ -35,7 +36,7 @@ namespace ontology
             void set_name(std::string name);
 
             // this method returns a pointer to `datatypes::AnyValue` corresponding to the given `key`.
-            datatypes::AnyValue* get_variable(std::string key);
+            std::shared_ptr<datatypes::AnyValue> get_variable(std::string key);
 
             friend class Universe;
             friend class Shader;

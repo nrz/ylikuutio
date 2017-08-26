@@ -5,6 +5,7 @@
 
 // Include standard headers
 #include <iostream> // std::cout, std::cin, std::cerr
+#include <memory>   // std::make_shared, std::shared_ptr
 #include <string>   // std::string
 
 namespace callback_system
@@ -16,11 +17,11 @@ namespace callback_system
         if (!this->name.empty())
         {
             // This is a named variable, so store it in parent's `anyvalue_hashmap`.
-            this->parent_pointer->set_any_value(this->name, this->any_value);
+            this->parent_pointer->set_any_value(this->name, std::make_shared<datatypes::AnyValue>(*this->any_value));
         }
     }
 
-    CallbackParameter::CallbackParameter(const std::string& name, datatypes::AnyValue* const any_value, const bool is_reference, callback_system::CallbackObject* const parent_pointer)
+    CallbackParameter::CallbackParameter(const std::string& name, std::shared_ptr<datatypes::AnyValue> any_value, const bool is_reference, callback_system::CallbackObject* const parent_pointer)
     {
         // constructor.
         this->name = name;
@@ -37,15 +38,12 @@ namespace callback_system
         // destructor.
         std::cout << "Callback parameter with childID " << this->childID << " will be destroyed.\n";
 
-        // destroy AnyValue.
-        delete this->any_value;
-
         // set pointer to this object to nullptr.
         this->parent_pointer->set_callback_parameter_pointer(this->childID, nullptr);
     }
 
-    datatypes::AnyValue* CallbackParameter::get_any_value() const
+    std::shared_ptr<datatypes::AnyValue> CallbackParameter::get_any_value() const
     {
-        return this->any_value;
+        return std::make_shared<datatypes::AnyValue>(*this->any_value);
     }
 }

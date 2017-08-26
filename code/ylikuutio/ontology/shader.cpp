@@ -74,12 +74,6 @@ namespace ontology
         this->parent_pointer->set_shader_pointer(this->childID, nullptr);
 
         glDeleteProgram(this->programID);
-
-        if (!this->name.empty() && this->universe_pointer != nullptr)
-        {
-            delete this->universe_pointer->entity_anyvalue_map[this->name];
-            this->universe_pointer->entity_anyvalue_map[this->name] = nullptr;
-        }
     }
 
     void Shader::render()

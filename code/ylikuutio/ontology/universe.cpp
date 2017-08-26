@@ -45,6 +45,7 @@
 // Include standard headers
 #include <cmath>         // NAN, std::isnan, std::pow
 #include <iostream>      // std::cout, std::cin, std::cerr
+#include <memory>        // std::make_shared, std::shared_ptr
 #include <stdint.h>      // uint32_t etc.
 #include <unordered_map> // std::unordered_map
 #include <vector>        // std::vector
@@ -207,7 +208,7 @@ namespace ontology
         return this->max_FPS;
     }
 
-    void Universe::set(std::string& setting_name, datatypes::AnyValue* setting_any_value)
+    void Universe::set(std::string& setting_name, std::shared_ptr<datatypes::AnyValue> setting_any_value)
     {
         this->setting_master_pointer->set(setting_name, setting_any_value);
     }
@@ -239,7 +240,7 @@ namespace ontology
 
     // Public callbacks.
 
-    datatypes::AnyValue* Universe::delete_entity(
+    std::shared_ptr<datatypes::AnyValue> Universe::delete_entity(
             console::Console* const console,
             ontology::Universe* const universe,
             std::vector<std::string>& command_parameters)
@@ -304,7 +305,6 @@ namespace ontology
                 default:
                     return nullptr;
             }
-            delete any_value;
         }
         else
         {
@@ -312,7 +312,7 @@ namespace ontology
         }
     }
 
-    datatypes::AnyValue* Universe::info(
+    std::shared_ptr<datatypes::AnyValue> Universe::info(
             console::Console* const console,
             ontology::Universe* const universe,
             std::vector<std::string>& command_parameters)
@@ -333,6 +333,12 @@ namespace ontology
         else if (command_parameters.size() == 1)
         {
             std::string name = command_parameters[0];
+
+            if (universe->entity_anyvalue_map.count(name) != 1)
+            {
+                return nullptr;
+            }
+
             datatypes::AnyValue* any_value = universe->entity_anyvalue_map[name];
 
             if (any_value == nullptr)

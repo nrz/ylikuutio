@@ -19,6 +19,7 @@
 // Include standard headers
 #include <iterator>      // std::back_inserter
 #include <list>          // std::list
+#include <memory>        // std::make_shared, std::shared_ptr
 #include <sstream>       // std::istringstream, std::ostringstream, std::stringstream
 #include <stdint.h>      // uint32_t etc.
 #include <unordered_map> // std::unordered_map
@@ -75,7 +76,7 @@ namespace console
         if (this->universe_pointer->setting_master_pointer->is_setting("console_top_y"))
         {
             // OK, there is a setting for `console_top_y`.
-            datatypes::AnyValue* console_top_y_any_value = universe_pointer->setting_master_pointer->setting_pointer_map["console_top_y"]->setting_value;
+            std::shared_ptr<datatypes::AnyValue> console_top_y_any_value = std::make_shared<datatypes::AnyValue>(*universe_pointer->setting_master_pointer->setting_pointer_map["console_top_y"]->setting_value);
 
             if (console_top_y_any_value->type == datatypes::UINT32_T)
             {
@@ -96,7 +97,7 @@ namespace console
         if (this->universe_pointer->setting_master_pointer->is_setting("console_bottom_y"))
         {
             // OK, there is a setting for `console_bottom_y`.
-            datatypes::AnyValue* console_bottom_y_any_value = universe_pointer->setting_master_pointer->setting_pointer_map["console_bottom_y"]->setting_value;
+            std::shared_ptr<datatypes::AnyValue> console_bottom_y_any_value = std::make_shared<datatypes::AnyValue>(*universe_pointer->setting_master_pointer->setting_pointer_map["console_bottom_y"]->setting_value);
 
             if (console_bottom_y_any_value->type == datatypes::UINT32_T)
             {
@@ -117,7 +118,7 @@ namespace console
         if (this->universe_pointer->setting_master_pointer->is_setting("console_left_x"))
         {
             // OK, there is a setting for `console_left_x`.
-            datatypes::AnyValue* console_left_x_any_value = universe_pointer->setting_master_pointer->setting_pointer_map["console_left_x"]->setting_value;
+            std::shared_ptr<datatypes::AnyValue> console_left_x_any_value = std::make_shared<datatypes::AnyValue>(*universe_pointer->setting_master_pointer->setting_pointer_map["console_left_x"]->setting_value);
 
             if (console_left_x_any_value->type == datatypes::UINT32_T)
             {
@@ -138,7 +139,7 @@ namespace console
         if (this->universe_pointer->setting_master_pointer->is_setting("console_right_x"))
         {
             // OK, there is a setting for `console_right_x`.
-            datatypes::AnyValue* console_right_x_any_value = universe_pointer->setting_master_pointer->setting_pointer_map["console_right_x"]->setting_value;
+            std::shared_ptr<datatypes::AnyValue> console_right_x_any_value = std::make_shared<datatypes::AnyValue>(*universe_pointer->setting_master_pointer->setting_pointer_map["console_right_x"]->setting_value);
 
             if (console_right_x_any_value->type == datatypes::UINT32_T)
             {
@@ -280,7 +281,7 @@ namespace console
 
     // Action mode keyrelease callbacks begin here.
 
-    datatypes::AnyValue* Console::enable_enter_console(
+    std::shared_ptr<datatypes::AnyValue> Console::enable_enter_console(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*>&,
@@ -295,7 +296,7 @@ namespace console
 
     // Action mode keypress callbacks begin here.
 
-    datatypes::AnyValue* Console::enter_console(
+    std::shared_ptr<datatypes::AnyValue> Console::enter_console(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*>&,
@@ -336,7 +337,7 @@ namespace console
 
             // Signal to caller that we have entered the console.
             uint32_t enter_console_magic_number = ENTER_CONSOLE_MAGIC_NUMBER;
-            datatypes::AnyValue* any_value_magic_number = new datatypes::AnyValue(enter_console_magic_number);
+            std::shared_ptr<datatypes::AnyValue> any_value_magic_number = std::make_shared<datatypes::AnyValue>(enter_console_magic_number);
             return any_value_magic_number;
         }
 
@@ -346,7 +347,7 @@ namespace console
 
     // Console mode keyrelease callbacks begin here.
 
-    datatypes::AnyValue* Console::enable_exit_console(
+    std::shared_ptr<datatypes::AnyValue> Console::enable_exit_console(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*>&,
@@ -359,7 +360,7 @@ namespace console
         return nullptr;
     }
 
-    datatypes::AnyValue* Console::release_left_control_in_console(
+    std::shared_ptr<datatypes::AnyValue> Console::release_left_control_in_console(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*>&,
@@ -372,7 +373,7 @@ namespace console
         return nullptr;
     }
 
-    datatypes::AnyValue* Console::release_right_control_in_console(
+    std::shared_ptr<datatypes::AnyValue> Console::release_right_control_in_console(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*>&,
@@ -385,7 +386,7 @@ namespace console
         return nullptr;
     }
 
-    datatypes::AnyValue* Console::release_left_alt_in_console(
+    std::shared_ptr<datatypes::AnyValue> Console::release_left_alt_in_console(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*>&,
@@ -398,7 +399,7 @@ namespace console
         return nullptr;
     }
 
-    datatypes::AnyValue* Console::release_right_alt_in_console(
+    std::shared_ptr<datatypes::AnyValue> Console::release_right_alt_in_console(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*>&,
@@ -411,7 +412,7 @@ namespace console
         return nullptr;
     }
 
-    datatypes::AnyValue* Console::release_left_shift_in_console(
+    std::shared_ptr<datatypes::AnyValue> Console::release_left_shift_in_console(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*>&,
@@ -424,7 +425,7 @@ namespace console
         return nullptr;
     }
 
-    datatypes::AnyValue* Console::release_right_shift_in_console(
+    std::shared_ptr<datatypes::AnyValue> Console::release_right_shift_in_console(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*>&,
@@ -437,7 +438,7 @@ namespace console
         return nullptr;
     }
 
-    datatypes::AnyValue* Console::enable_move_to_previous_input(
+    std::shared_ptr<datatypes::AnyValue> Console::enable_move_to_previous_input(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*>&,
@@ -450,7 +451,7 @@ namespace console
         return nullptr;
     }
 
-    datatypes::AnyValue* Console::enable_move_to_next_input(
+    std::shared_ptr<datatypes::AnyValue> Console::enable_move_to_next_input(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*>&,
@@ -463,7 +464,7 @@ namespace console
         return nullptr;
     }
 
-    datatypes::AnyValue* Console::enable_backspace(
+    std::shared_ptr<datatypes::AnyValue> Console::enable_backspace(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*>&,
@@ -476,7 +477,7 @@ namespace console
         return nullptr;
     }
 
-    datatypes::AnyValue* Console::enable_enter_key(
+    std::shared_ptr<datatypes::AnyValue> Console::enable_enter_key(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*>&,
@@ -489,7 +490,7 @@ namespace console
         return nullptr;
     }
 
-    datatypes::AnyValue* Console::enable_ctrl_c(
+    std::shared_ptr<datatypes::AnyValue> Console::enable_ctrl_c(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*>&,
@@ -502,7 +503,7 @@ namespace console
         return nullptr;
     }
 
-    datatypes::AnyValue* Console::enable_page_up(
+    std::shared_ptr<datatypes::AnyValue> Console::enable_page_up(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*>&,
@@ -515,7 +516,7 @@ namespace console
         return nullptr;
     }
 
-    datatypes::AnyValue* Console::enable_page_down(
+    std::shared_ptr<datatypes::AnyValue> Console::enable_page_down(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*>&,
@@ -528,7 +529,7 @@ namespace console
         return nullptr;
     }
 
-    datatypes::AnyValue* Console::enable_home(
+    std::shared_ptr<datatypes::AnyValue> Console::enable_home(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*>&,
@@ -541,7 +542,7 @@ namespace console
         return nullptr;
     }
 
-    datatypes::AnyValue* Console::enable_end(
+    std::shared_ptr<datatypes::AnyValue> Console::enable_end(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*>&,
@@ -556,7 +557,7 @@ namespace console
 
     // Console mode keypress callbacks begin here.
 
-    datatypes::AnyValue* Console::exit_console(
+    std::shared_ptr<datatypes::AnyValue> Console::exit_console(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*>&,
@@ -566,7 +567,7 @@ namespace console
         {
             // Signal to caller that we have exited the console.
             uint32_t exit_console_magic_number = EXIT_CONSOLE_MAGIC_NUMBER;
-            datatypes::AnyValue* any_value_magic_number = new datatypes::AnyValue(exit_console_magic_number);
+            std::shared_ptr<datatypes::AnyValue> any_value_magic_number = std::make_shared<datatypes::AnyValue>(exit_console_magic_number);
             return any_value_magic_number;
         }
 
@@ -574,7 +575,7 @@ namespace console
         return nullptr;
     }
 
-    datatypes::AnyValue* Console::press_left_control_in_console(
+    std::shared_ptr<datatypes::AnyValue> Console::press_left_control_in_console(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*>&,
@@ -587,7 +588,7 @@ namespace console
         return nullptr;
     }
 
-    datatypes::AnyValue* Console::press_right_control_in_console(
+    std::shared_ptr<datatypes::AnyValue> Console::press_right_control_in_console(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*>&,
@@ -600,7 +601,7 @@ namespace console
         return nullptr;
     }
 
-    datatypes::AnyValue* Console::press_left_alt_in_console(
+    std::shared_ptr<datatypes::AnyValue> Console::press_left_alt_in_console(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*>&,
@@ -613,7 +614,7 @@ namespace console
         return nullptr;
     }
 
-    datatypes::AnyValue* Console::press_right_alt_in_console(
+    std::shared_ptr<datatypes::AnyValue> Console::press_right_alt_in_console(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*>&,
@@ -626,7 +627,7 @@ namespace console
         return nullptr;
     }
 
-    datatypes::AnyValue* Console::press_left_shift_in_console(
+    std::shared_ptr<datatypes::AnyValue> Console::press_left_shift_in_console(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*>&,
@@ -639,7 +640,7 @@ namespace console
         return nullptr;
     }
 
-    datatypes::AnyValue* Console::press_right_shift_in_console(
+    std::shared_ptr<datatypes::AnyValue> Console::press_right_shift_in_console(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*>&,
@@ -652,7 +653,7 @@ namespace console
         return nullptr;
     }
 
-    datatypes::AnyValue* Console::move_to_previous_input(
+    std::shared_ptr<datatypes::AnyValue> Console::move_to_previous_input(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*>&,
@@ -692,7 +693,7 @@ namespace console
         return nullptr;
     }
 
-    datatypes::AnyValue* Console::move_to_next_input(
+    std::shared_ptr<datatypes::AnyValue> Console::move_to_next_input(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*>&,
@@ -727,7 +728,7 @@ namespace console
         return nullptr;
     }
 
-    datatypes::AnyValue* Console::backspace(
+    std::shared_ptr<datatypes::AnyValue> Console::backspace(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*>&,
@@ -744,13 +745,13 @@ namespace console
         return nullptr;
     }
 
-    datatypes::AnyValue* Console::enter_key(
+    std::shared_ptr<datatypes::AnyValue> Console::enter_key(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*>&,
             console::Console* console)
     {
-        datatypes::AnyValue* any_value = nullptr;
+        std::shared_ptr<datatypes::AnyValue> any_value = nullptr;
 
         if (console->in_console &&
                 console->can_enter_key)
@@ -804,7 +805,7 @@ namespace console
         return any_value;
     }
 
-    datatypes::AnyValue* Console::ctrl_c(
+    std::shared_ptr<datatypes::AnyValue> Console::ctrl_c(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*>&,
@@ -825,7 +826,7 @@ namespace console
         return nullptr;
     }
 
-    datatypes::AnyValue* Console::page_up(
+    std::shared_ptr<datatypes::AnyValue> Console::page_up(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*>&,
@@ -859,7 +860,7 @@ namespace console
         return nullptr;
     }
 
-    datatypes::AnyValue* Console::page_down(
+    std::shared_ptr<datatypes::AnyValue> Console::page_down(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*>&,
@@ -882,7 +883,7 @@ namespace console
         return nullptr;
     }
 
-    datatypes::AnyValue* Console::home(
+    std::shared_ptr<datatypes::AnyValue> Console::home(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*>&,
@@ -906,7 +907,7 @@ namespace console
         return nullptr;
     }
 
-    datatypes::AnyValue* Console::end(
+    std::shared_ptr<datatypes::AnyValue> Console::end(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
             std::vector<callback_system::CallbackParameter*>&,

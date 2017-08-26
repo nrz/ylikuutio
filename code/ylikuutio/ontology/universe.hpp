@@ -25,6 +25,7 @@
 
 // Include standard headers
 #include <iostream> // std::cout, std::cin, std::cerr
+#include <memory>   // std::make_shared, std::shared_ptr
 #include <queue>    // std::queue
 #include <unordered_map> // std::unordered_map
 #include <stdint.h> // uint32_t etc.
@@ -230,7 +231,7 @@ namespace ontology
             // this method returns current `max_FPS`.
             uint32_t get_max_FPS() const;
 
-            void set(std::string& setting_name, datatypes::AnyValue* setting_any_value);
+            void set(std::string& setting_name, std::shared_ptr<datatypes::AnyValue> setting_any_value);
 
             // this method returns a pointer to `config::Setting` corresponding to the given `key`.
             config::Setting* get(std::string key) const;
@@ -239,12 +240,12 @@ namespace ontology
 
             // Public callbacks.
 
-            static datatypes::AnyValue* delete_entity(
+            static std::shared_ptr<datatypes::AnyValue> delete_entity(
                     console::Console* const console,
                     ontology::Universe* const universe,
                     std::vector<std::string>& command_parameters);
 
-            static datatypes::AnyValue* info(
+            static std::shared_ptr<datatypes::AnyValue> info(
                     console::Console* const console,
                     ontology::Universe* const universe,
                     std::vector<std::string>& command_parameters);
