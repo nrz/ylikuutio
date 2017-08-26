@@ -94,12 +94,6 @@ namespace ontology
 
         // Delete shader
         glDeleteProgram(programID);
-
-        if (!this->name.empty() && this->universe_pointer != nullptr)
-        {
-            delete this->universe_pointer->entity_anyvalue_map[this->name];
-            this->universe_pointer->entity_anyvalue_map[this->name] = nullptr;
-        }
     }
 
     int32_t Font2D::get_number_of_children()

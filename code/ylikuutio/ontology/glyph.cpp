@@ -82,7 +82,6 @@ namespace ontology
 
         if (!this->name.empty() && this->universe_pointer != nullptr)
         {
-            delete this->universe_pointer->entity_anyvalue_map[this->name];
             this->universe_pointer->entity_anyvalue_map[this->name] = nullptr;
         }
     }

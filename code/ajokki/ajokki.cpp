@@ -122,7 +122,7 @@ int main(void)
 
     float earth_radius = 6371.0f; // in kilometres
 
-    SettingStruct world_radius_setting_struct(new datatypes::AnyValue(earth_radius));
+    SettingStruct world_radius_setting_struct(std::make_shared<datatypes::AnyValue>(earth_radius));
     world_radius_setting_struct.name = "world_radius";
     world_radius_setting_struct.setting_master_pointer = my_setting_master;
     world_radius_setting_struct.activate_callback = &config::SettingMaster::activate_world_radius; // world may be a planet or a moon.
@@ -408,27 +408,27 @@ int main(void)
     // Callback code for left Control release: release first turbo.
     callback_system::CallbackEngine* release_first_turbo_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* release_first_turbo_callback_object = new callback_system::CallbackObject(&ajokki::release_first_turbo, release_first_turbo_callback_engine);
-    new callback_system::CallbackParameter("", new datatypes::AnyValue(my_universe), false, release_first_turbo_callback_object);
+    new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, release_first_turbo_callback_object);
 
     // Callback code for right Control release: release second turbo.
     callback_system::CallbackEngine* release_second_turbo_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* release_second_turbo_callback_object = new callback_system::CallbackObject(&ajokki::release_second_turbo, release_second_turbo_callback_engine);
-    new callback_system::CallbackParameter("", new datatypes::AnyValue(my_universe), false, release_second_turbo_callback_object);
+    new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, release_second_turbo_callback_object);
 
     // Callback code for I release: enable_toggle invert mouse.
     callback_system::CallbackEngine* enable_toggle_invert_mouse_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* enable_toggle_invert_mouse_callback_object = new callback_system::CallbackObject(&ajokki::enable_toggle_invert_mouse, enable_toggle_invert_mouse_callback_engine);
-    new callback_system::CallbackParameter("", new datatypes::AnyValue(my_universe), false, enable_toggle_invert_mouse_callback_object);
+    new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, enable_toggle_invert_mouse_callback_object);
 
     // Callback code for F release: enable_toggle flight mode.
     callback_system::CallbackEngine* enable_toggle_flight_mode_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* enable_toggle_flight_mode_callback_object = new callback_system::CallbackObject(&ajokki::enable_toggle_flight_mode, enable_toggle_flight_mode_callback_engine);
-    new callback_system::CallbackParameter("", new datatypes::AnyValue(my_universe), false, enable_toggle_flight_mode_callback_object);
+    new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, enable_toggle_flight_mode_callback_object);
 
     // Callback code for F1 release: enable toggle help mode.
     callback_system::CallbackEngine* enable_toggle_help_mode_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* enable_toggle_help_mode_callback_object = new callback_system::CallbackObject(&ajokki::enable_toggle_help_mode, enable_toggle_help_mode_callback_engine);
-    new callback_system::CallbackParameter("", new datatypes::AnyValue(my_universe), false, enable_toggle_help_mode_callback_object);
+    new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, enable_toggle_help_mode_callback_object);
 
     /*********************************************************************\
      *  Callback engines for action mode keypresses begin here.          *
@@ -445,71 +445,71 @@ int main(void)
     // Callback code for left Control: first turbo.
     callback_system::CallbackEngine* first_turbo_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* first_turbo_callback_object = new callback_system::CallbackObject(&ajokki::first_turbo, first_turbo_callback_engine);
-    new callback_system::CallbackParameter("", new datatypes::AnyValue(my_universe), false, first_turbo_callback_object);
+    new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, first_turbo_callback_object);
 
     // Callback code for right Control: second turbo.
     callback_system::CallbackEngine* second_turbo_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* second_turbo_callback_object = new callback_system::CallbackObject(&ajokki::second_turbo, second_turbo_callback_engine);
-    new callback_system::CallbackParameter("", new datatypes::AnyValue(my_universe), false, second_turbo_callback_object);
+    new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, second_turbo_callback_object);
 
     // Callback code for key up: move forward.
     callback_system::CallbackEngine* move_forward_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* move_forward_callback_object = new callback_system::CallbackObject(
             &ajokki::move_forward, move_forward_callback_engine);
-    new callback_system::CallbackParameter("", new datatypes::AnyValue(my_universe), false, move_forward_callback_object);
+    new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, move_forward_callback_object);
 
     // Callback code for key down: move backward.
     callback_system::CallbackEngine* move_backward_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* move_backward_callback_object = new callback_system::CallbackObject(
             &ajokki::move_backward, move_backward_callback_engine);
-    new callback_system::CallbackParameter("", new datatypes::AnyValue(my_universe), false, move_backward_callback_object);
+    new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, move_backward_callback_object);
 
     // Callback code for key left: strafe left.
     callback_system::CallbackEngine* strafe_left_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* strafe_left_callback_object = new callback_system::CallbackObject(
             &ajokki::strafe_left, strafe_left_callback_engine);
-    new callback_system::CallbackParameter("", new datatypes::AnyValue(my_universe), false, strafe_left_callback_object);
+    new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, strafe_left_callback_object);
 
     // Callback code for key right: strafe right.
     callback_system::CallbackEngine* strafe_right_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* strafe_right_callback_object = new callback_system::CallbackObject(
             &ajokki::strafe_right, strafe_right_callback_engine);
-    new callback_system::CallbackParameter("", new datatypes::AnyValue(my_universe), false, strafe_right_callback_object);
+    new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, strafe_right_callback_object);
 
     // Callback code for space: ascent.
     callback_system::CallbackEngine* ascent_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* ascent_callback_object = new callback_system::CallbackObject(
             &ajokki::ascent, ascent_callback_engine);
-    new callback_system::CallbackParameter("", new datatypes::AnyValue(my_universe), false, ascent_callback_object);
+    new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, ascent_callback_object);
 
     // Callback code for enter: descent.
     callback_system::CallbackEngine* descent_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* descent_callback_object = new callback_system::CallbackObject(
             &ajokki::descent, descent_callback_engine);
-    new callback_system::CallbackParameter("", new datatypes::AnyValue(my_universe), false, descent_callback_object);
+    new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, descent_callback_object);
 
     // Callback code for I: toggle invert mouse.
     callback_system::CallbackEngine* toggle_invert_mouse_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* toggle_invert_mouse_callback_object = new callback_system::CallbackObject(&ajokki::toggle_invert_mouse, toggle_invert_mouse_callback_engine);
-    new callback_system::CallbackParameter("", new datatypes::AnyValue(my_universe), false, toggle_invert_mouse_callback_object);
+    new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, toggle_invert_mouse_callback_object);
 
     // Callback code for F: toggle flight mode.
     callback_system::CallbackEngine* toggle_flight_mode_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* toggle_flight_mode_callback_object = new callback_system::CallbackObject(&ajokki::toggle_flight_mode, toggle_flight_mode_callback_engine);
-    new callback_system::CallbackParameter("", new datatypes::AnyValue(my_universe), false, toggle_flight_mode_callback_object);
+    new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, toggle_flight_mode_callback_object);
 
     // Callback code for F1: toggle help mode.
     callback_system::CallbackEngine* toggle_help_mode_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* toggle_help_mode_callback_object = new callback_system::CallbackObject(&ajokki::toggle_help_mode, toggle_help_mode_callback_engine);
-    new callback_system::CallbackParameter("", new datatypes::AnyValue(my_universe), false, toggle_help_mode_callback_object);
+    new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, toggle_help_mode_callback_object);
 
     // Callback code for D: delete Suzanne species.
     bool does_suzanne_species_exist = true;
     callback_system::CallbackEngine* delete_suzanne_species_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* delete_suzanne_species_callback_object = new callback_system::CallbackObject(
             &ajokki::delete_suzanne_species, delete_suzanne_species_callback_engine);
-    new callback_system::CallbackParameter("suzanne_species", new datatypes::AnyValue(suzanne_species), false, delete_suzanne_species_callback_object);
-    new callback_system::CallbackParameter("does_suzanne_species_exist", new datatypes::AnyValue(&does_suzanne_species_exist), false, delete_suzanne_species_callback_object);
+    new callback_system::CallbackParameter("suzanne_species", std::make_shared<datatypes::AnyValue>(suzanne_species), false, delete_suzanne_species_callback_object);
+    new callback_system::CallbackParameter("does_suzanne_species_exist", std::make_shared<datatypes::AnyValue>(&does_suzanne_species_exist), false, delete_suzanne_species_callback_object);
 
     // Callback code for G: switch to grass material.
     bool does_suzanne_species_have_uvmap_texture = true;
@@ -517,17 +517,17 @@ int main(void)
     callback_system::CallbackEngine* switch_to_grass_material_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* switch_to_grass_material_callback_object = new callback_system::CallbackObject(
             &ajokki::switch_to_new_material, switch_to_grass_material_callback_engine);
-    new callback_system::CallbackParameter("suzanne_species", new datatypes::AnyValue(suzanne_species), false, switch_to_grass_material_callback_object);
-    new callback_system::CallbackParameter("new_material", new datatypes::AnyValue(grass_material), false, switch_to_grass_material_callback_object);
-    new callback_system::CallbackParameter("does_suzanne_species_exist", new datatypes::AnyValue(&does_suzanne_species_exist), false, switch_to_grass_material_callback_object);
+    new callback_system::CallbackParameter("suzanne_species", std::make_shared<datatypes::AnyValue>(suzanne_species), false, switch_to_grass_material_callback_object);
+    new callback_system::CallbackParameter("new_material", std::make_shared<datatypes::AnyValue>(grass_material), false, switch_to_grass_material_callback_object);
+    new callback_system::CallbackParameter("does_suzanne_species_exist", std::make_shared<datatypes::AnyValue>(&does_suzanne_species_exist), false, switch_to_grass_material_callback_object);
     new callback_system::CallbackParameter(
             "does_suzanne_species_have_old_texture",
-            new datatypes::AnyValue(&does_suzanne_species_have_uvmap_texture),
+            std::make_shared<datatypes::AnyValue>(&does_suzanne_species_have_uvmap_texture),
             false,
             switch_to_grass_material_callback_object);
     new callback_system::CallbackParameter(
             "does_suzanne_species_have_new_texture",
-            new datatypes::AnyValue(&does_suzanne_species_have_grass_texture),
+            std::make_shared<datatypes::AnyValue>(&does_suzanne_species_have_grass_texture),
             false,
             switch_to_grass_material_callback_object);
 
@@ -535,17 +535,17 @@ int main(void)
     callback_system::CallbackEngine* switch_to_uvmap_material_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* switch_to_uvmap_material_callback_object = new callback_system::CallbackObject(
             &ajokki::switch_to_new_material, switch_to_uvmap_material_callback_engine);
-    new callback_system::CallbackParameter("suzanne_species", new datatypes::AnyValue(suzanne_species), false, switch_to_uvmap_material_callback_object);
-    new callback_system::CallbackParameter("new_material", new datatypes::AnyValue(uvmap_material), false, switch_to_uvmap_material_callback_object);
-    new callback_system::CallbackParameter("does_suzanne_species_exist", new datatypes::AnyValue(&does_suzanne_species_exist), false, switch_to_uvmap_material_callback_object);
+    new callback_system::CallbackParameter("suzanne_species", std::make_shared<datatypes::AnyValue>(suzanne_species), false, switch_to_uvmap_material_callback_object);
+    new callback_system::CallbackParameter("new_material", std::make_shared<datatypes::AnyValue>(uvmap_material), false, switch_to_uvmap_material_callback_object);
+    new callback_system::CallbackParameter("does_suzanne_species_exist", std::make_shared<datatypes::AnyValue>(&does_suzanne_species_exist), false, switch_to_uvmap_material_callback_object);
     new callback_system::CallbackParameter(
             "does_suzanne_species_have_old_texture",
-            new datatypes::AnyValue(&does_suzanne_species_have_grass_texture),
+            std::make_shared<datatypes::AnyValue>(&does_suzanne_species_have_grass_texture),
             false,
             switch_to_uvmap_material_callback_object);
     new callback_system::CallbackParameter(
             "does_suzanne_species_have_new_texture",
-            new datatypes::AnyValue(&does_suzanne_species_have_uvmap_texture),
+            std::make_shared<datatypes::AnyValue>(&does_suzanne_species_have_uvmap_texture),
             false,
             switch_to_uvmap_material_callback_object);
 
@@ -555,17 +555,17 @@ int main(void)
     callback_system::CallbackEngine* transform_into_terrain_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* transform_into_terrain_callback_object = new callback_system::CallbackObject(
             &ajokki::transform_into_new_species, transform_into_terrain_callback_engine);
-    new callback_system::CallbackParameter("suzanne2", new datatypes::AnyValue(suzanne2), false, transform_into_terrain_callback_object); // suzanne2!!!
-    new callback_system::CallbackParameter("terrain_species", new datatypes::AnyValue(terrain_species), false, transform_into_terrain_callback_object);
-    new callback_system::CallbackParameter("does_suzanne_species_exist", new datatypes::AnyValue(&does_suzanne_species_exist), false, transform_into_terrain_callback_object);
+    new callback_system::CallbackParameter("suzanne2", std::make_shared<datatypes::AnyValue>(suzanne2), false, transform_into_terrain_callback_object); // suzanne2!!!
+    new callback_system::CallbackParameter("terrain_species", std::make_shared<datatypes::AnyValue>(terrain_species), false, transform_into_terrain_callback_object);
+    new callback_system::CallbackParameter("does_suzanne_species_exist", std::make_shared<datatypes::AnyValue>(&does_suzanne_species_exist), false, transform_into_terrain_callback_object);
     new callback_system::CallbackParameter(
             "has_suzanne_2_transformed_into_monkey",
-            new datatypes::AnyValue(&has_suzanne_2_transformed_into_monkey),
+            std::make_shared<datatypes::AnyValue>(&has_suzanne_2_transformed_into_monkey),
             false,
             transform_into_terrain_callback_object);
     new callback_system::CallbackParameter(
             "has_suzanne_2_transformed_into_terrain",
-            new datatypes::AnyValue(&has_suzanne_2_transformed_into_terrain),
+            std::make_shared<datatypes::AnyValue>(&has_suzanne_2_transformed_into_terrain),
             false,
             transform_into_terrain_callback_object);
 
@@ -573,17 +573,17 @@ int main(void)
     callback_system::CallbackEngine* transform_into_monkey_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* transform_into_monkey_callback_object = new callback_system::CallbackObject(
             &ajokki::transform_into_new_species, transform_into_monkey_callback_engine);
-    new callback_system::CallbackParameter("suzanne2", new datatypes::AnyValue(suzanne2), false, transform_into_monkey_callback_object); // suzanne2!!!
-    new callback_system::CallbackParameter("monkey_species", new datatypes::AnyValue(suzanne_species), false, transform_into_monkey_callback_object);
-    new callback_system::CallbackParameter("does_suzanne_species_exist", new datatypes::AnyValue(&does_suzanne_species_exist), false, transform_into_monkey_callback_object);
+    new callback_system::CallbackParameter("suzanne2", std::make_shared<datatypes::AnyValue>(suzanne2), false, transform_into_monkey_callback_object); // suzanne2!!!
+    new callback_system::CallbackParameter("monkey_species", std::make_shared<datatypes::AnyValue>(suzanne_species), false, transform_into_monkey_callback_object);
+    new callback_system::CallbackParameter("does_suzanne_species_exist", std::make_shared<datatypes::AnyValue>(&does_suzanne_species_exist), false, transform_into_monkey_callback_object);
     new callback_system::CallbackParameter(
             "has_suzanne_2_transformed_into_terrain",
-            new datatypes::AnyValue(&has_suzanne_2_transformed_into_terrain),
+            std::make_shared<datatypes::AnyValue>(&has_suzanne_2_transformed_into_terrain),
             false,
             transform_into_monkey_callback_object);
     new callback_system::CallbackParameter(
             "has_suzanne_2_transformed_into_monkey",
-            new datatypes::AnyValue(&has_suzanne_2_transformed_into_monkey),
+            std::make_shared<datatypes::AnyValue>(&has_suzanne_2_transformed_into_monkey),
             false,
             transform_into_monkey_callback_object);
 
@@ -723,8 +723,8 @@ int main(void)
     callback_system::CallbackEngine* end_callback_engine = new callback_system::CallbackEngine();
     new console::ConsoleCallbackObject(&console::Console::end, end_callback_engine, my_console);
 
-    new callback_system::CallbackParameter("", new datatypes::AnyValue(my_universe), false, cleanup_callback_object);
-    new callback_system::CallbackParameter("font2D_pointer", new datatypes::AnyValue(my_font2D), false, cleanup_callback_object);
+    new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, cleanup_callback_object);
+    new callback_system::CallbackParameter("font2D_pointer", std::make_shared<datatypes::AnyValue>(my_font2D), false, cleanup_callback_object);
     cleanup_callback_object->set_new_callback(&ajokki::full_cleanup);
 
     // Keyrelease callbacks for action mode.

@@ -6,6 +6,7 @@
 #include "code/ylikuutio/common/any_value.hpp"
 
 // Include standard headers
+#include <memory>        // std::make_shared, std::shared_ptr
 #include <queue>         // std::queue
 #include <string>        // std::string
 #include <unordered_map> // std::unordered_map
@@ -33,68 +34,68 @@ namespace config
             // this function returns help string for setting `setting`.
             std::string help(const std::string setting_name);
 
-            bool set(std::string& setting_name, datatypes::AnyValue* const setting_new_any_value);
+            bool set(std::string& setting_name, std::shared_ptr<datatypes::AnyValue> setting_new_any_value);
 
             config::Setting* get(std::string& setting_name);
 
             // Public callbacks.
 
-            static datatypes::AnyValue* set_and_print(
+            static std::shared_ptr<datatypes::AnyValue> set_and_print(
                     console::Console* console,
                     ontology::Universe* universe,
                     std::vector<std::string>& command_parameters);
 
-            static datatypes::AnyValue* get_and_print(
+            static std::shared_ptr<datatypes::AnyValue> get_and_print(
                     console::Console* console,
                     ontology::Universe* universe,
                     std::vector<std::string>& command_parameters);
 
-            static datatypes::AnyValue* activate_world_radius(ontology::Universe* const universe, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> activate_world_radius(ontology::Universe* const universe, config::SettingMaster* const setting_master);
 
-            static datatypes::AnyValue* activate_background_color(ontology::Universe* const universe, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> activate_background_color(ontology::Universe* const universe, config::SettingMaster* const setting_master);
 
-            static datatypes::AnyValue* activate_spherical_coordinates(ontology::Universe* const universe, config::SettingMaster* const setting_master);
-            static datatypes::AnyValue* activate_rho(ontology::Universe* const universe, config::SettingMaster* const setting_master);
-            static datatypes::AnyValue* activate_theta(ontology::Universe* const universe, config::SettingMaster* const setting_master);
-            static datatypes::AnyValue* activate_phi(ontology::Universe* const universe, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> activate_spherical_coordinates(ontology::Universe* const universe, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> activate_rho(ontology::Universe* const universe, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> activate_theta(ontology::Universe* const universe, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> activate_phi(ontology::Universe* const universe, config::SettingMaster* const setting_master);
 
-            static datatypes::AnyValue* activate_cartesian_coordinates(ontology::Universe* const universe, config::SettingMaster* const setting_master);
-            static datatypes::AnyValue* activate_x(ontology::Universe* const universe, config::SettingMaster* const setting_master);
-            static datatypes::AnyValue* activate_y(ontology::Universe* const universe, config::SettingMaster* const setting_master);
-            static datatypes::AnyValue* activate_z(ontology::Universe* const universe, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> activate_cartesian_coordinates(ontology::Universe* const universe, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> activate_x(ontology::Universe* const universe, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> activate_y(ontology::Universe* const universe, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> activate_z(ontology::Universe* const universe, config::SettingMaster* const setting_master);
 
-            static datatypes::AnyValue* activate_horizontal_angle(ontology::Universe* const universe, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> activate_horizontal_angle(ontology::Universe* const universe, config::SettingMaster* const setting_master);
 
-            static datatypes::AnyValue* activate_vertical_angle(ontology::Universe* const universe, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> activate_vertical_angle(ontology::Universe* const universe, config::SettingMaster* const setting_master);
 
-            static datatypes::AnyValue* activate_speed(ontology::Universe* const universe, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> activate_speed(ontology::Universe* const universe, config::SettingMaster* const setting_master);
 
-            static datatypes::AnyValue* activate_turbo_factor(ontology::Universe* const universe, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> activate_turbo_factor(ontology::Universe* const universe, config::SettingMaster* const setting_master);
 
-            static datatypes::AnyValue* activate_twin_turbo_factor(ontology::Universe* const universe, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> activate_twin_turbo_factor(ontology::Universe* const universe, config::SettingMaster* const setting_master);
 
-            static datatypes::AnyValue* activate_mouse_speed(ontology::Universe* const universe, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> activate_mouse_speed(ontology::Universe* const universe, config::SettingMaster* const setting_master);
 
-            static datatypes::AnyValue* activate_is_flight_mode_in_use(ontology::Universe* const universe, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> activate_is_flight_mode_in_use(ontology::Universe* const universe, config::SettingMaster* const setting_master);
 
-            static datatypes::AnyValue* activate_testing_spherical_world_in_use(ontology::Universe* const universe, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> activate_testing_spherical_world_in_use(ontology::Universe* const universe, config::SettingMaster* const setting_master);
 
-            static datatypes::AnyValue* read_x(ontology::Universe* const universe, config::SettingMaster* const setting_master);
-            static datatypes::AnyValue* read_y(ontology::Universe* const universe, config::SettingMaster* const setting_master);
-            static datatypes::AnyValue* read_z(ontology::Universe* const universe, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> read_x(ontology::Universe* const universe, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> read_y(ontology::Universe* const universe, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> read_z(ontology::Universe* const universe, config::SettingMaster* const setting_master);
 
-            static datatypes::AnyValue* read_rho(ontology::Universe* const universe, config::SettingMaster* const setting_master);
-            static datatypes::AnyValue* read_theta(ontology::Universe* const universe, config::SettingMaster* const setting_master);
-            static datatypes::AnyValue* read_phi(ontology::Universe* const universe, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> read_rho(ontology::Universe* const universe, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> read_theta(ontology::Universe* const universe, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> read_phi(ontology::Universe* const universe, config::SettingMaster* const setting_master);
 
-            static datatypes::AnyValue* read_up(ontology::Universe* const universe, config::SettingMaster* const setting_master);
-            static datatypes::AnyValue* read_right(ontology::Universe* const universe, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> read_up(ontology::Universe* const universe, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> read_right(ontology::Universe* const universe, config::SettingMaster* const setting_master);
 
-            static datatypes::AnyValue* read_horizontal_angle(ontology::Universe* const universe, config::SettingMaster* const setting_master);
-            static datatypes::AnyValue* read_vertical_angle(ontology::Universe* const universe, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> read_horizontal_angle(ontology::Universe* const universe, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> read_vertical_angle(ontology::Universe* const universe, config::SettingMaster* const setting_master);
 
-            static datatypes::AnyValue* read_is_flight_mode_in_use(ontology::Universe* const universe, config::SettingMaster* const setting_master);
-            static datatypes::AnyValue* read_testing_spherical_world_in_use(ontology::Universe* const universe, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> read_is_flight_mode_in_use(ontology::Universe* const universe, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> read_testing_spherical_world_in_use(ontology::Universe* const universe, config::SettingMaster* const setting_master);
 
             // Public callbacks end here.
 

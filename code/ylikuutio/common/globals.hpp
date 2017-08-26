@@ -44,6 +44,7 @@
 #endif
 
 // Include standard headers
+#include <memory>   // std::make_shared, std::shared_ptr
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 #include <unordered_map> // std::unordered_map
@@ -77,20 +78,20 @@ namespace ontology
     class Font2D;
 }
 
-typedef datatypes::AnyValue* (*ActivateCallback) (ontology::Universe* universe, config::SettingMaster* setting_master);
-typedef datatypes::AnyValue* (*ReadCallback) (ontology::Universe* universe, config::SettingMaster* setting_master);
-typedef datatypes::AnyValue* (*PreRenderCallback) (ontology::Universe* universe, config::SettingMaster* setting_master);
-typedef datatypes::AnyValue* (*PostRenderCallback) (ontology::Universe* universe, config::SettingMaster* setting_master);
+typedef std::shared_ptr<datatypes::AnyValue> (*ActivateCallback) (ontology::Universe* universe, config::SettingMaster* setting_master);
+typedef std::shared_ptr<datatypes::AnyValue> (*ReadCallback) (ontology::Universe* universe, config::SettingMaster* setting_master);
+typedef std::shared_ptr<datatypes::AnyValue> (*PreRenderCallback) (ontology::Universe* universe, config::SettingMaster* setting_master);
+typedef std::shared_ptr<datatypes::AnyValue> (*PostRenderCallback) (ontology::Universe* universe, config::SettingMaster* setting_master);
 
 typedef struct SettingStruct
 {
-    SettingStruct(datatypes::AnyValue* initial_value)
+    SettingStruct(std::shared_ptr<datatypes::AnyValue> initial_value)
         : initial_value(initial_value), should_ylikuutio_call_activate_callback_now(true), setting_master_pointer(nullptr), activate_callback(nullptr), read_callback(nullptr)
     {
         // constructor.
     }
     std::string name;
-    datatypes::AnyValue* initial_value;
+    std::shared_ptr<datatypes::AnyValue> initial_value;
     config::SettingMaster* setting_master_pointer;
     ActivateCallback activate_callback;
     ReadCallback read_callback;
@@ -171,7 +172,7 @@ typedef struct
     SphericalWorldStruct spherical_world_struct;
 } TransformationStruct;
 
-typedef datatypes::AnyValue* (*InputParametersToAnyValueCallback) (
+typedef std::shared_ptr<datatypes::AnyValue> (*InputParametersToAnyValueCallback) (
         callback_system::CallbackEngine*,
         callback_system::CallbackObject*,
         std::vector<callback_system::CallbackParameter*>&);
@@ -180,13 +181,13 @@ namespace console
 {
     class Console;
 }
-typedef datatypes::AnyValue* (*InputParametersToAnyValueCallbackWithConsole) (
+typedef std::shared_ptr<datatypes::AnyValue> (*InputParametersToAnyValueCallbackWithConsole) (
         callback_system::CallbackEngine*,
         callback_system::CallbackObject*,
         std::vector<callback_system::CallbackParameter*>&,
         console::Console*);
 
-typedef datatypes::AnyValue* (*GetContentCallback) (
+typedef std::shared_ptr<datatypes::AnyValue> (*GetContentCallback) (
         callback_system::CallbackEngine*,
         callback_system::CallbackObject*,
         std::vector<callback_system::CallbackParameter*>&,

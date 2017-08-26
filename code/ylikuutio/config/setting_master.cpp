@@ -5,6 +5,7 @@
 #include "code/ylikuutio/common/any_value.hpp"
 
 // Include standard headers
+#include <memory>        // std::make_shared, std::shared_ptr
 #include <string>        // std::string
 #include <vector>        // std::vector
 #include <unordered_map> // std::unordered_map
@@ -52,7 +53,7 @@ namespace config
         return this->help();
     }
 
-    bool SettingMaster::set(std::string& setting_name, datatypes::AnyValue* const setting_new_any_value)
+    bool SettingMaster::set(std::string& setting_name, std::shared_ptr<datatypes::AnyValue> setting_new_any_value)
     {
         if (!this->is_setting(setting_name))
         {
@@ -67,9 +68,6 @@ namespace config
         // create empty `AnyValue` (there is no suitable constructor yet).
         setting_new_any_value->type = setting->setting_value->type;
 
-        // Delete the old `datatypes::AnyValue`.
-        delete setting->setting_value;
-
         setting->setting_value = setting_new_any_value;
         setting->activate_callback(this->parent_pointer, this);
         return true;
@@ -82,7 +80,7 @@ namespace config
 
     // public callbacks.
 
-    datatypes::AnyValue* SettingMaster::set_and_print(
+    std::shared_ptr<datatypes::AnyValue> SettingMaster::set_and_print(
             console::Console* const console,
             ontology::Universe* const universe,
             std::vector<std::string>& command_parameters)
@@ -147,7 +145,7 @@ namespace config
                 config::Setting* setting = setting_master->setting_pointer_map[setting_name];
 
                 // create empty `AnyValue` (there is no suitable constructor yet).
-                datatypes::AnyValue* setting_any_value = new datatypes::AnyValue();
+                std::shared_ptr<datatypes::AnyValue> setting_any_value = std::make_shared<datatypes::AnyValue>();
                 setting_any_value->type = setting->setting_value->type;
 
                 // set a new value.
@@ -155,7 +153,6 @@ namespace config
 
                 if (success)
                 {
-                    delete setting->setting_value; // delete the old value.
                     setting->setting_value = setting_any_value;
 
                     if (setting->activate_callback != nullptr)
@@ -173,7 +170,7 @@ namespace config
         return nullptr;
     }
 
-    datatypes::AnyValue* SettingMaster::get_and_print(
+    std::shared_ptr<datatypes::AnyValue> SettingMaster::get_and_print(
             console::Console* const console,
             ontology::Universe* const universe,
             std::vector<std::string>& command_parameters)
@@ -232,7 +229,7 @@ namespace config
         return nullptr;
     }
 
-    datatypes::AnyValue* SettingMaster::activate_world_radius(ontology::Universe* const universe, config::SettingMaster* const setting_master)
+    std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_world_radius(ontology::Universe* const universe, config::SettingMaster* const setting_master)
     {
         if (universe == nullptr)
         {
@@ -246,7 +243,7 @@ namespace config
             return nullptr;
         }
 
-        datatypes::AnyValue* world_radius_any_value = setting_master_pointer->setting_pointer_map["world_radius"]->setting_value;
+        std::shared_ptr<datatypes::AnyValue> world_radius_any_value = std::make_shared<datatypes::AnyValue>(*setting_master_pointer->setting_pointer_map["world_radius"]->setting_value);
 
         if (world_radius_any_value == nullptr || world_radius_any_value->type != datatypes::FLOAT)
         {
@@ -257,7 +254,7 @@ namespace config
         return nullptr;
     }
 
-    datatypes::AnyValue* SettingMaster::activate_background_color(ontology::Universe* const universe, config::SettingMaster* const setting_master)
+    std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_background_color(ontology::Universe* const universe, config::SettingMaster* const setting_master)
     {
         if (universe == nullptr)
         {
@@ -280,7 +277,7 @@ namespace config
         }
 
         // red.
-        datatypes::AnyValue* red_any_value = setting_master_pointer->setting_pointer_map["red"]->setting_value;
+        std::shared_ptr<datatypes::AnyValue> red_any_value = std::make_shared<datatypes::AnyValue>(*setting_master_pointer->setting_pointer_map["red"]->setting_value);
 
         if (red_any_value == nullptr || red_any_value->type != datatypes::FLOAT)
         {
@@ -290,7 +287,7 @@ namespace config
         GLclampf red = static_cast<GLclampf>(red_any_value->float_value);
 
         // green.
-        datatypes::AnyValue* green_any_value = setting_master_pointer->setting_pointer_map["green"]->setting_value;
+        std::shared_ptr<datatypes::AnyValue> green_any_value = std::make_shared<datatypes::AnyValue>(*setting_master_pointer->setting_pointer_map["green"]->setting_value);
 
         if (green_any_value == nullptr || green_any_value->type != datatypes::FLOAT)
         {
@@ -300,7 +297,7 @@ namespace config
         GLclampf green = static_cast<GLclampf>(green_any_value->float_value);
 
         // blue.
-        datatypes::AnyValue* blue_any_value = setting_master_pointer->setting_pointer_map["blue"]->setting_value;
+        std::shared_ptr<datatypes::AnyValue> blue_any_value = std::make_shared<datatypes::AnyValue>(*setting_master_pointer->setting_pointer_map["blue"]->setting_value);
 
         if (blue_any_value == nullptr || blue_any_value->type != datatypes::FLOAT)
         {
@@ -310,7 +307,7 @@ namespace config
         GLclampf blue = static_cast<GLclampf>(blue_any_value->float_value);
 
         // alpha.
-        datatypes::AnyValue* alpha_any_value = setting_master_pointer->setting_pointer_map["alpha"]->setting_value;
+        std::shared_ptr<datatypes::AnyValue> alpha_any_value = std::make_shared<datatypes::AnyValue>(*setting_master_pointer->setting_pointer_map["alpha"]->setting_value);
 
         if (alpha_any_value == nullptr || alpha_any_value->type != datatypes::FLOAT)
         {
@@ -323,7 +320,7 @@ namespace config
         return nullptr;
     }
 
-    datatypes::AnyValue* SettingMaster::activate_spherical_coordinates(ontology::Universe* const universe, config::SettingMaster* const setting_master)
+    std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_spherical_coordinates(ontology::Universe* const universe, config::SettingMaster* const setting_master)
     {
         if (universe == nullptr)
         {
@@ -342,7 +339,7 @@ namespace config
             return nullptr;
         }
 
-        datatypes::AnyValue* spherical_coordinates_any_value = setting_master_pointer->setting_pointer_map["spherical_coordinates"]->setting_value;
+        std::shared_ptr<datatypes::AnyValue> spherical_coordinates_any_value = std::make_shared<datatypes::AnyValue>(*setting_master_pointer->setting_pointer_map["spherical_coordinates"]->setting_value);
 
         if (spherical_coordinates_any_value == nullptr || spherical_coordinates_any_value->type != datatypes::SPHERICAL_COORDINATES_STRUCT_POINTER)
         {
@@ -354,7 +351,7 @@ namespace config
         return nullptr;
     }
 
-    datatypes::AnyValue* SettingMaster::activate_rho(ontology::Universe* const universe, config::SettingMaster* const setting_master)
+    std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_rho(ontology::Universe* const universe, config::SettingMaster* const setting_master)
     {
         if (universe == nullptr || universe->spherical_coordinates == nullptr)
         {
@@ -373,7 +370,7 @@ namespace config
             return nullptr;
         }
 
-        datatypes::AnyValue* rho_any_value = setting_master_pointer->setting_pointer_map["rho"]->setting_value;
+        std::shared_ptr<datatypes::AnyValue> rho_any_value = std::make_shared<datatypes::AnyValue>(*setting_master_pointer->setting_pointer_map["rho"]->setting_value);
 
         if (rho_any_value == nullptr || rho_any_value->type != datatypes::FLOAT)
         {
@@ -383,7 +380,7 @@ namespace config
         universe->spherical_coordinates->rho = rho_any_value->float_value;
     }
 
-    datatypes::AnyValue* SettingMaster::activate_theta(ontology::Universe* const universe, config::SettingMaster* const setting_master)
+    std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_theta(ontology::Universe* const universe, config::SettingMaster* const setting_master)
     {
         if (universe == nullptr || universe->spherical_coordinates == nullptr)
         {
@@ -402,7 +399,7 @@ namespace config
             return nullptr;
         }
 
-        datatypes::AnyValue* theta_any_value = setting_master_pointer->setting_pointer_map["theta"]->setting_value;
+        std::shared_ptr<datatypes::AnyValue> theta_any_value = std::make_shared<datatypes::AnyValue>(*setting_master_pointer->setting_pointer_map["theta"]->setting_value);
 
         if (theta_any_value == nullptr || theta_any_value->type != datatypes::FLOAT)
         {
@@ -412,7 +409,7 @@ namespace config
         universe->spherical_coordinates->theta = theta_any_value->float_value;
     }
 
-    datatypes::AnyValue* SettingMaster::activate_phi(ontology::Universe* const universe, config::SettingMaster* const setting_master)
+    std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_phi(ontology::Universe* const universe, config::SettingMaster* const setting_master)
     {
         if (universe == nullptr || universe->spherical_coordinates == nullptr)
         {
@@ -431,7 +428,7 @@ namespace config
             return nullptr;
         }
 
-        datatypes::AnyValue* phi_any_value = setting_master_pointer->setting_pointer_map["phi"]->setting_value;
+        std::shared_ptr<datatypes::AnyValue> phi_any_value = std::make_shared<datatypes::AnyValue>(*setting_master_pointer->setting_pointer_map["phi"]->setting_value);
 
         if (phi_any_value == nullptr || phi_any_value->type != datatypes::FLOAT)
         {
@@ -441,7 +438,7 @@ namespace config
         universe->spherical_coordinates->phi = phi_any_value->float_value;
     }
 
-    datatypes::AnyValue* SettingMaster::activate_cartesian_coordinates(ontology::Universe* const universe, config::SettingMaster* const setting_master)
+    std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_cartesian_coordinates(ontology::Universe* const universe, config::SettingMaster* const setting_master)
     {
         if (universe == nullptr)
         {
@@ -460,7 +457,7 @@ namespace config
             return nullptr;
         }
 
-        datatypes::AnyValue* cartesian_coordinates_any_value = setting_master_pointer->setting_pointer_map["cartesian_coordinates"]->setting_value;
+        std::shared_ptr<datatypes::AnyValue> cartesian_coordinates_any_value = std::make_shared<datatypes::AnyValue>(*setting_master_pointer->setting_pointer_map["cartesian_coordinates"]->setting_value);
 
         if (cartesian_coordinates_any_value == nullptr || cartesian_coordinates_any_value->type != datatypes::GLM_VEC3_POINTER)
         {
@@ -472,7 +469,7 @@ namespace config
         return nullptr;
     }
 
-    datatypes::AnyValue* SettingMaster::activate_x(ontology::Universe* const universe, config::SettingMaster* const setting_master)
+    std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_x(ontology::Universe* const universe, config::SettingMaster* const setting_master)
     {
         if (universe == nullptr || universe->cartesian_coordinates == nullptr)
         {
@@ -491,7 +488,7 @@ namespace config
             return nullptr;
         }
 
-        datatypes::AnyValue* x_any_value = setting_master_pointer->setting_pointer_map["x"]->setting_value;
+        std::shared_ptr<datatypes::AnyValue> x_any_value = std::make_shared<datatypes::AnyValue>(*setting_master_pointer->setting_pointer_map["x"]->setting_value);
 
         if (x_any_value == nullptr || x_any_value->type != datatypes::FLOAT)
         {
@@ -499,9 +496,10 @@ namespace config
         }
 
         universe->cartesian_coordinates->x = x_any_value->float_value;
+        return nullptr;
     }
 
-    datatypes::AnyValue* SettingMaster::activate_y(ontology::Universe* const universe, config::SettingMaster* const setting_master)
+    std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_y(ontology::Universe* const universe, config::SettingMaster* const setting_master)
     {
         if (universe == nullptr || universe->cartesian_coordinates == nullptr)
         {
@@ -520,7 +518,7 @@ namespace config
             return nullptr;
         }
 
-        datatypes::AnyValue* y_any_value = setting_master_pointer->setting_pointer_map["y"]->setting_value;
+        std::shared_ptr<datatypes::AnyValue> y_any_value = std::make_shared<datatypes::AnyValue>(*setting_master_pointer->setting_pointer_map["y"]->setting_value);
 
         if (y_any_value == nullptr || y_any_value->type != datatypes::FLOAT)
         {
@@ -528,9 +526,10 @@ namespace config
         }
 
         universe->cartesian_coordinates->y = y_any_value->float_value;
+        return nullptr;
     }
 
-    datatypes::AnyValue* SettingMaster::activate_z(ontology::Universe* const universe, config::SettingMaster* const setting_master)
+    std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_z(ontology::Universe* const universe, config::SettingMaster* const setting_master)
     {
         if (universe == nullptr || universe->cartesian_coordinates == nullptr)
         {
@@ -549,7 +548,7 @@ namespace config
             return nullptr;
         }
 
-        datatypes::AnyValue* z_any_value = setting_master_pointer->setting_pointer_map["z"]->setting_value;
+        std::shared_ptr<datatypes::AnyValue> z_any_value = std::make_shared<datatypes::AnyValue>(*setting_master_pointer->setting_pointer_map["z"]->setting_value);
 
         if (z_any_value == nullptr || z_any_value->type != datatypes::FLOAT)
         {
@@ -557,9 +556,10 @@ namespace config
         }
 
         universe->cartesian_coordinates->z = z_any_value->float_value;
+        return nullptr;
     }
 
-    datatypes::AnyValue* SettingMaster::activate_horizontal_angle(ontology::Universe* const universe, config::SettingMaster* const setting_master)
+    std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_horizontal_angle(ontology::Universe* const universe, config::SettingMaster* const setting_master)
     {
         if (universe == nullptr)
         {
@@ -578,7 +578,7 @@ namespace config
             return nullptr;
         }
 
-        datatypes::AnyValue* horizontal_angle_any_value = setting_master_pointer->setting_pointer_map["horizontal_angle"]->setting_value;
+        std::shared_ptr<datatypes::AnyValue> horizontal_angle_any_value = std::make_shared<datatypes::AnyValue>(*setting_master_pointer->setting_pointer_map["horizontal_angle"]->setting_value);
 
         if (horizontal_angle_any_value == nullptr || horizontal_angle_any_value->type != datatypes::DOUBLE)
         {
@@ -589,7 +589,7 @@ namespace config
         return nullptr;
     }
 
-    datatypes::AnyValue* SettingMaster::activate_vertical_angle(ontology::Universe* const universe, config::SettingMaster* const setting_master)
+    std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_vertical_angle(ontology::Universe* const universe, config::SettingMaster* const setting_master)
     {
         if (universe == nullptr)
         {
@@ -608,7 +608,7 @@ namespace config
             return nullptr;
         }
 
-        datatypes::AnyValue* vertical_angle_any_value = setting_master_pointer->setting_pointer_map["vertical_angle"]->setting_value;
+        std::shared_ptr<datatypes::AnyValue> vertical_angle_any_value = std::make_shared<datatypes::AnyValue>(*setting_master_pointer->setting_pointer_map["vertical_angle"]->setting_value);
 
         if (vertical_angle_any_value == nullptr || vertical_angle_any_value->type != datatypes::DOUBLE)
         {
@@ -619,7 +619,7 @@ namespace config
         return nullptr;
     }
 
-    datatypes::AnyValue* SettingMaster::activate_speed(ontology::Universe* const universe, config::SettingMaster* const setting_master)
+    std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_speed(ontology::Universe* const universe, config::SettingMaster* const setting_master)
     {
         if (universe == nullptr)
         {
@@ -638,7 +638,7 @@ namespace config
             return nullptr;
         }
 
-        datatypes::AnyValue* speed_any_value = setting_master_pointer->setting_pointer_map["speed"]->setting_value;
+        std::shared_ptr<datatypes::AnyValue> speed_any_value = std::make_shared<datatypes::AnyValue>(*setting_master_pointer->setting_pointer_map["speed"]->setting_value);
 
         if (speed_any_value == nullptr || speed_any_value->type != datatypes::FLOAT)
         {
@@ -649,7 +649,7 @@ namespace config
         return nullptr;
     }
 
-    datatypes::AnyValue* SettingMaster::activate_turbo_factor(ontology::Universe* const universe, config::SettingMaster* const setting_master)
+    std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_turbo_factor(ontology::Universe* const universe, config::SettingMaster* const setting_master)
     {
         if (universe == nullptr)
         {
@@ -668,7 +668,7 @@ namespace config
             return nullptr;
         }
 
-        datatypes::AnyValue* turbo_factor_any_value = setting_master_pointer->setting_pointer_map["turbo_factor"]->setting_value;
+        std::shared_ptr<datatypes::AnyValue> turbo_factor_any_value = std::make_shared<datatypes::AnyValue>(*setting_master_pointer->setting_pointer_map["turbo_factor"]->setting_value);
 
         if (turbo_factor_any_value == nullptr || turbo_factor_any_value->type != datatypes::FLOAT)
         {
@@ -679,7 +679,7 @@ namespace config
         return nullptr;
     }
 
-    datatypes::AnyValue* SettingMaster::activate_twin_turbo_factor(ontology::Universe* const universe, config::SettingMaster* const setting_master)
+    std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_twin_turbo_factor(ontology::Universe* const universe, config::SettingMaster* const setting_master)
     {
         if (universe == nullptr)
         {
@@ -698,7 +698,7 @@ namespace config
             return nullptr;
         }
 
-        datatypes::AnyValue* twin_turbo_factor_any_value = setting_master_pointer->setting_pointer_map["twin_turbo_factor"]->setting_value;
+        std::shared_ptr<datatypes::AnyValue> twin_turbo_factor_any_value = std::make_shared<datatypes::AnyValue>(*setting_master_pointer->setting_pointer_map["twin_turbo_factor"]->setting_value);
 
         if (twin_turbo_factor_any_value == nullptr || twin_turbo_factor_any_value->type != datatypes::FLOAT)
         {
@@ -709,7 +709,7 @@ namespace config
         return nullptr;
     }
 
-    datatypes::AnyValue* SettingMaster::activate_mouse_speed(ontology::Universe* const universe, config::SettingMaster* const setting_master)
+    std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_mouse_speed(ontology::Universe* const universe, config::SettingMaster* const setting_master)
     {
         if (universe == nullptr)
         {
@@ -728,7 +728,7 @@ namespace config
             return nullptr;
         }
 
-        datatypes::AnyValue* mouse_speed_any_value = setting_master_pointer->setting_pointer_map["mouse_speed"]->setting_value;
+        std::shared_ptr<datatypes::AnyValue> mouse_speed_any_value = std::make_shared<datatypes::AnyValue>(*setting_master_pointer->setting_pointer_map["mouse_speed"]->setting_value);
 
         if (mouse_speed_any_value == nullptr || mouse_speed_any_value->type != datatypes::FLOAT)
         {
@@ -739,7 +739,7 @@ namespace config
         return nullptr;
     }
 
-    datatypes::AnyValue* SettingMaster::activate_is_flight_mode_in_use(ontology::Universe* const universe, config::SettingMaster* const setting_master)
+    std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_is_flight_mode_in_use(ontology::Universe* const universe, config::SettingMaster* const setting_master)
     {
         if (universe == nullptr)
         {
@@ -758,7 +758,7 @@ namespace config
             return nullptr;
         }
 
-        datatypes::AnyValue* is_flight_mode_in_use_any_value = setting_master_pointer->setting_pointer_map["is_flight_mode_in_use"]->setting_value;
+        std::shared_ptr<datatypes::AnyValue> is_flight_mode_in_use_any_value = std::make_shared<datatypes::AnyValue>(*setting_master_pointer->setting_pointer_map["is_flight_mode_in_use"]->setting_value);
 
         if (is_flight_mode_in_use_any_value == nullptr || is_flight_mode_in_use_any_value->type != datatypes::BOOL)
         {
@@ -768,7 +768,7 @@ namespace config
         universe->is_flight_mode_in_use = is_flight_mode_in_use_any_value->bool_value;
     }
 
-    datatypes::AnyValue* SettingMaster::activate_testing_spherical_world_in_use(ontology::Universe* const universe, config::SettingMaster* const setting_master)
+    std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_testing_spherical_world_in_use(ontology::Universe* const universe, config::SettingMaster* const setting_master)
     {
         if (universe == nullptr)
         {
@@ -787,7 +787,7 @@ namespace config
             return nullptr;
         }
 
-        datatypes::AnyValue* testing_spherical_world_in_use_any_value = setting_master_pointer->setting_pointer_map["testing_spherical_world_in_use"]->setting_value;
+        std::shared_ptr<datatypes::AnyValue> testing_spherical_world_in_use_any_value = std::make_shared<datatypes::AnyValue>(*setting_master_pointer->setting_pointer_map["testing_spherical_world_in_use"]->setting_value);
 
         if (testing_spherical_world_in_use_any_value == nullptr || testing_spherical_world_in_use_any_value->type != datatypes::BOOL)
         {
@@ -797,123 +797,123 @@ namespace config
         universe->testing_spherical_world_in_use = testing_spherical_world_in_use_any_value->bool_value;
     }
 
-    datatypes::AnyValue* SettingMaster::read_x(ontology::Universe* const universe, config::SettingMaster* const setting_master)
+    std::shared_ptr<datatypes::AnyValue> SettingMaster::read_x(ontology::Universe* const universe, config::SettingMaster* const setting_master)
     {
         if (universe == nullptr || universe->cartesian_coordinates == nullptr)
         {
             return nullptr;
         }
 
-        return new datatypes::AnyValue(universe->cartesian_coordinates->x);
+        return std::make_shared<datatypes::AnyValue>(universe->cartesian_coordinates->x);
     }
 
-    datatypes::AnyValue* SettingMaster::read_y(ontology::Universe* const universe, config::SettingMaster* const setting_master)
+    std::shared_ptr<datatypes::AnyValue> SettingMaster::read_y(ontology::Universe* const universe, config::SettingMaster* const setting_master)
     {
         if (universe == nullptr || universe->cartesian_coordinates == nullptr)
         {
             return nullptr;
         }
 
-        return new datatypes::AnyValue(universe->cartesian_coordinates->y);
+        return std::make_shared<datatypes::AnyValue>(universe->cartesian_coordinates->y);
     }
 
-    datatypes::AnyValue* SettingMaster::read_z(ontology::Universe* const universe, config::SettingMaster* const setting_master)
+    std::shared_ptr<datatypes::AnyValue> SettingMaster::read_z(ontology::Universe* const universe, config::SettingMaster* const setting_master)
     {
         if (universe == nullptr || universe->cartesian_coordinates == nullptr)
         {
             return nullptr;
         }
 
-        return new datatypes::AnyValue(universe->cartesian_coordinates->z);
+        return std::make_shared<datatypes::AnyValue>(universe->cartesian_coordinates->z);
     }
 
-    datatypes::AnyValue* SettingMaster::read_rho(ontology::Universe* const universe, config::SettingMaster* const setting_master)
+    std::shared_ptr<datatypes::AnyValue> SettingMaster::read_rho(ontology::Universe* const universe, config::SettingMaster* const setting_master)
     {
         if (universe == nullptr || universe->spherical_coordinates == nullptr)
         {
             return nullptr;
         }
 
-        return new datatypes::AnyValue(universe->spherical_coordinates->rho);
+        return std::make_shared<datatypes::AnyValue>(universe->spherical_coordinates->rho);
     }
 
-    datatypes::AnyValue* SettingMaster::read_theta(ontology::Universe* const universe, config::SettingMaster* const setting_master)
+    std::shared_ptr<datatypes::AnyValue> SettingMaster::read_theta(ontology::Universe* const universe, config::SettingMaster* const setting_master)
     {
         if (universe == nullptr || universe->spherical_coordinates == nullptr)
         {
             return nullptr;
         }
 
-        return new datatypes::AnyValue(universe->spherical_coordinates->theta);
+        return std::make_shared<datatypes::AnyValue>(universe->spherical_coordinates->theta);
     }
 
-    datatypes::AnyValue* SettingMaster::read_phi(ontology::Universe* const universe, config::SettingMaster* const setting_master)
+    std::shared_ptr<datatypes::AnyValue> SettingMaster::read_phi(ontology::Universe* const universe, config::SettingMaster* const setting_master)
     {
         if (universe == nullptr || universe->spherical_coordinates == nullptr)
         {
             return nullptr;
         }
 
-        return new datatypes::AnyValue(universe->spherical_coordinates->phi);
+        return std::make_shared<datatypes::AnyValue>(universe->spherical_coordinates->phi);
     }
 
-    datatypes::AnyValue* SettingMaster::read_up(ontology::Universe* const universe, config::SettingMaster* const setting_master)
+    std::shared_ptr<datatypes::AnyValue> SettingMaster::read_up(ontology::Universe* const universe, config::SettingMaster* const setting_master)
     {
         if (universe == nullptr)
         {
             return nullptr;
         }
 
-        return new datatypes::AnyValue(&universe->up);
+        return std::make_shared<datatypes::AnyValue>(&universe->up);
     }
 
-    datatypes::AnyValue* SettingMaster::read_right(ontology::Universe* const universe, config::SettingMaster* const setting_master)
+    std::shared_ptr<datatypes::AnyValue> SettingMaster::read_right(ontology::Universe* const universe, config::SettingMaster* const setting_master)
     {
         if (universe == nullptr)
         {
             return nullptr;
         }
 
-        return new datatypes::AnyValue(&universe->right);
+        return std::make_shared<datatypes::AnyValue>(&universe->right);
     }
 
-    datatypes::AnyValue* SettingMaster::read_horizontal_angle(ontology::Universe* const universe, config::SettingMaster* const setting_master)
+    std::shared_ptr<datatypes::AnyValue> SettingMaster::read_horizontal_angle(ontology::Universe* const universe, config::SettingMaster* const setting_master)
     {
         if (universe == nullptr)
         {
             return nullptr;
         }
 
-        return new datatypes::AnyValue(universe->horizontal_angle);
+        return std::make_shared<datatypes::AnyValue>(universe->horizontal_angle);
     }
 
-    datatypes::AnyValue* SettingMaster::read_vertical_angle(ontology::Universe* const universe, config::SettingMaster* const setting_master)
+    std::shared_ptr<datatypes::AnyValue> SettingMaster::read_vertical_angle(ontology::Universe* const universe, config::SettingMaster* const setting_master)
     {
         if (universe == nullptr)
         {
             return nullptr;
         }
 
-        return new datatypes::AnyValue(universe->vertical_angle);
+        return std::make_shared<datatypes::AnyValue>(universe->vertical_angle);
     }
 
-    datatypes::AnyValue* SettingMaster::read_is_flight_mode_in_use(ontology::Universe* const universe, config::SettingMaster* const setting_master)
+    std::shared_ptr<datatypes::AnyValue> SettingMaster::read_is_flight_mode_in_use(ontology::Universe* const universe, config::SettingMaster* const setting_master)
     {
         if (universe == nullptr)
         {
             return nullptr;
         }
 
-        return new datatypes::AnyValue(universe->is_flight_mode_in_use);
+        return std::make_shared<datatypes::AnyValue>(universe->is_flight_mode_in_use);
     }
 
-    datatypes::AnyValue* SettingMaster::read_testing_spherical_world_in_use(ontology::Universe* const universe, config::SettingMaster* const setting_master)
+    std::shared_ptr<datatypes::AnyValue> SettingMaster::read_testing_spherical_world_in_use(ontology::Universe* const universe, config::SettingMaster* const setting_master)
     {
         if (universe == nullptr)
         {
             return nullptr;
         }
 
-        return new datatypes::AnyValue(universe->testing_spherical_world_in_use);
+        return std::make_shared<datatypes::AnyValue>(universe->testing_spherical_world_in_use);
     }
 }

@@ -5,22 +5,23 @@
 #include "code/ylikuutio/common/globals.hpp"
 
 // Include standard headers
+#include <memory>   // std::make_shared, std::shared_ptr
 #include <string>   // std::string
 #include <vector>   // std::vector
 
 namespace ajokki
 {
-    datatypes::AnyValue* version(
+    std::shared_ptr<datatypes::AnyValue> version(
             console::Console* console,
             ontology::Universe*,
             std::vector<std::string>& command_parameters);
 
-    datatypes::AnyValue* quit(
+    std::shared_ptr<datatypes::AnyValue> quit(
             console::Console*,
             ontology::Universe*,
             std::vector<std::string>& command_parameters);
 
-    datatypes::AnyValue* help(
+    std::shared_ptr<datatypes::AnyValue> help(
             console::Console*,
             ontology::Universe*,
             std::vector<std::string>& command_parameters);

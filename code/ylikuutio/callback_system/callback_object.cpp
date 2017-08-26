@@ -14,12 +14,12 @@
 namespace callback_system
 {
     // getter function for callbacks and callback objects.
-    datatypes::AnyValue* CallbackObject::get_any_value(const std::string& name)
+    std::shared_ptr<datatypes::AnyValue> CallbackObject::get_any_value(const std::string& name)
     {
-        return &this->anyvalue_hashmap[name];
+        return std::make_shared<datatypes::AnyValue>(this->anyvalue_hashmap[name]);
     }
 
-    datatypes::AnyValue* CallbackObject::get_arg(const uint32_t arg_i) const
+    std::shared_ptr<datatypes::AnyValue> CallbackObject::get_arg(const uint32_t arg_i) const
     {
         if (arg_i >= this->callback_parameter_pointer_vector.size())
         {
@@ -35,11 +35,11 @@ namespace callback_system
             return nullptr;
         }
 
-        return callback_parameter->any_value;
+        return std::make_shared<datatypes::AnyValue>(*callback_parameter->any_value);
     }
 
     // setter function for callbacks and callback objects.
-    void CallbackObject::set_any_value(const std::string& name, const datatypes::AnyValue* const any_value)
+    void CallbackObject::set_any_value(const std::string& name, std::shared_ptr<datatypes::AnyValue> any_value)
     {
         this->anyvalue_hashmap[name] = *any_value;
     }
@@ -110,7 +110,7 @@ namespace callback_system
     {
         if (this->callback != nullptr)
         {
-            return std::shared_ptr<datatypes::AnyValue>(this->callback(this->parent_pointer, this, this->callback_parameter_pointer_vector));
+            return this->callback(this->parent_pointer, this, this->callback_parameter_pointer_vector);
         }
         return nullptr;
     }

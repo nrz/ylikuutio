@@ -83,12 +83,6 @@ namespace ontology
             // Make this `Scene` no more the active `Scene`.
             this->universe_pointer->active_scene = nullptr;
         }
-
-        if (!this->name.empty() && this->universe_pointer != nullptr)
-        {
-            delete this->universe_pointer->entity_anyvalue_map[this->name];
-            this->universe_pointer->entity_anyvalue_map[this->name] = nullptr;
-        }
     }
 
     void Scene::render()

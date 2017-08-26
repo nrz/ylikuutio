@@ -6,6 +6,7 @@
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include standard headers
+#include <memory>        // std::make_shared, std::shared_ptr
 #include <string>        // std::string
 
 namespace ontology
@@ -20,13 +21,13 @@ namespace callback_system
         public:
 
             // constructor.
-            CallbackParameter(const std::string& name, datatypes::AnyValue* const any_value, const bool is_reference, callback_system::CallbackObject* const parent_pointer);
+            CallbackParameter(const std::string& name, std::shared_ptr<datatypes::AnyValue> any_value, const bool is_reference, callback_system::CallbackObject* const parent_pointer);
 
             // destructor.
             ~CallbackParameter();
 
             // getter.
-            datatypes::AnyValue* get_any_value() const;
+            std::shared_ptr<datatypes::AnyValue> get_any_value() const;
 
             friend class CallbackObject;
 
@@ -38,7 +39,7 @@ namespace callback_system
             callback_system::CallbackObject* parent_pointer; // pointer to the callback object.
 
             std::string name;
-            datatypes::AnyValue* any_value; // this is `private` to make sure that someone does not overwrite it.
+            std::shared_ptr<datatypes::AnyValue> any_value; // this is `private` to make sure that someone does not overwrite it.
             bool is_reference;              // if true, the value is read from the hashmap. if false, then the value is read from the union.
     };
 }

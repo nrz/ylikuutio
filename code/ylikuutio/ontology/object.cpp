@@ -88,12 +88,6 @@ namespace ontology
             std::cout << "Object with childID " << std::dec << this->childID << " will be destroyed.\n";
             this->species_parent_pointer->set_object_pointer(this->childID, nullptr);
         }
-
-        if (!this->name.empty() && this->universe_pointer != nullptr)
-        {
-            delete this->universe_pointer->entity_anyvalue_map[this->name];
-            this->universe_pointer->entity_anyvalue_map[this->name] = nullptr;
-        }
     }
 
     void Object::act()

@@ -5,6 +5,7 @@
 #include "code/ylikuutio/common/globals.hpp"
 
 // Include standard headers
+#include <memory>   // std::make_shared, std::shared_ptr
 #include <string>   // std::string
 
 namespace console
@@ -41,7 +42,7 @@ namespace config
             std::string name;
 
             // The setting value (may be a pointer a some datatype).
-            datatypes::AnyValue* setting_value;
+            std::shared_ptr<datatypes::AnyValue> setting_value;
 
             // pointer to `ActivateCallback` used to activate the new value after setting it.
             ActivateCallback activate_callback;
