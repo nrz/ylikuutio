@@ -390,8 +390,8 @@ int main(void)
     std::unordered_map<std::string, ConsoleCommandCallback> command_callback_map;
 
     ConsoleStruct console_struct;
-    console_struct.current_keypress_callback_engine_vector_pointer_pointer = &*current_keypress_callback_engine_vector_pointer;
-    console_struct.current_keyrelease_callback_engine_vector_pointer_pointer = &*current_keyrelease_callback_engine_vector_pointer;
+    console_struct.current_keypress_callback_engine_vector_pointer_pointer = current_keypress_callback_engine_vector_pointer;
+    console_struct.current_keyrelease_callback_engine_vector_pointer_pointer = current_keyrelease_callback_engine_vector_pointer;
     console_struct.command_callback_map_pointer = &command_callback_map;
     console_struct.universe_pointer = my_universe;
     console_struct.font2D_pointer = my_font2D;
@@ -777,7 +777,7 @@ int main(void)
     console_keyrelease_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_PAGE_DOWN, enable_page_down_callback_engine });
     console_keyrelease_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_HOME, enable_home_callback_engine });
     console_keyrelease_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_END, enable_end_callback_engine });
-    my_console->set_my_keyrelease_callback_engine_vector_pointer(&*console_keyrelease_callback_engines);
+    my_console->set_my_keyrelease_callback_engine_vector_pointer(console_keyrelease_callback_engines);
 
     // Keypress callbacks for console.
     // Keypresses are checked in the order of this struct.
@@ -798,7 +798,7 @@ int main(void)
     console_keypress_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_PAGE_DOWN, page_down_callback_engine });
     console_keypress_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_HOME, home_callback_engine });
     console_keypress_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_END, end_callback_engine });
-    my_console->set_my_keypress_callback_engine_vector_pointer(&*console_keypress_callback_engines);
+    my_console->set_my_keypress_callback_engine_vector_pointer(console_keypress_callback_engines);
 
     /*********************************************************************\
      * Callback engines for console commands begin here.                 *
