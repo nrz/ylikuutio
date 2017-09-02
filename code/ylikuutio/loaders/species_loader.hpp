@@ -1,0 +1,27 @@
+#ifndef __SPECIES_LOADER_HPP_INCLUDED
+#define __SPECIES_LOADER_HPP_INCLUDED
+
+#include "species_loader_struct.hpp"
+
+// Include GLM
+#ifndef __GLM_GLM_HPP_INCLUDED
+#define __GLM_GLM_HPP_INCLUDED
+#include <glm/glm.hpp> // glm
+#endif
+
+// Include standard headers
+#include <stdint.h> // uint32_t etc.
+#include <vector>   // std::vector
+
+namespace loaders
+{
+    bool load_species(
+            SpeciesLoaderStruct species_loader_struct,
+            std::vector<glm::vec3>& out_vertices,
+            std::vector<glm::vec2>& out_UVs,
+            std::vector<glm::vec3>& out_normals,
+            int32_t& image_width,
+            int32_t& image_height);
+}
+
+#endif

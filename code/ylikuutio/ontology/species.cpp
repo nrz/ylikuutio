@@ -8,10 +8,7 @@
 #include "species_or_glyph.hpp"
 #include "species_struct.hpp"
 #include "render_templates.hpp"
-#include "code/ylikuutio/loaders/obj_loader.hpp"
-#include "code/ylikuutio/loaders/ascii_grid_loader.hpp"
-#include "code/ylikuutio/loaders/bmp_heightmap_loader.hpp"
-#include "code/ylikuutio/loaders/srtm_heightmap_loader.hpp"
+#include "code/ylikuutio/loaders/species_loader.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include GLEW
@@ -49,6 +46,8 @@ namespace ontology
         this->model_filename    = species_struct.model_filename;
         this->color_channel     = species_struct.color_channel;
         this->light_position    = species_struct.light_position;
+        this->latitude          = species_struct.latitude;
+        this->longitude         = species_struct.longitude;
         this->parent_pointer    = species_struct.parent_pointer;
         this->universe_pointer  = this->parent_pointer->universe_pointer;
         this->x_step            = species_struct.x_step;
@@ -66,62 +65,25 @@ namespace ontology
         this->vertexUVID = glGetAttribLocation(this->parent_pointer->parent_pointer->programID, "vertexUV");
         this->vertexNormal_modelspaceID = glGetAttribLocation(this->parent_pointer->parent_pointer->programID, "vertexNormal_modelspace");
 
-        bool model_loading_result;
+        SpeciesLoaderStruct species_loader_struct;
+        species_loader_struct.model_filename = this->model_filename;
+        species_loader_struct.model_file_format = this->model_file_format;
+        species_loader_struct.latitude = this->latitude;
+        species_loader_struct.longitude = this->longitude;
+        species_loader_struct.world_radius = this->world_radius;
+        species_loader_struct.divisor = this->divisor;
+        species_loader_struct.color_channel = this->color_channel;
+        species_loader_struct.x_step = this->x_step;
+        species_loader_struct.z_step = this->z_step;
+        species_loader_struct.triangulation_type = this->triangulation_type;
 
-        if ((std::strcmp(this->char_model_file_format, "obj") == 0) || (std::strcmp(this->char_model_file_format, "OBJ") == 0))
-        {
-            model_loading_result = loaders::load_OBJ(this->char_model_filename, this->vertices, this->UVs, this->normals);
-        }
-        else if (std::strcmp(this->char_model_file_format, "SRTM") == 0)
-        {
-            double current_latitude_in_degrees;
-            double current_longitude_in_degrees;
-            current_latitude_in_degrees = -16.50f;
-            current_longitude_in_degrees = -68.15f;
-
-            model_loading_result = loaders::load_SRTM_world(
-                    this->model_filename,
-                    current_latitude_in_degrees,
-                    current_longitude_in_degrees,
-                    this->world_radius,
-                    this->divisor,
-                    this->vertices,
-                    this->UVs,
-                    this->normals,
-                    this->x_step,
-                    this->z_step,
-                    this->triangulation_type);
-        }
-        else if ((std::strcmp(this->char_model_file_format, "bmp") == 0) || (std::strcmp(this->char_model_file_format, "BMP") == 0))
-        {
-            model_loading_result = loaders::load_BMP_world(
-                    this->model_filename,
-                    this->vertices,
-                    this->UVs,
-                    this->normals,
-                    this->image_width,
-                    this->image_height,
-                    this->color_channel,
-                    this->x_step,
-                    this->z_step,
-                    this->triangulation_type);
-        }
-        else if (std::strcmp(this->char_model_file_format, "ASCII_grid") == 0)
-        {
-            model_loading_result = loaders::load_ASCII_grid(
-                    this->model_filename,
-                    this->vertices,
-                    this->UVs,
-                    this->normals,
-                    this->x_step,
-                    this->z_step,
-                    this->triangulation_type);
-        }
-        else
-        {
-            std::cerr << "no model was loaded!\n";
-            std::cerr << "model file format: " << this->model_file_format << "\n";
-        }
+        loaders::load_species(
+                species_loader_struct,
+                this->vertices,
+                this->UVs,
+                this->normals,
+                this->image_width,
+                this->image_height);
 
         // Fill the index buffer.
         ontology::indexVBO(this->vertices, this->UVs, this->normals, this->indices, this->indexed_vertices, this->indexed_UVs, this->indexed_normals);

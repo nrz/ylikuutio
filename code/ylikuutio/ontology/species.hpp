@@ -86,6 +86,9 @@ namespace ontology
             const char* char_model_file_format;
             const char* char_model_filename;
 
+            double latitude;  // for SRTM.
+            double longitude; // for SRTM.
+
             uint32_t x_step;
             uint32_t z_step;
 

@@ -17,5 +17,6 @@ TEST(SpeciesStruct_must_be_initialized_appropriately, SpeciesStruct)
     ASSERT_TRUE(test_species_struct.model_filename.empty());
     ASSERT_TRUE(test_species_struct.color_channel.empty());
     ASSERT_EQ(test_species_struct.light_position, glm::vec3(0.0f, 0.0f, 0.0f));
-    ASSERT_TRUE(test_species_struct.coordinate_system.empty());
+    ASSERT_EQ(test_species_struct.latitude, 0.0f);
+    ASSERT_EQ(test_species_struct.longitude, 0.0f);
 }

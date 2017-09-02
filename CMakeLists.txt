@@ -490,6 +490,9 @@ add_library(ylikuutio STATIC
     code/ylikuutio/loaders/obj_loader.hpp
     code/ylikuutio/loaders/shader_loader.cpp
     code/ylikuutio/loaders/shader_loader.hpp
+    code/ylikuutio/loaders/species_loader.cpp
+    code/ylikuutio/loaders/species_loader.hpp
+    code/ylikuutio/loaders/species_loader_struct.hpp
     code/ylikuutio/loaders/srtm_heightmap_loader.cpp
     code/ylikuutio/loaders/srtm_heightmap_loader.hpp
     code/ylikuutio/loaders/texture_loader.cpp
