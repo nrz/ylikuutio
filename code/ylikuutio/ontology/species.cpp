@@ -101,25 +101,12 @@ namespace ontology
                 this->indexed_vertices,
                 this->indexed_UVs,
                 this->indexed_normals,
+                &this->vertexbuffer,
+                &this->uvbuffer,
+                &this->normalbuffer,
+                &this->elementbuffer,
                 this->image_width,
                 this->image_height);
-
-        // Load it into a VBO.
-        glGenBuffers(1, &this->vertexbuffer);
-        glBindBuffer(GL_ARRAY_BUFFER, this->vertexbuffer);
-        glBufferData(GL_ARRAY_BUFFER, this->indexed_vertices.size() * sizeof(glm::vec3), &this->indexed_vertices[0], GL_STATIC_DRAW);
-
-        glGenBuffers(1, &this->uvbuffer);
-        glBindBuffer(GL_ARRAY_BUFFER, this->uvbuffer);
-        glBufferData(GL_ARRAY_BUFFER, this->indexed_UVs.size() * sizeof(glm::vec2), &this->indexed_UVs[0], GL_STATIC_DRAW);
-
-        glGenBuffers(1, &this->normalbuffer);
-        glBindBuffer(GL_ARRAY_BUFFER, this->normalbuffer);
-        glBufferData(GL_ARRAY_BUFFER, this->indexed_normals.size() * sizeof(glm::vec3), &this->indexed_normals[0], GL_STATIC_DRAW);
-
-        glGenBuffers(1, &this->elementbuffer);
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->elementbuffer);
-        glBufferData(GL_ELEMENT_ARRAY_BUFFER, this->indices.size() * sizeof(GLuint), &this->indices[0] , GL_STATIC_DRAW);
 
         // TODO: Compute the graph of this object type to enable object vertex modification!
     }

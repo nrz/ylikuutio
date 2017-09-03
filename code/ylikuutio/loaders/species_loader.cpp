@@ -47,6 +47,10 @@ namespace loaders
             std::vector<glm::vec3>& indexed_vertices,
             std::vector<glm::vec2>& indexed_UVs,
             std::vector<glm::vec3>& indexed_normals,
+            GLuint* vertexbuffer,
+            GLuint* uvbuffer,
+            GLuint* normalbuffer,
+            GLuint* elementbuffer,
             int32_t& image_width,
             int32_t& image_height)
     {
@@ -119,6 +123,23 @@ namespace loaders
                 indexed_vertices,
                 indexed_UVs,
                 indexed_normals);
+
+        // Load it into a VBO.
+        glGenBuffers(1, vertexbuffer);
+        glBindBuffer(GL_ARRAY_BUFFER, *vertexbuffer);
+        glBufferData(GL_ARRAY_BUFFER, indexed_vertices.size() * sizeof(glm::vec3), &indexed_vertices[0], GL_STATIC_DRAW);
+
+        glGenBuffers(1, uvbuffer);
+        glBindBuffer(GL_ARRAY_BUFFER, *uvbuffer);
+        glBufferData(GL_ARRAY_BUFFER, indexed_UVs.size() * sizeof(glm::vec2), &indexed_UVs[0], GL_STATIC_DRAW);
+
+        glGenBuffers(1, normalbuffer);
+        glBindBuffer(GL_ARRAY_BUFFER, *normalbuffer);
+        glBufferData(GL_ARRAY_BUFFER, indexed_normals.size() * sizeof(glm::vec3), &indexed_normals[0], GL_STATIC_DRAW);
+
+        glGenBuffers(1, elementbuffer);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, *elementbuffer);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(GLuint), &indices[0] , GL_STATIC_DRAW);
 
         // TODO: Compute the graph of this object type to enable object vertex modification!
         return model_loading_result;

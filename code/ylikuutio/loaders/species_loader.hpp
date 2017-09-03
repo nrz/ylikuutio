@@ -30,6 +30,10 @@ namespace loaders
             std::vector<glm::vec3>& indexed_vertices,
             std::vector<glm::vec2>& indexed_UVs,
             std::vector<glm::vec3>& indexed_normals,
+            GLuint* vertexbuffer,
+            GLuint* uvbuffer,
+            GLuint* normalbuffer,
+            GLuint* elementbuffer,
             int32_t& image_width,
             int32_t& image_height);
 }
