@@ -97,11 +97,12 @@ namespace ontology
                 this->vertices,
                 this->UVs,
                 this->normals,
+                this->indices,
+                this->indexed_vertices,
+                this->indexed_UVs,
+                this->indexed_normals,
                 this->image_width,
                 this->image_height);
-
-        // Fill the index buffer.
-        ontology::indexVBO(this->vertices, this->UVs, this->normals, this->indices, this->indexed_vertices, this->indexed_UVs, this->indexed_normals);
 
         // Load it into a VBO.
         glGenBuffers(1, &this->vertexbuffer);
