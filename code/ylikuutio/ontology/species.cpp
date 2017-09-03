@@ -65,6 +65,21 @@ namespace ontology
         this->vertexUVID = glGetAttribLocation(this->parent_pointer->parent_pointer->programID, "vertexUV");
         this->vertexNormal_modelspaceID = glGetAttribLocation(this->parent_pointer->parent_pointer->programID, "vertexNormal_modelspace");
 
+        // Get a handle for our "LightPosition" uniform.
+        glUseProgram(this->parent_pointer->parent_pointer->programID);
+        this->lightID = glGetUniformLocation(this->parent_pointer->parent_pointer->programID, "LightPosition_worldspace");
+
+        if (this->is_world)
+        {
+            // set world species pointer so that it points to this species.
+            // currently there can be only one world species (used in collision detection).
+            this->parent_pointer->parent_pointer->parent_pointer->parent_pointer->set_terrain_species_pointer(this);
+        }
+
+        // water level.
+        GLuint water_level_uniform_location = glGetUniformLocation(this->parent_pointer->parent_pointer->programID, "water_level");
+        glUniform1f(water_level_uniform_location, this->universe_pointer->active_scene->water_level);
+
         SpeciesLoaderStruct species_loader_struct;
         species_loader_struct.model_filename = this->model_filename;
         species_loader_struct.model_file_format = this->model_file_format;
@@ -104,21 +119,6 @@ namespace ontology
         glGenBuffers(1, &this->elementbuffer);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->elementbuffer);
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, this->indices.size() * sizeof(GLuint), &this->indices[0] , GL_STATIC_DRAW);
-
-        // Get a handle for our "LightPosition" uniform.
-        glUseProgram(this->parent_pointer->parent_pointer->programID);
-        this->lightID = glGetUniformLocation(this->parent_pointer->parent_pointer->programID, "LightPosition_worldspace");
-
-        if (this->is_world)
-        {
-            // set world species pointer so that it points to this species.
-            // currently there can be only one world species (used in collision detection).
-            this->parent_pointer->parent_pointer->parent_pointer->parent_pointer->set_terrain_species_pointer(this);
-        }
-
-        // water level.
-        GLuint water_level_uniform_location = glGetUniformLocation(this->parent_pointer->parent_pointer->programID, "water_level");
-        glUniform1f(water_level_uniform_location, this->universe_pointer->active_scene->water_level);
 
         // TODO: Compute the graph of this object type to enable object vertex modification!
     }
