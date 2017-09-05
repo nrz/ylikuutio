@@ -21,6 +21,8 @@ namespace ontology
             // destructor.
             virtual ~Entity();
 
+            std::string get_type();
+
             virtual int32_t get_number_of_children() = 0;
             virtual int32_t get_number_of_descendants() = 0;
 
@@ -30,6 +32,8 @@ namespace ontology
 
             ontology::Universe* universe_pointer;            // pointer to the `Universe`.
             std::vector<void*> child_vector_pointers_vector;
+
+            std::string type;
 
             std::string name; // name of this entity.
 

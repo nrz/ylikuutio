@@ -17,6 +17,8 @@ namespace space_partition
         // constructor.
         this->is_original = true;
         this->number_of_triangle3Ds = 0;
+
+        this->type = "space_partition::Chunk*";
     }
 
     Chunk::~Chunk()

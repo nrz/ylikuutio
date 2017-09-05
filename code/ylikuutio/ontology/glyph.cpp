@@ -66,6 +66,8 @@ namespace ontology
         // TODO: triangulate the vertex data!
 
         // TODO: load the vertex data the same way as in `ontology::Species::Species(SpeciesStruct species_struct)`!
+
+        this->type = "ontology::Glyph*";
     }
 
     Glyph::~Glyph()

@@ -109,6 +109,7 @@ namespace ontology
                 this->image_height);
 
         // TODO: Compute the graph of this object type to enable object vertex modification!
+        this->type = "ontology::Species*";
     }
 
     Species::~Species()

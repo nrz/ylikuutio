@@ -20,6 +20,8 @@ namespace ontology
 
         // get `childID` from `Shader` and set pointer to this `Symbiosis`.
         this->bind_to_parent();
+
+        this->type = "ontology::Symbiosis*";
     }
 
     Symbiosis::~Symbiosis()

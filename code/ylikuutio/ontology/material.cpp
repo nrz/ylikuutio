@@ -72,6 +72,7 @@ namespace ontology
         this->child_vector_pointers_vector.push_back(&this->species_pointer_vector);
         this->child_vector_pointers_vector.push_back(&this->vector_font_pointer_vector);
         this->child_vector_pointers_vector.push_back(&this->chunk_master_pointer_vector);
+        this->type = "ontology::Material*";
     }
 
     Material::~Material()

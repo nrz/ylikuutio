@@ -116,6 +116,7 @@ namespace ontology
 
         this->child_vector_pointers_vector.push_back(&this->glyph_pointer_vector);
         this->child_vector_pointers_vector.push_back(&this->text3D_pointer_vector);
+        this->type = "ontology::VectorFont*";
     }
 
     VectorFont::~VectorFont()
