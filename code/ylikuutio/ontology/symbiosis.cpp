@@ -11,7 +11,7 @@ namespace ontology
         hierarchy::bind_child_to_parent<ontology::Symbiosis*>(this, this->parent_pointer->symbiosis_pointer_vector, this->parent_pointer->free_symbiosisID_queue, &this->parent_pointer->number_of_symbioses);
     }
 
-    Symbiosis::Symbiosis(SymbiosisStruct symbiosis_struct)
+    Symbiosis::Symbiosis(const SymbiosisStruct symbiosis_struct)
     {
         // constructor.
 

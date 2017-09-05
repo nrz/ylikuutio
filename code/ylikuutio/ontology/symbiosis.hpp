@@ -25,7 +25,7 @@ namespace ontology
     {
         public:
             // constructor.
-            Symbiosis(SymbiosisStruct symbiosis_struct);
+            Symbiosis(const SymbiosisStruct symbiosis_struct);
 
             // destructor.
             virtual ~Symbiosis();
