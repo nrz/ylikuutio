@@ -31,7 +31,7 @@ namespace ontology
 
             // destructor.
             // Destroying a `VectorFont` destroys also all `Text3D` entities, and after that all `Glyph` entities.
-            ~VectorFont();
+            virtual ~VectorFont();
 
             // this method sets `Glyph` pointer.
             void set_glyph_pointer(const uint32_t childID, ontology::Glyph* const child_pointer);

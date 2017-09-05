@@ -36,7 +36,7 @@ namespace ontology
             Text3D(const Text3DStruct text3D_struct);
 
             // destructor.
-            ~Text3D();
+            virtual ~Text3D();
 
             int32_t get_number_of_children() override;
 

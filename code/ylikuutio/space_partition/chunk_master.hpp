@@ -26,7 +26,7 @@ namespace space_partition
             ChunkMaster(GetContentCallback get_content_callback);
 
             // destructor.
-            ~ChunkMaster();
+            virtual ~ChunkMaster();
 
             friend class Chunk;
             template<class T1>

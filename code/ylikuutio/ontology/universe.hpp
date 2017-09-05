@@ -192,7 +192,7 @@ namespace ontology
             Universe();
 
             // destructor.
-            ~Universe();
+            virtual ~Universe();
 
             // this method renders the active `Scene` of this `Universe`.
             void render();

@@ -40,7 +40,7 @@ namespace ontology
             Species(const SpeciesStruct species_struct);
 
             // destructor.
-            ~Species();
+            virtual ~Species();
 
             // this method sets pointer to this `Species` to nullptr, sets `parent_pointer` according to the input, and requests a new `childID` from the new `Material`.
             void bind_to_new_parent(ontology::Material* const new_material_pointer);

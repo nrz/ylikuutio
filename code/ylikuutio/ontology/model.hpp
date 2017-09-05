@@ -42,7 +42,7 @@ namespace ontology
             Model();
 
             // destructor.
-            ~Model();
+            virtual ~Model();
 
             int32_t get_number_of_children() override;
 

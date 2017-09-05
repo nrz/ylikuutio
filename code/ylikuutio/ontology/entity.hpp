@@ -19,7 +19,7 @@ namespace ontology
             Entity();
 
             // destructor.
-            ~Entity();
+            virtual ~Entity();
 
             virtual int32_t get_number_of_children() = 0;
             virtual int32_t get_number_of_descendants() = 0;
