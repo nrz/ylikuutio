@@ -504,6 +504,8 @@ add_library(ylikuutio STATIC
     # ontology, in alphabetical order
     code/ylikuutio/ontology/entity.cpp
     code/ylikuutio/ontology/entity.hpp
+    code/ylikuutio/ontology/entity_factory.cpp
+    code/ylikuutio/ontology/entity_factory.hpp
     code/ylikuutio/ontology/entity_templates.hpp
     code/ylikuutio/ontology/font2D.cpp
     code/ylikuutio/ontology/font2D.hpp

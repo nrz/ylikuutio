@@ -41,6 +41,7 @@
 #include "code/ylikuutio/ontology/shader_struct.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
+#include "code/ylikuutio/ontology/entity_factory.hpp"
 #include "code/ylikuutio/config/setting.hpp"
 #include "code/ylikuutio/config/setting_master.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
@@ -115,7 +116,14 @@ std::string g_font_filename = "kongtext.svg";
 int main(void)
 {
     // Create the world, store it in `my_universe`.
-    ontology::Universe* my_universe = new ontology::Universe();
+    ontology::Entity* my_universe_entity = ontology::EntityFactory::create_Universe();
+    ontology::Universe* my_universe = dynamic_cast<ontology::Universe*>(my_universe_entity);
+
+    if (my_universe == nullptr)
+    {
+        std::cerr << "Failed to create Universe.\n";
+        return -1;
+    }
 
     // Create the setting master, store it in `my_setting_master`.
     config::SettingMaster* my_setting_master = new config::SettingMaster(my_universe);
@@ -188,35 +196,74 @@ int main(void)
     ajokki::set_debug_variables(my_setting_master);
     ajokki::set_console(my_setting_master);
 
-    ontology::Scene* my_scene = new ontology::Scene(my_universe, 0.9f);
+    ontology::Entity* my_scene_entity = ontology::EntityFactory::create_Scene(my_universe, 0.9f);
+    ontology::Scene* my_scene = dynamic_cast<ontology::Scene*>(my_scene_entity);
+
+    if (my_scene == nullptr)
+    {
+        std::cerr << "Failed to create Scene.\n";
+        return -1;
+    }
 
     // Create the shader, store it in `my_shader`.
     ShaderStruct shader_struct;
     shader_struct.parent_pointer = my_scene;
     shader_struct.vertex_shader = "StandardShading.vertexshader";
     shader_struct.fragment_shader = "StandardShading.fragmentshader";
-    ontology::Shader* my_shader = new ontology::Shader(shader_struct);
+
+    ontology::Entity* my_shader_entity = ontology::EntityFactory::create_Shader(shader_struct);
+    ontology::Shader* my_shader = dynamic_cast<ontology::Shader*>(my_shader_entity);
+
+    if (my_shader == nullptr)
+    {
+        std::cerr << "Failed to create Shader.\n";
+        return -1;
+    }
 
     // Create the material, store it in `grass_material`.
     MaterialStruct grass_material_struct;
     grass_material_struct.parent_pointer = my_shader;
     grass_material_struct.texture_file_format = g_texture_file_format;
     grass_material_struct.texture_filename = g_texture_filename;
-    ontology::Material* grass_material = new ontology::Material(grass_material_struct);
+
+    ontology::Entity* grass_material_entity = ontology::EntityFactory::create_Material(grass_material_struct);
+    ontology::Material* grass_material = dynamic_cast<ontology::Material*>(grass_material_entity);
+
+    if (grass_material == nullptr)
+    {
+        std::cerr << "Failed to create grass Material.\n";
+        return -1;
+    }
 
     // Create the material, store it in `uvmap_material`.
     MaterialStruct uvmap_material_struct;
     uvmap_material_struct.parent_pointer = my_shader;
     uvmap_material_struct.texture_file_format = "dds";
     uvmap_material_struct.texture_filename = "uvmap.DDS";
-    ontology::Material* uvmap_material = new ontology::Material(uvmap_material_struct);
+
+    ontology::Entity* uvmap_material_entity = ontology::EntityFactory::create_Material(uvmap_material_struct);
+    ontology::Material* uvmap_material = dynamic_cast<ontology::Material*>(uvmap_material_entity);
+
+    if (uvmap_material == nullptr)
+    {
+        std::cerr << "Failed to create uvmap Material.\n";
+        return -1;
+    }
 
     // Create the material, store it in `pink_geometric_tiles_material`.
     MaterialStruct pink_geometric_tiles_material_struct;
     pink_geometric_tiles_material_struct.parent_pointer = my_shader;
     pink_geometric_tiles_material_struct.texture_file_format = "bmp";
     pink_geometric_tiles_material_struct.texture_filename = "pavers1b2.bmp";
-    ontology::Material* pink_geometric_tiles_material = new ontology::Material(pink_geometric_tiles_material_struct);
+
+    ontology::Entity* pink_geometric_tiles_material_entity = ontology::EntityFactory::create_Material(pink_geometric_tiles_material_struct);
+    ontology::Material* pink_geometric_tiles_material = dynamic_cast<ontology::Material*>(pink_geometric_tiles_material_entity);
+
+    if (pink_geometric_tiles_material == nullptr)
+    {
+        std::cerr << "Failed to create pink geometric tiles Material.\n";
+        return -1;
+    }
 
     ontology::Species* terrain_species;
 
@@ -279,7 +326,7 @@ int main(void)
     terrain_object_struct1.rotate_angle = 0.0f;
     terrain_object_struct1.rotate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
     terrain_object_struct1.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
-    new ontology::Object(terrain_object_struct1);
+    ontology::EntityFactory::create_Object(terrain_object_struct1);
 
     // Create the species, store it in `snow_cottage_species`.
     SpeciesStruct snow_cottage_species_struct;
@@ -287,7 +334,15 @@ int main(void)
     snow_cottage_species_struct.model_file_format = "obj";
     snow_cottage_species_struct.model_filename = "snow_cottage_triangulated.obj";
     snow_cottage_species_struct.light_position = glm::vec3(0, 100000, 100000);
-    ontology::Species* snow_cottage_species = new ontology::Species(snow_cottage_species_struct);
+
+    ontology::Entity* snow_cottage_species_entity = ontology::EntityFactory::create_Species(snow_cottage_species_struct);
+    ontology::Species* snow_cottage_species = dynamic_cast<ontology::Species*>(snow_cottage_species_entity);
+
+    if (snow_cottage_species == nullptr)
+    {
+        std::cerr << "Failed to create snow cottage Species.\n";
+        return -1;
+    }
 
     snow_cottage_species->set_name("snow_cottage");
 
@@ -299,14 +354,32 @@ int main(void)
     snow_cottage_object_struct1.rotate_angle = 0.10f;
     snow_cottage_object_struct1.rotate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
     snow_cottage_object_struct1.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
-    // new ontology::Object(snow_cottage_object_struct1);
+
+    /*
+    ontology::Entity* snow_cottage_object_entity = ontology::EntityFactory::create_Object(snow_cottage_object_struct1);
+    ontology::Object* snow_cottage_object = dynamic_cast<ontology::Object*>(snow_cottage_object_entity);
+
+    if (snow_cottage_object == nullptr)
+    {
+        std::cerr << "Failed to create snow cottage Object.\n";
+        return -1;
+    }
+    */
 
     SpeciesStruct suzanne_species_struct;
     suzanne_species_struct.parent_pointer = uvmap_material;
     suzanne_species_struct.model_file_format = "obj";
     suzanne_species_struct.model_filename = "suzanne.obj";
     suzanne_species_struct.light_position = glm::vec3(0, 100000, 100000);
-    ontology::Species* suzanne_species = new ontology::Species(suzanne_species_struct);
+
+    ontology::Entity* suzanne_species_entity = ontology::EntityFactory::create_Species(suzanne_species_struct);
+    ontology::Species* suzanne_species = dynamic_cast<ontology::Species*>(suzanne_species_entity);
+
+    if (suzanne_species == nullptr)
+    {
+        std::cerr << "Failed to create suzanne Species.\n";
+        return -1;
+    }
 
     suzanne_species->set_name("Suzanne");
 
@@ -317,7 +390,7 @@ int main(void)
     suzanne_object_struct1.rotate_angle = 0.10f;
     suzanne_object_struct1.rotate_vector = glm::vec3(1.0f, 0.0f, 0.0f);
     suzanne_object_struct1.translate_vector = glm::vec3(1.0f, 0.0f, 0.0f);
-    new ontology::Object(suzanne_object_struct1);
+    ontology::EntityFactory::create_Object(suzanne_object_struct1);
 
     ObjectStruct suzanne_object_struct2;
     suzanne_object_struct2.species_parent_pointer = suzanne_species;
@@ -333,7 +406,7 @@ int main(void)
     suzanne_object_struct3.rotate_angle = 0.05f;
     suzanne_object_struct3.rotate_vector = glm::vec3(1.0f, 0.0f, 0.0f);
     suzanne_object_struct3.translate_vector = glm::vec3(0.0f, 0.0f, 1.0f);
-    new ontology::Object(suzanne_object_struct3);
+    ontology::EntityFactory::create_Object(suzanne_object_struct3);
 
     ObjectStruct suzanne_object_struct4;
     suzanne_object_struct4.species_parent_pointer = suzanne_species;
@@ -341,7 +414,7 @@ int main(void)
     suzanne_object_struct4.rotate_angle = 0.15f;
     suzanne_object_struct4.rotate_vector = glm::vec3(1.0f, 0.0f, 0.0f);
     suzanne_object_struct4.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
-    new ontology::Object(suzanne_object_struct4);
+    ontology::EntityFactory::create_Object(suzanne_object_struct4);
 
     ObjectStruct suzanne_object_struct5;
     suzanne_object_struct5.species_parent_pointer = suzanne_species;
@@ -350,13 +423,21 @@ int main(void)
     suzanne_object_struct5.rotate_angle = 0.03f;
     suzanne_object_struct5.rotate_vector = glm::vec3(1.0f, 1.0f, 1.0f);
     suzanne_object_struct5.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
-    new ontology::Object(suzanne_object_struct5);
+    ontology::EntityFactory::create_Object(suzanne_object_struct5);
 
     VectorFontStruct kongtext_vector_font_struct;
     kongtext_vector_font_struct.parent_pointer = grass_material;
     kongtext_vector_font_struct.font_file_format = g_font_file_format;
     kongtext_vector_font_struct.font_filename = g_font_filename;
-    ontology::VectorFont* kongtext_font = new ontology::VectorFont(kongtext_vector_font_struct);
+
+    ontology::Entity* kongtext_font_entity = ontology::EntityFactory::create_VectorFont(kongtext_vector_font_struct);
+    ontology::VectorFont* kongtext_font = dynamic_cast<ontology::VectorFont*>(kongtext_font_entity);
+
+    if (kongtext_font == nullptr)
+    {
+        std::cerr << "Failed to create kongtext VectorFont.\n";
+        return -1;
+    }
 
     Text3DStruct text3D_struct;
     text3D_struct.parent_pointer = kongtext_font;
@@ -366,7 +447,7 @@ int main(void)
     text3D_struct.rotate_angle = 0.0f;
     text3D_struct.rotate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
     text3D_struct.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
-    new ontology::Text3D(text3D_struct);
+    ontology::EntityFactory::create_Text3D(text3D_struct);
 
     // keypress callbacks.
     std::vector<KeyAndCallbackStruct>* action_mode_keypress_callback_engines = new std::vector<KeyAndCallbackStruct>();
