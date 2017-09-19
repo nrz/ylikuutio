@@ -14,7 +14,7 @@
 namespace loaders
 {
     bool load_SRTM_world(
-            const std::string image_path,
+            const std::string& image_path,
             const float latitude,
             const float longitude,
             const float world_radius,
@@ -24,7 +24,7 @@ namespace loaders
             std::vector<glm::vec3>& out_normals,
             const uint32_t x_step,
             const uint32_t z_step,
-            const std::string triangulation_type);
+            const std::string& triangulation_type);
 }
 
 #endif

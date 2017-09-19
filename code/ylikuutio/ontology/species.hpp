@@ -48,7 +48,7 @@ namespace ontology
             // this method sets an `Object` pointer.
             void set_object_pointer(const uint32_t childID, ontology::Object* const child_pointer);
 
-            void set_name(const std::string name);
+            void set_name(const std::string& name);
 
             bool is_world;                           // worlds currently do not rotate nor translate.
             float world_radius;                      // radius of sea level in kilometers. used only for worlds.

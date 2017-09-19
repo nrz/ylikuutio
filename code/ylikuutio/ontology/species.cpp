@@ -148,7 +148,7 @@ namespace ontology
         hierarchy::set_child_pointer(childID, child_pointer, this->object_pointer_vector, this->free_objectID_queue, &this->number_of_objects);
     }
 
-    void Species::set_name(const std::string name)
+    void Species::set_name(const std::string& name)
     {
         ontology::set_name(name, this);
     }

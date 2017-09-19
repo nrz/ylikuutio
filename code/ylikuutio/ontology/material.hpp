@@ -45,7 +45,7 @@ namespace ontology
             // this method sets pointer to this `Material` to nullptr, sets `parent_pointer` according to the input, and requests a new `childID` from the new `Shader`.
             void bind_to_new_parent(ontology::Shader* const new_shader_pointer);
 
-            void set_name(const std::string name);
+            void set_name(const std::string& name);
 
             friend class Shader;
             friend class VectorFont;

@@ -42,7 +42,7 @@ namespace ontology
             // this method sets pointer to this species to nullptr, sets `parent_pointer` according to the input, and requests a new `childID` from the new material.
             void bind_to_new_parent(ontology::Material* const new_material_pointer);
 
-            void set_name(const std::string name);
+            void set_name(const std::string& name);
 
             // The rest fields are created in the constructor.
             uint32_t image_width;

@@ -162,7 +162,7 @@ namespace ontology
         }
     }
 
-    void Object::set_name(const std::string name)
+    void Object::set_name(const std::string& name)
     {
         ontology::set_name(name, this);
     }

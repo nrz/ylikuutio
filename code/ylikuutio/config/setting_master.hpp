@@ -26,13 +26,13 @@ namespace config
             ~SettingMaster();
 
             // does setting `setting` exist?
-            bool is_setting(const std::string setting_name);
+            bool is_setting(const std::string& setting_name);
 
             // this function returns general help.
             std::string help();
 
             // this function returns help string for setting `setting`.
-            std::string help(const std::string setting_name);
+            std::string help(const std::string& setting_name);
 
             bool set(std::string& setting_name, std::shared_ptr<datatypes::AnyValue> setting_new_any_value);
 
