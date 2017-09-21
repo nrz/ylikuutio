@@ -26,7 +26,9 @@ add_subdirectory(FastNoiseSIMD)
 add_subdirectory(glfw-3.2)
 
 # TinySceme #
-add_subdirectory(tinyscheme-1.41)
+if(ENABLE_SCRIPTING_WITH_TINYSCHEME)
+    add_subdirectory(tinyscheme-1.41)
+endif()
 
 # Assimp #
 if(ENABLE_ASSET_IMPORTING_WITH_ASSIMP)
