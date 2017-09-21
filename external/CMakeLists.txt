@@ -28,18 +28,23 @@ add_subdirectory(glfw-3.2)
 # TinySceme #
 if(ENABLE_SCRIPTING_WITH_TINYSCHEME)
     add_subdirectory(tinyscheme-1.41)
+    include_directories(
+        tinyscheme-1.41/
+        )
 endif()
 
 # Assimp #
 if(ENABLE_ASSET_IMPORTING_WITH_ASSIMP)
     add_subdirectory(assimp)
+    include_directories(
+        assimp/include/
+        )
 endif()
 
 include_directories(
     glfw-3.2/include/GLFW/
     glew-2.0.0/include/
     FastNoiseSIMD/
-    tinyscheme-1.41/
 
     gdal-2.1.1/
     gdal-2.1.1/alg/
