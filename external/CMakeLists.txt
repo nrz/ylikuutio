@@ -28,6 +28,11 @@ add_subdirectory(glfw-3.2)
 # TinySceme #
 add_subdirectory(tinyscheme-1.41)
 
+# Assimp #
+if(ENABLE_ASSET_IMPORTING_WITH_ASSIMP)
+    add_subdirectory(assimp)
+endif()
+
 include_directories(
     glfw-3.2/include/GLFW/
     glew-2.0.0/include/

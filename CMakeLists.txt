@@ -10,6 +10,9 @@ project(ylikuutio)
 # comment the following line to disable scripting with TinyScheme.
 set(ENABLE_SCRIPTING_WITH_TINYSCHEME true)
 
+# comment the following line to disable asset importing with Open Asset Import Library (Assimp).
+set(ENABLE_ASSET_IMPORTING_WITH_ASSIMP true)
+
 # comment the following line to disable unit tests with Google Test.
 set(DO_UNIT_TESTS_WITH_GOOGLE_TEST true)
 
@@ -228,6 +231,12 @@ include_directories(
 if(ENABLE_SCRIPTING_WITH_TINYSCHEME)
     include_directories(
         external/tinyscheme/include/
+        )
+endif()
+
+if(ENABLE_ASSET_IMPORTING_WITH_ASSIMP)
+    include_directories(
+        external/assimp/include/
         )
 endif()
 
