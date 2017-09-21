@@ -1,0 +1,2 @@
+#!/bin/bash
+CC='/usr/bin/gcc' CXX='/usr/bin/g++' cmake .. && make -j $(($(nproc) - 1))
