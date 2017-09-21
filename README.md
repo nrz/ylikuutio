@@ -107,6 +107,10 @@ Then, to compile with GCC, in Ylikuutio install directory:
     $ cmake ..
     $ make
 
+To make compiling faster you probably want to use several threads:
+
+    $ make -j $(($(nproc) - 1))
+
 Or, to compile with Clang, again in Ylikuutio install directory:
 
     $ mkdir build
