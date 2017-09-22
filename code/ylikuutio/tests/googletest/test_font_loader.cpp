@@ -24,7 +24,7 @@ TEST(glyphs_must_be_found_appropriately, kongtext_svg)
     std::string font_filename = "kongtext.svg";
 
     std::string file_content = file::slurp(font_filename);
-    const uint32_t file_size = file_content.size();
+    const uint64_t file_size = file_content.size();
     char* SVG_data = new char[file_size];
     ASSERT_NE(SVG_data, nullptr);
     std::strncpy(SVG_data, file_content.c_str(), file_size);

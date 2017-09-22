@@ -315,7 +315,7 @@ namespace loaders
             std::vector<std::string>& unicode_strings)
     {
         std::string file_content = file::slurp(font_file_path);
-        const uint32_t file_size = file_content.size();
+        const uint64_t file_size = file_content.size();
         char* SVG_data = new char[file_size];
 
         if (SVG_data == nullptr)
