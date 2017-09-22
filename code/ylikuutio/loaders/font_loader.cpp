@@ -22,9 +22,18 @@ namespace loaders
         return string::check_and_report_if_some_string_matches(SVG_base_pointer, SVG_data_pointer, data_size, identifier_strings_vector);
     }
 
-    int32_t extract_value_from_string_with_standard_endings(char*& vertex_data_pointer, const char* const description)
+    int32_t extract_value_from_string_with_standard_endings(
+            const char* const vertex_base_pointer,
+            char*& vertex_data_pointer,
+            const uint64_t vertex_data_size,
+            const char* const description)
     {
-        return string::extract_int32_t_value_from_string(vertex_data_pointer, (char*) " Mmhvz\">", description);
+        return string::extract_int32_t_value_from_string(
+                vertex_base_pointer,
+                vertex_data_pointer,
+                vertex_data_size,
+                (const char* const) " Mmhvz\">",
+                description);
     }
 
     bool find_first_glyph_in_SVG(const char* SVG_base_pointer, char*& SVG_data_pointer, uint64_t data_size)
@@ -69,7 +78,7 @@ namespace loaders
     }
 
     bool load_vertex_data(
-            const char* SVG_base_pointer,
+            const char* const SVG_base_pointer,
             char*& SVG_data_pointer,
             uint64_t data_size,
             std::vector<std::vector<glm::vec2>>& current_glyph_vertices)
@@ -112,29 +121,41 @@ namespace loaders
         {
             if (std::strncmp(vertex_data_pointer, "M", std::strlen("M")) == 0)
             {
-                current_vertex.x = loaders::extract_value_from_string_with_standard_endings(vertex_data_pointer,
-                        (const char*) "M (moveto)");
+                current_vertex.x = loaders::extract_value_from_string_with_standard_endings(
+                        char_path,
+                        vertex_data_pointer,
+                        sizeof(char_path),
+                        (const char* const) "M (moveto)");
 
                 while (std::strncmp(vertex_data_pointer++, " ", std::strlen(" ")) != 0);
 
-                current_vertex.y = loaders::extract_value_from_string_with_standard_endings(--vertex_data_pointer,
-                        (const char*) "space (moveto y coordinate)");
+                current_vertex.y = loaders::extract_value_from_string_with_standard_endings(
+                        char_path,
+                        --vertex_data_pointer,
+                        sizeof(char_path),
+                        (const char* const) "space (moveto y coordinate)");
                 vertices_of_current_edge_section.push_back(current_vertex);
 
             } // if (std::strncmp(vertex_data_pointer, "M", std::strlen("M")) == 0)
             else if (std::strncmp(vertex_data_pointer, "h", std::strlen("h")) == 0)
             {
                 // OK, this is horizontal relative lineto.
-                int32_t horizontal_lineto_value = loaders::extract_value_from_string_with_standard_endings(vertex_data_pointer,
-                        (const char*) "h (horizontal relative lineto)");
+                int32_t horizontal_lineto_value = loaders::extract_value_from_string_with_standard_endings(
+                        char_path,
+                        vertex_data_pointer,
+                        sizeof(char_path),
+                        (const char* const) "h (horizontal relative lineto)");
                 current_vertex.x += horizontal_lineto_value;
                 vertices_of_current_edge_section.push_back(current_vertex);
             } // else if (std::strncmp(vertex_data_pointer, "h", std::strlen("h")) == 0)
             else if (std::strncmp(vertex_data_pointer, "v", std::strlen("v")) == 0)
             {
                 // OK, this is vertical relative lineto.
-                int32_t vertical_lineto_value = loaders::extract_value_from_string_with_standard_endings(vertex_data_pointer,
-                        (const char*) "v (vertical relative lineto)");
+                int32_t vertical_lineto_value = loaders::extract_value_from_string_with_standard_endings(
+                        char_path,
+                        vertex_data_pointer,
+                        sizeof(char_path),
+                        (const char* const) "v (vertical relative lineto)");
                 current_vertex.y += vertical_lineto_value;
                 vertices_of_current_edge_section.push_back(current_vertex);
             } // else if (std::strncmp(vertex_data_pointer, "v", std::strlen("v")) == 0)

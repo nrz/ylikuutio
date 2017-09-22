@@ -16,27 +16,35 @@ namespace string
             const std::vector<std::string> identifier_strings_vector);
 
     void extract_string(
-            const char* src_base_pointer,
+            const char* const src_base_pointer,
             char*& src_data_pointer,
             const uint64_t src_data_size,
-            const char* dest_base_pointer,
+            const char* const dest_base_pointer,
             char* dest_data_pointer,
             const uint64_t dest_data_size,
             const char* const char_end_string);
 
     void extract_string_with_several_endings(
-            char* dest_mem_pointer,
-            char*& src_mem_pointer,
+            const char* const src_base_pointer,
+            char*& src_data_pointer,
+            const uint64_t src_data_size,
+            const char* const dest_base_pointer,
+            char* dest_data_pointer,
+            const uint64_t dest_data_size,
             const char* const char_end_string);
 
     int32_t extract_int32_t_value_from_string(
-            char*& data_pointer,
-            char* char_end_string,
+            const char* const src_base_pointer,
+            char*& src_data_pointer,
+            const uint64_t src_data_size,
+            const char* const char_end_string,
             const char* const description);
 
     float extract_float_value_from_string(
-            char*& data_pointer,
-            char* char_end_string,
+            const char* const src_base_pointer,
+            char*& src_data_pointer,
+            const uint64_t src_data_size,
+            const char* const char_end_string,
             const char* const description);
 
     int32_t extract_unicode_value_from_string(const char*& unicode_char_pointer);
