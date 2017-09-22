@@ -73,8 +73,7 @@ https://www.blender.org/about/license/
 
 ## Compiling
 Ylikuutio can be compiled with GCC, Clang or Visual Studio.
-GCC is the primary compiler of Ylikuutio. For Clang and Visual Studio
-the compiling may break due to compiler-specific bugs.
+In Visual Studio the compiling may break due to compiler-specific bugs.
 Cross compiling from Linux to Windows using GCC works fine.
 C++11 support is required.
 OpenGL 3.0 or newer is required.
