@@ -12,7 +12,7 @@ TEST(string_matching, some_string_must_match_when_the_only_identifier_string_is_
     const char* text_base_pointer = text;
     char* text_data_pointer = text;
     std::vector<std::string> identifier_strings_vector = { "" };
-    ASSERT_TRUE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, identifier_strings_vector));
+    ASSERT_TRUE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
 }
 TEST(string_matching, some_string_must_match_when_there_is_only_one_1_character_string_in_the_identifier_string_vector_and_it_matches)
 {
@@ -20,12 +20,12 @@ TEST(string_matching, some_string_must_match_when_there_is_only_one_1_character_
     const char* text_base_pointer = text;
     char* text_data_pointer = text;
     std::vector<std::string> identifier_strings_vector = { "a" };
-    ASSERT_TRUE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, identifier_strings_vector));
+    ASSERT_TRUE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
 
     char other_text[] = "ab";
     const char* other_text_base_pointer = other_text;
     char* other_text_data_pointer = other_text;
-    ASSERT_TRUE(string::check_and_report_if_some_string_matches(other_text_base_pointer, other_text_data_pointer, identifier_strings_vector));
+    ASSERT_TRUE(string::check_and_report_if_some_string_matches(other_text_base_pointer, other_text_data_pointer, sizeof(other_text), identifier_strings_vector));
 }
 TEST(string_matching, some_string_must_match_when_there_is_only_one_2_character_string_in_the_identifier_string_vector_and_it_matches)
 {
@@ -33,7 +33,7 @@ TEST(string_matching, some_string_must_match_when_there_is_only_one_2_character_
     const char* text_base_pointer = text;
     char* text_data_pointer = text;
     std::vector<std::string> identifier_strings_vector = { "ab" };
-    ASSERT_TRUE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, identifier_strings_vector));
+    ASSERT_TRUE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
 }
 TEST(string_matching, some_string_must_match_when_there_is_only_one_3_character_string_in_the_identifier_string_vector_and_it_matches)
 {
@@ -41,7 +41,7 @@ TEST(string_matching, some_string_must_match_when_there_is_only_one_3_character_
     const char* text_base_pointer = text;
     char* text_data_pointer = text;
     std::vector<std::string> identifier_strings_vector = { "abc" };
-    ASSERT_TRUE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, identifier_strings_vector));
+    ASSERT_TRUE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
 }
 TEST(string_matching, some_string_must_match_when_there_are_two_1_character_strings_in_the_identifier_string_vector_and_the_1st_matches)
 {
@@ -49,7 +49,7 @@ TEST(string_matching, some_string_must_match_when_there_are_two_1_character_stri
     const char* text_base_pointer = text;
     char* text_data_pointer = text;
     std::vector<std::string> identifier_strings_vector = { "a", "b" };
-    ASSERT_TRUE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, identifier_strings_vector));
+    ASSERT_TRUE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
 }
 TEST(string_matching, some_string_must_match_when_there_are_two_1_character_strings_in_the_identifier_string_vector_and_the_2nd_matches)
 {
@@ -57,7 +57,7 @@ TEST(string_matching, some_string_must_match_when_there_are_two_1_character_stri
     const char* text_base_pointer = text;
     char* text_data_pointer = text;
     std::vector<std::string> identifier_strings_vector = { "a", "b" };
-    ASSERT_TRUE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, identifier_strings_vector));
+    ASSERT_TRUE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
 }
 TEST(string_matching, some_string_must_match_when_there_are_three_1_character_strings_in_the_identifier_string_vector_and_the_1st_matches)
 {
@@ -65,7 +65,7 @@ TEST(string_matching, some_string_must_match_when_there_are_three_1_character_st
     const char* text_base_pointer = text;
     char* text_data_pointer = text;
     std::vector<std::string> identifier_strings_vector = { "a", "b", "c" };
-    ASSERT_TRUE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, identifier_strings_vector));
+    ASSERT_TRUE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
 }
 TEST(string_matching, some_string_must_match_when_there_are_three_1_character_strings_in_the_identifier_string_vector_and_the_2nd_matches)
 {
@@ -73,7 +73,7 @@ TEST(string_matching, some_string_must_match_when_there_are_three_1_character_st
     const char* text_base_pointer = text;
     char* text_data_pointer = text;
     std::vector<std::string> identifier_strings_vector = { "a", "b", "c" };
-    ASSERT_TRUE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, identifier_strings_vector));
+    ASSERT_TRUE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
 }
 TEST(string_matching, some_string_must_match_when_there_are_three_1_character_strings_in_the_identifier_string_vector_and_the_3rd_matches)
 {
@@ -81,7 +81,7 @@ TEST(string_matching, some_string_must_match_when_there_are_three_1_character_st
     const char* text_base_pointer = text;
     char* text_data_pointer = text;
     std::vector<std::string> identifier_strings_vector = { "a", "b", "c" };
-    ASSERT_TRUE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, identifier_strings_vector));
+    ASSERT_TRUE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
 }
 TEST(string_matching, no_string_must_match_when_the_identifier_string_vector_is_empty)
 {
@@ -89,7 +89,7 @@ TEST(string_matching, no_string_must_match_when_the_identifier_string_vector_is_
     const char* text_base_pointer = text;
     char* text_data_pointer = text;
     std::vector<std::string> identifier_strings_vector = {};
-    ASSERT_FALSE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, identifier_strings_vector));
+    ASSERT_FALSE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
 }
 TEST(string_matching, no_string_must_match_when_the_only_identifier_string_is_longer_than_the_string_to_be_compared_with)
 {
@@ -97,7 +97,7 @@ TEST(string_matching, no_string_must_match_when_the_only_identifier_string_is_lo
     const char* text_base_pointer = text;
     char* text_data_pointer = text;
     std::vector<std::string> identifier_strings_vector = { "aa" };
-    ASSERT_FALSE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, identifier_strings_vector));
+    ASSERT_FALSE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
 }
 TEST(string_matching, no_string_must_match_when_there_is_only_one_1_character_string_in_the_identifier_string_vector_and_it_does_not_match)
 {
@@ -105,10 +105,10 @@ TEST(string_matching, no_string_must_match_when_there_is_only_one_1_character_st
     const char* text_base_pointer = text;
     char* text_data_pointer = text;
     std::vector<std::string> identifier_strings_vector = { "b" };
-    ASSERT_FALSE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, identifier_strings_vector));
+    ASSERT_FALSE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
 
     identifier_strings_vector = { "A" };
-    ASSERT_FALSE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, identifier_strings_vector));
+    ASSERT_FALSE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
 }
 TEST(string_matching, no_string_must_match_when_there_is_only_one_2_character_string_in_the_identifier_string_vector_and_its_1st_character_does_not_match)
 {
@@ -116,10 +116,10 @@ TEST(string_matching, no_string_must_match_when_there_is_only_one_2_character_st
     const char* text_base_pointer = text;
     char* text_data_pointer = text;
     std::vector<std::string> identifier_strings_vector = { "bb" };
-    ASSERT_FALSE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, identifier_strings_vector));
+    ASSERT_FALSE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
 
     identifier_strings_vector = { "Ab" };
-    ASSERT_FALSE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, identifier_strings_vector));
+    ASSERT_FALSE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
 }
 TEST(string_matching, no_string_must_match_when_there_is_only_one_2_character_string_in_the_identifier_string_vector_and_its_2nd_character_does_not_match)
 {
@@ -127,10 +127,10 @@ TEST(string_matching, no_string_must_match_when_there_is_only_one_2_character_st
     const char* text_base_pointer = text;
     char* text_data_pointer = text;
     std::vector<std::string> identifier_strings_vector = { "aa" };
-    ASSERT_FALSE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, identifier_strings_vector));
+    ASSERT_FALSE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
 
     identifier_strings_vector = { "aB" };
-    ASSERT_FALSE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, identifier_strings_vector));
+    ASSERT_FALSE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
 }
 TEST(string_matching, no_string_must_match_when_there_is_only_one_3_character_string_in_the_identifier_string_vector_and_its_1st_character_does_not_match)
 {
@@ -138,10 +138,10 @@ TEST(string_matching, no_string_must_match_when_there_is_only_one_3_character_st
     const char* text_base_pointer = text;
     char* text_data_pointer = text;
     std::vector<std::string> identifier_strings_vector = { "bbc" };
-    ASSERT_FALSE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, identifier_strings_vector));
+    ASSERT_FALSE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
 
     identifier_strings_vector = { "Abc" };
-    ASSERT_FALSE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, identifier_strings_vector));
+    ASSERT_FALSE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
 }
 TEST(string_matching, no_string_must_match_when_there_is_only_one_3_character_string_in_the_identifier_string_vector_and_its_2nd_character_does_not_match)
 {
@@ -149,10 +149,10 @@ TEST(string_matching, no_string_must_match_when_there_is_only_one_3_character_st
     const char* text_base_pointer = text;
     char* text_data_pointer = text;
     std::vector<std::string> identifier_strings_vector = { "aac" };
-    ASSERT_FALSE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, identifier_strings_vector));
+    ASSERT_FALSE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
 
     identifier_strings_vector = { "aBc" };
-    ASSERT_FALSE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, identifier_strings_vector));
+    ASSERT_FALSE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
 }
 TEST(string_matching, no_string_must_match_when_there_is_only_one_3_character_string_in_the_identifier_string_vector_and_its_3rd_character_does_not_match)
 {
@@ -160,10 +160,10 @@ TEST(string_matching, no_string_must_match_when_there_is_only_one_3_character_st
     const char* text_base_pointer = text;
     char* text_data_pointer = text;
     std::vector<std::string> identifier_strings_vector = { "abb" };
-    ASSERT_FALSE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, identifier_strings_vector));
+    ASSERT_FALSE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
 
     identifier_strings_vector = { "abC" };
-    ASSERT_FALSE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, identifier_strings_vector));
+    ASSERT_FALSE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
 }
 TEST(string_matching, no_string_must_match_when_there_are_two_1_character_strings_in_the_identifier_string_vector_and_neither_matches)
 {
@@ -171,7 +171,7 @@ TEST(string_matching, no_string_must_match_when_there_are_two_1_character_string
     const char* text_base_pointer = text;
     char* text_data_pointer = text;
     std::vector<std::string> identifier_strings_vector = { "A", "b" };
-    ASSERT_FALSE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, identifier_strings_vector));
+    ASSERT_FALSE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
 }
 TEST(string_matching, no_string_must_match_when_there_are_three_1_character_strings_in_the_identifier_string_vector_and_none_matches)
 {
@@ -179,7 +179,7 @@ TEST(string_matching, no_string_must_match_when_there_are_three_1_character_stri
     const char* text_base_pointer = text;
     char* text_data_pointer = text;
     std::vector<std::string> identifier_strings_vector = { "A", "b", "c" };
-    ASSERT_FALSE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, identifier_strings_vector));
+    ASSERT_FALSE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
 }
 TEST(unicode_value_from_string, char_only_a)
 {
@@ -246,7 +246,7 @@ TEST(extract_string_from_memory, nothing_must_be_extracted_when_source_string_is
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
 
-    string::extract_string(dest_array, text_pointer, end_string);
+    string::extract_string(text, text_pointer, sizeof(text), dest_array, dest_array, array_size, end_string);
     ASSERT_EQ(*dest_array, 0);
 }
 TEST(extract_string_from_memory, nothing_must_be_extracted_when_source_string_is_empty_string_and_end_string_is_1_char)
@@ -260,7 +260,7 @@ TEST(extract_string_from_memory, nothing_must_be_extracted_when_source_string_is
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
 
-    string::extract_string(dest_array, text_pointer, end_string);
+    string::extract_string(text, text_pointer, sizeof(text), dest_array, dest_array, array_size, end_string);
     ASSERT_EQ(*dest_array, 0);
 }
 TEST(extract_string_from_memory, nothing_must_be_extracted_when_source_string_is_empty_string_and_end_string_is_2_same_chars)
@@ -274,7 +274,7 @@ TEST(extract_string_from_memory, nothing_must_be_extracted_when_source_string_is
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
 
-    string::extract_string(dest_array, text_pointer, end_string);
+    string::extract_string(text, text_pointer, sizeof(text), dest_array, dest_array, array_size, end_string);
     ASSERT_EQ(*dest_array, 0);
 }
 TEST(extract_string_from_memory, nothing_must_be_extracted_when_source_string_is_empty_string_and_end_string_is_2_different_chars)
@@ -288,7 +288,7 @@ TEST(extract_string_from_memory, nothing_must_be_extracted_when_source_string_is
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
 
-    string::extract_string(dest_array, text_pointer, end_string);
+    string::extract_string(text, text_pointer, sizeof(text), dest_array, dest_array, array_size, end_string);
     ASSERT_EQ(*dest_array, 0);
 }
 TEST(extract_string_from_memory, 1_char_must_be_extracted_when_source_string_is_1_char_and_end_string_is_1_char)
@@ -302,7 +302,7 @@ TEST(extract_string_from_memory, 1_char_must_be_extracted_when_source_string_is_
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
 
-    string::extract_string(dest_array, text_pointer, end_string);
+    string::extract_string(text, text_pointer, sizeof(text), dest_array, dest_array, array_size, end_string);
     ASSERT_EQ(*dest_array, 0);
 }
 TEST(extract_string_from_memory, iloinen_lokki_laulaa_ja_nukkuu)
@@ -316,7 +316,7 @@ TEST(extract_string_from_memory, iloinen_lokki_laulaa_ja_nukkuu)
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
 
-    string::extract_string(dest_array, text_pointer, end_string);
+    string::extract_string(text, text_pointer, sizeof(text), dest_array, dest_array, array_size, end_string);
     ASSERT_EQ(*dest_array++, 'i');
     ASSERT_EQ(*dest_array++, 'l');
     ASSERT_EQ(*dest_array++, 'o');

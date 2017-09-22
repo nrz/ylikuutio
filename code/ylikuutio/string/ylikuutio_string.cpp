@@ -15,11 +15,19 @@ namespace string
     bool check_and_report_if_some_string_matches(
             const char* const base_pointer,
             const char* const data_pointer,
+            const uint64_t data_size,
             const std::vector<std::string> identifier_strings_vector)
     {
         for (std::string identifier_string : identifier_strings_vector)
         {
             const char* const identifier_string_char = identifier_string.c_str();
+
+            if (data_pointer + identifier_string.length() > base_pointer + data_size)
+            {
+                // If current `identifier_string` can't fit in the memory region,
+                // proceed to the next `identifier_string`, if there is any left.
+                continue;
+            }
 
             if (std::strncmp(data_pointer, identifier_string_char, std::strlen(identifier_string_char)) == 0)
             {
@@ -31,15 +39,21 @@ namespace string
     }
 
     void extract_string(
-            char* dest_mem_pointer,
-            char*& src_mem_pointer,
+            const char* src_base_pointer,
+            char*& src_data_pointer,
+            const uint64_t src_data_size,
+            const char* dest_base_pointer,
+            char* dest_data_pointer,
+            const uint64_t dest_data_size,
             const char* const char_end_string)
     {
-        while (std::strncmp(src_mem_pointer, char_end_string, std::strlen(char_end_string)) != 0)
+        while (src_data_pointer < src_base_pointer + src_data_size &&
+                dest_data_pointer + 1 < dest_base_pointer + dest_data_size &&
+                std::strncmp(src_data_pointer, char_end_string, std::strlen(char_end_string)) != 0)
         {
-            strncpy(dest_mem_pointer++, src_mem_pointer++, 1);
+            strncpy(dest_data_pointer++, src_data_pointer++, 1);
         }
-        *dest_mem_pointer = '\0';
+        *dest_data_pointer = '\0';
     }
 
     void extract_string_with_several_endings(

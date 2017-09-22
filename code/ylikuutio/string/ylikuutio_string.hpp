@@ -12,11 +12,16 @@ namespace string
     bool check_and_report_if_some_string_matches(
             const char* const base_pointer,
             const char* const data_pointer,
+            const uint64_t data_size,
             const std::vector<std::string> identifier_strings_vector);
 
     void extract_string(
-            char* dest_mem_pointer,
-            char*& src_mem_pointer,
+            const char* src_base_pointer,
+            char*& src_data_pointer,
+            const uint64_t src_data_size,
+            const char* dest_base_pointer,
+            char* dest_data_pointer,
+            const uint64_t dest_data_size,
             const char* const char_end_string);
 
     void extract_string_with_several_endings(
