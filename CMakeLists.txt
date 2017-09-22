@@ -10,9 +10,6 @@ project(ylikuutio)
 # comment the following line to disable scripting with TinyScheme.
 set(ENABLE_SCRIPTING_WITH_TINYSCHEME true)
 
-# comment the following line to disable asset importing with Open Asset Import Library (Assimp).
-set(ENABLE_ASSET_IMPORTING_WITH_ASSIMP true)
-
 # comment the following line to disable unit tests with Google Test.
 set(DO_UNIT_TESTS_WITH_GOOGLE_TEST true)
 
@@ -84,18 +81,13 @@ include_directories(
     external/glew-2.0.0/include/
     external/FastNoiseSIMD/
     external/pugixml/src/
+    external/assimp-3.0.1270/include/
     .
     )
 
 if(ENABLE_SCRIPTING_WITH_TINYSCHEME)
     include_directories(
         external/tinyscheme-1.41/
-        )
-endif()
-
-if(ENABLE_ASSET_IMPORTING_WITH_ASSIMP)
-    include_directories(
-        external/assimp/include/
         )
 endif()
 
@@ -480,7 +472,7 @@ add_executable(ajokki
     code/ajokki/ajokki_movement.hpp
     )
 add_dependencies(ajokki rescan)
-target_link_libraries(ajokki ylikuutio ${ALL_LIBS} glfw)
+target_link_libraries(ajokki ylikuutio ${ALL_LIBS} glfw assimp)
 
 if (ENABLE_SCRIPTING_WITH_TINYSCHEME)
     # TinyScheme-test
@@ -490,6 +482,7 @@ if (ENABLE_SCRIPTING_WITH_TINYSCHEME)
 endif()
 
 # Xcode and Visual working directories
+set_target_properties(ajokki PROPERTIES COMPILE_DEFINITIONS "USE_ASSIMP")
 set_target_properties(ajokki PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/code/ajokki/")
 create_target_launcher(ajokki WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/code/ajokki/")
 
