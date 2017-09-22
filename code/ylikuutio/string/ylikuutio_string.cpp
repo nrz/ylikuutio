@@ -23,7 +23,6 @@ namespace string
             if (std::strncmp(data_pointer, identifier_string_char, std::strlen(identifier_string_char)) == 0)
             {
                 const char* const identifier_string_char = identifier_string.c_str();
-                uint64_t offset = (uint64_t) data_pointer - (uint64_t) base_pointer;
                 return true;
             }
         }
