@@ -89,7 +89,7 @@ set_property(TARGET tinyscheme PROPERTY COMPILE_FLAGS "-DSTANDALONE=0 -DUSE_INTE
 # GDAL/OGR 2.1.1
 
 ### ANTTWEAKBAR ###
-# 
+#
 # set(ANTTWEAKBAR_SOURCE
 # 	AntTweakBar-1.16/src/LoadOGL.cpp
 # 	AntTweakBar-1.16/src/LoadOGLCore.cpp
@@ -102,7 +102,7 @@ set_property(TARGET tinyscheme PROPERTY COMPILE_FLAGS "-DSTANDALONE=0 -DUSE_INTE
 # 	AntTweakBar-1.16/src/TwOpenGLCore.cpp
 # 	AntTweakBar-1.16/src/TwPrecomp.cpp
 # )
-# 
+#
 # if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin") # If on Xcode, rename files to .mm
 # file(COPY ${ANTTWEAKBAR_SOURCE} DESTINATION AntTweakBar-ObjectiveC/)
 # file(RENAME ${CMAKE_BINARY_DIR}/external/AntTweakBar-ObjectiveC/LoadOGL.cpp      ${CMAKE_BINARY_DIR}/external/AntTweakBar-ObjectiveC/LoadOGL.mm     )
@@ -115,7 +115,7 @@ set_property(TARGET tinyscheme PROPERTY COMPILE_FLAGS "-DSTANDALONE=0 -DUSE_INTE
 # file(RENAME ${CMAKE_BINARY_DIR}/external/AntTweakBar-ObjectiveC/TwOpenGL.cpp     ${CMAKE_BINARY_DIR}/external/AntTweakBar-ObjectiveC/TwOpenGL.mm    )
 # file(RENAME ${CMAKE_BINARY_DIR}/external/AntTweakBar-ObjectiveC/TwOpenGLCore.cpp ${CMAKE_BINARY_DIR}/external/AntTweakBar-ObjectiveC/TwOpenGLCore.mm)
 # file(RENAME ${CMAKE_BINARY_DIR}/external/AntTweakBar-ObjectiveC/TwPrecomp.cpp    ${CMAKE_BINARY_DIR}/external/AntTweakBar-ObjectiveC/TwPrecomp.mm   )
-# 
+#
 # set(ANTTWEAKBAR_SOURCE
 # 	${CMAKE_BINARY_DIR}/external/AntTweakBar-ObjectiveC/LoadOGL.mm
 # 	${CMAKE_BINARY_DIR}/external/AntTweakBar-ObjectiveC/LoadOGLCore.mm
@@ -142,9 +142,9 @@ set_property(TARGET tinyscheme PROPERTY COMPILE_FLAGS "-DSTANDALONE=0 -DUSE_INTE
 # add_definitions(
 # 	-D_WINDOWS
 # )
-# 
+#
 # endif(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-# 
+#
 # set(ANTTWEAKBAR_HEADERS
 # 	AntTweakBar-1.16/src/AntPerfTimer.h
 # 	AntTweakBar-1.16/src/LoadOGL.h
@@ -160,16 +160,16 @@ set_property(TARGET tinyscheme PROPERTY COMPILE_FLAGS "-DSTANDALONE=0 -DUSE_INTE
 # 	AntTweakBar-1.16/src/TwOpenGLCore.h
 # 	AntTweakBar-1.16/src/TwPrecomp.h
 # )
-# 
+#
 # include_directories(
 # 	AntTweakBar-1.16/include/
 # )
-# 
+#
 # add_library( ANTTWEAKBAR_116_OGLCORE_GLFW STATIC
 # 	${ANTTWEAKBAR_SOURCE}
 # 	${ANTTWEAKBAR_HEADERS}
 # )
-# 
+#
 # target_link_libraries(ANTTWEAKBAR_116_OGLCORE_GLFW
 # 	${OPENGL_LIBRARY}
 # 	${EXTRA_LIBS}
@@ -177,7 +177,7 @@ set_property(TARGET tinyscheme PROPERTY COMPILE_FLAGS "-DSTANDALONE=0 -DUSE_INTE
 
 ### ASSIMP ###
 # AssImp already has a CMakeLists.txt so let's use these
-# 
+#
 # # Compile built-in, modified version of Zlib
 include(CheckIncludeFile)
 include(CheckTypeSize)
@@ -198,7 +198,7 @@ add_subdirectory(assimp-3.0.1270/code)
 
 ### BULLET ###
 # Bullet already has a CMakeLists.txt so let's use these
-# 
+#
 # set(BULLET_VERSION 2.81)
 # include_directories(
 # 	bullet-2.81-rev2613/src
