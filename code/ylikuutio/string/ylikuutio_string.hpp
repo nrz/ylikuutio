@@ -3,6 +3,7 @@
 
 // Include standard headers
 #include <list>      // std::list
+#include <stdint.h>  // uint32_t etc.
 #include <string>    // std::string
 #include <vector>    // std::vector
 
