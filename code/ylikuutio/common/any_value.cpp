@@ -107,6 +107,8 @@ namespace datatypes
                 return "console::Console*";
             case (SPHERICAL_COORDINATES_STRUCT_POINTER):
                 return "SphericalCoordinatesStruct*";
+            case (STD_STRING_POINTER):
+                return "std::string*";
             case (GLM_VEC3_POINTER):
                 return "glm::vec3*";
             default:
@@ -213,6 +215,13 @@ namespace datatypes
                             this->spherical_coordinates_struct_pointer->phi);
                 }
                 return std::string(buffer);
+            case (STD_STRING_POINTER):
+                if (this->std_string_pointer == nullptr)
+                {
+                    std::snprintf(buffer, sizeof(buffer), "nullptr");
+                    return std::string(buffer);
+                }
+                return std::string(*this->std_string_pointer);
             case (GLM_VEC3_POINTER):
                 if (this->glm_vec3_pointer == nullptr)
                 {
@@ -1307,6 +1316,26 @@ namespace datatypes
         {
             this->type = datatypes::SPHERICAL_COORDINATES_STRUCT_POINTER;
             this->spherical_coordinates_struct_pointer = spherical_coordinates_struct_pointer;
+        }
+    }
+
+    AnyValue::AnyValue(std::string* const std_string_pointer)
+    {
+        // constructor.
+        this->set_default_values();
+        this->type = datatypes::STD_STRING_POINTER;
+        this->std_string_pointer = std_string_pointer;
+    }
+
+    AnyValue::AnyValue(const std::string& type, std::string* const std_string_pointer)
+    {
+        // constructor.
+        this->set_default_values();
+
+        if (std::strcmp(type.c_str(), "std::string*") == 0)
+        {
+            this->type = datatypes::STD_STRING_POINTER;
+            this->std_string_pointer = std_string_pointer;
         }
     }
 
