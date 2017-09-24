@@ -17,8 +17,6 @@ install:
     - sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-5 90
     - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-5 90
 script:
-    - export CC=/usr/bin/gcc-5
-    - export CXX=/usr/bin/g++-5
     - gcc -v && g++ -v && cmake --version
     - mkdir build
     - cd build
