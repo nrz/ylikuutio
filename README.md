@@ -12,6 +12,10 @@ The source code from http://www.opengl-tutorial.org/ is licensed
 under WTFPL Public Licence version 2.
 http://www.opengl-tutorial.org/download/
 
+Open Asset Import Library (assimp) is licensed
+under a 3-clause BSD license.
+http://www.assimp.org/main_license.html
+
 TinyScheme is licensed under BSD-style license.
 http://tinyscheme.sourceforge.net/license.txt
 
