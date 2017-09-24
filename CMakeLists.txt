@@ -32,7 +32,7 @@ find_package(Threads REQUIRED)
 # Compile external dependencies
 add_subdirectory (external)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
 
 # set(CMAKE_COLOR_MAKEFILE ON)
 # set(CMAKE_VERBOSE_MAKEFILE ON)
@@ -436,7 +436,6 @@ add_library(ylikuutio STATIC
     # triangulation, in alphabetical order
     code/ylikuutio/triangulation/face_normals.cpp
     code/ylikuutio/triangulation/face_normals.hpp
-    code/ylikuutio/triangulation/indexing.cpp
     code/ylikuutio/triangulation/indexing.hpp
     code/ylikuutio/triangulation/polygon_triangulation.cpp
     code/ylikuutio/triangulation/polygon_triangulation.hpp
@@ -534,7 +533,6 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/string/ylikuutio_string.hpp
         code/ylikuutio/triangulation/face_normals.cpp
         code/ylikuutio/triangulation/face_normals.hpp
-        code/ylikuutio/triangulation/indexing.cpp
         code/ylikuutio/triangulation/indexing.hpp
         code/ylikuutio/triangulation/quad_triangulation.hpp
         code/ylikuutio/triangulation/triangulation_enums.hpp
