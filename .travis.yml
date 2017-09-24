@@ -1,5 +1,8 @@
 language: cpp
 dist: trusty
+compiler:
+    - gcc
+    - clang
 sudo: required
 before_install:
     # C++14
@@ -22,45 +25,20 @@ script:
     - cmake ..
     - make
     - ./unit_tests_with_Google_Test
-matrix:
-    include:
-        - os: linux
-          addons:
-              apt:
-                  sources:
-                      - ubuntu-toolchain-r-test
-                  packages:
-                      - cmake
-                      - git
-                      - libgl1-mesa-dev
-                      - libglu1-mesa-dev
-                      - libxcursor-dev
-                      - libxrandr-dev
-                      - libxext-dev
-                      - libxi-dev
-                      - libxinerama-dev
-                      - make
-                  env:
-                      - MATRIX_EVAL="CC=gcc-5 && CXX=g++-5"
-        - os: linux
-          addons:
-              apt:
-                  sources:
-                      - ubuntu-toolchain-r-test
-                  packages:
-                      - clang
-                      - git
-                      - cmake
-                      - make
-                      - libgl1-mesa-dev
-                      - libglu1-mesa-dev
-                      - libxcursor-dev
-                      - libxrandr-dev
-                      - libxext-dev
-                      - libxi-dev
-                      - libxinerama-dev
-                  env:
-                      - MATRIX_EVAL="CC=clang && CXX=clang++"
-
-before_install:
-    - eval "${MATRIX_EVAL}"
+os:
+    - linux
+addons:
+    apt:
+        sources:
+            - ubuntu-toolchain-r-test
+        packages:
+            - cmake
+            - git
+            - libgl1-mesa-dev
+            - libglu1-mesa-dev
+            - libxcursor-dev
+            - libxrandr-dev
+            - libxext-dev
+            - libxi-dev
+            - libxinerama-dev
+            - make
