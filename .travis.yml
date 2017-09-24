@@ -1,5 +1,23 @@
 language: cpp
+dist: trusty
+sudo: required
 script: mkdir build && cd build && cmake .. && make
+addons:
+    apt:
+        sources:
+        packages:
+            - cmake
+            - make
+            - libgl1-mesa-dev
+            - libglu1-mesa-dev
+            - libxcursor-dev
+            - libxrandr-dev
+            - libxext-dev
+            - libxi-dev
+            - libxinerama-dev
+            - g++-mingw-w64
+            - gcc-mingw-w64
+            - binutils-mingw-w64
 matrix:
     include:
         - os: linux
