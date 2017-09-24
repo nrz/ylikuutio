@@ -116,6 +116,7 @@ namespace ontology
 
         this->child_vector_pointers_vector.push_back(&this->glyph_pointer_vector);
         this->child_vector_pointers_vector.push_back(&this->text3D_pointer_vector);
+        this->type = "ontology::VectorFont*";
     }
 
     VectorFont::~VectorFont()
@@ -171,7 +172,7 @@ namespace ontology
         hierarchy::bind_child_to_new_parent<ontology::VectorFont*, ontology::Material*>(this, new_material_pointer, this->parent_pointer->vector_font_pointer_vector, this->parent_pointer->free_vector_fontID_queue, &this->parent_pointer->number_of_vector_fonts);
     }
 
-    void VectorFont::set_name(const std::string name)
+    void VectorFont::set_name(const std::string& name)
     {
         ontology::set_name(name, this);
     }

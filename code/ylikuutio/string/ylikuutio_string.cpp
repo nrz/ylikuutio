@@ -5,6 +5,7 @@
 #include <cstring>  // std::memcmp, std::strcmp, std::strlen, std::strncmp
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <list>     // std::list
+#include <stdint.h> // uint32_t etc.
 #include <sstream>  // std::istringstream, std::ostringstream, std::stringstream
 #include <string>   // std::string
 #include <vector>   // std::vector
@@ -14,16 +15,23 @@ namespace string
     bool check_and_report_if_some_string_matches(
             const char* const base_pointer,
             const char* const data_pointer,
+            const uint64_t data_size,
             const std::vector<std::string> identifier_strings_vector)
     {
         for (std::string identifier_string : identifier_strings_vector)
         {
             const char* const identifier_string_char = identifier_string.c_str();
 
+            if (data_pointer + identifier_string.length() > base_pointer + data_size)
+            {
+                // If current `identifier_string` can't fit in the memory region,
+                // proceed to the next `identifier_string`, if there is any left.
+                continue;
+            }
+
             if (std::strncmp(data_pointer, identifier_string_char, std::strlen(identifier_string_char)) == 0)
             {
                 const char* const identifier_string_char = identifier_string.c_str();
-                uint64_t offset = (uint64_t) data_pointer - (uint64_t) base_pointer;
                 return true;
             }
         }
@@ -31,25 +39,36 @@ namespace string
     }
 
     void extract_string(
-            char* dest_mem_pointer,
-            char*& src_mem_pointer,
+            const char* const src_base_pointer,
+            char*& src_data_pointer,
+            const uint64_t src_data_size,
+            const char* const dest_base_pointer,
+            char* dest_data_pointer,
+            const uint64_t dest_data_size,
             const char* const char_end_string)
     {
-        while (std::strncmp(src_mem_pointer, char_end_string, std::strlen(char_end_string)) != 0)
+        while (src_data_pointer < src_base_pointer + src_data_size &&
+                dest_data_pointer + 1 < dest_base_pointer + dest_data_size &&
+                std::strncmp(src_data_pointer, char_end_string, std::strlen(char_end_string)) != 0)
         {
-            strncpy(dest_mem_pointer++, src_mem_pointer++, 1);
+            strncpy(dest_data_pointer++, src_data_pointer++, 1);
         }
-        *dest_mem_pointer = '\0';
+        *dest_data_pointer = '\0';
     }
 
     void extract_string_with_several_endings(
-            char* dest_mem_pointer,
-            char*& src_mem_pointer,
+            const char* const src_base_pointer,
+            char*& src_data_pointer,
+            const uint64_t src_data_size,
+            const char* const dest_base_pointer,
+            char* dest_data_pointer,
+            const uint64_t dest_data_size,
             const char* const char_end_string)
     {
         // This function copies characters from `src_mem_pointer` until a character matches.
 
-        while (true)
+        while (src_data_pointer < src_base_pointer + src_data_size &&
+                dest_data_pointer + 1 < dest_base_pointer + dest_data_size)
         {
             uint32_t n_of_ending_characters = std::strlen(char_end_string);
             const char* end_char_pointer;
@@ -58,9 +77,9 @@ namespace string
             // Check if current character is any of the ending characters.
             while (*end_char_pointer != '\0')
             {
-                if (std::strncmp(src_mem_pointer, end_char_pointer, 1) == 0)
+                if (std::strncmp(src_data_pointer, end_char_pointer, 1) == 0)
                 {
-                    *dest_mem_pointer = '\0';
+                    *dest_data_pointer = '\0';
                     return;
                 }
                 end_char_pointer++;
@@ -68,20 +87,31 @@ namespace string
 
             // OK, current character is not any of the ending characters.
             // Copy it and advance the pointers accordingly.
-            strncpy(dest_mem_pointer++, src_mem_pointer++, 1);
+            strncpy(dest_data_pointer++, src_data_pointer++, 1);
         }
+        *dest_data_pointer = '\0';
+        return;
     }
 
     int32_t extract_int32_t_value_from_string(
-            char*& data_pointer,
-            char* char_end_string,
+            const char* const src_base_pointer,
+            char*& src_data_pointer,
+            const uint64_t src_data_size,
+            const char* const char_end_string,
             const char* const description)
     {
-        char char_number_buffer[1024]; // FIXME: risk of buffer overflow.
-        char* dest_mem_pointer;
-        dest_mem_pointer = char_number_buffer;
-        string::extract_string_with_several_endings(dest_mem_pointer, ++data_pointer, char_end_string);
-        uint32_t value = std::atoi(dest_mem_pointer);
+        char char_number_buffer[1024];
+        string::extract_string_with_several_endings(
+                src_base_pointer,
+                ++src_data_pointer,
+                src_data_size,
+                char_number_buffer,
+                char_number_buffer,
+                sizeof(char_number_buffer),
+                char_end_string);
+
+        uint32_t value = std::atoi(char_number_buffer);
+
         if (description != nullptr)
         {
             std::printf("%s: %d\n", description, value);
@@ -90,15 +120,23 @@ namespace string
     }
 
     float extract_float_value_from_string(
-            char*& data_pointer,
-            char* char_end_string,
+            const char* const src_base_pointer,
+            char*& src_data_pointer,
+            const uint64_t src_data_size,
+            const char* const char_end_string,
             const char* const description)
     {
-        char char_number_buffer[1024]; // FIXME: risk of buffer overflow.
-        char* dest_mem_pointer;
-        dest_mem_pointer = char_number_buffer;
-        string::extract_string_with_several_endings(dest_mem_pointer, ++data_pointer, char_end_string);
-        float value = std::atof(dest_mem_pointer);
+        char char_number_buffer[1024];
+        string::extract_string_with_several_endings(
+                src_base_pointer,
+                ++src_data_pointer,
+                src_data_size,
+                char_number_buffer,
+                char_number_buffer,
+                sizeof(char_number_buffer),
+                char_end_string);
+
+        float value = std::atof(char_number_buffer);
 
         if (description != nullptr)
         {

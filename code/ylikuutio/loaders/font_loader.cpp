@@ -11,7 +11,7 @@
 
 namespace loaders
 {
-    bool check_if_we_are_inside_block(const char* SVG_base_pointer, char*& SVG_data_pointer)
+    bool check_if_we_are_inside_block(const char* SVG_base_pointer, char*& SVG_data_pointer, uint64_t data_size)
     {
         // This function returns `true` if we are inside block, `false` otherwise.
 
@@ -19,15 +19,24 @@ namespace loaders
 
         // All possible block identifier strings.
         identifier_strings_vector = { "<?xml ", "<!DOCTYPE ", "<svg>", "<metadata>", "</metadata>", "<defs>", "<font ", "<font-face", "<missing-glyph" };
-        return string::check_and_report_if_some_string_matches(SVG_base_pointer, SVG_data_pointer, identifier_strings_vector);
+        return string::check_and_report_if_some_string_matches(SVG_base_pointer, SVG_data_pointer, data_size, identifier_strings_vector);
     }
 
-    int32_t extract_value_from_string_with_standard_endings(char*& vertex_data_pointer, const char* const description)
+    int32_t extract_value_from_string_with_standard_endings(
+            const char* const vertex_base_pointer,
+            char*& vertex_data_pointer,
+            const uint64_t vertex_data_size,
+            const char* const description)
     {
-        return string::extract_int32_t_value_from_string(vertex_data_pointer, (char*) " Mmhvz\">", description);
+        return string::extract_int32_t_value_from_string(
+                vertex_base_pointer,
+                vertex_data_pointer,
+                vertex_data_size,
+                (const char* const) " Mmhvz\">",
+                description);
     }
 
-    bool find_first_glyph_in_SVG(const char* SVG_base_pointer, char*& SVG_data_pointer)
+    bool find_first_glyph_in_SVG(const char* SVG_base_pointer, char*& SVG_data_pointer, uint64_t data_size)
     {
         // This function advances `SVG_data_pointer` to the start of the first glyph.
         // Returns true if a glyph was found.
@@ -46,31 +55,32 @@ namespace loaders
                     return false;
                 }
 
-                if (string::check_and_report_if_some_string_matches(SVG_base_pointer, SVG_data_pointer, std::vector<std::string> { "<glyph" }))
+                if (string::check_and_report_if_some_string_matches(SVG_base_pointer, SVG_data_pointer, data_size, std::vector<std::string> { "<glyph" }))
                 {
                     return true;
                 }
-                if (string::check_and_report_if_some_string_matches(SVG_base_pointer, SVG_data_pointer, std::vector<std::string> { "</svg>" }))
+                if (string::check_and_report_if_some_string_matches(SVG_base_pointer, SVG_data_pointer, data_size, std::vector<std::string> { "</svg>" }))
                 {
                     return false;
                 }
 
-                is_inside_block = loaders::check_if_we_are_inside_block(SVG_base_pointer, SVG_data_pointer);
+                is_inside_block = loaders::check_if_we_are_inside_block(SVG_base_pointer, SVG_data_pointer, data_size);
                 SVG_data_pointer++;
             }
             else
             {
                 // OK, we are inside a block.
                 SVG_data_pointer = std::strchr(SVG_data_pointer, '>');
-                string::check_and_report_if_some_string_matches(SVG_base_pointer, SVG_data_pointer, std::vector<std::string> { ">" });
+                string::check_and_report_if_some_string_matches(SVG_base_pointer, SVG_data_pointer, data_size, std::vector<std::string> { ">" });
                 is_inside_block = false;
             }
         }
     }
 
     bool load_vertex_data(
-            const char* SVG_base_pointer,
+            const char* const SVG_base_pointer,
             char*& SVG_data_pointer,
+            uint64_t data_size,
             std::vector<std::vector<glm::vec2>>& current_glyph_vertices)
     {
         // This function returns a pointer to vertex data of a single glyph and advances `SVG_data_pointer`.
@@ -99,7 +109,7 @@ namespace loaders
         char char_path[1024];
 
         // copy from opening double quote to the next `"/"`.
-        string::extract_string(char_path, opening_double_quote_pointer, (char*) "/");
+        string::extract_string(SVG_base_pointer, opening_double_quote_pointer, data_size, char_path, char_path, sizeof(char_path), (char*) "/");
 
         std::printf("d: %s\n", char_path);
 
@@ -111,29 +121,41 @@ namespace loaders
         {
             if (std::strncmp(vertex_data_pointer, "M", std::strlen("M")) == 0)
             {
-                current_vertex.x = loaders::extract_value_from_string_with_standard_endings(vertex_data_pointer,
-                        (const char*) "M (moveto)");
+                current_vertex.x = loaders::extract_value_from_string_with_standard_endings(
+                        char_path,
+                        vertex_data_pointer,
+                        sizeof(char_path),
+                        (const char* const) "M (moveto)");
 
                 while (std::strncmp(vertex_data_pointer++, " ", std::strlen(" ")) != 0);
 
-                current_vertex.y = loaders::extract_value_from_string_with_standard_endings(--vertex_data_pointer,
-                        (const char*) "space (moveto y coordinate)");
+                current_vertex.y = loaders::extract_value_from_string_with_standard_endings(
+                        char_path,
+                        --vertex_data_pointer,
+                        sizeof(char_path),
+                        (const char* const) "space (moveto y coordinate)");
                 vertices_of_current_edge_section.push_back(current_vertex);
 
             } // if (std::strncmp(vertex_data_pointer, "M", std::strlen("M")) == 0)
             else if (std::strncmp(vertex_data_pointer, "h", std::strlen("h")) == 0)
             {
                 // OK, this is horizontal relative lineto.
-                int32_t horizontal_lineto_value = loaders::extract_value_from_string_with_standard_endings(vertex_data_pointer,
-                        (const char*) "h (horizontal relative lineto)");
+                int32_t horizontal_lineto_value = loaders::extract_value_from_string_with_standard_endings(
+                        char_path,
+                        vertex_data_pointer,
+                        sizeof(char_path),
+                        (const char* const) "h (horizontal relative lineto)");
                 current_vertex.x += horizontal_lineto_value;
                 vertices_of_current_edge_section.push_back(current_vertex);
             } // else if (std::strncmp(vertex_data_pointer, "h", std::strlen("h")) == 0)
             else if (std::strncmp(vertex_data_pointer, "v", std::strlen("v")) == 0)
             {
                 // OK, this is vertical relative lineto.
-                int32_t vertical_lineto_value = loaders::extract_value_from_string_with_standard_endings(vertex_data_pointer,
-                        (const char*) "v (vertical relative lineto)");
+                int32_t vertical_lineto_value = loaders::extract_value_from_string_with_standard_endings(
+                        char_path,
+                        vertex_data_pointer,
+                        sizeof(char_path),
+                        (const char* const) "v (vertical relative lineto)");
                 current_vertex.y += vertical_lineto_value;
                 vertices_of_current_edge_section.push_back(current_vertex);
             } // else if (std::strncmp(vertex_data_pointer, "v", std::strlen("v")) == 0)
@@ -160,6 +182,7 @@ namespace loaders
     bool load_SVG_glyph(
             const char* const SVG_base_pointer,
             char*& SVG_data_pointer,
+            uint64_t data_size,
             std::vector<std::vector<std::vector<glm::vec2>>>& out_glyph_vertex_data,
             std::vector<std::string>& glyph_names,
             std::vector<std::string>& unicode_strings)
@@ -205,7 +228,14 @@ namespace loaders
 
                         closing_double_quote_pointer++;
 
-                        string::extract_string(char_glyph_name, opening_double_quote_pointer, (char*) "\"");
+                        string::extract_string(
+                                SVG_base_pointer,
+                                opening_double_quote_pointer,
+                                data_size,
+                                char_glyph_name,
+                                char_glyph_name,
+                                sizeof(char_glyph_name),
+                                (char*) "\"");
 
                         std::printf("glyph name: %s\n", char_glyph_name);
 
@@ -244,7 +274,14 @@ namespace loaders
                         // std::printf("closing \" found at 0x%lx.\n", (uint64_t) closing_double_quote_pointer);
                         has_glyph_unicode = true;
 
-                        string::extract_string(char_unicode, opening_double_quote_pointer, (char*) "\"");
+                        string::extract_string(
+                                SVG_base_pointer,
+                                opening_double_quote_pointer,
+                                data_size,
+                                char_unicode,
+                                char_unicode,
+                                sizeof(char_unicode),
+                                (char*) "\"");
 
                         std::printf("unicode: %s\n", char_unicode);
 
@@ -264,7 +301,7 @@ namespace loaders
             } // else if (std::strncmp(SVG_data_pointer, "unicode=", std::strlen("unicode=")) == 0)
             else if (std::strncmp(SVG_data_pointer, "d=", std::strlen("d=")) == 0)
             {
-                bool result = loaders::load_vertex_data(SVG_base_pointer, SVG_data_pointer, current_glyph_vertices);
+                bool result = loaders::load_vertex_data(SVG_base_pointer, SVG_data_pointer, data_size, current_glyph_vertices);
                 if (result == false)
                 {
                     return false;
@@ -315,7 +352,7 @@ namespace loaders
             std::vector<std::string>& unicode_strings)
     {
         std::string file_content = file::slurp(font_file_path);
-        const uint32_t file_size = file_content.size();
+        const uint64_t file_size = file_content.size();
         char* SVG_data = new char[file_size];
 
         if (SVG_data == nullptr)
@@ -334,7 +371,7 @@ namespace loaders
         SVG_data_pointer = SVG_data;
 
         // SVG files are XML files, so we just need to read until we find the data we need.
-        is_first_glyph_found = loaders::find_first_glyph_in_SVG(SVG_base_pointer, SVG_data_pointer);
+        is_first_glyph_found = loaders::find_first_glyph_in_SVG(SVG_base_pointer, SVG_data_pointer, file_size);
 
         if (!is_first_glyph_found || SVG_data_pointer == nullptr)
         {
@@ -354,6 +391,7 @@ namespace loaders
                 bool result = loaders::load_SVG_glyph(
                         SVG_base_pointer,
                         SVG_data_pointer,
+                        file_size,
                         out_glyph_vertex_data,
                         glyph_names,
                         unicode_strings);
@@ -368,7 +406,7 @@ namespace loaders
                 std::vector<std::string> string_vector;
                 string_vector = { "</font>", "</defs>", "</svg>" };
 
-                if (string::check_and_report_if_some_string_matches(SVG_base_pointer, SVG_data_pointer, string_vector))
+                if (string::check_and_report_if_some_string_matches(SVG_base_pointer, SVG_data_pointer, file_size, string_vector))
                 {
                     delete SVG_data;
                     return true;

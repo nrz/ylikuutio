@@ -30,7 +30,7 @@ namespace ontology
                     std::string font_texture_file_format);
 
             // destructor.
-            ~Font2D();
+            virtual ~Font2D();
 
             int32_t get_number_of_children() override;
 

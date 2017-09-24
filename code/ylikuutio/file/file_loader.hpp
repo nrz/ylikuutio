@@ -3,5 +3,5 @@
 
 namespace file
 {
-    std::string slurp(const std::string file_path);
+    std::string slurp(const std::string& file_path);
 }

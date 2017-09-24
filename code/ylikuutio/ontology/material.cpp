@@ -72,6 +72,7 @@ namespace ontology
         this->child_vector_pointers_vector.push_back(&this->species_pointer_vector);
         this->child_vector_pointers_vector.push_back(&this->vector_font_pointer_vector);
         this->child_vector_pointers_vector.push_back(&this->chunk_master_pointer_vector);
+        this->type = "ontology::Material*";
     }
 
     Material::~Material()
@@ -146,7 +147,7 @@ namespace ontology
         hierarchy::bind_child_to_new_parent<ontology::Material*, ontology::Shader*>(this, new_shader_pointer, this->parent_pointer->material_pointer_vector, this->parent_pointer->free_materialID_queue, &this->parent_pointer->number_of_materials);
     }
 
-    void Material::set_name(const std::string name)
+    void Material::set_name(const std::string& name)
     {
         ontology::set_name(name, this);
     }

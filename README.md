@@ -12,6 +12,10 @@ The source code from http://www.opengl-tutorial.org/ is licensed
 under WTFPL Public Licence version 2.
 http://www.opengl-tutorial.org/download/
 
+Open Asset Import Library (assimp) is licensed
+under a 3-clause BSD license.
+http://www.assimp.org/main_license.html
+
 TinyScheme is licensed under BSD-style license.
 http://tinyscheme.sourceforge.net/license.txt
 
@@ -73,10 +77,9 @@ https://www.blender.org/about/license/
 
 ## Compiling
 Ylikuutio can be compiled with GCC, Clang or Visual Studio.
-GCC is the primary compiler of Ylikuutio. For Clang and Visual Studio
-the compiling may break due to compiler-specific bugs.
+In Visual Studio the compiling may break due to compiler-specific bugs.
 Cross compiling from Linux to Windows using GCC works fine.
-C++11 support is required.
+C++14 support is required.
 OpenGL 3.0 or newer is required.
 CMake 2.6.2 or newer is needed for the compiling process.
 CMake uses git for downloading Google Test testing framework.
@@ -106,6 +109,10 @@ Then, to compile with GCC, in Ylikuutio install directory:
     $ cd build
     $ cmake ..
     $ make
+
+To make compiling faster you probably want to use several threads:
+
+    $ make -j $(($(nproc) - 1))
 
 Or, to compile with Clang, again in Ylikuutio install directory:
 

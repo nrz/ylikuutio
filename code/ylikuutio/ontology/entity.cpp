@@ -30,6 +30,11 @@ namespace ontology
         }
     }
 
+    std::string Entity::get_type()
+    {
+        return this->type;
+    }
+
     void Entity::prerender()
     {
         if (this->prerender_callback != nullptr &&

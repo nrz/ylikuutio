@@ -39,7 +39,7 @@ namespace space_partition
             Chunk();
 
             // destructor.
-            ~Chunk();
+            virtual ~Chunk();
 
             // this method sets a `triangle3D` pointer.
             void set_triangle3D_pointer(uint32_t childID, space_partition::Triangle3D* child_pointer);

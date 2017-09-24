@@ -32,7 +32,7 @@ find_package(Threads REQUIRED)
 # Compile external dependencies
 add_subdirectory (external)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
 
 # set(CMAKE_COLOR_MAKEFILE ON)
 # set(CMAKE_VERBOSE_MAKEFILE ON)
@@ -81,153 +81,13 @@ include_directories(
     external/glew-2.0.0/include/
     external/FastNoiseSIMD/
     external/pugixml/src/
-    external/tinyscheme-1.41/
-
-    external/gdal-2.1.1/
-    external/gdal-2.1.1/alg/
-    external/gdal-2.1.1/apps/
-    external/gdal-2.1.1/apps/
-    external/gdal-2.1.1/frmts/
-    external/gdal-2.1.1/frmts/aaigrid/
-    external/gdal-2.1.1/frmts/adrg/
-    external/gdal-2.1.1/frmts/aigrid/
-    external/gdal-2.1.1/frmts/airsar/
-    external/gdal-2.1.1/frmts/arg/
-    external/gdal-2.1.1/frmts/blx/
-    external/gdal-2.1.1/frmts/bmp/
-    external/gdal-2.1.1/frmts/bsb/
-    external/gdal-2.1.1/frmts/cals/
-    external/gdal-2.1.1/frmts/ceos/
-    external/gdal-2.1.1/frmts/ceos2/
-    external/gdal-2.1.1/frmts/coasp/
-    external/gdal-2.1.1/frmts/cosar/
-    external/gdal-2.1.1/frmts/ctg/
-    external/gdal-2.1.1/frmts/dimap/
-    external/gdal-2.1.1/frmts/dted/
-    external/gdal-2.1.1/frmts/e00grid/
-    external/gdal-2.1.1/frmts/elas/
-    external/gdal-2.1.1/frmts/envisat/
-    external/gdal-2.1.1/frmts/ers/
-    external/gdal-2.1.1/frmts/fit/
-    external/gdal-2.1.1/frmts/gff/
-    external/gdal-2.1.1/frmts/gif/
-    external/gdal-2.1.1/frmts/grib/
-    external/gdal-2.1.1/frmts/gsg/
-    external/gdal-2.1.1/frmts/gtiff/
-    external/gdal-2.1.1/frmts/gtiff/libgeotiff/
-    external/gdal-2.1.1/frmts/gtiff/libtiff/
-    external/gdal-2.1.1/frmts/gxf/
-    external/gdal-2.1.1/frmts/hf2/
-    external/gdal-2.1.1/frmts/hfa/
-    external/gdal-2.1.1/frmts/idrisi/
-    external/gdal-2.1.1/frmts/ilwis/
-    external/gdal-2.1.1/frmts/ingr/
-    external/gdal-2.1.1/frmts/iris/
-    external/gdal-2.1.1/frmts/iso8211/
-    external/gdal-2.1.1/frmts/jaxapalsar/
-    external/gdal-2.1.1/frmts/jdem/
-    external/gdal-2.1.1/frmts/jpeg/
-    external/gdal-2.1.1/frmts/jpeg/
-    external/gdal-2.1.1/frmts/jpeg/
-    external/gdal-2.1.1/frmts/kmlsuperoverlay/
-    external/gdal-2.1.1/frmts/l1b/
-    external/gdal-2.1.1/frmts/leveller/
-    external/gdal-2.1.1/frmts/map/
-    external/gdal-2.1.1/frmts/mem/
-    external/gdal-2.1.1/frmts/mrf/
-    external/gdal-2.1.1/frmts/mrf/libLERC/
-    external/gdal-2.1.1/frmts/msgn/
-    external/gdal-2.1.1/frmts/ngsgeoid/
-    external/gdal-2.1.1/frmts/nitf/
-    external/gdal-2.1.1/frmts/northwood/
-    external/gdal-2.1.1/frmts/ozi/
-    external/gdal-2.1.1/frmts/pcidsk/
-    external/gdal-2.1.1/frmts/pcraster/
-    external/gdal-2.1.1/frmts/pdf/
-    external/gdal-2.1.1/frmts/pds/
-    external/gdal-2.1.1/frmts/png/
-    external/gdal-2.1.1/frmts/r/
-    external/gdal-2.1.1/frmts/raw/
-    external/gdal-2.1.1/frmts/rik/
-    external/gdal-2.1.1/frmts/rmf/
-    external/gdal-2.1.1/frmts/rs2/
-    external/gdal-2.1.1/frmts/safe/
-    external/gdal-2.1.1/frmts/saga/
-    external/gdal-2.1.1/frmts/sdts/
-    external/gdal-2.1.1/frmts/sentinel2/
-    external/gdal-2.1.1/frmts/sgi/
-    external/gdal-2.1.1/frmts/srtmhgt/
-    external/gdal-2.1.1/frmts/terragen/
-    external/gdal-2.1.1/frmts/til/
-    external/gdal-2.1.1/frmts/tsx/
-    external/gdal-2.1.1/frmts/usgsdem/
-    external/gdal-2.1.1/frmts/vrt/
-    external/gdal-2.1.1/frmts/xpm/
-    external/gdal-2.1.1/frmts/xyz/
-    external/gdal-2.1.1/frmts/zlib/
-    external/gdal-2.1.1/frmts/zmap/
-    external/gdal-2.1.1/gcore/
-    external/gdal-2.1.1/gcore/mdreader/
-    external/gdal-2.1.1/ogr/
-    external/gdal-2.1.1/ogr/ogrsf_frmts/
-    external/gdal-2.1.1/ogr/ogrsf_frmts/aeronavfaa/
-    external/gdal-2.1.1/ogr/ogrsf_frmts/arcgen/
-    external/gdal-2.1.1/ogr/ogrsf_frmts/avc/
-    external/gdal-2.1.1/ogr/ogrsf_frmts/bna/
-    external/gdal-2.1.1/ogr/ogrsf_frmts/csv/
-    external/gdal-2.1.1/ogr/ogrsf_frmts/dgn/
-    external/gdal-2.1.1/ogr/ogrsf_frmts/dxf/
-    external/gdal-2.1.1/ogr/ogrsf_frmts/edigeo/
-    external/gdal-2.1.1/ogr/ogrsf_frmts/generic/
-    external/gdal-2.1.1/ogr/ogrsf_frmts/geoconcept/
-    external/gdal-2.1.1/ogr/ogrsf_frmts/geojson/
-    external/gdal-2.1.1/ogr/ogrsf_frmts/geojson/libjson/
-    external/gdal-2.1.1/ogr/ogrsf_frmts/georss/
-    external/gdal-2.1.1/ogr/ogrsf_frmts/gml/
-    external/gdal-2.1.1/ogr/ogrsf_frmts/gmt/
-    external/gdal-2.1.1/ogr/ogrsf_frmts/gpsbabel/
-    external/gdal-2.1.1/ogr/ogrsf_frmts/gpx/
-    external/gdal-2.1.1/ogr/ogrsf_frmts/gtm/
-    external/gdal-2.1.1/ogr/ogrsf_frmts/htf/
-    external/gdal-2.1.1/ogr/ogrsf_frmts/idrisi/
-    external/gdal-2.1.1/ogr/ogrsf_frmts/jml/
-    external/gdal-2.1.1/ogr/ogrsf_frmts/kml/
-    external/gdal-2.1.1/ogr/ogrsf_frmts/mem/
-    external/gdal-2.1.1/ogr/ogrsf_frmts/mitab/
-    external/gdal-2.1.1/ogr/ogrsf_frmts/ntf/
-    external/gdal-2.1.1/ogr/ogrsf_frmts/openair/
-    external/gdal-2.1.1/ogr/ogrsf_frmts/openfilegdb/
-    external/gdal-2.1.1/ogr/ogrsf_frmts/pds/
-    external/gdal-2.1.1/ogr/ogrsf_frmts/pgdump/
-    external/gdal-2.1.1/ogr/ogrsf_frmts/rec/
-    external/gdal-2.1.1/ogr/ogrsf_frmts/s57/
-    external/gdal-2.1.1/ogr/ogrsf_frmts/sdts/
-    external/gdal-2.1.1/ogr/ogrsf_frmts/segukooa/
-    external/gdal-2.1.1/ogr/ogrsf_frmts/segy/
-    external/gdal-2.1.1/ogr/ogrsf_frmts/selafin/
-    external/gdal-2.1.1/ogr/ogrsf_frmts/shape/
-    external/gdal-2.1.1/ogr/ogrsf_frmts/sua/
-    external/gdal-2.1.1/ogr/ogrsf_frmts/svg/
-    external/gdal-2.1.1/ogr/ogrsf_frmts/sxf/
-    external/gdal-2.1.1/ogr/ogrsf_frmts/tiger/
-    external/gdal-2.1.1/ogr/ogrsf_frmts/vdv/
-    external/gdal-2.1.1/ogr/ogrsf_frmts/vrt/
-    external/gdal-2.1.1/ogr/ogrsf_frmts/wasp/
-    external/gdal-2.1.1/ogr/ogrsf_frmts/xplane/
-    external/gdal-2.1.1/port/
-
-    # manually added due to builds failed due to missing files.
-    external/gdal-2.1.1/frmts/jpeg/libjpeg/
-    external/gdal-2.1.1/frmts/png/libpng/
-    external/gdal-2.1.1/frmts/gif/giflib/
-    external/gdal-2.1.1/frmts/pcraster/libcsf/
-    external/gdal-2.1.1/frmts/pcidsk/sdk/
+    external/assimp-3.0.1270/include/
     .
     )
 
 if(ENABLE_SCRIPTING_WITH_TINYSCHEME)
     include_directories(
-        external/tinyscheme/include/
+        external/tinyscheme-1.41/
         )
 endif()
 
@@ -374,7 +234,7 @@ configure_file(code/ylikuutio/shaders/TextVertexShader.vertexshader TextVertexSh
 configure_file(code/ylikuutio/shaders/TextVertexShader.fragmentshader TextVertexShader.fragmentshader COPYONLY)
 configure_file(code/tinyscheme/hello_world.scm hello_world.scm COPYONLY)
 configure_file(external/tinyscheme-1.41/init.scm init.scm COPYONLY)
-configure_file(res/objects/suzanne.obj suzanne.obj COPYONLY)
+configure_file(res/objects/custom/suzanne.obj suzanne.obj COPYONLY)
 configure_file(res/objects/snow_cottage_triangulated.obj snow_cottage_triangulated.obj COPYONLY)
 configure_file(res/textures/uvmap.DDS uvmap.DDS COPYONLY)
 configure_file(res/textures/GrassGreenTexture0002.bmp GrassGreenTexture0002.bmp COPYONLY)
@@ -490,6 +350,9 @@ add_library(ylikuutio STATIC
     code/ylikuutio/loaders/obj_loader.hpp
     code/ylikuutio/loaders/shader_loader.cpp
     code/ylikuutio/loaders/shader_loader.hpp
+    code/ylikuutio/loaders/species_loader.cpp
+    code/ylikuutio/loaders/species_loader.hpp
+    code/ylikuutio/loaders/species_loader_struct.hpp
     code/ylikuutio/loaders/srtm_heightmap_loader.cpp
     code/ylikuutio/loaders/srtm_heightmap_loader.hpp
     code/ylikuutio/loaders/texture_loader.cpp
@@ -501,6 +364,8 @@ add_library(ylikuutio STATIC
     # ontology, in alphabetical order
     code/ylikuutio/ontology/entity.cpp
     code/ylikuutio/ontology/entity.hpp
+    code/ylikuutio/ontology/entity_factory.cpp
+    code/ylikuutio/ontology/entity_factory.hpp
     code/ylikuutio/ontology/entity_templates.hpp
     code/ylikuutio/ontology/font2D.cpp
     code/ylikuutio/ontology/font2D.hpp
@@ -571,7 +436,6 @@ add_library(ylikuutio STATIC
     # triangulation, in alphabetical order
     code/ylikuutio/triangulation/face_normals.cpp
     code/ylikuutio/triangulation/face_normals.hpp
-    code/ylikuutio/triangulation/indexing.cpp
     code/ylikuutio/triangulation/indexing.hpp
     code/ylikuutio/triangulation/polygon_triangulation.cpp
     code/ylikuutio/triangulation/polygon_triangulation.hpp
@@ -607,7 +471,7 @@ add_executable(ajokki
     code/ajokki/ajokki_movement.hpp
     )
 add_dependencies(ajokki rescan)
-target_link_libraries(ajokki ylikuutio ${ALL_LIBS} glfw)
+target_link_libraries(ajokki ylikuutio ${ALL_LIBS} glfw assimp)
 
 if (ENABLE_SCRIPTING_WITH_TINYSCHEME)
     # TinyScheme-test
@@ -617,6 +481,7 @@ if (ENABLE_SCRIPTING_WITH_TINYSCHEME)
 endif()
 
 # Xcode and Visual working directories
+set_target_properties(ajokki PROPERTIES COMPILE_DEFINITIONS "USE_ASSIMP")
 set_target_properties(ajokki PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/code/ajokki/")
 create_target_launcher(ajokki WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/code/ajokki/")
 
@@ -668,7 +533,6 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/string/ylikuutio_string.hpp
         code/ylikuutio/triangulation/face_normals.cpp
         code/ylikuutio/triangulation/face_normals.hpp
-        code/ylikuutio/triangulation/indexing.cpp
         code/ylikuutio/triangulation/indexing.hpp
         code/ylikuutio/triangulation/quad_triangulation.hpp
         code/ylikuutio/triangulation/triangulation_enums.hpp

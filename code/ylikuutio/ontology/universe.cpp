@@ -105,6 +105,7 @@ namespace ontology
         this->number_of_scenes = 0;
 
         this->child_vector_pointers_vector.push_back(&this->scene_pointer_vector);
+        this->type = "ontology::Universe*";
     }
 
     Universe::~Universe()
@@ -348,6 +349,14 @@ namespace ontology
 
             // OK, let's find out information about the entity.
             ontology::Entity* entity = any_value->get_entity_pointer();
+
+            if (entity == nullptr)
+            {
+                return nullptr;
+            }
+
+            console->print_text(entity->get_type());
+
             uint64_t memory_address = reinterpret_cast<uint64_t>((void*) entity);
             char memory_address_char_array[256];
             snprintf(memory_address_char_array, sizeof(memory_address_char_array), "0x%08x", memory_address);

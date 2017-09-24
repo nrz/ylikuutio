@@ -48,56 +48,6 @@ namespace ontology
         }
 
     template<class T1>
-        int32_t get_number_of_child_types(const T1 entity)
-        {
-            return entity->child_vector_pointers_vector.size();
-        }
-
-    template<class T1>
-        uint32_t get_number_of_descendants(const std::vector<T1> child_pointer_vector)
-        {
-            uint32_t number_of_descendants = 0;
-
-            for (uint32_t i = 0; i < child_pointer_vector.size(); i++)
-            {
-                T1 child = child_pointer_vector.get(i);
-                number_of_descendants += get_number_of_descendants_of_entity(child);
-            }
-
-            return number_of_descendants;
-        }
-
-    template<class T1>
-        uint32_t get_number_of_descendants_of_entity(const T1 entity)
-        {
-            switch (typeid(entity))
-            {
-                case typeid(ontology::Universe*):
-                    return get_number_of_descendants(entity->scene_pointer_vector);
-                case typeid(ontology::Scene*):
-                    return get_number_of_descendants(entity->shader_pointer_vector);
-                case typeid(ontology::Shader*):
-                    return get_number_of_descendants(entity->material_pointer_vector) + get_number_of_descendants(entity->symbiosis_pointer_vector);
-                case typeid(ontology::Material*):
-                    return get_number_of_descendants(entity->species_pointer_vector) +
-                        get_number_of_descendants(entity->vector_font_pointer_vector) +
-                        get_number_of_descendants(entity->chunk_master_pointer_vector);
-                case typeid(ontology::Species*):
-                    return get_number_of_descendants(entity->object_pointer_vector);
-                case typeid(ontology::Object*):
-                    return 0;
-                case typeid(ontology::VectorFont*):
-                    return get_number_of_descendants(entity->glyph_pointer_vector) + get_number_of_descendants(entity->text3D_pointer_vector);
-                case typeid(ontology::Glyph*):
-                    return get_number_of_descendants(entity->object_pointer_vector);
-                case typeid(ontology::Text3D*):
-                    return get_number_of_descendants(entity->object_pointer_vector);
-                default:
-                    return -1;
-            }
-        }
-
-    template<class T1>
         InfoStruct* get_info(const T1 entity)
         {
             InfoStruct* info_struct = new InfoStruct();

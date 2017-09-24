@@ -65,6 +65,7 @@ namespace datatypes
         TEXT2D_POINTER,
         CONSOLE_POINTER,
         SPHERICAL_COORDINATES_STRUCT_POINTER,
+        STD_STRING_POINTER,
         GLM_VEC3_POINTER
     };
 
@@ -105,6 +106,7 @@ namespace datatypes
             AnyValue(ontology::Font2D* const font2D_pointer);
             AnyValue(console::Console* const console_pointer);
             AnyValue(SphericalCoordinatesStruct* const spherical_coordinates_struct_pointer);
+            AnyValue(std::string* const std_string_pointer);
             AnyValue(glm::vec3* const glm_vec3_pointer);
 
             AnyValue(const std::string& type, const bool bool_value);
@@ -131,6 +133,7 @@ namespace datatypes
             AnyValue(const std::string& type, ontology::Font2D* const font2D_pointer);
             AnyValue(const std::string& type, console::Console* const console_pointer);
             AnyValue(const std::string& type, SphericalCoordinatesStruct* const spherical_coordinates_struct_pointer);
+            AnyValue(const std::string& type, std::string* const std_string_pointer);
             AnyValue(const std::string& type, glm::vec3* const glm_vec3_pointer);
 
             int type;
@@ -158,6 +161,7 @@ namespace datatypes
             ontology::Font2D* font2D_pointer;
             console::Console* console_pointer;
             SphericalCoordinatesStruct* spherical_coordinates_struct_pointer;
+            std::string* std_string_pointer;
             glm::vec3* glm_vec3_pointer;
 
         private:

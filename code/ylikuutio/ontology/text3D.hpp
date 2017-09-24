@@ -36,7 +36,7 @@ namespace ontology
             Text3D(const Text3DStruct text3D_struct);
 
             // destructor.
-            ~Text3D();
+            virtual ~Text3D();
 
             int32_t get_number_of_children() override;
 
@@ -53,7 +53,7 @@ namespace ontology
             // this method sets a object pointer.
             void set_object_pointer(const uint32_t childID, ontology::Object* const child_pointer);
 
-            void set_name(const std::string name);
+            void set_name(const std::string& name);
 
             friend class Object;
             template<class T1>

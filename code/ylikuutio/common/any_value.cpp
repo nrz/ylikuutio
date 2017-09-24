@@ -107,6 +107,8 @@ namespace datatypes
                 return "console::Console*";
             case (SPHERICAL_COORDINATES_STRUCT_POINTER):
                 return "SphericalCoordinatesStruct*";
+            case (STD_STRING_POINTER):
+                return "std::string*";
             case (GLM_VEC3_POINTER):
                 return "glm::vec3*";
             default:
@@ -213,6 +215,13 @@ namespace datatypes
                             this->spherical_coordinates_struct_pointer->phi);
                 }
                 return std::string(buffer);
+            case (STD_STRING_POINTER):
+                if (this->std_string_pointer == nullptr)
+                {
+                    std::snprintf(buffer, sizeof(buffer), "nullptr");
+                    return std::string(buffer);
+                }
+                return std::string(*this->std_string_pointer);
             case (GLM_VEC3_POINTER):
                 if (this->glm_vec3_pointer == nullptr)
                 {
@@ -990,7 +999,7 @@ namespace datatypes
         }
     }
 
-    AnyValue::AnyValue(float* float_pointer)
+    AnyValue::AnyValue(float* const float_pointer)
     {
         // constructor.
         this->set_default_values();
@@ -1010,7 +1019,7 @@ namespace datatypes
         }
     }
 
-    AnyValue::AnyValue(double* double_pointer)
+    AnyValue::AnyValue(double* const double_pointer)
     {
         // constructor.
         this->set_default_values();
@@ -1030,7 +1039,7 @@ namespace datatypes
         }
     }
 
-    AnyValue::AnyValue(int32_t* int32_t_pointer)
+    AnyValue::AnyValue(int32_t* const int32_t_pointer)
     {
         // constructor.
         this->set_default_values();
@@ -1050,7 +1059,7 @@ namespace datatypes
         }
     }
 
-    AnyValue::AnyValue(uint32_t* uint32_t_pointer)
+    AnyValue::AnyValue(uint32_t* const uint32_t_pointer)
     {
         // constructor.
         this->set_default_values();
@@ -1070,7 +1079,7 @@ namespace datatypes
         }
     }
 
-    AnyValue::AnyValue(ontology::Universe* universe_pointer)
+    AnyValue::AnyValue(ontology::Universe* const universe_pointer)
     {
         // constructor.
         this->set_default_values();
@@ -1090,7 +1099,7 @@ namespace datatypes
         }
     }
 
-    AnyValue::AnyValue(ontology::Scene* scene_pointer)
+    AnyValue::AnyValue(ontology::Scene* const scene_pointer)
     {
         // constructor.
         this->set_default_values();
@@ -1110,7 +1119,7 @@ namespace datatypes
         }
     }
 
-    AnyValue::AnyValue(ontology::Shader* shader_pointer)
+    AnyValue::AnyValue(ontology::Shader* const shader_pointer)
     {
         // constructor.
         this->set_default_values();
@@ -1130,7 +1139,7 @@ namespace datatypes
         }
     }
 
-    AnyValue::AnyValue(ontology::Material* material_pointer)
+    AnyValue::AnyValue(ontology::Material* const material_pointer)
     {
         // constructor.
         this->set_default_values();
@@ -1150,7 +1159,7 @@ namespace datatypes
         }
     }
 
-    AnyValue::AnyValue(ontology::Species* species_pointer)
+    AnyValue::AnyValue(ontology::Species* const species_pointer)
     {
         // constructor.
         this->set_default_values();
@@ -1170,7 +1179,7 @@ namespace datatypes
         }
     }
 
-    AnyValue::AnyValue(ontology::Object* object_pointer)
+    AnyValue::AnyValue(ontology::Object* const object_pointer)
     {
         // constructor.
         this->set_default_values();
@@ -1190,7 +1199,7 @@ namespace datatypes
         }
     }
 
-    AnyValue::AnyValue(ontology::VectorFont* vector_font_pointer)
+    AnyValue::AnyValue(ontology::VectorFont* const vector_font_pointer)
     {
         // constructor.
         this->set_default_values();
@@ -1210,7 +1219,7 @@ namespace datatypes
         }
     }
 
-    AnyValue::AnyValue(ontology::Glyph* glyph_pointer)
+    AnyValue::AnyValue(ontology::Glyph* const glyph_pointer)
     {
         // constructor.
         this->set_default_values();
@@ -1230,7 +1239,7 @@ namespace datatypes
         }
     }
 
-    AnyValue::AnyValue(ontology::Text3D* text3D_pointer)
+    AnyValue::AnyValue(ontology::Text3D* const text3D_pointer)
     {
         // constructor.
         this->set_default_values();
@@ -1250,7 +1259,7 @@ namespace datatypes
         }
     }
 
-    AnyValue::AnyValue(ontology::Font2D* font2D_pointer)
+    AnyValue::AnyValue(ontology::Font2D* const font2D_pointer)
     {
         // constructor.
         this->set_default_values();
@@ -1270,7 +1279,7 @@ namespace datatypes
         }
     }
 
-    AnyValue::AnyValue(console::Console* console_pointer)
+    AnyValue::AnyValue(console::Console* const console_pointer)
     {
         // constructor.
         this->set_default_values();
@@ -1290,7 +1299,7 @@ namespace datatypes
         }
     }
 
-    AnyValue::AnyValue(SphericalCoordinatesStruct* spherical_coordinates_struct_pointer)
+    AnyValue::AnyValue(SphericalCoordinatesStruct* const spherical_coordinates_struct_pointer)
     {
         // constructor.
         this->set_default_values();
@@ -1310,7 +1319,27 @@ namespace datatypes
         }
     }
 
-    AnyValue::AnyValue(glm::vec3* glm_vec3_pointer)
+    AnyValue::AnyValue(std::string* const std_string_pointer)
+    {
+        // constructor.
+        this->set_default_values();
+        this->type = datatypes::STD_STRING_POINTER;
+        this->std_string_pointer = std_string_pointer;
+    }
+
+    AnyValue::AnyValue(const std::string& type, std::string* const std_string_pointer)
+    {
+        // constructor.
+        this->set_default_values();
+
+        if (std::strcmp(type.c_str(), "std::string*") == 0)
+        {
+            this->type = datatypes::STD_STRING_POINTER;
+            this->std_string_pointer = std_string_pointer;
+        }
+    }
+
+    AnyValue::AnyValue(glm::vec3* const glm_vec3_pointer)
     {
         // constructor.
         this->set_default_values();

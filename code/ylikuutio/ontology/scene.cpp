@@ -54,6 +54,7 @@ namespace ontology
 
         // make this `Scene` the active `Scene`.
         this->parent_pointer->set_active_scene(this);
+        this->type = "ontology::Scene*";
     }
 
     Scene::~Scene()

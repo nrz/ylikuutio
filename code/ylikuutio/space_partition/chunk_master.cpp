@@ -20,6 +20,8 @@ namespace space_partition
         // constructor.
         this->get_content_callback = get_content_callback;
         this->number_of_chunks = 0;
+
+        this->type = "space_partition::ChunkMaster*";
     }
 
     ChunkMaster::~ChunkMaster()

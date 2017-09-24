@@ -40,7 +40,7 @@ namespace ontology
             Species(const SpeciesStruct species_struct);
 
             // destructor.
-            ~Species();
+            virtual ~Species();
 
             // this method sets pointer to this `Species` to nullptr, sets `parent_pointer` according to the input, and requests a new `childID` from the new `Material`.
             void bind_to_new_parent(ontology::Material* const new_material_pointer);
@@ -48,7 +48,7 @@ namespace ontology
             // this method sets an `Object` pointer.
             void set_object_pointer(const uint32_t childID, ontology::Object* const child_pointer);
 
-            void set_name(const std::string name);
+            void set_name(const std::string& name);
 
             bool is_world;                           // worlds currently do not rotate nor translate.
             float world_radius;                      // radius of sea level in kilometers. used only for worlds.
@@ -85,6 +85,9 @@ namespace ontology
 
             const char* char_model_file_format;
             const char* char_model_filename;
+
+            double latitude;  // for SRTM.
+            double longitude; // for SRTM.
 
             uint32_t x_step;
             uint32_t z_step;

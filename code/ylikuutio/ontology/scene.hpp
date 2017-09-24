@@ -28,7 +28,7 @@ namespace ontology
             Scene(ontology::Universe* const universe_pointer, const float water_level);
 
             // destructor.
-            ~Scene();
+            virtual ~Scene();
 
             // this method returns a pointer to an `Object` using the name as key.
             ontology::Object* get_object(const std::string);

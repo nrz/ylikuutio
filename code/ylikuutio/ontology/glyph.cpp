@@ -66,6 +66,8 @@ namespace ontology
         // TODO: triangulate the vertex data!
 
         // TODO: load the vertex data the same way as in `ontology::Species::Species(SpeciesStruct species_struct)`!
+
+        this->type = "ontology::Glyph*";
     }
 
     Glyph::~Glyph()
@@ -101,7 +103,7 @@ namespace ontology
         hierarchy::set_child_pointer(childID, child_pointer, this->object_pointer_vector, this->free_objectID_queue, &this->number_of_objects);
     }
 
-    void Glyph::set_name(const std::string name)
+    void Glyph::set_name(const std::string& name)
     {
         ontology::set_name(name, this);
     }
