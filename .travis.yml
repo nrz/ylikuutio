@@ -2,22 +2,6 @@ language: cpp
 dist: trusty
 sudo: required
 script: mkdir build && cd build && cmake .. && make
-addons:
-    apt:
-        sources:
-        packages:
-            - cmake
-            - make
-            - libgl1-mesa-dev
-            - libglu1-mesa-dev
-            - libxcursor-dev
-            - libxrandr-dev
-            - libxext-dev
-            - libxi-dev
-            - libxinerama-dev
-            - g++-mingw-w64
-            - gcc-mingw-w64
-            - binutils-mingw-w64
 matrix:
     include:
         - os: linux
@@ -27,6 +11,18 @@ matrix:
                       - ubuntu-toolchain-r-test
                   packages:
                       - g++-4.9
+                      - cmake
+                      - make
+                      - libgl1-mesa-dev
+                      - libglu1-mesa-dev
+                      - libxcursor-dev
+                      - libxrandr-dev
+                      - libxext-dev
+                      - libxi-dev
+                      - libxinerama-dev
+                      - g++-mingw-w64
+                      - gcc-mingw-w64
+                      - binutils-mingw-w64
                   env:
                       - MATRIX_EVAL="CC=gcc-4.9 && CXX=g++-4.9"
 
@@ -37,6 +33,18 @@ matrix:
                       - ubuntu-toolchain-r-test
                   packages:
                       - g++-5
+                      - cmake
+                      - make
+                      - libgl1-mesa-dev
+                      - libglu1-mesa-dev
+                      - libxcursor-dev
+                      - libxrandr-dev
+                      - libxext-dev
+                      - libxi-dev
+                      - libxinerama-dev
+                      - g++-mingw-w64
+                      - gcc-mingw-w64
+                      - binutils-mingw-w64
                   env:
                       - MATRIX_EVAL="CC=gcc-5 && CXX=g++-5"
 
@@ -47,6 +55,18 @@ matrix:
                       - ubuntu-toolchain-r-test
                   packages:
                       - g++-6
+                      - cmake
+                      - make
+                      - libgl1-mesa-dev
+                      - libglu1-mesa-dev
+                      - libxcursor-dev
+                      - libxrandr-dev
+                      - libxext-dev
+                      - libxi-dev
+                      - libxinerama-dev
+                      - g++-mingw-w64
+                      - gcc-mingw-w64
+                      - binutils-mingw-w64
                   env:
                       - MATRIX_EVAL="CC=gcc-6 && CXX=g++-6"
 
@@ -57,6 +77,18 @@ matrix:
                       - ubuntu-toolchain-r-test
                   packages:
                       - g++-7
+                      - cmake
+                      - make
+                      - libgl1-mesa-dev
+                      - libglu1-mesa-dev
+                      - libxcursor-dev
+                      - libxrandr-dev
+                      - libxext-dev
+                      - libxi-dev
+                      - libxinerama-dev
+                      - g++-mingw-w64
+                      - gcc-mingw-w64
+                      - binutils-mingw-w64
                   env:
                       - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
 
@@ -68,6 +100,18 @@ matrix:
                       - llvm-toolchain-precise-3.6
                   packages:
                       - clang-3.6
+                      - cmake
+                      - make
+                      - libgl1-mesa-dev
+                      - libglu1-mesa-dev
+                      - libxcursor-dev
+                      - libxrandr-dev
+                      - libxext-dev
+                      - libxi-dev
+                      - libxinerama-dev
+                      - g++-mingw-w64
+                      - gcc-mingw-w64
+                      - binutils-mingw-w64
                   env:
                       - MATRIX_EVAL="CC=clang-3.6 && CXX=clang++-3.6"
 
@@ -79,6 +123,18 @@ matrix:
                       - llvm-toolchain-precise-3.7
                   packages:
                       - clang-3.7
+                      - cmake
+                      - make
+                      - libgl1-mesa-dev
+                      - libglu1-mesa-dev
+                      - libxcursor-dev
+                      - libxrandr-dev
+                      - libxext-dev
+                      - libxi-dev
+                      - libxinerama-dev
+                      - g++-mingw-w64
+                      - gcc-mingw-w64
+                      - binutils-mingw-w64
                   env:
                       - MATRIX_EVAL="CC=clang-3.7 && CXX=clang++-3.7"
 
@@ -90,6 +146,18 @@ matrix:
                       - llvm-toolchain-precise-3.8
                   packages:
                       - clang-3.8
+                      - cmake
+                      - make
+                      - libgl1-mesa-dev
+                      - libglu1-mesa-dev
+                      - libxcursor-dev
+                      - libxrandr-dev
+                      - libxext-dev
+                      - libxi-dev
+                      - libxinerama-dev
+                      - g++-mingw-w64
+                      - gcc-mingw-w64
+                      - binutils-mingw-w64
                   env:
                       - MATRIX_EVAL="CC=clang-3.8 && CXX=clang++-3.8"
 
@@ -101,6 +169,18 @@ matrix:
                       - llvm-toolchain-precise-3.9
                   packages:
                       - clang-3.9
+                      - cmake
+                      - make
+                      - libgl1-mesa-dev
+                      - libglu1-mesa-dev
+                      - libxcursor-dev
+                      - libxrandr-dev
+                      - libxext-dev
+                      - libxi-dev
+                      - libxinerama-dev
+                      - g++-mingw-w64
+                      - gcc-mingw-w64
+                      - binutils-mingw-w64
                   env:
                       - MATRIX_EVAL="CC=clang-3.9 && CXX=clang++-3.9"
 
@@ -112,6 +192,18 @@ matrix:
                       - llvm-toolchain-precise-4.0
                   packages:
                       - clang-4.0
+                      - cmake
+                      - make
+                      - libgl1-mesa-dev
+                      - libglu1-mesa-dev
+                      - libxcursor-dev
+                      - libxrandr-dev
+                      - libxext-dev
+                      - libxi-dev
+                      - libxinerama-dev
+                      - g++-mingw-w64
+                      - gcc-mingw-w64
+                      - binutils-mingw-w64
                   env:
                       - MATRIX_EVAL="CC=clang-4.0 && CXX=clang++-4.0"
 
@@ -123,6 +215,18 @@ matrix:
                       - llvm-toolchain-precise-5.0
                   packages:
                       - clang-5.0
+                      - cmake
+                      - make
+                      - libgl1-mesa-dev
+                      - libglu1-mesa-dev
+                      - libxcursor-dev
+                      - libxrandr-dev
+                      - libxext-dev
+                      - libxi-dev
+                      - libxinerama-dev
+                      - g++-mingw-w64
+                      - gcc-mingw-w64
+                      - binutils-mingw-w64
                   env:
                       - MATRIX_EVAL="CC=clang-5.0 && CXX=clang++-5.0"
 
