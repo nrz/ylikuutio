@@ -115,8 +115,11 @@ std::string g_font_filename = "kongtext.svg";
 
 int main(void)
 {
+
     // Create the world, store it in `my_universe`.
+    std::cout << "Creating ontology::Entity* my_universe_entity ...\n";
     ontology::Entity* my_universe_entity = ontology::EntityFactory::create_Universe();
+    std::cout << "Creating ontology::Universe* my_universe ...\n";
     ontology::Universe* my_universe = dynamic_cast<ontology::Universe*>(my_universe_entity);
 
     if (my_universe == nullptr)
@@ -126,6 +129,7 @@ int main(void)
     }
 
     // Create the setting master, store it in `my_setting_master`.
+    std::cout << "Creating config::SettingMaster* my_setting_master ...\n";
     config::SettingMaster* my_setting_master = new config::SettingMaster(my_universe);
 
     float earth_radius = 6371.0f; // in kilometres
@@ -137,6 +141,7 @@ int main(void)
     world_radius_setting_struct.should_ylikuutio_call_activate_callback_now = true;
     new config::Setting(world_radius_setting_struct);
 
+    std::cout << "Creating callback_system::CallbackEngine* cleanup_callback_engine ...\n";
     callback_system::CallbackEngine* cleanup_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* cleanup_callback_object = new callback_system::CallbackObject(nullptr, cleanup_callback_engine);
 
@@ -152,6 +157,7 @@ int main(void)
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
 
     // Open a window and create its OpenGL context.
+    std::cout << "Opening a window and creating its OpenGL context...\n";
     my_universe->set_window(
             glfwCreateWindow(
                 static_cast<GLuint>(my_universe->get_window_width()),
@@ -190,13 +196,20 @@ int main(void)
     // Cull triangles which normal is not towards the camera.
     glEnable(GL_CULL_FACE);
 
+    std::cout << "Setting up background colors ...\n";
     ajokki::set_background_colors(my_setting_master);
+    std::cout << "Setting up movement ...\n";
     ajokki::set_movement(my_setting_master);
+    std::cout << "Setting up location and orientation ...\n";
     ajokki::set_location_and_orientation(my_setting_master);
+    std::cout << "Setting up debug variables ...\n";
     ajokki::set_debug_variables(my_setting_master);
+    std::cout << "Setting up console ...\n";
     ajokki::set_console(my_setting_master);
 
+    std::cout << "Creating ontology::Entity* my_scene_entity ...\n";
     ontology::Entity* my_scene_entity = ontology::EntityFactory::create_Scene(my_universe, 0.9f);
+    std::cout << "Creating ontology::Scene* my_scene ...\n";
     ontology::Scene* my_scene = dynamic_cast<ontology::Scene*>(my_scene_entity);
 
     if (my_scene == nullptr)
@@ -211,7 +224,9 @@ int main(void)
     shader_struct.vertex_shader = "StandardShading.vertexshader";
     shader_struct.fragment_shader = "StandardShading.fragmentshader";
 
+    std::cout << "Creating ontology::Entity* my_shader_entity ...\n";
     ontology::Entity* my_shader_entity = ontology::EntityFactory::create_Shader(shader_struct);
+    std::cout << "Creating ontology::Shader* my_shader ...\n";
     ontology::Shader* my_shader = dynamic_cast<ontology::Shader*>(my_shader_entity);
 
     if (my_shader == nullptr)
@@ -226,7 +241,9 @@ int main(void)
     grass_material_struct.texture_file_format = g_texture_file_format;
     grass_material_struct.texture_filename = g_texture_filename;
 
+    std::cout << "Creating ontology::Entity* grass_material_entity ...\n";
     ontology::Entity* grass_material_entity = ontology::EntityFactory::create_Material(grass_material_struct);
+    std::cout << "Creating ontology::Material* grass_material ...\n";
     ontology::Material* grass_material = dynamic_cast<ontology::Material*>(grass_material_entity);
 
     if (grass_material == nullptr)
@@ -241,7 +258,9 @@ int main(void)
     uvmap_material_struct.texture_file_format = "dds";
     uvmap_material_struct.texture_filename = "uvmap.DDS";
 
+    std::cout << "Creating ontology::Entity* uvmap_material_entity ...\n";
     ontology::Entity* uvmap_material_entity = ontology::EntityFactory::create_Material(uvmap_material_struct);
+    std::cout << "Creating ontology::Material* uvmap_material ...\n";
     ontology::Material* uvmap_material = dynamic_cast<ontology::Material*>(uvmap_material_entity);
 
     if (uvmap_material == nullptr)
@@ -256,7 +275,9 @@ int main(void)
     pink_geometric_tiles_material_struct.texture_file_format = "bmp";
     pink_geometric_tiles_material_struct.texture_filename = "pavers1b2.bmp";
 
+    std::cout << "Creating ontology::Entity* uvmap_material_entity ...\n";
     ontology::Entity* pink_geometric_tiles_material_entity = ontology::EntityFactory::create_Material(pink_geometric_tiles_material_struct);
+    std::cout << "Creating ontology::Material* pink_geometric_tiles_material ...\n";
     ontology::Material* pink_geometric_tiles_material = dynamic_cast<ontology::Material*>(pink_geometric_tiles_material_entity);
 
     if (pink_geometric_tiles_material == nullptr)
@@ -265,6 +286,7 @@ int main(void)
         return -1;
     }
 
+    std::cout << "Creating ontology::Species* terrain_species ...\n";
     ontology::Species* terrain_species;
 
     if (my_universe->testing_spherical_world_in_use)
@@ -335,7 +357,9 @@ int main(void)
     snow_cottage_species_struct.model_filename = "snow_cottage_triangulated.obj";
     snow_cottage_species_struct.light_position = glm::vec3(0, 100000, 100000);
 
+    std::cout << "Creating ontology::Entity* snow_cottage_species_entity ...\n";
     ontology::Entity* snow_cottage_species_entity = ontology::EntityFactory::create_Species(snow_cottage_species_struct);
+    std::cout << "Creating ontology::Species* snow_cottage_species ...\n";
     ontology::Species* snow_cottage_species = dynamic_cast<ontology::Species*>(snow_cottage_species_entity);
 
     if (snow_cottage_species == nullptr)
@@ -372,7 +396,9 @@ int main(void)
     suzanne_species_struct.model_filename = "suzanne.obj";
     suzanne_species_struct.light_position = glm::vec3(0, 100000, 100000);
 
+    std::cout << "Creating ontology::Entity* suzanne_species_entity ...\n";
     ontology::Entity* suzanne_species_entity = ontology::EntityFactory::create_Species(suzanne_species_struct);
+    std::cout << "Creating ontology::Species* suzanne_species ...\n";
     ontology::Species* suzanne_species = dynamic_cast<ontology::Species*>(suzanne_species_entity);
 
     if (suzanne_species == nullptr)
@@ -430,7 +456,9 @@ int main(void)
     kongtext_vector_font_struct.font_file_format = g_font_file_format;
     kongtext_vector_font_struct.font_filename = g_font_filename;
 
+    std::cout << "Creating ontology::Entity* kongtext_font_entity ...\n";
     ontology::Entity* kongtext_font_entity = ontology::EntityFactory::create_VectorFont(kongtext_vector_font_struct);
+    std::cout << "Creating ontology::VectorFont* kongtext_font ...\n";
     ontology::VectorFont* kongtext_font = dynamic_cast<ontology::VectorFont*>(kongtext_font_entity);
 
     if (kongtext_font == nullptr)
@@ -467,7 +495,9 @@ int main(void)
     const char* char_g_font_texture_filename = g_font_texture_filename.c_str();
     const char* char_g_font_texture_file_format = g_font_texture_file_format.c_str();
 
+    std::cout << "Creating ontology::Entity* my_font2D_entity ...\n";
     ontology::Entity* my_font2D_entity = ontology::EntityFactory::create_Font2D(my_universe, my_universe->get_window_width(), my_universe->get_window_height(), char_g_font_texture_filename, char_g_font_texture_file_format);
+    std::cout << "Creating ontology::Font2D* my_font2D ...\n";
     ontology::Font2D* my_font2D = dynamic_cast<ontology::Font2D*>(my_font2D_entity);
 
     if (my_font2D == nullptr)
