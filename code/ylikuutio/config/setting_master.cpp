@@ -378,6 +378,7 @@ namespace config
         }
 
         universe->spherical_coordinates->rho = rho_any_value->float_value;
+        return nullptr;
     }
 
     std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_theta(ontology::Universe* const universe, config::SettingMaster* const setting_master)
@@ -407,6 +408,7 @@ namespace config
         }
 
         universe->spherical_coordinates->theta = theta_any_value->float_value;
+        return nullptr;
     }
 
     std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_phi(ontology::Universe* const universe, config::SettingMaster* const setting_master)
@@ -436,6 +438,7 @@ namespace config
         }
 
         universe->spherical_coordinates->phi = phi_any_value->float_value;
+        return nullptr;
     }
 
     std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_cartesian_coordinates(ontology::Universe* const universe, config::SettingMaster* const setting_master)
@@ -766,6 +769,7 @@ namespace config
         }
 
         universe->is_flight_mode_in_use = is_flight_mode_in_use_any_value->bool_value;
+        return nullptr;
     }
 
     std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_testing_spherical_world_in_use(ontology::Universe* const universe, config::SettingMaster* const setting_master)
@@ -795,6 +799,7 @@ namespace config
         }
 
         universe->testing_spherical_world_in_use = testing_spherical_world_in_use_any_value->bool_value;
+        return nullptr;
     }
 
     std::shared_ptr<datatypes::AnyValue> SettingMaster::read_x(ontology::Universe* const universe, config::SettingMaster* const setting_master)
