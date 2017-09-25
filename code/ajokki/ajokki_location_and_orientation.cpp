@@ -38,6 +38,7 @@ namespace ajokki
         spherical_coordinates_setting_struct.setting_master_pointer = setting_master;
         spherical_coordinates_setting_struct.activate_callback = &config::SettingMaster::activate_spherical_coordinates;
         spherical_coordinates_setting_struct.should_ylikuutio_call_activate_callback_now = true;
+        std::cout << "Executing `new config::Setting(spherical_coordinates_setting_struct);` ...\n";
         new config::Setting(spherical_coordinates_setting_struct);
 
         SettingStruct rho_setting_struct(std::make_shared<datatypes::AnyValue>(float_rho));
@@ -46,6 +47,7 @@ namespace ajokki
         rho_setting_struct.activate_callback = &config::SettingMaster::activate_rho;
         rho_setting_struct.read_callback = &config::SettingMaster::read_rho;
         rho_setting_struct.should_ylikuutio_call_activate_callback_now = true;
+        std::cout << "Executing `new config::Setting(rho_setting_struct);` ...\n";
         new config::Setting(rho_setting_struct);
 
         SettingStruct theta_setting_struct(std::make_shared<datatypes::AnyValue>(float_theta));
@@ -54,6 +56,7 @@ namespace ajokki
         theta_setting_struct.activate_callback = &config::SettingMaster::activate_theta;
         theta_setting_struct.read_callback = &config::SettingMaster::read_theta;
         theta_setting_struct.should_ylikuutio_call_activate_callback_now = true;
+        std::cout << "Executing `new config::Setting(theta_setting_struct);` ...\n";
         new config::Setting(theta_setting_struct);
 
         SettingStruct phi_setting_struct(std::make_shared<datatypes::AnyValue>(float_phi));
@@ -62,6 +65,7 @@ namespace ajokki
         phi_setting_struct.activate_callback = &config::SettingMaster::activate_phi;
         phi_setting_struct.read_callback = &config::SettingMaster::read_phi;
         phi_setting_struct.should_ylikuutio_call_activate_callback_now = true;
+        std::cout << "Executing `new config::Setting(phi_setting_struct);` ...\n";
         new config::Setting(phi_setting_struct);
 
         float float_x = 100.0f;
@@ -73,6 +77,7 @@ namespace ajokki
         cartesian_coordinates_setting_struct.setting_master_pointer = setting_master;
         cartesian_coordinates_setting_struct.activate_callback = &config::SettingMaster::activate_cartesian_coordinates;
         cartesian_coordinates_setting_struct.should_ylikuutio_call_activate_callback_now = true;
+        std::cout << "Executing `new config::Setting(cartesian_coordinates_setting_struct);` ...\n";
         new config::Setting(cartesian_coordinates_setting_struct);
 
         SettingStruct x_setting_struct(std::make_shared<datatypes::AnyValue>(float_x));
@@ -81,6 +86,7 @@ namespace ajokki
         x_setting_struct.activate_callback = &config::SettingMaster::activate_x;
         x_setting_struct.read_callback = &config::SettingMaster::read_x;
         x_setting_struct.should_ylikuutio_call_activate_callback_now = true;
+        std::cout << "Executing `new config::Setting(x_setting_struct);` ...\n";
         new config::Setting(x_setting_struct);
 
         SettingStruct y_setting_struct(std::make_shared<datatypes::AnyValue>(float_y));
@@ -89,6 +95,7 @@ namespace ajokki
         y_setting_struct.activate_callback = &config::SettingMaster::activate_y;
         y_setting_struct.read_callback = &config::SettingMaster::read_y;
         y_setting_struct.should_ylikuutio_call_activate_callback_now = true;
+        std::cout << "Executing `new config::Setting(y_setting_struct);` ...\n";
         new config::Setting(y_setting_struct);
 
         SettingStruct z_setting_struct(std::make_shared<datatypes::AnyValue>(float_z));
@@ -97,6 +104,7 @@ namespace ajokki
         z_setting_struct.activate_callback = &config::SettingMaster::activate_z;
         z_setting_struct.read_callback = &config::SettingMaster::read_z;
         z_setting_struct.should_ylikuutio_call_activate_callback_now = true;
+        std::cout << "Executing `new config::Setting(z_setting_struct);` ...\n";
         new config::Setting(z_setting_struct);
 
         double horizontal_angle = 42.42f;
@@ -106,6 +114,7 @@ namespace ajokki
         horizontal_angle_setting_struct.activate_callback = &config::SettingMaster::activate_horizontal_angle;
         horizontal_angle_setting_struct.read_callback = &config::SettingMaster::read_horizontal_angle;
         horizontal_angle_setting_struct.should_ylikuutio_call_activate_callback_now = true;
+        std::cout << "Executing `new config::Setting(horizontal_angle_setting_struct);` ...\n";
         new config::Setting(horizontal_angle_setting_struct);
 
         double vertical_angle = 7.44f;
@@ -115,6 +124,7 @@ namespace ajokki
         vertical_angle_setting_struct.activate_callback = &config::SettingMaster::activate_vertical_angle;
         vertical_angle_setting_struct.read_callback = &config::SettingMaster::read_vertical_angle;
         vertical_angle_setting_struct.should_ylikuutio_call_activate_callback_now = true;
+        std::cout << "Executing `new config::Setting(vertical_angle_setting_struct);` ...\n";
         new config::Setting(vertical_angle_setting_struct);
 
         float right = NAN; // the value does not matter, `right` is read with a read callback.
@@ -123,6 +133,7 @@ namespace ajokki
         right_setting_struct.setting_master_pointer = setting_master;
         right_setting_struct.read_callback = &config::SettingMaster::read_right;
         right_setting_struct.should_ylikuutio_call_activate_callback_now = false;
+        std::cout << "Executing `new config::Setting(right_setting_struct);` ...\n";
         new config::Setting(right_setting_struct);
 
         float up = NAN; // the value does not matter, `up` is read with a read callback.
@@ -131,6 +142,9 @@ namespace ajokki
         up_setting_struct.setting_master_pointer = setting_master;
         up_setting_struct.read_callback = &config::SettingMaster::read_up;
         up_setting_struct.should_ylikuutio_call_activate_callback_now = false;
+        std::cout << "Executing `new config::Setting(up_setting_struct);` ...\n";
         new config::Setting(up_setting_struct);
+
+        std::cout << "Setting up location and orientation ... ready.\n";
     }
 }
