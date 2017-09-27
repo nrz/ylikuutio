@@ -12,7 +12,7 @@ SOURCES=src/pugixml.cpp $(filter-out tests/fuzz_%,$(wildcard tests/*.cpp))
 EXECUTABLE=$(BUILD)/test
 
 VERSION=$(shell sed -n 's/.*version \(.*\).*/\1/p' src/pugiconfig.hpp)
-RELEASE=$(shell git ls-files src docs/*.html docs/*.css docs/samples docs/images scripts contrib CMakeLists.txt readme.txt)
+RELEASE=$(filter-out scripts/archive.py docs/%.adoc,$(shell git ls-files contrib docs scripts src CMakeLists.txt readme.txt))
 
 CXXFLAGS=-g -Wall -Wextra -Werror -pedantic -Wundef -Wshadow -Wcast-align -Wcast-qual -Wold-style-cast
 LDFLAGS=
@@ -61,17 +61,16 @@ ifeq ($(config),coverage)
 test: $(EXECUTABLE)
 	-@find $(BUILD) -name '*.gcda' -exec rm {} +
 	./$(EXECUTABLE)
-	@gcov -o $(BUILD)/src/ pugixml.cpp.gcda | sed -e '/./{H;$!d;}' -e 'x;/pugixml.cpp/!d;'
+	@gcov -b -o $(BUILD)/src/ pugixml.cpp.gcda | sed -e '/./{H;$!d;}' -e 'x;/pugixml.cpp/!d;'
 	@find . -name '*.gcov' -and -not -name 'pugixml.cpp.gcov' -exec rm {} +
 else
 test: $(EXECUTABLE)
 	./$(EXECUTABLE)
 endif
 
-fuzz:
-	@mkdir -p $(BUILD)
-	$(AFL)/afl-clang++ tests/fuzz_parse.cpp tests/allocator.cpp src/pugixml.cpp $(CXXFLAGS) -o $(BUILD)/fuzz_parse
-	$(AFL)/afl-fuzz -i tests/data_fuzz_parse -o $(BUILD)/fuzz_parse_out -x $(AFL)/testcases/_extras/xml/ -- $(BUILD)/fuzz_parse @@
+fuzz_%: $(BUILD)/fuzz_%
+	@mkdir -p build/$@
+	$< build/$@ tests/data_fuzz_$* -max_len=1024 -dict=tests/fuzz_$*.dict
 
 clean:
 	rm -rf $(BUILD)
@@ -82,10 +81,19 @@ docs: docs/quickstart.html docs/manual.html
 
 build/pugixml-%: .FORCE | $(RELEASE)
 	@mkdir -p $(BUILD)
-	perl tests/archive.pl $@ $|
+	TIMESTAMP=`git show v$(VERSION) -s --format=%ct` && python scripts/archive.py $@ pugixml-$(VERSION) $$TIMESTAMP $|
 
 $(EXECUTABLE): $(OBJECTS)
 	$(CXX) $(OBJECTS) $(LDFLAGS) -o $@
+
+build/libFuzzer.o:
+	svn co http://llvm.org/svn/llvm-project/llvm/trunk/lib/Fuzzer build/Fuzzer
+	ls build/Fuzzer/*.cpp | xargs printf '#include "%s"\n' >build/libFuzzer.cpp
+	clang++ build/libFuzzer.cpp -c -g -O2 -fno-omit-frame-pointer -std=c++11 -I . -o build/libFuzzer.o
+
+$(BUILD)/fuzz_%: tests/fuzz_%.cpp src/pugixml.cpp build/libFuzzer.o
+	@mkdir -p $(BUILD)
+	clang++ $(CXXFLAGS) -fsanitize=address -fsanitize-coverage=trace-pc-guard $^ -o $@
 
 $(BUILD)/%.o: %
 	@mkdir -p $(dir $@)

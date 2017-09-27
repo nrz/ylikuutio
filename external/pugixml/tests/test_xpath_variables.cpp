@@ -1,8 +1,10 @@
 #ifndef PUGIXML_NO_XPATH
 
-#include "common.hpp"
+#include "test.hpp"
 
 #include <string>
+
+using namespace pugi;
 
 TEST(xpath_variables_type_none)
 {
@@ -302,7 +304,23 @@ TEST_XML(xpath_variables_select, "<node attr='1'/><node attr='2'/>")
 TEST(xpath_variables_empty_name)
 {
 	xpath_variable_set set;
+	CHECK(!set.add(STR(""), xpath_type_node_set));
 	CHECK(!set.add(STR(""), xpath_type_number));
+	CHECK(!set.add(STR(""), xpath_type_string));
+	CHECK(!set.add(STR(""), xpath_type_boolean));
+}
+
+TEST(xpath_variables_long_name_out_of_memory_add)
+{
+	std::basic_string<char_t> name(1000, 'a');
+
+	test_runner::_memory_fail_threshold = 1000;
+
+	xpath_variable_set set;
+	CHECK_ALLOC_FAIL(CHECK(!set.add(name.c_str(), xpath_type_node_set)));
+	CHECK_ALLOC_FAIL(CHECK(!set.add(name.c_str(), xpath_type_number)));
+	CHECK_ALLOC_FAIL(CHECK(!set.add(name.c_str(), xpath_type_string)));
+	CHECK_ALLOC_FAIL(CHECK(!set.add(name.c_str(), xpath_type_boolean)));
 }
 
 TEST_XML(xpath_variables_inside_filter, "<node key='1' value='2'/><node key='2' value='1'/><node key='1' value='1'/>")
@@ -474,7 +492,19 @@ TEST_XML(xpath_variables_copy_out_of_memory, "<node1 /><node2 />")
 	CHECK(set2.get(STR("d"))->get_node_set().size() == 2);
 }
 
-#if __cplusplus >= 201103
+TEST(xpath_variables_copy_out_of_memory_clone)
+{
+	xpath_variable_set set1;
+	set1.set(STR("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"), true);
+
+	xpath_variable_set set2 = set1;
+
+	test_runner::_memory_fail_threshold = 60;
+
+	CHECK_ALLOC_FAIL(xpath_variable_set set3 = set1);
+}
+
+#ifdef PUGIXML_HAS_MOVE
 TEST_XML(xpath_variables_move, "<node />")
 {
 	xpath_variable_set set;
@@ -578,5 +608,38 @@ TEST(xpath_variables_copy_big_out_of_memory)
 
 		CHECK(!copy.get(name));
 	}
+}
+
+TEST(xpath_variables_copy_big_value_out_of_memory)
+{
+	xpath_variable_set set;
+
+	std::basic_string<char_t> var(10000, 'a');
+	set.set(STR("x"), var.c_str());
+
+	test_runner::_memory_fail_threshold = 15000;
+
+	xpath_variable_set copy;
+	CHECK_ALLOC_FAIL(copy = set);
+
+	CHECK(!copy.get(STR("x")));
+}
+
+TEST_XML(xpath_variables_evaluate_node_set_out_of_memory, "<node />")
+{
+	for (size_t i = 0; i < 600; ++i)
+		doc.append_child(STR("node"));
+
+	xpath_node_set ns = doc.select_nodes(STR("node"));
+	CHECK(ns.size() == 601);
+
+	xpath_variable_set set;
+	set.set(STR("nodes"), ns);
+
+	xpath_query q(STR("$nodes"), &set);
+
+	test_runner::_memory_fail_threshold = 1;
+
+	CHECK_ALLOC_FAIL(q.evaluate_node_set(xml_node()).empty());
 }
 #endif

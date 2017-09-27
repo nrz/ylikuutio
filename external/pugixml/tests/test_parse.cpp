@@ -1,6 +1,8 @@
-#include "common.hpp"
+#include "test.hpp"
 
 #include "writer_string.hpp"
+
+using namespace pugi;
 
 TEST(parse_pi_skip)
 {
@@ -86,6 +88,16 @@ TEST(parse_pi_error)
 	CHECK(doc.load_string(STR("<?xx#?>"), parse_fragment | parse_pi).status == status_bad_pi);
 	CHECK(doc.load_string(STR("<?name&?>"), parse_fragment | parse_pi).status == status_bad_pi);
 	CHECK(doc.load_string(STR("<?name& x?>"), parse_fragment | parse_pi).status == status_bad_pi);
+}
+
+TEST(parse_pi_error_buffer_boundary)
+{
+	char buf1[] = "<?name?>";
+	char buf2[] = "<?name?x";
+
+	xml_document doc;
+	CHECK(doc.load_buffer_inplace(buf1, 8, parse_fragment | parse_pi));
+	CHECK(doc.load_buffer_inplace(buf2, 8, parse_fragment | parse_pi).status == status_bad_pi);
 }
 
 TEST(parse_comments_skip)
@@ -280,8 +292,8 @@ TEST(parse_ws_pcdata_permutations)
     struct test_data_t
     {
         unsigned int mask; // 1 = default flags, 2 = parse_ws_pcdata, 4 = parse_ws_pcdata_single
-        const pugi::char_t* source;
-        const pugi::char_t* result;
+        const char_t* source;
+        const char_t* result;
         int nodes; // negative if parsing should fail
     };
 
@@ -349,8 +361,8 @@ TEST(parse_ws_pcdata_fragment_permutations)
     struct test_data_t
     {
         unsigned int mask; // 1 = default flags, 2 = parse_ws_pcdata, 4 = parse_ws_pcdata_single
-        const pugi::char_t* source;
-        const pugi::char_t* result;
+        const char_t* source;
+        const char_t* result;
         int nodes; // negative if parsing should fail
     };
 
@@ -429,8 +441,8 @@ TEST(parse_pcdata_trim)
 {
     struct test_data_t
     {
-        const pugi::char_t* source;
-        const pugi::char_t* result;
+        const char_t* source;
+        const char_t* result;
         unsigned int flags;
     };
 
@@ -462,7 +474,7 @@ TEST(parse_pcdata_trim)
         xml_document doc;
         CHECK(doc.load_string(td.source, td.flags | parse_trim_pcdata));
 
-        const pugi::char_t* value = doc.child(STR("node")) ? doc.child_value(STR("node")) : doc.text().get();
+        const char_t* value = doc.child(STR("node")) ? doc.child_value(STR("node")) : doc.text().get();
         CHECK_STRING(value, td.result);
     }
 }
@@ -551,7 +563,7 @@ TEST(parse_escapes_unicode)
 	CHECK(doc.load_string(STR("<node>&#x03B3;&#x03b3;&#x24B62;</node>"), parse_minimal | parse_escapes));
 
 #ifdef PUGIXML_WCHAR_MODE
-	const pugi::char_t* v = doc.child_value(STR("node"));
+	const char_t* v = doc.child_value(STR("node"));
 
 	size_t wcharsize = sizeof(wchar_t);
 
@@ -746,6 +758,36 @@ TEST(parse_attribute_quot_inside)
 			}
 }
 
+TEST(parse_attribute_wnorm_coverage)
+{
+	xml_document doc;
+	CHECK(doc.load_string(STR("<n a1='v' a2=' ' a3='x y' a4='x  y' a5='x   y' />"), parse_wnorm_attribute));
+	CHECK_NODE(doc, STR("<n a1=\"v\" a2=\"\" a3=\"x y\" a4=\"x y\" a5=\"x y\"/>"));
+
+	CHECK(doc.load_string(STR("<n a1='v' a2=' ' a3='x y' a4='x  y' a5='x   y' />"), parse_wnorm_attribute | parse_escapes));
+	CHECK_NODE(doc, STR("<n a1=\"v\" a2=\"\" a3=\"x y\" a4=\"x y\" a5=\"x y\"/>"));
+}
+
+TEST(parse_attribute_wconv_coverage)
+{
+	xml_document doc;
+	CHECK(doc.load_string(STR("<n a1='v' a2='\r' a3='\r\n\n' a4='\n' />"), parse_wconv_attribute));
+	CHECK_NODE(doc, STR("<n a1=\"v\" a2=\" \" a3=\"  \" a4=\" \"/>"));
+
+	CHECK(doc.load_string(STR("<n a1='v' a2='\r' a3='\r\n\n' a4='\n' />"), parse_wconv_attribute | parse_escapes));
+	CHECK_NODE(doc, STR("<n a1=\"v\" a2=\" \" a3=\"  \" a4=\" \"/>"));
+}
+
+TEST(parse_attribute_eol_coverage)
+{
+	xml_document doc;
+	CHECK(doc.load_string(STR("<n a1='v' a2='\r' a3='\r\n\n' a4='\n' />"), parse_eol));
+	CHECK_NODE(doc, STR("<n a1=\"v\" a2=\"&#10;\" a3=\"&#10;&#10;\" a4=\"&#10;\"/>"));
+
+	CHECK(doc.load_string(STR("<n a1='v' a2='\r' a3='\r\n\n' a4='\n' />"), parse_eol | parse_escapes));
+	CHECK_NODE(doc, STR("<n a1=\"v\" a2=\"&#10;\" a3=\"&#10;&#10;\" a4=\"&#10;\"/>"));
+}
+
 TEST(parse_tag_single)
 {
 	xml_document doc;
@@ -928,7 +970,7 @@ TEST(parse_out_of_memory_halfway_attr)
 
 TEST(parse_out_of_memory_conversion)
 {
-	test_runner::_memory_fail_threshold = 256;
+	test_runner::_memory_fail_threshold = 1;
 
 	xml_document doc;
 	CHECK_ALLOC_FAIL(CHECK(doc.load_buffer("<foo\x90/>", 7, parse_default, encoding_latin1).status == status_out_of_memory));
@@ -960,7 +1002,7 @@ TEST(parse_out_of_memory_allocator_state_sync)
 		CHECK(doc.append_child(STR("n")));
 }
 
-static bool test_offset(const char_t* contents, unsigned int options, pugi::xml_parse_status status, ptrdiff_t offset)
+static bool test_offset(const char_t* contents, unsigned int options, xml_parse_status status, ptrdiff_t offset)
 {
 	xml_document doc;
 	xml_parse_result res = doc.load_string(contents, options);
@@ -1005,8 +1047,8 @@ TEST(parse_error_offset)
 	CHECK_OFFSET("<n></n $>", parse_default, status_bad_end_element, 7);
 	CHECK_OFFSET("<n></n", parse_default, status_bad_end_element, 5);
 
-	CHECK_OFFSET("<no></na>", parse_default, status_end_element_mismatch, 8);
-	CHECK_OFFSET("<no></nod>", parse_default, status_end_element_mismatch, 9);
+	CHECK_OFFSET("<no></na>", parse_default, status_end_element_mismatch, 6);
+	CHECK_OFFSET("<no></nod>", parse_default, status_end_element_mismatch, 6);
 }
 
 TEST(parse_result_default)
@@ -1183,6 +1225,33 @@ TEST(parse_embed_pcdata)
 	}
 }
 
+TEST_XML_FLAGS(parse_embed_pcdata_fragment, "text", parse_fragment | parse_embed_pcdata)
+{
+	CHECK_NODE(doc, STR("text"));
+	CHECK(doc.first_child().type() == node_pcdata);
+	CHECK_STRING(doc.first_child().value(), STR("text"));
+}
+
+TEST_XML_FLAGS(parse_embed_pcdata_child, "<n><child/>text</n>", parse_embed_pcdata)
+{
+	xml_node n = doc.child(STR("n"));
+
+	CHECK_NODE(doc, STR("<n><child/>text</n>"));
+	CHECK(n.last_child().type() == node_pcdata);
+	CHECK_STRING(n.last_child().value(), STR("text"));
+}
+
+TEST_XML_FLAGS(parse_embed_pcdata_comment, "<n>text1<!---->text2</n>", parse_embed_pcdata)
+{
+	xml_node n = doc.child(STR("n"));
+
+	CHECK_NODE(doc, STR("<n>text1text2</n>"));
+	CHECK_STRING(n.value(), STR("text1"));
+	CHECK(n.first_child() == n.last_child());
+	CHECK(n.last_child().type() == node_pcdata);
+	CHECK_STRING(n.last_child().value(), STR("text2"));
+}
+
 TEST(parse_encoding_detect)
 {
 	char test[] = "<?xml version='1.0' encoding='utf-8'?><n/>";
@@ -1205,4 +1274,84 @@ TEST(parse_encoding_detect_latin1)
 	CHECK(doc.load_buffer(test2, sizeof(test2)).encoding == encoding_latin1);
 	CHECK(doc.load_buffer(test3, sizeof(test3)).encoding == encoding_latin1);
 	CHECK(doc.load_buffer(test4, sizeof(test4)).encoding == encoding_latin1);
+}
+
+TEST(parse_encoding_detect_auto)
+{
+	struct data_t
+	{
+		const char* contents;
+		size_t size;
+		xml_encoding encoding;
+	};
+
+	const data_t data[] =
+	{
+		// BOM
+		{ "\x00\x00\xfe\xff", 4, encoding_utf32_be },
+		{ "\xff\xfe\x00\x00", 4, encoding_utf32_le },
+		{ "\xfe\xff  ", 4, encoding_utf16_be },
+		{ "\xff\xfe  ", 4, encoding_utf16_le },
+		{ "\xef\xbb\xbf ", 4, encoding_utf8 },
+		// automatic tag detection for < or <?
+		{ "\x00\x00\x00<\x00\x00\x00n\x00\x00\x00/\x00\x00\x00>", 16, encoding_utf32_be },
+		{ "<\x00\x00\x00n\x00\x00\x00/\x00\x00\x00>\x00\x00\x00", 16, encoding_utf32_le },
+		{ "\x00<\x00?\x00n\x00?\x00>", 10, encoding_utf16_be },
+		{ "<\x00?\x00n\x00?\x00>\x00", 10, encoding_utf16_le },
+		{ "\x00<\x00n\x00/\x00>", 8, encoding_utf16_be },
+		{ "<\x00n\x00/\x00>\x00", 8, encoding_utf16_le },
+		// <?xml encoding
+		{ "<?xml encoding='latin1'?>", 25, encoding_latin1 },
+	};
+
+	for (size_t i = 0; i < sizeof(data) / sizeof(data[0]); ++i)
+	{
+		xml_document doc;
+		xml_parse_result result = doc.load_buffer(data[i].contents, data[i].size, parse_fragment);
+
+		CHECK(result);
+		CHECK(result.encoding == data[i].encoding);
+	}
+}
+
+TEST(parse_encoding_detect_auto_incomplete)
+{
+	struct data_t
+	{
+		const char* contents;
+		size_t size;
+		xml_encoding encoding;
+	};
+
+	const data_t data[] =
+	{
+		// BOM
+		{ "\x00\x00\xfe ", 4, encoding_utf8 },
+		{ "\x00\x00  ", 4, encoding_utf8 },
+		{ "\xff\xfe\x00 ", 4, encoding_utf16_le },
+		{ "\xfe   ", 4, encoding_utf8 },
+		{ "\xff   ", 4, encoding_utf8 },
+		{ "\xef\xbb  ", 4, encoding_utf8 },
+		{ "\xef   ", 4, encoding_utf8 },
+		// automatic tag detection for < or <?
+		{ "\x00\x00\x00 ", 4, encoding_utf8 },
+		{ "<\x00\x00n/\x00>\x00", 8, encoding_utf16_le },
+		{ "\x00<n\x00\x00/\x00>", 8, encoding_utf16_be },
+		{ "<\x00?n/\x00>\x00", 8, encoding_utf16_le },
+		{ "\x00 ", 2, encoding_utf8 },
+		// <?xml encoding
+		{ "<?xmC encoding='latin1'?>", 25, encoding_utf8 },
+		{ "<?xBC encoding='latin1'?>", 25, encoding_utf8 },
+		{ "<?ABC encoding='latin1'?>", 25, encoding_utf8 },
+		{ "<_ABC encoding='latin1'/>", 25, encoding_utf8 },
+	};
+
+	for (size_t i = 0; i < sizeof(data) / sizeof(data[0]); ++i)
+	{
+		xml_document doc;
+		xml_parse_result result = doc.load_buffer(data[i].contents, data[i].size, parse_fragment);
+
+		CHECK(result);
+		CHECK(result.encoding == data[i].encoding);
+	}
 }

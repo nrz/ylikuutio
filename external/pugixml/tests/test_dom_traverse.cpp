@@ -2,7 +2,7 @@
 #define _SCL_SECURE_NO_WARNINGS
 #define _SCL_SECURE_NO_DEPRECATE
 
-#include "common.hpp"
+#include "test.hpp"
 
 #include <string.h>
 #include <stdio.h>
@@ -14,6 +14,8 @@
 #include <string>
 
 #include "helpers.hpp"
+
+using namespace pugi;
 
 #ifdef PUGIXML_NO_STL
 template <typename I> static I move_iter(I base, int n)
@@ -137,6 +139,10 @@ TEST_XML(dom_attr_as_integer_space, "<node attr1=' \t1234' attr2='\t 0x123' attr
 	CHECK(node.attribute(STR("attr2")).as_int() == 291);
 	CHECK(node.attribute(STR("attr3")).as_int() == 0);
 	CHECK(node.attribute(STR("attr4")).as_int() == 0);
+
+#ifdef PUGIXML_HAS_LONG_LONG
+	CHECK(node.attribute(STR("attr1")).as_llong() == 1234);
+#endif
 }
 
 TEST_XML(dom_attr_as_float, "<node attr1='0' attr2='1' attr3='0.12' attr4='-5.1' attr5='3e-4' attr6='3.14159265358979323846'/>")
@@ -333,11 +339,11 @@ TEST_XML(dom_attr_iterator_invalidate, "<node><node1 attr1='0'/><node2 attr1='0'
 
 TEST_XML(dom_attr_iterator_const, "<node attr1='0' attr2='1'/>")
 {
-    pugi::xml_node node = doc.child(STR("node"));
+    xml_node node = doc.child(STR("node"));
 
-    const pugi::xml_attribute_iterator i1 = node.attributes_begin();
-    const pugi::xml_attribute_iterator i2 = ++xml_attribute_iterator(i1);
-    const pugi::xml_attribute_iterator i3 = ++xml_attribute_iterator(i2);
+    const xml_attribute_iterator i1 = node.attributes_begin();
+    const xml_attribute_iterator i2 = ++xml_attribute_iterator(i1);
+    const xml_attribute_iterator i3 = ++xml_attribute_iterator(i2);
 
     CHECK(*i1 == node.attribute(STR("attr1")));
     CHECK(*i2 == node.attribute(STR("attr2")));
@@ -455,11 +461,11 @@ TEST_XML(dom_node_iterator_invalidate, "<node><node1><child1/></node1><node2><ch
 
 TEST_XML(dom_node_iterator_const, "<node><child1/><child2/></node>")
 {
-    pugi::xml_node node = doc.child(STR("node"));
+    xml_node node = doc.child(STR("node"));
 
-    const pugi::xml_node_iterator i1 = node.begin();
-    const pugi::xml_node_iterator i2 = ++xml_node_iterator(i1);
-    const pugi::xml_node_iterator i3 = ++xml_node_iterator(i2);
+    const xml_node_iterator i1 = node.begin();
+    const xml_node_iterator i2 = ++xml_node_iterator(i1);
+    const xml_node_iterator i3 = ++xml_node_iterator(i2);
 
     CHECK(*i1 == node.child(STR("child1")));
     CHECK(*i2 == node.child(STR("child2")));
@@ -665,9 +671,9 @@ struct find_predicate_const
 
 struct find_predicate_prefix
 {
-	const pugi::char_t* prefix;
+	const char_t* prefix;
 
-	find_predicate_prefix(const pugi::char_t* prefix_): prefix(prefix_)
+	find_predicate_prefix(const char_t* prefix_): prefix(prefix_)
 	{
 	}
 
@@ -675,7 +681,7 @@ struct find_predicate_prefix
 	{
 	#ifdef PUGIXML_WCHAR_MODE
 		// can't use wcsncmp here because of a bug in DMC
-		return std::basic_string<pugi::char_t>(obj.name()).compare(0, wcslen(prefix), prefix) == 0;
+		return std::basic_string<char_t>(obj.name()).compare(0, wcslen(prefix), prefix) == 0;
 	#else
 		return strncmp(obj.name(), prefix, strlen(prefix)) == 0;
 	#endif
@@ -736,6 +742,9 @@ TEST_XML(dom_node_path, "<node><child1>text<child2/></child1></node>")
 	CHECK(doc.child(STR("node")).child(STR("child1")).first_child().path() == STR("/node/child1/"));
 
 	CHECK(doc.child(STR("node")).child(STR("child1")).path('\\') == STR("\\node\\child1"));
+
+	doc.append_child(node_element);
+	CHECK(doc.last_child().path() == STR("/"));
 }
 #endif
 
@@ -775,7 +784,7 @@ TEST_XML(dom_node_first_element_by_path, "<node><child1>text<child2/></child1></
 
 struct test_walker: xml_tree_walker
 {
-	std::basic_string<pugi::char_t> log;
+	std::basic_string<char_t> log;
 	unsigned int call_count;
 	unsigned int stop_count;
 
@@ -783,7 +792,7 @@ struct test_walker: xml_tree_walker
 	{
 	}
 
-	std::basic_string<pugi::char_t> depthstr() const
+	std::basic_string<char_t> depthstr() const
 	{
 		char buf[32];
 		sprintf(buf, "%d", depth());
@@ -792,13 +801,13 @@ struct test_walker: xml_tree_walker
 		wchar_t wbuf[32];
 		std::copy(buf, buf + strlen(buf) + 1, &wbuf[0]);
 
-		return std::basic_string<pugi::char_t>(wbuf);
+		return std::basic_string<char_t>(wbuf);
 	#else
-		return std::basic_string<pugi::char_t>(buf);
+		return std::basic_string<char_t>(buf);
 	#endif
 	}
 
-	virtual bool begin(xml_node& node)
+	virtual bool begin(xml_node& node) PUGIXML_OVERRIDE
 	{
 		log += STR("|");
 		log += depthstr();
@@ -810,7 +819,7 @@ struct test_walker: xml_tree_walker
 		return ++call_count != stop_count && xml_tree_walker::begin(node);
 	}
 
-	virtual bool for_each(xml_node& node)
+	virtual bool for_each(xml_node& node) PUGIXML_OVERRIDE
 	{
 		log += STR("|");
 		log += depthstr();
@@ -822,7 +831,7 @@ struct test_walker: xml_tree_walker
 		return ++call_count != stop_count && xml_tree_walker::end(node);
 	}
 
-	virtual bool end(xml_node& node)
+	virtual bool end(xml_node& node) PUGIXML_OVERRIDE
 	{
 		log += STR("|");
 		log += depthstr();
@@ -1273,4 +1282,18 @@ TEST_XML(dom_as_int_plus, "<node attr1='+1' attr2='+0xa' />")
 	CHECK(node.attribute(STR("attr2")).as_llong() == 10);
 	CHECK(node.attribute(STR("attr2")).as_ullong() == 10);
 #endif
+}
+
+TEST(dom_node_anonymous)
+{
+	xml_document doc;
+	doc.append_child(node_element);
+	doc.append_child(node_element);
+	doc.append_child(node_pcdata);
+
+	CHECK(doc.child(STR("node")) == xml_node());
+	CHECK(doc.first_child().next_sibling(STR("node")) == xml_node());
+	CHECK(doc.last_child().previous_sibling(STR("node")) == xml_node());
+	CHECK_STRING(doc.child_value(), STR(""));
+	CHECK_STRING(doc.last_child().child_value(), STR(""));
 }
