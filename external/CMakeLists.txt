@@ -76,7 +76,7 @@ target_link_libraries(GLEW_200
     ${EXTRA_LIBS}
     )
 
-add_library(tinyscheme
+add_library(tinyscheme STATIC
     tinyscheme-1.41/dynload.c
     tinyscheme-1.41/dynload.h
     tinyscheme-1.41/opdefines.h
