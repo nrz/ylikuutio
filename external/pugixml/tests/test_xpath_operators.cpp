@@ -1,6 +1,8 @@
 #ifndef PUGIXML_NO_XPATH
 
-#include "common.hpp"
+#include "test.hpp"
+
+using namespace pugi;
 
 TEST(xpath_operators_arithmetic)
 {
@@ -332,11 +334,21 @@ TEST_XML(xpath_operators_inequality_node_set_node_set, "<node><c1><v>1</v><v>-1<
 	CHECK_XPATH_BOOLEAN(n, STR("c1/v < c3/v"), true);
 	CHECK_XPATH_BOOLEAN(n, STR("c1/v <= c3/v"), true);
 
+	CHECK_XPATH_BOOLEAN(n, STR("c1/v[1] > c1/v[1]"), false);
+	CHECK_XPATH_BOOLEAN(n, STR("c1/v[1] < c1/v[1]"), false);
+	CHECK_XPATH_BOOLEAN(n, STR("c1/v[1] >= c1/v[1]"), true);
+	CHECK_XPATH_BOOLEAN(n, STR("c1/v[1] <= c1/v[1]"), true);
+
 #ifndef MSVC6_NAN_BUG
 	CHECK_XPATH_BOOLEAN(n, STR("c1/v > c2/v"), false);
 	CHECK_XPATH_BOOLEAN(n, STR("c1/v >= c2/v"), true);
 	CHECK_XPATH_BOOLEAN(n, STR("c1/v < c2/v"), true);
 	CHECK_XPATH_BOOLEAN(n, STR("c1/v <= c2/v"), true);
+
+	CHECK_XPATH_BOOLEAN(n, STR("c2/v[2] < c2/v[2]"), false);
+	CHECK_XPATH_BOOLEAN(n, STR("c2/v[2] > c2/v[2]"), false);
+	CHECK_XPATH_BOOLEAN(n, STR("c2/v[2] <= c2/v[2]"), false);
+	CHECK_XPATH_BOOLEAN(n, STR("c2/v[2] >= c2/v[2]"), false);
 #endif
 }
 

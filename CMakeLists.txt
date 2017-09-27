@@ -81,7 +81,7 @@ include_directories(
     external/glew-2.0.0/include/
     external/FastNoiseSIMD/
     external/pugixml/src/
-    external/assimp-3.0.1270/include/
+    external/assimp/include/
     .
     )
 
@@ -212,6 +212,7 @@ endif()
 
 set(ALL_LIBS
     ${OPENGL_LIBRARY}
+    assimp
     GLEW_200
     # GDAL_211
     pugixml
@@ -471,7 +472,7 @@ add_executable(ajokki
     code/ajokki/ajokki_movement.hpp
     )
 add_dependencies(ajokki rescan)
-target_link_libraries(ajokki ylikuutio ${ALL_LIBS} glfw assimp)
+target_link_libraries(ajokki ylikuutio ${ALL_LIBS} glfw)
 
 if (ENABLE_SCRIPTING_WITH_TINYSCHEME)
     # TinyScheme-test

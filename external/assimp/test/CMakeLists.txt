@@ -65,7 +65,7 @@ SET( TEST_SRCS
   unit/ut3DSImportExport.cpp
   unit/utACImportExport.cpp
   unit/utAMFImportExport.cpp
-  unit/utASEImportExport.cpp  
+  unit/utASEImportExport.cpp
   unit/utAnim.cpp
   unit/AssimpAPITest.cpp
   unit/utB3DImportExport.cpp
@@ -88,6 +88,7 @@ SET( TEST_SRCS
   unit/utFixInfacingNormals.cpp
   unit/utGenNormals.cpp
   unit/utglTFImportExport.cpp
+  unit/utglTF2ImportExport.cpp
   unit/utHMPImportExport.cpp
   unit/utIFCImportExport.cpp
   unit/utImporter.cpp
@@ -116,6 +117,7 @@ SET( TEST_SRCS
   unit/utRemoveRedundantMaterials.cpp
   unit/utRemoveVCProcess.cpp
   unit/utScenePreprocessor.cpp
+  unit/utSceneCombiner.cpp
   unit/utSharedPPData.cpp
   unit/utStringUtils.cpp
   unit/utSMDImportExport.cpp
@@ -145,7 +147,7 @@ add_executable( unit
 )
 
 add_definitions(-DASSIMP_TEST_MODELS_DIR="${CMAKE_CURRENT_LIST_DIR}/models")
-    
+
 SET_PROPERTY( TARGET assimp PROPERTY DEBUG_POSTFIX ${CMAKE_DEBUG_POSTFIX} )
 
 IF( WIN32 )

@@ -15,6 +15,9 @@ add_definitions(
 
 # Compile external dependencies
 
+# Assimp
+add_subdirectory(assimp)
+
 # pugixml
 add_subdirectory(pugixml)
 
@@ -34,6 +37,7 @@ if(ENABLE_SCRIPTING_WITH_TINYSCHEME)
 endif()
 
 include_directories(
+    assimp/include/
     glfw-3.2/include/GLFW/
     glew-2.0.0/include/
     FastNoiseSIMD/
@@ -76,7 +80,7 @@ target_link_libraries(GLEW_200
     ${EXTRA_LIBS}
     )
 
-add_library(tinyscheme
+add_library(tinyscheme STATIC
     tinyscheme-1.41/dynload.c
     tinyscheme-1.41/dynload.h
     tinyscheme-1.41/opdefines.h
@@ -174,27 +178,6 @@ set_property(TARGET tinyscheme PROPERTY COMPILE_FLAGS "-DSTANDALONE=0 -DUSE_INTE
 # 	${OPENGL_LIBRARY}
 # 	${EXTRA_LIBS}
 # )
-
-### ASSIMP ###
-# AssImp already has a CMakeLists.txt so let's use these
-#
-# # Compile built-in, modified version of Zlib
-include(CheckIncludeFile)
-include(CheckTypeSize)
-include(CheckFunctionExists)
-add_subdirectory(assimp-3.0.1270/contrib/zlib )
-
-# # Compile without Boost
-include_directories(assimp-3.0.1270/code/BoostWorkaround)
-add_definitions(-DASSIMP_BUILD_BOOST_WORKAROUND)
-#
-# # Compile AssImp
-set( LIB_INSTALL_DIR "lib")
-set(LIBASSIMP_COMPONENT libassimp3.0-r1270-OGLtuts)
-set(ZLIB_LIBRARIES zlib)
-set(BUILD_STATIC_LIB ON)
-set(ZLIB_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/zlib)
-add_subdirectory(assimp-3.0.1270/code)
 
 ### BULLET ###
 # Bullet already has a CMakeLists.txt so let's use these

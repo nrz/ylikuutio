@@ -1,5 +1,5 @@
 #include "terrain_generation_callbacks.hpp"
-#include "FastNoiseSIMD.h"
+#include "FastNoiseSIMD/FastNoiseSIMD.h"
 
 // Include standard headers
 #include <stdint.h> // uint32_t etc.

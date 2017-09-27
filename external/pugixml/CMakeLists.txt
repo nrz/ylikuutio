@@ -1,9 +1,11 @@
 project(pugixml)
 
-cmake_minimum_required(VERSION 2.6)
+cmake_minimum_required(VERSION 2.8.12)
 
 option(BUILD_SHARED_LIBS "Build shared instead of static library" OFF)
 option(BUILD_TESTS "Build tests" OFF)
+option(BUILD_PKGCONFIG "Build in PKGCONFIG mode" OFF)
+
 set(BUILD_DEFINES "" CACHE STRING "Build defines")
 
 if(MSVC)
@@ -45,16 +47,29 @@ if(NOT ${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION} STRLESS 3.1 AND ";${CMAKE_C
 	target_compile_features(pugixml PUBLIC cxx_long_long_type)
 endif()
 
-set_target_properties(pugixml PROPERTIES VERSION 1.7 SOVERSION 1)
+set_target_properties(pugixml PROPERTIES VERSION 1.8 SOVERSION 1)
+get_target_property(PUGIXML_VERSION_STRING pugixml VERSION)
+
+if(BUILD_PKGCONFIG)
+	# Install library into its own directory under LIBDIR
+	set(INSTALL_SUFFIX /pugixml-${PUGIXML_VERSION_STRING})
+endif()
+
+target_include_directories(pugixml PUBLIC
+	$<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/src>
+	$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}${INSTALL_SUFFIX}>)
 
 install(TARGETS pugixml EXPORT pugixml-config
-	ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
-	LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-	RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-)
-
-install(FILES ${HEADERS} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+	ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}${INSTALL_SUFFIX}
+	LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}${INSTALL_SUFFIX}
+	RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
+install(FILES ${HEADERS} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}${INSTALL_SUFFIX})
 install(EXPORT pugixml-config DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/pugixml)
+
+if(BUILD_PKGCONFIG)
+	configure_file(scripts/pugixml.pc.in ${PROJECT_BINARY_DIR}/pugixml.pc @ONLY)
+	install(FILES ${PROJECT_BINARY_DIR}/pugixml.pc DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/pkgconfig)
+endif()
 
 if(BUILD_TESTS)
 	file(GLOB TEST_SOURCES tests/*.cpp)
