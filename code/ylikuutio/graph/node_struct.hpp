@@ -13,7 +13,7 @@ namespace graph
 typedef struct NodeStruct
 {
     NodeStruct()
-        : parent_pointer(nullptr)
+        : nodeID(-1), parent_pointer(nullptr)
     {
         // constructor.
     }
