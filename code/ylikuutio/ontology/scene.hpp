@@ -68,8 +68,6 @@ namespace ontology
 
             ontology::Universe* parent_pointer;   // pointer to the `Universe`.
 
-            int32_t childID;                      // scene ID, set by `this->bind_to_parent()`.
-
             std::vector<ontology::Shader*> shader_pointer_vector;
             std::queue<int32_t> free_shaderID_queue;
             int32_t number_of_shaders;

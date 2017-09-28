@@ -92,8 +92,6 @@ namespace ontology
 
             ontology::Species* terrain_species_pointer; // pointer to scene species (used in collision detection).
 
-            int32_t childID;                      // shader ID, set by `this->bind_to_parent()`.
-
             std::string vertex_shader;            // filename of vertex shader.
             std::string fragment_shader;          // filename of fragment shader.
 

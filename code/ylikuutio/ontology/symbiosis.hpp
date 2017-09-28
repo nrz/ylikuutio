@@ -50,8 +50,6 @@ namespace ontology
 
             ontology::Shader* parent_pointer;     // pointer to `Scene`.
 
-            int32_t childID;                      // symbiosis ID, set by `this->bind_to_parent()`.
-
             std::vector<ontology::Material*> material_pointer_vector;
             std::vector<ontology::Species*> species_pointer_vector;
             std::queue<int32_t> free_materialID_queue;

@@ -32,6 +32,7 @@ namespace ontology
 
             ontology::Universe* universe_pointer;            // pointer to the `Universe`.
             std::vector<void*> child_vector_pointers_vector;
+            int32_t childID;
 
             std::string type;
 

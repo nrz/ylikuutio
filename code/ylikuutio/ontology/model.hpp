@@ -69,7 +69,6 @@ namespace ontology
             std::string color_channel;               // color channel in use: `"red"`, `"green"`, `"blue"`, `"mean"` or `"all"`.
             glm::vec3 light_position;                // light position.
 
-            int32_t childID;                         // species ID/text3D ID/glyph ID, set by corresponding `bind_to_parent()`.
             GLuint lightID;                          // light ID, returned by `glGetUniformLocation(programID, "LightPosition_worldspace");`.
 
             std::vector<ontology::Object*> object_pointer_vector;

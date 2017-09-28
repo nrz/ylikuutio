@@ -68,8 +68,6 @@ namespace ontology
 
             ontology::VectorFont* parent_pointer; // pointer to `VectorFont`.
 
-            int32_t childID;                      // text3D ID, set by `this->bind_to_parent()`.
-
             glm::vec3 original_scale_vector;      // original scale vector.
             GLfloat rotate_angle;                 // rotate angle.
             glm::vec3 coordinate_vector;          // coordinate vector.

@@ -211,7 +211,6 @@ namespace ontology
             ontology::Text3D* text3D_parent_pointer;   // pointer to `Text3D`.
             bool is_character;
 
-            int32_t childID;                       // object ID, set by `this->bind_to_parent()`.
             bool has_entered;
             bool should_ylikuutio_render_this_object;
 
