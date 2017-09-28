@@ -65,10 +65,6 @@ enable_testing()
 # Set default ExternalProject root directory
 set_directory_properties(PROPERTIES EP_PREFIX ${CMAKE_BINARY_DIR}/external)
 
-if(INCLUDE_DISTRIB)
-    add_subdirectory(distrib)
-endif(INCLUDE_DISTRIB)
-
 # Do not compile GLFW tests, examples and documentation.
 set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
