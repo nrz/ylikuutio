@@ -11,11 +11,12 @@ namespace geometry
     // can be used for creating n-dimensional lines.
     Line::Line(const std::vector<float> point1, const std::vector<float> point2)
     {
+        this->general_form_constant = NAN;
+
         if (point1 == point2 || point1.size() != point2.size())
         {
             this->is_valid = false; // two identical points do not define a line.
             this->general_form_coefficients.push_back(NAN);
-            this->general_form_constant = NAN;
         }
         else
         {
