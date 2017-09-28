@@ -75,7 +75,6 @@ set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 
 include_directories(
-    external/glfw-3.2/include/GLFW/
     external/glfw-3.2/include/
     external/glm-0.9.4.0/
     external/glew-2.0.0/include/
