@@ -16,7 +16,7 @@
 // Include GLFW
 #ifndef __GLFW3_H_INCLUDED
 #define __GLFW3_H_INCLUDED
-#include <glfw3.h>
+#include <GLFW/glfw3.h>
 #endif
 
 // Include standard headers

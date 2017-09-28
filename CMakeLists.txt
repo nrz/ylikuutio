@@ -65,23 +65,18 @@ enable_testing()
 # Set default ExternalProject root directory
 set_directory_properties(PROPERTIES EP_PREFIX ${CMAKE_BINARY_DIR}/external)
 
-if(INCLUDE_DISTRIB)
-    add_subdirectory(distrib)
-endif(INCLUDE_DISTRIB)
-
 # Do not compile GLFW tests, examples and documentation.
 set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 
 include_directories(
-    external/glfw-3.2/include/GLFW/
+    external/assimp/include/
+    external/FastNoiseSIMD/
+    external/glew-2.0.0/include/
     external/glfw-3.2/include/
     external/glm-0.9.4.0/
-    external/glew-2.0.0/include/
-    external/FastNoiseSIMD/
     external/pugixml/src/
-    external/assimp/include/
     .
     )
 
@@ -199,6 +194,7 @@ endif()
 set(ALL_LIBS
     ${OPENGL_LIBRARY}
     assimp
+    glfw
     GLEW_200
     pugixml
     )
@@ -457,7 +453,7 @@ add_executable(ajokki
     code/ajokki/ajokki_movement.hpp
     )
 add_dependencies(ajokki rescan)
-target_link_libraries(ajokki ylikuutio ${ALL_LIBS} glfw)
+target_link_libraries(ajokki ylikuutio ${ALL_LIBS})
 
 if (ENABLE_SCRIPTING_WITH_TINYSCHEME)
     # TinyScheme-test
