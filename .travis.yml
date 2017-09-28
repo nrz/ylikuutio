@@ -1,12 +1,9 @@
 matrix:
     include:
-        - os:
-            - linux
+        - os: linux
           language: cpp
           dist: trusty
-          compiler:
-              - gcc
-              - clang
+          compiler: gcc
           sudo: required
           before_install:
               # C++14
@@ -22,9 +19,38 @@ matrix:
               - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-5 90
           script:
               - gcc -v && g++ -v && cmake --version
-              - mkdir build
-              - cd build
+              - mkdir build_gcc
+              - cd build_gcc
               - cmake ..
+              - make
+              - ./unit_tests_with_Google_Test
+          addons:
+              apt:
+                  sources:
+                      - ubuntu-toolchain-r-test
+                  packages:
+                      - cmake
+                      - git
+                      - libx11-dev
+                      - libgl1-mesa-dev
+                      - libglu1-mesa-dev
+                      - libxcursor-dev
+                      - libxrandr-dev
+                      - libxext-dev
+                      - libxi-dev
+                      - libxinerama-dev
+                      - make
+
+        - os: linux
+          language: cpp
+          dist: trusty
+          compiler: clang
+          sudo: required
+          script:
+              - cmake --version
+              - mkdir build_clang
+              - cd build_clang
+              - CC=$(which clang) CXX=$(which clang++) cmake ..
               - make
               - ./unit_tests_with_Google_Test
           addons:
