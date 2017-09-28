@@ -37,9 +37,20 @@ namespace loaders
             const int32_t z_step,
             const std::string& triangulation_type)
     {
+        if (x_step < 1 || z_step < 1)
+        {
+            return false;
+        }
+
         int32_t image_size;
 
         uint8_t* image_data = load_BMP_file(image_path, image_width, image_height, image_size);
+
+        if (image_width < 2 || image_height < 2)
+        {
+            delete image_data;
+            return false;
+        }
 
         // Define world size.
         int32_t world_size = image_width * image_height;
