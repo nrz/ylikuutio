@@ -4,6 +4,7 @@
 #include "code/ylikuutio/geometry/spherical_world_struct.hpp"
 
 // Include standard headers
+#include <cmath>    // NAN, std::isnan, std::pow
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 
@@ -12,7 +13,7 @@ namespace geometry
     typedef struct TriangulateQuadsStruct
     {
         TriangulateQuadsStruct()
-            : should_ylikuutio_use_real_texture_coordinates(true), x_step(1), z_step(1)
+            : image_width(-1), image_height(-1), should_ylikuutio_use_real_texture_coordinates(true), sphere_radius(NAN), x_step(1), z_step(1)
         {
             // constructor.
         }
