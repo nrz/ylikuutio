@@ -37,9 +37,11 @@ endif()
 
 include_directories(
     assimp/include/
-    glfw-3.2/include/
-    glew-2.0.0/include/
     FastNoiseSIMD/
+    glew-2.0.0/include/
+    glfw-3.2/include/
+    glm-0.9.4.0/
+    pugixml/src/
     .
     )
 
