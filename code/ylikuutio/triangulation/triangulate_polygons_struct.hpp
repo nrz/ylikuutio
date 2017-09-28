@@ -15,7 +15,7 @@ namespace geometry
     typedef struct TriangulatePolygonsStruct
     {
         TriangulatePolygonsStruct()
-            : should_ylikuutio_use_real_texture_coordinates(true)
+            : input_vertices(nullptr), should_ylikuutio_use_real_texture_coordinates(true)
         {
             // constructor.
         }
