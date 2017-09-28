@@ -45,15 +45,15 @@ namespace callback_system
             friend class CallbackEngine;
             friend class CallbackParameter;
             template<class T1>
-                friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<uint32_t>& free_childID_queue, int32_t* number_of_children);
+                friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, int32_t* number_of_children);
             template<class T1, class T2>
-                friend void hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent_pointer, std::vector<T1>& old_child_pointer_vector, std::queue<uint32_t>& old_free_childID_queue, int32_t* old_number_of_children);
+                friend void hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent_pointer, std::vector<T1>& old_child_pointer_vector, std::queue<int32_t>& old_free_childID_queue, int32_t* old_number_of_children);
 
         protected:
             void bind_to_parent();
 
             // this method sets a callback parameter pointer.
-            void set_callback_parameter_pointer(const uint32_t childID, callback_system::CallbackParameter* const child_pointer);
+            void set_callback_parameter_pointer(const int32_t childID, callback_system::CallbackParameter* const child_pointer);
 
             void bind_child_to_parent(callback_system::CallbackParameter* child_pointer);
 
@@ -62,10 +62,10 @@ namespace callback_system
 
             callback_system::CallbackEngine* parent_pointer; // pointer to the callback engine.
 
-            uint32_t childID;                     // callback object ID, returned by `callback_system::CallbackEngine->get_callback_objectID()`.
+            int32_t childID;                                 // callback object ID, returned by `callback_system::CallbackEngine->get_callback_objectID()`.
 
             std::vector<callback_system::CallbackParameter*> callback_parameter_pointer_vector;
-            std::queue<uint32_t> free_callback_parameterID_queue;
+            std::queue<int32_t> free_callback_parameterID_queue;
             int32_t number_of_callback_parameters;
 
             InputParametersToAnyValueCallback callback;

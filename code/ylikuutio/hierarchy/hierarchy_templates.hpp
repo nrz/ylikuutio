@@ -11,10 +11,10 @@ namespace hierarchy
 {
     template<class T1>
         void set_child_pointer(
-                const uint32_t childID,
+                const int32_t childID,
                 const T1 child_pointer,
                 std::vector<T1>& child_pointer_vector,
-                std::queue<uint32_t>& free_childID_queue,
+                std::queue<int32_t>& free_childID_queue,
                 int32_t* const number_of_children)
         {
             child_pointer_vector[childID] = child_pointer;
@@ -43,11 +43,11 @@ namespace hierarchy
         }
 
     template<class T1>
-        uint32_t get_childID(std::vector<T1>& child_pointer_vector, std::queue<uint32_t>& free_childID_queue)
+        int32_t get_childID(std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue)
         {
             // This function is called eg. from `bind_child_to_parent`,
             // so that child instance gets an appropriate `childID`.
-            uint32_t childID;
+            int32_t childID;
 
             while (!free_childID_queue.empty())
             {
@@ -76,7 +76,7 @@ namespace hierarchy
         void bind_child_to_parent(
                 const T1 child_pointer,
                 std::vector<T1>& child_pointer_vector,
-                std::queue<uint32_t>& free_childID_queue,
+                std::queue<int32_t>& free_childID_queue,
                 int32_t* const number_of_children)
         {
             // If a class' instances have parents, this function must be
@@ -95,7 +95,7 @@ namespace hierarchy
                 std::unordered_map<std::string, T1>& child_hash_map,
                 const T1 child_pointer,
                 std::vector<T1>& child_pointer_vector,
-                std::queue<uint32_t>& free_childID_queue,
+                std::queue<int32_t>& free_childID_queue,
                 int32_t* const number_of_children)
         {
             // If a class' instances have parents, this function must be
@@ -120,7 +120,7 @@ namespace hierarchy
                 const T1 child_pointer,
                 const T2 new_parent_pointer,
                 std::vector<T1>& old_child_pointer_vector,
-                std::queue<uint32_t>& old_free_childID_queue,
+                std::queue<int32_t>& old_free_childID_queue,
                 int32_t* const old_number_of_children)
         {
             // Set pointer to this child to `nullptr` in the old parent.

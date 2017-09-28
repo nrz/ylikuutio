@@ -34,10 +34,10 @@ namespace ontology
             virtual ~VectorFont();
 
             // this method sets `Glyph` pointer.
-            void set_glyph_pointer(const uint32_t childID, ontology::Glyph* const child_pointer);
+            void set_glyph_pointer(const int32_t childID, ontology::Glyph* const child_pointer);
 
             // this method sets `Text3D` pointer.
-            void set_text3D_pointer(const uint32_t childID, ontology::Text3D* const child_pointer);
+            void set_text3D_pointer(const int32_t childID, ontology::Text3D* const child_pointer);
 
             // this method sets pointer to this species to nullptr, sets `parent_pointer` according to the input, and requests a new `childID` from the new material.
             void bind_to_new_parent(ontology::Material* const new_material_pointer);
@@ -57,9 +57,9 @@ namespace ontology
             template<class T1>
                 friend void set_name(std::string name, T1 entity);
             template<class T1>
-                friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<uint32_t>& free_childID_queue, int32_t* number_of_children);
+                friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, int32_t* number_of_children);
             template<class T1, class T2>
-                friend void hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent_pointer, std::vector<T1>& old_child_pointer_vector, std::queue<uint32_t>& old_free_childID_queue, int32_t* old_number_of_children);
+                friend void hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent_pointer, std::vector<T1>& old_child_pointer_vector, std::queue<int32_t>& old_free_childID_queue, int32_t* old_number_of_children);
 
         private:
             void bind_to_parent();
@@ -78,7 +78,7 @@ namespace ontology
             std::string font_file_format;         // type of the model file, eg. `"bmp"`.
             std::string font_filename;            // filename of the model file.
             GLfloat vertex_scaling_factor;
-            uint32_t childID;                     // vector font ID, set by `this->bind_to_parent()`.
+            int32_t childID;                      // vector font ID, set by `this->bind_to_parent()`.
             const char* char_font_file_format;
             const char* char_font_filename;
 
@@ -90,8 +90,8 @@ namespace ontology
 
             std::vector<ontology::Glyph*> glyph_pointer_vector;
             std::vector<ontology::Text3D*> text3D_pointer_vector;
-            std::queue<uint32_t> free_glyphID_queue;
-            std::queue<uint32_t> free_text3D_ID_queue;
+            std::queue<int32_t> free_glyphID_queue;
+            std::queue<int32_t> free_text3D_ID_queue;
             int32_t number_of_glyphs;
             int32_t number_of_text3Ds;
 

@@ -378,7 +378,7 @@ namespace ontology
 
     // Public callbacks end here.
 
-    void Universe::set_scene_pointer(uint32_t childID, ontology::Scene* child_pointer)
+    void Universe::set_scene_pointer(int32_t childID, ontology::Scene* child_pointer)
     {
         hierarchy::set_child_pointer(childID, child_pointer, this->scene_pointer_vector, this->free_sceneID_queue, &this->number_of_scenes);
     }

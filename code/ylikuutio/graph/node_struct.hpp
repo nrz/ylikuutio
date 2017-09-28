@@ -17,9 +17,9 @@ typedef struct NodeStruct
     {
         // constructor.
     }
-    uint32_t nodeID;
+    int32_t nodeID;
     graph::Graph* parent_pointer;
-    std::vector<uint32_t> neighbor_nodeIDs;
+    std::vector<int32_t> neighbor_nodeIDs;
 } NodeStruct;
 
 #endif

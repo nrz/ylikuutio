@@ -68,14 +68,14 @@ namespace callback_system
             template<class T1>
                 friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<uint32_t>& free_childID_queue, int32_t* number_of_children);
             template<class T1, class T2>
-                friend void hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent_pointer, std::vector<T1>& old_child_pointer_vector, std::queue<uint32_t>& old_free_childID_queue, int32_t* old_number_of_children);
+                friend void hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent_pointer, std::vector<T1>& old_child_pointer_vector, std::queue<int32_t>& old_free_childID_queue, int32_t* old_number_of_children);
 
         private:
             // this method sets a callback object pointer.
-            void set_callback_object_pointer(const uint32_t childID, callback_system::CallbackObject* const child_pointer);
+            void set_callback_object_pointer(const int32_t childID, callback_system::CallbackObject* const child_pointer);
 
             std::vector<callback_system::CallbackObject*> callback_object_pointer_vector;
-            std::queue<uint32_t> free_callback_objectID_queue;
+            std::queue<int32_t> free_callback_objectID_queue;
             int32_t number_of_callback_objects;
 
             std::vector<std::shared_ptr<datatypes::AnyValue>> return_values;

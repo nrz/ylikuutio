@@ -318,7 +318,7 @@ namespace ontology
 
         private:
             // this method sets a `Scene` pointer.
-            void set_scene_pointer(uint32_t childID, ontology::Scene* child_pointer);
+            void set_scene_pointer(int32_t childID, ontology::Scene* child_pointer);
 
             // this method stes the active `Scene`.
             void set_active_scene(ontology::Scene* scene);
@@ -333,7 +333,7 @@ namespace ontology
             float world_radius;
 
             std::vector<ontology::Scene*> scene_pointer_vector;
-            std::queue<uint32_t> free_sceneID_queue;
+            std::queue<int32_t> free_sceneID_queue;
             int32_t number_of_scenes;
 
             ontology::Scene* active_scene;

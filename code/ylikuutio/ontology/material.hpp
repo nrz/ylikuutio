@@ -58,9 +58,9 @@ namespace ontology
             template<class T1>
                 friend void set_name(std::string name, T1 entity);
             template<class T1>
-                friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<uint32_t>& free_childID_queue, int32_t* number_of_children);
+                friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, int32_t* number_of_children);
             template<class T1, class T2>
-                friend void hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent_pointer, std::vector<T1>& old_child_pointer_vector, std::queue<uint32_t>& old_free_childID_queue, int32_t* old_number_of_children);
+                friend void hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent_pointer, std::vector<T1>& old_child_pointer_vector, std::queue<int32_t>& old_free_childID_queue, int32_t* old_number_of_children);
 
         private:
             void bind_to_parent();
@@ -73,13 +73,13 @@ namespace ontology
             int32_t get_number_of_descendants() override;
 
             // this method sets `Species` pointer.
-            void set_species_pointer(const uint32_t childID, ontology::Species* const child_pointer);
+            void set_species_pointer(const int32_t childID, ontology::Species* const child_pointer);
 
             // this method sets `VectorFont` pointer.
-            void set_vector_font_pointer(const uint32_t childID, ontology::VectorFont* const child_pointer);
+            void set_vector_font_pointer(const int32_t childID, ontology::VectorFont* const child_pointer);
 
             // this method sets `ChunkMaster` pointer.
-            void set_chunk_master_pointer(const uint32_t childID, space_partition::ChunkMaster* const child_pointer);
+            void set_chunk_master_pointer(const int32_t childID, space_partition::ChunkMaster* const child_pointer);
 
             // this method sets a terrain `Species` pointer.
             void set_terrain_species_pointer(ontology::Species* const terrain_species_pointer);
@@ -94,16 +94,16 @@ namespace ontology
             std::vector<ontology::Species*> species_pointer_vector;
             std::vector<ontology::VectorFont*> vector_font_pointer_vector;
             std::vector<space_partition::ChunkMaster*> chunk_master_pointer_vector;
-            std::queue<uint32_t> free_speciesID_queue;
-            std::queue<uint32_t> free_vector_fontID_queue;
-            std::queue<uint32_t> free_chunk_masterID_queue;
+            std::queue<int32_t> free_speciesID_queue;
+            std::queue<int32_t> free_vector_fontID_queue;
+            std::queue<int32_t> free_chunk_masterID_queue;
             int32_t number_of_species;
             int32_t number_of_vector_fonts;
             int32_t number_of_chunk_masters;
 
             std::string texture_file_format;       // type of the model file, eg. `"bmp"`.
             std::string texture_filename;          // filename of the model file.
-            uint32_t childID;                      // material ID, set by `this->bind_to_parent()`.
+            int32_t childID;                       // material ID, set by `this->bind_to_parent()`.
             const char* char_texture_file_format;
             const char* char_texture_filename;
     };
