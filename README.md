@@ -2,11 +2,9 @@
 A hobby project of mine. Work in progress.
 
 ## License
-Ylikuutio 3D engine is under The GNU General Public License 3, or
-(at your option) any later version. See COPYING file. Please note that
-my other software products which use Ylikuutio 3D engine are not
-necessarily under The GNU General Public License 3 and may have more
-restrictive licenses. All my code copyright (C) 2016-2017 Antti Nuortimo.
+Ylikuutio 3D engine is under The GNU General Public License 3,
+or (at your option) any later version. See COPYING file.
+All my code copyright (C) 2016-2017 Antti Nuortimo.
 
 The source code from http://www.opengl-tutorial.org/ is licensed
 under WTFPL Public Licence version 2.
