@@ -91,10 +91,6 @@ if(ENABLE_SCRIPTING_WITH_TINYSCHEME)
         )
 endif()
 
-include_directories(
-    external/pugixml/src/
-    )
-
 if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
     include_directories(
         external/googletest/googletest/include/
@@ -200,21 +196,10 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
     include_directories(${GTEST_INCLUDE_DIRS})
 endif()
 
-# include_directories(
-#     external/AntTweakBar-1.16/include/
-#     external/glfw-3.0.3/include/GLFW/
-#     external/glm-0.9.4.0/
-#     external/glew-1.9.0/include/
-#     external/assimp-3.0.1270/include/
-#     external/bullet-2.81-rev2613/src/
-#     .
-#     )
-
 set(ALL_LIBS
     ${OPENGL_LIBRARY}
     assimp
     GLEW_200
-    # GDAL_211
     pugixml
     )
 
