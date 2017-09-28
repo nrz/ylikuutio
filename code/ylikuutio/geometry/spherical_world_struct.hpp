@@ -1,12 +1,15 @@
 #ifndef __SPHERICAL_WORLD_STRUCT_HPP_INCLUDED
 #define __SPHERICAL_WORLD_STRUCT_HPP_INCLUDED
 
+// Include standard headers
+#include <cmath> // NAN, std::isnan, std::pow
+
 namespace geometry
 {
     typedef struct SphericalWorldStruct
     {
         SphericalWorldStruct()
-            : SRTM_latitude_step_in_degrees(1.0f/1200.0f), SRTM_longitude_step_in_degrees(1.0f/1200.0f)
+            : southern_latitude(NAN), northern_latitude(NAN), western_longitude(NAN), eastern_longitude(NAN), SRTM_latitude_step_in_degrees(1.0f/1200.0f), SRTM_longitude_step_in_degrees(1.0f/1200.0f)
         {
             // constructor.
         }
