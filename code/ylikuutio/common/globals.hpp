@@ -50,10 +50,6 @@
 #include <unordered_map> // std::unordered_map
 #include <vector>   // std::vector
 
-#ifndef PI
-#define PI 3.14159265359f
-#endif
-
 namespace config
 {
     class SettingMaster;
@@ -113,64 +109,12 @@ typedef struct
     const char* vertical_alignment;
 } PrintingStruct;
 
-typedef struct SphericalWorldStruct
-{
-    SphericalWorldStruct()
-        : SRTM_latitude_step_in_degrees(1.0f/1200.0f), SRTM_longitude_step_in_degrees(1.0f/1200.0f)
-    {
-        // constructor.
-    }
-    double southern_latitude;
-    double northern_latitude;
-    double western_longitude;
-    double eastern_longitude;
-    double SRTM_latitude_step_in_degrees;
-    double SRTM_longitude_step_in_degrees;
-} SphericalWorldStruct;
-
-typedef struct TriangulateQuadsStruct
-{
-    TriangulateQuadsStruct()
-        : should_ylikuutio_use_real_texture_coordinates(true), x_step(1), z_step(1)
-    {
-        // constructor.
-    }
-    int32_t image_width;
-    int32_t image_height;
-    int32_t x_step;
-    int32_t z_step;
-    std::string triangulation_type;
-    bool should_ylikuutio_use_real_texture_coordinates;
-    double sphere_radius;
-    SphericalWorldStruct spherical_world_struct;
-} TriangulateQuadsStruct;
-
-typedef struct TriangulatePolygonsStruct
-{
-    TriangulatePolygonsStruct()
-        : should_ylikuutio_use_real_texture_coordinates(true)
-    {
-        // constructor.
-    }
-    std::vector<std::vector<glm::vec2>>* input_vertices;
-    bool should_ylikuutio_use_real_texture_coordinates;
-} TriangulatePolygonsStruct;
-
 typedef struct
 {
     uint32_t image_width;
     uint32_t image_height;
     bool should_ylikuutio_use_real_texture_coordinates;
 } BilinearInterpolationStruct;
-
-typedef struct
-{
-    uint32_t image_width;
-    uint32_t image_height;
-    double sphere_radius;
-    bool is_bilinear_interpolation_in_use;
-    SphericalWorldStruct spherical_world_struct;
-} TransformationStruct;
 
 typedef std::shared_ptr<datatypes::AnyValue> (*InputParametersToAnyValueCallback) (
         callback_system::CallbackEngine*,

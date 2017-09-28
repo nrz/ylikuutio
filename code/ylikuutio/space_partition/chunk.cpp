@@ -42,7 +42,7 @@ namespace space_partition
         // this `Chunk`.
     }
 
-    void Chunk::set_triangle3D_pointer(uint32_t childID, space_partition::Triangle3D* child_pointer)
+    void Chunk::set_triangle3D_pointer(int32_t childID, space_partition::Triangle3D* child_pointer)
     {
         hierarchy::set_child_pointer(childID, child_pointer, this->triangle3D_pointer_vector, this->free_triangle3D_ID_queue, &this->number_of_triangle3Ds);
     }

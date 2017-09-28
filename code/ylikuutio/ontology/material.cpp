@@ -126,17 +126,17 @@ namespace ontology
         return -1;
     }
 
-    void Material::set_species_pointer(const uint32_t childID, ontology::Species* const child_pointer)
+    void Material::set_species_pointer(const int32_t childID, ontology::Species* const child_pointer)
     {
         hierarchy::set_child_pointer(childID, child_pointer, this->species_pointer_vector, this->free_speciesID_queue, &this->number_of_species);
     }
 
-    void Material::set_vector_font_pointer(const uint32_t childID, ontology::VectorFont* const child_pointer)
+    void Material::set_vector_font_pointer(const int32_t childID, ontology::VectorFont* const child_pointer)
     {
         hierarchy::set_child_pointer(childID, child_pointer, this->vector_font_pointer_vector, this->free_vector_fontID_queue, &this->number_of_vector_fonts);
     }
 
-    void Material::set_chunk_master_pointer(const uint32_t childID, space_partition::ChunkMaster* const child_pointer)
+    void Material::set_chunk_master_pointer(const int32_t childID, space_partition::ChunkMaster* const child_pointer)
     {
         hierarchy::set_child_pointer(childID, child_pointer, this->chunk_master_pointer_vector, this->free_chunk_masterID_queue, &this->number_of_chunk_masters);
     }

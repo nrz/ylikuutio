@@ -32,9 +32,9 @@ namespace space_partition
             template<class T1>
                 friend void ontology::render_children(std::vector<T1>& child_pointer_vector);
             template<class T1>
-                friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<uint32_t>& free_childID_queue, int32_t* number_of_children);
+                friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, int32_t* number_of_children);
             template<class T1, class T2>
-                friend void hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent_pointer, std::vector<T1>& old_child_pointer_vector, std::queue<uint32_t>& old_free_childID_queue, int32_t* old_number_of_children);
+                friend void hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent_pointer, std::vector<T1>& old_child_pointer_vector, std::queue<int32_t>& old_free_childID_queue, int32_t* old_number_of_children);
 
         private:
             void bind_to_parent();
@@ -43,9 +43,9 @@ namespace space_partition
             void render();
 
             // this method sets `Chunk` pointer.
-            void set_chunk_pointer(uint32_t childID, space_partition::Chunk* child_pointer);
+            void set_chunk_pointer(int32_t childID, space_partition::Chunk* child_pointer);
 
-            uint32_t childID;                     // `ChunkMaster` ID, returned by `ontology::Material->get_chunk_masterID()`.
+            int32_t childID;                     // `ChunkMaster` ID, returned by `ontology::Material->get_chunk_masterID()`.
 
             // Callback used to get the content based on x, y, z.
             GetContentCallback get_content_callback;
@@ -53,7 +53,7 @@ namespace space_partition
             ontology::Material* parent_pointer;  // pointer to `Material`.
 
             std::vector<space_partition::Chunk*> chunk_pointer_vector;
-            std::queue<uint32_t> free_chunkID_queue;
+            std::queue<int32_t> free_chunkID_queue;
             int32_t number_of_chunks;
     };
 };

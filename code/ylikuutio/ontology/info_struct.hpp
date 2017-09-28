@@ -27,7 +27,7 @@ typedef struct InfoStruct
         // constructor.
     }
     std::shared_ptr<datatypes::AnyValue> memory_address;
-    uint32_t childID;
+    int32_t childID;
     std::string name;
     glm::vec3 coordinate_vector;
     int32_t number_of_children;

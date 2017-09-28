@@ -102,12 +102,12 @@ namespace ontology
         return -1;
     }
 
-    void Shader::set_material_pointer(const uint32_t childID, ontology::Material* const child_pointer)
+    void Shader::set_material_pointer(const int32_t childID, ontology::Material* const child_pointer)
     {
         hierarchy::set_child_pointer(childID, child_pointer, this->material_pointer_vector, this->free_materialID_queue, &this->number_of_materials);
     }
 
-    void Shader::set_symbiosis_pointer(const uint32_t childID, ontology::Symbiosis* const child_pointer)
+    void Shader::set_symbiosis_pointer(const int32_t childID, ontology::Symbiosis* const child_pointer)
     {
         hierarchy::set_child_pointer(childID, child_pointer, this->symbiosis_pointer_vector, this->free_symbiosisID_queue, &this->number_of_symbioses);
     }

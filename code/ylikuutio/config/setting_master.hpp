@@ -107,7 +107,7 @@ namespace config
             ontology::Universe* parent_pointer;
 
             std::vector<config::Setting*> setting_pointer_vector;
-            std::queue<uint32_t> free_settingID_queue;
+            std::queue<int32_t> free_settingID_queue;
             int32_t number_of_settings;
 
             std::unordered_map<std::string, config::Setting*> setting_pointer_map;

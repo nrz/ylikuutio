@@ -51,7 +51,7 @@ namespace ontology
             void bind_to_new_parent(ontology::VectorFont* const new_vector_font_pointer);
 
             // this method sets a object pointer.
-            void set_object_pointer(const uint32_t childID, ontology::Object* const child_pointer);
+            void set_object_pointer(const int32_t childID, ontology::Object* const child_pointer);
 
             void set_name(const std::string& name);
 
@@ -59,7 +59,7 @@ namespace ontology
             template<class T1>
                 friend void set_name(std::string name, T1 entity);
             template<class T1>
-                friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<uint32_t>& free_childID_queue, int32_t* number_of_children);
+                friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, int32_t* number_of_children);
 
         private:
             void bind_to_parent();
@@ -68,8 +68,6 @@ namespace ontology
 
             ontology::VectorFont* parent_pointer; // pointer to `VectorFont`.
 
-            uint32_t childID;                     // text3D ID, set by `this->bind_to_parent()`.
-
             glm::vec3 original_scale_vector;      // original scale vector.
             GLfloat rotate_angle;                 // rotate angle.
             glm::vec3 coordinate_vector;          // coordinate vector.
@@ -77,7 +75,7 @@ namespace ontology
             glm::vec3 translate_vector;           // translate vector.
 
             std::vector<ontology::Object*> object_pointer_vector;
-            std::queue<uint32_t> free_objectID_queue;
+            std::queue<int32_t> free_objectID_queue;
             int32_t number_of_objects;
     };
 }

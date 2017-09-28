@@ -1,7 +1,7 @@
 #ifndef __POLYGON_TRIANGULATION_HPP_INCLUDED
 #define __POLYGON_TRIANGULATION_HPP_INCLUDED
 
-#include "code/ylikuutio/common/globals.hpp"
+#include "triangulate_polygons_struct.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -15,13 +15,13 @@
 namespace geometry
 {
     bool triangulate_simple_polygon(
-            const TriangulatePolygonsStruct triangulate_polygons_struct,
+            const geometry::TriangulatePolygonsStruct triangulate_polygons_struct,
             std::vector<glm::vec3>& out_vertices,
             std::vector<glm::vec2>& out_UVs,
             std::vector<glm::vec3>& out_normals);
 
     bool triangulate_polygons(
-            const TriangulatePolygonsStruct triangulate_polygons_struct,
+            const geometry::TriangulatePolygonsStruct triangulate_polygons_struct,
             std::vector<glm::vec3>& out_vertices,
             std::vector<glm::vec2>& out_UVs,
             std::vector<glm::vec3>& out_normals);

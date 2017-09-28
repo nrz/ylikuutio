@@ -157,12 +157,12 @@ namespace ontology
         return -1;
     }
 
-    void VectorFont::set_glyph_pointer(const uint32_t childID, ontology::Glyph* const child_pointer)
+    void VectorFont::set_glyph_pointer(const int32_t childID, ontology::Glyph* const child_pointer)
     {
         hierarchy::set_child_pointer(childID, child_pointer, this->glyph_pointer_vector, this->free_glyphID_queue, &this->number_of_glyphs);
     }
 
-    void VectorFont::set_text3D_pointer(const uint32_t childID, ontology::Text3D* const child_pointer)
+    void VectorFont::set_text3D_pointer(const int32_t childID, ontology::Text3D* const child_pointer)
     {
         hierarchy::set_child_pointer(childID, child_pointer, this->text3D_pointer_vector, this->free_text3D_ID_queue, &this->number_of_text3Ds);
     }

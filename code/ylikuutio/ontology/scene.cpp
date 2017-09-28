@@ -12,6 +12,7 @@
 #include "shader.hpp"
 #include "render_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
+#include "code/ylikuutio/common/pi.hpp"
 
 // Include GLEW
 #ifndef __GL_GLEW_H_INCLUDED
@@ -117,7 +118,7 @@ namespace ontology
         ontology::set_name(name, this);
     }
 
-    void Scene::set_shader_pointer(const uint32_t childID, ontology::Shader* const child_pointer)
+    void Scene::set_shader_pointer(const int32_t childID, ontology::Shader* const child_pointer)
     {
         hierarchy::set_child_pointer(childID, child_pointer, this->shader_pointer_vector, this->free_shaderID_queue, &this->number_of_shaders);
     }

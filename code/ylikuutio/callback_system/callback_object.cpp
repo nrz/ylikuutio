@@ -57,6 +57,7 @@ namespace callback_system
     CallbackObject::CallbackObject(callback_system::CallbackEngine* parent_pointer)
     {
         // constructor.
+        this->callback = nullptr;
         this->parent_pointer = parent_pointer;
 
         // get childID from the CallbackEngine and set pointer to this CallbackObject.
@@ -87,7 +88,7 @@ namespace callback_system
         }
     }
 
-    void CallbackObject::set_callback_parameter_pointer(const uint32_t childID, callback_system::CallbackParameter* const child_pointer)
+    void CallbackObject::set_callback_parameter_pointer(const int32_t childID, callback_system::CallbackParameter* const child_pointer)
     {
         this->callback_parameter_pointer_vector[childID] = child_pointer;
 

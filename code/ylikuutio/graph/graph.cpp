@@ -20,17 +20,17 @@ namespace graph
         this->number_of_nodes = 0;
     }
 
-    void Graph::set_node_pointer(uint32_t childID, graph::Node* child_pointer)
+    void Graph::set_node_pointer(int32_t childID, graph::Node* child_pointer)
     {
         hierarchy::set_child_pointer(childID, child_pointer, this->node_pointer_vector, this->free_nodeID_queue, &this->number_of_nodes);
     }
 
-    graph::Node* Graph::get_node_pointer(uint32_t childID)
+    graph::Node* Graph::get_node_pointer(int32_t childID)
     {
         return this->node_pointer_vector[childID];
     }
 
-    uint32_t Graph::get_nodeID()
+    int32_t Graph::get_nodeID()
     {
         return hierarchy::get_childID(this->node_pointer_vector, this->free_nodeID_queue);
     }

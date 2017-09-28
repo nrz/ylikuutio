@@ -1,19 +1,28 @@
 #ifndef __QUAD_TRIANGULATION_HPP_INCLUDED
 #define __QUAD_TRIANGULATION_HPP_INCLUDED
 
+#ifndef PI
+#define PI 3.14159265359f
+#endif
+
 #ifndef GLM_FORCE_RADIANS
 #define GLM_FORCE_RADIANS
 #define DEGREES_TO_RADIANS(x) (x * PI / 180.0f)
 #endif
 
+#include "triangulate_quads_struct.hpp"
 #include "face_normals.hpp"
 #include "vertex_normals.hpp"
 #include "vertices.hpp"
 #include "triangulation_enums.hpp"
 #include "triangulation_templates.hpp"
+#include "triangulation_templates.hpp"
 #include "indexing.hpp"
+#include "code/ylikuutio/geometry/spherical_world_struct.hpp"
+#include "code/ylikuutio/geometry/transformation_struct.hpp"
 #include "code/ylikuutio/geometry/transformation.hpp"
-#include "code/ylikuutio/common/globals.hpp"
+#include "code/ylikuutio/geometry/transformation.hpp"
+#include "code/ylikuutio/common/pi.hpp"
 
 // Include GLEW
 #ifndef __GL_GLEW_H_INCLUDED
@@ -37,7 +46,7 @@ namespace geometry
     template<class T1>
         bool triangulate_quads(
                 const T1* input_vertex_pointer,
-                const TriangulateQuadsStruct triangulate_quads_struct,
+                const geometry::TriangulateQuadsStruct triangulate_quads_struct,
                 std::vector<glm::vec3>& out_vertices,
                 std::vector<glm::vec2>& out_UVs,
                 std::vector<glm::vec3>& out_normals)
@@ -52,7 +61,7 @@ namespace geometry
             const int32_t actual_image_height = (image_height - 1) / z_step + 1;
             const std::string triangulation_type = triangulate_quads_struct.triangulation_type;
             double sphere_radius = triangulate_quads_struct.sphere_radius;
-            const SphericalWorldStruct spherical_world_struct = triangulate_quads_struct.spherical_world_struct;
+            const geometry::SphericalWorldStruct spherical_world_struct = triangulate_quads_struct.spherical_world_struct;
 
             if (image_width < 2 || image_height < 2 || actual_image_width < 2 || actual_image_height < 2)
             {
@@ -70,6 +79,7 @@ namespace geometry
             bool is_southwest_northeast_edges_in_use = false;
             bool is_southeast_northwest_edges_in_use = false;
             bool is_triangulation_type_valid = false;
+            int32_t n_faces_for_each_vertex;
 
             if (std::strcmp(char_triangulation_type, "bilinear_interpolation") == 0)
             {
@@ -80,6 +90,7 @@ namespace geometry
                 // *---*
                 is_bilinear_interpolation_in_use = true;
                 is_triangulation_type_valid = true;
+                n_faces_for_each_vertex = 4;
             }
             else if ((std::strcmp(char_triangulation_type, "southwest_northeast_edges") == 0) || (std::strcmp(char_triangulation_type, "northeast_southwest_edges") == 0))
             {
@@ -90,6 +101,7 @@ namespace geometry
                 // *---*
                 is_southwest_northeast_edges_in_use = true;
                 is_triangulation_type_valid = true;
+                n_faces_for_each_vertex = 2;
             }
             else if ((std::strcmp(char_triangulation_type, "southeast_northwest_edges") == 0) || (std::strcmp(char_triangulation_type, "northwest_southeast_edges") == 0))
             {
@@ -100,6 +112,7 @@ namespace geometry
                 // *---*
                 is_southeast_northwest_edges_in_use = true;
                 is_triangulation_type_valid = true;
+                n_faces_for_each_vertex = 2;
             }
 
             std::cout << "triangulation type in use: " << triangulation_type << "\n";
@@ -149,22 +162,6 @@ namespace geometry
                 return false;
             }
 
-            int32_t n_faces_for_each_vertex;
-
-            if (is_bilinear_interpolation_in_use)
-            {
-                n_faces_for_each_vertex = 4;
-            }
-            else if (is_southwest_northeast_edges_in_use || is_southeast_northwest_edges_in_use)
-            {
-                n_faces_for_each_vertex = 2;
-            }
-            else
-            {
-                // triangulation type not defined!
-                return false;
-            }
-
             std::cout << "image width: " << image_width << " pixels.\n";
             std::cout << "image height: " << image_height << " pixels.\n";
 
@@ -206,7 +203,7 @@ namespace geometry
                 // y = rho * sin(theta) * sin(phi)
                 // z = rho * cos(theta)
 
-                TransformationStruct transformation_struct;
+                geometry::TransformationStruct transformation_struct;
                 transformation_struct.image_width = image_width;
                 transformation_struct.image_height = image_height;
                 transformation_struct.sphere_radius = sphere_radius;

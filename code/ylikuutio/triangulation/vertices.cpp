@@ -1,6 +1,6 @@
 #include "vertices.hpp"
 #include "indexing.hpp"
-#include "code/ylikuutio/common/globals.hpp"
+#include "triangulate_quads_struct.hpp"
 
 // Include GLEW
 #ifndef __GL_GLEW_H_INCLUDED
@@ -45,7 +45,7 @@ namespace geometry
     }
 
     bool define_vertices_UVs_and_normals(
-            const TriangulateQuadsStruct triangulate_quads_struct,
+            const geometry::TriangulateQuadsStruct triangulate_quads_struct,
             std::vector<glm::vec3>& temp_vertices,
             std::vector<glm::vec2>& temp_UVs,
             std::vector<glm::vec3>& temp_normals,

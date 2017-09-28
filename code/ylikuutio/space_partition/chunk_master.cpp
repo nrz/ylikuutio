@@ -36,7 +36,7 @@ namespace space_partition
         this->parent_pointer->set_chunk_master_pointer(this->childID, nullptr);
     }
 
-    void ChunkMaster::set_chunk_pointer(uint32_t childID, space_partition::Chunk* child_pointer)
+    void ChunkMaster::set_chunk_pointer(int32_t childID, space_partition::Chunk* child_pointer)
     {
         hierarchy::set_child_pointer(childID, child_pointer, this->chunk_pointer_vector, this->free_chunkID_queue, &this->number_of_chunks);
     }
