@@ -57,6 +57,7 @@ namespace callback_system
     CallbackObject::CallbackObject(callback_system::CallbackEngine* parent_pointer)
     {
         // constructor.
+        this->callback = nullptr;
         this->parent_pointer = parent_pointer;
 
         // get childID from the CallbackEngine and set pointer to this CallbackObject.
