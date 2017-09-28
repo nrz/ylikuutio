@@ -1,5 +1,5 @@
 #include "polygon_triangulation.hpp"
-#include "code/ylikuutio/common/globals.hpp"
+#include "triangulate_polygons_struct.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -8,12 +8,13 @@
 #endif
 
 // Include standard headers
+#include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
 
 namespace geometry
 {
     bool triangulate_simple_polygon(
-            const TriangulatePolygonsStruct triangulate_polygons_struct,
+            const geometry::TriangulatePolygonsStruct triangulate_polygons_struct,
             std::vector<glm::vec3>& out_vertices,
             std::vector<glm::vec2>& out_UVs,
             std::vector<glm::vec3>& out_normals)
@@ -23,7 +24,7 @@ namespace geometry
     }
 
     bool triangulate_polygons(
-            const TriangulatePolygonsStruct triangulate_polygons_struct,
+            const geometry::TriangulatePolygonsStruct triangulate_polygons_struct,
             std::vector<glm::vec3>& out_vertices,
             std::vector<glm::vec2>& out_UVs,
             std::vector<glm::vec3>& out_normals)

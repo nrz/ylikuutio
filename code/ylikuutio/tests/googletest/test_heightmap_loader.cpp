@@ -1,4 +1,6 @@
 #include "gtest/gtest.h"
+#include "code/ylikuutio/geometry/spherical_world_struct.hpp"
+#include "code/ylikuutio/triangulation/triangulate_quads_struct.hpp"
 #include "code/ylikuutio/triangulation/triangulation_enums.hpp"
 #include "code/ylikuutio/triangulation/triangulation_templates.hpp"
 #include "code/ylikuutio/triangulation/quad_triangulation.hpp"
@@ -751,11 +753,11 @@ TEST(a_2x2_world_must_be_triangulated_appropriately, bilinear_interpolation)
     std::vector<glm::vec2> UVs;      // UVs of the object.
     std::vector<glm::vec3> normals;  // normals of the object.
 
-    TriangulateQuadsStruct triangulate_quads_struct;
+    geometry::TriangulateQuadsStruct triangulate_quads_struct;
     triangulate_quads_struct.image_width = image_width;
     triangulate_quads_struct.image_height = image_height;
     triangulate_quads_struct.sphere_radius = NAN;
-    triangulate_quads_struct.spherical_world_struct = SphericalWorldStruct(); // not used, but is needed in the function call.
+    triangulate_quads_struct.spherical_world_struct = geometry::SphericalWorldStruct(); // not used, but is needed in the function call.
 
     triangulate_quads_struct.triangulation_type = "bilinear_interpolation";
 
@@ -860,11 +862,11 @@ TEST(a_2x2_world_must_be_triangulated_appropriately, southeast_northwest_edges)
     std::vector<glm::vec2> UVs;      // UVs of the object.
     std::vector<glm::vec3> normals;  // normals of the object.
 
-    TriangulateQuadsStruct triangulate_quads_struct;
+    geometry::TriangulateQuadsStruct triangulate_quads_struct;
     triangulate_quads_struct.image_width = image_width;
     triangulate_quads_struct.image_height = image_height;
     triangulate_quads_struct.sphere_radius = NAN;
-    triangulate_quads_struct.spherical_world_struct = SphericalWorldStruct(); // not used, but is needed in the function call.
+    triangulate_quads_struct.spherical_world_struct = geometry::SphericalWorldStruct(); // not used, but is needed in the function call.
 
     triangulate_quads_struct.triangulation_type = "southeast_northwest_edges";
 
@@ -939,11 +941,11 @@ TEST(a_2x2_world_must_be_triangulated_appropriately, southwest_northeast_edges)
     std::vector<glm::vec2> UVs;      // UVs of the object.
     std::vector<glm::vec3> normals;  // normals of the object.
 
-    TriangulateQuadsStruct triangulate_quads_struct;
+    geometry::TriangulateQuadsStruct triangulate_quads_struct;
     triangulate_quads_struct.image_width = image_width;
     triangulate_quads_struct.image_height = image_height;
     triangulate_quads_struct.sphere_radius = NAN;
-    triangulate_quads_struct.spherical_world_struct = SphericalWorldStruct(); // not used, but is needed in the function call.
+    triangulate_quads_struct.spherical_world_struct = geometry::SphericalWorldStruct(); // not used, but is needed in the function call.
 
     triangulate_quads_struct.triangulation_type = "southwest_northeast_edges";
 
@@ -1037,11 +1039,11 @@ TEST(a_3x3_world_must_be_triangulated_appropriately, southeast_northwest_edges)
     std::vector<glm::vec2> UVs;      // UVs of the object.
     std::vector<glm::vec3> normals;  // normals of the object.
 
-    TriangulateQuadsStruct triangulate_quads_struct;
+    geometry::TriangulateQuadsStruct triangulate_quads_struct;
     triangulate_quads_struct.image_width = image_width;
     triangulate_quads_struct.image_height = image_height;
     triangulate_quads_struct.sphere_radius = NAN;
-    triangulate_quads_struct.spherical_world_struct = SphericalWorldStruct(); // not used, but is needed in the function call.
+    triangulate_quads_struct.spherical_world_struct = geometry::SphericalWorldStruct(); // not used, but is needed in the function call.
 
     triangulate_quads_struct.triangulation_type = "southeast_northwest_edges";
 

@@ -1,0 +1,30 @@
+#ifndef __TRIANGULATE_QUADS_STRUCT_HPP_INCLUDED
+#define __TRIANGULATE_QUADS_STRUCT_HPP_INCLUDED
+
+#include "code/ylikuutio/geometry/spherical_world_struct.hpp"
+
+// Include standard headers
+#include <stdint.h> // uint32_t etc.
+#include <string>   // std::string
+
+namespace geometry
+{
+    typedef struct TriangulateQuadsStruct
+    {
+        TriangulateQuadsStruct()
+            : should_ylikuutio_use_real_texture_coordinates(true), x_step(1), z_step(1)
+        {
+            // constructor.
+        }
+        int32_t image_width;
+        int32_t image_height;
+        int32_t x_step;
+        int32_t z_step;
+        std::string triangulation_type;
+        bool should_ylikuutio_use_real_texture_coordinates;
+        double sphere_radius;
+        geometry::SphericalWorldStruct spherical_world_struct;
+    } TriangulateQuadsStruct;
+}
+
+#endif

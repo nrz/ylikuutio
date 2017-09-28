@@ -1,11 +1,16 @@
+#ifndef PI
+#define PI 3.14159265359f
+#endif
+
 #ifndef GLM_FORCE_RADIANS
 #define GLM_FORCE_RADIANS
 #define DEGREES_TO_RADIANS(x) (x * PI / 180.0f)
 #endif
 
 #include "transformation.hpp"
+#include "code/ylikuutio/geometry/spherical_world_struct.hpp"
 #include "code/ylikuutio/common/spherical_coordinates_struct.hpp"
-#include "code/ylikuutio/common/globals.hpp"
+#include "code/ylikuutio/common/pi.hpp"
 
 // Include GLEW
 #ifndef __GL_GLEW_H_INCLUDED
@@ -51,7 +56,7 @@ namespace geometry
         uint32_t image_height = transformation_struct.image_height;
         double sphere_radius = transformation_struct.sphere_radius;
         bool is_bilinear_interpolation_in_use = transformation_struct.is_bilinear_interpolation_in_use;
-        SphericalWorldStruct spherical_world_struct = transformation_struct.spherical_world_struct;
+        geometry::SphericalWorldStruct spherical_world_struct = transformation_struct.spherical_world_struct;
 
         // 3a. Transform spherical coordinates loaded from file (and computed this far as being in horizontal plane) to a curved surface.
         //

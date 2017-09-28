@@ -1,6 +1,10 @@
 #ifndef __SHADER_HPP_INCLUDED
 #define __SHADER_HPP_INCLUDED
 
+#ifndef PI
+#define PI 3.14159265359f
+#endif
+
 #ifndef GLM_FORCE_RADIANS
 #define GLM_FORCE_RADIANS
 #define DEGREES_TO_RADIANS(x) (x * PI / 180.0f)
@@ -12,7 +16,7 @@
 #include "entity_templates.hpp"
 #include "code/ylikuutio/loaders/shader_loader.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
-#include "code/ylikuutio/common/globals.hpp"
+#include "code/ylikuutio/common/pi.hpp"
 
 // Include GLEW
 #ifndef __GL_GLEW_H_INCLUDED

@@ -1,11 +1,17 @@
+#ifndef PI
+#define PI 3.14159265359f
+#endif
+
 #ifndef GLM_FORCE_RADIANS
 #define GLM_FORCE_RADIANS
 #define DEGREES_TO_RADIANS(x) (x * PI / 180.0f)
 #endif
 
 #include "srtm_heightmap_loader.hpp"
+#include "code/ylikuutio/geometry/spherical_world_struct.hpp"
+#include "code/ylikuutio/triangulation/triangulate_quads_struct.hpp"
 #include "code/ylikuutio/triangulation/quad_triangulation.hpp"
-#include "code/ylikuutio/common/globals.hpp"
+#include "code/ylikuutio/common/pi.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -171,13 +177,13 @@ namespace loaders
 
         delete image_data;
 
-        SphericalWorldStruct spherical_world_struct;
+        geometry::SphericalWorldStruct spherical_world_struct;
         spherical_world_struct.southern_latitude = southern_latitude; // must be float, though SRTM data is split between full degrees.
         spherical_world_struct.northern_latitude = northern_latitude; // must be float, though SRTM data is split between full degrees.
         spherical_world_struct.western_longitude = western_longitude; // must be float, though SRTM data is split between full degrees.
         spherical_world_struct.eastern_longitude = eastern_longitude; // must be float, though SRTM data is split between full degrees.
 
-        TriangulateQuadsStruct triangulate_quads_struct;
+        geometry::TriangulateQuadsStruct triangulate_quads_struct;
         triangulate_quads_struct.image_width = image_width_in_use;
         triangulate_quads_struct.image_height = image_height_in_use;
         triangulate_quads_struct.x_step = x_step;

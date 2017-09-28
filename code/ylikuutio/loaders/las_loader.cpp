@@ -1,3 +1,7 @@
+#ifndef PI
+#define PI 3.14159265359f
+#endif
+
 #ifndef GLM_FORCE_RADIANS
 #define GLM_FORCE_RADIANS
 #define DEGREES_TO_RADIANS(x) (x * PI / 180.0f)
@@ -5,7 +9,7 @@
 
 #include "las_loader.hpp"
 #include "code/ylikuutio/triangulation/quad_triangulation.hpp"
-#include "code/ylikuutio/common/globals.hpp"
+#include "code/ylikuutio/common/pi.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED

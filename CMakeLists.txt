@@ -255,6 +255,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/common/any_value.cpp
     code/ylikuutio/common/any_value.hpp
     code/ylikuutio/common/globals.hpp
+    code/ylikuutio/common/pi.hpp
     code/ylikuutio/common/spherical_coordinates_struct.hpp
 
     # config, in alphabetical order.
@@ -293,8 +294,10 @@ add_library(ylikuutio STATIC
     code/ylikuutio/geometry/line_segment3D.hpp
     code/ylikuutio/geometry/line_segment_line_segment_intersection.cpp
     code/ylikuutio/geometry/line_segment_line_segment_intersection.hpp
+    code/ylikuutio/geometry/spherical_world_struct.hpp
     code/ylikuutio/geometry/transformation.cpp
     code/ylikuutio/geometry/transformation.hpp
+    code/ylikuutio/geometry/transformation_struct.hpp
 
     # graph, in alphabetical order.
     code/ylikuutio/graph/graph.cpp
@@ -422,6 +425,8 @@ add_library(ylikuutio STATIC
     code/ylikuutio/triangulation/polygon_triangulation.cpp
     code/ylikuutio/triangulation/polygon_triangulation.hpp
     code/ylikuutio/triangulation/quad_triangulation.hpp
+    code/ylikuutio/triangulation/triangulate_polygons_struct.hpp
+    code/ylikuutio/triangulation/triangulate_quads_struct.hpp
     code/ylikuutio/triangulation/triangulation_enums.hpp
     code/ylikuutio/triangulation/triangulation_templates.hpp
     code/ylikuutio/triangulation/vertex_normals.cpp
@@ -517,6 +522,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/triangulation/face_normals.hpp
         code/ylikuutio/triangulation/indexing.hpp
         code/ylikuutio/triangulation/quad_triangulation.hpp
+        code/ylikuutio/triangulation/triangulate_quads_struct.hpp
         code/ylikuutio/triangulation/triangulation_enums.hpp
         code/ylikuutio/triangulation/vertex_normals.cpp
         code/ylikuutio/triangulation/vertex_normals.hpp

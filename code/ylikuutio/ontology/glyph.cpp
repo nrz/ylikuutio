@@ -3,6 +3,7 @@
 #include "object.hpp"
 #include "glyph_struct.hpp"
 #include "render_templates.hpp"
+#include "code/ylikuutio/triangulation/triangulate_polygons_struct.hpp"
 #include "code/ylikuutio/triangulation/polygon_triangulation.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
@@ -45,7 +46,7 @@ namespace ontology
         this->bind_to_parent();
 
         // TODO: implement triangulation of `Glyph` objects!
-        TriangulatePolygonsStruct triangulate_polygons_struct;
+        geometry::TriangulatePolygonsStruct triangulate_polygons_struct;
         triangulate_polygons_struct.input_vertices = this->glyph_vertex_data;
         bool triangulating_result = geometry::triangulate_polygons(
                 triangulate_polygons_struct,

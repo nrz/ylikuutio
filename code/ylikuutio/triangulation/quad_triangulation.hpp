@@ -1,19 +1,28 @@
 #ifndef __QUAD_TRIANGULATION_HPP_INCLUDED
 #define __QUAD_TRIANGULATION_HPP_INCLUDED
 
+#ifndef PI
+#define PI 3.14159265359f
+#endif
+
 #ifndef GLM_FORCE_RADIANS
 #define GLM_FORCE_RADIANS
 #define DEGREES_TO_RADIANS(x) (x * PI / 180.0f)
 #endif
 
+#include "triangulate_quads_struct.hpp"
 #include "face_normals.hpp"
 #include "vertex_normals.hpp"
 #include "vertices.hpp"
 #include "triangulation_enums.hpp"
 #include "triangulation_templates.hpp"
+#include "triangulation_templates.hpp"
 #include "indexing.hpp"
+#include "code/ylikuutio/geometry/spherical_world_struct.hpp"
+#include "code/ylikuutio/geometry/transformation_struct.hpp"
 #include "code/ylikuutio/geometry/transformation.hpp"
-#include "code/ylikuutio/common/globals.hpp"
+#include "code/ylikuutio/geometry/transformation.hpp"
+#include "code/ylikuutio/common/pi.hpp"
 
 // Include GLEW
 #ifndef __GL_GLEW_H_INCLUDED
@@ -37,7 +46,7 @@ namespace geometry
     template<class T1>
         bool triangulate_quads(
                 const T1* input_vertex_pointer,
-                const TriangulateQuadsStruct triangulate_quads_struct,
+                const geometry::TriangulateQuadsStruct triangulate_quads_struct,
                 std::vector<glm::vec3>& out_vertices,
                 std::vector<glm::vec2>& out_UVs,
                 std::vector<glm::vec3>& out_normals)
@@ -52,7 +61,7 @@ namespace geometry
             const int32_t actual_image_height = (image_height - 1) / z_step + 1;
             const std::string triangulation_type = triangulate_quads_struct.triangulation_type;
             double sphere_radius = triangulate_quads_struct.sphere_radius;
-            const SphericalWorldStruct spherical_world_struct = triangulate_quads_struct.spherical_world_struct;
+            const geometry::SphericalWorldStruct spherical_world_struct = triangulate_quads_struct.spherical_world_struct;
 
             if (image_width < 2 || image_height < 2 || actual_image_width < 2 || actual_image_height < 2)
             {
@@ -194,7 +203,7 @@ namespace geometry
                 // y = rho * sin(theta) * sin(phi)
                 // z = rho * cos(theta)
 
-                TransformationStruct transformation_struct;
+                geometry::TransformationStruct transformation_struct;
                 transformation_struct.image_width = image_width;
                 transformation_struct.image_height = image_height;
                 transformation_struct.sphere_radius = sphere_radius;
