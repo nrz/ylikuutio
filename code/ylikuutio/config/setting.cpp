@@ -21,6 +21,7 @@ namespace config
         this->parent_pointer = setting_struct.setting_master_pointer;
         this->activate_callback = setting_struct.activate_callback;
         this->read_callback = setting_struct.read_callback;
+        this->childID = -1;
 
         if (this->parent_pointer == nullptr)
         {
