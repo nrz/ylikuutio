@@ -98,8 +98,12 @@ namespace loaders
         char* point_data_pointer = point_data;
 
         // Read the point data from the file into the buffer.
-        // TODO: add check for file reading!
-        std::fread(point_data, 1, file_size, file);
+        if (std::fread(point_data, 1, file_size, file) != file_size)
+        {
+            std::cerr << "Error while reading " << ASCII_grid_file_name << "\n";
+            std::fclose(file);
+            return false;
+        }
 
         // Everything is in memory now, the file can be closed
         std::fclose(file);
