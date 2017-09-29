@@ -96,7 +96,7 @@ namespace loaders
         {
             std::cerr << "Moving BMP file position indicator failed.\n";
             std::fclose(file);
-            delete image_data;
+            delete[] image_data;
             return nullptr;
         }
 
@@ -105,7 +105,7 @@ namespace loaders
         {
             std::cerr << "Reading image data from file failed.\n";
             std::fclose(file);
-            delete image_data;
+            delete[] image_data;
             return nullptr;
         }
 
