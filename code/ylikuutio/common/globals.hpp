@@ -94,14 +94,19 @@ typedef struct SettingStruct
     bool should_ylikuutio_call_activate_callback_now;
 } SettingStruct;
 
-typedef struct
+typedef struct PrintingStruct
 {
-    uint32_t screen_width;
-    uint32_t screen_height;
-    uint32_t x;
-    uint32_t y;
-    uint32_t text_size;
-    uint32_t font_size;
+    PrintingStruct()
+        : screen_width(-1), screen_height(-1), x(-1), y(-1), text_size(-1), font_size(-1), text_char(nullptr), char_font_texture_file_format(nullptr), horizontal_alignment(nullptr), vertical_alignment(nullptr)
+    {
+        // constructor.
+    }
+    int32_t screen_width;
+    int32_t screen_height;
+    int32_t x;
+    int32_t y;
+    int32_t text_size;
+    int32_t font_size;
     std::string text;
     const char* text_char;
     const char* char_font_texture_file_format;
