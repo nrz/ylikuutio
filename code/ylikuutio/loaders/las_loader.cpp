@@ -145,7 +145,7 @@ namespace loaders
         if (fseek(file, offset_to_point_data, SEEK_SET) != 0)
         {
             std::cerr << "moving file pointer of file " << laser_scaling_file_name << " failed!\n";
-            delete point_data;
+            delete[] point_data;
             std::fclose(file);
             return false;
         }
@@ -172,7 +172,7 @@ namespace loaders
             laser_points.push_back(glm::vec3(x, y, z));
         }
 
-        delete point_data;
+        delete[] point_data;
 
         return true;
     }
