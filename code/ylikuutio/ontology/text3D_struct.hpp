@@ -19,7 +19,7 @@ namespace ontology
 typedef struct Text3DStruct
 {
     Text3DStruct()
-        : parent_pointer(nullptr), original_scale_vector(glm::vec3(1.0f, 1.0f, 1.0f)), rotate_angle(NAN)
+        : parent_pointer(nullptr), text_string_char(nullptr), original_scale_vector(glm::vec3(1.0f, 1.0f, 1.0f)), rotate_angle(NAN)
     {
         // constructor.
     }
