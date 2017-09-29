@@ -135,9 +135,12 @@ namespace loaders
         }
 
         /* get the surface desc */
-        // TODO: add check for file reading!
-        // TODO: store hardcoded value 4 into a variable.
-        std::fread(&header, 124, 1, fp);
+        if (std::fread(&header, 124, 1, fp) != 1)
+        {
+            std::cerr << "Error while reading " << filename << "\n";
+            std::fclose(fp);
+            return 0;
+        }
 
         uint32_t height      = *(uint32_t*) &header[8];
         uint32_t width       = *(uint32_t*) &header[12];
