@@ -62,8 +62,15 @@ namespace ontology
 
         // constructor.
         this->world_radius = NAN; // world radius is NAN as long it doesn't get `set` by `SettingMaster`.
+        this->terrain_species_pointer = nullptr;
+        this->active_scene = nullptr;
         this->setting_master_pointer = nullptr;
         this->console_pointer = nullptr;
+
+        this->background_red = NAN;
+        this->background_green = NAN;
+        this->background_blue = NAN;
+        this->background_alpha = NAN;
 
         // Variables related to the window.
         this->window = nullptr;
@@ -89,6 +96,11 @@ namespace ontology
         this->is_flight_mode_in_use = false;
         this->is_first_turbo_pressed = false;
         this->is_second_turbo_pressed = false;
+
+        this->horizontal_angle = NAN;
+        this->vertical_angle = NAN;
+        this->turbo_factor = NAN;
+        this->twin_turbo_factor = NAN;
 
         this->speed = 5.0f; // 5.0 units / second
         this->mouse_speed = 0.005f;
