@@ -14,6 +14,7 @@ namespace ontology
     Symbiosis::Symbiosis(const SymbiosisStruct symbiosis_struct)
     {
         // constructor.
+        this->parent_pointer = symbiosis_struct.parent_pointer;
 
         this->number_of_materials = 0;
         this->number_of_species = 0;
