@@ -37,18 +37,18 @@ namespace ontology
 
             static ontology::Entity* create_Universe();
             static ontology::Entity* create_Scene(ontology::Universe* const universe, const float water_level);
-            static ontology::Entity* create_Shader(const ShaderStruct shader_struct);
-            static ontology::Entity* create_Material(const MaterialStruct material_struct);
-            static ontology::Entity* create_Species(const SpeciesStruct species_struct);
-            static ontology::Entity* create_Object(const ObjectStruct object_struct);
-            static ontology::Entity* create_VectorFont(const VectorFontStruct vector_font_struct);
-            static ontology::Entity* create_Text3D(const Text3DStruct text3D_struct);
+            static ontology::Entity* create_Shader(const ShaderStruct& shader_struct);
+            static ontology::Entity* create_Material(const MaterialStruct& material_struct);
+            static ontology::Entity* create_Species(const SpeciesStruct& species_struct);
+            static ontology::Entity* create_Object(const ObjectStruct& object_struct);
+            static ontology::Entity* create_VectorFont(const VectorFontStruct& vector_font_struct);
+            static ontology::Entity* create_Text3D(const Text3DStruct& text3D_struct);
             static ontology::Entity* create_Font2D(
-                    ontology::Universe* universe,
+                    ontology::Universe* const universe,
                     GLuint screen_width,
                     GLuint screen_height,
-                    std::string texture_filename,
-                    std::string font_texture_file_format);
+                    const std::string& texture_filename,
+                    const std::string& font_texture_file_format);
     };
 }
 
