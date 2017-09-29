@@ -145,7 +145,7 @@ namespace loaders
         if (vertex_data == nullptr)
         {
             std::cerr << "Reserving memory for vertex data failed.\n";
-            delete image_data;
+            delete[] image_data;
             std::fclose(file);
             return false;
         }
@@ -175,7 +175,7 @@ namespace loaders
             image_pointer -= sizeof(int16_t) * (image_width_in_use + true_image_width);
         }
 
-        delete image_data;
+        delete[] image_data;
 
         geometry::SphericalWorldStruct spherical_world_struct;
         spherical_world_struct.southern_latitude = southern_latitude; // must be float, though SRTM data is split between full degrees.
@@ -193,7 +193,7 @@ namespace loaders
         triangulate_quads_struct.spherical_world_struct = spherical_world_struct;
 
         bool result = geometry::triangulate_quads(vertex_data, triangulate_quads_struct, out_vertices, out_UVs, out_normals);
-        delete vertex_data;
+        delete[] vertex_data;
         return result;
     }
 }
