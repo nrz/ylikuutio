@@ -131,7 +131,7 @@ namespace loaders
 
         // Create a buffer.
         uint32_t size_of_point_data_record = sizes_of_point_record_formats[point_data_formatID];
-        uint32_t point_data_size = number_of_point_records * size_of_point_data_record;
+        uint64_t point_data_size = number_of_point_records * size_of_point_data_record;
         uint8_t* point_data = new uint8_t[point_data_size];
 
         if (point_data == nullptr)
