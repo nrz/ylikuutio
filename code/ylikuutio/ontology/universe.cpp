@@ -360,7 +360,7 @@ namespace ontology
 
             uint64_t memory_address = reinterpret_cast<uint64_t>((void*) entity);
             char memory_address_char_array[256];
-            snprintf(memory_address_char_array, sizeof(memory_address_char_array), "0x%08x", memory_address);
+            snprintf(memory_address_char_array, sizeof(memory_address_char_array), "0x%08x", static_cast<uint64_t>(memory_address));
 
             std::string entity_info = "memory address: ";
             entity_info += std::string(memory_address_char_array);
