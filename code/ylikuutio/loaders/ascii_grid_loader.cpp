@@ -157,7 +157,7 @@ namespace loaders
         if (vertex_data == nullptr)
         {
             std::cerr << "Reserving memory for vertex data failed.\n";
-            delete point_data;
+            delete[] point_data;
             return false;
         }
 
@@ -196,7 +196,7 @@ namespace loaders
             }
         }
 
-        delete point_data;
+        delete[] point_data;
 
         std::cout << "Triangulating ascii grid data.\n";
 
