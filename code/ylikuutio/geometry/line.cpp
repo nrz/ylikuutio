@@ -16,6 +16,7 @@ namespace geometry
         if (point1 == point2 || point1.size() != point2.size())
         {
             this->is_valid = false; // two identical points do not define a line.
+            this->are_points_defined = false;
             this->general_form_coefficients.push_back(NAN);
         }
         else
@@ -33,6 +34,7 @@ namespace geometry
     {
         // TODO: add checks for the validity of general form coefficients and general form constant!
         this->is_valid = true;
+        this->are_points_defined = true;
         this->general_form_coefficients = general_form_coefficients;
         this->general_form_constant = general_form_constant;
     }
