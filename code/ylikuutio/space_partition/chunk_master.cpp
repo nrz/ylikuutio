@@ -1,5 +1,6 @@
 #include "chunk_master.hpp"
 #include "chunk.hpp"
+#include "code/ylikuutio/ontology/material.hpp"
 #include "code/ylikuutio/ontology/render_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/common/globals.hpp"
@@ -15,11 +16,16 @@ namespace space_partition
                 &this->parent_pointer->number_of_chunk_masters);
     }
 
-    ChunkMaster::ChunkMaster(GetContentCallback get_content_callback)
+    ChunkMaster::ChunkMaster(ontology::Material* const parent_pointer, GetContentCallback get_content_callback)
     {
         // constructor.
         this->get_content_callback = get_content_callback;
         this->number_of_chunks = 0;
+
+        this->parent_pointer = parent_pointer;
+
+        // get `childID` from `Material` and set pointer to this `ChunkMaster`.
+        this->bind_to_parent();
 
         this->type = "space_partition::ChunkMaster*";
     }

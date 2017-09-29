@@ -45,8 +45,6 @@ namespace ontology
             void set_name(const std::string& name);
 
             // The rest fields are created in the constructor.
-            uint32_t image_width;
-            uint32_t image_height;
 
             ontology::Material* parent_pointer; // pointer to `Material`.
 

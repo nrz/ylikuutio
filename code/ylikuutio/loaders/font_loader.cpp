@@ -376,7 +376,7 @@ namespace loaders
         if (!is_first_glyph_found || SVG_data_pointer == nullptr)
         {
             std::cerr << "no glyphs were found!\n";
-            delete SVG_data;
+            delete[] SVG_data;
             return false;
         }
 
@@ -397,7 +397,7 @@ namespace loaders
                         unicode_strings);
                 if (!result)
                 {
-                    delete SVG_data;
+                    delete[] SVG_data;
                     return false;
                 }
             } // End of glyph.
@@ -408,7 +408,7 @@ namespace loaders
 
                 if (string::check_and_report_if_some_string_matches(SVG_base_pointer, SVG_data_pointer, file_size, string_vector))
                 {
-                    delete SVG_data;
+                    delete[] SVG_data;
                     return true;
                 }
                 SVG_data_pointer++;

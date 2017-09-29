@@ -54,7 +54,7 @@ namespace loaders
 
         if (image_width < 2 || image_height < 2)
         {
-            delete image_data;
+            delete[] image_data;
             return false;
         }
 
@@ -72,7 +72,7 @@ namespace loaders
         if (vertex_data == nullptr)
         {
             std::cerr << "Reserving memory for vertex data failed.\n";
-            delete image_data;
+            delete[] image_data;
             return false;
         }
 
@@ -110,8 +110,8 @@ namespace loaders
                 else
                 {
                     std::cerr << "invalid color channel!\n";
-                    delete image_data;
-                    delete vertex_data;
+                    delete[] image_data;
+                    delete[] vertex_data;
                     return false;
                 }
 
@@ -120,7 +120,7 @@ namespace loaders
             }
         }
 
-        delete image_data;
+        delete[] image_data;
 
         std::cout << "color channel in use: " << color_channel << "\n";
 
@@ -134,7 +134,7 @@ namespace loaders
         triangulate_quads_struct.spherical_world_struct = geometry::SphericalWorldStruct(); // not used, but is needed in the function call.
 
         bool result = geometry::triangulate_quads(vertex_data, triangulate_quads_struct, out_vertices, out_UVs, out_normals);
-        delete vertex_data;
+        delete[] vertex_data;
         return result;
     }
 }

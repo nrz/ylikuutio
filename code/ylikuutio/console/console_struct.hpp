@@ -37,7 +37,7 @@ namespace ontology
 typedef struct ConsoleStruct
 {
     ConsoleStruct()
-        : universe_pointer(nullptr), font2D_pointer(nullptr)
+        : current_keypress_callback_engine_vector_pointer_pointer(nullptr), current_keyrelease_callback_engine_vector_pointer_pointer(nullptr), command_callback_map_pointer(nullptr), universe_pointer(nullptr), font2D_pointer(nullptr)
     {
         // constructor.
     }

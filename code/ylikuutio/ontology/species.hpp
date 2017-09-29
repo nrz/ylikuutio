@@ -37,7 +37,7 @@ namespace ontology
     {
         public:
             // constructor.
-            Species(const SpeciesStruct species_struct);
+            Species(const SpeciesStruct& species_struct);
 
             // destructor.
             virtual ~Species();

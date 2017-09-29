@@ -47,42 +47,42 @@ namespace ontology
         return new ontology::Scene(universe, water_level);
     }
 
-    ontology::Entity* EntityFactory::create_Shader(const ShaderStruct shader_struct)
+    ontology::Entity* EntityFactory::create_Shader(const ShaderStruct& shader_struct)
     {
         return new ontology::Shader(shader_struct);
     }
 
-    ontology::Entity* EntityFactory::create_Material(const MaterialStruct material_struct)
+    ontology::Entity* EntityFactory::create_Material(const MaterialStruct& material_struct)
     {
         return new ontology::Material(material_struct);
     }
 
-    ontology::Entity* EntityFactory::create_Species(const SpeciesStruct species_struct)
+    ontology::Entity* EntityFactory::create_Species(const SpeciesStruct& species_struct)
     {
         return new ontology::Species(species_struct);
     }
 
-    ontology::Entity* EntityFactory::create_Object(const ObjectStruct object_struct)
+    ontology::Entity* EntityFactory::create_Object(const ObjectStruct& object_struct)
     {
         return new ontology::Object(object_struct);
     }
 
-    ontology::Entity* EntityFactory::create_VectorFont(const VectorFontStruct vector_font_struct)
+    ontology::Entity* EntityFactory::create_VectorFont(const VectorFontStruct& vector_font_struct)
     {
         return new ontology::VectorFont(vector_font_struct);
     }
 
-    ontology::Entity* EntityFactory::create_Text3D(const Text3DStruct text3D_struct)
+    ontology::Entity* EntityFactory::create_Text3D(const Text3DStruct& text3D_struct)
     {
         return new ontology::Text3D(text3D_struct);
     }
 
     ontology::Entity* EntityFactory::create_Font2D(
-            ontology::Universe* universe,
+            ontology::Universe* const universe,
             GLuint screen_width,
             GLuint screen_height,
-            std::string texture_filename,
-            std::string font_texture_file_format)
+            const std::string& texture_filename,
+            const std::string& font_texture_file_format)
     {
         return new ontology::Font2D(
                 universe,

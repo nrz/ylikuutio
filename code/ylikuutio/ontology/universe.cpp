@@ -62,8 +62,15 @@ namespace ontology
 
         // constructor.
         this->world_radius = NAN; // world radius is NAN as long it doesn't get `set` by `SettingMaster`.
+        this->terrain_species_pointer = nullptr;
+        this->active_scene = nullptr;
         this->setting_master_pointer = nullptr;
         this->console_pointer = nullptr;
+
+        this->background_red = NAN;
+        this->background_green = NAN;
+        this->background_blue = NAN;
+        this->background_alpha = NAN;
 
         // Variables related to the window.
         this->window = nullptr;
@@ -89,6 +96,11 @@ namespace ontology
         this->is_flight_mode_in_use = false;
         this->is_first_turbo_pressed = false;
         this->is_second_turbo_pressed = false;
+
+        this->horizontal_angle = NAN;
+        this->vertical_angle = NAN;
+        this->turbo_factor = NAN;
+        this->twin_turbo_factor = NAN;
 
         this->speed = 5.0f; // 5.0 units / second
         this->mouse_speed = 0.005f;
@@ -360,7 +372,7 @@ namespace ontology
 
             uint64_t memory_address = reinterpret_cast<uint64_t>((void*) entity);
             char memory_address_char_array[256];
-            snprintf(memory_address_char_array, sizeof(memory_address_char_array), "0x%08x", memory_address);
+            snprintf(memory_address_char_array, sizeof(memory_address_char_array), "0x%08x", static_cast<uint64_t>(memory_address));
 
             std::string entity_info = "memory address: ";
             entity_info += std::string(memory_address_char_array);

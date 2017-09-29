@@ -40,7 +40,6 @@ namespace loaders
         else
         {
             std::printf("Impossible to open %s. Are you in the right directory ? Don't forget to read the FAQ !\n", vertex_file_path);
-            std::getchar();
             return 0;
         }
 

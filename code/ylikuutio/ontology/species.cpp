@@ -36,7 +36,7 @@ namespace ontology
         hierarchy::bind_child_to_parent<ontology::Species*>(this, this->parent_pointer->species_pointer_vector, this->parent_pointer->free_speciesID_queue, &this->parent_pointer->number_of_species);
     }
 
-    Species::Species(const SpeciesStruct species_struct)
+    Species::Species(const SpeciesStruct& species_struct)
     {
         // constructor.
         this->is_world          = species_struct.is_world;
@@ -91,6 +91,9 @@ namespace ontology
         species_loader_struct.x_step = this->x_step;
         species_loader_struct.z_step = this->z_step;
         species_loader_struct.triangulation_type = this->triangulation_type;
+
+        this->image_width = -1;
+        this->image_height = -1;
 
         loaders::load_species(
                 species_loader_struct,

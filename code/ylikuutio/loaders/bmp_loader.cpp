@@ -69,7 +69,15 @@ namespace loaders
         }
 
         // Read the information about the image
-        image_size = static_cast<int32_t>(*(uint32_t*) &header[0x22]);
+        uint32_t image_size_uint32_t = *(uint32_t*) &header[0x22];
+        if (image_size_uint32_t > 2147483647)
+        {
+            std::cerr << "BMP file is too big, size: " << image_size_uint32_t << " bytes.\n";
+            std::fclose(file);
+            return nullptr;
+        }
+
+        image_size = static_cast<int32_t>(image_size_uint32_t);
         image_width = *(int32_t*) &header[0x12];
         image_height = *(int32_t*) &header[0x16];
 
@@ -96,7 +104,7 @@ namespace loaders
         {
             std::cerr << "Moving BMP file position indicator failed.\n";
             std::fclose(file);
-            delete image_data;
+            delete[] image_data;
             return nullptr;
         }
 
@@ -105,7 +113,7 @@ namespace loaders
         {
             std::cerr << "Reading image data from file failed.\n";
             std::fclose(file);
-            delete image_data;
+            delete[] image_data;
             return nullptr;
         }
 

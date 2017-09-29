@@ -7,6 +7,7 @@
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
 
 // Include standard headers
+#include <cmath>    // NAN, std::isnan, std::pow
 #include <iostream> // std::cout, std::cin, std::cerr
 
 namespace ontology
@@ -24,6 +25,7 @@ namespace ontology
     Text3D::Text3D(const Text3DStruct text3D_struct)
     {
         // constructor.
+        this->rotate_angle = NAN;
         this->text_string = text3D_struct.text_string;
         this->parent_pointer = text3D_struct.parent_pointer;
         this->universe_pointer = this->parent_pointer->universe_pointer;

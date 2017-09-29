@@ -68,7 +68,14 @@ namespace loaders
             return false;
         }
 
-        uint64_t file_size = std::ftell(file);
+        int64_t file_size = std::ftell(file);
+
+        if (file_size < 0)
+        {
+            std::cerr << "ftell failed for the file " << ASCII_grid_file_name << " !\n";
+            std::fclose(file);
+            return false;
+        }
 
         // Move file pointer to the beginning of file.
         if (fseek(file, 0, SEEK_SET) != 0)
@@ -91,8 +98,12 @@ namespace loaders
         char* point_data_pointer = point_data;
 
         // Read the point data from the file into the buffer.
-        // TODO: add check for file reading!
-        std::fread(point_data, 1, file_size, file);
+        if (std::fread(point_data, 1, file_size, file) != file_size)
+        {
+            std::cerr << "Error while reading " << ASCII_grid_file_name << "\n";
+            std::fclose(file);
+            return false;
+        }
 
         // Everything is in memory now, the file can be closed
         std::fclose(file);
@@ -157,7 +168,7 @@ namespace loaders
         if (vertex_data == nullptr)
         {
             std::cerr << "Reserving memory for vertex data failed.\n";
-            delete point_data;
+            delete[] point_data;
             return false;
         }
 
@@ -196,7 +207,7 @@ namespace loaders
             }
         }
 
-        delete point_data;
+        delete[] point_data;
 
         std::cout << "Triangulating ascii grid data.\n";
 

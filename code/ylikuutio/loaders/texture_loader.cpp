@@ -121,8 +121,13 @@ namespace loaders
         const uint32_t dds_magic_number_size_in_bytes = 4; // "DDS "
         char filecode[dds_magic_number_size_in_bytes];
 
-        // TODO: add check for file reading!
-        std::fread(filecode, 1, dds_magic_number_size_in_bytes, fp);
+        if (std::fread(filecode, 1, dds_magic_number_size_in_bytes, fp) != dds_magic_number_size_in_bytes)
+        {
+            std::cerr << "Error while reading " << filename << "\n";
+            std::fclose(fp);
+            return 0;
+        }
+
         if (std::strncmp(filecode, "DDS ", dds_magic_number_size_in_bytes) != 0)
         {
             std::fclose(fp);
@@ -130,9 +135,12 @@ namespace loaders
         }
 
         /* get the surface desc */
-        // TODO: add check for file reading!
-        // TODO: store hardcoded value 4 into a variable.
-        std::fread(&header, 124, 1, fp);
+        if (std::fread(&header, 124, 1, fp) != 1)
+        {
+            std::cerr << "Error while reading " << filename << "\n";
+            std::fclose(fp);
+            return 0;
+        }
 
         uint32_t height      = *(uint32_t*) &header[8];
         uint32_t width       = *(uint32_t*) &header[12];

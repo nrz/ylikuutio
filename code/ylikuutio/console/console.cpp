@@ -34,6 +34,8 @@ namespace console
         this->cursor_index = 0;
         this->in_history = false;
         this->in_historical_input = false;
+        this->history_line_i = -1;     // some dummy value.
+        this->historical_input_i = -1; // some dummy value.
         this->in_console = false;
         this->can_enter_console = true;
         this->can_exit_console = false;

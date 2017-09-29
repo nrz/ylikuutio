@@ -40,6 +40,7 @@ namespace ontology
 
             if (universe->entity_anyvalue_map.count(name) != 0)
             {
+                delete entity_any_value;
                 return;
             }
 

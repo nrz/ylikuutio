@@ -18,7 +18,7 @@ namespace ontology
 typedef struct GlyphStruct
 {
     GlyphStruct()
-        : parent_pointer(nullptr)
+        : glyph_vertex_data(nullptr), glyph_name_pointer(nullptr), unicode_char_pointer(nullptr), parent_pointer(nullptr)
     {
         // constructor.
     }

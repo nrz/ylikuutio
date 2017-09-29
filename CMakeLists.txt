@@ -407,8 +407,6 @@ add_library(ylikuutio STATIC
     code/ylikuutio/space_partition/chunk_master.hpp
     code/ylikuutio/space_partition/terrain_generation_callbacks.cpp
     code/ylikuutio/space_partition/terrain_generation_callbacks.hpp
-    code/ylikuutio/space_partition/triangle3D.cpp
-    code/ylikuutio/space_partition/triangle3D.hpp
     code/ylikuutio/space_partition/vertex_graph.cpp
     code/ylikuutio/space_partition/vertex_graph.hpp
     code/ylikuutio/space_partition/vertex_node.cpp

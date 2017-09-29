@@ -56,16 +56,17 @@ namespace ontology
 
         if (this->is_character)
         {
-            this->species_parent_pointer = nullptr;
             this->glyph_parent_pointer   = object_struct.glyph_parent_pointer;
             this->text3D_parent_pointer  = object_struct.text3D_parent_pointer;
             this->universe_pointer       = this->text3D_parent_pointer->universe_pointer;
+            this->species_parent_pointer = nullptr;
         }
         else
         {
             this->species_parent_pointer = object_struct.species_parent_pointer;
             this->universe_pointer       = this->species_parent_pointer->universe_pointer;
             this->glyph_parent_pointer   = nullptr;
+            this->text3D_parent_pointer  = nullptr;
         }
 
         // get `childID` from `Species` or `Glyph` and set pointer to this `Object`.

@@ -131,7 +131,7 @@ namespace loaders
 
         // Create a buffer.
         uint32_t size_of_point_data_record = sizes_of_point_record_formats[point_data_formatID];
-        uint32_t point_data_size = number_of_point_records * size_of_point_data_record;
+        uint64_t point_data_size = number_of_point_records * size_of_point_data_record;
         uint8_t* point_data = new uint8_t[point_data_size];
 
         if (point_data == nullptr)
@@ -145,14 +145,19 @@ namespace loaders
         if (fseek(file, offset_to_point_data, SEEK_SET) != 0)
         {
             std::cerr << "moving file pointer of file " << laser_scaling_file_name << " failed!\n";
-            delete point_data;
+            delete[] point_data;
             std::fclose(file);
             return false;
         }
 
         // Read the actual image data from the file into the buffer.
-        // TODO: add check for file reading!
-        std::fread(point_data, 1, point_data_size, file);
+        if (std::fread(point_data, 1, point_data_size, file) != point_data_size)
+        {
+            std::cerr << "Error while reading " << laser_scaling_file_name << "\n";
+            delete[] point_data;
+            std::fclose(file);
+            return false;
+        }
 
         // Everything is in memory now, the file can be closed
         std::fclose(file);
@@ -172,7 +177,7 @@ namespace loaders
             laser_points.push_back(glm::vec3(x, y, z));
         }
 
-        delete point_data;
+        delete[] point_data;
 
         return true;
     }

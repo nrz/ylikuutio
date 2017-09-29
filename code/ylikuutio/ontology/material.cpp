@@ -38,6 +38,8 @@ namespace ontology
         this->parent_pointer = material_struct.parent_pointer;
         this->universe_pointer = this->parent_pointer->universe_pointer;
 
+        this->terrain_species_pointer = nullptr;
+
         this->texture_file_format = material_struct.texture_file_format;
         this->texture_filename    = material_struct.texture_filename;
 
@@ -64,6 +66,7 @@ namespace ontology
         {
             std::cerr << "no texture was loaded!\n";
             std::cerr << "texture file format: " << this->texture_file_format << "\n";
+            this->texture = 0; // some dummy value.
         }
 
         // Get a handle for our "myTextureSampler" uniform.
