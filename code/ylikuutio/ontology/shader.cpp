@@ -43,6 +43,8 @@ namespace ontology
         this->parent_pointer       = shader_struct.parent_pointer;
         this->universe_pointer     = this->parent_pointer->universe_pointer;
 
+        this->terrain_species_pointer = nullptr;
+
         this->number_of_materials = 0;
         this->number_of_symbioses = 0;
 
