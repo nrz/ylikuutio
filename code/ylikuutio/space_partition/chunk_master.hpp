@@ -23,7 +23,7 @@ namespace space_partition
     {
         public:
             // constructor.
-            ChunkMaster(GetContentCallback get_content_callback);
+            ChunkMaster(ontology::Material* const parent_pointer, GetContentCallback get_content_callback);
 
             // destructor.
             virtual ~ChunkMaster();
