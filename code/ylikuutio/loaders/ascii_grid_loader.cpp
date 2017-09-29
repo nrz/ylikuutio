@@ -68,7 +68,14 @@ namespace loaders
             return false;
         }
 
-        uint64_t file_size = std::ftell(file);
+        int64_t file_size = std::ftell(file);
+
+        if (file_size < 0)
+        {
+            std::cerr << "ftell failed for the file " << ASCII_grid_file_name << " !\n";
+            std::fclose(file);
+            return false;
+        }
 
         // Move file pointer to the beginning of file.
         if (fseek(file, 0, SEEK_SET) != 0)
