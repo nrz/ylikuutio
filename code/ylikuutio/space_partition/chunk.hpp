@@ -36,7 +36,7 @@ namespace space_partition
     {
         public:
             // constructor.
-            Chunk();
+            Chunk(space_partition::ChunkMaster* const parent_pointer);
 
             // destructor.
             virtual ~Chunk();
