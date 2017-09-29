@@ -151,8 +151,13 @@ namespace loaders
         }
 
         // Read the actual image data from the file into the buffer.
-        // TODO: add check for file reading!
-        std::fread(point_data, 1, point_data_size, file);
+        if (std::fread(point_data, 1, point_data_size, file) != point_data_size)
+        {
+            std::cerr << "Error while reading " << laser_scaling_file_name << "\n";
+            delete[] point_data;
+            std::fclose(file);
+            return false;
+        }
 
         // Everything is in memory now, the file can be closed
         std::fclose(file);
