@@ -31,6 +31,8 @@ namespace geometry
     // can be used for creating n-dimensional lines.
     Line::Line(const std::vector<float> general_form_coefficients, const float general_form_constant)
     {
+        // TODO: add checks for the validity of general form coefficients and general form constant!
+        this->is_valid = true;
         this->general_form_coefficients = general_form_coefficients;
         this->general_form_constant = general_form_constant;
     }
