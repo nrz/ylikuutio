@@ -92,6 +92,9 @@ namespace ontology
         species_loader_struct.z_step = this->z_step;
         species_loader_struct.triangulation_type = this->triangulation_type;
 
+        this->image_width = -1;
+        this->image_height = -1;
+
         loaders::load_species(
                 species_loader_struct,
                 this->vertices,
