@@ -33,11 +33,6 @@
 #include <glm/gtc/quaternion.hpp> // glm::quat
 #endif
 
-#ifndef __GLM_GTX_QUATERNION_HPP_INCLUDED
-#define __GLM_GTX_QUATERNION_HPP_INCLUDED
-#include <glm/gtx/quaternion.hpp> // glm::toMat4
-#endif
-
 // Include standard headers
 #include <queue>    // std::queue
 #include <stdint.h> // uint32_t etc.
@@ -210,6 +205,7 @@ namespace ontology
             ontology::Glyph* glyph_parent_pointer;     // pointer to `Glyph`.
             ontology::Text3D* text3D_parent_pointer;   // pointer to `Text3D`.
             bool is_character;
+            bool quaternions_in_use;
 
             bool has_entered;
             bool should_ylikuutio_render_this_object;
@@ -241,16 +237,20 @@ namespace ontology
             }
             else
             {
-                // create `rotation_matrix` using quaternions.
-                glm::quat my_quaternion;
-                my_quaternion = glm::quat(DEGREES_TO_RADIANS(object_pointer->rotate_vector));
-                glm::mat4 rotation_matrix = glm::toMat4(my_quaternion);
-
                 // rotate.
-                // this->model_matrix = rotation_matrix * this->model_matrix;
                 if (object_pointer->rotate_vector != glm::vec3(0.0f, 0.0f, 0.0f))
                 {
-                    object_pointer->model_matrix = glm::rotate(object_pointer->model_matrix, object_pointer->rotate_angle, object_pointer->rotate_vector);
+                    if (object_pointer->quaternions_in_use)
+                    {
+                        // create `rotation_matrix` using quaternions.
+                        glm::quat my_quaternion = glm::quat(DEGREES_TO_RADIANS(object_pointer->rotate_vector));
+                        glm::mat4 rotation_matrix = glm::mat4_cast(my_quaternion);
+                        object_pointer->model_matrix = rotation_matrix * object_pointer->model_matrix;
+                    }
+                    else
+                    {
+                        object_pointer->model_matrix = glm::rotate(object_pointer->model_matrix, object_pointer->rotate_angle, object_pointer->rotate_vector);
+                    }
                 }
 
                 object_pointer->model_matrix = glm::translate(object_pointer->model_matrix, object_pointer->translate_vector);
