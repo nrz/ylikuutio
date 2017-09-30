@@ -60,7 +60,6 @@ matrix:
                       - libxi-dev
                       - libxinerama-dev
                       - make
-
         - os: linux
           language: cpp
           dist: trusty
