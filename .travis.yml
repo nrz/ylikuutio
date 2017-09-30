@@ -32,7 +32,7 @@ matrix:
               # following Coverity instructions
               # https://scan.coverity.com/travis_ci
               global:
-                  - secure: "jxPP48PSYHIDVZ/Qh4LXbkgAN/zk4vtVlzJPm89edPRpJP5idcOJmrpon67ikOnQj7cpxDYqQZBXsDsZ4XDpu/8hHZpY8M8b1t+lUA15RiSlNpxzRgcCsJcDkOuzPVQozBQgdbYjlVlWa+hqpp/9qLFJLVLHJd6U98JXBgHT/5REwOxUf9TWb0jLjOEJ8rm8I8PZbXRx7IzN8gTOEj21YRUM03uQjP9XirGQYzjNG/0hI0HpDt2JtCdBS91yCFKbf/lmNEDghDJypeObUTYE5CT/kABr1dmgbaWRlSTygozCSM4C2WRY6vmqv4aPViEYNo8Yjmdj/UHh0qE8gqrSt5zPM8eVHjhHTTf+sJNUiyc27xomzJbZ1RppP2DHXdzB1wy19+wmuAU8Xd0OtGdPgiNHipTo9Hhd58Y/3xG5Lkasd+JBT5Lh4RgwsaKMxjtW745iWUgc3on9jBLZMmOARswOGHKdijW/kjKZYsAu+oNFC0osiqGDDWmlrJ9irDKG4m7KjgyOXNq+EPR3aMBXiN1lRGK9XON66IhKuBR2P5OiHowMZADj7AOYUy88j1dU0Sin8z6bcWtayoz42AaNPD4CN3JDkbLf2stmcUvbzv9mGcMkLKbp/vo+NV+oaZ9MfQyOOoItP+iQE7zpxcl+27TxpGFwcgv6QaezOQsiljI="
+                  - secure: jxPP48PSYHIDVZ/Qh4LXbkgAN/zk4vtVlzJPm89edPRpJP5idcOJmrpon67ikOnQj7cpxDYqQZBXsDsZ4XDpu/8hHZpY8M8b1t+lUA15RiSlNpxzRgcCsJcDkOuzPVQozBQgdbYjlVlWa+hqpp/9qLFJLVLHJd6U98JXBgHT/5REwOxUf9TWb0jLjOEJ8rm8I8PZbXRx7IzN8gTOEj21YRUM03uQjP9XirGQYzjNG/0hI0HpDt2JtCdBS91yCFKbf/lmNEDghDJypeObUTYE5CT/kABr1dmgbaWRlSTygozCSM4C2WRY6vmqv4aPViEYNo8Yjmdj/UHh0qE8gqrSt5zPM8eVHjhHTTf+sJNUiyc27xomzJbZ1RppP2DHXdzB1wy19+wmuAU8Xd0OtGdPgiNHipTo9Hhd58Y/3xG5Lkasd+JBT5Lh4RgwsaKMxjtW745iWUgc3on9jBLZMmOARswOGHKdijW/kjKZYsAu+oNFC0osiqGDDWmlrJ9irDKG4m7KjgyOXNq+EPR3aMBXiN1lRGK9XON66IhKuBR2P5OiHowMZADj7AOYUy88j1dU0Sin8z6bcWtayoz42AaNPD4CN3JDkbLf2stmcUvbzv9mGcMkLKbp/vo+NV+oaZ9MfQyOOoItP+iQE7zpxcl+27TxpGFwcgv6QaezOQsiljI=
           addons:
               # following Coverity instructions
               # https://scan.coverity.com/travis_ci
