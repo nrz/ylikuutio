@@ -10,7 +10,7 @@ matrix:
               # https://github.com/richelbilderbeek/travis_cmake_gcc_cpp14/blob/master/.travis.yml
               - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
               - sudo apt-get update -qq
-              - echo "Cores available: $(nproc)"
+              - echo "Hello from before_install of gcc build"
               # following Coverity instructions
               # https://scan.coverity.com/travis_ci
               - echo -n | openssl s_client -connect scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
@@ -67,7 +67,7 @@ matrix:
           compiler: clang
           sudo: required
           before_install:
-              - echo "Cores available: $(nproc)"
+              - echo "Hello from before_install of clang build"
           script:
               - cmake --version
               - mkdir build_clang
