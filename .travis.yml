@@ -1,92 +1,69 @@
-matrix:
-    include:
-        - os: linux
-          language: cpp
-          dist: trusty
-          compiler: gcc
-          sudo: required
-          before_install:
-              # C++14
-              # https://github.com/richelbilderbeek/travis_cmake_gcc_cpp14/blob/master/.travis.yml
-              - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
-              - sudo apt-get update -qq
-              - echo "Hello from before_install of gcc build"
-              # following Coverity instructions
-              # https://scan.coverity.com/travis_ci
-              - echo -n | openssl s_client -connect scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
-          install:
-              # C++14
-              # https://github.com/richelbilderbeek/travis_cmake_gcc_cpp14/blob/master/.travis.yml
-              - sudo apt-get install -qq gcc-5 g++-5
-              - sudo apt-get update -qq
-              - sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-5 90
-              - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-5 90
-          script:
-              - gcc -v && g++ -v && cmake --version
-              - mkdir build_gcc
-              - cd build_gcc
-              - cmake ..
-              - make -j $(nproc)
-              - ./unit_tests_with_Google_Test
-          env:
-              # following Coverity instructions
-              # https://scan.coverity.com/travis_ci
-              global:
-                  - secure: jxPP48PSYHIDVZ/Qh4LXbkgAN/zk4vtVlzJPm89edPRpJP5idcOJmrpon67ikOnQj7cpxDYqQZBXsDsZ4XDpu/8hHZpY8M8b1t+lUA15RiSlNpxzRgcCsJcDkOuzPVQozBQgdbYjlVlWa+hqpp/9qLFJLVLHJd6U98JXBgHT/5REwOxUf9TWb0jLjOEJ8rm8I8PZbXRx7IzN8gTOEj21YRUM03uQjP9XirGQYzjNG/0hI0HpDt2JtCdBS91yCFKbf/lmNEDghDJypeObUTYE5CT/kABr1dmgbaWRlSTygozCSM4C2WRY6vmqv4aPViEYNo8Yjmdj/UHh0qE8gqrSt5zPM8eVHjhHTTf+sJNUiyc27xomzJbZ1RppP2DHXdzB1wy19+wmuAU8Xd0OtGdPgiNHipTo9Hhd58Y/3xG5Lkasd+JBT5Lh4RgwsaKMxjtW745iWUgc3on9jBLZMmOARswOGHKdijW/kjKZYsAu+oNFC0osiqGDDWmlrJ9irDKG4m7KjgyOXNq+EPR3aMBXiN1lRGK9XON66IhKuBR2P5OiHowMZADj7AOYUy88j1dU0Sin8z6bcWtayoz42AaNPD4CN3JDkbLf2stmcUvbzv9mGcMkLKbp/vo+NV+oaZ9MfQyOOoItP+iQE7zpxcl+27TxpGFwcgv6QaezOQsiljI=
-          addons:
-              # following Coverity instructions
-              # https://scan.coverity.com/travis_ci
-              coverity_scan:
-                  project:
-                      name: "nrz/ylikuutio"
-                      description: "Ylikuutio 3D engine. Build submitted via Travis CI"
-                  notification_email: antti.nuortimo@gmail.com
-                  build_command_prepend: "mkdir build_coverity && cd build_coverity && cmake .."
-                  build_command: "make -j 8"
-                  # https://scan.coverity.com/faq#frequency
-                  branch_pattern: coverity_scan
-              apt:
-                  sources:
-                      - ubuntu-toolchain-r-test
-                  packages:
-                      - cmake
-                      - git
-                      - libx11-dev
-                      - libgl1-mesa-dev
-                      - libglu1-mesa-dev
-                      - libxcursor-dev
-                      - libxrandr-dev
-                      - libxext-dev
-                      - libxi-dev
-                      - libxinerama-dev
-                      - make
-        - os: linux
-          language: cpp
-          dist: trusty
-          compiler: clang
-          sudo: required
-          before_install:
-              - echo "Hello from before_install of clang build"
-          script:
-              - cmake --version
-              - mkdir build_clang
-              - cd build_clang
-              - CC=$(which clang) CXX=$(which clang++) cmake ..
-              - make -j $(nproc)
-              - ./unit_tests_with_Google_Test
-          addons:
-              apt:
-                  sources:
-                      - ubuntu-toolchain-r-test
-                  packages:
-                      - cmake
-                      - git
-                      - libx11-dev
-                      - libgl1-mesa-dev
-                      - libglu1-mesa-dev
-                      - libxcursor-dev
-                      - libxrandr-dev
-                      - libxext-dev
-                      - libxi-dev
-                      - libxinerama-dev
-                      - make
+env:
+    global:
+        # following Coverity instructions
+        # https://scan.coverity.com/travis_ci
+        - secure: "fE61u9/Qtn2jXo+ReUFdscmLAYMxOa3Rbvj3LMlRR6dV7tZf6arJJGYxklABKGQi5qMkYgcOY0rUqaOfvo/rPcIKNmlqZ1rz/nBZnvmvG8AKY6rtKKD0TUMphU3IzO2pXW4OywNNEaf8ze1iycB/wpZoBRNcuNev0BRiM8CiExV144abSLZu5vHNXXb9Rnfbn19yQCWdl5cnJlO+m+GQBQDjYCbYIToF6pr2D16qo8PPncYGs2GgdOci4aFs/+nFZS/NHULCafQIGk7tyQg3vq2Tpwi2dTshtfz/Y4JII4DlSFicoer55u2G4ML+9HaufaoFs4aaLROmNrtCbc6WI0upnlsSWlrGsFk2G3UBxopqGoQhmHVi0PYItOhOejz1YEpm4sCSUChrc5DKnmPgL/HXQQ5+/l+3ST9nZn6sZ4fJlwqe57U0e4M1me0hBXHr1t19/g40HAsFVLf7oxP4mpTdFOEF7DceEo5cZYEeiMW5T4gogeWmQjcckTmyHlly0unAyuQKrgCeOsL5Uks6E8TssQMewLp9ZGAMt7W8k7jcmtZpgKYBaf/MQdeICkoGgGg3XJpZSgATGNSzG3IwlNQxjvbteqNfle+kwaurgUGQT8KCnkrvRGvhPwJ0EkOxLj7wb7Ngrni4vldv9Uh9jQ5CWw2i7m/UN0pYV1Klb4Q="
+
+language: cpp
+
+os: linux
+
+dist: trusty
+
+compiler: gcc
+
+sudo: required
+
+before_install:
+    # C++14
+    # https://github.com/richelbilderbeek/travis_cmake_gcc_cpp14/blob/master/.travis.yml
+    - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
+    - sudo apt-get update -qq
+    - echo "Hello from before_install of gcc build"
+      # following Coverity instructions
+      # https://scan.coverity.com/travis_ci
+    - echo -n | openssl s_client -connect scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
+
+install:
+    # C++14
+    # https://github.com/richelbilderbeek/travis_cmake_gcc_cpp14/blob/master/.travis.yml
+    - sudo apt-get install -qq gcc-5 g++-5
+    - sudo apt-get update -qq
+    - sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-5 90
+    - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-5 90
+
+addons:
+    # following Coverity instructions
+    # https://scan.coverity.com/travis_ci
+    apt:
+        sources:
+            - ubuntu-toolchain-r-test
+        packages:
+            - cmake
+            - git
+            - libx11-dev
+            - libgl1-mesa-dev
+            - libglu1-mesa-dev
+            - libxcursor-dev
+            - libxrandr-dev
+            - libxext-dev
+            - libxi-dev
+            - libxinerama-dev
+            - make
+    coverity_scan:
+        project:
+            name: "nrz/ylikuutio"
+            description: "Ylikuutio 3D engine. Build submitted via Travis CI"
+            notification_email: antti.nuortimo@gmail.com
+            build_command_prepend: "mkdir build_coverity && cd build_coverity && cmake .."
+            build_command: "make -j 8"
+            # https://scan.coverity.com/faq#frequency
+            branch_pattern: coverity_scan
+
+script:
+    - gcc -v && g++ -v && cmake --version
+    - mkdir build_gcc
+    - cd build_gcc
+    - cmake ..
+    - make -j $(nproc)
+    - ./unit_tests_with_Google_Test
