@@ -3,9 +3,13 @@
 
 #include "matrix.hpp"
 
+// Include standard headers
+#include <cmath>    // NAN, std::isnan, std::pow
+#include <memory>   // std::make_shared, std::shared_ptr
+
 namespace linear_algebra
 {
-    Matrix cat(uint32_t dimension, Matrix& old_matrix1, Matrix& old_matrix2);
+    std::shared_ptr<linear_algebra::Matrix> cat(uint32_t dimension, linear_algebra::Matrix& old_matrix1, linear_algebra::Matrix& old_matrix2);
 }
 
 #endif

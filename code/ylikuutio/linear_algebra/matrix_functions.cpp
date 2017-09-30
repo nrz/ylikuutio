@@ -7,7 +7,7 @@
 
 namespace linear_algebra
 {
-    Matrix cat(uint32_t dimension, Matrix& old_matrix1, Matrix& old_matrix2)
+    std::shared_ptr<linear_algebra::Matrix> cat(uint32_t dimension, linear_algebra::Matrix& old_matrix1, linear_algebra::Matrix& old_matrix2)
     {
         // Matrices can be concatenated either vertically (`dimension` = 1)
         // or horizontally (`dimension` = 2).
@@ -17,15 +17,15 @@ namespace linear_algebra
             if (old_matrix1.width != old_matrix2.width)
             {
                 // Matrix widths do not match, return 1x1 NAN matrix.
-                Matrix tmp(1, 1);
-                tmp << NAN;
+                std::shared_ptr<linear_algebra::Matrix> tmp = std::make_shared<linear_algebra::Matrix>(1, 1);
+                *tmp << NAN;
                 return tmp;
             }
 
             uint32_t new_height = old_matrix1.height + old_matrix2.height;
             uint32_t new_width = old_matrix1.width;
 
-            Matrix new_matrix(new_height, new_width);
+            std::shared_ptr<linear_algebra::Matrix> new_matrix = std::make_shared<linear_algebra::Matrix>(new_height, new_width);
 
             // Populate the newly created matrix with old values.
 
@@ -33,7 +33,7 @@ namespace linear_algebra
             {
                 for (uint32_t x = 0; x < new_width; x++)
                 {
-                    new_matrix << old_matrix1[y][x];
+                    *new_matrix << old_matrix1[y][x];
                 }
             }
 
@@ -41,7 +41,7 @@ namespace linear_algebra
             {
                 for (uint32_t x = 0; x < new_width; x++)
                 {
-                    new_matrix << old_matrix2[y][x];
+                    *new_matrix << old_matrix2[y][x];
                 }
             }
 
@@ -53,27 +53,27 @@ namespace linear_algebra
             if (old_matrix1.height != old_matrix2.height)
             {
                 // Matrix heights do not match, return 1x1 NAN matrix.
-                Matrix tmp(1, 1);
-                tmp << NAN;
+                std::shared_ptr<linear_algebra::Matrix> tmp = std::make_shared<linear_algebra::Matrix>(1, 1);
+                *tmp << NAN;
                 return tmp;
             }
 
             uint32_t new_height = old_matrix1.height;
             uint32_t new_width = old_matrix1.width + old_matrix2.width;
 
-            Matrix new_matrix(new_height, new_width);
+            std::shared_ptr<linear_algebra::Matrix> new_matrix = std::make_shared<linear_algebra::Matrix>(new_height, new_width);
 
             // Populate the newly created matrix with old values.
             for (uint32_t y = 0; y < new_height; y++)
             {
                 for (uint32_t x = 0; x < old_matrix1.width; x++)
                 {
-                    new_matrix << old_matrix1[y][x];
+                    *new_matrix << old_matrix1[y][x];
                 }
 
                 for (uint32_t x = 0; x < old_matrix2.width; x++)
                 {
-                    new_matrix << old_matrix2[y][x];
+                    *new_matrix << old_matrix2[y][x];
                 }
             }
 
@@ -81,8 +81,8 @@ namespace linear_algebra
         }
 
         // Invalid dimension, return 1x1 NAN matrix.
-        Matrix tmp(1, 1);
-        tmp << NAN;
+        std::shared_ptr<linear_algebra::Matrix> tmp = std::make_shared<linear_algebra::Matrix>(1, 1);
+        *tmp << NAN;
         return tmp;
     }
 }
