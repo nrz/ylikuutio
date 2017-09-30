@@ -33,7 +33,7 @@ namespace linear_algebra
         }
     }
 
-    Matrix::Matrix(const Matrix& old_matrix)
+    Matrix::Matrix(const linear_algebra::Matrix& old_matrix)
     {
         // copy constructor.
         this->width = old_matrix.width;
@@ -78,9 +78,9 @@ namespace linear_algebra
         // delete this->array_of_arrays;
     }
 
-    Matrix Matrix::transpose()
+    linear_algebra::Matrix Matrix::transpose()
     {
-        Matrix new_matrix(this->width, this->height); // Flip width and height.
+        linear_algebra::Matrix new_matrix(this->width, this->height); // Flip width and height.
 
         for (uint32_t x = 0; x < this->width; x++)
         {
@@ -175,7 +175,7 @@ namespace linear_algebra
         }
     }
 
-    bool Matrix::operator==(const Matrix& rhs)
+    bool Matrix::operator==(const linear_algebra::Matrix& rhs)
     {
         // compare if matrices are equal.
         if (this->width != rhs.width ||
@@ -204,7 +204,7 @@ namespace linear_algebra
         return true;
     }
 
-    bool Matrix::operator!=(const Matrix& rhs)
+    bool Matrix::operator!=(const linear_algebra::Matrix& rhs)
     {
         // compare if matrices are equal.
         if (this->width != rhs.width ||
@@ -233,7 +233,7 @@ namespace linear_algebra
         return false;
     }
 
-    Matrix& Matrix::operator++()
+    linear_algebra::Matrix& Matrix::operator++()
     {
         for (uint32_t y = 0; y < this->height; y++)
         {
@@ -248,14 +248,14 @@ namespace linear_algebra
         return *this;
     }
 
-    Matrix Matrix::operator++(const int)
+    linear_algebra::Matrix Matrix::operator++(const int)
     {
-        Matrix tmp(*this); // Make a copy.
+        linear_algebra::Matrix tmp(*this); // Make a copy.
         this->operator++();
         return tmp; // Return old matrix.
     }
 
-    Matrix& Matrix::operator--()
+    linear_algebra::Matrix& Matrix::operator--()
     {
         for (uint32_t y = 0; y < this->height; y++)
         {
@@ -270,14 +270,14 @@ namespace linear_algebra
         return *this;
     }
 
-    Matrix Matrix::operator--(const int)
+    linear_algebra::Matrix Matrix::operator--(const int)
     {
         Matrix tmp(*this); // Make a copy.
         this->operator--();
         return tmp; // Return old matrix.
     }
 
-    Matrix& Matrix::operator+=(const float rhs)
+    linear_algebra::Matrix& Matrix::operator+=(const float rhs)
     {
         for (uint32_t y = 0; y < this->height; y++)
         {
@@ -292,7 +292,7 @@ namespace linear_algebra
         return *this;
     }
 
-    Matrix& Matrix::operator-=(const float rhs)
+    linear_algebra::Matrix& Matrix::operator-=(const float rhs)
     {
         for (uint32_t y = 0; y < this->height; y++)
         {
@@ -307,7 +307,7 @@ namespace linear_algebra
         return *this;
     }
 
-    Matrix& Matrix::operator*=(const float rhs)
+    linear_algebra::Matrix& Matrix::operator*=(const float rhs)
     {
         for (uint32_t y = 0; y < this->height; y++)
         {
@@ -322,7 +322,7 @@ namespace linear_algebra
         return *this;
     }
 
-    Matrix& Matrix::operator/=(const float rhs)
+    linear_algebra::Matrix& Matrix::operator/=(const float rhs)
     {
         for (uint32_t y = 0; y < this->height; y++)
         {
@@ -337,7 +337,7 @@ namespace linear_algebra
         return *this;
     }
 
-    Matrix& Matrix::operator+=(const Matrix& rhs)
+    linear_algebra::Matrix& Matrix::operator+=(const linear_algebra::Matrix& rhs)
     {
         for (uint32_t y = 0; y < this->height; y++)
         {
@@ -353,7 +353,7 @@ namespace linear_algebra
         return *this;
     }
 
-    Matrix& Matrix::operator-=(const Matrix& rhs)
+    linear_algebra::Matrix& Matrix::operator-=(const linear_algebra::Matrix& rhs)
     {
         for (uint32_t y = 0; y < this->height; y++)
         {
@@ -369,7 +369,7 @@ namespace linear_algebra
         return *this;
     }
 
-    Matrix operator+(Matrix& lhs, Matrix& rhs)
+    linear_algebra::Matrix operator+(linear_algebra::Matrix& lhs, linear_algebra::Matrix& rhs)
     {
         // Matrix addition.
         if (lhs.height != rhs.height || lhs.width != rhs.width)
@@ -378,7 +378,7 @@ namespace linear_algebra
             // Matrix addition is not defined.
             // Populate `lhs` with NAN to signal error.
             std::cerr << "Matrix dimensions do not match!\n";
-            Matrix result_matrix(1, 1);
+            linear_algebra::Matrix result_matrix(1, 1);
             result_matrix << NAN;
             return result_matrix;
         }
@@ -386,7 +386,7 @@ namespace linear_algebra
         // OK, dimensions match.
         uint32_t target_height = lhs.height;
         uint32_t target_width = lhs.width;
-        Matrix result_matrix(target_height, target_width);
+        linear_algebra::Matrix result_matrix(target_height, target_width);
 
         for (uint32_t y = 0; y < target_height; y++)
         {
@@ -398,7 +398,7 @@ namespace linear_algebra
         return result_matrix;
     }
 
-    Matrix operator-(Matrix& lhs, Matrix& rhs)
+    linear_algebra::Matrix operator-(linear_algebra::Matrix& lhs, linear_algebra::Matrix& rhs)
     {
         // Matrix subtraction.
         if (lhs.height != rhs.height || lhs.width != rhs.width)
@@ -407,7 +407,7 @@ namespace linear_algebra
             // Matrix addition is not defined.
             // Populate `lhs` with NAN to signal error.
             std::cerr << "Matrix dimensions do not match!\n";
-            Matrix result_matrix(1, 1);
+            linear_algebra::Matrix result_matrix(1, 1);
             result_matrix << NAN;
             return result_matrix;
         }
@@ -415,7 +415,7 @@ namespace linear_algebra
         // OK, dimensions match.
         uint32_t target_height = lhs.height;
         uint32_t target_width = lhs.width;
-        Matrix result_matrix(target_height, target_width);
+        linear_algebra::Matrix result_matrix(target_height, target_width);
 
         for (uint32_t y = 0; y < target_height; y++)
         {
@@ -427,7 +427,7 @@ namespace linear_algebra
         return result_matrix;
     }
 
-    Matrix operator*(Matrix& lhs, Matrix& rhs)
+    linear_algebra::Matrix operator*(linear_algebra::Matrix& lhs, linear_algebra::Matrix& rhs)
     {
         // Matrix multiplication.
         if (lhs.width != rhs.height)
@@ -436,7 +436,7 @@ namespace linear_algebra
             // Matrix multiplication is not defined.
             // Populate `lhs` with NAN to signal error.
             std::cerr << "Matrix dimensions do not match!\n";
-            Matrix result_matrix(1, 1);
+            linear_algebra::Matrix result_matrix(1, 1);
             result_matrix << NAN;
             return result_matrix;
         }
@@ -444,7 +444,7 @@ namespace linear_algebra
         // OK, dimensions match.
         uint32_t target_height = lhs.height;
         uint32_t target_width = rhs.width;
-        Matrix result_matrix(target_height, target_width);
+        linear_algebra::Matrix result_matrix(target_height, target_width);
 
         for (uint32_t target_y = 0; target_y < target_height; target_y++)
         {
