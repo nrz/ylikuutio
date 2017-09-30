@@ -55,15 +55,15 @@ addons:
             name: "nrz/ylikuutio"
             description: "Ylikuutio 3D engine. Build submitted via Travis CI"
             notification_email: antti.nuortimo@gmail.com
-            build_command_prepend: "mkdir build_coverity && cd build_coverity && cmake .."
-            build_command: "make -j 8"
+        build_command_prepend: "mkdir build_coverity && cd build_coverity && cmake .."
+        build_command: "make -j 4"
             # https://scan.coverity.com/faq#frequency
-            branch_pattern: coverity_scan
+        branch_pattern: coverity_scan
 
 script:
     - gcc -v && g++ -v && cmake --version
     - mkdir build_gcc
     - cd build_gcc
     - cmake ..
-    - make -j $(nproc)
+    - make -j 4
     - ./unit_tests_with_Google_Test
