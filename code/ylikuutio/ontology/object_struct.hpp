@@ -17,7 +17,7 @@ namespace ontology
 typedef struct ObjectStruct
 {
     ObjectStruct()
-        : species_parent_pointer(nullptr), glyph_parent_pointer(nullptr), text3D_parent_pointer(nullptr), original_scale_vector(glm::vec3(1.0f, 1.0f, 1.0f)), rotate_angle(NAN), is_character(false)
+        : species_parent_pointer(nullptr), glyph_parent_pointer(nullptr), text3D_parent_pointer(nullptr), original_scale_vector(glm::vec3(1.0f, 1.0f, 1.0f)), rotate_angle(0.0f), is_character(false), quaternions_in_use(false), coordinate_vector(glm::vec3(0.0f, 0.0f, 0.0f)), rotate_vector(glm::vec3(0.0f, 0.0f, 0.0f)), translate_vector(glm::vec3(0.0f, 0.0f, 0.0f))
     {
         // constructor.
     }
@@ -27,6 +27,7 @@ typedef struct ObjectStruct
     glm::vec3 original_scale_vector; // original scale vector.
     float rotate_angle;              // rotate angle.
     bool is_character;               // The parent of a character object is a Glyph. The parent of a regular object is a Species.
+    bool quaternions_in_use;
     glm::vec3 coordinate_vector;     // coordinate vector.
     glm::vec3 rotate_vector;         // rotate vector.
     glm::vec3 translate_vector;      // translate vector.

@@ -53,6 +53,7 @@ namespace ontology
         this->should_ylikuutio_render_this_object = true;
 
         this->is_character          = object_struct.is_character;
+        this->quaternions_in_use    = object_struct.quaternions_in_use;
 
         if (this->is_character)
         {
