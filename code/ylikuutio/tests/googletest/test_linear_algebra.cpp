@@ -74,7 +74,7 @@ TEST(matrices_must_function_as_expected, matrices)
 
     // transpose.
 
-    linear_algebra::Matrix magic3x3_transposed(magic3x3.transpose());
+    linear_algebra::Matrix magic3x3_transposed(*magic3x3.transpose());
     ASSERT_EQ(magic3x3_transposed[0][0], 8);
     ASSERT_EQ(magic3x3_transposed[1][0], 1);
     ASSERT_EQ(magic3x3_transposed[2][0], 6);
@@ -225,7 +225,7 @@ TEST(matrices_must_function_as_expected, matrices)
     ASSERT_EQ(magic3x3squared[2][2], 91);
 
     // matrix transpose.
-    linear_algebra::Matrix magic3x3transposed = magic3x3.transpose();
+    linear_algebra::Matrix magic3x3transposed = *magic3x3.transpose();
     ASSERT_EQ(magic3x3transposed[0][0], 8);
     ASSERT_EQ(magic3x3transposed[1][0], 1);
     ASSERT_EQ(magic3x3transposed[2][0], 6);
@@ -238,7 +238,7 @@ TEST(matrices_must_function_as_expected, matrices)
 
     // matrix concatenation.
 
-    linear_algebra::Matrix magic3x3_above_magic3x3_transposed_below(cat(1, magic3x3, magic3x3_transposed));
+    linear_algebra::Matrix magic3x3_above_magic3x3_transposed_below(*cat(1, magic3x3, magic3x3_transposed));
     ASSERT_EQ(magic3x3_above_magic3x3_transposed_below[0][0], 8);
     ASSERT_EQ(magic3x3_above_magic3x3_transposed_below[1][0], 3);
     ASSERT_EQ(magic3x3_above_magic3x3_transposed_below[2][0], 4);
@@ -260,7 +260,7 @@ TEST(matrices_must_function_as_expected, matrices)
 
     // matrix concatenation.
 
-    linear_algebra::Matrix magic3x3_left_magic3x3_transposed_right(cat(2, magic3x3, magic3x3_transposed));
+    linear_algebra::Matrix magic3x3_left_magic3x3_transposed_right(*cat(2, magic3x3, magic3x3_transposed));
     ASSERT_EQ(magic3x3_left_magic3x3_transposed_right[0][0], 8);
     ASSERT_EQ(magic3x3_left_magic3x3_transposed_right[1][0], 3);
     ASSERT_EQ(magic3x3_left_magic3x3_transposed_right[2][0], 4);

@@ -23,6 +23,7 @@
 #include <cmath>    // NAN, std::isnan, std::pow
 #include <cstdio>   // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf etc.
 #include <cstring>  // std::memcmp, std::strcmp, std::strlen, std::strncmp
+#include <inttypes.h> // PRId32, PRId64, PRIu32, PRIu64, PRIx32, PRIx64
 #include <string>   // std::string
 #include <stdint.h> // uint32_t etc.
 #include <stdlib.h> // std::strtol, std::strtoll, std::strtoul
@@ -137,70 +138,63 @@ namespace datatypes
                 std::snprintf(buffer, sizeof(buffer), "%f", this->double_value);
                 return std::string(buffer);
             case (INT32_T):
-#ifdef __linux__
                 // in Linux `int` is 32 bits, `long` is 64 bits, `long long` is also 64 bits.
-                std::snprintf(buffer, sizeof(buffer), "%d", this->int32_t_value);
-#elif defined(_WIN32) || defined(WIN32)
                 // in Windows `int` is 32 bits, `long` is also 32 bits, `long long` is 64 bits.
-                std::snprintf(buffer, sizeof(buffer), "%ld", this->int32_t_value);
-#endif
+                std::snprintf(buffer, sizeof(buffer), "%" PRId32, this->int32_t_value);
                 return std::string(buffer);
             case (UINT32_T):
-#ifdef __linux__
+
                 // in Linux `int` is 32 bits, `long` is 64 bits, `long long` is also 64 bits.
-                std::snprintf(buffer, sizeof(buffer), "%u", this->uint32_t_value);
-#elif defined(_WIN32) || defined(WIN32)
                 // in Windows `int` is 32 bits, `long` is also 32 bits, `long long` is 64 bits.
-                std::snprintf(buffer, sizeof(buffer), "%lu", this->uint32_t_value);
-#endif
+                std::snprintf(buffer, sizeof(buffer), "%" PRIu32, this->uint32_t_value);
                 return std::string(buffer);
             case (BOOL_POINTER):
-                std::snprintf(buffer, sizeof(buffer), "%llx", static_cast<void*>(this->bool_pointer));
+                std::snprintf(buffer, sizeof(buffer), "%" PRIx64, (uint64_t) this->bool_pointer);
                 return std::string(buffer);
             case (FLOAT_POINTER):
-                std::snprintf(buffer, sizeof(buffer), "%llx", static_cast<void*>(this->float_pointer));
+                std::snprintf(buffer, sizeof(buffer), "%" PRIx64, (uint64_t) this->float_pointer);
                 return std::string(buffer);
             case (DOUBLE_POINTER):
-                std::snprintf(buffer, sizeof(buffer), "%llx", static_cast<void*>(this->double_pointer));
+                std::snprintf(buffer, sizeof(buffer), "%" PRIx64, (uint64_t) this->double_pointer);
                 return std::string(buffer);
             case (INT32_T_POINTER):
-                std::snprintf(buffer, sizeof(buffer), "%llx", static_cast<void*>(this->int32_t_pointer));
+                std::snprintf(buffer, sizeof(buffer), "%" PRIx64, (uint64_t) this->int32_t_pointer);
                 return std::string(buffer);
             case (UINT32_T_POINTER):
-                std::snprintf(buffer, sizeof(buffer), "%llx", static_cast<void*>(this->uint32_t_pointer));
+                std::snprintf(buffer, sizeof(buffer), "%" PRIx64, (uint64_t) this->uint32_t_pointer);
                 return std::string(buffer);
             case (UNIVERSE_POINTER):
-                std::snprintf(buffer, sizeof(buffer), "%llx", static_cast<void*>(this->universe_pointer));
+                std::snprintf(buffer, sizeof(buffer), "%" PRIx64, (uint64_t) this->universe_pointer);
                 return std::string(buffer);
             case (SCENE_POINTER):
-                std::snprintf(buffer, sizeof(buffer), "%llx", static_cast<void*>(this->scene_pointer));
+                std::snprintf(buffer, sizeof(buffer), "%" PRIx64, (uint64_t) this->scene_pointer);
                 return std::string(buffer);
             case (SHADER_POINTER):
-                std::snprintf(buffer, sizeof(buffer), "%llx", static_cast<void*>(this->shader_pointer));
+                std::snprintf(buffer, sizeof(buffer), "%" PRIx64, (uint64_t) this->shader_pointer);
                 return std::string(buffer);
             case (MATERIAL_POINTER):
-                std::snprintf(buffer, sizeof(buffer), "%llx", static_cast<void*>(this->material_pointer));
+                std::snprintf(buffer, sizeof(buffer), "%" PRIx64, (uint64_t) this->material_pointer);
                 return std::string(buffer);
             case (SPECIES_POINTER):
-                std::snprintf(buffer, sizeof(buffer), "%llx", static_cast<void*>(this->species_pointer));
+                std::snprintf(buffer, sizeof(buffer), "%" PRIx64, (uint64_t) this->species_pointer);
                 return std::string(buffer);
             case (OBJECT_POINTER):
-                std::snprintf(buffer, sizeof(buffer), "%llx", static_cast<void*>(this->object_pointer));
+                std::snprintf(buffer, sizeof(buffer), "%" PRIx64, (uint64_t) this->object_pointer);
                 return std::string(buffer);
             case (VECTORFONT_POINTER):
-                std::snprintf(buffer, sizeof(buffer), "%llx", static_cast<void*>(this->vector_font_pointer));
+                std::snprintf(buffer, sizeof(buffer), "%" PRIx64, (uint64_t) this->vector_font_pointer);
                 return std::string(buffer);
             case (GLYPH_POINTER):
-                std::snprintf(buffer, sizeof(buffer), "%llx", static_cast<void*>(this->glyph_pointer));
+                std::snprintf(buffer, sizeof(buffer), "%" PRIx64, (uint64_t) this->glyph_pointer);
                 return std::string(buffer);
             case (TEXT3D_POINTER):
-                std::snprintf(buffer, sizeof(buffer), "%llx", static_cast<void*>(this->text3D_pointer));
+                std::snprintf(buffer, sizeof(buffer), "%" PRIx64, (uint64_t) this->text3D_pointer);
                 return std::string(buffer);
             case (TEXT2D_POINTER):
-                std::snprintf(buffer, sizeof(buffer), "%llx", static_cast<void*>(this->font2D_pointer));
+                std::snprintf(buffer, sizeof(buffer), "%" PRIx64, (uint64_t) this->font2D_pointer);
                 return std::string(buffer);
             case (CONSOLE_POINTER):
-                std::snprintf(buffer, sizeof(buffer), "%llx", static_cast<void*>(this->console_pointer));
+                std::snprintf(buffer, sizeof(buffer), "%" PRIx64, (uint64_t) this->console_pointer);
                 return std::string(buffer);
             case (SPHERICAL_COORDINATES_STRUCT_POINTER):
                 if (this->spherical_coordinates_struct_pointer == nullptr)

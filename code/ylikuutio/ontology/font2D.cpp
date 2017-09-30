@@ -174,6 +174,11 @@ namespace ontology
         {
             current_left_x = x - length * text_size;
         }
+        else
+        {
+            std::cerr << "Invalid horizontal alignment: " << horizontal_alignment << "\n";
+            return;
+        }
 
         if (std::strcmp(vertical_alignment, "top") == 0)
         {
@@ -186,6 +191,11 @@ namespace ontology
         else if (std::strcmp(vertical_alignment, "bottom") == 0)
         {
             current_top_y = y + number_of_lines * text_size;
+        }
+        else
+        {
+            std::cerr << "Invalid vertical alignment: " << vertical_alignment << "\n";
+            return;
         }
 
         // Fill buffers

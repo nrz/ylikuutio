@@ -45,6 +45,7 @@
 
 // Include standard headers
 #include <cmath>         // NAN, std::isnan, std::pow
+#include <inttypes.h>    // PRId32, PRId64, PRIu32, PRIu64, PRIx32, PRIx64
 #include <iostream>      // std::cout, std::cin, std::cerr
 #include <memory>        // std::make_shared, std::shared_ptr
 #include <stdint.h>      // uint32_t etc.
@@ -372,7 +373,7 @@ namespace ontology
 
             uint64_t memory_address = reinterpret_cast<uint64_t>((void*) entity);
             char memory_address_char_array[256];
-            snprintf(memory_address_char_array, sizeof(memory_address_char_array), "0x%08x", static_cast<uint64_t>(memory_address));
+            snprintf(memory_address_char_array, sizeof(memory_address_char_array), "0x%" PRIx64, static_cast<uint64_t>(memory_address));
 
             std::string entity_info = "memory address: ";
             entity_info += std::string(memory_address_char_array);

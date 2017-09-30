@@ -196,8 +196,8 @@ namespace loaders
 
         // A glyph was found!
         // std::printf("<glyph found at 0x%lx.\n", (uint64_t) SVG_data_pointer);
-        char char_glyph_name[1024]; // FIXME: risk of buffer overflow.
-        char char_unicode[1024];    // FIXME: risk of buffer overflow.
+        char char_glyph_name[1024];
+        char char_unicode[1024];
         std::vector<std::vector<glm::vec2>> current_glyph_vertices; // vertices of the current glyph.
         bool has_glyph_name = false;
         bool has_glyph_unicode = false;
