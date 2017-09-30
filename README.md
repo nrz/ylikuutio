@@ -1,9 +1,9 @@
 # Ylikuutio. A 3D game and simulation engine.
 A hobby project of mine. Work in progress.
 
-Travis CI, master branch: https://travis-ci.org/nrz/ylikuutio.svg?branch=master
+Travis CI, master branch: ![Travis CI master branch status](https://travis-ci.org/nrz/ylikuutio.svg?branch=master)
 
-Travis CI, coverity_scan branch: https://travis-ci.org/nrz/ylikuutio.svg?branch=coverity_scan
+Travis CI, coverity_scan branch: ![Travis CI coverity_scan branch status](https://travis-ci.org/nrz/ylikuutio.svg?branch=coverity_scan)
 
 ## License
 Ylikuutio 3D engine is under The GNU General Public License 3,
