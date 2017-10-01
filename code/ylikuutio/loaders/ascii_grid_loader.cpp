@@ -163,8 +163,7 @@ namespace loaders
         // note: the value of `image_height_in_use` can be adjusted here (for testing purposes).
         int32_t image_height_in_use = image_height;
 
-        float* vertex_data;
-        vertex_data = new float[image_width * image_height_in_use];
+        float* vertex_data = new float[image_width * image_height_in_use];
 
         if (vertex_data == nullptr)
         {
@@ -173,8 +172,7 @@ namespace loaders
             return false;
         }
 
-        float* vertex_pointer;
-        vertex_pointer = vertex_data;
+        float* vertex_pointer = vertex_data;
 
         // start processing image_data.
         std::cout << "Processing image data.\n";
