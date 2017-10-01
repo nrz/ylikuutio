@@ -180,6 +180,8 @@ namespace loaders
             out_UVs     .push_back(uv);
             out_normals .push_back(normal);
         }
+
+        std::fclose(file);
         return true;
     }
 }
