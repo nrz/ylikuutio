@@ -222,7 +222,7 @@ namespace loaders
         triangulate_quads_struct.spherical_world_struct = geometry::SphericalWorldStruct(); // not used, but is needed in the function call.
 
         bool result = geometry::triangulate_quads(vertex_data, triangulate_quads_struct, out_vertices, out_UVs, out_normals);
-        delete vertex_data;
+        delete[] vertex_data;
         return result;
     }
 }
