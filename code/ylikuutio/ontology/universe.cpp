@@ -293,38 +293,44 @@ namespace ontology
                 case (datatypes::datatype::UNIVERSE_POINTER):
                     // OK, this is an `Universe` to be deleted.
                     delete static_cast<ontology::Universe*>(any_value->universe_pointer);
+                    break;
                 case (datatypes::datatype::SCENE_POINTER):
                     // OK, this is a `Scene` to be deleted.
                     delete static_cast<ontology::Scene*>(any_value->scene_pointer);
+                    break;
                 case (datatypes::datatype::SHADER_POINTER):
                     // OK, this is a `Shader` to be deleted.
                     delete static_cast<ontology::Shader*>(any_value->shader_pointer);
+                    break;
                 case (datatypes::datatype::MATERIAL_POINTER):
                     // OK, this is a `Material` to be deleted.
                     delete static_cast<ontology::Material*>(any_value->material_pointer);
+                    break;
                 case (datatypes::datatype::SPECIES_POINTER):
                     // OK, this is a `Species` to be deleted.
                     delete static_cast<ontology::Species*>(any_value->species_pointer);
+                    break;
                 case (datatypes::datatype::OBJECT_POINTER):
                     // OK, this is a `Object` to be deleted.
                     delete static_cast<ontology::Object*>(any_value->object_pointer);
+                    break;
                 case (datatypes::datatype::VECTORFONT_POINTER):
                     // OK, this is a `VectorFont` to be deleted.
                     delete static_cast<ontology::VectorFont*>(any_value->vector_font_pointer);
+                    break;
                 case (datatypes::datatype::GLYPH_POINTER):
                     // OK, this is a `Glyph` to be deleted.
                     delete static_cast<ontology::Glyph*>(any_value->glyph_pointer);
+                    break;
                 case (datatypes::datatype::TEXT3D_POINTER):
                     // OK, this is a `Text3D` to be deleted.
                     delete static_cast<ontology::Text3D*>(any_value->text3D_pointer);
+                    break;
                 default:
                     return nullptr;
             }
         }
-        else
-        {
-            return nullptr;
-        }
+        return nullptr;
     }
 
     std::shared_ptr<datatypes::AnyValue> Universe::info(
