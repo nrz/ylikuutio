@@ -102,6 +102,7 @@ namespace loaders
         {
             std::cerr << "Error while reading " << ASCII_grid_file_name << "\n";
             std::fclose(file);
+            delete[] point_data;
             return false;
         }
 
