@@ -74,35 +74,6 @@ namespace linear_algebra
         }
     }
 
-    Matrix::Matrix(std::shared_ptr<linear_algebra::Matrix> old_matrix)
-    {
-        this->width = old_matrix->width;
-        this->height = old_matrix->height;
-
-        // Copy values from old matrix (deep copy).
-        // Don't care whether `old_matrix` is fully populated or not.
-        for (uint32_t y = 0; y < this->height; y++)
-        {
-            // Get the slices of both arrays.
-            std::vector<float>& my_array = this->array_of_arrays.at(y);
-            std::vector<float>& other_array = old_matrix->array_of_arrays.at(y);
-
-            for (uint32_t x = 0; x < this->width; x++)
-            {
-                my_array[x] = other_array[x];
-            }
-        }
-
-        if (this->width == this->height)
-        {
-            this->is_square = true;
-        }
-        else
-        {
-            this->is_square = false;
-        }
-    }
-
     std::shared_ptr<linear_algebra::Matrix> Matrix::transpose()
     {
         std::shared_ptr<linear_algebra::Matrix> new_matrix = std::make_shared<linear_algebra::Matrix>(this->width, this->height); // Flip width and height.

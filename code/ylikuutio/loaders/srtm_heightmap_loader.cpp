@@ -104,9 +104,6 @@ namespace loaders
 
         std::cout << "Loading SRTM file " << abs_image_path << " ...\n";
 
-        // Actual 16-bit big-endian signed integer heightmap data.
-        uint8_t* image_data;
-
         // Open the file
         const char* char_image_path = abs_image_path.c_str();
         std::FILE* file = std::fopen(char_image_path, "rb");
@@ -123,7 +120,8 @@ namespace loaders
         uint32_t image_size = sizeof(int16_t) * true_image_width * true_image_height;
 
         // Create a buffer.
-        image_data = new uint8_t[image_size];
+        // Actual 16-bit big-endian signed integer heightmap data.
+        uint8_t* image_data = new uint8_t[image_size];
 
         if (image_data == nullptr)
         {
@@ -144,8 +142,7 @@ namespace loaders
         // Everything is in memory now, the file can be closed
         std::fclose(file);
 
-        float* vertex_data;
-        vertex_data = new float[image_width_in_use * image_height_in_use];
+        float* vertex_data = new float[image_width_in_use * image_height_in_use];
 
         if (vertex_data == nullptr)
         {

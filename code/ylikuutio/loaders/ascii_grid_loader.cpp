@@ -102,6 +102,7 @@ namespace loaders
         {
             std::cerr << "Error while reading " << ASCII_grid_file_name << "\n";
             std::fclose(file);
+            delete[] point_data;
             return false;
         }
 
@@ -162,8 +163,7 @@ namespace loaders
         // note: the value of `image_height_in_use` can be adjusted here (for testing purposes).
         int32_t image_height_in_use = image_height;
 
-        float* vertex_data;
-        vertex_data = new float[image_width * image_height_in_use];
+        float* vertex_data = new float[image_width * image_height_in_use];
 
         if (vertex_data == nullptr)
         {
@@ -172,8 +172,7 @@ namespace loaders
             return false;
         }
 
-        float* vertex_pointer;
-        vertex_pointer = vertex_data;
+        float* vertex_pointer = vertex_data;
 
         // start processing image_data.
         std::cout << "Processing image data.\n";
@@ -221,7 +220,7 @@ namespace loaders
         triangulate_quads_struct.spherical_world_struct = geometry::SphericalWorldStruct(); // not used, but is needed in the function call.
 
         bool result = geometry::triangulate_quads(vertex_data, triangulate_quads_struct, out_vertices, out_UVs, out_normals);
-        delete vertex_data;
+        delete[] vertex_data;
         return result;
     }
 }

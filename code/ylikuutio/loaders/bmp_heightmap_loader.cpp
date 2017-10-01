@@ -66,8 +66,7 @@ namespace loaders
         uint8_t *image_pointer;
         image_pointer = image_data;
 
-        float* vertex_data;
-        vertex_data = new float[world_size];
+        float* vertex_data = new float[world_size];
 
         if (vertex_data == nullptr)
         {
