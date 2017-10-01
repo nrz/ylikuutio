@@ -40,7 +40,7 @@ include_directories(
     FastNoiseSIMD/
     glew-2.0.0/include/
     glfw-3.2/include/
-    glm-0.9.4.0/
+    glm/
     pugixml/src/
     .
     )

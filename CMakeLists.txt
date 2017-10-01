@@ -75,7 +75,7 @@ include_directories(
     external/FastNoiseSIMD/
     external/glew-2.0.0/include/
     external/glfw-3.2/include/
-    external/glm-0.9.4.0/
+    external/glm/
     external/pugixml/src/
     .
     )
