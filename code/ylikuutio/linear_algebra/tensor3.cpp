@@ -18,15 +18,15 @@ namespace linear_algebra
         this->width = width;
         this->height = height;
         this->depth = depth;
-        this->array_of_arrays_of_arrays = new float**[this->height];
+        this->array_of_arrays_of_arrays.resize(this->height);
 
         for (uint32_t y = 0; y < this->height; y++)
         {
-            this->array_of_arrays_of_arrays[y] = new float*[this->width];
+            this->array_of_arrays_of_arrays.at(y).resize(this->width);
 
             for (uint32_t x = 0; x < this->width; x++)
             {
-                this->array_of_arrays_of_arrays[y][x] = new float[this->depth];
+                this->array_of_arrays_of_arrays.at(y).at(x).resize(this->depth);
             }
         }
 
@@ -45,21 +45,21 @@ namespace linear_algebra
         }
     }
 
-    Tensor3::Tensor3(Tensor3& old_tensor3)
+    Tensor3::Tensor3(linear_algebra::Tensor3& old_tensor3)
     {
         // copy constructor.
         this->width = old_tensor3.width;
         this->height = old_tensor3.height;
         this->depth = old_tensor3.depth;
-        this->array_of_arrays_of_arrays = new float**[this->height];
+        this->array_of_arrays_of_arrays.resize(this->height);
 
         for (uint32_t y = 0; y < this->height; y++)
         {
-            this->array_of_arrays_of_arrays[y] = new float*[this->width];
+            this->array_of_arrays_of_arrays.at(y).resize(this->width);
 
             for (uint32_t x = 0; x < this->width; x++)
             {
-                this->array_of_arrays_of_arrays[y][x] = new float[this->depth];
+                this->array_of_arrays_of_arrays.at(y).at(x).resize(this->depth);
             }
         }
 
@@ -78,22 +78,22 @@ namespace linear_algebra
         }
     }
 
-    Tensor3::Tensor3(Matrix& old_matrix)
+    Tensor3::Tensor3(linear_algebra::Matrix& old_matrix)
     {
         // constructor.
 
         this->width = old_matrix.width;
         this->height = old_matrix.height;
         this->depth = 1;
-        this->array_of_arrays_of_arrays = new float**[this->height];
+        this->array_of_arrays_of_arrays.resize(this->height);
 
         for (uint32_t y = 0; y < this->height; y++)
         {
-            this->array_of_arrays_of_arrays[y] = new float*[this->width];
+            this->array_of_arrays_of_arrays.at(y).resize(this->width);
 
             for (uint32_t x = 0; x < this->width; x++)
             {
-                this->array_of_arrays_of_arrays[y][x] = new float[this->depth];
+                this->array_of_arrays_of_arrays.at(y).at(x).resize(this->depth);
             }
         }
 
@@ -105,10 +105,6 @@ namespace linear_algebra
         this->is_cube = false;
     }
 
-    Tensor3::~Tensor3()
-    {
-    }
-
     void Tensor3::operator<<(const float rhs)
     {
         if (this->is_fully_populated)
@@ -118,8 +114,8 @@ namespace linear_algebra
         }
 
         // First, get the slice.
-        float** my_array_of_arrays = this->array_of_arrays_of_arrays[this->next_y_to_populate];
-        float* my_array = my_array_of_arrays[this->next_x_to_populate];
+        std::vector<std::vector<float>>& my_array_of_arrays = this->array_of_arrays_of_arrays[this->next_y_to_populate];
+        std::vector<float>& my_array = my_array_of_arrays[this->next_x_to_populate];
 
         // Then store the value.
         my_array[this->next_z_to_populate] = rhs;
@@ -147,8 +143,8 @@ namespace linear_algebra
         while (!this->is_fully_populated && rhs_i < rhs.size())
         {
             // First, get the slice.
-            float** my_array_of_arrays = this->array_of_arrays_of_arrays[this->next_y_to_populate];
-            float* my_array = my_array_of_arrays[this->next_x_to_populate];
+            std::vector<std::vector<float>>& my_array_of_arrays = this->array_of_arrays_of_arrays[this->next_y_to_populate];
+            std::vector<float>& my_array = my_array_of_arrays[this->next_x_to_populate];
 
             // Then store the value.
             my_array[this->next_z_to_populate] = rhs.at(rhs_i++);
@@ -170,7 +166,7 @@ namespace linear_algebra
         }
     }
 
-    bool Tensor3::operator==(const Tensor3& rhs)
+    bool Tensor3::operator==(linear_algebra::Tensor3& rhs)
     {
         // compare if tensors are equal.
         if (this->width != rhs.width ||
@@ -184,13 +180,13 @@ namespace linear_algebra
         for (uint32_t y = 0; y < this->height; y++)
         {
             // Get the slices of both arrays.
-            float** my_array_of_arrays = this->array_of_arrays_of_arrays[y];
-            float** other_array_of_arrays = rhs.array_of_arrays_of_arrays[y];
+            std::vector<std::vector<float>>& my_array_of_arrays = this->array_of_arrays_of_arrays[y];
+            std::vector<std::vector<float>>& other_array_of_arrays = rhs.array_of_arrays_of_arrays[y];
 
             for (uint32_t x = 0; x < this->width; x++)
             {
-                float* my_array = my_array_of_arrays[x];
-                float* other_array = other_array_of_arrays[x];
+                std::vector<float>& my_array = my_array_of_arrays[x];
+                std::vector<float>& other_array = other_array_of_arrays[x];
 
                 for (uint32_t z = 0; z < this->depth; z++)
                 {
@@ -206,7 +202,7 @@ namespace linear_algebra
         return true;
     }
 
-    bool Tensor3::operator!=(const Tensor3& rhs)
+    bool Tensor3::operator!=(linear_algebra::Tensor3& rhs)
     {
         // compare if tensors are equal.
         if (this->width != rhs.width ||
@@ -220,13 +216,13 @@ namespace linear_algebra
         for (uint32_t y = 0; y < this->height; y++)
         {
             // Get the slices of both arrays.
-            float** my_array_of_arrays = this->array_of_arrays_of_arrays[y];
-            float** other_array_of_arrays = rhs.array_of_arrays_of_arrays[y];
+            std::vector<std::vector<float>>& my_array_of_arrays = this->array_of_arrays_of_arrays[y];
+            std::vector<std::vector<float>>& other_array_of_arrays = rhs.array_of_arrays_of_arrays[y];
 
             for (uint32_t x = 0; x < this->width; x++)
             {
-                float* my_array = my_array_of_arrays[x];
-                float* other_array = other_array_of_arrays[x];
+                std::vector<float>& my_array = my_array_of_arrays[x];
+                std::vector<float>& other_array = other_array_of_arrays[x];
 
                 for (uint32_t z = 0; z < this->depth; z++)
                 {

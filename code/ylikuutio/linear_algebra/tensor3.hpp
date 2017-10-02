@@ -21,24 +21,23 @@ namespace linear_algebra
             Tensor3(uint32_t height, uint32_t width, uint32_t depth);
 
             // copy constructor.
-            Tensor3(Tensor3& old_tensor3);
+            Tensor3(linear_algebra::Tensor3& old_tensor3);
+            Tensor3(std::shared_ptr<linear_algebra::Tensor3> old_matrix)
+                : Tensor3(*old_matrix) { }
 
             // constructor.
-            Tensor3(Matrix& old_matrix);
-
-            // destructor.
-            ~Tensor3();
+            Tensor3(linear_algebra::Matrix& old_matrix);
 
             // Inspired by http://stackoverflow.com/questions/6969881/operator-overload/6969904#6969904
             class Proxy2D
             {
                 public:
-                    Proxy2D(float** array_of_arrays) : array_of_arrays(array_of_arrays) { }
+                    Proxy2D(std::vector<std::vector<float>>& array_of_arrays) : array_of_arrays(array_of_arrays) { }
 
                     class Proxy
                     {
                         public:
-                            Proxy(float* proxy_array) : proxy_array(proxy_array) { }
+                            Proxy(std::vector<float>& proxy_array) : proxy_array(proxy_array) { }
 
                             float& operator[](const uint32_t index)
                             {
@@ -46,7 +45,7 @@ namespace linear_algebra
                             }
 
                         private:
-                            float* proxy_array;
+                            std::vector<float>& proxy_array;
                     };
 
                     Proxy operator[](const uint32_t index)
@@ -55,13 +54,13 @@ namespace linear_algebra
                     }
 
                 private:
-                    float** array_of_arrays;
+                    std::vector<std::vector<float>> array_of_arrays;
             };
 
             void operator<<(const float rhs);
             void operator<<(const std::vector<float>& rhs);
-            bool operator==(const Tensor3& rhs);
-            bool operator!=(const Tensor3& rhs);
+            bool operator==(linear_algebra::Tensor3& rhs);
+            bool operator!=(linear_algebra::Tensor3& rhs);
             Proxy2D operator[](const uint32_t index)
             {
                 return Proxy2D(array_of_arrays_of_arrays[index]);
@@ -82,7 +81,7 @@ namespace linear_algebra
             int32_t next_y_to_populate;
             int32_t next_z_to_populate;
 
-            float*** array_of_arrays_of_arrays;
+            std::vector<std::vector<std::vector<float>>> array_of_arrays_of_arrays;
     };
 }
 
