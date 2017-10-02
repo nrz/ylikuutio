@@ -23,6 +23,7 @@
 // Include standard headers
 #include <vector>   // std::vector
 #include <cstring>  // std::memcmp, std::strcmp, std::strlen, std::strncmp
+#include <iostream> // std::cout, std::cin, std::cerr
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 
@@ -266,6 +267,11 @@ namespace ontology
             {
                 // BMP is stored in the file beginning from the bottom line.
                 uv_y = 1 - (character / font_size) / (GLfloat) font_size;
+            }
+            else
+            {
+                std::cerr << "invalid char_font_texture_file_format " << std::string(char_font_texture_file_format) << "\n";
+                return;
             }
 
             glm::vec2 uv_up_left = glm::vec2(uv_x, uv_y);

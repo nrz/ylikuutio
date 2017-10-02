@@ -154,9 +154,13 @@ namespace loaders
         bufsize = mipMapCount > 1 ? linearSize * 2 : linearSize;
         buffer = (uint8_t*) malloc(bufsize * sizeof(uint8_t));
 
-        // TODO: add check for file reading!
-        // TODO: store hardcoded value 4 into a variable.
-        std::fread(buffer, 1, bufsize, fp);
+        if (std::fread(buffer, 1, bufsize, fp) != bufsize)
+        {
+            std::cerr << "Error while reading " << filename << "\n";
+            std::fclose(fp);
+            return 0;
+        }
+
         /* close the file pointer */
         std::fclose(fp);
 
