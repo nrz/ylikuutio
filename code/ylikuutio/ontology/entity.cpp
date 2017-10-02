@@ -10,6 +10,7 @@ namespace ontology
     Entity::Entity()
     {
         // constructor.
+        this->childID = -1;
         this->universe_pointer = nullptr;
         this->prerender_callback = nullptr;
         this->postrender_callback = nullptr;
