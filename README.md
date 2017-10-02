@@ -164,7 +164,7 @@ code itself are the best references on how to use Ylikuutio in practice.
 
 ## FAQ
 Q: What is "Ylikuutio"?
-A: In Finnish, "yli" means [https://en.wiktionary.org/wiki/yli-]("over"), and "kuutio" means [https://en.wiktionary.org/wiki/kuutio]("cube").
+A: In Finnish, "yli" means ["over"](https://en.wiktionary.org/wiki/yli-), and "kuutio" means ["cube"](https://en.wiktionary.org/wiki/kuutio).
    So, "Ylikuutio" is a reference to a [hypercube](https://en.wikipedia.org/wiki/Hypercube).
 
 Q: How is Ylikuutio software developed?
