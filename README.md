@@ -1,9 +1,8 @@
 # Ylikuutio. A 3D game and simulation engine.
 A hobby project of mine. Work in progress.
 
-Travis CI, master branch: ![Travis CI master branch status](https://travis-ci.org/nrz/ylikuutio.svg?branch=master)
-
-Travis CI, coverity_scan branch: ![Travis CI coverity_scan branch status](https://travis-ci.org/nrz/ylikuutio.svg?branch=coverity_scan)
+[![Build status](https://travis-ci.org/nrz/ylikuutio.svg?branch=master)](https://travis-ci.org/nrz/ylikuutio)
+[![Coverity Scan](https://scan.coverity.com/projects/nrz-ylikuutio/badge.svg)](https://scan.coverity.com/projects/nrz-ylikuutio)
 
 ## License
 Ylikuutio 3D engine is under The GNU General Public License 3,
@@ -11,71 +10,57 @@ or (at your option) any later version. See COPYING file.
 All my code copyright (C) 2016-2017 Antti Nuortimo.
 
 The source code from http://www.opengl-tutorial.org/ is licensed
-under WTFPL Public Licence version 2.
-http://www.opengl-tutorial.org/download/
+under [WTFPL Public Licence version 2](http://www.opengl-tutorial.org/download/).
 
 Open Asset Import Library (assimp) is licensed
-under a 3-clause BSD license.
-http://www.assimp.org/main_license.html
+under [a 3-clause BSD license](http://www.assimp.org/main_license.html).
 
-TinyScheme is licensed under BSD-style license.
-http://tinyscheme.sourceforge.net/license.txt
+TinyScheme is licensed under [BSD-style license](http://tinyscheme.sourceforge.net/license.txt).
 
-FastNoiseSIMD is licensed under the MIT license.
-https://github.com/Auburns/FastNoiseSIMD/blob/master/LICENSE
+FastNoiseSIMD is licensed under [the MIT license](https://github.com/Auburns/FastNoiseSIMD/blob/master/LICENSE).
 
 The OpenGL Extension Wrangler Library (GLEW) is licensed
-under the Modified BSD License, the Mesa 3-D License (MIT)
-and the Khronos License (MIT).
-https://github.com/nigels-com/glew#copyright-and-licensing
+under [the Modified BSD License, the Mesa 3-D License (MIT)
+and the Khronos License (MIT)](https://github.com/nigels-com/glew#copyright-and-licensing).
 
-GLFW is licensed under the zlib/libpng license.
-http://www.glfw.org/license.html
+GLFW is licensed under [the zlib/libpng license](http://www.glfw.org/license.html).
 
-OpenGL Mathematics (GLM) is licensed under The Happy Bunny License
-(Modified MIT License) and MIT License.
-http://glm.g-truc.net/copying.txt
+OpenGL Mathematics (GLM) is licensed under [The Happy Bunny License
+(Modified MIT License) and MIT License](http://glm.g-truc.net/copying.txt).
 
-pugixml is licensed under MIT license.
-https://github.com/zeux/pugixml/blob/master/README.md
+pugixml is licensed under [MIT license](https://github.com/zeux/pugixml/blob/master/README.md).
 
 Other resources are under their respective licenses.
 
-Grass texture is from Free Seamless Green Grass Textures:
-http://www.brusheezy.com/textures/20185-seamless-green-grass-textures
+Grass texture is from [Free Seamless Green Grass Textures](http://www.brusheezy.com/textures/20185-seamless-green-grass-textures).
 
 Pink Marble Pavers Or Tiles Background Texture is from www.myfreetextures.com .
 pavers1b2.bmp is scaled down and converted into BMP from the original pavers1b2.jpg .
 http://www.myfreetextures.com/marbles-pavers-tiles-background-texture/
-License conditions are available on www.myfreetextures.com website:
-http://www.myfreetextures.com/sample-page/
+License conditions are available on [www.myfreetextures.com website](http://www.myfreetextures.com/sample-page/).
 
-UV map texture is from opengl-tutorial:
-http://www.opengl-tutorial.org/beginners-tutorials/tutorial-8-basic-shading/
+UV map texture is from [opengl-tutorial](http://www.opengl-tutorial.org/beginners-tutorials/tutorial-8-basic-shading/).
 
-kongtext font is made by codeman38 (http://zone38.net/), see
+kongtext font is made by [codeman38](http://zone38.net/), see
 res/fonts/kongtext/license.txt for the license.
 
 Laser scanning data of Helsinki, Joensuu, and other Finnish cities is
 licensed under a Creative Commons Attribution 4.0 International License (CC-BY).
-Contains data from the open data of the National Land Survey of Finland.
+Contains data from [the open data of the National Land Survey of Finland](http://www.maanmittauslaitos.fi/en/professionals/digital-products/datasets-free-charge/terms-use-license/national-land-survey-open-data-cc-40-licence).
 Reference system is ETRS-TM35FIN and distribution format is LAZ.
-http://www.maanmittauslaitos.fi/en/professionals/digital-products/datasets-free-charge/terms-use-license/national-land-survey-open-data-cc-40-licence
 
 Shuttle Radar Topography Mission (SRTM) data around Bolivian altiplano and
 elsewhere in the world between 56° S and 60° N is in the public domain.
 SRTM is a NASA (National Aeronautics and Space Administration) mission.
 SRTM data shipped with Ylikuutio belongs to SRTMGL3 dataset.
-OpenStreetMap Wiki provides information about different SRTM datasets:
-http://wiki.openstreetmap.org/wiki/SRTM
+[OpenStreetMap Wiki provides information about different SRTM datasets](http://wiki.openstreetmap.org/wiki/SRTM).
 
 Suzanne the monkey is a standard Blender object. According to Blender
 license information: "All your artwork – images or movie files –
 including the .blend files and other data files Blender can write,
 is free for you to use as you like." Ylikuutio does not contain
-any code from Blender, however. Blender itself is released under
-the GNU General Public License (GPL) 2 or later.
-https://www.blender.org/about/license/
+any code from Blender, however. [Blender itself is released under
+the GNU General Public License (GPL) 2 or later](https://www.blender.org/about/license/).
 
 ## Compiling
 Ylikuutio can be compiled with GCC, Clang or Visual Studio.
