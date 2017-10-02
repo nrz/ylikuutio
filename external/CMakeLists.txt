@@ -25,7 +25,7 @@ add_subdirectory(pugixml)
 add_subdirectory(FastNoiseSIMD)
 
 ### GLFW ###
-add_subdirectory(glfw-3.2)
+add_subdirectory(glfw)
 
 # TinySceme #
 if(ENABLE_SCRIPTING_WITH_TINYSCHEME)
@@ -39,7 +39,7 @@ include_directories(
     assimp/include/
     FastNoiseSIMD/
     glew-2.0.0/include/
-    glfw-3.2/include/
+    glfw/include/
     glm/
     pugixml/src/
     .
