@@ -720,6 +720,7 @@ namespace datatypes
         this->font2D_pointer = original.font2D_pointer;
         this->console_pointer = original.console_pointer;
         this->spherical_coordinates_struct_pointer = original.spherical_coordinates_struct_pointer;
+        this->std_string_pointer = original.std_string_pointer;
         this->glm_vec3_pointer = original.glm_vec3_pointer;
     }
 
