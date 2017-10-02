@@ -34,10 +34,9 @@ Other resources are under their respective licenses.
 
 Grass texture is from [Free Seamless Green Grass Textures](http://www.brusheezy.com/textures/20185-seamless-green-grass-textures).
 
-Pink Marble Pavers Or Tiles Background Texture is from www.myfreetextures.com .
-pavers1b2.bmp is scaled down and converted into BMP from the original pavers1b2.jpg .
-http://www.myfreetextures.com/marbles-pavers-tiles-background-texture/
-License conditions are available on [www.myfreetextures.com website](http://www.myfreetextures.com/sample-page/).
+Pink Marble Pavers Or Tiles Background Texture is from [My Free Textures](http://www.myfreetextures.com/marbles-pavers-tiles-background-texture/).
+pavers1b2.bmp is scaled down and converted into BMP from the original `pavers1b2.jpg`.
+License conditions are available on [My Free Textures License/TOU page](http://www.myfreetextures.com/sample-page/).
 
 UV map texture is from [opengl-tutorial](http://www.opengl-tutorial.org/beginners-tutorials/tutorial-8-basic-shading/).
 
@@ -46,14 +45,14 @@ res/fonts/kongtext/license.txt for the license.
 
 Laser scanning data of Helsinki, Joensuu, and other Finnish cities is
 licensed under a Creative Commons Attribution 4.0 International License (CC-BY).
-Contains data from [the open data of the National Land Survey of Finland](http://www.maanmittauslaitos.fi/en/professionals/digital-products/datasets-free-charge/terms-use-license/national-land-survey-open-data-cc-40-licence).
+Contains data from [the National Land Survey of Finland Topographic Database 08/2016](http://www.maanmittauslaitos.fi/en/opendata-licence-cc40).
 Reference system is ETRS-TM35FIN and distribution format is LAZ.
 
-Shuttle Radar Topography Mission (SRTM) data around Bolivian altiplano and
+[Shuttle Radar Topography Mission (SRTM)](https://www2.jpl.nasa.gov/srtm/) data around Bolivian altiplano and
 elsewhere in the world between 56° S and 60° N is in the public domain.
-SRTM is a NASA (National Aeronautics and Space Administration) mission.
+SRTM is a [NASA (National Aeronautics and Space Administration)](https://www.nasa.gov/) mission.
 SRTM data shipped with Ylikuutio belongs to SRTMGL3 dataset.
-[OpenStreetMap Wiki provides information about different SRTM datasets](http://wiki.openstreetmap.org/wiki/SRTM).
+Information about different SRTM datasets is available in [OpenStreetMap Wiki](http://wiki.openstreetmap.org/wiki/SRTM).
 
 Suzanne the monkey is a standard Blender object. According to Blender
 license information: "All your artwork – images or movie files –
@@ -165,12 +164,11 @@ code itself are the best references on how to use Ylikuutio in practice.
 
 ## FAQ
 Q: What is "Ylikuutio"?
-A: In Finnish, "yli" means "over", and "kuutio" means "cube".
-   So, "Ylikuutio" is a reference to a hypercube.
-   https://en.wikipedia.org/wiki/Hypercube
+A: In Finnish, "yli" means [https://en.wiktionary.org/wiki/yli-]("over"), and "kuutio" means [https://en.wiktionary.org/wiki/kuutio]("cube").
+   So, "Ylikuutio" is a reference to a [hypercube](https://en.wikipedia.org/wiki/Hypercube).
 
 Q: How is Ylikuutio software developed?
-A: In Debian GNU/Linux (Debian Stretch at the moment), using Vim.
+A: In [Debian GNU/Linux](https://www.debian.org/) ([Debian Stretch](https://wiki.debian.org/DebianStretch) at the moment), using [Vim](http://www.vim.org/).
 
 Q: For what kinds of software Ylikuutio can be used?
 A: Ylikuutio can be used for all kinds of 3D games and simulations.
@@ -200,7 +198,7 @@ A: Yes, Ylikuutio uses VBOs (vertex buffer objects) and VBO indexing.
 
 Q: Is Ylikuutio based on some other 3D engine?
 A: Some parts of Ylikuutio (shaders, some file loaders, etc.) are based
-on http://www.opengl-tutorial.org/ , which I really recommend for anyone
+on [http://www.opengl-tutorial.org/](http://www.opengl-tutorial.org/), which I really recommend for anyone
 interested in learning OpenGL programming. Ylikuutio also uses external
 libraries such as TinyScheme, FastNoiseSIMD, GLEW, GLFW, GLM, and
 pugixml. The rest is written from scratch.
@@ -247,7 +245,7 @@ A: I like Lisp-family languages and TinyScheme fulfils my
 * sound
 
 ## Trademarks:
-Android is a trademark of Google Inc. See https://developer.android.com/legal.html .
+Android is a trademark of Google Inc. See [https://developer.android.com/legal.html](https://developer.android.com/legal.html).
 
 ## Contact info
 (found bugs and suggestions are very welcome!)
