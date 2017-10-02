@@ -2,6 +2,11 @@
 #define PI 3.14159265359f
 #endif
 
+#ifndef __STDC_FORMAT_MACROS
+// For MinGW.
+#define __STDC_FORMAT_MACROS
+#endif
+
 #ifndef GLM_FORCE_RADIANS
 #define GLM_FORCE_RADIANS
 #define DEGREES_TO_RADIANS(x) (x * PI / 180.0f)

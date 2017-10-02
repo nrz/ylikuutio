@@ -1,3 +1,8 @@
+#ifndef __STDC_FORMAT_MACROS
+// For MinGW.
+#define __STDC_FORMAT_MACROS
+#endif
+
 #include "any_value.hpp"
 #include "spherical_coordinates_struct.hpp"
 #include "code/ylikuutio/ontology/entity.hpp"
