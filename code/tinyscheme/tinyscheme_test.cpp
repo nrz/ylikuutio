@@ -30,7 +30,7 @@ scheme* init_scheme()
     if (init_file == nullptr)
     {
         std::cerr << "error loading init.scm\n";
-        delete sc;
+        free(sc);
         return nullptr;
     }
 
