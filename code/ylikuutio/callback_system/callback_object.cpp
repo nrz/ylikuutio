@@ -57,8 +57,11 @@ namespace callback_system
     CallbackObject::CallbackObject(callback_system::CallbackEngine* parent_pointer)
     {
         // constructor.
+        this->childID = -1;
         this->callback = nullptr;
         this->parent_pointer = parent_pointer;
+
+        this->number_of_callback_parameters = 0;
 
         // get childID from the CallbackEngine and set pointer to this CallbackObject.
         this->bind_to_parent();
@@ -67,6 +70,7 @@ namespace callback_system
     CallbackObject::CallbackObject(const InputParametersToAnyValueCallback callback, callback_system::CallbackEngine* parent_pointer)
     {
         // constructor.
+        this->childID = -1;
         this->callback = callback;
         this->parent_pointer = parent_pointer;
 
