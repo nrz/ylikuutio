@@ -48,6 +48,12 @@
 #include <GLFW/glfw3.h>
 #endif
 
+// Include GLM
+#ifndef __GLM_GLM_HPP_INCLUDED
+#define __GLM_GLM_HPP_INCLUDED
+#include <glm/glm.hpp> // glm
+#endif
+
 // Include standard headers
 #include <cmath>         // NAN, std::isnan, std::pow
 #include <inttypes.h>    // PRId32, PRId64, PRIu32, PRIu64, PRIx32, PRIx64
@@ -82,6 +88,9 @@ namespace ontology
         this->window = nullptr;
         this->window_width = 1600; // default width.
         this->window_height = 900; // default height.
+
+        this->ProjectionMatrix = glm::mat4(1.0f); // identity matrix (dummy value).
+        this->ViewMatrix = glm::mat4(1.0f);       // identity matrix (dummy value).
 
         // Variables related to the camera.
         this->aspect_ratio = static_cast<GLfloat>(this->window_width / this->window_height);
