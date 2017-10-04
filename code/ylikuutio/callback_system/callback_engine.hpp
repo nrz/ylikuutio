@@ -11,11 +11,6 @@
 #include <string>        // std::string
 #include <vector>        // std::vector
 
-namespace ontology
-{
-    class Universe;
-}
-
 // callback typedefs in alphabetical order.
 typedef void (*VoidToVoidCallback)(void);
 typedef void (*AnyValueToVoidCallback)(datatypes::AnyValue);
