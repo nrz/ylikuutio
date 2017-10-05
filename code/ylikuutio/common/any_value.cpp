@@ -15,6 +15,7 @@
 #include "code/ylikuutio/ontology/vector_font.hpp"
 #include "code/ylikuutio/ontology/glyph.hpp"
 #include "code/ylikuutio/ontology/text3D.hpp"
+#include "code/ylikuutio/ontology/symbiosis.hpp"
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
 
 // Include GLM
@@ -32,25 +33,6 @@
 #include <string>   // std::string
 #include <stdint.h> // uint32_t etc.
 #include <stdlib.h> // std::strtol, std::strtoll, std::strtoul
-
-namespace ontology
-{
-    class Universe;
-    class Scene;
-    class Shader;
-    class Material;
-    class Species;
-    class Object;
-    class VectorFont;
-    class Glyph;
-    class Text3D;
-    class Symbiosis;
-}
-
-namespace font2D
-{
-    class Font2D;
-}
 
 namespace console
 {
