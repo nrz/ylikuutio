@@ -69,6 +69,27 @@ TEST(lines2D_defined_with_std_vector_float_and_glm_vec2_must_be_identical, x1_0_
     ASSERT_TRUE(line_std_vector_float.is_identical_with(&line_glm_vec2));
     ASSERT_TRUE(line_glm_vec2.is_identical_with(&line_std_vector_float));
 }
+TEST(lines2D_defined_with_std_vector_float_and_glm_vec2_must_not_be_identical, x1_0_y1_0_x2_0_y2_1_x1_0_y1_1_x2_0_y2_0)
+{
+    geometry::Line2D line1_std_vector_float = geometry::Line2D(std::vector<float>{ 0.0f, 0.0f }, std::vector<float>{ 0.0f, 1.0f });
+    geometry::Line2D line2_std_vector_float = geometry::Line2D(std::vector<float>{ 0.0f, 1.0f }, std::vector<float>{ 0.0f, 0.0f });
+    ASSERT_FALSE(line1_std_vector_float.is_identical_with(&line2_std_vector_float));
+    ASSERT_FALSE(line2_std_vector_float.is_identical_with(&line1_std_vector_float));
+}
+TEST(lines2D_defined_with_std_vector_float_and_glm_vec2_must_not_be_identical, x1_1_y1_2_x2_3_y2_4_x1_3_y1_4_x2_1_y2_2)
+{
+    geometry::Line2D line1_std_vector_float = geometry::Line2D(std::vector<float>{ 1.0f, 2.0f }, std::vector<float>{ 3.0f, 4.0f });
+    geometry::Line2D line2_std_vector_float = geometry::Line2D(std::vector<float>{ 3.0f, 4.0f }, std::vector<float>{ 1.0f, 2.0f });
+    ASSERT_FALSE(line1_std_vector_float.is_identical_with(&line2_std_vector_float));
+    ASSERT_FALSE(line2_std_vector_float.is_identical_with(&line1_std_vector_float));
+}
+TEST(lines2D_defined_with_std_vector_float_and_glm_vec2_must_not_be_identical, x1_1_y1_2_x2_3_y2_4_x1_2_y1_1_x2_4_y2_3)
+{
+    geometry::Line2D line1_std_vector_float = geometry::Line2D(std::vector<float>{ 1.0f, 2.0f }, std::vector<float>{ 3.0f, 4.0f });
+    geometry::Line2D line2_std_vector_float = geometry::Line2D(std::vector<float>{ 2.0f, 1.0f }, std::vector<float>{ 4.0f, 3.0f });
+    ASSERT_FALSE(line1_std_vector_float.is_identical_with(&line2_std_vector_float));
+    ASSERT_FALSE(line2_std_vector_float.is_identical_with(&line1_std_vector_float));
+}
 TEST(line2D_must_be_defined_as_expected, line2D_x1_340_y1_150_x2_100_y2_50)
 {
     std::vector<float> point1;
