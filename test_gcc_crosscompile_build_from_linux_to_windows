@@ -1,0 +1,27 @@
+#!/bin/bash
+original_dir=$(pwd)
+script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+cd ${script_dir}
+timestamp=$(date --rfc-3339=seconds | sed 's/[^0-9a-zA-Z]/_/g')
+
+while :
+do
+    build_dir="build_test_gcc_crosscompile_build_from_linux_to_windows_${timestamp}"
+
+    if [ -d ${build_dir} ]
+    then
+        echo "${build_dir} exists already, waiting for 1 second..."
+        sleep 1
+        continue
+    fi
+
+    echo "creating ${build_dir}"
+    mkdir ${build_dir}
+    echo "changing into ${build_dir}"
+    cd ${build_dir}
+    ${script_dir}/crosscompile_from_linux_to_windows_gcc
+    wine tinyscheme_test.exe
+    break
+done
+
+cd ${original_dir}
