@@ -16,7 +16,7 @@ add_definitions(
 # Compile external dependencies
 
 # Assimp
-add_subdirectory(assimp)
+# add_subdirectory(assimp)
 
 # pugixml
 add_subdirectory(pugixml)

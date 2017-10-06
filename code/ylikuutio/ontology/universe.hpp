@@ -183,6 +183,7 @@ namespace ontology
 {
     class Scene;
     class Shader;
+    class Species;
     class Object;
 
     class Universe: public ontology::Entity

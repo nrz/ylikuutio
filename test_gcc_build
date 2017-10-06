@@ -1,0 +1,28 @@
+#!/bin/bash
+original_dir=$(pwd)
+script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+cd ${script_dir}
+timestamp=$(date --rfc-3339=seconds | sed 's/[^0-9a-zA-Z]/_/g')
+
+while :
+do
+    build_dir="build_test_gcc_linux_${timestamp}"
+
+    if [ -d ${build_dir} ]
+    then
+        echo "${build_dir} exists already, waiting for 1 second..."
+        sleep 1
+        continue
+    fi
+
+    echo "creating ${build_dir}"
+    mkdir ${build_dir}
+    echo "changing into ${build_dir}"
+    cd ${build_dir}
+    ${script_dir}/compile_linux_gcc
+    ./unit_tests_with_Google_Test
+    ./tinyscheme_test
+    break
+done
+
+cd ${original_dir}
