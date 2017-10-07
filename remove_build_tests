@@ -1,0 +1,6 @@
+#!/bin/bash
+original_dir=$(pwd)
+script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+cd ${script_dir}
+rm -rfv build_test_*
+cd ${original_dir}
