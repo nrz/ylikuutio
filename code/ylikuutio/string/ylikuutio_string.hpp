@@ -57,6 +57,8 @@ namespace string
             const uint32_t line_length);
 
     bool check_if_float_string(const std::string& my_string);
+    bool check_if_double_string(const std::string& my_string);
+    bool check_if_floating_point_string(const std::string& my_string, int32_t safe_number_of_chars);
 
     bool check_if_signed_integer_string(const std::string& my_string);
 

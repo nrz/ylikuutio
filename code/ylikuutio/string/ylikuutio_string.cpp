@@ -241,6 +241,20 @@ namespace string
 
     bool check_if_float_string(const std::string& my_string)
     {
+        int32_t maximum_safe_length_for_float_string = 38;
+        return check_if_floating_point_string(my_string, maximum_safe_length_for_float_string);
+    }
+
+    bool check_if_double_string(const std::string& my_string)
+    {
+        int32_t maximum_safe_length_for_double_string = 308;
+        return check_if_floating_point_string(my_string, maximum_safe_length_for_double_string);
+    }
+
+    bool check_if_floating_point_string(const std::string& my_string, int32_t safe_number_of_chars)
+    {
+        int32_t n_chars = 0;
+
         if (my_string.empty())
         {
             return false;
@@ -278,11 +292,21 @@ namespace string
 
                 // OK, decimal point here.
                 is_dot_found = true;
+                continue;
             }
 
-            else if (my_string.at(i) < '0' || my_string.at(i) > '9')
+            if (my_string.at(i) < '0' || my_string.at(i) > '9')
             {
                 return false;
+            }
+
+            if (!is_dot_found)
+            {
+                if (++n_chars > safe_number_of_chars)
+                {
+                    // Too many characters, maximum safe number is 38 characters for float, 308 for double.
+                    return false;
+                }
             }
         }
 

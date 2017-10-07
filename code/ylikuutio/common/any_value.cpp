@@ -296,7 +296,7 @@ namespace datatypes
                 }
             case (DOUBLE):
                 {
-                    if (!string::check_if_float_string(value_string))
+                    if (!string::check_if_double_string(value_string))
                     {
                         return false;
                     }
