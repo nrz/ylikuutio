@@ -206,6 +206,8 @@ namespace loaders
             }
         }
 
+        std::cout << "\n";
+
         delete[] point_data;
 
         std::cout << "Triangulating ascii grid data.\n";
