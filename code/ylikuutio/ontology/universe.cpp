@@ -295,6 +295,12 @@ namespace ontology
         else if (command_parameters.size() == 1)
         {
             std::string name = command_parameters[0];
+
+            if (universe->entity_anyvalue_map.count(name) != 1)
+            {
+                return nullptr;
+            }
+
             datatypes::AnyValue* any_value = universe->entity_anyvalue_map[name];
 
             if (any_value == nullptr)
