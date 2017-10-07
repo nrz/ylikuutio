@@ -182,7 +182,7 @@ namespace console
         this->my_keyrelease_callback_engine_vector_pointer = my_keyrelease_callback_engine_vector_pointer;
     }
 
-    void Console::print_text(std::string text)
+    void Console::print_text(const std::string& text)
     {
         // This function is to be called from console command callbacks to print text on console.
         // Please note that it is not necessary to be in console to be able to print in console.
@@ -191,7 +191,7 @@ namespace console
         std::list<char> text_char_list;
         int32_t current_line_length = 0;
 
-        for (char& my_char : text)
+        for (const char& my_char : text)
         {
             if (my_char == '\n')
             {
