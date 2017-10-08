@@ -2,10 +2,10 @@
 original_dir=$(pwd)
 script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd ${script_dir}
-timestamp=$(date --rfc-3339=seconds | sed 's/[^0-9a-zA-Z]/_/g')
 
 while :
 do
+    timestamp=$(date --rfc-3339=seconds | sed 's/[^0-9a-zA-Z]/_/g')
     build_dir="build_test_gcc_crosscompile_build_from_linux_to_windows_${timestamp}"
 
     if [ -d ${build_dir} ]

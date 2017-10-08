@@ -239,8 +239,50 @@ namespace string
         return my_string;
     }
 
+    std::vector<std::string> convert_std_list_char_to_std_vector_std_string(
+            const std::list<char>& std_list_char,
+            const uint32_t line_length)
+    {
+        std::vector<std::string> my_vector;
+        std::string my_string;
+        uint32_t remaining_characters_on_this_line = line_length;
+
+        for (std::list<char>::const_iterator it = std_list_char.begin(); it != std_list_char.end(); it++)
+        {
+            if (remaining_characters_on_this_line == 0)
+            {
+                my_vector.push_back(my_string);
+                my_string.clear();
+                remaining_characters_on_this_line = line_length;
+            }
+            my_string.push_back(*it);
+            remaining_characters_on_this_line--;
+        }
+
+        if (my_string.size() > 0)
+        {
+            my_vector.push_back(my_string);
+        }
+
+        return my_vector;
+    }
+
     bool check_if_float_string(const std::string& my_string)
     {
+        int32_t maximum_safe_length_for_float_string = 38;
+        return check_if_floating_point_string(my_string, maximum_safe_length_for_float_string);
+    }
+
+    bool check_if_double_string(const std::string& my_string)
+    {
+        int32_t maximum_safe_length_for_double_string = 308;
+        return check_if_floating_point_string(my_string, maximum_safe_length_for_double_string);
+    }
+
+    bool check_if_floating_point_string(const std::string& my_string, int32_t safe_number_of_chars)
+    {
+        int32_t n_chars = 0;
+
         if (my_string.empty())
         {
             return false;
@@ -278,11 +320,21 @@ namespace string
 
                 // OK, decimal point here.
                 is_dot_found = true;
+                continue;
             }
 
-            else if (my_string.at(i) < '0' || my_string.at(i) > '9')
+            if (my_string.at(i) < '0' || my_string.at(i) > '9')
             {
                 return false;
+            }
+
+            if (!is_dot_found)
+            {
+                if (++n_chars > safe_number_of_chars)
+                {
+                    // Too many characters, maximum safe number is 38 characters for float, 308 for double.
+                    return false;
+                }
             }
         }
 

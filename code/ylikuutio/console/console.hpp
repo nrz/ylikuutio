@@ -63,7 +63,7 @@ namespace console
 
             void set_my_keypress_callback_engine_vector_pointer(std::vector<KeyAndCallbackStruct>* my_keypress_callback_engine_vector_pointer);
             void set_my_keyrelease_callback_engine_vector_pointer(std::vector<KeyAndCallbackStruct>* my_keyrelease_callback_engine_vector_pointer);
-            void print_text(std::string text);
+            void print_text(const std::string& text);
             void print_help();
             void draw_console();
 
@@ -358,6 +358,8 @@ namespace console
 
             int32_t n_rows;
             int32_t n_columns;
+
+            const std::string prompt = "$ ";
     };
 }
 

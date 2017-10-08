@@ -188,22 +188,22 @@ namespace ontology
         return this->window;
     }
 
-    uint32_t Universe::get_window_width() const
+    int32_t Universe::get_window_width() const
     {
         return this->window_width;
     }
 
-    uint32_t Universe::get_window_height() const
+    int32_t Universe::get_window_height() const
     {
         return this->window_height;
     }
 
-    uint32_t Universe::get_text_size() const
+    int32_t Universe::get_text_size() const
     {
         return this->text_size;
     }
 
-    uint32_t Universe::get_font_size() const
+    int32_t Universe::get_font_size() const
     {
         return this->font_size;
     }
@@ -295,6 +295,12 @@ namespace ontology
         else if (command_parameters.size() == 1)
         {
             std::string name = command_parameters[0];
+
+            if (universe->entity_anyvalue_map.count(name) != 1)
+            {
+                return nullptr;
+            }
+
             datatypes::AnyValue* any_value = universe->entity_anyvalue_map[name];
 
             if (any_value == nullptr)
