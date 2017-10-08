@@ -358,6 +358,8 @@ namespace console
 
             int32_t n_rows;
             int32_t n_columns;
+
+            const std::string prompt = "$ ";
     };
 }
 

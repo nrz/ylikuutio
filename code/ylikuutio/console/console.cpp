@@ -159,8 +159,14 @@ namespace console
             this->console_right_x = 0;
         }
 
-        this->n_rows = this->console_top_y - this->console_bottom_y;
-        this->n_columns = this->console_right_x - this->console_left_x;
+        this->n_rows = this->console_top_y - this->console_bottom_y + 1;
+        this->n_columns = this->console_right_x - this->console_left_x + 1;
+
+        if (this->n_columns > this->universe_pointer->get_window_width() / this->universe_pointer->get_text_size())
+        {
+            // Upper limit for the the number of columns is window width divided by text size.
+            this-> n_columns = this->universe_pointer->get_window_width() / this->universe_pointer->get_text_size();
+        }
 
         this->print_text("Welcome! Please write \"help\" for more");
         this->print_text("information.");
@@ -186,8 +192,6 @@ namespace console
     {
         // This function is to be called from console command callbacks to print text on console.
         // Please note that it is not necessary to be in console to be able to print in console.
-        int32_t characters_for_line = this->universe_pointer->get_window_width() / this->universe_pointer->get_text_size();
-
         std::list<char> text_char_list;
         int32_t current_line_length = 0;
 
@@ -200,11 +204,10 @@ namespace console
                 text_char_list.clear();
                 current_line_length = 0;
             }
-            else if (current_line_length < characters_for_line)
+            else if (++current_line_length < this->n_columns)
             {
                 // Normal case.
                 text_char_list.push_back(my_char);
-                current_line_length++;
             }
             else
             {
@@ -233,7 +236,7 @@ namespace console
         if (this->in_console)
         {
             // Convert current input into std::string.
-            uint32_t characters_for_line = this->universe_pointer->get_window_width() / this->universe_pointer->get_text_size();
+            int32_t characters_for_line = this->universe_pointer->get_window_width() / this->universe_pointer->get_text_size();
 
             // Draw the console to screen using `font2D::printText2D`.
             PrintingStruct printing_struct;
@@ -250,7 +253,7 @@ namespace console
 
             if (this->in_history)
             {
-                int32_t history_end_i = history_line_i + this->n_rows + 1;
+                int32_t history_end_i = history_line_i + this->n_rows;
 
                 for (int32_t history_i = history_line_i; history_i < history_end_i && history_i < this->console_history.size(); history_i++)
                 {
@@ -260,14 +263,62 @@ namespace console
             }
             else
             {
-                int32_t history_start_i = (this->console_history.size() > this->n_rows ? this->console_history.size() - this->n_rows : 0);
+                int32_t n_lines_of_current_input = (this->prompt.size() + this->current_input.size() - 1) / this->n_columns + 1;
 
-                for (int32_t history_i = history_start_i; history_i < this->console_history.size(); history_i++)
+                int32_t history_start_i;
+
+                if (n_lines_of_current_input > this->n_rows)
                 {
-                    std::list<char> historical_text = this->console_history.at(history_i);
-                    printing_struct.text += string::convert_std_list_char_to_std_string(historical_text, characters_for_line, characters_for_line) + "\\n";
+                    // Current input does not fit completely in the console 'window'.
+
+                    // Split current input into lines and print only n last lines,
+                    // where n == `this->n_rows`.
+                    std::list<char> current_input_with_prompt = this->current_input;
+                    std::list<char>::iterator it = current_input_with_prompt.begin();
+
+                    // Copy prompt into the front of the current input.
+                    for (const char& my_char : this->prompt)
+                    {
+                        current_input_with_prompt.insert(it, my_char);
+                    }
+
+                    // Convert into a vector of lines.
+                    std::vector<std::string> current_input_vector = string::convert_std_list_char_to_std_vector_std_string(
+                            current_input_with_prompt,
+                            this->n_columns);
+
+                    // Print only n last lines.
+                    for (int32_t i = current_input_vector.size() - this->n_rows; i < current_input_vector.size(); i++)
+                    {
+                        printing_struct.text += current_input_vector.at(i) + "\\n";
+                    }
                 }
-                printing_struct.text += "$ " + string::convert_std_list_char_to_std_string(this->current_input, characters_for_line - 2, characters_for_line);
+                else
+                {
+                    // Current input fits completely in the console 'window'.
+
+                    if (this->console_history.size() + n_lines_of_current_input > this->n_rows)
+                    {
+                        // Everything does not fit in the console 'window'.
+                        history_start_i = this->console_history.size() - this->n_rows + n_lines_of_current_input;
+                    }
+                    else
+                    {
+                        // Everything does fit in the console 'window'.
+                        history_start_i = 0;
+                    }
+
+                    // We are not in history so print everything to the end of the history.
+                    for (int32_t history_i = history_start_i; history_i < this->console_history.size(); history_i++)
+                    {
+                        std::list<char> historical_text = this->console_history.at(history_i);
+                        printing_struct.text += string::convert_std_list_char_to_std_string(historical_text, characters_for_line, characters_for_line) + "\\n";
+                    }
+                    printing_struct.text += this->prompt + string::convert_std_list_char_to_std_string(
+                            this->current_input,
+                            characters_for_line - this->prompt.size(), // First line is shorter due to space taken by the prompt.
+                            characters_for_line);                      // The rest lines have full length.
+                }
             }
 
             this->font2D_pointer->printText2D(printing_struct);
@@ -760,14 +811,36 @@ namespace console
         {
             // Parse input into vector.
             std::string input_string(console->current_input.begin(), console->current_input.end());
-            std::istringstream input_stringstream(input_string);
-            std::string command;
 
             console->command_history.push_back(console->current_input);
             std::list<char>::iterator it = console->current_input.begin();
-            console->current_input.insert(it, '$');
-            console->current_input.insert(it, ' ');
-            console->console_history.push_back(console->current_input);
+
+            for (const char& my_char : console->prompt)
+            {
+                console->current_input.insert(it, my_char);
+            }
+
+            std::list<char> current_input_char_list;
+
+            // Split into lines, push_back each line into `console_history` separately.
+            for (const char& my_char : console->current_input)
+            {
+                current_input_char_list.push_back(my_char);
+
+                if (current_input_char_list.size () >= console->n_columns)
+                {
+                    console->console_history.push_back(current_input_char_list);
+                    current_input_char_list.clear();
+                }
+            }
+
+            if (current_input_char_list.size() > 0)
+            {
+                console->console_history.push_back(current_input_char_list);
+            }
+
+            std::istringstream input_stringstream(input_string);
+            std::string command;
 
             if (std::getline(input_stringstream, command, ' '))
             {
