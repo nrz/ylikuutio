@@ -343,7 +343,7 @@ namespace ontology
             console::Console* console_pointer;             // pointer to `Console`.
 
             // Named entities are stored here so that they can be recalled, if needed.
-            std::unordered_map<std::string, datatypes::AnyValue*> entity_anyvalue_map;
+            std::unordered_map<std::string, ontology::Entity*> entity_map;
 
             GLclampf background_red;
             GLclampf background_green;

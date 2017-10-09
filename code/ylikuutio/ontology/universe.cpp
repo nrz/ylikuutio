@@ -252,9 +252,9 @@ namespace ontology
         std::string entity_names = "";
 
         std::vector<std::string> keys;
-        keys.reserve(this->entity_anyvalue_map.size());
+        keys.reserve(this->entity_map.size());
 
-        for (auto it : this->entity_anyvalue_map)
+        for (auto it : this->entity_map)
         {
             if (!entity_names.empty())
             {
@@ -296,59 +296,20 @@ namespace ontology
         {
             std::string name = command_parameters[0];
 
-            if (universe->entity_anyvalue_map.count(name) != 1)
+            if (universe->entity_map.count(name) != 1)
             {
                 return nullptr;
             }
 
-            datatypes::AnyValue* any_value = universe->entity_anyvalue_map[name];
+            ontology::Entity* entity = universe->entity_map[name];
+            universe->entity_map.erase(name);
 
-            if (any_value == nullptr)
+            if (entity == nullptr)
             {
                 return nullptr;
             }
 
-            switch (any_value->type)
-            {
-                case (datatypes::datatype::UNIVERSE_POINTER):
-                    // OK, this is an `Universe` to be deleted.
-                    delete static_cast<ontology::Universe*>(any_value->universe_pointer);
-                    break;
-                case (datatypes::datatype::SCENE_POINTER):
-                    // OK, this is a `Scene` to be deleted.
-                    delete static_cast<ontology::Scene*>(any_value->scene_pointer);
-                    break;
-                case (datatypes::datatype::SHADER_POINTER):
-                    // OK, this is a `Shader` to be deleted.
-                    delete static_cast<ontology::Shader*>(any_value->shader_pointer);
-                    break;
-                case (datatypes::datatype::MATERIAL_POINTER):
-                    // OK, this is a `Material` to be deleted.
-                    delete static_cast<ontology::Material*>(any_value->material_pointer);
-                    break;
-                case (datatypes::datatype::SPECIES_POINTER):
-                    // OK, this is a `Species` to be deleted.
-                    delete static_cast<ontology::Species*>(any_value->species_pointer);
-                    break;
-                case (datatypes::datatype::OBJECT_POINTER):
-                    // OK, this is a `Object` to be deleted.
-                    delete static_cast<ontology::Object*>(any_value->object_pointer);
-                    break;
-                case (datatypes::datatype::VECTORFONT_POINTER):
-                    // OK, this is a `VectorFont` to be deleted.
-                    delete static_cast<ontology::VectorFont*>(any_value->vector_font_pointer);
-                    break;
-                case (datatypes::datatype::GLYPH_POINTER):
-                    // OK, this is a `Glyph` to be deleted.
-                    delete static_cast<ontology::Glyph*>(any_value->glyph_pointer);
-                    break;
-                case (datatypes::datatype::TEXT3D_POINTER):
-                    // OK, this is a `Text3D` to be deleted.
-                    delete static_cast<ontology::Text3D*>(any_value->text3D_pointer);
-                    break;
-                default:
-                    return nullptr;
-            }
+            delete entity;
         }
         return nullptr;
     }
@@ -375,25 +336,19 @@ namespace ontology
         {
             std::string name = command_parameters[0];
 
-            if (universe->entity_anyvalue_map.count(name) != 1)
+            if (universe->entity_map.count(name) != 1)
             {
                 return nullptr;
             }
 
-            datatypes::AnyValue* any_value = universe->entity_anyvalue_map[name];
-
-            if (any_value == nullptr)
-            {
-                return nullptr;
-            }
-
-            // OK, let's find out information about the entity.
-            ontology::Entity* entity = any_value->get_entity_pointer();
+            ontology::Entity* entity = universe->entity_map[name];
 
             if (entity == nullptr)
             {
                 return nullptr;
             }
+
+            // OK, let's find out information about the entity.
 
             console->print_text(entity->get_type());
 
