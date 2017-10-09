@@ -84,6 +84,11 @@ namespace ontology
         this->parent_pointer->set_glyph_pointer(this->childID, nullptr);
     }
 
+    ontology::Entity* Glyph::get_parent()
+    {
+        return this->parent_pointer;
+    }
+
     void Glyph::render()
     {
         this->prerender();

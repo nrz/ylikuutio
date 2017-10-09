@@ -16,6 +16,8 @@
 
 namespace ontology
 {
+    class Entity;
+
     void Object::bind_to_parent()
     {
         // get `childID` from `Species` or `Glyph` and set pointer to this `Object`.
@@ -122,6 +124,18 @@ namespace ontology
             }
 
             this->postrender();
+        }
+    }
+
+    ontology::Entity* Object::get_parent()
+    {
+        if (this->is_character)
+        {
+            return this->glyph_parent_pointer;
+        }
+        else
+        {
+            return this->species_parent_pointer;
         }
     }
 

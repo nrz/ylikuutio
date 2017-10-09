@@ -42,6 +42,8 @@ namespace ontology
             // glyphs should be destroyed only by destroying the entire `VectorFont`.
             virtual ~Glyph();
 
+            ontology::Entity* get_parent() override;
+
             // this method sets a object pointer.
             void set_object_pointer(const int32_t childID, ontology::Object* const child_pointer);
 

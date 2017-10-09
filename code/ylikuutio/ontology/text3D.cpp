@@ -90,6 +90,11 @@ namespace ontology
         this->parent_pointer->set_text3D_pointer(this->childID, nullptr);
     }
 
+    ontology::Entity* Text3D::get_parent()
+    {
+        return this->parent_pointer;
+    }
+
     int32_t Text3D::get_number_of_children()
     {
         return this->number_of_objects;

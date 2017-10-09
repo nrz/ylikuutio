@@ -94,6 +94,11 @@ namespace ontology
         this->postrender();
     }
 
+    ontology::Entity* Shader::get_parent()
+    {
+        return this->parent_pointer;
+    }
+
     int32_t Shader::get_number_of_children()
     {
         return this->number_of_materials + this->number_of_symbioses;

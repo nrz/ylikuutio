@@ -23,6 +23,7 @@ namespace ontology
 
             std::string get_type();
 
+            virtual ontology::Entity* get_parent() = 0;
             virtual int32_t get_number_of_children() = 0;
             virtual int32_t get_number_of_descendants() = 0;
 
