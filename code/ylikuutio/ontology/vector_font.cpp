@@ -147,6 +147,11 @@ namespace ontology
         this->postrender();
     }
 
+    ontology::Entity* VectorFont::get_parent()
+    {
+        return this->parent_pointer;
+    }
+
     int32_t VectorFont::get_number_of_children()
     {
         return this->number_of_glyphs + this->number_of_text3Ds;

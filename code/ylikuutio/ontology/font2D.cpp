@@ -108,6 +108,12 @@ namespace ontology
         glDeleteProgram(programID);
     }
 
+    ontology::Entity* Font2D::get_parent()
+    {
+        // Currently `Font2D`'s do not any parents.
+        return nullptr;
+    }
+
     int32_t Font2D::get_number_of_children()
     {
         return -1;

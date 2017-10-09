@@ -31,21 +31,13 @@ namespace ontology
                 return;
             }
 
-            datatypes::AnyValue* entity_any_value = new datatypes::AnyValue(entity);
-
-            if (entity_any_value == nullptr)
+            if (universe->entity_map.count(name) != 0)
             {
+                // The name is already in use.
                 return;
             }
 
-            if (universe->entity_anyvalue_map.count(name) != 0)
-            {
-                delete entity_any_value;
-                return;
-            }
-
-            entity->name = name;
-            universe->entity_anyvalue_map[name] = entity_any_value;
+            universe->entity_map[name] = entity;
         }
 
     template<class T1>

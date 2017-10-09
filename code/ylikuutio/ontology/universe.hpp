@@ -198,6 +198,7 @@ namespace ontology
             // this method renders the active `Scene` of this `Universe`.
             void render();
 
+            ontology::Entity* get_parent() override;
             int32_t get_number_of_children() override;
 
             int32_t get_number_of_descendants() override;
@@ -236,6 +237,8 @@ namespace ontology
 
             // this method returns a pointer to `config::Setting` corresponding to the given `key`.
             config::Setting* get(std::string key) const;
+
+            ontology::Entity* get_entity(const std::string& name);
 
             std::string get_entity_names() const;
 
@@ -343,7 +346,7 @@ namespace ontology
             console::Console* console_pointer;             // pointer to `Console`.
 
             // Named entities are stored here so that they can be recalled, if needed.
-            std::unordered_map<std::string, datatypes::AnyValue*> entity_anyvalue_map;
+            std::unordered_map<std::string, ontology::Entity*> entity_map;
 
             GLclampf background_red;
             GLclampf background_green;

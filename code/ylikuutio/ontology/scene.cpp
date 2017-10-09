@@ -102,6 +102,11 @@ namespace ontology
         this->postrender();
     }
 
+    ontology::Entity* Scene::get_parent()
+    {
+        return this->parent_pointer;
+    }
+
     int32_t Scene::get_number_of_children()
     {
         return this->number_of_shaders;

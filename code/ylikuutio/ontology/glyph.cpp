@@ -82,11 +82,11 @@ namespace ontology
 
         // set pointer to this `Glyph` to nullptr.
         this->parent_pointer->set_glyph_pointer(this->childID, nullptr);
+    }
 
-        if (!this->name.empty() && this->universe_pointer != nullptr)
-        {
-            this->universe_pointer->entity_anyvalue_map[this->name] = nullptr;
-        }
+    ontology::Entity* Glyph::get_parent()
+    {
+        return this->parent_pointer;
     }
 
     void Glyph::render()

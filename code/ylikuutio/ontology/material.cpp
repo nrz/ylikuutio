@@ -119,6 +119,11 @@ namespace ontology
         this->postrender();
     }
 
+    ontology::Entity* Material::get_parent()
+    {
+        return this->parent_pointer;
+    }
+
     int32_t Material::get_number_of_children()
     {
         return this->number_of_species + this->number_of_vector_fonts + this->number_of_chunk_masters;
