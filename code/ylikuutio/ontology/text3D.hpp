@@ -40,7 +40,6 @@ namespace ontology
 
             ontology::Entity* get_parent() override;
             int32_t get_number_of_children() override;
-
             int32_t get_number_of_descendants() override;
 
             // this method deletes all glyph Objects of this `Text3D`,
