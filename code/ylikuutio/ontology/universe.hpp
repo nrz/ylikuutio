@@ -237,6 +237,8 @@ namespace ontology
             // this method returns a pointer to `config::Setting` corresponding to the given `key`.
             config::Setting* get(std::string key) const;
 
+            ontology::Entity* get_entity(const std::string& name);
+
             std::string get_entity_names() const;
 
             // Public callbacks.

@@ -247,6 +247,15 @@ namespace ontology
         return this->setting_master_pointer->get(key);
     }
 
+    ontology::Entity* Universe::get_entity(const std::string& name)
+    {
+        if (this->entity_map.count(name) != 1)
+        {
+            return nullptr;
+        }
+        return this->entity_map[name];
+    }
+
     std::string Universe::get_entity_names() const
     {
         std::string entity_names = "";
