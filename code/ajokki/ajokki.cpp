@@ -240,6 +240,8 @@ int main(void)
         return -1;
     }
 
+    grass_material->set_name("grass_material");
+
     // Create the material, store it in `uvmap_material`.
     MaterialStruct uvmap_material_struct;
     uvmap_material_struct.parent_pointer = my_shader;
@@ -254,6 +256,8 @@ int main(void)
         std::cerr << "Failed to create uvmap Material.\n";
         return -1;
     }
+
+    uvmap_material->set_name("uvmap_material");
 
     // Create the material, store it in `pink_geometric_tiles_material`.
     MaterialStruct pink_geometric_tiles_material_struct;
@@ -289,6 +293,8 @@ int main(void)
         SRTM_terrain_species_struct.divisor = 1000.0f;
         terrain_species = new ontology::Species(SRTM_terrain_species_struct);
 
+        terrain_species->set_name("altiplano_species");
+
         my_universe->turbo_factor = 100.0f;
         my_universe->twin_turbo_factor = 50000.0f;
     }
@@ -316,7 +322,7 @@ int main(void)
         ASCII_grid_terrain_species_struct.z_step = 4;
         terrain_species = new ontology::Species(ASCII_grid_terrain_species_struct);
 
-        terrain_species->set_name("Helsinki");
+        terrain_species->set_name("Helsinki_species");
 
         my_universe->is_flight_mode_in_use = true;
 
@@ -386,7 +392,7 @@ int main(void)
         return -1;
     }
 
-    suzanne_species->set_name("Suzanne");
+    suzanne_species->set_name("suzanne_species");
 
     // Create suzanne1, store it in `suzanne1`.
     ObjectStruct suzanne_object_struct1;
@@ -404,6 +410,7 @@ int main(void)
     suzanne_object_struct2.rotate_vector = glm::vec3(1.0f, 0.0f, 0.0f);
     suzanne_object_struct2.translate_vector = glm::vec3(0.0f, 1.0f, 0.0f);
     ontology::Object* suzanne2 = new ontology::Object(suzanne_object_struct2);
+    suzanne2->set_name("suzanne2");
 
     ObjectStruct suzanne_object_struct3;
     suzanne_object_struct3.species_parent_pointer = suzanne_species;
