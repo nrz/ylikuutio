@@ -190,17 +190,84 @@ namespace ontology
     {
         public:
             // constructor.
-            Universe();
+            Universe()
+                : Entity(nullptr) // `Universe` has no parent.
+            {
+                this->cartesian_coordinates = nullptr;
+                this->spherical_coordinates = nullptr;
+
+                // constructor.
+                this->world_radius = NAN; // world radius is NAN as long it doesn't get `set` by `SettingMaster`.
+                this->terrain_species_pointer = nullptr;
+                this->active_scene = nullptr;
+                this->setting_master_pointer = nullptr;
+                this->console_pointer = nullptr;
+
+                this->background_red = NAN;
+                this->background_green = NAN;
+                this->background_blue = NAN;
+                this->background_alpha = NAN;
+
+                // Variables related to the window.
+                this->window = nullptr;
+                this->window_width = 1600; // default width.
+                this->window_height = 900; // default height.
+
+                this->ProjectionMatrix = glm::mat4(1.0f); // identity matrix (dummy value).
+                this->ViewMatrix = glm::mat4(1.0f);       // identity matrix (dummy value).
+
+                // Variables related to the camera.
+                this->aspect_ratio = static_cast<GLfloat>(this->window_width / this->window_height);
+                this->initialFoV = 60.0f;
+
+                this->text_size = 40; // default text size.
+                this->font_size = 16; // default font size.
+
+                this->max_FPS = 60; // default value max 60 frames per second.
+                this->delta_time = NAN;
+                this->last_time_before_reading_keyboard = NAN;
+                this->current_time_before_reading_keyboard = NAN;
+
+                this->has_mouse_ever_moved = false;
+                this->can_toggle_invert_mouse = false;
+                this->is_invert_mouse_in_use = false;
+                this->can_toggle_flight_mode = false;
+                this->is_flight_mode_in_use = false;
+                this->is_first_turbo_pressed = false;
+                this->is_second_turbo_pressed = false;
+
+                this->horizontal_angle = NAN;
+                this->vertical_angle = NAN;
+                this->turbo_factor = NAN;
+                this->twin_turbo_factor = NAN;
+
+                this->speed = 5.0f; // 5.0 units / second
+                this->mouse_speed = 0.005f;
+
+                this->gravity = 9.81f / 60.0f;
+                this->fall_speed = this->gravity;
+
+                this->testing_spherical_world_in_use = false;
+                this->is_key_I_released = true;
+                this->is_key_F_released = true;
+                this->in_help_mode = true;
+                this->can_toggle_help_mode = false;
+                this->can_display_help_screen = true;
+
+                this->number_of_scenes = 0;
+
+                this->child_vector_pointers_vector.push_back(&this->scene_pointer_vector);
+                this->type = "ontology::Universe*";
+            }
 
             // destructor.
-            virtual ~Universe();
+            ~Universe();
 
             // this method renders the active `Scene` of this `Universe`.
             void render();
 
             ontology::Entity* get_parent() override;
             int32_t get_number_of_children() override;
-
             int32_t get_number_of_descendants() override;
 
             // this method sets a new `window`.
@@ -319,6 +386,8 @@ namespace ontology
                 friend void set_name(const std::string name, T1 entity);
             template<class T1>
                 friend void render_this_object(ontology::Object* object_pointer, ontology::Shader* shader_pointer);
+            template<class T1>
+                friend void set_name(const std::string& name, T1 entity);
 
         private:
             // this method sets a `Scene` pointer.

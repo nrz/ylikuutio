@@ -3,12 +3,20 @@
 
 #include "entity.hpp"
 #include "entity_templates.hpp"
+#include "code/ylikuutio/loaders/shader_loader.hpp"
+#include "code/ylikuutio/loaders/texture_loader.hpp"
 #include "code/ylikuutio/common/globals.hpp"
 
 // Include GLEW
 #ifndef __GL_GLEW_H_INCLUDED
 #define __GL_GLEW_H_INCLUDED
 #include <GL/glew.h> // GLfloat, GLuint etc.
+#endif
+
+// Include GLFW
+#ifndef __GLFW3_H_INCLUDED
+#define __GLFW3_H_INCLUDED
+#include <GLFW/glfw3.h>
 #endif
 
 // Include standard headers
@@ -27,14 +35,69 @@ namespace ontology
                     GLuint screen_width,
                     GLuint screen_height,
                     std::string texture_filename,
-                    std::string font_texture_file_format);
+                    std::string font_texture_file_format)
+                : Entity(universe_pointer)
+            {
+                // constructor.
+
+                // Initialize class members with some dummy values.
+                this->vertexbuffer = 0;
+                this->uvbuffer = 0;
+                this->programID = 0;
+                this->vertex_position_in_screenspaceID = 0;
+                this->vertexUVID = 0;
+                this->Text2DUniformID = 0;
+                this->screen_width_uniform_ID = 0;
+                this->screen_height_uniform_ID = 0;
+
+                const char* char_font_texture_file_format = font_texture_file_format.c_str();
+
+                // Initialize texture
+                if ((std::strcmp(char_font_texture_file_format, "bmp") == 0) || (std::strcmp(char_font_texture_file_format, "BMP") == 0))
+                {
+                    this->texture = loaders::load_BMP_texture(texture_filename);
+                }
+                else if ((std::strcmp(char_font_texture_file_format, "dds") == 0) || (std::strcmp(char_font_texture_file_format, "DDS") == 0))
+                {
+                    this->texture = loaders::load_DDS_texture(texture_filename);
+                }
+                else
+                {
+                    printf("Invalid font texture file format: `%s`. Supported font texture file formats: bmp, BMP, dds, DDS.\n", char_font_texture_file_format);
+                    this->texture = 0;
+                    return;
+                }
+
+                // Initialize VBO
+                glGenBuffers(1, &vertexbuffer);
+                glGenBuffers(1, &uvbuffer);
+
+                // Initialize Shader
+                programID = loaders::load_shaders("TextVertexShader.vertexshader", "TextVertexShader.fragmentshader");
+
+                // Get a handle for our buffers
+                vertex_position_in_screenspaceID = glGetAttribLocation(programID, "vertexPosition_screenspace");
+                vertexUVID = glGetAttribLocation(programID, "vertexUV");
+
+                // Initialize uniforms' IDs
+                Text2DUniformID = glGetUniformLocation(programID, "myTextureSampler");
+
+                // Initialize uniform window width.
+                screen_width_uniform_ID = glGetUniformLocation(programID, "screen_width");
+                glUniform1i(screen_width_uniform_ID, screen_width);
+
+                // Initialize uniform window height.
+                screen_height_uniform_ID = glGetUniformLocation(programID, "screen_height");
+                glUniform1i(screen_height_uniform_ID, screen_height);
+
+                this->universe_pointer = universe_pointer;
+            }
 
             // destructor.
-            virtual ~Font2D();
+            ~Font2D();
 
             ontology::Entity* get_parent() override;
             int32_t get_number_of_children() override;
-
             int32_t get_number_of_descendants() override;
 
             void printText2D(

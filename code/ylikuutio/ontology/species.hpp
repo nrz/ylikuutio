@@ -8,12 +8,19 @@
 #include "species_struct.hpp"
 #include "render_templates.hpp"
 #include "entity_templates.hpp"
+#include "code/ylikuutio/loaders/species_loader.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include GLEW
 #ifndef __GL_GLEW_H_INCLUDED
 #define __GL_GLEW_H_INCLUDED
 #include <GL/glew.h> // GLfloat, GLuint etc.
+#endif
+
+// Include GLFW
+#ifndef __GLFW3_H_INCLUDED
+#define __GLFW3_H_INCLUDED
+#include <GLFW/glfw3.h>
 #endif
 
 // Include GLM
@@ -37,10 +44,90 @@ namespace ontology
     {
         public:
             // constructor.
-            Species(const SpeciesStruct& species_struct);
+            Species(const SpeciesStruct& species_struct)
+                : Model(species_struct.parent_pointer->universe_pointer)
+            {
+                // constructor.
+                this->is_world          = species_struct.is_world;
+                this->world_radius      = species_struct.world_radius;
+                this->divisor           = species_struct.divisor;
+                this->model_file_format = species_struct.model_file_format;
+                this->model_filename    = species_struct.model_filename;
+                this->color_channel     = species_struct.color_channel;
+                this->light_position    = species_struct.light_position;
+                this->latitude          = species_struct.latitude;
+                this->longitude         = species_struct.longitude;
+                this->parent_pointer    = species_struct.parent_pointer;
+                this->universe_pointer  = this->parent_pointer->universe_pointer;
+                this->x_step            = species_struct.x_step;
+                this->z_step            = species_struct.z_step;
+                this->triangulation_type = species_struct.triangulation_type;
+
+                this->char_model_file_format = this->model_file_format.c_str();
+                this->char_model_filename    = this->model_filename.c_str();
+
+                // get `childID` from `Material` and set pointer to this `Species`.
+                this->bind_to_parent();
+
+                // Get a handle for our buffers.
+                this->vertexPosition_modelspaceID = glGetAttribLocation(this->parent_pointer->parent_pointer->programID, "vertexPosition_modelspace");
+                this->vertexUVID = glGetAttribLocation(this->parent_pointer->parent_pointer->programID, "vertexUV");
+                this->vertexNormal_modelspaceID = glGetAttribLocation(this->parent_pointer->parent_pointer->programID, "vertexNormal_modelspace");
+
+                // Get a handle for our "LightPosition" uniform.
+                glUseProgram(this->parent_pointer->parent_pointer->programID);
+                this->lightID = glGetUniformLocation(this->parent_pointer->parent_pointer->programID, "LightPosition_worldspace");
+
+                if (this->is_world)
+                {
+                    // set world species pointer so that it points to this species.
+                    // currently there can be only one world species (used in collision detection).
+                    this->parent_pointer->parent_pointer->parent_pointer->parent_pointer->set_terrain_species_pointer(this);
+                }
+
+                // water level.
+                GLuint water_level_uniform_location = glGetUniformLocation(this->parent_pointer->parent_pointer->programID, "water_level");
+                glUniform1f(water_level_uniform_location, this->universe_pointer->active_scene->water_level);
+
+                SpeciesLoaderStruct species_loader_struct;
+                species_loader_struct.model_filename = this->model_filename;
+                species_loader_struct.model_file_format = this->model_file_format;
+                species_loader_struct.latitude = this->latitude;
+                species_loader_struct.longitude = this->longitude;
+                species_loader_struct.world_radius = this->world_radius;
+                species_loader_struct.divisor = this->divisor;
+                species_loader_struct.color_channel = this->color_channel;
+                species_loader_struct.x_step = this->x_step;
+                species_loader_struct.z_step = this->z_step;
+                species_loader_struct.triangulation_type = this->triangulation_type;
+
+                this->image_width = -1;
+                this->image_height = -1;
+
+                loaders::load_species(
+                        species_loader_struct,
+                        this->vertices,
+                        this->UVs,
+                        this->normals,
+                        this->indices,
+                        this->indexed_vertices,
+                        this->indexed_UVs,
+                        this->indexed_normals,
+                        &this->vertexbuffer,
+                        &this->uvbuffer,
+                        &this->normalbuffer,
+                        &this->elementbuffer,
+                        this->image_width,
+                        this->image_height);
+
+                // TODO: Compute the graph of this object type to enable object vertex modification!
+
+                this->child_vector_pointers_vector.push_back(&this->object_pointer_vector);
+                this->type = "ontology::Species*";
+            }
 
             // destructor.
-            virtual ~Species();
+            ~Species();
 
             ontology::Entity* get_parent() override;
 

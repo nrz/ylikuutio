@@ -27,7 +27,19 @@ namespace space_partition
     {
         public:
             // constructor.
-            Chunk(space_partition::ChunkMaster* const parent_pointer);
+            Chunk(ontology::Universe* universe, space_partition::ChunkMaster* const parent_pointer)
+                : Model(universe)
+            {
+                // constructor.
+                this->is_original = true;
+
+                this->parent_pointer = parent_pointer;
+
+                // get `childID` from `ChunkMaster` and set pointer to this `Chunk`.
+                this->bind_to_parent();
+
+                this->type = "space_partition::Chunk*";
+            }
 
             // destructor.
             virtual ~Chunk();

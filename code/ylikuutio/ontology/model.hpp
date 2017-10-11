@@ -30,28 +30,48 @@ namespace space_partition
 
 namespace ontology
 {
+    class Universe;
     class Shader;
     class Material;
     class Species;
     class Object;
+    class Glyph;
 
     class Model: public ontology::Entity
     {
         public:
             // constructor.
-            Model();
+            Model(ontology::Universe* universe)
+                : Entity(universe)
+            {
+                // constructor.
+
+                // Initialize class members with some dummy values.
+                this->childID = -1;
+                this->lightID = 0;
+                this->vertexPosition_modelspaceID = 0;
+                this->vertexUVID = 0;
+                this->vertexNormal_modelspaceID = 0;
+                this->vertexbuffer = 0;
+                this->uvbuffer = 0;
+                this->normalbuffer = 0;
+                this->elementbuffer = 0;
+
+                this->number_of_objects = 0;
+                this->child_vector_pointers_vector.push_back(&this->object_pointer_vector);
+            }
 
             // destructor.
             virtual ~Model();
 
             int32_t get_number_of_children() override;
-
             int32_t get_number_of_descendants() override;
 
             friend class Glyph;
             friend class Species;
             friend class Object;
             friend class space_partition::Chunk;
+            friend void get_gl_attrib_locations(ontology::Shader* shader, ontology::Glyph* glyph);
             template<class T1>
                 friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, int32_t* number_of_children);
             template<class T1, class T2>
