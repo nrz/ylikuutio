@@ -3,11 +3,12 @@
 
 #include "species_or_glyph.hpp"
 #include "model.hpp"
-#include "text3D.hpp"
-#include "vector_font.hpp"
 #include "glyph_struct.hpp"
+#include "gl_attrib_locations.hpp"
 #include "render_templates.hpp"
 #include "entity_templates.hpp"
+#include "code/ylikuutio/triangulation/triangulate_polygons_struct.hpp"
+#include "code/ylikuutio/triangulation/polygon_triangulation.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include GLEW
@@ -30,17 +31,55 @@
 
 namespace ontology
 {
+    class VectorFont;
     class Object;
 
     class Glyph: public ontology::Model
     {
         public:
             // constructor.
-            Glyph(const GlyphStruct glyph_struct);
+            Glyph(const GlyphStruct glyph_struct)
+                : Model(glyph_struct.universe_pointer)
+            {
+                // constructor.
+                this->universe_pointer = glyph_struct.universe_pointer;
+                this->parent_pointer = glyph_struct.parent_pointer;
+
+                this->glyph_vertex_data = glyph_struct.glyph_vertex_data;
+                this->glyph_name_pointer = glyph_struct.glyph_name_pointer;
+                this->unicode_char_pointer = glyph_struct.unicode_char_pointer;
+                this->light_position = glyph_struct.light_position;
+
+                // get `childID` from `VectorFont` and set pointer to this `Glyph`.
+                this->bind_to_parent();
+
+                // TODO: implement triangulation of `Glyph` objects!
+                geometry::TriangulatePolygonsStruct triangulate_polygons_struct;
+                triangulate_polygons_struct.input_vertices = this->glyph_vertex_data;
+                bool triangulating_result = geometry::triangulate_polygons(
+                        triangulate_polygons_struct,
+                        this->vertices,
+                        this->UVs,
+                        this->normals);
+
+                if (!triangulating_result)
+                {
+                    std::cerr << "triangulation failed!\n";
+                }
+
+                // Get a handle for our buffers.
+                ontology::get_gl_attrib_locations(glyph_struct.shader_pointer, this);
+
+                // TODO: triangulate the vertex data!
+
+                // TODO: load the vertex data the same way as in `ontology::Species::Species(SpeciesStruct species_struct)`!
+
+                this->type = "ontology::Glyph*";
+            }
 
             // destructor.
             // glyphs should be destroyed only by destroying the entire `VectorFont`.
-            virtual ~Glyph();
+            ~Glyph();
 
             ontology::Entity* get_parent() override;
 

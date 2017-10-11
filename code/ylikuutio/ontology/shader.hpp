@@ -11,6 +11,8 @@
 #endif
 
 #include "entity.hpp"
+#include "scene.hpp"
+#include "glyph.hpp"
 #include "shader_struct.hpp"
 #include "render_templates.hpp"
 #include "entity_templates.hpp"
@@ -22,6 +24,12 @@
 #ifndef __GL_GLEW_H_INCLUDED
 #define __GL_GLEW_H_INCLUDED
 #include <GL/glew.h> // GLfloat, GLuint etc.
+#endif
+
+// Include GLFW
+#ifndef __GLFW3_H_INCLUDED
+#define __GLFW3_H_INCLUDED
+#include <GLFW/glfw3.h>
 #endif
 
 // Include standard headers
@@ -41,10 +49,42 @@ namespace ontology
     {
         public:
             // constructor.
-            Shader(const ShaderStruct shader_struct);
+            Shader(const ShaderStruct shader_struct)
+                : Entity(shader_struct.parent_pointer->universe_pointer)
+            {
+                // constructor.
+
+                this->vertex_shader        = shader_struct.vertex_shader;
+                this->fragment_shader      = shader_struct.fragment_shader;
+
+                this->char_vertex_shader   = this->vertex_shader.c_str();
+                this->char_fragment_shader = this->fragment_shader.c_str();
+                this->parent_pointer       = shader_struct.parent_pointer;
+                this->universe_pointer     = this->parent_pointer->universe_pointer;
+
+                this->terrain_species_pointer = nullptr;
+
+                this->number_of_materials = 0;
+                this->number_of_symbioses = 0;
+
+                // get `childID` from `Scene` and set pointer to this `Shader`.
+                this->bind_to_parent();
+
+                // Create and compile our GLSL program from the shaders.
+                this->programID = loaders::load_shaders(this->char_vertex_shader, this->char_fragment_shader);
+
+                // Get a handle for our "MVP" uniform.
+                this->MatrixID = glGetUniformLocation(this->programID, "MVP");
+                this->ViewMatrixID = glGetUniformLocation(this->programID, "V");
+                this->ModelMatrixID = glGetUniformLocation(this->programID, "M");
+
+                this->child_vector_pointers_vector.push_back(&this->material_pointer_vector);
+                this->child_vector_pointers_vector.push_back(&this->symbiosis_pointer_vector);
+                this->type = "ontology::Shader*";
+            }
 
             // destructor.
-            virtual ~Shader();
+            ~Shader();
 
             // this method sets pointer to this `Shader` to nullptr, sets `parent_pointer` according to the input, and requests a new `childID` from the new `Scene`.
             void bind_to_new_parent(ontology::Scene* const new_scene_pointer);
@@ -56,6 +96,7 @@ namespace ontology
             friend class Material;
             friend class Glyph;
             friend class Species;
+            friend void ontology::get_gl_attrib_locations(ontology::Shader* shader, ontology::Glyph* glyph);
             template<class T1>
                 friend void render_children(std::vector<T1>& child_pointer_vector);
             template<class T1>

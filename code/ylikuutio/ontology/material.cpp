@@ -4,7 +4,6 @@
 #include "render_templates.hpp"
 #include "material_struct.hpp"
 #include "code/ylikuutio/space_partition/chunk_master.hpp"
-#include "code/ylikuutio/loaders/texture_loader.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include GLEW
@@ -30,52 +29,6 @@ namespace ontology
     {
         // get `childID` from `Shader` and set pointer to this `Material`.
         hierarchy::bind_child_to_parent<ontology::Material*>(this, this->parent_pointer->material_pointer_vector, this->parent_pointer->free_materialID_queue, &this->parent_pointer->number_of_materials);
-    }
-
-    Material::Material(const MaterialStruct material_struct)
-    {
-        // constructor.
-        this->parent_pointer = material_struct.parent_pointer;
-        this->universe_pointer = this->parent_pointer->universe_pointer;
-
-        this->terrain_species_pointer = nullptr;
-
-        this->texture_file_format = material_struct.texture_file_format;
-        this->texture_filename    = material_struct.texture_filename;
-
-        this->char_texture_file_format = this->texture_file_format.c_str();
-        this->char_texture_filename    = this->texture_filename.c_str();
-
-        this->number_of_species = 0;
-        this->number_of_vector_fonts = 0;
-        this->number_of_chunk_masters = 0;
-
-        // get `childID` from the `Shader` and set pointer to this `Material`.
-        this->bind_to_parent();
-
-        // Load the texture.
-        if ((std::strcmp(this->char_texture_file_format, "bmp") == 0) || (std::strcmp(this->char_texture_file_format, "BMP") == 0))
-        {
-            this->texture = loaders::load_BMP_texture(this->texture_filename);
-        }
-        else if ((std::strcmp(this->char_texture_file_format, "dds") == 0) || (std::strcmp(this->char_texture_file_format, "DDS") == 0))
-        {
-            this->texture = loaders::load_DDS_texture(this->texture_filename);
-        }
-        else
-        {
-            std::cerr << "no texture was loaded!\n";
-            std::cerr << "texture file format: " << this->texture_file_format << "\n";
-            this->texture = 0; // some dummy value.
-        }
-
-        // Get a handle for our "myTextureSampler" uniform.
-        this->openGL_textureID = glGetUniformLocation(this->parent_pointer->programID, "myTextureSampler");
-
-        this->child_vector_pointers_vector.push_back(&this->species_pointer_vector);
-        this->child_vector_pointers_vector.push_back(&this->vector_font_pointer_vector);
-        this->child_vector_pointers_vector.push_back(&this->chunk_master_pointer_vector);
-        this->type = "ontology::Material*";
     }
 
     Material::~Material()

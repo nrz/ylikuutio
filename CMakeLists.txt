@@ -347,6 +347,10 @@ add_library(ylikuutio STATIC
     code/ylikuutio/map/ylikuutio_map.hpp
 
     # ontology, in alphabetical order
+    code/ylikuutio/ontology/gl_attrib_locations.cpp
+    code/ylikuutio/ontology/gl_attrib_locations.hpp
+    code/ylikuutio/ontology/glyph_object_creation.cpp
+    code/ylikuutio/ontology/glyph_object_creation.hpp
     code/ylikuutio/ontology/entity.cpp
     code/ylikuutio/ontology/entity.hpp
     code/ylikuutio/ontology/entity_factory.cpp

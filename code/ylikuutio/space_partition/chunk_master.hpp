@@ -23,7 +23,20 @@ namespace space_partition
     {
         public:
             // constructor.
-            ChunkMaster(ontology::Material* const parent_pointer, GetContentCallback get_content_callback);
+            ChunkMaster(ontology::Universe* universe, ontology::Material* const parent_pointer, GetContentCallback get_content_callback)
+                : ontology::Entity(universe)
+            {
+                // constructor.
+                this->get_content_callback = get_content_callback;
+                this->number_of_chunks = 0;
+
+                this->parent_pointer = parent_pointer;
+
+                // get `childID` from `Material` and set pointer to this `ChunkMaster`.
+                this->bind_to_parent();
+
+                this->type = "space_partition::ChunkMaster*";
+            }
 
             // destructor.
             virtual ~ChunkMaster();

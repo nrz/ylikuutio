@@ -332,6 +332,7 @@ int main(void)
 
     // Create terrain1, store it in `terrain1`.
     ObjectStruct terrain_object_struct1;
+    terrain_object_struct1.universe_pointer = my_universe;
     terrain_object_struct1.species_parent_pointer = terrain_species;
     terrain_object_struct1.coordinate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
     terrain_object_struct1.rotate_angle = 0.0f;
@@ -359,6 +360,7 @@ int main(void)
 
     // Create snow cottage, store it in `snow_cottage1`.
     ObjectStruct snow_cottage_object_struct1;
+    snow_cottage_object_struct1.universe_pointer = my_universe;
     snow_cottage_object_struct1.species_parent_pointer = snow_cottage_species;
     snow_cottage_object_struct1.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
     snow_cottage_object_struct1.coordinate_vector = glm::vec3(121.50f, 126.50f, 63.70f);
@@ -396,6 +398,7 @@ int main(void)
 
     // Create suzanne1, store it in `suzanne1`.
     ObjectStruct suzanne_object_struct1;
+    suzanne_object_struct1.universe_pointer = my_universe;
     suzanne_object_struct1.species_parent_pointer = suzanne_species;
     suzanne_object_struct1.coordinate_vector = glm::vec3(82.50f, 119.00f, 95.50f);
     suzanne_object_struct1.rotate_angle = 0.10f;
@@ -404,6 +407,7 @@ int main(void)
     ontology::EntityFactory::create_Object(suzanne_object_struct1);
 
     ObjectStruct suzanne_object_struct2;
+    suzanne_object_struct2.universe_pointer = my_universe;
     suzanne_object_struct2.species_parent_pointer = suzanne_species;
     suzanne_object_struct2.coordinate_vector = glm::vec3(112.90f, 113.90f, 75.50f);
     suzanne_object_struct2.rotate_angle = 0.20f;
@@ -413,6 +417,7 @@ int main(void)
     suzanne2->set_name("suzanne2");
 
     ObjectStruct suzanne_object_struct3;
+    suzanne_object_struct3.universe_pointer = my_universe;
     suzanne_object_struct3.species_parent_pointer = suzanne_species;
     suzanne_object_struct3.coordinate_vector = glm::vec3(126.90f, 162.90f, 103.00f);
     suzanne_object_struct3.rotate_angle = 0.05f;
@@ -421,6 +426,7 @@ int main(void)
     ontology::EntityFactory::create_Object(suzanne_object_struct3);
 
     ObjectStruct suzanne_object_struct4;
+    suzanne_object_struct4.universe_pointer = my_universe;
     suzanne_object_struct4.species_parent_pointer = suzanne_species;
     suzanne_object_struct4.coordinate_vector = glm::vec3(96.00f, 130.00f, 109.00f);
     suzanne_object_struct4.rotate_angle = 0.15f;
@@ -429,6 +435,7 @@ int main(void)
     ontology::EntityFactory::create_Object(suzanne_object_struct4);
 
     ObjectStruct suzanne_object_struct5;
+    suzanne_object_struct5.universe_pointer = my_universe;
     suzanne_object_struct5.species_parent_pointer = suzanne_species;
     suzanne_object_struct5.original_scale_vector = glm::vec3(10.0f, 10.0f, 10.0f);
     suzanne_object_struct5.coordinate_vector = glm::vec3(103.00f, 140.00f, 109.00f);

@@ -17,10 +17,11 @@ namespace ontology
 typedef struct ObjectStruct
 {
     ObjectStruct()
-        : species_parent_pointer(nullptr), glyph_parent_pointer(nullptr), text3D_parent_pointer(nullptr), original_scale_vector(glm::vec3(1.0f, 1.0f, 1.0f)), rotate_angle(0.0f), is_character(false), quaternions_in_use(false), coordinate_vector(glm::vec3(0.0f, 0.0f, 0.0f)), rotate_vector(glm::vec3(0.0f, 0.0f, 0.0f)), translate_vector(glm::vec3(0.0f, 0.0f, 0.0f))
+        : universe_pointer(nullptr), species_parent_pointer(nullptr), glyph_parent_pointer(nullptr), text3D_parent_pointer(nullptr), original_scale_vector(glm::vec3(1.0f, 1.0f, 1.0f)), rotate_angle(0.0f), is_character(false), quaternions_in_use(false), coordinate_vector(glm::vec3(0.0f, 0.0f, 0.0f)), rotate_vector(glm::vec3(0.0f, 0.0f, 0.0f)), translate_vector(glm::vec3(0.0f, 0.0f, 0.0f))
     {
         // constructor.
     }
+    ontology::Universe* universe_pointer;      // pointer to the `Universe`.
     ontology::Species* species_parent_pointer; // pointer to the parent `Species`.
     ontology::Glyph* glyph_parent_pointer;     // pointer to the parent `Glyph`.
     ontology::Text3D* text3D_parent_pointer;   // pointer to the parent `Text3D`.

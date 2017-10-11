@@ -36,33 +36,6 @@ namespace ontology
         hierarchy::bind_child_to_parent<ontology::Scene*>(this, this->parent_pointer->scene_pointer_vector, this->parent_pointer->free_sceneID_queue, &this->parent_pointer->number_of_scenes);
     }
 
-    Scene::Scene(ontology::Universe* const parent_pointer, const float water_level)
-    {
-        // constructor.
-        this->gravity = 9.81f / 60.0f;
-        this->fall_speed = this->gravity;
-        this->water_level = static_cast<GLfloat>(water_level);
-
-        this->universe_pointer = parent_pointer;
-        this->parent_pointer = parent_pointer;
-
-        this->cartesian_coordinates = nullptr;
-        this->spherical_coordinates = nullptr;
-        this->horizontal_angle = NAN;
-        this->vertical_angle = NAN;
-
-        this->number_of_shaders = 0;
-
-        // get `childID` from `Universe` and set pointer to this `Scene`.
-        this->bind_to_parent();
-
-        this->child_vector_pointers_vector.push_back(&this->shader_pointer_vector);
-
-        // make this `Scene` the active `Scene`.
-        this->parent_pointer->set_active_scene(this);
-        this->type = "ontology::Scene*";
-    }
-
     Scene::~Scene()
     {
         // destructor.

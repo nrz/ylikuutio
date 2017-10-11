@@ -1,10 +1,14 @@
-#ifndef TEXT3D_HPP
-#define TEXT3D_HPP
+#ifndef __TEXT3D_HPP_INCLUDED
+#define __TEXT3D_HPP_INCLUDED
 
 #include "entity.hpp"
+#include "glyph_object_creation.hpp"
+#include "vector_font.hpp"
 #include "text3D_struct.hpp"
+#include "object_struct.hpp"
 #include "entity_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
+#include "code/ylikuutio/string/ylikuutio_string.hpp"
 #include "code/ylikuutio/common/globals.hpp"
 
 // Include GLEW
@@ -20,12 +24,16 @@
 #endif
 
 // Include standard headers
+#include <cmath>    // NAN, std::isnan, std::pow
+#include <iostream> // std::cout, std::cin, std::cerr
 #include <queue>    // std::queue
 #include <string>   // std::string
 #include <vector>   // std::vector
 
 namespace ontology
 {
+    class Object;
+
     class Text3D: public ontology::Entity
     {
         public:
@@ -33,10 +41,31 @@ namespace ontology
             // TODO: `Text3D` constructor also creates each `Object`,
             // and binds each to its corresponding `Glyph` for rendering hierarchy,
             // and also binds each to this `Text3D` for ontological hierarchy.
-            Text3D(const Text3DStruct text3D_struct);
+            Text3D(const Text3DStruct& text3D_struct)
+                : Entity(text3D_struct.parent_pointer->universe_pointer)
+            {
+                // constructor.
+                this->rotate_angle = NAN;
+                this->text_string = text3D_struct.text_string;
+                this->parent_pointer = text3D_struct.parent_pointer;
+                this->universe_pointer = this->parent_pointer->universe_pointer;
+
+                this->number_of_objects = 0;
+
+                // get childID from `VectorFont` and set pointer to this `Text3D`.
+                this->bind_to_parent();
+
+                std::cout << "Creating the glyph Objects for the string \"" << this->text_string << "\"\n";
+
+                // Let's create each glyph `Object` in a loop.
+
+                ontology::create_glyph_objects(this->text_string, this);
+
+                this->child_vector_pointers_vector.push_back(&this->object_pointer_vector);
+            }
 
             // destructor.
-            virtual ~Text3D();
+            ~Text3D();
 
             ontology::Entity* get_parent() override;
             int32_t get_number_of_children() override;
@@ -56,6 +85,7 @@ namespace ontology
             void set_name(const std::string& name);
 
             friend class Object;
+            friend void create_glyph_objects(const std::string& text_string, ontology::Text3D* text3D);
             template<class T1>
                 friend void set_name(std::string name, T1 entity);
             template<class T1>

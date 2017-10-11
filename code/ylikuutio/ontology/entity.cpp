@@ -2,16 +2,17 @@
 #include "universe.hpp"
 
 // Include standard headers
+#include <iostream>      // std::cout, std::cin, std::cerr
 #include <string>        // std::string
 #include <unordered_map> // std::unordered_map
 
 namespace ontology
 {
-    Entity::Entity()
+    Entity::Entity(ontology::Universe* universe)
     {
         // constructor.
         this->childID = -1;
-        this->universe_pointer = nullptr;
+        this->universe_pointer = universe;
         this->prerender_callback = nullptr;
         this->postrender_callback = nullptr;
     }
@@ -19,15 +20,27 @@ namespace ontology
     Entity::~Entity()
     {
         // destructor.
+        std::cout << "Entity destructor called.\n";
 
-        if (!this->name.empty() && this->universe_pointer != nullptr)
+        if (this->name.empty())
         {
-            // OK, this `Entity` had a name, so it's name shall be erased.
-            if (this->universe_pointer->entity_map.count(this->name) != 0)
-            {
-                // OK, `Universe` knows the name of this `Entity`.
-                this->universe_pointer->entity_map.erase(this->name);
-            }
+            std::cerr << "Entity destructor: error: name is empty.\n";
+            return;
+        }
+
+        if (this->universe_pointer == nullptr)
+        {
+            std::cerr << "Entity destructor: error: `universe_pointer` is `nullptr`.\n";
+            return;
+        }
+
+        // OK, this `Entity` had a name, so it's name shall be erased.
+        if (this->universe_pointer->entity_map.count(this->name) != 0)
+        {
+            std::cout << "Entity destructor: erasing " << this->name << " from `entity_map` ...\n";
+
+            // OK, `Universe` knows the name of this `Entity`.
+            this->universe_pointer->entity_map.erase(this->name);
         }
     }
 

@@ -4,6 +4,7 @@
 #include "entity.hpp"
 #include "shader.hpp"
 #include "species.hpp"
+#include "text3D.hpp"
 #include "glyph.hpp"
 #include "object_struct.hpp"
 #include "render_templates.hpp"
@@ -48,10 +49,46 @@ namespace ontology
     {
         public:
             // constructor.
-            Object(const ObjectStruct object_struct);
+            Object(const ObjectStruct object_struct)
+                : Entity(object_struct.universe_pointer)
+            {
+                // constructor.
+                this->coordinate_vector     = object_struct.coordinate_vector;
+                this->original_scale_vector = object_struct.original_scale_vector;
+                this->rotate_angle          = object_struct.rotate_angle;
+                this->rotate_vector         = object_struct.rotate_vector;
+                this->translate_vector      = object_struct.translate_vector;
+                this->has_entered           = false;
+
+                // enable rendering of a recently entered Object.
+                // TODO: enable entering without enabling rendering.
+                this->should_ylikuutio_render_this_object = true;
+
+                this->is_character          = object_struct.is_character;
+                this->quaternions_in_use    = object_struct.quaternions_in_use;
+                this->model_matrix          = glm::mat4(1.0f); // identity matrix (dummy value).
+                this->MVP_matrix            = glm::mat4(1.0f); // identity matrix (dummy value).
+
+                if (this->is_character)
+                {
+                    this->glyph_parent_pointer   = object_struct.glyph_parent_pointer;
+                    this->text3D_parent_pointer  = object_struct.text3D_parent_pointer;
+                    this->species_parent_pointer = nullptr;
+                }
+                else
+                {
+                    this->species_parent_pointer = object_struct.species_parent_pointer;
+                    this->glyph_parent_pointer   = nullptr;
+                    this->text3D_parent_pointer  = nullptr;
+                }
+
+                // get `childID` from `Species` or `Glyph` and set pointer to this `Object`.
+                this->bind_to_parent();
+                this->type = "ontology::Object*";
+            }
 
             // destructor.
-            virtual ~Object();
+            ~Object();
 
             // this method sets pointer to this `Object` to nullptr, sets `parent_pointer` according to the input,
             // and requests a new `childID` from the new `Species` or from the new `Glyph`.

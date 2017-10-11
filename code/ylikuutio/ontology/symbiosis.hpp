@@ -5,6 +5,7 @@
 // `ShaderSymbiosis` is like `Symbiosis`, but it contains also `Shader`s in addition to `Material`s and `Species`.
 
 #include "entity.hpp"
+#include "shader.hpp"
 #include "symbiosis_struct.hpp"
 #include "entity_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
@@ -25,10 +26,23 @@ namespace ontology
     {
         public:
             // constructor.
-            Symbiosis(const SymbiosisStruct symbiosis_struct);
+            Symbiosis(const SymbiosisStruct symbiosis_struct)
+                : Entity(symbiosis_struct.parent_pointer->universe_pointer)
+            {
+                // constructor.
+                this->parent_pointer = symbiosis_struct.parent_pointer;
+
+                this->number_of_materials = 0;
+                this->number_of_species = 0;
+
+                // get `childID` from `Shader` and set pointer to this `Symbiosis`.
+                this->bind_to_parent();
+
+                this->type = "ontology::Symbiosis*";
+            }
 
             // destructor.
-            virtual ~Symbiosis();
+            ~Symbiosis();
 
             int32_t get_number_of_children() override;
 
