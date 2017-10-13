@@ -643,88 +643,42 @@ int main(void)
     new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, toggle_help_mode_callback_object);
 
     // Callback code for D: delete Suzanne species.
-    bool does_suzanne_species_exist = true;
     callback_system::CallbackEngine* delete_suzanne_species_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* delete_suzanne_species_callback_object = new callback_system::CallbackObject(
             &ajokki::delete_suzanne_species, delete_suzanne_species_callback_engine);
-    new callback_system::CallbackParameter("suzanne_species", std::make_shared<datatypes::AnyValue>(suzanne_species), false, delete_suzanne_species_callback_object);
-    new callback_system::CallbackParameter("does_suzanne_species_exist", std::make_shared<datatypes::AnyValue>(&does_suzanne_species_exist), false, delete_suzanne_species_callback_object);
+    new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, delete_suzanne_species_callback_object);
 
     // Callback code for G: switch to grass material.
-    bool does_suzanne_species_have_uvmap_texture = true;
-    bool does_suzanne_species_have_grass_texture = false;
+    std::string grass_material_string = "grass_material";
     callback_system::CallbackEngine* switch_to_grass_material_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* switch_to_grass_material_callback_object = new callback_system::CallbackObject(
             &ajokki::switch_to_new_material, switch_to_grass_material_callback_engine);
-    new callback_system::CallbackParameter("suzanne_species", std::make_shared<datatypes::AnyValue>(suzanne_species), false, switch_to_grass_material_callback_object);
-    new callback_system::CallbackParameter("new_material", std::make_shared<datatypes::AnyValue>(grass_material), false, switch_to_grass_material_callback_object);
-    new callback_system::CallbackParameter("does_suzanne_species_exist", std::make_shared<datatypes::AnyValue>(&does_suzanne_species_exist), false, switch_to_grass_material_callback_object);
-    new callback_system::CallbackParameter(
-            "does_suzanne_species_have_old_texture",
-            std::make_shared<datatypes::AnyValue>(&does_suzanne_species_have_uvmap_texture),
-            false,
-            switch_to_grass_material_callback_object);
-    new callback_system::CallbackParameter(
-            "does_suzanne_species_have_new_texture",
-            std::make_shared<datatypes::AnyValue>(&does_suzanne_species_have_grass_texture),
-            false,
-            switch_to_grass_material_callback_object);
+    new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, switch_to_grass_material_callback_object);
+    new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(&grass_material_string), false, switch_to_grass_material_callback_object);
 
     // Callback code for U: switch back to uvmap material.
+    std::string uvmap_material_string = "uvmap_material";
     callback_system::CallbackEngine* switch_to_uvmap_material_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* switch_to_uvmap_material_callback_object = new callback_system::CallbackObject(
             &ajokki::switch_to_new_material, switch_to_uvmap_material_callback_engine);
-    new callback_system::CallbackParameter("suzanne_species", std::make_shared<datatypes::AnyValue>(suzanne_species), false, switch_to_uvmap_material_callback_object);
-    new callback_system::CallbackParameter("new_material", std::make_shared<datatypes::AnyValue>(uvmap_material), false, switch_to_uvmap_material_callback_object);
-    new callback_system::CallbackParameter("does_suzanne_species_exist", std::make_shared<datatypes::AnyValue>(&does_suzanne_species_exist), false, switch_to_uvmap_material_callback_object);
-    new callback_system::CallbackParameter(
-            "does_suzanne_species_have_old_texture",
-            std::make_shared<datatypes::AnyValue>(&does_suzanne_species_have_grass_texture),
-            false,
-            switch_to_uvmap_material_callback_object);
-    new callback_system::CallbackParameter(
-            "does_suzanne_species_have_new_texture",
-            std::make_shared<datatypes::AnyValue>(&does_suzanne_species_have_uvmap_texture),
-            false,
-            switch_to_uvmap_material_callback_object);
+    new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, switch_to_uvmap_material_callback_object);
+    new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(&uvmap_material_string), false, switch_to_uvmap_material_callback_object);
 
     // Callback code for T: transform `suzanne2` into terrain.
-    bool has_suzanne_2_transformed_into_monkey = true;
-    bool has_suzanne_2_transformed_into_terrain = false;
+    std::string helsinki_species_string = "Helsinki_species";
     callback_system::CallbackEngine* transform_into_terrain_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* transform_into_terrain_callback_object = new callback_system::CallbackObject(
             &ajokki::transform_into_new_species, transform_into_terrain_callback_engine);
-    new callback_system::CallbackParameter("suzanne2", std::make_shared<datatypes::AnyValue>(suzanne2), false, transform_into_terrain_callback_object); // suzanne2!!!
-    new callback_system::CallbackParameter("terrain_species", std::make_shared<datatypes::AnyValue>(terrain_species), false, transform_into_terrain_callback_object);
-    new callback_system::CallbackParameter("does_suzanne_species_exist", std::make_shared<datatypes::AnyValue>(&does_suzanne_species_exist), false, transform_into_terrain_callback_object);
-    new callback_system::CallbackParameter(
-            "has_suzanne_2_transformed_into_monkey",
-            std::make_shared<datatypes::AnyValue>(&has_suzanne_2_transformed_into_monkey),
-            false,
-            transform_into_terrain_callback_object);
-    new callback_system::CallbackParameter(
-            "has_suzanne_2_transformed_into_terrain",
-            std::make_shared<datatypes::AnyValue>(&has_suzanne_2_transformed_into_terrain),
-            false,
-            transform_into_terrain_callback_object);
+    new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, transform_into_terrain_callback_object);
+    new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(&helsinki_species_string), false, transform_into_terrain_callback_object);
 
     // Callback code for A: transform `suzanne2` back into monkey.
+    std::string suzanne_species_string = "suzanne_species";
     callback_system::CallbackEngine* transform_into_monkey_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* transform_into_monkey_callback_object = new callback_system::CallbackObject(
             &ajokki::transform_into_new_species, transform_into_monkey_callback_engine);
-    new callback_system::CallbackParameter("suzanne2", std::make_shared<datatypes::AnyValue>(suzanne2), false, transform_into_monkey_callback_object); // suzanne2!!!
-    new callback_system::CallbackParameter("monkey_species", std::make_shared<datatypes::AnyValue>(suzanne_species), false, transform_into_monkey_callback_object);
-    new callback_system::CallbackParameter("does_suzanne_species_exist", std::make_shared<datatypes::AnyValue>(&does_suzanne_species_exist), false, transform_into_monkey_callback_object);
-    new callback_system::CallbackParameter(
-            "has_suzanne_2_transformed_into_terrain",
-            std::make_shared<datatypes::AnyValue>(&has_suzanne_2_transformed_into_terrain),
-            false,
-            transform_into_monkey_callback_object);
-    new callback_system::CallbackParameter(
-            "has_suzanne_2_transformed_into_monkey",
-            std::make_shared<datatypes::AnyValue>(&has_suzanne_2_transformed_into_monkey),
-            false,
-            transform_into_monkey_callback_object);
+    new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, transform_into_monkey_callback_object);
+    new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(&suzanne_species_string), false, transform_into_monkey_callback_object);
 
     /*********************************************************************\
      *  Callback engines for console keyreleases begin here.             *
@@ -1181,14 +1135,12 @@ int main(void)
                         "Ctrl      turbo\\n"
                         "Ctrl+Ctrl extra turbo\\n"
                         "for debugging:\\n"
-                        "G  grass texture%s\\n"
-                        "U  uvmap texture%s\\n"
+                        "G  grass texture\\n"
+                        "U  uvmap texture\\n"
                         "T  terrain species\\n"
                         "A  suzanne species\\n",
                         (my_universe->is_invert_mouse_in_use ? on_text : off_text),
-                        (my_universe->is_flight_mode_in_use ? on_text : off_text),
-                        (!does_suzanne_species_have_uvmap_texture ? in_use_text : null_text),
-                        (does_suzanne_species_have_uvmap_texture ? in_use_text : null_text));
+                        (my_universe->is_flight_mode_in_use ? on_text : off_text));
 
                 char spherical_coordinates_text[256];
 

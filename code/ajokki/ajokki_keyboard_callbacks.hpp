@@ -107,17 +107,17 @@ namespace ajokki
     std::shared_ptr<datatypes::AnyValue> delete_suzanne_species(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject* callback_object,
-            std::vector<callback_system::CallbackParameter*>& input_parameters);
+            std::vector<callback_system::CallbackParameter*>&);
 
     std::shared_ptr<datatypes::AnyValue> switch_to_new_material(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject* callback_object,
-            std::vector<callback_system::CallbackParameter*>& input_parameters);
+            std::vector<callback_system::CallbackParameter*>&);
 
     std::shared_ptr<datatypes::AnyValue> transform_into_new_species(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject* callback_object,
-            std::vector<callback_system::CallbackParameter*>& input_parameters);
+            std::vector<callback_system::CallbackParameter*>&);
 }
 
 #endif
