@@ -79,7 +79,7 @@ namespace ontology
 
             // destructor.
             // glyphs should be destroyed only by destroying the entire `VectorFont`.
-            ~Glyph();
+            virtual ~Glyph();
 
             ontology::Entity* get_parent() override;
 
