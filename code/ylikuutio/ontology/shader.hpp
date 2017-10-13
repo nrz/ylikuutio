@@ -84,7 +84,7 @@ namespace ontology
             }
 
             // destructor.
-            ~Shader();
+            virtual ~Shader();
 
             // this method sets pointer to this `Shader` to nullptr, sets `parent_pointer` according to the input, and requests a new `childID` from the new `Scene`.
             void bind_to_new_parent(ontology::Scene* const new_scene_pointer);

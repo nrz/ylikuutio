@@ -65,7 +65,7 @@ namespace ontology
             }
 
             // destructor.
-            ~Text3D();
+            virtual ~Text3D();
 
             ontology::Entity* get_parent() override;
             int32_t get_number_of_children() override;

@@ -94,7 +94,7 @@ namespace ontology
             }
 
             // destructor.
-            ~Font2D();
+            virtual ~Font2D();
 
             ontology::Entity* get_parent() override;
             int32_t get_number_of_children() override;

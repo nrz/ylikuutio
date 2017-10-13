@@ -127,7 +127,7 @@ namespace ontology
             }
 
             // destructor.
-            ~Species();
+            virtual ~Species();
 
             ontology::Entity* get_parent() override;
 

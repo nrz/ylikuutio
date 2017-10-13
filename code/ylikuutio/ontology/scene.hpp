@@ -62,7 +62,7 @@ namespace ontology
             }
 
             // destructor.
-            ~Scene();
+            virtual ~Scene();
 
             // this method returns a pointer to an `Object` using the name as key.
             ontology::Object* get_object(const std::string);

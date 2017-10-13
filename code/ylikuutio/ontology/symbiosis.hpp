@@ -42,7 +42,7 @@ namespace ontology
             }
 
             // destructor.
-            ~Symbiosis();
+            virtual ~Symbiosis();
 
             int32_t get_number_of_children() override;
 

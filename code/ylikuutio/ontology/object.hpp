@@ -88,7 +88,7 @@ namespace ontology
             }
 
             // destructor.
-            ~Object();
+            virtual ~Object();
 
             // this method sets pointer to this `Object` to nullptr, sets `parent_pointer` according to the input,
             // and requests a new `childID` from the new `Species` or from the new `Glyph`.
