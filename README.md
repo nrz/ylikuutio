@@ -5,7 +5,7 @@ A hobby project of mine. Work in progress.
 [![Coverity Scan](https://scan.coverity.com/projects/nrz-ylikuutio/badge.svg)](https://scan.coverity.com/projects/nrz-ylikuutio)
 
 ## License
-Ylikuutio 3D engine is under The GNU General Public License 3,
+Ylikuutio is under The GNU General Public License 3,
 or (at your option) any later version. See COPYING file.
 All my code copyright (C) 2016-2017 Antti Nuortimo.
 
@@ -30,7 +30,7 @@ OpenGL Mathematics (GLM) is licensed under [The Happy Bunny License
 
 pugixml is licensed under [MIT license](https://github.com/zeux/pugixml/blob/master/README.md).
 
-Other resources are under their respective licenses.
+Other resources are licensed under their respective licenses.
 
 Grass texture is from [Free Seamless Green Grass Textures](http://www.brusheezy.com/textures/20185-seamless-green-grass-textures).
 
@@ -73,19 +73,19 @@ CMake uses git for downloading Google Test testing framework.
 In Linux it's simple.
 
 First, install all the necessary compilers, tools and libs. You may use
-your favorite package manager such as aptitude, apt-get, yum etc.
+your favorite package manager such as apt, aptitude, apt-get, yum etc.
 You all need these packages: cmake make g++ gcc libx11-dev libgl1-mesa-dev libglu1-mesa-dev libxcursor-dev libxrandr-dev libxext-dev libxi-dev libxinerama-dev
-Eg. with aptitude:
+Eg. with apt:
 
-    $ sudo aptitude install cmake build-essential libx11-dev libgl1-mesa-dev libglu1-mesa-dev libxcursor-dev libxrandr-dev libxext-dev libxi-dev libxinerama-dev
+    $ sudo apt install cmake build-essential libx11-dev libgl1-mesa-dev libglu1-mesa-dev libxcursor-dev libxrandr-dev libxext-dev libxi-dev libxinerama-dev
 
 If you are doing a cross compile from Linux to Windows, you need also:
 
-    $ sudo aptitude install g++-mingw-w64 gcc-mingw-w64 binutils-mingw-w64
+    $ sudo apt install g++-mingw-w64 gcc-mingw-w64 binutils-mingw-w64
 
 If you are doing a cross compile from Linux to Android(TM), you need also:
 
-    $ sudo aptitude install google-android-ndk-installer
+    $ sudo apt install google-android-ndk-installer
 
 However, cross compiling from Linux to Android does not work yet!
 
@@ -182,7 +182,7 @@ A: Ylikuutio aims to be a fast and flexible 3D game/simulation engine
 Q: What are the target platforms of Ylikuutio?
 A: Ylikuutio targets Linux, Windows and Android, in this order.
    Cross-compiling from Linux to Windows works!
-   Cross-compiling for Android is not implemented yet.
+   Cross-compiling from Linux to Android is not implemented yet.
    Currently only 64-bit environments are supported.
 
 Q: What graphics APIs Ylikuutio uses?
