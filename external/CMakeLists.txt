@@ -11,29 +11,12 @@ add_definitions(
     )
 
 # Compile external dependencies
-# add_subdirectory(gdal-2.1.1)
-
-# Compile external dependencies
-
-# Assimp
-# add_subdirectory(assimp)
 
 # pugixml
 add_subdirectory(pugixml)
 
-# FastNoiseSIMD
-add_subdirectory(FastNoiseSIMD)
-
 ### GLFW ###
 add_subdirectory(glfw)
-
-# TinySceme #
-if(ENABLE_SCRIPTING_WITH_TINYSCHEME)
-    add_subdirectory(tinyscheme-1.41)
-    include_directories(
-        tinyscheme-1.41/
-        )
-endif()
 
 include_directories(
     assimp/include/
