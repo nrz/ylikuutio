@@ -9,7 +9,7 @@
 typedef struct SpeciesLoaderStruct
 {
     SpeciesLoaderStruct()
-        : latitude(NAN), longitude(NAN), world_radius(NAN), divisor(NAN), x_step(1), z_step(1), triangulation_type("bilinear_interpolation")
+        : latitude(NAN), longitude(NAN), world_radius(NAN), divisor(NAN), mesh_i(0), x_step(1), z_step(1), triangulation_type("bilinear_interpolation")
     {
         // constructor.
     }
@@ -19,6 +19,7 @@ typedef struct SpeciesLoaderStruct
     double longitude;   // in degrees, for SRTM.
     float world_radius; // for SRTM.
     float divisor;      // for SRTM.
+    int32_t mesh_i;     // for FBX.
     std::string color_channel; // for BMP.
     uint32_t x_step;
     uint32_t z_step;
