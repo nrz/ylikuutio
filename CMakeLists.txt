@@ -330,6 +330,8 @@ add_library(ylikuutio STATIC
     code/ylikuutio/loaders/bmp_heightmap_loader.hpp
     code/ylikuutio/loaders/bmp_loader.cpp
     code/ylikuutio/loaders/bmp_loader.hpp
+    code/ylikuutio/loaders/fbx_loader.cpp
+    code/ylikuutio/loaders/fbx_loader.hpp
     code/ylikuutio/loaders/font_loader.cpp
     code/ylikuutio/loaders/font_loader.hpp
     code/ylikuutio/loaders/las_loader.cpp
@@ -512,6 +514,8 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/linear_algebra/matrix_functions.hpp
         code/ylikuutio/linear_algebra/tensor3.cpp
         code/ylikuutio/linear_algebra/tensor3.hpp
+        code/ylikuutio/loaders/fbx_loader.cpp
+        code/ylikuutio/loaders/fbx_loader.hpp
         code/ylikuutio/loaders/font_loader.cpp
         code/ylikuutio/loaders/font_loader.hpp
         code/ylikuutio/ontology/glyph_struct.hpp
@@ -538,6 +542,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/googletest/test_any_value.cpp
         code/ylikuutio/tests/googletest/test_bilinear_interpolation2D.cpp
         code/ylikuutio/tests/googletest/test_callback_system.cpp
+        code/ylikuutio/tests/googletest/test_fbx_loader.cpp
         code/ylikuutio/tests/googletest/test_file_loader.cpp
         code/ylikuutio/tests/googletest/test_font_loader.cpp
         code/ylikuutio/tests/googletest/test_node_struct.cpp
