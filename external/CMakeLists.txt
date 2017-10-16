@@ -19,7 +19,6 @@ add_subdirectory(pugixml)
 add_subdirectory(glfw)
 
 include_directories(
-    assimp/include/
     FastNoiseSIMD/
     glew-2.0.0/include/
     glfw/include/
