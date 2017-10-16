@@ -71,7 +71,6 @@ set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 
 include_directories(
-    # external/assimp/include/
     external/FastNoiseSIMD/
     external/glew-2.0.0/include/
     external/glfw/include/
