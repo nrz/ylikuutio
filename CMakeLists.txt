@@ -76,6 +76,7 @@ include_directories(
     external/glfw/include/
     external/glm/
     external/pugixml/src/
+    external/OpenFBX/src/
     .
     )
 
@@ -196,6 +197,8 @@ set(ALL_LIBS
     glfw
     GLEW_200
     pugixml
+    miniz
+    OpenFBX
     )
 
 add_definitions(
@@ -554,8 +557,10 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
     set(MAIN_FILE code/ylikuutio/tests/googletest/main.cpp)
 
     add_library(codeToTest ${FILES_TO_TEST})
+    add_dependencies(codeToTest OpenFBX)
 
     add_executable(do_tests_googletest ${MAIN_FILE})
+    add_dependencies(do_tests_googletest OpenFBX)
     target_link_libraries(do_tests_googletest codeToTest)
 
     add_executable(unit_tests_with_Google_Test code/ylikuutio/tests/googletest/test_main.cpp ${UNIT_TESTS})
