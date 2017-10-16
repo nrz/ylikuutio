@@ -12,6 +12,8 @@ All my code copyright (C) 2016-2017 Antti Nuortimo.
 The source code from http://www.opengl-tutorial.org/ is licensed
 under [WTFPL Public Licence version 2](http://www.opengl-tutorial.org/download/).
 
+OpenFBX is licensed under under [the MIT license](https://github.com/nem0/OpenFBX/blob/master/LICENSE).
+
 Open Asset Import Library (assimp) is licensed
 under [a 3-clause BSD license](http://www.assimp.org/main_license.html).
 
@@ -28,7 +30,7 @@ GLFW is licensed under [the zlib/libpng license](http://www.glfw.org/license.htm
 OpenGL Mathematics (GLM) is licensed under [The Happy Bunny License
 (Modified MIT License) and MIT License](http://glm.g-truc.net/copying.txt).
 
-pugixml is licensed under [MIT license](https://github.com/zeux/pugixml/blob/master/README.md).
+pugixml is licensed under [the MIT license](https://github.com/zeux/pugixml/blob/master/README.md).
 
 Other resources are licensed under their respective licenses.
 
@@ -54,7 +56,12 @@ SRTM is a [NASA (National Aeronautics and Space Administration)](https://www.nas
 SRTM data shipped with Ylikuutio belongs to SRTMGL3 dataset.
 Information about different SRTM datasets is available in [OpenStreetMap Wiki](http://wiki.openstreetmap.org/wiki/SRTM).
 
-Suzanne the monkey is a standard Blender object. According to Blender
+[Rigged and animated cat](https://www.blendswap.com/blends/view/86110) is made by JonasDichelle and it is licensed
+under [Creative Commons Attribution 3.0 Unported (CC BY 3.0) license](https://creativecommons.org/licenses/by/3.0/).
+The `cat.fbx` file shipped with Ylikuutio is made from the original
+`cat.blend` by exporting the object in [FBX](https://en.wikipedia.org/wiki/FBX) file format, using [Blender](https://www.blender.org/).
+
+Suzanne the monkey is a standard [Blender](https://www.blender.org/) object. According to Blender
 license information: "All your artwork – images or movie files –
 including the .blend files and other data files Blender can write,
 is free for you to use as you like." Ylikuutio does not contain
