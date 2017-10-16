@@ -71,12 +71,12 @@ set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 
 include_directories(
-    # external/assimp/include/
     external/FastNoiseSIMD/
     external/glew-2.0.0/include/
     external/glfw/include/
     external/glm/
     external/pugixml/src/
+    external/OpenFBX/src/
     .
     )
 
@@ -197,6 +197,8 @@ set(ALL_LIBS
     glfw
     GLEW_200
     pugixml
+    miniz
+    OpenFBX
     )
 
 add_definitions(
@@ -218,6 +220,7 @@ configure_file(code/tinyscheme/hello_world.scm hello_world.scm COPYONLY)
 configure_file(external/tinyscheme-1.41/init.scm init.scm COPYONLY)
 configure_file(res/objects/custom/suzanne.obj suzanne.obj COPYONLY)
 configure_file(res/objects/snow_cottage_triangulated.obj snow_cottage_triangulated.obj COPYONLY)
+configure_file(res/objects/www.blendswap.com/86110_rigged_and_animated_cat/cat.fbx cat.fbx COPYONLY)
 configure_file(res/textures/uvmap.DDS uvmap.DDS COPYONLY)
 configure_file(res/textures/GrassGreenTexture0002.bmp GrassGreenTexture0002.bmp COPYONLY)
 configure_file(res/textures/pavers1b2.bmp pavers1b2.bmp COPYONLY)
@@ -327,6 +330,8 @@ add_library(ylikuutio STATIC
     code/ylikuutio/loaders/bmp_heightmap_loader.hpp
     code/ylikuutio/loaders/bmp_loader.cpp
     code/ylikuutio/loaders/bmp_loader.hpp
+    code/ylikuutio/loaders/fbx_loader.cpp
+    code/ylikuutio/loaders/fbx_loader.hpp
     code/ylikuutio/loaders/font_loader.cpp
     code/ylikuutio/loaders/font_loader.hpp
     code/ylikuutio/loaders/las_loader.cpp
@@ -509,6 +514,8 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/linear_algebra/matrix_functions.hpp
         code/ylikuutio/linear_algebra/tensor3.cpp
         code/ylikuutio/linear_algebra/tensor3.hpp
+        code/ylikuutio/loaders/fbx_loader.cpp
+        code/ylikuutio/loaders/fbx_loader.hpp
         code/ylikuutio/loaders/font_loader.cpp
         code/ylikuutio/loaders/font_loader.hpp
         code/ylikuutio/ontology/glyph_struct.hpp
@@ -535,6 +542,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/googletest/test_any_value.cpp
         code/ylikuutio/tests/googletest/test_bilinear_interpolation2D.cpp
         code/ylikuutio/tests/googletest/test_callback_system.cpp
+        code/ylikuutio/tests/googletest/test_fbx_loader.cpp
         code/ylikuutio/tests/googletest/test_file_loader.cpp
         code/ylikuutio/tests/googletest/test_font_loader.cpp
         code/ylikuutio/tests/googletest/test_node_struct.cpp
@@ -554,8 +562,10 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
     set(MAIN_FILE code/ylikuutio/tests/googletest/main.cpp)
 
     add_library(codeToTest ${FILES_TO_TEST})
+    add_dependencies(codeToTest OpenFBX)
 
     add_executable(do_tests_googletest ${MAIN_FILE})
+    add_dependencies(do_tests_googletest OpenFBX)
     target_link_libraries(do_tests_googletest codeToTest)
 
     add_executable(unit_tests_with_Google_Test code/ylikuutio/tests/googletest/test_main.cpp ${UNIT_TESTS})

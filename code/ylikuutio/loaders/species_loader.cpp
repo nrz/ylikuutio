@@ -1,6 +1,7 @@
 #include "species_loader.hpp"
 #include "species_loader_struct.hpp"
 #include "obj_loader.hpp"
+#include "fbx_loader.hpp"
 #include "ascii_grid_loader.hpp"
 #include "bmp_heightmap_loader.hpp"
 #include "srtm_heightmap_loader.hpp"
@@ -60,6 +61,15 @@ namespace loaders
         {
             model_loading_result = loaders::load_OBJ(
                     species_loader_struct.model_filename.c_str(),
+                    out_vertices,
+                    out_UVs,
+                    out_normals);
+        }
+        else if (species_loader_struct.model_file_format.compare("fbx") == 0 || species_loader_struct.model_file_format.compare("FBX") == 0)
+        {
+            model_loading_result = loaders::load_FBX(
+                    species_loader_struct.model_filename,
+                    species_loader_struct.mesh_i,
                     out_vertices,
                     out_UVs,
                     out_normals);

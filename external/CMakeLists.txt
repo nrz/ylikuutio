@@ -11,37 +11,20 @@ add_definitions(
     )
 
 # Compile external dependencies
-# add_subdirectory(gdal-2.1.1)
-
-# Compile external dependencies
-
-# Assimp
-# add_subdirectory(assimp)
 
 # pugixml
 add_subdirectory(pugixml)
 
-# FastNoiseSIMD
-add_subdirectory(FastNoiseSIMD)
-
 ### GLFW ###
 add_subdirectory(glfw)
 
-# TinySceme #
-if(ENABLE_SCRIPTING_WITH_TINYSCHEME)
-    add_subdirectory(tinyscheme-1.41)
-    include_directories(
-        tinyscheme-1.41/
-        )
-endif()
-
 include_directories(
-    assimp/include/
     FastNoiseSIMD/
     glew-2.0.0/include/
     glfw/include/
     glm/
     pugixml/src/
+    OpenFBX/src/
     .
     )
 
@@ -90,3 +73,15 @@ add_library(tinyscheme STATIC
     tinyscheme-1.41/scheme-private.h
     )
 set_property(TARGET tinyscheme PROPERTY COMPILE_FLAGS "-DSTANDALONE=0 -DUSE_INTERFACE=1")
+
+add_library(miniz STATIC
+    OpenFBX/src/miniz.c
+    OpenFBX/src/miniz.h
+    )
+add_library(OpenFBX STATIC
+    OpenFBX/src/ofbx.cpp
+    OpenFBX/src/ofbx.h
+    )
+add_dependencies(OpenFBX miniz)
+target_link_libraries(OpenFBX miniz)
+set_property(TARGET OpenFBX PROPERTY COMPILE_FLAGS "-std=c++14")

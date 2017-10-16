@@ -593,7 +593,7 @@ namespace ajokki
         return nullptr;
     }
 
-    std::shared_ptr<datatypes::AnyValue> delete_suzanne_species(
+    std::shared_ptr<datatypes::AnyValue> delete_entity(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>&)
@@ -633,14 +633,37 @@ namespace ajokki
             return nullptr;
         }
 
-        ontology::Entity* suzanne_species_entity = universe->get_entity("suzanne_species");
+        std::shared_ptr<datatypes::AnyValue> any_value_entity_string = std::make_shared<datatypes::AnyValue>(*callback_object->get_arg(1));
 
-        if (suzanne_species_entity == nullptr)
+        if (any_value_entity_string == nullptr)
+        {
+            std::cerr << "Error: entity_string not found!\n";
+            return nullptr;
+        }
+
+        if (any_value_entity_string->type != datatypes::STD_STRING_POINTER)
+        {
+            std::cerr << "Invalid datatype: " << any_value_entity_string->type << ", should be " << datatypes::STD_STRING_POINTER << "\n";
+            return nullptr;
+        }
+
+        std::string* entity_string_pointer = any_value_entity_string->std_string_pointer;
+
+        if (entity_string_pointer == nullptr)
         {
             return nullptr;
         }
 
-        delete suzanne_species_entity;
+        std::string entity_string = *entity_string_pointer;
+
+        ontology::Entity* entity = universe->get_entity(entity_string);
+
+        if (entity == nullptr)
+        {
+            return nullptr;
+        }
+
+        delete entity;
 
         return nullptr;
     }
@@ -672,21 +695,44 @@ namespace ajokki
             return nullptr;
         }
 
-        ontology::Entity* suzanne_species_entity = universe->get_entity("suzanne_species");
+        std::shared_ptr<datatypes::AnyValue> any_value_entity_string = std::make_shared<datatypes::AnyValue>(*callback_object->get_arg(1));
 
-        if (suzanne_species_entity == nullptr)
+        if (any_value_entity_string == nullptr)
+        {
+            std::cerr << "Error: entity_string not found!\n";
+            return nullptr;
+        }
+
+        if (any_value_entity_string->type != datatypes::STD_STRING_POINTER)
+        {
+            std::cerr << "Invalid datatype: " << any_value_entity_string->type << ", should be " << datatypes::STD_STRING_POINTER << "\n";
+            return nullptr;
+        }
+
+        std::string* entity_string_pointer = any_value_entity_string->std_string_pointer;
+
+        if (entity_string_pointer == nullptr)
         {
             return nullptr;
         }
 
-        ontology::Species* suzanne_species = dynamic_cast<ontology::Species*>(suzanne_species_entity);
+        std::string entity_string = *entity_string_pointer;
 
-        if (suzanne_species == nullptr)
+        ontology::Entity* entity = universe->get_entity(entity_string);
+
+        if (entity == nullptr)
         {
             return nullptr;
         }
 
-        ontology::Entity* old_material_entity = suzanne_species->get_parent();
+        ontology::Species* species = dynamic_cast<ontology::Species*>(entity);
+
+        if (species == nullptr)
+        {
+            return nullptr;
+        }
+
+        ontology::Entity* old_material_entity = species->get_parent();
 
         ontology::Material* old_material = dynamic_cast<ontology::Material*>(old_material_entity);
 
@@ -695,7 +741,7 @@ namespace ajokki
             return nullptr;
         }
 
-        std::shared_ptr<datatypes::AnyValue> any_value_material_string = std::make_shared<datatypes::AnyValue>(*callback_object->get_arg(1));
+        std::shared_ptr<datatypes::AnyValue> any_value_material_string = std::make_shared<datatypes::AnyValue>(*callback_object->get_arg(2));
 
         if (any_value_material_string == nullptr)
         {
@@ -738,7 +784,7 @@ namespace ajokki
             return nullptr;
         }
 
-        suzanne_species->bind_to_new_parent(new_material);
+        species->bind_to_new_parent(new_material);
         return nullptr;
     }
 
@@ -769,21 +815,44 @@ namespace ajokki
             return nullptr;
         }
 
-        ontology::Entity* suzanne2_object_entity = universe->get_entity("suzanne2");
+        std::shared_ptr<datatypes::AnyValue> any_value_entity_string = std::make_shared<datatypes::AnyValue>(*callback_object->get_arg(1));
 
-        if (suzanne2_object_entity == nullptr)
+        if (any_value_entity_string == nullptr)
+        {
+            std::cerr << "Error: entity_string not found!\n";
+            return nullptr;
+        }
+
+        if (any_value_entity_string->type != datatypes::STD_STRING_POINTER)
+        {
+            std::cerr << "Invalid datatype: " << any_value_entity_string->type << ", should be " << datatypes::STD_STRING_POINTER << "\n";
+            return nullptr;
+        }
+
+        std::string* entity_string_pointer = any_value_entity_string->std_string_pointer;
+
+        if (entity_string_pointer == nullptr)
         {
             return nullptr;
         }
 
-        ontology::Object* suzanne2_object = dynamic_cast<ontology::Object*>(suzanne2_object_entity);
+        std::string entity_string = *entity_string_pointer;
 
-        if (suzanne2_object == nullptr)
+        ontology::Entity* entity = universe->get_entity(entity_string);
+
+        if (entity == nullptr)
         {
             return nullptr;
         }
 
-        ontology::Entity* old_species_entity = suzanne2_object->get_parent();
+        ontology::Object* object = dynamic_cast<ontology::Object*>(entity);
+
+        if (object == nullptr)
+        {
+            return nullptr;
+        }
+
+        ontology::Entity* old_species_entity = object->get_parent();
 
         ontology::Species* old_species = dynamic_cast<ontology::Species*>(old_species_entity);
 
@@ -792,7 +861,7 @@ namespace ajokki
             return nullptr;
         }
 
-        std::shared_ptr<datatypes::AnyValue> any_value_species_string = std::make_shared<datatypes::AnyValue>(*callback_object->get_arg(1));
+        std::shared_ptr<datatypes::AnyValue> any_value_species_string = std::make_shared<datatypes::AnyValue>(*callback_object->get_arg(2));
 
         if (any_value_species_string == nullptr)
         {
@@ -835,7 +904,7 @@ namespace ajokki
             return nullptr;
         }
 
-        suzanne2_object->bind_to_new_parent(new_species);
+        object->bind_to_new_parent(new_species);
         return nullptr;
     }
 }

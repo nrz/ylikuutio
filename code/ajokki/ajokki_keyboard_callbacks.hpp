@@ -104,7 +104,7 @@ namespace ajokki
             callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>&);
 
-    std::shared_ptr<datatypes::AnyValue> delete_suzanne_species(
+    std::shared_ptr<datatypes::AnyValue> delete_entity(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject* callback_object,
             std::vector<callback_system::CallbackParameter*>&);

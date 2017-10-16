@@ -470,6 +470,64 @@ int main(void)
     suzanne_object_struct5.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
     ontology::EntityFactory::create_Object(suzanne_object_struct5);
 
+    SpeciesStruct cat_species_struct;
+    cat_species_struct.parent_pointer = uvmap_material;
+    cat_species_struct.model_file_format = "fbx";
+    cat_species_struct.model_filename = "cat.fbx";
+    cat_species_struct.light_position = glm::vec3(0, 100000, 100000);
+
+    std::cout << "Creating ontology::Entity* cat_species_entity ...\n";
+    ontology::Entity* cat_species_entity = ontology::EntityFactory::create_Species(cat_species_struct);
+
+    std::cout << "Creating ontology::Species* cat_species ...\n";
+    ontology::Species* cat_species = dynamic_cast<ontology::Species*>(cat_species_entity);
+
+    if (cat_species == nullptr)
+    {
+        std::cerr << "Failed to create cat Species.\n";
+        return -1;
+    }
+
+    cat_species->set_name("cat_species");
+
+    ObjectStruct cat_object_struct1;
+    cat_object_struct1.universe_pointer = my_universe;
+    cat_object_struct1.species_parent_pointer = cat_species;
+    cat_object_struct1.original_scale_vector = glm::vec3(10.0f, 10.0f, 10.0f);
+    cat_object_struct1.coordinate_vector = glm::vec3(500.00f, 140.00f, 500.00f);
+    cat_object_struct1.rotate_angle = 0.03f;
+    cat_object_struct1.rotate_vector = glm::vec3(1.0f, 1.0f, 1.0f);
+    cat_object_struct1.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
+    ontology::Entity* cat1_entity = ontology::EntityFactory::create_Object(cat_object_struct1);
+    ontology::Object* cat1 = dynamic_cast<ontology::Object*>(cat1_entity);
+
+    if (cat1 == nullptr)
+    {
+        std::cerr << "Failed to create cat1 Object.\n";
+        return -1;
+    }
+
+    cat1->set_name("cat1");
+
+    ObjectStruct cat_object_struct2;
+    cat_object_struct2.universe_pointer = my_universe;
+    cat_object_struct2.species_parent_pointer = cat_species;
+    cat_object_struct2.original_scale_vector = glm::vec3(15.0f, 15.0f, 15.0f);
+    cat_object_struct2.coordinate_vector = glm::vec3(700.00f, 140.00f, 700.00f);
+    cat_object_struct2.rotate_angle = 0.03f;
+    cat_object_struct2.rotate_vector = glm::vec3(1.5f, 1.0f, 0.9f);
+    cat_object_struct2.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
+    ontology::Entity* cat2_entity = ontology::EntityFactory::create_Object(cat_object_struct2);
+    ontology::Object* cat2 = dynamic_cast<ontology::Object*>(cat2_entity);
+
+    if (cat1 == nullptr)
+    {
+        std::cerr << "Failed to create cat2 Object.\n";
+        return -1;
+    }
+
+    cat2->set_name("cat2");
+
     VectorFontStruct kongtext_vector_font_struct;
     kongtext_vector_font_struct.parent_pointer = grass_material;
     kongtext_vector_font_struct.font_file_format = g_font_file_format;
@@ -643,10 +701,12 @@ int main(void)
     new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, toggle_help_mode_callback_object);
 
     // Callback code for D: delete Suzanne species.
+    std::string suzanne_species_string = "suzanne_species";
     callback_system::CallbackEngine* delete_suzanne_species_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* delete_suzanne_species_callback_object = new callback_system::CallbackObject(
-            &ajokki::delete_suzanne_species, delete_suzanne_species_callback_engine);
+            &ajokki::delete_entity, delete_suzanne_species_callback_engine);
     new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, delete_suzanne_species_callback_object);
+    new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(&suzanne_species_string), false, delete_suzanne_species_callback_object);
 
     // Callback code for G: switch to grass material.
     std::string grass_material_string = "grass_material";
@@ -654,6 +714,7 @@ int main(void)
     callback_system::CallbackObject* switch_to_grass_material_callback_object = new callback_system::CallbackObject(
             &ajokki::switch_to_new_material, switch_to_grass_material_callback_engine);
     new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, switch_to_grass_material_callback_object);
+    new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(&suzanne_species_string), false, switch_to_grass_material_callback_object);
     new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(&grass_material_string), false, switch_to_grass_material_callback_object);
 
     // Callback code for U: switch back to uvmap material.
@@ -662,22 +723,25 @@ int main(void)
     callback_system::CallbackObject* switch_to_uvmap_material_callback_object = new callback_system::CallbackObject(
             &ajokki::switch_to_new_material, switch_to_uvmap_material_callback_engine);
     new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, switch_to_uvmap_material_callback_object);
+    new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(&suzanne_species_string), false, switch_to_uvmap_material_callback_object);
     new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(&uvmap_material_string), false, switch_to_uvmap_material_callback_object);
 
     // Callback code for T: transform `suzanne2` into terrain.
     std::string helsinki_species_string = "Helsinki_species";
+    std::string suzanne2_string = "suzanne2";
     callback_system::CallbackEngine* transform_into_terrain_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* transform_into_terrain_callback_object = new callback_system::CallbackObject(
             &ajokki::transform_into_new_species, transform_into_terrain_callback_engine);
     new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, transform_into_terrain_callback_object);
+    new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(&suzanne2_string), false, transform_into_terrain_callback_object);
     new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(&helsinki_species_string), false, transform_into_terrain_callback_object);
 
     // Callback code for A: transform `suzanne2` back into monkey.
-    std::string suzanne_species_string = "suzanne_species";
     callback_system::CallbackEngine* transform_into_monkey_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* transform_into_monkey_callback_object = new callback_system::CallbackObject(
             &ajokki::transform_into_new_species, transform_into_monkey_callback_engine);
     new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, transform_into_monkey_callback_object);
+    new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(&suzanne2_string), false, transform_into_monkey_callback_object);
     new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(&suzanne_species_string), false, transform_into_monkey_callback_object);
 
     /*********************************************************************\
