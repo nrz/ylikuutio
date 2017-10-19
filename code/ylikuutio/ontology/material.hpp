@@ -1,5 +1,5 @@
-#ifndef __TEXTURE_HPP_INCLUDED
-#define __TEXTURE_HPP_INCLUDED
+#ifndef __MATERIAL_HPP_INCLUDED
+#define __MATERIAL_HPP_INCLUDED
 
 #include "entity.hpp"
 #include "shader.hpp"
