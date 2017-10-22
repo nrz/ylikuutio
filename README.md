@@ -71,11 +71,17 @@ the GNU General Public License (GPL) 2 or later](https://www.blender.org/about/l
 ## Compiling
 Ylikuutio can be compiled with GCC, Clang or Visual Studio.
 In Visual Studio the compiling may break due to compiler-specific bugs.
-Cross compiling from Linux to Windows using GCC works fine.
+Cross compiling from Linux© to Windows© using GCC works fine.
 C++14 support is required.
 OpenGL 3.0 or newer is required.
 CMake 2.6.2 or newer is needed for the compiling process.
 CMake uses git for downloading Google Test testing framework.
+
+Ylikuutio repository in GitHub has 2 branches: `master` & `coverity_scan`.
+master is the branch that should be up to date and it's the one to build.
+`coverity_scan` is for Synopsys© Coverity Scan© analysis tool which is run through
+Travis CI. However, Coverity Scan analysis tool configuration in `.travis.yml`
+is not yet ready and does not yet work.
 
 In Linux it's simple.
 
@@ -242,17 +248,23 @@ A: I like Lisp-family languages and TinyScheme fulfils my
 * objects with 4 or more spatial dimensions, projected to 3D space before rendering to screen
 * more shaders
 * sky dome
-* water
+* more realistic static water
+* flowing water
 * more physics
 * artificial intelligence (AI) creatures
+* A\* and Theta\* pathfinding
 * TinyScheme as scripting language
-* visual pattern recognition for AI
+* visual pattern recognition for AI: V1 (primary visual cortex) and V2 simulation
 * GUI for scripting, asset creation etc.
-* Internet gaming
+* Internet gaming with ASIO
 * sound
 
 ## Trademarks:
-Android is a trademark of Google Inc. See [https://developer.android.com/legal.html](https://developer.android.com/legal.html).
+Android© is a trademark of Google Inc. See [https://developer.android.com/legal.html](https://developer.android.com/legal.html).
+Coverity© and Coverity Scan© are registered trademarks of Synopsys, Inc. in the US and/or other countries. See [https://www.synopsys.com/company/legal/trademarks-brands.html](https://www.synopsys.com/company/legal/trademarks-brands.html).
+Linux© is the registered trademark of Linus Torvalds in the U.S. and other countries. See [https://www.linuxmark.org/programs/legal/trademark/attribution](https://www.linuxmark.org/programs/legal/trademark/attribution).
+Synopsys© is a registered trademarks of Synopsys, Inc. in the US and/or other countries. See [https://www.synopsys.com/company/legal/trademarks-brands.html](https://www.synopsys.com/company/legal/trademarks-brands.html).
+Windows© is a registered trademark of Microsoft. See [https://www.microsoft.com/en-us/legal/intellectualproperty/trademarks/usage/general.aspx](https://www.microsoft.com/en-us/legal/intellectualproperty/trademarks/usage/general.aspx).
 
 ## Contact info
 (found bugs and suggestions are very welcome!)
