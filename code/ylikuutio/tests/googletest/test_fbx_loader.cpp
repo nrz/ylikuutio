@@ -1,6 +1,6 @@
 #include "gtest/gtest.h"
-#include "code/ylikuutio/loaders/fbx_loader.hpp"
-#include "code/ylikuutio/loaders/fbx_loader.cpp"
+#include "code/ylikuutio/loaders/fbx_species_loader.hpp"
+#include "code/ylikuutio/loaders/fbx_species_loader.cpp"
 #include <miniz.c>
 #include <miniz.h>
 #include <ofbx.cpp>
