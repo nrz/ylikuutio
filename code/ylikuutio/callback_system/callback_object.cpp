@@ -46,7 +46,7 @@ namespace callback_system
 
     void CallbackObject::bind_to_parent()
     {
-        hierarchy::bind_child_to_parent<callback_system::CallbackObject*>(this, this->parent_pointer->callback_object_pointer_vector, this->parent_pointer->free_callback_objectID_queue, &this->parent_pointer->number_of_callback_objects);
+        hierarchy::bind_child_to_parent<callback_system::CallbackObject*>(this, this->parent->callback_object_pointer_vector, this->parent->free_callback_objectID_queue, &this->parent->number_of_callback_objects);
     }
 
     void CallbackObject::set_new_callback(const InputParametersToAnyValueCallback callback)
@@ -54,12 +54,12 @@ namespace callback_system
         this->callback = callback;
     }
 
-    CallbackObject::CallbackObject(callback_system::CallbackEngine* parent_pointer)
+    CallbackObject::CallbackObject(callback_system::CallbackEngine* parent)
     {
         // constructor.
         this->childID = -1;
         this->callback = nullptr;
-        this->parent_pointer = parent_pointer;
+        this->parent = parent;
 
         this->number_of_callback_parameters = 0;
 
@@ -67,12 +67,12 @@ namespace callback_system
         this->bind_to_parent();
     }
 
-    CallbackObject::CallbackObject(const InputParametersToAnyValueCallback callback, callback_system::CallbackEngine* parent_pointer)
+    CallbackObject::CallbackObject(const InputParametersToAnyValueCallback callback, callback_system::CallbackEngine* parent)
     {
         // constructor.
         this->childID = -1;
         this->callback = callback;
-        this->parent_pointer = parent_pointer;
+        this->parent = parent;
 
         this->number_of_callback_parameters = 0;
 
@@ -115,7 +115,7 @@ namespace callback_system
     {
         if (this->callback != nullptr)
         {
-            return this->callback(this->parent_pointer, this, this->callback_parameter_pointer_vector);
+            return this->callback(this->parent, this, this->callback_parameter_pointer_vector);
         }
         return nullptr;
     }

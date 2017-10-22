@@ -24,10 +24,10 @@ namespace callback_system
 
         public:
             // constructor.
-            CallbackObject(callback_system::CallbackEngine* parent_pointer);
+            CallbackObject(callback_system::CallbackEngine* parent);
 
             // constructor.
-            CallbackObject(const InputParametersToAnyValueCallback callback, callback_system::CallbackEngine* parent_pointer);
+            CallbackObject(const InputParametersToAnyValueCallback callback, callback_system::CallbackEngine* parent);
 
             // destructor.
             virtual ~CallbackObject();
@@ -47,7 +47,7 @@ namespace callback_system
             template<class T1>
                 friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, int32_t* number_of_children);
             template<class T1, class T2>
-                friend void hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent_pointer, std::vector<T1>& old_child_pointer_vector, std::queue<int32_t>& old_free_childID_queue, int32_t* old_number_of_children);
+                friend void hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent, std::vector<T1>& old_child_pointer_vector, std::queue<int32_t>& old_free_childID_queue, int32_t* old_number_of_children);
 
         protected:
             void bind_to_parent();
@@ -60,7 +60,7 @@ namespace callback_system
             // execute this callback.
             virtual std::shared_ptr<datatypes::AnyValue> execute();
 
-            callback_system::CallbackEngine* parent_pointer; // pointer to the callback engine.
+            callback_system::CallbackEngine* parent; // pointer to the callback engine.
 
             int32_t childID;                                 // callback object ID, returned by `callback_system::CallbackEngine->get_callback_objectID()`.
 

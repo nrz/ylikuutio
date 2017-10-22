@@ -23,7 +23,7 @@ namespace ontology
     void Shader::bind_to_parent()
     {
         // get `childID` from `Scene` and set pointer to this `Shader`.
-        hierarchy::bind_child_to_parent<ontology::Shader*>(this, this->parent_pointer->shader_pointer_vector, this->parent_pointer->free_shaderID_queue, &this->parent_pointer->number_of_shaders);
+        hierarchy::bind_child_to_parent<ontology::Shader*>(this, this->parent->shader_pointer_vector, this->parent->free_shaderID_queue, &this->parent->number_of_shaders);
     }
 
     Shader::~Shader()
@@ -36,7 +36,7 @@ namespace ontology
         hierarchy::delete_children<ontology::Material*>(this->material_pointer_vector, &this->number_of_materials);
 
         // set pointer to this shader to nullptr.
-        this->parent_pointer->set_shader_pointer(this->childID, nullptr);
+        this->parent->set_shader_pointer(this->childID, nullptr);
 
         glDeleteProgram(this->programID);
     }
@@ -58,7 +58,7 @@ namespace ontology
 
     ontology::Entity* Shader::get_parent()
     {
-        return this->parent_pointer;
+        return this->parent;
     }
 
     int32_t Shader::get_number_of_children()
@@ -83,8 +83,8 @@ namespace ontology
 
     void Shader::bind_to_new_parent(ontology::Scene* const new_scene_pointer)
     {
-        // this method sets pointer to this `Shader` to nullptr, sets `parent_pointer` according to the input, and requests a new `childID` from the new `Scene`.
-        hierarchy::bind_child_to_new_parent<ontology::Shader*, ontology::Scene*>(this, new_scene_pointer, this->parent_pointer->shader_pointer_vector, this->parent_pointer->free_shaderID_queue, &this->parent_pointer->number_of_shaders);
+        // this method sets pointer to this `Shader` to nullptr, sets `parent` according to the input, and requests a new `childID` from the new `Scene`.
+        hierarchy::bind_child_to_new_parent<ontology::Shader*, ontology::Scene*>(this, new_scene_pointer, this->parent->shader_pointer_vector, this->parent->free_shaderID_queue, &this->parent->number_of_shaders);
     }
 
     void Shader::set_name(std::string name)
@@ -95,6 +95,6 @@ namespace ontology
     void Shader::set_terrain_species_pointer(ontology::Species* const terrain_species_pointer)
     {
         this->terrain_species_pointer = terrain_species_pointer;
-        this->parent_pointer->parent_pointer->set_terrain_species_pointer(this->terrain_species_pointer);
+        this->parent->parent->set_terrain_species_pointer(this->terrain_species_pointer);
     }
 }

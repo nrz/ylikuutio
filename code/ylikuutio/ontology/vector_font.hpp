@@ -33,14 +33,14 @@ namespace ontology
             // constructor.
             // TODO: `VectorFont` constructor also creates each `Glyph` and binds them to the `VectorFont`.
             VectorFont(const VectorFontStruct vector_font_struct)
-                : Entity(vector_font_struct.parent_pointer->universe_pointer)
+                : Entity(vector_font_struct.parent->universe_pointer)
             {
                 // constructor.
                 this->font_file_format      = vector_font_struct.font_file_format;
                 this->font_filename         = vector_font_struct.font_filename;
                 this->vertex_scaling_factor = vector_font_struct.vertex_scaling_factor;
-                this->parent_pointer        = vector_font_struct.parent_pointer;
-                this->universe_pointer      = this->parent_pointer->universe_pointer;
+                this->parent        = vector_font_struct.parent;
+                this->universe_pointer      = this->parent->universe_pointer;
 
                 this->char_font_file_format = this->font_file_format.c_str();
                 this->char_font_filename    = this->font_filename.c_str();
@@ -87,8 +87,8 @@ namespace ontology
                         glyph_struct.glyph_name_pointer = this->glyph_names.at(glyph_i).c_str();
                         glyph_struct.unicode_char_pointer = unicode_char_pointer;
                         glyph_struct.universe_pointer = this->universe_pointer;
-                        glyph_struct.shader_pointer = this->parent_pointer->parent_pointer;
-                        glyph_struct.parent_pointer = this;
+                        glyph_struct.shader_pointer = this->parent->parent;
+                        glyph_struct.parent = this;
 
                         std::string glyph_name_string = glyph_struct.glyph_name_pointer;
                         std::string unicode_string = glyph_struct.unicode_char_pointer;
@@ -116,7 +116,7 @@ namespace ontology
             // this method sets `Text3D` pointer.
             void set_text3D_pointer(const int32_t childID, ontology::Text3D* const child_pointer);
 
-            // this method sets pointer to this species to nullptr, sets `parent_pointer` according to the input, and requests a new `childID` from the new material.
+            // this method sets pointer to this species to nullptr, sets `parent` according to the input, and requests a new `childID` from the new material.
             void bind_to_new_parent(ontology::Material* const new_material_pointer);
 
             void set_name(const std::string& name);
@@ -127,7 +127,7 @@ namespace ontology
 
             // The rest fields are created in the constructor.
 
-            ontology::Material* parent_pointer; // pointer to `Material`.
+            ontology::Material* parent; // pointer to `Material`.
 
             friend class Glyph;
             friend class Text3D;
@@ -138,7 +138,7 @@ namespace ontology
             template<class T1>
                 friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, int32_t* number_of_children);
             template<class T1, class T2>
-                friend void hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent_pointer, std::vector<T1>& old_child_pointer_vector, std::queue<int32_t>& old_free_childID_queue, int32_t* old_number_of_children);
+                friend void hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent, std::vector<T1>& old_child_pointer_vector, std::queue<int32_t>& old_free_childID_queue, int32_t* old_number_of_children);
 
         private:
             void bind_to_parent();

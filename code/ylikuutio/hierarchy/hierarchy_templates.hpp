@@ -82,7 +82,7 @@ namespace hierarchy
             // If a class' instances have parents, this function must be
             // called in the constructor. The call must be done only once
             // in each constructor, usually after setting
-            // `this->parent_pointer`. So, get `childID` from the parent,
+            // `this->parent`. So, get `childID` from the parent,
             // because every child deserves a unique ID!
             child_pointer->childID = get_childID(child_pointer_vector, free_childID_queue);
             // set pointer to the child in parent's child pointer vector so that parent knows about children's whereabouts!
@@ -101,7 +101,7 @@ namespace hierarchy
             // If a class' instances have parents, this function must be
             // called in the constructor. The call must be done only once
             // in each constructor, usually after setting
-            // `this->parent_pointer`. So, get `childID` from the parent,
+            // `this->parent`. So, get `childID` from the parent,
             // because every child deserves a unique ID!
 
             if (!child_name.empty())
@@ -118,7 +118,7 @@ namespace hierarchy
     template <class T1, class T2>
         void bind_child_to_new_parent(
                 const T1 child_pointer,
-                const T2 new_parent_pointer,
+                const T2 new_parent,
                 std::vector<T1>& old_child_pointer_vector,
                 std::queue<int32_t>& old_free_childID_queue,
                 int32_t* const old_number_of_children)
@@ -127,7 +127,7 @@ namespace hierarchy
             T1 dummy_child_pointer = nullptr;
             set_child_pointer(child_pointer->childID, dummy_child_pointer, old_child_pointer_vector, old_free_childID_queue, old_number_of_children);
             // set the new parent pointer.
-            child_pointer->parent_pointer = new_parent_pointer;
+            child_pointer->parent = new_parent;
             // bind to the new parent.
             child_pointer->bind_to_parent();
         }

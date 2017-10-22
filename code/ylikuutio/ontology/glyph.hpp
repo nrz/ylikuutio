@@ -43,7 +43,7 @@ namespace ontology
             {
                 // constructor.
                 this->universe_pointer = glyph_struct.universe_pointer;
-                this->parent_pointer = glyph_struct.parent_pointer;
+                this->parent = glyph_struct.parent;
 
                 this->glyph_vertex_data = glyph_struct.glyph_vertex_data;
                 this->glyph_name_pointer = glyph_struct.glyph_name_pointer;
@@ -104,7 +104,7 @@ namespace ontology
             // this method renders all `Object`s of this `Glyph`.
             void render();
 
-            ontology::VectorFont* parent_pointer;  // pointer to `VectorFont`.
+            ontology::VectorFont* parent;  // pointer to `VectorFont`.
 
             std::vector<std::vector<glm::vec2>>* glyph_vertex_data;
             const char* glyph_name_pointer;        // we need only a pointer, because glyphs are always created by the `VectorFont` constructor.

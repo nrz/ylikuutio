@@ -21,8 +21,8 @@ namespace console
         public:
             // constructor.
             ConsoleCallbackObject(InputParametersToAnyValueCallbackWithConsole console_callback,
-                    callback_system::CallbackEngine* parent_pointer, console::Console* console_pointer)
-                : callback_system::CallbackObject(nullptr, parent_pointer)
+                    callback_system::CallbackEngine* parent, console::Console* console_pointer)
+                : callback_system::CallbackObject(nullptr, parent)
             {
                 // constructor.
                 this->callback = nullptr;

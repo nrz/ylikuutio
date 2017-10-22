@@ -21,7 +21,7 @@ namespace callback_system
         public:
 
             // constructor.
-            CallbackParameter(const std::string& name, std::shared_ptr<datatypes::AnyValue> any_value, const bool is_reference, callback_system::CallbackObject* const parent_pointer);
+            CallbackParameter(const std::string& name, std::shared_ptr<datatypes::AnyValue> any_value, const bool is_reference, callback_system::CallbackObject* const parent);
 
             // destructor.
             ~CallbackParameter();
@@ -36,7 +36,7 @@ namespace callback_system
         private:
             void bind_to_parent();
 
-            callback_system::CallbackObject* parent_pointer; // pointer to the callback object.
+            callback_system::CallbackObject* parent; // pointer to the callback object.
 
             std::string name;
             std::shared_ptr<datatypes::AnyValue> any_value; // this is `private` to make sure that someone does not overwrite it.

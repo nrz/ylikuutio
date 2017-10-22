@@ -13,12 +13,12 @@ namespace graph
 typedef struct NodeStruct
 {
     NodeStruct()
-        : nodeID(-1), parent_pointer(nullptr)
+        : nodeID(-1), parent(nullptr)
     {
         // constructor.
     }
     int32_t nodeID;
-    graph::Graph* parent_pointer;
+    graph::Graph* parent;
     std::vector<int32_t> neighbor_nodeIDs;
 } NodeStruct;
 

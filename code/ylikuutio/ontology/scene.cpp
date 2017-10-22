@@ -33,7 +33,7 @@ namespace ontology
     void Scene::bind_to_parent()
     {
         // get `childID` from `Universe` and set pointer to this `Scene`.
-        hierarchy::bind_child_to_parent<ontology::Scene*>(this, this->parent_pointer->scene_pointer_vector, this->parent_pointer->free_sceneID_queue, &this->parent_pointer->number_of_scenes);
+        hierarchy::bind_child_to_parent<ontology::Scene*>(this, this->parent->scene_pointer_vector, this->parent->free_sceneID_queue, &this->parent->number_of_scenes);
     }
 
     Scene::~Scene()
@@ -77,7 +77,7 @@ namespace ontology
 
     ontology::Entity* Scene::get_parent()
     {
-        return this->parent_pointer;
+        return this->parent;
     }
 
     int32_t Scene::get_number_of_children()

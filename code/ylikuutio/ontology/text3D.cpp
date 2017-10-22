@@ -12,7 +12,7 @@ namespace ontology
     void Text3D::bind_to_parent()
     {
         // get `childID` from `VectorFont` and set pointer to this `Text3D`.
-        hierarchy::bind_child_to_parent<ontology::Text3D*>(this, this->parent_pointer->text3D_pointer_vector, this->parent_pointer->free_text3D_ID_queue, &this->parent_pointer->number_of_text3Ds);
+        hierarchy::bind_child_to_parent<ontology::Text3D*>(this, this->parent->text3D_pointer_vector, this->parent->free_text3D_ID_queue, &this->parent->number_of_text3Ds);
     }
 
     Text3D::~Text3D()
@@ -24,12 +24,12 @@ namespace ontology
         std::cout << "All objects (" << this->object_pointer_vector.size() << " pieces) of this 3D text will be destroyed.\n";
         hierarchy::delete_children<ontology::Object*>(this->object_pointer_vector, &this->number_of_objects);
 
-        this->parent_pointer->set_text3D_pointer(this->childID, nullptr);
+        this->parent->set_text3D_pointer(this->childID, nullptr);
     }
 
     ontology::Entity* Text3D::get_parent()
     {
-        return this->parent_pointer;
+        return this->parent;
     }
 
     int32_t Text3D::get_number_of_children()

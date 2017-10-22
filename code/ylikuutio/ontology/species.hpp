@@ -45,7 +45,7 @@ namespace ontology
         public:
             // constructor.
             Species(const SpeciesStruct& species_struct)
-                : Model(species_struct.parent_pointer->universe_pointer)
+                : Model(species_struct.parent->universe_pointer)
             {
                 // constructor.
                 this->is_world          = species_struct.is_world;
@@ -57,8 +57,8 @@ namespace ontology
                 this->light_position    = species_struct.light_position;
                 this->latitude          = species_struct.latitude;
                 this->longitude         = species_struct.longitude;
-                this->parent_pointer    = species_struct.parent_pointer;
-                this->universe_pointer  = this->parent_pointer->universe_pointer;
+                this->parent    = species_struct.parent;
+                this->universe_pointer  = this->parent->universe_pointer;
                 this->x_step            = species_struct.x_step;
                 this->z_step            = species_struct.z_step;
                 this->triangulation_type = species_struct.triangulation_type;
@@ -70,23 +70,23 @@ namespace ontology
                 this->bind_to_parent();
 
                 // Get a handle for our buffers.
-                this->vertexPosition_modelspaceID = glGetAttribLocation(this->parent_pointer->parent_pointer->programID, "vertexPosition_modelspace");
-                this->vertexUVID = glGetAttribLocation(this->parent_pointer->parent_pointer->programID, "vertexUV");
-                this->vertexNormal_modelspaceID = glGetAttribLocation(this->parent_pointer->parent_pointer->programID, "vertexNormal_modelspace");
+                this->vertexPosition_modelspaceID = glGetAttribLocation(this->parent->parent->programID, "vertexPosition_modelspace");
+                this->vertexUVID = glGetAttribLocation(this->parent->parent->programID, "vertexUV");
+                this->vertexNormal_modelspaceID = glGetAttribLocation(this->parent->parent->programID, "vertexNormal_modelspace");
 
                 // Get a handle for our "LightPosition" uniform.
-                glUseProgram(this->parent_pointer->parent_pointer->programID);
-                this->lightID = glGetUniformLocation(this->parent_pointer->parent_pointer->programID, "LightPosition_worldspace");
+                glUseProgram(this->parent->parent->programID);
+                this->lightID = glGetUniformLocation(this->parent->parent->programID, "LightPosition_worldspace");
 
                 if (this->is_world)
                 {
                     // set world species pointer so that it points to this species.
                     // currently there can be only one world species (used in collision detection).
-                    this->parent_pointer->parent_pointer->parent_pointer->parent_pointer->set_terrain_species_pointer(this);
+                    this->parent->parent->parent->parent->set_terrain_species_pointer(this);
                 }
 
                 // water level.
-                GLuint water_level_uniform_location = glGetUniformLocation(this->parent_pointer->parent_pointer->programID, "water_level");
+                GLuint water_level_uniform_location = glGetUniformLocation(this->parent->parent->programID, "water_level");
                 glUniform1f(water_level_uniform_location, this->universe_pointer->active_scene->water_level);
 
                 SpeciesLoaderStruct species_loader_struct;
@@ -131,7 +131,7 @@ namespace ontology
 
             ontology::Entity* get_parent() override;
 
-            // this method sets pointer to this `Species` to nullptr, sets `parent_pointer` according to the input, and requests a new `childID` from the new `Material`.
+            // this method sets pointer to this `Species` to nullptr, sets `parent` according to the input, and requests a new `childID` from the new `Material`.
             void bind_to_new_parent(ontology::Material* const new_material_pointer);
 
             // this method sets an `Object` pointer.
@@ -152,7 +152,7 @@ namespace ontology
             template<class T1>
                 friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, int32_t* number_of_children);
             template<class T1, class T2>
-                friend void hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent_pointer, std::vector<T1>& old_child_pointer_vector, std::queue<int32_t>& old_free_childID_queue, int32_t* old_number_of_children);
+                friend void hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent, std::vector<T1>& old_child_pointer_vector, std::queue<int32_t>& old_free_childID_queue, int32_t* old_number_of_children);
             template<class T1>
                 friend void render_species_or_glyph(T1 species_or_glyph_pointer);
             template<class T1>
@@ -167,7 +167,7 @@ namespace ontology
             // this method renders all `Object`s of this `Species`.
             void render();
 
-            ontology::Material* parent_pointer;   // pointer to `Material`.
+            ontology::Material* parent;   // pointer to `Material`.
 
             std::string model_file_format;        // type of the model file, eg. `"bmp"`.
             std::string model_filename;           // filename of the model file.

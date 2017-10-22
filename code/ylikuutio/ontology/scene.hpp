@@ -42,7 +42,7 @@ namespace ontology
                 this->water_level = static_cast<GLfloat>(water_level);
 
                 this->universe_pointer = universe_pointer;
-                this->parent_pointer = universe_pointer;
+                this->parent = universe_pointer;
 
                 this->cartesian_coordinates = nullptr;
                 this->spherical_coordinates = nullptr;
@@ -57,7 +57,7 @@ namespace ontology
                 this->child_vector_pointers_vector.push_back(&this->shader_pointer_vector);
 
                 // make this `Scene` the active `Scene`.
-                this->parent_pointer->set_active_scene(this);
+                this->parent->set_active_scene(this);
                 this->type = "ontology::Scene*";
             }
 
@@ -82,7 +82,7 @@ namespace ontology
             template<class T1>
                 friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, int32_t* number_of_children);
             template<class T1, class T2>
-                friend void hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent_pointer, std::vector<T1>& old_child_pointer_vector, std::queue<int32_t>& old_free_childID_queue, int32_t* old_number_of_children);
+                friend void hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent, std::vector<T1>& old_child_pointer_vector, std::queue<int32_t>& old_free_childID_queue, int32_t* old_number_of_children);
 
         private:
             void bind_to_parent();
@@ -100,7 +100,7 @@ namespace ontology
             // this method sets a `Symbiosis` pointer.
             void set_symbiosis_pointer(const int32_t childID, ontology::Symbiosis* const child_pointer);
 
-            ontology::Universe* parent_pointer;   // pointer to the `Universe`.
+            ontology::Universe* parent;   // pointer to the `Universe`.
 
             std::vector<ontology::Shader*> shader_pointer_vector;
             std::queue<int32_t> free_shaderID_queue;

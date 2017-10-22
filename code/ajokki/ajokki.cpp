@@ -225,7 +225,7 @@ int main(void)
 
     // Create the shader, store it in `my_shader`.
     ShaderStruct shader_struct;
-    shader_struct.parent_pointer = my_scene;
+    shader_struct.parent = my_scene;
     shader_struct.vertex_shader = "StandardShading.vertexshader";
     shader_struct.fragment_shader = "StandardShading.fragmentshader";
 
@@ -242,7 +242,7 @@ int main(void)
 
     // Create the material, store it in `grass_material`.
     MaterialStruct grass_material_struct;
-    grass_material_struct.parent_pointer = my_shader;
+    grass_material_struct.parent = my_shader;
     grass_material_struct.texture_file_format = g_texture_file_format;
     grass_material_struct.texture_filename = g_texture_filename;
 
@@ -261,7 +261,7 @@ int main(void)
 
     // Create the material, store it in `uvmap_material`.
     MaterialStruct uvmap_material_struct;
-    uvmap_material_struct.parent_pointer = my_shader;
+    uvmap_material_struct.parent = my_shader;
     uvmap_material_struct.texture_file_format = "dds";
     uvmap_material_struct.texture_filename = "uvmap.DDS";
 
@@ -280,7 +280,7 @@ int main(void)
 
     // Create the material, store it in `pink_geometric_tiles_material`.
     MaterialStruct pink_geometric_tiles_material_struct;
-    pink_geometric_tiles_material_struct.parent_pointer = my_shader;
+    pink_geometric_tiles_material_struct.parent = my_shader;
     pink_geometric_tiles_material_struct.texture_file_format = "bmp";
     pink_geometric_tiles_material_struct.texture_filename = "pavers1b2.bmp";
 
@@ -302,7 +302,7 @@ int main(void)
     {
         // Create the species, store it in `terrain_species`.
         SpeciesStruct(SRTM_terrain_species_struct);
-        SRTM_terrain_species_struct.parent_pointer = grass_material;
+        SRTM_terrain_species_struct.parent = grass_material;
         SRTM_terrain_species_struct.model_file_format = "SRTM";
         // SRTM_terrain_species_struct.model_filename = "/media/laatikko_4TB/satelliittikuvat/srtm/version3/data/";
         SRTM_terrain_species_struct.model_filename = "./"; // for testing
@@ -325,7 +325,7 @@ int main(void)
         // Create the species, store it in `terrain_species`.
         /*
         SpeciesStruct bmp_terrain_species_struct;
-        bmp_terrain_species_struct.parent_pointer = grass_material;
+        bmp_terrain_species_struct.parent = grass_material;
         bmp_terrain_species_struct.model_file_format = g_model_file_format;
         bmp_terrain_species_struct.model_filename = g_model_filename;
         bmp_terrain_species_struct.color_channel = g_height_data_color_channel;
@@ -335,7 +335,7 @@ int main(void)
         */
 
         SpeciesStruct ASCII_grid_terrain_species_struct;
-        ASCII_grid_terrain_species_struct.parent_pointer = grass_material;
+        ASCII_grid_terrain_species_struct.parent = grass_material;
         ASCII_grid_terrain_species_struct.model_file_format = ASCII_grid_model_file_format;
         ASCII_grid_terrain_species_struct.model_filename = ASCII_grid_model_filename;
         ASCII_grid_terrain_species_struct.light_position = glm::vec3(0, 100000, 100000);
@@ -355,7 +355,7 @@ int main(void)
     // Create terrain1, store it in `terrain1`.
     ObjectStruct terrain_object_struct1;
     terrain_object_struct1.universe_pointer = my_universe;
-    terrain_object_struct1.species_parent_pointer = terrain_species;
+    terrain_object_struct1.species_parent = terrain_species;
     terrain_object_struct1.coordinate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
     terrain_object_struct1.rotate_angle = 0.0f;
     terrain_object_struct1.rotate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
@@ -364,7 +364,7 @@ int main(void)
 
     // Create the species, store it in `snow_cottage_species`.
     SpeciesStruct snow_cottage_species_struct;
-    snow_cottage_species_struct.parent_pointer = pink_geometric_tiles_material;
+    snow_cottage_species_struct.parent = pink_geometric_tiles_material;
     snow_cottage_species_struct.model_file_format = "obj";
     snow_cottage_species_struct.model_filename = "snow_cottage_triangulated.obj";
     snow_cottage_species_struct.light_position = glm::vec3(0, 100000, 100000);
@@ -385,7 +385,7 @@ int main(void)
     // Create snow cottage, store it in `snow_cottage1`.
     ObjectStruct snow_cottage_object_struct1;
     snow_cottage_object_struct1.universe_pointer = my_universe;
-    snow_cottage_object_struct1.species_parent_pointer = snow_cottage_species;
+    snow_cottage_object_struct1.species_parent = snow_cottage_species;
     snow_cottage_object_struct1.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
     snow_cottage_object_struct1.coordinate_vector = glm::vec3(121.50f, 126.50f, 63.70f);
     snow_cottage_object_struct1.rotate_angle = 0.10f;
@@ -404,7 +404,7 @@ int main(void)
     */
 
     SpeciesStruct suzanne_species_struct;
-    suzanne_species_struct.parent_pointer = uvmap_material;
+    suzanne_species_struct.parent = uvmap_material;
     suzanne_species_struct.model_file_format = "obj";
     suzanne_species_struct.model_filename = "suzanne.obj";
     suzanne_species_struct.light_position = glm::vec3(0, 100000, 100000);
@@ -425,7 +425,7 @@ int main(void)
     // Create suzanne1, store it in `suzanne1`.
     ObjectStruct suzanne_object_struct1;
     suzanne_object_struct1.universe_pointer = my_universe;
-    suzanne_object_struct1.species_parent_pointer = suzanne_species;
+    suzanne_object_struct1.species_parent = suzanne_species;
     suzanne_object_struct1.coordinate_vector = glm::vec3(82.50f, 119.00f, 95.50f);
     suzanne_object_struct1.rotate_angle = 0.10f;
     suzanne_object_struct1.rotate_vector = glm::vec3(1.0f, 0.0f, 0.0f);
@@ -434,7 +434,7 @@ int main(void)
 
     ObjectStruct suzanne_object_struct2;
     suzanne_object_struct2.universe_pointer = my_universe;
-    suzanne_object_struct2.species_parent_pointer = suzanne_species;
+    suzanne_object_struct2.species_parent = suzanne_species;
     suzanne_object_struct2.coordinate_vector = glm::vec3(112.90f, 113.90f, 75.50f);
     suzanne_object_struct2.rotate_angle = 0.20f;
     suzanne_object_struct2.rotate_vector = glm::vec3(1.0f, 0.0f, 0.0f);
@@ -444,7 +444,7 @@ int main(void)
 
     ObjectStruct suzanne_object_struct3;
     suzanne_object_struct3.universe_pointer = my_universe;
-    suzanne_object_struct3.species_parent_pointer = suzanne_species;
+    suzanne_object_struct3.species_parent = suzanne_species;
     suzanne_object_struct3.coordinate_vector = glm::vec3(126.90f, 162.90f, 103.00f);
     suzanne_object_struct3.rotate_angle = 0.05f;
     suzanne_object_struct3.rotate_vector = glm::vec3(1.0f, 0.0f, 0.0f);
@@ -453,7 +453,7 @@ int main(void)
 
     ObjectStruct suzanne_object_struct4;
     suzanne_object_struct4.universe_pointer = my_universe;
-    suzanne_object_struct4.species_parent_pointer = suzanne_species;
+    suzanne_object_struct4.species_parent = suzanne_species;
     suzanne_object_struct4.coordinate_vector = glm::vec3(96.00f, 130.00f, 109.00f);
     suzanne_object_struct4.rotate_angle = 0.15f;
     suzanne_object_struct4.rotate_vector = glm::vec3(1.0f, 0.0f, 0.0f);
@@ -462,7 +462,7 @@ int main(void)
 
     ObjectStruct suzanne_object_struct5;
     suzanne_object_struct5.universe_pointer = my_universe;
-    suzanne_object_struct5.species_parent_pointer = suzanne_species;
+    suzanne_object_struct5.species_parent = suzanne_species;
     suzanne_object_struct5.original_scale_vector = glm::vec3(10.0f, 10.0f, 10.0f);
     suzanne_object_struct5.coordinate_vector = glm::vec3(103.00f, 140.00f, 109.00f);
     suzanne_object_struct5.rotate_angle = 0.03f;
@@ -471,7 +471,7 @@ int main(void)
     ontology::EntityFactory::create_Object(suzanne_object_struct5);
 
     SpeciesStruct cat_species_struct;
-    cat_species_struct.parent_pointer = uvmap_material;
+    cat_species_struct.parent = uvmap_material;
     cat_species_struct.model_file_format = "fbx";
     cat_species_struct.model_filename = "cat.fbx";
     cat_species_struct.light_position = glm::vec3(0, 100000, 100000);
@@ -492,7 +492,7 @@ int main(void)
 
     ObjectStruct cat_object_struct1;
     cat_object_struct1.universe_pointer = my_universe;
-    cat_object_struct1.species_parent_pointer = cat_species;
+    cat_object_struct1.species_parent = cat_species;
     cat_object_struct1.original_scale_vector = glm::vec3(10.0f, 10.0f, 10.0f);
     cat_object_struct1.coordinate_vector = glm::vec3(500.00f, 140.00f, 500.00f);
     cat_object_struct1.rotate_angle = 0.03f;
@@ -511,7 +511,7 @@ int main(void)
 
     ObjectStruct cat_object_struct2;
     cat_object_struct2.universe_pointer = my_universe;
-    cat_object_struct2.species_parent_pointer = cat_species;
+    cat_object_struct2.species_parent = cat_species;
     cat_object_struct2.original_scale_vector = glm::vec3(15.0f, 15.0f, 15.0f);
     cat_object_struct2.coordinate_vector = glm::vec3(700.00f, 140.00f, 700.00f);
     cat_object_struct2.rotate_angle = 0.03f;
@@ -529,7 +529,7 @@ int main(void)
     cat2->set_name("cat2");
 
     VectorFontStruct kongtext_vector_font_struct;
-    kongtext_vector_font_struct.parent_pointer = grass_material;
+    kongtext_vector_font_struct.parent = grass_material;
     kongtext_vector_font_struct.font_file_format = g_font_file_format;
     kongtext_vector_font_struct.font_filename = g_font_filename;
 
@@ -545,7 +545,7 @@ int main(void)
     }
 
     Text3DStruct text3D_struct;
-    text3D_struct.parent_pointer = kongtext_font;
+    text3D_struct.parent = kongtext_font;
     text3D_struct.text_string = "Hello world &#x26; its habitants!";
     text3D_struct.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
     text3D_struct.coordinate_vector = glm::vec3(100.00f, 100.00f, 100.00f);

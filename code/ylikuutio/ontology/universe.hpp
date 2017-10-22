@@ -34,11 +34,11 @@
 
 // `Universe`, `Scene`, `Shader`, `Material`, `Species`, `Object`.
 // `Universe`, `Scene`, `Shader`, `Material`, `VectorFont`, `Glyph`, `Object`.
-// `Universe` must be created before any `Scene`. `parent_pointer` must be given to each `Scene`.
-// `Scene` must be created before any `Shader`. `parent_pointer` must be given to each `Shader`.
-// `Shader` must be created before any `Material`. `parent_pointer` must be given to each `Material`.
-// `Material` must be created before any `Species`. `parent_pointer` must be given to each `Species`.
-// `Species` must be create before any `Object` of that `Species`. `parent_pointer` must be given to each `Object` of the `Species`.
+// `Universe` must be created before any `Scene`. `parent` must be given to each `Scene`.
+// `Scene` must be created before any `Shader`. `parent` must be given to each `Shader`.
+// `Shader` must be created before any `Material`. `parent` must be given to each `Material`.
+// `Material` must be created before any `Species`. `parent` must be given to each `Species`.
+// `Species` must be create before any `Object` of that `Species`. `parent` must be given to each `Object` of the `Species`.
 //
 //
 // Hierarchy of regular `Object`s (including terrain species):

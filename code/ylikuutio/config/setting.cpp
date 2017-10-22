@@ -10,7 +10,7 @@ namespace config
 {
     void Setting::bind_to_parent()
     {
-        hierarchy::bind_child_to_parent<config::Setting*>(this, this->parent_pointer->setting_pointer_vector, this->parent_pointer->free_settingID_queue, &this->parent_pointer->number_of_settings);
+        hierarchy::bind_child_to_parent<config::Setting*>(this, this->parent->setting_pointer_vector, this->parent->free_settingID_queue, &this->parent->number_of_settings);
     }
 
     Setting::Setting(const SettingStruct setting_struct)
@@ -18,12 +18,12 @@ namespace config
         // constructor.
         this->name = setting_struct.name;
         this->setting_value = setting_struct.initial_value;
-        this->parent_pointer = setting_struct.setting_master_pointer;
+        this->parent = setting_struct.setting_master_pointer;
         this->activate_callback = setting_struct.activate_callback;
         this->read_callback = setting_struct.read_callback;
         this->childID = -1;
 
-        if (this->parent_pointer == nullptr)
+        if (this->parent == nullptr)
         {
             return;
         }
@@ -31,11 +31,11 @@ namespace config
         // get `childID` from the `SettingMaster` and set pointer to this `Setting`.
         this->bind_to_parent();
 
-        this->parent_pointer->setting_pointer_map[this->name] = this;
+        this->parent->setting_pointer_map[this->name] = this;
 
         if (setting_struct.should_ylikuutio_call_activate_callback_now)
         {
-            this->activate_callback(this->parent_pointer->parent_pointer, this->parent_pointer);
+            this->activate_callback(this->parent->parent, this->parent);
         }
     }
 

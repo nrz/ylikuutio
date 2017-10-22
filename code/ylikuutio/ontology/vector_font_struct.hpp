@@ -19,12 +19,12 @@ namespace ontology
 typedef struct VectorFontStruct
 {
     VectorFontStruct()
-        : parent_pointer(nullptr), vertex_scaling_factor(DEFAULT_VERTEX_SCALING_FACTOR)
+        : parent(nullptr), vertex_scaling_factor(DEFAULT_VERTEX_SCALING_FACTOR)
     {
         // constructor.
     }
     // used for all files (for all font).
-    ontology::Material* parent_pointer;     // pointer to the material object.
+    ontology::Material* parent;     // pointer to the material object.
     GLfloat vertex_scaling_factor;
     std::string font_file_format;           // type of the font file. supported file formats so far: `"svg"`/`"SVG"`.
     std::string font_filename;              // filename of the font file.

@@ -20,7 +20,7 @@ namespace ontology
 typedef struct GlyphStruct
 {
     GlyphStruct()
-        : glyph_vertex_data(nullptr), glyph_name_pointer(nullptr), unicode_char_pointer(nullptr), universe_pointer(nullptr), shader_pointer(nullptr), parent_pointer(nullptr), light_position(glm::vec3(0.0f, 0.0f, 0.0f))
+        : glyph_vertex_data(nullptr), glyph_name_pointer(nullptr), unicode_char_pointer(nullptr), universe_pointer(nullptr), shader_pointer(nullptr), parent(nullptr), light_position(glm::vec3(0.0f, 0.0f, 0.0f))
     {
         // constructor.
     }
@@ -30,7 +30,7 @@ typedef struct GlyphStruct
     const char* unicode_char_pointer;     // we need only a pointer, because glyphs are always created by the `VectorFont` constructor.
     ontology::Universe* universe_pointer; // pointer to the `Universe`.
     ontology::Shader* shader_pointer;     // pointer to the `Shader`.
-    ontology::VectorFont* parent_pointer; // pointer to the font object.
+    ontology::VectorFont* parent; // pointer to the font object.
     glm::vec3 light_position;             // light position.
 } GlyphStruct;
 

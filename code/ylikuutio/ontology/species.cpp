@@ -24,7 +24,7 @@ namespace ontology
     void Species::bind_to_parent()
     {
         // get `childID` from `Material` and set pointer to this `Species`.
-        hierarchy::bind_child_to_parent<ontology::Species*>(this, this->parent_pointer->species_pointer_vector, this->parent_pointer->free_speciesID_queue, &this->parent_pointer->number_of_species);
+        hierarchy::bind_child_to_parent<ontology::Species*>(this, this->parent->species_pointer_vector, this->parent->free_speciesID_queue, &this->parent->number_of_species);
     }
 
     Species::~Species()
@@ -43,7 +43,7 @@ namespace ontology
         glDeleteBuffers(1, &this->elementbuffer);
 
         // set pointer to this species to nullptr.
-        this->parent_pointer->set_species_pointer(this->childID, nullptr);
+        this->parent->set_species_pointer(this->childID, nullptr);
     }
 
     void Species::render()
@@ -58,7 +58,7 @@ namespace ontology
 
     ontology::Entity* Species::get_parent()
     {
-        return this->parent_pointer;
+        return this->parent;
     }
 
     void Species::set_object_pointer(const int32_t childID, ontology::Object* const child_pointer)
@@ -73,7 +73,7 @@ namespace ontology
 
     void Species::bind_to_new_parent(ontology::Material* const new_material_pointer)
     {
-        // this method sets pointer to this `Species` to nullptr, sets `parent_pointer` according to the input, and requests a new `childID` from the new `Material`.
-        hierarchy::bind_child_to_new_parent<ontology::Species*, ontology::Material*>(this, new_material_pointer, this->parent_pointer->species_pointer_vector, this->parent_pointer->free_speciesID_queue, &this->parent_pointer->number_of_species);
+        // this method sets pointer to this `Species` to nullptr, sets `parent` according to the input, and requests a new `childID` from the new `Material`.
+        hierarchy::bind_child_to_new_parent<ontology::Species*, ontology::Material*>(this, new_material_pointer, this->parent->species_pointer_vector, this->parent->free_speciesID_queue, &this->parent->number_of_species);
     }
 }

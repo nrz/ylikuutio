@@ -15,6 +15,6 @@ TEST(GlyphStruct_must_be_initialized_appropriately, GlyphStruct)
     ASSERT_EQ(test_glyph_struct.unicode_char_pointer, nullptr);
     ASSERT_EQ(test_glyph_struct.universe_pointer, nullptr);
     ASSERT_EQ(test_glyph_struct.shader_pointer, nullptr);
-    ASSERT_EQ(test_glyph_struct.parent_pointer, nullptr);
+    ASSERT_EQ(test_glyph_struct.parent, nullptr);
     ASSERT_EQ(test_glyph_struct.light_position, glm::vec3(0.0f, 0.0f, 0.0f));
 }

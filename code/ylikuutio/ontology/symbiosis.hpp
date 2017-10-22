@@ -27,10 +27,10 @@ namespace ontology
         public:
             // constructor.
             Symbiosis(const SymbiosisStruct symbiosis_struct)
-                : Entity(symbiosis_struct.parent_pointer->universe_pointer)
+                : Entity(symbiosis_struct.parent->universe_pointer)
             {
                 // constructor.
-                this->parent_pointer = symbiosis_struct.parent_pointer;
+                this->parent = symbiosis_struct.parent;
 
                 this->number_of_materials = 0;
                 this->number_of_species = 0;
@@ -49,7 +49,7 @@ namespace ontology
             int32_t get_number_of_descendants() override;
 
 
-            // this method sets pointer to this `Symbiosis` to nullptr, sets `parent_pointer` according to the input, and requests a new `childID` from the new `Shader`.
+            // this method sets pointer to this `Symbiosis` to nullptr, sets `parent` according to the input, and requests a new `childID` from the new `Shader`.
             void bind_to_new_parent(ontology::Shader* new_shader_pointer);
 
             void set_name(std::string name);
@@ -62,7 +62,7 @@ namespace ontology
 
             // no `render()` member function in `Symbiosis` because `Symbiosis` is not present in the rendering hierarchy.
 
-            ontology::Shader* parent_pointer;     // pointer to `Scene`.
+            ontology::Shader* parent;     // pointer to `Scene`.
 
             std::vector<ontology::Material*> material_pointer_vector;
             std::vector<ontology::Species*> species_pointer_vector;

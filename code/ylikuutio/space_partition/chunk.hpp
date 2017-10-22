@@ -27,13 +27,13 @@ namespace space_partition
     {
         public:
             // constructor.
-            Chunk(ontology::Universe* universe, space_partition::ChunkMaster* const parent_pointer)
+            Chunk(ontology::Universe* universe, space_partition::ChunkMaster* const parent)
                 : Model(universe)
             {
                 // constructor.
                 this->is_original = true;
 
-                this->parent_pointer = parent_pointer;
+                this->parent = parent;
 
                 // get `childID` from `ChunkMaster` and set pointer to this `Chunk`.
                 this->bind_to_parent();
@@ -51,14 +51,14 @@ namespace space_partition
             template<class T1>
                 friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, int32_t* number_of_children);
             template<class T1, class T2>
-                friend void hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent_pointer, std::vector<T1>& old_child_pointer_vector, std::queue<int32_t>& old_free_childID_queue, int32_t* old_number_of_children);
+                friend void hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent, std::vector<T1>& old_child_pointer_vector, std::queue<int32_t>& old_free_childID_queue, int32_t* old_number_of_children);
 
         private:
             void bind_to_parent();
 
             void render();
 
-            space_partition::ChunkMaster* parent_pointer;  // pointer to `ChunkMaster`.
+            space_partition::ChunkMaster* parent;  // pointer to `ChunkMaster`.
 
             bool is_original; // If `Chunk` is original, if can be reconstructed using `get_content_callback`.
     };

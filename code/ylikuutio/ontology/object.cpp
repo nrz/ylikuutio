@@ -24,19 +24,19 @@ namespace ontology
 
         if (this->is_character)
         {
-            ontology::Text3D* parent_pointer;
-            parent_pointer = this->text3D_parent_pointer;
+            ontology::Text3D* parent;
+            parent = this->text3D_parent;
             // for ontological hierarchy (rendering hierarchy does not use `childID`).
             // get `childID` from `Glyph` and set pointer to this `Object`.
-            hierarchy::bind_child_to_parent<ontology::Object*>(this, parent_pointer->object_pointer_vector, parent_pointer->free_objectID_queue, &parent_pointer->number_of_objects);
+            hierarchy::bind_child_to_parent<ontology::Object*>(this, parent->object_pointer_vector, parent->free_objectID_queue, &parent->number_of_objects);
         }
         else
         {
-            ontology::Species* parent_pointer;
-            parent_pointer = this->species_parent_pointer;
+            ontology::Species* parent;
+            parent = this->species_parent;
             // for ontological hierarchy (rendering hierarchy does not use `childID`).
             // get `childID` from `Species` and set pointer to this `Object`.
-            hierarchy::bind_child_to_parent<ontology::Object*>(this, parent_pointer->object_pointer_vector, parent_pointer->free_objectID_queue, &parent_pointer->number_of_objects);
+            hierarchy::bind_child_to_parent<ontology::Object*>(this, parent->object_pointer_vector, parent->free_objectID_queue, &parent->number_of_objects);
         }
     }
 
@@ -47,14 +47,14 @@ namespace ontology
         // set pointer to this object to nullptr.
         if (this->is_character)
         {
-            std::string unicode_string = this->glyph_parent_pointer->unicode_char_pointer;
+            std::string unicode_string = this->glyph_parent->unicode_char_pointer;
             std::cout << "Object with childID " << std::dec << this->childID << " (Unicode: \"" << unicode_string << "\") will be destroyed.\n";
-            this->text3D_parent_pointer->set_object_pointer(this->childID, nullptr);
+            this->text3D_parent->set_object_pointer(this->childID, nullptr);
         }
         else
         {
             std::cout << "Object with childID " << std::dec << this->childID << " will be destroyed.\n";
-            this->species_parent_pointer->set_object_pointer(this->childID, nullptr);
+            this->species_parent->set_object_pointer(this->childID, nullptr);
         }
     }
 
@@ -75,12 +75,12 @@ namespace ontology
 
             if (this->is_character)
             {
-                shader_pointer = this->glyph_parent_pointer->parent_pointer->parent_pointer->parent_pointer;
+                shader_pointer = this->glyph_parent->parent->parent->parent;
                 ontology::render_this_object<ontology::Glyph*>(this, shader_pointer);
             }
             else
             {
-                shader_pointer = this->species_parent_pointer->parent_pointer->parent_pointer;
+                shader_pointer = this->species_parent->parent->parent;
                 ontology::render_this_object<ontology::Species*>(this, shader_pointer);
             }
 
@@ -92,11 +92,11 @@ namespace ontology
     {
         if (this->is_character)
         {
-            return this->glyph_parent_pointer;
+            return this->glyph_parent;
         }
         else
         {
-            return this->species_parent_pointer;
+            return this->species_parent;
         }
     }
 
@@ -110,32 +110,32 @@ namespace ontology
         return 0;
     }
 
-    void Object::bind_to_new_parent(void* const new_parent_pointer)
+    void Object::bind_to_new_parent(void* const new_parent)
     {
-        // this method sets pointer to this `Object` to nullptr, sets `parent_pointer` according to the input,
+        // this method sets pointer to this `Object` to nullptr, sets `parent` according to the input,
         // and requests a new `childID` from the new `Species` or from the new `Glyph`.
 
         if (this->is_character)
         {
-            ontology::Glyph* parent_pointer;
-            parent_pointer = this->glyph_parent_pointer;
+            ontology::Glyph* parent;
+            parent = this->glyph_parent;
             // set pointer to this child to nullptr in the old parent.
             ontology::Object* dummy_child_pointer = nullptr;
-            hierarchy::set_child_pointer(this->childID, dummy_child_pointer, glyph_parent_pointer->object_pointer_vector, glyph_parent_pointer->free_objectID_queue, &glyph_parent_pointer->number_of_objects);
+            hierarchy::set_child_pointer(this->childID, dummy_child_pointer, glyph_parent->object_pointer_vector, glyph_parent->free_objectID_queue, &glyph_parent->number_of_objects);
             // set the new parent pointer.
-            this->glyph_parent_pointer = static_cast<ontology::Glyph*>(new_parent_pointer);
+            this->glyph_parent = static_cast<ontology::Glyph*>(new_parent);
             // bind to the new parent.
             this->bind_to_parent();
         }
         else
         {
-            ontology::Species* parent_pointer;
-            parent_pointer = this->species_parent_pointer;
+            ontology::Species* parent;
+            parent = this->species_parent;
             // set pointer to this child to nullptr in the old parent.
             ontology::Object* dummy_child_pointer = nullptr;
-            hierarchy::set_child_pointer(this->childID, dummy_child_pointer, species_parent_pointer->object_pointer_vector, species_parent_pointer->free_objectID_queue, &species_parent_pointer->number_of_objects);
+            hierarchy::set_child_pointer(this->childID, dummy_child_pointer, species_parent->object_pointer_vector, species_parent->free_objectID_queue, &species_parent->number_of_objects);
             // set the new parent pointer.
-            this->species_parent_pointer = static_cast<ontology::Species*>(new_parent_pointer);
+            this->species_parent = static_cast<ontology::Species*>(new_parent);
             // bind to the new parent.
             this->bind_to_parent();
         }
