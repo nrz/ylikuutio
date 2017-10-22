@@ -229,14 +229,23 @@ A: I like Lisp-family languages and TinyScheme fulfils my
 * fully functioning in-game console
 
 ## Future developments underway:
+* option for wireframe models (`enable wireframe`, `disable wireframe`)
 * full support for different keyboard layouts in console
+* custom keyboard mappings in Ajokki
+* command to read console command input from file
+* copy-paste in console (Shift-Ins for paste)
+* console reference manual (`man` command)
+* rendering to texture (for mirrors and displays)
 * partially transparent 2D text
 * 3D text
-* multiple scenes in the same `Universe`
+* partially transparent 3D text
+* multiple scenes in the same `Universe` (`activate` console command)
 * coordinates relative to other objects, not only to `Universe` object
+* practically infinite voxel worlds (limited by `float` precision)
 * collision detection between objects
 * octree space partitioning
 * possibility to create scenes with different spatial scales
+* background loading of `Scene`s
 * objects (`Species` in Ylikuutio terminology) with modifiable vertices
 * making holes in objects
 * splitting of objects into 2 or more pieces
