@@ -354,7 +354,7 @@ int main(void)
 
     // Create terrain1, store it in `terrain1`.
     ObjectStruct terrain_object_struct1;
-    terrain_object_struct1.universe_pointer = my_universe;
+    terrain_object_struct1.universe = my_universe;
     terrain_object_struct1.species_parent = terrain_species;
     terrain_object_struct1.coordinate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
     terrain_object_struct1.rotate_angle = 0.0f;
@@ -384,7 +384,7 @@ int main(void)
 
     // Create snow cottage, store it in `snow_cottage1`.
     ObjectStruct snow_cottage_object_struct1;
-    snow_cottage_object_struct1.universe_pointer = my_universe;
+    snow_cottage_object_struct1.universe = my_universe;
     snow_cottage_object_struct1.species_parent = snow_cottage_species;
     snow_cottage_object_struct1.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
     snow_cottage_object_struct1.coordinate_vector = glm::vec3(121.50f, 126.50f, 63.70f);
@@ -424,7 +424,7 @@ int main(void)
 
     // Create suzanne1, store it in `suzanne1`.
     ObjectStruct suzanne_object_struct1;
-    suzanne_object_struct1.universe_pointer = my_universe;
+    suzanne_object_struct1.universe = my_universe;
     suzanne_object_struct1.species_parent = suzanne_species;
     suzanne_object_struct1.coordinate_vector = glm::vec3(82.50f, 119.00f, 95.50f);
     suzanne_object_struct1.rotate_angle = 0.10f;
@@ -433,7 +433,7 @@ int main(void)
     ontology::EntityFactory::create_Object(suzanne_object_struct1);
 
     ObjectStruct suzanne_object_struct2;
-    suzanne_object_struct2.universe_pointer = my_universe;
+    suzanne_object_struct2.universe = my_universe;
     suzanne_object_struct2.species_parent = suzanne_species;
     suzanne_object_struct2.coordinate_vector = glm::vec3(112.90f, 113.90f, 75.50f);
     suzanne_object_struct2.rotate_angle = 0.20f;
@@ -443,7 +443,7 @@ int main(void)
     suzanne2->set_name("suzanne2");
 
     ObjectStruct suzanne_object_struct3;
-    suzanne_object_struct3.universe_pointer = my_universe;
+    suzanne_object_struct3.universe = my_universe;
     suzanne_object_struct3.species_parent = suzanne_species;
     suzanne_object_struct3.coordinate_vector = glm::vec3(126.90f, 162.90f, 103.00f);
     suzanne_object_struct3.rotate_angle = 0.05f;
@@ -452,7 +452,7 @@ int main(void)
     ontology::EntityFactory::create_Object(suzanne_object_struct3);
 
     ObjectStruct suzanne_object_struct4;
-    suzanne_object_struct4.universe_pointer = my_universe;
+    suzanne_object_struct4.universe = my_universe;
     suzanne_object_struct4.species_parent = suzanne_species;
     suzanne_object_struct4.coordinate_vector = glm::vec3(96.00f, 130.00f, 109.00f);
     suzanne_object_struct4.rotate_angle = 0.15f;
@@ -461,7 +461,7 @@ int main(void)
     ontology::EntityFactory::create_Object(suzanne_object_struct4);
 
     ObjectStruct suzanne_object_struct5;
-    suzanne_object_struct5.universe_pointer = my_universe;
+    suzanne_object_struct5.universe = my_universe;
     suzanne_object_struct5.species_parent = suzanne_species;
     suzanne_object_struct5.original_scale_vector = glm::vec3(10.0f, 10.0f, 10.0f);
     suzanne_object_struct5.coordinate_vector = glm::vec3(103.00f, 140.00f, 109.00f);
@@ -491,7 +491,7 @@ int main(void)
     cat_species->set_name("cat_species");
 
     ObjectStruct cat_object_struct1;
-    cat_object_struct1.universe_pointer = my_universe;
+    cat_object_struct1.universe = my_universe;
     cat_object_struct1.species_parent = cat_species;
     cat_object_struct1.original_scale_vector = glm::vec3(10.0f, 10.0f, 10.0f);
     cat_object_struct1.coordinate_vector = glm::vec3(500.00f, 140.00f, 500.00f);
@@ -510,7 +510,7 @@ int main(void)
     cat1->set_name("cat1");
 
     ObjectStruct cat_object_struct2;
-    cat_object_struct2.universe_pointer = my_universe;
+    cat_object_struct2.universe = my_universe;
     cat_object_struct2.species_parent = cat_species;
     cat_object_struct2.original_scale_vector = glm::vec3(15.0f, 15.0f, 15.0f);
     cat_object_struct2.coordinate_vector = glm::vec3(700.00f, 140.00f, 700.00f);
@@ -589,7 +589,7 @@ int main(void)
     console_struct.current_keypress_callback_engine_vector_pointer_pointer = current_keypress_callback_engine_vector_pointer;
     console_struct.current_keyrelease_callback_engine_vector_pointer_pointer = current_keyrelease_callback_engine_vector_pointer;
     console_struct.command_callback_map_pointer = &command_callback_map;
-    console_struct.universe_pointer = my_universe;
+    console_struct.universe = my_universe;
     console_struct.font2D_pointer = my_font2D;
 
     console::Console* my_console = new console::Console(console_struct); // create a console.

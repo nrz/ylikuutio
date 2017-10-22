@@ -46,22 +46,22 @@ namespace ontology
         hierarchy::delete_children<ontology::Shader*>(this->shader_pointer_vector, &this->number_of_shaders);
 
         // If this is the active `Scene`, set all `Scene`-related variables to `nullptr` or invalid.
-        if (this->universe_pointer->active_scene == this)
+        if (this->universe->active_scene == this)
         {
-            this->universe_pointer->cartesian_coordinates = nullptr;
+            this->universe->cartesian_coordinates = nullptr;
 
-            this->universe_pointer->direction = glm::vec3(NAN, NAN, NAN);
+            this->universe->direction = glm::vec3(NAN, NAN, NAN);
 
-            this->universe_pointer->right = glm::vec3(NAN, NAN, NAN);
-            this->universe_pointer->up = glm::vec3(NAN, NAN, NAN);
+            this->universe->right = glm::vec3(NAN, NAN, NAN);
+            this->universe->up = glm::vec3(NAN, NAN, NAN);
 
-            this->universe_pointer->spherical_coordinates = nullptr;
+            this->universe->spherical_coordinates = nullptr;
 
-            this->universe_pointer->horizontal_angle = NAN;
-            this->universe_pointer->vertical_angle = NAN;
+            this->universe->horizontal_angle = NAN;
+            this->universe->vertical_angle = NAN;
 
             // Make this `Scene` no more the active `Scene`.
-            this->universe_pointer->active_scene = nullptr;
+            this->universe->active_scene = nullptr;
         }
     }
 

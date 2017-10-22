@@ -50,7 +50,7 @@ namespace ontology
         public:
             // constructor.
             Object(const ObjectStruct object_struct)
-                : Entity(object_struct.universe_pointer)
+                : Entity(object_struct.universe)
             {
                 // constructor.
                 this->coordinate_vector     = object_struct.coordinate_vector;
@@ -295,7 +295,7 @@ namespace ontology
                 object_pointer->coordinate_vector = glm::vec3(object_pointer->model_matrix[0][0], object_pointer->model_matrix[1][1], object_pointer->model_matrix[2][2]);
             }
 
-            object_pointer->MVP_matrix = object_pointer->universe_pointer->ProjectionMatrix * object_pointer->universe_pointer->ViewMatrix * object_pointer->model_matrix;
+            object_pointer->MVP_matrix = object_pointer->universe->ProjectionMatrix * object_pointer->universe->ViewMatrix * object_pointer->model_matrix;
 
             // Send our transformation to the currently bound shader,
             // in the "MVP" uniform.

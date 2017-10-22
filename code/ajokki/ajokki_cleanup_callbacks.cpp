@@ -42,16 +42,16 @@ namespace ajokki
     {
         std::cout << "Cleaning up.\n";
 
-        std::shared_ptr<datatypes::AnyValue> any_value_universe_pointer = std::make_shared<datatypes::AnyValue>(*callback_object->get_arg(0));
+        std::shared_ptr<datatypes::AnyValue> any_value_universe = std::make_shared<datatypes::AnyValue>(*callback_object->get_arg(0));
         std::shared_ptr<datatypes::AnyValue> any_value_font2D_pointer = std::make_shared<datatypes::AnyValue>(*callback_object->get_any_value("font2D_pointer"));
 
-        if (any_value_universe_pointer->type == datatypes::UNIVERSE_POINTER)
+        if (any_value_universe->type == datatypes::UNIVERSE_POINTER)
         {
-            delete any_value_universe_pointer->universe_pointer;
+            delete any_value_universe->universe;
         }
         else
         {
-            std::cerr << "Invalid datatype: " << any_value_universe_pointer->type << ", should be " << datatypes::UNIVERSE_POINTER << "\n";
+            std::cerr << "Invalid datatype: " << any_value_universe->type << ", should be " << datatypes::UNIVERSE_POINTER << "\n";
         }
 
         if (any_value_font2D_pointer->type == datatypes::TEXT2D_POINTER)

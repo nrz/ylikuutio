@@ -50,7 +50,7 @@ namespace ontology
         public:
             // constructor.
             Shader(const ShaderStruct shader_struct)
-                : Entity(shader_struct.parent->universe_pointer)
+                : Entity(shader_struct.parent->universe)
             {
                 // constructor.
 
@@ -60,7 +60,7 @@ namespace ontology
                 this->char_vertex_shader   = this->vertex_shader.c_str();
                 this->char_fragment_shader = this->fragment_shader.c_str();
                 this->parent       = shader_struct.parent;
-                this->universe_pointer     = this->parent->universe_pointer;
+                this->universe     = this->parent->universe;
 
                 this->terrain_species_pointer = nullptr;
 

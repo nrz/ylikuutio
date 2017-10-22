@@ -69,16 +69,16 @@ namespace console
         this->command_callback_map_pointer = console_struct.command_callback_map_pointer;
 
         // This is a pointer to `ontology::Universe`.
-        this->universe_pointer = console_struct.universe_pointer;
-        this->universe_pointer->console_pointer = this;
+        this->universe = console_struct.universe;
+        this->universe->console_pointer = this;
 
         // This is a pointer to `font2D::Font2D` instance that is used for printing.
         this->font2D_pointer = console_struct.font2D_pointer;
 
-        if (this->universe_pointer->setting_master_pointer->is_setting("console_top_y"))
+        if (this->universe->setting_master_pointer->is_setting("console_top_y"))
         {
             // OK, there is a setting for `console_top_y`.
-            std::shared_ptr<datatypes::AnyValue> console_top_y_any_value = std::make_shared<datatypes::AnyValue>(*universe_pointer->setting_master_pointer->setting_pointer_map["console_top_y"]->setting_value);
+            std::shared_ptr<datatypes::AnyValue> console_top_y_any_value = std::make_shared<datatypes::AnyValue>(*universe->setting_master_pointer->setting_pointer_map["console_top_y"]->setting_value);
 
             if (console_top_y_any_value->type == datatypes::UINT32_T)
             {
@@ -96,10 +96,10 @@ namespace console
             this->console_top_y = 0;
         }
 
-        if (this->universe_pointer->setting_master_pointer->is_setting("console_bottom_y"))
+        if (this->universe->setting_master_pointer->is_setting("console_bottom_y"))
         {
             // OK, there is a setting for `console_bottom_y`.
-            std::shared_ptr<datatypes::AnyValue> console_bottom_y_any_value = std::make_shared<datatypes::AnyValue>(*universe_pointer->setting_master_pointer->setting_pointer_map["console_bottom_y"]->setting_value);
+            std::shared_ptr<datatypes::AnyValue> console_bottom_y_any_value = std::make_shared<datatypes::AnyValue>(*universe->setting_master_pointer->setting_pointer_map["console_bottom_y"]->setting_value);
 
             if (console_bottom_y_any_value->type == datatypes::UINT32_T)
             {
@@ -117,10 +117,10 @@ namespace console
             this->console_bottom_y = 0;
         }
 
-        if (this->universe_pointer->setting_master_pointer->is_setting("console_left_x"))
+        if (this->universe->setting_master_pointer->is_setting("console_left_x"))
         {
             // OK, there is a setting for `console_left_x`.
-            std::shared_ptr<datatypes::AnyValue> console_left_x_any_value = std::make_shared<datatypes::AnyValue>(*universe_pointer->setting_master_pointer->setting_pointer_map["console_left_x"]->setting_value);
+            std::shared_ptr<datatypes::AnyValue> console_left_x_any_value = std::make_shared<datatypes::AnyValue>(*universe->setting_master_pointer->setting_pointer_map["console_left_x"]->setting_value);
 
             if (console_left_x_any_value->type == datatypes::UINT32_T)
             {
@@ -138,10 +138,10 @@ namespace console
             this->console_left_x = 0;
         }
 
-        if (this->universe_pointer->setting_master_pointer->is_setting("console_right_x"))
+        if (this->universe->setting_master_pointer->is_setting("console_right_x"))
         {
             // OK, there is a setting for `console_right_x`.
-            std::shared_ptr<datatypes::AnyValue> console_right_x_any_value = std::make_shared<datatypes::AnyValue>(*universe_pointer->setting_master_pointer->setting_pointer_map["console_right_x"]->setting_value);
+            std::shared_ptr<datatypes::AnyValue> console_right_x_any_value = std::make_shared<datatypes::AnyValue>(*universe->setting_master_pointer->setting_pointer_map["console_right_x"]->setting_value);
 
             if (console_right_x_any_value->type == datatypes::UINT32_T)
             {
@@ -162,10 +162,10 @@ namespace console
         this->n_rows = this->console_top_y - this->console_bottom_y + 1;
         this->n_columns = this->console_right_x - this->console_left_x + 1;
 
-        if (this->n_columns > this->universe_pointer->get_window_width() / this->universe_pointer->get_text_size())
+        if (this->n_columns > this->universe->get_window_width() / this->universe->get_text_size())
         {
             // Upper limit for the the number of columns is window width divided by text size.
-            this-> n_columns = this->universe_pointer->get_window_width() / this->universe_pointer->get_text_size();
+            this-> n_columns = this->universe->get_window_width() / this->universe->get_text_size();
         }
 
         this->print_text("Welcome! Please write \"help\" for more");
@@ -236,18 +236,18 @@ namespace console
         if (this->in_console)
         {
             // Convert current input into std::string.
-            int32_t characters_for_line = this->universe_pointer->get_window_width() / this->universe_pointer->get_text_size();
+            int32_t characters_for_line = this->universe->get_window_width() / this->universe->get_text_size();
 
             // Draw the console to screen using `font2D::printText2D`.
             PrintingStruct printing_struct;
-            printing_struct.screen_width = static_cast<GLuint>(this->universe_pointer->get_window_width());
-            printing_struct.screen_height = static_cast<GLuint>(this->universe_pointer->get_window_height());
-            printing_struct.text_size = this->universe_pointer->get_text_size();
-            printing_struct.font_size = this->universe_pointer->get_font_size();
+            printing_struct.screen_width = static_cast<GLuint>(this->universe->get_window_width());
+            printing_struct.screen_height = static_cast<GLuint>(this->universe->get_window_height());
+            printing_struct.text_size = this->universe->get_text_size();
+            printing_struct.font_size = this->universe->get_font_size();
             printing_struct.char_font_texture_file_format = "bmp";
 
             printing_struct.x = 0;
-            printing_struct.y = this->universe_pointer->get_window_height() - (2 * this->universe_pointer->get_text_size());
+            printing_struct.y = this->universe->get_window_height() - (2 * this->universe->get_text_size());
             printing_struct.horizontal_alignment = "left";
             printing_struct.vertical_alignment = "top";
 
@@ -327,7 +327,7 @@ namespace console
 
     ontology::Universe* Console::get_universe()
     {
-        return this->universe_pointer;
+        return this->universe;
     }
 
     // Public callbacks.
@@ -378,7 +378,7 @@ namespace console
             *console->current_keyrelease_callback_engine_vector_pointer_pointer =
                 console->my_keyrelease_callback_engine_vector_pointer;
 
-            glfwSetCharModsCallback(console->universe_pointer->get_window(), Console::charmods_callback);
+            glfwSetCharModsCallback(console->universe->get_window(), Console::charmods_callback);
 
             // Mark that we're in console.
             console->in_console = true;
@@ -867,7 +867,7 @@ namespace console
                         console->command_callback_map_pointer->count(command) == 1)
                 {
                     ConsoleCommandCallback callback = console->command_callback_map_pointer->at(command);
-                    any_value = callback(console, console->universe_pointer, parameter_vector);
+                    any_value = callback(console, console->universe, parameter_vector);
                 }
             }
 
@@ -1061,7 +1061,7 @@ namespace console
             // Restore previous keyrelease callback engine vector pointer.
             *this->current_keyrelease_callback_engine_vector_pointer_pointer = this->previous_keyrelease_callback_engine_vector_pointer;
 
-            glfwSetCharModsCallback(this->universe_pointer->get_window(), nullptr);
+            glfwSetCharModsCallback(this->universe->get_window(), nullptr);
 
             // Mark that we have exited the console.
             this->in_console = false;

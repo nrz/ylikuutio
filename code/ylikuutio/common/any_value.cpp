@@ -155,7 +155,7 @@ namespace datatypes
                 std::snprintf(buffer, sizeof(buffer), "%" PRIx64, (uint64_t) this->uint32_t_pointer);
                 return std::string(buffer);
             case (UNIVERSE_POINTER):
-                std::snprintf(buffer, sizeof(buffer), "%" PRIx64, (uint64_t) this->universe_pointer);
+                std::snprintf(buffer, sizeof(buffer), "%" PRIx64, (uint64_t) this->universe);
                 return std::string(buffer);
             case (SCENE_POINTER):
                 std::snprintf(buffer, sizeof(buffer), "%" PRIx64, (uint64_t) this->scene_pointer);
@@ -230,7 +230,7 @@ namespace datatypes
         switch (this->type)
         {
             case (UNIVERSE_POINTER):
-                return static_cast<ontology::Entity*>(static_cast<void*>(this->universe_pointer));
+                return static_cast<ontology::Entity*>(static_cast<void*>(this->universe));
             case (SCENE_POINTER):
                 return static_cast<ontology::Entity*>(static_cast<void*>(this->scene_pointer));
             case (SHADER_POINTER):
@@ -439,12 +439,12 @@ namespace datatypes
 
                     // 0 means that the base is determined by the format given in string.
                     // The size of the pointer is assumed to be 64 bits.
-                    ontology::Universe* universe_pointer = (ontology::Universe*) (std::strtoll(value_string.c_str(), &end, 0));
+                    ontology::Universe* universe = (ontology::Universe*) (std::strtoll(value_string.c_str(), &end, 0));
                     if (errno == ERANGE)
                     {
                         return false;
                     }
-                    this->universe_pointer = universe_pointer;
+                    this->universe = universe;
                     return true;
                 }
             case (SCENE_POINTER):
@@ -666,7 +666,7 @@ namespace datatypes
         this->double_pointer = nullptr;
         this->int32_t_pointer = nullptr;
         this->uint32_t_pointer = nullptr;
-        this->universe_pointer = nullptr;
+        this->universe = nullptr;
         this->scene_pointer = nullptr;
         this->shader_pointer = nullptr;
         this->material_pointer = nullptr;
@@ -698,7 +698,7 @@ namespace datatypes
         this->double_pointer = original.double_pointer;
         this->int32_t_pointer = original.int32_t_pointer;
         this->uint32_t_pointer = original.uint32_t_pointer;
-        this->universe_pointer = original.universe_pointer;
+        this->universe = original.universe;
         this->scene_pointer = original.scene_pointer;
         this->shader_pointer = original.shader_pointer;
         this->material_pointer = original.material_pointer;
@@ -1066,15 +1066,15 @@ namespace datatypes
         }
     }
 
-    AnyValue::AnyValue(ontology::Universe* const universe_pointer)
+    AnyValue::AnyValue(ontology::Universe* const universe)
     {
         // constructor.
         this->set_default_values();
         this->type = datatypes::UNIVERSE_POINTER;
-        this->universe_pointer = universe_pointer;
+        this->universe = universe;
     }
 
-    AnyValue::AnyValue(const std::string& type, ontology::Universe* const universe_pointer)
+    AnyValue::AnyValue(const std::string& type, ontology::Universe* const universe)
     {
         // constructor.
         this->set_default_values();
@@ -1082,7 +1082,7 @@ namespace datatypes
         if (std::strcmp(type.c_str(), "ontology::Universe*") == 0)
         {
             this->type = datatypes::UNIVERSE_POINTER;
-            this->universe_pointer = universe_pointer;
+            this->universe = universe;
         }
     }
 

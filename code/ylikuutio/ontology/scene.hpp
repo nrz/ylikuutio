@@ -33,16 +33,16 @@ namespace ontology
     {
         public:
             // constructor.
-            Scene(ontology::Universe* const universe_pointer, const float water_level)
-                : Entity(universe_pointer)
+            Scene(ontology::Universe* const universe, const float water_level)
+                : Entity(universe)
             {
                 // constructor.
                 this->gravity = 9.81f / 60.0f;
                 this->fall_speed = this->gravity;
                 this->water_level = static_cast<GLfloat>(water_level);
 
-                this->universe_pointer = universe_pointer;
-                this->parent = universe_pointer;
+                this->universe = universe;
+                this->parent = universe;
 
                 this->cartesian_coordinates = nullptr;
                 this->spherical_coordinates = nullptr;

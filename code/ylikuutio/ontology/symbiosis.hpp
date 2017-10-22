@@ -27,7 +27,7 @@ namespace ontology
         public:
             // constructor.
             Symbiosis(const SymbiosisStruct symbiosis_struct)
-                : Entity(symbiosis_struct.parent->universe_pointer)
+                : Entity(symbiosis_struct.parent->universe)
             {
                 // constructor.
                 this->parent = symbiosis_struct.parent;

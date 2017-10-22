@@ -24,7 +24,7 @@ namespace ontology
     template<class T1>
         void set_name(const std::string& name, T1 entity)
         {
-            ontology::Universe* universe = entity->universe_pointer;
+            ontology::Universe* universe = entity->universe;
 
             if (universe == nullptr)
             {

@@ -48,7 +48,7 @@ namespace ontology
         // [re]bind `programID` shader.
         glUseProgram(this->programID);
 
-        glUniformMatrix4fv(this->ViewMatrixID, 1, GL_FALSE, &this->universe_pointer->ViewMatrix[0][0]); // This one doesn't change between objects, so this can be done once for all objects that use "programID"
+        glUniformMatrix4fv(this->ViewMatrixID, 1, GL_FALSE, &this->universe->ViewMatrix[0][0]); // This one doesn't change between objects, so this can be done once for all objects that use "programID"
 
         // render this `Shader` by calling `render()` function of each `Material`.
         ontology::render_children<ontology::Material*>(this->material_pointer_vector);

@@ -12,10 +12,10 @@
 
 namespace config
 {
-    SettingMaster::SettingMaster(ontology::Universe* const universe_pointer)
+    SettingMaster::SettingMaster(ontology::Universe* const universe)
     {
         // costructor.
-        this->parent = universe_pointer;
+        this->parent = universe;
         this->number_of_settings = 0;
 
         // bind to parent.

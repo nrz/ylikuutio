@@ -42,13 +42,13 @@ namespace ontology
             // and binds each to its corresponding `Glyph` for rendering hierarchy,
             // and also binds each to this `Text3D` for ontological hierarchy.
             Text3D(const Text3DStruct& text3D_struct)
-                : Entity(text3D_struct.parent->universe_pointer)
+                : Entity(text3D_struct.parent->universe)
             {
                 // constructor.
                 this->rotate_angle = NAN;
                 this->text_string = text3D_struct.text_string;
                 this->parent = text3D_struct.parent;
-                this->universe_pointer = this->parent->universe_pointer;
+                this->universe = this->parent->universe;
 
                 this->number_of_objects = 0;
 

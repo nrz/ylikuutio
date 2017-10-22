@@ -45,11 +45,11 @@ namespace ontology
         public:
             // constructor.
             Material(const MaterialStruct material_struct)
-                : Entity(material_struct.parent->universe_pointer)
+                : Entity(material_struct.parent->universe)
             {
                 // constructor.
                 this->parent = material_struct.parent;
-                this->universe_pointer = this->parent->universe_pointer;
+                this->universe = this->parent->universe;
 
                 this->terrain_species_pointer = nullptr;
 

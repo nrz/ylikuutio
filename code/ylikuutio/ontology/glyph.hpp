@@ -39,10 +39,10 @@ namespace ontology
         public:
             // constructor.
             Glyph(const GlyphStruct glyph_struct)
-                : Model(glyph_struct.universe_pointer)
+                : Model(glyph_struct.universe)
             {
                 // constructor.
-                this->universe_pointer = glyph_struct.universe_pointer;
+                this->universe = glyph_struct.universe;
                 this->parent = glyph_struct.parent;
 
                 this->glyph_vertex_data = glyph_struct.glyph_vertex_data;

@@ -31,12 +31,12 @@ namespace ontology
         public:
             // constructor.
             Font2D(
-                    ontology::Universe* universe_pointer,
+                    ontology::Universe* universe,
                     GLuint screen_width,
                     GLuint screen_height,
                     std::string texture_filename,
                     std::string font_texture_file_format)
-                : Entity(universe_pointer)
+                : Entity(universe)
             {
                 // constructor.
 
@@ -90,7 +90,7 @@ namespace ontology
                 screen_height_uniform_ID = glGetUniformLocation(programID, "screen_height");
                 glUniform1i(screen_height_uniform_ID, screen_height);
 
-                this->universe_pointer = universe_pointer;
+                this->universe = universe;
             }
 
             // destructor.

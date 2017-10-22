@@ -346,7 +346,7 @@ namespace console
             std::unordered_map<std::string, ConsoleCommandCallback>* command_callback_map_pointer;
 
             // This is a pointer to `ontology::Universe`.
-            ontology::Universe* universe_pointer;
+            ontology::Universe* universe;
 
             // This is a pointer to `font2D::Font2D` instance that is used for printing.
             ontology::Font2D* font2D_pointer;

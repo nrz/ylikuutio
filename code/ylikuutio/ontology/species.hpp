@@ -45,7 +45,7 @@ namespace ontology
         public:
             // constructor.
             Species(const SpeciesStruct& species_struct)
-                : Model(species_struct.parent->universe_pointer)
+                : Model(species_struct.parent->universe)
             {
                 // constructor.
                 this->is_world          = species_struct.is_world;
@@ -58,7 +58,7 @@ namespace ontology
                 this->latitude          = species_struct.latitude;
                 this->longitude         = species_struct.longitude;
                 this->parent    = species_struct.parent;
-                this->universe_pointer  = this->parent->universe_pointer;
+                this->universe  = this->parent->universe;
                 this->x_step            = species_struct.x_step;
                 this->z_step            = species_struct.z_step;
                 this->triangulation_type = species_struct.triangulation_type;
@@ -87,7 +87,7 @@ namespace ontology
 
                 // water level.
                 GLuint water_level_uniform_location = glGetUniformLocation(this->parent->parent->programID, "water_level");
-                glUniform1f(water_level_uniform_location, this->universe_pointer->active_scene->water_level);
+                glUniform1f(water_level_uniform_location, this->universe->active_scene->water_level);
 
                 SpeciesLoaderStruct species_loader_struct;
                 species_loader_struct.model_filename = this->model_filename;

@@ -20,7 +20,7 @@ namespace config
     {
         public:
             // constructor.
-            SettingMaster(ontology::Universe* const universe_pointer);
+            SettingMaster(ontology::Universe* const universe);
 
             // destructor.
             ~SettingMaster();

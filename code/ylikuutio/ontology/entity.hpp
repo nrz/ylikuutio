@@ -34,7 +34,7 @@ namespace ontology
             void prerender();
             void postrender();
 
-            ontology::Universe* universe_pointer;            // pointer to the `Universe`.
+            ontology::Universe* universe;            // pointer to the `Universe`.
             std::vector<void*> child_vector_pointers_vector;
             int32_t childID;
 
