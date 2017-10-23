@@ -387,6 +387,12 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/species.hpp
     code/ylikuutio/ontology/species_or_glyph.hpp
     code/ylikuutio/ontology/species_struct.hpp
+    code/ylikuutio/ontology/symbiont_material.cpp
+    code/ylikuutio/ontology/symbiont_material.hpp
+    code/ylikuutio/ontology/symbiont_material_struct.hpp
+    code/ylikuutio/ontology/symbiont_species.cpp
+    code/ylikuutio/ontology/symbiont_species.hpp
+    code/ylikuutio/ontology/symbiont_species_struct.hpp
     code/ylikuutio/ontology/symbiosis.cpp
     code/ylikuutio/ontology/symbiosis.hpp
     code/ylikuutio/ontology/symbiosis_struct.hpp

@@ -3,6 +3,7 @@
 #include "universe.hpp"
 #include "material.hpp"
 #include "glyph.hpp"
+#include "symbiosis.hpp"
 #include "render_templates.hpp"
 #include "shader_struct.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
@@ -35,6 +36,10 @@ namespace ontology
         std::cout << "All materials of this shader will be destroyed.\n";
         hierarchy::delete_children<ontology::Material*>(this->material_pointer_vector, &this->number_of_materials);
 
+        // destroy all symbioses of this shader.
+        std::cout << "All symbioses of this shader will be destroyed.\n";
+        hierarchy::delete_children<ontology::Symbiosis*>(this->symbiosis_pointer_vector, &this->number_of_symbioses);
+
         // set pointer to this shader to nullptr.
         this->parent->set_shader_pointer(this->childID, nullptr);
 
@@ -50,8 +55,9 @@ namespace ontology
 
         glUniformMatrix4fv(this->ViewMatrixID, 1, GL_FALSE, &this->universe->ViewMatrix[0][0]); // This one doesn't change between objects, so this can be done once for all objects that use "programID"
 
-        // render this `Shader` by calling `render()` function of each `Material`.
+        // render this `Shader` by calling `render()` function of each `Material` and of each `Symbiosis`.
         ontology::render_children<ontology::Material*>(this->material_pointer_vector);
+        ontology::render_children<ontology::Symbiosis*>(this->symbiosis_pointer_vector);
 
         this->postrender();
     }

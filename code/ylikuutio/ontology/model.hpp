@@ -36,6 +36,7 @@ namespace ontology
     class Species;
     class Object;
     class Glyph;
+    class SymbiontSpecies;
 
     class Model: public ontology::Entity
     {
@@ -69,6 +70,7 @@ namespace ontology
 
             friend class Glyph;
             friend class Species;
+            friend class SymbiontSpecies;
             friend class Object;
             friend class space_partition::Chunk;
             friend void get_gl_attrib_locations(ontology::Shader* shader, ontology::Glyph* glyph);

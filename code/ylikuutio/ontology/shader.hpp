@@ -44,6 +44,8 @@ namespace ontology
     class Material;
     class Object;
     class Symbiosis;
+    class SymbiontMaterial;
+    class SymbiontSpecies;
 
     class Shader: public ontology::Entity
     {
@@ -93,6 +95,8 @@ namespace ontology
 
             friend class Scene;
             friend class Symbiosis;
+            friend class SymbiontMaterial;
+            friend class SymbiontSpecies;
             friend class Material;
             friend class Glyph;
             friend class Species;
