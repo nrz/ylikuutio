@@ -57,8 +57,8 @@ namespace ontology
                 this->light_position    = species_struct.light_position;
                 this->latitude          = species_struct.latitude;
                 this->longitude         = species_struct.longitude;
-                this->parent    = species_struct.parent;
-                this->universe  = this->parent->universe;
+                this->parent            = species_struct.parent;
+                this->universe          = this->parent->universe;
                 this->x_step            = species_struct.x_step;
                 this->z_step            = species_struct.z_step;
                 this->triangulation_type = species_struct.triangulation_type;
