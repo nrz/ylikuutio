@@ -223,6 +223,9 @@ int main(void)
         return -1;
     }
 
+    // Set `my_scene` to be the currently active `Scene`.
+    my_universe->set_active_scene(my_scene);
+
     // Create the shader, store it in `my_shader`.
     ShaderStruct shader_struct;
     shader_struct.parent = my_scene;
