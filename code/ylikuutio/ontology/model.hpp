@@ -88,6 +88,9 @@ namespace ontology
             // this method sets a object pointer.
             void set_object_pointer(int32_t childID, ontology::Object* child_pointer);
 
+            GLfloat initial_rotate_angle;            // initial rotate angle.
+            glm::vec3 initial_rotate_vector;         // initial rotate vector.
+
             std::string color_channel;               // color channel in use: `"red"`, `"green"`, `"blue"`, `"mean"` or `"all"`.
             glm::vec3 light_position;                // light position.
 
