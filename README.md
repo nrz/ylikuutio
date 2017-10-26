@@ -233,6 +233,8 @@ A: I like Lisp-family languages and TinyScheme fulfils my
 * full support for different keyboard layouts in console
 * custom keyboard mappings in Ajokki
 * command to read console command input from file
+* command to record gameplay
+* command to play recorded gameplay
 * copy-paste in console (Shift-Ins for paste)
 * console reference manual (`man` command)
 * rendering to texture (for mirrors and displays)
@@ -259,6 +261,7 @@ A: I like Lisp-family languages and TinyScheme fulfils my
 * sky dome
 * more realistic static water
 * flowing water
+* snow and ice
 * more physics
 * artificial intelligence (AI) creatures
 * A\* and Theta\* pathfinding
