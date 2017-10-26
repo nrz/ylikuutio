@@ -90,9 +90,14 @@ namespace ontology
         return -1;
     }
 
-    // this method returns a pointer to an `Object` using the name as key.
-    ontology::Object* Scene::get_object(const std::string name)
+    // this method returns a pointer to an `Entity` using the name as key.
+    ontology::Entity* Scene::get_entity(const std::string name)
     {
+        if (this->name_map.count(name) != 1)
+        {
+            return nullptr;
+        }
+
         return this->name_map[name];
     }
 

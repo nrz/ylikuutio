@@ -64,8 +64,8 @@ namespace ontology
             // destructor.
             virtual ~Scene();
 
-            // this method returns a pointer to an `Object` using the name as key.
-            ontology::Object* get_object(const std::string);
+            // this method returns a pointer to an `Entity` using the name as key.
+            ontology::Entity* get_entity(const std::string);
 
             void set_name(std::string name);
 
@@ -106,8 +106,8 @@ namespace ontology
             std::queue<int32_t> free_shaderID_queue;
             int32_t number_of_shaders;
 
-            // For finding any `Object`s of this `Scene` by using its name.
-            std::unordered_map<std::string, ontology::Object*> name_map;
+            // For finding any `Entity`s of this `Scene` by using its name.
+            std::unordered_map<std::string, ontology::Entity*> name_map;
 
             // Variables related to location and orientation.
 
