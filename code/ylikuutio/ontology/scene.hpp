@@ -48,6 +48,8 @@ namespace ontology
                 this->spherical_coordinates = nullptr;
                 this->horizontal_angle = NAN;
                 this->vertical_angle = NAN;
+                this->turbo_factor = NAN;
+                this->twin_turbo_factor = NAN;
 
                 this->number_of_shaders = 0;
 
@@ -71,6 +73,8 @@ namespace ontology
 
             // this method returns a pointer to `datatypes::AnyValue` corresponding to the given `key`.
             std::shared_ptr<datatypes::AnyValue> get_variable(std::string key);
+            void set_turbo_factor(float turbo_factor);
+            void set_twin_turbo_factor(float turbo_factor);
 
             friend class Universe;
             friend class Shader;
@@ -125,6 +129,9 @@ namespace ontology
 
             double horizontal_angle;
             double vertical_angle;
+
+            float turbo_factor;
+            float twin_turbo_factor;
 
             // Variables related to physics.
             float gravity;

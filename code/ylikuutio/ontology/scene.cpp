@@ -106,6 +106,26 @@ namespace ontology
         ontology::set_name(name, this);
     }
 
+    void Scene::set_turbo_factor(float turbo_factor)
+    {
+        this->turbo_factor = turbo_factor;
+
+        if (this == this->universe->active_scene)
+        {
+            this->universe->turbo_factor = this->turbo_factor;
+        }
+    }
+
+    void Scene::set_twin_turbo_factor(float twin_turbo_factor)
+    {
+        this->twin_turbo_factor = twin_turbo_factor;
+
+        if (this == this->universe->active_scene)
+        {
+            this->universe->twin_turbo_factor = this->twin_turbo_factor;
+        }
+    }
+
     void Scene::set_shader_pointer(const int32_t childID, ontology::Shader* const child_pointer)
     {
         hierarchy::set_child_pointer(childID, child_pointer, this->shader_pointer_vector, this->free_shaderID_queue, &this->number_of_shaders);

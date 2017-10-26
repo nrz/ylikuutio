@@ -82,15 +82,25 @@ namespace ontology
 
     void Universe::render()
     {
-        this->prerender();
-
-        if (this->compute_matrices_from_inputs())
+        if (this->active_scene != nullptr)
         {
-            // render this `Universe` by calling `render()` function of the active `Scene`.
-            this->active_scene->render();
-        }
+            this->prerender();
 
-        this->postrender();
+            if (this->compute_matrices_from_inputs())
+            {
+                // render this `Universe` by calling `render()` function of the active `Scene`.
+                this->active_scene->render();
+            }
+
+            this->postrender();
+        }
+    }
+
+    void Universe::set_active_scene(ontology::Scene* scene)
+    {
+        this->active_scene = scene;
+        this->turbo_factor = scene->turbo_factor;
+        this->twin_turbo_factor = scene->twin_turbo_factor;
     }
 
     ontology::Entity* Universe::get_parent()
@@ -107,11 +117,6 @@ namespace ontology
     int32_t Universe::get_number_of_descendants()
     {
         return -1;
-    }
-
-    void Universe::set_active_scene(ontology::Scene* scene)
-    {
-        this->active_scene = scene;
     }
 
     void Universe::set_window(GLFWwindow* window)

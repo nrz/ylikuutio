@@ -266,6 +266,9 @@ namespace ontology
             // this method renders the active `Scene` of this `Universe`.
             void render();
 
+            // this method stes the active `Scene`.
+            void set_active_scene(ontology::Scene* scene);
+
             ontology::Entity* get_parent() override;
             int32_t get_number_of_children() override;
             int32_t get_number_of_descendants() override;
@@ -392,9 +395,6 @@ namespace ontology
         private:
             // this method sets a `Scene` pointer.
             void set_scene_pointer(int32_t childID, ontology::Scene* child_pointer);
-
-            // this method stes the active `Scene`.
-            void set_active_scene(ontology::Scene* scene);
 
             // this method sets a terrain `Species` pointer.
             void set_terrain_species_pointer(ontology::Species* terrain_species_pointer);
