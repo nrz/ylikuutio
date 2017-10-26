@@ -302,6 +302,7 @@ int main(void)
     {
         // Create the species, store it in `terrain_species`.
         SpeciesStruct(SRTM_terrain_species_struct);
+        SRTM_terrain_species_struct.scene = my_scene;
         SRTM_terrain_species_struct.parent = grass_material;
         SRTM_terrain_species_struct.model_file_format = "SRTM";
         // SRTM_terrain_species_struct.model_filename = "/media/laatikko_4TB/satelliittikuvat/srtm/version3/data/";
@@ -335,6 +336,7 @@ int main(void)
         */
 
         SpeciesStruct ASCII_grid_terrain_species_struct;
+        ASCII_grid_terrain_species_struct.scene = my_scene;
         ASCII_grid_terrain_species_struct.parent = grass_material;
         ASCII_grid_terrain_species_struct.model_file_format = ASCII_grid_model_file_format;
         ASCII_grid_terrain_species_struct.model_filename = ASCII_grid_model_filename;
@@ -364,6 +366,7 @@ int main(void)
 
     // Create the species, store it in `snow_cottage_species`.
     SpeciesStruct snow_cottage_species_struct;
+    snow_cottage_species_struct.scene = my_scene;
     snow_cottage_species_struct.parent = pink_geometric_tiles_material;
     snow_cottage_species_struct.model_file_format = "obj";
     snow_cottage_species_struct.model_filename = "snow_cottage_triangulated.obj";
@@ -404,6 +407,7 @@ int main(void)
     */
 
     SpeciesStruct suzanne_species_struct;
+    suzanne_species_struct.scene = my_scene;
     suzanne_species_struct.parent = uvmap_material;
     suzanne_species_struct.model_file_format = "obj";
     suzanne_species_struct.model_filename = "suzanne.obj";
@@ -471,6 +475,7 @@ int main(void)
     ontology::EntityFactory::create_Object(suzanne_object_struct5);
 
     SpeciesStruct cat_species_struct;
+    cat_species_struct.scene = my_scene;
     cat_species_struct.parent = uvmap_material;
     cat_species_struct.model_file_format = "fbx";
     cat_species_struct.model_filename = "cat.fbx";

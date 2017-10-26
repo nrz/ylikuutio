@@ -57,9 +57,6 @@ namespace ontology
                 this->bind_to_parent();
 
                 this->child_vector_pointers_vector.push_back(&this->shader_pointer_vector);
-
-                // make this `Scene` the active `Scene`.
-                this->parent->set_active_scene(this);
                 this->type = "ontology::Scene*";
             }
 

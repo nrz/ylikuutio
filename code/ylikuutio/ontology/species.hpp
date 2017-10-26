@@ -87,7 +87,7 @@ namespace ontology
 
                 // water level.
                 GLuint water_level_uniform_location = glGetUniformLocation(this->parent->parent->programID, "water_level");
-                glUniform1f(water_level_uniform_location, this->universe->active_scene->water_level);
+                glUniform1f(water_level_uniform_location, species_struct.scene->water_level);
 
                 SpeciesLoaderStruct species_loader_struct;
                 species_loader_struct.model_filename = this->model_filename;
