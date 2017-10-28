@@ -72,7 +72,7 @@ namespace ontology
         // destructor.
         std::cout << "This universe will be destroyed.\n";
 
-        // destroy all scenes of this world.
+        // destroy all scenes of this universe.
         std::cout << "All scenes of this universe will be destroyed.\n";
         hierarchy::delete_children<ontology::Scene*>(this->scene_pointer_vector, &this->number_of_scenes);
 
