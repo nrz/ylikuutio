@@ -99,8 +99,12 @@ namespace ontology
     void Universe::set_active_scene(ontology::Scene* scene)
     {
         this->active_scene = scene;
-        this->turbo_factor = scene->turbo_factor;
-        this->twin_turbo_factor = scene->twin_turbo_factor;
+
+        if (this->active_scene != nullptr)
+        {
+            this->turbo_factor = this->active_scene->turbo_factor;
+            this->twin_turbo_factor = this->active_scene->twin_turbo_factor;
+        }
     }
 
     ontology::Entity* Universe::get_parent()
