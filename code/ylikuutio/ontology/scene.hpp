@@ -48,8 +48,8 @@ namespace ontology
                 this->spherical_coordinates = nullptr;
                 this->horizontal_angle = NAN;
                 this->vertical_angle = NAN;
-                this->turbo_factor = NAN;
-                this->twin_turbo_factor = NAN;
+                this->turbo_factor = 1.0f;
+                this->twin_turbo_factor = 1.0f;
 
                 this->number_of_shaders = 0;
 
