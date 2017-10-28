@@ -269,7 +269,7 @@ A: I like Lisp-family languages and TinyScheme fulfils my
 * visual pattern recognition for AI: V1 (primary visual cortex) and V2 simulation
 * GUI for scripting, asset creation etc.
 * Internet gaming with ASIO
-* sound
+* audio with Simple DirectMedia Layer (SDL)
 
 ## Trademarks:
 Android© is a trademark of Google Inc. See [https://developer.android.com/legal.html](https://developer.android.com/legal.html).
