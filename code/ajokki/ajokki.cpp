@@ -231,6 +231,8 @@ int main(void)
         return -1;
     }
 
+    helsinki_eastern_downtown_scene->set_name("helsinki_eastern_downtown_scene");
+
     // Set `helsinki_eastern_downtown_scene` to be the currently active `Scene`.
     my_universe->set_active_scene(helsinki_eastern_downtown_scene);
 
@@ -555,6 +557,8 @@ int main(void)
         return -1;
     }
 
+    joensuu_center_and_western_scene->set_name("joensuu_center_and_western_scene");
+
     // Set `joensuu_center_and_western_scene` to be the currently active `Scene`.
     // my_universe->set_active_scene(joensuu_center_and_western_scene);
 
@@ -633,6 +637,8 @@ int main(void)
         std::cerr << "Failed to create Scene.\n";
         return -1;
     }
+
+    altiplano_scene->set_name("altiplano_scene");
 
     // Set `altiplano_scene` to be the currently active `Scene`.
     // my_universe->set_active_scene(altiplano_scene);
