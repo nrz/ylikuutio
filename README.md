@@ -236,6 +236,7 @@ A: I like Lisp-family languages and TinyScheme fulfils my
 * command to record gameplay
 * command to play recorded gameplay
 * running some Linux command line commands in console, with Toybox
+* option to disassemble some Ylikuutio code (`Entity` objects) using NDISASM
 * copy-paste in console (Shift-Ins for paste)
 * console reference manual (`man` command)
 * rendering to texture (for mirrors and displays)
