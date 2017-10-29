@@ -261,6 +261,8 @@ A: I like Lisp-family languages and TinyScheme fulfils my
 * objects with 4 or more spatial dimensions, projected to 3D space before rendering to screen
 * more shaders
 * sky dome
+* railways
+* roads
 * more realistic static water
 * flowing water
 * snow and ice
