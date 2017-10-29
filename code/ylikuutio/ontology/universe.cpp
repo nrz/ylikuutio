@@ -274,6 +274,51 @@ namespace ontology
         return nullptr;
     }
 
+    std::shared_ptr<datatypes::AnyValue> Universe::activate_scene(
+            console::Console* const console,
+            ontology::Universe* const universe,
+            std::vector<std::string>& command_parameters)
+    {
+        if (console == nullptr || universe == nullptr)
+        {
+            return nullptr;
+        }
+
+        config::SettingMaster* setting_master = universe->setting_master_pointer;
+
+        if (setting_master == nullptr)
+        {
+            return nullptr;
+        }
+
+        if (command_parameters.size() == 0)
+        {
+            // No command parameters.
+            // Print variable names.
+            console->print_text(setting_master->help());
+        }
+        else if (command_parameters.size() == 1)
+        {
+            std::string name = command_parameters[0];
+
+            if (universe->entity_map.count(name) == 0)
+            {
+                return nullptr;
+            }
+
+            ontology::Entity* entity = universe->entity_map[name];
+            ontology::Scene* scene = dynamic_cast<ontology::Scene*>(entity);
+
+            if (scene == nullptr)
+            {
+                return nullptr;
+            }
+
+            universe->set_active_scene(scene);
+        }
+        return nullptr;
+    }
+
     std::shared_ptr<datatypes::AnyValue> Universe::info(
             console::Console* const console,
             ontology::Universe* const universe,

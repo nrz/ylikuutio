@@ -379,15 +379,15 @@ int main(void)
     snow_cottage_object_struct1.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
 
     /*
-    ontology::Entity* snow_cottage_object_entity = ontology::EntityFactory::create_Object(snow_cottage_object_struct1);
-    ontology::Object* snow_cottage_object = dynamic_cast<ontology::Object*>(snow_cottage_object_entity);
+       ontology::Entity* snow_cottage_object_entity = ontology::EntityFactory::create_Object(snow_cottage_object_struct1);
+       ontology::Object* snow_cottage_object = dynamic_cast<ontology::Object*>(snow_cottage_object_entity);
 
-    if (snow_cottage_object == nullptr)
-    {
-        std::cerr << "Failed to create snow cottage Object.\n";
-        return -1;
-    }
-    */
+       if (snow_cottage_object == nullptr)
+       {
+       std::cerr << "Failed to create snow cottage Object.\n";
+       return -1;
+       }
+       */
 
     SpeciesStruct suzanne_species_struct;
     suzanne_species_struct.scene = helsinki_eastern_downtown_scene;
@@ -1131,6 +1131,7 @@ int main(void)
     // Object handling callbacks.
     command_callback_map["info"] = &ontology::Universe::info;
     command_callback_map["delete"] = &ontology::Universe::delete_entity;
+    command_callback_map["activate"] = &ontology::Universe::activate_scene;
 
     // Exit program callbacks.
     command_callback_map["bye"] = &ajokki::quit;

@@ -342,6 +342,11 @@ namespace ontology
             glm::vec3 right; // note: `right` can not be set directly using console.
             glm::vec3 up;    // note: `up` can not be set directly using console.
 
+            static std::shared_ptr<datatypes::AnyValue> activate_scene(
+                    console::Console* const console,
+                    ontology::Universe* const universe,
+                    std::vector<std::string>& command_parameters);
+
             double horizontal_angle;
             double vertical_angle;
 
