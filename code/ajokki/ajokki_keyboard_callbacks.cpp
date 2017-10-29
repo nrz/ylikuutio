@@ -48,6 +48,14 @@ namespace ajokki
             return false;
         }
 
+        ontology::Scene* scene = universe->get_active_scene();
+
+        if (scene == nullptr)
+        {
+            // No active scene.
+            return false;
+        }
+
         GLfloat temp_speed;
 
         if (universe->is_first_turbo_pressed && universe->is_second_turbo_pressed)
