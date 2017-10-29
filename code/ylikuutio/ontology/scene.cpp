@@ -45,23 +45,10 @@ namespace ontology
         std::cout << "All shaders of this scene will be destroyed.\n";
         hierarchy::delete_children<ontology::Shader*>(this->shader_pointer_vector, &this->number_of_shaders);
 
-        // If this is the active `Scene`, set all `Scene`-related variables to `nullptr` or invalid.
-        if (this->universe->active_scene == this)
+        if (this->universe->get_active_scene() == this)
         {
-            this->universe->cartesian_coordinates = nullptr;
-
-            this->universe->direction = glm::vec3(NAN, NAN, NAN);
-
-            this->universe->right = glm::vec3(NAN, NAN, NAN);
-            this->universe->up = glm::vec3(NAN, NAN, NAN);
-
-            this->universe->spherical_coordinates = nullptr;
-
-            this->universe->horizontal_angle = NAN;
-            this->universe->vertical_angle = NAN;
-
             // Make this `Scene` no more the active `Scene`.
-            this->universe->active_scene = nullptr;
+            this->universe->set_active_scene(nullptr);
         }
 
         // set pointer to this scene to nullptr.
