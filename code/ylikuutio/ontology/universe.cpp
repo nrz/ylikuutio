@@ -107,6 +107,11 @@ namespace ontology
         }
     }
 
+    ontology::Scene* Universe::get_active_scene()
+    {
+        return this->active_scene;
+    }
+
     ontology::Entity* Universe::get_parent()
     {
         // `Universe` has no parent.
