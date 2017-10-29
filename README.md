@@ -235,6 +235,7 @@ A: I like Lisp-family languages and TinyScheme fulfils my
 * command to read console command input from file
 * command to record gameplay
 * command to play recorded gameplay
+* running some Linux command line commands in console, with Toybox
 * copy-paste in console (Shift-Ins for paste)
 * console reference manual (`man` command)
 * rendering to texture (for mirrors and displays)
