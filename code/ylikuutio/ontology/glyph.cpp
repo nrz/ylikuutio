@@ -14,7 +14,7 @@ namespace ontology
     void Glyph::bind_to_parent()
     {
         // get `childID` from `VectorFont` and set pointer to this `Glyph`.
-        hierarchy::bind_child_to_parent<ontology::Glyph*>(this, this->parent_pointer->glyph_pointer_vector, this->parent_pointer->free_glyphID_queue, &this->parent_pointer->number_of_glyphs);
+        hierarchy::bind_child_to_parent<ontology::Glyph*>(this, this->parent->glyph_pointer_vector, this->parent->free_glyphID_queue, &this->parent->number_of_glyphs);
     }
 
     Glyph::~Glyph()
@@ -27,12 +27,12 @@ namespace ontology
         // TODO: Cleanup VBO, shader and texture (copy these from `Species::~Species()`).
 
         // set pointer to this `Glyph` to nullptr.
-        this->parent_pointer->set_glyph_pointer(this->childID, nullptr);
+        this->parent->set_glyph_pointer(this->childID, nullptr);
     }
 
     ontology::Entity* Glyph::get_parent()
     {
-        return this->parent_pointer;
+        return this->parent;
     }
 
     void Glyph::render()

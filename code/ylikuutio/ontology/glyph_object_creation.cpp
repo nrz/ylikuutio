@@ -14,20 +14,20 @@ namespace ontology
         while (*text_pointer != '\0')
         {
             int32_t unicode_value = string::extract_unicode_value_from_string(text_pointer);
-            ontology::Glyph* glyph_pointer = text3D->parent_pointer->get_glyph_pointer(unicode_value);
+            ontology::Glyph* glyph_pointer = text3D->parent->get_glyph_pointer(unicode_value);
 
             if (glyph_pointer == nullptr)
             {
                 // nullptr, so skip this character.
-                std::cerr << "Error: no matching Glyph found for unicode_value 0x" << std::hex << unicode_value << "\n";
+                std::cerr << "Error: no matching Glyph found for unicode_value 0x" << std::hex << unicode_value << std::dec << "\n";
                 continue;
             }
 
-            std::cout << "Creating the glyph Object for unicode_value 0x" << std::hex << unicode_value << "\n";
+            std::cout << "Creating the glyph Object for unicode_value 0x" << std::hex << unicode_value << std::dec << "\n";
 
             ObjectStruct object_struct;
-            object_struct.glyph_parent_pointer = glyph_pointer;
-            object_struct.text3D_parent_pointer = text3D;
+            object_struct.glyph_parent = glyph_pointer;
+            object_struct.text3D_parent = text3D;
             object_struct.original_scale_vector = text3D->original_scale_vector;
             object_struct.rotate_angle = text3D->rotate_angle;
             object_struct.is_character = true;

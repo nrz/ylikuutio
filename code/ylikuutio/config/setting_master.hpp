@@ -20,7 +20,7 @@ namespace config
     {
         public:
             // constructor.
-            SettingMaster(ontology::Universe* const universe_pointer);
+            SettingMaster(ontology::Universe* const universe);
 
             // destructor.
             ~SettingMaster();
@@ -104,7 +104,7 @@ namespace config
             friend class console::Console;
 
         private:
-            ontology::Universe* parent_pointer;
+            ontology::Universe* parent;
 
             std::vector<config::Setting*> setting_pointer_vector;
             std::queue<int32_t> free_settingID_queue;

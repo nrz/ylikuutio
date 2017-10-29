@@ -42,13 +42,13 @@ namespace ontology
             // and binds each to its corresponding `Glyph` for rendering hierarchy,
             // and also binds each to this `Text3D` for ontological hierarchy.
             Text3D(const Text3DStruct& text3D_struct)
-                : Entity(text3D_struct.parent_pointer->universe_pointer)
+                : Entity(text3D_struct.parent->universe)
             {
                 // constructor.
                 this->rotate_angle = NAN;
                 this->text_string = text3D_struct.text_string;
-                this->parent_pointer = text3D_struct.parent_pointer;
-                this->universe_pointer = this->parent_pointer->universe_pointer;
+                this->parent = text3D_struct.parent;
+                this->universe = this->parent->universe;
 
                 this->number_of_objects = 0;
 
@@ -73,7 +73,7 @@ namespace ontology
 
             // this method deletes all glyph Objects of this `Text3D`,
             // sets pointer to this `Text3D` to nullptr,
-            // sets `parent_pointer` according to the input (the new `VectorFont`),
+            // sets `parent` according to the input (the new `VectorFont`),
             // requests a new `childID` from the new `VectorFont`,
             // and creates all glyph Objects of this `Text3D` with the font data.
             // Note: different fonts may provide glyphs for different Unicodes!
@@ -96,7 +96,7 @@ namespace ontology
 
             std::string text_string;
 
-            ontology::VectorFont* parent_pointer; // pointer to `VectorFont`.
+            ontology::VectorFont* parent; // pointer to `VectorFont`.
 
             glm::vec3 original_scale_vector;      // original scale vector.
             GLfloat rotate_angle;                 // rotate angle.

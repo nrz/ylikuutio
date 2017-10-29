@@ -11,9 +11,9 @@ namespace space_partition
     {
         hierarchy::bind_child_to_parent<space_partition::ChunkMaster*>(
                 this,
-                this->parent_pointer->chunk_master_pointer_vector,
-                this->parent_pointer->free_chunk_masterID_queue,
-                &this->parent_pointer->number_of_chunk_masters);
+                this->parent->chunk_master_pointer_vector,
+                this->parent->free_chunk_masterID_queue,
+                &this->parent->number_of_chunk_masters);
     }
 
     ChunkMaster::~ChunkMaster()
@@ -25,7 +25,7 @@ namespace space_partition
         hierarchy::delete_children<space_partition::Chunk*>(this->chunk_pointer_vector, &this->number_of_chunks);
 
         // set pointer to this `ChunkMaster` to nullptr.
-        this->parent_pointer->set_chunk_master_pointer(this->childID, nullptr);
+        this->parent->set_chunk_master_pointer(this->childID, nullptr);
     }
 
     void ChunkMaster::set_chunk_pointer(int32_t childID, space_partition::Chunk* child_pointer)

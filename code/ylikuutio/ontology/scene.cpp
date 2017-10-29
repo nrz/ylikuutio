@@ -33,7 +33,7 @@ namespace ontology
     void Scene::bind_to_parent()
     {
         // get `childID` from `Universe` and set pointer to this `Scene`.
-        hierarchy::bind_child_to_parent<ontology::Scene*>(this, this->parent_pointer->scene_pointer_vector, this->parent_pointer->free_sceneID_queue, &this->parent_pointer->number_of_scenes);
+        hierarchy::bind_child_to_parent<ontology::Scene*>(this, this->parent->scene_pointer_vector, this->parent->free_sceneID_queue, &this->parent->number_of_scenes);
     }
 
     Scene::~Scene()
@@ -45,24 +45,14 @@ namespace ontology
         std::cout << "All shaders of this scene will be destroyed.\n";
         hierarchy::delete_children<ontology::Shader*>(this->shader_pointer_vector, &this->number_of_shaders);
 
-        // If this is the active `Scene`, set all `Scene`-related variables to `nullptr` or invalid.
-        if (this->universe_pointer->active_scene == this)
+        if (this->universe->get_active_scene() == this)
         {
-            this->universe_pointer->cartesian_coordinates = nullptr;
-
-            this->universe_pointer->direction = glm::vec3(NAN, NAN, NAN);
-
-            this->universe_pointer->right = glm::vec3(NAN, NAN, NAN);
-            this->universe_pointer->up = glm::vec3(NAN, NAN, NAN);
-
-            this->universe_pointer->spherical_coordinates = nullptr;
-
-            this->universe_pointer->horizontal_angle = NAN;
-            this->universe_pointer->vertical_angle = NAN;
-
             // Make this `Scene` no more the active `Scene`.
-            this->universe_pointer->active_scene = nullptr;
+            this->universe->set_active_scene(nullptr);
         }
+
+        // set pointer to this scene to nullptr.
+        this->parent->set_scene_pointer(this->childID, nullptr);
     }
 
     void Scene::render()
@@ -77,7 +67,7 @@ namespace ontology
 
     ontology::Entity* Scene::get_parent()
     {
-        return this->parent_pointer;
+        return this->parent;
     }
 
     int32_t Scene::get_number_of_children()
@@ -90,15 +80,40 @@ namespace ontology
         return -1;
     }
 
-    // this method returns a pointer to an `Object` using the name as key.
-    ontology::Object* Scene::get_object(const std::string name)
+    // this method returns a pointer to an `Entity` using the name as key.
+    ontology::Entity* Scene::get_entity(const std::string name)
     {
+        if (this->name_map.count(name) != 1)
+        {
+            return nullptr;
+        }
+
         return this->name_map[name];
     }
 
     void Scene::set_name(const std::string name)
     {
         ontology::set_name(name, this);
+    }
+
+    void Scene::set_turbo_factor(float turbo_factor)
+    {
+        this->turbo_factor = turbo_factor;
+
+        if (this == this->universe->active_scene)
+        {
+            this->universe->turbo_factor = this->turbo_factor;
+        }
+    }
+
+    void Scene::set_twin_turbo_factor(float twin_turbo_factor)
+    {
+        this->twin_turbo_factor = twin_turbo_factor;
+
+        if (this == this->universe->active_scene)
+        {
+            this->universe->twin_turbo_factor = this->twin_turbo_factor;
+        }
     }
 
     void Scene::set_shader_pointer(const int32_t childID, ontology::Shader* const child_pointer)

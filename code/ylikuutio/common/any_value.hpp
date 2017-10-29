@@ -93,7 +93,7 @@ namespace datatypes
             AnyValue(double* const double_pointer);
             AnyValue(int32_t* const int32_t_pointer);
             AnyValue(uint32_t* const uint32_t_pointer);
-            AnyValue(ontology::Universe* const universe_pointer);
+            AnyValue(ontology::Universe* const universe);
             AnyValue(ontology::Scene* const scene_pointer);
             AnyValue(ontology::Shader* const shader_pointer);
             AnyValue(ontology::Material* const material_pointer);
@@ -120,7 +120,7 @@ namespace datatypes
             AnyValue(const std::string& type, double* const double_pointer);
             AnyValue(const std::string& type, int32_t* const int32_t_pointer);
             AnyValue(const std::string& type, uint32_t* const uint32_t_pointer);
-            AnyValue(const std::string& type, ontology::Universe* const universe_pointer);
+            AnyValue(const std::string& type, ontology::Universe* const universe);
             AnyValue(const std::string& type, ontology::Scene* const scene_pointer);
             AnyValue(const std::string& type, ontology::Shader* const shader_pointer);
             AnyValue(const std::string& type, ontology::Material* const material_pointer);
@@ -148,7 +148,7 @@ namespace datatypes
             double* double_pointer;
             int32_t* int32_t_pointer;
             uint32_t* uint32_t_pointer;
-            ontology::Universe* universe_pointer;
+            ontology::Universe* universe;
             ontology::Scene* scene_pointer;
             ontology::Shader* shader_pointer;
             ontology::Material* material_pointer;

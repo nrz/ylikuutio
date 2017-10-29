@@ -36,6 +36,7 @@ namespace ontology
     class Species;
     class Object;
     class Glyph;
+    class SymbiontSpecies;
 
     class Model: public ontology::Entity
     {
@@ -69,13 +70,14 @@ namespace ontology
 
             friend class Glyph;
             friend class Species;
+            friend class SymbiontSpecies;
             friend class Object;
             friend class space_partition::Chunk;
             friend void get_gl_attrib_locations(ontology::Shader* shader, ontology::Glyph* glyph);
             template<class T1>
                 friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, int32_t* number_of_children);
             template<class T1, class T2>
-                friend void hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent_pointer, std::vector<T1>& old_child_pointer_vector, std::queue<int32_t>& old_free_childID_queue, int32_t* old_number_of_children);
+                friend void hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent, std::vector<T1>& old_child_pointer_vector, std::queue<int32_t>& old_free_childID_queue, int32_t* old_number_of_children);
             template<class T1>
                 friend void render_species_or_glyph(T1 species_or_glyph_pointer);
             template<class T1>
@@ -85,6 +87,9 @@ namespace ontology
         private:
             // this method sets a object pointer.
             void set_object_pointer(int32_t childID, ontology::Object* child_pointer);
+
+            GLfloat initial_rotate_angle;            // initial rotate angle.
+            glm::vec3 initial_rotate_vector;         // initial rotate vector.
 
             std::string color_channel;               // color channel in use: `"red"`, `"green"`, `"blue"`, `"mean"` or `"all"`.
             glm::vec3 light_position;                // light position.

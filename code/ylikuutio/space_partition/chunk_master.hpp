@@ -23,14 +23,14 @@ namespace space_partition
     {
         public:
             // constructor.
-            ChunkMaster(ontology::Universe* universe, ontology::Material* const parent_pointer, GetContentCallback get_content_callback)
+            ChunkMaster(ontology::Universe* universe, ontology::Material* const parent, GetContentCallback get_content_callback)
                 : ontology::Entity(universe)
             {
                 // constructor.
                 this->get_content_callback = get_content_callback;
                 this->number_of_chunks = 0;
 
-                this->parent_pointer = parent_pointer;
+                this->parent = parent;
 
                 // get `childID` from `Material` and set pointer to this `ChunkMaster`.
                 this->bind_to_parent();
@@ -47,7 +47,7 @@ namespace space_partition
             template<class T1>
                 friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, int32_t* number_of_children);
             template<class T1, class T2>
-                friend void hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent_pointer, std::vector<T1>& old_child_pointer_vector, std::queue<int32_t>& old_free_childID_queue, int32_t* old_number_of_children);
+                friend void hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent, std::vector<T1>& old_child_pointer_vector, std::queue<int32_t>& old_free_childID_queue, int32_t* old_number_of_children);
 
         private:
             void bind_to_parent();
@@ -63,7 +63,7 @@ namespace space_partition
             // Callback used to get the content based on x, y, z.
             GetContentCallback get_content_callback;
 
-            ontology::Material* parent_pointer;  // pointer to `Material`.
+            ontology::Material* parent;  // pointer to `Material`.
 
             std::vector<space_partition::Chunk*> chunk_pointer_vector;
             std::queue<int32_t> free_chunkID_queue;

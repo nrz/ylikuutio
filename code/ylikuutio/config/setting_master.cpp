@@ -12,15 +12,15 @@
 
 namespace config
 {
-    SettingMaster::SettingMaster(ontology::Universe* const universe_pointer)
+    SettingMaster::SettingMaster(ontology::Universe* const universe)
     {
         // costructor.
-        this->parent_pointer = universe_pointer;
+        this->parent = universe;
         this->number_of_settings = 0;
 
         // bind to parent.
         // there can be only 1 `SettingMaster`.
-        this->parent_pointer->setting_master_pointer = this;
+        this->parent->setting_master_pointer = this;
     }
 
     SettingMaster::~SettingMaster()
@@ -69,7 +69,7 @@ namespace config
         setting_new_any_value->type = setting->setting_value->type;
 
         setting->setting_value = setting_new_any_value;
-        setting->activate_callback(this->parent_pointer, this);
+        setting->activate_callback(this->parent, this);
         return true;
     }
 

@@ -9,17 +9,17 @@ namespace graph
 {
     void Node::bind_to_parent()
     {
-        hierarchy::bind_child_to_parent<graph::Node*>(this, this->parent_pointer->node_pointer_vector, this->parent_pointer->free_nodeID_queue, &this->parent_pointer->number_of_nodes);
+        hierarchy::bind_child_to_parent<graph::Node*>(this, this->parent->node_pointer_vector, this->parent->free_nodeID_queue, &this->parent->number_of_nodes);
     }
 
     Node::Node(NodeStruct node_struct)
     {
         // constructor.
         this->childID = node_struct.nodeID;
-        this->parent_pointer = node_struct.parent_pointer;
+        this->parent = node_struct.parent;
 
         // set pointer to this node.
-        this->parent_pointer->set_node_pointer(this->childID, this);
+        this->parent->set_node_pointer(this->childID, this);
 
         // create all bidirectional links between this node and neighbor nodes.
         for (uint32_t link_i = 0; link_i < this->neighbor_nodeIDs.size(); link_i++)
@@ -40,7 +40,7 @@ namespace graph
         }
 
         // set pointer to this node to nullptr.
-        this->parent_pointer->set_node_pointer(this->childID, nullptr);
+        this->parent->set_node_pointer(this->childID, nullptr);
     }
 
     void Node::create_unidirectional_link(int32_t nodeID)
@@ -64,7 +64,7 @@ namespace graph
         this->create_unidirectional_link(nodeID);
 
         // create a link from destination node to this node.
-        static_cast<graph::Node*>(this->parent_pointer->get_node_pointer(childID))->create_unidirectional_link(this->childID);
+        static_cast<graph::Node*>(this->parent->get_node_pointer(childID))->create_unidirectional_link(this->childID);
     }
 
     void Node::delete_unidirectional_link(int32_t nodeID)
@@ -79,7 +79,7 @@ namespace graph
         this->delete_unidirectional_link(nodeID);
 
         // delete a link from destination node to this node.
-        static_cast<graph::Node*>(this->parent_pointer->get_node_pointer(childID))->delete_unidirectional_link(this->childID);
+        static_cast<graph::Node*>(this->parent->get_node_pointer(childID))->delete_unidirectional_link(this->childID);
     }
 
     // Transfering a `Node` to a new `Graph` is similar to `bind_to_new_parent`, but there is one important difference:
@@ -93,6 +93,6 @@ namespace graph
 
     void Node::bind_to_new_parent(graph::Graph *new_graph_pointer)
     {
-        hierarchy::bind_child_to_new_parent<graph::Node*, graph::Graph*>(this, new_graph_pointer, this->parent_pointer->node_pointer_vector, this->parent_pointer->free_nodeID_queue, &this->parent_pointer->number_of_nodes);
+        hierarchy::bind_child_to_new_parent<graph::Node*, graph::Graph*>(this, new_graph_pointer, this->parent->node_pointer_vector, this->parent->free_nodeID_queue, &this->parent->number_of_nodes);
     }
 }

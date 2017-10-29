@@ -1,5 +1,5 @@
-#ifndef __TEXTURE_HPP_INCLUDED
-#define __TEXTURE_HPP_INCLUDED
+#ifndef __MATERIAL_HPP_INCLUDED
+#define __MATERIAL_HPP_INCLUDED
 
 #include "entity.hpp"
 #include "shader.hpp"
@@ -45,11 +45,11 @@ namespace ontology
         public:
             // constructor.
             Material(const MaterialStruct material_struct)
-                : Entity(material_struct.parent_pointer->universe_pointer)
+                : Entity(material_struct.parent->universe)
             {
                 // constructor.
-                this->parent_pointer = material_struct.parent_pointer;
-                this->universe_pointer = this->parent_pointer->universe_pointer;
+                this->parent = material_struct.parent;
+                this->universe = this->parent->universe;
 
                 this->terrain_species_pointer = nullptr;
 
@@ -83,7 +83,7 @@ namespace ontology
                 }
 
                 // Get a handle for our "myTextureSampler" uniform.
-                this->openGL_textureID = glGetUniformLocation(this->parent_pointer->programID, "myTextureSampler");
+                this->openGL_textureID = glGetUniformLocation(this->parent->programID, "myTextureSampler");
 
                 this->child_vector_pointers_vector.push_back(&this->species_pointer_vector);
                 this->child_vector_pointers_vector.push_back(&this->vector_font_pointer_vector);
@@ -94,7 +94,7 @@ namespace ontology
             // destructor.
             virtual ~Material();
 
-            // this method sets pointer to this `Material` to nullptr, sets `parent_pointer` according to the input, and requests a new `childID` from the new `Shader`.
+            // this method sets pointer to this `Material` to nullptr, sets `parent` according to the input, and requests a new `childID` from the new `Shader`.
             void bind_to_new_parent(ontology::Shader* const new_shader_pointer);
 
             void set_name(const std::string& name);
@@ -112,7 +112,7 @@ namespace ontology
             template<class T1>
                 friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, int32_t* number_of_children);
             template<class T1, class T2>
-                friend void hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent_pointer, std::vector<T1>& old_child_pointer_vector, std::queue<int32_t>& old_free_childID_queue, int32_t* old_number_of_children);
+                friend void hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent, std::vector<T1>& old_child_pointer_vector, std::queue<int32_t>& old_free_childID_queue, int32_t* old_number_of_children);
 
         private:
             void bind_to_parent();
@@ -136,7 +136,7 @@ namespace ontology
             // this method sets a terrain `Species` pointer.
             void set_terrain_species_pointer(ontology::Species* const terrain_species_pointer);
 
-            ontology::Shader* parent_pointer;      // pointer to `Shader`.
+            ontology::Shader* parent;      // pointer to `Shader`.
 
             ontology::Species* terrain_species_pointer; // pointer to terrain `Species` (used in collision detection).
 

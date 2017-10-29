@@ -34,11 +34,11 @@
 
 // `Universe`, `Scene`, `Shader`, `Material`, `Species`, `Object`.
 // `Universe`, `Scene`, `Shader`, `Material`, `VectorFont`, `Glyph`, `Object`.
-// `Universe` must be created before any `Scene`. `parent_pointer` must be given to each `Scene`.
-// `Scene` must be created before any `Shader`. `parent_pointer` must be given to each `Shader`.
-// `Shader` must be created before any `Material`. `parent_pointer` must be given to each `Material`.
-// `Material` must be created before any `Species`. `parent_pointer` must be given to each `Species`.
-// `Species` must be create before any `Object` of that `Species`. `parent_pointer` must be given to each `Object` of the `Species`.
+// `Universe` must be created before any `Scene`. `parent` must be given to each `Scene`.
+// `Scene` must be created before any `Shader`. `parent` must be given to each `Shader`.
+// `Shader` must be created before any `Material`. `parent` must be given to each `Material`.
+// `Material` must be created before any `Species`. `parent` must be given to each `Species`.
+// `Species` must be create before any `Object` of that `Species`. `parent` must be given to each `Object` of the `Species`.
 //
 //
 // Hierarchy of regular `Object`s (including terrain species):
@@ -266,6 +266,11 @@ namespace ontology
             // this method renders the active `Scene` of this `Universe`.
             void render();
 
+            // this method stes the active `Scene`.
+            void set_active_scene(ontology::Scene* scene);
+
+            ontology::Scene* get_active_scene();
+
             ontology::Entity* get_parent() override;
             int32_t get_number_of_children() override;
             int32_t get_number_of_descendants() override;
@@ -337,6 +342,11 @@ namespace ontology
             glm::vec3 right; // note: `right` can not be set directly using console.
             glm::vec3 up;    // note: `up` can not be set directly using console.
 
+            static std::shared_ptr<datatypes::AnyValue> activate_scene(
+                    console::Console* const console,
+                    ontology::Universe* const universe,
+                    std::vector<std::string>& command_parameters);
+
             double horizontal_angle;
             double vertical_angle;
 
@@ -392,9 +402,6 @@ namespace ontology
         private:
             // this method sets a `Scene` pointer.
             void set_scene_pointer(int32_t childID, ontology::Scene* child_pointer);
-
-            // this method stes the active `Scene`.
-            void set_active_scene(ontology::Scene* scene);
 
             // this method sets a terrain `Species` pointer.
             void set_terrain_species_pointer(ontology::Species* terrain_species_pointer);

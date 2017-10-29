@@ -2,6 +2,7 @@ TEE-lista:
 Listaa tähän keskeneräiset asiat kiireellisyysjärjestyksessä kiireellisimmät ylös. Rasti ruutuun ja valmiit-osastolle kun on valmis.
 
 Ylikuution kehityksen kannalta välttämättömiä työvaiheita:
+[ ] Lisää `enable wireframe`, `disable wireframe`, `enable wireframe <entity_name>`, `disable wireframe <entity_name>`.
 [ ] Lisää vokselimaailma.
 [ ] Lisää tekoälyobjektit.
 [ ] Lisää konsoliin skenejen (`Scene`) latauskomento `load`.

@@ -28,7 +28,7 @@ namespace ontology
     void Material::bind_to_parent()
     {
         // get `childID` from `Shader` and set pointer to this `Material`.
-        hierarchy::bind_child_to_parent<ontology::Material*>(this, this->parent_pointer->material_pointer_vector, this->parent_pointer->free_materialID_queue, &this->parent_pointer->number_of_materials);
+        hierarchy::bind_child_to_parent<ontology::Material*>(this, this->parent->material_pointer_vector, this->parent->free_materialID_queue, &this->parent->number_of_materials);
     }
 
     Material::~Material()
@@ -51,7 +51,7 @@ namespace ontology
         glDeleteTextures(1, &this->texture);
 
         // set pointer to this material to nullptr.
-        this->parent_pointer->set_material_pointer(this->childID, nullptr);
+        this->parent->set_material_pointer(this->childID, nullptr);
     }
 
     void Material::render()
@@ -74,7 +74,7 @@ namespace ontology
 
     ontology::Entity* Material::get_parent()
     {
-        return this->parent_pointer;
+        return this->parent;
     }
 
     int32_t Material::get_number_of_children()
@@ -104,8 +104,8 @@ namespace ontology
 
     void Material::bind_to_new_parent(ontology::Shader* const new_shader_pointer)
     {
-        // this method sets pointer to this `Material` to nullptr, sets `parent_pointer` according to the input, and requests a new `childID` from the new `Shader`.
-        hierarchy::bind_child_to_new_parent<ontology::Material*, ontology::Shader*>(this, new_shader_pointer, this->parent_pointer->material_pointer_vector, this->parent_pointer->free_materialID_queue, &this->parent_pointer->number_of_materials);
+        // this method sets pointer to this `Material` to nullptr, sets `parent` according to the input, and requests a new `childID` from the new `Shader`.
+        hierarchy::bind_child_to_new_parent<ontology::Material*, ontology::Shader*>(this, new_shader_pointer, this->parent->material_pointer_vector, this->parent->free_materialID_queue, &this->parent->number_of_materials);
     }
 
     void Material::set_name(const std::string& name)
@@ -116,6 +116,6 @@ namespace ontology
     void Material::set_terrain_species_pointer(ontology::Species* const terrain_species_pointer)
     {
         this->terrain_species_pointer = terrain_species_pointer;
-        this->parent_pointer->set_terrain_species_pointer(this->terrain_species_pointer);
+        this->parent->set_terrain_species_pointer(this->terrain_species_pointer);
     }
 }

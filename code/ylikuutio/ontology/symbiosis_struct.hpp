@@ -12,11 +12,11 @@ namespace ontology
 typedef struct SymbiosisStruct
 {
     SymbiosisStruct()
-        : parent_pointer(nullptr)
+        : parent(nullptr)
     {
         // constructor.
     }
-    ontology::Shader* parent_pointer; // pointer to the `Scene` object.
+    ontology::Shader* parent; // pointer to the `Scene` object.
 
     std::string model_file_format;    // type of the symbiosis model file.
     std::string model_filename;       // filename of the symbiosis model file.

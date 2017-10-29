@@ -50,7 +50,7 @@ namespace ontology
         public:
             // constructor.
             Object(const ObjectStruct object_struct)
-                : Entity(object_struct.universe_pointer)
+                : Entity(object_struct.universe)
             {
                 // constructor.
                 this->coordinate_vector     = object_struct.coordinate_vector;
@@ -71,15 +71,15 @@ namespace ontology
 
                 if (this->is_character)
                 {
-                    this->glyph_parent_pointer   = object_struct.glyph_parent_pointer;
-                    this->text3D_parent_pointer  = object_struct.text3D_parent_pointer;
-                    this->species_parent_pointer = nullptr;
+                    this->glyph_parent   = object_struct.glyph_parent;
+                    this->text3D_parent  = object_struct.text3D_parent;
+                    this->species_parent = nullptr;
                 }
                 else
                 {
-                    this->species_parent_pointer = object_struct.species_parent_pointer;
-                    this->glyph_parent_pointer   = nullptr;
-                    this->text3D_parent_pointer  = nullptr;
+                    this->species_parent = object_struct.species_parent;
+                    this->glyph_parent   = nullptr;
+                    this->text3D_parent  = nullptr;
                 }
 
                 // get `childID` from `Species` or `Glyph` and set pointer to this `Object`.
@@ -92,9 +92,9 @@ namespace ontology
 
             ontology::Entity* get_parent() override;
 
-            // this method sets pointer to this `Object` to nullptr, sets `parent_pointer` according to the input,
+            // this method sets pointer to this `Object` to nullptr, sets `parent` according to the input,
             // and requests a new `childID` from the new `Species` or from the new `Glyph`.
-            void bind_to_new_parent(void* const new_parent_pointer);
+            void bind_to_new_parent(void* const new_parent);
 
             void set_name(const std::string& name);
 
@@ -219,7 +219,7 @@ namespace ontology
             template<class T1>
                 friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, int32_t* number_of_children);
             template<class T1, class T2>
-                friend void hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent_pointer, std::vector<T1>& old_child_pointer_vector, std::queue<int32_t>& old_free_childID_queue, int32_t* old_number_of_children);
+                friend void hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent, std::vector<T1>& old_child_pointer_vector, std::queue<int32_t>& old_free_childID_queue, int32_t* old_number_of_children);
             template<class T1>
                 friend void render_children(std::vector<T1>& child_pointer_vector);
             template<class T1>
@@ -239,9 +239,9 @@ namespace ontology
             // act according to this game/simulation object's programming.
             void act();
 
-            ontology::Species* species_parent_pointer; // pointer to `Species`.
-            ontology::Glyph* glyph_parent_pointer;     // pointer to `Glyph`.
-            ontology::Text3D* text3D_parent_pointer;   // pointer to `Text3D`.
+            ontology::Species* species_parent; // pointer to `Species`.
+            ontology::Glyph* glyph_parent;     // pointer to `Glyph`.
+            ontology::Text3D* text3D_parent;   // pointer to `Text3D`.
             bool is_character;
             bool quaternions_in_use;
 
@@ -295,7 +295,7 @@ namespace ontology
                 object_pointer->coordinate_vector = glm::vec3(object_pointer->model_matrix[0][0], object_pointer->model_matrix[1][1], object_pointer->model_matrix[2][2]);
             }
 
-            object_pointer->MVP_matrix = object_pointer->universe_pointer->ProjectionMatrix * object_pointer->universe_pointer->ViewMatrix * object_pointer->model_matrix;
+            object_pointer->MVP_matrix = object_pointer->universe->ProjectionMatrix * object_pointer->universe->ViewMatrix * object_pointer->model_matrix;
 
             // Send our transformation to the currently bound shader,
             // in the "MVP" uniform.
@@ -313,7 +313,7 @@ namespace ontology
 
             if (object_pointer->is_character)
             {
-                ontology::Glyph* parent_glyph = object_pointer->glyph_parent_pointer;
+                ontology::Glyph* parent_glyph = object_pointer->glyph_parent;
                 vertexbuffer = parent_glyph->vertexbuffer;
                 vertexPosition_modelspaceID = parent_glyph->vertexPosition_modelspaceID;
                 uvbuffer = parent_glyph->uvbuffer;
@@ -325,7 +325,7 @@ namespace ontology
             }
             else
             {
-                ontology::Species* parent_species = object_pointer->species_parent_pointer;
+                ontology::Species* parent_species = object_pointer->species_parent;
                 vertexbuffer = parent_species->vertexbuffer;
                 vertexPosition_modelspaceID = parent_species->vertexPosition_modelspaceID;
                 uvbuffer = parent_species->uvbuffer;

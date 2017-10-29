@@ -12,11 +12,11 @@ namespace ontology
 typedef struct ShaderStruct
 {
     ShaderStruct()
-        : parent_pointer(nullptr)
+        : parent(nullptr)
     {
         // constructor.
     }
-    ontology::Scene* parent_pointer; // pointer to the scene (draw list).
+    ontology::Scene* parent; // pointer to the scene (draw list).
     std::string vertex_shader;       // filename of vertex shader.
     std::string fragment_shader;     // filename of fragment shader.
 } ShaderStruct;

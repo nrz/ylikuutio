@@ -1,4 +1,4 @@
-#include "fbx_loader.hpp"
+#include "fbx_species_loader.hpp"
 #include "code/ylikuutio/file/file_loader.hpp"
 #include <ofbx.h>
 

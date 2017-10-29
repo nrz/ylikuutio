@@ -70,10 +70,10 @@ namespace ontology
     Universe::~Universe()
     {
         // destructor.
-        std::cout << "This world will be destroyed.\n";
+        std::cout << "This universe will be destroyed.\n";
 
-        // destroy all scenes of this world.
-        std::cout << "All scenes of this world will be destroyed.\n";
+        // destroy all scenes of this universe.
+        std::cout << "All scenes of this universe will be destroyed.\n";
         hierarchy::delete_children<ontology::Scene*>(this->scene_pointer_vector, &this->number_of_scenes);
 
         std::cout << "The setting master of this universe will be destroyed.\n";
@@ -82,15 +82,34 @@ namespace ontology
 
     void Universe::render()
     {
-        this->prerender();
-
-        if (this->compute_matrices_from_inputs())
+        if (this->active_scene != nullptr)
         {
-            // render this `Universe` by calling `render()` function of the active `Scene`.
-            this->active_scene->render();
-        }
+            this->prerender();
 
-        this->postrender();
+            if (this->compute_matrices_from_inputs())
+            {
+                // render this `Universe` by calling `render()` function of the active `Scene`.
+                this->active_scene->render();
+            }
+
+            this->postrender();
+        }
+    }
+
+    void Universe::set_active_scene(ontology::Scene* scene)
+    {
+        this->active_scene = scene;
+
+        if (this->active_scene != nullptr)
+        {
+            this->turbo_factor = this->active_scene->turbo_factor;
+            this->twin_turbo_factor = this->active_scene->twin_turbo_factor;
+        }
+    }
+
+    ontology::Scene* Universe::get_active_scene()
+    {
+        return this->active_scene;
     }
 
     ontology::Entity* Universe::get_parent()
@@ -107,11 +126,6 @@ namespace ontology
     int32_t Universe::get_number_of_descendants()
     {
         return -1;
-    }
-
-    void Universe::set_active_scene(ontology::Scene* scene)
-    {
-        this->active_scene = scene;
     }
 
     void Universe::set_window(GLFWwindow* window)
@@ -256,6 +270,51 @@ namespace ontology
             }
 
             delete entity;
+        }
+        return nullptr;
+    }
+
+    std::shared_ptr<datatypes::AnyValue> Universe::activate_scene(
+            console::Console* const console,
+            ontology::Universe* const universe,
+            std::vector<std::string>& command_parameters)
+    {
+        if (console == nullptr || universe == nullptr)
+        {
+            return nullptr;
+        }
+
+        config::SettingMaster* setting_master = universe->setting_master_pointer;
+
+        if (setting_master == nullptr)
+        {
+            return nullptr;
+        }
+
+        if (command_parameters.size() == 0)
+        {
+            // No command parameters.
+            // Print variable names.
+            console->print_text(setting_master->help());
+        }
+        else if (command_parameters.size() == 1)
+        {
+            std::string name = command_parameters[0];
+
+            if (universe->entity_map.count(name) == 0)
+            {
+                return nullptr;
+            }
+
+            ontology::Entity* entity = universe->entity_map[name];
+            ontology::Scene* scene = dynamic_cast<ontology::Scene*>(entity);
+
+            if (scene == nullptr)
+            {
+                return nullptr;
+            }
+
+            universe->set_active_scene(scene);
         }
         return nullptr;
     }

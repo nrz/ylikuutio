@@ -330,8 +330,8 @@ add_library(ylikuutio STATIC
     code/ylikuutio/loaders/bmp_heightmap_loader.hpp
     code/ylikuutio/loaders/bmp_loader.cpp
     code/ylikuutio/loaders/bmp_loader.hpp
-    code/ylikuutio/loaders/fbx_loader.cpp
-    code/ylikuutio/loaders/fbx_loader.hpp
+    code/ylikuutio/loaders/fbx_species_loader.cpp
+    code/ylikuutio/loaders/fbx_species_loader.hpp
     code/ylikuutio/loaders/font_loader.cpp
     code/ylikuutio/loaders/font_loader.hpp
     code/ylikuutio/loaders/las_loader.cpp
@@ -387,6 +387,12 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/species.hpp
     code/ylikuutio/ontology/species_or_glyph.hpp
     code/ylikuutio/ontology/species_struct.hpp
+    code/ylikuutio/ontology/symbiont_material.cpp
+    code/ylikuutio/ontology/symbiont_material.hpp
+    code/ylikuutio/ontology/symbiont_material_struct.hpp
+    code/ylikuutio/ontology/symbiont_species.cpp
+    code/ylikuutio/ontology/symbiont_species.hpp
+    code/ylikuutio/ontology/symbiont_species_struct.hpp
     code/ylikuutio/ontology/symbiosis.cpp
     code/ylikuutio/ontology/symbiosis.hpp
     code/ylikuutio/ontology/symbiosis_struct.hpp
@@ -514,8 +520,8 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/linear_algebra/matrix_functions.hpp
         code/ylikuutio/linear_algebra/tensor3.cpp
         code/ylikuutio/linear_algebra/tensor3.hpp
-        code/ylikuutio/loaders/fbx_loader.cpp
-        code/ylikuutio/loaders/fbx_loader.hpp
+        code/ylikuutio/loaders/fbx_species_loader.cpp
+        code/ylikuutio/loaders/fbx_species_loader.hpp
         code/ylikuutio/loaders/font_loader.cpp
         code/ylikuutio/loaders/font_loader.hpp
         code/ylikuutio/ontology/glyph_struct.hpp

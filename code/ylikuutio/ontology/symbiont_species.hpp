@@ -1,11 +1,12 @@
-#ifndef __SPECIES_HPP_INCLUDED
-#define __SPECIES_HPP_INCLUDED
+#ifndef __SYMBIONT_SPECIES_HPP_INCLUDED
+#define __SYMBIONT_SPECIES_HPP_INCLUDED
 
+#include "entity.hpp"
+#include "shader.hpp"
 #include "species_or_glyph.hpp"
 #include "model.hpp"
-#include "material.hpp"
-#include "ground_level.hpp"
-#include "species_struct.hpp"
+#include "symbiont_material.hpp"
+#include "symbiont_species_struct.hpp"
 #include "render_templates.hpp"
 #include "entity_templates.hpp"
 #include "code/ylikuutio/loaders/species_loader.hpp"
@@ -38,68 +39,35 @@
 namespace ontology
 {
     class Universe;
-    class Material;
 
-    class Species: public ontology::Model
+    class SymbiontSpecies: public ontology::Model
     {
         public:
             // constructor.
-            Species(const SpeciesStruct& species_struct)
-                : Model(species_struct.parent->universe)
+            SymbiontSpecies(const SymbiontSpeciesStruct& symbiont_species_struct)
+                : Model(symbiont_species_struct.universe)
             {
                 // constructor.
-                this->is_world          = species_struct.is_world;
-                this->world_radius      = species_struct.world_radius;
-                this->divisor           = species_struct.divisor;
-                this->model_file_format = species_struct.model_file_format;
-                this->model_filename    = species_struct.model_filename;
-                this->color_channel     = species_struct.color_channel;
-                this->light_position    = species_struct.light_position;
-                this->latitude          = species_struct.latitude;
-                this->longitude         = species_struct.longitude;
-                this->parent            = species_struct.parent;
-                this->universe          = this->parent->universe;
-                this->x_step            = species_struct.x_step;
-                this->z_step            = species_struct.z_step;
-                this->triangulation_type = species_struct.triangulation_type;
+                this->light_position = symbiont_species_struct.light_position;
+                this->parent   = symbiont_species_struct.parent;
+                this->universe = symbiont_species_struct.universe;
 
-                this->char_model_file_format = this->model_file_format.c_str();
-                this->char_model_filename    = this->model_filename.c_str();
-
-                // get `childID` from `Material` and set pointer to this `Species`.
+                // get `childID` from `Material` and set pointer to this `SymbiontSpecies`.
                 this->bind_to_parent();
 
                 // Get a handle for our buffers.
-                this->vertexPosition_modelspaceID = glGetAttribLocation(this->parent->parent->programID, "vertexPosition_modelspace");
-                this->vertexUVID = glGetAttribLocation(this->parent->parent->programID, "vertexUV");
-                this->vertexNormal_modelspaceID = glGetAttribLocation(this->parent->parent->programID, "vertexNormal_modelspace");
+                ontology::Shader* shader = symbiont_species_struct.shader;
+                this->vertexPosition_modelspaceID = glGetAttribLocation(shader->programID, "vertexPosition_modelspace");
+                this->vertexUVID = glGetAttribLocation(shader->programID, "vertexUV");
+                this->vertexNormal_modelspaceID = glGetAttribLocation(shader->programID, "vertexNormal_modelspace");
 
                 // Get a handle for our "LightPosition" uniform.
-                glUseProgram(this->parent->parent->programID);
-                this->lightID = glGetUniformLocation(this->parent->parent->programID, "LightPosition_worldspace");
-
-                if (this->is_world)
-                {
-                    // set world species pointer so that it points to this species.
-                    // currently there can be only one world species (used in collision detection).
-                    this->parent->parent->parent->parent->set_terrain_species_pointer(this);
-                }
-
-                // water level.
-                GLuint water_level_uniform_location = glGetUniformLocation(this->parent->parent->programID, "water_level");
-                glUniform1f(water_level_uniform_location, species_struct.scene->water_level);
+                glUseProgram(shader->programID);
+                this->lightID = glGetUniformLocation(shader->programID, "LightPosition_worldspace");
 
                 SpeciesLoaderStruct species_loader_struct;
                 species_loader_struct.model_filename = this->model_filename;
                 species_loader_struct.model_file_format = this->model_file_format;
-                species_loader_struct.latitude = this->latitude;
-                species_loader_struct.longitude = this->longitude;
-                species_loader_struct.world_radius = this->world_radius;
-                species_loader_struct.divisor = this->divisor;
-                species_loader_struct.color_channel = this->color_channel;
-                species_loader_struct.x_step = this->x_step;
-                species_loader_struct.z_step = this->z_step;
-                species_loader_struct.triangulation_type = this->triangulation_type;
 
                 this->image_width = -1;
                 this->image_height = -1;
@@ -123,17 +91,15 @@ namespace ontology
                 // TODO: Compute the graph of this object type to enable object vertex modification!
 
                 this->child_vector_pointers_vector.push_back(&this->object_pointer_vector);
-                this->type = "ontology::Species*";
+                this->type = "ontology::SymbiontSpecies*";
             }
 
             // destructor.
-            virtual ~Species();
+            virtual ~SymbiontSpecies();
 
             ontology::Entity* get_parent() override;
 
-            // this method sets pointer to this `Species` to nullptr, sets `parent` according to the input, and requests a new `childID` from the new `Material`.
-            void bind_to_new_parent(ontology::Material* const new_material_pointer);
-
+            // this method sets pointer to this `SymbiontSpecies` to nullptr, sets `parent` according to the input, and requests a new `childID` from the new `Material`.
             // this method sets an `Object` pointer.
             void set_object_pointer(const int32_t childID, ontology::Object* const child_pointer);
 
@@ -143,7 +109,6 @@ namespace ontology
             float world_radius;                      // radius of sea level in kilometers. used only for worlds.
             float divisor;                           // value by which SRTM values are divided to convert them to kilometers.
 
-            std::string color_channel;               // color channel in use: `"red"`, `"green"`, `"blue"`, `"mean"` or `"all"`.
             glm::vec3 light_position;                // light position.
 
             friend class Object;
@@ -151,23 +116,20 @@ namespace ontology
                 friend void render_children(std::vector<T1>& child_pointer_vector);
             template<class T1>
                 friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, int32_t* number_of_children);
-            template<class T1, class T2>
-                friend void hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent, std::vector<T1>& old_child_pointer_vector, std::queue<int32_t>& old_free_childID_queue, int32_t* old_number_of_children);
             template<class T1>
                 friend void render_species_or_glyph(T1 species_or_glyph_pointer);
             template<class T1>
                 friend void render_this_object(ontology::Object* object_pointer, ontology::Shader* shader_pointer);
             template<class T1>
                 friend void set_name(std::string name, T1 entity);
-            friend GLfloat get_ground_level(ontology::Species* terrain_species, glm::vec3* position);
 
         private:
             void bind_to_parent();
 
-            // this method renders all `Object`s of this `Species`.
+            // this method renders all `Object`s of this `SymbiontSpecies`.
             void render();
 
-            ontology::Material* parent;   // pointer to `Material`.
+            ontology::SymbiontMaterial* parent; // pointer to `SymbiontMaterial`.
 
             std::string model_file_format;        // type of the model file, eg. `"bmp"`.
             std::string model_filename;           // filename of the model file.

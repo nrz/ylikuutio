@@ -37,14 +37,14 @@ namespace ontology
 typedef struct ConsoleStruct
 {
     ConsoleStruct()
-        : current_keypress_callback_engine_vector_pointer_pointer(nullptr), current_keyrelease_callback_engine_vector_pointer_pointer(nullptr), command_callback_map_pointer(nullptr), universe_pointer(nullptr), font2D_pointer(nullptr)
+        : current_keypress_callback_engine_vector_pointer_pointer(nullptr), current_keyrelease_callback_engine_vector_pointer_pointer(nullptr), command_callback_map_pointer(nullptr), universe(nullptr), font2D_pointer(nullptr)
     {
         // constructor.
     }
     std::vector<KeyAndCallbackStruct>** current_keypress_callback_engine_vector_pointer_pointer;
     std::vector<KeyAndCallbackStruct>** current_keyrelease_callback_engine_vector_pointer_pointer;
     std::unordered_map<std::string, ConsoleCommandCallback>* command_callback_map_pointer;
-    ontology::Universe* universe_pointer;
+    ontology::Universe* universe;
     ontology::Font2D* font2D_pointer;
 } ConsoleStruct;
 
