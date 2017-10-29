@@ -63,6 +63,9 @@ namespace ontology
             // Make this `Scene` no more the active `Scene`.
             this->universe->active_scene = nullptr;
         }
+
+        // set pointer to this scene to nullptr.
+        this->parent->set_scene_pointer(this->childID, nullptr);
     }
 
     void Scene::render()
