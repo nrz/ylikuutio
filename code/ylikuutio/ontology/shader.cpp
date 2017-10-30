@@ -98,9 +98,9 @@ namespace ontology
         ontology::set_name(name, this);
     }
 
-    void Shader::set_terrain_species_pointer(ontology::Species* const terrain_species_pointer)
+    void Shader::set_terrain_species(ontology::Species* const terrain_species)
     {
-        this->terrain_species_pointer = terrain_species_pointer;
-        this->parent->parent->set_terrain_species_pointer(this->terrain_species_pointer);
+        this->terrain_species = terrain_species;
+        this->parent->parent->set_terrain_species(this->terrain_species);
     }
 }

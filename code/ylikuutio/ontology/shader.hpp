@@ -64,7 +64,7 @@ namespace ontology
                 this->parent       = shader_struct.parent;
                 this->universe     = this->parent->universe;
 
-                this->terrain_species_pointer = nullptr;
+                this->terrain_species = nullptr;
 
                 this->number_of_materials = 0;
                 this->number_of_symbioses = 0;
@@ -129,7 +129,7 @@ namespace ontology
             void set_symbiosis_pointer(const int32_t childID, ontology::Symbiosis* const child_pointer);
 
             // this method sets a scene species pointer.
-            void set_terrain_species_pointer(ontology::Species* terrain_species_pointer);
+            void set_terrain_species(ontology::Species* terrain_species);
 
             ontology::Scene* parent;      // pointer to `Scene`.
 
@@ -139,7 +139,7 @@ namespace ontology
             GLuint ViewMatrixID;
             GLuint ModelMatrixID;
 
-            ontology::Species* terrain_species_pointer; // pointer to scene species (used in collision detection).
+            ontology::Species* terrain_species;   // pointer to scene species (used in collision detection).
 
             std::string vertex_shader;            // filename of vertex shader.
             std::string fragment_shader;          // filename of fragment shader.

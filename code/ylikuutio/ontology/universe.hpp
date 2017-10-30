@@ -198,7 +198,7 @@ namespace ontology
 
                 // constructor.
                 this->world_radius = NAN; // world radius is NAN as long it doesn't get `set` by `SettingMaster`.
-                this->terrain_species_pointer = nullptr;
+                this->terrain_species = nullptr;
                 this->active_scene = nullptr;
                 this->setting_master_pointer = nullptr;
                 this->console_pointer = nullptr;
@@ -404,11 +404,11 @@ namespace ontology
             void set_scene_pointer(int32_t childID, ontology::Scene* child_pointer);
 
             // this method sets a terrain `Species` pointer.
-            void set_terrain_species_pointer(ontology::Species* terrain_species_pointer);
+            void set_terrain_species(ontology::Species* terrain_species);
 
             bool compute_matrices_from_inputs();
 
-            void* terrain_species_pointer;              // pointer to terrain `Species` (used in collision detection).
+            void* terrain_species;               // pointer to terrain `Species` (used in collision detection).
 
             float world_radius;
 
