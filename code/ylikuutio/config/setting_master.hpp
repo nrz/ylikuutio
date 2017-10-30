@@ -78,8 +78,6 @@ namespace config
 
             static std::shared_ptr<datatypes::AnyValue> activate_is_flight_mode_in_use(ontology::Universe* const universe, config::SettingMaster* const setting_master);
 
-            static std::shared_ptr<datatypes::AnyValue> activate_testing_spherical_world_in_use(ontology::Universe* const universe, config::SettingMaster* const setting_master);
-
             static std::shared_ptr<datatypes::AnyValue> read_x(ontology::Universe* const universe, config::SettingMaster* const setting_master);
             static std::shared_ptr<datatypes::AnyValue> read_y(ontology::Universe* const universe, config::SettingMaster* const setting_master);
             static std::shared_ptr<datatypes::AnyValue> read_z(ontology::Universe* const universe, config::SettingMaster* const setting_master);
@@ -95,7 +93,6 @@ namespace config
             static std::shared_ptr<datatypes::AnyValue> read_vertical_angle(ontology::Universe* const universe, config::SettingMaster* const setting_master);
 
             static std::shared_ptr<datatypes::AnyValue> read_is_flight_mode_in_use(ontology::Universe* const universe, config::SettingMaster* const setting_master);
-            static std::shared_ptr<datatypes::AnyValue> read_testing_spherical_world_in_use(ontology::Universe* const universe, config::SettingMaster* const setting_master);
 
             // Public callbacks end here.
 
