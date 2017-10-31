@@ -380,6 +380,10 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/object.hpp
     code/ylikuutio/ontology/object_struct.hpp
     code/ylikuutio/ontology/render_templates.hpp
+    code/ylikuutio/ontology/rail_vehicle.cpp
+    code/ylikuutio/ontology/rail_vehicle.hpp
+    code/ylikuutio/ontology/road_vehicle.cpp
+    code/ylikuutio/ontology/road_vehicle.hpp
     code/ylikuutio/ontology/scene.cpp
     code/ylikuutio/ontology/scene.hpp
     code/ylikuutio/ontology/shader.cpp
@@ -406,6 +410,8 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/vector_font.cpp
     code/ylikuutio/ontology/vector_font.hpp
     code/ylikuutio/ontology/vector_font_struct.hpp
+    code/ylikuutio/ontology/vehicle.cpp
+    code/ylikuutio/ontology/vehicle.hpp
     code/ylikuutio/ontology/vboindexer.cpp
     code/ylikuutio/ontology/vboindexer.hpp
 
