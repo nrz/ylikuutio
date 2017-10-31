@@ -1,7 +1,7 @@
 #ifndef __TEXT3D_HPP_INCLUDED
 #define __TEXT3D_HPP_INCLUDED
 
-#include "entity.hpp"
+#include "movable.hpp"
 #include "glyph_object_creation.hpp"
 #include "vector_font.hpp"
 #include "text3D_struct.hpp"
@@ -32,9 +32,10 @@
 
 namespace ontology
 {
+    class Entity;
     class Object;
 
-    class Text3D: public ontology::Entity
+    class Text3D: public ontology::Movable
     {
         public:
             // constructor.
@@ -42,7 +43,7 @@ namespace ontology
             // and binds each to its corresponding `Glyph` for rendering hierarchy,
             // and also binds each to this `Text3D` for ontological hierarchy.
             Text3D(const Text3DStruct& text3D_struct)
-                : Entity(text3D_struct.parent->universe)
+                : ontology::Movable(text3D_struct.parent->universe, text3D_struct.cartesian_coordinates)
             {
                 // constructor.
                 this->rotate_angle = NAN;
@@ -100,7 +101,6 @@ namespace ontology
 
             glm::vec3 original_scale_vector;      // original scale vector.
             GLfloat rotate_angle;                 // rotate angle.
-            glm::vec3 coordinate_vector;          // coordinate vector.
             glm::vec3 rotate_vector;              // rotate vector.
             glm::vec3 translate_vector;           // translate vector.
 

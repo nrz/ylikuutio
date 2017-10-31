@@ -11,6 +11,12 @@ typedef struct SphericalCoordinatesStruct
     {
         // constructor.
     }
+
+    SphericalCoordinatesStruct(float rho, float theta, float phi)
+        : rho(rho), theta(theta), phi(phi)
+    {
+        // constructor.
+    }
     double rho;
     double theta;
     double phi;
