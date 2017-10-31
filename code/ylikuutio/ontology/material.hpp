@@ -51,7 +51,7 @@ namespace ontology
                 this->parent = material_struct.parent;
                 this->universe = this->parent->universe;
 
-                this->terrain_species_pointer = nullptr;
+                this->terrain_species = nullptr;
 
                 this->texture_file_format = material_struct.texture_file_format;
                 this->texture_filename    = material_struct.texture_filename;
@@ -134,11 +134,11 @@ namespace ontology
             void set_chunk_master_pointer(const int32_t childID, space_partition::ChunkMaster* const child_pointer);
 
             // this method sets a terrain `Species` pointer.
-            void set_terrain_species_pointer(ontology::Species* const terrain_species_pointer);
+            void set_terrain_species(ontology::Species* const terrain_species);
 
             ontology::Shader* parent;      // pointer to `Shader`.
 
-            ontology::Species* terrain_species_pointer; // pointer to terrain `Species` (used in collision detection).
+            ontology::Species* terrain_species;    // pointer to terrain `Species` (used in collision detection).
 
             GLuint texture;                        // Texture of this `Material`, returned by `load_BMP_texture` or `load_DDS_texture` (used for `glGenTextures` etc.).
             GLuint openGL_textureID;               // texture ID, returned by `glGetUniformLocation(programID, "myTextureSampler");`.

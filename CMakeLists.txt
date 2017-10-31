@@ -374,6 +374,8 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/material_struct.hpp
     code/ylikuutio/ontology/model.cpp
     code/ylikuutio/ontology/model.hpp
+    code/ylikuutio/ontology/movable.cpp
+    code/ylikuutio/ontology/movable.hpp
     code/ylikuutio/ontology/object.cpp
     code/ylikuutio/ontology/object.hpp
     code/ylikuutio/ontology/object_struct.hpp

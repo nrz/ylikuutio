@@ -1,7 +1,7 @@
 #ifndef __OBJECT_HPP_INCLUDED
 #define __OBJECT_HPP_INCLUDED
 
-#include "entity.hpp"
+#include "movable.hpp"
 #include "shader.hpp"
 #include "species.hpp"
 #include "text3D.hpp"
@@ -45,15 +45,14 @@ namespace ontology
     class Species;
     class Glyph;
 
-    class Object: public ontology::Entity
+    class Object: public ontology::Movable
     {
         public:
             // constructor.
             Object(const ObjectStruct object_struct)
-                : Entity(object_struct.universe)
+                : Movable(object_struct.universe, object_struct.cartesian_coordinates)
             {
                 // constructor.
-                this->coordinate_vector     = object_struct.coordinate_vector;
                 this->original_scale_vector = object_struct.original_scale_vector;
                 this->rotate_angle          = object_struct.rotate_angle;
                 this->rotate_vector         = object_struct.rotate_vector;
@@ -109,29 +108,6 @@ namespace ontology
             // TODO: implement public AI callbacks!
 
             // Command callbacks.
-
-            // Set target towards which to move.
-            static void set_dest(ontology::Object* const object, const float x, const float y, const float z);
-
-            // Allied-object-centric-information callbacks.
-
-            // Get x coordinate of `object`.
-            static float get_x(const ontology::Object* const object);
-
-            // Get y coordinate of `object`.
-            static float get_y(const ontology::Object* const object);
-
-            // Get z destination coordinate of `object`.
-            static float get_z(const ontology::Object* const object);
-
-            // Get x destination coordinate of `object`.
-            static float get_dest_x(const ontology::Object* const object);
-
-            // Get y destination coordinate of `object`.
-            static float get_dest_y(const ontology::Object* const object);
-
-            // Get z coordinate of `object`.
-            static float get_dest_z(const ontology::Object* const object);
 
             // Allied-object-centric path and map information callbacks.
 
@@ -248,13 +224,10 @@ namespace ontology
             bool has_entered;
             bool should_ylikuutio_render_this_object;
 
-            glm::vec3 coordinate_vector;           // coordinate vector.
             glm::vec3 original_scale_vector;       // original scale vector.
             GLfloat rotate_angle;                  // rotate angle.
             glm::vec3 rotate_vector;               // rotate vector.
             glm::vec3 translate_vector;            // translate vector.
-
-            glm::vec3 dest_vector;                 // destination vector.
 
             // The rest fields are created in the constructor.
             glm::mat4 model_matrix;                // model matrix.
@@ -266,11 +239,11 @@ namespace ontology
         {
             if (!object_pointer->has_entered)
             {
-                object_pointer->model_matrix = glm::translate(glm::mat4(1.0f), object_pointer->coordinate_vector);
+                object_pointer->model_matrix = glm::translate(glm::mat4(1.0f), *object_pointer->cartesian_coordinates);
                 object_pointer->model_matrix = glm::scale(object_pointer->model_matrix, object_pointer->original_scale_vector);
 
                 // store the new coordinates to be used in the next update.
-                object_pointer->coordinate_vector = glm::vec3(object_pointer->model_matrix[0][0], object_pointer->model_matrix[1][1], object_pointer->model_matrix[2][2]);
+                *object_pointer->cartesian_coordinates = glm::vec3(object_pointer->model_matrix[0][0], object_pointer->model_matrix[1][1], object_pointer->model_matrix[2][2]);
                 object_pointer->has_entered = true;
             }
             else
@@ -292,7 +265,7 @@ namespace ontology
                 }
 
                 object_pointer->model_matrix = glm::translate(object_pointer->model_matrix, object_pointer->translate_vector);
-                object_pointer->coordinate_vector = glm::vec3(object_pointer->model_matrix[0][0], object_pointer->model_matrix[1][1], object_pointer->model_matrix[2][2]);
+                *object_pointer->cartesian_coordinates = glm::vec3(object_pointer->model_matrix[0][0], object_pointer->model_matrix[1][1], object_pointer->model_matrix[2][2]);
             }
 
             object_pointer->MVP_matrix = object_pointer->universe->ProjectionMatrix * object_pointer->universe->ViewMatrix * object_pointer->model_matrix;

@@ -31,7 +31,7 @@ namespace ontology
             object_struct.original_scale_vector = text3D->original_scale_vector;
             object_struct.rotate_angle = text3D->rotate_angle;
             object_struct.is_character = true;
-            object_struct.coordinate_vector = text3D->coordinate_vector; // TODO: adjust this as needed.
+            object_struct.cartesian_coordinates = text3D->cartesian_coordinates; // TODO: adjust this as needed.
             object_struct.rotate_vector = text3D->rotate_vector;
             ontology::Object* object = new ontology::Object(object_struct);
         }

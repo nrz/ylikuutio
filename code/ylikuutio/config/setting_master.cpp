@@ -772,36 +772,6 @@ namespace config
         return nullptr;
     }
 
-    std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_testing_spherical_world_in_use(ontology::Universe* const universe, config::SettingMaster* const setting_master)
-    {
-        if (universe == nullptr)
-        {
-            return nullptr;
-        }
-
-        SettingMaster* setting_master_pointer = universe->setting_master_pointer;
-
-        if (setting_master_pointer == nullptr)
-        {
-            return nullptr;
-        }
-
-        if (setting_master_pointer->setting_pointer_map.count("testing_spherical_world_in_use") != 1)
-        {
-            return nullptr;
-        }
-
-        std::shared_ptr<datatypes::AnyValue> testing_spherical_world_in_use_any_value = std::make_shared<datatypes::AnyValue>(*setting_master_pointer->setting_pointer_map["testing_spherical_world_in_use"]->setting_value);
-
-        if (testing_spherical_world_in_use_any_value == nullptr || testing_spherical_world_in_use_any_value->type != datatypes::BOOL)
-        {
-            return nullptr;
-        }
-
-        universe->testing_spherical_world_in_use = testing_spherical_world_in_use_any_value->bool_value;
-        return nullptr;
-    }
-
     std::shared_ptr<datatypes::AnyValue> SettingMaster::read_x(ontology::Universe* const universe, config::SettingMaster* const setting_master)
     {
         if (universe == nullptr || universe->cartesian_coordinates == nullptr)
@@ -910,15 +880,5 @@ namespace config
         }
 
         return std::make_shared<datatypes::AnyValue>(universe->is_flight_mode_in_use);
-    }
-
-    std::shared_ptr<datatypes::AnyValue> SettingMaster::read_testing_spherical_world_in_use(ontology::Universe* const universe, config::SettingMaster* const setting_master)
-    {
-        if (universe == nullptr)
-        {
-            return nullptr;
-        }
-
-        return std::make_shared<datatypes::AnyValue>(universe->testing_spherical_world_in_use);
     }
 }

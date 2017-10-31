@@ -391,9 +391,9 @@ namespace ontology
         hierarchy::set_child_pointer(childID, child_pointer, this->scene_pointer_vector, this->free_sceneID_queue, &this->number_of_scenes);
     }
 
-    void Universe::set_terrain_species_pointer(ontology::Species* terrain_species_pointer)
+    void Universe::set_terrain_species(ontology::Species* terrain_species)
     {
-        this->terrain_species_pointer = terrain_species_pointer;
+        this->terrain_species = terrain_species;
     }
 
     bool Universe::compute_matrices_from_inputs()
@@ -414,9 +414,9 @@ namespace ontology
         // adjust position according to the ground.
         if (!this->is_flight_mode_in_use)
         {
-            if (this->terrain_species_pointer != nullptr)
+            if (this->terrain_species != nullptr)
             {
-                GLfloat ground_y = ontology::get_floor_level(static_cast<ontology::Species*>(this->terrain_species_pointer), this->cartesian_coordinates);
+                GLfloat ground_y = ontology::get_floor_level(static_cast<ontology::Species*>(this->terrain_species), this->cartesian_coordinates);
 
                 if (!std::isnan(ground_y) && this->cartesian_coordinates->y < ground_y)
                 {

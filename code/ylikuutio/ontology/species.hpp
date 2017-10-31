@@ -82,7 +82,7 @@ namespace ontology
                 {
                     // set world species pointer so that it points to this species.
                     // currently there can be only one world species (used in collision detection).
-                    this->parent->parent->parent->parent->set_terrain_species_pointer(this);
+                    this->parent->parent->parent->parent->set_terrain_species(this);
                 }
 
                 // water level.

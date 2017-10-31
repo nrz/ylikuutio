@@ -7,6 +7,9 @@
 #include <glm/glm.hpp> // glm
 #endif
 
+// Include standard headers
+#include <memory> // std::make_shared, std::shared_ptr
+
 namespace ontology
 {
     class Species;
@@ -17,7 +20,7 @@ namespace ontology
 typedef struct ObjectStruct
 {
     ObjectStruct()
-        : universe(nullptr), species_parent(nullptr), glyph_parent(nullptr), text3D_parent(nullptr), original_scale_vector(glm::vec3(1.0f, 1.0f, 1.0f)), rotate_angle(0.0f), is_character(false), quaternions_in_use(false), coordinate_vector(glm::vec3(0.0f, 0.0f, 0.0f)), rotate_vector(glm::vec3(0.0f, 0.0f, 0.0f)), translate_vector(glm::vec3(0.0f, 0.0f, 0.0f))
+        : universe(nullptr), species_parent(nullptr), glyph_parent(nullptr), text3D_parent(nullptr), original_scale_vector(glm::vec3(1.0f, 1.0f, 1.0f)), rotate_angle(0.0f), is_character(false), quaternions_in_use(false), cartesian_coordinates(nullptr), rotate_vector(glm::vec3(0.0f, 0.0f, 0.0f)), translate_vector(glm::vec3(0.0f, 0.0f, 0.0f))
     {
         // constructor.
     }
@@ -29,7 +32,7 @@ typedef struct ObjectStruct
     float rotate_angle;              // rotate angle.
     bool is_character;               // The parent of a character object is a Glyph. The parent of a regular object is a Species.
     bool quaternions_in_use;
-    glm::vec3 coordinate_vector;     // coordinate vector.
+    std::shared_ptr<glm::vec3> cartesian_coordinates; // coordinate vector.
     glm::vec3 rotate_vector;         // rotate vector.
     glm::vec3 translate_vector;      // translate vector.
 } ObjectStruct;
