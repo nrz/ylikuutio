@@ -263,6 +263,7 @@ A: I like Lisp-family languages and TinyScheme fulfils my
 * sky dome
 * railways
 * roads
+* trains, trams, and road vehicles
 * more realistic static water
 * flowing water
 * snow and ice
