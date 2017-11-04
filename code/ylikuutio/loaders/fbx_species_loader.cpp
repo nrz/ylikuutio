@@ -42,6 +42,8 @@ namespace loaders
         // OpenFBX wants `u8` == `unsigned char`.
         const u8* data = reinterpret_cast<const u8*>(data_vector.data());
         int size = data_vector.size();
+        std::cout << "loaded FBX data vector size: " << size << "\n";
+
         ofbx::IScene* ofbx_iscene = ofbx::load(data, size);
 
         if (ofbx_iscene == nullptr)
