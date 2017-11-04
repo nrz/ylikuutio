@@ -38,7 +38,7 @@ namespace ontology
     {
         public:
             // constructor.
-            SymbiontMaterial(const SymbiontMaterialStruct symbiont_material_struct)
+            SymbiontMaterial(const SymbiontMaterialStruct& symbiont_material_struct)
                 : Entity(symbiont_material_struct.universe)
             {
                 // constructor.

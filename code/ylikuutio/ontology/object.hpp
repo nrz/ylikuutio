@@ -49,7 +49,7 @@ namespace ontology
     {
         public:
             // constructor.
-            Object(const ObjectStruct object_struct)
+            Object(const ObjectStruct& object_struct)
                 : Movable(object_struct.universe, object_struct.cartesian_coordinates)
             {
                 // constructor.

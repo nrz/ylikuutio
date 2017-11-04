@@ -51,7 +51,7 @@ namespace ontology
     {
         public:
             // constructor.
-            Shader(const ShaderStruct shader_struct)
+            Shader(const ShaderStruct& shader_struct)
                 : Entity(shader_struct.parent->universe)
             {
                 // constructor.

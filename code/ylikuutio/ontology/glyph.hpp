@@ -38,7 +38,7 @@ namespace ontology
     {
         public:
             // constructor.
-            Glyph(const GlyphStruct glyph_struct)
+            Glyph(const GlyphStruct& glyph_struct)
                 : Model(glyph_struct.universe)
             {
                 // constructor.

@@ -44,7 +44,7 @@ namespace ontology
     {
         public:
             // constructor.
-            Material(const MaterialStruct material_struct)
+            Material(const MaterialStruct& material_struct)
                 : Entity(material_struct.parent->universe)
             {
                 // constructor.

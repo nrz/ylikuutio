@@ -18,7 +18,7 @@ namespace ontology
     {
         public:
             // constructor.
-            RailVehicle(const ObjectStruct object_struct)
+            RailVehicle(const ObjectStruct& object_struct)
                 : Vehicle(object_struct)
             {
                 // constructor.

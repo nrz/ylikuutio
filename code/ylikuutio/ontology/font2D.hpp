@@ -112,7 +112,7 @@ namespace ontology
                     const char* horizontal_alignment,
                     const char* vertical_alignment);
 
-            void printText2D(PrintingStruct printing_struct);
+            void printText2D(const PrintingStruct& printing_struct);
 
             void printText2D(
                     GLuint screen_width,

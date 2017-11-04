@@ -283,7 +283,7 @@ namespace ontology
         glDisableVertexAttribArray(vertexUVID);
     }
 
-    void Font2D::printText2D(PrintingStruct printing_struct)
+    void Font2D::printText2D(const PrintingStruct& printing_struct)
     {
         if (printing_struct.text.empty())
         {

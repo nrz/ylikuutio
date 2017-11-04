@@ -32,7 +32,7 @@ namespace ontology
     {
         public:
             // constructor.
-            Symbiosis(const SymbiosisStruct symbiosis_struct)
+            Symbiosis(const SymbiosisStruct& symbiosis_struct)
                 : Entity(symbiosis_struct.parent->universe)
             {
                 // constructor.
