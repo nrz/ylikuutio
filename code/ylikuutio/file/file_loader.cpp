@@ -25,7 +25,7 @@ namespace file
 
     std::vector<uint8_t> binary_slurp(const std::string& file_path)
     {
-        std::ifstream file(file_path.c_str());
+        std::ifstream file(file_path.c_str(), std::fstream::binary);
         file.unsetf(std::ios::skipws);           // do not skip whitespace.
         file.seekg(0, std::ios::end);
         std::streampos file_size = file.tellg();

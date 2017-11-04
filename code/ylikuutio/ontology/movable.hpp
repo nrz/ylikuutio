@@ -12,6 +12,8 @@
 // Include standard headers
 #include <memory> // std::make_shared, std::shared_ptr
 
+// `Movable` is a mixin class, not intended to be instantiated.
+
 namespace ontology
 {
     class Movable: public ontology::Entity

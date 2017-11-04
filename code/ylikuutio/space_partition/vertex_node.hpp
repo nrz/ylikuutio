@@ -10,7 +10,7 @@ namespace space_partition
     {
         public:
             // constructor.
-            VertexNode(glm::vec3 coordinate_vector, NodeStruct node_struct)
+            VertexNode(glm::vec3 coordinate_vector, const NodeStruct& node_struct)
                 : graph::Node(node_struct)
             {
                 // constructor.

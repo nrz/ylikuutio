@@ -27,7 +27,7 @@
 
 namespace console
 {
-    Console::Console(ConsoleStruct console_struct)
+    Console::Console(const ConsoleStruct& console_struct)
     {
         // constructor.
         this->cursor_it = this->current_input.begin();

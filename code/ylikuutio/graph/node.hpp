@@ -16,7 +16,7 @@ namespace graph
     {
         public:
             // constructor.
-            Node(NodeStruct node_struct);
+            Node(const NodeStruct& node_struct);
 
             // destructor.
             ~Node();

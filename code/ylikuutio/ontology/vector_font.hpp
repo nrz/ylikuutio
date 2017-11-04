@@ -32,7 +32,7 @@ namespace ontology
         public:
             // constructor.
             // TODO: `VectorFont` constructor also creates each `Glyph` and binds them to the `VectorFont`.
-            VectorFont(const VectorFontStruct vector_font_struct)
+            VectorFont(const VectorFontStruct& vector_font_struct)
                 : Entity(vector_font_struct.parent->universe)
             {
                 // constructor.
