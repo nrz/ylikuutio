@@ -12,7 +12,7 @@ namespace graph
         hierarchy::bind_child_to_parent<graph::Node*>(this, this->parent->node_pointer_vector, this->parent->free_nodeID_queue, &this->parent->number_of_nodes);
     }
 
-    Node::Node(NodeStruct node_struct)
+    Node::Node(const NodeStruct& node_struct)
     {
         // constructor.
         this->childID = node_struct.nodeID;

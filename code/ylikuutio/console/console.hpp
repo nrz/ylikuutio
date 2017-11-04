@@ -56,7 +56,7 @@ namespace console
     {
         public:
             // constructor.
-            Console(ConsoleStruct console_struct);
+            Console(const ConsoleStruct& console_struct);
 
             // destructor.
             ~Console();
