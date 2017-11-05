@@ -9,29 +9,24 @@ Ylikuutio is under The GNU General Public License 3,
 or (at your option) any later version. See COPYING file.
 All my code copyright (C) 2016-2017 Antti Nuortimo.
 
-The source code from http://www.opengl-tutorial.org/ is licensed
-under [WTFPL Public Licence version 2](http://www.opengl-tutorial.org/download/).
+### Currently in use
+* The source code from http://www.opengl-tutorial.org/ is licensed under [WTFPL Public Licence version 2](http://www.opengl-tutorial.org/download/).
+* OpenGL Mathematics (GLM) is licensed under [The Happy Bunny License (Modified MIT License) and MIT License](http://glm.g-truc.net/copying.txt).
+* GLFW is licensed under [the zlib/libpng license](http://www.glfw.org/license.html).
+* The OpenGL Extension Wrangler Library (GLEW) is licensed under [the Modified BSD License, the Mesa 3-D License (MIT) and the Khronos License (MIT)](https://github.com/nigels-com/glew#copyright-and-licensing).
+* OpenFBX is licensed under under [the MIT license](https://github.com/nem0/OpenFBX/blob/master/LICENSE).
+* TinyScheme is licensed under [BSD-style license](http://tinyscheme.sourceforge.net/license.txt).
+* pugixml is licensed under [the MIT license](https://github.com/zeux/pugixml/blob/master/README.md).
 
-OpenFBX is licensed under under [the MIT license](https://github.com/nem0/OpenFBX/blob/master/LICENSE).
+### Not yet in use
+* GLFM is licensed under [the zlib license](https://github.com/brackeen/glfm/blob/master/LICENSE).
+* FastNoiseSIMD is licensed under [the MIT license](https://github.com/Auburns/FastNoiseSIMD/blob/master/LICENSE).
+* TinySpline is licensed under [the MIT license](https://github.com/msteinbeck/tinyspline/blob/master/LICENSE).
 
-Open Asset Import Library (assimp) is licensed
-under [a 3-clause BSD license](http://www.assimp.org/main_license.html).
+### Currently not in use
+* Open Asset Import Library (assimp) is licensed under [a 3-clause BSD license](http://www.assimp.org/main_license.html).
 
-TinyScheme is licensed under [BSD-style license](http://tinyscheme.sourceforge.net/license.txt).
-
-FastNoiseSIMD is licensed under [the MIT license](https://github.com/Auburns/FastNoiseSIMD/blob/master/LICENSE).
-
-The OpenGL Extension Wrangler Library (GLEW) is licensed
-under [the Modified BSD License, the Mesa 3-D License (MIT)
-and the Khronos License (MIT)](https://github.com/nigels-com/glew#copyright-and-licensing).
-
-GLFW is licensed under [the zlib/libpng license](http://www.glfw.org/license.html).
-
-OpenGL Mathematics (GLM) is licensed under [The Happy Bunny License
-(Modified MIT License) and MIT License](http://glm.g-truc.net/copying.txt).
-
-pugixml is licensed under [the MIT license](https://github.com/zeux/pugixml/blob/master/README.md).
-
+### Other resources
 Other resources are licensed under their respective licenses.
 
 Grass texture is from [Free Seamless Green Grass Textures](http://www.brusheezy.com/textures/20185-seamless-green-grass-textures).
