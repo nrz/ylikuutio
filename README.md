@@ -40,8 +40,6 @@ Pink Marble Pavers Or Tiles Background Texture is from [My Free Textures](http:/
 pavers1b2.bmp is scaled down and converted into BMP from the original `pavers1b2.jpg`.
 License conditions are available on [My Free Textures License/TOU page](http://www.myfreetextures.com/sample-page/).
 
-UV map texture is from [opengl-tutorial](http://www.opengl-tutorial.org/beginners-tutorials/tutorial-8-basic-shading/).
-
 kongtext font is made by [codeman38](http://zone38.net/), see
 res/fonts/kongtext/license.txt for the license.
 

@@ -275,25 +275,6 @@ int main(void)
 
     helsinki_eastern_downtown_grass_material->set_name("helsinki_eastern_downtown_grass_material");
 
-    // Create the material, store it in `helsinki_eastern_downtown_uvmap_material`.
-    MaterialStruct helsinki_eastern_downtown_uvmap_material_struct;
-    helsinki_eastern_downtown_uvmap_material_struct.parent = helsinki_eastern_downtown_shader;
-    helsinki_eastern_downtown_uvmap_material_struct.texture_file_format = "dds";
-    helsinki_eastern_downtown_uvmap_material_struct.texture_filename = "uvmap.DDS";
-
-    std::cout << "Creating ontology::Entity* helsinki_eastern_downtown_uvmap_material_entity ...\n";
-    ontology::Entity* helsinki_eastern_downtown_uvmap_material_entity = ontology::EntityFactory::create_Material(helsinki_eastern_downtown_uvmap_material_struct);
-    std::cout << "Creating ontology::Material* helsinki_eastern_downtown_uvmap_material ...\n";
-    ontology::Material* helsinki_eastern_downtown_uvmap_material = dynamic_cast<ontology::Material*>(helsinki_eastern_downtown_uvmap_material_entity);
-
-    if (helsinki_eastern_downtown_uvmap_material == nullptr)
-    {
-        std::cerr << "Failed to create uvmap Material.\n";
-        return -1;
-    }
-
-    helsinki_eastern_downtown_uvmap_material->set_name("helsinki_eastern_downtown_uvmap_material");
-
     // Create the material, store it in `pink_geometric_tiles_material`.
     MaterialStruct pink_geometric_tiles_material_struct;
     pink_geometric_tiles_material_struct.parent = helsinki_eastern_downtown_shader;
@@ -310,6 +291,8 @@ int main(void)
         std::cerr << "Failed to create pink geometric tiles Material.\n";
         return -1;
     }
+
+    pink_geometric_tiles_material->set_name("pink_geometric_tiles_material");
 
     // Create the species, store it in `bmp_terrain_species`.
     SpeciesStruct bmp_terrain_species_struct;
@@ -391,7 +374,7 @@ int main(void)
 
     SpeciesStruct suzanne_species_struct;
     suzanne_species_struct.scene = helsinki_eastern_downtown_scene;
-    suzanne_species_struct.parent = helsinki_eastern_downtown_uvmap_material;
+    suzanne_species_struct.parent = pink_geometric_tiles_material;
     suzanne_species_struct.model_file_format = "obj";
     suzanne_species_struct.model_filename = "suzanne.obj";
     suzanne_species_struct.light_position = glm::vec3(0, 100000, 100000);
@@ -459,7 +442,7 @@ int main(void)
 
     SpeciesStruct cat_species_struct;
     cat_species_struct.scene = helsinki_eastern_downtown_scene;
-    cat_species_struct.parent = helsinki_eastern_downtown_uvmap_material;
+    cat_species_struct.parent = pink_geometric_tiles_material;
     cat_species_struct.model_file_format = "fbx";
     cat_species_struct.model_filename = "cat.fbx";
     cat_species_struct.light_position = glm::vec3(0, 100000, 100000);
@@ -879,14 +862,14 @@ int main(void)
     new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(&suzanne_species_string), false, switch_to_grass_material_callback_object);
     new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(&grass_material_string), false, switch_to_grass_material_callback_object);
 
-    // Callback code for U: switch back to uvmap material.
-    std::string uvmap_material_string = "helsinki_eastern_downtown_uvmap_material";
-    callback_system::CallbackEngine* switch_to_uvmap_material_callback_engine = new callback_system::CallbackEngine();
-    callback_system::CallbackObject* switch_to_uvmap_material_callback_object = new callback_system::CallbackObject(
-            &ajokki::switch_to_new_material, switch_to_uvmap_material_callback_engine);
-    new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, switch_to_uvmap_material_callback_object);
-    new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(&suzanne_species_string), false, switch_to_uvmap_material_callback_object);
-    new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(&uvmap_material_string), false, switch_to_uvmap_material_callback_object);
+    // Callback code for U: switch back to pink_geometric_tiles_material.
+    std::string pink_geometric_tiles_material_string = "pink_geometric_tiles_material";
+    callback_system::CallbackEngine* switch_to_pink_geometric_tiles_material_callback_engine = new callback_system::CallbackEngine();
+    callback_system::CallbackObject* switch_to_pink_geometric_tiles_material_callback_object = new callback_system::CallbackObject(
+            &ajokki::switch_to_new_material, switch_to_pink_geometric_tiles_material_callback_engine);
+    new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, switch_to_pink_geometric_tiles_material_callback_object);
+    new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(&suzanne_species_string), false, switch_to_pink_geometric_tiles_material_callback_object);
+    new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(&pink_geometric_tiles_material_string), false, switch_to_pink_geometric_tiles_material_callback_object);
 
     // Callback code for T: transform `suzanne2` into terrain.
     std::string helsinki_species_string = "Helsinki_species";
@@ -1072,7 +1055,7 @@ int main(void)
     action_mode_keypress_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_F1, toggle_help_mode_callback_engine });
     action_mode_keypress_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_D, delete_suzanne_species_callback_engine });
     action_mode_keypress_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_G, switch_to_grass_material_callback_engine });
-    action_mode_keypress_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_U, switch_to_uvmap_material_callback_engine });
+    action_mode_keypress_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_P, switch_to_pink_geometric_tiles_material_callback_engine });
     action_mode_keypress_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_T, transform_into_terrain_callback_engine });
     action_mode_keypress_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_A, transform_into_monkey_callback_engine });
 
