@@ -14,7 +14,7 @@ All my code copyright (C) 2016-2017 Antti Nuortimo.
 * OpenGL Mathematics (GLM) is licensed under [The Happy Bunny License (Modified MIT License) and MIT License](http://glm.g-truc.net/copying.txt).
 * GLFW is licensed under [the zlib/libpng license](http://www.glfw.org/license.html).
 * The OpenGL Extension Wrangler Library (GLEW) is licensed under [the Modified BSD License, the Mesa 3-D License (MIT) and the Khronos License (MIT)](https://github.com/nigels-com/glew#copyright-and-licensing).
-* OpenFBX is licensed under under [the MIT license](https://github.com/nem0/OpenFBX/blob/master/LICENSE).
+* OpenFBX is licensed under [the MIT license](https://github.com/nem0/OpenFBX/blob/master/LICENSE).
 * TinyScheme is licensed under [BSD-style license](http://tinyscheme.sourceforge.net/license.txt).
 * pugixml is licensed under [the MIT license](https://github.com/zeux/pugixml/blob/master/README.md).
 
