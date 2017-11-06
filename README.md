@@ -19,6 +19,7 @@ All my code copyright (C) 2016-2017 Antti Nuortimo.
 * pugixml is licensed under [the MIT license](https://github.com/zeux/pugixml/blob/master/README.md).
 
 ### Not yet in use
+* Asio is licensed under [Boost software license](https://github.com/chriskohlhoff/asio/blob/master/asio/LICENSE_1_0.txt).
 * GLFM is licensed under [the zlib license](https://github.com/brackeen/glfm/blob/master/LICENSE).
 * FastNoiseSIMD is licensed under [the MIT license](https://github.com/Auburns/FastNoiseSIMD/blob/master/LICENSE).
 * TinySpline is licensed under [the MIT license](https://github.com/msteinbeck/tinyspline/blob/master/LICENSE).
