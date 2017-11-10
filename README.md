@@ -198,7 +198,7 @@ A: Ylikuutio targets OpenGL version 3.1, but so far 3.0 works too,
 
 Q: Are there plans to support other graphics APIs?
 A: Newer OpenGL versions may be supported in the future, but so far
-   OpenGL 3.1 fulfils my requirements.
+   OpenGL 3.1 fulfils my requirements. Vulkan needs to be considered.
 
 Q: Does Ylikuutio use modern OpenGL (VBOs)?
 A: Yes, Ylikuutio uses VBOs (vertex buffer objects) and VBO indexing.
