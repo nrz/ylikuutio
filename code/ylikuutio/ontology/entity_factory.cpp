@@ -23,13 +23,15 @@
 #endif
 
 // Include standard headers
+#include <memory>    // std::make_shared, std::shared_ptr
 #include <string>    // std::string
 
 namespace ontology
 {
-    EntityFactory::EntityFactory()
+    EntityFactory::EntityFactory(std::shared_ptr<config::SettingMaster> setting_master)
     {
         // constructor.
+        this->setting_master = setting_master;
     }
 
     EntityFactory::~EntityFactory()

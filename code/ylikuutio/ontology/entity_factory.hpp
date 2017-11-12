@@ -25,6 +25,7 @@
 #endif
 
 // Include standard headers
+#include <memory>    // std::make_shared, std::shared_ptr
 #include <string>    // std::string
 
 namespace ontology
@@ -32,7 +33,7 @@ namespace ontology
     class EntityFactory
     {
         public:
-            EntityFactory();
+            EntityFactory(std::shared_ptr<config::SettingMaster> setting_master);
             ~EntityFactory();
 
             static ontology::Entity* create_Universe();
@@ -49,6 +50,8 @@ namespace ontology
                     GLuint screen_height,
                     const std::string& texture_filename,
                     const std::string& font_texture_file_format);
+
+            std::shared_ptr<config::SettingMaster> setting_master;
     };
 }
 
