@@ -51,7 +51,7 @@ namespace ontology
             config::SettingMaster* get_setting_master();
 
             ontology::Entity* create_Universe();
-            ontology::Entity* create_Scene(ontology::Universe* const universe, const float water_level);
+            ontology::Entity* create_Scene(const float water_level);
             ontology::Entity* create_Shader(const ShaderStruct& shader_struct);
             ontology::Entity* create_Material(const MaterialStruct& material_struct);
             ontology::Entity* create_Species(const SpeciesStruct& species_struct);

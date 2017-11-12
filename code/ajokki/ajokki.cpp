@@ -225,7 +225,7 @@ int main(void)
     // Helsinki `Scene` begins here.
 
     std::cout << "Creating ontology::Entity* helsinki_eastern_downtown_scene_entity ...\n";
-    ontology::Entity* helsinki_eastern_downtown_scene_entity = entity_factory->create_Scene(my_universe, 0.9f);
+    ontology::Entity* helsinki_eastern_downtown_scene_entity = entity_factory->create_Scene(0.9f);
     std::cout << "Creating ontology::Scene* helsinki_eastern_downtown_scene ...\n";
     ontology::Scene* helsinki_eastern_downtown_scene = dynamic_cast<ontology::Scene*>(helsinki_eastern_downtown_scene_entity);
 
@@ -534,7 +534,7 @@ int main(void)
     // Joensuu `Scene` begins here.
 
     std::cout << "Creating ontology::Entity* joensuu_center_and_western_scene_entity ...\n";
-    ontology::Entity* joensuu_center_and_western_scene_entity = entity_factory->create_Scene(my_universe, 0.9f);
+    ontology::Entity* joensuu_center_and_western_scene_entity = entity_factory->create_Scene(0.9f);
     std::cout << "Creating ontology::Scene* joensuu_center_and_western_scene ...\n";
     ontology::Scene* joensuu_center_and_western_scene = dynamic_cast<ontology::Scene*>(joensuu_center_and_western_scene_entity);
 
@@ -615,7 +615,7 @@ int main(void)
     // altiplano `Scene` begins here.
 
     std::cout << "Creating ontology::Entity* altiplano_scene_entity ...\n";
-    ontology::Entity* altiplano_scene_entity = entity_factory->create_Scene(my_universe, 0.9f);
+    ontology::Entity* altiplano_scene_entity = entity_factory->create_Scene(0.9f);
     std::cout << "Creating ontology::Scene* altiplano_scene ...\n";
     ontology::Scene* altiplano_scene = dynamic_cast<ontology::Scene*>(altiplano_scene_entity);
 

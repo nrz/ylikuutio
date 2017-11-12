@@ -70,9 +70,9 @@ namespace ontology
         return new ontology::Universe();
     }
 
-    ontology::Entity* EntityFactory::create_Scene(ontology::Universe* const universe, const float water_level)
+    ontology::Entity* EntityFactory::create_Scene(const float water_level)
     {
-        return new ontology::Scene(universe, water_level);
+        return new ontology::Scene(this->universe, water_level);
     }
 
     ontology::Entity* EntityFactory::create_Shader(const ShaderStruct& shader_struct)
