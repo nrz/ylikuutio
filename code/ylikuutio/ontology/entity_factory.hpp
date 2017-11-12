@@ -28,30 +28,46 @@
 #include <memory>    // std::make_shared, std::shared_ptr
 #include <string>    // std::string
 
+namespace config
+{
+    class SettingMaster;
+}
+
 namespace ontology
 {
     class EntityFactory
     {
         public:
-            EntityFactory(std::shared_ptr<config::SettingMaster> setting_master);
+            // constructor.
+            EntityFactory();
+
+            // destructor.
             ~EntityFactory();
 
-            static ontology::Entity* create_Universe();
-            static ontology::Entity* create_Scene(ontology::Universe* const universe, const float water_level);
-            static ontology::Entity* create_Shader(const ShaderStruct& shader_struct);
-            static ontology::Entity* create_Material(const MaterialStruct& material_struct);
-            static ontology::Entity* create_Species(const SpeciesStruct& species_struct);
-            static ontology::Entity* create_Object(const ObjectStruct& object_struct);
-            static ontology::Entity* create_VectorFont(const VectorFontStruct& vector_font_struct);
-            static ontology::Entity* create_Text3D(const Text3DStruct& text3D_struct);
-            static ontology::Entity* create_Font2D(
+            void set_universe(ontology::Universe* universe);
+            ontology::Universe* get_universe();
+
+            void set_setting_master(config::SettingMaster* setting_master);
+            config::SettingMaster* get_setting_master();
+
+            ontology::Entity* create_Universe();
+            ontology::Entity* create_Scene(ontology::Universe* const universe, const float water_level);
+            ontology::Entity* create_Shader(const ShaderStruct& shader_struct);
+            ontology::Entity* create_Material(const MaterialStruct& material_struct);
+            ontology::Entity* create_Species(const SpeciesStruct& species_struct);
+            ontology::Entity* create_Object(const ObjectStruct& object_struct);
+            ontology::Entity* create_VectorFont(const VectorFontStruct& vector_font_struct);
+            ontology::Entity* create_Text3D(const Text3DStruct& text3D_struct);
+            ontology::Entity* create_Font2D(
                     ontology::Universe* const universe,
                     GLuint screen_width,
                     GLuint screen_height,
                     const std::string& texture_filename,
                     const std::string& font_texture_file_format);
 
-            std::shared_ptr<config::SettingMaster> setting_master;
+        private:
+            ontology::Universe* universe;
+            config::SettingMaster* setting_master;
     };
 }
 

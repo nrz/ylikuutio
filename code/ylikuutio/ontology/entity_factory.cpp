@@ -26,17 +26,43 @@
 #include <memory>    // std::make_shared, std::shared_ptr
 #include <string>    // std::string
 
+namespace config
+{
+    class SettingMaster;
+}
+
 namespace ontology
 {
-    EntityFactory::EntityFactory(std::shared_ptr<config::SettingMaster> setting_master)
+    EntityFactory::EntityFactory()
     {
         // constructor.
-        this->setting_master = setting_master;
+        this->universe = nullptr;
+        this->setting_master = nullptr;
     }
 
     EntityFactory::~EntityFactory()
     {
         // destructor.
+    }
+
+    void EntityFactory::set_universe(ontology::Universe* universe)
+    {
+        this->universe = universe;
+    }
+
+    ontology::Universe* EntityFactory::get_universe()
+    {
+        return this->universe;
+    }
+
+    void EntityFactory::set_setting_master(config::SettingMaster* setting_master)
+    {
+        this->setting_master = setting_master;
+    }
+
+    config::SettingMaster* EntityFactory::get_setting_master()
+    {
+        return this->setting_master;
     }
 
     ontology::Entity* EntityFactory::create_Universe()
