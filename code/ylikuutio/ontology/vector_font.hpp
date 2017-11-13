@@ -32,15 +32,14 @@ namespace ontology
         public:
             // constructor.
             // TODO: `VectorFont` constructor also creates each `Glyph` and binds them to the `VectorFont`.
-            VectorFont(const VectorFontStruct& vector_font_struct)
-                : Entity(vector_font_struct.parent->universe)
+            VectorFont(ontology::Universe* const universe, const VectorFontStruct& vector_font_struct)
+                : Entity(universe)
             {
                 // constructor.
                 this->font_file_format      = vector_font_struct.font_file_format;
                 this->font_filename         = vector_font_struct.font_filename;
                 this->vertex_scaling_factor = vector_font_struct.vertex_scaling_factor;
                 this->parent        = vector_font_struct.parent;
-                this->universe      = this->parent->universe;
 
                 this->char_font_file_format = this->font_file_format.c_str();
                 this->char_font_filename    = this->font_filename.c_str();
@@ -86,7 +85,7 @@ namespace ontology
                         glyph_struct.glyph_vertex_data = &this->glyph_vertex_data.at(glyph_i);
                         glyph_struct.glyph_name_pointer = this->glyph_names.at(glyph_i).c_str();
                         glyph_struct.unicode_char_pointer = unicode_char_pointer;
-                        glyph_struct.universe = this->universe;
+                        glyph_struct.universe = universe;
                         glyph_struct.shader_pointer = this->parent->parent;
                         glyph_struct.parent = this;
 

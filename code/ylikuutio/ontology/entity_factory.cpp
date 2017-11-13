@@ -97,7 +97,7 @@ namespace ontology
 
     ontology::Entity* EntityFactory::create_VectorFont(const VectorFontStruct& vector_font_struct)
     {
-        return new ontology::VectorFont(vector_font_struct);
+        return new ontology::VectorFont(this->universe, vector_font_struct);
     }
 
     ontology::Entity* EntityFactory::create_Text3D(const Text3DStruct& text3D_struct)
