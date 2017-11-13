@@ -102,7 +102,7 @@ namespace ontology
 
     ontology::Entity* EntityFactory::create_Text3D(const Text3DStruct& text3D_struct)
     {
-        return new ontology::Text3D(text3D_struct);
+        return new ontology::Text3D(this->universe, text3D_struct);
     }
 
     ontology::Entity* EntityFactory::create_Font2D(
