@@ -202,7 +202,7 @@ namespace console
                 text_char_list.clear();
                 current_line_length = 0;
             }
-            else if (++current_line_length < this->n_columns)
+            else if (++current_line_length <= this->n_columns)
             {
                 // Normal case.
                 text_char_list.push_back(my_char);
