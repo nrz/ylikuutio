@@ -82,7 +82,7 @@ namespace ontology
 
     ontology::Entity* EntityFactory::create_Material(const MaterialStruct& material_struct)
     {
-        return new ontology::Material(material_struct);
+        return new ontology::Material(this->universe, material_struct);
     }
 
     ontology::Entity* EntityFactory::create_Species(const SpeciesStruct& species_struct)
