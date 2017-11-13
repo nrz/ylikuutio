@@ -33,7 +33,7 @@ namespace ontology
             object_struct.is_character = true;
             object_struct.cartesian_coordinates = text3D->cartesian_coordinates; // TODO: adjust this as needed.
             object_struct.rotate_vector = text3D->rotate_vector;
-            ontology::Object* object = new ontology::Object(object_struct);
+            ontology::Object* object = new ontology::Object(text3D->universe, object_struct);
         }
 
         // TODO: Add support for Unicode strings.

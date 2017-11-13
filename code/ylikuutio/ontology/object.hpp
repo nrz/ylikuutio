@@ -49,8 +49,8 @@ namespace ontology
     {
         public:
             // constructor.
-            Object(const ObjectStruct& object_struct)
-                : Movable(object_struct.universe, object_struct.cartesian_coordinates)
+            Object(ontology::Universe* const universe, const ObjectStruct& object_struct)
+                : Movable(universe, object_struct.cartesian_coordinates)
             {
                 // constructor.
                 this->original_scale_vector = object_struct.original_scale_vector;

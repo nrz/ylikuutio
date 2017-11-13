@@ -92,7 +92,7 @@ namespace ontology
 
     ontology::Entity* EntityFactory::create_Object(const ObjectStruct& object_struct)
     {
-        return new ontology::Object(object_struct);
+        return new ontology::Object(this->universe, object_struct);
     }
 
     ontology::Entity* EntityFactory::create_VectorFont(const VectorFontStruct& vector_font_struct)

@@ -348,7 +348,6 @@ int main(void)
 
     // Create Helsinki eastern downtown terrain.
     ObjectStruct helsinki_eastern_downtown_struct;
-    helsinki_eastern_downtown_struct.universe = my_universe;
     helsinki_eastern_downtown_struct.species_parent = helsinki_eastern_downtown_terrain_species;
     helsinki_eastern_downtown_struct.cartesian_coordinates = std::make_shared<glm::vec3>(0.0f, 0.0f, 0.0f);
     helsinki_eastern_downtown_struct.rotate_angle = 0.0f;
@@ -380,7 +379,6 @@ int main(void)
 
     // Create snow cottage, store it in `snow_cottage1`.
     ObjectStruct snow_cottage_object_struct1;
-    snow_cottage_object_struct1.universe = my_universe;
     snow_cottage_object_struct1.species_parent = snow_cottage_species;
     snow_cottage_object_struct1.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
     snow_cottage_object_struct1.cartesian_coordinates = std::make_shared<glm::vec3>(121.50f, 126.50f, 63.70f);
@@ -422,51 +420,101 @@ int main(void)
 
     // Create suzanne1, store it in `suzanne1`.
     ObjectStruct suzanne_object_struct1;
-    suzanne_object_struct1.universe = my_universe;
     suzanne_object_struct1.species_parent = suzanne_species;
     suzanne_object_struct1.cartesian_coordinates = std::make_shared<glm::vec3>(82.50f, 119.00f, 95.50f);
     suzanne_object_struct1.rotate_angle = 0.10f;
     suzanne_object_struct1.rotate_vector = glm::vec3(1.0f, 0.0f, 0.0f);
     suzanne_object_struct1.translate_vector = glm::vec3(1.0f, 0.0f, 0.0f);
-    entity_factory->create_Object(suzanne_object_struct1);
+    std::cout << "Creating ontology::Entity* suzanne1_entity ...\n";
+    ontology::Entity* suzanne1_entity = entity_factory->create_Object(suzanne_object_struct1);
+    std::cout << "Creating ontology::Species* suzanne1 ...\n";
+    ontology::Object* suzanne1 = dynamic_cast<ontology::Object*>(suzanne1_entity);
 
+    if (suzanne1 == nullptr)
+    {
+        std::cerr << "Failed to create suzanne Object.\n";
+        return -1;
+    }
+
+    suzanne1->set_name("suzanne1");
+
+    suzanne_species->set_name("suzanne_species");
     ObjectStruct suzanne_object_struct2;
-    suzanne_object_struct2.universe = my_universe;
     suzanne_object_struct2.species_parent = suzanne_species;
     suzanne_object_struct2.cartesian_coordinates = std::make_shared<glm::vec3>(112.90f, 113.90f, 75.50f);
     suzanne_object_struct2.rotate_angle = 0.20f;
     suzanne_object_struct2.rotate_vector = glm::vec3(1.0f, 0.0f, 0.0f);
     suzanne_object_struct2.translate_vector = glm::vec3(0.0f, 1.0f, 0.0f);
-    ontology::Object* suzanne2 = new ontology::Object(suzanne_object_struct2);
+    std::cout << "Creating ontology::Entity* suzanne2_entity ...\n";
+    ontology::Entity* suzanne2_entity = entity_factory->create_Object(suzanne_object_struct1);
+    std::cout << "Creating ontology::Species* suzanne2 ...\n";
+    ontology::Object* suzanne2 = dynamic_cast<ontology::Object*>(suzanne2_entity);
+
+    if (suzanne2 == nullptr)
+    {
+        std::cerr << "Failed to create suzanne Object.\n";
+        return -1;
+    }
+
     suzanne2->set_name("suzanne2");
 
     ObjectStruct suzanne_object_struct3;
-    suzanne_object_struct3.universe = my_universe;
     suzanne_object_struct3.species_parent = suzanne_species;
     suzanne_object_struct3.cartesian_coordinates = std::make_shared<glm::vec3>(126.90f, 162.90f, 103.00f);
     suzanne_object_struct3.rotate_angle = 0.05f;
     suzanne_object_struct3.rotate_vector = glm::vec3(1.0f, 0.0f, 0.0f);
     suzanne_object_struct3.translate_vector = glm::vec3(0.0f, 0.0f, 1.0f);
-    entity_factory->create_Object(suzanne_object_struct3);
+    std::cout << "Creating ontology::Entity* suzanne3_entity ...\n";
+    ontology::Entity* suzanne3_entity = entity_factory->create_Object(suzanne_object_struct1);
+    std::cout << "Creating ontology::Species* suzanne3 ...\n";
+    ontology::Object* suzanne3 = dynamic_cast<ontology::Object*>(suzanne3_entity);
+
+    if (suzanne3 == nullptr)
+    {
+        std::cerr << "Failed to create suzanne Object.\n";
+        return -1;
+    }
+
+    suzanne3->set_name("suzanne3");
 
     ObjectStruct suzanne_object_struct4;
-    suzanne_object_struct4.universe = my_universe;
     suzanne_object_struct4.species_parent = suzanne_species;
     suzanne_object_struct4.cartesian_coordinates = std::make_shared<glm::vec3>(96.00f, 130.00f, 109.00f);
     suzanne_object_struct4.rotate_angle = 0.15f;
     suzanne_object_struct4.rotate_vector = glm::vec3(1.0f, 0.0f, 0.0f);
     suzanne_object_struct4.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
-    entity_factory->create_Object(suzanne_object_struct4);
+    std::cout << "Creating ontology::Entity* suzanne4_entity ...\n";
+    ontology::Entity* suzanne4_entity = entity_factory->create_Object(suzanne_object_struct1);
+    std::cout << "Creating ontology::Species* suzanne4 ...\n";
+    ontology::Object* suzanne4 = dynamic_cast<ontology::Object*>(suzanne4_entity);
+
+    if (suzanne4 == nullptr)
+    {
+        std::cerr << "Failed to create suzanne Object.\n";
+        return -1;
+    }
+
+    suzanne4->set_name("suzanne4");
 
     ObjectStruct suzanne_object_struct5;
-    suzanne_object_struct5.universe = my_universe;
     suzanne_object_struct5.species_parent = suzanne_species;
     suzanne_object_struct5.original_scale_vector = glm::vec3(10.0f, 10.0f, 10.0f);
     suzanne_object_struct5.cartesian_coordinates = std::make_shared<glm::vec3>(103.00f, 140.00f, 109.00f);
     suzanne_object_struct5.rotate_angle = 0.03f;
     suzanne_object_struct5.rotate_vector = glm::vec3(1.0f, 1.0f, 1.0f);
     suzanne_object_struct5.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
-    entity_factory->create_Object(suzanne_object_struct5);
+    std::cout << "Creating ontology::Entity* suzanne5_entity ...\n";
+    ontology::Entity* suzanne5_entity = entity_factory->create_Object(suzanne_object_struct1);
+    std::cout << "Creating ontology::Species* suzanne5 ...\n";
+    ontology::Object* suzanne5 = dynamic_cast<ontology::Object*>(suzanne5_entity);
+
+    if (suzanne5 == nullptr)
+    {
+        std::cerr << "Failed to create suzanne Object.\n";
+        return -1;
+    }
+
+    suzanne5->set_name("suzanne5");
 
     SpeciesStruct cat_species_struct;
     cat_species_struct.scene = helsinki_eastern_downtown_scene;
@@ -491,7 +539,6 @@ int main(void)
     cat_species->set_name("cat_species");
 
     ObjectStruct cat_object_struct1;
-    cat_object_struct1.universe = my_universe;
     cat_object_struct1.species_parent = cat_species;
     cat_object_struct1.original_scale_vector = glm::vec3(10.0f, 10.0f, 10.0f);
     cat_object_struct1.cartesian_coordinates = std::make_shared<glm::vec3>(500.00f, 140.00f, 500.00f);
@@ -510,7 +557,6 @@ int main(void)
     cat1->set_name("cat1");
 
     ObjectStruct cat_object_struct2;
-    cat_object_struct2.universe = my_universe;
     cat_object_struct2.species_parent = cat_species;
     cat_object_struct2.original_scale_vector = glm::vec3(15.0f, 15.0f, 15.0f);
     cat_object_struct2.cartesian_coordinates = std::make_shared<glm::vec3>(700.00f, 140.00f, 700.00f);
@@ -638,7 +684,6 @@ int main(void)
 
     // Create Helsinki eastern downtown terrain.
     ObjectStruct joensuu_center_and_western_struct;
-    joensuu_center_and_western_struct.universe = my_universe;
     joensuu_center_and_western_struct.species_parent = joensuu_center_and_western_terrain_species;
     joensuu_center_and_western_struct.cartesian_coordinates = std::make_shared<glm::vec3>(0.0f, 0.0f, 0.0f);
     joensuu_center_and_western_struct.rotate_angle = 0.0f;
@@ -735,7 +780,6 @@ int main(void)
 
     // Create altiplano terrain.
     ObjectStruct altiplano_struct;
-    altiplano_struct.universe = my_universe;
     altiplano_struct.species_parent = altiplano_terrain_species;
     altiplano_struct.cartesian_coordinates = std::make_shared<glm::vec3>(0.0f, 0.0f, 0.0f);
     altiplano_struct.rotate_angle = 0.0f;

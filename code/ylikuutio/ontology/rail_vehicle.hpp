@@ -18,8 +18,8 @@ namespace ontology
     {
         public:
             // constructor.
-            RailVehicle(const ObjectStruct& object_struct)
-                : Vehicle(object_struct)
+            RailVehicle(ontology::Universe* const universe, const ObjectStruct& object_struct)
+                : Vehicle(universe, object_struct)
             {
                 // constructor.
             }
