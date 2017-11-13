@@ -74,6 +74,7 @@
 #include <cmath>         // NAN, std::isnan, std::pow
 #include <cstdio>        // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf etc.
 #include <iostream>      // std::cout, std::cin, std::cerr
+#include <limits>        // std::numeric_limits
 #include <memory>        // std::make_shared, std::shared_ptr
 #include <string>        // std::string
 #include <stdint.h>      // uint32_t etc.
@@ -696,7 +697,7 @@ int main(void)
     // altiplano `Scene` begins here.
 
     std::cout << "Creating ontology::Entity* altiplano_scene_entity ...\n";
-    ontology::Entity* altiplano_scene_entity = entity_factory->create_Scene(0.9f);
+    ontology::Entity* altiplano_scene_entity = entity_factory->create_Scene(-1.0f * std::numeric_limits<float>::infinity());
     std::cout << "Creating ontology::Scene* altiplano_scene ...\n";
     ontology::Scene* altiplano_scene = dynamic_cast<ontology::Scene*>(altiplano_scene_entity);
 
