@@ -14,18 +14,20 @@
 namespace ontology
 {
     class Scene;
+    class Shader;
     class Material;
 }
 
 typedef struct SpeciesStruct
 {
     SpeciesStruct()
-        : scene(nullptr), parent(nullptr), is_world(false), world_radius(NAN), divisor(1.0f), water_level(-1.0f * std::numeric_limits<float>::infinity()), light_position(glm::vec3(0.0f, 0.0f, 0.0f)), latitude(0.0f), longitude(0.0f), x_step(1), z_step(1), triangulation_type("bilinear_interpolation")
+        : scene(nullptr), shader(nullptr), parent(nullptr), is_world(false), world_radius(NAN), divisor(1.0f), water_level(-1.0f * std::numeric_limits<float>::infinity()), light_position(glm::vec3(0.0f, 0.0f, 0.0f)), latitude(0.0f), longitude(0.0f), x_step(1), z_step(1), triangulation_type("bilinear_interpolation")
     {
         // constructor.
     }
     // used for all files (for all species).
     ontology::Scene* scene;          // pointer to `Scene` object.
+    ontology::Shader* shader;        // pointer to `Shader` object.
     ontology::Material* parent;      // pointer to `Material` object.
     bool is_world;                           // worlds currently neither rotate nor translate.
     float world_radius;                      // radius of sea level in kilometers. used only for worlds.

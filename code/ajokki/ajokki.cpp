@@ -301,17 +301,29 @@ int main(void)
     // Create the species, store it in `bmp_terrain_species`.
     SpeciesStruct bmp_terrain_species_struct;
     bmp_terrain_species_struct.scene = helsinki_eastern_downtown_scene;
+    bmp_terrain_species_struct.shader = helsinki_eastern_downtown_shader;
     bmp_terrain_species_struct.parent = helsinki_eastern_downtown_grass_material;
     bmp_terrain_species_struct.model_file_format = g_model_file_format;
     bmp_terrain_species_struct.model_filename = g_model_filename;
     bmp_terrain_species_struct.color_channel = g_height_data_color_channel;
     bmp_terrain_species_struct.light_position = glm::vec3(0, 100000, 100000);
     bmp_terrain_species_struct.is_world = true;
-    ontology::Species* bmp_terrain_species = new ontology::Species(bmp_terrain_species_struct);
+    std::cout << "Creating ontology::Entity* bmp_terrain_species_entity ...\n";
+    ontology::Entity* bmp_terrain_species_entity = entity_factory->create_Species(bmp_terrain_species_struct);
+    std::cout << "Creating ontology::Species* bmp_terrain_species ...\n";
+    ontology::Species* bmp_terrain_species = dynamic_cast<ontology::Species*>(bmp_terrain_species_entity);
+
+    if (bmp_terrain_species == nullptr)
+    {
+        std::cerr << "Failed to create Species.\n";
+        return -1;
+    }
+
     bmp_terrain_species->set_name("bmp_terrain_species");
 
     SpeciesStruct helsinki_eastern_downtown_terrain_species_struct;
     helsinki_eastern_downtown_terrain_species_struct.scene = helsinki_eastern_downtown_scene;
+    helsinki_eastern_downtown_terrain_species_struct.shader = helsinki_eastern_downtown_shader;
     helsinki_eastern_downtown_terrain_species_struct.parent = helsinki_eastern_downtown_grass_material;
     helsinki_eastern_downtown_terrain_species_struct.model_file_format = ASCII_grid_model_file_format;
     helsinki_eastern_downtown_terrain_species_struct.model_filename = helsinki_eastern_downtown_ascii_grid_model_filename;
@@ -319,7 +331,17 @@ int main(void)
     helsinki_eastern_downtown_terrain_species_struct.is_world = true;
     helsinki_eastern_downtown_terrain_species_struct.x_step = 4;
     helsinki_eastern_downtown_terrain_species_struct.z_step = 4;
-    ontology::Species* helsinki_eastern_downtown_terrain_species = new ontology::Species(helsinki_eastern_downtown_terrain_species_struct);
+    std::cout << "Creating ontology::Entity* helsinki_eastern_downtown_terrain_species_entity ...\n";
+    ontology::Entity* helsinki_eastern_downtown_terrain_species_entity = entity_factory->create_Species(helsinki_eastern_downtown_terrain_species_struct);
+    std::cout << "Creating ontology::Species* helsinki_eastern_downtown_terrain_species ...\n";
+    ontology::Species* helsinki_eastern_downtown_terrain_species = dynamic_cast<ontology::Species*>(helsinki_eastern_downtown_terrain_species_entity);
+
+    if (helsinki_eastern_downtown_terrain_species == nullptr)
+    {
+        std::cerr << "Failed to create Species.\n";
+        return -1;
+    }
+
     helsinki_eastern_downtown_terrain_species->set_name("Helsinki_eastern_downtown_species");
 
     my_universe->is_flight_mode_in_use = true;
@@ -337,6 +359,7 @@ int main(void)
     // Create the species, store it in `snow_cottage_species`.
     SpeciesStruct snow_cottage_species_struct;
     snow_cottage_species_struct.scene = helsinki_eastern_downtown_scene;
+    snow_cottage_species_struct.shader = helsinki_eastern_downtown_shader;
     snow_cottage_species_struct.parent = pink_geometric_tiles_material;
     snow_cottage_species_struct.model_file_format = "obj";
     snow_cottage_species_struct.model_filename = "snow_cottage_triangulated.obj";
@@ -378,6 +401,7 @@ int main(void)
 
     SpeciesStruct suzanne_species_struct;
     suzanne_species_struct.scene = helsinki_eastern_downtown_scene;
+    suzanne_species_struct.shader = helsinki_eastern_downtown_shader;
     suzanne_species_struct.parent = pink_geometric_tiles_material;
     suzanne_species_struct.model_file_format = "obj";
     suzanne_species_struct.model_filename = "suzanne.obj";
@@ -446,6 +470,7 @@ int main(void)
 
     SpeciesStruct cat_species_struct;
     cat_species_struct.scene = helsinki_eastern_downtown_scene;
+    cat_species_struct.shader = helsinki_eastern_downtown_shader;
     cat_species_struct.parent = pink_geometric_tiles_material;
     cat_species_struct.model_file_format = "fbx";
     cat_species_struct.model_filename = "cat.fbx";
@@ -590,6 +615,7 @@ int main(void)
 
     SpeciesStruct joensuu_center_and_western_terrain_species_struct;
     joensuu_center_and_western_terrain_species_struct.scene = joensuu_center_and_western_scene;
+    joensuu_center_and_western_terrain_species_struct.shader = joensuu_center_and_western_shader;
     joensuu_center_and_western_terrain_species_struct.parent = joensuu_center_and_western_grass_material;
     joensuu_center_and_western_terrain_species_struct.model_file_format = ASCII_grid_model_file_format;
     joensuu_center_and_western_terrain_species_struct.model_filename = joensuu_center_and_western_ascii_grid_model_filename;
@@ -597,7 +623,17 @@ int main(void)
     joensuu_center_and_western_terrain_species_struct.is_world = true;
     joensuu_center_and_western_terrain_species_struct.x_step = 4;
     joensuu_center_and_western_terrain_species_struct.z_step = 4;
-    ontology::Species* joensuu_center_and_western_terrain_species = new ontology::Species(joensuu_center_and_western_terrain_species_struct);
+    std::cout << "Creating ontology::Entity* joensuu_center_and_western_terrain_species_entity ...\n";
+    ontology::Entity* joensuu_center_and_western_terrain_species_entity = entity_factory->create_Species(joensuu_center_and_western_terrain_species_struct);
+    std::cout << "Creating ontology::Species* joensuu_center_and_western_terrain_species ...\n";
+    ontology::Species* joensuu_center_and_western_terrain_species = dynamic_cast<ontology::Species*>(joensuu_center_and_western_terrain_species_entity);
+
+    if (joensuu_center_and_western_terrain_species == nullptr)
+    {
+        std::cerr << "Failed to create Species.\n";
+        return -1;
+    }
+
     joensuu_center_and_western_terrain_species->set_name("joensuu_center_and_western_species");
 
     // Create Helsinki eastern downtown terrain.
@@ -672,6 +708,7 @@ int main(void)
     // Create the species, store it in `terrain_species`.
     SpeciesStruct(altiplano_terrain_species_struct);
     altiplano_terrain_species_struct.scene = altiplano_scene;
+    altiplano_terrain_species_struct.shader = altiplano_shader;
     altiplano_terrain_species_struct.parent = altiplano_grass_material;
     altiplano_terrain_species_struct.model_file_format = "SRTM";
     altiplano_terrain_species_struct.model_filename = "./"; // for testing
@@ -683,10 +720,16 @@ int main(void)
     altiplano_terrain_species_struct.world_radius = earth_radius;
     altiplano_terrain_species_struct.divisor = 1000.0f;
 
+    std::cout << "Creating ontology::Entity* altiplano_terrain_species_entity ...\n";
+    ontology::Entity* altiplano_terrain_species_entity = entity_factory->create_Species(altiplano_terrain_species_struct);
     std::cout << "Creating ontology::Species* altiplano_terrain_species ...\n";
-    ontology::Species* altiplano_terrain_species;
+    ontology::Species* altiplano_terrain_species = dynamic_cast<ontology::Species*>(altiplano_terrain_species_entity);
 
-    altiplano_terrain_species = new ontology::Species(altiplano_terrain_species_struct);
+    if (altiplano_terrain_species == nullptr)
+    {
+        std::cerr << "Failed to create Species.\n";
+        return -1;
+    }
 
     altiplano_terrain_species->set_name("altiplano_species");
 

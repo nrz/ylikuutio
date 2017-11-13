@@ -77,7 +77,7 @@ namespace ontology
 
     ontology::Entity* EntityFactory::create_Shader(const ShaderStruct& shader_struct)
     {
-        return new ontology::Shader(shader_struct);
+        return new ontology::Shader(this->universe, shader_struct);
     }
 
     ontology::Entity* EntityFactory::create_Material(const MaterialStruct& material_struct)
@@ -87,7 +87,7 @@ namespace ontology
 
     ontology::Entity* EntityFactory::create_Species(const SpeciesStruct& species_struct)
     {
-        return new ontology::Species(species_struct);
+        return new ontology::Species(this->universe, species_struct);
     }
 
     ontology::Entity* EntityFactory::create_Object(const ObjectStruct& object_struct)

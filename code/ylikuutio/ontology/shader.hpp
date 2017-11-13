@@ -11,7 +11,6 @@
 #endif
 
 #include "entity.hpp"
-#include "scene.hpp"
 #include "glyph.hpp"
 #include "shader_struct.hpp"
 #include "render_templates.hpp"
@@ -51,8 +50,8 @@ namespace ontology
     {
         public:
             // constructor.
-            Shader(const ShaderStruct& shader_struct)
-                : Entity(shader_struct.parent->universe)
+            Shader(ontology::Universe* const universe, const ShaderStruct& shader_struct)
+                : Entity(universe)
             {
                 // constructor.
 
@@ -62,7 +61,7 @@ namespace ontology
                 this->char_vertex_shader   = this->vertex_shader.c_str();
                 this->char_fragment_shader = this->fragment_shader.c_str();
                 this->parent               = shader_struct.parent;
-                this->universe             = this->parent->universe;
+                this->universe             = universe;
 
                 this->terrain_species = nullptr;
 
