@@ -37,6 +37,29 @@ namespace ontology
     class Glyph: public ontology::Model
     {
         public:
+            // destructor.
+            // glyphs should be destroyed only by destroying the entire `VectorFont`.
+            virtual ~Glyph();
+
+            ontology::Entity* get_parent() override;
+
+            // this method sets a object pointer.
+            void set_object_pointer(const int32_t childID, ontology::Object* const child_pointer);
+
+            void set_name(const std::string& name);
+
+            friend class VectorFont;
+            friend class Object;
+            template<class T1>
+                friend void render_children(std::vector<T1>& child_pointer_vector);
+            template<class T1>
+                friend void set_name(std::string name, T1 entity);
+            template<class T1>
+                friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, int32_t* number_of_children);
+            template<class T1>
+                friend void render_species_or_glyph(T1 species_or_glyph_pointer);
+
+        private:
             // constructor.
             Glyph(const GlyphStruct& glyph_struct)
                 : Model(glyph_struct.universe)
@@ -77,28 +100,6 @@ namespace ontology
                 this->type = "ontology::Glyph*";
             }
 
-            // destructor.
-            // glyphs should be destroyed only by destroying the entire `VectorFont`.
-            virtual ~Glyph();
-
-            ontology::Entity* get_parent() override;
-
-            // this method sets a object pointer.
-            void set_object_pointer(const int32_t childID, ontology::Object* const child_pointer);
-
-            void set_name(const std::string& name);
-
-            friend class Object;
-            template<class T1>
-                friend void render_children(std::vector<T1>& child_pointer_vector);
-            template<class T1>
-                friend void set_name(std::string name, T1 entity);
-            template<class T1>
-                friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, int32_t* number_of_children);
-            template<class T1>
-                friend void render_species_or_glyph(T1 species_or_glyph_pointer);
-
-        private:
             void bind_to_parent();
 
             // this method renders all `Object`s of this `Glyph`.
