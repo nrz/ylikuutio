@@ -169,6 +169,26 @@ Ylikuutio library code is located in `code/ylikuutio/` tree. Ylikuutio code
 may change a lot and so far no API has been defined. Ajokki and Ylikuutio
 code itself are the best references on how to use Ylikuutio in practice.
 
+Some available console commands to try in Ajokki:
+* `activate joensuu_center_and_western_scene`
+* `activate helsinki_eastern_downtown_scene`
+* `activate altiplano_scene`
+* `set red 1.0`
+* `set green 0.15`
+* `set blue 0.77`
+* `get red`
+* `get green`
+* `get blue`
+* `set x 123`
+* `set y 456`
+* `set z 789`
+* `get x`
+* `get y`
+* `get z`
+* `info`
+* `info cat_species`
+* `info cat2`
+
 ## FAQ
 Q: What is "Ylikuutio"?
 A: In Finnish, "yli" means ["over"](https://en.wiktionary.org/wiki/yli-), and "kuutio" means ["cube"](https://en.wiktionary.org/wiki/kuutio).
