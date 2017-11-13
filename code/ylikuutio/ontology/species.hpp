@@ -3,7 +3,9 @@
 
 #include "species_or_glyph.hpp"
 #include "model.hpp"
-#include "material.hpp"
+#include "universe.hpp"
+#include "scene.hpp"
+#include "shader.hpp"
 #include "ground_level.hpp"
 #include "species_struct.hpp"
 #include "render_templates.hpp"
@@ -37,17 +39,17 @@
 
 namespace ontology
 {
-    class Universe;
     class Material;
 
     class Species: public ontology::Model
     {
         public:
             // constructor.
-            Species(const SpeciesStruct& species_struct)
-                : Model(species_struct.parent->universe)
+            Species(ontology::Universe* const universe, const SpeciesStruct& species_struct)
+                : Model(universe)
             {
                 // constructor.
+                this->universe          = universe;
                 this->is_world          = species_struct.is_world;
                 this->world_radius      = species_struct.world_radius;
                 this->divisor           = species_struct.divisor;
@@ -58,7 +60,6 @@ namespace ontology
                 this->latitude          = species_struct.latitude;
                 this->longitude         = species_struct.longitude;
                 this->parent            = species_struct.parent;
-                this->universe          = this->parent->universe;
                 this->x_step            = species_struct.x_step;
                 this->z_step            = species_struct.z_step;
                 this->triangulation_type = species_struct.triangulation_type;
@@ -70,23 +71,23 @@ namespace ontology
                 this->bind_to_parent();
 
                 // Get a handle for our buffers.
-                this->vertexPosition_modelspaceID = glGetAttribLocation(this->parent->parent->programID, "vertexPosition_modelspace");
-                this->vertexUVID = glGetAttribLocation(this->parent->parent->programID, "vertexUV");
-                this->vertexNormal_modelspaceID = glGetAttribLocation(this->parent->parent->programID, "vertexNormal_modelspace");
+                this->vertexPosition_modelspaceID = glGetAttribLocation(species_struct.shader->programID, "vertexPosition_modelspace");
+                this->vertexUVID = glGetAttribLocation(species_struct.shader->programID, "vertexUV");
+                this->vertexNormal_modelspaceID = glGetAttribLocation(species_struct.shader->programID, "vertexNormal_modelspace");
 
                 // Get a handle for our "LightPosition" uniform.
-                glUseProgram(this->parent->parent->programID);
-                this->lightID = glGetUniformLocation(this->parent->parent->programID, "LightPosition_worldspace");
+                glUseProgram(species_struct.shader->programID);
+                this->lightID = glGetUniformLocation(species_struct.shader->programID, "LightPosition_worldspace");
 
                 if (this->is_world)
                 {
                     // set world species pointer so that it points to this species.
                     // currently there can be only one world species (used in collision detection).
-                    this->parent->parent->parent->parent->set_terrain_species(this);
+                    this->universe->set_terrain_species(this);
                 }
 
                 // water level.
-                GLuint water_level_uniform_location = glGetUniformLocation(this->parent->parent->programID, "water_level");
+                GLuint water_level_uniform_location = glGetUniformLocation(species_struct.shader->programID, "water_level");
                 glUniform1f(water_level_uniform_location, species_struct.scene->water_level);
 
                 SpeciesLoaderStruct species_loader_struct;

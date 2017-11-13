@@ -2,7 +2,10 @@ TEE-lista:
 Listaa tähän keskeneräiset asiat kiireellisyysjärjestyksessä kiireellisimmät ylös. Rasti ruutuun ja valmiit-osastolle kun on valmis.
 
 Ylikuution kehityksen kannalta välttämättömiä työvaiheita:
-[ ] Lisää `enable wireframe`, `disable wireframe`, `enable wireframe <entity_name>`, `disable wireframe <entity_name>`.
+[ ] Lisää `set wireframe true`, `set wireframe false`.
+[ ] Lisää `enable wireframe`, `disable wireframe`.
+[ ] Lisää `enable wireframe <entity_name>`, `disable wireframe <entity_name>`.
+[ ] Lisää tuki Helsingin 3D-kaupunkimallille: http://www.hri.fi/fi/dataset/helsingin-3d-kaupunkimalli
 [ ] Lisää vokselimaailma.
 [ ] Lisää tekoälyobjektit.
 [ ] Lisää konsoliin skenejen (`Scene`) latauskomento `load`.

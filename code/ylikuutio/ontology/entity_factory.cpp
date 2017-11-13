@@ -23,13 +23,21 @@
 #endif
 
 // Include standard headers
+#include <memory>    // std::make_shared, std::shared_ptr
 #include <string>    // std::string
+
+namespace config
+{
+    class SettingMaster;
+}
 
 namespace ontology
 {
     EntityFactory::EntityFactory()
     {
         // constructor.
+        this->universe = nullptr;
+        this->setting_master = nullptr;
     }
 
     EntityFactory::~EntityFactory()
@@ -37,55 +45,74 @@ namespace ontology
         // destructor.
     }
 
+    void EntityFactory::set_universe(ontology::Universe* universe)
+    {
+        this->universe = universe;
+    }
+
+    ontology::Universe* EntityFactory::get_universe()
+    {
+        return this->universe;
+    }
+
+    void EntityFactory::set_setting_master(config::SettingMaster* setting_master)
+    {
+        this->setting_master = setting_master;
+    }
+
+    config::SettingMaster* EntityFactory::get_setting_master()
+    {
+        return this->setting_master;
+    }
+
     ontology::Entity* EntityFactory::create_Universe()
     {
         return new ontology::Universe();
     }
 
-    ontology::Entity* EntityFactory::create_Scene(ontology::Universe* const universe, const float water_level)
+    ontology::Entity* EntityFactory::create_Scene(const float water_level)
     {
-        return new ontology::Scene(universe, water_level);
+        return new ontology::Scene(this->universe, water_level);
     }
 
     ontology::Entity* EntityFactory::create_Shader(const ShaderStruct& shader_struct)
     {
-        return new ontology::Shader(shader_struct);
+        return new ontology::Shader(this->universe, shader_struct);
     }
 
     ontology::Entity* EntityFactory::create_Material(const MaterialStruct& material_struct)
     {
-        return new ontology::Material(material_struct);
+        return new ontology::Material(this->universe, material_struct);
     }
 
     ontology::Entity* EntityFactory::create_Species(const SpeciesStruct& species_struct)
     {
-        return new ontology::Species(species_struct);
+        return new ontology::Species(this->universe, species_struct);
     }
 
     ontology::Entity* EntityFactory::create_Object(const ObjectStruct& object_struct)
     {
-        return new ontology::Object(object_struct);
+        return new ontology::Object(this->universe, object_struct);
     }
 
     ontology::Entity* EntityFactory::create_VectorFont(const VectorFontStruct& vector_font_struct)
     {
-        return new ontology::VectorFont(vector_font_struct);
+        return new ontology::VectorFont(this->universe, vector_font_struct);
     }
 
     ontology::Entity* EntityFactory::create_Text3D(const Text3DStruct& text3D_struct)
     {
-        return new ontology::Text3D(text3D_struct);
+        return new ontology::Text3D(this->universe, text3D_struct);
     }
 
     ontology::Entity* EntityFactory::create_Font2D(
-            ontology::Universe* const universe,
             GLuint screen_width,
             GLuint screen_height,
             const std::string& texture_filename,
             const std::string& font_texture_file_format)
     {
         return new ontology::Font2D(
-                universe,
+                this->universe,
                 universe->get_window_width(),
                 universe->get_window_height(),
                 texture_filename.c_str(),

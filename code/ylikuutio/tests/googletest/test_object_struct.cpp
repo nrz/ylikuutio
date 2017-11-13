@@ -13,7 +13,6 @@
 TEST(ObjectStruct_must_be_initialized_appropriately, ObjectStruct)
 {
     ObjectStruct test_object_struct;
-    ASSERT_EQ(test_object_struct.universe, nullptr);
     ASSERT_EQ(test_object_struct.species_parent, nullptr);
     ASSERT_EQ(test_object_struct.glyph_parent, nullptr);
     ASSERT_EQ(test_object_struct.original_scale_vector, glm::vec3(1.0f, 1.0f, 1.0f));

@@ -14,11 +14,12 @@ All my code copyright (C) 2016-2017 Antti Nuortimo.
 * OpenGL Mathematics (GLM) is licensed under [The Happy Bunny License (Modified MIT License) and MIT License](http://glm.g-truc.net/copying.txt).
 * GLFW is licensed under [the zlib/libpng license](http://www.glfw.org/license.html).
 * The OpenGL Extension Wrangler Library (GLEW) is licensed under [the Modified BSD License, the Mesa 3-D License (MIT) and the Khronos License (MIT)](https://github.com/nigels-com/glew#copyright-and-licensing).
-* OpenFBX is licensed under under [the MIT license](https://github.com/nem0/OpenFBX/blob/master/LICENSE).
+* OpenFBX is licensed under [the MIT license](https://github.com/nem0/OpenFBX/blob/master/LICENSE).
 * TinyScheme is licensed under [BSD-style license](http://tinyscheme.sourceforge.net/license.txt).
 * pugixml is licensed under [the MIT license](https://github.com/zeux/pugixml/blob/master/README.md).
 
 ### Not yet in use
+* Asio is licensed under [Boost software license](https://github.com/chriskohlhoff/asio/blob/master/asio/LICENSE_1_0.txt).
 * GLFM is licensed under [the zlib license](https://github.com/brackeen/glfm/blob/master/LICENSE).
 * FastNoiseSIMD is licensed under [the MIT license](https://github.com/Auburns/FastNoiseSIMD/blob/master/LICENSE).
 * TinySpline is licensed under [the MIT license](https://github.com/msteinbeck/tinyspline/blob/master/LICENSE).
@@ -168,6 +169,26 @@ Ylikuutio library code is located in `code/ylikuutio/` tree. Ylikuutio code
 may change a lot and so far no API has been defined. Ajokki and Ylikuutio
 code itself are the best references on how to use Ylikuutio in practice.
 
+Some available console commands to try in Ajokki:
+* `activate joensuu_center_and_western_scene`
+* `activate helsinki_eastern_downtown_scene`
+* `activate altiplano_scene`
+* `set red 1.0`
+* `set green 0.15`
+* `set blue 0.77`
+* `get red`
+* `get green`
+* `get blue`
+* `set x 123`
+* `set y 456`
+* `set z 789`
+* `get x`
+* `get y`
+* `get z`
+* `info`
+* `info cat_species`
+* `info cat2`
+
 ## FAQ
 Q: What is "Ylikuutio"?
 A: In Finnish, "yli" means ["over"](https://en.wiktionary.org/wiki/yli-), and "kuutio" means ["cube"](https://en.wiktionary.org/wiki/kuutio).
@@ -197,7 +218,7 @@ A: Ylikuutio targets OpenGL version 3.1, but so far 3.0 works too,
 
 Q: Are there plans to support other graphics APIs?
 A: Newer OpenGL versions may be supported in the future, but so far
-   OpenGL 3.1 fulfils my requirements.
+   OpenGL 3.1 fulfils my requirements. Vulkan needs to be considered.
 
 Q: Does Ylikuutio use modern OpenGL (VBOs)?
 A: Yes, Ylikuutio uses VBOs (vertex buffer objects) and VBO indexing.

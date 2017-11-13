@@ -74,6 +74,7 @@
 #include <cmath>         // NAN, std::isnan, std::pow
 #include <cstdio>        // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf etc.
 #include <iostream>      // std::cout, std::cin, std::cerr
+#include <limits>        // std::numeric_limits
 #include <memory>        // std::make_shared, std::shared_ptr
 #include <string>        // std::string
 #include <stdint.h>      // uint32_t etc.
@@ -120,10 +121,11 @@ std::string g_font_filename = "kongtext.svg";
 
 int main(void)
 {
+    std::shared_ptr<ontology::EntityFactory> entity_factory = std::make_shared<ontology::EntityFactory>();
 
     // Create the world, store it in `my_universe`.
     std::cout << "Creating ontology::Entity* my_universe_entity ...\n";
-    ontology::Entity* my_universe_entity = ontology::EntityFactory::create_Universe();
+    ontology::Entity* my_universe_entity = entity_factory->create_Universe();
     std::cout << "Creating ontology::Universe* my_universe ...\n";
     ontology::Universe* my_universe = dynamic_cast<ontology::Universe*>(my_universe_entity);
 
@@ -136,6 +138,9 @@ int main(void)
     // Create the setting master, store it in `my_setting_master`.
     std::cout << "Creating config::SettingMaster* my_setting_master ...\n";
     config::SettingMaster* my_setting_master = new config::SettingMaster(my_universe);
+
+    entity_factory->set_universe(my_universe);
+    entity_factory->set_setting_master(my_setting_master);
 
     float earth_radius = 6371.0f; // in kilometres
 
@@ -221,7 +226,7 @@ int main(void)
     // Helsinki `Scene` begins here.
 
     std::cout << "Creating ontology::Entity* helsinki_eastern_downtown_scene_entity ...\n";
-    ontology::Entity* helsinki_eastern_downtown_scene_entity = ontology::EntityFactory::create_Scene(my_universe, 0.9f);
+    ontology::Entity* helsinki_eastern_downtown_scene_entity = entity_factory->create_Scene(0.9f);
     std::cout << "Creating ontology::Scene* helsinki_eastern_downtown_scene ...\n";
     ontology::Scene* helsinki_eastern_downtown_scene = dynamic_cast<ontology::Scene*>(helsinki_eastern_downtown_scene_entity);
 
@@ -246,7 +251,7 @@ int main(void)
     helsinki_eastern_downtown_shader_struct.fragment_shader = "StandardShading.fragmentshader";
 
     std::cout << "Creating ontology::Entity* helsinki_eastern_downtown_shader_entity ...\n";
-    ontology::Entity* helsinki_eastern_downtown_shader_entity = ontology::EntityFactory::create_Shader(helsinki_eastern_downtown_shader_struct);
+    ontology::Entity* helsinki_eastern_downtown_shader_entity = entity_factory->create_Shader(helsinki_eastern_downtown_shader_struct);
     std::cout << "Creating ontology::Shader* helsinki_eastern_downtown_shader ...\n";
     ontology::Shader* helsinki_eastern_downtown_shader = dynamic_cast<ontology::Shader*>(helsinki_eastern_downtown_shader_entity);
 
@@ -263,7 +268,7 @@ int main(void)
     helsinki_eastern_downtown_grass_material_struct.texture_filename = g_texture_filename;
 
     std::cout << "Creating ontology::Entity* helsinki_eastern_downtown_grass_material_entity ...\n";
-    ontology::Entity* helsinki_eastern_downtown_grass_material_entity = ontology::EntityFactory::create_Material(helsinki_eastern_downtown_grass_material_struct);
+    ontology::Entity* helsinki_eastern_downtown_grass_material_entity = entity_factory->create_Material(helsinki_eastern_downtown_grass_material_struct);
     std::cout << "Creating ontology::Material* helsinki_eastern_downtown_grass_material ...\n";
     ontology::Material* helsinki_eastern_downtown_grass_material = dynamic_cast<ontology::Material*>(helsinki_eastern_downtown_grass_material_entity);
 
@@ -282,7 +287,7 @@ int main(void)
     pink_geometric_tiles_material_struct.texture_filename = "pavers1b2.bmp";
 
     std::cout << "Creating ontology::Entity* pink_geometric_tiles_material_entity ...\n";
-    ontology::Entity* pink_geometric_tiles_material_entity = ontology::EntityFactory::create_Material(pink_geometric_tiles_material_struct);
+    ontology::Entity* pink_geometric_tiles_material_entity = entity_factory->create_Material(pink_geometric_tiles_material_struct);
     std::cout << "Creating ontology::Material* pink_geometric_tiles_material ...\n";
     ontology::Material* pink_geometric_tiles_material = dynamic_cast<ontology::Material*>(pink_geometric_tiles_material_entity);
 
@@ -297,17 +302,29 @@ int main(void)
     // Create the species, store it in `bmp_terrain_species`.
     SpeciesStruct bmp_terrain_species_struct;
     bmp_terrain_species_struct.scene = helsinki_eastern_downtown_scene;
+    bmp_terrain_species_struct.shader = helsinki_eastern_downtown_shader;
     bmp_terrain_species_struct.parent = helsinki_eastern_downtown_grass_material;
     bmp_terrain_species_struct.model_file_format = g_model_file_format;
     bmp_terrain_species_struct.model_filename = g_model_filename;
     bmp_terrain_species_struct.color_channel = g_height_data_color_channel;
     bmp_terrain_species_struct.light_position = glm::vec3(0, 100000, 100000);
     bmp_terrain_species_struct.is_world = true;
-    ontology::Species* bmp_terrain_species = new ontology::Species(bmp_terrain_species_struct);
+    std::cout << "Creating ontology::Entity* bmp_terrain_species_entity ...\n";
+    ontology::Entity* bmp_terrain_species_entity = entity_factory->create_Species(bmp_terrain_species_struct);
+    std::cout << "Creating ontology::Species* bmp_terrain_species ...\n";
+    ontology::Species* bmp_terrain_species = dynamic_cast<ontology::Species*>(bmp_terrain_species_entity);
+
+    if (bmp_terrain_species == nullptr)
+    {
+        std::cerr << "Failed to create Species.\n";
+        return -1;
+    }
+
     bmp_terrain_species->set_name("bmp_terrain_species");
 
     SpeciesStruct helsinki_eastern_downtown_terrain_species_struct;
     helsinki_eastern_downtown_terrain_species_struct.scene = helsinki_eastern_downtown_scene;
+    helsinki_eastern_downtown_terrain_species_struct.shader = helsinki_eastern_downtown_shader;
     helsinki_eastern_downtown_terrain_species_struct.parent = helsinki_eastern_downtown_grass_material;
     helsinki_eastern_downtown_terrain_species_struct.model_file_format = ASCII_grid_model_file_format;
     helsinki_eastern_downtown_terrain_species_struct.model_filename = helsinki_eastern_downtown_ascii_grid_model_filename;
@@ -315,31 +332,41 @@ int main(void)
     helsinki_eastern_downtown_terrain_species_struct.is_world = true;
     helsinki_eastern_downtown_terrain_species_struct.x_step = 4;
     helsinki_eastern_downtown_terrain_species_struct.z_step = 4;
-    ontology::Species* helsinki_eastern_downtown_terrain_species = new ontology::Species(helsinki_eastern_downtown_terrain_species_struct);
+    std::cout << "Creating ontology::Entity* helsinki_eastern_downtown_terrain_species_entity ...\n";
+    ontology::Entity* helsinki_eastern_downtown_terrain_species_entity = entity_factory->create_Species(helsinki_eastern_downtown_terrain_species_struct);
+    std::cout << "Creating ontology::Species* helsinki_eastern_downtown_terrain_species ...\n";
+    ontology::Species* helsinki_eastern_downtown_terrain_species = dynamic_cast<ontology::Species*>(helsinki_eastern_downtown_terrain_species_entity);
+
+    if (helsinki_eastern_downtown_terrain_species == nullptr)
+    {
+        std::cerr << "Failed to create Species.\n";
+        return -1;
+    }
+
     helsinki_eastern_downtown_terrain_species->set_name("Helsinki_eastern_downtown_species");
 
     my_universe->is_flight_mode_in_use = true;
 
     // Create Helsinki eastern downtown terrain.
     ObjectStruct helsinki_eastern_downtown_struct;
-    helsinki_eastern_downtown_struct.universe = my_universe;
     helsinki_eastern_downtown_struct.species_parent = helsinki_eastern_downtown_terrain_species;
     helsinki_eastern_downtown_struct.cartesian_coordinates = std::make_shared<glm::vec3>(0.0f, 0.0f, 0.0f);
     helsinki_eastern_downtown_struct.rotate_angle = 0.0f;
     helsinki_eastern_downtown_struct.rotate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
     helsinki_eastern_downtown_struct.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
-    ontology::EntityFactory::create_Object(helsinki_eastern_downtown_struct);
+    entity_factory->create_Object(helsinki_eastern_downtown_struct);
 
     // Create the species, store it in `snow_cottage_species`.
     SpeciesStruct snow_cottage_species_struct;
     snow_cottage_species_struct.scene = helsinki_eastern_downtown_scene;
+    snow_cottage_species_struct.shader = helsinki_eastern_downtown_shader;
     snow_cottage_species_struct.parent = pink_geometric_tiles_material;
     snow_cottage_species_struct.model_file_format = "obj";
     snow_cottage_species_struct.model_filename = "snow_cottage_triangulated.obj";
     snow_cottage_species_struct.light_position = glm::vec3(0, 100000, 100000);
 
     std::cout << "Creating ontology::Entity* snow_cottage_species_entity ...\n";
-    ontology::Entity* snow_cottage_species_entity = ontology::EntityFactory::create_Species(snow_cottage_species_struct);
+    ontology::Entity* snow_cottage_species_entity = entity_factory->create_Species(snow_cottage_species_struct);
     std::cout << "Creating ontology::Species* snow_cottage_species ...\n";
     ontology::Species* snow_cottage_species = dynamic_cast<ontology::Species*>(snow_cottage_species_entity);
 
@@ -353,7 +380,6 @@ int main(void)
 
     // Create snow cottage, store it in `snow_cottage1`.
     ObjectStruct snow_cottage_object_struct1;
-    snow_cottage_object_struct1.universe = my_universe;
     snow_cottage_object_struct1.species_parent = snow_cottage_species;
     snow_cottage_object_struct1.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
     snow_cottage_object_struct1.cartesian_coordinates = std::make_shared<glm::vec3>(121.50f, 126.50f, 63.70f);
@@ -362,7 +388,7 @@ int main(void)
     snow_cottage_object_struct1.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
 
     /*
-       ontology::Entity* snow_cottage_object_entity = ontology::EntityFactory::create_Object(snow_cottage_object_struct1);
+       ontology::Entity* snow_cottage_object_entity = entity_factory->create_Object(snow_cottage_object_struct1);
        ontology::Object* snow_cottage_object = dynamic_cast<ontology::Object*>(snow_cottage_object_entity);
 
        if (snow_cottage_object == nullptr)
@@ -374,13 +400,14 @@ int main(void)
 
     SpeciesStruct suzanne_species_struct;
     suzanne_species_struct.scene = helsinki_eastern_downtown_scene;
+    suzanne_species_struct.shader = helsinki_eastern_downtown_shader;
     suzanne_species_struct.parent = pink_geometric_tiles_material;
     suzanne_species_struct.model_file_format = "obj";
     suzanne_species_struct.model_filename = "suzanne.obj";
     suzanne_species_struct.light_position = glm::vec3(0, 100000, 100000);
 
     std::cout << "Creating ontology::Entity* suzanne_species_entity ...\n";
-    ontology::Entity* suzanne_species_entity = ontology::EntityFactory::create_Species(suzanne_species_struct);
+    ontology::Entity* suzanne_species_entity = entity_factory->create_Species(suzanne_species_struct);
     std::cout << "Creating ontology::Species* suzanne_species ...\n";
     ontology::Species* suzanne_species = dynamic_cast<ontology::Species*>(suzanne_species_entity);
 
@@ -394,61 +421,112 @@ int main(void)
 
     // Create suzanne1, store it in `suzanne1`.
     ObjectStruct suzanne_object_struct1;
-    suzanne_object_struct1.universe = my_universe;
     suzanne_object_struct1.species_parent = suzanne_species;
     suzanne_object_struct1.cartesian_coordinates = std::make_shared<glm::vec3>(82.50f, 119.00f, 95.50f);
     suzanne_object_struct1.rotate_angle = 0.10f;
     suzanne_object_struct1.rotate_vector = glm::vec3(1.0f, 0.0f, 0.0f);
     suzanne_object_struct1.translate_vector = glm::vec3(1.0f, 0.0f, 0.0f);
-    ontology::EntityFactory::create_Object(suzanne_object_struct1);
+    std::cout << "Creating ontology::Entity* suzanne1_entity ...\n";
+    ontology::Entity* suzanne1_entity = entity_factory->create_Object(suzanne_object_struct1);
+    std::cout << "Creating ontology::Species* suzanne1 ...\n";
+    ontology::Object* suzanne1 = dynamic_cast<ontology::Object*>(suzanne1_entity);
 
+    if (suzanne1 == nullptr)
+    {
+        std::cerr << "Failed to create suzanne Object.\n";
+        return -1;
+    }
+
+    suzanne1->set_name("suzanne1");
+
+    suzanne_species->set_name("suzanne_species");
     ObjectStruct suzanne_object_struct2;
-    suzanne_object_struct2.universe = my_universe;
     suzanne_object_struct2.species_parent = suzanne_species;
     suzanne_object_struct2.cartesian_coordinates = std::make_shared<glm::vec3>(112.90f, 113.90f, 75.50f);
     suzanne_object_struct2.rotate_angle = 0.20f;
     suzanne_object_struct2.rotate_vector = glm::vec3(1.0f, 0.0f, 0.0f);
     suzanne_object_struct2.translate_vector = glm::vec3(0.0f, 1.0f, 0.0f);
-    ontology::Object* suzanne2 = new ontology::Object(suzanne_object_struct2);
+    std::cout << "Creating ontology::Entity* suzanne2_entity ...\n";
+    ontology::Entity* suzanne2_entity = entity_factory->create_Object(suzanne_object_struct1);
+    std::cout << "Creating ontology::Species* suzanne2 ...\n";
+    ontology::Object* suzanne2 = dynamic_cast<ontology::Object*>(suzanne2_entity);
+
+    if (suzanne2 == nullptr)
+    {
+        std::cerr << "Failed to create suzanne Object.\n";
+        return -1;
+    }
+
     suzanne2->set_name("suzanne2");
 
     ObjectStruct suzanne_object_struct3;
-    suzanne_object_struct3.universe = my_universe;
     suzanne_object_struct3.species_parent = suzanne_species;
     suzanne_object_struct3.cartesian_coordinates = std::make_shared<glm::vec3>(126.90f, 162.90f, 103.00f);
     suzanne_object_struct3.rotate_angle = 0.05f;
     suzanne_object_struct3.rotate_vector = glm::vec3(1.0f, 0.0f, 0.0f);
     suzanne_object_struct3.translate_vector = glm::vec3(0.0f, 0.0f, 1.0f);
-    ontology::EntityFactory::create_Object(suzanne_object_struct3);
+    std::cout << "Creating ontology::Entity* suzanne3_entity ...\n";
+    ontology::Entity* suzanne3_entity = entity_factory->create_Object(suzanne_object_struct1);
+    std::cout << "Creating ontology::Species* suzanne3 ...\n";
+    ontology::Object* suzanne3 = dynamic_cast<ontology::Object*>(suzanne3_entity);
+
+    if (suzanne3 == nullptr)
+    {
+        std::cerr << "Failed to create suzanne Object.\n";
+        return -1;
+    }
+
+    suzanne3->set_name("suzanne3");
 
     ObjectStruct suzanne_object_struct4;
-    suzanne_object_struct4.universe = my_universe;
     suzanne_object_struct4.species_parent = suzanne_species;
     suzanne_object_struct4.cartesian_coordinates = std::make_shared<glm::vec3>(96.00f, 130.00f, 109.00f);
     suzanne_object_struct4.rotate_angle = 0.15f;
     suzanne_object_struct4.rotate_vector = glm::vec3(1.0f, 0.0f, 0.0f);
     suzanne_object_struct4.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
-    ontology::EntityFactory::create_Object(suzanne_object_struct4);
+    std::cout << "Creating ontology::Entity* suzanne4_entity ...\n";
+    ontology::Entity* suzanne4_entity = entity_factory->create_Object(suzanne_object_struct1);
+    std::cout << "Creating ontology::Species* suzanne4 ...\n";
+    ontology::Object* suzanne4 = dynamic_cast<ontology::Object*>(suzanne4_entity);
+
+    if (suzanne4 == nullptr)
+    {
+        std::cerr << "Failed to create suzanne Object.\n";
+        return -1;
+    }
+
+    suzanne4->set_name("suzanne4");
 
     ObjectStruct suzanne_object_struct5;
-    suzanne_object_struct5.universe = my_universe;
     suzanne_object_struct5.species_parent = suzanne_species;
     suzanne_object_struct5.original_scale_vector = glm::vec3(10.0f, 10.0f, 10.0f);
     suzanne_object_struct5.cartesian_coordinates = std::make_shared<glm::vec3>(103.00f, 140.00f, 109.00f);
     suzanne_object_struct5.rotate_angle = 0.03f;
     suzanne_object_struct5.rotate_vector = glm::vec3(1.0f, 1.0f, 1.0f);
     suzanne_object_struct5.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
-    ontology::EntityFactory::create_Object(suzanne_object_struct5);
+    std::cout << "Creating ontology::Entity* suzanne5_entity ...\n";
+    ontology::Entity* suzanne5_entity = entity_factory->create_Object(suzanne_object_struct1);
+    std::cout << "Creating ontology::Species* suzanne5 ...\n";
+    ontology::Object* suzanne5 = dynamic_cast<ontology::Object*>(suzanne5_entity);
+
+    if (suzanne5 == nullptr)
+    {
+        std::cerr << "Failed to create suzanne Object.\n";
+        return -1;
+    }
+
+    suzanne5->set_name("suzanne5");
 
     SpeciesStruct cat_species_struct;
     cat_species_struct.scene = helsinki_eastern_downtown_scene;
+    cat_species_struct.shader = helsinki_eastern_downtown_shader;
     cat_species_struct.parent = pink_geometric_tiles_material;
     cat_species_struct.model_file_format = "fbx";
     cat_species_struct.model_filename = "cat.fbx";
     cat_species_struct.light_position = glm::vec3(0, 100000, 100000);
 
     std::cout << "Creating ontology::Entity* cat_species_entity ...\n";
-    ontology::Entity* cat_species_entity = ontology::EntityFactory::create_Species(cat_species_struct);
+    ontology::Entity* cat_species_entity = entity_factory->create_Species(cat_species_struct);
 
     std::cout << "Creating ontology::Species* cat_species ...\n";
     ontology::Species* cat_species = dynamic_cast<ontology::Species*>(cat_species_entity);
@@ -462,14 +540,13 @@ int main(void)
     cat_species->set_name("cat_species");
 
     ObjectStruct cat_object_struct1;
-    cat_object_struct1.universe = my_universe;
     cat_object_struct1.species_parent = cat_species;
     cat_object_struct1.original_scale_vector = glm::vec3(10.0f, 10.0f, 10.0f);
     cat_object_struct1.cartesian_coordinates = std::make_shared<glm::vec3>(500.00f, 140.00f, 500.00f);
     cat_object_struct1.rotate_angle = 0.03f;
     cat_object_struct1.rotate_vector = glm::vec3(1.0f, 1.0f, 1.0f);
     cat_object_struct1.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
-    ontology::Entity* cat1_entity = ontology::EntityFactory::create_Object(cat_object_struct1);
+    ontology::Entity* cat1_entity = entity_factory->create_Object(cat_object_struct1);
     ontology::Object* cat1 = dynamic_cast<ontology::Object*>(cat1_entity);
 
     if (cat1 == nullptr)
@@ -481,14 +558,13 @@ int main(void)
     cat1->set_name("cat1");
 
     ObjectStruct cat_object_struct2;
-    cat_object_struct2.universe = my_universe;
     cat_object_struct2.species_parent = cat_species;
     cat_object_struct2.original_scale_vector = glm::vec3(15.0f, 15.0f, 15.0f);
     cat_object_struct2.cartesian_coordinates = std::make_shared<glm::vec3>(700.00f, 140.00f, 700.00f);
     cat_object_struct2.rotate_angle = 0.03f;
     cat_object_struct2.rotate_vector = glm::vec3(1.5f, 1.0f, 0.9f);
     cat_object_struct2.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
-    ontology::Entity* cat2_entity = ontology::EntityFactory::create_Object(cat_object_struct2);
+    ontology::Entity* cat2_entity = entity_factory->create_Object(cat_object_struct2);
     ontology::Object* cat2 = dynamic_cast<ontology::Object*>(cat2_entity);
 
     if (cat1 == nullptr)
@@ -505,7 +581,7 @@ int main(void)
     kongtext_vector_font_struct.font_filename = g_font_filename;
 
     std::cout << "Creating ontology::Entity* kongtext_font_entity ...\n";
-    ontology::Entity* kongtext_font_entity = ontology::EntityFactory::create_VectorFont(kongtext_vector_font_struct);
+    ontology::Entity* kongtext_font_entity = entity_factory->create_VectorFont(kongtext_vector_font_struct);
     std::cout << "Creating ontology::VectorFont* kongtext_font ...\n";
     ontology::VectorFont* kongtext_font = dynamic_cast<ontology::VectorFont*>(kongtext_font_entity);
 
@@ -523,14 +599,14 @@ int main(void)
     text3D_struct.rotate_angle = 0.0f;
     text3D_struct.rotate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
     text3D_struct.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
-    ontology::EntityFactory::create_Text3D(text3D_struct);
+    entity_factory->create_Text3D(text3D_struct);
 
     // Helsinki `Scene` ends here.
 
     // Joensuu `Scene` begins here.
 
     std::cout << "Creating ontology::Entity* joensuu_center_and_western_scene_entity ...\n";
-    ontology::Entity* joensuu_center_and_western_scene_entity = ontology::EntityFactory::create_Scene(my_universe, 0.9f);
+    ontology::Entity* joensuu_center_and_western_scene_entity = entity_factory->create_Scene(77.0f);
     std::cout << "Creating ontology::Scene* joensuu_center_and_western_scene ...\n";
     ontology::Scene* joensuu_center_and_western_scene = dynamic_cast<ontology::Scene*>(joensuu_center_and_western_scene_entity);
 
@@ -555,7 +631,7 @@ int main(void)
     joensuu_center_and_western_shader_struct.fragment_shader = "StandardShading.fragmentshader";
 
     std::cout << "Creating ontology::Entity* joensuu_center_and_western_shader_entity ...\n";
-    ontology::Entity* joensuu_center_and_western_shader_entity = ontology::EntityFactory::create_Shader(joensuu_center_and_western_shader_struct);
+    ontology::Entity* joensuu_center_and_western_shader_entity = entity_factory->create_Shader(joensuu_center_and_western_shader_struct);
     std::cout << "Creating ontology::Shader* joensuu_center_and_western_shader ...\n";
     ontology::Shader* joensuu_center_and_western_shader = dynamic_cast<ontology::Shader*>(joensuu_center_and_western_shader_entity);
 
@@ -572,7 +648,7 @@ int main(void)
     joensuu_center_and_western_grass_material_struct.texture_filename = g_texture_filename;
 
     std::cout << "Creating ontology::Entity* joensuu_center_and_western_grass_material_entity ...\n";
-    ontology::Entity* joensuu_center_and_western_grass_material_entity = ontology::EntityFactory::create_Material(joensuu_center_and_western_grass_material_struct);
+    ontology::Entity* joensuu_center_and_western_grass_material_entity = entity_factory->create_Material(joensuu_center_and_western_grass_material_struct);
     std::cout << "Creating ontology::Material* joensuu_center_and_western_grass_material ...\n";
     ontology::Material* joensuu_center_and_western_grass_material = dynamic_cast<ontology::Material*>(joensuu_center_and_western_grass_material_entity);
 
@@ -586,6 +662,7 @@ int main(void)
 
     SpeciesStruct joensuu_center_and_western_terrain_species_struct;
     joensuu_center_and_western_terrain_species_struct.scene = joensuu_center_and_western_scene;
+    joensuu_center_and_western_terrain_species_struct.shader = joensuu_center_and_western_shader;
     joensuu_center_and_western_terrain_species_struct.parent = joensuu_center_and_western_grass_material;
     joensuu_center_and_western_terrain_species_struct.model_file_format = ASCII_grid_model_file_format;
     joensuu_center_and_western_terrain_species_struct.model_filename = joensuu_center_and_western_ascii_grid_model_filename;
@@ -593,25 +670,34 @@ int main(void)
     joensuu_center_and_western_terrain_species_struct.is_world = true;
     joensuu_center_and_western_terrain_species_struct.x_step = 4;
     joensuu_center_and_western_terrain_species_struct.z_step = 4;
-    ontology::Species* joensuu_center_and_western_terrain_species = new ontology::Species(joensuu_center_and_western_terrain_species_struct);
+    std::cout << "Creating ontology::Entity* joensuu_center_and_western_terrain_species_entity ...\n";
+    ontology::Entity* joensuu_center_and_western_terrain_species_entity = entity_factory->create_Species(joensuu_center_and_western_terrain_species_struct);
+    std::cout << "Creating ontology::Species* joensuu_center_and_western_terrain_species ...\n";
+    ontology::Species* joensuu_center_and_western_terrain_species = dynamic_cast<ontology::Species*>(joensuu_center_and_western_terrain_species_entity);
+
+    if (joensuu_center_and_western_terrain_species == nullptr)
+    {
+        std::cerr << "Failed to create Species.\n";
+        return -1;
+    }
+
     joensuu_center_and_western_terrain_species->set_name("joensuu_center_and_western_species");
 
     // Create Helsinki eastern downtown terrain.
     ObjectStruct joensuu_center_and_western_struct;
-    joensuu_center_and_western_struct.universe = my_universe;
     joensuu_center_and_western_struct.species_parent = joensuu_center_and_western_terrain_species;
     joensuu_center_and_western_struct.cartesian_coordinates = std::make_shared<glm::vec3>(0.0f, 0.0f, 0.0f);
     joensuu_center_and_western_struct.rotate_angle = 0.0f;
     joensuu_center_and_western_struct.rotate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
     joensuu_center_and_western_struct.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
-    ontology::EntityFactory::create_Object(joensuu_center_and_western_struct);
+    entity_factory->create_Object(joensuu_center_and_western_struct);
 
     // Joensuu `Scene` ends here.
 
     // altiplano `Scene` begins here.
 
     std::cout << "Creating ontology::Entity* altiplano_scene_entity ...\n";
-    ontology::Entity* altiplano_scene_entity = ontology::EntityFactory::create_Scene(my_universe, 0.9f);
+    ontology::Entity* altiplano_scene_entity = entity_factory->create_Scene(-1.0f * std::numeric_limits<float>::infinity());
     std::cout << "Creating ontology::Scene* altiplano_scene ...\n";
     ontology::Scene* altiplano_scene = dynamic_cast<ontology::Scene*>(altiplano_scene_entity);
 
@@ -636,7 +722,7 @@ int main(void)
     altiplano_shader_struct.fragment_shader = "StandardShading.fragmentshader";
 
     std::cout << "Creating ontology::Entity* altiplano_shader_entity ...\n";
-    ontology::Entity* altiplano_shader_entity = ontology::EntityFactory::create_Shader(altiplano_shader_struct);
+    ontology::Entity* altiplano_shader_entity = entity_factory->create_Shader(altiplano_shader_struct);
     std::cout << "Creating ontology::Shader* altiplano_shader ...\n";
     ontology::Shader* altiplano_shader = dynamic_cast<ontology::Shader*>(altiplano_shader_entity);
 
@@ -653,7 +739,7 @@ int main(void)
     altiplano_grass_material_struct.texture_filename = g_texture_filename;
 
     std::cout << "Creating ontology::Entity* altiplano_grass_material_entity ...\n";
-    ontology::Entity* altiplano_grass_material_entity = ontology::EntityFactory::create_Material(altiplano_grass_material_struct);
+    ontology::Entity* altiplano_grass_material_entity = entity_factory->create_Material(altiplano_grass_material_struct);
     std::cout << "Creating ontology::Material* altiplano_grass_material ...\n";
     ontology::Material* altiplano_grass_material = dynamic_cast<ontology::Material*>(altiplano_grass_material_entity);
 
@@ -668,6 +754,7 @@ int main(void)
     // Create the species, store it in `terrain_species`.
     SpeciesStruct(altiplano_terrain_species_struct);
     altiplano_terrain_species_struct.scene = altiplano_scene;
+    altiplano_terrain_species_struct.shader = altiplano_shader;
     altiplano_terrain_species_struct.parent = altiplano_grass_material;
     altiplano_terrain_species_struct.model_file_format = "SRTM";
     altiplano_terrain_species_struct.model_filename = "./"; // for testing
@@ -679,22 +766,27 @@ int main(void)
     altiplano_terrain_species_struct.world_radius = earth_radius;
     altiplano_terrain_species_struct.divisor = 1000.0f;
 
+    std::cout << "Creating ontology::Entity* altiplano_terrain_species_entity ...\n";
+    ontology::Entity* altiplano_terrain_species_entity = entity_factory->create_Species(altiplano_terrain_species_struct);
     std::cout << "Creating ontology::Species* altiplano_terrain_species ...\n";
-    ontology::Species* altiplano_terrain_species;
+    ontology::Species* altiplano_terrain_species = dynamic_cast<ontology::Species*>(altiplano_terrain_species_entity);
 
-    altiplano_terrain_species = new ontology::Species(altiplano_terrain_species_struct);
+    if (altiplano_terrain_species == nullptr)
+    {
+        std::cerr << "Failed to create Species.\n";
+        return -1;
+    }
 
     altiplano_terrain_species->set_name("altiplano_species");
 
     // Create altiplano terrain.
     ObjectStruct altiplano_struct;
-    altiplano_struct.universe = my_universe;
     altiplano_struct.species_parent = altiplano_terrain_species;
     altiplano_struct.cartesian_coordinates = std::make_shared<glm::vec3>(0.0f, 0.0f, 0.0f);
     altiplano_struct.rotate_angle = 0.0f;
     altiplano_struct.rotate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
     altiplano_struct.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
-    ontology::EntityFactory::create_Object(altiplano_struct);
+    entity_factory->create_Object(altiplano_struct);
     // altiplano `Scene` ends here.
 
     my_universe->turbo_factor = 100.0f;
@@ -718,7 +810,7 @@ int main(void)
     const char* char_g_font_texture_file_format = g_font_texture_file_format.c_str();
 
     std::cout << "Creating ontology::Entity* my_font2D_entity ...\n";
-    ontology::Entity* my_font2D_entity = ontology::EntityFactory::create_Font2D(my_universe, my_universe->get_window_width(), my_universe->get_window_height(), char_g_font_texture_filename, char_g_font_texture_file_format);
+    ontology::Entity* my_font2D_entity = entity_factory->create_Font2D(my_universe->get_window_width(), my_universe->get_window_height(), char_g_font_texture_filename, char_g_font_texture_file_format);
     std::cout << "Creating ontology::Font2D* my_font2D ...\n";
     ontology::Font2D* my_font2D = dynamic_cast<ontology::Font2D*>(my_font2D_entity);
 

@@ -33,6 +33,7 @@
 namespace ontology
 {
     class Entity;
+    class Universe;
     class Object;
 
     class Text3D: public ontology::Movable
@@ -42,14 +43,13 @@ namespace ontology
             // TODO: `Text3D` constructor also creates each `Object`,
             // and binds each to its corresponding `Glyph` for rendering hierarchy,
             // and also binds each to this `Text3D` for ontological hierarchy.
-            Text3D(const Text3DStruct& text3D_struct)
-                : ontology::Movable(text3D_struct.parent->universe, text3D_struct.cartesian_coordinates)
+            Text3D(ontology::Universe* const universe, const Text3DStruct& text3D_struct)
+                : ontology::Movable(universe, text3D_struct.cartesian_coordinates)
             {
                 // constructor.
                 this->rotate_angle = NAN;
                 this->text_string = text3D_struct.text_string;
                 this->parent = text3D_struct.parent;
-                this->universe = this->parent->universe;
 
                 this->number_of_objects = 0;
 
