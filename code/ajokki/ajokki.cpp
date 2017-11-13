@@ -810,7 +810,7 @@ int main(void)
     const char* char_g_font_texture_file_format = g_font_texture_file_format.c_str();
 
     std::cout << "Creating ontology::Entity* my_font2D_entity ...\n";
-    ontology::Entity* my_font2D_entity = entity_factory->create_Font2D(my_universe, my_universe->get_window_width(), my_universe->get_window_height(), char_g_font_texture_filename, char_g_font_texture_file_format);
+    ontology::Entity* my_font2D_entity = entity_factory->create_Font2D(my_universe->get_window_width(), my_universe->get_window_height(), char_g_font_texture_filename, char_g_font_texture_file_format);
     std::cout << "Creating ontology::Font2D* my_font2D ...\n";
     ontology::Font2D* my_font2D = dynamic_cast<ontology::Font2D*>(my_font2D_entity);
 

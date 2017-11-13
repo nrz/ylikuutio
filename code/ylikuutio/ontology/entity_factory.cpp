@@ -106,14 +106,13 @@ namespace ontology
     }
 
     ontology::Entity* EntityFactory::create_Font2D(
-            ontology::Universe* const universe,
             GLuint screen_width,
             GLuint screen_height,
             const std::string& texture_filename,
             const std::string& font_texture_file_format)
     {
         return new ontology::Font2D(
-                universe,
+                this->universe,
                 universe->get_window_width(),
                 universe->get_window_height(),
                 texture_filename.c_str(),

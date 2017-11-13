@@ -59,7 +59,6 @@ namespace ontology
             ontology::Entity* create_VectorFont(const VectorFontStruct& vector_font_struct);
             ontology::Entity* create_Text3D(const Text3DStruct& text3D_struct);
             ontology::Entity* create_Font2D(
-                    ontology::Universe* const universe,
                     GLuint screen_width,
                     GLuint screen_height,
                     const std::string& texture_filename,
