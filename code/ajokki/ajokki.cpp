@@ -605,7 +605,7 @@ int main(void)
     // Joensuu `Scene` begins here.
 
     std::cout << "Creating ontology::Entity* joensuu_center_and_western_scene_entity ...\n";
-    ontology::Entity* joensuu_center_and_western_scene_entity = entity_factory->create_Scene(0.9f);
+    ontology::Entity* joensuu_center_and_western_scene_entity = entity_factory->create_Scene(77.0f);
     std::cout << "Creating ontology::Scene* joensuu_center_and_western_scene ...\n";
     ontology::Scene* joensuu_center_and_western_scene = dynamic_cast<ontology::Scene*>(joensuu_center_and_western_scene_entity);
 
