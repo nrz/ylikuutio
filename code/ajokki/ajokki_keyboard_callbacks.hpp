@@ -2,12 +2,17 @@
 #define __AJOKKI_KEYBOARD_CALLBACKS_HPP_INCLUDED
 
 #include "code/ylikuutio/common/any_value.hpp"
-#include "code/ylikuutio/callback_system/callback_parameter.hpp"
-#include "code/ylikuutio/callback_system/callback_object.hpp"
-#include "code/ylikuutio/callback_system/callback_engine.hpp"
 
 // Include standard headers
 #include <memory> // std::make_shared, std::shared_ptr
+#include <vector> // std::vector
+
+namespace callback_system
+{
+    class CallbackEngine;
+    class CallbackObject;
+    class CallbackParameter;
+}
 
 namespace ajokki
 {
