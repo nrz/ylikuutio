@@ -28,11 +28,6 @@
 #include <memory>    // std::make_shared, std::shared_ptr
 #include <string>    // std::string
 
-namespace config
-{
-    class SettingMaster;
-}
-
 namespace ontology
 {
     class EntityFactory
@@ -46,9 +41,6 @@ namespace ontology
 
             void set_universe(ontology::Universe* universe);
             ontology::Universe* get_universe();
-
-            void set_setting_master(config::SettingMaster* setting_master);
-            config::SettingMaster* get_setting_master();
 
             ontology::Entity* create_Universe();
             ontology::Entity* create_Scene(const float water_level);
@@ -66,7 +58,6 @@ namespace ontology
 
         private:
             ontology::Universe* universe;
-            config::SettingMaster* setting_master;
     };
 }
 

@@ -140,7 +140,6 @@ int main(void)
     config::SettingMaster* my_setting_master = new config::SettingMaster(my_universe);
 
     entity_factory->set_universe(my_universe);
-    entity_factory->set_setting_master(my_setting_master);
 
     float earth_radius = 6371.0f; // in kilometres
 
