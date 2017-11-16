@@ -447,7 +447,7 @@ int main(void)
     suzanne_object_struct2.rotate_vector = glm::vec3(1.0f, 0.0f, 0.0f);
     suzanne_object_struct2.translate_vector = glm::vec3(0.0f, 1.0f, 0.0f);
     std::cout << "Creating ontology::Entity* suzanne2_entity ...\n";
-    ontology::Entity* suzanne2_entity = entity_factory->create_Object(suzanne_object_struct1);
+    ontology::Entity* suzanne2_entity = entity_factory->create_Object(suzanne_object_struct2);
     std::cout << "Creating ontology::Species* suzanne2 ...\n";
     ontology::Object* suzanne2 = dynamic_cast<ontology::Object*>(suzanne2_entity);
 
@@ -466,7 +466,7 @@ int main(void)
     suzanne_object_struct3.rotate_vector = glm::vec3(1.0f, 0.0f, 0.0f);
     suzanne_object_struct3.translate_vector = glm::vec3(0.0f, 0.0f, 1.0f);
     std::cout << "Creating ontology::Entity* suzanne3_entity ...\n";
-    ontology::Entity* suzanne3_entity = entity_factory->create_Object(suzanne_object_struct1);
+    ontology::Entity* suzanne3_entity = entity_factory->create_Object(suzanne_object_struct3);
     std::cout << "Creating ontology::Species* suzanne3 ...\n";
     ontology::Object* suzanne3 = dynamic_cast<ontology::Object*>(suzanne3_entity);
 
@@ -485,7 +485,7 @@ int main(void)
     suzanne_object_struct4.rotate_vector = glm::vec3(1.0f, 0.0f, 0.0f);
     suzanne_object_struct4.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
     std::cout << "Creating ontology::Entity* suzanne4_entity ...\n";
-    ontology::Entity* suzanne4_entity = entity_factory->create_Object(suzanne_object_struct1);
+    ontology::Entity* suzanne4_entity = entity_factory->create_Object(suzanne_object_struct4);
     std::cout << "Creating ontology::Species* suzanne4 ...\n";
     ontology::Object* suzanne4 = dynamic_cast<ontology::Object*>(suzanne4_entity);
 
@@ -505,7 +505,7 @@ int main(void)
     suzanne_object_struct5.rotate_vector = glm::vec3(1.0f, 1.0f, 1.0f);
     suzanne_object_struct5.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
     std::cout << "Creating ontology::Entity* suzanne5_entity ...\n";
-    ontology::Entity* suzanne5_entity = entity_factory->create_Object(suzanne_object_struct1);
+    ontology::Entity* suzanne5_entity = entity_factory->create_Object(suzanne_object_struct5);
     std::cout << "Creating ontology::Species* suzanne5 ...\n";
     ontology::Object* suzanne5 = dynamic_cast<ontology::Object*>(suzanne5_entity);
 
