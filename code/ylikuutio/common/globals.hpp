@@ -70,25 +70,25 @@ namespace graph
 
 namespace ontology
 {
-    class Universe;
+    class Entity;
     class Font2D;
 }
 
-typedef std::shared_ptr<datatypes::AnyValue> (*ActivateCallback) (ontology::Universe* universe, config::SettingMaster* setting_master);
-typedef std::shared_ptr<datatypes::AnyValue> (*ReadCallback) (ontology::Universe* universe, config::SettingMaster* setting_master);
-typedef std::shared_ptr<datatypes::AnyValue> (*PreRenderCallback) (ontology::Universe* universe, config::SettingMaster* setting_master);
-typedef std::shared_ptr<datatypes::AnyValue> (*PostRenderCallback) (ontology::Universe* universe, config::SettingMaster* setting_master);
+typedef std::shared_ptr<datatypes::AnyValue> (*ActivateCallback) (ontology::Entity* entity, config::SettingMaster* setting_master);
+typedef std::shared_ptr<datatypes::AnyValue> (*ReadCallback) (ontology::Entity* entity, config::SettingMaster* setting_master);
+typedef std::shared_ptr<datatypes::AnyValue> (*PreRenderCallback) (ontology::Entity* entity, config::SettingMaster* setting_master);
+typedef std::shared_ptr<datatypes::AnyValue> (*PostRenderCallback) (ontology::Entity* entity, config::SettingMaster* setting_master);
 
 typedef struct SettingStruct
 {
     SettingStruct(std::shared_ptr<datatypes::AnyValue> initial_value)
-        : initial_value(initial_value), should_ylikuutio_call_activate_callback_now(true), setting_master_pointer(nullptr), activate_callback(nullptr), read_callback(nullptr)
+        : initial_value(initial_value), should_ylikuutio_call_activate_callback_now(true), setting_master(nullptr), activate_callback(nullptr), read_callback(nullptr)
     {
         // constructor.
     }
     std::string name;
     std::shared_ptr<datatypes::AnyValue> initial_value;
-    config::SettingMaster* setting_master_pointer;
+    config::SettingMaster* setting_master;
     ActivateCallback activate_callback;
     ReadCallback read_callback;
     bool should_ylikuutio_call_activate_callback_now;

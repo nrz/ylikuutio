@@ -21,7 +21,7 @@ namespace ajokki
         std::shared_ptr<datatypes::AnyValue> any_value_speed = std::make_shared<datatypes::AnyValue>(speed);
         SettingStruct speed_setting_struct(any_value_speed);
         speed_setting_struct.name = "speed";
-        speed_setting_struct.setting_master_pointer = setting_master;
+        speed_setting_struct.setting_master = setting_master;
         speed_setting_struct.activate_callback = &config::SettingMaster::activate_speed;
         speed_setting_struct.should_ylikuutio_call_activate_callback_now = true;
         new config::Setting(speed_setting_struct);
@@ -31,7 +31,7 @@ namespace ajokki
         std::shared_ptr<datatypes::AnyValue> any_value_turbo_factor = std::make_shared<datatypes::AnyValue>(turbo_factor);
         SettingStruct turbo_factor_setting_struct(any_value_turbo_factor);
         turbo_factor_setting_struct.name = "turbo_factor";
-        turbo_factor_setting_struct.setting_master_pointer = setting_master;
+        turbo_factor_setting_struct.setting_master = setting_master;
         turbo_factor_setting_struct.activate_callback = &config::SettingMaster::activate_turbo_factor;
         turbo_factor_setting_struct.should_ylikuutio_call_activate_callback_now = true;
         new config::Setting(turbo_factor_setting_struct);
@@ -41,7 +41,7 @@ namespace ajokki
         std::shared_ptr<datatypes::AnyValue> any_value_twin_turbo_factor = std::make_shared<datatypes::AnyValue>(twin_turbo_factor);
         SettingStruct twin_turbo_factor_setting_struct(any_value_twin_turbo_factor);
         twin_turbo_factor_setting_struct.name = "twin_turbo_factor";
-        twin_turbo_factor_setting_struct.setting_master_pointer = setting_master;
+        twin_turbo_factor_setting_struct.setting_master = setting_master;
         twin_turbo_factor_setting_struct.activate_callback = &config::SettingMaster::activate_twin_turbo_factor;
         twin_turbo_factor_setting_struct.should_ylikuutio_call_activate_callback_now = true;
         new config::Setting(twin_turbo_factor_setting_struct);
@@ -50,7 +50,7 @@ namespace ajokki
         std::shared_ptr<datatypes::AnyValue> any_value_mouse_speed = std::make_shared<datatypes::AnyValue>(mouse_speed);
         SettingStruct mouse_speed_setting_struct(any_value_mouse_speed);
         mouse_speed_setting_struct.name = "mouse_speed";
-        mouse_speed_setting_struct.setting_master_pointer = setting_master;
+        mouse_speed_setting_struct.setting_master = setting_master;
         mouse_speed_setting_struct.activate_callback = &config::SettingMaster::activate_mouse_speed;
         mouse_speed_setting_struct.should_ylikuutio_call_activate_callback_now = true;
         new config::Setting(mouse_speed_setting_struct);

@@ -1,16 +1,27 @@
 #ifndef __SETTING_MASTER_HPP_INCLUDED
 #define __SETTING_MASTER_HPP_INCLUDED
 
-#include "code/ylikuutio/console/console.hpp"
-#include "code/ylikuutio/ontology/universe.hpp"
-#include "code/ylikuutio/common/any_value.hpp"
-
 // Include standard headers
 #include <memory>        // std::make_shared, std::shared_ptr
 #include <queue>         // std::queue
 #include <string>        // std::string
 #include <unordered_map> // std::unordered_map
 #include <vector>        // std::vector
+
+namespace console
+{
+    class Console;
+}
+
+namespace datatypes
+{
+    class AnyValue;
+}
+
+namespace ontology
+{
+    class Entity;
+}
 
 namespace config
 {
@@ -20,7 +31,7 @@ namespace config
     {
         public:
             // constructor.
-            SettingMaster(ontology::Universe* const universe);
+            SettingMaster(ontology::Entity* const entity);
 
             // destructor.
             ~SettingMaster();
@@ -42,66 +53,66 @@ namespace config
 
             static std::shared_ptr<datatypes::AnyValue> set_and_print(
                     console::Console* console,
-                    ontology::Universe* universe,
+                    ontology::Entity* entity,
                     std::vector<std::string>& command_parameters);
 
             static std::shared_ptr<datatypes::AnyValue> get_and_print(
                     console::Console* console,
-                    ontology::Universe* universe,
+                    ontology::Entity* entity,
                     std::vector<std::string>& command_parameters);
 
-            static std::shared_ptr<datatypes::AnyValue> activate_world_radius(ontology::Universe* const universe, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> activate_world_radius(ontology::Entity* const entity, config::SettingMaster* const setting_master);
 
-            static std::shared_ptr<datatypes::AnyValue> activate_background_color(ontology::Universe* const universe, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> activate_background_color(ontology::Entity* const entity, config::SettingMaster* const setting_master);
 
-            static std::shared_ptr<datatypes::AnyValue> activate_spherical_coordinates(ontology::Universe* const universe, config::SettingMaster* const setting_master);
-            static std::shared_ptr<datatypes::AnyValue> activate_rho(ontology::Universe* const universe, config::SettingMaster* const setting_master);
-            static std::shared_ptr<datatypes::AnyValue> activate_theta(ontology::Universe* const universe, config::SettingMaster* const setting_master);
-            static std::shared_ptr<datatypes::AnyValue> activate_phi(ontology::Universe* const universe, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> activate_spherical_coordinates(ontology::Entity* const entity, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> activate_rho(ontology::Entity* const entity, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> activate_theta(ontology::Entity* const entity, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> activate_phi(ontology::Entity* const entity, config::SettingMaster* const setting_master);
 
-            static std::shared_ptr<datatypes::AnyValue> activate_cartesian_coordinates(ontology::Universe* const universe, config::SettingMaster* const setting_master);
-            static std::shared_ptr<datatypes::AnyValue> activate_x(ontology::Universe* const universe, config::SettingMaster* const setting_master);
-            static std::shared_ptr<datatypes::AnyValue> activate_y(ontology::Universe* const universe, config::SettingMaster* const setting_master);
-            static std::shared_ptr<datatypes::AnyValue> activate_z(ontology::Universe* const universe, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> activate_cartesian_coordinates(ontology::Entity* const entity, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> activate_x(ontology::Entity* const entity, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> activate_y(ontology::Entity* const entity, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> activate_z(ontology::Entity* const entity, config::SettingMaster* const setting_master);
 
-            static std::shared_ptr<datatypes::AnyValue> activate_horizontal_angle(ontology::Universe* const universe, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> activate_horizontal_angle(ontology::Entity* const entity, config::SettingMaster* const setting_master);
 
-            static std::shared_ptr<datatypes::AnyValue> activate_vertical_angle(ontology::Universe* const universe, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> activate_vertical_angle(ontology::Entity* const entity, config::SettingMaster* const setting_master);
 
-            static std::shared_ptr<datatypes::AnyValue> activate_speed(ontology::Universe* const universe, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> activate_speed(ontology::Entity* const entity, config::SettingMaster* const setting_master);
 
-            static std::shared_ptr<datatypes::AnyValue> activate_turbo_factor(ontology::Universe* const universe, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> activate_turbo_factor(ontology::Entity* const entity, config::SettingMaster* const setting_master);
 
-            static std::shared_ptr<datatypes::AnyValue> activate_twin_turbo_factor(ontology::Universe* const universe, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> activate_twin_turbo_factor(ontology::Entity* const entity, config::SettingMaster* const setting_master);
 
-            static std::shared_ptr<datatypes::AnyValue> activate_mouse_speed(ontology::Universe* const universe, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> activate_mouse_speed(ontology::Entity* const entity, config::SettingMaster* const setting_master);
 
-            static std::shared_ptr<datatypes::AnyValue> activate_is_flight_mode_in_use(ontology::Universe* const universe, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> activate_is_flight_mode_in_use(ontology::Entity* const entity, config::SettingMaster* const setting_master);
 
-            static std::shared_ptr<datatypes::AnyValue> read_x(ontology::Universe* const universe, config::SettingMaster* const setting_master);
-            static std::shared_ptr<datatypes::AnyValue> read_y(ontology::Universe* const universe, config::SettingMaster* const setting_master);
-            static std::shared_ptr<datatypes::AnyValue> read_z(ontology::Universe* const universe, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> read_x(ontology::Entity* const entity, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> read_y(ontology::Entity* const entity, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> read_z(ontology::Entity* const entity, config::SettingMaster* const setting_master);
 
-            static std::shared_ptr<datatypes::AnyValue> read_rho(ontology::Universe* const universe, config::SettingMaster* const setting_master);
-            static std::shared_ptr<datatypes::AnyValue> read_theta(ontology::Universe* const universe, config::SettingMaster* const setting_master);
-            static std::shared_ptr<datatypes::AnyValue> read_phi(ontology::Universe* const universe, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> read_rho(ontology::Entity* const entity, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> read_theta(ontology::Entity* const entity, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> read_phi(ontology::Entity* const entity, config::SettingMaster* const setting_master);
 
-            static std::shared_ptr<datatypes::AnyValue> read_up(ontology::Universe* const universe, config::SettingMaster* const setting_master);
-            static std::shared_ptr<datatypes::AnyValue> read_right(ontology::Universe* const universe, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> read_up(ontology::Entity* const entity, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> read_right(ontology::Entity* const entity, config::SettingMaster* const setting_master);
 
-            static std::shared_ptr<datatypes::AnyValue> read_horizontal_angle(ontology::Universe* const universe, config::SettingMaster* const setting_master);
-            static std::shared_ptr<datatypes::AnyValue> read_vertical_angle(ontology::Universe* const universe, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> read_horizontal_angle(ontology::Entity* const entity, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> read_vertical_angle(ontology::Entity* const entity, config::SettingMaster* const setting_master);
 
-            static std::shared_ptr<datatypes::AnyValue> read_is_flight_mode_in_use(ontology::Universe* const universe, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> read_is_flight_mode_in_use(ontology::Entity* const entity, config::SettingMaster* const setting_master);
 
             // Public callbacks end here.
 
             friend class Setting;
-            friend class ontology::Universe;
+            friend class ontology::Entity;
             friend class console::Console;
 
         private:
-            ontology::Universe* parent;
+            ontology::Entity* parent;
 
             std::vector<config::Setting*> setting_pointer_vector;
             std::queue<int32_t> free_settingID_queue;

@@ -77,7 +77,7 @@ namespace ontology
         hierarchy::delete_children<ontology::Scene*>(this->scene_pointer_vector, &this->number_of_scenes);
 
         std::cout << "The setting master of this universe will be destroyed.\n";
-        delete this->setting_master_pointer;
+        delete this->setting_master;
     }
 
     void Universe::render()
@@ -190,12 +190,12 @@ namespace ontology
 
     void Universe::set(std::string& setting_name, std::shared_ptr<datatypes::AnyValue> setting_any_value)
     {
-        this->setting_master_pointer->set(setting_name, setting_any_value);
+        this->setting_master->set(setting_name, setting_any_value);
     }
 
     config::Setting* Universe::get(std::string key) const
     {
-        return this->setting_master_pointer->get(key);
+        return this->setting_master->get(key);
     }
 
     ontology::Entity* Universe::get_entity(const std::string& name)
@@ -231,15 +231,22 @@ namespace ontology
 
     std::shared_ptr<datatypes::AnyValue> Universe::delete_entity(
             console::Console* const console,
-            ontology::Universe* const universe,
+            ontology::Entity* const entity,
             std::vector<std::string>& command_parameters)
     {
-        if (console == nullptr || universe == nullptr)
+        if (console == nullptr || entity == nullptr)
         {
             return nullptr;
         }
 
-        config::SettingMaster* setting_master = universe->setting_master_pointer;
+        ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
+
+        if (universe == nullptr)
+        {
+            return nullptr;
+        }
+
+        config::SettingMaster* setting_master = universe->setting_master;
 
         if (setting_master == nullptr)
         {
@@ -276,15 +283,22 @@ namespace ontology
 
     std::shared_ptr<datatypes::AnyValue> Universe::activate_scene(
             console::Console* const console,
-            ontology::Universe* const universe,
+            ontology::Entity* const entity,
             std::vector<std::string>& command_parameters)
     {
-        if (console == nullptr || universe == nullptr)
+        if (console == nullptr || entity == nullptr)
         {
             return nullptr;
         }
 
-        config::SettingMaster* setting_master = universe->setting_master_pointer;
+        ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
+
+        if (universe == nullptr)
+        {
+            return nullptr;
+        }
+
+        config::SettingMaster* setting_master = universe->setting_master;
 
         if (setting_master == nullptr)
         {
@@ -321,12 +335,17 @@ namespace ontology
 
     std::shared_ptr<datatypes::AnyValue> Universe::info(
             console::Console* const console,
-            ontology::Universe* const universe,
+            ontology::Entity* const entity,
             std::vector<std::string>& command_parameters)
     {
-        if (console == nullptr ||
-                universe == nullptr ||
-                universe->setting_master_pointer == nullptr)
+        if (console == nullptr || entity == nullptr)
+        {
+            return nullptr;
+        }
+
+        ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
+
+        if (universe == nullptr)
         {
             return nullptr;
         }

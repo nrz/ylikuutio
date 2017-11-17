@@ -140,13 +140,12 @@ int main(void)
     config::SettingMaster* my_setting_master = new config::SettingMaster(my_universe);
 
     entity_factory->set_universe(my_universe);
-    entity_factory->set_setting_master(my_setting_master);
 
     float earth_radius = 6371.0f; // in kilometres
 
     SettingStruct world_radius_setting_struct(std::make_shared<datatypes::AnyValue>(earth_radius));
     world_radius_setting_struct.name = "world_radius";
-    world_radius_setting_struct.setting_master_pointer = my_setting_master;
+    world_radius_setting_struct.setting_master = my_setting_master;
     world_radius_setting_struct.activate_callback = &config::SettingMaster::activate_world_radius; // world may be a planet or a moon.
     world_radius_setting_struct.should_ylikuutio_call_activate_callback_now = true;
     new config::Setting(world_radius_setting_struct);
@@ -447,7 +446,7 @@ int main(void)
     suzanne_object_struct2.rotate_vector = glm::vec3(1.0f, 0.0f, 0.0f);
     suzanne_object_struct2.translate_vector = glm::vec3(0.0f, 1.0f, 0.0f);
     std::cout << "Creating ontology::Entity* suzanne2_entity ...\n";
-    ontology::Entity* suzanne2_entity = entity_factory->create_Object(suzanne_object_struct1);
+    ontology::Entity* suzanne2_entity = entity_factory->create_Object(suzanne_object_struct2);
     std::cout << "Creating ontology::Species* suzanne2 ...\n";
     ontology::Object* suzanne2 = dynamic_cast<ontology::Object*>(suzanne2_entity);
 
@@ -466,7 +465,7 @@ int main(void)
     suzanne_object_struct3.rotate_vector = glm::vec3(1.0f, 0.0f, 0.0f);
     suzanne_object_struct3.translate_vector = glm::vec3(0.0f, 0.0f, 1.0f);
     std::cout << "Creating ontology::Entity* suzanne3_entity ...\n";
-    ontology::Entity* suzanne3_entity = entity_factory->create_Object(suzanne_object_struct1);
+    ontology::Entity* suzanne3_entity = entity_factory->create_Object(suzanne_object_struct3);
     std::cout << "Creating ontology::Species* suzanne3 ...\n";
     ontology::Object* suzanne3 = dynamic_cast<ontology::Object*>(suzanne3_entity);
 
@@ -485,7 +484,7 @@ int main(void)
     suzanne_object_struct4.rotate_vector = glm::vec3(1.0f, 0.0f, 0.0f);
     suzanne_object_struct4.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
     std::cout << "Creating ontology::Entity* suzanne4_entity ...\n";
-    ontology::Entity* suzanne4_entity = entity_factory->create_Object(suzanne_object_struct1);
+    ontology::Entity* suzanne4_entity = entity_factory->create_Object(suzanne_object_struct4);
     std::cout << "Creating ontology::Species* suzanne4 ...\n";
     ontology::Object* suzanne4 = dynamic_cast<ontology::Object*>(suzanne4_entity);
 
@@ -505,7 +504,7 @@ int main(void)
     suzanne_object_struct5.rotate_vector = glm::vec3(1.0f, 1.0f, 1.0f);
     suzanne_object_struct5.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
     std::cout << "Creating ontology::Entity* suzanne5_entity ...\n";
-    ontology::Entity* suzanne5_entity = entity_factory->create_Object(suzanne_object_struct1);
+    ontology::Entity* suzanne5_entity = entity_factory->create_Object(suzanne_object_struct5);
     std::cout << "Creating ontology::Species* suzanne5 ...\n";
     ontology::Object* suzanne5 = dynamic_cast<ontology::Object*>(suzanne5_entity);
 
@@ -820,6 +819,8 @@ int main(void)
         return -1;
     }
 
+    std::cout << "Font2D created successfully.\n";
+
     std::unordered_map<std::string, ConsoleCommandCallback> command_callback_map;
 
     ConsoleStruct console_struct;
@@ -829,11 +830,15 @@ int main(void)
     console_struct.universe = my_universe;
     console_struct.font2D_pointer = my_font2D;
 
+    std::cout << "Creating console::Console* my_console ...\n";
+
     console::Console* my_console = new console::Console(console_struct); // create a console.
 
     /*********************************************************************\
      *  Callback engines for action mode keyreleases begin here.         *
     \*********************************************************************/
+
+    std::cout << "Defining action mode keyrelease callback engines.\n";
 
     // Callback code for `GLFW_KEY_GRAVE_ACCENT` release: enable enter console.
     callback_system::CallbackEngine* enable_enter_console_callback_engine = new callback_system::CallbackEngine();
@@ -867,6 +872,8 @@ int main(void)
     /*********************************************************************\
      *  Callback engines for action mode keypresses begin here.          *
     \*********************************************************************/
+
+    std::cout << "Defining action mode keypress callback engines.\n";
 
     // Callback code for `GLFW_KEY_GRAVE_ACCENT` (tilde key above Tab, usually used for console).
     callback_system::CallbackEngine* enter_console_callback_engine = new callback_system::CallbackEngine();
@@ -985,6 +992,8 @@ int main(void)
      *  Callback engines for console keyreleases begin here.             *
     \*********************************************************************/
 
+    std::cout << "Defining console keyrelease callback engines.\n";
+
     // Callback code for `GLFW_KEY_GRAVE_ACCENT` release: enable exit console.
     callback_system::CallbackEngine* enable_exit_console_callback_engine = new callback_system::CallbackEngine();
     new console::ConsoleCallbackObject(&console::Console::enable_exit_console, enable_exit_console_callback_engine, my_console);
@@ -1052,6 +1061,8 @@ int main(void)
     /*********************************************************************\
      *  Callback engines for console keypresses begin here.              *
     \*********************************************************************/
+
+    std::cout << "Defining console keypress callback engines.\n";
 
     // Callback code for `GLFW_KEY_GRAVE_ACCENT` (tilde key above Tab, usually used for console).
     callback_system::CallbackEngine* exit_console_callback_engine = new callback_system::CallbackEngine();
@@ -1198,6 +1209,8 @@ int main(void)
      * These define what commands there are available in the console     *
      * and what each command does.                                       *
      \********************************************************************/
+
+    std::cout << "Defining console command callback engines.\n";
 
     // Config callbacks.
     command_callback_map["set"] = &config::SettingMaster::set_and_print;

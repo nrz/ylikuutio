@@ -18,12 +18,12 @@ namespace datatypes
 
 namespace ontology
 {
-    class Universe;
+    class Entity;
 }
 
 typedef std::shared_ptr<datatypes::AnyValue> (*ConsoleCommandCallback) (
         console::Console*,
-        ontology::Universe*,
+        ontology::Entity*,
         std::vector<std::string>& command_parameters);
 
 #endif

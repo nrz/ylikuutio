@@ -18,7 +18,7 @@ namespace config
         // constructor.
         this->name = setting_struct.name;
         this->setting_value = setting_struct.initial_value;
-        this->parent = setting_struct.setting_master_pointer;
+        this->parent = setting_struct.setting_master;
         this->activate_callback = setting_struct.activate_callback;
         this->read_callback = setting_struct.read_callback;
         this->childID = -1;

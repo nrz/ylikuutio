@@ -17,6 +17,7 @@
 
 // Include standard headers
 #include <iterator>      // std::back_inserter
+#include <iostream>      // std::cout, std::cin, std::cerr
 #include <list>          // std::list
 #include <memory>        // std::make_shared, std::shared_ptr
 #include <stdint.h>      // uint32_t etc.
@@ -57,26 +58,41 @@ namespace console
         this->previous_keyrelease_callback_engine_vector_pointer = nullptr;
         this->my_keyrelease_callback_engine_vector_pointer = nullptr;
 
+        std::cout << "Defining pointers in Console::Console\n";
+
         // This is a pointer to `std::vector<KeyAndCallbackStruct>*` that controls keypress callbacks.
         this->current_keypress_callback_engine_vector_pointer_pointer = console_struct.current_keypress_callback_engine_vector_pointer_pointer;
+        std::cout << "1st pointer defined in Console::Console\n";
 
         // This is a pointer to `std::vector<KeyAndCallbackStruct>*` that controls keyrelease callbacks.
         this->current_keyrelease_callback_engine_vector_pointer_pointer = console_struct.current_keyrelease_callback_engine_vector_pointer_pointer;
+        std::cout << "2nd pointer defined in Console::Console\n";
 
         // This is a pointer to `std::unordered_map<std::string, bool>` that contains console command callbacks.
         this->command_callback_map_pointer = console_struct.command_callback_map_pointer;
+        std::cout << "3rd pointer defined in Console::Console\n";
 
         // This is a pointer to `ontology::Universe`.
         this->universe = console_struct.universe;
+        std::cout << "4th pointer defined in Console::Console\n";
+
         this->universe->console_pointer = this;
+        std::cout << "5th pointer defined in Console::Console\n";
 
         // This is a pointer to `font2D::Font2D` instance that is used for printing.
         this->font2D_pointer = console_struct.font2D_pointer;
+        std::cout << "6th pointer defined in Console::Console\n";
 
-        if (this->universe->setting_master_pointer->is_setting("console_top_y"))
+        std::cout << "Initializing config::SettingMaster setting_master\n";
+
+        config::SettingMaster* setting_master = this->universe->setting_master;
+
+        std::cout << "Initializing console_top_y\n";
+
+        if (setting_master != nullptr && setting_master->is_setting("console_top_y"))
         {
             // OK, there is a setting for `console_top_y`.
-            std::shared_ptr<datatypes::AnyValue> console_top_y_any_value = std::make_shared<datatypes::AnyValue>(*universe->setting_master_pointer->setting_pointer_map["console_top_y"]->setting_value);
+            std::shared_ptr<datatypes::AnyValue> console_top_y_any_value = std::make_shared<datatypes::AnyValue>(*universe->setting_master->setting_pointer_map["console_top_y"]->setting_value);
 
             if (console_top_y_any_value->type == datatypes::UINT32_T)
             {
@@ -84,20 +100,22 @@ namespace console
             }
             else
             {
-                // console_top_y` not `datatypes::UINT32_T`, so set `console_top_y` to zero 0.
-                this->console_top_y = 0;
+                // console_top_y` not `datatypes::UINT32_T`, so set `console_top_y` to 9.
+                this->console_top_y = 9;
             }
         }
         else
         {
-            // console_top_y` not defined, so set `console_top_y` to zero 0.
-            this->console_top_y = 0;
+            // console_top_y` not defined, so set `console_top_y` to 9.
+            this->console_top_y = 9;
         }
 
-        if (this->universe->setting_master_pointer->is_setting("console_bottom_y"))
+        std::cout << "Initializing console_bottom_y\n";
+
+        if (setting_master != nullptr && setting_master->is_setting("console_bottom_y"))
         {
             // OK, there is a setting for `console_bottom_y`.
-            std::shared_ptr<datatypes::AnyValue> console_bottom_y_any_value = std::make_shared<datatypes::AnyValue>(*universe->setting_master_pointer->setting_pointer_map["console_bottom_y"]->setting_value);
+            std::shared_ptr<datatypes::AnyValue> console_bottom_y_any_value = std::make_shared<datatypes::AnyValue>(*universe->setting_master->setting_pointer_map["console_bottom_y"]->setting_value);
 
             if (console_bottom_y_any_value->type == datatypes::UINT32_T)
             {
@@ -115,10 +133,12 @@ namespace console
             this->console_bottom_y = 0;
         }
 
-        if (this->universe->setting_master_pointer->is_setting("console_left_x"))
+        std::cout << "Initializing console_left_x\n";
+
+        if (setting_master != nullptr && setting_master->is_setting("console_left_x"))
         {
             // OK, there is a setting for `console_left_x`.
-            std::shared_ptr<datatypes::AnyValue> console_left_x_any_value = std::make_shared<datatypes::AnyValue>(*universe->setting_master_pointer->setting_pointer_map["console_left_x"]->setting_value);
+            std::shared_ptr<datatypes::AnyValue> console_left_x_any_value = std::make_shared<datatypes::AnyValue>(*universe->setting_master->setting_pointer_map["console_left_x"]->setting_value);
 
             if (console_left_x_any_value->type == datatypes::UINT32_T)
             {
@@ -136,10 +156,12 @@ namespace console
             this->console_left_x = 0;
         }
 
-        if (this->universe->setting_master_pointer->is_setting("console_right_x"))
+        std::cout << "Initializing console_right_x\n";
+
+        if (setting_master != nullptr && setting_master->is_setting("console_right_x"))
         {
             // OK, there is a setting for `console_right_x`.
-            std::shared_ptr<datatypes::AnyValue> console_right_x_any_value = std::make_shared<datatypes::AnyValue>(*universe->setting_master_pointer->setting_pointer_map["console_right_x"]->setting_value);
+            std::shared_ptr<datatypes::AnyValue> console_right_x_any_value = std::make_shared<datatypes::AnyValue>(*universe->setting_master->setting_pointer_map["console_right_x"]->setting_value);
 
             if (console_right_x_any_value->type == datatypes::UINT32_T)
             {
@@ -147,17 +169,20 @@ namespace console
             }
             else
             {
-                // console_right_x` not `datatypes::UINT32_T`, so set `console_right_x` to zero 0.
-                this->console_right_x = 0;
+                // console_right_x` not `datatypes::UINT32_T`, so set `console_right_x` to 9.
+                this->console_right_x = 9;
             }
         }
         else
         {
-            // console_right_x` not defined, so set `console_right_x` to zero 0.
-            this->console_right_x = 0;
+            // console_right_x` not defined, so set `console_right_x` to 9.
+            this->console_right_x = 9;
         }
 
+        std::cout << "Initializing n_rows\n";
         this->n_rows = this->console_top_y - this->console_bottom_y + 1;
+
+        std::cout << "Initializing n_columns\n";
         this->n_columns = this->console_right_x - this->console_left_x + 1;
 
         if (this->n_columns > this->universe->get_window_width() / this->universe->get_text_size())

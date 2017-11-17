@@ -200,7 +200,6 @@ namespace ontology
                 this->world_radius = NAN; // world radius is NAN as long it doesn't get `set` by `SettingMaster`.
                 this->terrain_species = nullptr;
                 this->active_scene = nullptr;
-                this->setting_master_pointer = nullptr;
                 this->console_pointer = nullptr;
 
                 this->background_red = NAN;
@@ -318,12 +317,17 @@ namespace ontology
 
             static std::shared_ptr<datatypes::AnyValue> delete_entity(
                     console::Console* const console,
-                    ontology::Universe* const universe,
+                    ontology::Entity* const entity,
+                    std::vector<std::string>& command_parameters);
+
+            static std::shared_ptr<datatypes::AnyValue> activate_scene(
+                    console::Console* const console,
+                    ontology::Entity* const entity,
                     std::vector<std::string>& command_parameters);
 
             static std::shared_ptr<datatypes::AnyValue> info(
                     console::Console* const console,
-                    ontology::Universe* const universe,
+                    ontology::Entity* const entity,
                     std::vector<std::string>& command_parameters);
 
             // Public callbacks end here.
@@ -341,11 +345,6 @@ namespace ontology
 
             glm::vec3 right; // note: `right` can not be set directly using console.
             glm::vec3 up;    // note: `up` can not be set directly using console.
-
-            static std::shared_ptr<datatypes::AnyValue> activate_scene(
-                    console::Console* const console,
-                    ontology::Universe* const universe,
-                    std::vector<std::string>& command_parameters);
 
             double horizontal_angle;
             double vertical_angle;
@@ -418,8 +417,7 @@ namespace ontology
 
             ontology::Scene* active_scene;
 
-            config::SettingMaster* setting_master_pointer; // pointer to `SettingMaster`.
-            console::Console* console_pointer;             // pointer to `Console`.
+            console::Console* console_pointer;     // pointer to `Console`.
 
             // Named entities are stored here so that they can be recalled, if needed.
             std::unordered_map<std::string, ontology::Entity*> entity_map;

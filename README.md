@@ -28,44 +28,18 @@ All my code copyright (C) 2016-2017 Antti Nuortimo.
 * Open Asset Import Library (assimp) is licensed under [a 3-clause BSD license](http://www.assimp.org/main_license.html).
 
 ### Other resources
-Other resources are licensed under their respective licenses.
-
-Grass texture is from [Free Seamless Green Grass Textures](http://www.brusheezy.com/textures/20185-seamless-green-grass-textures).
-
-Pink Marble Pavers Or Tiles Background Texture is from [My Free Textures](http://www.myfreetextures.com/marbles-pavers-tiles-background-texture/).
-pavers1b2.bmp is scaled down and converted into BMP from the original `pavers1b2.jpg`.
-License conditions are available on [My Free Textures License/TOU page](http://www.myfreetextures.com/sample-page/).
-
-kongtext font is made by [codeman38](http://zone38.net/), see
-res/fonts/kongtext/license.txt for the license.
-
-Laser scanning data of Helsinki, Joensuu, and other Finnish cities is
-licensed under a Creative Commons Attribution 4.0 International License (CC-BY).
-Contains data from [the National Land Survey of Finland Topographic Database 08/2016](http://www.maanmittauslaitos.fi/en/opendata-licence-cc40).
-Reference system is ETRS-TM35FIN and distribution format is LAZ.
-
-[Shuttle Radar Topography Mission (SRTM)](https://www2.jpl.nasa.gov/srtm/) data around Bolivian altiplano and
-elsewhere in the world between 56° S and 60° N is in the public domain.
-SRTM is a [NASA (National Aeronautics and Space Administration)](https://www.nasa.gov/) mission.
-SRTM data shipped with Ylikuutio belongs to SRTMGL3 dataset.
-Information about different SRTM datasets is available in [OpenStreetMap Wiki](http://wiki.openstreetmap.org/wiki/SRTM).
-
-[Rigged and animated cat](https://www.blendswap.com/blends/view/86110) is made by JonasDichelle and it is licensed
-under [Creative Commons Attribution 3.0 Unported (CC BY 3.0) license](https://creativecommons.org/licenses/by/3.0/).
-The `cat.fbx` file shipped with Ylikuutio is made from the original
-`cat.blend` by exporting the object in [FBX](https://en.wikipedia.org/wiki/FBX) file format, using [Blender](https://www.blender.org/).
-
-Suzanne the monkey is a standard [Blender](https://www.blender.org/) object. According to Blender
-license information: "All your artwork – images or movie files –
-including the .blend files and other data files Blender can write,
-is free for you to use as you like." Ylikuutio does not contain
-any code from Blender, however. [Blender itself is released under
-the GNU General Public License (GPL) 2 or later](https://www.blender.org/about/license/).
+* Grass texture is from [Free Seamless Green Grass Textures](http://www.brusheezy.com/textures/20185-seamless-green-grass-textures).
+* Pink Marble Pavers Or Tiles Background Texture is from [My Free Textures](http://www.myfreetextures.com/marbles-pavers-tiles-background-texture/). pavers1b2.bmp is scaled down and converted into BMP from the original `pavers1b2.jpg`. License conditions are available on [My Free Textures License/TOU page](http://www.myfreetextures.com/sample-page/).
+* kongtext font is made by [codeman38](http://zone38.net/), see res/fonts/kongtext/license.txt for the license.
+* Laser scanning data of Helsinki, Joensuu, and other Finnish cities is licensed under a Creative Commons Attribution 4.0 International License (CC-BY). Contains data from [the National Land Survey of Finland Topographic Database 08/2016](http://www.maanmittauslaitos.fi/en/opendata-licence-cc40). Reference system is ETRS-TM35FIN and distribution format is LAZ.
+* [Shuttle Radar Topography Mission (SRTM)](https://www2.jpl.nasa.gov/srtm/) data around Bolivian altiplano and elsewhere in the world between 56° S and 60° N is in the public domain. SRTM is a [NASA (National Aeronautics and Space Administration)](https://www.nasa.gov/) mission. SRTM data shipped with Ylikuutio belongs to SRTMGL3 dataset. Information about different SRTM datasets is available in [OpenStreetMap Wiki](http://wiki.openstreetmap.org/wiki/SRTM).
+* [Rigged and animated cat](https://www.blendswap.com/blends/view/86110) is made by JonasDichelle and it is licensed under [Creative Commons Attribution 3.0 Unported (CC BY 3.0) license](https://creativecommons.org/licenses/by/3.0/). The `cat.fbx` file shipped with Ylikuutio is made from the original `cat.blend` by exporting the object in [FBX](https://en.wikipedia.org/wiki/FBX) file format, using [Blender](https://www.blender.org/).
+* Suzanne the monkey is a standard [Blender](https://www.blender.org/) object. According to Blender license information: "All your artwork – images or movie files – including the .blend files and other data files Blender can write, is free for you to use as you like." Ylikuutio does not contain any code from Blender, however. [Blender itself is released under the GNU General Public License (GPL) 2 or later](https://www.blender.org/about/license/).
 
 ## Compiling
 Ylikuutio can be compiled with GCC, Clang or Visual Studio.
-In Visual Studio the compiling may break due to compiler-specific bugs.
-Cross compiling from Linux© to Windows© using GCC works fine.
+In Visual Studio compiling may break due to compiler-specific bugs.
+Cross compiling from Linux to Windows using GCC works fine.
 C++14 support is required.
 OpenGL 3.0 or newer is required.
 CMake 2.6.2 or newer is needed for the compiling process.
