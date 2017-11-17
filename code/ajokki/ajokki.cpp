@@ -342,7 +342,7 @@ int main(void)
         return -1;
     }
 
-    helsinki_eastern_downtown_terrain_species->set_name("Helsinki_eastern_downtown_species");
+    helsinki_eastern_downtown_terrain_species->set_name("helsinki_eastern_downtown_terrain_species");
 
     my_universe->is_flight_mode_in_use = true;
 
@@ -375,7 +375,7 @@ int main(void)
         return -1;
     }
 
-    snow_cottage_species->set_name("snow_cottage");
+    snow_cottage_species->set_name("snow_cottage_species");
 
     // Create snow cottage, store it in `snow_cottage1`.
     ObjectStruct snow_cottage_object_struct1;
@@ -680,7 +680,7 @@ int main(void)
         return -1;
     }
 
-    joensuu_center_and_western_terrain_species->set_name("joensuu_center_and_western_species");
+    joensuu_center_and_western_terrain_species->set_name("joensuu_center_and_western_terrain_species");
 
     // Create Helsinki eastern downtown terrain.
     ObjectStruct joensuu_center_and_western_struct;
@@ -776,7 +776,7 @@ int main(void)
         return -1;
     }
 
-    altiplano_terrain_species->set_name("altiplano_species");
+    altiplano_terrain_species->set_name("altiplano_terrain_species");
 
     // Create altiplano terrain.
     ObjectStruct altiplano_struct;
