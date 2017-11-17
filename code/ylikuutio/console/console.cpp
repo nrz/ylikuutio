@@ -100,14 +100,14 @@ namespace console
             }
             else
             {
-                // console_top_y` not `datatypes::UINT32_T`, so set `console_top_y` to zero 0.
-                this->console_top_y = 0;
+                // console_top_y` not `datatypes::UINT32_T`, so set `console_top_y` to 9.
+                this->console_top_y = 9;
             }
         }
         else
         {
-            // console_top_y` not defined, so set `console_top_y` to zero 0.
-            this->console_top_y = 0;
+            // console_top_y` not defined, so set `console_top_y` to 9.
+            this->console_top_y = 9;
         }
 
         std::cout << "Initializing console_bottom_y\n";
@@ -169,14 +169,14 @@ namespace console
             }
             else
             {
-                // console_right_x` not `datatypes::UINT32_T`, so set `console_right_x` to zero 0.
-                this->console_right_x = 0;
+                // console_right_x` not `datatypes::UINT32_T`, so set `console_right_x` to 9.
+                this->console_right_x = 9;
             }
         }
         else
         {
-            // console_right_x` not defined, so set `console_right_x` to zero 0.
-            this->console_right_x = 0;
+            // console_right_x` not defined, so set `console_right_x` to 9.
+            this->console_right_x = 9;
         }
 
         std::cout << "Initializing n_rows\n";
