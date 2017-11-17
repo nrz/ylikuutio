@@ -18,24 +18,24 @@ namespace datatypes
 
 namespace ontology
 {
-    class Universe;
+    class Entity;
 }
 
 namespace ajokki
 {
     std::shared_ptr<datatypes::AnyValue> version(
             console::Console* console,
-            ontology::Universe*,
+            ontology::Entity*,
             std::vector<std::string>& command_parameters);
 
     std::shared_ptr<datatypes::AnyValue> quit(
             console::Console*,
-            ontology::Universe*,
+            ontology::Entity*,
             std::vector<std::string>& command_parameters);
 
     std::shared_ptr<datatypes::AnyValue> help(
             console::Console*,
-            ontology::Universe*,
+            ontology::Entity*,
             std::vector<std::string>& command_parameters);
 }
 

@@ -1,26 +1,32 @@
 #include "setting_master.hpp"
 #include "setting.hpp"
 #include "code/ylikuutio/console/console.hpp"
-#include "code/ylikuutio/ontology/universe.hpp"
+#include "code/ylikuutio/ontology/entity.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
 
 // Include standard headers
+#include <iostream>      // std::cout, std::cin, std::cerr
 #include <memory>        // std::make_shared, std::shared_ptr
 #include <string>        // std::string
 #include <vector>        // std::vector
 #include <unordered_map> // std::unordered_map
 
+namespace ontology
+{
+    class Entity;
+}
+
 namespace config
 {
-    SettingMaster::SettingMaster(ontology::Universe* const universe)
+    SettingMaster::SettingMaster(ontology::Entity* const entity)
     {
         // costructor.
-        this->parent = universe;
+        this->parent = entity;
         this->number_of_settings = 0;
 
         // bind to parent.
         // there can be only 1 `SettingMaster`.
-        this->parent->setting_master_pointer = this;
+        this->parent->setting_master = this;
     }
 
     SettingMaster::~SettingMaster()
@@ -30,7 +36,10 @@ namespace config
 
     bool SettingMaster::is_setting(const std::string& setting_name)
     {
-        return (this->setting_pointer_map.count(setting_name) == 1);
+        std::cout << "Checking if " << setting_name << " is a Setting.\n";
+        bool is_setting = (this->setting_pointer_map.count(setting_name) == 1);
+        std::cout << "Returning from SettingMaster::is_setting\n";
+        return is_setting;
     }
 
     std::string SettingMaster::help()
@@ -82,7 +91,7 @@ namespace config
 
     std::shared_ptr<datatypes::AnyValue> SettingMaster::set_and_print(
             console::Console* const console,
-            ontology::Universe* const universe,
+            ontology::Entity* const entity,
             std::vector<std::string>& command_parameters)
     {
         // Usage:
@@ -90,7 +99,7 @@ namespace config
         // to get valid values:   set <variable>
         // to set variable:       set <variable> value[s]
 
-        config::SettingMaster* setting_master = universe->setting_master_pointer;
+        config::SettingMaster* setting_master = entity->setting_master;
 
         if (command_parameters.size() == 0)
         {
@@ -115,7 +124,7 @@ namespace config
                 }
                 else if (setting != nullptr && setting->setting_value != nullptr)
                 {
-                    console->print_text(setting->read_callback(universe, setting_master)->get_string());
+                    console->print_text(setting->read_callback(entity, setting_master)->get_string());
                 }
                 else
                 {
@@ -157,7 +166,7 @@ namespace config
 
                     if (setting->activate_callback != nullptr)
                     {
-                        setting->activate_callback(universe, setting_master);
+                        setting->activate_callback(entity, setting_master);
                     }
                 }
             }
@@ -172,13 +181,13 @@ namespace config
 
     std::shared_ptr<datatypes::AnyValue> SettingMaster::get_and_print(
             console::Console* const console,
-            ontology::Universe* const universe,
+            ontology::Entity* const entity,
             std::vector<std::string>& command_parameters)
     {
         // Usage:
         // to get variable names: get
         // to get variable value: get <variable>
-        config::SettingMaster* setting_master = universe->setting_master_pointer;
+        config::SettingMaster* setting_master = entity->setting_master;
 
         if (command_parameters.size() == 0)
         {
@@ -203,7 +212,7 @@ namespace config
                 }
                 else if (setting != nullptr && setting->setting_value != nullptr)
                 {
-                    console->print_text(setting->read_callback(universe, setting_master)->get_string());
+                    console->print_text(setting->read_callback(entity, setting_master)->get_string());
                 }
                 else
                 {
@@ -229,23 +238,28 @@ namespace config
         return nullptr;
     }
 
-    std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_world_radius(ontology::Universe* const universe, config::SettingMaster* const setting_master)
+    std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_world_radius(ontology::Entity* const entity, config::SettingMaster* const setting_master)
     {
-        if (universe == nullptr)
+        if (entity == nullptr || setting_master == nullptr)
         {
             return nullptr;
         }
 
-        SettingMaster* setting_master_pointer = universe->setting_master_pointer;
-
-        if (setting_master_pointer->setting_pointer_map.count("world_radius") != 1)
+        if (setting_master->setting_pointer_map.count("world_radius") != 1)
         {
             return nullptr;
         }
 
-        std::shared_ptr<datatypes::AnyValue> world_radius_any_value = std::make_shared<datatypes::AnyValue>(*setting_master_pointer->setting_pointer_map["world_radius"]->setting_value);
+        std::shared_ptr<datatypes::AnyValue> world_radius_any_value = std::make_shared<datatypes::AnyValue>(*setting_master->setting_pointer_map["world_radius"]->setting_value);
 
         if (world_radius_any_value == nullptr || world_radius_any_value->type != datatypes::FLOAT)
+        {
+            return nullptr;
+        }
+
+        ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
+
+        if (universe == nullptr)
         {
             return nullptr;
         }
@@ -254,30 +268,23 @@ namespace config
         return nullptr;
     }
 
-    std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_background_color(ontology::Universe* const universe, config::SettingMaster* const setting_master)
+    std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_background_color(ontology::Entity* const entity, config::SettingMaster* const setting_master)
     {
-        if (universe == nullptr)
+        if (entity == nullptr || setting_master == nullptr)
         {
             return nullptr;
         }
 
-        SettingMaster* setting_master_pointer = universe->setting_master_pointer;
-
-        if (setting_master_pointer == nullptr)
-        {
-            return nullptr;
-        }
-
-        if (setting_master_pointer->setting_pointer_map.count("red") != 1 ||
-                setting_master_pointer->setting_pointer_map.count("green") != 1 ||
-                setting_master_pointer->setting_pointer_map.count("blue") != 1 ||
-                setting_master_pointer->setting_pointer_map.count("alpha") != 1)
+        if (setting_master->setting_pointer_map.count("red") != 1 ||
+                setting_master->setting_pointer_map.count("green") != 1 ||
+                setting_master->setting_pointer_map.count("blue") != 1 ||
+                setting_master->setting_pointer_map.count("alpha") != 1)
         {
             return nullptr;
         }
 
         // red.
-        std::shared_ptr<datatypes::AnyValue> red_any_value = std::make_shared<datatypes::AnyValue>(*setting_master_pointer->setting_pointer_map["red"]->setting_value);
+        std::shared_ptr<datatypes::AnyValue> red_any_value = std::make_shared<datatypes::AnyValue>(*setting_master->setting_pointer_map["red"]->setting_value);
 
         if (red_any_value == nullptr || red_any_value->type != datatypes::FLOAT)
         {
@@ -287,7 +294,7 @@ namespace config
         GLclampf red = static_cast<GLclampf>(red_any_value->float_value);
 
         // green.
-        std::shared_ptr<datatypes::AnyValue> green_any_value = std::make_shared<datatypes::AnyValue>(*setting_master_pointer->setting_pointer_map["green"]->setting_value);
+        std::shared_ptr<datatypes::AnyValue> green_any_value = std::make_shared<datatypes::AnyValue>(*setting_master->setting_pointer_map["green"]->setting_value);
 
         if (green_any_value == nullptr || green_any_value->type != datatypes::FLOAT)
         {
@@ -297,7 +304,7 @@ namespace config
         GLclampf green = static_cast<GLclampf>(green_any_value->float_value);
 
         // blue.
-        std::shared_ptr<datatypes::AnyValue> blue_any_value = std::make_shared<datatypes::AnyValue>(*setting_master_pointer->setting_pointer_map["blue"]->setting_value);
+        std::shared_ptr<datatypes::AnyValue> blue_any_value = std::make_shared<datatypes::AnyValue>(*setting_master->setting_pointer_map["blue"]->setting_value);
 
         if (blue_any_value == nullptr || blue_any_value->type != datatypes::FLOAT)
         {
@@ -307,7 +314,7 @@ namespace config
         GLclampf blue = static_cast<GLclampf>(blue_any_value->float_value);
 
         // alpha.
-        std::shared_ptr<datatypes::AnyValue> alpha_any_value = std::make_shared<datatypes::AnyValue>(*setting_master_pointer->setting_pointer_map["alpha"]->setting_value);
+        std::shared_ptr<datatypes::AnyValue> alpha_any_value = std::make_shared<datatypes::AnyValue>(*setting_master->setting_pointer_map["alpha"]->setting_value);
 
         if (alpha_any_value == nullptr || alpha_any_value->type != datatypes::FLOAT)
         {
@@ -320,28 +327,28 @@ namespace config
         return nullptr;
     }
 
-    std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_spherical_coordinates(ontology::Universe* const universe, config::SettingMaster* const setting_master)
+    std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_spherical_coordinates(ontology::Entity* const entity, config::SettingMaster* const setting_master)
     {
-        if (universe == nullptr)
+        if (entity == nullptr || setting_master == nullptr)
         {
             return nullptr;
         }
 
-        SettingMaster* setting_master_pointer = universe->setting_master_pointer;
-
-        if (setting_master_pointer == nullptr)
+        if (setting_master->setting_pointer_map.count("spherical_coordinates") != 1)
         {
             return nullptr;
         }
 
-        if (setting_master_pointer->setting_pointer_map.count("spherical_coordinates") != 1)
-        {
-            return nullptr;
-        }
-
-        std::shared_ptr<datatypes::AnyValue> spherical_coordinates_any_value = std::make_shared<datatypes::AnyValue>(*setting_master_pointer->setting_pointer_map["spherical_coordinates"]->setting_value);
+        std::shared_ptr<datatypes::AnyValue> spherical_coordinates_any_value = std::make_shared<datatypes::AnyValue>(*setting_master->setting_pointer_map["spherical_coordinates"]->setting_value);
 
         if (spherical_coordinates_any_value == nullptr || spherical_coordinates_any_value->type != datatypes::SPHERICAL_COORDINATES_STRUCT_POINTER)
+        {
+            return nullptr;
+        }
+
+        ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
+
+        if (universe == nullptr)
         {
             return nullptr;
         }
@@ -351,26 +358,26 @@ namespace config
         return nullptr;
     }
 
-    std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_rho(ontology::Universe* const universe, config::SettingMaster* const setting_master)
+    std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_rho(ontology::Entity* const entity, config::SettingMaster* const setting_master)
     {
+        if (entity == nullptr || setting_master == nullptr)
+        {
+            return nullptr;
+        }
+
+        ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
+
         if (universe == nullptr || universe->spherical_coordinates == nullptr)
         {
             return nullptr;
         }
 
-        SettingMaster* setting_master_pointer = universe->setting_master_pointer;
-
-        if (setting_master_pointer == nullptr)
+        if (setting_master->setting_pointer_map.count("spherical_coordinates") != 1)
         {
             return nullptr;
         }
 
-        if (setting_master_pointer->setting_pointer_map.count("spherical_coordinates") != 1)
-        {
-            return nullptr;
-        }
-
-        std::shared_ptr<datatypes::AnyValue> rho_any_value = std::make_shared<datatypes::AnyValue>(*setting_master_pointer->setting_pointer_map["rho"]->setting_value);
+        std::shared_ptr<datatypes::AnyValue> rho_any_value = std::make_shared<datatypes::AnyValue>(*setting_master->setting_pointer_map["rho"]->setting_value);
 
         if (rho_any_value == nullptr || rho_any_value->type != datatypes::FLOAT)
         {
@@ -381,26 +388,26 @@ namespace config
         return nullptr;
     }
 
-    std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_theta(ontology::Universe* const universe, config::SettingMaster* const setting_master)
+    std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_theta(ontology::Entity* const entity, config::SettingMaster* const setting_master)
     {
+        if (entity == nullptr || setting_master == nullptr)
+        {
+            return nullptr;
+        }
+
+        ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
+
         if (universe == nullptr || universe->spherical_coordinates == nullptr)
         {
             return nullptr;
         }
 
-        SettingMaster* setting_master_pointer = universe->setting_master_pointer;
-
-        if (setting_master_pointer == nullptr)
+        if (setting_master->setting_pointer_map.count("spherical_coordinates") != 1)
         {
             return nullptr;
         }
 
-        if (setting_master_pointer->setting_pointer_map.count("spherical_coordinates") != 1)
-        {
-            return nullptr;
-        }
-
-        std::shared_ptr<datatypes::AnyValue> theta_any_value = std::make_shared<datatypes::AnyValue>(*setting_master_pointer->setting_pointer_map["theta"]->setting_value);
+        std::shared_ptr<datatypes::AnyValue> theta_any_value = std::make_shared<datatypes::AnyValue>(*setting_master->setting_pointer_map["theta"]->setting_value);
 
         if (theta_any_value == nullptr || theta_any_value->type != datatypes::FLOAT)
         {
@@ -411,26 +418,26 @@ namespace config
         return nullptr;
     }
 
-    std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_phi(ontology::Universe* const universe, config::SettingMaster* const setting_master)
+    std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_phi(ontology::Entity* const entity, config::SettingMaster* const setting_master)
     {
+        if (entity == nullptr || setting_master == nullptr)
+        {
+            return nullptr;
+        }
+
+        ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
+
         if (universe == nullptr || universe->spherical_coordinates == nullptr)
         {
             return nullptr;
         }
 
-        SettingMaster* setting_master_pointer = universe->setting_master_pointer;
-
-        if (setting_master_pointer == nullptr)
+        if (setting_master->setting_pointer_map.count("spherical_coordinates") != 1)
         {
             return nullptr;
         }
 
-        if (setting_master_pointer->setting_pointer_map.count("spherical_coordinates") != 1)
-        {
-            return nullptr;
-        }
-
-        std::shared_ptr<datatypes::AnyValue> phi_any_value = std::make_shared<datatypes::AnyValue>(*setting_master_pointer->setting_pointer_map["phi"]->setting_value);
+        std::shared_ptr<datatypes::AnyValue> phi_any_value = std::make_shared<datatypes::AnyValue>(*setting_master->setting_pointer_map["phi"]->setting_value);
 
         if (phi_any_value == nullptr || phi_any_value->type != datatypes::FLOAT)
         {
@@ -441,26 +448,21 @@ namespace config
         return nullptr;
     }
 
-    std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_cartesian_coordinates(ontology::Universe* const universe, config::SettingMaster* const setting_master)
+    std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_cartesian_coordinates(ontology::Entity* const entity, config::SettingMaster* const setting_master)
     {
-        if (universe == nullptr)
+        if (entity == nullptr || setting_master == nullptr)
         {
             return nullptr;
         }
 
-        SettingMaster* setting_master_pointer = universe->setting_master_pointer;
+        ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
 
-        if (setting_master_pointer == nullptr)
+        if (universe == nullptr || setting_master->setting_pointer_map.count("cartesian_coordinates") != 1)
         {
             return nullptr;
         }
 
-        if (setting_master_pointer->setting_pointer_map.count("cartesian_coordinates") != 1)
-        {
-            return nullptr;
-        }
-
-        std::shared_ptr<datatypes::AnyValue> cartesian_coordinates_any_value = std::make_shared<datatypes::AnyValue>(*setting_master_pointer->setting_pointer_map["cartesian_coordinates"]->setting_value);
+        std::shared_ptr<datatypes::AnyValue> cartesian_coordinates_any_value = std::make_shared<datatypes::AnyValue>(*setting_master->setting_pointer_map["cartesian_coordinates"]->setting_value);
 
         if (cartesian_coordinates_any_value == nullptr || cartesian_coordinates_any_value->type != datatypes::GLM_VEC3_POINTER)
         {
@@ -472,26 +474,26 @@ namespace config
         return nullptr;
     }
 
-    std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_x(ontology::Universe* const universe, config::SettingMaster* const setting_master)
+    std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_x(ontology::Entity* const entity, config::SettingMaster* const setting_master)
     {
+        if (entity == nullptr || setting_master == nullptr)
+        {
+            return nullptr;
+        }
+
+        ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
+
         if (universe == nullptr || universe->cartesian_coordinates == nullptr)
         {
             return nullptr;
         }
 
-        SettingMaster* setting_master_pointer = universe->setting_master_pointer;
-
-        if (setting_master_pointer == nullptr)
+        if (setting_master->setting_pointer_map.count("x") != 1)
         {
             return nullptr;
         }
 
-        if (setting_master_pointer->setting_pointer_map.count("x") != 1)
-        {
-            return nullptr;
-        }
-
-        std::shared_ptr<datatypes::AnyValue> x_any_value = std::make_shared<datatypes::AnyValue>(*setting_master_pointer->setting_pointer_map["x"]->setting_value);
+        std::shared_ptr<datatypes::AnyValue> x_any_value = std::make_shared<datatypes::AnyValue>(*setting_master->setting_pointer_map["x"]->setting_value);
 
         if (x_any_value == nullptr || x_any_value->type != datatypes::FLOAT)
         {
@@ -502,26 +504,26 @@ namespace config
         return nullptr;
     }
 
-    std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_y(ontology::Universe* const universe, config::SettingMaster* const setting_master)
+    std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_y(ontology::Entity* const entity, config::SettingMaster* const setting_master)
     {
+        if (entity == nullptr || setting_master == nullptr)
+        {
+            return nullptr;
+        }
+
+        ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
+
         if (universe == nullptr || universe->cartesian_coordinates == nullptr)
         {
             return nullptr;
         }
 
-        SettingMaster* setting_master_pointer = universe->setting_master_pointer;
-
-        if (setting_master_pointer == nullptr)
+        if (setting_master->setting_pointer_map.count("y") != 1)
         {
             return nullptr;
         }
 
-        if (setting_master_pointer->setting_pointer_map.count("y") != 1)
-        {
-            return nullptr;
-        }
-
-        std::shared_ptr<datatypes::AnyValue> y_any_value = std::make_shared<datatypes::AnyValue>(*setting_master_pointer->setting_pointer_map["y"]->setting_value);
+        std::shared_ptr<datatypes::AnyValue> y_any_value = std::make_shared<datatypes::AnyValue>(*setting_master->setting_pointer_map["y"]->setting_value);
 
         if (y_any_value == nullptr || y_any_value->type != datatypes::FLOAT)
         {
@@ -532,26 +534,26 @@ namespace config
         return nullptr;
     }
 
-    std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_z(ontology::Universe* const universe, config::SettingMaster* const setting_master)
+    std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_z(ontology::Entity* const entity, config::SettingMaster* const setting_master)
     {
+        if (entity == nullptr || setting_master == nullptr)
+        {
+            return nullptr;
+        }
+
+        ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
+
         if (universe == nullptr || universe->cartesian_coordinates == nullptr)
         {
             return nullptr;
         }
 
-        SettingMaster* setting_master_pointer = universe->setting_master_pointer;
-
-        if (setting_master_pointer == nullptr)
+        if (setting_master->setting_pointer_map.count("z") != 1)
         {
             return nullptr;
         }
 
-        if (setting_master_pointer->setting_pointer_map.count("z") != 1)
-        {
-            return nullptr;
-        }
-
-        std::shared_ptr<datatypes::AnyValue> z_any_value = std::make_shared<datatypes::AnyValue>(*setting_master_pointer->setting_pointer_map["z"]->setting_value);
+        std::shared_ptr<datatypes::AnyValue> z_any_value = std::make_shared<datatypes::AnyValue>(*setting_master->setting_pointer_map["z"]->setting_value);
 
         if (z_any_value == nullptr || z_any_value->type != datatypes::FLOAT)
         {
@@ -562,26 +564,26 @@ namespace config
         return nullptr;
     }
 
-    std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_horizontal_angle(ontology::Universe* const universe, config::SettingMaster* const setting_master)
+    std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_horizontal_angle(ontology::Entity* const entity, config::SettingMaster* const setting_master)
     {
+        if (entity == nullptr || setting_master == nullptr)
+        {
+            return nullptr;
+        }
+
+        ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
+
         if (universe == nullptr)
         {
             return nullptr;
         }
 
-        SettingMaster* setting_master_pointer = universe->setting_master_pointer;
-
-        if (setting_master_pointer == nullptr)
+        if (setting_master->setting_pointer_map.count("horizontal_angle") != 1)
         {
             return nullptr;
         }
 
-        if (setting_master_pointer->setting_pointer_map.count("horizontal_angle") != 1)
-        {
-            return nullptr;
-        }
-
-        std::shared_ptr<datatypes::AnyValue> horizontal_angle_any_value = std::make_shared<datatypes::AnyValue>(*setting_master_pointer->setting_pointer_map["horizontal_angle"]->setting_value);
+        std::shared_ptr<datatypes::AnyValue> horizontal_angle_any_value = std::make_shared<datatypes::AnyValue>(*setting_master->setting_pointer_map["horizontal_angle"]->setting_value);
 
         if (horizontal_angle_any_value == nullptr || horizontal_angle_any_value->type != datatypes::DOUBLE)
         {
@@ -592,26 +594,26 @@ namespace config
         return nullptr;
     }
 
-    std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_vertical_angle(ontology::Universe* const universe, config::SettingMaster* const setting_master)
+    std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_vertical_angle(ontology::Entity* const entity, config::SettingMaster* const setting_master)
     {
+        if (entity == nullptr || setting_master == nullptr)
+        {
+            return nullptr;
+        }
+
+        ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
+
         if (universe == nullptr)
         {
             return nullptr;
         }
 
-        SettingMaster* setting_master_pointer = universe->setting_master_pointer;
-
-        if (setting_master_pointer == nullptr)
+        if (setting_master->setting_pointer_map.count("vertical_angle") != 1)
         {
             return nullptr;
         }
 
-        if (setting_master_pointer->setting_pointer_map.count("vertical_angle") != 1)
-        {
-            return nullptr;
-        }
-
-        std::shared_ptr<datatypes::AnyValue> vertical_angle_any_value = std::make_shared<datatypes::AnyValue>(*setting_master_pointer->setting_pointer_map["vertical_angle"]->setting_value);
+        std::shared_ptr<datatypes::AnyValue> vertical_angle_any_value = std::make_shared<datatypes::AnyValue>(*setting_master->setting_pointer_map["vertical_angle"]->setting_value);
 
         if (vertical_angle_any_value == nullptr || vertical_angle_any_value->type != datatypes::DOUBLE)
         {
@@ -622,26 +624,26 @@ namespace config
         return nullptr;
     }
 
-    std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_speed(ontology::Universe* const universe, config::SettingMaster* const setting_master)
+    std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_speed(ontology::Entity* const entity, config::SettingMaster* const setting_master)
     {
+        if (entity == nullptr || setting_master == nullptr)
+        {
+            return nullptr;
+        }
+
+        ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
+
         if (universe == nullptr)
         {
             return nullptr;
         }
 
-        SettingMaster* setting_master_pointer = universe->setting_master_pointer;
-
-        if (setting_master_pointer == nullptr)
+        if (setting_master->setting_pointer_map.count("speed") != 1)
         {
             return nullptr;
         }
 
-        if (setting_master_pointer->setting_pointer_map.count("speed") != 1)
-        {
-            return nullptr;
-        }
-
-        std::shared_ptr<datatypes::AnyValue> speed_any_value = std::make_shared<datatypes::AnyValue>(*setting_master_pointer->setting_pointer_map["speed"]->setting_value);
+        std::shared_ptr<datatypes::AnyValue> speed_any_value = std::make_shared<datatypes::AnyValue>(*setting_master->setting_pointer_map["speed"]->setting_value);
 
         if (speed_any_value == nullptr || speed_any_value->type != datatypes::FLOAT)
         {
@@ -652,26 +654,26 @@ namespace config
         return nullptr;
     }
 
-    std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_turbo_factor(ontology::Universe* const universe, config::SettingMaster* const setting_master)
+    std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_turbo_factor(ontology::Entity* const entity, config::SettingMaster* const setting_master)
     {
+        if (entity == nullptr || setting_master == nullptr)
+        {
+            return nullptr;
+        }
+
+        ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
+
         if (universe == nullptr)
         {
             return nullptr;
         }
 
-        SettingMaster* setting_master_pointer = universe->setting_master_pointer;
-
-        if (setting_master_pointer == nullptr)
+        if (setting_master->setting_pointer_map.count("turbo_factor") != 1)
         {
             return nullptr;
         }
 
-        if (setting_master_pointer->setting_pointer_map.count("turbo_factor") != 1)
-        {
-            return nullptr;
-        }
-
-        std::shared_ptr<datatypes::AnyValue> turbo_factor_any_value = std::make_shared<datatypes::AnyValue>(*setting_master_pointer->setting_pointer_map["turbo_factor"]->setting_value);
+        std::shared_ptr<datatypes::AnyValue> turbo_factor_any_value = std::make_shared<datatypes::AnyValue>(*setting_master->setting_pointer_map["turbo_factor"]->setting_value);
 
         if (turbo_factor_any_value == nullptr || turbo_factor_any_value->type != datatypes::FLOAT)
         {
@@ -682,26 +684,26 @@ namespace config
         return nullptr;
     }
 
-    std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_twin_turbo_factor(ontology::Universe* const universe, config::SettingMaster* const setting_master)
+    std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_twin_turbo_factor(ontology::Entity* const entity, config::SettingMaster* const setting_master)
     {
+        if (entity == nullptr || setting_master == nullptr)
+        {
+            return nullptr;
+        }
+
+        ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
+
         if (universe == nullptr)
         {
             return nullptr;
         }
 
-        SettingMaster* setting_master_pointer = universe->setting_master_pointer;
-
-        if (setting_master_pointer == nullptr)
+        if (setting_master->setting_pointer_map.count("twin_turbo_factor") != 1)
         {
             return nullptr;
         }
 
-        if (setting_master_pointer->setting_pointer_map.count("twin_turbo_factor") != 1)
-        {
-            return nullptr;
-        }
-
-        std::shared_ptr<datatypes::AnyValue> twin_turbo_factor_any_value = std::make_shared<datatypes::AnyValue>(*setting_master_pointer->setting_pointer_map["twin_turbo_factor"]->setting_value);
+        std::shared_ptr<datatypes::AnyValue> twin_turbo_factor_any_value = std::make_shared<datatypes::AnyValue>(*setting_master->setting_pointer_map["twin_turbo_factor"]->setting_value);
 
         if (twin_turbo_factor_any_value == nullptr || twin_turbo_factor_any_value->type != datatypes::FLOAT)
         {
@@ -712,26 +714,26 @@ namespace config
         return nullptr;
     }
 
-    std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_mouse_speed(ontology::Universe* const universe, config::SettingMaster* const setting_master)
+    std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_mouse_speed(ontology::Entity* const entity, config::SettingMaster* const setting_master)
     {
+        if (entity == nullptr || setting_master == nullptr)
+        {
+            return nullptr;
+        }
+
+        ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
+
         if (universe == nullptr)
         {
             return nullptr;
         }
 
-        SettingMaster* setting_master_pointer = universe->setting_master_pointer;
-
-        if (setting_master_pointer == nullptr)
+        if (setting_master->setting_pointer_map.count("mouse_speed") != 1)
         {
             return nullptr;
         }
 
-        if (setting_master_pointer->setting_pointer_map.count("mouse_speed") != 1)
-        {
-            return nullptr;
-        }
-
-        std::shared_ptr<datatypes::AnyValue> mouse_speed_any_value = std::make_shared<datatypes::AnyValue>(*setting_master_pointer->setting_pointer_map["mouse_speed"]->setting_value);
+        std::shared_ptr<datatypes::AnyValue> mouse_speed_any_value = std::make_shared<datatypes::AnyValue>(*setting_master->setting_pointer_map["mouse_speed"]->setting_value);
 
         if (mouse_speed_any_value == nullptr || mouse_speed_any_value->type != datatypes::FLOAT)
         {
@@ -742,26 +744,26 @@ namespace config
         return nullptr;
     }
 
-    std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_is_flight_mode_in_use(ontology::Universe* const universe, config::SettingMaster* const setting_master)
+    std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_is_flight_mode_in_use(ontology::Entity* const entity, config::SettingMaster* const setting_master)
     {
+        if (entity == nullptr || setting_master == nullptr)
+        {
+            return nullptr;
+        }
+
+        ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
+
         if (universe == nullptr)
         {
             return nullptr;
         }
 
-        SettingMaster* setting_master_pointer = universe->setting_master_pointer;
-
-        if (setting_master_pointer == nullptr)
+        if (setting_master->setting_pointer_map.count("is_flight_mode_in_use") != 1)
         {
             return nullptr;
         }
 
-        if (setting_master_pointer->setting_pointer_map.count("is_flight_mode_in_use") != 1)
-        {
-            return nullptr;
-        }
-
-        std::shared_ptr<datatypes::AnyValue> is_flight_mode_in_use_any_value = std::make_shared<datatypes::AnyValue>(*setting_master_pointer->setting_pointer_map["is_flight_mode_in_use"]->setting_value);
+        std::shared_ptr<datatypes::AnyValue> is_flight_mode_in_use_any_value = std::make_shared<datatypes::AnyValue>(*setting_master->setting_pointer_map["is_flight_mode_in_use"]->setting_value);
 
         if (is_flight_mode_in_use_any_value == nullptr || is_flight_mode_in_use_any_value->type != datatypes::BOOL)
         {
@@ -772,8 +774,15 @@ namespace config
         return nullptr;
     }
 
-    std::shared_ptr<datatypes::AnyValue> SettingMaster::read_x(ontology::Universe* const universe, config::SettingMaster* const setting_master)
+    std::shared_ptr<datatypes::AnyValue> SettingMaster::read_x(ontology::Entity* const entity, config::SettingMaster* const setting_master)
     {
+        if (entity == nullptr)
+        {
+            return nullptr;
+        }
+
+        ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
+
         if (universe == nullptr || universe->cartesian_coordinates == nullptr)
         {
             return nullptr;
@@ -782,8 +791,15 @@ namespace config
         return std::make_shared<datatypes::AnyValue>(universe->cartesian_coordinates->x);
     }
 
-    std::shared_ptr<datatypes::AnyValue> SettingMaster::read_y(ontology::Universe* const universe, config::SettingMaster* const setting_master)
+    std::shared_ptr<datatypes::AnyValue> SettingMaster::read_y(ontology::Entity* const entity, config::SettingMaster* const setting_master)
     {
+        if (entity == nullptr)
+        {
+            return nullptr;
+        }
+
+        ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
+
         if (universe == nullptr || universe->cartesian_coordinates == nullptr)
         {
             return nullptr;
@@ -792,8 +808,15 @@ namespace config
         return std::make_shared<datatypes::AnyValue>(universe->cartesian_coordinates->y);
     }
 
-    std::shared_ptr<datatypes::AnyValue> SettingMaster::read_z(ontology::Universe* const universe, config::SettingMaster* const setting_master)
+    std::shared_ptr<datatypes::AnyValue> SettingMaster::read_z(ontology::Entity* const entity, config::SettingMaster* const setting_master)
     {
+        if (entity == nullptr)
+        {
+            return nullptr;
+        }
+
+        ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
+
         if (universe == nullptr || universe->cartesian_coordinates == nullptr)
         {
             return nullptr;
@@ -802,8 +825,15 @@ namespace config
         return std::make_shared<datatypes::AnyValue>(universe->cartesian_coordinates->z);
     }
 
-    std::shared_ptr<datatypes::AnyValue> SettingMaster::read_rho(ontology::Universe* const universe, config::SettingMaster* const setting_master)
+    std::shared_ptr<datatypes::AnyValue> SettingMaster::read_rho(ontology::Entity* const entity, config::SettingMaster* const setting_master)
     {
+        if (entity == nullptr)
+        {
+            return nullptr;
+        }
+
+        ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
+
         if (universe == nullptr || universe->spherical_coordinates == nullptr)
         {
             return nullptr;
@@ -812,8 +842,15 @@ namespace config
         return std::make_shared<datatypes::AnyValue>(universe->spherical_coordinates->rho);
     }
 
-    std::shared_ptr<datatypes::AnyValue> SettingMaster::read_theta(ontology::Universe* const universe, config::SettingMaster* const setting_master)
+    std::shared_ptr<datatypes::AnyValue> SettingMaster::read_theta(ontology::Entity* const entity, config::SettingMaster* const setting_master)
     {
+        if (entity == nullptr)
+        {
+            return nullptr;
+        }
+
+        ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
+
         if (universe == nullptr || universe->spherical_coordinates == nullptr)
         {
             return nullptr;
@@ -822,8 +859,15 @@ namespace config
         return std::make_shared<datatypes::AnyValue>(universe->spherical_coordinates->theta);
     }
 
-    std::shared_ptr<datatypes::AnyValue> SettingMaster::read_phi(ontology::Universe* const universe, config::SettingMaster* const setting_master)
+    std::shared_ptr<datatypes::AnyValue> SettingMaster::read_phi(ontology::Entity* const entity, config::SettingMaster* const setting_master)
     {
+        if (entity == nullptr)
+        {
+            return nullptr;
+        }
+
+        ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
+
         if (universe == nullptr || universe->spherical_coordinates == nullptr)
         {
             return nullptr;
@@ -832,8 +876,15 @@ namespace config
         return std::make_shared<datatypes::AnyValue>(universe->spherical_coordinates->phi);
     }
 
-    std::shared_ptr<datatypes::AnyValue> SettingMaster::read_up(ontology::Universe* const universe, config::SettingMaster* const setting_master)
+    std::shared_ptr<datatypes::AnyValue> SettingMaster::read_up(ontology::Entity* const entity, config::SettingMaster* const setting_master)
     {
+        if (entity == nullptr)
+        {
+            return nullptr;
+        }
+
+        ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
+
         if (universe == nullptr)
         {
             return nullptr;
@@ -842,8 +893,15 @@ namespace config
         return std::make_shared<datatypes::AnyValue>(&universe->up);
     }
 
-    std::shared_ptr<datatypes::AnyValue> SettingMaster::read_right(ontology::Universe* const universe, config::SettingMaster* const setting_master)
+    std::shared_ptr<datatypes::AnyValue> SettingMaster::read_right(ontology::Entity* const entity, config::SettingMaster* const setting_master)
     {
+        if (entity == nullptr)
+        {
+            return nullptr;
+        }
+
+        ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
+
         if (universe == nullptr)
         {
             return nullptr;
@@ -852,8 +910,15 @@ namespace config
         return std::make_shared<datatypes::AnyValue>(&universe->right);
     }
 
-    std::shared_ptr<datatypes::AnyValue> SettingMaster::read_horizontal_angle(ontology::Universe* const universe, config::SettingMaster* const setting_master)
+    std::shared_ptr<datatypes::AnyValue> SettingMaster::read_horizontal_angle(ontology::Entity* const entity, config::SettingMaster* const setting_master)
     {
+        if (entity == nullptr)
+        {
+            return nullptr;
+        }
+
+        ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
+
         if (universe == nullptr)
         {
             return nullptr;
@@ -862,8 +927,15 @@ namespace config
         return std::make_shared<datatypes::AnyValue>(universe->horizontal_angle);
     }
 
-    std::shared_ptr<datatypes::AnyValue> SettingMaster::read_vertical_angle(ontology::Universe* const universe, config::SettingMaster* const setting_master)
+    std::shared_ptr<datatypes::AnyValue> SettingMaster::read_vertical_angle(ontology::Entity* const entity, config::SettingMaster* const setting_master)
     {
+        if (entity == nullptr)
+        {
+            return nullptr;
+        }
+
+        ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
+
         if (universe == nullptr)
         {
             return nullptr;
@@ -872,8 +944,15 @@ namespace config
         return std::make_shared<datatypes::AnyValue>(universe->vertical_angle);
     }
 
-    std::shared_ptr<datatypes::AnyValue> SettingMaster::read_is_flight_mode_in_use(ontology::Universe* const universe, config::SettingMaster* const setting_master)
+    std::shared_ptr<datatypes::AnyValue> SettingMaster::read_is_flight_mode_in_use(ontology::Entity* const entity, config::SettingMaster* const setting_master)
     {
+        if (entity == nullptr)
+        {
+            return nullptr;
+        }
+
+        ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
+
         if (universe == nullptr)
         {
             return nullptr;

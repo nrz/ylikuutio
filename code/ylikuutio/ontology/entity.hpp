@@ -8,6 +8,11 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
+namespace config
+{
+    class SettingMaster;
+}
+
 namespace ontology
 {
     class Universe;
@@ -27,6 +32,7 @@ namespace ontology
             virtual int32_t get_number_of_children() = 0;
             virtual int32_t get_number_of_descendants() = 0;
 
+            friend class config::SettingMaster;
             template<class T1>
                 friend void set_name(const std::string& name, T1 entity);
 
@@ -35,6 +41,7 @@ namespace ontology
             void postrender();
 
             ontology::Universe* universe;          // pointer to `Universe`.
+            config::SettingMaster* setting_master; // pointer to `SettingMaster`.
             std::vector<void*> child_vector_pointers_vector;
             int32_t childID;
 

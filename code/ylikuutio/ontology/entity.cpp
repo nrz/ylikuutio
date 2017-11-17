@@ -13,6 +13,7 @@ namespace ontology
         // constructor.
         this->childID = -1;
         this->universe = universe;
+        this->setting_master = nullptr;
         this->prerender_callback = nullptr;
         this->postrender_callback = nullptr;
     }
@@ -53,9 +54,9 @@ namespace ontology
     {
         if (this->prerender_callback != nullptr &&
                 this->universe != nullptr &&
-                this->universe->setting_master_pointer != nullptr)
+                this->universe->setting_master != nullptr)
         {
-            this->prerender_callback(this->universe, this->universe->setting_master_pointer);
+            this->prerender_callback(this->universe, this->universe->setting_master);
         }
     }
 
@@ -63,9 +64,9 @@ namespace ontology
     {
         if (this->postrender_callback != nullptr &&
                 this->universe != nullptr &&
-                this->universe->setting_master_pointer != nullptr)
+                this->universe->setting_master != nullptr)
         {
-            this->postrender_callback(this->universe, this->universe->setting_master_pointer);
+            this->postrender_callback(this->universe, this->universe->setting_master);
         }
     }
 }
