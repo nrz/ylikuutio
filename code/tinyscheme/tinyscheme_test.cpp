@@ -8,6 +8,23 @@
 
 // Based on https://github.com/dchest/tinyscheme/blob/master/example.c
 
+pointer cube(scheme* sc, pointer args)
+{
+    if (sc == nullptr)
+    {
+        std::cerr << "error: scheme* sc is nullptr\n";
+        return nullptr;
+    }
+
+    if (args == sc->NIL || !sc->vptr->is_number(sc->vptr->pair_car(args)))
+    {
+        return sc->NIL;
+    }
+
+    double value = sc->vptr->rvalue(sc->vptr->pair_car(args));
+    return sc->vptr->mk_real(sc, value * value * value);
+}
+
 pointer display(scheme* sc, pointer args)
 {
     if (sc == nullptr)
@@ -49,6 +66,7 @@ scheme* init_scheme()
     scheme_load_file(sc, init_file);
     fclose(init_file);
 
+    sc->vptr->scheme_define(sc, sc->global_env, sc->vptr->mk_symbol(sc, "cube"), sc->vptr->mk_foreign_func(sc, cube));
     sc->vptr->scheme_define(sc, sc->global_env, sc->vptr->mk_symbol(sc, "display"), sc->vptr->mk_foreign_func(sc, display));
 
     return sc;
@@ -75,6 +93,12 @@ bool do_stuff(scheme* sc)
     /* eval a C string as Scheme code */
     const char* hello_world_char = "(display \"Hello world!\n\")";
     scheme_load_string(sc, hello_world_char);
+
+    const char* cube_char = "(display (string-append \"5.0 cubed is \" (number->string (cube 5.0)) \"\n\"))";
+    scheme_load_string(sc, cube_char);
+
+    const char* see_you_char = "(display \"See you!\n\")";
+    scheme_load_string(sc, see_you_char);
 
     return true;
 }
