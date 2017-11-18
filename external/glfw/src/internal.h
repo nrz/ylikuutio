@@ -25,6 +25,8 @@
 //
 //========================================================================
 
+#pragma once
+
 #if defined(_GLFW_USE_CONFIG_H)
  #include "glfw_config.h"
 #endif
@@ -641,13 +643,14 @@ const char* _glfwPlatformGetScancodeName(int scancode);
 int _glfwPlatformGetKeyScancode(int key);
 
 void _glfwPlatformGetMonitorPos(_GLFWmonitor* monitor, int* xpos, int* ypos);
+void _glfwPlatformGetMonitorContentScale(_GLFWmonitor* monitor, float* xscale, float* yscale);
 GLFWvidmode* _glfwPlatformGetVideoModes(_GLFWmonitor* monitor, int* count);
 void _glfwPlatformGetVideoMode(_GLFWmonitor* monitor, GLFWvidmode* mode);
 void _glfwPlatformGetGammaRamp(_GLFWmonitor* monitor, GLFWgammaramp* ramp);
 void _glfwPlatformSetGammaRamp(_GLFWmonitor* monitor, const GLFWgammaramp* ramp);
 
-void _glfwPlatformSetClipboardString(_GLFWwindow* window, const char* string);
-const char* _glfwPlatformGetClipboardString(_GLFWwindow* window);
+void _glfwPlatformSetClipboardString(const char* string);
+const char* _glfwPlatformGetClipboardString(void);
 
 int _glfwPlatformPollJoystick(_GLFWjoystick* js, int mode);
 void _glfwPlatformUpdateGamepadGUID(char* guid);
@@ -670,6 +673,7 @@ void _glfwPlatformSetWindowSizeLimits(_GLFWwindow* window, int minwidth, int min
 void _glfwPlatformSetWindowAspectRatio(_GLFWwindow* window, int numer, int denom);
 void _glfwPlatformGetFramebufferSize(_GLFWwindow* window, int* width, int* height);
 void _glfwPlatformGetWindowFrameSize(_GLFWwindow* window, int* left, int* top, int* right, int* bottom);
+void _glfwPlatformGetWindowContentScale(_GLFWwindow* window, float* xscale, float* yscale);
 void _glfwPlatformIconifyWindow(_GLFWwindow* window);
 void _glfwPlatformRestoreWindow(_GLFWwindow* window);
 void _glfwPlatformMaximizeWindow(_GLFWwindow* window);
@@ -683,9 +687,11 @@ int _glfwPlatformWindowIconified(_GLFWwindow* window);
 int _glfwPlatformWindowVisible(_GLFWwindow* window);
 int _glfwPlatformWindowMaximized(_GLFWwindow* window);
 int _glfwPlatformFramebufferTransparent(_GLFWwindow* window);
+float _glfwPlatformGetWindowOpacity(_GLFWwindow* window);
 void _glfwPlatformSetWindowResizable(_GLFWwindow* window, GLFWbool enabled);
 void _glfwPlatformSetWindowDecorated(_GLFWwindow* window, GLFWbool enabled);
 void _glfwPlatformSetWindowFloating(_GLFWwindow* window, GLFWbool enabled);
+void _glfwPlatformSetWindowOpacity(_GLFWwindow* window, float opacity);
 
 void _glfwPlatformPollEvents(void);
 void _glfwPlatformWaitEvents(void);
@@ -777,7 +783,7 @@ void _glfwInputWindowCloseRequest(_GLFWwindow* window);
  *  @param[in] monitor The new desired monitor, or `NULL`.
  *  @ingroup event
  */
-void _glfwInputWindowMonitorChange(_GLFWwindow* window, _GLFWmonitor* monitor);
+void _glfwInputWindowMonitor(_GLFWwindow* window, _GLFWmonitor* monitor);
 
 /*! @brief Notifies shared code of a physical key event.
  *  @param[in] window The window that received the event.
