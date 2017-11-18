@@ -298,6 +298,25 @@ int main(void)
 
     pink_geometric_tiles_material->set_name("pink_geometric_tiles_material");
 
+    // Create the material, store it in `orange_fur_material`.
+    MaterialStruct orange_fur_material_struct;
+    orange_fur_material_struct.parent = helsinki_east_downtown_shader;
+    orange_fur_material_struct.texture_file_format = "bmp";
+    orange_fur_material_struct.texture_filename = "orange_fur_texture.bmp";
+
+    std::cout << "Creating ontology::Entity* orange_fur_material_entity ...\n";
+    ontology::Entity* orange_fur_material_entity = entity_factory->create_Material(orange_fur_material_struct);
+    std::cout << "Creating ontology::Material* orange_fur_material ...\n";
+    ontology::Material* orange_fur_material = dynamic_cast<ontology::Material*>(orange_fur_material_entity);
+
+    if (orange_fur_material == nullptr)
+    {
+        std::cerr << "Failed to create pink geometric tiles Material.\n";
+        return -1;
+    }
+
+    orange_fur_material->set_name("orange_fur_material");
+
     // Create the species, store it in `bmp_terrain_species`.
     SpeciesStruct bmp_terrain_species_struct;
     bmp_terrain_species_struct.scene = helsinki_east_downtown_scene;
@@ -400,7 +419,7 @@ int main(void)
     SpeciesStruct suzanne_species_struct;
     suzanne_species_struct.scene = helsinki_east_downtown_scene;
     suzanne_species_struct.shader = helsinki_east_downtown_shader;
-    suzanne_species_struct.parent = pink_geometric_tiles_material;
+    suzanne_species_struct.parent = orange_fur_material;
     suzanne_species_struct.model_file_format = "obj";
     suzanne_species_struct.model_filename = "suzanne.obj";
     suzanne_species_struct.light_position = glm::vec3(0, 100000, 100000);
@@ -519,7 +538,7 @@ int main(void)
     SpeciesStruct cat_species_struct;
     cat_species_struct.scene = helsinki_east_downtown_scene;
     cat_species_struct.shader = helsinki_east_downtown_shader;
-    cat_species_struct.parent = pink_geometric_tiles_material;
+    cat_species_struct.parent = orange_fur_material;
     cat_species_struct.model_file_format = "fbx";
     cat_species_struct.model_filename = "cat.fbx";
     cat_species_struct.light_position = glm::vec3(0, 100000, 100000);
