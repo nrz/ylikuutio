@@ -10,6 +10,12 @@
 
 pointer display(scheme* sc, pointer args)
 {
+    if (sc == nullptr)
+    {
+        std::cerr << "error: scheme* sc is nullptr\n";
+        return nullptr;
+    }
+
     if (args != sc->NIL)
     {
         if (sc->vptr->is_string(sc->vptr->pair_car(args)))
@@ -24,6 +30,12 @@ pointer display(scheme* sc, pointer args)
 scheme* init_scheme()
 {
     scheme* sc = scheme_init_new();
+
+    if (sc == nullptr)
+    {
+        std::cerr << "error: scheme_init_new() failed\n";
+        return nullptr;
+    }
 
     FILE* init_file = fopen("init.scm", "r");
 
@@ -44,6 +56,12 @@ scheme* init_scheme()
 
 bool do_stuff(scheme* sc)
 {
+    if (sc == nullptr)
+    {
+        std::cerr << "error: scheme* sc is nullptr\n";
+        return false;
+    }
+
     FILE* hello_world_file = fopen("hello_world.scm", "r");
 
     if (hello_world_file == nullptr)
