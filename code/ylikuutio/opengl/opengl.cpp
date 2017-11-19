@@ -83,4 +83,9 @@ namespace opengl
         // Cull triangles which normal is not towards the camera.
         glEnable(GL_CULL_FACE);
     }
+
+    double get_time()
+    {
+        return glfwGetTime();
+    }
 }
