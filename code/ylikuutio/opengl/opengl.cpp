@@ -40,4 +40,9 @@ namespace opengl
     {
         glfwMakeContextCurrent(window);
     }
+
+    void disable_cursor(GLFWwindow* window)
+    {
+        glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+    }
 }

@@ -180,7 +180,7 @@ int main(void)
         return -1;
     }
     opengl::make_context_current(my_universe->get_window());
-    glfwSetInputMode(my_universe->get_window(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+    opengl::disable_cursor(my_universe->get_window());
 
     // Initialize GLEW.
     if (glewInit() != GLEW_OK)
