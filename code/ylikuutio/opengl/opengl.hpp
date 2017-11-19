@@ -18,4 +18,5 @@ namespace opengl
     void disable_cursor(GLFWwindow* window);
     bool init_glew();
     void set_sticky_keys(GLFWwindow* window);
+    void set_cursor_position(GLFWwindow* window, double xpos, double ypos);
 }
