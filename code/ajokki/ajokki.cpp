@@ -183,9 +183,8 @@ int main(void)
     opengl::disable_cursor(my_universe->get_window());
 
     // Initialize GLEW.
-    if (glewInit() != GLEW_OK)
+    if (!opengl::init_glew())
     {
-        std::cerr << "Failed to initialize GLEW.\n";
         cleanup_callback_engine->execute();
         return -1;
     }

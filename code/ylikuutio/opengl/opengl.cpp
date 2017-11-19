@@ -45,4 +45,14 @@ namespace opengl
     {
         glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
     }
+
+    bool init_glew()
+    {
+        if (glewInit() != GLEW_OK)
+        {
+            std::cerr << "Failed to initialize GLEW.\n";
+            return false;
+        }
+        return true;
+    }
 }

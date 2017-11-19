@@ -16,4 +16,5 @@ namespace opengl
     GLFWwindow* create_window(int window_width, int window_height, const char* title, GLFWmonitor* monitor, GLFWwindow* share);
     void make_context_current(GLFWwindow* window);
     void disable_cursor(GLFWwindow* window);
+    bool init_glew();
 }
