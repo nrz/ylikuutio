@@ -30,4 +30,9 @@ namespace opengl
         glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
         return true;
     }
+
+    GLFWwindow* create_window(int window_width, int window_height, const char* title, GLFWmonitor* monitor, GLFWwindow* share)
+    {
+        return glfwCreateWindow(window_width, window_height, title, monitor, share);
+    }
 }

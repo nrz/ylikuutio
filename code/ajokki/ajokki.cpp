@@ -165,9 +165,9 @@ int main(void)
     // Open a window and create its OpenGL context.
     std::cout << "Opening a window and creating its OpenGL context...\n";
     my_universe->set_window(
-            glfwCreateWindow(
-                static_cast<GLuint>(my_universe->get_window_width()),
-                static_cast<GLuint>(my_universe->get_window_height()),
+            opengl::create_window(
+                static_cast<int>(my_universe->get_window_width()),
+                static_cast<int>(my_universe->get_window_height()),
                 "Ajokki v. 0.0.1, powered by Ylikuutio v. 0.0.1",
                 nullptr,
                 nullptr));
