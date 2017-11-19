@@ -194,12 +194,12 @@ int main(void)
     opengl::set_cursor_position(my_universe->get_window(), static_cast<double>(my_universe->get_window_width()) / 2, static_cast<double>(my_universe->get_window_height()) / 2);
 
     // Enable depth test.
-    glEnable(GL_DEPTH_TEST);
+    opengl::enable_depth_test();
     // Accept fragment if it closer to the camera than the former one.
-    glDepthFunc(GL_LESS);
+    opengl::set_depth_func_to_less();
 
     // Cull triangles which normal is not towards the camera.
-    glEnable(GL_CULL_FACE);
+    opengl::cull_triangles();
 
     std::cout << "Setting up background colors ...\n";
     ajokki::set_background_colors(my_setting_master);

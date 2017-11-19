@@ -65,4 +65,22 @@ namespace opengl
     {
         glfwSetCursorPos(window, xpos, ypos);
     }
+
+    void enable_depth_test()
+    {
+        // Enable depth test.
+        glEnable(GL_DEPTH_TEST);
+    }
+
+    void set_depth_func_to_less()
+    {
+        // Accept fragment if it closer to the camera than the former one.
+        glDepthFunc(GL_LESS);
+    }
+
+    void cull_triangles()
+    {
+        // Cull triangles which normal is not towards the camera.
+        glEnable(GL_CULL_FACE);
+    }
 }
