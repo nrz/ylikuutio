@@ -550,6 +550,15 @@ void _glfwPlatformGetWindowFrameSize(_GLFWwindow* window,
     // implemented, but for now just leave everything as 0.
 }
 
+void _glfwPlatformGetWindowContentScale(_GLFWwindow* window,
+                                        float* xscale, float* yscale)
+{
+    if (xscale)
+        *xscale = (float) window->wl.scale;
+    if (yscale)
+        *yscale = (float) window->wl.scale;
+}
+
 void _glfwPlatformIconifyWindow(_GLFWwindow* window)
 {
     // TODO: move to xdg_shell instead of wl_shell.
@@ -633,7 +642,7 @@ void _glfwPlatformSetWindowMonitor(_GLFWwindow* window,
     {
         wl_shell_surface_set_toplevel(window->wl.shellSurface);
     }
-    _glfwInputWindowMonitorChange(window, monitor);
+    _glfwInputWindowMonitor(window, monitor);
 }
 
 int _glfwPlatformWindowFocused(_GLFWwindow* window)
@@ -681,6 +690,15 @@ void _glfwPlatformSetWindowFloating(_GLFWwindow* window, GLFWbool enabled)
     // TODO
     _glfwInputError(GLFW_PLATFORM_ERROR,
                     "Wayland: Window attribute setting not implemented yet");
+}
+
+float _glfwPlatformGetWindowOpacity(_GLFWwindow* window)
+{
+    return 1.f;
+}
+
+void _glfwPlatformSetWindowOpacity(_GLFWwindow* window, float opacity)
+{
 }
 
 void _glfwPlatformPollEvents(void)
@@ -999,14 +1017,14 @@ void _glfwPlatformSetCursor(_GLFWwindow* window, _GLFWcursor* cursor)
     }
 }
 
-void _glfwPlatformSetClipboardString(_GLFWwindow* window, const char* string)
+void _glfwPlatformSetClipboardString(const char* string)
 {
     // TODO
     _glfwInputError(GLFW_PLATFORM_ERROR,
                     "Wayland: Clipboard setting not implemented yet");
 }
 
-const char* _glfwPlatformGetClipboardString(_GLFWwindow* window)
+const char* _glfwPlatformGetClipboardString(void)
 {
     // TODO
     _glfwInputError(GLFW_PLATFORM_ERROR,

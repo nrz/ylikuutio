@@ -32,6 +32,7 @@
 #include "code/ylikuutio/config/setting_master.hpp"
 #include "code/ylikuutio/console/console.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
+#include "code/ylikuutio/map/ylikuutio_map.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
 #include "code/ylikuutio/common/globals.hpp"
 #include "code/ylikuutio/common/pi.hpp"
@@ -354,7 +355,7 @@ namespace ontology
         {
             // No command parameters.
             // Print names of named entities.
-            console->print_text(universe->get_entity_names());
+            map::print_keys_to_console(&universe->entity_map, console);
         }
         else if (command_parameters.size() == 1)
         {

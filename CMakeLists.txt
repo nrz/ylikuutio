@@ -222,6 +222,7 @@ configure_file(res/objects/custom/suzanne.obj suzanne.obj COPYONLY)
 configure_file(res/objects/snow_cottage_triangulated.obj snow_cottage_triangulated.obj COPYONLY)
 configure_file(res/objects/www.blendswap.com/86110_rigged_and_animated_cat/cat.fbx cat.fbx COPYONLY)
 configure_file(res/textures/GrassGreenTexture0002.bmp GrassGreenTexture0002.bmp COPYONLY)
+configure_file(res/textures/orange_fur_texture.bmp orange_fur_texture.bmp COPYONLY)
 configure_file(res/textures/pavers1b2.bmp pavers1b2.bmp COPYONLY)
 configure_file(res/textures/numbers_123456_black_and_white.bmp numbers_123456_black_and_white.bmp COPYONLY)
 configure_file(res/fonts/Holstein.DDS Holstein.DDS COPYONLY)
@@ -311,6 +312,10 @@ add_library(ylikuutio STATIC
 
     # hierarchy, in alphabetical order.
     code/ylikuutio/hierarchy/hierarchy_templates.hpp
+
+    # input, in alphabetical order
+    code/ylikuutio/input/input.cpp
+    code/ylikuutio/input/input.hpp
 
     # interpolation, in alphabetical order
     code/ylikuutio/interpolation/bilinear_interpolation2D.hpp
@@ -415,6 +420,10 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/vboindexer.cpp
     code/ylikuutio/ontology/vboindexer.hpp
 
+    # opengl, in alphabetical order
+    code/ylikuutio/opengl/opengl.cpp
+    code/ylikuutio/opengl/opengl.hpp
+
     # shaders, in alphabetical order
     code/ylikuutio/shaders/StandardShading.fragmentshader
     code/ylikuutio/shaders/StandardShading.vertexshader
@@ -438,6 +447,10 @@ add_library(ylikuutio STATIC
     # string, in alphabetical order
     code/ylikuutio/string/ylikuutio_string.cpp
     code/ylikuutio/string/ylikuutio_string.hpp
+
+    # time, in alphabetical order
+    code/ylikuutio/time/time.cpp
+    code/ylikuutio/time/time.hpp
 
     # triangulation, in alphabetical order
     code/ylikuutio/triangulation/face_normals.cpp

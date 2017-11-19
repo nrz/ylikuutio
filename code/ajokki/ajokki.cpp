@@ -28,6 +28,7 @@
 #include "code/ylikuutio/console/console_command_callback.hpp"
 #include "code/ylikuutio/console/console_struct.hpp"
 #include "code/ylikuutio/console/console_callback_object.hpp"
+#include "code/ylikuutio/input/input.hpp"
 #include "code/ylikuutio/ontology/vboindexer.hpp"
 #include "code/ylikuutio/ontology/font2D.hpp"
 #include "code/ylikuutio/ontology/object.hpp"
@@ -48,6 +49,8 @@
 #include "code/ylikuutio/ontology/entity_factory.hpp"
 #include "code/ylikuutio/config/setting.hpp"
 #include "code/ylikuutio/config/setting_master.hpp"
+#include "code/ylikuutio/opengl/opengl.hpp"
+#include "code/ylikuutio/time/time.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
 #include "code/ylikuutio/common/globals.hpp"
 #include "code/ylikuutio/common/pi.hpp"
@@ -92,8 +95,8 @@ std::string ASCII_grid_model_file_format = "ASCII_grid";
 std::string g_model_filename = "noise256x256.bmp";
 // std::string g_model_filename = "noise128x128.bmp";
 
-std::string joensuu_center_and_western_ascii_grid_model_filename = "N5424G.asc"; // Joensuu center & western.
-std::string helsinki_eastern_downtown_ascii_grid_model_filename = "L4133D.asc"; // Helsinki eastern downtown.
+std::string joensuu_center_west_ascii_grid_model_filename = "N5424G.asc"; // Joensuu center & western.
+std::string helsinki_east_downtown_ascii_grid_model_filename = "L4133D.asc"; // Helsinki eastern downtown.
 
 // texture file format: bmp/...
 std::string g_texture_file_format = "bmp";
@@ -155,22 +158,18 @@ int main(void)
     callback_system::CallbackObject* cleanup_callback_object = new callback_system::CallbackObject(nullptr, cleanup_callback_engine);
 
     // Initialise GLFW
-    if (!glfwInit())
+    if (!opengl::init_window())
     {
         std::cerr << "Failed to initialize GLFW.\n";
         return -1;
     }
 
-    glfwWindowHint(GLFW_SAMPLES, 4);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
-
     // Open a window and create its OpenGL context.
     std::cout << "Opening a window and creating its OpenGL context...\n";
     my_universe->set_window(
-            glfwCreateWindow(
-                static_cast<GLuint>(my_universe->get_window_width()),
-                static_cast<GLuint>(my_universe->get_window_height()),
+            opengl::create_window(
+                static_cast<int>(my_universe->get_window_width()),
+                static_cast<int>(my_universe->get_window_height()),
                 "Ajokki v. 0.0.1, powered by Ylikuutio v. 0.0.1",
                 nullptr,
                 nullptr));
@@ -182,28 +181,27 @@ int main(void)
         cleanup_callback_engine->execute();
         return -1;
     }
-    glfwMakeContextCurrent(my_universe->get_window());
-    glfwSetInputMode(my_universe->get_window(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+    opengl::make_context_current(my_universe->get_window());
+    input::disable_cursor(my_universe->get_window());
 
     // Initialize GLEW.
-    if (glewInit() != GLEW_OK)
+    if (!opengl::init_glew())
     {
-        std::cerr << "Failed to initialize GLEW.\n";
         cleanup_callback_engine->execute();
         return -1;
     }
 
     // Ensure we can capture the escape key being pressed below.
-    glfwSetInputMode(my_universe->get_window(), GLFW_STICKY_KEYS, GL_TRUE);
-    glfwSetCursorPos(my_universe->get_window(), (static_cast<GLuint>(my_universe->get_window_width()) / 2), (static_cast<GLuint>(my_universe->get_window_height()) / 2));
+    input::set_sticky_keys(my_universe->get_window());
+    input::set_cursor_position(my_universe->get_window(), static_cast<double>(my_universe->get_window_width()) / 2, static_cast<double>(my_universe->get_window_height()) / 2);
 
     // Enable depth test.
-    glEnable(GL_DEPTH_TEST);
+    opengl::enable_depth_test();
     // Accept fragment if it closer to the camera than the former one.
-    glDepthFunc(GL_LESS);
+    opengl::set_depth_func_to_less();
 
     // Cull triangles which normal is not towards the camera.
-    glEnable(GL_CULL_FACE);
+    opengl::cull_triangles();
 
     std::cout << "Setting up background colors ...\n";
     ajokki::set_background_colors(my_setting_master);
@@ -224,64 +222,64 @@ int main(void)
 
     // Helsinki `Scene` begins here.
 
-    std::cout << "Creating ontology::Entity* helsinki_eastern_downtown_scene_entity ...\n";
-    ontology::Entity* helsinki_eastern_downtown_scene_entity = entity_factory->create_Scene(0.9f);
-    std::cout << "Creating ontology::Scene* helsinki_eastern_downtown_scene ...\n";
-    ontology::Scene* helsinki_eastern_downtown_scene = dynamic_cast<ontology::Scene*>(helsinki_eastern_downtown_scene_entity);
+    std::cout << "Creating ontology::Entity* helsinki_east_downtown_scene_entity ...\n";
+    ontology::Entity* helsinki_east_downtown_scene_entity = entity_factory->create_Scene(0.9f);
+    std::cout << "Creating ontology::Scene* helsinki_east_downtown_scene ...\n";
+    ontology::Scene* helsinki_east_downtown_scene = dynamic_cast<ontology::Scene*>(helsinki_east_downtown_scene_entity);
 
-    if (helsinki_eastern_downtown_scene == nullptr)
+    if (helsinki_east_downtown_scene == nullptr)
     {
         std::cerr << "Failed to create Scene.\n";
         return -1;
     }
 
-    helsinki_eastern_downtown_scene->set_name("helsinki_eastern_downtown_scene");
+    helsinki_east_downtown_scene->set_name("helsinki_east_downtown_scene");
 
-    // Set `helsinki_eastern_downtown_scene` to be the currently active `Scene`.
-    my_universe->set_active_scene(helsinki_eastern_downtown_scene);
+    // Set `helsinki_east_downtown_scene` to be the currently active `Scene`.
+    my_universe->set_active_scene(helsinki_east_downtown_scene);
 
-    helsinki_eastern_downtown_scene->set_turbo_factor(5.0f);
-    helsinki_eastern_downtown_scene->set_twin_turbo_factor(100.0f);
+    helsinki_east_downtown_scene->set_turbo_factor(5.0f);
+    helsinki_east_downtown_scene->set_twin_turbo_factor(100.0f);
 
-    // Create the shader, store it in `helsinki_eastern_downtown_shader`.
-    ShaderStruct helsinki_eastern_downtown_shader_struct;
-    helsinki_eastern_downtown_shader_struct.parent = helsinki_eastern_downtown_scene;
-    helsinki_eastern_downtown_shader_struct.vertex_shader = "StandardShading.vertexshader";
-    helsinki_eastern_downtown_shader_struct.fragment_shader = "StandardShading.fragmentshader";
+    // Create the shader, store it in `helsinki_east_downtown_shader`.
+    ShaderStruct helsinki_east_downtown_shader_struct;
+    helsinki_east_downtown_shader_struct.parent = helsinki_east_downtown_scene;
+    helsinki_east_downtown_shader_struct.vertex_shader = "StandardShading.vertexshader";
+    helsinki_east_downtown_shader_struct.fragment_shader = "StandardShading.fragmentshader";
 
-    std::cout << "Creating ontology::Entity* helsinki_eastern_downtown_shader_entity ...\n";
-    ontology::Entity* helsinki_eastern_downtown_shader_entity = entity_factory->create_Shader(helsinki_eastern_downtown_shader_struct);
-    std::cout << "Creating ontology::Shader* helsinki_eastern_downtown_shader ...\n";
-    ontology::Shader* helsinki_eastern_downtown_shader = dynamic_cast<ontology::Shader*>(helsinki_eastern_downtown_shader_entity);
+    std::cout << "Creating ontology::Entity* helsinki_east_downtown_shader_entity ...\n";
+    ontology::Entity* helsinki_east_downtown_shader_entity = entity_factory->create_Shader(helsinki_east_downtown_shader_struct);
+    std::cout << "Creating ontology::Shader* helsinki_east_downtown_shader ...\n";
+    ontology::Shader* helsinki_east_downtown_shader = dynamic_cast<ontology::Shader*>(helsinki_east_downtown_shader_entity);
 
-    if (helsinki_eastern_downtown_shader == nullptr)
+    if (helsinki_east_downtown_shader == nullptr)
     {
         std::cerr << "Failed to create Shader.\n";
         return -1;
     }
 
-    // Create the material, store it in `helsinki_eastern_downtown_grass_material`.
-    MaterialStruct helsinki_eastern_downtown_grass_material_struct;
-    helsinki_eastern_downtown_grass_material_struct.parent = helsinki_eastern_downtown_shader;
-    helsinki_eastern_downtown_grass_material_struct.texture_file_format = g_texture_file_format;
-    helsinki_eastern_downtown_grass_material_struct.texture_filename = g_texture_filename;
+    // Create the material, store it in `helsinki_east_downtown_grass_material`.
+    MaterialStruct helsinki_east_downtown_grass_material_struct;
+    helsinki_east_downtown_grass_material_struct.parent = helsinki_east_downtown_shader;
+    helsinki_east_downtown_grass_material_struct.texture_file_format = g_texture_file_format;
+    helsinki_east_downtown_grass_material_struct.texture_filename = g_texture_filename;
 
-    std::cout << "Creating ontology::Entity* helsinki_eastern_downtown_grass_material_entity ...\n";
-    ontology::Entity* helsinki_eastern_downtown_grass_material_entity = entity_factory->create_Material(helsinki_eastern_downtown_grass_material_struct);
-    std::cout << "Creating ontology::Material* helsinki_eastern_downtown_grass_material ...\n";
-    ontology::Material* helsinki_eastern_downtown_grass_material = dynamic_cast<ontology::Material*>(helsinki_eastern_downtown_grass_material_entity);
+    std::cout << "Creating ontology::Entity* helsinki_east_downtown_grass_material_entity ...\n";
+    ontology::Entity* helsinki_east_downtown_grass_material_entity = entity_factory->create_Material(helsinki_east_downtown_grass_material_struct);
+    std::cout << "Creating ontology::Material* helsinki_east_downtown_grass_material ...\n";
+    ontology::Material* helsinki_east_downtown_grass_material = dynamic_cast<ontology::Material*>(helsinki_east_downtown_grass_material_entity);
 
-    if (helsinki_eastern_downtown_grass_material == nullptr)
+    if (helsinki_east_downtown_grass_material == nullptr)
     {
         std::cerr << "Failed to create grass Material.\n";
         return -1;
     }
 
-    helsinki_eastern_downtown_grass_material->set_name("helsinki_eastern_downtown_grass_material");
+    helsinki_east_downtown_grass_material->set_name("helsinki_east_downtown_grass_material");
 
     // Create the material, store it in `pink_geometric_tiles_material`.
     MaterialStruct pink_geometric_tiles_material_struct;
-    pink_geometric_tiles_material_struct.parent = helsinki_eastern_downtown_shader;
+    pink_geometric_tiles_material_struct.parent = helsinki_east_downtown_shader;
     pink_geometric_tiles_material_struct.texture_file_format = "bmp";
     pink_geometric_tiles_material_struct.texture_filename = "pavers1b2.bmp";
 
@@ -298,11 +296,30 @@ int main(void)
 
     pink_geometric_tiles_material->set_name("pink_geometric_tiles_material");
 
+    // Create the material, store it in `orange_fur_material`.
+    MaterialStruct orange_fur_material_struct;
+    orange_fur_material_struct.parent = helsinki_east_downtown_shader;
+    orange_fur_material_struct.texture_file_format = "bmp";
+    orange_fur_material_struct.texture_filename = "orange_fur_texture.bmp";
+
+    std::cout << "Creating ontology::Entity* orange_fur_material_entity ...\n";
+    ontology::Entity* orange_fur_material_entity = entity_factory->create_Material(orange_fur_material_struct);
+    std::cout << "Creating ontology::Material* orange_fur_material ...\n";
+    ontology::Material* orange_fur_material = dynamic_cast<ontology::Material*>(orange_fur_material_entity);
+
+    if (orange_fur_material == nullptr)
+    {
+        std::cerr << "Failed to create pink geometric tiles Material.\n";
+        return -1;
+    }
+
+    orange_fur_material->set_name("orange_fur_material");
+
     // Create the species, store it in `bmp_terrain_species`.
     SpeciesStruct bmp_terrain_species_struct;
-    bmp_terrain_species_struct.scene = helsinki_eastern_downtown_scene;
-    bmp_terrain_species_struct.shader = helsinki_eastern_downtown_shader;
-    bmp_terrain_species_struct.parent = helsinki_eastern_downtown_grass_material;
+    bmp_terrain_species_struct.scene = helsinki_east_downtown_scene;
+    bmp_terrain_species_struct.shader = helsinki_east_downtown_shader;
+    bmp_terrain_species_struct.parent = helsinki_east_downtown_grass_material;
     bmp_terrain_species_struct.model_file_format = g_model_file_format;
     bmp_terrain_species_struct.model_filename = g_model_filename;
     bmp_terrain_species_struct.color_channel = g_height_data_color_channel;
@@ -321,44 +338,44 @@ int main(void)
 
     bmp_terrain_species->set_name("bmp_terrain_species");
 
-    SpeciesStruct helsinki_eastern_downtown_terrain_species_struct;
-    helsinki_eastern_downtown_terrain_species_struct.scene = helsinki_eastern_downtown_scene;
-    helsinki_eastern_downtown_terrain_species_struct.shader = helsinki_eastern_downtown_shader;
-    helsinki_eastern_downtown_terrain_species_struct.parent = helsinki_eastern_downtown_grass_material;
-    helsinki_eastern_downtown_terrain_species_struct.model_file_format = ASCII_grid_model_file_format;
-    helsinki_eastern_downtown_terrain_species_struct.model_filename = helsinki_eastern_downtown_ascii_grid_model_filename;
-    helsinki_eastern_downtown_terrain_species_struct.light_position = glm::vec3(0, 100000, 100000);
-    helsinki_eastern_downtown_terrain_species_struct.is_world = true;
-    helsinki_eastern_downtown_terrain_species_struct.x_step = 4;
-    helsinki_eastern_downtown_terrain_species_struct.z_step = 4;
-    std::cout << "Creating ontology::Entity* helsinki_eastern_downtown_terrain_species_entity ...\n";
-    ontology::Entity* helsinki_eastern_downtown_terrain_species_entity = entity_factory->create_Species(helsinki_eastern_downtown_terrain_species_struct);
-    std::cout << "Creating ontology::Species* helsinki_eastern_downtown_terrain_species ...\n";
-    ontology::Species* helsinki_eastern_downtown_terrain_species = dynamic_cast<ontology::Species*>(helsinki_eastern_downtown_terrain_species_entity);
+    SpeciesStruct helsinki_east_downtown_terrain_species_struct;
+    helsinki_east_downtown_terrain_species_struct.scene = helsinki_east_downtown_scene;
+    helsinki_east_downtown_terrain_species_struct.shader = helsinki_east_downtown_shader;
+    helsinki_east_downtown_terrain_species_struct.parent = helsinki_east_downtown_grass_material;
+    helsinki_east_downtown_terrain_species_struct.model_file_format = ASCII_grid_model_file_format;
+    helsinki_east_downtown_terrain_species_struct.model_filename = helsinki_east_downtown_ascii_grid_model_filename;
+    helsinki_east_downtown_terrain_species_struct.light_position = glm::vec3(0, 100000, 100000);
+    helsinki_east_downtown_terrain_species_struct.is_world = true;
+    helsinki_east_downtown_terrain_species_struct.x_step = 4;
+    helsinki_east_downtown_terrain_species_struct.z_step = 4;
+    std::cout << "Creating ontology::Entity* helsinki_east_downtown_terrain_species_entity ...\n";
+    ontology::Entity* helsinki_east_downtown_terrain_species_entity = entity_factory->create_Species(helsinki_east_downtown_terrain_species_struct);
+    std::cout << "Creating ontology::Species* helsinki_east_downtown_terrain_species ...\n";
+    ontology::Species* helsinki_east_downtown_terrain_species = dynamic_cast<ontology::Species*>(helsinki_east_downtown_terrain_species_entity);
 
-    if (helsinki_eastern_downtown_terrain_species == nullptr)
+    if (helsinki_east_downtown_terrain_species == nullptr)
     {
         std::cerr << "Failed to create Species.\n";
         return -1;
     }
 
-    helsinki_eastern_downtown_terrain_species->set_name("Helsinki_eastern_downtown_species");
+    helsinki_east_downtown_terrain_species->set_name("helsinki_east_downtown_terrain_species");
 
     my_universe->is_flight_mode_in_use = true;
 
     // Create Helsinki eastern downtown terrain.
-    ObjectStruct helsinki_eastern_downtown_struct;
-    helsinki_eastern_downtown_struct.species_parent = helsinki_eastern_downtown_terrain_species;
-    helsinki_eastern_downtown_struct.cartesian_coordinates = std::make_shared<glm::vec3>(0.0f, 0.0f, 0.0f);
-    helsinki_eastern_downtown_struct.rotate_angle = 0.0f;
-    helsinki_eastern_downtown_struct.rotate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
-    helsinki_eastern_downtown_struct.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
-    entity_factory->create_Object(helsinki_eastern_downtown_struct);
+    ObjectStruct helsinki_east_downtown_struct;
+    helsinki_east_downtown_struct.species_parent = helsinki_east_downtown_terrain_species;
+    helsinki_east_downtown_struct.cartesian_coordinates = std::make_shared<glm::vec3>(0.0f, 0.0f, 0.0f);
+    helsinki_east_downtown_struct.rotate_angle = 0.0f;
+    helsinki_east_downtown_struct.rotate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
+    helsinki_east_downtown_struct.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
+    entity_factory->create_Object(helsinki_east_downtown_struct);
 
     // Create the species, store it in `snow_cottage_species`.
     SpeciesStruct snow_cottage_species_struct;
-    snow_cottage_species_struct.scene = helsinki_eastern_downtown_scene;
-    snow_cottage_species_struct.shader = helsinki_eastern_downtown_shader;
+    snow_cottage_species_struct.scene = helsinki_east_downtown_scene;
+    snow_cottage_species_struct.shader = helsinki_east_downtown_shader;
     snow_cottage_species_struct.parent = pink_geometric_tiles_material;
     snow_cottage_species_struct.model_file_format = "obj";
     snow_cottage_species_struct.model_filename = "snow_cottage_triangulated.obj";
@@ -375,7 +392,7 @@ int main(void)
         return -1;
     }
 
-    snow_cottage_species->set_name("snow_cottage");
+    snow_cottage_species->set_name("snow_cottage_species");
 
     // Create snow cottage, store it in `snow_cottage1`.
     ObjectStruct snow_cottage_object_struct1;
@@ -398,9 +415,9 @@ int main(void)
        */
 
     SpeciesStruct suzanne_species_struct;
-    suzanne_species_struct.scene = helsinki_eastern_downtown_scene;
-    suzanne_species_struct.shader = helsinki_eastern_downtown_shader;
-    suzanne_species_struct.parent = pink_geometric_tiles_material;
+    suzanne_species_struct.scene = helsinki_east_downtown_scene;
+    suzanne_species_struct.shader = helsinki_east_downtown_shader;
+    suzanne_species_struct.parent = orange_fur_material;
     suzanne_species_struct.model_file_format = "obj";
     suzanne_species_struct.model_filename = "suzanne.obj";
     suzanne_species_struct.light_position = glm::vec3(0, 100000, 100000);
@@ -517,9 +534,9 @@ int main(void)
     suzanne5->set_name("suzanne5");
 
     SpeciesStruct cat_species_struct;
-    cat_species_struct.scene = helsinki_eastern_downtown_scene;
-    cat_species_struct.shader = helsinki_eastern_downtown_shader;
-    cat_species_struct.parent = pink_geometric_tiles_material;
+    cat_species_struct.scene = helsinki_east_downtown_scene;
+    cat_species_struct.shader = helsinki_east_downtown_shader;
+    cat_species_struct.parent = orange_fur_material;
     cat_species_struct.model_file_format = "fbx";
     cat_species_struct.model_filename = "cat.fbx";
     cat_species_struct.light_position = glm::vec3(0, 100000, 100000);
@@ -575,7 +592,7 @@ int main(void)
     cat2->set_name("cat2");
 
     VectorFontStruct kongtext_vector_font_struct;
-    kongtext_vector_font_struct.parent = helsinki_eastern_downtown_grass_material;
+    kongtext_vector_font_struct.parent = helsinki_east_downtown_grass_material;
     kongtext_vector_font_struct.font_file_format = g_font_file_format;
     kongtext_vector_font_struct.font_filename = g_font_filename;
 
@@ -604,92 +621,92 @@ int main(void)
 
     // Joensuu `Scene` begins here.
 
-    std::cout << "Creating ontology::Entity* joensuu_center_and_western_scene_entity ...\n";
-    ontology::Entity* joensuu_center_and_western_scene_entity = entity_factory->create_Scene(77.0f);
-    std::cout << "Creating ontology::Scene* joensuu_center_and_western_scene ...\n";
-    ontology::Scene* joensuu_center_and_western_scene = dynamic_cast<ontology::Scene*>(joensuu_center_and_western_scene_entity);
+    std::cout << "Creating ontology::Entity* joensuu_center_west_scene_entity ...\n";
+    ontology::Entity* joensuu_center_west_scene_entity = entity_factory->create_Scene(77.0f);
+    std::cout << "Creating ontology::Scene* joensuu_center_west_scene ...\n";
+    ontology::Scene* joensuu_center_west_scene = dynamic_cast<ontology::Scene*>(joensuu_center_west_scene_entity);
 
-    if (joensuu_center_and_western_scene == nullptr)
+    if (joensuu_center_west_scene == nullptr)
     {
         std::cerr << "Failed to create Scene.\n";
         return -1;
     }
 
-    joensuu_center_and_western_scene->set_name("joensuu_center_and_western_scene");
+    joensuu_center_west_scene->set_name("joensuu_center_west_scene");
 
-    // Set `joensuu_center_and_western_scene` to be the currently active `Scene`.
-    // my_universe->set_active_scene(joensuu_center_and_western_scene);
+    // Set `joensuu_center_west_scene` to be the currently active `Scene`.
+    // my_universe->set_active_scene(joensuu_center_west_scene);
 
-    joensuu_center_and_western_scene->set_turbo_factor(5.0f);
-    joensuu_center_and_western_scene->set_twin_turbo_factor(100.0f);
+    joensuu_center_west_scene->set_turbo_factor(5.0f);
+    joensuu_center_west_scene->set_twin_turbo_factor(100.0f);
 
-    // Create the shader, store it in `joensuu_center_and_western_shader`.
-    ShaderStruct joensuu_center_and_western_shader_struct;
-    joensuu_center_and_western_shader_struct.parent = joensuu_center_and_western_scene;
-    joensuu_center_and_western_shader_struct.vertex_shader = "StandardShading.vertexshader";
-    joensuu_center_and_western_shader_struct.fragment_shader = "StandardShading.fragmentshader";
+    // Create the shader, store it in `joensuu_center_west_shader`.
+    ShaderStruct joensuu_center_west_shader_struct;
+    joensuu_center_west_shader_struct.parent = joensuu_center_west_scene;
+    joensuu_center_west_shader_struct.vertex_shader = "StandardShading.vertexshader";
+    joensuu_center_west_shader_struct.fragment_shader = "StandardShading.fragmentshader";
 
-    std::cout << "Creating ontology::Entity* joensuu_center_and_western_shader_entity ...\n";
-    ontology::Entity* joensuu_center_and_western_shader_entity = entity_factory->create_Shader(joensuu_center_and_western_shader_struct);
-    std::cout << "Creating ontology::Shader* joensuu_center_and_western_shader ...\n";
-    ontology::Shader* joensuu_center_and_western_shader = dynamic_cast<ontology::Shader*>(joensuu_center_and_western_shader_entity);
+    std::cout << "Creating ontology::Entity* joensuu_center_west_shader_entity ...\n";
+    ontology::Entity* joensuu_center_west_shader_entity = entity_factory->create_Shader(joensuu_center_west_shader_struct);
+    std::cout << "Creating ontology::Shader* joensuu_center_west_shader ...\n";
+    ontology::Shader* joensuu_center_west_shader = dynamic_cast<ontology::Shader*>(joensuu_center_west_shader_entity);
 
-    if (joensuu_center_and_western_shader == nullptr)
+    if (joensuu_center_west_shader == nullptr)
     {
         std::cerr << "Failed to create Shader.\n";
         return -1;
     }
 
-    // Create the material, store it in `helsinki_eastern_downtown_grass_material`.
-    MaterialStruct joensuu_center_and_western_grass_material_struct;
-    joensuu_center_and_western_grass_material_struct.parent = joensuu_center_and_western_shader;
-    joensuu_center_and_western_grass_material_struct.texture_file_format = g_texture_file_format;
-    joensuu_center_and_western_grass_material_struct.texture_filename = g_texture_filename;
+    // Create the material, store it in `helsinki_east_downtown_grass_material`.
+    MaterialStruct joensuu_center_west_grass_material_struct;
+    joensuu_center_west_grass_material_struct.parent = joensuu_center_west_shader;
+    joensuu_center_west_grass_material_struct.texture_file_format = g_texture_file_format;
+    joensuu_center_west_grass_material_struct.texture_filename = g_texture_filename;
 
-    std::cout << "Creating ontology::Entity* joensuu_center_and_western_grass_material_entity ...\n";
-    ontology::Entity* joensuu_center_and_western_grass_material_entity = entity_factory->create_Material(joensuu_center_and_western_grass_material_struct);
-    std::cout << "Creating ontology::Material* joensuu_center_and_western_grass_material ...\n";
-    ontology::Material* joensuu_center_and_western_grass_material = dynamic_cast<ontology::Material*>(joensuu_center_and_western_grass_material_entity);
+    std::cout << "Creating ontology::Entity* joensuu_center_west_grass_material_entity ...\n";
+    ontology::Entity* joensuu_center_west_grass_material_entity = entity_factory->create_Material(joensuu_center_west_grass_material_struct);
+    std::cout << "Creating ontology::Material* joensuu_center_west_grass_material ...\n";
+    ontology::Material* joensuu_center_west_grass_material = dynamic_cast<ontology::Material*>(joensuu_center_west_grass_material_entity);
 
-    if (joensuu_center_and_western_grass_material == nullptr)
+    if (joensuu_center_west_grass_material == nullptr)
     {
         std::cerr << "Failed to create grass Material.\n";
         return -1;
     }
 
-    joensuu_center_and_western_grass_material->set_name("joensuu_center_and_western_grass_material");
+    joensuu_center_west_grass_material->set_name("joensuu_center_west_grass_material");
 
-    SpeciesStruct joensuu_center_and_western_terrain_species_struct;
-    joensuu_center_and_western_terrain_species_struct.scene = joensuu_center_and_western_scene;
-    joensuu_center_and_western_terrain_species_struct.shader = joensuu_center_and_western_shader;
-    joensuu_center_and_western_terrain_species_struct.parent = joensuu_center_and_western_grass_material;
-    joensuu_center_and_western_terrain_species_struct.model_file_format = ASCII_grid_model_file_format;
-    joensuu_center_and_western_terrain_species_struct.model_filename = joensuu_center_and_western_ascii_grid_model_filename;
-    joensuu_center_and_western_terrain_species_struct.light_position = glm::vec3(0, 100000, 100000);
-    joensuu_center_and_western_terrain_species_struct.is_world = true;
-    joensuu_center_and_western_terrain_species_struct.x_step = 4;
-    joensuu_center_and_western_terrain_species_struct.z_step = 4;
-    std::cout << "Creating ontology::Entity* joensuu_center_and_western_terrain_species_entity ...\n";
-    ontology::Entity* joensuu_center_and_western_terrain_species_entity = entity_factory->create_Species(joensuu_center_and_western_terrain_species_struct);
-    std::cout << "Creating ontology::Species* joensuu_center_and_western_terrain_species ...\n";
-    ontology::Species* joensuu_center_and_western_terrain_species = dynamic_cast<ontology::Species*>(joensuu_center_and_western_terrain_species_entity);
+    SpeciesStruct joensuu_center_west_terrain_species_struct;
+    joensuu_center_west_terrain_species_struct.scene = joensuu_center_west_scene;
+    joensuu_center_west_terrain_species_struct.shader = joensuu_center_west_shader;
+    joensuu_center_west_terrain_species_struct.parent = joensuu_center_west_grass_material;
+    joensuu_center_west_terrain_species_struct.model_file_format = ASCII_grid_model_file_format;
+    joensuu_center_west_terrain_species_struct.model_filename = joensuu_center_west_ascii_grid_model_filename;
+    joensuu_center_west_terrain_species_struct.light_position = glm::vec3(0, 100000, 100000);
+    joensuu_center_west_terrain_species_struct.is_world = true;
+    joensuu_center_west_terrain_species_struct.x_step = 4;
+    joensuu_center_west_terrain_species_struct.z_step = 4;
+    std::cout << "Creating ontology::Entity* joensuu_center_west_terrain_species_entity ...\n";
+    ontology::Entity* joensuu_center_west_terrain_species_entity = entity_factory->create_Species(joensuu_center_west_terrain_species_struct);
+    std::cout << "Creating ontology::Species* joensuu_center_west_terrain_species ...\n";
+    ontology::Species* joensuu_center_west_terrain_species = dynamic_cast<ontology::Species*>(joensuu_center_west_terrain_species_entity);
 
-    if (joensuu_center_and_western_terrain_species == nullptr)
+    if (joensuu_center_west_terrain_species == nullptr)
     {
         std::cerr << "Failed to create Species.\n";
         return -1;
     }
 
-    joensuu_center_and_western_terrain_species->set_name("joensuu_center_and_western_species");
+    joensuu_center_west_terrain_species->set_name("joensuu_center_west_terrain_species");
 
     // Create Helsinki eastern downtown terrain.
-    ObjectStruct joensuu_center_and_western_struct;
-    joensuu_center_and_western_struct.species_parent = joensuu_center_and_western_terrain_species;
-    joensuu_center_and_western_struct.cartesian_coordinates = std::make_shared<glm::vec3>(0.0f, 0.0f, 0.0f);
-    joensuu_center_and_western_struct.rotate_angle = 0.0f;
-    joensuu_center_and_western_struct.rotate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
-    joensuu_center_and_western_struct.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
-    entity_factory->create_Object(joensuu_center_and_western_struct);
+    ObjectStruct joensuu_center_west_struct;
+    joensuu_center_west_struct.species_parent = joensuu_center_west_terrain_species;
+    joensuu_center_west_struct.cartesian_coordinates = std::make_shared<glm::vec3>(0.0f, 0.0f, 0.0f);
+    joensuu_center_west_struct.rotate_angle = 0.0f;
+    joensuu_center_west_struct.rotate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
+    joensuu_center_west_struct.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
+    entity_factory->create_Object(joensuu_center_west_struct);
 
     // Joensuu `Scene` ends here.
 
@@ -776,7 +793,7 @@ int main(void)
         return -1;
     }
 
-    altiplano_terrain_species->set_name("altiplano_species");
+    altiplano_terrain_species->set_name("altiplano_terrain_species");
 
     // Create altiplano terrain.
     ObjectStruct altiplano_struct;
@@ -953,7 +970,7 @@ int main(void)
     new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(&suzanne_species_string), false, delete_suzanne_species_callback_object);
 
     // Callback code for G: switch to grass material.
-    std::string grass_material_string = "helsinki_eastern_downtown_grass_material";
+    std::string grass_material_string = "helsinki_east_downtown_grass_material";
     callback_system::CallbackEngine* switch_to_grass_material_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* switch_to_grass_material_callback_object = new callback_system::CallbackObject(
             &ajokki::switch_to_new_material, switch_to_grass_material_callback_engine);
@@ -1234,8 +1251,8 @@ int main(void)
     command_callback_map["version"] = &ajokki::version;
 
     // For speed computation
-    double last_time_to_display_FPS = glfwGetTime();
-    double last_time_for_display_sync = glfwGetTime();
+    double last_time_to_display_FPS = ylikuutio::time::get_time();
+    double last_time_for_display_sync = ylikuutio::time::get_time();
     int nbFrames = 0;
 
     bool ms_frame_text_ready = false;
@@ -1248,11 +1265,11 @@ int main(void)
 
     while (!is_exit_requested)
     {
-        double current_time_in_main_loop = glfwGetTime();
+        double current_time_in_main_loop = ylikuutio::time::get_time();
 
         if (current_time_in_main_loop - last_time_for_display_sync >= (1.0f / my_universe->get_max_FPS()))
         {
-            last_time_for_display_sync = glfwGetTime();
+            last_time_for_display_sync = ylikuutio::time::get_time();
 
             char ms_frame_text[256];
             nbFrames++;
@@ -1427,7 +1444,7 @@ int main(void)
                         my_universe->cartesian_coordinates->z);
 
                 char time_text[256];
-                std::snprintf(time_text, sizeof(time_text), "%.2f sec", glfwGetTime());
+                std::snprintf(time_text, sizeof(time_text), "%.2f sec", ylikuutio::time::get_time());
 
                 char null_text[] = "";
                 char on_text[] = "on";

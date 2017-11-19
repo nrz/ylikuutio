@@ -267,8 +267,21 @@ static const NSRange kEmptyRange = { NSNotFound, 0 };
     const NSRect contentRect = [window->ns.view frame];
     const NSRect fbRect = [window->ns.view convertRectToBacking:contentRect];
 
-    _glfwInputFramebufferSize(window, fbRect.size.width, fbRect.size.height);
-    _glfwInputWindowSize(window, contentRect.size.width, contentRect.size.height);
+    if (fbRect.size.width != window->ns.fbWidth ||
+        fbRect.size.height != window->ns.fbHeight)
+    {
+        window->ns.fbWidth  = fbRect.size.width;
+        window->ns.fbHeight = fbRect.size.height;
+        _glfwInputFramebufferSize(window, fbRect.size.width, fbRect.size.height);
+    }
+
+    if (contentRect.size.width != window->ns.width ||
+        contentRect.size.height != window->ns.height)
+    {
+        window->ns.width  = contentRect.size.width;
+        window->ns.height = contentRect.size.height;
+        _glfwInputWindowSize(window, contentRect.size.width, contentRect.size.height);
+    }
 }
 
 - (void)windowDidMove:(NSNotification *)notification
@@ -551,7 +564,13 @@ static const NSRange kEmptyRange = { NSNotFound, 0 };
     const NSRect contentRect = [window->ns.view frame];
     const NSRect fbRect = [window->ns.view convertRectToBacking:contentRect];
 
-    _glfwInputFramebufferSize(window, fbRect.size.width, fbRect.size.height);
+    if (fbRect.size.width != window->ns.fbWidth ||
+        fbRect.size.height != window->ns.fbHeight)
+    {
+        window->ns.fbWidth  = fbRect.size.width;
+        window->ns.fbHeight = fbRect.size.height;
+        _glfwInputFramebufferSize(window, fbRect.size.width, fbRect.size.height);
+    }
 }
 
 - (void)drawRect:(NSRect)rect
@@ -1095,6 +1114,9 @@ static GLFWbool createNativeWindow(_GLFWwindow* window,
     [window->ns.object setAcceptsMouseMovedEvents:YES];
     [window->ns.object setRestorable:NO];
 
+    _glfwPlatformGetWindowSize(window, &window->ns.width, &window->ns.height);
+    _glfwPlatformGetFramebufferSize(window, &window->ns.fbWidth, &window->ns.fbHeight);
+
     return GLFW_TRUE;
 }
 
@@ -1288,6 +1310,18 @@ void _glfwPlatformGetWindowFrameSize(_GLFWwindow* window,
         *bottom = contentRect.origin.y - frameRect.origin.y;
 }
 
+void _glfwPlatformGetWindowContentScale(_GLFWwindow* window,
+                                        float* xscale, float* yscale)
+{
+    const NSRect points = [window->ns.view frame];
+    const NSRect pixels = [window->ns.view convertRectToBacking:points];
+
+    if (xscale)
+        *xscale = (float) (pixels.size.width / points.size.width);
+    if (yscale)
+        *yscale = (float) (pixels.size.height / points.size.height);
+}
+
 void _glfwPlatformIconifyWindow(_GLFWwindow* window)
 {
     [window->ns.object miniaturize:nil];
@@ -1363,7 +1397,7 @@ void _glfwPlatformSetWindowMonitor(_GLFWwindow* window,
     if (window->monitor)
         releaseMonitor(window);
 
-    _glfwInputWindowMonitorChange(window, monitor);
+    _glfwInputWindowMonitor(window, monitor);
 
     // HACK: Allow the state cached in Cocoa to catch up to reality
     // TODO: Solve this in a less terrible way
@@ -1372,28 +1406,6 @@ void _glfwPlatformSetWindowMonitor(_GLFWwindow* window,
     const NSUInteger styleMask = getStyleMask(window);
     [window->ns.object setStyleMask:styleMask];
     [window->ns.object makeFirstResponder:window->ns.view];
-
-    NSRect contentRect;
-
-    if (monitor)
-    {
-        GLFWvidmode mode;
-
-        _glfwPlatformGetVideoMode(window->monitor, &mode);
-        _glfwPlatformGetMonitorPos(window->monitor, &xpos, &ypos);
-
-        contentRect = NSMakeRect(xpos, transformY(ypos + mode.height),
-                                    mode.width, mode.height);
-    }
-    else
-    {
-        contentRect = NSMakeRect(xpos, transformY(ypos + height),
-                                    width, height);
-    }
-
-    NSRect frameRect = [window->ns.object frameRectForContentRect:contentRect
-                                                        styleMask:styleMask];
-    [window->ns.object setFrame:frameRect display:YES];
 
     if (monitor)
     {
@@ -1404,6 +1416,12 @@ void _glfwPlatformSetWindowMonitor(_GLFWwindow* window,
     }
     else
     {
+        NSRect contentRect = NSMakeRect(xpos, transformY(ypos + height),
+                                        width, height);
+        NSRect frameRect = [window->ns.object frameRectForContentRect:contentRect
+                                                            styleMask:styleMask];
+        [window->ns.object setFrame:frameRect display:YES];
+
         if (window->numer != GLFW_DONT_CARE &&
             window->denom != GLFW_DONT_CARE)
         {
@@ -1479,6 +1497,16 @@ void _glfwPlatformSetWindowFloating(_GLFWwindow* window, GLFWbool enabled)
         [window->ns.object setLevel:NSFloatingWindowLevel];
     else
         [window->ns.object setLevel:NSNormalWindowLevel];
+}
+
+float _glfwPlatformGetWindowOpacity(_GLFWwindow* window)
+{
+    return (float) [window->ns.object alphaValue];
+}
+
+void _glfwPlatformSetWindowOpacity(_GLFWwindow* window, float opacity)
+{
+    [window->ns.object setAlphaValue:opacity];
 }
 
 void _glfwPlatformPollEvents(void)
@@ -1728,7 +1756,7 @@ void _glfwPlatformSetCursor(_GLFWwindow* window, _GLFWcursor* cursor)
         updateCursorImage(window);
 }
 
-void _glfwPlatformSetClipboardString(_GLFWwindow* window, const char* string)
+void _glfwPlatformSetClipboardString(const char* string)
 {
     NSArray* types = [NSArray arrayWithObjects:NSStringPboardType, nil];
 
@@ -1738,7 +1766,7 @@ void _glfwPlatformSetClipboardString(_GLFWwindow* window, const char* string)
                   forType:NSStringPboardType];
 }
 
-const char* _glfwPlatformGetClipboardString(_GLFWwindow* window)
+const char* _glfwPlatformGetClipboardString(void)
 {
     NSPasteboard* pasteboard = [NSPasteboard generalPasteboard];
 
