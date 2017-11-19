@@ -313,6 +313,10 @@ add_library(ylikuutio STATIC
     # hierarchy, in alphabetical order.
     code/ylikuutio/hierarchy/hierarchy_templates.hpp
 
+    # input, in alphabetical order
+    code/ylikuutio/input/input.cpp
+    code/ylikuutio/input/input.hpp
+
     # interpolation, in alphabetical order
     code/ylikuutio/interpolation/bilinear_interpolation2D.hpp
 

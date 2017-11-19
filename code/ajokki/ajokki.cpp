@@ -28,6 +28,7 @@
 #include "code/ylikuutio/console/console_command_callback.hpp"
 #include "code/ylikuutio/console/console_struct.hpp"
 #include "code/ylikuutio/console/console_callback_object.hpp"
+#include "code/ylikuutio/input/input.hpp"
 #include "code/ylikuutio/ontology/vboindexer.hpp"
 #include "code/ylikuutio/ontology/font2D.hpp"
 #include "code/ylikuutio/ontology/object.hpp"
@@ -180,7 +181,7 @@ int main(void)
         return -1;
     }
     opengl::make_context_current(my_universe->get_window());
-    opengl::disable_cursor(my_universe->get_window());
+    input::disable_cursor(my_universe->get_window());
 
     // Initialize GLEW.
     if (!opengl::init_glew())
@@ -190,8 +191,8 @@ int main(void)
     }
 
     // Ensure we can capture the escape key being pressed below.
-    opengl::set_sticky_keys(my_universe->get_window());
-    opengl::set_cursor_position(my_universe->get_window(), static_cast<double>(my_universe->get_window_width()) / 2, static_cast<double>(my_universe->get_window_height()) / 2);
+    input::set_sticky_keys(my_universe->get_window());
+    input::set_cursor_position(my_universe->get_window(), static_cast<double>(my_universe->get_window_width()) / 2, static_cast<double>(my_universe->get_window_height()) / 2);
 
     // Enable depth test.
     opengl::enable_depth_test();

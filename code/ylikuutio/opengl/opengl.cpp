@@ -41,11 +41,6 @@ namespace opengl
         glfwMakeContextCurrent(window);
     }
 
-    void disable_cursor(GLFWwindow* window)
-    {
-        glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-    }
-
     bool init_glew()
     {
         if (glewInit() != GLEW_OK)
@@ -54,16 +49,6 @@ namespace opengl
             return false;
         }
         return true;
-    }
-
-    void set_sticky_keys(GLFWwindow* window)
-    {
-        glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
-    }
-
-    void set_cursor_position(GLFWwindow* window, double xpos, double ypos)
-    {
-        glfwSetCursorPos(window, xpos, ypos);
     }
 
     void enable_depth_test()
