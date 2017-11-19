@@ -48,6 +48,7 @@
 #include "code/ylikuutio/ontology/entity_factory.hpp"
 #include "code/ylikuutio/config/setting.hpp"
 #include "code/ylikuutio/config/setting_master.hpp"
+#include "code/ylikuutio/opengl/opengl.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
 #include "code/ylikuutio/common/globals.hpp"
 #include "code/ylikuutio/common/pi.hpp"
@@ -155,15 +156,11 @@ int main(void)
     callback_system::CallbackObject* cleanup_callback_object = new callback_system::CallbackObject(nullptr, cleanup_callback_engine);
 
     // Initialise GLFW
-    if (!glfwInit())
+    if (!opengl::init_window())
     {
         std::cerr << "Failed to initialize GLFW.\n";
         return -1;
     }
-
-    glfwWindowHint(GLFW_SAMPLES, 4);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
 
     // Open a window and create its OpenGL context.
     std::cout << "Opening a window and creating its OpenGL context...\n";

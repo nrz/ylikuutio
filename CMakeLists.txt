@@ -416,6 +416,10 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/vboindexer.cpp
     code/ylikuutio/ontology/vboindexer.hpp
 
+    # ontology, in alphabetical order
+    code/ylikuutio/opengl/opengl.cpp
+    code/ylikuutio/opengl/opengl.hpp
+
     # shaders, in alphabetical order
     code/ylikuutio/shaders/StandardShading.fragmentshader
     code/ylikuutio/shaders/StandardShading.vertexshader
