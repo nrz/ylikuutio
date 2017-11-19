@@ -55,4 +55,9 @@ namespace opengl
         }
         return true;
     }
+
+    void set_sticky_keys(GLFWwindow* window)
+    {
+        glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
+    }
 }

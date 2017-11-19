@@ -190,7 +190,7 @@ int main(void)
     }
 
     // Ensure we can capture the escape key being pressed below.
-    glfwSetInputMode(my_universe->get_window(), GLFW_STICKY_KEYS, GL_TRUE);
+    opengl::set_sticky_keys(my_universe->get_window());
     glfwSetCursorPos(my_universe->get_window(), (static_cast<GLuint>(my_universe->get_window_width()) / 2), (static_cast<GLuint>(my_universe->get_window_height()) / 2));
 
     // Enable depth test.

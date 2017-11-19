@@ -17,4 +17,5 @@ namespace opengl
     void make_context_current(GLFWwindow* window);
     void disable_cursor(GLFWwindow* window);
     bool init_glew();
+    void set_sticky_keys(GLFWwindow* window);
 }
