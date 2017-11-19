@@ -179,7 +179,7 @@ int main(void)
         cleanup_callback_engine->execute();
         return -1;
     }
-    glfwMakeContextCurrent(my_universe->get_window());
+    opengl::make_context_current(my_universe->get_window());
     glfwSetInputMode(my_universe->get_window(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
     // Initialize GLEW.

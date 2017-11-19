@@ -35,4 +35,9 @@ namespace opengl
     {
         return glfwCreateWindow(window_width, window_height, title, monitor, share);
     }
+
+    void make_context_current(GLFWwindow* window)
+    {
+        glfwMakeContextCurrent(window);
+    }
 }

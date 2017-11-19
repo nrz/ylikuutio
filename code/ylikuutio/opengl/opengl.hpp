@@ -14,4 +14,5 @@ namespace opengl
 {
     bool init_window();
     GLFWwindow* create_window(int window_width, int window_height, const char* title, GLFWmonitor* monitor, GLFWwindow* share);
+    void make_context_current(GLFWwindow* window);
 }
