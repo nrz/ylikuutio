@@ -12,9 +12,6 @@
 #include <GLFW/glfw3.h>
 #endif
 
-// Include standard headers
-#include <iostream> // std::cout, std::cin, std::cerr
-
 namespace input
 {
     void disable_cursor(GLFWwindow* window)
