@@ -448,6 +448,10 @@ add_library(ylikuutio STATIC
     code/ylikuutio/string/ylikuutio_string.cpp
     code/ylikuutio/string/ylikuutio_string.hpp
 
+    # time, in alphabetical order
+    code/ylikuutio/time/time.cpp
+    code/ylikuutio/time/time.hpp
+
     # triangulation, in alphabetical order
     code/ylikuutio/triangulation/face_normals.cpp
     code/ylikuutio/triangulation/face_normals.hpp

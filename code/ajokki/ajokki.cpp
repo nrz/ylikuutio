@@ -50,6 +50,7 @@
 #include "code/ylikuutio/config/setting.hpp"
 #include "code/ylikuutio/config/setting_master.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
+#include "code/ylikuutio/time/time.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
 #include "code/ylikuutio/common/globals.hpp"
 #include "code/ylikuutio/common/pi.hpp"
@@ -1250,8 +1251,8 @@ int main(void)
     command_callback_map["version"] = &ajokki::version;
 
     // For speed computation
-    double last_time_to_display_FPS = opengl::get_time();
-    double last_time_for_display_sync = opengl::get_time();
+    double last_time_to_display_FPS = ylikuutio::time::get_time();
+    double last_time_for_display_sync = ylikuutio::time::get_time();
     int nbFrames = 0;
 
     bool ms_frame_text_ready = false;
@@ -1264,11 +1265,11 @@ int main(void)
 
     while (!is_exit_requested)
     {
-        double current_time_in_main_loop = opengl::get_time();
+        double current_time_in_main_loop = ylikuutio::time::get_time();
 
         if (current_time_in_main_loop - last_time_for_display_sync >= (1.0f / my_universe->get_max_FPS()))
         {
-            last_time_for_display_sync = opengl::get_time();
+            last_time_for_display_sync = ylikuutio::time::get_time();
 
             char ms_frame_text[256];
             nbFrames++;
@@ -1443,7 +1444,7 @@ int main(void)
                         my_universe->cartesian_coordinates->z);
 
                 char time_text[256];
-                std::snprintf(time_text, sizeof(time_text), "%.2f sec", opengl::get_time());
+                std::snprintf(time_text, sizeof(time_text), "%.2f sec", ylikuutio::time::get_time());
 
                 char null_text[] = "";
                 char on_text[] = "on";
