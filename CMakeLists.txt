@@ -484,6 +484,8 @@ add_executable(ajokki
     code/ajokki/ajokki_console_callbacks.hpp
     code/ajokki/ajokki_debug.cpp
     code/ajokki/ajokki_debug.hpp
+    code/ajokki/ajokki_joensuu_center_west_scene.cpp
+    code/ajokki/ajokki_joensuu_center_west_scene.hpp
     code/ajokki/ajokki_keyboard_callbacks.cpp
     code/ajokki/ajokki_keyboard_callbacks.hpp
     code/ajokki/ajokki_location_and_orientation.cpp
