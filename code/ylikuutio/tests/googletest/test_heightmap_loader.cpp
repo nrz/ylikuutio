@@ -345,7 +345,7 @@ TEST(face_indices_must_be_computed_appropriately, a_4x4_world)
     ASSERT_EQ(geometry::get_face_normal_i(3, 2, geometry::WNW, example_width), 32);
     ASSERT_EQ(geometry::get_face_normal_i(3, 2, geometry::NNW, example_width), 35);
 }
-TEST(a_BMP_world_must_be_loaded_appropriately, load_3x3_BMP_world)
+TEST(a_BMP_terrain_must_be_loaded_appropriately, load_3x3_BMP_terrain)
 {
     std::string image_path = "test3x3.bmp";
     std::vector<glm::vec3> out_vertices;
@@ -680,7 +680,7 @@ TEST(a_BMP_world_must_be_loaded_appropriately, load_3x3_BMP_world)
 
     // TODO: add assertions for normals!
 }
-TEST(a_BMP_world_must_be_loaded_appropriately, load_256x256_BMP_world)
+TEST(a_BMP_terrain_must_be_loaded_appropriately, load_256x256_BMP_terrain)
 {
     std::string image_path = "noise256x256.bmp";
     std::vector<glm::vec3> out_vertices;
