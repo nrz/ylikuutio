@@ -94,7 +94,7 @@ namespace loaders
         }
         else if (species_loader_struct.model_file_format.compare("bmp") == 0 || species_loader_struct.model_file_format.compare("BMP") == 0)
         {
-            model_loading_result = loaders::load_BMP_world(
+            model_loading_result = loaders::load_BMP_terrain(
                     species_loader_struct.model_filename,
                     out_vertices,
                     out_UVs,

@@ -358,7 +358,7 @@ TEST(a_BMP_world_must_be_loaded_appropriately, load_3x3_BMP_world)
     uint32_t z_step = 1;
     std::string triangulation_type = "bilinear_interpolation";
 
-    bool model_loading_result = loaders::load_BMP_world(
+    bool model_loading_result = loaders::load_BMP_terrain(
             image_path,
             *&out_vertices,
             *&out_UVs,
@@ -693,7 +693,7 @@ TEST(a_BMP_world_must_be_loaded_appropriately, load_256x256_BMP_world)
     uint32_t z_step = 1;
     std::string triangulation_type = "bilinear_interpolation";
 
-    bool model_loading_result = loaders::load_BMP_world(
+    bool model_loading_result = loaders::load_BMP_terrain(
             image_path,
             *&out_vertices,
             *&out_UVs,
