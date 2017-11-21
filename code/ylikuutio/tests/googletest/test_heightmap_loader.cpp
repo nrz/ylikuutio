@@ -726,10 +726,10 @@ TEST(a_2x2_terrain_must_be_triangulated_appropriately, bilinear_interpolation)
     // bilinear interpolation.
     int32_t image_width = 2;
     int32_t image_height = 2;
-    uint32_t world_size = image_width * image_height;
+    uint32_t terrain_size = image_width * image_height;
 
     uint32_t* vertex_data;
-    vertex_data = new uint32_t[world_size];
+    vertex_data = new uint32_t[terrain_size];
     ASSERT_NE(vertex_data, nullptr);
     uint32_t* vertex_pointer = vertex_data;
     // x, z: height (y).
@@ -837,10 +837,10 @@ TEST(a_2x2_terrain_must_be_triangulated_appropriately, southeast_northwest_edges
     // southeast northwest edges.
     int32_t image_width = 2;
     int32_t image_height = 2;
-    uint32_t world_size = image_width * image_height;
+    uint32_t terrain_size = image_width * image_height;
 
     uint32_t* vertex_data;
-    vertex_data = new uint32_t[world_size];
+    vertex_data = new uint32_t[terrain_size];
     ASSERT_NE(vertex_data, nullptr);
     uint32_t* vertex_pointer = vertex_data;
     // x, z: height (y).
@@ -916,10 +916,10 @@ TEST(a_2x2_terrain_must_be_triangulated_appropriately, southwest_northeast_edges
     // southwest northeast edges.
     int32_t image_width = 2;
     int32_t image_height = 2;
-    uint32_t world_size = image_width * image_height;
+    uint32_t terrain_size = image_width * image_height;
 
     uint32_t* vertex_data;
-    vertex_data = new uint32_t[world_size];
+    vertex_data = new uint32_t[terrain_size];
     ASSERT_NE(vertex_data, nullptr);
     uint32_t* vertex_pointer = vertex_data;
     // x, z: height (y).
@@ -999,10 +999,10 @@ TEST(a_3x3_terrain_must_be_triangulated_appropriately, southeast_northwest_edges
     // southeast northwest edges.
     int32_t image_width = 3;
     int32_t image_height = 3;
-    uint32_t world_size = image_width * image_height;
+    uint32_t terrain_size = image_width * image_height;
 
     uint32_t* vertex_data;
-    vertex_data = new uint32_t[world_size];
+    vertex_data = new uint32_t[terrain_size];
     ASSERT_NE(vertex_data, nullptr);
     uint32_t* vertex_pointer = vertex_data;
     // x, z: height (y).

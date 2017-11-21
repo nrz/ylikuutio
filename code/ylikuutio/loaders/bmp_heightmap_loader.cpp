@@ -58,15 +58,15 @@ namespace loaders
             return false;
         }
 
-        // Define world size.
-        int32_t world_size = image_width * image_height;
+        // Define terrain size.
+        int32_t terrain_size = image_width * image_height;
 
         int32_t line_size_in_bytes = image_size / image_height;
 
         uint8_t *image_pointer;
         image_pointer = image_data;
 
-        float* vertex_data = new float[world_size];
+        float* vertex_data = new float[terrain_size];
 
         if (vertex_data == nullptr)
         {
