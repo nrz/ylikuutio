@@ -14,7 +14,7 @@ namespace geometry
         uint32_t image_height;
         double sphere_radius;
         bool is_bilinear_interpolation_in_use;
-        geometry::SphericalWorldStruct spherical_world_struct;
+        geometry::SphericalTerrainStruct spherical_world_struct;
     } TransformationStruct;
 }
 

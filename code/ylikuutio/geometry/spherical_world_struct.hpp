@@ -6,9 +6,9 @@
 
 namespace geometry
 {
-    typedef struct SphericalWorldStruct
+    typedef struct SphericalTerrainStruct
     {
-        SphericalWorldStruct()
+        SphericalTerrainStruct()
             : southern_latitude(NAN), northern_latitude(NAN), western_longitude(NAN), eastern_longitude(NAN), SRTM_latitude_step_in_degrees(1.0f/1200.0f), SRTM_longitude_step_in_degrees(1.0f/1200.0f)
         {
             // constructor.
@@ -19,7 +19,7 @@ namespace geometry
         double eastern_longitude;
         double SRTM_latitude_step_in_degrees;
         double SRTM_longitude_step_in_degrees;
-    } SphericalWorldStruct;
+    } SphericalTerrainStruct;
 }
 
 #endif

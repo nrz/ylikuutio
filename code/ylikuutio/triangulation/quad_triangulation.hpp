@@ -61,7 +61,7 @@ namespace geometry
             const int32_t actual_image_height = (image_height - 1) / z_step + 1;
             const std::string triangulation_type = triangulate_quads_struct.triangulation_type;
             double sphere_radius = triangulate_quads_struct.sphere_radius;
-            const geometry::SphericalWorldStruct spherical_world_struct = triangulate_quads_struct.spherical_world_struct;
+            const geometry::SphericalTerrainStruct spherical_world_struct = triangulate_quads_struct.spherical_world_struct;
 
             if (image_width < 2 || image_height < 2 || actual_image_width < 2 || actual_image_height < 2)
             {

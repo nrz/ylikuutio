@@ -179,7 +179,7 @@ namespace loaders
 
         delete[] image_data;
 
-        geometry::SphericalWorldStruct spherical_world_struct;
+        geometry::SphericalTerrainStruct spherical_world_struct;
         spherical_world_struct.southern_latitude = southern_latitude; // must be float, though SRTM data is split between full degrees.
         spherical_world_struct.northern_latitude = northern_latitude; // must be float, though SRTM data is split between full degrees.
         spherical_world_struct.western_longitude = western_longitude; // must be float, though SRTM data is split between full degrees.

@@ -56,7 +56,7 @@ namespace geometry
         uint32_t image_height = transformation_struct.image_height;
         double sphere_radius = transformation_struct.sphere_radius;
         bool is_bilinear_interpolation_in_use = transformation_struct.is_bilinear_interpolation_in_use;
-        geometry::SphericalWorldStruct spherical_world_struct = transformation_struct.spherical_world_struct;
+        geometry::SphericalTerrainStruct spherical_world_struct = transformation_struct.spherical_world_struct;
 
         // 3a. Transform spherical coordinates loaded from file (and computed this far as being in horizontal plane) to a curved surface.
         //

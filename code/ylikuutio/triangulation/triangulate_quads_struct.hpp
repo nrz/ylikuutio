@@ -24,7 +24,7 @@ namespace geometry
         std::string triangulation_type;
         bool should_ylikuutio_use_real_texture_coordinates;
         double sphere_radius;
-        geometry::SphericalWorldStruct spherical_world_struct;
+        geometry::SphericalTerrainStruct spherical_world_struct;
     } TriangulateQuadsStruct;
 }
 
