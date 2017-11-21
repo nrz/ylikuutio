@@ -30,7 +30,7 @@
 
 namespace loaders
 {
-    bool load_SRTM_world(
+    bool load_SRTM_terrain(
             const std::string& image_path,
             const float latitude,
             const float longitude,
