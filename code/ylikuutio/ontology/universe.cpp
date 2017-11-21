@@ -446,7 +446,7 @@ namespace ontology
             }
         }
 
-        if (this->testing_spherical_world_in_use)
+        if (this->testing_spherical_terrain_in_use)
         {
             if (this->spherical_coordinates == nullptr)
             {

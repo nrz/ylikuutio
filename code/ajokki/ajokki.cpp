@@ -1010,7 +1010,7 @@ int main(void)
 
                 char spherical_coordinates_text[256];
 
-                if (my_universe != nullptr && my_universe->testing_spherical_world_in_use)
+                if (my_universe != nullptr && my_universe->testing_spherical_terrain_in_use)
                 {
                     std::snprintf(spherical_coordinates_text, sizeof(spherical_coordinates_text), "rho:%.2f theta:%.2f phi:%.2f", my_universe->spherical_coordinates->rho, my_universe->spherical_coordinates->theta, my_universe->spherical_coordinates->phi);
                 }
@@ -1034,7 +1034,7 @@ int main(void)
                     my_font2D->printText2D(printing_struct);
                 }
 
-                if (my_universe != nullptr && my_universe->testing_spherical_world_in_use)
+                if (my_universe != nullptr && my_universe->testing_spherical_terrain_in_use)
                 {
                     // print spherical coordinates on bottom left corner.
                     printing_struct.x = 0;

@@ -246,7 +246,7 @@ namespace ontology
                 this->gravity = 9.81f / 60.0f;
                 this->fall_speed = this->gravity;
 
-                this->testing_spherical_world_in_use = false;
+                this->testing_spherical_terrain_in_use = false;
                 this->is_key_I_released = true;
                 this->is_key_F_released = true;
                 this->in_help_mode = true;
@@ -366,7 +366,7 @@ namespace ontology
             float fall_speed;
 
             // Variables related to the current `Scene`.
-            bool testing_spherical_world_in_use;
+            bool testing_spherical_terrain_in_use;
 
             // Variables related to debug & testing keys.
             bool is_key_I_released;
