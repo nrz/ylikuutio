@@ -91,7 +91,7 @@ namespace ajokki
         joensuu_center_west_terrain_species_struct.model_file_format = "ASCII_grid";
         joensuu_center_west_terrain_species_struct.model_filename = "N5424G.asc"; // Joensuu center & western.
         joensuu_center_west_terrain_species_struct.light_position = glm::vec3(0, 100000, 100000);
-        joensuu_center_west_terrain_species_struct.is_world = true;
+        joensuu_center_west_terrain_species_struct.is_terrain = true;
         joensuu_center_west_terrain_species_struct.x_step = 4;
         joensuu_center_west_terrain_species_struct.z_step = 4;
         std::cout << "Creating ontology::Entity* joensuu_center_west_terrain_species_entity ...\n";

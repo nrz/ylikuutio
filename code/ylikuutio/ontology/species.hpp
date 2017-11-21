@@ -50,7 +50,7 @@ namespace ontology
             {
                 // constructor.
                 this->universe          = universe;
-                this->is_world          = species_struct.is_world;
+                this->is_terrain          = species_struct.is_terrain;
                 this->world_radius      = species_struct.world_radius;
                 this->divisor           = species_struct.divisor;
                 this->model_file_format = species_struct.model_file_format;
@@ -79,7 +79,7 @@ namespace ontology
                 glUseProgram(species_struct.shader->programID);
                 this->lightID = glGetUniformLocation(species_struct.shader->programID, "LightPosition_worldspace");
 
-                if (this->is_world)
+                if (this->is_terrain)
                 {
                     // set world species pointer so that it points to this species.
                     // currently there can be only one world species (used in collision detection).
@@ -140,7 +140,7 @@ namespace ontology
 
             void set_name(const std::string& name);
 
-            bool is_world;                           // worlds currently do not rotate nor translate.
+            bool is_terrain;                           // worlds currently do not rotate nor translate.
             float world_radius;                      // radius of sea level in kilometers. used only for worlds.
             float divisor;                           // value by which SRTM values are divided to convert them to kilometers.
 
