@@ -8,7 +8,7 @@
 #endif
 
 #include "srtm_heightmap_loader.hpp"
-#include "code/ylikuutio/geometry/spherical_world_struct.hpp"
+#include "code/ylikuutio/geometry/spherical_terrain_struct.hpp"
 #include "code/ylikuutio/triangulation/triangulate_quads_struct.hpp"
 #include "code/ylikuutio/triangulation/quad_triangulation.hpp"
 #include "code/ylikuutio/common/pi.hpp"
@@ -179,11 +179,11 @@ namespace loaders
 
         delete[] image_data;
 
-        geometry::SphericalTerrainStruct spherical_world_struct;
-        spherical_world_struct.southern_latitude = southern_latitude; // must be float, though SRTM data is split between full degrees.
-        spherical_world_struct.northern_latitude = northern_latitude; // must be float, though SRTM data is split between full degrees.
-        spherical_world_struct.western_longitude = western_longitude; // must be float, though SRTM data is split between full degrees.
-        spherical_world_struct.eastern_longitude = eastern_longitude; // must be float, though SRTM data is split between full degrees.
+        geometry::SphericalTerrainStruct spherical_terrain_struct;
+        spherical_terrain_struct.southern_latitude = southern_latitude; // must be float, though SRTM data is split between full degrees.
+        spherical_terrain_struct.northern_latitude = northern_latitude; // must be float, though SRTM data is split between full degrees.
+        spherical_terrain_struct.western_longitude = western_longitude; // must be float, though SRTM data is split between full degrees.
+        spherical_terrain_struct.eastern_longitude = eastern_longitude; // must be float, though SRTM data is split between full degrees.
 
         geometry::TriangulateQuadsStruct triangulate_quads_struct;
         triangulate_quads_struct.image_width = image_width_in_use;
@@ -192,7 +192,7 @@ namespace loaders
         triangulate_quads_struct.z_step = z_step;
         triangulate_quads_struct.triangulation_type = triangulation_type;
         triangulate_quads_struct.sphere_radius = world_radius;
-        triangulate_quads_struct.spherical_world_struct = spherical_world_struct;
+        triangulate_quads_struct.spherical_terrain_struct = spherical_terrain_struct;
 
         bool result = geometry::triangulate_quads(vertex_data, triangulate_quads_struct, out_vertices, out_UVs, out_normals);
         delete[] vertex_data;

@@ -8,7 +8,7 @@
 #endif
 
 #include "ascii_grid_loader.hpp"
-#include "code/ylikuutio/geometry/spherical_world_struct.hpp"
+#include "code/ylikuutio/geometry/spherical_terrain_struct.hpp"
 #include "code/ylikuutio/triangulation/triangulate_quads_struct.hpp"
 #include "code/ylikuutio/triangulation/quad_triangulation.hpp"
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
@@ -219,7 +219,7 @@ namespace loaders
         triangulate_quads_struct.z_step = z_step;
         triangulate_quads_struct.triangulation_type = triangulation_type;
         triangulate_quads_struct.sphere_radius = NAN;
-        triangulate_quads_struct.spherical_world_struct = geometry::SphericalTerrainStruct(); // not used, but is needed in the function call.
+        triangulate_quads_struct.spherical_terrain_struct = geometry::SphericalTerrainStruct(); // not used, but is needed in the function call.
 
         bool result = geometry::triangulate_quads(vertex_data, triangulate_quads_struct, out_vertices, out_UVs, out_normals);
         delete[] vertex_data;

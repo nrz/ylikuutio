@@ -1,5 +1,5 @@
 #include "gtest/gtest.h"
-#include "code/ylikuutio/geometry/spherical_world_struct.hpp"
+#include "code/ylikuutio/geometry/spherical_terrain_struct.hpp"
 #include "code/ylikuutio/triangulation/triangulate_quads_struct.hpp"
 #include "code/ylikuutio/triangulation/triangulation_enums.hpp"
 #include "code/ylikuutio/triangulation/triangulation_templates.hpp"
@@ -757,7 +757,7 @@ TEST(a_2x2_terrain_must_be_triangulated_appropriately, bilinear_interpolation)
     triangulate_quads_struct.image_width = image_width;
     triangulate_quads_struct.image_height = image_height;
     triangulate_quads_struct.sphere_radius = NAN;
-    triangulate_quads_struct.spherical_world_struct = geometry::SphericalTerrainStruct(); // not used, but is needed in the function call.
+    triangulate_quads_struct.spherical_terrain_struct = geometry::SphericalTerrainStruct(); // not used, but is needed in the function call.
 
     triangulate_quads_struct.triangulation_type = "bilinear_interpolation";
 
@@ -866,7 +866,7 @@ TEST(a_2x2_terrain_must_be_triangulated_appropriately, southeast_northwest_edges
     triangulate_quads_struct.image_width = image_width;
     triangulate_quads_struct.image_height = image_height;
     triangulate_quads_struct.sphere_radius = NAN;
-    triangulate_quads_struct.spherical_world_struct = geometry::SphericalTerrainStruct(); // not used, but is needed in the function call.
+    triangulate_quads_struct.spherical_terrain_struct = geometry::SphericalTerrainStruct(); // not used, but is needed in the function call.
 
     triangulate_quads_struct.triangulation_type = "southeast_northwest_edges";
 
@@ -945,7 +945,7 @@ TEST(a_2x2_terrain_must_be_triangulated_appropriately, southwest_northeast_edges
     triangulate_quads_struct.image_width = image_width;
     triangulate_quads_struct.image_height = image_height;
     triangulate_quads_struct.sphere_radius = NAN;
-    triangulate_quads_struct.spherical_world_struct = geometry::SphericalTerrainStruct(); // not used, but is needed in the function call.
+    triangulate_quads_struct.spherical_terrain_struct = geometry::SphericalTerrainStruct(); // not used, but is needed in the function call.
 
     triangulate_quads_struct.triangulation_type = "southwest_northeast_edges";
 
@@ -1043,7 +1043,7 @@ TEST(a_3x3_terrain_must_be_triangulated_appropriately, southeast_northwest_edges
     triangulate_quads_struct.image_width = image_width;
     triangulate_quads_struct.image_height = image_height;
     triangulate_quads_struct.sphere_radius = NAN;
-    triangulate_quads_struct.spherical_world_struct = geometry::SphericalTerrainStruct(); // not used, but is needed in the function call.
+    triangulate_quads_struct.spherical_terrain_struct = geometry::SphericalTerrainStruct(); // not used, but is needed in the function call.
 
     triangulate_quads_struct.triangulation_type = "southeast_northwest_edges";
 
