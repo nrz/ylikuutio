@@ -91,10 +91,10 @@ namespace geometry
 
             for (uint32_t x = 0; x < image_width; x++)
             {
-                glm::vec3 spherical_world_vertex = temp_vertices[temp_vertices_i];
-                spherical_world_vertex.x = (GLfloat) current_longitude_in_degrees;
-                spherical_world_vertex.z = (GLfloat) current_latitude_in_degrees;
-                temp_vertices[temp_vertices_i++] = geometry::transform_planar_world_vertex_into_cartesian_vertex(spherical_world_vertex, sphere_radius);
+                glm::vec3 spherical_terrain_vertex = temp_vertices[temp_vertices_i];
+                spherical_terrain_vertex.x = (GLfloat) current_longitude_in_degrees;
+                spherical_terrain_vertex.z = (GLfloat) current_latitude_in_degrees;
+                temp_vertices[temp_vertices_i++] = geometry::transform_planar_world_vertex_into_cartesian_vertex(spherical_terrain_vertex, sphere_radius);
 
                 current_longitude_in_degrees += longitude_step_in_degrees;
             }
@@ -125,10 +125,10 @@ namespace geometry
 
                 for (uint32_t x = 1; x < image_width; x++)
                 {
-                    glm::vec3 spherical_world_vertex = temp_vertices[temp_vertices_i];
-                    spherical_world_vertex.x = (GLfloat) current_longitude_in_degrees;
-                    spherical_world_vertex.z = (GLfloat) current_latitude_in_degrees;
-                    temp_vertices[temp_vertices_i++] = geometry::transform_planar_world_vertex_into_cartesian_vertex(spherical_world_vertex, sphere_radius);
+                    glm::vec3 spherical_terrain_vertex = temp_vertices[temp_vertices_i];
+                    spherical_terrain_vertex.x = (GLfloat) current_longitude_in_degrees;
+                    spherical_terrain_vertex.z = (GLfloat) current_latitude_in_degrees;
+                    temp_vertices[temp_vertices_i++] = geometry::transform_planar_world_vertex_into_cartesian_vertex(spherical_terrain_vertex, sphere_radius);
 
                     current_longitude_in_degrees += longitude_step_in_degrees;
                 }
