@@ -466,7 +466,7 @@ namespace ontology
         camera_cartesian_coordinates.y += 2.0f;
 
         // Projection matrix : 45° Field of View, aspect ratio, display range : 0.1 unit <-> 100 units
-        this->ProjectionMatrix = glm::perspective(DEGREES_TO_RADIANS(FoV), aspect_ratio, 0.001f, 5000.0f + 2.0f * static_cast<GLfloat>(this->world_radius));
+        this->ProjectionMatrix = glm::perspective(DEGREES_TO_RADIANS(FoV), aspect_ratio, 0.001f, 5000.0f + 2.0f * static_cast<GLfloat>(this->planet_radius));
         // Camera matrix
         this->ViewMatrix = glm::lookAt(
                 camera_cartesian_coordinates,                   // Camera is here

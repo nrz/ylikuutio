@@ -197,7 +197,7 @@ namespace ontology
                 this->spherical_coordinates = nullptr;
 
                 // constructor.
-                this->world_radius = NAN; // world radius is NAN as long it doesn't get `set` by `SettingMaster`.
+                this->planet_radius = NAN; // world radius is NAN as long it doesn't get `set` by `SettingMaster`.
                 this->terrain_species = nullptr;
                 this->active_scene = nullptr;
                 this->console_pointer = nullptr;
@@ -409,7 +409,7 @@ namespace ontology
 
             void* terrain_species;               // pointer to terrain `Species` (used in collision detection).
 
-            float world_radius;
+            float planet_radius;
 
             std::vector<ontology::Scene*> scene_pointer_vector;
             std::queue<int32_t> free_sceneID_queue;

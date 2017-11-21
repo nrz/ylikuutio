@@ -12,7 +12,7 @@ TEST(SpeciesStruct_must_be_initialized_appropriately, SpeciesStruct)
     SpeciesStruct test_species_struct;
     ASSERT_EQ(test_species_struct.parent, nullptr);
     ASSERT_FALSE(test_species_struct.is_terrain);
-    ASSERT_TRUE(std::isnan(test_species_struct.world_radius));
+    ASSERT_TRUE(std::isnan(test_species_struct.planet_radius));
     ASSERT_TRUE(test_species_struct.model_file_format.empty());
     ASSERT_TRUE(test_species_struct.model_filename.empty());
     ASSERT_TRUE(test_species_struct.color_channel.empty());

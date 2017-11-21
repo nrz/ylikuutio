@@ -17,7 +17,7 @@ namespace loaders
             const std::string& image_path,
             const float latitude,
             const float longitude,
-            const float world_radius,
+            const float planet_radius,
             const float divisor,
             std::vector<glm::vec3>& out_vertices,
             std::vector<glm::vec2>& out_UVs,

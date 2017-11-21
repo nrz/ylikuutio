@@ -238,21 +238,21 @@ namespace config
         return nullptr;
     }
 
-    std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_world_radius(ontology::Entity* const entity, config::SettingMaster* const setting_master)
+    std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_planet_radius(ontology::Entity* const entity, config::SettingMaster* const setting_master)
     {
         if (entity == nullptr || setting_master == nullptr)
         {
             return nullptr;
         }
 
-        if (setting_master->setting_pointer_map.count("world_radius") != 1)
+        if (setting_master->setting_pointer_map.count("planet_radius") != 1)
         {
             return nullptr;
         }
 
-        std::shared_ptr<datatypes::AnyValue> world_radius_any_value = std::make_shared<datatypes::AnyValue>(*setting_master->setting_pointer_map["world_radius"]->setting_value);
+        std::shared_ptr<datatypes::AnyValue> planet_radius_any_value = std::make_shared<datatypes::AnyValue>(*setting_master->setting_pointer_map["planet_radius"]->setting_value);
 
-        if (world_radius_any_value == nullptr || world_radius_any_value->type != datatypes::FLOAT)
+        if (planet_radius_any_value == nullptr || planet_radius_any_value->type != datatypes::FLOAT)
         {
             return nullptr;
         }
@@ -264,7 +264,7 @@ namespace config
             return nullptr;
         }
 
-        universe->world_radius = world_radius_any_value->float_value;
+        universe->planet_radius = planet_radius_any_value->float_value;
         return nullptr;
     }
 

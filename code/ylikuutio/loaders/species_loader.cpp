@@ -83,7 +83,7 @@ namespace loaders
                     species_loader_struct.model_filename,
                     species_loader_struct.latitude,
                     species_loader_struct.longitude,
-                    species_loader_struct.world_radius,
+                    species_loader_struct.planet_radius,
                     species_loader_struct.divisor,
                     out_vertices,
                     out_UVs,

@@ -34,7 +34,7 @@ namespace loaders
             const std::string& image_path,
             const float latitude,
             const float longitude,
-            const float world_radius,
+            const float planet_radius,
             const float divisor,
             std::vector<glm::vec3>& out_vertices,
             std::vector<glm::vec2>& out_UVs,
@@ -191,7 +191,7 @@ namespace loaders
         triangulate_quads_struct.x_step = x_step;
         triangulate_quads_struct.z_step = z_step;
         triangulate_quads_struct.triangulation_type = triangulation_type;
-        triangulate_quads_struct.sphere_radius = world_radius;
+        triangulate_quads_struct.sphere_radius = planet_radius;
         triangulate_quads_struct.spherical_terrain_struct = spherical_terrain_struct;
 
         bool result = geometry::triangulate_quads(vertex_data, triangulate_quads_struct, out_vertices, out_UVs, out_normals);

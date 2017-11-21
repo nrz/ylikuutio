@@ -138,12 +138,12 @@ int main(void)
 
     float earth_radius = 6371.0f; // in kilometres
 
-    SettingStruct world_radius_setting_struct(std::make_shared<datatypes::AnyValue>(earth_radius));
-    world_radius_setting_struct.name = "world_radius";
-    world_radius_setting_struct.setting_master = my_setting_master;
-    world_radius_setting_struct.activate_callback = &config::SettingMaster::activate_world_radius; // world may be a planet or a moon.
-    world_radius_setting_struct.should_ylikuutio_call_activate_callback_now = true;
-    new config::Setting(world_radius_setting_struct);
+    SettingStruct planet_radius_setting_struct(std::make_shared<datatypes::AnyValue>(earth_radius));
+    planet_radius_setting_struct.name = "planet_radius";
+    planet_radius_setting_struct.setting_master = my_setting_master;
+    planet_radius_setting_struct.activate_callback = &config::SettingMaster::activate_planet_radius; // world may be a planet or a moon.
+    planet_radius_setting_struct.should_ylikuutio_call_activate_callback_now = true;
+    new config::Setting(planet_radius_setting_struct);
 
     std::cout << "Creating callback_system::CallbackEngine* cleanup_callback_engine ...\n";
     callback_system::CallbackEngine* cleanup_callback_engine = new callback_system::CallbackEngine();
@@ -313,7 +313,7 @@ int main(void)
     altiplano_terrain_species_struct.is_terrain = true;
     altiplano_terrain_species_struct.x_step = 1;
     altiplano_terrain_species_struct.z_step = 1;
-    altiplano_terrain_species_struct.world_radius = earth_radius;
+    altiplano_terrain_species_struct.planet_radius = earth_radius;
     altiplano_terrain_species_struct.divisor = 1000.0f;
 
     std::cout << "Creating ontology::Entity* altiplano_terrain_species_entity ...\n";
