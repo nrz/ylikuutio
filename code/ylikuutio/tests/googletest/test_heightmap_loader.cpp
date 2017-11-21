@@ -22,7 +22,7 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
-TEST(vertices_must_be_defined_and_interpolated_appropriately, a_3x3_world)
+TEST(vertices_must_be_defined_and_interpolated_appropriately, a_3x3_terrain)
 {
     int32_t image_width = 3;
     int32_t image_height = 3;
@@ -230,7 +230,7 @@ TEST(vertices_must_be_defined_and_interpolated_appropriately, a_3x3_world)
     ASSERT_TRUE(glm::all(glm::equal(face_normal_vector_vec3[10], glm::normalize(glm::cross(i6_x0_z2 - i11_x0_5_z1_5, i7_x1_z2 - i11_x0_5_z1_5)))));
     ASSERT_TRUE(glm::all(glm::equal(face_normal_vector_vec3[11], glm::normalize(glm::cross(i7_x1_z2 - i11_x0_5_z1_5, i4_x1_z1 - i11_x0_5_z1_5)))));
 }
-TEST(face_indices_must_be_computed_appropriately, a_4x4_world)
+TEST(face_indices_must_be_computed_appropriately, a_4x4_terrain)
 {
     // Face indices example for a 4x4 image file using bilinear interpolation.
     //
@@ -716,7 +716,7 @@ TEST(a_BMP_terrain_must_be_loaded_appropriately, load_256x256_BMP_terrain)
     ASSERT_EQ(out_UVs.size(), n_vertices_for_face * n_faces_for_bilinear_triangulation * (n_width_of_image_file - 1) * (n_height_of_image_file - 1));
     ASSERT_EQ(out_normals.size(), n_vertices_for_face * n_faces_for_bilinear_triangulation * (n_width_of_image_file - 1) * (n_height_of_image_file - 1));
 }
-TEST(a_2x2_world_must_be_triangulated_appropriately, bilinear_interpolation)
+TEST(a_2x2_terrain_must_be_triangulated_appropriately, bilinear_interpolation)
 {
     // *---*
     // |\ /|
@@ -827,7 +827,7 @@ TEST(a_2x2_world_must_be_triangulated_appropriately, bilinear_interpolation)
     ASSERT_EQ(vertices[11].z, 0.0f);
     ASSERT_EQ(vertices[11].y, southeast_height);
 }
-TEST(a_2x2_world_must_be_triangulated_appropriately, southeast_northwest_edges)
+TEST(a_2x2_terrain_must_be_triangulated_appropriately, southeast_northwest_edges)
 {
     // *---*
     // |\  |
@@ -906,7 +906,7 @@ TEST(a_2x2_world_must_be_triangulated_appropriately, southeast_northwest_edges)
     ASSERT_EQ(vertices[5].z, 1.0f);
     ASSERT_EQ(vertices[5].y, northwest_height);
 }
-TEST(a_2x2_world_must_be_triangulated_appropriately, southwest_northeast_edges)
+TEST(a_2x2_terrain_must_be_triangulated_appropriately, southwest_northeast_edges)
 {
     // *---*
     // |  /|
@@ -985,7 +985,7 @@ TEST(a_2x2_world_must_be_triangulated_appropriately, southwest_northeast_edges)
     ASSERT_EQ(vertices[5].z, 0.0f);
     ASSERT_EQ(vertices[5].y, southwest_height);
 }
-TEST(a_3x3_world_must_be_triangulated_appropriately, southeast_northwest_edges)
+TEST(a_3x3_terrain_must_be_triangulated_appropriately, southeast_northwest_edges)
 {
     // *---*---*
     // |\  |\  |
