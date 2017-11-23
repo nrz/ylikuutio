@@ -150,7 +150,7 @@
 // Deleting a `Species` also deletes all objects that are bound to the same `Species`.
 // Deleting an `Object` only deletes the object.
 
-// Characteristics of object type graphs:
+// Characteristics of object type graphs: TODO: implement object type graphs!
 // 1. Each object must be an undirected graph.
 // 2. Each edge must be a link in the graph.
 // 3. The faces of each object must form a closed surface. The only exception is the terrain object, which may have borders.
