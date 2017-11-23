@@ -175,7 +175,7 @@ int main(void)
         return -1;
     }
     opengl::make_context_current(my_universe->get_window());
-    input::disable_cursor(my_universe->get_window());
+    ylikuutio::input::disable_cursor(my_universe->get_window());
 
     // Initialize GLEW.
     if (!opengl::init_glew())
@@ -185,8 +185,8 @@ int main(void)
     }
 
     // Ensure we can capture the escape key being pressed below.
-    input::set_sticky_keys(my_universe->get_window());
-    input::set_cursor_position(my_universe->get_window(), static_cast<double>(my_universe->get_window_width()) / 2, static_cast<double>(my_universe->get_window_height()) / 2);
+    ylikuutio::input::set_sticky_keys(my_universe->get_window());
+    ylikuutio::input::set_cursor_position(my_universe->get_window(), static_cast<double>(my_universe->get_window_width()) / 2, static_cast<double>(my_universe->get_window_height()) / 2);
 
     // Enable depth test.
     opengl::enable_depth_test();

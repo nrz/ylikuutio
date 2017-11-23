@@ -10,9 +10,12 @@
 #include <GLFW/glfw3.h>
 #endif
 
-namespace input
+namespace ylikuutio
 {
-    void disable_cursor(GLFWwindow* window);
-    void set_sticky_keys(GLFWwindow* window);
-    void set_cursor_position(GLFWwindow* window, double xpos, double ypos);
+    namespace input
+    {
+        void disable_cursor(GLFWwindow* window);
+        void set_sticky_keys(GLFWwindow* window);
+        void set_cursor_position(GLFWwindow* window, double xpos, double ypos);
+    }
 }
