@@ -151,7 +151,7 @@ int main(void)
     callback_system::CallbackObject* cleanup_callback_object = new callback_system::CallbackObject(nullptr, cleanup_callback_engine);
 
     // Initialise GLFW
-    if (!opengl::init_window())
+    if (!ylikuutio::opengl::init_window())
     {
         std::cerr << "Failed to initialize GLFW.\n";
         return -1;
@@ -160,7 +160,7 @@ int main(void)
     // Open a window and create its OpenGL context.
     std::cout << "Opening a window and creating its OpenGL context...\n";
     my_universe->set_window(
-            opengl::create_window(
+            ylikuutio::opengl::create_window(
                 static_cast<int>(my_universe->get_window_width()),
                 static_cast<int>(my_universe->get_window_height()),
                 "Ajokki v. 0.0.1, powered by Ylikuutio v. 0.0.1",
@@ -174,11 +174,11 @@ int main(void)
         cleanup_callback_engine->execute();
         return -1;
     }
-    opengl::make_context_current(my_universe->get_window());
+    ylikuutio::opengl::make_context_current(my_universe->get_window());
     ylikuutio::input::disable_cursor(my_universe->get_window());
 
     // Initialize GLEW.
-    if (!opengl::init_glew())
+    if (!ylikuutio::opengl::init_glew())
     {
         cleanup_callback_engine->execute();
         return -1;
@@ -189,12 +189,12 @@ int main(void)
     ylikuutio::input::set_cursor_position(my_universe->get_window(), static_cast<double>(my_universe->get_window_width()) / 2, static_cast<double>(my_universe->get_window_height()) / 2);
 
     // Enable depth test.
-    opengl::enable_depth_test();
+    ylikuutio::opengl::enable_depth_test();
     // Accept fragment if it closer to the camera than the former one.
-    opengl::set_depth_func_to_less();
+    ylikuutio::opengl::set_depth_func_to_less();
 
     // Cull triangles which normal is not towards the camera.
-    opengl::cull_triangles();
+    ylikuutio::opengl::cull_triangles();
 
     std::cout << "Setting up background colors ...\n";
     ajokki::set_background_colors(my_setting_master);
