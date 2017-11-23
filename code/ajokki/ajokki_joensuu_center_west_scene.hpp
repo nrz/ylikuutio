@@ -1,5 +1,6 @@
 namespace ontology
 {
+    class World;
     class Entity;
     class EntityFactory;
 }
@@ -9,5 +10,5 @@ namespace ontology
 
 namespace ajokki
 {
-    ontology::Entity* create_joensuu_center_west_scene(std::shared_ptr<ontology::EntityFactory> entity_factory);
+    ontology::Entity* create_joensuu_center_west_scene(std::shared_ptr<ontology::EntityFactory> entity_factory, ontology::World* const world);
 }

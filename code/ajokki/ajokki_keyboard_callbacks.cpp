@@ -8,6 +8,7 @@
 #include "code/ylikuutio/ontology/species.hpp"
 #include "code/ylikuutio/ontology/material.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
+#include "code/ylikuutio/ontology/world.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
 #include "code/ylikuutio/common/globals.hpp"
 
@@ -48,7 +49,15 @@ namespace ajokki
             return false;
         }
 
-        ontology::Scene* scene = universe->get_active_scene();
+        ontology::World* world = universe->get_active_world();
+
+        if (world == nullptr)
+        {
+            // No active `World`.
+            return false;
+        }
+
+        ontology::Scene* scene = universe->get_active_world()->get_active_scene();
 
         if (scene == nullptr)
         {

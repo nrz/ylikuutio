@@ -1,16 +1,6 @@
 #ifndef __ENTITY_FACTORY_HPP_INCLUDED
 #define __ENTITY_FACTORY_HPP_INCLUDED
 
-#include "entity.hpp"
-#include "universe.hpp"
-#include "scene.hpp"
-#include "shader.hpp"
-#include "material.hpp"
-#include "species.hpp"
-#include "object.hpp"
-#include "vector_font.hpp"
-#include "text3D.hpp"
-#include "font2D.hpp"
 #include "shader_struct.hpp"
 #include "material_struct.hpp"
 #include "species_struct.hpp"
@@ -30,6 +20,18 @@
 
 namespace ontology
 {
+    class Entity;
+    class Universe;
+    class World;
+    class Scene;
+    class Shader;
+    class Material;
+    class Species;
+    class Object;
+    class VectorFont;
+    class Text3D;
+    class Font2D;
+
     class EntityFactory
     {
         public:
@@ -43,7 +45,8 @@ namespace ontology
             ontology::Universe* get_universe();
 
             ontology::Entity* create_Universe();
-            ontology::Entity* create_Scene(const float water_level);
+            ontology::Entity* create_World();
+            ontology::Entity* create_Scene(ontology::World* const world, const float water_level);
             ontology::Entity* create_Shader(const ShaderStruct& shader_struct);
             ontology::Entity* create_Material(const MaterialStruct& material_struct);
             ontology::Entity* create_Species(const SpeciesStruct& species_struct);

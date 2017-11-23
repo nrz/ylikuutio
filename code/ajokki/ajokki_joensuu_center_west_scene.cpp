@@ -23,15 +23,19 @@
 
 namespace ontology
 {
+    class World;
     class Entity;
 }
 
 namespace ajokki
 {
-    ontology::Entity* create_joensuu_center_west_scene(std::shared_ptr<ontology::EntityFactory> entity_factory)
+    ontology::Entity* create_joensuu_center_west_scene(std::shared_ptr<ontology::EntityFactory> entity_factory, ontology::World* const world)
     {
         // Joensuu `Scene` begins here.
-        ontology::Entity* joensuu_center_west_scene_entity = entity_factory->create_Scene(77.0f);
+
+        std::cout << "Creating ontology::Entity* joensuu_center_west_scene_entity ...\n";
+        ontology::Entity* joensuu_center_west_scene_entity = entity_factory->create_Scene(world, 77.0f);
+        std::cout << "Creating ontology::Scene* joensuu_center_west_scene ...\n";
         ontology::Scene* joensuu_center_west_scene = dynamic_cast<ontology::Scene*>(joensuu_center_west_scene_entity);
 
         if (joensuu_center_west_scene == nullptr)

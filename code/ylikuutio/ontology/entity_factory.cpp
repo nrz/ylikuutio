@@ -1,6 +1,7 @@
 #include "entity_factory.hpp"
 #include "entity.hpp"
 #include "universe.hpp"
+#include "world.hpp"
 #include "scene.hpp"
 #include "shader.hpp"
 #include "material.hpp"
@@ -54,9 +55,14 @@ namespace ontology
         return new ontology::Universe();
     }
 
-    ontology::Entity* EntityFactory::create_Scene(const float water_level)
+    ontology::Entity* EntityFactory::create_World()
     {
-        return new ontology::Scene(this->universe, water_level);
+        return new ontology::World(this->universe);
+    }
+
+    ontology::Entity* EntityFactory::create_Scene(ontology::World* const world, const float water_level)
+    {
+        return new ontology::Scene(this->universe, world, water_level);
     }
 
     ontology::Entity* EntityFactory::create_Shader(const ShaderStruct& shader_struct)

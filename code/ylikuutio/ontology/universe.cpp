@@ -18,14 +18,7 @@
 
 #include "universe.hpp"
 #include "entity.hpp"
-#include "scene.hpp"
-#include "shader.hpp"
-#include "material.hpp"
-#include "species.hpp"
-#include "object.hpp"
-#include "vector_font.hpp"
-#include "glyph.hpp"
-#include "text3D.hpp"
+#include "world.hpp"
 #include "ground_level.hpp"
 #include "render_templates.hpp"
 #include "code/ylikuutio/config/setting.hpp"
@@ -55,6 +48,11 @@
 #include <glm/glm.hpp> // glm
 #endif
 
+#ifndef __GLM_GTC_MATRIX_TRANSFORM_HPP_INCLUDED
+#define __GLM_GTC_MATRIX_TRANSFORM_HPP_INCLUDED
+#include <glm/gtc/matrix_transform.hpp>
+#endif
+
 // Include standard headers
 #include <cmath>         // NAN, std::isnan, std::pow
 #include <inttypes.h>    // PRId32, PRId64, PRIu32, PRIu64, PRIx32, PRIx64
@@ -73,9 +71,9 @@ namespace ontology
         // destructor.
         std::cout << "This universe will be destroyed.\n";
 
-        // destroy all scenes of this universe.
-        std::cout << "All scenes of this universe will be destroyed.\n";
-        hierarchy::delete_children<ontology::Scene*>(this->scene_pointer_vector, &this->number_of_scenes);
+        // destroy all worlds of this universe.
+        std::cout << "All worlds of this universe will be destroyed.\n";
+        hierarchy::delete_children<ontology::World*>(this->world_pointer_vector, &this->number_of_worlds);
 
         std::cout << "The setting master of this universe will be destroyed.\n";
         delete this->setting_master;
@@ -83,34 +81,51 @@ namespace ontology
 
     void Universe::render()
     {
-        if (this->active_scene != nullptr)
+        if (this->active_world != nullptr)
         {
             this->prerender();
 
             if (this->compute_matrices_from_inputs())
             {
-                // render this `Universe` by calling `render()` function of the active `Scene`.
-                this->active_scene->render();
+                // render this `Universe` by calling `render()` function of the active `World`.
+                this->active_world->render();
             }
 
             this->postrender();
         }
     }
 
-    void Universe::set_active_scene(ontology::Scene* scene)
+    void Universe::set_active_world(ontology::World* world)
     {
-        this->active_scene = scene;
+        this->active_world = world;
 
-        if (this->active_scene != nullptr)
+        if (this->active_world != nullptr && this->active_world->active_scene != nullptr)
         {
-            this->turbo_factor = this->active_scene->turbo_factor;
-            this->twin_turbo_factor = this->active_scene->twin_turbo_factor;
+            this->turbo_factor = this->active_world->active_scene->turbo_factor;
+            this->twin_turbo_factor = this->active_world->active_scene->twin_turbo_factor;
         }
     }
 
-    ontology::Scene* Universe::get_active_scene()
+    void Universe::set_active_scene(ontology::Scene* scene)
     {
-        return this->active_scene;
+        if (this->active_world == nullptr)
+        {
+            // No active `World`.
+            return;
+        }
+
+        this->active_world->active_scene = scene;
+
+        if (this->active_world->active_scene != nullptr)
+        {
+            this->turbo_factor = this->active_world->active_scene->turbo_factor;
+            this->twin_turbo_factor = this->active_world->active_scene->twin_turbo_factor;
+        }
+    }
+
+    ontology::World* Universe::get_active_world()
+    {
+        return this->active_world;
     }
 
     ontology::Entity* Universe::get_parent()
@@ -121,7 +136,7 @@ namespace ontology
 
     int32_t Universe::get_number_of_children()
     {
-        return this->number_of_scenes;
+        return this->number_of_worlds;
     }
 
     int32_t Universe::get_number_of_descendants()
@@ -282,17 +297,21 @@ namespace ontology
         return nullptr;
     }
 
-    std::shared_ptr<datatypes::AnyValue> Universe::activate_scene(
+    std::shared_ptr<datatypes::AnyValue> Universe::activate(
             console::Console* const console,
-            ontology::Entity* const entity,
+            ontology::Entity* const universe_entity,
             std::vector<std::string>& command_parameters)
     {
-        if (console == nullptr || entity == nullptr)
+        // This function can be used to activate a `World` or a `Scene`.
+        // A `World` can be activated always, assuming that the `entity` is a `Universe`.
+        // A `Scene` can be activated only if there is an active `Scene`.
+
+        if (console == nullptr || universe_entity == nullptr)
         {
             return nullptr;
         }
 
-        ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
+        ontology::Universe* universe = dynamic_cast<ontology::Universe*>(universe_entity);
 
         if (universe == nullptr)
         {
@@ -322,14 +341,25 @@ namespace ontology
             }
 
             ontology::Entity* entity = universe->entity_map[name];
+            ontology::World* world = dynamic_cast<ontology::World*>(entity);
             ontology::Scene* scene = dynamic_cast<ontology::Scene*>(entity);
 
-            if (scene == nullptr)
+            if (world == nullptr && scene == nullptr)
             {
+                // The named `Entity` is neither a `World` nor a `Scene`.
                 return nullptr;
             }
 
-            universe->set_active_scene(scene);
+            if (world != nullptr && scene == nullptr)
+            {
+                // The named `Entity` is a `World`.
+                universe->set_active_world(world);
+            }
+            else if (scene != nullptr && world == nullptr)
+            {
+                // The named `Entity` is a `Scene`.
+                universe->set_active_scene(scene);
+            }
         }
         return nullptr;
     }
@@ -406,9 +436,9 @@ namespace ontology
 
     // Public callbacks end here.
 
-    void Universe::set_scene_pointer(int32_t childID, ontology::Scene* child_pointer)
+    void Universe::set_world_pointer(int32_t childID, ontology::World* child_pointer)
     {
-        hierarchy::set_child_pointer(childID, child_pointer, this->scene_pointer_vector, this->free_sceneID_queue, &this->number_of_scenes);
+        hierarchy::set_child_pointer(childID, child_pointer, this->world_pointer_vector, this->free_worldID_queue, &this->number_of_worlds);
     }
 
     void Universe::set_terrain_species(ontology::Species* terrain_species)

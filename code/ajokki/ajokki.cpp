@@ -47,6 +47,7 @@
 #include "code/ylikuutio/ontology/shader.hpp"
 #include "code/ylikuutio/ontology/shader_struct.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
+#include "code/ylikuutio/ontology/world.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/entity_factory.hpp"
 #include "code/ylikuutio/config/setting.hpp"
@@ -206,6 +207,18 @@ int main(void)
     std::cout << "Setting up console ...\n";
     ajokki::set_console(my_setting_master);
 
+    // Create the `World`s.
+
+    ontology::Entity* earth_world_entity = entity_factory->create_World();
+    ontology::World* earth_world = dynamic_cast<ontology::World*>(earth_world_entity);
+
+    if (earth_world == nullptr)
+    {
+        return -1;
+    }
+
+    my_universe->set_active_world(earth_world);
+
     // Create the `Scene`s.
     // The `Scene`s will be created in the following order:
     // 1. Helsinki
@@ -214,7 +227,7 @@ int main(void)
 
     // Helsinki `Scene` begins here.
 
-    ontology::Entity* helsinki_east_downtown_scene_entity = ajokki::create_helsinki_east_downtown_scene(entity_factory);
+    ontology::Entity* helsinki_east_downtown_scene_entity = ajokki::create_helsinki_east_downtown_scene(entity_factory, earth_world);
 
     if (helsinki_east_downtown_scene_entity == nullptr)
     {
@@ -230,14 +243,14 @@ int main(void)
         return -1;
     }
 
-    // Set `helsinki_east_downtown_scene` to be the currently active `Scene`.
-    my_universe->set_active_scene(helsinki_east_downtown_scene);
+    // Set `helsinki_east_downtown_scene` to be the currently active `Scene` in `earth_world`.
+    earth_world->set_active_scene(helsinki_east_downtown_scene);
 
     // Helsinki `Scene` ends here.
 
     // Joensuu `Scene` begins here.
 
-    if (ajokki::create_joensuu_center_west_scene(entity_factory) == nullptr)
+    if (ajokki::create_joensuu_center_west_scene(entity_factory, earth_world) == nullptr)
     {
         return -1;
     }
@@ -247,7 +260,7 @@ int main(void)
     // altiplano `Scene` begins here.
 
     std::cout << "Creating ontology::Entity* altiplano_scene_entity ...\n";
-    ontology::Entity* altiplano_scene_entity = entity_factory->create_Scene(-1.0f * std::numeric_limits<float>::infinity());
+    ontology::Entity* altiplano_scene_entity = entity_factory->create_Scene(earth_world, -1.0f * std::numeric_limits<float>::infinity());
     std::cout << "Creating ontology::Scene* altiplano_scene ...\n";
     ontology::Scene* altiplano_scene = dynamic_cast<ontology::Scene*>(altiplano_scene_entity);
 
@@ -770,7 +783,7 @@ int main(void)
     // Object handling callbacks.
     command_callback_map["info"] = &ontology::Universe::info;
     command_callback_map["delete"] = &ontology::Universe::delete_entity;
-    command_callback_map["activate"] = &ontology::Universe::activate_scene;
+    command_callback_map["activate"] = &ontology::Universe::activate;
 
     // Exit program callbacks.
     command_callback_map["bye"] = &ajokki::quit;

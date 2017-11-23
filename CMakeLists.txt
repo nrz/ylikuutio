@@ -419,6 +419,8 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/vehicle.hpp
     code/ylikuutio/ontology/vboindexer.cpp
     code/ylikuutio/ontology/vboindexer.hpp
+    code/ylikuutio/ontology/world.cpp
+    code/ylikuutio/ontology/world.hpp
 
     # opengl, in alphabetical order
     code/ylikuutio/opengl/opengl.cpp
