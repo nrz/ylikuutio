@@ -226,6 +226,13 @@ http://gis.stackexchange.com/questions/43743/how-to-extract-elevation-from-hgt-f
 CUB-tiedostoformaatin muuntaminen esim. `gdal_translate`:lla:
 http://planetarygis.blogspot.fi/2014/06/using-isis-23-image-cubes-in-gis.html
 
+DWG-tiedostoformaatin muuntaminen TeighaConverterilla:
+https://www.freecadweb.org/wiki/FreeCAD_and_DWG_Import
+https://www.opendesign.com/guestfiles/teigha_file_converter
+
+OpenCTM-tiedostoformaatti:
+http://openctm.sourceforge.net/
+
 OpenGL-ohjeita:
 http://www.opengl-tutorial.org/
 http://ogldev.atspace.co.uk/
@@ -266,11 +273,17 @@ http://far-cry.ubi.com/en-GB/media/index.aspx
 The Elder Scrolls V - Skyrim:
 http://www.elderscrolls.com/skyrim/media/
 
-3D model of Helsinki / Helsingin 3D-kaupunkimalli:
+3D model of Helsinki / Helsingin 3D-kaupunkimalli (CC-BY 4.0):
 http://www.hri.fi/fi/dataset/helsingin-3d-kaupunkimalli
 http://www.hri.fi/en/dataset/helsingin-3d-kaupunkimalli
 http://3d.hel.ninja/data/citygml/
 http://3d.hel.ninja/data/mesh/
+
+3D model of Oulu (CC-BY 4.0):
+http://avoindata.ouka.fi/3d/index_en.html
+
+Turun kampus- ja tiedepuistoalueen 3D-kaupunkimalli (CC-BY 4.0):
+http://www.lounaistieto.fi/blog/2017/09/06/turun-kampus-ja-tiedepuistoalueen-3d-kaupunkimalli/
 
 Digital Elevation Data (by Jonathan de Ferranti,
 whole world data available at 3 and 15 arc second resolutions):
