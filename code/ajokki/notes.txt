@@ -1,55 +1,55 @@
-UV layoutin exporttaus Blenderissä:
-* UV/Image Editor -moodissa -> UVs -> Export UV Layout , .png-tiedostona ulos.
+How to export UV layout in Blender:
+* in UV/Image Editor mode -> UVs -> Export UV Layout , export as a .png file.
 
-Ladataan .png GIMP:ssä.
+Load .png in GIMP.
 
 Ladataan toistaiseksi funktiolla `GLuint load_BMP_texture(std::string filename)`:
 
-Tiedoston tallennus `*.bmp`-formaatissa (toistaiseksi pitää olla 24-bittinen BMP):
-* -> Export
-  -> Windows BMP Image (*.bmp)
-  -> Compatibility Options
-  -> Do not write color space information (raksi ruutuun)
-  -> Advanced Options
-  -> 24 bits (R8 G8 B8)
-  -> Export
+Saving file as BMP (it needs to be a 24-bit BMP):
+-> Export
+-> Windows BMP Image (*.bmp)
+-> Compatibility Options
+-> Do not write color space information (raksi ruutuun)
+-> Advanced Options
+-> 24 bits (R8 G8 B8)
+-> Export
 
 Marching cubes algorithm
 Marching tetrahedra algorithm
 
-Maapallon korkeusdataa:
+Elevation data of the Earth:
 http://wiki.openstreetmap.org/wiki/SRTM
 http://e4ftl01.cr.usgs.gov/SRTM/SRTMGL3.003/
 
-Maapallon kasvillisuusdataa (43200 x 86400 pikseliä):
+Vegetation data of the Earth (43200 x 86400 pixels):
 http://landcover.usgs.gov/global_climatology.php
 
-Globaali säätietopalvelu (API):
+Global weather API:
 http://openweathermap.org/
 
-Kuun korkeusdataa: LRO Lola Elevation Model 118m (LDEM GDR) (46080 x 92160 pikseliä):
+Elevation data of the Moon: LRO Lola Elevation Model 118m (LDEM GDR) (46080 x 92160 pixels):
 http://astrogeology.usgs.gov/search/details/Moon/LRO/LOLA/Lunar_LRO_LOLA_Global_LDEM_118m_Mar2014/cub
 
 Mars Global Data Sets:
 http://www.mars.asu.edu/data/
 
-Mars Global Data Sets - MOLA Shaded Relief (46080 x 23040 pikseliä):
+Mars Global Data Sets - MOLA Shaded Relief (46080 x 23040 pixels):
 http://www.mars.asu.edu/data/mola_color/
 
-Hyviä ilmaisia, vapaita 3U-objekteja:
+Good free 3D models (free as beer and free as speech), check the license of each file:
 http://www.blendswap.com/
 http://tf3dm.com/
 
-Paras hevosmalli tähän mennessä:
+Best 3D horse model so far:
 https://www.blendswap.com/blends/view/76528
 
-Yksisarvinen:
+Unicorn:
 https://www.blendswap.com/blends/view/72281
 
 Rigged and animated cat:
 https://www.blendswap.com/blends/view/86110
 
-Tiger (ilman tekstuuria):
+Tiger (without texture):
 https://www.blendswap.com/blends/view/67522
 
 Cheetah:
@@ -61,13 +61,13 @@ https://www.blendswap.com/blends/view/74227
 Police Camero Super Charger:
 https://www.blendswap.com/blends/view/73114
 
-Ford Crown Victoria Police Interceptor 2005 (tarkista tekstuurin lisenssi!):
+Ford Crown Victoria Police Interceptor 2005 (check the license of the texture!):
 https://www.blendswap.com/blends/view/89245
 
-La Couronne (purjelaiva):
+La Couronne (sailship):
 https://www.blendswap.com/blends/view/15532
 
-HMS Aiax (purjelaiva/fregatti):
+HMS Aiax (sailship/frigate):
 https://www.blendswap.com/blends/view/61361
 
 Missile Cruiser:
@@ -88,13 +88,13 @@ https://www.blendswap.com/blends/view/86025
 HMS Bounty:
 https://www.blendswap.com/blends/view/72940
 
-Tartane (1500-1800-luvuilla Välimerellä käytössä ollut purjelaivatyyppi):
+Tartane (a sailship type used in the Mediterranean sea between 16th century and 19th century):
 https://www.blendswap.com/blends/view/78226
 
-The Mayflower (karakki/nao):
+The Mayflower (Dutch cargo fluyt):
 https://www.blendswap.com/blends/view/67084
 
-America (kuunari):
+America (schooner):
 https://www.blendswap.com/blends/view/79825
 
 Drakkar:
@@ -106,7 +106,7 @@ https://www.blendswap.com/blends/view/81020
 Dzonkki:
 https://www.blendswap.com/blends/view/74176
 
-Mandragore 2 (dzonkki):
+Mandragore 2 (Junk ship):
 https://www.blendswap.com/blends/view/80483
 
 SLM HGm4/6 (BB204) Locomotive:
@@ -217,35 +217,35 @@ https://www.blendswap.com/blends/view/82485
 Konserian Swamptree:
 https://www.blendswap.com/blends/view/66481
 
-Hyviä ilmaisia, vapaita tekstuureja:
+Good free textures (free as beer and free as speech):
 http://www.myfreetextures.com/
 
-HGT-tiedostoformaatti:
+HGT file format:
 http://gis.stackexchange.com/questions/43743/how-to-extract-elevation-from-hgt-file
 
-CUB-tiedostoformaatin muuntaminen esim. `gdal_translate`:lla:
+Converting CUB file format eg. with `gdal_translate`:
 http://planetarygis.blogspot.fi/2014/06/using-isis-23-image-cubes-in-gis.html
 
-DWG-tiedostoformaatin muuntaminen TeighaConverterilla:
+Converting DWG file format with TeighaConverter:
 https://www.freecadweb.org/wiki/FreeCAD_and_DWG_Import
 https://www.opendesign.com/guestfiles/teigha_file_converter
 
-OpenCTM-tiedostoformaatti:
+OpenCTM file format:
 http://openctm.sourceforge.net/
 
-OpenGL-ohjeita:
+OpenGL instructions:
 http://www.opengl-tutorial.org/
 http://ogldev.atspace.co.uk/
 http://www.arcsynthesis.org/gltut/
 http://www.videotutorialsrock.com/index.php
 
-Blender-ohjeita:
+Blender instructions:
 https://www.youtube.com/playlist?list=PLda3VoSoc_TR7X7wfblBGiRz-bvhKpGkS
 
-Avaruuden pilkkominen (space partitioning):
+Space partitioning:
 http://tulrich.com/geekstuff/partitioning.html
 
-Octree-ohjeita:
+Octree instructions:
 http://www.gamedev.net/page/resources/_/technical/game-programming/introduction-to-octrees-r3529
 
 A Real-Time Procedural Universe, Part Three: Matters of Scale:
@@ -266,7 +266,7 @@ http://http.developer.nvidia.com/GPUGems/gpugems_pref01.html
 GPGPU::Basic Math Tutorial:
 http://www.mathematik.uni-dortmund.de/~goeddeke/gpgpu/tutorial.html
 
-Nykyajan 3U-peligrafiikan esimerkkejä:
+3D game graphics examples:
 Far Cry 4:
 http://far-cry.ubi.com/en-GB/media/index.aspx
 
@@ -282,7 +282,7 @@ http://3d.hel.ninja/data/mesh/
 3D model of Oulu (CC-BY 4.0):
 http://avoindata.ouka.fi/3d/index_en.html
 
-Turun kampus- ja tiedepuistoalueen 3D-kaupunkimalli (CC-BY 4.0):
+3D model of the campus and science park area of Turku / Turun kampus- ja tiedepuistoalueen 3D-kaupunkimalli (CC-BY 4.0):
 http://www.lounaistieto.fi/blog/2017/09/06/turun-kampus-ja-tiedepuistoalueen-3d-kaupunkimalli/
 
 Digital Elevation Data (by Jonathan de Ferranti,
