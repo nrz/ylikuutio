@@ -1,0 +1,66 @@
+TODO list:
+Tasks in priority order in descending priority, the most urgent ones first. Check when ready and move to the section Ready, when ready.
+
+Tasks which are necessary for the development of Ylikuutio:
+[ ] Add `set wireframe true`, `set wireframe false`.
+[ ] Add `enable wireframe`, `disable wireframe`.
+[ ] Add `enable wireframe <entity_name>`, `disable wireframe <entity_name>`.
+[ ] Add support for 3D model of Helsinki: http://www.hri.fi/en/dataset/helsingin-3d-kaupunkimalli http://www.hri.fi/fi/dataset/helsingin-3d-kaupunkimalli
+[ ] Add voxel world.
+[ ] Add AI objects (robots).
+[ ] Add scene loading command `load` into console.
+[ ] Move main loop out of `main` function and away from Ajokki into `ontology::Universe` class of Ylikuutio.
+[ ] Add support for custom keyboard settings.
+[ ] Add support for camera objects..
+[ ] Use GLFM library (only for Android builds). https://github.com/brackeen/glfm
+[ ] Add variable `wireframe`: `set wireframe on` / `set wireframe off`.
+[ ] Add variable `text_size`.
+[ ] Add variable `direction`.
+[ ] Use TinySpline.
+[ ] Add bicubic interpolation.
+[ ] Add spline interpolation.
+[ ] Variable `triangulation`: `set triangulation bilinear`/`set triangulation bicubic`/`set triangulation southwest_northeast`/`set triangulation southeast_northwest`.
+[ ] Implement scene loading which works in the background.
+[ ] Add object listing command `objects` into console.
+[ ] Add entity-specific pre-render and post-render callbacks `prerender_callback and `postrender_callback`.
+[ ] Create a graph of the vertices and edges of a scene.
+[ ] Add functionality for vertex selection and modification, using ray casting.
+[ ] Add modifying of vertices.
+[ ] Add octree segmentation.
+[ ] Add support for vector fonts.
+[ ] Add TinyScheme support for programming of AI objects (robots).
+[ ] Enable changing of variable `up` in the console with `set up`.
+[ ] Enable changing of variable `right` in the console with `set right`.
+[ ] Add dynamic not flowing water.
+[ ] Add physics modeling.
+[ ] Add flowing water (computed with a server).
+[ ] Add Internet code (ASIO).
+
+Less urgent:
+[ ] Add TinyScheme support in console.
+[ ] Add support for 3D text.
+[ ] Add support for partially transparent text.
+[ ] Add support for over 3-dimensional objects (projected into 3D space in `Object::render()`).
+[ ] Store each robot's current view into an array from which the robot may access it programmatically using C++ and/or GLSL.
+[ ] Implement simulation of primary visual cortex (V1).
+[ ] Implement simulation of V2.
+
+Ready:
+[x] Add test VBO, eg. some kind of particle object.
+[x] Define an object class.
+[x] Add support for several vertex buffer objects (VBO).
+[x] `string.h` -> `cstring`.
+[x] `strcmp` -> `std::strcmp`.
+[x] `strlen` -> `std::strlen`.
+[x] Implement callbacks.
+[x] Test functioning of callbacks.
+[x] Add console (it opens with key `).
+[x] Enable naming of entities of any level in entity hierarchy.
+[x] Add scrolling into console when the 'window' gets full.
+[x] Add command `info` into console (tells about entities, eg. number of vertices of an objects etc. information).
+[x] Add variable `horizontal_angle`.
+[x] Add variable `vertical_angle`.
+[x] Add variable `right`.
+[x] Add variable `up`.
+[x] Add variable `window_width`.
+[x] Add variable `window_height`.
