@@ -117,25 +117,15 @@ std::string g_font_texture_filename = "Holstein.bmp";
 
 int main(void)
 {
-    std::shared_ptr<ontology::EntityFactory> entity_factory = std::make_shared<ontology::EntityFactory>();
-
     // Create the world, store it in `my_universe`.
     std::cout << "Creating ontology::Entity* my_universe_entity ...\n";
-    ontology::Entity* my_universe_entity = entity_factory->create_Universe();
-    std::cout << "Creating ontology::Universe* my_universe ...\n";
-    ontology::Universe* my_universe = dynamic_cast<ontology::Universe*>(my_universe_entity);
+    ontology::Universe* my_universe = new ontology::Universe();
 
-    if (my_universe == nullptr)
-    {
-        std::cerr << "Failed to create Universe.\n";
-        return -1;
-    }
+    ontology::EntityFactory* entity_factory = my_universe->get_entity_factory();
 
     // Create the setting master, store it in `my_setting_master`.
     std::cout << "Creating config::SettingMaster* my_setting_master ...\n";
     config::SettingMaster* my_setting_master = new config::SettingMaster(my_universe);
-
-    entity_factory->set_universe(my_universe);
 
     float earth_radius = 6371.0f; // in kilometres
 

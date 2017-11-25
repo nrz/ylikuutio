@@ -243,6 +243,12 @@ namespace ontology
         return entity_names;
     }
 
+    ontology::EntityFactory* Universe::get_entity_factory()
+    {
+        // Return a raw non-owning pointer.
+        return this->entity_factory.get();
+    }
+
     // Public callbacks.
 
     std::shared_ptr<datatypes::AnyValue> Universe::delete_entity(

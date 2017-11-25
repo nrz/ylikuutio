@@ -36,12 +36,12 @@ namespace ontology
     {
         public:
             // constructor.
-            EntityFactory();
+            // only `Universe` should create an `EntityFactory`.
+            EntityFactory(ontology::Universe* universe);
 
             // destructor.
             ~EntityFactory();
 
-            void set_universe(ontology::Universe* universe);
             ontology::Universe* get_universe();
 
             ontology::Entity* create_Universe();

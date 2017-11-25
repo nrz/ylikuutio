@@ -29,10 +29,10 @@
 
 namespace ontology
 {
-    EntityFactory::EntityFactory()
+    EntityFactory::EntityFactory(ontology::Universe* universe)
     {
         // constructor.
-        this->universe = nullptr;
+        this->universe = universe;
     }
 
     EntityFactory::~EntityFactory()
@@ -40,19 +40,9 @@ namespace ontology
         // destructor.
     }
 
-    void EntityFactory::set_universe(ontology::Universe* universe)
-    {
-        this->universe = universe;
-    }
-
     ontology::Universe* EntityFactory::get_universe()
     {
         return this->universe;
-    }
-
-    ontology::Entity* EntityFactory::create_Universe()
-    {
-        return new ontology::Universe();
     }
 
     ontology::Entity* EntityFactory::create_World()

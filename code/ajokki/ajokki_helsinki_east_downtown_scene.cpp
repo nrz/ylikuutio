@@ -29,7 +29,7 @@ namespace ontology
 
 namespace ajokki
 {
-    ontology::Entity* create_helsinki_east_downtown_scene(std::shared_ptr<ontology::EntityFactory> entity_factory, ontology::World* const world)
+    ontology::Entity* create_helsinki_east_downtown_scene(ontology::EntityFactory* entity_factory, ontology::World* const world)
     {
         // Helsinki `Scene` begins here.
 

@@ -2,6 +2,7 @@
 #define __UNIVERSE_HPP_INCLUDED
 
 #include "entity.hpp"
+#include "entity_factory.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
 #include "code/ylikuutio/common/globals.hpp"
 
@@ -205,6 +206,8 @@ namespace ontology
             Universe()
                 : Entity(nullptr) // `Universe` has no parent.
             {
+                this->entity_factory = std::make_shared<ontology::EntityFactory>(this);
+
                 this->cartesian_coordinates = nullptr;
                 this->spherical_coordinates = nullptr;
 
@@ -328,6 +331,8 @@ namespace ontology
 
             std::string get_entity_names() const;
 
+            ontology::EntityFactory* get_entity_factory();
+
             // Public callbacks.
 
             static std::shared_ptr<datatypes::AnyValue> delete_entity(
@@ -426,6 +431,8 @@ namespace ontology
             void* terrain_species;               // pointer to terrain `Species` (used in collision detection).
 
             float planet_radius;
+
+            std::shared_ptr<ontology::EntityFactory> entity_factory;
 
             std::vector<ontology::World*> world_pointer_vector;
             std::queue<int32_t> free_worldID_queue;
