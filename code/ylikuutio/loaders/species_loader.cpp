@@ -79,11 +79,11 @@ namespace loaders
             species_loader_struct.latitude = -16.50f; // in degrees.
             species_loader_struct.longitude = -68.15f; // in degrees.
 
-            model_loading_result = loaders::load_SRTM_world(
+            model_loading_result = loaders::load_SRTM_terrain(
                     species_loader_struct.model_filename,
                     species_loader_struct.latitude,
                     species_loader_struct.longitude,
-                    species_loader_struct.world_radius,
+                    species_loader_struct.planet_radius,
                     species_loader_struct.divisor,
                     out_vertices,
                     out_UVs,
@@ -94,7 +94,7 @@ namespace loaders
         }
         else if (species_loader_struct.model_file_format.compare("bmp") == 0 || species_loader_struct.model_file_format.compare("BMP") == 0)
         {
-            model_loading_result = loaders::load_BMP_world(
+            model_loading_result = loaders::load_BMP_terrain(
                     species_loader_struct.model_filename,
                     out_vertices,
                     out_UVs,

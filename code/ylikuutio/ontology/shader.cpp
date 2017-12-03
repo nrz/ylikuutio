@@ -1,5 +1,6 @@
 #include "shader.hpp"
 #include "scene.hpp"
+#include "world.hpp"
 #include "universe.hpp"
 #include "material.hpp"
 #include "glyph.hpp"
@@ -101,6 +102,6 @@ namespace ontology
     void Shader::set_terrain_species(ontology::Species* const terrain_species)
     {
         this->terrain_species = terrain_species;
-        this->parent->parent->set_terrain_species(this->terrain_species);
+        this->parent->parent->parent->set_terrain_species(this->terrain_species);
     }
 }

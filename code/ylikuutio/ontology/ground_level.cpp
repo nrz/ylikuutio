@@ -30,7 +30,7 @@ namespace ontology
             ontology::Species* terrain_species,
             glm::vec3* position)
     {
-        if (!terrain_species->is_world)
+        if (!terrain_species->is_terrain)
         {
             // if the current species is not a world species, no collision detection to the ground will be performed.
             return NAN;
@@ -97,7 +97,7 @@ namespace ontology
             ontology::Species* terrain_species,
             glm::vec3* position)
     {
-        if (!terrain_species->is_world)
+        if (!terrain_species->is_terrain)
         {
             // if the current species is not a world species, no collision detection to the ground will be performed.
             return NAN;

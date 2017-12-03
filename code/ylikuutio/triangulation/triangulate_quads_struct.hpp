@@ -1,7 +1,7 @@
 #ifndef __TRIANGULATE_QUADS_STRUCT_HPP_INCLUDED
 #define __TRIANGULATE_QUADS_STRUCT_HPP_INCLUDED
 
-#include "code/ylikuutio/geometry/spherical_world_struct.hpp"
+#include "code/ylikuutio/geometry/spherical_terrain_struct.hpp"
 
 // Include standard headers
 #include <cmath>    // NAN, std::isnan, std::pow
@@ -24,7 +24,7 @@ namespace geometry
         std::string triangulation_type;
         bool should_ylikuutio_use_real_texture_coordinates;
         double sphere_radius;
-        geometry::SphericalWorldStruct spherical_world_struct;
+        geometry::SphericalTerrainStruct spherical_terrain_struct;
     } TriangulateQuadsStruct;
 }
 

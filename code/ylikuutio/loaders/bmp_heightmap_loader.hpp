@@ -14,7 +14,7 @@
 
 namespace loaders
 {
-    bool load_BMP_world(
+    bool load_BMP_terrain(
             const std::string& image_path,
             std::vector<glm::vec3>& out_vertices,
             std::vector<glm::vec2>& out_UVs,

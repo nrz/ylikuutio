@@ -8,6 +8,7 @@
 #endif
 
 #include "scene.hpp"
+#include "world.hpp"
 #include "ground_level.hpp"
 #include "shader.hpp"
 #include "render_templates.hpp"
@@ -45,10 +46,10 @@ namespace ontology
         std::cout << "All shaders of this scene will be destroyed.\n";
         hierarchy::delete_children<ontology::Shader*>(this->shader_pointer_vector, &this->number_of_shaders);
 
-        if (this->universe->get_active_scene() == this)
+        if (this->parent->get_active_scene() == this)
         {
             // Make this `Scene` no more the active `Scene`.
-            this->universe->set_active_scene(nullptr);
+            this->parent->set_active_scene(nullptr);
         }
 
         // set pointer to this scene to nullptr.
@@ -100,7 +101,7 @@ namespace ontology
     {
         this->turbo_factor = turbo_factor;
 
-        if (this == this->universe->active_scene)
+        if (this->parent == this->universe->active_world && this == this->parent->active_scene)
         {
             this->universe->turbo_factor = this->turbo_factor;
         }
@@ -110,7 +111,7 @@ namespace ontology
     {
         this->twin_turbo_factor = twin_turbo_factor;
 
-        if (this == this->universe->active_scene)
+        if (this->parent == this->universe->active_world && this == this->parent->active_scene)
         {
             this->universe->twin_turbo_factor = this->twin_turbo_factor;
         }

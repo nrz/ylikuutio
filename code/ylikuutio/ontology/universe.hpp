@@ -2,6 +2,7 @@
 #define __UNIVERSE_HPP_INCLUDED
 
 #include "entity.hpp"
+#include "entity_factory.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
 #include "code/ylikuutio/common/globals.hpp"
 
@@ -45,6 +46,8 @@
 //
 //    Universe
 //       ^
+//     World
+//       ^
 //     Scene
 //       ^
 //     Shader
@@ -60,6 +63,8 @@
 // Ontological hierarchy of `Glyph` (character) objects:
 //
 //    Universe
+//       ^
+//     World
 //       ^
 //     Scene
 //       ^
@@ -79,6 +84,8 @@
 // Rendering hierarchy of `Glyph` (character) objects:
 //
 //    Universe
+//       ^
+//     World
 //       ^
 //     Scene
 //       ^
@@ -101,6 +108,8 @@
 //
 //    Universe
 //       ^
+//     World
+//       ^
 //     Scene
 //       ^
 //   Symbiosis
@@ -120,6 +129,8 @@
 //
 //    Universe
 //       ^
+//     World
+//       ^
 //     Scene
 //       ^
 //     Shader
@@ -132,14 +143,15 @@
 //
 // Please note that `Symbiosis` is ignored completely in rendering hierarchy.
 //
-// Deleting a `Universe` also deletes all scenes, all shaders, materials, species, fonts, glyphs and objects that are bound to the same `Universe`.
-// Deleting a `Scene` also deletes all shaders, materials, species, fonts, glyphs and objects that are bound to the same `Universe`.
+// Deleting a `Universe` also deletes all worlds, scenes, all shaders, materials, species, fonts, glyphs and objects that are bound to the same `Universe`.
+// Deleting a `World` also deletes all scenes, all shaders, materials, species, fonts, glyphs and objects that are bound to the same `World`.
+// Deleting a `Scene` also deletes all shaders, materials, species, fonts, glyphs and objects that are bound to the same `Scene`.
 // Deleting a `Shader` also deletes all materials, species, fonts, glyphs and objects that are bound to the same `Shader`.
 // Deleting a `Material` also deletes all species, fonts, glyphs and objects that are bound to the same `Material`.
 // Deleting a `Species` also deletes all objects that are bound to the same `Species`.
 // Deleting an `Object` only deletes the object.
 
-// Characteristics of object type graphs:
+// Characteristics of object type graphs: TODO: implement object type graphs!
 // 1. Each object must be an undirected graph.
 // 2. Each edge must be a link in the graph.
 // 3. The faces of each object must form a closed surface. The only exception is the terrain object, which may have borders.
@@ -181,6 +193,7 @@ namespace console
 
 namespace ontology
 {
+    class World;
     class Scene;
     class Shader;
     class Species;
@@ -193,13 +206,15 @@ namespace ontology
             Universe()
                 : Entity(nullptr) // `Universe` has no parent.
             {
+                this->entity_factory = new ontology::EntityFactory(this);
+
                 this->cartesian_coordinates = nullptr;
                 this->spherical_coordinates = nullptr;
 
                 // constructor.
-                this->world_radius = NAN; // world radius is NAN as long it doesn't get `set` by `SettingMaster`.
+                this->planet_radius = NAN; // world radius is NAN as long it doesn't get `set` by `SettingMaster`.
                 this->terrain_species = nullptr;
-                this->active_scene = nullptr;
+                this->active_world = nullptr;
                 this->console_pointer = nullptr;
 
                 this->background_red = NAN;
@@ -246,16 +261,16 @@ namespace ontology
                 this->gravity = 9.81f / 60.0f;
                 this->fall_speed = this->gravity;
 
-                this->testing_spherical_world_in_use = false;
+                this->testing_spherical_terrain_in_use = false;
                 this->is_key_I_released = true;
                 this->is_key_F_released = true;
                 this->in_help_mode = true;
                 this->can_toggle_help_mode = false;
                 this->can_display_help_screen = true;
 
-                this->number_of_scenes = 0;
+                this->number_of_worlds = 0;
 
-                this->child_vector_pointers_vector.push_back(&this->scene_pointer_vector);
+                this->child_vector_pointers_vector.push_back(&this->world_pointer_vector);
                 this->type = "ontology::Universe*";
             }
 
@@ -265,10 +280,13 @@ namespace ontology
             // this method renders the active `Scene` of this `Universe`.
             void render();
 
-            // this method stes the active `Scene`.
-            void set_active_scene(ontology::Scene* scene);
+            // this method stes the active `World`.
+            void set_active_world(ontology::World* world);
 
-            ontology::Scene* get_active_scene();
+            // this method stes the active `Scene`.
+            void set_active_scene(ontology::Scene* world);
+
+            ontology::World* get_active_world();
 
             ontology::Entity* get_parent() override;
             int32_t get_number_of_children() override;
@@ -313,6 +331,8 @@ namespace ontology
 
             std::string get_entity_names() const;
 
+            ontology::EntityFactory* get_entity_factory();
+
             // Public callbacks.
 
             static std::shared_ptr<datatypes::AnyValue> delete_entity(
@@ -320,9 +340,9 @@ namespace ontology
                     ontology::Entity* const entity,
                     std::vector<std::string>& command_parameters);
 
-            static std::shared_ptr<datatypes::AnyValue> activate_scene(
+            static std::shared_ptr<datatypes::AnyValue> activate(
                     console::Console* const console,
-                    ontology::Entity* const entity,
+                    ontology::Entity* const universe_entity,
                     std::vector<std::string>& command_parameters);
 
             static std::shared_ptr<datatypes::AnyValue> info(
@@ -366,7 +386,7 @@ namespace ontology
             float fall_speed;
 
             // Variables related to the current `Scene`.
-            bool testing_spherical_world_in_use;
+            bool testing_spherical_terrain_in_use;
 
             // Variables related to debug & testing keys.
             bool is_key_I_released;
@@ -378,6 +398,7 @@ namespace ontology
             bool can_display_help_screen;
 
             friend class Entity;
+            friend class World;
             friend class Scene;
             friend class Shader;
             friend class Material;
@@ -399,8 +420,8 @@ namespace ontology
                 friend void set_name(const std::string& name, T1 entity);
 
         private:
-            // this method sets a `Scene` pointer.
-            void set_scene_pointer(int32_t childID, ontology::Scene* child_pointer);
+            // this method sets a `World` pointer.
+            void set_world_pointer(int32_t childID, ontology::World* child_pointer);
 
             // this method sets a terrain `Species` pointer.
             void set_terrain_species(ontology::Species* terrain_species);
@@ -409,13 +430,15 @@ namespace ontology
 
             void* terrain_species;               // pointer to terrain `Species` (used in collision detection).
 
-            float world_radius;
+            float planet_radius;
 
-            std::vector<ontology::Scene*> scene_pointer_vector;
-            std::queue<int32_t> free_sceneID_queue;
-            int32_t number_of_scenes;
+            ontology::EntityFactory* entity_factory;
 
-            ontology::Scene* active_scene;
+            std::vector<ontology::World*> world_pointer_vector;
+            std::queue<int32_t> free_worldID_queue;
+            int32_t number_of_worlds;
+
+            ontology::World* active_world;
 
             console::Console* console_pointer;     // pointer to `Console`.
 

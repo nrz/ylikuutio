@@ -18,7 +18,7 @@
 #include "triangulation_templates.hpp"
 #include "triangulation_templates.hpp"
 #include "indexing.hpp"
-#include "code/ylikuutio/geometry/spherical_world_struct.hpp"
+#include "code/ylikuutio/geometry/spherical_terrain_struct.hpp"
 #include "code/ylikuutio/geometry/transformation_struct.hpp"
 #include "code/ylikuutio/geometry/transformation.hpp"
 #include "code/ylikuutio/geometry/transformation.hpp"
@@ -61,7 +61,7 @@ namespace geometry
             const int32_t actual_image_height = (image_height - 1) / z_step + 1;
             const std::string triangulation_type = triangulate_quads_struct.triangulation_type;
             double sphere_radius = triangulate_quads_struct.sphere_radius;
-            const geometry::SphericalWorldStruct spherical_world_struct = triangulate_quads_struct.spherical_world_struct;
+            const geometry::SphericalTerrainStruct spherical_terrain_struct = triangulate_quads_struct.spherical_terrain_struct;
 
             if (image_width < 2 || image_height < 2 || actual_image_width < 2 || actual_image_height < 2)
             {
@@ -208,7 +208,7 @@ namespace geometry
                 transformation_struct.image_height = image_height;
                 transformation_struct.sphere_radius = sphere_radius;
                 transformation_struct.is_bilinear_interpolation_in_use = is_bilinear_interpolation_in_use;
-                transformation_struct.spherical_world_struct = spherical_world_struct;
+                transformation_struct.spherical_terrain_struct = spherical_terrain_struct;
                 geometry::transform_coordinates_to_curved_surface(transformation_struct, temp_vertices);
             }
             else

@@ -12,20 +12,23 @@
 #include <GLFW/glfw3.h>
 #endif
 
-namespace input
+namespace ylikuutio
 {
-    void disable_cursor(GLFWwindow* window)
+    namespace input
     {
-        glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-    }
+        void disable_cursor(GLFWwindow* window)
+        {
+            glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+        }
 
-    void set_sticky_keys(GLFWwindow* window)
-    {
-        glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
-    }
+        void set_sticky_keys(GLFWwindow* window)
+        {
+            glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
+        }
 
-    void set_cursor_position(GLFWwindow* window, double xpos, double ypos)
-    {
-        glfwSetCursorPos(window, xpos, ypos);
+        void set_cursor_position(GLFWwindow* window, double xpos, double ypos)
+        {
+            glfwSetCursorPos(window, xpos, ypos);
+        }
     }
 }

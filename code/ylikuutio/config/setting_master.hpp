@@ -61,7 +61,7 @@ namespace config
                     ontology::Entity* entity,
                     std::vector<std::string>& command_parameters);
 
-            static std::shared_ptr<datatypes::AnyValue> activate_world_radius(ontology::Entity* const entity, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> activate_planet_radius(ontology::Entity* const entity, config::SettingMaster* const setting_master);
 
             static std::shared_ptr<datatypes::AnyValue> activate_background_color(ontology::Entity* const entity, config::SettingMaster* const setting_master);
 

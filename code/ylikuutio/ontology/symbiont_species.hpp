@@ -105,8 +105,8 @@ namespace ontology
 
             void set_name(const std::string& name);
 
-            bool is_world;                           // worlds currently do not rotate nor translate.
-            float world_radius;                      // radius of sea level in kilometers. used only for worlds.
+            bool is_terrain;                           // worlds currently do not rotate nor translate.
+            float planet_radius;                      // radius of sea level in kilometers. used only for worlds.
             float divisor;                           // value by which SRTM values are divided to convert them to kilometers.
 
             glm::vec3 light_position;                // light position.

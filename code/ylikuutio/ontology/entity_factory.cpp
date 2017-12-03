@@ -1,6 +1,7 @@
 #include "entity_factory.hpp"
 #include "entity.hpp"
 #include "universe.hpp"
+#include "world.hpp"
 #include "scene.hpp"
 #include "shader.hpp"
 #include "material.hpp"
@@ -28,10 +29,10 @@
 
 namespace ontology
 {
-    EntityFactory::EntityFactory()
+    EntityFactory::EntityFactory(ontology::Universe* universe)
     {
         // constructor.
-        this->universe = nullptr;
+        this->universe = universe;
     }
 
     EntityFactory::~EntityFactory()
@@ -39,24 +40,19 @@ namespace ontology
         // destructor.
     }
 
-    void EntityFactory::set_universe(ontology::Universe* universe)
-    {
-        this->universe = universe;
-    }
-
     ontology::Universe* EntityFactory::get_universe()
     {
         return this->universe;
     }
 
-    ontology::Entity* EntityFactory::create_Universe()
+    ontology::Entity* EntityFactory::create_World()
     {
-        return new ontology::Universe();
+        return new ontology::World(this->universe);
     }
 
-    ontology::Entity* EntityFactory::create_Scene(const float water_level)
+    ontology::Entity* EntityFactory::create_Scene(ontology::World* const world, const float water_level)
     {
-        return new ontology::Scene(this->universe, water_level);
+        return new ontology::Scene(this->universe, world, water_level);
     }
 
     ontology::Entity* EntityFactory::create_Shader(const ShaderStruct& shader_struct)

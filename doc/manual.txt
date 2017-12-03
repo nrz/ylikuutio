@@ -1,0 +1,28 @@
+Ajokki 0.0.1 / Ylikuutio 0.0.1 manual.
+
+F1 to get help.
+` to enter/exit console.
+
+Console commands:
+
+To activate a scene or a world:
+`activate`
+
+To get info about the entities:
+`info`
+
+To set the value of an existing variable:
+`set`
+
+To get the value of a variable:
+`get`
+
+To delete an entity (and all its descendants):
+`delete`
+
+To exit Ajokki:
+`bye`
+`chau`
+`ciao`
+`heippa`
+`sayonara`

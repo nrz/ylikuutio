@@ -298,7 +298,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/geometry/line_segment3D.hpp
     code/ylikuutio/geometry/line_segment_line_segment_intersection.cpp
     code/ylikuutio/geometry/line_segment_line_segment_intersection.hpp
-    code/ylikuutio/geometry/spherical_world_struct.hpp
+    code/ylikuutio/geometry/spherical_terrain_struct.hpp
     code/ylikuutio/geometry/transformation.cpp
     code/ylikuutio/geometry/transformation.hpp
     code/ylikuutio/geometry/transformation_struct.hpp
@@ -419,6 +419,8 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/vehicle.hpp
     code/ylikuutio/ontology/vboindexer.cpp
     code/ylikuutio/ontology/vboindexer.hpp
+    code/ylikuutio/ontology/world.cpp
+    code/ylikuutio/ontology/world.hpp
 
     # opengl, in alphabetical order
     code/ylikuutio/opengl/opengl.cpp
@@ -484,6 +486,10 @@ add_executable(ajokki
     code/ajokki/ajokki_console_callbacks.hpp
     code/ajokki/ajokki_debug.cpp
     code/ajokki/ajokki_debug.hpp
+    code/ajokki/ajokki_helsinki_east_downtown_scene.cpp
+    code/ajokki/ajokki_helsinki_east_downtown_scene.hpp
+    code/ajokki/ajokki_joensuu_center_west_scene.cpp
+    code/ajokki/ajokki_joensuu_center_west_scene.hpp
     code/ajokki/ajokki_keyboard_callbacks.cpp
     code/ajokki/ajokki_keyboard_callbacks.hpp
     code/ajokki/ajokki_location_and_orientation.cpp

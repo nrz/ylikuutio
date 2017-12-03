@@ -8,7 +8,7 @@
 #endif
 
 #include "transformation.hpp"
-#include "code/ylikuutio/geometry/spherical_world_struct.hpp"
+#include "code/ylikuutio/geometry/spherical_terrain_struct.hpp"
 #include "code/ylikuutio/common/spherical_coordinates_struct.hpp"
 #include "code/ylikuutio/common/pi.hpp"
 
@@ -56,7 +56,7 @@ namespace geometry
         uint32_t image_height = transformation_struct.image_height;
         double sphere_radius = transformation_struct.sphere_radius;
         bool is_bilinear_interpolation_in_use = transformation_struct.is_bilinear_interpolation_in_use;
-        geometry::SphericalWorldStruct spherical_world_struct = transformation_struct.spherical_world_struct;
+        geometry::SphericalTerrainStruct spherical_terrain_struct = transformation_struct.spherical_terrain_struct;
 
         // 3a. Transform spherical coordinates loaded from file (and computed this far as being in horizontal plane) to a curved surface.
         //
@@ -70,15 +70,15 @@ namespace geometry
         std::cout << "transforming spherical coordinates loaded from file to cartesian coordinates.\n";
         std::cout << "radius: " << sphere_radius << "\n";
 
-        double latitude_step_in_degrees = spherical_world_struct.SRTM_latitude_step_in_degrees;
+        double latitude_step_in_degrees = spherical_terrain_struct.SRTM_latitude_step_in_degrees;
         // double latitude_step_in_degrees = (360.0f / image_height); // for testing, creates a sphere always.
         std::cout << "latitude step in degrees: " << latitude_step_in_degrees << "\n";
 
-        double longitude_step_in_degrees = spherical_world_struct.SRTM_longitude_step_in_degrees;
+        double longitude_step_in_degrees = spherical_terrain_struct.SRTM_longitude_step_in_degrees;
         // double longitude_step_in_degrees = (360.0f / image_width); // for testing, creates a sphere always.
         std::cout << "longitude step in degrees: " << longitude_step_in_degrees << "\n";
 
-        double current_latitude_in_degrees = spherical_world_struct.southern_latitude;
+        double current_latitude_in_degrees = spherical_terrain_struct.southern_latitude;
 
         GLuint temp_vertices_i = 0;
 
@@ -87,14 +87,14 @@ namespace geometry
         {
             // loop through all latitudes.
 
-            double current_longitude_in_degrees = spherical_world_struct.western_longitude;
+            double current_longitude_in_degrees = spherical_terrain_struct.western_longitude;
 
             for (uint32_t x = 0; x < image_width; x++)
             {
-                glm::vec3 spherical_world_vertex = temp_vertices[temp_vertices_i];
-                spherical_world_vertex.x = (GLfloat) current_longitude_in_degrees;
-                spherical_world_vertex.z = (GLfloat) current_latitude_in_degrees;
-                temp_vertices[temp_vertices_i++] = geometry::transform_planar_world_vertex_into_cartesian_vertex(spherical_world_vertex, sphere_radius);
+                glm::vec3 spherical_terrain_vertex = temp_vertices[temp_vertices_i];
+                spherical_terrain_vertex.x = (GLfloat) current_longitude_in_degrees;
+                spherical_terrain_vertex.z = (GLfloat) current_latitude_in_degrees;
+                temp_vertices[temp_vertices_i++] = geometry::transform_planar_world_vertex_into_cartesian_vertex(spherical_terrain_vertex, sphere_radius);
 
                 current_longitude_in_degrees += longitude_step_in_degrees;
             }
@@ -115,20 +115,20 @@ namespace geometry
             std::cout << "transforming interpolated spherical coordinates to cartesian coordinates.\n";
             std::cout << "radius: " << sphere_radius << "\n";
 
-            double current_latitude_in_degrees = spherical_world_struct.southern_latitude;
+            double current_latitude_in_degrees = spherical_terrain_struct.southern_latitude;
 
             for (uint32_t z = 1; z < image_height; z++)
             {
                 // loop through all latitudes.
 
-                double current_longitude_in_degrees = spherical_world_struct.western_longitude;
+                double current_longitude_in_degrees = spherical_terrain_struct.western_longitude;
 
                 for (uint32_t x = 1; x < image_width; x++)
                 {
-                    glm::vec3 spherical_world_vertex = temp_vertices[temp_vertices_i];
-                    spherical_world_vertex.x = (GLfloat) current_longitude_in_degrees;
-                    spherical_world_vertex.z = (GLfloat) current_latitude_in_degrees;
-                    temp_vertices[temp_vertices_i++] = geometry::transform_planar_world_vertex_into_cartesian_vertex(spherical_world_vertex, sphere_radius);
+                    glm::vec3 spherical_terrain_vertex = temp_vertices[temp_vertices_i];
+                    spherical_terrain_vertex.x = (GLfloat) current_longitude_in_degrees;
+                    spherical_terrain_vertex.z = (GLfloat) current_latitude_in_degrees;
+                    temp_vertices[temp_vertices_i++] = geometry::transform_planar_world_vertex_into_cartesian_vertex(spherical_terrain_vertex, sphere_radius);
 
                     current_longitude_in_degrees += longitude_step_in_degrees;
                 }

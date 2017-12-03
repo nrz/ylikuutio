@@ -1,5 +1,5 @@
 #include "gtest/gtest.h"
-#include "code/ylikuutio/geometry/spherical_world_struct.hpp"
+#include "code/ylikuutio/geometry/spherical_terrain_struct.hpp"
 #include "code/ylikuutio/triangulation/triangulate_quads_struct.hpp"
 #include "code/ylikuutio/triangulation/triangulation_enums.hpp"
 #include "code/ylikuutio/triangulation/triangulation_templates.hpp"
@@ -22,7 +22,7 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
-TEST(vertices_must_be_defined_and_interpolated_appropriately, a_3x3_world)
+TEST(vertices_must_be_defined_and_interpolated_appropriately, a_3x3_terrain)
 {
     int32_t image_width = 3;
     int32_t image_height = 3;
@@ -230,7 +230,7 @@ TEST(vertices_must_be_defined_and_interpolated_appropriately, a_3x3_world)
     ASSERT_TRUE(glm::all(glm::equal(face_normal_vector_vec3[10], glm::normalize(glm::cross(i6_x0_z2 - i11_x0_5_z1_5, i7_x1_z2 - i11_x0_5_z1_5)))));
     ASSERT_TRUE(glm::all(glm::equal(face_normal_vector_vec3[11], glm::normalize(glm::cross(i7_x1_z2 - i11_x0_5_z1_5, i4_x1_z1 - i11_x0_5_z1_5)))));
 }
-TEST(face_indices_must_be_computed_appropriately, a_4x4_world)
+TEST(face_indices_must_be_computed_appropriately, a_4x4_terrain)
 {
     // Face indices example for a 4x4 image file using bilinear interpolation.
     //
@@ -345,7 +345,7 @@ TEST(face_indices_must_be_computed_appropriately, a_4x4_world)
     ASSERT_EQ(geometry::get_face_normal_i(3, 2, geometry::WNW, example_width), 32);
     ASSERT_EQ(geometry::get_face_normal_i(3, 2, geometry::NNW, example_width), 35);
 }
-TEST(a_BMP_world_must_be_loaded_appropriately, load_3x3_BMP_world)
+TEST(a_BMP_terrain_must_be_loaded_appropriately, load_3x3_BMP_terrain)
 {
     std::string image_path = "test3x3.bmp";
     std::vector<glm::vec3> out_vertices;
@@ -358,7 +358,7 @@ TEST(a_BMP_world_must_be_loaded_appropriately, load_3x3_BMP_world)
     uint32_t z_step = 1;
     std::string triangulation_type = "bilinear_interpolation";
 
-    bool model_loading_result = loaders::load_BMP_world(
+    bool model_loading_result = loaders::load_BMP_terrain(
             image_path,
             *&out_vertices,
             *&out_UVs,
@@ -680,7 +680,7 @@ TEST(a_BMP_world_must_be_loaded_appropriately, load_3x3_BMP_world)
 
     // TODO: add assertions for normals!
 }
-TEST(a_BMP_world_must_be_loaded_appropriately, load_256x256_BMP_world)
+TEST(a_BMP_terrain_must_be_loaded_appropriately, load_256x256_BMP_terrain)
 {
     std::string image_path = "noise256x256.bmp";
     std::vector<glm::vec3> out_vertices;
@@ -693,7 +693,7 @@ TEST(a_BMP_world_must_be_loaded_appropriately, load_256x256_BMP_world)
     uint32_t z_step = 1;
     std::string triangulation_type = "bilinear_interpolation";
 
-    bool model_loading_result = loaders::load_BMP_world(
+    bool model_loading_result = loaders::load_BMP_terrain(
             image_path,
             *&out_vertices,
             *&out_UVs,
@@ -716,7 +716,7 @@ TEST(a_BMP_world_must_be_loaded_appropriately, load_256x256_BMP_world)
     ASSERT_EQ(out_UVs.size(), n_vertices_for_face * n_faces_for_bilinear_triangulation * (n_width_of_image_file - 1) * (n_height_of_image_file - 1));
     ASSERT_EQ(out_normals.size(), n_vertices_for_face * n_faces_for_bilinear_triangulation * (n_width_of_image_file - 1) * (n_height_of_image_file - 1));
 }
-TEST(a_2x2_world_must_be_triangulated_appropriately, bilinear_interpolation)
+TEST(a_2x2_terrain_must_be_triangulated_appropriately, bilinear_interpolation)
 {
     // *---*
     // |\ /|
@@ -726,10 +726,10 @@ TEST(a_2x2_world_must_be_triangulated_appropriately, bilinear_interpolation)
     // bilinear interpolation.
     int32_t image_width = 2;
     int32_t image_height = 2;
-    uint32_t world_size = image_width * image_height;
+    uint32_t terrain_size = image_width * image_height;
 
     uint32_t* vertex_data;
-    vertex_data = new uint32_t[world_size];
+    vertex_data = new uint32_t[terrain_size];
     ASSERT_NE(vertex_data, nullptr);
     uint32_t* vertex_pointer = vertex_data;
     // x, z: height (y).
@@ -757,7 +757,7 @@ TEST(a_2x2_world_must_be_triangulated_appropriately, bilinear_interpolation)
     triangulate_quads_struct.image_width = image_width;
     triangulate_quads_struct.image_height = image_height;
     triangulate_quads_struct.sphere_radius = NAN;
-    triangulate_quads_struct.spherical_world_struct = geometry::SphericalWorldStruct(); // not used, but is needed in the function call.
+    triangulate_quads_struct.spherical_terrain_struct = geometry::SphericalTerrainStruct(); // not used, but is needed in the function call.
 
     triangulate_quads_struct.triangulation_type = "bilinear_interpolation";
 
@@ -827,7 +827,7 @@ TEST(a_2x2_world_must_be_triangulated_appropriately, bilinear_interpolation)
     ASSERT_EQ(vertices[11].z, 0.0f);
     ASSERT_EQ(vertices[11].y, southeast_height);
 }
-TEST(a_2x2_world_must_be_triangulated_appropriately, southeast_northwest_edges)
+TEST(a_2x2_terrain_must_be_triangulated_appropriately, southeast_northwest_edges)
 {
     // *---*
     // |\  |
@@ -837,10 +837,10 @@ TEST(a_2x2_world_must_be_triangulated_appropriately, southeast_northwest_edges)
     // southeast northwest edges.
     int32_t image_width = 2;
     int32_t image_height = 2;
-    uint32_t world_size = image_width * image_height;
+    uint32_t terrain_size = image_width * image_height;
 
     uint32_t* vertex_data;
-    vertex_data = new uint32_t[world_size];
+    vertex_data = new uint32_t[terrain_size];
     ASSERT_NE(vertex_data, nullptr);
     uint32_t* vertex_pointer = vertex_data;
     // x, z: height (y).
@@ -866,7 +866,7 @@ TEST(a_2x2_world_must_be_triangulated_appropriately, southeast_northwest_edges)
     triangulate_quads_struct.image_width = image_width;
     triangulate_quads_struct.image_height = image_height;
     triangulate_quads_struct.sphere_radius = NAN;
-    triangulate_quads_struct.spherical_world_struct = geometry::SphericalWorldStruct(); // not used, but is needed in the function call.
+    triangulate_quads_struct.spherical_terrain_struct = geometry::SphericalTerrainStruct(); // not used, but is needed in the function call.
 
     triangulate_quads_struct.triangulation_type = "southeast_northwest_edges";
 
@@ -906,7 +906,7 @@ TEST(a_2x2_world_must_be_triangulated_appropriately, southeast_northwest_edges)
     ASSERT_EQ(vertices[5].z, 1.0f);
     ASSERT_EQ(vertices[5].y, northwest_height);
 }
-TEST(a_2x2_world_must_be_triangulated_appropriately, southwest_northeast_edges)
+TEST(a_2x2_terrain_must_be_triangulated_appropriately, southwest_northeast_edges)
 {
     // *---*
     // |  /|
@@ -916,10 +916,10 @@ TEST(a_2x2_world_must_be_triangulated_appropriately, southwest_northeast_edges)
     // southwest northeast edges.
     int32_t image_width = 2;
     int32_t image_height = 2;
-    uint32_t world_size = image_width * image_height;
+    uint32_t terrain_size = image_width * image_height;
 
     uint32_t* vertex_data;
-    vertex_data = new uint32_t[world_size];
+    vertex_data = new uint32_t[terrain_size];
     ASSERT_NE(vertex_data, nullptr);
     uint32_t* vertex_pointer = vertex_data;
     // x, z: height (y).
@@ -945,7 +945,7 @@ TEST(a_2x2_world_must_be_triangulated_appropriately, southwest_northeast_edges)
     triangulate_quads_struct.image_width = image_width;
     triangulate_quads_struct.image_height = image_height;
     triangulate_quads_struct.sphere_radius = NAN;
-    triangulate_quads_struct.spherical_world_struct = geometry::SphericalWorldStruct(); // not used, but is needed in the function call.
+    triangulate_quads_struct.spherical_terrain_struct = geometry::SphericalTerrainStruct(); // not used, but is needed in the function call.
 
     triangulate_quads_struct.triangulation_type = "southwest_northeast_edges";
 
@@ -985,7 +985,7 @@ TEST(a_2x2_world_must_be_triangulated_appropriately, southwest_northeast_edges)
     ASSERT_EQ(vertices[5].z, 0.0f);
     ASSERT_EQ(vertices[5].y, southwest_height);
 }
-TEST(a_3x3_world_must_be_triangulated_appropriately, southeast_northwest_edges)
+TEST(a_3x3_terrain_must_be_triangulated_appropriately, southeast_northwest_edges)
 {
     // *---*---*
     // |\  |\  |
@@ -999,10 +999,10 @@ TEST(a_3x3_world_must_be_triangulated_appropriately, southeast_northwest_edges)
     // southeast northwest edges.
     int32_t image_width = 3;
     int32_t image_height = 3;
-    uint32_t world_size = image_width * image_height;
+    uint32_t terrain_size = image_width * image_height;
 
     uint32_t* vertex_data;
-    vertex_data = new uint32_t[world_size];
+    vertex_data = new uint32_t[terrain_size];
     ASSERT_NE(vertex_data, nullptr);
     uint32_t* vertex_pointer = vertex_data;
     // x, z: height (y).
@@ -1043,7 +1043,7 @@ TEST(a_3x3_world_must_be_triangulated_appropriately, southeast_northwest_edges)
     triangulate_quads_struct.image_width = image_width;
     triangulate_quads_struct.image_height = image_height;
     triangulate_quads_struct.sphere_radius = NAN;
-    triangulate_quads_struct.spherical_world_struct = geometry::SphericalWorldStruct(); // not used, but is needed in the function call.
+    triangulate_quads_struct.spherical_terrain_struct = geometry::SphericalTerrainStruct(); // not used, but is needed in the function call.
 
     triangulate_quads_struct.triangulation_type = "southeast_northwest_edges";
 

@@ -1,7 +1,7 @@
 #include "gtest/gtest.h"
 #include "code/ylikuutio/interpolation/bilinear_interpolation2D.hpp"
 
-TEST(a_1x1_world_must_be_interpolated_appropriately, no_change)
+TEST(a_1x1_terrain_must_be_interpolated_appropriately, no_change)
 {
     uint32_t image_width = 1;
     uint32_t image_height = 1;
@@ -32,7 +32,7 @@ TEST(a_1x1_world_must_be_interpolated_appropriately, no_change)
     ASSERT_TRUE(*output_vertex_pointer > 8.26875246809035e21);
     ASSERT_TRUE(*output_vertex_pointer < 8.26875246809036e21);
 }
-TEST(a_2x2_world_must_be_interpolated_appropriately, no_change)
+TEST(a_2x2_terrain_must_be_interpolated_appropriately, no_change)
 {
     uint32_t image_width = 2;
     uint32_t image_height = 2;
@@ -59,7 +59,7 @@ TEST(a_2x2_world_must_be_interpolated_appropriately, no_change)
     ASSERT_TRUE(*output_vertex_pointer++ == 345.25f);
     ASSERT_TRUE(*output_vertex_pointer++ == 456.25f);
 }
-TEST(a_2x2_world_must_be_interpolated_appropriately, halfway_points)
+TEST(a_2x2_terrain_must_be_interpolated_appropriately, halfway_points)
 {
     uint32_t image_width = 2;
     uint32_t image_height = 2;
@@ -93,7 +93,7 @@ TEST(a_2x2_world_must_be_interpolated_appropriately, halfway_points)
     ASSERT_TRUE(*output_vertex_pointer++ == (345.25f + 456.25f) / 2.0f);                     // 0.5, 1.0
     ASSERT_TRUE(*output_vertex_pointer++ == 456.25f);                                        // 1.0, 1.0 
 }
-TEST(a_2x2_world_must_be_interpolated_appropriately, quarter_points)
+TEST(a_2x2_terrain_must_be_interpolated_appropriately, quarter_points)
 {
     uint32_t image_width = 2;
     uint32_t image_height = 2;

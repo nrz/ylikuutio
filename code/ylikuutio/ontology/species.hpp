@@ -50,8 +50,8 @@ namespace ontology
             {
                 // constructor.
                 this->universe          = universe;
-                this->is_world          = species_struct.is_world;
-                this->world_radius      = species_struct.world_radius;
+                this->is_terrain          = species_struct.is_terrain;
+                this->planet_radius      = species_struct.planet_radius;
                 this->divisor           = species_struct.divisor;
                 this->model_file_format = species_struct.model_file_format;
                 this->model_filename    = species_struct.model_filename;
@@ -79,7 +79,7 @@ namespace ontology
                 glUseProgram(species_struct.shader->programID);
                 this->lightID = glGetUniformLocation(species_struct.shader->programID, "LightPosition_worldspace");
 
-                if (this->is_world)
+                if (this->is_terrain)
                 {
                     // set world species pointer so that it points to this species.
                     // currently there can be only one world species (used in collision detection).
@@ -95,7 +95,7 @@ namespace ontology
                 species_loader_struct.model_file_format = this->model_file_format;
                 species_loader_struct.latitude = this->latitude;
                 species_loader_struct.longitude = this->longitude;
-                species_loader_struct.world_radius = this->world_radius;
+                species_loader_struct.planet_radius = this->planet_radius;
                 species_loader_struct.divisor = this->divisor;
                 species_loader_struct.color_channel = this->color_channel;
                 species_loader_struct.x_step = this->x_step;
@@ -140,8 +140,8 @@ namespace ontology
 
             void set_name(const std::string& name);
 
-            bool is_world;                           // worlds currently do not rotate nor translate.
-            float world_radius;                      // radius of sea level in kilometers. used only for worlds.
+            bool is_terrain;                           // worlds currently do not rotate nor translate.
+            float planet_radius;                      // radius of sea level in kilometers. used only for worlds.
             float divisor;                           // value by which SRTM values are divided to convert them to kilometers.
 
             std::string color_channel;               // color channel in use: `"red"`, `"green"`, `"blue"`, `"mean"` or `"all"`.

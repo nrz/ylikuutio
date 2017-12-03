@@ -24,6 +24,7 @@
 namespace ontology
 {
     class Universe;
+    class World;
     class Shader;
     class Species;
     class Symbiosis;
@@ -33,7 +34,7 @@ namespace ontology
     {
         public:
             // constructor.
-            Scene(ontology::Universe* const universe, const float water_level)
+            Scene(ontology::Universe* const universe, ontology::World* const world, const float water_level)
                 : Entity(universe)
             {
                 // constructor.
@@ -42,7 +43,7 @@ namespace ontology
                 this->water_level = static_cast<GLfloat>(water_level);
 
                 this->universe = universe;
-                this->parent = universe;
+                this->parent = world;
 
                 this->cartesian_coordinates = nullptr;
                 this->spherical_coordinates = nullptr;
@@ -53,7 +54,7 @@ namespace ontology
 
                 this->number_of_shaders = 0;
 
-                // get `childID` from `Universe` and set pointer to this `Scene`.
+                // get `childID` from `World` and set pointer to this `Scene`.
                 this->bind_to_parent();
 
                 this->child_vector_pointers_vector.push_back(&this->shader_pointer_vector);
@@ -74,6 +75,7 @@ namespace ontology
             void set_twin_turbo_factor(float turbo_factor);
 
             friend class Universe;
+            friend class World;
             friend class Shader;
             friend class Species;
             template<class T1>
@@ -101,7 +103,7 @@ namespace ontology
             // this method sets a `Symbiosis` pointer.
             void set_symbiosis_pointer(const int32_t childID, ontology::Symbiosis* const child_pointer);
 
-            ontology::Universe* parent;   // pointer to the `Universe`.
+            ontology::World* parent;   // pointer to the `World`.
 
             std::vector<ontology::Shader*> shader_pointer_vector;
             std::queue<int32_t> free_shaderID_queue;
