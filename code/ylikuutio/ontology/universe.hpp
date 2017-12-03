@@ -206,7 +206,7 @@ namespace ontology
             Universe()
                 : Entity(nullptr) // `Universe` has no parent.
             {
-                this->entity_factory = std::make_shared<ontology::EntityFactory>(this);
+                this->entity_factory = new ontology::EntityFactory(this);
 
                 this->cartesian_coordinates = nullptr;
                 this->spherical_coordinates = nullptr;
@@ -432,7 +432,7 @@ namespace ontology
 
             float planet_radius;
 
-            std::shared_ptr<ontology::EntityFactory> entity_factory;
+            ontology::EntityFactory* entity_factory;
 
             std::vector<ontology::World*> world_pointer_vector;
             std::queue<int32_t> free_worldID_queue;

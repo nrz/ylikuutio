@@ -77,6 +77,9 @@ namespace ontology
 
         std::cout << "The setting master of this universe will be destroyed.\n";
         delete this->setting_master;
+
+        std::cout << "The entity factory of this universe will be destroyed.\n";
+        delete this->entity_factory;
     }
 
     void Universe::render()
@@ -245,8 +248,7 @@ namespace ontology
 
     ontology::EntityFactory* Universe::get_entity_factory()
     {
-        // Return a raw non-owning pointer.
-        return this->entity_factory.get();
+        return this->entity_factory;
     }
 
     // Public callbacks.

@@ -35,10 +35,6 @@ namespace ontology
     class EntityFactory
     {
         public:
-            // constructor.
-            // only `Universe` should create an `EntityFactory`.
-            EntityFactory(ontology::Universe* universe);
-
             // destructor.
             ~EntityFactory();
 
@@ -59,7 +55,13 @@ namespace ontology
                     const std::string& texture_filename,
                     const std::string& font_texture_file_format);
 
+            friend class Universe;
+
         private:
+            // constructor.
+            // only `Universe` can create an `EntityFactory`.
+            EntityFactory(ontology::Universe* universe);
+
             ontology::Universe* universe;
     };
 }
