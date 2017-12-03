@@ -85,6 +85,7 @@
 #include <string>        // std::string
 #include <stdint.h>      // uint32_t etc.
 #include <unordered_map> // std::unordered_map
+#include <vector>        // std::vector
 
 // model filename.
 // std::string g_model_filename = "cube.obj";
