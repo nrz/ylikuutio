@@ -97,7 +97,7 @@ namespace ontology
             // destructor.
             virtual ~SymbiontSpecies();
 
-            ontology::Entity* get_parent() override;
+            ontology::Entity* get_parent() const override;
 
             // this method sets pointer to this `SymbiontSpecies` to nullptr, sets `parent` according to the input, and requests a new `childID` from the new `Material`.
             // this method sets an `Object` pointer.

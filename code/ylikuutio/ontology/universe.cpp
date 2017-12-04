@@ -126,23 +126,23 @@ namespace ontology
         }
     }
 
-    ontology::World* Universe::get_active_world()
+    ontology::World* Universe::get_active_world() const
     {
         return this->active_world;
     }
 
-    ontology::Entity* Universe::get_parent()
+    ontology::Entity* Universe::get_parent() const
     {
         // `Universe` has no parent.
         return nullptr;
     }
 
-    int32_t Universe::get_number_of_children()
+    int32_t Universe::get_number_of_children() const
     {
         return this->number_of_worlds;
     }
 
-    int32_t Universe::get_number_of_descendants()
+    int32_t Universe::get_number_of_descendants() const
     {
         return -1;
     }
@@ -217,13 +217,13 @@ namespace ontology
         return this->setting_master->get(key);
     }
 
-    ontology::Entity* Universe::get_entity(const std::string& name)
+    ontology::Entity* Universe::get_entity(const std::string& name) const
     {
         if (this->entity_map.count(name) != 1)
         {
             return nullptr;
         }
-        return this->entity_map[name];
+        return this->entity_map.at(name);
     }
 
     std::string Universe::get_entity_names() const
@@ -246,7 +246,7 @@ namespace ontology
         return entity_names;
     }
 
-    ontology::EntityFactory* Universe::get_entity_factory()
+    ontology::EntityFactory* Universe::get_entity_factory() const
     {
         return this->entity_factory;
     }

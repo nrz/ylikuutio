@@ -130,7 +130,7 @@ namespace ontology
             // destructor.
             virtual ~Species();
 
-            ontology::Entity* get_parent() override;
+            ontology::Entity* get_parent() const override;
 
             // this method sets pointer to this `Species` to nullptr, sets `parent` according to the input, and requests a new `childID` from the new `Material`.
             void bind_to_new_parent(ontology::Material* const new_material_pointer);

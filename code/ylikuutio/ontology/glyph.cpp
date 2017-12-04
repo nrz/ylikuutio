@@ -30,7 +30,7 @@ namespace ontology
         this->parent->set_glyph_pointer(this->childID, nullptr);
     }
 
-    ontology::Entity* Glyph::get_parent()
+    ontology::Entity* Glyph::get_parent() const
     {
         return this->parent;
     }

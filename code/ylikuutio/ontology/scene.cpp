@@ -66,17 +66,17 @@ namespace ontology
         this->postrender();
     }
 
-    ontology::Entity* Scene::get_parent()
+    ontology::Entity* Scene::get_parent() const
     {
         return this->parent;
     }
 
-    int32_t Scene::get_number_of_children()
+    int32_t Scene::get_number_of_children() const
     {
         return this->number_of_shaders;
     }
 
-    int32_t Scene::get_number_of_descendants()
+    int32_t Scene::get_number_of_descendants() const
     {
         return -1;
     }

@@ -49,7 +49,7 @@ namespace ontology
         this->postrender();
     }
 
-    ontology::Entity* SymbiontSpecies::get_parent()
+    ontology::Entity* SymbiontSpecies::get_parent() const
     {
         return this->parent;
     }

@@ -86,9 +86,9 @@ namespace ontology
             // this method renders all `SymbiontSpecies` using this `SymbiontMaterial`.
             void render();
 
-            ontology::Entity* get_parent() override;
-            int32_t get_number_of_children() override;
-            int32_t get_number_of_descendants() override;
+            ontology::Entity* get_parent() const override;
+            int32_t get_number_of_children() const override;
+            int32_t get_number_of_descendants() const override;
 
             // this method sets `SymbiontSpecies` pointer.
             void set_symbiont_species_pointer(const int32_t childID, ontology::SymbiontSpecies* const child_pointer);

@@ -88,7 +88,7 @@ namespace ontology
         }
     }
 
-    ontology::Entity* Object::get_parent()
+    ontology::Entity* Object::get_parent() const
     {
         if (this->is_character)
         {
@@ -100,12 +100,12 @@ namespace ontology
         }
     }
 
-    int32_t Object::get_number_of_children()
+    int32_t Object::get_number_of_children() const
     {
         return 0;
     }
 
-    int32_t Object::get_number_of_descendants()
+    int32_t Object::get_number_of_descendants() const
     {
         return 0;
     }

@@ -89,7 +89,7 @@ namespace ontology
             // destructor.
             virtual ~Object();
 
-            ontology::Entity* get_parent() override;
+            ontology::Entity* get_parent() const override;
 
             // this method sets pointer to this `Object` to nullptr, sets `parent` according to the input,
             // and requests a new `childID` from the new `Species` or from the new `Glyph`.
@@ -209,8 +209,8 @@ namespace ontology
             // this method renders this `Object`.
             void render();
 
-            int32_t get_number_of_children() override;
-            int32_t get_number_of_descendants() override;
+            int32_t get_number_of_children() const override;
+            int32_t get_number_of_descendants() const override;
 
             // act according to this game/simulation object's programming.
             void act();

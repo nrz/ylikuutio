@@ -68,9 +68,9 @@ namespace ontology
             // destructor.
             virtual ~Text3D();
 
-            ontology::Entity* get_parent() override;
-            int32_t get_number_of_children() override;
-            int32_t get_number_of_descendants() override;
+            ontology::Entity* get_parent() const override;
+            int32_t get_number_of_children() const override;
+            int32_t get_number_of_descendants() const override;
 
             // this method deletes all glyph Objects of this `Text3D`,
             // sets pointer to this `Text3D` to nullptr,

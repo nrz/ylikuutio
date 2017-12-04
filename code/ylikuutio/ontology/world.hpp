@@ -48,9 +48,9 @@ namespace ontology
 
             ontology::Scene* get_active_scene();
 
-            ontology::Entity* get_parent() override;
-            int32_t get_number_of_children() override;
-            int32_t get_number_of_descendants() override;
+            ontology::Entity* get_parent() const override;
+            int32_t get_number_of_children() const override;
+            int32_t get_number_of_descendants() const override;
 
             friend class Universe;
             friend class Scene;
