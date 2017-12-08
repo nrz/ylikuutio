@@ -36,7 +36,7 @@ namespace callback_system
             void set_new_callback(const InputParametersToAnyValueCallback callback);
 
             // getter functions for callbacks and callback objects.
-            std::shared_ptr<datatypes::AnyValue> get_any_value(const std::string& name);
+            std::shared_ptr<datatypes::AnyValue> get_any_value(const std::string& name) const;
             std::shared_ptr<datatypes::AnyValue> get_arg(const uint32_t arg_i) const;
 
             // setter function for callbacks and callback objects.

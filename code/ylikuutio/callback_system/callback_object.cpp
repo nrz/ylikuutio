@@ -15,9 +15,13 @@
 namespace callback_system
 {
     // getter function for callbacks and callback objects.
-    std::shared_ptr<datatypes::AnyValue> CallbackObject::get_any_value(const std::string& name)
+    std::shared_ptr<datatypes::AnyValue> CallbackObject::get_any_value(const std::string& name) const
     {
-        return std::make_shared<datatypes::AnyValue>(this->anyvalue_hashmap[name]);
+        if (this->anyvalue_hashmap.count(name) != 1)
+        {
+            return nullptr;
+        }
+        return std::make_shared<datatypes::AnyValue>(this->anyvalue_hashmap.at(name));
     }
 
     std::shared_ptr<datatypes::AnyValue> CallbackObject::get_arg(const uint32_t arg_i) const

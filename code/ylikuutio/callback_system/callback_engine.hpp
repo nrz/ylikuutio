@@ -55,9 +55,9 @@ namespace callback_system
             // execute all callbacks.
             std::shared_ptr<datatypes::AnyValue> execute();
 
-            uint32_t get_n_of_return_values();
-            std::shared_ptr<datatypes::AnyValue> get_nth_return_value(uint32_t n);
-            std::shared_ptr<datatypes::AnyValue> get_previous_return_value();
+            uint32_t get_n_of_return_values() const;
+            std::shared_ptr<datatypes::AnyValue> get_nth_return_value(uint32_t n) const;
+            std::shared_ptr<datatypes::AnyValue> get_previous_return_value() const;
 
             friend class CallbackObject;
             template<class T1>
