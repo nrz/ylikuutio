@@ -47,7 +47,7 @@ namespace ontology
         }
     }
 
-    ontology::Scene* World::get_active_scene()
+    ontology::Scene* World::get_active_scene() const
     {
         return this->active_scene;
     }

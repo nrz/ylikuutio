@@ -46,7 +46,7 @@ namespace ontology
             // this method stes the active `Scene`.
             void set_active_scene(ontology::Scene* scene);
 
-            ontology::Scene* get_active_scene();
+            ontology::Scene* get_active_scene() const;
 
             ontology::Entity* get_parent() const override;
             int32_t get_number_of_children() const override;

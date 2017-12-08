@@ -110,7 +110,7 @@ namespace ontology
                     const char* text_char,
                     const char* char_font_texture_file_format,
                     const char* horizontal_alignment,
-                    const char* vertical_alignment);
+                    const char* vertical_alignment) const;
 
             void printText2D(const PrintingStruct& printing_struct);
 

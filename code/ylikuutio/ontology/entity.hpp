@@ -26,7 +26,7 @@ namespace ontology
             // destructor.
             virtual ~Entity();
 
-            std::string get_type();
+            std::string get_type() const;
 
             virtual ontology::Entity* get_parent() const = 0;
             virtual int32_t get_number_of_children() const = 0;

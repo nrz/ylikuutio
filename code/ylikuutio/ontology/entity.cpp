@@ -45,7 +45,7 @@ namespace ontology
         }
     }
 
-    std::string Entity::get_type()
+    std::string Entity::get_type() const
     {
         return this->type;
     }

@@ -40,7 +40,7 @@ namespace ontology
         // destructor.
     }
 
-    ontology::Universe* EntityFactory::get_universe()
+    ontology::Universe* EntityFactory::get_universe() const
     {
         return this->universe;
     }
