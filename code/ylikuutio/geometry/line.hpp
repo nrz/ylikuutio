@@ -18,7 +18,7 @@ namespace geometry
             // can be used for creating n-dimensional lines.
             Line(const std::vector<float> general_form_coefficients, const float general_form_constant);
 
-            std::string get_general_form_equation();
+            std::string get_general_form_equation() const;
 
         protected:
             bool is_valid;

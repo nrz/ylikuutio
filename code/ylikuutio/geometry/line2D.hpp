@@ -64,10 +64,10 @@ namespace geometry
                 // y - y1 = m(x - x1)
             }
 
-            bool is_identical_with(const geometry::Line2D* const line);   // Here, identical means that points are identical.
+            bool is_identical_with(const geometry::Line2D* const line) const;   // Here, identical means that points are identical.
 
-            bool do_lines2D_intersect(const geometry::Line2D* const line1, const geometry::Line2D* const line2);
-            bool do_lines2D_intersect(const geometry::Line2D* const line);
+            bool do_lines2D_intersect(const geometry::Line2D* const line1, const geometry::Line2D* const line2) const;
+            bool do_lines2D_intersect(const geometry::Line2D* const line) const;
 
             glm::vec2 vec2_point1;
             glm::vec2 vec2_point2;

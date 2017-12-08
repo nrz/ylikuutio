@@ -39,7 +39,7 @@ namespace geometry
         this->general_form_constant = general_form_constant;
     }
 
-    std::string Line::get_general_form_equation()
+    std::string Line::get_general_form_equation() const
     {
         // TODO: implement this function!
         std::string line_equation;
