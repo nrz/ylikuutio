@@ -71,7 +71,7 @@ namespace console
             void set_my_keyrelease_callback_engine_vector_pointer(std::vector<KeyAndCallbackStruct>* my_keyrelease_callback_engine_vector_pointer);
             void print_text(const std::string& text);
             void print_help();
-            void draw_console();
+            void draw_console() const;
 
             // Public callbacks.
 
@@ -297,7 +297,7 @@ namespace console
 
             // Callbacks end here.
 
-            ontology::Universe* get_universe();
+            ontology::Universe* get_universe() const;
 
             void copy_historical_input_into_current_input();
             bool exit_console();

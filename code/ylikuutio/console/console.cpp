@@ -254,7 +254,7 @@ namespace console
         map::print_keys_to_console(this->command_callback_map_pointer, this);
     }
 
-    void Console::draw_console()
+    void Console::draw_console() const
     {
         if (this->in_console)
         {
@@ -348,7 +348,7 @@ namespace console
         }
     }
 
-    ontology::Universe* Console::get_universe()
+    ontology::Universe* Console::get_universe() const
     {
         return this->universe;
     }
