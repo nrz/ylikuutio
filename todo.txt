@@ -10,6 +10,7 @@ Tasks which are necessary for the development of Ylikuutio:
 [ ] Add command line parameter `--headless` to Ajokki (do not open any windows).
 [ ] Add command line parameter `--input-file` to Ajokki (load keypresses and keyreleases from a file, eg. `--input-file foo` or `--input-file=foo`).
 [ ] Add support for 3D model of Helsinki: http://www.hri.fi/en/dataset/helsingin-3d-kaupunkimalli http://www.hri.fi/fi/dataset/helsingin-3d-kaupunkimalli
+[ ] Add support for OpenStreetMap data: https://www.openstreetmap.org/
 [ ] Add voxel world.
 [ ] Add AI objects (robots).
 [ ] Add scene loading command `load` into console.
