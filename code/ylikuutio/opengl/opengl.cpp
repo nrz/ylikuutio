@@ -79,5 +79,17 @@ namespace ylikuutio
                     static_cast<GLclampf>(blue),
                     static_cast<GLclampf>(alpha));
         }
+
+        void set_wireframe(bool wireframe)
+        {
+            if (wireframe)
+            {
+                glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+            }
+            else
+            {
+                glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+            }
+        }
     }
 }

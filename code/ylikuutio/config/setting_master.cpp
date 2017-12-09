@@ -347,17 +347,7 @@ namespace config
             return nullptr;
         }
 
-        bool wireframe = wireframe_any_value->bool_value;
-
-        if (wireframe)
-        {
-            glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-        }
-        else
-        {
-            glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-        }
-
+        ylikuutio::opengl::set_wireframe(wireframe_any_value->bool_value);
         return nullptr;
     }
 
