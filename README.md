@@ -164,6 +164,8 @@ Some available console commands to try in Ajokki:
 * `info`
 * `info cat_species`
 * `info cat2`
+* `set wireframe true`
+* `set wireframe false`
 
 ## FAQ
 Q: What is "Ylikuutio"?
