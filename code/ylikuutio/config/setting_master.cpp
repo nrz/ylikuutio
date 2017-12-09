@@ -2,6 +2,7 @@
 #include "setting.hpp"
 #include "code/ylikuutio/console/console.hpp"
 #include "code/ylikuutio/ontology/entity.hpp"
+#include "code/ylikuutio/opengl/opengl.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
 
 // Include standard headers
@@ -323,7 +324,7 @@ namespace config
 
         GLclampf alpha = static_cast<GLclampf>(alpha_any_value->float_value);
 
-        glClearColor(red, green, blue, alpha);
+        ylikuutio::opengl::set_background_color(red, green, blue, alpha);
         return nullptr;
     }
 

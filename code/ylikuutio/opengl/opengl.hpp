@@ -21,5 +21,6 @@ namespace ylikuutio
         void enable_depth_test();
         void set_depth_func_to_less();
         void cull_triangles();
+        void set_background_color(float red, float green, float blue, float alpha);
     }
 }

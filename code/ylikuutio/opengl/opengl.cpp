@@ -70,5 +70,14 @@ namespace ylikuutio
             // Cull triangles which normal is not towards the camera.
             glEnable(GL_CULL_FACE);
         }
+
+        void set_background_color(float red, float green, float blue, float alpha)
+        {
+            glClearColor(
+                    static_cast<GLclampf>(red),
+                    static_cast<GLclampf>(green),
+                    static_cast<GLclampf>(blue),
+                    static_cast<GLclampf>(alpha));
+        }
     }
 }
