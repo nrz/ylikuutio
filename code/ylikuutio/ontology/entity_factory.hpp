@@ -38,7 +38,7 @@ namespace ontology
             // destructor.
             ~EntityFactory();
 
-            ontology::Universe* get_universe();
+            ontology::Universe* get_universe() const;
 
             ontology::Entity* create_Universe();
             ontology::Entity* create_World();

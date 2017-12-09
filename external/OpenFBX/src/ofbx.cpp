@@ -1019,8 +1019,10 @@ struct MaterialImpl : Material
 
 
 	const Texture* getTexture(Texture::TextureType type) const override { return textures[type]; }
+	Color getDiffuseColor() const override { return diffuse_color; }
 
 	const Texture* textures[Texture::TextureType::COUNT];
+	Color diffuse_color;
 };
 
 
@@ -1374,7 +1376,7 @@ struct Scene : IScene
 
 	int getAnimationStackCount() const override { return (int)m_animation_stacks.size(); }
 	int getMeshCount() const override { return (int)m_meshes.size(); }
-
+	float getSceneFrameRate() const override { return m_scene_frame_rate; }
 
 	const Object* const* getAllObjects() const override { return m_all_objects.empty() ? nullptr : &m_all_objects[0]; }
 
@@ -1428,6 +1430,7 @@ struct Scene : IScene
 
 	Element* m_root_element = nullptr;
 	Root* m_root = nullptr;
+	float m_scene_frame_rate = -1;
 	std::unordered_map<u64, ObjectPair> m_object_map;
 	std::vector<Object*> m_all_objects;
 	std::vector<Mesh*> m_meshes;
@@ -1615,7 +1618,8 @@ static OptionalError<Object*> parseMesh(const Scene& scene, const Element& eleme
 static OptionalError<Object*> parseMaterial(const Scene& scene, const Element& element)
 {
 	MaterialImpl* material = new MaterialImpl(scene, element);
-	/*const Element* prop = findChild(element, "Properties70");
+	const Element* prop = findChild(element, "Properties70");
+	material->diffuse_color = { 1, 1, 1 };
 	if (prop) prop = prop->child;
 	while (prop)
 	{
@@ -1623,11 +1627,13 @@ static OptionalError<Object*> parseMaterial(const Scene& scene, const Element& e
 		{
 			if (prop->first_property->value == "DiffuseColor")
 			{
-				// TODO
+				material->diffuse_color.r = (float)prop->getProperty(4)->getValue().toDouble();
+				material->diffuse_color.g = (float)prop->getProperty(5)->getValue().toDouble();
+				material->diffuse_color.b = (float)prop->getProperty(6)->getValue().toDouble();
 			}
 		}
 		prop = prop->sibling;
-	}*/
+	}
 	return material;
 }
 
@@ -1801,6 +1807,7 @@ template <typename T> static bool parseBinaryArray(const Property& property, std
 		int elem_count = sizeof(T) / elem_size;
 		out->resize(count / elem_count);
 
+		if (count == 0) return true;
 		return parseArrayRaw(property, &(*out)[0], int(sizeof((*out)[0]) * out->size()));
 	}
 	else
@@ -2271,6 +2278,84 @@ static bool parseTakes(Scene* scene)
 	}
 
 	return true;
+}
+
+
+// http://docs.autodesk.com/FBX/2014/ENU/FBX-SDK-Documentation/index.html?url=cpp_ref/class_fbx_time.html,topicNumber=cpp_ref_class_fbx_time_html29087af6-8c2c-4e9d-aede-7dc5a1c2436c,hash=a837590fd5310ff5df56ffcf7c394787e
+enum FrameRate 
+{
+	FrameRate_DEFAULT = 0,
+	FrameRate_120 = 1,
+	FrameRate_100 = 2,
+	FrameRate_60 = 3,
+	FrameRate_50 = 4,
+	FrameRate_48 = 5,
+	FrameRate_30 = 6,
+	FrameRate_30_DROP = 7,
+	FrameRate_NTSC_DROP_FRAME = 8,
+	FrameRate_NTSC_FULL_FRAME = 9,
+	FrameRate_PAL = 10,
+	FrameRate_CINEMA = 11,
+	FrameRate_1000 = 12,
+	FrameRate_CINEMA_ND = 13,
+	FrameRate_CUSTOM = 14,
+};
+
+
+static float getFramerateFromTimeMode(int time_mode)
+{
+	switch (time_mode)
+	{
+		case FrameRate_DEFAULT: return 1;
+		case FrameRate_120: return 120;
+		case FrameRate_100: return 100;
+		case FrameRate_60: return 60;
+		case FrameRate_50: return 50;
+		case FrameRate_48: return 48;
+		case FrameRate_30: return 30;
+		case FrameRate_30_DROP: return 30;
+		case FrameRate_NTSC_DROP_FRAME: return 29.9700262f;
+		case FrameRate_NTSC_FULL_FRAME: return 29.9700262f;
+		case FrameRate_PAL: return 25;
+		case FrameRate_CINEMA: return 24;
+		case FrameRate_1000: return 1000;
+		case FrameRate_CINEMA_ND: return 23.976f;
+		case FrameRate_CUSTOM: return -2;
+	}
+	return -1;
+}
+
+
+static void parseGlobalSettings(const Element& root, Scene* scene)
+{
+	for (ofbx::Element* settings = root.child; settings; settings = settings->sibling)
+	{
+		if (settings->id == "GlobalSettings")
+		{
+			for (ofbx::Element* props70 = settings->child; props70; props70 = props70->sibling)
+			{
+				if (props70->id == "Properties70")
+				{
+					for (ofbx::Element* time_mode = props70->child; time_mode; time_mode = time_mode->sibling)
+					{
+						if (time_mode->first_property && time_mode->first_property->value == "TimeMode")
+						{
+							ofbx::IElementProperty* prop = time_mode->getProperty(4);
+							if (prop)
+							{
+								ofbx::DataView value = prop->getValue();
+								int time_mode = *(int*)value.begin;
+								scene->m_scene_frame_rate = getFramerateFromTimeMode(time_mode);
+							}
+							break;
+						}
+					}
+					break;
+				}
+			}
+			break;
+		}
+	}
 }
 
 
@@ -2767,7 +2852,8 @@ IScene* load(const u8* data, int size)
 	if(!parseConnections(*root.getValue(), scene.get())) return nullptr;
 	if(!parseTakes(scene.get())) return nullptr;
 	if(!parseObjects(*root.getValue(), scene.get())) return nullptr;
-	
+	parseGlobalSettings(*root.getValue(), scene.get());
+
 	return scene.release();
 }
 

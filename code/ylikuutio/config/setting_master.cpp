@@ -2,6 +2,7 @@
 #include "setting.hpp"
 #include "code/ylikuutio/console/console.hpp"
 #include "code/ylikuutio/ontology/entity.hpp"
+#include "code/ylikuutio/opengl/opengl.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
 
 // Include standard headers
@@ -323,7 +324,30 @@ namespace config
 
         GLclampf alpha = static_cast<GLclampf>(alpha_any_value->float_value);
 
-        glClearColor(red, green, blue, alpha);
+        ylikuutio::opengl::set_background_color(red, green, blue, alpha);
+        return nullptr;
+    }
+
+    std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_wireframe(ontology::Entity* const entity, config::SettingMaster* const setting_master)
+    {
+        if (entity == nullptr || setting_master == nullptr)
+        {
+            return nullptr;
+        }
+
+        if (setting_master->setting_pointer_map.count("wireframe") != 1)
+        {
+            return nullptr;
+        }
+
+        std::shared_ptr<datatypes::AnyValue> wireframe_any_value = std::make_shared<datatypes::AnyValue>(*setting_master->setting_pointer_map["wireframe"]->setting_value);
+
+        if (wireframe_any_value == nullptr || wireframe_any_value->type != datatypes::BOOL)
+        {
+            return nullptr;
+        }
+
+        ylikuutio::opengl::set_wireframe(wireframe_any_value->bool_value);
         return nullptr;
     }
 

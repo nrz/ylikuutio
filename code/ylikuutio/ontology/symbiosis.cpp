@@ -28,12 +28,12 @@ namespace ontology
         this->postrender();
     }
 
-    int32_t Symbiosis::get_number_of_children()
+    int32_t Symbiosis::get_number_of_children() const
     {
         return this->number_of_symbiont_materials;
     }
 
-    int32_t Symbiosis::get_number_of_descendants()
+    int32_t Symbiosis::get_number_of_descendants() const
     {
         return -1;
     }

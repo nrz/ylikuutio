@@ -2,10 +2,12 @@ TODO list:
 Tasks in priority order in descending priority, the most urgent ones first. Check when ready and move to the section Ready, when ready.
 
 Tasks which are necessary for the development of Ylikuutio:
-[ ] Add `set wireframe true`, `set wireframe false`.
-[ ] Add `enable wireframe`, `disable wireframe`.
-[ ] Add `enable wireframe <entity_name>`, `disable wireframe <entity_name>`.
+[ ] Add support for command line parameters in Ajokki.
+[ ] Add command line parameter `--debug` to Ajokki (log all kinds of debug information).
+[ ] Add command line parameter `--headless` to Ajokki (do not open any windows).
+[ ] Add command line parameter `--input-file` to Ajokki (load keypresses and keyreleases from a file, eg. `--input-file foo` or `--input-file=foo`).
 [ ] Add support for 3D model of Helsinki: http://www.hri.fi/en/dataset/helsingin-3d-kaupunkimalli http://www.hri.fi/fi/dataset/helsingin-3d-kaupunkimalli
+[ ] Add support for OpenStreetMap data: https://www.openstreetmap.org/
 [ ] Add voxel world.
 [ ] Add AI objects (robots).
 [ ] Add scene loading command `load` into console.
@@ -20,6 +22,8 @@ Tasks which are necessary for the development of Ylikuutio:
 [ ] Add bicubic interpolation.
 [ ] Add spline interpolation.
 [ ] Variable `triangulation`: `set triangulation bilinear`/`set triangulation bicubic`/`set triangulation southwest_northeast`/`set triangulation southeast_northwest`.
+[ ] Write integration tests for Ajokki.
+[ ] Learn how to write unit tests for multithreaded C++ code.
 [ ] Implement scene loading which works in the background.
 [ ] Add object listing command `objects` into console.
 [ ] Add entity-specific pre-render and post-render callbacks `prerender_callback and `postrender_callback`.
@@ -64,3 +68,4 @@ Ready:
 [x] Add variable `up`.
 [x] Add variable `window_width`.
 [x] Add variable `window_height`.
+[x] Add `set wireframe true`, `set wireframe false`.

@@ -47,23 +47,23 @@ namespace ontology
         }
     }
 
-    ontology::Scene* World::get_active_scene()
+    ontology::Scene* World::get_active_scene() const
     {
         return this->active_scene;
     }
 
-    ontology::Entity* World::get_parent()
+    ontology::Entity* World::get_parent() const
     {
         // `World` has no parent.
         return nullptr;
     }
 
-    int32_t World::get_number_of_children()
+    int32_t World::get_number_of_children() const
     {
         return this->number_of_scenes;
     }
 
-    int32_t World::get_number_of_descendants()
+    int32_t World::get_number_of_descendants() const
     {
         return -1;
     }

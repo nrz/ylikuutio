@@ -21,6 +21,7 @@
 #include "ajokki_console.hpp"
 #include "ajokki_movement.hpp"
 #include "ajokki_location_and_orientation.hpp"
+#include "ajokki_wireframe.hpp"
 #include "code/ylikuutio/callback_system/callback_parameter.hpp"
 #include "code/ylikuutio/callback_system/callback_object.hpp"
 #include "code/ylikuutio/callback_system/callback_engine.hpp"
@@ -85,6 +86,7 @@
 #include <string>        // std::string
 #include <stdint.h>      // uint32_t etc.
 #include <unordered_map> // std::unordered_map
+#include <vector>        // std::vector
 
 // model filename.
 // std::string g_model_filename = "cube.obj";
@@ -188,6 +190,8 @@ int main(void)
 
     std::cout << "Setting up background colors ...\n";
     ajokki::set_background_colors(my_setting_master);
+    std::cout << "Setting up wireframe state ...\n";
+    ajokki::set_wireframe(my_setting_master);
     std::cout << "Setting up movement ...\n";
     ajokki::set_movement(my_setting_master);
     std::cout << "Setting up location and orientation ...\n";

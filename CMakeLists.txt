@@ -496,6 +496,8 @@ add_executable(ajokki
     code/ajokki/ajokki_location_and_orientation.hpp
     code/ajokki/ajokki_movement.cpp
     code/ajokki/ajokki_movement.hpp
+    code/ajokki/ajokki_wireframe.cpp
+    code/ajokki/ajokki_wireframe.hpp
     )
 add_dependencies(ajokki rescan)
 target_link_libraries(ajokki ylikuutio ${ALL_LIBS})

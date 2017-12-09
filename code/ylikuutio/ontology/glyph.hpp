@@ -41,7 +41,7 @@ namespace ontology
             // glyphs should be destroyed only by destroying the entire `VectorFont`.
             virtual ~Glyph();
 
-            ontology::Entity* get_parent() override;
+            ontology::Entity* get_parent() const override;
 
             // this method sets a object pointer.
             void set_object_pointer(const int32_t childID, ontology::Object* const child_pointer);
@@ -51,7 +51,7 @@ namespace ontology
             friend class VectorFont;
             friend class Object;
             template<class T1>
-                friend void render_children(std::vector<T1>& child_pointer_vector);
+                friend void render_children(const std::vector<T1>& child_pointer_vector);
             template<class T1>
                 friend void set_name(std::string name, T1 entity);
             template<class T1>

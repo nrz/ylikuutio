@@ -133,9 +133,9 @@ namespace ontology
             // this method renders all `SymbiontMaterial`s belonging to this `Symbiosis`.
             void render();
 
-            int32_t get_number_of_children() override;
+            int32_t get_number_of_children() const override;
 
-            int32_t get_number_of_descendants() override;
+            int32_t get_number_of_descendants() const override;
 
             void set_symbiont_material_pointer(const int32_t childID, ontology::SymbiontMaterial* const child_pointer);
 

@@ -29,8 +29,8 @@ namespace geometry
             {
             }
 
-            bool do_lines3D_intersect(const geometry::Line3D* const line1, const geometry::Line3D* const line2);
-            bool do_lines3D_intersect(const geometry::Line3D* const line);
+            bool do_lines3D_intersect(const geometry::Line3D* const line1, const geometry::Line3D* const line2) const;
+            bool do_lines3D_intersect(const geometry::Line3D* const line) const;
 
         private:
             glm::vec3 vec3_point1;

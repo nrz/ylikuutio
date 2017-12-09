@@ -58,12 +58,12 @@ namespace callback_system
         return std::shared_ptr<datatypes::AnyValue>(any_value);
     }
 
-    uint32_t CallbackEngine::get_n_of_return_values()
+    uint32_t CallbackEngine::get_n_of_return_values() const
     {
         return this->return_values.size();
     }
 
-    std::shared_ptr<datatypes::AnyValue> CallbackEngine::get_nth_return_value(uint32_t n)
+    std::shared_ptr<datatypes::AnyValue> CallbackEngine::get_nth_return_value(uint32_t n) const
     {
         // note: indexing of `n` begins from 0.
 
@@ -77,7 +77,7 @@ namespace callback_system
         return this->return_values.at(n_of_return_values - 1);
     }
 
-    std::shared_ptr<datatypes::AnyValue> CallbackEngine::get_previous_return_value()
+    std::shared_ptr<datatypes::AnyValue> CallbackEngine::get_previous_return_value() const
     {
         uint32_t n_of_return_values = this->get_n_of_return_values();
 

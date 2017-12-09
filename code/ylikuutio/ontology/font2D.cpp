@@ -44,18 +44,18 @@ namespace ontology
         glDeleteProgram(programID);
     }
 
-    ontology::Entity* Font2D::get_parent()
+    ontology::Entity* Font2D::get_parent() const
     {
         // Currently `Font2D`'s do not any parents.
         return nullptr;
     }
 
-    int32_t Font2D::get_number_of_children()
+    int32_t Font2D::get_number_of_children() const
     {
         return -1;
     }
 
-    int32_t Font2D::get_number_of_descendants()
+    int32_t Font2D::get_number_of_descendants() const
     {
         return -1;
     }
@@ -70,7 +70,7 @@ namespace ontology
             const char* text_char,
             const char* char_font_texture_file_format,
             const char* horizontal_alignment,
-            const char* vertical_alignment)
+            const char* vertical_alignment) const
     {
         // If horizontal alignment is `"left"`, each line begins from the same x coordinate.
         // If horizontal alignment is `"left"` and vertical alignment is `"top"`,

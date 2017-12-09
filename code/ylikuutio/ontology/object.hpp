@@ -89,7 +89,7 @@ namespace ontology
             // destructor.
             virtual ~Object();
 
-            ontology::Entity* get_parent() override;
+            ontology::Entity* get_parent() const override;
 
             // this method sets pointer to this `Object` to nullptr, sets `parent` according to the input,
             // and requests a new `childID` from the new `Species` or from the new `Glyph`.
@@ -197,9 +197,7 @@ namespace ontology
             template<class T1, class T2>
                 friend void hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent, std::vector<T1>& old_child_pointer_vector, std::queue<int32_t>& old_free_childID_queue, int32_t* old_number_of_children);
             template<class T1>
-                friend void render_children(std::vector<T1>& child_pointer_vector);
-            template<class T1>
-                friend void render_this_object(ontology::Object* object_pointer, ontology::Shader* shader_pointer);
+                friend void render_children(const std::vector<T1>& child_pointer_vector);
             template<class T1>
                 friend void set_name(std::string name, T1 entity);
 
@@ -208,9 +206,10 @@ namespace ontology
 
             // this method renders this `Object`.
             void render();
+            void render_this_object(ontology::Shader* shader_pointer);
 
-            int32_t get_number_of_children() override;
-            int32_t get_number_of_descendants() override;
+            int32_t get_number_of_children() const override;
+            int32_t get_number_of_descendants() const override;
 
             // act according to this game/simulation object's programming.
             void act();
@@ -233,126 +232,6 @@ namespace ontology
             glm::mat4 model_matrix;                // model matrix.
             glm::mat4 MVP_matrix;                  // model view projection matrix.
     };
-
-    template<class T1>
-        void render_this_object(ontology::Object* object_pointer, ontology::Shader* shader_pointer)
-        {
-            if (!object_pointer->has_entered)
-            {
-                object_pointer->model_matrix = glm::translate(glm::mat4(1.0f), *object_pointer->cartesian_coordinates);
-                object_pointer->model_matrix = glm::scale(object_pointer->model_matrix, object_pointer->original_scale_vector);
-
-                // store the new coordinates to be used in the next update.
-                *object_pointer->cartesian_coordinates = glm::vec3(object_pointer->model_matrix[0][0], object_pointer->model_matrix[1][1], object_pointer->model_matrix[2][2]);
-                object_pointer->has_entered = true;
-            }
-            else
-            {
-                // rotate.
-                if (object_pointer->rotate_vector != glm::vec3(0.0f, 0.0f, 0.0f))
-                {
-                    if (object_pointer->quaternions_in_use)
-                    {
-                        // create `rotation_matrix` using quaternions.
-                        glm::quat my_quaternion = glm::quat(DEGREES_TO_RADIANS(object_pointer->rotate_vector));
-                        glm::mat4 rotation_matrix = glm::mat4_cast(my_quaternion);
-                        object_pointer->model_matrix = rotation_matrix * object_pointer->model_matrix;
-                    }
-                    else
-                    {
-                        object_pointer->model_matrix = glm::rotate(object_pointer->model_matrix, object_pointer->rotate_angle, object_pointer->rotate_vector);
-                    }
-                }
-
-                object_pointer->model_matrix = glm::translate(object_pointer->model_matrix, object_pointer->translate_vector);
-                *object_pointer->cartesian_coordinates = glm::vec3(object_pointer->model_matrix[0][0], object_pointer->model_matrix[1][1], object_pointer->model_matrix[2][2]);
-            }
-
-            object_pointer->MVP_matrix = object_pointer->universe->ProjectionMatrix * object_pointer->universe->ViewMatrix * object_pointer->model_matrix;
-
-            // Send our transformation to the currently bound shader,
-            // in the "MVP" uniform.
-            glUniformMatrix4fv(shader_pointer->MatrixID, 1, GL_FALSE, &object_pointer->MVP_matrix[0][0]);
-            glUniformMatrix4fv(shader_pointer->ModelMatrixID, 1, GL_FALSE, &object_pointer->model_matrix[0][0]);
-
-            GLuint vertexbuffer;
-            GLuint vertexPosition_modelspaceID;
-            GLuint uvbuffer;
-            GLuint vertexUVID;
-            GLuint normalbuffer;
-            GLuint vertexNormal_modelspaceID;
-            GLuint elementbuffer;
-            GLuint indices_size;
-
-            if (object_pointer->is_character)
-            {
-                ontology::Glyph* parent_glyph = object_pointer->glyph_parent;
-                vertexbuffer = parent_glyph->vertexbuffer;
-                vertexPosition_modelspaceID = parent_glyph->vertexPosition_modelspaceID;
-                uvbuffer = parent_glyph->uvbuffer;
-                vertexUVID = parent_glyph->vertexUVID;
-                normalbuffer = parent_glyph->normalbuffer;
-                vertexNormal_modelspaceID = parent_glyph->vertexNormal_modelspaceID;
-                elementbuffer = parent_glyph->elementbuffer;
-                indices_size = parent_glyph->indices.size();
-            }
-            else
-            {
-                ontology::Species* parent_species = object_pointer->species_parent;
-                vertexbuffer = parent_species->vertexbuffer;
-                vertexPosition_modelspaceID = parent_species->vertexPosition_modelspaceID;
-                uvbuffer = parent_species->uvbuffer;
-                vertexUVID = parent_species->vertexUVID;
-                normalbuffer = parent_species->normalbuffer;
-                vertexNormal_modelspaceID = parent_species->vertexNormal_modelspaceID;
-                elementbuffer = parent_species->elementbuffer;
-                indices_size = parent_species->indices.size();
-            }
-
-            // 1st attribute buffer : vertices.
-            glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
-            glVertexAttribPointer(
-                    vertexPosition_modelspaceID, // The attribute we want to configure
-                    3,                           // size
-                    GL_FLOAT,                    // type
-                    GL_FALSE,                    // normalized?
-                    0,                           // stride
-                    (void*) 0                    // array buffer offset
-                    );
-
-            // 2nd attribute buffer : UVs.
-            glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
-            glVertexAttribPointer(
-                    vertexUVID, // The attribute we want to configure
-                    2,          // size : U+V => 2
-                    GL_FLOAT,   // type
-                    GL_FALSE,   // normalized?
-                    0,          // stride
-                    (void*) 0   // array buffer offset
-                    );
-
-            // 3rd attribute buffer : normals.
-            glBindBuffer(GL_ARRAY_BUFFER, normalbuffer);
-            glVertexAttribPointer(
-                    vertexNormal_modelspaceID, // The attribute we want to configure
-                    3,                         // size
-                    GL_FLOAT,                  // type
-                    GL_FALSE,                  // normalized?
-                    0,                         // stride
-                    (void*) 0                  // array buffer offset
-                    );
-
-            // Index buffer.
-            glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, elementbuffer);
-
-            // Draw the triangles!
-            glDrawElements(
-                    GL_TRIANGLES,    // mode
-                    indices_size,    // count
-                    GL_UNSIGNED_INT, // type
-                    (void*) 0        // element array buffer offset
-                    );
-        }
 }
 
 #endif

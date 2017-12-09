@@ -286,11 +286,11 @@ namespace ontology
             // this method stes the active `Scene`.
             void set_active_scene(ontology::Scene* world);
 
-            ontology::World* get_active_world();
+            ontology::World* get_active_world() const;
 
-            ontology::Entity* get_parent() override;
-            int32_t get_number_of_children() override;
-            int32_t get_number_of_descendants() override;
+            ontology::Entity* get_parent() const override;
+            int32_t get_number_of_children() const override;
+            int32_t get_number_of_descendants() const override;
 
             // this method sets a new `window`.
             void set_window(GLFWwindow* window);
@@ -327,11 +327,11 @@ namespace ontology
             // this method returns a pointer to `config::Setting` corresponding to the given `key`.
             config::Setting* get(std::string key) const;
 
-            ontology::Entity* get_entity(const std::string& name);
+            ontology::Entity* get_entity(const std::string& name) const;
 
             std::string get_entity_names() const;
 
-            ontology::EntityFactory* get_entity_factory();
+            ontology::EntityFactory* get_entity_factory() const;
 
             // Public callbacks.
 
@@ -414,8 +414,6 @@ namespace ontology
 
             template<class T1>
                 friend void set_name(const std::string name, T1 entity);
-            template<class T1>
-                friend void render_this_object(ontology::Object* object_pointer, ontology::Shader* shader_pointer);
             template<class T1>
                 friend void set_name(const std::string& name, T1 entity);
 

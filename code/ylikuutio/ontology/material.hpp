@@ -105,7 +105,7 @@ namespace ontology
             friend class Object;
             friend class space_partition::ChunkMaster;
             template<class T1>
-                friend void render_children(std::vector<T1>& child_pointer_vector);
+                friend void render_children(const std::vector<T1>& child_pointer_vector);
             template<class T1>
                 friend void set_name(std::string name, T1 entity);
             template<class T1>
@@ -119,9 +119,9 @@ namespace ontology
             // this method renders all `Species` using this `Material`.
             void render();
 
-            ontology::Entity* get_parent() override;
-            int32_t get_number_of_children() override;
-            int32_t get_number_of_descendants() override;
+            ontology::Entity* get_parent() const override;
+            int32_t get_number_of_children() const override;
+            int32_t get_number_of_descendants() const override;
 
             // this method sets `Species` pointer.
             void set_species_pointer(const int32_t childID, ontology::Species* const child_pointer);

@@ -96,9 +96,9 @@ namespace ontology
             // destructor.
             virtual ~Font2D();
 
-            ontology::Entity* get_parent() override;
-            int32_t get_number_of_children() override;
-            int32_t get_number_of_descendants() override;
+            ontology::Entity* get_parent() const override;
+            int32_t get_number_of_children() const override;
+            int32_t get_number_of_descendants() const override;
 
             void printText2D(
                     GLuint screen_width,
@@ -110,7 +110,7 @@ namespace ontology
                     const char* text_char,
                     const char* char_font_texture_file_format,
                     const char* horizontal_alignment,
-                    const char* vertical_alignment);
+                    const char* vertical_alignment) const;
 
             void printText2D(const PrintingStruct& printing_struct);
 

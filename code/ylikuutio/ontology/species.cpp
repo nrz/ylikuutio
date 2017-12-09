@@ -56,7 +56,7 @@ namespace ontology
         this->postrender();
     }
 
-    ontology::Entity* Species::get_parent()
+    ontology::Entity* Species::get_parent() const
     {
         return this->parent;
     }

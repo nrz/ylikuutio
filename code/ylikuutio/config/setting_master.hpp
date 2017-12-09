@@ -65,6 +65,8 @@ namespace config
 
             static std::shared_ptr<datatypes::AnyValue> activate_background_color(ontology::Entity* const entity, config::SettingMaster* const setting_master);
 
+            static std::shared_ptr<datatypes::AnyValue> activate_wireframe(ontology::Entity* const entity, config::SettingMaster* const setting_master);
+
             static std::shared_ptr<datatypes::AnyValue> activate_spherical_coordinates(ontology::Entity* const entity, config::SettingMaster* const setting_master);
             static std::shared_ptr<datatypes::AnyValue> activate_rho(ontology::Entity* const entity, config::SettingMaster* const setting_master);
             static std::shared_ptr<datatypes::AnyValue> activate_theta(ontology::Entity* const entity, config::SettingMaster* const setting_master);

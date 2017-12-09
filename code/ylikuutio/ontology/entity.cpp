@@ -45,12 +45,12 @@ namespace ontology
         }
     }
 
-    std::string Entity::get_type()
+    std::string Entity::get_type() const
     {
         return this->type;
     }
 
-    void Entity::prerender()
+    void Entity::prerender() const
     {
         if (this->prerender_callback != nullptr &&
                 this->universe != nullptr &&
@@ -60,7 +60,7 @@ namespace ontology
         }
     }
 
-    void Entity::postrender()
+    void Entity::postrender() const
     {
         if (this->postrender_callback != nullptr &&
                 this->universe != nullptr &&

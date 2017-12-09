@@ -164,6 +164,8 @@ Some available console commands to try in Ajokki:
 * `info`
 * `info cat_species`
 * `info cat2`
+* `set wireframe true`
+* `set wireframe false`
 
 ## FAQ
 Q: What is "Ylikuutio"?
@@ -217,6 +219,7 @@ A: I like Lisp-family languages and TinyScheme fulfils my
 * instant rebinding of instances of classes belonging to rendering hierarchy
 * callbacks
 * fully functioning in-game console
+* multiple scenes in the same `Universe` (`activate` console command)
 
 ## Future developments underway:
 * option for wireframe models (`enable wireframe`, `disable wireframe`)
