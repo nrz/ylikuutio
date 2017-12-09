@@ -327,6 +327,39 @@ namespace config
         return nullptr;
     }
 
+    std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_wireframe(ontology::Entity* const entity, config::SettingMaster* const setting_master)
+    {
+        if (entity == nullptr || setting_master == nullptr)
+        {
+            return nullptr;
+        }
+
+        if (setting_master->setting_pointer_map.count("wireframe") != 1)
+        {
+            return nullptr;
+        }
+
+        std::shared_ptr<datatypes::AnyValue> wireframe_any_value = std::make_shared<datatypes::AnyValue>(*setting_master->setting_pointer_map["wireframe"]->setting_value);
+
+        if (wireframe_any_value == nullptr || wireframe_any_value->type != datatypes::BOOL)
+        {
+            return nullptr;
+        }
+
+        bool wireframe = wireframe_any_value->bool_value;
+
+        if (wireframe)
+        {
+            glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+        }
+        else
+        {
+            glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+        }
+
+        return nullptr;
+    }
+
     std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_spherical_coordinates(ontology::Entity* const entity, config::SettingMaster* const setting_master)
     {
         if (entity == nullptr || setting_master == nullptr)
