@@ -1,6 +1,7 @@
 #include "object.hpp"
 #include "glyph.hpp"
 #include "species.hpp"
+#include "text3D.hpp"
 #include "object_struct.hpp"
 #include "render_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
@@ -13,6 +14,7 @@
 
 // Include standard headers
 #include <iostream> // std::cout, std::cin, std::cerr
+#include <string>   // std::string
 
 namespace ontology
 {
