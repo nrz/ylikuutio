@@ -2,9 +2,6 @@ TODO list:
 Tasks in priority order in descending priority, the most urgent ones first. Check when ready and move to the section Ready, when ready.
 
 Tasks which are necessary for the development of Ylikuutio:
-[ ] Add `set wireframe true`, `set wireframe false`.
-[ ] Add `enable wireframe`, `disable wireframe`.
-[ ] Add `enable wireframe <entity_name>`, `disable wireframe <entity_name>`.
 [ ] Add support for command line parameters in Ajokki.
 [ ] Add command line parameter `--debug` to Ajokki (log all kinds of debug information).
 [ ] Add command line parameter `--headless` to Ajokki (do not open any windows).
@@ -71,3 +68,4 @@ Ready:
 [x] Add variable `up`.
 [x] Add variable `window_width`.
 [x] Add variable `window_height`.
+[x] Add `set wireframe true`, `set wireframe false`.
