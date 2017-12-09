@@ -63,8 +63,6 @@
 #include <unordered_map> // std::unordered_map
 #include <vector>        // std::vector
 
-extern GLFWwindow* window; // The "extern" keyword here is to access the variable "window" declared in tutorialXXX.cpp. This is a hack to keep the tutorials simple. Please avoid this.
-
 namespace ontology
 {
     Universe::~Universe()
