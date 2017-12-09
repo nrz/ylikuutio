@@ -71,21 +71,136 @@ namespace ontology
         {
             this->prerender();
 
-            ontology::Shader* shader_pointer;
-
             if (this->is_character)
             {
-                shader_pointer = this->glyph_parent->parent->parent->parent;
-                ontology::render_this_object<ontology::Glyph*>(this, shader_pointer);
+                this->render_this_object(this->glyph_parent->parent->parent->parent);
             }
             else
             {
-                shader_pointer = this->species_parent->parent->parent;
-                ontology::render_this_object<ontology::Species*>(this, shader_pointer);
+                this->render_this_object(this->species_parent->parent->parent);
             }
 
             this->postrender();
         }
+    }
+
+    void Object::render_this_object(ontology::Shader* shader_pointer)
+    {
+        if (!this->has_entered)
+        {
+            this->model_matrix = glm::translate(glm::mat4(1.0f), *this->cartesian_coordinates);
+            this->model_matrix = glm::scale(this->model_matrix, this->original_scale_vector);
+
+            // store the new coordinates to be used in the next update.
+            *this->cartesian_coordinates = glm::vec3(this->model_matrix[0][0], this->model_matrix[1][1], this->model_matrix[2][2]);
+            this->has_entered = true;
+        }
+        else
+        {
+            // rotate.
+            if (this->rotate_vector != glm::vec3(0.0f, 0.0f, 0.0f))
+            {
+                if (this->quaternions_in_use)
+                {
+                    // create `rotation_matrix` using quaternions.
+                    glm::quat my_quaternion = glm::quat(DEGREES_TO_RADIANS(this->rotate_vector));
+                    glm::mat4 rotation_matrix = glm::mat4_cast(my_quaternion);
+                    this->model_matrix = rotation_matrix * this->model_matrix;
+                }
+                else
+                {
+                    this->model_matrix = glm::rotate(this->model_matrix, this->rotate_angle, this->rotate_vector);
+                }
+            }
+
+            this->model_matrix = glm::translate(this->model_matrix, this->translate_vector);
+            *this->cartesian_coordinates = glm::vec3(this->model_matrix[0][0], this->model_matrix[1][1], this->model_matrix[2][2]);
+        }
+
+        this->MVP_matrix = this->universe->ProjectionMatrix * this->universe->ViewMatrix * this->model_matrix;
+
+        // Send our transformation to the currently bound shader,
+        // in the "MVP" uniform.
+        glUniformMatrix4fv(shader_pointer->MatrixID, 1, GL_FALSE, &this->MVP_matrix[0][0]);
+        glUniformMatrix4fv(shader_pointer->ModelMatrixID, 1, GL_FALSE, &this->model_matrix[0][0]);
+
+        GLuint vertexbuffer;
+        GLuint vertexPosition_modelspaceID;
+        GLuint uvbuffer;
+        GLuint vertexUVID;
+        GLuint normalbuffer;
+        GLuint vertexNormal_modelspaceID;
+        GLuint elementbuffer;
+        GLuint indices_size;
+
+        if (this->is_character)
+        {
+            ontology::Glyph* parent_glyph = this->glyph_parent;
+            vertexbuffer = parent_glyph->vertexbuffer;
+            vertexPosition_modelspaceID = parent_glyph->vertexPosition_modelspaceID;
+            uvbuffer = parent_glyph->uvbuffer;
+            vertexUVID = parent_glyph->vertexUVID;
+            normalbuffer = parent_glyph->normalbuffer;
+            vertexNormal_modelspaceID = parent_glyph->vertexNormal_modelspaceID;
+            elementbuffer = parent_glyph->elementbuffer;
+            indices_size = parent_glyph->indices.size();
+        }
+        else
+        {
+            ontology::Species* parent_species = this->species_parent;
+            vertexbuffer = parent_species->vertexbuffer;
+            vertexPosition_modelspaceID = parent_species->vertexPosition_modelspaceID;
+            uvbuffer = parent_species->uvbuffer;
+            vertexUVID = parent_species->vertexUVID;
+            normalbuffer = parent_species->normalbuffer;
+            vertexNormal_modelspaceID = parent_species->vertexNormal_modelspaceID;
+            elementbuffer = parent_species->elementbuffer;
+            indices_size = parent_species->indices.size();
+        }
+
+        // 1st attribute buffer : vertices.
+        glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
+        glVertexAttribPointer(
+                vertexPosition_modelspaceID, // The attribute we want to configure
+                3,                           // size
+                GL_FLOAT,                    // type
+                GL_FALSE,                    // normalized?
+                0,                           // stride
+                (void*) 0                    // array buffer offset
+                );
+
+        // 2nd attribute buffer : UVs.
+        glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
+        glVertexAttribPointer(
+                vertexUVID, // The attribute we want to configure
+                2,          // size : U+V => 2
+                GL_FLOAT,   // type
+                GL_FALSE,   // normalized?
+                0,          // stride
+                (void*) 0   // array buffer offset
+                );
+
+        // 3rd attribute buffer : normals.
+        glBindBuffer(GL_ARRAY_BUFFER, normalbuffer);
+        glVertexAttribPointer(
+                vertexNormal_modelspaceID, // The attribute we want to configure
+                3,                         // size
+                GL_FLOAT,                  // type
+                GL_FALSE,                  // normalized?
+                0,                         // stride
+                (void*) 0                  // array buffer offset
+                );
+
+        // Index buffer.
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, elementbuffer);
+
+        // Draw the triangles!
+        glDrawElements(
+                GL_TRIANGLES,    // mode
+                indices_size,    // count
+                GL_UNSIGNED_INT, // type
+                (void*) 0        // element array buffer offset
+                );
     }
 
     ontology::Entity* Object::get_parent() const

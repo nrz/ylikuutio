@@ -415,8 +415,6 @@ namespace ontology
             template<class T1>
                 friend void set_name(const std::string name, T1 entity);
             template<class T1>
-                friend void render_this_object(ontology::Object* object_pointer, ontology::Shader* shader_pointer);
-            template<class T1>
                 friend void set_name(const std::string& name, T1 entity);
 
         private:
