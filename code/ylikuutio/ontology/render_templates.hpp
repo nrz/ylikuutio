@@ -8,7 +8,7 @@
 namespace ontology
 {
     template<class T1>
-        void render_children(std::vector<T1>& child_pointer_vector)
+        void render_children(const std::vector<T1>& child_pointer_vector)
         {
             for (uint32_t child_i = 0; child_i < child_pointer_vector.size(); child_i++)
             {

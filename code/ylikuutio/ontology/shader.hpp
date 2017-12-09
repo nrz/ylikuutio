@@ -101,7 +101,7 @@ namespace ontology
             friend class Species;
             friend void ontology::get_gl_attrib_locations(ontology::Shader* shader, ontology::Glyph* glyph);
             template<class T1>
-                friend void render_children(std::vector<T1>& child_pointer_vector);
+                friend void render_children(const std::vector<T1>& child_pointer_vector);
             template<class T1>
                 friend void set_name(std::string name, T1 entity);
             template<class T1>
