@@ -14,6 +14,12 @@ namespace ylikuutio
 {
     namespace input
     {
+        enum input_method
+        {
+            KEYBOARD,
+            INPUT_FILE
+        };
+
         void disable_cursor(GLFWwindow* window);
         void set_sticky_keys(GLFWwindow* window);
         void set_cursor_position(GLFWwindow* window, double xpos, double ypos);
