@@ -117,8 +117,26 @@ std::string g_font_texture_file_format = "bmp";
 // std::string g_font_texture_filename = "Holstein.DDS";
 std::string g_font_texture_filename = "Holstein.bmp";
 
-int main(void)
+int main(int argc, char* argv[])
 {
+    std::vector<std::string> arg_vector;
+
+    if (argc > 1)
+    {
+        arg_vector.assign(argv + 1, argv + argc);
+
+        // Print command line arguments (without the executable name string).
+        for (std::string argument : arg_vector)
+        {
+            std::cout << argument << "\n";
+        }
+    }
+    else
+    {
+        std::cout << "no command line arguments.\n";
+    }
+
+
     // Create the world, store it in `my_universe`.
     std::cout << "Creating ontology::Entity* my_universe_entity ...\n";
     ontology::Universe* my_universe = new ontology::Universe();
