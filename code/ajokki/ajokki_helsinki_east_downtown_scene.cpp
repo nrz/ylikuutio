@@ -366,7 +366,7 @@ namespace ajokki
         ontology::Entity* cat2_entity = entity_factory->create_Object(cat_object_struct2);
         ontology::Object* cat2 = dynamic_cast<ontology::Object*>(cat2_entity);
 
-        if (cat1 == nullptr)
+        if (cat2 == nullptr)
         {
             std::cerr << "Failed to create cat2 Object.\n";
             return nullptr;
