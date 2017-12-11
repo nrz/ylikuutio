@@ -14,7 +14,6 @@ Tasks which are necessary for the development of Ylikuutio:
 [ ] Add support for custom keyboard settings.
 [ ] Add support for camera objects..
 [ ] Use GLFM library (only for Android builds). https://github.com/brackeen/glfm
-[ ] Add variable `wireframe`: `set wireframe on` / `set wireframe off`.
 [ ] Add variable `text_size`.
 [ ] Add variable `direction`.
 [ ] Use TinySpline.
@@ -24,8 +23,6 @@ Tasks which are necessary for the development of Ylikuutio:
 [ ] Write integration tests for Ajokki.
 [ ] Learn how to write unit tests for multithreaded C++ code.
 [ ] Implement scene loading which works in the background.
-[ ] Add object listing command `objects` into console.
-[ ] Add entity-specific pre-render and post-render callbacks `prerender_callback and `postrender_callback`.
 [ ] Create a graph of the vertices and edges of a scene.
 [ ] Add functionality for vertex selection and modification, using ray casting.
 [ ] Add modifying of vertices.
@@ -69,3 +66,6 @@ Ready:
 [x] Add variable `window_height`.
 [x] Add `set wireframe true`, `set wireframe false`.
 [x] Add support for command line parameters in Ajokki.
+[x] Add variable `wireframe`: `set wireframe true` / `set wireframe false`.
+[x] Add object listing command `info` into console.
+[x] Add entity-specific pre-render and post-render callbacks `prerender_callback` and `postrender_callback`.
