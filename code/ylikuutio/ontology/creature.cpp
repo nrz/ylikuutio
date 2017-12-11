@@ -6,4 +6,9 @@ namespace ontology
     {
         // destructor.
     }
+
+    void Creature::act()
+    {
+        // TODO: act according to this `Creature`'s programming.
+    }
 }
