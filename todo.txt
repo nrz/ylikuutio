@@ -2,6 +2,7 @@ TODO list:
 Tasks in priority order in descending priority, the most urgent ones first. Check when ready and move to the section Ready, when ready.
 
 Tasks which are necessary for the development of Ylikuutio:
+[ ] Add support for `man` command in console (a container class with the command callback together with the `man` text for the command).
 [ ] Add command line parameter `--debug` to Ajokki (log all kinds of debug information).
 [ ] Add command line parameter `--headless` to Ajokki (do not open any windows).
 [ ] Add command line parameter `--input-file` to Ajokki (load keypresses and keyreleases from a file, eg. `--input-file foo` or `--input-file=foo`).
@@ -24,7 +25,7 @@ Tasks which are necessary for the development of Ylikuutio:
 [ ] Learn how to write unit tests for multithreaded C++ code.
 [ ] Implement scene loading which works in the background.
 [ ] Create a graph of the vertices and edges of a scene.
-[ ] Add functionality for vertex selection and modification, using ray casting.
+[ ] Add vertex selection and modification (with a mouse cursor), using ray casting.
 [ ] Add modifying of vertices.
 [ ] Add octree segmentation.
 [ ] Add support for vector fonts.
@@ -35,6 +36,7 @@ Tasks which are necessary for the development of Ylikuutio:
 [ ] Add physics modeling.
 [ ] Add flowing water (computed with a server).
 [ ] Add Internet code (ASIO).
+[ ] Add support for changing window size.
 
 Less urgent:
 [ ] Add TinyScheme support in console.
