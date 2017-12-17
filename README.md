@@ -21,6 +21,7 @@ All my code copyright (C) 2016-2017 Antti Nuortimo.
 
 ### Not yet in use
 * GLFM is licensed under [the zlib license](https://github.com/brackeen/glfm/blob/master/LICENSE).
+* Google logging module (glog) is licensed under [the conditions available in https://github.com/google/glog/blob/master/COPYING](https://github.com/google/glog/blob/master/COPYING).
 * FastNoiseSIMD is licensed under [the MIT license](https://github.com/Auburns/FastNoiseSIMD/blob/master/LICENSE).
 * TinySpline is licensed under [the MIT license](https://github.com/msteinbeck/tinyspline/blob/master/LICENSE).
 
