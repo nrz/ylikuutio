@@ -71,6 +71,7 @@ set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 
 include_directories(
+    external/asio/asio/include/
     external/FastNoiseSIMD/
     external/glew-2.0.0/include/
     external/glfw/include/
@@ -357,6 +358,8 @@ add_library(ylikuutio STATIC
     code/ylikuutio/map/ylikuutio_map.hpp
 
     # ontology, in alphabetical order
+    code/ylikuutio/ontology/creature.cpp
+    code/ylikuutio/ontology/creature.hpp
     code/ylikuutio/ontology/gl_attrib_locations.cpp
     code/ylikuutio/ontology/gl_attrib_locations.hpp
     code/ylikuutio/ontology/glyph_object_creation.cpp
@@ -575,6 +578,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         )
     set(UNIT_TESTS
         code/ylikuutio/tests/googletest/test_any_value.cpp
+        code/ylikuutio/tests/googletest/test_asio.cpp
         code/ylikuutio/tests/googletest/test_bilinear_interpolation2D.cpp
         code/ylikuutio/tests/googletest/test_callback_system.cpp
         code/ylikuutio/tests/googletest/test_fbx_loader.cpp

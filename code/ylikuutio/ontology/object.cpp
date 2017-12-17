@@ -60,11 +60,6 @@ namespace ontology
         }
     }
 
-    void Object::act()
-    {
-        // TODO: act according to this game/simulation object's programming.
-    }
-
     void Object::render()
     {
         // render this `Object`.

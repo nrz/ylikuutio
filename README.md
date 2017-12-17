@@ -5,12 +5,13 @@ A hobby project of mine. Work in progress.
 [![Coverity Scan](https://scan.coverity.com/projects/nrz-ylikuutio/badge.svg)](https://scan.coverity.com/projects/nrz-ylikuutio)
 
 ## License
-Ylikuutio is under The GNU General Public License 3,
+Ylikuutio is under The GNU Affero General Public License 3,
 or (at your option) any later version. See COPYING file.
 All my code copyright (C) 2016-2017 Antti Nuortimo.
 
 ### Currently in use
 * The source code from http://www.opengl-tutorial.org/ is licensed under [WTFPL Public Licence version 2](http://www.opengl-tutorial.org/download/).
+* Asio is licensed under [Boost software license](https://github.com/chriskohlhoff/asio/blob/master/asio/LICENSE_1_0.txt).
 * OpenGL Mathematics (GLM) is licensed under [The Happy Bunny License (Modified MIT License) and MIT License](http://glm.g-truc.net/copying.txt).
 * GLFW is licensed under [the zlib/libpng license](http://www.glfw.org/license.html).
 * The OpenGL Extension Wrangler Library (GLEW) is licensed under [the Modified BSD License, the Mesa 3-D License (MIT) and the Khronos License (MIT)](https://github.com/nigels-com/glew#copyright-and-licensing).
@@ -19,8 +20,8 @@ All my code copyright (C) 2016-2017 Antti Nuortimo.
 * pugixml is licensed under [the MIT license](https://github.com/zeux/pugixml/blob/master/README.md).
 
 ### Not yet in use
-* Asio is licensed under [Boost software license](https://github.com/chriskohlhoff/asio/blob/master/asio/LICENSE_1_0.txt).
 * GLFM is licensed under [the zlib license](https://github.com/brackeen/glfm/blob/master/LICENSE).
+* Google logging module (glog) is licensed under [the conditions available in https://github.com/google/glog/blob/master/COPYING](https://github.com/google/glog/blob/master/COPYING).
 * FastNoiseSIMD is licensed under [the MIT license](https://github.com/Auburns/FastNoiseSIMD/blob/master/LICENSE).
 * TinySpline is licensed under [the MIT license](https://github.com/msteinbeck/tinyspline/blob/master/LICENSE).
 

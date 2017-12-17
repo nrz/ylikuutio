@@ -117,8 +117,27 @@ std::string g_font_texture_file_format = "bmp";
 // std::string g_font_texture_filename = "Holstein.DDS";
 std::string g_font_texture_filename = "Holstein.bmp";
 
-int main(void)
+int main(int argc, char* argv[])
 {
+    std::vector<std::string> arg_vector;
+
+    if (argc > 1)
+    {
+        arg_vector.assign(argv + 1, argv + argc);
+
+        // Print command line arguments (without the executable name string).
+        for (std::string argument : arg_vector)
+        {
+            std::cout << argument << "\n";
+        }
+    }
+    else
+    {
+        std::cout << "no command line arguments.\n";
+    }
+
+    int input_method_in_use = ylikuutio::input::KEYBOARD;
+
     // Create the world, store it in `my_universe`.
     std::cout << "Creating ontology::Entity* my_universe_entity ...\n";
     ontology::Universe* my_universe = new ontology::Universe();
@@ -880,7 +899,29 @@ int main(void)
             // Check for key releases and call corresponding callbacks.
             for (uint32_t i = 0; i < (*current_keyrelease_callback_engine_vector_pointer)->size(); i++)
             {
-                if (glfwGetKey(my_universe->get_window(), (*current_keyrelease_callback_engine_vector_pointer)->at(i).keycode) == GLFW_RELEASE)
+                bool is_released = false;
+
+                if (input_method_in_use == ylikuutio::input::KEYBOARD)
+                {
+                    if (glfwGetKey(my_universe->get_window(), (*current_keyrelease_callback_engine_vector_pointer)->at(i).keycode) == GLFW_RELEASE)
+                    {
+                        is_released = true;
+                    }
+                }
+                else if (input_method_in_use == ylikuutio::input::INPUT_FILE)
+                {
+                    // TODO: implement optionally loading keyreleases from a file (do not execute `glfwGetKey` in that case).
+                    if (false)
+                    {
+                        is_released = true;
+                    }
+                }
+                else
+                {
+                    std::cerr << "Unsupported input method: " << input_method_in_use << "\n";
+                }
+
+                if (is_released)
                 {
                     callback_system::CallbackEngine* callback_engine = (*current_keyrelease_callback_engine_vector_pointer)->at(i).callback_engine;
                     std::shared_ptr<datatypes::AnyValue> any_value = callback_engine->execute();
@@ -890,7 +931,29 @@ int main(void)
             // Check for keypresses and call corresponding callbacks.
             for (uint32_t i = 0; i < (*current_keypress_callback_engine_vector_pointer)->size(); i++)
             {
-                if (glfwGetKey(my_universe->get_window(), (*current_keypress_callback_engine_vector_pointer)->at(i).keycode) == GLFW_PRESS)
+                bool is_pressed = false;
+
+                if (input_method_in_use == ylikuutio::input::KEYBOARD)
+                {
+                    if (glfwGetKey(my_universe->get_window(), (*current_keypress_callback_engine_vector_pointer)->at(i).keycode) == GLFW_PRESS)
+                    {
+                        is_pressed = true;
+                    }
+                }
+                else if (input_method_in_use == ylikuutio::input::INPUT_FILE)
+                {
+                    // TODO: implement optionally loading keyreleases from a file (do not execute `glfwGetKey` in that case).
+                    if (false)
+                    {
+                        is_pressed = true;
+                    }
+                }
+                else
+                {
+                    std::cerr << "Unsupported input method: " << input_method_in_use << "\n";
+                }
+
+                if (is_pressed)
                 {
                     callback_system::CallbackEngine* callback_engine = (*current_keypress_callback_engine_vector_pointer)->at(i).callback_engine;
                     std::shared_ptr<datatypes::AnyValue> any_value = callback_engine->execute();
