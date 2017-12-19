@@ -512,6 +512,22 @@ if (ENABLE_SCRIPTING_WITH_TINYSCHEME)
     target_link_libraries(tinyscheme_test tinyscheme)
 endif()
 
+# Asio-test
+add_executable(asio_chat_server
+    code/asio/asio_chat_server.cpp
+    )
+target_link_libraries(asio_chat_server pthread)
+
+add_executable(asio_chat_client
+    code/asio/asio_chat_client.cpp
+    )
+target_link_libraries(asio_chat_client pthread)
+
+add_executable(asio_nslookup
+    code/asio/asio_nslookup.cpp
+    )
+target_link_libraries(asio_nslookup pthread)
+
 # Xcode and Visual working directories
 set_target_properties(ajokki PROPERTIES COMPILE_DEFINITIONS "USE_ASSIMP")
 set_target_properties(ajokki PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/code/ajokki/")
