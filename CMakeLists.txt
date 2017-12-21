@@ -357,6 +357,12 @@ add_library(ylikuutio STATIC
     # map, in alphabetical order
     code/ylikuutio/map/ylikuutio_map.hpp
 
+    # network, in alphabetical order
+    code/ylikuutio/network/tcp_connection.cpp
+    code/ylikuutio/network/tcp_connection.hpp
+    code/ylikuutio/network/tcp_server.cpp
+    code/ylikuutio/network/tcp_server.hpp
+
     # ontology, in alphabetical order
     code/ylikuutio/ontology/creature.cpp
     code/ylikuutio/ontology/creature.hpp
