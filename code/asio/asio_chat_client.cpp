@@ -7,6 +7,8 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
+// based on http://think-async.com/Asio/asio-1.10.6/doc/asio/tutorial/tutdaytime1.html
+
 std::string make_string(asio::streambuf& streambuf)
 {
     return { asio::buffers_begin(streambuf.data()), asio::buffers_end(streambuf.data()) };
