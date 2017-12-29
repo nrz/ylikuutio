@@ -357,6 +357,12 @@ add_library(ylikuutio STATIC
     # map, in alphabetical order
     code/ylikuutio/map/ylikuutio_map.hpp
 
+    # network, in alphabetical order
+    code/ylikuutio/network/tcp_connection.cpp
+    code/ylikuutio/network/tcp_connection.hpp
+    code/ylikuutio/network/tcp_server.cpp
+    code/ylikuutio/network/tcp_server.hpp
+
     # ontology, in alphabetical order
     code/ylikuutio/ontology/creature.cpp
     code/ylikuutio/ontology/creature.hpp
@@ -511,6 +517,22 @@ if (ENABLE_SCRIPTING_WITH_TINYSCHEME)
         )
     target_link_libraries(tinyscheme_test tinyscheme)
 endif()
+
+# Asio-test
+add_executable(asio_chat_server
+    code/asio/asio_chat_server.cpp
+    )
+target_link_libraries(asio_chat_server pthread)
+
+add_executable(asio_chat_client
+    code/asio/asio_chat_client.cpp
+    )
+target_link_libraries(asio_chat_client pthread)
+
+add_executable(asio_nslookup
+    code/asio/asio_nslookup.cpp
+    )
+target_link_libraries(asio_nslookup pthread)
 
 # Xcode and Visual working directories
 set_target_properties(ajokki PROPERTIES COMPILE_DEFINITIONS "USE_ASSIMP")
