@@ -28,6 +28,7 @@ else()
 endif()
 
 find_package(Threads REQUIRED)
+find_package(SDL2 REQUIRED)
 
 # Compile external dependencies
 add_subdirectory (external)
@@ -71,6 +72,7 @@ set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 
 include_directories(
+    ${SDL2_INCLUDE_DIRS}
     external/asio/asio/include/
     external/FastNoiseSIMD/
     external/glew-2.0.0/include/
@@ -194,6 +196,7 @@ endif()
 
 set(ALL_LIBS
     ${OPENGL_LIBRARY}
+    ${SDL2_LIBRARIES}
     # assimp
     glfw
     GLEW_200

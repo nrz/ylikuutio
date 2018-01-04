@@ -28,10 +28,10 @@ In Linux it's simple.
 
 First, install all the necessary compilers, tools and libs. You may use
 your favorite package manager such as apt, aptitude, apt-get, yum etc.
-You all need these packages: cmake make g++ gcc libx11-dev libgl1-mesa-dev libglu1-mesa-dev libxcursor-dev libxrandr-dev libxext-dev libxi-dev libxinerama-dev
+You all need these packages: cmake make g++ gcc libx11-dev libgl1-mesa-dev libglu1-mesa-dev libsdl2-dev libxcursor-dev libxrandr-dev libxext-dev libxi-dev libxinerama-dev
 Eg. with apt:
 
-    $ sudo apt install cmake build-essential libx11-dev libgl1-mesa-dev libglu1-mesa-dev libxcursor-dev libxrandr-dev libxext-dev libxi-dev libxinerama-dev
+    $ sudo apt install cmake build-essential libx11-dev libgl1-mesa-dev libglu1-mesa-dev libsdl2-dev libxcursor-dev libxrandr-dev libxext-dev libxi-dev libxinerama-dev
 
 If you are doing a cross compile from Linux to Windows, you need also:
 
