@@ -210,25 +210,35 @@ add_definitions(
     -D_CRT_SECURE_NO_WARNINGS
     )
 
-# for general use.
+# Shaders.
 configure_file(code/ylikuutio/shaders/TransformVertexShader.vertexshader TransformVertexShader.vertexshader COPYONLY)
 configure_file(code/ylikuutio/shaders/TextureFragmentShader.fragmentshader TextureFragmentShader.fragmentshader COPYONLY)
 configure_file(code/ylikuutio/shaders/StandardShading.vertexshader StandardShading.vertexshader COPYONLY)
 configure_file(code/ylikuutio/shaders/StandardShading.fragmentshader StandardShading.fragmentshader COPYONLY)
 configure_file(code/ylikuutio/shaders/TextVertexShader.vertexshader TextVertexShader.vertexshader COPYONLY)
 configure_file(code/ylikuutio/shaders/TextVertexShader.fragmentshader TextVertexShader.fragmentshader COPYONLY)
+
+# TinyScheme code.
 configure_file(code/tinyscheme/hello_world.scm hello_world.scm COPYONLY)
 configure_file(external/tinyscheme-1.41/init.scm init.scm COPYONLY)
+
+# 3D models.
 configure_file(res/objects/custom/suzanne.obj suzanne.obj COPYONLY)
 configure_file(res/objects/snow_cottage_triangulated.obj snow_cottage_triangulated.obj COPYONLY)
 configure_file(res/objects/www.blendswap.com/86110_rigged_and_animated_cat/cat.fbx cat.fbx COPYONLY)
+
+# Textures.
 configure_file(res/textures/GrassGreenTexture0002.bmp GrassGreenTexture0002.bmp COPYONLY)
 configure_file(res/textures/orange_fur_texture.bmp orange_fur_texture.bmp COPYONLY)
 configure_file(res/textures/pavers1b2.bmp pavers1b2.bmp COPYONLY)
 configure_file(res/textures/numbers_123456_black_and_white.bmp numbers_123456_black_and_white.bmp COPYONLY)
+
+# Fonts.
 configure_file(res/fonts/kongtext/kongtext.svg kongtext.svg COPYONLY)
 configure_file(res/fonts/Holstein.DDS Holstein.DDS COPYONLY)
 configure_file(res/fonts/Holstein.bmp Holstein.bmp COPYONLY)
+
+# Maps.
 configure_file(res/height_maps/noise1024x1024.bmp noise1024x1024.bmp COPYONLY)
 configure_file(res/height_maps/noise256x256.bmp noise256x256.bmp COPYONLY)
 configure_file(res/height_maps/noise128x128.bmp noise128x128.bmp COPYONLY)
@@ -239,7 +249,7 @@ configure_file(res/laser_scanning_data/L4133D1.laz L4133D1.laz COPYONLY)
 configure_file(res/maps/Hofinkatu_Isafjordinkatu_Joensuu_Finland.osm Hofinkatu_Isafjordinkatu_Joensuu_Finland.osm COPYONLY)
 configure_file(res/maps/Exactum_Physicum_Helsinki_Finland.osm Exactum_Physicum_Helsinki_Finland.osm COPYONLY)
 
-# for tests.
+# Image files for tests.
 configure_file(res/height_maps/noise256x256.bmp noise256x256.bmp COPYONLY)
 configure_file(res/textures/test3x3.bmp test3x3.bmp COPYONLY)
 
