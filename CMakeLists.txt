@@ -76,8 +76,8 @@ include_directories(
     external/glew-2.0.0/include/
     external/glfw/include/
     external/glm/
-    external/pugixml/src/
     external/OpenFBX/src/
+    external/pugixml/src/
     .
     )
 

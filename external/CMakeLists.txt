@@ -24,8 +24,8 @@ include_directories(
     glew-2.0.0/include/
     glfw/include/
     glm/
-    pugixml/src/
     OpenFBX/src/
+    pugixml/src/
     .
     )
 
