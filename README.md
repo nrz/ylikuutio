@@ -278,6 +278,7 @@ A: I like Lisp-family languages and TinyScheme fulfils my
 
 ### Audio
 * [Chipland Loop (120 BPM-A Major)](https://freesound.org/people/SSS_Samples/sounds/414257/) is made by SSS\_Samples and and it is licensed under [Creative Commons Attribution 3.0 Unported (CC BY 3.0) license](https://creativecommons.org/licenses/by/3.0/).
+* [Sample 97 Bpm](https://freesound.org/people/Greek555/sounds/414270/) is made by Greek555 and it is licensed under the [Creative Commons 0 (CC0 1.0) license](https://creativecommons.org/publicdomain/zero/1.0/).
 
 ## Trademarks:
 Android© is a trademark of Google Inc. See [https://developer.android.com/legal.html](https://developer.android.com/legal.html).
