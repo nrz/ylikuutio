@@ -240,7 +240,7 @@ A: I like Lisp-family languages and TinyScheme fulfils my
 * Internet gaming with ASIO
 * audio with Simple DirectMedia Layer (SDL)
 
-### Currently in use
+### Libraries currently in use
 * The source code from http://www.opengl-tutorial.org/ is licensed under [WTFPL Public Licence version 2](http://www.opengl-tutorial.org/download/).
 * Asio is licensed under [Boost software license](https://github.com/chriskohlhoff/asio/blob/master/asio/LICENSE_1_0.txt).
 * OpenGL Mathematics (GLM) is licensed under [The Happy Bunny License (Modified MIT License) and MIT License](http://glm.g-truc.net/copying.txt).
@@ -250,25 +250,31 @@ A: I like Lisp-family languages and TinyScheme fulfils my
 * TinyScheme is licensed under [BSD-style license](http://tinyscheme.sourceforge.net/license.txt).
 * pugixml is licensed under [the MIT license](https://github.com/zeux/pugixml/blob/master/README.md).
 
-### Not yet in use
+### Libraries not yet in use
 * GLFM is licensed under [the zlib license](https://github.com/brackeen/glfm/blob/master/LICENSE).
 * Google logging module (glog) is licensed under [the conditions available in https://github.com/google/glog/blob/master/COPYING](https://github.com/google/glog/blob/master/COPYING).
 * FastNoiseSIMD is licensed under [the MIT license](https://github.com/Auburns/FastNoiseSIMD/blob/master/LICENSE).
 * TinySpline is licensed under [the MIT license](https://github.com/msteinbeck/tinyspline/blob/master/LICENSE).
 
-### Currently not in use
+### Libraries currently not in use
 * Open Asset Import Library (assimp) is licensed under [a 3-clause BSD license](http://www.assimp.org/main_license.html).
 
-### Other resources
-* Grass texture is from [Free Seamless Green Grass Textures](http://www.brusheezy.com/textures/20185-seamless-green-grass-textures).
-* A Cool Seamless Orange Fur Texture is from [My Free Textures](http://www.myfreetextures.com/a-cool-seamless-orange-fur-texture/). `orange_fur_texture.bmp` is scaled down and converted into BMP from the original `ornage-fur-texture.jpg` (sic). License conditions are available on [My Free Textures License/TOU page](http://www.myfreetextures.com/sample-page/).
-* Pink Marble Pavers Or Tiles Background Texture is from [My Free Textures](http://www.myfreetextures.com/marbles-pavers-tiles-background-texture/). `pavers1b2.bmp` is scaled down and converted into BMP from the original `pavers1b2.jpg`. License conditions are available on [My Free Textures License/TOU page](http://www.myfreetextures.com/sample-page/).
-* kongtext font is made by [codeman38](http://zone38.net/), see res/fonts/kongtext/license.txt for the license.
-* Laser scanning data of Helsinki, Joensuu, and other Finnish cities is licensed under a Creative Commons Attribution 4.0 International License (CC-BY). Contains data from [the National Land Survey of Finland Topographic Database 08/2016](http://www.maanmittauslaitos.fi/en/opendata-licence-cc40). Reference system is ETRS-TM35FIN and distribution format is LAZ.
-* [Shuttle Radar Topography Mission (SRTM)](https://www2.jpl.nasa.gov/srtm/) data around Bolivian altiplano and elsewhere in the world between 56° S and 60° N is in the public domain. SRTM is a [NASA (National Aeronautics and Space Administration)](https://www.nasa.gov/) mission. SRTM data shipped with Ylikuutio belongs to SRTMGL3 dataset. Information about different SRTM datasets is available in [OpenStreetMap Wiki](http://wiki.openstreetmap.org/wiki/SRTM).
+### 3D models
 * [3D model of Helsinki.](http://www.hri.fi/en/dataset/helsingin-3d-kaupunkimalli) The administrator of 3D model of Helsinki is Helsingin kaupunginkanslia and the original creator is Helsingin kaupungin kaupunginkanslia, tietotekniikka- ja viestintäosasto. The data has been downloaded from the [Helsinki Region Infoshare](http://www.hri.fi/) service 19.11.2017 using the license [Creative Commons Nimeä 4.0 Kansainvälinen (CC BY 4.0)](http://creativecommons.org/licenses/by/4.0/deed.fi).
 * [Rigged and animated cat](https://www.blendswap.com/blends/view/86110) is made by JonasDichelle and it is licensed under [Creative Commons Attribution 3.0 Unported (CC BY 3.0) license](https://creativecommons.org/licenses/by/3.0/). The `cat.fbx` file shipped with Ylikuutio is made from the original `cat.blend` by exporting the object in [FBX](https://en.wikipedia.org/wiki/FBX) file format, using [Blender](https://www.blender.org/).
 * Suzanne the monkey is a standard [Blender](https://www.blender.org/) object. According to Blender license information: "All your artwork – images or movie files – including the .blend files and other data files Blender can write, is free for you to use as you like." Ylikuutio does not contain any code from Blender, however. [Blender itself is released under the GNU General Public License (GPL) 2 or later](https://www.blender.org/about/license/).
+
+### Textures
+* Grass texture is from [Free Seamless Green Grass Textures](http://www.brusheezy.com/textures/20185-seamless-green-grass-textures).
+* A Cool Seamless Orange Fur Texture is from [My Free Textures](http://www.myfreetextures.com/a-cool-seamless-orange-fur-texture/). `orange_fur_texture.bmp` is scaled down and converted into BMP from the original `ornage-fur-texture.jpg` (sic). License conditions are available on [My Free Textures License/TOU page](http://www.myfreetextures.com/sample-page/).
+* Pink Marble Pavers Or Tiles Background Texture is from [My Free Textures](http://www.myfreetextures.com/marbles-pavers-tiles-background-texture/). `pavers1b2.bmp` is scaled down and converted into BMP from the original `pavers1b2.jpg`. License conditions are available on [My Free Textures License/TOU page](http://www.myfreetextures.com/sample-page/).
+
+### Fonts
+* kongtext font is made by [codeman38](http://zone38.net/), see res/fonts/kongtext/license.txt for the license.
+
+### Heightmap data
+* Laser scanning data of Helsinki, Joensuu, and other Finnish cities is licensed under a Creative Commons Attribution 4.0 International License (CC-BY). Contains data from [the National Land Survey of Finland Topographic Database 08/2016](http://www.maanmittauslaitos.fi/en/opendata-licence-cc40). Reference system is ETRS-TM35FIN and distribution format is LAZ.
+* [Shuttle Radar Topography Mission (SRTM)](https://www2.jpl.nasa.gov/srtm/) data around Bolivian altiplano and elsewhere in the world between 56° S and 60° N is in the public domain. SRTM is a [NASA (National Aeronautics and Space Administration)](https://www.nasa.gov/) mission. SRTM data shipped with Ylikuutio belongs to SRTMGL3 dataset. Information about different SRTM datasets is available in [OpenStreetMap Wiki](http://wiki.openstreetmap.org/wiki/SRTM).
 
 ## Trademarks:
 Android© is a trademark of Google Inc. See [https://developer.android.com/legal.html](https://developer.android.com/legal.html).
