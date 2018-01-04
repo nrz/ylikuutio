@@ -272,7 +272,8 @@ A: I like Lisp-family languages and TinyScheme fulfils my
 ### Fonts
 * kongtext font is made by [codeman38](http://zone38.net/), see res/fonts/kongtext/license.txt for the license.
 
-### Heightmap data
+### Map data
+* [OpenStreetMap®](https://www.openstreetmap.org/) data of Helsinki, Joensuu, and other Finnish cities is open data, licensed under [the Open Data Commons Open Database License (ODbL) by the OpenStreetMap Foundation (OSMF)](https://www.openstreetmap.org/copyright). OpenStreetMap data is © OpenStreetMap contributors.
 * Laser scanning data of Helsinki, Joensuu, and other Finnish cities is licensed under a Creative Commons Attribution 4.0 International License (CC-BY). Contains data from [the National Land Survey of Finland Topographic Database 08/2016](http://www.maanmittauslaitos.fi/en/opendata-licence-cc40). Reference system is ETRS-TM35FIN and distribution format is LAZ.
 * [Shuttle Radar Topography Mission (SRTM)](https://www2.jpl.nasa.gov/srtm/) data around Bolivian altiplano and elsewhere in the world between 56° S and 60° N is in the public domain. SRTM is a [NASA (National Aeronautics and Space Administration)](https://www.nasa.gov/) mission. SRTM data shipped with Ylikuutio belongs to SRTMGL3 dataset. Information about different SRTM datasets is available in [OpenStreetMap Wiki](http://wiki.openstreetmap.org/wiki/SRTM).
 
