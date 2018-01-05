@@ -75,7 +75,7 @@ set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 
 include_directories(
     ${SFML_INCLUDE_DIR}
-    external/asio/asio/include/
+    # external/asio/asio/include/
     external/FastNoiseSIMD/
     external/glew-2.0.0/include/
     external/glfw/include/
@@ -378,10 +378,10 @@ add_library(ylikuutio STATIC
     code/ylikuutio/map/ylikuutio_map.hpp
 
     # network, in alphabetical order
-    code/ylikuutio/network/tcp_connection.cpp
-    code/ylikuutio/network/tcp_connection.hpp
-    code/ylikuutio/network/tcp_server.cpp
-    code/ylikuutio/network/tcp_server.hpp
+    # code/ylikuutio/network/tcp_connection.cpp
+    # code/ylikuutio/network/tcp_connection.hpp
+    # code/ylikuutio/network/tcp_server.cpp
+    # code/ylikuutio/network/tcp_server.hpp
 
     # ontology, in alphabetical order
     code/ylikuutio/ontology/creature.cpp
@@ -539,20 +539,22 @@ if (ENABLE_SCRIPTING_WITH_TINYSCHEME)
 endif()
 
 # Asio-test
-add_executable(asio_chat_server
-    code/asio/asio_chat_server.cpp
-    )
-target_link_libraries(asio_chat_server pthread)
+if(FALSE)
+    add_executable(asio_chat_server
+        code/asio/asio_chat_server.cpp
+        )
+    target_link_libraries(asio_chat_server pthread)
 
-add_executable(asio_chat_client
-    code/asio/asio_chat_client.cpp
-    )
-target_link_libraries(asio_chat_client pthread)
+    add_executable(asio_chat_client
+        code/asio/asio_chat_client.cpp
+        )
+    target_link_libraries(asio_chat_client pthread)
 
-add_executable(asio_nslookup
-    code/asio/asio_nslookup.cpp
-    )
-target_link_libraries(asio_nslookup pthread)
+    add_executable(asio_nslookup
+        code/asio/asio_nslookup.cpp
+        )
+    target_link_libraries(asio_nslookup pthread)
+endif()
 
 # Xcode and Visual working directories
 set_target_properties(ajokki PROPERTIES COMPILE_DEFINITIONS "USE_ASSIMP")
@@ -620,7 +622,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         )
     set(UNIT_TESTS
         code/ylikuutio/tests/googletest/test_any_value.cpp
-        code/ylikuutio/tests/googletest/test_asio.cpp
+        # code/ylikuutio/tests/googletest/test_asio.cpp
         code/ylikuutio/tests/googletest/test_bilinear_interpolation2D.cpp
         code/ylikuutio/tests/googletest/test_callback_system.cpp
         code/ylikuutio/tests/googletest/test_fbx_loader.cpp
