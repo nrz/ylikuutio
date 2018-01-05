@@ -21,7 +21,7 @@ set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
 set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
 set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
 
-set(CMAKE_CXX_FLAGS "-std=c++11 -static-libgcc -static-libstdc++ -static -O3 -s")
+set(CMAKE_CXX_FLAGS "-DASIO_STANDALONE -std=c++11 -static-libgcc -static-libstdc++ -static -O3 -s")
 set(CMAKE_C_FLAGS "-static-libgcc -static-libstdc++ -static -O3 -s")
 set(CMAKE_SHARED_LIBRARY_LINK_C_FLAGS "-static-libgcc -static-libstdc++ -static -O3 -s")
 set(CMAKE_SHARED_LIBRARY_LINK_CXX_FLAGS "-std=c++11 -static-libgcc -static-libstdc++ -static -O3 -s")
