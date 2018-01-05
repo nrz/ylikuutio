@@ -10,6 +10,9 @@ project(ylikuutio)
 # comment the following line to disable scripting with TinyScheme.
 set(ENABLE_SCRIPTING_WITH_TINYSCHEME true)
 
+# comment th following line to use `libsfml-dev` shipped with Linux.
+# set(COMPILE_SFML_FROM_SOURCE true)
+
 # comment the following line to disable unit tests with Google Test.
 set(DO_UNIT_TESTS_WITH_GOOGLE_TEST true)
 
@@ -29,8 +32,10 @@ endif()
 
 find_package(Threads REQUIRED)
 
-set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
-find_package(SFML 2 REQUIRED audio)
+if (NOT(COMPILE_SFML_FROM_SOURCE))
+    set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
+    find_package(SFML 2 REQUIRED system audio)
+endif()
 
 # Compile external dependencies
 add_subdirectory (external)
@@ -73,8 +78,13 @@ set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 
+if (NOT(COMPILE_SFML_FROM_SOURCE))
 include_directories(
     ${SFML_INCLUDE_DIR}
+    )
+endif()
+
+include_directories(
     # external/asio/asio/include/
     external/FastNoiseSIMD/
     external/glew-2.0.0/include/
@@ -198,7 +208,6 @@ endif()
 
 set(ALL_LIBS
     ${OPENGL_LIBRARY}
-    ${SFML_LIBRARIES}
     # assimp
     glfw
     GLEW_200
@@ -206,6 +215,13 @@ set(ALL_LIBS
     miniz
     OpenFBX
     )
+
+if (NOT(COMPILE_SFML_FROM_SOURCE))
+set(ALL_LIBS
+    ${ALL_LIBS}
+    ${SFML_LIBRARIES}
+    )
+endif()
 
 add_definitions(
     -DTW_STATIC
