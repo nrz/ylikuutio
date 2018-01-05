@@ -18,6 +18,12 @@ add_subdirectory(pugixml)
 ### GLFW ###
 add_subdirectory(glfw)
 
+if (COMPILE_SFML_FROM_SOURCE)
+    include_directories(
+        SFML-2.4.2/include/
+        )
+endif()
+
 include_directories(
     # asio/asio/include/
     FastNoiseSIMD/
