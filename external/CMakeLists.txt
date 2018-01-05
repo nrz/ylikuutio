@@ -19,7 +19,7 @@ add_subdirectory(pugixml)
 add_subdirectory(glfw)
 
 include_directories(
-    asio/asio/include/
+    # asio/asio/include/
     FastNoiseSIMD/
     glew-2.0.0/include/
     glfw/include/
@@ -47,7 +47,7 @@ elseif(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 endif(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
 
 ### ASIO ###
-add_subdirectory(asio)
+# add_subdirectory(asio)
 
 ### GLEW ###
 
