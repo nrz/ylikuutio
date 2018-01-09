@@ -20,21 +20,48 @@ add_subdirectory(glfw)
 
 # SFML
 if (COMPILE_SFML_FROM_SOURCE)
+    if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
+        include_directories(
+            # asio/asio/include/
+            FastNoiseSIMD/
+            glew-2.0.0/include/
+            glfw/include/
+            glm/
+            OpenFBX/src/
+            pugixml/src/
+            SFML-2.4.2/include/
+            SFML-2.4.2/src/
+            SFML-2.4.2/extlibs/headers/
+            SFML-2.4.2/extlibs/headers/AL/
+            SFML-2.4.2/extlibs/headers/FLAC/
+            .
+            )
+    else()
+        include_directories(
+            # asio/asio/include/
+            FastNoiseSIMD/
+            glew-2.0.0/include/
+            glfw/include/
+            glm/
+            OpenFBX/src/
+            pugixml/src/
+            SFML-2.4.2/include/
+            SFML-2.4.2/src/
+            .
+            )
+    endif()
+else()
     include_directories(
-        SFML-2.4.2/include/
+        # asio/asio/include/
+        FastNoiseSIMD/
+        glew-2.0.0/include/
+        glfw/include/
+        glm/
+        OpenFBX/src/
+        pugixml/src/
+        .
         )
 endif()
-
-include_directories(
-    # asio/asio/include/
-    FastNoiseSIMD/
-    glew-2.0.0/include/
-    glfw/include/
-    glm/
-    OpenFBX/src/
-    pugixml/src/
-    .
-    )
 
 if(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
     if(NOT CROSS_COMPILE_FOR_WINDOWS)
@@ -96,3 +123,75 @@ add_library(OpenFBX STATIC
 add_dependencies(OpenFBX miniz)
 target_link_libraries(OpenFBX miniz)
 set_property(TARGET OpenFBX PROPERTY COMPILE_FLAGS "-std=c++14")
+
+# sfml-system
+if(COMPILE_SFML_FROM_SOURCE)
+    if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+        add_library(sfml-system STATIC
+            SFML-2.4.2/src/SFML/System/Clock.cpp
+            SFML-2.4.2/src/SFML/System/Err.cpp
+            SFML-2.4.2/src/SFML/System/FileInputStream.cpp
+            SFML-2.4.2/src/SFML/System/Lock.cpp
+            SFML-2.4.2/src/SFML/System/MemoryInputStream.cpp
+            SFML-2.4.2/src/SFML/System/Mutex.cpp
+            SFML-2.4.2/src/SFML/System/Sleep.cpp
+            SFML-2.4.2/src/SFML/System/String.cpp
+            SFML-2.4.2/src/SFML/System/Thread.cpp
+            SFML-2.4.2/src/SFML/System/ThreadLocal.cpp
+            SFML-2.4.2/src/SFML/System/Time.cpp
+            SFML-2.4.2/src/SFML/System/Unix/ClockImpl.cpp
+            SFML-2.4.2/src/SFML/System/Unix/MutexImpl.cpp
+            SFML-2.4.2/src/SFML/System/Unix/SleepImpl.cpp
+            SFML-2.4.2/src/SFML/System/Unix/ThreadImpl.cpp
+            SFML-2.4.2/src/SFML/System/Unix/ThreadLocalImpl.cpp
+            SFML-2.4.2/src/SFML/System/Unix/ClockImpl.cpp
+            SFML-2.4.2/src/SFML/System/Unix/MutexImpl.cpp
+            SFML-2.4.2/src/SFML/System/Unix/SleepImpl.cpp
+            SFML-2.4.2/src/SFML/System/Unix/ThreadImpl.cpp
+            SFML-2.4.2/src/SFML/System/Unix/ThreadLocalImpl.cpp
+            )
+    elseif(CMAKE_SYSTEM_NAME STREQUAL "Android")
+        add_library(sfml-system STATIC
+            SFML-2.4.2/src/SFML/System/Clock.cpp
+            SFML-2.4.2/src/SFML/System/Err.cpp
+            SFML-2.4.2/src/SFML/System/FileInputStream.cpp
+            SFML-2.4.2/src/SFML/System/Lock.cpp
+            SFML-2.4.2/src/SFML/System/MemoryInputStream.cpp
+            SFML-2.4.2/src/SFML/System/Mutex.cpp
+            SFML-2.4.2/src/SFML/System/Sleep.cpp
+            SFML-2.4.2/src/SFML/System/String.cpp
+            SFML-2.4.2/src/SFML/System/Thread.cpp
+            SFML-2.4.2/src/SFML/System/ThreadLocal.cpp
+            SFML-2.4.2/src/SFML/System/Time.cpp
+            SFML-2.4.2/src/SFML/System/Android/Activity.cpp
+            SFML-2.4.2/src/SFML/System/Android/Activity.hpp
+            SFML-2.4.2/src/SFML/System/Android/NativeActivity.cpp
+            SFML-2.4.2/src/SFML/System/Android/ResourceStream.cpp
+            SFML-2.4.2/src/SFML/System/Android/ResourceStream.hpp
+            )
+    elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
+        add_library(sfml-system STATIC
+            SFML-2.4.2/src/SFML/System/Clock.cpp
+            SFML-2.4.2/src/SFML/System/Err.cpp
+            SFML-2.4.2/src/SFML/System/FileInputStream.cpp
+            SFML-2.4.2/src/SFML/System/Lock.cpp
+            SFML-2.4.2/src/SFML/System/MemoryInputStream.cpp
+            SFML-2.4.2/src/SFML/System/Mutex.cpp
+            SFML-2.4.2/src/SFML/System/Sleep.cpp
+            SFML-2.4.2/src/SFML/System/String.cpp
+            SFML-2.4.2/src/SFML/System/Thread.cpp
+            SFML-2.4.2/src/SFML/System/ThreadLocal.cpp
+            SFML-2.4.2/src/SFML/System/Time.cpp
+            SFML-2.4.2/src/SFML/System/Win32/ClockImpl.cpp
+            SFML-2.4.2/src/SFML/System/Win32/MutexImpl.cpp
+            SFML-2.4.2/src/SFML/System/Win32/SleepImpl.cpp
+            SFML-2.4.2/src/SFML/System/Win32/ThreadImpl.cpp
+            SFML-2.4.2/src/SFML/System/Win32/ThreadLocalImpl.cpp
+            SFML-2.4.2/src/SFML/System/Win32/ClockImpl.cpp
+            SFML-2.4.2/src/SFML/System/Win32/MutexImpl.cpp
+            SFML-2.4.2/src/SFML/System/Win32/SleepImpl.cpp
+            SFML-2.4.2/src/SFML/System/Win32/ThreadImpl.cpp
+            SFML-2.4.2/src/SFML/System/Win32/ThreadLocalImpl.cpp
+            )
+    endif()
+endif()
