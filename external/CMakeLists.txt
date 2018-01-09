@@ -31,6 +31,8 @@ if (COMPILE_SFML_FROM_SOURCE)
             pugixml/src/
             SFML-2.4.2/include/
             SFML-2.4.2/src/
+            SFML-2.4.2/extlibs/headers/
+            SFML-2.4.2/extlibs/headers/AL/
             .
             )
     else()
@@ -191,5 +193,53 @@ if(COMPILE_SFML_FROM_SOURCE)
             SFML-2.4.2/src/SFML/System/Win32/ThreadLocalImpl.cpp
             )
         set_property(TARGET sfml-system PROPERTY COMPILE_FLAGS "-DSFML_STATIC -DSFML_STATIC_LIBRARIES -DSFML_USE_STATIC_STD_LIBS")
+    endif()
+
+    if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
+        add_library(sfml-audio STATIC
+            SFML-2.4.2/src/SFML/Audio/ALCheck.cpp
+            SFML-2.4.2/src/SFML/Audio/AlResource.cpp
+            SFML-2.4.2/src/SFML/Audio/AudioDevice.cpp
+            SFML-2.4.2/src/SFML/Audio/InputSoundFile.cpp
+            SFML-2.4.2/src/SFML/Audio/Listener.cpp
+            SFML-2.4.2/src/SFML/Audio/Music.cpp
+            SFML-2.4.2/src/SFML/Audio/OutputSoundFile.cpp
+            SFML-2.4.2/src/SFML/Audio/Sound.cpp
+            SFML-2.4.2/src/SFML/Audio/SoundBuffer.cpp
+            SFML-2.4.2/src/SFML/Audio/SoundBufferRecorder.cpp
+            SFML-2.4.2/src/SFML/Audio/SoundFileFactory.cpp
+            SFML-2.4.2/src/SFML/Audio/SoundFileReaderFlac.cpp
+            SFML-2.4.2/src/SFML/Audio/SoundFileReaderOgg.cpp
+            SFML-2.4.2/src/SFML/Audio/SoundFileReaderWav.cpp
+            SFML-2.4.2/src/SFML/Audio/SoundFileWriterFlac.cpp
+            SFML-2.4.2/src/SFML/Audio/SoundFileWriterOgg.cpp
+            SFML-2.4.2/src/SFML/Audio/SoundFileWriterWav.cpp
+            SFML-2.4.2/src/SFML/Audio/SoundRecorder.cpp
+            SFML-2.4.2/src/SFML/Audio/SoundSource.cpp
+            SFML-2.4.2/src/SFML/Audio/SoundStream.cpp
+            SFML-2.4.2/src/SFML/Audio/ALCheck.hpp
+            SFML-2.4.2/src/SFML/Audio/AudioDevice.hpp
+            SFML-2.4.2/src/SFML/Audio/CMakeLists.txt
+            SFML-2.4.2/src/SFML/Audio/SoundFileReaderFlac.hpp
+            SFML-2.4.2/src/SFML/Audio/SoundFileReaderOgg.hpp
+            SFML-2.4.2/src/SFML/Audio/SoundFileReaderWav.hpp
+            SFML-2.4.2/src/SFML/Audio/SoundFileWriterFlac.hpp
+            SFML-2.4.2/src/SFML/Audio/SoundFileWriterOgg.hpp
+            SFML-2.4.2/src/SFML/Audio/SoundFileWriterWav.hpp
+            # SFML-2.4.2/extlibs/headers/AL/al.h
+            # SFML-2.4.2/extlibs/headers/FLAC/assert.h
+            )
+        add_dependencies(sfml-audio sfml-system)
+        target_link_libraries(sfml-audio
+            sfml-system
+            pthread
+            ${CMAKE_SOURCE_DIR}/external/SFML-2.4.2/extlibs/libs-mingw/x64/libFLAC.a
+            ${CMAKE_SOURCE_DIR}/external/SFML-2.4.2/extlibs/libs-mingw/x64/libopenal32.a
+            ${CMAKE_SOURCE_DIR}/external/SFML-2.4.2/extlibs/libs-mingw/x64/libvorbisfile.a
+            ${CMAKE_SOURCE_DIR}/external/SFML-2.4.2/extlibs/libs-mingw/x64/libvorbis.a
+            ${CMAKE_SOURCE_DIR}/external/SFML-2.4.2/extlibs/libs-mingw/x64/libogg.a
+            ${CMAKE_SOURCE_DIR}/external/SFML-2.4.2/extlibs/libs-mingw/x64/libvorbisenc.a
+            )
+        set_property(TARGET sfml-audio PROPERTY COMPILE_FLAGS "-DSFML_STATIC -DSFML_STATIC_LIBRARIES -DSFML_USE_STATIC_STD_LIBS")
     endif()
 endif()
