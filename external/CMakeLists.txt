@@ -31,9 +31,6 @@ if (COMPILE_SFML_FROM_SOURCE)
             pugixml/src/
             SFML-2.4.2/include/
             SFML-2.4.2/src/
-            SFML-2.4.2/extlibs/headers/
-            SFML-2.4.2/extlibs/headers/AL/
-            SFML-2.4.2/extlibs/headers/FLAC/
             .
             )
     else()
@@ -193,5 +190,6 @@ if(COMPILE_SFML_FROM_SOURCE)
             SFML-2.4.2/src/SFML/System/Win32/ThreadImpl.cpp
             SFML-2.4.2/src/SFML/System/Win32/ThreadLocalImpl.cpp
             )
+        set_property(TARGET sfml-system PROPERTY COMPILE_FLAGS "-DSFML_STATIC -DSFML_STATIC_LIBRARIES -DSFML_USE_STATIC_STD_LIBS")
     endif()
 endif()
