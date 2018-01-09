@@ -28,10 +28,10 @@ In Linux it's simple.
 
 First, install all the necessary compilers, tools and libs. You may use
 your favorite package manager such as apt, aptitude, apt-get, yum etc.
-You all need these packages: cmake make g++ gcc libx11-dev libgl1-mesa-dev libglu1-mesa-dev libxcursor-dev libxrandr-dev libxext-dev libxi-dev libxinerama-dev
+You all need these packages: cmake make g++ gcc libx11-dev libgl1-mesa-dev libglu1-mesa-dev libsfml-dev libxcursor-dev libxrandr-dev libxext-dev libxi-dev libxinerama-dev
 Eg. with apt:
 
-    $ sudo apt install cmake build-essential libx11-dev libgl1-mesa-dev libglu1-mesa-dev libxcursor-dev libxrandr-dev libxext-dev libxi-dev libxinerama-dev
+    $ sudo apt install cmake build-essential libx11-dev libgl1-mesa-dev libglu1-mesa-dev libsfml-dev libxcursor-dev libxrandr-dev libxext-dev libxi-dev libxinerama-dev
 
 If you are doing a cross compile from Linux to Windows, you need also:
 
@@ -191,6 +191,7 @@ A: I like Lisp-family languages and TinyScheme fulfils my
 * callbacks
 * fully functioning in-game console
 * multiple scenes in the same `Universe` (`activate` console command)
+* audio with Simple and Fast Multimedia Library (SFML)
 
 ## Future developments underway:
 * option for wireframe models (`enable wireframe`, `disable wireframe`)
@@ -238,7 +239,6 @@ A: I like Lisp-family languages and TinyScheme fulfils my
 * visual pattern recognition for AI: V1 (primary visual cortex) and V2 simulation
 * GUI for scripting, asset creation etc.
 * Internet gaming with ASIO
-* audio with Simple DirectMedia Layer (SDL)
 
 ### Libraries currently in use
 * The source code from http://www.opengl-tutorial.org/ is licensed under [WTFPL Public Licence version 2](http://www.opengl-tutorial.org/download/).
@@ -247,6 +247,7 @@ A: I like Lisp-family languages and TinyScheme fulfils my
 * GLFW is licensed under [the zlib/libpng license](http://www.glfw.org/license.html).
 * The OpenGL Extension Wrangler Library (GLEW) is licensed under [the Modified BSD License, the Mesa 3-D License (MIT) and the Khronos License (MIT)](https://github.com/nigels-com/glew#copyright-and-licensing).
 * OpenFBX is licensed under [the MIT license](https://github.com/nem0/OpenFBX/blob/master/LICENSE).
+* [SFML](https://www.sfml-dev.org/) is licensed under [the zlib/png license](https://www.sfml-dev.org/license.php).
 * TinyScheme is licensed under [BSD-style license](http://tinyscheme.sourceforge.net/license.txt).
 * pugixml is licensed under [the MIT license](https://github.com/zeux/pugixml/blob/master/README.md).
 

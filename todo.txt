@@ -2,7 +2,6 @@ TODO list:
 Tasks in priority order in descending priority, the most urgent ones first. Check when ready and move to the section Ready, when ready.
 
 Tasks which are necessary for the development of Ylikuutio:
-[ ] Add audio with SDL.
 [ ] Add support for `man` command in console (a container class with the command callback together with the `man` text for the command).
 [ ] Add command line parameter `--debug` to Ajokki (log all kinds of debug information).
 [ ] Add command line parameter `--headless` to Ajokki (do not open any windows).
@@ -72,3 +71,4 @@ Ready:
 [x] Add variable `wireframe`: `set wireframe true` / `set wireframe false`.
 [x] Add object listing command `info` into console.
 [x] Add entity-specific pre-render and post-render callbacks `prerender_callback` and `postrender_callback`.
+[x] Add audio with SFML.

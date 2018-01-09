@@ -10,6 +10,9 @@ project(ylikuutio)
 # comment the following line to disable scripting with TinyScheme.
 set(ENABLE_SCRIPTING_WITH_TINYSCHEME true)
 
+# comment th following line to use `libsfml-dev` shipped with Linux.
+set(COMPILE_SFML_FROM_SOURCE true)
+
 # comment the following line to disable unit tests with Google Test.
 set(DO_UNIT_TESTS_WITH_GOOGLE_TEST true)
 
@@ -29,10 +32,15 @@ endif()
 
 find_package(Threads REQUIRED)
 
+if (NOT(COMPILE_SFML_FROM_SOURCE))
+    set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
+    find_package(SFML 2 REQUIRED system audio)
+endif()
+
 # Compile external dependencies
 add_subdirectory (external)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DSFML_STATIC -std=c++14")
 
 # set(CMAKE_COLOR_MAKEFILE ON)
 # set(CMAKE_VERBOSE_MAKEFILE ON)
@@ -69,6 +77,16 @@ set_directory_properties(PROPERTIES EP_PREFIX ${CMAKE_BINARY_DIR}/external)
 set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
+
+if (COMPILE_SFML_FROM_SOURCE)
+    include_directories(
+        external/SFML-2.4.2/include/
+        )
+else()
+    include_directories(
+        ${SFML_INCLUDE_DIR}
+        )
+endif()
 
 include_directories(
     # external/asio/asio/include/
@@ -201,6 +219,19 @@ set(ALL_LIBS
     miniz
     OpenFBX
     )
+
+if (COMPILE_SFML_FROM_SOURCE)
+    set(ALL_LIBS
+        ${ALL_LIBS}
+        sfml-system
+        sfml-audio
+        )
+else()
+    set(ALL_LIBS
+        ${ALL_LIBS}
+        ${SFML_LIBRARIES}
+        )
+endif()
 
 add_definitions(
     -DTW_STATIC

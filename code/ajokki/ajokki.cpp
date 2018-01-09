@@ -77,6 +77,8 @@
 #include <glm/glm.hpp> // glm
 #endif
 
+#include <SFML/Audio.hpp>
+
 // Include standard headers
 #include <cmath>         // NAN, std::isnan, std::pow
 #include <cstdio>        // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf etc.
@@ -116,6 +118,9 @@ std::string g_font_texture_file_format = "bmp";
 // font texture filename.
 // std::string g_font_texture_filename = "Holstein.DDS";
 std::string g_font_texture_filename = "Holstein.bmp";
+
+// background music filename.
+std::string music_filename = "414270__greek555__sample-97-bpm.wav";
 
 int main(int argc, char* argv[])
 {
@@ -822,6 +827,19 @@ int main(int argc, char* argv[])
     // Measure speed
     double last_time_before_reading_keyboard = NAN;
     double current_time_before_reading_keyboard = NAN;
+
+    // Load music into buffer.
+    sf::SoundBuffer sound_buffer;
+
+    if (!sound_buffer.loadFromFile(music_filename))
+    {
+        std::cout << "Music file " << music_filename << " could not be loaded!\n";
+        return -1;
+    }
+
+    sf::Sound sound;
+    sound.setBuffer(sound_buffer);
+    sound.play();
 
     while (!is_exit_requested)
     {
