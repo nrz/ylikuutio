@@ -40,6 +40,30 @@ Good free 3D models (free as beer and free as speech), check the license of each
 http://www.blendswap.com/
 http://tf3dm.com/
 
+Cute lady full rig:
+https://www.blendswap.com/blends/view/62580
+
+Ingrid:
+https://www.blendswap.com/blends/view/66416
+
+Liz:
+https://www.blendswap.com/blends/view/87822
+
+Lilly basic:
+https://www.blendswap.com/blends/view/46330
+
+Brave (man):
+https://www.blendswap.com/blends/view/17222
+
+Secret agent (man):
+https://www.blendswap.com/blends/view/87428
+
+Lost soldier rigged (man):
+https://www.blendswap.com/blends/view/66663
+
+Snow man ("lumiukko" in Finnish):
+https://www.blendswap.com/blends/view/66332
+
 Best 3D horse model so far:
 https://www.blendswap.com/blends/view/76528
 
@@ -136,6 +160,9 @@ https://www.blendswap.com/blends/view/83231
 Tram - ATM class 1500 (Milano):
 https://www.blendswap.com/blends/view/75920
 
+Rail car ("resiina" in Finnish):
+https://www.blendswap.com/blends/view/70924
+
 Texture Railway Track:
 https://www.blendswap.com/blends/view/80810
 
@@ -144,6 +171,9 @@ https://www.blendswap.com/blends/view/68798
 
 Rock and Rail:
 https://www.blendswap.com/blends/view/85465
+
+Textured railroad track:
+https://www.blendswap.com/blends/view/80810
 
 Underground Subway:
 https://www.blendswap.com/blends/view/75305
@@ -297,3 +327,24 @@ http://www.rockthe3d.com/free-3d-rigged-beautiful-girl-models/
 
 Git Large File Storage:
 https://git-lfs.github.com/
+
+Good free music (free as beer and free as speech), check the license of each file:
+https://freesound.org/
+
+Greek555 / Greek / Sample 37 Bpm:
+https://freesound.org/people/Greek555/sounds/414270/
+
+JPMusic82 / Melody / Arp Bass Loop 128.bpm.mp3
+https://freesound.org/people/JPMusic82/sounds/414269/
+
+SSS_Samples / Chipland Loop (120 BPM-A Major):
+https://freesound.org/people/SSS_Samples/sounds/414257/
+
+mikewest / VeryHeavyWaves.WAV
+https://freesound.org/people/mikewest/sounds/414344/
+
+mikewest / Dog barking.wav
+https://freesound.org/people/mikewest/sounds/414341/
+
+MZ ETZ250 motorcycle two-stroke engine:
+https://freesound.org/people/Silbad/sounds/414263/

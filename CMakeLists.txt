@@ -10,6 +10,9 @@ project(ylikuutio)
 # comment the following line to disable scripting with TinyScheme.
 set(ENABLE_SCRIPTING_WITH_TINYSCHEME true)
 
+# comment th following line to use `libsfml-dev` shipped with Linux.
+set(COMPILE_SFML_FROM_SOURCE true)
+
 # comment the following line to disable unit tests with Google Test.
 set(DO_UNIT_TESTS_WITH_GOOGLE_TEST true)
 
@@ -29,10 +32,15 @@ endif()
 
 find_package(Threads REQUIRED)
 
+if (NOT(COMPILE_SFML_FROM_SOURCE))
+    set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
+    find_package(SFML 2 REQUIRED system audio)
+endif()
+
 # Compile external dependencies
 add_subdirectory (external)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DSFML_STATIC -std=c++14")
 
 # set(CMAKE_COLOR_MAKEFILE ON)
 # set(CMAKE_VERBOSE_MAKEFILE ON)
@@ -70,14 +78,24 @@ set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 
+if (COMPILE_SFML_FROM_SOURCE)
+    include_directories(
+        external/SFML-2.4.2/include/
+        )
+else()
+    include_directories(
+        ${SFML_INCLUDE_DIR}
+        )
+endif()
+
 include_directories(
-    external/asio/asio/include/
+    # external/asio/asio/include/
     external/FastNoiseSIMD/
     external/glew-2.0.0/include/
     external/glfw/include/
     external/glm/
-    external/pugixml/src/
     external/OpenFBX/src/
+    external/pugixml/src/
     .
     )
 
@@ -202,6 +220,19 @@ set(ALL_LIBS
     OpenFBX
     )
 
+if (COMPILE_SFML_FROM_SOURCE)
+    set(ALL_LIBS
+        ${ALL_LIBS}
+        sfml-system
+        sfml-audio
+        )
+else()
+    set(ALL_LIBS
+        ${ALL_LIBS}
+        ${SFML_LIBRARIES}
+        )
+endif()
+
 add_definitions(
     -DTW_STATIC
     -DTW_NO_LIB_PRAGMA
@@ -210,24 +241,35 @@ add_definitions(
     -D_CRT_SECURE_NO_WARNINGS
     )
 
-# for general use.
+# Shaders.
 configure_file(code/ylikuutio/shaders/TransformVertexShader.vertexshader TransformVertexShader.vertexshader COPYONLY)
 configure_file(code/ylikuutio/shaders/TextureFragmentShader.fragmentshader TextureFragmentShader.fragmentshader COPYONLY)
 configure_file(code/ylikuutio/shaders/StandardShading.vertexshader StandardShading.vertexshader COPYONLY)
 configure_file(code/ylikuutio/shaders/StandardShading.fragmentshader StandardShading.fragmentshader COPYONLY)
 configure_file(code/ylikuutio/shaders/TextVertexShader.vertexshader TextVertexShader.vertexshader COPYONLY)
 configure_file(code/ylikuutio/shaders/TextVertexShader.fragmentshader TextVertexShader.fragmentshader COPYONLY)
+
+# TinyScheme code.
 configure_file(code/tinyscheme/hello_world.scm hello_world.scm COPYONLY)
 configure_file(external/tinyscheme-1.41/init.scm init.scm COPYONLY)
+
+# 3D models.
 configure_file(res/objects/custom/suzanne.obj suzanne.obj COPYONLY)
 configure_file(res/objects/snow_cottage_triangulated.obj snow_cottage_triangulated.obj COPYONLY)
 configure_file(res/objects/www.blendswap.com/86110_rigged_and_animated_cat/cat.fbx cat.fbx COPYONLY)
+
+# Textures.
 configure_file(res/textures/GrassGreenTexture0002.bmp GrassGreenTexture0002.bmp COPYONLY)
 configure_file(res/textures/orange_fur_texture.bmp orange_fur_texture.bmp COPYONLY)
 configure_file(res/textures/pavers1b2.bmp pavers1b2.bmp COPYONLY)
 configure_file(res/textures/numbers_123456_black_and_white.bmp numbers_123456_black_and_white.bmp COPYONLY)
+
+# Fonts.
+configure_file(res/fonts/kongtext/kongtext.svg kongtext.svg COPYONLY)
 configure_file(res/fonts/Holstein.DDS Holstein.DDS COPYONLY)
 configure_file(res/fonts/Holstein.bmp Holstein.bmp COPYONLY)
+
+# Maps.
 configure_file(res/height_maps/noise1024x1024.bmp noise1024x1024.bmp COPYONLY)
 configure_file(res/height_maps/noise256x256.bmp noise256x256.bmp COPYONLY)
 configure_file(res/height_maps/noise128x128.bmp noise128x128.bmp COPYONLY)
@@ -235,11 +277,15 @@ configure_file(res/height_maps/S17W069.hgt S17W069.hgt COPYONLY)
 configure_file(res/height_maps/L4133D.asc L4133D.asc COPYONLY)
 configure_file(res/height_maps/N5424G.asc N5424G.asc COPYONLY)
 configure_file(res/laser_scanning_data/L4133D1.laz L4133D1.laz COPYONLY)
-configure_file(res/fonts/kongtext/kongtext.svg kongtext.svg COPYONLY)
 configure_file(res/maps/Hofinkatu_Isafjordinkatu_Joensuu_Finland.osm Hofinkatu_Isafjordinkatu_Joensuu_Finland.osm COPYONLY)
 configure_file(res/maps/Exactum_Physicum_Helsinki_Finland.osm Exactum_Physicum_Helsinki_Finland.osm COPYONLY)
 
-# for tests.
+# Audio.
+configure_file(res/audio/freesound.org/414257__sss-samples__chipland-loop-120-bpm-a-major.wav 414257__sss-samples__chipland-loop-120-bpm-a-major.wav COPYONLY)
+configure_file(res/audio/freesound.org/414269__jpmusic82__arp-bass-loop-128-bpm.mp3 414269__jpmusic82__arp-bass-loop-128-bpm.mp3 COPYONLY)
+configure_file(res/audio/freesound.org/414270__greek555__sample-97-bpm.wav 414270__greek555__sample-97-bpm.wav COPYONLY)
+
+# Image files for tests.
 configure_file(res/height_maps/noise256x256.bmp noise256x256.bmp COPYONLY)
 configure_file(res/textures/test3x3.bmp test3x3.bmp COPYONLY)
 
@@ -358,10 +404,10 @@ add_library(ylikuutio STATIC
     code/ylikuutio/map/ylikuutio_map.hpp
 
     # network, in alphabetical order
-    code/ylikuutio/network/tcp_connection.cpp
-    code/ylikuutio/network/tcp_connection.hpp
-    code/ylikuutio/network/tcp_server.cpp
-    code/ylikuutio/network/tcp_server.hpp
+    # code/ylikuutio/network/tcp_connection.cpp
+    # code/ylikuutio/network/tcp_connection.hpp
+    # code/ylikuutio/network/tcp_server.cpp
+    # code/ylikuutio/network/tcp_server.hpp
 
     # ontology, in alphabetical order
     code/ylikuutio/ontology/creature.cpp
@@ -519,20 +565,22 @@ if (ENABLE_SCRIPTING_WITH_TINYSCHEME)
 endif()
 
 # Asio-test
-add_executable(asio_chat_server
-    code/asio/asio_chat_server.cpp
-    )
-target_link_libraries(asio_chat_server pthread)
+if(FALSE)
+    add_executable(asio_chat_server
+        code/asio/asio_chat_server.cpp
+        )
+    target_link_libraries(asio_chat_server pthread)
 
-add_executable(asio_chat_client
-    code/asio/asio_chat_client.cpp
-    )
-target_link_libraries(asio_chat_client pthread)
+    add_executable(asio_chat_client
+        code/asio/asio_chat_client.cpp
+        )
+    target_link_libraries(asio_chat_client pthread)
 
-add_executable(asio_nslookup
-    code/asio/asio_nslookup.cpp
-    )
-target_link_libraries(asio_nslookup pthread)
+    add_executable(asio_nslookup
+        code/asio/asio_nslookup.cpp
+        )
+    target_link_libraries(asio_nslookup pthread)
+endif()
 
 # Xcode and Visual working directories
 set_target_properties(ajokki PROPERTIES COMPILE_DEFINITIONS "USE_ASSIMP")
@@ -600,7 +648,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         )
     set(UNIT_TESTS
         code/ylikuutio/tests/googletest/test_any_value.cpp
-        code/ylikuutio/tests/googletest/test_asio.cpp
+        # code/ylikuutio/tests/googletest/test_asio.cpp
         code/ylikuutio/tests/googletest/test_bilinear_interpolation2D.cpp
         code/ylikuutio/tests/googletest/test_callback_system.cpp
         code/ylikuutio/tests/googletest/test_fbx_loader.cpp

@@ -71,3 +71,4 @@ Ready:
 [x] Add variable `wireframe`: `set wireframe true` / `set wireframe false`.
 [x] Add object listing command `info` into console.
 [x] Add entity-specific pre-render and post-render callbacks `prerender_callback` and `postrender_callback`.
+[x] Add audio with SFML.
