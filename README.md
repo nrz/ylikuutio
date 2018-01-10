@@ -283,12 +283,12 @@ A: I like Lisp-family languages and TinyScheme fulfils my
 * [Chipland Loop (120 BPM-A Major)](https://freesound.org/people/SSS_Samples/sounds/414257/) is made by SSS\_Samples and and it is licensed under [Creative Commons Attribution 3.0 Unported (CC BY 3.0) license](https://creativecommons.org/licenses/by/3.0/).
 * [Sample 97 Bpm](https://freesound.org/people/Greek555/sounds/414270/) is made by Greek555 and it is licensed under the [Creative Commons 0 (CC0 1.0) license](https://creativecommons.org/publicdomain/zero/1.0/).
 
-## Trademarks:
-Android is a trademark of Google Inc. See [https://developer.android.com/legal.html](https://developer.android.com/legal.html).
-Coverity® and Coverity Scan® are registered trademarks of Synopsys, Inc. in the US and/or other countries. See [https://www.synopsys.com/company/legal/trademarks-brands.html](https://www.synopsys.com/company/legal/trademarks-brands.html).
-Linux® is the registered trademark of Linus Torvalds in the U.S. and other countries. See [https://www.linuxmark.org/programs/legal/trademark/attribution](https://www.linuxmark.org/programs/legal/trademark/attribution).
-Synopsys® is a registered trademark of Synopsys, Inc. in the US and/or other countries. See [https://www.synopsys.com/company/legal/trademarks-brands.html](https://www.synopsys.com/company/legal/trademarks-brands.html).
-Windows is a trademark of Microsoft. See [https://www.microsoft.com/en-us/legal/intellectualproperty/trademarks/usage/general.aspx](https://www.microsoft.com/en-us/legal/intellectualproperty/trademarks/usage/general.aspx).
+## Trademarks
+* Android is a trademark of Google Inc. See [https://developer.android.com/legal.html](https://developer.android.com/legal.html).
+* Coverity® and Coverity Scan® are registered trademarks of Synopsys, Inc. in the US and/or other countries. See [https://www.synopsys.com/company/legal/trademarks-brands.html](https://www.synopsys.com/company/legal/trademarks-brands.html).
+* Linux® is the registered trademark of Linus Torvalds in the U.S. and other countries. See [https://www.linuxmark.org/programs/legal/trademark/attribution](https://www.linuxmark.org/programs/legal/trademark/attribution).
+* Synopsys® is a registered trademark of Synopsys, Inc. in the US and/or other countries. See [https://www.synopsys.com/company/legal/trademarks-brands.html](https://www.synopsys.com/company/legal/trademarks-brands.html).
+* Windows is a trademark of Microsoft. See [https://www.microsoft.com/en-us/legal/intellectualproperty/trademarks/usage/general.aspx](https://www.microsoft.com/en-us/legal/intellectualproperty/trademarks/usage/general.aspx).
 
 ## Contact info
 (found bugs and suggestions are very welcome!)
