@@ -297,7 +297,7 @@ A: I like Lisp-family languages and TinyScheme fulfils my
 |:-------------- |:------------------------------------------------------------- |
 | name           | Antti Nuortimo                                                |
 | GitHub         | https://github.com/nrz                                        |
-| Stack Overflow | http://stackoverflow.com/users/1310991/nrz                    |
+| Stack Overflow | https://stackoverflow.com/users/1310991/nrz                   |
 | email          | antti dot nuortimo at gmail dot com                           |
 |                | (please write 'ylikuutio' to email title to escape /dev/null) |
 
