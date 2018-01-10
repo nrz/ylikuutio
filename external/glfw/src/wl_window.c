@@ -125,6 +125,7 @@ static void checkScaleChange(_GLFWwindow* window)
         wl_surface_set_buffer_scale(window->wl.surface, scale);
         wl_egl_window_resize(window->wl.native, scaledWidth, scaledHeight, 0, 0);
         _glfwInputFramebufferSize(window, scaledWidth, scaledHeight);
+        _glfwInputWindowContentScale(window, scale, scale);
     }
 }
 
@@ -189,6 +190,24 @@ static void setOpaqueRegion(_GLFWwindow* window)
     wl_region_destroy(region);
 }
 
+static void setIdleInhibitor(_GLFWwindow* window, GLFWbool enable)
+{
+    if (enable && !window->wl.idleInhibitor && _glfw.wl.idleInhibitManager)
+    {
+        window->wl.idleInhibitor =
+            zwp_idle_inhibit_manager_v1_create_inhibitor(
+                _glfw.wl.idleInhibitManager, window->wl.surface);
+        if (!window->wl.idleInhibitor)
+            _glfwInputError(GLFW_PLATFORM_ERROR,
+                            "Wayland: Idle inhibitor creation failed");
+    }
+    else if (!enable && window->wl.idleInhibitor)
+    {
+        zwp_idle_inhibitor_v1_destroy(window->wl.idleInhibitor);
+        window->wl.idleInhibitor = NULL;
+    }
+}
+
 static GLFWbool createSurface(_GLFWwindow* window,
                               const _GLFWwndconfig* wndconfig)
 {
@@ -239,14 +258,17 @@ static GLFWbool createShellSurface(_GLFWwindow* window)
             WL_SHELL_SURFACE_FULLSCREEN_METHOD_DEFAULT,
             0,
             window->monitor->wl.output);
+        setIdleInhibitor(window, GLFW_TRUE);
     }
     else if (window->wl.maximized)
     {
         wl_shell_surface_set_maximized(window->wl.shellSurface, NULL);
+        setIdleInhibitor(window, GLFW_FALSE);
     }
     else
     {
         wl_shell_surface_set_toplevel(window->wl.shellSurface);
+        setIdleInhibitor(window, GLFW_FALSE);
     }
 
     wl_surface_commit(window->wl.surface);
@@ -452,6 +474,9 @@ void _glfwPlatformDestroyWindow(_GLFWwindow* window)
         _glfwInputWindowFocus(window, GLFW_FALSE);
     }
 
+    if (window->wl.idleInhibitor)
+        zwp_idle_inhibitor_v1_destroy(window->wl.idleInhibitor);
+
     if (window->context.destroy)
         window->context.destroy(window);
 
@@ -637,10 +662,12 @@ void _glfwPlatformSetWindowMonitor(_GLFWwindow* window,
             WL_SHELL_SURFACE_FULLSCREEN_METHOD_DEFAULT,
             refreshRate * 1000, // Convert Hz to mHz.
             monitor->wl.output);
+        setIdleInhibitor(window, GLFW_TRUE);
     }
     else
     {
         wl_shell_surface_set_toplevel(window->wl.shellSurface);
+        setIdleInhibitor(window, GLFW_FALSE);
     }
     _glfwInputWindowMonitor(window, monitor);
 }
@@ -664,6 +691,11 @@ int _glfwPlatformWindowVisible(_GLFWwindow* window)
 int _glfwPlatformWindowMaximized(_GLFWwindow* window)
 {
     return window->wl.maximized;
+}
+
+int _glfwPlatformWindowHovered(_GLFWwindow* window)
+{
+    return window->wl.hovered;
 }
 
 int _glfwPlatformFramebufferTransparent(_GLFWwindow* window)

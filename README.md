@@ -12,7 +12,7 @@ All my code copyright (C) 2016-2017 Antti Nuortimo.
 ## Compiling
 Ylikuutio can be compiled with GCC, Clang or Visual Studio.
 In Visual Studio compiling may break due to compiler-specific bugs.
-Cross compiling from Linux to Windows using GCC works fine.
+Cross compiling from Linux® to Windows using GCC works fine.
 C++14 support is required.
 OpenGL 3.0 or newer is required.
 CMake 2.6.2 or newer is needed for the compiling process.
@@ -37,7 +37,7 @@ If you are doing a cross compile from Linux to Windows, you need also:
 
     $ sudo apt install g++-mingw-w64 gcc-mingw-w64 binutils-mingw-w64
 
-If you are doing a cross compile from Linux to Android(TM), you need also:
+If you are doing a cross compile from Linux to Android™, you need also:
 
     $ sudo apt install google-android-ndk-installer
 
@@ -74,7 +74,7 @@ To cross compile from Linux to Windows:
     $ cmake -DCMAKE_TOOLCHAIN_FILE=../w64.cmake ..
     $ make
 
-To cross compile from Linux to Android(TM) (using Android(TM) NDK):
+To cross compile from Linux to Android (using Android NDK):
 
     $ mkdir build_android
     $ cd build_android
@@ -241,24 +241,24 @@ A: I like Lisp-family languages and TinyScheme fulfils my
 * Internet gaming with ASIO
 
 ### Libraries currently in use
-* The source code from http://www.opengl-tutorial.org/ is licensed under [WTFPL Public Licence version 2](http://www.opengl-tutorial.org/download/).
-* Asio is licensed under [Boost software license](https://github.com/chriskohlhoff/asio/blob/master/asio/LICENSE_1_0.txt).
-* OpenGL Mathematics (GLM) is licensed under [The Happy Bunny License (Modified MIT License) and MIT License](http://glm.g-truc.net/copying.txt).
-* GLFW is licensed under [the zlib/libpng license](http://www.glfw.org/license.html).
-* The OpenGL Extension Wrangler Library (GLEW) is licensed under [the Modified BSD License, the Mesa 3-D License (MIT) and the Khronos License (MIT)](https://github.com/nigels-com/glew#copyright-and-licensing).
-* OpenFBX is licensed under [the MIT license](https://github.com/nem0/OpenFBX/blob/master/LICENSE).
+* The source code from [http://www.opengl-tutorial.org/](http://www.opengl-tutorial.org/) is licensed under [WTFPL Public Licence version 2](http://www.opengl-tutorial.org/download/).
+* [Asio](https://think-async.com/) is licensed under [Boost software license](https://github.com/chriskohlhoff/asio/blob/master/asio/LICENSE_1_0.txt).
+* [OpenGL Mathematics (GLM)](https://glm.g-truc.net/) is licensed under [The Happy Bunny License (Modified MIT License) and MIT License](http://glm.g-truc.net/copying.txt).
+* [GLFW](http://www.glfw.org/) is licensed under [the zlib/libpng license](http://www.glfw.org/license.html).
+* [The OpenGL Extension Wrangler Library (GLEW)](http://glew.sourceforge.net/) is licensed under [the Modified BSD License, the Mesa 3-D License (MIT) and the Khronos License (MIT)](https://github.com/nigels-com/glew#copyright-and-licensing).
+* [OpenFBX](https://github.com/nem0/OpenFBX) is licensed under [the MIT license](https://github.com/nem0/OpenFBX/blob/master/LICENSE).
 * [SFML](https://www.sfml-dev.org/) is licensed under [the zlib/png license](https://www.sfml-dev.org/license.php).
-* TinyScheme is licensed under [BSD-style license](http://tinyscheme.sourceforge.net/license.txt).
-* pugixml is licensed under [the MIT license](https://github.com/zeux/pugixml/blob/master/README.md).
+* [TinyScheme](http://tinyscheme.sourceforge.net/) is licensed under [BSD-style license](http://tinyscheme.sourceforge.net/license.txt).
+* [pugixml](https://pugixml.org/) is licensed under [the MIT license](https://github.com/zeux/pugixml/blob/master/README.md).
 
 ### Libraries not yet in use
-* GLFM is licensed under [the zlib license](https://github.com/brackeen/glfm/blob/master/LICENSE).
-* Google logging module (glog) is licensed under [the conditions available in https://github.com/google/glog/blob/master/COPYING](https://github.com/google/glog/blob/master/COPYING).
-* FastNoiseSIMD is licensed under [the MIT license](https://github.com/Auburns/FastNoiseSIMD/blob/master/LICENSE).
-* TinySpline is licensed under [the MIT license](https://github.com/msteinbeck/tinyspline/blob/master/LICENSE).
+* [GLFM](https://github.com/brackeen/glfm) is licensed under [the zlib license](https://github.com/brackeen/glfm/blob/master/LICENSE).
+* [Google logging module (glog)](https://github.com/google/glog) is licensed under [the conditions available in https://github.com/google/glog/blob/master/COPYING](https://github.com/google/glog/blob/master/COPYING).
+* [FastNoiseSIMD](https://github.com/Auburns/FastNoiseSIMD) is licensed under [the MIT license](https://github.com/Auburns/FastNoiseSIMD/blob/master/LICENSE).
+* [TinySpline](https://github.com/msteinbeck/tinyspline) is licensed under [the MIT license](https://github.com/msteinbeck/tinyspline/blob/master/LICENSE).
 
 ### Libraries currently not in use
-* Open Asset Import Library (assimp) is licensed under [a 3-clause BSD license](http://www.assimp.org/main_license.html).
+* [Open Asset Import Library (assimp)](http://www.assimp.org/) is licensed under [a 3-clause BSD license](http://www.assimp.org/main_license.html).
 
 ### 3D models
 * [3D model of Helsinki.](http://www.hri.fi/en/dataset/helsingin-3d-kaupunkimalli) The administrator of 3D model of Helsinki is Helsingin kaupunginkanslia and the original creator is Helsingin kaupungin kaupunginkanslia, tietotekniikka- ja viestintäosasto. The data has been downloaded from the [Helsinki Region Infoshare](http://www.hri.fi/) service 19.11.2017 using the license [Creative Commons Nimeä 4.0 Kansainvälinen (CC BY 4.0)](http://creativecommons.org/licenses/by/4.0/deed.fi).
@@ -283,12 +283,12 @@ A: I like Lisp-family languages and TinyScheme fulfils my
 * [Chipland Loop (120 BPM-A Major)](https://freesound.org/people/SSS_Samples/sounds/414257/) is made by SSS\_Samples and and it is licensed under [Creative Commons Attribution 3.0 Unported (CC BY 3.0) license](https://creativecommons.org/licenses/by/3.0/).
 * [Sample 97 Bpm](https://freesound.org/people/Greek555/sounds/414270/) is made by Greek555 and it is licensed under the [Creative Commons 0 (CC0 1.0) license](https://creativecommons.org/publicdomain/zero/1.0/).
 
-## Trademarks:
-Android© is a trademark of Google Inc. See [https://developer.android.com/legal.html](https://developer.android.com/legal.html).
-Coverity© and Coverity Scan© are registered trademarks of Synopsys, Inc. in the US and/or other countries. See [https://www.synopsys.com/company/legal/trademarks-brands.html](https://www.synopsys.com/company/legal/trademarks-brands.html).
-Linux© is the registered trademark of Linus Torvalds in the U.S. and other countries. See [https://www.linuxmark.org/programs/legal/trademark/attribution](https://www.linuxmark.org/programs/legal/trademark/attribution).
-Synopsys© is a registered trademarks of Synopsys, Inc. in the US and/or other countries. See [https://www.synopsys.com/company/legal/trademarks-brands.html](https://www.synopsys.com/company/legal/trademarks-brands.html).
-Windows© is a registered trademark of Microsoft. See [https://www.microsoft.com/en-us/legal/intellectualproperty/trademarks/usage/general.aspx](https://www.microsoft.com/en-us/legal/intellectualproperty/trademarks/usage/general.aspx).
+## Trademarks
+* Android is a trademark of Google Inc. See [https://developer.android.com/legal.html](https://developer.android.com/legal.html).
+* Coverity® and Coverity Scan® are registered trademarks of Synopsys, Inc. in the US and/or other countries. See [https://www.synopsys.com/company/legal/trademarks-brands.html](https://www.synopsys.com/company/legal/trademarks-brands.html).
+* Linux® is the registered trademark of Linus Torvalds in the U.S. and other countries. See [https://www.linuxmark.org/programs/legal/trademark/attribution](https://www.linuxmark.org/programs/legal/trademark/attribution).
+* Synopsys® is a registered trademark of Synopsys, Inc. in the US and/or other countries. See [https://www.synopsys.com/company/legal/trademarks-brands.html](https://www.synopsys.com/company/legal/trademarks-brands.html).
+* Windows is a trademark of Microsoft. See [https://www.microsoft.com/en-us/legal/intellectualproperty/trademarks/usage/general.aspx](https://www.microsoft.com/en-us/legal/intellectualproperty/trademarks/usage/general.aspx).
 
 ## Contact info
 (found bugs and suggestions are very welcome!)
@@ -297,7 +297,7 @@ Windows© is a registered trademark of Microsoft. See [https://www.microsoft.com
 |:-------------- |:------------------------------------------------------------- |
 | name           | Antti Nuortimo                                                |
 | GitHub         | https://github.com/nrz                                        |
-| Stack Overflow | http://stackoverflow.com/users/1310991/nrz                    |
+| Stack Overflow | https://stackoverflow.com/users/1310991/nrz                   |
 | email          | antti dot nuortimo at gmail dot com                           |
 |                | (please write 'ylikuutio' to email title to escape /dev/null) |
 

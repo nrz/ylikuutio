@@ -43,6 +43,7 @@ namespace console
         this->can_backspace = false;
         this->can_enter_key = false;
         this->can_ctrl_c = false;
+        this->can_ctrl_w = false;
         this->can_page_up = false;
         this->can_page_down = false;
         this->can_home = false;

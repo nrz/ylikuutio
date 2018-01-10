@@ -11,6 +11,7 @@ Tasks which are necessary for the development of Ylikuutio:
 [ ] Add voxel world.
 [ ] Add AI objects (robots).
 [ ] Add scene loading command `load` into console.
+[ ] Add audio playing command `play` into console.
 [ ] Move main loop out of `main` function and away from Ajokki into `ontology::Universe` class of Ylikuutio.
 [ ] Add support for custom keyboard settings.
 [ ] Add support for camera objects..
