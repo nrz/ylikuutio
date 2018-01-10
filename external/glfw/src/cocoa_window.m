@@ -43,6 +43,7 @@
  #define NSEventModifierFlagControl NSControlKeyMask
  #define NSEventModifierFlagOption NSAlternateKeyMask
  #define NSEventModifierFlagShift NSShiftKeyMask
+ #define NSEventModifierFlagCapsLock NSAlphaShiftKeyMask
  #define NSEventModifierFlagDeviceIndependentFlagsMask NSDeviceIndependentModifierFlagsMask
  #define NSEventMaskAny NSAnyEventMask
  #define NSEventTypeApplicationDefined NSApplicationDefined
@@ -177,6 +178,8 @@ static int translateFlags(NSUInteger flags)
         mods |= GLFW_MOD_ALT;
     if (flags & NSEventModifierFlagCommand)
         mods |= GLFW_MOD_SUPER;
+    if (flags & NSEventModifierFlagCapsLock)
+        mods |= GLFW_MOD_CAPS_LOCK;
 
     return mods;
 }
@@ -571,6 +574,16 @@ static const NSRange kEmptyRange = { NSNotFound, 0 };
         window->ns.fbHeight = fbRect.size.height;
         _glfwInputFramebufferSize(window, fbRect.size.width, fbRect.size.height);
     }
+
+    const float xscale = fbRect.size.width / contentRect.size.width;
+    const float yscale = fbRect.size.height / contentRect.size.height;
+
+    if (xscale != window->ns.xscale || yscale != window->ns.yscale)
+    {
+        window->ns.xscale = xscale;
+        window->ns.yscale = yscale;
+        _glfwInputWindowContentScale(window, xscale, yscale);
+    }
 }
 
 - (void)drawRect:(NSRect)rect
@@ -686,17 +699,17 @@ static const NSRange kEmptyRange = { NSNotFound, 0 };
                         [sender draggingLocation].x,
                         contentRect.size.height - [sender draggingLocation].y);
 
-    const int count = [files count];
+    const NSUInteger count = [files count];
     if (count)
     {
         NSEnumerator* e = [files objectEnumerator];
         char** paths = calloc(count, sizeof(char*));
-        int i;
+        NSUInteger i;
 
         for (i = 0;  i < count;  i++)
             paths[i] = strdup([[e nextObject] UTF8String]);
 
-        _glfwInputDrop(window, count, (const char**) paths);
+        _glfwInputDrop(window, (int) count, (const char**) paths);
 
         for (i = 0;  i < count;  i++)
             free(paths[i]);
@@ -1093,8 +1106,8 @@ static GLFWbool createNativeWindow(_GLFWwindow* window,
             [window->ns.object zoom:nil];
     }
 
-    if (wndconfig->ns.frame)
-        [window->ns.object setFrameAutosaveName:[NSString stringWithUTF8String:wndconfig->title]];
+    if (strlen(wndconfig->ns.frameName))
+        [window->ns.object setFrameAutosaveName:[NSString stringWithUTF8String:wndconfig->ns.frameName]];
 
     window->ns.view = [[GLFWContentView alloc] initWithGlfwWindow:window];
 
@@ -1473,6 +1486,20 @@ int _glfwPlatformWindowVisible(_GLFWwindow* window)
 int _glfwPlatformWindowMaximized(_GLFWwindow* window)
 {
     return [window->ns.object isZoomed];
+}
+
+int _glfwPlatformWindowHovered(_GLFWwindow* window)
+{
+    const NSPoint point = [NSEvent mouseLocation];
+
+    if ([NSWindow windowNumberAtPoint:point belowWindowWithWindowNumber:0] !=
+        [window->ns.object windowNumber])
+    {
+        return GLFW_FALSE;
+    }
+
+    return NSPointInRect(point,
+        [window->ns.object convertRectToScreen:[window->ns.view bounds]]);
 }
 
 int _glfwPlatformFramebufferTransparent(_GLFWwindow* window)
