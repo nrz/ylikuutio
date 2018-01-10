@@ -624,6 +624,10 @@ int main(int argc, char* argv[])
     callback_system::CallbackEngine* enable_ctrl_c_callback_engine = new callback_system::CallbackEngine();
     new console::ConsoleCallbackObject(&console::Console::enable_ctrl_c, enable_ctrl_c_callback_engine, my_console);
 
+    // Callback code for W release: enable Control-W.
+    callback_system::CallbackEngine* enable_ctrl_w_callback_engine = new callback_system::CallbackEngine();
+    new console::ConsoleCallbackObject(&console::Console::enable_ctrl_w, enable_ctrl_w_callback_engine, my_console);
+
     // Callback code for PgUp release: enable PgUp.
     callback_system::CallbackEngine* enable_page_up_callback_engine = new callback_system::CallbackEngine();
     new console::ConsoleCallbackObject(&console::Console::enable_page_up, enable_page_up_callback_engine, my_console);
@@ -694,6 +698,10 @@ int main(int argc, char* argv[])
     callback_system::CallbackEngine* ctrl_c_callback_engine = new callback_system::CallbackEngine();
     new console::ConsoleCallbackObject(&console::Console::ctrl_c, ctrl_c_callback_engine, my_console);
 
+    // Callback code for W: Control-W.
+    callback_system::CallbackEngine* ctrl_w_callback_engine = new callback_system::CallbackEngine();
+    new console::ConsoleCallbackObject(&console::Console::ctrl_w, ctrl_w_callback_engine, my_console);
+
     // Callback code for PgUp.
     callback_system::CallbackEngine* page_up_callback_engine = new callback_system::CallbackEngine();
     new console::ConsoleCallbackObject(&console::Console::page_up, page_up_callback_engine, my_console);
@@ -759,6 +767,7 @@ int main(int argc, char* argv[])
     console_keyrelease_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_BACKSPACE, enable_backspace_callback_engine });
     console_keyrelease_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_ENTER, enable_enter_key_callback_engine });
     console_keyrelease_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_C, enable_ctrl_c_callback_engine });
+    console_keyrelease_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_W, enable_ctrl_w_callback_engine });
     console_keyrelease_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_PAGE_UP, enable_page_up_callback_engine });
     console_keyrelease_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_PAGE_DOWN, enable_page_down_callback_engine });
     console_keyrelease_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_HOME, enable_home_callback_engine });
@@ -780,6 +789,7 @@ int main(int argc, char* argv[])
     console_keypress_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_BACKSPACE, backspace_callback_engine });
     console_keypress_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_ENTER, enter_callback_engine });
     console_keypress_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_C, ctrl_c_callback_engine });
+    console_keypress_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_W, ctrl_w_callback_engine });
     console_keypress_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_PAGE_UP, page_up_callback_engine });
     console_keypress_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_PAGE_DOWN, page_down_callback_engine });
     console_keypress_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_HOME, home_callback_engine });

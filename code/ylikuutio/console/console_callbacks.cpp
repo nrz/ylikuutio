@@ -246,6 +246,19 @@ namespace console
         return nullptr;
     }
 
+    std::shared_ptr<datatypes::AnyValue> Console::enable_ctrl_w(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject*,
+            std::vector<callback_system::CallbackParameter*>&,
+            console::Console* console)
+    {
+        if (console->in_console)
+        {
+            console->can_ctrl_w = true;
+        }
+        return nullptr;
+    }
+
     std::shared_ptr<datatypes::AnyValue> Console::enable_page_up(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject*,
@@ -587,6 +600,51 @@ namespace console
             console->cursor_it = console->current_input.begin();
             console->cursor_index = 0;
             console->can_ctrl_c = false;
+        }
+        return nullptr;
+    }
+
+    std::shared_ptr<datatypes::AnyValue> Console::ctrl_w(
+            callback_system::CallbackEngine*,
+            callback_system::CallbackObject*,
+            std::vector<callback_system::CallbackParameter*>&,
+            console::Console* console)
+    {
+        if (console->in_console &&
+                console->can_ctrl_w &&
+                (console->is_left_control_pressed || console->is_right_control_pressed) &&
+                !console->is_left_alt_pressed && !console->is_right_alt_pressed &&
+                !console->is_left_shift_pressed && !console->is_right_shift_pressed)
+        {
+            console->in_historical_input = false;
+
+            // First, remove all spaces until a non-space is encountered.
+            while (console->cursor_it != console->current_input.begin())
+            {
+                if (*--console->cursor_it == ' ')
+                {
+                    console->cursor_it++;
+                    break;
+                }
+
+                console->cursor_it = console->current_input.erase(console->cursor_it);
+                console->cursor_index--;
+            }
+
+            // Then, remove all non-spaces until a space is encountered.
+            while (console->cursor_it != console->current_input.begin())
+            {
+                if (*--console->cursor_it != ' ')
+                {
+                    console->cursor_it++;
+                    break;
+                }
+
+                console->cursor_it = console->current_input.erase(console->cursor_it);
+                console->cursor_index--;
+            }
+
+            console->can_ctrl_w = false;
         }
         return nullptr;
     }

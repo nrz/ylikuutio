@@ -165,6 +165,12 @@ namespace console
                     std::vector<callback_system::CallbackParameter*>&,
                     console::Console* console);
 
+            static std::shared_ptr<datatypes::AnyValue> enable_ctrl_w(
+                    callback_system::CallbackEngine*,
+                    callback_system::CallbackObject*,
+                    std::vector<callback_system::CallbackParameter*>&,
+                    console::Console* console);
+
             static std::shared_ptr<datatypes::AnyValue> enable_page_up(
                     callback_system::CallbackEngine*,
                     callback_system::CallbackObject*,
@@ -263,6 +269,12 @@ namespace console
                     std::vector<callback_system::CallbackParameter*>&,
                     console::Console* console);
 
+            static std::shared_ptr<datatypes::AnyValue> ctrl_w(
+                    callback_system::CallbackEngine*,
+                    callback_system::CallbackObject*,
+                    std::vector<callback_system::CallbackParameter*>&,
+                    console::Console* console);
+
             static std::shared_ptr<datatypes::AnyValue> page_up(
                     callback_system::CallbackEngine*,
                     callback_system::CallbackObject*,
@@ -318,6 +330,7 @@ namespace console
             bool can_backspace;
             bool can_enter_key;
             bool can_ctrl_c;
+            bool can_ctrl_w;
             bool can_page_up;
             bool can_page_down;
             bool can_home;
