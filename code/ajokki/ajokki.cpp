@@ -227,7 +227,9 @@ int main(int argc, char* argv[])
 
     // Create the `World`s.
 
+    std::cout << "Creating ontology::Entity* earth_world_entity ...\n";
     ontology::Entity* earth_world_entity = entity_factory->create_World();
+    std::cout << "Creating ontology::World* earth_world ...\n";
     ontology::World* earth_world = dynamic_cast<ontology::World*>(earth_world_entity);
 
     if (earth_world == nullptr)
@@ -235,6 +237,7 @@ int main(int argc, char* argv[])
         return -1;
     }
 
+    std::cout << "Setting earth_world as the active world ...\n";
     my_universe->set_active_world(earth_world);
 
     // Create the `Scene`s.
@@ -245,6 +248,7 @@ int main(int argc, char* argv[])
 
     // Helsinki `Scene` begins here.
 
+    std::cout << "Creating ontology::Entity* helsinki_east_downtown_scene_entity and its contents ...\n";
     ontology::Entity* helsinki_east_downtown_scene_entity = ajokki::create_helsinki_east_downtown_scene(entity_factory, earth_world);
 
     if (helsinki_east_downtown_scene_entity == nullptr)
@@ -252,6 +256,7 @@ int main(int argc, char* argv[])
         return -1;
     }
 
+    std::cout << "Creating ontology::Scene* helsinki_east_downtown_scene ...\n";
     ontology::Scene* helsinki_east_downtown_scene = dynamic_cast<ontology::Scene*>(helsinki_east_downtown_scene_entity);
 
     my_universe->is_flight_mode_in_use = true;
@@ -262,12 +267,14 @@ int main(int argc, char* argv[])
     }
 
     // Set `helsinki_east_downtown_scene` to be the currently active `Scene` in `earth_world`.
+    std::cout << "Setting helsinki_east_downtown_scene as the active scene ...\n";
     earth_world->set_active_scene(helsinki_east_downtown_scene);
 
     // Helsinki `Scene` ends here.
 
     // Joensuu `Scene` begins here.
 
+    std::cout << "Creating ontology::Scene* joensuu_center_west_scene and its contents ...\n";
     if (ajokki::create_joensuu_center_west_scene(entity_factory, earth_world) == nullptr)
     {
         return -1;
