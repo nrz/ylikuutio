@@ -5,6 +5,8 @@
 
 namespace ontology
 {
+    class SettingMaster;
+
     void World::bind(ontology::Scene* scene)
     {
         // get `childID` from `World` and set pointer to `scene`.
@@ -53,8 +55,8 @@ namespace ontology
 
         if (this->active_scene != nullptr)
         {
-            this->parent->turbo_factor = this->active_scene->turbo_factor;
-            this->parent->twin_turbo_factor = this->active_scene->twin_turbo_factor;
+            this->parent->turbo_factor = this->active_scene->get_turbo_factor();
+            this->parent->twin_turbo_factor = this->active_scene->get_twin_turbo_factor();
         }
     }
 

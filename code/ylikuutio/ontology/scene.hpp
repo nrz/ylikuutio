@@ -28,7 +28,6 @@ namespace ontology
     class Shader;
     class Species;
     class Symbiosis;
-    class Object;
 
     class Scene: public ontology::Entity
     {
@@ -40,7 +39,7 @@ namespace ontology
                 // constructor.
                 this->gravity = 9.81f / 60.0f;
                 this->fall_speed = this->gravity;
-                this->water_level = static_cast<GLfloat>(water_level);
+                this->water_level = water_level;
 
                 this->universe = universe;
                 this->parent = world;
@@ -64,6 +63,13 @@ namespace ontology
             // destructor.
             virtual ~Scene();
 
+            void bind(ontology::Shader* shader);
+
+            void unbind(int32_t childID);
+
+            // this method renders all `Shader`s of this `Scene`.
+            void render();
+
             // this method returns a pointer to an `Entity` using the name as key.
             ontology::Entity* get_entity(const std::string);
 
@@ -71,17 +77,16 @@ namespace ontology
 
             // this method returns a pointer to `datatypes::AnyValue` corresponding to the given `key`.
             std::shared_ptr<datatypes::AnyValue> get_variable(std::string key);
+            float get_turbo_factor();
             void set_turbo_factor(float turbo_factor);
+            float get_twin_turbo_factor();
             void set_twin_turbo_factor(float turbo_factor);
 
-            friend class Universe;
-            friend class World;
-            friend class Shader;
-            friend class Species;
-            template<class T1>
-                friend void render_children(const std::vector<T1>& child_pointer_vector);
-            template<class T1>
-                friend void set_name(std::string name, T1 entity);
+            float get_water_level();
+
+            // this method sets a `Shader` pointer.
+            void set_shader_pointer(const int32_t childID, ontology::Shader* const child_pointer);
+
             template<class T1>
                 friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, int32_t* number_of_children);
             template<class T1, class T2>
@@ -90,15 +95,9 @@ namespace ontology
         private:
             void bind_to_parent();
 
-            // this method renders all `Shader`s of this `Scene`.
-            void render();
-
             ontology::Entity* get_parent() const override;
             int32_t get_number_of_children() const override;
             int32_t get_number_of_descendants() const override;
-
-            // this method sets a `Shader` pointer.
-            void set_shader_pointer(const int32_t childID, ontology::Shader* const child_pointer);
 
             // this method sets a `Symbiosis` pointer.
             void set_symbiosis_pointer(const int32_t childID, ontology::Symbiosis* const child_pointer);
@@ -139,7 +138,7 @@ namespace ontology
             float gravity;
             float fall_speed;
 
-            GLfloat water_level;
+            float water_level;
     };
 }
 

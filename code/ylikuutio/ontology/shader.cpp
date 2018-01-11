@@ -25,7 +25,7 @@ namespace ontology
     void Shader::bind_to_parent()
     {
         // get `childID` from `Scene` and set pointer to this `Shader`.
-        hierarchy::bind_child_to_parent<ontology::Shader*>(this, this->parent->shader_pointer_vector, this->parent->free_shaderID_queue, &this->parent->number_of_shaders);
+        this->parent->bind(this);
     }
 
     Shader::~Shader()
@@ -90,8 +90,12 @@ namespace ontology
 
     void Shader::bind_to_new_parent(ontology::Scene* const new_scene_pointer)
     {
-        // this method sets pointer to this `Shader` to nullptr, sets `parent` according to the input, and requests a new `childID` from the new `Scene`.
-        hierarchy::bind_child_to_new_parent<ontology::Shader*, ontology::Scene*>(this, new_scene_pointer, this->parent->shader_pointer_vector, this->parent->free_shaderID_queue, &this->parent->number_of_shaders);
+        // unbind from the old parent `Scene`.
+        this->parent->unbind(this->childID);
+
+        // get `childID` from `Scene` and set pointer to this `Shader`.
+        this->parent = new_scene_pointer;
+        this->parent->bind(this);
     }
 
     void Shader::set_name(std::string name)

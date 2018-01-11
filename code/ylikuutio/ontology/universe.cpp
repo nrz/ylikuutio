@@ -113,8 +113,8 @@ namespace ontology
 
         if (this->active_world != nullptr && this->active_world->get_active_scene() != nullptr)
         {
-            this->turbo_factor = this->active_world->get_active_scene()->turbo_factor;
-            this->twin_turbo_factor = this->active_world->get_active_scene()->twin_turbo_factor;
+            this->turbo_factor = this->active_world->get_active_scene()->get_turbo_factor();
+            this->twin_turbo_factor = this->active_world->get_active_scene()->get_twin_turbo_factor();
         }
     }
 
@@ -130,8 +130,8 @@ namespace ontology
 
         if (this->active_world->get_active_scene() != nullptr)
         {
-            this->turbo_factor = this->active_world->get_active_scene()->turbo_factor;
-            this->twin_turbo_factor = this->active_world->get_active_scene()->twin_turbo_factor;
+            this->turbo_factor = this->active_world->get_active_scene()->get_turbo_factor();
+            this->twin_turbo_factor = this->active_world->get_active_scene()->get_twin_turbo_factor();
         }
     }
 
