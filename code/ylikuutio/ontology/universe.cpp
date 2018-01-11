@@ -81,6 +81,16 @@ namespace ontology
         delete this->entity_factory;
     }
 
+    void Universe::bind(ontology::World* world)
+    {
+        // get `childID` from `Universe` and set pointer to this `World`.
+        hierarchy::bind_child_to_parent<ontology::World*>(
+                world,
+                this->world_pointer_vector,
+                this->free_worldID_queue,
+                &this->number_of_worlds);
+    }
+
     void Universe::render()
     {
         if (this->active_world != nullptr)
@@ -123,6 +133,11 @@ namespace ontology
             this->turbo_factor = this->active_world->active_scene->turbo_factor;
             this->twin_turbo_factor = this->active_world->active_scene->twin_turbo_factor;
         }
+    }
+
+    int32_t Universe::get_number_of_worlds() const
+    {
+        return this->number_of_worlds;
     }
 
     ontology::World* Universe::get_active_world() const
@@ -216,6 +231,11 @@ namespace ontology
         return this->setting_master->get(key);
     }
 
+    bool Universe::is_entity(const std::string& name) const
+    {
+        return this->entity_map.count(name) == 1;
+    }
+
     ontology::Entity* Universe::get_entity(const std::string& name) const
     {
         if (this->entity_map.count(name) != 1)
@@ -243,6 +263,22 @@ namespace ontology
         }
 
         return entity_names;
+    }
+
+    void Universe::add_entity(const std::string& name, ontology::Entity* const entity)
+    {
+        if (this->entity_map.count(name) == 0)
+        {
+            this->entity_map[name] = entity;
+        }
+    }
+
+    void Universe::erase_entity(const std::string& name)
+    {
+        if (this->entity_map.count(name) == 1)
+        {
+            this->entity_map.erase(name);
+        }
     }
 
     ontology::EntityFactory* Universe::get_entity_factory() const
@@ -443,6 +479,31 @@ namespace ontology
 
     // Public callbacks end here.
 
+    config::SettingMaster* Universe::get_setting_master() const
+    {
+        return this->setting_master;
+    }
+
+    console::Console* Universe::get_console() const
+    {
+        return this->console_pointer;
+    }
+
+    void Universe::set_console(console::Console* console)
+    {
+        this->console_pointer = console;
+    }
+
+    float Universe::get_planet_radius() const
+    {
+        return this->planet_radius;
+    }
+
+    void Universe::set_planet_radius(float planet_radius)
+    {
+        this->planet_radius = planet_radius;
+    }
+
     void Universe::set_world_pointer(int32_t childID, ontology::World* child_pointer)
     {
         hierarchy::set_child_pointer(childID, child_pointer, this->world_pointer_vector, this->free_worldID_queue, &this->number_of_worlds);
@@ -451,6 +512,16 @@ namespace ontology
     void Universe::set_terrain_species(ontology::Species* terrain_species)
     {
         this->terrain_species = terrain_species;
+    }
+
+    glm::mat4& Universe::get_projection_matrix()
+    {
+        return this->ProjectionMatrix;
+    }
+
+    glm::mat4& Universe::get_view_matrix()
+    {
+        return this->ViewMatrix;
     }
 
     bool Universe::compute_matrices_from_inputs()

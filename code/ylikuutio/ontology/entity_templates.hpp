@@ -11,7 +11,6 @@
 
 namespace ontology
 {
-    class Universe;
     class Scene;
     class Shader;
     class Material;
@@ -31,13 +30,13 @@ namespace ontology
                 return;
             }
 
-            if (universe->entity_map.count(name) != 0)
+            if (universe->is_entity(name))
             {
                 // The name is already in use.
                 return;
             }
 
-            universe->entity_map[name] = entity;
+            universe->add_entity(name, entity);
             entity->name = name;
         }
 

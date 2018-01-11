@@ -36,13 +36,7 @@ namespace ontology
         }
 
         // OK, this `Entity` had a name, so it's name shall be erased.
-        if (this->universe->entity_map.count(this->name) != 0)
-        {
-            std::cout << "Entity destructor: erasing " << this->name << " from `entity_map` ...\n";
-
-            // OK, `Universe` knows the name of this `Entity`.
-            this->universe->entity_map.erase(this->name);
-        }
+        this->universe->erase_entity(this->name);
     }
 
     std::string Entity::get_type() const

@@ -265,7 +265,7 @@ namespace config
             return nullptr;
         }
 
-        universe->planet_radius = planet_radius_any_value->float_value;
+        universe->set_planet_radius(planet_radius_any_value->float_value);
         return nullptr;
     }
 

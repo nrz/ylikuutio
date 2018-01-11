@@ -101,7 +101,7 @@ namespace ontology
     {
         this->turbo_factor = turbo_factor;
 
-        if (this->parent == this->universe->active_world && this == this->parent->active_scene)
+        if (this->parent == this->universe->get_active_world() && this == this->parent->active_scene)
         {
             this->universe->turbo_factor = this->turbo_factor;
         }
@@ -111,7 +111,7 @@ namespace ontology
     {
         this->twin_turbo_factor = twin_turbo_factor;
 
-        if (this->parent == this->universe->active_world && this == this->parent->active_scene)
+        if (this->parent == this->universe->get_active_world() && this == this->parent->active_scene)
         {
             this->universe->twin_turbo_factor = this->twin_turbo_factor;
         }
