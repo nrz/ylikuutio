@@ -26,6 +26,7 @@ namespace ontology
             {
                 this->universe = universe;
                 this->parent = universe;
+                this->active_scene = nullptr;
 
                 this->number_of_scenes = 0;
 
