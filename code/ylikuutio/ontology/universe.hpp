@@ -209,7 +209,6 @@ namespace ontology
                 this->cartesian_coordinates = nullptr;
                 this->spherical_coordinates = nullptr;
 
-                // constructor.
                 this->planet_radius = NAN; // world radius is NAN as long it doesn't get `set` by `SettingMaster`.
                 this->terrain_species = nullptr;
                 this->active_world = nullptr;
