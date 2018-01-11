@@ -83,7 +83,7 @@ namespace ontology
 
     void Universe::bind(ontology::World* world)
     {
-        // get `childID` from `Universe` and set pointer to this `World`.
+        // get `childID` from `Universe` and set pointer to `world`.
         hierarchy::bind_child_to_parent<ontology::World*>(
                 world,
                 this->world_pointer_vector,
