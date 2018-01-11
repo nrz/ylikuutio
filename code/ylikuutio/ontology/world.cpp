@@ -1,6 +1,7 @@
 #include "world.hpp"
 #include "universe.hpp"
 #include "scene.hpp"
+#include "code/ylikuutio/config/setting_master.hpp"
 
 namespace ontology
 {
