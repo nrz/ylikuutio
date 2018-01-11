@@ -33,8 +33,8 @@ namespace ontology
 
     void Scene::bind_to_parent()
     {
-        // get `childID` from `Universe` and set pointer to this `Scene`.
-        hierarchy::bind_child_to_parent<ontology::Scene*>(this, this->parent->scene_pointer_vector, this->parent->free_sceneID_queue, &this->parent->number_of_scenes);
+        // get `childID` from `World` and set pointer to this `Scene`.
+        this->parent->bind(this);
     }
 
     Scene::~Scene()
@@ -101,7 +101,7 @@ namespace ontology
     {
         this->turbo_factor = turbo_factor;
 
-        if (this->parent == this->universe->get_active_world() && this == this->parent->active_scene)
+        if (this->parent == this->universe->get_active_world() && this == this->parent->get_active_scene())
         {
             this->universe->turbo_factor = this->turbo_factor;
         }
@@ -111,7 +111,7 @@ namespace ontology
     {
         this->twin_turbo_factor = twin_turbo_factor;
 
-        if (this->parent == this->universe->get_active_world() && this == this->parent->active_scene)
+        if (this->parent == this->universe->get_active_world() && this == this->parent->get_active_scene())
         {
             this->universe->twin_turbo_factor = this->twin_turbo_factor;
         }

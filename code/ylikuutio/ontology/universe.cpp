@@ -111,10 +111,10 @@ namespace ontology
     {
         this->active_world = world;
 
-        if (this->active_world != nullptr && this->active_world->active_scene != nullptr)
+        if (this->active_world != nullptr && this->active_world->get_active_scene() != nullptr)
         {
-            this->turbo_factor = this->active_world->active_scene->turbo_factor;
-            this->twin_turbo_factor = this->active_world->active_scene->twin_turbo_factor;
+            this->turbo_factor = this->active_world->get_active_scene()->turbo_factor;
+            this->twin_turbo_factor = this->active_world->get_active_scene()->twin_turbo_factor;
         }
     }
 
@@ -126,12 +126,12 @@ namespace ontology
             return;
         }
 
-        this->active_world->active_scene = scene;
+        this->active_world->set_active_scene(scene);
 
-        if (this->active_world->active_scene != nullptr)
+        if (this->active_world->get_active_scene() != nullptr)
         {
-            this->turbo_factor = this->active_world->active_scene->turbo_factor;
-            this->twin_turbo_factor = this->active_world->active_scene->twin_turbo_factor;
+            this->turbo_factor = this->active_world->get_active_scene()->turbo_factor;
+            this->twin_turbo_factor = this->active_world->get_active_scene()->twin_turbo_factor;
         }
     }
 

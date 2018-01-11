@@ -4,6 +4,16 @@
 
 namespace ontology
 {
+    void World::bind(ontology::Scene* scene)
+    {
+        // get `childID` from `World` and set pointer to `scene`.
+        hierarchy::bind_child_to_parent<ontology::Scene*>(
+                scene,
+                this->scene_pointer_vector,
+                this->free_sceneID_queue,
+                &this->number_of_scenes);
+    }
+
     void World::bind_to_parent()
     {
         // get `childID` from `Universe` and set pointer to this `World`.

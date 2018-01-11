@@ -2,7 +2,6 @@
 #define __WORLD_HPP_INCLUDED
 
 #include "entity.hpp"
-#include "code/ylikuutio/config/setting_master.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include standard headers
@@ -40,6 +39,8 @@ namespace ontology
             // destructor.
             virtual ~World();
 
+            void bind(ontology::Scene* scene);
+
             // this method renders the active `Scene` of this `World`.
             void render();
 
@@ -48,21 +49,18 @@ namespace ontology
 
             ontology::Scene* get_active_scene() const;
 
+            // this method sets a `Scene` pointer.
+            void set_scene_pointer(int32_t childID, ontology::Scene* child_pointer);
+
             ontology::Entity* get_parent() const override;
             int32_t get_number_of_children() const override;
             int32_t get_number_of_descendants() const override;
 
-            friend class Universe;
-            friend class Scene;
-            friend class Shader;
             template<class T1>
                 friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, int32_t* number_of_children);
 
         private:
             void bind_to_parent();
-
-            // this method sets a `Scene` pointer.
-            void set_scene_pointer(int32_t childID, ontology::Scene* child_pointer);
 
             ontology::Universe* parent; // pointer to the `Universe`.
 
