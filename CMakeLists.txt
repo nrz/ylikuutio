@@ -10,7 +10,7 @@ project(ylikuutio)
 # comment the following line to disable scripting with TinyScheme.
 set(ENABLE_SCRIPTING_WITH_TINYSCHEME true)
 
-# comment th following line to use `libsfml-dev` shipped with Linux.
+# comment the following line to use `libsfml-dev` shipped with Linux.
 set(COMPILE_SFML_FROM_SOURCE true)
 
 # comment the following line to disable unit tests with Google Test.
