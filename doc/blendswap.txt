@@ -1,12 +1,21 @@
 Good free 3D models (free as beer and free as speech), check the license of each file:
-http://www.blendswap.com/
-http://tf3dm.com/
+https://www.blendswap.com/
+https://www.blendswap.com/blends/categories
 
 Cute lady full rig:
 https://www.blendswap.com/blends/view/62580
 
+Game Engine Anime Girl:
+https://www.blendswap.com/blends/view/89343
+
+Illumina - Blender Game Engine Low Poly Girl:
+https://www.blendswap.com/blends/view/71562
+
 Ingrid:
 https://www.blendswap.com/blends/view/66416
+
+Katie - version 2.01:
+https://www.blendswap.com/blends/view/69006
 
 Liz:
 https://www.blendswap.com/blends/view/87822
@@ -14,17 +23,134 @@ https://www.blendswap.com/blends/view/87822
 Lilly basic:
 https://www.blendswap.com/blends/view/46330
 
+Jackie James:
+https://www.blendswap.com/blends/view/59957
+
+Iris - beautiful young woman:
+https://www.blendswap.com/blends/view/56601
+
+Breanna:
+https://www.blendswap.com/blends/view/14036
+
+Natasha:
+https://www.blendswap.com/blends/view/84943
+
+Sandy (pin-up):
+https://www.blendswap.com/blends/view/73753
+
+Simple girl:
+https://www.blendswap.com/blends/view/66413
+
+Sintel Lite:
+https://www.blendswap.com/blends/view/4861
+
+Sintel Lite 2.57B:
+https://www.blendswap.com/blends/view/7093
+
+Sintel Lite - Cycles V1:
+https://www.blendswap.com/blends/view/12191
+
+Sintel Lite - Blender Guru:
+https://www.blendswap.com/blends/view/53062
+
+Sintel for Cycles upgrade:
+https://www.blendswap.com/blends/view/63151
+
+Sintel Cycles:
+https://www.blendswap.com/blends/view/65730
+
+Sintel Lite - Cycles and hair:
+https://www.blendswap.com/blends/view/66558
+
+Vega:
+https://www.blendswap.com/blends/view/70467
+
+Wacom tablet personification (anime woman):
+https://www.blendswap.com/blends/view/57493
+
+Zuleyka - lowpoly gameready model:
+https://www.blendswap.com/blends/view/69025
+
+Rene Rig:
+https://www.blendswap.com/blends/view/83006
+
+RC (woman):
+https://www.blendswap.com/blends/view/84668
+
+Sarah:
+https://www.blendswap.com/blends/view/86548
+
+Secret Agent Elena:
+https://www.blendswap.com/blends/view/77207
+
+Syle in Fall:
+https://www.blendswap.com/blends/view/81608
+
+Female sci-fi character:
+https://www.blendswap.com/blends/view/80099
+
+The Journey (Artstation contest) (a person riding a motorbike):
+https://www.blendswap.com/blends/view/85041
+
+Asian Male:
+https://www.blendswap.com/blends/view/74824
+
+Character scientist (man):
+https://www.blendswap.com/blends/view/87234
+
+Jhon:
+https://www.blendswap.com/blends/view/67415
+
+Proxyself: Shane Farrell:
+https://www.blendswap.com/blends/view/87831
+
+Mike_Freeman Human Basemesh:
+https://www.blendswap.com/blends/view/88341
+
 Brave (man):
 https://www.blendswap.com/blends/view/17222
+
+Captain Scar (man):
+https://www.blendswap.com/blends/view/74104
 
 Secret agent (man):
 https://www.blendswap.com/blends/view/87428
 
+S.W.A.T.:
+https://www.blendswap.com/blends/view/47274
+
 Lost soldier rigged (man):
 https://www.blendswap.com/blends/view/66663
 
+BGE Directional Movement Astronaut:
+https://www.blendswap.com/blends/view/82876
+
+Scifi contest (Blenderguru) (man):
+https://www.blendswap.com/blends/view/67919
+
+The hunter (man):
+https://www.blendswap.com/blends/view/68118
+
+Dance:
+https://www.blendswap.com/blends/view/89718
+
+3D Hand:
+https://www.blendswap.com/blends/view/81285
+
+Skeleton:
+https://www.blendswap.com/blends/view/83799
+
 Snow man ("lumiukko" in Finnish):
 https://www.blendswap.com/blends/view/66332
+
+Snow man in Cycles ("lumiukko" in Finnish):
+https://www.blendswap.com/blends/view/24112
+
+Vainilla - snow man ("lumiukko" in Finnish):
+https://www.blendswap.com/blends/view/71320
+
+Boneco de neve ("snow man" in English, "lumiukko" in Finnish):
+https://www.blendswap.com/blends/view/72242
 
 Best 3D horse model so far:
 https://www.blendswap.com/blends/view/76528
@@ -40,6 +166,18 @@ https://www.blendswap.com/blends/view/67522
 
 Cheetah:
 https://www.blendswap.com/blends/view/57756
+
+Deer low poly:
+https://www.blendswap.com/blends/view/88304
+
+Venado huichol:
+https://www.blendswap.com/blends/view/88286
+
+Toad:
+https://www.blendswap.com/blends/view/74827
+
+Dog scout (robot dog):
+https://www.blendswap.com/blends/view/41178
 
 Porsche 997 Turbo Polizei:
 https://www.blendswap.com/blends/view/74227
