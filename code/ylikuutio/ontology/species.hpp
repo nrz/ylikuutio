@@ -71,13 +71,13 @@ namespace ontology
                 this->bind_to_parent();
 
                 // Get a handle for our buffers.
-                this->vertexPosition_modelspaceID = glGetAttribLocation(species_struct.shader->programID, "vertexPosition_modelspace");
-                this->vertexUVID = glGetAttribLocation(species_struct.shader->programID, "vertexUV");
-                this->vertexNormal_modelspaceID = glGetAttribLocation(species_struct.shader->programID, "vertexNormal_modelspace");
+                this->vertexPosition_modelspaceID = glGetAttribLocation(species_struct.shader->get_programID(), "vertexPosition_modelspace");
+                this->vertexUVID = glGetAttribLocation(species_struct.shader->get_programID(), "vertexUV");
+                this->vertexNormal_modelspaceID = glGetAttribLocation(species_struct.shader->get_programID(), "vertexNormal_modelspace");
 
                 // Get a handle for our "LightPosition" uniform.
-                glUseProgram(species_struct.shader->programID);
-                this->lightID = glGetUniformLocation(species_struct.shader->programID, "LightPosition_worldspace");
+                glUseProgram(species_struct.shader->get_programID());
+                this->lightID = glGetUniformLocation(species_struct.shader->get_programID(), "LightPosition_worldspace");
 
                 if (this->is_terrain)
                 {
@@ -87,7 +87,7 @@ namespace ontology
                 }
 
                 // water level.
-                GLuint water_level_uniform_location = glGetUniformLocation(species_struct.shader->programID, "water_level");
+                GLuint water_level_uniform_location = glGetUniformLocation(species_struct.shader->get_programID(), "water_level");
                 glUniform1f(water_level_uniform_location, species_struct.scene->get_water_level());
 
                 SpeciesLoaderStruct species_loader_struct;

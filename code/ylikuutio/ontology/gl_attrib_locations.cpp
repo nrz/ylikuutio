@@ -12,8 +12,8 @@ namespace ontology
 {
     void get_gl_attrib_locations(ontology::Shader* shader, ontology::Glyph* glyph)
     {
-        glyph->vertexPosition_modelspaceID = glGetAttribLocation(shader->programID, "vertexPosition_modelspace");
-        glyph->vertexUVID = glGetAttribLocation(shader->programID, "vertexUV");
-        glyph->vertexNormal_modelspaceID = glGetAttribLocation(shader->programID, "vertexNormal_modelspace");
+        glyph->vertexPosition_modelspaceID = glGetAttribLocation(shader->get_programID(), "vertexPosition_modelspace");
+        glyph->vertexUVID = glGetAttribLocation(shader->get_programID(), "vertexUV");
+        glyph->vertexNormal_modelspaceID = glGetAttribLocation(shader->get_programID(), "vertexNormal_modelspace");
     }
 }

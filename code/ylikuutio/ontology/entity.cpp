@@ -44,6 +44,11 @@ namespace ontology
         return this->type;
     }
 
+    ontology::Universe* Entity::get_universe()
+    {
+        return this->get_parent()->get_universe();
+    }
+
     void Entity::prerender() const
     {
         if (this->prerender_callback != nullptr &&

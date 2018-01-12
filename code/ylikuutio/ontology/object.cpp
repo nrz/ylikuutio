@@ -118,8 +118,8 @@ namespace ontology
 
         // Send our transformation to the currently bound shader,
         // in the "MVP" uniform.
-        glUniformMatrix4fv(shader_pointer->MatrixID, 1, GL_FALSE, &this->MVP_matrix[0][0]);
-        glUniformMatrix4fv(shader_pointer->ModelMatrixID, 1, GL_FALSE, &this->model_matrix[0][0]);
+        glUniformMatrix4fv(shader_pointer->get_matrixID(), 1, GL_FALSE, &this->MVP_matrix[0][0]);
+        glUniformMatrix4fv(shader_pointer->get_model_matrixID(), 1, GL_FALSE, &this->model_matrix[0][0]);
 
         GLuint vertexbuffer;
         GLuint vertexPosition_modelspaceID;

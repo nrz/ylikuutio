@@ -22,6 +22,48 @@
 
 namespace ontology
 {
+    void Shader::bind_material(ontology::Material* material)
+    {
+        // get `childID` from `Shader` and set pointer to `material`.
+        hierarchy::bind_child_to_parent<ontology::Material*>(
+                material,
+                this->material_pointer_vector,
+                this->free_materialID_queue,
+                &this->number_of_materials);
+    }
+
+    void Shader::bind_symbiosis(ontology::Symbiosis* symbiosis)
+    {
+        // get `childID` from `Shader` and set pointer to `symbiosis`.
+        hierarchy::bind_child_to_parent<ontology::Symbiosis*>(
+                symbiosis,
+                this->symbiosis_pointer_vector,
+                this->free_symbiosisID_queue,
+                &this->number_of_symbioses);
+    }
+
+    void Shader::unbind_material(int32_t childID)
+    {
+        ontology::Material* dummy_child_pointer = nullptr;
+        hierarchy::set_child_pointer(
+                childID,
+                dummy_child_pointer,
+                this->material_pointer_vector,
+                this->free_materialID_queue,
+                &this->number_of_materials);
+    }
+
+    void Shader::unbind_symbiosis(int32_t childID)
+    {
+        ontology::Symbiosis* dummy_child_pointer = nullptr;
+        hierarchy::set_child_pointer(
+                childID,
+                dummy_child_pointer,
+                this->symbiosis_pointer_vector,
+                this->free_symbiosisID_queue,
+                &this->number_of_symbioses);
+    }
+
     void Shader::bind_to_parent()
     {
         // get `childID` from `Scene` and set pointer to this `Shader`.
@@ -101,6 +143,21 @@ namespace ontology
     void Shader::set_name(std::string name)
     {
         ontology::set_name(name, this);
+    }
+
+    GLuint Shader::get_programID()
+    {
+        return this->programID;
+    }
+
+    GLuint Shader::get_matrixID()
+    {
+        return this->MatrixID;
+    }
+
+    GLuint Shader::get_model_matrixID()
+    {
+        return this->ModelMatrixID;
     }
 
     void Shader::set_terrain_species(ontology::Species* const terrain_species)

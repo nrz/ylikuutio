@@ -306,6 +306,7 @@ namespace ontology
 
             ontology::World* get_active_world() const;
 
+            ontology::Universe* get_universe() final override;
             ontology::Entity* get_parent() const override;
             int32_t get_number_of_children() const override;
             int32_t get_number_of_descendants() const override;
