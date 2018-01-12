@@ -1,5 +1,8 @@
 #include "model.hpp"
 
+// Include standard headers
+#include <stdint.h> // uint32_t etc.
+
 namespace ontology
 {
     class Universe;
