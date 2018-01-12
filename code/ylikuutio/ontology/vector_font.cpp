@@ -62,6 +62,26 @@ namespace ontology
         this->parent->set_vector_font_pointer(this->childID, nullptr);
     }
 
+    void VectorFont::bind_glyph(ontology::Glyph* glyph)
+    {
+        // get `childID` from `VectorFont` and set pointer to `glyph`.
+        hierarchy::bind_child_to_parent<ontology::Glyph*>(
+                glyph,
+                this->glyph_pointer_vector,
+                this->free_glyphID_queue,
+                &this->number_of_glyphs);
+    }
+
+    void VectorFont::bind_text3D(ontology::Text3D* text3D)
+    {
+        // get `childID` from `VectorFont` and set pointer to `text3D`.
+        hierarchy::bind_child_to_parent<ontology::Text3D*>(
+                text3D,
+                this->text3D_pointer_vector,
+                this->free_text3D_ID_queue,
+                &this->number_of_text3Ds);
+    }
+
     void VectorFont::render()
     {
         this->prerender();
