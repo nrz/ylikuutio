@@ -28,6 +28,7 @@ namespace ontology
 
             std::string get_type() const;
 
+            virtual ontology::Universe* get_universe();
             virtual ontology::Entity* get_parent() const = 0;
             virtual int32_t get_number_of_children() const = 0;
             virtual int32_t get_number_of_descendants() const = 0;

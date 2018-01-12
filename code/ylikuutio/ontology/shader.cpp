@@ -22,10 +22,52 @@
 
 namespace ontology
 {
+    void Shader::bind_material(ontology::Material* material)
+    {
+        // get `childID` from `Shader` and set pointer to `material`.
+        hierarchy::bind_child_to_parent<ontology::Material*>(
+                material,
+                this->material_pointer_vector,
+                this->free_materialID_queue,
+                &this->number_of_materials);
+    }
+
+    void Shader::bind_symbiosis(ontology::Symbiosis* symbiosis)
+    {
+        // get `childID` from `Shader` and set pointer to `symbiosis`.
+        hierarchy::bind_child_to_parent<ontology::Symbiosis*>(
+                symbiosis,
+                this->symbiosis_pointer_vector,
+                this->free_symbiosisID_queue,
+                &this->number_of_symbioses);
+    }
+
+    void Shader::unbind_material(int32_t childID)
+    {
+        ontology::Material* dummy_child_pointer = nullptr;
+        hierarchy::set_child_pointer(
+                childID,
+                dummy_child_pointer,
+                this->material_pointer_vector,
+                this->free_materialID_queue,
+                &this->number_of_materials);
+    }
+
+    void Shader::unbind_symbiosis(int32_t childID)
+    {
+        ontology::Symbiosis* dummy_child_pointer = nullptr;
+        hierarchy::set_child_pointer(
+                childID,
+                dummy_child_pointer,
+                this->symbiosis_pointer_vector,
+                this->free_symbiosisID_queue,
+                &this->number_of_symbioses);
+    }
+
     void Shader::bind_to_parent()
     {
         // get `childID` from `Scene` and set pointer to this `Shader`.
-        hierarchy::bind_child_to_parent<ontology::Shader*>(this, this->parent->shader_pointer_vector, this->parent->free_shaderID_queue, &this->parent->number_of_shaders);
+        this->parent->bind(this);
     }
 
     Shader::~Shader()
@@ -54,7 +96,7 @@ namespace ontology
         // [re]bind `programID` shader.
         glUseProgram(this->programID);
 
-        glUniformMatrix4fv(this->ViewMatrixID, 1, GL_FALSE, &this->universe->ViewMatrix[0][0]); // This one doesn't change between objects, so this can be done once for all objects that use "programID"
+        glUniformMatrix4fv(this->ViewMatrixID, 1, GL_FALSE, &this->universe->get_view_matrix()[0][0]); // This one doesn't change between objects, so this can be done once for all objects that use "programID"
 
         // render this `Shader` by calling `render()` function of each `Material` and of each `Symbiosis`.
         ontology::render_children<ontology::Material*>(this->material_pointer_vector);
@@ -90,8 +132,12 @@ namespace ontology
 
     void Shader::bind_to_new_parent(ontology::Scene* const new_scene_pointer)
     {
-        // this method sets pointer to this `Shader` to nullptr, sets `parent` according to the input, and requests a new `childID` from the new `Scene`.
-        hierarchy::bind_child_to_new_parent<ontology::Shader*, ontology::Scene*>(this, new_scene_pointer, this->parent->shader_pointer_vector, this->parent->free_shaderID_queue, &this->parent->number_of_shaders);
+        // unbind from the old parent `Scene`.
+        this->parent->unbind(this->childID);
+
+        // get `childID` from `Scene` and set pointer to this `Shader`.
+        this->parent = new_scene_pointer;
+        this->parent->bind(this);
     }
 
     void Shader::set_name(std::string name)
@@ -99,9 +145,24 @@ namespace ontology
         ontology::set_name(name, this);
     }
 
+    GLuint Shader::get_programID()
+    {
+        return this->programID;
+    }
+
+    GLuint Shader::get_matrixID()
+    {
+        return this->MatrixID;
+    }
+
+    GLuint Shader::get_model_matrixID()
+    {
+        return this->ModelMatrixID;
+    }
+
     void Shader::set_terrain_species(ontology::Species* const terrain_species)
     {
         this->terrain_species = terrain_species;
-        this->parent->parent->parent->set_terrain_species(this->terrain_species);
+        this->universe->set_terrain_species(this->terrain_species);
     }
 }

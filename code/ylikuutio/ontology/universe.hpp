@@ -195,9 +195,7 @@ namespace ontology
 {
     class World;
     class Scene;
-    class Shader;
     class Species;
-    class Object;
 
     class Universe: public ontology::Entity
     {
@@ -211,7 +209,6 @@ namespace ontology
                 this->cartesian_coordinates = nullptr;
                 this->spherical_coordinates = nullptr;
 
-                // constructor.
                 this->planet_radius = NAN; // world radius is NAN as long it doesn't get `set` by `SettingMaster`.
                 this->terrain_species = nullptr;
                 this->active_world = nullptr;
@@ -277,6 +274,8 @@ namespace ontology
             // destructor.
             virtual ~Universe();
 
+            void bind(ontology::World* world);
+
             // this method renders the active `Scene` of this `Universe`.
             void render();
 
@@ -286,8 +285,28 @@ namespace ontology
             // this method stes the active `Scene`.
             void set_active_scene(ontology::Scene* world);
 
+            config::SettingMaster* get_setting_master() const;
+
+            console::Console* get_console() const;
+            void set_console(console::Console* console);
+
+            float get_planet_radius() const;
+            void set_planet_radius(float planet_radius);
+
+            // this method sets a `World` pointer.
+            void set_world_pointer(int32_t childID, ontology::World* child_pointer);
+
+            // this method sets a terrain `Species` pointer.
+            void set_terrain_species(ontology::Species* terrain_species);
+
+            glm::mat4& get_projection_matrix();
+            glm::mat4& get_view_matrix();
+
+            int32_t get_number_of_worlds() const;
+
             ontology::World* get_active_world() const;
 
+            ontology::Universe* get_universe() final override;
             ontology::Entity* get_parent() const override;
             int32_t get_number_of_children() const override;
             int32_t get_number_of_descendants() const override;
@@ -327,9 +346,12 @@ namespace ontology
             // this method returns a pointer to `config::Setting` corresponding to the given `key`.
             config::Setting* get(std::string key) const;
 
+            bool is_entity(const std::string& name) const;
             ontology::Entity* get_entity(const std::string& name) const;
-
             std::string get_entity_names() const;
+
+            void add_entity(const std::string& name, ontology::Entity* const entity);
+            void erase_entity(const std::string& name);
 
             ontology::EntityFactory* get_entity_factory() const;
 
@@ -397,33 +419,7 @@ namespace ontology
             bool can_toggle_help_mode;
             bool can_display_help_screen;
 
-            friend class Entity;
-            friend class World;
-            friend class Scene;
-            friend class Shader;
-            friend class Material;
-            friend class Species;
-            friend class Object;
-            friend class VectorFont;
-            friend class Glyph;
-            friend class Text3D;
-            friend class Font2D;
-            friend class config::Setting;
-            friend class config::SettingMaster;
-            friend class console::Console;
-
-            template<class T1>
-                friend void set_name(const std::string name, T1 entity);
-            template<class T1>
-                friend void set_name(const std::string& name, T1 entity);
-
         private:
-            // this method sets a `World` pointer.
-            void set_world_pointer(int32_t childID, ontology::World* child_pointer);
-
-            // this method sets a terrain `Species` pointer.
-            void set_terrain_species(ontology::Species* terrain_species);
-
             bool compute_matrices_from_inputs();
 
             void* terrain_species;               // pointer to terrain `Species` (used in collision detection).

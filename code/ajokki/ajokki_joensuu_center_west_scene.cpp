@@ -120,6 +120,63 @@ namespace ajokki
         joensuu_center_west_struct.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
         entity_factory->create_Object(joensuu_center_west_struct);
 
+        // Create the material, store it in `orange_fur_material_joensuu`.
+        MaterialStruct orange_fur_material_joensuu_struct;
+        orange_fur_material_joensuu_struct.parent = joensuu_center_west_shader;
+        orange_fur_material_joensuu_struct.texture_file_format = "bmp";
+        orange_fur_material_joensuu_struct.texture_filename = "orange_fur_texture.bmp";
+
+        std::cout << "Creating ontology::Entity* orange_fur_material_joensuu_entity ...\n";
+        ontology::Entity* orange_fur_material_joensuu_entity = entity_factory->create_Material(orange_fur_material_joensuu_struct);
+        std::cout << "Creating ontology::Material* orange_fur_material_joensuu ...\n";
+        ontology::Material* orange_fur_material_joensuu = dynamic_cast<ontology::Material*>(orange_fur_material_joensuu_entity);
+
+        if (orange_fur_material_joensuu == nullptr)
+        {
+            std::cerr << "Failed to create pink geometric tiles Material.\n";
+            return nullptr;
+        }
+
+        SpeciesStruct horse_species_struct;
+        horse_species_struct.scene = joensuu_center_west_scene;
+        horse_species_struct.shader = joensuu_center_west_shader;
+        horse_species_struct.parent = orange_fur_material_joensuu;
+        horse_species_struct.model_file_format = "fbx";
+        horse_species_struct.model_filename = "horse.fbx";
+        horse_species_struct.light_position = glm::vec3(0, 100000, 100000);
+
+        std::cout << "Creating ontology::Entity* horse_species_entity ...\n";
+        ontology::Entity* horse_species_entity = entity_factory->create_Species(horse_species_struct);
+
+        std::cout << "Creating ontology::Species* horse_species ...\n";
+        ontology::Species* horse_species = dynamic_cast<ontology::Species*>(horse_species_entity);
+
+        if (horse_species == nullptr)
+        {
+            std::cerr << "Failed to create horse Species.\n";
+            return nullptr;
+        }
+
+        horse_species->set_name("horse_species");
+
+        ObjectStruct horse_object_struct1;
+        horse_object_struct1.species_parent = horse_species;
+        horse_object_struct1.original_scale_vector = glm::vec3(5.0f, 5.0f, 5.0f);
+        horse_object_struct1.cartesian_coordinates = std::make_shared<glm::vec3>(2150.00f, 200.00f, 1990.00f);
+        horse_object_struct1.rotate_angle = 0.03f;
+        horse_object_struct1.rotate_vector = glm::vec3(1.0f, 1.0f, 1.0f);
+        horse_object_struct1.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
+        ontology::Entity* horse1_entity = entity_factory->create_Object(horse_object_struct1);
+        ontology::Object* horse1 = dynamic_cast<ontology::Object*>(horse1_entity);
+
+        if (horse1 == nullptr)
+        {
+            std::cerr << "Failed to create horse1 Object.\n";
+            return nullptr;
+        }
+
+        horse1->set_name("horse1");
+
         return joensuu_center_west_scene_entity;
         // Joensuu `Scene` ends here.
     }

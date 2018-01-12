@@ -114,12 +114,12 @@ namespace ontology
             *this->cartesian_coordinates = glm::vec3(this->model_matrix[0][0], this->model_matrix[1][1], this->model_matrix[2][2]);
         }
 
-        this->MVP_matrix = this->universe->ProjectionMatrix * this->universe->ViewMatrix * this->model_matrix;
+        this->MVP_matrix = this->universe->get_projection_matrix() * this->universe->get_view_matrix() * this->model_matrix;
 
         // Send our transformation to the currently bound shader,
         // in the "MVP" uniform.
-        glUniformMatrix4fv(shader_pointer->MatrixID, 1, GL_FALSE, &this->MVP_matrix[0][0]);
-        glUniformMatrix4fv(shader_pointer->ModelMatrixID, 1, GL_FALSE, &this->model_matrix[0][0]);
+        glUniformMatrix4fv(shader_pointer->get_matrixID(), 1, GL_FALSE, &this->MVP_matrix[0][0]);
+        glUniformMatrix4fv(shader_pointer->get_model_matrixID(), 1, GL_FALSE, &this->model_matrix[0][0]);
 
         GLuint vertexbuffer;
         GLuint vertexPosition_modelspaceID;

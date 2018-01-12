@@ -1,13 +1,26 @@
 #include "world.hpp"
 #include "universe.hpp"
 #include "scene.hpp"
+#include "code/ylikuutio/config/setting_master.hpp"
 
 namespace ontology
 {
+    class SettingMaster;
+
+    void World::bind(ontology::Scene* scene)
+    {
+        // get `childID` from `World` and set pointer to `scene`.
+        hierarchy::bind_child_to_parent<ontology::Scene*>(
+                scene,
+                this->scene_pointer_vector,
+                this->free_sceneID_queue,
+                &this->number_of_scenes);
+    }
+
     void World::bind_to_parent()
     {
         // get `childID` from `Universe` and set pointer to this `World`.
-        hierarchy::bind_child_to_parent<ontology::World*>(this, this->parent->world_pointer_vector, this->parent->free_worldID_queue, &this->parent->number_of_worlds);
+        this->parent->bind(this);
     }
 
     World::~World()
@@ -42,8 +55,8 @@ namespace ontology
 
         if (this->active_scene != nullptr)
         {
-            this->parent->turbo_factor = this->active_scene->turbo_factor;
-            this->parent->twin_turbo_factor = this->active_scene->twin_turbo_factor;
+            this->parent->turbo_factor = this->active_scene->get_turbo_factor();
+            this->parent->twin_turbo_factor = this->active_scene->get_twin_turbo_factor();
         }
     }
 

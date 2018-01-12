@@ -29,12 +29,31 @@
 
 namespace ontology
 {
-    class Object;
+    void Scene::bind(ontology::Shader* shader)
+    {
+        // get `childID` from `Scene` and set pointer to `shader`.
+        hierarchy::bind_child_to_parent<ontology::Shader*>(
+                shader,
+                this->shader_pointer_vector,
+                this->free_shaderID_queue,
+                &this->number_of_shaders);
+    }
+
+    void Scene::unbind(int32_t childID)
+    {
+        ontology::Shader* dummy_child_pointer = nullptr;
+        hierarchy::set_child_pointer(
+                childID,
+                dummy_child_pointer,
+                this->shader_pointer_vector,
+                this->free_shaderID_queue,
+                &this->number_of_shaders);
+    }
 
     void Scene::bind_to_parent()
     {
-        // get `childID` from `Universe` and set pointer to this `Scene`.
-        hierarchy::bind_child_to_parent<ontology::Scene*>(this, this->parent->scene_pointer_vector, this->parent->free_sceneID_queue, &this->parent->number_of_scenes);
+        // get `childID` from `World` and set pointer to this `Scene`.
+        this->parent->bind(this);
     }
 
     Scene::~Scene()
@@ -97,13 +116,29 @@ namespace ontology
         ontology::set_name(name, this);
     }
 
+    float Scene::get_turbo_factor()
+    {
+        if (this->parent == this->universe->get_active_world() && this == this->parent->get_active_scene())
+        {
+            return this->universe->turbo_factor;
+        }
+    }
+
     void Scene::set_turbo_factor(float turbo_factor)
     {
         this->turbo_factor = turbo_factor;
 
-        if (this->parent == this->universe->active_world && this == this->parent->active_scene)
+        if (this->parent == this->universe->get_active_world() && this == this->parent->get_active_scene())
         {
             this->universe->turbo_factor = this->turbo_factor;
+        }
+    }
+
+    float Scene::get_twin_turbo_factor()
+    {
+        if (this->parent == this->universe->get_active_world() && this == this->parent->get_active_scene())
+        {
+            return this->universe->twin_turbo_factor;
         }
     }
 
@@ -111,10 +146,15 @@ namespace ontology
     {
         this->twin_turbo_factor = twin_turbo_factor;
 
-        if (this->parent == this->universe->active_world && this == this->parent->active_scene)
+        if (this->parent == this->universe->get_active_world() && this == this->parent->get_active_scene())
         {
             this->universe->twin_turbo_factor = this->twin_turbo_factor;
         }
+    }
+
+    float Scene::get_water_level()
+    {
+        return this->water_level;
     }
 
     void Scene::set_shader_pointer(const int32_t childID, ontology::Shader* const child_pointer)

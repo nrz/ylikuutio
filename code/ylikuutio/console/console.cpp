@@ -77,7 +77,7 @@ namespace console
         this->universe = console_struct.universe;
         std::cout << "4th pointer defined in Console::Console\n";
 
-        this->universe->console_pointer = this;
+        this->universe->set_console(this);
         std::cout << "5th pointer defined in Console::Console\n";
 
         // This is a pointer to `font2D::Font2D` instance that is used for printing.
@@ -86,14 +86,14 @@ namespace console
 
         std::cout << "Initializing config::SettingMaster setting_master\n";
 
-        config::SettingMaster* setting_master = this->universe->setting_master;
+        config::SettingMaster* setting_master = this->universe->get_setting_master();
 
         std::cout << "Initializing console_top_y\n";
 
         if (setting_master != nullptr && setting_master->is_setting("console_top_y"))
         {
             // OK, there is a setting for `console_top_y`.
-            std::shared_ptr<datatypes::AnyValue> console_top_y_any_value = std::make_shared<datatypes::AnyValue>(*universe->setting_master->setting_pointer_map["console_top_y"]->setting_value);
+            std::shared_ptr<datatypes::AnyValue> console_top_y_any_value = std::make_shared<datatypes::AnyValue>(*universe->get_setting_master()->setting_pointer_map["console_top_y"]->setting_value);
 
             if (console_top_y_any_value->type == datatypes::UINT32_T)
             {
@@ -116,7 +116,7 @@ namespace console
         if (setting_master != nullptr && setting_master->is_setting("console_bottom_y"))
         {
             // OK, there is a setting for `console_bottom_y`.
-            std::shared_ptr<datatypes::AnyValue> console_bottom_y_any_value = std::make_shared<datatypes::AnyValue>(*universe->setting_master->setting_pointer_map["console_bottom_y"]->setting_value);
+            std::shared_ptr<datatypes::AnyValue> console_bottom_y_any_value = std::make_shared<datatypes::AnyValue>(*universe->get_setting_master()->setting_pointer_map["console_bottom_y"]->setting_value);
 
             if (console_bottom_y_any_value->type == datatypes::UINT32_T)
             {
@@ -139,7 +139,7 @@ namespace console
         if (setting_master != nullptr && setting_master->is_setting("console_left_x"))
         {
             // OK, there is a setting for `console_left_x`.
-            std::shared_ptr<datatypes::AnyValue> console_left_x_any_value = std::make_shared<datatypes::AnyValue>(*universe->setting_master->setting_pointer_map["console_left_x"]->setting_value);
+            std::shared_ptr<datatypes::AnyValue> console_left_x_any_value = std::make_shared<datatypes::AnyValue>(*universe->get_setting_master()->setting_pointer_map["console_left_x"]->setting_value);
 
             if (console_left_x_any_value->type == datatypes::UINT32_T)
             {
@@ -162,7 +162,7 @@ namespace console
         if (setting_master != nullptr && setting_master->is_setting("console_right_x"))
         {
             // OK, there is a setting for `console_right_x`.
-            std::shared_ptr<datatypes::AnyValue> console_right_x_any_value = std::make_shared<datatypes::AnyValue>(*universe->setting_master->setting_pointer_map["console_right_x"]->setting_value);
+            std::shared_ptr<datatypes::AnyValue> console_right_x_any_value = std::make_shared<datatypes::AnyValue>(*universe->get_setting_master()->setting_pointer_map["console_right_x"]->setting_value);
 
             if (console_right_x_any_value->type == datatypes::UINT32_T)
             {

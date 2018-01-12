@@ -10,7 +10,7 @@ project(ylikuutio)
 # comment the following line to disable scripting with TinyScheme.
 set(ENABLE_SCRIPTING_WITH_TINYSCHEME true)
 
-# comment th following line to use `libsfml-dev` shipped with Linux.
+# comment the following line to use `libsfml-dev` shipped with Linux.
 set(COMPILE_SFML_FROM_SOURCE true)
 
 # comment the following line to disable unit tests with Google Test.
@@ -40,7 +40,7 @@ endif()
 # Compile external dependencies
 add_subdirectory (external)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DSFML_STATIC -std=c++14")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DSFML_STATIC -std=c++14 -O3")
 
 # set(CMAKE_COLOR_MAKEFILE ON)
 # set(CMAKE_VERBOSE_MAKEFILE ON)
@@ -256,6 +256,7 @@ configure_file(external/tinyscheme-1.41/init.scm init.scm COPYONLY)
 # 3D models.
 configure_file(res/objects/custom/suzanne.obj suzanne.obj COPYONLY)
 configure_file(res/objects/snow_cottage_triangulated.obj snow_cottage_triangulated.obj COPYONLY)
+configure_file(res/objects/www.blendswap.com/76528_horse/horse.fbx horse.fbx COPYONLY)
 configure_file(res/objects/www.blendswap.com/86110_rigged_and_animated_cat/cat.fbx cat.fbx COPYONLY)
 
 # Textures.

@@ -762,7 +762,7 @@ namespace console
             return;
         }
 
-        console::Console* console = universe->console_pointer;
+        console::Console* console = universe->get_console();
 
         if (console == nullptr)
         {

@@ -28,7 +28,7 @@ namespace ontology
     void Material::bind_to_parent()
     {
         // get `childID` from `Shader` and set pointer to this `Material`.
-        hierarchy::bind_child_to_parent<ontology::Material*>(this, this->parent->material_pointer_vector, this->parent->free_materialID_queue, &this->parent->number_of_materials);
+        this->parent->bind_material(this);
     }
 
     Material::~Material()
@@ -104,8 +104,12 @@ namespace ontology
 
     void Material::bind_to_new_parent(ontology::Shader* const new_shader_pointer)
     {
-        // this method sets pointer to this `Material` to nullptr, sets `parent` according to the input, and requests a new `childID` from the new `Shader`.
-        hierarchy::bind_child_to_new_parent<ontology::Material*, ontology::Shader*>(this, new_shader_pointer, this->parent->material_pointer_vector, this->parent->free_materialID_queue, &this->parent->number_of_materials);
+        // unbind from the old parent `Shader`.
+        this->parent->unbind_material(this->childID);
+
+        // get `childID` from `Shader` and set pointer to this `Material`.
+        this->parent = new_shader_pointer;
+        this->parent->bind_material(this);
     }
 
     void Material::set_name(const std::string& name)

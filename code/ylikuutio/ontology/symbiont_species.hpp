@@ -57,13 +57,13 @@ namespace ontology
 
                 // Get a handle for our buffers.
                 ontology::Shader* shader = symbiont_species_struct.shader;
-                this->vertexPosition_modelspaceID = glGetAttribLocation(shader->programID, "vertexPosition_modelspace");
-                this->vertexUVID = glGetAttribLocation(shader->programID, "vertexUV");
-                this->vertexNormal_modelspaceID = glGetAttribLocation(shader->programID, "vertexNormal_modelspace");
+                this->vertexPosition_modelspaceID = glGetAttribLocation(shader->get_programID(), "vertexPosition_modelspace");
+                this->vertexUVID = glGetAttribLocation(shader->get_programID(), "vertexUV");
+                this->vertexNormal_modelspaceID = glGetAttribLocation(shader->get_programID(), "vertexNormal_modelspace");
 
                 // Get a handle for our "LightPosition" uniform.
-                glUseProgram(shader->programID);
-                this->lightID = glGetUniformLocation(shader->programID, "LightPosition_worldspace");
+                glUseProgram(shader->get_programID());
+                this->lightID = glGetUniformLocation(shader->get_programID(), "LightPosition_worldspace");
 
                 SpeciesLoaderStruct species_loader_struct;
                 species_loader_struct.model_filename = this->model_filename;
