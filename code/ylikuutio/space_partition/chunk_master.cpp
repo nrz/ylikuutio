@@ -9,11 +9,8 @@ namespace space_partition
 {
     void ChunkMaster::bind_to_parent()
     {
-        hierarchy::bind_child_to_parent<space_partition::ChunkMaster*>(
-                this,
-                this->parent->chunk_master_pointer_vector,
-                this->parent->free_chunk_masterID_queue,
-                &this->parent->number_of_chunk_masters);
+        // get `childID` from `Material` and set pointer to this `ChunkMaster`.
+        this->parent->bind_chunk_master(this);
     }
 
     ChunkMaster::~ChunkMaster()

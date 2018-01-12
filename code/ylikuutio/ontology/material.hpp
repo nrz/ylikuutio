@@ -93,35 +93,20 @@ namespace ontology
             // destructor.
             virtual ~Material();
 
+            void bind_species(ontology::Species* species);
+            void bind_vector_font(ontology::VectorFont* vector_font);
+            void bind_chunk_master(space_partition::ChunkMaster* chunk_master);
+
+            void unbind_species(int32_t childID);
+            void unbind_vector_font(int32_t childID);
+            void unbind_chunk_master(int32_t childID);
+
             // this method sets pointer to this `Material` to nullptr, sets `parent` according to the input, and requests a new `childID` from the new `Shader`.
             void bind_to_new_parent(ontology::Shader* const new_shader_pointer);
 
-            void set_name(const std::string& name);
-
-            friend class Shader;
-            friend class VectorFont;
-            friend class Glyph;
-            friend class Species;
-            friend class Object;
-            friend class space_partition::ChunkMaster;
-            template<class T1>
-                friend void render_children(const std::vector<T1>& child_pointer_vector);
-            template<class T1>
-                friend void set_name(std::string name, T1 entity);
-            template<class T1>
-                friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, int32_t* number_of_children);
-            template<class T1, class T2>
-                friend void hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent, std::vector<T1>& old_child_pointer_vector, std::queue<int32_t>& old_free_childID_queue, int32_t* old_number_of_children);
-
-        private:
-            void bind_to_parent();
-
-            // this method renders all `Species` using this `Material`.
-            void render();
-
             ontology::Entity* get_parent() const override;
-            int32_t get_number_of_children() const override;
-            int32_t get_number_of_descendants() const override;
+
+            void set_name(const std::string& name);
 
             // this method sets `Species` pointer.
             void set_species_pointer(const int32_t childID, ontology::Species* const child_pointer);
@@ -134,6 +119,22 @@ namespace ontology
 
             // this method sets a terrain `Species` pointer.
             void set_terrain_species(ontology::Species* const terrain_species);
+
+            template<class T1>
+                friend void render_children(const std::vector<T1>& child_pointer_vector);
+            template<class T1>
+                friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, int32_t* number_of_children);
+            template<class T1, class T2>
+                friend void hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent, std::vector<T1>& old_child_pointer_vector, std::queue<int32_t>& old_free_childID_queue, int32_t* old_number_of_children);
+
+        private:
+            void bind_to_parent();
+
+            // this method renders all `Species` using this `Material`.
+            void render();
+
+            int32_t get_number_of_children() const override;
+            int32_t get_number_of_descendants() const override;
 
             ontology::Shader* parent;      // pointer to `Shader`.
 

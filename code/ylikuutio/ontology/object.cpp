@@ -70,11 +70,11 @@ namespace ontology
 
             if (this->is_character)
             {
-                this->render_this_object(this->glyph_parent->parent->parent->parent);
+                this->render_this_object(static_cast<ontology::Shader*>(this->glyph_parent->parent->parent->get_parent()));
             }
             else
             {
-                this->render_this_object(this->species_parent->parent->parent);
+                this->render_this_object(static_cast<ontology::Shader*>(this->species_parent->parent->get_parent()));
             }
 
             this->postrender();

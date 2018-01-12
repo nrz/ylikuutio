@@ -28,7 +28,7 @@ namespace ontology
     void VectorFont::bind_to_parent()
     {
         // get `childID` from `Material` and set pointer to this `VectorFont`.
-        hierarchy::bind_child_to_parent<ontology::VectorFont*>(this, this->parent->vector_font_pointer_vector, this->parent->free_vector_fontID_queue, &this->parent->number_of_vector_fonts);
+        this->parent->bind_vector_font(this);
     }
 
     // this method returns a pointer to `Glyph` that matches the given `unicode_value`,
@@ -99,7 +99,12 @@ namespace ontology
 
     void VectorFont::bind_to_new_parent(ontology::Material* const new_material_pointer)
     {
-        hierarchy::bind_child_to_new_parent<ontology::VectorFont*, ontology::Material*>(this, new_material_pointer, this->parent->vector_font_pointer_vector, this->parent->free_vector_fontID_queue, &this->parent->number_of_vector_fonts);
+        // unbind from the old parent `Material`.
+        this->parent->unbind_vector_font(this->childID);
+
+        // get `childID` from `Material` and set pointer to this `VectorFont`.
+        this->parent = new_material_pointer;
+        this->parent->bind_vector_font(this);
     }
 
     void VectorFont::set_name(const std::string& name)

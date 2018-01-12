@@ -54,6 +54,69 @@ namespace ontology
         this->parent->set_material_pointer(this->childID, nullptr);
     }
 
+    void Material::bind_species(ontology::Species* species)
+    {
+        // get `childID` from `Material` and set pointer to `species`.
+        hierarchy::bind_child_to_parent<ontology::Species*>(
+                species,
+                this->species_pointer_vector,
+                this->free_speciesID_queue,
+                &this->number_of_species);
+    }
+
+    void Material::bind_vector_font(ontology::VectorFont* vector_font)
+    {
+        // get `childID` from `Material` and set pointer to `vector_font`.
+        hierarchy::bind_child_to_parent<ontology::VectorFont*>(
+                vector_font,
+                this->vector_font_pointer_vector,
+                this->free_vector_fontID_queue,
+                &this->number_of_vector_fonts);
+    }
+
+    void Material::bind_chunk_master(space_partition::ChunkMaster* chunk_master)
+    {
+        // get `childID` from `Material` and set pointer to `chunk_master`.
+        hierarchy::bind_child_to_parent<space_partition::ChunkMaster*>(
+                chunk_master,
+                this->chunk_master_pointer_vector,
+                this->free_chunk_masterID_queue,
+                &this->number_of_chunk_masters);
+    }
+
+    void Material::unbind_species(int32_t childID)
+    {
+        ontology::Species* dummy_child_pointer = nullptr;
+        hierarchy::set_child_pointer(
+                childID,
+                dummy_child_pointer,
+                this->species_pointer_vector,
+                this->free_speciesID_queue,
+                &this->number_of_species);
+    }
+
+    void Material::unbind_vector_font(int32_t childID)
+    {
+        ontology::VectorFont* dummy_child_pointer = nullptr;
+        hierarchy::set_child_pointer(
+                childID,
+                dummy_child_pointer,
+                this->vector_font_pointer_vector,
+                this->free_vector_fontID_queue,
+                &this->number_of_vector_fonts);
+    }
+
+    void Material::unbind_chunk_master(int32_t childID)
+    {
+        space_partition::ChunkMaster* dummy_child_pointer = nullptr;
+        hierarchy::set_child_pointer(
+                childID,
+                dummy_child_pointer,
+                this->chunk_master_pointer_vector,
+                this->free_chunk_masterID_queue,
+                &this->number_of_chunk_masters);
+    }
+
     void Material::render()
     {
         this->prerender();
