@@ -36,29 +36,29 @@ namespace ontology
             return NAN;
         }
 
-        if ((position->x < 0.0f) || (position->x > terrain_species->image_width))
+        if ((position->x < 0.0f) || (position->x > terrain_species->get_image_width()))
         {
             // if the x coordinate is out of range, no collision detection to the ground will be performed.
             return NAN;
         }
 
-        if ((position->z < 0.0f) || (position->z > terrain_species->image_height))
+        if ((position->z < 0.0f) || (position->z > terrain_species->get_image_height()))
         {
             // if the z coordinate is out of range, no collision detection to the ground will be performed.
             return NAN;
         }
 
         // compute the indices of closest vertices.
-        GLuint southwest_i = (GLuint) floor(position->z) * terrain_species->image_width + floor(position->x);
-        GLuint southeast_i = (GLuint) floor(position->z) * terrain_species->image_width + ceil(position->x);
-        GLuint northwest_i = (GLuint) ceil(position->z) * terrain_species->image_width + floor(position->x);
-        GLuint northeast_i = (GLuint) ceil(position->z) * terrain_species->image_width + ceil(position->x);
+        GLuint southwest_i = (GLuint) floor(position->z) * terrain_species->get_image_width() + floor(position->x);
+        GLuint southeast_i = (GLuint) floor(position->z) * terrain_species->get_image_width() + ceil(position->x);
+        GLuint northwest_i = (GLuint) ceil(position->z) * terrain_species->get_image_width() + floor(position->x);
+        GLuint northeast_i = (GLuint) ceil(position->z) * terrain_species->get_image_width() + ceil(position->x);
 
         // read closest the heights of closest integer coordinates to be used in bilinear interpolation.
-        GLfloat southwest_height = terrain_species->vertices[southwest_i].y;
-        GLfloat southeast_height = terrain_species->vertices[southeast_i].y;
-        GLfloat northwest_height = terrain_species->vertices[northwest_i].y;
-        GLfloat northeast_height = terrain_species->vertices[northeast_i].y;
+        GLfloat southwest_height = terrain_species->get_vertices()[southwest_i].y;
+        GLfloat southeast_height = terrain_species->get_vertices()[southeast_i].y;
+        GLfloat northwest_height = terrain_species->get_vertices()[northwest_i].y;
+        GLfloat northeast_height = terrain_species->get_vertices()[northeast_i].y;
 
         // these are not actually means but interpolations.
         // the result of the interpolation is mean if and only if (ceil(x) - x == 0.5) & (x - floor(x) == 0.5) , likewise for the z coordinate.

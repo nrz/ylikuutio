@@ -140,6 +140,9 @@ namespace ontology
 
             void set_name(const std::string& name);
 
+            int32_t get_image_width();
+            int32_t get_image_height();
+
             bool is_terrain;                           // worlds currently do not rotate nor translate.
             float planet_radius;                      // radius of sea level in kilometers. used only for worlds.
             float divisor;                           // value by which SRTM values are divided to convert them to kilometers.
@@ -147,7 +150,6 @@ namespace ontology
             std::string color_channel;               // color channel in use: `"red"`, `"green"`, `"blue"`, `"mean"` or `"all"`.
             glm::vec3 light_position;                // light position.
 
-            friend class Object;
             template<class T1>
                 friend void render_children(const std::vector<T1>& child_pointer_vector);
             template<class T1>
@@ -156,9 +158,6 @@ namespace ontology
                 friend void hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent, std::vector<T1>& old_child_pointer_vector, std::queue<int32_t>& old_free_childID_queue, int32_t* old_number_of_children);
             template<class T1>
                 friend void render_species_or_glyph(T1 species_or_glyph_pointer);
-            template<class T1>
-                friend void set_name(std::string name, T1 entity);
-            friend GLfloat get_ground_level(ontology::Species* terrain_species, glm::vec3* position);
 
         private:
             void bind_to_parent();

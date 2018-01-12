@@ -1,7 +1,14 @@
 #include "model.hpp"
 
+// Include GLM
+#ifndef __GLM_GLM_HPP_INCLUDED
+#define __GLM_GLM_HPP_INCLUDED
+#include <glm/glm.hpp> // glm
+#endif
+
 // Include standard headers
 #include <stdint.h> // uint32_t etc.
+#include <vector>   // std::vector
 
 namespace ontology
 {
@@ -20,5 +27,10 @@ namespace ontology
     int32_t Model::get_number_of_descendants() const
     {
         return -1;
+    }
+
+    std::vector<glm::vec3> Model::get_vertices() const
+    {
+        return this->vertices;
     }
 }

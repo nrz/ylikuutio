@@ -74,7 +74,7 @@ namespace ontology
             }
             else
             {
-                this->render_this_object(static_cast<ontology::Shader*>(this->species_parent->parent->get_parent()));
+                this->render_this_object(static_cast<ontology::Shader*>(this->species_parent->get_parent()->get_parent()));
             }
 
             this->postrender();

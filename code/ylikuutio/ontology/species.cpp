@@ -71,6 +71,16 @@ namespace ontology
         ontology::set_name(name, this);
     }
 
+    int32_t Species::get_image_width()
+    {
+        return this->image_width;
+    }
+
+    int32_t Species::get_image_height()
+    {
+        return this->image_height;
+    }
+
     void Species::bind_to_new_parent(ontology::Material* const new_material_pointer)
     {
         // unbind from the old parent `Material`.
