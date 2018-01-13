@@ -1,4 +1,5 @@
 #include "glyph.hpp"
+#include "vector_font.hpp"
 #include "species_or_glyph.hpp"
 #include "object.hpp"
 #include "glyph_struct.hpp"
@@ -14,7 +15,7 @@ namespace ontology
     void Glyph::bind_to_parent()
     {
         // get `childID` from `VectorFont` and set pointer to this `Glyph`.
-        hierarchy::bind_child_to_parent<ontology::Glyph*>(this, this->parent->glyph_pointer_vector, this->parent->free_glyphID_queue, &this->parent->number_of_glyphs);
+        this->parent->bind_glyph(this);
     }
 
     Glyph::~Glyph()
@@ -48,6 +49,11 @@ namespace ontology
     void Glyph::set_object_pointer(const int32_t childID, ontology::Object* const child_pointer)
     {
         hierarchy::set_child_pointer(childID, child_pointer, this->object_pointer_vector, this->free_objectID_queue, &this->number_of_objects);
+    }
+
+    const char* Glyph::get_unicode_char_pointer()
+    {
+        return this->unicode_char_pointer;
     }
 
     void Glyph::set_name(const std::string& name)

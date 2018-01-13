@@ -86,7 +86,7 @@ namespace ontology
                         glyph_struct.glyph_name_pointer = this->glyph_names.at(glyph_i).c_str();
                         glyph_struct.unicode_char_pointer = unicode_char_pointer;
                         glyph_struct.universe = universe;
-                        glyph_struct.shader_pointer = this->parent->parent;
+                        glyph_struct.shader_pointer = static_cast<ontology::Shader*>(this->parent->get_parent());
                         glyph_struct.parent = this;
 
                         std::string glyph_name_string = glyph_struct.glyph_name_pointer;
@@ -109,6 +109,9 @@ namespace ontology
             // Destroying a `VectorFont` destroys also all `Text3D` entities, and after that all `Glyph` entities.
             virtual ~VectorFont();
 
+            void bind_glyph(ontology::Glyph* glyph);
+            void bind_text3D(ontology::Text3D* text3D);
+
             // this method sets `Glyph` pointer.
             void set_glyph_pointer(const int32_t childID, ontology::Glyph* const child_pointer);
 
@@ -128,12 +131,8 @@ namespace ontology
 
             ontology::Material* parent; // pointer to `Material`.
 
-            friend class Glyph;
-            friend class Text3D;
             template<class T1>
                 friend void render_children(const std::vector<T1>& child_pointer_vector);
-            template<class T1>
-                friend void set_name(std::string name, T1 entity);
             template<class T1>
                 friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, int32_t* number_of_children);
             template<class T1, class T2>

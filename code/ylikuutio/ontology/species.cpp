@@ -24,7 +24,7 @@ namespace ontology
     void Species::bind_to_parent()
     {
         // get `childID` from `Material` and set pointer to this `Species`.
-        hierarchy::bind_child_to_parent<ontology::Species*>(this, this->parent->species_pointer_vector, this->parent->free_speciesID_queue, &this->parent->number_of_species);
+        this->parent->bind_species(this);
     }
 
     Species::~Species()
@@ -71,9 +71,23 @@ namespace ontology
         ontology::set_name(name, this);
     }
 
+    int32_t Species::get_image_width()
+    {
+        return this->image_width;
+    }
+
+    int32_t Species::get_image_height()
+    {
+        return this->image_height;
+    }
+
     void Species::bind_to_new_parent(ontology::Material* const new_material_pointer)
     {
-        // this method sets pointer to this `Species` to nullptr, sets `parent` according to the input, and requests a new `childID` from the new `Material`.
-        hierarchy::bind_child_to_new_parent<ontology::Species*, ontology::Material*>(this, new_material_pointer, this->parent->species_pointer_vector, this->parent->free_speciesID_queue, &this->parent->number_of_species);
+        // unbind from the old parent `Material`.
+        this->parent->unbind_species(this->childID);
+
+        // get `childID` from `Material` and set pointer to this `Species`.
+        this->parent = new_material_pointer;
+        this->parent->bind_species(this);
     }
 }

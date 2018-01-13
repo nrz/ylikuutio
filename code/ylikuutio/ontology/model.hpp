@@ -68,6 +68,8 @@ namespace ontology
             int32_t get_number_of_children() const override;
             int32_t get_number_of_descendants() const override;
 
+            std::vector<glm::vec3> get_vertices() const;
+
             friend class Glyph;
             friend class Species;
             friend class SymbiontSpecies;

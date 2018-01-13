@@ -49,7 +49,7 @@ namespace ontology
         // set pointer to this object to nullptr.
         if (this->is_character)
         {
-            std::string unicode_string = this->glyph_parent->unicode_char_pointer;
+            std::string unicode_string = this->glyph_parent->get_unicode_char_pointer();
             std::cout << "Object with childID " << std::dec << this->childID << " (Unicode: \"" << unicode_string << "\") will be destroyed.\n";
             this->text3D_parent->set_object_pointer(this->childID, nullptr);
         }
@@ -70,11 +70,11 @@ namespace ontology
 
             if (this->is_character)
             {
-                this->render_this_object(this->glyph_parent->parent->parent->parent);
+                this->render_this_object(static_cast<ontology::Shader*>(this->glyph_parent->get_parent()->get_parent()->get_parent()));
             }
             else
             {
-                this->render_this_object(this->species_parent->parent->parent);
+                this->render_this_object(static_cast<ontology::Shader*>(this->species_parent->get_parent()->get_parent()));
             }
 
             this->postrender();

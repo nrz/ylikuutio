@@ -1,4 +1,5 @@
 #include "text3D.hpp"
+#include "vector_font.hpp"
 #include "object.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
@@ -12,7 +13,7 @@ namespace ontology
     void Text3D::bind_to_parent()
     {
         // get `childID` from `VectorFont` and set pointer to this `Text3D`.
-        hierarchy::bind_child_to_parent<ontology::Text3D*>(this, this->parent->text3D_pointer_vector, this->parent->free_text3D_ID_queue, &this->parent->number_of_text3Ds);
+        this->parent->bind_text3D(this);
     }
 
     Text3D::~Text3D()
