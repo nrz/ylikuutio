@@ -51,6 +51,11 @@ namespace ontology
         hierarchy::set_child_pointer(childID, child_pointer, this->object_pointer_vector, this->free_objectID_queue, &this->number_of_objects);
     }
 
+    const char* Glyph::get_unicode_char_pointer()
+    {
+        return this->unicode_char_pointer;
+    }
+
     void Glyph::set_name(const std::string& name)
     {
         ontology::set_name(name, this);
