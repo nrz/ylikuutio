@@ -1,8 +1,10 @@
 #include "glyph_object_creation.hpp"
+#include "vector_font.hpp"
 #include "text3D.hpp"
 #include "object.hpp"
 
 // Include standard headers
+#include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 
 namespace ontology

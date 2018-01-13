@@ -3,6 +3,10 @@
 #include "scene.hpp"
 #include "code/ylikuutio/config/setting_master.hpp"
 
+// Include standard headers
+#include <iostream> // std::cout, std::cin, std::cerr
+#include <stdint.h> // uint32_t etc.
+
 namespace ontology
 {
     class SettingMaster;
