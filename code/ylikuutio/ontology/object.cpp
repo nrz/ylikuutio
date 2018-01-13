@@ -22,14 +22,14 @@ namespace ontology
 
     void Object::bind_to_parent()
     {
-        // get `childID` from `Species` or `Glyph` and set pointer to this `Object`.
+        // get `childID` from `Species` or `Text3D` and set pointer to this `Object`.
 
         if (this->is_character)
         {
             ontology::Text3D* parent;
             parent = this->text3D_parent;
             // for ontological hierarchy (rendering hierarchy does not use `childID`).
-            // get `childID` from `Glyph` and set pointer to this `Object`.
+            // get `childID` from `Text3D` and set pointer to this `Object`.
             hierarchy::bind_child_to_parent<ontology::Object*>(this, parent->object_pointer_vector, parent->free_objectID_queue, &parent->number_of_objects);
         }
         else

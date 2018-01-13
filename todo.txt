@@ -30,6 +30,8 @@ Tasks which are necessary for the development of Ylikuutio:
 [ ] Add vertex selection and modification (with a mouse cursor), using ray casting.
 [ ] Add modifying of vertices.
 [ ] Add octree segmentation.
+[ ] Add A* route finding.
+[ ] Add Theta* route finding.
 [ ] Add support for vector fonts.
 [ ] Add TinyScheme support for programming of AI objects (robots).
 [ ] Enable changing of variable `up` in the console with `set up`.
