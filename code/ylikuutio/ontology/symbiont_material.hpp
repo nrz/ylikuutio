@@ -31,7 +31,6 @@
 namespace ontology
 {
     class SymbiontSpecies;
-    class Object;
 
     class SymbiontMaterial: public ontology::Entity
     {
@@ -66,16 +65,16 @@ namespace ontology
             // destructor.
             virtual ~SymbiontMaterial();
 
+            void bind(ontology::SymbiontSpecies* symbiont_species);
+
             // this method sets pointer to this `SymbiontMaterial` to nullptr, sets `parent` according to the input, and requests a new `childID` from the new `Symbiosis`.
             void set_name(const std::string& name);
 
-            friend class Symbiosis;
-            friend class SymbiontSpecies;
-            friend class Object;
+            // this method sets `SymbiontSpecies` pointer.
+            void set_symbiont_species_pointer(const int32_t childID, ontology::SymbiontSpecies* const child_pointer);
+
             template<class T1>
                 friend void render_children(const std::vector<T1>& child_pointer_vector);
-            template<class T1>
-                friend void set_name(std::string name, T1 entity);
             template<class T1>
                 friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, int32_t* number_of_children);
 
@@ -88,9 +87,6 @@ namespace ontology
             ontology::Entity* get_parent() const override;
             int32_t get_number_of_children() const override;
             int32_t get_number_of_descendants() const override;
-
-            // this method sets `SymbiontSpecies` pointer.
-            void set_symbiont_species_pointer(const int32_t childID, ontology::SymbiontSpecies* const child_pointer);
 
             ontology::Symbiosis* parent;           // pointer to `Symbiosis`.
 
