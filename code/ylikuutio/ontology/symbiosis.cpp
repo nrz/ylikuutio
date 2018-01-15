@@ -18,6 +18,16 @@ namespace ontology
         // destructor.
     }
 
+    void Symbiosis::bind(ontology::SymbiontMaterial* symbiont_material)
+    {
+        // get `childID` from `Symbiosis` and set pointer to `symbiont_material`.
+        hierarchy::bind_child_to_parent<ontology::SymbiontMaterial*>(
+                symbiont_material,
+                this->symbiont_material_pointer_vector,
+                this->free_symbiont_materialID_queue,
+                &this->number_of_symbiont_materials);
+    }
+
     void Symbiosis::render()
     {
         this->prerender();

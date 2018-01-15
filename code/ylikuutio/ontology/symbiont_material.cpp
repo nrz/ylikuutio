@@ -26,7 +26,7 @@ namespace ontology
     void SymbiontMaterial::bind_to_parent()
     {
         // get `childID` from `Symbiosis` and set pointer to this `SymbiontMaterial`.
-        hierarchy::bind_child_to_parent<ontology::SymbiontMaterial*>(this, this->parent->symbiont_material_pointer_vector, this->parent->free_symbiont_materialID_queue, &this->parent->number_of_symbiont_materials);
+        this->parent->bind(this);
     }
 
     SymbiontMaterial::~SymbiontMaterial()

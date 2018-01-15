@@ -26,7 +26,6 @@ namespace ontology
 {
     class Shader;
     class SymbiontMaterial;
-    class SymbiontSpecies;
 
     class Symbiosis: public ontology::Entity
     {
@@ -130,6 +129,8 @@ namespace ontology
             // destructor.
             virtual ~Symbiosis();
 
+            void bind(ontology::SymbiontMaterial* symbiont_material);
+
             // this method renders all `SymbiontMaterial`s belonging to this `Symbiosis`.
             void render();
 
@@ -144,8 +145,6 @@ namespace ontology
 
             void set_name(std::string name);
 
-            friend class SymbiontSpecies;
-            friend class SymbiontMaterial;
             template<class T1>
                 friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, int32_t* number_of_children);
             template<class T1, class T2>
