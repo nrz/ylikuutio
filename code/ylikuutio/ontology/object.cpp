@@ -34,11 +34,9 @@ namespace ontology
         }
         else
         {
-            ontology::Species* parent;
-            parent = this->species_parent;
             // for ontological hierarchy (rendering hierarchy does not use `childID`).
             // get `childID` from `Species` and set pointer to this `Object`.
-            hierarchy::bind_child_to_parent<ontology::Object*>(this, parent->object_pointer_vector, parent->free_objectID_queue, &parent->number_of_objects);
+            this->species_parent->bind(this);
         }
     }
 
@@ -121,39 +119,17 @@ namespace ontology
         glUniformMatrix4fv(shader_pointer->get_matrixID(), 1, GL_FALSE, &this->MVP_matrix[0][0]);
         glUniformMatrix4fv(shader_pointer->get_model_matrixID(), 1, GL_FALSE, &this->model_matrix[0][0]);
 
-        GLuint vertexbuffer;
-        GLuint vertexPosition_modelspaceID;
-        GLuint uvbuffer;
-        GLuint vertexUVID;
-        GLuint normalbuffer;
-        GLuint vertexNormal_modelspaceID;
-        GLuint elementbuffer;
-        GLuint indices_size;
-
-        if (this->is_character)
-        {
-            ontology::Glyph* parent_glyph = this->glyph_parent;
-            vertexbuffer = parent_glyph->vertexbuffer;
-            vertexPosition_modelspaceID = parent_glyph->vertexPosition_modelspaceID;
-            uvbuffer = parent_glyph->uvbuffer;
-            vertexUVID = parent_glyph->vertexUVID;
-            normalbuffer = parent_glyph->normalbuffer;
-            vertexNormal_modelspaceID = parent_glyph->vertexNormal_modelspaceID;
-            elementbuffer = parent_glyph->elementbuffer;
-            indices_size = parent_glyph->indices.size();
-        }
-        else
-        {
-            ontology::Species* parent_species = this->species_parent;
-            vertexbuffer = parent_species->vertexbuffer;
-            vertexPosition_modelspaceID = parent_species->vertexPosition_modelspaceID;
-            uvbuffer = parent_species->uvbuffer;
-            vertexUVID = parent_species->vertexUVID;
-            normalbuffer = parent_species->normalbuffer;
-            vertexNormal_modelspaceID = parent_species->vertexNormal_modelspaceID;
-            elementbuffer = parent_species->elementbuffer;
-            indices_size = parent_species->indices.size();
-        }
+        ontology::Model* glyph_parent_model = this->glyph_parent;
+        ontology::Model* species_parent_model = this->species_parent;
+        ontology::Model* parent_model = (this->is_character ? glyph_parent_model : species_parent_model);
+        GLuint vertexbuffer = parent_model->get_vertexbuffer();
+        GLuint vertexPosition_modelspaceID = parent_model->get_vertexPosition_modelspaceID();
+        GLuint uvbuffer = parent_model->get_uvbuffer();
+        GLuint vertexUVID = parent_model->get_vertexUVID();
+        GLuint normalbuffer = parent_model->get_normalbuffer();
+        GLuint vertexNormal_modelspaceID = parent_model->get_vertexNormal_modelspaceID();
+        GLuint elementbuffer = parent_model->get_elementbuffer();
+        GLuint indices_size = parent_model->get_indices().size();
 
         // 1st attribute buffer : vertices.
         glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
@@ -229,27 +205,21 @@ namespace ontology
 
         if (this->is_character)
         {
-            ontology::Glyph* parent;
-            parent = this->glyph_parent;
-            // set pointer to this child to nullptr in the old parent.
-            ontology::Object* dummy_child_pointer = nullptr;
-            hierarchy::set_child_pointer(this->childID, dummy_child_pointer, glyph_parent->object_pointer_vector, glyph_parent->free_objectID_queue, &glyph_parent->number_of_objects);
-            // set the new parent pointer.
+            // unbind from the old parent `Glyph`.
+            this->glyph_parent->unbind(this->childID);
+
+            // get `childID` from `Glyph` and set pointer to this `Object`.
             this->glyph_parent = static_cast<ontology::Glyph*>(new_parent);
-            // bind to the new parent.
-            this->bind_to_parent();
+            this->glyph_parent->bind(this);
         }
         else
         {
-            ontology::Species* parent;
-            parent = this->species_parent;
-            // set pointer to this child to nullptr in the old parent.
-            ontology::Object* dummy_child_pointer = nullptr;
-            hierarchy::set_child_pointer(this->childID, dummy_child_pointer, species_parent->object_pointer_vector, species_parent->free_objectID_queue, &species_parent->number_of_objects);
-            // set the new parent pointer.
+            // unbind from the old parent `Species`.
+            this->species_parent->unbind(this->childID);
+
+            // get `childID` from `Species` and set pointer to this `Object`.
             this->species_parent = static_cast<ontology::Species*>(new_parent);
-            // bind to the new parent.
-            this->bind_to_parent();
+            this->species_parent->bind(this);
         }
     }
 
