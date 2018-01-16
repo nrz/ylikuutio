@@ -16,6 +16,7 @@ Tasks which are necessary for the development of Ylikuutio:
 [ ] Move main loop out of `main` function and away from Ajokki into `ontology::Universe` class of Ylikuutio.
 [ ] Add support for custom keyboard settings.
 [ ] Add support for camera objects..
+[ ] Use GLFW Android port for Android builds. https://github.com/glfw/glfw/issues/611 https://github.com/xCuri0/glfw-android-example
 [ ] Use GLFM library (only for Android builds). https://github.com/brackeen/glfm
 [ ] Add variable `text_size`.
 [ ] Add variable `direction`.
