@@ -203,24 +203,24 @@ namespace ontology
         // this method sets pointer to this `Object` to nullptr, sets `parent` according to the input,
         // and requests a new `childID` from the new `Species` or from the new `Glyph`.
 
+        ontology::Model* glyph_parent_model = this->glyph_parent;
+        ontology::Model* species_parent_model = this->species_parent;
+        ontology::Model* parent_model = (this->is_character ? glyph_parent_model : species_parent_model);
+
+        // unbind from the old parent `Model`.
+        parent_model->unbind(this->childID);
+
         if (this->is_character)
         {
-            // unbind from the old parent `Glyph`.
-            this->glyph_parent->unbind(this->childID);
-
-            // get `childID` from `Glyph` and set pointer to this `Object`.
             this->glyph_parent = static_cast<ontology::Glyph*>(new_parent);
-            this->glyph_parent->bind(this);
         }
         else
         {
-            // unbind from the old parent `Species`.
-            this->species_parent->unbind(this->childID);
-
-            // get `childID` from `Species` and set pointer to this `Object`.
             this->species_parent = static_cast<ontology::Species*>(new_parent);
-            this->species_parent->bind(this);
         }
+
+        // get `childID` from `Model` and set pointer to this `Object`.
+        parent_model->bind(this);
     }
 
     void Object::set_name(const std::string& name)
