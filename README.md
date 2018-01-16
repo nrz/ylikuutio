@@ -9,6 +9,12 @@ Ylikuutio is under The GNU Affero General Public License 3,
 or (at your option) any later version. See COPYING file.
 All my code copyright (C) 2016-2017 Antti Nuortimo.
 
+## Overview
+Ylikuutio is a 3D game engine designed for 3D games and simulations.
+Ylikuutio aims to run fast and support also older hardware.
+Currently Ylikuutio works on 64-bit Linux and Windows systems.
+Android support is a work in progress.
+
 ## Compiling
 Ylikuutio can be compiled with GCC, Clang or Visual Studio.
 In Visual Studio compiling may break due to compiler-specific bugs.

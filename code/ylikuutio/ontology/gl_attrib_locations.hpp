@@ -6,7 +6,7 @@ namespace ontology
     class Shader;
     class Glyph;
 
-    void get_gl_attrib_locations(ontology::Shader* shader, ontology::Glyph* glyph);
+    void store_gl_attrib_locations(ontology::Shader* shader, ontology::Glyph* const glyph);
 }
 
 #endif

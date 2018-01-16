@@ -22,6 +22,7 @@
 #include "ajokki_movement.hpp"
 #include "ajokki_location_and_orientation.hpp"
 #include "ajokki_wireframe.hpp"
+#include "code/ylikuutio/audio/audio_master.hpp"
 #include "code/ylikuutio/callback_system/callback_parameter.hpp"
 #include "code/ylikuutio/callback_system/callback_object.hpp"
 #include "code/ylikuutio/callback_system/callback_engine.hpp"
@@ -76,8 +77,6 @@
 #define __GLM_GLM_HPP_INCLUDED
 #include <glm/glm.hpp> // glm
 #endif
-
-#include <SFML/Audio.hpp>
 
 // Include standard headers
 #include <cmath>         // NAN, std::isnan, std::pow
@@ -152,6 +151,8 @@ int main(int argc, char* argv[])
     // Create the setting master, store it in `my_setting_master`.
     std::cout << "Creating config::SettingMaster* my_setting_master ...\n";
     config::SettingMaster* my_setting_master = new config::SettingMaster(my_universe);
+
+    ylikuutio::audio::AudioMaster audio_master;
 
     float earth_radius = 6371.0f; // in kilometres
 
@@ -845,18 +846,10 @@ int main(int argc, char* argv[])
     double last_time_before_reading_keyboard = NAN;
     double current_time_before_reading_keyboard = NAN;
 
-    // Load music into buffer.
-    sf::SoundBuffer sound_buffer;
-
-    if (!sound_buffer.loadFromFile(music_filename))
+    if (!audio_master.load_and_play(music_filename))
     {
         std::cout << "Music file " << music_filename << " could not be loaded!\n";
-        return -1;
     }
-
-    sf::Sound sound;
-    sound.setBuffer(sound_buffer);
-    sound.play();
 
     while (!is_exit_requested)
     {

@@ -31,12 +31,7 @@ namespace space_partition
 namespace ontology
 {
     class Universe;
-    class Shader;
-    class Material;
-    class Species;
     class Object;
-    class Glyph;
-    class SymbiontSpecies;
 
     class Model: public ontology::Entity
     {
@@ -65,26 +60,36 @@ namespace ontology
             // destructor.
             virtual ~Model();
 
+            void bind(ontology::Object* object);
+            void unbind(int32_t childID);
+
             int32_t get_number_of_children() const override;
             int32_t get_number_of_descendants() const override;
 
             std::vector<glm::vec3> get_vertices() const;
+            std::vector<uint32_t> get_indices() const;
 
-            friend class Glyph;
-            friend class Species;
-            friend class SymbiontSpecies;
-            friend class Object;
-            friend class space_partition::Chunk;
-            friend void get_gl_attrib_locations(ontology::Shader* shader, ontology::Glyph* glyph);
+            GLuint get_vertexPosition_modelspaceID();
+            GLuint get_vertexUVID();
+            GLuint get_vertexNormal_modelspaceID();
+
+            GLuint get_vertexbuffer();
+            GLuint get_uvbuffer();
+            GLuint get_normalbuffer();
+            GLuint get_elementbuffer();
+
+            void store_vertexPosition_modelspaceID(GLuint vertexPosition_modelspaceID);
+            void store_vertexUVID(GLuint vertexUVID);
+            void store_vertexNormal_modelspaceID(GLuint vertexNormal_modelspaceID);
+
             template<class T1>
                 friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, int32_t* number_of_children);
             template<class T1, class T2>
                 friend void hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent, std::vector<T1>& old_child_pointer_vector, std::queue<int32_t>& old_free_childID_queue, int32_t* old_number_of_children);
             template<class T1>
                 friend void render_species_or_glyph(T1 species_or_glyph_pointer);
-            friend GLfloat get_ground_level(ontology::Species* terrain_species, glm::vec3* position);
 
-        private:
+        protected:
             // this method sets a object pointer.
             void set_object_pointer(int32_t childID, ontology::Object* child_pointer);
 

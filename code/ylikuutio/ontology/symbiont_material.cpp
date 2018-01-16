@@ -18,7 +18,6 @@
 #endif
 
 // Include standard headers
-#include <cstring>  // std::memcmp, std::strcmp, std::strlen, std::strncmp
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <stdint.h> // uint32_t etc.
 
@@ -27,7 +26,7 @@ namespace ontology
     void SymbiontMaterial::bind_to_parent()
     {
         // get `childID` from `Symbiosis` and set pointer to this `SymbiontMaterial`.
-        hierarchy::bind_child_to_parent<ontology::SymbiontMaterial*>(this, this->parent->symbiont_material_pointer_vector, this->parent->free_symbiont_materialID_queue, &this->parent->number_of_symbiont_materials);
+        this->parent->bind(this);
     }
 
     SymbiontMaterial::~SymbiontMaterial()
@@ -43,6 +42,16 @@ namespace ontology
 
         // set pointer to this symbiont_material to nullptr.
         this->parent->set_symbiont_material_pointer(this->childID, nullptr);
+    }
+
+    void SymbiontMaterial::bind(ontology::SymbiontSpecies* symbiont_species)
+    {
+        // get `childID` from `SymbiontMaterial` and set pointer to `symbiont_species`.
+        hierarchy::bind_child_to_parent<ontology::SymbiontSpecies*>(
+                symbiont_species,
+                this->symbiont_species_pointer_vector,
+                this->free_symbiont_speciesID_queue,
+                &this->number_of_symbiont_species);
     }
 
     void SymbiontMaterial::render()

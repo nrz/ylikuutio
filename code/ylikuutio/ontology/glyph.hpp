@@ -90,7 +90,7 @@ namespace ontology
                 }
 
                 // Get a handle for our buffers.
-                ontology::get_gl_attrib_locations(glyph_struct.shader_pointer, this);
+                ontology::store_gl_attrib_locations(glyph_struct.shader_pointer, this);
 
                 // TODO: triangulate the vertex data!
 

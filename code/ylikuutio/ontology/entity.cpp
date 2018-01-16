@@ -49,6 +49,16 @@ namespace ontology
         return this->get_parent()->get_universe();
     }
 
+    config::SettingMaster* Entity::get_setting_master()
+    {
+        return this->setting_master;
+    }
+
+    void Entity::set_setting_master(config::SettingMaster* setting_master)
+    {
+        this->setting_master = setting_master;
+    }
+
     void Entity::prerender() const
     {
         if (this->prerender_callback != nullptr &&
