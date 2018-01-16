@@ -40,6 +40,7 @@ Tasks which are necessary for the development of Ylikuutio:
 [ ] Add dynamic not flowing water.
 [ ] Add physics modeling.
 [ ] Add flowing water (computed with a server).
+[ ] Add Internet code (SFML).
 [ ] Add Internet code (ASIO).
 [ ] Add support for changing window size.
 
