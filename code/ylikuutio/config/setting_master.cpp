@@ -27,7 +27,7 @@ namespace config
 
         // bind to parent.
         // there can be only 1 `SettingMaster`.
-        this->parent->setting_master = this;
+        this->parent->set_setting_master(this);
     }
 
     SettingMaster::~SettingMaster()
@@ -100,7 +100,7 @@ namespace config
         // to get valid values:   set <variable>
         // to set variable:       set <variable> value[s]
 
-        config::SettingMaster* setting_master = entity->setting_master;
+        config::SettingMaster* setting_master = entity->get_setting_master();
 
         if (command_parameters.size() == 0)
         {
@@ -188,7 +188,7 @@ namespace config
         // Usage:
         // to get variable names: get
         // to get variable value: get <variable>
-        config::SettingMaster* setting_master = entity->setting_master;
+        config::SettingMaster* setting_master = entity->get_setting_master();
 
         if (command_parameters.size() == 0)
         {

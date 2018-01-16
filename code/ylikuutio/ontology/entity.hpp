@@ -29,11 +29,13 @@ namespace ontology
             std::string get_type() const;
 
             virtual ontology::Universe* get_universe();
+            config::SettingMaster* get_setting_master();
+            void set_setting_master(config::SettingMaster* setting_master);
+
             virtual ontology::Entity* get_parent() const = 0;
             virtual int32_t get_number_of_children() const = 0;
             virtual int32_t get_number_of_descendants() const = 0;
 
-            friend class config::SettingMaster;
             template<class T1>
                 friend void set_name(const std::string& name, T1 entity);
 
