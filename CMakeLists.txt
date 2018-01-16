@@ -292,6 +292,10 @@ configure_file(res/textures/test3x3.bmp test3x3.bmp COPYONLY)
 
 # Ylikuutio
 add_library(ylikuutio STATIC
+    # audio, in alphabetical order
+    code/ylikuutio/audio/audio_master.cpp
+    code/ylikuutio/audio/audio_master.hpp
+
     # callback_system, in alphabetical order
     code/ylikuutio/callback_system/callback_engine.cpp
     code/ylikuutio/callback_system/callback_engine.hpp
