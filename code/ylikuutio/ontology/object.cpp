@@ -1,6 +1,7 @@
 #include "object.hpp"
 #include "glyph.hpp"
 #include "species.hpp"
+#include "model.hpp"
 #include "text3D.hpp"
 #include "object_struct.hpp"
 #include "render_templates.hpp"
