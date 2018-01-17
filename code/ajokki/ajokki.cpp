@@ -144,7 +144,9 @@ int main(int argc, char* argv[])
 
     // Create the world, store it in `my_universe`.
     std::cout << "Creating ontology::Entity* my_universe_entity ...\n";
-    ontology::Universe* my_universe = new ontology::Universe();
+    UniverseStruct universe_struct;
+    universe_struct.window_title = "Ajokki 0.0.1, powered by Ylikuutio 0.0.1";
+    ontology::Universe* my_universe = new ontology::Universe(universe_struct);
 
     ontology::EntityFactory* entity_factory = my_universe->get_entity_factory();
 
@@ -166,24 +168,6 @@ int main(int argc, char* argv[])
     std::cout << "Creating callback_system::CallbackEngine* cleanup_callback_engine ...\n";
     callback_system::CallbackEngine* cleanup_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* cleanup_callback_object = new callback_system::CallbackObject(nullptr, cleanup_callback_engine);
-
-    // Initialise GLFW
-    if (!ylikuutio::opengl::init_window())
-    {
-        std::cerr << "Failed to initialize GLFW.\n";
-        return -1;
-    }
-
-    // Open a window and create its OpenGL context.
-    std::cout << "Opening a window and creating its OpenGL context...\n";
-    my_universe->set_window(
-            ylikuutio::opengl::create_window(
-                static_cast<int>(my_universe->get_window_width()),
-                static_cast<int>(my_universe->get_window_height()),
-                "Ajokki v. 0.0.1, powered by Ylikuutio v. 0.0.1",
-                nullptr,
-                nullptr));
-    cleanup_callback_object->set_new_callback(&ajokki::glfwTerminate_cleanup);
 
     if (my_universe->get_window() == nullptr)
     {

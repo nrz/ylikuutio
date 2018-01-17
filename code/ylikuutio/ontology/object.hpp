@@ -56,6 +56,8 @@ namespace ontology
                 this->original_scale_vector = object_struct.original_scale_vector;
                 this->rotate_angle          = object_struct.rotate_angle;
                 this->rotate_vector         = object_struct.rotate_vector;
+                this->initial_rotate_angle  = object_struct.initial_rotate_angle;
+                this->initial_rotate_vector = object_struct.initial_rotate_vector;
                 this->translate_vector      = object_struct.translate_vector;
                 this->has_entered           = false;
 
@@ -127,6 +129,8 @@ namespace ontology
             GLfloat rotate_angle;                  // rotate angle.
             glm::vec3 rotate_vector;               // rotate vector.
             glm::vec3 translate_vector;            // translate vector.
+            GLfloat initial_rotate_angle;          // initial rotate angle.
+            glm::vec3 initial_rotate_vector;       // initial rotate vector.
 
             // The rest fields are created in the constructor.
             glm::mat4 model_matrix;                // model matrix.

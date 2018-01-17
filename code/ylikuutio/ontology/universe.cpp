@@ -79,6 +79,8 @@ namespace ontology
 
         std::cout << "The entity factory of this universe will be destroyed.\n";
         delete this->entity_factory;
+
+        glfwTerminate();
     }
 
     void Universe::bind(ontology::World* world)

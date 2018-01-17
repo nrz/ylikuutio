@@ -74,6 +74,17 @@ namespace ontology
         if (!this->has_entered)
         {
             this->model_matrix = glm::translate(glm::mat4(1.0f), *this->cartesian_coordinates);
+
+            if (!this->is_character)
+            {
+                const std::string model_file_format = this->species_parent->get_model_file_format();
+
+                if (model_file_format.compare("fbx") == 0 || model_file_format.compare("FBX") == 0)
+                {
+                    // Only FBX objects need initial rotation.
+                    this->model_matrix = glm::rotate(this->model_matrix, this->initial_rotate_angle, this->initial_rotate_vector);
+                }
+            }
             this->model_matrix = glm::scale(this->model_matrix, this->original_scale_vector);
 
             // store the new coordinates to be used in the next update.
