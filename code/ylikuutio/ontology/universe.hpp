@@ -3,6 +3,8 @@
 
 #include "entity.hpp"
 #include "entity_factory.hpp"
+#include "universe_struct.hpp"
+#include "code/ylikuutio/opengl/opengl.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
 #include "code/ylikuutio/common/globals.hpp"
 
@@ -201,7 +203,7 @@ namespace ontology
     {
         public:
             // constructor.
-            Universe()
+            Universe(UniverseStruct& universe_struct)
                 : Entity(nullptr) // `Universe` has no parent.
             {
                 this->entity_factory = new ontology::EntityFactory(this);
@@ -221,8 +223,10 @@ namespace ontology
 
                 // Variables related to the window.
                 this->window = nullptr;
-                this->window_width = 1600; // default width.
-                this->window_height = 900; // default height.
+                this->window_width = universe_struct.window_width;
+                this->window_height = universe_struct.window_height;
+                this->window_title = universe_struct.window_title;
+                this->is_headless = universe_struct.is_headless;
 
                 this->ProjectionMatrix = glm::mat4(1.0f); // identity matrix (dummy value).
                 this->ViewMatrix = glm::mat4(1.0f);       // identity matrix (dummy value).
@@ -231,10 +235,10 @@ namespace ontology
                 this->aspect_ratio = static_cast<GLfloat>(this->window_width / this->window_height);
                 this->initialFoV = 60.0f;
 
-                this->text_size = 40; // default text size.
-                this->font_size = 16; // default font size.
+                this->text_size = universe_struct.text_size;
+                this->font_size = universe_struct.font_size;
 
-                this->max_FPS = 60; // default value max 60 frames per second.
+                this->max_FPS = universe_struct.max_FPS;
                 this->delta_time = NAN;
                 this->last_time_before_reading_keyboard = NAN;
                 this->current_time_before_reading_keyboard = NAN;
@@ -252,10 +256,10 @@ namespace ontology
                 this->turbo_factor = NAN;
                 this->twin_turbo_factor = NAN;
 
-                this->speed = 5.0f; // 5.0 units / second
-                this->mouse_speed = 0.005f;
+                this->speed = universe_struct.speed;
+                this->mouse_speed = universe_struct.mouse_speed;
 
-                this->gravity = 9.81f / 60.0f;
+                this->gravity = universe_struct.gravity;
                 this->fall_speed = this->gravity;
 
                 this->testing_spherical_terrain_in_use = false;
@@ -269,6 +273,23 @@ namespace ontology
 
                 this->child_vector_pointers_vector.push_back(&this->world_pointer_vector);
                 this->type = "ontology::Universe*";
+
+                // Initialise GLFW
+                if (!ylikuutio::opengl::init_window())
+                {
+                    std::cerr << "Failed to initialize GLFW.\n";
+                    return;
+                }
+
+                // Open a window and create its OpenGL context.
+                std::cout << "Opening a window and creating its OpenGL context...\n";
+                this->set_window(
+                        ylikuutio::opengl::create_window(
+                            static_cast<int>(this->window_width),
+                            static_cast<int>(this->window_height),
+                            this->window_title.c_str(),
+                            nullptr,
+                            nullptr));
             }
 
             // destructor.
@@ -448,6 +469,8 @@ namespace ontology
             GLFWwindow* window;
             int32_t window_width;
             int32_t window_height;
+            std::string window_title;
+            bool is_headless;
 
             // Variables related to the camera.
             glm::mat4 ProjectionMatrix;
@@ -460,7 +483,7 @@ namespace ontology
             int32_t font_size;
 
             // Variables related to timing of events.
-            uint32_t max_FPS;
+            int32_t max_FPS;
             float delta_time;
 
             double last_time_before_reading_keyboard;

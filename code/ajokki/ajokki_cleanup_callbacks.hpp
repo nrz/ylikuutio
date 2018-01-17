@@ -16,11 +16,6 @@ namespace callback_system
 
 namespace ajokki
 {
-    std::shared_ptr<datatypes::AnyValue> glfwTerminate_cleanup(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>& input_parameters);
-
     std::shared_ptr<datatypes::AnyValue> full_cleanup(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject* callback_object,

@@ -7,18 +7,6 @@
 #include "code/ylikuutio/ontology/font2D.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
 
-// Include GLEW
-#ifndef __GL_GLEW_H_INCLUDED
-#define __GL_GLEW_H_INCLUDED
-#include <GL/glew.h> // GLfloat, GLuint etc.
-#endif
-
-// Include GLFW
-#ifndef __GLFW3_H_INCLUDED
-#define __GLFW3_H_INCLUDED
-#include <GLFW/glfw3.h>
-#endif
-
 // Include standard headers
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <memory>   // std::make_shared, std::shared_ptr
@@ -26,15 +14,6 @@
 
 namespace ajokki
 {
-    std::shared_ptr<datatypes::AnyValue> glfwTerminate_cleanup(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>& input_parameters)
-    {
-        glfwTerminate();
-        return nullptr;
-    }
-
     std::shared_ptr<datatypes::AnyValue> full_cleanup(
             callback_system::CallbackEngine*,
             callback_system::CallbackObject* callback_object,
@@ -64,8 +43,6 @@ namespace ajokki
             std::cerr << "Invalid datatype: " << any_value_font2D_pointer->type << ", should be " << datatypes::TEXT2D_POINTER << "\n";
         }
 
-        // Close OpenGL window and terminate GLFW
-        glfwTerminate();
         return nullptr;
     }
 }

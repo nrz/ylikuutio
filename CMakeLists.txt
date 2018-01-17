@@ -472,6 +472,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/text3D_struct.hpp
     code/ylikuutio/ontology/universe.cpp
     code/ylikuutio/ontology/universe.hpp
+    code/ylikuutio/ontology/universe_struct.hpp
     code/ylikuutio/ontology/vector_font.cpp
     code/ylikuutio/ontology/vector_font.hpp
     code/ylikuutio/ontology/vector_font_struct.hpp
