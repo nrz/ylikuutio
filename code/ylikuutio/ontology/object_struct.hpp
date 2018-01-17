@@ -20,7 +20,16 @@ namespace ontology
 typedef struct ObjectStruct
 {
     ObjectStruct()
-        : species_parent(nullptr), glyph_parent(nullptr), text3D_parent(nullptr), original_scale_vector(glm::vec3(1.0f, 1.0f, 1.0f)), rotate_angle(0.0f), is_character(false), quaternions_in_use(false), cartesian_coordinates(nullptr), rotate_vector(glm::vec3(0.0f, 0.0f, 0.0f)), translate_vector(glm::vec3(0.0f, 0.0f, 0.0f))
+        : species_parent(nullptr),
+        glyph_parent(nullptr),
+        text3D_parent(nullptr),
+        original_scale_vector(glm::vec3(1.0f, 1.0f, 1.0f)),
+        rotate_angle(0.0f),
+        is_character(false),
+        quaternions_in_use(false),
+        cartesian_coordinates(nullptr),
+        rotate_vector(glm::vec3(0.0f, 0.0f, 0.0f)),
+        translate_vector(glm::vec3(0.0f, 0.0f, 0.0f))
     {
         // constructor.
     }
