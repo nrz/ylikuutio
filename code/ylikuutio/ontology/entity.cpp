@@ -44,12 +44,12 @@ namespace ontology
         return this->type;
     }
 
-    ontology::Universe* Entity::get_universe()
+    ontology::Universe* Entity::get_universe() const
     {
         return this->universe;
     }
 
-    config::SettingMaster* Entity::get_setting_master()
+    config::SettingMaster* Entity::get_setting_master() const
     {
         return this->setting_master;
     }

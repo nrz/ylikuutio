@@ -206,6 +206,7 @@ namespace ontology
             Universe(const UniverseStruct& universe_struct)
                 : Entity(nullptr) // `Universe` has no parent.
             {
+                this->universe = this;
                 this->entity_factory = new ontology::EntityFactory(this);
 
                 this->cartesian_coordinates = nullptr;
@@ -327,7 +328,6 @@ namespace ontology
 
             ontology::World* get_active_world() const;
 
-            ontology::Universe* get_universe() final override;
             ontology::Entity* get_parent() const override;
             int32_t get_number_of_children() const override;
             int32_t get_number_of_descendants() const override;

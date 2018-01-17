@@ -147,11 +147,6 @@ namespace ontology
         return this->active_world;
     }
 
-    ontology::Universe* Universe::get_universe()
-    {
-        return this;
-    }
-
     ontology::Entity* Universe::get_parent() const
     {
         // `Universe` has no parent.
