@@ -143,6 +143,8 @@ namespace ontology
             int32_t get_image_width();
             int32_t get_image_height();
 
+            const std::string& get_model_file_format();
+
             bool is_terrain;                           // worlds currently do not rotate nor translate.
             float planet_radius;                      // radius of sea level in kilometers. used only for worlds.
             float divisor;                           // value by which SRTM values are divided to convert them to kilometers.

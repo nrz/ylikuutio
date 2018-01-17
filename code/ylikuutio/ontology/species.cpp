@@ -76,6 +76,11 @@ namespace ontology
         return this->image_width;
     }
 
+    const std::string& Species::get_model_file_format()
+    {
+        return this->model_file_format;
+    }
+
     int32_t Species::get_image_height()
     {
         return this->image_height;
