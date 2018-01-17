@@ -203,7 +203,7 @@ namespace ontology
     {
         public:
             // constructor.
-            Universe(UniverseStruct& universe_struct)
+            Universe(const UniverseStruct& universe_struct)
                 : Entity(nullptr) // `Universe` has no parent.
             {
                 this->entity_factory = new ontology::EntityFactory(this);
