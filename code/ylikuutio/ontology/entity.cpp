@@ -46,7 +46,7 @@ namespace ontology
 
     ontology::Universe* Entity::get_universe()
     {
-        return this->get_parent()->get_universe();
+        return this->universe;
     }
 
     config::SettingMaster* Entity::get_setting_master()
