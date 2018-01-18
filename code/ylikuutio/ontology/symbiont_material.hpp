@@ -42,8 +42,8 @@ namespace ontology
                 : Entity(symbiont_material_struct.universe)
             {
                 // constructor.
-                this->parent = symbiont_material_struct.parent;
                 this->universe = symbiont_material_struct.universe;
+                this->parent = symbiont_material_struct.parent;
 
                 this->texture_file_format = symbiont_material_struct.texture_file_format;
                 this->texture_filename    = symbiont_material_struct.texture_filename;
