@@ -23,9 +23,9 @@ namespace ontology
 typedef struct SymbiontSpeciesStruct
 {
     SymbiontSpeciesStruct(
-            ontology::Universe* universe,
-            ontology::Shader* shader,
-            ontology::SymbiontMaterial* parent,
+            ontology::Universe* const universe,
+            ontology::Shader* const shader,
+            ontology::SymbiontMaterial* const parent,
             int32_t vertex_count,
             const ofbx::Vec3* vertices,
             const ofbx::Vec2* uvs,

@@ -7,7 +7,7 @@ namespace ontology
     class Shader;
     class SymbiontMaterial;
 
-    void Symbiosis::bind(ontology::SymbiontMaterial* symbiont_material)
+    void Symbiosis::bind(ontology::SymbiontMaterial* const symbiont_material)
     {
         // get `childID` from `Symbiosis` and set pointer to `symbiont_material`.
         hierarchy::bind_child_to_parent<ontology::SymbiontMaterial*>(

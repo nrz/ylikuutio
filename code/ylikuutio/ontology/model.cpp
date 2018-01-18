@@ -15,7 +15,7 @@ namespace ontology
 {
     class Universe;
 
-    void Model::bind(ontology::Object* object)
+    void Model::bind(ontology::Object* const object)
     {
         // get `childID` from `Model` and set pointer to `object`.
         hierarchy::bind_child_to_parent<ontology::Object*>(
@@ -25,7 +25,7 @@ namespace ontology
                 &this->number_of_objects);
     }
 
-    void Model::unbind(int32_t childID)
+    void Model::unbind(const int32_t childID)
     {
         ontology::Object* dummy_child_pointer = nullptr;
         hierarchy::set_child_pointer(
@@ -61,37 +61,37 @@ namespace ontology
         return this->indices;
     }
 
-    GLuint Model::get_vertexPosition_modelspaceID()
+    GLuint Model::get_vertexPosition_modelspaceID() const
     {
         return this->vertexPosition_modelspaceID;
     }
 
-    GLuint Model::get_vertexUVID()
+    GLuint Model::get_vertexUVID() const
     {
         return this->vertexUVID;
     }
 
-    GLuint Model::get_vertexNormal_modelspaceID()
+    GLuint Model::get_vertexNormal_modelspaceID() const
     {
         return this->vertexNormal_modelspaceID;
     }
 
-    GLuint Model::get_vertexbuffer()
+    GLuint Model::get_vertexbuffer() const
     {
         return this->vertexbuffer;
     }
 
-    GLuint Model::get_uvbuffer()
+    GLuint Model::get_uvbuffer() const
     {
         return this->uvbuffer;
     }
 
-    GLuint Model::get_normalbuffer()
+    GLuint Model::get_normalbuffer() const
     {
         return this->normalbuffer;
     }
 
-    GLuint Model::get_elementbuffer()
+    GLuint Model::get_elementbuffer() const
     {
         return this->elementbuffer;
     }

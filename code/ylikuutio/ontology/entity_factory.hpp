@@ -60,7 +60,7 @@ namespace ontology
         private:
             // constructor.
             // only `Universe` can create an `EntityFactory`.
-            EntityFactory(ontology::Universe* universe);
+            EntityFactory(ontology::Universe* const universe);
 
             ontology::Universe* universe;
     };

@@ -30,8 +30,8 @@ namespace ontology
     class VectorFont: public ontology::Entity
     {
         public:
-            void bind_glyph(ontology::Glyph* glyph);
-            void bind_text3D(ontology::Text3D* text3D);
+            void bind_glyph(ontology::Glyph* const glyph);
+            void bind_text3D(ontology::Text3D* const text3D);
 
             // this method sets pointer to this species to nullptr, sets `parent` according to the input, and requests a new `childID` from the new material.
             void bind_to_new_parent(ontology::Material* const new_material_pointer);
@@ -125,7 +125,7 @@ namespace ontology
 
             // this method returns a pointer to `Glyph` that matches the given `unicode_value`,
             // and `nullptr` if this `VectorFont` does not contain such a `Glyph`.
-            ontology::Glyph* get_glyph_pointer(int32_t unicode_value);
+            ontology::Glyph* get_glyph_pointer(const int32_t unicode_value) const;
 
             // The rest fields are created in the constructor.
 

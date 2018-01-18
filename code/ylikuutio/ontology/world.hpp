@@ -20,7 +20,7 @@ namespace ontology
     class World: public ontology::Entity
     {
         public:
-            void bind(ontology::Scene* scene);
+            void bind(ontology::Scene* const scene);
 
             // constructor.
             World(ontology::Universe* const universe)
@@ -46,12 +46,12 @@ namespace ontology
             void render();
 
             // this method stes the active `Scene`.
-            void set_active_scene(ontology::Scene* scene);
+            void set_active_scene(ontology::Scene* const scene);
 
             ontology::Scene* get_active_scene() const;
 
             // this method sets a `Scene` pointer.
-            void set_scene_pointer(int32_t childID, ontology::Scene* child_pointer);
+            void set_scene_pointer(const int32_t childID, ontology::Scene* const child_pointer);
 
             ontology::Entity* get_parent() const override;
             int32_t get_number_of_children() const override;

@@ -30,10 +30,10 @@ namespace ontology
     class Symbiosis: public ontology::Entity
     {
         public:
-            void bind(ontology::SymbiontMaterial* symbiont_material);
+            void bind(ontology::SymbiontMaterial* const symbiont_material);
 
             // this method sets pointer to this `Symbiosis` to nullptr, sets `parent` according to the input, and requests a new `childID` from the new `Shader`.
-            void bind_to_new_parent(ontology::Shader* new_shader_pointer);
+            void bind_to_new_parent(ontology::Shader* const new_shader_pointer);
 
             // constructor.
             Symbiosis(const SymbiosisStruct& symbiosis_struct)

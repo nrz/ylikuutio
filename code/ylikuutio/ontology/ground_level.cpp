@@ -27,8 +27,8 @@
 namespace ontology
 {
     GLfloat get_ground_level(
-            ontology::Species* terrain_species,
-            glm::vec3* position)
+            ontology::Species* const terrain_species,
+            glm::vec3* const position)
     {
         if (!terrain_species->is_terrain)
         {
@@ -94,8 +94,8 @@ namespace ontology
     }
 
     GLfloat get_floor_level(
-            ontology::Species* terrain_species,
-            glm::vec3* position)
+            ontology::Species* const terrain_species,
+            glm::vec3* const position)
     {
         if (!terrain_species->is_terrain)
         {

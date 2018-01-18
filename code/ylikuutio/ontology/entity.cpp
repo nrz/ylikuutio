@@ -8,7 +8,7 @@
 
 namespace ontology
 {
-    Entity::Entity(ontology::Universe* universe)
+    Entity::Entity(ontology::Universe* const universe)
     {
         // constructor.
         this->childID = -1;
@@ -54,7 +54,7 @@ namespace ontology
         return this->setting_master;
     }
 
-    void Entity::set_setting_master(config::SettingMaster* setting_master)
+    void Entity::set_setting_master(config::SettingMaster* const setting_master)
     {
         this->setting_master = setting_master;
     }

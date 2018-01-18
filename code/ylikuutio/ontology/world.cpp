@@ -11,7 +11,7 @@ namespace ontology
 {
     class SettingMaster;
 
-    void World::bind(ontology::Scene* scene)
+    void World::bind(ontology::Scene* const scene)
     {
         // get `childID` from `World` and set pointer to `scene`.
         hierarchy::bind_child_to_parent<ontology::Scene*>(
@@ -85,7 +85,7 @@ namespace ontology
         return -1;
     }
 
-    void World::set_scene_pointer(int32_t childID, ontology::Scene* child_pointer)
+    void World::set_scene_pointer(const int32_t childID, ontology::Scene* const child_pointer)
     {
         hierarchy::set_child_pointer(childID, child_pointer, this->scene_pointer_vector, this->free_sceneID_queue, &this->number_of_scenes);
     }

@@ -111,7 +111,7 @@ namespace ontology
 
             // this method renders this `Object`.
             void render();
-            void render_this_object(ontology::Shader* shader_pointer);
+            void render_this_object(ontology::Shader* const shader_pointer);
 
             int32_t get_number_of_children() const override;
             int32_t get_number_of_descendants() const override;

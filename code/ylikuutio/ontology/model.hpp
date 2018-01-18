@@ -36,11 +36,11 @@ namespace ontology
     class Model: public ontology::Entity
     {
         public:
-            void bind(ontology::Object* object);
-            void unbind(int32_t childID);
+            void bind(ontology::Object* const object);
+            void unbind(const int32_t childID);
 
             // constructor.
-            Model(ontology::Universe* universe)
+            Model(ontology::Universe* const universe)
                 : Entity(universe)
             {
                 // constructor.
@@ -69,14 +69,14 @@ namespace ontology
             std::vector<glm::vec3> get_vertices() const;
             std::vector<uint32_t> get_indices() const;
 
-            GLuint get_vertexPosition_modelspaceID();
-            GLuint get_vertexUVID();
-            GLuint get_vertexNormal_modelspaceID();
+            GLuint get_vertexPosition_modelspaceID() const;
+            GLuint get_vertexUVID() const;
+            GLuint get_vertexNormal_modelspaceID() const;
 
-            GLuint get_vertexbuffer();
-            GLuint get_uvbuffer();
-            GLuint get_normalbuffer();
-            GLuint get_elementbuffer();
+            GLuint get_vertexbuffer() const;
+            GLuint get_uvbuffer() const;
+            GLuint get_normalbuffer() const;
+            GLuint get_elementbuffer() const;
 
             void store_vertexPosition_modelspaceID(GLuint vertexPosition_modelspaceID);
             void store_vertexUVID(GLuint vertexUVID);

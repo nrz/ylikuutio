@@ -25,7 +25,7 @@
 
 namespace ontology
 {
-    void Material::bind_species(ontology::Species* species)
+    void Material::bind_species(ontology::Species* const species)
     {
         // get `childID` from `Material` and set pointer to `species`.
         hierarchy::bind_child_to_parent<ontology::Species*>(
@@ -35,7 +35,7 @@ namespace ontology
                 &this->number_of_species);
     }
 
-    void Material::bind_vector_font(ontology::VectorFont* vector_font)
+    void Material::bind_vector_font(ontology::VectorFont* const vector_font)
     {
         // get `childID` from `Material` and set pointer to `vector_font`.
         hierarchy::bind_child_to_parent<ontology::VectorFont*>(
@@ -45,7 +45,7 @@ namespace ontology
                 &this->number_of_vector_fonts);
     }
 
-    void Material::bind_chunk_master(space_partition::ChunkMaster* chunk_master)
+    void Material::bind_chunk_master(space_partition::ChunkMaster* const chunk_master)
     {
         // get `childID` from `Material` and set pointer to `chunk_master`.
         hierarchy::bind_child_to_parent<space_partition::ChunkMaster*>(
@@ -55,7 +55,7 @@ namespace ontology
                 &this->number_of_chunk_masters);
     }
 
-    void Material::unbind_species(int32_t childID)
+    void Material::unbind_species(const int32_t childID)
     {
         ontology::Species* dummy_child_pointer = nullptr;
         hierarchy::set_child_pointer(
@@ -66,7 +66,7 @@ namespace ontology
                 &this->number_of_species);
     }
 
-    void Material::unbind_vector_font(int32_t childID)
+    void Material::unbind_vector_font(const int32_t childID)
     {
         ontology::VectorFont* dummy_child_pointer = nullptr;
         hierarchy::set_child_pointer(
@@ -77,7 +77,7 @@ namespace ontology
                 &this->number_of_vector_fonts);
     }
 
-    void Material::unbind_chunk_master(int32_t childID)
+    void Material::unbind_chunk_master(const int32_t childID)
     {
         space_partition::ChunkMaster* dummy_child_pointer = nullptr;
         hierarchy::set_child_pointer(

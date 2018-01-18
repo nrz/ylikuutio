@@ -202,7 +202,7 @@ namespace ontology
     class Universe: public ontology::Entity
     {
         public:
-            void bind(ontology::World* world);
+            void bind(ontology::World* const world);
 
             // constructor.
             Universe(const UniverseStruct& universe_struct)
@@ -302,10 +302,10 @@ namespace ontology
             void render();
 
             // this method stes the active `World`.
-            void set_active_world(ontology::World* world);
+            void set_active_world(ontology::World* const world);
 
             // this method stes the active `Scene`.
-            void set_active_scene(ontology::Scene* world);
+            void set_active_scene(ontology::Scene* const world);
 
             config::SettingMaster* get_setting_master() const;
 

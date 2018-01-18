@@ -29,7 +29,7 @@
 
 namespace ontology
 {
-    EntityFactory::EntityFactory(ontology::Universe* universe)
+    EntityFactory::EntityFactory(ontology::Universe* const universe)
     {
         // constructor.
         this->universe = universe;

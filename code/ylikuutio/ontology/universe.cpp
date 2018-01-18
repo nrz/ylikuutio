@@ -65,7 +65,7 @@
 
 namespace ontology
 {
-    void Universe::bind(ontology::World* world)
+    void Universe::bind(ontology::World* const world)
     {
         // get `childID` from `Universe` and set pointer to `world`.
         hierarchy::bind_child_to_parent<ontology::World*>(
@@ -109,7 +109,7 @@ namespace ontology
         }
     }
 
-    void Universe::set_active_world(ontology::World* world)
+    void Universe::set_active_world(ontology::World* const world)
     {
         this->active_world = world;
 
@@ -120,7 +120,7 @@ namespace ontology
         }
     }
 
-    void Universe::set_active_scene(ontology::Scene* scene)
+    void Universe::set_active_scene(ontology::Scene* const scene)
     {
         if (this->active_world == nullptr)
         {

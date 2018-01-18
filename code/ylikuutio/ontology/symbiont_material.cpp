@@ -23,7 +23,7 @@
 
 namespace ontology
 {
-    void SymbiontMaterial::bind(ontology::SymbiontSpecies* symbiont_species)
+    void SymbiontMaterial::bind(ontology::SymbiontSpecies* const symbiont_species)
     {
         // get `childID` from `SymbiontMaterial` and set pointer to `symbiont_species`.
         hierarchy::bind_child_to_parent<ontology::SymbiontSpecies*>(

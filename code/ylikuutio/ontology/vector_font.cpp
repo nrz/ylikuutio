@@ -25,7 +25,7 @@ namespace ontology
     class Text3D;
     class Glyph;
 
-    void VectorFont::bind_glyph(ontology::Glyph* glyph)
+    void VectorFont::bind_glyph(ontology::Glyph* const glyph)
     {
         // get `childID` from `VectorFont` and set pointer to `glyph`.
         hierarchy::bind_child_to_parent<ontology::Glyph*>(
@@ -35,7 +35,7 @@ namespace ontology
                 &this->number_of_glyphs);
     }
 
-    void VectorFont::bind_text3D(ontology::Text3D* text3D)
+    void VectorFont::bind_text3D(ontology::Text3D* const text3D)
     {
         // get `childID` from `VectorFont` and set pointer to `text3D`.
         hierarchy::bind_child_to_parent<ontology::Text3D*>(
@@ -63,11 +63,11 @@ namespace ontology
 
     // this method returns a pointer to `Glyph` that matches the given `unicode_value`,
     // and `nullptr` if this `VectorFont` does not contain such a `Glyph`.
-    ontology::Glyph* VectorFont::get_glyph_pointer(int32_t unicode_value)
+    ontology::Glyph* VectorFont::get_glyph_pointer(const int32_t unicode_value) const
     {
         if (this->unicode_glyph_map.count(unicode_value) == 1)
         {
-            return this->unicode_glyph_map[unicode_value];
+            return this->unicode_glyph_map.at(unicode_value);
         }
 
         // No matching `Glyph` found!

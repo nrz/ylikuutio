@@ -14,7 +14,7 @@ namespace ontology
     class Object;
 
     template<class T1>
-        void render_species_or_glyph(T1 species_or_glyph_pointer)
+        void render_species_or_glyph(T1 const species_or_glyph_pointer)
         {
             // Compute the MVP matrix from keyboard and mouse input.
             glUniform3f(

@@ -43,13 +43,13 @@ namespace ontology
     class Material: public ontology::Entity
     {
         public:
-            void bind_species(ontology::Species* species);
-            void bind_vector_font(ontology::VectorFont* vector_font);
-            void bind_chunk_master(space_partition::ChunkMaster* chunk_master);
+            void bind_species(ontology::Species* const species);
+            void bind_vector_font(ontology::VectorFont* const vector_font);
+            void bind_chunk_master(space_partition::ChunkMaster* const chunk_master);
 
-            void unbind_species(int32_t childID);
-            void unbind_vector_font(int32_t childID);
-            void unbind_chunk_master(int32_t childID);
+            void unbind_species(const int32_t childID);
+            void unbind_vector_font(const int32_t childID);
+            void unbind_chunk_master(const int32_t childID);
 
             // constructor.
             Material(ontology::Universe* const universe, const MaterialStruct& material_struct)

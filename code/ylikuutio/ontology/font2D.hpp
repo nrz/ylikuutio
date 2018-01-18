@@ -31,11 +31,11 @@ namespace ontology
         public:
             // constructor.
             Font2D(
-                    ontology::Universe* universe,
+                    ontology::Universe* const universe,
                     GLuint screen_width,
                     GLuint screen_height,
-                    std::string texture_filename,
-                    std::string font_texture_file_format)
+                    const std::string& texture_filename,
+                    const std::string& font_texture_file_format)
                 : Entity(universe)
             {
                 // constructor.
@@ -107,10 +107,10 @@ namespace ontology
                     GLuint y,
                     GLuint text_size,
                     GLuint font_size,
-                    const char* text_char,
-                    const char* char_font_texture_file_format,
-                    const char* horizontal_alignment,
-                    const char* vertical_alignment) const;
+                    const char* const text_char,
+                    const char* const char_font_texture_file_format,
+                    const char* const horizontal_alignment,
+                    const char* const vertical_alignment) const;
 
             void printText2D(const PrintingStruct& printing_struct);
 
@@ -121,10 +121,10 @@ namespace ontology
                     GLuint y,
                     GLuint text_size,
                     GLuint font_size,
-                    const char* text_char,
-                    const char* char_font_texture_file_format);
+                    const char* const text_char,
+                    const char* const char_font_texture_file_format);
 
-            void set_name(std::string name);
+            void set_name(const std::string& name);
 
         private:
             GLuint texture;      // Texture containing the glyphs, reterned by `load_BMP_texture` or `load_DDS_texture` (used for `glGenTextures` etc.).

@@ -94,7 +94,7 @@ namespace ontology
         }
     }
 
-    void Object::render_this_object(ontology::Shader* shader_pointer)
+    void Object::render_this_object(ontology::Shader* const shader_pointer)
     {
         if (!this->has_entered)
         {

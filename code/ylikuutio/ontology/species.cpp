@@ -81,17 +81,17 @@ namespace ontology
         ontology::set_name(name, this);
     }
 
-    int32_t Species::get_image_width()
+    int32_t Species::get_image_width() const
     {
         return this->image_width;
     }
 
-    const std::string& Species::get_model_file_format()
+    const std::string& Species::get_model_file_format() const
     {
         return this->model_file_format;
     }
 
-    int32_t Species::get_image_height()
+    int32_t Species::get_image_height() const
     {
         return this->image_height;
     }

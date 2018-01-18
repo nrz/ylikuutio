@@ -17,8 +17,8 @@
 
 namespace ontology
 {
-    GLfloat get_ground_level(ontology::Species* terrain_species, glm::vec3* position);
-    GLfloat get_floor_level(ontology::Species* terrain_species, glm::vec3* position);
+    GLfloat get_ground_level(ontology::Species* const terrain_species, glm::vec3* const position);
+    GLfloat get_floor_level(ontology::Species* const terrain_species, glm::vec3* const position);
 }
 
 #endif

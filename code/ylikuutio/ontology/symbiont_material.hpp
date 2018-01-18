@@ -35,7 +35,7 @@ namespace ontology
     class SymbiontMaterial: public ontology::Entity
     {
         public:
-            void bind(ontology::SymbiontSpecies* symbiont_species);
+            void bind(ontology::SymbiontSpecies* const symbiont_species);
 
             // constructor.
             SymbiontMaterial(const SymbiontMaterialStruct& symbiont_material_struct)

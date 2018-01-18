@@ -140,10 +140,10 @@ namespace ontology
 
             void set_name(const std::string& name);
 
-            int32_t get_image_width();
-            int32_t get_image_height();
+            int32_t get_image_width() const;
+            int32_t get_image_height() const;
 
-            const std::string& get_model_file_format();
+            const std::string& get_model_file_format() const;
 
             bool is_terrain;                           // worlds currently do not rotate nor translate.
             float planet_radius;                      // radius of sea level in kilometers. used only for worlds.

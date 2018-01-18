@@ -21,7 +21,7 @@ namespace ontology
     {
         public:
             // constructor.
-            Entity(ontology::Universe* universe);
+            Entity(ontology::Universe* const universe);
 
             // destructor.
             virtual ~Entity();
@@ -30,7 +30,7 @@ namespace ontology
 
             ontology::Universe* get_universe() const;
             config::SettingMaster* get_setting_master() const;
-            void set_setting_master(config::SettingMaster* setting_master);
+            void set_setting_master(config::SettingMaster* const setting_master);
 
             virtual ontology::Entity* get_parent() const = 0;
             virtual int32_t get_number_of_children() const = 0;
