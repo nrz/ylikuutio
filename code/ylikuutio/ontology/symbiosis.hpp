@@ -11,6 +11,8 @@
 #include "symbiosis_struct.hpp"
 #include "symbiont_species_struct.hpp"
 #include "entity_templates.hpp"
+#include "code/ylikuutio/loaders/symbiosis_loader.hpp"
+#include "code/ylikuutio/loaders/symbiosis_loader_struct.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/file/file_loader.hpp"
 #include <ofbx.h>
@@ -42,91 +44,28 @@ namespace ontology
                 : Entity(symbiosis_struct.parent->get_universe())
             {
                 // constructor.
+                this->universe = symbiosis_struct.parent->get_universe();
                 this->parent = symbiosis_struct.parent;
-
-                this->number_of_symbiont_materials = 0;
 
                 // get `childID` from `Shader` and set pointer to this `Symbiosis`.
                 this->bind_to_parent();
 
-                if (symbiosis_struct.model_file_format.compare("fbx") == 0 || symbiosis_struct.model_file_format.compare("FBX") == 0)
-                {
-                    // TODO: write the FBX symbiosis loading code!
-                    std::vector<unsigned char> data_vector = file::binary_slurp(symbiosis_struct.model_filename);
+                this->number_of_symbiont_materials = 0;
 
-                    // OpenFBX wants `u8` == `unsigned char`.
-                    const u8* data = reinterpret_cast<const u8*>(data_vector.data());
-                    const int size = data_vector.size();
-                    const ofbx::IScene* ofbx_iscene = ofbx::load(data, size);
+                SymbiosisLoaderStruct symbiosis_loader_struct;
+                symbiosis_loader_struct.model_filename = symbiosis_struct.model_filename;
+                symbiosis_loader_struct.model_file_format = symbiosis_struct.model_file_format;
+                symbiosis_loader_struct.triangulation_type = symbiosis_struct.triangulation_type;
 
-                    if (ofbx_iscene == nullptr)
-                    {
-                        std::cerr << "Error: ofbx_iscene is nullptr!\n";
-                        return;
-                    }
-
-                    const int32_t mesh_count = static_cast<const int32_t>(ofbx_iscene->getMeshCount()); // `getMeshCount()` returns `int`.
-
-                    for (int32_t mesh_i = 0; mesh_i < mesh_count; mesh_i++)
-                    {
-                        const ofbx::Mesh* mesh = ofbx_iscene->getMesh(mesh_i);
-
-                        if (mesh == nullptr)
-                        {
-                            std::cerr << "Error: mesh is nullptr!\n";
-                            continue;
-                        }
-
-                        const ofbx::Geometry* geometry = mesh->getGeometry();
-
-                        if (geometry == nullptr)
-                        {
-                            std::cerr << "Error: geometry is nullptr!\n";
-                            continue;
-                        }
-
-                        const int material_count = mesh->getMaterialCount(); // TODO: use this in  `ontology::Symbiosis` entities!
-                        std::cout << symbiosis_struct.model_filename << ": mesh " << mesh_i << ": getMaterialCount(): " << material_count << "\n";
-
-                        const int vertex_count = geometry->getVertexCount();
-                        std::cout << symbiosis_struct.model_filename << ": mesh " << mesh_i << ": getVertexCount(): " << vertex_count << "\n";
-
-                        if (vertex_count <= 0)
-                        {
-                            std::cerr << "Error: vertex count is <= 0 !\n";
-                            continue;
-                        }
-
-                        const ofbx::Vec3* vertices = geometry->getVertices();
-
-                        if (vertices == nullptr)
-                        {
-                            std::cerr << "Error: vertices is nullptr!\n";
-                            continue;
-                        }
-
-                        const ofbx::Vec3* normals = geometry->getNormals();
-
-                        if (normals == nullptr)
-                        {
-                            std::cerr << "Error: normals is nullptr!\n";
-                            continue;
-                        }
-
-                        const ofbx::Vec2* uvs = geometry->getUVs();
-
-                        if (uvs == nullptr)
-                        {
-                            std::cerr << "Error: uvs is nullptr!\n";
-                            continue;
-                        }
-                    }
-                }
-                else
-                {
-                    std::cerr << "no model was loaded!\n";
-                    std::cerr << "model file format: " << symbiosis_struct.model_file_format << "\n";
-                }
+                bool result = loaders::load_symbiosis(
+                        symbiosis_loader_struct,
+                        this->vertices,
+                        this->UVs,
+                        this->normals,
+                        this->indices,
+                        this->indexed_vertices,
+                        this->indexed_UVs,
+                        this->indexed_normals);
 
                 // TODO: Compute the graph of each type to enable object vertex modification!
 
@@ -160,6 +99,15 @@ namespace ontology
             std::vector<ontology::SymbiontMaterial*> symbiont_material_pointer_vector;
             std::queue<int32_t> free_symbiont_materialID_queue;
             int32_t number_of_symbiont_materials;
+
+            std::vector<std::vector<glm::vec3>> vertices;         // vertices of the object.
+            std::vector<std::vector<glm::vec2>> UVs;              // UVs of the object.
+            std::vector<std::vector<glm::vec3>> normals;          // normals of the object.
+
+            std::vector<std::vector<uint32_t>> indices;           // the deleted vertices will be reused (though it is not required, if there's enough memory).
+            std::vector<std::vector<glm::vec3>> indexed_vertices;
+            std::vector<std::vector<glm::vec2>> indexed_UVs;
+            std::vector<std::vector<glm::vec3>> indexed_normals;
     };
 }
 

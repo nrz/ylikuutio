@@ -12,7 +12,7 @@ namespace ontology
 typedef struct SymbiosisStruct
 {
     SymbiosisStruct()
-        : parent(nullptr)
+        : parent(nullptr), triangulation_type("bilinear_interpolation")
     {
         // constructor.
     }
@@ -20,6 +20,7 @@ typedef struct SymbiosisStruct
 
     std::string model_file_format;    // type of the symbiosis model file.
     std::string model_filename;       // filename of the symbiosis model file.
+    std::string triangulation_type;   // `"bilinear_interpolation"`, `"southwest_northeast_edges"`, `"southeast_northwest_edges"`.
 } SymbiosisStruct;
 
 #endif

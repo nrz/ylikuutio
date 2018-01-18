@@ -389,6 +389,8 @@ add_library(ylikuutio STATIC
     code/ylikuutio/loaders/bmp_loader.hpp
     code/ylikuutio/loaders/fbx_species_loader.cpp
     code/ylikuutio/loaders/fbx_species_loader.hpp
+    code/ylikuutio/loaders/fbx_symbiosis_loader.cpp
+    code/ylikuutio/loaders/fbx_symbiosis_loader.hpp
     code/ylikuutio/loaders/font_loader.cpp
     code/ylikuutio/loaders/font_loader.hpp
     code/ylikuutio/loaders/las_loader.cpp
@@ -402,6 +404,9 @@ add_library(ylikuutio STATIC
     code/ylikuutio/loaders/species_loader_struct.hpp
     code/ylikuutio/loaders/srtm_heightmap_loader.cpp
     code/ylikuutio/loaders/srtm_heightmap_loader.hpp
+    code/ylikuutio/loaders/symbiosis_loader.cpp
+    code/ylikuutio/loaders/symbiosis_loader.hpp
+    code/ylikuutio/loaders/symbiosis_loader_struct.hpp
     code/ylikuutio/loaders/texture_loader.cpp
     code/ylikuutio/loaders/texture_loader.hpp
 
