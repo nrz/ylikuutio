@@ -56,8 +56,8 @@ namespace ontology
 
                     // OpenFBX wants `u8` == `unsigned char`.
                     const u8* data = reinterpret_cast<const u8*>(data_vector.data());
-                    int size = data_vector.size();
-                    ofbx::IScene* ofbx_iscene = ofbx::load(data, size);
+                    const int size = data_vector.size();
+                    const ofbx::IScene* ofbx_iscene = ofbx::load(data, size);
 
                     if (ofbx_iscene == nullptr)
                     {
@@ -65,7 +65,7 @@ namespace ontology
                         return;
                     }
 
-                    int32_t mesh_count = static_cast<int32_t>(ofbx_iscene->getMeshCount()); // `getMeshCount()` returns `int`.
+                    const int32_t mesh_count = static_cast<const int32_t>(ofbx_iscene->getMeshCount()); // `getMeshCount()` returns `int`.
 
                     for (int32_t mesh_i = 0; mesh_i < mesh_count; mesh_i++)
                     {
@@ -85,10 +85,10 @@ namespace ontology
                             continue;
                         }
 
-                        int material_count = mesh->getMaterialCount(); // TODO: use this in  `ontology::Symbiosis` entities!
+                        const int material_count = mesh->getMaterialCount(); // TODO: use this in  `ontology::Symbiosis` entities!
                         std::cout << symbiosis_struct.model_filename << ": mesh " << mesh_i << ": getMaterialCount(): " << material_count << "\n";
 
-                        int vertex_count = geometry->getVertexCount();
+                        const int vertex_count = geometry->getVertexCount();
                         std::cout << symbiosis_struct.model_filename << ": mesh " << mesh_i << ": getVertexCount(): " << vertex_count << "\n";
 
                         if (vertex_count <= 0)
