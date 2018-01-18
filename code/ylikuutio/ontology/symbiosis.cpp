@@ -1,6 +1,10 @@
 #include "symbiosis.hpp"
 #include "symbiont_material.hpp"
+#include "render_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
+
+// Include standard headers
+#include <stdint.h> // uint32_t etc.
 
 namespace ontology
 {
