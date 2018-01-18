@@ -52,7 +52,7 @@ namespace ontology
                 this->parent = symbiont_species_struct.parent;
                 this->light_position = symbiont_species_struct.light_position;
 
-                // get `childID` from `Material` and set pointer to this `SymbiontSpecies`.
+                // get `childID` from `SymbiontMaterial` and set pointer to this `SymbiontSpecies`.
                 this->bind_to_parent();
 
                 // Get a handle for our buffers.
