@@ -70,6 +70,16 @@ namespace ontology
         this->parent->bind(this);
     }
 
+    void Shader::bind_to_new_parent(ontology::Scene* const new_scene_pointer)
+    {
+        // unbind from the old parent `Scene`.
+        this->parent->unbind(this->childID);
+
+        // get `childID` from `Scene` and set pointer to this `Shader`.
+        this->parent = new_scene_pointer;
+        this->parent->bind(this);
+    }
+
     Shader::~Shader()
     {
         // destructor.
@@ -128,16 +138,6 @@ namespace ontology
     void Shader::set_symbiosis_pointer(const int32_t childID, ontology::Symbiosis* const child_pointer)
     {
         hierarchy::set_child_pointer(childID, child_pointer, this->symbiosis_pointer_vector, this->free_symbiosisID_queue, &this->number_of_symbioses);
-    }
-
-    void Shader::bind_to_new_parent(ontology::Scene* const new_scene_pointer)
-    {
-        // unbind from the old parent `Scene`.
-        this->parent->unbind(this->childID);
-
-        // get `childID` from `Scene` and set pointer to this `Shader`.
-        this->parent = new_scene_pointer;
-        this->parent->bind(this);
     }
 
     void Shader::set_name(std::string name)

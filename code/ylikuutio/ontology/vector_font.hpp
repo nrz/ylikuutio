@@ -30,6 +30,12 @@ namespace ontology
     class VectorFont: public ontology::Entity
     {
         public:
+            void bind_glyph(ontology::Glyph* glyph);
+            void bind_text3D(ontology::Text3D* text3D);
+
+            // this method sets pointer to this species to nullptr, sets `parent` according to the input, and requests a new `childID` from the new material.
+            void bind_to_new_parent(ontology::Material* const new_material_pointer);
+
             // constructor.
             // TODO: `VectorFont` constructor also creates each `Glyph` and binds them to the `VectorFont`.
             VectorFont(ontology::Universe* const universe, const VectorFontStruct& vector_font_struct)
@@ -109,17 +115,11 @@ namespace ontology
             // Destroying a `VectorFont` destroys also all `Text3D` entities, and after that all `Glyph` entities.
             virtual ~VectorFont();
 
-            void bind_glyph(ontology::Glyph* glyph);
-            void bind_text3D(ontology::Text3D* text3D);
-
             // this method sets `Glyph` pointer.
             void set_glyph_pointer(const int32_t childID, ontology::Glyph* const child_pointer);
 
             // this method sets `Text3D` pointer.
             void set_text3D_pointer(const int32_t childID, ontology::Text3D* const child_pointer);
-
-            // this method sets pointer to this species to nullptr, sets `parent` according to the input, and requests a new `childID` from the new material.
-            void bind_to_new_parent(ontology::Material* const new_material_pointer);
 
             void set_name(const std::string& name);
 
@@ -132,11 +132,11 @@ namespace ontology
             ontology::Material* parent; // pointer to `Material`.
 
             template<class T1>
-                friend void render_children(const std::vector<T1>& child_pointer_vector);
-            template<class T1>
                 friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, int32_t* number_of_children);
             template<class T1, class T2>
                 friend void hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent, std::vector<T1>& old_child_pointer_vector, std::queue<int32_t>& old_free_childID_queue, int32_t* old_number_of_children);
+            template<class T1>
+                friend void render_children(const std::vector<T1>& child_pointer_vector);
 
         private:
             void bind_to_parent();

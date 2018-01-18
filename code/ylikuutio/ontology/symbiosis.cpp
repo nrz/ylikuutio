@@ -7,17 +7,6 @@ namespace ontology
     class Shader;
     class SymbiontMaterial;
 
-    void Symbiosis::bind_to_parent()
-    {
-        // get `childID` from `Shader` and set pointer to this `Symbiosis`.
-        this->parent->bind_symbiosis(this);
-    }
-
-    Symbiosis::~Symbiosis()
-    {
-        // destructor.
-    }
-
     void Symbiosis::bind(ontology::SymbiontMaterial* symbiont_material)
     {
         // get `childID` from `Symbiosis` and set pointer to `symbiont_material`.
@@ -26,6 +15,27 @@ namespace ontology
                 this->symbiont_material_pointer_vector,
                 this->free_symbiont_materialID_queue,
                 &this->number_of_symbiont_materials);
+    }
+
+    void Symbiosis::bind_to_parent()
+    {
+        // get `childID` from `Shader` and set pointer to this `Symbiosis`.
+        this->parent->bind_symbiosis(this);
+    }
+
+    void Symbiosis::bind_to_new_parent(ontology::Shader* const new_shader_pointer)
+    {
+        // unbind from the old parent `Shader`.
+        this->parent->unbind_symbiosis(this->childID);
+
+        // get `childID` from `Shader` and set pointer to this `Symbiosis`.
+        this->parent = new_shader_pointer;
+        this->parent->bind_symbiosis(this);
+    }
+
+    Symbiosis::~Symbiosis()
+    {
+        // destructor.
     }
 
     void Symbiosis::render()
@@ -56,15 +66,5 @@ namespace ontology
                 this->symbiont_material_pointer_vector,
                 this->free_symbiont_materialID_queue,
                 &this->number_of_symbiont_materials);
-    }
-
-    void Symbiosis::bind_to_new_parent(ontology::Shader* const new_shader_pointer)
-    {
-        // unbind from the old parent `Shader`.
-        this->parent->unbind_symbiosis(this->childID);
-
-        // get `childID` from `Shader` and set pointer to this `Symbiosis`.
-        this->parent = new_shader_pointer;
-        this->parent->bind_symbiosis(this);
     }
 }

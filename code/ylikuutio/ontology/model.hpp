@@ -36,6 +36,9 @@ namespace ontology
     class Model: public ontology::Entity
     {
         public:
+            void bind(ontology::Object* object);
+            void unbind(int32_t childID);
+
             // constructor.
             Model(ontology::Universe* universe)
                 : Entity(universe)
@@ -59,9 +62,6 @@ namespace ontology
 
             // destructor.
             virtual ~Model();
-
-            void bind(ontology::Object* object);
-            void unbind(int32_t childID);
 
             int32_t get_number_of_children() const override;
             int32_t get_number_of_descendants() const override;

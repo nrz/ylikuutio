@@ -30,6 +30,11 @@ namespace ontology
     class Symbiosis: public ontology::Entity
     {
         public:
+            void bind(ontology::SymbiontMaterial* symbiont_material);
+
+            // this method sets pointer to this `Symbiosis` to nullptr, sets `parent` according to the input, and requests a new `childID` from the new `Shader`.
+            void bind_to_new_parent(ontology::Shader* new_shader_pointer);
+
             // constructor.
             Symbiosis(const SymbiosisStruct& symbiosis_struct)
                 : Entity(symbiosis_struct.parent->get_universe())
@@ -129,8 +134,6 @@ namespace ontology
             // destructor.
             virtual ~Symbiosis();
 
-            void bind(ontology::SymbiontMaterial* symbiont_material);
-
             // this method renders all `SymbiontMaterial`s belonging to this `Symbiosis`.
             void render();
 
@@ -139,9 +142,6 @@ namespace ontology
             int32_t get_number_of_descendants() const override;
 
             void set_symbiont_material_pointer(const int32_t childID, ontology::SymbiontMaterial* const child_pointer);
-
-            // this method sets pointer to this `Symbiosis` to nullptr, sets `parent` according to the input, and requests a new `childID` from the new `Shader`.
-            void bind_to_new_parent(ontology::Shader* new_shader_pointer);
 
             void set_name(std::string name);
 

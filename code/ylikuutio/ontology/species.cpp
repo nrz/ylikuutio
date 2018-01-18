@@ -27,6 +27,16 @@ namespace ontology
         this->parent->bind_species(this);
     }
 
+    void Species::bind_to_new_parent(ontology::Material* const new_material_pointer)
+    {
+        // unbind from the old parent `Material`.
+        this->parent->unbind_species(this->childID);
+
+        // get `childID` from `Material` and set pointer to this `Species`.
+        this->parent = new_material_pointer;
+        this->parent->bind_species(this);
+    }
+
     Species::~Species()
     {
         // destructor.
@@ -84,15 +94,5 @@ namespace ontology
     int32_t Species::get_image_height()
     {
         return this->image_height;
-    }
-
-    void Species::bind_to_new_parent(ontology::Material* const new_material_pointer)
-    {
-        // unbind from the old parent `Material`.
-        this->parent->unbind_species(this->childID);
-
-        // get `childID` from `Material` and set pointer to this `Species`.
-        this->parent = new_material_pointer;
-        this->parent->bind_species(this);
     }
 }

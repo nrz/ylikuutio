@@ -46,6 +46,15 @@ namespace ontology
     class Shader: public ontology::Entity
     {
         public:
+            void bind_material(ontology::Material* material);
+            void bind_symbiosis(ontology::Symbiosis* symbiosis);
+
+            void unbind_material(int32_t childID);
+            void unbind_symbiosis(int32_t childID);
+
+            // this method sets pointer to this `Shader` to nullptr, sets `parent` according to the input, and requests a new `childID` from the new `Scene`.
+            void bind_to_new_parent(ontology::Scene* const new_scene_pointer);
+
             // constructor.
             Shader(ontology::Universe* const universe, const ShaderStruct& shader_struct)
                 : Entity(universe)
@@ -84,15 +93,6 @@ namespace ontology
             // destructor.
             virtual ~Shader();
 
-            void bind_material(ontology::Material* material);
-            void bind_symbiosis(ontology::Symbiosis* symbiosis);
-
-            void unbind_material(int32_t childID);
-            void unbind_symbiosis(int32_t childID);
-
-            // this method sets pointer to this `Shader` to nullptr, sets `parent` according to the input, and requests a new `childID` from the new `Scene`.
-            void bind_to_new_parent(ontology::Scene* const new_scene_pointer);
-
             void set_name(std::string name);
 
             // this method sets a `Material` pointer.
@@ -106,11 +106,11 @@ namespace ontology
             GLuint get_model_matrixID();
 
             template<class T1>
-                friend void render_children(const std::vector<T1>& child_pointer_vector);
-            template<class T1>
                 friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, int32_t* number_of_children);
             template<class T1, class T2>
                 friend void hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent, std::vector<T1>& old_child_pointer_vector, std::queue<int32_t>& old_free_childID_queue, int32_t* old_number_of_children);
+            template<class T1>
+                friend void render_children(const std::vector<T1>& child_pointer_vector);
 
         private:
             void bind_to_parent();

@@ -15,11 +15,6 @@ namespace ontology
 {
     class Universe;
 
-    Model::~Model()
-    {
-        // destructor.
-    }
-
     void Model::bind(ontology::Object* object)
     {
         // get `childID` from `Model` and set pointer to `object`.
@@ -39,6 +34,11 @@ namespace ontology
                 this->object_pointer_vector,
                 this->free_objectID_queue,
                 &this->number_of_objects);
+    }
+
+    Model::~Model()
+    {
+        // destructor.
     }
 
     int32_t Model::get_number_of_children() const

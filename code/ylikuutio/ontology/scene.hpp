@@ -32,6 +32,10 @@ namespace ontology
     class Scene: public ontology::Entity
     {
         public:
+            void bind(ontology::Shader* shader);
+
+            void unbind(int32_t childID);
+
             // constructor.
             Scene(ontology::Universe* const universe, ontology::World* const world, const float water_level)
                 : Entity(universe)
@@ -62,10 +66,6 @@ namespace ontology
 
             // destructor.
             virtual ~Scene();
-
-            void bind(ontology::Shader* shader);
-
-            void unbind(int32_t childID);
 
             // this method renders all `Shader`s of this `Scene`.
             void render();

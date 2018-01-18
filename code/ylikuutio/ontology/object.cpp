@@ -30,6 +30,31 @@ namespace ontology
         parent_model->bind(this);
     }
 
+    void Object::bind_to_new_parent(void* const new_parent)
+    {
+        // this method sets pointer to this `Object` to nullptr, sets `parent` according to the input,
+        // and requests a new `childID` from the new `Species` or from the new `Glyph`.
+
+        ontology::Model* glyph_parent_model = this->glyph_parent;
+        ontology::Model* species_parent_model = this->species_parent;
+        ontology::Model* parent_model = (this->is_character ? glyph_parent_model : species_parent_model);
+
+        // unbind from the old parent `Model`.
+        parent_model->unbind(this->childID);
+
+        if (this->is_character)
+        {
+            this->glyph_parent = static_cast<ontology::Glyph*>(new_parent);
+        }
+        else
+        {
+            this->species_parent = static_cast<ontology::Species*>(new_parent);
+        }
+
+        // get `childID` from `Model` and set pointer to this `Object`.
+        parent_model->bind(this);
+    }
+
     Object::~Object()
     {
         // destructor.
@@ -197,31 +222,6 @@ namespace ontology
     int32_t Object::get_number_of_descendants() const
     {
         return 0;
-    }
-
-    void Object::bind_to_new_parent(void* const new_parent)
-    {
-        // this method sets pointer to this `Object` to nullptr, sets `parent` according to the input,
-        // and requests a new `childID` from the new `Species` or from the new `Glyph`.
-
-        ontology::Model* glyph_parent_model = this->glyph_parent;
-        ontology::Model* species_parent_model = this->species_parent;
-        ontology::Model* parent_model = (this->is_character ? glyph_parent_model : species_parent_model);
-
-        // unbind from the old parent `Model`.
-        parent_model->unbind(this->childID);
-
-        if (this->is_character)
-        {
-            this->glyph_parent = static_cast<ontology::Glyph*>(new_parent);
-        }
-        else
-        {
-            this->species_parent = static_cast<ontology::Species*>(new_parent);
-        }
-
-        // get `childID` from `Model` and set pointer to this `Object`.
-        parent_model->bind(this);
     }
 
     void Object::set_name(const std::string& name)

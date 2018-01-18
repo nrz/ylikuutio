@@ -43,6 +43,14 @@ namespace ontology
     class Material: public ontology::Entity
     {
         public:
+            void bind_species(ontology::Species* species);
+            void bind_vector_font(ontology::VectorFont* vector_font);
+            void bind_chunk_master(space_partition::ChunkMaster* chunk_master);
+
+            void unbind_species(int32_t childID);
+            void unbind_vector_font(int32_t childID);
+            void unbind_chunk_master(int32_t childID);
+
             // constructor.
             Material(ontology::Universe* const universe, const MaterialStruct& material_struct)
                 : Entity(universe)
@@ -92,14 +100,6 @@ namespace ontology
 
             // destructor.
             virtual ~Material();
-
-            void bind_species(ontology::Species* species);
-            void bind_vector_font(ontology::VectorFont* vector_font);
-            void bind_chunk_master(space_partition::ChunkMaster* chunk_master);
-
-            void unbind_species(int32_t childID);
-            void unbind_vector_font(int32_t childID);
-            void unbind_chunk_master(int32_t childID);
 
             // this method sets pointer to this `Material` to nullptr, sets `parent` according to the input, and requests a new `childID` from the new `Shader`.
             void bind_to_new_parent(ontology::Shader* const new_shader_pointer);

@@ -202,6 +202,8 @@ namespace ontology
     class Universe: public ontology::Entity
     {
         public:
+            void bind(ontology::World* world);
+
             // constructor.
             Universe(const UniverseStruct& universe_struct)
                 : Entity(nullptr) // `Universe` has no parent.
@@ -295,8 +297,6 @@ namespace ontology
 
             // destructor.
             virtual ~Universe();
-
-            void bind(ontology::World* world);
 
             // this method renders the active `Scene` of this `Universe`.
             void render();

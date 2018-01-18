@@ -48,6 +48,10 @@ namespace ontology
     class Object: public ontology::Movable
     {
         public:
+            // this method sets pointer to this `Object` to nullptr, sets `parent` according to the input,
+            // and requests a new `childID` from the new `Species` or from the new `Glyph`.
+            void bind_to_new_parent(void* const new_parent);
+
             // constructor.
             Object(ontology::Universe* const universe, const ObjectStruct& object_struct)
                 : Movable(universe, object_struct.cartesian_coordinates)
@@ -92,10 +96,6 @@ namespace ontology
             virtual ~Object();
 
             ontology::Entity* get_parent() const override;
-
-            // this method sets pointer to this `Object` to nullptr, sets `parent` according to the input,
-            // and requests a new `childID` from the new `Species` or from the new `Glyph`.
-            void bind_to_new_parent(void* const new_parent);
 
             void set_name(const std::string& name);
 

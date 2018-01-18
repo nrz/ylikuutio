@@ -23,6 +23,16 @@
 
 namespace ontology
 {
+    void SymbiontMaterial::bind(ontology::SymbiontSpecies* symbiont_species)
+    {
+        // get `childID` from `SymbiontMaterial` and set pointer to `symbiont_species`.
+        hierarchy::bind_child_to_parent<ontology::SymbiontSpecies*>(
+                symbiont_species,
+                this->symbiont_species_pointer_vector,
+                this->free_symbiont_speciesID_queue,
+                &this->number_of_symbiont_species);
+    }
+
     void SymbiontMaterial::bind_to_parent()
     {
         // get `childID` from `Symbiosis` and set pointer to this `SymbiontMaterial`.
@@ -42,16 +52,6 @@ namespace ontology
 
         // set pointer to this symbiont_material to nullptr.
         this->parent->set_symbiont_material_pointer(this->childID, nullptr);
-    }
-
-    void SymbiontMaterial::bind(ontology::SymbiontSpecies* symbiont_species)
-    {
-        // get `childID` from `SymbiontMaterial` and set pointer to `symbiont_species`.
-        hierarchy::bind_child_to_parent<ontology::SymbiontSpecies*>(
-                symbiont_species,
-                this->symbiont_species_pointer_vector,
-                this->free_symbiont_speciesID_queue,
-                &this->number_of_symbiont_species);
     }
 
     void SymbiontMaterial::render()

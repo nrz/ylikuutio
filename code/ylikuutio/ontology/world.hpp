@@ -20,6 +20,8 @@ namespace ontology
     class World: public ontology::Entity
     {
         public:
+            void bind(ontology::Scene* scene);
+
             // constructor.
             World(ontology::Universe* const universe)
                 : Entity(universe)
@@ -39,8 +41,6 @@ namespace ontology
 
             // destructor.
             virtual ~World();
-
-            void bind(ontology::Scene* scene);
 
             // this method renders the active `Scene` of this `World`.
             void render();
