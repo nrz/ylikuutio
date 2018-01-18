@@ -29,7 +29,7 @@ namespace ontology
             std::string get_type() const;
 
             ontology::Universe* get_universe() const;
-            config::SettingMaster* get_setting_master() const;;
+            config::SettingMaster* get_setting_master() const;
             void set_setting_master(config::SettingMaster* setting_master);
 
             virtual ontology::Entity* get_parent() const = 0;
