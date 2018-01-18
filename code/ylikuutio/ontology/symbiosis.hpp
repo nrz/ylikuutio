@@ -1,8 +1,10 @@
 #ifndef __SYMBIOSIS_HPP_INCLUDED
 #define __SYMBIOSIS_HPP_INCLUDED
-// `Symbiosis` consists usually of 2 or more different `Material`s and 2 or more `Species` bound to these `Material`s.
-// Symbiont `Species` use the same `Shader`. In the future, a new class `ShaderSymbiosis` may be crated should need for such class arise.
-// `ShaderSymbiosis` is like `Symbiosis`, but it contains also `Shader`s in addition to `Material`s and `Species`.
+// `Symbiosis` consists usually of 2 or more different `SymbiontMaterial`s and 2 or more `SymbiontSpecies` bound to these `SymbiontMaterial`s.
+// All `SymbiontSpecies` of the same `Symbiosis` use the same `Shader`.
+//
+// In the future, a new class `ShaderSymbiosis` may be created should need for such class arise.
+// `ShaderSymbiosis` is like `Symbiosis`, but it contains also `SymbiontShader`s in addition to `SymbiontMaterial`s and `SymbiontSpecies`.
 
 #include "entity.hpp"
 #include "symbiont_species.hpp"
