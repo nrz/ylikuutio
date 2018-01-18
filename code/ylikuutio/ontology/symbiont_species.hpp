@@ -48,9 +48,9 @@ namespace ontology
                 : Model(symbiont_species_struct.universe)
             {
                 // constructor.
-                this->light_position = symbiont_species_struct.light_position;
-                this->parent   = symbiont_species_struct.parent;
                 this->universe = symbiont_species_struct.universe;
+                this->parent = symbiont_species_struct.parent;
+                this->light_position = symbiont_species_struct.light_position;
 
                 // get `childID` from `Material` and set pointer to this `SymbiontSpecies`.
                 this->bind_to_parent();
