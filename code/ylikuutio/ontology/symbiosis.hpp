@@ -155,7 +155,7 @@ namespace ontology
         private:
             void bind_to_parent();
 
-            ontology::Shader* parent; // pointer to `Scene`.
+            ontology::Shader* parent; // pointer to `Shader`.
 
             std::vector<ontology::SymbiontMaterial*> symbiont_material_pointer_vector;
             std::queue<int32_t> free_symbiont_materialID_queue;
