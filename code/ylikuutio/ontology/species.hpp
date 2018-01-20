@@ -11,6 +11,7 @@
 #include "render_templates.hpp"
 #include "entity_templates.hpp"
 #include "code/ylikuutio/loaders/species_loader.hpp"
+#include "code/ylikuutio/loaders/species_loader_struct.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include GLEW
