@@ -111,9 +111,9 @@ namespace ontology
             GLuint vertexUVID;
             GLuint vertexNormal_modelspaceID;
 
-            std::vector<glm::vec3> vertices;         // vertices of the object.
-            std::vector<glm::vec2> UVs;              // UVs of the object.
-            std::vector<glm::vec3> normals;          // normals of the object.
+            std::vector<glm::vec3> vertices;         // vertices of the `Model`.
+            std::vector<glm::vec2> UVs;              // UVs of the `Model`.
+            std::vector<glm::vec3> normals;          // normals of the `Model`.
 
             std::vector<uint32_t> indices;           // the deleted vertices will be reused (though it is not required, if there's enough memory).
             std::vector<glm::vec3> indexed_vertices;
