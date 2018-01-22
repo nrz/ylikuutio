@@ -71,7 +71,7 @@ namespace ajokki
 
         // Create the material, store it in `joensuu_center_west_grass_material_struct`.
         MaterialStruct joensuu_center_west_grass_material_struct;
-        joensuu_center_west_grass_material_struct.parent = joensuu_center_west_shader;
+        joensuu_center_west_grass_material_struct.shader = joensuu_center_west_shader;
         joensuu_center_west_grass_material_struct.texture_file_format = "bmp";
         joensuu_center_west_grass_material_struct.texture_filename = "GrassGreenTexture0002.bmp";
 
@@ -91,7 +91,7 @@ namespace ajokki
         SpeciesStruct joensuu_center_west_terrain_species_struct;
         joensuu_center_west_terrain_species_struct.scene = joensuu_center_west_scene;
         joensuu_center_west_terrain_species_struct.shader = joensuu_center_west_shader;
-        joensuu_center_west_terrain_species_struct.parent = joensuu_center_west_grass_material;
+        joensuu_center_west_terrain_species_struct.material = joensuu_center_west_grass_material;
         joensuu_center_west_terrain_species_struct.model_file_format = "ASCII_grid";
         joensuu_center_west_terrain_species_struct.model_filename = "N5424G.asc"; // Joensuu center & western.
         joensuu_center_west_terrain_species_struct.light_position = glm::vec3(0, 100000, 100000);
@@ -122,7 +122,7 @@ namespace ajokki
 
         // Create the material, store it in `orange_fur_material_joensuu`.
         MaterialStruct orange_fur_material_joensuu_struct;
-        orange_fur_material_joensuu_struct.parent = joensuu_center_west_shader;
+        orange_fur_material_joensuu_struct.shader = joensuu_center_west_shader;
         orange_fur_material_joensuu_struct.texture_file_format = "bmp";
         orange_fur_material_joensuu_struct.texture_filename = "orange_fur_texture.bmp";
 
@@ -140,7 +140,7 @@ namespace ajokki
         SpeciesStruct horse_species_struct;
         horse_species_struct.scene = joensuu_center_west_scene;
         horse_species_struct.shader = joensuu_center_west_shader;
-        horse_species_struct.parent = orange_fur_material_joensuu;
+        horse_species_struct.material = orange_fur_material_joensuu;
         horse_species_struct.model_file_format = "fbx";
         horse_species_struct.model_filename = "horse.fbx";
         horse_species_struct.light_position = glm::vec3(0, 100000, 100000);

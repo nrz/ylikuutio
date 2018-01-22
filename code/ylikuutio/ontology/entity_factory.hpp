@@ -5,6 +5,8 @@
 #include "material_struct.hpp"
 #include "species_struct.hpp"
 #include "object_struct.hpp"
+#include "symbiosis_struct.hpp"
+#include "holobiont_struct.hpp"
 #include "vector_font_struct.hpp"
 #include "text3D_struct.hpp"
 
@@ -47,6 +49,8 @@ namespace ontology
             ontology::Entity* create_Material(const MaterialStruct& material_struct);
             ontology::Entity* create_Species(const SpeciesStruct& species_struct);
             ontology::Entity* create_Object(const ObjectStruct& object_struct);
+            ontology::Entity* create_Symbiosis(const SymbiosisStruct& symbiosis_struct);
+            ontology::Entity* create_Holobiont(const HolobiontStruct& object_struct);
             ontology::Entity* create_VectorFont(const VectorFontStruct& vector_font_struct);
             ontology::Entity* create_Text3D(const Text3DStruct& text3D_struct);
             ontology::Entity* create_Font2D(
@@ -60,7 +64,7 @@ namespace ontology
         private:
             // constructor.
             // only `Universe` can create an `EntityFactory`.
-            EntityFactory(ontology::Universe* universe);
+            EntityFactory(ontology::Universe* const universe);
 
             ontology::Universe* universe;
     };

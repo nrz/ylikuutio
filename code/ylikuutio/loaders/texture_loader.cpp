@@ -1,5 +1,6 @@
 #include "texture_loader.hpp"
 #include "bmp_loader.hpp"
+#include <ofbx.h>
 
 // Include GLEW
 #ifndef __GL_GLEW_H_INCLUDED
@@ -14,6 +15,7 @@
 #endif
 
 // Include standard headers
+#include <cmath>    // floor, NAN, sqrt, std::isnan, std::pow
 #include <cstdio>   // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf etc.
 #include <cstring>  // std::memcmp, std::strcmp, std::strlen, std::strncmp
 #include <iostream> // std::cout, std::cin, std::cerr
@@ -23,17 +25,9 @@
 
 namespace loaders
 {
-    GLuint load_BMP_texture(const std::string& filename)
+    // Load texture from memory.
+    GLuint load_texture(const uint8_t* const image_data, const int32_t image_width, const int32_t image_height, bool should_image_data_be_deleted)
     {
-        int32_t image_width;
-        int32_t image_height;
-        int32_t image_size;
-
-        uint32_t x_step = 1;
-        uint32_t z_step = 1;
-
-        uint8_t* image_data = load_BMP_file(filename, image_width, image_height, image_size);
-
         // Create one OpenGL texture
         GLuint textureID;
         glGenTextures(1, &textureID);
@@ -44,8 +38,11 @@ namespace loaders
         // Give the image to OpenGL
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, image_width, image_height, 0, GL_BGR, GL_UNSIGNED_BYTE, image_data);
 
-        // OpenGL has now copied the data. Free our own version
-        delete[] image_data;
+        if (should_image_data_be_deleted)
+        {
+            // OpenGL has now copied the data. Free our own version
+            delete[] image_data;
+        }
 
         // Poor filtering, or ...
         //glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
@@ -71,6 +68,42 @@ namespace loaders
 
         // Return the ID of the texture we just created
         return textureID;
+    }
+
+    // Load texture from memory.
+    GLuint load_FBX_texture(const ofbx::Texture* const ofbx_texture)
+    {
+        // Load the texture.
+        const uint8_t* texture_data_begin = static_cast<const uint8_t*>(ofbx_texture->getFileName().begin);
+        const uint8_t* texture_data_end = static_cast<const uint8_t*>(ofbx_texture->getFileName().end);
+
+        std::cout << "Loading ofbx::Texture* from memory address 0x" << std::hex << (uint64_t) texture_data_begin << std::dec << "\n";
+        std::cout << "ofbx::Texture* texture end address is 0x" << std::hex << (uint64_t) texture_data_end << std::dec << "\n";
+
+        // Assume square texture.
+        uint64_t data_size = (uint64_t) texture_data_end - (uint64_t) texture_data_begin;
+        std::cout << "ofbx::Texture* data size is " << data_size << " bytes.\n";
+
+        double sqrt_of_data_size = sqrt(data_size);
+        std::cout << "ofbx::Texture* square root of data size is " << sqrt_of_data_size << "\n";
+
+        int32_t floor_of_sqrt = static_cast<int32_t>(floor(sqrt_of_data_size));
+
+        return loaders::load_texture(texture_data_begin, floor_of_sqrt, floor_of_sqrt, false);
+    }
+
+    GLuint load_BMP_texture(const std::string& filename)
+    {
+        int32_t image_width;
+        int32_t image_height;
+        int32_t image_size;
+
+        uint32_t x_step = 1;
+        uint32_t z_step = 1;
+
+        uint8_t* image_data = load_BMP_file(filename, image_width, image_height, image_size);
+
+        return load_texture(image_data, image_width, image_height, true);
     }
 
     // Since GLFW 3, glfwLoadTexture2D() has been removed. You have to use another texture loading library,

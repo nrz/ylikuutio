@@ -25,36 +25,7 @@
 
 namespace ontology
 {
-    void Material::bind_to_parent()
-    {
-        // get `childID` from `Shader` and set pointer to this `Material`.
-        this->parent->bind_material(this);
-    }
-
-    Material::~Material()
-    {
-        // destructor.
-        std::cout << "Material with childID " << std::dec << this->childID << " will be destroyed.\n";
-
-        // destroy all species of this material.
-        std::cout << "All species of this material will be destroyed.\n";
-        hierarchy::delete_children<ontology::Species*>(this->species_pointer_vector, &this->number_of_species);
-
-        // destroy all fonts of this material.
-        std::cout << "All fonts of this material will be destroyed.\n";
-        hierarchy::delete_children<ontology::VectorFont*>(this->vector_font_pointer_vector, &this->number_of_vector_fonts);
-
-        // destroy all chunk masters of this material.
-        std::cout << "All chunk masters of this material will be destroyed.\n";
-        hierarchy::delete_children<space_partition::ChunkMaster*>(this->chunk_master_pointer_vector, &this->number_of_chunk_masters);
-
-        glDeleteTextures(1, &this->texture);
-
-        // set pointer to this material to nullptr.
-        this->parent->set_material_pointer(this->childID, nullptr);
-    }
-
-    void Material::bind_species(ontology::Species* species)
+    void Material::bind_species(ontology::Species* const species)
     {
         // get `childID` from `Material` and set pointer to `species`.
         hierarchy::bind_child_to_parent<ontology::Species*>(
@@ -64,7 +35,7 @@ namespace ontology
                 &this->number_of_species);
     }
 
-    void Material::bind_vector_font(ontology::VectorFont* vector_font)
+    void Material::bind_vector_font(ontology::VectorFont* const vector_font)
     {
         // get `childID` from `Material` and set pointer to `vector_font`.
         hierarchy::bind_child_to_parent<ontology::VectorFont*>(
@@ -74,7 +45,7 @@ namespace ontology
                 &this->number_of_vector_fonts);
     }
 
-    void Material::bind_chunk_master(space_partition::ChunkMaster* chunk_master)
+    void Material::bind_chunk_master(space_partition::ChunkMaster* const chunk_master)
     {
         // get `childID` from `Material` and set pointer to `chunk_master`.
         hierarchy::bind_child_to_parent<space_partition::ChunkMaster*>(
@@ -84,7 +55,7 @@ namespace ontology
                 &this->number_of_chunk_masters);
     }
 
-    void Material::unbind_species(int32_t childID)
+    void Material::unbind_species(const int32_t childID)
     {
         ontology::Species* dummy_child_pointer = nullptr;
         hierarchy::set_child_pointer(
@@ -95,7 +66,7 @@ namespace ontology
                 &this->number_of_species);
     }
 
-    void Material::unbind_vector_font(int32_t childID)
+    void Material::unbind_vector_font(const int32_t childID)
     {
         ontology::VectorFont* dummy_child_pointer = nullptr;
         hierarchy::set_child_pointer(
@@ -106,7 +77,7 @@ namespace ontology
                 &this->number_of_vector_fonts);
     }
 
-    void Material::unbind_chunk_master(int32_t childID)
+    void Material::unbind_chunk_master(const int32_t childID)
     {
         space_partition::ChunkMaster* dummy_child_pointer = nullptr;
         hierarchy::set_child_pointer(
@@ -115,6 +86,38 @@ namespace ontology
                 this->chunk_master_pointer_vector,
                 this->free_chunk_masterID_queue,
                 &this->number_of_chunk_masters);
+    }
+
+    void Material::bind_to_parent()
+    {
+        // get `childID` from `Shader` and set pointer to this `Material`.
+        this->parent->bind_material(this);
+    }
+
+    Material::~Material()
+    {
+        if (!this->is_symbiont_material)
+        {
+            // destructor.
+            std::cout << "Material with childID " << std::dec << this->childID << " will be destroyed.\n";
+
+            // destroy all species of this material.
+            std::cout << "All species of this material will be destroyed.\n";
+            hierarchy::delete_children<ontology::Species*>(this->species_pointer_vector, &this->number_of_species);
+
+            // destroy all fonts of this material.
+            std::cout << "All fonts of this material will be destroyed.\n";
+            hierarchy::delete_children<ontology::VectorFont*>(this->vector_font_pointer_vector, &this->number_of_vector_fonts);
+
+            // destroy all chunk masters of this material.
+            std::cout << "All chunk masters of this material will be destroyed.\n";
+            hierarchy::delete_children<space_partition::ChunkMaster*>(this->chunk_master_pointer_vector, &this->number_of_chunk_masters);
+
+            glDeleteTextures(1, &this->texture);
+
+            // set pointer to this material to nullptr.
+            this->parent->set_material_pointer(this->childID, nullptr);
+        }
     }
 
     void Material::render()

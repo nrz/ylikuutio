@@ -32,6 +32,10 @@ namespace ontology
     class Scene: public ontology::Entity
     {
         public:
+            void bind(ontology::Shader* const shader);
+
+            void unbind(const int32_t childID);
+
             // constructor.
             Scene(ontology::Universe* const universe, ontology::World* const world, const float water_level)
                 : Entity(universe)
@@ -63,26 +67,22 @@ namespace ontology
             // destructor.
             virtual ~Scene();
 
-            void bind(ontology::Shader* shader);
-
-            void unbind(int32_t childID);
-
             // this method renders all `Shader`s of this `Scene`.
             void render();
 
             // this method returns a pointer to an `Entity` using the name as key.
-            ontology::Entity* get_entity(const std::string);
+            ontology::Entity* get_entity(const std::string) const;
 
             void set_name(std::string name);
 
             // this method returns a pointer to `datatypes::AnyValue` corresponding to the given `key`.
-            std::shared_ptr<datatypes::AnyValue> get_variable(std::string key);
-            float get_turbo_factor();
+            std::shared_ptr<datatypes::AnyValue> get_variable(const std::string& key) const;
+            float get_turbo_factor() const;
             void set_turbo_factor(float turbo_factor);
-            float get_twin_turbo_factor();
+            float get_twin_turbo_factor() const;
             void set_twin_turbo_factor(float turbo_factor);
 
-            float get_water_level();
+            float get_water_level() const;
 
             // this method sets a `Shader` pointer.
             void set_shader_pointer(const int32_t childID, ontology::Shader* const child_pointer);

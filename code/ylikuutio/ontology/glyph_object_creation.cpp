@@ -11,7 +11,7 @@ namespace ontology
 {
     class Glyph;
 
-    void create_glyph_objects(const std::string& text_string, ontology::Text3D* text3D)
+    void create_glyph_objects(const std::string& text_string, ontology::Text3D* const text3D)
     {
         const char* text_pointer = text_string.c_str();
 

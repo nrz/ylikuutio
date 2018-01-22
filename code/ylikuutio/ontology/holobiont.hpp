@@ -1,12 +1,10 @@
-#ifndef __OBJECT_HPP_INCLUDED
-#define __OBJECT_HPP_INCLUDED
+#ifndef __HOLOBIONT_HPP_INCLUDED
+#define __HOLOBIONT_HPP_INCLUDED
 
 #include "movable.hpp"
 #include "shader.hpp"
-#include "species.hpp"
-#include "text3D.hpp"
-#include "glyph.hpp"
-#include "object_struct.hpp"
+#include "symbiosis.hpp"
+#include "holobiont_struct.hpp"
 #include "render_templates.hpp"
 #include "entity_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
@@ -42,62 +40,65 @@
 
 namespace ontology
 {
-    class Species;
-    class Glyph;
+    class Biont;
 
-    class Object: public ontology::Movable
+    class Holobiont: public ontology::Movable
     {
         public:
+            void bind_biont(ontology::Biont* const biont);
+            void unbind_biont(const int32_t childID);
+
             // this method sets pointer to this `Object` to nullptr, sets `parent` according to the input,
             // and requests a new `childID` from the new `Species` or from the new `Glyph`.
-            void bind_to_new_parent(void* const new_parent);
+            void bind_to_new_parent(ontology::Symbiosis* const new_parent);
 
             // constructor.
-            Object(ontology::Universe* const universe, const ObjectStruct& object_struct)
-                : Movable(universe, object_struct.cartesian_coordinates)
+            Holobiont(ontology::Universe* const universe, const HolobiontStruct& holobiont_struct)
+                : Movable(universe, holobiont_struct.cartesian_coordinates)
             {
                 // constructor.
-                this->original_scale_vector = object_struct.original_scale_vector;
-                this->rotate_angle          = object_struct.rotate_angle;
-                this->rotate_vector         = object_struct.rotate_vector;
-                this->initial_rotate_angle  = object_struct.initial_rotate_angle;
-                this->initial_rotate_vector = object_struct.initial_rotate_vector;
-                this->translate_vector      = object_struct.translate_vector;
+                this->universe              = universe;
+                this->symbiosis_parent      = holobiont_struct.symbiosis_parent;
+
+                this->original_scale_vector = holobiont_struct.original_scale_vector;
+                this->rotate_angle          = holobiont_struct.rotate_angle;
+                this->rotate_vector         = holobiont_struct.rotate_vector;
+                this->initial_rotate_angle  = holobiont_struct.initial_rotate_angle;
+                this->initial_rotate_vector = holobiont_struct.initial_rotate_vector;
+                this->quaternions_in_use    = holobiont_struct.quaternions_in_use;
+                this->cartesian_coordinates = holobiont_struct.cartesian_coordinates;
+                this->translate_vector      = holobiont_struct.translate_vector;
                 this->has_entered           = false;
 
-                // enable rendering of a recently entered Object.
-                // TODO: enable entering without enabling rendering.
-                this->should_ylikuutio_render_this_object = true;
+                this->should_ylikuutio_render_this_holobiont = true;
+                this->number_of_bionts = 0;
 
-                this->is_character          = object_struct.is_character;
-                this->quaternions_in_use    = object_struct.quaternions_in_use;
-                this->model_matrix          = glm::mat4(1.0f); // identity matrix (dummy value).
-                this->MVP_matrix            = glm::mat4(1.0f); // identity matrix (dummy value).
-
-                if (this->is_character)
-                {
-                    this->glyph_parent   = object_struct.glyph_parent;
-                    this->text3D_parent  = object_struct.text3D_parent;
-                    this->species_parent = nullptr;
-                }
-                else
-                {
-                    this->species_parent = object_struct.species_parent;
-                    this->glyph_parent   = nullptr;
-                    this->text3D_parent  = nullptr;
-                }
-
-                // get `childID` from `Species` or `Glyph` and set pointer to this `Object`.
+                // get `childID` from `Symbiosis` and set pointer to this `Holobiont`.
                 this->bind_to_parent();
-                this->type = "ontology::Object*";
+                this->type = "ontology::Holobiont*";
+
+                this->create_bionts();
             }
 
             // destructor.
-            virtual ~Object();
+            virtual ~Holobiont();
 
             ontology::Entity* get_parent() const override;
 
+            void set_biont_pointer(const int32_t childID, ontology::Biont* const child_pointer);
+
             void set_name(const std::string& name);
+
+            GLuint get_vertexposition_modelspaceID(const int32_t biontID) const;
+            GLuint get_vertexUVID(const int32_t biontID) const;
+            GLuint get_vertexnormal_modelspaceID(const int32_t biontID) const;
+
+            GLuint get_vertexbuffer(const int32_t biontID) const;
+            GLuint get_uvbuffer(const int32_t biontID) const;
+            GLuint get_normalbuffer(const int32_t biontID) const;
+            GLuint get_elementbuffer(const int32_t biontID) const;
+            std::vector<uint32_t> get_indices(const int32_t biontID) const;
+            int32_t get_indices_size(const int32_t biontID) const;
 
             template<class T1>
                 friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, int32_t* number_of_children);
@@ -109,21 +110,24 @@ namespace ontology
         private:
             void bind_to_parent();
 
-            // this method renders this `Object`.
+            // this method renders this `Holobiont`.
             void render();
-            void render_this_object(ontology::Shader* const shader_pointer);
+
+            void create_bionts();
 
             int32_t get_number_of_children() const override;
             int32_t get_number_of_descendants() const override;
 
-            ontology::Species* species_parent; // pointer to `Species`.
-            ontology::Glyph* glyph_parent;     // pointer to `Glyph`.
-            ontology::Text3D* text3D_parent;   // pointer to `Text3D`.
-            bool is_character;
+            std::vector<ontology::Biont*> biont_pointer_vector;
+            std::queue<int32_t> free_biontID_queue;
+            int32_t number_of_bionts;
+
+            ontology::Symbiosis* symbiosis_parent; // pointer to `Symbiosis`.
+
             bool quaternions_in_use;
 
             bool has_entered;
-            bool should_ylikuutio_render_this_object;
+            bool should_ylikuutio_render_this_holobiont;
 
             glm::vec3 original_scale_vector;       // original scale vector.
             GLfloat rotate_angle;                  // rotate angle.
@@ -131,10 +135,6 @@ namespace ontology
             glm::vec3 translate_vector;            // translate vector.
             GLfloat initial_rotate_angle;          // initial rotate angle.
             glm::vec3 initial_rotate_vector;       // initial rotate vector.
-
-            // The rest fields are created in the constructor.
-            glm::mat4 model_matrix;                // model matrix.
-            glm::mat4 MVP_matrix;                  // model view projection matrix.
     };
 }
 

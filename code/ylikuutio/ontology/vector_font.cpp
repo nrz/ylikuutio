@@ -25,6 +25,36 @@ namespace ontology
     class Text3D;
     class Glyph;
 
+    void VectorFont::bind_glyph(ontology::Glyph* const glyph)
+    {
+        // get `childID` from `VectorFont` and set pointer to `glyph`.
+        hierarchy::bind_child_to_parent<ontology::Glyph*>(
+                glyph,
+                this->glyph_pointer_vector,
+                this->free_glyphID_queue,
+                &this->number_of_glyphs);
+    }
+
+    void VectorFont::bind_text3D(ontology::Text3D* const text3D)
+    {
+        // get `childID` from `VectorFont` and set pointer to `text3D`.
+        hierarchy::bind_child_to_parent<ontology::Text3D*>(
+                text3D,
+                this->text3D_pointer_vector,
+                this->free_text3D_ID_queue,
+                &this->number_of_text3Ds);
+    }
+
+    void VectorFont::bind_to_new_parent(ontology::Material* const new_material_pointer)
+    {
+        // unbind from the old parent `Material`.
+        this->parent->unbind_vector_font(this->childID);
+
+        // get `childID` from `Material` and set pointer to this `VectorFont`.
+        this->parent = new_material_pointer;
+        this->parent->bind_vector_font(this);
+    }
+
     void VectorFont::bind_to_parent()
     {
         // get `childID` from `Material` and set pointer to this `VectorFont`.
@@ -33,11 +63,11 @@ namespace ontology
 
     // this method returns a pointer to `Glyph` that matches the given `unicode_value`,
     // and `nullptr` if this `VectorFont` does not contain such a `Glyph`.
-    ontology::Glyph* VectorFont::get_glyph_pointer(int32_t unicode_value)
+    ontology::Glyph* VectorFont::get_glyph_pointer(const int32_t unicode_value) const
     {
         if (this->unicode_glyph_map.count(unicode_value) == 1)
         {
-            return this->unicode_glyph_map[unicode_value];
+            return this->unicode_glyph_map.at(unicode_value);
         }
 
         // No matching `Glyph` found!
@@ -60,26 +90,6 @@ namespace ontology
 
         // set pointer to this `VectorFont` to nullptr.
         this->parent->set_vector_font_pointer(this->childID, nullptr);
-    }
-
-    void VectorFont::bind_glyph(ontology::Glyph* glyph)
-    {
-        // get `childID` from `VectorFont` and set pointer to `glyph`.
-        hierarchy::bind_child_to_parent<ontology::Glyph*>(
-                glyph,
-                this->glyph_pointer_vector,
-                this->free_glyphID_queue,
-                &this->number_of_glyphs);
-    }
-
-    void VectorFont::bind_text3D(ontology::Text3D* text3D)
-    {
-        // get `childID` from `VectorFont` and set pointer to `text3D`.
-        hierarchy::bind_child_to_parent<ontology::Text3D*>(
-                text3D,
-                this->text3D_pointer_vector,
-                this->free_text3D_ID_queue,
-                &this->number_of_text3Ds);
     }
 
     void VectorFont::render()
@@ -115,16 +125,6 @@ namespace ontology
     void VectorFont::set_text3D_pointer(const int32_t childID, ontology::Text3D* const child_pointer)
     {
         hierarchy::set_child_pointer(childID, child_pointer, this->text3D_pointer_vector, this->free_text3D_ID_queue, &this->number_of_text3Ds);
-    }
-
-    void VectorFont::bind_to_new_parent(ontology::Material* const new_material_pointer)
-    {
-        // unbind from the old parent `Material`.
-        this->parent->unbind_vector_font(this->childID);
-
-        // get `childID` from `Material` and set pointer to this `VectorFont`.
-        this->parent = new_material_pointer;
-        this->parent->bind_vector_font(this);
     }
 
     void VectorFont::set_name(const std::string& name)

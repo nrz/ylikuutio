@@ -5,6 +5,7 @@
 #include "ascii_grid_loader.hpp"
 #include "bmp_heightmap_loader.hpp"
 #include "srtm_heightmap_loader.hpp"
+#include "code/ylikuutio/ontology/vboindexer.hpp"
 
 // Include GLEW
 #ifndef __GL_GLEW_H_INCLUDED
@@ -24,19 +25,6 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
-namespace ontology
-{
-    void indexVBO(
-            std::vector<glm::vec3>& in_vertices,
-            std::vector<glm::vec2>& in_uvs,
-            std::vector<glm::vec3>& in_normals,
-            std::vector<GLuint>& out_indices,
-            std::vector<glm::vec3>& out_vertices,
-            std::vector<glm::vec2>& out_uvs,
-            std::vector<glm::vec3>& out_normals
-            );
-}
-
 namespace loaders
 {
     bool load_species(
@@ -51,9 +39,7 @@ namespace loaders
             GLuint* vertexbuffer,
             GLuint* uvbuffer,
             GLuint* normalbuffer,
-            GLuint* elementbuffer,
-            int32_t& image_width,
-            int32_t& image_height)
+            GLuint* elementbuffer)
     {
         bool model_loading_result = false;
 
@@ -99,8 +85,8 @@ namespace loaders
                     out_vertices,
                     out_UVs,
                     out_normals,
-                    image_width,
-                    image_height,
+                    species_loader_struct.image_width_pointer,
+                    species_loader_struct.image_height_pointer,
                     species_loader_struct.color_channel,
                     species_loader_struct.x_step,
                     species_loader_struct.z_step,

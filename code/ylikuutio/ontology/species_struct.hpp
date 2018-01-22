@@ -9,26 +9,45 @@
 
 // Include standard headers
 #include <limits>   // std::numeric_limits
+#include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
+#include <vector>   // std::vector
 
 namespace ontology
 {
     class Scene;
     class Shader;
     class Material;
+    class SymbiontMaterial;
 }
 
 typedef struct SpeciesStruct
 {
     SpeciesStruct()
-        : scene(nullptr), shader(nullptr), parent(nullptr), is_terrain(false), planet_radius(NAN), divisor(1.0f), water_level(-1.0f * std::numeric_limits<float>::infinity()), light_position(glm::vec3(0.0f, 0.0f, 0.0f)), latitude(0.0f), longitude(0.0f), x_step(1), z_step(1), triangulation_type("bilinear_interpolation")
+        : scene(nullptr),
+        shader(nullptr),
+        material(nullptr),
+        symbiont_material(nullptr),
+        is_terrain(false),
+        planet_radius(NAN),
+        divisor(1.0f),
+        water_level(-1.0f * std::numeric_limits<float>::infinity()),
+        is_symbiont_species(false),
+        vertex_count(-1),
+        light_position(glm::vec3(0.0f, 0.0f, 0.0f)),
+        latitude(0.0f),
+        longitude(0.0f),
+        x_step(1),
+        z_step(1),
+        triangulation_type("bilinear_interpolation")
     {
         // constructor.
     }
     // used for all files (for all species).
-    ontology::Scene* scene;          // pointer to `Scene` object.
-    ontology::Shader* shader;        // pointer to `Shader` object.
-    ontology::Material* parent;      // pointer to `Material` object.
+    ontology::Scene* scene;                        // pointer to `Scene` object.
+    ontology::Shader* shader;                      // pointer to `Shader` object.
+    ontology::Material* material;                  // pointer to `Material` object.
+    ontology::SymbiontMaterial* symbiont_material; // pointer to `SymbiontMaterial` object.
     bool is_terrain;                           // worlds currently neither rotate nor translate.
     float planet_radius;                      // radius of sea level in kilometers. used only for worlds.
     float divisor;                           // value by which SRTM values are divided to convert them to kilometers.
@@ -37,6 +56,11 @@ typedef struct SpeciesStruct
                                              // TODO: add support for `"SRTM"`.
     std::string model_filename;              // filename of the model file.
     std::string color_channel;               // color channel to use for altitude data, for BMP model files.
+    bool is_symbiont_species;
+    int32_t vertex_count;                    // For `SymbiontSpecies`.
+    std::vector<glm::vec3> vertices;         // For `SymbiontSpecies`.
+    std::vector<glm::vec2> uvs;              // For `SymbiontSpecies`.
+    std::vector<glm::vec3> normals;          // For `SymbiontSpecies`.
     glm::vec3 light_position;                // light position.
     double latitude;                         // in degrees, for SRTM model files.
     double longitude;                        // in degrees, for SRTM model files.

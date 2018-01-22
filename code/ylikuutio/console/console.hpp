@@ -53,7 +53,7 @@
 namespace map
 {
     template <class T1>
-        void print_keys_to_console(std::unordered_map<std::string, T1>* unordered_map_pointer, console::Console* console);
+        void print_keys_to_console(const std::unordered_map<std::string, T1>* const unordered_map_pointer, console::Console* const console);
 }
 
 namespace console
@@ -302,7 +302,7 @@ namespace console
             // Public callbacks end here.
 
             template <class T1>
-                friend void map::print_keys_to_console(std::unordered_map<std::string, T1>* unordered_map_pointer, console::Console* console);
+                friend void map::print_keys_to_console(const std::unordered_map<std::string, T1>* const unordered_map_pointer, console::Console* const console);
 
         private:
             static void charmods_callback(GLFWwindow* window, unsigned int codepoint, int mods);

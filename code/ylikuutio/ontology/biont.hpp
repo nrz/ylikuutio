@@ -1,12 +1,9 @@
-#ifndef __OBJECT_HPP_INCLUDED
-#define __OBJECT_HPP_INCLUDED
+#ifndef __BIONT_HPP_INCLUDED
+#define __BIONT_HPP_INCLUDED
 
 #include "movable.hpp"
 #include "shader.hpp"
-#include "species.hpp"
-#include "text3D.hpp"
-#include "glyph.hpp"
-#include "object_struct.hpp"
+#include "biont_struct.hpp"
 #include "render_templates.hpp"
 #include "entity_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
@@ -42,58 +39,47 @@
 
 namespace ontology
 {
-    class Species;
-    class Glyph;
+    class Holobiont;
 
-    class Object: public ontology::Movable
+    class Biont: public ontology::Movable
     {
         public:
-            // this method sets pointer to this `Object` to nullptr, sets `parent` according to the input,
+            // this method sets pointer to this `Biont` to nullptr, sets `parent` according to the input,
             // and requests a new `childID` from the new `Species` or from the new `Glyph`.
-            void bind_to_new_parent(void* const new_parent);
+            void bind_to_new_parent(ontology::Holobiont* const new_holobiont_parent);
 
             // constructor.
-            Object(ontology::Universe* const universe, const ObjectStruct& object_struct)
-                : Movable(universe, object_struct.cartesian_coordinates)
+            Biont(ontology::Universe* const universe, const BiontStruct& biont_struct)
+                : Movable(universe, biont_struct.cartesian_coordinates)
             {
                 // constructor.
-                this->original_scale_vector = object_struct.original_scale_vector;
-                this->rotate_angle          = object_struct.rotate_angle;
-                this->rotate_vector         = object_struct.rotate_vector;
-                this->initial_rotate_angle  = object_struct.initial_rotate_angle;
-                this->initial_rotate_vector = object_struct.initial_rotate_vector;
-                this->translate_vector      = object_struct.translate_vector;
+                this->universe              = universe;
+                this->holobiont_parent      = biont_struct.holobiont_parent;
+                this->biontID               = biont_struct.biontID;
+                this->original_scale_vector = biont_struct.original_scale_vector;
+                this->rotate_angle          = biont_struct.rotate_angle;
+                this->rotate_vector         = biont_struct.rotate_vector;
+                this->initial_rotate_angle  = biont_struct.initial_rotate_angle;
+                this->initial_rotate_vector = biont_struct.initial_rotate_vector;
+                this->translate_vector      = biont_struct.translate_vector;
                 this->has_entered           = false;
 
-                // enable rendering of a recently entered Object.
+                // enable rendering of a recently entered Biont.
                 // TODO: enable entering without enabling rendering.
-                this->should_ylikuutio_render_this_object = true;
+                this->should_ylikuutio_render_this_biont = true;
 
-                this->is_character          = object_struct.is_character;
-                this->quaternions_in_use    = object_struct.quaternions_in_use;
+                this->quaternions_in_use    = biont_struct.quaternions_in_use;
+                this->cartesian_coordinates = biont_struct.cartesian_coordinates;
                 this->model_matrix          = glm::mat4(1.0f); // identity matrix (dummy value).
                 this->MVP_matrix            = glm::mat4(1.0f); // identity matrix (dummy value).
 
-                if (this->is_character)
-                {
-                    this->glyph_parent   = object_struct.glyph_parent;
-                    this->text3D_parent  = object_struct.text3D_parent;
-                    this->species_parent = nullptr;
-                }
-                else
-                {
-                    this->species_parent = object_struct.species_parent;
-                    this->glyph_parent   = nullptr;
-                    this->text3D_parent  = nullptr;
-                }
-
-                // get `childID` from `Species` or `Glyph` and set pointer to this `Object`.
+                // get `childID` from `Holobiont` and set pointer to this `Biont`.
                 this->bind_to_parent();
-                this->type = "ontology::Object*";
+                this->type = "ontology::Biont*";
             }
 
             // destructor.
-            virtual ~Object();
+            virtual ~Biont();
 
             ontology::Entity* get_parent() const override;
 
@@ -106,24 +92,22 @@ namespace ontology
             template<class T1>
                 friend void render_children(const std::vector<T1>& child_pointer_vector);
 
-        private:
+        protected:
             void bind_to_parent();
 
-            // this method renders this `Object`.
+            // this method renders this `Biont`.
             void render();
-            void render_this_object(ontology::Shader* const shader_pointer);
+            void render_this_biont(ontology::Shader* const shader_pointer);
 
             int32_t get_number_of_children() const override;
             int32_t get_number_of_descendants() const override;
 
-            ontology::Species* species_parent; // pointer to `Species`.
-            ontology::Glyph* glyph_parent;     // pointer to `Glyph`.
-            ontology::Text3D* text3D_parent;   // pointer to `Text3D`.
-            bool is_character;
+            ontology::Holobiont* holobiont_parent; // pointer to `Holobiont`.
+            int32_t biontID;
             bool quaternions_in_use;
 
             bool has_entered;
-            bool should_ylikuutio_render_this_object;
+            bool should_ylikuutio_render_this_biont;
 
             glm::vec3 original_scale_vector;       // original scale vector.
             GLfloat rotate_angle;                  // rotate angle.

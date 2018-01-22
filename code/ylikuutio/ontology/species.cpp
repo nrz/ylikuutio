@@ -24,26 +24,39 @@ namespace ontology
     void Species::bind_to_parent()
     {
         // get `childID` from `Material` and set pointer to this `Species`.
-        this->parent->bind_species(this);
+        this->material_parent->bind_species(this);
+    }
+
+    void Species::bind_to_new_parent(ontology::Material* const new_material_pointer)
+    {
+        // unbind from the old parent `Material`.
+        this->material_parent->unbind_species(this->childID);
+
+        // get `childID` from `Material` and set pointer to this `Species`.
+        this->material_parent = new_material_pointer;
+        this->material_parent->bind_species(this);
     }
 
     Species::~Species()
     {
-        // destructor.
-        std::cout << "Species with childID " << std::dec << this->childID << " will be destroyed.\n";
+        if (!this->is_symbiont_species)
+        {
+            // destructor.
+            std::cout << "Species with childID " << std::dec << this->childID << " will be destroyed.\n";
 
-        // destroy all objects of this species.
-        std::cout << "All objects of this species will be destroyed.\n";
-        hierarchy::delete_children<ontology::Object*>(this->object_pointer_vector, &this->number_of_objects);
+            // destroy all objects of this species.
+            std::cout << "All objects of this species will be destroyed.\n";
+            hierarchy::delete_children<ontology::Object*>(this->object_pointer_vector, &this->number_of_objects);
 
-        // Cleanup VBO, shader and texture.
-        glDeleteBuffers(1, &this->vertexbuffer);
-        glDeleteBuffers(1, &this->uvbuffer);
-        glDeleteBuffers(1, &this->normalbuffer);
-        glDeleteBuffers(1, &this->elementbuffer);
+            // Cleanup VBO, shader and texture.
+            glDeleteBuffers(1, &this->vertexbuffer);
+            glDeleteBuffers(1, &this->uvbuffer);
+            glDeleteBuffers(1, &this->normalbuffer);
+            glDeleteBuffers(1, &this->elementbuffer);
 
-        // set pointer to this species to nullptr.
-        this->parent->set_species_pointer(this->childID, nullptr);
+            // set pointer to this species to nullptr.
+            this->material_parent->set_species_pointer(this->childID, nullptr);
+        }
     }
 
     void Species::render()
@@ -58,7 +71,11 @@ namespace ontology
 
     ontology::Entity* Species::get_parent() const
     {
-        return this->parent;
+        if (this->is_symbiont_species)
+        {
+            return nullptr;
+        }
+        return this->material_parent;
     }
 
     void Species::set_object_pointer(const int32_t childID, ontology::Object* const child_pointer)
@@ -71,28 +88,18 @@ namespace ontology
         ontology::set_name(name, this);
     }
 
-    int32_t Species::get_image_width()
+    int32_t Species::get_image_width() const
     {
         return this->image_width;
     }
 
-    const std::string& Species::get_model_file_format()
+    const std::string& Species::get_model_file_format() const
     {
         return this->model_file_format;
     }
 
-    int32_t Species::get_image_height()
+    int32_t Species::get_image_height() const
     {
         return this->image_height;
-    }
-
-    void Species::bind_to_new_parent(ontology::Material* const new_material_pointer)
-    {
-        // unbind from the old parent `Material`.
-        this->parent->unbind_species(this->childID);
-
-        // get `childID` from `Material` and set pointer to this `Species`.
-        this->parent = new_material_pointer;
-        this->parent->bind_species(this);
     }
 }

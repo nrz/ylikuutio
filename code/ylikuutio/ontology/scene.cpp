@@ -29,7 +29,7 @@
 
 namespace ontology
 {
-    void Scene::bind(ontology::Shader* shader)
+    void Scene::bind(ontology::Shader* const shader)
     {
         // get `childID` from `Scene` and set pointer to `shader`.
         hierarchy::bind_child_to_parent<ontology::Shader*>(
@@ -39,7 +39,7 @@ namespace ontology
                 &this->number_of_shaders);
     }
 
-    void Scene::unbind(int32_t childID)
+    void Scene::unbind(const int32_t childID)
     {
         ontology::Shader* dummy_child_pointer = nullptr;
         hierarchy::set_child_pointer(
@@ -101,14 +101,14 @@ namespace ontology
     }
 
     // this method returns a pointer to an `Entity` using the name as key.
-    ontology::Entity* Scene::get_entity(const std::string name)
+    ontology::Entity* Scene::get_entity(const std::string name) const
     {
         if (this->name_map.count(name) != 1)
         {
             return nullptr;
         }
 
-        return this->name_map[name];
+        return this->name_map.at(name);
     }
 
     void Scene::set_name(const std::string name)
@@ -116,7 +116,7 @@ namespace ontology
         ontology::set_name(name, this);
     }
 
-    float Scene::get_turbo_factor()
+    float Scene::get_turbo_factor() const
     {
         if (this->parent == this->universe->get_active_world() && this == this->parent->get_active_scene())
         {
@@ -134,7 +134,7 @@ namespace ontology
         }
     }
 
-    float Scene::get_twin_turbo_factor()
+    float Scene::get_twin_turbo_factor() const
     {
         if (this->parent == this->universe->get_active_world() && this == this->parent->get_active_scene())
         {
@@ -152,7 +152,7 @@ namespace ontology
         }
     }
 
-    float Scene::get_water_level()
+    float Scene::get_water_level() const
     {
         return this->water_level;
     }

@@ -33,9 +33,7 @@ namespace loaders
             GLuint* vertexbuffer,
             GLuint* uvbuffer,
             GLuint* normalbuffer,
-            GLuint* elementbuffer,
-            int32_t& image_width,
-            int32_t& image_height);
+            GLuint* elementbuffer);
 }
 
 #endif

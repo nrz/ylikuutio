@@ -307,7 +307,7 @@ int main(int argc, char* argv[])
 
     // Create the material, store it in `altiplano_grass_material`.
     MaterialStruct altiplano_grass_material_struct;
-    altiplano_grass_material_struct.parent = altiplano_shader;
+    altiplano_grass_material_struct.shader = altiplano_shader;
     altiplano_grass_material_struct.texture_file_format = g_texture_file_format;
     altiplano_grass_material_struct.texture_filename = g_texture_filename;
 
@@ -328,7 +328,7 @@ int main(int argc, char* argv[])
     SpeciesStruct(altiplano_terrain_species_struct);
     altiplano_terrain_species_struct.scene = altiplano_scene;
     altiplano_terrain_species_struct.shader = altiplano_shader;
-    altiplano_terrain_species_struct.parent = altiplano_grass_material;
+    altiplano_terrain_species_struct.material = altiplano_grass_material;
     altiplano_terrain_species_struct.model_file_format = "SRTM";
     altiplano_terrain_species_struct.model_filename = "./"; // for testing
     altiplano_terrain_species_struct.color_channel = g_height_data_color_channel;

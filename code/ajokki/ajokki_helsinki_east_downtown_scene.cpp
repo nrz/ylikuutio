@@ -4,10 +4,14 @@
 #include "code/ylikuutio/ontology/material.hpp"
 #include "code/ylikuutio/ontology/species.hpp"
 #include "code/ylikuutio/ontology/object.hpp"
+#include "code/ylikuutio/ontology/symbiosis.hpp"
+#include "code/ylikuutio/ontology/holobiont.hpp"
 #include "code/ylikuutio/ontology/shader_struct.hpp"
 #include "code/ylikuutio/ontology/material_struct.hpp"
 #include "code/ylikuutio/ontology/species_struct.hpp"
 #include "code/ylikuutio/ontology/object_struct.hpp"
+#include "code/ylikuutio/ontology/symbiosis_struct.hpp"
+#include "code/ylikuutio/ontology/holobiont_struct.hpp"
 #include "code/ylikuutio/ontology/entity_factory.hpp"
 
 // Include GLM
@@ -68,7 +72,7 @@ namespace ajokki
 
         // Create the material, store it in `helsinki_east_downtown_grass_material`.
         MaterialStruct helsinki_east_downtown_grass_material_struct;
-        helsinki_east_downtown_grass_material_struct.parent = helsinki_east_downtown_shader;
+        helsinki_east_downtown_grass_material_struct.shader = helsinki_east_downtown_shader;
         helsinki_east_downtown_grass_material_struct.texture_file_format = "bmp";
         helsinki_east_downtown_grass_material_struct.texture_filename = "GrassGreenTexture0002.bmp";
 
@@ -87,7 +91,7 @@ namespace ajokki
 
         // Create the material, store it in `pink_geometric_tiles_material`.
         MaterialStruct pink_geometric_tiles_material_struct;
-        pink_geometric_tiles_material_struct.parent = helsinki_east_downtown_shader;
+        pink_geometric_tiles_material_struct.shader = helsinki_east_downtown_shader;
         pink_geometric_tiles_material_struct.texture_file_format = "bmp";
         pink_geometric_tiles_material_struct.texture_filename = "pavers1b2.bmp";
 
@@ -106,7 +110,7 @@ namespace ajokki
 
         // Create the material, store it in `orange_fur_material`.
         MaterialStruct orange_fur_material_struct;
-        orange_fur_material_struct.parent = helsinki_east_downtown_shader;
+        orange_fur_material_struct.shader = helsinki_east_downtown_shader;
         orange_fur_material_struct.texture_file_format = "bmp";
         orange_fur_material_struct.texture_filename = "orange_fur_texture.bmp";
 
@@ -126,7 +130,7 @@ namespace ajokki
         SpeciesStruct helsinki_east_downtown_terrain_species_struct;
         helsinki_east_downtown_terrain_species_struct.scene = helsinki_east_downtown_scene;
         helsinki_east_downtown_terrain_species_struct.shader = helsinki_east_downtown_shader;
-        helsinki_east_downtown_terrain_species_struct.parent = helsinki_east_downtown_grass_material;
+        helsinki_east_downtown_terrain_species_struct.material = helsinki_east_downtown_grass_material;
         helsinki_east_downtown_terrain_species_struct.model_file_format = "ASCII_grid";
         helsinki_east_downtown_terrain_species_struct.model_filename = "L4133D.asc"; // Helsinki eastern downtown.
         helsinki_east_downtown_terrain_species_struct.light_position = glm::vec3(0, 100000, 100000);
@@ -159,7 +163,7 @@ namespace ajokki
         SpeciesStruct snow_cottage_species_struct;
         snow_cottage_species_struct.scene = helsinki_east_downtown_scene;
         snow_cottage_species_struct.shader = helsinki_east_downtown_shader;
-        snow_cottage_species_struct.parent = pink_geometric_tiles_material;
+        snow_cottage_species_struct.material = pink_geometric_tiles_material;
         snow_cottage_species_struct.model_file_format = "obj";
         snow_cottage_species_struct.model_filename = "snow_cottage_triangulated.obj";
         snow_cottage_species_struct.light_position = glm::vec3(0, 100000, 100000);
@@ -200,7 +204,7 @@ namespace ajokki
         SpeciesStruct suzanne_species_struct;
         suzanne_species_struct.scene = helsinki_east_downtown_scene;
         suzanne_species_struct.shader = helsinki_east_downtown_shader;
-        suzanne_species_struct.parent = orange_fur_material;
+        suzanne_species_struct.material = orange_fur_material;
         suzanne_species_struct.model_file_format = "obj";
         suzanne_species_struct.model_filename = "suzanne.obj";
         suzanne_species_struct.light_position = glm::vec3(0, 100000, 100000);
@@ -319,7 +323,7 @@ namespace ajokki
         SpeciesStruct cat_species_struct;
         cat_species_struct.scene = helsinki_east_downtown_scene;
         cat_species_struct.shader = helsinki_east_downtown_shader;
-        cat_species_struct.parent = orange_fur_material;
+        cat_species_struct.material = orange_fur_material;
         cat_species_struct.model_file_format = "fbx";
         cat_species_struct.model_filename = "cat.fbx";
         cat_species_struct.light_position = glm::vec3(0, 100000, 100000);
@@ -373,6 +377,52 @@ namespace ajokki
         }
 
         cat2->set_name("cat2");
+
+        SymbiosisStruct turbo_polizei_symbiosis_struct;
+        turbo_polizei_symbiosis_struct.parent = helsinki_east_downtown_shader;
+        turbo_polizei_symbiosis_struct.model_file_format = "fbx";
+        turbo_polizei_symbiosis_struct.model_filename = "turbo_polizei.fbx";
+        turbo_polizei_symbiosis_struct.light_position = glm::vec3(0, 100000, 100000);
+
+        std::cout << "Creating ontology::Entity* turbo_polizei_symbiosis_entity ...\n";
+        ontology::Entity* turbo_polizei_symbiosis_entity = entity_factory->create_Symbiosis(turbo_polizei_symbiosis_struct);
+
+        std::cout << "Creating ontology::Symbiosis* turbo_polizei_symbiosis ...\n";
+        ontology::Symbiosis* turbo_polizei_symbiosis = dynamic_cast<ontology::Symbiosis*>(turbo_polizei_symbiosis_entity);
+
+        if (turbo_polizei_symbiosis == nullptr)
+        {
+            std::cerr << "Failed to create turbo_polizei Symbiosis.\n";
+            return nullptr;
+        }
+
+        turbo_polizei_symbiosis->set_name("turbo_polizei_symbiosis");
+
+        turbo_polizei_symbiosis->create_symbionts();
+
+        HolobiontStruct turbo_polizei_object_struct1;
+        turbo_polizei_object_struct1.symbiosis_parent = turbo_polizei_symbiosis;
+        turbo_polizei_object_struct1.original_scale_vector = glm::vec3(20.0f, 20.0f, 20.0f);
+        turbo_polizei_object_struct1.cartesian_coordinates = std::make_shared<glm::vec3>(1000.00f, 500.00f, 1000.00f);
+        turbo_polizei_object_struct1.rotate_angle = 0.00f;
+        turbo_polizei_object_struct1.rotate_vector = glm::vec3(1.0f, 1.0f, 1.0f);
+        turbo_polizei_object_struct1.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
+
+        std::cout << "Creating ontology::Entity* turbo_polizei1_entity ...\n";
+
+        ontology::Entity* turbo_polizei1_entity = entity_factory->create_Holobiont(turbo_polizei_object_struct1);
+
+        std::cout << "Creating ontology::Holobiont* turbo_polizei1 ...\n";
+
+        ontology::Holobiont* turbo_polizei1 = dynamic_cast<ontology::Holobiont*>(turbo_polizei1_entity);
+
+        if (turbo_polizei1 == nullptr)
+        {
+            std::cerr << "Failed to create turbo_polizei1 Object.\n";
+            return nullptr;
+        }
+
+        turbo_polizei1->set_name("turbo_polizei1");
 
         VectorFontStruct kongtext_vector_font_struct;
         kongtext_vector_font_struct.parent = helsinki_east_downtown_grass_material;

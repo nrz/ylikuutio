@@ -256,6 +256,7 @@ configure_file(external/tinyscheme-1.41/init.scm init.scm COPYONLY)
 # 3D models.
 configure_file(res/objects/custom/suzanne.obj suzanne.obj COPYONLY)
 configure_file(res/objects/snow_cottage_triangulated.obj snow_cottage_triangulated.obj COPYONLY)
+configure_file(res/objects/www.blendswap.com/74227_Porsche_997_turbo_polizei_lowpoly/turbo_polizei.fbx turbo_polizei.fbx COPYONLY)
 configure_file(res/objects/www.blendswap.com/76528_horse/horse.fbx horse.fbx COPYONLY)
 configure_file(res/objects/www.blendswap.com/86110_rigged_and_animated_cat/cat.fbx cat.fbx COPYONLY)
 
@@ -389,6 +390,8 @@ add_library(ylikuutio STATIC
     code/ylikuutio/loaders/bmp_loader.hpp
     code/ylikuutio/loaders/fbx_species_loader.cpp
     code/ylikuutio/loaders/fbx_species_loader.hpp
+    code/ylikuutio/loaders/fbx_symbiosis_loader.cpp
+    code/ylikuutio/loaders/fbx_symbiosis_loader.hpp
     code/ylikuutio/loaders/font_loader.cpp
     code/ylikuutio/loaders/font_loader.hpp
     code/ylikuutio/loaders/las_loader.cpp
@@ -402,6 +405,9 @@ add_library(ylikuutio STATIC
     code/ylikuutio/loaders/species_loader_struct.hpp
     code/ylikuutio/loaders/srtm_heightmap_loader.cpp
     code/ylikuutio/loaders/srtm_heightmap_loader.hpp
+    code/ylikuutio/loaders/symbiosis_loader.cpp
+    code/ylikuutio/loaders/symbiosis_loader.hpp
+    code/ylikuutio/loaders/symbiosis_loader_struct.hpp
     code/ylikuutio/loaders/texture_loader.cpp
     code/ylikuutio/loaders/texture_loader.hpp
 
@@ -415,6 +421,9 @@ add_library(ylikuutio STATIC
     # code/ylikuutio/network/tcp_server.hpp
 
     # ontology, in alphabetical order
+    code/ylikuutio/ontology/biont.cpp
+    code/ylikuutio/ontology/biont.hpp
+    code/ylikuutio/ontology/biont_struct.hpp
     code/ylikuutio/ontology/creature.cpp
     code/ylikuutio/ontology/creature.hpp
     code/ylikuutio/ontology/gl_attrib_locations.cpp
@@ -433,6 +442,9 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/glyph_struct.hpp
     code/ylikuutio/ontology/ground_level.cpp
     code/ylikuutio/ontology/ground_level.hpp
+    code/ylikuutio/ontology/holobiont.cpp
+    code/ylikuutio/ontology/holobiont.hpp
+    code/ylikuutio/ontology/holobiont_struct.hpp
     code/ylikuutio/ontology/info_struct.hpp
     code/ylikuutio/ontology/material.cpp
     code/ylikuutio/ontology/material.hpp
@@ -460,10 +472,8 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/species_struct.hpp
     code/ylikuutio/ontology/symbiont_material.cpp
     code/ylikuutio/ontology/symbiont_material.hpp
-    code/ylikuutio/ontology/symbiont_material_struct.hpp
     code/ylikuutio/ontology/symbiont_species.cpp
     code/ylikuutio/ontology/symbiont_species.hpp
-    code/ylikuutio/ontology/symbiont_species_struct.hpp
     code/ylikuutio/ontology/symbiosis.cpp
     code/ylikuutio/ontology/symbiosis.hpp
     code/ylikuutio/ontology/symbiosis_struct.hpp

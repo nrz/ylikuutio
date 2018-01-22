@@ -202,10 +202,13 @@ namespace ontology
     class Universe: public ontology::Entity
     {
         public:
+            void bind(ontology::World* const world);
+
             // constructor.
-            Universe(UniverseStruct& universe_struct)
+            Universe(const UniverseStruct& universe_struct)
                 : Entity(nullptr) // `Universe` has no parent.
             {
+                this->universe = this;
                 this->entity_factory = new ontology::EntityFactory(this);
 
                 this->cartesian_coordinates = nullptr;
@@ -295,16 +298,14 @@ namespace ontology
             // destructor.
             virtual ~Universe();
 
-            void bind(ontology::World* world);
-
             // this method renders the active `Scene` of this `Universe`.
             void render();
 
             // this method stes the active `World`.
-            void set_active_world(ontology::World* world);
+            void set_active_world(ontology::World* const world);
 
             // this method stes the active `Scene`.
-            void set_active_scene(ontology::Scene* world);
+            void set_active_scene(ontology::Scene* const world);
 
             config::SettingMaster* get_setting_master() const;
 
@@ -327,7 +328,6 @@ namespace ontology
 
             ontology::World* get_active_world() const;
 
-            ontology::Universe* get_universe() final override;
             ontology::Entity* get_parent() const override;
             int32_t get_number_of_children() const override;
             int32_t get_number_of_descendants() const override;

@@ -40,6 +40,14 @@ namespace ontology
     class Text3D: public ontology::Movable
     {
         public:
+            // this method deletes all glyph Objects of this `Text3D`,
+            // sets pointer to this `Text3D` to nullptr,
+            // sets `parent` according to the input (the new `VectorFont`),
+            // requests a new `childID` from the new `VectorFont`,
+            // and creates all glyph Objects of this `Text3D` with the font data.
+            // Note: different fonts may provide glyphs for different Unicodes!
+            void bind_to_new_parent(ontology::VectorFont* const new_vector_font_pointer);
+
             // constructor.
             // TODO: `Text3D` constructor also creates each `Object`,
             // and binds each to its corresponding `Glyph` for rendering hierarchy,
@@ -73,14 +81,6 @@ namespace ontology
             int32_t get_number_of_children() const override;
             int32_t get_number_of_descendants() const override;
 
-            // this method deletes all glyph Objects of this `Text3D`,
-            // sets pointer to this `Text3D` to nullptr,
-            // sets `parent` according to the input (the new `VectorFont`),
-            // requests a new `childID` from the new `VectorFont`,
-            // and creates all glyph Objects of this `Text3D` with the font data.
-            // Note: different fonts may provide glyphs for different Unicodes!
-            void bind_to_new_parent(ontology::VectorFont* const new_vector_font_pointer);
-
             // this method sets a object pointer.
             void set_object_pointer(const int32_t childID, ontology::Object* const child_pointer);
 
@@ -89,9 +89,9 @@ namespace ontology
             friend class Object;
             friend void create_glyph_objects(const std::string& text_string, ontology::Text3D* text3D);
             template<class T1>
-                friend void set_name(std::string name, T1 entity);
-            template<class T1>
                 friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, int32_t* number_of_children);
+            template<class T1>
+                friend void set_name(std::string name, T1 entity);
 
         private:
             void bind_to_parent();

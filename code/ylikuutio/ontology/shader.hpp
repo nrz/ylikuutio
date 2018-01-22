@@ -46,6 +46,15 @@ namespace ontology
     class Shader: public ontology::Entity
     {
         public:
+            void bind_material(ontology::Material* const material);
+            void bind_symbiosis(ontology::Symbiosis* const symbiosis);
+
+            void unbind_material(const int32_t childID);
+            void unbind_symbiosis(const int32_t childID);
+
+            // this method sets pointer to this `Shader` to nullptr, sets `parent` according to the input, and requests a new `childID` from the new `Scene`.
+            void bind_to_new_parent(ontology::Scene* const new_scene_pointer);
+
             // constructor.
             Shader(ontology::Universe* const universe, const ShaderStruct& shader_struct)
                 : Entity(universe)
@@ -84,33 +93,26 @@ namespace ontology
             // destructor.
             virtual ~Shader();
 
-            void bind_material(ontology::Material* material);
-            void bind_symbiosis(ontology::Symbiosis* symbiosis);
-
-            void unbind_material(int32_t childID);
-            void unbind_symbiosis(int32_t childID);
-
-            // this method sets pointer to this `Shader` to nullptr, sets `parent` according to the input, and requests a new `childID` from the new `Scene`.
-            void bind_to_new_parent(ontology::Scene* const new_scene_pointer);
-
             void set_name(std::string name);
+
+            ontology::Entity* get_parent() const override;
 
             // this method sets a `Material` pointer.
             void set_material_pointer(const int32_t childID, ontology::Material* const child_pointer);
 
             // this method sets a scene species pointer.
-            void set_terrain_species(ontology::Species* terrain_species);
+            void set_terrain_species(ontology::Species* const terrain_species);
 
-            GLuint get_programID();
-            GLuint get_matrixID();
-            GLuint get_model_matrixID();
+            GLuint get_programID() const;
+            GLuint get_matrixID() const;
+            GLuint get_model_matrixID() const;
 
-            template<class T1>
-                friend void render_children(const std::vector<T1>& child_pointer_vector);
             template<class T1>
                 friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, int32_t* number_of_children);
             template<class T1, class T2>
                 friend void hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent, std::vector<T1>& old_child_pointer_vector, std::queue<int32_t>& old_free_childID_queue, int32_t* old_number_of_children);
+            template<class T1>
+                friend void render_children(const std::vector<T1>& child_pointer_vector);
 
         private:
             void bind_to_parent();
@@ -118,7 +120,6 @@ namespace ontology
             // this method renders all materials using this `Shader`.
             void render();
 
-            ontology::Entity* get_parent() const override;
             int32_t get_number_of_children() const override;
             int32_t get_number_of_descendants() const override;
 

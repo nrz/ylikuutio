@@ -9,7 +9,16 @@
 typedef struct SpeciesLoaderStruct
 {
     SpeciesLoaderStruct()
-        : latitude(NAN), longitude(NAN), planet_radius(NAN), divisor(NAN), mesh_i(0), x_step(1), z_step(1), triangulation_type("bilinear_interpolation")
+        : latitude(NAN),
+        longitude(NAN),
+        planet_radius(NAN),
+        divisor(NAN),
+        mesh_i(0),
+        x_step(1),
+        z_step(1),
+        image_width_pointer(nullptr),
+        image_height_pointer(nullptr),
+        triangulation_type("bilinear_interpolation")
     {
         // constructor.
     }
@@ -23,6 +32,8 @@ typedef struct SpeciesLoaderStruct
     std::string color_channel; // for BMP.
     uint32_t x_step;
     uint32_t z_step;
+    int32_t* image_width_pointer;
+    int32_t* image_height_pointer;
     std::string triangulation_type; // for all.
 } SpeciesLoaderStruct;
 

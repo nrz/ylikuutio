@@ -15,12 +15,7 @@ namespace ontology
 {
     class Universe;
 
-    Model::~Model()
-    {
-        // destructor.
-    }
-
-    void Model::bind(ontology::Object* object)
+    void Model::bind(ontology::Object* const object)
     {
         // get `childID` from `Model` and set pointer to `object`.
         hierarchy::bind_child_to_parent<ontology::Object*>(
@@ -30,7 +25,7 @@ namespace ontology
                 &this->number_of_objects);
     }
 
-    void Model::unbind(int32_t childID)
+    void Model::unbind(const int32_t childID)
     {
         ontology::Object* dummy_child_pointer = nullptr;
         hierarchy::set_child_pointer(
@@ -39,6 +34,11 @@ namespace ontology
                 this->object_pointer_vector,
                 this->free_objectID_queue,
                 &this->number_of_objects);
+    }
+
+    Model::~Model()
+    {
+        // destructor.
     }
 
     int32_t Model::get_number_of_children() const
@@ -61,44 +61,44 @@ namespace ontology
         return this->indices;
     }
 
-    GLuint Model::get_vertexPosition_modelspaceID()
+    GLuint Model::get_vertex_position_modelspaceID() const
     {
-        return this->vertexPosition_modelspaceID;
+        return this->vertex_position_modelspaceID;
     }
 
-    GLuint Model::get_vertexUVID()
+    GLuint Model::get_vertexUVID() const
     {
         return this->vertexUVID;
     }
 
-    GLuint Model::get_vertexNormal_modelspaceID()
+    GLuint Model::get_vertex_normal_modelspaceID() const
     {
-        return this->vertexNormal_modelspaceID;
+        return this->vertex_normal_modelspaceID;
     }
 
-    GLuint Model::get_vertexbuffer()
+    GLuint Model::get_vertexbuffer() const
     {
         return this->vertexbuffer;
     }
 
-    GLuint Model::get_uvbuffer()
+    GLuint Model::get_uvbuffer() const
     {
         return this->uvbuffer;
     }
 
-    GLuint Model::get_normalbuffer()
+    GLuint Model::get_normalbuffer() const
     {
         return this->normalbuffer;
     }
 
-    GLuint Model::get_elementbuffer()
+    GLuint Model::get_elementbuffer() const
     {
         return this->elementbuffer;
     }
 
-    void Model::store_vertexPosition_modelspaceID(GLuint vertexPosition_modelspaceID)
+    void Model::store_vertex_position_modelspaceID(GLuint vertex_position_modelspaceID)
     {
-        this->vertexPosition_modelspaceID = vertexPosition_modelspaceID;
+        this->vertex_position_modelspaceID = vertex_position_modelspaceID;
     }
 
     void Model::store_vertexUVID(GLuint vertexUVID)
@@ -106,8 +106,8 @@ namespace ontology
         this->vertexUVID = vertexUVID;
     }
 
-    void Model::store_vertexNormal_modelspaceID(GLuint vertexNormal_modelspaceID)
+    void Model::store_vertex_normal_modelspaceID(GLuint vertex_normal_modelspaceID)
     {
-        this->vertexNormal_modelspaceID = vertexNormal_modelspaceID;
+        this->vertex_normal_modelspaceID = vertex_normal_modelspaceID;
     }
 }
