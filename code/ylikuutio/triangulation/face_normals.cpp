@@ -31,6 +31,17 @@ namespace geometry
             return false;
         }
 
+        if (is_bilinear_interpolation_in_use)
+        {
+            // If bilinear interpolation is in use, then number of faces is:
+            // 4 * (actual_image_width - 1) * (actual_image_height - 1)
+            face_normal_vector_vec3.reserve(4 * (actual_image_width - 1) * (actual_image_height - 1));
+        }
+        else
+        {
+            face_normal_vector_vec3.reserve(2 * (actual_image_width - 1) * (actual_image_height - 1));
+        }
+
         for (int32_t z = 1; z < actual_image_height; z++)
         {
             for (int32_t x = 1; x < actual_image_width; x++)
