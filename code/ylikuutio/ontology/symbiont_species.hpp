@@ -150,8 +150,6 @@ namespace ontology
 
             std::string model_file_format;        // type of the model file, eg. `"bmp"`.
             std::string model_filename;           // filename of the model file.
-
-            std::string triangulation_type;
     };
 }
 
