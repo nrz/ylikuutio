@@ -149,18 +149,18 @@ namespace ontology
         ontology::Model* species_parent_model = this->species_parent;
         ontology::Model* parent_model = (this->is_character ? glyph_parent_model : species_parent_model);
         GLuint vertexbuffer = parent_model->get_vertexbuffer();
-        GLuint vertexPosition_modelspaceID = parent_model->get_vertexPosition_modelspaceID();
+        GLuint vertex_position_modelspaceID = parent_model->get_vertex_position_modelspaceID();
         GLuint uvbuffer = parent_model->get_uvbuffer();
         GLuint vertexUVID = parent_model->get_vertexUVID();
         GLuint normalbuffer = parent_model->get_normalbuffer();
-        GLuint vertexNormal_modelspaceID = parent_model->get_vertexNormal_modelspaceID();
+        GLuint vertex_normal_modelspaceID = parent_model->get_vertex_normal_modelspaceID();
         GLuint elementbuffer = parent_model->get_elementbuffer();
         GLuint indices_size = parent_model->get_indices().size();
 
         // 1st attribute buffer : vertices.
         glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
         glVertexAttribPointer(
-                vertexPosition_modelspaceID, // The attribute we want to configure
+                vertex_position_modelspaceID, // The attribute we want to configure
                 3,                           // size
                 GL_FLOAT,                    // type
                 GL_FALSE,                    // normalized?
@@ -182,7 +182,7 @@ namespace ontology
         // 3rd attribute buffer : normals.
         glBindBuffer(GL_ARRAY_BUFFER, normalbuffer);
         glVertexAttribPointer(
-                vertexNormal_modelspaceID, // The attribute we want to configure
+                vertex_normal_modelspaceID, // The attribute we want to configure
                 3,                         // size
                 GL_FLOAT,                  // type
                 GL_FALSE,                  // normalized?

@@ -61,9 +61,9 @@ namespace ontology
         return this->indices;
     }
 
-    GLuint Model::get_vertexPosition_modelspaceID() const
+    GLuint Model::get_vertex_position_modelspaceID() const
     {
-        return this->vertexPosition_modelspaceID;
+        return this->vertex_position_modelspaceID;
     }
 
     GLuint Model::get_vertexUVID() const
@@ -71,9 +71,9 @@ namespace ontology
         return this->vertexUVID;
     }
 
-    GLuint Model::get_vertexNormal_modelspaceID() const
+    GLuint Model::get_vertex_normal_modelspaceID() const
     {
-        return this->vertexNormal_modelspaceID;
+        return this->vertex_normal_modelspaceID;
     }
 
     GLuint Model::get_vertexbuffer() const
@@ -96,9 +96,9 @@ namespace ontology
         return this->elementbuffer;
     }
 
-    void Model::store_vertexPosition_modelspaceID(GLuint vertexPosition_modelspaceID)
+    void Model::store_vertex_position_modelspaceID(GLuint vertex_position_modelspaceID)
     {
-        this->vertexPosition_modelspaceID = vertexPosition_modelspaceID;
+        this->vertex_position_modelspaceID = vertex_position_modelspaceID;
     }
 
     void Model::store_vertexUVID(GLuint vertexUVID)
@@ -106,8 +106,8 @@ namespace ontology
         this->vertexUVID = vertexUVID;
     }
 
-    void Model::store_vertexNormal_modelspaceID(GLuint vertexNormal_modelspaceID)
+    void Model::store_vertex_normal_modelspaceID(GLuint vertex_normal_modelspaceID)
     {
-        this->vertexNormal_modelspaceID = vertexNormal_modelspaceID;
+        this->vertex_normal_modelspaceID = vertex_normal_modelspaceID;
     }
 }

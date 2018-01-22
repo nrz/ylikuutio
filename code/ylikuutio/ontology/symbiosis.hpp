@@ -7,15 +7,20 @@
 // `ShaderSymbiosis` is like `Symbiosis`, but it contains also `SymbiontShader`s in addition to `SymbiontMaterial`s and `SymbiontSpecies`.
 
 #include "entity.hpp"
-#include "symbiont_species.hpp"
 #include "symbiosis_struct.hpp"
-#include "symbiont_species_struct.hpp"
+#include "material_struct.hpp"
 #include "entity_templates.hpp"
 #include "code/ylikuutio/loaders/symbiosis_loader.hpp"
 #include "code/ylikuutio/loaders/symbiosis_loader_struct.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/file/file_loader.hpp"
 #include <ofbx.h>
+
+// Include GLM
+#ifndef __GLM_GLM_HPP_INCLUDED
+#define __GLM_GLM_HPP_INCLUDED
+#include <glm/glm.hpp> // glm
+#endif
 
 // OpenFBX wants `u8` == `unsigned char`.
 typedef unsigned char u8;
@@ -24,59 +29,59 @@ typedef unsigned char u8;
 #include <queue>    // std::queue
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
+#include <unordered_map> // std::unordered_map
 #include <vector>   // std::vector
 
 namespace ontology
 {
     class Shader;
     class SymbiontMaterial;
+    class SymbiontSpecies;
+    class Holobiont;
 
     class Symbiosis: public ontology::Entity
     {
         public:
-            void bind(ontology::SymbiontMaterial* const symbiont_material);
+            void bind_symbiont_material(ontology::SymbiontMaterial* const symbiont_material);
+            void bind_holobiont(ontology::Holobiont* const holobiont);
+
+            void unbind_holobiont(const int32_t childID);
 
             // this method sets pointer to this `Symbiosis` to nullptr, sets `parent` according to the input, and requests a new `childID` from the new `Shader`.
             void bind_to_new_parent(ontology::Shader* const new_shader_pointer);
 
             // constructor.
-            Symbiosis(const SymbiosisStruct& symbiosis_struct)
-                : Entity(symbiosis_struct.parent->get_universe())
+            Symbiosis(ontology::Universe* universe, const SymbiosisStruct& symbiosis_struct)
+                : Entity(universe)
             {
                 // constructor.
-                this->universe = symbiosis_struct.parent->get_universe();
+                this->universe = universe;
                 this->parent = symbiosis_struct.parent;
+                this->model_filename = symbiosis_struct.model_filename;
+                this->model_file_format = symbiosis_struct.model_file_format;
+                this->triangulation_type = symbiosis_struct.triangulation_type;
+                this->light_position = symbiosis_struct.light_position;
+
+                this->number_of_symbiont_materials = 0;
+                this->number_of_holobionts = 0;
 
                 // get `childID` from `Shader` and set pointer to this `Symbiosis`.
                 this->bind_to_parent();
 
-                this->number_of_symbiont_materials = 0;
-
-                SymbiosisLoaderStruct symbiosis_loader_struct;
-                symbiosis_loader_struct.model_filename = symbiosis_struct.model_filename;
-                symbiosis_loader_struct.model_file_format = symbiosis_struct.model_file_format;
-                symbiosis_loader_struct.triangulation_type = symbiosis_struct.triangulation_type;
-
-                bool result = loaders::load_symbiosis(
-                        symbiosis_loader_struct,
-                        this->vertices,
-                        this->UVs,
-                        this->normals,
-                        this->indices,
-                        this->indexed_vertices,
-                        this->indexed_UVs,
-                        this->indexed_normals);
-
-                // TODO: Compute the graph of each type to enable object vertex modification!
-
+                this->child_vector_pointers_vector.push_back(&this->symbiont_material_pointer_vector);
+                this->child_vector_pointers_vector.push_back(&this->holobiont_pointer_vector);
                 this->type = "ontology::Symbiosis*";
             }
 
             // destructor.
             virtual ~Symbiosis();
 
+            void create_symbionts();
+
             // this method renders all `SymbiontMaterial`s belonging to this `Symbiosis`.
             void render();
+
+            ontology::Entity* get_parent() const override;
 
             int32_t get_number_of_children() const override;
 
@@ -84,7 +89,28 @@ namespace ontology
 
             void set_symbiont_material_pointer(const int32_t childID, ontology::SymbiontMaterial* const child_pointer);
 
-            void set_name(std::string name);
+            void set_holobiont_pointer(const int32_t childID, ontology::Holobiont* const child_pointer);
+
+            void set_name(const std::string& name);
+
+            ontology::SymbiontSpecies* get_symbiont_species(const int32_t biontID) const;
+            GLuint get_vertex_position_modelspaceID(const int32_t biontID) const;
+            GLuint get_vertexUVID(const int32_t biontID) const;
+            GLuint get_vertex_normal_modelspaceID(const int32_t biontID) const;
+
+            GLuint get_vertexbuffer(const int32_t biontID) const;
+            GLuint get_uvbuffer(const int32_t biontID) const;
+            GLuint get_normalbuffer(const int32_t biontID) const;
+            GLuint get_elementbuffer(const int32_t biontID) const;
+
+            std::vector<uint32_t> get_indices(const int32_t biontID) const;
+            GLuint get_indices_size(const int32_t biontID) const;
+            int32_t get_number_of_symbionts() const;
+            GLuint get_texture(const int32_t biontID) const;
+            GLuint get_openGL_textureID(const int32_t biontID) const;
+
+            GLuint get_lightID(const int32_t biontID) const;
+            glm::vec3 get_light_position(const int32_t biontID) const;
 
             template<class T1>
                 friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, int32_t* number_of_children);
@@ -96,18 +122,36 @@ namespace ontology
 
             ontology::Shader* parent; // pointer to `Shader`.
 
+            std::string model_file_format;  // type of the model file, eg. `"fbx"`.
+            std::string model_filename;     // filename of the model file.
+            std::string triangulation_type;
+
+            glm::vec3 light_position;       // light position.
+
             std::vector<ontology::SymbiontMaterial*> symbiont_material_pointer_vector;
+            std::vector<ontology::Holobiont*> holobiont_pointer_vector;
             std::queue<int32_t> free_symbiont_materialID_queue;
+            std::queue<int32_t> free_holobiontID_queue;
             int32_t number_of_symbiont_materials;
+            int32_t number_of_holobionts;
 
             std::vector<std::vector<glm::vec3>> vertices;         // vertices of the object.
-            std::vector<std::vector<glm::vec2>> UVs;              // UVs of the object.
+            std::vector<std::vector<glm::vec2>> uvs;              // UVs of the object.
             std::vector<std::vector<glm::vec3>> normals;          // normals of the object.
 
             std::vector<std::vector<uint32_t>> indices;           // the deleted vertices will be reused (though it is not required, if there's enough memory).
             std::vector<std::vector<glm::vec3>> indexed_vertices;
-            std::vector<std::vector<glm::vec2>> indexed_UVs;
+            std::vector<std::vector<glm::vec2>> indexed_uvs;
             std::vector<std::vector<glm::vec3>> indexed_normals;
+
+            std::unordered_map<const ofbx::Texture*, std::vector<int32_t>> ofbx_diffuse_texture_mesh_map;
+            std::vector<ontology::SymbiontMaterial*> biontID_symbiont_material_vector;
+            std::vector<ontology::SymbiontSpecies*> biontID_symbiont_species_vector;
+            std::vector<const ofbx::Mesh*> ofbx_meshes;
+            std::vector<const ofbx::Texture*> ofbx_diffuse_texture_vector;
+            std::vector<const ofbx::Texture*> ofbx_normal_texture_vector; // currently not in use.
+            std::vector<const ofbx::Texture*> ofbx_count_texture_vector;  // currently not in use.
+            int32_t ofbx_mesh_count;
     };
 }
 

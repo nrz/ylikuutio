@@ -24,7 +24,7 @@ namespace ontology
     void SymbiontSpecies::bind_to_parent()
     {
         // get `childID` from `SymbiontMaterial` and set pointer to this `SymbiontSpecies`.
-        this->parent->bind(this);
+        this->symbiont_material_parent->bind(this);
     }
 
     SymbiontSpecies::~SymbiontSpecies()
@@ -36,7 +36,7 @@ namespace ontology
         glDeleteBuffers(1, &this->elementbuffer);
 
         // set pointer to this symbiont_species to nullptr.
-        this->parent->set_symbiont_species_pointer(this->childID, nullptr);
+        this->symbiont_material_parent->set_symbiont_species_pointer(this->childID, nullptr);
     }
 
     void SymbiontSpecies::render()
@@ -51,7 +51,7 @@ namespace ontology
 
     ontology::Entity* SymbiontSpecies::get_parent() const
     {
-        return this->parent;
+        return this->symbiont_material_parent;
     }
 
     void SymbiontSpecies::set_object_pointer(const int32_t childID, ontology::Object* const child_pointer)
@@ -62,5 +62,15 @@ namespace ontology
     void SymbiontSpecies::set_name(const std::string& name)
     {
         ontology::set_name(name, this);
+    }
+
+    int32_t SymbiontSpecies::get_indices_size() const
+    {
+        return this->indices.size();
+    }
+
+    GLuint SymbiontSpecies::get_lightID() const
+    {
+        return this->lightID;
     }
 }

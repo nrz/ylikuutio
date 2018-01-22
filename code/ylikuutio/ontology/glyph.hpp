@@ -81,7 +81,7 @@ namespace ontology
                 bool triangulating_result = geometry::triangulate_polygons(
                         triangulate_polygons_struct,
                         this->vertices,
-                        this->UVs,
+                        this->uvs,
                         this->normals);
 
                 if (!triangulating_result)

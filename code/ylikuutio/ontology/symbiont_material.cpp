@@ -4,6 +4,7 @@
 #include "render_templates.hpp"
 #include "material_struct.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
+#include <ofbx.h>
 
 // Include GLEW
 #ifndef __GL_GLEW_H_INCLUDED
@@ -36,7 +37,7 @@ namespace ontology
     void SymbiontMaterial::bind_to_parent()
     {
         // get `childID` from `Symbiosis` and set pointer to this `SymbiontMaterial`.
-        this->parent->bind(this);
+        this->parent->bind_symbiont_material(this);
     }
 
     SymbiontMaterial::~SymbiontMaterial()
@@ -93,5 +94,25 @@ namespace ontology
     void SymbiontMaterial::set_name(const std::string& name)
     {
         ontology::set_name(name, this);
+    }
+
+    void SymbiontMaterial::load_texture()
+    {
+        this->texture = loaders::load_FBX_texture(this->ofbx_texture);
+
+        // Get a handle for our "myTextureSampler" uniform.
+        ontology::Symbiosis* symbiosis = static_cast<ontology::Symbiosis*>(this->parent);
+        ontology::Shader* shader = static_cast<ontology::Shader*>(symbiosis->get_parent());
+        this->openGL_textureID = glGetUniformLocation(shader->get_programID(), "myTextureSampler");
+    }
+
+    GLuint SymbiontMaterial::get_texture()
+    {
+        return this->texture;
+    }
+
+    GLuint SymbiontMaterial::get_openGL_textureID()
+    {
+        return this->openGL_textureID;
     }
 }

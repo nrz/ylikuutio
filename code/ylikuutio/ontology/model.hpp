@@ -48,9 +48,9 @@ namespace ontology
                 // Initialize class members with some dummy values.
                 this->childID = -1;
                 this->lightID = 0;
-                this->vertexPosition_modelspaceID = 0;
+                this->vertex_position_modelspaceID = 0;
                 this->vertexUVID = 0;
-                this->vertexNormal_modelspaceID = 0;
+                this->vertex_normal_modelspaceID = 0;
                 this->vertexbuffer = 0;
                 this->uvbuffer = 0;
                 this->normalbuffer = 0;
@@ -69,18 +69,18 @@ namespace ontology
             std::vector<glm::vec3> get_vertices() const;
             std::vector<uint32_t> get_indices() const;
 
-            GLuint get_vertexPosition_modelspaceID() const;
+            GLuint get_vertex_position_modelspaceID() const;
             GLuint get_vertexUVID() const;
-            GLuint get_vertexNormal_modelspaceID() const;
+            GLuint get_vertex_normal_modelspaceID() const;
 
             GLuint get_vertexbuffer() const;
             GLuint get_uvbuffer() const;
             GLuint get_normalbuffer() const;
             GLuint get_elementbuffer() const;
 
-            void store_vertexPosition_modelspaceID(GLuint vertexPosition_modelspaceID);
+            void store_vertex_position_modelspaceID(GLuint vertex_position_modelspaceID);
             void store_vertexUVID(GLuint vertexUVID);
-            void store_vertexNormal_modelspaceID(GLuint vertexNormal_modelspaceID);
+            void store_vertex_normal_modelspaceID(GLuint vertex_normal_modelspaceID);
 
             template<class T1>
                 friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, int32_t* number_of_children);
@@ -107,17 +107,17 @@ namespace ontology
 
             std::string triangulation_type;
 
-            GLuint vertexPosition_modelspaceID;
+            GLuint vertex_position_modelspaceID;
             GLuint vertexUVID;
-            GLuint vertexNormal_modelspaceID;
+            GLuint vertex_normal_modelspaceID;
 
             std::vector<glm::vec3> vertices;         // vertices of the `Model`.
-            std::vector<glm::vec2> UVs;              // UVs of the `Model`.
+            std::vector<glm::vec2> uvs;              // UVs of the `Model`.
             std::vector<glm::vec3> normals;          // normals of the `Model`.
 
             std::vector<uint32_t> indices;           // the deleted vertices will be reused (though it is not required, if there's enough memory).
             std::vector<glm::vec3> indexed_vertices;
-            std::vector<glm::vec2> indexed_UVs;
+            std::vector<glm::vec2> indexed_uvs;
             std::vector<glm::vec3> indexed_normals;
 
             GLuint vertexbuffer;

@@ -36,8 +36,8 @@ namespace loaders
             std::vector<glm::vec3>& out_vertices,
             std::vector<glm::vec2>& out_UVs,
             std::vector<glm::vec3>& out_normals,
-            int32_t& image_width,
-            int32_t& image_height,
+            int32_t* image_width_pointer,
+            int32_t* image_height_pointer,
             const std::string& color_channel,
             const int32_t x_step,
             const int32_t z_step,
@@ -48,9 +48,20 @@ namespace loaders
             return false;
         }
 
+        if (image_width_pointer == nullptr || image_height_pointer == nullptr)
+        {
+            return false;
+        }
+
         int32_t image_size;
 
+        int32_t image_width;
+        int32_t image_height;
+
         uint8_t* image_data = load_BMP_file(image_path, image_width, image_height, image_size);
+
+        *image_width_pointer = image_width;
+        *image_height_pointer = image_height;
 
         if (image_width < 2 || image_height < 2)
         {

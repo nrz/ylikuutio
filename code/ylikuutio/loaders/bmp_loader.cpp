@@ -21,7 +21,7 @@ namespace loaders
         // Data read from the header of the BMP file
         uint8_t header[header_size];
         // Actual RGB image data.
-        uint8_t *image_data;
+        uint8_t* image_data;
 
         // Open the file
         const char* char_image_path = image_path.c_str();

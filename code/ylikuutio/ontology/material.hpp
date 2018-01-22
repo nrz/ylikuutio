@@ -36,6 +36,7 @@ namespace space_partition
 
 namespace ontology
 {
+    class Universe;
     class Species;
     class Object;
     class VectorFont;
@@ -56,7 +57,10 @@ namespace ontology
                 : Entity(universe)
             {
                 // constructor.
-                this->parent = material_struct.parent;
+                this->universe = universe;
+                this->parent = material_struct.shader;
+
+                this->is_symbiont_material = material_struct.is_symbiont_material;
 
                 this->terrain_species = nullptr;
 
@@ -70,32 +74,35 @@ namespace ontology
                 this->number_of_vector_fonts = 0;
                 this->number_of_chunk_masters = 0;
 
-                // get `childID` from the `Shader` and set pointer to this `Material`.
-                this->bind_to_parent();
-
-                // Load the texture.
-                if ((std::strcmp(this->char_texture_file_format, "bmp") == 0) || (std::strcmp(this->char_texture_file_format, "BMP") == 0))
+                if (!this->is_symbiont_material)
                 {
-                    this->texture = loaders::load_BMP_texture(this->texture_filename);
-                }
-                else if ((std::strcmp(this->char_texture_file_format, "dds") == 0) || (std::strcmp(this->char_texture_file_format, "DDS") == 0))
-                {
-                    this->texture = loaders::load_DDS_texture(this->texture_filename);
-                }
-                else
-                {
-                    std::cerr << "no texture was loaded!\n";
-                    std::cerr << "texture file format: " << this->texture_file_format << "\n";
-                    this->texture = 0; // some dummy value.
-                }
+                    // get `childID` from the `Shader` and set pointer to this `Material`.
+                    this->bind_to_parent();
 
-                // Get a handle for our "myTextureSampler" uniform.
-                this->openGL_textureID = glGetUniformLocation(this->parent->get_programID(), "myTextureSampler");
+                    // Load the texture.
+                    if ((std::strcmp(this->char_texture_file_format, "bmp") == 0) || (std::strcmp(this->char_texture_file_format, "BMP") == 0))
+                    {
+                        this->texture = loaders::load_BMP_texture(this->texture_filename);
+                    }
+                    else if ((std::strcmp(this->char_texture_file_format, "dds") == 0) || (std::strcmp(this->char_texture_file_format, "DDS") == 0))
+                    {
+                        this->texture = loaders::load_DDS_texture(this->texture_filename);
+                    }
+                    else
+                    {
+                        std::cerr << "no texture was loaded!\n";
+                        std::cerr << "texture file format: " << this->texture_file_format << "\n";
+                        this->texture = 0; // some dummy value.
+                    }
 
-                this->child_vector_pointers_vector.push_back(&this->species_pointer_vector);
-                this->child_vector_pointers_vector.push_back(&this->vector_font_pointer_vector);
-                this->child_vector_pointers_vector.push_back(&this->chunk_master_pointer_vector);
-                this->type = "ontology::Material*";
+                    // Get a handle for our "myTextureSampler" uniform.
+                    this->openGL_textureID = glGetUniformLocation(this->parent->get_programID(), "myTextureSampler");
+
+                    this->child_vector_pointers_vector.push_back(&this->species_pointer_vector);
+                    this->child_vector_pointers_vector.push_back(&this->vector_font_pointer_vector);
+                    this->child_vector_pointers_vector.push_back(&this->chunk_master_pointer_vector);
+                    this->type = "ontology::Material*";
+                }
             }
 
             // destructor.
@@ -137,6 +144,8 @@ namespace ontology
             int32_t get_number_of_descendants() const override;
 
             ontology::Shader* parent;      // pointer to `Shader`.
+
+            bool is_symbiont_material;
 
             ontology::Species* terrain_species;    // pointer to terrain `Species` (used in collision detection).
 

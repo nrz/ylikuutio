@@ -421,6 +421,9 @@ add_library(ylikuutio STATIC
     # code/ylikuutio/network/tcp_server.hpp
 
     # ontology, in alphabetical order
+    code/ylikuutio/ontology/biont.cpp
+    code/ylikuutio/ontology/biont.hpp
+    code/ylikuutio/ontology/biont_struct.hpp
     code/ylikuutio/ontology/creature.cpp
     code/ylikuutio/ontology/creature.hpp
     code/ylikuutio/ontology/gl_attrib_locations.cpp
@@ -439,6 +442,9 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/glyph_struct.hpp
     code/ylikuutio/ontology/ground_level.cpp
     code/ylikuutio/ontology/ground_level.hpp
+    code/ylikuutio/ontology/holobiont.cpp
+    code/ylikuutio/ontology/holobiont.hpp
+    code/ylikuutio/ontology/holobiont_struct.hpp
     code/ylikuutio/ontology/info_struct.hpp
     code/ylikuutio/ontology/material.cpp
     code/ylikuutio/ontology/material.hpp
@@ -466,10 +472,8 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/species_struct.hpp
     code/ylikuutio/ontology/symbiont_material.cpp
     code/ylikuutio/ontology/symbiont_material.hpp
-    code/ylikuutio/ontology/symbiont_material_struct.hpp
     code/ylikuutio/ontology/symbiont_species.cpp
     code/ylikuutio/ontology/symbiont_species.hpp
-    code/ylikuutio/ontology/symbiont_species_struct.hpp
     code/ylikuutio/ontology/symbiosis.cpp
     code/ylikuutio/ontology/symbiosis.hpp
     code/ylikuutio/ontology/symbiosis_struct.hpp

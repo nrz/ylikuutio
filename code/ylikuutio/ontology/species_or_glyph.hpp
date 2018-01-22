@@ -24,20 +24,20 @@ namespace ontology
                     species_or_glyph_pointer->light_position.z);
 
             // 1st attribute buffer : vertices.
-            glEnableVertexAttribArray(species_or_glyph_pointer->vertexPosition_modelspaceID);
+            glEnableVertexAttribArray(species_or_glyph_pointer->vertex_position_modelspaceID);
 
             // 2nd attribute buffer : UVs.
             glEnableVertexAttribArray(species_or_glyph_pointer->vertexUVID);
 
             // 3rd attribute buffer : normals.
-            glEnableVertexAttribArray(species_or_glyph_pointer->vertexNormal_modelspaceID);
+            glEnableVertexAttribArray(species_or_glyph_pointer->vertex_normal_modelspaceID);
 
             // render this `Species` or `Glyph` by calling `render()` function of each `Object`.
             ontology::render_children<ontology::Object*>(species_or_glyph_pointer->object_pointer_vector);
 
-            glDisableVertexAttribArray(species_or_glyph_pointer->vertexPosition_modelspaceID);
+            glDisableVertexAttribArray(species_or_glyph_pointer->vertex_position_modelspaceID);
             glDisableVertexAttribArray(species_or_glyph_pointer->vertexUVID);
-            glDisableVertexAttribArray(species_or_glyph_pointer->vertexNormal_modelspaceID);
+            glDisableVertexAttribArray(species_or_glyph_pointer->vertex_normal_modelspaceID);
         }
 }
 

@@ -7,6 +7,8 @@
 #include "material.hpp"
 #include "species.hpp"
 #include "object.hpp"
+#include "symbiosis.hpp"
+#include "holobiont.hpp"
 #include "vector_font.hpp"
 #include "text3D.hpp"
 #include "font2D.hpp"
@@ -14,6 +16,8 @@
 #include "material_struct.hpp"
 #include "species_struct.hpp"
 #include "object_struct.hpp"
+#include "symbiosis_struct.hpp"
+#include "holobiont_struct.hpp"
 #include "vector_font_struct.hpp"
 #include "text3D_struct.hpp"
 
@@ -73,6 +77,16 @@ namespace ontology
     ontology::Entity* EntityFactory::create_Object(const ObjectStruct& object_struct)
     {
         return new ontology::Object(this->universe, object_struct);
+    }
+
+    ontology::Entity* EntityFactory::create_Symbiosis(const SymbiosisStruct& symbiosis_struct)
+    {
+        return new ontology::Symbiosis(this->universe, symbiosis_struct);
+    }
+
+    ontology::Entity* EntityFactory::create_Holobiont(const HolobiontStruct& holobiont_struct)
+    {
+        return new ontology::Holobiont(this->universe, holobiont_struct);
     }
 
     ontology::Entity* EntityFactory::create_VectorFont(const VectorFontStruct& vector_font_struct)

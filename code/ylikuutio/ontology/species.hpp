@@ -55,6 +55,7 @@ namespace ontology
                 // constructor.
                 this->universe          = universe;
                 this->is_terrain          = species_struct.is_terrain;
+                this->is_symbiont_species = species_struct.is_symbiont_species;
                 this->planet_radius      = species_struct.planet_radius;
                 this->divisor           = species_struct.divisor;
                 this->model_file_format = species_struct.model_file_format;
@@ -63,7 +64,7 @@ namespace ontology
                 this->light_position    = species_struct.light_position;
                 this->latitude          = species_struct.latitude;
                 this->longitude         = species_struct.longitude;
-                this->parent            = species_struct.parent;
+                this->material_parent   = species_struct.material;
                 this->x_step            = species_struct.x_step;
                 this->z_step            = species_struct.z_step;
                 this->triangulation_type = species_struct.triangulation_type;
@@ -71,64 +72,67 @@ namespace ontology
                 this->char_model_file_format = this->model_file_format.c_str();
                 this->char_model_filename    = this->model_filename.c_str();
 
-                // get `childID` from `Material` and set pointer to this `Species`.
-                this->bind_to_parent();
-
-                // Get a handle for our buffers.
-                this->vertexPosition_modelspaceID = glGetAttribLocation(species_struct.shader->get_programID(), "vertexPosition_modelspace");
-                this->vertexUVID = glGetAttribLocation(species_struct.shader->get_programID(), "vertexUV");
-                this->vertexNormal_modelspaceID = glGetAttribLocation(species_struct.shader->get_programID(), "vertexNormal_modelspace");
-
-                // Get a handle for our "LightPosition" uniform.
-                glUseProgram(species_struct.shader->get_programID());
-                this->lightID = glGetUniformLocation(species_struct.shader->get_programID(), "LightPosition_worldspace");
-
-                if (this->is_terrain)
+                if (!this->is_symbiont_species)
                 {
-                    // set world species pointer so that it points to this species.
-                    // currently there can be only one world species (used in collision detection).
-                    this->universe->set_terrain_species(this);
+                    // get `childID` from `Material` and set pointer to this `Species`.
+                    this->bind_to_parent();
+
+                    // Get a handle for our buffers.
+                    this->vertex_position_modelspaceID = glGetAttribLocation(species_struct.shader->get_programID(), "vertexPosition_modelspace");
+                    this->vertexUVID = glGetAttribLocation(species_struct.shader->get_programID(), "vertexUV");
+                    this->vertex_normal_modelspaceID = glGetAttribLocation(species_struct.shader->get_programID(), "vertexNormal_modelspace");
+
+                    // Get a handle for our "LightPosition" uniform.
+                    glUseProgram(species_struct.shader->get_programID());
+                    this->lightID = glGetUniformLocation(species_struct.shader->get_programID(), "LightPosition_worldspace");
+
+                    if (this->is_terrain)
+                    {
+                        // set world species pointer so that it points to this species.
+                        // currently there can be only one world species (used in collision detection).
+                        this->universe->set_terrain_species(this);
+                    }
+
+                    // water level.
+                    GLuint water_level_uniform_location = glGetUniformLocation(species_struct.shader->get_programID(), "water_level");
+                    glUniform1f(water_level_uniform_location, species_struct.scene->get_water_level());
+
+                    SpeciesLoaderStruct species_loader_struct;
+                    species_loader_struct.model_filename = this->model_filename;
+                    species_loader_struct.model_file_format = this->model_file_format;
+                    species_loader_struct.latitude = this->latitude;
+                    species_loader_struct.longitude = this->longitude;
+                    species_loader_struct.planet_radius = this->planet_radius;
+                    species_loader_struct.divisor = this->divisor;
+                    species_loader_struct.color_channel = this->color_channel;
+                    species_loader_struct.x_step = this->x_step;
+                    species_loader_struct.z_step = this->z_step;
+                    species_loader_struct.image_width_pointer = &this->image_width;
+                    species_loader_struct.image_height_pointer = &this->image_height;
+                    species_loader_struct.triangulation_type = this->triangulation_type;
+
+                    this->image_width = -1;
+                    this->image_height = -1;
+
+                    loaders::load_species(
+                            species_loader_struct,
+                            this->vertices,
+                            this->uvs,
+                            this->normals,
+                            this->indices,
+                            this->indexed_vertices,
+                            this->indexed_uvs,
+                            this->indexed_normals,
+                            &this->vertexbuffer,
+                            &this->uvbuffer,
+                            &this->normalbuffer,
+                            &this->elementbuffer);
+
+                    // TODO: Compute the graph of this object type to enable object vertex modification!
+
+                    this->child_vector_pointers_vector.push_back(&this->object_pointer_vector);
+                    this->type = "ontology::Species*";
                 }
-
-                // water level.
-                GLuint water_level_uniform_location = glGetUniformLocation(species_struct.shader->get_programID(), "water_level");
-                glUniform1f(water_level_uniform_location, species_struct.scene->get_water_level());
-
-                SpeciesLoaderStruct species_loader_struct;
-                species_loader_struct.model_filename = this->model_filename;
-                species_loader_struct.model_file_format = this->model_file_format;
-                species_loader_struct.latitude = this->latitude;
-                species_loader_struct.longitude = this->longitude;
-                species_loader_struct.planet_radius = this->planet_radius;
-                species_loader_struct.divisor = this->divisor;
-                species_loader_struct.color_channel = this->color_channel;
-                species_loader_struct.x_step = this->x_step;
-                species_loader_struct.z_step = this->z_step;
-                species_loader_struct.triangulation_type = this->triangulation_type;
-
-                this->image_width = -1;
-                this->image_height = -1;
-
-                loaders::load_species(
-                        species_loader_struct,
-                        this->vertices,
-                        this->UVs,
-                        this->normals,
-                        this->indices,
-                        this->indexed_vertices,
-                        this->indexed_UVs,
-                        this->indexed_normals,
-                        &this->vertexbuffer,
-                        &this->uvbuffer,
-                        &this->normalbuffer,
-                        &this->elementbuffer,
-                        this->image_width,
-                        this->image_height);
-
-                // TODO: Compute the graph of this object type to enable object vertex modification!
-
-                this->child_vector_pointers_vector.push_back(&this->object_pointer_vector);
-                this->type = "ontology::Species*";
             }
 
             // destructor.
@@ -168,7 +172,9 @@ namespace ontology
             // this method renders all `Object`s of this `Species`.
             void render();
 
-            ontology::Material* parent;   // pointer to `Material`.
+            ontology::Material* material_parent;  // pointer to `Material`.
+
+            bool is_symbiont_species;
 
             std::string model_file_format;        // type of the model file, eg. `"bmp"`.
             std::string model_filename;           // filename of the model file.

@@ -96,25 +96,28 @@ namespace ontology
 
     Material::~Material()
     {
-        // destructor.
-        std::cout << "Material with childID " << std::dec << this->childID << " will be destroyed.\n";
+        if (!this->is_symbiont_material)
+        {
+            // destructor.
+            std::cout << "Material with childID " << std::dec << this->childID << " will be destroyed.\n";
 
-        // destroy all species of this material.
-        std::cout << "All species of this material will be destroyed.\n";
-        hierarchy::delete_children<ontology::Species*>(this->species_pointer_vector, &this->number_of_species);
+            // destroy all species of this material.
+            std::cout << "All species of this material will be destroyed.\n";
+            hierarchy::delete_children<ontology::Species*>(this->species_pointer_vector, &this->number_of_species);
 
-        // destroy all fonts of this material.
-        std::cout << "All fonts of this material will be destroyed.\n";
-        hierarchy::delete_children<ontology::VectorFont*>(this->vector_font_pointer_vector, &this->number_of_vector_fonts);
+            // destroy all fonts of this material.
+            std::cout << "All fonts of this material will be destroyed.\n";
+            hierarchy::delete_children<ontology::VectorFont*>(this->vector_font_pointer_vector, &this->number_of_vector_fonts);
 
-        // destroy all chunk masters of this material.
-        std::cout << "All chunk masters of this material will be destroyed.\n";
-        hierarchy::delete_children<space_partition::ChunkMaster*>(this->chunk_master_pointer_vector, &this->number_of_chunk_masters);
+            // destroy all chunk masters of this material.
+            std::cout << "All chunk masters of this material will be destroyed.\n";
+            hierarchy::delete_children<space_partition::ChunkMaster*>(this->chunk_master_pointer_vector, &this->number_of_chunk_masters);
 
-        glDeleteTextures(1, &this->texture);
+            glDeleteTextures(1, &this->texture);
 
-        // set pointer to this material to nullptr.
-        this->parent->set_material_pointer(this->childID, nullptr);
+            // set pointer to this material to nullptr.
+            this->parent->set_material_pointer(this->childID, nullptr);
+        }
     }
 
     void Material::render()

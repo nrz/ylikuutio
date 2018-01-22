@@ -101,6 +101,8 @@ TEST(OpenFBX_must_function_appropriately, rigged_and_animated_cat)
             else
             {
                 std::cout << "mesh " << i << ", DIFFUSE texture at " << std::hex << (void*) diffuse_texture << std::dec << "\n";
+                ofbx::DataView dataview_filename = diffuse_texture->getFileName();
+                ofbx::DataView dataview_rel_filename = diffuse_texture->getRelativeFileName();
             }
 
             const ofbx::Texture* normal_texture = material->getTexture(ofbx::Texture::NORMAL);
@@ -122,6 +124,8 @@ TEST(OpenFBX_must_function_appropriately, rigged_and_animated_cat)
             {
                 std::cout << "mesh " << i << ", COUNT texture at " << std::hex << (void*) count_texture << std::dec << "\n";
             }
+
+            ofbx::Color color = material->getDiffuseColor();
 
             const ofbx::Object* parent = material->getParent();
             ASSERT_NE(parent, nullptr);
@@ -231,6 +235,8 @@ TEST(OpenFBX_must_function_appropriately, turbo_polizei)
             else
             {
                 std::cout << "mesh " << i << ", DIFFUSE texture at " << std::hex << (void*) diffuse_texture << std::dec << "\n";
+                ofbx::DataView dataview_filename = diffuse_texture->getFileName();
+                ofbx::DataView dataview_rel_filename = diffuse_texture->getRelativeFileName();
             }
 
             const ofbx::Texture* normal_texture = material->getTexture(ofbx::Texture::NORMAL);
@@ -252,6 +258,8 @@ TEST(OpenFBX_must_function_appropriately, turbo_polizei)
             {
                 std::cout << "mesh " << i << ", COUNT texture at " << std::hex << (void*) count_texture << std::dec << "\n";
             }
+
+            ofbx::Color color = material->getDiffuseColor();
 
             const ofbx::Object* parent = material->getParent();
             ASSERT_NE(parent, nullptr);
