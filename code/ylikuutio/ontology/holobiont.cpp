@@ -86,7 +86,7 @@ namespace ontology
     void Holobiont::create_bionts()
     {
         std::cout << "Creating bionts for Holobiont located at 0x" << std::hex << (uint64_t) this << std::dec << " ...\n";
-        // Create regular `ontology::Object*` entities so that
+        // Create `Biont` entities so that
         // they bind this `Holobiont`.
         int32_t correct_number_of_bionts = this->symbiosis_parent->get_number_of_symbionts();
         std::cout << "Number of bionts to be created: " << correct_number_of_bionts << "\n";
