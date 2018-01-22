@@ -89,17 +89,6 @@ namespace ontology
 
             void set_name(const std::string& name);
 
-            GLuint get_vertexposition_modelspaceID(const int32_t biontID) const;
-            GLuint get_vertexUVID(const int32_t biontID) const;
-            GLuint get_vertexnormal_modelspaceID(const int32_t biontID) const;
-
-            GLuint get_vertexbuffer(const int32_t biontID) const;
-            GLuint get_uvbuffer(const int32_t biontID) const;
-            GLuint get_normalbuffer(const int32_t biontID) const;
-            GLuint get_elementbuffer(const int32_t biontID) const;
-            std::vector<uint32_t> get_indices(const int32_t biontID) const;
-            int32_t get_indices_size(const int32_t biontID) const;
-
             template<class T1>
                 friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, int32_t* number_of_children);
             template<class T1, class T2>

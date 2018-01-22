@@ -86,13 +86,19 @@ namespace ontology
     void Holobiont::create_bionts()
     {
         std::cout << "Creating bionts for Holobiont located at 0x" << std::hex << (uint64_t) this << std::dec << " ...\n";
-        // Create regular `ontology::Object*` entities so that
+        // Create `Biont` entities so that
         // they bind this `Holobiont`.
         int32_t correct_number_of_bionts = this->symbiosis_parent->get_number_of_symbionts();
         std::cout << "Number of bionts to be created: " << correct_number_of_bionts << "\n";
 
         for (int32_t biontID = 0; biontID < correct_number_of_bionts; biontID++)
         {
+            if (!this->symbiosis_parent->has_texture(biontID))
+            {
+                std::cout << "There is no texture for biont with biontID " << biontID << "\n";
+                continue;
+            }
+
             BiontStruct biont_struct;
             biont_struct.biontID               = biontID;
             biont_struct.holobiont_parent      = this;
@@ -102,7 +108,7 @@ namespace ontology
             biont_struct.initial_rotate_angle  = this->initial_rotate_angle;
             biont_struct.initial_rotate_vector = this->initial_rotate_vector;
             biont_struct.quaternions_in_use    = this->quaternions_in_use;
-            biont_struct.cartesian_coordinates = this->cartesian_coordinates;
+            biont_struct.cartesian_coordinates = std::make_shared<glm::vec3>(*this->cartesian_coordinates);
             biont_struct.translate_vector      = this->translate_vector;
             biont_struct.texture               = this->symbiosis_parent->get_texture(biontID);
 
@@ -135,57 +141,5 @@ namespace ontology
     void Holobiont::set_name(const std::string& name)
     {
         ontology::set_name(name, this);
-    }
-
-    GLuint Holobiont::get_vertexposition_modelspaceID(const int32_t biontID) const
-    {
-        //return this->symbiosis_parent->get_vertexposition_modelspaceID(biontID);
-        return 0;
-    }
-
-    GLuint Holobiont::get_vertexUVID(const int32_t biontID) const
-    {
-        // return this->symbiosis_parent->get_vertexUVID(biontID);
-        return 0;
-    }
-
-    GLuint Holobiont::get_vertexnormal_modelspaceID(const int32_t biontID) const
-    {
-        // return this->symbiosis_parent->get_vertexnormal_modelspaceID(biontID);
-        return 0;
-    }
-
-    GLuint Holobiont::get_vertexbuffer(const int32_t biontID) const
-    {
-        // return this->symbiosis_parent->get_vertexbuffer(biontID);
-        return 0;
-    }
-
-    GLuint Holobiont::get_uvbuffer(const int32_t biontID) const
-    {
-        // return this->symbiosis_parent->get_uvbuffer(biontID);
-        return 0;
-    }
-
-    GLuint Holobiont::get_normalbuffer(const int32_t biontID) const
-    {
-        // return this->symbiosis_parent->get_normalbuffer(biontID);
-        return 0;
-    }
-
-    GLuint Holobiont::get_elementbuffer(const int32_t biontID) const
-    {
-        // return this->symbiosis_parent->get_elementbuffer(biontID);
-        return 0;
-    }
-
-    std::vector<uint32_t> Holobiont::get_indices(const int32_t biontID) const
-    {
-        return this->symbiosis_parent->get_indices(biontID);
-    }
-
-    int32_t Holobiont::get_indices_size(const int32_t biontID) const
-    {
-        return this->symbiosis_parent->get_indices_size(biontID);
     }
 }

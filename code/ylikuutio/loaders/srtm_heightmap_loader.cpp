@@ -164,8 +164,23 @@ namespace loaders
         // FIXME: this is a temporary testing code with a hardcoded start from the southwestern corner.
         // TODO: write a proper code for loading the appropriate chunks (based on real spherical coordinates) into VBOs!
 
+        // start processing image_data.
+        std::cout << "Processing SRTM heightmap data.\n";
+
+        int32_t last_percent = -1;
+        int32_t current_percent = -1;
+
         for (uint32_t z = 0; z < image_height_in_use; z++)
         {
+            // show progress in percents.
+            current_percent = static_cast<int32_t>(floor(100.0f * ((double) z / (double) (image_height_in_use - 1))));
+
+            if (current_percent > last_percent)
+            {
+                std::cout << current_percent << "% ";
+                last_percent = current_percent;
+            }
+
             for (uint32_t x = 0; x < image_width_in_use; x++)
             {
                 uint32_t y;
