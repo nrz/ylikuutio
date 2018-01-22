@@ -266,6 +266,21 @@ namespace ontology
         return this->ofbx_mesh_count;
     }
 
+    bool Symbiosis::has_texture(const int32_t biontID) const
+    {
+        if (biontID >= this->biontID_symbiont_material_vector.size())
+        {
+            return false;
+        }
+
+        if (this->biontID_symbiont_material_vector.at(biontID) == nullptr)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
     GLuint Symbiosis::get_texture(const int32_t biontID) const
     {
         return this->biontID_symbiont_material_vector.at(biontID)->get_texture();

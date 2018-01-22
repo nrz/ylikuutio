@@ -93,6 +93,12 @@ namespace ontology
 
         for (int32_t biontID = 0; biontID < correct_number_of_bionts; biontID++)
         {
+            if (!this->symbiosis_parent->has_texture(biontID))
+            {
+                std::cout << "There is no texture for biont with biontID " << biontID << "\n";
+                continue;
+            }
+
             BiontStruct biont_struct;
             biont_struct.biontID               = biontID;
             biont_struct.holobiont_parent      = this;

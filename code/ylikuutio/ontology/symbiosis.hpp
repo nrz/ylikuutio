@@ -106,6 +106,7 @@ namespace ontology
             std::vector<uint32_t> get_indices(const int32_t biontID) const;
             GLuint get_indices_size(const int32_t biontID) const;
             int32_t get_number_of_symbionts() const;
+            bool has_texture(const int32_t biontID) const;
             GLuint get_texture(const int32_t biontID) const;
             GLuint get_openGL_textureID(const int32_t biontID) const;
 
