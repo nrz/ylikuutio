@@ -96,17 +96,17 @@ namespace ontology
         return this->elementbuffer;
     }
 
-    void Model::store_vertex_position_modelspaceID(GLuint vertex_position_modelspaceID)
+    void Model::store_vertex_position_modelspaceID(const GLuint vertex_position_modelspaceID)
     {
         this->vertex_position_modelspaceID = vertex_position_modelspaceID;
     }
 
-    void Model::store_vertexUVID(GLuint vertexUVID)
+    void Model::store_vertexUVID(const GLuint vertexUVID)
     {
         this->vertexUVID = vertexUVID;
     }
 
-    void Model::store_vertex_normal_modelspaceID(GLuint vertex_normal_modelspaceID)
+    void Model::store_vertex_normal_modelspaceID(const GLuint vertex_normal_modelspaceID)
     {
         this->vertex_normal_modelspaceID = vertex_normal_modelspaceID;
     }

@@ -106,12 +106,12 @@ namespace ontology
         this->openGL_textureID = glGetUniformLocation(shader->get_programID(), "myTextureSampler");
     }
 
-    GLuint SymbiontMaterial::get_texture()
+    GLuint SymbiontMaterial::get_texture() const
     {
         return this->texture;
     }
 
-    GLuint SymbiontMaterial::get_openGL_textureID()
+    GLuint SymbiontMaterial::get_openGL_textureID() const
     {
         return this->openGL_textureID;
     }

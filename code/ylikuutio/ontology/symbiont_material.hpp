@@ -70,8 +70,8 @@ namespace ontology
             // this method sets `SymbiontSpecies` pointer.
             void set_symbiont_species_pointer(const int32_t childID, ontology::SymbiontSpecies* const child_pointer);
 
-            GLuint get_texture();
-            GLuint get_openGL_textureID();
+            GLuint get_texture() const;
+            GLuint get_openGL_textureID() const;
 
             friend class Symbiosis;
             friend class SymbiontSpecies;

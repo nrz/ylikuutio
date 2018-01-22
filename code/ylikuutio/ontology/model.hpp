@@ -78,9 +78,9 @@ namespace ontology
             GLuint get_normalbuffer() const;
             GLuint get_elementbuffer() const;
 
-            void store_vertex_position_modelspaceID(GLuint vertex_position_modelspaceID);
-            void store_vertexUVID(GLuint vertexUVID);
-            void store_vertex_normal_modelspaceID(GLuint vertex_normal_modelspaceID);
+            void store_vertex_position_modelspaceID(const GLuint vertex_position_modelspaceID);
+            void store_vertexUVID(const GLuint vertexUVID);
+            void store_vertex_normal_modelspaceID(const GLuint vertex_normal_modelspaceID);
 
             template<class T1>
                 friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, int32_t* number_of_children);
@@ -91,7 +91,7 @@ namespace ontology
 
         protected:
             // this method sets a object pointer.
-            void set_object_pointer(int32_t childID, ontology::Object* child_pointer);
+            void set_object_pointer(const int32_t childID, ontology::Object* const child_pointer);
 
             GLfloat initial_rotate_angle;            // initial rotate angle.
             glm::vec3 initial_rotate_vector;         // initial rotate vector.
