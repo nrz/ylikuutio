@@ -402,8 +402,8 @@ namespace ajokki
 
         HolobiontStruct turbo_polizei_object_struct1;
         turbo_polizei_object_struct1.symbiosis_parent = turbo_polizei_symbiosis;
-        turbo_polizei_object_struct1.cartesian_coordinates = std::make_shared<glm::vec3>(1000.00f, 500.00f, 1000.00f);
         turbo_polizei_object_struct1.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
+        turbo_polizei_object_struct1.cartesian_coordinates = std::make_shared<glm::vec3>(85.00f, 30.00f, 175.00f);
         turbo_polizei_object_struct1.rotate_angle = 0.00f;
         turbo_polizei_object_struct1.rotate_vector = glm::vec3(1.0f, 1.0f, 1.0f);
         turbo_polizei_object_struct1.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
