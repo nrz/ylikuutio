@@ -31,7 +31,6 @@ namespace string
 
             if (std::strncmp(data_pointer, identifier_string_char, std::strlen(identifier_string_char)) == 0)
             {
-                const char* const identifier_string_char = identifier_string.c_str();
                 return true;
             }
         }
