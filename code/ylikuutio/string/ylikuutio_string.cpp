@@ -135,7 +135,7 @@ namespace string
                 sizeof(char_number_buffer),
                 char_end_string);
 
-        float value = std::atof(char_number_buffer);
+        float value = std::strtof(char_number_buffer, nullptr);
 
         if (description != nullptr)
         {
