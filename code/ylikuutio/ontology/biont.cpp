@@ -67,7 +67,6 @@ namespace ontology
         {
             this->model_matrix = glm::translate(glm::mat4(1.0f), *this->cartesian_coordinates);
 
-            // TODO: write the rendering code.
             /*
             const std::string model_file_format = this->holobiont_parent->get_model_file_format();
 
@@ -146,7 +145,6 @@ namespace ontology
         glUniformMatrix4fv(shader_pointer->get_matrixID(), 1, GL_FALSE, &this->MVP_matrix[0][0]);
         glUniformMatrix4fv(shader_pointer->get_model_matrixID(), 1, GL_FALSE, &this->model_matrix[0][0]);
 
-        // TODO: write the rendering code.
         GLuint vertexbuffer = symbiont_species->get_vertexbuffer();
         GLuint vertex_position_modelspaceID = symbiont_species->get_vertex_position_modelspaceID();
         GLuint uvbuffer = symbiont_species->get_uvbuffer();
@@ -155,8 +153,6 @@ namespace ontology
         GLuint vertex_normal_modelspaceID = symbiont_species->get_vertex_normal_modelspaceID();
         GLuint elementbuffer = symbiont_species->get_elementbuffer();
         GLuint indices_size = symbiont_species->get_indices_size();
-
-        // At least until here OK.
 
         // 1st attribute buffer : vertices.
         glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
