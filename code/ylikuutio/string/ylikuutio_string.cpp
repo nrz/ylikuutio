@@ -109,7 +109,7 @@ namespace string
                 sizeof(char_number_buffer),
                 char_end_string);
 
-        uint32_t value = std::atoi(char_number_buffer);
+        uint32_t value = std::strtoul(char_number_buffer, nullptr, 10); // base 10.
 
         if (description != nullptr)
         {
