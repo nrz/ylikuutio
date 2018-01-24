@@ -101,6 +101,11 @@ namespace ontology
         return -1;
     }
 
+    const std::string& Symbiosis::get_model_file_format()
+    {
+        return this->model_file_format;
+    }
+
     void Symbiosis::set_symbiont_material_pointer(const int32_t childID, ontology::SymbiontMaterial* const child_pointer)
     {
         hierarchy::set_child_pointer(

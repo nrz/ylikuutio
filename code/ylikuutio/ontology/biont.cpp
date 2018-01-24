@@ -63,19 +63,20 @@ namespace ontology
 
     void Biont::render_this_biont(ontology::Shader* const shader_pointer)
     {
+        ontology::Holobiont* holobiont = this->holobiont_parent;
+        ontology::Symbiosis* symbiosis = static_cast<ontology::Symbiosis*>(holobiont->get_parent());
+
         if (!this->has_entered)
         {
             this->model_matrix = glm::translate(glm::mat4(1.0f), *this->cartesian_coordinates);
 
-            /*
-            const std::string model_file_format = this->holobiont_parent->get_model_file_format();
+            const std::string model_file_format = symbiosis->get_model_file_format();
 
             if (model_file_format.compare("fbx") == 0 || model_file_format.compare("FBX") == 0)
             {
                 // Only FBX bionts need initial rotation.
                 this->model_matrix = glm::rotate(this->model_matrix, this->initial_rotate_angle, this->initial_rotate_vector);
             }
-            */
 
             this->model_matrix = glm::scale(this->model_matrix, this->original_scale_vector);
 
@@ -109,8 +110,6 @@ namespace ontology
 
         // Bind our texture in Texture Unit 0.
         glActiveTexture(GL_TEXTURE0);
-        ontology::Holobiont* holobiont = this->holobiont_parent;
-        ontology::Symbiosis* symbiosis = static_cast<ontology::Symbiosis*>(holobiont->get_parent());
         glBindTexture(GL_TEXTURE_2D, symbiosis->get_texture(this->biontID));
         // Set our "myTextureSampler" sampler to user Texture Unit 0.
         glUniform1i(symbiosis->get_openGL_textureID(this->biontID), 0);
