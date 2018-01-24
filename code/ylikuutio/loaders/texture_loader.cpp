@@ -1,5 +1,6 @@
 #include "texture_loader.hpp"
 #include "bmp_loader.hpp"
+#include "code/ylikuutio/string/ylikuutio_string.hpp"
 #include <ofbx.h>
 
 // Include GLEW
@@ -76,6 +77,8 @@ namespace loaders
         // Load the texture.
         const uint8_t* texture_data_begin = static_cast<const uint8_t*>(ofbx_texture->getFileName().begin);
         const uint8_t* texture_data_end = static_cast<const uint8_t*>(ofbx_texture->getFileName().end);
+
+        string::print_hexdump(texture_data_begin, texture_data_end);
 
         std::cout << "Loading ofbx::Texture* from memory address 0x" << std::hex << (uint64_t) texture_data_begin << std::dec << "\n";
         std::cout << "ofbx::Texture* texture end address is 0x" << std::hex << (uint64_t) texture_data_end << std::dec << "\n";
