@@ -3,6 +3,7 @@
 // Include standard headers
 #include <cstdio>   // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf etc.
 #include <cstring>  // std::memcmp, std::strcmp, std::strlen, std::strncmp
+#include <iomanip>  // std::setfill, std::setw
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <list>     // std::list
 #include <stdint.h> // uint32_t etc.
@@ -385,5 +386,45 @@ namespace string
         }
 
         return true;
+    }
+
+    void print_hexdump(const void* const start_address, const void* const end_address) // `begin` is inclusive, `end is exclusive.
+    {
+        void* void_start_address = const_cast<void*>(start_address);
+        const int32_t line_width_in_bytes = 16;
+        int32_t characters_on_this_line = 0;
+        std::string current_line_ascii = "";
+        std::string current_line_hex = "";
+
+        for (uint8_t* data_pointer = static_cast<uint8_t*>(void_start_address); data_pointer < end_address; data_pointer++)
+        {
+            const uint8_t data_byte = static_cast<uint8_t>(*data_pointer);
+            const char data_char = (data_byte >= 0x20 && data_byte <= 0x7f ? static_cast<char>(data_byte) : '.');
+            current_line_ascii += data_char;
+
+            uint32_t data_32_bit = static_cast<uint32_t>(data_byte); // to get the hexadecimal representation instead of the actual value.
+            std::stringstream my_stream;
+            my_stream << std::setfill('0') << std::setw(2) << std::hex << data_32_bit << std::dec; // std::hex does not work on char values.
+            current_line_hex += my_stream.str();
+            current_line_hex += " ";
+
+            if (++characters_on_this_line >= line_width_in_bytes)
+            {
+                std::cout << current_line_hex << " " << current_line_ascii << "\n";
+                current_line_hex = "";
+                current_line_ascii = "";
+                characters_on_this_line = 0;
+            }
+        }
+
+        if (characters_on_this_line > 0)
+        {
+            std::cout << current_line_hex << " " << current_line_ascii << "\n";
+            current_line_hex = "";
+            current_line_ascii = "";
+            characters_on_this_line = 0;
+        }
+
+        std::cout << "\n";
     }
 }

@@ -67,6 +67,8 @@ namespace string
     bool check_if_signed_integer_string(const std::string& my_string);
 
     bool check_if_unsigned_integer_string(const std::string& my_string);
+
+    void print_hexdump(const void* const start_address, const void* const end_address); // `begin` is inclusive, `end is exclusive.
 }
 
 #endif
