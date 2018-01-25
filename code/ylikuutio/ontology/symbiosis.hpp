@@ -87,6 +87,8 @@ namespace ontology
 
             int32_t get_number_of_descendants() const override;
 
+            const std::string& get_model_file_format();
+
             void set_symbiont_material_pointer(const int32_t childID, ontology::SymbiontMaterial* const child_pointer);
 
             void set_holobiont_pointer(const int32_t childID, ontology::Holobiont* const child_pointer);

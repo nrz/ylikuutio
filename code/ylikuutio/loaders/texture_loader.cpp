@@ -1,5 +1,6 @@
 #include "texture_loader.hpp"
 #include "bmp_loader.hpp"
+#include "code/ylikuutio/string/ylikuutio_string.hpp"
 #include <ofbx.h>
 
 // Include GLEW
@@ -17,7 +18,7 @@
 // Include standard headers
 #include <cmath>    // floor, NAN, sqrt, std::isnan, std::pow
 #include <cstdio>   // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf etc.
-#include <cstring>  // std::memcmp, std::strcmp, std::strlen, std::strncmp
+#include <cstring>  // std::memcmp, std::memcpy, std::strcmp, std::strlen, std::strncmp
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <stdint.h> // uint32_t etc.
 #include <stdlib.h> // free, malloc
@@ -77,19 +78,51 @@ namespace loaders
         const uint8_t* texture_data_begin = static_cast<const uint8_t*>(ofbx_texture->getFileName().begin);
         const uint8_t* texture_data_end = static_cast<const uint8_t*>(ofbx_texture->getFileName().end);
 
-        std::cout << "Loading ofbx::Texture* from memory address 0x" << std::hex << (uint64_t) texture_data_begin << std::dec << "\n";
-        std::cout << "ofbx::Texture* texture end address is 0x" << std::hex << (uint64_t) texture_data_end << std::dec << "\n";
+        string::print_hexdump(texture_data_begin, texture_data_end);
 
-        // Assume square texture.
-        uint64_t data_size = (uint64_t) texture_data_end - (uint64_t) texture_data_begin;
-        std::cout << "ofbx::Texture* data size is " << data_size << " bytes.\n";
+        // Find out the filename.
+        int32_t filename_buffer_size = 1024;
+        uint8_t filename_buffer[filename_buffer_size];
+        const char separator = '/'; // FIXME: don't assume slash as some operating systems may use other characters.
 
-        double sqrt_of_data_size = sqrt(data_size);
-        std::cout << "ofbx::Texture* square root of data size is " << sqrt_of_data_size << "\n";
+        int32_t filename_length = string::extract_last_part_of_string(
+                texture_data_begin,
+                texture_data_end - texture_data_begin,
+                filename_buffer,
+                filename_buffer_size,
+                separator);
 
-        int32_t floor_of_sqrt = static_cast<int32_t>(floor(sqrt_of_data_size));
+        std::cout << "Filename length: " << filename_length << " bytes.\n";
 
-        return loaders::load_texture(texture_data_begin, floor_of_sqrt, floor_of_sqrt, false);
+        char* texture_filename = static_cast<char*>(static_cast<void*>(filename_buffer));
+        std::cout << "Texture file: " << texture_filename << "\n";
+
+        // Find out the file suffix (filetype).
+        int32_t file_suffix_buffer_size = 16;
+        uint8_t file_suffix_buffer[file_suffix_buffer_size];
+        const char suffix_separator = '.';
+
+        string::extract_last_part_of_string(
+                filename_buffer,
+                filename_length,
+                file_suffix_buffer,
+                file_suffix_buffer_size,
+                suffix_separator);
+
+        char* texture_file_suffix = static_cast<char*>(static_cast<void*>(file_suffix_buffer));
+
+        std::cout << "Texture file suffix: " << texture_file_suffix << "\n";
+
+        if (strncmp(texture_file_suffix, "bmp", sizeof("bmp")) == 0)
+        {
+            std::string filename_string = std::string((char*) &filename_buffer);
+            return loaders::load_BMP_texture(filename_string);
+        }
+        else if (strncmp(texture_file_suffix, "bmp", sizeof("bmp")) == 0)
+        {
+            // TODO: implement PNG loading!
+        }
+        return 0;
     }
 
     GLuint load_BMP_texture(const std::string& filename)

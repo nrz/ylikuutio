@@ -63,20 +63,20 @@ namespace ontology
 
     void Biont::render_this_biont(ontology::Shader* const shader_pointer)
     {
+        ontology::Holobiont* holobiont = this->holobiont_parent;
+        ontology::Symbiosis* symbiosis = static_cast<ontology::Symbiosis*>(holobiont->get_parent());
+
         if (!this->has_entered)
         {
             this->model_matrix = glm::translate(glm::mat4(1.0f), *this->cartesian_coordinates);
 
-            // TODO: write the rendering code.
-            /*
-            const std::string model_file_format = this->holobiont_parent->get_model_file_format();
+            const std::string model_file_format = symbiosis->get_model_file_format();
 
             if (model_file_format.compare("fbx") == 0 || model_file_format.compare("FBX") == 0)
             {
                 // Only FBX bionts need initial rotation.
                 this->model_matrix = glm::rotate(this->model_matrix, this->initial_rotate_angle, this->initial_rotate_vector);
             }
-            */
 
             this->model_matrix = glm::scale(this->model_matrix, this->original_scale_vector);
 
@@ -110,8 +110,6 @@ namespace ontology
 
         // Bind our texture in Texture Unit 0.
         glActiveTexture(GL_TEXTURE0);
-        ontology::Holobiont* holobiont = this->holobiont_parent;
-        ontology::Symbiosis* symbiosis = static_cast<ontology::Symbiosis*>(holobiont->get_parent());
         glBindTexture(GL_TEXTURE_2D, symbiosis->get_texture(this->biontID));
         // Set our "myTextureSampler" sampler to user Texture Unit 0.
         glUniform1i(symbiosis->get_openGL_textureID(this->biontID), 0);
@@ -146,7 +144,6 @@ namespace ontology
         glUniformMatrix4fv(shader_pointer->get_matrixID(), 1, GL_FALSE, &this->MVP_matrix[0][0]);
         glUniformMatrix4fv(shader_pointer->get_model_matrixID(), 1, GL_FALSE, &this->model_matrix[0][0]);
 
-        // TODO: write the rendering code.
         GLuint vertexbuffer = symbiont_species->get_vertexbuffer();
         GLuint vertex_position_modelspaceID = symbiont_species->get_vertex_position_modelspaceID();
         GLuint uvbuffer = symbiont_species->get_uvbuffer();
@@ -155,8 +152,6 @@ namespace ontology
         GLuint vertex_normal_modelspaceID = symbiont_species->get_vertex_normal_modelspaceID();
         GLuint elementbuffer = symbiont_species->get_elementbuffer();
         GLuint indices_size = symbiont_species->get_indices_size();
-
-        // At least until here OK.
 
         // 1st attribute buffer : vertices.
         glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);

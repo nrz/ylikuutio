@@ -145,7 +145,7 @@ int main(int argc, char* argv[])
     // Create the world, store it in `my_universe`.
     std::cout << "Creating ontology::Entity* my_universe_entity ...\n";
     UniverseStruct universe_struct;
-    universe_struct.window_title = "Ajokki 0.0.1, powered by Ylikuutio 0.0.1";
+    universe_struct.window_title = "Ajokki 0.0.2, powered by Ylikuutio 0.0.2";
     ontology::Universe* my_universe = new ontology::Universe(universe_struct);
 
     ontology::EntityFactory* entity_factory = my_universe->get_entity_factory();
@@ -1071,7 +1071,7 @@ int main(int argc, char* argv[])
                 std::snprintf(
                         help_text_char,
                         sizeof(help_text_char),
-                        "Ajokki v. 0.0.1\\n"
+                        "Ajokki v. 0.0.2\\n"
                         "\\n"
                         "arrow keys\\n"
                         "space jump\\n"
