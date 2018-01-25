@@ -93,6 +93,34 @@ namespace string
         return;
     }
 
+    int32_t extract_last_part_of_string(
+            const uint8_t* const src_base_pointer,
+            const uint64_t src_data_size,
+            uint8_t* const dest_base_pointer,
+            const uint64_t dest_data_size,
+            const char separator)
+    {
+        uint8_t* src_data_pointer = const_cast<uint8_t*>(src_base_pointer);
+        uint8_t* dest_data_pointer = dest_base_pointer;
+        int32_t filename_length = 0; // length without trailing 0 byte.
+
+        while (src_data_pointer < src_base_pointer + src_data_size &&
+                dest_data_pointer + 1 < dest_base_pointer + dest_data_size)
+        {
+            if (*src_data_pointer == static_cast<uint8_t>(separator))
+            {
+                dest_data_pointer = dest_base_pointer;
+                src_data_pointer++;
+                filename_length = 0;
+                continue;
+            }
+            std::memcpy(dest_data_pointer++, src_data_pointer++, 1);
+            filename_length++;
+        }
+        *dest_data_pointer = '\0';
+        return filename_length;
+    }
+
     int32_t extract_int32_t_value_from_string(
             const char* const src_base_pointer,
             char*& src_data_pointer,
