@@ -25,7 +25,7 @@ namespace ajokki
             ontology::Entity*,
             std::vector<std::string>& command_parameters)
     {
-        console->print_text("Ajokki 0.0.1 / Ylikuutio 0.0.1");
+        console->print_text("Ajokki 0.0.2 / Ylikuutio 0.0.2");
         return nullptr;
     }
 
