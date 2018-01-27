@@ -206,7 +206,7 @@ namespace ontology
 
             // constructor.
             Universe(const UniverseStruct& universe_struct)
-                : Entity(nullptr) // `Universe` has no parent.
+                : Entity(this) // `Universe` has no parent.
             {
                 this->universe = this;
                 this->entity_factory = new ontology::EntityFactory(this);
