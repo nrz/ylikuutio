@@ -117,7 +117,7 @@ namespace ontology
 
             std::cout << "Creating biont with biontID " << biontID << " ...\n";
 
-            ontology::Biont* biont = new ontology::Biont(this->universe, biont_struct);
+            new ontology::Biont(this->universe, biont_struct);
         }
     }
 
