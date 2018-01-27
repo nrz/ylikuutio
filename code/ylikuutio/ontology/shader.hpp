@@ -99,6 +99,9 @@ namespace ontology
             // this method sets a `Material` pointer.
             void set_material_pointer(const int32_t childID, ontology::Material* const child_pointer);
 
+            // this method sets a `Symbiosis` pointer.
+            void set_symbiosis_pointer(const int32_t childID, ontology::Symbiosis* const child_pointer);
+
             // this method sets a scene species pointer.
             void set_terrain_species(ontology::Species* const terrain_species);
 
@@ -121,9 +124,6 @@ namespace ontology
 
             int32_t get_number_of_children() const override;
             int32_t get_number_of_descendants() const override;
-
-            // this method sets a `Symbiosis` pointer.
-            void set_symbiosis_pointer(const int32_t childID, ontology::Symbiosis* const child_pointer);
 
             ontology::Scene* parent;      // pointer to `Scene`.
 

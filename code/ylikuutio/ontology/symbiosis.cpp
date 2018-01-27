@@ -69,6 +69,18 @@ namespace ontology
     Symbiosis::~Symbiosis()
     {
         // destructor.
+        std::cout << "Symbiosis with childID " << std::dec << this->childID << " will be destroyed.\n";
+
+        // destroy all holobionts of this symbiosis.
+        std::cout << "All holobionts of this symbiosis will be destroyed.\n";
+        hierarchy::delete_children<ontology::Holobiont*>(this->holobiont_pointer_vector, &this->number_of_holobionts);
+
+        // destroy all symbiont materials of this symbiosis.
+        std::cout << "All symbiont materials of this symbiosis will be destroyed.\n";
+        hierarchy::delete_children<ontology::SymbiontMaterial*>(this->symbiont_material_pointer_vector, &this->number_of_symbiont_materials);
+
+        // set pointer to this symbiosis to nullptr.
+        this->parent->set_symbiosis_pointer(this->childID, nullptr);
     }
 
     void Symbiosis::render()

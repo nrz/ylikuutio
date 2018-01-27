@@ -62,9 +62,12 @@ namespace ontology
     Holobiont::~Holobiont()
     {
         // destructor.
+        std::cout << "Holobiont with childID " << std::dec << this->childID << " will be destroyed.\n";
+
+        std::cout << "All bionts of this holobiont will be destroyed.\n";
+        hierarchy::delete_children<ontology::Biont*>(this->biont_pointer_vector, &this->number_of_bionts);
 
         // set pointer to this `Holobiont` to nullptr.
-        std::cout << "Holobiont with childID " << std::dec << this->childID << " will be destroyed.\n";
         this->symbiosis_parent->set_holobiont_pointer(this->childID, nullptr);
     }
 
