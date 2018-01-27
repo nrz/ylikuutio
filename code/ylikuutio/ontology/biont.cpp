@@ -40,8 +40,10 @@ namespace ontology
 
     Biont::~Biont()
     {
-        // set pointer to this biont to nullptr.
+        // destructor.
         std::cout << "Biont with childID " << std::dec << this->childID << " will be destroyed.\n";
+
+        // set pointer to this biont to nullptr.
         this->holobiont_parent->set_biont_pointer(this->childID, nullptr);
     }
 
