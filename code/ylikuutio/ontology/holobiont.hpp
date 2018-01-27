@@ -57,7 +57,6 @@ namespace ontology
                 : Movable(universe, holobiont_struct.cartesian_coordinates)
             {
                 // constructor.
-                this->universe              = universe;
                 this->symbiosis_parent      = holobiont_struct.symbiosis_parent;
 
                 this->original_scale_vector = holobiont_struct.original_scale_vector;

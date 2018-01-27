@@ -67,7 +67,6 @@ namespace ontology
                 this->char_vertex_shader   = this->vertex_shader.c_str();
                 this->char_fragment_shader = this->fragment_shader.c_str();
                 this->parent               = shader_struct.parent;
-                this->universe             = universe;
 
                 this->terrain_species = nullptr;
 

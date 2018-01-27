@@ -54,7 +54,6 @@ namespace ontology
                 : Species(universe, species_struct)
             {
                 // constructor.
-                this->universe                 = universe;
                 this->shader                   = species_struct.shader;
                 this->symbiont_material_parent = species_struct.symbiont_material;
                 this->vertices                 = species_struct.vertices;

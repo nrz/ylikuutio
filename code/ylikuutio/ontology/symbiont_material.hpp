@@ -48,7 +48,6 @@ namespace ontology
                 : Material(universe, material_struct)
             {
                 // constructor.
-                this->universe = universe;
                 this->parent = material_struct.symbiosis;
 
                 this->ofbx_texture = material_struct.ofbx_texture;

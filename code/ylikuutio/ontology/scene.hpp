@@ -45,7 +45,6 @@ namespace ontology
                 this->fall_speed = this->gravity;
                 this->water_level = water_level;
 
-                this->universe = universe;
                 this->parent = world;
 
                 this->cartesian_coordinates = nullptr;

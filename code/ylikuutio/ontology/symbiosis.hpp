@@ -55,7 +55,6 @@ namespace ontology
                 : Entity(universe)
             {
                 // constructor.
-                this->universe = universe;
                 this->parent = symbiosis_struct.parent;
                 this->model_filename = symbiosis_struct.model_filename;
                 this->model_file_format = symbiosis_struct.model_file_format;
