@@ -87,7 +87,7 @@ namespace ontology
     {
         this->prerender();
 
-        // render this `Symbiosis` by calling `render()` function of each `SymbiontMaterial`.
+        // render this `Symbiosis` by calling `render()` function of each `Holobiont`.
         ontology::render_children<ontology::Holobiont*>(this->holobiont_pointer_vector);
 
         this->postrender();

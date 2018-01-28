@@ -79,7 +79,7 @@ namespace ontology
         {
             this->prerender();
 
-            // render this `Scene` by calling `render()` function of each `Biont`.
+            // render this `Holobiont` by calling `render()` function of each `Biont`.
             ontology::render_children<ontology::Biont*>(this->biont_pointer_vector);
 
             this->postrender();
