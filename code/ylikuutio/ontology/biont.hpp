@@ -3,6 +3,7 @@
 
 #include "movable.hpp"
 #include "shader.hpp"
+#include "symbiont_species.hpp"
 #include "biont_struct.hpp"
 #include "render_templates.hpp"
 #include "entity_templates.hpp"
@@ -74,6 +75,8 @@ namespace ontology
 
                 // get `childID` from `Holobiont` and set pointer to this `Biont`.
                 this->bind_to_parent();
+                // get `childID` from `SymbiontSpecies` and set pointer to this `Biont`.
+                this->bind_to_symbiont_species();
                 this->type = "ontology::Biont*";
             }
 
@@ -93,6 +96,7 @@ namespace ontology
 
         protected:
             void bind_to_parent();
+            void bind_to_symbiont_species();
 
             // this method renders this `Biont`.
             void render();
@@ -104,6 +108,9 @@ namespace ontology
             ontology::Holobiont* holobiont_parent; // pointer to `Holobiont`.
             int32_t biontID;
             bool quaternions_in_use;
+
+            ontology::SymbiontSpecies* symbiont_species; // pointer to `SymbiontSpecies`.
+            int32_t symbiont_species_biontID;
 
             bool has_entered;
             bool should_ylikuutio_render_this_biont;
