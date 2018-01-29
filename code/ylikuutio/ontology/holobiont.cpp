@@ -62,9 +62,12 @@ namespace ontology
     Holobiont::~Holobiont()
     {
         // destructor.
+        std::cout << "Holobiont with childID " << std::dec << this->childID << " will be destroyed.\n";
+
+        std::cout << "All bionts of this holobiont will be destroyed.\n";
+        hierarchy::delete_children<ontology::Biont*>(this->biont_pointer_vector, &this->number_of_bionts);
 
         // set pointer to this `Holobiont` to nullptr.
-        std::cout << "Holobiont with childID " << std::dec << this->childID << " will be destroyed.\n";
         this->symbiosis_parent->set_holobiont_pointer(this->childID, nullptr);
     }
 
@@ -76,7 +79,7 @@ namespace ontology
         {
             this->prerender();
 
-            // render this `Scene` by calling `render()` function of each `Biont`.
+            // render this `Holobiont` by calling `render()` function of each `Biont`.
             ontology::render_children<ontology::Biont*>(this->biont_pointer_vector);
 
             this->postrender();
@@ -114,7 +117,7 @@ namespace ontology
 
             std::cout << "Creating biont with biontID " << biontID << " ...\n";
 
-            ontology::Biont* biont = new ontology::Biont(this->universe, biont_struct);
+            new ontology::Biont(this->universe, biont_struct);
         }
     }
 

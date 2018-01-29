@@ -64,7 +64,6 @@ namespace ontology
                 : Model(glyph_struct.universe)
             {
                 // constructor.
-                this->universe = glyph_struct.universe;
                 this->parent = glyph_struct.parent;
 
                 this->glyph_vertex_data = glyph_struct.glyph_vertex_data;

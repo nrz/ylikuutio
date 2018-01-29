@@ -26,7 +26,6 @@ namespace ontology
             World(ontology::Universe* const universe)
                 : Entity(universe)
             {
-                this->universe = universe;
                 this->parent = universe;
                 this->active_scene = nullptr;
 

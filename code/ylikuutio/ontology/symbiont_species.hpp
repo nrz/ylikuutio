@@ -41,6 +41,7 @@
 namespace ontology
 {
     class Universe;
+    class Biont;
 
     class SymbiontSpecies: public ontology::Species
     {
@@ -49,12 +50,15 @@ namespace ontology
             virtual ~SymbiontSpecies();
 
         private:
+            void bind_biont(ontology::Biont* const biont);
+
+            void unbind_biont(const int32_t childID);
+
             // constructor.
             SymbiontSpecies(ontology::Universe* const universe, const SpeciesStruct& species_struct)
                 : Species(universe, species_struct)
             {
                 // constructor.
-                this->universe                 = universe;
                 this->shader                   = species_struct.shader;
                 this->symbiont_material_parent = species_struct.symbiont_material;
                 this->vertices                 = species_struct.vertices;
@@ -144,6 +148,10 @@ namespace ontology
 
             // this method renders all `Object`s of this `SymbiontSpecies`.
             void render();
+
+            std::vector<ontology::Biont*> biont_pointer_vector;
+            std::queue<int32_t> free_biontID_queue;
+            int32_t number_of_bionts;
 
             ontology::SymbiontMaterial* symbiont_material_parent; // pointer to `SymbiontMaterial`.
             ontology::Shader* shader;           // pointer to `Shader`.

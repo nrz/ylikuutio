@@ -25,6 +25,18 @@ namespace ontology
         this->holobiont_parent->bind_biont(this);
     }
 
+    void Biont::bind_to_symbiont_species()
+    {
+        if (this->holobiont_parent == nullptr)
+        {
+            return;
+        }
+
+        ontology::Symbiosis* symbiosis = static_cast<ontology::Symbiosis*>(this->holobiont_parent->get_parent());
+        this->symbiont_species = symbiosis->get_symbiont_species(this->biontID);
+        this->symbiont_species->bind_biont(this);
+    }
+
     void Biont::bind_to_new_parent(ontology::Holobiont* const new_holobiont_parent)
     {
         // this method sets pointer to this `Biont` to nullptr, sets `parent` according to the input,
@@ -40,8 +52,11 @@ namespace ontology
 
     Biont::~Biont()
     {
-        // set pointer to this biont to nullptr.
+        // destructor.
         std::cout << "Biont with childID " << std::dec << this->childID << " will be destroyed.\n";
+
+        // set pointer to this biont to nullptr.
+        this->symbiont_species->unbind_biont(this->childID);
         this->holobiont_parent->set_biont_pointer(this->childID, nullptr);
     }
 

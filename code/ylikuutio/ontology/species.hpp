@@ -53,7 +53,6 @@ namespace ontology
                 : Model(universe)
             {
                 // constructor.
-                this->universe          = universe;
                 this->is_terrain          = species_struct.is_terrain;
                 this->is_symbiont_species = species_struct.is_symbiont_species;
                 this->planet_radius      = species_struct.planet_radius;

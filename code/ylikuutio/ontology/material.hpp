@@ -57,7 +57,6 @@ namespace ontology
                 : Entity(universe)
             {
                 // constructor.
-                this->universe = universe;
                 this->parent = material_struct.shader;
 
                 this->is_symbiont_material = material_struct.is_symbiont_material;

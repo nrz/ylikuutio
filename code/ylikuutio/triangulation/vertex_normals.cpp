@@ -31,6 +31,14 @@ namespace geometry
             return false;
         }
 
+        if ((is_bilinear_interpolation_in_use && is_southwest_northeast_edges_in_use) ||
+                (is_bilinear_interpolation_in_use && is_southeast_northwest_edges_in_use) ||
+                (is_southwest_northeast_edges_in_use && is_southeast_northwest_edges_in_use))
+        {
+            // Only 1 triangulation type can be in use.
+            return false;
+        }
+
         if (is_bilinear_interpolation_in_use)
         {
             // If bilinear interpolation is in use, then number of faces is:

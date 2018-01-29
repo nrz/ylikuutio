@@ -4,6 +4,7 @@
 #include "scene.hpp"
 #include "shader.hpp"
 #include "symbiont_material.hpp"
+#include "biont.hpp"
 #include "object.hpp"
 #include "species_or_glyph.hpp"
 #include "render_templates.hpp"
@@ -21,6 +22,36 @@
 
 namespace ontology
 {
+    void SymbiontSpecies::bind_biont(ontology::Biont* const biont)
+    {
+        // `SymbiontSpecies` is not the hierarchical parent of `Biont`.
+        // This relationship is purely only for rendering.
+        // To avoid potential problems in the future, follow this order:
+        // 1. bind `Biont` to its `Holobiont` parent.
+        // 2. bind `Biont` to its corresponding `SymbiontSpecies`.
+        // 3. do stuff
+        // 4. unbind `Biont` from its `SymbiontSpecies`.
+        // 5. unbind `Biont` from its `Holobiont` parent.
+        //
+        // get `childID` from `SymbiontSpecies` and set pointer to `biont`.
+        hierarchy::bind_child_to_parent<ontology::Biont*>(
+                biont,
+                this->biont_pointer_vector,
+                this->free_biontID_queue,
+                &this->number_of_bionts);
+    }
+
+    void SymbiontSpecies::unbind_biont(const int32_t childID)
+    {
+        ontology::Biont* dummy_child_pointer = nullptr;
+        hierarchy::set_child_pointer(
+                childID,
+                dummy_child_pointer,
+                this->biont_pointer_vector,
+                this->free_biontID_queue,
+                &this->number_of_bionts);
+    }
+
     void SymbiontSpecies::bind_to_parent()
     {
         // get `childID` from `SymbiontMaterial` and set pointer to this `SymbiontSpecies`.
