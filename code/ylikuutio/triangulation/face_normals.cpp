@@ -140,7 +140,7 @@ namespace geometry
             return glm::vec3(NAN, NAN, NAN);
         }
 
-        int32_t face_normal_i = get_face_normal_i(x, z, compass_point_code, actual_image_width);
+        const int32_t face_normal_i = get_face_normal_i(x, z, compass_point_code, actual_image_width);
 
         if (face_normal_i < 0)
         {
