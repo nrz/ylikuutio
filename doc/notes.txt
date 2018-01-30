@@ -120,37 +120,70 @@ https://git-lfs.github.com/
 Good free music (free as beer and free as speech), check the license of each file:
 https://freesound.org/
 
-Greek555 / Greek / Melody 90 BPM:
-https://freesound.org/people/Greek555/sounds/413508/
+Greek555 / Greek / Amperage Chords 128 BPM:
+https://freesound.org/people/Greek555/sounds/394467/
+
+Greek555 / Greek / Amperage Progressive House 128 BPM:
+https://freesound.org/people/Greek555/sounds/382252/
+
+Greek555 / Greek / Blue Play:
+https://freesound.org/people/Greek555/sounds/416882/
+
+Greek555 / Greek / Fx 128 BPM:
+https://freesound.org/people/Greek555/sounds/413753/
+
+Greek555 / Greek / Guitar 108 BPM:
+https://freesound.org/people/Greek555/sounds/410278/
+
+Greek555 / Greek / Keyboard Chicago 128 BPM:
+https://freesound.org/people/Greek555/sounds/387436/
 
 Greek555 / Greek / Melody 90 BPM:
+https://freesound.org/people/Greek555/sounds/413508/
 https://freesound.org/people/Greek555/sounds/412922/
 
 Greek555 / Greek / Melody 100 BPM:
 https://freesound.org/people/Greek555/sounds/415127/
-
-Greek555 / Greek / Melody 100 BPM:
 https://freesound.org/people/Greek555/sounds/413610/
+
+Greek555 / Greek / Melody 120 BPM:
+https://freesound.org/people/Greek555/sounds/415324/
+
+Greek555 / Greek / Melody 126 BPM:
+https://freesound.org/people/Greek555/sounds/411969/
+
+Greek555 / Greek / Melody 128 BPM:
+https://freesound.org/people/Greek555/sounds/388883/
+https://freesound.org/people/Greek555/sounds/398753/
+https://freesound.org/people/Greek555/sounds/416625/
+
+Greek555 / Greek / Melody Loop 128 BPM:
+https://freesound.org/people/Greek555/sounds/414742/
 
 Greek555 / Greek / Melody 130 BPM:
 https://freesound.org/people/Greek555/sounds/413417/
 
-Greek555 / Greek / Melody Loop 128 BPM:
-https://freesound.org/people/Greek555/sounds/414742/
+Greek555 / Greek / Melody Broken Square 130 BPM:
+https://freesound.org/people/Greek555/sounds/398048/
+
+Greek555 / Greek / Melody Piano 128 BPM:
+https://freesound.org/people/Greek555/sounds/398394/
+
+Greek555 / Greek / Pad 128 BPM:
+https://freesound.org/people/Greek555/sounds/395031/
 
 Greek555 / Greek / Sample 97 BPM:
 https://freesound.org/people/Greek555/sounds/414270/
 
 Greek555 / Greek / Sample 100 BPM:
+https://freesound.org/people/Greek555/sounds/410456/
 https://freesound.org/people/Greek555/sounds/413196/
-
-Greek555 / Greek / Sample 100 BPM:
+https://freesound.org/people/Greek555/sounds/413759/
 https://freesound.org/people/Greek555/sounds/413760/
-
-Greek555 / Greek / Sample 100 BPM:
 https://freesound.org/people/Greek555/sounds/414201/
 
 Greek555 / Greek / Sample 120 BPM:
+https://freesound.org/people/Greek555/sounds/410536/
 https://freesound.org/people/Greek555/sounds/414228/
 
 Greek555 / Greek / Sample 121 BPM:
@@ -160,28 +193,40 @@ Greek555 / Greek / Sample 126 BPM:
 https://freesound.org/people/Greek555/sounds/411556/
 
 Greek555 / Greek / Sample 128 BPM:
-https://freesound.org/people/Greek555/sounds/414043/
-
-Greek555 / Greek / Sample 128 BPM:
-https://freesound.org/people/Greek555/sounds/413609/
-
-Greek555 / Greek / Sample 128 BPM:
-https://freesound.org/people/Greek555/sounds/414717/
-
-Greek555 / Greek / Sample 128 BPM:
-https://freesound.org/people/Greek555/sounds/413265/
-
-Greek555 / Greek / Sample 128 BPM:
+https://freesound.org/people/Greek555/sounds/383468/
+https://freesound.org/people/Greek555/sounds/395067/
+https://freesound.org/people/Greek555/sounds/401797/
+https://freesound.org/people/Greek555/sounds/410606/
+https://freesound.org/people/Greek555/sounds/410872/
 https://freesound.org/people/Greek555/sounds/412936/
-
-Greek555 / Greek / Sample 130 BPM:
-https://freesound.org/people/Greek555/sounds/415045/
-
-Greek555 / Greek / Sample 130 BPM:
-https://freesound.org/people/Greek555/sounds/414508/
+https://freesound.org/people/Greek555/sounds/413265/
+https://freesound.org/people/Greek555/sounds/413609/
+https://freesound.org/people/Greek555/sounds/414043/
+https://freesound.org/people/Greek555/sounds/414717/
+https://freesound.org/people/Greek555/sounds/415968/
+https://freesound.org/people/Greek555/sounds/416400/
+https://freesound.org/people/Greek555/sounds/416609/
 
 Greek555 / Greek / Sample 130 BPM:
 https://freesound.org/people/Greek555/sounds/413269/
+https://freesound.org/people/Greek555/sounds/414508/
+https://freesound.org/people/Greek555/sounds/415045/
+https://freesound.org/people/Greek555/sounds/416235/
+
+Greek555 / Greek / Sample 137 BPM:
+https://freesound.org/people/Greek555/sounds/415272/
+
+Greek555 / Greek / Sample 140 BPM:
+https://freesound.org/people/Greek555/sounds/416316/
+
+Greek555 / Greek / Sample Tropical House 100 BPM:
+https://freesound.org/people/Greek555/sounds/404352/
+
+Greek555 / Greek / Spectral 99 BPM:
+https://freesound.org/people/Greek555/sounds/403186/
+
+Greek555 / Greek / Step by Step 120 BPM:
+https://freesound.org/people/Greek555/sounds/402677/
 
 JPMusic82 / Melody / Arp Bass Loop 128.bpm.mp3
 https://freesound.org/people/JPMusic82/sounds/414269/
