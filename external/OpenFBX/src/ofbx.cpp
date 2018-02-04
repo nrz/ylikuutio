@@ -438,13 +438,12 @@ static bool decompress(const u8* in, size_t in_size, u8* out, size_t out_size)
 	mz_stream stream = {};
 	mz_inflateInit(&stream);
 
-	int status;
 	stream.avail_in = (int)in_size;
 	stream.next_in = in;
 	stream.avail_out = (int)out_size;
 	stream.next_out = out;
 
-	status = mz_inflate(&stream, Z_SYNC_FLUSH);
+	int status = mz_inflate(&stream, Z_SYNC_FLUSH);
 
 	if (status != Z_STREAM_END) return false;
 
@@ -737,7 +736,7 @@ static OptionalError<Property*> readTextProperty(Cursor* cursor)
 			{
 				++cursor->current;
 			}
-			if (cursor->current < cursor->end && *cursor->current == 'e')
+			if (cursor->current < cursor->end && (*cursor->current == 'e' || *cursor->current == 'E'))
 			{
 				// 10.5e-013
 				++cursor->current;
@@ -773,13 +772,20 @@ static OptionalError<Property*> readTextProperty(Cursor* cursor)
 		if (cursor->current < cursor->end) ++cursor->current; // skip ':'
 		skipInsignificantWhitespaces(cursor);
 		prop->value.begin = cursor->current;
-		prop->count = 1;
+		prop->count = 0;
+		bool is_any = false;
 		while (cursor->current < cursor->end && *cursor->current != '}')
 		{
-			if (*cursor->current == ',') ++prop->count;
+			if (*cursor->current == ',')
+			{
+				if (is_any) ++prop->count;
+				is_any = false;
+			}
+			else if (!isspace(*cursor->current) && *cursor->current != '\n') is_any = true;
 			if (*cursor->current == '.') prop->type = 'd';
 			++cursor->current;
 		}
+		if (is_any) ++prop->count;
 		prop->value.end = cursor->current;
 		if (cursor->current < cursor->end) ++cursor->current; // skip '}'
 		return prop.release();
@@ -916,7 +922,6 @@ static OptionalError<Element*> tokenize(const u8* data, size_t size)
 		if (!*element) return root;
 		element = &(*element)->sibling;
 	}
-	return root;
 }
 
 
@@ -1269,7 +1274,6 @@ struct AnimationStackImpl : AnimationStack
 
 	const AnimationLayer* getLayer(int index) const override
 	{
-		assert(index == 0);
 		return resolveObjectLink<AnimationLayer>(index);
 	}
 
@@ -1449,6 +1453,12 @@ struct AnimationCurveNodeImpl : AnimationCurveNode
 	}
 
 
+	const Object* getBone() const override
+	{
+		return bone;
+	}
+
+
 	Vec3 getNodeLocalTransform(double time) const override
 	{
 		u64 fbx_time = secondsToFbxTime(time);
@@ -1507,6 +1517,12 @@ struct AnimationLayerImpl : AnimationLayer
 
 	Type getType() const override { return Type::ANIMATION_LAYER; }
 
+
+	const AnimationCurveNode* getCurveNode(int index) const override
+	{
+		if (index >= curve_nodes.size() || index < 0) return nullptr;
+		return curve_nodes[index];
+	}
 
 
 	const AnimationCurveNode* getCurveNode(const Object& bone, const char* prop) const override
@@ -1766,7 +1782,7 @@ template <> const char* fromString<Matrix>(const char* str, const char* end, Mat
 template<typename T> static void parseTextArray(const Property& property, std::vector<T>* out)
 {
 	const u8* iter = property.value.begin;
-	while (iter < property.value.end)
+	for(int i = 0; i < property.count; ++i)
 	{
 		T val;
 		iter = (const u8*)fromString<T>((const char*)iter, (const char*)property.value.end, &val);
@@ -1907,7 +1923,7 @@ static void splat(std::vector<T>* out,
 	GeometryImpl::VertexDataMapping mapping,
 	const std::vector<T>& data,
 	const std::vector<int>& indices,
-	const std::vector<int>& to_old_vertices)
+	const std::vector<int>& original_indices)
 {
 	assert(out);
 
@@ -1935,12 +1951,14 @@ static void splat(std::vector<T>* out,
 		// uv0 uv1 ...
 		assert(indices.empty());
 
-		out->resize(to_old_vertices.size());
+		out->resize(original_indices.size());
 
 		int data_size = (int)data.size();
-		for (int i = 0, c = (int)to_old_vertices.size(); i < c; ++i)
+		for (int i = 0, c = (int)original_indices.size(); i < c; ++i)
 		{
-			if(to_old_vertices[i] < data_size) (*out)[i] = data[to_old_vertices[i]];
+			int idx = original_indices[i];
+			if (idx < 0) idx = -idx - 1;
+			if(idx < data_size) (*out)[i] = data[idx];
 			else (*out)[i] = T();
 		}
 	}
@@ -2003,7 +2021,7 @@ static int getTriCountFromPoly(const std::vector<int>& indices, int* idx)
 	while (indices[*idx + 1 + count] >= 0)
 	{
 		++count;
-	};
+	}
 
 	*idx = *idx + 2 + count;
 	return count;
@@ -2106,9 +2124,12 @@ static OptionalError<Object*> parseGeometry(const Scene& scene, const Element& e
 		std::vector<int> tmp_indices;
 		GeometryImpl::VertexDataMapping mapping;
 		if (!parseVertexData(*layer_uv_element, "UV", "UVIndex", &tmp, &tmp_indices, &mapping)) return Error("Invalid UVs");
-		geom->uvs.resize(tmp_indices.empty() ? tmp.size() : tmp_indices.size());
-		splat(&geom->uvs, mapping, tmp, tmp_indices, geom->to_old_vertices);
-		remap(&geom->uvs, to_old_indices);
+		if (!tmp.empty())
+		{
+			geom->uvs.resize(tmp_indices.empty() ? tmp.size() : tmp_indices.size());
+			splat(&geom->uvs, mapping, tmp, tmp_indices, original_indices);
+			remap(&geom->uvs, to_old_indices);
+		}
 	}
 
 	const Element* layer_tangent_element = findChild(element, "LayerElementTangents");
@@ -2125,8 +2146,11 @@ static OptionalError<Object*> parseGeometry(const Scene& scene, const Element& e
 		{
 			if (!parseVertexData(*layer_tangent_element, "Tangent", "TangentIndex", &tmp, &tmp_indices, &mapping))  return Error("Invalid tangets");
 		}
-		splat(&geom->tangents, mapping, tmp, tmp_indices, geom->to_old_vertices);
-		remap(&geom->tangents, to_old_indices);
+		if (!tmp.empty())
+		{
+			splat(&geom->tangents, mapping, tmp, tmp_indices, original_indices);
+			remap(&geom->tangents, to_old_indices);
+		}
 	}
 
 	const Element* layer_color_element = findChild(element, "LayerElementColor");
@@ -2136,8 +2160,11 @@ static OptionalError<Object*> parseGeometry(const Scene& scene, const Element& e
 		std::vector<int> tmp_indices;
 		GeometryImpl::VertexDataMapping mapping;
 		if (!parseVertexData(*layer_color_element, "Colors", "ColorIndex", &tmp, &tmp_indices, &mapping)) return Error("Invalid colors");
-		splat(&geom->colors, mapping, tmp, tmp_indices, geom->to_old_vertices);
-		remap(&geom->colors, to_old_indices);
+		if (!tmp.empty())
+		{
+			splat(&geom->colors, mapping, tmp, tmp_indices, original_indices);
+			remap(&geom->colors, to_old_indices);
+		}
 	}
 
 	const Element* layer_normal_element = findChild(element, "LayerElementNormal");
@@ -2147,8 +2174,11 @@ static OptionalError<Object*> parseGeometry(const Scene& scene, const Element& e
 		std::vector<int> tmp_indices;
 		GeometryImpl::VertexDataMapping mapping;
 		if (!parseVertexData(*layer_normal_element, "Normals", "NormalsIndex", &tmp, &tmp_indices, &mapping)) return Error("Invalid normals");
-		splat(&geom->normals, mapping, tmp, tmp_indices, geom->to_old_vertices);
-		remap(&geom->normals, to_old_indices);
+		if (!tmp.empty())
+		{
+			splat(&geom->normals, mapping, tmp, tmp_indices, original_indices);
+			remap(&geom->normals, to_old_indices);
+		}
 	}
 
 	return geom.release();
@@ -2631,7 +2661,7 @@ static bool parseObjects(const Element& root, Scene* scene)
 			{
 				Error::s_message = "Failed to postprocess cluster";
 				return false;
-			};
+			}
 		}
 	}
 
