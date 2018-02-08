@@ -44,7 +44,7 @@
 // `Species` must be create before any `Object` of that `Species`. `parent` must be given to each `Object` of the `Species`.
 //
 //
-// Hierarchy of regular `Object`s (including terrain species):
+// Hierarchy of regular `Object`s (including terrain `Species`):
 //
 //    Universe
 //       ^
@@ -62,7 +62,7 @@
 //
 // Please note that for regular `Object`s the hierarchy above is both the ontological hierarchy and the rendering hierarchy.
 //
-// Ontological hierarchy of `Glyph` (character) objects:
+// Ontological hierarchy of `Glyph` (character) entities:
 //
 //    Universe
 //       ^
@@ -83,7 +83,7 @@
 // Ontological hierarchy affects how objects can be created and how they can be destroyed,
 // though the precise ways how objects can be created depends on the functions available.
 //
-// Rendering hierarchy of `Glyph` (character) objects:
+// Rendering hierarchy of `Glyph` (character) entities:
 //
 //    Universe
 //       ^
@@ -106,7 +106,7 @@
 // even if the children (which are of type `Object`) may belong to many different `Text3D` objects.
 // `Text3D` is anyway needed in the ontological hierarchy, so that complete 3D texts can be destroyed and manipulated at once.
 //
-// Ontological hierarchy of `Symbiosis` objects:
+// Ontological hierarchy of `Symbiosis` entities:
 //
 //    Universe
 //       ^
@@ -114,20 +114,25 @@
 //       ^
 //     Scene
 //       ^
-//   Symbiosis
-//       ^
 //     Shader
 //       ^
-//    Material
+//   Symbiosis < SymbiontMaterial
+//       ^              ^
+//   Holobiont   SymbiontSpecies
 //       ^
-//    Species
-//       ^
-//     Object
+//     Biont
+//
+// Each `Holobiont` is a composite organism which consists of 0 more `Bionts`.
+// The `Biont`s of the `Holobiont` each belong to their corresponding
+// `SymbiontSpecies`.
+//
+// For more information about holobionts, check Wikipedia:
+// https://en.wikipedia.org/wiki/Holobiont
 //
 // Ontological hierarchy affects how objects can be created and how they can be destroyed,
 // though the precise ways how objects can be created depends on the functions available.
 //
-// Rendering hierarchy of `Symbiosis` objects:
+// Rendering hierarchy of `Symbiosis` entities:
 //
 //    Universe
 //       ^
@@ -137,13 +142,81 @@
 //       ^
 //     Shader
 //       ^
-//    Material
+//   Symbiosis > SymbiontMaterial
+//       ^              v
+//   Holobiont   SymbiontSpecies
 //       ^
-//    Species
-//       ^
-//     Object
+//     Biont
 //
-// Please note that `Symbiosis` is ignored completely in rendering hierarchy.
+// Optimized rendering hierarchy of `Symbiosis` entities:
+//
+//      Universe
+//         ^
+//       World
+//         ^
+//       Scene
+//         ^
+//       Shader
+//         ^
+//     Symbiosis
+//         ^
+//  SymbiontMaterial
+//         ^
+//  SymbiontSpecies
+//         ^
+//       Biont
+//
+// TODO: implement optimized rendering hierarchy for `Symbiosis` entities!
+//
+// Ontological hierarchy of `ShaderSymbiosis` entities:
+//
+//      Universe
+//         ^
+//       World
+//         ^
+//       Scene
+//         ^
+//  ShaderSymbiosis < SymbiontShader
+//         ^                ^
+//     Holobiont     SymbiontMaterial
+//         ^                ^
+//       Biont       SymbiontSpecies
+//
+// Rendering hierarchy of `ShaderSymbiosis` entities:
+//
+//      Universe
+//         ^
+//       World
+//         ^
+//       Scene
+//         ^
+//  ShaderSymbiosis > SymbiontShader
+//         ^                v
+//     Holobiont     SymbiontMaterial
+//         ^                v
+//       Biont       SymbiontSpecies
+//
+// TODO: implement `ShaderSymbiosis` entities!
+//
+// Optimized rendering hierarchy of `ShaderSymbiosis` entities:
+//
+//      Universe
+//         ^
+//       World
+//         ^
+//       Scene
+//         ^
+//  ShaderSymbiosis
+//         ^
+//   SymbiontShader
+//         ^
+//  SymbiontMaterial
+//         ^
+//  SymbiontSpecies
+//         ^
+//       Biont
+//
+// TODO: implement optimized rendering hierarchy for `ShaderSymbiosis` entities!
 //
 // Deleting a `Universe` also deletes all worlds, scenes, all shaders, materials, species, fonts, glyphs and objects that are bound to the same `Universe`.
 // Deleting a `World` also deletes all scenes, all shaders, materials, species, fonts, glyphs and objects that are bound to the same `World`.
