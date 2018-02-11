@@ -481,11 +481,6 @@ namespace ontology
 
     // Public callbacks end here.
 
-    config::SettingMaster* Universe::get_setting_master() const
-    {
-        return this->setting_master;
-    }
-
     console::Console* Universe::get_console() const
     {
         return this->console_pointer;

@@ -258,7 +258,6 @@
 namespace config
 {
     class Setting;
-    class SettingMaster;
 }
 
 namespace console
@@ -378,8 +377,6 @@ namespace ontology
 
             // this method stes the active `Scene`.
             void set_active_scene(ontology::Scene* const world);
-
-            config::SettingMaster* get_setting_master() const;
 
             console::Console* get_console() const;
             void set_console(console::Console* console);
