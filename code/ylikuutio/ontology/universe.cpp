@@ -348,7 +348,7 @@ namespace ontology
             std::vector<std::string>& command_parameters)
     {
         // This function can be used to activate a `World` or a `Scene`.
-        // A `World` can be activated always, assuming that the `entity` is a `Universe`.
+        // A `World` can be activated always, assuming that the `universe_entity` is a `Universe`.
         // A `Scene` can be activated only if there is an active `Scene`.
 
         if (console == nullptr || universe_entity == nullptr)
