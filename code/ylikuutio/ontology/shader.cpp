@@ -157,7 +157,7 @@ namespace ontology
 
     GLuint Shader::get_model_matrixID() const
     {
-        return this->ModelMatrixID;
+        return this->model_matrixID;
     }
 
     void Shader::set_terrain_species(ontology::Species* const terrain_species)

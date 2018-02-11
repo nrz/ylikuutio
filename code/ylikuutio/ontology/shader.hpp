@@ -82,7 +82,7 @@ namespace ontology
                 // Get a handle for our "MVP" uniform.
                 this->MatrixID = glGetUniformLocation(this->programID, "MVP");
                 this->view_matrixID = glGetUniformLocation(this->programID, "V");
-                this->ModelMatrixID = glGetUniformLocation(this->programID, "M");
+                this->model_matrixID = glGetUniformLocation(this->programID, "M");
 
                 this->child_vector_pointers_vector.push_back(&this->material_pointer_vector);
                 this->child_vector_pointers_vector.push_back(&this->symbiosis_pointer_vector);
@@ -131,7 +131,7 @@ namespace ontology
 
             GLuint MatrixID;
             GLuint view_matrixID;
-            GLuint ModelMatrixID;
+            GLuint model_matrixID;
 
             ontology::Species* terrain_species;   // pointer to scene species (used in collision detection).
 
