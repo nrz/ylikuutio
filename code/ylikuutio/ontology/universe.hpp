@@ -304,7 +304,7 @@ namespace ontology
                 this->is_headless = universe_struct.is_headless;
 
                 this->projection_matrix = glm::mat4(1.0f); // identity matrix (dummy value).
-                this->ViewMatrix = glm::mat4(1.0f);       // identity matrix (dummy value).
+                this->view_matrix = glm::mat4(1.0f);       // identity matrix (dummy value).
 
                 // Variables related to the camera.
                 this->aspect_ratio = static_cast<GLfloat>(this->window_width / this->window_height);
@@ -546,7 +546,7 @@ namespace ontology
 
             // Variables related to the camera.
             glm::mat4 projection_matrix;
-            glm::mat4 ViewMatrix;
+            glm::mat4 view_matrix;
             GLfloat aspect_ratio;
             GLfloat initialFoV;
 

@@ -523,7 +523,7 @@ namespace ontology
 
     glm::mat4& Universe::get_view_matrix()
     {
-        return this->ViewMatrix;
+        return this->view_matrix;
     }
 
     bool Universe::compute_matrices_from_inputs()
@@ -578,7 +578,7 @@ namespace ontology
         // Projection matrix : 45° Field of View, aspect ratio, display range : 0.1 unit <-> 100 units
         this->projection_matrix = glm::perspective(DEGREES_TO_RADIANS(FoV), aspect_ratio, 0.001f, 5000.0f + 2.0f * static_cast<GLfloat>(this->planet_radius));
         // Camera matrix
-        this->ViewMatrix = glm::lookAt(
+        this->view_matrix = glm::lookAt(
                 camera_cartesian_coordinates,                   // Camera is here
                 camera_cartesian_coordinates + this->direction, // and looks here : at the same position, plus "direction"
                 this->up                                        // Head is up (set to 0,-1,0 to look upside-down)
