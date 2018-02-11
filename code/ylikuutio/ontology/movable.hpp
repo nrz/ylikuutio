@@ -17,6 +17,8 @@
 
 namespace ontology
 {
+    class Universe;
+
     class Movable: public ontology::Entity
     {
         public:
