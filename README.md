@@ -18,7 +18,7 @@ Android support is a work in progress.
 ## Compiling
 Ylikuutio can be compiled with GCC, Clang or Visual Studio.
 In Visual Studio compiling may break due to compiler-specific bugs.
-Cross compiling from Linux® to Windows using GCC works fine.
+Cross compiling from Linux® to Windows using MinGW works fine.
 C++14 support is required.
 OpenGL 3.0 or newer is required.
 CMake 2.6.2 or newer is needed for the compiling process.
@@ -103,8 +103,9 @@ In Windows:
 
     > ajokki.exe
 
-F to toggle flying on off, arrow keys work too.
-F1 toggles help display and there you'll see some more options to try.
+Press `` to get console. Press F to toggle flying on off.
+Arrow keys work too. Ctrl is turbo. F1 toggles help display
+and there you'll see some more options to try.
 
 To run tests (coverage is still quite limited but underway):
 
@@ -114,7 +115,7 @@ To run tests (coverage is still quite limited but underway):
 This part reflects the current usage of Ylikuutio and will change as new
 functionality is implemented.
 
-At the moment, you need a main class (for an example, please see
+At the moment, you need a `main` function (for an example, please see
 `code/ajokki/ajokki.cpp`) which starts your game/simulation (initialization),
 runs the game/simulation (the main loop) and ends the program (cleaning-up).
 In all these phases mentioned above Ylikuutio library functions may be used.
@@ -160,6 +161,8 @@ A: Ylikuutio can be used for all kinds of 3D games and simulations.
 Q: What are the design goals for Ylikuutio?
 A: Ylikuutio aims to be a fast and flexible 3D game/simulation engine
    and fulfil my own requirements for my own indie game projects.
+   Ylikuutio aims to run fast also on low-end video cards.
+   Higher detail level may be offered for high-end video cards.
 
 Q: What are the target platforms of Ylikuutio?
 A: Ylikuutio targets Linux, Windows and Android, in this order.
@@ -182,8 +185,8 @@ Q: Is Ylikuutio based on some other 3D engine?
 A: Some parts of Ylikuutio (shaders, some file loaders, etc.) are based
 on [http://www.opengl-tutorial.org/](http://www.opengl-tutorial.org/), which I really recommend for anyone
 interested in learning OpenGL programming. Ylikuutio also uses external
-libraries such as TinyScheme, FastNoiseSIMD, GLEW, GLFW, GLM, and
-pugixml. The rest is written from scratch.
+libraries such as (in alphabetical order) Asio, GLM, GLEW, GLFW, OpenFBX,
+SFML, TinyScheme, and pugixml. The rest is written from scratch.
 
 Q: Why TinyScheme is chosen as the scripting language of Ylikuutio?
 A: I like Lisp-family languages and TinyScheme fulfils my
@@ -198,9 +201,9 @@ A: I like Lisp-family languages and TinyScheme fulfils my
 * fully functioning in-game console
 * multiple scenes in the same `Universe` (`activate` console command)
 * audio with Simple and Fast Multimedia Library (SFML)
+* option for wireframe models (`set wireframe true`, `set wireframe false`)
 
 ## Future developments underway:
-* option for wireframe models (`enable wireframe`, `disable wireframe`)
 * full support for different keyboard layouts in console
 * custom keyboard mappings in Ajokki
 * command to read console command input from file
