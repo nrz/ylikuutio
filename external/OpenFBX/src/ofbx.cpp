@@ -1660,6 +1660,8 @@ template <typename T> static bool parseArrayRaw(const Property& property, T* out
 {
 	if (property.value.is_binary)
 	{
+		assert(out);
+
 		int elem_size = 1;
 		switch (property.type)
 		{
@@ -1926,6 +1928,7 @@ static void splat(std::vector<T>* out,
 	const std::vector<int>& original_indices)
 {
 	assert(out);
+	assert(!data.empty());
 
 	if (mapping == GeometryImpl::BY_POLYGON_VERTEX)
 	{
