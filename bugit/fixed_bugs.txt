@@ -1,2 +1,0 @@
-number  date        type                                status
-00001   2016-02-07  segmentation fault in ajokki.cpp    fixed (multiple bugs in cpp/ylikuutio/model/font_loader.cpp)
