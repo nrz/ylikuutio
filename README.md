@@ -80,6 +80,12 @@ To cross compile from Linux to Windows:
     $ cmake -DCMAKE_TOOLCHAIN_FILE=../w64.cmake ..
     $ make
 
+Crosscompiling from Linux to Windows fails to compile tests.
+This is a known bug in Google Test. Just run `make` *again* if
+compiling ends before you get `ajokki.exe` and `tinyscheme_test.exe`.
+You can also disable compiling of tests as described above.
+https://github.com/google/googletest/issues/606
+
 To cross compile from Linux to Android (using Android NDK):
 
     $ mkdir build_android
