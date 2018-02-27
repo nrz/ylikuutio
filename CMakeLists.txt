@@ -290,6 +290,7 @@ configure_file(res/maps/Exactum_Physicum_Helsinki_Finland.osm Exactum_Physicum_H
 configure_file(res/audio/freesound.org/414257__sss-samples__chipland-loop-120-bpm-a-major.wav 414257__sss-samples__chipland-loop-120-bpm-a-major.wav COPYONLY)
 configure_file(res/audio/freesound.org/414269__jpmusic82__arp-bass-loop-128-bpm.mp3 414269__jpmusic82__arp-bass-loop-128-bpm.mp3 COPYONLY)
 configure_file(res/audio/freesound.org/414270__greek555__sample-97-bpm.wav 414270__greek555__sample-97-bpm.wav COPYONLY)
+configure_file(res/audio/freesound.org/419588__greek555__dreaming-of-me.ogg 419588__greek555__dreaming-of-me.ogg COPYONLY)
 
 # Image files for tests.
 configure_file(res/height_maps/noise256x256.bmp noise256x256.bmp COPYONLY)
