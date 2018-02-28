@@ -41,6 +41,14 @@ elseif (_GLFW_WAYLAND)
 
     ecm_add_wayland_client_protocol(glfw_SOURCES
         PROTOCOL
+        "${WAYLAND_PROTOCOLS_PKGDATADIR}/stable/xdg-shell/xdg-shell.xml"
+        BASENAME xdg-shell)
+    ecm_add_wayland_client_protocol(glfw_SOURCES
+        PROTOCOL
+        "${WAYLAND_PROTOCOLS_PKGDATADIR}/stable/viewporter/viewporter.xml"
+        BASENAME viewporter)
+    ecm_add_wayland_client_protocol(glfw_SOURCES
+        PROTOCOL
         "${WAYLAND_PROTOCOLS_PKGDATADIR}/unstable/relative-pointer/relative-pointer-unstable-v1.xml"
         BASENAME relative-pointer-unstable-v1)
     ecm_add_wayland_client_protocol(glfw_SOURCES
@@ -90,9 +98,7 @@ set_target_properties(glfw PROPERTIES
                       POSITION_INDEPENDENT_CODE ON
                       FOLDER "GLFW3")
 
-target_compile_definitions(glfw PRIVATE
-                           _GLFW_USE_CONFIG_H
-                           $<$<BOOL:${UNIX}>:_XOPEN_SOURCE=600>)
+target_compile_definitions(glfw PRIVATE _GLFW_USE_CONFIG_H)
 target_include_directories(glfw PUBLIC
                            "$<BUILD_INTERFACE:${GLFW_SOURCE_DIR}/include>"
                            "$<INSTALL_INTERFACE:$<INSTALL_PREFIX>/include>")
