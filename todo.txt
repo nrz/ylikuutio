@@ -2,6 +2,8 @@ TODO list:
 Tasks in priority order in descending priority, the most urgent ones first. Check when ready and move to the section Ready, when ready.
 
 Tasks which are necessary for the development of Ylikuutio:
+[ ] Implement entity-specific variables.
+[ ] Implement `Camera` entities.
 [ ] Optimize `Symbiosis` entities' rendering by going through `SymbiontMaterial`->`SymbiontSpecies`->`Biont` hierarchy.
 [ ] Add support for `man` command in console (a container class with the command callback together with the `man` text for the command).
 [ ] Add command line parameter `--debug` to Ajokki (log all kinds of debug information).
@@ -16,7 +18,6 @@ Tasks which are necessary for the development of Ylikuutio:
 [ ] Add audio playing command `play` into console.
 [ ] Move main loop out of `main` function and away from Ajokki into `ontology::Universe` class of Ylikuutio.
 [ ] Add support for custom keyboard settings.
-[ ] Add support for camera objects..
 [ ] Use GLFW Android port for Android builds. https://github.com/glfw/glfw/issues/611 https://github.com/xCuri0/glfw-android-example
 [ ] Use GLFM library (only for Android builds). https://github.com/brackeen/glfm
 [ ] Add variable `text_size`.

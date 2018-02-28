@@ -2,6 +2,7 @@
 #include "setting.hpp"
 #include "code/ylikuutio/console/console.hpp"
 #include "code/ylikuutio/ontology/entity.hpp"
+#include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
 

@@ -2,6 +2,7 @@
 #define __MOVABLE_HPP_INCLUDED
 
 #include "entity.hpp"
+#include "code/ylikuutio/common/spherical_coordinates_struct.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -16,6 +17,8 @@
 
 namespace ontology
 {
+    class Universe;
+
     class Movable: public ontology::Entity
     {
         public:

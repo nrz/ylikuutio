@@ -187,7 +187,10 @@ int main(int argc, char* argv[])
 
     // Ensure we can capture the escape key being pressed below.
     ylikuutio::input::set_sticky_keys(my_universe->get_window());
-    ylikuutio::input::set_cursor_position(my_universe->get_window(), static_cast<double>(my_universe->get_window_width()) / 2, static_cast<double>(my_universe->get_window_height()) / 2);
+    ylikuutio::input::set_cursor_position(
+            my_universe->get_window(),
+            static_cast<double>(my_universe->get_window_width()) / 2,
+            static_cast<double>(my_universe->get_window_height()) / 2);
 
     // Enable depth test.
     ylikuutio::opengl::enable_depth_test();
@@ -383,7 +386,11 @@ int main(int argc, char* argv[])
     const char* char_g_font_texture_file_format = g_font_texture_file_format.c_str();
 
     std::cout << "Creating ontology::Entity* my_font2D_entity ...\n";
-    ontology::Entity* my_font2D_entity = entity_factory->create_Font2D(my_universe->get_window_width(), my_universe->get_window_height(), char_g_font_texture_filename, char_g_font_texture_file_format);
+    ontology::Entity* my_font2D_entity = entity_factory->create_Font2D(
+            my_universe->get_window_width(),
+            my_universe->get_window_height(),
+            char_g_font_texture_filename,
+            char_g_font_texture_file_format);
     std::cout << "Creating ontology::Font2D* my_font2D ...\n";
     ontology::Font2D* my_font2D = dynamic_cast<ontology::Font2D*>(my_font2D_entity);
 
@@ -420,27 +427,37 @@ int main(int argc, char* argv[])
 
     // Callback code for left Control release: release first turbo.
     callback_system::CallbackEngine* release_first_turbo_callback_engine = new callback_system::CallbackEngine();
-    callback_system::CallbackObject* release_first_turbo_callback_object = new callback_system::CallbackObject(&ajokki::release_first_turbo, release_first_turbo_callback_engine);
+    callback_system::CallbackObject* release_first_turbo_callback_object = new callback_system::CallbackObject(
+            &ajokki::release_first_turbo,
+            release_first_turbo_callback_engine);
     new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, release_first_turbo_callback_object);
 
     // Callback code for right Control release: release second turbo.
     callback_system::CallbackEngine* release_second_turbo_callback_engine = new callback_system::CallbackEngine();
-    callback_system::CallbackObject* release_second_turbo_callback_object = new callback_system::CallbackObject(&ajokki::release_second_turbo, release_second_turbo_callback_engine);
+    callback_system::CallbackObject* release_second_turbo_callback_object = new callback_system::CallbackObject(
+            &ajokki::release_second_turbo,
+            release_second_turbo_callback_engine);
     new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, release_second_turbo_callback_object);
 
     // Callback code for I release: enable_toggle invert mouse.
     callback_system::CallbackEngine* enable_toggle_invert_mouse_callback_engine = new callback_system::CallbackEngine();
-    callback_system::CallbackObject* enable_toggle_invert_mouse_callback_object = new callback_system::CallbackObject(&ajokki::enable_toggle_invert_mouse, enable_toggle_invert_mouse_callback_engine);
+    callback_system::CallbackObject* enable_toggle_invert_mouse_callback_object = new callback_system::CallbackObject(
+            &ajokki::enable_toggle_invert_mouse,
+            enable_toggle_invert_mouse_callback_engine);
     new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, enable_toggle_invert_mouse_callback_object);
 
     // Callback code for F release: enable_toggle flight mode.
     callback_system::CallbackEngine* enable_toggle_flight_mode_callback_engine = new callback_system::CallbackEngine();
-    callback_system::CallbackObject* enable_toggle_flight_mode_callback_object = new callback_system::CallbackObject(&ajokki::enable_toggle_flight_mode, enable_toggle_flight_mode_callback_engine);
+    callback_system::CallbackObject* enable_toggle_flight_mode_callback_object = new callback_system::CallbackObject(
+            &ajokki::enable_toggle_flight_mode,
+            enable_toggle_flight_mode_callback_engine);
     new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, enable_toggle_flight_mode_callback_object);
 
     // Callback code for F1 release: enable toggle help mode.
     callback_system::CallbackEngine* enable_toggle_help_mode_callback_engine = new callback_system::CallbackEngine();
-    callback_system::CallbackObject* enable_toggle_help_mode_callback_object = new callback_system::CallbackObject(&ajokki::enable_toggle_help_mode, enable_toggle_help_mode_callback_engine);
+    callback_system::CallbackObject* enable_toggle_help_mode_callback_object = new callback_system::CallbackObject(
+            &ajokki::enable_toggle_help_mode,
+            enable_toggle_help_mode_callback_engine);
     new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, enable_toggle_help_mode_callback_object);
 
     /*********************************************************************\
@@ -459,70 +476,87 @@ int main(int argc, char* argv[])
 
     // Callback code for left Control: first turbo.
     callback_system::CallbackEngine* first_turbo_callback_engine = new callback_system::CallbackEngine();
-    callback_system::CallbackObject* first_turbo_callback_object = new callback_system::CallbackObject(&ajokki::first_turbo, first_turbo_callback_engine);
+    callback_system::CallbackObject* first_turbo_callback_object = new callback_system::CallbackObject(
+            &ajokki::first_turbo,
+            first_turbo_callback_engine);
     new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, first_turbo_callback_object);
 
     // Callback code for right Control: second turbo.
     callback_system::CallbackEngine* second_turbo_callback_engine = new callback_system::CallbackEngine();
-    callback_system::CallbackObject* second_turbo_callback_object = new callback_system::CallbackObject(&ajokki::second_turbo, second_turbo_callback_engine);
+    callback_system::CallbackObject* second_turbo_callback_object = new callback_system::CallbackObject(
+            &ajokki::second_turbo,
+            second_turbo_callback_engine);
     new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, second_turbo_callback_object);
 
     // Callback code for key up: move forward.
     callback_system::CallbackEngine* move_forward_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* move_forward_callback_object = new callback_system::CallbackObject(
-            &ajokki::move_forward, move_forward_callback_engine);
+            &ajokki::move_forward,
+            move_forward_callback_engine);
     new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, move_forward_callback_object);
 
     // Callback code for key down: move backward.
     callback_system::CallbackEngine* move_backward_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* move_backward_callback_object = new callback_system::CallbackObject(
-            &ajokki::move_backward, move_backward_callback_engine);
+            &ajokki::move_backward,
+            move_backward_callback_engine);
     new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, move_backward_callback_object);
 
     // Callback code for key left: strafe left.
     callback_system::CallbackEngine* strafe_left_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* strafe_left_callback_object = new callback_system::CallbackObject(
-            &ajokki::strafe_left, strafe_left_callback_engine);
+            &ajokki::strafe_left,
+            strafe_left_callback_engine);
     new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, strafe_left_callback_object);
 
     // Callback code for key right: strafe right.
     callback_system::CallbackEngine* strafe_right_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* strafe_right_callback_object = new callback_system::CallbackObject(
-            &ajokki::strafe_right, strafe_right_callback_engine);
+            &ajokki::strafe_right,
+            strafe_right_callback_engine);
     new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, strafe_right_callback_object);
 
     // Callback code for space: ascent.
     callback_system::CallbackEngine* ascent_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* ascent_callback_object = new callback_system::CallbackObject(
-            &ajokki::ascent, ascent_callback_engine);
+            &ajokki::ascent,
+            ascent_callback_engine);
     new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, ascent_callback_object);
 
     // Callback code for enter: descent.
     callback_system::CallbackEngine* descent_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* descent_callback_object = new callback_system::CallbackObject(
-            &ajokki::descent, descent_callback_engine);
+            &ajokki::descent,
+            descent_callback_engine);
     new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, descent_callback_object);
 
     // Callback code for I: toggle invert mouse.
     callback_system::CallbackEngine* toggle_invert_mouse_callback_engine = new callback_system::CallbackEngine();
-    callback_system::CallbackObject* toggle_invert_mouse_callback_object = new callback_system::CallbackObject(&ajokki::toggle_invert_mouse, toggle_invert_mouse_callback_engine);
+    callback_system::CallbackObject* toggle_invert_mouse_callback_object = new callback_system::CallbackObject(
+            &ajokki::toggle_invert_mouse,
+            toggle_invert_mouse_callback_engine);
     new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, toggle_invert_mouse_callback_object);
 
     // Callback code for F: toggle flight mode.
     callback_system::CallbackEngine* toggle_flight_mode_callback_engine = new callback_system::CallbackEngine();
-    callback_system::CallbackObject* toggle_flight_mode_callback_object = new callback_system::CallbackObject(&ajokki::toggle_flight_mode, toggle_flight_mode_callback_engine);
+    callback_system::CallbackObject* toggle_flight_mode_callback_object = new callback_system::CallbackObject(
+            &ajokki::toggle_flight_mode,
+            toggle_flight_mode_callback_engine);
     new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, toggle_flight_mode_callback_object);
 
     // Callback code for F1: toggle help mode.
     callback_system::CallbackEngine* toggle_help_mode_callback_engine = new callback_system::CallbackEngine();
-    callback_system::CallbackObject* toggle_help_mode_callback_object = new callback_system::CallbackObject(&ajokki::toggle_help_mode, toggle_help_mode_callback_engine);
+    callback_system::CallbackObject* toggle_help_mode_callback_object = new callback_system::CallbackObject(
+            &ajokki::toggle_help_mode,
+            toggle_help_mode_callback_engine);
     new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, toggle_help_mode_callback_object);
 
     // Callback code for D: delete Suzanne species.
     std::string suzanne_species_string = "suzanne_species";
     callback_system::CallbackEngine* delete_suzanne_species_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* delete_suzanne_species_callback_object = new callback_system::CallbackObject(
-            &ajokki::delete_entity, delete_suzanne_species_callback_engine);
+            &ajokki::delete_entity,
+            delete_suzanne_species_callback_engine);
     new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, delete_suzanne_species_callback_object);
     new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(&suzanne_species_string), false, delete_suzanne_species_callback_object);
 
@@ -530,7 +564,8 @@ int main(int argc, char* argv[])
     std::string grass_material_string = "helsinki_east_downtown_grass_material";
     callback_system::CallbackEngine* switch_to_grass_material_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* switch_to_grass_material_callback_object = new callback_system::CallbackObject(
-            &ajokki::switch_to_new_material, switch_to_grass_material_callback_engine);
+            &ajokki::switch_to_new_material,
+            switch_to_grass_material_callback_engine);
     new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, switch_to_grass_material_callback_object);
     new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(&suzanne_species_string), false, switch_to_grass_material_callback_object);
     new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(&grass_material_string), false, switch_to_grass_material_callback_object);
@@ -539,17 +574,31 @@ int main(int argc, char* argv[])
     std::string pink_geometric_tiles_material_string = "pink_geometric_tiles_material";
     callback_system::CallbackEngine* switch_to_pink_geometric_tiles_material_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* switch_to_pink_geometric_tiles_material_callback_object = new callback_system::CallbackObject(
-            &ajokki::switch_to_new_material, switch_to_pink_geometric_tiles_material_callback_engine);
-    new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, switch_to_pink_geometric_tiles_material_callback_object);
-    new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(&suzanne_species_string), false, switch_to_pink_geometric_tiles_material_callback_object);
-    new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(&pink_geometric_tiles_material_string), false, switch_to_pink_geometric_tiles_material_callback_object);
+            &ajokki::switch_to_new_material,
+            switch_to_pink_geometric_tiles_material_callback_engine);
+    new callback_system::CallbackParameter(
+            "",
+            std::make_shared<datatypes::AnyValue>(my_universe),
+            false,
+            switch_to_pink_geometric_tiles_material_callback_object);
+    new callback_system::CallbackParameter(
+            "",
+            std::make_shared<datatypes::AnyValue>(&suzanne_species_string),
+            false,
+            switch_to_pink_geometric_tiles_material_callback_object);
+    new callback_system::CallbackParameter(
+            "",
+            std::make_shared<datatypes::AnyValue>(&pink_geometric_tiles_material_string),
+            false,
+            switch_to_pink_geometric_tiles_material_callback_object);
 
     // Callback code for T: transform `suzanne2` into terrain.
     std::string helsinki_species_string = "Helsinki_species";
     std::string suzanne2_string = "suzanne2";
     callback_system::CallbackEngine* transform_into_terrain_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* transform_into_terrain_callback_object = new callback_system::CallbackObject(
-            &ajokki::transform_into_new_species, transform_into_terrain_callback_engine);
+            &ajokki::transform_into_new_species,
+            transform_into_terrain_callback_engine);
     new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, transform_into_terrain_callback_object);
     new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(&suzanne2_string), false, transform_into_terrain_callback_object);
     new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(&helsinki_species_string), false, transform_into_terrain_callback_object);
@@ -830,10 +879,9 @@ int main(int argc, char* argv[])
     double last_time_before_reading_keyboard = NAN;
     double current_time_before_reading_keyboard = NAN;
 
-    if (!audio_master.load_and_play(music_filename))
-    {
-        std::cout << "Music file " << music_filename << " could not be loaded!\n";
-    }
+    audio_master.add_to_playlist("Ajokki_playlist", "414270__greek555__sample-97-bpm.wav");
+    audio_master.add_to_playlist("Ajokki_playlist", "419588__greek555__dreaming-of-me.ogg");
+    audio_master.play_playlist("Ajokki_playlist");
 
     while (!is_exit_requested)
     {
@@ -850,10 +898,18 @@ int main(int argc, char* argv[])
             {
                 // If last `std::printf()` was more than 1 sec ago,
                 // `std::printf` and reset.
-                std::snprintf(ms_frame_text, sizeof(ms_frame_text), "%.02f ms/frame; %.02f Hz", 1000.0f / ((double) nbFrames), 1000.0f / (1000.0f / ((double) nbFrames)));
+                std::snprintf(
+                        ms_frame_text,
+                        sizeof(ms_frame_text),
+                        "%.02f ms/frame; %.02f Hz",
+                        1000.0f / ((double) nbFrames),
+                        1000.0f / (1000.0f / ((double) nbFrames)));
                 ms_frame_text_ready = true;
                 nbFrames = 0;
                 last_time_to_display_FPS += 1.0;
+
+                // Update audio also (in case the sound has reached the end).
+                audio_master.update();
             }
 
             // Clear the screen.
@@ -1094,7 +1150,13 @@ int main(int argc, char* argv[])
 
                 if (my_universe != nullptr && my_universe->testing_spherical_terrain_in_use)
                 {
-                    std::snprintf(spherical_coordinates_text, sizeof(spherical_coordinates_text), "rho:%.2f theta:%.2f phi:%.2f", my_universe->spherical_coordinates->rho, my_universe->spherical_coordinates->theta, my_universe->spherical_coordinates->phi);
+                    std::snprintf(
+                            spherical_coordinates_text,
+                            sizeof(spherical_coordinates_text),
+                            "rho:%.2f theta:%.2f phi:%.2f",
+                            my_universe->spherical_coordinates->rho,
+                            my_universe->spherical_coordinates->theta,
+                            my_universe->spherical_coordinates->phi);
                 }
 
                 // print cartesian coordinates on bottom left corner.

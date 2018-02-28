@@ -348,7 +348,7 @@ namespace ontology
             std::vector<std::string>& command_parameters)
     {
         // This function can be used to activate a `World` or a `Scene`.
-        // A `World` can be activated always, assuming that the `entity` is a `Universe`.
+        // A `World` can be activated always, assuming that the `universe_entity` is a `Universe`.
         // A `Scene` can be activated only if there is an active `Scene`.
 
         if (console == nullptr || universe_entity == nullptr)
@@ -481,11 +481,6 @@ namespace ontology
 
     // Public callbacks end here.
 
-    config::SettingMaster* Universe::get_setting_master() const
-    {
-        return this->setting_master;
-    }
-
     console::Console* Universe::get_console() const
     {
         return this->console_pointer;
@@ -518,12 +513,12 @@ namespace ontology
 
     glm::mat4& Universe::get_projection_matrix()
     {
-        return this->ProjectionMatrix;
+        return this->projection_matrix;
     }
 
     glm::mat4& Universe::get_view_matrix()
     {
-        return this->ViewMatrix;
+        return this->view_matrix;
     }
 
     bool Universe::compute_matrices_from_inputs()
@@ -576,9 +571,9 @@ namespace ontology
         camera_cartesian_coordinates.y += 2.0f;
 
         // Projection matrix : 45° Field of View, aspect ratio, display range : 0.1 unit <-> 100 units
-        this->ProjectionMatrix = glm::perspective(DEGREES_TO_RADIANS(FoV), aspect_ratio, 0.001f, 5000.0f + 2.0f * static_cast<GLfloat>(this->planet_radius));
+        this->projection_matrix = glm::perspective(DEGREES_TO_RADIANS(FoV), aspect_ratio, 0.001f, 5000.0f + 2.0f * static_cast<GLfloat>(this->planet_radius));
         // Camera matrix
-        this->ViewMatrix = glm::lookAt(
+        this->view_matrix = glm::lookAt(
                 camera_cartesian_coordinates,                   // Camera is here
                 camera_cartesian_coordinates + this->direction, // and looks here : at the same position, plus "direction"
                 this->up                                        // Head is up (set to 0,-1,0 to look upside-down)

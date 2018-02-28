@@ -60,7 +60,7 @@ struct DataView
 	bool operator!=(const char* rhs) const { return !(*this == rhs); }
 	bool operator==(const char* rhs) const;
 
-	u64 toLong() const;
+	u64 toU64() const;
 	int toInt() const;
 	u32 toU32() const;
 	double toDouble() const;
@@ -308,6 +308,7 @@ struct AnimationLayer : Object
 
 	AnimationLayer(const Scene& _scene, const IElement& _element);
 
+	virtual const AnimationCurveNode* getCurveNode(int index) const = 0;
 	virtual const AnimationCurveNode* getCurveNode(const Object& bone, const char* property) const = 0;
 };
 
@@ -331,6 +332,7 @@ struct AnimationCurveNode : Object
 	AnimationCurveNode(const Scene& _scene, const IElement& _element);
 
 	virtual Vec3 getNodeLocalTransform(double time) const = 0;
+	virtual const Object* getBone() const = 0;
 };
 
 

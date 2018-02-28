@@ -138,9 +138,9 @@ static float transformY(float y)
 
 // Make the specified window and its video mode active on its monitor
 //
-static GLFWbool acquireMonitor(_GLFWwindow* window)
+static void acquireMonitor(_GLFWwindow* window)
 {
-    const GLFWbool status = _glfwSetVideoModeNS(window->monitor, &window->videoMode);
+    _glfwSetVideoModeNS(window->monitor, &window->videoMode);
     const CGRect bounds = CGDisplayBounds(window->monitor->ns.displayID);
     const NSRect frame = NSMakeRect(bounds.origin.x,
                                     transformY(bounds.origin.y + bounds.size.height),
@@ -150,7 +150,6 @@ static GLFWbool acquireMonitor(_GLFWwindow* window)
     [window->ns.object setFrame:frame display:YES];
 
     _glfwInputMonitorWindow(window->monitor, window);
-    return status;
 }
 
 // Remove the window and restore the original video mode
@@ -707,7 +706,7 @@ static const NSRange kEmptyRange = { NSNotFound, 0 };
         NSUInteger i;
 
         for (i = 0;  i < count;  i++)
-            paths[i] = strdup([[e nextObject] UTF8String]);
+            paths[i] = _glfw_strdup([[e nextObject] UTF8String]);
 
         _glfwInputDrop(window, (int) count, (const char**) paths);
 
@@ -1178,11 +1177,7 @@ int _glfwPlatformCreateWindow(_GLFWwindow* window,
     {
         _glfwPlatformShowWindow(window);
         _glfwPlatformFocusWindow(window);
-        if (!acquireMonitor(window))
-            return GLFW_FALSE;
-
-        if (wndconfig->centerCursor)
-            centerCursor(window);
+        acquireMonitor(window);
     }
 
     return GLFW_TRUE;
@@ -1418,6 +1413,7 @@ void _glfwPlatformSetWindowMonitor(_GLFWwindow* window,
 
     const NSUInteger styleMask = getStyleMask(window);
     [window->ns.object setStyleMask:styleMask];
+    // HACK: Changing the style mask can cause the first responder to be cleared
     [window->ns.object makeFirstResponder:window->ns.view];
 
     if (monitor)
@@ -1813,7 +1809,7 @@ const char* _glfwPlatformGetClipboardString(void)
     }
 
     free(_glfw.ns.clipboardString);
-    _glfw.ns.clipboardString = strdup([object UTF8String]);
+    _glfw.ns.clipboardString = _glfw_strdup([object UTF8String]);
 
     return _glfw.ns.clipboardString;
 }

@@ -1,0 +1,4 @@
+#!/bin/bash
+# this script converts the audio files in the current directory
+# to OGG file format using full OGG audio quality.
+dir2ogg --quality=10 $(pwd)

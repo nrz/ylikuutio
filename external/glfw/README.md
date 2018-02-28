@@ -178,6 +178,8 @@ information on what to include when reporting a bug.
 - Added `GLFW_OSMESA_CONTEXT_API` for creating OpenGL contexts with
   [OSMesa](https://www.mesa3d.org/osmesa.html) (#281)
 - Added `GenerateMappings.cmake` script for updating gamepad mappings
+- Made `glfwCreateWindowSurface` emit an error when the window has a context
+  (#1194,#1205)
 - Deprecated window parameter of clipboard string functions
 - Deprecated charmods callback
 - Removed `GLFW_USE_RETINA` compile-time option
@@ -231,6 +233,8 @@ information on what to include when reporting a bug.
 - [X11] Bugfix: Selection I/O reported but did not support `COMPOUND_TEXT`
 - [X11] Bugfix: Latin-1 text read from selections was not converted to UTF-8
 - [X11] Bugfix: NVidia EGL would segfault if unloaded before closing the display
+- [Linux] Added workaround for missing `SYN_DROPPED` in pre-2.6.39 kernel
+          headers (#1196)
 - [Linux] Moved to evdev for joystick input (#906,#1005)
 - [Linux] Bugfix: Event processing did not detect joystick disconnection (#932)
 - [Linux] Bugfix: The joystick device path could be truncated (#1025)
@@ -442,6 +446,7 @@ skills.
  - Ricardo Vieira
  - Nicholas Vitovitch
  - Simon Voordouw
+ - Corentin Wallez
  - Torsten Walluhn
  - Patrick Walton
  - Xo Wang
