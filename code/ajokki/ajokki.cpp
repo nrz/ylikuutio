@@ -879,10 +879,9 @@ int main(int argc, char* argv[])
     double last_time_before_reading_keyboard = NAN;
     double current_time_before_reading_keyboard = NAN;
 
-    if (!audio_master.load_and_play(music_filename))
-    {
-        std::cout << "Music file " << music_filename << " could not be loaded!\n";
-    }
+    audio_master.add_to_playlist("Ajokki_playlist", "414270__greek555__sample-97-bpm.wav");
+    audio_master.add_to_playlist("Ajokki_playlist", "419588__greek555__dreaming-of-me.ogg");
+    audio_master.play_playlist("Ajokki_playlist");
 
     while (!is_exit_requested)
     {
@@ -908,6 +907,9 @@ int main(int argc, char* argv[])
                 ms_frame_text_ready = true;
                 nbFrames = 0;
                 last_time_to_display_FPS += 1.0;
+
+                // Update audio also (in case the sound has reached the end).
+                audio_master.update();
             }
 
             // Clear the screen.
