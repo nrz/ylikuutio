@@ -189,7 +189,7 @@ namespace ontology
                 std::cout << "ontology::SymbiontMaterial* successfully created.\n";
 
                 // Create `SymbiontSpecies`s.
-                // Care only about `ofbx::Texture*`s with are DIFFUSE textures.
+                // Care only about `ofbx::Texture*`s which are DIFFUSE textures.
                 for (int32_t mesh_i : this->ofbx_diffuse_texture_mesh_map.at(ofbx_texture))
                 {
                     int32_t vertex_count = this->vertices.at(mesh_i).size();
