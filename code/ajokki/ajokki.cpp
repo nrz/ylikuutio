@@ -1087,7 +1087,7 @@ int main(int argc, char* argv[])
                 }
             }
 
-            // Render the world.
+            // Render the `Universe`.
             my_universe->render();
 
             // Draw the console (including current input).
