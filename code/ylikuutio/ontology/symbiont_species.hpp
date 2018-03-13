@@ -112,7 +112,7 @@ namespace ontology
                 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->elementbuffer);
                 glBufferData(GL_ELEMENT_ARRAY_BUFFER, this->indices.size() * sizeof(GLuint), &this->indices[0] , GL_STATIC_DRAW);
 
-                // TODO: Compute the graph of this object type to enable object vertex modification!
+                // TODO: Compute the vertex graph of this `SymbiontSpecies` to enable object vertex modification!
 
                 this->type = "ontology::SymbiontSpecies*";
             }
@@ -128,8 +128,8 @@ namespace ontology
             int32_t get_indices_size() const;
             GLuint get_lightID() const;
 
-            bool is_terrain;                           // worlds currently do not rotate nor translate.
-            float planet_radius;                      // radius of sea level in kilometers. used only for worlds.
+            bool is_terrain;                         // terrains currently do not rotate nor translate.
+            float planet_radius;                     // radius of sea level in kilometers. can be a planet or a moon. used only for terrains.
             float divisor;                           // value by which SRTM values are divided to convert them to kilometers.
 
             glm::vec3 light_position;                // light position.

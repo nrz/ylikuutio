@@ -31,7 +31,7 @@ namespace ontology
 
     void Symbiosis::bind_holobiont(ontology::Holobiont* const holobiont)
     {
-        // get `childID` from `Symbiosis` and set pointer to `object`.
+        // get `childID` from `Symbiosis` and set pointer to `holobiont`.
         hierarchy::bind_child_to_parent<ontology::Holobiont*>(
                 holobiont,
                 this->holobiont_pointer_vector,
@@ -71,15 +71,15 @@ namespace ontology
         // destructor.
         std::cout << "Symbiosis with childID " << std::dec << this->childID << " will be destroyed.\n";
 
-        // destroy all holobionts of this symbiosis.
+        // destroy all `Holobiont`s of this `Symbiosis`.
         std::cout << "All holobionts of this symbiosis will be destroyed.\n";
         hierarchy::delete_children<ontology::Holobiont*>(this->holobiont_pointer_vector, &this->number_of_holobionts);
 
-        // destroy all symbiont materials of this symbiosis.
+        // destroy all `SymbiontMaterial`s of this `Symbiosis`.
         std::cout << "All symbiont materials of this symbiosis will be destroyed.\n";
         hierarchy::delete_children<ontology::SymbiontMaterial*>(this->symbiont_material_pointer_vector, &this->number_of_symbiont_materials);
 
-        // set pointer to this symbiosis to nullptr.
+        // set pointer to this `Symbiosis` to `nullptr`.
         this->parent->set_symbiosis_pointer(this->childID, nullptr);
     }
 
