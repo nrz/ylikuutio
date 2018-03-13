@@ -119,10 +119,6 @@ namespace ontology
 
             ontology::Entity* get_parent() const override;
 
-            // this method sets pointer to this `SymbiontSpecies` to nullptr, sets `parent` according to the input, and requests a new `childID` from the new `Material`.
-            // this method sets an `Object` pointer.
-            void set_object_pointer(const int32_t childID, ontology::Object* const child_pointer);
-
             void set_name(const std::string& name);
 
             int32_t get_indices_size() const;
