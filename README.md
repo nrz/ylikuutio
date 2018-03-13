@@ -202,7 +202,7 @@ A: I like Lisp-family languages and TinyScheme fulfils my
 * 3D rendering
 * 2D text
 * support for different height map formats (SRTM, LAZ)
-* instant rebinding of instances of classes belonging to rendering hierarchy
+* instant rebinding of instances of classes belonging to ontological hierarchy
 * callbacks
 * fully functioning in-game console
 * multiple scenes in the same `Universe` (`activate` console command)
