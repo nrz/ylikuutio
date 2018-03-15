@@ -109,6 +109,10 @@ In Windows:
 
     > ajokki.exe
 
+`ajokki.exe` binary can also be executed in Linux, using Wine:
+
+    $ wine ./ajokki.exe
+
 Press `` to get console. Press F to toggle flying on off.
 Arrow keys work too. Ctrl is turbo. F1 toggles help display
 and there you'll see some more options to try.
