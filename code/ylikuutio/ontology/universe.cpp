@@ -541,7 +541,7 @@ namespace ontology
         {
             if (this->terrain_species != nullptr)
             {
-                GLfloat ground_y = ontology::get_floor_level(static_cast<ontology::Species*>(this->terrain_species), this->cartesian_coordinates);
+                GLfloat ground_y = ontology::get_floor_level(static_cast<ontology::Species*>(this->terrain_species), *this->cartesian_coordinates);
 
                 if (!std::isnan(ground_y) && this->cartesian_coordinates->y < ground_y)
                 {
