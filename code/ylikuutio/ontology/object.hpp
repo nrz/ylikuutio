@@ -53,7 +53,7 @@ namespace ontology
             void bind_to_new_parent(void* const new_parent);
 
             // constructor.
-            Object(ontology::Universe* const universe, const ObjectStruct& object_struct)
+            Object(ontology::Universe* const universe, ObjectStruct& object_struct)
                 : Movable(universe, object_struct.cartesian_coordinates)
             {
                 // constructor.

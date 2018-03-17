@@ -53,7 +53,7 @@ namespace ontology
             void bind_to_new_parent(ontology::Symbiosis* const new_parent);
 
             // constructor.
-            Holobiont(ontology::Universe* const universe, const HolobiontStruct& holobiont_struct)
+            Holobiont(ontology::Universe* const universe, HolobiontStruct& holobiont_struct)
                 : Movable(universe, holobiont_struct.cartesian_coordinates)
             {
                 // constructor.

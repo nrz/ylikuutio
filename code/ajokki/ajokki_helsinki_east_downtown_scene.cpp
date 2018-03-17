@@ -22,7 +22,6 @@
 
 // Include standard headers
 #include <iostream>   // std::cout, std::cin, std::cerr
-#include <memory>     // std::make_shared, std::shared_ptr
 #include <string>     // std::string
 
 namespace ontology
@@ -153,7 +152,7 @@ namespace ajokki
         // Create Helsinki eastern downtown terrain.
         ObjectStruct helsinki_east_downtown_struct;
         helsinki_east_downtown_struct.species_parent = helsinki_east_downtown_terrain_species;
-        helsinki_east_downtown_struct.cartesian_coordinates = std::make_shared<glm::vec3>(0.0f, 0.0f, 0.0f);
+        helsinki_east_downtown_struct.cartesian_coordinates = glm::vec3(0.0f, 0.0f, 0.0f);
         helsinki_east_downtown_struct.rotate_angle = 0.0f;
         helsinki_east_downtown_struct.rotate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
         helsinki_east_downtown_struct.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
@@ -185,7 +184,7 @@ namespace ajokki
         ObjectStruct snow_cottage_object_struct1;
         snow_cottage_object_struct1.species_parent = snow_cottage_species;
         snow_cottage_object_struct1.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
-        snow_cottage_object_struct1.cartesian_coordinates = std::make_shared<glm::vec3>(121.50f, 126.50f, 63.70f);
+        snow_cottage_object_struct1.cartesian_coordinates = glm::vec3(121.50f, 126.50f, 63.70f);
         snow_cottage_object_struct1.rotate_angle = 0.10f;
         snow_cottage_object_struct1.rotate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
         snow_cottage_object_struct1.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
@@ -225,7 +224,7 @@ namespace ajokki
         // Create suzanne1, store it in `suzanne1`.
         ObjectStruct suzanne_object_struct1;
         suzanne_object_struct1.species_parent = suzanne_species;
-        suzanne_object_struct1.cartesian_coordinates = std::make_shared<glm::vec3>(82.50f, 119.00f, 95.50f);
+        suzanne_object_struct1.cartesian_coordinates = glm::vec3(82.50f, 119.00f, 95.50f);
         suzanne_object_struct1.rotate_angle = 0.10f;
         suzanne_object_struct1.rotate_vector = glm::vec3(1.0f, 0.0f, 0.0f);
         suzanne_object_struct1.translate_vector = glm::vec3(1.0f, 0.0f, 0.0f);
@@ -245,7 +244,7 @@ namespace ajokki
         suzanne_species->set_name("suzanne_species");
         ObjectStruct suzanne_object_struct2;
         suzanne_object_struct2.species_parent = suzanne_species;
-        suzanne_object_struct2.cartesian_coordinates = std::make_shared<glm::vec3>(112.90f, 113.90f, 75.50f);
+        suzanne_object_struct2.cartesian_coordinates = glm::vec3(112.90f, 113.90f, 75.50f);
         suzanne_object_struct2.rotate_angle = 0.20f;
         suzanne_object_struct2.rotate_vector = glm::vec3(1.0f, 0.0f, 0.0f);
         suzanne_object_struct2.translate_vector = glm::vec3(0.0f, 1.0f, 0.0f);
@@ -264,7 +263,7 @@ namespace ajokki
 
         ObjectStruct suzanne_object_struct3;
         suzanne_object_struct3.species_parent = suzanne_species;
-        suzanne_object_struct3.cartesian_coordinates = std::make_shared<glm::vec3>(126.90f, 162.90f, 103.00f);
+        suzanne_object_struct3.cartesian_coordinates = glm::vec3(126.90f, 162.90f, 103.00f);
         suzanne_object_struct3.rotate_angle = 0.05f;
         suzanne_object_struct3.rotate_vector = glm::vec3(1.0f, 0.0f, 0.0f);
         suzanne_object_struct3.translate_vector = glm::vec3(0.0f, 0.0f, 1.0f);
@@ -283,7 +282,7 @@ namespace ajokki
 
         ObjectStruct suzanne_object_struct4;
         suzanne_object_struct4.species_parent = suzanne_species;
-        suzanne_object_struct4.cartesian_coordinates = std::make_shared<glm::vec3>(96.00f, 130.00f, 109.00f);
+        suzanne_object_struct4.cartesian_coordinates = glm::vec3(96.00f, 130.00f, 109.00f);
         suzanne_object_struct4.rotate_angle = 0.15f;
         suzanne_object_struct4.rotate_vector = glm::vec3(1.0f, 0.0f, 0.0f);
         suzanne_object_struct4.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
@@ -303,7 +302,7 @@ namespace ajokki
         ObjectStruct suzanne_object_struct5;
         suzanne_object_struct5.species_parent = suzanne_species;
         suzanne_object_struct5.original_scale_vector = glm::vec3(10.0f, 10.0f, 10.0f);
-        suzanne_object_struct5.cartesian_coordinates = std::make_shared<glm::vec3>(103.00f, 140.00f, 109.00f);
+        suzanne_object_struct5.cartesian_coordinates = glm::vec3(103.00f, 140.00f, 109.00f);
         suzanne_object_struct5.rotate_angle = 0.03f;
         suzanne_object_struct5.rotate_vector = glm::vec3(1.0f, 1.0f, 1.0f);
         suzanne_object_struct5.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
@@ -345,7 +344,7 @@ namespace ajokki
         ObjectStruct cat_object_struct1;
         cat_object_struct1.species_parent = cat_species;
         cat_object_struct1.original_scale_vector = glm::vec3(10.0f, 10.0f, 10.0f);
-        cat_object_struct1.cartesian_coordinates = std::make_shared<glm::vec3>(500.00f, 140.00f, 500.00f);
+        cat_object_struct1.cartesian_coordinates = glm::vec3(500.00f, 140.00f, 500.00f);
         cat_object_struct1.rotate_angle = 0.00f;
         cat_object_struct1.rotate_vector = glm::vec3(1.0f, 1.0f, 1.0f);
         cat_object_struct1.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
@@ -363,7 +362,7 @@ namespace ajokki
         ObjectStruct cat_object_struct2;
         cat_object_struct2.species_parent = cat_species;
         cat_object_struct2.original_scale_vector = glm::vec3(15.0f, 15.0f, 15.0f);
-        cat_object_struct2.cartesian_coordinates = std::make_shared<glm::vec3>(700.00f, 140.00f, 700.00f);
+        cat_object_struct2.cartesian_coordinates = glm::vec3(700.00f, 140.00f, 700.00f);
         cat_object_struct2.rotate_angle = 0.00f;
         cat_object_struct2.rotate_vector = glm::vec3(1.5f, 1.0f, 0.9f);
         cat_object_struct2.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
@@ -403,7 +402,7 @@ namespace ajokki
         HolobiontStruct turbo_polizei_object_struct1;
         turbo_polizei_object_struct1.symbiosis_parent = turbo_polizei_symbiosis;
         turbo_polizei_object_struct1.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
-        turbo_polizei_object_struct1.cartesian_coordinates = std::make_shared<glm::vec3>(85.00f, 30.00f, 175.00f);
+        turbo_polizei_object_struct1.cartesian_coordinates = glm::vec3(85.00f, 30.00f, 175.00f);
         turbo_polizei_object_struct1.rotate_angle = 0.00f;
         turbo_polizei_object_struct1.rotate_vector = glm::vec3(1.0f, 1.0f, 1.0f);
         turbo_polizei_object_struct1.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
@@ -444,7 +443,7 @@ namespace ajokki
         text3D_struct.parent = kongtext_font;
         text3D_struct.text_string = "Hello world &#x26; its habitants!";
         text3D_struct.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
-        text3D_struct.cartesian_coordinates = std::make_shared<glm::vec3>(100.00f, 100.00f, 100.00f);
+        text3D_struct.cartesian_coordinates = glm::vec3(100.00f, 100.00f, 100.00f);
         text3D_struct.rotate_angle = 0.0f;
         text3D_struct.rotate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
         text3D_struct.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);

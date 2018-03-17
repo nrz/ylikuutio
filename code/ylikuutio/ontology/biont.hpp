@@ -50,7 +50,7 @@ namespace ontology
             void bind_to_new_parent(ontology::Holobiont* const new_holobiont_parent);
 
             // constructor.
-            Biont(ontology::Universe* const universe, const BiontStruct& biont_struct)
+            Biont(ontology::Universe* const universe, BiontStruct& biont_struct)
                 : Movable(universe, biont_struct.cartesian_coordinates)
             {
                 // constructor.

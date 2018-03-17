@@ -429,6 +429,9 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/biont.cpp
     code/ylikuutio/ontology/biont.hpp
     code/ylikuutio/ontology/biont_struct.hpp
+    code/ylikuutio/ontology/camera.cpp
+    code/ylikuutio/ontology/camera.hpp
+    code/ylikuutio/ontology/camera_struct.hpp
     code/ylikuutio/ontology/creature.cpp
     code/ylikuutio/ontology/creature.hpp
     code/ylikuutio/ontology/gl_attrib_locations.cpp

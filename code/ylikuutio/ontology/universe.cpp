@@ -19,6 +19,7 @@
 #include "universe.hpp"
 #include "entity.hpp"
 #include "world.hpp"
+#include "species.hpp"
 #include "ground_level.hpp"
 #include "render_templates.hpp"
 #include "code/ylikuutio/config/setting.hpp"
@@ -506,6 +507,11 @@ namespace ontology
         hierarchy::set_child_pointer(childID, child_pointer, this->world_pointer_vector, this->free_worldID_queue, &this->number_of_worlds);
     }
 
+    ontology::Species* Universe::get_terrain_species()
+    {
+        return static_cast<ontology::Species*>(this->terrain_species);
+    }
+
     void Universe::set_terrain_species(ontology::Species* terrain_species)
     {
         this->terrain_species = terrain_species;
@@ -513,25 +519,40 @@ namespace ontology
 
     glm::mat4& Universe::get_projection_matrix()
     {
-        return this->projection_matrix;
+        return this->current_camera_projection_matrix;
+    }
+
+    void Universe::set_projection_matrix(glm::mat4& projection_matrix)
+    {
+        this->current_camera_projection_matrix = projection_matrix;
     }
 
     glm::mat4& Universe::get_view_matrix()
     {
-        return this->view_matrix;
+        return this->current_camera_view_matrix;
+    }
+
+    void Universe::set_view_matrix(glm::mat4& view_matrix)
+    {
+        this->current_camera_view_matrix = view_matrix;
+    }
+
+    GLfloat Universe::get_aspect_ratio()
+    {
+        return this->aspect_ratio;
+    }
+
+    GLfloat Universe::get_initialFoV()
+    {
+        return this->initialFoV;
     }
 
     bool Universe::compute_matrices_from_inputs()
     {
-        if (this->cartesian_coordinates == nullptr)
-        {
-            return false;
-        }
-
         if (!this->is_flight_mode_in_use)
         {
             this->fall_speed += this->gravity;
-            this->cartesian_coordinates->y -= this->fall_speed;
+            this->current_camera_cartesian_coordinates.y -= this->fall_speed;
         }
 
         GLfloat FoV = this->initialFoV;
@@ -541,11 +562,13 @@ namespace ontology
         {
             if (this->terrain_species != nullptr)
             {
-                GLfloat ground_y = ontology::get_floor_level(static_cast<ontology::Species*>(this->terrain_species), *this->cartesian_coordinates);
+                GLfloat ground_y = ontology::get_floor_level(
+                        static_cast<ontology::Species*>(this->terrain_species),
+                        this->current_camera_cartesian_coordinates);
 
-                if (!std::isnan(ground_y) && this->cartesian_coordinates->y < ground_y)
+                if (!std::isnan(ground_y) && this->current_camera_cartesian_coordinates.y < ground_y)
                 {
-                    this->cartesian_coordinates->y = ground_y;
+                    this->current_camera_cartesian_coordinates.y = ground_y;
                     this->fall_speed = 0.0f;
                 }
             }
@@ -553,30 +576,37 @@ namespace ontology
 
         if (this->testing_spherical_terrain_in_use)
         {
-            if (this->spherical_coordinates == nullptr)
-            {
-                return false;
-            }
-
             // compute spherical coordinates.
-            this->spherical_coordinates->rho = sqrt((this->cartesian_coordinates->x * this->cartesian_coordinates->x) + (this->cartesian_coordinates->y * this->cartesian_coordinates->y) + (this->cartesian_coordinates->z * this->cartesian_coordinates->z));
-            this->spherical_coordinates->theta = RADIANS_TO_DEGREES(atan2(sqrt((this->cartesian_coordinates->x * this->cartesian_coordinates->x) + (this->cartesian_coordinates->y * this->cartesian_coordinates->y)), this->cartesian_coordinates->z));
-            this->spherical_coordinates->phi = RADIANS_TO_DEGREES(atan2(this->cartesian_coordinates->y, this->cartesian_coordinates->x));
+            this->current_camera_spherical_coordinates.rho = sqrt(
+                    (this->current_camera_cartesian_coordinates.x * this->current_camera_cartesian_coordinates.x) +
+                    (this->current_camera_cartesian_coordinates.y * this->current_camera_cartesian_coordinates.y) +
+                    (this->current_camera_cartesian_coordinates.z * this->current_camera_cartesian_coordinates.z));
+            this->current_camera_spherical_coordinates.theta = RADIANS_TO_DEGREES(atan2(sqrt(
+                            (this->current_camera_cartesian_coordinates.x * this->current_camera_cartesian_coordinates.x) +
+                            (this->current_camera_cartesian_coordinates.y * this->current_camera_cartesian_coordinates.y)),
+                        this->current_camera_cartesian_coordinates.z));
+            this->current_camera_spherical_coordinates.phi = RADIANS_TO_DEGREES(atan2(
+                        this->current_camera_cartesian_coordinates.y,
+                        this->current_camera_cartesian_coordinates.x));
         }
 
         glm::vec3 camera_cartesian_coordinates;
-        camera_cartesian_coordinates.x = this->cartesian_coordinates->x;
-        camera_cartesian_coordinates.y = this->cartesian_coordinates->y;
-        camera_cartesian_coordinates.z = this->cartesian_coordinates->z;
+        camera_cartesian_coordinates.x = this->current_camera_cartesian_coordinates.x;
+        camera_cartesian_coordinates.y = this->current_camera_cartesian_coordinates.y;
+        camera_cartesian_coordinates.z = this->current_camera_cartesian_coordinates.z;
         camera_cartesian_coordinates.y += 2.0f;
 
         // Projection matrix : 45° Field of View, aspect ratio, display range : 0.1 unit <-> 100 units
-        this->projection_matrix = glm::perspective(DEGREES_TO_RADIANS(FoV), aspect_ratio, 0.001f, 5000.0f + 2.0f * static_cast<GLfloat>(this->planet_radius));
+        this->current_camera_projection_matrix = glm::perspective(
+                DEGREES_TO_RADIANS(FoV),
+                this->aspect_ratio,
+                0.001f,
+                5000.0f + 2.0f * static_cast<GLfloat>(this->planet_radius));
         // Camera matrix
-        this->view_matrix = glm::lookAt(
-                camera_cartesian_coordinates,                   // Camera is here
-                camera_cartesian_coordinates + this->direction, // and looks here : at the same position, plus "direction"
-                this->up                                        // Head is up (set to 0,-1,0 to look upside-down)
+        this->current_camera_view_matrix = glm::lookAt(
+                camera_cartesian_coordinates,                                  // Camera is here
+                camera_cartesian_coordinates + this->current_camera_direction, // and looks here : at the same position, plus "current_camera_direction"
+                this->current_camera_up                                        // Head is up (set to 0,-1,0 to look upside-down)
                 );
 
         return true;

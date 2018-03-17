@@ -18,7 +18,6 @@
 
 // Include standard headers
 #include <iostream>   // std::cout, std::cin, std::cerr
-#include <memory>     // std::make_shared, std::shared_ptr
 #include <string>     // std::string
 
 namespace ontology
@@ -114,7 +113,7 @@ namespace ajokki
         // Create Joensuu center west terrain.
         ObjectStruct joensuu_center_west_struct;
         joensuu_center_west_struct.species_parent = joensuu_center_west_terrain_species;
-        joensuu_center_west_struct.cartesian_coordinates = std::make_shared<glm::vec3>(0.0f, 0.0f, 0.0f);
+        joensuu_center_west_struct.cartesian_coordinates = glm::vec3(0.0f, 0.0f, 0.0f);
         joensuu_center_west_struct.rotate_angle = 0.0f;
         joensuu_center_west_struct.rotate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
         joensuu_center_west_struct.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
@@ -162,7 +161,7 @@ namespace ajokki
         ObjectStruct horse_object_struct1;
         horse_object_struct1.species_parent = horse_species;
         horse_object_struct1.original_scale_vector = glm::vec3(5.0f, 5.0f, 5.0f);
-        horse_object_struct1.cartesian_coordinates = std::make_shared<glm::vec3>(2150.00f, 200.00f, 1990.00f);
+        horse_object_struct1.cartesian_coordinates = glm::vec3(2150.00f, 200.00f, 1990.00f);
         horse_object_struct1.rotate_angle = 0.00f;
         horse_object_struct1.rotate_vector = glm::vec3(1.0f, 1.0f, 1.0f);
         horse_object_struct1.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);

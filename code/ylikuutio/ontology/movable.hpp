@@ -11,7 +11,7 @@
 #endif
 
 // Include standard headers
-#include <memory> // std::make_shared, std::shared_ptr
+#include <cmath>  // NAN, std::isnan, std::pow
 
 // `Movable` is a mixin class, not intended to be instantiated.
 
@@ -23,25 +23,29 @@ namespace ontology
     {
         public:
             // constructor.
-            Movable(ontology::Universe* const universe, std::shared_ptr<glm::vec3> cartesian_coordinates) 
+            Movable(ontology::Universe* const universe, glm::vec3& cartesian_coordinates)
                 : Entity(universe)
             {
                 // constructor.
                 this->cartesian_coordinates = cartesian_coordinates;
-                this->spherical_coordinates = nullptr;
+                this->spherical_coordinates.rho = NAN;
+                this->spherical_coordinates.theta = NAN;
+                this->spherical_coordinates.phi = NAN;
             }
 
             // constructor.
-            Movable(ontology::Universe* const universe, std::shared_ptr<SphericalCoordinatesStruct> spherical_coordinates) 
+            Movable(ontology::Universe* const universe, const SphericalCoordinatesStruct& spherical_coordinates)
                 : Entity(universe)
             {
                 // constructor.
-                this->cartesian_coordinates = nullptr;
+                this->cartesian_coordinates = glm::vec3(NAN, NAN, NAN);
                 this->spherical_coordinates = spherical_coordinates;
             }
 
             // destructor.
             virtual ~Movable();
+
+            glm::vec3& get_cartesian_coordinates();
 
             // Public callbacks (to be called from AI scripts written in
             // TinyScheme). These are the functions that are available
@@ -99,11 +103,23 @@ namespace ontology
 
             // Public callbacks end here.
 
-            std::shared_ptr<glm::vec3> cartesian_coordinates;                  // cartesian coordinates.
-            std::shared_ptr<SphericalCoordinatesStruct> spherical_coordinates; // spherical coordinates.
+            // `cartesian_coordinates` can be accessed as a vector or as single coordinates `x`, `y`, `z`.
+            glm::vec3 cartesian_coordinates;                  // cartesian coordinates.
 
-            std::shared_ptr<glm::vec3> dest_cartesian_coordinates;                  // cartesian destination coordinates.
-            std::shared_ptr<SphericalCoordinatesStruct> dest_spherical_coordinates; // spherical destination coordinates.
+            // `spherical_coordinates` can be accessed as a vector or as single coordinates `rho`, `theta`, `phi`.
+            SphericalCoordinatesStruct spherical_coordinates; // spherical coordinates.
+
+            glm::vec3 dest_cartesian_coordinates;                  // cartesian destination coordinates.
+            SphericalCoordinatesStruct dest_spherical_coordinates; // spherical destination coordinates.
+
+            // `direction` can be accessed as a vector or as single coordinates `pitch`, `roll`, `yaw`.
+            glm::vec3 direction;
+
+            glm::vec3 right; // note: `right` can not be set directly using console.
+            glm::vec3 up;    // note: `up` can not be set directly using console.
+
+            double horizontal_angle;
+            double vertical_angle;
     };
 }
 

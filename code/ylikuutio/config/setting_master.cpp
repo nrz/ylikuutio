@@ -378,8 +378,7 @@ namespace config
             return nullptr;
         }
 
-        delete universe->spherical_coordinates; // delete the old `SphericalCoordinatesStruct`.
-        universe->spherical_coordinates = spherical_coordinates_any_value->spherical_coordinates_struct_pointer;
+        universe->current_camera_spherical_coordinates = *spherical_coordinates_any_value->spherical_coordinates_struct_pointer;
         return nullptr;
     }
 
@@ -392,7 +391,7 @@ namespace config
 
         ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
 
-        if (universe == nullptr || universe->spherical_coordinates == nullptr)
+        if (universe == nullptr)
         {
             return nullptr;
         }
@@ -409,7 +408,7 @@ namespace config
             return nullptr;
         }
 
-        universe->spherical_coordinates->rho = rho_any_value->float_value;
+        universe->current_camera_spherical_coordinates.rho = rho_any_value->float_value;
         return nullptr;
     }
 
@@ -422,7 +421,7 @@ namespace config
 
         ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
 
-        if (universe == nullptr || universe->spherical_coordinates == nullptr)
+        if (universe == nullptr)
         {
             return nullptr;
         }
@@ -439,7 +438,7 @@ namespace config
             return nullptr;
         }
 
-        universe->spherical_coordinates->theta = theta_any_value->float_value;
+        universe->current_camera_spherical_coordinates.theta = theta_any_value->float_value;
         return nullptr;
     }
 
@@ -452,7 +451,7 @@ namespace config
 
         ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
 
-        if (universe == nullptr || universe->spherical_coordinates == nullptr)
+        if (universe == nullptr)
         {
             return nullptr;
         }
@@ -469,7 +468,7 @@ namespace config
             return nullptr;
         }
 
-        universe->spherical_coordinates->phi = phi_any_value->float_value;
+        universe->current_camera_spherical_coordinates.phi = phi_any_value->float_value;
         return nullptr;
     }
 
@@ -494,8 +493,7 @@ namespace config
             return nullptr;
         }
 
-        delete universe->cartesian_coordinates; // delete the old `glm::vec3`.
-        universe->cartesian_coordinates = cartesian_coordinates_any_value->glm_vec3_pointer;
+        universe->current_camera_cartesian_coordinates = glm::vec3(*cartesian_coordinates_any_value->glm_vec3_pointer);
         return nullptr;
     }
 
@@ -508,7 +506,7 @@ namespace config
 
         ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
 
-        if (universe == nullptr || universe->cartesian_coordinates == nullptr)
+        if (universe == nullptr)
         {
             return nullptr;
         }
@@ -525,7 +523,7 @@ namespace config
             return nullptr;
         }
 
-        universe->cartesian_coordinates->x = x_any_value->float_value;
+        universe->current_camera_cartesian_coordinates.x = x_any_value->float_value;
         return nullptr;
     }
 
@@ -538,7 +536,7 @@ namespace config
 
         ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
 
-        if (universe == nullptr || universe->cartesian_coordinates == nullptr)
+        if (universe == nullptr)
         {
             return nullptr;
         }
@@ -555,7 +553,7 @@ namespace config
             return nullptr;
         }
 
-        universe->cartesian_coordinates->y = y_any_value->float_value;
+        universe->current_camera_cartesian_coordinates.y = y_any_value->float_value;
         return nullptr;
     }
 
@@ -568,7 +566,7 @@ namespace config
 
         ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
 
-        if (universe == nullptr || universe->cartesian_coordinates == nullptr)
+        if (universe == nullptr)
         {
             return nullptr;
         }
@@ -585,7 +583,7 @@ namespace config
             return nullptr;
         }
 
-        universe->cartesian_coordinates->z = z_any_value->float_value;
+        universe->current_camera_cartesian_coordinates.z = z_any_value->float_value;
         return nullptr;
     }
 
@@ -615,7 +613,7 @@ namespace config
             return nullptr;
         }
 
-        universe->horizontal_angle = horizontal_angle_any_value->double_value;
+        universe->current_camera_horizontal_angle = horizontal_angle_any_value->double_value;
         return nullptr;
     }
 
@@ -645,7 +643,7 @@ namespace config
             return nullptr;
         }
 
-        universe->vertical_angle = vertical_angle_any_value->double_value;
+        universe->current_camera_vertical_angle = vertical_angle_any_value->double_value;
         return nullptr;
     }
 
@@ -808,12 +806,12 @@ namespace config
 
         ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
 
-        if (universe == nullptr || universe->cartesian_coordinates == nullptr)
+        if (universe == nullptr)
         {
             return nullptr;
         }
 
-        return std::make_shared<datatypes::AnyValue>(universe->cartesian_coordinates->x);
+        return std::make_shared<datatypes::AnyValue>(universe->current_camera_cartesian_coordinates.x);
     }
 
     std::shared_ptr<datatypes::AnyValue> SettingMaster::read_y(ontology::Entity* const entity, config::SettingMaster* const setting_master)
@@ -825,12 +823,12 @@ namespace config
 
         ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
 
-        if (universe == nullptr || universe->cartesian_coordinates == nullptr)
+        if (universe == nullptr)
         {
             return nullptr;
         }
 
-        return std::make_shared<datatypes::AnyValue>(universe->cartesian_coordinates->y);
+        return std::make_shared<datatypes::AnyValue>(universe->current_camera_cartesian_coordinates.y);
     }
 
     std::shared_ptr<datatypes::AnyValue> SettingMaster::read_z(ontology::Entity* const entity, config::SettingMaster* const setting_master)
@@ -842,12 +840,12 @@ namespace config
 
         ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
 
-        if (universe == nullptr || universe->cartesian_coordinates == nullptr)
+        if (universe == nullptr)
         {
             return nullptr;
         }
 
-        return std::make_shared<datatypes::AnyValue>(universe->cartesian_coordinates->z);
+        return std::make_shared<datatypes::AnyValue>(universe->current_camera_cartesian_coordinates.z);
     }
 
     std::shared_ptr<datatypes::AnyValue> SettingMaster::read_rho(ontology::Entity* const entity, config::SettingMaster* const setting_master)
@@ -859,12 +857,12 @@ namespace config
 
         ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
 
-        if (universe == nullptr || universe->spherical_coordinates == nullptr)
+        if (universe == nullptr)
         {
             return nullptr;
         }
 
-        return std::make_shared<datatypes::AnyValue>(universe->spherical_coordinates->rho);
+        return std::make_shared<datatypes::AnyValue>(universe->current_camera_spherical_coordinates.rho);
     }
 
     std::shared_ptr<datatypes::AnyValue> SettingMaster::read_theta(ontology::Entity* const entity, config::SettingMaster* const setting_master)
@@ -876,12 +874,12 @@ namespace config
 
         ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
 
-        if (universe == nullptr || universe->spherical_coordinates == nullptr)
+        if (universe == nullptr)
         {
             return nullptr;
         }
 
-        return std::make_shared<datatypes::AnyValue>(universe->spherical_coordinates->theta);
+        return std::make_shared<datatypes::AnyValue>(universe->current_camera_spherical_coordinates.theta);
     }
 
     std::shared_ptr<datatypes::AnyValue> SettingMaster::read_phi(ontology::Entity* const entity, config::SettingMaster* const setting_master)
@@ -893,12 +891,12 @@ namespace config
 
         ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
 
-        if (universe == nullptr || universe->spherical_coordinates == nullptr)
+        if (universe == nullptr)
         {
             return nullptr;
         }
 
-        return std::make_shared<datatypes::AnyValue>(universe->spherical_coordinates->phi);
+        return std::make_shared<datatypes::AnyValue>(universe->current_camera_spherical_coordinates.phi);
     }
 
     std::shared_ptr<datatypes::AnyValue> SettingMaster::read_up(ontology::Entity* const entity, config::SettingMaster* const setting_master)
@@ -915,7 +913,7 @@ namespace config
             return nullptr;
         }
 
-        return std::make_shared<datatypes::AnyValue>(&universe->up);
+        return std::make_shared<datatypes::AnyValue>(&universe->current_camera_up);
     }
 
     std::shared_ptr<datatypes::AnyValue> SettingMaster::read_right(ontology::Entity* const entity, config::SettingMaster* const setting_master)
@@ -932,7 +930,7 @@ namespace config
             return nullptr;
         }
 
-        return std::make_shared<datatypes::AnyValue>(&universe->right);
+        return std::make_shared<datatypes::AnyValue>(&universe->current_camera_right);
     }
 
     std::shared_ptr<datatypes::AnyValue> SettingMaster::read_horizontal_angle(ontology::Entity* const entity, config::SettingMaster* const setting_master)
@@ -949,7 +947,7 @@ namespace config
             return nullptr;
         }
 
-        return std::make_shared<datatypes::AnyValue>(universe->horizontal_angle);
+        return std::make_shared<datatypes::AnyValue>(universe->current_camera_horizontal_angle);
     }
 
     std::shared_ptr<datatypes::AnyValue> SettingMaster::read_vertical_angle(ontology::Entity* const entity, config::SettingMaster* const setting_master)
@@ -966,7 +964,7 @@ namespace config
             return nullptr;
         }
 
-        return std::make_shared<datatypes::AnyValue>(universe->vertical_angle);
+        return std::make_shared<datatypes::AnyValue>(universe->current_camera_vertical_angle);
     }
 
     std::shared_ptr<datatypes::AnyValue> SettingMaster::read_is_flight_mode_in_use(ontology::Entity* const entity, config::SettingMaster* const setting_master)

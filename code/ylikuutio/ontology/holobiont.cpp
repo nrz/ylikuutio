@@ -112,7 +112,7 @@ namespace ontology
             biont_struct.initial_rotate_angle  = this->initial_rotate_angle;
             biont_struct.initial_rotate_vector = this->initial_rotate_vector;
             biont_struct.quaternions_in_use    = this->quaternions_in_use;
-            biont_struct.cartesian_coordinates = std::make_shared<glm::vec3>(*this->cartesian_coordinates);
+            biont_struct.cartesian_coordinates = this->cartesian_coordinates;
             biont_struct.translate_vector      = this->translate_vector;
             biont_struct.texture               = this->symbiosis_parent->get_texture(biontID);
 

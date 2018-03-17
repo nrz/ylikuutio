@@ -358,7 +358,7 @@ int main(int argc, char* argv[])
     // Create altiplano terrain.
     ObjectStruct altiplano_struct;
     altiplano_struct.species_parent = altiplano_terrain_species;
-    altiplano_struct.cartesian_coordinates = std::make_shared<glm::vec3>(0.0f, 0.0f, 0.0f);
+    altiplano_struct.cartesian_coordinates = glm::vec3(0.0f, 0.0f, 0.0f);
     altiplano_struct.rotate_angle = 0.0f;
     altiplano_struct.rotate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
     altiplano_struct.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
@@ -931,38 +931,36 @@ int main(int argc, char* argv[])
                 my_universe->has_mouse_ever_moved = true;
 
                 // Compute new orientation
-                my_universe->horizontal_angle += my_universe->mouse_speed * GLfloat(my_universe->get_window_width() / 2 - xpos);
-                my_universe->horizontal_angle = remainder(my_universe->horizontal_angle, (2.0f * PI));
+                my_universe->current_camera_horizontal_angle += my_universe->mouse_speed * GLfloat(my_universe->get_window_width() / 2 - xpos);
+                my_universe->current_camera_horizontal_angle = remainder(my_universe->current_camera_horizontal_angle, (2.0f * PI));
 
                 if (my_universe->is_invert_mouse_in_use)
                 {
                     // invert mouse.
-                    my_universe->vertical_angle -= my_universe->mouse_speed * GLfloat(my_universe->get_window_height() / 2 - ypos);
+                    my_universe->current_camera_vertical_angle -= my_universe->mouse_speed * GLfloat(my_universe->get_window_height() / 2 - ypos);
                 }
                 else
                 {
                     // don't invert mouse.
-                    my_universe->vertical_angle += my_universe->mouse_speed * GLfloat(my_universe->get_window_height() / 2 - ypos);
+                    my_universe->current_camera_vertical_angle += my_universe->mouse_speed * GLfloat(my_universe->get_window_height() / 2 - ypos);
                 }
-                my_universe->vertical_angle = remainder(my_universe->vertical_angle, (2.0f * PI));
+                my_universe->current_camera_vertical_angle = remainder(my_universe->current_camera_vertical_angle, (2.0f * PI));
             }
 
             // Direction : Spherical coordinates to Cartesian coordinates conversion
-            my_universe->direction = glm::vec3(
-                    cos(my_universe->vertical_angle) * sin(my_universe->horizontal_angle),
-                    sin(my_universe->vertical_angle),
-                    cos(my_universe->vertical_angle) * cos(my_universe->horizontal_angle)
-                    );
+            my_universe->current_camera_direction = glm::vec3(
+                    cos(my_universe->current_camera_vertical_angle) * sin(my_universe->current_camera_horizontal_angle),
+                    sin(my_universe->current_camera_vertical_angle),
+                    cos(my_universe->current_camera_vertical_angle) * cos(my_universe->current_camera_horizontal_angle));
 
             // Right vector
-            my_universe->right = glm::vec3(
-                    sin(my_universe->horizontal_angle - PI/2.0f),
+            my_universe->current_camera_right = glm::vec3(
+                    sin(my_universe->current_camera_horizontal_angle - PI/2.0f),
                     0,
-                    cos(my_universe->horizontal_angle - PI/2.0f)
-                    );
+                    cos(my_universe->current_camera_horizontal_angle - PI/2.0f));
 
             // Up vector
-            my_universe->up = glm::cross(my_universe->right, my_universe->direction);
+            my_universe->current_camera_up = glm::cross(my_universe->current_camera_right, my_universe->current_camera_direction);
 
             // Check for key releases and call corresponding callbacks.
             for (uint32_t i = 0; i < (*current_keyrelease_callback_engine_vector_pointer)->size(); i++)
@@ -1100,20 +1098,20 @@ int main(int argc, char* argv[])
             printing_struct.font_size = my_universe->get_font_size();
             printing_struct.char_font_texture_file_format = "bmp";
 
-            if (my_universe != nullptr && my_universe->cartesian_coordinates != nullptr)
+            if (my_universe != nullptr)
             {
                 char angles_and_coordinates_text[256];
                 std::snprintf(
                         angles_and_coordinates_text,
                         sizeof(angles_and_coordinates_text),
                         "%.2f,%.2f rad; %.2f,%.2f deg\\n(%.2f,%.2f,%.2f)",
-                        my_universe->horizontal_angle,
-                        my_universe->vertical_angle,
-                        RADIANS_TO_DEGREES(my_universe->horizontal_angle),
-                        RADIANS_TO_DEGREES(my_universe->vertical_angle),
-                        my_universe->cartesian_coordinates->x,
-                        my_universe->cartesian_coordinates->y,
-                        my_universe->cartesian_coordinates->z);
+                        my_universe->current_camera_horizontal_angle,
+                        my_universe->current_camera_vertical_angle,
+                        RADIANS_TO_DEGREES(my_universe->current_camera_horizontal_angle),
+                        RADIANS_TO_DEGREES(my_universe->current_camera_vertical_angle),
+                        my_universe->current_camera_cartesian_coordinates.x,
+                        my_universe->current_camera_cartesian_coordinates.y,
+                        my_universe->current_camera_cartesian_coordinates.z);
 
                 char time_text[256];
                 std::snprintf(time_text, sizeof(time_text), "%.2f sec", ylikuutio::time::get_time());
@@ -1154,9 +1152,9 @@ int main(int argc, char* argv[])
                             spherical_coordinates_text,
                             sizeof(spherical_coordinates_text),
                             "rho:%.2f theta:%.2f phi:%.2f",
-                            my_universe->spherical_coordinates->rho,
-                            my_universe->spherical_coordinates->theta,
-                            my_universe->spherical_coordinates->phi);
+                            my_universe->current_camera_spherical_coordinates.rho,
+                            my_universe->current_camera_spherical_coordinates.theta,
+                            my_universe->current_camera_spherical_coordinates.phi);
                 }
 
                 // print cartesian coordinates on bottom left corner.
