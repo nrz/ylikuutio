@@ -27,14 +27,14 @@
 #endif
 
 // Include standard headers
-#include <cmath>    // NAN, std::isnan, std::pow
-#include <iostream> // std::cout, std::cin, std::cerr
-#include <memory>   // std::make_shared, std::shared_ptr
-#include <queue>    // std::queue
+#include <cmath>         // NAN, std::isnan, std::pow
+#include <iostream>      // std::cout, std::cin, std::cerr
+#include <memory>        // std::make_shared, std::shared_ptr
+#include <queue>         // std::queue
 #include <unordered_map> // std::unordered_map
-#include <stdint.h> // uint32_t etc.
-#include <string>   // std::string
-#include <vector>   // std::vector
+#include <stdint.h>      // uint32_t etc.
+#include <string>        // std::string
+#include <vector>        // std::vector
 
 // `Universe`, `Scene`, `Shader`, `Material`, `Species`, `Object`.
 // `Universe`, `Scene`, `Shader`, `Material`, `VectorFont`, `Glyph`, `Object`.
