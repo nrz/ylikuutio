@@ -142,7 +142,7 @@ namespace config
                 console->print_text(setting_master->help());
             }
         }
-        else
+        else if (command_parameters.size() == 2)
         {
             std::string setting_name = command_parameters.at(0);
 
