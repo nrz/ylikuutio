@@ -74,25 +74,8 @@ namespace ontology
     class Font2D;
 }
 
-typedef std::shared_ptr<datatypes::AnyValue> (*ActivateCallback) (ontology::Entity* entity, config::SettingMaster* setting_master);
-typedef std::shared_ptr<datatypes::AnyValue> (*ReadCallback) (ontology::Entity* entity, config::SettingMaster* setting_master);
 typedef std::shared_ptr<datatypes::AnyValue> (*PreRenderCallback) (ontology::Entity* entity, config::SettingMaster* setting_master);
 typedef std::shared_ptr<datatypes::AnyValue> (*PostRenderCallback) (ontology::Entity* entity, config::SettingMaster* setting_master);
-
-typedef struct SettingStruct
-{
-    SettingStruct(std::shared_ptr<datatypes::AnyValue> initial_value)
-        : initial_value(initial_value), should_ylikuutio_call_activate_callback_now(true), setting_master(nullptr), activate_callback(nullptr), read_callback(nullptr)
-    {
-        // constructor.
-    }
-    std::string name;
-    std::shared_ptr<datatypes::AnyValue> initial_value;
-    config::SettingMaster* setting_master;
-    ActivateCallback activate_callback;
-    ReadCallback read_callback;
-    bool should_ylikuutio_call_activate_callback_now;
-} SettingStruct;
 
 typedef struct PrintingStruct
 {

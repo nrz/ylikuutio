@@ -320,10 +320,13 @@ add_library(ylikuutio STATIC
     code/ylikuutio/common/spherical_coordinates_struct.hpp
 
     # config, in alphabetical order.
+    code/ylikuutio/config/activate_callback.hpp
+    code/ylikuutio/config/read_callback.hpp
     code/ylikuutio/config/setting.cpp
     code/ylikuutio/config/setting.hpp
     code/ylikuutio/config/setting_master.cpp
     code/ylikuutio/config/setting_master.hpp
+    code/ylikuutio/config/setting_struct.hpp
 
     # console, in alphabetical order.
     code/ylikuutio/console/command_and_callback_struct.hpp
