@@ -83,7 +83,7 @@ namespace ontology
         // destructor.
         std::cout << "Scene with childID " << std::dec << this->childID << " will be destroyed.\n";
 
-        // destroy all shaders of this scene.
+        // destroy all `Shader`s of this `Scene`.
         std::cout << "All shaders of this scene will be destroyed.\n";
         hierarchy::delete_children<ontology::Shader*>(this->shader_pointer_vector, &this->number_of_shaders);
 
@@ -97,7 +97,7 @@ namespace ontology
             this->parent->set_active_scene(nullptr);
         }
 
-        // set pointer to this scene to nullptr.
+        // set pointer to this `Scene` to `nullptr`.
         this->parent->set_scene_pointer(this->childID, nullptr);
     }
 
