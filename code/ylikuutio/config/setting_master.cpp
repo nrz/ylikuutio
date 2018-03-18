@@ -111,9 +111,10 @@ namespace config
         }
         else if (command_parameters.size() == 1)
         {
+            // Exactly 1 parameter.
+
             std::string setting_name = command_parameters.at(0);
 
-            // One (1) command parameter.
             // Print current value of the given variable.
             if (setting_master->is_setting(setting_name))
             {
@@ -144,9 +145,10 @@ namespace config
         }
         else if (command_parameters.size() == 2)
         {
+            // Exactly 2 parameters.
+
             std::string setting_name = command_parameters.at(0);
 
-            // At least 2 variables.
             // Check the validity of the variable name.
             if (setting_master->is_setting(setting_name))
             {
@@ -199,9 +201,10 @@ namespace config
         }
         else if (command_parameters.size() == 1)
         {
+            // Exactly 1 parameter.
+
             std::string setting_name = command_parameters.at(0);
 
-            // One (1) command parameter.
             // Print valid values of the given variable.
             if (setting_master->is_setting(setting_name))
             {
