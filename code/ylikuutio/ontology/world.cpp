@@ -35,9 +35,6 @@ namespace ontology
         // destroy all scenes of this world.
         std::cout << "All scenes of this world will be destroyed.\n";
         hierarchy::delete_children<ontology::Scene*>(this->scene_pointer_vector, &this->number_of_scenes);
-
-        std::cout << "The setting master of this world will be destroyed.\n";
-        delete this->setting_master;
     }
 
     void World::render()

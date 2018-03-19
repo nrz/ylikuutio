@@ -85,9 +85,6 @@ namespace ontology
         std::cout << "All worlds of this universe will be destroyed.\n";
         hierarchy::delete_children<ontology::World*>(this->world_pointer_vector, &this->number_of_worlds);
 
-        std::cout << "The setting master of this universe will be destroyed.\n";
-        delete this->setting_master;
-
         std::cout << "The entity factory of this universe will be destroyed.\n";
         delete this->entity_factory;
 

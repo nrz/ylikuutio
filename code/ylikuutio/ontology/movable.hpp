@@ -3,6 +3,10 @@
 
 #include "entity.hpp"
 #include "code/ylikuutio/common/spherical_coordinates_struct.hpp"
+#include "code/ylikuutio/config/setting.hpp"
+#include "code/ylikuutio/config/setting_master.hpp"
+#include "code/ylikuutio/config/setting_struct.hpp"
+#include "code/ylikuutio/common/any_value.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -12,6 +16,7 @@
 
 // Include standard headers
 #include <cmath>  // NAN, std::isnan, std::pow
+#include <memory> // std::make_shared, std::shared_ptr
 
 // `Movable` is a mixin class, not intended to be instantiated.
 
@@ -27,10 +32,48 @@ namespace ontology
                 : Entity(universe)
             {
                 // constructor.
-                this->cartesian_coordinates = cartesian_coordinates;
+                this->cartesian_coordinates.x = cartesian_coordinates.x;
+                this->cartesian_coordinates.y = cartesian_coordinates.y;
+                this->cartesian_coordinates.z = cartesian_coordinates.z;
                 this->spherical_coordinates.rho = NAN;
                 this->spherical_coordinates.theta = NAN;
                 this->spherical_coordinates.phi = NAN;
+
+                float float_x = cartesian_coordinates.x;
+                float float_y = cartesian_coordinates.y;
+                float float_z = cartesian_coordinates.z;
+
+                SettingStruct cartesian_coordinates_setting_struct(std::make_shared<datatypes::AnyValue>(new glm::vec3(float_x, float_y, float_z)));
+                cartesian_coordinates_setting_struct.name = "cartesian_coordinates";
+                cartesian_coordinates_setting_struct.setting_master = this->setting_master;
+                cartesian_coordinates_setting_struct.activate_callback = &config::SettingMaster::activate_cartesian_coordinates;
+                cartesian_coordinates_setting_struct.should_ylikuutio_call_activate_callback_now = true;
+                std::cout << "Executing `new config::Setting(cartesian_coordinates_setting_struct);` ...\n";
+                new config::Setting(cartesian_coordinates_setting_struct);
+
+                SettingStruct x_setting_struct(std::make_shared<datatypes::AnyValue>(float_x));
+                x_setting_struct.name = "x";
+                x_setting_struct.setting_master = this->setting_master;
+                x_setting_struct.activate_callback = &config::SettingMaster::activate_x;
+                x_setting_struct.should_ylikuutio_call_activate_callback_now = true;
+                std::cout << "Executing `new config::Setting(x_setting_struct);` ...\n";
+                new config::Setting(x_setting_struct);
+
+                SettingStruct y_setting_struct(std::make_shared<datatypes::AnyValue>(float_y));
+                y_setting_struct.name = "y";
+                y_setting_struct.setting_master = this->setting_master;
+                y_setting_struct.activate_callback = &config::SettingMaster::activate_y;
+                y_setting_struct.should_ylikuutio_call_activate_callback_now = true;
+                std::cout << "Executing `new config::Setting(y_setting_struct);` ...\n";
+                new config::Setting(y_setting_struct);
+
+                SettingStruct z_setting_struct(std::make_shared<datatypes::AnyValue>(float_z));
+                z_setting_struct.name = "z";
+                z_setting_struct.setting_master = this->setting_master;
+                z_setting_struct.activate_callback = &config::SettingMaster::activate_z;
+                z_setting_struct.should_ylikuutio_call_activate_callback_now = true;
+                std::cout << "Executing `new config::Setting(z_setting_struct);` ...\n";
+                new config::Setting(z_setting_struct);
             }
 
             // constructor.
@@ -38,6 +81,7 @@ namespace ontology
                 : Entity(universe)
             {
                 // constructor.
+                this->setting_master = new config::SettingMaster(this);
                 this->cartesian_coordinates = glm::vec3(NAN, NAN, NAN);
                 this->spherical_coordinates = spherical_coordinates;
             }
