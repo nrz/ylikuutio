@@ -1139,7 +1139,7 @@ int main(int argc, char* argv[])
                         "Ctrl+Ctrl extra turbo\\n"
                         "for debugging:\\n"
                         "G  grass texture\\n"
-                        "U  uvmap texture\\n"
+                        "P  pink geometric tiles texture\\n"
                         "T  terrain species\\n"
                         "A  suzanne species\\n",
                         (my_universe->is_invert_mouse_in_use ? on_text : off_text),
