@@ -91,6 +91,7 @@ namespace config
 
             static std::shared_ptr<datatypes::AnyValue> activate_is_flight_mode_in_use(ontology::Entity* const entity, config::SettingMaster* const setting_master);
 
+            static std::shared_ptr<datatypes::AnyValue> read_cartesian_coordinates(ontology::Entity* const entity, config::SettingMaster* const setting_master);
             static std::shared_ptr<datatypes::AnyValue> read_x(ontology::Entity* const entity, config::SettingMaster* const setting_master);
             static std::shared_ptr<datatypes::AnyValue> read_y(ontology::Entity* const entity, config::SettingMaster* const setting_master);
             static std::shared_ptr<datatypes::AnyValue> read_z(ontology::Entity* const entity, config::SettingMaster* const setting_master);
