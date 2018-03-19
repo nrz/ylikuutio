@@ -571,7 +571,7 @@ int main(int argc, char* argv[])
     new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(&suzanne_species_string), false, switch_to_grass_material_callback_object);
     new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(&grass_material_string), false, switch_to_grass_material_callback_object);
 
-    // Callback code for U: switch back to pink_geometric_tiles_material.
+    // Callback code for P: switch to pink_geometric_tiles_material.
     std::string pink_geometric_tiles_material_string = "pink_geometric_tiles_material";
     callback_system::CallbackEngine* switch_to_pink_geometric_tiles_material_callback_engine = new callback_system::CallbackEngine();
     callback_system::CallbackObject* switch_to_pink_geometric_tiles_material_callback_object = new callback_system::CallbackObject(
