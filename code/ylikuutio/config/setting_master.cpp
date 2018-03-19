@@ -127,7 +127,16 @@ namespace config
                 }
                 else if (setting != nullptr && setting->setting_value != nullptr)
                 {
-                    console->print_text(setting->read_callback(entity, setting_master)->get_string());
+                    std::shared_ptr<datatypes::AnyValue> any_value_shared_ptr = setting->read_callback(entity, setting_master);
+
+                    if (any_value_shared_ptr != nullptr)
+                    {
+                        console->print_text(any_value_shared_ptr->get_string());
+                    }
+                    else
+                    {
+                        console->print_text("read_callback returned nullptr");
+                    }
                 }
                 else
                 {
@@ -217,7 +226,16 @@ namespace config
                 }
                 else if (setting != nullptr && setting->setting_value != nullptr)
                 {
-                    console->print_text(setting->read_callback(entity, setting_master)->get_string());
+                    std::shared_ptr<datatypes::AnyValue> any_value_shared_ptr = setting->read_callback(entity, setting_master);
+
+                    if (any_value_shared_ptr != nullptr)
+                    {
+                        console->print_text(any_value_shared_ptr->get_string());
+                    }
+                    else
+                    {
+                        console->print_text("read_callback returned nullptr");
+                    }
                 }
                 else
                 {
