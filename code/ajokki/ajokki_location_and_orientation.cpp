@@ -76,6 +76,7 @@ namespace ajokki
         cartesian_coordinates_setting_struct.name = "cartesian_coordinates";
         cartesian_coordinates_setting_struct.setting_master = setting_master;
         cartesian_coordinates_setting_struct.activate_callback = &config::SettingMaster::activate_cartesian_coordinates;
+        cartesian_coordinates_setting_struct.read_callback = &config::SettingMaster::read_cartesian_coordinates;
         cartesian_coordinates_setting_struct.should_ylikuutio_call_activate_callback_now = true;
         std::cout << "Executing `new config::Setting(cartesian_coordinates_setting_struct);` ...\n";
         new config::Setting(cartesian_coordinates_setting_struct);

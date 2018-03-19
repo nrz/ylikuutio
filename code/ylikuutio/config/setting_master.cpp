@@ -1110,6 +1110,30 @@ namespace config
         return nullptr;
     }
 
+    std::shared_ptr<datatypes::AnyValue> SettingMaster::read_cartesian_coordinates(ontology::Entity* const entity, config::SettingMaster* const setting_master)
+    {
+        if (entity == nullptr)
+        {
+            return nullptr;
+        }
+
+        ontology::Movable* movable = dynamic_cast<ontology::Movable*>(entity);
+
+        if (movable != nullptr)
+        {
+            return std::make_shared<datatypes::AnyValue>(&movable->cartesian_coordinates);
+        }
+
+        ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
+
+        if (universe == nullptr)
+        {
+            return nullptr;
+        }
+
+        return std::make_shared<datatypes::AnyValue>(&universe->current_camera_cartesian_coordinates);
+    }
+
     std::shared_ptr<datatypes::AnyValue> SettingMaster::read_x(ontology::Entity* const entity, config::SettingMaster* const setting_master)
     {
         if (entity == nullptr)
