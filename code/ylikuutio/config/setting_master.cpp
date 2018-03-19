@@ -142,14 +142,12 @@ namespace config
                 {
                     // Invalid variable name.
                     console->print_text("invalid variable name");
-                    console->print_text(setting_master->help());
                 }
             }
             else
             {
                 // Invalid variable name.
                 console->print_text("invalid variable name");
-                console->print_text(setting_master->help());
             }
         }
         else if (command_parameters.size() == 2)
