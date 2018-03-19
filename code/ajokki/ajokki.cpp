@@ -1126,7 +1126,7 @@ int main(int argc, char* argv[])
                 std::snprintf(
                         help_text_char,
                         sizeof(help_text_char),
-                        "Ajokki v. 0.0.2\\n"
+                        "Ajokki 0.0.2\\n"
                         "\\n"
                         "arrow keys\\n"
                         "space jump\\n"
