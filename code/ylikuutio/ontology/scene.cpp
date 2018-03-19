@@ -11,6 +11,7 @@
 #include "world.hpp"
 #include "ground_level.hpp"
 #include "shader.hpp"
+#include "camera.hpp"
 #include "render_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/common/pi.hpp"
@@ -29,7 +30,7 @@
 
 namespace ontology
 {
-    void Scene::bind(ontology::Shader* const shader)
+    void Scene::bind_shader(ontology::Shader* const shader)
     {
         // get `childID` from `Scene` and set pointer to `shader`.
         hierarchy::bind_child_to_parent<ontology::Shader*>(
@@ -39,7 +40,17 @@ namespace ontology
                 &this->number_of_shaders);
     }
 
-    void Scene::unbind(const int32_t childID)
+    void Scene::bind_camera(ontology::Camera* const camera)
+    {
+        // get `childID` from `Scene` and set pointer to `camera`.
+        hierarchy::bind_child_to_parent<ontology::Camera*>(
+                camera,
+                this->camera_pointer_vector,
+                this->free_cameraID_queue,
+                &this->number_of_cameras);
+    }
+
+    void Scene::unbind_shader(const int32_t childID)
     {
         ontology::Shader* dummy_child_pointer = nullptr;
         hierarchy::set_child_pointer(
@@ -48,6 +59,17 @@ namespace ontology
                 this->shader_pointer_vector,
                 this->free_shaderID_queue,
                 &this->number_of_shaders);
+    }
+
+    void Scene::unbind_camera(const int32_t childID)
+    {
+        ontology::Camera* dummy_child_pointer = nullptr;
+        hierarchy::set_child_pointer(
+                childID,
+                dummy_child_pointer,
+                this->camera_pointer_vector,
+                this->free_cameraID_queue,
+                &this->number_of_cameras);
     }
 
     void Scene::bind_to_parent()
@@ -61,9 +83,13 @@ namespace ontology
         // destructor.
         std::cout << "Scene with childID " << std::dec << this->childID << " will be destroyed.\n";
 
-        // destroy all shaders of this scene.
+        // destroy all `Shader`s of this `Scene`.
         std::cout << "All shaders of this scene will be destroyed.\n";
         hierarchy::delete_children<ontology::Shader*>(this->shader_pointer_vector, &this->number_of_shaders);
+
+        // destroy all `Camera`s of this `Scene`.
+        std::cout << "All cameras of this scene will be destroyed.\n";
+        hierarchy::delete_children<ontology::Camera*>(this->camera_pointer_vector, &this->number_of_cameras);
 
         if (this->parent->get_active_scene() == this)
         {
@@ -71,7 +97,7 @@ namespace ontology
             this->parent->set_active_scene(nullptr);
         }
 
-        // set pointer to this scene to nullptr.
+        // set pointer to this `Scene` to `nullptr`.
         this->parent->set_scene_pointer(this->childID, nullptr);
     }
 
@@ -83,6 +109,25 @@ namespace ontology
         ontology::render_children<ontology::Shader*>(this->shader_pointer_vector);
 
         this->postrender();
+    }
+
+    ontology::Camera* Scene::get_active_camera()
+    {
+        return this->active_camera;
+    }
+
+    void Scene::set_active_camera(ontology::Camera* camera)
+    {
+        this->active_camera = camera;
+
+        if (this->active_camera != nullptr)
+        {
+            this->universe->current_camera_cartesian_coordinates = camera->get_cartesian_coordinates();
+            this->universe->set_projection_matrix(camera->get_projection_matrix());
+            this->universe->set_view_matrix(camera->get_view_matrix());
+            this->universe->current_camera_horizontal_angle = camera->get_horizontal_angle();
+            this->universe->current_camera_vertical_angle = camera->get_vertical_angle();
+        }
     }
 
     ontology::Entity* Scene::get_parent() const
@@ -160,5 +205,10 @@ namespace ontology
     void Scene::set_shader_pointer(const int32_t childID, ontology::Shader* const child_pointer)
     {
         hierarchy::set_child_pointer(childID, child_pointer, this->shader_pointer_vector, this->free_shaderID_queue, &this->number_of_shaders);
+    }
+
+    void Scene::set_camera_pointer(const int32_t childID, ontology::Camera* const child_pointer)
+    {
+        hierarchy::set_child_pointer(childID, child_pointer, this->camera_pointer_vector, this->free_cameraID_queue, &this->number_of_cameras);
     }
 }

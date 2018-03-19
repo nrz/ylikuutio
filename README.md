@@ -7,7 +7,7 @@ A hobby project of mine. Work in progress.
 ## License
 Ylikuutio is under The GNU Affero General Public License 3,
 or (at your option) any later version. See COPYING file.
-All my code copyright (C) 2016-2018 Antti Nuortimo.
+All my code copyright (C) 2015-2018 Antti Nuortimo.
 
 ## Overview
 Ylikuutio is a 3D game engine designed for 3D games and simulations.
@@ -109,6 +109,10 @@ In Windows:
 
     > ajokki.exe
 
+`ajokki.exe` binary can also be executed in Linux, using Wine:
+
+    $ wine ./ajokki.exe
+
 Press `` to get console. Press F to toggle flying on off.
 Arrow keys work too. Ctrl is turbo. F1 toggles help display
 and there you'll see some more options to try.
@@ -202,7 +206,7 @@ A: I like Lisp-family languages and TinyScheme fulfils my
 * 3D rendering
 * 2D text
 * support for different height map formats (SRTM, LAZ)
-* instant rebinding of instances of classes belonging to rendering hierarchy
+* instant rebinding of instances of classes belonging to ontological hierarchy
 * callbacks
 * fully functioning in-game console
 * multiple scenes in the same `Universe` (`activate` console command)

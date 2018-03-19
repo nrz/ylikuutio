@@ -12,7 +12,7 @@
 #endif
 
 // Include standard headers
-#include <memory> // std::make_shared, std::shared_ptr
+#include <cmath> // NAN, std::isnan, std::pow
 
 namespace ontology
 {
@@ -27,7 +27,7 @@ typedef struct HolobiontStruct
         rotate_angle(0.0f),
         initial_rotate_angle(PI),
         quaternions_in_use(false),
-        cartesian_coordinates(nullptr),
+        cartesian_coordinates(glm::vec3(NAN, NAN, NAN)),
         rotate_vector(glm::vec3(0.0f, 0.0f, 0.0f)),
         initial_rotate_vector(glm::vec3(0.0f, 1.0f, 1.0f)),
         translate_vector(glm::vec3(0.0f, 0.0f, 0.0f))
@@ -39,7 +39,7 @@ typedef struct HolobiontStruct
     float rotate_angle;              // rotate angle.
     float initial_rotate_angle;      // initial rotate angle.
     bool quaternions_in_use;
-    std::shared_ptr<glm::vec3> cartesian_coordinates; // coordinate vector.
+    glm::vec3 cartesian_coordinates; // coordinate vector.
     glm::vec3 rotate_vector;         // rotate vector.
     glm::vec3 initial_rotate_vector; // initial rotate vector.
     glm::vec3 translate_vector;      // translate vector.

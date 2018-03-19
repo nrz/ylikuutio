@@ -29,32 +29,37 @@ Tasks which are necessary for the development of Ylikuutio:
 [ ] Write integration tests for Ajokki.
 [ ] Learn how to write unit tests for multithreaded C++ code.
 [ ] Implement scene loading which works in the background.
-[ ] Create a graph of the vertices and edges of a scene.
+[ ] Create a vertex graph of the vertices and edges of a scene.
 [ ] Add vertex selection and modification (with a mouse cursor), using ray casting.
 [ ] Add modifying of vertices.
 [ ] Add octree segmentation.
 [ ] Add A* route finding.
 [ ] Add Theta* route finding.
 [ ] Add support for vector fonts.
+[ ] Implement rendering into a texture.
 [ ] Add TinyScheme support for programming of AI objects (robots).
-[ ] Enable changing of variable `up` in the console with `set up`.
-[ ] Enable changing of variable `right` in the console with `set right`.
 [ ] Add dynamic not flowing water.
 [ ] Add physics modeling.
 [ ] Add flowing water (computed on a server).
 [ ] Add Internet code (SFML).
 [ ] Add Internet code (ASIO).
+[ ] Add support for automatic detection of optimal window size.
 [ ] Add support for changing window size.
+[ ] Create `audio::Sound` class, whose parent is `Entity`.
+[ ] Create `audio::PlayList` class, whose parent is `Entity`.
+[ ] Implement `play` console command for playing `Sound`s and `Playlist`s.
+[ ] Implement `pause` console command for pausing `Sound`s and `Playlist`s.
+[ ] Implement `next` console command for changing to the next `Sound` in a `Playlist`.
+[ ] Implement `prev` console command for changing to the previous `Sound` in a `Playlist`.
 
 Less urgent:
 [ ] Add TinyScheme support in console.
 [ ] Add support for 3D text.
 [ ] Add support for partially transparent text.
-[ ] Implement rendering into a texture.
 [ ] Add support for over 3-dimensional objects (projected into 3D space in `Object::render()`).
 [ ] Store each robot's current view into an array from which the robot may access it programmatically using C++ and/or GLSL.
-[ ] Implement simulation of primary visual cortex (V1).
-[ ] Implement simulation of V2.
+[ ] Implement simulation of contour detection processing in the primary visual cortex (V1).
+[ ] Implement simulation of contour detection processing in V2 (visual cortex area).
 
 Ready:
 [x] Add test VBO, eg. some kind of particle object.

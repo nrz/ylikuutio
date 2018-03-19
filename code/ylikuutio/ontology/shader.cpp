@@ -67,17 +67,17 @@ namespace ontology
     void Shader::bind_to_parent()
     {
         // get `childID` from `Scene` and set pointer to this `Shader`.
-        this->parent->bind(this);
+        this->parent->bind_shader(this);
     }
 
     void Shader::bind_to_new_parent(ontology::Scene* const new_scene_pointer)
     {
         // unbind from the old parent `Scene`.
-        this->parent->unbind(this->childID);
+        this->parent->unbind_shader(this->childID);
 
         // get `childID` from `Scene` and set pointer to this `Shader`.
         this->parent = new_scene_pointer;
-        this->parent->bind(this);
+        this->parent->bind_shader(this);
     }
 
     Shader::~Shader()

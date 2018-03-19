@@ -79,7 +79,7 @@ namespace ajokki
         {
             temp_speed = universe->speed;
         }
-        *universe->cartesian_coordinates += temp_speed * universe->get_delta_time() * moving_direction;
+        universe->current_camera_cartesian_coordinates += temp_speed * universe->get_delta_time() * moving_direction;
 
         return true;
     }
@@ -345,7 +345,7 @@ namespace ajokki
             return nullptr;
         }
 
-        ajokki::move_to_direction(callback_object, universe->direction);
+        ajokki::move_to_direction(callback_object, universe->current_camera_direction);
         return nullptr;
     }
 
@@ -376,7 +376,7 @@ namespace ajokki
             return nullptr;
         }
 
-        ajokki::move_to_direction(callback_object, -universe->direction);
+        ajokki::move_to_direction(callback_object, -universe->current_camera_direction);
         return nullptr;
     }
 
@@ -407,7 +407,7 @@ namespace ajokki
             return nullptr;
         }
 
-        ajokki::move_to_direction(callback_object, -universe->right);
+        ajokki::move_to_direction(callback_object, -universe->current_camera_right);
         return nullptr;
     }
 
@@ -438,7 +438,7 @@ namespace ajokki
             return nullptr;
         }
 
-        ajokki::move_to_direction(callback_object, universe->right);
+        ajokki::move_to_direction(callback_object, universe->current_camera_right);
         return nullptr;
     }
 
@@ -469,7 +469,7 @@ namespace ajokki
             return nullptr;
         }
 
-        ajokki::move_to_direction(callback_object, universe->up);
+        ajokki::move_to_direction(callback_object, universe->current_camera_up);
         return nullptr;
     }
 
@@ -500,7 +500,7 @@ namespace ajokki
             return nullptr;
         }
 
-        ajokki::move_to_direction(callback_object, -universe->up);
+        ajokki::move_to_direction(callback_object, -universe->current_camera_up);
         return nullptr;
     }
 

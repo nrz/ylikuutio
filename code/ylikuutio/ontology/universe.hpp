@@ -4,6 +4,7 @@
 #include "entity.hpp"
 #include "entity_factory.hpp"
 #include "universe_struct.hpp"
+#include "camera_struct.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
 #include "code/ylikuutio/common/globals.hpp"
@@ -27,13 +28,14 @@
 #endif
 
 // Include standard headers
-#include <iostream> // std::cout, std::cin, std::cerr
-#include <memory>   // std::make_shared, std::shared_ptr
-#include <queue>    // std::queue
+#include <cmath>         // NAN, std::isnan, std::pow
+#include <iostream>      // std::cout, std::cin, std::cerr
+#include <memory>        // std::make_shared, std::shared_ptr
+#include <queue>         // std::queue
 #include <unordered_map> // std::unordered_map
-#include <stdint.h> // uint32_t etc.
-#include <string>   // std::string
-#include <vector>   // std::vector
+#include <stdint.h>      // uint32_t etc.
+#include <string>        // std::string
+#include <vector>        // std::vector
 
 // `Universe`, `Scene`, `Shader`, `Material`, `Species`, `Object`.
 // `Universe`, `Scene`, `Shader`, `Material`, `VectorFont`, `Glyph`, `Object`.
@@ -282,8 +284,11 @@ namespace ontology
             {
                 this->entity_factory = new ontology::EntityFactory(this);
 
-                this->cartesian_coordinates = nullptr;
-                this->spherical_coordinates = nullptr;
+                this->current_camera_cartesian_coordinates = glm::vec3(NAN, NAN, NAN); // dummy coordinates.
+
+                this->current_camera_spherical_coordinates.rho = NAN;   // dummy coordinates.
+                this->current_camera_spherical_coordinates.theta = NAN; // dummy coordinates.
+                this->current_camera_spherical_coordinates.phi = NAN;   // dummy coordinates.
 
                 this->planet_radius = NAN; // world radius is NAN as long it doesn't get `set` by `SettingMaster`.
                 this->terrain_species = nullptr;
@@ -302,8 +307,10 @@ namespace ontology
                 this->window_title = universe_struct.window_title;
                 this->is_headless = universe_struct.is_headless;
 
-                this->projection_matrix = glm::mat4(1.0f); // identity matrix (dummy value).
-                this->view_matrix = glm::mat4(1.0f);       // identity matrix (dummy value).
+                this->current_camera_projection_matrix = glm::mat4(1.0f); // identity matrix (dummy value).
+                this->current_camera_view_matrix = glm::mat4(1.0f);       // identity matrix (dummy value).
+                this->current_camera_horizontal_angle = NAN;
+                this->current_camera_vertical_angle = NAN;
 
                 // Variables related to the camera.
                 this->aspect_ratio = static_cast<GLfloat>(this->window_width / this->window_height);
@@ -325,8 +332,6 @@ namespace ontology
                 this->is_first_turbo_pressed = false;
                 this->is_second_turbo_pressed = false;
 
-                this->horizontal_angle = NAN;
-                this->vertical_angle = NAN;
                 this->turbo_factor = NAN;
                 this->twin_turbo_factor = NAN;
 
@@ -387,11 +392,11 @@ namespace ontology
             // this method sets a `World` pointer.
             void set_world_pointer(int32_t childID, ontology::World* child_pointer);
 
+            // this method returns a terrain `Species` pointer.
+            ontology::Species* get_terrain_species();
+
             // this method sets a terrain `Species` pointer.
             void set_terrain_species(ontology::Species* terrain_species);
-
-            glm::mat4& get_projection_matrix();
-            glm::mat4& get_view_matrix();
 
             int32_t get_number_of_worlds() const;
 
@@ -445,6 +450,15 @@ namespace ontology
 
             ontology::EntityFactory* get_entity_factory() const;
 
+            glm::mat4& get_projection_matrix();
+            void set_projection_matrix(glm::mat4& projection_matrix);
+
+            glm::mat4& get_view_matrix();
+            void set_view_matrix(glm::mat4& view_matrix);
+
+            GLfloat get_aspect_ratio();
+            GLfloat get_initialFoV();
+
             // Public callbacks.
 
             static std::shared_ptr<datatypes::AnyValue> delete_entity(
@@ -467,19 +481,19 @@ namespace ontology
             // Variables related to location and orientation.
 
             // `cartesian_coordinates` can be accessed as a vector or as single coordinates `x`, `y`, `z`.
-            glm::vec3* cartesian_coordinates;
+            glm::vec3 current_camera_cartesian_coordinates;
 
             // `spherical_coordinates` can be accessed as a vector or as single coordinates `rho`, `theta`, `phi`.
-            SphericalCoordinatesStruct* spherical_coordinates;
+            SphericalCoordinatesStruct current_camera_spherical_coordinates;
 
             // `direction` can be accessed as a vector or as single coordinates `pitch`, `roll`, `yaw`.
-            glm::vec3 direction;
+            glm::vec3 current_camera_direction;
 
-            glm::vec3 right; // note: `right` can not be set directly using console.
-            glm::vec3 up;    // note: `up` can not be set directly using console.
+            glm::vec3 current_camera_right; // note: `right` can not be set directly using console.
+            glm::vec3 current_camera_up;    // note: `up` can not be set directly using console.
 
-            double horizontal_angle;
-            double vertical_angle;
+            double current_camera_horizontal_angle;
+            double current_camera_vertical_angle;
 
             float speed;
             float turbo_factor;
@@ -542,10 +556,10 @@ namespace ontology
             bool is_headless;
 
             // Variables related to the camera.
-            glm::mat4 projection_matrix;
-            glm::mat4 view_matrix;
-            GLfloat aspect_ratio;
-            GLfloat initialFoV;
+            glm::mat4 current_camera_projection_matrix;
+            glm::mat4 current_camera_view_matrix;
+            GLfloat aspect_ratio; // at the moment all cameras use the same aspect ratio.
+            GLfloat initialFoV;   // at the moment all cameras use the same FoV.
 
             // Variables related to the fonts and texts used.
             int32_t text_size;

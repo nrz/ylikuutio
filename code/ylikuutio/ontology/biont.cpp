@@ -83,7 +83,7 @@ namespace ontology
 
         if (!this->has_entered)
         {
-            this->model_matrix = glm::translate(glm::mat4(1.0f), *this->cartesian_coordinates);
+            this->model_matrix = glm::translate(glm::mat4(1.0f), this->cartesian_coordinates);
 
             const std::string model_file_format = symbiosis->get_model_file_format();
 
@@ -96,7 +96,7 @@ namespace ontology
             this->model_matrix = glm::scale(this->model_matrix, this->original_scale_vector);
 
             // store the new coordinates to be used in the next update.
-            *this->cartesian_coordinates = glm::vec3(this->model_matrix[0][0], this->model_matrix[1][1], this->model_matrix[2][2]);
+            this->cartesian_coordinates = glm::vec3(this->model_matrix[0][0], this->model_matrix[1][1], this->model_matrix[2][2]);
             this->has_entered = true;
         }
         else
@@ -118,7 +118,7 @@ namespace ontology
             }
 
             this->model_matrix = glm::translate(this->model_matrix, this->translate_vector);
-            *this->cartesian_coordinates = glm::vec3(this->model_matrix[0][0], this->model_matrix[1][1], this->model_matrix[2][2]);
+            this->cartesian_coordinates = glm::vec3(this->model_matrix[0][0], this->model_matrix[1][1], this->model_matrix[2][2]);
         }
 
         this->MVP_matrix = this->universe->get_projection_matrix() * this->universe->get_view_matrix() * this->model_matrix;

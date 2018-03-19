@@ -9,6 +9,24 @@
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include <ofbx.h>
 
+// Include GLEW
+#ifndef __GL_GLEW_H_INCLUDED
+#define __GL_GLEW_H_INCLUDED
+#include <GL/glew.h> // GLfloat, GLuint etc.
+#endif
+
+// Include GLFW
+#ifndef __GLFW3_H_INCLUDED
+#define __GLFW3_H_INCLUDED
+#include <GLFW/glfw3.h>
+#endif
+
+// Include GLM
+#ifndef __GLM_GLM_HPP_INCLUDED
+#define __GLM_GLM_HPP_INCLUDED
+#include <glm/glm.hpp> // glm
+#endif
+
 // Include standard headers
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <stdint.h> // uint32_t etc.
@@ -31,7 +49,7 @@ namespace ontology
 
     void Symbiosis::bind_holobiont(ontology::Holobiont* const holobiont)
     {
-        // get `childID` from `Symbiosis` and set pointer to `object`.
+        // get `childID` from `Symbiosis` and set pointer to `holobiont`.
         hierarchy::bind_child_to_parent<ontology::Holobiont*>(
                 holobiont,
                 this->holobiont_pointer_vector,
@@ -71,15 +89,15 @@ namespace ontology
         // destructor.
         std::cout << "Symbiosis with childID " << std::dec << this->childID << " will be destroyed.\n";
 
-        // destroy all holobionts of this symbiosis.
+        // destroy all `Holobiont`s of this `Symbiosis`.
         std::cout << "All holobionts of this symbiosis will be destroyed.\n";
         hierarchy::delete_children<ontology::Holobiont*>(this->holobiont_pointer_vector, &this->number_of_holobionts);
 
-        // destroy all symbiont materials of this symbiosis.
+        // destroy all `SymbiontMaterial`s of this `Symbiosis`.
         std::cout << "All symbiont materials of this symbiosis will be destroyed.\n";
         hierarchy::delete_children<ontology::SymbiontMaterial*>(this->symbiont_material_pointer_vector, &this->number_of_symbiont_materials);
 
-        // set pointer to this symbiosis to nullptr.
+        // set pointer to this `Symbiosis` to `nullptr`.
         this->parent->set_symbiosis_pointer(this->childID, nullptr);
     }
 
@@ -189,7 +207,7 @@ namespace ontology
                 std::cout << "ontology::SymbiontMaterial* successfully created.\n";
 
                 // Create `SymbiontSpecies`s.
-                // Care only about `ofbx::Texture*`s with are DIFFUSE textures.
+                // Care only about `ofbx::Texture*`s which are DIFFUSE textures.
                 for (int32_t mesh_i : this->ofbx_diffuse_texture_mesh_map.at(ofbx_texture))
                 {
                     int32_t vertex_count = this->vertices.at(mesh_i).size();

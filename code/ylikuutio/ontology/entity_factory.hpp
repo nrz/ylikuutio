@@ -9,6 +9,7 @@
 #include "holobiont_struct.hpp"
 #include "vector_font_struct.hpp"
 #include "text3D_struct.hpp"
+#include "camera_struct.hpp"
 
 // Include GLEW
 #ifndef __GL_GLEW_H_INCLUDED
@@ -48,16 +49,17 @@ namespace ontology
             ontology::Entity* create_Shader(const ShaderStruct& shader_struct);
             ontology::Entity* create_Material(const MaterialStruct& material_struct);
             ontology::Entity* create_Species(const SpeciesStruct& species_struct);
-            ontology::Entity* create_Object(const ObjectStruct& object_struct);
+            ontology::Entity* create_Object(ObjectStruct& object_struct);
             ontology::Entity* create_Symbiosis(const SymbiosisStruct& symbiosis_struct);
-            ontology::Entity* create_Holobiont(const HolobiontStruct& object_struct);
+            ontology::Entity* create_Holobiont(HolobiontStruct& object_struct);
             ontology::Entity* create_VectorFont(const VectorFontStruct& vector_font_struct);
-            ontology::Entity* create_Text3D(const Text3DStruct& text3D_struct);
+            ontology::Entity* create_Text3D(Text3DStruct& text3D_struct);
             ontology::Entity* create_Font2D(
                     GLuint screen_width,
                     GLuint screen_height,
                     const std::string& texture_filename,
                     const std::string& font_texture_file_format);
+            ontology::Entity* create_Camera(CameraStruct& camera_struct);
 
             friend class Universe;
 

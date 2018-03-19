@@ -28,13 +28,16 @@ namespace ontology
     class Shader;
     class Species;
     class Symbiosis;
+    class Camera;
 
     class Scene: public ontology::Entity
     {
         public:
-            void bind(ontology::Shader* const shader);
+            void bind_shader(ontology::Shader* const shader);
+            void bind_camera(ontology::Camera* const camera);
 
-            void unbind(const int32_t childID);
+            void unbind_shader(const int32_t childID);
+            void unbind_camera(const int32_t childID);
 
             // constructor.
             Scene(ontology::Universe* const universe, ontology::World* const world, const float water_level)
@@ -55,6 +58,8 @@ namespace ontology
                 this->twin_turbo_factor = 1.0f;
 
                 this->number_of_shaders = 0;
+                this->number_of_cameras = 0;
+                this->active_camera = nullptr;
 
                 // get `childID` from `World` and set pointer to this `Scene`.
                 this->bind_to_parent();
@@ -68,6 +73,9 @@ namespace ontology
 
             // this method renders all `Shader`s of this `Scene`.
             void render();
+
+            ontology::Camera* get_active_camera();
+            void set_active_camera(ontology::Camera* camera);
 
             // this method returns a pointer to an `Entity` using the name as key.
             ontology::Entity* get_entity(const std::string) const;
@@ -85,6 +93,9 @@ namespace ontology
 
             // this method sets a `Shader` pointer.
             void set_shader_pointer(const int32_t childID, ontology::Shader* const child_pointer);
+
+            // this method sets a `Camera` pointer.
+            void set_camera_pointer(const int32_t childID, ontology::Camera* const child_pointer);
 
             template<class T1>
                 friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, int32_t* number_of_children);
@@ -106,6 +117,12 @@ namespace ontology
             std::vector<ontology::Shader*> shader_pointer_vector;
             std::queue<int32_t> free_shaderID_queue;
             int32_t number_of_shaders;
+
+            std::vector<ontology::Camera*> camera_pointer_vector;
+            std::queue<int32_t> free_cameraID_queue;
+            int32_t number_of_cameras;
+
+            ontology::Camera* active_camera;
 
             // For finding any `Entity`s of this `Scene` by using its name.
             std::unordered_map<std::string, ontology::Entity*> name_map;

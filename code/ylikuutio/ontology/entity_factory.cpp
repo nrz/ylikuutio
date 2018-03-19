@@ -12,6 +12,7 @@
 #include "vector_font.hpp"
 #include "text3D.hpp"
 #include "font2D.hpp"
+#include "camera.hpp"
 #include "shader_struct.hpp"
 #include "material_struct.hpp"
 #include "species_struct.hpp"
@@ -20,6 +21,7 @@
 #include "holobiont_struct.hpp"
 #include "vector_font_struct.hpp"
 #include "text3D_struct.hpp"
+#include "camera_struct.hpp"
 
 // Include GLEW
 #ifndef __GL_GLEW_H_INCLUDED
@@ -74,7 +76,7 @@ namespace ontology
         return new ontology::Species(this->universe, species_struct);
     }
 
-    ontology::Entity* EntityFactory::create_Object(const ObjectStruct& object_struct)
+    ontology::Entity* EntityFactory::create_Object(ObjectStruct& object_struct)
     {
         return new ontology::Object(this->universe, object_struct);
     }
@@ -84,7 +86,7 @@ namespace ontology
         return new ontology::Symbiosis(this->universe, symbiosis_struct);
     }
 
-    ontology::Entity* EntityFactory::create_Holobiont(const HolobiontStruct& holobiont_struct)
+    ontology::Entity* EntityFactory::create_Holobiont(HolobiontStruct& holobiont_struct)
     {
         return new ontology::Holobiont(this->universe, holobiont_struct);
     }
@@ -94,7 +96,7 @@ namespace ontology
         return new ontology::VectorFont(this->universe, vector_font_struct);
     }
 
-    ontology::Entity* EntityFactory::create_Text3D(const Text3DStruct& text3D_struct)
+    ontology::Entity* EntityFactory::create_Text3D(Text3DStruct& text3D_struct)
     {
         return new ontology::Text3D(this->universe, text3D_struct);
     }
@@ -111,5 +113,10 @@ namespace ontology
                 universe->get_window_height(),
                 texture_filename.c_str(),
                 font_texture_file_format.c_str());
+    }
+
+    ontology::Entity* EntityFactory::create_Camera(CameraStruct& camera_struct)
+    {
+        return new ontology::Camera(this->universe, camera_struct);
     }
 }

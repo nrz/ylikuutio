@@ -1,9 +1,9 @@
 #include "ajokki_location_and_orientation.hpp"
 #include "code/ylikuutio/config/setting.hpp"
 #include "code/ylikuutio/config/setting_master.hpp"
+#include "code/ylikuutio/config/setting_struct.hpp"
 #include "code/ylikuutio/common/spherical_coordinates_struct.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
-#include "code/ylikuutio/common/globals.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED

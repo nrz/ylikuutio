@@ -1,5 +1,6 @@
 #include "entity.hpp"
 #include "universe.hpp"
+#include "code/ylikuutio/config/setting_master.hpp"
 
 // Include standard headers
 #include <iostream>      // std::cout, std::cin, std::cerr
@@ -13,15 +14,18 @@ namespace ontology
         // constructor.
         this->childID = -1;
         this->universe = universe;
-        this->setting_master = nullptr;
         this->prerender_callback = nullptr;
         this->postrender_callback = nullptr;
+        this->setting_master = new config::SettingMaster(this);
     }
 
     Entity::~Entity()
     {
         // destructor.
         std::cout << "Entity destructor called.\n";
+
+        std::cout << "The setting master of this entity will be destroyed.\n";
+        delete this->setting_master;
 
         if (this->name.empty())
         {

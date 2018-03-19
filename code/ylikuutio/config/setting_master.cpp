@@ -3,6 +3,7 @@
 #include "code/ylikuutio/console/console.hpp"
 #include "code/ylikuutio/ontology/entity.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
+#include "code/ylikuutio/ontology/movable.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
 
@@ -99,7 +100,8 @@ namespace config
         // Usage:
         // to get variable names: set
         // to get valid values:   set <variable>
-        // to set variable:       set <variable> value[s]
+        // to set variable:       set <variable> <value>
+        // to set variable:       set <entity> <variable> <value>
 
         config::SettingMaster* setting_master = entity->get_setting_master();
 
@@ -111,9 +113,10 @@ namespace config
         }
         else if (command_parameters.size() == 1)
         {
+            // Exactly 1 parameter.
+
             std::string setting_name = command_parameters.at(0);
 
-            // One (1) command parameter.
             // Print current value of the given variable.
             if (setting_master->is_setting(setting_name))
             {
@@ -126,27 +129,35 @@ namespace config
                 }
                 else if (setting != nullptr && setting->setting_value != nullptr)
                 {
-                    console->print_text(setting->read_callback(entity, setting_master)->get_string());
+                    std::shared_ptr<datatypes::AnyValue> any_value_shared_ptr = setting->read_callback(entity, setting_master);
+
+                    if (any_value_shared_ptr != nullptr)
+                    {
+                        console->print_text(any_value_shared_ptr->get_string());
+                    }
+                    else
+                    {
+                        console->print_text("read_callback returned nullptr");
+                    }
                 }
                 else
                 {
                     // Invalid variable name.
                     console->print_text("invalid variable name");
-                    console->print_text(setting_master->help());
                 }
             }
             else
             {
                 // Invalid variable name.
                 console->print_text("invalid variable name");
-                console->print_text(setting_master->help());
             }
         }
-        else
+        else if (command_parameters.size() == 2)
         {
+            // Exactly 2 parameters.
+
             std::string setting_name = command_parameters.at(0);
 
-            // At least 2 variables.
             // Check the validity of the variable name.
             if (setting_master->is_setting(setting_name))
             {
@@ -177,6 +188,73 @@ namespace config
                 console->print_text(setting_master->help());
             }
         }
+        else if (command_parameters.size() == 3)
+        {
+            // Exactly 3 parameters.
+
+            std::string entity_name = command_parameters.at(0);
+
+            // if `set_and_print` is called through `Console::enter_key`,
+            // then `entity` is `ontology::Universe`, as
+            // `Console::enter_key` passes `ontology::Universe` as
+            // the 2nd parameter to any `ConsoleCommandCallback` it calls.
+            //
+            // But now we want the `Entity` that corresponds `entity_name`
+            // in `ontology::Universe` 'namespace' (Ylikuutio namespace, not
+            // C++ namespace!), so we need to request it from `ontology::Universe`.
+            // We also want the `SettingMaster` of the same `Entity`.
+
+            ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
+
+            if (universe == nullptr)
+            {
+                // `entity` is not a `ontology::Universe*`,
+                // can not proceed further.
+                return nullptr;
+            }
+
+            // Check the validity of the entity name.
+            if (!universe->is_entity(entity_name))
+            {
+                // Not a valid `Entity`.
+                return nullptr;
+            }
+
+            ontology::Entity* named_entity = universe->get_entity(entity_name);
+            setting_master = named_entity->get_setting_master();
+
+            std::string setting_name = command_parameters.at(1);
+
+            // Check the validity of the variable name.
+            if (setting_master->is_setting(setting_name))
+            {
+                // OK, this is a valid variable name.
+                // Set the variable value and activate it by
+                // calling the corresponding activate callback.
+                config::Setting* setting = setting_master->setting_pointer_map[setting_name];
+
+                // create empty `AnyValue` (there is no suitable constructor yet).
+                std::shared_ptr<datatypes::AnyValue> setting_any_value = std::make_shared<datatypes::AnyValue>();
+                setting_any_value->type = setting->setting_value->type;
+
+                // set a new value.
+                bool success = setting_any_value->set_value(command_parameters.at(2));
+
+                if (success)
+                {
+                    setting->setting_value = setting_any_value;
+
+                    if (setting->activate_callback != nullptr)
+                    {
+                        setting->activate_callback(named_entity, setting_master);
+                    }
+                }
+            }
+            else
+            {
+                console->print_text(setting_master->help());
+            }
+        }
 
         return nullptr;
     }
@@ -199,9 +277,10 @@ namespace config
         }
         else if (command_parameters.size() == 1)
         {
+            // Exactly 1 parameter.
+
             std::string setting_name = command_parameters.at(0);
 
-            // One (1) command parameter.
             // Print valid values of the given variable.
             if (setting_master->is_setting(setting_name))
             {
@@ -214,25 +293,104 @@ namespace config
                 }
                 else if (setting != nullptr && setting->setting_value != nullptr)
                 {
-                    console->print_text(setting->read_callback(entity, setting_master)->get_string());
+                    std::shared_ptr<datatypes::AnyValue> any_value_shared_ptr = setting->read_callback(entity, setting_master);
+
+                    if (any_value_shared_ptr != nullptr)
+                    {
+                        console->print_text(any_value_shared_ptr->get_string());
+                    }
+                    else
+                    {
+                        console->print_text("read_callback returned nullptr");
+                    }
                 }
                 else
                 {
                     // Invalid variable name.
                     console->print_text("invalid variable name");
-                    console->print_text(setting_master->help());
                 }
             }
             else
             {
                 // Invalid variable name.
                 console->print_text("invalid variable name");
-                console->print_text(setting_master->help());
+            }
+        }
+        else if (command_parameters.size() == 2)
+        {
+            // Exactly 2 parameters.
+
+            std::string entity_name = command_parameters.at(0);
+
+            // if `get_and_print` is called through `Console::enter_key`,
+            // then `entity` is `ontology::Universe`, as
+            // `Console::enter_key` passes `ontology::Universe` as
+            // the 2nd parameter to any `ConsoleCommandCallback` it calls.
+            //
+            // But now we want the `Entity` that corresponds `entity_name`
+            // in `ontology::Universe` 'namespace' (Ylikuutio namespace, not
+            // C++ namespace!), so we need to request it from `ontology::Universe`.
+            // We also want the `SettingMaster` of the same `Entity`.
+
+            ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
+
+            if (universe == nullptr)
+            {
+                // `entity` is not a `ontology::Universe*`,
+                // can not proceed further.
+                return nullptr;
+            }
+
+            // Check the validity of the entity name.
+            if (!universe->is_entity(entity_name))
+            {
+                // Not a valid `Entity`.
+                return nullptr;
+            }
+
+            ontology::Entity* named_entity = universe->get_entity(entity_name);
+            setting_master = named_entity->get_setting_master();
+
+            std::string setting_name = command_parameters.at(1);
+
+            // Print valid values of the given variable.
+            if (setting_master->is_setting(setting_name))
+            {
+                config::Setting* setting = setting_master->get(setting_name);
+
+                if (setting != nullptr && setting->setting_value != nullptr && setting->read_callback == nullptr)
+                {
+                    // Print variable value.
+                    console->print_text(setting->setting_value->get_string());
+                }
+                else if (setting != nullptr && setting->setting_value != nullptr)
+                {
+                    std::shared_ptr<datatypes::AnyValue> any_value_shared_ptr = setting->read_callback(named_entity, setting_master);
+
+                    if (any_value_shared_ptr != nullptr)
+                    {
+                        console->print_text(any_value_shared_ptr->get_string());
+                    }
+                    else
+                    {
+                        console->print_text("read_callback returned nullptr");
+                    }
+                }
+                else
+                {
+                    // Invalid variable name.
+                    console->print_text("invalid variable name");
+                }
+            }
+            else
+            {
+                // Invalid variable name.
+                console->print_text("invalid variable name");
             }
         }
         else
         {
-            // More than 1 command parameter.
+            // More than 2 command parameters.
             // Print variable names.
             console->print_text(setting_master->help());
         }
@@ -359,7 +517,29 @@ namespace config
             return nullptr;
         }
 
-        if (setting_master->setting_pointer_map.count("spherical_coordinates") != 1)
+        ontology::Movable* movable = dynamic_cast<ontology::Movable*>(entity);
+
+        if (movable != nullptr)
+        {
+            if (setting_master->setting_pointer_map.count("spherical_coordinates") != 1)
+            {
+                return nullptr;
+            }
+
+            std::shared_ptr<datatypes::AnyValue> spherical_coordinates_any_value = std::make_shared<datatypes::AnyValue>(*setting_master->setting_pointer_map["spherical_coordinates"]->setting_value);
+
+            if (spherical_coordinates_any_value == nullptr || spherical_coordinates_any_value->type != datatypes::SPHERICAL_COORDINATES_STRUCT_POINTER)
+            {
+                return nullptr;
+            }
+
+            movable->spherical_coordinates = *spherical_coordinates_any_value->spherical_coordinates_struct_pointer;
+            return nullptr;
+        }
+
+        ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
+
+        if (universe == nullptr || setting_master->setting_pointer_map.count("spherical_coordinates") != 1)
         {
             return nullptr;
         }
@@ -371,15 +551,7 @@ namespace config
             return nullptr;
         }
 
-        ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
-
-        if (universe == nullptr)
-        {
-            return nullptr;
-        }
-
-        delete universe->spherical_coordinates; // delete the old `SphericalCoordinatesStruct`.
-        universe->spherical_coordinates = spherical_coordinates_any_value->spherical_coordinates_struct_pointer;
+        universe->current_camera_spherical_coordinates = *spherical_coordinates_any_value->spherical_coordinates_struct_pointer;
         return nullptr;
     }
 
@@ -390,9 +562,29 @@ namespace config
             return nullptr;
         }
 
+        ontology::Movable* movable = dynamic_cast<ontology::Movable*>(entity);
+
+        if (movable != nullptr)
+        {
+            if (setting_master->setting_pointer_map.count("spherical_coordinates") != 1)
+            {
+                return nullptr;
+            }
+
+            std::shared_ptr<datatypes::AnyValue> rho_any_value = std::make_shared<datatypes::AnyValue>(*setting_master->setting_pointer_map["rho"]->setting_value);
+
+            if (rho_any_value == nullptr || rho_any_value->type != datatypes::FLOAT)
+            {
+                return nullptr;
+            }
+
+            movable->spherical_coordinates.rho = rho_any_value->float_value;
+            return nullptr;
+        }
+
         ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
 
-        if (universe == nullptr || universe->spherical_coordinates == nullptr)
+        if (universe == nullptr)
         {
             return nullptr;
         }
@@ -409,7 +601,7 @@ namespace config
             return nullptr;
         }
 
-        universe->spherical_coordinates->rho = rho_any_value->float_value;
+        universe->current_camera_spherical_coordinates.rho = rho_any_value->float_value;
         return nullptr;
     }
 
@@ -420,9 +612,29 @@ namespace config
             return nullptr;
         }
 
+        ontology::Movable* movable = dynamic_cast<ontology::Movable*>(entity);
+
+        if (movable != nullptr)
+        {
+            if (setting_master->setting_pointer_map.count("spherical_coordinates") != 1)
+            {
+                return nullptr;
+            }
+
+            std::shared_ptr<datatypes::AnyValue> theta_any_value = std::make_shared<datatypes::AnyValue>(*setting_master->setting_pointer_map["theta"]->setting_value);
+
+            if (theta_any_value == nullptr || theta_any_value->type != datatypes::FLOAT)
+            {
+                return nullptr;
+            }
+
+            movable->spherical_coordinates.theta = theta_any_value->float_value;
+            return nullptr;
+        }
+
         ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
 
-        if (universe == nullptr || universe->spherical_coordinates == nullptr)
+        if (universe == nullptr)
         {
             return nullptr;
         }
@@ -439,7 +651,7 @@ namespace config
             return nullptr;
         }
 
-        universe->spherical_coordinates->theta = theta_any_value->float_value;
+        universe->current_camera_spherical_coordinates.theta = theta_any_value->float_value;
         return nullptr;
     }
 
@@ -450,9 +662,29 @@ namespace config
             return nullptr;
         }
 
+        ontology::Movable* movable = dynamic_cast<ontology::Movable*>(entity);
+
+        if (movable != nullptr)
+        {
+            if (setting_master->setting_pointer_map.count("spherical_coordinates") != 1)
+            {
+                return nullptr;
+            }
+
+            std::shared_ptr<datatypes::AnyValue> phi_any_value = std::make_shared<datatypes::AnyValue>(*setting_master->setting_pointer_map["phi"]->setting_value);
+
+            if (phi_any_value == nullptr || phi_any_value->type != datatypes::FLOAT)
+            {
+                return nullptr;
+            }
+
+            movable->spherical_coordinates.phi = phi_any_value->float_value;
+            return nullptr;
+        }
+
         ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
 
-        if (universe == nullptr || universe->spherical_coordinates == nullptr)
+        if (universe == nullptr)
         {
             return nullptr;
         }
@@ -469,7 +701,7 @@ namespace config
             return nullptr;
         }
 
-        universe->spherical_coordinates->phi = phi_any_value->float_value;
+        universe->current_camera_spherical_coordinates.phi = phi_any_value->float_value;
         return nullptr;
     }
 
@@ -477,6 +709,26 @@ namespace config
     {
         if (entity == nullptr || setting_master == nullptr)
         {
+            return nullptr;
+        }
+
+        ontology::Movable* movable = dynamic_cast<ontology::Movable*>(entity);
+
+        if (movable != nullptr)
+        {
+            if (setting_master->setting_pointer_map.count("cartesian_coordinates") != 1)
+            {
+                return nullptr;
+            }
+
+            std::shared_ptr<datatypes::AnyValue> cartesian_coordinates_any_value = std::make_shared<datatypes::AnyValue>(*setting_master->setting_pointer_map["cartesian_coordinates"]->setting_value);
+
+            if (cartesian_coordinates_any_value == nullptr || cartesian_coordinates_any_value->type != datatypes::GLM_VEC3_POINTER)
+            {
+                return nullptr;
+            }
+
+            movable->cartesian_coordinates = glm::vec3(*cartesian_coordinates_any_value->glm_vec3_pointer);
             return nullptr;
         }
 
@@ -494,8 +746,7 @@ namespace config
             return nullptr;
         }
 
-        delete universe->cartesian_coordinates; // delete the old `glm::vec3`.
-        universe->cartesian_coordinates = cartesian_coordinates_any_value->glm_vec3_pointer;
+        universe->current_camera_cartesian_coordinates = glm::vec3(*cartesian_coordinates_any_value->glm_vec3_pointer);
         return nullptr;
     }
 
@@ -506,9 +757,29 @@ namespace config
             return nullptr;
         }
 
+        ontology::Movable* movable = dynamic_cast<ontology::Movable*>(entity);
+
+        if (movable != nullptr)
+        {
+            if (setting_master->setting_pointer_map.count("x") != 1)
+            {
+                return nullptr;
+            }
+
+            std::shared_ptr<datatypes::AnyValue> x_any_value = std::make_shared<datatypes::AnyValue>(*setting_master->setting_pointer_map["x"]->setting_value);
+
+            if (x_any_value == nullptr || x_any_value->type != datatypes::FLOAT)
+            {
+                return nullptr;
+            }
+
+            movable->cartesian_coordinates.x = x_any_value->float_value;
+            return nullptr;
+        }
+
         ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
 
-        if (universe == nullptr || universe->cartesian_coordinates == nullptr)
+        if (universe == nullptr)
         {
             return nullptr;
         }
@@ -525,7 +796,7 @@ namespace config
             return nullptr;
         }
 
-        universe->cartesian_coordinates->x = x_any_value->float_value;
+        universe->current_camera_cartesian_coordinates.x = x_any_value->float_value;
         return nullptr;
     }
 
@@ -536,9 +807,29 @@ namespace config
             return nullptr;
         }
 
+        ontology::Movable* movable = dynamic_cast<ontology::Movable*>(entity);
+
+        if (movable != nullptr)
+        {
+            if (setting_master->setting_pointer_map.count("y") != 1)
+            {
+                return nullptr;
+            }
+
+            std::shared_ptr<datatypes::AnyValue> y_any_value = std::make_shared<datatypes::AnyValue>(*setting_master->setting_pointer_map["y"]->setting_value);
+
+            if (y_any_value == nullptr || y_any_value->type != datatypes::FLOAT)
+            {
+                return nullptr;
+            }
+
+            movable->cartesian_coordinates.y = y_any_value->float_value;
+            return nullptr;
+        }
+
         ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
 
-        if (universe == nullptr || universe->cartesian_coordinates == nullptr)
+        if (universe == nullptr)
         {
             return nullptr;
         }
@@ -555,7 +846,7 @@ namespace config
             return nullptr;
         }
 
-        universe->cartesian_coordinates->y = y_any_value->float_value;
+        universe->current_camera_cartesian_coordinates.y = y_any_value->float_value;
         return nullptr;
     }
 
@@ -566,9 +857,29 @@ namespace config
             return nullptr;
         }
 
+        ontology::Movable* movable = dynamic_cast<ontology::Movable*>(entity);
+
+        if (movable != nullptr)
+        {
+            if (setting_master->setting_pointer_map.count("z") != 1)
+            {
+                return nullptr;
+            }
+
+            std::shared_ptr<datatypes::AnyValue> z_any_value = std::make_shared<datatypes::AnyValue>(*setting_master->setting_pointer_map["z"]->setting_value);
+
+            if (z_any_value == nullptr || z_any_value->type != datatypes::FLOAT)
+            {
+                return nullptr;
+            }
+
+            movable->cartesian_coordinates.z = z_any_value->float_value;
+            return nullptr;
+        }
+
         ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
 
-        if (universe == nullptr || universe->cartesian_coordinates == nullptr)
+        if (universe == nullptr)
         {
             return nullptr;
         }
@@ -585,7 +896,7 @@ namespace config
             return nullptr;
         }
 
-        universe->cartesian_coordinates->z = z_any_value->float_value;
+        universe->current_camera_cartesian_coordinates.z = z_any_value->float_value;
         return nullptr;
     }
 
@@ -615,7 +926,7 @@ namespace config
             return nullptr;
         }
 
-        universe->horizontal_angle = horizontal_angle_any_value->double_value;
+        universe->current_camera_horizontal_angle = horizontal_angle_any_value->double_value;
         return nullptr;
     }
 
@@ -645,7 +956,7 @@ namespace config
             return nullptr;
         }
 
-        universe->vertical_angle = vertical_angle_any_value->double_value;
+        universe->current_camera_vertical_angle = vertical_angle_any_value->double_value;
         return nullptr;
     }
 
@@ -806,14 +1117,21 @@ namespace config
             return nullptr;
         }
 
+        ontology::Movable* movable = dynamic_cast<ontology::Movable*>(entity);
+
+        if (movable != nullptr)
+        {
+            return std::make_shared<datatypes::AnyValue>(movable->cartesian_coordinates.x);
+        }
+
         ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
 
-        if (universe == nullptr || universe->cartesian_coordinates == nullptr)
+        if (universe == nullptr)
         {
             return nullptr;
         }
 
-        return std::make_shared<datatypes::AnyValue>(universe->cartesian_coordinates->x);
+        return std::make_shared<datatypes::AnyValue>(universe->current_camera_cartesian_coordinates.x);
     }
 
     std::shared_ptr<datatypes::AnyValue> SettingMaster::read_y(ontology::Entity* const entity, config::SettingMaster* const setting_master)
@@ -823,14 +1141,21 @@ namespace config
             return nullptr;
         }
 
+        ontology::Movable* movable = dynamic_cast<ontology::Movable*>(entity);
+
+        if (movable != nullptr)
+        {
+            return std::make_shared<datatypes::AnyValue>(movable->cartesian_coordinates.y);
+        }
+
         ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
 
-        if (universe == nullptr || universe->cartesian_coordinates == nullptr)
+        if (universe == nullptr)
         {
             return nullptr;
         }
 
-        return std::make_shared<datatypes::AnyValue>(universe->cartesian_coordinates->y);
+        return std::make_shared<datatypes::AnyValue>(universe->current_camera_cartesian_coordinates.y);
     }
 
     std::shared_ptr<datatypes::AnyValue> SettingMaster::read_z(ontology::Entity* const entity, config::SettingMaster* const setting_master)
@@ -840,14 +1165,21 @@ namespace config
             return nullptr;
         }
 
+        ontology::Movable* movable = dynamic_cast<ontology::Movable*>(entity);
+
+        if (movable != nullptr)
+        {
+            return std::make_shared<datatypes::AnyValue>(movable->cartesian_coordinates.z);
+        }
+
         ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
 
-        if (universe == nullptr || universe->cartesian_coordinates == nullptr)
+        if (universe == nullptr)
         {
             return nullptr;
         }
 
-        return std::make_shared<datatypes::AnyValue>(universe->cartesian_coordinates->z);
+        return std::make_shared<datatypes::AnyValue>(universe->current_camera_cartesian_coordinates.z);
     }
 
     std::shared_ptr<datatypes::AnyValue> SettingMaster::read_rho(ontology::Entity* const entity, config::SettingMaster* const setting_master)
@@ -857,14 +1189,21 @@ namespace config
             return nullptr;
         }
 
+        ontology::Movable* movable = dynamic_cast<ontology::Movable*>(entity);
+
+        if (movable != nullptr)
+        {
+            return std::make_shared<datatypes::AnyValue>(movable->spherical_coordinates.rho);
+        }
+
         ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
 
-        if (universe == nullptr || universe->spherical_coordinates == nullptr)
+        if (universe == nullptr)
         {
             return nullptr;
         }
 
-        return std::make_shared<datatypes::AnyValue>(universe->spherical_coordinates->rho);
+        return std::make_shared<datatypes::AnyValue>(universe->current_camera_spherical_coordinates.rho);
     }
 
     std::shared_ptr<datatypes::AnyValue> SettingMaster::read_theta(ontology::Entity* const entity, config::SettingMaster* const setting_master)
@@ -874,14 +1213,21 @@ namespace config
             return nullptr;
         }
 
+        ontology::Movable* movable = dynamic_cast<ontology::Movable*>(entity);
+
+        if (movable != nullptr)
+        {
+            return std::make_shared<datatypes::AnyValue>(movable->spherical_coordinates.theta);
+        }
+
         ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
 
-        if (universe == nullptr || universe->spherical_coordinates == nullptr)
+        if (universe == nullptr)
         {
             return nullptr;
         }
 
-        return std::make_shared<datatypes::AnyValue>(universe->spherical_coordinates->theta);
+        return std::make_shared<datatypes::AnyValue>(universe->current_camera_spherical_coordinates.theta);
     }
 
     std::shared_ptr<datatypes::AnyValue> SettingMaster::read_phi(ontology::Entity* const entity, config::SettingMaster* const setting_master)
@@ -891,14 +1237,21 @@ namespace config
             return nullptr;
         }
 
+        ontology::Movable* movable = dynamic_cast<ontology::Movable*>(entity);
+
+        if (movable != nullptr)
+        {
+            return std::make_shared<datatypes::AnyValue>(movable->spherical_coordinates.phi);
+        }
+
         ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
 
-        if (universe == nullptr || universe->spherical_coordinates == nullptr)
+        if (universe == nullptr)
         {
             return nullptr;
         }
 
-        return std::make_shared<datatypes::AnyValue>(universe->spherical_coordinates->phi);
+        return std::make_shared<datatypes::AnyValue>(universe->current_camera_spherical_coordinates.phi);
     }
 
     std::shared_ptr<datatypes::AnyValue> SettingMaster::read_up(ontology::Entity* const entity, config::SettingMaster* const setting_master)
@@ -915,7 +1268,7 @@ namespace config
             return nullptr;
         }
 
-        return std::make_shared<datatypes::AnyValue>(&universe->up);
+        return std::make_shared<datatypes::AnyValue>(&universe->current_camera_up);
     }
 
     std::shared_ptr<datatypes::AnyValue> SettingMaster::read_right(ontology::Entity* const entity, config::SettingMaster* const setting_master)
@@ -932,7 +1285,7 @@ namespace config
             return nullptr;
         }
 
-        return std::make_shared<datatypes::AnyValue>(&universe->right);
+        return std::make_shared<datatypes::AnyValue>(&universe->current_camera_right);
     }
 
     std::shared_ptr<datatypes::AnyValue> SettingMaster::read_horizontal_angle(ontology::Entity* const entity, config::SettingMaster* const setting_master)
@@ -949,7 +1302,7 @@ namespace config
             return nullptr;
         }
 
-        return std::make_shared<datatypes::AnyValue>(universe->horizontal_angle);
+        return std::make_shared<datatypes::AnyValue>(universe->current_camera_horizontal_angle);
     }
 
     std::shared_ptr<datatypes::AnyValue> SettingMaster::read_vertical_angle(ontology::Entity* const entity, config::SettingMaster* const setting_master)
@@ -966,7 +1319,7 @@ namespace config
             return nullptr;
         }
 
-        return std::make_shared<datatypes::AnyValue>(universe->vertical_angle);
+        return std::make_shared<datatypes::AnyValue>(universe->current_camera_vertical_angle);
     }
 
     std::shared_ptr<datatypes::AnyValue> SettingMaster::read_is_flight_mode_in_use(ontology::Entity* const entity, config::SettingMaster* const setting_master)

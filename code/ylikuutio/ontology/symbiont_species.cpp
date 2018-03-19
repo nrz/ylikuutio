@@ -24,8 +24,11 @@ namespace ontology
 {
     void SymbiontSpecies::bind_biont(ontology::Biont* const biont)
     {
-        // `SymbiontSpecies` is not the hierarchical parent of `Biont`.
-        // This relationship is purely only for rendering.
+        // `SymbiontSpecies` is not the ontological parent of `Biont`,
+        // as `Holobiont` is the ontological parent of `Biont`.
+        // The relationship between `SymbiontSpecies` and `Biont`
+        // is purely only for rendering.
+        //
         // To avoid potential problems in the future, follow this order:
         // 1. bind `Biont` to its `Holobiont` parent.
         // 2. bind `Biont` to its corresponding `SymbiontSpecies`.
@@ -66,7 +69,7 @@ namespace ontology
         glDeleteBuffers(1, &this->normalbuffer);
         glDeleteBuffers(1, &this->elementbuffer);
 
-        // set pointer to this symbiont_species to nullptr.
+        // set pointer to this `SymbiontSpecies` to `nullptr`.
         this->symbiont_material_parent->set_symbiont_species_pointer(this->childID, nullptr);
     }
 
@@ -83,11 +86,6 @@ namespace ontology
     ontology::Entity* SymbiontSpecies::get_parent() const
     {
         return this->symbiont_material_parent;
-    }
-
-    void SymbiontSpecies::set_object_pointer(const int32_t childID, ontology::Object* const child_pointer)
-    {
-        hierarchy::set_child_pointer(childID, child_pointer, this->object_pointer_vector, this->free_objectID_queue, &this->number_of_objects);
     }
 
     void SymbiontSpecies::set_name(const std::string& name)

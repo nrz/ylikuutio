@@ -1,6 +1,7 @@
 #ifndef __SETTING_HPP_INCLUDED
 #define __SETTING_HPP_INCLUDED
 
+#include "setting_struct.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/common/globals.hpp"
 
