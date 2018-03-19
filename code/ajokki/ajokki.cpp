@@ -571,6 +571,16 @@ int main(int argc, char* argv[])
     new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(&suzanne_species_string), false, switch_to_grass_material_callback_object);
     new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(&grass_material_string), false, switch_to_grass_material_callback_object);
 
+    // Callback code for O: switch to orange fur material.
+    std::string orange_fur_material_string = "orange_fur_material";
+    callback_system::CallbackEngine* switch_to_orange_fur_material_callback_engine = new callback_system::CallbackEngine();
+    callback_system::CallbackObject* switch_to_orange_fur_material_callback_object = new callback_system::CallbackObject(
+            &ajokki::switch_to_new_material,
+            switch_to_orange_fur_material_callback_engine);
+    new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, switch_to_orange_fur_material_callback_object);
+    new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(&suzanne_species_string), false, switch_to_orange_fur_material_callback_object);
+    new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(&orange_fur_material_string), false, switch_to_orange_fur_material_callback_object);
+
     // Callback code for P: switch to pink_geometric_tiles_material.
     std::string pink_geometric_tiles_material_string = "pink_geometric_tiles_material";
     callback_system::CallbackEngine* switch_to_pink_geometric_tiles_material_callback_engine = new callback_system::CallbackEngine();
@@ -790,6 +800,7 @@ int main(int argc, char* argv[])
     action_mode_keypress_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_F1, toggle_help_mode_callback_engine });
     action_mode_keypress_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_D, delete_suzanne_species_callback_engine });
     action_mode_keypress_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_G, switch_to_grass_material_callback_engine });
+    action_mode_keypress_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_O, switch_to_orange_fur_material_callback_engine });
     action_mode_keypress_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_P, switch_to_pink_geometric_tiles_material_callback_engine });
     action_mode_keypress_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_T, transform_into_terrain_callback_engine });
     action_mode_keypress_callback_engines->push_back(KeyAndCallbackStruct { GLFW_KEY_A, transform_into_monkey_callback_engine });
@@ -1139,6 +1150,7 @@ int main(int argc, char* argv[])
                         "Ctrl+Ctrl extra turbo\\n"
                         "for debugging:\\n"
                         "G  grass texture\\n"
+                        "O  orange fur texture\\n"
                         "P  pink geometric tiles texture\\n"
                         "T  terrain species\\n"
                         "A  suzanne species\\n",
