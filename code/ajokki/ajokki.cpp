@@ -567,9 +567,21 @@ int main(int argc, char* argv[])
     callback_system::CallbackObject* switch_to_grass_material_callback_object = new callback_system::CallbackObject(
             &ajokki::switch_to_new_material,
             switch_to_grass_material_callback_engine);
-    new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, switch_to_grass_material_callback_object);
-    new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(&suzanne_species_string), false, switch_to_grass_material_callback_object);
-    new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(&grass_material_string), false, switch_to_grass_material_callback_object);
+    new callback_system::CallbackParameter(
+            "",
+            std::make_shared<datatypes::AnyValue>(my_universe),
+            false,
+            switch_to_grass_material_callback_object);
+    new callback_system::CallbackParameter(
+            "",
+            std::make_shared<datatypes::AnyValue>(&suzanne_species_string),
+            false,
+            switch_to_grass_material_callback_object);
+    new callback_system::CallbackParameter(
+            "",
+            std::make_shared<datatypes::AnyValue>(&grass_material_string),
+            false,
+            switch_to_grass_material_callback_object);
 
     // Callback code for O: switch to orange fur material.
     std::string orange_fur_material_string = "orange_fur_material";
@@ -577,9 +589,21 @@ int main(int argc, char* argv[])
     callback_system::CallbackObject* switch_to_orange_fur_material_callback_object = new callback_system::CallbackObject(
             &ajokki::switch_to_new_material,
             switch_to_orange_fur_material_callback_engine);
-    new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, switch_to_orange_fur_material_callback_object);
-    new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(&suzanne_species_string), false, switch_to_orange_fur_material_callback_object);
-    new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(&orange_fur_material_string), false, switch_to_orange_fur_material_callback_object);
+    new callback_system::CallbackParameter(
+            "",
+            std::make_shared<datatypes::AnyValue>(my_universe),
+            false,
+            switch_to_orange_fur_material_callback_object);
+    new callback_system::CallbackParameter(
+            "",
+            std::make_shared<datatypes::AnyValue>(&suzanne_species_string),
+            false,
+            switch_to_orange_fur_material_callback_object);
+    new callback_system::CallbackParameter(
+            "",
+            std::make_shared<datatypes::AnyValue>(&orange_fur_material_string),
+            false,
+            switch_to_orange_fur_material_callback_object);
 
     // Callback code for P: switch to pink_geometric_tiles_material.
     std::string pink_geometric_tiles_material_string = "pink_geometric_tiles_material";
