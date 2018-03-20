@@ -2,7 +2,7 @@ TODO list:
 Tasks in priority order in descending priority, the most urgent ones first. Check when ready and move to the section Ready, when ready.
 
 Tasks which are necessary for the development of Ylikuutio:
-[ ] Implement entity-specific variables.
+[ ] Implement `Entity`-specific variables.
 [ ] Implement `Camera` entities.
 [ ] Optimize `Symbiosis` entities' rendering by going through `SymbiontMaterial`->`SymbiontSpecies`->`Biont` hierarchy.
 [ ] Add support for `man` command in console (a container class with the command callback together with the `man` text for the command).
