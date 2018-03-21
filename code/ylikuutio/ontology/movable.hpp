@@ -39,6 +39,9 @@ namespace ontology
                 this->spherical_coordinates.theta = NAN;
                 this->spherical_coordinates.phi = NAN;
 
+                this->model_matrix = glm::mat4(1.0f); // identity matrix (dummy value).
+                this->MVP_matrix   = glm::mat4(1.0f); // identity matrix (dummy value).
+
                 float float_x = cartesian_coordinates.x;
                 float float_y = cartesian_coordinates.y;
                 float float_z = cartesian_coordinates.z;
@@ -168,6 +171,10 @@ namespace ontology
 
             double horizontal_angle;
             double vertical_angle;
+
+            // The rest fields are created in the constructor.
+            glm::mat4 model_matrix;                // model matrix.
+            glm::mat4 MVP_matrix;                  // model view projection matrix.
     };
 }
 
