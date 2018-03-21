@@ -103,6 +103,8 @@ namespace datatypes
                 return "std::string*";
             case (GLM_VEC3_POINTER):
                 return "glm::vec3*";
+            case (GLM_VEC4_POINTER):
+                return "glm::vec4*";
             default:
                 return "TODO: define string for this datatype!";
         }
@@ -218,6 +220,20 @@ namespace datatypes
                             this->glm_vec3_pointer->x,
                             this->glm_vec3_pointer->y,
                             this->glm_vec3_pointer->z);
+                }
+                return std::string(buffer);
+            case (GLM_VEC4_POINTER):
+                if (this->glm_vec4_pointer == nullptr)
+                {
+                    std::snprintf(buffer, sizeof(buffer), "nullptr");
+                }
+                else
+                {
+                    std::snprintf(buffer, sizeof(buffer), "{ %f, %f, %f, %f }",
+                            this->glm_vec4_pointer->x,
+                            this->glm_vec4_pointer->y,
+                            this->glm_vec4_pointer->z,
+                            this->glm_vec4_pointer->w);
                 }
                 return std::string(buffer);
             default:
@@ -647,6 +663,21 @@ namespace datatypes
                     this->glm_vec3_pointer = glm_vec3_pointer;
                     return true;
                 }
+            case (GLM_VEC4_POINTER):
+                {
+                    if (!string::check_if_unsigned_integer_string(value_string))
+                    {
+                        return false;
+                    }
+
+                    glm::vec4* glm_vec4_pointer = (glm::vec4*) (std::strtoll(value_string.c_str(), &end, 0));
+                    if (errno == ERANGE)
+                    {
+                        return false;
+                    }
+                    this->glm_vec4_pointer = glm_vec4_pointer;
+                    return true;
+                }
             default:
                 return false;
         }
@@ -681,6 +712,7 @@ namespace datatypes
         this->spherical_coordinates_struct_pointer = nullptr;
         this->std_string_pointer = nullptr;
         this->glm_vec3_pointer = nullptr;
+        this->glm_vec4_pointer = nullptr;
     }
 
     AnyValue::AnyValue(const datatypes::AnyValue& original)
@@ -713,6 +745,7 @@ namespace datatypes
         this->spherical_coordinates_struct_pointer = original.spherical_coordinates_struct_pointer;
         this->std_string_pointer = original.std_string_pointer;
         this->glm_vec3_pointer = original.glm_vec3_pointer;
+        this->glm_vec4_pointer = original.glm_vec4_pointer;
     }
 
     AnyValue::AnyValue(const std::string& type, const std::string& value_string)
@@ -1343,6 +1376,26 @@ namespace datatypes
         {
             this->type = datatypes::GLM_VEC3_POINTER;
             this->glm_vec3_pointer = glm_vec3_pointer;
+        }
+    }
+
+    AnyValue::AnyValue(glm::vec4* const glm_vec4_pointer)
+    {
+        // constructor.
+        this->set_default_values();
+        this->type = datatypes::GLM_VEC4_POINTER;
+        this->glm_vec4_pointer = glm_vec4_pointer;
+    }
+
+    AnyValue::AnyValue(const std::string& type, glm::vec4* const glm_vec4_pointer)
+    {
+        // constructor.
+        this->set_default_values();
+
+        if (std::strcmp(type.c_str(), "glm::vec4*") == 0)
+        {
+            this->type = datatypes::GLM_VEC4_POINTER;
+            this->glm_vec4_pointer = glm_vec4_pointer;
         }
     }
 }

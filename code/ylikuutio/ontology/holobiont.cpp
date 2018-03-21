@@ -122,6 +122,51 @@ namespace ontology
         }
     }
 
+    void Holobiont::update_x(float x)
+    {
+        this->cartesian_coordinates.x = x;
+        this->model_matrix[3][0] = x;
+
+        for (ontology::Biont* biont : this->biont_pointer_vector)
+        {
+            if (biont != nullptr)
+            {
+                biont->cartesian_coordinates.x = x;
+                biont->model_matrix[3][0] = x;
+            }
+        }
+    }
+
+    void Holobiont::update_y(float y)
+    {
+        this->cartesian_coordinates.y = y;
+        this->model_matrix[3][1] = y;
+
+        for (ontology::Biont* biont : this->biont_pointer_vector)
+        {
+            if (biont != nullptr)
+            {
+                biont->cartesian_coordinates.y = y;
+                biont->model_matrix[3][1] = y;
+            }
+        }
+    }
+
+    void Holobiont::update_z(float z)
+    {
+        this->cartesian_coordinates.z = z;
+        this->model_matrix[3][2] = z;
+
+        for (ontology::Biont* biont : this->biont_pointer_vector)
+        {
+            if (biont != nullptr)
+            {
+                biont->cartesian_coordinates.z = z;
+                biont->model_matrix[3][2] = z;
+            }
+        }
+    }
+
     ontology::Entity* Holobiont::get_parent() const
     {
         return this->symbiosis_parent;

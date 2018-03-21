@@ -66,7 +66,8 @@ namespace datatypes
         CONSOLE_POINTER,
         SPHERICAL_COORDINATES_STRUCT_POINTER,
         STD_STRING_POINTER,
-        GLM_VEC3_POINTER
+        GLM_VEC3_POINTER,
+        GLM_VEC4_POINTER
     };
 
     typedef class AnyValue
@@ -108,6 +109,7 @@ namespace datatypes
             AnyValue(SphericalCoordinatesStruct* const spherical_coordinates_struct_pointer);
             AnyValue(std::string* const std_string_pointer);
             AnyValue(glm::vec3* const glm_vec3_pointer);
+            AnyValue(glm::vec4* const glm_vec4_pointer);
 
             AnyValue(const std::string& type, const bool bool_value);
             AnyValue(const std::string& type, const char char_value);
@@ -135,6 +137,7 @@ namespace datatypes
             AnyValue(const std::string& type, SphericalCoordinatesStruct* const spherical_coordinates_struct_pointer);
             AnyValue(const std::string& type, std::string* const std_string_pointer);
             AnyValue(const std::string& type, glm::vec3* const glm_vec3_pointer);
+            AnyValue(const std::string& type, glm::vec4* const glm_vec3_pointer);
 
             int type;
             bool bool_value;
@@ -163,6 +166,7 @@ namespace datatypes
             SphericalCoordinatesStruct* spherical_coordinates_struct_pointer;
             std::string* std_string_pointer;
             glm::vec3* glm_vec3_pointer;
+            glm::vec4* glm_vec4_pointer;
 
         private:
             void set_default_values();

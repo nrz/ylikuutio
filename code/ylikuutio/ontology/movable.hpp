@@ -39,6 +39,9 @@ namespace ontology
                 this->spherical_coordinates.theta = NAN;
                 this->spherical_coordinates.phi = NAN;
 
+                this->model_matrix = glm::mat4(1.0f); // identity matrix (dummy value).
+                this->MVP_matrix   = glm::mat4(1.0f); // identity matrix (dummy value).
+
                 float float_x = cartesian_coordinates.x;
                 float float_y = cartesian_coordinates.y;
                 float float_z = cartesian_coordinates.z;
@@ -47,6 +50,7 @@ namespace ontology
                 cartesian_coordinates_setting_struct.name = "cartesian_coordinates";
                 cartesian_coordinates_setting_struct.setting_master = this->setting_master;
                 cartesian_coordinates_setting_struct.activate_callback = &config::SettingMaster::activate_cartesian_coordinates;
+                cartesian_coordinates_setting_struct.read_callback = &config::SettingMaster::read_cartesian_coordinates;
                 cartesian_coordinates_setting_struct.should_ylikuutio_call_activate_callback_now = true;
                 std::cout << "Executing `new config::Setting(cartesian_coordinates_setting_struct);` ...\n";
                 new config::Setting(cartesian_coordinates_setting_struct);
@@ -55,6 +59,7 @@ namespace ontology
                 x_setting_struct.name = "x";
                 x_setting_struct.setting_master = this->setting_master;
                 x_setting_struct.activate_callback = &config::SettingMaster::activate_x;
+                x_setting_struct.read_callback = &config::SettingMaster::read_x;
                 x_setting_struct.should_ylikuutio_call_activate_callback_now = true;
                 std::cout << "Executing `new config::Setting(x_setting_struct);` ...\n";
                 new config::Setting(x_setting_struct);
@@ -63,6 +68,7 @@ namespace ontology
                 y_setting_struct.name = "y";
                 y_setting_struct.setting_master = this->setting_master;
                 y_setting_struct.activate_callback = &config::SettingMaster::activate_y;
+                y_setting_struct.read_callback = &config::SettingMaster::read_y;
                 y_setting_struct.should_ylikuutio_call_activate_callback_now = true;
                 std::cout << "Executing `new config::Setting(y_setting_struct);` ...\n";
                 new config::Setting(y_setting_struct);
@@ -71,6 +77,7 @@ namespace ontology
                 z_setting_struct.name = "z";
                 z_setting_struct.setting_master = this->setting_master;
                 z_setting_struct.activate_callback = &config::SettingMaster::activate_z;
+                z_setting_struct.read_callback = &config::SettingMaster::read_z;
                 z_setting_struct.should_ylikuutio_call_activate_callback_now = true;
                 std::cout << "Executing `new config::Setting(z_setting_struct);` ...\n";
                 new config::Setting(z_setting_struct);
@@ -164,6 +171,10 @@ namespace ontology
 
             double horizontal_angle;
             double vertical_angle;
+
+            // The rest fields are created in the constructor.
+            glm::mat4 model_matrix;                // model matrix.
+            glm::mat4 MVP_matrix;                  // model view projection matrix.
     };
 }
 

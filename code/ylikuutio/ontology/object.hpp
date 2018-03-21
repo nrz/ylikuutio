@@ -71,8 +71,6 @@ namespace ontology
 
                 this->is_character          = object_struct.is_character;
                 this->quaternions_in_use    = object_struct.quaternions_in_use;
-                this->model_matrix          = glm::mat4(1.0f); // identity matrix (dummy value).
-                this->MVP_matrix            = glm::mat4(1.0f); // identity matrix (dummy value).
 
                 if (this->is_character)
                 {
@@ -131,10 +129,6 @@ namespace ontology
             glm::vec3 translate_vector;            // translate vector.
             GLfloat initial_rotate_angle;          // initial rotate angle.
             glm::vec3 initial_rotate_vector;       // initial rotate vector.
-
-            // The rest fields are created in the constructor.
-            glm::mat4 model_matrix;                // model matrix.
-            glm::mat4 MVP_matrix;                  // model view projection matrix.
     };
 }
 

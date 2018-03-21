@@ -121,10 +121,6 @@ namespace ontology
             glm::vec3 translate_vector;            // translate vector.
             GLfloat initial_rotate_angle;          // initial rotate angle.
             glm::vec3 initial_rotate_vector;       // initial rotate vector.
-
-            // The rest fields are created in the constructor.
-            glm::mat4 model_matrix;                // model matrix.
-            glm::mat4 MVP_matrix;                  // model view projection matrix.
     };
 }
 

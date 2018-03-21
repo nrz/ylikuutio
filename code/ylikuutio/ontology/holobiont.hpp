@@ -82,6 +82,10 @@ namespace ontology
             // destructor.
             virtual ~Holobiont();
 
+            void update_x(float x);
+            void update_y(float y);
+            void update_z(float z);
+
             ontology::Entity* get_parent() const override;
 
             void set_biont_pointer(const int32_t childID, ontology::Biont* const child_pointer);
