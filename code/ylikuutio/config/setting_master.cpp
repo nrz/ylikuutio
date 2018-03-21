@@ -3,6 +3,7 @@
 #include "code/ylikuutio/console/console.hpp"
 #include "code/ylikuutio/ontology/entity.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
+#include "code/ylikuutio/ontology/holobiont.hpp"
 #include "code/ylikuutio/ontology/movable.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
@@ -775,6 +776,14 @@ namespace config
 
             movable->cartesian_coordinates.x = x_any_value->float_value;
             movable->model_matrix[3][0] = x_any_value->float_value;
+
+            ontology::Holobiont* holobiont = dynamic_cast<ontology::Holobiont*>(movable);
+
+            if (holobiont != nullptr)
+            {
+                holobiont->update_x(x_any_value->float_value);
+            }
+
             return nullptr;
         }
 
@@ -826,6 +835,14 @@ namespace config
 
             movable->cartesian_coordinates.y = y_any_value->float_value;
             movable->model_matrix[3][1] = y_any_value->float_value;
+
+            ontology::Holobiont* holobiont = dynamic_cast<ontology::Holobiont*>(movable);
+
+            if (holobiont != nullptr)
+            {
+                holobiont->update_y(y_any_value->float_value);
+            }
+
             return nullptr;
         }
 
@@ -877,6 +894,14 @@ namespace config
 
             movable->cartesian_coordinates.z = z_any_value->float_value;
             movable->model_matrix[3][2] = z_any_value->float_value;
+
+            ontology::Holobiont* holobiont = dynamic_cast<ontology::Holobiont*>(movable);
+
+            if (holobiont != nullptr)
+            {
+                holobiont->update_z(z_any_value->float_value);
+            }
+
             return nullptr;
         }
 
