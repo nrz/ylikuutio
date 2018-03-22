@@ -80,7 +80,7 @@ namespace ontology
         return this->vertical_angle;
     }
 
-    bool Camera::compute_matrices_from_inputs()
+    bool Camera::compute_and_update_matrices_from_inputs()
     {
         if (!this->universe->is_flight_mode_in_use)
         {

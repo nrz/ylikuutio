@@ -79,7 +79,7 @@ namespace ontology
             int32_t get_number_of_children() const override;
             int32_t get_number_of_descendants() const override;
 
-            bool compute_matrices_from_inputs();
+            bool compute_and_update_matrices_from_inputs();
 
             // Variables related to location and orientation.
 
