@@ -70,12 +70,12 @@ namespace ontology
         return this->view_matrix;
     }
 
-    float Camera::get_horizontal_angle()
+    float Camera::get_horizontal_angle() const
     {
         return this->horizontal_angle;
     }
 
-    float Camera::get_vertical_angle()
+    float Camera::get_vertical_angle() const
     {
         return this->vertical_angle;
     }
@@ -145,17 +145,17 @@ namespace ontology
         return true;
     }
 
-    glm::vec3 Camera::get_direction()
+    glm::vec3 Camera::get_direction() const
     {
         return this->direction;
     }
 
-    glm::vec3 Camera::get_right()
+    glm::vec3 Camera::get_right() const
     {
         return this->right;
     }
 
-    glm::vec3 Camera::get_up()
+    glm::vec3 Camera::get_up() const
     {
         return this->up;
     }
