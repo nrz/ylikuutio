@@ -139,8 +139,7 @@ namespace ontology
         this->view_matrix = glm::lookAt(
                 camera_cartesian_coordinates,                   // Camera is here
                 camera_cartesian_coordinates + this->direction, // and looks here : at the same position, plus "direction"
-                this->up                                        // Head is up (set to 0,-1,0 to look upside-down)
-                );
+                this->up);                                      // Head is up (set to 0,-1,0 to look upside-down)
 
         return true;
     }
