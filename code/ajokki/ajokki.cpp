@@ -917,6 +917,7 @@ int main(int argc, char* argv[])
 
     audio_master.add_to_playlist("Ajokki_playlist", "414270__greek555__sample-97-bpm.wav");
     audio_master.add_to_playlist("Ajokki_playlist", "419588__greek555__dreaming-of-me.ogg");
+    audio_master.add_to_playlist("Ajokki_playlist", "416882__greek555__blue-play.ogg");
     audio_master.play_playlist("Ajokki_playlist");
 
     while (!is_exit_requested)
