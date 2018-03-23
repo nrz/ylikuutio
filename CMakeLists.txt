@@ -16,11 +16,6 @@ set(COMPILE_SFML_FROM_SOURCE true)
 # comment the following line to disable unit tests with Google Test.
 set(DO_UNIT_TESTS_WITH_GOOGLE_TEST true)
 
-# uncomment the following line to download the latest versions of external projects
-# instead of using the versions carried in Ylikuutio repository (in `external/`).
-# this does not affect any library at the moment (did affect Eigen earlier, though).
-# set(ENABLE_DOWNLOAD_LATEST_VERSIONS_OF_EXTERNAL_PROJECTS)
-
 # uncomment the following line to disable updating of external projects.
 set(DISABLE_UPDATE_STEP true)
 
