@@ -10,7 +10,7 @@ typedef struct UniverseStruct
         is_headless(false),
         text_size(40),
         font_size(16),
-        max_FPS(500),          // default value max 500 frames per second.
+        max_FPS(50000),        // default value max 50000 frames per second.
         speed(5.0f),           // default value 5.0 units / second
         mouse_speed(0.005f),
         gravity(9.81f / 60.0f)
