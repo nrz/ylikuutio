@@ -119,9 +119,6 @@ std::string g_font_texture_file_format = "bmp";
 // std::string g_font_texture_filename = "Holstein.DDS";
 std::string g_font_texture_filename = "Holstein.bmp";
 
-// background music filename.
-std::string music_filename = "414270__greek555__sample-97-bpm.wav";
-
 int main(int argc, char* argv[])
 {
     std::vector<std::string> arg_vector;
