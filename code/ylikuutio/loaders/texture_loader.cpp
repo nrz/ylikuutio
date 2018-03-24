@@ -81,7 +81,7 @@ namespace loaders
         string::print_hexdump(texture_data_begin, texture_data_end);
 
         // Find out the filename.
-        int32_t filename_buffer_size = 1024;
+        const int32_t filename_buffer_size = 1024;
         uint8_t filename_buffer[filename_buffer_size];
         const char separator = '/'; // FIXME: don't assume slash as some operating systems may use other characters.
 
@@ -98,7 +98,7 @@ namespace loaders
         std::cout << "Texture file: " << texture_filename << "\n";
 
         // Find out the file suffix (filetype).
-        int32_t file_suffix_buffer_size = 16;
+        const int32_t file_suffix_buffer_size = 16;
         uint8_t file_suffix_buffer[file_suffix_buffer_size];
         const char suffix_separator = '.';
 
