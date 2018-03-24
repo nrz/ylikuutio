@@ -55,9 +55,4 @@ namespace ontology
     {
         return this->unicode_char_pointer;
     }
-
-    void Glyph::set_name(const std::string& name)
-    {
-        ontology::set_name(name, this);
-    }
 }

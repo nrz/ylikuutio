@@ -112,8 +112,6 @@ namespace ontology
 
             ontology::Entity* get_parent() const override;
 
-            void set_name(const std::string& name);
-
             // this method sets `Species` pointer.
             void set_species_pointer(const int32_t childID, ontology::Species* const child_pointer);
 

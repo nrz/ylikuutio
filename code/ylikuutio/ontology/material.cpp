@@ -178,11 +178,6 @@ namespace ontology
         this->parent->bind_material(this);
     }
 
-    void Material::set_name(const std::string& name)
-    {
-        ontology::set_name(name, this);
-    }
-
     void Material::set_terrain_species(ontology::Species* const terrain_species)
     {
         this->terrain_species = terrain_species;

@@ -80,8 +80,6 @@ namespace ontology
             // this method returns a pointer to an `Entity` using the name as key.
             ontology::Entity* get_entity(const std::string) const;
 
-            void set_name(std::string name);
-
             // this method returns a pointer to `datatypes::AnyValue` corresponding to the given `key`.
             std::shared_ptr<datatypes::AnyValue> get_variable(const std::string& key) const;
             float get_turbo_factor() const;

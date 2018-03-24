@@ -56,8 +56,6 @@ namespace ontology
 
             ontology::Entity* get_parent() const override;
 
-            void set_name(std::string name);
-
             glm::vec3 get_direction() const;
             glm::vec3 get_up() const;
             glm::vec3 get_right() const;

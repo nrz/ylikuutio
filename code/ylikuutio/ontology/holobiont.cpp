@@ -186,9 +186,4 @@ namespace ontology
     {
         hierarchy::set_child_pointer(childID, child_pointer, this->biont_pointer_vector, this->free_biontID_queue, &this->number_of_bionts);
     }
-
-    void Holobiont::set_name(const std::string& name)
-    {
-        ontology::set_name(name, this);
-    }
 }

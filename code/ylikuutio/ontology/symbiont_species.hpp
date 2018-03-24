@@ -119,8 +119,6 @@ namespace ontology
 
             ontology::Entity* get_parent() const override;
 
-            void set_name(const std::string& name);
-
             int32_t get_indices_size() const;
             GLuint get_lightID() const;
 

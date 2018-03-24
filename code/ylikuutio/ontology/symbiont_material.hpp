@@ -63,11 +63,6 @@ namespace ontology
                 this->type = "ontology::SymbiontMaterial*";
             }
 
-            // this method sets pointer to this `SymbiontMaterial` to `nullptr`,
-            // sets `parent` according to the input, and
-            // requests a new `childID` from the new `Symbiosis`.
-            void set_name(const std::string& name);
-
             // this method sets `SymbiontSpecies` pointer.
             void set_symbiont_species_pointer(const int32_t childID, ontology::SymbiontSpecies* const child_pointer);
 

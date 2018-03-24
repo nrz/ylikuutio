@@ -21,26 +21,6 @@ namespace ontology
     class Text3D;
 
     template<class T1>
-        void set_name(const std::string& name, T1 entity)
-        {
-            ontology::Universe* universe = entity->universe;
-
-            if (universe == nullptr)
-            {
-                return;
-            }
-
-            if (universe->is_entity(name))
-            {
-                // The name is already in use.
-                return;
-            }
-
-            universe->add_entity(name, entity);
-            entity->name = name;
-        }
-
-    template<class T1>
         InfoStruct* get_info(const T1 entity)
         {
             InfoStruct* info_struct = new InfoStruct();

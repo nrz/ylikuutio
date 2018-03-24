@@ -140,11 +140,6 @@ namespace ontology
         hierarchy::set_child_pointer(childID, child_pointer, this->symbiosis_pointer_vector, this->free_symbiosisID_queue, &this->number_of_symbioses);
     }
 
-    void Shader::set_name(std::string name)
-    {
-        ontology::set_name(name, this);
-    }
-
     GLuint Shader::get_programID() const
     {
         return this->programID;

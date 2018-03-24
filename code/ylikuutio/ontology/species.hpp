@@ -142,8 +142,6 @@ namespace ontology
             // this method sets an `Object` pointer.
             void set_object_pointer(const int32_t childID, ontology::Object* const child_pointer);
 
-            void set_name(const std::string& name);
-
             int32_t get_image_width() const;
             int32_t get_image_height() const;
 

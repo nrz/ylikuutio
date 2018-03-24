@@ -92,8 +92,6 @@ namespace ontology
             // destructor.
             virtual ~Shader();
 
-            void set_name(std::string name);
-
             ontology::Entity* get_parent() const override;
 
             // this method sets a `Material` pointer.

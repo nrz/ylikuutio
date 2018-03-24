@@ -84,14 +84,10 @@ namespace ontology
             // this method sets a object pointer.
             void set_object_pointer(const int32_t childID, ontology::Object* const child_pointer);
 
-            void set_name(const std::string& name);
-
             friend class Object;
             friend void create_glyph_objects(const std::string& text_string, ontology::Text3D* text3D);
             template<class T1>
                 friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, int32_t* number_of_children);
-            template<class T1>
-                friend void set_name(std::string name, T1 entity);
 
         private:
             void bind_to_parent();

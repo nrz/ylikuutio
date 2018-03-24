@@ -156,11 +156,6 @@ namespace ontology
         return this->name_map.at(name);
     }
 
-    void Scene::set_name(const std::string name)
-    {
-        ontology::set_name(name, this);
-    }
-
     float Scene::get_turbo_factor() const
     {
         if (this->parent == this->universe->get_active_world() && this == this->parent->get_active_scene())

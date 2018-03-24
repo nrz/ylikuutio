@@ -98,8 +98,6 @@ namespace ontology
 
             void set_holobiont_pointer(const int32_t childID, ontology::Holobiont* const child_pointer);
 
-            void set_name(const std::string& name);
-
             ontology::SymbiontSpecies* get_symbiont_species(const int32_t biontID) const;
             GLuint get_vertex_position_modelspaceID(const int32_t biontID) const;
             GLuint get_vertexUVID(const int32_t biontID) const;

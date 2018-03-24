@@ -121,8 +121,6 @@ namespace ontology
             // this method sets `Text3D` pointer.
             void set_text3D_pointer(const int32_t childID, ontology::Text3D* const child_pointer);
 
-            void set_name(const std::string& name);
-
             // this method returns a pointer to `Glyph` that matches the given `unicode_value`,
             // and `nullptr` if this `VectorFont` does not contain such a `Glyph`.
             ontology::Glyph* get_glyph_pointer(const int32_t unicode_value) const;

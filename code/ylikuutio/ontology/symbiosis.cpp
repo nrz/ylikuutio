@@ -111,11 +111,6 @@ namespace ontology
         this->postrender();
     }
 
-    void Symbiosis::set_name(const std::string& name)
-    {
-        ontology::set_name(name, this);
-    }
-
     ontology::Entity* Symbiosis::get_parent() const
     {
         return this->parent;
