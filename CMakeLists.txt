@@ -16,11 +16,6 @@ set(COMPILE_SFML_FROM_SOURCE true)
 # comment the following line to disable unit tests with Google Test.
 set(DO_UNIT_TESTS_WITH_GOOGLE_TEST true)
 
-# uncomment the following line to download the latest versions of external projects
-# instead of using the versions carried in Ylikuutio repository (in `external/`).
-# this does not affect any library at the moment (did affect Eigen earlier, though).
-# set(ENABLE_DOWNLOAD_LATEST_VERSIONS_OF_EXTERNAL_PROJECTS)
-
 # uncomment the following line to disable updating of external projects.
 set(DISABLE_UPDATE_STEP true)
 
@@ -290,6 +285,7 @@ configure_file(res/maps/Exactum_Physicum_Helsinki_Finland.osm Exactum_Physicum_H
 configure_file(res/audio/freesound.org/414257__sss-samples__chipland-loop-120-bpm-a-major.wav 414257__sss-samples__chipland-loop-120-bpm-a-major.wav COPYONLY)
 configure_file(res/audio/freesound.org/414269__jpmusic82__arp-bass-loop-128-bpm.mp3 414269__jpmusic82__arp-bass-loop-128-bpm.mp3 COPYONLY)
 configure_file(res/audio/freesound.org/414270__greek555__sample-97-bpm.wav 414270__greek555__sample-97-bpm.wav COPYONLY)
+configure_file(res/audio/freesound.org/416882__greek555__blue-play.ogg 416882__greek555__blue-play.ogg COPYONLY)
 configure_file(res/audio/freesound.org/419588__greek555__dreaming-of-me.ogg 419588__greek555__dreaming-of-me.ogg COPYONLY)
 
 # Image files for tests.

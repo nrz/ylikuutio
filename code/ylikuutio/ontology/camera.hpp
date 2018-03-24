@@ -58,15 +58,15 @@ namespace ontology
 
             void set_name(std::string name);
 
-            glm::vec3 get_direction();
-            glm::vec3 get_up();
-            glm::vec3 get_right();
+            glm::vec3 get_direction() const;
+            glm::vec3 get_up() const;
+            glm::vec3 get_right() const;
             void adjust_horizontal_angle(float adjustment);
 
             glm::mat4& get_projection_matrix();
             glm::mat4& get_view_matrix();
-            float get_horizontal_angle();
-            float get_vertical_angle();
+            float get_horizontal_angle() const;
+            float get_vertical_angle() const;
 
             friend class Universe;
 
@@ -79,7 +79,7 @@ namespace ontology
             int32_t get_number_of_children() const override;
             int32_t get_number_of_descendants() const override;
 
-            bool compute_matrices_from_inputs();
+            bool compute_and_update_matrices_from_inputs();
 
             // Variables related to location and orientation.
 

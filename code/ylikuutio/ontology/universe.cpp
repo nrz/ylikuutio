@@ -97,7 +97,7 @@ namespace ontology
         {
             this->prerender();
 
-            if (this->compute_matrices_from_inputs())
+            if (this->compute_and_update_matrices_from_inputs())
             {
                 // render this `Universe` by calling `render()` function of the active `World`.
                 this->active_world->render();
@@ -544,7 +544,7 @@ namespace ontology
         return this->initialFoV;
     }
 
-    bool Universe::compute_matrices_from_inputs()
+    bool Universe::compute_and_update_matrices_from_inputs()
     {
         if (!this->is_flight_mode_in_use)
         {

@@ -70,17 +70,17 @@ namespace ontology
         return this->view_matrix;
     }
 
-    float Camera::get_horizontal_angle()
+    float Camera::get_horizontal_angle() const
     {
         return this->horizontal_angle;
     }
 
-    float Camera::get_vertical_angle()
+    float Camera::get_vertical_angle() const
     {
         return this->vertical_angle;
     }
 
-    bool Camera::compute_matrices_from_inputs()
+    bool Camera::compute_and_update_matrices_from_inputs()
     {
         if (!this->universe->is_flight_mode_in_use)
         {
@@ -139,23 +139,22 @@ namespace ontology
         this->view_matrix = glm::lookAt(
                 camera_cartesian_coordinates,                   // Camera is here
                 camera_cartesian_coordinates + this->direction, // and looks here : at the same position, plus "direction"
-                this->up                                        // Head is up (set to 0,-1,0 to look upside-down)
-                );
+                this->up);                                      // Head is up (set to 0,-1,0 to look upside-down)
 
         return true;
     }
 
-    glm::vec3 Camera::get_direction()
+    glm::vec3 Camera::get_direction() const
     {
         return this->direction;
     }
 
-    glm::vec3 Camera::get_right()
+    glm::vec3 Camera::get_right() const
     {
         return this->right;
     }
 
-    glm::vec3 Camera::get_up()
+    glm::vec3 Camera::get_up() const
     {
         return this->up;
     }
