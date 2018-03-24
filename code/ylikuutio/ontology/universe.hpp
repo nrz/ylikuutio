@@ -369,6 +369,10 @@ namespace ontology
                             this->window_title.c_str(),
                             nullptr,
                             nullptr));
+
+                // Disable vertical sync.
+                // TODO: add option to enable/disable vsync in the console.
+                glfwSwapInterval(0);
             }
 
             // destructor.
