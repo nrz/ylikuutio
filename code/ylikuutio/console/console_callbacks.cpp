@@ -1,4 +1,5 @@
 #include "console.hpp"
+#include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/callback_system/callback_magic_numbers.hpp"
 
 // Include standard headers
