@@ -4,7 +4,6 @@
 #include "symbiont_species.hpp"
 #include "holobiont.hpp"
 #include "material_struct.hpp"
-#include "entity_templates.hpp"
 #include "render_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include <ofbx.h>

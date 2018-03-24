@@ -2,7 +2,6 @@
 #define __FONT2D_HPP_INCLUDED
 
 #include "entity.hpp"
-#include "entity_templates.hpp"
 #include "code/ylikuutio/loaders/shader_loader.hpp"
 #include "code/ylikuutio/loaders/texture_loader.hpp"
 #include "code/ylikuutio/common/globals.hpp"

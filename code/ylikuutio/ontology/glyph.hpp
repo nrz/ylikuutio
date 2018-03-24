@@ -6,7 +6,6 @@
 #include "glyph_struct.hpp"
 #include "gl_attrib_locations.hpp"
 #include "render_templates.hpp"
-#include "entity_templates.hpp"
 #include "code/ylikuutio/triangulation/triangulate_polygons_struct.hpp"
 #include "code/ylikuutio/triangulation/polygon_triangulation.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"

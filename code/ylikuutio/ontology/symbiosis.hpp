@@ -9,7 +9,6 @@
 #include "entity.hpp"
 #include "symbiosis_struct.hpp"
 #include "material_struct.hpp"
-#include "entity_templates.hpp"
 #include "code/ylikuutio/loaders/symbiosis_loader.hpp"
 #include "code/ylikuutio/loaders/symbiosis_loader_struct.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"

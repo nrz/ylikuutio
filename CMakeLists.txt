@@ -441,7 +441,6 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/entity.hpp
     code/ylikuutio/ontology/entity_factory.cpp
     code/ylikuutio/ontology/entity_factory.hpp
-    code/ylikuutio/ontology/entity_templates.hpp
     code/ylikuutio/ontology/font2D.cpp
     code/ylikuutio/ontology/font2D.hpp
     code/ylikuutio/ontology/glyph.cpp
@@ -452,7 +451,6 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/holobiont.cpp
     code/ylikuutio/ontology/holobiont.hpp
     code/ylikuutio/ontology/holobiont_struct.hpp
-    code/ylikuutio/ontology/info_struct.hpp
     code/ylikuutio/ontology/material.cpp
     code/ylikuutio/ontology/material.hpp
     code/ylikuutio/ontology/material_struct.hpp

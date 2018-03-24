@@ -8,7 +8,6 @@
 #include "glyph.hpp"
 #include "object_struct.hpp"
 #include "render_templates.hpp"
-#include "entity_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/common/globals.hpp"
 

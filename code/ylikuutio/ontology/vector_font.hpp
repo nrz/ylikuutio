@@ -7,7 +7,6 @@
 #include "glyph_struct.hpp"
 #include "vector_font_struct.hpp"
 #include "render_templates.hpp"
-#include "entity_templates.hpp"
 #include "code/ylikuutio/loaders/font_loader.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/string/ylikuutio_string.hpp"

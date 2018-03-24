@@ -3,7 +3,6 @@
 
 #include "entity.hpp"
 #include "universe.hpp"
-#include "entity_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include GLEW

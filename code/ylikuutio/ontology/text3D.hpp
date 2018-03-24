@@ -6,7 +6,6 @@
 #include "vector_font.hpp"
 #include "text3D_struct.hpp"
 #include "object_struct.hpp"
-#include "entity_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
 #include "code/ylikuutio/common/globals.hpp"

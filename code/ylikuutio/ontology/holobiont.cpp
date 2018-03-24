@@ -1,7 +1,6 @@
 #include "holobiont.hpp"
 #include "symbiosis.hpp"
 #include "biont.hpp"
-#include "entity_templates.hpp"
 #include "render_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 

@@ -1,5 +1,4 @@
 #include "font2D.hpp"
-#include "entity_templates.hpp"
 
 // Include GLEW
 #ifndef __GL_GLEW_H_INCLUDED
