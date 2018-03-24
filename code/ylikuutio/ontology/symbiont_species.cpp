@@ -88,11 +88,6 @@ namespace ontology
         return this->symbiont_material_parent;
     }
 
-    void SymbiontSpecies::set_name(const std::string& name)
-    {
-        ontology::set_name(name, this);
-    }
-
     int32_t SymbiontSpecies::get_indices_size() const
     {
         return this->indices.size();

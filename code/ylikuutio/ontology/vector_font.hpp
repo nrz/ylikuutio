@@ -7,7 +7,6 @@
 #include "glyph_struct.hpp"
 #include "vector_font_struct.hpp"
 #include "render_templates.hpp"
-#include "entity_templates.hpp"
 #include "code/ylikuutio/loaders/font_loader.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
@@ -120,8 +119,6 @@ namespace ontology
 
             // this method sets `Text3D` pointer.
             void set_text3D_pointer(const int32_t childID, ontology::Text3D* const child_pointer);
-
-            void set_name(const std::string& name);
 
             // this method returns a pointer to `Glyph` that matches the given `unicode_value`,
             // and `nullptr` if this `VectorFont` does not contain such a `Glyph`.

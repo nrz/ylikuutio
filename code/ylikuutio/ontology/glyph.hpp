@@ -6,7 +6,6 @@
 #include "glyph_struct.hpp"
 #include "gl_attrib_locations.hpp"
 #include "render_templates.hpp"
-#include "entity_templates.hpp"
 #include "code/ylikuutio/triangulation/triangulate_polygons_struct.hpp"
 #include "code/ylikuutio/triangulation/polygon_triangulation.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
@@ -45,8 +44,6 @@ namespace ontology
 
             // this method sets a object pointer.
             void set_object_pointer(const int32_t childID, ontology::Object* const child_pointer);
-
-            void set_name(const std::string& name);
 
             const char* get_unicode_char_pointer();
 

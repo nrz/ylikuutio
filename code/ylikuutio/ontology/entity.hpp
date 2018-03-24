@@ -36,8 +36,7 @@ namespace ontology
             virtual int32_t get_number_of_children() const = 0;
             virtual int32_t get_number_of_descendants() const = 0;
 
-            template<class T1>
-                friend void set_name(const std::string& name, T1 entity);
+            void set_name(const std::string& name);
 
         protected:
             void prerender() const;

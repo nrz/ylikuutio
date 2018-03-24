@@ -223,9 +223,4 @@ namespace ontology
     {
         return 0;
     }
-
-    void Object::set_name(const std::string& name)
-    {
-        ontology::set_name(name, this);
-    }
 }

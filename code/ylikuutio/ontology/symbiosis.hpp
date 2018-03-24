@@ -9,7 +9,6 @@
 #include "entity.hpp"
 #include "symbiosis_struct.hpp"
 #include "material_struct.hpp"
-#include "entity_templates.hpp"
 #include "code/ylikuutio/loaders/symbiosis_loader.hpp"
 #include "code/ylikuutio/loaders/symbiosis_loader_struct.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
@@ -97,8 +96,6 @@ namespace ontology
             void set_symbiont_material_pointer(const int32_t childID, ontology::SymbiontMaterial* const child_pointer);
 
             void set_holobiont_pointer(const int32_t childID, ontology::Holobiont* const child_pointer);
-
-            void set_name(const std::string& name);
 
             ontology::SymbiontSpecies* get_symbiont_species(const int32_t biontID) const;
             GLuint get_vertex_position_modelspaceID(const int32_t biontID) const;

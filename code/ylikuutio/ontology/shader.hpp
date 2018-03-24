@@ -14,7 +14,6 @@
 #include "glyph.hpp"
 #include "shader_struct.hpp"
 #include "render_templates.hpp"
-#include "entity_templates.hpp"
 #include "code/ylikuutio/loaders/shader_loader.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/common/pi.hpp"
@@ -91,8 +90,6 @@ namespace ontology
 
             // destructor.
             virtual ~Shader();
-
-            void set_name(std::string name);
 
             ontology::Entity* get_parent() const override;
 

@@ -126,9 +126,4 @@ namespace ontology
     {
         hierarchy::set_child_pointer(childID, child_pointer, this->text3D_pointer_vector, this->free_text3D_ID_queue, &this->number_of_text3Ds);
     }
-
-    void VectorFont::set_name(const std::string& name)
-    {
-        ontology::set_name(name, this);
-    }
 }

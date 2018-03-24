@@ -5,7 +5,6 @@
 #include "shader.hpp"
 #include "material_struct.hpp"
 #include "render_templates.hpp"
-#include "entity_templates.hpp"
 #include "code/ylikuutio/loaders/texture_loader.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/common/globals.hpp"
@@ -111,8 +110,6 @@ namespace ontology
             void bind_to_new_parent(ontology::Shader* const new_shader_pointer);
 
             ontology::Entity* get_parent() const override;
-
-            void set_name(const std::string& name);
 
             // this method sets `Species` pointer.
             void set_species_pointer(const int32_t childID, ontology::Species* const child_pointer);

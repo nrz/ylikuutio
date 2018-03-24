@@ -82,4 +82,21 @@ namespace ontology
             this->postrender_callback(this->universe, this->universe->setting_master);
         }
     }
+
+    void Entity::set_name(const std::string& name)
+    {
+        if (this->universe == nullptr)
+        {
+            return;
+        }
+
+        if (this->universe->is_entity(name))
+        {
+            // The name is already in use.
+            return;
+        }
+
+        this->name = name;
+        this->universe->add_entity(name, this);
+    }
 }

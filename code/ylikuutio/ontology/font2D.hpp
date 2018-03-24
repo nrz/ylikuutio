@@ -2,7 +2,6 @@
 #define __FONT2D_HPP_INCLUDED
 
 #include "entity.hpp"
-#include "entity_templates.hpp"
 #include "code/ylikuutio/loaders/shader_loader.hpp"
 #include "code/ylikuutio/loaders/texture_loader.hpp"
 #include "code/ylikuutio/common/globals.hpp"
@@ -121,8 +120,6 @@ namespace ontology
                     GLuint font_size,
                     const char* const text_char,
                     const char* const char_font_texture_file_format);
-
-            void set_name(const std::string& name);
 
         private:
             GLuint texture;      // Texture containing the glyphs, reterned by `load_BMP_texture` or `load_DDS_texture` (used for `glGenTextures` etc.).

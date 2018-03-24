@@ -5,7 +5,6 @@
 #include "symbiosis.hpp"
 #include "material_struct.hpp"
 #include "render_templates.hpp"
-#include "entity_templates.hpp"
 #include "code/ylikuutio/loaders/texture_loader.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/common/globals.hpp"
@@ -62,11 +61,6 @@ namespace ontology
                 this->child_vector_pointers_vector.push_back(&this->symbiont_species_pointer_vector);
                 this->type = "ontology::SymbiontMaterial*";
             }
-
-            // this method sets pointer to this `SymbiontMaterial` to `nullptr`,
-            // sets `parent` according to the input, and
-            // requests a new `childID` from the new `Symbiosis`.
-            void set_name(const std::string& name);
 
             // this method sets `SymbiontSpecies` pointer.
             void set_symbiont_species_pointer(const int32_t childID, ontology::SymbiontSpecies* const child_pointer);

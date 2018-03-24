@@ -1,7 +1,6 @@
 #include "holobiont.hpp"
 #include "symbiosis.hpp"
 #include "biont.hpp"
-#include "entity_templates.hpp"
 #include "render_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
@@ -185,10 +184,5 @@ namespace ontology
     void Holobiont::set_biont_pointer(const int32_t childID, ontology::Biont* const child_pointer)
     {
         hierarchy::set_child_pointer(childID, child_pointer, this->biont_pointer_vector, this->free_biontID_queue, &this->number_of_bionts);
-    }
-
-    void Holobiont::set_name(const std::string& name)
-    {
-        ontology::set_name(name, this);
     }
 }

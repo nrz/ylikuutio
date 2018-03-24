@@ -4,7 +4,6 @@
 #include "symbiont_species.hpp"
 #include "holobiont.hpp"
 #include "material_struct.hpp"
-#include "entity_templates.hpp"
 #include "render_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include <ofbx.h>
@@ -109,11 +108,6 @@ namespace ontology
         ontology::render_children<ontology::Holobiont*>(this->holobiont_pointer_vector);
 
         this->postrender();
-    }
-
-    void Symbiosis::set_name(const std::string& name)
-    {
-        ontology::set_name(name, this);
     }
 
     ontology::Entity* Symbiosis::get_parent() const

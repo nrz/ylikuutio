@@ -83,11 +83,6 @@ namespace ontology
         hierarchy::set_child_pointer(childID, child_pointer, this->object_pointer_vector, this->free_objectID_queue, &this->number_of_objects);
     }
 
-    void Species::set_name(const std::string& name)
-    {
-        ontology::set_name(name, this);
-    }
-
     int32_t Species::get_image_width() const
     {
         return this->image_width;

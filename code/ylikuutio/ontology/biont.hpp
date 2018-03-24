@@ -6,7 +6,6 @@
 #include "symbiont_species.hpp"
 #include "biont_struct.hpp"
 #include "render_templates.hpp"
-#include "entity_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/common/globals.hpp"
 
@@ -84,8 +83,6 @@ namespace ontology
             virtual ~Biont();
 
             ontology::Entity* get_parent() const override;
-
-            void set_name(const std::string& name);
 
             template<class T1>
                 friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, int32_t* number_of_children);

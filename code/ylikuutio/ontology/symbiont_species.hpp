@@ -9,7 +9,6 @@
 #include "symbiont_material.hpp"
 #include "species_struct.hpp"
 #include "render_templates.hpp"
-#include "entity_templates.hpp"
 #include "vboindexer.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
@@ -118,8 +117,6 @@ namespace ontology
             }
 
             ontology::Entity* get_parent() const override;
-
-            void set_name(const std::string& name);
 
             int32_t get_indices_size() const;
             GLuint get_lightID() const;

@@ -95,11 +95,6 @@ namespace ontology
                 &this->number_of_symbiont_species);
     }
 
-    void SymbiontMaterial::set_name(const std::string& name)
-    {
-        ontology::set_name(name, this);
-    }
-
     void SymbiontMaterial::load_texture()
     {
         this->texture = loaders::load_FBX_texture(this->ofbx_texture);

@@ -1,5 +1,4 @@
 #include "font2D.hpp"
-#include "entity_templates.hpp"
 
 // Include GLEW
 #ifndef __GL_GLEW_H_INCLUDED
@@ -326,10 +325,5 @@ namespace ontology
             const char* const char_font_texture_file_format)
     {
         printText2D(screen_width, screen_height, x, y, text_size, font_size, text_char, char_font_texture_file_format, "left", "bottom");
-    }
-
-    void Font2D::set_name(const std::string& name)
-    {
-        ontology::set_name(name, this);
     }
 }
