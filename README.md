@@ -64,8 +64,8 @@ Or, to compile with Clang, again in Ylikuutio install directory:
 
     $ mkdir build
     $ cd build
-    $ export CC='/usr/bin/clang'
-    $ export CXX='/usr/bin/clang++'
+    $ export CC="$(which clang)"
+    $ export CXX="(which clang++)"
     $ cmake ..
     $ make
 
