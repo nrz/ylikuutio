@@ -35,6 +35,10 @@ Tasks which are necessary for the development of Ylikuutio:
 [ ] Implement vertex selection and modification (with a mouse cursor), using ray casting.
 [ ] Implement modifying of vertices.
 [ ] Implement octree segmentation.
+[ ] Implement frustrum culling.
+[ ] Implement generation of terrain meshes in different levels of detail (LOD) using different `x_step`s and `z_step`s (eg. 1, 2, 4, 8, 16, 32, 64, 128).
+[ ] Implement terrain mesh LOD selection based on the distance between the camera and the terrain.
+[ ] Implement terrain mesh LOD selection based on the distance between the camera and the terrain and the available video memory.
 [ ] Implement A* route finding.
 [ ] Implement Theta* route finding.
 [ ] Implement support for vector fonts.
@@ -44,6 +48,7 @@ Tasks which are necessary for the development of Ylikuutio:
 [ ] Implement physics modeling.
 [ ] Implement flowing water (computed on a server).
 [ ] Implement Internet code (ASIO).
+[ ] Implement Internet code (cpp-netlib).
 [ ] Implement support for automatic detection of optimal window size.
 [ ] Implement support for changing window size.
 [ ] Implement support for changing font size.
