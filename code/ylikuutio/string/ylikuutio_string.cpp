@@ -19,7 +19,7 @@ namespace string
             const uint64_t data_size,
             const std::vector<std::string> identifier_strings_vector)
     {
-        for (std::string identifier_string : identifier_strings_vector)
+        for (const std::string identifier_string : identifier_strings_vector)
         {
             const char* const identifier_string_char = identifier_string.c_str();
 

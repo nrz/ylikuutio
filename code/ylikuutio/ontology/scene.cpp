@@ -162,6 +162,8 @@ namespace ontology
         {
             return this->universe->turbo_factor;
         }
+
+        return NAN;
     }
 
     void Scene::set_turbo_factor(float turbo_factor)
@@ -180,6 +182,8 @@ namespace ontology
         {
             return this->universe->twin_turbo_factor;
         }
+
+        return NAN;
     }
 
     void Scene::set_twin_turbo_factor(float twin_turbo_factor)

@@ -192,6 +192,8 @@ namespace loaders
             image_pointer -= sizeof(int16_t) * (image_width_in_use + true_image_width);
         }
 
+        std::cout << "\n";
+
         delete[] image_data;
 
         geometry::SphericalTerrainStruct spherical_terrain_struct;

@@ -5,6 +5,7 @@
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <memory>   // std::make_shared, std::shared_ptr
 #include <stdint.h> // uint32_t etc.
+#include <vector>   // std::vector
 
 namespace linear_algebra
 {
@@ -372,7 +373,7 @@ namespace linear_algebra
         {
             // Matrix dimensions do not match!
             // Matrix addition is not defined.
-            // Populate `lhs` with NAN to signal error.
+            // Populate `result_matrix` with NAN to signal error.
             std::cerr << "Matrix dimensions do not match!\n";
             linear_algebra::Matrix result_matrix(1, 1);
             result_matrix << NAN;
@@ -401,7 +402,7 @@ namespace linear_algebra
         {
             // Matrix dimensions do not match!
             // Matrix addition is not defined.
-            // Populate `lhs` with NAN to signal error.
+            // Populate `result_matrix` with NAN to signal error.
             std::cerr << "Matrix dimensions do not match!\n";
             linear_algebra::Matrix result_matrix(1, 1);
             result_matrix << NAN;
@@ -430,7 +431,7 @@ namespace linear_algebra
         {
             // Matrix dimensions do not match!
             // Matrix multiplication is not defined.
-            // Populate `lhs` with NAN to signal error.
+            // Populate `result_matrix` with NAN to signal error.
             std::cerr << "Matrix dimensions do not match!\n";
             linear_algebra::Matrix result_matrix(1, 1);
             result_matrix << NAN;
