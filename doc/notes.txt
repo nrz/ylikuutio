@@ -48,6 +48,7 @@ http://planetarygis.blogspot.fi/2014/06/using-isis-23-image-cubes-in-gis.html
 Converting DWG file format with TeighaConverter:
 https://www.freecadweb.org/wiki/FreeCAD_and_DWG_Import
 https://www.opendesign.com/guestfiles/teigha_file_converter
+https://blender.stackexchange.com/questions/30788/how-do-i-import-a-dxf
 
 OpenCTM file format:
 http://openctm.sourceforge.net/
