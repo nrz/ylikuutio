@@ -154,6 +154,19 @@ Some available console commands to try in Ajokki:
 * `info cat2`
 * `set wireframe true`
 * `set wireframe false`
+* `get turbo_polizei1 cartesian_coordinates`
+* `get turbo_polizei1 x`
+* `get turbo_polizei1 y`
+* `get turbo_polizei1 z`
+* `set turbo_polizei1 y 50`
+* `set turbo_polizei1 x 100`
+* `set turbo_polizei1 z 200`
+* `get cat1 cartesian_coordinates`
+* `get cat1 x`
+* `get cat1 y`
+* `get cat1 z`
+* `set cat1 x 123.45`
+* `set cat1 z 210`
 
 ## FAQ
 Q: What is "Ylikuutio"?
