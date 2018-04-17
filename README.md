@@ -134,8 +134,8 @@ may change a lot and so far no API has been defined. Ajokki and Ylikuutio
 code itself are the best references on how to use Ylikuutio in practice.
 
 Some available console commands to try in Ajokki:
-* `activate joensuu_center_and_western_scene`
-* `activate helsinki_eastern_downtown_scene`
+* `activate joensuu_center_and_west_scene`
+* `activate helsinki_east_downtown_scene`
 * `activate altiplano_scene`
 * `set red 1.0`
 * `set green 0.15`
