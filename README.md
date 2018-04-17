@@ -134,8 +134,8 @@ may change a lot and so far no API has been defined. Ajokki and Ylikuutio
 code itself are the best references on how to use Ylikuutio in practice.
 
 Some available console commands to try in Ajokki:
-* `activate joensuu_center_and_western_scene`
-* `activate helsinki_eastern_downtown_scene`
+* `activate joensuu_center_and_west_scene`
+* `activate helsinki_east_downtown_scene`
 * `activate altiplano_scene`
 * `set red 1.0`
 * `set green 0.15`
@@ -154,6 +154,19 @@ Some available console commands to try in Ajokki:
 * `info cat2`
 * `set wireframe true`
 * `set wireframe false`
+* `get turbo_polizei1 cartesian_coordinates`
+* `get turbo_polizei1 x`
+* `get turbo_polizei1 y`
+* `get turbo_polizei1 z`
+* `set turbo_polizei1 y 50`
+* `set turbo_polizei1 x 100`
+* `set turbo_polizei1 z 200`
+* `get cat1 cartesian_coordinates`
+* `get cat1 x`
+* `get cat1 y`
+* `get cat1 z`
+* `set cat1 x 123.45`
+* `set cat1 z 210`
 
 ## FAQ
 Q: What is "Ylikuutio"?
@@ -213,7 +226,7 @@ A: I like Lisp-family languages and TinyScheme fulfils my
 * audio with Simple and Fast Multimedia Library (SFML)
 * option for wireframe models (`set wireframe true`, `set wireframe false`)
 
-## Future developments underway:
+## Future developments underway
 * full support for different keyboard layouts in console
 * custom keyboard mappings in Ajokki
 * command to read console command input from file

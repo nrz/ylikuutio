@@ -48,6 +48,7 @@ http://planetarygis.blogspot.fi/2014/06/using-isis-23-image-cubes-in-gis.html
 Converting DWG file format with TeighaConverter:
 https://www.freecadweb.org/wiki/FreeCAD_and_DWG_Import
 https://www.opendesign.com/guestfiles/teigha_file_converter
+https://blender.stackexchange.com/questions/30788/how-do-i-import-a-dxf
 
 OpenCTM file format:
 http://openctm.sourceforge.net/
@@ -98,11 +99,23 @@ http://www.hri.fi/en/dataset/helsingin-3d-kaupunkimalli
 http://3d.hel.ninja/data/citygml/
 http://3d.hel.ninja/data/mesh/
 
-3D model of Oulu (CC-BY 4.0):
-http://avoindata.ouka.fi/3d/index_en.html
+3D model of Vantaa (CC-BY 4.0):
+https://hri.fi/data/en_GB/dataset/vantaan-3d-rakennukset
+https://hri.fi/data/fi/dataset/vantaan-3d-rakennukset
+
+3D model of Oulu center (CC-BY 4.0):
+http://ubicomp.oulu.fi/infrastructure-virtualoulu/
+https://github.com/Oulu-UCC/3D_City_fbx
 
 3D model of the campus and science park area of Turku / Turun kampus- ja tiedepuistoalueen 3D-kaupunkimalli (CC-BY 4.0):
 http://www.lounaistieto.fi/blog/2017/09/06/turun-kampus-ja-tiedepuistoalueen-3d-kaupunkimalli/
+
+3D model of Tampere (custom license):
+http://kartat.tampere.fi/splashscreen/
+https://www.tampere.fi/tampereen-kaupunki/tietoa-tampereesta/avoin-data/avoin-data-lisenssi.html
+
+https://www.citygml.org/3dcities/
+http://www.opengeospatial.org/resources/data
 
 Digital Elevation Data (by Jonathan de Ferranti,
 whole world data available at 3 and 15 arc second resolutions):

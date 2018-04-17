@@ -10,6 +10,10 @@ Tasks which are necessary for the development of Ylikuutio:
 [ ] Implement command line parameter `--input-file` to Ajokki (load keypresses and keyreleases from a file, eg. `--input-file foo` or `--input-file=foo`).
 [ ] Implement command line parameter `--window-size` to Ajokki (eg. `--window-size 1920x1080` or `--window-size=1920x1080`).
 [ ] Implement support for 3D model of Helsinki: http://www.hri.fi/en/dataset/helsingin-3d-kaupunkimalli http://www.hri.fi/fi/dataset/helsingin-3d-kaupunkimalli
+[ ] Implement support for 3D model of Vantaa: https://hri.fi/data/en_GB/dataset/vantaan-3d-rakennukset https://hri.fi/data/fi/dataset/vantaan-3d-rakennukset
+[ ] Implement support for 3D model of Oulu: http://ubicomp.oulu.fi/infrastructure-virtualoulu/ https://github.com/Oulu-UCC/3D_City_fbx
+[ ] Implement support for 3D model of Turku campus and science park area: http://www.lounaistieto.fi/blog/2017/09/06/turun-kampus-ja-tiedepuistoalueen-3d-kaupunkimalli/
+[ ] Implement support for 3D model of Tampere: http://kartat.tampere.fi/splashscreen/
 [ ] Implement support for OpenStreetMap data: https://www.openstreetmap.org/
 [ ] Implement voxel world.
 [ ] Implement AI objects (robots).
@@ -22,7 +26,7 @@ Tasks which are necessary for the development of Ylikuutio:
 [ ] Implement support for custom keyboard settings.
 [ ] Use GLFW Android port for Android builds. https://github.com/glfw/glfw/issues/611 https://github.com/xCuri0/glfw-android-example
 [ ] Use GLFM library (only for Android builds). https://github.com/brackeen/glfm
-[ ] Add variable `text_size`.
+[ ] Add variable `text_size` (affects size of console text and other texts printed on screen).
 [ ] Add variable `direction`.
 [ ] Use TinySpline.
 [ ] Add bicubic interpolation.
