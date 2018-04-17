@@ -226,7 +226,7 @@ A: I like Lisp-family languages and TinyScheme fulfils my
 * audio with Simple and Fast Multimedia Library (SFML)
 * option for wireframe models (`set wireframe true`, `set wireframe false`)
 
-## Future developments underway:
+## Future developments underway
 * full support for different keyboard layouts in console
 * custom keyboard mappings in Ajokki
 * command to read console command input from file
