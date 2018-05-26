@@ -447,7 +447,8 @@ namespace string
 
         if (characters_on_this_line > 0)
         {
-            const int32_t number_of_spaces_needed = (line_width_in_bytes - characters_on_this_line) * 3 + 1; // each byte's hexdump takes 3 characters.
+            const int32_t size_of_each_bytes_hexdump = 3; // each byte's hexdump takes 3 characters.
+            const int32_t number_of_spaces_needed = (line_width_in_bytes - characters_on_this_line) * size_of_each_bytes_hexdump + 1;
             std::cout << current_line_hex << std::string(number_of_spaces_needed, ' ') << current_line_ascii << "\n";
         }
 
