@@ -84,6 +84,7 @@ TEST(glyphs_must_be_found_appropriately, kongtext_svg)
     ASSERT_TRUE(is_tenth_glyph_found);
     ASSERT_EQ(SVG_data_pointer, SVG_base_pointer + 0x5d6);
 }
+
 TEST(font_must_be_loaded_appropriately, kongtext_svg)
 {
     std::string font_filename = "kongtext.svg";

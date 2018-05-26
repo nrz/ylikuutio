@@ -154,6 +154,7 @@ TEST(OpenFBX_must_function_appropriately, rigged_and_animated_cat)
     std::cout << filename << ": getAllObjectCount(): " << all_object_count << "\n";
     ASSERT_GT(all_object_count, 0);
 }
+
 TEST(OpenFBX_must_function_appropriately, turbo_polizei)
 {
     const std::string filename = "turbo_polizei.fbx";
@@ -288,6 +289,7 @@ TEST(OpenFBX_must_function_appropriately, turbo_polizei)
     std::cout << filename << ": getAllObjectCount(): " << all_object_count << "\n";
     ASSERT_GT(all_object_count, 0);
 }
+
 TEST(fbx_file_must_be_loaded_appropriately, rigged_and_animated_cat)
 {
     std::string filename = "cat.fbx";

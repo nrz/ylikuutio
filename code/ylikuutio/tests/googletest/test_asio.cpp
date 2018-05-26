@@ -20,6 +20,7 @@ TEST(nslookup_must_function_correctly_for_127_0_0_1, nslookup)
     ASSERT_EQ(my_address.to_string(), "127.0.0.1");
     ASSERT_EQ(it, end);
 }
+
 TEST(nslookup_must_function_correctly_for_colon_colon_1, nslookup)
 {
     // Create the `asio::io_service`.
@@ -39,6 +40,7 @@ TEST(nslookup_must_function_correctly_for_colon_colon_1, nslookup)
     ASSERT_EQ(my_address.to_string(), "::1");
     ASSERT_EQ(it, end);
 }
+
 TEST(nslookup_must_function_correctly_for_localhost, nslookup)
 {
     // Create the `asio::io_service`.

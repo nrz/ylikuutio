@@ -32,6 +32,7 @@ TEST(a_1x1_terrain_must_be_interpolated_appropriately, no_change)
     ASSERT_TRUE(*output_vertex_pointer > 8.26875246809035e21);
     ASSERT_TRUE(*output_vertex_pointer < 8.26875246809036e21);
 }
+
 TEST(a_2x2_terrain_must_be_interpolated_appropriately, no_change)
 {
     uint32_t image_width = 2;
@@ -59,6 +60,7 @@ TEST(a_2x2_terrain_must_be_interpolated_appropriately, no_change)
     ASSERT_TRUE(*output_vertex_pointer++ == 345.25f);
     ASSERT_TRUE(*output_vertex_pointer++ == 456.25f);
 }
+
 TEST(a_2x2_terrain_must_be_interpolated_appropriately, halfway_points)
 {
     uint32_t image_width = 2;
@@ -93,6 +95,7 @@ TEST(a_2x2_terrain_must_be_interpolated_appropriately, halfway_points)
     ASSERT_TRUE(*output_vertex_pointer++ == (345.25f + 456.25f) / 2.0f);                     // 0.5, 1.0
     ASSERT_TRUE(*output_vertex_pointer++ == 456.25f);                                        // 1.0, 1.0 
 }
+
 TEST(a_2x2_terrain_must_be_interpolated_appropriately, quarter_points)
 {
     uint32_t image_width = 2;

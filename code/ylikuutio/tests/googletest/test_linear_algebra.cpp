@@ -304,6 +304,7 @@ TEST(matrices_must_function_as_expected, matrices)
     ASSERT_EQ(magic3x3_left_magic3x3_transposed_right[1][5], 9);
     ASSERT_EQ(magic3x3_left_magic3x3_transposed_right[2][5], 2);
 }
+
 TEST(tensors_must_function_as_expected, tensors)
 {
     // populate tensors and tensor equality.
