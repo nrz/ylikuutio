@@ -3,12 +3,12 @@ Tasks in priority order in descending priority, the most urgent ones first. Chec
 
 Tasks which are necessary for the development of Ylikuutio:
 [ ] Implement `Camera` entities.
-[ ] Optimize `Symbiosis` entities' rendering by going through `SymbiontMaterial`->`SymbiontSpecies`->`Biont` hierarchy.
-[ ] Implement support for `man` command in console (a container class with the command callback together with the `man` text for the command).
-[ ] Implement command line parameter `--debug` to Ajokki (log all kinds of debug information).
-[ ] Implement command line parameter `--headless` to Ajokki (do not open any windows).
+[ ] Implement command line parameter `--headless` to Ajokki (do not open any windows, do not render anything).
 [ ] Implement command line parameter `--input-file` to Ajokki (load keypresses and keyreleases from a file, eg. `--input-file foo` or `--input-file=foo`).
 [ ] Implement command line parameter `--window-size` to Ajokki (eg. `--window-size 1920x1080` or `--window-size=1920x1080`).
+[ ] Implement command line parameter `--debug` to Ajokki (log all kinds of debug information).
+[ ] Implement support for `man` command in console (a container class with the command callback together with the `man` text for the command).
+[ ] Optimize `Symbiosis` entities' rendering by going through `SymbiontMaterial`->`SymbiontSpecies`->`Biont` hierarchy.
 [ ] Implement support for 3D model of Helsinki: http://www.hri.fi/en/dataset/helsingin-3d-kaupunkimalli http://www.hri.fi/fi/dataset/helsingin-3d-kaupunkimalli
 [ ] Implement support for 3D model of Vantaa: https://hri.fi/data/en_GB/dataset/vantaan-3d-rakennukset https://hri.fi/data/fi/dataset/vantaan-3d-rakennukset
 [ ] Implement support for 3D model of Oulu: http://ubicomp.oulu.fi/infrastructure-virtualoulu/ https://github.com/Oulu-UCC/3D_City_fbx
