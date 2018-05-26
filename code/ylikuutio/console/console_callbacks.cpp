@@ -513,10 +513,13 @@ namespace console
         if (console->in_console &&
                 console->can_enter_key)
         {
-            // Parse input into vector.
+            // Copy current input into a `std::string`.
             std::string input_string(console->current_input.begin(), console->current_input.end());
 
+            // Copy current input into the command history.
             console->command_history.push_back(console->current_input);
+
+            // Prefix current input with the prompt, for saving into `console_history`.
             std::list<char>::iterator it = console->current_input.begin();
 
             for (const char& my_char : console->prompt)
