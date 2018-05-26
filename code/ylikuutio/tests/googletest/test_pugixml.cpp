@@ -32,6 +32,7 @@ TEST(xml_must_be_loaded_as_expected, exactum_and_physicum)
     ASSERT_TRUE(exactum_way != nullptr);
     ASSERT_EQ(strcmp(exactum_way.attribute("id").value(), "16790295"), 0);
 }
+
 TEST(xml_must_be_loaded_as_expected, hofinkatu_and_isafjordinkatu)
 {
     const char* hofinkatu_and_isafjordinkatu_osm_char = "Hofinkatu_Isafjordinkatu_Joensuu_Finland.osm";

@@ -63,6 +63,7 @@ TEST(line2D_line2D_intersection, parallel_lines)
     ASSERT_TRUE(std::isnan(intersection_point_c_b.x));
     ASSERT_TRUE(std::isnan(intersection_point_c_b.y));
 }
+
 TEST(line2D_line2D_intersection, intersecting_lines)
 {
     // ^..........*. a1 = point 1 of line a at (5, 1).

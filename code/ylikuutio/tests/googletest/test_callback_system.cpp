@@ -231,6 +231,7 @@ TEST(callback_engine_must_function_properly, int32_t_zero_negated_equals_zero)
 
     delete callback_engine;
 }
+
 TEST(callback_engine_must_function_properly, int32_t_one_negated_equals_minus_one)
 {
     callback_system::CallbackEngine* callback_engine = new callback_system::CallbackEngine();
@@ -249,6 +250,7 @@ TEST(callback_engine_must_function_properly, int32_t_one_negated_equals_minus_on
 
     delete callback_engine;
 }
+
 TEST(callback_engine_must_function_properly, int32_t_two_negated_equals_minus_two)
 {
     callback_system::CallbackEngine* callback_engine = new callback_system::CallbackEngine();
@@ -267,6 +269,7 @@ TEST(callback_engine_must_function_properly, int32_t_two_negated_equals_minus_tw
 
     delete callback_engine;
 }
+
 TEST(callback_engine_must_function_properly, int32_t_minus_one_negated_equals_one)
 {
     callback_system::CallbackEngine* callback_engine = new callback_system::CallbackEngine();
@@ -285,6 +288,7 @@ TEST(callback_engine_must_function_properly, int32_t_minus_one_negated_equals_on
 
     delete callback_engine;
 }
+
 TEST(callback_engine_must_function_properly, int32_t_minus_two_negated_equals_two)
 {
     callback_system::CallbackEngine* callback_engine = new callback_system::CallbackEngine();
@@ -303,6 +307,7 @@ TEST(callback_engine_must_function_properly, int32_t_minus_two_negated_equals_tw
 
     delete callback_engine;
 }
+
 TEST(callback_engine_must_function_properly, int32_t_three_squared_equals_nine)
 {
     callback_system::CallbackEngine* callback_engine = new callback_system::CallbackEngine();
@@ -321,6 +326,7 @@ TEST(callback_engine_must_function_properly, int32_t_three_squared_equals_nine)
 
     delete callback_engine;
 }
+
 TEST(callback_engine_must_function_properly, uint32_t_three_squared_equals_nine)
 {
     callback_system::CallbackEngine* callback_engine = new callback_system::CallbackEngine();
@@ -339,6 +345,7 @@ TEST(callback_engine_must_function_properly, uint32_t_three_squared_equals_nine)
 
     delete callback_engine;
 }
+
 TEST(callback_engine_must_function_properly, uint32_t_5_expt_7_equals_78125)
 {
     callback_system::CallbackEngine* callback_engine = new callback_system::CallbackEngine();
@@ -362,6 +369,7 @@ TEST(callback_engine_must_function_properly, uint32_t_5_expt_7_equals_78125)
 
     delete callback_engine;
 }
+
 TEST(callback_engine_must_function_properly, uint32_t_5_expt_7_equals_78125_with_named_inputs)
 {
     callback_system::CallbackEngine* callback_engine = new callback_system::CallbackEngine();
@@ -387,6 +395,7 @@ TEST(callback_engine_must_function_properly, uint32_t_5_expt_7_equals_78125_with
 
     delete callback_engine;
 }
+
 TEST(callback_engine_must_function_properly, uint32_t_7_expt_5_then_squared_equals_282475249)
 {
     callback_system::CallbackEngine* callback_engine = new callback_system::CallbackEngine();
@@ -412,6 +421,7 @@ TEST(callback_engine_must_function_properly, uint32_t_7_expt_5_then_squared_equa
 
     delete callback_engine;
 }
+
 TEST(callback_engine_must_function_properly, two_squared_four_times_equals_65536)
 {
     callback_system::CallbackEngine* callback_engine = new callback_system::CallbackEngine();

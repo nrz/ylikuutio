@@ -513,10 +513,13 @@ namespace console
         if (console->in_console &&
                 console->can_enter_key)
         {
-            // Parse input into vector.
+            // Copy current input into a `std::string`.
             std::string input_string(console->current_input.begin(), console->current_input.end());
 
+            // Copy current input into the command history.
             console->command_history.push_back(console->current_input);
+
+            // Prefix current input with the prompt, for saving into `console_history`.
             std::list<char>::iterator it = console->current_input.begin();
 
             for (const char& my_char : console->prompt)
@@ -543,29 +546,34 @@ namespace console
                 console->console_history.push_back(current_input_char_list);
             }
 
+            bool is_command = false;
             std::istringstream input_stringstream(input_string);
+            std::vector<std::string> parameter_vector;
             std::string command;
+            std::string token;
 
-            if (std::getline(input_stringstream, command, ' '))
+            while (std::getline(input_stringstream, token, ' '))
             {
-                // OK, there was a command.
-                std::vector<std::string> parameter_vector;
-
-                // Now read the command parameters.
-                while (true)
+                if (token.empty())
                 {
-                    std::string parameter;
-
-                    if (std::getline(input_stringstream, parameter, ' '))
-                    {
-                        parameter_vector.push_back(parameter);
-                    }
-                    else
-                    {
-                        break;
-                    }
+                    continue;
                 }
 
+                if (!is_command)
+                {
+                    // First non-empty token is the command.
+                    command = token;
+                    is_command = true;
+                }
+                else
+                {
+                    // The rest non-empty tokens are the parameters.
+                    parameter_vector.push_back(token);
+                }
+            }
+
+            if (is_command)
+            {
                 // Call the corresponding console command callback, if there is one.
                 if (console->command_callback_map_pointer != nullptr &&
                         console->command_callback_map_pointer->count(command) == 1)

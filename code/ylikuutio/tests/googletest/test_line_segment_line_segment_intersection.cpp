@@ -63,6 +63,7 @@ TEST(line_segment2D_line_segment2D_intersection, parallel_line_segments)
     ASSERT_TRUE(std::isnan(intersection_point_c_b.x));
     ASSERT_TRUE(std::isnan(intersection_point_c_b.y));
 }
+
 TEST(line_segment2D_line_segment2D_intersection, intersecting_line_segments)
 {
     // ^..........*. a1 = point 1 of line segment a at (5, 1).
@@ -87,6 +88,7 @@ TEST(line_segment2D_line_segment2D_intersection, intersecting_line_segments)
     ASSERT_EQ(intersection_point.x, 7.0f);
     ASSERT_EQ(intersection_point.y, 3.0f);
 }
+
 TEST(line_segment2D_line_segment2D_intersection, potentially_but_not_intersecting_line_segments)
 {
     // ^..........*. a1 = point 1 of line segment a at (5, 1).
@@ -111,6 +113,7 @@ TEST(line_segment2D_line_segment2D_intersection, potentially_but_not_intersectin
     ASSERT_TRUE(std::isnan(intersection_point.x));
     ASSERT_TRUE(std::isnan(intersection_point.y));
 }
+
 TEST(line_segment2D_line_segment2D_intersection, intersection_at_other_lines_point2)
 {
     // ^..........*. a1 = point 1 of line segment a at (5, 1).
@@ -135,6 +138,7 @@ TEST(line_segment2D_line_segment2D_intersection, intersection_at_other_lines_poi
     ASSERT_EQ(intersection_point.x, 7.0f);
     ASSERT_EQ(intersection_point.y, 3.0f);
 }
+
 TEST(line_segment2D_line_segment2D_intersection, intersection_at_both_lines_point2)
 {
     // ^............ a1 = point 1 of line segment a at (5, 1).
