@@ -106,9 +106,9 @@ located in the `deps/` directory.
  - [stb\_image\_write](https://github.com/nothings/stb) for writing images to disk
  - [Vulkan headers](https://www.khronos.org/registry/vulkan/) for Vulkan tests
 
-The Vulkan example additionally requires the Vulkan SDK to be installed, or it
-will not be included in the build.  On macOS you need to provide the path to the
-MoltenVK SDK manually as it has no standard installation location.
+The Vulkan example additionally requires the LunarG Vulkan SDK to be installed,
+or it will not be included in the build.  On macOS you need to provide the path
+to the SDK manually as it has no standard installation location.
 
 The documentation is generated with [Doxygen](http://doxygen.org/) if CMake can
 find that tool.
@@ -264,6 +264,7 @@ information on what to include when reporting a bug.
 - [Cocoa] Bugfix: Window title was lost when full screen or undecorated (#1082)
 - [Cocoa] Bugfix: Window was resized twice when entering full screen (#1085)
 - [Cocoa] Bugfix: Duplicate size events were not filtered (#1085)
+- [Cocoa] Bugfix: Event polling did not initialize AppKit if necessary (#1218)
 - [WGL] Added support for `WGL_EXT_colorspace` for OpenGL ES contexts
 - [WGL] Added support for `WGL_ARB_create_context_no_error`
 - [GLX] Added support for `GLX_ARB_create_context_no_error`
