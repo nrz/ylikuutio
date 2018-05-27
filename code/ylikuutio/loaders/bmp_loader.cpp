@@ -97,7 +97,7 @@ namespace loaders
                 return nullptr;
             }
 
-            image_size = image_width * image_height * 3; // 3 : one byte for each Red, Green and Blue component
+            image_size = number_of_pixels * 3; // 3 : one byte for each Red, Green and Blue component
         }
 
         // Create a buffer.
