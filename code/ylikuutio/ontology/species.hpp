@@ -70,6 +70,9 @@ namespace ontology
                 this->char_model_file_format = this->model_file_format.c_str();
                 this->char_model_filename    = this->model_filename.c_str();
 
+                this->image_width = -1;
+                this->image_height = -1;
+
                 if (!this->is_symbiont_species)
                 {
                     // get `childID` from `Material` and set pointer to this `Species`.
@@ -108,9 +111,6 @@ namespace ontology
                     species_loader_struct.image_width_pointer = &this->image_width;
                     species_loader_struct.image_height_pointer = &this->image_height;
                     species_loader_struct.triangulation_type = this->triangulation_type;
-
-                    this->image_width = -1;
-                    this->image_height = -1;
 
                     const bool is_debug_mode = true;
 
