@@ -218,7 +218,7 @@ namespace loaders
         uint8_t* buffer;
         std::size_t bufsize;
         /* how big is it going to be including all mipmaps? */
-        bufsize = mipMapCount > 1 ? linearSize * 2 : linearSize;
+        bufsize = mipMapCount > 1 ? 2 * static_cast<std::size_t>(linearSize) : linearSize;
         buffer = (uint8_t*) malloc(bufsize * sizeof(uint8_t));
 
         if (std::fread(buffer, 1, bufsize, fp) != bufsize)
