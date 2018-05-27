@@ -112,6 +112,8 @@ namespace ontology
                     this->image_width = -1;
                     this->image_height = -1;
 
+                    const bool is_debug_mode = true;
+
                     loaders::load_species(
                             species_loader_struct,
                             this->vertices,
@@ -124,7 +126,8 @@ namespace ontology
                             &this->vertexbuffer,
                             &this->uvbuffer,
                             &this->normalbuffer,
-                            &this->elementbuffer);
+                            &this->elementbuffer,
+                            is_debug_mode);
 
                     // TODO: Compute the graph of this object type to enable object vertex modification!
 

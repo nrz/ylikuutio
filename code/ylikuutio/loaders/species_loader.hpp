@@ -33,7 +33,8 @@ namespace loaders
             GLuint* vertexbuffer,
             GLuint* uvbuffer,
             GLuint* normalbuffer,
-            GLuint* elementbuffer);
+            GLuint* elementbuffer,
+            const bool is_debug_mode);
 }
 
 #endif

@@ -39,7 +39,8 @@ namespace loaders
             GLuint* vertexbuffer,
             GLuint* uvbuffer,
             GLuint* normalbuffer,
-            GLuint* elementbuffer)
+            GLuint* elementbuffer,
+            const bool is_debug_mode)
     {
         bool model_loading_result = false;
 
@@ -58,7 +59,8 @@ namespace loaders
                     species_loader_struct.mesh_i,
                     out_vertices,
                     out_UVs,
-                    out_normals);
+                    out_normals,
+                    is_debug_mode);
         }
         else if (species_loader_struct.model_file_format.compare("srtm") == 0 || species_loader_struct.model_file_format.compare("SRTM") == 0)
         {

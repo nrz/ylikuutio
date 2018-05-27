@@ -157,6 +157,8 @@ namespace ontology
         symbiosis_loader_struct.model_file_format = this->model_file_format;
         symbiosis_loader_struct.triangulation_type = this->triangulation_type;
 
+        const bool is_debug_mode = true;
+
         if (loaders::load_symbiosis(
                     symbiosis_loader_struct,
                     this->vertices,
@@ -171,7 +173,8 @@ namespace ontology
                     this->ofbx_diffuse_texture_vector,
                     this->ofbx_normal_texture_vector,
                     this->ofbx_count_texture_vector,
-                    this->ofbx_mesh_count))
+                    this->ofbx_mesh_count,
+                    is_debug_mode))
         {
             std::cout << "number of meshes: " << this->ofbx_mesh_count << "\n";
 
