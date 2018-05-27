@@ -73,6 +73,7 @@ namespace ontology
                 this->number_of_chunk_masters = 0;
 
                 this->texture = 0; // some dummy value.
+                this->openGL_textureID = 0; // some dummy value.
 
                 if (!this->is_symbiont_material)
                 {
