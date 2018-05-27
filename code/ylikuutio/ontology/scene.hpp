@@ -25,7 +25,6 @@ namespace ontology
     class Universe;
     class World;
     class Shader;
-    class Species;
     class Symbiosis;
     class Camera;
 
@@ -134,9 +133,6 @@ namespace ontology
 
             glm::vec3 right; // note: `right` can not be set directly using console.
             glm::vec3 up;    // note: `up` can not be set directly using console.
-
-            // pointer to terrain `Species` (used in collision detection).
-            ontology::Species* terrain_species;
 
             // `spherical_coordinates` can be accessed as a vector or as single coordinates `rho`, `theta`, `phi`.
             SphericalCoordinatesStruct* spherical_coordinates;
