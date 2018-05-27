@@ -17,7 +17,6 @@
 namespace ontology
 {
     class Species;
-    class Symbiosis;
     class Glyph;
     class Text3D;
 }
@@ -42,7 +41,6 @@ typedef struct ObjectStruct
         // constructor.
     }
     ontology::Species* species_parent;     // pointer to the parent `Species`.
-    ontology::Symbiosis* symbiosis_parent; // pointer to the parent `Symbiosis`.
     ontology::Glyph* glyph_parent;     // pointer to the parent `Glyph`.
     ontology::Text3D* text3D_parent;   // pointer to the parent `Text3D`.
     glm::vec3 original_scale_vector; // original scale vector.
