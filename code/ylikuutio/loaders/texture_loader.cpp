@@ -224,6 +224,7 @@ namespace loaders
         if (std::fread(buffer, 1, bufsize, fp) != bufsize)
         {
             std::cerr << "Error while reading " << filename << "\n";
+            free(buffer);
             std::fclose(fp);
             return 0;
         }
