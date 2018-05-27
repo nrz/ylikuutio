@@ -55,6 +55,8 @@ namespace ontology
                 this->uvbuffer = 0;
                 this->normalbuffer = 0;
                 this->elementbuffer = 0;
+                this->initial_rotate_angle = 0.0f;
+                this->initial_rotate_vector = glm::vec3(0.0f, 1.0f, 1.0f);
 
                 this->number_of_objects = 0;
                 this->child_vector_pointers_vector.push_back(&this->object_pointer_vector);
