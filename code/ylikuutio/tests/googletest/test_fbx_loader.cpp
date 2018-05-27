@@ -292,7 +292,7 @@ TEST(OpenFBX_must_function_appropriately, turbo_polizei)
 
 TEST(fbx_file_must_be_loaded_appropriately, rigged_and_animated_cat)
 {
-    std::string filename = "cat.fbx";
+    const std::string filename = "cat.fbx";
     std::vector<glm::vec3> out_vertices;
     std::vector<glm::vec2> out_UVs;
     std::vector<glm::vec3> out_normals;
