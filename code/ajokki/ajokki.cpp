@@ -933,14 +933,19 @@ int main(int argc, char* argv[])
             {
                 // If last `std::printf()` was more than 1 sec ago,
                 // `std::printf` and reset.
-                std::snprintf(
-                        ms_frame_text,
-                        sizeof(ms_frame_text),
-                        "%.02f ms/frame; %d Hz",
-                        1000.0f / ((double) number_of_frames),
-                        number_of_frames);
-                ms_frame_text_ready = true;
-                number_of_frames = 0;
+                if (number_of_frames > 0)
+                {
+                    std::snprintf(
+                            ms_frame_text,
+                            sizeof(ms_frame_text),
+                            "%.02f ms/frame; %d Hz",
+                            1000.0f / ((double) number_of_frames),
+                            number_of_frames);
+                    ms_frame_text_ready = true;
+                    number_of_frames = 0;
+                }
+
+                // `last_time_to_display_FPS` needs to be incremented to avoid infinite loop.
                 last_time_to_display_FPS += 1.0;
 
                 // Update audio also (in case the sound has reached the end).
