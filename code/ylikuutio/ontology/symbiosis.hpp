@@ -68,6 +68,7 @@ namespace ontology
 
                 this->number_of_symbiont_materials = 0;
                 this->number_of_holobionts = 0;
+                this->ofbx_mesh_count = 0;
 
                 // get `childID` from `Shader` and set pointer to this `Symbiosis`.
                 this->bind_to_parent();
