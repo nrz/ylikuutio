@@ -82,7 +82,7 @@ namespace geometry
             }
 
             const int32_t actual_image_width = image_width / x_step;
-            const int32_t actual_image_height = actual_image_height / x_step;
+            const int32_t actual_image_height = image_height / z_step;
             int32_t number_of_vertices = actual_image_width * actual_image_height;
             temp_vertices.reserve(number_of_vertices);
             temp_UVs.reserve(number_of_vertices);
