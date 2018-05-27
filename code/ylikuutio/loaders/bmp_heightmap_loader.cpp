@@ -22,6 +22,7 @@
 
 // Include standard headers
 #include <cmath>    // NAN, std::isnan, std::pow
+#include <cstddef>  // std::size_t
 #include <cstdio>   // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf etc.
 #include <cstring>  // std::memcmp, std::strcmp, std::strlen, std::strncmp
 #include <iostream> // std::cout, std::cin, std::cerr
@@ -53,7 +54,7 @@ namespace loaders
             return false;
         }
 
-        int32_t image_size;
+        std::size_t image_size;
 
         int32_t image_width;
         int32_t image_height;

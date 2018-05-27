@@ -2,6 +2,7 @@
 #define __BMP_LOADER_HPP_INCLUDED
 
 // Include standard headers
+#include <cstddef>  // std::size_t
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 
@@ -11,7 +12,7 @@ namespace loaders
             const std::string image_path,
             int32_t& image_width,
             int32_t& image_height,
-            int32_t& image_size);
+            std::size_t& image_size);
 }
 
 #endif

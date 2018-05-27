@@ -17,6 +17,7 @@
 
 // Include standard headers
 #include <cmath>    // floor, NAN, sqrt, std::isnan, std::pow
+#include <cstddef>  // std::size_t
 #include <cstdio>   // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf etc.
 #include <cstring>  // std::memcmp, std::memcpy, std::strcmp, std::strlen, std::strncmp
 #include <iostream> // std::cout, std::cin, std::cerr
@@ -129,7 +130,7 @@ namespace loaders
     {
         int32_t image_width;
         int32_t image_height;
-        int32_t image_size;
+        std::size_t image_size;
 
         uint32_t x_step = 1;
         uint32_t z_step = 1;
