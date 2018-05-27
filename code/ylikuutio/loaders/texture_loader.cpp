@@ -17,6 +17,7 @@
 
 // Include standard headers
 #include <cmath>    // floor, NAN, sqrt, std::isnan, std::pow
+#include <cstddef>  // std::size_t
 #include <cstdio>   // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf etc.
 #include <cstring>  // std::memcmp, std::memcpy, std::strcmp, std::strlen, std::strncmp
 #include <iostream> // std::cout, std::cin, std::cerr
@@ -129,7 +130,7 @@ namespace loaders
     {
         int32_t image_width;
         int32_t image_height;
-        int32_t image_size;
+        std::size_t image_size;
 
         uint32_t x_step = 1;
         uint32_t z_step = 1;
@@ -215,7 +216,7 @@ namespace loaders
         uint32_t fourCC      = *(uint32_t*) &header[80];
 
         uint8_t* buffer;
-        uint32_t bufsize;
+        std::size_t bufsize;
         /* how big is it going to be including all mipmaps? */
         bufsize = mipMapCount > 1 ? linearSize * 2 : linearSize;
         buffer = (uint8_t*) malloc(bufsize * sizeof(uint8_t));
@@ -223,6 +224,7 @@ namespace loaders
         if (std::fread(buffer, 1, bufsize, fp) != bufsize)
         {
             std::cerr << "Error while reading " << filename << "\n";
+            free(buffer);
             std::fclose(fp);
             return 0;
         }
