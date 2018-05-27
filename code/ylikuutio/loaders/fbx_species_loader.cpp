@@ -23,7 +23,8 @@ namespace loaders
             const int32_t mesh_i,
             std::vector<glm::vec3>& out_vertices,
             std::vector<glm::vec2>& out_UVs,
-            std::vector<glm::vec3>& out_normals)
+            std::vector<glm::vec3>& out_normals,
+            const bool is_debug_mode)
     {
         // Functions and data of interest in OpenFBX:
         // struct TakeInfo
@@ -42,7 +43,11 @@ namespace loaders
         // OpenFBX wants `u8` == `unsigned char`.
         const u8* data = reinterpret_cast<const u8*>(data_vector.data());
         int size = data_vector.size();
-        std::cout << "loaded FBX data vector size: " << size << "\n";
+
+        if (is_debug_mode)
+        {
+            std::cout << "loaded FBX data vector size: " << size << "\n";
+        }
 
         ofbx::IScene* ofbx_iscene = ofbx::load(data, size);
 
@@ -79,10 +84,18 @@ namespace loaders
         // TODO: finalize the implementation of `ontology::Symbiosis`
         // to be able to support for different materials!
         int material_count = mesh->getMaterialCount(); // TODO: use this in  `ontology::Symbiosis` entities!
-        std::cout << filename << ": mesh " << mesh_i << ": getMaterialCount(): " << material_count << "\n";
+
+        if (is_debug_mode)
+        {
+            std::cout << filename << ": mesh " << mesh_i << ": getMaterialCount(): " << material_count << "\n";
+        }
 
         int vertex_count = geometry->getVertexCount();
-        std::cout << filename << ": mesh " << mesh_i << ": getVertexCount(): " << vertex_count << "\n";
+
+        if (is_debug_mode)
+        {
+            std::cout << filename << ": mesh " << mesh_i << ": getVertexCount(): " << vertex_count << "\n";
+        }
 
         const ofbx::Vec3* vertices = geometry->getVertices();
 

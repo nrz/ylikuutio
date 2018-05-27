@@ -298,6 +298,9 @@ TEST(fbx_file_must_be_loaded_appropriately, rigged_and_animated_cat)
     std::vector<glm::vec3> out_normals;
 
     int32_t mesh_i = 0;
-    bool result = loaders::load_FBX(filename, mesh_i, out_vertices, out_UVs, out_normals);
+
+    const bool is_debug_mode = false; // Travis fails for too much output.
+
+    bool result = loaders::load_FBX(filename, mesh_i, out_vertices, out_UVs, out_normals, is_debug_mode);
     ASSERT_TRUE(result);
 }

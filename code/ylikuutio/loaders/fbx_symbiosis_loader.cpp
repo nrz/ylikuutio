@@ -30,7 +30,8 @@ namespace loaders
             std::vector<const ofbx::Texture*>& ofbx_diffuse_texture_vector,
             std::vector<const ofbx::Texture*>& ofbx_normal_texture_vector,
             std::vector<const ofbx::Texture*>& ofbx_count_texture_vector,
-            int32_t& mesh_count)
+            int32_t& mesh_count,
+            const bool is_debug_mode)
     {
         // Functions and data of interest in OpenFBX:
         // struct TakeInfo
@@ -49,7 +50,11 @@ namespace loaders
         // OpenFBX wants `u8` == `unsigned char`.
         const u8* data = reinterpret_cast<const u8*>(data_vector.data());
         const int64_t size = data_vector.size();
-        std::cout << "loaded FBX data vector size: " << size << "\n";
+
+        if (is_debug_mode)
+        {
+            std::cout << "loaded FBX data vector size: " << size << "\n";
+        }
 
         const ofbx::IScene* ofbx_iscene = ofbx::load(data, size);
 
@@ -84,11 +89,19 @@ namespace loaders
             // TODO: finalize the implementation of `ontology::Symbiosis`
             // to be able to support for different materials!
             const int material_count = mesh->getMaterialCount(); // TODO: use this in  `ontology::Symbiosis` entities!
-            std::cout << filename << ": mesh " << mesh_i << ": getMaterialCount(): " << material_count << "\n";
+
+            if (is_debug_mode)
+            {
+                std::cout << filename << ": mesh " << mesh_i << ": getMaterialCount(): " << material_count << "\n";
+            }
 
             for (int32_t material_i = 0; material_i < material_count; material_i++)
             {
-                std::cout << "mesh " << mesh_i << ", material " << material_i << "\n";
+                if (is_debug_mode)
+                {
+                    std::cout << "mesh " << mesh_i << ", material " << material_i << "\n";
+                }
+
                 const ofbx::Material* material = mesh->getMaterial(material_i);
 
                 if (material == nullptr)
@@ -101,11 +114,17 @@ namespace loaders
 
                 if (diffuse_texture == nullptr)
                 {
-                    std::cout << "mesh " << mesh_i << ", DIFFUSE texture is nullptr\n";
+                    if (is_debug_mode)
+                    {
+                        std::cout << "mesh " << mesh_i << ", DIFFUSE texture is nullptr\n";
+                    }
                 }
                 else
                 {
-                    std::cout << "mesh " << mesh_i << ", DIFFUSE texture at " << std::hex << (void*) diffuse_texture << std::dec << "\n";
+                    if (is_debug_mode)
+                    {
+                        std::cout << "mesh " << mesh_i << ", DIFFUSE texture at " << std::hex << (void*) diffuse_texture << std::dec << "\n";
+                    }
 
                     // Add new texture to map.
                     if (ofbx_diffuse_texture_mesh_map.count(diffuse_texture) != 1)
@@ -114,10 +133,18 @@ namespace loaders
                         ofbx_diffuse_texture_mesh_map[diffuse_texture] = std::vector<int32_t>();
                     }
 
-                    std::cout << "Adding mesh " << mesh_i << " to DIFFUSE texture at " << std::hex << (void*) diffuse_texture << std::dec << "\n";
+                    if (is_debug_mode)
+                    {
+                        std::cout << "Adding mesh " << mesh_i << " to DIFFUSE texture at " << std::hex << (void*) diffuse_texture << std::dec << "\n";
+                    }
+
                     ofbx_diffuse_texture_mesh_map[diffuse_texture].push_back(mesh_i);
 
-                    std::cout << "Adding mesh " << mesh_i << " to DIFFUSE textures.\n";
+                    if (is_debug_mode)
+                    {
+                        std::cout << "Adding mesh " << mesh_i << " to DIFFUSE textures.\n";
+                    }
+
                     ofbx_diffuse_texture_vector.push_back(diffuse_texture);
                 }
 
@@ -125,15 +152,25 @@ namespace loaders
 
                 if (normal_texture == nullptr)
                 {
-                    std::cout << "mesh " << mesh_i << ", NORMAL texture is nullptr\n";
+                    if (is_debug_mode)
+                    {
+                        std::cout << "mesh " << mesh_i << ", NORMAL texture is nullptr\n";
+                    }
                 }
                 else
                 {
-                    std::cout << "mesh " << mesh_i << ", NORMAL texture at " << std::hex << (void*) normal_texture << std::dec << "\n";
+                    if (is_debug_mode)
+                    {
+                        std::cout << "mesh " << mesh_i << ", NORMAL texture at " << std::hex << (void*) normal_texture << std::dec << "\n";
+                    }
 
                     // TODO: store NORMAL textures similarly as DIFFUSE textures.
 
-                    std::cout << "Adding mesh " << mesh_i << " to NORMAL textures.\n";
+                    if (is_debug_mode)
+                    {
+                        std::cout << "Adding mesh " << mesh_i << " to NORMAL textures.\n";
+                    }
+
                     ofbx_normal_texture_vector.push_back(normal_texture);
                 }
 
@@ -141,21 +178,34 @@ namespace loaders
 
                 if (count_texture == nullptr)
                 {
-                    std::cout << "mesh " << mesh_i << ", COUNT texture is nullptr\n";
+                    if (is_debug_mode)
+                    {
+                        std::cout << "mesh " << mesh_i << ", COUNT texture is nullptr\n";
+                    }
                 }
                 else
                 {
-                    std::cout << "mesh " << mesh_i << ", COUNT texture at " << std::hex << (void*) count_texture << std::dec << "\n";
+                    if (is_debug_mode)
+                    {
+                        std::cout << "mesh " << mesh_i << ", COUNT texture at " << std::hex << (void*) count_texture << std::dec << "\n";
+                    }
 
                     // TODO: store COUNT textures similarly as DIFFUSE textures.
 
-                    std::cout << "Adding mesh " << mesh_i << " to COUNT textures.\n";
+                    if (is_debug_mode)
+                    {
+                        std::cout << "Adding mesh " << mesh_i << " to COUNT textures.\n";
+                    }
                     ofbx_count_texture_vector.push_back(count_texture);
                 }
             }
 
             const int vertex_count = geometry->getVertexCount();
-            std::cout << filename << ": mesh " << mesh_i << ": getVertexCount(): " << vertex_count << "\n";
+
+            if (is_debug_mode)
+            {
+                std::cout << filename << ": mesh " << mesh_i << ": getVertexCount(): " << vertex_count << "\n";
+            }
 
             const ofbx::Vec3* vertices = geometry->getVertices();
 

@@ -37,7 +37,8 @@ namespace loaders
             std::vector<const ofbx::Texture*>& ofbx_diffuse_texture_vector,
             std::vector<const ofbx::Texture*>& ofbx_normal_texture_vector,
             std::vector<const ofbx::Texture*>& ofbx_count_texture_vector,
-            int32_t& mesh_count);
+            int32_t& mesh_count,
+            const bool is_debug_mode);
 }
 
 #endif
