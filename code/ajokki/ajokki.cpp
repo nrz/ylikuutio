@@ -902,7 +902,7 @@ int main(int argc, char* argv[])
     // For speed computation
     double last_time_to_display_FPS = ylikuutio::time::get_time();
     double last_time_for_display_sync = ylikuutio::time::get_time();
-    int number_of_frames = 0;
+    int32_t number_of_frames = 0;
 
     bool ms_frame_text_ready = false;
 
