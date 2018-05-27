@@ -107,7 +107,6 @@ namespace ontology
             bool quaternions_in_use;
 
             ontology::SymbiontSpecies* symbiont_species; // pointer to `SymbiontSpecies`.
-            int32_t symbiont_species_biontID;
 
             bool has_entered;
             bool should_ylikuutio_render_this_biont;
