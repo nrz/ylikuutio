@@ -216,7 +216,7 @@ namespace loaders
         uint32_t fourCC      = *(uint32_t*) &header[80];
 
         uint8_t* buffer;
-        uint32_t bufsize;
+        std::size_t bufsize;
         /* how big is it going to be including all mipmaps? */
         bufsize = mipMapCount > 1 ? linearSize * 2 : linearSize;
         buffer = (uint8_t*) malloc(bufsize * sizeof(uint8_t));
