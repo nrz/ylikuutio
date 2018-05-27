@@ -902,7 +902,7 @@ int main(int argc, char* argv[])
     // For speed computation
     double last_time_to_display_FPS = ylikuutio::time::get_time();
     double last_time_for_display_sync = ylikuutio::time::get_time();
-    int nbFrames = 0;
+    int number_of_frames = 0;
 
     bool ms_frame_text_ready = false;
 
@@ -927,7 +927,7 @@ int main(int argc, char* argv[])
             last_time_for_display_sync = ylikuutio::time::get_time();
 
             char ms_frame_text[256];
-            nbFrames++;
+            number_of_frames++;
 
             while (current_time_in_main_loop - last_time_to_display_FPS >= 1.0f)
             {
@@ -937,10 +937,10 @@ int main(int argc, char* argv[])
                         ms_frame_text,
                         sizeof(ms_frame_text),
                         "%.02f ms/frame; %.02f Hz",
-                        1000.0f / ((double) nbFrames),
-                        1000.0f / (1000.0f / ((double) nbFrames)));
+                        1000.0f / ((double) number_of_frames),
+                        1000.0f / (1000.0f / ((double) number_of_frames)));
                 ms_frame_text_ready = true;
-                nbFrames = 0;
+                number_of_frames = 0;
                 last_time_to_display_FPS += 1.0;
 
                 // Update audio also (in case the sound has reached the end).
