@@ -115,6 +115,7 @@ namespace ontology
 
                 this->number_of_bionts = 0;
 
+                this->child_vector_pointers_vector.push_back(&this->biont_pointer_vector);
                 this->type = "ontology::SymbiontSpecies*";
             }
 
