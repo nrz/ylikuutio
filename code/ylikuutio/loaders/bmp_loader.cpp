@@ -88,7 +88,7 @@ namespace loaders
         // Some BMP files are misformatted, guess missing information
         if (image_size == 0)
         {
-            int64_t number_of_pixels = (int64_t) image_width * image_height;
+            int64_t number_of_pixels = static_cast<int64_t>(image_width) * image_height;
 
             if (number_of_pixels > std::numeric_limits<std::size_t>::max() / 4)
             {
