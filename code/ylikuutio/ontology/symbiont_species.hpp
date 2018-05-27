@@ -113,6 +113,8 @@ namespace ontology
 
                 // TODO: Compute the vertex graph of this `SymbiontSpecies` to enable object vertex modification!
 
+                this->number_of_bionts = 0;
+
                 this->type = "ontology::SymbiontSpecies*";
             }
 
