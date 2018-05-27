@@ -32,14 +32,15 @@ namespace loaders
             const char* const vertex_base_pointer,
             char*& vertex_data_pointer,
             const uint64_t vertex_data_size,
-            const char* const description)
+            const char* const description,
+            const bool is_debug_mode)
     {
         return string::extract_int32_t_value_from_string(
                 vertex_base_pointer,
                 vertex_data_pointer,
                 vertex_data_size,
                 (const char* const) " Mmhvz\">",
-                description);
+                is_debug_mode ? description : nullptr);
     }
 
     bool find_first_glyph_in_SVG(const char* SVG_base_pointer, char*& SVG_data_pointer, uint64_t data_size)
@@ -87,7 +88,8 @@ namespace loaders
             const char* const SVG_base_pointer,
             char*& SVG_data_pointer,
             uint64_t data_size,
-            std::vector<std::vector<glm::vec2>>& current_glyph_vertices)
+            std::vector<std::vector<glm::vec2>>& current_glyph_vertices,
+            const bool is_debug_mode)
     {
         // This function returns a pointer to vertex data of a single glyph and advances `SVG_data_pointer`.
 
@@ -117,7 +119,10 @@ namespace loaders
         // copy from opening double quote to the next `"/"`.
         string::extract_string(SVG_base_pointer, opening_double_quote_pointer, data_size, char_path, char_path, sizeof(char_path), (char*) "/");
 
-        std::printf("d: %s\n", char_path);
+        if (is_debug_mode)
+        {
+            std::printf("d: %s\n", char_path);
+        }
 
         // Loop through vertices and push them to `current_glyph_vertices`.
         char* vertex_data_pointer;
@@ -131,7 +136,8 @@ namespace loaders
                         char_path,
                         vertex_data_pointer,
                         sizeof(char_path),
-                        (const char* const) "M (moveto)");
+                        (const char* const) "M (moveto)",
+                        is_debug_mode);
 
                 while (std::strncmp(vertex_data_pointer++, " ", std::strlen(" ")) != 0);
 
@@ -139,7 +145,9 @@ namespace loaders
                         char_path,
                         --vertex_data_pointer,
                         sizeof(char_path),
-                        (const char* const) "space (moveto y coordinate)");
+                        (const char* const) "space (moveto y coordinate)",
+                        is_debug_mode);
+
                 vertices_of_current_edge_section.push_back(current_vertex);
 
             } // if (std::strncmp(vertex_data_pointer, "M", std::strlen("M")) == 0)
@@ -150,7 +158,9 @@ namespace loaders
                         char_path,
                         vertex_data_pointer,
                         sizeof(char_path),
-                        (const char* const) "h (horizontal relative lineto)");
+                        (const char* const) "h (horizontal relative lineto)",
+                        is_debug_mode);
+
                 current_vertex.x += horizontal_lineto_value;
                 vertices_of_current_edge_section.push_back(current_vertex);
             } // else if (std::strncmp(vertex_data_pointer, "h", std::strlen("h")) == 0)
@@ -161,20 +171,30 @@ namespace loaders
                         char_path,
                         vertex_data_pointer,
                         sizeof(char_path),
-                        (const char* const) "v (vertical relative lineto)");
+                        (const char* const) "v (vertical relative lineto)",
+                        is_debug_mode);
+
                 current_vertex.y += vertical_lineto_value;
                 vertices_of_current_edge_section.push_back(current_vertex);
             } // else if (std::strncmp(vertex_data_pointer, "v", std::strlen("v")) == 0)
             else if (std::strncmp(vertex_data_pointer, "z", std::strlen("z")) == 0)
             {
-                std::printf("z (closepath)\n");
+                if (is_debug_mode)
+                {
+                    std::printf("z (closepath)\n");
+                }
+
                 current_glyph_vertices.push_back(vertices_of_current_edge_section); // store the vertices of the current edge section.
                 vertices_of_current_edge_section.clear();                           // clear the vector of vertices of the current edge section.
                 vertex_data_pointer++;
             } // else if (std::strncmp(vertex_data_pointer, "z", std::strlen("z")) == 0)
             else if (std::strncmp(vertex_data_pointer, "\"", std::strlen("\"")) == 0)
             {
-                std::printf("\" (end of vertex data)\n");
+                if (is_debug_mode)
+                {
+                    std::printf("\" (end of vertex data)\n");
+                }
+
                 SVG_data_pointer = ++closing_double_quote_pointer;
                 return true;
             } // else if (std::strncmp(vertex_data_pointer, "\"", std::strlen("\"")) == 0)
@@ -191,7 +211,8 @@ namespace loaders
             uint64_t data_size,
             std::vector<std::vector<std::vector<glm::vec2>>>& out_glyph_vertex_data,
             std::vector<std::string>& glyph_names,
-            std::vector<std::string>& unicode_strings)
+            std::vector<std::string>& unicode_strings,
+            const bool is_debug_mode)
     {
         // This function loads the next SVG glyph.
         // SVG_base_pointer: pointer to the origin of the SVG data.
@@ -201,7 +222,11 @@ namespace loaders
         // unicode_strings: vector of unicode strings.
 
         // A glyph was found!
-        // std::printf("<glyph found at 0x%lx.\n", (uint64_t) SVG_data_pointer);
+        if (is_debug_mode)
+        {
+            std::printf("<glyph found at 0x%lx.\n", (uint64_t) SVG_data_pointer);
+        }
+
         char char_glyph_name[1024];
         char char_unicode[1024];
         std::vector<std::vector<glm::vec2>> current_glyph_vertices; // vertices of the current glyph.
@@ -215,13 +240,19 @@ namespace loaders
             {
                 // A glyph-name was found.
                 // TODO: If the glyph does not have a glyph name, an empty string will be stored as glyph-name.
-                // std::printf("glyph-name= found at 0x%lx.\n", (uint64_t) SVG_data_pointer);
+                if (is_debug_mode)
+                {
+                    std::printf("glyph-name= found at 0x%lx.\n", (uint64_t) SVG_data_pointer);
+                }
 
                 // Find the memory address of the opening double quote.
                 char* opening_double_quote_pointer = strchr(SVG_data_pointer, '"');
                 if (opening_double_quote_pointer != nullptr)
                 {
-                    // std::printf("opening \" found at 0x%lx.\n", (uint64_t) opening_double_quote_pointer);
+                    if (is_debug_mode)
+                    {
+                        std::printf("opening \" found at 0x%lx.\n", (uint64_t) opening_double_quote_pointer);
+                    }
 
                     opening_double_quote_pointer++;
 
@@ -229,7 +260,11 @@ namespace loaders
                     char* closing_double_quote_pointer = strchr(opening_double_quote_pointer, '"');
                     if (closing_double_quote_pointer != nullptr)
                     {
-                        // std::printf("closing \" found at 0x%lx.\n", (uint64_t) closing_double_quote_pointer);
+                        if (is_debug_mode)
+                        {
+                            std::printf("closing \" found at 0x%lx.\n", (uint64_t) closing_double_quote_pointer);
+                        }
+
                         has_glyph_name = true;
 
                         closing_double_quote_pointer++;
@@ -243,7 +278,10 @@ namespace loaders
                                 sizeof(char_glyph_name),
                                 (char*) "\"");
 
-                        std::printf("glyph name: %s\n", char_glyph_name);
+                        if (is_debug_mode)
+                        {
+                            std::printf("glyph name: %s\n", char_glyph_name);
+                        }
 
                         SVG_data_pointer = ++closing_double_quote_pointer;
                     } // if (closing_double_quote_pointer != nullptr)
@@ -263,13 +301,19 @@ namespace loaders
             {
                 // Unicode was found.
                 // TODO: If the glyph does not have unicode, the glyph will be discarded (as there is no way to refer to it).
-                // std::printf("unicode= found at 0x%lx.\n", (uint64_t) SVG_data_pointer);
+                if (is_debug_mode)
+                {
+                    std::printf("unicode= found at 0x%lx.\n", (uint64_t) SVG_data_pointer);
+                }
 
                 // Find the memory address of the opening double quote.
                 char* opening_double_quote_pointer = strchr(SVG_data_pointer, '"');
                 if (opening_double_quote_pointer != nullptr)
                 {
-                    // std::printf("opening \" found at 0x%lx.\n", (uint64_t) opening_double_quote_pointer);
+                    if (is_debug_mode)
+                    {
+                        std::printf("opening \" found at 0x%lx.\n", (uint64_t) opening_double_quote_pointer);
+                    }
 
                     opening_double_quote_pointer++;
 
@@ -277,7 +321,11 @@ namespace loaders
                     char* closing_double_quote_pointer = strchr(opening_double_quote_pointer, '"');
                     if (closing_double_quote_pointer != nullptr)
                     {
-                        // std::printf("closing \" found at 0x%lx.\n", (uint64_t) closing_double_quote_pointer);
+                        if (is_debug_mode)
+                        {
+                            std::printf("closing \" found at 0x%lx.\n", (uint64_t) closing_double_quote_pointer);
+                        }
+
                         has_glyph_unicode = true;
 
                         string::extract_string(
@@ -289,7 +337,10 @@ namespace loaders
                                 sizeof(char_unicode),
                                 (char*) "\"");
 
-                        std::printf("unicode: %s\n", char_unicode);
+                        if (is_debug_mode)
+                        {
+                            std::printf("unicode: %s\n", char_unicode);
+                        }
 
                         SVG_data_pointer = ++closing_double_quote_pointer;
                     } // if (closing_double_quote_pointer != nullptr)
@@ -307,7 +358,7 @@ namespace loaders
             } // else if (std::strncmp(SVG_data_pointer, "unicode=", std::strlen("unicode=")) == 0)
             else if (std::strncmp(SVG_data_pointer, "d=", std::strlen("d=")) == 0)
             {
-                bool result = loaders::load_vertex_data(SVG_base_pointer, SVG_data_pointer, data_size, current_glyph_vertices);
+                bool result = loaders::load_vertex_data(SVG_base_pointer, SVG_data_pointer, data_size, current_glyph_vertices, is_debug_mode);
                 if (result == false)
                 {
                     return false;
@@ -336,7 +387,11 @@ namespace loaders
                     glyph_names.push_back(glyph_name_string);
 
                     // TODO: Create default vertex vector (no vertices), if needed.
-                    std::printf("number of vertices: %lu\n", current_glyph_vertices.size());
+                    if (is_debug_mode)
+                    {
+                        std::printf("number of vertices: %lu\n", current_glyph_vertices.size());
+                    }
+
                     // Store the vertices of the current vector to the glyph vertex vector
                     // which contains the vertices of all the glyphs.
                     out_glyph_vertex_data.push_back(current_glyph_vertices);
@@ -355,7 +410,8 @@ namespace loaders
             const std::string font_file_path,
             std::vector<std::vector<std::vector<glm::vec2>>>& out_glyph_vertex_data,
             std::vector<std::string>& glyph_names,
-            std::vector<std::string>& unicode_strings)
+            std::vector<std::string>& unicode_strings,
+            const bool is_debug_mode)
     {
         std::string file_content = file::slurp(font_file_path);
         const uint64_t file_size = file_content.size();
@@ -387,7 +443,10 @@ namespace loaders
         }
 
         uint64_t offset = (uint64_t) SVG_data_pointer - (uint64_t) SVG_base_pointer;
-        std::printf("First glyph found at file offset 0x" PRIx64 " (memory address 0x" PRIx64 ").\n", offset, (uint64_t) SVG_data_pointer);
+        if (is_debug_mode)
+        {
+            std::printf("First glyph found at file offset 0x" PRIx64 " (memory address 0x" PRIx64 ").\n", offset, (uint64_t) SVG_data_pointer);
+        }
 
         // Create the vertex data for each glyph in a loop.
         while (true)
@@ -400,7 +459,9 @@ namespace loaders
                         file_size,
                         out_glyph_vertex_data,
                         glyph_names,
-                        unicode_strings);
+                        unicode_strings,
+                        is_debug_mode);
+
                 if (!result)
                 {
                     delete[] SVG_data;
