@@ -120,6 +120,8 @@ typedef struct
     HRGN hRgnBlur;
     BOOL fTransitionOnMaximized;
 } DWM_BLURBEHIND;
+#else
+ #include <dwmapi.h>
 #endif /*Windows Vista*/
 
 #ifndef DPI_ENUMS_DECLARED
@@ -240,7 +242,9 @@ typedef VkBool32 (APIENTRY *PFN_vkGetPhysicalDeviceWin32PresentationSupportKHR)(
 #include "egl_context.h"
 #include "osmesa_context.h"
 
-#define _GLFW_WNDCLASSNAME L"GLFW30"
+#if !defined(_GLFW_WNDCLASSNAME)
+ #define _GLFW_WNDCLASSNAME L"GLFW30"
+#endif
 
 #define _glfw_dlopen(name) LoadLibraryA(name)
 #define _glfw_dlclose(handle) FreeLibrary((HMODULE) handle)

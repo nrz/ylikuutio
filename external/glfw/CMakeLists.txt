@@ -1,14 +1,8 @@
-cmake_minimum_required(VERSION 2.8.12)
+cmake_minimum_required(VERSION 3.0)
 
 project(GLFW C)
 
 set(CMAKE_LEGACY_CYGWIN_WIN32 OFF)
-
-if (NOT CMAKE_VERSION VERSION_LESS "3.0")
-    # Until all major package systems have moved to CMake 3,
-    # we stick with the older INSTALL_NAME_DIR mechanism
-    cmake_policy(SET CMP0042 OLD)
-endif()
 
 if (NOT CMAKE_VERSION VERSION_LESS "3.1")
     cmake_policy(SET CMP0054 NEW)
@@ -141,15 +135,6 @@ if (MINGW)
     endif()
 endif()
 
-if (APPLE)
-    # Dependencies required by the MoltenVK static library
-    set(GLFW_VULKAN_DEPS
-        "-lc++"
-        "-framework Cocoa"
-        "-framework Metal"
-        "-framework QuartzCore")
-endif()
-
 #--------------------------------------------------------------------
 # Detect and select backend APIs
 #--------------------------------------------------------------------
@@ -180,7 +165,7 @@ endif()
 #--------------------------------------------------------------------
 if (GLFW_VULKAN_STATIC)
     if (VULKAN_FOUND AND VULKAN_STATIC_LIBRARY)
-        list(APPEND glfw_LIBRARIES "${VULKAN_STATIC_LIBRARY}" ${GLFW_VULKAN_DEPS})
+        list(APPEND glfw_LIBRARIES "${VULKAN_STATIC_LIBRARY}")
         if (BUILD_SHARED_LIBS)
             message(WARNING "Linking Vulkan loader static library into GLFW")
         endif()
@@ -289,6 +274,14 @@ if (_GLFW_WAYLAND)
 
     include(CheckIncludeFiles)
     check_include_files(xkbcommon/xkbcommon-compose.h HAVE_XKBCOMMON_COMPOSE_H)
+
+    if (NOT ("${CMAKE_SYSTEM_NAME}" STREQUAL "Linux"))
+        find_package(EpollShim)
+        if (EPOLLSHIM_FOUND)
+            list(APPEND glfw_INCLUDE_DIRS "${EPOLLSHIM_INCLUDE_DIRS}")
+            list(APPEND glfw_LIBRARIES "${EPOLLSHIM_LIBRARIES}")
+        endif()
+    endif()
 endif()
 
 #--------------------------------------------------------------------

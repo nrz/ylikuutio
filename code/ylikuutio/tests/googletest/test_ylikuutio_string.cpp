@@ -269,8 +269,10 @@ TEST(extract_string_from_memory, nothing_must_be_extracted_when_source_string_is
 
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
+    const char* orig_dest_array = dest_array;
 
     string::extract_string(text, text_pointer, sizeof(text), dest_array, dest_array, array_size, end_string);
+    ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array, 0);
 }
 
@@ -284,8 +286,10 @@ TEST(extract_string_from_memory, nothing_must_be_extracted_when_source_string_is
 
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
+    const char* orig_dest_array = dest_array;
 
     string::extract_string(text, text_pointer, sizeof(text), dest_array, dest_array, array_size, end_string);
+    ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array, 0);
 }
 
@@ -299,8 +303,10 @@ TEST(extract_string_from_memory, nothing_must_be_extracted_when_source_string_is
 
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
+    const char* orig_dest_array = dest_array;
 
     string::extract_string(text, text_pointer, sizeof(text), dest_array, dest_array, array_size, end_string);
+    ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array, 0);
 }
 
@@ -314,8 +320,10 @@ TEST(extract_string_from_memory, nothing_must_be_extracted_when_source_string_is
 
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
+    const char* orig_dest_array = dest_array;
 
     string::extract_string(text, text_pointer, sizeof(text), dest_array, dest_array, array_size, end_string);
+    ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array, 0);
 }
 
@@ -329,8 +337,10 @@ TEST(extract_string_from_memory, 1_char_must_be_extracted_when_source_string_is_
 
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
+    const char* orig_dest_array = dest_array;
 
     string::extract_string(text, text_pointer, sizeof(text), dest_array, dest_array, array_size, end_string);
+    ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array, 0);
 }
 
@@ -344,8 +354,10 @@ TEST(extract_string_from_memory, iloinen_lokki_laulaa_ja_nukkuu)
 
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
+    const char* orig_dest_array = dest_array;
 
     string::extract_string(text, text_pointer, sizeof(text), dest_array, dest_array, array_size, end_string);
+    ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array++, 'i');
     ASSERT_EQ(*dest_array++, 'l');
     ASSERT_EQ(*dest_array++, 'o');
@@ -380,8 +392,10 @@ TEST(extract_string_with_several_endings_from_memory, nothing_must_be_extracted_
 
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
+    const char* orig_dest_array = dest_array;
 
     string::extract_string_with_several_endings(text, text_pointer, sizeof(text), dest_array, dest_array, array_size, end_string);
+    ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array, 0);
 }
 
@@ -395,8 +409,10 @@ TEST(extract_string_with_several_endings_from_memory, nothing_must_be_extracted_
 
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
+    const char* orig_dest_array = dest_array;
 
     string::extract_string_with_several_endings(text, text_pointer, sizeof(text), dest_array, dest_array, array_size, end_string);
+    ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array, 0);
 }
 
@@ -410,8 +426,10 @@ TEST(extract_string_with_several_endings_from_memory, nothing_must_be_extracted_
 
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
+    const char* orig_dest_array = dest_array;
 
     string::extract_string_with_several_endings(text, text_pointer, sizeof(text), dest_array, dest_array, array_size, end_string);
+    ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array, 0);
 }
 
@@ -425,8 +443,10 @@ TEST(extract_string_with_several_endings_from_memory, nothing_must_be_extracted_
 
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
+    const char* orig_dest_array = dest_array;
 
     string::extract_string_with_several_endings(text, text_pointer, sizeof(text), dest_array, dest_array, array_size, end_string);
+    ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array, 0);
 }
 
@@ -440,8 +460,10 @@ TEST(extract_string_with_several_endings_from_memory, nothing_must_be_extracted_
 
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
+    const char* orig_dest_array = dest_array;
 
     string::extract_string_with_several_endings(text, text_pointer, sizeof(text), dest_array, dest_array, array_size, end_string);
+    ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array, 0);
 }
 
@@ -455,8 +477,10 @@ TEST(extract_string_with_several_endings_from_memory, nothing_must_be_extracted_
 
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
+    const char* orig_dest_array = dest_array;
 
     string::extract_string_with_several_endings(text, text_pointer, sizeof(text), dest_array, dest_array, array_size, end_string);
+    ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array, 0);
 }
 
@@ -470,8 +494,10 @@ TEST(extract_string_with_several_endings_from_memory, nothing_must_be_extracted_
 
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
+    const char* orig_dest_array = dest_array;
 
     string::extract_string_with_several_endings(text, text_pointer, sizeof(text), dest_array, dest_array, array_size, end_string);
+    ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array, 0);
 }
 
@@ -485,8 +511,10 @@ TEST(extract_string_with_several_endings_from_memory, nothing_must_be_extracted_
 
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
+    const char* orig_dest_array = dest_array;
 
     string::extract_string_with_several_endings(text, text_pointer, sizeof(text), dest_array, dest_array, array_size, end_string);
+    ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array, 0);
 }
 
@@ -500,8 +528,10 @@ TEST(extract_string_with_several_endings_from_memory, 1_char_must_be_extracted_w
 
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
+    const char* orig_dest_array = dest_array;
 
     string::extract_string_with_several_endings(text, text_pointer, sizeof(text), dest_array, dest_array, array_size, end_string);
+    ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array++, 'a');
     ASSERT_EQ(*dest_array, 0);
 }
@@ -516,8 +546,10 @@ TEST(extract_string_with_several_endings_from_memory, nothing_must_be_extracted_
 
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
+    const char* orig_dest_array = dest_array;
 
     string::extract_string_with_several_endings(text, text_pointer, sizeof(text), dest_array, dest_array, array_size, end_string);
+    ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array, 0);
 }
 
@@ -531,8 +563,10 @@ TEST(extract_string_with_several_endings_from_memory, nothing_must_be_extracted_
 
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
+    const char* orig_dest_array = dest_array;
 
     string::extract_string_with_several_endings(text, text_pointer, sizeof(text), dest_array, dest_array, array_size, end_string);
+    ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array, 0);
 }
 
@@ -546,8 +580,10 @@ TEST(extract_string_with_several_endings_from_memory, 1_char_must_be_extracted_w
 
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
+    const char* orig_dest_array = dest_array;
 
     string::extract_string_with_several_endings(text, text_pointer, sizeof(text), dest_array, dest_array, array_size, end_string);
+    ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array++, 'a');
     ASSERT_EQ(*dest_array, 0);
 }
@@ -562,8 +598,10 @@ TEST(extract_string_with_several_endings_from_memory, 1_char_must_be_extracted_w
 
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
+    const char* orig_dest_array = dest_array;
 
     string::extract_string_with_several_endings(text, text_pointer, sizeof(text), dest_array, dest_array, array_size, end_string);
+    ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array++, 'a');
     ASSERT_EQ(*dest_array, 0);
 }
@@ -578,8 +616,10 @@ TEST(extract_string_with_several_endings_from_memory, 1_char_must_be_extracted_w
 
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
+    const char* orig_dest_array = dest_array;
 
     string::extract_string_with_several_endings(text, text_pointer, sizeof(text), dest_array, dest_array, array_size, end_string);
+    ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array++, 'a');
     ASSERT_EQ(*dest_array, 0);
 }
@@ -594,8 +634,10 @@ TEST(extract_string_with_several_endings_from_memory, 1_char_must_be_extracted_w
 
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
+    const char* orig_dest_array = dest_array;
 
     string::extract_string_with_several_endings(text, text_pointer, sizeof(text), dest_array, dest_array, array_size, end_string);
+    ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array++, 'a');
     ASSERT_EQ(*dest_array, 0);
 }
@@ -610,8 +652,10 @@ TEST(extract_string_with_several_endings_from_memory, 2_chars_must_be_extracted_
 
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
+    const char* orig_dest_array = dest_array;
 
     string::extract_string_with_several_endings(text, text_pointer, sizeof(text), dest_array, dest_array, array_size, end_string);
+    ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array++, 'a');
     ASSERT_EQ(*dest_array++, 'b');
     ASSERT_EQ(*dest_array, 0);
@@ -627,8 +671,10 @@ TEST(extract_string_with_several_endings_from_memory, nothing_must_be_extracted_
 
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
+    const char* orig_dest_array = dest_array;
 
     string::extract_string_with_several_endings(text, text_pointer, sizeof(text), dest_array, dest_array, array_size, end_string);
+    ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array, 0);
 }
 
@@ -642,8 +688,10 @@ TEST(extract_string_with_several_endings_from_memory, 1_char_must_be_extracted_w
 
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
+    const char* orig_dest_array = dest_array;
 
     string::extract_string_with_several_endings(text, text_pointer, sizeof(text), dest_array, dest_array, array_size, end_string);
+    ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array++, 'a');
     ASSERT_EQ(*dest_array, 0);
 }
@@ -658,8 +706,10 @@ TEST(extract_string_with_several_endings_from_memory, 2_chars_must_be_extracted_
 
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
+    const char* orig_dest_array = dest_array;
 
     string::extract_string_with_several_endings(text, text_pointer, sizeof(text), dest_array, dest_array, array_size, end_string);
+    ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array++, 'a');
     ASSERT_EQ(*dest_array++, 'b');
     ASSERT_EQ(*dest_array, 0);
@@ -675,8 +725,10 @@ TEST(extract_string_with_several_endings_from_memory, 3_chars_must_be_extracted_
 
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
+    const char* orig_dest_array = dest_array;
 
     string::extract_string_with_several_endings(text, text_pointer, sizeof(text), dest_array, dest_array, array_size, end_string);
+    ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array++, 'a');
     ASSERT_EQ(*dest_array++, 'b');
     ASSERT_EQ(*dest_array++, 'c');
@@ -693,8 +745,10 @@ TEST(extract_string_with_several_endings_from_memory, nothing_must_be_extracted_
 
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
+    const char* orig_dest_array = dest_array;
 
     string::extract_string_with_several_endings(text, text_pointer, sizeof(text), dest_array, dest_array, array_size, end_string);
+    ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array, 0);
 }
 
@@ -708,8 +762,10 @@ TEST(extract_string_with_several_endings_from_memory, nothing_must_be_extracted_
 
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
+    const char* orig_dest_array = dest_array;
 
     string::extract_string_with_several_endings(text, text_pointer, sizeof(text), dest_array, dest_array, array_size, end_string);
+    ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array, 0);
 }
 
@@ -723,8 +779,10 @@ TEST(extract_string_with_several_endings_from_memory, nothing_must_be_extracted_
 
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
+    const char* orig_dest_array = dest_array;
 
     string::extract_string_with_several_endings(text, text_pointer, sizeof(text), dest_array, dest_array, array_size, end_string);
+    ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array, 0);
 }
 
@@ -738,8 +796,10 @@ TEST(extract_string_with_several_endings_from_memory, nothing_must_be_extracted_
 
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
+    const char* orig_dest_array = dest_array;
 
     string::extract_string_with_several_endings(text, text_pointer, sizeof(text), dest_array, dest_array, array_size, end_string);
+    ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array, 0);
 }
 
@@ -753,8 +813,10 @@ TEST(extract_string_with_several_endings_from_memory, nothing_must_be_extracted_
 
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
+    const char* orig_dest_array = dest_array;
 
     string::extract_string_with_several_endings(text, text_pointer, sizeof(text), dest_array, dest_array, array_size, end_string);
+    ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array, 0);
 }
 
@@ -768,8 +830,10 @@ TEST(extract_string_with_several_endings_from_memory, 1_char_must_be_extracted_w
 
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
+    const char* orig_dest_array = dest_array;
 
     string::extract_string_with_several_endings(text, text_pointer, sizeof(text), dest_array, dest_array, array_size, end_string);
+    ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array++, 'a');
     ASSERT_EQ(*dest_array, 0);
 }
@@ -784,8 +848,10 @@ TEST(extract_string_with_several_endings_from_memory, 1_char_must_be_extracted_w
 
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
+    const char* orig_dest_array = dest_array;
 
     string::extract_string_with_several_endings(text, text_pointer, sizeof(text), dest_array, dest_array, array_size, end_string);
+    ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array++, 'a');
     ASSERT_EQ(*dest_array, 0);
 }
@@ -800,8 +866,10 @@ TEST(extract_string_with_several_endings_from_memory, 1_char_must_be_extracted_w
 
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
+    const char* orig_dest_array = dest_array;
 
     string::extract_string_with_several_endings(text, text_pointer, sizeof(text), dest_array, dest_array, array_size, end_string);
+    ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array++, 'a');
     ASSERT_EQ(*dest_array, 0);
 }
@@ -816,8 +884,10 @@ TEST(extract_string_with_several_endings_from_memory, 1_char_must_be_extracted_w
 
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
+    const char* orig_dest_array = dest_array;
 
     string::extract_string_with_several_endings(text, text_pointer, sizeof(text), dest_array, dest_array, array_size, end_string);
+    ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array++, 'a');
     ASSERT_EQ(*dest_array, 0);
 }
@@ -832,8 +902,10 @@ TEST(extract_string_with_several_endings_from_memory, 1_char_must_be_extracted_w
 
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
+    const char* orig_dest_array = dest_array;
 
     string::extract_string_with_several_endings(text, text_pointer, sizeof(text), dest_array, dest_array, array_size, end_string);
+    ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array++, 'a');
     ASSERT_EQ(*dest_array, 0);
 }
@@ -848,8 +920,10 @@ TEST(extract_string_with_several_endings_from_memory, 2_chars_must_be_extracted_
 
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
+    const char* orig_dest_array = dest_array;
 
     string::extract_string_with_several_endings(text, text_pointer, sizeof(text), dest_array, dest_array, array_size, end_string);
+    ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array++, 'a');
     ASSERT_EQ(*dest_array++, 'b');
     ASSERT_EQ(*dest_array, 0);
@@ -865,8 +939,10 @@ TEST(extract_string_with_several_endings_from_memory, 2_chars_must_be_extracted_
 
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
+    const char* orig_dest_array = dest_array;
 
     string::extract_string_with_several_endings(text, text_pointer, sizeof(text), dest_array, dest_array, array_size, end_string);
+    ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array++, 'a');
     ASSERT_EQ(*dest_array++, 'b');
     ASSERT_EQ(*dest_array, 0);
@@ -882,8 +958,10 @@ TEST(extract_string_with_several_endings_from_memory, 2_chars_must_be_extracted_
 
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
+    const char* orig_dest_array = dest_array;
 
     string::extract_string_with_several_endings(text, text_pointer, sizeof(text), dest_array, dest_array, array_size, end_string);
+    ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array++, 'a');
     ASSERT_EQ(*dest_array++, 'b');
     ASSERT_EQ(*dest_array, 0);
@@ -899,8 +977,10 @@ TEST(extract_string_with_several_endings_from_memory, 2_chars_must_be_extracted_
 
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
+    const char* orig_dest_array = dest_array;
 
     string::extract_string_with_several_endings(text, text_pointer, sizeof(text), dest_array, dest_array, array_size, end_string);
+    ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array++, 'a');
     ASSERT_EQ(*dest_array++, 'b');
     ASSERT_EQ(*dest_array, 0);
@@ -916,8 +996,10 @@ TEST(extract_string_with_several_endings_from_memory, 2_chars_must_be_extracted_
 
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
+    const char* orig_dest_array = dest_array;
 
     string::extract_string_with_several_endings(text, text_pointer, sizeof(text), dest_array, dest_array, array_size, end_string);
+    ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array++, 'a');
     ASSERT_EQ(*dest_array++, 'b');
     ASSERT_EQ(*dest_array, 0);
@@ -933,8 +1015,10 @@ TEST(extract_string_with_several_endings_from_memory, 3_chars_must_be_extracted_
 
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
+    const char* orig_dest_array = dest_array;
 
     string::extract_string_with_several_endings(text, text_pointer, sizeof(text), dest_array, dest_array, array_size, end_string);
+    ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array++, 'a');
     ASSERT_EQ(*dest_array++, 'b');
     ASSERT_EQ(*dest_array++, 'c');
