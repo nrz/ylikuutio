@@ -38,6 +38,8 @@ namespace ontology
                 this->spherical_coordinates.rho = NAN;
                 this->spherical_coordinates.theta = NAN;
                 this->spherical_coordinates.phi = NAN;
+                this->horizontal_angle = 0.0f;
+                this->vertical_angle = 0.0f;
 
                 this->model_matrix = glm::mat4(1.0f); // identity matrix (dummy value).
                 this->MVP_matrix   = glm::mat4(1.0f); // identity matrix (dummy value).
