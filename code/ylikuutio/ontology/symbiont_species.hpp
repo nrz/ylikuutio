@@ -121,10 +121,6 @@ namespace ontology
             int32_t get_indices_size() const;
             GLuint get_lightID() const;
 
-            bool is_terrain;                         // terrains currently do not rotate nor translate.
-            float planet_radius;                     // radius of sea level in kilometers. can be a planet or a moon. used only for terrains.
-            float divisor;                           // value by which SRTM values are divided to convert them to kilometers.
-
             glm::vec3 light_position;                // light position.
 
             friend class Symbiosis;
