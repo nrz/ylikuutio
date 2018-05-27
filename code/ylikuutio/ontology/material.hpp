@@ -72,6 +72,8 @@ namespace ontology
                 this->number_of_vector_fonts = 0;
                 this->number_of_chunk_masters = 0;
 
+                this->texture = 0; // some dummy value.
+
                 if (!this->is_symbiont_material)
                 {
                     // get `childID` from the `Shader` and set pointer to this `Material`.
@@ -90,7 +92,6 @@ namespace ontology
                     {
                         std::cerr << "no texture was loaded!\n";
                         std::cerr << "texture file format: " << this->texture_file_format << "\n";
-                        this->texture = 0; // some dummy value.
                     }
 
                     // Get a handle for our "myTextureSampler" uniform.
