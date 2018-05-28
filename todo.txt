@@ -7,6 +7,7 @@ Tasks which are necessary for the development of Ylikuutio:
 [ ] Implement command line parameter `--input-file` to Ajokki (load keypresses and keyreleases from a file, eg. `--input-file foo` or `--input-file=foo`).
 [ ] Implement command line parameter `--window-size` to Ajokki (eg. `--window-size 1920x1080` or `--window-size=1920x1080`).
 [ ] Implement command line parameter `--debug` to Ajokki (log all kinds of debug information).
+[ ] Rewrite `obj_loader.cpp` without `fscanf`, using instead `namespace string` functions for parsing.
 [ ] Implement support for `man` command in console (a container class with the command callback together with the `man` text for the command).
 [ ] Optimize `Symbiosis` entities' rendering by going through `SymbiontMaterial`->`SymbiontSpecies`->`Biont` hierarchy.
 [ ] Implement support for 3D model of Helsinki: http://www.hri.fi/en/dataset/helsingin-3d-kaupunkimalli http://www.hri.fi/fi/dataset/helsingin-3d-kaupunkimalli
