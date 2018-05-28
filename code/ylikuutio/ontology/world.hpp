@@ -36,6 +36,8 @@ namespace ontology
 
                 this->child_vector_pointers_vector.push_back(&this->scene_pointer_vector);
                 this->type = "ontology::World*";
+
+                this->can_be_erased = true;
             }
 
             // destructor.

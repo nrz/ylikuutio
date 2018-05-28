@@ -76,6 +76,8 @@ namespace ontology
                 this->child_vector_pointers_vector.push_back(&this->symbiont_material_pointer_vector);
                 this->child_vector_pointers_vector.push_back(&this->holobiont_pointer_vector);
                 this->type = "ontology::Symbiosis*";
+
+                this->can_be_erased = true;
             }
 
             // destructor.

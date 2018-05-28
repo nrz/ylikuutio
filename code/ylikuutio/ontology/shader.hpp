@@ -86,6 +86,8 @@ namespace ontology
                 this->child_vector_pointers_vector.push_back(&this->material_pointer_vector);
                 this->child_vector_pointers_vector.push_back(&this->symbiosis_pointer_vector);
                 this->type = "ontology::Shader*";
+
+                this->can_be_erased = true;
             }
 
             // destructor.

@@ -28,6 +28,8 @@ namespace ontology
 
             std::string get_type() const;
 
+            bool get_can_be_erased() const;
+
             ontology::Universe* get_universe() const;
             config::SettingMaster* get_setting_master() const;
             void set_setting_master(config::SettingMaster* const setting_master);
@@ -50,6 +52,8 @@ namespace ontology
             std::string type;
 
             std::string name; // name of this entity.
+
+            bool can_be_erased;
 
             PreRenderCallback prerender_callback;
             PostRenderCallback postrender_callback;
