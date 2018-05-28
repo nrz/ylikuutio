@@ -1,6 +1,7 @@
 #ifndef __OBJECT_HPP_INCLUDED
 #define __OBJECT_HPP_INCLUDED
 
+#include "entity.hpp"
 #include "movable.hpp"
 #include "shader.hpp"
 #include "species.hpp"
