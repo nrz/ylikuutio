@@ -69,6 +69,7 @@ namespace ontology
 
                 this->quaternions_in_use    = biont_struct.quaternions_in_use;
                 this->cartesian_coordinates = biont_struct.cartesian_coordinates;
+                this->symbiont_species      = nullptr;         // dummy value.
                 this->model_matrix          = glm::mat4(1.0f); // identity matrix (dummy value).
                 this->MVP_matrix            = glm::mat4(1.0f); // identity matrix (dummy value).
 
