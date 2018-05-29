@@ -71,6 +71,9 @@ namespace ontology
                 ontology::create_glyph_objects(this->text_string, this);
 
                 this->child_vector_pointers_vector.push_back(&this->object_pointer_vector);
+                this->type = "ontology::Text3D*";
+
+                this->can_be_erased = true;
             }
 
             // destructor.

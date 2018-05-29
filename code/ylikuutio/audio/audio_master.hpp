@@ -1,3 +1,6 @@
+#ifndef __AUDIO_MASTER_HPP_INCLUDED
+#define __AUDIO_MASTER_HPP_INCLUDED
+
 #include <SFML/Audio.hpp>
 
 // Include standard headers
@@ -41,3 +44,5 @@ namespace ylikuutio
         };
     }
 }
+
+#endif

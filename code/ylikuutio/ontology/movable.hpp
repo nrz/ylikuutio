@@ -83,6 +83,8 @@ namespace ontology
                 z_setting_struct.should_ylikuutio_call_activate_callback_now = true;
                 std::cout << "Executing `new config::Setting(z_setting_struct);` ...\n";
                 new config::Setting(z_setting_struct);
+
+                this->can_be_erased = true;
             }
 
             // constructor.

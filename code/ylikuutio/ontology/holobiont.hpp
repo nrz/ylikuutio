@@ -76,6 +76,8 @@ namespace ontology
                 this->type = "ontology::Holobiont*";
 
                 this->create_bionts();
+
+                this->can_be_erased = true;
             }
 
             // destructor.

@@ -17,6 +17,7 @@ namespace ontology
         this->prerender_callback = nullptr;
         this->postrender_callback = nullptr;
         this->setting_master = new config::SettingMaster(this);
+        this->can_be_erased = false;
     }
 
     Entity::~Entity()
@@ -46,6 +47,11 @@ namespace ontology
     std::string Entity::get_type() const
     {
         return this->type;
+    }
+
+    bool Entity::get_can_be_erased() const
+    {
+        return this->can_be_erased;
     }
 
     ontology::Universe* Entity::get_universe() const

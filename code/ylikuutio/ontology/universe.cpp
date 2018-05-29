@@ -277,7 +277,10 @@ namespace ontology
     {
         if (this->entity_map.count(name) == 1)
         {
-            this->entity_map.erase(name);
+            if (this->entity_map[name]->get_can_be_erased())
+            {
+                this->entity_map.erase(name);
+            }
         }
     }
 
