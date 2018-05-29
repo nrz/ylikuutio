@@ -692,15 +692,15 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/googletest/test_ylikuutio_string.cpp)
     set(MAIN_FILE code/ylikuutio/tests/googletest/main.cpp)
 
-    add_library(codeToTest ${FILES_TO_TEST})
-    add_dependencies(codeToTest OpenFBX)
+    add_library(code_to_test ${FILES_TO_TEST})
+    add_dependencies(code_to_test OpenFBX)
 
     add_executable(do_tests_googletest ${MAIN_FILE})
     add_dependencies(do_tests_googletest OpenFBX)
-    target_link_libraries(do_tests_googletest codeToTest)
+    target_link_libraries(do_tests_googletest code_to_test)
 
     add_executable(unit_tests_with_Google_Test code/ylikuutio/tests/googletest/test_main.cpp ${UNIT_TESTS})
-    target_link_libraries(unit_tests_with_Google_Test gtest libgtest rt pthread codeToTest)
+    target_link_libraries(unit_tests_with_Google_Test gtest libgtest rt pthread code_to_test)
 
     # Xcode and Visual working directories
     set_target_properties(unit_tests_with_Google_Test PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/code/tests/googletest/")
