@@ -8,6 +8,9 @@ Tasks which are necessary for the development of Ylikuutio:
 [ ] Implement command line parameter `--window-size` to Ajokki (eg. `--window-size 1920x1080` or `--window-size=1920x1080`).
 [ ] Implement command line parameter `--debug` to Ajokki (log all kinds of debug information).
 [ ] Rewrite `obj_loader.cpp` without `fscanf`, using instead `namespace string` functions for parsing.
+[ ] Evaluate network libraries (code quality, platform & crosscompiling support, MinGW-w64). https://stackoverflow.com/questions/118945/best-c-c-network-library
+[ ] Implement chat server using the chosen network library.
+[ ] Implement chat client using the chosen network library.
 [ ] Implement support for `man` command in console (a container class with the command callback together with the `man` text for the command).
 [ ] Optimize `Symbiosis` entities' rendering by going through `SymbiontMaterial`->`SymbiontSpecies`->`Biont` hierarchy.
 [ ] Implement support for 3D model of Helsinki: http://www.hri.fi/en/dataset/helsingin-3d-kaupunkimalli http://www.hri.fi/fi/dataset/helsingin-3d-kaupunkimalli
@@ -52,8 +55,6 @@ Tasks which are necessary for the development of Ylikuutio:
 [ ] Implement dynamic not flowing water.
 [ ] Implement physics modeling.
 [ ] Implement flowing water (computed on a server).
-[ ] Implement Internet code (ASIO).
-[ ] Implement Internet code (cpp-netlib).
 [ ] Implement support for automatic detection of optimal window size.
 [ ] Implement support for changing window size.
 [ ] Implement support for changing font size.
