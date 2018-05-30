@@ -13,9 +13,11 @@ Tasks which are necessary for the development of Ylikuutio:
 [ ] Implement chat client using the chosen network library.
 [ ] Implement support for `man` command in console (a container class with the command callback together with the `man` text for the command).
 [ ] Optimize `Symbiosis` entities' rendering by going through `SymbiontMaterial`->`SymbiontSpecies`->`Biont` hierarchy.
+[ ] Implement support for 3D model of Oulu: http://ubicomp.oulu.fi/infrastructure-virtualoulu/ https://github.com/Oulu-UCC/3D_City_fbx
+[ ] Add support for CityGML file format.
 [ ] Implement support for 3D model of Helsinki: http://www.hri.fi/en/dataset/helsingin-3d-kaupunkimalli http://www.hri.fi/fi/dataset/helsingin-3d-kaupunkimalli
 [ ] Implement support for 3D model of Vantaa: https://hri.fi/data/en_GB/dataset/vantaan-3d-rakennukset https://hri.fi/data/fi/dataset/vantaan-3d-rakennukset
-[ ] Implement support for 3D model of Oulu: http://ubicomp.oulu.fi/infrastructure-virtualoulu/ https://github.com/Oulu-UCC/3D_City_fbx
+[ ] Add support for Collada .dae file format.
 [ ] Implement support for 3D model of Turku campus and science park area: http://www.lounaistieto.fi/blog/2017/09/06/turun-kampus-ja-tiedepuistoalueen-3d-kaupunkimalli/
 [ ] Implement support for 3D model of Tampere: http://kartat.tampere.fi/splashscreen/
 [ ] Implement support for OpenStreetMap data: https://www.openstreetmap.org/
