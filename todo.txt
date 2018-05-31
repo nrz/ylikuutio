@@ -3,25 +3,33 @@ Tasks in priority order in descending priority, the most urgent ones first. Chec
 
 Tasks which are necessary for the development of Ylikuutio:
 [ ] Implement `Camera` entities.
+[ ] Evaluate Pthreads-win32, in particular MinGW-w64 support: https://sourceware.org/pthreads-win32/ https://sourceforge.net/p/mingw-w64/wiki2/Compile%20pthreads/
+[ ] Write test code using pthreads.
+[ ] Implement scene loading which works in the background.
 [ ] Implement command line parameter `--headless` to Ajokki (do not open any windows, do not render anything).
 [ ] Implement command line parameter `--input-file` to Ajokki (load keypresses and keyreleases from a file, eg. `--input-file foo` or `--input-file=foo`).
 [ ] Implement command line parameter `--window-size` to Ajokki (eg. `--window-size 1920x1080` or `--window-size=1920x1080`).
 [ ] Implement command line parameter `--debug` to Ajokki (log all kinds of debug information).
 [ ] Rewrite `obj_loader.cpp` without `fscanf`, using instead `namespace string` functions for parsing.
 [ ] Evaluate network libraries (code quality, platform & crosscompiling support, MinGW-w64). https://stackoverflow.com/questions/118945/best-c-c-network-library
+[ ] Evaluate Asio (nework and low-level I/O library): https://think-async.com/
+[ ] Evaluate cpp-netlib (network library): http://cpp-netlib.org/
+[ ] Evaluate kNet (network library): https://github.com/juj/kNet/ (used by Urho3D: https://urho3d.github.io/ )
 [ ] Implement chat server using the chosen network library.
 [ ] Implement chat client using the chosen network library.
 [ ] Implement support for `man` command in console (a container class with the command callback together with the `man` text for the command).
 [ ] Optimize `Symbiosis` entities' rendering by going through `SymbiontMaterial`->`SymbiontSpecies`->`Biont` hierarchy.
-[ ] Implement support for 3D model of Oulu: http://ubicomp.oulu.fi/infrastructure-virtualoulu/ https://github.com/Oulu-UCC/3D_City_fbx
 [ ] Add support for CityGML file format.
 [ ] Implement support for 3D model of Helsinki: http://www.hri.fi/en/dataset/helsingin-3d-kaupunkimalli http://www.hri.fi/fi/dataset/helsingin-3d-kaupunkimalli
 [ ] Implement support for 3D model of Vantaa: https://hri.fi/data/en_GB/dataset/vantaan-3d-rakennukset https://hri.fi/data/fi/dataset/vantaan-3d-rakennukset
+[ ] Implement support for OpenStreetMap data: https://www.openstreetmap.org/
+[ ] Implement support for 3D model of Oulu: http://ubicomp.oulu.fi/infrastructure-virtualoulu/ https://github.com/Oulu-UCC/3D_City_fbx
 [ ] Add support for Collada .dae file format.
 [ ] Implement support for 3D model of Turku campus and science park area: http://www.lounaistieto.fi/blog/2017/09/06/turun-kampus-ja-tiedepuistoalueen-3d-kaupunkimalli/
 [ ] Implement support for 3D model of Tampere: http://kartat.tampere.fi/splashscreen/
-[ ] Implement support for OpenStreetMap data: https://www.openstreetmap.org/
 [ ] Implement voxel world.
+[ ] Fix Travis configuration file `.travis.yml`.
+[ ] Fix Coverity Scan Travis integration configuration (in `.travis.yml`).
 [ ] Implement AI objects (robots).
 [ ] Add scene loading command `load` into console.
 [ ] Implement `play` console command for playing `Sound`s and `Playlist`s.
@@ -40,7 +48,6 @@ Tasks which are necessary for the development of Ylikuutio:
 [ ] Variable `triangulation`: `set triangulation bilinear`/`set triangulation bicubic`/`set triangulation southwest_northeast`/`set triangulation southeast_northwest`.
 [ ] Write integration tests for Ajokki.
 [ ] Learn how to write unit tests for multithreaded C++ code.
-[ ] Implement scene loading which works in the background.
 [ ] Create a vertex graph of the vertices and edges of a scene.
 [ ] Implement vertex selection and modification (with a mouse cursor), using ray casting.
 [ ] Implement modifying of vertices.
