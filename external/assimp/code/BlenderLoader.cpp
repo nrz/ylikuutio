@@ -3,7 +3,8 @@
 Open Asset Import Library (assimp)
 ----------------------------------------------------------------------
 
-Copyright (c) 2006-2017, assimp team
+Copyright (c) 2006-2018, assimp team
+
 
 All rights reserved.
 
@@ -53,13 +54,13 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "BlenderIntermediate.h"
 #include "BlenderModifier.h"
 #include "BlenderBMesh.h"
-#include "StringUtils.h"
+#include <assimp/StringUtils.h>
 #include <assimp/scene.h>
 #include <assimp/importerdesc.h>
 
-#include "StringComparison.h"
-#include "StreamReader.h"
-#include "MemoryIOWrapper.h"
+#include <assimp/StringComparison.h>
+#include <assimp/StreamReader.h>
+#include <assimp/MemoryIOWrapper.h>
 
 #include <cctype>
 
@@ -153,14 +154,6 @@ void BlenderImporter::SetupProperties(const Importer* /*pImp*/)
     // nothing to be done for the moment
 }
 
-struct free_it {
-    free_it(void* free) : free(free) {}
-    ~free_it() {
-        ::free(this->free);
-    }
-
-    void* free;
-};
 
 // ------------------------------------------------------------------------------------------------
 // Imports the given file into the given scene structure.
@@ -168,8 +161,7 @@ void BlenderImporter::InternReadFile( const std::string& pFile,
     aiScene* pScene, IOSystem* pIOHandler)
 {
 #ifndef ASSIMP_BUILD_NO_COMPRESSED_BLEND
-    Bytef* dest = NULL;
-    free_it free_it_really(dest);
+    std::vector<Bytef> uncompressed;
 #endif
 
 
@@ -217,6 +209,7 @@ void BlenderImporter::InternReadFile( const std::string& pFile,
 
         size_t total = 0l;
 
+        // TODO: be smarter about this, decompress directly into heap buffer
         // and decompress the data .... do 1k chunks in the hope that we won't kill the stack
 #define MYBLOCK 1024
         Bytef block[MYBLOCK];
@@ -231,8 +224,8 @@ void BlenderImporter::InternReadFile( const std::string& pFile,
             }
             const size_t have = MYBLOCK - zstream.avail_out;
             total += have;
-            dest = reinterpret_cast<Bytef*>( realloc(dest,total) );
-            memcpy(dest + total - have,block,have);
+            uncompressed.resize(total);
+            memcpy(uncompressed.data() + total - have,block,have);
         }
         while (ret != Z_STREAM_END);
 
@@ -240,7 +233,7 @@ void BlenderImporter::InternReadFile( const std::string& pFile,
         inflateEnd(&zstream);
 
         // replace the input stream with a memory stream
-        stream.reset(new MemoryIOStream(reinterpret_cast<uint8_t*>(dest),total));
+        stream.reset(new MemoryIOStream(reinterpret_cast<uint8_t*>(uncompressed.data()),total));
 
         // .. and retry
         stream->Read(magic,7,1);
@@ -334,12 +327,12 @@ void BlenderImporter::ExtractScene(Scene& out, const FileDatabase& file)
     ss.Convert(out,file);
 
 #ifndef ASSIMP_BUILD_BLENDER_NO_STATS
-    DefaultLogger::get()->info((format(),
+    ASSIMP_LOG_INFO_F(
         "(Stats) Fields read: " ,file.stats().fields_read,
         ", pointers resolved: " ,file.stats().pointers_resolved,
         ", cache hits: "        ,file.stats().cache_hits,
         ", cached objects: "    ,file.stats().cached_objects
-    ));
+    );
 #endif
 }
 
@@ -1148,7 +1141,7 @@ void BlenderImporter::ConvertMesh(const Scene& /*in*/, const Object* /*obj*/, co
 // ------------------------------------------------------------------------------------------------
 aiCamera* BlenderImporter::ConvertCamera(const Scene& /*in*/, const Object* obj, const Camera* cam, ConversionData& /*conv_data*/)
 {
-    ScopeGuard<aiCamera> out(new aiCamera());
+    std::unique_ptr<aiCamera> out(new aiCamera());
     out->mName = obj->id.name+2;
     out->mPosition = aiVector3D(0.f, 0.f, 0.f);
     out->mUp = aiVector3D(0.f, 1.f, 0.f);
@@ -1159,13 +1152,13 @@ aiCamera* BlenderImporter::ConvertCamera(const Scene& /*in*/, const Object* obj,
     out->mClipPlaneNear = cam->clipsta;
     out->mClipPlaneFar = cam->clipend;
 
-    return out.dismiss();
+    return out.release();
 }
 
 // ------------------------------------------------------------------------------------------------
 aiLight* BlenderImporter::ConvertLight(const Scene& /*in*/, const Object* obj, const Lamp* lamp, ConversionData& /*conv_data*/)
 {
-    ScopeGuard<aiLight> out(new aiLight());
+    std::unique_ptr<aiLight> out(new aiLight());
     out->mName = obj->id.name+2;
 
     switch (lamp->type)
@@ -1203,7 +1196,7 @@ aiLight* BlenderImporter::ConvertLight(const Scene& /*in*/, const Object* obj, c
     out->mColorAmbient = aiColor3D(lamp->r, lamp->g, lamp->b) * lamp->energy;
     out->mColorSpecular = aiColor3D(lamp->r, lamp->g, lamp->b) * lamp->energy;
     out->mColorDiffuse = aiColor3D(lamp->r, lamp->g, lamp->b) * lamp->energy;
-    return out.dismiss();
+    return out.release();
 }
 
 // ------------------------------------------------------------------------------------------------
@@ -1221,7 +1214,7 @@ aiNode* BlenderImporter::ConvertNode(const Scene& in, const Object* obj, Convers
         ++it;
     }
 
-    ScopeGuard<aiNode> node(new aiNode(obj->id.name+2)); // skip over the name prefix 'OB'
+    std::unique_ptr<aiNode> node(new aiNode(obj->id.name+2)); // skip over the name prefix 'OB'
     if (obj->data) {
         switch (obj->type)
         {
@@ -1305,14 +1298,14 @@ aiNode* BlenderImporter::ConvertNode(const Scene& in, const Object* obj, Convers
         aiNode** nd = node->mChildren = new aiNode*[node->mNumChildren]();
         for (const Object* nobj :children) {
             *nd = ConvertNode(in,nobj,conv_data,node->mTransformation * parentTransform);
-            (*nd++)->mParent = node;
+            (*nd++)->mParent = node.get();
         }
     }
 
     // apply modifiers
     modifier_cache->ApplyModifiers(*node,conv_data,in,*obj);
 
-    return node.dismiss();
+    return node.release();
 }
 
 #endif // ASSIMP_BUILD_NO_BLEND_IMPORTER
