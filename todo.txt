@@ -1,9 +1,17 @@
 TODO list:
 Tasks in priority order in descending priority, the most urgent ones first. Check when ready and move to the section Ready, when ready.
 
+Fixes needed:
+[ ] Fix compiling on Visual Studio.
+[ ] Fix Travis configuration file `.travis.yml`.
+[ ] Fix Coverity Scan Travis integration configuration (in `.travis.yml`).
+
 Tasks which are necessary for the development of Ylikuutio:
 [ ] Implement `Camera` entities.
+[ ] Evaluate mingw-std-threads: https://github.com/meganz/mingw-std-threads
+[ ] Evaluate winpthreads: https://sourceforge.net/p/mingw-w64/mingw-w64/ci/master/tree/mingw-w64-libraries/winpthreads/ https://en.wikipedia.org/wiki/MinGW#MinGW-w64
 [ ] Evaluate Pthreads-win32, in particular MinGW-w64 support: https://sourceware.org/pthreads-win32/ https://sourceforge.net/p/mingw-w64/wiki2/Compile%20pthreads/
+[ ] Write test code using C++11 threads.
 [ ] Write test code using pthreads.
 [ ] Implement scene loading which works in the background.
 [ ] Implement command line parameter `--headless` to Ajokki (do not open any windows, do not render anything).
@@ -17,6 +25,7 @@ Tasks which are necessary for the development of Ylikuutio:
 [ ] Evaluate kNet (network library): https://github.com/juj/kNet/ (used by Urho3D: https://urho3d.github.io/ )
 [ ] Implement chat server using the chosen network library.
 [ ] Implement chat client using the chosen network library.
+[ ] Evaluate AppVeyor: https://github.com/marketplace/appveyor
 [ ] Implement support for `man` command in console (a container class with the command callback together with the `man` text for the command).
 [ ] Optimize `Symbiosis` entities' rendering by going through `SymbiontMaterial`->`SymbiontSpecies`->`Biont` hierarchy.
 [ ] Add support for CityGML file format.
@@ -28,8 +37,6 @@ Tasks which are necessary for the development of Ylikuutio:
 [ ] Implement support for 3D model of Turku campus and science park area: http://www.lounaistieto.fi/blog/2017/09/06/turun-kampus-ja-tiedepuistoalueen-3d-kaupunkimalli/
 [ ] Implement support for 3D model of Tampere: http://kartat.tampere.fi/splashscreen/
 [ ] Implement voxel world.
-[ ] Fix Travis configuration file `.travis.yml`.
-[ ] Fix Coverity Scan Travis integration configuration (in `.travis.yml`).
 [ ] Implement AI objects (robots).
 [ ] Add scene loading command `load` into console.
 [ ] Implement `play` console command for playing `Sound`s and `Playlist`s.
