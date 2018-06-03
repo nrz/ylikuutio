@@ -41,7 +41,7 @@ namespace loaders
     {
         std::cout << "Loading OBJ file " << path << " ...\n";
 
-        std::vector<uint32_t> vertex_indices, uv_indices, normal_indices;
+        std::vector<int32_t> vertex_indices, uv_indices, normal_indices;
         std::vector<glm::vec3> temp_vertices;
         std::vector<glm::vec2> temp_UVs;
         std::vector<glm::vec3> temp_normals;
