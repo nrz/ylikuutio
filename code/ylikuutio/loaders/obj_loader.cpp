@@ -126,33 +126,33 @@ namespace loaders
                 // Example:
                 // f 5/1/1 1/2/1 4/3/1
                 std::string vertex1, vertex2, vertex3;
-                unsigned int vertexIndex[3], uvIndex[3], normalIndex[3];
+                unsigned int vertex_index[3], uv_index[3], normal_index[3];
                 int matches = fscanf(
                         file,
                         "%d/%d/%d %d/%d/%d %d/%d/%d\n",
-                        &vertexIndex[0],
-                        &uvIndex[0],
-                        &normalIndex[0],
-                        &vertexIndex[1],
-                        &uvIndex[1],
-                        &normalIndex[1],
-                        &vertexIndex[2],
-                        &uvIndex[2],
-                        &normalIndex[2]);
+                        &vertex_index[0],
+                        &uv_index[0],
+                        &normal_index[0],
+                        &vertex_index[1],
+                        &uv_index[1],
+                        &normal_index[1],
+                        &vertex_index[2],
+                        &uv_index[2],
+                        &normal_index[2]);
                 if (matches != 9)
                 {
                     std::printf("File can't be read by our simple parser :-( Try exporting with other options\n");
                     continue;
                 }
-                vertex_indices.push_back(vertexIndex[0]);
-                vertex_indices.push_back(vertexIndex[1]);
-                vertex_indices.push_back(vertexIndex[2]);
-                uv_indices.push_back(uvIndex[0]);
-                uv_indices.push_back(uvIndex[1]);
-                uv_indices.push_back(uvIndex[2]);
-                normal_indices.push_back(normalIndex[0]);
-                normal_indices.push_back(normalIndex[1]);
-                normal_indices.push_back(normalIndex[2]);
+                vertex_indices.push_back(vertex_index[0]);
+                vertex_indices.push_back(vertex_index[1]);
+                vertex_indices.push_back(vertex_index[2]);
+                uv_indices.push_back(uv_index[0]);
+                uv_indices.push_back(uv_index[1]);
+                uv_indices.push_back(uv_index[2]);
+                normal_indices.push_back(normal_index[0]);
+                normal_indices.push_back(normal_index[1]);
+                normal_indices.push_back(normal_index[2]);
             }
             else
             {
@@ -166,14 +166,14 @@ namespace loaders
         for (unsigned int i = 0; i < vertex_indices.size(); i++)
         {
             // Get the indices of its attributes
-            unsigned int vertexIndex = vertex_indices[i];
-            unsigned int uvIndex = uv_indices[i];
-            unsigned int normalIndex = normal_indices[i];
+            unsigned int vertex_index = vertex_indices[i];
+            unsigned int uv_index = uv_indices[i];
+            unsigned int normal_index = normal_indices[i];
 
             // Get the attributes thanks to the index
-            glm::vec3 vertex = temp_vertices[vertexIndex - 1];
-            glm::vec2 uv = temp_UVs[uvIndex - 1];
-            glm::vec3 normal = temp_normals[normalIndex - 1];
+            glm::vec3 vertex = temp_vertices[vertex_index - 1];
+            glm::vec2 uv = temp_UVs[uv_index - 1];
+            glm::vec3 normal = temp_normals[normal_index - 1];
 
             // Put the attributes in buffers
             out_vertices.push_back(vertex);

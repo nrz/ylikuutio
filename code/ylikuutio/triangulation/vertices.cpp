@@ -24,24 +24,24 @@ namespace geometry
             std::vector<glm::vec3>& temp_vertices,
             std::vector<glm::vec2>& temp_UVs,
             std::vector<glm::vec3>& temp_normals,
-            GLuint vertexIndex[3],
-            GLuint uvIndex[3],
-            GLuint normalIndex[3],
+            GLuint vertex_index[3],
+            GLuint uv_index[3],
+            GLuint normal_index[3],
             std::vector<glm::vec3>& out_vertices,
             std::vector<glm::vec2>& out_UVs,
             std::vector<glm::vec3>& out_normals)
     {
-        out_vertices.push_back(temp_vertices[vertexIndex[0]]);
-        out_UVs.push_back(temp_UVs[uvIndex[0]]);
-        out_normals.push_back(temp_normals[normalIndex[0]]);
+        out_vertices.push_back(temp_vertices[vertex_index[0]]);
+        out_UVs.push_back(temp_UVs[uv_index[0]]);
+        out_normals.push_back(temp_normals[normal_index[0]]);
 
-        out_vertices.push_back(temp_vertices[vertexIndex[1]]);
-        out_UVs.push_back(temp_UVs[uvIndex[1]]);
-        out_normals.push_back(temp_normals[normalIndex[1]]);
+        out_vertices.push_back(temp_vertices[vertex_index[1]]);
+        out_UVs.push_back(temp_UVs[uv_index[1]]);
+        out_normals.push_back(temp_normals[normal_index[1]]);
 
-        out_vertices.push_back(temp_vertices[vertexIndex[2]]);
-        out_UVs.push_back(temp_UVs[uvIndex[2]]);
-        out_normals.push_back(temp_normals[normalIndex[2]]);
+        out_vertices.push_back(temp_vertices[vertex_index[2]]);
+        out_UVs.push_back(temp_UVs[uv_index[2]]);
+        out_normals.push_back(temp_normals[normal_index[2]]);
     }
 
     bool define_vertices_UVs_and_normals(
@@ -49,9 +49,9 @@ namespace geometry
             std::vector<glm::vec3>& temp_vertices,
             std::vector<glm::vec2>& temp_UVs,
             std::vector<glm::vec3>& temp_normals,
-            GLuint vertexIndex[3],
-            GLuint uvIndex[3],
-            GLuint normalIndex[3],
+            GLuint vertex_index[3],
+            GLuint uv_index[3],
+            GLuint normal_index[3],
             std::vector<glm::vec3>& out_vertices,
             std::vector<glm::vec2>& out_UVs,
             std::vector<glm::vec3>& out_normals,
@@ -122,137 +122,137 @@ namespace geometry
                     // Fourth triangle: center, northeast, southeast.
 
                     // Define the first triangle, S: center, southeast, southwest.
-                    vertexIndex[0] = current_interpolated_vertex_i;
-                    vertexIndex[1] = southeast(current_vertex_i, actual_image_width);
-                    vertexIndex[2] = southwest(current_vertex_i, actual_image_width);
+                    vertex_index[0] = current_interpolated_vertex_i;
+                    vertex_index[1] = southeast(current_vertex_i, actual_image_width);
+                    vertex_index[2] = southwest(current_vertex_i, actual_image_width);
 
-                    normalIndex[0] = current_interpolated_vertex_i;
-                    normalIndex[1] = southeast(current_vertex_i, actual_image_width);
-                    normalIndex[2] = southwest(current_vertex_i, actual_image_width);
+                    normal_index[0] = current_interpolated_vertex_i;
+                    normal_index[1] = southeast(current_vertex_i, actual_image_width);
+                    normal_index[2] = southwest(current_vertex_i, actual_image_width);
 
                     if (triangulate_quads_struct.should_ylikuutio_use_real_texture_coordinates)
                     {
-                        uvIndex[0] = current_interpolated_vertex_i;
-                        uvIndex[1] = southeast(current_vertex_i, actual_image_width);
-                        uvIndex[2] = southwest(current_vertex_i, actual_image_width);
+                        uv_index[0] = current_interpolated_vertex_i;
+                        uv_index[1] = southeast(current_vertex_i, actual_image_width);
+                        uv_index[2] = southwest(current_vertex_i, actual_image_width);
                     }
                     else
                     {
                         // Use altitude as texture coordinate (useful for elevation maps).
-                        // uvIndex[0] = static_cast<GLuint>(center_y(x, z, input_vertex_pointer, actual_image_width));
-                        // uvIndex[1] = static_cast<GLuint>(southeast_y(x, z, input_vertex_pointer, actual_image_width));
-                        // uvIndex[2] = static_cast<GLuint>(southwest_y(x, z, input_vertex_pointer, actual_image_width));
+                        // uv_index[0] = static_cast<GLuint>(center_y(x, z, input_vertex_pointer, actual_image_width));
+                        // uv_index[1] = static_cast<GLuint>(southeast_y(x, z, input_vertex_pointer, actual_image_width));
+                        // uv_index[2] = static_cast<GLuint>(southwest_y(x, z, input_vertex_pointer, actual_image_width));
                     }
 
                     geometry::output_triangle_vertices(
                             temp_vertices,
                             temp_UVs,
                             temp_normals,
-                            vertexIndex,
-                            uvIndex,
-                            normalIndex,
+                            vertex_index,
+                            uv_index,
+                            normal_index,
                             out_vertices,
                             out_UVs,
                             out_normals);
 
                     // Define the second triangle, W: center, southwest, northwest.
-                    vertexIndex[0] = current_interpolated_vertex_i;
-                    vertexIndex[1] = southwest(current_vertex_i, actual_image_width);
-                    vertexIndex[2] = northwest(current_vertex_i, actual_image_width);
+                    vertex_index[0] = current_interpolated_vertex_i;
+                    vertex_index[1] = southwest(current_vertex_i, actual_image_width);
+                    vertex_index[2] = northwest(current_vertex_i, actual_image_width);
 
-                    normalIndex[0] = current_interpolated_vertex_i;
-                    normalIndex[1] = southwest(current_vertex_i, actual_image_width);
-                    normalIndex[2] = northwest(current_vertex_i, actual_image_width);
+                    normal_index[0] = current_interpolated_vertex_i;
+                    normal_index[1] = southwest(current_vertex_i, actual_image_width);
+                    normal_index[2] = northwest(current_vertex_i, actual_image_width);
 
                     if (triangulate_quads_struct.should_ylikuutio_use_real_texture_coordinates)
                     {
-                        uvIndex[0] = current_interpolated_vertex_i;
-                        uvIndex[1] = southwest(current_vertex_i, actual_image_width);
-                        uvIndex[2] = northwest(current_vertex_i, actual_image_width);
+                        uv_index[0] = current_interpolated_vertex_i;
+                        uv_index[1] = southwest(current_vertex_i, actual_image_width);
+                        uv_index[2] = northwest(current_vertex_i, actual_image_width);
                     }
                     else
                     {
                         // Use altitude as texture coordinate (useful for elevation maps).
-                        // uvIndex[0] = static_cast<GLuint>(center_y(x, z, input_vertex_pointer, actual_image_width));
-                        // uvIndex[1] = static_cast<GLuint>(southwest_y(x, z, input_vertex_pointer, actual_image_width));
-                        // uvIndex[2] = static_cast<GLuint>(northwest_y(x, z, input_vertex_pointer, actual_image_width));
+                        // uv_index[0] = static_cast<GLuint>(center_y(x, z, input_vertex_pointer, actual_image_width));
+                        // uv_index[1] = static_cast<GLuint>(southwest_y(x, z, input_vertex_pointer, actual_image_width));
+                        // uv_index[2] = static_cast<GLuint>(northwest_y(x, z, input_vertex_pointer, actual_image_width));
                     }
 
                     geometry::output_triangle_vertices(
                             temp_vertices,
                             temp_UVs,
                             temp_normals,
-                            vertexIndex,
-                            uvIndex,
-                            normalIndex,
+                            vertex_index,
+                            uv_index,
+                            normal_index,
                             out_vertices,
                             out_UVs,
                             out_normals);
 
                     // Define the third triangle, N: center, northwest, northeast.
-                    vertexIndex[0] = current_interpolated_vertex_i;
-                    vertexIndex[1] = northwest(current_vertex_i, actual_image_width);
-                    vertexIndex[2] = northeast(current_vertex_i, actual_image_width);
+                    vertex_index[0] = current_interpolated_vertex_i;
+                    vertex_index[1] = northwest(current_vertex_i, actual_image_width);
+                    vertex_index[2] = northeast(current_vertex_i, actual_image_width);
 
-                    normalIndex[0] = current_interpolated_vertex_i;
-                    normalIndex[1] = northwest(current_vertex_i, actual_image_width);
-                    normalIndex[2] = northeast(current_vertex_i, actual_image_width);
+                    normal_index[0] = current_interpolated_vertex_i;
+                    normal_index[1] = northwest(current_vertex_i, actual_image_width);
+                    normal_index[2] = northeast(current_vertex_i, actual_image_width);
 
                     if (triangulate_quads_struct.should_ylikuutio_use_real_texture_coordinates)
                     {
-                        uvIndex[0] = current_interpolated_vertex_i;
-                        uvIndex[1] = northwest(current_vertex_i, actual_image_width);
-                        uvIndex[2] = northeast(current_vertex_i, actual_image_width);
+                        uv_index[0] = current_interpolated_vertex_i;
+                        uv_index[1] = northwest(current_vertex_i, actual_image_width);
+                        uv_index[2] = northeast(current_vertex_i, actual_image_width);
                     }
                     else
                     {
                         // Use altitude as texture coordinate (useful for elevation maps).
-                        // uvIndex[0] = static_cast<GLuint>(center_y(x, z, input_vertex_pointer, actual_image_width));
-                        // uvIndex[1] = static_cast<GLuint>(northwest_y(x, z, input_vertex_pointer, actual_image_width));
-                        // uvIndex[2] = static_cast<GLuint>(northeast_y(x, z, input_vertex_pointer, actual_image_width));
+                        // uv_index[0] = static_cast<GLuint>(center_y(x, z, input_vertex_pointer, actual_image_width));
+                        // uv_index[1] = static_cast<GLuint>(northwest_y(x, z, input_vertex_pointer, actual_image_width));
+                        // uv_index[2] = static_cast<GLuint>(northeast_y(x, z, input_vertex_pointer, actual_image_width));
                     }
 
                     geometry::output_triangle_vertices(
                             temp_vertices,
                             temp_UVs,
                             temp_normals,
-                            vertexIndex,
-                            uvIndex,
-                            normalIndex,
+                            vertex_index,
+                            uv_index,
+                            normal_index,
                             out_vertices,
                             out_UVs,
                             out_normals);
 
                     // Define the fourth triangle, E: center, northeast, southeast.
-                    vertexIndex[0] = current_interpolated_vertex_i;
-                    vertexIndex[1] = northeast(current_vertex_i, actual_image_width);
-                    vertexIndex[2] = southeast(current_vertex_i, actual_image_width);
+                    vertex_index[0] = current_interpolated_vertex_i;
+                    vertex_index[1] = northeast(current_vertex_i, actual_image_width);
+                    vertex_index[2] = southeast(current_vertex_i, actual_image_width);
 
-                    normalIndex[0] = current_interpolated_vertex_i;
-                    normalIndex[1] = northeast(current_vertex_i, actual_image_width);
-                    normalIndex[2] = southeast(current_vertex_i, actual_image_width);
+                    normal_index[0] = current_interpolated_vertex_i;
+                    normal_index[1] = northeast(current_vertex_i, actual_image_width);
+                    normal_index[2] = southeast(current_vertex_i, actual_image_width);
 
                     if (triangulate_quads_struct.should_ylikuutio_use_real_texture_coordinates)
                     {
-                        uvIndex[0] = current_interpolated_vertex_i;
-                        uvIndex[1] = northeast(current_vertex_i, actual_image_width);
-                        uvIndex[2] = southeast(current_vertex_i, actual_image_width);
+                        uv_index[0] = current_interpolated_vertex_i;
+                        uv_index[1] = northeast(current_vertex_i, actual_image_width);
+                        uv_index[2] = southeast(current_vertex_i, actual_image_width);
                     }
                     else
                     {
                         // Use altitude as texture coordinate (useful for elevation maps).
-                        // uvIndex[0] = static_cast<GLuint>(center_y(x, z, input_vertex_pointer, actual_image_width));
-                        // uvIndex[1] = static_cast<GLuint>(northeast_y(x, z, input_vertex_pointer, actual_image_width));
-                        // uvIndex[2] = static_cast<GLuint>(southeast_y(x, z, input_vertex_pointer, actual_image_width));
+                        // uv_index[0] = static_cast<GLuint>(center_y(x, z, input_vertex_pointer, actual_image_width));
+                        // uv_index[1] = static_cast<GLuint>(northeast_y(x, z, input_vertex_pointer, actual_image_width));
+                        // uv_index[2] = static_cast<GLuint>(southeast_y(x, z, input_vertex_pointer, actual_image_width));
                     }
 
                     geometry::output_triangle_vertices(
                             temp_vertices,
                             temp_UVs,
                             temp_normals,
-                            vertexIndex,
-                            uvIndex,
-                            normalIndex,
+                            vertex_index,
+                            uv_index,
+                            normal_index,
                             out_vertices,
                             out_UVs,
                             out_normals);
@@ -300,69 +300,69 @@ namespace geometry
                     // Second triangle: northwest, northeast, southwest.
 
                     // Define the first triangle, SE: southeast, southwest, northeast.
-                    vertexIndex[0] = southeast(current_vertex_i, actual_image_width);
-                    vertexIndex[1] = southwest(current_vertex_i, actual_image_width);
-                    vertexIndex[2] = northeast(current_vertex_i, actual_image_width);
+                    vertex_index[0] = southeast(current_vertex_i, actual_image_width);
+                    vertex_index[1] = southwest(current_vertex_i, actual_image_width);
+                    vertex_index[2] = northeast(current_vertex_i, actual_image_width);
 
-                    normalIndex[0] = southeast(current_vertex_i, actual_image_width);
-                    normalIndex[1] = southwest(current_vertex_i, actual_image_width);
-                    normalIndex[2] = northeast(current_vertex_i, actual_image_width);
+                    normal_index[0] = southeast(current_vertex_i, actual_image_width);
+                    normal_index[1] = southwest(current_vertex_i, actual_image_width);
+                    normal_index[2] = northeast(current_vertex_i, actual_image_width);
 
                     if (triangulate_quads_struct.should_ylikuutio_use_real_texture_coordinates)
                     {
-                        uvIndex[0] = southeast(current_vertex_i, actual_image_width);
-                        uvIndex[1] = southwest(current_vertex_i, actual_image_width);
-                        uvIndex[2] = northeast(current_vertex_i, actual_image_width);
+                        uv_index[0] = southeast(current_vertex_i, actual_image_width);
+                        uv_index[1] = southwest(current_vertex_i, actual_image_width);
+                        uv_index[2] = northeast(current_vertex_i, actual_image_width);
                     }
                     else
                     {
                         // Use altitude as texture coordinate (useful for elevation maps).
-                        // uvIndex[0] = static_cast<GLuint>(southeast_y(x, z, input_vertex_pointer, actual_image_width));
-                        // uvIndex[1] = static_cast<GLuint>(southwest_y(x, z, input_vertex_pointer, actual_image_width));
-                        // uvIndex[2] = static_cast<GLuint>(northeast_y(x, z, input_vertex_pointer, actual_image_width));
+                        // uv_index[0] = static_cast<GLuint>(southeast_y(x, z, input_vertex_pointer, actual_image_width));
+                        // uv_index[1] = static_cast<GLuint>(southwest_y(x, z, input_vertex_pointer, actual_image_width));
+                        // uv_index[2] = static_cast<GLuint>(northeast_y(x, z, input_vertex_pointer, actual_image_width));
                     }
 
                     geometry::output_triangle_vertices(
                             temp_vertices,
                             temp_UVs,
                             temp_normals,
-                            vertexIndex,
-                            uvIndex,
-                            normalIndex,
+                            vertex_index,
+                            uv_index,
+                            normal_index,
                             out_vertices,
                             out_UVs,
                             out_normals);
 
                     // Define the second triangle, NW: northwest, northeast, southwest.
-                    vertexIndex[0] = northwest(current_vertex_i, actual_image_width);
-                    vertexIndex[1] = northeast(current_vertex_i, actual_image_width);
-                    vertexIndex[2] = southwest(current_vertex_i, actual_image_width);
+                    vertex_index[0] = northwest(current_vertex_i, actual_image_width);
+                    vertex_index[1] = northeast(current_vertex_i, actual_image_width);
+                    vertex_index[2] = southwest(current_vertex_i, actual_image_width);
 
-                    normalIndex[0] = northwest(current_vertex_i, actual_image_width);
-                    normalIndex[1] = northeast(current_vertex_i, actual_image_width);
-                    normalIndex[2] = southwest(current_vertex_i, actual_image_width);
+                    normal_index[0] = northwest(current_vertex_i, actual_image_width);
+                    normal_index[1] = northeast(current_vertex_i, actual_image_width);
+                    normal_index[2] = southwest(current_vertex_i, actual_image_width);
 
                     if (triangulate_quads_struct.should_ylikuutio_use_real_texture_coordinates)
                     {
-                        uvIndex[0] = northwest(current_vertex_i, actual_image_width);
-                        uvIndex[1] = northeast(current_vertex_i, actual_image_width);
-                        uvIndex[2] = southwest(current_vertex_i, actual_image_width);
+                        uv_index[0] = northwest(current_vertex_i, actual_image_width);
+                        uv_index[1] = northeast(current_vertex_i, actual_image_width);
+                        uv_index[2] = southwest(current_vertex_i, actual_image_width);
                     }
                     else
                     {
                         // Use altitude as texture coordinate (useful for elevation maps).
-                        // uvIndex[0] = static_cast<GLuint>(northwest_y(x, z, input_vertex_pointer, actual_image_width));
-                        // uvIndex[1] = static_cast<GLuint>(northeast_y(x, z, input_vertex_pointer, actual_image_width));
-                        // uvIndex[2] = static_cast<GLuint>(southwest_y(x, z, input_vertex_pointer, actual_image_width));
+                        // uv_index[0] = static_cast<GLuint>(northwest_y(x, z, input_vertex_pointer, actual_image_width));
+                        // uv_index[1] = static_cast<GLuint>(northeast_y(x, z, input_vertex_pointer, actual_image_width));
+                        // uv_index[2] = static_cast<GLuint>(southwest_y(x, z, input_vertex_pointer, actual_image_width));
                     }
 
                     geometry::output_triangle_vertices(
                             temp_vertices,
                             temp_UVs,
                             temp_normals,
-                            vertexIndex,
-                            uvIndex,
-                            normalIndex,
+                            vertex_index,
+                            uv_index,
+                            normal_index,
                             out_vertices,
                             out_UVs,
                             out_normals);
@@ -408,69 +408,69 @@ namespace geometry
                     // Second triangle: northeast, southeast, northwest.
 
                     // Define the first triangle, SW: southwest, northwest, southeast.
-                    vertexIndex[0] = southwest(current_vertex_i, actual_image_width);
-                    vertexIndex[1] = northwest(current_vertex_i, actual_image_width);
-                    vertexIndex[2] = southeast(current_vertex_i, actual_image_width);
+                    vertex_index[0] = southwest(current_vertex_i, actual_image_width);
+                    vertex_index[1] = northwest(current_vertex_i, actual_image_width);
+                    vertex_index[2] = southeast(current_vertex_i, actual_image_width);
 
-                    normalIndex[0] = southwest(current_vertex_i, actual_image_width);
-                    normalIndex[1] = northwest(current_vertex_i, actual_image_width);
-                    normalIndex[2] = southeast(current_vertex_i, actual_image_width);
+                    normal_index[0] = southwest(current_vertex_i, actual_image_width);
+                    normal_index[1] = northwest(current_vertex_i, actual_image_width);
+                    normal_index[2] = southeast(current_vertex_i, actual_image_width);
 
                     if (triangulate_quads_struct.should_ylikuutio_use_real_texture_coordinates)
                     {
-                        uvIndex[0] = southwest(current_vertex_i, actual_image_width);
-                        uvIndex[1] = northwest(current_vertex_i, actual_image_width);
-                        uvIndex[2] = southeast(current_vertex_i, actual_image_width);
+                        uv_index[0] = southwest(current_vertex_i, actual_image_width);
+                        uv_index[1] = northwest(current_vertex_i, actual_image_width);
+                        uv_index[2] = southeast(current_vertex_i, actual_image_width);
                     }
                     else
                     {
                         // Use altitude as texture coordinate (useful for elevation maps).
-                        // uvIndex[0] = static_cast<GLuint>(southwest_y(x, z, input_vertex_pointer, actual_image_width));
-                        // uvIndex[1] = static_cast<GLuint>(northwest_y(x, z, input_vertex_pointer, actual_image_width));
-                        // uvIndex[2] = static_cast<GLuint>(southeast_y(x, z, input_vertex_pointer, actual_image_width));
+                        // uv_index[0] = static_cast<GLuint>(southwest_y(x, z, input_vertex_pointer, actual_image_width));
+                        // uv_index[1] = static_cast<GLuint>(northwest_y(x, z, input_vertex_pointer, actual_image_width));
+                        // uv_index[2] = static_cast<GLuint>(southeast_y(x, z, input_vertex_pointer, actual_image_width));
                     }
 
                     geometry::output_triangle_vertices(
                             temp_vertices,
                             temp_UVs,
                             temp_normals,
-                            vertexIndex,
-                            uvIndex,
-                            normalIndex,
+                            vertex_index,
+                            uv_index,
+                            normal_index,
                             out_vertices,
                             out_UVs,
                             out_normals);
 
                     // Define the second triangle, NW: northeast, southeast, northwest.
-                    vertexIndex[0] = northeast(current_vertex_i, actual_image_width);
-                    vertexIndex[1] = southeast(current_vertex_i, actual_image_width);
-                    vertexIndex[2] = northwest(current_vertex_i, actual_image_width);
+                    vertex_index[0] = northeast(current_vertex_i, actual_image_width);
+                    vertex_index[1] = southeast(current_vertex_i, actual_image_width);
+                    vertex_index[2] = northwest(current_vertex_i, actual_image_width);
 
-                    normalIndex[0] = northeast(current_vertex_i, actual_image_width);
-                    normalIndex[1] = southeast(current_vertex_i, actual_image_width);
-                    normalIndex[2] = northwest(current_vertex_i, actual_image_width);
+                    normal_index[0] = northeast(current_vertex_i, actual_image_width);
+                    normal_index[1] = southeast(current_vertex_i, actual_image_width);
+                    normal_index[2] = northwest(current_vertex_i, actual_image_width);
 
                     if (triangulate_quads_struct.should_ylikuutio_use_real_texture_coordinates)
                     {
-                        uvIndex[0] = northeast(current_vertex_i, actual_image_width);
-                        uvIndex[1] = southeast(current_vertex_i, actual_image_width);
-                        uvIndex[2] = northwest(current_vertex_i, actual_image_width);
+                        uv_index[0] = northeast(current_vertex_i, actual_image_width);
+                        uv_index[1] = southeast(current_vertex_i, actual_image_width);
+                        uv_index[2] = northwest(current_vertex_i, actual_image_width);
                     }
                     else
                     {
                         // Use altitude as texture coordinate (useful for elevation maps).
-                        // uvIndex[0] = static_cast<GLuint>(northeast_y(x, z, input_vertex_pointer, actual_image_width));
-                        // uvIndex[1] = static_cast<GLuint>(southeast_y(x, z, input_vertex_pointer, actual_image_width));
-                        // uvIndex[2] = static_cast<GLuint>(northwest_y(x, z, input_vertex_pointer, actual_image_width));
+                        // uv_index[0] = static_cast<GLuint>(northeast_y(x, z, input_vertex_pointer, actual_image_width));
+                        // uv_index[1] = static_cast<GLuint>(southeast_y(x, z, input_vertex_pointer, actual_image_width));
+                        // uv_index[2] = static_cast<GLuint>(northwest_y(x, z, input_vertex_pointer, actual_image_width));
                     }
 
                     geometry::output_triangle_vertices(
                             temp_vertices,
                             temp_UVs,
                             temp_normals,
-                            vertexIndex,
-                            uvIndex,
-                            normalIndex,
+                            vertex_index,
+                            uv_index,
+                            normal_index,
                             out_vertices,
                             out_UVs,
                             out_normals);
