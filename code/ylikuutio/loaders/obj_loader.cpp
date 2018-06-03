@@ -41,7 +41,7 @@ namespace loaders
     {
         std::cout << "Loading OBJ file " << path << " ...\n";
 
-        std::vector<uint32_t> vertexIndices, uvIndices, normalIndices;
+        std::vector<uint32_t> vertex_indices, uv_indices, normal_indices;
         std::vector<glm::vec3> temp_vertices;
         std::vector<glm::vec2> temp_UVs;
         std::vector<glm::vec3> temp_normals;
@@ -144,15 +144,15 @@ namespace loaders
                     std::printf("File can't be read by our simple parser :-( Try exporting with other options\n");
                     continue;
                 }
-                vertexIndices.push_back(vertexIndex[0]);
-                vertexIndices.push_back(vertexIndex[1]);
-                vertexIndices.push_back(vertexIndex[2]);
-                uvIndices.push_back(uvIndex[0]);
-                uvIndices.push_back(uvIndex[1]);
-                uvIndices.push_back(uvIndex[2]);
-                normalIndices.push_back(normalIndex[0]);
-                normalIndices.push_back(normalIndex[1]);
-                normalIndices.push_back(normalIndex[2]);
+                vertex_indices.push_back(vertexIndex[0]);
+                vertex_indices.push_back(vertexIndex[1]);
+                vertex_indices.push_back(vertexIndex[2]);
+                uv_indices.push_back(uvIndex[0]);
+                uv_indices.push_back(uvIndex[1]);
+                uv_indices.push_back(uvIndex[2]);
+                normal_indices.push_back(normalIndex[0]);
+                normal_indices.push_back(normalIndex[1]);
+                normal_indices.push_back(normalIndex[2]);
             }
             else
             {
@@ -163,12 +163,12 @@ namespace loaders
         }
 
         // For each vertex of each triangle
-        for (unsigned int i = 0; i < vertexIndices.size(); i++)
+        for (unsigned int i = 0; i < vertex_indices.size(); i++)
         {
             // Get the indices of its attributes
-            unsigned int vertexIndex = vertexIndices[i];
-            unsigned int uvIndex = uvIndices[i];
-            unsigned int normalIndex = normalIndices[i];
+            unsigned int vertexIndex = vertex_indices[i];
+            unsigned int uvIndex = uv_indices[i];
+            unsigned int normalIndex = normal_indices[i];
 
             // Get the attributes thanks to the index
             glm::vec3 vertex = temp_vertices[vertexIndex - 1];
