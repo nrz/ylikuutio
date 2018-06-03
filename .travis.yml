@@ -67,4 +67,4 @@ script:
     - cd build_gcc
     - cmake ..
     - make -j 4
-    - ./unit_tests_with_Google_Test
+    - ./unit_tests_with_google_test
