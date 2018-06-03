@@ -64,9 +64,6 @@ namespace loaders
         }
         else if (species_loader_struct.model_file_format.compare("srtm") == 0 || species_loader_struct.model_file_format.compare("SRTM") == 0)
         {
-            species_loader_struct.latitude = -16.50f; // in degrees.
-            species_loader_struct.longitude = -68.15f; // in degrees.
-
             model_loading_result = loaders::load_SRTM_terrain(
                     species_loader_struct.model_filename,
                     species_loader_struct.latitude,
