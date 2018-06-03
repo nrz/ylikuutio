@@ -46,7 +46,7 @@ namespace loaders
         std::vector<glm::vec2> temp_UVs;
         std::vector<glm::vec3> temp_normals;
 
-        std::FILE* file = std::fopen(path, "r");
+        std::FILE* file = std::fopen(path, "rb");
 
         if (file == nullptr)
         {
