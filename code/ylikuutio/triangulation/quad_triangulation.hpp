@@ -130,8 +130,8 @@ namespace geometry
             std::vector<glm::vec3> temp_normals;
 
             // Processing stages:
-            // 1. Define the (GLfloat) vertices for vertices loaded from file, `push_back` to `temp_vertices` and `temp_UVs`.
-            // 2. Interpolate the (GLfloat) vertices between, using bilinear interpolation, `push_back` to `temp_vertices` and `temp_UVs`.
+            // 1. Define the (float) vertices for vertices loaded from file, `push_back` to `temp_vertices` and `temp_UVs`.
+            // 2. Interpolate the (float) vertices between, using bilinear interpolation, `push_back` to `temp_vertices` and `temp_UVs`.
             // 3a. Transform spherical coordinates loaded from file (and computed this far as being in horizontal plane) to a curved surface.
             // 3b. For bilinear interpolation: Transform interpolated coordinates (and computed this far as being in horizontal plane) to a curved surface.
             // 4. Compute the face normals, `push_back` to `face_normals`.
