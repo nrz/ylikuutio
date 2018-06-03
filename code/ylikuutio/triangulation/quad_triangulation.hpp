@@ -125,7 +125,6 @@ namespace geometry
                 return false;
             }
 
-            std::vector<GLuint> vertexIndices, uvIndices, normalIndices;
             std::vector<glm::vec3> temp_vertices;
             std::vector<glm::vec2> temp_UVs;
             std::vector<glm::vec3> temp_normals;
