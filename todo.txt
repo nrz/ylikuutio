@@ -3,7 +3,6 @@ Tasks in priority order in descending priority, the most urgent ones first. Chec
 
 Fixes needed:
 [ ] Fix compiling on Visual Studio.
-[ ] Fix Coverity Scan Travis integration configuration (in `.travis.yml`).
 
 Tasks which are necessary for the development of Ylikuutio:
 [ ] Implement `Camera` entities.
@@ -115,3 +114,4 @@ Ready:
 [x] Bind each `Biont` also to its corresponding `SymbiontSpecies` (and also unbind from its corresponding `SymbiontSpecies`).
 [x] Implement `Entity`-specific variables.
 [x] Fix Travis configuration file `.travis.yml`.
+[x] Fix Coverity Scan Travis integration configuration (in `.travis.yml`).
