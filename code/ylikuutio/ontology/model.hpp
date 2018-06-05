@@ -68,8 +68,8 @@ namespace ontology
             int32_t get_number_of_children() const override;
             int32_t get_number_of_descendants() const override;
 
-            std::vector<glm::vec3> get_vertices() const;
-            std::vector<uint32_t> get_indices() const;
+            const std::vector<glm::vec3>& get_vertices() const;
+            const std::vector<uint32_t>& get_indices() const;
 
             GLuint get_vertex_position_modelspaceID() const;
             GLuint get_vertexUVID() const;
