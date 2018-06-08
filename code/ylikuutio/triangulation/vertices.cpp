@@ -80,6 +80,12 @@ namespace geometry
 
         if (is_bilinear_interpolation_in_use)
         {
+            if (temp_vertices.size() != actual_image_width * actual_image_height + (actual_image_width - 1) * (actual_image_height - 1))
+            {
+                // Number of vertices must be correct.
+                return false;
+            }
+
             // Face indices example for a 4x4 image file using bilinear interpolation.
             //
             //  +-------+-------+-------+
@@ -272,6 +278,12 @@ namespace geometry
         }
         else if (is_southwest_northeast_edges_in_use)
         {
+            if (temp_vertices.size() != actual_image_width * actual_image_height)
+            {
+                // If number of face normals is not width * height, then the number of vertices is incorrect.
+                return false;
+            }
+
             // Face indices example for a 4x4 image file using southwest-northeast edges.
             //
             // +---+---+---+
@@ -380,6 +392,12 @@ namespace geometry
         }
         else if (is_southeast_northwest_edges_in_use)
         {
+            if (temp_vertices.size() != actual_image_width * actual_image_height)
+            {
+                // If number of face normals is not width * height, then the number of vertices is incorrect.
+                return false;
+            }
+
             // Face indices example for a 4x4 image file using southeast-northwest edges.
             //
             // +---+---+---+
