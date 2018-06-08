@@ -69,6 +69,15 @@ namespace geometry
             return false;
         }
 
+        if ((is_bilinear_interpolation_in_use && is_southwest_northeast_edges_in_use) ||
+                (is_bilinear_interpolation_in_use && is_southeast_northwest_edges_in_use) ||
+                (is_southwest_northeast_edges_in_use && is_southeast_northwest_edges_in_use) ||
+                (!is_bilinear_interpolation_in_use && !is_southwest_northeast_edges_in_use && !is_southeast_northwest_edges_in_use))
+        {
+            // Exactly 1 triangulation method must be selected.
+            return false;
+        }
+
         if (is_bilinear_interpolation_in_use)
         {
             // Face indices example for a 4x4 image file using bilinear interpolation.
