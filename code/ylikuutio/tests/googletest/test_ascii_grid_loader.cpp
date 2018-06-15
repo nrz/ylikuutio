@@ -24,6 +24,24 @@ TEST(an_ASCII_grid_must_be_defined_and_interpolated_appropriately, test_3x3_0_1_
 
     ASSERT_TRUE(model_loading_result);
 
+    //  +-------+-------+
+    //  |\ 10  /|\ 14  /|
+    //  | \   / | \   / |
+    //  |  \ /  |  \ /  |
+    //  | 9 x 11|13 x 15|
+    //  |  / \  |  / \  |
+    //  | /   \ | /   \ |
+    //  |/  8  \|/ 12  \|
+    //  +-------+-------+
+    //  |\  2  /|\  6  /|
+    //  | \   / | \   / |
+    //  |  \ /  |  \ /  |
+    //  |1  x  3|5  x  7|
+    //  |  / \  |  / \  |
+    //  | /   \ | /   \ |
+    //  |/  0  \|/  4  \|
+    //  +-------+-------+
+
     ASSERT_EQ(vertices[0].y, 3.25f); // central vertex of 1st triangle.
     ASSERT_EQ(vertices[1].y, 1.00f); // southeast vertex.
     ASSERT_EQ(vertices[2].y, 0.00f); // southwest vertex.
