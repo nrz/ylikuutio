@@ -122,8 +122,13 @@ namespace geometry
 
                     temp_UVs.push_back(uv);
 
+                    // `uv.x` is repeated 0, 1, 0, 1 ... when moving eastward.
+                    // this causes the texture be mirrored horizontally for every other quad.
                     texture_x ^= 1;
                 }
+
+                // `uv.y` is repeated 0, 1, 0, 1 ... when moving southward.
+                // this causes the texture be mirrored vertically for every other quad.
                 texture_y ^= 1;
             }
 
