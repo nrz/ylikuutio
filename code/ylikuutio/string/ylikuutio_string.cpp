@@ -38,6 +38,28 @@ namespace string
         return false;
     }
 
+    bool check_and_report_if_some_string_matches(
+            const std::string& data_string,
+            const std::size_t data_index,
+            const std::vector<std::string> identifier_strings_vector)
+    {
+        for (const std::string& identifier_string : identifier_strings_vector)
+        {
+            if (data_index + identifier_string.length() > data_string.size())
+            {
+                // If current `identifier_string` can't fit in the memory region,
+                // proceed to the next `identifier_string`, if there is any left.
+                continue;
+            }
+
+            if (data_string.compare(data_index, identifier_string.size(), identifier_string) == 0)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     void extract_string(
             const char* const src_base_pointer,
             char*& src_data_pointer,

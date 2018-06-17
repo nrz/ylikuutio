@@ -15,6 +15,11 @@ namespace string
             const uint64_t data_size,
             const std::vector<std::string> identifier_strings_vector);
 
+    bool check_and_report_if_some_string_matches(
+            const std::string& data_string,
+            const std::size_t data_index,
+            const std::vector<std::string> identifier_strings_vector);
+
     void extract_string(
             const char* const src_base_pointer,
             char*& src_data_pointer,
