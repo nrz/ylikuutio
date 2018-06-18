@@ -60,6 +60,12 @@ namespace string
             const char* const char_end_string,
             const char* const description);
 
+    int32_t extract_int32_t_value_from_string(
+            const std::string& data_string,
+            std::size_t& data_index,
+            const char* const char_end_string,
+            const char* const description);
+
     float extract_float_value_from_string(
             const char* const src_base_pointer,
             char*& src_data_pointer,

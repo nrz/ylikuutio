@@ -209,6 +209,30 @@ namespace string
         return value;
     }
 
+    int32_t extract_int32_t_value_from_string(
+            const std::string& data_string,
+            std::size_t& data_index,
+            const char* const char_end_string,
+            const char* const description)
+    {
+        char char_number_buffer[1024];
+        string::extract_string_with_several_endings(
+                data_string,
+                ++data_index,
+                char_number_buffer,
+                char_number_buffer,
+                sizeof(char_number_buffer),
+                char_end_string);
+
+        int32_t value = std::strtol(char_number_buffer, nullptr, 10); // base 10.
+
+        if (description != nullptr)
+        {
+            std::printf("%s: %d\n", description, value);
+        }
+        return value;
+    }
+
     float extract_float_value_from_string(
             const char* const src_base_pointer,
             char*& src_data_pointer,
