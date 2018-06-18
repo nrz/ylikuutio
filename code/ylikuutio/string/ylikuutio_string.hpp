@@ -38,6 +38,14 @@ namespace string
             const uint64_t dest_data_size,
             const char* const char_end_string);
 
+    void extract_string_with_several_endings(
+            const std::string& data_string,
+            std::size_t& data_index,
+            const char* const dest_base_pointer,
+            char* dest_data_pointer,
+            const uint64_t dest_data_size,
+            const char* const char_end_string);
+
     int32_t extract_last_part_of_string(
             const uint8_t* const src_base_pointer,
             const uint64_t src_data_size,

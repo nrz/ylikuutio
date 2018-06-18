@@ -116,6 +116,45 @@ namespace string
         return;
     }
 
+    void extract_string_with_several_endings(
+            const std::string& data_string,
+            std::size_t& data_index,
+            const char* const dest_base_pointer,
+            char* dest_data_pointer,
+            const uint64_t dest_data_size,
+            const char* const char_end_string)
+    {
+        // This function copies characters from `src_data_pointer` until a character matches.
+
+        while (data_index < data_string.size() &&
+                dest_data_pointer + 1 < dest_base_pointer + dest_data_size)
+        {
+            uint32_t n_of_ending_characters = std::strlen(char_end_string);
+            const char* end_char_pointer;
+            end_char_pointer = char_end_string;
+            const std::string current_char_string = data_string.substr(data_index, 1);
+
+            // Check if current character is any of the ending characters.
+            while (*end_char_pointer != '\0')
+            {
+                if (std::strncmp(current_char_string.c_str(), end_char_pointer, 1) == 0)
+                {
+                    *dest_data_pointer = '\0';
+                    return;
+                }
+                end_char_pointer++;
+            }
+
+            // OK, current character is not any of the ending characters.
+            // Copy it and advance `dest_data_pointer` and `data_index` accordingly.
+            strncpy(dest_data_pointer++, current_char_string.c_str(), 1);
+            data_index++;
+        }
+
+        *dest_data_pointer = '\0';
+        return;
+    }
+
     int32_t extract_last_part_of_string(
             const uint8_t* const src_base_pointer,
             const uint64_t src_data_size,
