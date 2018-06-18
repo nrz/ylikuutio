@@ -259,6 +259,30 @@ namespace string
         return value;
     }
 
+    float extract_float_value_from_string(
+            const std::string& data_string,
+            std::size_t& data_index,
+            const char* const char_end_string,
+            const char* const description)
+    {
+        char char_number_buffer[1024];
+        string::extract_string_with_several_endings(
+                data_string,
+                ++data_index,
+                char_number_buffer,
+                char_number_buffer,
+                sizeof(char_number_buffer),
+                char_end_string);
+
+        float value = std::strtof(char_number_buffer, nullptr);
+
+        if (description != nullptr)
+        {
+            std::printf("%s: %f\n", description, value);
+        }
+        return value;
+    }
+
     int32_t extract_unicode_value_from_string(const char*& unicode_char_pointer)
     {
         if (*unicode_char_pointer == '\0')

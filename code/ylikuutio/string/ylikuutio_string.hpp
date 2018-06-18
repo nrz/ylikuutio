@@ -73,6 +73,12 @@ namespace string
             const char* const char_end_string,
             const char* const description);
 
+    float extract_float_value_from_string(
+            const std::string& data_string,
+            std::size_t& data_index,
+            const char* const char_end_string,
+            const char* const description);
+
     int32_t extract_unicode_value_from_string(const char*& unicode_char_pointer);
 
     std::string convert_std_list_char_to_std_string(const std::list<char>& std_list_char);
