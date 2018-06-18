@@ -111,6 +111,7 @@ namespace string
             // Copy it and advance the pointers accordingly.
             strncpy(dest_data_pointer++, src_data_pointer++, 1);
         }
+
         *dest_data_pointer = '\0';
         return;
     }
