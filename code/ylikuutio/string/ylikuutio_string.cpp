@@ -87,7 +87,7 @@ namespace string
             const uint64_t dest_data_size,
             const char* const char_end_string)
     {
-        // This function copies characters from `src_mem_pointer` until a character matches.
+        // This function copies characters from `src_data_pointer` until a character matches.
 
         while (src_data_pointer < src_base_pointer + src_data_size &&
                 dest_data_pointer + 1 < dest_base_pointer + dest_data_size)
