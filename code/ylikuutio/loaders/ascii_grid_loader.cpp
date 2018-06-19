@@ -63,17 +63,17 @@ namespace loaders
         std::size_t file_content_i = 0;
 
         // All possible block identifier strings.
-        std::vector<std::string> number_strings_vector = { "-", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+        const std::vector<std::string> number_strings_vector = { "-", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
         while (!string::check_and_report_if_some_string_matches(file_content, ++file_content_i, number_strings_vector));
-        int32_t image_width = string::extract_int32_t_value_from_string(
+        const int32_t image_width = string::extract_int32_t_value_from_string(
                 file_content,
                 --file_content_i,
                 (const char* const) " \n",
                 (const char* const) "ncols");
 
         while (!string::check_and_report_if_some_string_matches(file_content, ++file_content_i, number_strings_vector));
-        int32_t image_height = string::extract_int32_t_value_from_string(
+        const int32_t image_height = string::extract_int32_t_value_from_string(
                 file_content,
                 --file_content_i,
                 (const char* const) " \n",
@@ -108,7 +108,7 @@ namespace loaders
                 (const char* const) "nodata_value");
 
         // note: the value of `image_height_in_use` can be adjusted here (for testing purposes).
-        int32_t image_height_in_use = image_height;
+        const int32_t image_height_in_use = image_height;
 
         float* vertex_data = new float[image_width * image_height_in_use];
 
