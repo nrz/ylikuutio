@@ -439,8 +439,6 @@ TEST(extract_string_from_memory, nothing_must_be_extracted_when_source_string_is
     char* text_pointer = text;
 
     char end_string[] = "";
-    char* end_string_pointer = end_string;
-
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -456,8 +454,6 @@ TEST(extract_string_from_memory, nothing_must_be_extracted_when_source_string_is
     char* text_pointer = text;
 
     char end_string[] = "a";
-    char* end_string_pointer = end_string;
-
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -473,8 +469,6 @@ TEST(extract_string_from_memory, nothing_must_be_extracted_when_source_string_is
     char* text_pointer = text;
 
     char end_string[] = "aa";
-    char* end_string_pointer = end_string;
-
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -490,8 +484,6 @@ TEST(extract_string_from_memory, nothing_must_be_extracted_when_source_string_is
     char* text_pointer = text;
 
     char end_string[] = "ab";
-    char* end_string_pointer = end_string;
-
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -507,8 +499,6 @@ TEST(extract_string_from_memory, 1_char_must_be_extracted_when_source_string_is_
     char* text_pointer = text;
 
     char end_string[] = "a";
-    char* end_string_pointer = end_string;
-
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -524,8 +514,6 @@ TEST(extract_string_from_memory, iloinen_lokki_laulaa_ja_nukkuu)
     char* text_pointer = text;
 
     char end_string[] = "ja";
-    char* end_string_pointer = end_string;
-
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -562,8 +550,6 @@ TEST(extract_string_with_several_endings_from_memory, nothing_must_be_extracted_
     char* text_pointer = text;
 
     char end_string[] = "";
-    char* end_string_pointer = end_string;
-
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -579,8 +565,6 @@ TEST(extract_string_with_several_endings_from_memory_std_string, nothing_must_be
     std::size_t data_index = 0;
 
     char end_string[] = "";
-    char* end_string_pointer = end_string;
-
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -596,8 +580,6 @@ TEST(extract_string_with_several_endings_from_memory, nothing_must_be_extracted_
     char* text_pointer = text;
 
     char end_string[] = "a";
-    char* end_string_pointer = end_string;
-
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -613,8 +595,6 @@ TEST(extract_string_with_several_endings_from_memory_std_string, nothing_must_be
     std::size_t data_index = 0;
 
     char end_string[] = "a";
-    char* end_string_pointer = end_string;
-
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -630,8 +610,6 @@ TEST(extract_string_with_several_endings_from_memory, nothing_must_be_extracted_
     char* text_pointer = text;
 
     char end_string[] = "aa";
-    char* end_string_pointer = end_string;
-
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -647,8 +625,6 @@ TEST(extract_string_with_several_endings_from_memory_std_string, nothing_must_be
     std::size_t data_index = 0;
 
     char end_string[] = "aa";
-    char* end_string_pointer = end_string;
-
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -664,8 +640,6 @@ TEST(extract_string_with_several_endings_from_memory, nothing_must_be_extracted_
     char* text_pointer = text;
 
     char end_string[] = "ab";
-    char* end_string_pointer = end_string;
-
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -681,8 +655,6 @@ TEST(extract_string_with_several_endings_from_memory_std_string, nothing_must_be
     std::size_t data_index = 0;
 
     char end_string[] = "ab";
-    char* end_string_pointer = end_string;
-
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -698,8 +670,6 @@ TEST(extract_string_with_several_endings_from_memory, nothing_must_be_extracted_
     char* text_pointer = text;
 
     char end_string[] = "a";
-    char* end_string_pointer = end_string;
-
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -715,8 +685,6 @@ TEST(extract_string_with_several_endings_from_memory_std_string, nothing_must_be
     std::size_t data_index = 0;
 
     char end_string[] = "a";
-    char* end_string_pointer = end_string;
-
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -732,8 +700,6 @@ TEST(extract_string_with_several_endings_from_memory, nothing_must_be_extracted_
     char* text_pointer = text;
 
     char end_string[] = "ab";
-    char* end_string_pointer = end_string;
-
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -749,8 +715,6 @@ TEST(extract_string_with_several_endings_from_memory_std_string, nothing_must_be
     std::size_t data_index = 0;
 
     char end_string[] = "ab";
-    char* end_string_pointer = end_string;
-
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -766,8 +730,6 @@ TEST(extract_string_with_several_endings_from_memory, nothing_must_be_extracted_
     char* text_pointer = text;
 
     char end_string[] = "ba";
-    char* end_string_pointer = end_string;
-
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -783,8 +745,6 @@ TEST(extract_string_with_several_endings_from_memory_std_string, nothing_must_be
     std::size_t data_index = 0;
 
     char end_string[] = "ba";
-    char* end_string_pointer = end_string;
-
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -800,8 +760,6 @@ TEST(extract_string_with_several_endings_from_memory, nothing_must_be_extracted_
     char* text_pointer = text;
 
     char end_string[] = "aa";
-    char* end_string_pointer = end_string;
-
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -817,8 +775,6 @@ TEST(extract_string_with_several_endings_from_memory_std_string, nothing_must_be
     std::size_t data_index = 0;
 
     char end_string[] = "aa";
-    char* end_string_pointer = end_string;
-
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -834,8 +790,6 @@ TEST(extract_string_with_several_endings_from_memory, 1_char_must_be_extracted_w
     char* text_pointer = text;
 
     char end_string[] = "b";
-    char* end_string_pointer = end_string;
-
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -852,8 +806,6 @@ TEST(extract_string_with_several_endings_from_memory_std_string, 1_char_must_be_
     std::size_t data_index = 0;
 
     char end_string[] = "b";
-    char* end_string_pointer = end_string;
-
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -870,8 +822,6 @@ TEST(extract_string_with_several_endings_from_memory, nothing_must_be_extracted_
     char* text_pointer = text;
 
     char end_string[] = "a";
-    char* end_string_pointer = end_string;
-
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -887,8 +837,6 @@ TEST(extract_string_with_several_endings_from_memory_std_string, nothing_must_be
     std::size_t data_index = 0;
 
     char end_string[] = "a";
-    char* end_string_pointer = end_string;
-
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -904,8 +852,6 @@ TEST(extract_string_with_several_endings_from_memory, nothing_must_be_extracted_
     char* text_pointer = text;
 
     char end_string[] = "a";
-    char* end_string_pointer = end_string;
-
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -921,8 +867,6 @@ TEST(extract_string_with_several_endings_from_memory_std_string, nothing_must_be
     std::size_t data_index = 0;
 
     char end_string[] = "a";
-    char* end_string_pointer = end_string;
-
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -938,8 +882,6 @@ TEST(extract_string_with_several_endings_from_memory, 1_char_must_be_extracted_w
     char* text_pointer = text;
 
     char end_string[] = "b";
-    char* end_string_pointer = end_string;
-
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -956,8 +898,6 @@ TEST(extract_string_with_several_endings_from_memory_std_string, 1_char_must_be_
     std::size_t data_index = 0;
 
     char end_string[] = "b";
-    char* end_string_pointer = end_string;
-
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -974,8 +914,6 @@ TEST(extract_string_with_several_endings_from_memory, 1_char_must_be_extracted_w
     char* text_pointer = text;
 
     char end_string[] = "bc";
-    char* end_string_pointer = end_string;
-
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -992,8 +930,6 @@ TEST(extract_string_with_several_endings_from_memory_std_string, 1_char_must_be_
     std::size_t data_index = 0;
 
     char end_string[] = "bc";
-    char* end_string_pointer = end_string;
-
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -1010,8 +946,6 @@ TEST(extract_string_with_several_endings_from_memory, 1_char_must_be_extracted_w
     char* text_pointer = text;
 
     char end_string[] = "cb";
-    char* end_string_pointer = end_string;
-
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -1028,8 +962,6 @@ TEST(extract_string_with_several_endings_from_memory_std_string, 1_char_must_be_
     std::size_t data_index = 0;
 
     char end_string[] = "cb";
-    char* end_string_pointer = end_string;
-
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -1046,8 +978,6 @@ TEST(extract_string_with_several_endings_from_memory, 1_char_must_be_extracted_w
     char* text_pointer = text;
 
     char end_string[] = "bb";
-    char* end_string_pointer = end_string;
-
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -1064,8 +994,6 @@ TEST(extract_string_with_several_endings_from_memory_std_string, 1_char_must_be_
     std::size_t data_index = 0;
 
     char end_string[] = "bb";
-    char* end_string_pointer = end_string;
-
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -1082,8 +1010,6 @@ TEST(extract_string_with_several_endings_from_memory, 2_chars_must_be_extracted_
     char* text_pointer = text;
 
     char end_string[] = "c";
-    char* end_string_pointer = end_string;
-
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -1101,8 +1027,6 @@ TEST(extract_string_with_several_endings_from_memory_std_string, 2_chars_must_be
     std::size_t data_index = 0;
 
     char end_string[] = "c";
-    char* end_string_pointer = end_string;
-
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -1120,8 +1044,6 @@ TEST(extract_string_with_several_endings_from_memory, nothing_must_be_extracted_
     char* text_pointer = text;
 
     char end_string[] = "a";
-    char* end_string_pointer = end_string;
-
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -1137,8 +1059,6 @@ TEST(extract_string_with_several_endings_from_memory_std_string, nothing_must_be
     std::size_t data_index = 0;
 
     char end_string[] = "a";
-    char* end_string_pointer = end_string;
-
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -1154,8 +1074,6 @@ TEST(extract_string_with_several_endings_from_memory, 1_char_must_be_extracted_w
     char* text_pointer = text;
 
     char end_string[] = "b";
-    char* end_string_pointer = end_string;
-
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -1172,8 +1090,6 @@ TEST(extract_string_with_several_endings_from_memory_std_string, 1_char_must_be_
     std::size_t data_index = 0;
 
     char end_string[] = "b";
-    char* end_string_pointer = end_string;
-
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -1190,8 +1106,6 @@ TEST(extract_string_with_several_endings_from_memory, 2_chars_must_be_extracted_
     char* text_pointer = text;
 
     char end_string[] = "c";
-    char* end_string_pointer = end_string;
-
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -1209,8 +1123,6 @@ TEST(extract_string_with_several_endings_from_memory_std_string, 2_chars_must_be
     std::size_t data_index = 0;
 
     char end_string[] = "c";
-    char* end_string_pointer = end_string;
-
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -1228,8 +1140,6 @@ TEST(extract_string_with_several_endings_from_memory, 3_chars_must_be_extracted_
     char* text_pointer = text;
 
     char end_string[] = "d";
-    char* end_string_pointer = end_string;
-
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -1248,8 +1158,6 @@ TEST(extract_string_with_several_endings_from_memory_std_string, 3_chars_must_be
     std::size_t data_index = 0;
 
     char end_string[] = "d";
-    char* end_string_pointer = end_string;
-
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -1268,8 +1176,6 @@ TEST(extract_string_with_several_endings_from_memory, nothing_must_be_extracted_
     char* text_pointer = text;
 
     char end_string[] = "ad";
-    char* end_string_pointer = end_string;
-
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -1285,8 +1191,6 @@ TEST(extract_string_with_several_endings_from_memory_std_string, nothing_must_be
     std::size_t data_index = 0;
 
     char end_string[] = "ad";
-    char* end_string_pointer = end_string;
-
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -1302,8 +1206,6 @@ TEST(extract_string_with_several_endings_from_memory, nothing_must_be_extracted_
     char* text_pointer = text;
 
     char end_string[] = "da";
-    char* end_string_pointer = end_string;
-
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -1319,8 +1221,6 @@ TEST(extract_string_with_several_endings_from_memory_std_string, nothing_must_be
     std::size_t data_index = 0;
 
     char end_string[] = "da";
-    char* end_string_pointer = end_string;
-
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -1336,8 +1236,6 @@ TEST(extract_string_with_several_endings_from_memory, nothing_must_be_extracted_
     char* text_pointer = text;
 
     char end_string[] = "dea";
-    char* end_string_pointer = end_string;
-
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -1353,8 +1251,6 @@ TEST(extract_string_with_several_endings_from_memory_std_string, nothing_must_be
     std::size_t data_index = 0;
 
     char end_string[] = "dea";
-    char* end_string_pointer = end_string;
-
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -1370,8 +1266,6 @@ TEST(extract_string_with_several_endings_from_memory, nothing_must_be_extracted_
     char* text_pointer = text;
 
     char end_string[] = "defa";
-    char* end_string_pointer = end_string;
-
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -1387,8 +1281,6 @@ TEST(extract_string_with_several_endings_from_memory_std_string, nothing_must_be
     std::size_t data_index = 0;
 
     char end_string[] = "defa";
-    char* end_string_pointer = end_string;
-
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -1404,8 +1296,6 @@ TEST(extract_string_with_several_endings_from_memory, nothing_must_be_extracted_
     char* text_pointer = text;
 
     char end_string[] = "defga";
-    char* end_string_pointer = end_string;
-
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -1421,8 +1311,6 @@ TEST(extract_string_with_several_endings_from_memory_std_string, nothing_must_be
     std::size_t data_index = 0;
 
     char end_string[] = "defga";
-    char* end_string_pointer = end_string;
-
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -1438,8 +1326,6 @@ TEST(extract_string_with_several_endings_from_memory, 1_char_must_be_extracted_w
     char* text_pointer = text;
 
     char end_string[] = "bd";
-    char* end_string_pointer = end_string;
-
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -1456,8 +1342,6 @@ TEST(extract_string_with_several_endings_from_memory_std_string, 1_char_must_be_
     std::size_t data_index = 0;
 
     char end_string[] = "bd";
-    char* end_string_pointer = end_string;
-
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -1474,8 +1358,6 @@ TEST(extract_string_with_several_endings_from_memory, 1_char_must_be_extracted_w
     char* text_pointer = text;
 
     char end_string[] = "db";
-    char* end_string_pointer = end_string;
-
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -1492,8 +1374,6 @@ TEST(extract_string_with_several_endings_from_memory_std_string, 1_char_must_be_
     std::size_t data_index = 0;
 
     char end_string[] = "db";
-    char* end_string_pointer = end_string;
-
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -1510,8 +1390,6 @@ TEST(extract_string_with_several_endings_from_memory, 1_char_must_be_extracted_w
     char* text_pointer = text;
 
     char end_string[] = "deb";
-    char* end_string_pointer = end_string;
-
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -1528,8 +1406,6 @@ TEST(extract_string_with_several_endings_from_memory_std_string, 1_char_must_be_
     std::size_t data_index = 0;
 
     char end_string[] = "deb";
-    char* end_string_pointer = end_string;
-
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -1546,8 +1422,6 @@ TEST(extract_string_with_several_endings_from_memory, 1_char_must_be_extracted_w
     char* text_pointer = text;
 
     char end_string[] = "defb";
-    char* end_string_pointer = end_string;
-
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -1564,8 +1438,6 @@ TEST(extract_string_with_several_endings_from_memory_std_string, 1_char_must_be_
     std::size_t data_index = 0;
 
     char end_string[] = "defb";
-    char* end_string_pointer = end_string;
-
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -1582,8 +1454,6 @@ TEST(extract_string_with_several_endings_from_memory, 1_char_must_be_extracted_w
     char* text_pointer = text;
 
     char end_string[] = "defgb";
-    char* end_string_pointer = end_string;
-
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -1600,8 +1470,6 @@ TEST(extract_string_with_several_endings_from_memory_std_string, 1_char_must_be_
     std::size_t data_index = 0;
 
     char end_string[] = "defgb";
-    char* end_string_pointer = end_string;
-
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -1618,8 +1486,6 @@ TEST(extract_string_with_several_endings_from_memory, 2_chars_must_be_extracted_
     char* text_pointer = text;
 
     char end_string[] = "cd";
-    char* end_string_pointer = end_string;
-
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -1637,8 +1503,6 @@ TEST(extract_string_with_several_endings_from_memory_std_string, 2_chars_must_be
     std::size_t data_index = 0;
 
     char end_string[] = "cd";
-    char* end_string_pointer = end_string;
-
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -1656,8 +1520,6 @@ TEST(extract_string_with_several_endings_from_memory, 2_chars_must_be_extracted_
     char* text_pointer = text;
 
     char end_string[] = "dc";
-    char* end_string_pointer = end_string;
-
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -1675,8 +1537,6 @@ TEST(extract_string_with_several_endings_from_memory_std_string, 2_chars_must_be
     std::size_t data_index = 0;
 
     char end_string[] = "dc";
-    char* end_string_pointer = end_string;
-
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -1694,8 +1554,6 @@ TEST(extract_string_with_several_endings_from_memory, 2_chars_must_be_extracted_
     char* text_pointer = text;
 
     char end_string[] = "dec";
-    char* end_string_pointer = end_string;
-
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -1713,8 +1571,6 @@ TEST(extract_string_with_several_endings_from_memory_std_string, 2_chars_must_be
     std::size_t data_index = 0;
 
     char end_string[] = "dec";
-    char* end_string_pointer = end_string;
-
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -1732,8 +1588,6 @@ TEST(extract_string_with_several_endings_from_memory, 2_chars_must_be_extracted_
     char* text_pointer = text;
 
     char end_string[] = "defc";
-    char* end_string_pointer = end_string;
-
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -1751,8 +1605,6 @@ TEST(extract_string_with_several_endings_from_memory_std_string, 2_chars_must_be
     std::size_t data_index = 0;
 
     char end_string[] = "defc";
-    char* end_string_pointer = end_string;
-
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -1770,8 +1622,6 @@ TEST(extract_string_with_several_endings_from_memory, 2_chars_must_be_extracted_
     char* text_pointer = text;
 
     char end_string[] = "defgc";
-    char* end_string_pointer = end_string;
-
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -1789,8 +1639,6 @@ TEST(extract_string_with_several_endings_from_memory_std_string, 2_chars_must_be
     std::size_t data_index = 0;
 
     char end_string[] = "defgc";
-    char* end_string_pointer = end_string;
-
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -1808,8 +1656,6 @@ TEST(extract_string_with_several_endings_from_memory, 3_chars_must_be_extracted_
     char* text_pointer = text;
 
     char end_string[] = "";
-    char* end_string_pointer = end_string;
-
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -1828,8 +1674,6 @@ TEST(extract_string_with_several_endings_from_memory_std_string, 3_chars_must_be
     std::size_t data_index = 0;
 
     char end_string[] = "";
-    char* end_string_pointer = end_string;
-
     uint32_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
