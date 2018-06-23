@@ -16,7 +16,7 @@ namespace string
     bool check_and_report_if_some_string_matches(
             const char* const base_pointer,
             const char* const data_pointer,
-            const uint64_t data_size,
+            const std::size_t data_size,
             const std::vector<std::string> identifier_strings_vector)
     {
         for (const std::string& identifier_string : identifier_strings_vector)
@@ -63,10 +63,10 @@ namespace string
     void extract_string(
             const char* const src_base_pointer,
             char*& src_data_pointer,
-            const uint64_t src_data_size,
+            const std::size_t src_data_size,
             const char* const dest_base_pointer,
             char* dest_data_pointer,
-            const uint64_t dest_data_size,
+            const std::size_t dest_data_size,
             const char* const char_end_string)
     {
         // + 1 needed for both source and dest because of the null terminator.
@@ -82,10 +82,10 @@ namespace string
     void extract_string_with_several_endings(
             const char* const src_base_pointer,
             char*& src_data_pointer,
-            const uint64_t src_data_size,
+            const std::size_t src_data_size,
             const char* const dest_base_pointer,
             char* dest_data_pointer,
-            const uint64_t dest_data_size,
+            const std::size_t dest_data_size,
             const char* const char_end_string)
     {
         // This function copies characters from `src_data_pointer` until a character matches.
@@ -123,7 +123,7 @@ namespace string
             std::size_t& data_index,
             const char* const dest_base_pointer,
             char* dest_data_pointer,
-            const uint64_t dest_data_size,
+            const std::size_t dest_data_size,
             const char* const char_end_string)
     {
         // This function copies characters from `src_data_pointer` until a character matches.
@@ -193,9 +193,9 @@ namespace string
 
     int32_t extract_last_part_of_string(
             const uint8_t* const src_base_pointer,
-            const uint64_t src_data_size,
+            const std::size_t src_data_size,
             uint8_t* const dest_base_pointer,
-            const uint64_t dest_data_size,
+            const std::size_t dest_data_size,
             const char separator)
     {
         uint8_t* src_data_pointer = const_cast<uint8_t*>(src_base_pointer);
@@ -223,7 +223,7 @@ namespace string
     int32_t extract_int32_t_value_from_string(
             const char* const src_base_pointer,
             char*& src_data_pointer,
-            const uint64_t src_data_size,
+            const std::size_t src_data_size,
             const char* const char_end_string,
             const char* const description)
     {
@@ -273,7 +273,7 @@ namespace string
     float extract_float_value_from_string(
             const char* const src_base_pointer,
             char*& src_data_pointer,
-            const uint64_t src_data_size,
+            const std::size_t src_data_size,
             const char* const char_end_string,
             const char* const description)
     {

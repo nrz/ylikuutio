@@ -11,7 +11,7 @@ TEST(extract_string_from_memory, nothing_must_be_extracted_when_source_string_is
     char* text_pointer = text;
 
     char end_string[] = "";
-    uint32_t array_size = 128;
+    std::size_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
 
@@ -26,7 +26,7 @@ TEST(extract_string_from_memory, nothing_must_be_extracted_when_source_string_is
     char* text_pointer = text;
 
     char end_string[] = "a";
-    uint32_t array_size = 128;
+    std::size_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
 
@@ -41,7 +41,7 @@ TEST(extract_string_from_memory, nothing_must_be_extracted_when_source_string_is
     char* text_pointer = text;
 
     char end_string[] = "aa";
-    uint32_t array_size = 128;
+    std::size_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
 
@@ -56,7 +56,7 @@ TEST(extract_string_from_memory, nothing_must_be_extracted_when_source_string_is
     char* text_pointer = text;
 
     char end_string[] = "ab";
-    uint32_t array_size = 128;
+    std::size_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
 
@@ -71,7 +71,7 @@ TEST(extract_string_from_memory, 1_char_must_be_extracted_when_source_string_is_
     char* text_pointer = text;
 
     char end_string[] = "a";
-    uint32_t array_size = 128;
+    std::size_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
 
@@ -86,7 +86,7 @@ TEST(extract_string_from_memory, iloinen_lokki_laulaa_ja_nukkuu)
     char* text_pointer = text;
 
     char end_string[] = "ja";
-    uint32_t array_size = 128;
+    std::size_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
 
