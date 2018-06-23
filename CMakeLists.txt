@@ -675,6 +675,10 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         # code/ylikuutio/tests/googletest/test_asio.cpp
         code/ylikuutio/tests/googletest/test_bilinear_interpolation2D.cpp
         code/ylikuutio/tests/googletest/test_callback_system.cpp
+        code/ylikuutio/tests/googletest/test_check_and_report_if_some_string_matches.cpp
+        code/ylikuutio/tests/googletest/test_extract_string.cpp
+        code/ylikuutio/tests/googletest/test_extract_string_with_several_endings.cpp
+        code/ylikuutio/tests/googletest/test_extract_unicode_value_from_string.cpp
         code/ylikuutio/tests/googletest/test_fbx_loader.cpp
         code/ylikuutio/tests/googletest/test_file_loader.cpp
         code/ylikuutio/tests/googletest/test_font_loader.cpp
@@ -691,8 +695,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/googletest/test_pugixml.cpp
         code/ylikuutio/tests/googletest/test_shader_struct.cpp
         code/ylikuutio/tests/googletest/test_species_struct.cpp
-        code/ylikuutio/tests/googletest/test_vector_font_struct.cpp
-        code/ylikuutio/tests/googletest/test_ylikuutio_string.cpp)
+        code/ylikuutio/tests/googletest/test_vector_font_struct.cpp)
     set(MAIN_FILE code/ylikuutio/tests/googletest/main.cpp)
 
     add_library(code_to_test ${FILES_TO_TEST})
