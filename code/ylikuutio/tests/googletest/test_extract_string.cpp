@@ -18,6 +18,7 @@ TEST(extract_string_from_memory, nothing_must_be_extracted_when_source_string_is
     string::extract_string(text, text_pointer, sizeof(text), dest_array, dest_array, array_size, end_string);
     ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array, 0);
+    ASSERT_EQ(text_pointer, text);
 }
 
 TEST(extract_string_from_memory, nothing_must_be_extracted_when_source_string_is_empty_string_and_end_string_is_1_char)
@@ -33,6 +34,7 @@ TEST(extract_string_from_memory, nothing_must_be_extracted_when_source_string_is
     string::extract_string(text, text_pointer, sizeof(text), dest_array, dest_array, array_size, end_string);
     ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array, 0);
+    ASSERT_EQ(text_pointer, text);
 }
 
 TEST(extract_string_from_memory, nothing_must_be_extracted_when_source_string_is_empty_string_and_end_string_is_2_same_chars)
@@ -48,6 +50,7 @@ TEST(extract_string_from_memory, nothing_must_be_extracted_when_source_string_is
     string::extract_string(text, text_pointer, sizeof(text), dest_array, dest_array, array_size, end_string);
     ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array, 0);
+    ASSERT_EQ(text_pointer, text);
 }
 
 TEST(extract_string_from_memory, nothing_must_be_extracted_when_source_string_is_empty_string_and_end_string_is_2_different_chars)
@@ -63,6 +66,7 @@ TEST(extract_string_from_memory, nothing_must_be_extracted_when_source_string_is
     string::extract_string(text, text_pointer, sizeof(text), dest_array, dest_array, array_size, end_string);
     ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array, 0);
+    ASSERT_EQ(text_pointer, text);
 }
 
 TEST(extract_string_from_memory, nothing_must_be_extracted_when_source_string_is_1_char_and_end_string_is_same_char)
@@ -78,6 +82,7 @@ TEST(extract_string_from_memory, nothing_must_be_extracted_when_source_string_is
     string::extract_string(text, text_pointer, sizeof(text), dest_array, dest_array, array_size, end_string);
     ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array, 0);
+    ASSERT_EQ(text_pointer, text);
 }
 
 TEST(extract_string_from_memory, iloinen_lokki_laulaa_ja_nukkuu)
@@ -114,4 +119,5 @@ TEST(extract_string_from_memory, iloinen_lokki_laulaa_ja_nukkuu)
     ASSERT_EQ(*dest_array++, 'a');
     ASSERT_EQ(*dest_array++, ' ');
     ASSERT_EQ(*dest_array++, 0);
+    ASSERT_EQ((std::size_t) text_pointer, (std::size_t) text + 21);
 }
