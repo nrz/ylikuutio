@@ -65,7 +65,7 @@ TEST(extract_string_from_memory, nothing_must_be_extracted_when_source_string_is
     ASSERT_EQ(*dest_array, 0);
 }
 
-TEST(extract_string_from_memory, 1_char_must_be_extracted_when_source_string_is_1_char_and_end_string_is_1_char)
+TEST(extract_string_from_memory, nothing_must_be_extracted_when_source_string_is_1_char_and_end_string_is_same_char)
 {
     char text[] = "a";
     char* text_pointer = text;
