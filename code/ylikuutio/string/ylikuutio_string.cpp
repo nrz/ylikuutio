@@ -69,7 +69,7 @@ namespace string
             const uint64_t dest_data_size,
             const char* const char_end_string)
     {
-        while (src_data_pointer < src_base_pointer + src_data_size &&
+        while (src_data_pointer + 1 < src_base_pointer + src_data_size &&
                 dest_data_pointer + 1 < dest_base_pointer + dest_data_size &&
                 std::strncmp(src_data_pointer, char_end_string, std::strlen(char_end_string)) != 0)
         {
@@ -89,7 +89,7 @@ namespace string
     {
         // This function copies characters from `src_data_pointer` until a character matches.
 
-        while (src_data_pointer < src_base_pointer + src_data_size &&
+        while (src_data_pointer + 1 < src_base_pointer + src_data_size &&
                 dest_data_pointer + 1 < dest_base_pointer + dest_data_size)
         {
             uint32_t n_of_ending_characters = std::strlen(char_end_string);
@@ -200,7 +200,7 @@ namespace string
         uint8_t* dest_data_pointer = dest_base_pointer;
         int32_t filename_length = 0; // length without trailing 0 byte.
 
-        while (src_data_pointer < src_base_pointer + src_data_size &&
+        while (src_data_pointer + 1 < src_base_pointer + src_data_size &&
                 dest_data_pointer + 1 < dest_base_pointer + dest_data_size)
         {
             if (*src_data_pointer == static_cast<uint8_t>(separator))
