@@ -420,6 +420,9 @@ add_library(ylikuutio STATIC
     # map, in alphabetical order
     code/ylikuutio/map/ylikuutio_map.hpp
 
+    # memory, in alphabetical order
+    code/ylikuutio/memory/memory_templates.hpp
+
     # network, in alphabetical order
     # code/ylikuutio/network/tcp_connection.cpp
     # code/ylikuutio/network/tcp_connection.hpp
