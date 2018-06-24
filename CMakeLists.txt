@@ -648,6 +648,8 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/linear_algebra/matrix_functions.hpp
         code/ylikuutio/linear_algebra/tensor3.cpp
         code/ylikuutio/linear_algebra/tensor3.hpp
+        code/ylikuutio/loaders/ascii_grid_loader.cpp
+        code/ylikuutio/loaders/ascii_grid_loader.hpp
         code/ylikuutio/loaders/fbx_species_loader.cpp
         code/ylikuutio/loaders/fbx_species_loader.hpp
         code/ylikuutio/loaders/font_loader.cpp
@@ -659,6 +661,8 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/ontology/species_struct.hpp
         code/ylikuutio/ontology/text3D_struct.hpp
         code/ylikuutio/ontology/vector_font_struct.hpp
+        code/ylikuutio/ontology/universe.cpp
+        code/ylikuutio/ontology/universe.hpp
         code/ylikuutio/string/ylikuutio_string.cpp
         code/ylikuutio/string/ylikuutio_string.hpp
         code/ylikuutio/triangulation/face_normals.cpp
