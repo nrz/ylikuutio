@@ -10,8 +10,8 @@ TEST(extract_string_from_memory, nothing_must_be_extracted_when_source_string_is
     char text[] = "";
     char* text_pointer = text;
 
-    char end_string[] = "";
-    std::size_t array_size = 128;
+    const char end_string[] = "";
+    const std::size_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
 
@@ -26,8 +26,8 @@ TEST(extract_string_from_memory, nothing_must_be_extracted_when_source_string_is
     char text[] = "";
     char* text_pointer = text;
 
-    char end_string[] = "a";
-    std::size_t array_size = 128;
+    const char end_string[] = "a";
+    const std::size_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
 
@@ -42,8 +42,8 @@ TEST(extract_string_from_memory, nothing_must_be_extracted_when_source_string_is
     char text[] = "";
     char* text_pointer = text;
 
-    char end_string[] = "aa";
-    std::size_t array_size = 128;
+    const char end_string[] = "aa";
+    const std::size_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
 
@@ -58,8 +58,8 @@ TEST(extract_string_from_memory, nothing_must_be_extracted_when_source_string_is
     char text[] = "";
     char* text_pointer = text;
 
-    char end_string[] = "ab";
-    std::size_t array_size = 128;
+    const char end_string[] = "ab";
+    const std::size_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
 
@@ -74,8 +74,8 @@ TEST(extract_string_from_memory, nothing_must_be_extracted_when_source_string_is
     char text[] = "a";
     char* text_pointer = text;
 
-    char end_string[] = "a";
-    std::size_t array_size = 128;
+    const char end_string[] = "a";
+    const std::size_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
 
@@ -90,8 +90,8 @@ TEST(extract_string_from_memory, iloinen_lokki_laulaa_ja_nukkuu)
     char text[] = "iloinen lokki laulaa ja nukkuu";
     char* text_pointer = text;
 
-    char end_string[] = "ja";
-    std::size_t array_size = 128;
+    const char end_string[] = "ja";
+    const std::size_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
 

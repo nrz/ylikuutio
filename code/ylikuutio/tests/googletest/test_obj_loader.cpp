@@ -7,12 +7,12 @@
 
 TEST(obj_files_must_be_loaded_approriately, suzanne_obj)
 {
-    std::string obj_filename = "suzanne.obj";
+    const std::string obj_filename = "suzanne.obj";
     std::vector<glm::vec3> out_vertices;
     std::vector<glm::vec2> out_UVs;
     std::vector<glm::vec3> out_normals;
 
-    bool result = loaders::load_OBJ(obj_filename.c_str(), out_vertices, out_UVs, out_normals);
+    const bool result = loaders::load_OBJ(obj_filename.c_str(), out_vertices, out_UVs, out_normals);
     ASSERT_TRUE(result);
 
     // note: `load_OBJ` only loads the OBJ file. `load_OBJ` does not remove duplicate vertices.
