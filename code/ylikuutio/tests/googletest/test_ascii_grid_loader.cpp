@@ -2,6 +2,16 @@
 #include "code/ylikuutio/loaders/ascii_grid_loader.hpp"
 #include "code/ylikuutio/loaders/ascii_grid_loader.cpp"
 
+// Include GLM
+#ifndef __GLM_GLM_HPP_INCLUDED
+#define __GLM_GLM_HPP_INCLUDED
+#include <glm/glm.hpp> // glm
+#endif
+
+// Include standard headers
+#include <string>   // std::string
+#include <vector>   // std::vector
+
 TEST(an_ASCII_grid_must_be_defined_and_interpolated_appropriately, test_3x3_0_1_2_4_8_16_32_64_128_256_x_step_1_z_step_1)
 {
     const std::string ASCII_grid_model_filename = "test_3x3_0_1_2_4_8_16_32_64_128.asc"; // Helsinki eastern downtown.

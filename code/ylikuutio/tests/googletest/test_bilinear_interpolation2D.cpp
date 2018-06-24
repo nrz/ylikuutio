@@ -1,6 +1,9 @@
 #include "gtest/gtest.h"
 #include "code/ylikuutio/interpolation/bilinear_interpolation2D.hpp"
 
+// Include standard headers
+#include <stdint.h> // uint32_t etc.
+
 TEST(a_1x1_terrain_must_be_interpolated_appropriately, no_change)
 {
     uint32_t image_width = 1;
