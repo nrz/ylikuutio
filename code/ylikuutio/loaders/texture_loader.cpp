@@ -1,6 +1,8 @@
 #include "texture_loader.hpp"
 #include "bmp_loader.hpp"
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
+
+// Include OpenFBX
 #include <ofbx.h>
 
 // Include GLEW

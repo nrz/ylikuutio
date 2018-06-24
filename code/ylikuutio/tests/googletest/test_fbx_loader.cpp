@@ -1,8 +1,12 @@
 #include "gtest/gtest.h"
 #include "code/ylikuutio/loaders/fbx_species_loader.hpp"
 #include "code/ylikuutio/loaders/fbx_species_loader.cpp"
+
+// Include miniz (required by OpenFBX)
 #include <miniz.c>
 #include <miniz.h>
+
+// Include OpenFBX
 #include <ofbx.cpp>
 #include <ofbx.h>
 
