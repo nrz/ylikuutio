@@ -24,29 +24,29 @@ std::shared_ptr<datatypes::AnyValue> square(callback_system::CallbackEngine*, ca
 
     if (any_value->type == datatypes::INT32_T)
     {
-        int32_t factor = any_value->int32_t_value;
-        int32_t squared = factor * factor;
+        const int32_t factor = any_value->int32_t_value;
+        const int32_t squared = factor * factor;
         std::cout << "Square of (int32_t) " << factor << " is " << squared << ".\n";
         return std::make_shared<datatypes::AnyValue>(squared);
     }
     else if (any_value->type == datatypes::UINT32_T)
     {
-        uint32_t factor = any_value->uint32_t_value;
-        uint32_t squared = factor * factor;
+        const uint32_t factor = any_value->uint32_t_value;
+        const uint32_t squared = factor * factor;
         std::cout << "Square of (uint32_t) " << factor << " is " << squared << ".\n";
         return std::make_shared<datatypes::AnyValue>(squared);
     }
     else if (any_value->type == datatypes::FLOAT)
     {
-        float factor = any_value->uint32_t_value;
-        float squared = factor * factor;
+        const float factor = any_value->uint32_t_value;
+        const float squared = factor * factor;
         std::cout << "Square of (float) " << factor << " is " << squared << ".\n";
         return std::make_shared<datatypes::AnyValue>(squared);
     }
     else if (any_value->type == datatypes::FLOAT)
     {
-        double factor = any_value->uint32_t_value;
-        double squared = factor * factor;
+        const double factor = any_value->uint32_t_value;
+        const double squared = factor * factor;
         std::cout << "Square of (double) " << factor << " is " << squared << ".\n";
         return std::make_shared<datatypes::AnyValue>(squared);
     }
@@ -74,29 +74,29 @@ std::shared_ptr<datatypes::AnyValue> square_last(callback_system::CallbackEngine
 
     if (return_value_any_value->type == datatypes::INT32_T)
     {
-        int32_t factor = return_value_any_value->int32_t_value;
-        int32_t squared = factor * factor;
+        const int32_t factor = return_value_any_value->int32_t_value;
+        const int32_t squared = factor * factor;
         std::cout << "Square of (int32_t) " << factor << " is " << squared << ".\n";
         return std::make_shared<datatypes::AnyValue>(squared);
     }
     else if (return_value_any_value->type == datatypes::UINT32_T)
     {
-        uint32_t factor = return_value_any_value->uint32_t_value;
-        uint32_t squared = factor * factor;
+        const uint32_t factor = return_value_any_value->uint32_t_value;
+        const uint32_t squared = factor * factor;
         std::cout << "Square of (uint32_t) " << factor << " is " << squared << ".\n";
         return std::make_shared<datatypes::AnyValue>(squared);
     }
     else if (return_value_any_value->type == datatypes::FLOAT)
     {
-        float factor = return_value_any_value->uint32_t_value;
-        float squared = factor * factor;
+        const float factor = return_value_any_value->uint32_t_value;
+        const float squared = factor * factor;
         std::cout << "Square of (float) " << factor << " is " << squared << ".\n";
         return std::make_shared<datatypes::AnyValue>(squared);
     }
     else if (return_value_any_value->type == datatypes::FLOAT)
     {
-        double factor = return_value_any_value->uint32_t_value;
-        double squared = factor * factor;
+        const double factor = return_value_any_value->uint32_t_value;
+        const double squared = factor * factor;
         std::cout << "Square of (double) " << factor << " is " << squared << ".\n";
         return std::make_shared<datatypes::AnyValue>(squared);
     }
@@ -117,25 +117,25 @@ std::shared_ptr<datatypes::AnyValue> expt(callback_system::CallbackEngine*, call
 
     if (base->type == datatypes::INT32_T && exponent->type == datatypes::INT32_T)
     {
-        int32_t power = std::pow(base->int32_t_value, exponent->int32_t_value);
+        const int32_t power = std::pow(base->int32_t_value, exponent->int32_t_value);
         std::cout << "(int32_t) " << base->int32_t_value << "^" << exponent->int32_t_value << " is " << power << ".\n";
         return std::make_shared<datatypes::AnyValue>(power);
     }
     else if (base->type == datatypes::UINT32_T && exponent->type == datatypes::UINT32_T)
     {
-        uint32_t power = std::pow(base->uint32_t_value, exponent->uint32_t_value);
+        const uint32_t power = std::pow(base->uint32_t_value, exponent->uint32_t_value);
         std::cout << "(uint32_t) " << base->uint32_t_value << "^" << exponent->uint32_t_value << " is " << power << ".\n";
         return std::make_shared<datatypes::AnyValue>(power);
     }
     else if (base->type == datatypes::FLOAT && exponent->type == datatypes::FLOAT)
     {
-        float power = std::pow(base->float_value, exponent->float_value);
+        const float power = std::pow(base->float_value, exponent->float_value);
         std::cout << "(float) " << base->float_value << "^" << exponent->float_value << " is " << power << ".\n";
         return std::make_shared<datatypes::AnyValue>(power);
     }
     else if (base->type == datatypes::DOUBLE && exponent->type == datatypes::DOUBLE)
     {
-        double power = std::pow(base->double_value, exponent->double_value);
+        const double power = std::pow(base->double_value, exponent->double_value);
         std::cout << "(double) " << base->double_value << "^" << exponent->double_value << " is " << power << ".\n";
         return std::make_shared<datatypes::AnyValue>(power);
     }
@@ -154,25 +154,25 @@ std::shared_ptr<datatypes::AnyValue> expt_with_named_inputs(
 
     if (base->type == datatypes::INT32_T && exponent->type == datatypes::INT32_T)
     {
-        int32_t power = std::pow(base->int32_t_value, exponent->int32_t_value);
+        const int32_t power = std::pow(base->int32_t_value, exponent->int32_t_value);
         std::cout << "(int32_t) " << base->int32_t_value << "^" << exponent->int32_t_value << " is " << power << ".\n";
         return std::make_shared<datatypes::AnyValue>(power);
     }
     else if (base->type == datatypes::UINT32_T && exponent->type == datatypes::UINT32_T)
     {
-        uint32_t power = std::pow(base->uint32_t_value, exponent->uint32_t_value);
+        const uint32_t power = std::pow(base->uint32_t_value, exponent->uint32_t_value);
         std::cout << "(uint32_t) " << base->uint32_t_value << "^" << exponent->uint32_t_value << " is " << power << ".\n";
         return std::make_shared<datatypes::AnyValue>(power);
     }
     else if (base->type == datatypes::FLOAT && exponent->type == datatypes::FLOAT)
     {
-        float power = std::pow(base->float_value, exponent->float_value);
+        const float power = std::pow(base->float_value, exponent->float_value);
         std::cout << "(float) " << base->float_value << "^" << exponent->float_value << " is " << power << ".\n";
         return std::make_shared<datatypes::AnyValue>(power);
     }
     else if (base->type == datatypes::DOUBLE && exponent->type == datatypes::DOUBLE)
     {
-        double power = std::pow(base->double_value, exponent->double_value);
+        const double power = std::pow(base->double_value, exponent->double_value);
         std::cout << "(double) " << base->double_value << "^" << exponent->double_value << " is " << power << ".\n";
         return std::make_shared<datatypes::AnyValue>(power);
     }
@@ -193,19 +193,19 @@ std::shared_ptr<datatypes::AnyValue> neg(callback_system::CallbackEngine*, callb
 
     if (any_value->type == datatypes::INT32_T)
     {
-        int32_t product = -1 * any_value->int32_t_value;
+        const int32_t product = -1 * any_value->int32_t_value;
         std::cout << "-1 * (int32_t) " << any_value->int32_t_value << " is " << product << ".\n";
         return std::make_shared<datatypes::AnyValue>(product);
     }
     else if (any_value->type == datatypes::FLOAT)
     {
-        float product = -1.0 * any_value->float_value;
+        const float product = -1.0 * any_value->float_value;
         std::cout << "-1 * (float) " << any_value->float_value << " is " << product << ".\n";
         return std::make_shared<datatypes::AnyValue>(product);
     }
     else if (any_value->type == datatypes::DOUBLE)
     {
-        double product = -1.0 * any_value->double_value;
+        const double product = -1.0 * any_value->double_value;
         std::cout << "-1 * (double) " << any_value->double_value << " is " << product << ".\n";
         return std::make_shared<datatypes::AnyValue>(product);
     }
@@ -219,8 +219,8 @@ TEST(callback_engine_must_function_properly, int32_t_zero_negated_equals_zero)
     callback_system::CallbackObject* callback_object = new callback_system::CallbackObject(nullptr, callback_engine);
     callback_object->set_new_callback(&neg);
 
-    int32_t zero = 0;
-    bool is_reference_0 = false;
+    const int32_t zero = 0;
+    const bool is_reference_0 = false;
     std::shared_ptr<datatypes::AnyValue> zero_value = std::make_shared<datatypes::AnyValue>(zero);
     new callback_system::CallbackParameter("", zero_value, is_reference_0, callback_object);
 
@@ -238,8 +238,8 @@ TEST(callback_engine_must_function_properly, int32_t_one_negated_equals_minus_on
     callback_system::CallbackObject* callback_object = new callback_system::CallbackObject(nullptr, callback_engine);
     callback_object->set_new_callback(&neg);
 
-    int32_t one = 1;
-    bool is_reference_1 = false;
+    const int32_t one = 1;
+    const bool is_reference_1 = false;
     std::shared_ptr<datatypes::AnyValue> one_value = std::make_shared<datatypes::AnyValue>(one);
     new callback_system::CallbackParameter("", one_value, is_reference_1, callback_object);
 
@@ -257,8 +257,8 @@ TEST(callback_engine_must_function_properly, int32_t_two_negated_equals_minus_tw
     callback_system::CallbackObject* callback_object = new callback_system::CallbackObject(nullptr, callback_engine);
     callback_object->set_new_callback(&neg);
 
-    int32_t two = 2;
-    bool is_reference_2 = false;
+    const int32_t two = 2;
+    const bool is_reference_2 = false;
     std::shared_ptr<datatypes::AnyValue> two_value = std::make_shared<datatypes::AnyValue>(two);
     new callback_system::CallbackParameter("", two_value, is_reference_2, callback_object);
 
@@ -276,8 +276,8 @@ TEST(callback_engine_must_function_properly, int32_t_minus_one_negated_equals_on
     callback_system::CallbackObject* callback_object = new callback_system::CallbackObject(nullptr, callback_engine);
     callback_object->set_new_callback(&neg);
 
-    int32_t minus_one = -1;
-    bool is_reference_minus_1 = false;
+    const int32_t minus_one = -1;
+    const bool is_reference_minus_1 = false;
     std::shared_ptr<datatypes::AnyValue> minus_one_value = std::make_shared<datatypes::AnyValue>(minus_one);
     new callback_system::CallbackParameter("", minus_one_value, is_reference_minus_1, callback_object);
 
@@ -295,8 +295,8 @@ TEST(callback_engine_must_function_properly, int32_t_minus_two_negated_equals_tw
     callback_system::CallbackObject* callback_object = new callback_system::CallbackObject(nullptr, callback_engine);
     callback_object->set_new_callback(&neg);
 
-    int32_t minus_two = -2;
-    bool is_reference_minus_2 = false;
+    const int32_t minus_two = -2;
+    const bool is_reference_minus_2 = false;
     std::shared_ptr<datatypes::AnyValue> minus_two_value = std::make_shared<datatypes::AnyValue>(minus_two);
     new callback_system::CallbackParameter("", minus_two_value, is_reference_minus_2, callback_object);
 
@@ -314,8 +314,8 @@ TEST(callback_engine_must_function_properly, int32_t_three_squared_equals_nine)
     callback_system::CallbackObject* callback_object = new callback_system::CallbackObject(nullptr, callback_engine);
     callback_object->set_new_callback(&square);
 
-    int32_t three = 3;
-    bool is_reference_3 = false;
+    const int32_t three = 3;
+    const bool is_reference_3 = false;
     std::shared_ptr<datatypes::AnyValue> three_value = std::make_shared<datatypes::AnyValue>(three);
     new callback_system::CallbackParameter("foo", three_value, is_reference_3, callback_object);
 
@@ -333,8 +333,8 @@ TEST(callback_engine_must_function_properly, uint32_t_three_squared_equals_nine)
     callback_system::CallbackObject* callback_object = new callback_system::CallbackObject(nullptr, callback_engine);
     callback_object->set_new_callback(&square);
 
-    uint32_t three = 3;
-    bool is_reference_3 = false;
+    const uint32_t three = 3;
+    const bool is_reference_3 = false;
     std::shared_ptr<datatypes::AnyValue> three_value = std::make_shared<datatypes::AnyValue>(three);
     new callback_system::CallbackParameter("foo", three_value, is_reference_3, callback_object);
 
@@ -352,13 +352,13 @@ TEST(callback_engine_must_function_properly, uint32_t_5_expt_7_equals_78125)
     callback_system::CallbackObject* callback_object = new callback_system::CallbackObject(nullptr, callback_engine);
     callback_object->set_new_callback(&expt);
 
-    uint32_t five = 5;
-    bool is_reference_5 = false;
+    const uint32_t five = 5;
+    const bool is_reference_5 = false;
     std::shared_ptr<datatypes::AnyValue> five_value = std::make_shared<datatypes::AnyValue>(five);
     new callback_system::CallbackParameter("foo", five_value, is_reference_5, callback_object);
 
-    uint32_t seven = 7;
-    bool is_reference_7 = false;
+    const uint32_t seven = 7;
+    const bool is_reference_7 = false;
     std::shared_ptr<datatypes::AnyValue> seven_value = std::make_shared<datatypes::AnyValue>(seven);
     new callback_system::CallbackParameter("foo", seven_value, is_reference_7, callback_object);
 
@@ -376,15 +376,15 @@ TEST(callback_engine_must_function_properly, uint32_t_5_expt_7_equals_78125_with
     callback_system::CallbackObject* callback_object = new callback_system::CallbackObject(nullptr, callback_engine);
     callback_object->set_new_callback(&expt_with_named_inputs);
 
-    uint32_t five = 5;
-    bool is_reference_5 = false;
+    const uint32_t five = 5;
+    const bool is_reference_5 = false;
     std::shared_ptr<datatypes::AnyValue> five_value = std::make_shared<datatypes::AnyValue>(five);
     new callback_system::CallbackParameter("base", five_value, is_reference_5, callback_object);
     std::shared_ptr<datatypes::AnyValue> anyvalue_base = std::make_shared<datatypes::AnyValue>(*callback_object->get_any_value("base"));
     ASSERT_EQ(anyvalue_base->type, datatypes::UINT32_T);
 
-    uint32_t seven = 7;
-    bool is_reference_7 = false;
+    const uint32_t seven = 7;
+    const bool is_reference_7 = false;
     std::shared_ptr<datatypes::AnyValue> seven_value = std::make_shared<datatypes::AnyValue>(seven);
     new callback_system::CallbackParameter("exponent", seven_value, is_reference_7, callback_object);
 
@@ -404,13 +404,13 @@ TEST(callback_engine_must_function_properly, uint32_t_7_expt_5_then_squared_equa
     callback_system::CallbackObject* callback_object_square_last = new callback_system::CallbackObject(nullptr, callback_engine);
     callback_object_square_last->set_new_callback(&square_last);
 
-    uint32_t seven = 7;
-    bool is_reference_7 = false;
+    const uint32_t seven = 7;
+    const bool is_reference_7 = false;
     std::shared_ptr<datatypes::AnyValue> seven_value = std::make_shared<datatypes::AnyValue>(seven);
     new callback_system::CallbackParameter("", seven_value, is_reference_7, callback_object_expt);
 
-    uint32_t five = 5;
-    bool is_reference_5 = false;
+    const uint32_t five = 5;
+    const bool is_reference_5 = false;
     std::shared_ptr<datatypes::AnyValue> five_value = std::make_shared<datatypes::AnyValue>(five);
     new callback_system::CallbackParameter("", five_value, is_reference_5, callback_object_expt);
 
@@ -428,8 +428,8 @@ TEST(callback_engine_must_function_properly, two_squared_four_times_equals_65536
     callback_system::CallbackObject* callback_object_1st_square = new callback_system::CallbackObject(nullptr, callback_engine);
     callback_object_1st_square->set_new_callback(&square);
 
-    uint32_t two = 2;
-    bool is_reference_2 = false;
+    const uint32_t two = 2;
+    const bool is_reference_2 = false;
     std::shared_ptr<datatypes::AnyValue> two_value = std::make_shared<datatypes::AnyValue>(two);
     new callback_system::CallbackParameter("", two_value, is_reference_2, callback_object_1st_square);
 
