@@ -26,7 +26,7 @@ typedef unsigned char u8;
 TEST(OpenFBX_must_function_appropriately, rigged_and_animated_cat)
 {
     const std::string filename = "cat.fbx";
-    std::vector<unsigned char> data_vector = file::binary_slurp(filename);
+    std::vector<uint8_t> data_vector = file::binary_slurp(filename);
     ASSERT_EQ(data_vector.size(), 7550684);                                // size of `cat.fbx` in bytes.
 
     const u8* const data = reinterpret_cast<unsigned char*>(data_vector.data());
@@ -133,7 +133,7 @@ TEST(OpenFBX_must_function_appropriately, rigged_and_animated_cat)
 TEST(OpenFBX_must_function_appropriately, turbo_polizei)
 {
     const std::string filename = "turbo_polizei.fbx";
-    std::vector<unsigned char> data_vector = file::binary_slurp(filename);
+    std::vector<uint8_t> data_vector = file::binary_slurp(filename);
     ASSERT_EQ(data_vector.size(), 364972);                                // size of `turbo_polizei.fbx` in bytes.
 
     const u8* const data = reinterpret_cast<unsigned char*>(data_vector.data());
