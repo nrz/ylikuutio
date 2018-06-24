@@ -1,9 +1,6 @@
 #include "gtest/gtest.h"
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
 
-// Include standard headers
-#include <string>   // std::string
-
 TEST(unicode_value_from_string, char_only_a)
 {
     const char text[] = "a";

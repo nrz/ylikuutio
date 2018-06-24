@@ -1,5 +1,4 @@
 #include "gtest/gtest.h"
-#include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/species.hpp"
 #include "code/ylikuutio/ontology/glyph.hpp"
 #include "code/ylikuutio/ontology/object_struct.hpp"
