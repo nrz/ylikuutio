@@ -31,7 +31,7 @@
 namespace loaders
 {
     bool load_ASCII_grid(
-            const std::string& ASCII_grid_file_name,
+            const std::string& ascii_grid_filename,
             std::vector<glm::vec3>& out_vertices,
             std::vector<glm::vec2>& out_UVs,
             std::vector<glm::vec3>& out_normals,
@@ -49,14 +49,14 @@ namespace loaders
         // NODATA_value  -9999.000
         // 34.315 34.467 34.441 34.260 33.972 33.564 33.229 33.130 33.102 33.024 32.902 32.669 32.305 32.013 31.937 31.893 31.831 31.832
 
-        std::cout << "Loading ASCII grid file " << ASCII_grid_file_name << " ...\n";
+        std::cout << "Loading ASCII grid file " << ascii_grid_filename << " ...\n";
 
         // Open the file
-        const std::string file_content = file::slurp(ASCII_grid_file_name);
+        const std::string file_content = file::slurp(ascii_grid_filename);
 
         if (file_content.empty())
         {
-            std::cerr << ASCII_grid_file_name << " could not be opened, or the file is empty.\n";
+            std::cerr << ascii_grid_filename << " could not be opened, or the file is empty.\n";
             return false;
         }
 
