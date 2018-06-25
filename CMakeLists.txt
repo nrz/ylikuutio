@@ -654,6 +654,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/loaders/fbx_species_loader.hpp
         code/ylikuutio/loaders/font_loader.cpp
         code/ylikuutio/loaders/font_loader.hpp
+        code/ylikuutio/memory/memory_templates.hpp
         code/ylikuutio/ontology/glyph_struct.hpp
         code/ylikuutio/ontology/material_struct.hpp
         code/ylikuutio/ontology/object_struct.hpp
