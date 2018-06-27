@@ -37,6 +37,14 @@ TEST(obj_files_must_be_loaded_approriately, suzanne_obj)
     ASSERT_LT(out_UVs[0].x, 0.31640625);
     ASSERT_GT(out_UVs[0].y, 0.791015625);
     ASSERT_LT(out_UVs[0].y, 0.79296875);
+    // vertex normal 1 (vertex normal numbering begins from 1):
+    // vn 0.189764 -0.003571 0.981811
+    ASSERT_GT(out_normals[0].x, 0.189453125);
+    ASSERT_LT(out_normals[0].x, 0.19140625);
+    ASSERT_GT(out_normals[0].y, -0.003662109);
+    ASSERT_LT(out_normals[0].y, -0.003540039);
+    ASSERT_GT(out_normals[0].z, 0.981445313);
+    ASSERT_LT(out_normals[0].z, 0.982421875);
 
     // vertex 65 (vertex numbering begins from 1):
     // v 0.445313 0.156250 0.781250
@@ -50,6 +58,14 @@ TEST(obj_files_must_be_loaded_approriately, suzanne_obj)
     ASSERT_LT(out_UVs[1].x, 0.33203125);
     ASSERT_GT(out_UVs[1].y, 0.786132813);
     ASSERT_LT(out_UVs[1].y, 0.787109375);
+    // vertex normal 2 (vertex normal numbering begins from 1):
+    // vn 0.646809 -0.758202 0.082095
+    ASSERT_GT(out_normals[1].x, 0.64453125);
+    ASSERT_LT(out_normals[1].x, 0.6484375);
+    ASSERT_GT(out_normals[1].y, -0.758300781);
+    ASSERT_LT(out_normals[1].y, -0.758056641);
+    ASSERT_GT(out_normals[1].z, 0.08203125);
+    ASSERT_LT(out_normals[1].z, 0.083984375);
 
     // vertex 49 (vertex numbering begins from 1):
     // v 0.476563 0.242188 0.773438
