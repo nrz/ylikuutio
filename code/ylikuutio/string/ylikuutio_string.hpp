@@ -2,6 +2,7 @@
 #define __YLIKUUTIO_STRING_HPP_INCLUDED
 
 // Include standard headers
+#include <cstddef>   // std::size_t
 #include <list>      // std::list
 #include <stdint.h>  // uint32_t etc.
 #include <string>    // std::string

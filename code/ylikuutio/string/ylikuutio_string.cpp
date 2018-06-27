@@ -1,6 +1,7 @@
 #include "ylikuutio_string.hpp"
 
 // Include standard headers
+#include <cstddef>  // std::size_t
 #include <cstdio>   // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf etc.
 #include <cstring>  // std::memcmp, std::memcpy, std::strcmp, std::strlen, std::strncmp
 #include <iomanip>  // std::setfill, std::setw
