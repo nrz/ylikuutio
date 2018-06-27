@@ -21,4 +21,144 @@ TEST(obj_files_must_be_loaded_approriately, suzanne_obj)
     ASSERT_EQ(out_vertices.size(), number_of_faces * number_of_vertices_in_triangle);
     ASSERT_EQ(out_UVs.size(), number_of_faces * number_of_vertices_in_triangle);
     ASSERT_EQ(out_normals.size(), number_of_faces * number_of_vertices_in_triangle);
+
+    // face 0:
+    // f 61/1/1 65/2/2 49/3/3
+    // vertex 61 (vertex numbering begins from 1):
+    // v 0.351563 0.242188 0.828125
+    ASSERT_GT(out_vertices[0].x, 0.3515625);
+    ASSERT_LT(out_vertices[0].x, 0.35546875);
+    ASSERT_GT(out_vertices[0].y, 0.2421875);
+    ASSERT_LT(out_vertices[0].y, 0.24609375);
+    ASSERT_EQ(out_vertices[0].z, 0.828125);
+
+    // vertex 65 (vertex numbering begins from 1):
+    // v 0.445313 0.156250 0.781250
+    ASSERT_GT(out_vertices[1].x, 0.4453125);
+    ASSERT_LT(out_vertices[1].x, 0.44921875);
+    ASSERT_EQ(out_vertices[1].y, 0.15625);
+    ASSERT_EQ(out_vertices[1].z, 0.78125);
+
+    // vertex 49 (vertex numbering begins from 1):
+    // v 0.476563 0.242188 0.773438
+    ASSERT_GT(out_vertices[2].x, 0.4765625);
+    ASSERT_LT(out_vertices[2].x, 0.48046875);
+    ASSERT_GT(out_vertices[2].y, 0.2421875);
+    ASSERT_LT(out_vertices[2].y, 0.24609375);
+    ASSERT_GT(out_vertices[2].z, 0.7734375);
+    ASSERT_LT(out_vertices[2].z, 0.77734375);
+
+    // face 1:
+    // f 50/4/4 66/5/5 62/6/6
+    // vertex 50 (vertex numbering begins from 1):
+    // v -0.476563 0.242188 0.773438
+    ASSERT_GT(out_vertices[3].x, -0.48046875);
+    ASSERT_LT(out_vertices[3].x, -0.4765625);
+    ASSERT_GT(out_vertices[3].y, 0.2421875);
+    ASSERT_LT(out_vertices[3].y, 0.24609375);
+    ASSERT_GT(out_vertices[3].z, 0.7734375);
+    ASSERT_LT(out_vertices[3].z, 0.77734375);
+
+    // vertex 66 (vertex numbering begins from 1):
+    // v -0.445313 0.156250 0.781250
+    ASSERT_GT(out_vertices[4].x, -0.44921875);
+    ASSERT_LT(out_vertices[4].x, -0.4453125);
+    ASSERT_EQ(out_vertices[4].y, 0.15625);
+    ASSERT_EQ(out_vertices[4].z, 0.78125);
+
+    // vertex 62 (vertex numbering begins from 1):
+    // v -0.351563 0.242188 0.828125
+    ASSERT_GT(out_vertices[5].x, -0.35546875);
+    ASSERT_LT(out_vertices[5].x, -0.3515625);
+    ASSERT_GT(out_vertices[5].y, 0.2421875);
+    ASSERT_LT(out_vertices[5].y, 0.24609375);
+    ASSERT_EQ(out_vertices[5].z, 0.828125);
+
+    // face 2:
+    // f 63/7/7 65/2/2 61/1/1
+    // vertex 63 (vertex numbering begins from 1):
+    // v 0.351563 0.117188 0.804688
+    ASSERT_GT(out_vertices[6].x, 0.3515625);
+    ASSERT_LT(out_vertices[6].x, 0.35546875);
+    ASSERT_GT(out_vertices[6].y, 0.1171875);
+    ASSERT_LT(out_vertices[6].y, 0.12109375);
+    ASSERT_GT(out_vertices[6].z, 0.8046875);
+    ASSERT_LT(out_vertices[6].z, 0.80859375);
+
+    // vertex 65 (vertex numbering begins from 1):
+    // v 0.445313 0.156250 0.781250
+    ASSERT_GT(out_vertices[7].x, 0.4453125);
+    ASSERT_LT(out_vertices[7].x, 0.44921875);
+    ASSERT_EQ(out_vertices[7].y, 0.15625);
+    ASSERT_EQ(out_vertices[7].z, 0.78125);
+
+    // vertex 61 (vertex numbering begins from 1):
+    // v 0.351563 0.242188 0.828125
+    ASSERT_GT(out_vertices[8].x, 0.3515625);
+    ASSERT_LT(out_vertices[8].x, 0.35546875);
+    ASSERT_GT(out_vertices[8].y, 0.2421875);
+    ASSERT_LT(out_vertices[8].y, 0.24609375);
+    ASSERT_EQ(out_vertices[8].z, 0.828125);
+
+    // face 3:
+    // f 62/6/6 66/5/5 64/8/8
+    // vertex 62 (vertex numbering begins from 1):
+    // v -0.351563 0.242188 0.828125
+    ASSERT_GT(out_vertices[9].x, -0.35546875);
+    ASSERT_LT(out_vertices[9].x, -0.3515625);
+    ASSERT_GT(out_vertices[9].y, 0.2421875);
+    ASSERT_LT(out_vertices[9].y, 0.24609375);
+    ASSERT_EQ(out_vertices[9].z, 0.828125);
+
+    // vertex 66 (vertex numbering begins from 1):
+    // v -0.445313 0.156250 0.781250
+    ASSERT_GT(out_vertices[10].x, -0.44921875);
+    ASSERT_LT(out_vertices[10].x, -0.4453125);
+    ASSERT_EQ(out_vertices[10].y, 0.15625);
+    ASSERT_EQ(out_vertices[10].z, 0.78125);
+
+    // vertex 64 (vertex numbering begins from 1):
+    // v -0.351563 0.117188 0.804688
+    ASSERT_GT(out_vertices[11].x, -0.35546875);
+    ASSERT_LT(out_vertices[11].x, -0.3515625);
+    ASSERT_GT(out_vertices[11].y, 0.1171875);
+    ASSERT_LT(out_vertices[11].y, 0.12109375);
+    ASSERT_GT(out_vertices[11].z, 0.8046875);
+    ASSERT_LT(out_vertices[11].z, 0.80859375);
+
+    // face 4:
+    // f 61/1/1 59/9/9 63/7/7
+    // vertex 61 (vertex numbering begins from 1):
+    // v 0.351563 0.242188 0.828125
+    ASSERT_GT(out_vertices[12].x, 0.3515625);
+    ASSERT_LT(out_vertices[12].x, 0.35546875);
+    ASSERT_GT(out_vertices[12].y, 0.2421875);
+    ASSERT_LT(out_vertices[12].y, 0.24609375);
+    ASSERT_EQ(out_vertices[12].z, 0.828125);
+
+    // vertex 59 (vertex numbering begins from 1):
+    // v 0.265625 0.156250 0.820313
+    ASSERT_EQ(out_vertices[13].x, 0.265625);
+    ASSERT_EQ(out_vertices[13].y, 0.15625);
+    ASSERT_GT(out_vertices[13].z, 0.8203125);
+    ASSERT_LT(out_vertices[13].z, 0.82421875);
+
+    // vertex 63 (vertex numbering begins from 1):
+    // v 0.351563 0.117188 0.804688
+    ASSERT_GT(out_vertices[14].x, 0.3515625);
+    ASSERT_LT(out_vertices[14].x, 0.35546875);
+    ASSERT_GT(out_vertices[14].y, 0.1171875);
+    ASSERT_LT(out_vertices[14].y, 0.12109375);
+    ASSERT_GT(out_vertices[14].z, 0.8046875);
+    ASSERT_LT(out_vertices[14].z, 0.80859375);
+
+    // face 967:
+    // f 47/546/463 3/588/505 45/562/479
+    // vertex 47 (vertex numbering begins from 1):
+    // v 0.468750 0.242188 0.757813
+    ASSERT_EQ(out_vertices[3 * 966].x, 0.46875);
+    ASSERT_GT(out_vertices[3 * 966].y, 0.2421875);
+    ASSERT_LT(out_vertices[3 * 966].y, 0.24609375);
+    ASSERT_GT(out_vertices[3 * 966].z, 0.7578125);
+    ASSERT_LT(out_vertices[3 * 966].z, 0.76171875);
 }
