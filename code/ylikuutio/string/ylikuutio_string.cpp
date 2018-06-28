@@ -564,7 +564,7 @@ namespace string
         return true;
     }
 
-    void print_hexdump(const void* const start_address, const void* const end_address) // `begin` is inclusive, `end is exclusive.
+    void print_hexdump(const void* const start_address, const void* const end_address) // `begin` is inclusive, `end` is exclusive.
     {
         void* void_start_address = const_cast<void*>(start_address);
         const int32_t line_width_in_bytes = 16;
