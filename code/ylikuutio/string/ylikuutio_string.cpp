@@ -455,7 +455,7 @@ namespace string
         return check_if_floating_point_string(my_string, maximum_safe_length_for_double_string);
     }
 
-    bool check_if_floating_point_string(const std::string& my_string, int32_t safe_number_of_chars)
+    bool check_if_floating_point_string(const std::string& my_string, const int32_t safe_number_of_chars)
     {
         int32_t n_chars = 0;
 
