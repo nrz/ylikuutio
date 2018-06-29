@@ -10,7 +10,7 @@ TEST(string_matching, some_string_must_match_when_the_only_identifier_string_is_
     char text[] = "a";
     const char* text_base_pointer = text;
     char* text_data_pointer = text;
-    std::vector<std::string> identifier_strings_vector = { "" };
+    const std::vector<std::string> identifier_strings_vector = { "" };
     ASSERT_TRUE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
 }
 
@@ -18,7 +18,7 @@ TEST(string_matching_std_string, some_string_must_match_when_the_only_identifier
 {
     const std::string text_string = "a";
     const std::size_t data_index = 0;
-    std::vector<std::string> identifier_strings_vector = { "" };
+    const std::vector<std::string> identifier_strings_vector = { "" };
     ASSERT_TRUE(string::check_and_report_if_some_string_matches(text_string, data_index, identifier_strings_vector));
 }
 
@@ -27,7 +27,7 @@ TEST(string_matching, some_string_must_match_when_there_is_only_one_1_character_
     char text[] = "a";
     const char* text_base_pointer = text;
     char* text_data_pointer = text;
-    std::vector<std::string> identifier_strings_vector = { "a" };
+    const std::vector<std::string> identifier_strings_vector = { "a" };
     ASSERT_TRUE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
 
     char other_text[] = "ab";
@@ -40,7 +40,7 @@ TEST(string_matching_std_string, some_string_must_match_when_there_is_only_one_1
 {
     const std::string text_string = "a";
     const std::size_t data_index = 0;
-    std::vector<std::string> identifier_strings_vector = { "a" };
+    const std::vector<std::string> identifier_strings_vector = { "a" };
     ASSERT_TRUE(string::check_and_report_if_some_string_matches(text_string, data_index, identifier_strings_vector));
 
     const std::string other_text_string = "ab";
@@ -53,7 +53,7 @@ TEST(string_matching, some_string_must_match_when_there_is_only_one_2_character_
     char text[] = "ab";
     const char* text_base_pointer = text;
     char* text_data_pointer = text;
-    std::vector<std::string> identifier_strings_vector = { "ab" };
+    const std::vector<std::string> identifier_strings_vector = { "ab" };
     ASSERT_TRUE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
 }
 
@@ -61,7 +61,7 @@ TEST(string_matching_std_string, some_string_must_match_when_there_is_only_one_2
 {
     const std::string text_string = "ab";
     const std::size_t data_index = 0;
-    std::vector<std::string> identifier_strings_vector = { "ab" };
+    const std::vector<std::string> identifier_strings_vector = { "ab" };
     ASSERT_TRUE(string::check_and_report_if_some_string_matches(text_string, data_index, identifier_strings_vector));
 }
 
@@ -70,7 +70,7 @@ TEST(string_matching, some_string_must_match_when_there_is_only_one_3_character_
     char text[] = "abc";
     const char* text_base_pointer = text;
     char* text_data_pointer = text;
-    std::vector<std::string> identifier_strings_vector = { "abc" };
+    const std::vector<std::string> identifier_strings_vector = { "abc" };
     ASSERT_TRUE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
 }
 
@@ -78,7 +78,7 @@ TEST(string_matching_std_string, some_string_must_match_when_there_is_only_one_3
 {
     const std::string text_string = "abc";
     const std::size_t data_index = 0;
-    std::vector<std::string> identifier_strings_vector = { "abc" };
+    const std::vector<std::string> identifier_strings_vector = { "abc" };
     ASSERT_TRUE(string::check_and_report_if_some_string_matches(text_string, data_index, identifier_strings_vector));
 }
 
@@ -87,7 +87,7 @@ TEST(string_matching, some_string_must_match_when_there_are_two_1_character_stri
     char text[] = "a";
     const char* text_base_pointer = text;
     char* text_data_pointer = text;
-    std::vector<std::string> identifier_strings_vector = { "a", "b" };
+    const std::vector<std::string> identifier_strings_vector = { "a", "b" };
     ASSERT_TRUE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
 }
 
@@ -95,7 +95,7 @@ TEST(string_matching_std_string, some_string_must_match_when_there_are_two_1_cha
 {
     const std::string text_string = "a";
     const std::size_t data_index = 0;
-    std::vector<std::string> identifier_strings_vector = { "a", "b" };
+    const std::vector<std::string> identifier_strings_vector = { "a", "b" };
     ASSERT_TRUE(string::check_and_report_if_some_string_matches(text_string, data_index, identifier_strings_vector));
 }
 
@@ -104,7 +104,7 @@ TEST(string_matching, some_string_must_match_when_there_are_two_1_character_stri
     char text[] = "b";
     const char* text_base_pointer = text;
     char* text_data_pointer = text;
-    std::vector<std::string> identifier_strings_vector = { "a", "b" };
+    const std::vector<std::string> identifier_strings_vector = { "a", "b" };
     ASSERT_TRUE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
 }
 
@@ -112,7 +112,7 @@ TEST(string_matching_std_string, some_string_must_match_when_there_are_two_1_cha
 {
     const std::string text_string = "b";
     const std::size_t data_index = 0;
-    std::vector<std::string> identifier_strings_vector = { "a", "b" };
+    const std::vector<std::string> identifier_strings_vector = { "a", "b" };
     ASSERT_TRUE(string::check_and_report_if_some_string_matches(text_string, data_index, identifier_strings_vector));
 }
 
@@ -121,7 +121,7 @@ TEST(string_matching, some_string_must_match_when_there_are_three_1_character_st
     char text[] = "a";
     const char* text_base_pointer = text;
     char* text_data_pointer = text;
-    std::vector<std::string> identifier_strings_vector = { "a", "b", "c" };
+    const std::vector<std::string> identifier_strings_vector = { "a", "b", "c" };
     ASSERT_TRUE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
 }
 
@@ -129,7 +129,7 @@ TEST(string_matching_std_string, some_string_must_match_when_there_are_three_1_c
 {
     const std::string text_string = "a";
     const std::size_t data_index = 0;
-    std::vector<std::string> identifier_strings_vector = { "a", "b", "c" };
+    const std::vector<std::string> identifier_strings_vector = { "a", "b", "c" };
     ASSERT_TRUE(string::check_and_report_if_some_string_matches(text_string, data_index, identifier_strings_vector));
 }
 
@@ -138,7 +138,7 @@ TEST(string_matching, some_string_must_match_when_there_are_three_1_character_st
     char text[] = "b";
     const char* text_base_pointer = text;
     char* text_data_pointer = text;
-    std::vector<std::string> identifier_strings_vector = { "a", "b", "c" };
+    const std::vector<std::string> identifier_strings_vector = { "a", "b", "c" };
     ASSERT_TRUE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
 }
 
@@ -146,7 +146,7 @@ TEST(string_matching_std_string, some_string_must_match_when_there_are_three_1_c
 {
     const std::string text_string = "b";
     const std::size_t data_index = 0;
-    std::vector<std::string> identifier_strings_vector = { "a", "b", "c" };
+    const std::vector<std::string> identifier_strings_vector = { "a", "b", "c" };
     ASSERT_TRUE(string::check_and_report_if_some_string_matches(text_string, data_index, identifier_strings_vector));
 }
 
@@ -155,7 +155,7 @@ TEST(string_matching, some_string_must_match_when_there_are_three_1_character_st
     char text[] = "c";
     const char* text_base_pointer = text;
     char* text_data_pointer = text;
-    std::vector<std::string> identifier_strings_vector = { "a", "b", "c" };
+    const std::vector<std::string> identifier_strings_vector = { "a", "b", "c" };
     ASSERT_TRUE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
 }
 
@@ -163,7 +163,7 @@ TEST(string_matching_std_string, some_string_must_match_when_there_are_three_1_c
 {
     const std::string text_string = "c";
     const std::size_t data_index = 0;
-    std::vector<std::string> identifier_strings_vector = { "a", "b", "c" };
+    const std::vector<std::string> identifier_strings_vector = { "a", "b", "c" };
     ASSERT_TRUE(string::check_and_report_if_some_string_matches(text_string, data_index, identifier_strings_vector));
 }
 
@@ -172,7 +172,7 @@ TEST(string_matching, no_string_must_match_when_the_identifier_string_vector_is_
     char text[] = "a";
     const char* text_base_pointer = text;
     char* text_data_pointer = text;
-    std::vector<std::string> identifier_strings_vector = {};
+    const std::vector<std::string> identifier_strings_vector = {};
     ASSERT_FALSE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
 }
 
@@ -180,7 +180,7 @@ TEST(string_matching_std_string, no_string_must_match_when_the_identifier_string
 {
     const std::string text_string = "a";
     const std::size_t data_index = 0;
-    std::vector<std::string> identifier_strings_vector = {};
+    const std::vector<std::string> identifier_strings_vector = {};
     ASSERT_FALSE(string::check_and_report_if_some_string_matches(text_string, data_index, identifier_strings_vector));
 }
 
@@ -189,7 +189,7 @@ TEST(string_matching, no_string_must_match_when_the_only_identifier_string_is_lo
     char text[] = "a";
     const char* text_base_pointer = text;
     char* text_data_pointer = text;
-    std::vector<std::string> identifier_strings_vector = { "aa" };
+    const std::vector<std::string> identifier_strings_vector = { "aa" };
     ASSERT_FALSE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
 }
 
@@ -197,7 +197,7 @@ TEST(string_matching_std_string, no_string_must_match_when_the_only_identifier_s
 {
     const std::string text_string = "a";
     const std::size_t data_index = 0;
-    std::vector<std::string> identifier_strings_vector = { "aa" };
+    const std::vector<std::string> identifier_strings_vector = { "aa" };
     ASSERT_FALSE(string::check_and_report_if_some_string_matches(text_string, data_index, identifier_strings_vector));
 }
 
@@ -344,7 +344,7 @@ TEST(string_matching, no_string_must_match_when_there_are_two_1_character_string
     char text[] = "a";
     const char* text_base_pointer = text;
     char* text_data_pointer = text;
-    std::vector<std::string> identifier_strings_vector = { "A", "b" };
+    const std::vector<std::string> identifier_strings_vector = { "A", "b" };
     ASSERT_FALSE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
 }
 
@@ -352,7 +352,7 @@ TEST(string_matching_std_string, no_string_must_match_when_there_are_two_1_chara
 {
     const std::string text_string = "a";
     const std::size_t data_index = 0;
-    std::vector<std::string> identifier_strings_vector = { "A", "b" };
+    const std::vector<std::string> identifier_strings_vector = { "A", "b" };
     ASSERT_FALSE(string::check_and_report_if_some_string_matches(text_string, data_index, identifier_strings_vector));
 }
 
@@ -361,7 +361,7 @@ TEST(string_matching, no_string_must_match_when_there_are_three_1_character_stri
     char text[] = "a";
     const char* text_base_pointer = text;
     char* text_data_pointer = text;
-    std::vector<std::string> identifier_strings_vector = { "A", "b", "c" };
+    const std::vector<std::string> identifier_strings_vector = { "A", "b", "c" };
     ASSERT_FALSE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
 }
 
@@ -369,6 +369,6 @@ TEST(string_matching_std_string, no_string_must_match_when_there_are_three_1_cha
 {
     const std::string text_string = "a";
     const std::size_t data_index = 0;
-    std::vector<std::string> identifier_strings_vector = { "A", "b", "c" };
+    const std::vector<std::string> identifier_strings_vector = { "A", "b", "c" };
     ASSERT_FALSE(string::check_and_report_if_some_string_matches(text_string, data_index, identifier_strings_vector));
 }
