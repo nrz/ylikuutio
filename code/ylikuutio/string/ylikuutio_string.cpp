@@ -24,7 +24,7 @@ namespace string
         {
             const char* const identifier_string_char = identifier_string.c_str();
 
-            if (data_pointer + identifier_string.length() > base_pointer + data_size)
+            if (data_pointer + identifier_string.size() > base_pointer + data_size)
             {
                 // If current `identifier_string` can't fit in the memory region,
                 // proceed to the next `identifier_string`, if there is any left.
@@ -46,7 +46,7 @@ namespace string
     {
         for (const std::string& identifier_string : identifier_strings_vector)
         {
-            if (data_index + identifier_string.length() > data_string.size())
+            if (data_index + identifier_string.size() > data_string.size())
             {
                 // If current `identifier_string` can't fit in the memory region,
                 // proceed to the next `identifier_string`, if there is any left.
@@ -466,7 +466,7 @@ namespace string
 
         bool is_dot_found = false;
 
-        for (int32_t i = 0; i < my_string.length(); i++)
+        for (int32_t i = 0; i < my_string.size(); i++)
         {
             // Each of the characters must be one of the following:
             // 0123456789.-
@@ -488,7 +488,7 @@ namespace string
                     return false;
                 }
 
-                if (i == my_string.length() - 1)
+                if (i == my_string.size() - 1)
                 {
                     // Last character is dot.
                     return false;
@@ -524,7 +524,7 @@ namespace string
             return false;
         }
 
-        for (int32_t i = 0; i < my_string.length(); i++)
+        for (int32_t i = 0; i < my_string.size(); i++)
         {
             // Each of the characters must be one of the following:
             // 0123456789
@@ -550,7 +550,7 @@ namespace string
             return false;
         }
 
-        for (int32_t i = 0; i < my_string.length(); i++)
+        for (int32_t i = 0; i < my_string.size(); i++)
         {
             // Each of the characters must be one of the following:
             // 0123456789
