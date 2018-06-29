@@ -18,7 +18,6 @@ Tasks which are necessary for the development of Ylikuutio:
 [ ] Implement command line parameter `--input-file` to Ajokki (load keypresses and keyreleases from a file, eg. `--input-file foo` or `--input-file=foo`).
 [ ] Implement command line parameter `--window-size` to Ajokki (eg. `--window-size 1920x1080` or `--window-size=1920x1080`).
 [ ] Implement command line parameter `--debug` to Ajokki (log all kinds of debug information).
-[ ] Rewrite `obj_loader.cpp` without `fscanf`, using instead `namespace string` functions for parsing.
 [ ] Evaluate network libraries (code quality, platform & crosscompiling support, MinGW-w64). https://stackoverflow.com/questions/118945/best-c-c-network-library
 [ ] Evaluate Asio (nework and low-level I/O library): https://think-async.com/
 [ ] Evaluate cpp-netlib (network library): http://cpp-netlib.org/
@@ -117,3 +116,4 @@ Ready:
 [x] Implement `Entity`-specific variables.
 [x] Fix Travis configuration file `.travis.yml`.
 [x] Fix Coverity Scan Travis integration configuration (in `.travis.yml`).
+[x] Rewrite `obj_loader.cpp` without `fscanf`, using instead `stringstream` for parsing.
