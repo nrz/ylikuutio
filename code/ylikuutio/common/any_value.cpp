@@ -686,33 +686,6 @@ namespace datatypes
     void AnyValue::set_default_values()
     {
         this->type = datatypes::UNKNOWN;
-        this->bool_value = false;
-        this->char_value = 0;
-        this->float_value = NAN;
-        this->double_value = NAN;
-        this->int32_t_value = 0;
-        this->uint32_t_value = 0;
-        this->bool_pointer = nullptr;
-        this->float_pointer = nullptr;
-        this->double_pointer = nullptr;
-        this->int32_t_pointer = nullptr;
-        this->uint32_t_pointer = nullptr;
-        this->universe = nullptr;
-        this->scene_pointer = nullptr;
-        this->shader_pointer = nullptr;
-        this->material_pointer = nullptr;
-        this->species_pointer = nullptr;
-        this->object_pointer = nullptr;
-        this->vector_font_pointer = nullptr;
-        this->glyph_pointer = nullptr;
-        this->text3D_pointer = nullptr;
-        this->symbiosis_pointer = nullptr;
-        this->font2D_pointer = nullptr;
-        this->console_pointer = nullptr;
-        this->spherical_coordinates_struct_pointer = nullptr;
-        this->std_string_pointer = nullptr;
-        this->glm_vec3_pointer = nullptr;
-        this->glm_vec4_pointer = nullptr;
     }
 
     AnyValue::AnyValue(const datatypes::AnyValue& original)
