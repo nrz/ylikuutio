@@ -16,7 +16,7 @@ TEST(extract_string_from_memory, nothing_must_be_extracted_when_source_string_is
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
 
-    string::extract_string(text, text_pointer, sizeof(text), dest_array, dest_array, array_size, end_string);
+    ylikuutio::string::extract_string(text, text_pointer, sizeof(text), dest_array, dest_array, array_size, end_string);
     ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array, 0);
     ASSERT_EQ(text_pointer, text);
@@ -32,7 +32,7 @@ TEST(extract_string_from_memory, nothing_must_be_extracted_when_source_string_is
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
 
-    string::extract_string(text, text_pointer, sizeof(text), dest_array, dest_array, array_size, end_string);
+    ylikuutio::string::extract_string(text, text_pointer, sizeof(text), dest_array, dest_array, array_size, end_string);
     ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array, 0);
     ASSERT_EQ(text_pointer, text);
@@ -48,7 +48,7 @@ TEST(extract_string_from_memory, nothing_must_be_extracted_when_source_string_is
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
 
-    string::extract_string(text, text_pointer, sizeof(text), dest_array, dest_array, array_size, end_string);
+    ylikuutio::string::extract_string(text, text_pointer, sizeof(text), dest_array, dest_array, array_size, end_string);
     ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array, 0);
     ASSERT_EQ(text_pointer, text);
@@ -64,7 +64,7 @@ TEST(extract_string_from_memory, nothing_must_be_extracted_when_source_string_is
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
 
-    string::extract_string(text, text_pointer, sizeof(text), dest_array, dest_array, array_size, end_string);
+    ylikuutio::string::extract_string(text, text_pointer, sizeof(text), dest_array, dest_array, array_size, end_string);
     ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array, 0);
     ASSERT_EQ(text_pointer, text);
@@ -80,7 +80,7 @@ TEST(extract_string_from_memory, nothing_must_be_extracted_when_source_string_is
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
 
-    string::extract_string(text, text_pointer, sizeof(text), dest_array, dest_array, array_size, end_string);
+    ylikuutio::string::extract_string(text, text_pointer, sizeof(text), dest_array, dest_array, array_size, end_string);
     ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array, 0);
     ASSERT_EQ(text_pointer, text);
@@ -96,7 +96,7 @@ TEST(extract_string_from_memory, iloinen_lokki_laulaa_ja_nukkuu)
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
 
-    string::extract_string(text, text_pointer, sizeof(text), dest_array, dest_array, array_size, end_string);
+    ylikuutio::string::extract_string(text, text_pointer, sizeof(text), dest_array, dest_array, array_size, end_string);
     ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array++, 'i');
     ASSERT_EQ(*dest_array++, 'l');

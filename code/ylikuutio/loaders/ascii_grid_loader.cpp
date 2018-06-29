@@ -65,43 +65,43 @@ namespace loaders
         // All possible block identifier strings.
         const std::vector<std::string> number_strings_vector = { "-", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
-        while (!string::check_and_report_if_some_string_matches(file_content, ++file_content_i, number_strings_vector));
-        const int32_t image_width = string::extract_int32_t_value_from_string(
+        while (!ylikuutio::string::check_and_report_if_some_string_matches(file_content, ++file_content_i, number_strings_vector));
+        const int32_t image_width = ylikuutio::string::extract_int32_t_value_from_string(
                 file_content,
                 --file_content_i,
                 (const char* const) " \n",
                 (const char* const) "ncols");
 
-        while (!string::check_and_report_if_some_string_matches(file_content, ++file_content_i, number_strings_vector));
-        const int32_t image_height = string::extract_int32_t_value_from_string(
+        while (!ylikuutio::string::check_and_report_if_some_string_matches(file_content, ++file_content_i, number_strings_vector));
+        const int32_t image_height = ylikuutio::string::extract_int32_t_value_from_string(
                 file_content,
                 --file_content_i,
                 (const char* const) " \n",
                 (const char* const) "nrows");
 
-        while (!string::check_and_report_if_some_string_matches(file_content, ++file_content_i, number_strings_vector));
-        string::extract_float_value_from_string(
+        while (!ylikuutio::string::check_and_report_if_some_string_matches(file_content, ++file_content_i, number_strings_vector));
+        ylikuutio::string::extract_float_value_from_string(
                 file_content,
                 --file_content_i,
                 (const char* const) " \n",
                 (const char* const) "xllcorner");
 
-        while (!string::check_and_report_if_some_string_matches(file_content, ++file_content_i, number_strings_vector));
-        string::extract_float_value_from_string(
+        while (!ylikuutio::string::check_and_report_if_some_string_matches(file_content, ++file_content_i, number_strings_vector));
+        ylikuutio::string::extract_float_value_from_string(
                 file_content,
                 --file_content_i,
                 (const char* const) " \n",
                 (const char* const) "yllcorner");
 
-        while (!string::check_and_report_if_some_string_matches(file_content, ++file_content_i, number_strings_vector));
-        string::extract_float_value_from_string(
+        while (!ylikuutio::string::check_and_report_if_some_string_matches(file_content, ++file_content_i, number_strings_vector));
+        ylikuutio::string::extract_float_value_from_string(
                 file_content,
                 --file_content_i,
                 (const char* const) " \n",
                 (const char* const) "cellsize");
 
-        while (!string::check_and_report_if_some_string_matches(file_content, ++file_content_i, number_strings_vector));
-        string::extract_float_value_from_string(
+        while (!ylikuutio::string::check_and_report_if_some_string_matches(file_content, ++file_content_i, number_strings_vector));
+        ylikuutio::string::extract_float_value_from_string(
                 file_content,
                 --file_content_i,
                 (const char* const) " \n",
@@ -139,11 +139,11 @@ namespace loaders
 
             for (int32_t x = 0; x < image_width; x++)
             {
-                while (!string::check_and_report_if_some_string_matches(file_content, file_content_i, number_strings_vector))
+                while (!ylikuutio::string::check_and_report_if_some_string_matches(file_content, file_content_i, number_strings_vector))
                 {
                     file_content_i++;
                 }
-                *vertex_pointer++ = string::extract_float_value_from_string(
+                *vertex_pointer++ = ylikuutio::string::extract_float_value_from_string(
                         file_content,
                         --file_content_i,
                         (const char* const) " \n",

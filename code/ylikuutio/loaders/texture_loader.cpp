@@ -81,14 +81,14 @@ namespace loaders
         const uint8_t* texture_data_begin = static_cast<const uint8_t*>(ofbx_texture->getFileName().begin);
         const uint8_t* texture_data_end = static_cast<const uint8_t*>(ofbx_texture->getFileName().end);
 
-        string::print_hexdump(texture_data_begin, texture_data_end);
+        ylikuutio::string::print_hexdump(texture_data_begin, texture_data_end);
 
         // Find out the filename.
         const int32_t filename_buffer_size = 1024;
         uint8_t filename_buffer[filename_buffer_size];
         const char separator = '/'; // FIXME: don't assume slash as some operating systems may use other characters.
 
-        int32_t filename_length = string::extract_last_part_of_string(
+        int32_t filename_length = ylikuutio::string::extract_last_part_of_string(
                 texture_data_begin,
                 texture_data_end - texture_data_begin + 1,
                 filename_buffer,
@@ -105,7 +105,7 @@ namespace loaders
         uint8_t file_suffix_buffer[file_suffix_buffer_size];
         const char suffix_separator = '.';
 
-        string::extract_last_part_of_string(
+        ylikuutio::string::extract_last_part_of_string(
                 filename_buffer,
                 filename_length + 1,
                 file_suffix_buffer,

@@ -52,7 +52,7 @@ namespace loaders
             // Read until any non-whitespace character.
             while (true)
             {
-                if (!string::check_and_report_if_some_string_matches(file_content, file_content_i, whitespace_vector))
+                if (!ylikuutio::string::check_and_report_if_some_string_matches(file_content, file_content_i, whitespace_vector))
                 {
                     std::cout << "not whitespace: file_content[" << file_content_i << "] is " << file_content[file_content_i] << "\n";
                     break;
@@ -77,7 +77,7 @@ namespace loaders
             // OK, non-whitespace found.
             std::string current_line_string;
             const char* newline_char_end_string = "\n";
-            string::extract_string_with_several_endings(file_content, file_content_i, current_line_string, newline_char_end_string);
+            ylikuutio::string::extract_string_with_several_endings(file_content, file_content_i, current_line_string, newline_char_end_string);
 
             std::cout << "replacing slashes with spaces\n";
 
@@ -181,7 +181,7 @@ namespace loaders
             const std::vector<std::string> endline_vector = { "\n", "\r" };
 
             // Read until any non-whitespace character.
-            while (string::check_and_report_if_some_string_matches(file_content, ++file_content_i, endline_vector));
+            while (ylikuutio::string::check_and_report_if_some_string_matches(file_content, ++file_content_i, endline_vector));
         }
 
         // For each vertex of each triangle

@@ -11,7 +11,7 @@ TEST(string_matching, some_string_must_match_when_the_only_identifier_string_is_
     const char* text_base_pointer = text;
     char* text_data_pointer = text;
     const std::vector<std::string> identifier_strings_vector = { "" };
-    ASSERT_TRUE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
+    ASSERT_TRUE(ylikuutio::string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
 }
 
 TEST(string_matching_std_string, some_string_must_match_when_the_only_identifier_string_is_an_empty_string)
@@ -19,7 +19,7 @@ TEST(string_matching_std_string, some_string_must_match_when_the_only_identifier
     const std::string text_string = "a";
     const std::size_t data_index = 0;
     const std::vector<std::string> identifier_strings_vector = { "" };
-    ASSERT_TRUE(string::check_and_report_if_some_string_matches(text_string, data_index, identifier_strings_vector));
+    ASSERT_TRUE(ylikuutio::string::check_and_report_if_some_string_matches(text_string, data_index, identifier_strings_vector));
 }
 
 TEST(string_matching, some_string_must_match_when_there_is_only_one_1_character_string_in_the_identifier_string_vector_and_it_matches)
@@ -28,12 +28,12 @@ TEST(string_matching, some_string_must_match_when_there_is_only_one_1_character_
     const char* text_base_pointer = text;
     char* text_data_pointer = text;
     const std::vector<std::string> identifier_strings_vector = { "a" };
-    ASSERT_TRUE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
+    ASSERT_TRUE(ylikuutio::string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
 
     char other_text[] = "ab";
     const char* other_text_base_pointer = other_text;
     char* other_text_data_pointer = other_text;
-    ASSERT_TRUE(string::check_and_report_if_some_string_matches(other_text_base_pointer, other_text_data_pointer, sizeof(other_text), identifier_strings_vector));
+    ASSERT_TRUE(ylikuutio::string::check_and_report_if_some_string_matches(other_text_base_pointer, other_text_data_pointer, sizeof(other_text), identifier_strings_vector));
 }
 
 TEST(string_matching_std_string, some_string_must_match_when_there_is_only_one_1_character_string_in_the_identifier_string_vector_and_it_matches)
@@ -41,11 +41,11 @@ TEST(string_matching_std_string, some_string_must_match_when_there_is_only_one_1
     const std::string text_string = "a";
     const std::size_t data_index = 0;
     const std::vector<std::string> identifier_strings_vector = { "a" };
-    ASSERT_TRUE(string::check_and_report_if_some_string_matches(text_string, data_index, identifier_strings_vector));
+    ASSERT_TRUE(ylikuutio::string::check_and_report_if_some_string_matches(text_string, data_index, identifier_strings_vector));
 
     const std::string other_text_string = "ab";
     const std::size_t other_text_data_index = 0;
-    ASSERT_TRUE(string::check_and_report_if_some_string_matches(other_text_string, other_text_data_index, identifier_strings_vector));
+    ASSERT_TRUE(ylikuutio::string::check_and_report_if_some_string_matches(other_text_string, other_text_data_index, identifier_strings_vector));
 }
 
 TEST(string_matching, some_string_must_match_when_there_is_only_one_2_character_string_in_the_identifier_string_vector_and_it_matches)
@@ -54,7 +54,7 @@ TEST(string_matching, some_string_must_match_when_there_is_only_one_2_character_
     const char* text_base_pointer = text;
     char* text_data_pointer = text;
     const std::vector<std::string> identifier_strings_vector = { "ab" };
-    ASSERT_TRUE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
+    ASSERT_TRUE(ylikuutio::string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
 }
 
 TEST(string_matching_std_string, some_string_must_match_when_there_is_only_one_2_character_string_in_the_identifier_string_vector_and_it_matches)
@@ -62,7 +62,7 @@ TEST(string_matching_std_string, some_string_must_match_when_there_is_only_one_2
     const std::string text_string = "ab";
     const std::size_t data_index = 0;
     const std::vector<std::string> identifier_strings_vector = { "ab" };
-    ASSERT_TRUE(string::check_and_report_if_some_string_matches(text_string, data_index, identifier_strings_vector));
+    ASSERT_TRUE(ylikuutio::string::check_and_report_if_some_string_matches(text_string, data_index, identifier_strings_vector));
 }
 
 TEST(string_matching, some_string_must_match_when_there_is_only_one_3_character_string_in_the_identifier_string_vector_and_it_matches)
@@ -71,7 +71,7 @@ TEST(string_matching, some_string_must_match_when_there_is_only_one_3_character_
     const char* text_base_pointer = text;
     char* text_data_pointer = text;
     const std::vector<std::string> identifier_strings_vector = { "abc" };
-    ASSERT_TRUE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
+    ASSERT_TRUE(ylikuutio::string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
 }
 
 TEST(string_matching_std_string, some_string_must_match_when_there_is_only_one_3_character_string_in_the_identifier_string_vector_and_it_matches)
@@ -79,7 +79,7 @@ TEST(string_matching_std_string, some_string_must_match_when_there_is_only_one_3
     const std::string text_string = "abc";
     const std::size_t data_index = 0;
     const std::vector<std::string> identifier_strings_vector = { "abc" };
-    ASSERT_TRUE(string::check_and_report_if_some_string_matches(text_string, data_index, identifier_strings_vector));
+    ASSERT_TRUE(ylikuutio::string::check_and_report_if_some_string_matches(text_string, data_index, identifier_strings_vector));
 }
 
 TEST(string_matching, some_string_must_match_when_there_are_two_1_character_strings_in_the_identifier_string_vector_and_the_1st_matches)
@@ -88,7 +88,7 @@ TEST(string_matching, some_string_must_match_when_there_are_two_1_character_stri
     const char* text_base_pointer = text;
     char* text_data_pointer = text;
     const std::vector<std::string> identifier_strings_vector = { "a", "b" };
-    ASSERT_TRUE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
+    ASSERT_TRUE(ylikuutio::string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
 }
 
 TEST(string_matching_std_string, some_string_must_match_when_there_are_two_1_character_strings_in_the_identifier_string_vector_and_the_1st_matches)
@@ -96,7 +96,7 @@ TEST(string_matching_std_string, some_string_must_match_when_there_are_two_1_cha
     const std::string text_string = "a";
     const std::size_t data_index = 0;
     const std::vector<std::string> identifier_strings_vector = { "a", "b" };
-    ASSERT_TRUE(string::check_and_report_if_some_string_matches(text_string, data_index, identifier_strings_vector));
+    ASSERT_TRUE(ylikuutio::string::check_and_report_if_some_string_matches(text_string, data_index, identifier_strings_vector));
 }
 
 TEST(string_matching, some_string_must_match_when_there_are_two_1_character_strings_in_the_identifier_string_vector_and_the_2nd_matches)
@@ -105,7 +105,7 @@ TEST(string_matching, some_string_must_match_when_there_are_two_1_character_stri
     const char* text_base_pointer = text;
     char* text_data_pointer = text;
     const std::vector<std::string> identifier_strings_vector = { "a", "b" };
-    ASSERT_TRUE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
+    ASSERT_TRUE(ylikuutio::string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
 }
 
 TEST(string_matching_std_string, some_string_must_match_when_there_are_two_1_character_strings_in_the_identifier_string_vector_and_the_2nd_matches)
@@ -113,7 +113,7 @@ TEST(string_matching_std_string, some_string_must_match_when_there_are_two_1_cha
     const std::string text_string = "b";
     const std::size_t data_index = 0;
     const std::vector<std::string> identifier_strings_vector = { "a", "b" };
-    ASSERT_TRUE(string::check_and_report_if_some_string_matches(text_string, data_index, identifier_strings_vector));
+    ASSERT_TRUE(ylikuutio::string::check_and_report_if_some_string_matches(text_string, data_index, identifier_strings_vector));
 }
 
 TEST(string_matching, some_string_must_match_when_there_are_three_1_character_strings_in_the_identifier_string_vector_and_the_1st_matches)
@@ -122,7 +122,7 @@ TEST(string_matching, some_string_must_match_when_there_are_three_1_character_st
     const char* text_base_pointer = text;
     char* text_data_pointer = text;
     const std::vector<std::string> identifier_strings_vector = { "a", "b", "c" };
-    ASSERT_TRUE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
+    ASSERT_TRUE(ylikuutio::string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
 }
 
 TEST(string_matching_std_string, some_string_must_match_when_there_are_three_1_character_strings_in_the_identifier_string_vector_and_the_1st_matches)
@@ -130,7 +130,7 @@ TEST(string_matching_std_string, some_string_must_match_when_there_are_three_1_c
     const std::string text_string = "a";
     const std::size_t data_index = 0;
     const std::vector<std::string> identifier_strings_vector = { "a", "b", "c" };
-    ASSERT_TRUE(string::check_and_report_if_some_string_matches(text_string, data_index, identifier_strings_vector));
+    ASSERT_TRUE(ylikuutio::string::check_and_report_if_some_string_matches(text_string, data_index, identifier_strings_vector));
 }
 
 TEST(string_matching, some_string_must_match_when_there_are_three_1_character_strings_in_the_identifier_string_vector_and_the_2nd_matches)
@@ -139,7 +139,7 @@ TEST(string_matching, some_string_must_match_when_there_are_three_1_character_st
     const char* text_base_pointer = text;
     char* text_data_pointer = text;
     const std::vector<std::string> identifier_strings_vector = { "a", "b", "c" };
-    ASSERT_TRUE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
+    ASSERT_TRUE(ylikuutio::string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
 }
 
 TEST(string_matching_std_string, some_string_must_match_when_there_are_three_1_character_strings_in_the_identifier_string_vector_and_the_2nd_matches)
@@ -147,7 +147,7 @@ TEST(string_matching_std_string, some_string_must_match_when_there_are_three_1_c
     const std::string text_string = "b";
     const std::size_t data_index = 0;
     const std::vector<std::string> identifier_strings_vector = { "a", "b", "c" };
-    ASSERT_TRUE(string::check_and_report_if_some_string_matches(text_string, data_index, identifier_strings_vector));
+    ASSERT_TRUE(ylikuutio::string::check_and_report_if_some_string_matches(text_string, data_index, identifier_strings_vector));
 }
 
 TEST(string_matching, some_string_must_match_when_there_are_three_1_character_strings_in_the_identifier_string_vector_and_the_3rd_matches)
@@ -156,7 +156,7 @@ TEST(string_matching, some_string_must_match_when_there_are_three_1_character_st
     const char* text_base_pointer = text;
     char* text_data_pointer = text;
     const std::vector<std::string> identifier_strings_vector = { "a", "b", "c" };
-    ASSERT_TRUE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
+    ASSERT_TRUE(ylikuutio::string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
 }
 
 TEST(string_matching_std_string, some_string_must_match_when_there_are_three_1_character_strings_in_the_identifier_string_vector_and_the_3rd_matches)
@@ -164,7 +164,7 @@ TEST(string_matching_std_string, some_string_must_match_when_there_are_three_1_c
     const std::string text_string = "c";
     const std::size_t data_index = 0;
     const std::vector<std::string> identifier_strings_vector = { "a", "b", "c" };
-    ASSERT_TRUE(string::check_and_report_if_some_string_matches(text_string, data_index, identifier_strings_vector));
+    ASSERT_TRUE(ylikuutio::string::check_and_report_if_some_string_matches(text_string, data_index, identifier_strings_vector));
 }
 
 TEST(string_matching, no_string_must_match_when_the_identifier_string_vector_is_empty)
@@ -173,7 +173,7 @@ TEST(string_matching, no_string_must_match_when_the_identifier_string_vector_is_
     const char* text_base_pointer = text;
     char* text_data_pointer = text;
     const std::vector<std::string> identifier_strings_vector = {};
-    ASSERT_FALSE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
+    ASSERT_FALSE(ylikuutio::string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
 }
 
 TEST(string_matching_std_string, no_string_must_match_when_the_identifier_string_vector_is_empty)
@@ -181,7 +181,7 @@ TEST(string_matching_std_string, no_string_must_match_when_the_identifier_string
     const std::string text_string = "a";
     const std::size_t data_index = 0;
     const std::vector<std::string> identifier_strings_vector = {};
-    ASSERT_FALSE(string::check_and_report_if_some_string_matches(text_string, data_index, identifier_strings_vector));
+    ASSERT_FALSE(ylikuutio::string::check_and_report_if_some_string_matches(text_string, data_index, identifier_strings_vector));
 }
 
 TEST(string_matching, no_string_must_match_when_the_only_identifier_string_is_longer_than_the_string_to_be_compared_with)
@@ -190,7 +190,7 @@ TEST(string_matching, no_string_must_match_when_the_only_identifier_string_is_lo
     const char* text_base_pointer = text;
     char* text_data_pointer = text;
     const std::vector<std::string> identifier_strings_vector = { "aa" };
-    ASSERT_FALSE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
+    ASSERT_FALSE(ylikuutio::string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
 }
 
 TEST(string_matching_std_string, no_string_must_match_when_the_only_identifier_string_is_longer_than_the_string_to_be_compared_with)
@@ -198,7 +198,7 @@ TEST(string_matching_std_string, no_string_must_match_when_the_only_identifier_s
     const std::string text_string = "a";
     const std::size_t data_index = 0;
     const std::vector<std::string> identifier_strings_vector = { "aa" };
-    ASSERT_FALSE(string::check_and_report_if_some_string_matches(text_string, data_index, identifier_strings_vector));
+    ASSERT_FALSE(ylikuutio::string::check_and_report_if_some_string_matches(text_string, data_index, identifier_strings_vector));
 }
 
 TEST(string_matching, no_string_must_match_when_there_is_only_one_1_character_string_in_the_identifier_string_vector_and_it_does_not_match)
@@ -207,10 +207,10 @@ TEST(string_matching, no_string_must_match_when_there_is_only_one_1_character_st
     const char* text_base_pointer = text;
     char* text_data_pointer = text;
     std::vector<std::string> identifier_strings_vector = { "b" };
-    ASSERT_FALSE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
+    ASSERT_FALSE(ylikuutio::string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
 
     identifier_strings_vector = { "A" };
-    ASSERT_FALSE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
+    ASSERT_FALSE(ylikuutio::string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
 }
 
 TEST(string_matching_std_string, no_string_must_match_when_there_is_only_one_1_character_string_in_the_identifier_string_vector_and_it_does_not_match)
@@ -218,10 +218,10 @@ TEST(string_matching_std_string, no_string_must_match_when_there_is_only_one_1_c
     const std::string text_string = "a";
     const std::size_t data_index = 0;
     std::vector<std::string> identifier_strings_vector = { "b" };
-    ASSERT_FALSE(string::check_and_report_if_some_string_matches(text_string, data_index, identifier_strings_vector));
+    ASSERT_FALSE(ylikuutio::string::check_and_report_if_some_string_matches(text_string, data_index, identifier_strings_vector));
 
     identifier_strings_vector = { "A" };
-    ASSERT_FALSE(string::check_and_report_if_some_string_matches(text_string, data_index, identifier_strings_vector));
+    ASSERT_FALSE(ylikuutio::string::check_and_report_if_some_string_matches(text_string, data_index, identifier_strings_vector));
 }
 
 TEST(string_matching, no_string_must_match_when_there_is_only_one_2_character_string_in_the_identifier_string_vector_and_its_1st_character_does_not_match)
@@ -230,10 +230,10 @@ TEST(string_matching, no_string_must_match_when_there_is_only_one_2_character_st
     const char* text_base_pointer = text;
     char* text_data_pointer = text;
     std::vector<std::string> identifier_strings_vector = { "bb" };
-    ASSERT_FALSE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
+    ASSERT_FALSE(ylikuutio::string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
 
     identifier_strings_vector = { "Ab" };
-    ASSERT_FALSE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
+    ASSERT_FALSE(ylikuutio::string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
 }
 
 TEST(string_matching_std_string, no_string_must_match_when_there_is_only_one_2_character_string_in_the_identifier_string_vector_and_its_1st_character_does_not_match)
@@ -241,10 +241,10 @@ TEST(string_matching_std_string, no_string_must_match_when_there_is_only_one_2_c
     const std::string text_string = "ab";
     const std::size_t data_index = 0;
     std::vector<std::string> identifier_strings_vector = { "bb" };
-    ASSERT_FALSE(string::check_and_report_if_some_string_matches(text_string, data_index, identifier_strings_vector));
+    ASSERT_FALSE(ylikuutio::string::check_and_report_if_some_string_matches(text_string, data_index, identifier_strings_vector));
 
     identifier_strings_vector = { "Ab" };
-    ASSERT_FALSE(string::check_and_report_if_some_string_matches(text_string, data_index, identifier_strings_vector));
+    ASSERT_FALSE(ylikuutio::string::check_and_report_if_some_string_matches(text_string, data_index, identifier_strings_vector));
 }
 
 TEST(string_matching, no_string_must_match_when_there_is_only_one_2_character_string_in_the_identifier_string_vector_and_its_2nd_character_does_not_match)
@@ -253,10 +253,10 @@ TEST(string_matching, no_string_must_match_when_there_is_only_one_2_character_st
     const char* text_base_pointer = text;
     char* text_data_pointer = text;
     std::vector<std::string> identifier_strings_vector = { "aa" };
-    ASSERT_FALSE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
+    ASSERT_FALSE(ylikuutio::string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
 
     identifier_strings_vector = { "aB" };
-    ASSERT_FALSE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
+    ASSERT_FALSE(ylikuutio::string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
 }
 
 TEST(string_matching_std_string, no_string_must_match_when_there_is_only_one_2_character_string_in_the_identifier_string_vector_and_its_2nd_character_does_not_match)
@@ -264,10 +264,10 @@ TEST(string_matching_std_string, no_string_must_match_when_there_is_only_one_2_c
     const std::string text_string = "ab";
     const std::size_t data_index = 0;
     std::vector<std::string> identifier_strings_vector = { "aa" };
-    ASSERT_FALSE(string::check_and_report_if_some_string_matches(text_string, data_index, identifier_strings_vector));
+    ASSERT_FALSE(ylikuutio::string::check_and_report_if_some_string_matches(text_string, data_index, identifier_strings_vector));
 
     identifier_strings_vector = { "aB" };
-    ASSERT_FALSE(string::check_and_report_if_some_string_matches(text_string, data_index, identifier_strings_vector));
+    ASSERT_FALSE(ylikuutio::string::check_and_report_if_some_string_matches(text_string, data_index, identifier_strings_vector));
 }
 
 TEST(string_matching, no_string_must_match_when_there_is_only_one_3_character_string_in_the_identifier_string_vector_and_its_1st_character_does_not_match)
@@ -276,10 +276,10 @@ TEST(string_matching, no_string_must_match_when_there_is_only_one_3_character_st
     const char* text_base_pointer = text;
     char* text_data_pointer = text;
     std::vector<std::string> identifier_strings_vector = { "bbc" };
-    ASSERT_FALSE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
+    ASSERT_FALSE(ylikuutio::string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
 
     identifier_strings_vector = { "Abc" };
-    ASSERT_FALSE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
+    ASSERT_FALSE(ylikuutio::string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
 }
 
 TEST(string_matching_std_string, no_string_must_match_when_there_is_only_one_3_character_string_in_the_identifier_string_vector_and_its_1st_character_does_not_match)
@@ -287,10 +287,10 @@ TEST(string_matching_std_string, no_string_must_match_when_there_is_only_one_3_c
     const std::string text_string = "abc";
     const std::size_t data_index = 0;
     std::vector<std::string> identifier_strings_vector = { "bbc" };
-    ASSERT_FALSE(string::check_and_report_if_some_string_matches(text_string, data_index, identifier_strings_vector));
+    ASSERT_FALSE(ylikuutio::string::check_and_report_if_some_string_matches(text_string, data_index, identifier_strings_vector));
 
     identifier_strings_vector = { "Abc" };
-    ASSERT_FALSE(string::check_and_report_if_some_string_matches(text_string, data_index, identifier_strings_vector));
+    ASSERT_FALSE(ylikuutio::string::check_and_report_if_some_string_matches(text_string, data_index, identifier_strings_vector));
 }
 
 TEST(string_matching, no_string_must_match_when_there_is_only_one_3_character_string_in_the_identifier_string_vector_and_its_2nd_character_does_not_match)
@@ -299,10 +299,10 @@ TEST(string_matching, no_string_must_match_when_there_is_only_one_3_character_st
     const char* text_base_pointer = text;
     char* text_data_pointer = text;
     std::vector<std::string> identifier_strings_vector = { "aac" };
-    ASSERT_FALSE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
+    ASSERT_FALSE(ylikuutio::string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
 
     identifier_strings_vector = { "aBc" };
-    ASSERT_FALSE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
+    ASSERT_FALSE(ylikuutio::string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
 }
 
 TEST(string_matching_std_string, no_string_must_match_when_there_is_only_one_3_character_string_in_the_identifier_string_vector_and_its_2nd_character_does_not_match)
@@ -310,10 +310,10 @@ TEST(string_matching_std_string, no_string_must_match_when_there_is_only_one_3_c
     const std::string text_string = "abc";
     const std::size_t data_index = 0;
     std::vector<std::string> identifier_strings_vector = { "aac" };
-    ASSERT_FALSE(string::check_and_report_if_some_string_matches(text_string, data_index, identifier_strings_vector));
+    ASSERT_FALSE(ylikuutio::string::check_and_report_if_some_string_matches(text_string, data_index, identifier_strings_vector));
 
     identifier_strings_vector = { "aBc" };
-    ASSERT_FALSE(string::check_and_report_if_some_string_matches(text_string, data_index, identifier_strings_vector));
+    ASSERT_FALSE(ylikuutio::string::check_and_report_if_some_string_matches(text_string, data_index, identifier_strings_vector));
 }
 
 TEST(string_matching, no_string_must_match_when_there_is_only_one_3_character_string_in_the_identifier_string_vector_and_its_3rd_character_does_not_match)
@@ -322,10 +322,10 @@ TEST(string_matching, no_string_must_match_when_there_is_only_one_3_character_st
     const char* text_base_pointer = text;
     char* text_data_pointer = text;
     std::vector<std::string> identifier_strings_vector = { "abb" };
-    ASSERT_FALSE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
+    ASSERT_FALSE(ylikuutio::string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
 
     identifier_strings_vector = { "abC" };
-    ASSERT_FALSE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
+    ASSERT_FALSE(ylikuutio::string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
 }
 
 TEST(string_matching_std_string, no_string_must_match_when_there_is_only_one_3_character_string_in_the_identifier_string_vector_and_its_3rd_character_does_not_match)
@@ -333,10 +333,10 @@ TEST(string_matching_std_string, no_string_must_match_when_there_is_only_one_3_c
     const std::string text_string = "abc";
     const std::size_t data_index = 0;
     std::vector<std::string> identifier_strings_vector = { "abb" };
-    ASSERT_FALSE(string::check_and_report_if_some_string_matches(text_string, data_index, identifier_strings_vector));
+    ASSERT_FALSE(ylikuutio::string::check_and_report_if_some_string_matches(text_string, data_index, identifier_strings_vector));
 
     identifier_strings_vector = { "abC" };
-    ASSERT_FALSE(string::check_and_report_if_some_string_matches(text_string, data_index, identifier_strings_vector));
+    ASSERT_FALSE(ylikuutio::string::check_and_report_if_some_string_matches(text_string, data_index, identifier_strings_vector));
 }
 
 TEST(string_matching, no_string_must_match_when_there_are_two_1_character_strings_in_the_identifier_string_vector_and_neither_matches)
@@ -345,7 +345,7 @@ TEST(string_matching, no_string_must_match_when_there_are_two_1_character_string
     const char* text_base_pointer = text;
     char* text_data_pointer = text;
     const std::vector<std::string> identifier_strings_vector = { "A", "b" };
-    ASSERT_FALSE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
+    ASSERT_FALSE(ylikuutio::string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
 }
 
 TEST(string_matching_std_string, no_string_must_match_when_there_are_two_1_character_strings_in_the_identifier_string_vector_and_neither_matches)
@@ -353,7 +353,7 @@ TEST(string_matching_std_string, no_string_must_match_when_there_are_two_1_chara
     const std::string text_string = "a";
     const std::size_t data_index = 0;
     const std::vector<std::string> identifier_strings_vector = { "A", "b" };
-    ASSERT_FALSE(string::check_and_report_if_some_string_matches(text_string, data_index, identifier_strings_vector));
+    ASSERT_FALSE(ylikuutio::string::check_and_report_if_some_string_matches(text_string, data_index, identifier_strings_vector));
 }
 
 TEST(string_matching, no_string_must_match_when_there_are_three_1_character_strings_in_the_identifier_string_vector_and_none_matches)
@@ -362,7 +362,7 @@ TEST(string_matching, no_string_must_match_when_there_are_three_1_character_stri
     const char* text_base_pointer = text;
     char* text_data_pointer = text;
     const std::vector<std::string> identifier_strings_vector = { "A", "b", "c" };
-    ASSERT_FALSE(string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
+    ASSERT_FALSE(ylikuutio::string::check_and_report_if_some_string_matches(text_base_pointer, text_data_pointer, sizeof(text), identifier_strings_vector));
 }
 
 TEST(string_matching_std_string, no_string_must_match_when_there_are_three_1_character_strings_in_the_identifier_string_vector_and_none_matches)
@@ -370,5 +370,5 @@ TEST(string_matching_std_string, no_string_must_match_when_there_are_three_1_cha
     const std::string text_string = "a";
     const std::size_t data_index = 0;
     const std::vector<std::string> identifier_strings_vector = { "A", "b", "c" };
-    ASSERT_FALSE(string::check_and_report_if_some_string_matches(text_string, data_index, identifier_strings_vector));
+    ASSERT_FALSE(ylikuutio::string::check_and_report_if_some_string_matches(text_string, data_index, identifier_strings_vector));
 }

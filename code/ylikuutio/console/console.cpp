@@ -282,7 +282,7 @@ namespace console
                 for (int32_t history_i = history_line_i; history_i < history_end_i && history_i < this->console_history.size(); history_i++)
                 {
                     std::list<char> historical_text = this->console_history.at(history_i);
-                    printing_struct.text += string::convert_std_list_char_to_std_string(historical_text, characters_for_line, characters_for_line) + "\\n";
+                    printing_struct.text += ylikuutio::string::convert_std_list_char_to_std_string(historical_text, characters_for_line, characters_for_line) + "\\n";
                 }
             }
             else
@@ -307,7 +307,7 @@ namespace console
                     }
 
                     // Convert into a vector of lines.
-                    std::vector<std::string> current_input_vector = string::convert_std_list_char_to_std_vector_std_string(
+                    std::vector<std::string> current_input_vector = ylikuutio::string::convert_std_list_char_to_std_vector_std_string(
                             current_input_with_prompt,
                             this->n_columns);
 
@@ -336,9 +336,9 @@ namespace console
                     for (int32_t history_i = history_start_i; history_i < this->console_history.size(); history_i++)
                     {
                         std::list<char> historical_text = this->console_history.at(history_i);
-                        printing_struct.text += string::convert_std_list_char_to_std_string(historical_text, characters_for_line, characters_for_line) + "\\n";
+                        printing_struct.text += ylikuutio::string::convert_std_list_char_to_std_string(historical_text, characters_for_line, characters_for_line) + "\\n";
                     }
-                    printing_struct.text += this->prompt + string::convert_std_list_char_to_std_string(
+                    printing_struct.text += this->prompt + ylikuutio::string::convert_std_list_char_to_std_string(
                             this->current_input,
                             characters_for_line - this->prompt.size(), // First line is shorter due to space taken by the prompt.
                             characters_for_line);                      // The rest lines have full length.
