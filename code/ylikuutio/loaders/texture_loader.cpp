@@ -1,6 +1,8 @@
 #include "texture_loader.hpp"
 #include "bmp_loader.hpp"
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
+
+// Include OpenFBX
 #include <ofbx.h>
 
 // Include GLEW
@@ -88,7 +90,7 @@ namespace loaders
 
         int32_t filename_length = string::extract_last_part_of_string(
                 texture_data_begin,
-                texture_data_end - texture_data_begin,
+                texture_data_end - texture_data_begin + 1,
                 filename_buffer,
                 filename_buffer_size,
                 separator);
@@ -105,7 +107,7 @@ namespace loaders
 
         string::extract_last_part_of_string(
                 filename_buffer,
-                filename_length,
+                filename_length + 1,
                 file_suffix_buffer,
                 file_suffix_buffer_size,
                 suffix_separator);

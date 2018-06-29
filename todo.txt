@@ -5,6 +5,8 @@ Fixes needed:
 [ ] Fix compiling on Visual Studio.
 
 Tasks which are necessary for the development of Ylikuutio:
+[ ] Write code to convert ASCII grid files (height maps) to binary grid files, storing also interpolated vertices, UVs, and normals.
+[ ] Convert ASCII grid files into binary grid files.
 [ ] Implement `Camera` entities.
 [ ] Evaluate mingw-std-threads: https://github.com/meganz/mingw-std-threads
 [ ] Evaluate winpthreads: https://sourceforge.net/p/mingw-w64/mingw-w64/ci/master/tree/mingw-w64-libraries/winpthreads/ https://en.wikipedia.org/wiki/MinGW#MinGW-w64

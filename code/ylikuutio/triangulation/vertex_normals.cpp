@@ -33,20 +33,33 @@ namespace geometry
 
         if ((is_bilinear_interpolation_in_use && is_southwest_northeast_edges_in_use) ||
                 (is_bilinear_interpolation_in_use && is_southeast_northwest_edges_in_use) ||
-                (is_southwest_northeast_edges_in_use && is_southeast_northwest_edges_in_use))
+                (is_southwest_northeast_edges_in_use && is_southeast_northwest_edges_in_use) ||
+                (!is_bilinear_interpolation_in_use && !is_southwest_northeast_edges_in_use && !is_southeast_northwest_edges_in_use))
         {
-            // Only 1 triangulation type can be in use.
+            // Exactly 1 triangulation method must be selected.
             return false;
         }
 
         if (is_bilinear_interpolation_in_use)
         {
+            if (face_normal_vector_vec3.size() != 4 * (actual_image_width - 1) * (actual_image_height - 1))
+            {
+                // If number of face normals is not 4 * width * height, then the number of vertices is incorrect.
+                return false;
+            }
+
             // If bilinear interpolation is in use, then number of faces is:
             const int32_t number_of_interpolated_vertices = (actual_image_width - 1) * (actual_image_height - 1);
             temp_normals.reserve(actual_image_width * actual_image_height + number_of_interpolated_vertices);
         }
         else
         {
+            if (face_normal_vector_vec3.size() != 2 * (actual_image_width - 1) * (actual_image_height - 1))
+            {
+                // If number of face normals is not 2 * width * height, then the number of vertices is incorrect.
+                return false;
+            }
+
             temp_normals.reserve(actual_image_width * actual_image_height);
         }
 

@@ -277,6 +277,7 @@ configure_file(res/height_maps/noise128x128.bmp noise128x128.bmp COPYONLY)
 configure_file(res/height_maps/S17W069.hgt S17W069.hgt COPYONLY)
 configure_file(res/height_maps/L4133D.asc L4133D.asc COPYONLY)
 configure_file(res/height_maps/N5424G.asc N5424G.asc COPYONLY)
+configure_file(res/height_maps/test_3x3_0_1_2_4_8_16_32_64_128.asc test_3x3_0_1_2_4_8_16_32_64_128.asc COPYONLY)
 configure_file(res/laser_scanning_data/L4133D1.laz L4133D1.laz COPYONLY)
 configure_file(res/maps/Hofinkatu_Isafjordinkatu_Joensuu_Finland.osm Hofinkatu_Isafjordinkatu_Joensuu_Finland.osm COPYONLY)
 configure_file(res/maps/Exactum_Physicum_Helsinki_Finland.osm Exactum_Physicum_Helsinki_Finland.osm COPYONLY)
@@ -418,6 +419,9 @@ add_library(ylikuutio STATIC
 
     # map, in alphabetical order
     code/ylikuutio/map/ylikuutio_map.hpp
+
+    # memory, in alphabetical order
+    code/ylikuutio/memory/memory_templates.hpp
 
     # network, in alphabetical order
     # code/ylikuutio/network/tcp_connection.cpp
@@ -644,10 +648,13 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/linear_algebra/matrix_functions.hpp
         code/ylikuutio/linear_algebra/tensor3.cpp
         code/ylikuutio/linear_algebra/tensor3.hpp
+        code/ylikuutio/loaders/ascii_grid_loader.cpp
+        code/ylikuutio/loaders/ascii_grid_loader.hpp
         code/ylikuutio/loaders/fbx_species_loader.cpp
         code/ylikuutio/loaders/fbx_species_loader.hpp
         code/ylikuutio/loaders/font_loader.cpp
         code/ylikuutio/loaders/font_loader.hpp
+        code/ylikuutio/memory/memory_templates.hpp
         code/ylikuutio/ontology/glyph_struct.hpp
         code/ylikuutio/ontology/material_struct.hpp
         code/ylikuutio/ontology/object_struct.hpp
@@ -655,6 +662,8 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/ontology/species_struct.hpp
         code/ylikuutio/ontology/text3D_struct.hpp
         code/ylikuutio/ontology/vector_font_struct.hpp
+        code/ylikuutio/ontology/universe.cpp
+        code/ylikuutio/ontology/universe.hpp
         code/ylikuutio/string/ylikuutio_string.cpp
         code/ylikuutio/string/ylikuutio_string.hpp
         code/ylikuutio/triangulation/face_normals.cpp
@@ -670,26 +679,31 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         )
     set(UNIT_TESTS
         code/ylikuutio/tests/googletest/test_any_value.cpp
+        code/ylikuutio/tests/googletest/test_ascii_grid_loader.cpp
         # code/ylikuutio/tests/googletest/test_asio.cpp
         code/ylikuutio/tests/googletest/test_bilinear_interpolation2D.cpp
         code/ylikuutio/tests/googletest/test_callback_system.cpp
+        code/ylikuutio/tests/googletest/test_check_and_report_if_some_string_matches.cpp
+        code/ylikuutio/tests/googletest/test_extract_string.cpp
+        code/ylikuutio/tests/googletest/test_extract_string_with_several_endings.cpp
+        code/ylikuutio/tests/googletest/test_extract_unicode_value_from_string.cpp
         code/ylikuutio/tests/googletest/test_fbx_loader.cpp
         code/ylikuutio/tests/googletest/test_file_loader.cpp
         code/ylikuutio/tests/googletest/test_font_loader.cpp
-        code/ylikuutio/tests/googletest/test_node_struct.cpp
-        code/ylikuutio/tests/googletest/test_shader_struct.cpp
-        code/ylikuutio/tests/googletest/test_material_struct.cpp
-        code/ylikuutio/tests/googletest/test_species_struct.cpp
-        code/ylikuutio/tests/googletest/test_vector_font_struct.cpp
         code/ylikuutio/tests/googletest/test_glyph_struct.cpp
-        code/ylikuutio/tests/googletest/test_object_struct.cpp
         code/ylikuutio/tests/googletest/test_heightmap_loader.cpp
         code/ylikuutio/tests/googletest/test_line2D.cpp
         code/ylikuutio/tests/googletest/test_line_line_intersection.cpp
         code/ylikuutio/tests/googletest/test_line_segment_line_segment_intersection.cpp
         code/ylikuutio/tests/googletest/test_linear_algebra.cpp
+        code/ylikuutio/tests/googletest/test_material_struct.cpp
+        code/ylikuutio/tests/googletest/test_node_struct.cpp
+        code/ylikuutio/tests/googletest/test_obj_loader.cpp
+        code/ylikuutio/tests/googletest/test_object_struct.cpp
         code/ylikuutio/tests/googletest/test_pugixml.cpp
-        code/ylikuutio/tests/googletest/test_ylikuutio_string.cpp)
+        code/ylikuutio/tests/googletest/test_shader_struct.cpp
+        code/ylikuutio/tests/googletest/test_species_struct.cpp
+        code/ylikuutio/tests/googletest/test_vector_font_struct.cpp)
     set(MAIN_FILE code/ylikuutio/tests/googletest/main.cpp)
 
     add_library(code_to_test ${FILES_TO_TEST})

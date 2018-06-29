@@ -1,6 +1,9 @@
 #include "gtest/gtest.h"
 #include "code/ylikuutio/interpolation/bilinear_interpolation2D.hpp"
 
+// Include standard headers
+#include <stdint.h> // uint32_t etc.
+
 TEST(a_1x1_terrain_must_be_interpolated_appropriately, no_change)
 {
     uint32_t image_width = 1;
@@ -91,9 +94,9 @@ TEST(a_2x2_terrain_must_be_interpolated_appropriately, halfway_points)
     ASSERT_TRUE(*output_vertex_pointer++ == (123.25f + 345.25f) / 2.0f);                     // 0.0, 0.5
     ASSERT_TRUE(*output_vertex_pointer++ == (123.25f + 234.25f + 345.25f + 456.25f) / 4.0f); // 0.5, 0.5
     ASSERT_TRUE(*output_vertex_pointer++ == (234.25f + 456.25f) / 2.0f);                     // 1.0, 0.5
-    ASSERT_TRUE(*output_vertex_pointer++ == 345.25f);                                        // 0.0, 1.0 
+    ASSERT_TRUE(*output_vertex_pointer++ == 345.25f);                                        // 0.0, 1.0
     ASSERT_TRUE(*output_vertex_pointer++ == (345.25f + 456.25f) / 2.0f);                     // 0.5, 1.0
-    ASSERT_TRUE(*output_vertex_pointer++ == 456.25f);                                        // 1.0, 1.0 
+    ASSERT_TRUE(*output_vertex_pointer++ == 456.25f);                                        // 1.0, 1.0
 }
 
 TEST(a_2x2_terrain_must_be_interpolated_appropriately, quarter_points)

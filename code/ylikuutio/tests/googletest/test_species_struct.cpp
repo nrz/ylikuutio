@@ -9,7 +9,7 @@
 
 TEST(SpeciesStruct_must_be_initialized_appropriately, SpeciesStruct)
 {
-    SpeciesStruct test_species_struct;
+    const SpeciesStruct test_species_struct;
     ASSERT_EQ(test_species_struct.scene, nullptr);
     ASSERT_EQ(test_species_struct.shader, nullptr);
     ASSERT_EQ(test_species_struct.material, nullptr);

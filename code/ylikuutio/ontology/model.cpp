@@ -51,12 +51,12 @@ namespace ontology
         return -1;
     }
 
-    std::vector<glm::vec3> Model::get_vertices() const
+    const std::vector<glm::vec3>& Model::get_vertices() const
     {
         return this->vertices;
     }
 
-    std::vector<uint32_t> Model::get_indices() const
+    const std::vector<uint32_t>& Model::get_indices() const
     {
         return this->indices;
     }

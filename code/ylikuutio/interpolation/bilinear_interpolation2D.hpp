@@ -40,30 +40,30 @@ namespace interpolation
             
             for (float z = start_z; z <= end_z; z += delta_z)
             {
-                float floor_z = floor(z);
-                float ceil_z = ceil(z);
-                float rel_z = z - floor_z; // 0 <= rel_z <= 1
-                float inv_rel_z = 1.0f - rel_z;
-                uint32_t z0 = static_cast<uint32_t>(floor_z);
-                uint32_t z1 = static_cast<uint32_t>(ceil_z);
+                const float floor_z = floor(z);
+                const float ceil_z = ceil(z);
+                const float rel_z = z - floor_z; // 0 <= rel_z <= 1
+                const float inv_rel_z = 1.0f - rel_z;
+                const uint32_t z0 = static_cast<uint32_t>(floor_z);
+                const uint32_t z1 = static_cast<uint32_t>(ceil_z);
 
                 // Interpolate along z axis.
                 for (float x = start_x; x <= end_x; x += delta_x)
                 {
                     // https://en.wikipedia.org/wiki/Bilinear_interpolation#Unit_Square
-                    float floor_x = floor(x);
-                    float ceil_x = ceil(x);
-                    float rel_x = x - floor_x; // 0 <= rel_x <= 1
-                    float inv_rel_x = 1.0f - rel_x;
-                    uint32_t x0 = static_cast<uint32_t>(floor_x);
-                    uint32_t x1 = static_cast<uint32_t>(ceil_x);
+                    const float floor_x = floor(x);
+                    const float ceil_x = ceil(x);
+                    const float rel_x = x - floor_x; // 0 <= rel_x <= 1
+                    const float inv_rel_x = 1.0f - rel_x;
+                    const uint32_t x0 = static_cast<uint32_t>(floor_x);
+                    const uint32_t x1 = static_cast<uint32_t>(ceil_x);
 
-                    float data_0_0 = static_cast<float>(*(input_vertex_pointer + image_width * z0 + x0));
-                    float data_0_1 = static_cast<float>(*(input_vertex_pointer + image_width * z1 + x0));
-                    float data_1_0 = static_cast<float>(*(input_vertex_pointer + image_width * z0 + x1));
-                    float data_1_1 = static_cast<float>(*(input_vertex_pointer + image_width * z1 + x1));
+                    const float data_0_0 = static_cast<float>(*(input_vertex_pointer + image_width * z0 + x0));
+                    const float data_0_1 = static_cast<float>(*(input_vertex_pointer + image_width * z1 + x0));
+                    const float data_1_0 = static_cast<float>(*(input_vertex_pointer + image_width * z0 + x1));
+                    const float data_1_1 = static_cast<float>(*(input_vertex_pointer + image_width * z1 + x1));
 
-                    float value = inv_rel_x * inv_rel_z * data_0_0 + rel_x * inv_rel_z * data_1_0 + inv_rel_x * rel_z * data_0_1 + rel_x * rel_z * data_1_1;
+                    const float value = inv_rel_x * inv_rel_z * data_0_0 + rel_x * inv_rel_z * data_1_0 + inv_rel_x * rel_z * data_0_1 + rel_x * rel_z * data_1_1;
                     *output_vertex_pointer++ = value;
                 }
             }

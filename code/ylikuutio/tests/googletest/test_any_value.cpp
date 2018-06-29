@@ -33,9 +33,9 @@ TEST(any_value_must_be_initialized_appropriately, no_value)
     ASSERT_EQ(no_value.symbiosis_pointer, nullptr);
     ASSERT_EQ(no_value.font2D_pointer, nullptr);
     ASSERT_EQ(no_value.console_pointer, nullptr);
-    ASSERT_EQ(std::strlen(no_value.get_datatype().c_str()), strlen("unknown"));
+    ASSERT_EQ(std::strlen(no_value.get_datatype().c_str()), std::strlen("unknown"));
     ASSERT_EQ(std::strcmp(no_value.get_datatype().c_str(), "unknown"), 0);
-    ASSERT_EQ(std::strlen(no_value.get_string().c_str()), strlen("unknown"));
+    ASSERT_EQ(std::strlen(no_value.get_string().c_str()), std::strlen("unknown"));
     ASSERT_EQ(std::strcmp(no_value.get_string().c_str(), "unknown"), 0);
 }
 
@@ -66,9 +66,9 @@ TEST(any_value_must_be_initialized_appropriately, bool_true)
     ASSERT_EQ(true_value.symbiosis_pointer, nullptr);
     ASSERT_EQ(true_value.font2D_pointer, nullptr);
     ASSERT_EQ(true_value.console_pointer, nullptr);
-    ASSERT_EQ(std::strlen(true_value.get_datatype().c_str()), strlen("bool"));
+    ASSERT_EQ(std::strlen(true_value.get_datatype().c_str()), std::strlen("bool"));
     ASSERT_EQ(std::strcmp(true_value.get_datatype().c_str(), "bool"), 0);
-    ASSERT_EQ(std::strlen(true_value.get_string().c_str()), strlen("bool"));
+    ASSERT_EQ(std::strlen(true_value.get_string().c_str()), std::strlen("bool"));
     ASSERT_EQ(std::strcmp(true_value.get_string().c_str(), "true"), 0);
 }
 
@@ -99,9 +99,9 @@ TEST(any_value_must_be_initialized_appropriately, bool_false)
     ASSERT_EQ(false_value.symbiosis_pointer, nullptr);
     ASSERT_EQ(false_value.font2D_pointer, nullptr);
     ASSERT_EQ(false_value.console_pointer, nullptr);
-    ASSERT_EQ(std::strlen(false_value.get_datatype().c_str()), strlen("bool"));
+    ASSERT_EQ(std::strlen(false_value.get_datatype().c_str()), std::strlen("bool"));
     ASSERT_EQ(std::strcmp(false_value.get_datatype().c_str(), "bool"), 0);
-    ASSERT_EQ(std::strlen(false_value.get_string().c_str()), strlen("false"));
+    ASSERT_EQ(std::strlen(false_value.get_string().c_str()), std::strlen("false"));
     ASSERT_EQ(std::strcmp(false_value.get_string().c_str(), "false"), 0);
 }
 
@@ -135,9 +135,9 @@ TEST(any_value_must_be_initialized_appropriately, float_0)
     ASSERT_EQ(float_zero_value.symbiosis_pointer, nullptr);
     ASSERT_EQ(float_zero_value.font2D_pointer, nullptr);
     ASSERT_EQ(float_zero_value.console_pointer, nullptr);
-    ASSERT_EQ(std::strlen(float_zero_value.get_datatype().c_str()), strlen("float"));
+    ASSERT_EQ(std::strlen(float_zero_value.get_datatype().c_str()), std::strlen("float"));
     ASSERT_EQ(std::strcmp(float_zero_value.get_datatype().c_str(), "float"), 0);
-    ASSERT_EQ(std::strlen(float_zero_value.get_string().c_str()), strlen("0.000000"));
+    ASSERT_EQ(std::strlen(float_zero_value.get_string().c_str()), std::strlen("0.000000"));
     ASSERT_EQ(std::strlen(float_zero_value.get_string().c_str()), 8);
     ASSERT_EQ(std::strcmp(float_zero_value.get_string().c_str(), "0.000000"), 0);
 }
@@ -171,9 +171,9 @@ TEST(any_value_must_be_initialized_appropriately, float_positive_infinity)
     ASSERT_EQ(float_positive_infinity_value.symbiosis_pointer, nullptr);
     ASSERT_EQ(float_positive_infinity_value.font2D_pointer, nullptr);
     ASSERT_EQ(float_positive_infinity_value.console_pointer, nullptr);
-    ASSERT_EQ(std::strlen(float_positive_infinity_value.get_datatype().c_str()), strlen("float"));
+    ASSERT_EQ(std::strlen(float_positive_infinity_value.get_datatype().c_str()), std::strlen("float"));
     ASSERT_EQ(std::strcmp(float_positive_infinity_value.get_datatype().c_str(), "float"), 0);
-    ASSERT_EQ(std::strlen(float_positive_infinity_value.get_string().c_str()), strlen("inf"));
+    ASSERT_EQ(std::strlen(float_positive_infinity_value.get_string().c_str()), std::strlen("inf"));
     ASSERT_EQ(std::strcmp(float_positive_infinity_value.get_string().c_str(), "inf"), 0);
 }
 
@@ -206,9 +206,9 @@ TEST(any_value_must_be_initialized_appropriately, float_negative_infinity)
     ASSERT_EQ(float_negative_infinity_value.symbiosis_pointer, nullptr);
     ASSERT_EQ(float_negative_infinity_value.font2D_pointer, nullptr);
     ASSERT_EQ(float_negative_infinity_value.console_pointer, nullptr);
-    ASSERT_EQ(std::strlen(float_negative_infinity_value.get_datatype().c_str()), strlen("float"));
+    ASSERT_EQ(std::strlen(float_negative_infinity_value.get_datatype().c_str()), std::strlen("float"));
     ASSERT_EQ(std::strcmp(float_negative_infinity_value.get_datatype().c_str(), "float"), 0);
-    ASSERT_EQ(std::strlen(float_negative_infinity_value.get_string().c_str()), strlen("-inf"));
+    ASSERT_EQ(std::strlen(float_negative_infinity_value.get_string().c_str()), std::strlen("-inf"));
     ASSERT_EQ(std::strcmp(float_negative_infinity_value.get_string().c_str(), "-inf"), 0);
 }
 
@@ -241,9 +241,9 @@ TEST(any_value_must_be_initialized_appropriately, float_NAN)
     ASSERT_EQ(float_NAN_value.symbiosis_pointer, nullptr);
     ASSERT_EQ(float_NAN_value.font2D_pointer, nullptr);
     ASSERT_EQ(float_NAN_value.console_pointer, nullptr);
-    ASSERT_EQ(std::strlen(float_NAN_value.get_datatype().c_str()), strlen("float"));
+    ASSERT_EQ(std::strlen(float_NAN_value.get_datatype().c_str()), std::strlen("float"));
     ASSERT_EQ(std::strcmp(float_NAN_value.get_datatype().c_str(), "float"), 0);
-    ASSERT_EQ(std::strlen(float_NAN_value.get_string().c_str()), strlen("nan"));
+    ASSERT_EQ(std::strlen(float_NAN_value.get_string().c_str()), std::strlen("nan"));
     ASSERT_EQ(std::strcmp(float_NAN_value.get_string().c_str(), "nan"), 0);
 }
 
@@ -276,9 +276,9 @@ TEST(any_value_must_be_initialized_appropriately, double_0)
     ASSERT_EQ(double_zero_value.symbiosis_pointer, nullptr);
     ASSERT_EQ(double_zero_value.font2D_pointer, nullptr);
     ASSERT_EQ(double_zero_value.console_pointer, nullptr);
-    ASSERT_EQ(std::strlen(double_zero_value.get_datatype().c_str()), strlen("double"));
+    ASSERT_EQ(std::strlen(double_zero_value.get_datatype().c_str()), std::strlen("double"));
     ASSERT_EQ(std::strcmp(double_zero_value.get_datatype().c_str(), "double"), 0);
-    ASSERT_EQ(std::strlen(double_zero_value.get_string().c_str()), strlen("0.000000"));
+    ASSERT_EQ(std::strlen(double_zero_value.get_string().c_str()), std::strlen("0.000000"));
     ASSERT_EQ(std::strlen(double_zero_value.get_string().c_str()), 8);
     ASSERT_EQ(std::strcmp(double_zero_value.get_string().c_str(), "0.000000"), 0);
 }
@@ -312,9 +312,9 @@ TEST(any_value_must_be_initialized_appropriately, double_positive_infinity)
     ASSERT_EQ(double_positive_infinity_value.symbiosis_pointer, nullptr);
     ASSERT_EQ(double_positive_infinity_value.font2D_pointer, nullptr);
     ASSERT_EQ(double_positive_infinity_value.console_pointer, nullptr);
-    ASSERT_EQ(std::strlen(double_positive_infinity_value.get_datatype().c_str()), strlen("double"));
+    ASSERT_EQ(std::strlen(double_positive_infinity_value.get_datatype().c_str()), std::strlen("double"));
     ASSERT_EQ(std::strcmp(double_positive_infinity_value.get_datatype().c_str(), "double"), 0);
-    ASSERT_EQ(std::strlen(double_positive_infinity_value.get_string().c_str()), strlen("inf"));
+    ASSERT_EQ(std::strlen(double_positive_infinity_value.get_string().c_str()), std::strlen("inf"));
     ASSERT_EQ(std::strcmp(double_positive_infinity_value.get_string().c_str(), "inf"), 0);
 }
 
@@ -347,9 +347,9 @@ TEST(any_value_must_be_initialized_appropriately, double_negative_infinity)
     ASSERT_EQ(double_negative_infinity_value.symbiosis_pointer, nullptr);
     ASSERT_EQ(double_negative_infinity_value.font2D_pointer, nullptr);
     ASSERT_EQ(double_negative_infinity_value.console_pointer, nullptr);
-    ASSERT_EQ(std::strlen(double_negative_infinity_value.get_datatype().c_str()), strlen("double"));
+    ASSERT_EQ(std::strlen(double_negative_infinity_value.get_datatype().c_str()), std::strlen("double"));
     ASSERT_EQ(std::strcmp(double_negative_infinity_value.get_datatype().c_str(), "double"), 0);
-    ASSERT_EQ(std::strlen(double_negative_infinity_value.get_string().c_str()), strlen("-inf"));
+    ASSERT_EQ(std::strlen(double_negative_infinity_value.get_string().c_str()), std::strlen("-inf"));
     ASSERT_EQ(std::strcmp(double_negative_infinity_value.get_string().c_str(), "-inf"), 0);
 }
 
@@ -382,9 +382,9 @@ TEST(any_value_must_be_initialized_appropriately, double_NAN)
     ASSERT_EQ(double_NAN_value.symbiosis_pointer, nullptr);
     ASSERT_EQ(double_NAN_value.font2D_pointer, nullptr);
     ASSERT_EQ(double_NAN_value.console_pointer, nullptr);
-    ASSERT_EQ(std::strlen(double_NAN_value.get_datatype().c_str()), strlen("double"));
+    ASSERT_EQ(std::strlen(double_NAN_value.get_datatype().c_str()), std::strlen("double"));
     ASSERT_EQ(std::strcmp(double_NAN_value.get_datatype().c_str(), "double"), 0);
-    ASSERT_EQ(std::strlen(double_NAN_value.get_string().c_str()), strlen("nan"));
+    ASSERT_EQ(std::strlen(double_NAN_value.get_string().c_str()), std::strlen("nan"));
     ASSERT_EQ(std::strcmp(double_NAN_value.get_string().c_str(), "nan"), 0);
 }
 
@@ -416,9 +416,9 @@ TEST(any_value_must_be_initialized_appropriately, int32_t_zero)
     ASSERT_EQ(int32_t_zero_value.symbiosis_pointer, nullptr);
     ASSERT_EQ(int32_t_zero_value.font2D_pointer, nullptr);
     ASSERT_EQ(int32_t_zero_value.console_pointer, nullptr);
-    ASSERT_EQ(std::strlen(int32_t_zero_value.get_datatype().c_str()), strlen("int32_t"));
+    ASSERT_EQ(std::strlen(int32_t_zero_value.get_datatype().c_str()), std::strlen("int32_t"));
     ASSERT_EQ(std::strcmp(int32_t_zero_value.get_datatype().c_str(), "int32_t"), 0);
-    ASSERT_EQ(std::strlen(int32_t_zero_value.get_string().c_str()), strlen("0"));
+    ASSERT_EQ(std::strlen(int32_t_zero_value.get_string().c_str()), std::strlen("0"));
     ASSERT_EQ(std::strcmp(int32_t_zero_value.get_string().c_str(), "0"), 0);
 }
 
@@ -450,9 +450,9 @@ TEST(any_value_must_be_initialized_appropriately, int32_t_plus_1)
     ASSERT_EQ(int32_t_plus_1_value.symbiosis_pointer, nullptr);
     ASSERT_EQ(int32_t_plus_1_value.font2D_pointer, nullptr);
     ASSERT_EQ(int32_t_plus_1_value.console_pointer, nullptr);
-    ASSERT_EQ(std::strlen(int32_t_plus_1_value.get_datatype().c_str()), strlen("int32_t"));
+    ASSERT_EQ(std::strlen(int32_t_plus_1_value.get_datatype().c_str()), std::strlen("int32_t"));
     ASSERT_EQ(std::strcmp(int32_t_plus_1_value.get_datatype().c_str(), "int32_t"), 0);
-    ASSERT_EQ(std::strlen(int32_t_plus_1_value.get_string().c_str()), strlen("1"));
+    ASSERT_EQ(std::strlen(int32_t_plus_1_value.get_string().c_str()), std::strlen("1"));
     ASSERT_EQ(std::strcmp(int32_t_plus_1_value.get_string().c_str(), "1"), 0);
 }
 
@@ -485,9 +485,9 @@ TEST(any_value_must_be_initialized_appropriately, int32_t_minus_1)
     ASSERT_EQ(int32_t_minus_1_value.symbiosis_pointer, nullptr);
     ASSERT_EQ(int32_t_minus_1_value.font2D_pointer, nullptr);
     ASSERT_EQ(int32_t_minus_1_value.console_pointer, nullptr);
-    ASSERT_EQ(std::strlen(int32_t_minus_1_value.get_datatype().c_str()), strlen("int32_t"));
+    ASSERT_EQ(std::strlen(int32_t_minus_1_value.get_datatype().c_str()), std::strlen("int32_t"));
     ASSERT_EQ(std::strcmp(int32_t_minus_1_value.get_datatype().c_str(), "int32_t"), 0);
-    ASSERT_EQ(std::strlen(int32_t_minus_1_value.get_string().c_str()), strlen("-1"));
+    ASSERT_EQ(std::strlen(int32_t_minus_1_value.get_string().c_str()), std::strlen("-1"));
     ASSERT_EQ(std::strcmp(int32_t_minus_1_value.get_string().c_str(), "-1"), 0);
 }
 
@@ -527,9 +527,9 @@ TEST(any_value_must_be_initialized_appropriately, int32_t_max)
     ASSERT_EQ(int32_t_max_value.symbiosis_pointer, nullptr);
     ASSERT_EQ(int32_t_max_value.font2D_pointer, nullptr);
     ASSERT_EQ(int32_t_max_value.console_pointer, nullptr);
-    ASSERT_EQ(std::strlen(int32_t_max_value.get_datatype().c_str()), strlen("int32_t"));
+    ASSERT_EQ(std::strlen(int32_t_max_value.get_datatype().c_str()), std::strlen("int32_t"));
     ASSERT_EQ(std::strcmp(int32_t_max_value.get_datatype().c_str(), "int32_t"), 0);
-    ASSERT_EQ(std::strlen(int32_t_max_value.get_string().c_str()), strlen("2147483647"));
+    ASSERT_EQ(std::strlen(int32_t_max_value.get_string().c_str()), std::strlen("2147483647"));
     ASSERT_EQ(std::strcmp(int32_t_max_value.get_string().c_str(), "2147483647"), 0);
 }
 
@@ -569,9 +569,9 @@ TEST(any_value_must_be_initialized_appropriately, int32_t_min)
     ASSERT_EQ(int32_t_min_value.symbiosis_pointer, nullptr);
     ASSERT_EQ(int32_t_min_value.font2D_pointer, nullptr);
     ASSERT_EQ(int32_t_min_value.console_pointer, nullptr);
-    ASSERT_EQ(std::strlen(int32_t_min_value.get_datatype().c_str()), strlen("int32_t"));
+    ASSERT_EQ(std::strlen(int32_t_min_value.get_datatype().c_str()), std::strlen("int32_t"));
     ASSERT_EQ(std::strcmp(int32_t_min_value.get_datatype().c_str(), "int32_t"), 0);
-    ASSERT_EQ(std::strlen(int32_t_min_value.get_string().c_str()), strlen("-2147483648"));
+    ASSERT_EQ(std::strlen(int32_t_min_value.get_string().c_str()), std::strlen("-2147483648"));
     ASSERT_EQ(std::strcmp(int32_t_min_value.get_string().c_str(), "-2147483648"), 0);
 }
 
@@ -602,9 +602,9 @@ TEST(any_value_must_be_initialized_appropriately, uint32_t_zero)
     ASSERT_EQ(uint32_t_zero_value.symbiosis_pointer, nullptr);
     ASSERT_EQ(uint32_t_zero_value.font2D_pointer, nullptr);
     ASSERT_EQ(uint32_t_zero_value.console_pointer, nullptr);
-    ASSERT_EQ(std::strlen(uint32_t_zero_value.get_datatype().c_str()), strlen("uint32_t"));
+    ASSERT_EQ(std::strlen(uint32_t_zero_value.get_datatype().c_str()), std::strlen("uint32_t"));
     ASSERT_EQ(std::strcmp(uint32_t_zero_value.get_datatype().c_str(), "uint32_t"), 0);
-    ASSERT_EQ(std::strlen(uint32_t_zero_value.get_string().c_str()), strlen("0"));
+    ASSERT_EQ(std::strlen(uint32_t_zero_value.get_string().c_str()), std::strlen("0"));
     ASSERT_EQ(std::strcmp(uint32_t_zero_value.get_string().c_str(), "0"), 0);
 }
 
@@ -635,9 +635,9 @@ TEST(any_value_must_be_initialized_appropriately, uint32_t_plus_1)
     ASSERT_EQ(uint32_t_plus_1_value.symbiosis_pointer, nullptr);
     ASSERT_EQ(uint32_t_plus_1_value.font2D_pointer, nullptr);
     ASSERT_EQ(uint32_t_plus_1_value.console_pointer, nullptr);
-    ASSERT_EQ(std::strlen(uint32_t_plus_1_value.get_datatype().c_str()), strlen("uint32_t"));
+    ASSERT_EQ(std::strlen(uint32_t_plus_1_value.get_datatype().c_str()), std::strlen("uint32_t"));
     ASSERT_EQ(std::strcmp(uint32_t_plus_1_value.get_datatype().c_str(), "uint32_t"), 0);
-    ASSERT_EQ(std::strlen(uint32_t_plus_1_value.get_string().c_str()), strlen("1"));
+    ASSERT_EQ(std::strlen(uint32_t_plus_1_value.get_string().c_str()), std::strlen("1"));
     ASSERT_EQ(std::strcmp(uint32_t_plus_1_value.get_string().c_str(), "1"), 0);
 }
 
@@ -677,9 +677,9 @@ TEST(any_value_must_be_initialized_appropriately, uint32_t_max)
     ASSERT_EQ(uint32_t_max_value.symbiosis_pointer, nullptr);
     ASSERT_EQ(uint32_t_max_value.font2D_pointer, nullptr);
     ASSERT_EQ(uint32_t_max_value.console_pointer, nullptr);
-    ASSERT_EQ(std::strlen(uint32_t_max_value.get_datatype().c_str()), strlen("uint32_t"));
+    ASSERT_EQ(std::strlen(uint32_t_max_value.get_datatype().c_str()), std::strlen("uint32_t"));
     ASSERT_EQ(std::strcmp(uint32_t_max_value.get_datatype().c_str(), "uint32_t"), 0);
-    ASSERT_EQ(std::strlen(uint32_t_max_value.get_string().c_str()), strlen("4294967295"));
+    ASSERT_EQ(std::strlen(uint32_t_max_value.get_string().c_str()), std::strlen("4294967295"));
     ASSERT_EQ(std::strcmp(uint32_t_max_value.get_string().c_str(), "4294967295"), 0);
 }
 
@@ -710,9 +710,9 @@ TEST(any_value_must_be_initialized_appropriately, universe)
     ASSERT_EQ(universe_any_value.symbiosis_pointer, nullptr);
     ASSERT_EQ(universe_any_value.font2D_pointer, nullptr);
     ASSERT_EQ(universe_any_value.console_pointer, nullptr);
-    ASSERT_EQ(std::strlen(universe_any_value.get_datatype().c_str()), strlen("ontology::Universe*"));
+    ASSERT_EQ(std::strlen(universe_any_value.get_datatype().c_str()), std::strlen("ontology::Universe*"));
     ASSERT_EQ(std::strcmp(universe_any_value.get_datatype().c_str(), "ontology::Universe*"), 0);
-    ASSERT_EQ(std::strlen(universe_any_value.get_string().c_str()), strlen("deadbeef"));
+    ASSERT_EQ(std::strlen(universe_any_value.get_string().c_str()), std::strlen("deadbeef"));
     ASSERT_EQ(std::strcmp(universe_any_value.get_string().c_str(), "deadbeef"), 0);
 }
 
@@ -743,9 +743,9 @@ TEST(any_value_must_be_initialized_appropriately, scene)
     ASSERT_EQ(scene_pointer_any_value.symbiosis_pointer, nullptr);
     ASSERT_EQ(scene_pointer_any_value.font2D_pointer, nullptr);
     ASSERT_EQ(scene_pointer_any_value.console_pointer, nullptr);
-    ASSERT_EQ(std::strlen(scene_pointer_any_value.get_datatype().c_str()), strlen("ontology::Scene*"));
+    ASSERT_EQ(std::strlen(scene_pointer_any_value.get_datatype().c_str()), std::strlen("ontology::Scene*"));
     ASSERT_EQ(std::strcmp(scene_pointer_any_value.get_datatype().c_str(), "ontology::Scene*"), 0);
-    ASSERT_EQ(std::strlen(scene_pointer_any_value.get_string().c_str()), strlen("bad5ce6e"));
+    ASSERT_EQ(std::strlen(scene_pointer_any_value.get_string().c_str()), std::strlen("bad5ce6e"));
     ASSERT_EQ(std::strcmp(scene_pointer_any_value.get_string().c_str(), "bad5ce6e"), 0);
 }
 
@@ -776,9 +776,9 @@ TEST(any_value_must_be_initialized_appropriately, shader)
     ASSERT_EQ(shader_pointer_any_value.symbiosis_pointer, nullptr);
     ASSERT_EQ(shader_pointer_any_value.font2D_pointer, nullptr);
     ASSERT_EQ(shader_pointer_any_value.console_pointer, nullptr);
-    ASSERT_EQ(std::strlen(shader_pointer_any_value.get_datatype().c_str()), strlen("ontology::Shader*"));
+    ASSERT_EQ(std::strlen(shader_pointer_any_value.get_datatype().c_str()), std::strlen("ontology::Shader*"));
     ASSERT_EQ(std::strcmp(shader_pointer_any_value.get_datatype().c_str(), "ontology::Shader*"), 0);
-    ASSERT_EQ(std::strlen(shader_pointer_any_value.get_string().c_str()), strlen("bad5bade7"));
+    ASSERT_EQ(std::strlen(shader_pointer_any_value.get_string().c_str()), std::strlen("bad5bade7"));
     ASSERT_EQ(std::strcmp(shader_pointer_any_value.get_string().c_str(), "bad5bade7"), 0);
 }
 
@@ -809,9 +809,9 @@ TEST(any_value_must_be_initialized_appropriately, material)
     ASSERT_EQ(material_pointer_any_value.symbiosis_pointer, nullptr);
     ASSERT_EQ(material_pointer_any_value.font2D_pointer, nullptr);
     ASSERT_EQ(material_pointer_any_value.console_pointer, nullptr);
-    ASSERT_EQ(std::strlen(material_pointer_any_value.get_datatype().c_str()), strlen("ontology::Material*"));
+    ASSERT_EQ(std::strlen(material_pointer_any_value.get_datatype().c_str()), std::strlen("ontology::Material*"));
     ASSERT_EQ(std::strcmp(material_pointer_any_value.get_datatype().c_str(), "ontology::Material*"), 0);
-    ASSERT_EQ(std::strlen(material_pointer_any_value.get_string().c_str()), strlen("bad6a7e71a1"));
+    ASSERT_EQ(std::strlen(material_pointer_any_value.get_string().c_str()), std::strlen("bad6a7e71a1"));
     ASSERT_EQ(std::strcmp(material_pointer_any_value.get_string().c_str(), "bad6a7e71a1"), 0);
 }
 
@@ -842,9 +842,9 @@ TEST(any_value_must_be_initialized_appropriately, species)
     ASSERT_EQ(species_pointer_any_value.symbiosis_pointer, nullptr);
     ASSERT_EQ(species_pointer_any_value.font2D_pointer, nullptr);
     ASSERT_EQ(species_pointer_any_value.console_pointer, nullptr);
-    ASSERT_EQ(std::strlen(species_pointer_any_value.get_datatype().c_str()), strlen("ontology::Species*"));
+    ASSERT_EQ(std::strlen(species_pointer_any_value.get_datatype().c_str()), std::strlen("ontology::Species*"));
     ASSERT_EQ(std::strcmp(species_pointer_any_value.get_datatype().c_str(), "ontology::Species*"), 0);
-    ASSERT_EQ(std::strlen(species_pointer_any_value.get_string().c_str()), strlen("bad5bec1e5"));
+    ASSERT_EQ(std::strlen(species_pointer_any_value.get_string().c_str()), std::strlen("bad5bec1e5"));
     ASSERT_EQ(std::strcmp(species_pointer_any_value.get_string().c_str(), "bad5bec1e5"), 0);
 }
 
@@ -875,8 +875,8 @@ TEST(any_value_must_be_initialized_appropriately, object)
     ASSERT_EQ(object_pointer_any_value.symbiosis_pointer, nullptr);
     ASSERT_EQ(object_pointer_any_value.font2D_pointer, nullptr);
     ASSERT_EQ(object_pointer_any_value.console_pointer, nullptr);
-    ASSERT_EQ(std::strlen(object_pointer_any_value.get_datatype().c_str()), strlen("ontology::Object*"));
+    ASSERT_EQ(std::strlen(object_pointer_any_value.get_datatype().c_str()), std::strlen("ontology::Object*"));
     ASSERT_EQ(std::strcmp(object_pointer_any_value.get_datatype().c_str(), "ontology::Object*"), 0);
-    ASSERT_EQ(std::strlen(object_pointer_any_value.get_string().c_str()), strlen("bad0b1ec7"));
+    ASSERT_EQ(std::strlen(object_pointer_any_value.get_string().c_str()), std::strlen("bad0b1ec7"));
     ASSERT_EQ(std::strcmp(object_pointer_any_value.get_string().c_str(), "bad0b1ec7"), 0);
 }

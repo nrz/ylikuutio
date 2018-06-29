@@ -31,14 +31,35 @@ namespace geometry
             return false;
         }
 
+        if ((is_bilinear_interpolation_in_use && is_southwest_northeast_edges_in_use) ||
+                (is_bilinear_interpolation_in_use && is_southeast_northwest_edges_in_use) ||
+                (is_southwest_northeast_edges_in_use && is_southeast_northwest_edges_in_use) ||
+                (!is_bilinear_interpolation_in_use && !is_southwest_northeast_edges_in_use && !is_southeast_northwest_edges_in_use))
+        {
+            // Exactly 1 triangulation method must be selected.
+            return false;
+        }
+
         if (is_bilinear_interpolation_in_use)
         {
+            if (temp_vertices.size() != actual_image_width * actual_image_height + (actual_image_width - 1) * (actual_image_height - 1))
+            {
+                // Number of vertices must be correct.
+                return false;
+            }
+
             // If bilinear interpolation is in use, then number of faces is:
             // 4 * (actual_image_width - 1) * (actual_image_height - 1)
             face_normal_vector_vec3.reserve(4 * (actual_image_width - 1) * (actual_image_height - 1));
         }
         else
         {
+            if (temp_vertices.size() != actual_image_width * actual_image_height)
+            {
+                // If number of face normals is not width * height, then the number of vertices is incorrect.
+                return false;
+            }
+
             face_normal_vector_vec3.reserve(2 * (actual_image_width - 1) * (actual_image_height - 1));
         }
 

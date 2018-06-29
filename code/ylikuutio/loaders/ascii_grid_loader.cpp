@@ -11,8 +11,8 @@
 #include "code/ylikuutio/geometry/spherical_terrain_struct.hpp"
 #include "code/ylikuutio/triangulation/triangulate_quads_struct.hpp"
 #include "code/ylikuutio/triangulation/quad_triangulation.hpp"
+#include "code/ylikuutio/file/file_loader.hpp"
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
-#include "code/ylikuutio/common/pi.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -31,7 +31,7 @@
 namespace loaders
 {
     bool load_ASCII_grid(
-            const std::string& ASCII_grid_file_name,
+            const std::string& ascii_grid_filename,
             std::vector<glm::vec3>& out_vertices,
             std::vector<glm::vec2>& out_UVs,
             std::vector<glm::vec3>& out_normals,
@@ -49,126 +49,72 @@ namespace loaders
         // NODATA_value  -9999.000
         // 34.315 34.467 34.441 34.260 33.972 33.564 33.229 33.130 33.102 33.024 32.902 32.669 32.305 32.013 31.937 31.893 31.831 31.832
 
-        std::cout << "Loading ascii grid file " << ASCII_grid_file_name << " ...\n";
+        std::cout << "Loading ASCII grid file " << ascii_grid_filename << " ...\n";
 
         // Open the file
-        const char* char_ASCII_grid_file_name = ASCII_grid_file_name.c_str();
-        std::FILE* file = std::fopen(char_ASCII_grid_file_name, "rb");
-        if (!file)
+        const std::string file_content = file::slurp(ascii_grid_filename);
+
+        if (file_content.empty())
         {
-            std::cerr << ASCII_grid_file_name << " could not be opened.\n";
+            std::cerr << ascii_grid_filename << " could not be opened, or the file is empty.\n";
             return false;
         }
 
-        // Find out file size.
-        if (std::fseek(file, 0, SEEK_END) != 0)
-        {
-            std::cerr << "moving file pointer of file " << ASCII_grid_file_name << " failed!\n";
-            std::fclose(file);
-            return false;
-        }
-
-        int64_t file_size = std::ftell(file);
-
-        if (file_size < 0)
-        {
-            std::cerr << "ftell failed for the file " << ASCII_grid_file_name << " !\n";
-            std::fclose(file);
-            return false;
-        }
-
-        // Move file pointer to the beginning of file.
-        if (fseek(file, 0, SEEK_SET) != 0)
-        {
-            std::cerr << "moving file pointer of file " << ASCII_grid_file_name << " failed!\n";
-            std::fclose(file);
-            return false;
-        }
-
-        // Reserve enough memory.
-        char* point_data = new char[file_size];
-
-        if (point_data == nullptr)
-        {
-            std::cerr << "Reserving memory for point data failed.\n";
-            std::fclose(file);
-            return false;
-        }
-
-        char* point_data_pointer = point_data;
-
-        // Read the point data from the file into the buffer.
-        if (std::fread(point_data, 1, file_size, file) != file_size)
-        {
-            std::cerr << "Error while reading " << ASCII_grid_file_name << "\n";
-            std::fclose(file);
-            delete[] point_data;
-            return false;
-        }
-
-        // Everything is in memory now, the file can be closed
-        std::fclose(file);
+        std::size_t file_content_i = 0;
 
         // All possible block identifier strings.
-        std::vector<std::string> number_strings_vector = { "-", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+        const std::vector<std::string> number_strings_vector = { "-", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
-        while (!string::check_and_report_if_some_string_matches(point_data, ++point_data_pointer, file_size, number_strings_vector));
-        int32_t image_width = string::extract_int32_t_value_from_string(
-                point_data,
-                --point_data_pointer,
-                file_size,
+        while (!string::check_and_report_if_some_string_matches(file_content, ++file_content_i, number_strings_vector));
+        const int32_t image_width = string::extract_int32_t_value_from_string(
+                file_content,
+                --file_content_i,
                 (const char* const) " \n",
                 (const char* const) "ncols");
 
-        while (!string::check_and_report_if_some_string_matches(point_data, ++point_data_pointer, file_size, number_strings_vector));
-        int32_t image_height = string::extract_int32_t_value_from_string(
-                point_data,
-                --point_data_pointer,
-                file_size,
+        while (!string::check_and_report_if_some_string_matches(file_content, ++file_content_i, number_strings_vector));
+        const int32_t image_height = string::extract_int32_t_value_from_string(
+                file_content,
+                --file_content_i,
                 (const char* const) " \n",
                 (const char* const) "nrows");
 
-        while (!string::check_and_report_if_some_string_matches(point_data, ++point_data_pointer, file_size, number_strings_vector));
+        while (!string::check_and_report_if_some_string_matches(file_content, ++file_content_i, number_strings_vector));
         string::extract_float_value_from_string(
-                point_data,
-                --point_data_pointer,
-                file_size,
+                file_content,
+                --file_content_i,
                 (const char* const) " \n",
                 (const char* const) "xllcorner");
 
-        while (!string::check_and_report_if_some_string_matches(point_data, ++point_data_pointer, file_size, number_strings_vector));
+        while (!string::check_and_report_if_some_string_matches(file_content, ++file_content_i, number_strings_vector));
         string::extract_float_value_from_string(
-                point_data,
-                --point_data_pointer,
-                file_size,
+                file_content,
+                --file_content_i,
                 (const char* const) " \n",
                 (const char* const) "yllcorner");
 
-        while (!string::check_and_report_if_some_string_matches(point_data, ++point_data_pointer, file_size, number_strings_vector));
+        while (!string::check_and_report_if_some_string_matches(file_content, ++file_content_i, number_strings_vector));
         string::extract_float_value_from_string(
-                point_data,
-                --point_data_pointer,
-                file_size,
+                file_content,
+                --file_content_i,
                 (const char* const) " \n",
                 (const char* const) "cellsize");
 
-        while (!string::check_and_report_if_some_string_matches(point_data, ++point_data_pointer, file_size, number_strings_vector));
+        while (!string::check_and_report_if_some_string_matches(file_content, ++file_content_i, number_strings_vector));
         string::extract_float_value_from_string(
-                point_data,
-                --point_data_pointer,
-                file_size,
+                file_content,
+                --file_content_i,
                 (const char* const) " \n",
                 (const char* const) "nodata_value");
 
         // note: the value of `image_height_in_use` can be adjusted here (for testing purposes).
-        int32_t image_height_in_use = image_height;
+        const int32_t image_height_in_use = image_height;
 
         float* vertex_data = new float[image_width * image_height_in_use];
 
         if (vertex_data == nullptr)
         {
             std::cerr << "Reserving memory for vertex data failed.\n";
-            delete[] point_data;
             return false;
         }
 
@@ -193,22 +139,19 @@ namespace loaders
 
             for (int32_t x = 0; x < image_width; x++)
             {
-                while (!string::check_and_report_if_some_string_matches(point_data, point_data_pointer, file_size, number_strings_vector))
+                while (!string::check_and_report_if_some_string_matches(file_content, file_content_i, number_strings_vector))
                 {
-                    point_data_pointer++;
+                    file_content_i++;
                 }
                 *vertex_pointer++ = string::extract_float_value_from_string(
-                        point_data,
-                        --point_data_pointer,
-                        file_size,
+                        file_content,
+                        --file_content_i,
                         (const char* const) " \n",
                         (const char* const) nullptr);
             }
         }
 
         std::cout << "\n";
-
-        delete[] point_data;
 
         std::cout << "Triangulating ascii grid data.\n";
 

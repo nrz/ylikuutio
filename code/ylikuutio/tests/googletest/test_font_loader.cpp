@@ -21,73 +21,71 @@
 
 TEST(glyphs_must_be_found_appropriately, kongtext_svg)
 {
-    std::string font_filename = "kongtext.svg";
+    const std::string font_filename = "kongtext.svg";
 
-    std::string file_content = file::slurp(font_filename);
+    const std::string file_content = file::slurp(font_filename);
     const uint64_t file_size = file_content.size();
-    char* SVG_data = new char[file_size];
+    char* const SVG_data = new char[file_size];
     ASSERT_NE(SVG_data, nullptr);
     std::strncpy(SVG_data, file_content.c_str(), file_size);
 
-    const char* SVG_base_pointer;
-    char* SVG_data_pointer;
-    SVG_base_pointer = SVG_data;
-    SVG_data_pointer = SVG_data;
+    const char* const SVG_base_pointer = SVG_data;
+    char* SVG_data_pointer = SVG_data; 
 
     // SVG files are XML files, so we just need to read until we find the data we need.
-    bool is_first_glyph_found = loaders::find_first_glyph_in_SVG(SVG_base_pointer, SVG_data_pointer, file_size);
+    const bool is_first_glyph_found = loaders::find_first_glyph_in_SVG(SVG_base_pointer, SVG_data_pointer, file_size);
     ASSERT_TRUE(is_first_glyph_found);
     ASSERT_EQ(SVG_data_pointer, SVG_base_pointer + 0x2e0);
     SVG_data_pointer++;
 
-    bool is_second_glyph_found = loaders::find_first_glyph_in_SVG(SVG_base_pointer, SVG_data_pointer, file_size);
+    const bool is_second_glyph_found = loaders::find_first_glyph_in_SVG(SVG_base_pointer, SVG_data_pointer, file_size);
     ASSERT_TRUE(is_second_glyph_found);
     ASSERT_EQ(SVG_data_pointer, SVG_base_pointer + 0x320);
     SVG_data_pointer++;
 
-    bool is_third_glyph_found = loaders::find_first_glyph_in_SVG(SVG_base_pointer, SVG_data_pointer, file_size);
+    const bool is_third_glyph_found = loaders::find_first_glyph_in_SVG(SVG_base_pointer, SVG_data_pointer, file_size);
     ASSERT_TRUE(is_third_glyph_found);
     ASSERT_EQ(SVG_data_pointer, SVG_base_pointer + 0x353);
     SVG_data_pointer++;
 
-    bool is_fourth_glyph_found = loaders::find_first_glyph_in_SVG(SVG_base_pointer, SVG_data_pointer, file_size);
+    const bool is_fourth_glyph_found = loaders::find_first_glyph_in_SVG(SVG_base_pointer, SVG_data_pointer, file_size);
     ASSERT_TRUE(is_fourth_glyph_found);
     ASSERT_EQ(SVG_data_pointer, SVG_base_pointer + 0x386);
     SVG_data_pointer++;
 
-    bool is_fifth_glyph_found = loaders::find_first_glyph_in_SVG(SVG_base_pointer, SVG_data_pointer, file_size);
+    const bool is_fifth_glyph_found = loaders::find_first_glyph_in_SVG(SVG_base_pointer, SVG_data_pointer, file_size);
     ASSERT_TRUE(is_fifth_glyph_found);
     ASSERT_EQ(SVG_data_pointer, SVG_base_pointer + 0x3b4);
     SVG_data_pointer++;
 
-    bool is_sixth_glyph_found = loaders::find_first_glyph_in_SVG(SVG_base_pointer, SVG_data_pointer, file_size);
+    const bool is_sixth_glyph_found = loaders::find_first_glyph_in_SVG(SVG_base_pointer, SVG_data_pointer, file_size);
     ASSERT_TRUE(is_sixth_glyph_found);
     ASSERT_EQ(SVG_data_pointer, SVG_base_pointer + 0x3f2);
     SVG_data_pointer++;
 
-    bool is_seventh_glyph_found = loaders::find_first_glyph_in_SVG(SVG_base_pointer, SVG_data_pointer, file_size);
+    const bool is_seventh_glyph_found = loaders::find_first_glyph_in_SVG(SVG_base_pointer, SVG_data_pointer, file_size);
     ASSERT_TRUE(is_seventh_glyph_found);
     ASSERT_EQ(SVG_data_pointer, SVG_base_pointer + 0x421);
     SVG_data_pointer++;
 
-    bool is_eigth_glyph_found = loaders::find_first_glyph_in_SVG(SVG_base_pointer, SVG_data_pointer, file_size);
+    const bool is_eigth_glyph_found = loaders::find_first_glyph_in_SVG(SVG_base_pointer, SVG_data_pointer, file_size);
     ASSERT_TRUE(is_eigth_glyph_found);
     ASSERT_EQ(SVG_data_pointer, SVG_base_pointer + 0x48b);
     SVG_data_pointer++;
 
-    bool is_ninth_glyph_found = loaders::find_first_glyph_in_SVG(SVG_base_pointer, SVG_data_pointer, file_size);
+    const bool is_ninth_glyph_found = loaders::find_first_glyph_in_SVG(SVG_base_pointer, SVG_data_pointer, file_size);
     ASSERT_TRUE(is_ninth_glyph_found);
     ASSERT_EQ(SVG_data_pointer, SVG_base_pointer + 0x4fc);
     SVG_data_pointer++;
 
-    bool is_tenth_glyph_found = loaders::find_first_glyph_in_SVG(SVG_base_pointer, SVG_data_pointer, file_size);
+    const bool is_tenth_glyph_found = loaders::find_first_glyph_in_SVG(SVG_base_pointer, SVG_data_pointer, file_size);
     ASSERT_TRUE(is_tenth_glyph_found);
     ASSERT_EQ(SVG_data_pointer, SVG_base_pointer + 0x5d6);
 }
 
 TEST(font_must_be_loaded_appropriately, kongtext_svg)
 {
-    std::string font_filename = "kongtext.svg";
+    const std::string font_filename = "kongtext.svg";
 
     std::vector<std::vector<std::vector<glm::vec2>>> glyph_vertex_data;
     std::vector<std::string> glyph_names;
@@ -95,7 +93,7 @@ TEST(font_must_be_loaded_appropriately, kongtext_svg)
 
     const bool is_debug_mode = false; // Travis fails for too much output.
 
-    bool font_loading_result = loaders::load_SVG_font(
+    const bool font_loading_result = loaders::load_SVG_font(
             font_filename,
             glyph_vertex_data,
             glyph_names,

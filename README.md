@@ -215,6 +215,9 @@ Q: Why TinyScheme is chosen as the scripting language of Ylikuutio?
 A: I like Lisp-family languages and TinyScheme fulfils my
    requirements related to a small size and a suitable license.
 
+Q: Does Ylikuutio use right-handed or left-handed world coordinates?
+A: Ylikuutio uses right-handed world coordinates, so X grows eastward, Z grows southward, and Y grow upwards.
+
 ## Implemented functionality
 * 3D rendering
 * 2D text
@@ -300,7 +303,7 @@ A: I like Lisp-family languages and TinyScheme fulfils my
 * Suzanne the monkey is a standard [Blender](https://www.blender.org/) object. According to Blender license information: "All your artwork – images or movie files – including the .blend files and other data files Blender can write, is free for you to use as you like." Ylikuutio does not contain any code from Blender, however. [Blender itself is released under the GNU General Public License (GPL) 2 or later](https://www.blender.org/about/license/).
 
 ### Textures
-* Grass texture is from [Free Seamless Green Grass Textures](http://www.brusheezy.com/textures/20185-seamless-green-grass-textures).
+* Grass texture is from [Free Seamless Green Grass Textures](http://www.brusheezy.com/textures/20185-seamless-green-grass-textures), and is under CC-BY license.
 * A Cool Seamless Orange Fur Texture is from [My Free Textures](http://www.myfreetextures.com/a-cool-seamless-orange-fur-texture/). `orange_fur_texture.bmp` is scaled down and converted into BMP from the original `ornage-fur-texture.jpg` (sic). License conditions are available on [My Free Textures License/TOU page](http://www.myfreetextures.com/sample-page/).
 * Pink Marble Pavers Or Tiles Background Texture is from [My Free Textures](http://www.myfreetextures.com/marbles-pavers-tiles-background-texture/). `pavers1b2.bmp` is scaled down and converted into BMP from the original `pavers1b2.jpg`. License conditions are available on [My Free Textures License/TOU page](http://www.myfreetextures.com/sample-page/).
 

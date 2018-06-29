@@ -1,6 +1,7 @@
 #include "ylikuutio_string.hpp"
 
 // Include standard headers
+#include <cstddef>  // std::size_t
 #include <cstdio>   // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf etc.
 #include <cstring>  // std::memcmp, std::memcpy, std::strcmp, std::strlen, std::strncmp
 #include <iomanip>  // std::setfill, std::setw
@@ -16,14 +17,14 @@ namespace string
     bool check_and_report_if_some_string_matches(
             const char* const base_pointer,
             const char* const data_pointer,
-            const uint64_t data_size,
+            const std::size_t data_size,
             const std::vector<std::string> identifier_strings_vector)
     {
-        for (const std::string identifier_string : identifier_strings_vector)
+        for (const std::string& identifier_string : identifier_strings_vector)
         {
             const char* const identifier_string_char = identifier_string.c_str();
 
-            if (data_pointer + identifier_string.length() > base_pointer + data_size)
+            if (data_pointer + identifier_string.size() > base_pointer + data_size)
             {
                 // If current `identifier_string` can't fit in the memory region,
                 // proceed to the next `identifier_string`, if there is any left.
@@ -38,16 +39,39 @@ namespace string
         return false;
     }
 
+    bool check_and_report_if_some_string_matches(
+            const std::string& data_string,
+            const std::size_t data_index,
+            const std::vector<std::string> identifier_strings_vector)
+    {
+        for (const std::string& identifier_string : identifier_strings_vector)
+        {
+            if (data_index + identifier_string.size() > data_string.size())
+            {
+                // If current `identifier_string` can't fit in the memory region,
+                // proceed to the next `identifier_string`, if there is any left.
+                continue;
+            }
+
+            if (data_string.compare(data_index, identifier_string.size(), identifier_string) == 0)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     void extract_string(
             const char* const src_base_pointer,
             char*& src_data_pointer,
-            const uint64_t src_data_size,
+            const std::size_t src_data_size,
             const char* const dest_base_pointer,
             char* dest_data_pointer,
-            const uint64_t dest_data_size,
+            const std::size_t dest_data_size,
             const char* const char_end_string)
     {
-        while (src_data_pointer < src_base_pointer + src_data_size &&
+        // + 1 needed for both source and dest because of the null terminator.
+        while (src_data_pointer + 1 < src_base_pointer + src_data_size &&
                 dest_data_pointer + 1 < dest_base_pointer + dest_data_size &&
                 std::strncmp(src_data_pointer, char_end_string, std::strlen(char_end_string)) != 0)
         {
@@ -59,15 +83,16 @@ namespace string
     void extract_string_with_several_endings(
             const char* const src_base_pointer,
             char*& src_data_pointer,
-            const uint64_t src_data_size,
+            const std::size_t src_data_size,
             const char* const dest_base_pointer,
             char* dest_data_pointer,
-            const uint64_t dest_data_size,
+            const std::size_t dest_data_size,
             const char* const char_end_string)
     {
-        // This function copies characters from `src_mem_pointer` until a character matches.
+        // This function copies characters from `src_data_pointer` until a character matches.
 
-        while (src_data_pointer < src_base_pointer + src_data_size &&
+        // + 1 needed for both source and dest because of the null terminator.
+        while (src_data_pointer + 1 < src_base_pointer + src_data_size &&
                 dest_data_pointer + 1 < dest_base_pointer + dest_data_size)
         {
             uint32_t n_of_ending_characters = std::strlen(char_end_string);
@@ -89,22 +114,97 @@ namespace string
             // Copy it and advance the pointers accordingly.
             strncpy(dest_data_pointer++, src_data_pointer++, 1);
         }
+
         *dest_data_pointer = '\0';
         return;
     }
 
+    void extract_string_with_several_endings(
+            const std::string& data_string,
+            std::size_t& data_index,
+            const char* const dest_base_pointer,
+            char* dest_data_pointer,
+            const std::size_t dest_data_size,
+            const char* const char_end_string)
+    {
+        // This function copies characters from `src_data_pointer` until a character matches.
+
+        while (data_index < data_string.size() &&
+                dest_data_pointer + 1 < dest_base_pointer + dest_data_size)
+        {
+            uint32_t n_of_ending_characters = std::strlen(char_end_string);
+            const char* end_char_pointer;
+            end_char_pointer = char_end_string;
+            const std::string current_char_string = data_string.substr(data_index, 1);
+
+            // Check if current character is any of the ending characters.
+            while (*end_char_pointer != '\0')
+            {
+                if (std::strncmp(current_char_string.c_str(), end_char_pointer, 1) == 0)
+                {
+                    *dest_data_pointer = '\0';
+                    return;
+                }
+                end_char_pointer++;
+            }
+
+            // OK, current character is not any of the ending characters.
+            // Copy it and advance `dest_data_pointer` and `data_index` accordingly.
+            strncpy(dest_data_pointer++, current_char_string.c_str(), 1);
+            data_index++;
+        }
+
+        *dest_data_pointer = '\0';
+        return;
+    }
+
+    void extract_string_with_several_endings(
+            const std::string& data_string,
+            std::size_t& data_index,
+            std::string& dest_string,
+            const char* const char_end_string)
+    {
+        // This function copies characters from `src_data_pointer` until a character matches.
+        std::size_t original_data_index = data_index;
+
+        while (data_index < data_string.size())
+        {
+            uint32_t n_of_ending_characters = std::strlen(char_end_string);
+            const char* end_char_pointer;
+            end_char_pointer = char_end_string;
+            const std::string current_char_string = data_string.substr(data_index, 1);
+
+            // Check if current character is any of the ending characters.
+            while (*end_char_pointer != '\0')
+            {
+                if (std::strncmp(current_char_string.c_str(), end_char_pointer, 1) == 0)
+                {
+                    dest_string = data_string.substr(original_data_index, data_index - original_data_index);
+                    return;
+                }
+                end_char_pointer++;
+            }
+
+            // OK, current character is not any of the ending characters.
+            data_index++;
+        }
+
+        dest_string = data_string.substr(original_data_index, data_index - original_data_index);
+    }
+
     int32_t extract_last_part_of_string(
             const uint8_t* const src_base_pointer,
-            const uint64_t src_data_size,
+            const std::size_t src_data_size,
             uint8_t* const dest_base_pointer,
-            const uint64_t dest_data_size,
+            const std::size_t dest_data_size,
             const char separator)
     {
         uint8_t* src_data_pointer = const_cast<uint8_t*>(src_base_pointer);
         uint8_t* dest_data_pointer = dest_base_pointer;
         int32_t filename_length = 0; // length without trailing 0 byte.
 
-        while (src_data_pointer < src_base_pointer + src_data_size &&
+        // + 1 needed for both source and dest because of the null terminator.
+        while (src_data_pointer + 1 < src_base_pointer + src_data_size &&
                 dest_data_pointer + 1 < dest_base_pointer + dest_data_size)
         {
             if (*src_data_pointer == static_cast<uint8_t>(separator))
@@ -124,7 +224,7 @@ namespace string
     int32_t extract_int32_t_value_from_string(
             const char* const src_base_pointer,
             char*& src_data_pointer,
-            const uint64_t src_data_size,
+            const std::size_t src_data_size,
             const char* const char_end_string,
             const char* const description)
     {
@@ -138,7 +238,31 @@ namespace string
                 sizeof(char_number_buffer),
                 char_end_string);
 
-        uint32_t value = std::strtoul(char_number_buffer, nullptr, 10); // base 10.
+        int32_t value = std::strtol(char_number_buffer, nullptr, 10); // base 10.
+
+        if (description != nullptr)
+        {
+            std::printf("%s: %d\n", description, value);
+        }
+        return value;
+    }
+
+    int32_t extract_int32_t_value_from_string(
+            const std::string& data_string,
+            std::size_t& data_index,
+            const char* const char_end_string,
+            const char* const description)
+    {
+        char char_number_buffer[1024];
+        string::extract_string_with_several_endings(
+                data_string,
+                ++data_index,
+                char_number_buffer,
+                char_number_buffer,
+                sizeof(char_number_buffer),
+                char_end_string);
+
+        int32_t value = std::strtol(char_number_buffer, nullptr, 10); // base 10.
 
         if (description != nullptr)
         {
@@ -150,7 +274,7 @@ namespace string
     float extract_float_value_from_string(
             const char* const src_base_pointer,
             char*& src_data_pointer,
-            const uint64_t src_data_size,
+            const std::size_t src_data_size,
             const char* const char_end_string,
             const char* const description)
     {
@@ -159,6 +283,30 @@ namespace string
                 src_base_pointer,
                 ++src_data_pointer,
                 src_data_size,
+                char_number_buffer,
+                char_number_buffer,
+                sizeof(char_number_buffer),
+                char_end_string);
+
+        float value = std::strtof(char_number_buffer, nullptr);
+
+        if (description != nullptr)
+        {
+            std::printf("%s: %f\n", description, value);
+        }
+        return value;
+    }
+
+    float extract_float_value_from_string(
+            const std::string& data_string,
+            std::size_t& data_index,
+            const char* const char_end_string,
+            const char* const description)
+    {
+        char char_number_buffer[1024];
+        string::extract_string_with_several_endings(
+                data_string,
+                ++data_index,
                 char_number_buffer,
                 char_number_buffer,
                 sizeof(char_number_buffer),
@@ -307,7 +455,7 @@ namespace string
         return check_if_floating_point_string(my_string, maximum_safe_length_for_double_string);
     }
 
-    bool check_if_floating_point_string(const std::string& my_string, int32_t safe_number_of_chars)
+    bool check_if_floating_point_string(const std::string& my_string, const int32_t safe_number_of_chars)
     {
         int32_t n_chars = 0;
 
@@ -318,7 +466,7 @@ namespace string
 
         bool is_dot_found = false;
 
-        for (int32_t i = 0; i < my_string.length(); i++)
+        for (int32_t i = 0; i < my_string.size(); i++)
         {
             // Each of the characters must be one of the following:
             // 0123456789.-
@@ -340,7 +488,7 @@ namespace string
                     return false;
                 }
 
-                if (i == my_string.length() - 1)
+                if (i == my_string.size() - 1)
                 {
                     // Last character is dot.
                     return false;
@@ -376,7 +524,7 @@ namespace string
             return false;
         }
 
-        for (int32_t i = 0; i < my_string.length(); i++)
+        for (int32_t i = 0; i < my_string.size(); i++)
         {
             // Each of the characters must be one of the following:
             // 0123456789
@@ -402,7 +550,7 @@ namespace string
             return false;
         }
 
-        for (int32_t i = 0; i < my_string.length(); i++)
+        for (int32_t i = 0; i < my_string.size(); i++)
         {
             // Each of the characters must be one of the following:
             // 0123456789
@@ -416,7 +564,7 @@ namespace string
         return true;
     }
 
-    void print_hexdump(const void* const start_address, const void* const end_address) // `begin` is inclusive, `end is exclusive.
+    void print_hexdump(const void* const start_address, const void* const end_address) // `begin` is inclusive, `end` is exclusive.
     {
         void* void_start_address = const_cast<void*>(start_address);
         const int32_t line_width_in_bytes = 16;

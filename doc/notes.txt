@@ -21,6 +21,9 @@ Elevation data of the Earth:
 http://wiki.openstreetmap.org/wiki/SRTM
 http://e4ftl01.cr.usgs.gov/SRTM/SRTMGL3.003/
 
+NASA Visible Earth
+https://visibleearth.nasa.gov/
+
 Vegetation data of the Earth (43200 x 86400 pixels):
 http://landcover.usgs.gov/global_climatology.php
 

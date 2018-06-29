@@ -9,7 +9,7 @@
 
 TEST(GlyphStruct_must_be_initialized_appropriately, GlyphStruct)
 {
-    GlyphStruct test_glyph_struct;
+    const GlyphStruct test_glyph_struct;
     ASSERT_EQ(test_glyph_struct.glyph_vertex_data, nullptr);
     ASSERT_EQ(test_glyph_struct.glyph_name_pointer, nullptr);
     ASSERT_EQ(test_glyph_struct.unicode_char_pointer, nullptr);

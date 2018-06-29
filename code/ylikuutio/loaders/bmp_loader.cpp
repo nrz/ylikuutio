@@ -1,89 +1,94 @@
 #include "bmp_loader.hpp"
+#include "code/ylikuutio/file/file_loader.hpp"
+#include "code/ylikuutio/memory/memory_templates.hpp"
 
 // Include standard headers
+#include <algorithm> // std::copy
 #include <cstddef>  // std::size_t
 #include <cstdio>   // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf etc.
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <limits>   // std::numeric_limits
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
+#include <vector>   // std::vector
 
 namespace loaders
 {
     uint8_t* load_BMP_file(
-            const std::string image_path,
+            const std::string& bmp_filename,
             int32_t& image_width,
             int32_t& image_height,
             std::size_t& image_size)
     {
-        std::cout << "Loading BMP file " << image_path << " ...\n";
-
-        const uint32_t header_size = 54;
-
-        // Data read from the header of the BMP file
-        uint8_t header[header_size];
-        // Actual RGB image data.
-        uint8_t* image_data;
+        std::cout << "Loading BMP file " << bmp_filename << " ...\n";
 
         // Open the file
-        const char* char_image_path = image_path.c_str();
-        std::FILE* file = std::fopen(char_image_path, "rb");
-        if (!file)
+        const std::vector<uint8_t> file_content = file::binary_slurp(bmp_filename);
+
+        if (file_content.empty())
         {
-            std::cerr << image_path << " could not be opened.\n";
+            std::cerr << bmp_filename << " could not be opened, or the file is empty.\n";
             return nullptr;
         }
 
-        // Read the header, i.e. the 54 first bytes
+        const std::size_t header_size = 54;
 
-        // If less than 54 bytes are read, it's a problem.
-        if (std::fread(header, 1, header_size, file) != header_size)
+        if (file_content.size() < header_size)
         {
-            std::cerr << "not a correct BMP file.\n";
-            std::fclose(file);
+            // BMP header size is 54 bytes.
+            std::cerr << bmp_filename << " is not a correct BMP file.\n";
             return nullptr;
         }
+
+        if (file_content[0] != 'B' || file_content[1] != 'M')
+        {
+            // BMP begins always with "BM".
+            std::cerr << bmp_filename << " is not a correct BMP file.\n";
+            return nullptr;
+        }
+
+        uint8_t* file_content_uint8_t = (uint8_t*) file_content.data();
 
         // The start offset of pixel array in file.
-        uint32_t pixel_array_start_offset = header[0x0a];
+        uint32_t pixel_array_start_offset = ylikuutio::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(file_content_uint8_t, 0x0a);
 
-        // A BMP files always begins with "BM"
-        if ((header[0] != 'B') || (header[1] != 'M'))
+        if (pixel_array_start_offset >= file_content.size())
         {
-            std::cerr << "not a correct BMP file.\n";
-            std::fclose(file);
+            std::cerr << "is not a correct BMP file.\n";
             return nullptr;
         }
 
         // Make sure this is a 24bpp file
-        if (*(uint32_t*) &header[0x1e] != 0)
+        uint32_t bits_per_pixel = ylikuutio::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(file_content_uint8_t, 0x1c);
+
+        if (bits_per_pixel != 24)
         {
-            std::cerr << "not a correct BMP file.\n";
-            std::fclose(file);
+            std::cerr << "not a correct 24-bit BMP file.\n";
             return nullptr;
         }
 
-        if (*(uint32_t*) &header[0x1c] != 24)
+        uint32_t compression_type = ylikuutio::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(file_content_uint8_t, 0x1e);
+
+        if (compression_type != 0)
         {
-            std::cerr << "not a correct BMP file.\n";
-            std::fclose(file);
+            std::cerr << "not a correct uncompressed 24-bit BMP file.\n";
             return nullptr;
         }
 
         // Read the information about the image
-        uint32_t image_size_uint32_t = *(uint32_t*) &header[0x22];
+        uint32_t image_size_uint32_t = ylikuutio::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(file_content_uint8_t, 0x22);
+
         if (image_size_uint32_t > 2147483647)
         {
             std::cerr << "BMP file is too big, size: " << image_size_uint32_t << " bytes.\n";
-            std::fclose(file);
             return nullptr;
         }
 
         image_size = static_cast<std::size_t>(image_size_uint32_t);
-        image_width = *(int32_t*) &header[0x12];
-        image_height = *(int32_t*) &header[0x16];
-
         std::cout << "image size is " << image_size << " bytes.\n";
+
+        image_width = ylikuutio::memory::read_nonaligned_32_bit<uint8_t, int32_t>(file_content_uint8_t, 0x12);
+        image_height = ylikuutio::memory::read_nonaligned_32_bit<uint8_t, int32_t>(file_content_uint8_t, 0x16);
 
         // Some BMP files are misformatted, guess missing information
         if (image_size == 0)
@@ -93,7 +98,6 @@ namespace loaders
             if (number_of_pixels > std::numeric_limits<std::size_t>::max() / 4)
             {
                 std::cerr << "BMP file is too big, number of pixels: " << number_of_pixels << "\n";
-                std::fclose(file);
                 return nullptr;
             }
 
@@ -101,35 +105,15 @@ namespace loaders
         }
 
         // Create a buffer.
-        image_data = new uint8_t[image_size];
+        uint8_t* image_data = new uint8_t[image_size];
 
         if (image_data == nullptr)
         {
             std::cerr << "Reserving memory for image data failed.\n";
-            std::fclose(file);
             return nullptr;
         }
 
-        // Move file pointer to the start of the pixel array.
-        if (std::fseek(file, pixel_array_start_offset, SEEK_SET) != 0)
-        {
-            std::cerr << "Moving BMP file position indicator failed.\n";
-            std::fclose(file);
-            delete[] image_data;
-            return nullptr;
-        }
-
-        // Read the actual image data from the file into the buffer.
-        if (std::fread(image_data, 1, image_size, file) != image_size)
-        {
-            std::cerr << "Reading image data from file failed.\n";
-            std::fclose(file);
-            delete[] image_data;
-            return nullptr;
-        }
-
-        // Everything is in memory now, so the file can be closed.
-        std::fclose(file);
+        std::copy(file_content.begin() + pixel_array_start_offset, file_content.end(), image_data);
 
         return image_data;
     }
