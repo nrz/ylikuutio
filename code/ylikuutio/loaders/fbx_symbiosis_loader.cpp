@@ -227,8 +227,9 @@ namespace loaders
 
             if (uvs == nullptr)
             {
+                // `uvs` should not be `nullptr`.
                 std::cerr << "Error: uvs is nullptr!\n";
-                return false;
+                continue;
             }
 
             std::vector<glm::vec3> mesh_out_vertices;
