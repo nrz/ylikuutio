@@ -192,6 +192,11 @@ namespace ontology
             // Create `SymbiontMaterial`s.
             for (const ofbx::Texture* ofbx_texture : ofbx_diffuse_texture_pointer_vector)
             {
+                if (ofbx_texture == nullptr)
+                {
+                    continue;
+                }
+
                 std::cout << "Creating ontology::SymbiontMaterial* based on ofbx::Texture* at 0x" << std::hex << (uint64_t) ofbx_texture << std::dec << " ...\n";
                 MaterialStruct material_struct;
                 material_struct.shader = this->parent;
