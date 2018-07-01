@@ -56,9 +56,9 @@ namespace ylikuutio
                 const char* const char_end_string);
 
         int32_t extract_last_part_of_string(
-                const uint8_t* const src_base_pointer,
+                const char* const src_base_pointer,
                 const std::size_t src_data_size,
-                uint8_t* const dest_base_pointer,
+                char* const dest_base_pointer,
                 const std::size_t dest_data_size,
                 const char separator);
 
@@ -110,6 +110,7 @@ namespace ylikuutio
         bool check_if_unsigned_integer_string(const std::string& my_string);
 
         void print_hexdump(const void* const start_address, const void* const end_address); // `begin` is inclusive, `end is exclusive.
+        void print_hexdump(const std::string& my_string);
     }
 }
 

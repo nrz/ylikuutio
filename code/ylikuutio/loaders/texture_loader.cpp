@@ -78,19 +78,18 @@ namespace loaders
     GLuint load_FBX_texture(const ofbx::Texture* const ofbx_texture)
     {
         // Load the texture.
-        const uint8_t* texture_data_begin = static_cast<const uint8_t*>(ofbx_texture->getFileName().begin);
-        const uint8_t* texture_data_end = static_cast<const uint8_t*>(ofbx_texture->getFileName().end);
+        const std::string filename = std::string((const char*) ofbx_texture->getFileName().begin, (const char*) ofbx_texture->getFileName().end);
 
-        ylikuutio::string::print_hexdump(texture_data_begin, texture_data_end);
+        ylikuutio::string::print_hexdump(filename);
 
         // Find out the filename.
         const int32_t filename_buffer_size = 1024;
-        uint8_t filename_buffer[filename_buffer_size];
+        char filename_buffer[filename_buffer_size];
         const char separator = '/'; // FIXME: don't assume slash as some operating systems may use other characters.
 
         int32_t filename_length = ylikuutio::string::extract_last_part_of_string(
-                texture_data_begin,
-                texture_data_end - texture_data_begin + 1,
+                filename.c_str(),
+                filename.size(),
                 filename_buffer,
                 filename_buffer_size,
                 separator);
@@ -102,7 +101,7 @@ namespace loaders
 
         // Find out the file suffix (filetype).
         const int32_t file_suffix_buffer_size = 16;
-        uint8_t file_suffix_buffer[file_suffix_buffer_size];
+        char file_suffix_buffer[file_suffix_buffer_size];
         const char suffix_separator = '.';
 
         ylikuutio::string::extract_last_part_of_string(
@@ -112,19 +111,20 @@ namespace loaders
                 file_suffix_buffer_size,
                 suffix_separator);
 
-        char* texture_file_suffix = static_cast<char*>(static_cast<void*>(file_suffix_buffer));
+        const char* texture_file_suffix = static_cast<char*>(static_cast<void*>(file_suffix_buffer));
 
         std::cout << "Texture file suffix: " << texture_file_suffix << "\n";
 
         if (strncmp(texture_file_suffix, "bmp", sizeof("bmp")) == 0)
         {
-            std::string filename_string = std::string((char*) &filename_buffer);
+            const std::string filename_string = std::string((char*) &filename_buffer);
             return loaders::load_BMP_texture(filename_string);
         }
         else if (strncmp(texture_file_suffix, "png", sizeof("png")) == 0)
         {
             // TODO: implement PNG loading!
         }
+
         return 0;
     }
 

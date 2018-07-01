@@ -1,6 +1,7 @@
 #include "ylikuutio_string.hpp"
 
 // Include standard headers
+#include <algorithm> // std::copy
 #include <cstddef>  // std::size_t
 #include <cstdio>   // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf etc.
 #include <cstring>  // std::memcmp, std::memcpy, std::strcmp, std::strlen, std::strncmp
@@ -195,30 +196,34 @@ namespace ylikuutio
         }
 
         int32_t extract_last_part_of_string(
-                const uint8_t* const src_base_pointer,
+                const char* const src_base_pointer,
                 const std::size_t src_data_size,
-                uint8_t* const dest_base_pointer,
+                char* const dest_base_pointer,
                 const std::size_t dest_data_size,
                 const char separator)
         {
-            uint8_t* src_data_pointer = const_cast<uint8_t*>(src_base_pointer);
-            uint8_t* dest_data_pointer = dest_base_pointer;
+            char* src_data_pointer = const_cast<char*>(src_base_pointer);
+            char* src_first_char_after_separator_pointer = nullptr;
+            char* dest_data_pointer = dest_base_pointer;
             int32_t filename_length = 0; // length without trailing 0 byte.
 
             // + 1 needed for both source and dest because of the null terminator.
-            while (src_data_pointer + 1 < src_base_pointer + src_data_size &&
-                    dest_data_pointer + 1 < dest_base_pointer + dest_data_size)
+            for ( ; src_data_pointer < src_base_pointer + src_data_size && dest_data_pointer + 1 < dest_base_pointer + dest_data_size; src_data_pointer++)
             {
-                if (*src_data_pointer == static_cast<uint8_t>(separator))
+                if (*src_data_pointer == static_cast<char>(separator))
                 {
-                    dest_data_pointer = dest_base_pointer;
-                    src_data_pointer++;
+                    src_first_char_after_separator_pointer = src_data_pointer + 1;
                     filename_length = 0;
-                    continue;
                 }
-                std::memcpy(dest_data_pointer++, src_data_pointer++, 1);
-                filename_length++;
+                else if (src_first_char_after_separator_pointer != nullptr)
+                {
+                    // separator pointer found.
+                    filename_length++;
+                }
             }
+
+            std::copy(src_first_char_after_separator_pointer, src_first_char_after_separator_pointer + filename_length, dest_base_pointer);
+            dest_data_pointer += filename_length;
             *dest_data_pointer = '\0';
             return filename_length;
         }
@@ -577,6 +582,44 @@ namespace ylikuutio
             for (uint8_t* data_pointer = static_cast<uint8_t*>(void_start_address); data_pointer < end_address; data_pointer++)
             {
                 const uint8_t data_byte = static_cast<uint8_t>(*data_pointer);
+                const char data_char = (data_byte >= 0x20 && data_byte <= 0x7f ? static_cast<char>(data_byte) : '.');
+                current_line_ascii += data_char;
+
+                uint32_t data_32_bit = static_cast<uint32_t>(data_byte); // to get the hexadecimal representation instead of the actual value.
+                std::stringstream my_stream;
+                my_stream << std::setfill('0') << std::setw(2) << std::hex << data_32_bit << std::dec; // std::hex does not work on char values.
+                current_line_hex += my_stream.str();
+                current_line_hex += " ";
+
+                if (++characters_on_this_line >= line_width_in_bytes)
+                {
+                    std::cout << current_line_hex << " " << current_line_ascii << "\n";
+                    current_line_hex = "";
+                    current_line_ascii = "";
+                    characters_on_this_line = 0;
+                }
+            }
+
+            if (characters_on_this_line > 0)
+            {
+                const int32_t size_of_each_bytes_hexdump = 3; // each byte's hexdump takes 3 characters.
+                const int32_t number_of_spaces_needed = (line_width_in_bytes - characters_on_this_line) * size_of_each_bytes_hexdump + 1;
+                std::cout << current_line_hex << std::string(number_of_spaces_needed, ' ') << current_line_ascii << "\n";
+            }
+
+            std::cout << "\n";
+        }
+
+        void print_hexdump(const std::string& my_string)
+        {
+            const int32_t line_width_in_bytes = 16;
+            int32_t characters_on_this_line = 0;
+            std::string current_line_ascii = "";
+            std::string current_line_hex = "";
+
+            for (auto it = my_string.begin(); it != my_string.end(); it++)
+            {
+                const uint8_t data_byte = static_cast<uint8_t>(*it);
                 const char data_char = (data_byte >= 0x20 && data_byte <= 0x7f ? static_cast<char>(data_byte) : '.');
                 current_line_ascii += data_char;
 
