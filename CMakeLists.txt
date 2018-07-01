@@ -250,7 +250,6 @@ configure_file(external/tinyscheme-1.41/init.scm init.scm COPYONLY)
 
 # 3D models.
 configure_file(res/objects/custom/suzanne.obj suzanne.obj COPYONLY)
-configure_file(res/objects/snow_cottage_triangulated.obj snow_cottage_triangulated.obj COPYONLY)
 configure_file(res/objects/www.blendswap.com/46359_freight_train/freight_train.fbx freight_train.fbx COPYONLY)
 configure_file(res/objects/www.blendswap.com/46359_freight_train/textures/freight_train_chassis.bmp freight_train_chassis.bmp COPYONLY)
 configure_file(res/objects/www.blendswap.com/46359_freight_train/textures/freight_train_box_expage.bmp freight_train_box_expage.bmp COPYONLY)
