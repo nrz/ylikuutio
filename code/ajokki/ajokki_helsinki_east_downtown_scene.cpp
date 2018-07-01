@@ -158,48 +158,6 @@ namespace ajokki
         helsinki_east_downtown_struct.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
         entity_factory->create_Object(helsinki_east_downtown_struct);
 
-        // Create the species, store it in `snow_cottage_species`.
-        SpeciesStruct snow_cottage_species_struct;
-        snow_cottage_species_struct.scene = helsinki_east_downtown_scene;
-        snow_cottage_species_struct.shader = helsinki_east_downtown_shader;
-        snow_cottage_species_struct.material = pink_geometric_tiles_material;
-        snow_cottage_species_struct.model_file_format = "obj";
-        snow_cottage_species_struct.model_filename = "snow_cottage_triangulated.obj";
-        snow_cottage_species_struct.light_position = glm::vec3(0, 100000, 100000);
-
-        std::cout << "Creating ontology::Entity* snow_cottage_species_entity ...\n";
-        ontology::Entity* snow_cottage_species_entity = entity_factory->create_Species(snow_cottage_species_struct);
-        std::cout << "Creating ontology::Species* snow_cottage_species ...\n";
-        ontology::Species* snow_cottage_species = dynamic_cast<ontology::Species*>(snow_cottage_species_entity);
-
-        if (snow_cottage_species == nullptr)
-        {
-            std::cerr << "Failed to create snow cottage Species.\n";
-            return nullptr;
-        }
-
-        snow_cottage_species->set_name("snow_cottage_species");
-
-        // Create snow cottage, store it in `snow_cottage1`.
-        ObjectStruct snow_cottage_object_struct1;
-        snow_cottage_object_struct1.species_parent = snow_cottage_species;
-        snow_cottage_object_struct1.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
-        snow_cottage_object_struct1.cartesian_coordinates = glm::vec3(121.50f, 126.50f, 63.70f);
-        snow_cottage_object_struct1.rotate_angle = 0.10f;
-        snow_cottage_object_struct1.rotate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
-        snow_cottage_object_struct1.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
-
-        /*
-           ontology::Entity* snow_cottage_object_entity = entity_factory->create_Object(snow_cottage_object_struct1);
-           ontology::Object* snow_cottage_object = dynamic_cast<ontology::Object*>(snow_cottage_object_entity);
-
-           if (snow_cottage_object == nullptr)
-           {
-           std::cerr << "Failed to create snow cottage Object.\n";
-           return nullptr;
-           }
-           */
-
         SpeciesStruct suzanne_species_struct;
         suzanne_species_struct.scene = helsinki_east_downtown_scene;
         suzanne_species_struct.shader = helsinki_east_downtown_shader;
