@@ -335,6 +335,52 @@ namespace ajokki
 
         cat2->set_name("cat2");
 
+        SymbiosisStruct freight_train_symbiosis_struct;
+        freight_train_symbiosis_struct.parent = helsinki_east_downtown_shader;
+        freight_train_symbiosis_struct.model_file_format = "fbx";
+        freight_train_symbiosis_struct.model_filename = "freight_train.fbx";
+        freight_train_symbiosis_struct.light_position = glm::vec3(0, 100000, 100000);
+
+        std::cout << "Creating ontology::Entity* freight_train_symbiosis_entity ...\n";
+        ontology::Entity* freight_train_symbiosis_entity = entity_factory->create_Symbiosis(freight_train_symbiosis_struct);
+
+        std::cout << "Creating ontology::Symbiosis* freight_train_symbiosis ...\n";
+        ontology::Symbiosis* freight_train_symbiosis = dynamic_cast<ontology::Symbiosis*>(freight_train_symbiosis_entity);
+
+        if (freight_train_symbiosis == nullptr)
+        {
+            std::cerr << "Failed to create freight_train Symbiosis.\n";
+            return nullptr;
+        }
+
+        freight_train_symbiosis->set_name("freight_train_symbiosis");
+
+        freight_train_symbiosis->create_symbionts();
+
+        HolobiontStruct freight_train_object_struct1;
+        freight_train_object_struct1.symbiosis_parent = freight_train_symbiosis;
+        freight_train_object_struct1.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
+        freight_train_object_struct1.cartesian_coordinates = glm::vec3(125.00f, 40.00f, 80.00f);
+        freight_train_object_struct1.rotate_angle = 0.00f;
+        freight_train_object_struct1.rotate_vector = glm::vec3(1.0f, 1.0f, 1.0f);
+        freight_train_object_struct1.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
+
+        std::cout << "Creating ontology::Entity* freight_train1_entity ...\n";
+
+        ontology::Entity* freight_train1_entity = entity_factory->create_Holobiont(freight_train_object_struct1);
+
+        std::cout << "Creating ontology::Holobiont* freight_train1 ...\n";
+
+        ontology::Holobiont* freight_train1 = dynamic_cast<ontology::Holobiont*>(freight_train1_entity);
+
+        if (freight_train1 == nullptr)
+        {
+            std::cerr << "Failed to create freight_train1 Object.\n";
+            return nullptr;
+        }
+
+        freight_train1->set_name("freight_train1");
+
         SymbiosisStruct turbo_polizei_symbiosis_struct;
         turbo_polizei_symbiosis_struct.parent = helsinki_east_downtown_shader;
         turbo_polizei_symbiosis_struct.model_file_format = "fbx";
