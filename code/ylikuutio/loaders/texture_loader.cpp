@@ -121,7 +121,7 @@ namespace loaders
             std::string filename_string = std::string((char*) &filename_buffer);
             return loaders::load_BMP_texture(filename_string);
         }
-        else if (strncmp(texture_file_suffix, "bmp", sizeof("bmp")) == 0)
+        else if (strncmp(texture_file_suffix, "png", sizeof("png")) == 0)
         {
             // TODO: implement PNG loading!
         }
