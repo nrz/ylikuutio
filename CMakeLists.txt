@@ -249,7 +249,9 @@ configure_file(code/tinyscheme/hello_world.scm hello_world.scm COPYONLY)
 configure_file(external/tinyscheme-1.41/init.scm init.scm COPYONLY)
 
 # 3D models.
+# Suzanne.
 configure_file(res/objects/custom/suzanne.obj suzanne.obj COPYONLY)
+# Freight train.
 configure_file(res/objects/www.blendswap.com/46359_freight_train/freight_train.fbx freight_train.fbx COPYONLY)
 configure_file(res/objects/www.blendswap.com/46359_freight_train/textures/freight_train_chassis.bmp freight_train_chassis.bmp COPYONLY)
 configure_file(res/objects/www.blendswap.com/46359_freight_train/textures/freight_train_box_expage.bmp freight_train_box_expage.bmp COPYONLY)
@@ -259,13 +261,15 @@ configure_file(res/objects/www.blendswap.com/46359_freight_train/textures/freigh
 configure_file(res/objects/www.blendswap.com/46359_freight_train/textures/freight_train_gray_concrete.bmp freight_train_gray_concrete.bmp COPYONLY)
 configure_file(res/objects/www.blendswap.com/46359_freight_train/textures/freight_train_iron_texture_by_pabloalvin.bmp freight_train_iron_texture_by_pabloalvin.bmp COPYONLY)
 configure_file(res/objects/www.blendswap.com/46359_freight_train/textures/freight_train_stone.bmp freight_train_stone.bmp COPYONLY)
-
+# Turbo polizei.
 configure_file(res/objects/www.blendswap.com/74227_Porsche_997_turbo_polizei_lowpoly/turbo_polizei.fbx turbo_polizei.fbx COPYONLY)
 configure_file(res/objects/www.blendswap.com/74227_Porsche_997_turbo_polizei_lowpoly/textures/car.png car.png COPYONLY)
 configure_file(res/objects/www.blendswap.com/74227_Porsche_997_turbo_polizei_lowpoly/textures/wheell.png wheell.png COPYONLY)
 configure_file(res/objects/www.blendswap.com/74227_Porsche_997_turbo_polizei_lowpoly/textures/car.bmp car.bmp COPYONLY)
 configure_file(res/objects/www.blendswap.com/74227_Porsche_997_turbo_polizei_lowpoly/textures/wheell.bmp wheell.bmp COPYONLY)
+# Horse.
 configure_file(res/objects/www.blendswap.com/76528_horse/horse.fbx horse.fbx COPYONLY)
+# Cat.
 configure_file(res/objects/www.blendswap.com/86110_rigged_and_animated_cat/cat.fbx cat.fbx COPYONLY)
 
 # Textures.
