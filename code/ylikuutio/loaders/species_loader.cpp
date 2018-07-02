@@ -61,6 +61,8 @@ namespace loaders
                     out_UVs,
                     out_normals,
                     is_debug_mode);
+
+            std::cout << species_loader_struct.model_filename << " loaded successfully.\n";
         }
         else if (species_loader_struct.model_file_format.compare("srtm") == 0 || species_loader_struct.model_file_format.compare("SRTM") == 0)
         {
@@ -109,6 +111,8 @@ namespace loaders
             return false;
         }
 
+        std::cout << "Indexing...\n";
+
         // Fill the index buffer.
         ontology::indexVBO(
                 out_vertices,
@@ -118,6 +122,8 @@ namespace loaders
                 indexed_vertices,
                 indexed_UVs,
                 indexed_normals);
+
+        std::cout << "Indexing completed successfully.\n";
 
         // Load it into a VBO.
         glGenBuffers(1, vertexbuffer);
