@@ -37,6 +37,7 @@ typedef struct SpeciesStruct
         light_position(glm::vec3(0.0f, 0.0f, 0.0f)),
         latitude(0.0f),
         longitude(0.0f),
+        mesh_i(0),
         x_step(1),
         z_step(1),
         triangulation_type("bilinear_interpolation")
@@ -64,6 +65,7 @@ typedef struct SpeciesStruct
     glm::vec3 light_position;                // light position.
     double latitude;                         // in degrees, for SRTM model files.
     double longitude;                        // in degrees, for SRTM model files.
+    int32_t mesh_i;                          // for FBX.
     uint32_t x_step;                         // Step in x-dimension for input data (set to 1 to load all data points/measurements).
     uint32_t z_step;                         // Step in z-dimension for input data (set to 1 to load all data points/measurements).
     std::string triangulation_type;          // `"bilinear_interpolation"`, `"southwest_northeast_edges"`, `"southeast_northwest_edges"`.
