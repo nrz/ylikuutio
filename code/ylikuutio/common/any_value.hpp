@@ -140,33 +140,37 @@ namespace datatypes
             AnyValue(const std::string& type, glm::vec4* const glm_vec3_pointer);
 
             int type;
-            bool bool_value;
-            char char_value;
-            float float_value;
-            double double_value;
-            int32_t int32_t_value;
-            uint32_t uint32_t_value;
-            bool* bool_pointer;
-            float* float_pointer;
-            double* double_pointer;
-            int32_t* int32_t_pointer;
-            uint32_t* uint32_t_pointer;
-            ontology::Universe* universe;
-            ontology::Scene* scene_pointer;
-            ontology::Shader* shader_pointer;
-            ontology::Material* material_pointer;
-            ontology::Species* species_pointer;
-            ontology::Object* object_pointer;
-            ontology::VectorFont* vector_font_pointer;
-            ontology::Glyph* glyph_pointer;
-            ontology::Text3D* text3D_pointer;
-            ontology::Symbiosis* symbiosis_pointer;
-            ontology::Font2D* font2D_pointer;
-            console::Console* console_pointer;
-            SphericalCoordinatesStruct* spherical_coordinates_struct_pointer;
-            std::string* std_string_pointer;
-            glm::vec3* glm_vec3_pointer;
-            glm::vec4* glm_vec4_pointer;
+
+            union
+            {
+                bool bool_value;
+                char char_value;
+                float float_value;
+                double double_value;
+                int32_t int32_t_value;
+                uint32_t uint32_t_value;
+                bool* bool_pointer;
+                float* float_pointer;
+                double* double_pointer;
+                int32_t* int32_t_pointer;
+                uint32_t* uint32_t_pointer;
+                ontology::Universe* universe;
+                ontology::Scene* scene_pointer;
+                ontology::Shader* shader_pointer;
+                ontology::Material* material_pointer;
+                ontology::Species* species_pointer;
+                ontology::Object* object_pointer;
+                ontology::VectorFont* vector_font_pointer;
+                ontology::Glyph* glyph_pointer;
+                ontology::Text3D* text3D_pointer;
+                ontology::Symbiosis* symbiosis_pointer;
+                ontology::Font2D* font2D_pointer;
+                console::Console* console_pointer;
+                SphericalCoordinatesStruct* spherical_coordinates_struct_pointer;
+                std::string* std_string_pointer;
+                glm::vec3* glm_vec3_pointer;
+                glm::vec4* glm_vec4_pointer;
+            };
 
         private:
             void set_default_values();

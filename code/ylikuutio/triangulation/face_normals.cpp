@@ -136,11 +136,7 @@ namespace geometry
                     face_normal = glm::normalize(glm::cross(edge1, edge2));
                     face_normal_vector_vec3.push_back(face_normal);
                 }
-                else
-                {
-                    std::cerr << "invalid triangulation type!\n";
-                    return false;
-                }
+
                 current_interpolated_vertex_i++;
             }
         }

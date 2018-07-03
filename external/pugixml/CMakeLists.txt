@@ -1,10 +1,11 @@
-project(pugixml)
+cmake_minimum_required(VERSION 3.0)
 
-cmake_minimum_required(VERSION 2.8.12)
+project(pugixml VERSION 1.9)
 
 option(BUILD_SHARED_LIBS "Build shared instead of static library" OFF)
 option(BUILD_TESTS "Build tests" OFF)
-option(BUILD_PKGCONFIG "Build in PKGCONFIG mode" OFF)
+option(USE_VERSIONED_LIBDIR "Use a private subdirectory to install the headers and libs" OFF)
+option(USE_POSTFIX "Use separate postfix for each configuration to make sure you can install multiple build outputs" OFF)
 
 set(BUILD_DEFINES "" CACHE STRING "Build defines")
 
@@ -28,7 +29,7 @@ include(GNUInstallDirs)
 mark_as_advanced(CLEAR CMAKE_INSTALL_LIBDIR CMAKE_INSTALL_INCLUDEDIR)
 
 set(HEADERS src/pugixml.hpp src/pugiconfig.hpp)
-set(SOURCES ${HEADERS} src/pugixml.cpp)
+set(SOURCES src/pugixml.cpp)
 
 if(DEFINED BUILD_DEFINES)
 	foreach(DEFINE ${BUILD_DEFINES})
@@ -37,9 +38,14 @@ if(DEFINED BUILD_DEFINES)
 endif()
 
 if(BUILD_SHARED_LIBS)
-	add_library(pugixml SHARED ${SOURCES})
+	add_library(pugixml SHARED ${HEADERS} ${SOURCES})
 else()
-	add_library(pugixml STATIC ${SOURCES})
+	add_library(pugixml STATIC ${HEADERS} ${SOURCES})
+endif()
+
+# Export symbols for shared library builds
+if(BUILD_SHARED_LIBS AND MSVC)
+	target_compile_definitions(pugixml PRIVATE "PUGIXML_API=__declspec(dllexport)")
 endif()
 
 # Enable C++11 long long for compilers that are capable of it
@@ -47,17 +53,20 @@ if(NOT ${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION} STRLESS 3.1 AND ";${CMAKE_C
 	target_compile_features(pugixml PUBLIC cxx_long_long_type)
 endif()
 
-set_target_properties(pugixml PROPERTIES VERSION 1.8 SOVERSION 1)
-get_target_property(PUGIXML_VERSION_STRING pugixml VERSION)
+set_target_properties(pugixml PROPERTIES VERSION ${pugixml_VERSION} SOVERSION 1)
 
-if(BUILD_PKGCONFIG)
+if(USE_VERSIONED_LIBDIR)
 	# Install library into its own directory under LIBDIR
-	set(INSTALL_SUFFIX /pugixml-${PUGIXML_VERSION_STRING})
+	set(INSTALL_SUFFIX /pugixml-${pugixml_VERSION})
 endif()
 
 target_include_directories(pugixml PUBLIC
 	$<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/src>
 	$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}${INSTALL_SUFFIX}>)
+
+if(USE_POSTFIX AND CMAKE_CONFIGURATION_TYPES)
+	set_target_properties(pugixml PROPERTIES DEBUG_POSTFIX "_d" MINSIZEREL_POSTFIX "_m" RELWITHDEBINFO_POSTFIX "_r")
+endif()
 
 install(TARGETS pugixml EXPORT pugixml-config
 	ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}${INSTALL_SUFFIX}
@@ -66,10 +75,8 @@ install(TARGETS pugixml EXPORT pugixml-config
 install(FILES ${HEADERS} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}${INSTALL_SUFFIX})
 install(EXPORT pugixml-config DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/pugixml)
 
-if(BUILD_PKGCONFIG)
-	configure_file(scripts/pugixml.pc.in ${PROJECT_BINARY_DIR}/pugixml.pc @ONLY)
-	install(FILES ${PROJECT_BINARY_DIR}/pugixml.pc DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/pkgconfig)
-endif()
+configure_file(scripts/pugixml.pc.in ${PROJECT_BINARY_DIR}/pugixml.pc @ONLY)
+install(FILES ${PROJECT_BINARY_DIR}/pugixml.pc DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}/pkgconfig)
 
 if(BUILD_TESTS)
 	file(GLOB TEST_SOURCES tests/*.cpp)

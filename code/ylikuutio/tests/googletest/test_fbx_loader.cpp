@@ -251,3 +251,110 @@ TEST(fbx_file_must_be_loaded_appropriately, rigged_and_animated_cat)
     const bool result = loaders::load_FBX(filename, mesh_i, out_vertices, out_UVs, out_normals, is_debug_mode);
     ASSERT_TRUE(result);
 }
+
+TEST(fbx_file_must_be_loaded_appropriately, freight_train)
+{
+    const std::string filename = "freight_train.fbx";
+    std::vector<uint8_t> data_vector = file::binary_slurp(filename);
+    ASSERT_EQ(data_vector.size(), 426124);                                // size of `freight_train.fbx` in bytes.
+
+    const u8* const data = reinterpret_cast<unsigned char*>(data_vector.data());
+    ASSERT_NE(data, nullptr);
+
+    const int size = data_vector.size();
+    ASSERT_EQ(size, 426124);                                             // size of `freight_train.fbx` in bytes.
+
+    const ofbx::IScene* const ofbx_iscene = ofbx::load(data, size);
+    ASSERT_NE(ofbx_iscene, nullptr);
+
+    const ofbx::IElement* const ofbx_ielement = ofbx_iscene->getRootElement();
+    ASSERT_NE(ofbx_ielement, nullptr);
+
+    const ofbx::Object* const ofbx_object = ofbx_iscene->getRoot();
+    ASSERT_NE(ofbx_object, nullptr);
+    const ofbx::Object::Type ofbx_object_type = ofbx_object->getType();
+    ASSERT_EQ(ofbx_object_type, ofbx::Object::Type::ROOT);
+
+    const int ofbx_mesh_count = ofbx_iscene->getMeshCount();
+    ASSERT_GT(ofbx_mesh_count, 0);
+
+    // FBX file may be several meshes (`ofbx::Mesh`).
+    // Each mesh may have several materials (`ofbx::Material`).
+    // Each material has a texture (`ofbx::Texture`).
+
+    for (int i = 0; i < ofbx_mesh_count; i++)
+    {
+        const ofbx::Mesh* const mesh = ofbx_iscene->getMesh(i);
+        ASSERT_NE(mesh, nullptr);
+
+        const ofbx::Geometry* const geometry = mesh->getGeometry();
+        ASSERT_NE(geometry, nullptr);
+
+        const ofbx::Vec3* const vertices = geometry->getVertices();
+
+        const int vertex_count = geometry->getVertexCount();
+        ASSERT_GE(vertex_count, 0);
+
+        const ofbx::Vec3* const normals = geometry->getNormals();
+
+        const ofbx::Vec2* const uvs = geometry->getUVs();
+
+        const ofbx::Vec4* const colors = geometry->getColors();
+
+        const ofbx::Vec3* const tangents = geometry->getTangents();
+
+        const ofbx::Skin* const skin = geometry->getSkin();
+
+        const int* const materials = geometry->getMaterials();
+
+        const ofbx::Matrix geometric_matrix = mesh->getGeometricMatrix();
+
+        const int material_count = mesh->getMaterialCount();
+        ASSERT_GT(material_count, 0);
+
+        for (int j = 0; j < material_count; j++)
+        {
+            const ofbx::Material* const material = mesh->getMaterial(j);
+            ASSERT_NE(material, nullptr);
+
+            const ofbx::Object::Type material_type = material->s_type;
+            ASSERT_EQ(material_type, ofbx::Object::Type::MATERIAL);
+
+            const ofbx::Texture* const diffuse_texture = material->getTexture(ofbx::Texture::DIFFUSE);
+            if (diffuse_texture != nullptr)
+            {
+                const ofbx::DataView dataview_filename = diffuse_texture->getFileName();
+                const ofbx::DataView dataview_rel_filename = diffuse_texture->getRelativeFileName();
+            }
+
+            const ofbx::Texture* const normal_texture = material->getTexture(ofbx::Texture::NORMAL);
+
+            const ofbx::Texture* const count_texture = material->getTexture(ofbx::Texture::COUNT);
+
+            const ofbx::Color color = material->getDiffuseColor();
+
+            const ofbx::Object* const parent = material->getParent();
+            ASSERT_NE(parent, nullptr);
+
+            const ofbx::RotationOrder rotation_order = material->getRotationOrder();
+            ASSERT_EQ(rotation_order, ofbx::RotationOrder::EULER_XYZ);
+        }
+
+        // Base struct `Object` functions for `const ofbx::Mesh* mesh`.
+
+        const ofbx::RotationOrder rotation_order = mesh->getRotationOrder();
+        ASSERT_EQ(rotation_order, ofbx::RotationOrder::EULER_XYZ);
+
+        const bool mesh_is_node = mesh->isNode();
+        ASSERT_TRUE(mesh_is_node);
+    }
+
+    const int ofbx_animation_stack_count = ofbx_iscene->getAnimationStackCount();
+    ASSERT_GT(ofbx_mesh_count, 0);
+
+    const ofbx::Object* const* ofbx_all_objects = ofbx_iscene->getAllObjects();
+    ASSERT_NE(ofbx_all_objects, nullptr);
+
+    const int all_object_count = ofbx_iscene->getAllObjectCount();
+    ASSERT_GT(all_object_count, 0);
+}

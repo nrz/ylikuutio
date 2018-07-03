@@ -223,14 +223,6 @@ namespace loaders
                 return false;
             }
 
-            const ofbx::Vec2* uvs = geometry->getUVs();
-
-            if (uvs == nullptr)
-            {
-                std::cerr << "Error: uvs is nullptr!\n";
-                return false;
-            }
-
             std::vector<glm::vec3> mesh_out_vertices;
 
             for (int i = 0; i < vertex_count; i++)
@@ -244,11 +236,21 @@ namespace loaders
 
             std::vector<glm::vec2> mesh_out_uvs;
 
-            for (int i = 0; i < vertex_count; i++)
+            const ofbx::Vec2* uvs = geometry->getUVs();
+
+            if (uvs == nullptr)
             {
-                // UVs.
-                glm::vec2 uv = { uvs[i].x, uvs[i].y };
-                mesh_out_uvs.push_back(uv);
+                // `uvs` should not be `nullptr`.
+                std::cerr << "Error: uvs is nullptr!\n";
+            }
+            else
+            {
+                for (int32_t vertex_i = 0; vertex_i < vertex_count; vertex_i++)
+                {
+                    // UVs.
+                    glm::vec2 uv = { uvs[vertex_i].x, uvs[vertex_i].y };
+                    mesh_out_uvs.push_back(uv);
+                }
             }
 
             out_uvs.push_back(mesh_out_uvs);

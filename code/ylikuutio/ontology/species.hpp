@@ -63,6 +63,7 @@ namespace ontology
                 this->latitude          = species_struct.latitude;
                 this->longitude         = species_struct.longitude;
                 this->material_parent   = species_struct.material;
+                this->mesh_i            = species_struct.mesh_i;
                 this->x_step            = species_struct.x_step;
                 this->z_step            = species_struct.z_step;
                 this->triangulation_type = species_struct.triangulation_type;
@@ -106,6 +107,7 @@ namespace ontology
                     species_loader_struct.planet_radius = this->planet_radius;
                     species_loader_struct.divisor = this->divisor;
                     species_loader_struct.color_channel = this->color_channel;
+                    species_loader_struct.mesh_i = this->mesh_i;
                     species_loader_struct.x_step = this->x_step;
                     species_loader_struct.z_step = this->z_step;
                     species_loader_struct.image_width_pointer = &this->image_width;
@@ -185,6 +187,8 @@ namespace ontology
 
             double latitude;  // for SRTM.
             double longitude; // for SRTM.
+
+            int32_t mesh_i;
 
             uint32_t x_step;
             uint32_t z_step;

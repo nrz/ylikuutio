@@ -66,6 +66,12 @@ namespace loaders
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 #endif
 
+#ifdef MIRRORED_REPEAT_TEXTURES
+        // ... nice trilinear filtering.
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT);
+#endif
+
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
         glGenerateMipmap(GL_TEXTURE_2D);
@@ -78,19 +84,18 @@ namespace loaders
     GLuint load_FBX_texture(const ofbx::Texture* const ofbx_texture)
     {
         // Load the texture.
-        const uint8_t* texture_data_begin = static_cast<const uint8_t*>(ofbx_texture->getFileName().begin);
-        const uint8_t* texture_data_end = static_cast<const uint8_t*>(ofbx_texture->getFileName().end);
+        const std::string filename = std::string((const char*) ofbx_texture->getFileName().begin, (const char*) ofbx_texture->getFileName().end);
 
-        string::print_hexdump(texture_data_begin, texture_data_end);
+        ylikuutio::string::print_hexdump(filename);
 
         // Find out the filename.
         const int32_t filename_buffer_size = 1024;
-        uint8_t filename_buffer[filename_buffer_size];
+        char filename_buffer[filename_buffer_size];
         const char separator = '/'; // FIXME: don't assume slash as some operating systems may use other characters.
 
-        int32_t filename_length = string::extract_last_part_of_string(
-                texture_data_begin,
-                texture_data_end - texture_data_begin + 1,
+        int32_t filename_length = ylikuutio::string::extract_last_part_of_string(
+                filename.c_str(),
+                filename.size(),
                 filename_buffer,
                 filename_buffer_size,
                 separator);
@@ -102,29 +107,30 @@ namespace loaders
 
         // Find out the file suffix (filetype).
         const int32_t file_suffix_buffer_size = 16;
-        uint8_t file_suffix_buffer[file_suffix_buffer_size];
+        char file_suffix_buffer[file_suffix_buffer_size];
         const char suffix_separator = '.';
 
-        string::extract_last_part_of_string(
+        ylikuutio::string::extract_last_part_of_string(
                 filename_buffer,
                 filename_length + 1,
                 file_suffix_buffer,
                 file_suffix_buffer_size,
                 suffix_separator);
 
-        char* texture_file_suffix = static_cast<char*>(static_cast<void*>(file_suffix_buffer));
+        const char* texture_file_suffix = static_cast<char*>(static_cast<void*>(file_suffix_buffer));
 
         std::cout << "Texture file suffix: " << texture_file_suffix << "\n";
 
         if (strncmp(texture_file_suffix, "bmp", sizeof("bmp")) == 0)
         {
-            std::string filename_string = std::string((char*) &filename_buffer);
+            const std::string filename_string = std::string((char*) &filename_buffer);
             return loaders::load_BMP_texture(filename_string);
         }
-        else if (strncmp(texture_file_suffix, "bmp", sizeof("bmp")) == 0)
+        else if (strncmp(texture_file_suffix, "png", sizeof("png")) == 0)
         {
             // TODO: implement PNG loading!
         }
+
         return 0;
     }
 
@@ -141,31 +147,6 @@ namespace loaders
 
         return load_texture(image_data, image_width, image_height, true);
     }
-
-    // Since GLFW 3, glfwLoadTexture2D() has been removed. You have to use another texture loading library,
-    // or do it yourself (just like load_BMP_texture and load_DDS_texture)
-    //GLuint loadTGA_glfw(const char*  imagepath){
-    //
-    //    // Create one OpenGL texture
-    //    GLuint textureID;
-    //    glGenTextures(1, &textureID);
-    //
-    //    // "Bind" the newly created texture : all future texture functions will modify this texture
-    //    glBindTexture(GL_TEXTURE_2D, textureID);
-    //
-    //    // Read the file, call glTexImage2D with the right parameters
-    //    glfwLoadTexture2D(imagepath, 0);
-    //
-    //    // Nice trilinear filtering.
-    //    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    //    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    //    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    //    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-    //    glGenerateMipmap(GL_TEXTURE_2D);
-    //
-    //    // Return the ID of the texture we just created
-    //    return textureID;
-    //}
 
 #define FOURCC_DXT1 0x31545844 // Equivalent to "DXT1" in ASCII
 #define FOURCC_DXT3 0x33545844 // Equivalent to "DXT3" in ASCII

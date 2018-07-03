@@ -25,7 +25,7 @@ namespace loaders
 
         // All possible block identifier strings.
         identifier_strings_vector = { "<?xml ", "<!DOCTYPE ", "<svg>", "<metadata>", "</metadata>", "<defs>", "<font ", "<font-face", "<missing-glyph" };
-        return string::check_and_report_if_some_string_matches(SVG_base_pointer, SVG_data_pointer, data_size, identifier_strings_vector);
+        return ylikuutio::string::check_and_report_if_some_string_matches(SVG_base_pointer, SVG_data_pointer, data_size, identifier_strings_vector);
     }
 
     int32_t extract_value_from_string_with_standard_endings(
@@ -35,7 +35,7 @@ namespace loaders
             const char* const description,
             const bool is_debug_mode)
     {
-        return string::extract_int32_t_value_from_string(
+        return ylikuutio::string::extract_int32_t_value_from_string(
                 vertex_base_pointer,
                 vertex_data_pointer,
                 vertex_data_size,
@@ -62,11 +62,11 @@ namespace loaders
                     return false;
                 }
 
-                if (string::check_and_report_if_some_string_matches(SVG_base_pointer, SVG_data_pointer, data_size, std::vector<std::string> { "<glyph" }))
+                if (ylikuutio::string::check_and_report_if_some_string_matches(SVG_base_pointer, SVG_data_pointer, data_size, std::vector<std::string> { "<glyph" }))
                 {
                     return true;
                 }
-                if (string::check_and_report_if_some_string_matches(SVG_base_pointer, SVG_data_pointer, data_size, std::vector<std::string> { "</svg>" }))
+                if (ylikuutio::string::check_and_report_if_some_string_matches(SVG_base_pointer, SVG_data_pointer, data_size, std::vector<std::string> { "</svg>" }))
                 {
                     return false;
                 }
@@ -78,7 +78,7 @@ namespace loaders
             {
                 // OK, we are inside a block.
                 SVG_data_pointer = std::strchr(SVG_data_pointer, '>');
-                string::check_and_report_if_some_string_matches(SVG_base_pointer, SVG_data_pointer, data_size, std::vector<std::string> { ">" });
+                ylikuutio::string::check_and_report_if_some_string_matches(SVG_base_pointer, SVG_data_pointer, data_size, std::vector<std::string> { ">" });
                 is_inside_block = false;
             }
         }
@@ -117,7 +117,7 @@ namespace loaders
         char char_path[1024];
 
         // copy from opening double quote to the next `"/"`.
-        string::extract_string(SVG_base_pointer, opening_double_quote_pointer, data_size, char_path, char_path, sizeof(char_path), (char*) "/");
+        ylikuutio::string::extract_string(SVG_base_pointer, opening_double_quote_pointer, data_size, char_path, char_path, sizeof(char_path), (char*) "/");
 
         if (is_debug_mode)
         {
@@ -269,7 +269,7 @@ namespace loaders
 
                         closing_double_quote_pointer++;
 
-                        string::extract_string(
+                        ylikuutio::string::extract_string(
                                 SVG_base_pointer,
                                 opening_double_quote_pointer,
                                 data_size,
@@ -328,7 +328,7 @@ namespace loaders
 
                         has_glyph_unicode = true;
 
-                        string::extract_string(
+                        ylikuutio::string::extract_string(
                                 SVG_base_pointer,
                                 opening_double_quote_pointer,
                                 data_size,
@@ -473,7 +473,7 @@ namespace loaders
                 std::vector<std::string> string_vector;
                 string_vector = { "</font>", "</defs>", "</svg>" };
 
-                if (string::check_and_report_if_some_string_matches(SVG_base_pointer, SVG_data_pointer, file_size, string_vector))
+                if (ylikuutio::string::check_and_report_if_some_string_matches(SVG_base_pointer, SVG_data_pointer, file_size, string_vector))
                 {
                     delete[] SVG_data;
                     return true;

@@ -301,7 +301,7 @@ namespace datatypes
                 }
             case (FLOAT):
                 {
-                    if (!string::check_if_float_string(value_string))
+                    if (!ylikuutio::string::check_if_float_string(value_string))
                     {
                         return false;
                     }
@@ -316,7 +316,7 @@ namespace datatypes
                 }
             case (DOUBLE):
                 {
-                    if (!string::check_if_double_string(value_string))
+                    if (!ylikuutio::string::check_if_double_string(value_string))
                     {
                         return false;
                     }
@@ -331,7 +331,7 @@ namespace datatypes
                 }
             case (INT32_T):
                 {
-                    if (!string::check_if_signed_integer_string(value_string))
+                    if (!ylikuutio::string::check_if_signed_integer_string(value_string))
                     {
                         return false;
                     }
@@ -347,7 +347,7 @@ namespace datatypes
                 }
             case (UINT32_T):
                 {
-                    if (!string::check_if_unsigned_integer_string(value_string))
+                    if (!ylikuutio::string::check_if_unsigned_integer_string(value_string))
                     {
                         return false;
                     }
@@ -363,7 +363,7 @@ namespace datatypes
                 }
             case (BOOL_POINTER):
                 {
-                    if (!string::check_if_unsigned_integer_string(value_string))
+                    if (!ylikuutio::string::check_if_unsigned_integer_string(value_string))
                     {
                         return false;
                     }
@@ -380,7 +380,7 @@ namespace datatypes
                 }
             case (FLOAT_POINTER):
                 {
-                    if (!string::check_if_unsigned_integer_string(value_string))
+                    if (!ylikuutio::string::check_if_unsigned_integer_string(value_string))
                     {
                         return false;
                     }
@@ -397,7 +397,7 @@ namespace datatypes
                 }
             case (DOUBLE_POINTER):
                 {
-                    if (!string::check_if_unsigned_integer_string(value_string))
+                    if (!ylikuutio::string::check_if_unsigned_integer_string(value_string))
                     {
                         return false;
                     }
@@ -414,7 +414,7 @@ namespace datatypes
                 }
             case (INT32_T_POINTER):
                 {
-                    if (!string::check_if_unsigned_integer_string(value_string))
+                    if (!ylikuutio::string::check_if_unsigned_integer_string(value_string))
                     {
                         return false;
                     }
@@ -431,7 +431,7 @@ namespace datatypes
                 }
             case (UINT32_T_POINTER):
                 {
-                    if (!string::check_if_unsigned_integer_string(value_string))
+                    if (!ylikuutio::string::check_if_unsigned_integer_string(value_string))
                     {
                         return false;
                     }
@@ -448,7 +448,7 @@ namespace datatypes
                 }
             case (UNIVERSE_POINTER):
                 {
-                    if (!string::check_if_unsigned_integer_string(value_string))
+                    if (!ylikuutio::string::check_if_unsigned_integer_string(value_string))
                     {
                         return false;
                     }
@@ -465,7 +465,7 @@ namespace datatypes
                 }
             case (SCENE_POINTER):
                 {
-                    if (!string::check_if_unsigned_integer_string(value_string))
+                    if (!ylikuutio::string::check_if_unsigned_integer_string(value_string))
                     {
                         return false;
                     }
@@ -482,7 +482,7 @@ namespace datatypes
                 }
             case (SHADER_POINTER):
                 {
-                    if (!string::check_if_unsigned_integer_string(value_string))
+                    if (!ylikuutio::string::check_if_unsigned_integer_string(value_string))
                     {
                         return false;
                     }
@@ -499,7 +499,7 @@ namespace datatypes
                 }
             case (MATERIAL_POINTER):
                 {
-                    if (!string::check_if_unsigned_integer_string(value_string))
+                    if (!ylikuutio::string::check_if_unsigned_integer_string(value_string))
                     {
                         return false;
                     }
@@ -516,7 +516,7 @@ namespace datatypes
                 }
             case (SPECIES_POINTER):
                 {
-                    if (!string::check_if_unsigned_integer_string(value_string))
+                    if (!ylikuutio::string::check_if_unsigned_integer_string(value_string))
                     {
                         return false;
                     }
@@ -533,7 +533,7 @@ namespace datatypes
                 }
             case (OBJECT_POINTER):
                 {
-                    if (!string::check_if_unsigned_integer_string(value_string))
+                    if (!ylikuutio::string::check_if_unsigned_integer_string(value_string))
                     {
                         return false;
                     }
@@ -550,7 +550,7 @@ namespace datatypes
                 }
             case (VECTORFONT_POINTER):
                 {
-                    if (!string::check_if_unsigned_integer_string(value_string))
+                    if (!ylikuutio::string::check_if_unsigned_integer_string(value_string))
                     {
                         return false;
                     }
@@ -567,7 +567,7 @@ namespace datatypes
                 }
             case (GLYPH_POINTER):
                 {
-                    if (!string::check_if_unsigned_integer_string(value_string))
+                    if (!ylikuutio::string::check_if_unsigned_integer_string(value_string))
                     {
                         return false;
                     }
@@ -584,7 +584,7 @@ namespace datatypes
                 }
             case (TEXT3D_POINTER):
                 {
-                    if (!string::check_if_unsigned_integer_string(value_string))
+                    if (!ylikuutio::string::check_if_unsigned_integer_string(value_string))
                     {
                         return false;
                     }
@@ -601,7 +601,7 @@ namespace datatypes
                 }
             case (TEXT2D_POINTER):
                 {
-                    if (!string::check_if_unsigned_integer_string(value_string))
+                    if (!ylikuutio::string::check_if_unsigned_integer_string(value_string))
                     {
                         return false;
                     }
@@ -618,7 +618,7 @@ namespace datatypes
                 }
             case (CONSOLE_POINTER):
                 {
-                    if (!string::check_if_unsigned_integer_string(value_string))
+                    if (!ylikuutio::string::check_if_unsigned_integer_string(value_string))
                     {
                         return false;
                     }
@@ -635,7 +635,7 @@ namespace datatypes
                 }
             case (SPHERICAL_COORDINATES_STRUCT_POINTER):
                 {
-                    if (!string::check_if_unsigned_integer_string(value_string))
+                    if (!ylikuutio::string::check_if_unsigned_integer_string(value_string))
                     {
                         return false;
                     }
@@ -650,7 +650,7 @@ namespace datatypes
                 }
             case (GLM_VEC3_POINTER):
                 {
-                    if (!string::check_if_unsigned_integer_string(value_string))
+                    if (!ylikuutio::string::check_if_unsigned_integer_string(value_string))
                     {
                         return false;
                     }
@@ -665,7 +665,7 @@ namespace datatypes
                 }
             case (GLM_VEC4_POINTER):
                 {
-                    if (!string::check_if_unsigned_integer_string(value_string))
+                    if (!ylikuutio::string::check_if_unsigned_integer_string(value_string))
                     {
                         return false;
                     }
@@ -686,33 +686,6 @@ namespace datatypes
     void AnyValue::set_default_values()
     {
         this->type = datatypes::UNKNOWN;
-        this->bool_value = false;
-        this->char_value = 0;
-        this->float_value = NAN;
-        this->double_value = NAN;
-        this->int32_t_value = 0;
-        this->uint32_t_value = 0;
-        this->bool_pointer = nullptr;
-        this->float_pointer = nullptr;
-        this->double_pointer = nullptr;
-        this->int32_t_pointer = nullptr;
-        this->uint32_t_pointer = nullptr;
-        this->universe = nullptr;
-        this->scene_pointer = nullptr;
-        this->shader_pointer = nullptr;
-        this->material_pointer = nullptr;
-        this->species_pointer = nullptr;
-        this->object_pointer = nullptr;
-        this->vector_font_pointer = nullptr;
-        this->glyph_pointer = nullptr;
-        this->text3D_pointer = nullptr;
-        this->symbiosis_pointer = nullptr;
-        this->font2D_pointer = nullptr;
-        this->console_pointer = nullptr;
-        this->spherical_coordinates_struct_pointer = nullptr;
-        this->std_string_pointer = nullptr;
-        this->glm_vec3_pointer = nullptr;
-        this->glm_vec4_pointer = nullptr;
     }
 
     AnyValue::AnyValue(const datatypes::AnyValue& original)

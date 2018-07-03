@@ -289,6 +289,62 @@ namespace min_
 
 		return Error;
 	}
+
+	int min_tern(int a, int b)
+	{
+		return a < b ? a : b;
+	}
+
+	int min_int(int x, int y)
+	{
+		return y ^ ((x ^ y) & -(x < y)); 
+	}
+
+	static int perf(std::size_t Count)
+	{
+		std::vector<int> A(Count);
+		std::vector<int> B(Count);
+
+		std::size_t const InternalCount = 200000;
+
+		for(std::size_t i = 0; i < Count; ++i)
+		{
+			A[i] = glm::linearRand(-1000, 1000);
+			B[i] = glm::linearRand(-1000, 1000);
+		}
+
+		int Error = 0;
+
+		glm::int32 SumA = 0;
+		{
+			std::clock_t Timestamp0 = std::clock();
+
+			for (std::size_t j = 0; j < InternalCount; ++j)
+			for (std::size_t i = 0; i < Count; ++i)
+				SumA += min_tern(A[i], B[i]);
+
+			std::clock_t Timestamp1 = std::clock();
+
+			std::printf("min_tern Time %d clocks\n", static_cast<int>(Timestamp1 - Timestamp0));
+		}
+
+		glm::int32 SumB = 0;
+		{
+			std::clock_t Timestamp0 = std::clock();
+
+			for (std::size_t j = 0; j < InternalCount; ++j)
+			for (std::size_t i = 0; i < Count; ++i)
+				SumB += min_int(A[i], B[i]);
+
+			std::clock_t Timestamp1 = std::clock();
+
+			std::printf("min_int Time %d clocks\n", static_cast<int>(Timestamp1 - Timestamp0));
+		}
+
+		Error += SumA == SumB ? 0 : 1;
+
+		return Error;
+	}
 }//namespace min_
 
 namespace max_
@@ -1039,12 +1095,12 @@ namespace sign
 
 		std::clock_t Timestamp6 = std::clock();
 
-		std::printf("sign_cmp(rand) Time %d clocks\n", static_cast<unsigned int>(Timestamp1 - Timestamp0));
-		std::printf("sign_if(rand) Time %d clocks\n", static_cast<unsigned int>(Timestamp2 - Timestamp1));
-		std::printf("sign_alu1(rand) Time %d clocks\n", static_cast<unsigned int>(Timestamp3 - Timestamp2));
-		std::printf("sign_alu2(rand) Time %d clocks\n", static_cast<unsigned int>(Timestamp4 - Timestamp3));
-		std::printf("sign_sub(rand) Time %d clocks\n", static_cast<unsigned int>(Timestamp5 - Timestamp4));
-		std::printf("glm::sign(rand) Time %d clocks\n", static_cast<unsigned int>(Timestamp6 - Timestamp5));
+		std::printf("sign_cmp(rand) Time %d clocks\n", static_cast<int>(Timestamp1 - Timestamp0));
+		std::printf("sign_if(rand) Time %d clocks\n", static_cast<int>(Timestamp2 - Timestamp1));
+		std::printf("sign_alu1(rand) Time %d clocks\n", static_cast<int>(Timestamp3 - Timestamp2));
+		std::printf("sign_alu2(rand) Time %d clocks\n", static_cast<int>(Timestamp4 - Timestamp3));
+		std::printf("sign_sub(rand) Time %d clocks\n", static_cast<int>(Timestamp5 - Timestamp4));
+		std::printf("glm::sign(rand) Time %d clocks\n", static_cast<int>(Timestamp6 - Timestamp5));
 
 		return Error;
 	}
@@ -1087,11 +1143,11 @@ namespace sign
 
 		std::clock_t Timestamp5 = std::clock();
 
-		std::printf("sign_cmp(linear) Time %d clocks\n", static_cast<unsigned int>(Timestamp1 - Timestamp0));
-		std::printf("sign_if(linear) Time %d clocks\n", static_cast<unsigned int>(Timestamp2 - Timestamp1));
-		std::printf("sign_alu1(linear) Time %d clocks\n", static_cast<unsigned int>(Timestamp3 - Timestamp2));
-		std::printf("sign_alu2(linear) Time %d clocks\n", static_cast<unsigned int>(Timestamp4 - Timestamp3));
-		std::printf("sign_sub(linear) Time %d clocks\n", static_cast<unsigned int>(Timestamp5 - Timestamp4));
+		std::printf("sign_cmp(linear) Time %d clocks\n", static_cast<int>(Timestamp1 - Timestamp0));
+		std::printf("sign_if(linear) Time %d clocks\n", static_cast<int>(Timestamp2 - Timestamp1));
+		std::printf("sign_alu1(linear) Time %d clocks\n", static_cast<int>(Timestamp3 - Timestamp2));
+		std::printf("sign_alu2(linear) Time %d clocks\n", static_cast<int>(Timestamp4 - Timestamp3));
+		std::printf("sign_sub(linear) Time %d clocks\n", static_cast<int>(Timestamp5 - Timestamp4));
 
 		return Error;
 	}
@@ -1130,13 +1186,13 @@ namespace sign
 
 		std::clock_t Timestamp5 = std::clock();
 
-		std::printf("Sum %d\n", static_cast<unsigned int>(Sum));
+		std::printf("Sum %d\n", static_cast<int>(Sum));
 
-		std::printf("sign_cmp(linear_cal) Time %d clocks\n", static_cast<unsigned int>(Timestamp1 - Timestamp0));
-		std::printf("sign_if(linear_cal) Time %d clocks\n", static_cast<unsigned int>(Timestamp2 - Timestamp1));
-		std::printf("sign_alu1(linear_cal) Time %d clocks\n", static_cast<unsigned int>(Timestamp3 - Timestamp2));
-		std::printf("sign_alu2(linear_cal) Time %d clocks\n", static_cast<unsigned int>(Timestamp4 - Timestamp3));
-		std::printf("sign_sub(linear_cal) Time %d clocks\n", static_cast<unsigned int>(Timestamp5 - Timestamp4));
+		std::printf("sign_cmp(linear_cal) Time %d clocks\n", static_cast<int>(Timestamp1 - Timestamp0));
+		std::printf("sign_if(linear_cal) Time %d clocks\n", static_cast<int>(Timestamp2 - Timestamp1));
+		std::printf("sign_alu1(linear_cal) Time %d clocks\n", static_cast<int>(Timestamp3 - Timestamp2));
+		std::printf("sign_alu2(linear_cal) Time %d clocks\n", static_cast<int>(Timestamp4 - Timestamp3));
+		std::printf("sign_sub(linear_cal) Time %d clocks\n", static_cast<int>(Timestamp5 - Timestamp4));
 
 		return Error;
 	}
@@ -1261,6 +1317,8 @@ int main()
 		std::size_t Samples = 1;
 #	endif
 	Error += sign::perf(Samples);
+
+	Error += min_::perf(Samples);
 
 	return Error;
 }

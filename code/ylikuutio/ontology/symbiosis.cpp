@@ -192,6 +192,11 @@ namespace ontology
             // Create `SymbiontMaterial`s.
             for (const ofbx::Texture* ofbx_texture : ofbx_diffuse_texture_pointer_vector)
             {
+                if (ofbx_texture == nullptr)
+                {
+                    continue;
+                }
+
                 std::cout << "Creating ontology::SymbiontMaterial* based on ofbx::Texture* at 0x" << std::hex << (uint64_t) ofbx_texture << std::dec << " ...\n";
                 MaterialStruct material_struct;
                 material_struct.shader = this->parent;
@@ -207,18 +212,15 @@ namespace ontology
                 // Care only about `ofbx::Texture*`s which are DIFFUSE textures.
                 for (int32_t mesh_i : this->ofbx_diffuse_texture_mesh_map.at(ofbx_texture))
                 {
-                    int32_t vertex_count = this->vertices.at(mesh_i).size();
-                    std::vector<glm::vec3> vertices = this->vertices.at(mesh_i);
-
                     SpeciesStruct species_struct;
                     species_struct.is_symbiont_species = true;
                     species_struct.scene = static_cast<ontology::Scene*>(this->parent->get_parent());
                     species_struct.shader = this->parent;
                     species_struct.symbiont_material = symbiont_material;
-                    species_struct.vertex_count = vertex_count;
-                    species_struct.vertices = this->vertices.at(mesh_i);
-                    species_struct.uvs = this->uvs.at(mesh_i);
-                    species_struct.normals = this->normals.at(mesh_i);
+                    species_struct.vertex_count = mesh_i < this->vertices.size() ? this->vertices.at(mesh_i).size() : 0;
+                    species_struct.vertices = mesh_i < this->vertices.size() ? this->vertices.at(mesh_i) : std::vector<glm::vec3>();
+                    species_struct.uvs = mesh_i < this->uvs.size() ? this->uvs.at(mesh_i) : std::vector<glm::vec2>();
+                    species_struct.normals = mesh_i < this->normals.size() ? this->normals.at(mesh_i) : std::vector<glm::vec3>();
                     species_struct.light_position = this->light_position;
 
                     std::cout << "Creating ontology::SymbiontSpecies*, mesh index " << mesh_i << "...\n";

@@ -17,7 +17,7 @@ namespace ontology
 
         while (*text_pointer != '\0')
         {
-            int32_t unicode_value = string::extract_unicode_value_from_string(text_pointer);
+            int32_t unicode_value = ylikuutio::string::extract_unicode_value_from_string(text_pointer);
             ontology::Glyph* glyph_pointer = text3D->parent->get_glyph_pointer(unicode_value);
 
             if (glyph_pointer == nullptr)

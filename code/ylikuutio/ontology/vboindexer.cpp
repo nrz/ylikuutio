@@ -100,7 +100,7 @@ namespace ontology
         std::map<PackedVertex, GLuint> VertexToOutIndex;
 
         // For each input vertex
-        for (uint32_t i = 0; i < in_vertices.size(); i++)
+        for (int32_t i = 0; i < in_vertices.size() && i < in_UVs.size() && i < in_normals.size(); i++)
         {
             PackedVertex packed = { in_vertices[i], in_UVs[i], in_normals[i] };
 

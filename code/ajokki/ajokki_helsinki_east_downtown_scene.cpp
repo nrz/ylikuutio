@@ -1,3 +1,7 @@
+#ifndef PI
+#define PI 3.14159265359f
+#endif
+
 #include "ajokki_helsinki_east_downtown_scene.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
 #include "code/ylikuutio/ontology/shader.hpp"
@@ -157,48 +161,6 @@ namespace ajokki
         helsinki_east_downtown_struct.rotate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
         helsinki_east_downtown_struct.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
         entity_factory->create_Object(helsinki_east_downtown_struct);
-
-        // Create the species, store it in `snow_cottage_species`.
-        SpeciesStruct snow_cottage_species_struct;
-        snow_cottage_species_struct.scene = helsinki_east_downtown_scene;
-        snow_cottage_species_struct.shader = helsinki_east_downtown_shader;
-        snow_cottage_species_struct.material = pink_geometric_tiles_material;
-        snow_cottage_species_struct.model_file_format = "obj";
-        snow_cottage_species_struct.model_filename = "snow_cottage_triangulated.obj";
-        snow_cottage_species_struct.light_position = glm::vec3(0, 100000, 100000);
-
-        std::cout << "Creating ontology::Entity* snow_cottage_species_entity ...\n";
-        ontology::Entity* snow_cottage_species_entity = entity_factory->create_Species(snow_cottage_species_struct);
-        std::cout << "Creating ontology::Species* snow_cottage_species ...\n";
-        ontology::Species* snow_cottage_species = dynamic_cast<ontology::Species*>(snow_cottage_species_entity);
-
-        if (snow_cottage_species == nullptr)
-        {
-            std::cerr << "Failed to create snow cottage Species.\n";
-            return nullptr;
-        }
-
-        snow_cottage_species->set_name("snow_cottage_species");
-
-        // Create snow cottage, store it in `snow_cottage1`.
-        ObjectStruct snow_cottage_object_struct1;
-        snow_cottage_object_struct1.species_parent = snow_cottage_species;
-        snow_cottage_object_struct1.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
-        snow_cottage_object_struct1.cartesian_coordinates = glm::vec3(121.50f, 126.50f, 63.70f);
-        snow_cottage_object_struct1.rotate_angle = 0.10f;
-        snow_cottage_object_struct1.rotate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
-        snow_cottage_object_struct1.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
-
-        /*
-           ontology::Entity* snow_cottage_object_entity = entity_factory->create_Object(snow_cottage_object_struct1);
-           ontology::Object* snow_cottage_object = dynamic_cast<ontology::Object*>(snow_cottage_object_entity);
-
-           if (snow_cottage_object == nullptr)
-           {
-           std::cerr << "Failed to create snow cottage Object.\n";
-           return nullptr;
-           }
-           */
 
         SpeciesStruct suzanne_species_struct;
         suzanne_species_struct.scene = helsinki_east_downtown_scene;
@@ -377,6 +339,52 @@ namespace ajokki
 
         cat2->set_name("cat2");
 
+        SymbiosisStruct freight_train_symbiosis_struct;
+        freight_train_symbiosis_struct.parent = helsinki_east_downtown_shader;
+        freight_train_symbiosis_struct.model_file_format = "fbx";
+        freight_train_symbiosis_struct.model_filename = "freight_train.fbx";
+        freight_train_symbiosis_struct.light_position = glm::vec3(0, 100000, 100000);
+
+        std::cout << "Creating ontology::Entity* freight_train_symbiosis_entity ...\n";
+        ontology::Entity* freight_train_symbiosis_entity = entity_factory->create_Symbiosis(freight_train_symbiosis_struct);
+
+        std::cout << "Creating ontology::Symbiosis* freight_train_symbiosis ...\n";
+        ontology::Symbiosis* freight_train_symbiosis = dynamic_cast<ontology::Symbiosis*>(freight_train_symbiosis_entity);
+
+        if (freight_train_symbiosis == nullptr)
+        {
+            std::cerr << "Failed to create freight_train Symbiosis.\n";
+            return nullptr;
+        }
+
+        freight_train_symbiosis->set_name("freight_train_symbiosis");
+
+        freight_train_symbiosis->create_symbionts();
+
+        HolobiontStruct freight_train_object_struct1;
+        freight_train_object_struct1.symbiosis_parent = freight_train_symbiosis;
+        freight_train_object_struct1.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
+        freight_train_object_struct1.cartesian_coordinates = glm::vec3(125.00f, 40.00f, 80.00f);
+        freight_train_object_struct1.rotate_angle = 0.00f;
+        freight_train_object_struct1.rotate_vector = glm::vec3(1.0f, 1.0f, 1.0f);
+        freight_train_object_struct1.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
+
+        std::cout << "Creating ontology::Entity* freight_train1_entity ...\n";
+
+        ontology::Entity* freight_train1_entity = entity_factory->create_Holobiont(freight_train_object_struct1);
+
+        std::cout << "Creating ontology::Holobiont* freight_train1 ...\n";
+
+        ontology::Holobiont* freight_train1 = dynamic_cast<ontology::Holobiont*>(freight_train1_entity);
+
+        if (freight_train1 == nullptr)
+        {
+            std::cerr << "Failed to create freight_train1 Object.\n";
+            return nullptr;
+        }
+
+        freight_train1->set_name("freight_train1");
+
         SymbiosisStruct turbo_polizei_symbiosis_struct;
         turbo_polizei_symbiosis_struct.parent = helsinki_east_downtown_shader;
         turbo_polizei_symbiosis_struct.model_file_format = "fbx";
@@ -422,6 +430,79 @@ namespace ajokki
         }
 
         turbo_polizei1->set_name("turbo_polizei1");
+
+        SymbiosisStruct fantasy_house_with_balcony_symbiosis_struct;
+        fantasy_house_with_balcony_symbiosis_struct.parent = helsinki_east_downtown_shader;
+        fantasy_house_with_balcony_symbiosis_struct.model_file_format = "fbx";
+        fantasy_house_with_balcony_symbiosis_struct.model_filename = "fantasy_house_with_balcony.fbx";
+        fantasy_house_with_balcony_symbiosis_struct.light_position = glm::vec3(0, 100000, 100000);
+
+        std::cout << "Creating ontology::Entity* fantasy_house_with_balcony_symbiosis_entity ...\n";
+        ontology::Entity* fantasy_house_with_balcony_symbiosis_entity = entity_factory->create_Symbiosis(fantasy_house_with_balcony_symbiosis_struct);
+
+        std::cout << "Creating ontology::Symbiosis* fantasy_house_with_balcony_symbiosis ...\n";
+        ontology::Symbiosis* fantasy_house_with_balcony_symbiosis = dynamic_cast<ontology::Symbiosis*>(fantasy_house_with_balcony_symbiosis_entity);
+
+        if (fantasy_house_with_balcony_symbiosis == nullptr)
+        {
+            std::cerr << "Failed to create fantasy_house_with_balcony Symbiosis.\n";
+            return nullptr;
+        }
+
+        fantasy_house_with_balcony_symbiosis->set_name("fantasy_house_with_balcony_symbiosis");
+
+        fantasy_house_with_balcony_symbiosis->create_symbionts();
+
+        HolobiontStruct fantasy_house_with_balcony_object_struct1;
+        fantasy_house_with_balcony_object_struct1.symbiosis_parent = fantasy_house_with_balcony_symbiosis;
+        fantasy_house_with_balcony_object_struct1.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
+        fantasy_house_with_balcony_object_struct1.cartesian_coordinates = glm::vec3(268.00f, 59.00f, 174.00f);
+        fantasy_house_with_balcony_object_struct1.rotate_angle = 0.00f;
+        fantasy_house_with_balcony_object_struct1.initial_rotate_angle = 0.0f;
+        fantasy_house_with_balcony_object_struct1.rotate_vector = glm::vec3(1.0f, 1.0f, 1.0f);
+        fantasy_house_with_balcony_object_struct1.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
+
+        std::cout << "Creating ontology::Entity* fantasy_house_with_balcony1_entity ...\n";
+
+        ontology::Entity* fantasy_house_with_balcony1_entity = entity_factory->create_Holobiont(fantasy_house_with_balcony_object_struct1);
+
+        std::cout << "Creating ontology::Holobiont* fantasy_house_with_balcony1 ...\n";
+
+        ontology::Holobiont* fantasy_house_with_balcony1 = dynamic_cast<ontology::Holobiont*>(fantasy_house_with_balcony1_entity);
+
+        if (fantasy_house_with_balcony1 == nullptr)
+        {
+            std::cerr << "Failed to create fantasy_house_with_balcony1 Object.\n";
+            return nullptr;
+        }
+
+        fantasy_house_with_balcony1->set_name("fantasy_house_with_balcony1");
+
+        HolobiontStruct fantasy_house_with_balcony_object_struct2;
+        fantasy_house_with_balcony_object_struct2.symbiosis_parent = fantasy_house_with_balcony_symbiosis;
+        fantasy_house_with_balcony_object_struct2.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
+        fantasy_house_with_balcony_object_struct2.cartesian_coordinates = glm::vec3(252.00f, 23.50f, 2614.00f);
+        fantasy_house_with_balcony_object_struct2.rotate_angle = 0.00f;
+        fantasy_house_with_balcony_object_struct2.initial_rotate_angle = PI / 2;
+        fantasy_house_with_balcony_object_struct2.rotate_vector = glm::vec3(1.0f, 1.0f, 1.0f);
+        fantasy_house_with_balcony_object_struct2.initial_rotate_vector = glm::vec3(0.0f, 1.0f, 0.0f);
+        fantasy_house_with_balcony_object_struct2.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
+
+        std::cout << "Creating ontology::Entity* fantasy_house_with_balcony2_entity ...\n";
+
+        ontology::Entity* fantasy_house_with_balcony2_entity = entity_factory->create_Holobiont(fantasy_house_with_balcony_object_struct2);
+
+        std::cout << "Creating ontology::Holobiont* fantasy_house_with_balcony2 ...\n";
+
+        ontology::Holobiont* fantasy_house_with_balcony2 = dynamic_cast<ontology::Holobiont*>(fantasy_house_with_balcony2_entity);
+
+        if (fantasy_house_with_balcony2 == nullptr)
+        {
+            std::cerr << "Failed to create fantasy_house_with_balcony2 Object.\n";
+            return nullptr;
+        }
+
+        fantasy_house_with_balcony2->set_name("fantasy_house_with_balcony2");
 
         VectorFontStruct kongtext_vector_font_struct;
         kongtext_vector_font_struct.parent = helsinki_east_downtown_grass_material;

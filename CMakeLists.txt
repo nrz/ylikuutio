@@ -249,14 +249,38 @@ configure_file(code/tinyscheme/hello_world.scm hello_world.scm COPYONLY)
 configure_file(external/tinyscheme-1.41/init.scm init.scm COPYONLY)
 
 # 3D models.
+# Suzanne.
 configure_file(res/objects/custom/suzanne.obj suzanne.obj COPYONLY)
-configure_file(res/objects/snow_cottage_triangulated.obj snow_cottage_triangulated.obj COPYONLY)
+# Freight train.
+configure_file(res/objects/www.blendswap.com/46359_freight_train/freight_train.fbx freight_train.fbx COPYONLY)
+configure_file(res/objects/www.blendswap.com/46359_freight_train/textures/freight_train_chassis.bmp freight_train_chassis.bmp COPYONLY)
+configure_file(res/objects/www.blendswap.com/46359_freight_train/textures/freight_train_box_expage.bmp freight_train_box_expage.bmp COPYONLY)
+configure_file(res/objects/www.blendswap.com/46359_freight_train/textures/freight_train_body.bmp freight_train_body.bmp COPYONLY)
+configure_file(res/objects/www.blendswap.com/46359_freight_train/textures/freight_train_expage1.bmp freight_train_expage1.bmp COPYONLY)
+configure_file(res/objects/www.blendswap.com/46359_freight_train/textures/freight_train_expage2.bmp freight_train_expage2.bmp COPYONLY)
+configure_file(res/objects/www.blendswap.com/46359_freight_train/textures/freight_train_gray_concrete.bmp freight_train_gray_concrete.bmp COPYONLY)
+configure_file(res/objects/www.blendswap.com/46359_freight_train/textures/freight_train_iron_texture_by_pabloalvin.bmp freight_train_iron_texture_by_pabloalvin.bmp COPYONLY)
+configure_file(res/objects/www.blendswap.com/46359_freight_train/textures/freight_train_stone.bmp freight_train_stone.bmp COPYONLY)
+# Turbo polizei.
 configure_file(res/objects/www.blendswap.com/74227_Porsche_997_turbo_polizei_lowpoly/turbo_polizei.fbx turbo_polizei.fbx COPYONLY)
 configure_file(res/objects/www.blendswap.com/74227_Porsche_997_turbo_polizei_lowpoly/textures/car.png car.png COPYONLY)
 configure_file(res/objects/www.blendswap.com/74227_Porsche_997_turbo_polizei_lowpoly/textures/wheell.png wheell.png COPYONLY)
 configure_file(res/objects/www.blendswap.com/74227_Porsche_997_turbo_polizei_lowpoly/textures/car.bmp car.bmp COPYONLY)
 configure_file(res/objects/www.blendswap.com/74227_Porsche_997_turbo_polizei_lowpoly/textures/wheell.bmp wheell.bmp COPYONLY)
+# Fantasy house with balcony.
+configure_file(res/objects/www.blendswap.com/55007_fantasy_house_with_balcony/fantasy_house_with_balcony.fbx fantasy_house_with_balcony.fbx COPYONLY)
+configure_file(res/objects/www.blendswap.com/55007_fantasy_house_with_balcony/textures/fantasy_house_with_balcony_bricks.bmp fantasy_house_with_balcony_bricks.bmp COPYONLY)
+configure_file(res/objects/www.blendswap.com/55007_fantasy_house_with_balcony/textures/fantasy_house_with_balcony_copper_roof.bmp fantasy_house_with_balcony_copper_roof.bmp COPYONLY)
+configure_file(res/objects/www.blendswap.com/55007_fantasy_house_with_balcony/textures/fantasy_house_with_balcony_door2.bmp fantasy_house_with_balcony_door2.bmp COPYONLY)
+configure_file(res/objects/www.blendswap.com/55007_fantasy_house_with_balcony/textures/fantasy_house_with_balcony_door3.bmp fantasy_house_with_balcony_door3.bmp COPYONLY)
+configure_file(res/objects/www.blendswap.com/55007_fantasy_house_with_balcony/textures/fantasy_house_with_balcony_plaster.bmp fantasy_house_with_balcony_plaster.bmp COPYONLY)
+configure_file(res/objects/www.blendswap.com/55007_fantasy_house_with_balcony/textures/fantasy_house_with_balcony_roof.bmp fantasy_house_with_balcony_roof.bmp COPYONLY)
+configure_file(res/objects/www.blendswap.com/55007_fantasy_house_with_balcony/textures/fantasy_house_with_balcony_stone_wall.bmp fantasy_house_with_balcony_stone_wall.bmp COPYONLY)
+configure_file(res/objects/www.blendswap.com/55007_fantasy_house_with_balcony/textures/fantasy_house_with_balcony_window.bmp fantasy_house_with_balcony_window.bmp COPYONLY)
+configure_file(res/objects/www.blendswap.com/55007_fantasy_house_with_balcony/textures/fantasy_house_with_balcony_wood_floor.bmp fantasy_house_with_balcony_wood_floor.bmp COPYONLY)
+# Horse.
 configure_file(res/objects/www.blendswap.com/76528_horse/horse.fbx horse.fbx COPYONLY)
+# Cat.
 configure_file(res/objects/www.blendswap.com/86110_rigged_and_animated_cat/cat.fbx cat.fbx COPYONLY)
 
 # Textures.

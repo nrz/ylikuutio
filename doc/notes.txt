@@ -1,3 +1,7 @@
+How to export textures in Blender:
+* File -> External data -> [ ] Automatically Pack into .blend (make the box unchecked).
+* File -> External data -> Unpack All Into Files
+
 How to export UV layout in Blender:
 * in UV/Image Editor mode -> UVs -> Export UV Layout , export as a .png file.
 
