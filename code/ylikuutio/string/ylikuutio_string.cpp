@@ -222,7 +222,11 @@ namespace ylikuutio
                 }
             }
 
-            std::copy(src_first_char_after_separator_pointer, src_first_char_after_separator_pointer + filename_length, dest_base_pointer);
+            if (src_first_char_after_separator_pointer != nullptr)
+            {
+                std::copy(src_first_char_after_separator_pointer, src_first_char_after_separator_pointer + filename_length, dest_base_pointer);
+            }
+
             dest_data_pointer += filename_length;
             *dest_data_pointer = '\0';
             return filename_length;
