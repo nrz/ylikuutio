@@ -205,7 +205,7 @@ namespace ylikuutio
             char* src_data_pointer = const_cast<char*>(src_base_pointer);
             char* src_first_char_after_separator_pointer = nullptr;
             char* dest_data_pointer = dest_base_pointer;
-            int32_t filename_length = 0; // length without trailing 0 byte.
+            int32_t filename_length = 0; // length without trailing null byte.
 
             // + 1 needed for both source and dest because of the null terminator.
             for ( ; src_data_pointer < src_base_pointer + src_data_size && dest_data_pointer + 1 < dest_base_pointer + dest_data_size; src_data_pointer++)

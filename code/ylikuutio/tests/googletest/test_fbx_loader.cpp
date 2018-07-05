@@ -49,9 +49,12 @@ TEST(OpenFBX_must_function_appropriately, rigged_and_animated_cat)
     const int ofbx_mesh_count = ofbx_iscene->getMeshCount();
     ASSERT_GT(ofbx_mesh_count, 0);
 
-    // FBX file may be several meshes (`ofbx::Mesh`).
+    // FBX file may contain several meshes (`ofbx::Mesh`).
     // Each mesh may have several materials (`ofbx::Material`).
-    // Each material has a texture (`ofbx::Texture`).
+    // Each material may have up to 3 textures (`ofbx::Texture`):
+    // `ofbx::Texture::DIFFUSE`,
+    // `ofbx::Texture::NORMAL`,
+    // `ofbx::Texture::COUNT`.
 
     for (int i = 0; i < ofbx_mesh_count; i++)
     {
@@ -156,9 +159,12 @@ TEST(OpenFBX_must_function_appropriately, turbo_polizei)
     const int ofbx_mesh_count = ofbx_iscene->getMeshCount();
     ASSERT_GT(ofbx_mesh_count, 0);
 
-    // FBX file may be several meshes (`ofbx::Mesh`).
+    // FBX file may contain several meshes (`ofbx::Mesh`).
     // Each mesh may have several materials (`ofbx::Material`).
-    // Each material has a texture (`ofbx::Texture`).
+    // Each material may have up to 3 textures (`ofbx::Texture`):
+    // `ofbx::Texture::DIFFUSE`,
+    // `ofbx::Texture::NORMAL`,
+    // `ofbx::Texture::COUNT`.
 
     for (int i = 0; i < ofbx_mesh_count; i++)
     {
@@ -278,9 +284,12 @@ TEST(fbx_file_must_be_loaded_appropriately, freight_train)
     const int ofbx_mesh_count = ofbx_iscene->getMeshCount();
     ASSERT_GT(ofbx_mesh_count, 0);
 
-    // FBX file may be several meshes (`ofbx::Mesh`).
+    // FBX file may contain several meshes (`ofbx::Mesh`).
     // Each mesh may have several materials (`ofbx::Material`).
-    // Each material has a texture (`ofbx::Texture`).
+    // Each material may have up to 3 textures (`ofbx::Texture`):
+    // `ofbx::Texture::DIFFUSE`,
+    // `ofbx::Texture::NORMAL`,
+    // `ofbx::Texture::COUNT`.
 
     for (int i = 0; i < ofbx_mesh_count; i++)
     {
