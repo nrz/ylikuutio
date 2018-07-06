@@ -17,32 +17,35 @@ namespace ylikuutio
     }
 }
 
-namespace console
+namespace ylikuutio
 {
-    class ConsoleCallbackObject : public ylikuutio::callback_system::CallbackObject
+    namespace console
     {
-        public:
-            // constructor.
-            ConsoleCallbackObject(InputParametersToAnyValueCallbackWithConsole console_callback,
-                    ylikuutio::callback_system::CallbackEngine* parent, console::Console* console_pointer)
-                : ylikuutio::callback_system::CallbackObject(nullptr, parent)
-            {
+        class ConsoleCallbackObject : public ylikuutio::callback_system::CallbackObject
+        {
+            public:
                 // constructor.
-                this->callback = nullptr;
-                this->console_callback = console_callback;
-                this->console_pointer = console_pointer;
-            }
+                ConsoleCallbackObject(InputParametersToAnyValueCallbackWithConsole console_callback,
+                        ylikuutio::callback_system::CallbackEngine* parent, ylikuutio::console::Console* console_pointer)
+                    : ylikuutio::callback_system::CallbackObject(nullptr, parent)
+                {
+                    // constructor.
+                    this->callback = nullptr;
+                    this->console_callback = console_callback;
+                    this->console_pointer = console_pointer;
+                }
 
-            // destructor.
-            ~ConsoleCallbackObject();
+                // destructor.
+                ~ConsoleCallbackObject();
 
-        private:
-            // execute this callback.
-            std::shared_ptr<datatypes::AnyValue> execute();
+            private:
+                // execute this callback.
+                std::shared_ptr<datatypes::AnyValue> execute();
 
-            InputParametersToAnyValueCallbackWithConsole console_callback;
-            console::Console* console_pointer;
-    };
+                InputParametersToAnyValueCallbackWithConsole console_callback;
+                ylikuutio::console::Console* console_pointer;
+        };
+    }
 }
 
 #endif

@@ -9,9 +9,12 @@
 #include <memory>   // std::make_shared, std::shared_ptr
 #include <string>   // std::string
 
-namespace console
+namespace ylikuutio
 {
-    class Console;
+    namespace console
+    {
+        class Console;
+    }
 }
 
 namespace config
@@ -30,7 +33,7 @@ namespace config
             std::string help();
 
             friend SettingMaster;
-            friend console::Console;
+            friend ylikuutio::console::Console;
 
             template<class T1>
                 friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, int32_t* number_of_children);

@@ -23,9 +23,12 @@
 #include <stdint.h> // uint32_t etc.
 #include <stdlib.h> // std::strtol, std::strtoll, std::strtoul
 
-namespace console
+namespace ylikuutio
 {
-    class Console;
+    namespace console
+    {
+        class Console;
+    }
 }
 
 namespace ontology
@@ -96,7 +99,7 @@ namespace datatypes
             case (TEXT2D_POINTER):
                 return "ontology::Text2D*";
             case (CONSOLE_POINTER):
-                return "console::Console*";
+                return "ylikuutio::console::Console*";
             case (SPHERICAL_COORDINATES_STRUCT_POINTER):
                 return "SphericalCoordinatesStruct*";
             case (STD_STRING_POINTER):
@@ -625,7 +628,7 @@ namespace datatypes
 
                     // 0 means that the base is determined by the format given in string.
                     // The size of the pointer is assumed to be 64 bits.
-                    console::Console* console_pointer = (console::Console*) (std::strtoll(value_string.c_str(), &end, 0));
+                    ylikuutio::console::Console* console_pointer = (ylikuutio::console::Console*) (std::strtoll(value_string.c_str(), &end, 0));
                     if (errno == ERANGE)
                     {
                         return false;
@@ -835,7 +838,7 @@ namespace datatypes
             this->type = datatypes::TEXT2D_POINTER;
             this->set_value(value_string);
         }
-        else if (std::strcmp(type.c_str(), "console::Console*") == 0)
+        else if (std::strcmp(type.c_str(), "ylikuutio::console::Console*") == 0)
         {
             this->type = datatypes::CONSOLE_POINTER;
             this->set_value(value_string);
@@ -1272,7 +1275,7 @@ namespace datatypes
         }
     }
 
-    AnyValue::AnyValue(console::Console* const console_pointer)
+    AnyValue::AnyValue(ylikuutio::console::Console* const console_pointer)
     {
         // constructor.
         this->set_default_values();
@@ -1280,12 +1283,12 @@ namespace datatypes
         this->console_pointer = console_pointer;
     }
 
-    AnyValue::AnyValue(const std::string& type, console::Console* const console_pointer)
+    AnyValue::AnyValue(const std::string& type, ylikuutio::console::Console* const console_pointer)
     {
         // constructor.
         this->set_default_values();
 
-        if (std::strcmp(type.c_str(), "console::Console*") == 0)
+        if (std::strcmp(type.c_str(), "ylikuutio::console::Console*") == 0)
         {
             this->type = datatypes::CONSOLE_POINTER;
             this->console_pointer = console_pointer;

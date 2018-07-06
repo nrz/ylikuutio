@@ -31,9 +31,12 @@ namespace ontology
     class Font2D;
 }
 
-namespace console
+namespace ylikuutio
 {
-    class Console;
+    namespace console
+    {
+        class Console;
+    }
 }
 
 namespace datatypes
@@ -105,7 +108,7 @@ namespace datatypes
             AnyValue(ontology::Text3D* const text3D_pointer);
             AnyValue(ontology::Symbiosis* const symbiosis_pointer);
             AnyValue(ontology::Font2D* const font2D_pointer);
-            AnyValue(console::Console* const console_pointer);
+            AnyValue(ylikuutio::console::Console* const console_pointer);
             AnyValue(SphericalCoordinatesStruct* const spherical_coordinates_struct_pointer);
             AnyValue(std::string* const std_string_pointer);
             AnyValue(glm::vec3* const glm_vec3_pointer);
@@ -133,7 +136,7 @@ namespace datatypes
             AnyValue(const std::string& type, ontology::Text3D* const text3D_pointer);
             AnyValue(const std::string& type, ontology::Symbiosis* const symbiosis_pointer);
             AnyValue(const std::string& type, ontology::Font2D* const font2D_pointer);
-            AnyValue(const std::string& type, console::Console* const console_pointer);
+            AnyValue(const std::string& type, ylikuutio::console::Console* const console_pointer);
             AnyValue(const std::string& type, SphericalCoordinatesStruct* const spherical_coordinates_struct_pointer);
             AnyValue(const std::string& type, std::string* const std_string_pointer);
             AnyValue(const std::string& type, glm::vec3* const glm_vec3_pointer);
@@ -165,7 +168,7 @@ namespace datatypes
                 ontology::Text3D* text3D_pointer;
                 ontology::Symbiosis* symbiosis_pointer;
                 ontology::Font2D* font2D_pointer;
-                console::Console* console_pointer;
+                ylikuutio::console::Console* console_pointer;
                 SphericalCoordinatesStruct* spherical_coordinates_struct_pointer;
                 std::string* std_string_pointer;
                 glm::vec3* glm_vec3_pointer;

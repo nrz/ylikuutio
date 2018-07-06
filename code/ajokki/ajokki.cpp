@@ -411,9 +411,9 @@ int main(int argc, char* argv[])
     console_struct.universe = my_universe;
     console_struct.font2D_pointer = my_font2D;
 
-    std::cout << "Creating console::Console* my_console ...\n";
+    std::cout << "Creating ylikuutio::console::Console* my_console ...\n";
 
-    console::Console* my_console = new console::Console(console_struct); // create a console.
+    ylikuutio::console::Console* my_console = new ylikuutio::console::Console(console_struct); // create a console.
 
     /*********************************************************************\
      *  Callback engines for action mode keyreleases begin here.         *
@@ -423,7 +423,7 @@ int main(int argc, char* argv[])
 
     // Callback code for `GLFW_KEY_GRAVE_ACCENT` release: enable enter console.
     ylikuutio::callback_system::CallbackEngine* enable_enter_console_callback_engine = new ylikuutio::callback_system::CallbackEngine();
-    new console::ConsoleCallbackObject(&console::Console::enable_enter_console, enable_enter_console_callback_engine, my_console);
+    new ylikuutio::console::ConsoleCallbackObject(&ylikuutio::console::Console::enable_enter_console, enable_enter_console_callback_engine, my_console);
 
     // Callback code for left Control release: release first turbo.
     ylikuutio::callback_system::CallbackEngine* release_first_turbo_callback_engine = new ylikuutio::callback_system::CallbackEngine();
@@ -468,7 +468,7 @@ int main(int argc, char* argv[])
 
     // Callback code for `GLFW_KEY_GRAVE_ACCENT` (tilde key above Tab, usually used for console).
     ylikuutio::callback_system::CallbackEngine* enter_console_callback_engine = new ylikuutio::callback_system::CallbackEngine();
-    new console::ConsoleCallbackObject(&console::Console::enter_console, enter_console_callback_engine, my_console);
+    new ylikuutio::console::ConsoleCallbackObject(&ylikuutio::console::Console::enter_console, enter_console_callback_engine, my_console);
 
     // Callback code for esc: exit program.
     ylikuutio::callback_system::CallbackEngine* exit_program_callback_engine = new ylikuutio::callback_system::CallbackEngine();
@@ -653,71 +653,71 @@ int main(int argc, char* argv[])
 
     // Callback code for `GLFW_KEY_GRAVE_ACCENT` release: enable exit console.
     ylikuutio::callback_system::CallbackEngine* enable_exit_console_callback_engine = new ylikuutio::callback_system::CallbackEngine();
-    new console::ConsoleCallbackObject(&console::Console::enable_exit_console, enable_exit_console_callback_engine, my_console);
+    new ylikuutio::console::ConsoleCallbackObject(&ylikuutio::console::Console::enable_exit_console, enable_exit_console_callback_engine, my_console);
 
     // Callback code for left Control release.
     ylikuutio::callback_system::CallbackEngine* release_left_control_in_console_callback_engine = new ylikuutio::callback_system::CallbackEngine();
-    new console::ConsoleCallbackObject(&console::Console::release_left_control_in_console, release_left_control_in_console_callback_engine, my_console);
+    new ylikuutio::console::ConsoleCallbackObject(&ylikuutio::console::Console::release_left_control_in_console, release_left_control_in_console_callback_engine, my_console);
 
     // Callback code for right Control release.
     ylikuutio::callback_system::CallbackEngine* release_right_control_in_console_callback_engine = new ylikuutio::callback_system::CallbackEngine();
-    new console::ConsoleCallbackObject(&console::Console::release_right_control_in_console, release_right_control_in_console_callback_engine, my_console);
+    new ylikuutio::console::ConsoleCallbackObject(&ylikuutio::console::Console::release_right_control_in_console, release_right_control_in_console_callback_engine, my_console);
 
     // Callback code for left Alt release.
     ylikuutio::callback_system::CallbackEngine* release_left_alt_in_console_callback_engine = new ylikuutio::callback_system::CallbackEngine();
-    new console::ConsoleCallbackObject(&console::Console::release_left_alt_in_console, release_left_alt_in_console_callback_engine, my_console);
+    new ylikuutio::console::ConsoleCallbackObject(&ylikuutio::console::Console::release_left_alt_in_console, release_left_alt_in_console_callback_engine, my_console);
 
     // Callback code for right Alt release.
     ylikuutio::callback_system::CallbackEngine* release_right_alt_in_console_callback_engine = new ylikuutio::callback_system::CallbackEngine();
-    new console::ConsoleCallbackObject(&console::Console::release_right_alt_in_console, release_right_alt_in_console_callback_engine, my_console);
+    new ylikuutio::console::ConsoleCallbackObject(&ylikuutio::console::Console::release_right_alt_in_console, release_right_alt_in_console_callback_engine, my_console);
 
     // Callback code for left Shift release.
     ylikuutio::callback_system::CallbackEngine* release_left_shift_in_console_callback_engine = new ylikuutio::callback_system::CallbackEngine();
-    new console::ConsoleCallbackObject(&console::Console::release_left_shift_in_console, release_left_shift_in_console_callback_engine, my_console);
+    new ylikuutio::console::ConsoleCallbackObject(&ylikuutio::console::Console::release_left_shift_in_console, release_left_shift_in_console_callback_engine, my_console);
 
     // Callback code for right Shift release.
     ylikuutio::callback_system::CallbackEngine* release_right_shift_in_console_callback_engine = new ylikuutio::callback_system::CallbackEngine();
-    new console::ConsoleCallbackObject(&console::Console::release_right_shift_in_console, release_right_shift_in_console_callback_engine, my_console);
+    new ylikuutio::console::ConsoleCallbackObject(&ylikuutio::console::Console::release_right_shift_in_console, release_right_shift_in_console_callback_engine, my_console);
 
     // Callback code for key up release: enable move to previous input.
     ylikuutio::callback_system::CallbackEngine* enable_move_to_previous_input_callback_engine = new ylikuutio::callback_system::CallbackEngine();
-    new console::ConsoleCallbackObject(&console::Console::enable_move_to_previous_input, enable_move_to_previous_input_callback_engine, my_console);
+    new ylikuutio::console::ConsoleCallbackObject(&ylikuutio::console::Console::enable_move_to_previous_input, enable_move_to_previous_input_callback_engine, my_console);
 
     // Callback code for key down release: enable move to next input.
     ylikuutio::callback_system::CallbackEngine* enable_move_to_next_input_callback_engine = new ylikuutio::callback_system::CallbackEngine();
-    new console::ConsoleCallbackObject(&console::Console::enable_move_to_next_input, enable_move_to_next_input_callback_engine, my_console);
+    new ylikuutio::console::ConsoleCallbackObject(&ylikuutio::console::Console::enable_move_to_next_input, enable_move_to_next_input_callback_engine, my_console);
 
     // Callback code for backspace release: enable backspace.
     ylikuutio::callback_system::CallbackEngine* enable_backspace_callback_engine = new ylikuutio::callback_system::CallbackEngine();
-    new console::ConsoleCallbackObject(&console::Console::enable_backspace, enable_backspace_callback_engine, my_console);
+    new ylikuutio::console::ConsoleCallbackObject(&ylikuutio::console::Console::enable_backspace, enable_backspace_callback_engine, my_console);
 
     // Callback code for enter release: enable Enter key.
     ylikuutio::callback_system::CallbackEngine* enable_enter_key_callback_engine = new ylikuutio::callback_system::CallbackEngine();
-    new console::ConsoleCallbackObject(&console::Console::enable_enter_key, enable_enter_key_callback_engine, my_console);
+    new ylikuutio::console::ConsoleCallbackObject(&ylikuutio::console::Console::enable_enter_key, enable_enter_key_callback_engine, my_console);
 
     // Callback code for C release: enable Control-C.
     ylikuutio::callback_system::CallbackEngine* enable_ctrl_c_callback_engine = new ylikuutio::callback_system::CallbackEngine();
-    new console::ConsoleCallbackObject(&console::Console::enable_ctrl_c, enable_ctrl_c_callback_engine, my_console);
+    new ylikuutio::console::ConsoleCallbackObject(&ylikuutio::console::Console::enable_ctrl_c, enable_ctrl_c_callback_engine, my_console);
 
     // Callback code for W release: enable Control-W.
     ylikuutio::callback_system::CallbackEngine* enable_ctrl_w_callback_engine = new ylikuutio::callback_system::CallbackEngine();
-    new console::ConsoleCallbackObject(&console::Console::enable_ctrl_w, enable_ctrl_w_callback_engine, my_console);
+    new ylikuutio::console::ConsoleCallbackObject(&ylikuutio::console::Console::enable_ctrl_w, enable_ctrl_w_callback_engine, my_console);
 
     // Callback code for PgUp release: enable PgUp.
     ylikuutio::callback_system::CallbackEngine* enable_page_up_callback_engine = new ylikuutio::callback_system::CallbackEngine();
-    new console::ConsoleCallbackObject(&console::Console::enable_page_up, enable_page_up_callback_engine, my_console);
+    new ylikuutio::console::ConsoleCallbackObject(&ylikuutio::console::Console::enable_page_up, enable_page_up_callback_engine, my_console);
 
     // Callback code for PgDn release: enable PgDn.
     ylikuutio::callback_system::CallbackEngine* enable_page_down_callback_engine = new ylikuutio::callback_system::CallbackEngine();
-    new console::ConsoleCallbackObject(&console::Console::enable_page_down, enable_page_down_callback_engine, my_console);
+    new ylikuutio::console::ConsoleCallbackObject(&ylikuutio::console::Console::enable_page_down, enable_page_down_callback_engine, my_console);
 
     // Callback code for Home release: enable Home.
     ylikuutio::callback_system::CallbackEngine* enable_home_callback_engine = new ylikuutio::callback_system::CallbackEngine();
-    new console::ConsoleCallbackObject(&console::Console::enable_home, enable_home_callback_engine, my_console);
+    new ylikuutio::console::ConsoleCallbackObject(&ylikuutio::console::Console::enable_home, enable_home_callback_engine, my_console);
 
     // Callback code for End release: enable End.
     ylikuutio::callback_system::CallbackEngine* enable_end_callback_engine = new ylikuutio::callback_system::CallbackEngine();
-    new console::ConsoleCallbackObject(&console::Console::enable_end, enable_end_callback_engine, my_console);
+    new ylikuutio::console::ConsoleCallbackObject(&ylikuutio::console::Console::enable_end, enable_end_callback_engine, my_console);
 
     /*********************************************************************\
      *  Callback engines for console keypresses begin here.              *
@@ -727,71 +727,71 @@ int main(int argc, char* argv[])
 
     // Callback code for `GLFW_KEY_GRAVE_ACCENT` (tilde key above Tab, usually used for console).
     ylikuutio::callback_system::CallbackEngine* exit_console_callback_engine = new ylikuutio::callback_system::CallbackEngine();
-    new console::ConsoleCallbackObject(&console::Console::exit_console, exit_console_callback_engine, my_console);
+    new ylikuutio::console::ConsoleCallbackObject(&ylikuutio::console::Console::exit_console, exit_console_callback_engine, my_console);
 
     // Callback code for left Control press.
     ylikuutio::callback_system::CallbackEngine* press_left_control_in_console_callback_engine = new ylikuutio::callback_system::CallbackEngine();
-    new console::ConsoleCallbackObject(&console::Console::press_left_control_in_console, press_left_control_in_console_callback_engine, my_console);
+    new ylikuutio::console::ConsoleCallbackObject(&ylikuutio::console::Console::press_left_control_in_console, press_left_control_in_console_callback_engine, my_console);
 
     // Callback code for right Control press.
     ylikuutio::callback_system::CallbackEngine* press_right_control_in_console_callback_engine = new ylikuutio::callback_system::CallbackEngine();
-    new console::ConsoleCallbackObject(&console::Console::press_right_control_in_console, press_right_control_in_console_callback_engine, my_console);
+    new ylikuutio::console::ConsoleCallbackObject(&ylikuutio::console::Console::press_right_control_in_console, press_right_control_in_console_callback_engine, my_console);
 
     // Callback code for left Alt press.
     ylikuutio::callback_system::CallbackEngine* press_left_alt_in_console_callback_engine = new ylikuutio::callback_system::CallbackEngine();
-    new console::ConsoleCallbackObject(&console::Console::press_left_alt_in_console, press_left_alt_in_console_callback_engine, my_console);
+    new ylikuutio::console::ConsoleCallbackObject(&ylikuutio::console::Console::press_left_alt_in_console, press_left_alt_in_console_callback_engine, my_console);
 
     // Callback code for right Alt press.
     ylikuutio::callback_system::CallbackEngine* press_right_alt_in_console_callback_engine = new ylikuutio::callback_system::CallbackEngine();
-    new console::ConsoleCallbackObject(&console::Console::press_right_alt_in_console, press_right_alt_in_console_callback_engine, my_console);
+    new ylikuutio::console::ConsoleCallbackObject(&ylikuutio::console::Console::press_right_alt_in_console, press_right_alt_in_console_callback_engine, my_console);
 
     // Callback code for left Shift press.
     ylikuutio::callback_system::CallbackEngine* press_left_shift_in_console_callback_engine = new ylikuutio::callback_system::CallbackEngine();
-    new console::ConsoleCallbackObject(&console::Console::press_left_shift_in_console, press_left_shift_in_console_callback_engine, my_console);
+    new ylikuutio::console::ConsoleCallbackObject(&ylikuutio::console::Console::press_left_shift_in_console, press_left_shift_in_console_callback_engine, my_console);
 
     // Callback code for right Shift press.
     ylikuutio::callback_system::CallbackEngine* press_right_shift_in_console_callback_engine = new ylikuutio::callback_system::CallbackEngine();
-    new console::ConsoleCallbackObject(&console::Console::press_right_shift_in_console, press_right_shift_in_console_callback_engine, my_console);
+    new ylikuutio::console::ConsoleCallbackObject(&ylikuutio::console::Console::press_right_shift_in_console, press_right_shift_in_console_callback_engine, my_console);
 
     // Callback code for key up: move to previous input.
     ylikuutio::callback_system::CallbackEngine* move_to_previous_input_callback_engine = new ylikuutio::callback_system::CallbackEngine();
-    new console::ConsoleCallbackObject(&console::Console::move_to_previous_input, move_to_previous_input_callback_engine, my_console);
+    new ylikuutio::console::ConsoleCallbackObject(&ylikuutio::console::Console::move_to_previous_input, move_to_previous_input_callback_engine, my_console);
 
     // Callback code for key down: move to next input.
     ylikuutio::callback_system::CallbackEngine* move_to_next_input_callback_engine = new ylikuutio::callback_system::CallbackEngine();
-    new console::ConsoleCallbackObject(&console::Console::move_to_next_input, move_to_next_input_callback_engine, my_console);
+    new ylikuutio::console::ConsoleCallbackObject(&ylikuutio::console::Console::move_to_next_input, move_to_next_input_callback_engine, my_console);
 
     // Callback code for backspace: delete character left of cursor from current input in console.
     ylikuutio::callback_system::CallbackEngine* backspace_callback_engine = new ylikuutio::callback_system::CallbackEngine();
-    new console::ConsoleCallbackObject(&console::Console::backspace, backspace_callback_engine, my_console);
+    new ylikuutio::console::ConsoleCallbackObject(&ylikuutio::console::Console::backspace, backspace_callback_engine, my_console);
 
     // Callback code for Enter key.
     ylikuutio::callback_system::CallbackEngine* enter_callback_engine = new ylikuutio::callback_system::CallbackEngine();
-    new console::ConsoleCallbackObject(&console::Console::enter_key, enter_callback_engine, my_console);
+    new ylikuutio::console::ConsoleCallbackObject(&ylikuutio::console::Console::enter_key, enter_callback_engine, my_console);
 
     // Callback code for C: Control-C.
     ylikuutio::callback_system::CallbackEngine* ctrl_c_callback_engine = new ylikuutio::callback_system::CallbackEngine();
-    new console::ConsoleCallbackObject(&console::Console::ctrl_c, ctrl_c_callback_engine, my_console);
+    new ylikuutio::console::ConsoleCallbackObject(&ylikuutio::console::Console::ctrl_c, ctrl_c_callback_engine, my_console);
 
     // Callback code for W: Control-W.
     ylikuutio::callback_system::CallbackEngine* ctrl_w_callback_engine = new ylikuutio::callback_system::CallbackEngine();
-    new console::ConsoleCallbackObject(&console::Console::ctrl_w, ctrl_w_callback_engine, my_console);
+    new ylikuutio::console::ConsoleCallbackObject(&ylikuutio::console::Console::ctrl_w, ctrl_w_callback_engine, my_console);
 
     // Callback code for PgUp.
     ylikuutio::callback_system::CallbackEngine* page_up_callback_engine = new ylikuutio::callback_system::CallbackEngine();
-    new console::ConsoleCallbackObject(&console::Console::page_up, page_up_callback_engine, my_console);
+    new ylikuutio::console::ConsoleCallbackObject(&ylikuutio::console::Console::page_up, page_up_callback_engine, my_console);
 
     // Callback code for PgDn.
     ylikuutio::callback_system::CallbackEngine* page_down_callback_engine = new ylikuutio::callback_system::CallbackEngine();
-    new console::ConsoleCallbackObject(&console::Console::page_down, page_down_callback_engine, my_console);
+    new ylikuutio::console::ConsoleCallbackObject(&ylikuutio::console::Console::page_down, page_down_callback_engine, my_console);
 
     // Callback code for Home.
     ylikuutio::callback_system::CallbackEngine* home_callback_engine = new ylikuutio::callback_system::CallbackEngine();
-    new console::ConsoleCallbackObject(&console::Console::home, home_callback_engine, my_console);
+    new ylikuutio::console::ConsoleCallbackObject(&ylikuutio::console::Console::home, home_callback_engine, my_console);
 
     // Callback code for End.
     ylikuutio::callback_system::CallbackEngine* end_callback_engine = new ylikuutio::callback_system::CallbackEngine();
-    new console::ConsoleCallbackObject(&console::Console::end, end_callback_engine, my_console);
+    new ylikuutio::console::ConsoleCallbackObject(&ylikuutio::console::Console::end, end_callback_engine, my_console);
 
     new ylikuutio::callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, cleanup_callback_object);
     new ylikuutio::callback_system::CallbackParameter("font2D_pointer", std::make_shared<datatypes::AnyValue>(my_font2D), false, cleanup_callback_object);

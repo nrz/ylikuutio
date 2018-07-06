@@ -262,9 +262,12 @@ namespace config
     class Setting;
 }
 
-namespace console
+namespace ylikuutio
 {
-    class Console;
+    namespace console
+    {
+        class Console;
+    }
 }
 
 namespace ontology
@@ -387,8 +390,8 @@ namespace ontology
             // this method stes the active `Scene`.
             void set_active_scene(ontology::Scene* const world);
 
-            console::Console* get_console() const;
-            void set_console(console::Console* console);
+            ylikuutio::console::Console* get_console() const;
+            void set_console(ylikuutio::console::Console* console);
 
             float get_planet_radius() const;
             void set_planet_radius(float planet_radius);
@@ -466,17 +469,17 @@ namespace ontology
             // Public callbacks.
 
             static std::shared_ptr<datatypes::AnyValue> delete_entity(
-                    console::Console* const console,
+                    ylikuutio::console::Console* const console,
                     ontology::Entity* const entity,
                     std::vector<std::string>& command_parameters);
 
             static std::shared_ptr<datatypes::AnyValue> activate(
-                    console::Console* const console,
+                    ylikuutio::console::Console* const console,
                     ontology::Entity* const universe_entity,
                     std::vector<std::string>& command_parameters);
 
             static std::shared_ptr<datatypes::AnyValue> info(
-                    console::Console* const console,
+                    ylikuutio::console::Console* const console,
                     ontology::Entity* const entity,
                     std::vector<std::string>& command_parameters);
 
@@ -542,7 +545,7 @@ namespace ontology
 
             ontology::World* active_world;
 
-            console::Console* console_pointer;     // pointer to `Console`.
+            ylikuutio::console::Console* console_pointer;     // pointer to `Console`.
 
             // Named entities are stored here so that they can be recalled, if needed.
             std::unordered_map<std::string, ontology::Entity*> entity_map;

@@ -112,15 +112,18 @@ typedef std::shared_ptr<datatypes::AnyValue> (*InputParametersToAnyValueCallback
         ylikuutio::callback_system::CallbackObject*,
         std::vector<ylikuutio::callback_system::CallbackParameter*>&);
 
-namespace console
+namespace ylikuutio
 {
-    class Console;
+    namespace console
+    {
+        class Console;
+    }
 }
 typedef std::shared_ptr<datatypes::AnyValue> (*InputParametersToAnyValueCallbackWithConsole) (
         ylikuutio::callback_system::CallbackEngine*,
         ylikuutio::callback_system::CallbackObject*,
         std::vector<ylikuutio::callback_system::CallbackParameter*>&,
-        console::Console*);
+        ylikuutio::console::Console*);
 
 typedef std::shared_ptr<datatypes::AnyValue> (*GetContentCallback) (
         ylikuutio::callback_system::CallbackEngine*,

@@ -292,7 +292,7 @@ namespace ontology
     // Public callbacks.
 
     std::shared_ptr<datatypes::AnyValue> Universe::delete_entity(
-            console::Console* const console,
+            ylikuutio::console::Console* const console,
             ontology::Entity* const entity,
             std::vector<std::string>& command_parameters)
     {
@@ -344,7 +344,7 @@ namespace ontology
     }
 
     std::shared_ptr<datatypes::AnyValue> Universe::activate(
-            console::Console* const console,
+            ylikuutio::console::Console* const console,
             ontology::Entity* const universe_entity,
             std::vector<std::string>& command_parameters)
     {
@@ -411,7 +411,7 @@ namespace ontology
     }
 
     std::shared_ptr<datatypes::AnyValue> Universe::info(
-            console::Console* const console,
+            ylikuutio::console::Console* const console,
             ontology::Entity* const entity,
             std::vector<std::string>& command_parameters)
     {
@@ -482,12 +482,12 @@ namespace ontology
 
     // Public callbacks end here.
 
-    console::Console* Universe::get_console() const
+    ylikuutio::console::Console* Universe::get_console() const
     {
         return this->console_pointer;
     }
 
-    void Universe::set_console(console::Console* console)
+    void Universe::set_console(ylikuutio::console::Console* console)
     {
         this->console_pointer = console;
     }

@@ -94,7 +94,7 @@ namespace config
     // public callbacks.
 
     std::shared_ptr<datatypes::AnyValue> SettingMaster::set_and_print(
-            console::Console* const console,
+            ylikuutio::console::Console* const console,
             ontology::Entity* const entity,
             std::vector<std::string>& command_parameters)
     {
@@ -261,7 +261,7 @@ namespace config
     }
 
     std::shared_ptr<datatypes::AnyValue> SettingMaster::get_and_print(
-            console::Console* const console,
+            ylikuutio::console::Console* const console,
             ontology::Entity* const entity,
             std::vector<std::string>& command_parameters)
     {

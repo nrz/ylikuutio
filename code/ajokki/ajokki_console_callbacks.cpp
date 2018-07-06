@@ -8,9 +8,12 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
-namespace console
+namespace ylikuutio
 {
-    class Console;
+    namespace console
+    {
+        class Console;
+    }
 }
 
 namespace ontology
@@ -21,7 +24,7 @@ namespace ontology
 namespace ajokki
 {
     std::shared_ptr<datatypes::AnyValue> version(
-            console::Console* console,
+            ylikuutio::console::Console* console,
             ontology::Entity*,
             std::vector<std::string>& command_parameters)
     {
@@ -30,7 +33,7 @@ namespace ajokki
     }
 
     std::shared_ptr<datatypes::AnyValue> quit(
-            console::Console*,
+            ylikuutio::console::Console*,
             ontology::Entity*,
             std::vector<std::string>& command_parameters)
     {
@@ -39,7 +42,7 @@ namespace ajokki
     }
 
     std::shared_ptr<datatypes::AnyValue> help(
-            console::Console* console,
+            ylikuutio::console::Console* console,
             ontology::Entity*,
             std::vector<std::string>& command_parameters)
     {

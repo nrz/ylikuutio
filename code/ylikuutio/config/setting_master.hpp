@@ -8,9 +8,12 @@
 #include <unordered_map> // std::unordered_map
 #include <vector>        // std::vector
 
-namespace console
+namespace ylikuutio
 {
-    class Console;
+    namespace console
+    {
+        class Console;
+    }
 }
 
 namespace datatypes
@@ -52,12 +55,12 @@ namespace config
             // Public callbacks.
 
             static std::shared_ptr<datatypes::AnyValue> set_and_print(
-                    console::Console* console,
+                    ylikuutio::console::Console* console,
                     ontology::Entity* entity,
                     std::vector<std::string>& command_parameters);
 
             static std::shared_ptr<datatypes::AnyValue> get_and_print(
-                    console::Console* console,
+                    ylikuutio::console::Console* console,
                     ontology::Entity* entity,
                     std::vector<std::string>& command_parameters);
 
@@ -112,7 +115,7 @@ namespace config
 
             friend class Setting;
             friend class ontology::Entity;
-            friend class console::Console;
+            friend class ylikuutio::console::Console;
 
         private:
             ontology::Entity* parent;
