@@ -413,7 +413,7 @@ namespace loaders
             std::vector<std::string>& unicode_strings,
             const bool is_debug_mode)
     {
-        std::string file_content = file::slurp(font_file_path);
+        std::string file_content = ylikuutio::file::slurp(font_file_path);
         const uint64_t file_size = file_content.size();
         char* SVG_data = new char[file_size];
 

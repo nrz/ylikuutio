@@ -23,7 +23,7 @@ namespace loaders
         std::cout << "Loading BMP file " << bmp_filename << " ...\n";
 
         // Open the file
-        const std::vector<uint8_t> file_content = file::binary_slurp(bmp_filename);
+        const std::vector<uint8_t> file_content = ylikuutio::file::binary_slurp(bmp_filename);
 
         if (file_content.empty())
         {

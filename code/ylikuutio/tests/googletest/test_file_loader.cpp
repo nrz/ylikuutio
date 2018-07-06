@@ -9,7 +9,7 @@
 
 TEST(file_must_be_slurped_appropriately, kongtext_svg)
 {
-    const std::string file_content = file::slurp("kongtext.svg");
+    const std::string file_content = ylikuutio::file::slurp("kongtext.svg");
     const std::string first_line_of_kongtext_svg = "<?xml version=\"1.0\" standalone=\"no\"?>";
     const uint32_t length_of_first_line_of_kongtext_svg = first_line_of_kongtext_svg.size();
     ASSERT_EQ(file_content.compare(0, length_of_first_line_of_kongtext_svg, first_line_of_kongtext_svg), 0);
@@ -23,7 +23,7 @@ TEST(file_must_be_slurped_appropriately, kongtext_svg)
 TEST(file_must_be_slurped_appropriately, test3x3_bmp)
 {
     const std::string bmp_filename = "test3x3.bmp";
-    std::vector<uint8_t> file_content = file::binary_slurp(bmp_filename);
+    std::vector<uint8_t> file_content = ylikuutio::file::binary_slurp(bmp_filename);
     const uint16_t* file_content_uint16_t = (uint16_t*) file_content.data();
     const uint32_t* file_content_uint32_t = (uint32_t*) file_content.data();
 

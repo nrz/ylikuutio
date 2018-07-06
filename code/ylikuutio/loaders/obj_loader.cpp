@@ -29,7 +29,7 @@ namespace loaders
         std::cout << "Loading OBJ file " << obj_file_name << " ...\n";
 
         // Open the file
-        const std::string file_content = file::slurp(obj_file_name);
+        const std::string file_content = ylikuutio::file::slurp(obj_file_name);
 
         if (file_content.empty())
         {

@@ -52,7 +52,7 @@ namespace loaders
         std::cout << "Loading ASCII grid file " << ascii_grid_filename << " ...\n";
 
         // Open the file
-        const std::string file_content = file::slurp(ascii_grid_filename);
+        const std::string file_content = ylikuutio::file::slurp(ascii_grid_filename);
 
         if (file_content.empty())
         {

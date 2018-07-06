@@ -38,7 +38,7 @@ namespace loaders
         // };
         //
         // IScene* load(const u8* data, int size)
-        std::vector<unsigned char> data_vector = file::binary_slurp(filename);
+        std::vector<unsigned char> data_vector = ylikuutio::file::binary_slurp(filename);
 
         // OpenFBX wants `u8` == `unsigned char`.
         const u8* data = reinterpret_cast<const u8*>(data_vector.data());
