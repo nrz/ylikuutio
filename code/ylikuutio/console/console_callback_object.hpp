@@ -9,20 +9,23 @@
 // Include standard headers
 #include <memory>   // std::make_shared, std::shared_ptr
 
-namespace callback_system
+namespace ylikuutio
 {
-    class CallbackParameter;
+    namespace callback_system
+    {
+        class CallbackParameter;
+    }
 }
 
 namespace console
 {
-    class ConsoleCallbackObject : public callback_system::CallbackObject
+    class ConsoleCallbackObject : public ylikuutio::callback_system::CallbackObject
     {
         public:
             // constructor.
             ConsoleCallbackObject(InputParametersToAnyValueCallbackWithConsole console_callback,
-                    callback_system::CallbackEngine* parent, console::Console* console_pointer)
-                : callback_system::CallbackObject(nullptr, parent)
+                    ylikuutio::callback_system::CallbackEngine* parent, console::Console* console_pointer)
+                : ylikuutio::callback_system::CallbackObject(nullptr, parent)
             {
                 // constructor.
                 this->callback = nullptr;

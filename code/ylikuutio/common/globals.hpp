@@ -56,11 +56,14 @@ namespace config
     class Setting;
 }
 
-namespace callback_system
+namespace ylikuutio
 {
-    class CallbackEngine;
-    class CallbackObject;
-    class CallbackParameter;
+    namespace callback_system
+    {
+        class CallbackEngine;
+        class CallbackObject;
+        class CallbackParameter;
+    }
 }
 
 namespace graph
@@ -105,24 +108,24 @@ typedef struct
 } BilinearInterpolationStruct;
 
 typedef std::shared_ptr<datatypes::AnyValue> (*InputParametersToAnyValueCallback) (
-        callback_system::CallbackEngine*,
-        callback_system::CallbackObject*,
-        std::vector<callback_system::CallbackParameter*>&);
+        ylikuutio::callback_system::CallbackEngine*,
+        ylikuutio::callback_system::CallbackObject*,
+        std::vector<ylikuutio::callback_system::CallbackParameter*>&);
 
 namespace console
 {
     class Console;
 }
 typedef std::shared_ptr<datatypes::AnyValue> (*InputParametersToAnyValueCallbackWithConsole) (
-        callback_system::CallbackEngine*,
-        callback_system::CallbackObject*,
-        std::vector<callback_system::CallbackParameter*>&,
+        ylikuutio::callback_system::CallbackEngine*,
+        ylikuutio::callback_system::CallbackObject*,
+        std::vector<ylikuutio::callback_system::CallbackParameter*>&,
         console::Console*);
 
 typedef std::shared_ptr<datatypes::AnyValue> (*GetContentCallback) (
-        callback_system::CallbackEngine*,
-        callback_system::CallbackObject*,
-        std::vector<callback_system::CallbackParameter*>&,
+        ylikuutio::callback_system::CallbackEngine*,
+        ylikuutio::callback_system::CallbackObject*,
+        std::vector<ylikuutio::callback_system::CallbackParameter*>&,
         uint32_t x_start,
         uint32_t y_start,
         uint32_t z_start,

@@ -25,7 +25,7 @@
 
 namespace ajokki
 {
-    bool move_to_direction(callback_system::CallbackObject* callback_object, glm::vec3 moving_direction)
+    bool move_to_direction(ylikuutio::callback_system::CallbackObject* callback_object, glm::vec3 moving_direction)
     {
         std::shared_ptr<datatypes::AnyValue> any_value_universe = std::make_shared<datatypes::AnyValue>(*callback_object->get_arg(0));
 
@@ -89,9 +89,9 @@ namespace ajokki
     \*********************************************************************/
 
     std::shared_ptr<datatypes::AnyValue> release_first_turbo(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject* callback_object,
-            std::vector<callback_system::CallbackParameter*>&)
+            ylikuutio::callback_system::CallbackEngine*,
+            ylikuutio::callback_system::CallbackObject* callback_object,
+            std::vector<ylikuutio::callback_system::CallbackParameter*>&)
     {
         std::shared_ptr<datatypes::AnyValue> any_value_universe = std::make_shared<datatypes::AnyValue>(*callback_object->get_arg(0));
 
@@ -120,9 +120,9 @@ namespace ajokki
     }
 
     std::shared_ptr<datatypes::AnyValue> release_second_turbo(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject* callback_object,
-            std::vector<callback_system::CallbackParameter*>&)
+            ylikuutio::callback_system::CallbackEngine*,
+            ylikuutio::callback_system::CallbackObject* callback_object,
+            std::vector<ylikuutio::callback_system::CallbackParameter*>&)
     {
         std::shared_ptr<datatypes::AnyValue> any_value_universe = std::make_shared<datatypes::AnyValue>(*callback_object->get_arg(0));
 
@@ -151,9 +151,9 @@ namespace ajokki
     }
 
     std::shared_ptr<datatypes::AnyValue> enable_toggle_invert_mouse(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject* callback_object,
-            std::vector<callback_system::CallbackParameter*>&)
+            ylikuutio::callback_system::CallbackEngine*,
+            ylikuutio::callback_system::CallbackObject* callback_object,
+            std::vector<ylikuutio::callback_system::CallbackParameter*>&)
     {
         std::shared_ptr<datatypes::AnyValue> any_value_universe = std::make_shared<datatypes::AnyValue>(*callback_object->get_arg(0));
 
@@ -182,9 +182,9 @@ namespace ajokki
     }
 
     std::shared_ptr<datatypes::AnyValue> enable_toggle_flight_mode(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject* callback_object,
-            std::vector<callback_system::CallbackParameter*>&)
+            ylikuutio::callback_system::CallbackEngine*,
+            ylikuutio::callback_system::CallbackObject* callback_object,
+            std::vector<ylikuutio::callback_system::CallbackParameter*>&)
     {
         std::shared_ptr<datatypes::AnyValue> any_value_universe = std::make_shared<datatypes::AnyValue>(*callback_object->get_arg(0));
 
@@ -213,9 +213,9 @@ namespace ajokki
     }
 
     std::shared_ptr<datatypes::AnyValue> enable_toggle_help_mode(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject* callback_object,
-            std::vector<callback_system::CallbackParameter*>&)
+            ylikuutio::callback_system::CallbackEngine*,
+            ylikuutio::callback_system::CallbackObject* callback_object,
+            std::vector<ylikuutio::callback_system::CallbackParameter*>&)
     {
         std::shared_ptr<datatypes::AnyValue> any_value_universe = std::make_shared<datatypes::AnyValue>(*callback_object->get_arg(0));
 
@@ -248,18 +248,18 @@ namespace ajokki
     \*********************************************************************/
 
     std::shared_ptr<datatypes::AnyValue> exit_program(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>&)
+            ylikuutio::callback_system::CallbackEngine*,
+            ylikuutio::callback_system::CallbackObject*,
+            std::vector<ylikuutio::callback_system::CallbackParameter*>&)
     {
         uint32_t exit_program_magic_number = EXIT_PROGRAM_MAGIC_NUMBER;
         return std::make_shared<datatypes::AnyValue>(exit_program_magic_number);
     }
 
     std::shared_ptr<datatypes::AnyValue> first_turbo(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject* callback_object,
-            std::vector<callback_system::CallbackParameter*>&)
+            ylikuutio::callback_system::CallbackEngine*,
+            ylikuutio::callback_system::CallbackObject* callback_object,
+            std::vector<ylikuutio::callback_system::CallbackParameter*>&)
     {
         std::shared_ptr<datatypes::AnyValue> any_value_universe = std::make_shared<datatypes::AnyValue>(*callback_object->get_arg(0));
 
@@ -288,9 +288,9 @@ namespace ajokki
     }
 
     std::shared_ptr<datatypes::AnyValue> second_turbo(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject* callback_object,
-            std::vector<callback_system::CallbackParameter*>&)
+            ylikuutio::callback_system::CallbackEngine*,
+            ylikuutio::callback_system::CallbackObject* callback_object,
+            std::vector<ylikuutio::callback_system::CallbackParameter*>&)
     {
         std::shared_ptr<datatypes::AnyValue> any_value_universe = std::make_shared<datatypes::AnyValue>(*callback_object->get_arg(0));
 
@@ -319,9 +319,9 @@ namespace ajokki
     }
 
     std::shared_ptr<datatypes::AnyValue> move_forward(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject* callback_object,
-            std::vector<callback_system::CallbackParameter*>&)
+            ylikuutio::callback_system::CallbackEngine*,
+            ylikuutio::callback_system::CallbackObject* callback_object,
+            std::vector<ylikuutio::callback_system::CallbackParameter*>&)
     {
         std::shared_ptr<datatypes::AnyValue> any_value_universe = std::make_shared<datatypes::AnyValue>(*callback_object->get_arg(0));
 
@@ -350,9 +350,9 @@ namespace ajokki
     }
 
     std::shared_ptr<datatypes::AnyValue> move_backward(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject* callback_object,
-            std::vector<callback_system::CallbackParameter*>&)
+            ylikuutio::callback_system::CallbackEngine*,
+            ylikuutio::callback_system::CallbackObject* callback_object,
+            std::vector<ylikuutio::callback_system::CallbackParameter*>&)
     {
         std::shared_ptr<datatypes::AnyValue> any_value_universe = std::make_shared<datatypes::AnyValue>(*callback_object->get_arg(0));
 
@@ -381,9 +381,9 @@ namespace ajokki
     }
 
     std::shared_ptr<datatypes::AnyValue> strafe_left(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject* callback_object,
-            std::vector<callback_system::CallbackParameter*>&)
+            ylikuutio::callback_system::CallbackEngine*,
+            ylikuutio::callback_system::CallbackObject* callback_object,
+            std::vector<ylikuutio::callback_system::CallbackParameter*>&)
     {
         std::shared_ptr<datatypes::AnyValue> any_value_universe = std::make_shared<datatypes::AnyValue>(*callback_object->get_arg(0));
 
@@ -412,9 +412,9 @@ namespace ajokki
     }
 
     std::shared_ptr<datatypes::AnyValue> strafe_right(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject* callback_object,
-            std::vector<callback_system::CallbackParameter*>&)
+            ylikuutio::callback_system::CallbackEngine*,
+            ylikuutio::callback_system::CallbackObject* callback_object,
+            std::vector<ylikuutio::callback_system::CallbackParameter*>&)
     {
         std::shared_ptr<datatypes::AnyValue> any_value_universe = std::make_shared<datatypes::AnyValue>(*callback_object->get_arg(0));
 
@@ -443,9 +443,9 @@ namespace ajokki
     }
 
     std::shared_ptr<datatypes::AnyValue> ascent(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject* callback_object,
-            std::vector<callback_system::CallbackParameter*>&)
+            ylikuutio::callback_system::CallbackEngine*,
+            ylikuutio::callback_system::CallbackObject* callback_object,
+            std::vector<ylikuutio::callback_system::CallbackParameter*>&)
     {
         std::shared_ptr<datatypes::AnyValue> any_value_universe = std::make_shared<datatypes::AnyValue>(*callback_object->get_arg(0));
 
@@ -474,9 +474,9 @@ namespace ajokki
     }
 
     std::shared_ptr<datatypes::AnyValue> descent(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject* callback_object,
-            std::vector<callback_system::CallbackParameter*>&)
+            ylikuutio::callback_system::CallbackEngine*,
+            ylikuutio::callback_system::CallbackObject* callback_object,
+            std::vector<ylikuutio::callback_system::CallbackParameter*>&)
     {
         std::shared_ptr<datatypes::AnyValue> any_value_universe = std::make_shared<datatypes::AnyValue>(*callback_object->get_arg(0));
 
@@ -505,9 +505,9 @@ namespace ajokki
     }
 
     std::shared_ptr<datatypes::AnyValue> toggle_invert_mouse(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject* callback_object,
-            std::vector<callback_system::CallbackParameter*>&)
+            ylikuutio::callback_system::CallbackEngine*,
+            ylikuutio::callback_system::CallbackObject* callback_object,
+            std::vector<ylikuutio::callback_system::CallbackParameter*>&)
     {
         std::shared_ptr<datatypes::AnyValue> any_value_universe = std::make_shared<datatypes::AnyValue>(*callback_object->get_arg(0));
 
@@ -540,9 +540,9 @@ namespace ajokki
     }
 
     std::shared_ptr<datatypes::AnyValue> toggle_flight_mode(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject* callback_object,
-            std::vector<callback_system::CallbackParameter*>&)
+            ylikuutio::callback_system::CallbackEngine*,
+            ylikuutio::callback_system::CallbackObject* callback_object,
+            std::vector<ylikuutio::callback_system::CallbackParameter*>&)
     {
         std::shared_ptr<datatypes::AnyValue> any_value_universe = std::make_shared<datatypes::AnyValue>(*callback_object->get_arg(0));
 
@@ -576,9 +576,9 @@ namespace ajokki
     }
 
     std::shared_ptr<datatypes::AnyValue> toggle_help_mode(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject* callback_object,
-            std::vector<callback_system::CallbackParameter*>&)
+            ylikuutio::callback_system::CallbackEngine*,
+            ylikuutio::callback_system::CallbackObject* callback_object,
+            std::vector<ylikuutio::callback_system::CallbackParameter*>&)
     {
         std::shared_ptr<datatypes::AnyValue> any_value_universe = std::make_shared<datatypes::AnyValue>(*callback_object->get_arg(0));
 
@@ -611,13 +611,13 @@ namespace ajokki
     }
 
     std::shared_ptr<datatypes::AnyValue> delete_entity(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject* callback_object,
-            std::vector<callback_system::CallbackParameter*>&)
+            ylikuutio::callback_system::CallbackEngine*,
+            ylikuutio::callback_system::CallbackObject* callback_object,
+            std::vector<ylikuutio::callback_system::CallbackParameter*>&)
     {
         // Callbacks' input parameters can be accessed either through
-        // `callback_system::CallbackObject* callback_object`or
-        // `std::vector<callback_system::CallbackParameter*>& input parameters`.
+        // `ylikuutio::callback_system::CallbackObject* callback_object`or
+        // `std::vector<ylikuutio::callback_system::CallbackParameter*>& input parameters`.
         //
         // To access named input variables:
         // `datatypes::AnyValue* some_any_value = callback_object->get_any_value("foo");`
@@ -686,9 +686,9 @@ namespace ajokki
     }
 
     std::shared_ptr<datatypes::AnyValue> switch_to_new_material(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject* callback_object,
-            std::vector<callback_system::CallbackParameter*>&)
+            ylikuutio::callback_system::CallbackEngine*,
+            ylikuutio::callback_system::CallbackObject* callback_object,
+            std::vector<ylikuutio::callback_system::CallbackParameter*>&)
     {
         std::shared_ptr<datatypes::AnyValue> any_value_universe = std::make_shared<datatypes::AnyValue>(*callback_object->get_arg(0));
 
@@ -806,9 +806,9 @@ namespace ajokki
     }
 
     std::shared_ptr<datatypes::AnyValue> transform_into_new_species(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject* callback_object,
-            std::vector<callback_system::CallbackParameter*>&)
+            ylikuutio::callback_system::CallbackEngine*,
+            ylikuutio::callback_system::CallbackObject* callback_object,
+            std::vector<ylikuutio::callback_system::CallbackParameter*>&)
     {
         std::shared_ptr<datatypes::AnyValue> any_value_universe = std::make_shared<datatypes::AnyValue>(*callback_object->get_arg(0));
 

@@ -7,19 +7,22 @@
 #include <memory>   // std::make_shared, std::shared_ptr
 #include <vector>   // std::vector
 
-namespace callback_system
+namespace ylikuutio
 {
-    class CallbackEngine;
-    class CallbackObject;
-    class CallbackParameter;
+    namespace callback_system
+    {
+        class CallbackEngine;
+        class CallbackObject;
+        class CallbackParameter;
+    }
 }
 
 namespace ajokki
 {
     std::shared_ptr<datatypes::AnyValue> full_cleanup(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject* callback_object,
-            std::vector<callback_system::CallbackParameter*>&);
+            ylikuutio::callback_system::CallbackEngine*,
+            ylikuutio::callback_system::CallbackObject* callback_object,
+            std::vector<ylikuutio::callback_system::CallbackParameter*>&);
 }
 
 #endif

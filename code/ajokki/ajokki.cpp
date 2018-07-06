@@ -163,9 +163,9 @@ int main(int argc, char* argv[])
     planet_radius_setting_struct.should_ylikuutio_call_activate_callback_now = true;
     new config::Setting(planet_radius_setting_struct);
 
-    std::cout << "Creating callback_system::CallbackEngine* cleanup_callback_engine ...\n";
-    callback_system::CallbackEngine* cleanup_callback_engine = new callback_system::CallbackEngine();
-    callback_system::CallbackObject* cleanup_callback_object = new callback_system::CallbackObject(nullptr, cleanup_callback_engine);
+    std::cout << "Creating ylikuutio::callback_system::CallbackEngine* cleanup_callback_engine ...\n";
+    ylikuutio::callback_system::CallbackEngine* cleanup_callback_engine = new ylikuutio::callback_system::CallbackEngine();
+    ylikuutio::callback_system::CallbackObject* cleanup_callback_object = new ylikuutio::callback_system::CallbackObject(nullptr, cleanup_callback_engine);
 
     if (my_universe->get_window() == nullptr)
     {
@@ -422,43 +422,43 @@ int main(int argc, char* argv[])
     std::cout << "Defining action mode keyrelease callback engines.\n";
 
     // Callback code for `GLFW_KEY_GRAVE_ACCENT` release: enable enter console.
-    callback_system::CallbackEngine* enable_enter_console_callback_engine = new callback_system::CallbackEngine();
+    ylikuutio::callback_system::CallbackEngine* enable_enter_console_callback_engine = new ylikuutio::callback_system::CallbackEngine();
     new console::ConsoleCallbackObject(&console::Console::enable_enter_console, enable_enter_console_callback_engine, my_console);
 
     // Callback code for left Control release: release first turbo.
-    callback_system::CallbackEngine* release_first_turbo_callback_engine = new callback_system::CallbackEngine();
-    callback_system::CallbackObject* release_first_turbo_callback_object = new callback_system::CallbackObject(
+    ylikuutio::callback_system::CallbackEngine* release_first_turbo_callback_engine = new ylikuutio::callback_system::CallbackEngine();
+    ylikuutio::callback_system::CallbackObject* release_first_turbo_callback_object = new ylikuutio::callback_system::CallbackObject(
             &ajokki::release_first_turbo,
             release_first_turbo_callback_engine);
-    new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, release_first_turbo_callback_object);
+    new ylikuutio::callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, release_first_turbo_callback_object);
 
     // Callback code for right Control release: release second turbo.
-    callback_system::CallbackEngine* release_second_turbo_callback_engine = new callback_system::CallbackEngine();
-    callback_system::CallbackObject* release_second_turbo_callback_object = new callback_system::CallbackObject(
+    ylikuutio::callback_system::CallbackEngine* release_second_turbo_callback_engine = new ylikuutio::callback_system::CallbackEngine();
+    ylikuutio::callback_system::CallbackObject* release_second_turbo_callback_object = new ylikuutio::callback_system::CallbackObject(
             &ajokki::release_second_turbo,
             release_second_turbo_callback_engine);
-    new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, release_second_turbo_callback_object);
+    new ylikuutio::callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, release_second_turbo_callback_object);
 
     // Callback code for I release: enable_toggle invert mouse.
-    callback_system::CallbackEngine* enable_toggle_invert_mouse_callback_engine = new callback_system::CallbackEngine();
-    callback_system::CallbackObject* enable_toggle_invert_mouse_callback_object = new callback_system::CallbackObject(
+    ylikuutio::callback_system::CallbackEngine* enable_toggle_invert_mouse_callback_engine = new ylikuutio::callback_system::CallbackEngine();
+    ylikuutio::callback_system::CallbackObject* enable_toggle_invert_mouse_callback_object = new ylikuutio::callback_system::CallbackObject(
             &ajokki::enable_toggle_invert_mouse,
             enable_toggle_invert_mouse_callback_engine);
-    new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, enable_toggle_invert_mouse_callback_object);
+    new ylikuutio::callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, enable_toggle_invert_mouse_callback_object);
 
     // Callback code for F release: enable_toggle flight mode.
-    callback_system::CallbackEngine* enable_toggle_flight_mode_callback_engine = new callback_system::CallbackEngine();
-    callback_system::CallbackObject* enable_toggle_flight_mode_callback_object = new callback_system::CallbackObject(
+    ylikuutio::callback_system::CallbackEngine* enable_toggle_flight_mode_callback_engine = new ylikuutio::callback_system::CallbackEngine();
+    ylikuutio::callback_system::CallbackObject* enable_toggle_flight_mode_callback_object = new ylikuutio::callback_system::CallbackObject(
             &ajokki::enable_toggle_flight_mode,
             enable_toggle_flight_mode_callback_engine);
-    new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, enable_toggle_flight_mode_callback_object);
+    new ylikuutio::callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, enable_toggle_flight_mode_callback_object);
 
     // Callback code for F1 release: enable toggle help mode.
-    callback_system::CallbackEngine* enable_toggle_help_mode_callback_engine = new callback_system::CallbackEngine();
-    callback_system::CallbackObject* enable_toggle_help_mode_callback_object = new callback_system::CallbackObject(
+    ylikuutio::callback_system::CallbackEngine* enable_toggle_help_mode_callback_engine = new ylikuutio::callback_system::CallbackEngine();
+    ylikuutio::callback_system::CallbackObject* enable_toggle_help_mode_callback_object = new ylikuutio::callback_system::CallbackObject(
             &ajokki::enable_toggle_help_mode,
             enable_toggle_help_mode_callback_engine);
-    new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, enable_toggle_help_mode_callback_object);
+    new ylikuutio::callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, enable_toggle_help_mode_callback_object);
 
     /*********************************************************************\
      *  Callback engines for action mode keypresses begin here.          *
@@ -467,116 +467,116 @@ int main(int argc, char* argv[])
     std::cout << "Defining action mode keypress callback engines.\n";
 
     // Callback code for `GLFW_KEY_GRAVE_ACCENT` (tilde key above Tab, usually used for console).
-    callback_system::CallbackEngine* enter_console_callback_engine = new callback_system::CallbackEngine();
+    ylikuutio::callback_system::CallbackEngine* enter_console_callback_engine = new ylikuutio::callback_system::CallbackEngine();
     new console::ConsoleCallbackObject(&console::Console::enter_console, enter_console_callback_engine, my_console);
 
     // Callback code for esc: exit program.
-    callback_system::CallbackEngine* exit_program_callback_engine = new callback_system::CallbackEngine();
-    new callback_system::CallbackObject(&ajokki::exit_program, exit_program_callback_engine);
+    ylikuutio::callback_system::CallbackEngine* exit_program_callback_engine = new ylikuutio::callback_system::CallbackEngine();
+    new ylikuutio::callback_system::CallbackObject(&ajokki::exit_program, exit_program_callback_engine);
 
     // Callback code for left Control: first turbo.
-    callback_system::CallbackEngine* first_turbo_callback_engine = new callback_system::CallbackEngine();
-    callback_system::CallbackObject* first_turbo_callback_object = new callback_system::CallbackObject(
+    ylikuutio::callback_system::CallbackEngine* first_turbo_callback_engine = new ylikuutio::callback_system::CallbackEngine();
+    ylikuutio::callback_system::CallbackObject* first_turbo_callback_object = new ylikuutio::callback_system::CallbackObject(
             &ajokki::first_turbo,
             first_turbo_callback_engine);
-    new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, first_turbo_callback_object);
+    new ylikuutio::callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, first_turbo_callback_object);
 
     // Callback code for right Control: second turbo.
-    callback_system::CallbackEngine* second_turbo_callback_engine = new callback_system::CallbackEngine();
-    callback_system::CallbackObject* second_turbo_callback_object = new callback_system::CallbackObject(
+    ylikuutio::callback_system::CallbackEngine* second_turbo_callback_engine = new ylikuutio::callback_system::CallbackEngine();
+    ylikuutio::callback_system::CallbackObject* second_turbo_callback_object = new ylikuutio::callback_system::CallbackObject(
             &ajokki::second_turbo,
             second_turbo_callback_engine);
-    new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, second_turbo_callback_object);
+    new ylikuutio::callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, second_turbo_callback_object);
 
     // Callback code for key up: move forward.
-    callback_system::CallbackEngine* move_forward_callback_engine = new callback_system::CallbackEngine();
-    callback_system::CallbackObject* move_forward_callback_object = new callback_system::CallbackObject(
+    ylikuutio::callback_system::CallbackEngine* move_forward_callback_engine = new ylikuutio::callback_system::CallbackEngine();
+    ylikuutio::callback_system::CallbackObject* move_forward_callback_object = new ylikuutio::callback_system::CallbackObject(
             &ajokki::move_forward,
             move_forward_callback_engine);
-    new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, move_forward_callback_object);
+    new ylikuutio::callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, move_forward_callback_object);
 
     // Callback code for key down: move backward.
-    callback_system::CallbackEngine* move_backward_callback_engine = new callback_system::CallbackEngine();
-    callback_system::CallbackObject* move_backward_callback_object = new callback_system::CallbackObject(
+    ylikuutio::callback_system::CallbackEngine* move_backward_callback_engine = new ylikuutio::callback_system::CallbackEngine();
+    ylikuutio::callback_system::CallbackObject* move_backward_callback_object = new ylikuutio::callback_system::CallbackObject(
             &ajokki::move_backward,
             move_backward_callback_engine);
-    new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, move_backward_callback_object);
+    new ylikuutio::callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, move_backward_callback_object);
 
     // Callback code for key left: strafe left.
-    callback_system::CallbackEngine* strafe_left_callback_engine = new callback_system::CallbackEngine();
-    callback_system::CallbackObject* strafe_left_callback_object = new callback_system::CallbackObject(
+    ylikuutio::callback_system::CallbackEngine* strafe_left_callback_engine = new ylikuutio::callback_system::CallbackEngine();
+    ylikuutio::callback_system::CallbackObject* strafe_left_callback_object = new ylikuutio::callback_system::CallbackObject(
             &ajokki::strafe_left,
             strafe_left_callback_engine);
-    new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, strafe_left_callback_object);
+    new ylikuutio::callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, strafe_left_callback_object);
 
     // Callback code for key right: strafe right.
-    callback_system::CallbackEngine* strafe_right_callback_engine = new callback_system::CallbackEngine();
-    callback_system::CallbackObject* strafe_right_callback_object = new callback_system::CallbackObject(
+    ylikuutio::callback_system::CallbackEngine* strafe_right_callback_engine = new ylikuutio::callback_system::CallbackEngine();
+    ylikuutio::callback_system::CallbackObject* strafe_right_callback_object = new ylikuutio::callback_system::CallbackObject(
             &ajokki::strafe_right,
             strafe_right_callback_engine);
-    new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, strafe_right_callback_object);
+    new ylikuutio::callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, strafe_right_callback_object);
 
     // Callback code for space: ascent.
-    callback_system::CallbackEngine* ascent_callback_engine = new callback_system::CallbackEngine();
-    callback_system::CallbackObject* ascent_callback_object = new callback_system::CallbackObject(
+    ylikuutio::callback_system::CallbackEngine* ascent_callback_engine = new ylikuutio::callback_system::CallbackEngine();
+    ylikuutio::callback_system::CallbackObject* ascent_callback_object = new ylikuutio::callback_system::CallbackObject(
             &ajokki::ascent,
             ascent_callback_engine);
-    new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, ascent_callback_object);
+    new ylikuutio::callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, ascent_callback_object);
 
     // Callback code for enter: descent.
-    callback_system::CallbackEngine* descent_callback_engine = new callback_system::CallbackEngine();
-    callback_system::CallbackObject* descent_callback_object = new callback_system::CallbackObject(
+    ylikuutio::callback_system::CallbackEngine* descent_callback_engine = new ylikuutio::callback_system::CallbackEngine();
+    ylikuutio::callback_system::CallbackObject* descent_callback_object = new ylikuutio::callback_system::CallbackObject(
             &ajokki::descent,
             descent_callback_engine);
-    new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, descent_callback_object);
+    new ylikuutio::callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, descent_callback_object);
 
     // Callback code for I: toggle invert mouse.
-    callback_system::CallbackEngine* toggle_invert_mouse_callback_engine = new callback_system::CallbackEngine();
-    callback_system::CallbackObject* toggle_invert_mouse_callback_object = new callback_system::CallbackObject(
+    ylikuutio::callback_system::CallbackEngine* toggle_invert_mouse_callback_engine = new ylikuutio::callback_system::CallbackEngine();
+    ylikuutio::callback_system::CallbackObject* toggle_invert_mouse_callback_object = new ylikuutio::callback_system::CallbackObject(
             &ajokki::toggle_invert_mouse,
             toggle_invert_mouse_callback_engine);
-    new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, toggle_invert_mouse_callback_object);
+    new ylikuutio::callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, toggle_invert_mouse_callback_object);
 
     // Callback code for F: toggle flight mode.
-    callback_system::CallbackEngine* toggle_flight_mode_callback_engine = new callback_system::CallbackEngine();
-    callback_system::CallbackObject* toggle_flight_mode_callback_object = new callback_system::CallbackObject(
+    ylikuutio::callback_system::CallbackEngine* toggle_flight_mode_callback_engine = new ylikuutio::callback_system::CallbackEngine();
+    ylikuutio::callback_system::CallbackObject* toggle_flight_mode_callback_object = new ylikuutio::callback_system::CallbackObject(
             &ajokki::toggle_flight_mode,
             toggle_flight_mode_callback_engine);
-    new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, toggle_flight_mode_callback_object);
+    new ylikuutio::callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, toggle_flight_mode_callback_object);
 
     // Callback code for F1: toggle help mode.
-    callback_system::CallbackEngine* toggle_help_mode_callback_engine = new callback_system::CallbackEngine();
-    callback_system::CallbackObject* toggle_help_mode_callback_object = new callback_system::CallbackObject(
+    ylikuutio::callback_system::CallbackEngine* toggle_help_mode_callback_engine = new ylikuutio::callback_system::CallbackEngine();
+    ylikuutio::callback_system::CallbackObject* toggle_help_mode_callback_object = new ylikuutio::callback_system::CallbackObject(
             &ajokki::toggle_help_mode,
             toggle_help_mode_callback_engine);
-    new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, toggle_help_mode_callback_object);
+    new ylikuutio::callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, toggle_help_mode_callback_object);
 
     // Callback code for D: delete Suzanne species.
     std::string suzanne_species_string = "suzanne_species";
-    callback_system::CallbackEngine* delete_suzanne_species_callback_engine = new callback_system::CallbackEngine();
-    callback_system::CallbackObject* delete_suzanne_species_callback_object = new callback_system::CallbackObject(
+    ylikuutio::callback_system::CallbackEngine* delete_suzanne_species_callback_engine = new ylikuutio::callback_system::CallbackEngine();
+    ylikuutio::callback_system::CallbackObject* delete_suzanne_species_callback_object = new ylikuutio::callback_system::CallbackObject(
             &ajokki::delete_entity,
             delete_suzanne_species_callback_engine);
-    new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, delete_suzanne_species_callback_object);
-    new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(&suzanne_species_string), false, delete_suzanne_species_callback_object);
+    new ylikuutio::callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, delete_suzanne_species_callback_object);
+    new ylikuutio::callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(&suzanne_species_string), false, delete_suzanne_species_callback_object);
 
     // Callback code for G: switch to grass material.
     std::string grass_material_string = "helsinki_east_downtown_grass_material";
-    callback_system::CallbackEngine* switch_to_grass_material_callback_engine = new callback_system::CallbackEngine();
-    callback_system::CallbackObject* switch_to_grass_material_callback_object = new callback_system::CallbackObject(
+    ylikuutio::callback_system::CallbackEngine* switch_to_grass_material_callback_engine = new ylikuutio::callback_system::CallbackEngine();
+    ylikuutio::callback_system::CallbackObject* switch_to_grass_material_callback_object = new ylikuutio::callback_system::CallbackObject(
             &ajokki::switch_to_new_material,
             switch_to_grass_material_callback_engine);
-    new callback_system::CallbackParameter(
+    new ylikuutio::callback_system::CallbackParameter(
             "",
             std::make_shared<datatypes::AnyValue>(my_universe),
             false,
             switch_to_grass_material_callback_object);
-    new callback_system::CallbackParameter(
+    new ylikuutio::callback_system::CallbackParameter(
             "",
             std::make_shared<datatypes::AnyValue>(&suzanne_species_string),
             false,
             switch_to_grass_material_callback_object);
-    new callback_system::CallbackParameter(
+    new ylikuutio::callback_system::CallbackParameter(
             "",
             std::make_shared<datatypes::AnyValue>(&grass_material_string),
             false,
@@ -584,21 +584,21 @@ int main(int argc, char* argv[])
 
     // Callback code for O: switch to orange fur material.
     std::string orange_fur_material_string = "orange_fur_material";
-    callback_system::CallbackEngine* switch_to_orange_fur_material_callback_engine = new callback_system::CallbackEngine();
-    callback_system::CallbackObject* switch_to_orange_fur_material_callback_object = new callback_system::CallbackObject(
+    ylikuutio::callback_system::CallbackEngine* switch_to_orange_fur_material_callback_engine = new ylikuutio::callback_system::CallbackEngine();
+    ylikuutio::callback_system::CallbackObject* switch_to_orange_fur_material_callback_object = new ylikuutio::callback_system::CallbackObject(
             &ajokki::switch_to_new_material,
             switch_to_orange_fur_material_callback_engine);
-    new callback_system::CallbackParameter(
+    new ylikuutio::callback_system::CallbackParameter(
             "",
             std::make_shared<datatypes::AnyValue>(my_universe),
             false,
             switch_to_orange_fur_material_callback_object);
-    new callback_system::CallbackParameter(
+    new ylikuutio::callback_system::CallbackParameter(
             "",
             std::make_shared<datatypes::AnyValue>(&suzanne_species_string),
             false,
             switch_to_orange_fur_material_callback_object);
-    new callback_system::CallbackParameter(
+    new ylikuutio::callback_system::CallbackParameter(
             "",
             std::make_shared<datatypes::AnyValue>(&orange_fur_material_string),
             false,
@@ -606,21 +606,21 @@ int main(int argc, char* argv[])
 
     // Callback code for P: switch to pink_geometric_tiles_material.
     std::string pink_geometric_tiles_material_string = "pink_geometric_tiles_material";
-    callback_system::CallbackEngine* switch_to_pink_geometric_tiles_material_callback_engine = new callback_system::CallbackEngine();
-    callback_system::CallbackObject* switch_to_pink_geometric_tiles_material_callback_object = new callback_system::CallbackObject(
+    ylikuutio::callback_system::CallbackEngine* switch_to_pink_geometric_tiles_material_callback_engine = new ylikuutio::callback_system::CallbackEngine();
+    ylikuutio::callback_system::CallbackObject* switch_to_pink_geometric_tiles_material_callback_object = new ylikuutio::callback_system::CallbackObject(
             &ajokki::switch_to_new_material,
             switch_to_pink_geometric_tiles_material_callback_engine);
-    new callback_system::CallbackParameter(
+    new ylikuutio::callback_system::CallbackParameter(
             "",
             std::make_shared<datatypes::AnyValue>(my_universe),
             false,
             switch_to_pink_geometric_tiles_material_callback_object);
-    new callback_system::CallbackParameter(
+    new ylikuutio::callback_system::CallbackParameter(
             "",
             std::make_shared<datatypes::AnyValue>(&suzanne_species_string),
             false,
             switch_to_pink_geometric_tiles_material_callback_object);
-    new callback_system::CallbackParameter(
+    new ylikuutio::callback_system::CallbackParameter(
             "",
             std::make_shared<datatypes::AnyValue>(&pink_geometric_tiles_material_string),
             false,
@@ -629,21 +629,21 @@ int main(int argc, char* argv[])
     // Callback code for T: transform `suzanne2` into terrain.
     std::string helsinki_species_string = "Helsinki_species";
     std::string suzanne2_string = "suzanne2";
-    callback_system::CallbackEngine* transform_into_terrain_callback_engine = new callback_system::CallbackEngine();
-    callback_system::CallbackObject* transform_into_terrain_callback_object = new callback_system::CallbackObject(
+    ylikuutio::callback_system::CallbackEngine* transform_into_terrain_callback_engine = new ylikuutio::callback_system::CallbackEngine();
+    ylikuutio::callback_system::CallbackObject* transform_into_terrain_callback_object = new ylikuutio::callback_system::CallbackObject(
             &ajokki::transform_into_new_species,
             transform_into_terrain_callback_engine);
-    new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, transform_into_terrain_callback_object);
-    new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(&suzanne2_string), false, transform_into_terrain_callback_object);
-    new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(&helsinki_species_string), false, transform_into_terrain_callback_object);
+    new ylikuutio::callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, transform_into_terrain_callback_object);
+    new ylikuutio::callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(&suzanne2_string), false, transform_into_terrain_callback_object);
+    new ylikuutio::callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(&helsinki_species_string), false, transform_into_terrain_callback_object);
 
     // Callback code for A: transform `suzanne2` back into monkey.
-    callback_system::CallbackEngine* transform_into_monkey_callback_engine = new callback_system::CallbackEngine();
-    callback_system::CallbackObject* transform_into_monkey_callback_object = new callback_system::CallbackObject(
+    ylikuutio::callback_system::CallbackEngine* transform_into_monkey_callback_engine = new ylikuutio::callback_system::CallbackEngine();
+    ylikuutio::callback_system::CallbackObject* transform_into_monkey_callback_object = new ylikuutio::callback_system::CallbackObject(
             &ajokki::transform_into_new_species, transform_into_monkey_callback_engine);
-    new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, transform_into_monkey_callback_object);
-    new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(&suzanne2_string), false, transform_into_monkey_callback_object);
-    new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(&suzanne_species_string), false, transform_into_monkey_callback_object);
+    new ylikuutio::callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, transform_into_monkey_callback_object);
+    new ylikuutio::callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(&suzanne2_string), false, transform_into_monkey_callback_object);
+    new ylikuutio::callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(&suzanne_species_string), false, transform_into_monkey_callback_object);
 
     /*********************************************************************\
      *  Callback engines for console keyreleases begin here.             *
@@ -652,71 +652,71 @@ int main(int argc, char* argv[])
     std::cout << "Defining console keyrelease callback engines.\n";
 
     // Callback code for `GLFW_KEY_GRAVE_ACCENT` release: enable exit console.
-    callback_system::CallbackEngine* enable_exit_console_callback_engine = new callback_system::CallbackEngine();
+    ylikuutio::callback_system::CallbackEngine* enable_exit_console_callback_engine = new ylikuutio::callback_system::CallbackEngine();
     new console::ConsoleCallbackObject(&console::Console::enable_exit_console, enable_exit_console_callback_engine, my_console);
 
     // Callback code for left Control release.
-    callback_system::CallbackEngine* release_left_control_in_console_callback_engine = new callback_system::CallbackEngine();
+    ylikuutio::callback_system::CallbackEngine* release_left_control_in_console_callback_engine = new ylikuutio::callback_system::CallbackEngine();
     new console::ConsoleCallbackObject(&console::Console::release_left_control_in_console, release_left_control_in_console_callback_engine, my_console);
 
     // Callback code for right Control release.
-    callback_system::CallbackEngine* release_right_control_in_console_callback_engine = new callback_system::CallbackEngine();
+    ylikuutio::callback_system::CallbackEngine* release_right_control_in_console_callback_engine = new ylikuutio::callback_system::CallbackEngine();
     new console::ConsoleCallbackObject(&console::Console::release_right_control_in_console, release_right_control_in_console_callback_engine, my_console);
 
     // Callback code for left Alt release.
-    callback_system::CallbackEngine* release_left_alt_in_console_callback_engine = new callback_system::CallbackEngine();
+    ylikuutio::callback_system::CallbackEngine* release_left_alt_in_console_callback_engine = new ylikuutio::callback_system::CallbackEngine();
     new console::ConsoleCallbackObject(&console::Console::release_left_alt_in_console, release_left_alt_in_console_callback_engine, my_console);
 
     // Callback code for right Alt release.
-    callback_system::CallbackEngine* release_right_alt_in_console_callback_engine = new callback_system::CallbackEngine();
+    ylikuutio::callback_system::CallbackEngine* release_right_alt_in_console_callback_engine = new ylikuutio::callback_system::CallbackEngine();
     new console::ConsoleCallbackObject(&console::Console::release_right_alt_in_console, release_right_alt_in_console_callback_engine, my_console);
 
     // Callback code for left Shift release.
-    callback_system::CallbackEngine* release_left_shift_in_console_callback_engine = new callback_system::CallbackEngine();
+    ylikuutio::callback_system::CallbackEngine* release_left_shift_in_console_callback_engine = new ylikuutio::callback_system::CallbackEngine();
     new console::ConsoleCallbackObject(&console::Console::release_left_shift_in_console, release_left_shift_in_console_callback_engine, my_console);
 
     // Callback code for right Shift release.
-    callback_system::CallbackEngine* release_right_shift_in_console_callback_engine = new callback_system::CallbackEngine();
+    ylikuutio::callback_system::CallbackEngine* release_right_shift_in_console_callback_engine = new ylikuutio::callback_system::CallbackEngine();
     new console::ConsoleCallbackObject(&console::Console::release_right_shift_in_console, release_right_shift_in_console_callback_engine, my_console);
 
     // Callback code for key up release: enable move to previous input.
-    callback_system::CallbackEngine* enable_move_to_previous_input_callback_engine = new callback_system::CallbackEngine();
+    ylikuutio::callback_system::CallbackEngine* enable_move_to_previous_input_callback_engine = new ylikuutio::callback_system::CallbackEngine();
     new console::ConsoleCallbackObject(&console::Console::enable_move_to_previous_input, enable_move_to_previous_input_callback_engine, my_console);
 
     // Callback code for key down release: enable move to next input.
-    callback_system::CallbackEngine* enable_move_to_next_input_callback_engine = new callback_system::CallbackEngine();
+    ylikuutio::callback_system::CallbackEngine* enable_move_to_next_input_callback_engine = new ylikuutio::callback_system::CallbackEngine();
     new console::ConsoleCallbackObject(&console::Console::enable_move_to_next_input, enable_move_to_next_input_callback_engine, my_console);
 
     // Callback code for backspace release: enable backspace.
-    callback_system::CallbackEngine* enable_backspace_callback_engine = new callback_system::CallbackEngine();
+    ylikuutio::callback_system::CallbackEngine* enable_backspace_callback_engine = new ylikuutio::callback_system::CallbackEngine();
     new console::ConsoleCallbackObject(&console::Console::enable_backspace, enable_backspace_callback_engine, my_console);
 
     // Callback code for enter release: enable Enter key.
-    callback_system::CallbackEngine* enable_enter_key_callback_engine = new callback_system::CallbackEngine();
+    ylikuutio::callback_system::CallbackEngine* enable_enter_key_callback_engine = new ylikuutio::callback_system::CallbackEngine();
     new console::ConsoleCallbackObject(&console::Console::enable_enter_key, enable_enter_key_callback_engine, my_console);
 
     // Callback code for C release: enable Control-C.
-    callback_system::CallbackEngine* enable_ctrl_c_callback_engine = new callback_system::CallbackEngine();
+    ylikuutio::callback_system::CallbackEngine* enable_ctrl_c_callback_engine = new ylikuutio::callback_system::CallbackEngine();
     new console::ConsoleCallbackObject(&console::Console::enable_ctrl_c, enable_ctrl_c_callback_engine, my_console);
 
     // Callback code for W release: enable Control-W.
-    callback_system::CallbackEngine* enable_ctrl_w_callback_engine = new callback_system::CallbackEngine();
+    ylikuutio::callback_system::CallbackEngine* enable_ctrl_w_callback_engine = new ylikuutio::callback_system::CallbackEngine();
     new console::ConsoleCallbackObject(&console::Console::enable_ctrl_w, enable_ctrl_w_callback_engine, my_console);
 
     // Callback code for PgUp release: enable PgUp.
-    callback_system::CallbackEngine* enable_page_up_callback_engine = new callback_system::CallbackEngine();
+    ylikuutio::callback_system::CallbackEngine* enable_page_up_callback_engine = new ylikuutio::callback_system::CallbackEngine();
     new console::ConsoleCallbackObject(&console::Console::enable_page_up, enable_page_up_callback_engine, my_console);
 
     // Callback code for PgDn release: enable PgDn.
-    callback_system::CallbackEngine* enable_page_down_callback_engine = new callback_system::CallbackEngine();
+    ylikuutio::callback_system::CallbackEngine* enable_page_down_callback_engine = new ylikuutio::callback_system::CallbackEngine();
     new console::ConsoleCallbackObject(&console::Console::enable_page_down, enable_page_down_callback_engine, my_console);
 
     // Callback code for Home release: enable Home.
-    callback_system::CallbackEngine* enable_home_callback_engine = new callback_system::CallbackEngine();
+    ylikuutio::callback_system::CallbackEngine* enable_home_callback_engine = new ylikuutio::callback_system::CallbackEngine();
     new console::ConsoleCallbackObject(&console::Console::enable_home, enable_home_callback_engine, my_console);
 
     // Callback code for End release: enable End.
-    callback_system::CallbackEngine* enable_end_callback_engine = new callback_system::CallbackEngine();
+    ylikuutio::callback_system::CallbackEngine* enable_end_callback_engine = new ylikuutio::callback_system::CallbackEngine();
     new console::ConsoleCallbackObject(&console::Console::enable_end, enable_end_callback_engine, my_console);
 
     /*********************************************************************\
@@ -726,75 +726,75 @@ int main(int argc, char* argv[])
     std::cout << "Defining console keypress callback engines.\n";
 
     // Callback code for `GLFW_KEY_GRAVE_ACCENT` (tilde key above Tab, usually used for console).
-    callback_system::CallbackEngine* exit_console_callback_engine = new callback_system::CallbackEngine();
+    ylikuutio::callback_system::CallbackEngine* exit_console_callback_engine = new ylikuutio::callback_system::CallbackEngine();
     new console::ConsoleCallbackObject(&console::Console::exit_console, exit_console_callback_engine, my_console);
 
     // Callback code for left Control press.
-    callback_system::CallbackEngine* press_left_control_in_console_callback_engine = new callback_system::CallbackEngine();
+    ylikuutio::callback_system::CallbackEngine* press_left_control_in_console_callback_engine = new ylikuutio::callback_system::CallbackEngine();
     new console::ConsoleCallbackObject(&console::Console::press_left_control_in_console, press_left_control_in_console_callback_engine, my_console);
 
     // Callback code for right Control press.
-    callback_system::CallbackEngine* press_right_control_in_console_callback_engine = new callback_system::CallbackEngine();
+    ylikuutio::callback_system::CallbackEngine* press_right_control_in_console_callback_engine = new ylikuutio::callback_system::CallbackEngine();
     new console::ConsoleCallbackObject(&console::Console::press_right_control_in_console, press_right_control_in_console_callback_engine, my_console);
 
     // Callback code for left Alt press.
-    callback_system::CallbackEngine* press_left_alt_in_console_callback_engine = new callback_system::CallbackEngine();
+    ylikuutio::callback_system::CallbackEngine* press_left_alt_in_console_callback_engine = new ylikuutio::callback_system::CallbackEngine();
     new console::ConsoleCallbackObject(&console::Console::press_left_alt_in_console, press_left_alt_in_console_callback_engine, my_console);
 
     // Callback code for right Alt press.
-    callback_system::CallbackEngine* press_right_alt_in_console_callback_engine = new callback_system::CallbackEngine();
+    ylikuutio::callback_system::CallbackEngine* press_right_alt_in_console_callback_engine = new ylikuutio::callback_system::CallbackEngine();
     new console::ConsoleCallbackObject(&console::Console::press_right_alt_in_console, press_right_alt_in_console_callback_engine, my_console);
 
     // Callback code for left Shift press.
-    callback_system::CallbackEngine* press_left_shift_in_console_callback_engine = new callback_system::CallbackEngine();
+    ylikuutio::callback_system::CallbackEngine* press_left_shift_in_console_callback_engine = new ylikuutio::callback_system::CallbackEngine();
     new console::ConsoleCallbackObject(&console::Console::press_left_shift_in_console, press_left_shift_in_console_callback_engine, my_console);
 
     // Callback code for right Shift press.
-    callback_system::CallbackEngine* press_right_shift_in_console_callback_engine = new callback_system::CallbackEngine();
+    ylikuutio::callback_system::CallbackEngine* press_right_shift_in_console_callback_engine = new ylikuutio::callback_system::CallbackEngine();
     new console::ConsoleCallbackObject(&console::Console::press_right_shift_in_console, press_right_shift_in_console_callback_engine, my_console);
 
     // Callback code for key up: move to previous input.
-    callback_system::CallbackEngine* move_to_previous_input_callback_engine = new callback_system::CallbackEngine();
+    ylikuutio::callback_system::CallbackEngine* move_to_previous_input_callback_engine = new ylikuutio::callback_system::CallbackEngine();
     new console::ConsoleCallbackObject(&console::Console::move_to_previous_input, move_to_previous_input_callback_engine, my_console);
 
     // Callback code for key down: move to next input.
-    callback_system::CallbackEngine* move_to_next_input_callback_engine = new callback_system::CallbackEngine();
+    ylikuutio::callback_system::CallbackEngine* move_to_next_input_callback_engine = new ylikuutio::callback_system::CallbackEngine();
     new console::ConsoleCallbackObject(&console::Console::move_to_next_input, move_to_next_input_callback_engine, my_console);
 
     // Callback code for backspace: delete character left of cursor from current input in console.
-    callback_system::CallbackEngine* backspace_callback_engine = new callback_system::CallbackEngine();
+    ylikuutio::callback_system::CallbackEngine* backspace_callback_engine = new ylikuutio::callback_system::CallbackEngine();
     new console::ConsoleCallbackObject(&console::Console::backspace, backspace_callback_engine, my_console);
 
     // Callback code for Enter key.
-    callback_system::CallbackEngine* enter_callback_engine = new callback_system::CallbackEngine();
+    ylikuutio::callback_system::CallbackEngine* enter_callback_engine = new ylikuutio::callback_system::CallbackEngine();
     new console::ConsoleCallbackObject(&console::Console::enter_key, enter_callback_engine, my_console);
 
     // Callback code for C: Control-C.
-    callback_system::CallbackEngine* ctrl_c_callback_engine = new callback_system::CallbackEngine();
+    ylikuutio::callback_system::CallbackEngine* ctrl_c_callback_engine = new ylikuutio::callback_system::CallbackEngine();
     new console::ConsoleCallbackObject(&console::Console::ctrl_c, ctrl_c_callback_engine, my_console);
 
     // Callback code for W: Control-W.
-    callback_system::CallbackEngine* ctrl_w_callback_engine = new callback_system::CallbackEngine();
+    ylikuutio::callback_system::CallbackEngine* ctrl_w_callback_engine = new ylikuutio::callback_system::CallbackEngine();
     new console::ConsoleCallbackObject(&console::Console::ctrl_w, ctrl_w_callback_engine, my_console);
 
     // Callback code for PgUp.
-    callback_system::CallbackEngine* page_up_callback_engine = new callback_system::CallbackEngine();
+    ylikuutio::callback_system::CallbackEngine* page_up_callback_engine = new ylikuutio::callback_system::CallbackEngine();
     new console::ConsoleCallbackObject(&console::Console::page_up, page_up_callback_engine, my_console);
 
     // Callback code for PgDn.
-    callback_system::CallbackEngine* page_down_callback_engine = new callback_system::CallbackEngine();
+    ylikuutio::callback_system::CallbackEngine* page_down_callback_engine = new ylikuutio::callback_system::CallbackEngine();
     new console::ConsoleCallbackObject(&console::Console::page_down, page_down_callback_engine, my_console);
 
     // Callback code for Home.
-    callback_system::CallbackEngine* home_callback_engine = new callback_system::CallbackEngine();
+    ylikuutio::callback_system::CallbackEngine* home_callback_engine = new ylikuutio::callback_system::CallbackEngine();
     new console::ConsoleCallbackObject(&console::Console::home, home_callback_engine, my_console);
 
     // Callback code for End.
-    callback_system::CallbackEngine* end_callback_engine = new callback_system::CallbackEngine();
+    ylikuutio::callback_system::CallbackEngine* end_callback_engine = new ylikuutio::callback_system::CallbackEngine();
     new console::ConsoleCallbackObject(&console::Console::end, end_callback_engine, my_console);
 
-    new callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, cleanup_callback_object);
-    new callback_system::CallbackParameter("font2D_pointer", std::make_shared<datatypes::AnyValue>(my_font2D), false, cleanup_callback_object);
+    new ylikuutio::callback_system::CallbackParameter("", std::make_shared<datatypes::AnyValue>(my_universe), false, cleanup_callback_object);
+    new ylikuutio::callback_system::CallbackParameter("font2D_pointer", std::make_shared<datatypes::AnyValue>(my_font2D), false, cleanup_callback_object);
     cleanup_callback_object->set_new_callback(&ajokki::full_cleanup);
 
     // Keyrelease callbacks for action mode.
@@ -1031,7 +1031,7 @@ int main(int argc, char* argv[])
 
                 if (is_released)
                 {
-                    callback_system::CallbackEngine* callback_engine = (*current_keyrelease_callback_engine_vector_pointer)->at(i).callback_engine;
+                    ylikuutio::callback_system::CallbackEngine* callback_engine = (*current_keyrelease_callback_engine_vector_pointer)->at(i).callback_engine;
                     std::shared_ptr<datatypes::AnyValue> any_value = callback_engine->execute();
                 }
             }
@@ -1063,7 +1063,7 @@ int main(int argc, char* argv[])
 
                 if (is_pressed)
                 {
-                    callback_system::CallbackEngine* callback_engine = (*current_keypress_callback_engine_vector_pointer)->at(i).callback_engine;
+                    ylikuutio::callback_system::CallbackEngine* callback_engine = (*current_keypress_callback_engine_vector_pointer)->at(i).callback_engine;
                     std::shared_ptr<datatypes::AnyValue> any_value = callback_engine->execute();
 
                     if (any_value != nullptr &&

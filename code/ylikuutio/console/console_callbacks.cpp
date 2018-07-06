@@ -10,11 +10,14 @@
 #include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
 
-namespace callback_system
+namespace ylikuutio
 {
-    class CallbackEngine;
-    class CallbackObject;
-    class CallbackParameter;
+    namespace callback_system
+    {
+        class CallbackEngine;
+        class CallbackObject;
+        class CallbackParameter;
+    }
 }
 
 namespace console
@@ -26,9 +29,9 @@ namespace console
     // Action mode keyrelease callbacks begin here.
 
     std::shared_ptr<datatypes::AnyValue> Console::enable_enter_console(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>&,
+            ylikuutio::callback_system::CallbackEngine*,
+            ylikuutio::callback_system::CallbackObject*,
+            std::vector<ylikuutio::callback_system::CallbackParameter*>&,
             console::Console* console)
     {
         if (!console->in_console)
@@ -41,9 +44,9 @@ namespace console
     // Action mode keypress callbacks begin here.
 
     std::shared_ptr<datatypes::AnyValue> Console::enter_console(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>&,
+            ylikuutio::callback_system::CallbackEngine*,
+            ylikuutio::callback_system::CallbackObject*,
+            std::vector<ylikuutio::callback_system::CallbackParameter*>&,
             console::Console* console)
     {
         if (!console->in_console &&
@@ -92,9 +95,9 @@ namespace console
     // Console mode keyrelease callbacks begin here.
 
     std::shared_ptr<datatypes::AnyValue> Console::enable_exit_console(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>&,
+            ylikuutio::callback_system::CallbackEngine*,
+            ylikuutio::callback_system::CallbackObject*,
+            std::vector<ylikuutio::callback_system::CallbackParameter*>&,
             console::Console* console)
     {
         if (console->in_console)
@@ -105,9 +108,9 @@ namespace console
     }
 
     std::shared_ptr<datatypes::AnyValue> Console::release_left_control_in_console(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>&,
+            ylikuutio::callback_system::CallbackEngine*,
+            ylikuutio::callback_system::CallbackObject*,
+            std::vector<ylikuutio::callback_system::CallbackParameter*>&,
             console::Console* console)
     {
         if (console->in_console)
@@ -118,9 +121,9 @@ namespace console
     }
 
     std::shared_ptr<datatypes::AnyValue> Console::release_right_control_in_console(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>&,
+            ylikuutio::callback_system::CallbackEngine*,
+            ylikuutio::callback_system::CallbackObject*,
+            std::vector<ylikuutio::callback_system::CallbackParameter*>&,
             console::Console* console)
     {
         if (console->in_console)
@@ -131,9 +134,9 @@ namespace console
     }
 
     std::shared_ptr<datatypes::AnyValue> Console::release_left_alt_in_console(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>&,
+            ylikuutio::callback_system::CallbackEngine*,
+            ylikuutio::callback_system::CallbackObject*,
+            std::vector<ylikuutio::callback_system::CallbackParameter*>&,
             console::Console* console)
     {
         if (console->in_console)
@@ -144,9 +147,9 @@ namespace console
     }
 
     std::shared_ptr<datatypes::AnyValue> Console::release_right_alt_in_console(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>&,
+            ylikuutio::callback_system::CallbackEngine*,
+            ylikuutio::callback_system::CallbackObject*,
+            std::vector<ylikuutio::callback_system::CallbackParameter*>&,
             console::Console* console)
     {
         if (console->in_console)
@@ -157,9 +160,9 @@ namespace console
     }
 
     std::shared_ptr<datatypes::AnyValue> Console::release_left_shift_in_console(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>&,
+            ylikuutio::callback_system::CallbackEngine*,
+            ylikuutio::callback_system::CallbackObject*,
+            std::vector<ylikuutio::callback_system::CallbackParameter*>&,
             console::Console* console)
     {
         if (console->in_console)
@@ -170,9 +173,9 @@ namespace console
     }
 
     std::shared_ptr<datatypes::AnyValue> Console::release_right_shift_in_console(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>&,
+            ylikuutio::callback_system::CallbackEngine*,
+            ylikuutio::callback_system::CallbackObject*,
+            std::vector<ylikuutio::callback_system::CallbackParameter*>&,
             console::Console* console)
     {
         if (console->in_console)
@@ -183,9 +186,9 @@ namespace console
     }
 
     std::shared_ptr<datatypes::AnyValue> Console::enable_move_to_previous_input(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>&,
+            ylikuutio::callback_system::CallbackEngine*,
+            ylikuutio::callback_system::CallbackObject*,
+            std::vector<ylikuutio::callback_system::CallbackParameter*>&,
             console::Console* console)
     {
         if (console->in_console)
@@ -196,9 +199,9 @@ namespace console
     }
 
     std::shared_ptr<datatypes::AnyValue> Console::enable_move_to_next_input(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>&,
+            ylikuutio::callback_system::CallbackEngine*,
+            ylikuutio::callback_system::CallbackObject*,
+            std::vector<ylikuutio::callback_system::CallbackParameter*>&,
             console::Console* console)
     {
         if (console->in_console)
@@ -209,9 +212,9 @@ namespace console
     }
 
     std::shared_ptr<datatypes::AnyValue> Console::enable_backspace(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>&,
+            ylikuutio::callback_system::CallbackEngine*,
+            ylikuutio::callback_system::CallbackObject*,
+            std::vector<ylikuutio::callback_system::CallbackParameter*>&,
             console::Console* console)
     {
         if (console->in_console)
@@ -222,9 +225,9 @@ namespace console
     }
 
     std::shared_ptr<datatypes::AnyValue> Console::enable_enter_key(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>&,
+            ylikuutio::callback_system::CallbackEngine*,
+            ylikuutio::callback_system::CallbackObject*,
+            std::vector<ylikuutio::callback_system::CallbackParameter*>&,
             console::Console* console)
     {
         if (console->in_console)
@@ -235,9 +238,9 @@ namespace console
     }
 
     std::shared_ptr<datatypes::AnyValue> Console::enable_ctrl_c(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>&,
+            ylikuutio::callback_system::CallbackEngine*,
+            ylikuutio::callback_system::CallbackObject*,
+            std::vector<ylikuutio::callback_system::CallbackParameter*>&,
             console::Console* console)
     {
         if (console->in_console)
@@ -248,9 +251,9 @@ namespace console
     }
 
     std::shared_ptr<datatypes::AnyValue> Console::enable_ctrl_w(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>&,
+            ylikuutio::callback_system::CallbackEngine*,
+            ylikuutio::callback_system::CallbackObject*,
+            std::vector<ylikuutio::callback_system::CallbackParameter*>&,
             console::Console* console)
     {
         if (console->in_console)
@@ -261,9 +264,9 @@ namespace console
     }
 
     std::shared_ptr<datatypes::AnyValue> Console::enable_page_up(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>&,
+            ylikuutio::callback_system::CallbackEngine*,
+            ylikuutio::callback_system::CallbackObject*,
+            std::vector<ylikuutio::callback_system::CallbackParameter*>&,
             console::Console* console)
     {
         if (console->in_console)
@@ -274,9 +277,9 @@ namespace console
     }
 
     std::shared_ptr<datatypes::AnyValue> Console::enable_page_down(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>&,
+            ylikuutio::callback_system::CallbackEngine*,
+            ylikuutio::callback_system::CallbackObject*,
+            std::vector<ylikuutio::callback_system::CallbackParameter*>&,
             console::Console* console)
     {
         if (console->in_console)
@@ -287,9 +290,9 @@ namespace console
     }
 
     std::shared_ptr<datatypes::AnyValue> Console::enable_home(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>&,
+            ylikuutio::callback_system::CallbackEngine*,
+            ylikuutio::callback_system::CallbackObject*,
+            std::vector<ylikuutio::callback_system::CallbackParameter*>&,
             console::Console* console)
     {
         if (console->in_console)
@@ -300,9 +303,9 @@ namespace console
     }
 
     std::shared_ptr<datatypes::AnyValue> Console::enable_end(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>&,
+            ylikuutio::callback_system::CallbackEngine*,
+            ylikuutio::callback_system::CallbackObject*,
+            std::vector<ylikuutio::callback_system::CallbackParameter*>&,
             console::Console* console)
     {
         if (console->in_console)
@@ -315,9 +318,9 @@ namespace console
     // Console mode keypress callbacks begin here.
 
     std::shared_ptr<datatypes::AnyValue> Console::exit_console(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>&,
+            ylikuutio::callback_system::CallbackEngine*,
+            ylikuutio::callback_system::CallbackObject*,
+            std::vector<ylikuutio::callback_system::CallbackParameter*>&,
             console::Console* console)
     {
         if (console->in_console && console->exit_console())
@@ -333,9 +336,9 @@ namespace console
     }
 
     std::shared_ptr<datatypes::AnyValue> Console::press_left_control_in_console(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>&,
+            ylikuutio::callback_system::CallbackEngine*,
+            ylikuutio::callback_system::CallbackObject*,
+            std::vector<ylikuutio::callback_system::CallbackParameter*>&,
             console::Console* console)
     {
         if (console->in_console)
@@ -346,9 +349,9 @@ namespace console
     }
 
     std::shared_ptr<datatypes::AnyValue> Console::press_right_control_in_console(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>&,
+            ylikuutio::callback_system::CallbackEngine*,
+            ylikuutio::callback_system::CallbackObject*,
+            std::vector<ylikuutio::callback_system::CallbackParameter*>&,
             console::Console* console)
     {
         if (console->in_console)
@@ -359,9 +362,9 @@ namespace console
     }
 
     std::shared_ptr<datatypes::AnyValue> Console::press_left_alt_in_console(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>&,
+            ylikuutio::callback_system::CallbackEngine*,
+            ylikuutio::callback_system::CallbackObject*,
+            std::vector<ylikuutio::callback_system::CallbackParameter*>&,
             console::Console* console)
     {
         if (console->in_console)
@@ -372,9 +375,9 @@ namespace console
     }
 
     std::shared_ptr<datatypes::AnyValue> Console::press_right_alt_in_console(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>&,
+            ylikuutio::callback_system::CallbackEngine*,
+            ylikuutio::callback_system::CallbackObject*,
+            std::vector<ylikuutio::callback_system::CallbackParameter*>&,
             console::Console* console)
     {
         if (console->in_console)
@@ -385,9 +388,9 @@ namespace console
     }
 
     std::shared_ptr<datatypes::AnyValue> Console::press_left_shift_in_console(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>&,
+            ylikuutio::callback_system::CallbackEngine*,
+            ylikuutio::callback_system::CallbackObject*,
+            std::vector<ylikuutio::callback_system::CallbackParameter*>&,
             console::Console* console)
     {
         if (console->in_console)
@@ -398,9 +401,9 @@ namespace console
     }
 
     std::shared_ptr<datatypes::AnyValue> Console::press_right_shift_in_console(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>&,
+            ylikuutio::callback_system::CallbackEngine*,
+            ylikuutio::callback_system::CallbackObject*,
+            std::vector<ylikuutio::callback_system::CallbackParameter*>&,
             console::Console* console)
     {
         if (console->in_console)
@@ -411,9 +414,9 @@ namespace console
     }
 
     std::shared_ptr<datatypes::AnyValue> Console::move_to_previous_input(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>&,
+            ylikuutio::callback_system::CallbackEngine*,
+            ylikuutio::callback_system::CallbackObject*,
+            std::vector<ylikuutio::callback_system::CallbackParameter*>&,
             console::Console* console)
     {
         if (console->in_console && console->can_move_to_previous_input)
@@ -451,9 +454,9 @@ namespace console
     }
 
     std::shared_ptr<datatypes::AnyValue> Console::move_to_next_input(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>&,
+            ylikuutio::callback_system::CallbackEngine*,
+            ylikuutio::callback_system::CallbackObject*,
+            std::vector<ylikuutio::callback_system::CallbackParameter*>&,
             console::Console* console)
     {
         if (console->in_console && console->can_move_to_next_input)
@@ -486,9 +489,9 @@ namespace console
     }
 
     std::shared_ptr<datatypes::AnyValue> Console::backspace(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>&,
+            ylikuutio::callback_system::CallbackEngine*,
+            ylikuutio::callback_system::CallbackObject*,
+            std::vector<ylikuutio::callback_system::CallbackParameter*>&,
             console::Console* console)
     {
         if (console->in_console &&
@@ -503,9 +506,9 @@ namespace console
     }
 
     std::shared_ptr<datatypes::AnyValue> Console::enter_key(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>&,
+            ylikuutio::callback_system::CallbackEngine*,
+            ylikuutio::callback_system::CallbackObject*,
+            std::vector<ylikuutio::callback_system::CallbackParameter*>&,
             console::Console* console)
     {
         std::shared_ptr<datatypes::AnyValue> any_value = nullptr;
@@ -593,9 +596,9 @@ namespace console
     }
 
     std::shared_ptr<datatypes::AnyValue> Console::ctrl_c(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>&,
+            ylikuutio::callback_system::CallbackEngine*,
+            ylikuutio::callback_system::CallbackObject*,
+            std::vector<ylikuutio::callback_system::CallbackParameter*>&,
             console::Console* console)
     {
         if (console->in_console &&
@@ -614,9 +617,9 @@ namespace console
     }
 
     std::shared_ptr<datatypes::AnyValue> Console::ctrl_w(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>&,
+            ylikuutio::callback_system::CallbackEngine*,
+            ylikuutio::callback_system::CallbackObject*,
+            std::vector<ylikuutio::callback_system::CallbackParameter*>&,
             console::Console* console)
     {
         if (console->in_console &&
@@ -659,9 +662,9 @@ namespace console
     }
 
     std::shared_ptr<datatypes::AnyValue> Console::page_up(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>&,
+            ylikuutio::callback_system::CallbackEngine*,
+            ylikuutio::callback_system::CallbackObject*,
+            std::vector<ylikuutio::callback_system::CallbackParameter*>&,
             console::Console* console)
     {
         if (console->in_console && console->can_page_up)
@@ -693,9 +696,9 @@ namespace console
     }
 
     std::shared_ptr<datatypes::AnyValue> Console::page_down(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>&,
+            ylikuutio::callback_system::CallbackEngine*,
+            ylikuutio::callback_system::CallbackObject*,
+            std::vector<ylikuutio::callback_system::CallbackParameter*>&,
             console::Console* console)
     {
         if (console->in_console && console->can_page_down)
@@ -716,9 +719,9 @@ namespace console
     }
 
     std::shared_ptr<datatypes::AnyValue> Console::home(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>&,
+            ylikuutio::callback_system::CallbackEngine*,
+            ylikuutio::callback_system::CallbackObject*,
+            std::vector<ylikuutio::callback_system::CallbackParameter*>&,
             console::Console* console)
     {
         if (console->in_console && console->can_home)
@@ -740,9 +743,9 @@ namespace console
     }
 
     std::shared_ptr<datatypes::AnyValue> Console::end(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>&,
+            ylikuutio::callback_system::CallbackEngine*,
+            ylikuutio::callback_system::CallbackObject*,
+            std::vector<ylikuutio::callback_system::CallbackParameter*>&,
             console::Console* console)
     {
         if (console->in_console && console->can_end)
