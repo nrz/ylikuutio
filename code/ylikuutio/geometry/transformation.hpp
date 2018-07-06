@@ -12,15 +12,18 @@
 // Include standard headers
 #include <vector>   // std::vector
 
-namespace geometry
+namespace ylikuutio
 {
-    glm::vec3 transform_planar_world_vertex_into_cartesian_vertex(
-            glm::vec3 planar_world_vertex,
-            const double sphere_radius);
+    namespace geometry
+    {
+        glm::vec3 transform_planar_world_vertex_into_cartesian_vertex(
+                glm::vec3 planar_world_vertex,
+                const double sphere_radius);
 
-    void transform_coordinates_to_curved_surface(
-            const geometry::TransformationStruct transformation_struct,
-            std::vector<glm::vec3>& temp_vertices);
+        void transform_coordinates_to_curved_surface(
+                const ylikuutio::geometry::TransformationStruct transformation_struct,
+                std::vector<glm::vec3>& temp_vertices);
+    }
 }
 
 #endif

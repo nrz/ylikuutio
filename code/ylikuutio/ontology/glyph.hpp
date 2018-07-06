@@ -72,9 +72,9 @@ namespace ontology
                 this->bind_to_parent();
 
                 // TODO: implement triangulation of `Glyph` objects!
-                geometry::TriangulatePolygonsStruct triangulate_polygons_struct;
+                ylikuutio::geometry::TriangulatePolygonsStruct triangulate_polygons_struct;
                 triangulate_polygons_struct.input_vertices = this->glyph_vertex_data;
-                bool triangulating_result = geometry::triangulate_polygons(
+                bool triangulating_result = ylikuutio::geometry::triangulate_polygons(
                         triangulate_polygons_struct,
                         this->vertices,
                         this->uvs,

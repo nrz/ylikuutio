@@ -1,5 +1,8 @@
 #include "line_segment3D.hpp"
 
-namespace geometry
+namespace ylikuutio
 {
+    namespace geometry
+    {
+    }
 }

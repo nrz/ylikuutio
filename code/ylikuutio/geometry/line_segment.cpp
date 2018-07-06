@@ -4,19 +4,22 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
-namespace geometry
+namespace ylikuutio
 {
-    /*
-    LineSegment::LineSegment(const std::vector<float> point1, const std::vector<float> point2)
+    namespace geometry
     {
+        /*
+           LineSegment::LineSegment(const std::vector<float> point1, const std::vector<float> point2)
+           {
         // constructor.
         // can be used for creating n-dimensional line segments.
-    }
-    */
+        }
+        */
 
-    std::string LineSegment::get_equation()
-    {
-        std::string line_segment_equation;
-        return line_segment_equation;
+        std::string LineSegment::get_equation()
+        {
+            std::string line_segment_equation;
+            return line_segment_equation;
+        }
     }
 }
