@@ -26,8 +26,8 @@
 
 // Include standard headers
 #include <iostream> // std::cout, std::cin, std::cerr
-#include <vector>   // std::vector
 #include <stdint.h> // uint32_t etc.
+#include <vector>   // std::vector
 
 namespace geometry
 {
