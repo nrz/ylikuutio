@@ -11,11 +11,14 @@ namespace config
     class SettingMaster;
 }
 
-namespace ontology
+namespace ylikuutio
 {
-    class Entity;
+    namespace ontology
+    {
+        class Entity;
+    }
 }
 
-typedef std::shared_ptr<datatypes::AnyValue> (*ReadCallback) (ontology::Entity* entity, config::SettingMaster* setting_master);
+typedef std::shared_ptr<datatypes::AnyValue> (*ReadCallback) (ylikuutio::ontology::Entity* entity, config::SettingMaster* setting_master);
 
 #endif

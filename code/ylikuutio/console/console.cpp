@@ -75,7 +75,7 @@ namespace ylikuutio
             this->command_callback_map_pointer = console_struct.command_callback_map_pointer;
             std::cout << "3rd pointer defined in Console::Console\n";
 
-            // This is a pointer to `ontology::Universe`.
+            // This is a pointer to `ylikuutio::ontology::Universe`.
             this->universe = console_struct.universe;
             std::cout << "4th pointer defined in Console::Console\n";
 
@@ -351,7 +351,7 @@ namespace ylikuutio
             }
         }
 
-        ontology::Universe* Console::get_universe() const
+        ylikuutio::ontology::Universe* Console::get_universe() const
         {
             return this->universe;
         }

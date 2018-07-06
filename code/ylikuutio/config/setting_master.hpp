@@ -21,9 +21,12 @@ namespace datatypes
     class AnyValue;
 }
 
-namespace ontology
+namespace ylikuutio
 {
-    class Entity;
+    namespace ontology
+    {
+        class Entity;
+    }
 }
 
 namespace config
@@ -34,7 +37,7 @@ namespace config
     {
         public:
             // constructor.
-            SettingMaster(ontology::Entity* const entity);
+            SettingMaster(ylikuutio::ontology::Entity* const entity);
 
             // destructor.
             ~SettingMaster();
@@ -56,69 +59,69 @@ namespace config
 
             static std::shared_ptr<datatypes::AnyValue> set_and_print(
                     ylikuutio::console::Console* console,
-                    ontology::Entity* entity,
+                    ylikuutio::ontology::Entity* entity,
                     std::vector<std::string>& command_parameters);
 
             static std::shared_ptr<datatypes::AnyValue> get_and_print(
                     ylikuutio::console::Console* console,
-                    ontology::Entity* entity,
+                    ylikuutio::ontology::Entity* entity,
                     std::vector<std::string>& command_parameters);
 
-            static std::shared_ptr<datatypes::AnyValue> activate_planet_radius(ontology::Entity* const entity, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> activate_planet_radius(ylikuutio::ontology::Entity* const entity, config::SettingMaster* const setting_master);
 
-            static std::shared_ptr<datatypes::AnyValue> activate_background_color(ontology::Entity* const entity, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> activate_background_color(ylikuutio::ontology::Entity* const entity, config::SettingMaster* const setting_master);
 
-            static std::shared_ptr<datatypes::AnyValue> activate_wireframe(ontology::Entity* const entity, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> activate_wireframe(ylikuutio::ontology::Entity* const entity, config::SettingMaster* const setting_master);
 
-            static std::shared_ptr<datatypes::AnyValue> activate_spherical_coordinates(ontology::Entity* const entity, config::SettingMaster* const setting_master);
-            static std::shared_ptr<datatypes::AnyValue> activate_rho(ontology::Entity* const entity, config::SettingMaster* const setting_master);
-            static std::shared_ptr<datatypes::AnyValue> activate_theta(ontology::Entity* const entity, config::SettingMaster* const setting_master);
-            static std::shared_ptr<datatypes::AnyValue> activate_phi(ontology::Entity* const entity, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> activate_spherical_coordinates(ylikuutio::ontology::Entity* const entity, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> activate_rho(ylikuutio::ontology::Entity* const entity, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> activate_theta(ylikuutio::ontology::Entity* const entity, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> activate_phi(ylikuutio::ontology::Entity* const entity, config::SettingMaster* const setting_master);
 
-            static std::shared_ptr<datatypes::AnyValue> activate_cartesian_coordinates(ontology::Entity* const entity, config::SettingMaster* const setting_master);
-            static std::shared_ptr<datatypes::AnyValue> activate_x(ontology::Entity* const entity, config::SettingMaster* const setting_master);
-            static std::shared_ptr<datatypes::AnyValue> activate_y(ontology::Entity* const entity, config::SettingMaster* const setting_master);
-            static std::shared_ptr<datatypes::AnyValue> activate_z(ontology::Entity* const entity, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> activate_cartesian_coordinates(ylikuutio::ontology::Entity* const entity, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> activate_x(ylikuutio::ontology::Entity* const entity, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> activate_y(ylikuutio::ontology::Entity* const entity, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> activate_z(ylikuutio::ontology::Entity* const entity, config::SettingMaster* const setting_master);
 
-            static std::shared_ptr<datatypes::AnyValue> activate_horizontal_angle(ontology::Entity* const entity, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> activate_horizontal_angle(ylikuutio::ontology::Entity* const entity, config::SettingMaster* const setting_master);
 
-            static std::shared_ptr<datatypes::AnyValue> activate_vertical_angle(ontology::Entity* const entity, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> activate_vertical_angle(ylikuutio::ontology::Entity* const entity, config::SettingMaster* const setting_master);
 
-            static std::shared_ptr<datatypes::AnyValue> activate_speed(ontology::Entity* const entity, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> activate_speed(ylikuutio::ontology::Entity* const entity, config::SettingMaster* const setting_master);
 
-            static std::shared_ptr<datatypes::AnyValue> activate_turbo_factor(ontology::Entity* const entity, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> activate_turbo_factor(ylikuutio::ontology::Entity* const entity, config::SettingMaster* const setting_master);
 
-            static std::shared_ptr<datatypes::AnyValue> activate_twin_turbo_factor(ontology::Entity* const entity, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> activate_twin_turbo_factor(ylikuutio::ontology::Entity* const entity, config::SettingMaster* const setting_master);
 
-            static std::shared_ptr<datatypes::AnyValue> activate_mouse_speed(ontology::Entity* const entity, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> activate_mouse_speed(ylikuutio::ontology::Entity* const entity, config::SettingMaster* const setting_master);
 
-            static std::shared_ptr<datatypes::AnyValue> activate_is_flight_mode_in_use(ontology::Entity* const entity, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> activate_is_flight_mode_in_use(ylikuutio::ontology::Entity* const entity, config::SettingMaster* const setting_master);
 
-            static std::shared_ptr<datatypes::AnyValue> read_cartesian_coordinates(ontology::Entity* const entity, config::SettingMaster* const setting_master);
-            static std::shared_ptr<datatypes::AnyValue> read_x(ontology::Entity* const entity, config::SettingMaster* const setting_master);
-            static std::shared_ptr<datatypes::AnyValue> read_y(ontology::Entity* const entity, config::SettingMaster* const setting_master);
-            static std::shared_ptr<datatypes::AnyValue> read_z(ontology::Entity* const entity, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> read_cartesian_coordinates(ylikuutio::ontology::Entity* const entity, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> read_x(ylikuutio::ontology::Entity* const entity, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> read_y(ylikuutio::ontology::Entity* const entity, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> read_z(ylikuutio::ontology::Entity* const entity, config::SettingMaster* const setting_master);
 
-            static std::shared_ptr<datatypes::AnyValue> read_rho(ontology::Entity* const entity, config::SettingMaster* const setting_master);
-            static std::shared_ptr<datatypes::AnyValue> read_theta(ontology::Entity* const entity, config::SettingMaster* const setting_master);
-            static std::shared_ptr<datatypes::AnyValue> read_phi(ontology::Entity* const entity, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> read_rho(ylikuutio::ontology::Entity* const entity, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> read_theta(ylikuutio::ontology::Entity* const entity, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> read_phi(ylikuutio::ontology::Entity* const entity, config::SettingMaster* const setting_master);
 
-            static std::shared_ptr<datatypes::AnyValue> read_up(ontology::Entity* const entity, config::SettingMaster* const setting_master);
-            static std::shared_ptr<datatypes::AnyValue> read_right(ontology::Entity* const entity, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> read_up(ylikuutio::ontology::Entity* const entity, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> read_right(ylikuutio::ontology::Entity* const entity, config::SettingMaster* const setting_master);
 
-            static std::shared_ptr<datatypes::AnyValue> read_horizontal_angle(ontology::Entity* const entity, config::SettingMaster* const setting_master);
-            static std::shared_ptr<datatypes::AnyValue> read_vertical_angle(ontology::Entity* const entity, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> read_horizontal_angle(ylikuutio::ontology::Entity* const entity, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> read_vertical_angle(ylikuutio::ontology::Entity* const entity, config::SettingMaster* const setting_master);
 
-            static std::shared_ptr<datatypes::AnyValue> read_is_flight_mode_in_use(ontology::Entity* const entity, config::SettingMaster* const setting_master);
+            static std::shared_ptr<datatypes::AnyValue> read_is_flight_mode_in_use(ylikuutio::ontology::Entity* const entity, config::SettingMaster* const setting_master);
 
             // Public callbacks end here.
 
             friend class Setting;
-            friend class ontology::Entity;
+            friend class ylikuutio::ontology::Entity;
             friend class ylikuutio::console::Console;
 
         private:
-            ontology::Entity* parent;
+            ylikuutio::ontology::Entity* parent;
 
             std::vector<config::Setting*> setting_pointer_vector;
             std::queue<int32_t> free_settingID_queue;

@@ -1,9 +1,12 @@
 #include "vehicle.hpp"
 
-namespace ontology
+namespace ylikuutio
 {
-    Vehicle::~Vehicle()
+    namespace ontology
     {
-        // destructor.
+        Vehicle::~Vehicle()
+        {
+            // destructor.
+        }
     }
 }

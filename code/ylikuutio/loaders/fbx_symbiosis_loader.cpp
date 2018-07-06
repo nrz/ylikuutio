@@ -86,9 +86,9 @@ namespace loaders
                 return false;
             }
 
-            // TODO: finalize the implementation of `ontology::Symbiosis`
+            // TODO: finalize the implementation of `ylikuutio::ontology::Symbiosis`
             // to be able to support for different materials!
-            const int material_count = mesh->getMaterialCount(); // TODO: use this in  `ontology::Symbiosis` entities!
+            const int material_count = mesh->getMaterialCount(); // TODO: use this in  `ylikuutio::ontology::Symbiosis` entities!
 
             if (is_debug_mode)
             {

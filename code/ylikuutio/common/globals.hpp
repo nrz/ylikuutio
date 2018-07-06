@@ -71,14 +71,17 @@ namespace graph
     class Graph;
 }
 
-namespace ontology
+namespace ylikuutio
 {
-    class Entity;
-    class Font2D;
+    namespace ontology
+    {
+        class Entity;
+        class Font2D;
+    }
 }
 
-typedef std::shared_ptr<datatypes::AnyValue> (*PreRenderCallback) (ontology::Entity* entity, config::SettingMaster* setting_master);
-typedef std::shared_ptr<datatypes::AnyValue> (*PostRenderCallback) (ontology::Entity* entity, config::SettingMaster* setting_master);
+typedef std::shared_ptr<datatypes::AnyValue> (*PreRenderCallback) (ylikuutio::ontology::Entity* entity, config::SettingMaster* setting_master);
+typedef std::shared_ptr<datatypes::AnyValue> (*PostRenderCallback) (ylikuutio::ontology::Entity* entity, config::SettingMaster* setting_master);
 
 typedef struct PrintingStruct
 {

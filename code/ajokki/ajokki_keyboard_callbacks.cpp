@@ -41,7 +41,7 @@ namespace ajokki
             return false;
         }
 
-        ontology::Universe* universe = any_value_universe->universe;
+        ylikuutio::ontology::Universe* universe = any_value_universe->universe;
 
         if (universe == nullptr)
         {
@@ -49,7 +49,7 @@ namespace ajokki
             return false;
         }
 
-        ontology::World* world = universe->get_active_world();
+        ylikuutio::ontology::World* world = universe->get_active_world();
 
         if (world == nullptr)
         {
@@ -57,7 +57,7 @@ namespace ajokki
             return false;
         }
 
-        ontology::Scene* scene = universe->get_active_world()->get_active_scene();
+        ylikuutio::ontology::Scene* scene = universe->get_active_world()->get_active_scene();
 
         if (scene == nullptr)
         {
@@ -107,7 +107,7 @@ namespace ajokki
             return nullptr;
         }
 
-        ontology::Universe* universe = any_value_universe->universe;
+        ylikuutio::ontology::Universe* universe = any_value_universe->universe;
 
         if (universe == nullptr)
         {
@@ -138,7 +138,7 @@ namespace ajokki
             return nullptr;
         }
 
-        ontology::Universe* universe = any_value_universe->universe;
+        ylikuutio::ontology::Universe* universe = any_value_universe->universe;
 
         if (universe == nullptr)
         {
@@ -169,7 +169,7 @@ namespace ajokki
             return nullptr;
         }
 
-        ontology::Universe* universe = any_value_universe->universe;
+        ylikuutio::ontology::Universe* universe = any_value_universe->universe;
 
         if (universe == nullptr)
         {
@@ -200,7 +200,7 @@ namespace ajokki
             return nullptr;
         }
 
-        ontology::Universe* universe = any_value_universe->universe;
+        ylikuutio::ontology::Universe* universe = any_value_universe->universe;
 
         if (universe == nullptr)
         {
@@ -231,7 +231,7 @@ namespace ajokki
             return nullptr;
         }
 
-        ontology::Universe* universe = any_value_universe->universe;
+        ylikuutio::ontology::Universe* universe = any_value_universe->universe;
 
         if (universe == nullptr)
         {
@@ -275,7 +275,7 @@ namespace ajokki
             return nullptr;
         }
 
-        ontology::Universe* universe = any_value_universe->universe;
+        ylikuutio::ontology::Universe* universe = any_value_universe->universe;
 
         if (universe == nullptr)
         {
@@ -306,7 +306,7 @@ namespace ajokki
             return nullptr;
         }
 
-        ontology::Universe* universe = any_value_universe->universe;
+        ylikuutio::ontology::Universe* universe = any_value_universe->universe;
 
         if (universe == nullptr)
         {
@@ -337,7 +337,7 @@ namespace ajokki
             return nullptr;
         }
 
-        ontology::Universe* universe = any_value_universe->universe;
+        ylikuutio::ontology::Universe* universe = any_value_universe->universe;
 
         if (universe == nullptr)
         {
@@ -368,7 +368,7 @@ namespace ajokki
             return nullptr;
         }
 
-        ontology::Universe* universe = any_value_universe->universe;
+        ylikuutio::ontology::Universe* universe = any_value_universe->universe;
 
         if (universe == nullptr)
         {
@@ -399,7 +399,7 @@ namespace ajokki
             return nullptr;
         }
 
-        ontology::Universe* universe = any_value_universe->universe;
+        ylikuutio::ontology::Universe* universe = any_value_universe->universe;
 
         if (universe == nullptr)
         {
@@ -430,7 +430,7 @@ namespace ajokki
             return nullptr;
         }
 
-        ontology::Universe* universe = any_value_universe->universe;
+        ylikuutio::ontology::Universe* universe = any_value_universe->universe;
 
         if (universe == nullptr)
         {
@@ -461,7 +461,7 @@ namespace ajokki
             return nullptr;
         }
 
-        ontology::Universe* universe = any_value_universe->universe;
+        ylikuutio::ontology::Universe* universe = any_value_universe->universe;
 
         if (universe == nullptr)
         {
@@ -492,7 +492,7 @@ namespace ajokki
             return nullptr;
         }
 
-        ontology::Universe* universe = any_value_universe->universe;
+        ylikuutio::ontology::Universe* universe = any_value_universe->universe;
 
         if (universe == nullptr)
         {
@@ -523,7 +523,7 @@ namespace ajokki
             return nullptr;
         }
 
-        ontology::Universe* universe = any_value_universe->universe;
+        ylikuutio::ontology::Universe* universe = any_value_universe->universe;
 
         if (universe == nullptr)
         {
@@ -558,7 +558,7 @@ namespace ajokki
             return nullptr;
         }
 
-        ontology::Universe* universe = any_value_universe->universe;
+        ylikuutio::ontology::Universe* universe = any_value_universe->universe;
 
         if (universe == nullptr)
         {
@@ -594,7 +594,7 @@ namespace ajokki
             return nullptr;
         }
 
-        ontology::Universe* universe = any_value_universe->universe;
+        ylikuutio::ontology::Universe* universe = any_value_universe->universe;
 
         if (universe == nullptr)
         {
@@ -642,7 +642,7 @@ namespace ajokki
             return nullptr;
         }
 
-        ontology::Universe* universe = any_value_universe->universe;
+        ylikuutio::ontology::Universe* universe = any_value_universe->universe;
 
         if (universe == nullptr)
         {
@@ -673,7 +673,7 @@ namespace ajokki
 
         std::string entity_string = *entity_string_pointer;
 
-        ontology::Entity* entity = universe->get_entity(entity_string);
+        ylikuutio::ontology::Entity* entity = universe->get_entity(entity_string);
 
         if (entity == nullptr)
         {
@@ -704,7 +704,7 @@ namespace ajokki
             return nullptr;
         }
 
-        ontology::Universe* universe = any_value_universe->universe;
+        ylikuutio::ontology::Universe* universe = any_value_universe->universe;
 
         if (universe == nullptr)
         {
@@ -735,23 +735,23 @@ namespace ajokki
 
         std::string entity_string = *entity_string_pointer;
 
-        ontology::Entity* entity = universe->get_entity(entity_string);
+        ylikuutio::ontology::Entity* entity = universe->get_entity(entity_string);
 
         if (entity == nullptr)
         {
             return nullptr;
         }
 
-        ontology::Species* species = dynamic_cast<ontology::Species*>(entity);
+        ylikuutio::ontology::Species* species = dynamic_cast<ylikuutio::ontology::Species*>(entity);
 
         if (species == nullptr)
         {
             return nullptr;
         }
 
-        ontology::Entity* old_material_entity = species->get_parent();
+        ylikuutio::ontology::Entity* old_material_entity = species->get_parent();
 
-        ontology::Material* old_material = dynamic_cast<ontology::Material*>(old_material_entity);
+        ylikuutio::ontology::Material* old_material = dynamic_cast<ylikuutio::ontology::Material*>(old_material_entity);
 
         if (old_material == nullptr)
         {
@@ -781,14 +781,14 @@ namespace ajokki
 
         std::string new_material_string = *new_material_string_pointer;
 
-        ontology::Entity* new_material_entity = universe->get_entity(new_material_string);
+        ylikuutio::ontology::Entity* new_material_entity = universe->get_entity(new_material_string);
 
         if (new_material_entity == nullptr)
         {
             return nullptr;
         }
 
-        ontology::Material* new_material = dynamic_cast<ontology::Material*>(new_material_entity);
+        ylikuutio::ontology::Material* new_material = dynamic_cast<ylikuutio::ontology::Material*>(new_material_entity);
 
         if (new_material == nullptr)
         {
@@ -824,7 +824,7 @@ namespace ajokki
             return nullptr;
         }
 
-        ontology::Universe* universe = any_value_universe->universe;
+        ylikuutio::ontology::Universe* universe = any_value_universe->universe;
 
         if (universe == nullptr)
         {
@@ -855,23 +855,23 @@ namespace ajokki
 
         std::string entity_string = *entity_string_pointer;
 
-        ontology::Entity* entity = universe->get_entity(entity_string);
+        ylikuutio::ontology::Entity* entity = universe->get_entity(entity_string);
 
         if (entity == nullptr)
         {
             return nullptr;
         }
 
-        ontology::Object* object = dynamic_cast<ontology::Object*>(entity);
+        ylikuutio::ontology::Object* object = dynamic_cast<ylikuutio::ontology::Object*>(entity);
 
         if (object == nullptr)
         {
             return nullptr;
         }
 
-        ontology::Entity* old_species_entity = object->get_parent();
+        ylikuutio::ontology::Entity* old_species_entity = object->get_parent();
 
-        ontology::Species* old_species = dynamic_cast<ontology::Species*>(old_species_entity);
+        ylikuutio::ontology::Species* old_species = dynamic_cast<ylikuutio::ontology::Species*>(old_species_entity);
 
         if (old_species == nullptr)
         {
@@ -901,14 +901,14 @@ namespace ajokki
 
         std::string new_species_string = *new_species_string_pointer;
 
-        ontology::Entity* new_species_entity = universe->get_entity(new_species_string);
+        ylikuutio::ontology::Entity* new_species_entity = universe->get_entity(new_species_string);
 
         if (new_species_entity == nullptr)
         {
             return nullptr;
         }
 
-        ontology::Species* new_species = dynamic_cast<ontology::Species*>(new_species_entity);
+        ylikuutio::ontology::Species* new_species = dynamic_cast<ylikuutio::ontology::Species*>(new_species_entity);
 
         if (new_species == nullptr)
         {

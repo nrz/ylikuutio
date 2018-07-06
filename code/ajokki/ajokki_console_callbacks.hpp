@@ -19,26 +19,29 @@ namespace datatypes
     class AnyValue;
 }
 
-namespace ontology
+namespace ylikuutio
 {
-    class Entity;
+    namespace ontology
+    {
+        class Entity;
+    }
 }
 
 namespace ajokki
 {
     std::shared_ptr<datatypes::AnyValue> version(
             ylikuutio::console::Console* console,
-            ontology::Entity*,
+            ylikuutio::ontology::Entity*,
             std::vector<std::string>& command_parameters);
 
     std::shared_ptr<datatypes::AnyValue> quit(
             ylikuutio::console::Console*,
-            ontology::Entity*,
+            ylikuutio::ontology::Entity*,
             std::vector<std::string>& command_parameters);
 
     std::shared_ptr<datatypes::AnyValue> help(
             ylikuutio::console::Console*,
-            ontology::Entity*,
+            ylikuutio::ontology::Entity*,
             std::vector<std::string>& command_parameters);
 }
 

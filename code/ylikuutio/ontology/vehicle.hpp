@@ -1,20 +1,23 @@
 #include "object.hpp"
 
-namespace ontology
+namespace ylikuutio
 {
-    class Universe;
-
-    class Vehicle: public ontology::Object
+    namespace ontology
     {
-        public:
-            // constructor.
-            Vehicle(ontology::Universe* const universe, ObjectStruct& object_struct)
-                : Object(universe, object_struct)
-            {
-                // constructor.
-            }
+        class Universe;
 
-            // destructor.
-            virtual ~Vehicle();
-    };
+        class Vehicle: public ylikuutio::ontology::Object
+        {
+            public:
+                // constructor.
+                Vehicle(ylikuutio::ontology::Universe* const universe, ObjectStruct& object_struct)
+                    : Object(universe, object_struct)
+                {
+                    // constructor.
+                }
+
+                // destructor.
+                virtual ~Vehicle();
+        };
+    }
 }

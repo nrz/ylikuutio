@@ -15,20 +15,23 @@
 #include <string>   // std::string
 #include <stdint.h> // uint32_t etc.
 
-namespace ontology
+namespace ylikuutio
 {
-    class Entity;
-    class Universe;
-    class Scene;
-    class Shader;
-    class Material;
-    class Species;
-    class Object;
-    class VectorFont;
-    class Glyph;
-    class Text3D;
-    class Symbiosis;
-    class Font2D;
+    namespace ontology
+    {
+        class Entity;
+        class Universe;
+        class Scene;
+        class Shader;
+        class Material;
+        class Species;
+        class Object;
+        class VectorFont;
+        class Glyph;
+        class Text3D;
+        class Symbiosis;
+        class Font2D;
+    }
 }
 
 namespace ylikuutio
@@ -78,7 +81,7 @@ namespace datatypes
         public:
             std::string get_datatype();
             std::string get_string() const;
-            ontology::Entity* get_entity_pointer() const;
+            ylikuutio::ontology::Entity* get_entity_pointer() const;
             bool set_value(const std::string& value_string);
 
             // copy constructor.
@@ -97,17 +100,17 @@ namespace datatypes
             AnyValue(double* const double_pointer);
             AnyValue(int32_t* const int32_t_pointer);
             AnyValue(uint32_t* const uint32_t_pointer);
-            AnyValue(ontology::Universe* const universe);
-            AnyValue(ontology::Scene* const scene_pointer);
-            AnyValue(ontology::Shader* const shader_pointer);
-            AnyValue(ontology::Material* const material_pointer);
-            AnyValue(ontology::Species* const species_pointer);
-            AnyValue(ontology::Object* const object_pointer);
-            AnyValue(ontology::VectorFont* const vector_font_pointer);
-            AnyValue(ontology::Glyph* const glyph_pointer);
-            AnyValue(ontology::Text3D* const text3D_pointer);
-            AnyValue(ontology::Symbiosis* const symbiosis_pointer);
-            AnyValue(ontology::Font2D* const font2D_pointer);
+            AnyValue(ylikuutio::ontology::Universe* const universe);
+            AnyValue(ylikuutio::ontology::Scene* const scene_pointer);
+            AnyValue(ylikuutio::ontology::Shader* const shader_pointer);
+            AnyValue(ylikuutio::ontology::Material* const material_pointer);
+            AnyValue(ylikuutio::ontology::Species* const species_pointer);
+            AnyValue(ylikuutio::ontology::Object* const object_pointer);
+            AnyValue(ylikuutio::ontology::VectorFont* const vector_font_pointer);
+            AnyValue(ylikuutio::ontology::Glyph* const glyph_pointer);
+            AnyValue(ylikuutio::ontology::Text3D* const text3D_pointer);
+            AnyValue(ylikuutio::ontology::Symbiosis* const symbiosis_pointer);
+            AnyValue(ylikuutio::ontology::Font2D* const font2D_pointer);
             AnyValue(ylikuutio::console::Console* const console_pointer);
             AnyValue(SphericalCoordinatesStruct* const spherical_coordinates_struct_pointer);
             AnyValue(std::string* const std_string_pointer);
@@ -125,17 +128,17 @@ namespace datatypes
             AnyValue(const std::string& type, double* const double_pointer);
             AnyValue(const std::string& type, int32_t* const int32_t_pointer);
             AnyValue(const std::string& type, uint32_t* const uint32_t_pointer);
-            AnyValue(const std::string& type, ontology::Universe* const universe);
-            AnyValue(const std::string& type, ontology::Scene* const scene_pointer);
-            AnyValue(const std::string& type, ontology::Shader* const shader_pointer);
-            AnyValue(const std::string& type, ontology::Material* const material_pointer);
-            AnyValue(const std::string& type, ontology::Species* const species_pointer);
-            AnyValue(const std::string& type, ontology::Object* const object_pointer);
-            AnyValue(const std::string& type, ontology::VectorFont* const vector_font_pointer);
-            AnyValue(const std::string& type, ontology::Glyph* const glyph_pointer);
-            AnyValue(const std::string& type, ontology::Text3D* const text3D_pointer);
-            AnyValue(const std::string& type, ontology::Symbiosis* const symbiosis_pointer);
-            AnyValue(const std::string& type, ontology::Font2D* const font2D_pointer);
+            AnyValue(const std::string& type, ylikuutio::ontology::Universe* const universe);
+            AnyValue(const std::string& type, ylikuutio::ontology::Scene* const scene_pointer);
+            AnyValue(const std::string& type, ylikuutio::ontology::Shader* const shader_pointer);
+            AnyValue(const std::string& type, ylikuutio::ontology::Material* const material_pointer);
+            AnyValue(const std::string& type, ylikuutio::ontology::Species* const species_pointer);
+            AnyValue(const std::string& type, ylikuutio::ontology::Object* const object_pointer);
+            AnyValue(const std::string& type, ylikuutio::ontology::VectorFont* const vector_font_pointer);
+            AnyValue(const std::string& type, ylikuutio::ontology::Glyph* const glyph_pointer);
+            AnyValue(const std::string& type, ylikuutio::ontology::Text3D* const text3D_pointer);
+            AnyValue(const std::string& type, ylikuutio::ontology::Symbiosis* const symbiosis_pointer);
+            AnyValue(const std::string& type, ylikuutio::ontology::Font2D* const font2D_pointer);
             AnyValue(const std::string& type, ylikuutio::console::Console* const console_pointer);
             AnyValue(const std::string& type, SphericalCoordinatesStruct* const spherical_coordinates_struct_pointer);
             AnyValue(const std::string& type, std::string* const std_string_pointer);
@@ -157,17 +160,17 @@ namespace datatypes
                 double* double_pointer;
                 int32_t* int32_t_pointer;
                 uint32_t* uint32_t_pointer;
-                ontology::Universe* universe;
-                ontology::Scene* scene_pointer;
-                ontology::Shader* shader_pointer;
-                ontology::Material* material_pointer;
-                ontology::Species* species_pointer;
-                ontology::Object* object_pointer;
-                ontology::VectorFont* vector_font_pointer;
-                ontology::Glyph* glyph_pointer;
-                ontology::Text3D* text3D_pointer;
-                ontology::Symbiosis* symbiosis_pointer;
-                ontology::Font2D* font2D_pointer;
+                ylikuutio::ontology::Universe* universe;
+                ylikuutio::ontology::Scene* scene_pointer;
+                ylikuutio::ontology::Shader* shader_pointer;
+                ylikuutio::ontology::Material* material_pointer;
+                ylikuutio::ontology::Species* species_pointer;
+                ylikuutio::ontology::Object* object_pointer;
+                ylikuutio::ontology::VectorFont* vector_font_pointer;
+                ylikuutio::ontology::Glyph* glyph_pointer;
+                ylikuutio::ontology::Text3D* text3D_pointer;
+                ylikuutio::ontology::Symbiosis* symbiosis_pointer;
+                ylikuutio::ontology::Font2D* font2D_pointer;
                 ylikuutio::console::Console* console_pointer;
                 SphericalCoordinatesStruct* spherical_coordinates_struct_pointer;
                 std::string* std_string_pointer;

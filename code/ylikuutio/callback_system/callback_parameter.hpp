@@ -9,9 +9,12 @@
 #include <memory>        // std::make_shared, std::shared_ptr
 #include <string>        // std::string
 
-namespace ontology
+namespace ylikuutio
 {
-    class Universe;
+    namespace ontology
+    {
+        class Universe;
+    }
 }
 
 namespace ylikuutio

@@ -114,7 +114,7 @@ namespace loaders
         std::cout << "Indexing...\n";
 
         // Fill the index buffer.
-        ontology::indexVBO(
+        ylikuutio::ontology::indexVBO(
                 out_vertices,
                 out_UVs,
                 out_normals,

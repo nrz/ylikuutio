@@ -19,14 +19,17 @@ namespace datatypes
     class AnyValue;
 }
 
-namespace ontology
+namespace ylikuutio
 {
-    class Entity;
+    namespace ontology
+    {
+        class Entity;
+    }
 }
 
 typedef std::shared_ptr<datatypes::AnyValue> (*ConsoleCommandCallback) (
         ylikuutio::console::Console*,
-        ontology::Entity*,
+        ylikuutio::ontology::Entity*,
         std::vector<std::string>& command_parameters);
 
 #endif

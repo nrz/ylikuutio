@@ -311,7 +311,7 @@ namespace ylikuutio
 
                 // Callbacks end here.
 
-                ontology::Universe* get_universe() const;
+                ylikuutio::ontology::Universe* get_universe() const;
 
                 void copy_historical_input_into_current_input();
                 bool exit_console();
@@ -366,11 +366,11 @@ namespace ylikuutio
                 // This is a pointer to `std::unordered_map<std::string, bool>` that contains console command callbacks.
                 std::unordered_map<std::string, ConsoleCommandCallback>* command_callback_map_pointer;
 
-                // This is a pointer to `ontology::Universe`.
-                ontology::Universe* universe;
+                // This is a pointer to `ylikuutio::ontology::Universe`.
+                ylikuutio::ontology::Universe* universe;
 
                 // This is a pointer to `font2D::Font2D` instance that is used for printing.
-                ontology::Font2D* font2D_pointer;
+                ylikuutio::ontology::Font2D* font2D_pointer;
 
                 int32_t console_top_y;
                 int32_t console_bottom_y;

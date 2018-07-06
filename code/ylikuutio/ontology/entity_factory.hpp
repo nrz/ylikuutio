@@ -21,55 +21,58 @@
 #include <memory>    // std::make_shared, std::shared_ptr
 #include <string>    // std::string
 
-namespace ontology
+namespace ylikuutio
 {
-    class Entity;
-    class Universe;
-    class World;
-    class Scene;
-    class Shader;
-    class Material;
-    class Species;
-    class Object;
-    class VectorFont;
-    class Text3D;
-    class Font2D;
-
-    class EntityFactory
+    namespace ontology
     {
-        public:
-            // destructor.
-            ~EntityFactory();
+        class Entity;
+        class Universe;
+        class World;
+        class Scene;
+        class Shader;
+        class Material;
+        class Species;
+        class Object;
+        class VectorFont;
+        class Text3D;
+        class Font2D;
 
-            ontology::Universe* get_universe() const;
+        class EntityFactory
+        {
+            public:
+                // destructor.
+                ~EntityFactory();
 
-            ontology::Entity* create_Universe();
-            ontology::Entity* create_World();
-            ontology::Entity* create_Scene(ontology::World* const world, const float water_level);
-            ontology::Entity* create_Shader(const ShaderStruct& shader_struct);
-            ontology::Entity* create_Material(const MaterialStruct& material_struct);
-            ontology::Entity* create_Species(const SpeciesStruct& species_struct);
-            ontology::Entity* create_Object(ObjectStruct& object_struct);
-            ontology::Entity* create_Symbiosis(const SymbiosisStruct& symbiosis_struct);
-            ontology::Entity* create_Holobiont(HolobiontStruct& object_struct);
-            ontology::Entity* create_VectorFont(const VectorFontStruct& vector_font_struct);
-            ontology::Entity* create_Text3D(Text3DStruct& text3D_struct);
-            ontology::Entity* create_Font2D(
-                    GLuint screen_width,
-                    GLuint screen_height,
-                    const std::string& texture_filename,
-                    const std::string& font_texture_file_format);
-            ontology::Entity* create_Camera(CameraStruct& camera_struct);
+                ylikuutio::ontology::Universe* get_universe() const;
 
-            friend class Universe;
+                ylikuutio::ontology::Entity* create_Universe();
+                ylikuutio::ontology::Entity* create_World();
+                ylikuutio::ontology::Entity* create_Scene(ylikuutio::ontology::World* const world, const float water_level);
+                ylikuutio::ontology::Entity* create_Shader(const ShaderStruct& shader_struct);
+                ylikuutio::ontology::Entity* create_Material(const MaterialStruct& material_struct);
+                ylikuutio::ontology::Entity* create_Species(const SpeciesStruct& species_struct);
+                ylikuutio::ontology::Entity* create_Object(ObjectStruct& object_struct);
+                ylikuutio::ontology::Entity* create_Symbiosis(const SymbiosisStruct& symbiosis_struct);
+                ylikuutio::ontology::Entity* create_Holobiont(HolobiontStruct& object_struct);
+                ylikuutio::ontology::Entity* create_VectorFont(const VectorFontStruct& vector_font_struct);
+                ylikuutio::ontology::Entity* create_Text3D(Text3DStruct& text3D_struct);
+                ylikuutio::ontology::Entity* create_Font2D(
+                        GLuint screen_width,
+                        GLuint screen_height,
+                        const std::string& texture_filename,
+                        const std::string& font_texture_file_format);
+                ylikuutio::ontology::Entity* create_Camera(CameraStruct& camera_struct);
 
-        private:
-            // constructor.
-            // only `Universe` can create an `EntityFactory`.
-            EntityFactory(ontology::Universe* const universe);
+                friend class Universe;
 
-            ontology::Universe* universe;
-    };
+            private:
+                // constructor.
+                // only `Universe` can create an `EntityFactory`.
+                EntityFactory(ylikuutio::ontology::Universe* const universe);
+
+                ylikuutio::ontology::Universe* universe;
+        };
+    }
 }
 
 #endif

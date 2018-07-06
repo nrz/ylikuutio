@@ -769,7 +769,7 @@ namespace ylikuutio
             // Shift (left or right): 0x01
             // Alt (not AltGr):       0x04
             // Shift + Alt:           0x05
-            ontology::Universe* universe = static_cast<ontology::Universe*>(glfwGetWindowUserPointer(window));
+            ylikuutio::ontology::Universe* universe = static_cast<ylikuutio::ontology::Universe*>(glfwGetWindowUserPointer(window));
 
             if (universe == nullptr)
             {

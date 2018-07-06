@@ -141,12 +141,12 @@ int main(int argc, char* argv[])
     int input_method_in_use = ylikuutio::input::KEYBOARD;
 
     // Create the world, store it in `my_universe`.
-    std::cout << "Creating ontology::Entity* my_universe_entity ...\n";
+    std::cout << "Creating ylikuutio::ontology::Entity* my_universe_entity ...\n";
     UniverseStruct universe_struct;
     universe_struct.window_title = "Ajokki 0.0.3, powered by Ylikuutio 0.0.3";
-    ontology::Universe* my_universe = new ontology::Universe(universe_struct);
+    ylikuutio::ontology::Universe* my_universe = new ylikuutio::ontology::Universe(universe_struct);
 
-    ontology::EntityFactory* entity_factory = my_universe->get_entity_factory();
+    ylikuutio::ontology::EntityFactory* entity_factory = my_universe->get_entity_factory();
 
     // Create the setting master, store it in `my_setting_master`.
     std::cout << "Creating config::SettingMaster* my_setting_master ...\n";
@@ -213,10 +213,10 @@ int main(int argc, char* argv[])
 
     // Create the `World`s.
 
-    std::cout << "Creating ontology::Entity* earth_world_entity ...\n";
-    ontology::Entity* earth_world_entity = entity_factory->create_World();
-    std::cout << "Creating ontology::World* earth_world ...\n";
-    ontology::World* earth_world = dynamic_cast<ontology::World*>(earth_world_entity);
+    std::cout << "Creating ylikuutio::ontology::Entity* earth_world_entity ...\n";
+    ylikuutio::ontology::Entity* earth_world_entity = entity_factory->create_World();
+    std::cout << "Creating ylikuutio::ontology::World* earth_world ...\n";
+    ylikuutio::ontology::World* earth_world = dynamic_cast<ylikuutio::ontology::World*>(earth_world_entity);
 
     if (earth_world == nullptr)
     {
@@ -234,16 +234,16 @@ int main(int argc, char* argv[])
 
     // Helsinki `Scene` begins here.
 
-    std::cout << "Creating ontology::Entity* helsinki_east_downtown_scene_entity and its contents ...\n";
-    ontology::Entity* helsinki_east_downtown_scene_entity = ajokki::create_helsinki_east_downtown_scene(entity_factory, earth_world);
+    std::cout << "Creating ylikuutio::ontology::Entity* helsinki_east_downtown_scene_entity and its contents ...\n";
+    ylikuutio::ontology::Entity* helsinki_east_downtown_scene_entity = ajokki::create_helsinki_east_downtown_scene(entity_factory, earth_world);
 
     if (helsinki_east_downtown_scene_entity == nullptr)
     {
         return -1;
     }
 
-    std::cout << "Creating ontology::Scene* helsinki_east_downtown_scene ...\n";
-    ontology::Scene* helsinki_east_downtown_scene = dynamic_cast<ontology::Scene*>(helsinki_east_downtown_scene_entity);
+    std::cout << "Creating ylikuutio::ontology::Scene* helsinki_east_downtown_scene ...\n";
+    ylikuutio::ontology::Scene* helsinki_east_downtown_scene = dynamic_cast<ylikuutio::ontology::Scene*>(helsinki_east_downtown_scene_entity);
 
     my_universe->is_flight_mode_in_use = true;
 
@@ -260,7 +260,7 @@ int main(int argc, char* argv[])
 
     // Joensuu `Scene` begins here.
 
-    std::cout << "Creating ontology::Scene* joensuu_center_west_scene and its contents ...\n";
+    std::cout << "Creating ylikuutio::ontology::Scene* joensuu_center_west_scene and its contents ...\n";
     if (ajokki::create_joensuu_center_west_scene(entity_factory, earth_world) == nullptr)
     {
         return -1;
@@ -270,10 +270,10 @@ int main(int argc, char* argv[])
 
     // altiplano `Scene` begins here.
 
-    std::cout << "Creating ontology::Entity* altiplano_scene_entity ...\n";
-    ontology::Entity* altiplano_scene_entity = entity_factory->create_Scene(earth_world, -1.0f * std::numeric_limits<float>::infinity());
-    std::cout << "Creating ontology::Scene* altiplano_scene ...\n";
-    ontology::Scene* altiplano_scene = dynamic_cast<ontology::Scene*>(altiplano_scene_entity);
+    std::cout << "Creating ylikuutio::ontology::Entity* altiplano_scene_entity ...\n";
+    ylikuutio::ontology::Entity* altiplano_scene_entity = entity_factory->create_Scene(earth_world, -1.0f * std::numeric_limits<float>::infinity());
+    std::cout << "Creating ylikuutio::ontology::Scene* altiplano_scene ...\n";
+    ylikuutio::ontology::Scene* altiplano_scene = dynamic_cast<ylikuutio::ontology::Scene*>(altiplano_scene_entity);
 
     if (altiplano_scene == nullptr)
     {
@@ -295,10 +295,10 @@ int main(int argc, char* argv[])
     altiplano_shader_struct.vertex_shader = "StandardShading.vertexshader";
     altiplano_shader_struct.fragment_shader = "StandardShading.fragmentshader";
 
-    std::cout << "Creating ontology::Entity* altiplano_shader_entity ...\n";
-    ontology::Entity* altiplano_shader_entity = entity_factory->create_Shader(altiplano_shader_struct);
-    std::cout << "Creating ontology::Shader* altiplano_shader ...\n";
-    ontology::Shader* altiplano_shader = dynamic_cast<ontology::Shader*>(altiplano_shader_entity);
+    std::cout << "Creating ylikuutio::ontology::Entity* altiplano_shader_entity ...\n";
+    ylikuutio::ontology::Entity* altiplano_shader_entity = entity_factory->create_Shader(altiplano_shader_struct);
+    std::cout << "Creating ylikuutio::ontology::Shader* altiplano_shader ...\n";
+    ylikuutio::ontology::Shader* altiplano_shader = dynamic_cast<ylikuutio::ontology::Shader*>(altiplano_shader_entity);
 
     if (altiplano_shader == nullptr)
     {
@@ -312,10 +312,10 @@ int main(int argc, char* argv[])
     altiplano_grass_material_struct.texture_file_format = g_texture_file_format;
     altiplano_grass_material_struct.texture_filename = g_texture_filename;
 
-    std::cout << "Creating ontology::Entity* altiplano_grass_material_entity ...\n";
-    ontology::Entity* altiplano_grass_material_entity = entity_factory->create_Material(altiplano_grass_material_struct);
-    std::cout << "Creating ontology::Material* altiplano_grass_material ...\n";
-    ontology::Material* altiplano_grass_material = dynamic_cast<ontology::Material*>(altiplano_grass_material_entity);
+    std::cout << "Creating ylikuutio::ontology::Entity* altiplano_grass_material_entity ...\n";
+    ylikuutio::ontology::Entity* altiplano_grass_material_entity = entity_factory->create_Material(altiplano_grass_material_struct);
+    std::cout << "Creating ylikuutio::ontology::Material* altiplano_grass_material ...\n";
+    ylikuutio::ontology::Material* altiplano_grass_material = dynamic_cast<ylikuutio::ontology::Material*>(altiplano_grass_material_entity);
 
     if (altiplano_grass_material == nullptr)
     {
@@ -342,10 +342,10 @@ int main(int argc, char* argv[])
     altiplano_terrain_species_struct.planet_radius = earth_radius;
     altiplano_terrain_species_struct.divisor = 1000.0f;
 
-    std::cout << "Creating ontology::Entity* altiplano_terrain_species_entity ...\n";
-    ontology::Entity* altiplano_terrain_species_entity = entity_factory->create_Species(altiplano_terrain_species_struct);
-    std::cout << "Creating ontology::Species* altiplano_terrain_species ...\n";
-    ontology::Species* altiplano_terrain_species = dynamic_cast<ontology::Species*>(altiplano_terrain_species_entity);
+    std::cout << "Creating ylikuutio::ontology::Entity* altiplano_terrain_species_entity ...\n";
+    ylikuutio::ontology::Entity* altiplano_terrain_species_entity = entity_factory->create_Species(altiplano_terrain_species_struct);
+    std::cout << "Creating ylikuutio::ontology::Species* altiplano_terrain_species ...\n";
+    ylikuutio::ontology::Species* altiplano_terrain_species = dynamic_cast<ylikuutio::ontology::Species*>(altiplano_terrain_species_entity);
 
     if (altiplano_terrain_species == nullptr)
     {
@@ -385,14 +385,14 @@ int main(int argc, char* argv[])
     const char* char_g_font_texture_filename = g_font_texture_filename.c_str();
     const char* char_g_font_texture_file_format = g_font_texture_file_format.c_str();
 
-    std::cout << "Creating ontology::Entity* my_font2D_entity ...\n";
-    ontology::Entity* my_font2D_entity = entity_factory->create_Font2D(
+    std::cout << "Creating ylikuutio::ontology::Entity* my_font2D_entity ...\n";
+    ylikuutio::ontology::Entity* my_font2D_entity = entity_factory->create_Font2D(
             my_universe->get_window_width(),
             my_universe->get_window_height(),
             char_g_font_texture_filename,
             char_g_font_texture_file_format);
-    std::cout << "Creating ontology::Font2D* my_font2D ...\n";
-    ontology::Font2D* my_font2D = dynamic_cast<ontology::Font2D*>(my_font2D_entity);
+    std::cout << "Creating ylikuutio::ontology::Font2D* my_font2D ...\n";
+    ylikuutio::ontology::Font2D* my_font2D = dynamic_cast<ylikuutio::ontology::Font2D*>(my_font2D_entity);
 
     if (my_font2D == nullptr)
     {
@@ -885,9 +885,9 @@ int main(int argc, char* argv[])
     command_callback_map["get"] = &config::SettingMaster::get_and_print;
 
     // Object handling callbacks.
-    command_callback_map["info"] = &ontology::Universe::info;
-    command_callback_map["delete"] = &ontology::Universe::delete_entity;
-    command_callback_map["activate"] = &ontology::Universe::activate;
+    command_callback_map["info"] = &ylikuutio::ontology::Universe::info;
+    command_callback_map["delete"] = &ylikuutio::ontology::Universe::delete_entity;
+    command_callback_map["activate"] = &ylikuutio::ontology::Universe::activate;
 
     // Exit program callbacks.
     command_callback_map["bye"] = &ajokki::quit;
