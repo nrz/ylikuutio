@@ -59,6 +59,12 @@ namespace ylikuutio
             glEnable(GL_DEPTH_TEST);
         }
 
+        void disable_depth_test()
+        {
+            // Disable depth test.
+            glDisable(GL_DEPTH_TEST);
+        }
+
         void set_depth_func_to_less()
         {
             // Accept fragment if it closer to the camera than the former one.
