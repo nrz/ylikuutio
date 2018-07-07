@@ -612,7 +612,7 @@ namespace ylikuutio
                 this->current_camera_projection_matrix = glm::perspective(
                         DEGREES_TO_RADIANS(FoV),
                         this->aspect_ratio,
-                        0.001f,
+                        1.0f,
                         5000.0f); // visibility: 5000 units.
             }
 

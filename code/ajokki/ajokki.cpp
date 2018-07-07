@@ -1130,6 +1130,8 @@ int main(int argc, char* argv[])
             // Render the `Universe`.
             my_universe->render();
 
+            ylikuutio::opengl::disable_depth_test();
+
             // Draw the console (including current input).
             my_console->draw_console();
 
@@ -1246,6 +1248,8 @@ int main(int argc, char* argv[])
                 printing_struct.vertical_alignment = "top";
                 my_font2D->printText2D(printing_struct);
             }
+
+            ylikuutio::opengl::enable_depth_test();
 
             // Swap buffers.
             glfwSwapBuffers(my_universe->get_window());
