@@ -8,7 +8,7 @@
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 
-namespace ylikuutio
+namespace yli
 {
     namespace geometry
     {
@@ -26,7 +26,7 @@ namespace ylikuutio
             std::string triangulation_type;
             bool should_ylikuutio_use_real_texture_coordinates;
             double sphere_radius;
-            ylikuutio::geometry::SphericalTerrainStruct spherical_terrain_struct;
+            yli::geometry::SphericalTerrainStruct spherical_terrain_struct;
         } TriangulateQuadsStruct;
     }
 }

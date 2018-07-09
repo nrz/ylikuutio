@@ -37,20 +37,20 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
-namespace ylikuutio
+namespace yli
 {
     namespace ontology
     {
         class Material;
 
-        class Species: public ylikuutio::ontology::Model
+        class Species: public yli::ontology::Model
         {
             public:
                 // this method sets pointer to this `Species` to nullptr, sets `parent` according to the input, and requests a new `childID` from the new `Material`.
-                void bind_to_new_parent(ylikuutio::ontology::Material* const new_material_pointer);
+                void bind_to_new_parent(yli::ontology::Material* const new_material_pointer);
 
                 // constructor.
-                Species(ylikuutio::ontology::Universe* const universe, const SpeciesStruct& species_struct)
+                Species(yli::ontology::Universe* const universe, const SpeciesStruct& species_struct)
                     : Model(universe)
                 {
                     // constructor.
@@ -136,7 +136,7 @@ namespace ylikuutio
                         // TODO: Compute the graph of this object type to enable object vertex modification!
 
                         this->child_vector_pointers_vector.push_back(&this->object_pointer_vector);
-                        this->type = "ylikuutio::ontology::Species*";
+                        this->type = "yli::ontology::Species*";
 
                         this->can_be_erased = true;
                     }
@@ -145,10 +145,10 @@ namespace ylikuutio
                 // destructor.
                 virtual ~Species();
 
-                ylikuutio::ontology::Entity* get_parent() const override;
+                yli::ontology::Entity* get_parent() const override;
 
                 // this method sets an `Object` pointer.
-                void set_object_pointer(const int32_t childID, ylikuutio::ontology::Object* const child_pointer);
+                void set_object_pointer(const int32_t childID, yli::ontology::Object* const child_pointer);
 
                 int32_t get_image_width() const;
                 int32_t get_image_height() const;
@@ -177,7 +177,7 @@ namespace ylikuutio
                 // this method renders all `Object`s of this `Species`.
                 void render();
 
-                ylikuutio::ontology::Material* material_parent;  // pointer to `Material`.
+                yli::ontology::Material* material_parent;  // pointer to `Material`.
 
                 bool is_symbiont_species;
 

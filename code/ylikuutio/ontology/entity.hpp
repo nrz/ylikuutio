@@ -8,7 +8,7 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
-namespace ylikuutio
+namespace yli
 {
     namespace config
     {
@@ -16,7 +16,7 @@ namespace ylikuutio
     }
 }
 
-namespace ylikuutio
+namespace yli
 {
     namespace ontology
     {
@@ -26,7 +26,7 @@ namespace ylikuutio
         {
             public:
                 // constructor.
-                Entity(ylikuutio::ontology::Universe* const universe);
+                Entity(yli::ontology::Universe* const universe);
 
                 // destructor.
                 virtual ~Entity();
@@ -35,11 +35,11 @@ namespace ylikuutio
 
                 bool get_can_be_erased() const;
 
-                ylikuutio::ontology::Universe* get_universe() const;
-                ylikuutio::config::SettingMaster* get_setting_master() const;
-                void set_setting_master(ylikuutio::config::SettingMaster* const setting_master);
+                yli::ontology::Universe* get_universe() const;
+                yli::config::SettingMaster* get_setting_master() const;
+                void set_setting_master(yli::config::SettingMaster* const setting_master);
 
-                virtual ylikuutio::ontology::Entity* get_parent() const = 0;
+                virtual yli::ontology::Entity* get_parent() const = 0;
                 virtual int32_t get_number_of_children() const = 0;
                 virtual int32_t get_number_of_descendants() const = 0;
 
@@ -49,8 +49,8 @@ namespace ylikuutio
                 void prerender() const;
                 void postrender() const;
 
-                ylikuutio::ontology::Universe* universe;          // pointer to `Universe`.
-                ylikuutio::config::SettingMaster* setting_master; // pointer to `SettingMaster`.
+                yli::ontology::Universe* universe;          // pointer to `Universe`.
+                yli::config::SettingMaster* setting_master; // pointer to `SettingMaster`.
                 std::vector<void*> child_vector_pointers_vector;
                 int32_t childID;
 

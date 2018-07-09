@@ -28,24 +28,24 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
-namespace ylikuutio
+namespace yli
 {
     namespace ontology
     {
         class VectorFont;
         class Object;
 
-        class Glyph: public ylikuutio::ontology::Model
+        class Glyph: public yli::ontology::Model
         {
             public:
                 // destructor.
                 // glyphs should be destroyed only by destroying the entire `VectorFont`.
                 virtual ~Glyph();
 
-                ylikuutio::ontology::Entity* get_parent() const override;
+                yli::ontology::Entity* get_parent() const override;
 
                 // this method sets a object pointer.
-                void set_object_pointer(const int32_t childID, ylikuutio::ontology::Object* const child_pointer);
+                void set_object_pointer(const int32_t childID, yli::ontology::Object* const child_pointer);
 
                 const char* get_unicode_char_pointer();
 
@@ -74,9 +74,9 @@ namespace ylikuutio
                     this->bind_to_parent();
 
                     // TODO: implement triangulation of `Glyph` objects!
-                    ylikuutio::geometry::TriangulatePolygonsStruct triangulate_polygons_struct;
+                    yli::geometry::TriangulatePolygonsStruct triangulate_polygons_struct;
                     triangulate_polygons_struct.input_vertices = this->glyph_vertex_data;
-                    bool triangulating_result = ylikuutio::geometry::triangulate_polygons(
+                    bool triangulating_result = yli::geometry::triangulate_polygons(
                             triangulate_polygons_struct,
                             this->vertices,
                             this->uvs,
@@ -88,13 +88,13 @@ namespace ylikuutio
                     }
 
                     // Get a handle for our buffers.
-                    ylikuutio::ontology::store_gl_attrib_locations(glyph_struct.shader_pointer, this);
+                    yli::ontology::store_gl_attrib_locations(glyph_struct.shader_pointer, this);
 
                     // TODO: triangulate the vertex data!
 
-                    // TODO: load the vertex data the same way as in `ylikuutio::ontology::Species::Species(SpeciesStruct species_struct)`!
+                    // TODO: load the vertex data the same way as in `yli::ontology::Species::Species(SpeciesStruct species_struct)`!
 
-                    this->type = "ylikuutio::ontology::Glyph*";
+                    this->type = "yli::ontology::Glyph*";
                 }
 
                 void bind_to_parent();
@@ -102,7 +102,7 @@ namespace ylikuutio
                 // this method renders all `Object`s of this `Glyph`.
                 void render();
 
-                ylikuutio::ontology::VectorFont* parent;  // pointer to `VectorFont`.
+                yli::ontology::VectorFont* parent;  // pointer to `VectorFont`.
 
                 std::vector<std::vector<glm::vec2>>* glyph_vertex_data;
                 const char* glyph_name_pointer;        // we need only a pointer, because glyphs are always created by the `VectorFont` constructor.

@@ -37,14 +37,14 @@
 #include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
 
-namespace ylikuutio
+namespace yli
 {
     namespace geometry
     {
         template<class T1>
             bool triangulate_quads(
                     const T1* input_vertex_pointer,
-                    const ylikuutio::geometry::TriangulateQuadsStruct triangulate_quads_struct,
+                    const yli::geometry::TriangulateQuadsStruct triangulate_quads_struct,
                     std::vector<glm::vec3>& out_vertices,
                     std::vector<glm::vec2>& out_UVs,
                     std::vector<glm::vec3>& out_normals)
@@ -59,7 +59,7 @@ namespace ylikuutio
                 const int32_t actual_image_height = (image_height - 1) / z_step + 1;
                 const std::string triangulation_type = triangulate_quads_struct.triangulation_type;
                 const double sphere_radius = triangulate_quads_struct.sphere_radius;
-                const ylikuutio::geometry::SphericalTerrainStruct spherical_terrain_struct = triangulate_quads_struct.spherical_terrain_struct;
+                const yli::geometry::SphericalTerrainStruct spherical_terrain_struct = triangulate_quads_struct.spherical_terrain_struct;
 
                 if (image_width < 2 || image_height < 2 || actual_image_width < 2 || actual_image_height < 2)
                 {
@@ -132,7 +132,7 @@ namespace ylikuutio
                 // 3b. For bilinear interpolation: Transform interpolated coordinates (and computed this far as being in horizontal plane) to a curved surface.
                 // 4. Compute the face normals, `push_back` to `face_normals`.
                 // 5. Compute the vertex normals for vertices loaded from file and for interpolated vertices (for `"bilinear_interpolation"`), `push_back` to `temp_normals`.
-                // 6. Loop through all vertices and `ylikuutio::geometry::output_triangle_vertices`.
+                // 6. Loop through all vertices and `yli::geometry::output_triangle_vertices`.
                 //
                 // stg. `"bilinear_interpolation"`                                      `"southwest_northeast_edges"`               `"southeast_northwest_edges"`
                 // 1.   `define_vertices`                                               `define_vertices`                           `define_vertices`
@@ -146,7 +146,7 @@ namespace ylikuutio
 
                 // 1. Define the vertices for vertices loaded from file, `push_back` to `temp_vertices`.
 
-                if (!ylikuutio::geometry::define_vertices(
+                if (!yli::geometry::define_vertices(
                             input_vertex_pointer,
                             image_width,
                             image_height,
@@ -174,7 +174,7 @@ namespace ylikuutio
                 if (is_bilinear_interpolation_in_use)
                 {
                     // 2. Interpolate the vertices between, using bilinear interpolation, `push_back` to `temp_vertices`.
-                    if (!ylikuutio::geometry::interpolate_and_define_vertices_using_bilinear_interpolation(
+                    if (!yli::geometry::interpolate_and_define_vertices_using_bilinear_interpolation(
                                 input_vertex_pointer,
                                 image_width,
                                 image_height,
@@ -200,13 +200,13 @@ namespace ylikuutio
                     // y = rho * sin(theta) * sin(phi)
                     // z = rho * cos(theta)
 
-                    ylikuutio::geometry::TransformationStruct transformation_struct;
+                    yli::geometry::TransformationStruct transformation_struct;
                     transformation_struct.image_width = image_width;
                     transformation_struct.image_height = image_height;
                     transformation_struct.sphere_radius = sphere_radius;
                     transformation_struct.is_bilinear_interpolation_in_use = is_bilinear_interpolation_in_use;
                     transformation_struct.spherical_terrain_struct = spherical_terrain_struct;
-                    ylikuutio::geometry::transform_coordinates_to_curved_surface(transformation_struct, temp_vertices);
+                    yli::geometry::transform_coordinates_to_curved_surface(transformation_struct, temp_vertices);
                 }
                 else
                 {
@@ -224,7 +224,7 @@ namespace ylikuutio
 
                 std::vector<glm::vec3> face_normal_vector_vec3;
 
-                if (!ylikuutio::geometry::compute_face_normals(
+                if (!yli::geometry::compute_face_normals(
                             temp_vertices,
                             face_normal_vector_vec3,
                             actual_image_width,
@@ -237,7 +237,7 @@ namespace ylikuutio
                 }
 
                 // 5. Compute the vertex normals for vertices loaded from file, `push_back` to `temp_normals`.
-                if (!ylikuutio::geometry::compute_vertex_normals(
+                if (!yli::geometry::compute_vertex_normals(
                             temp_normals,
                             face_normal_vector_vec3,
                             actual_image_width,
@@ -249,9 +249,9 @@ namespace ylikuutio
                     return false;
                 }
 
-                // 6. Loop through all vertices and `ylikuutio::geometry::output_triangle_vertices`.
+                // 6. Loop through all vertices and `yli::geometry::output_triangle_vertices`.
 
-                if (!ylikuutio::geometry::define_vertices_UVs_and_normals(
+                if (!yli::geometry::define_vertices_UVs_and_normals(
                             triangulate_quads_struct,
                             temp_vertices,
                             temp_UVs,

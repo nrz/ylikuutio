@@ -3,7 +3,7 @@
 // Include standard headers
 #include <string>   // std::string
 
-namespace ylikuutio
+namespace yli
 {
     namespace geometry
     {

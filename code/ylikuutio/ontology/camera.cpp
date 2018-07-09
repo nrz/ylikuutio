@@ -23,7 +23,7 @@
 #include "ground_level.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
-namespace ylikuutio
+namespace yli
 {
     namespace ontology
     {
@@ -47,7 +47,7 @@ namespace ylikuutio
             this->parent->set_camera_pointer(this->childID, nullptr);
         }
 
-        ylikuutio::ontology::Entity* Camera::get_parent() const
+        yli::ontology::Entity* Camera::get_parent() const
         {
             return this->parent;
         }
@@ -97,8 +97,8 @@ namespace ylikuutio
             {
                 if (this->universe->get_terrain_species() != nullptr)
                 {
-                    GLfloat ground_y = ylikuutio::ontology::get_floor_level(
-                            static_cast<ylikuutio::ontology::Species*>(this->universe->get_terrain_species()),
+                    GLfloat ground_y = yli::ontology::get_floor_level(
+                            static_cast<yli::ontology::Species*>(this->universe->get_terrain_species()),
                             this->cartesian_coordinates);
 
                     if (!std::isnan(ground_y) && this->cartesian_coordinates.y < ground_y)

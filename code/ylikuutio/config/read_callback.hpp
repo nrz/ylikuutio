@@ -6,7 +6,7 @@
 // Include standard headers
 #include <memory> // std::make_shared, std::shared_ptr
 
-namespace ylikuutio
+namespace yli
 {
     namespace config
     {
@@ -14,7 +14,7 @@ namespace ylikuutio
     }
 }
 
-namespace ylikuutio
+namespace yli
 {
     namespace ontology
     {
@@ -22,6 +22,6 @@ namespace ylikuutio
     }
 }
 
-typedef std::shared_ptr<datatypes::AnyValue> (*ReadCallback) (ylikuutio::ontology::Entity* entity, ylikuutio::config::SettingMaster* setting_master);
+typedef std::shared_ptr<datatypes::AnyValue> (*ReadCallback) (yli::ontology::Entity* entity, yli::config::SettingMaster* setting_master);
 
 #endif

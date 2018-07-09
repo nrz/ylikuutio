@@ -6,7 +6,7 @@
 // Include standard headers
 #include <stdint.h>      // uint32_t etc.
 
-namespace ylikuutio
+namespace yli
 {
     namespace geometry
     {
@@ -16,7 +16,7 @@ namespace ylikuutio
             uint32_t image_height;
             double sphere_radius;
             bool is_bilinear_interpolation_in_use;
-            ylikuutio::geometry::SphericalTerrainStruct spherical_terrain_struct;
+            yli::geometry::SphericalTerrainStruct spherical_terrain_struct;
         } TransformationStruct;
     }
 }

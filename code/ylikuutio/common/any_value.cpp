@@ -23,7 +23,7 @@
 #include <stdint.h> // uint32_t etc.
 #include <stdlib.h> // std::strtol, std::strtoll, std::strtoul
 
-namespace ylikuutio
+namespace yli
 {
     namespace console
     {
@@ -31,7 +31,7 @@ namespace ylikuutio
     }
 }
 
-namespace ylikuutio
+namespace yli
 {
     namespace ontology
     {
@@ -82,27 +82,27 @@ namespace datatypes
             case (UINT32_T_POINTER):
                 return "uint32_t*";
             case (UNIVERSE_POINTER):
-                return "ylikuutio::ontology::Universe*";
+                return "yli::ontology::Universe*";
             case (SCENE_POINTER):
-                return "ylikuutio::ontology::Scene*";
+                return "yli::ontology::Scene*";
             case (SHADER_POINTER):
-                return "ylikuutio::ontology::Shader*";
+                return "yli::ontology::Shader*";
             case (MATERIAL_POINTER):
-                return "ylikuutio::ontology::Material*";
+                return "yli::ontology::Material*";
             case (SPECIES_POINTER):
-                return "ylikuutio::ontology::Species*";
+                return "yli::ontology::Species*";
             case (OBJECT_POINTER):
-                return "ylikuutio::ontology::Object*";
+                return "yli::ontology::Object*";
             case (VECTORFONT_POINTER):
-                return "ylikuutio::ontology::VectorFont*";
+                return "yli::ontology::VectorFont*";
             case (GLYPH_POINTER):
-                return "ylikuutio::ontology::Glyph*";
+                return "yli::ontology::Glyph*";
             case (TEXT3D_POINTER):
-                return "ylikuutio::ontology::Text3D*";
+                return "yli::ontology::Text3D*";
             case (TEXT2D_POINTER):
-                return "ylikuutio::ontology::Text2D*";
+                return "yli::ontology::Text2D*";
             case (CONSOLE_POINTER):
-                return "ylikuutio::console::Console*";
+                return "yli::console::Console*";
             case (SPHERICAL_COORDINATES_STRUCT_POINTER):
                 return "SphericalCoordinatesStruct*";
             case (STD_STRING_POINTER):
@@ -247,28 +247,28 @@ namespace datatypes
         }
     }
 
-    ylikuutio::ontology::Entity* AnyValue::get_entity_pointer() const
+    yli::ontology::Entity* AnyValue::get_entity_pointer() const
     {
         switch (this->type)
         {
             case (UNIVERSE_POINTER):
-                return static_cast<ylikuutio::ontology::Entity*>(static_cast<void*>(this->universe));
+                return static_cast<yli::ontology::Entity*>(static_cast<void*>(this->universe));
             case (SCENE_POINTER):
-                return static_cast<ylikuutio::ontology::Entity*>(static_cast<void*>(this->scene_pointer));
+                return static_cast<yli::ontology::Entity*>(static_cast<void*>(this->scene_pointer));
             case (SHADER_POINTER):
-                return static_cast<ylikuutio::ontology::Entity*>(static_cast<void*>(this->shader_pointer));
+                return static_cast<yli::ontology::Entity*>(static_cast<void*>(this->shader_pointer));
             case (MATERIAL_POINTER):
-                return static_cast<ylikuutio::ontology::Entity*>(static_cast<void*>(this->material_pointer));
+                return static_cast<yli::ontology::Entity*>(static_cast<void*>(this->material_pointer));
             case (SPECIES_POINTER):
-                return static_cast<ylikuutio::ontology::Entity*>(static_cast<void*>(this->species_pointer));
+                return static_cast<yli::ontology::Entity*>(static_cast<void*>(this->species_pointer));
             case (OBJECT_POINTER):
-                return static_cast<ylikuutio::ontology::Entity*>(static_cast<void*>(this->object_pointer));
+                return static_cast<yli::ontology::Entity*>(static_cast<void*>(this->object_pointer));
             case (VECTORFONT_POINTER):
-                return static_cast<ylikuutio::ontology::Entity*>(static_cast<void*>(this->vector_font_pointer));
+                return static_cast<yli::ontology::Entity*>(static_cast<void*>(this->vector_font_pointer));
             case (GLYPH_POINTER):
-                return static_cast<ylikuutio::ontology::Entity*>(static_cast<void*>(this->glyph_pointer));
+                return static_cast<yli::ontology::Entity*>(static_cast<void*>(this->glyph_pointer));
             case (TEXT3D_POINTER):
-                return static_cast<ylikuutio::ontology::Entity*>(static_cast<void*>(this->text3D_pointer));
+                return static_cast<yli::ontology::Entity*>(static_cast<void*>(this->text3D_pointer));
             default:
                 return nullptr;
         }
@@ -307,7 +307,7 @@ namespace datatypes
                 }
             case (FLOAT):
                 {
-                    if (!ylikuutio::string::check_if_float_string(value_string))
+                    if (!yli::string::check_if_float_string(value_string))
                     {
                         return false;
                     }
@@ -322,7 +322,7 @@ namespace datatypes
                 }
             case (DOUBLE):
                 {
-                    if (!ylikuutio::string::check_if_double_string(value_string))
+                    if (!yli::string::check_if_double_string(value_string))
                     {
                         return false;
                     }
@@ -337,7 +337,7 @@ namespace datatypes
                 }
             case (INT32_T):
                 {
-                    if (!ylikuutio::string::check_if_signed_integer_string(value_string))
+                    if (!yli::string::check_if_signed_integer_string(value_string))
                     {
                         return false;
                     }
@@ -353,7 +353,7 @@ namespace datatypes
                 }
             case (UINT32_T):
                 {
-                    if (!ylikuutio::string::check_if_unsigned_integer_string(value_string))
+                    if (!yli::string::check_if_unsigned_integer_string(value_string))
                     {
                         return false;
                     }
@@ -369,7 +369,7 @@ namespace datatypes
                 }
             case (BOOL_POINTER):
                 {
-                    if (!ylikuutio::string::check_if_unsigned_integer_string(value_string))
+                    if (!yli::string::check_if_unsigned_integer_string(value_string))
                     {
                         return false;
                     }
@@ -386,7 +386,7 @@ namespace datatypes
                 }
             case (FLOAT_POINTER):
                 {
-                    if (!ylikuutio::string::check_if_unsigned_integer_string(value_string))
+                    if (!yli::string::check_if_unsigned_integer_string(value_string))
                     {
                         return false;
                     }
@@ -403,7 +403,7 @@ namespace datatypes
                 }
             case (DOUBLE_POINTER):
                 {
-                    if (!ylikuutio::string::check_if_unsigned_integer_string(value_string))
+                    if (!yli::string::check_if_unsigned_integer_string(value_string))
                     {
                         return false;
                     }
@@ -420,7 +420,7 @@ namespace datatypes
                 }
             case (INT32_T_POINTER):
                 {
-                    if (!ylikuutio::string::check_if_unsigned_integer_string(value_string))
+                    if (!yli::string::check_if_unsigned_integer_string(value_string))
                     {
                         return false;
                     }
@@ -437,7 +437,7 @@ namespace datatypes
                 }
             case (UINT32_T_POINTER):
                 {
-                    if (!ylikuutio::string::check_if_unsigned_integer_string(value_string))
+                    if (!yli::string::check_if_unsigned_integer_string(value_string))
                     {
                         return false;
                     }
@@ -454,14 +454,14 @@ namespace datatypes
                 }
             case (UNIVERSE_POINTER):
                 {
-                    if (!ylikuutio::string::check_if_unsigned_integer_string(value_string))
+                    if (!yli::string::check_if_unsigned_integer_string(value_string))
                     {
                         return false;
                     }
 
                     // 0 means that the base is determined by the format given in string.
                     // The size of the pointer is assumed to be 64 bits.
-                    ylikuutio::ontology::Universe* universe = (ylikuutio::ontology::Universe*) (std::strtoll(value_string.c_str(), &end, 0));
+                    yli::ontology::Universe* universe = (yli::ontology::Universe*) (std::strtoll(value_string.c_str(), &end, 0));
                     if (errno == ERANGE)
                     {
                         return false;
@@ -471,14 +471,14 @@ namespace datatypes
                 }
             case (SCENE_POINTER):
                 {
-                    if (!ylikuutio::string::check_if_unsigned_integer_string(value_string))
+                    if (!yli::string::check_if_unsigned_integer_string(value_string))
                     {
                         return false;
                     }
 
                     // 0 means that the base is determined by the format given in string.
                     // The size of the pointer is assumed to be 64 bits.
-                    ylikuutio::ontology::Scene* scene_pointer = (ylikuutio::ontology::Scene*) (std::strtoll(value_string.c_str(), &end, 0));
+                    yli::ontology::Scene* scene_pointer = (yli::ontology::Scene*) (std::strtoll(value_string.c_str(), &end, 0));
                     if (errno == ERANGE)
                     {
                         return false;
@@ -488,14 +488,14 @@ namespace datatypes
                 }
             case (SHADER_POINTER):
                 {
-                    if (!ylikuutio::string::check_if_unsigned_integer_string(value_string))
+                    if (!yli::string::check_if_unsigned_integer_string(value_string))
                     {
                         return false;
                     }
 
                     // 0 means that the base is determined by the format given in string.
                     // The size of the pointer is assumed to be 64 bits.
-                    ylikuutio::ontology::Shader* shader_pointer = (ylikuutio::ontology::Shader*) (std::strtoll(value_string.c_str(), &end, 0));
+                    yli::ontology::Shader* shader_pointer = (yli::ontology::Shader*) (std::strtoll(value_string.c_str(), &end, 0));
                     if (errno == ERANGE)
                     {
                         return false;
@@ -505,14 +505,14 @@ namespace datatypes
                 }
             case (MATERIAL_POINTER):
                 {
-                    if (!ylikuutio::string::check_if_unsigned_integer_string(value_string))
+                    if (!yli::string::check_if_unsigned_integer_string(value_string))
                     {
                         return false;
                     }
 
                     // 0 means that the base is determined by the format given in string.
                     // The size of the pointer is assumed to be 64 bits.
-                    ylikuutio::ontology::Material* material_pointer = (ylikuutio::ontology::Material*) (std::strtoll(value_string.c_str(), &end, 0));
+                    yli::ontology::Material* material_pointer = (yli::ontology::Material*) (std::strtoll(value_string.c_str(), &end, 0));
                     if (errno == ERANGE)
                     {
                         return false;
@@ -522,14 +522,14 @@ namespace datatypes
                 }
             case (SPECIES_POINTER):
                 {
-                    if (!ylikuutio::string::check_if_unsigned_integer_string(value_string))
+                    if (!yli::string::check_if_unsigned_integer_string(value_string))
                     {
                         return false;
                     }
 
                     // 0 means that the base is determined by the format given in string.
                     // The size of the pointer is assumed to be 64 bits.
-                    ylikuutio::ontology::Species* species_pointer = (ylikuutio::ontology::Species*) (std::strtoll(value_string.c_str(), &end, 0));
+                    yli::ontology::Species* species_pointer = (yli::ontology::Species*) (std::strtoll(value_string.c_str(), &end, 0));
                     if (errno == ERANGE)
                     {
                         return false;
@@ -539,14 +539,14 @@ namespace datatypes
                 }
             case (OBJECT_POINTER):
                 {
-                    if (!ylikuutio::string::check_if_unsigned_integer_string(value_string))
+                    if (!yli::string::check_if_unsigned_integer_string(value_string))
                     {
                         return false;
                     }
 
                     // 0 means that the base is determined by the format given in string.
                     // The size of the pointer is assumed to be 64 bits.
-                    ylikuutio::ontology::Object* object_pointer = (ylikuutio::ontology::Object*) (std::strtoll(value_string.c_str(), &end, 0));
+                    yli::ontology::Object* object_pointer = (yli::ontology::Object*) (std::strtoll(value_string.c_str(), &end, 0));
                     if (errno == ERANGE)
                     {
                         return false;
@@ -556,14 +556,14 @@ namespace datatypes
                 }
             case (VECTORFONT_POINTER):
                 {
-                    if (!ylikuutio::string::check_if_unsigned_integer_string(value_string))
+                    if (!yli::string::check_if_unsigned_integer_string(value_string))
                     {
                         return false;
                     }
 
                     // 0 means that the base is determined by the format given in string.
                     // The size of the pointer is assumed to be 64 bits.
-                    ylikuutio::ontology::VectorFont* vector_font_pointer = (ylikuutio::ontology::VectorFont*) (std::strtoll(value_string.c_str(), &end, 0));
+                    yli::ontology::VectorFont* vector_font_pointer = (yli::ontology::VectorFont*) (std::strtoll(value_string.c_str(), &end, 0));
                     if (errno == ERANGE)
                     {
                         return false;
@@ -573,14 +573,14 @@ namespace datatypes
                 }
             case (GLYPH_POINTER):
                 {
-                    if (!ylikuutio::string::check_if_unsigned_integer_string(value_string))
+                    if (!yli::string::check_if_unsigned_integer_string(value_string))
                     {
                         return false;
                     }
 
                     // 0 means that the base is determined by the format given in string.
                     // The size of the pointer is assumed to be 64 bits.
-                    ylikuutio::ontology::Glyph* glyph_pointer = (ylikuutio::ontology::Glyph*) (std::strtoll(value_string.c_str(), &end, 0));
+                    yli::ontology::Glyph* glyph_pointer = (yli::ontology::Glyph*) (std::strtoll(value_string.c_str(), &end, 0));
                     if (errno == ERANGE)
                     {
                         return false;
@@ -590,14 +590,14 @@ namespace datatypes
                 }
             case (TEXT3D_POINTER):
                 {
-                    if (!ylikuutio::string::check_if_unsigned_integer_string(value_string))
+                    if (!yli::string::check_if_unsigned_integer_string(value_string))
                     {
                         return false;
                     }
 
                     // 0 means that the base is determined by the format given in string.
                     // The size of the pointer is assumed to be 64 bits.
-                    ylikuutio::ontology::Text3D* text3D_pointer = (ylikuutio::ontology::Text3D*) (std::strtoll(value_string.c_str(), &end, 0));
+                    yli::ontology::Text3D* text3D_pointer = (yli::ontology::Text3D*) (std::strtoll(value_string.c_str(), &end, 0));
                     if (errno == ERANGE)
                     {
                         return false;
@@ -607,14 +607,14 @@ namespace datatypes
                 }
             case (TEXT2D_POINTER):
                 {
-                    if (!ylikuutio::string::check_if_unsigned_integer_string(value_string))
+                    if (!yli::string::check_if_unsigned_integer_string(value_string))
                     {
                         return false;
                     }
 
                     // 0 means that the base is determined by the format given in string.
                     // The size of the pointer is assumed to be 64 bits.
-                    ylikuutio::ontology::Font2D* font2D_pointer = (ylikuutio::ontology::Font2D*) (std::strtoll(value_string.c_str(), &end, 0));
+                    yli::ontology::Font2D* font2D_pointer = (yli::ontology::Font2D*) (std::strtoll(value_string.c_str(), &end, 0));
                     if (errno == ERANGE)
                     {
                         return false;
@@ -624,14 +624,14 @@ namespace datatypes
                 }
             case (CONSOLE_POINTER):
                 {
-                    if (!ylikuutio::string::check_if_unsigned_integer_string(value_string))
+                    if (!yli::string::check_if_unsigned_integer_string(value_string))
                     {
                         return false;
                     }
 
                     // 0 means that the base is determined by the format given in string.
                     // The size of the pointer is assumed to be 64 bits.
-                    ylikuutio::console::Console* console_pointer = (ylikuutio::console::Console*) (std::strtoll(value_string.c_str(), &end, 0));
+                    yli::console::Console* console_pointer = (yli::console::Console*) (std::strtoll(value_string.c_str(), &end, 0));
                     if (errno == ERANGE)
                     {
                         return false;
@@ -641,7 +641,7 @@ namespace datatypes
                 }
             case (SPHERICAL_COORDINATES_STRUCT_POINTER):
                 {
-                    if (!ylikuutio::string::check_if_unsigned_integer_string(value_string))
+                    if (!yli::string::check_if_unsigned_integer_string(value_string))
                     {
                         return false;
                     }
@@ -656,7 +656,7 @@ namespace datatypes
                 }
             case (GLM_VEC3_POINTER):
                 {
-                    if (!ylikuutio::string::check_if_unsigned_integer_string(value_string))
+                    if (!yli::string::check_if_unsigned_integer_string(value_string))
                     {
                         return false;
                     }
@@ -671,7 +671,7 @@ namespace datatypes
                 }
             case (GLM_VEC4_POINTER):
                 {
-                    if (!ylikuutio::string::check_if_unsigned_integer_string(value_string))
+                    if (!yli::string::check_if_unsigned_integer_string(value_string))
                     {
                         return false;
                     }
@@ -786,62 +786,62 @@ namespace datatypes
             this->type = datatypes::UINT32_T_POINTER;
             this->set_value(value_string);
         }
-        else if (std::strcmp(type.c_str(), "ylikuutio::ontology::Universe*") == 0)
+        else if (std::strcmp(type.c_str(), "yli::ontology::Universe*") == 0)
         {
             this->type = datatypes::UNIVERSE_POINTER;
             this->set_value(value_string);
         }
-        else if (std::strcmp(type.c_str(), "ylikuutio::ontology::Scene*") == 0)
+        else if (std::strcmp(type.c_str(), "yli::ontology::Scene*") == 0)
         {
             this->type = datatypes::SCENE_POINTER;
             this->set_value(value_string);
         }
-        else if (std::strcmp(type.c_str(), "ylikuutio::ontology::Shader*") == 0)
+        else if (std::strcmp(type.c_str(), "yli::ontology::Shader*") == 0)
         {
             this->type = datatypes::SHADER_POINTER;
             this->set_value(value_string);
         }
-        else if (std::strcmp(type.c_str(), "ylikuutio::ontology::Material*") == 0)
+        else if (std::strcmp(type.c_str(), "yli::ontology::Material*") == 0)
         {
             this->type = datatypes::MATERIAL_POINTER;
             this->set_value(value_string);
         }
-        else if (std::strcmp(type.c_str(), "ylikuutio::ontology::Species*") == 0)
+        else if (std::strcmp(type.c_str(), "yli::ontology::Species*") == 0)
         {
             this->type = datatypes::SPECIES_POINTER;
             this->set_value(value_string);
         }
-        else if (std::strcmp(type.c_str(), "ylikuutio::ontology::Object*") == 0)
+        else if (std::strcmp(type.c_str(), "yli::ontology::Object*") == 0)
         {
             this->type = datatypes::OBJECT_POINTER;
             this->set_value(value_string);
         }
-        else if (std::strcmp(type.c_str(), "ylikuutio::ontology::VectorFont*") == 0)
+        else if (std::strcmp(type.c_str(), "yli::ontology::VectorFont*") == 0)
         {
             this->type = datatypes::VECTORFONT_POINTER;
             this->set_value(value_string);
         }
-        else if (std::strcmp(type.c_str(), "ylikuutio::ontology::Glyph*") == 0)
+        else if (std::strcmp(type.c_str(), "yli::ontology::Glyph*") == 0)
         {
             this->type = datatypes::GLYPH_POINTER;
             this->set_value(value_string);
         }
-        else if (std::strcmp(type.c_str(), "ylikuutio::ontology::Text3D*") == 0)
+        else if (std::strcmp(type.c_str(), "yli::ontology::Text3D*") == 0)
         {
             this->type = datatypes::TEXT3D_POINTER;
             this->set_value(value_string);
         }
-        else if (std::strcmp(type.c_str(), "ylikuutio::ontology::Symbiosis*") == 0)
+        else if (std::strcmp(type.c_str(), "yli::ontology::Symbiosis*") == 0)
         {
             this->type = datatypes::SYMBIOSIS_POINTER;
             this->set_value(value_string);
         }
-        else if (std::strcmp(type.c_str(), "ylikuutio::ontology::Text2D*") == 0)
+        else if (std::strcmp(type.c_str(), "yli::ontology::Text2D*") == 0)
         {
             this->type = datatypes::TEXT2D_POINTER;
             this->set_value(value_string);
         }
-        else if (std::strcmp(type.c_str(), "ylikuutio::console::Console*") == 0)
+        else if (std::strcmp(type.c_str(), "yli::console::Console*") == 0)
         {
             this->type = datatypes::CONSOLE_POINTER;
             this->set_value(value_string);
@@ -1078,7 +1078,7 @@ namespace datatypes
         }
     }
 
-    AnyValue::AnyValue(ylikuutio::ontology::Universe* const universe)
+    AnyValue::AnyValue(yli::ontology::Universe* const universe)
     {
         // constructor.
         this->set_default_values();
@@ -1086,19 +1086,19 @@ namespace datatypes
         this->universe = universe;
     }
 
-    AnyValue::AnyValue(const std::string& type, ylikuutio::ontology::Universe* const universe)
+    AnyValue::AnyValue(const std::string& type, yli::ontology::Universe* const universe)
     {
         // constructor.
         this->set_default_values();
 
-        if (std::strcmp(type.c_str(), "ylikuutio::ontology::Universe*") == 0)
+        if (std::strcmp(type.c_str(), "yli::ontology::Universe*") == 0)
         {
             this->type = datatypes::UNIVERSE_POINTER;
             this->universe = universe;
         }
     }
 
-    AnyValue::AnyValue(ylikuutio::ontology::Scene* const scene_pointer)
+    AnyValue::AnyValue(yli::ontology::Scene* const scene_pointer)
     {
         // constructor.
         this->set_default_values();
@@ -1106,19 +1106,19 @@ namespace datatypes
         this->scene_pointer = scene_pointer;
     }
 
-    AnyValue::AnyValue(const std::string& type, ylikuutio::ontology::Scene* const scene_pointer)
+    AnyValue::AnyValue(const std::string& type, yli::ontology::Scene* const scene_pointer)
     {
         // constructor.
         this->set_default_values();
 
-        if (std::strcmp(type.c_str(), "ylikuutio::ontology::Scene*") == 0)
+        if (std::strcmp(type.c_str(), "yli::ontology::Scene*") == 0)
         {
             this->type = datatypes::SCENE_POINTER;
             this->scene_pointer = scene_pointer;
         }
     }
 
-    AnyValue::AnyValue(ylikuutio::ontology::Shader* const shader_pointer)
+    AnyValue::AnyValue(yli::ontology::Shader* const shader_pointer)
     {
         // constructor.
         this->set_default_values();
@@ -1126,19 +1126,19 @@ namespace datatypes
         this->shader_pointer = shader_pointer;
     }
 
-    AnyValue::AnyValue(const std::string& type, ylikuutio::ontology::Shader* const shader_pointer)
+    AnyValue::AnyValue(const std::string& type, yli::ontology::Shader* const shader_pointer)
     {
         // constructor.
         this->set_default_values();
 
-        if (std::strcmp(type.c_str(), "ylikuutio::ontology::Shader*") == 0)
+        if (std::strcmp(type.c_str(), "yli::ontology::Shader*") == 0)
         {
             this->type = datatypes::SHADER_POINTER;
             this->shader_pointer = shader_pointer;
         }
     }
 
-    AnyValue::AnyValue(ylikuutio::ontology::Material* const material_pointer)
+    AnyValue::AnyValue(yli::ontology::Material* const material_pointer)
     {
         // constructor.
         this->set_default_values();
@@ -1146,19 +1146,19 @@ namespace datatypes
         this->material_pointer = material_pointer;
     }
 
-    AnyValue::AnyValue(const std::string& type, ylikuutio::ontology::Material* const material_pointer)
+    AnyValue::AnyValue(const std::string& type, yli::ontology::Material* const material_pointer)
     {
         // constructor.
         this->set_default_values();
 
-        if (std::strcmp(type.c_str(), "ylikuutio::ontology::Material*") == 0)
+        if (std::strcmp(type.c_str(), "yli::ontology::Material*") == 0)
         {
             this->type = datatypes::MATERIAL_POINTER;
             this->material_pointer = material_pointer;
         }
     }
 
-    AnyValue::AnyValue(ylikuutio::ontology::Species* const species_pointer)
+    AnyValue::AnyValue(yli::ontology::Species* const species_pointer)
     {
         // constructor.
         this->set_default_values();
@@ -1166,19 +1166,19 @@ namespace datatypes
         this->species_pointer = species_pointer;
     }
 
-    AnyValue::AnyValue(const std::string& type, ylikuutio::ontology::Species* const species_pointer)
+    AnyValue::AnyValue(const std::string& type, yli::ontology::Species* const species_pointer)
     {
         // constructor.
         this->set_default_values();
 
-        if (std::strcmp(type.c_str(), "ylikuutio::ontology::Species*") == 0)
+        if (std::strcmp(type.c_str(), "yli::ontology::Species*") == 0)
         {
             this->type = datatypes::SPECIES_POINTER;
             this->species_pointer = species_pointer;
         }
     }
 
-    AnyValue::AnyValue(ylikuutio::ontology::Object* const object_pointer)
+    AnyValue::AnyValue(yli::ontology::Object* const object_pointer)
     {
         // constructor.
         this->set_default_values();
@@ -1186,19 +1186,19 @@ namespace datatypes
         this->object_pointer = object_pointer;
     }
 
-    AnyValue::AnyValue(const std::string& type, ylikuutio::ontology::Object* const object_pointer)
+    AnyValue::AnyValue(const std::string& type, yli::ontology::Object* const object_pointer)
     {
         // constructor.
         this->set_default_values();
 
-        if (std::strcmp(type.c_str(), "ylikuutio::ontology::Object*") == 0)
+        if (std::strcmp(type.c_str(), "yli::ontology::Object*") == 0)
         {
             this->type = datatypes::OBJECT_POINTER;
             this->object_pointer = object_pointer;
         }
     }
 
-    AnyValue::AnyValue(ylikuutio::ontology::VectorFont* const vector_font_pointer)
+    AnyValue::AnyValue(yli::ontology::VectorFont* const vector_font_pointer)
     {
         // constructor.
         this->set_default_values();
@@ -1206,19 +1206,19 @@ namespace datatypes
         this->vector_font_pointer = vector_font_pointer;
     }
 
-    AnyValue::AnyValue(const std::string& type, ylikuutio::ontology::VectorFont* const vector_font_pointer)
+    AnyValue::AnyValue(const std::string& type, yli::ontology::VectorFont* const vector_font_pointer)
     {
         // constructor.
         this->set_default_values();
 
-        if (std::strcmp(type.c_str(), "ylikuutio::ontology::Vectorfont*") == 0)
+        if (std::strcmp(type.c_str(), "yli::ontology::Vectorfont*") == 0)
         {
             this->type = datatypes::VECTORFONT_POINTER;
             this->vector_font_pointer = vector_font_pointer;
         }
     }
 
-    AnyValue::AnyValue(ylikuutio::ontology::Glyph* const glyph_pointer)
+    AnyValue::AnyValue(yli::ontology::Glyph* const glyph_pointer)
     {
         // constructor.
         this->set_default_values();
@@ -1226,19 +1226,19 @@ namespace datatypes
         this->glyph_pointer = glyph_pointer;
     }
 
-    AnyValue::AnyValue(const std::string& type, ylikuutio::ontology::Glyph* const glyph_pointer)
+    AnyValue::AnyValue(const std::string& type, yli::ontology::Glyph* const glyph_pointer)
     {
         // constructor.
         this->set_default_values();
 
-        if (std::strcmp(type.c_str(), "ylikuutio::ontology::Glyph*") == 0)
+        if (std::strcmp(type.c_str(), "yli::ontology::Glyph*") == 0)
         {
             this->type = datatypes::GLYPH_POINTER;
             this->glyph_pointer = glyph_pointer;
         }
     }
 
-    AnyValue::AnyValue(ylikuutio::ontology::Text3D* const text3D_pointer)
+    AnyValue::AnyValue(yli::ontology::Text3D* const text3D_pointer)
     {
         // constructor.
         this->set_default_values();
@@ -1246,19 +1246,19 @@ namespace datatypes
         this->text3D_pointer = text3D_pointer;
     }
 
-    AnyValue::AnyValue(const std::string& type, ylikuutio::ontology::Text3D* const text3D_pointer)
+    AnyValue::AnyValue(const std::string& type, yli::ontology::Text3D* const text3D_pointer)
     {
         // constructor.
         this->set_default_values();
 
-        if (std::strcmp(type.c_str(), "ylikuutio::ontology::Text3D*") == 0)
+        if (std::strcmp(type.c_str(), "yli::ontology::Text3D*") == 0)
         {
             this->type = datatypes::TEXT3D_POINTER;
             this->text3D_pointer = text3D_pointer;
         }
     }
 
-    AnyValue::AnyValue(ylikuutio::ontology::Font2D* const font2D_pointer)
+    AnyValue::AnyValue(yli::ontology::Font2D* const font2D_pointer)
     {
         // constructor.
         this->set_default_values();
@@ -1266,19 +1266,19 @@ namespace datatypes
         this->font2D_pointer = font2D_pointer;
     }
 
-    AnyValue::AnyValue(const std::string& type, ylikuutio::ontology::Font2D* const font2D_pointer)
+    AnyValue::AnyValue(const std::string& type, yli::ontology::Font2D* const font2D_pointer)
     {
         // constructor.
         this->set_default_values();
 
-        if (std::strcmp(type.c_str(), "ylikuutio::ontology::Font2D*") == 0)
+        if (std::strcmp(type.c_str(), "yli::ontology::Font2D*") == 0)
         {
             this->type = datatypes::TEXT2D_POINTER;
             this->font2D_pointer = font2D_pointer;
         }
     }
 
-    AnyValue::AnyValue(ylikuutio::console::Console* const console_pointer)
+    AnyValue::AnyValue(yli::console::Console* const console_pointer)
     {
         // constructor.
         this->set_default_values();
@@ -1286,12 +1286,12 @@ namespace datatypes
         this->console_pointer = console_pointer;
     }
 
-    AnyValue::AnyValue(const std::string& type, ylikuutio::console::Console* const console_pointer)
+    AnyValue::AnyValue(const std::string& type, yli::console::Console* const console_pointer)
     {
         // constructor.
         this->set_default_values();
 
-        if (std::strcmp(type.c_str(), "ylikuutio::console::Console*") == 0)
+        if (std::strcmp(type.c_str(), "yli::console::Console*") == 0)
         {
             this->type = datatypes::CONSOLE_POINTER;
             this->console_pointer = console_pointer;

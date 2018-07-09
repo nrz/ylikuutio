@@ -6,7 +6,7 @@
 #include <string> // std::string
 #include <vector> // std::vector
 
-namespace ylikuutio
+namespace yli
 {
     namespace console
     {
@@ -19,7 +19,7 @@ namespace datatypes
     class AnyValue;
 }
 
-namespace ylikuutio
+namespace yli
 {
     namespace ontology
     {
@@ -28,8 +28,8 @@ namespace ylikuutio
 }
 
 typedef std::shared_ptr<datatypes::AnyValue> (*ConsoleCommandCallback) (
-        ylikuutio::console::Console*,
-        ylikuutio::ontology::Entity*,
+        yli::console::Console*,
+        yli::ontology::Entity*,
         std::vector<std::string>& command_parameters);
 
 #endif

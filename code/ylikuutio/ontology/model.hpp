@@ -28,21 +28,21 @@ namespace space_partition
     class Chunk;
 }
 
-namespace ylikuutio
+namespace yli
 {
     namespace ontology
     {
         class Universe;
         class Object;
 
-        class Model: public ylikuutio::ontology::Entity
+        class Model: public yli::ontology::Entity
         {
             public:
-                void bind(ylikuutio::ontology::Object* const object);
+                void bind(yli::ontology::Object* const object);
                 void unbind(const int32_t childID);
 
                 // constructor.
-                Model(ylikuutio::ontology::Universe* const universe)
+                Model(yli::ontology::Universe* const universe)
                     : Entity(universe)
                 {
                     // constructor.
@@ -95,7 +95,7 @@ namespace ylikuutio
 
             protected:
                 // this method sets a object pointer.
-                void set_object_pointer(const int32_t childID, ylikuutio::ontology::Object* const child_pointer);
+                void set_object_pointer(const int32_t childID, yli::ontology::Object* const child_pointer);
 
                 GLfloat initial_rotate_angle;            // initial rotate angle.
                 glm::vec3 initial_rotate_vector;         // initial rotate vector.
@@ -105,7 +105,7 @@ namespace ylikuutio
 
                 GLuint lightID;                          // light ID, returned by `glGetUniformLocation(programID, "LightPosition_worldspace");`.
 
-                std::vector<ylikuutio::ontology::Object*> object_pointer_vector;
+                std::vector<yli::ontology::Object*> object_pointer_vector;
                 std::queue<int32_t> free_objectID_queue;
                 int32_t number_of_objects;
 

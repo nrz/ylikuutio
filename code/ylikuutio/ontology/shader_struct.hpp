@@ -4,7 +4,7 @@
 // Include standard headers
 #include <string>   // std::string
 
-namespace ylikuutio
+namespace yli
 {
     namespace ontology
     {
@@ -19,7 +19,7 @@ typedef struct ShaderStruct
     {
         // constructor.
     }
-    ylikuutio::ontology::Scene* parent; // pointer to the scene (draw list).
+    yli::ontology::Scene* parent; // pointer to the scene (draw list).
     std::string vertex_shader;       // filename of vertex shader.
     std::string fragment_shader;     // filename of fragment shader.
 } ShaderStruct;

@@ -28,24 +28,24 @@
 #include <stdint.h> // uint32_t etc.
 #include <unordered_map> // std::unordered_map
 
-namespace ylikuutio
+namespace yli
 {
     namespace ontology
     {
-        void Scene::bind_shader(ylikuutio::ontology::Shader* const shader)
+        void Scene::bind_shader(yli::ontology::Shader* const shader)
         {
             // get `childID` from `Scene` and set pointer to `shader`.
-            hierarchy::bind_child_to_parent<ylikuutio::ontology::Shader*>(
+            hierarchy::bind_child_to_parent<yli::ontology::Shader*>(
                     shader,
                     this->shader_pointer_vector,
                     this->free_shaderID_queue,
                     &this->number_of_shaders);
         }
 
-        void Scene::bind_camera(ylikuutio::ontology::Camera* const camera)
+        void Scene::bind_camera(yli::ontology::Camera* const camera)
         {
             // get `childID` from `Scene` and set pointer to `camera`.
-            hierarchy::bind_child_to_parent<ylikuutio::ontology::Camera*>(
+            hierarchy::bind_child_to_parent<yli::ontology::Camera*>(
                     camera,
                     this->camera_pointer_vector,
                     this->free_cameraID_queue,
@@ -54,7 +54,7 @@ namespace ylikuutio
 
         void Scene::unbind_shader(const int32_t childID)
         {
-            ylikuutio::ontology::Shader* dummy_child_pointer = nullptr;
+            yli::ontology::Shader* dummy_child_pointer = nullptr;
             hierarchy::set_child_pointer(
                     childID,
                     dummy_child_pointer,
@@ -65,7 +65,7 @@ namespace ylikuutio
 
         void Scene::unbind_camera(const int32_t childID)
         {
-            ylikuutio::ontology::Camera* dummy_child_pointer = nullptr;
+            yli::ontology::Camera* dummy_child_pointer = nullptr;
             hierarchy::set_child_pointer(
                     childID,
                     dummy_child_pointer,
@@ -87,11 +87,11 @@ namespace ylikuutio
 
             // destroy all `Shader`s of this `Scene`.
             std::cout << "All shaders of this scene will be destroyed.\n";
-            hierarchy::delete_children<ylikuutio::ontology::Shader*>(this->shader_pointer_vector, &this->number_of_shaders);
+            hierarchy::delete_children<yli::ontology::Shader*>(this->shader_pointer_vector, &this->number_of_shaders);
 
             // destroy all `Camera`s of this `Scene`.
             std::cout << "All cameras of this scene will be destroyed.\n";
-            hierarchy::delete_children<ylikuutio::ontology::Camera*>(this->camera_pointer_vector, &this->number_of_cameras);
+            hierarchy::delete_children<yli::ontology::Camera*>(this->camera_pointer_vector, &this->number_of_cameras);
 
             if (this->parent->get_active_scene() == this)
             {
@@ -108,17 +108,17 @@ namespace ylikuutio
             this->prerender();
 
             // render this `Scene` by calling `render()` function of each `Shader`.
-            ylikuutio::ontology::render_children<ylikuutio::ontology::Shader*>(this->shader_pointer_vector);
+            yli::ontology::render_children<yli::ontology::Shader*>(this->shader_pointer_vector);
 
             this->postrender();
         }
 
-        ylikuutio::ontology::Camera* Scene::get_active_camera()
+        yli::ontology::Camera* Scene::get_active_camera()
         {
             return this->active_camera;
         }
 
-        void Scene::set_active_camera(ylikuutio::ontology::Camera* camera)
+        void Scene::set_active_camera(yli::ontology::Camera* camera)
         {
             this->active_camera = camera;
 
@@ -132,7 +132,7 @@ namespace ylikuutio
             }
         }
 
-        ylikuutio::ontology::Entity* Scene::get_parent() const
+        yli::ontology::Entity* Scene::get_parent() const
         {
             return this->parent;
         }
@@ -148,7 +148,7 @@ namespace ylikuutio
         }
 
         // this method returns a pointer to an `Entity` using the name as key.
-        ylikuutio::ontology::Entity* Scene::get_entity(const std::string name) const
+        yli::ontology::Entity* Scene::get_entity(const std::string name) const
         {
             if (this->name_map.count(name) != 1)
             {
@@ -203,12 +203,12 @@ namespace ylikuutio
             return this->water_level;
         }
 
-        void Scene::set_shader_pointer(const int32_t childID, ylikuutio::ontology::Shader* const child_pointer)
+        void Scene::set_shader_pointer(const int32_t childID, yli::ontology::Shader* const child_pointer)
         {
             hierarchy::set_child_pointer(childID, child_pointer, this->shader_pointer_vector, this->free_shaderID_queue, &this->number_of_shaders);
         }
 
-        void Scene::set_camera_pointer(const int32_t childID, ylikuutio::ontology::Camera* const child_pointer)
+        void Scene::set_camera_pointer(const int32_t childID, yli::ontology::Camera* const child_pointer)
         {
             hierarchy::set_child_pointer(childID, child_pointer, this->camera_pointer_vector, this->free_cameraID_queue, &this->number_of_cameras);
         }

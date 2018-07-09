@@ -13,7 +13,7 @@
 // Include standard headers
 #include <vector>   // std::vector
 
-namespace ylikuutio
+namespace yli
 {
     namespace geometry
     {
@@ -66,10 +66,10 @@ namespace ylikuutio
                     // y - y1 = m(x - x1)
                 }
 
-                bool is_identical_with(const ylikuutio::geometry::Line2D* const line) const;   // Here, identical means that points are identical.
+                bool is_identical_with(const yli::geometry::Line2D* const line) const;   // Here, identical means that points are identical.
 
-                bool do_lines2D_intersect(const ylikuutio::geometry::Line2D* const line1, const ylikuutio::geometry::Line2D* const line2) const;
-                bool do_lines2D_intersect(const ylikuutio::geometry::Line2D* const line) const;
+                bool do_lines2D_intersect(const yli::geometry::Line2D* const line1, const yli::geometry::Line2D* const line2) const;
+                bool do_lines2D_intersect(const yli::geometry::Line2D* const line) const;
 
                 glm::vec2 vec2_point1;
                 glm::vec2 vec2_point2;

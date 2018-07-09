@@ -7,15 +7,15 @@
 #include <glm/glm.hpp> // glm
 #endif
 
-namespace ylikuutio
+namespace yli
 {
     namespace geometry
     {
         class Line2D;
         class Line3D;
 
-        glm::vec2 get_intersection_point(const ylikuutio::geometry::Line2D* const line1, const ylikuutio::geometry::Line2D* const line2);
-        glm::vec3 get_intersection_point(const ylikuutio::geometry::Line3D* const line1, const ylikuutio::geometry::Line3D* const line2);
+        glm::vec2 get_intersection_point(const yli::geometry::Line2D* const line1, const yli::geometry::Line2D* const line2);
+        glm::vec3 get_intersection_point(const yli::geometry::Line3D* const line1, const yli::geometry::Line3D* const line2);
     }
 }
 

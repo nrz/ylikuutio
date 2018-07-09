@@ -23,7 +23,7 @@
 #include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
 
-namespace ylikuutio
+namespace yli
 {
     namespace geometry
     {
@@ -45,7 +45,7 @@ namespace ylikuutio
 
         // for bilinear interpolation.
         // These functions exist to avoid need to remember
-        // the array order when calling `ylikuutio::geometry::get_face_normal`.
+        // the array order when calling `yli::geometry::get_face_normal`.
         glm::vec3 s_face_normal(const std::vector<glm::vec3>& face_normal_vector_vec3, const int32_t x, const int32_t z, const int32_t image_width);
         glm::vec3 w_face_normal(const std::vector<glm::vec3>& face_normal_vector_vec3, const int32_t x, const int32_t z, const int32_t image_width);
         glm::vec3 n_face_normal(const std::vector<glm::vec3>& face_normal_vector_vec3, const int32_t x, const int32_t z, const int32_t image_width);

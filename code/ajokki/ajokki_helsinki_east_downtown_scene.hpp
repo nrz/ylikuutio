@@ -1,4 +1,4 @@
-namespace ylikuutio
+namespace yli
 {
     namespace ontology
     {
@@ -10,5 +10,5 @@ namespace ylikuutio
 
 namespace ajokki
 {
-    ylikuutio::ontology::Entity* create_helsinki_east_downtown_scene(ylikuutio::ontology::EntityFactory* entity_factory, ylikuutio::ontology::World* const world);
+    yli::ontology::Entity* create_helsinki_east_downtown_scene(yli::ontology::EntityFactory* entity_factory, yli::ontology::World* const world);
 }

@@ -7,20 +7,20 @@
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 
-namespace ylikuutio
+namespace yli
 {
     namespace ontology
     {
         class Glyph;
 
-        void create_glyph_objects(const std::string& text_string, ylikuutio::ontology::Text3D* const text3D)
+        void create_glyph_objects(const std::string& text_string, yli::ontology::Text3D* const text3D)
         {
             const char* text_pointer = text_string.c_str();
 
             while (*text_pointer != '\0')
             {
-                int32_t unicode_value = ylikuutio::string::extract_unicode_value_from_string(text_pointer);
-                ylikuutio::ontology::Glyph* glyph_pointer = text3D->parent->get_glyph_pointer(unicode_value);
+                int32_t unicode_value = yli::string::extract_unicode_value_from_string(text_pointer);
+                yli::ontology::Glyph* glyph_pointer = text3D->parent->get_glyph_pointer(unicode_value);
 
                 if (glyph_pointer == nullptr)
                 {
@@ -39,7 +39,7 @@ namespace ylikuutio
                 object_struct.is_character = true;
                 object_struct.cartesian_coordinates = text3D->cartesian_coordinates; // TODO: adjust this as needed.
                 object_struct.rotate_vector = text3D->rotate_vector;
-                ylikuutio::ontology::Object* object = new ylikuutio::ontology::Object(text3D->universe, object_struct);
+                yli::ontology::Object* object = new yli::ontology::Object(text3D->universe, object_struct);
             }
 
             // TODO: Add support for Unicode strings.

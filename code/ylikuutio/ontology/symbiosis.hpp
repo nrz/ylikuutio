@@ -37,7 +37,7 @@ typedef unsigned char u8;
 #include <unordered_map> // std::unordered_map
 #include <vector>   // std::vector
 
-namespace ylikuutio
+namespace yli
 {
     namespace ontology
     {
@@ -46,19 +46,19 @@ namespace ylikuutio
         class SymbiontSpecies;
         class Holobiont;
 
-        class Symbiosis: public ylikuutio::ontology::Entity
+        class Symbiosis: public yli::ontology::Entity
         {
             public:
-                void bind_symbiont_material(ylikuutio::ontology::SymbiontMaterial* const symbiont_material);
-                void bind_holobiont(ylikuutio::ontology::Holobiont* const holobiont);
+                void bind_symbiont_material(yli::ontology::SymbiontMaterial* const symbiont_material);
+                void bind_holobiont(yli::ontology::Holobiont* const holobiont);
 
                 void unbind_holobiont(const int32_t childID);
 
                 // this method sets pointer to this `Symbiosis` to nullptr, sets `parent` according to the input, and requests a new `childID` from the new `Shader`.
-                void bind_to_new_parent(ylikuutio::ontology::Shader* const new_shader_pointer);
+                void bind_to_new_parent(yli::ontology::Shader* const new_shader_pointer);
 
                 // constructor.
-                Symbiosis(ylikuutio::ontology::Universe* universe, const SymbiosisStruct& symbiosis_struct)
+                Symbiosis(yli::ontology::Universe* universe, const SymbiosisStruct& symbiosis_struct)
                     : Entity(universe)
                 {
                     // constructor.
@@ -77,7 +77,7 @@ namespace ylikuutio
 
                     this->child_vector_pointers_vector.push_back(&this->symbiont_material_pointer_vector);
                     this->child_vector_pointers_vector.push_back(&this->holobiont_pointer_vector);
-                    this->type = "ylikuutio::ontology::Symbiosis*";
+                    this->type = "yli::ontology::Symbiosis*";
 
                     this->can_be_erased = true;
                 }
@@ -90,7 +90,7 @@ namespace ylikuutio
                 // this method renders all `SymbiontMaterial`s belonging to this `Symbiosis`.
                 void render();
 
-                ylikuutio::ontology::Entity* get_parent() const override;
+                yli::ontology::Entity* get_parent() const override;
 
                 int32_t get_number_of_children() const override;
 
@@ -98,11 +98,11 @@ namespace ylikuutio
 
                 const std::string& get_model_file_format();
 
-                void set_symbiont_material_pointer(const int32_t childID, ylikuutio::ontology::SymbiontMaterial* const child_pointer);
+                void set_symbiont_material_pointer(const int32_t childID, yli::ontology::SymbiontMaterial* const child_pointer);
 
-                void set_holobiont_pointer(const int32_t childID, ylikuutio::ontology::Holobiont* const child_pointer);
+                void set_holobiont_pointer(const int32_t childID, yli::ontology::Holobiont* const child_pointer);
 
-                ylikuutio::ontology::SymbiontSpecies* get_symbiont_species(const int32_t biontID) const;
+                yli::ontology::SymbiontSpecies* get_symbiont_species(const int32_t biontID) const;
                 GLuint get_vertex_position_modelspaceID(const int32_t biontID) const;
                 GLuint get_vertexUVID(const int32_t biontID) const;
                 GLuint get_vertex_normal_modelspaceID(const int32_t biontID) const;
@@ -130,7 +130,7 @@ namespace ylikuutio
             private:
                 void bind_to_parent();
 
-                ylikuutio::ontology::Shader* parent; // pointer to `Shader`.
+                yli::ontology::Shader* parent; // pointer to `Shader`.
 
                 std::string model_file_format;  // type of the model file, eg. `"fbx"`.
                 std::string model_filename;     // filename of the model file.
@@ -138,8 +138,8 @@ namespace ylikuutio
 
                 glm::vec3 light_position;       // light position.
 
-                std::vector<ylikuutio::ontology::SymbiontMaterial*> symbiont_material_pointer_vector;
-                std::vector<ylikuutio::ontology::Holobiont*> holobiont_pointer_vector;
+                std::vector<yli::ontology::SymbiontMaterial*> symbiont_material_pointer_vector;
+                std::vector<yli::ontology::Holobiont*> holobiont_pointer_vector;
                 std::queue<int32_t> free_symbiont_materialID_queue;
                 std::queue<int32_t> free_holobiontID_queue;
                 int32_t number_of_symbiont_materials;
@@ -155,8 +155,8 @@ namespace ylikuutio
                 std::vector<std::vector<glm::vec3>> indexed_normals;
 
                 std::unordered_map<const ofbx::Texture*, std::vector<int32_t>> ofbx_diffuse_texture_mesh_map;
-                std::vector<ylikuutio::ontology::SymbiontMaterial*> biontID_symbiont_material_vector;
-                std::vector<ylikuutio::ontology::SymbiontSpecies*> biontID_symbiont_species_vector;
+                std::vector<yli::ontology::SymbiontMaterial*> biontID_symbiont_material_vector;
+                std::vector<yli::ontology::SymbiontSpecies*> biontID_symbiont_species_vector;
                 std::vector<const ofbx::Mesh*> ofbx_meshes;
                 std::vector<const ofbx::Texture*> ofbx_diffuse_texture_vector;
                 std::vector<const ofbx::Texture*> ofbx_normal_texture_vector; // currently not in use.

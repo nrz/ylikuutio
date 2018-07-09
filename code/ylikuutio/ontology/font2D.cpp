@@ -24,7 +24,7 @@
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 
-namespace ylikuutio
+namespace yli
 {
     namespace ontology
     {
@@ -45,7 +45,7 @@ namespace ylikuutio
             glDeleteProgram(programID);
         }
 
-        ylikuutio::ontology::Entity* Font2D::get_parent() const
+        yli::ontology::Entity* Font2D::get_parent() const
         {
             // Currently `Font2D`'s do not any parents.
             return nullptr;

@@ -28,7 +28,7 @@
 #include <iostream>   // std::cout, std::cin, std::cerr
 #include <string>     // std::string
 
-namespace ylikuutio
+namespace yli
 {
     namespace ontology
     {
@@ -39,14 +39,14 @@ namespace ylikuutio
 
 namespace ajokki
 {
-    ylikuutio::ontology::Entity* create_helsinki_east_downtown_scene(ylikuutio::ontology::EntityFactory* entity_factory, ylikuutio::ontology::World* const world)
+    yli::ontology::Entity* create_helsinki_east_downtown_scene(yli::ontology::EntityFactory* entity_factory, yli::ontology::World* const world)
     {
         // Helsinki `Scene` begins here.
 
-        std::cout << "Creating ylikuutio::ontology::Entity* helsinki_east_downtown_scene_entity ...\n";
-        ylikuutio::ontology::Entity* helsinki_east_downtown_scene_entity = entity_factory->create_Scene(world, 0.9f);
-        std::cout << "Creating ylikuutio::ontology::Scene* helsinki_east_downtown_scene ...\n";
-        ylikuutio::ontology::Scene* helsinki_east_downtown_scene = dynamic_cast<ylikuutio::ontology::Scene*>(helsinki_east_downtown_scene_entity);
+        std::cout << "Creating yli::ontology::Entity* helsinki_east_downtown_scene_entity ...\n";
+        yli::ontology::Entity* helsinki_east_downtown_scene_entity = entity_factory->create_Scene(world, 0.9f);
+        std::cout << "Creating yli::ontology::Scene* helsinki_east_downtown_scene ...\n";
+        yli::ontology::Scene* helsinki_east_downtown_scene = dynamic_cast<yli::ontology::Scene*>(helsinki_east_downtown_scene_entity);
 
         if (helsinki_east_downtown_scene == nullptr)
         {
@@ -65,10 +65,10 @@ namespace ajokki
         helsinki_east_downtown_shader_struct.vertex_shader = "StandardShading.vertexshader";
         helsinki_east_downtown_shader_struct.fragment_shader = "StandardShading.fragmentshader";
 
-        std::cout << "Creating ylikuutio::ontology::Entity* helsinki_east_downtown_shader_entity ...\n";
-        ylikuutio::ontology::Entity* helsinki_east_downtown_shader_entity = entity_factory->create_Shader(helsinki_east_downtown_shader_struct);
-        std::cout << "Creating ylikuutio::ontology::Shader* helsinki_east_downtown_shader ...\n";
-        ylikuutio::ontology::Shader* helsinki_east_downtown_shader = dynamic_cast<ylikuutio::ontology::Shader*>(helsinki_east_downtown_shader_entity);
+        std::cout << "Creating yli::ontology::Entity* helsinki_east_downtown_shader_entity ...\n";
+        yli::ontology::Entity* helsinki_east_downtown_shader_entity = entity_factory->create_Shader(helsinki_east_downtown_shader_struct);
+        std::cout << "Creating yli::ontology::Shader* helsinki_east_downtown_shader ...\n";
+        yli::ontology::Shader* helsinki_east_downtown_shader = dynamic_cast<yli::ontology::Shader*>(helsinki_east_downtown_shader_entity);
 
         if (helsinki_east_downtown_shader == nullptr)
         {
@@ -82,10 +82,10 @@ namespace ajokki
         helsinki_east_downtown_grass_material_struct.texture_file_format = "bmp";
         helsinki_east_downtown_grass_material_struct.texture_filename = "GrassGreenTexture0002.bmp";
 
-        std::cout << "Creating ylikuutio::ontology::Entity* helsinki_east_downtown_grass_material_entity ...\n";
-        ylikuutio::ontology::Entity* helsinki_east_downtown_grass_material_entity = entity_factory->create_Material(helsinki_east_downtown_grass_material_struct);
-        std::cout << "Creating ylikuutio::ontology::Material* helsinki_east_downtown_grass_material ...\n";
-        ylikuutio::ontology::Material* helsinki_east_downtown_grass_material = dynamic_cast<ylikuutio::ontology::Material*>(helsinki_east_downtown_grass_material_entity);
+        std::cout << "Creating yli::ontology::Entity* helsinki_east_downtown_grass_material_entity ...\n";
+        yli::ontology::Entity* helsinki_east_downtown_grass_material_entity = entity_factory->create_Material(helsinki_east_downtown_grass_material_struct);
+        std::cout << "Creating yli::ontology::Material* helsinki_east_downtown_grass_material ...\n";
+        yli::ontology::Material* helsinki_east_downtown_grass_material = dynamic_cast<yli::ontology::Material*>(helsinki_east_downtown_grass_material_entity);
 
         if (helsinki_east_downtown_grass_material == nullptr)
         {
@@ -101,10 +101,10 @@ namespace ajokki
         pink_geometric_tiles_material_struct.texture_file_format = "bmp";
         pink_geometric_tiles_material_struct.texture_filename = "pavers1b2.bmp";
 
-        std::cout << "Creating ylikuutio::ontology::Entity* pink_geometric_tiles_material_entity ...\n";
-        ylikuutio::ontology::Entity* pink_geometric_tiles_material_entity = entity_factory->create_Material(pink_geometric_tiles_material_struct);
-        std::cout << "Creating ylikuutio::ontology::Material* pink_geometric_tiles_material ...\n";
-        ylikuutio::ontology::Material* pink_geometric_tiles_material = dynamic_cast<ylikuutio::ontology::Material*>(pink_geometric_tiles_material_entity);
+        std::cout << "Creating yli::ontology::Entity* pink_geometric_tiles_material_entity ...\n";
+        yli::ontology::Entity* pink_geometric_tiles_material_entity = entity_factory->create_Material(pink_geometric_tiles_material_struct);
+        std::cout << "Creating yli::ontology::Material* pink_geometric_tiles_material ...\n";
+        yli::ontology::Material* pink_geometric_tiles_material = dynamic_cast<yli::ontology::Material*>(pink_geometric_tiles_material_entity);
 
         if (pink_geometric_tiles_material == nullptr)
         {
@@ -120,10 +120,10 @@ namespace ajokki
         orange_fur_material_struct.texture_file_format = "bmp";
         orange_fur_material_struct.texture_filename = "orange_fur_texture.bmp";
 
-        std::cout << "Creating ylikuutio::ontology::Entity* orange_fur_material_entity ...\n";
-        ylikuutio::ontology::Entity* orange_fur_material_entity = entity_factory->create_Material(orange_fur_material_struct);
-        std::cout << "Creating ylikuutio::ontology::Material* orange_fur_material ...\n";
-        ylikuutio::ontology::Material* orange_fur_material = dynamic_cast<ylikuutio::ontology::Material*>(orange_fur_material_entity);
+        std::cout << "Creating yli::ontology::Entity* orange_fur_material_entity ...\n";
+        yli::ontology::Entity* orange_fur_material_entity = entity_factory->create_Material(orange_fur_material_struct);
+        std::cout << "Creating yli::ontology::Material* orange_fur_material ...\n";
+        yli::ontology::Material* orange_fur_material = dynamic_cast<yli::ontology::Material*>(orange_fur_material_entity);
 
         if (orange_fur_material == nullptr)
         {
@@ -143,10 +143,10 @@ namespace ajokki
         helsinki_east_downtown_terrain_species_struct.is_terrain = true;
         helsinki_east_downtown_terrain_species_struct.x_step = 4;
         helsinki_east_downtown_terrain_species_struct.z_step = 4;
-        std::cout << "Creating ylikuutio::ontology::Entity* helsinki_east_downtown_terrain_species_entity ...\n";
-        ylikuutio::ontology::Entity* helsinki_east_downtown_terrain_species_entity = entity_factory->create_Species(helsinki_east_downtown_terrain_species_struct);
-        std::cout << "Creating ylikuutio::ontology::Species* helsinki_east_downtown_terrain_species ...\n";
-        ylikuutio::ontology::Species* helsinki_east_downtown_terrain_species = dynamic_cast<ylikuutio::ontology::Species*>(helsinki_east_downtown_terrain_species_entity);
+        std::cout << "Creating yli::ontology::Entity* helsinki_east_downtown_terrain_species_entity ...\n";
+        yli::ontology::Entity* helsinki_east_downtown_terrain_species_entity = entity_factory->create_Species(helsinki_east_downtown_terrain_species_struct);
+        std::cout << "Creating yli::ontology::Species* helsinki_east_downtown_terrain_species ...\n";
+        yli::ontology::Species* helsinki_east_downtown_terrain_species = dynamic_cast<yli::ontology::Species*>(helsinki_east_downtown_terrain_species_entity);
 
         if (helsinki_east_downtown_terrain_species == nullptr)
         {
@@ -173,10 +173,10 @@ namespace ajokki
         suzanne_species_struct.model_filename = "suzanne.obj";
         suzanne_species_struct.light_position = glm::vec3(0, 100000, 100000);
 
-        std::cout << "Creating ylikuutio::ontology::Entity* suzanne_species_entity ...\n";
-        ylikuutio::ontology::Entity* suzanne_species_entity = entity_factory->create_Species(suzanne_species_struct);
-        std::cout << "Creating ylikuutio::ontology::Species* suzanne_species ...\n";
-        ylikuutio::ontology::Species* suzanne_species = dynamic_cast<ylikuutio::ontology::Species*>(suzanne_species_entity);
+        std::cout << "Creating yli::ontology::Entity* suzanne_species_entity ...\n";
+        yli::ontology::Entity* suzanne_species_entity = entity_factory->create_Species(suzanne_species_struct);
+        std::cout << "Creating yli::ontology::Species* suzanne_species ...\n";
+        yli::ontology::Species* suzanne_species = dynamic_cast<yli::ontology::Species*>(suzanne_species_entity);
 
         if (suzanne_species == nullptr)
         {
@@ -193,10 +193,10 @@ namespace ajokki
         suzanne_object_struct1.rotate_angle = 0.10f;
         suzanne_object_struct1.rotate_vector = glm::vec3(1.0f, 0.0f, 0.0f);
         suzanne_object_struct1.translate_vector = glm::vec3(1.0f, 0.0f, 0.0f);
-        std::cout << "Creating ylikuutio::ontology::Entity* suzanne1_entity ...\n";
-        ylikuutio::ontology::Entity* suzanne1_entity = entity_factory->create_Object(suzanne_object_struct1);
-        std::cout << "Creating ylikuutio::ontology::Species* suzanne1 ...\n";
-        ylikuutio::ontology::Object* suzanne1 = dynamic_cast<ylikuutio::ontology::Object*>(suzanne1_entity);
+        std::cout << "Creating yli::ontology::Entity* suzanne1_entity ...\n";
+        yli::ontology::Entity* suzanne1_entity = entity_factory->create_Object(suzanne_object_struct1);
+        std::cout << "Creating yli::ontology::Species* suzanne1 ...\n";
+        yli::ontology::Object* suzanne1 = dynamic_cast<yli::ontology::Object*>(suzanne1_entity);
 
         if (suzanne1 == nullptr)
         {
@@ -213,10 +213,10 @@ namespace ajokki
         suzanne_object_struct2.rotate_angle = 0.20f;
         suzanne_object_struct2.rotate_vector = glm::vec3(1.0f, 0.0f, 0.0f);
         suzanne_object_struct2.translate_vector = glm::vec3(0.0f, 1.0f, 0.0f);
-        std::cout << "Creating ylikuutio::ontology::Entity* suzanne2_entity ...\n";
-        ylikuutio::ontology::Entity* suzanne2_entity = entity_factory->create_Object(suzanne_object_struct2);
-        std::cout << "Creating ylikuutio::ontology::Species* suzanne2 ...\n";
-        ylikuutio::ontology::Object* suzanne2 = dynamic_cast<ylikuutio::ontology::Object*>(suzanne2_entity);
+        std::cout << "Creating yli::ontology::Entity* suzanne2_entity ...\n";
+        yli::ontology::Entity* suzanne2_entity = entity_factory->create_Object(suzanne_object_struct2);
+        std::cout << "Creating yli::ontology::Species* suzanne2 ...\n";
+        yli::ontology::Object* suzanne2 = dynamic_cast<yli::ontology::Object*>(suzanne2_entity);
 
         if (suzanne2 == nullptr)
         {
@@ -232,10 +232,10 @@ namespace ajokki
         suzanne_object_struct3.rotate_angle = 0.05f;
         suzanne_object_struct3.rotate_vector = glm::vec3(1.0f, 0.0f, 0.0f);
         suzanne_object_struct3.translate_vector = glm::vec3(0.0f, 0.0f, 1.0f);
-        std::cout << "Creating ylikuutio::ontology::Entity* suzanne3_entity ...\n";
-        ylikuutio::ontology::Entity* suzanne3_entity = entity_factory->create_Object(suzanne_object_struct3);
-        std::cout << "Creating ylikuutio::ontology::Species* suzanne3 ...\n";
-        ylikuutio::ontology::Object* suzanne3 = dynamic_cast<ylikuutio::ontology::Object*>(suzanne3_entity);
+        std::cout << "Creating yli::ontology::Entity* suzanne3_entity ...\n";
+        yli::ontology::Entity* suzanne3_entity = entity_factory->create_Object(suzanne_object_struct3);
+        std::cout << "Creating yli::ontology::Species* suzanne3 ...\n";
+        yli::ontology::Object* suzanne3 = dynamic_cast<yli::ontology::Object*>(suzanne3_entity);
 
         if (suzanne3 == nullptr)
         {
@@ -251,10 +251,10 @@ namespace ajokki
         suzanne_object_struct4.rotate_angle = 0.15f;
         suzanne_object_struct4.rotate_vector = glm::vec3(1.0f, 0.0f, 0.0f);
         suzanne_object_struct4.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
-        std::cout << "Creating ylikuutio::ontology::Entity* suzanne4_entity ...\n";
-        ylikuutio::ontology::Entity* suzanne4_entity = entity_factory->create_Object(suzanne_object_struct4);
-        std::cout << "Creating ylikuutio::ontology::Species* suzanne4 ...\n";
-        ylikuutio::ontology::Object* suzanne4 = dynamic_cast<ylikuutio::ontology::Object*>(suzanne4_entity);
+        std::cout << "Creating yli::ontology::Entity* suzanne4_entity ...\n";
+        yli::ontology::Entity* suzanne4_entity = entity_factory->create_Object(suzanne_object_struct4);
+        std::cout << "Creating yli::ontology::Species* suzanne4 ...\n";
+        yli::ontology::Object* suzanne4 = dynamic_cast<yli::ontology::Object*>(suzanne4_entity);
 
         if (suzanne4 == nullptr)
         {
@@ -271,10 +271,10 @@ namespace ajokki
         suzanne_object_struct5.rotate_angle = 0.03f;
         suzanne_object_struct5.rotate_vector = glm::vec3(1.0f, 1.0f, 1.0f);
         suzanne_object_struct5.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
-        std::cout << "Creating ylikuutio::ontology::Entity* suzanne5_entity ...\n";
-        ylikuutio::ontology::Entity* suzanne5_entity = entity_factory->create_Object(suzanne_object_struct5);
-        std::cout << "Creating ylikuutio::ontology::Species* suzanne5 ...\n";
-        ylikuutio::ontology::Object* suzanne5 = dynamic_cast<ylikuutio::ontology::Object*>(suzanne5_entity);
+        std::cout << "Creating yli::ontology::Entity* suzanne5_entity ...\n";
+        yli::ontology::Entity* suzanne5_entity = entity_factory->create_Object(suzanne_object_struct5);
+        std::cout << "Creating yli::ontology::Species* suzanne5 ...\n";
+        yli::ontology::Object* suzanne5 = dynamic_cast<yli::ontology::Object*>(suzanne5_entity);
 
         if (suzanne5 == nullptr)
         {
@@ -292,11 +292,11 @@ namespace ajokki
         cat_species_struct.model_filename = "cat.fbx";
         cat_species_struct.light_position = glm::vec3(0, 100000, 100000);
 
-        std::cout << "Creating ylikuutio::ontology::Entity* cat_species_entity ...\n";
-        ylikuutio::ontology::Entity* cat_species_entity = entity_factory->create_Species(cat_species_struct);
+        std::cout << "Creating yli::ontology::Entity* cat_species_entity ...\n";
+        yli::ontology::Entity* cat_species_entity = entity_factory->create_Species(cat_species_struct);
 
-        std::cout << "Creating ylikuutio::ontology::Species* cat_species ...\n";
-        ylikuutio::ontology::Species* cat_species = dynamic_cast<ylikuutio::ontology::Species*>(cat_species_entity);
+        std::cout << "Creating yli::ontology::Species* cat_species ...\n";
+        yli::ontology::Species* cat_species = dynamic_cast<yli::ontology::Species*>(cat_species_entity);
 
         if (cat_species == nullptr)
         {
@@ -313,8 +313,8 @@ namespace ajokki
         cat_object_struct1.rotate_angle = 0.00f;
         cat_object_struct1.rotate_vector = glm::vec3(1.0f, 1.0f, 1.0f);
         cat_object_struct1.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
-        ylikuutio::ontology::Entity* cat1_entity = entity_factory->create_Object(cat_object_struct1);
-        ylikuutio::ontology::Object* cat1 = dynamic_cast<ylikuutio::ontology::Object*>(cat1_entity);
+        yli::ontology::Entity* cat1_entity = entity_factory->create_Object(cat_object_struct1);
+        yli::ontology::Object* cat1 = dynamic_cast<yli::ontology::Object*>(cat1_entity);
 
         if (cat1 == nullptr)
         {
@@ -331,8 +331,8 @@ namespace ajokki
         cat_object_struct2.rotate_angle = 0.00f;
         cat_object_struct2.rotate_vector = glm::vec3(1.5f, 1.0f, 0.9f);
         cat_object_struct2.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
-        ylikuutio::ontology::Entity* cat2_entity = entity_factory->create_Object(cat_object_struct2);
-        ylikuutio::ontology::Object* cat2 = dynamic_cast<ylikuutio::ontology::Object*>(cat2_entity);
+        yli::ontology::Entity* cat2_entity = entity_factory->create_Object(cat_object_struct2);
+        yli::ontology::Object* cat2 = dynamic_cast<yli::ontology::Object*>(cat2_entity);
 
         if (cat2 == nullptr)
         {
@@ -348,11 +348,11 @@ namespace ajokki
         freight_train_symbiosis_struct.model_filename = "freight_train.fbx";
         freight_train_symbiosis_struct.light_position = glm::vec3(0, 100000, 100000);
 
-        std::cout << "Creating ylikuutio::ontology::Entity* freight_train_symbiosis_entity ...\n";
-        ylikuutio::ontology::Entity* freight_train_symbiosis_entity = entity_factory->create_Symbiosis(freight_train_symbiosis_struct);
+        std::cout << "Creating yli::ontology::Entity* freight_train_symbiosis_entity ...\n";
+        yli::ontology::Entity* freight_train_symbiosis_entity = entity_factory->create_Symbiosis(freight_train_symbiosis_struct);
 
-        std::cout << "Creating ylikuutio::ontology::Symbiosis* freight_train_symbiosis ...\n";
-        ylikuutio::ontology::Symbiosis* freight_train_symbiosis = dynamic_cast<ylikuutio::ontology::Symbiosis*>(freight_train_symbiosis_entity);
+        std::cout << "Creating yli::ontology::Symbiosis* freight_train_symbiosis ...\n";
+        yli::ontology::Symbiosis* freight_train_symbiosis = dynamic_cast<yli::ontology::Symbiosis*>(freight_train_symbiosis_entity);
 
         if (freight_train_symbiosis == nullptr)
         {
@@ -372,13 +372,13 @@ namespace ajokki
         freight_train_object_struct1.rotate_vector = glm::vec3(1.0f, 1.0f, 1.0f);
         freight_train_object_struct1.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
 
-        std::cout << "Creating ylikuutio::ontology::Entity* freight_train1_entity ...\n";
+        std::cout << "Creating yli::ontology::Entity* freight_train1_entity ...\n";
 
-        ylikuutio::ontology::Entity* freight_train1_entity = entity_factory->create_Holobiont(freight_train_object_struct1);
+        yli::ontology::Entity* freight_train1_entity = entity_factory->create_Holobiont(freight_train_object_struct1);
 
-        std::cout << "Creating ylikuutio::ontology::Holobiont* freight_train1 ...\n";
+        std::cout << "Creating yli::ontology::Holobiont* freight_train1 ...\n";
 
-        ylikuutio::ontology::Holobiont* freight_train1 = dynamic_cast<ylikuutio::ontology::Holobiont*>(freight_train1_entity);
+        yli::ontology::Holobiont* freight_train1 = dynamic_cast<yli::ontology::Holobiont*>(freight_train1_entity);
 
         if (freight_train1 == nullptr)
         {
@@ -394,11 +394,11 @@ namespace ajokki
         turbo_polizei_symbiosis_struct.model_filename = "turbo_polizei.fbx";
         turbo_polizei_symbiosis_struct.light_position = glm::vec3(0, 100000, 100000);
 
-        std::cout << "Creating ylikuutio::ontology::Entity* turbo_polizei_symbiosis_entity ...\n";
-        ylikuutio::ontology::Entity* turbo_polizei_symbiosis_entity = entity_factory->create_Symbiosis(turbo_polizei_symbiosis_struct);
+        std::cout << "Creating yli::ontology::Entity* turbo_polizei_symbiosis_entity ...\n";
+        yli::ontology::Entity* turbo_polizei_symbiosis_entity = entity_factory->create_Symbiosis(turbo_polizei_symbiosis_struct);
 
-        std::cout << "Creating ylikuutio::ontology::Symbiosis* turbo_polizei_symbiosis ...\n";
-        ylikuutio::ontology::Symbiosis* turbo_polizei_symbiosis = dynamic_cast<ylikuutio::ontology::Symbiosis*>(turbo_polizei_symbiosis_entity);
+        std::cout << "Creating yli::ontology::Symbiosis* turbo_polizei_symbiosis ...\n";
+        yli::ontology::Symbiosis* turbo_polizei_symbiosis = dynamic_cast<yli::ontology::Symbiosis*>(turbo_polizei_symbiosis_entity);
 
         if (turbo_polizei_symbiosis == nullptr)
         {
@@ -418,13 +418,13 @@ namespace ajokki
         turbo_polizei_object_struct1.rotate_vector = glm::vec3(1.0f, 1.0f, 1.0f);
         turbo_polizei_object_struct1.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
 
-        std::cout << "Creating ylikuutio::ontology::Entity* turbo_polizei1_entity ...\n";
+        std::cout << "Creating yli::ontology::Entity* turbo_polizei1_entity ...\n";
 
-        ylikuutio::ontology::Entity* turbo_polizei1_entity = entity_factory->create_Holobiont(turbo_polizei_object_struct1);
+        yli::ontology::Entity* turbo_polizei1_entity = entity_factory->create_Holobiont(turbo_polizei_object_struct1);
 
-        std::cout << "Creating ylikuutio::ontology::Holobiont* turbo_polizei1 ...\n";
+        std::cout << "Creating yli::ontology::Holobiont* turbo_polizei1 ...\n";
 
-        ylikuutio::ontology::Holobiont* turbo_polizei1 = dynamic_cast<ylikuutio::ontology::Holobiont*>(turbo_polizei1_entity);
+        yli::ontology::Holobiont* turbo_polizei1 = dynamic_cast<yli::ontology::Holobiont*>(turbo_polizei1_entity);
 
         if (turbo_polizei1 == nullptr)
         {
@@ -440,11 +440,11 @@ namespace ajokki
         fantasy_house_with_balcony_symbiosis_struct.model_filename = "fantasy_house_with_balcony.fbx";
         fantasy_house_with_balcony_symbiosis_struct.light_position = glm::vec3(0, 100000, 100000);
 
-        std::cout << "Creating ylikuutio::ontology::Entity* fantasy_house_with_balcony_symbiosis_entity ...\n";
-        ylikuutio::ontology::Entity* fantasy_house_with_balcony_symbiosis_entity = entity_factory->create_Symbiosis(fantasy_house_with_balcony_symbiosis_struct);
+        std::cout << "Creating yli::ontology::Entity* fantasy_house_with_balcony_symbiosis_entity ...\n";
+        yli::ontology::Entity* fantasy_house_with_balcony_symbiosis_entity = entity_factory->create_Symbiosis(fantasy_house_with_balcony_symbiosis_struct);
 
-        std::cout << "Creating ylikuutio::ontology::Symbiosis* fantasy_house_with_balcony_symbiosis ...\n";
-        ylikuutio::ontology::Symbiosis* fantasy_house_with_balcony_symbiosis = dynamic_cast<ylikuutio::ontology::Symbiosis*>(fantasy_house_with_balcony_symbiosis_entity);
+        std::cout << "Creating yli::ontology::Symbiosis* fantasy_house_with_balcony_symbiosis ...\n";
+        yli::ontology::Symbiosis* fantasy_house_with_balcony_symbiosis = dynamic_cast<yli::ontology::Symbiosis*>(fantasy_house_with_balcony_symbiosis_entity);
 
         if (fantasy_house_with_balcony_symbiosis == nullptr)
         {
@@ -465,13 +465,13 @@ namespace ajokki
         fantasy_house_with_balcony_object_struct1.rotate_vector = glm::vec3(1.0f, 1.0f, 1.0f);
         fantasy_house_with_balcony_object_struct1.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
 
-        std::cout << "Creating ylikuutio::ontology::Entity* fantasy_house_with_balcony1_entity ...\n";
+        std::cout << "Creating yli::ontology::Entity* fantasy_house_with_balcony1_entity ...\n";
 
-        ylikuutio::ontology::Entity* fantasy_house_with_balcony1_entity = entity_factory->create_Holobiont(fantasy_house_with_balcony_object_struct1);
+        yli::ontology::Entity* fantasy_house_with_balcony1_entity = entity_factory->create_Holobiont(fantasy_house_with_balcony_object_struct1);
 
-        std::cout << "Creating ylikuutio::ontology::Holobiont* fantasy_house_with_balcony1 ...\n";
+        std::cout << "Creating yli::ontology::Holobiont* fantasy_house_with_balcony1 ...\n";
 
-        ylikuutio::ontology::Holobiont* fantasy_house_with_balcony1 = dynamic_cast<ylikuutio::ontology::Holobiont*>(fantasy_house_with_balcony1_entity);
+        yli::ontology::Holobiont* fantasy_house_with_balcony1 = dynamic_cast<yli::ontology::Holobiont*>(fantasy_house_with_balcony1_entity);
 
         if (fantasy_house_with_balcony1 == nullptr)
         {
@@ -491,13 +491,13 @@ namespace ajokki
         fantasy_house_with_balcony_object_struct2.initial_rotate_vector = glm::vec3(0.0f, 1.0f, 0.0f);
         fantasy_house_with_balcony_object_struct2.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
 
-        std::cout << "Creating ylikuutio::ontology::Entity* fantasy_house_with_balcony2_entity ...\n";
+        std::cout << "Creating yli::ontology::Entity* fantasy_house_with_balcony2_entity ...\n";
 
-        ylikuutio::ontology::Entity* fantasy_house_with_balcony2_entity = entity_factory->create_Holobiont(fantasy_house_with_balcony_object_struct2);
+        yli::ontology::Entity* fantasy_house_with_balcony2_entity = entity_factory->create_Holobiont(fantasy_house_with_balcony_object_struct2);
 
-        std::cout << "Creating ylikuutio::ontology::Holobiont* fantasy_house_with_balcony2 ...\n";
+        std::cout << "Creating yli::ontology::Holobiont* fantasy_house_with_balcony2 ...\n";
 
-        ylikuutio::ontology::Holobiont* fantasy_house_with_balcony2 = dynamic_cast<ylikuutio::ontology::Holobiont*>(fantasy_house_with_balcony2_entity);
+        yli::ontology::Holobiont* fantasy_house_with_balcony2 = dynamic_cast<yli::ontology::Holobiont*>(fantasy_house_with_balcony2_entity);
 
         if (fantasy_house_with_balcony2 == nullptr)
         {
@@ -512,10 +512,10 @@ namespace ajokki
         kongtext_vector_font_struct.font_file_format = "svg";
         kongtext_vector_font_struct.font_filename = "kongtext.svg";
 
-        std::cout << "Creating ylikuutio::ontology::Entity* kongtext_font_entity ...\n";
-        ylikuutio::ontology::Entity* kongtext_font_entity = entity_factory->create_VectorFont(kongtext_vector_font_struct);
-        std::cout << "Creating ylikuutio::ontology::VectorFont* kongtext_font ...\n";
-        ylikuutio::ontology::VectorFont* kongtext_font = dynamic_cast<ylikuutio::ontology::VectorFont*>(kongtext_font_entity);
+        std::cout << "Creating yli::ontology::Entity* kongtext_font_entity ...\n";
+        yli::ontology::Entity* kongtext_font_entity = entity_factory->create_VectorFont(kongtext_vector_font_struct);
+        std::cout << "Creating yli::ontology::VectorFont* kongtext_font ...\n";
+        yli::ontology::VectorFont* kongtext_font = dynamic_cast<yli::ontology::VectorFont*>(kongtext_font_entity);
 
         if (kongtext_font == nullptr)
         {

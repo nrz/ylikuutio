@@ -11,7 +11,7 @@
 
 #define DEFAULT_VERTEX_SCALING_FACTOR (0.001f)
 
-namespace ylikuutio
+namespace yli
 {
     namespace ontology
     {
@@ -27,7 +27,7 @@ typedef struct VectorFontStruct
         // constructor.
     }
     // used for all files (for all font).
-    ylikuutio::ontology::Material* parent;     // pointer to the material object.
+    yli::ontology::Material* parent;     // pointer to the material object.
     GLfloat vertex_scaling_factor;
     std::string font_file_format;           // type of the font file. supported file formats so far: `"svg"`/`"SVG"`.
     std::string font_filename;              // filename of the font file.

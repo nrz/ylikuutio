@@ -5,7 +5,7 @@
 #include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
 
-namespace ylikuutio
+namespace yli
 {
     namespace ontology
     {

@@ -14,7 +14,7 @@
 // Include standard headers
 #include <cmath> // NAN, std::isnan, std::pow
 
-namespace ylikuutio
+namespace yli
 {
     namespace ontology
     {
@@ -43,9 +43,9 @@ typedef struct ObjectStruct
     {
         // constructor.
     }
-    ylikuutio::ontology::Species* species_parent;     // pointer to the parent `Species`.
-    ylikuutio::ontology::Glyph* glyph_parent;     // pointer to the parent `Glyph`.
-    ylikuutio::ontology::Text3D* text3D_parent;   // pointer to the parent `Text3D`.
+    yli::ontology::Species* species_parent;     // pointer to the parent `Species`.
+    yli::ontology::Glyph* glyph_parent;     // pointer to the parent `Glyph`.
+    yli::ontology::Text3D* text3D_parent;   // pointer to the parent `Text3D`.
     glm::vec3 original_scale_vector; // original scale vector.
     float rotate_angle;              // rotate angle.
     float initial_rotate_angle;      // initial rotate angle.

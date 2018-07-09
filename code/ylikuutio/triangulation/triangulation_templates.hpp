@@ -19,7 +19,7 @@
 #include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
 
-namespace ylikuutio
+namespace yli
 {
     namespace geometry
     {
@@ -40,22 +40,22 @@ namespace ylikuutio
         template<class T1>
             float southwest_y(const int32_t x, const int32_t z, const T1* const input_vertex_pointer, const int32_t image_width, const int32_t x_step, const int32_t z_step)
             {
-                return static_cast<float>(ylikuutio::geometry::get_y(input_vertex_pointer, x - x_step, z - z_step, image_width));
+                return static_cast<float>(yli::geometry::get_y(input_vertex_pointer, x - x_step, z - z_step, image_width));
             }
         template<class T1>
             float southeast_y(const int32_t x, const int32_t z, const T1* const input_vertex_pointer, const int32_t image_width, const int32_t x_step, const int32_t z_step)
             {
-                return static_cast<float>(ylikuutio::geometry::get_y(input_vertex_pointer, x, z - z_step, image_width));
+                return static_cast<float>(yli::geometry::get_y(input_vertex_pointer, x, z - z_step, image_width));
             }
         template<class T1>
             float northwest_y(const int32_t x, const int32_t z, const T1* const input_vertex_pointer, const int32_t image_width, const int32_t x_step, const int32_t z_step)
             {
-                return static_cast<float>(ylikuutio::geometry::get_y(input_vertex_pointer, x - x_step, z, image_width));
+                return static_cast<float>(yli::geometry::get_y(input_vertex_pointer, x - x_step, z, image_width));
             }
         template<class T1>
             float northeast_y(const int32_t x, const int32_t z, const T1* const input_vertex_pointer, const int32_t image_width, const int32_t x_step, const int32_t z_step)
             {
-                return static_cast<float>(ylikuutio::geometry::get_y(input_vertex_pointer, x, z, image_width));
+                return static_cast<float>(yli::geometry::get_y(input_vertex_pointer, x, z, image_width));
             }
         template<class T1>
             float center_y(const int32_t x, const int32_t z, const T1* const input_vertex_pointer, const int32_t image_width, const int32_t x_step, const int32_t z_step)
@@ -99,7 +99,7 @@ namespace ylikuutio
                     for (int32_t x = 0; x < image_width; x += x_step)
                     {
                         // current x,z coordinates).
-                        float y = static_cast<float>(ylikuutio::geometry::get_y(input_vertex_pointer, x, z, image_width));
+                        float y = static_cast<float>(yli::geometry::get_y(input_vertex_pointer, x, z, image_width));
 
                         // This corresponds to "v": specify one vertex.
                         glm::vec3 vertex;

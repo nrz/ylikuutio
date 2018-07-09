@@ -12,7 +12,7 @@
 // Include standard headers
 #include <vector>   // std::vector
 
-namespace ylikuutio
+namespace yli
 {
     namespace geometry
     {
@@ -21,7 +21,7 @@ namespace ylikuutio
                 const double sphere_radius);
 
         void transform_coordinates_to_curved_surface(
-                const ylikuutio::geometry::TransformationStruct transformation_struct,
+                const yli::geometry::TransformationStruct transformation_struct,
                 std::vector<glm::vec3>& temp_vertices);
     }
 }

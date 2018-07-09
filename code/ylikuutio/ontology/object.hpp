@@ -40,14 +40,14 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
-namespace ylikuutio
+namespace yli
 {
     namespace ontology
     {
         class Species;
         class Glyph;
 
-        class Object: public ylikuutio::ontology::Movable
+        class Object: public yli::ontology::Movable
         {
             public:
                 // this method sets pointer to this `Object` to nullptr, sets `parent` according to the input,
@@ -55,7 +55,7 @@ namespace ylikuutio
                 void bind_to_new_parent(void* const new_parent);
 
                 // constructor.
-                Object(ylikuutio::ontology::Universe* const universe, ObjectStruct& object_struct)
+                Object(yli::ontology::Universe* const universe, ObjectStruct& object_struct)
                     : Movable(universe, object_struct.cartesian_coordinates)
                 {
                     // constructor.
@@ -89,13 +89,13 @@ namespace ylikuutio
 
                     // get `childID` from `Species` or `Glyph` and set pointer to this `Object`.
                     this->bind_to_parent();
-                    this->type = "ylikuutio::ontology::Object*";
+                    this->type = "yli::ontology::Object*";
                 }
 
                 // destructor.
                 virtual ~Object();
 
-                ylikuutio::ontology::Entity* get_parent() const override;
+                yli::ontology::Entity* get_parent() const override;
 
                 template<class T1>
                     friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, int32_t* number_of_children);
@@ -109,14 +109,14 @@ namespace ylikuutio
 
                 // this method renders this `Object`.
                 void render();
-                void render_this_object(ylikuutio::ontology::Shader* const shader_pointer);
+                void render_this_object(yli::ontology::Shader* const shader_pointer);
 
                 int32_t get_number_of_children() const override;
                 int32_t get_number_of_descendants() const override;
 
-                ylikuutio::ontology::Species* species_parent; // pointer to `Species`.
-                ylikuutio::ontology::Glyph* glyph_parent;     // pointer to `Glyph`.
-                ylikuutio::ontology::Text3D* text3D_parent;   // pointer to `Text3D`.
+                yli::ontology::Species* species_parent; // pointer to `Species`.
+                yli::ontology::Glyph* glyph_parent;     // pointer to `Glyph`.
+                yli::ontology::Text3D* text3D_parent;   // pointer to `Text3D`.
                 bool is_character;
                 bool quaternions_in_use;
 

@@ -24,7 +24,7 @@
 #include <unordered_map> // std::unordered_map
 #include <vector>        // std::vector
 
-namespace ylikuutio
+namespace yli
 {
     namespace console
     {
@@ -75,7 +75,7 @@ namespace ylikuutio
             this->command_callback_map_pointer = console_struct.command_callback_map_pointer;
             std::cout << "3rd pointer defined in Console::Console\n";
 
-            // This is a pointer to `ylikuutio::ontology::Universe`.
+            // This is a pointer to `yli::ontology::Universe`.
             this->universe = console_struct.universe;
             std::cout << "4th pointer defined in Console::Console\n";
 
@@ -86,9 +86,9 @@ namespace ylikuutio
             this->font2D_pointer = console_struct.font2D_pointer;
             std::cout << "6th pointer defined in Console::Console\n";
 
-            std::cout << "Initializing ylikuutio::config::SettingMaster setting_master\n";
+            std::cout << "Initializing yli::config::SettingMaster setting_master\n";
 
-            ylikuutio::config::SettingMaster* setting_master = this->universe->get_setting_master();
+            yli::config::SettingMaster* setting_master = this->universe->get_setting_master();
 
             std::cout << "Initializing console_top_y\n";
 
@@ -284,7 +284,7 @@ namespace ylikuutio
                     for (int32_t history_i = history_line_i; history_i < history_end_i && history_i < this->console_history.size(); history_i++)
                     {
                         std::list<char> historical_text = this->console_history.at(history_i);
-                        printing_struct.text += ylikuutio::string::convert_std_list_char_to_std_string(historical_text, characters_for_line, characters_for_line) + "\\n";
+                        printing_struct.text += yli::string::convert_std_list_char_to_std_string(historical_text, characters_for_line, characters_for_line) + "\\n";
                     }
                 }
                 else
@@ -309,7 +309,7 @@ namespace ylikuutio
                         }
 
                         // Convert into a vector of lines.
-                        std::vector<std::string> current_input_vector = ylikuutio::string::convert_std_list_char_to_std_vector_std_string(
+                        std::vector<std::string> current_input_vector = yli::string::convert_std_list_char_to_std_vector_std_string(
                                 current_input_with_prompt,
                                 this->n_columns);
 
@@ -338,9 +338,9 @@ namespace ylikuutio
                         for (int32_t history_i = history_start_i; history_i < this->console_history.size(); history_i++)
                         {
                             std::list<char> historical_text = this->console_history.at(history_i);
-                            printing_struct.text += ylikuutio::string::convert_std_list_char_to_std_string(historical_text, characters_for_line, characters_for_line) + "\\n";
+                            printing_struct.text += yli::string::convert_std_list_char_to_std_string(historical_text, characters_for_line, characters_for_line) + "\\n";
                         }
-                        printing_struct.text += this->prompt + ylikuutio::string::convert_std_list_char_to_std_string(
+                        printing_struct.text += this->prompt + yli::string::convert_std_list_char_to_std_string(
                                 this->current_input,
                                 characters_for_line - this->prompt.size(), // First line is shorter due to space taken by the prompt.
                                 characters_for_line);                      // The rest lines have full length.
@@ -351,7 +351,7 @@ namespace ylikuutio
             }
         }
 
-        ylikuutio::ontology::Universe* Console::get_universe() const
+        yli::ontology::Universe* Console::get_universe() const
         {
             return this->universe;
         }

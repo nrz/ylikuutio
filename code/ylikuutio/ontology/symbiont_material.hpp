@@ -29,23 +29,23 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
-namespace ylikuutio
+namespace yli
 {
     namespace ontology
     {
         class SymbiontSpecies;
 
-        class SymbiontMaterial: public ylikuutio::ontology::Material
+        class SymbiontMaterial: public yli::ontology::Material
         {
             public:
                 // destructor.
                 virtual ~SymbiontMaterial();
 
             private:
-                void bind(ylikuutio::ontology::SymbiontSpecies* const symbiont_species);
+                void bind(yli::ontology::SymbiontSpecies* const symbiont_species);
 
                 // constructor.
-                SymbiontMaterial(ylikuutio::ontology::Universe* const universe, const MaterialStruct& material_struct)
+                SymbiontMaterial(yli::ontology::Universe* const universe, const MaterialStruct& material_struct)
                     : Material(universe, material_struct)
                 {
                     // constructor.
@@ -61,11 +61,11 @@ namespace ylikuutio
                     this->load_texture();
 
                     this->child_vector_pointers_vector.push_back(&this->symbiont_species_pointer_vector);
-                    this->type = "ylikuutio::ontology::SymbiontMaterial*";
+                    this->type = "yli::ontology::SymbiontMaterial*";
                 }
 
                 // this method sets `SymbiontSpecies` pointer.
-                void set_symbiont_species_pointer(const int32_t childID, ylikuutio::ontology::SymbiontSpecies* const child_pointer);
+                void set_symbiont_species_pointer(const int32_t childID, yli::ontology::SymbiontSpecies* const child_pointer);
 
                 GLuint get_texture() const;
                 GLuint get_openGL_textureID() const;
@@ -84,18 +84,18 @@ namespace ylikuutio
                 // this method renders all `SymbiontSpecies` using this `SymbiontMaterial`.
                 void render();
 
-                ylikuutio::ontology::Entity* get_parent() const override;
+                yli::ontology::Entity* get_parent() const override;
                 int32_t get_number_of_children() const override;
                 int32_t get_number_of_descendants() const override;
 
-                ylikuutio::ontology::Symbiosis* parent;           // pointer to `Symbiosis`.
+                yli::ontology::Symbiosis* parent;           // pointer to `Symbiosis`.
 
                 const ofbx::Texture* ofbx_texture;
 
                 GLuint texture;                        // Texture of this `SymbiontMaterial`.
                 GLuint openGL_textureID;               // texture ID, returned by `glGetUniformLocation(programID, "myTextureSampler");`.
 
-                std::vector<ylikuutio::ontology::SymbiontSpecies*> symbiont_species_pointer_vector;
+                std::vector<yli::ontology::SymbiontSpecies*> symbiont_species_pointer_vector;
                 std::queue<int32_t> free_symbiont_speciesID_queue;
                 int32_t number_of_symbiont_species;
         };

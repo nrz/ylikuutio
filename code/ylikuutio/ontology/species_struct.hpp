@@ -13,7 +13,7 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
-namespace ylikuutio
+namespace yli
 {
     namespace ontology
     {
@@ -48,10 +48,10 @@ typedef struct SpeciesStruct
         // constructor.
     }
     // used for all files (for all species).
-    ylikuutio::ontology::Scene* scene;                        // pointer to `Scene` object.
-    ylikuutio::ontology::Shader* shader;                      // pointer to `Shader` object.
-    ylikuutio::ontology::Material* material;                  // pointer to `Material` object.
-    ylikuutio::ontology::SymbiontMaterial* symbiont_material; // pointer to `SymbiontMaterial` object.
+    yli::ontology::Scene* scene;                        // pointer to `Scene` object.
+    yli::ontology::Shader* shader;                      // pointer to `Shader` object.
+    yli::ontology::Material* material;                  // pointer to `Material` object.
+    yli::ontology::SymbiontMaterial* symbiont_material; // pointer to `SymbiontMaterial` object.
     bool is_terrain;                           // worlds currently neither rotate nor translate.
     float planet_radius;                      // radius of sea level in kilometers. used only for worlds.
     float divisor;                           // value by which SRTM values are divided to convert them to kilometers.

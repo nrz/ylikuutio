@@ -30,7 +30,7 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
-namespace ylikuutio
+namespace yli
 {
     namespace ontology
     {
@@ -38,7 +38,7 @@ namespace ylikuutio
         class Universe;
         class Object;
 
-        class Text3D: public ylikuutio::ontology::Movable
+        class Text3D: public yli::ontology::Movable
         {
             public:
                 // this method deletes all glyph Objects of this `Text3D`,
@@ -47,14 +47,14 @@ namespace ylikuutio
                 // requests a new `childID` from the new `VectorFont`,
                 // and creates all glyph Objects of this `Text3D` with the font data.
                 // Note: different fonts may provide glyphs for different Unicodes!
-                void bind_to_new_parent(ylikuutio::ontology::VectorFont* const new_vector_font_pointer);
+                void bind_to_new_parent(yli::ontology::VectorFont* const new_vector_font_pointer);
 
                 // constructor.
                 // TODO: `Text3D` constructor also creates each `Object`,
                 // and binds each to its corresponding `Glyph` for rendering hierarchy,
                 // and also binds each to this `Text3D` for ontological hierarchy.
-                Text3D(ylikuutio::ontology::Universe* const universe, Text3DStruct& text3D_struct)
-                    : ylikuutio::ontology::Movable(universe, text3D_struct.cartesian_coordinates)
+                Text3D(yli::ontology::Universe* const universe, Text3DStruct& text3D_struct)
+                    : yli::ontology::Movable(universe, text3D_struct.cartesian_coordinates)
                 {
                     // constructor.
                     this->rotate_angle = NAN;
@@ -70,10 +70,10 @@ namespace ylikuutio
 
                     // Let's create each glyph `Object` in a loop.
 
-                    ylikuutio::ontology::create_glyph_objects(this->text_string, this);
+                    yli::ontology::create_glyph_objects(this->text_string, this);
 
                     this->child_vector_pointers_vector.push_back(&this->object_pointer_vector);
-                    this->type = "ylikuutio::ontology::Text3D*";
+                    this->type = "yli::ontology::Text3D*";
 
                     this->can_be_erased = true;
                 }
@@ -81,15 +81,15 @@ namespace ylikuutio
                 // destructor.
                 virtual ~Text3D();
 
-                ylikuutio::ontology::Entity* get_parent() const override;
+                yli::ontology::Entity* get_parent() const override;
                 int32_t get_number_of_children() const override;
                 int32_t get_number_of_descendants() const override;
 
                 // this method sets a object pointer.
-                void set_object_pointer(const int32_t childID, ylikuutio::ontology::Object* const child_pointer);
+                void set_object_pointer(const int32_t childID, yli::ontology::Object* const child_pointer);
 
                 friend class Object;
-                friend void create_glyph_objects(const std::string& text_string, ylikuutio::ontology::Text3D* text3D);
+                friend void create_glyph_objects(const std::string& text_string, yli::ontology::Text3D* text3D);
                 template<class T1>
                     friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, int32_t* number_of_children);
 
@@ -98,14 +98,14 @@ namespace ylikuutio
 
                 std::string text_string;
 
-                ylikuutio::ontology::VectorFont* parent; // pointer to `VectorFont`.
+                yli::ontology::VectorFont* parent; // pointer to `VectorFont`.
 
                 glm::vec3 original_scale_vector;      // original scale vector.
                 GLfloat rotate_angle;                 // rotate angle.
                 glm::vec3 rotate_vector;              // rotate vector.
                 glm::vec3 translate_vector;           // translate vector.
 
-                std::vector<ylikuutio::ontology::Object*> object_pointer_vector;
+                std::vector<yli::ontology::Object*> object_pointer_vector;
                 std::queue<int32_t> free_objectID_queue;
                 int32_t number_of_objects;
         };

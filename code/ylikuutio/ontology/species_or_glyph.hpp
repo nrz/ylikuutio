@@ -9,7 +9,7 @@
 #include <GL/glew.h> // GLfloat, GLuint etc.
 #endif
 
-namespace ylikuutio
+namespace yli
 {
     namespace ontology
     {
@@ -35,7 +35,7 @@ namespace ylikuutio
                 glEnableVertexAttribArray(species_or_glyph_pointer->vertex_normal_modelspaceID);
 
                 // render this `Species` or `Glyph` by calling `render()` function of each `Object`.
-                ylikuutio::ontology::render_children<ylikuutio::ontology::Object*>(species_or_glyph_pointer->object_pointer_vector);
+                yli::ontology::render_children<yli::ontology::Object*>(species_or_glyph_pointer->object_pointer_vector);
 
                 glDisableVertexAttribArray(species_or_glyph_pointer->vertex_position_modelspaceID);
                 glDisableVertexAttribArray(species_or_glyph_pointer->vertexUVID);

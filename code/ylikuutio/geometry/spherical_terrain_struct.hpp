@@ -4,7 +4,7 @@
 // Include standard headers
 #include <cmath> // NAN, std::isnan, std::pow
 
-namespace ylikuutio
+namespace yli
 {
     namespace geometry
     {

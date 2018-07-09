@@ -1,7 +1,7 @@
 #ifndef __AJOKKI_LOCATION_AND_ORIENTATION_HPP_INCLUDED
 #define __AJOKKI_LOCATION_AND_ORIENTATION_HPP_INCLUDED
 
-namespace ylikuutio
+namespace yli
 {
     namespace config
     {
@@ -11,7 +11,7 @@ namespace ylikuutio
 
 namespace ajokki
 {
-    void set_location_and_orientation(ylikuutio::config::SettingMaster* const setting_master);
+    void set_location_and_orientation(yli::config::SettingMaster* const setting_master);
 }
 
 #endif

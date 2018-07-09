@@ -1,5 +1,5 @@
 // Include standard headers
-namespace ylikuutio
+namespace yli
 {
     namespace memory
     {

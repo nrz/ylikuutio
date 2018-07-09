@@ -50,7 +50,7 @@
 #include <unordered_map> // std::unordered_map
 #include <vector>   // std::vector
 
-namespace ylikuutio
+namespace yli
 {
     namespace config
     {
@@ -59,7 +59,7 @@ namespace ylikuutio
     }
 }
 
-namespace ylikuutio
+namespace yli
 {
     namespace callback_system
     {
@@ -74,7 +74,7 @@ namespace graph
     class Graph;
 }
 
-namespace ylikuutio
+namespace yli
 {
     namespace ontology
     {
@@ -83,8 +83,8 @@ namespace ylikuutio
     }
 }
 
-typedef std::shared_ptr<datatypes::AnyValue> (*PreRenderCallback) (ylikuutio::ontology::Entity* entity, ylikuutio::config::SettingMaster* setting_master);
-typedef std::shared_ptr<datatypes::AnyValue> (*PostRenderCallback) (ylikuutio::ontology::Entity* entity, ylikuutio::config::SettingMaster* setting_master);
+typedef std::shared_ptr<datatypes::AnyValue> (*PreRenderCallback) (yli::ontology::Entity* entity, yli::config::SettingMaster* setting_master);
+typedef std::shared_ptr<datatypes::AnyValue> (*PostRenderCallback) (yli::ontology::Entity* entity, yli::config::SettingMaster* setting_master);
 
 typedef struct PrintingStruct
 {
@@ -114,11 +114,11 @@ typedef struct
 } BilinearInterpolationStruct;
 
 typedef std::shared_ptr<datatypes::AnyValue> (*InputParametersToAnyValueCallback) (
-        ylikuutio::callback_system::CallbackEngine*,
-        ylikuutio::callback_system::CallbackObject*,
-        std::vector<ylikuutio::callback_system::CallbackParameter*>&);
+        yli::callback_system::CallbackEngine*,
+        yli::callback_system::CallbackObject*,
+        std::vector<yli::callback_system::CallbackParameter*>&);
 
-namespace ylikuutio
+namespace yli
 {
     namespace console
     {
@@ -126,15 +126,15 @@ namespace ylikuutio
     }
 }
 typedef std::shared_ptr<datatypes::AnyValue> (*InputParametersToAnyValueCallbackWithConsole) (
-        ylikuutio::callback_system::CallbackEngine*,
-        ylikuutio::callback_system::CallbackObject*,
-        std::vector<ylikuutio::callback_system::CallbackParameter*>&,
-        ylikuutio::console::Console*);
+        yli::callback_system::CallbackEngine*,
+        yli::callback_system::CallbackObject*,
+        std::vector<yli::callback_system::CallbackParameter*>&,
+        yli::console::Console*);
 
 typedef std::shared_ptr<datatypes::AnyValue> (*GetContentCallback) (
-        ylikuutio::callback_system::CallbackEngine*,
-        ylikuutio::callback_system::CallbackObject*,
-        std::vector<ylikuutio::callback_system::CallbackParameter*>&,
+        yli::callback_system::CallbackEngine*,
+        yli::callback_system::CallbackObject*,
+        std::vector<yli::callback_system::CallbackParameter*>&,
         uint32_t x_start,
         uint32_t y_start,
         uint32_t z_start,

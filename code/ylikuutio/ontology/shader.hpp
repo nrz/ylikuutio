@@ -36,7 +36,7 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
-namespace ylikuutio
+namespace yli
 {
     namespace ontology
     {
@@ -44,20 +44,20 @@ namespace ylikuutio
         class Material;
         class Symbiosis;
 
-        class Shader: public ylikuutio::ontology::Entity
+        class Shader: public yli::ontology::Entity
         {
             public:
-                void bind_material(ylikuutio::ontology::Material* const material);
-                void bind_symbiosis(ylikuutio::ontology::Symbiosis* const symbiosis);
+                void bind_material(yli::ontology::Material* const material);
+                void bind_symbiosis(yli::ontology::Symbiosis* const symbiosis);
 
                 void unbind_material(const int32_t childID);
                 void unbind_symbiosis(const int32_t childID);
 
                 // this method sets pointer to this `Shader` to nullptr, sets `parent` according to the input, and requests a new `childID` from the new `Scene`.
-                void bind_to_new_parent(ylikuutio::ontology::Scene* const new_scene_pointer);
+                void bind_to_new_parent(yli::ontology::Scene* const new_scene_pointer);
 
                 // constructor.
-                Shader(ylikuutio::ontology::Universe* const universe, const ShaderStruct& shader_struct)
+                Shader(yli::ontology::Universe* const universe, const ShaderStruct& shader_struct)
                     : Entity(universe)
                 {
                     // constructor.
@@ -87,7 +87,7 @@ namespace ylikuutio
 
                     this->child_vector_pointers_vector.push_back(&this->material_pointer_vector);
                     this->child_vector_pointers_vector.push_back(&this->symbiosis_pointer_vector);
-                    this->type = "ylikuutio::ontology::Shader*";
+                    this->type = "yli::ontology::Shader*";
 
                     this->can_be_erased = true;
                 }
@@ -95,16 +95,16 @@ namespace ylikuutio
                 // destructor.
                 virtual ~Shader();
 
-                ylikuutio::ontology::Entity* get_parent() const override;
+                yli::ontology::Entity* get_parent() const override;
 
                 // this method sets a `Material` pointer.
-                void set_material_pointer(const int32_t childID, ylikuutio::ontology::Material* const child_pointer);
+                void set_material_pointer(const int32_t childID, yli::ontology::Material* const child_pointer);
 
                 // this method sets a `Symbiosis` pointer.
-                void set_symbiosis_pointer(const int32_t childID, ylikuutio::ontology::Symbiosis* const child_pointer);
+                void set_symbiosis_pointer(const int32_t childID, yli::ontology::Symbiosis* const child_pointer);
 
                 // this method sets a scene species pointer.
-                void set_terrain_species(ylikuutio::ontology::Species* const terrain_species);
+                void set_terrain_species(yli::ontology::Species* const terrain_species);
 
                 GLuint get_programID() const;
                 GLuint get_matrixID() const;
@@ -126,7 +126,7 @@ namespace ylikuutio
                 int32_t get_number_of_children() const override;
                 int32_t get_number_of_descendants() const override;
 
-                ylikuutio::ontology::Scene* parent;      // pointer to `Scene`.
+                yli::ontology::Scene* parent;      // pointer to `Scene`.
 
                 GLuint programID;                     // this `Shader`'s `programID`, returned by `load_shaders`.
 
@@ -134,13 +134,13 @@ namespace ylikuutio
                 GLuint view_matrixID;
                 GLuint model_matrixID;
 
-                ylikuutio::ontology::Species* terrain_species;   // pointer to scene species (used in collision detection).
+                yli::ontology::Species* terrain_species;   // pointer to scene species (used in collision detection).
 
                 std::string vertex_shader;            // filename of vertex shader.
                 std::string fragment_shader;          // filename of fragment shader.
 
-                std::vector<ylikuutio::ontology::Material*> material_pointer_vector;
-                std::vector<ylikuutio::ontology::Symbiosis*> symbiosis_pointer_vector;
+                std::vector<yli::ontology::Material*> material_pointer_vector;
+                std::vector<yli::ontology::Symbiosis*> symbiosis_pointer_vector;
                 std::queue<int32_t> free_materialID_queue;
                 std::queue<int32_t> free_symbiosisID_queue;
                 int32_t number_of_materials;

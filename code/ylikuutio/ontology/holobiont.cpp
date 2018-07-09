@@ -16,16 +16,16 @@
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 
-namespace ylikuutio
+namespace yli
 {
     namespace ontology
     {
         class Entity;
 
-        void Holobiont::bind_biont(ylikuutio::ontology::Biont* const biont)
+        void Holobiont::bind_biont(yli::ontology::Biont* const biont)
         {
             // get `childID` from `Holobiont` and set pointer to `object`.
-            hierarchy::bind_child_to_parent<ylikuutio::ontology::Biont*>(
+            hierarchy::bind_child_to_parent<yli::ontology::Biont*>(
                     biont,
                     this->biont_pointer_vector,
                     this->free_biontID_queue,
@@ -34,7 +34,7 @@ namespace ylikuutio
 
         void Holobiont::unbind_biont(const int32_t childID)
         {
-            ylikuutio::ontology::Biont* dummy_child_pointer = nullptr;
+            yli::ontology::Biont* dummy_child_pointer = nullptr;
             hierarchy::set_child_pointer(
                     childID,
                     dummy_child_pointer,
@@ -49,7 +49,7 @@ namespace ylikuutio
             this->symbiosis_parent->bind_holobiont(this);
         }
 
-        void Holobiont::bind_to_new_parent(ylikuutio::ontology::Symbiosis* const new_parent)
+        void Holobiont::bind_to_new_parent(yli::ontology::Symbiosis* const new_parent)
         {
             // this method sets pointer to this `Object` to nullptr, sets `parent` according to the input,
             // and requests a new `childID` from the new `Symbiosis`.
@@ -67,7 +67,7 @@ namespace ylikuutio
             std::cout << "Holobiont with childID " << std::dec << this->childID << " will be destroyed.\n";
 
             std::cout << "All bionts of this holobiont will be destroyed.\n";
-            hierarchy::delete_children<ylikuutio::ontology::Biont*>(this->biont_pointer_vector, &this->number_of_bionts);
+            hierarchy::delete_children<yli::ontology::Biont*>(this->biont_pointer_vector, &this->number_of_bionts);
 
             // set pointer to this `Holobiont` to nullptr.
             this->symbiosis_parent->set_holobiont_pointer(this->childID, nullptr);
@@ -82,7 +82,7 @@ namespace ylikuutio
                 this->prerender();
 
                 // render this `Holobiont` by calling `render()` function of each `Biont`.
-                ylikuutio::ontology::render_children<ylikuutio::ontology::Biont*>(this->biont_pointer_vector);
+                yli::ontology::render_children<yli::ontology::Biont*>(this->biont_pointer_vector);
 
                 this->postrender();
             }
@@ -119,7 +119,7 @@ namespace ylikuutio
 
                 std::cout << "Creating biont with biontID " << biontID << " ...\n";
 
-                new ylikuutio::ontology::Biont(this->universe, biont_struct);
+                new yli::ontology::Biont(this->universe, biont_struct);
             }
         }
 
@@ -128,7 +128,7 @@ namespace ylikuutio
             this->cartesian_coordinates.x = x;
             this->model_matrix[3][0] = x;
 
-            for (ylikuutio::ontology::Biont* biont : this->biont_pointer_vector)
+            for (yli::ontology::Biont* biont : this->biont_pointer_vector)
             {
                 if (biont != nullptr)
                 {
@@ -143,7 +143,7 @@ namespace ylikuutio
             this->cartesian_coordinates.y = y;
             this->model_matrix[3][1] = y;
 
-            for (ylikuutio::ontology::Biont* biont : this->biont_pointer_vector)
+            for (yli::ontology::Biont* biont : this->biont_pointer_vector)
             {
                 if (biont != nullptr)
                 {
@@ -158,7 +158,7 @@ namespace ylikuutio
             this->cartesian_coordinates.z = z;
             this->model_matrix[3][2] = z;
 
-            for (ylikuutio::ontology::Biont* biont : this->biont_pointer_vector)
+            for (yli::ontology::Biont* biont : this->biont_pointer_vector)
             {
                 if (biont != nullptr)
                 {
@@ -168,7 +168,7 @@ namespace ylikuutio
             }
         }
 
-        ylikuutio::ontology::Entity* Holobiont::get_parent() const
+        yli::ontology::Entity* Holobiont::get_parent() const
         {
             return this->symbiosis_parent;
         }
@@ -183,7 +183,7 @@ namespace ylikuutio
             return 0;
         }
 
-        void Holobiont::set_biont_pointer(const int32_t childID, ylikuutio::ontology::Biont* const child_pointer)
+        void Holobiont::set_biont_pointer(const int32_t childID, yli::ontology::Biont* const child_pointer)
         {
             hierarchy::set_child_pointer(childID, child_pointer, this->biont_pointer_vector, this->free_biontID_queue, &this->number_of_bionts);
         }

@@ -15,7 +15,7 @@
 #include <vector>        // std::vector
 #include <unordered_map> // std::unordered_map
 
-namespace ylikuutio
+namespace yli
 {
     namespace ontology
     {
@@ -23,11 +23,11 @@ namespace ylikuutio
     }
 }
 
-namespace ylikuutio
+namespace yli
 {
     namespace config
     {
-        SettingMaster::SettingMaster(ylikuutio::ontology::Entity* const entity)
+        SettingMaster::SettingMaster(yli::ontology::Entity* const entity)
         {
             // costructor.
             this->parent = entity;
@@ -61,7 +61,7 @@ namespace ylikuutio
         {
             if (this->is_setting(setting_name))
             {
-                ylikuutio::config::Setting* setting = this->setting_pointer_map[setting_name];
+                yli::config::Setting* setting = this->setting_pointer_map[setting_name];
 
                 if (setting != nullptr)
                 {
@@ -81,7 +81,7 @@ namespace ylikuutio
             // OK, this is a valid variable name.
             // Set the variable value and activate it by
             // calling the corresponding activate callback.
-            ylikuutio::config::Setting* setting = this->setting_pointer_map[setting_name];
+            yli::config::Setting* setting = this->setting_pointer_map[setting_name];
 
             // create empty `AnyValue` (there is no suitable constructor yet).
             setting_new_any_value->type = setting->setting_value->type;
@@ -91,7 +91,7 @@ namespace ylikuutio
             return true;
         }
 
-        ylikuutio::config::Setting* SettingMaster::get(std::string& setting_name)
+        yli::config::Setting* SettingMaster::get(std::string& setting_name)
         {
             return this->setting_pointer_map[setting_name];
         }
@@ -99,8 +99,8 @@ namespace ylikuutio
         // public callbacks.
 
         std::shared_ptr<datatypes::AnyValue> SettingMaster::set_and_print(
-                ylikuutio::console::Console* const console,
-                ylikuutio::ontology::Entity* const entity,
+                yli::console::Console* const console,
+                yli::ontology::Entity* const entity,
                 std::vector<std::string>& command_parameters)
         {
             // Usage:
@@ -109,7 +109,7 @@ namespace ylikuutio
             // to set variable:       set <variable> <value>
             // to set variable:       set <entity> <variable> <value>
 
-            ylikuutio::config::SettingMaster* setting_master = entity->get_setting_master();
+            yli::config::SettingMaster* setting_master = entity->get_setting_master();
 
             if (command_parameters.size() == 0)
             {
@@ -126,7 +126,7 @@ namespace ylikuutio
                 // Print current value of the given variable.
                 if (setting_master->is_setting(setting_name))
                 {
-                    ylikuutio::config::Setting* setting = setting_master->get(setting_name);
+                    yli::config::Setting* setting = setting_master->get(setting_name);
 
                     if (setting != nullptr && setting->setting_value != nullptr && setting->read_callback == nullptr)
                     {
@@ -170,7 +170,7 @@ namespace ylikuutio
                     // OK, this is a valid variable name.
                     // Set the variable value and activate it by
                     // calling the corresponding activate callback.
-                    ylikuutio::config::Setting* setting = setting_master->setting_pointer_map[setting_name];
+                    yli::config::Setting* setting = setting_master->setting_pointer_map[setting_name];
 
                     // create empty `AnyValue` (there is no suitable constructor yet).
                     std::shared_ptr<datatypes::AnyValue> setting_any_value = std::make_shared<datatypes::AnyValue>();
@@ -201,20 +201,20 @@ namespace ylikuutio
                 std::string entity_name = command_parameters.at(0);
 
                 // if `set_and_print` is called through `Console::enter_key`,
-                // then `entity` is `ylikuutio::ontology::Universe`, as
-                // `Console::enter_key` passes `ylikuutio::ontology::Universe` as
+                // then `entity` is `yli::ontology::Universe`, as
+                // `Console::enter_key` passes `yli::ontology::Universe` as
                 // the 2nd parameter to any `ConsoleCommandCallback` it calls.
                 //
                 // But now we want the `Entity` that corresponds `entity_name`
-                // in `ylikuutio::ontology::Universe` 'namespace' (Ylikuutio namespace, not
-                // C++ namespace!), so we need to request it from `ylikuutio::ontology::Universe`.
+                // in `yli::ontology::Universe` 'namespace' (Ylikuutio namespace, not
+                // C++ namespace!), so we need to request it from `yli::ontology::Universe`.
                 // We also want the `SettingMaster` of the same `Entity`.
 
-                ylikuutio::ontology::Universe* universe = dynamic_cast<ylikuutio::ontology::Universe*>(entity);
+                yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
                 if (universe == nullptr)
                 {
-                    // `entity` is not a `ylikuutio::ontology::Universe*`,
+                    // `entity` is not a `yli::ontology::Universe*`,
                     // can not proceed further.
                     return nullptr;
                 }
@@ -226,7 +226,7 @@ namespace ylikuutio
                     return nullptr;
                 }
 
-                ylikuutio::ontology::Entity* named_entity = universe->get_entity(entity_name);
+                yli::ontology::Entity* named_entity = universe->get_entity(entity_name);
                 setting_master = named_entity->get_setting_master();
 
                 std::string setting_name = command_parameters.at(1);
@@ -237,7 +237,7 @@ namespace ylikuutio
                     // OK, this is a valid variable name.
                     // Set the variable value and activate it by
                     // calling the corresponding activate callback.
-                    ylikuutio::config::Setting* setting = setting_master->setting_pointer_map[setting_name];
+                    yli::config::Setting* setting = setting_master->setting_pointer_map[setting_name];
 
                     // create empty `AnyValue` (there is no suitable constructor yet).
                     std::shared_ptr<datatypes::AnyValue> setting_any_value = std::make_shared<datatypes::AnyValue>();
@@ -266,14 +266,14 @@ namespace ylikuutio
         }
 
         std::shared_ptr<datatypes::AnyValue> SettingMaster::get_and_print(
-                ylikuutio::console::Console* const console,
-                ylikuutio::ontology::Entity* const entity,
+                yli::console::Console* const console,
+                yli::ontology::Entity* const entity,
                 std::vector<std::string>& command_parameters)
         {
             // Usage:
             // to get variable names: get
             // to get variable value: get <variable>
-            ylikuutio::config::SettingMaster* setting_master = entity->get_setting_master();
+            yli::config::SettingMaster* setting_master = entity->get_setting_master();
 
             if (command_parameters.size() == 0)
             {
@@ -290,7 +290,7 @@ namespace ylikuutio
                 // Print valid values of the given variable.
                 if (setting_master->is_setting(setting_name))
                 {
-                    ylikuutio::config::Setting* setting = setting_master->get(setting_name);
+                    yli::config::Setting* setting = setting_master->get(setting_name);
 
                     if (setting != nullptr && setting->setting_value != nullptr && setting->read_callback == nullptr)
                     {
@@ -329,20 +329,20 @@ namespace ylikuutio
                 std::string entity_name = command_parameters.at(0);
 
                 // if `get_and_print` is called through `Console::enter_key`,
-                // then `entity` is `ylikuutio::ontology::Universe`, as
-                // `Console::enter_key` passes `ylikuutio::ontology::Universe` as
+                // then `entity` is `yli::ontology::Universe`, as
+                // `Console::enter_key` passes `yli::ontology::Universe` as
                 // the 2nd parameter to any `ConsoleCommandCallback` it calls.
                 //
                 // But now we want the `Entity` that corresponds `entity_name`
-                // in `ylikuutio::ontology::Universe` 'namespace' (Ylikuutio namespace, not
-                // C++ namespace!), so we need to request it from `ylikuutio::ontology::Universe`.
+                // in `yli::ontology::Universe` 'namespace' (Ylikuutio namespace, not
+                // C++ namespace!), so we need to request it from `yli::ontology::Universe`.
                 // We also want the `SettingMaster` of the same `Entity`.
 
-                ylikuutio::ontology::Universe* universe = dynamic_cast<ylikuutio::ontology::Universe*>(entity);
+                yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
                 if (universe == nullptr)
                 {
-                    // `entity` is not a `ylikuutio::ontology::Universe*`,
+                    // `entity` is not a `yli::ontology::Universe*`,
                     // can not proceed further.
                     return nullptr;
                 }
@@ -354,7 +354,7 @@ namespace ylikuutio
                     return nullptr;
                 }
 
-                ylikuutio::ontology::Entity* named_entity = universe->get_entity(entity_name);
+                yli::ontology::Entity* named_entity = universe->get_entity(entity_name);
                 setting_master = named_entity->get_setting_master();
 
                 std::string setting_name = command_parameters.at(1);
@@ -362,7 +362,7 @@ namespace ylikuutio
                 // Print valid values of the given variable.
                 if (setting_master->is_setting(setting_name))
                 {
-                    ylikuutio::config::Setting* setting = setting_master->get(setting_name);
+                    yli::config::Setting* setting = setting_master->get(setting_name);
 
                     if (setting != nullptr && setting->setting_value != nullptr && setting->read_callback == nullptr)
                     {
@@ -404,7 +404,7 @@ namespace ylikuutio
             return nullptr;
         }
 
-        std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_planet_radius(ylikuutio::ontology::Entity* const entity, ylikuutio::config::SettingMaster* const setting_master)
+        std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_planet_radius(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
             if (entity == nullptr || setting_master == nullptr)
             {
@@ -423,7 +423,7 @@ namespace ylikuutio
                 return nullptr;
             }
 
-            ylikuutio::ontology::Universe* universe = dynamic_cast<ylikuutio::ontology::Universe*>(entity);
+            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
             if (universe == nullptr)
             {
@@ -434,7 +434,7 @@ namespace ylikuutio
             return nullptr;
         }
 
-        std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_background_color(ylikuutio::ontology::Entity* const entity, ylikuutio::config::SettingMaster* const setting_master)
+        std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_background_color(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
             if (entity == nullptr || setting_master == nullptr)
             {
@@ -489,11 +489,11 @@ namespace ylikuutio
 
             GLclampf alpha = static_cast<GLclampf>(alpha_any_value->float_value);
 
-            ylikuutio::opengl::set_background_color(red, green, blue, alpha);
+            yli::opengl::set_background_color(red, green, blue, alpha);
             return nullptr;
         }
 
-        std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_wireframe(ylikuutio::ontology::Entity* const entity, ylikuutio::config::SettingMaster* const setting_master)
+        std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_wireframe(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
             if (entity == nullptr || setting_master == nullptr)
             {
@@ -512,18 +512,18 @@ namespace ylikuutio
                 return nullptr;
             }
 
-            ylikuutio::opengl::set_wireframe(wireframe_any_value->bool_value);
+            yli::opengl::set_wireframe(wireframe_any_value->bool_value);
             return nullptr;
         }
 
-        std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_spherical_coordinates(ylikuutio::ontology::Entity* const entity, ylikuutio::config::SettingMaster* const setting_master)
+        std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_spherical_coordinates(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
             if (entity == nullptr || setting_master == nullptr)
             {
                 return nullptr;
             }
 
-            ylikuutio::ontology::Movable* movable = dynamic_cast<ylikuutio::ontology::Movable*>(entity);
+            yli::ontology::Movable* movable = dynamic_cast<yli::ontology::Movable*>(entity);
 
             if (movable != nullptr)
             {
@@ -543,7 +543,7 @@ namespace ylikuutio
                 return nullptr;
             }
 
-            ylikuutio::ontology::Universe* universe = dynamic_cast<ylikuutio::ontology::Universe*>(entity);
+            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
             if (universe == nullptr || setting_master->setting_pointer_map.count("spherical_coordinates") != 1)
             {
@@ -561,14 +561,14 @@ namespace ylikuutio
             return nullptr;
         }
 
-        std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_rho(ylikuutio::ontology::Entity* const entity, ylikuutio::config::SettingMaster* const setting_master)
+        std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_rho(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
             if (entity == nullptr || setting_master == nullptr)
             {
                 return nullptr;
             }
 
-            ylikuutio::ontology::Movable* movable = dynamic_cast<ylikuutio::ontology::Movable*>(entity);
+            yli::ontology::Movable* movable = dynamic_cast<yli::ontology::Movable*>(entity);
 
             if (movable != nullptr)
             {
@@ -588,7 +588,7 @@ namespace ylikuutio
                 return nullptr;
             }
 
-            ylikuutio::ontology::Universe* universe = dynamic_cast<ylikuutio::ontology::Universe*>(entity);
+            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
             if (universe == nullptr)
             {
@@ -611,14 +611,14 @@ namespace ylikuutio
             return nullptr;
         }
 
-        std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_theta(ylikuutio::ontology::Entity* const entity, ylikuutio::config::SettingMaster* const setting_master)
+        std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_theta(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
             if (entity == nullptr || setting_master == nullptr)
             {
                 return nullptr;
             }
 
-            ylikuutio::ontology::Movable* movable = dynamic_cast<ylikuutio::ontology::Movable*>(entity);
+            yli::ontology::Movable* movable = dynamic_cast<yli::ontology::Movable*>(entity);
 
             if (movable != nullptr)
             {
@@ -638,7 +638,7 @@ namespace ylikuutio
                 return nullptr;
             }
 
-            ylikuutio::ontology::Universe* universe = dynamic_cast<ylikuutio::ontology::Universe*>(entity);
+            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
             if (universe == nullptr)
             {
@@ -661,14 +661,14 @@ namespace ylikuutio
             return nullptr;
         }
 
-        std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_phi(ylikuutio::ontology::Entity* const entity, ylikuutio::config::SettingMaster* const setting_master)
+        std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_phi(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
             if (entity == nullptr || setting_master == nullptr)
             {
                 return nullptr;
             }
 
-            ylikuutio::ontology::Movable* movable = dynamic_cast<ylikuutio::ontology::Movable*>(entity);
+            yli::ontology::Movable* movable = dynamic_cast<yli::ontology::Movable*>(entity);
 
             if (movable != nullptr)
             {
@@ -688,7 +688,7 @@ namespace ylikuutio
                 return nullptr;
             }
 
-            ylikuutio::ontology::Universe* universe = dynamic_cast<ylikuutio::ontology::Universe*>(entity);
+            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
             if (universe == nullptr)
             {
@@ -711,14 +711,14 @@ namespace ylikuutio
             return nullptr;
         }
 
-        std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_cartesian_coordinates(ylikuutio::ontology::Entity* const entity, ylikuutio::config::SettingMaster* const setting_master)
+        std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_cartesian_coordinates(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
             if (entity == nullptr || setting_master == nullptr)
             {
                 return nullptr;
             }
 
-            ylikuutio::ontology::Movable* movable = dynamic_cast<ylikuutio::ontology::Movable*>(entity);
+            yli::ontology::Movable* movable = dynamic_cast<yli::ontology::Movable*>(entity);
 
             if (movable != nullptr)
             {
@@ -738,7 +738,7 @@ namespace ylikuutio
                 return nullptr;
             }
 
-            ylikuutio::ontology::Universe* universe = dynamic_cast<ylikuutio::ontology::Universe*>(entity);
+            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
             if (universe == nullptr || setting_master->setting_pointer_map.count("cartesian_coordinates") != 1)
             {
@@ -756,14 +756,14 @@ namespace ylikuutio
             return nullptr;
         }
 
-        std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_x(ylikuutio::ontology::Entity* const entity, ylikuutio::config::SettingMaster* const setting_master)
+        std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_x(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
             if (entity == nullptr || setting_master == nullptr)
             {
                 return nullptr;
             }
 
-            ylikuutio::ontology::Movable* movable = dynamic_cast<ylikuutio::ontology::Movable*>(entity);
+            yli::ontology::Movable* movable = dynamic_cast<yli::ontology::Movable*>(entity);
 
             if (movable != nullptr)
             {
@@ -782,7 +782,7 @@ namespace ylikuutio
                 movable->cartesian_coordinates.x = x_any_value->float_value;
                 movable->model_matrix[3][0] = x_any_value->float_value;
 
-                ylikuutio::ontology::Holobiont* holobiont = dynamic_cast<ylikuutio::ontology::Holobiont*>(movable);
+                yli::ontology::Holobiont* holobiont = dynamic_cast<yli::ontology::Holobiont*>(movable);
 
                 if (holobiont != nullptr)
                 {
@@ -792,7 +792,7 @@ namespace ylikuutio
                 return nullptr;
             }
 
-            ylikuutio::ontology::Universe* universe = dynamic_cast<ylikuutio::ontology::Universe*>(entity);
+            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
             if (universe == nullptr)
             {
@@ -815,14 +815,14 @@ namespace ylikuutio
             return nullptr;
         }
 
-        std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_y(ylikuutio::ontology::Entity* const entity, ylikuutio::config::SettingMaster* const setting_master)
+        std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_y(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
             if (entity == nullptr || setting_master == nullptr)
             {
                 return nullptr;
             }
 
-            ylikuutio::ontology::Movable* movable = dynamic_cast<ylikuutio::ontology::Movable*>(entity);
+            yli::ontology::Movable* movable = dynamic_cast<yli::ontology::Movable*>(entity);
 
             if (movable != nullptr)
             {
@@ -841,7 +841,7 @@ namespace ylikuutio
                 movable->cartesian_coordinates.y = y_any_value->float_value;
                 movable->model_matrix[3][1] = y_any_value->float_value;
 
-                ylikuutio::ontology::Holobiont* holobiont = dynamic_cast<ylikuutio::ontology::Holobiont*>(movable);
+                yli::ontology::Holobiont* holobiont = dynamic_cast<yli::ontology::Holobiont*>(movable);
 
                 if (holobiont != nullptr)
                 {
@@ -851,7 +851,7 @@ namespace ylikuutio
                 return nullptr;
             }
 
-            ylikuutio::ontology::Universe* universe = dynamic_cast<ylikuutio::ontology::Universe*>(entity);
+            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
             if (universe == nullptr)
             {
@@ -874,14 +874,14 @@ namespace ylikuutio
             return nullptr;
         }
 
-        std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_z(ylikuutio::ontology::Entity* const entity, ylikuutio::config::SettingMaster* const setting_master)
+        std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_z(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
             if (entity == nullptr || setting_master == nullptr)
             {
                 return nullptr;
             }
 
-            ylikuutio::ontology::Movable* movable = dynamic_cast<ylikuutio::ontology::Movable*>(entity);
+            yli::ontology::Movable* movable = dynamic_cast<yli::ontology::Movable*>(entity);
 
             if (movable != nullptr)
             {
@@ -900,7 +900,7 @@ namespace ylikuutio
                 movable->cartesian_coordinates.z = z_any_value->float_value;
                 movable->model_matrix[3][2] = z_any_value->float_value;
 
-                ylikuutio::ontology::Holobiont* holobiont = dynamic_cast<ylikuutio::ontology::Holobiont*>(movable);
+                yli::ontology::Holobiont* holobiont = dynamic_cast<yli::ontology::Holobiont*>(movable);
 
                 if (holobiont != nullptr)
                 {
@@ -910,7 +910,7 @@ namespace ylikuutio
                 return nullptr;
             }
 
-            ylikuutio::ontology::Universe* universe = dynamic_cast<ylikuutio::ontology::Universe*>(entity);
+            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
             if (universe == nullptr)
             {
@@ -933,14 +933,14 @@ namespace ylikuutio
             return nullptr;
         }
 
-        std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_horizontal_angle(ylikuutio::ontology::Entity* const entity, ylikuutio::config::SettingMaster* const setting_master)
+        std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_horizontal_angle(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
             if (entity == nullptr || setting_master == nullptr)
             {
                 return nullptr;
             }
 
-            ylikuutio::ontology::Universe* universe = dynamic_cast<ylikuutio::ontology::Universe*>(entity);
+            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
             if (universe == nullptr)
             {
@@ -963,14 +963,14 @@ namespace ylikuutio
             return nullptr;
         }
 
-        std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_vertical_angle(ylikuutio::ontology::Entity* const entity, ylikuutio::config::SettingMaster* const setting_master)
+        std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_vertical_angle(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
             if (entity == nullptr || setting_master == nullptr)
             {
                 return nullptr;
             }
 
-            ylikuutio::ontology::Universe* universe = dynamic_cast<ylikuutio::ontology::Universe*>(entity);
+            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
             if (universe == nullptr)
             {
@@ -993,14 +993,14 @@ namespace ylikuutio
             return nullptr;
         }
 
-        std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_speed(ylikuutio::ontology::Entity* const entity, ylikuutio::config::SettingMaster* const setting_master)
+        std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_speed(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
             if (entity == nullptr || setting_master == nullptr)
             {
                 return nullptr;
             }
 
-            ylikuutio::ontology::Universe* universe = dynamic_cast<ylikuutio::ontology::Universe*>(entity);
+            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
             if (universe == nullptr)
             {
@@ -1023,14 +1023,14 @@ namespace ylikuutio
             return nullptr;
         }
 
-        std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_turbo_factor(ylikuutio::ontology::Entity* const entity, ylikuutio::config::SettingMaster* const setting_master)
+        std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_turbo_factor(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
             if (entity == nullptr || setting_master == nullptr)
             {
                 return nullptr;
             }
 
-            ylikuutio::ontology::Universe* universe = dynamic_cast<ylikuutio::ontology::Universe*>(entity);
+            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
             if (universe == nullptr)
             {
@@ -1053,14 +1053,14 @@ namespace ylikuutio
             return nullptr;
         }
 
-        std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_twin_turbo_factor(ylikuutio::ontology::Entity* const entity, ylikuutio::config::SettingMaster* const setting_master)
+        std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_twin_turbo_factor(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
             if (entity == nullptr || setting_master == nullptr)
             {
                 return nullptr;
             }
 
-            ylikuutio::ontology::Universe* universe = dynamic_cast<ylikuutio::ontology::Universe*>(entity);
+            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
             if (universe == nullptr)
             {
@@ -1083,14 +1083,14 @@ namespace ylikuutio
             return nullptr;
         }
 
-        std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_mouse_speed(ylikuutio::ontology::Entity* const entity, ylikuutio::config::SettingMaster* const setting_master)
+        std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_mouse_speed(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
             if (entity == nullptr || setting_master == nullptr)
             {
                 return nullptr;
             }
 
-            ylikuutio::ontology::Universe* universe = dynamic_cast<ylikuutio::ontology::Universe*>(entity);
+            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
             if (universe == nullptr)
             {
@@ -1113,14 +1113,14 @@ namespace ylikuutio
             return nullptr;
         }
 
-        std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_is_flight_mode_in_use(ylikuutio::ontology::Entity* const entity, ylikuutio::config::SettingMaster* const setting_master)
+        std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_is_flight_mode_in_use(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
             if (entity == nullptr || setting_master == nullptr)
             {
                 return nullptr;
             }
 
-            ylikuutio::ontology::Universe* universe = dynamic_cast<ylikuutio::ontology::Universe*>(entity);
+            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
             if (universe == nullptr)
             {
@@ -1143,21 +1143,21 @@ namespace ylikuutio
             return nullptr;
         }
 
-        std::shared_ptr<datatypes::AnyValue> SettingMaster::read_cartesian_coordinates(ylikuutio::ontology::Entity* const entity, ylikuutio::config::SettingMaster* const setting_master)
+        std::shared_ptr<datatypes::AnyValue> SettingMaster::read_cartesian_coordinates(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
             if (entity == nullptr)
             {
                 return nullptr;
             }
 
-            ylikuutio::ontology::Movable* movable = dynamic_cast<ylikuutio::ontology::Movable*>(entity);
+            yli::ontology::Movable* movable = dynamic_cast<yli::ontology::Movable*>(entity);
 
             if (movable != nullptr)
             {
                 return std::make_shared<datatypes::AnyValue>(&movable->cartesian_coordinates);
             }
 
-            ylikuutio::ontology::Universe* universe = dynamic_cast<ylikuutio::ontology::Universe*>(entity);
+            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
             if (universe == nullptr)
             {
@@ -1167,21 +1167,21 @@ namespace ylikuutio
             return std::make_shared<datatypes::AnyValue>(&universe->current_camera_cartesian_coordinates);
         }
 
-        std::shared_ptr<datatypes::AnyValue> SettingMaster::read_x(ylikuutio::ontology::Entity* const entity, ylikuutio::config::SettingMaster* const setting_master)
+        std::shared_ptr<datatypes::AnyValue> SettingMaster::read_x(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
             if (entity == nullptr)
             {
                 return nullptr;
             }
 
-            ylikuutio::ontology::Movable* movable = dynamic_cast<ylikuutio::ontology::Movable*>(entity);
+            yli::ontology::Movable* movable = dynamic_cast<yli::ontology::Movable*>(entity);
 
             if (movable != nullptr)
             {
                 return std::make_shared<datatypes::AnyValue>(movable->cartesian_coordinates.x);
             }
 
-            ylikuutio::ontology::Universe* universe = dynamic_cast<ylikuutio::ontology::Universe*>(entity);
+            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
             if (universe == nullptr)
             {
@@ -1191,21 +1191,21 @@ namespace ylikuutio
             return std::make_shared<datatypes::AnyValue>(universe->current_camera_cartesian_coordinates.x);
         }
 
-        std::shared_ptr<datatypes::AnyValue> SettingMaster::read_y(ylikuutio::ontology::Entity* const entity, ylikuutio::config::SettingMaster* const setting_master)
+        std::shared_ptr<datatypes::AnyValue> SettingMaster::read_y(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
             if (entity == nullptr)
             {
                 return nullptr;
             }
 
-            ylikuutio::ontology::Movable* movable = dynamic_cast<ylikuutio::ontology::Movable*>(entity);
+            yli::ontology::Movable* movable = dynamic_cast<yli::ontology::Movable*>(entity);
 
             if (movable != nullptr)
             {
                 return std::make_shared<datatypes::AnyValue>(movable->cartesian_coordinates.y);
             }
 
-            ylikuutio::ontology::Universe* universe = dynamic_cast<ylikuutio::ontology::Universe*>(entity);
+            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
             if (universe == nullptr)
             {
@@ -1215,21 +1215,21 @@ namespace ylikuutio
             return std::make_shared<datatypes::AnyValue>(universe->current_camera_cartesian_coordinates.y);
         }
 
-        std::shared_ptr<datatypes::AnyValue> SettingMaster::read_z(ylikuutio::ontology::Entity* const entity, ylikuutio::config::SettingMaster* const setting_master)
+        std::shared_ptr<datatypes::AnyValue> SettingMaster::read_z(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
             if (entity == nullptr)
             {
                 return nullptr;
             }
 
-            ylikuutio::ontology::Movable* movable = dynamic_cast<ylikuutio::ontology::Movable*>(entity);
+            yli::ontology::Movable* movable = dynamic_cast<yli::ontology::Movable*>(entity);
 
             if (movable != nullptr)
             {
                 return std::make_shared<datatypes::AnyValue>(movable->cartesian_coordinates.z);
             }
 
-            ylikuutio::ontology::Universe* universe = dynamic_cast<ylikuutio::ontology::Universe*>(entity);
+            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
             if (universe == nullptr)
             {
@@ -1239,21 +1239,21 @@ namespace ylikuutio
             return std::make_shared<datatypes::AnyValue>(universe->current_camera_cartesian_coordinates.z);
         }
 
-        std::shared_ptr<datatypes::AnyValue> SettingMaster::read_rho(ylikuutio::ontology::Entity* const entity, ylikuutio::config::SettingMaster* const setting_master)
+        std::shared_ptr<datatypes::AnyValue> SettingMaster::read_rho(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
             if (entity == nullptr)
             {
                 return nullptr;
             }
 
-            ylikuutio::ontology::Movable* movable = dynamic_cast<ylikuutio::ontology::Movable*>(entity);
+            yli::ontology::Movable* movable = dynamic_cast<yli::ontology::Movable*>(entity);
 
             if (movable != nullptr)
             {
                 return std::make_shared<datatypes::AnyValue>(movable->spherical_coordinates.rho);
             }
 
-            ylikuutio::ontology::Universe* universe = dynamic_cast<ylikuutio::ontology::Universe*>(entity);
+            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
             if (universe == nullptr)
             {
@@ -1263,21 +1263,21 @@ namespace ylikuutio
             return std::make_shared<datatypes::AnyValue>(universe->current_camera_spherical_coordinates.rho);
         }
 
-        std::shared_ptr<datatypes::AnyValue> SettingMaster::read_theta(ylikuutio::ontology::Entity* const entity, ylikuutio::config::SettingMaster* const setting_master)
+        std::shared_ptr<datatypes::AnyValue> SettingMaster::read_theta(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
             if (entity == nullptr)
             {
                 return nullptr;
             }
 
-            ylikuutio::ontology::Movable* movable = dynamic_cast<ylikuutio::ontology::Movable*>(entity);
+            yli::ontology::Movable* movable = dynamic_cast<yli::ontology::Movable*>(entity);
 
             if (movable != nullptr)
             {
                 return std::make_shared<datatypes::AnyValue>(movable->spherical_coordinates.theta);
             }
 
-            ylikuutio::ontology::Universe* universe = dynamic_cast<ylikuutio::ontology::Universe*>(entity);
+            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
             if (universe == nullptr)
             {
@@ -1287,21 +1287,21 @@ namespace ylikuutio
             return std::make_shared<datatypes::AnyValue>(universe->current_camera_spherical_coordinates.theta);
         }
 
-        std::shared_ptr<datatypes::AnyValue> SettingMaster::read_phi(ylikuutio::ontology::Entity* const entity, ylikuutio::config::SettingMaster* const setting_master)
+        std::shared_ptr<datatypes::AnyValue> SettingMaster::read_phi(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
             if (entity == nullptr)
             {
                 return nullptr;
             }
 
-            ylikuutio::ontology::Movable* movable = dynamic_cast<ylikuutio::ontology::Movable*>(entity);
+            yli::ontology::Movable* movable = dynamic_cast<yli::ontology::Movable*>(entity);
 
             if (movable != nullptr)
             {
                 return std::make_shared<datatypes::AnyValue>(movable->spherical_coordinates.phi);
             }
 
-            ylikuutio::ontology::Universe* universe = dynamic_cast<ylikuutio::ontology::Universe*>(entity);
+            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
             if (universe == nullptr)
             {
@@ -1311,14 +1311,14 @@ namespace ylikuutio
             return std::make_shared<datatypes::AnyValue>(universe->current_camera_spherical_coordinates.phi);
         }
 
-        std::shared_ptr<datatypes::AnyValue> SettingMaster::read_up(ylikuutio::ontology::Entity* const entity, ylikuutio::config::SettingMaster* const setting_master)
+        std::shared_ptr<datatypes::AnyValue> SettingMaster::read_up(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
             if (entity == nullptr)
             {
                 return nullptr;
             }
 
-            ylikuutio::ontology::Universe* universe = dynamic_cast<ylikuutio::ontology::Universe*>(entity);
+            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
             if (universe == nullptr)
             {
@@ -1328,14 +1328,14 @@ namespace ylikuutio
             return std::make_shared<datatypes::AnyValue>(&universe->current_camera_up);
         }
 
-        std::shared_ptr<datatypes::AnyValue> SettingMaster::read_right(ylikuutio::ontology::Entity* const entity, ylikuutio::config::SettingMaster* const setting_master)
+        std::shared_ptr<datatypes::AnyValue> SettingMaster::read_right(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
             if (entity == nullptr)
             {
                 return nullptr;
             }
 
-            ylikuutio::ontology::Universe* universe = dynamic_cast<ylikuutio::ontology::Universe*>(entity);
+            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
             if (universe == nullptr)
             {
@@ -1345,14 +1345,14 @@ namespace ylikuutio
             return std::make_shared<datatypes::AnyValue>(&universe->current_camera_right);
         }
 
-        std::shared_ptr<datatypes::AnyValue> SettingMaster::read_horizontal_angle(ylikuutio::ontology::Entity* const entity, ylikuutio::config::SettingMaster* const setting_master)
+        std::shared_ptr<datatypes::AnyValue> SettingMaster::read_horizontal_angle(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
             if (entity == nullptr)
             {
                 return nullptr;
             }
 
-            ylikuutio::ontology::Universe* universe = dynamic_cast<ylikuutio::ontology::Universe*>(entity);
+            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
             if (universe == nullptr)
             {
@@ -1362,14 +1362,14 @@ namespace ylikuutio
             return std::make_shared<datatypes::AnyValue>(universe->current_camera_horizontal_angle);
         }
 
-        std::shared_ptr<datatypes::AnyValue> SettingMaster::read_vertical_angle(ylikuutio::ontology::Entity* const entity, ylikuutio::config::SettingMaster* const setting_master)
+        std::shared_ptr<datatypes::AnyValue> SettingMaster::read_vertical_angle(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
             if (entity == nullptr)
             {
                 return nullptr;
             }
 
-            ylikuutio::ontology::Universe* universe = dynamic_cast<ylikuutio::ontology::Universe*>(entity);
+            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
             if (universe == nullptr)
             {
@@ -1379,14 +1379,14 @@ namespace ylikuutio
             return std::make_shared<datatypes::AnyValue>(universe->current_camera_vertical_angle);
         }
 
-        std::shared_ptr<datatypes::AnyValue> SettingMaster::read_is_flight_mode_in_use(ylikuutio::ontology::Entity* const entity, ylikuutio::config::SettingMaster* const setting_master)
+        std::shared_ptr<datatypes::AnyValue> SettingMaster::read_is_flight_mode_in_use(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
             if (entity == nullptr)
             {
                 return nullptr;
             }
 
-            ylikuutio::ontology::Universe* universe = dynamic_cast<ylikuutio::ontology::Universe*>(entity);
+            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
             if (universe == nullptr)
             {

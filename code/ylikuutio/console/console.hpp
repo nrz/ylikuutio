@@ -53,10 +53,10 @@
 namespace map
 {
     template <class T1>
-        void print_keys_to_console(const std::unordered_map<std::string, T1>* const unordered_map_pointer, ylikuutio::console::Console* const console);
+        void print_keys_to_console(const std::unordered_map<std::string, T1>* const unordered_map_pointer, yli::console::Console* const console);
 }
 
-namespace ylikuutio
+namespace yli
 {
     namespace console
     {
@@ -80,238 +80,238 @@ namespace ylikuutio
                 // Action mode keyrelease callbacks begin here.
 
                 static std::shared_ptr<datatypes::AnyValue> enable_enter_console(
-                        ylikuutio::callback_system::CallbackEngine*,
-                        ylikuutio::callback_system::CallbackObject*,
-                        std::vector<ylikuutio::callback_system::CallbackParameter*>&,
-                        ylikuutio::console::Console* console);
+                        yli::callback_system::CallbackEngine*,
+                        yli::callback_system::CallbackObject*,
+                        std::vector<yli::callback_system::CallbackParameter*>&,
+                        yli::console::Console* console);
 
                 // Action mode keypress callbacks begin here.
 
                 static std::shared_ptr<datatypes::AnyValue> enter_console(
-                        ylikuutio::callback_system::CallbackEngine*,
-                        ylikuutio::callback_system::CallbackObject*,
-                        std::vector<ylikuutio::callback_system::CallbackParameter*>&,
-                        ylikuutio::console::Console* console);
+                        yli::callback_system::CallbackEngine*,
+                        yli::callback_system::CallbackObject*,
+                        std::vector<yli::callback_system::CallbackParameter*>&,
+                        yli::console::Console* console);
 
                 // Console mode keyrelease callbacks begin here.
 
                 static std::shared_ptr<datatypes::AnyValue> enable_exit_console(
-                        ylikuutio::callback_system::CallbackEngine*,
-                        ylikuutio::callback_system::CallbackObject*,
-                        std::vector<ylikuutio::callback_system::CallbackParameter*>&,
-                        ylikuutio::console::Console* console);
+                        yli::callback_system::CallbackEngine*,
+                        yli::callback_system::CallbackObject*,
+                        std::vector<yli::callback_system::CallbackParameter*>&,
+                        yli::console::Console* console);
 
                 static std::shared_ptr<datatypes::AnyValue> release_left_control_in_console(
-                        ylikuutio::callback_system::CallbackEngine*,
-                        ylikuutio::callback_system::CallbackObject*,
-                        std::vector<ylikuutio::callback_system::CallbackParameter*>&,
-                        ylikuutio::console::Console* console);
+                        yli::callback_system::CallbackEngine*,
+                        yli::callback_system::CallbackObject*,
+                        std::vector<yli::callback_system::CallbackParameter*>&,
+                        yli::console::Console* console);
 
                 static std::shared_ptr<datatypes::AnyValue> release_right_control_in_console(
-                        ylikuutio::callback_system::CallbackEngine*,
-                        ylikuutio::callback_system::CallbackObject*,
-                        std::vector<ylikuutio::callback_system::CallbackParameter*>&,
-                        ylikuutio::console::Console* console);
+                        yli::callback_system::CallbackEngine*,
+                        yli::callback_system::CallbackObject*,
+                        std::vector<yli::callback_system::CallbackParameter*>&,
+                        yli::console::Console* console);
 
                 static std::shared_ptr<datatypes::AnyValue> release_left_alt_in_console(
-                        ylikuutio::callback_system::CallbackEngine*,
-                        ylikuutio::callback_system::CallbackObject*,
-                        std::vector<ylikuutio::callback_system::CallbackParameter*>&,
-                        ylikuutio::console::Console* console);
+                        yli::callback_system::CallbackEngine*,
+                        yli::callback_system::CallbackObject*,
+                        std::vector<yli::callback_system::CallbackParameter*>&,
+                        yli::console::Console* console);
 
                 static std::shared_ptr<datatypes::AnyValue> release_right_alt_in_console(
-                        ylikuutio::callback_system::CallbackEngine*,
-                        ylikuutio::callback_system::CallbackObject*,
-                        std::vector<ylikuutio::callback_system::CallbackParameter*>&,
-                        ylikuutio::console::Console* console);
+                        yli::callback_system::CallbackEngine*,
+                        yli::callback_system::CallbackObject*,
+                        std::vector<yli::callback_system::CallbackParameter*>&,
+                        yli::console::Console* console);
 
                 static std::shared_ptr<datatypes::AnyValue> release_left_shift_in_console(
-                        ylikuutio::callback_system::CallbackEngine*,
-                        ylikuutio::callback_system::CallbackObject*,
-                        std::vector<ylikuutio::callback_system::CallbackParameter*>&,
-                        ylikuutio::console::Console* console);
+                        yli::callback_system::CallbackEngine*,
+                        yli::callback_system::CallbackObject*,
+                        std::vector<yli::callback_system::CallbackParameter*>&,
+                        yli::console::Console* console);
 
                 static std::shared_ptr<datatypes::AnyValue> release_right_shift_in_console(
-                        ylikuutio::callback_system::CallbackEngine*,
-                        ylikuutio::callback_system::CallbackObject*,
-                        std::vector<ylikuutio::callback_system::CallbackParameter*>&,
-                        ylikuutio::console::Console* console);
+                        yli::callback_system::CallbackEngine*,
+                        yli::callback_system::CallbackObject*,
+                        std::vector<yli::callback_system::CallbackParameter*>&,
+                        yli::console::Console* console);
 
                 static std::shared_ptr<datatypes::AnyValue> enable_move_to_previous_input(
-                        ylikuutio::callback_system::CallbackEngine*,
-                        ylikuutio::callback_system::CallbackObject*,
-                        std::vector<ylikuutio::callback_system::CallbackParameter*>&,
-                        ylikuutio::console::Console* console);
+                        yli::callback_system::CallbackEngine*,
+                        yli::callback_system::CallbackObject*,
+                        std::vector<yli::callback_system::CallbackParameter*>&,
+                        yli::console::Console* console);
 
                 static std::shared_ptr<datatypes::AnyValue> enable_move_to_next_input(
-                        ylikuutio::callback_system::CallbackEngine*,
-                        ylikuutio::callback_system::CallbackObject*,
-                        std::vector<ylikuutio::callback_system::CallbackParameter*>&,
-                        ylikuutio::console::Console* console);
+                        yli::callback_system::CallbackEngine*,
+                        yli::callback_system::CallbackObject*,
+                        std::vector<yli::callback_system::CallbackParameter*>&,
+                        yli::console::Console* console);
 
                 static std::shared_ptr<datatypes::AnyValue> enable_backspace(
-                        ylikuutio::callback_system::CallbackEngine*,
-                        ylikuutio::callback_system::CallbackObject*,
-                        std::vector<ylikuutio::callback_system::CallbackParameter*>&,
-                        ylikuutio::console::Console* console);
+                        yli::callback_system::CallbackEngine*,
+                        yli::callback_system::CallbackObject*,
+                        std::vector<yli::callback_system::CallbackParameter*>&,
+                        yli::console::Console* console);
 
                 static std::shared_ptr<datatypes::AnyValue> enable_enter_key(
-                        ylikuutio::callback_system::CallbackEngine*,
-                        ylikuutio::callback_system::CallbackObject*,
-                        std::vector<ylikuutio::callback_system::CallbackParameter*>&,
-                        ylikuutio::console::Console* console);
+                        yli::callback_system::CallbackEngine*,
+                        yli::callback_system::CallbackObject*,
+                        std::vector<yli::callback_system::CallbackParameter*>&,
+                        yli::console::Console* console);
 
                 static std::shared_ptr<datatypes::AnyValue> enable_ctrl_c(
-                        ylikuutio::callback_system::CallbackEngine*,
-                        ylikuutio::callback_system::CallbackObject*,
-                        std::vector<ylikuutio::callback_system::CallbackParameter*>&,
-                        ylikuutio::console::Console* console);
+                        yli::callback_system::CallbackEngine*,
+                        yli::callback_system::CallbackObject*,
+                        std::vector<yli::callback_system::CallbackParameter*>&,
+                        yli::console::Console* console);
 
                 static std::shared_ptr<datatypes::AnyValue> enable_ctrl_w(
-                        ylikuutio::callback_system::CallbackEngine*,
-                        ylikuutio::callback_system::CallbackObject*,
-                        std::vector<ylikuutio::callback_system::CallbackParameter*>&,
-                        ylikuutio::console::Console* console);
+                        yli::callback_system::CallbackEngine*,
+                        yli::callback_system::CallbackObject*,
+                        std::vector<yli::callback_system::CallbackParameter*>&,
+                        yli::console::Console* console);
 
                 static std::shared_ptr<datatypes::AnyValue> enable_page_up(
-                        ylikuutio::callback_system::CallbackEngine*,
-                        ylikuutio::callback_system::CallbackObject*,
-                        std::vector<ylikuutio::callback_system::CallbackParameter*>&,
-                        ylikuutio::console::Console* console);
+                        yli::callback_system::CallbackEngine*,
+                        yli::callback_system::CallbackObject*,
+                        std::vector<yli::callback_system::CallbackParameter*>&,
+                        yli::console::Console* console);
 
                 static std::shared_ptr<datatypes::AnyValue> enable_page_down(
-                        ylikuutio::callback_system::CallbackEngine*,
-                        ylikuutio::callback_system::CallbackObject*,
-                        std::vector<ylikuutio::callback_system::CallbackParameter*>&,
-                        ylikuutio::console::Console* console);
+                        yli::callback_system::CallbackEngine*,
+                        yli::callback_system::CallbackObject*,
+                        std::vector<yli::callback_system::CallbackParameter*>&,
+                        yli::console::Console* console);
 
                 static std::shared_ptr<datatypes::AnyValue> enable_home(
-                        ylikuutio::callback_system::CallbackEngine*,
-                        ylikuutio::callback_system::CallbackObject*,
-                        std::vector<ylikuutio::callback_system::CallbackParameter*>&,
-                        ylikuutio::console::Console* console);
+                        yli::callback_system::CallbackEngine*,
+                        yli::callback_system::CallbackObject*,
+                        std::vector<yli::callback_system::CallbackParameter*>&,
+                        yli::console::Console* console);
 
                 static std::shared_ptr<datatypes::AnyValue> enable_end(
-                        ylikuutio::callback_system::CallbackEngine*,
-                        ylikuutio::callback_system::CallbackObject*,
-                        std::vector<ylikuutio::callback_system::CallbackParameter*>&,
-                        ylikuutio::console::Console* console);
+                        yli::callback_system::CallbackEngine*,
+                        yli::callback_system::CallbackObject*,
+                        std::vector<yli::callback_system::CallbackParameter*>&,
+                        yli::console::Console* console);
 
                 // Console mode keypress callbacks begin here.
 
                 static std::shared_ptr<datatypes::AnyValue> exit_console(
-                        ylikuutio::callback_system::CallbackEngine*,
-                        ylikuutio::callback_system::CallbackObject*,
-                        std::vector<ylikuutio::callback_system::CallbackParameter*>&,
-                        ylikuutio::console::Console* console);
+                        yli::callback_system::CallbackEngine*,
+                        yli::callback_system::CallbackObject*,
+                        std::vector<yli::callback_system::CallbackParameter*>&,
+                        yli::console::Console* console);
 
                 static std::shared_ptr<datatypes::AnyValue> press_left_control_in_console(
-                        ylikuutio::callback_system::CallbackEngine*,
-                        ylikuutio::callback_system::CallbackObject*,
-                        std::vector<ylikuutio::callback_system::CallbackParameter*>&,
-                        ylikuutio::console::Console* console);
+                        yli::callback_system::CallbackEngine*,
+                        yli::callback_system::CallbackObject*,
+                        std::vector<yli::callback_system::CallbackParameter*>&,
+                        yli::console::Console* console);
 
                 static std::shared_ptr<datatypes::AnyValue> press_right_control_in_console(
-                        ylikuutio::callback_system::CallbackEngine*,
-                        ylikuutio::callback_system::CallbackObject*,
-                        std::vector<ylikuutio::callback_system::CallbackParameter*>&,
-                        ylikuutio::console::Console* console);
+                        yli::callback_system::CallbackEngine*,
+                        yli::callback_system::CallbackObject*,
+                        std::vector<yli::callback_system::CallbackParameter*>&,
+                        yli::console::Console* console);
 
                 static std::shared_ptr<datatypes::AnyValue> press_left_alt_in_console(
-                        ylikuutio::callback_system::CallbackEngine*,
-                        ylikuutio::callback_system::CallbackObject*,
-                        std::vector<ylikuutio::callback_system::CallbackParameter*>&,
-                        ylikuutio::console::Console* console);
+                        yli::callback_system::CallbackEngine*,
+                        yli::callback_system::CallbackObject*,
+                        std::vector<yli::callback_system::CallbackParameter*>&,
+                        yli::console::Console* console);
 
                 static std::shared_ptr<datatypes::AnyValue> press_right_alt_in_console(
-                        ylikuutio::callback_system::CallbackEngine*,
-                        ylikuutio::callback_system::CallbackObject*,
-                        std::vector<ylikuutio::callback_system::CallbackParameter*>&,
-                        ylikuutio::console::Console* console);
+                        yli::callback_system::CallbackEngine*,
+                        yli::callback_system::CallbackObject*,
+                        std::vector<yli::callback_system::CallbackParameter*>&,
+                        yli::console::Console* console);
 
                 static std::shared_ptr<datatypes::AnyValue> press_left_shift_in_console(
-                        ylikuutio::callback_system::CallbackEngine*,
-                        ylikuutio::callback_system::CallbackObject*,
-                        std::vector<ylikuutio::callback_system::CallbackParameter*>&,
-                        ylikuutio::console::Console* console);
+                        yli::callback_system::CallbackEngine*,
+                        yli::callback_system::CallbackObject*,
+                        std::vector<yli::callback_system::CallbackParameter*>&,
+                        yli::console::Console* console);
 
                 static std::shared_ptr<datatypes::AnyValue> press_right_shift_in_console(
-                        ylikuutio::callback_system::CallbackEngine*,
-                        ylikuutio::callback_system::CallbackObject*,
-                        std::vector<ylikuutio::callback_system::CallbackParameter*>&,
-                        ylikuutio::console::Console* console);
+                        yli::callback_system::CallbackEngine*,
+                        yli::callback_system::CallbackObject*,
+                        std::vector<yli::callback_system::CallbackParameter*>&,
+                        yli::console::Console* console);
 
                 static std::shared_ptr<datatypes::AnyValue> move_to_previous_input(
-                        ylikuutio::callback_system::CallbackEngine*,
-                        ylikuutio::callback_system::CallbackObject*,
-                        std::vector<ylikuutio::callback_system::CallbackParameter*>&,
-                        ylikuutio::console::Console* console);
+                        yli::callback_system::CallbackEngine*,
+                        yli::callback_system::CallbackObject*,
+                        std::vector<yli::callback_system::CallbackParameter*>&,
+                        yli::console::Console* console);
 
                 static std::shared_ptr<datatypes::AnyValue> move_to_next_input(
-                        ylikuutio::callback_system::CallbackEngine*,
-                        ylikuutio::callback_system::CallbackObject*,
-                        std::vector<ylikuutio::callback_system::CallbackParameter*>&,
-                        ylikuutio::console::Console* console);
+                        yli::callback_system::CallbackEngine*,
+                        yli::callback_system::CallbackObject*,
+                        std::vector<yli::callback_system::CallbackParameter*>&,
+                        yli::console::Console* console);
 
                 static std::shared_ptr<datatypes::AnyValue> backspace(
-                        ylikuutio::callback_system::CallbackEngine*,
-                        ylikuutio::callback_system::CallbackObject*,
-                        std::vector<ylikuutio::callback_system::CallbackParameter*>&,
-                        ylikuutio::console::Console* console);
+                        yli::callback_system::CallbackEngine*,
+                        yli::callback_system::CallbackObject*,
+                        std::vector<yli::callback_system::CallbackParameter*>&,
+                        yli::console::Console* console);
 
                 static std::shared_ptr<datatypes::AnyValue> enter_key(
-                        ylikuutio::callback_system::CallbackEngine*,
-                        ylikuutio::callback_system::CallbackObject*,
-                        std::vector<ylikuutio::callback_system::CallbackParameter*>&,
-                        ylikuutio::console::Console* console);
+                        yli::callback_system::CallbackEngine*,
+                        yli::callback_system::CallbackObject*,
+                        std::vector<yli::callback_system::CallbackParameter*>&,
+                        yli::console::Console* console);
 
                 static std::shared_ptr<datatypes::AnyValue> ctrl_c(
-                        ylikuutio::callback_system::CallbackEngine*,
-                        ylikuutio::callback_system::CallbackObject*,
-                        std::vector<ylikuutio::callback_system::CallbackParameter*>&,
-                        ylikuutio::console::Console* console);
+                        yli::callback_system::CallbackEngine*,
+                        yli::callback_system::CallbackObject*,
+                        std::vector<yli::callback_system::CallbackParameter*>&,
+                        yli::console::Console* console);
 
                 static std::shared_ptr<datatypes::AnyValue> ctrl_w(
-                        ylikuutio::callback_system::CallbackEngine*,
-                        ylikuutio::callback_system::CallbackObject*,
-                        std::vector<ylikuutio::callback_system::CallbackParameter*>&,
-                        ylikuutio::console::Console* console);
+                        yli::callback_system::CallbackEngine*,
+                        yli::callback_system::CallbackObject*,
+                        std::vector<yli::callback_system::CallbackParameter*>&,
+                        yli::console::Console* console);
 
                 static std::shared_ptr<datatypes::AnyValue> page_up(
-                        ylikuutio::callback_system::CallbackEngine*,
-                        ylikuutio::callback_system::CallbackObject*,
-                        std::vector<ylikuutio::callback_system::CallbackParameter*>&,
-                        ylikuutio::console::Console* console);
+                        yli::callback_system::CallbackEngine*,
+                        yli::callback_system::CallbackObject*,
+                        std::vector<yli::callback_system::CallbackParameter*>&,
+                        yli::console::Console* console);
 
                 static std::shared_ptr<datatypes::AnyValue> page_down(
-                        ylikuutio::callback_system::CallbackEngine*,
-                        ylikuutio::callback_system::CallbackObject*,
-                        std::vector<ylikuutio::callback_system::CallbackParameter*>&,
-                        ylikuutio::console::Console* console);
+                        yli::callback_system::CallbackEngine*,
+                        yli::callback_system::CallbackObject*,
+                        std::vector<yli::callback_system::CallbackParameter*>&,
+                        yli::console::Console* console);
 
                 static std::shared_ptr<datatypes::AnyValue> home(
-                        ylikuutio::callback_system::CallbackEngine*,
-                        ylikuutio::callback_system::CallbackObject*,
-                        std::vector<ylikuutio::callback_system::CallbackParameter*>&,
-                        ylikuutio::console::Console* console);
+                        yli::callback_system::CallbackEngine*,
+                        yli::callback_system::CallbackObject*,
+                        std::vector<yli::callback_system::CallbackParameter*>&,
+                        yli::console::Console* console);
 
                 static std::shared_ptr<datatypes::AnyValue> end(
-                        ylikuutio::callback_system::CallbackEngine*,
-                        ylikuutio::callback_system::CallbackObject*,
-                        std::vector<ylikuutio::callback_system::CallbackParameter*>&,
-                        ylikuutio::console::Console* console);
+                        yli::callback_system::CallbackEngine*,
+                        yli::callback_system::CallbackObject*,
+                        std::vector<yli::callback_system::CallbackParameter*>&,
+                        yli::console::Console* console);
 
                 // Public callbacks end here.
 
                 template <class T1>
-                    friend void map::print_keys_to_console(const std::unordered_map<std::string, T1>* const unordered_map_pointer, ylikuutio::console::Console* const console);
+                    friend void map::print_keys_to_console(const std::unordered_map<std::string, T1>* const unordered_map_pointer, yli::console::Console* const console);
 
             private:
                 static void charmods_callback(GLFWwindow* window, unsigned int codepoint, int mods);
 
                 // Callbacks end here.
 
-                ylikuutio::ontology::Universe* get_universe() const;
+                yli::ontology::Universe* get_universe() const;
 
                 void copy_historical_input_into_current_input();
                 bool exit_console();
@@ -366,11 +366,11 @@ namespace ylikuutio
                 // This is a pointer to `std::unordered_map<std::string, bool>` that contains console command callbacks.
                 std::unordered_map<std::string, ConsoleCommandCallback>* command_callback_map_pointer;
 
-                // This is a pointer to `ylikuutio::ontology::Universe`.
-                ylikuutio::ontology::Universe* universe;
+                // This is a pointer to `yli::ontology::Universe`.
+                yli::ontology::Universe* universe;
 
                 // This is a pointer to `font2D::Font2D` instance that is used for printing.
-                ylikuutio::ontology::Font2D* font2D_pointer;
+                yli::ontology::Font2D* font2D_pointer;
 
                 int32_t console_top_y;
                 int32_t console_bottom_y;

@@ -33,7 +33,7 @@ namespace space_partition
     class ChunkMaster;
 }
 
-namespace ylikuutio
+namespace yli
 {
     namespace ontology
     {
@@ -42,11 +42,11 @@ namespace ylikuutio
         class Object;
         class VectorFont;
 
-        class Material: public ylikuutio::ontology::Entity
+        class Material: public yli::ontology::Entity
         {
             public:
-                void bind_species(ylikuutio::ontology::Species* const species);
-                void bind_vector_font(ylikuutio::ontology::VectorFont* const vector_font);
+                void bind_species(yli::ontology::Species* const species);
+                void bind_vector_font(yli::ontology::VectorFont* const vector_font);
                 void bind_chunk_master(space_partition::ChunkMaster* const chunk_master);
 
                 void unbind_species(const int32_t childID);
@@ -54,7 +54,7 @@ namespace ylikuutio
                 void unbind_chunk_master(const int32_t childID);
 
                 // constructor.
-                Material(ylikuutio::ontology::Universe* const universe, const MaterialStruct& material_struct)
+                Material(yli::ontology::Universe* const universe, const MaterialStruct& material_struct)
                     : Entity(universe)
                 {
                     // constructor.
@@ -103,7 +103,7 @@ namespace ylikuutio
                         this->child_vector_pointers_vector.push_back(&this->species_pointer_vector);
                         this->child_vector_pointers_vector.push_back(&this->vector_font_pointer_vector);
                         this->child_vector_pointers_vector.push_back(&this->chunk_master_pointer_vector);
-                        this->type = "ylikuutio::ontology::Material*";
+                        this->type = "yli::ontology::Material*";
 
                         this->can_be_erased = true;
                     }
@@ -113,21 +113,21 @@ namespace ylikuutio
                 virtual ~Material();
 
                 // this method sets pointer to this `Material` to nullptr, sets `parent` according to the input, and requests a new `childID` from the new `Shader`.
-                void bind_to_new_parent(ylikuutio::ontology::Shader* const new_shader_pointer);
+                void bind_to_new_parent(yli::ontology::Shader* const new_shader_pointer);
 
-                ylikuutio::ontology::Entity* get_parent() const override;
+                yli::ontology::Entity* get_parent() const override;
 
                 // this method sets `Species` pointer.
-                void set_species_pointer(const int32_t childID, ylikuutio::ontology::Species* const child_pointer);
+                void set_species_pointer(const int32_t childID, yli::ontology::Species* const child_pointer);
 
                 // this method sets `VectorFont` pointer.
-                void set_vector_font_pointer(const int32_t childID, ylikuutio::ontology::VectorFont* const child_pointer);
+                void set_vector_font_pointer(const int32_t childID, yli::ontology::VectorFont* const child_pointer);
 
                 // this method sets `ChunkMaster` pointer.
                 void set_chunk_master_pointer(const int32_t childID, space_partition::ChunkMaster* const child_pointer);
 
                 // this method sets a terrain `Species` pointer.
-                void set_terrain_species(ylikuutio::ontology::Species* const terrain_species);
+                void set_terrain_species(yli::ontology::Species* const terrain_species);
 
                 template<class T1>
                     friend void render_children(const std::vector<T1>& child_pointer_vector);
@@ -145,17 +145,17 @@ namespace ylikuutio
                 int32_t get_number_of_children() const override;
                 int32_t get_number_of_descendants() const override;
 
-                ylikuutio::ontology::Shader* parent;      // pointer to `Shader`.
+                yli::ontology::Shader* parent;      // pointer to `Shader`.
 
                 bool is_symbiont_material;
 
-                ylikuutio::ontology::Species* terrain_species;    // pointer to terrain `Species` (used in collision detection).
+                yli::ontology::Species* terrain_species;    // pointer to terrain `Species` (used in collision detection).
 
                 GLuint texture;                        // Texture of this `Material`, returned by `load_BMP_texture` or `load_DDS_texture` (used for `glGenTextures` etc.).
                 GLuint openGL_textureID;               // texture ID, returned by `glGetUniformLocation(programID, "myTextureSampler");`.
 
-                std::vector<ylikuutio::ontology::Species*> species_pointer_vector;
-                std::vector<ylikuutio::ontology::VectorFont*> vector_font_pointer_vector;
+                std::vector<yli::ontology::Species*> species_pointer_vector;
+                std::vector<yli::ontology::VectorFont*> vector_font_pointer_vector;
                 std::vector<space_partition::ChunkMaster*> chunk_master_pointer_vector;
                 std::queue<int32_t> free_speciesID_queue;
                 std::queue<int32_t> free_vector_fontID_queue;

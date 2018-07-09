@@ -20,11 +20,11 @@
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <stdint.h> // uint32_t etc.
 
-namespace ylikuutio
+namespace yli
 {
     namespace ontology
     {
-        void SymbiontSpecies::bind_biont(ylikuutio::ontology::Biont* const biont)
+        void SymbiontSpecies::bind_biont(yli::ontology::Biont* const biont)
         {
             // `SymbiontSpecies` is not the ontological parent of `Biont`,
             // as `Holobiont` is the ontological parent of `Biont`.
@@ -39,7 +39,7 @@ namespace ylikuutio
             // 5. unbind `Biont` from its `Holobiont` parent.
             //
             // get `childID` from `SymbiontSpecies` and set pointer to `biont`.
-            hierarchy::bind_child_to_parent<ylikuutio::ontology::Biont*>(
+            hierarchy::bind_child_to_parent<yli::ontology::Biont*>(
                     biont,
                     this->biont_pointer_vector,
                     this->free_biontID_queue,
@@ -48,7 +48,7 @@ namespace ylikuutio
 
         void SymbiontSpecies::unbind_biont(const int32_t childID)
         {
-            ylikuutio::ontology::Biont* dummy_child_pointer = nullptr;
+            yli::ontology::Biont* dummy_child_pointer = nullptr;
             hierarchy::set_child_pointer(
                     childID,
                     dummy_child_pointer,
@@ -80,12 +80,12 @@ namespace ylikuutio
             this->prerender();
 
             // render this `SymbiontSpecies`.
-            ylikuutio::ontology::render_species_or_glyph<ylikuutio::ontology::SymbiontSpecies*>(this);
+            yli::ontology::render_species_or_glyph<yli::ontology::SymbiontSpecies*>(this);
 
             this->postrender();
         }
 
-        ylikuutio::ontology::Entity* SymbiontSpecies::get_parent() const
+        yli::ontology::Entity* SymbiontSpecies::get_parent() const
         {
             return this->symbiont_material_parent;
         }

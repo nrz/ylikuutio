@@ -1,7 +1,7 @@
 #ifndef __AJOKKI_MOVEMENT_HPP_INCLUDED
 #define __AJOKKI_MOVEMENT_HPP_INCLUDED
 
-namespace ylikuutio
+namespace yli
 {
     namespace config
     {
@@ -11,7 +11,7 @@ namespace ylikuutio
 
 namespace ajokki
 {
-    void set_movement(ylikuutio::config::SettingMaster* const setting_master);
+    void set_movement(yli::config::SettingMaster* const setting_master);
 }
 
 #endif

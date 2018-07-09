@@ -10,7 +10,7 @@
 // Include standard headers
 #include <vector>   // std::vector
 
-namespace ylikuutio
+namespace yli
 {
     namespace geometry
     {

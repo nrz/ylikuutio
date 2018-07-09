@@ -11,16 +11,16 @@
 #include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
 
-namespace ylikuutio
+namespace yli
 {
     namespace ontology
     {
         class Universe;
 
-        void Model::bind(ylikuutio::ontology::Object* const object)
+        void Model::bind(yli::ontology::Object* const object)
         {
             // get `childID` from `Model` and set pointer to `object`.
-            hierarchy::bind_child_to_parent<ylikuutio::ontology::Object*>(
+            hierarchy::bind_child_to_parent<yli::ontology::Object*>(
                     object,
                     this->object_pointer_vector,
                     this->free_objectID_queue,
@@ -29,7 +29,7 @@ namespace ylikuutio
 
         void Model::unbind(const int32_t childID)
         {
-            ylikuutio::ontology::Object* dummy_child_pointer = nullptr;
+            yli::ontology::Object* dummy_child_pointer = nullptr;
             hierarchy::set_child_pointer(
                     childID,
                     dummy_child_pointer,

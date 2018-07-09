@@ -37,26 +37,26 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
-namespace ylikuutio
+namespace yli
 {
     namespace ontology
     {
         class Universe;
         class Biont;
 
-        class SymbiontSpecies: public ylikuutio::ontology::Species
+        class SymbiontSpecies: public yli::ontology::Species
         {
             public:
                 // destructor.
                 virtual ~SymbiontSpecies();
 
             private:
-                void bind_biont(ylikuutio::ontology::Biont* const biont);
+                void bind_biont(yli::ontology::Biont* const biont);
 
                 void unbind_biont(const int32_t childID);
 
                 // constructor.
-                SymbiontSpecies(ylikuutio::ontology::Universe* const universe, const SpeciesStruct& species_struct)
+                SymbiontSpecies(yli::ontology::Universe* const universe, const SpeciesStruct& species_struct)
                     : Species(universe, species_struct)
                 {
                     // constructor.
@@ -67,7 +67,7 @@ namespace ylikuutio
                     this->normals                  = species_struct.normals;
                     this->light_position           = species_struct.light_position;
 
-                    std::cout << "Binding `ylikuutio::ontology::SymbiontSpecies*` to `ylikuutio::ontology::SymbiontMaterial*` ...\n";
+                    std::cout << "Binding `yli::ontology::SymbiontSpecies*` to `yli::ontology::SymbiontMaterial*` ...\n";
 
                     // get `childID` from `SymbiontMaterial` and set pointer to this `SymbiontSpecies`.
                     this->bind_to_parent();
@@ -83,11 +83,11 @@ namespace ylikuutio
 
                     // water level.
                     GLuint water_level_uniform_location = glGetUniformLocation(this->shader->get_programID(), "water_level");
-                    ylikuutio::ontology::Scene* scene = static_cast<ylikuutio::ontology::Scene*>(this->shader->get_parent());
+                    yli::ontology::Scene* scene = static_cast<yli::ontology::Scene*>(this->shader->get_parent());
                     glUniform1f(water_level_uniform_location, scene->get_water_level());
 
                     // Fill the index buffer.
-                    ylikuutio::ontology::indexVBO(
+                    yli::ontology::indexVBO(
                             this->vertices,
                             this->uvs,
                             this->normals,
@@ -118,10 +118,10 @@ namespace ylikuutio
                     this->number_of_bionts = 0;
 
                     this->child_vector_pointers_vector.push_back(&this->biont_pointer_vector);
-                    this->type = "ylikuutio::ontology::SymbiontSpecies*";
+                    this->type = "yli::ontology::SymbiontSpecies*";
                 }
 
-                ylikuutio::ontology::Entity* get_parent() const override;
+                yli::ontology::Entity* get_parent() const override;
 
                 int32_t get_indices_size() const;
                 GLuint get_lightID() const;
@@ -143,12 +143,12 @@ namespace ylikuutio
                 // this method renders all `Object`s of this `SymbiontSpecies`.
                 void render();
 
-                std::vector<ylikuutio::ontology::Biont*> biont_pointer_vector;
+                std::vector<yli::ontology::Biont*> biont_pointer_vector;
                 std::queue<int32_t> free_biontID_queue;
                 int32_t number_of_bionts;
 
-                ylikuutio::ontology::SymbiontMaterial* symbiont_material_parent; // pointer to `SymbiontMaterial`.
-                ylikuutio::ontology::Shader* shader;           // pointer to `Shader`.
+                yli::ontology::SymbiontMaterial* symbiont_material_parent; // pointer to `SymbiontMaterial`.
+                yli::ontology::Shader* shader;           // pointer to `Shader`.
 
                 std::string model_file_format;        // type of the model file, eg. `"bmp"`.
                 std::string model_filename;           // filename of the model file.

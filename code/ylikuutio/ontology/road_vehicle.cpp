@@ -1,6 +1,6 @@
 #include "road_vehicle.hpp"
 
-namespace ylikuutio
+namespace yli
 {
     namespace ontology
     {

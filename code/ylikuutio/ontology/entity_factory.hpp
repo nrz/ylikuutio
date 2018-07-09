@@ -21,7 +21,7 @@
 #include <memory>    // std::make_shared, std::shared_ptr
 #include <string>    // std::string
 
-namespace ylikuutio
+namespace yli
 {
     namespace ontology
     {
@@ -43,34 +43,34 @@ namespace ylikuutio
                 // destructor.
                 ~EntityFactory();
 
-                ylikuutio::ontology::Universe* get_universe() const;
+                yli::ontology::Universe* get_universe() const;
 
-                ylikuutio::ontology::Entity* create_Universe();
-                ylikuutio::ontology::Entity* create_World();
-                ylikuutio::ontology::Entity* create_Scene(ylikuutio::ontology::World* const world, const float water_level);
-                ylikuutio::ontology::Entity* create_Shader(const ShaderStruct& shader_struct);
-                ylikuutio::ontology::Entity* create_Material(const MaterialStruct& material_struct);
-                ylikuutio::ontology::Entity* create_Species(const SpeciesStruct& species_struct);
-                ylikuutio::ontology::Entity* create_Object(ObjectStruct& object_struct);
-                ylikuutio::ontology::Entity* create_Symbiosis(const SymbiosisStruct& symbiosis_struct);
-                ylikuutio::ontology::Entity* create_Holobiont(HolobiontStruct& object_struct);
-                ylikuutio::ontology::Entity* create_VectorFont(const VectorFontStruct& vector_font_struct);
-                ylikuutio::ontology::Entity* create_Text3D(Text3DStruct& text3D_struct);
-                ylikuutio::ontology::Entity* create_Font2D(
+                yli::ontology::Entity* create_Universe();
+                yli::ontology::Entity* create_World();
+                yli::ontology::Entity* create_Scene(yli::ontology::World* const world, const float water_level);
+                yli::ontology::Entity* create_Shader(const ShaderStruct& shader_struct);
+                yli::ontology::Entity* create_Material(const MaterialStruct& material_struct);
+                yli::ontology::Entity* create_Species(const SpeciesStruct& species_struct);
+                yli::ontology::Entity* create_Object(ObjectStruct& object_struct);
+                yli::ontology::Entity* create_Symbiosis(const SymbiosisStruct& symbiosis_struct);
+                yli::ontology::Entity* create_Holobiont(HolobiontStruct& object_struct);
+                yli::ontology::Entity* create_VectorFont(const VectorFontStruct& vector_font_struct);
+                yli::ontology::Entity* create_Text3D(Text3DStruct& text3D_struct);
+                yli::ontology::Entity* create_Font2D(
                         GLuint screen_width,
                         GLuint screen_height,
                         const std::string& texture_filename,
                         const std::string& font_texture_file_format);
-                ylikuutio::ontology::Entity* create_Camera(CameraStruct& camera_struct);
+                yli::ontology::Entity* create_Camera(CameraStruct& camera_struct);
 
                 friend class Universe;
 
             private:
                 // constructor.
                 // only `Universe` can create an `EntityFactory`.
-                EntityFactory(ylikuutio::ontology::Universe* const universe);
+                EntityFactory(yli::ontology::Universe* const universe);
 
-                ylikuutio::ontology::Universe* universe;
+                yli::ontology::Universe* universe;
         };
     }
 }

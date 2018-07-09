@@ -33,11 +33,11 @@
 #include <memory>    // std::make_shared, std::shared_ptr
 #include <string>    // std::string
 
-namespace ylikuutio
+namespace yli
 {
     namespace ontology
     {
-        EntityFactory::EntityFactory(ylikuutio::ontology::Universe* const universe)
+        EntityFactory::EntityFactory(yli::ontology::Universe* const universe)
         {
             // constructor.
             this->universe = universe;
@@ -48,68 +48,68 @@ namespace ylikuutio
             // destructor.
         }
 
-        ylikuutio::ontology::Universe* EntityFactory::get_universe() const
+        yli::ontology::Universe* EntityFactory::get_universe() const
         {
             return this->universe;
         }
 
-        ylikuutio::ontology::Entity* EntityFactory::create_World()
+        yli::ontology::Entity* EntityFactory::create_World()
         {
-            return new ylikuutio::ontology::World(this->universe);
+            return new yli::ontology::World(this->universe);
         }
 
-        ylikuutio::ontology::Entity* EntityFactory::create_Scene(ylikuutio::ontology::World* const world, const float water_level)
+        yli::ontology::Entity* EntityFactory::create_Scene(yli::ontology::World* const world, const float water_level)
         {
-            return new ylikuutio::ontology::Scene(this->universe, world, water_level);
+            return new yli::ontology::Scene(this->universe, world, water_level);
         }
 
-        ylikuutio::ontology::Entity* EntityFactory::create_Shader(const ShaderStruct& shader_struct)
+        yli::ontology::Entity* EntityFactory::create_Shader(const ShaderStruct& shader_struct)
         {
-            return new ylikuutio::ontology::Shader(this->universe, shader_struct);
+            return new yli::ontology::Shader(this->universe, shader_struct);
         }
 
-        ylikuutio::ontology::Entity* EntityFactory::create_Material(const MaterialStruct& material_struct)
+        yli::ontology::Entity* EntityFactory::create_Material(const MaterialStruct& material_struct)
         {
-            return new ylikuutio::ontology::Material(this->universe, material_struct);
+            return new yli::ontology::Material(this->universe, material_struct);
         }
 
-        ylikuutio::ontology::Entity* EntityFactory::create_Species(const SpeciesStruct& species_struct)
+        yli::ontology::Entity* EntityFactory::create_Species(const SpeciesStruct& species_struct)
         {
-            return new ylikuutio::ontology::Species(this->universe, species_struct);
+            return new yli::ontology::Species(this->universe, species_struct);
         }
 
-        ylikuutio::ontology::Entity* EntityFactory::create_Object(ObjectStruct& object_struct)
+        yli::ontology::Entity* EntityFactory::create_Object(ObjectStruct& object_struct)
         {
-            return new ylikuutio::ontology::Object(this->universe, object_struct);
+            return new yli::ontology::Object(this->universe, object_struct);
         }
 
-        ylikuutio::ontology::Entity* EntityFactory::create_Symbiosis(const SymbiosisStruct& symbiosis_struct)
+        yli::ontology::Entity* EntityFactory::create_Symbiosis(const SymbiosisStruct& symbiosis_struct)
         {
-            return new ylikuutio::ontology::Symbiosis(this->universe, symbiosis_struct);
+            return new yli::ontology::Symbiosis(this->universe, symbiosis_struct);
         }
 
-        ylikuutio::ontology::Entity* EntityFactory::create_Holobiont(HolobiontStruct& holobiont_struct)
+        yli::ontology::Entity* EntityFactory::create_Holobiont(HolobiontStruct& holobiont_struct)
         {
-            return new ylikuutio::ontology::Holobiont(this->universe, holobiont_struct);
+            return new yli::ontology::Holobiont(this->universe, holobiont_struct);
         }
 
-        ylikuutio::ontology::Entity* EntityFactory::create_VectorFont(const VectorFontStruct& vector_font_struct)
+        yli::ontology::Entity* EntityFactory::create_VectorFont(const VectorFontStruct& vector_font_struct)
         {
-            return new ylikuutio::ontology::VectorFont(this->universe, vector_font_struct);
+            return new yli::ontology::VectorFont(this->universe, vector_font_struct);
         }
 
-        ylikuutio::ontology::Entity* EntityFactory::create_Text3D(Text3DStruct& text3D_struct)
+        yli::ontology::Entity* EntityFactory::create_Text3D(Text3DStruct& text3D_struct)
         {
-            return new ylikuutio::ontology::Text3D(this->universe, text3D_struct);
+            return new yli::ontology::Text3D(this->universe, text3D_struct);
         }
 
-        ylikuutio::ontology::Entity* EntityFactory::create_Font2D(
+        yli::ontology::Entity* EntityFactory::create_Font2D(
                 GLuint screen_width,
                 GLuint screen_height,
                 const std::string& texture_filename,
                 const std::string& font_texture_file_format)
         {
-            return new ylikuutio::ontology::Font2D(
+            return new yli::ontology::Font2D(
                     this->universe,
                     universe->get_window_width(),
                     universe->get_window_height(),
@@ -117,9 +117,9 @@ namespace ylikuutio
                     font_texture_file_format.c_str());
         }
 
-        ylikuutio::ontology::Entity* EntityFactory::create_Camera(CameraStruct& camera_struct)
+        yli::ontology::Entity* EntityFactory::create_Camera(CameraStruct& camera_struct)
         {
-            return new ylikuutio::ontology::Camera(this->universe, camera_struct);
+            return new yli::ontology::Camera(this->universe, camera_struct);
         }
     }
 }

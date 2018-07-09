@@ -22,14 +22,14 @@
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <stdint.h> // uint32_t etc.
 
-namespace ylikuutio
+namespace yli
 {
     namespace ontology
     {
-        void SymbiontMaterial::bind(ylikuutio::ontology::SymbiontSpecies* const symbiont_species)
+        void SymbiontMaterial::bind(yli::ontology::SymbiontSpecies* const symbiont_species)
         {
             // get `childID` from `SymbiontMaterial` and set pointer to `symbiont_species`.
-            hierarchy::bind_child_to_parent<ylikuutio::ontology::SymbiontSpecies*>(
+            hierarchy::bind_child_to_parent<yli::ontology::SymbiontSpecies*>(
                     symbiont_species,
                     this->symbiont_species_pointer_vector,
                     this->free_symbiont_speciesID_queue,
@@ -49,7 +49,7 @@ namespace ylikuutio
 
             // destroy all symbiont species of this symbiont material.
             std::cout << "All symbiont species of this symbiont material will be destroyed.\n";
-            hierarchy::delete_children<ylikuutio::ontology::SymbiontSpecies*>(this->symbiont_species_pointer_vector, &this->number_of_symbiont_species);
+            hierarchy::delete_children<yli::ontology::SymbiontSpecies*>(this->symbiont_species_pointer_vector, &this->number_of_symbiont_species);
 
             glDeleteTextures(1, &this->texture);
 
@@ -68,12 +68,12 @@ namespace ylikuutio
             glUniform1i(this->openGL_textureID, 0);
 
             // render this `SymbiontMaterial` by calling `render()` function of each `SymbiontSpecies`.
-            ylikuutio::ontology::render_children<ylikuutio::ontology::SymbiontSpecies*>(this->symbiont_species_pointer_vector);
+            yli::ontology::render_children<yli::ontology::SymbiontSpecies*>(this->symbiont_species_pointer_vector);
 
             this->postrender();
         }
 
-        ylikuutio::ontology::Entity* SymbiontMaterial::get_parent() const
+        yli::ontology::Entity* SymbiontMaterial::get_parent() const
         {
             return this->parent;
         }
@@ -88,7 +88,7 @@ namespace ylikuutio
             return -1;
         }
 
-        void SymbiontMaterial::set_symbiont_species_pointer(const int32_t childID, ylikuutio::ontology::SymbiontSpecies* const child_pointer)
+        void SymbiontMaterial::set_symbiont_species_pointer(const int32_t childID, yli::ontology::SymbiontSpecies* const child_pointer)
         {
             hierarchy::set_child_pointer(
                     childID, child_pointer,
@@ -102,8 +102,8 @@ namespace ylikuutio
             this->texture = loaders::load_FBX_texture(this->ofbx_texture);
 
             // Get a handle for our "myTextureSampler" uniform.
-            ylikuutio::ontology::Symbiosis* symbiosis = static_cast<ylikuutio::ontology::Symbiosis*>(this->parent);
-            ylikuutio::ontology::Shader* shader = static_cast<ylikuutio::ontology::Shader*>(symbiosis->get_parent());
+            yli::ontology::Symbiosis* symbiosis = static_cast<yli::ontology::Symbiosis*>(this->parent);
+            yli::ontology::Shader* shader = static_cast<yli::ontology::Shader*>(symbiosis->get_parent());
             this->openGL_textureID = glGetUniformLocation(shader->get_programID(), "myTextureSampler");
         }
 

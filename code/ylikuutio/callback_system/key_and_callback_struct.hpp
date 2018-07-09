@@ -4,7 +4,7 @@
 // Include standard headers
 #include <stdint.h>      // uint32_t etc.
 
-namespace ylikuutio
+namespace yli
 {
     namespace callback_system
     {
@@ -15,7 +15,7 @@ namespace ylikuutio
 typedef struct
 {
     uint32_t keycode;
-    ylikuutio::callback_system::CallbackEngine* callback_engine;
+    yli::callback_system::CallbackEngine* callback_engine;
 } KeyAndCallbackStruct;
 
 #endif

@@ -17,7 +17,7 @@
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <string>   // std::string
 
-namespace ylikuutio
+namespace yli
 {
     namespace ontology
     {
@@ -26,9 +26,9 @@ namespace ylikuutio
         void Object::bind_to_parent()
         {
             // get `childID` from `Species` or `Text3D` and set pointer to this `Object`.
-            ylikuutio::ontology::Model* glyph_parent_model = this->glyph_parent;
-            ylikuutio::ontology::Model* species_parent_model = this->species_parent;
-            ylikuutio::ontology::Model* parent_model = (this->is_character ? glyph_parent_model : species_parent_model);
+            yli::ontology::Model* glyph_parent_model = this->glyph_parent;
+            yli::ontology::Model* species_parent_model = this->species_parent;
+            yli::ontology::Model* parent_model = (this->is_character ? glyph_parent_model : species_parent_model);
             parent_model->bind(this);
         }
 
@@ -37,20 +37,20 @@ namespace ylikuutio
             // this method sets pointer to this `Object` to nullptr, sets `parent` according to the input,
             // and requests a new `childID` from the new `Species` or from the new `Glyph`.
 
-            ylikuutio::ontology::Model* glyph_parent_model = this->glyph_parent;
-            ylikuutio::ontology::Model* species_parent_model = this->species_parent;
-            ylikuutio::ontology::Model* parent_model = (this->is_character ? glyph_parent_model : species_parent_model);
+            yli::ontology::Model* glyph_parent_model = this->glyph_parent;
+            yli::ontology::Model* species_parent_model = this->species_parent;
+            yli::ontology::Model* parent_model = (this->is_character ? glyph_parent_model : species_parent_model);
 
             // unbind from the old parent `Model`.
             parent_model->unbind(this->childID);
 
             if (this->is_character)
             {
-                this->glyph_parent = static_cast<ylikuutio::ontology::Glyph*>(new_parent);
+                this->glyph_parent = static_cast<yli::ontology::Glyph*>(new_parent);
             }
             else
             {
-                this->species_parent = static_cast<ylikuutio::ontology::Species*>(new_parent);
+                this->species_parent = static_cast<yli::ontology::Species*>(new_parent);
             }
 
             // get `childID` from `Model` and set pointer to this `Object`.
@@ -85,18 +85,18 @@ namespace ylikuutio
 
                 if (this->is_character)
                 {
-                    this->render_this_object(static_cast<ylikuutio::ontology::Shader*>(this->glyph_parent->get_parent()->get_parent()->get_parent()));
+                    this->render_this_object(static_cast<yli::ontology::Shader*>(this->glyph_parent->get_parent()->get_parent()->get_parent()));
                 }
                 else
                 {
-                    this->render_this_object(static_cast<ylikuutio::ontology::Shader*>(this->species_parent->get_parent()->get_parent()));
+                    this->render_this_object(static_cast<yli::ontology::Shader*>(this->species_parent->get_parent()->get_parent()));
                 }
 
                 this->postrender();
             }
         }
 
-        void Object::render_this_object(ylikuutio::ontology::Shader* const shader_pointer)
+        void Object::render_this_object(yli::ontology::Shader* const shader_pointer)
         {
             if (!this->has_entered)
             {
@@ -147,9 +147,9 @@ namespace ylikuutio
             glUniformMatrix4fv(shader_pointer->get_matrixID(), 1, GL_FALSE, &this->MVP_matrix[0][0]);
             glUniformMatrix4fv(shader_pointer->get_model_matrixID(), 1, GL_FALSE, &this->model_matrix[0][0]);
 
-            ylikuutio::ontology::Model* glyph_parent_model = this->glyph_parent;
-            ylikuutio::ontology::Model* species_parent_model = this->species_parent;
-            ylikuutio::ontology::Model* parent_model = (this->is_character ? glyph_parent_model : species_parent_model);
+            yli::ontology::Model* glyph_parent_model = this->glyph_parent;
+            yli::ontology::Model* species_parent_model = this->species_parent;
+            yli::ontology::Model* parent_model = (this->is_character ? glyph_parent_model : species_parent_model);
             GLuint vertexbuffer = parent_model->get_vertexbuffer();
             GLuint vertex_position_modelspaceID = parent_model->get_vertex_position_modelspaceID();
             GLuint uvbuffer = parent_model->get_uvbuffer();
@@ -204,7 +204,7 @@ namespace ylikuutio
                     );
         }
 
-        ylikuutio::ontology::Entity* Object::get_parent() const
+        yli::ontology::Entity* Object::get_parent() const
         {
             if (this->is_character)
             {

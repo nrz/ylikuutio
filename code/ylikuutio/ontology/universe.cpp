@@ -64,14 +64,14 @@
 #include <unordered_map> // std::unordered_map
 #include <vector>        // std::vector
 
-namespace ylikuutio
+namespace yli
 {
     namespace ontology
     {
-        void Universe::bind(ylikuutio::ontology::World* const world)
+        void Universe::bind(yli::ontology::World* const world)
         {
             // get `childID` from `Universe` and set pointer to `world`.
-            hierarchy::bind_child_to_parent<ylikuutio::ontology::World*>(
+            hierarchy::bind_child_to_parent<yli::ontology::World*>(
                     world,
                     this->world_pointer_vector,
                     this->free_worldID_queue,
@@ -85,7 +85,7 @@ namespace ylikuutio
 
             // destroy all worlds of this universe.
             std::cout << "All worlds of this universe will be destroyed.\n";
-            hierarchy::delete_children<ylikuutio::ontology::World*>(this->world_pointer_vector, &this->number_of_worlds);
+            hierarchy::delete_children<yli::ontology::World*>(this->world_pointer_vector, &this->number_of_worlds);
 
             std::cout << "The entity factory of this universe will be destroyed.\n";
             delete this->entity_factory;
@@ -109,7 +109,7 @@ namespace ylikuutio
             }
         }
 
-        void Universe::set_active_world(ylikuutio::ontology::World* const world)
+        void Universe::set_active_world(yli::ontology::World* const world)
         {
             this->active_world = world;
 
@@ -120,7 +120,7 @@ namespace ylikuutio
             }
         }
 
-        void Universe::set_active_scene(ylikuutio::ontology::Scene* const scene)
+        void Universe::set_active_scene(yli::ontology::Scene* const scene)
         {
             if (this->active_world == nullptr)
             {
@@ -142,12 +142,12 @@ namespace ylikuutio
             return this->number_of_worlds;
         }
 
-        ylikuutio::ontology::World* Universe::get_active_world() const
+        yli::ontology::World* Universe::get_active_world() const
         {
             return this->active_world;
         }
 
-        ylikuutio::ontology::Entity* Universe::get_parent() const
+        yli::ontology::Entity* Universe::get_parent() const
         {
             // `Universe` has no parent.
             return nullptr;
@@ -228,7 +228,7 @@ namespace ylikuutio
             this->setting_master->set(setting_name, setting_any_value);
         }
 
-        ylikuutio::config::Setting* Universe::get(std::string key) const
+        yli::config::Setting* Universe::get(std::string key) const
         {
             return this->setting_master->get(key);
         }
@@ -238,7 +238,7 @@ namespace ylikuutio
             return this->entity_map.count(name) == 1;
         }
 
-        ylikuutio::ontology::Entity* Universe::get_entity(const std::string& name) const
+        yli::ontology::Entity* Universe::get_entity(const std::string& name) const
         {
             if (this->entity_map.count(name) != 1)
             {
@@ -267,7 +267,7 @@ namespace ylikuutio
             return entity_names;
         }
 
-        void Universe::add_entity(const std::string& name, ylikuutio::ontology::Entity* const entity)
+        void Universe::add_entity(const std::string& name, yli::ontology::Entity* const entity)
         {
             if (this->entity_map.count(name) == 0)
             {
@@ -286,7 +286,7 @@ namespace ylikuutio
             }
         }
 
-        ylikuutio::ontology::EntityFactory* Universe::get_entity_factory() const
+        yli::ontology::EntityFactory* Universe::get_entity_factory() const
         {
             return this->entity_factory;
         }
@@ -294,8 +294,8 @@ namespace ylikuutio
         // Public callbacks.
 
         std::shared_ptr<datatypes::AnyValue> Universe::delete_entity(
-                ylikuutio::console::Console* const console,
-                ylikuutio::ontology::Entity* const entity,
+                yli::console::Console* const console,
+                yli::ontology::Entity* const entity,
                 std::vector<std::string>& command_parameters)
         {
             if (console == nullptr || entity == nullptr)
@@ -303,14 +303,14 @@ namespace ylikuutio
                 return nullptr;
             }
 
-            ylikuutio::ontology::Universe* universe = dynamic_cast<ylikuutio::ontology::Universe*>(entity);
+            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
             if (universe == nullptr)
             {
                 return nullptr;
             }
 
-            ylikuutio::config::SettingMaster* setting_master = universe->setting_master;
+            yli::config::SettingMaster* setting_master = universe->setting_master;
 
             if (setting_master == nullptr)
             {
@@ -332,7 +332,7 @@ namespace ylikuutio
                     return nullptr;
                 }
 
-                ylikuutio::ontology::Entity* entity = universe->entity_map[name];
+                yli::ontology::Entity* entity = universe->entity_map[name];
                 universe->entity_map.erase(name);
 
                 if (entity == nullptr)
@@ -346,8 +346,8 @@ namespace ylikuutio
         }
 
         std::shared_ptr<datatypes::AnyValue> Universe::activate(
-                ylikuutio::console::Console* const console,
-                ylikuutio::ontology::Entity* const universe_entity,
+                yli::console::Console* const console,
+                yli::ontology::Entity* const universe_entity,
                 std::vector<std::string>& command_parameters)
         {
             // This function can be used to activate a `World` or a `Scene`.
@@ -359,14 +359,14 @@ namespace ylikuutio
                 return nullptr;
             }
 
-            ylikuutio::ontology::Universe* universe = dynamic_cast<ylikuutio::ontology::Universe*>(universe_entity);
+            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(universe_entity);
 
             if (universe == nullptr)
             {
                 return nullptr;
             }
 
-            ylikuutio::config::SettingMaster* setting_master = universe->setting_master;
+            yli::config::SettingMaster* setting_master = universe->setting_master;
 
             if (setting_master == nullptr)
             {
@@ -388,9 +388,9 @@ namespace ylikuutio
                     return nullptr;
                 }
 
-                ylikuutio::ontology::Entity* entity = universe->entity_map[name];
-                ylikuutio::ontology::World* world = dynamic_cast<ylikuutio::ontology::World*>(entity);
-                ylikuutio::ontology::Scene* scene = dynamic_cast<ylikuutio::ontology::Scene*>(entity);
+                yli::ontology::Entity* entity = universe->entity_map[name];
+                yli::ontology::World* world = dynamic_cast<yli::ontology::World*>(entity);
+                yli::ontology::Scene* scene = dynamic_cast<yli::ontology::Scene*>(entity);
 
                 if (world == nullptr && scene == nullptr)
                 {
@@ -413,8 +413,8 @@ namespace ylikuutio
         }
 
         std::shared_ptr<datatypes::AnyValue> Universe::info(
-                ylikuutio::console::Console* const console,
-                ylikuutio::ontology::Entity* const entity,
+                yli::console::Console* const console,
+                yli::ontology::Entity* const entity,
                 std::vector<std::string>& command_parameters)
         {
             if (console == nullptr || entity == nullptr)
@@ -422,7 +422,7 @@ namespace ylikuutio
                 return nullptr;
             }
 
-            ylikuutio::ontology::Universe* universe = dynamic_cast<ylikuutio::ontology::Universe*>(entity);
+            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
             if (universe == nullptr)
             {
@@ -444,7 +444,7 @@ namespace ylikuutio
                     return nullptr;
                 }
 
-                ylikuutio::ontology::Entity* entity = universe->entity_map[name];
+                yli::ontology::Entity* entity = universe->entity_map[name];
 
                 if (entity == nullptr)
                 {
@@ -484,12 +484,12 @@ namespace ylikuutio
 
         // Public callbacks end here.
 
-        ylikuutio::console::Console* Universe::get_console() const
+        yli::console::Console* Universe::get_console() const
         {
             return this->console_pointer;
         }
 
-        void Universe::set_console(ylikuutio::console::Console* console)
+        void Universe::set_console(yli::console::Console* console)
         {
             this->console_pointer = console;
         }
@@ -504,17 +504,17 @@ namespace ylikuutio
             this->planet_radius = planet_radius;
         }
 
-        void Universe::set_world_pointer(int32_t childID, ylikuutio::ontology::World* child_pointer)
+        void Universe::set_world_pointer(int32_t childID, yli::ontology::World* child_pointer)
         {
             hierarchy::set_child_pointer(childID, child_pointer, this->world_pointer_vector, this->free_worldID_queue, &this->number_of_worlds);
         }
 
-        ylikuutio::ontology::Species* Universe::get_terrain_species()
+        yli::ontology::Species* Universe::get_terrain_species()
         {
-            return static_cast<ylikuutio::ontology::Species*>(this->terrain_species);
+            return static_cast<yli::ontology::Species*>(this->terrain_species);
         }
 
-        void Universe::set_terrain_species(ylikuutio::ontology::Species* terrain_species)
+        void Universe::set_terrain_species(yli::ontology::Species* terrain_species)
         {
             this->terrain_species = terrain_species;
         }
@@ -564,8 +564,8 @@ namespace ylikuutio
             {
                 if (this->terrain_species != nullptr)
                 {
-                    GLfloat ground_y = ylikuutio::ontology::get_floor_level(
-                            static_cast<ylikuutio::ontology::Species*>(this->terrain_species),
+                    GLfloat ground_y = yli::ontology::get_floor_level(
+                            static_cast<yli::ontology::Species*>(this->terrain_species),
                             this->current_camera_cartesian_coordinates);
 
                     if (!std::isnan(ground_y) && this->current_camera_cartesian_coordinates.y < ground_y)

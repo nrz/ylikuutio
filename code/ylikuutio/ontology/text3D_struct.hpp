@@ -11,7 +11,7 @@
 #include <cmath>    // NAN, std::isnan, std::pow
 #include <string>   // std::string
 
-namespace ylikuutio
+namespace yli
 {
     namespace ontology
     {
@@ -30,7 +30,7 @@ typedef struct Text3DStruct
     {
         // constructor.
     }
-    ylikuutio::ontology::VectorFont* parent; // pointer to the parent `VectorFont`.
+    yli::ontology::VectorFont* parent; // pointer to the parent `VectorFont`.
     std::string text_string;
     const char* text_string_char;
     glm::vec3 original_scale_vector;      // original scale vector.

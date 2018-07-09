@@ -10,7 +10,7 @@
 // Include standard headers
 #include <string>   // std::string
 
-namespace ylikuutio
+namespace yli
 {
     namespace ontology
     {
@@ -25,7 +25,7 @@ typedef struct SymbiosisStruct
     {
         // constructor.
     }
-    ylikuutio::ontology::Shader* parent; // pointer to the `Scene` object.
+    yli::ontology::Shader* parent; // pointer to the `Scene` object.
 
     std::string model_file_format;    // type of the symbiosis model file.
     std::string model_filename;       // filename of the symbiosis model file.

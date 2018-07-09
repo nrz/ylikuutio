@@ -6,13 +6,13 @@
 // Include standard headers
 #include <string>   // std::string
 
-namespace ylikuutio
+namespace yli
 {
     namespace config
     {
         void Setting::bind_to_parent()
         {
-            hierarchy::bind_child_to_parent<ylikuutio::config::Setting*>(this, this->parent->setting_pointer_vector, this->parent->free_settingID_queue, &this->parent->number_of_settings);
+            hierarchy::bind_child_to_parent<yli::config::Setting*>(this, this->parent->setting_pointer_vector, this->parent->free_settingID_queue, &this->parent->number_of_settings);
         }
 
         Setting::Setting(const SettingStruct& setting_struct)

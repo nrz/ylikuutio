@@ -13,11 +13,11 @@
 // Include standard headers
 #include <cmath>    // NAN, std::isnan, std::pow
 
-namespace ylikuutio
+namespace yli
 {
     namespace geometry
     {
-        glm::vec2 get_intersection_point(const ylikuutio::geometry::LineSegment2D* const line_segment1, const ylikuutio::geometry::LineSegment2D* const line_segment2)
+        glm::vec2 get_intersection_point(const yli::geometry::LineSegment2D* const line_segment1, const yli::geometry::LineSegment2D* const line_segment2)
         {
             // See http://mathworld.wolfram.com/Line-LineIntersection.html
 
@@ -29,10 +29,10 @@ namespace ylikuutio
             glm::vec2 line_segment2_point1 = glm::vec2(line_segment2->x1, line_segment2->y1);
             glm::vec2 line_segment2_point2 = glm::vec2(line_segment2->x2, line_segment2->y2);
 
-            ylikuutio::geometry::Line2D line1 = ylikuutio::geometry::Line2D(line_segment1_point1, line_segment1_point2);
-            ylikuutio::geometry::Line2D line2 = ylikuutio::geometry::Line2D(line_segment2_point1, line_segment2_point2);
+            yli::geometry::Line2D line1 = yli::geometry::Line2D(line_segment1_point1, line_segment1_point2);
+            yli::geometry::Line2D line2 = yli::geometry::Line2D(line_segment2_point1, line_segment2_point2);
 
-            glm::vec2 potential_intersection_point = ylikuutio::geometry::get_intersection_point(&line1, &line2);
+            glm::vec2 potential_intersection_point = yli::geometry::get_intersection_point(&line1, &line2);
 
             glm::vec2 line_segment1_point_with_lower_x;
             glm::vec2 line_segment1_point_with_higher_x;

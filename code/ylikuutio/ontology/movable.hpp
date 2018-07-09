@@ -20,17 +20,17 @@
 
 // `Movable` is a mixin class, not intended to be instantiated.
 
-namespace ylikuutio
+namespace yli
 {
     namespace ontology
     {
         class Universe;
 
-        class Movable: public ylikuutio::ontology::Entity
+        class Movable: public yli::ontology::Entity
         {
             public:
                 // constructor.
-                Movable(ylikuutio::ontology::Universe* const universe, glm::vec3& cartesian_coordinates)
+                Movable(yli::ontology::Universe* const universe, glm::vec3& cartesian_coordinates)
                     : Entity(universe)
                 {
                     // constructor.
@@ -53,48 +53,48 @@ namespace ylikuutio
                     SettingStruct cartesian_coordinates_setting_struct(std::make_shared<datatypes::AnyValue>(new glm::vec3(float_x, float_y, float_z)));
                     cartesian_coordinates_setting_struct.name = "cartesian_coordinates";
                     cartesian_coordinates_setting_struct.setting_master = this->setting_master;
-                    cartesian_coordinates_setting_struct.activate_callback = &ylikuutio::config::SettingMaster::activate_cartesian_coordinates;
-                    cartesian_coordinates_setting_struct.read_callback = &ylikuutio::config::SettingMaster::read_cartesian_coordinates;
+                    cartesian_coordinates_setting_struct.activate_callback = &yli::config::SettingMaster::activate_cartesian_coordinates;
+                    cartesian_coordinates_setting_struct.read_callback = &yli::config::SettingMaster::read_cartesian_coordinates;
                     cartesian_coordinates_setting_struct.should_ylikuutio_call_activate_callback_now = true;
-                    std::cout << "Executing `new ylikuutio::config::Setting(cartesian_coordinates_setting_struct);` ...\n";
-                    new ylikuutio::config::Setting(cartesian_coordinates_setting_struct);
+                    std::cout << "Executing `new yli::config::Setting(cartesian_coordinates_setting_struct);` ...\n";
+                    new yli::config::Setting(cartesian_coordinates_setting_struct);
 
                     SettingStruct x_setting_struct(std::make_shared<datatypes::AnyValue>(float_x));
                     x_setting_struct.name = "x";
                     x_setting_struct.setting_master = this->setting_master;
-                    x_setting_struct.activate_callback = &ylikuutio::config::SettingMaster::activate_x;
-                    x_setting_struct.read_callback = &ylikuutio::config::SettingMaster::read_x;
+                    x_setting_struct.activate_callback = &yli::config::SettingMaster::activate_x;
+                    x_setting_struct.read_callback = &yli::config::SettingMaster::read_x;
                     x_setting_struct.should_ylikuutio_call_activate_callback_now = true;
-                    std::cout << "Executing `new ylikuutio::config::Setting(x_setting_struct);` ...\n";
-                    new ylikuutio::config::Setting(x_setting_struct);
+                    std::cout << "Executing `new yli::config::Setting(x_setting_struct);` ...\n";
+                    new yli::config::Setting(x_setting_struct);
 
                     SettingStruct y_setting_struct(std::make_shared<datatypes::AnyValue>(float_y));
                     y_setting_struct.name = "y";
                     y_setting_struct.setting_master = this->setting_master;
-                    y_setting_struct.activate_callback = &ylikuutio::config::SettingMaster::activate_y;
-                    y_setting_struct.read_callback = &ylikuutio::config::SettingMaster::read_y;
+                    y_setting_struct.activate_callback = &yli::config::SettingMaster::activate_y;
+                    y_setting_struct.read_callback = &yli::config::SettingMaster::read_y;
                     y_setting_struct.should_ylikuutio_call_activate_callback_now = true;
-                    std::cout << "Executing `new ylikuutio::config::Setting(y_setting_struct);` ...\n";
-                    new ylikuutio::config::Setting(y_setting_struct);
+                    std::cout << "Executing `new yli::config::Setting(y_setting_struct);` ...\n";
+                    new yli::config::Setting(y_setting_struct);
 
                     SettingStruct z_setting_struct(std::make_shared<datatypes::AnyValue>(float_z));
                     z_setting_struct.name = "z";
                     z_setting_struct.setting_master = this->setting_master;
-                    z_setting_struct.activate_callback = &ylikuutio::config::SettingMaster::activate_z;
-                    z_setting_struct.read_callback = &ylikuutio::config::SettingMaster::read_z;
+                    z_setting_struct.activate_callback = &yli::config::SettingMaster::activate_z;
+                    z_setting_struct.read_callback = &yli::config::SettingMaster::read_z;
                     z_setting_struct.should_ylikuutio_call_activate_callback_now = true;
-                    std::cout << "Executing `new ylikuutio::config::Setting(z_setting_struct);` ...\n";
-                    new ylikuutio::config::Setting(z_setting_struct);
+                    std::cout << "Executing `new yli::config::Setting(z_setting_struct);` ...\n";
+                    new yli::config::Setting(z_setting_struct);
 
                     this->can_be_erased = true;
                 }
 
                 // constructor.
-                Movable(ylikuutio::ontology::Universe* const universe, const SphericalCoordinatesStruct& spherical_coordinates)
+                Movable(yli::ontology::Universe* const universe, const SphericalCoordinatesStruct& spherical_coordinates)
                     : Entity(universe)
                 {
                     // constructor.
-                    this->setting_master = new ylikuutio::config::SettingMaster(this);
+                    this->setting_master = new yli::config::SettingMaster(this);
                     this->cartesian_coordinates = glm::vec3(NAN, NAN, NAN);
                     this->spherical_coordinates = spherical_coordinates;
                 }
@@ -117,46 +117,46 @@ namespace ylikuutio
                 // Command callbacks.
 
                 // Set target towards which to move.
-                static void set_dest(ylikuutio::ontology::Movable* const movable, const float x, const float y, const float z);
+                static void set_dest(yli::ontology::Movable* const movable, const float x, const float y, const float z);
 
                 // Set target towards which to move.
-                static void set_spherical_dest(ylikuutio::ontology::Movable* const movable, const float rho, const float theta, const float phi);
+                static void set_spherical_dest(yli::ontology::Movable* const movable, const float rho, const float theta, const float phi);
 
                 // Get x coordinate of `object`.
-                static float get_x(const ylikuutio::ontology::Movable* const movable);
+                static float get_x(const yli::ontology::Movable* const movable);
 
                 // Get y coordinate of `object`.
-                static float get_y(const ylikuutio::ontology::Movable* const movable);
+                static float get_y(const yli::ontology::Movable* const movable);
 
                 // Get z destination coordinate of `object`.
-                static float get_z(const ylikuutio::ontology::Movable* const movable);
+                static float get_z(const yli::ontology::Movable* const movable);
 
                 // Get rho coordinate of `object`.
-                static float get_rho(const ylikuutio::ontology::Movable* const movable);
+                static float get_rho(const yli::ontology::Movable* const movable);
 
                 // Get theta coordinate of `object`.
-                static float get_theta(const ylikuutio::ontology::Movable* const movable);
+                static float get_theta(const yli::ontology::Movable* const movable);
 
                 // Get phi destination coordinate of `object`.
-                static float get_phi(const ylikuutio::ontology::Movable* const movable);
+                static float get_phi(const yli::ontology::Movable* const movable);
 
                 // Get x destination coordinate of `object`.
-                static float get_dest_x(const ylikuutio::ontology::Movable* const movable);
+                static float get_dest_x(const yli::ontology::Movable* const movable);
 
                 // Get y destination coordinate of `object`.
-                static float get_dest_y(const ylikuutio::ontology::Movable* const movable);
+                static float get_dest_y(const yli::ontology::Movable* const movable);
 
                 // Get z coordinate of `object`.
-                static float get_dest_z(const ylikuutio::ontology::Movable* const movable);
+                static float get_dest_z(const yli::ontology::Movable* const movable);
 
                 // Get rho destination coordinate of `object`.
-                static float get_dest_rho(const ylikuutio::ontology::Movable* const movable);
+                static float get_dest_rho(const yli::ontology::Movable* const movable);
 
                 // Get theta destination coordinate of `object`.
-                static float get_dest_theta(const ylikuutio::ontology::Movable* const movable);
+                static float get_dest_theta(const yli::ontology::Movable* const movable);
 
                 // Get phi destination destination coordinate of `object`.
-                static float get_dest_phi(const ylikuutio::ontology::Movable* const movable);
+                static float get_dest_phi(const yli::ontology::Movable* const movable);
 
                 // Public callbacks end here.
 

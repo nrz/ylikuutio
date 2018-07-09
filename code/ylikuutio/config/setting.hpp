@@ -9,7 +9,7 @@
 #include <memory>   // std::make_shared, std::shared_ptr
 #include <string>   // std::string
 
-namespace ylikuutio
+namespace yli
 {
     namespace console
     {
@@ -17,7 +17,7 @@ namespace ylikuutio
     }
 }
 
-namespace ylikuutio
+namespace yli
 {
     namespace config
     {
@@ -35,7 +35,7 @@ namespace ylikuutio
                 std::string help();
 
                 friend SettingMaster;
-                friend ylikuutio::console::Console;
+                friend yli::console::Console;
 
                 template<class T1>
                     friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, int32_t* number_of_children);
@@ -56,9 +56,9 @@ namespace ylikuutio
                 // pointer to `ReadCallback` used to read the value. Leave to `nullptr` to read the value from `setting_value` of `class Setting`.
                 ReadCallback read_callback;
 
-                ylikuutio::config::SettingMaster* parent; // pointer to `SettingMaster`.
+                yli::config::SettingMaster* parent; // pointer to `SettingMaster`.
 
-                int32_t childID;                       // setting ID, returned by `ylikuutio::config::SettingMaster->get_settingID()`.
+                int32_t childID;                       // setting ID, returned by `yli::config::SettingMaster->get_settingID()`.
         };
     }
 }

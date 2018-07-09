@@ -12,7 +12,7 @@
 // Include standard headers
 #include <vector>   // std::vector
 
-namespace ylikuutio
+namespace yli
 {
     namespace geometry
     {
@@ -31,8 +31,8 @@ namespace ylikuutio
                 {
                 }
 
-                bool do_lines3D_intersect(const ylikuutio::geometry::Line3D* const line1, const ylikuutio::geometry::Line3D* const line2) const;
-                bool do_lines3D_intersect(const ylikuutio::geometry::Line3D* const line) const;
+                bool do_lines3D_intersect(const yli::geometry::Line3D* const line1, const yli::geometry::Line3D* const line2) const;
+                bool do_lines3D_intersect(const yli::geometry::Line3D* const line) const;
 
             private:
                 glm::vec3 vec3_point1;

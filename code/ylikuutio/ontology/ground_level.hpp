@@ -15,12 +15,12 @@
 #include <glm/glm.hpp> // glm
 #endif
 
-namespace ylikuutio
+namespace yli
 {
     namespace ontology
     {
-        GLfloat get_ground_level(ylikuutio::ontology::Species* const terrain_species, glm::vec3& position);
-        GLfloat get_floor_level(ylikuutio::ontology::Species* const terrain_species, glm::vec3& position);
+        GLfloat get_ground_level(yli::ontology::Species* const terrain_species, glm::vec3& position);
+        GLfloat get_floor_level(yli::ontology::Species* const terrain_species, glm::vec3& position);
     }
 }
 

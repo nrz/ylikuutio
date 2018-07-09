@@ -29,7 +29,7 @@
 #include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
 
-namespace ylikuutio
+namespace yli
 {
     namespace geometry
     {
@@ -58,7 +58,7 @@ namespace ylikuutio
             uint32_t image_height = transformation_struct.image_height;
             double sphere_radius = transformation_struct.sphere_radius;
             bool is_bilinear_interpolation_in_use = transformation_struct.is_bilinear_interpolation_in_use;
-            ylikuutio::geometry::SphericalTerrainStruct spherical_terrain_struct = transformation_struct.spherical_terrain_struct;
+            yli::geometry::SphericalTerrainStruct spherical_terrain_struct = transformation_struct.spherical_terrain_struct;
 
             // 3a. Transform spherical coordinates loaded from file (and computed this far as being in horizontal plane) to a curved surface.
             //
@@ -96,7 +96,7 @@ namespace ylikuutio
                     glm::vec3 spherical_terrain_vertex = temp_vertices[temp_vertices_i];
                     spherical_terrain_vertex.x = (GLfloat) current_longitude_in_degrees;
                     spherical_terrain_vertex.z = (GLfloat) current_latitude_in_degrees;
-                    temp_vertices[temp_vertices_i++] = ylikuutio::geometry::transform_planar_world_vertex_into_cartesian_vertex(spherical_terrain_vertex, sphere_radius);
+                    temp_vertices[temp_vertices_i++] = yli::geometry::transform_planar_world_vertex_into_cartesian_vertex(spherical_terrain_vertex, sphere_radius);
 
                     current_longitude_in_degrees += longitude_step_in_degrees;
                 }
@@ -130,7 +130,7 @@ namespace ylikuutio
                         glm::vec3 spherical_terrain_vertex = temp_vertices[temp_vertices_i];
                         spherical_terrain_vertex.x = (GLfloat) current_longitude_in_degrees;
                         spherical_terrain_vertex.z = (GLfloat) current_latitude_in_degrees;
-                        temp_vertices[temp_vertices_i++] = ylikuutio::geometry::transform_planar_world_vertex_into_cartesian_vertex(spherical_terrain_vertex, sphere_radius);
+                        temp_vertices[temp_vertices_i++] = yli::geometry::transform_planar_world_vertex_into_cartesian_vertex(spherical_terrain_vertex, sphere_radius);
 
                         current_longitude_in_degrees += longitude_step_in_degrees;
                     }

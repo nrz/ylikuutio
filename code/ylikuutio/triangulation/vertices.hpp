@@ -19,7 +19,7 @@
 #include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
 
-namespace ylikuutio
+namespace yli
 {
     namespace geometry
     {
@@ -35,7 +35,7 @@ namespace ylikuutio
                 std::vector<glm::vec3>& out_normals);
 
         bool define_vertices_UVs_and_normals(
-                const ylikuutio::geometry::TriangulateQuadsStruct triangulate_quads_struct,
+                const yli::geometry::TriangulateQuadsStruct triangulate_quads_struct,
                 std::vector<glm::vec3>& temp_vertices,
                 std::vector<glm::vec2>& temp_UVs,
                 std::vector<glm::vec3>& temp_normals,

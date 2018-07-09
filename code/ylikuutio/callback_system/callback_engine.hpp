@@ -17,7 +17,7 @@ typedef void (*AnyValueToVoidCallback)(datatypes::AnyValue);
 typedef datatypes::AnyValue (*VoidToAnyValueCallback)(void);
 typedef datatypes::AnyValue (*AnyValueToAnyValueCallback)(datatypes::AnyValue);
 
-namespace ylikuutio
+namespace yli
 {
     namespace callback_system
     {
@@ -67,9 +67,9 @@ namespace ylikuutio
 
             private:
                 // this method sets a callback object pointer.
-                void set_callback_object_pointer(const int32_t childID, ylikuutio::callback_system::CallbackObject* const child_pointer);
+                void set_callback_object_pointer(const int32_t childID, yli::callback_system::CallbackObject* const child_pointer);
 
-                std::vector<ylikuutio::callback_system::CallbackObject*> callback_object_pointer_vector;
+                std::vector<yli::callback_system::CallbackObject*> callback_object_pointer_vector;
                 std::queue<int32_t> free_callback_objectID_queue;
                 int32_t number_of_callback_objects;
 

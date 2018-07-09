@@ -12,20 +12,20 @@
 // `World` is just a collection of `Scene`s which share some common resources,
 // like `VectorFont`s.
 
-namespace ylikuutio
+namespace yli
 {
     namespace ontology
     {
         class Universe;
         class Scene;
 
-        class World: public ylikuutio::ontology::Entity
+        class World: public yli::ontology::Entity
         {
             public:
-                void bind(ylikuutio::ontology::Scene* const scene);
+                void bind(yli::ontology::Scene* const scene);
 
                 // constructor.
-                World(ylikuutio::ontology::Universe* const universe)
+                World(yli::ontology::Universe* const universe)
                     : Entity(universe)
                 {
                     this->parent = universe;
@@ -37,7 +37,7 @@ namespace ylikuutio
                     this->bind_to_parent();
 
                     this->child_vector_pointers_vector.push_back(&this->scene_pointer_vector);
-                    this->type = "ylikuutio::ontology::World*";
+                    this->type = "yli::ontology::World*";
 
                     this->can_be_erased = true;
                 }
@@ -49,14 +49,14 @@ namespace ylikuutio
                 void render();
 
                 // this method stes the active `Scene`.
-                void set_active_scene(ylikuutio::ontology::Scene* const scene);
+                void set_active_scene(yli::ontology::Scene* const scene);
 
-                ylikuutio::ontology::Scene* get_active_scene() const;
+                yli::ontology::Scene* get_active_scene() const;
 
                 // this method sets a `Scene` pointer.
-                void set_scene_pointer(const int32_t childID, ylikuutio::ontology::Scene* const child_pointer);
+                void set_scene_pointer(const int32_t childID, yli::ontology::Scene* const child_pointer);
 
-                ylikuutio::ontology::Entity* get_parent() const override;
+                yli::ontology::Entity* get_parent() const override;
                 int32_t get_number_of_children() const override;
                 int32_t get_number_of_descendants() const override;
 
@@ -66,13 +66,13 @@ namespace ylikuutio
             private:
                 void bind_to_parent();
 
-                ylikuutio::ontology::Universe* parent; // pointer to the `Universe`.
+                yli::ontology::Universe* parent; // pointer to the `Universe`.
 
-                std::vector<ylikuutio::ontology::Scene*> scene_pointer_vector;
+                std::vector<yli::ontology::Scene*> scene_pointer_vector;
                 std::queue<int32_t> free_sceneID_queue;
                 int32_t number_of_scenes;
 
-                ylikuutio::ontology::Scene* active_scene;
+                yli::ontology::Scene* active_scene;
         };
     }
 }

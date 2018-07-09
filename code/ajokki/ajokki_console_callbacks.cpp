@@ -8,7 +8,7 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
-namespace ylikuutio
+namespace yli
 {
     namespace console
     {
@@ -16,7 +16,7 @@ namespace ylikuutio
     }
 }
 
-namespace ylikuutio
+namespace yli
 {
     namespace ontology
     {
@@ -27,8 +27,8 @@ namespace ylikuutio
 namespace ajokki
 {
     std::shared_ptr<datatypes::AnyValue> version(
-            ylikuutio::console::Console* console,
-            ylikuutio::ontology::Entity*,
+            yli::console::Console* console,
+            yli::ontology::Entity*,
             std::vector<std::string>& command_parameters)
     {
         console->print_text("Ajokki 0.0.3 / Ylikuutio 0.0.3");
@@ -36,8 +36,8 @@ namespace ajokki
     }
 
     std::shared_ptr<datatypes::AnyValue> quit(
-            ylikuutio::console::Console*,
-            ylikuutio::ontology::Entity*,
+            yli::console::Console*,
+            yli::ontology::Entity*,
             std::vector<std::string>& command_parameters)
     {
         uint32_t exit_program_magic_number = EXIT_PROGRAM_MAGIC_NUMBER;
@@ -45,8 +45,8 @@ namespace ajokki
     }
 
     std::shared_ptr<datatypes::AnyValue> help(
-            ylikuutio::console::Console* console,
-            ylikuutio::ontology::Entity*,
+            yli::console::Console* console,
+            yli::ontology::Entity*,
             std::vector<std::string>& command_parameters)
     {
         console->print_help();

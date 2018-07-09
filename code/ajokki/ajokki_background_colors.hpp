@@ -1,7 +1,7 @@
 #ifndef __AJOKKI_BACKGROUND_COLORS_HPP_INCLUDED
 #define __AJOKKI_BACKGROUND_COLORS_HPP_INCLUDED
 
-namespace ylikuutio
+namespace yli
 {
     namespace config
     {
@@ -11,7 +11,7 @@ namespace ylikuutio
 
 namespace ajokki
 {
-    void set_background_colors(ylikuutio::config::SettingMaster* setting_master);
+    void set_background_colors(yli::config::SettingMaster* setting_master);
 }
 
 #endif

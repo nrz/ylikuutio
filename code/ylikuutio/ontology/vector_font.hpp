@@ -21,25 +21,25 @@
 #include <vector>        // std::vector
 #include <unordered_map> // std::unordered_map
 
-namespace ylikuutio
+namespace yli
 {
     namespace ontology
     {
         class Material;
         class Text3D;
 
-        class VectorFont: public ylikuutio::ontology::Entity
+        class VectorFont: public yli::ontology::Entity
         {
             public:
-                void bind_glyph(ylikuutio::ontology::Glyph* const glyph);
-                void bind_text3D(ylikuutio::ontology::Text3D* const text3D);
+                void bind_glyph(yli::ontology::Glyph* const glyph);
+                void bind_text3D(yli::ontology::Text3D* const text3D);
 
                 // this method sets pointer to this species to nullptr, sets `parent` according to the input, and requests a new `childID` from the new material.
-                void bind_to_new_parent(ylikuutio::ontology::Material* const new_material_pointer);
+                void bind_to_new_parent(yli::ontology::Material* const new_material_pointer);
 
                 // constructor.
                 // TODO: `VectorFont` constructor also creates each `Glyph` and binds them to the `VectorFont`.
-                VectorFont(ylikuutio::ontology::Universe* const universe, const VectorFontStruct& vector_font_struct)
+                VectorFont(yli::ontology::Universe* const universe, const VectorFontStruct& vector_font_struct)
                     : Entity(universe)
                 {
                     // constructor.
@@ -83,7 +83,7 @@ namespace ylikuutio
                             const char* unicode_char_pointer = this->unicode_strings.at(glyph_i).c_str();
                             const char* temp_unicode_char_pointer = unicode_char_pointer;
 
-                            int32_t unicode_value = ylikuutio::string::extract_unicode_value_from_string(temp_unicode_char_pointer);
+                            int32_t unicode_value = yli::string::extract_unicode_value_from_string(temp_unicode_char_pointer);
                             if (unicode_value >= 0xd800 && unicode_value <= 0xdfff)
                             {
                                 // invalid Unicode, skip to next `Glyph`.
@@ -96,13 +96,13 @@ namespace ylikuutio
                             glyph_struct.glyph_name_pointer = this->glyph_names.at(glyph_i).c_str();
                             glyph_struct.unicode_char_pointer = unicode_char_pointer;
                             glyph_struct.universe = universe;
-                            glyph_struct.shader_pointer = static_cast<ylikuutio::ontology::Shader*>(this->parent->get_parent());
+                            glyph_struct.shader_pointer = static_cast<yli::ontology::Shader*>(this->parent->get_parent());
                             glyph_struct.parent = this;
 
                             std::string glyph_name_string = glyph_struct.glyph_name_pointer;
                             std::string unicode_string = glyph_struct.unicode_char_pointer;
                             std::cout << "Creating Glyph \"" << glyph_name_string << "\", Unicode: \"" << unicode_string << "\"\n";
-                            ylikuutio::ontology::Glyph* glyph = new ylikuutio::ontology::Glyph(glyph_struct);
+                            yli::ontology::Glyph* glyph = new yli::ontology::Glyph(glyph_struct);
 
                             // so that each `Glyph` can be referred to,
                             // we need a hash map that points from Unicode string to `Glyph`.
@@ -112,7 +112,7 @@ namespace ylikuutio
 
                     this->child_vector_pointers_vector.push_back(&this->glyph_pointer_vector);
                     this->child_vector_pointers_vector.push_back(&this->text3D_pointer_vector);
-                    this->type = "ylikuutio::ontology::VectorFont*";
+                    this->type = "yli::ontology::VectorFont*";
 
                     this->can_be_erased = true;
                 }
@@ -122,18 +122,18 @@ namespace ylikuutio
                 virtual ~VectorFont();
 
                 // this method sets `Glyph` pointer.
-                void set_glyph_pointer(const int32_t childID, ylikuutio::ontology::Glyph* const child_pointer);
+                void set_glyph_pointer(const int32_t childID, yli::ontology::Glyph* const child_pointer);
 
                 // this method sets `Text3D` pointer.
-                void set_text3D_pointer(const int32_t childID, ylikuutio::ontology::Text3D* const child_pointer);
+                void set_text3D_pointer(const int32_t childID, yli::ontology::Text3D* const child_pointer);
 
                 // this method returns a pointer to `Glyph` that matches the given `unicode_value`,
                 // and `nullptr` if this `VectorFont` does not contain such a `Glyph`.
-                ylikuutio::ontology::Glyph* get_glyph_pointer(const int32_t unicode_value) const;
+                yli::ontology::Glyph* get_glyph_pointer(const int32_t unicode_value) const;
 
                 // The rest fields are created in the constructor.
 
-                ylikuutio::ontology::Material* parent; // pointer to `Material`.
+                yli::ontology::Material* parent; // pointer to `Material`.
 
                 template<class T1>
                     friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, int32_t* number_of_children);
@@ -148,7 +148,7 @@ namespace ylikuutio
                 // this method renders all `Glyph`s of this `VectorFont`.
                 void render();
 
-                ylikuutio::ontology::Entity* get_parent() const override;
+                yli::ontology::Entity* get_parent() const override;
                 int32_t get_number_of_children() const override;
                 int32_t get_number_of_descendants() const override;
 
@@ -164,14 +164,14 @@ namespace ylikuutio
                 std::vector<std::string> glyph_names;
                 std::vector<std::string> unicode_strings;
 
-                std::vector<ylikuutio::ontology::Glyph*> glyph_pointer_vector;
-                std::vector<ylikuutio::ontology::Text3D*> text3D_pointer_vector;
+                std::vector<yli::ontology::Glyph*> glyph_pointer_vector;
+                std::vector<yli::ontology::Text3D*> text3D_pointer_vector;
                 std::queue<int32_t> free_glyphID_queue;
                 std::queue<int32_t> free_text3D_ID_queue;
                 int32_t number_of_glyphs;
                 int32_t number_of_text3Ds;
 
-                std::unordered_map<int32_t, ylikuutio::ontology::Glyph*> unicode_glyph_map;
+                std::unordered_map<int32_t, yli::ontology::Glyph*> unicode_glyph_map;
         };
     }
 }

@@ -28,7 +28,7 @@
 #include <unordered_map> // std::unordered_map
 #include <vector>        // std::vector
 
-namespace ylikuutio
+namespace yli
 {
     namespace ontology
     {
@@ -47,8 +47,8 @@ typedef struct ConsoleStruct
     std::vector<KeyAndCallbackStruct>** current_keypress_callback_engine_vector_pointer_pointer;
     std::vector<KeyAndCallbackStruct>** current_keyrelease_callback_engine_vector_pointer_pointer;
     std::unordered_map<std::string, ConsoleCommandCallback>* command_callback_map_pointer;
-    ylikuutio::ontology::Universe* universe;
-    ylikuutio::ontology::Font2D* font2D_pointer;
+    yli::ontology::Universe* universe;
+    yli::ontology::Font2D* font2D_pointer;
 } ConsoleStruct;
 
 #endif

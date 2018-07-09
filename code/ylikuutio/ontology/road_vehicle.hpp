@@ -10,17 +10,17 @@
 // Include standard headers
 #include <memory> // std::make_shared, std::shared_ptr
 
-namespace ylikuutio
+namespace yli
 {
     namespace ontology
     {
         class Universe;
 
-        class RoadVehicle: public ylikuutio::ontology::Vehicle
+        class RoadVehicle: public yli::ontology::Vehicle
         {
             public:
                 // constructor.
-                RoadVehicle(ylikuutio::ontology::Universe* const universe, ObjectStruct& object_struct)
+                RoadVehicle(yli::ontology::Universe* const universe, ObjectStruct& object_struct)
                     : Vehicle(universe, object_struct)
                 {
                     // constructor.

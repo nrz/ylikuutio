@@ -12,7 +12,7 @@
 #include <unordered_map> // std::unordered_map
 #include <vector>   // std::vector
 
-namespace ylikuutio
+namespace yli
 {
     namespace callback_system
     {
@@ -34,7 +34,7 @@ namespace ylikuutio
                 return nullptr;
             }
 
-            ylikuutio::callback_system::CallbackParameter* callback_parameter = this->callback_parameter_pointer_vector.at(arg_i);
+            yli::callback_system::CallbackParameter* callback_parameter = this->callback_parameter_pointer_vector.at(arg_i);
 
             if (callback_parameter == nullptr)
             {
@@ -53,7 +53,7 @@ namespace ylikuutio
 
         void CallbackObject::bind_to_parent()
         {
-            hierarchy::bind_child_to_parent<ylikuutio::callback_system::CallbackObject*>(this, this->parent->callback_object_pointer_vector, this->parent->free_callback_objectID_queue, &this->parent->number_of_callback_objects);
+            hierarchy::bind_child_to_parent<yli::callback_system::CallbackObject*>(this, this->parent->callback_object_pointer_vector, this->parent->free_callback_objectID_queue, &this->parent->number_of_callback_objects);
         }
 
         void CallbackObject::set_new_callback(const InputParametersToAnyValueCallback callback)
@@ -61,7 +61,7 @@ namespace ylikuutio
             this->callback = callback;
         }
 
-        CallbackObject::CallbackObject(ylikuutio::callback_system::CallbackEngine* parent)
+        CallbackObject::CallbackObject(yli::callback_system::CallbackEngine* parent)
         {
             // constructor.
             this->childID = -1;
@@ -74,7 +74,7 @@ namespace ylikuutio
             this->bind_to_parent();
         }
 
-        CallbackObject::CallbackObject(const InputParametersToAnyValueCallback callback, ylikuutio::callback_system::CallbackEngine* parent)
+        CallbackObject::CallbackObject(const InputParametersToAnyValueCallback callback, yli::callback_system::CallbackEngine* parent)
         {
             // constructor.
             this->childID = -1;
@@ -99,7 +99,7 @@ namespace ylikuutio
             }
         }
 
-        void CallbackObject::set_callback_parameter_pointer(const int32_t childID, ylikuutio::callback_system::CallbackParameter* const child_pointer)
+        void CallbackObject::set_callback_parameter_pointer(const int32_t childID, yli::callback_system::CallbackParameter* const child_pointer)
         {
             this->callback_parameter_pointer_vector[childID] = child_pointer;
 

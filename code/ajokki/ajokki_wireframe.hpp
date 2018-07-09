@@ -1,7 +1,7 @@
 #ifndef __AJOKKI_WIREFRAME_HPP_INCLUDED
 #define __AJOKKI_WIREFRAME_HPP_INCLUDED
 
-namespace ylikuutio
+namespace yli
 {
     namespace config
     {
@@ -11,7 +11,7 @@ namespace ylikuutio
 
 namespace ajokki
 {
-    void set_wireframe(ylikuutio::config::SettingMaster* setting_master);
+    void set_wireframe(yli::config::SettingMaster* setting_master);
 }
 
 #endif

@@ -11,7 +11,7 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
-namespace ylikuutio
+namespace yli
 {
     namespace callback_system
     {
@@ -28,10 +28,10 @@ namespace ylikuutio
 
             // destroy all callback objects of this callback engine.
             std::cout << "All callback objects of this callback engine will be destroyed.\n";
-            hierarchy::delete_children<ylikuutio::callback_system::CallbackObject*>(this->callback_object_pointer_vector, &this->number_of_callback_objects);
+            hierarchy::delete_children<yli::callback_system::CallbackObject*>(this->callback_object_pointer_vector, &this->number_of_callback_objects);
         }
 
-        void CallbackEngine::set_callback_object_pointer(const int32_t childID, ylikuutio::callback_system::CallbackObject* const child_pointer)
+        void CallbackEngine::set_callback_object_pointer(const int32_t childID, yli::callback_system::CallbackObject* const child_pointer)
         {
             hierarchy::set_child_pointer(childID, child_pointer, this->callback_object_pointer_vector, this->free_callback_objectID_queue, &this->number_of_callback_objects);
         }
@@ -43,7 +43,7 @@ namespace ylikuutio
             // execute all callbacks.
             for (uint32_t child_i = 0; child_i < this->callback_object_pointer_vector.size(); child_i++)
             {
-                ylikuutio::callback_system::CallbackObject* callback_object_pointer = static_cast<ylikuutio::callback_system::CallbackObject*>(this->callback_object_pointer_vector[child_i]);
+                yli::callback_system::CallbackObject* callback_object_pointer = static_cast<yli::callback_system::CallbackObject*>(this->callback_object_pointer_vector[child_i]);
 
                 if (callback_object_pointer != nullptr)
                 {

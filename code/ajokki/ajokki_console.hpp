@@ -1,7 +1,7 @@
 #ifndef __AJOKKI_CONSOLE_HPP_INCLUDED
 #define __AJOKKI_CONSOLE_HPP_INCLUDED
 
-namespace ylikuutio
+namespace yli
 {
     namespace config
     {
@@ -11,7 +11,7 @@ namespace ylikuutio
 
 namespace ajokki
 {
-    void set_console(ylikuutio::config::SettingMaster* const setting_master);
+    void set_console(yli::config::SettingMaster* const setting_master);
 }
 
 #endif

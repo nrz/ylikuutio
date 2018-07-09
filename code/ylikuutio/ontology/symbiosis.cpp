@@ -32,26 +32,26 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
-namespace ylikuutio
+namespace yli
 {
     namespace ontology
     {
         class Holobiont;
 
-        void Symbiosis::bind_symbiont_material(ylikuutio::ontology::SymbiontMaterial* const symbiont_material)
+        void Symbiosis::bind_symbiont_material(yli::ontology::SymbiontMaterial* const symbiont_material)
         {
             // get `childID` from `Symbiosis` and set pointer to `symbiont_material`.
-            hierarchy::bind_child_to_parent<ylikuutio::ontology::SymbiontMaterial*>(
+            hierarchy::bind_child_to_parent<yli::ontology::SymbiontMaterial*>(
                     symbiont_material,
                     this->symbiont_material_pointer_vector,
                     this->free_symbiont_materialID_queue,
                     &this->number_of_symbiont_materials);
         }
 
-        void Symbiosis::bind_holobiont(ylikuutio::ontology::Holobiont* const holobiont)
+        void Symbiosis::bind_holobiont(yli::ontology::Holobiont* const holobiont)
         {
             // get `childID` from `Symbiosis` and set pointer to `holobiont`.
-            hierarchy::bind_child_to_parent<ylikuutio::ontology::Holobiont*>(
+            hierarchy::bind_child_to_parent<yli::ontology::Holobiont*>(
                     holobiont,
                     this->holobiont_pointer_vector,
                     this->free_holobiontID_queue,
@@ -60,7 +60,7 @@ namespace ylikuutio
 
         void Symbiosis::unbind_holobiont(const int32_t childID)
         {
-            ylikuutio::ontology::Holobiont* dummy_child_pointer = nullptr;
+            yli::ontology::Holobiont* dummy_child_pointer = nullptr;
             hierarchy::set_child_pointer(
                     childID,
                     dummy_child_pointer,
@@ -75,7 +75,7 @@ namespace ylikuutio
             this->parent->bind_symbiosis(this);
         }
 
-        void Symbiosis::bind_to_new_parent(ylikuutio::ontology::Shader* const new_shader_pointer)
+        void Symbiosis::bind_to_new_parent(yli::ontology::Shader* const new_shader_pointer)
         {
             // unbind from the old parent `Shader`.
             this->parent->unbind_symbiosis(this->childID);
@@ -92,11 +92,11 @@ namespace ylikuutio
 
             // destroy all `Holobiont`s of this `Symbiosis`.
             std::cout << "All holobionts of this symbiosis will be destroyed.\n";
-            hierarchy::delete_children<ylikuutio::ontology::Holobiont*>(this->holobiont_pointer_vector, &this->number_of_holobionts);
+            hierarchy::delete_children<yli::ontology::Holobiont*>(this->holobiont_pointer_vector, &this->number_of_holobionts);
 
             // destroy all `SymbiontMaterial`s of this `Symbiosis`.
             std::cout << "All symbiont materials of this symbiosis will be destroyed.\n";
-            hierarchy::delete_children<ylikuutio::ontology::SymbiontMaterial*>(this->symbiont_material_pointer_vector, &this->number_of_symbiont_materials);
+            hierarchy::delete_children<yli::ontology::SymbiontMaterial*>(this->symbiont_material_pointer_vector, &this->number_of_symbiont_materials);
 
             // set pointer to this `Symbiosis` to `nullptr`.
             this->parent->set_symbiosis_pointer(this->childID, nullptr);
@@ -107,12 +107,12 @@ namespace ylikuutio
             this->prerender();
 
             // render this `Symbiosis` by calling `render()` function of each `Holobiont`.
-            ylikuutio::ontology::render_children<ylikuutio::ontology::Holobiont*>(this->holobiont_pointer_vector);
+            yli::ontology::render_children<yli::ontology::Holobiont*>(this->holobiont_pointer_vector);
 
             this->postrender();
         }
 
-        ylikuutio::ontology::Entity* Symbiosis::get_parent() const
+        yli::ontology::Entity* Symbiosis::get_parent() const
         {
             return this->parent;
         }
@@ -132,7 +132,7 @@ namespace ylikuutio
             return this->model_file_format;
         }
 
-        void Symbiosis::set_symbiont_material_pointer(const int32_t childID, ylikuutio::ontology::SymbiontMaterial* const child_pointer)
+        void Symbiosis::set_symbiont_material_pointer(const int32_t childID, yli::ontology::SymbiontMaterial* const child_pointer)
         {
             hierarchy::set_child_pointer(
                     childID,
@@ -142,7 +142,7 @@ namespace ylikuutio
                     &this->number_of_symbiont_materials);
         }
 
-        void Symbiosis::set_holobiont_pointer(const int32_t childID, ylikuutio::ontology::Holobiont* const child_pointer)
+        void Symbiosis::set_holobiont_pointer(const int32_t childID, yli::ontology::Holobiont* const child_pointer)
         {
             hierarchy::set_child_pointer(
                     childID,
@@ -199,16 +199,16 @@ namespace ylikuutio
                         continue;
                     }
 
-                    std::cout << "Creating ylikuutio::ontology::SymbiontMaterial* based on ofbx::Texture* at 0x" << std::hex << (uint64_t) ofbx_texture << std::dec << " ...\n";
+                    std::cout << "Creating yli::ontology::SymbiontMaterial* based on ofbx::Texture* at 0x" << std::hex << (uint64_t) ofbx_texture << std::dec << " ...\n";
                     MaterialStruct material_struct;
                     material_struct.shader = this->parent;
                     material_struct.symbiosis = this;
                     material_struct.is_symbiont_material = true;
                     material_struct.ofbx_texture = ofbx_texture;
-                    ylikuutio::ontology::SymbiontMaterial* symbiont_material = new ylikuutio::ontology::SymbiontMaterial(this->universe, material_struct);
+                    yli::ontology::SymbiontMaterial* symbiont_material = new yli::ontology::SymbiontMaterial(this->universe, material_struct);
                     symbiont_material->load_texture();
 
-                    std::cout << "ylikuutio::ontology::SymbiontMaterial* successfully created.\n";
+                    std::cout << "yli::ontology::SymbiontMaterial* successfully created.\n";
 
                     // Create `SymbiontSpecies`s.
                     // Care only about `ofbx::Texture*`s which are DIFFUSE textures.
@@ -216,7 +216,7 @@ namespace ylikuutio
                     {
                         SpeciesStruct species_struct;
                         species_struct.is_symbiont_species = true;
-                        species_struct.scene = static_cast<ylikuutio::ontology::Scene*>(this->parent->get_parent());
+                        species_struct.scene = static_cast<yli::ontology::Scene*>(this->parent->get_parent());
                         species_struct.shader = this->parent;
                         species_struct.symbiont_material = symbiont_material;
                         species_struct.vertex_count = mesh_i < this->vertices.size() ? this->vertices.at(mesh_i).size() : 0;
@@ -225,15 +225,15 @@ namespace ylikuutio
                         species_struct.normals = mesh_i < this->normals.size() ? this->normals.at(mesh_i) : std::vector<glm::vec3>();
                         species_struct.light_position = this->light_position;
 
-                        std::cout << "Creating ylikuutio::ontology::SymbiontSpecies*, mesh index " << mesh_i << "...\n";
+                        std::cout << "Creating yli::ontology::SymbiontSpecies*, mesh index " << mesh_i << "...\n";
 
-                        ylikuutio::ontology::SymbiontSpecies* symbiont_species = new ylikuutio::ontology::SymbiontSpecies(this->universe, species_struct);
+                        yli::ontology::SymbiontSpecies* symbiont_species = new yli::ontology::SymbiontSpecies(this->universe, species_struct);
 
-                        std::cout << "ylikuutio::ontology::SymbiontSpecies*, mesh index " << mesh_i << " successfully created.\n";
+                        std::cout << "yli::ontology::SymbiontSpecies*, mesh index " << mesh_i << " successfully created.\n";
 
-                        std::cout << "storing ylikuutio::ontology::SymbiontMaterial* symbiont_material into vector with mesh_i " << mesh_i << " ...\n";
+                        std::cout << "storing yli::ontology::SymbiontMaterial* symbiont_material into vector with mesh_i " << mesh_i << " ...\n";
                         this->biontID_symbiont_material_vector.at(mesh_i) = symbiont_material;
-                        std::cout << "storing ylikuutio::ontology::SymbiontSpecies* symbiont_species into vector with mesh_i " << mesh_i << " ...\n";
+                        std::cout << "storing yli::ontology::SymbiontSpecies* symbiont_species into vector with mesh_i " << mesh_i << " ...\n";
                         this->biontID_symbiont_species_vector.at(mesh_i) = symbiont_species;
 
                         std::cout << "Success.\n";
@@ -245,7 +245,7 @@ namespace ylikuutio
             }
         }
 
-        ylikuutio::ontology::SymbiontSpecies* Symbiosis::get_symbiont_species(const int32_t biontID) const
+        yli::ontology::SymbiontSpecies* Symbiosis::get_symbiont_species(const int32_t biontID) const
         {
             return this->biontID_symbiont_species_vector.at(biontID);
         }

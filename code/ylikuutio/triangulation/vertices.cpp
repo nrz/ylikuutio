@@ -18,7 +18,7 @@
 #include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
 
-namespace ylikuutio
+namespace yli
 {
     namespace geometry
     {
@@ -47,7 +47,7 @@ namespace ylikuutio
         }
 
         bool define_vertices_UVs_and_normals(
-                const ylikuutio::geometry::TriangulateQuadsStruct triangulate_quads_struct,
+                const yli::geometry::TriangulateQuadsStruct triangulate_quads_struct,
                 std::vector<glm::vec3>& temp_vertices,
                 std::vector<glm::vec2>& temp_UVs,
                 std::vector<glm::vec3>& temp_normals,
@@ -63,7 +63,7 @@ namespace ylikuutio
                 const bool is_southwest_northeast_edges_in_use,
                 const bool is_southeast_northwest_edges_in_use)
         {
-            // 6. Loop through all vertices and `ylikuutio::geometry::output_triangle_vertices`.
+            // 6. Loop through all vertices and `yli::geometry::output_triangle_vertices`.
 
             if (actual_image_width < 2 || actual_image_height < 2)
             {
@@ -161,7 +161,7 @@ namespace ylikuutio
                             // uv_index[2] = static_cast<GLuint>(southwest_y(x, z, input_vertex_pointer, actual_image_width));
                         }
 
-                        ylikuutio::geometry::output_triangle_vertices(
+                        yli::geometry::output_triangle_vertices(
                                 temp_vertices,
                                 temp_UVs,
                                 temp_normals,
@@ -195,7 +195,7 @@ namespace ylikuutio
                             // uv_index[2] = static_cast<GLuint>(northwest_y(x, z, input_vertex_pointer, actual_image_width));
                         }
 
-                        ylikuutio::geometry::output_triangle_vertices(
+                        yli::geometry::output_triangle_vertices(
                                 temp_vertices,
                                 temp_UVs,
                                 temp_normals,
@@ -229,7 +229,7 @@ namespace ylikuutio
                             // uv_index[2] = static_cast<GLuint>(northeast_y(x, z, input_vertex_pointer, actual_image_width));
                         }
 
-                        ylikuutio::geometry::output_triangle_vertices(
+                        yli::geometry::output_triangle_vertices(
                                 temp_vertices,
                                 temp_UVs,
                                 temp_normals,
@@ -263,7 +263,7 @@ namespace ylikuutio
                             // uv_index[2] = static_cast<GLuint>(southeast_y(x, z, input_vertex_pointer, actual_image_width));
                         }
 
-                        ylikuutio::geometry::output_triangle_vertices(
+                        yli::geometry::output_triangle_vertices(
                                 temp_vertices,
                                 temp_UVs,
                                 temp_normals,
@@ -345,7 +345,7 @@ namespace ylikuutio
                             // uv_index[2] = static_cast<GLuint>(northeast_y(x, z, input_vertex_pointer, actual_image_width));
                         }
 
-                        ylikuutio::geometry::output_triangle_vertices(
+                        yli::geometry::output_triangle_vertices(
                                 temp_vertices,
                                 temp_UVs,
                                 temp_normals,
@@ -379,7 +379,7 @@ namespace ylikuutio
                             // uv_index[2] = static_cast<GLuint>(southwest_y(x, z, input_vertex_pointer, actual_image_width));
                         }
 
-                        ylikuutio::geometry::output_triangle_vertices(
+                        yli::geometry::output_triangle_vertices(
                                 temp_vertices,
                                 temp_UVs,
                                 temp_normals,
@@ -459,7 +459,7 @@ namespace ylikuutio
                             // uv_index[2] = static_cast<GLuint>(southeast_y(x, z, input_vertex_pointer, actual_image_width));
                         }
 
-                        ylikuutio::geometry::output_triangle_vertices(
+                        yli::geometry::output_triangle_vertices(
                                 temp_vertices,
                                 temp_UVs,
                                 temp_normals,
@@ -493,7 +493,7 @@ namespace ylikuutio
                             // uv_index[2] = static_cast<GLuint>(northwest_y(x, z, input_vertex_pointer, actual_image_width));
                         }
 
-                        ylikuutio::geometry::output_triangle_vertices(
+                        yli::geometry::output_triangle_vertices(
                                 temp_vertices,
                                 temp_UVs,
                                 temp_normals,

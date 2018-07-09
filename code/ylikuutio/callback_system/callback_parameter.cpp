@@ -8,13 +8,13 @@
 #include <memory>   // std::make_shared, std::shared_ptr
 #include <string>   // std::string
 
-namespace ylikuutio
+namespace yli
 {
     namespace callback_system
     {
         void CallbackParameter::bind_to_parent()
         {
-            hierarchy::bind_child_to_parent<ylikuutio::callback_system::CallbackParameter*>(this, this->parent->callback_parameter_pointer_vector, this->parent->free_callback_parameterID_queue, &this->parent->number_of_callback_parameters);
+            hierarchy::bind_child_to_parent<yli::callback_system::CallbackParameter*>(this, this->parent->callback_parameter_pointer_vector, this->parent->free_callback_parameterID_queue, &this->parent->number_of_callback_parameters);
 
             if (!this->name.empty())
             {
@@ -23,7 +23,7 @@ namespace ylikuutio
             }
         }
 
-        CallbackParameter::CallbackParameter(const std::string& name, std::shared_ptr<datatypes::AnyValue> any_value, const bool is_reference, ylikuutio::callback_system::CallbackObject* const parent)
+        CallbackParameter::CallbackParameter(const std::string& name, std::shared_ptr<datatypes::AnyValue> any_value, const bool is_reference, yli::callback_system::CallbackObject* const parent)
         {
             // constructor.
             this->name = name;

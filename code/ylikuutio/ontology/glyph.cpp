@@ -10,7 +10,7 @@
 #include <stdint.h> // uint32_t etc.
 #include <iostream> // std::cout, std::cin, std::cerr
 
-namespace ylikuutio
+namespace yli
 {
     namespace ontology
     {
@@ -33,7 +33,7 @@ namespace ylikuutio
             this->parent->set_glyph_pointer(this->childID, nullptr);
         }
 
-        ylikuutio::ontology::Entity* Glyph::get_parent() const
+        yli::ontology::Entity* Glyph::get_parent() const
         {
             return this->parent;
         }
@@ -43,12 +43,12 @@ namespace ylikuutio
             this->prerender();
 
             // render this `Glyph`.
-            ylikuutio::ontology::render_species_or_glyph<ylikuutio::ontology::Glyph*>(this);
+            yli::ontology::render_species_or_glyph<yli::ontology::Glyph*>(this);
 
             this->postrender();
         }
 
-        void Glyph::set_object_pointer(const int32_t childID, ylikuutio::ontology::Object* const child_pointer)
+        void Glyph::set_object_pointer(const int32_t childID, yli::ontology::Object* const child_pointer)
         {
             hierarchy::set_child_pointer(childID, child_pointer, this->object_pointer_vector, this->free_objectID_queue, &this->number_of_objects);
         }

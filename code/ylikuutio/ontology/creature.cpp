@@ -1,6 +1,6 @@
 #include "creature.hpp"
 
-namespace ylikuutio
+namespace yli
 {
     namespace ontology
     {

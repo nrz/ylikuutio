@@ -6,7 +6,7 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
-namespace ylikuutio
+namespace yli
 {
     namespace console
     {
@@ -19,7 +19,7 @@ namespace datatypes
     class AnyValue;
 }
 
-namespace ylikuutio
+namespace yli
 {
     namespace ontology
     {
@@ -30,18 +30,18 @@ namespace ylikuutio
 namespace ajokki
 {
     std::shared_ptr<datatypes::AnyValue> version(
-            ylikuutio::console::Console* console,
-            ylikuutio::ontology::Entity*,
+            yli::console::Console* console,
+            yli::ontology::Entity*,
             std::vector<std::string>& command_parameters);
 
     std::shared_ptr<datatypes::AnyValue> quit(
-            ylikuutio::console::Console*,
-            ylikuutio::ontology::Entity*,
+            yli::console::Console*,
+            yli::ontology::Entity*,
             std::vector<std::string>& command_parameters);
 
     std::shared_ptr<datatypes::AnyValue> help(
-            ylikuutio::console::Console*,
-            ylikuutio::ontology::Entity*,
+            yli::console::Console*,
+            yli::ontology::Entity*,
             std::vector<std::string>& command_parameters);
 }
 

@@ -24,12 +24,12 @@
 #include <math.h> // fmax
 #include <vector> // std::vector
 
-namespace ylikuutio
+namespace yli
 {
     namespace ontology
     {
         GLfloat get_ground_level(
-                ylikuutio::ontology::Species* const terrain_species,
+                yli::ontology::Species* const terrain_species,
                 glm::vec3& position)
         {
             if (!terrain_species->is_terrain)
@@ -96,7 +96,7 @@ namespace ylikuutio
         }
 
         GLfloat get_floor_level(
-                ylikuutio::ontology::Species* const terrain_species,
+                yli::ontology::Species* const terrain_species,
                 glm::vec3& position)
         {
             if (!terrain_species->is_terrain)

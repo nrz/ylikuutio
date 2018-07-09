@@ -23,24 +23,24 @@
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <stdint.h> // uint32_t etc.
 
-namespace ylikuutio
+namespace yli
 {
     namespace ontology
     {
-        void Material::bind_species(ylikuutio::ontology::Species* const species)
+        void Material::bind_species(yli::ontology::Species* const species)
         {
             // get `childID` from `Material` and set pointer to `species`.
-            hierarchy::bind_child_to_parent<ylikuutio::ontology::Species*>(
+            hierarchy::bind_child_to_parent<yli::ontology::Species*>(
                     species,
                     this->species_pointer_vector,
                     this->free_speciesID_queue,
                     &this->number_of_species);
         }
 
-        void Material::bind_vector_font(ylikuutio::ontology::VectorFont* const vector_font)
+        void Material::bind_vector_font(yli::ontology::VectorFont* const vector_font)
         {
             // get `childID` from `Material` and set pointer to `vector_font`.
-            hierarchy::bind_child_to_parent<ylikuutio::ontology::VectorFont*>(
+            hierarchy::bind_child_to_parent<yli::ontology::VectorFont*>(
                     vector_font,
                     this->vector_font_pointer_vector,
                     this->free_vector_fontID_queue,
@@ -59,7 +59,7 @@ namespace ylikuutio
 
         void Material::unbind_species(const int32_t childID)
         {
-            ylikuutio::ontology::Species* dummy_child_pointer = nullptr;
+            yli::ontology::Species* dummy_child_pointer = nullptr;
             hierarchy::set_child_pointer(
                     childID,
                     dummy_child_pointer,
@@ -70,7 +70,7 @@ namespace ylikuutio
 
         void Material::unbind_vector_font(const int32_t childID)
         {
-            ylikuutio::ontology::VectorFont* dummy_child_pointer = nullptr;
+            yli::ontology::VectorFont* dummy_child_pointer = nullptr;
             hierarchy::set_child_pointer(
                     childID,
                     dummy_child_pointer,
@@ -105,11 +105,11 @@ namespace ylikuutio
 
                 // destroy all species of this material.
                 std::cout << "All species of this material will be destroyed.\n";
-                hierarchy::delete_children<ylikuutio::ontology::Species*>(this->species_pointer_vector, &this->number_of_species);
+                hierarchy::delete_children<yli::ontology::Species*>(this->species_pointer_vector, &this->number_of_species);
 
                 // destroy all fonts of this material.
                 std::cout << "All fonts of this material will be destroyed.\n";
-                hierarchy::delete_children<ylikuutio::ontology::VectorFont*>(this->vector_font_pointer_vector, &this->number_of_vector_fonts);
+                hierarchy::delete_children<yli::ontology::VectorFont*>(this->vector_font_pointer_vector, &this->number_of_vector_fonts);
 
                 // destroy all chunk masters of this material.
                 std::cout << "All chunk masters of this material will be destroyed.\n";
@@ -133,14 +133,14 @@ namespace ylikuutio
             glUniform1i(this->openGL_textureID, 0);
 
             // render this `Material` by calling `render()` function of each `Species`, each `VectorFont`, and each `ChunkMaster`.
-            ylikuutio::ontology::render_children<ylikuutio::ontology::Species*>(this->species_pointer_vector);
-            ylikuutio::ontology::render_children<ylikuutio::ontology::VectorFont*>(this->vector_font_pointer_vector);
-            ylikuutio::ontology::render_children<space_partition::ChunkMaster*>(this->chunk_master_pointer_vector);
+            yli::ontology::render_children<yli::ontology::Species*>(this->species_pointer_vector);
+            yli::ontology::render_children<yli::ontology::VectorFont*>(this->vector_font_pointer_vector);
+            yli::ontology::render_children<space_partition::ChunkMaster*>(this->chunk_master_pointer_vector);
 
             this->postrender();
         }
 
-        ylikuutio::ontology::Entity* Material::get_parent() const
+        yli::ontology::Entity* Material::get_parent() const
         {
             return this->parent;
         }
@@ -155,12 +155,12 @@ namespace ylikuutio
             return -1;
         }
 
-        void Material::set_species_pointer(const int32_t childID, ylikuutio::ontology::Species* const child_pointer)
+        void Material::set_species_pointer(const int32_t childID, yli::ontology::Species* const child_pointer)
         {
             hierarchy::set_child_pointer(childID, child_pointer, this->species_pointer_vector, this->free_speciesID_queue, &this->number_of_species);
         }
 
-        void Material::set_vector_font_pointer(const int32_t childID, ylikuutio::ontology::VectorFont* const child_pointer)
+        void Material::set_vector_font_pointer(const int32_t childID, yli::ontology::VectorFont* const child_pointer)
         {
             hierarchy::set_child_pointer(childID, child_pointer, this->vector_font_pointer_vector, this->free_vector_fontID_queue, &this->number_of_vector_fonts);
         }
@@ -170,7 +170,7 @@ namespace ylikuutio
             hierarchy::set_child_pointer(childID, child_pointer, this->chunk_master_pointer_vector, this->free_chunk_masterID_queue, &this->number_of_chunk_masters);
         }
 
-        void Material::bind_to_new_parent(ylikuutio::ontology::Shader* const new_shader_pointer)
+        void Material::bind_to_new_parent(yli::ontology::Shader* const new_shader_pointer)
         {
             // unbind from the old parent `Shader`.
             this->parent->unbind_material(this->childID);
@@ -180,7 +180,7 @@ namespace ylikuutio
             this->parent->bind_material(this);
         }
 
-        void Material::set_terrain_species(ylikuutio::ontology::Species* const terrain_species)
+        void Material::set_terrain_species(yli::ontology::Species* const terrain_species)
         {
             this->terrain_species = terrain_species;
             this->parent->set_terrain_species(this->terrain_species);

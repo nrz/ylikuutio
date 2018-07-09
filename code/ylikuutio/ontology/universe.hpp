@@ -257,7 +257,7 @@
 //    y-coordinates of these are compared. The piece with the smallest y-coordinate (lowest altitude) remains terrain, other pieces become
 //    regular objects. The pieces that become regular objects will be subject to gravity the same way as any regular object.
 
-namespace ylikuutio
+namespace yli
 {
     namespace config
     {
@@ -265,7 +265,7 @@ namespace ylikuutio
     }
 }
 
-namespace ylikuutio
+namespace yli
 {
     namespace console
     {
@@ -273,7 +273,7 @@ namespace ylikuutio
     }
 }
 
-namespace ylikuutio
+namespace yli
 {
     namespace ontology
     {
@@ -281,16 +281,16 @@ namespace ylikuutio
         class Scene;
         class Species;
 
-        class Universe: public ylikuutio::ontology::Entity
+        class Universe: public yli::ontology::Entity
         {
             public:
-                void bind(ylikuutio::ontology::World* const world);
+                void bind(yli::ontology::World* const world);
 
                 // constructor.
                 Universe(const UniverseStruct& universe_struct)
                     : Entity(this) // `Universe` has no parent.
                 {
-                    this->entity_factory = new ylikuutio::ontology::EntityFactory(this);
+                    this->entity_factory = new yli::ontology::EntityFactory(this);
 
                     this->current_camera_cartesian_coordinates = glm::vec3(NAN, NAN, NAN); // dummy coordinates.
 
@@ -359,10 +359,10 @@ namespace ylikuutio
                     this->number_of_worlds = 0;
 
                     this->child_vector_pointers_vector.push_back(&this->world_pointer_vector);
-                    this->type = "ylikuutio::ontology::Universe*";
+                    this->type = "yli::ontology::Universe*";
 
                     // Initialise GLFW
-                    if (!ylikuutio::opengl::init_window())
+                    if (!yli::opengl::init_window())
                     {
                         std::cerr << "Failed to initialize GLFW.\n";
                         return;
@@ -371,7 +371,7 @@ namespace ylikuutio
                     // Open a window and create its OpenGL context.
                     std::cout << "Opening a window and creating its OpenGL context...\n";
                     this->set_window(
-                            ylikuutio::opengl::create_window(
+                            yli::opengl::create_window(
                                 static_cast<int>(this->window_width),
                                 static_cast<int>(this->window_height),
                                 this->window_title.c_str(),
@@ -390,31 +390,31 @@ namespace ylikuutio
                 void render();
 
                 // this method stes the active `World`.
-                void set_active_world(ylikuutio::ontology::World* const world);
+                void set_active_world(yli::ontology::World* const world);
 
                 // this method stes the active `Scene`.
-                void set_active_scene(ylikuutio::ontology::Scene* const world);
+                void set_active_scene(yli::ontology::Scene* const world);
 
-                ylikuutio::console::Console* get_console() const;
-                void set_console(ylikuutio::console::Console* console);
+                yli::console::Console* get_console() const;
+                void set_console(yli::console::Console* console);
 
                 float get_planet_radius() const;
                 void set_planet_radius(float planet_radius);
 
                 // this method sets a `World` pointer.
-                void set_world_pointer(int32_t childID, ylikuutio::ontology::World* child_pointer);
+                void set_world_pointer(int32_t childID, yli::ontology::World* child_pointer);
 
                 // this method returns a terrain `Species` pointer.
-                ylikuutio::ontology::Species* get_terrain_species();
+                yli::ontology::Species* get_terrain_species();
 
                 // this method sets a terrain `Species` pointer.
-                void set_terrain_species(ylikuutio::ontology::Species* terrain_species);
+                void set_terrain_species(yli::ontology::Species* terrain_species);
 
                 int32_t get_number_of_worlds() const;
 
-                ylikuutio::ontology::World* get_active_world() const;
+                yli::ontology::World* get_active_world() const;
 
-                ylikuutio::ontology::Entity* get_parent() const override;
+                yli::ontology::Entity* get_parent() const override;
                 int32_t get_number_of_children() const override;
                 int32_t get_number_of_descendants() const override;
 
@@ -450,17 +450,17 @@ namespace ylikuutio
 
                 void set(std::string& setting_name, std::shared_ptr<datatypes::AnyValue> setting_any_value);
 
-                // this method returns a pointer to `ylikuutio::config::Setting` corresponding to the given `key`.
-                ylikuutio::config::Setting* get(std::string key) const;
+                // this method returns a pointer to `yli::config::Setting` corresponding to the given `key`.
+                yli::config::Setting* get(std::string key) const;
 
                 bool is_entity(const std::string& name) const;
-                ylikuutio::ontology::Entity* get_entity(const std::string& name) const;
+                yli::ontology::Entity* get_entity(const std::string& name) const;
                 std::string get_entity_names() const;
 
-                void add_entity(const std::string& name, ylikuutio::ontology::Entity* const entity);
+                void add_entity(const std::string& name, yli::ontology::Entity* const entity);
                 void erase_entity(const std::string& name);
 
-                ylikuutio::ontology::EntityFactory* get_entity_factory() const;
+                yli::ontology::EntityFactory* get_entity_factory() const;
 
                 glm::mat4& get_projection_matrix();
                 void set_projection_matrix(glm::mat4& projection_matrix);
@@ -474,18 +474,18 @@ namespace ylikuutio
                 // Public callbacks.
 
                 static std::shared_ptr<datatypes::AnyValue> delete_entity(
-                        ylikuutio::console::Console* const console,
-                        ylikuutio::ontology::Entity* const entity,
+                        yli::console::Console* const console,
+                        yli::ontology::Entity* const entity,
                         std::vector<std::string>& command_parameters);
 
                 static std::shared_ptr<datatypes::AnyValue> activate(
-                        ylikuutio::console::Console* const console,
-                        ylikuutio::ontology::Entity* const universe_entity,
+                        yli::console::Console* const console,
+                        yli::ontology::Entity* const universe_entity,
                         std::vector<std::string>& command_parameters);
 
                 static std::shared_ptr<datatypes::AnyValue> info(
-                        ylikuutio::console::Console* const console,
-                        ylikuutio::ontology::Entity* const entity,
+                        yli::console::Console* const console,
+                        yli::ontology::Entity* const entity,
                         std::vector<std::string>& command_parameters);
 
                 // Public callbacks end here.
@@ -542,18 +542,18 @@ namespace ylikuutio
 
                 float planet_radius;
 
-                ylikuutio::ontology::EntityFactory* entity_factory;
+                yli::ontology::EntityFactory* entity_factory;
 
-                std::vector<ylikuutio::ontology::World*> world_pointer_vector;
+                std::vector<yli::ontology::World*> world_pointer_vector;
                 std::queue<int32_t> free_worldID_queue;
                 int32_t number_of_worlds;
 
-                ylikuutio::ontology::World* active_world;
+                yli::ontology::World* active_world;
 
-                ylikuutio::console::Console* console_pointer;     // pointer to `Console`.
+                yli::console::Console* console_pointer;     // pointer to `Console`.
 
                 // Named entities are stored here so that they can be recalled, if needed.
-                std::unordered_map<std::string, ylikuutio::ontology::Entity*> entity_map;
+                std::unordered_map<std::string, yli::ontology::Entity*> entity_map;
 
                 GLclampf background_red;
                 GLclampf background_green;

@@ -7,18 +7,18 @@
 #include <string>        // std::string
 #include <unordered_map> // std::unordered_map
 
-namespace ylikuutio
+namespace yli
 {
     namespace ontology
     {
-        Entity::Entity(ylikuutio::ontology::Universe* const universe)
+        Entity::Entity(yli::ontology::Universe* const universe)
         {
             // constructor.
             this->childID = -1;
             this->universe = universe;
             this->prerender_callback = nullptr;
             this->postrender_callback = nullptr;
-            this->setting_master = new ylikuutio::config::SettingMaster(this);
+            this->setting_master = new yli::config::SettingMaster(this);
             this->can_be_erased = false;
         }
 
@@ -56,17 +56,17 @@ namespace ylikuutio
             return this->can_be_erased;
         }
 
-        ylikuutio::ontology::Universe* Entity::get_universe() const
+        yli::ontology::Universe* Entity::get_universe() const
         {
             return this->universe;
         }
 
-        ylikuutio::config::SettingMaster* Entity::get_setting_master() const
+        yli::config::SettingMaster* Entity::get_setting_master() const
         {
             return this->setting_master;
         }
 
-        void Entity::set_setting_master(ylikuutio::config::SettingMaster* const setting_master)
+        void Entity::set_setting_master(yli::config::SettingMaster* const setting_master)
         {
             this->setting_master = setting_master;
         }

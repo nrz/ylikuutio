@@ -15,7 +15,7 @@
 // Include standard headers
 #include <iostream> // std::cout, std::cin, std::cerr
 
-namespace ylikuutio
+namespace yli
 {
     namespace opengl
     {

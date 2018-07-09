@@ -14,7 +14,7 @@
 // Include standard headers
 #include <cmath> // NAN, std::isnan, std::pow
 
-namespace ylikuutio
+namespace yli
 {
     namespace ontology
     {
@@ -39,7 +39,7 @@ typedef struct BiontStruct
     {
         // constructor.
     }
-    ylikuutio::ontology::Holobiont* holobiont_parent; // pointer to the parent `Holobiont`.
+    yli::ontology::Holobiont* holobiont_parent; // pointer to the parent `Holobiont`.
     int32_t biontID;
     glm::vec3 original_scale_vector; // original scale vector.
     float rotate_angle;              // rotate angle.

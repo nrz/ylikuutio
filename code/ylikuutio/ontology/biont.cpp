@@ -15,7 +15,7 @@
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <string>   // std::string
 
-namespace ylikuutio
+namespace yli
 {
     namespace ontology
     {
@@ -34,12 +34,12 @@ namespace ylikuutio
                 return;
             }
 
-            ylikuutio::ontology::Symbiosis* symbiosis = static_cast<ylikuutio::ontology::Symbiosis*>(this->holobiont_parent->get_parent());
+            yli::ontology::Symbiosis* symbiosis = static_cast<yli::ontology::Symbiosis*>(this->holobiont_parent->get_parent());
             this->symbiont_species = symbiosis->get_symbiont_species(this->biontID);
             this->symbiont_species->bind_biont(this);
         }
 
-        void Biont::bind_to_new_parent(ylikuutio::ontology::Holobiont* const new_holobiont_parent)
+        void Biont::bind_to_new_parent(yli::ontology::Holobiont* const new_holobiont_parent)
         {
             // this method sets pointer to this `Biont` to nullptr, sets `parent` according to the input,
             // and requests a new `childID` from the new `Holobiont`.
@@ -70,18 +70,18 @@ namespace ylikuutio
             {
                 this->prerender();
 
-                ylikuutio::ontology::Symbiosis* symbiosis = static_cast<ylikuutio::ontology::Symbiosis*>(this->holobiont_parent->get_parent());
-                ylikuutio::ontology::Shader* shader = static_cast<ylikuutio::ontology::Shader*>(symbiosis->get_parent());
+                yli::ontology::Symbiosis* symbiosis = static_cast<yli::ontology::Symbiosis*>(this->holobiont_parent->get_parent());
+                yli::ontology::Shader* shader = static_cast<yli::ontology::Shader*>(symbiosis->get_parent());
                 this->render_this_biont(shader);
 
                 this->postrender();
             }
         }
 
-        void Biont::render_this_biont(ylikuutio::ontology::Shader* const shader_pointer)
+        void Biont::render_this_biont(yli::ontology::Shader* const shader_pointer)
         {
-            ylikuutio::ontology::Holobiont* holobiont = this->holobiont_parent;
-            ylikuutio::ontology::Symbiosis* symbiosis = static_cast<ylikuutio::ontology::Symbiosis*>(holobiont->get_parent());
+            yli::ontology::Holobiont* holobiont = this->holobiont_parent;
+            yli::ontology::Symbiosis* symbiosis = static_cast<yli::ontology::Symbiosis*>(holobiont->get_parent());
 
             if (!this->has_entered)
             {
@@ -143,7 +143,7 @@ namespace ylikuutio
                     light_position.y,
                     light_position.z);
 
-            ylikuutio::ontology::SymbiontSpecies* symbiont_species = symbiosis->get_symbiont_species(this->biontID);
+            yli::ontology::SymbiontSpecies* symbiont_species = symbiosis->get_symbiont_species(this->biontID);
 
             // 1st attribute buffer : vertices.
             glEnableVertexAttribArray(symbiont_species->get_vertex_position_modelspaceID());
@@ -215,7 +215,7 @@ namespace ylikuutio
                     );
         }
 
-        ylikuutio::ontology::Entity* Biont::get_parent() const
+        yli::ontology::Entity* Biont::get_parent() const
         {
             return this->holobiont_parent;
         }

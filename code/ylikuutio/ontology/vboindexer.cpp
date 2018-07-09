@@ -57,7 +57,7 @@ bool getSimilarVertexIndex(
     return false;
 }
 
-namespace ylikuutio
+namespace yli
 {
     namespace ontology
     {

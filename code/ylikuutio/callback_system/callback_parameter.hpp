@@ -9,7 +9,7 @@
 #include <memory>        // std::make_shared, std::shared_ptr
 #include <string>        // std::string
 
-namespace ylikuutio
+namespace yli
 {
     namespace ontology
     {
@@ -17,7 +17,7 @@ namespace ylikuutio
     }
 }
 
-namespace ylikuutio
+namespace yli
 {
     namespace callback_system
     {
@@ -26,7 +26,7 @@ namespace ylikuutio
             public:
 
                 // constructor.
-                CallbackParameter(const std::string& name, std::shared_ptr<datatypes::AnyValue> any_value, const bool is_reference, ylikuutio::callback_system::CallbackObject* const parent);
+                CallbackParameter(const std::string& name, std::shared_ptr<datatypes::AnyValue> any_value, const bool is_reference, yli::callback_system::CallbackObject* const parent);
 
                 // destructor.
                 ~CallbackParameter();
@@ -36,12 +36,12 @@ namespace ylikuutio
 
                 friend class CallbackObject;
 
-                int32_t childID;                // callback parameter ID, returned by `ylikuutio::callback_system::CallbackObject->get_callback_parameterID()`.
+                int32_t childID;                // callback parameter ID, returned by `yli::callback_system::CallbackObject->get_callback_parameterID()`.
 
             private:
                 void bind_to_parent();
 
-                ylikuutio::callback_system::CallbackObject* parent; // pointer to the callback object.
+                yli::callback_system::CallbackObject* parent; // pointer to the callback object.
 
                 std::string name;
                 std::shared_ptr<datatypes::AnyValue> any_value; // this is `private` to make sure that someone does not overwrite it.

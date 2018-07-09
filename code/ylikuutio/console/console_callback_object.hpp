@@ -9,7 +9,7 @@
 // Include standard headers
 #include <memory>   // std::make_shared, std::shared_ptr
 
-namespace ylikuutio
+namespace yli
 {
     namespace callback_system
     {
@@ -17,17 +17,17 @@ namespace ylikuutio
     }
 }
 
-namespace ylikuutio
+namespace yli
 {
     namespace console
     {
-        class ConsoleCallbackObject : public ylikuutio::callback_system::CallbackObject
+        class ConsoleCallbackObject : public yli::callback_system::CallbackObject
         {
             public:
                 // constructor.
                 ConsoleCallbackObject(InputParametersToAnyValueCallbackWithConsole console_callback,
-                        ylikuutio::callback_system::CallbackEngine* parent, ylikuutio::console::Console* console_pointer)
-                    : ylikuutio::callback_system::CallbackObject(nullptr, parent)
+                        yli::callback_system::CallbackEngine* parent, yli::console::Console* console_pointer)
+                    : yli::callback_system::CallbackObject(nullptr, parent)
                 {
                     // constructor.
                     this->callback = nullptr;
@@ -43,7 +43,7 @@ namespace ylikuutio
                 std::shared_ptr<datatypes::AnyValue> execute();
 
                 InputParametersToAnyValueCallbackWithConsole console_callback;
-                ylikuutio::console::Console* console_pointer;
+                yli::console::Console* console_pointer;
         };
     }
 }

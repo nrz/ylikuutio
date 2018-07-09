@@ -11,12 +11,12 @@
 #include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
 
-namespace ylikuutio
+namespace yli
 {
     namespace geometry
     {
         bool triangulate_simple_polygon(
-                const ylikuutio::geometry::TriangulatePolygonsStruct triangulate_polygons_struct,
+                const yli::geometry::TriangulatePolygonsStruct triangulate_polygons_struct,
                 std::vector<glm::vec3>& out_vertices,
                 std::vector<glm::vec2>& out_UVs,
                 std::vector<glm::vec3>& out_normals)
@@ -26,14 +26,14 @@ namespace ylikuutio
         }
 
         bool triangulate_polygons(
-                const ylikuutio::geometry::TriangulatePolygonsStruct triangulate_polygons_struct,
+                const yli::geometry::TriangulatePolygonsStruct triangulate_polygons_struct,
                 std::vector<glm::vec3>& out_vertices,
                 std::vector<glm::vec2>& out_UVs,
                 std::vector<glm::vec3>& out_normals)
         {
             // TODO: implement this function!
 
-            // Find hidden vertices using `get_intersection_point(ylikuutio::geometry::LineSegment2D* line_segment1, ylikuutio::geometry::LineSegment2D* line_segment2)`.
+            // Find hidden vertices using `get_intersection_point(yli::geometry::LineSegment2D* line_segment1, yli::geometry::LineSegment2D* line_segment2)`.
             std::vector<std::vector<glm::vec2>>* vertex_data = triangulate_polygons_struct.input_vertices;
 
             // Each edge may have intersections with any other intersections

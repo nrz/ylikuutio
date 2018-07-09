@@ -10,7 +10,7 @@
 #include <GLFW/glfw3.h>
 #endif
 
-namespace ylikuutio
+namespace yli
 {
     namespace input
     {

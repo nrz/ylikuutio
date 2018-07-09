@@ -20,7 +20,7 @@
 #include <unordered_map> // std::unordered_map
 #include <vector>   // std::vector
 
-namespace ylikuutio
+namespace yli
 {
     namespace ontology
     {
@@ -30,17 +30,17 @@ namespace ylikuutio
         class Symbiosis;
         class Camera;
 
-        class Scene: public ylikuutio::ontology::Entity
+        class Scene: public yli::ontology::Entity
         {
             public:
-                void bind_shader(ylikuutio::ontology::Shader* const shader);
-                void bind_camera(ylikuutio::ontology::Camera* const camera);
+                void bind_shader(yli::ontology::Shader* const shader);
+                void bind_camera(yli::ontology::Camera* const camera);
 
                 void unbind_shader(const int32_t childID);
                 void unbind_camera(const int32_t childID);
 
                 // constructor.
-                Scene(ylikuutio::ontology::Universe* const universe, ylikuutio::ontology::World* const world, const float water_level)
+                Scene(yli::ontology::Universe* const universe, yli::ontology::World* const world, const float water_level)
                     : Entity(universe)
                 {
                     // constructor.
@@ -65,7 +65,7 @@ namespace ylikuutio
                     this->bind_to_parent();
 
                     this->child_vector_pointers_vector.push_back(&this->shader_pointer_vector);
-                    this->type = "ylikuutio::ontology::Scene*";
+                    this->type = "yli::ontology::Scene*";
 
                     this->can_be_erased = true;
                 }
@@ -76,11 +76,11 @@ namespace ylikuutio
                 // this method renders all `Shader`s of this `Scene`.
                 void render();
 
-                ylikuutio::ontology::Camera* get_active_camera();
-                void set_active_camera(ylikuutio::ontology::Camera* camera);
+                yli::ontology::Camera* get_active_camera();
+                void set_active_camera(yli::ontology::Camera* camera);
 
                 // this method returns a pointer to an `Entity` using the name as key.
-                ylikuutio::ontology::Entity* get_entity(const std::string) const;
+                yli::ontology::Entity* get_entity(const std::string) const;
 
                 // this method returns a pointer to `datatypes::AnyValue` corresponding to the given `key`.
                 std::shared_ptr<datatypes::AnyValue> get_variable(const std::string& key) const;
@@ -92,10 +92,10 @@ namespace ylikuutio
                 float get_water_level() const;
 
                 // this method sets a `Shader` pointer.
-                void set_shader_pointer(const int32_t childID, ylikuutio::ontology::Shader* const child_pointer);
+                void set_shader_pointer(const int32_t childID, yli::ontology::Shader* const child_pointer);
 
                 // this method sets a `Camera` pointer.
-                void set_camera_pointer(const int32_t childID, ylikuutio::ontology::Camera* const child_pointer);
+                void set_camera_pointer(const int32_t childID, yli::ontology::Camera* const child_pointer);
 
                 template<class T1>
                     friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, int32_t* number_of_children);
@@ -105,27 +105,27 @@ namespace ylikuutio
             private:
                 void bind_to_parent();
 
-                ylikuutio::ontology::Entity* get_parent() const override;
+                yli::ontology::Entity* get_parent() const override;
                 int32_t get_number_of_children() const override;
                 int32_t get_number_of_descendants() const override;
 
                 // this method sets a `Symbiosis` pointer.
-                void set_symbiosis_pointer(const int32_t childID, ylikuutio::ontology::Symbiosis* const child_pointer);
+                void set_symbiosis_pointer(const int32_t childID, yli::ontology::Symbiosis* const child_pointer);
 
-                ylikuutio::ontology::World* parent;   // pointer to the `World`.
+                yli::ontology::World* parent;   // pointer to the `World`.
 
-                std::vector<ylikuutio::ontology::Shader*> shader_pointer_vector;
+                std::vector<yli::ontology::Shader*> shader_pointer_vector;
                 std::queue<int32_t> free_shaderID_queue;
                 int32_t number_of_shaders;
 
-                std::vector<ylikuutio::ontology::Camera*> camera_pointer_vector;
+                std::vector<yli::ontology::Camera*> camera_pointer_vector;
                 std::queue<int32_t> free_cameraID_queue;
                 int32_t number_of_cameras;
 
-                ylikuutio::ontology::Camera* active_camera;
+                yli::ontology::Camera* active_camera;
 
                 // For finding any `Entity`s of this `Scene` by using its name.
-                std::unordered_map<std::string, ylikuutio::ontology::Entity*> name_map;
+                std::unordered_map<std::string, yli::ontology::Entity*> name_map;
 
                 // Variables related to location and orientation.
 

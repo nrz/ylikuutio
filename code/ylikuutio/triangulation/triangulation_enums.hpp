@@ -1,7 +1,7 @@
 #ifndef __TRIANGULATION_ENUMS_HPP_INCLUDED
 #define __TRIANGULATION_ENUMS_HPP_INCLUDED
 
-namespace ylikuutio
+namespace yli
 {
     namespace geometry
     {

@@ -19,7 +19,7 @@
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <stdint.h> // uint32_t etc.
 
-namespace ylikuutio
+namespace yli
 {
     namespace ontology
     {
@@ -29,7 +29,7 @@ namespace ylikuutio
             this->material_parent->bind_species(this);
         }
 
-        void Species::bind_to_new_parent(ylikuutio::ontology::Material* const new_material_pointer)
+        void Species::bind_to_new_parent(yli::ontology::Material* const new_material_pointer)
         {
             // unbind from the old parent `Material`.
             this->material_parent->unbind_species(this->childID);
@@ -48,7 +48,7 @@ namespace ylikuutio
 
                 // destroy all objects of this species.
                 std::cout << "All objects of this species will be destroyed.\n";
-                hierarchy::delete_children<ylikuutio::ontology::Object*>(this->object_pointer_vector, &this->number_of_objects);
+                hierarchy::delete_children<yli::ontology::Object*>(this->object_pointer_vector, &this->number_of_objects);
 
                 // Cleanup VBO, shader and texture.
                 glDeleteBuffers(1, &this->vertexbuffer);
@@ -66,12 +66,12 @@ namespace ylikuutio
             this->prerender();
 
             // render this `Species`.
-            ylikuutio::ontology::render_species_or_glyph<ylikuutio::ontology::Species*>(this);
+            yli::ontology::render_species_or_glyph<yli::ontology::Species*>(this);
 
             this->postrender();
         }
 
-        ylikuutio::ontology::Entity* Species::get_parent() const
+        yli::ontology::Entity* Species::get_parent() const
         {
             if (this->is_symbiont_species)
             {
@@ -80,7 +80,7 @@ namespace ylikuutio
             return this->material_parent;
         }
 
-        void Species::set_object_pointer(const int32_t childID, ylikuutio::ontology::Object* const child_pointer)
+        void Species::set_object_pointer(const int32_t childID, yli::ontology::Object* const child_pointer)
         {
             hierarchy::set_child_pointer(childID, child_pointer, this->object_pointer_vector, this->free_objectID_queue, &this->number_of_objects);
         }

@@ -8,11 +8,11 @@
 #include <GL/glew.h> // GLfloat, GLuint etc.
 #endif
 
-namespace ylikuutio
+namespace yli
 {
     namespace ontology
     {
-        void store_gl_attrib_locations(ylikuutio::ontology::Shader* const shader, ylikuutio::ontology::Glyph* const glyph)
+        void store_gl_attrib_locations(yli::ontology::Shader* const shader, yli::ontology::Glyph* const glyph)
         {
             glyph->store_vertex_position_modelspaceID(glGetAttribLocation(shader->get_programID(), "vertexPosition_modelspace"));
             glyph->store_vertexUVID(glGetAttribLocation(shader->get_programID(), "vertexUV"));

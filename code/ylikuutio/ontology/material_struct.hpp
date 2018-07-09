@@ -10,7 +10,7 @@ namespace ofbx
     struct Texture;
 }
 
-namespace ylikuutio
+namespace yli
 {
     namespace ontology
     {
@@ -29,8 +29,8 @@ typedef struct MaterialStruct
     {
         // constructor.
     }
-    ylikuutio::ontology::Shader* shader;         // pointer to `Shader`.
-    ylikuutio::ontology::Symbiosis* symbiosis;   // pointer to `Symbiosis`.
+    yli::ontology::Shader* shader;         // pointer to `Shader`.
+    yli::ontology::Symbiosis* symbiosis;   // pointer to `Symbiosis`.
     std::string texture_file_format;  // type of the texture file. supported file formats so far: `"bmp"`/`"BMP"`, `"dds"`/`"DDS"`.
     std::string texture_filename;     // filename of the model file.
     std::string image_path;

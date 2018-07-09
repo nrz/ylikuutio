@@ -26,17 +26,17 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
-namespace ylikuutio
+namespace yli
 {
     namespace ontology
     {
         class Universe;
 
-        class Camera: public ylikuutio::ontology::Movable
+        class Camera: public yli::ontology::Movable
         {
             public:
                 // constructor.
-                Camera(ylikuutio::ontology::Universe* const universe, CameraStruct& camera_struct)
+                Camera(yli::ontology::Universe* const universe, CameraStruct& camera_struct)
                     : Movable(universe, camera_struct.cartesian_coordinates)
                 {
                     this->horizontal_angle = NAN;
@@ -56,7 +56,7 @@ namespace ylikuutio
                 // destructor.
                 virtual ~Camera();
 
-                ylikuutio::ontology::Entity* get_parent() const override;
+                yli::ontology::Entity* get_parent() const override;
 
                 glm::vec3 get_direction() const;
                 glm::vec3 get_up() const;
@@ -83,7 +83,7 @@ namespace ylikuutio
 
                 // Variables related to location and orientation.
 
-                ylikuutio::ontology::Scene* parent;
+                yli::ontology::Scene* parent;
 
                 // Variables related to the camera.
                 glm::mat4 projection_matrix;

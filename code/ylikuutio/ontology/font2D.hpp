@@ -21,18 +21,18 @@
 // Include standard headers
 #include <string>    // std::string
 
-namespace ylikuutio
+namespace yli
 {
     namespace ontology
     {
         class Universe;
 
-        class Font2D: public ylikuutio::ontology::Entity
+        class Font2D: public yli::ontology::Entity
         {
             public:
                 // constructor.
                 Font2D(
-                        ylikuutio::ontology::Universe* const universe,
+                        yli::ontology::Universe* const universe,
                         GLuint screen_width,
                         GLuint screen_height,
                         const std::string& texture_filename,
@@ -95,7 +95,7 @@ namespace ylikuutio
                 // destructor.
                 virtual ~Font2D();
 
-                ylikuutio::ontology::Entity* get_parent() const override;
+                yli::ontology::Entity* get_parent() const override;
                 int32_t get_number_of_children() const override;
                 int32_t get_number_of_descendants() const override;
 

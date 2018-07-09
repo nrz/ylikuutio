@@ -37,24 +37,24 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
-namespace ylikuutio
+namespace yli
 {
     namespace ontology
     {
         class Biont;
 
-        class Holobiont: public ylikuutio::ontology::Movable
+        class Holobiont: public yli::ontology::Movable
         {
             public:
-                void bind_biont(ylikuutio::ontology::Biont* const biont);
+                void bind_biont(yli::ontology::Biont* const biont);
                 void unbind_biont(const int32_t childID);
 
                 // this method sets pointer to this `Object` to nullptr, sets `parent` according to the input,
                 // and requests a new `childID` from the new `Species` or from the new `Glyph`.
-                void bind_to_new_parent(ylikuutio::ontology::Symbiosis* const new_parent);
+                void bind_to_new_parent(yli::ontology::Symbiosis* const new_parent);
 
                 // constructor.
-                Holobiont(ylikuutio::ontology::Universe* const universe, HolobiontStruct& holobiont_struct)
+                Holobiont(yli::ontology::Universe* const universe, HolobiontStruct& holobiont_struct)
                     : Movable(universe, holobiont_struct.cartesian_coordinates)
                 {
                     // constructor.
@@ -75,7 +75,7 @@ namespace ylikuutio
 
                     // get `childID` from `Symbiosis` and set pointer to this `Holobiont`.
                     this->bind_to_parent();
-                    this->type = "ylikuutio::ontology::Holobiont*";
+                    this->type = "yli::ontology::Holobiont*";
 
                     this->create_bionts();
 
@@ -89,9 +89,9 @@ namespace ylikuutio
                 void update_y(float y);
                 void update_z(float z);
 
-                ylikuutio::ontology::Entity* get_parent() const override;
+                yli::ontology::Entity* get_parent() const override;
 
-                void set_biont_pointer(const int32_t childID, ylikuutio::ontology::Biont* const child_pointer);
+                void set_biont_pointer(const int32_t childID, yli::ontology::Biont* const child_pointer);
 
                 template<class T1>
                     friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, int32_t* number_of_children);
@@ -111,11 +111,11 @@ namespace ylikuutio
                 int32_t get_number_of_children() const override;
                 int32_t get_number_of_descendants() const override;
 
-                std::vector<ylikuutio::ontology::Biont*> biont_pointer_vector;
+                std::vector<yli::ontology::Biont*> biont_pointer_vector;
                 std::queue<int32_t> free_biontID_queue;
                 int32_t number_of_bionts;
 
-                ylikuutio::ontology::Symbiosis* symbiosis_parent; // pointer to `Symbiosis`.
+                yli::ontology::Symbiosis* symbiosis_parent; // pointer to `Symbiosis`.
 
                 bool quaternions_in_use;
 

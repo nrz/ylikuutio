@@ -12,11 +12,11 @@
 // Include standard headers
 #include <cmath>    // NAN, std::isnan, std::pow
 
-namespace ylikuutio
+namespace yli
 {
     namespace geometry
     {
-        glm::vec2 get_intersection_point(const ylikuutio::geometry::Line2D* const line1, const ylikuutio::geometry::Line2D* const line2)
+        glm::vec2 get_intersection_point(const yli::geometry::Line2D* const line1, const yli::geometry::Line2D* const line2)
         {
             // See http://mathworld.wolfram.com/Line-LineIntersection.html
 
@@ -50,7 +50,7 @@ namespace ylikuutio
             return glm::vec2(x, y);
         }
 
-        glm::vec3 get_intersection_point(const ylikuutio::geometry::Line3D* const line1, const ylikuutio::geometry::Line3D* const line2)
+        glm::vec3 get_intersection_point(const yli::geometry::Line3D* const line1, const yli::geometry::Line3D* const line2)
         {
             // TODO: implement this function!
             glm::vec3 intersection_point;
