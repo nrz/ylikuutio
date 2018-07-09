@@ -196,13 +196,13 @@ namespace loaders
 
         delete[] image_data;
 
-        geometry::SphericalTerrainStruct spherical_terrain_struct;
+        yli::geometry::SphericalTerrainStruct spherical_terrain_struct;
         spherical_terrain_struct.southern_latitude = southern_latitude; // must be float, though SRTM data is split between full degrees.
         spherical_terrain_struct.northern_latitude = northern_latitude; // must be float, though SRTM data is split between full degrees.
         spherical_terrain_struct.western_longitude = western_longitude; // must be float, though SRTM data is split between full degrees.
         spherical_terrain_struct.eastern_longitude = eastern_longitude; // must be float, though SRTM data is split between full degrees.
 
-        geometry::TriangulateQuadsStruct triangulate_quads_struct;
+        yli::geometry::TriangulateQuadsStruct triangulate_quads_struct;
         triangulate_quads_struct.image_width = image_width_in_use;
         triangulate_quads_struct.image_height = image_height_in_use;
         triangulate_quads_struct.x_step = x_step;
@@ -211,7 +211,7 @@ namespace loaders
         triangulate_quads_struct.sphere_radius = planet_radius;
         triangulate_quads_struct.spherical_terrain_struct = spherical_terrain_struct;
 
-        bool result = geometry::triangulate_quads(vertex_data, triangulate_quads_struct, out_vertices, out_UVs, out_normals);
+        bool result = yli::geometry::triangulate_quads(vertex_data, triangulate_quads_struct, out_vertices, out_UVs, out_normals);
         delete[] vertex_data;
         return result;
     }

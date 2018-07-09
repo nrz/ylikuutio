@@ -10,10 +10,13 @@ namespace ofbx
     struct Texture;
 }
 
-namespace ontology
+namespace yli
 {
-    class Shader;
-    class Symbiosis;
+    namespace ontology
+    {
+        class Shader;
+        class Symbiosis;
+    }
 }
 
 typedef struct MaterialStruct
@@ -26,8 +29,8 @@ typedef struct MaterialStruct
     {
         // constructor.
     }
-    ontology::Shader* shader;         // pointer to `Shader`.
-    ontology::Symbiosis* symbiosis;   // pointer to `Symbiosis`.
+    yli::ontology::Shader* shader;         // pointer to `Shader`.
+    yli::ontology::Symbiosis* symbiosis;   // pointer to `Symbiosis`.
     std::string texture_file_format;  // type of the texture file. supported file formats so far: `"bmp"`/`"BMP"`, `"dds"`/`"DDS"`.
     std::string texture_filename;     // filename of the model file.
     std::string image_path;

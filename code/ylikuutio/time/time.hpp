@@ -1,4 +1,4 @@
-namespace ylikuutio
+namespace yli
 {
     namespace time
     {

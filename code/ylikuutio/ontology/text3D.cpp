@@ -7,45 +7,48 @@
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <stdint.h> // uint32_t etc.
 
-namespace ontology
+namespace yli
 {
-    class Object;
-
-    void Text3D::bind_to_parent()
+    namespace ontology
     {
-        // get `childID` from `VectorFont` and set pointer to this `Text3D`.
-        this->parent->bind_text3D(this);
-    }
+        class Object;
 
-    Text3D::~Text3D()
-    {
-        // destructor.
-        std::cout << "This 3D text (\"" << this->text_string << "\", childID " << std::dec << this->childID << ") will be destroyed.\n";
+        void Text3D::bind_to_parent()
+        {
+            // get `childID` from `VectorFont` and set pointer to this `Text3D`.
+            this->parent->bind_text3D(this);
+        }
 
-        // destroy all objects of this `Text3D`.
-        std::cout << "All objects (" << this->object_pointer_vector.size() << " pieces) of this 3D text will be destroyed.\n";
-        hierarchy::delete_children<ontology::Object*>(this->object_pointer_vector, &this->number_of_objects);
+        Text3D::~Text3D()
+        {
+            // destructor.
+            std::cout << "This 3D text (\"" << this->text_string << "\", childID " << std::dec << this->childID << ") will be destroyed.\n";
 
-        this->parent->set_text3D_pointer(this->childID, nullptr);
-    }
+            // destroy all objects of this `Text3D`.
+            std::cout << "All objects (" << this->object_pointer_vector.size() << " pieces) of this 3D text will be destroyed.\n";
+            hierarchy::delete_children<yli::ontology::Object*>(this->object_pointer_vector, &this->number_of_objects);
 
-    ontology::Entity* Text3D::get_parent() const
-    {
-        return this->parent;
-    }
+            this->parent->set_text3D_pointer(this->childID, nullptr);
+        }
 
-    int32_t Text3D::get_number_of_children() const
-    {
-        return this->number_of_objects;
-    }
+        yli::ontology::Entity* Text3D::get_parent() const
+        {
+            return this->parent;
+        }
 
-    int32_t Text3D::get_number_of_descendants() const
-    {
-        return -1;
-    }
+        int32_t Text3D::get_number_of_children() const
+        {
+            return this->number_of_objects;
+        }
 
-    void Text3D::set_object_pointer(const int32_t childID, ontology::Object* const child_pointer)
-    {
-        hierarchy::set_child_pointer(childID, child_pointer, this->object_pointer_vector, this->free_objectID_queue, &this->number_of_objects);
+        int32_t Text3D::get_number_of_descendants() const
+        {
+            return -1;
+        }
+
+        void Text3D::set_object_pointer(const int32_t childID, yli::ontology::Object* const child_pointer)
+        {
+            hierarchy::set_child_pointer(childID, child_pointer, this->object_pointer_vector, this->free_objectID_queue, &this->number_of_objects);
+        }
     }
 }

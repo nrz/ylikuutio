@@ -25,7 +25,7 @@
 
 namespace ajokki
 {
-    bool move_to_direction(callback_system::CallbackObject* callback_object, glm::vec3 moving_direction)
+    bool move_to_direction(yli::callback_system::CallbackObject* callback_object, glm::vec3 moving_direction)
     {
         std::shared_ptr<datatypes::AnyValue> any_value_universe = std::make_shared<datatypes::AnyValue>(*callback_object->get_arg(0));
 
@@ -41,7 +41,7 @@ namespace ajokki
             return false;
         }
 
-        ontology::Universe* universe = any_value_universe->universe;
+        yli::ontology::Universe* universe = any_value_universe->universe;
 
         if (universe == nullptr)
         {
@@ -49,7 +49,7 @@ namespace ajokki
             return false;
         }
 
-        ontology::World* world = universe->get_active_world();
+        yli::ontology::World* world = universe->get_active_world();
 
         if (world == nullptr)
         {
@@ -57,7 +57,7 @@ namespace ajokki
             return false;
         }
 
-        ontology::Scene* scene = universe->get_active_world()->get_active_scene();
+        yli::ontology::Scene* scene = universe->get_active_world()->get_active_scene();
 
         if (scene == nullptr)
         {
@@ -89,9 +89,9 @@ namespace ajokki
     \*********************************************************************/
 
     std::shared_ptr<datatypes::AnyValue> release_first_turbo(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject* callback_object,
-            std::vector<callback_system::CallbackParameter*>&)
+            yli::callback_system::CallbackEngine*,
+            yli::callback_system::CallbackObject* callback_object,
+            std::vector<yli::callback_system::CallbackParameter*>&)
     {
         std::shared_ptr<datatypes::AnyValue> any_value_universe = std::make_shared<datatypes::AnyValue>(*callback_object->get_arg(0));
 
@@ -107,7 +107,7 @@ namespace ajokki
             return nullptr;
         }
 
-        ontology::Universe* universe = any_value_universe->universe;
+        yli::ontology::Universe* universe = any_value_universe->universe;
 
         if (universe == nullptr)
         {
@@ -120,9 +120,9 @@ namespace ajokki
     }
 
     std::shared_ptr<datatypes::AnyValue> release_second_turbo(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject* callback_object,
-            std::vector<callback_system::CallbackParameter*>&)
+            yli::callback_system::CallbackEngine*,
+            yli::callback_system::CallbackObject* callback_object,
+            std::vector<yli::callback_system::CallbackParameter*>&)
     {
         std::shared_ptr<datatypes::AnyValue> any_value_universe = std::make_shared<datatypes::AnyValue>(*callback_object->get_arg(0));
 
@@ -138,7 +138,7 @@ namespace ajokki
             return nullptr;
         }
 
-        ontology::Universe* universe = any_value_universe->universe;
+        yli::ontology::Universe* universe = any_value_universe->universe;
 
         if (universe == nullptr)
         {
@@ -151,9 +151,9 @@ namespace ajokki
     }
 
     std::shared_ptr<datatypes::AnyValue> enable_toggle_invert_mouse(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject* callback_object,
-            std::vector<callback_system::CallbackParameter*>&)
+            yli::callback_system::CallbackEngine*,
+            yli::callback_system::CallbackObject* callback_object,
+            std::vector<yli::callback_system::CallbackParameter*>&)
     {
         std::shared_ptr<datatypes::AnyValue> any_value_universe = std::make_shared<datatypes::AnyValue>(*callback_object->get_arg(0));
 
@@ -169,7 +169,7 @@ namespace ajokki
             return nullptr;
         }
 
-        ontology::Universe* universe = any_value_universe->universe;
+        yli::ontology::Universe* universe = any_value_universe->universe;
 
         if (universe == nullptr)
         {
@@ -182,9 +182,9 @@ namespace ajokki
     }
 
     std::shared_ptr<datatypes::AnyValue> enable_toggle_flight_mode(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject* callback_object,
-            std::vector<callback_system::CallbackParameter*>&)
+            yli::callback_system::CallbackEngine*,
+            yli::callback_system::CallbackObject* callback_object,
+            std::vector<yli::callback_system::CallbackParameter*>&)
     {
         std::shared_ptr<datatypes::AnyValue> any_value_universe = std::make_shared<datatypes::AnyValue>(*callback_object->get_arg(0));
 
@@ -200,7 +200,7 @@ namespace ajokki
             return nullptr;
         }
 
-        ontology::Universe* universe = any_value_universe->universe;
+        yli::ontology::Universe* universe = any_value_universe->universe;
 
         if (universe == nullptr)
         {
@@ -213,9 +213,9 @@ namespace ajokki
     }
 
     std::shared_ptr<datatypes::AnyValue> enable_toggle_help_mode(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject* callback_object,
-            std::vector<callback_system::CallbackParameter*>&)
+            yli::callback_system::CallbackEngine*,
+            yli::callback_system::CallbackObject* callback_object,
+            std::vector<yli::callback_system::CallbackParameter*>&)
     {
         std::shared_ptr<datatypes::AnyValue> any_value_universe = std::make_shared<datatypes::AnyValue>(*callback_object->get_arg(0));
 
@@ -231,7 +231,7 @@ namespace ajokki
             return nullptr;
         }
 
-        ontology::Universe* universe = any_value_universe->universe;
+        yli::ontology::Universe* universe = any_value_universe->universe;
 
         if (universe == nullptr)
         {
@@ -248,18 +248,18 @@ namespace ajokki
     \*********************************************************************/
 
     std::shared_ptr<datatypes::AnyValue> exit_program(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>&)
+            yli::callback_system::CallbackEngine*,
+            yli::callback_system::CallbackObject*,
+            std::vector<yli::callback_system::CallbackParameter*>&)
     {
         uint32_t exit_program_magic_number = EXIT_PROGRAM_MAGIC_NUMBER;
         return std::make_shared<datatypes::AnyValue>(exit_program_magic_number);
     }
 
     std::shared_ptr<datatypes::AnyValue> first_turbo(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject* callback_object,
-            std::vector<callback_system::CallbackParameter*>&)
+            yli::callback_system::CallbackEngine*,
+            yli::callback_system::CallbackObject* callback_object,
+            std::vector<yli::callback_system::CallbackParameter*>&)
     {
         std::shared_ptr<datatypes::AnyValue> any_value_universe = std::make_shared<datatypes::AnyValue>(*callback_object->get_arg(0));
 
@@ -275,7 +275,7 @@ namespace ajokki
             return nullptr;
         }
 
-        ontology::Universe* universe = any_value_universe->universe;
+        yli::ontology::Universe* universe = any_value_universe->universe;
 
         if (universe == nullptr)
         {
@@ -288,9 +288,9 @@ namespace ajokki
     }
 
     std::shared_ptr<datatypes::AnyValue> second_turbo(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject* callback_object,
-            std::vector<callback_system::CallbackParameter*>&)
+            yli::callback_system::CallbackEngine*,
+            yli::callback_system::CallbackObject* callback_object,
+            std::vector<yli::callback_system::CallbackParameter*>&)
     {
         std::shared_ptr<datatypes::AnyValue> any_value_universe = std::make_shared<datatypes::AnyValue>(*callback_object->get_arg(0));
 
@@ -306,7 +306,7 @@ namespace ajokki
             return nullptr;
         }
 
-        ontology::Universe* universe = any_value_universe->universe;
+        yli::ontology::Universe* universe = any_value_universe->universe;
 
         if (universe == nullptr)
         {
@@ -319,9 +319,9 @@ namespace ajokki
     }
 
     std::shared_ptr<datatypes::AnyValue> move_forward(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject* callback_object,
-            std::vector<callback_system::CallbackParameter*>&)
+            yli::callback_system::CallbackEngine*,
+            yli::callback_system::CallbackObject* callback_object,
+            std::vector<yli::callback_system::CallbackParameter*>&)
     {
         std::shared_ptr<datatypes::AnyValue> any_value_universe = std::make_shared<datatypes::AnyValue>(*callback_object->get_arg(0));
 
@@ -337,7 +337,7 @@ namespace ajokki
             return nullptr;
         }
 
-        ontology::Universe* universe = any_value_universe->universe;
+        yli::ontology::Universe* universe = any_value_universe->universe;
 
         if (universe == nullptr)
         {
@@ -350,9 +350,9 @@ namespace ajokki
     }
 
     std::shared_ptr<datatypes::AnyValue> move_backward(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject* callback_object,
-            std::vector<callback_system::CallbackParameter*>&)
+            yli::callback_system::CallbackEngine*,
+            yli::callback_system::CallbackObject* callback_object,
+            std::vector<yli::callback_system::CallbackParameter*>&)
     {
         std::shared_ptr<datatypes::AnyValue> any_value_universe = std::make_shared<datatypes::AnyValue>(*callback_object->get_arg(0));
 
@@ -368,7 +368,7 @@ namespace ajokki
             return nullptr;
         }
 
-        ontology::Universe* universe = any_value_universe->universe;
+        yli::ontology::Universe* universe = any_value_universe->universe;
 
         if (universe == nullptr)
         {
@@ -381,9 +381,9 @@ namespace ajokki
     }
 
     std::shared_ptr<datatypes::AnyValue> strafe_left(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject* callback_object,
-            std::vector<callback_system::CallbackParameter*>&)
+            yli::callback_system::CallbackEngine*,
+            yli::callback_system::CallbackObject* callback_object,
+            std::vector<yli::callback_system::CallbackParameter*>&)
     {
         std::shared_ptr<datatypes::AnyValue> any_value_universe = std::make_shared<datatypes::AnyValue>(*callback_object->get_arg(0));
 
@@ -399,7 +399,7 @@ namespace ajokki
             return nullptr;
         }
 
-        ontology::Universe* universe = any_value_universe->universe;
+        yli::ontology::Universe* universe = any_value_universe->universe;
 
         if (universe == nullptr)
         {
@@ -412,9 +412,9 @@ namespace ajokki
     }
 
     std::shared_ptr<datatypes::AnyValue> strafe_right(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject* callback_object,
-            std::vector<callback_system::CallbackParameter*>&)
+            yli::callback_system::CallbackEngine*,
+            yli::callback_system::CallbackObject* callback_object,
+            std::vector<yli::callback_system::CallbackParameter*>&)
     {
         std::shared_ptr<datatypes::AnyValue> any_value_universe = std::make_shared<datatypes::AnyValue>(*callback_object->get_arg(0));
 
@@ -430,7 +430,7 @@ namespace ajokki
             return nullptr;
         }
 
-        ontology::Universe* universe = any_value_universe->universe;
+        yli::ontology::Universe* universe = any_value_universe->universe;
 
         if (universe == nullptr)
         {
@@ -443,9 +443,9 @@ namespace ajokki
     }
 
     std::shared_ptr<datatypes::AnyValue> ascent(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject* callback_object,
-            std::vector<callback_system::CallbackParameter*>&)
+            yli::callback_system::CallbackEngine*,
+            yli::callback_system::CallbackObject* callback_object,
+            std::vector<yli::callback_system::CallbackParameter*>&)
     {
         std::shared_ptr<datatypes::AnyValue> any_value_universe = std::make_shared<datatypes::AnyValue>(*callback_object->get_arg(0));
 
@@ -461,7 +461,7 @@ namespace ajokki
             return nullptr;
         }
 
-        ontology::Universe* universe = any_value_universe->universe;
+        yli::ontology::Universe* universe = any_value_universe->universe;
 
         if (universe == nullptr)
         {
@@ -474,9 +474,9 @@ namespace ajokki
     }
 
     std::shared_ptr<datatypes::AnyValue> descent(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject* callback_object,
-            std::vector<callback_system::CallbackParameter*>&)
+            yli::callback_system::CallbackEngine*,
+            yli::callback_system::CallbackObject* callback_object,
+            std::vector<yli::callback_system::CallbackParameter*>&)
     {
         std::shared_ptr<datatypes::AnyValue> any_value_universe = std::make_shared<datatypes::AnyValue>(*callback_object->get_arg(0));
 
@@ -492,7 +492,7 @@ namespace ajokki
             return nullptr;
         }
 
-        ontology::Universe* universe = any_value_universe->universe;
+        yli::ontology::Universe* universe = any_value_universe->universe;
 
         if (universe == nullptr)
         {
@@ -505,9 +505,9 @@ namespace ajokki
     }
 
     std::shared_ptr<datatypes::AnyValue> toggle_invert_mouse(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject* callback_object,
-            std::vector<callback_system::CallbackParameter*>&)
+            yli::callback_system::CallbackEngine*,
+            yli::callback_system::CallbackObject* callback_object,
+            std::vector<yli::callback_system::CallbackParameter*>&)
     {
         std::shared_ptr<datatypes::AnyValue> any_value_universe = std::make_shared<datatypes::AnyValue>(*callback_object->get_arg(0));
 
@@ -523,7 +523,7 @@ namespace ajokki
             return nullptr;
         }
 
-        ontology::Universe* universe = any_value_universe->universe;
+        yli::ontology::Universe* universe = any_value_universe->universe;
 
         if (universe == nullptr)
         {
@@ -540,9 +540,9 @@ namespace ajokki
     }
 
     std::shared_ptr<datatypes::AnyValue> toggle_flight_mode(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject* callback_object,
-            std::vector<callback_system::CallbackParameter*>&)
+            yli::callback_system::CallbackEngine*,
+            yli::callback_system::CallbackObject* callback_object,
+            std::vector<yli::callback_system::CallbackParameter*>&)
     {
         std::shared_ptr<datatypes::AnyValue> any_value_universe = std::make_shared<datatypes::AnyValue>(*callback_object->get_arg(0));
 
@@ -558,7 +558,7 @@ namespace ajokki
             return nullptr;
         }
 
-        ontology::Universe* universe = any_value_universe->universe;
+        yli::ontology::Universe* universe = any_value_universe->universe;
 
         if (universe == nullptr)
         {
@@ -576,9 +576,9 @@ namespace ajokki
     }
 
     std::shared_ptr<datatypes::AnyValue> toggle_help_mode(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject* callback_object,
-            std::vector<callback_system::CallbackParameter*>&)
+            yli::callback_system::CallbackEngine*,
+            yli::callback_system::CallbackObject* callback_object,
+            std::vector<yli::callback_system::CallbackParameter*>&)
     {
         std::shared_ptr<datatypes::AnyValue> any_value_universe = std::make_shared<datatypes::AnyValue>(*callback_object->get_arg(0));
 
@@ -594,7 +594,7 @@ namespace ajokki
             return nullptr;
         }
 
-        ontology::Universe* universe = any_value_universe->universe;
+        yli::ontology::Universe* universe = any_value_universe->universe;
 
         if (universe == nullptr)
         {
@@ -611,13 +611,13 @@ namespace ajokki
     }
 
     std::shared_ptr<datatypes::AnyValue> delete_entity(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject* callback_object,
-            std::vector<callback_system::CallbackParameter*>&)
+            yli::callback_system::CallbackEngine*,
+            yli::callback_system::CallbackObject* callback_object,
+            std::vector<yli::callback_system::CallbackParameter*>&)
     {
         // Callbacks' input parameters can be accessed either through
-        // `callback_system::CallbackObject* callback_object`or
-        // `std::vector<callback_system::CallbackParameter*>& input parameters`.
+        // `yli::callback_system::CallbackObject* callback_object`or
+        // `std::vector<yli::callback_system::CallbackParameter*>& input parameters`.
         //
         // To access named input variables:
         // `datatypes::AnyValue* some_any_value = callback_object->get_any_value("foo");`
@@ -642,7 +642,7 @@ namespace ajokki
             return nullptr;
         }
 
-        ontology::Universe* universe = any_value_universe->universe;
+        yli::ontology::Universe* universe = any_value_universe->universe;
 
         if (universe == nullptr)
         {
@@ -673,7 +673,7 @@ namespace ajokki
 
         std::string entity_string = *entity_string_pointer;
 
-        ontology::Entity* entity = universe->get_entity(entity_string);
+        yli::ontology::Entity* entity = universe->get_entity(entity_string);
 
         if (entity == nullptr)
         {
@@ -686,9 +686,9 @@ namespace ajokki
     }
 
     std::shared_ptr<datatypes::AnyValue> switch_to_new_material(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject* callback_object,
-            std::vector<callback_system::CallbackParameter*>&)
+            yli::callback_system::CallbackEngine*,
+            yli::callback_system::CallbackObject* callback_object,
+            std::vector<yli::callback_system::CallbackParameter*>&)
     {
         std::shared_ptr<datatypes::AnyValue> any_value_universe = std::make_shared<datatypes::AnyValue>(*callback_object->get_arg(0));
 
@@ -704,7 +704,7 @@ namespace ajokki
             return nullptr;
         }
 
-        ontology::Universe* universe = any_value_universe->universe;
+        yli::ontology::Universe* universe = any_value_universe->universe;
 
         if (universe == nullptr)
         {
@@ -735,23 +735,23 @@ namespace ajokki
 
         std::string entity_string = *entity_string_pointer;
 
-        ontology::Entity* entity = universe->get_entity(entity_string);
+        yli::ontology::Entity* entity = universe->get_entity(entity_string);
 
         if (entity == nullptr)
         {
             return nullptr;
         }
 
-        ontology::Species* species = dynamic_cast<ontology::Species*>(entity);
+        yli::ontology::Species* species = dynamic_cast<yli::ontology::Species*>(entity);
 
         if (species == nullptr)
         {
             return nullptr;
         }
 
-        ontology::Entity* old_material_entity = species->get_parent();
+        yli::ontology::Entity* old_material_entity = species->get_parent();
 
-        ontology::Material* old_material = dynamic_cast<ontology::Material*>(old_material_entity);
+        yli::ontology::Material* old_material = dynamic_cast<yli::ontology::Material*>(old_material_entity);
 
         if (old_material == nullptr)
         {
@@ -781,14 +781,14 @@ namespace ajokki
 
         std::string new_material_string = *new_material_string_pointer;
 
-        ontology::Entity* new_material_entity = universe->get_entity(new_material_string);
+        yli::ontology::Entity* new_material_entity = universe->get_entity(new_material_string);
 
         if (new_material_entity == nullptr)
         {
             return nullptr;
         }
 
-        ontology::Material* new_material = dynamic_cast<ontology::Material*>(new_material_entity);
+        yli::ontology::Material* new_material = dynamic_cast<yli::ontology::Material*>(new_material_entity);
 
         if (new_material == nullptr)
         {
@@ -806,9 +806,9 @@ namespace ajokki
     }
 
     std::shared_ptr<datatypes::AnyValue> transform_into_new_species(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject* callback_object,
-            std::vector<callback_system::CallbackParameter*>&)
+            yli::callback_system::CallbackEngine*,
+            yli::callback_system::CallbackObject* callback_object,
+            std::vector<yli::callback_system::CallbackParameter*>&)
     {
         std::shared_ptr<datatypes::AnyValue> any_value_universe = std::make_shared<datatypes::AnyValue>(*callback_object->get_arg(0));
 
@@ -824,7 +824,7 @@ namespace ajokki
             return nullptr;
         }
 
-        ontology::Universe* universe = any_value_universe->universe;
+        yli::ontology::Universe* universe = any_value_universe->universe;
 
         if (universe == nullptr)
         {
@@ -855,23 +855,23 @@ namespace ajokki
 
         std::string entity_string = *entity_string_pointer;
 
-        ontology::Entity* entity = universe->get_entity(entity_string);
+        yli::ontology::Entity* entity = universe->get_entity(entity_string);
 
         if (entity == nullptr)
         {
             return nullptr;
         }
 
-        ontology::Object* object = dynamic_cast<ontology::Object*>(entity);
+        yli::ontology::Object* object = dynamic_cast<yli::ontology::Object*>(entity);
 
         if (object == nullptr)
         {
             return nullptr;
         }
 
-        ontology::Entity* old_species_entity = object->get_parent();
+        yli::ontology::Entity* old_species_entity = object->get_parent();
 
-        ontology::Species* old_species = dynamic_cast<ontology::Species*>(old_species_entity);
+        yli::ontology::Species* old_species = dynamic_cast<yli::ontology::Species*>(old_species_entity);
 
         if (old_species == nullptr)
         {
@@ -901,14 +901,14 @@ namespace ajokki
 
         std::string new_species_string = *new_species_string_pointer;
 
-        ontology::Entity* new_species_entity = universe->get_entity(new_species_string);
+        yli::ontology::Entity* new_species_entity = universe->get_entity(new_species_string);
 
         if (new_species_entity == nullptr)
         {
             return nullptr;
         }
 
-        ontology::Species* new_species = dynamic_cast<ontology::Species*>(new_species_entity);
+        yli::ontology::Species* new_species = dynamic_cast<yli::ontology::Species*>(new_species_entity);
 
         if (new_species == nullptr)
         {

@@ -11,9 +11,12 @@
 #include <cmath>    // NAN, std::isnan, std::pow
 #include <string>   // std::string
 
-namespace ontology
+namespace yli
 {
-    class VectorFont;
+    namespace ontology
+    {
+        class VectorFont;
+    }
 }
 
 typedef struct Text3DStruct
@@ -27,7 +30,7 @@ typedef struct Text3DStruct
     {
         // constructor.
     }
-    ontology::VectorFont* parent; // pointer to the parent `VectorFont`.
+    yli::ontology::VectorFont* parent; // pointer to the parent `VectorFont`.
     std::string text_string;
     const char* text_string_char;
     glm::vec3 original_scale_vector;      // original scale vector.

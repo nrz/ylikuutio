@@ -8,7 +8,7 @@
 #include <string>        // std::string
 #include <unordered_map> // std::unordered_map
 
-namespace ylikuutio
+namespace yli
 {
     namespace audio
     {

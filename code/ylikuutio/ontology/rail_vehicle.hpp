@@ -10,21 +10,24 @@
 // Include standard headers
 #include <memory> // std::make_shared, std::shared_ptr
 
-namespace ontology
+namespace yli
 {
-    class Universe;
-
-    class RailVehicle: public ontology::Vehicle
+    namespace ontology
     {
-        public:
-            // constructor.
-            RailVehicle(ontology::Universe* const universe, ObjectStruct& object_struct)
-                : Vehicle(universe, object_struct)
-            {
-                // constructor.
-            }
+        class Universe;
 
-            // destructor.
-            virtual ~RailVehicle();
-    };
+        class RailVehicle: public yli::ontology::Vehicle
+        {
+            public:
+                // constructor.
+                RailVehicle(yli::ontology::Universe* const universe, ObjectStruct& object_struct)
+                    : Vehicle(universe, object_struct)
+                {
+                    // constructor.
+                }
+
+                // destructor.
+                virtual ~RailVehicle();
+        };
+    }
 }

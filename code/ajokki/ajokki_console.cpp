@@ -6,14 +6,17 @@
 // Include standard headers
 #include <memory> // std::make_shared, std::shared_ptr
 
-namespace config
+namespace yli
 {
-    class SettingMaster;
+    namespace config
+    {
+        class SettingMaster;
+    }
 }
 
 namespace ajokki
 {
-    void set_console(config::SettingMaster* const setting_master)
+    void set_console(yli::config::SettingMaster* const setting_master)
     {
         // Variables related to console.
         uint32_t console_top_y = 15;
@@ -23,7 +26,7 @@ namespace ajokki
         console_top_y_setting_struct.setting_master = setting_master;
         console_top_y_setting_struct.activate_callback = nullptr;
         console_top_y_setting_struct.should_ylikuutio_call_activate_callback_now = false;
-        new config::Setting(console_top_y_setting_struct);
+        new yli::config::Setting(console_top_y_setting_struct);
 
         uint32_t console_bottom_y = 0;
         std::shared_ptr<datatypes::AnyValue> any_value_console_bottom_y = std::make_shared<datatypes::AnyValue>(console_bottom_y);
@@ -32,7 +35,7 @@ namespace ajokki
         console_bottom_y_setting_struct.setting_master = setting_master;
         console_bottom_y_setting_struct.activate_callback = nullptr;
         console_bottom_y_setting_struct.should_ylikuutio_call_activate_callback_now = false;
-        new config::Setting(console_bottom_y_setting_struct);
+        new yli::config::Setting(console_bottom_y_setting_struct);
 
         uint32_t console_right_x = 39;
         std::shared_ptr<datatypes::AnyValue> any_value_console_right_x = std::make_shared<datatypes::AnyValue>(console_right_x);
@@ -41,7 +44,7 @@ namespace ajokki
         console_right_x_setting_struct.setting_master = setting_master;
         console_right_x_setting_struct.activate_callback = nullptr;
         console_right_x_setting_struct.should_ylikuutio_call_activate_callback_now = false;
-        new config::Setting(console_right_x_setting_struct);
+        new yli::config::Setting(console_right_x_setting_struct);
 
         uint32_t console_left_x = 0;
         std::shared_ptr<datatypes::AnyValue> any_value_console_left_x = std::make_shared<datatypes::AnyValue>(console_left_x);
@@ -50,6 +53,6 @@ namespace ajokki
         console_left_x_setting_struct.setting_master = setting_master;
         console_left_x_setting_struct.activate_callback = nullptr;
         console_left_x_setting_struct.should_ylikuutio_call_activate_callback_now = false;
-        new config::Setting(console_left_x_setting_struct);
+        new yli::config::Setting(console_left_x_setting_struct);
     }
 }

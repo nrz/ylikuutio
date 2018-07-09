@@ -15,9 +15,9 @@
 namespace ajokki
 {
     std::shared_ptr<datatypes::AnyValue> full_cleanup(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject* callback_object,
-            std::vector<callback_system::CallbackParameter*>&)
+            yli::callback_system::CallbackEngine*,
+            yli::callback_system::CallbackObject* callback_object,
+            std::vector<yli::callback_system::CallbackParameter*>&)
     {
         std::cout << "Cleaning up.\n";
 

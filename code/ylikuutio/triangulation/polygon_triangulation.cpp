@@ -11,50 +11,53 @@
 #include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
 
-namespace geometry
+namespace yli
 {
-    bool triangulate_simple_polygon(
-            const geometry::TriangulatePolygonsStruct triangulate_polygons_struct,
-            std::vector<glm::vec3>& out_vertices,
-            std::vector<glm::vec2>& out_UVs,
-            std::vector<glm::vec3>& out_normals)
+    namespace geometry
     {
-        // TODO: implement this function!
-        return false;
-    }
-
-    bool triangulate_polygons(
-            const geometry::TriangulatePolygonsStruct triangulate_polygons_struct,
-            std::vector<glm::vec3>& out_vertices,
-            std::vector<glm::vec2>& out_UVs,
-            std::vector<glm::vec3>& out_normals)
-    {
-        // TODO: implement this function!
-
-        // Find hidden vertices using `get_intersection_point(geometry::LineSegment2D* line_segment1, geometry::LineSegment2D* line_segment2)`.
-        std::vector<std::vector<glm::vec2>>* vertex_data = triangulate_polygons_struct.input_vertices;
-
-        // Each edge may have intersections with any other intersections
-        // except immediately previous and immediately next intersections.
-        // TODO: write the code!
-
-        for (uint32_t vertex_i = 0; vertex_i < vertex_data->size(); vertex_i++)
+        bool triangulate_simple_polygon(
+                const yli::geometry::TriangulatePolygonsStruct triangulate_polygons_struct,
+                std::vector<glm::vec3>& out_vertices,
+                std::vector<glm::vec2>& out_UVs,
+                std::vector<glm::vec3>& out_normals)
         {
+            // TODO: implement this function!
+            return false;
         }
 
-        // All vertices (3D, explicitly defined and hidden) should be known now.
-
-        // Divide complex polygons into simple polygons. Each vertex belongs to 1 or more simple polygons.
-        // TODO: write the code!
-        std::vector<std::vector<glm::vec3>> simple_polygons;
-
-        for (uint32_t vertex_i = 0; vertex_i < vertex_data->size(); vertex_i++)
+        bool triangulate_polygons(
+                const yli::geometry::TriangulatePolygonsStruct triangulate_polygons_struct,
+                std::vector<glm::vec3>& out_vertices,
+                std::vector<glm::vec2>& out_UVs,
+                std::vector<glm::vec3>& out_normals)
         {
+            // TODO: implement this function!
+
+            // Find hidden vertices using `get_intersection_point(yli::geometry::LineSegment2D* line_segment1, yli::geometry::LineSegment2D* line_segment2)`.
+            std::vector<std::vector<glm::vec2>>* vertex_data = triangulate_polygons_struct.input_vertices;
+
+            // Each edge may have intersections with any other intersections
+            // except immediately previous and immediately next intersections.
+            // TODO: write the code!
+
+            for (uint32_t vertex_i = 0; vertex_i < vertex_data->size(); vertex_i++)
+            {
+            }
+
+            // All vertices (3D, explicitly defined and hidden) should be known now.
+
+            // Divide complex polygons into simple polygons. Each vertex belongs to 1 or more simple polygons.
+            // TODO: write the code!
+            std::vector<std::vector<glm::vec3>> simple_polygons;
+
+            for (uint32_t vertex_i = 0; vertex_i < vertex_data->size(); vertex_i++)
+            {
+            }
+
+            // Loop through simple polygons and triangulate them.
+            // TODO: write the code!
+
+            return false;
         }
-
-        // Loop through simple polygons and triangulate them.
-        // TODO: write the code!
-
-        return false;
     }
 }

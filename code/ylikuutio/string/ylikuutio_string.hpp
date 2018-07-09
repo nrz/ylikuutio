@@ -8,7 +8,7 @@
 #include <string>    // std::string
 #include <vector>    // std::vector
 
-namespace ylikuutio
+namespace yli
 {
     namespace string
     {

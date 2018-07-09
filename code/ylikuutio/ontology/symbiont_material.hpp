@@ -29,74 +29,77 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
-namespace ontology
+namespace yli
 {
-    class SymbiontSpecies;
-
-    class SymbiontMaterial: public ontology::Material
+    namespace ontology
     {
-        public:
-            // destructor.
-            virtual ~SymbiontMaterial();
+        class SymbiontSpecies;
 
-        private:
-            void bind(ontology::SymbiontSpecies* const symbiont_species);
+        class SymbiontMaterial: public yli::ontology::Material
+        {
+            public:
+                // destructor.
+                virtual ~SymbiontMaterial();
 
-            // constructor.
-            SymbiontMaterial(ontology::Universe* const universe, const MaterialStruct& material_struct)
-                : Material(universe, material_struct)
-            {
+            private:
+                void bind(yli::ontology::SymbiontSpecies* const symbiont_species);
+
                 // constructor.
-                this->parent = material_struct.symbiosis;
+                SymbiontMaterial(yli::ontology::Universe* const universe, const MaterialStruct& material_struct)
+                    : Material(universe, material_struct)
+                {
+                    // constructor.
+                    this->parent = material_struct.symbiosis;
 
-                this->ofbx_texture = material_struct.ofbx_texture;
+                    this->ofbx_texture = material_struct.ofbx_texture;
 
-                this->number_of_symbiont_species = 0;
+                    this->number_of_symbiont_species = 0;
 
-                // get `childID` from the `Symbiosis` and set pointer to this `SymbiontMaterial`.
-                this->bind_to_parent();
+                    // get `childID` from the `Symbiosis` and set pointer to this `SymbiontMaterial`.
+                    this->bind_to_parent();
 
-                this->load_texture();
+                    this->load_texture();
 
-                this->child_vector_pointers_vector.push_back(&this->symbiont_species_pointer_vector);
-                this->type = "ontology::SymbiontMaterial*";
-            }
+                    this->child_vector_pointers_vector.push_back(&this->symbiont_species_pointer_vector);
+                    this->type = "yli::ontology::SymbiontMaterial*";
+                }
 
-            // this method sets `SymbiontSpecies` pointer.
-            void set_symbiont_species_pointer(const int32_t childID, ontology::SymbiontSpecies* const child_pointer);
+                // this method sets `SymbiontSpecies` pointer.
+                void set_symbiont_species_pointer(const int32_t childID, yli::ontology::SymbiontSpecies* const child_pointer);
 
-            GLuint get_texture() const;
-            GLuint get_openGL_textureID() const;
+                GLuint get_texture() const;
+                GLuint get_openGL_textureID() const;
 
-            friend class Symbiosis;
-            friend class SymbiontSpecies;
-            template<class T1>
-                friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, int32_t* number_of_children);
-            template<class T1>
-                friend void render_children(const std::vector<T1>& child_pointer_vector);
+                friend class Symbiosis;
+                friend class SymbiontSpecies;
+                template<class T1>
+                    friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, int32_t* number_of_children);
+                template<class T1>
+                    friend void render_children(const std::vector<T1>& child_pointer_vector);
 
-            void bind_to_parent();
+                void bind_to_parent();
 
-            void load_texture();
+                void load_texture();
 
-            // this method renders all `SymbiontSpecies` using this `SymbiontMaterial`.
-            void render();
+                // this method renders all `SymbiontSpecies` using this `SymbiontMaterial`.
+                void render();
 
-            ontology::Entity* get_parent() const override;
-            int32_t get_number_of_children() const override;
-            int32_t get_number_of_descendants() const override;
+                yli::ontology::Entity* get_parent() const override;
+                int32_t get_number_of_children() const override;
+                int32_t get_number_of_descendants() const override;
 
-            ontology::Symbiosis* parent;           // pointer to `Symbiosis`.
+                yli::ontology::Symbiosis* parent;           // pointer to `Symbiosis`.
 
-            const ofbx::Texture* ofbx_texture;
+                const ofbx::Texture* ofbx_texture;
 
-            GLuint texture;                        // Texture of this `SymbiontMaterial`.
-            GLuint openGL_textureID;               // texture ID, returned by `glGetUniformLocation(programID, "myTextureSampler");`.
+                GLuint texture;                        // Texture of this `SymbiontMaterial`.
+                GLuint openGL_textureID;               // texture ID, returned by `glGetUniformLocation(programID, "myTextureSampler");`.
 
-            std::vector<ontology::SymbiontSpecies*> symbiont_species_pointer_vector;
-            std::queue<int32_t> free_symbiont_speciesID_queue;
-            int32_t number_of_symbiont_species;
-    };
+                std::vector<yli::ontology::SymbiontSpecies*> symbiont_species_pointer_vector;
+                std::queue<int32_t> free_symbiont_speciesID_queue;
+                int32_t number_of_symbiont_species;
+        };
+    }
 }
 
 #endif

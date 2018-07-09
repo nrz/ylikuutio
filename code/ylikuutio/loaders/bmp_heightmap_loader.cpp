@@ -135,16 +135,16 @@ namespace loaders
 
         std::cout << "color channel in use: " << color_channel << "\n";
 
-        geometry::TriangulateQuadsStruct triangulate_quads_struct;
+        yli::geometry::TriangulateQuadsStruct triangulate_quads_struct;
         triangulate_quads_struct.image_width = image_width;
         triangulate_quads_struct.image_height = image_height;
         triangulate_quads_struct.x_step = x_step;
         triangulate_quads_struct.z_step = z_step;
         triangulate_quads_struct.triangulation_type = triangulation_type;
         triangulate_quads_struct.sphere_radius = NAN;
-        triangulate_quads_struct.spherical_terrain_struct = geometry::SphericalTerrainStruct(); // not used, but is needed in the function call.
+        triangulate_quads_struct.spherical_terrain_struct = yli::geometry::SphericalTerrainStruct(); // not used, but is needed in the function call.
 
-        bool result = geometry::triangulate_quads(vertex_data, triangulate_quads_struct, out_vertices, out_UVs, out_normals);
+        bool result = yli::geometry::triangulate_quads(vertex_data, triangulate_quads_struct, out_vertices, out_UVs, out_normals);
         delete[] vertex_data;
         return result;
     }

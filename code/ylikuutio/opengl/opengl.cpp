@@ -15,7 +15,7 @@
 // Include standard headers
 #include <iostream> // std::cout, std::cin, std::cerr
 
-namespace ylikuutio
+namespace yli
 {
     namespace opengl
     {
@@ -57,6 +57,12 @@ namespace ylikuutio
         {
             // Enable depth test.
             glEnable(GL_DEPTH_TEST);
+        }
+
+        void disable_depth_test()
+        {
+            // Disable depth test.
+            glDisable(GL_DEPTH_TEST);
         }
 
         void set_depth_func_to_less()

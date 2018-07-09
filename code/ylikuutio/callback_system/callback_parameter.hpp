@@ -9,39 +9,45 @@
 #include <memory>        // std::make_shared, std::shared_ptr
 #include <string>        // std::string
 
-namespace ontology
+namespace yli
 {
-    class Universe;
+    namespace ontology
+    {
+        class Universe;
+    }
 }
 
-namespace callback_system
+namespace yli
 {
-    class CallbackParameter
+    namespace callback_system
     {
-        public:
+        class CallbackParameter
+        {
+            public:
 
-            // constructor.
-            CallbackParameter(const std::string& name, std::shared_ptr<datatypes::AnyValue> any_value, const bool is_reference, callback_system::CallbackObject* const parent);
+                // constructor.
+                CallbackParameter(const std::string& name, std::shared_ptr<datatypes::AnyValue> any_value, const bool is_reference, yli::callback_system::CallbackObject* const parent);
 
-            // destructor.
-            ~CallbackParameter();
+                // destructor.
+                ~CallbackParameter();
 
-            // getter.
-            std::shared_ptr<datatypes::AnyValue> get_any_value() const;
+                // getter.
+                std::shared_ptr<datatypes::AnyValue> get_any_value() const;
 
-            friend class CallbackObject;
+                friend class CallbackObject;
 
-            int32_t childID;                // callback parameter ID, returned by `callback_system::CallbackObject->get_callback_parameterID()`.
+                int32_t childID;                // callback parameter ID, returned by `yli::callback_system::CallbackObject->get_callback_parameterID()`.
 
-        private:
-            void bind_to_parent();
+            private:
+                void bind_to_parent();
 
-            callback_system::CallbackObject* parent; // pointer to the callback object.
+                yli::callback_system::CallbackObject* parent; // pointer to the callback object.
 
-            std::string name;
-            std::shared_ptr<datatypes::AnyValue> any_value; // this is `private` to make sure that someone does not overwrite it.
-            bool is_reference;              // if true, the value is read from the hashmap. if false, then the value is read from the union.
-    };
+                std::string name;
+                std::shared_ptr<datatypes::AnyValue> any_value; // this is `private` to make sure that someone does not overwrite it.
+                bool is_reference;              // if true, the value is read from the hashmap. if false, then the value is read from the union.
+        };
+    }
 }
 
 #endif

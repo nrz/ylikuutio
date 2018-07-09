@@ -230,6 +230,9 @@ if(COMPILE_SFML_FROM_SOURCE)
             # SFML-2.4.2/extlibs/headers/FLAC/assert.h
             )
         add_dependencies(sfml-audio sfml-system)
+    endif()
+
+    if(CMAKE_CROSSCOMPILING AND CMAKE_SYSTEM_NAME STREQUAL "Windows")
         target_link_libraries(sfml-audio
             sfml-system
             pthread
@@ -240,6 +243,33 @@ if(COMPILE_SFML_FROM_SOURCE)
             ${CMAKE_SOURCE_DIR}/external/SFML-2.4.2/extlibs/libs-mingw/x64/libogg.a
             ${CMAKE_SOURCE_DIR}/external/SFML-2.4.2/extlibs/libs-mingw/x64/libvorbisenc.a
             )
+        set_property(TARGET sfml-audio PROPERTY COMPILE_FLAGS "-DSFML_STATIC -DSFML_STATIC_LIBRARIES -DSFML_USE_STATIC_STD_LIBS")
+    elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
+        if(SFML_COMPILER_MSVC AND SFML_MSVC_VERSION LESS 14)
+            target_link_libraries(sfml-audio
+                sfml-system
+                ${CMAKE_SOURCE_DIR}/external/SFML-2.4.2/extlibs/libs-msvc/x64/flac.lib
+                ${CMAKE_SOURCE_DIR}/external/SFML-2.4.2/extlibs/libs-msvc/x64/freetype.lib
+                ${CMAKE_SOURCE_DIR}/external/SFML-2.4.2/extlibs/libs-msvc/x64/jpeg.lib
+                ${CMAKE_SOURCE_DIR}/external/SFML-2.4.2/extlibs/libs-msvc/x64/ogg.lib
+                ${CMAKE_SOURCE_DIR}/external/SFML-2.4.2/extlibs/libs-msvc/x64/openal32.lib
+                ${CMAKE_SOURCE_DIR}/external/SFML-2.4.2/extlibs/libs-msvc/x64/vorbis.lib
+                ${CMAKE_SOURCE_DIR}/external/SFML-2.4.2/extlibs/libs-msvc/x64/vorbisenc.lib
+                ${CMAKE_SOURCE_DIR}/external/SFML-2.4.2/extlibs/libs-msvc/x64/vorbisfile.lib
+                )
+        elseif(SFML_COMPILER_MSVC)
+            target_link_libraries(sfml-audio
+                sfml-system
+                ${CMAKE_SOURCE_DIR}/external/SFML-2.4.2/extlibs/libs-msvc-universal/x64/flac.lib
+                ${CMAKE_SOURCE_DIR}/external/SFML-2.4.2/extlibs/libs-msvc-universal/x64/freetype.lib
+                ${CMAKE_SOURCE_DIR}/external/SFML-2.4.2/extlibs/libs-msvc-universal/x64/jpeg.lib
+                ${CMAKE_SOURCE_DIR}/external/SFML-2.4.2/extlibs/libs-msvc-universal/x64/ogg.lib
+                ${CMAKE_SOURCE_DIR}/external/SFML-2.4.2/extlibs/libs-msvc-universal/x64/openal32.lib
+                ${CMAKE_SOURCE_DIR}/external/SFML-2.4.2/extlibs/libs-msvc-universal/x64/vorbis.lib
+                ${CMAKE_SOURCE_DIR}/external/SFML-2.4.2/extlibs/libs-msvc-universal/x64/vorbisenc.lib
+                ${CMAKE_SOURCE_DIR}/external/SFML-2.4.2/extlibs/libs-msvc-universal/x64/vorbisfile.lib
+                )
+        endif()
         set_property(TARGET sfml-audio PROPERTY COMPILE_FLAGS "-DSFML_STATIC -DSFML_STATIC_LIBRARIES -DSFML_USE_STATIC_STD_LIBS")
     endif()
 endif()

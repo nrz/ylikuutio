@@ -4,9 +4,12 @@
 // Include standard headers
 #include <string>   // std::string
 
-namespace ontology
+namespace yli
 {
-    class Scene;
+    namespace ontology
+    {
+        class Scene;
+    }
 }
 
 typedef struct ShaderStruct
@@ -16,7 +19,7 @@ typedef struct ShaderStruct
     {
         // constructor.
     }
-    ontology::Scene* parent; // pointer to the scene (draw list).
+    yli::ontology::Scene* parent; // pointer to the scene (draw list).
     std::string vertex_shader;       // filename of vertex shader.
     std::string fragment_shader;     // filename of fragment shader.
 } ShaderStruct;

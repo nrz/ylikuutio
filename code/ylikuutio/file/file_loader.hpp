@@ -3,8 +3,11 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
-namespace file
+namespace yli
 {
-    std::string slurp(const std::string& file_path);
-    std::vector<uint8_t> binary_slurp(const std::string& file_path);
+    namespace file
+    {
+        std::string slurp(const std::string& file_path);
+        std::vector<uint8_t> binary_slurp(const std::string& file_path);
+    }
 }

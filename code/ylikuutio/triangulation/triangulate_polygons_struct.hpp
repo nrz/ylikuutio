@@ -10,18 +10,21 @@
 // Include standard headers
 #include <vector>   // std::vector
 
-namespace geometry
+namespace yli
 {
-    typedef struct TriangulatePolygonsStruct
+    namespace geometry
     {
-        TriangulatePolygonsStruct()
-            : input_vertices(nullptr), should_ylikuutio_use_real_texture_coordinates(true)
+        typedef struct TriangulatePolygonsStruct
         {
-            // constructor.
-        }
-        std::vector<std::vector<glm::vec2>>* input_vertices;
-        bool should_ylikuutio_use_real_texture_coordinates;
-    } TriangulatePolygonsStruct;
+            TriangulatePolygonsStruct()
+                : input_vertices(nullptr), should_ylikuutio_use_real_texture_coordinates(true)
+            {
+                // constructor.
+            }
+            std::vector<std::vector<glm::vec2>>* input_vertices;
+            bool should_ylikuutio_use_real_texture_coordinates;
+        } TriangulatePolygonsStruct;
+    }
 }
 
 #endif

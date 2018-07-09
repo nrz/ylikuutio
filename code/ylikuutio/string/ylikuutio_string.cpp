@@ -13,7 +13,7 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
-namespace ylikuutio
+namespace yli
 {
     namespace string
     {
@@ -240,7 +240,7 @@ namespace ylikuutio
                 const char* const description)
         {
             char char_number_buffer[1024];
-            ylikuutio::string::extract_string_with_several_endings(
+            yli::string::extract_string_with_several_endings(
                     src_base_pointer,
                     ++src_data_pointer,
                     src_data_size,
@@ -265,7 +265,7 @@ namespace ylikuutio
                 const char* const description)
         {
             char char_number_buffer[1024];
-            ylikuutio::string::extract_string_with_several_endings(
+            yli::string::extract_string_with_several_endings(
                     data_string,
                     ++data_index,
                     char_number_buffer,
@@ -290,7 +290,7 @@ namespace ylikuutio
                 const char* const description)
         {
             char char_number_buffer[1024];
-            ylikuutio::string::extract_string_with_several_endings(
+            yli::string::extract_string_with_several_endings(
                     src_base_pointer,
                     ++src_data_pointer,
                     src_data_size,
@@ -315,7 +315,7 @@ namespace ylikuutio
                 const char* const description)
         {
             char char_number_buffer[1024];
-            ylikuutio::string::extract_string_with_several_endings(
+            yli::string::extract_string_with_several_endings(
                     data_string,
                     ++data_index,
                     char_number_buffer,

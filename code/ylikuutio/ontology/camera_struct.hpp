@@ -10,9 +10,12 @@
 // Include standard headers
 #include <cmath> // NAN, std::isnan, std::pow
 
-namespace ontology
+namespace yli
 {
-    class Scene;
+    namespace ontology
+    {
+        class Scene;
+    }
 }
 
 typedef struct CameraStruct
@@ -26,7 +29,7 @@ typedef struct CameraStruct
     {
         // constructor.
     }
-    ontology::Scene* parent;                          // pointer to the parent `Scene`.
+    yli::ontology::Scene* parent;                          // pointer to the parent `Scene`.
 
     // `cartesian_coordinates` can be accessed as a vector or as single coordinates `x`, `y`, `z`.
     glm::vec3 cartesian_coordinates; // coordinate vector.

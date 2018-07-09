@@ -9,7 +9,7 @@
 
 namespace ajokki
 {
-    void set_wireframe(config::SettingMaster* setting_master)
+    void set_wireframe(yli::config::SettingMaster* setting_master)
     {
         // Do not use wireframe by default.
 
@@ -18,8 +18,8 @@ namespace ajokki
         SettingStruct wireframe_setting_struct(std::make_shared<datatypes::AnyValue>(bool_false));
         wireframe_setting_struct.name = "wireframe";
         wireframe_setting_struct.setting_master = setting_master;
-        wireframe_setting_struct.activate_callback = &config::SettingMaster::activate_wireframe;
+        wireframe_setting_struct.activate_callback = &yli::config::SettingMaster::activate_wireframe;
         wireframe_setting_struct.should_ylikuutio_call_activate_callback_now = true;
-        new config::Setting(wireframe_setting_struct);
+        new yli::config::Setting(wireframe_setting_struct);
     }
 }

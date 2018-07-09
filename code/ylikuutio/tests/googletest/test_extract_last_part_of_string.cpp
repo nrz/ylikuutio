@@ -16,7 +16,7 @@ TEST(extract_last_part_of_string, nothing_must_be_extracted_when_source_string_i
     const char* orig_dest_array = dest_array;
     const char separator = 'a';
 
-    ylikuutio::string::extract_last_part_of_string(text, sizeof(text), dest_array, array_size, separator);
+    yli::string::extract_last_part_of_string(text, sizeof(text), dest_array, array_size, separator);
     ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array, 0);
 }
@@ -31,7 +31,7 @@ TEST(extract_last_part_of_string, nothing_must_be_extracted_when_source_string_i
     const char* orig_dest_array = dest_array;
     const char separator = 'b';
 
-    ylikuutio::string::extract_last_part_of_string(text, sizeof(text), dest_array, array_size, separator);
+    yli::string::extract_last_part_of_string(text, sizeof(text), dest_array, array_size, separator);
     ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array, 0);
 }
@@ -46,7 +46,7 @@ TEST(extract_last_part_of_string, nothing_must_be_extracted_when_source_string_i
     const char* orig_dest_array = dest_array;
     const char separator = 'b';
 
-    ylikuutio::string::extract_last_part_of_string(text, sizeof(text), dest_array, array_size, separator);
+    yli::string::extract_last_part_of_string(text, sizeof(text), dest_array, array_size, separator);
     ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array, 0);
 }
@@ -61,7 +61,7 @@ TEST(extract_last_part_of_string, nothing_must_be_extracted_when_source_string_i
     const char* orig_dest_array = dest_array;
     const char separator = 'c';
 
-    ylikuutio::string::extract_last_part_of_string(text, sizeof(text), dest_array, array_size, separator);
+    yli::string::extract_last_part_of_string(text, sizeof(text), dest_array, array_size, separator);
     ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array, 0);
 }
@@ -76,7 +76,7 @@ TEST(extract_last_part_of_string, nothing_must_be_extracted_when_source_string_i
     const char* orig_dest_array = dest_array;
     const char separator = 'd';
 
-    ylikuutio::string::extract_last_part_of_string(text, sizeof(text), dest_array, array_size, separator);
+    yli::string::extract_last_part_of_string(text, sizeof(text), dest_array, array_size, separator);
     ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array, 0);
 }
@@ -91,7 +91,7 @@ TEST(extract_last_part_of_string, nothing_must_be_extracted_when_source_string_i
     const char* orig_dest_array = dest_array;
     const char separator = 'b';
 
-    ylikuutio::string::extract_last_part_of_string(text, sizeof(text), dest_array, array_size, separator);
+    yli::string::extract_last_part_of_string(text, sizeof(text), dest_array, array_size, separator);
     ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array, 0);
 }
@@ -106,7 +106,7 @@ TEST(extract_last_part_of_string, nothing_must_be_extracted_when_source_string_i
     const char* orig_dest_array = dest_array;
     const char separator = 'a';
 
-    ylikuutio::string::extract_last_part_of_string(text, sizeof(text), dest_array, array_size, separator);
+    yli::string::extract_last_part_of_string(text, sizeof(text), dest_array, array_size, separator);
     ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array, 0);
 }
@@ -121,7 +121,7 @@ TEST(extract_last_part_of_string, nothing_must_be_extracted_when_source_string_i
     const char* orig_dest_array = dest_array;
     const char separator = 'a';
 
-    ylikuutio::string::extract_last_part_of_string(text, sizeof(text), dest_array, array_size, separator);
+    yli::string::extract_last_part_of_string(text, sizeof(text), dest_array, array_size, separator);
     ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array, 0);
 }
@@ -136,7 +136,7 @@ TEST(extract_last_part_of_string, 1_char_must_be_extracted_when_source_string_is
     const char* orig_dest_array = dest_array;
     const char separator = 'a';
 
-    ylikuutio::string::extract_last_part_of_string(text, sizeof(text), dest_array, array_size, separator);
+    yli::string::extract_last_part_of_string(text, sizeof(text), dest_array, array_size, separator);
     ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array++, 'b');
     ASSERT_EQ(*dest_array, 0);
@@ -152,7 +152,7 @@ TEST(extract_last_part_of_string, nothing_must_be_extracted_when_source_string_i
     const char* orig_dest_array = dest_array;
     const char separator = 'c';
 
-    ylikuutio::string::extract_last_part_of_string(text, sizeof(text), dest_array, array_size, separator);
+    yli::string::extract_last_part_of_string(text, sizeof(text), dest_array, array_size, separator);
     ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array, 0);
 }
@@ -167,7 +167,7 @@ TEST(extract_last_part_of_string, 1_char_must_be_extracted_when_source_string_is
     const char* orig_dest_array = dest_array;
     const char separator = 'b';
 
-    ylikuutio::string::extract_last_part_of_string(text, sizeof(text), dest_array, array_size, separator);
+    yli::string::extract_last_part_of_string(text, sizeof(text), dest_array, array_size, separator);
     ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array++, 'c');
     ASSERT_EQ(*dest_array, 0);
@@ -183,7 +183,7 @@ TEST(extract_last_part_of_string, 2_chars_must_be_extracted_when_source_string_i
     const char* orig_dest_array = dest_array;
     const char separator = 'a';
 
-    ylikuutio::string::extract_last_part_of_string(text, sizeof(text), dest_array, array_size, separator);
+    yli::string::extract_last_part_of_string(text, sizeof(text), dest_array, array_size, separator);
     ASSERT_EQ(dest_array, orig_dest_array);
     ASSERT_EQ(*dest_array++, 'b');
     ASSERT_EQ(*dest_array++, 'c');

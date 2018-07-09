@@ -10,7 +10,7 @@
 #include <GLFW/glfw3.h>
 #endif
 
-namespace ylikuutio
+namespace yli
 {
     namespace opengl
     {
@@ -19,6 +19,7 @@ namespace ylikuutio
         void make_context_current(GLFWwindow* window);
         bool init_glew();
         void enable_depth_test();
+        void disable_depth_test();
         void set_depth_func_to_less();
         void cull_triangles();
         void set_background_color(float red, float green, float blue, float alpha);

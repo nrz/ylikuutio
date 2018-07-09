@@ -8,24 +8,27 @@
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 
-namespace geometry
+namespace yli
 {
-    typedef struct TriangulateQuadsStruct
+    namespace geometry
     {
-        TriangulateQuadsStruct()
-            : image_width(-1), image_height(-1), should_ylikuutio_use_real_texture_coordinates(true), sphere_radius(NAN), x_step(1), z_step(1)
+        typedef struct TriangulateQuadsStruct
         {
-            // constructor.
-        }
-        int32_t image_width;
-        int32_t image_height;
-        int32_t x_step;
-        int32_t z_step;
-        std::string triangulation_type;
-        bool should_ylikuutio_use_real_texture_coordinates;
-        double sphere_radius;
-        geometry::SphericalTerrainStruct spherical_terrain_struct;
-    } TriangulateQuadsStruct;
+            TriangulateQuadsStruct()
+                : image_width(-1), image_height(-1), should_ylikuutio_use_real_texture_coordinates(true), sphere_radius(NAN), x_step(1), z_step(1)
+            {
+                // constructor.
+            }
+            int32_t image_width;
+            int32_t image_height;
+            int32_t x_step;
+            int32_t z_step;
+            std::string triangulation_type;
+            bool should_ylikuutio_use_real_texture_coordinates;
+            double sphere_radius;
+            yli::geometry::SphericalTerrainStruct spherical_terrain_struct;
+        } TriangulateQuadsStruct;
+    }
 }
 
 #endif

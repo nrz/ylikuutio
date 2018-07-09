@@ -33,6 +33,6 @@ namespace space_partition
     void ChunkMaster::render()
     {
         // render `ChunkMaster` by calling `render()` function of each `Chunk`.
-        ontology::render_children<space_partition::Chunk*>(this->chunk_pointer_vector);
+        yli::ontology::render_children<space_partition::Chunk*>(this->chunk_pointer_vector);
     }
 }

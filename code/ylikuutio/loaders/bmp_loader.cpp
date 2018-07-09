@@ -23,7 +23,7 @@ namespace loaders
         std::cout << "Loading BMP file " << bmp_filename << " ...\n";
 
         // Open the file
-        const std::vector<uint8_t> file_content = file::binary_slurp(bmp_filename);
+        const std::vector<uint8_t> file_content = yli::file::binary_slurp(bmp_filename);
 
         if (file_content.empty())
         {
@@ -50,7 +50,7 @@ namespace loaders
         uint8_t* file_content_uint8_t = (uint8_t*) file_content.data();
 
         // The start offset of pixel array in file.
-        uint32_t pixel_array_start_offset = ylikuutio::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(file_content_uint8_t, 0x0a);
+        uint32_t pixel_array_start_offset = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(file_content_uint8_t, 0x0a);
 
         if (pixel_array_start_offset >= file_content.size())
         {
@@ -59,7 +59,7 @@ namespace loaders
         }
 
         // Make sure this is a 24bpp file
-        uint32_t bits_per_pixel = ylikuutio::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(file_content_uint8_t, 0x1c);
+        uint32_t bits_per_pixel = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(file_content_uint8_t, 0x1c);
 
         if (bits_per_pixel != 24)
         {
@@ -67,7 +67,7 @@ namespace loaders
             return nullptr;
         }
 
-        uint32_t compression_type = ylikuutio::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(file_content_uint8_t, 0x1e);
+        uint32_t compression_type = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(file_content_uint8_t, 0x1e);
 
         if (compression_type != 0)
         {
@@ -76,7 +76,7 @@ namespace loaders
         }
 
         // Read the information about the image
-        uint32_t image_size_uint32_t = ylikuutio::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(file_content_uint8_t, 0x22);
+        uint32_t image_size_uint32_t = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(file_content_uint8_t, 0x22);
 
         if (image_size_uint32_t > 2147483647)
         {
@@ -87,8 +87,8 @@ namespace loaders
         image_size = static_cast<std::size_t>(image_size_uint32_t);
         std::cout << "image size is " << image_size << " bytes.\n";
 
-        image_width = ylikuutio::memory::read_nonaligned_32_bit<uint8_t, int32_t>(file_content_uint8_t, 0x12);
-        image_height = ylikuutio::memory::read_nonaligned_32_bit<uint8_t, int32_t>(file_content_uint8_t, 0x16);
+        image_width = yli::memory::read_nonaligned_32_bit<uint8_t, int32_t>(file_content_uint8_t, 0x12);
+        image_height = yli::memory::read_nonaligned_32_bit<uint8_t, int32_t>(file_content_uint8_t, 0x16);
 
         // Some BMP files are misformatted, guess missing information
         if (image_size == 0)

@@ -1,14 +1,17 @@
 #ifndef __AJOKKI_WIREFRAME_HPP_INCLUDED
 #define __AJOKKI_WIREFRAME_HPP_INCLUDED
 
-namespace config
+namespace yli
 {
-    class SettingMaster;
+    namespace config
+    {
+        class SettingMaster;
+    }
 }
 
 namespace ajokki
 {
-    void set_wireframe(config::SettingMaster* setting_master);
+    void set_wireframe(yli::config::SettingMaster* setting_master);
 }
 
 #endif

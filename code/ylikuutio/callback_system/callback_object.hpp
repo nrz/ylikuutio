@@ -14,65 +14,68 @@
 #include <unordered_map> // std::unordered_map
 #include <vector>        // std::vector
 
-namespace callback_system
+namespace yli
 {
-    class CallbackParameter;
-
-    class CallbackObject
+    namespace callback_system
     {
-        // CallbackObject is an object that contains a single callback.
+        class CallbackParameter;
 
-        public:
-            // constructor.
-            CallbackObject(callback_system::CallbackEngine* parent);
+        class CallbackObject
+        {
+            // CallbackObject is an object that contains a single callback.
 
-            // constructor.
-            CallbackObject(const InputParametersToAnyValueCallback callback, callback_system::CallbackEngine* parent);
+            public:
+                // constructor.
+                CallbackObject(yli::callback_system::CallbackEngine* parent);
 
-            // destructor.
-            virtual ~CallbackObject();
+                // constructor.
+                CallbackObject(const InputParametersToAnyValueCallback callback, yli::callback_system::CallbackEngine* parent);
 
-            // this method changes the callback without changing the parameters of CallbackObject.
-            void set_new_callback(const InputParametersToAnyValueCallback callback);
+                // destructor.
+                virtual ~CallbackObject();
 
-            // getter functions for callbacks and callback objects.
-            std::shared_ptr<datatypes::AnyValue> get_any_value(const std::string& name) const;
-            std::shared_ptr<datatypes::AnyValue> get_arg(const uint32_t arg_i) const;
+                // this method changes the callback without changing the parameters of CallbackObject.
+                void set_new_callback(const InputParametersToAnyValueCallback callback);
 
-            // setter function for callbacks and callback objects.
-            void set_any_value(const std::string& name, std::shared_ptr<datatypes::AnyValue> any_value);
+                // getter functions for callbacks and callback objects.
+                std::shared_ptr<datatypes::AnyValue> get_any_value(const std::string& name) const;
+                std::shared_ptr<datatypes::AnyValue> get_arg(const uint32_t arg_i) const;
 
-            friend class CallbackEngine;
-            friend class CallbackParameter;
-            template<class T1>
-                friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, int32_t* number_of_children);
-            template<class T1, class T2>
-                friend void hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent, std::vector<T1>& old_child_pointer_vector, std::queue<int32_t>& old_free_childID_queue, int32_t* old_number_of_children);
+                // setter function for callbacks and callback objects.
+                void set_any_value(const std::string& name, std::shared_ptr<datatypes::AnyValue> any_value);
 
-        protected:
-            void bind_to_parent();
+                friend class CallbackEngine;
+                friend class CallbackParameter;
+                template<class T1>
+                    friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, int32_t* number_of_children);
+                template<class T1, class T2>
+                    friend void hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent, std::vector<T1>& old_child_pointer_vector, std::queue<int32_t>& old_free_childID_queue, int32_t* old_number_of_children);
 
-            // this method sets a callback parameter pointer.
-            void set_callback_parameter_pointer(const int32_t childID, callback_system::CallbackParameter* const child_pointer);
+            protected:
+                void bind_to_parent();
 
-            void bind_child_to_parent(callback_system::CallbackParameter* child_pointer);
+                // this method sets a callback parameter pointer.
+                void set_callback_parameter_pointer(const int32_t childID, yli::callback_system::CallbackParameter* const child_pointer);
 
-            // execute this callback.
-            virtual std::shared_ptr<datatypes::AnyValue> execute();
+                void bind_child_to_parent(yli::callback_system::CallbackParameter* child_pointer);
 
-            callback_system::CallbackEngine* parent; // pointer to the callback engine.
+                // execute this callback.
+                virtual std::shared_ptr<datatypes::AnyValue> execute();
 
-            int32_t childID;                                 // callback object ID, returned by `callback_system::CallbackEngine->get_callback_objectID()`.
+                yli::callback_system::CallbackEngine* parent; // pointer to the callback engine.
 
-            std::vector<callback_system::CallbackParameter*> callback_parameter_pointer_vector;
-            std::queue<int32_t> free_callback_parameterID_queue;
-            int32_t number_of_callback_parameters;
+                int32_t childID;                                 // callback object ID, returned by `yli::callback_system::CallbackEngine->get_callback_objectID()`.
 
-            InputParametersToAnyValueCallback callback;
+                std::vector<yli::callback_system::CallbackParameter*> callback_parameter_pointer_vector;
+                std::queue<int32_t> free_callback_parameterID_queue;
+                int32_t number_of_callback_parameters;
 
-            // A hash map used to store variables.
-            std::unordered_map<std::string, datatypes::AnyValue> anyvalue_hashmap;
-    };
+                InputParametersToAnyValueCallback callback;
+
+                // A hash map used to store variables.
+                std::unordered_map<std::string, datatypes::AnyValue> anyvalue_hashmap;
+        };
+    }
 }
 
 #endif

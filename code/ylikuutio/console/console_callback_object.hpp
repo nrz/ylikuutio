@@ -9,37 +9,43 @@
 // Include standard headers
 #include <memory>   // std::make_shared, std::shared_ptr
 
-namespace callback_system
+namespace yli
 {
-    class CallbackParameter;
+    namespace callback_system
+    {
+        class CallbackParameter;
+    }
 }
 
-namespace console
+namespace yli
 {
-    class ConsoleCallbackObject : public callback_system::CallbackObject
+    namespace console
     {
-        public:
-            // constructor.
-            ConsoleCallbackObject(InputParametersToAnyValueCallbackWithConsole console_callback,
-                    callback_system::CallbackEngine* parent, console::Console* console_pointer)
-                : callback_system::CallbackObject(nullptr, parent)
-            {
+        class ConsoleCallbackObject : public yli::callback_system::CallbackObject
+        {
+            public:
                 // constructor.
-                this->callback = nullptr;
-                this->console_callback = console_callback;
-                this->console_pointer = console_pointer;
-            }
+                ConsoleCallbackObject(InputParametersToAnyValueCallbackWithConsole console_callback,
+                        yli::callback_system::CallbackEngine* parent, yli::console::Console* console_pointer)
+                    : yli::callback_system::CallbackObject(nullptr, parent)
+                {
+                    // constructor.
+                    this->callback = nullptr;
+                    this->console_callback = console_callback;
+                    this->console_pointer = console_pointer;
+                }
 
-            // destructor.
-            ~ConsoleCallbackObject();
+                // destructor.
+                ~ConsoleCallbackObject();
 
-        private:
-            // execute this callback.
-            std::shared_ptr<datatypes::AnyValue> execute();
+            private:
+                // execute this callback.
+                std::shared_ptr<datatypes::AnyValue> execute();
 
-            InputParametersToAnyValueCallbackWithConsole console_callback;
-            console::Console* console_pointer;
-    };
+                InputParametersToAnyValueCallbackWithConsole console_callback;
+                yli::console::Console* console_pointer;
+        };
+    }
 }
 
 #endif

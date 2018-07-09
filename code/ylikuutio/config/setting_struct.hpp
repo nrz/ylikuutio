@@ -7,9 +7,12 @@
 // Include standard headers
 #include <memory>   // std::make_shared, std::shared_ptr
 
-namespace config
+namespace yli
 {
-    class SettingMaster;
+    namespace config
+    {
+        class SettingMaster;
+    }
 }
 
 typedef struct SettingStruct
@@ -25,7 +28,7 @@ typedef struct SettingStruct
     }
     std::string name;
     std::shared_ptr<datatypes::AnyValue> initial_value;
-    config::SettingMaster* setting_master;
+    yli::config::SettingMaster* setting_master;
     ActivateCallback activate_callback;
     ReadCallback read_callback;
     bool should_ylikuutio_call_activate_callback_now;

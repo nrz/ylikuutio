@@ -37,96 +37,99 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
-namespace ontology
+namespace yli
 {
-    class Biont;
-
-    class Holobiont: public ontology::Movable
+    namespace ontology
     {
-        public:
-            void bind_biont(ontology::Biont* const biont);
-            void unbind_biont(const int32_t childID);
+        class Biont;
 
-            // this method sets pointer to this `Object` to nullptr, sets `parent` according to the input,
-            // and requests a new `childID` from the new `Species` or from the new `Glyph`.
-            void bind_to_new_parent(ontology::Symbiosis* const new_parent);
+        class Holobiont: public yli::ontology::Movable
+        {
+            public:
+                void bind_biont(yli::ontology::Biont* const biont);
+                void unbind_biont(const int32_t childID);
 
-            // constructor.
-            Holobiont(ontology::Universe* const universe, HolobiontStruct& holobiont_struct)
-                : Movable(universe, holobiont_struct.cartesian_coordinates)
-            {
+                // this method sets pointer to this `Object` to nullptr, sets `parent` according to the input,
+                // and requests a new `childID` from the new `Species` or from the new `Glyph`.
+                void bind_to_new_parent(yli::ontology::Symbiosis* const new_parent);
+
                 // constructor.
-                this->symbiosis_parent      = holobiont_struct.symbiosis_parent;
+                Holobiont(yli::ontology::Universe* const universe, HolobiontStruct& holobiont_struct)
+                    : Movable(universe, holobiont_struct.cartesian_coordinates)
+                {
+                    // constructor.
+                    this->symbiosis_parent      = holobiont_struct.symbiosis_parent;
 
-                this->original_scale_vector = holobiont_struct.original_scale_vector;
-                this->rotate_angle          = holobiont_struct.rotate_angle;
-                this->rotate_vector         = holobiont_struct.rotate_vector;
-                this->initial_rotate_angle  = holobiont_struct.initial_rotate_angle;
-                this->initial_rotate_vector = holobiont_struct.initial_rotate_vector;
-                this->quaternions_in_use    = holobiont_struct.quaternions_in_use;
-                this->cartesian_coordinates = holobiont_struct.cartesian_coordinates;
-                this->translate_vector      = holobiont_struct.translate_vector;
-                this->has_entered           = false;
+                    this->original_scale_vector = holobiont_struct.original_scale_vector;
+                    this->rotate_angle          = holobiont_struct.rotate_angle;
+                    this->rotate_vector         = holobiont_struct.rotate_vector;
+                    this->initial_rotate_angle  = holobiont_struct.initial_rotate_angle;
+                    this->initial_rotate_vector = holobiont_struct.initial_rotate_vector;
+                    this->quaternions_in_use    = holobiont_struct.quaternions_in_use;
+                    this->cartesian_coordinates = holobiont_struct.cartesian_coordinates;
+                    this->translate_vector      = holobiont_struct.translate_vector;
+                    this->has_entered           = false;
 
-                this->should_ylikuutio_render_this_holobiont = true;
-                this->number_of_bionts = 0;
+                    this->should_ylikuutio_render_this_holobiont = true;
+                    this->number_of_bionts = 0;
 
-                // get `childID` from `Symbiosis` and set pointer to this `Holobiont`.
-                this->bind_to_parent();
-                this->type = "ontology::Holobiont*";
+                    // get `childID` from `Symbiosis` and set pointer to this `Holobiont`.
+                    this->bind_to_parent();
+                    this->type = "yli::ontology::Holobiont*";
 
-                this->create_bionts();
+                    this->create_bionts();
 
-                this->can_be_erased = true;
-            }
+                    this->can_be_erased = true;
+                }
 
-            // destructor.
-            virtual ~Holobiont();
+                // destructor.
+                virtual ~Holobiont();
 
-            void update_x(float x);
-            void update_y(float y);
-            void update_z(float z);
+                void update_x(float x);
+                void update_y(float y);
+                void update_z(float z);
 
-            ontology::Entity* get_parent() const override;
+                yli::ontology::Entity* get_parent() const override;
 
-            void set_biont_pointer(const int32_t childID, ontology::Biont* const child_pointer);
+                void set_biont_pointer(const int32_t childID, yli::ontology::Biont* const child_pointer);
 
-            template<class T1>
-                friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, int32_t* number_of_children);
-            template<class T1, class T2>
-                friend void hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent, std::vector<T1>& old_child_pointer_vector, std::queue<int32_t>& old_free_childID_queue, int32_t* old_number_of_children);
-            template<class T1>
-                friend void render_children(const std::vector<T1>& child_pointer_vector);
+                template<class T1>
+                    friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, int32_t* number_of_children);
+                template<class T1, class T2>
+                    friend void hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent, std::vector<T1>& old_child_pointer_vector, std::queue<int32_t>& old_free_childID_queue, int32_t* old_number_of_children);
+                template<class T1>
+                    friend void render_children(const std::vector<T1>& child_pointer_vector);
 
-        private:
-            void bind_to_parent();
+            private:
+                void bind_to_parent();
 
-            // this method renders this `Holobiont`.
-            void render();
+                // this method renders this `Holobiont`.
+                void render();
 
-            void create_bionts();
+                void create_bionts();
 
-            int32_t get_number_of_children() const override;
-            int32_t get_number_of_descendants() const override;
+                int32_t get_number_of_children() const override;
+                int32_t get_number_of_descendants() const override;
 
-            std::vector<ontology::Biont*> biont_pointer_vector;
-            std::queue<int32_t> free_biontID_queue;
-            int32_t number_of_bionts;
+                std::vector<yli::ontology::Biont*> biont_pointer_vector;
+                std::queue<int32_t> free_biontID_queue;
+                int32_t number_of_bionts;
 
-            ontology::Symbiosis* symbiosis_parent; // pointer to `Symbiosis`.
+                yli::ontology::Symbiosis* symbiosis_parent; // pointer to `Symbiosis`.
 
-            bool quaternions_in_use;
+                bool quaternions_in_use;
 
-            bool has_entered;
-            bool should_ylikuutio_render_this_holobiont;
+                bool has_entered;
+                bool should_ylikuutio_render_this_holobiont;
 
-            glm::vec3 original_scale_vector;       // original scale vector.
-            GLfloat rotate_angle;                  // rotate angle.
-            glm::vec3 rotate_vector;               // rotate vector.
-            glm::vec3 translate_vector;            // translate vector.
-            GLfloat initial_rotate_angle;          // initial rotate angle.
-            glm::vec3 initial_rotate_vector;       // initial rotate vector.
-    };
+                glm::vec3 original_scale_vector;       // original scale vector.
+                GLfloat rotate_angle;                  // rotate angle.
+                glm::vec3 rotate_vector;               // rotate vector.
+                glm::vec3 translate_vector;            // translate vector.
+                GLfloat initial_rotate_angle;          // initial rotate angle.
+                glm::vec3 initial_rotate_vector;       // initial rotate vector.
+        };
+    }
 }
 
 #endif

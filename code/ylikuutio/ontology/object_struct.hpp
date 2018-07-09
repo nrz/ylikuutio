@@ -14,11 +14,14 @@
 // Include standard headers
 #include <cmath> // NAN, std::isnan, std::pow
 
-namespace ontology
+namespace yli
 {
-    class Species;
-    class Glyph;
-    class Text3D;
+    namespace ontology
+    {
+        class Species;
+        class Glyph;
+        class Text3D;
+    }
 }
 
 typedef struct ObjectStruct
@@ -40,9 +43,9 @@ typedef struct ObjectStruct
     {
         // constructor.
     }
-    ontology::Species* species_parent;     // pointer to the parent `Species`.
-    ontology::Glyph* glyph_parent;     // pointer to the parent `Glyph`.
-    ontology::Text3D* text3D_parent;   // pointer to the parent `Text3D`.
+    yli::ontology::Species* species_parent;     // pointer to the parent `Species`.
+    yli::ontology::Glyph* glyph_parent;     // pointer to the parent `Glyph`.
+    yli::ontology::Text3D* text3D_parent;   // pointer to the parent `Text3D`.
     glm::vec3 original_scale_vector; // original scale vector.
     float rotate_angle;              // rotate angle.
     float initial_rotate_angle;      // initial rotate angle.

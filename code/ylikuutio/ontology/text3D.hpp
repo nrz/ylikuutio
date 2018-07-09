@@ -30,83 +30,86 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
-namespace ontology
+namespace yli
 {
-    class Entity;
-    class Universe;
-    class Object;
-
-    class Text3D: public ontology::Movable
+    namespace ontology
     {
-        public:
-            // this method deletes all glyph Objects of this `Text3D`,
-            // sets pointer to this `Text3D` to nullptr,
-            // sets `parent` according to the input (the new `VectorFont`),
-            // requests a new `childID` from the new `VectorFont`,
-            // and creates all glyph Objects of this `Text3D` with the font data.
-            // Note: different fonts may provide glyphs for different Unicodes!
-            void bind_to_new_parent(ontology::VectorFont* const new_vector_font_pointer);
+        class Entity;
+        class Universe;
+        class Object;
 
-            // constructor.
-            // TODO: `Text3D` constructor also creates each `Object`,
-            // and binds each to its corresponding `Glyph` for rendering hierarchy,
-            // and also binds each to this `Text3D` for ontological hierarchy.
-            Text3D(ontology::Universe* const universe, Text3DStruct& text3D_struct)
-                : ontology::Movable(universe, text3D_struct.cartesian_coordinates)
-            {
+        class Text3D: public yli::ontology::Movable
+        {
+            public:
+                // this method deletes all glyph Objects of this `Text3D`,
+                // sets pointer to this `Text3D` to nullptr,
+                // sets `parent` according to the input (the new `VectorFont`),
+                // requests a new `childID` from the new `VectorFont`,
+                // and creates all glyph Objects of this `Text3D` with the font data.
+                // Note: different fonts may provide glyphs for different Unicodes!
+                void bind_to_new_parent(yli::ontology::VectorFont* const new_vector_font_pointer);
+
                 // constructor.
-                this->rotate_angle = NAN;
-                this->text_string = text3D_struct.text_string;
-                this->parent = text3D_struct.parent;
+                // TODO: `Text3D` constructor also creates each `Object`,
+                // and binds each to its corresponding `Glyph` for rendering hierarchy,
+                // and also binds each to this `Text3D` for ontological hierarchy.
+                Text3D(yli::ontology::Universe* const universe, Text3DStruct& text3D_struct)
+                    : yli::ontology::Movable(universe, text3D_struct.cartesian_coordinates)
+                {
+                    // constructor.
+                    this->rotate_angle = NAN;
+                    this->text_string = text3D_struct.text_string;
+                    this->parent = text3D_struct.parent;
 
-                this->number_of_objects = 0;
+                    this->number_of_objects = 0;
 
-                // get childID from `VectorFont` and set pointer to this `Text3D`.
-                this->bind_to_parent();
+                    // get childID from `VectorFont` and set pointer to this `Text3D`.
+                    this->bind_to_parent();
 
-                std::cout << "Creating the glyph Objects for the string \"" << this->text_string << "\"\n";
+                    std::cout << "Creating the glyph Objects for the string \"" << this->text_string << "\"\n";
 
-                // Let's create each glyph `Object` in a loop.
+                    // Let's create each glyph `Object` in a loop.
 
-                ontology::create_glyph_objects(this->text_string, this);
+                    yli::ontology::create_glyph_objects(this->text_string, this);
 
-                this->child_vector_pointers_vector.push_back(&this->object_pointer_vector);
-                this->type = "ontology::Text3D*";
+                    this->child_vector_pointers_vector.push_back(&this->object_pointer_vector);
+                    this->type = "yli::ontology::Text3D*";
 
-                this->can_be_erased = true;
-            }
+                    this->can_be_erased = true;
+                }
 
-            // destructor.
-            virtual ~Text3D();
+                // destructor.
+                virtual ~Text3D();
 
-            ontology::Entity* get_parent() const override;
-            int32_t get_number_of_children() const override;
-            int32_t get_number_of_descendants() const override;
+                yli::ontology::Entity* get_parent() const override;
+                int32_t get_number_of_children() const override;
+                int32_t get_number_of_descendants() const override;
 
-            // this method sets a object pointer.
-            void set_object_pointer(const int32_t childID, ontology::Object* const child_pointer);
+                // this method sets a object pointer.
+                void set_object_pointer(const int32_t childID, yli::ontology::Object* const child_pointer);
 
-            friend class Object;
-            friend void create_glyph_objects(const std::string& text_string, ontology::Text3D* text3D);
-            template<class T1>
-                friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, int32_t* number_of_children);
+                friend class Object;
+                friend void create_glyph_objects(const std::string& text_string, yli::ontology::Text3D* text3D);
+                template<class T1>
+                    friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, int32_t* number_of_children);
 
-        private:
-            void bind_to_parent();
+            private:
+                void bind_to_parent();
 
-            std::string text_string;
+                std::string text_string;
 
-            ontology::VectorFont* parent; // pointer to `VectorFont`.
+                yli::ontology::VectorFont* parent; // pointer to `VectorFont`.
 
-            glm::vec3 original_scale_vector;      // original scale vector.
-            GLfloat rotate_angle;                 // rotate angle.
-            glm::vec3 rotate_vector;              // rotate vector.
-            glm::vec3 translate_vector;           // translate vector.
+                glm::vec3 original_scale_vector;      // original scale vector.
+                GLfloat rotate_angle;                 // rotate angle.
+                glm::vec3 rotate_vector;              // rotate vector.
+                glm::vec3 translate_vector;           // translate vector.
 
-            std::vector<ontology::Object*> object_pointer_vector;
-            std::queue<int32_t> free_objectID_queue;
-            int32_t number_of_objects;
-    };
+                std::vector<yli::ontology::Object*> object_pointer_vector;
+                std::queue<int32_t> free_objectID_queue;
+                int32_t number_of_objects;
+        };
+    }
 }
 
 #endif

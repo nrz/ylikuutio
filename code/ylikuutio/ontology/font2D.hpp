@@ -21,117 +21,120 @@
 // Include standard headers
 #include <string>    // std::string
 
-namespace ontology
+namespace yli
 {
-    class Universe;
-
-    class Font2D: public ontology::Entity
+    namespace ontology
     {
-        public:
-            // constructor.
-            Font2D(
-                    ontology::Universe* const universe,
-                    GLuint screen_width,
-                    GLuint screen_height,
-                    const std::string& texture_filename,
-                    const std::string& font_texture_file_format)
-                : Entity(universe)
-            {
+        class Universe;
+
+        class Font2D: public yli::ontology::Entity
+        {
+            public:
                 // constructor.
-
-                // Initialize class members with some dummy values.
-                this->vertexbuffer = 0;
-                this->uvbuffer = 0;
-                this->programID = 0;
-                this->vertex_position_in_screenspaceID = 0;
-                this->vertexUVID = 0;
-                this->Text2DUniformID = 0;
-                this->screen_width_uniform_ID = 0;
-                this->screen_height_uniform_ID = 0;
-
-                const char* char_font_texture_file_format = font_texture_file_format.c_str();
-
-                // Initialize texture
-                if ((std::strcmp(char_font_texture_file_format, "bmp") == 0) || (std::strcmp(char_font_texture_file_format, "BMP") == 0))
+                Font2D(
+                        yli::ontology::Universe* const universe,
+                        GLuint screen_width,
+                        GLuint screen_height,
+                        const std::string& texture_filename,
+                        const std::string& font_texture_file_format)
+                    : Entity(universe)
                 {
-                    this->texture = loaders::load_BMP_texture(texture_filename);
+                    // constructor.
+
+                    // Initialize class members with some dummy values.
+                    this->vertexbuffer = 0;
+                    this->uvbuffer = 0;
+                    this->programID = 0;
+                    this->vertex_position_in_screenspaceID = 0;
+                    this->vertexUVID = 0;
+                    this->Text2DUniformID = 0;
+                    this->screen_width_uniform_ID = 0;
+                    this->screen_height_uniform_ID = 0;
+
+                    const char* char_font_texture_file_format = font_texture_file_format.c_str();
+
+                    // Initialize texture
+                    if ((std::strcmp(char_font_texture_file_format, "bmp") == 0) || (std::strcmp(char_font_texture_file_format, "BMP") == 0))
+                    {
+                        this->texture = loaders::load_BMP_texture(texture_filename);
+                    }
+                    else if ((std::strcmp(char_font_texture_file_format, "dds") == 0) || (std::strcmp(char_font_texture_file_format, "DDS") == 0))
+                    {
+                        this->texture = loaders::load_DDS_texture(texture_filename);
+                    }
+                    else
+                    {
+                        printf("Invalid font texture file format: `%s`. Supported font texture file formats: bmp, BMP, dds, DDS.\n", char_font_texture_file_format);
+                        this->texture = 0;
+                        return;
+                    }
+
+                    // Initialize VBO
+                    glGenBuffers(1, &vertexbuffer);
+                    glGenBuffers(1, &uvbuffer);
+
+                    // Initialize Shader
+                    programID = loaders::load_shaders("TextVertexShader.vertexshader", "TextVertexShader.fragmentshader");
+
+                    // Get a handle for our buffers
+                    vertex_position_in_screenspaceID = glGetAttribLocation(programID, "vertexPosition_screenspace");
+                    vertexUVID = glGetAttribLocation(programID, "vertexUV");
+
+                    // Initialize uniforms' IDs
+                    Text2DUniformID = glGetUniformLocation(programID, "myTextureSampler");
+
+                    // Initialize uniform window width.
+                    screen_width_uniform_ID = glGetUniformLocation(programID, "screen_width");
+                    glUniform1i(screen_width_uniform_ID, screen_width);
+
+                    // Initialize uniform window height.
+                    screen_height_uniform_ID = glGetUniformLocation(programID, "screen_height");
+                    glUniform1i(screen_height_uniform_ID, screen_height);
                 }
-                else if ((std::strcmp(char_font_texture_file_format, "dds") == 0) || (std::strcmp(char_font_texture_file_format, "DDS") == 0))
-                {
-                    this->texture = loaders::load_DDS_texture(texture_filename);
-                }
-                else
-                {
-                    printf("Invalid font texture file format: `%s`. Supported font texture file formats: bmp, BMP, dds, DDS.\n", char_font_texture_file_format);
-                    this->texture = 0;
-                    return;
-                }
 
-                // Initialize VBO
-                glGenBuffers(1, &vertexbuffer);
-                glGenBuffers(1, &uvbuffer);
+                // destructor.
+                virtual ~Font2D();
 
-                // Initialize Shader
-                programID = loaders::load_shaders("TextVertexShader.vertexshader", "TextVertexShader.fragmentshader");
+                yli::ontology::Entity* get_parent() const override;
+                int32_t get_number_of_children() const override;
+                int32_t get_number_of_descendants() const override;
 
-                // Get a handle for our buffers
-                vertex_position_in_screenspaceID = glGetAttribLocation(programID, "vertexPosition_screenspace");
-                vertexUVID = glGetAttribLocation(programID, "vertexUV");
+                void printText2D(
+                        GLuint screen_width,
+                        GLuint screen_height,
+                        GLuint x,
+                        GLuint y,
+                        GLuint text_size,
+                        GLuint font_size,
+                        const char* const text_char,
+                        const char* const char_font_texture_file_format,
+                        const char* const horizontal_alignment,
+                        const char* const vertical_alignment) const;
 
-                // Initialize uniforms' IDs
-                Text2DUniformID = glGetUniformLocation(programID, "myTextureSampler");
+                void printText2D(const PrintingStruct& printing_struct);
 
-                // Initialize uniform window width.
-                screen_width_uniform_ID = glGetUniformLocation(programID, "screen_width");
-                glUniform1i(screen_width_uniform_ID, screen_width);
+                void printText2D(
+                        GLuint screen_width,
+                        GLuint screen_height,
+                        GLuint x,
+                        GLuint y,
+                        GLuint text_size,
+                        GLuint font_size,
+                        const char* const text_char,
+                        const char* const char_font_texture_file_format);
 
-                // Initialize uniform window height.
-                screen_height_uniform_ID = glGetUniformLocation(programID, "screen_height");
-                glUniform1i(screen_height_uniform_ID, screen_height);
-            }
-
-            // destructor.
-            virtual ~Font2D();
-
-            ontology::Entity* get_parent() const override;
-            int32_t get_number_of_children() const override;
-            int32_t get_number_of_descendants() const override;
-
-            void printText2D(
-                    GLuint screen_width,
-                    GLuint screen_height,
-                    GLuint x,
-                    GLuint y,
-                    GLuint text_size,
-                    GLuint font_size,
-                    const char* const text_char,
-                    const char* const char_font_texture_file_format,
-                    const char* const horizontal_alignment,
-                    const char* const vertical_alignment) const;
-
-            void printText2D(const PrintingStruct& printing_struct);
-
-            void printText2D(
-                    GLuint screen_width,
-                    GLuint screen_height,
-                    GLuint x,
-                    GLuint y,
-                    GLuint text_size,
-                    GLuint font_size,
-                    const char* const text_char,
-                    const char* const char_font_texture_file_format);
-
-        private:
-            GLuint texture;      // Texture containing the glyphs, reterned by `load_BMP_texture` or `load_DDS_texture` (used for `glGenTextures` etc.).
-            GLuint vertexbuffer; // Buffer containing the vertices
-            GLuint uvbuffer;     // Buffer containing the UVs
-            GLuint programID;    // The `programID` of the shader used to display the text, returned by `load_shaders`.
-            GLuint vertex_position_in_screenspaceID; // Location of the program's `vertexPosition_screenspace` attribute.
-            GLuint vertexUVID;                       // Location of the program's `vertexUV` attribute.
-            GLuint Text2DUniformID;                  // Location of the program's texture attribute.
-            GLuint screen_width_uniform_ID;          // Location of the program's window width uniform.
-            GLuint screen_height_uniform_ID;         // Location of the program's window height uniform.
-    };
+            private:
+                GLuint texture;      // Texture containing the glyphs, reterned by `load_BMP_texture` or `load_DDS_texture` (used for `glGenTextures` etc.).
+                GLuint vertexbuffer; // Buffer containing the vertices
+                GLuint uvbuffer;     // Buffer containing the UVs
+                GLuint programID;    // The `programID` of the shader used to display the text, returned by `load_shaders`.
+                GLuint vertex_position_in_screenspaceID; // Location of the program's `vertexPosition_screenspace` attribute.
+                GLuint vertexUVID;                       // Location of the program's `vertexUV` attribute.
+                GLuint Text2DUniformID;                  // Location of the program's texture attribute.
+                GLuint screen_width_uniform_ID;          // Location of the program's window width uniform.
+                GLuint screen_height_uniform_ID;         // Location of the program's window height uniform.
+        };
+    }
 }
 
 #endif

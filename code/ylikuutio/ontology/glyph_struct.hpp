@@ -10,11 +10,14 @@
 // Include standard headers
 #include <vector>   // std::vector
 
-namespace ontology
+namespace yli
 {
-    class Universe;
-    class Shader;
-    class VectorFont;
+    namespace ontology
+    {
+        class Universe;
+        class Shader;
+        class VectorFont;
+    }
 }
 
 typedef struct GlyphStruct
@@ -28,9 +31,9 @@ typedef struct GlyphStruct
     std::vector<std::vector<glm::vec2>>* glyph_vertex_data;
     const char* glyph_name_pointer;       // we need only a pointer, because glyphs are always created by the `VectorFont` constructor.
     const char* unicode_char_pointer;     // we need only a pointer, because glyphs are always created by the `VectorFont` constructor.
-    ontology::Universe* universe; // pointer to the `Universe`.
-    ontology::Shader* shader_pointer;     // pointer to the `Shader`.
-    ontology::VectorFont* parent; // pointer to the font object.
+    yli::ontology::Universe* universe; // pointer to the `Universe`.
+    yli::ontology::Shader* shader_pointer;     // pointer to the `Shader`.
+    yli::ontology::VectorFont* parent; // pointer to the font object.
     glm::vec3 light_position;             // light position.
 } GlyphStruct;
 

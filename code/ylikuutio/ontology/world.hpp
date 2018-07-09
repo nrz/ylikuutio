@@ -12,66 +12,69 @@
 // `World` is just a collection of `Scene`s which share some common resources,
 // like `VectorFont`s.
 
-namespace ontology
+namespace yli
 {
-    class Universe;
-    class Scene;
-
-    class World: public ontology::Entity
+    namespace ontology
     {
-        public:
-            void bind(ontology::Scene* const scene);
+        class Universe;
+        class Scene;
 
-            // constructor.
-            World(ontology::Universe* const universe)
-                : Entity(universe)
-            {
-                this->parent = universe;
-                this->active_scene = nullptr;
+        class World: public yli::ontology::Entity
+        {
+            public:
+                void bind(yli::ontology::Scene* const scene);
 
-                this->number_of_scenes = 0;
+                // constructor.
+                World(yli::ontology::Universe* const universe)
+                    : Entity(universe)
+                {
+                    this->parent = universe;
+                    this->active_scene = nullptr;
 
-                // get `childID` from `Universe` and set pointer to this `World`.
-                this->bind_to_parent();
+                    this->number_of_scenes = 0;
 
-                this->child_vector_pointers_vector.push_back(&this->scene_pointer_vector);
-                this->type = "ontology::World*";
+                    // get `childID` from `Universe` and set pointer to this `World`.
+                    this->bind_to_parent();
 
-                this->can_be_erased = true;
-            }
+                    this->child_vector_pointers_vector.push_back(&this->scene_pointer_vector);
+                    this->type = "yli::ontology::World*";
 
-            // destructor.
-            virtual ~World();
+                    this->can_be_erased = true;
+                }
 
-            // this method renders the active `Scene` of this `World`.
-            void render();
+                // destructor.
+                virtual ~World();
 
-            // this method stes the active `Scene`.
-            void set_active_scene(ontology::Scene* const scene);
+                // this method renders the active `Scene` of this `World`.
+                void render();
 
-            ontology::Scene* get_active_scene() const;
+                // this method stes the active `Scene`.
+                void set_active_scene(yli::ontology::Scene* const scene);
 
-            // this method sets a `Scene` pointer.
-            void set_scene_pointer(const int32_t childID, ontology::Scene* const child_pointer);
+                yli::ontology::Scene* get_active_scene() const;
 
-            ontology::Entity* get_parent() const override;
-            int32_t get_number_of_children() const override;
-            int32_t get_number_of_descendants() const override;
+                // this method sets a `Scene` pointer.
+                void set_scene_pointer(const int32_t childID, yli::ontology::Scene* const child_pointer);
 
-            template<class T1>
-                friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, int32_t* number_of_children);
+                yli::ontology::Entity* get_parent() const override;
+                int32_t get_number_of_children() const override;
+                int32_t get_number_of_descendants() const override;
 
-        private:
-            void bind_to_parent();
+                template<class T1>
+                    friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, int32_t* number_of_children);
 
-            ontology::Universe* parent; // pointer to the `Universe`.
+            private:
+                void bind_to_parent();
 
-            std::vector<ontology::Scene*> scene_pointer_vector;
-            std::queue<int32_t> free_sceneID_queue;
-            int32_t number_of_scenes;
+                yli::ontology::Universe* parent; // pointer to the `Universe`.
 
-            ontology::Scene* active_scene;
-    };
+                std::vector<yli::ontology::Scene*> scene_pointer_vector;
+                std::queue<int32_t> free_sceneID_queue;
+                int32_t number_of_scenes;
+
+                yli::ontology::Scene* active_scene;
+        };
+    }
 }
 
 #endif

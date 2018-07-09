@@ -14,9 +14,12 @@
 // Include standard headers
 #include <cmath> // NAN, std::isnan, std::pow
 
-namespace ontology
+namespace yli
 {
-    class Symbiosis;
+    namespace ontology
+    {
+        class Symbiosis;
+    }
 }
 
 typedef struct HolobiontStruct
@@ -34,7 +37,7 @@ typedef struct HolobiontStruct
     {
         // constructor.
     }
-    ontology::Symbiosis* symbiosis_parent; // pointer to the parent `Symbiosis`.
+    yli::ontology::Symbiosis* symbiosis_parent; // pointer to the parent `Symbiosis`.
     glm::vec3 original_scale_vector; // original scale vector.
     float rotate_angle;              // rotate angle.
     float initial_rotate_angle;      // initial rotate angle.

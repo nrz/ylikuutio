@@ -23,11 +23,11 @@
 
 namespace space_partition
 {
-    class Chunk: ontology::Model
+    class Chunk: yli::ontology::Model
     {
         public:
             // constructor.
-            Chunk(ontology::Universe* universe, space_partition::ChunkMaster* const parent)
+            Chunk(yli::ontology::Universe* universe, space_partition::ChunkMaster* const parent)
                 : Model(universe)
             {
                 // constructor.
@@ -51,7 +51,7 @@ namespace space_partition
             template<class T1, class T2>
                 friend void hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent, std::vector<T1>& old_child_pointer_vector, std::queue<int32_t>& old_free_childID_queue, int32_t* old_number_of_children);
             template<class T1>
-                friend void ontology::render_children(const std::vector<T1>& child_pointer_vector);
+                friend void yli::ontology::render_children(const std::vector<T1>& child_pointer_vector);
 
         private:
             void bind_to_parent();

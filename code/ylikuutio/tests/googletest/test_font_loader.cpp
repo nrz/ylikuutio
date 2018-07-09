@@ -23,7 +23,7 @@ TEST(glyphs_must_be_found_appropriately, kongtext_svg)
 {
     const std::string font_filename = "kongtext.svg";
 
-    const std::string file_content = file::slurp(font_filename);
+    const std::string file_content = yli::file::slurp(font_filename);
     const uint64_t file_size = file_content.size();
     char* const SVG_data = new char[file_size];
     ASSERT_NE(SVG_data, nullptr);

@@ -6,48 +6,51 @@
 // Include standard headers
 #include <string>   // std::string
 
-namespace config
+namespace yli
 {
-    void Setting::bind_to_parent()
+    namespace config
     {
-        hierarchy::bind_child_to_parent<config::Setting*>(this, this->parent->setting_pointer_vector, this->parent->free_settingID_queue, &this->parent->number_of_settings);
-    }
-
-    Setting::Setting(const SettingStruct& setting_struct)
-    {
-        // constructor.
-        this->name = setting_struct.name;
-        this->setting_value = setting_struct.initial_value;
-        this->parent = setting_struct.setting_master;
-        this->activate_callback = setting_struct.activate_callback;
-        this->read_callback = setting_struct.read_callback;
-        this->childID = -1;
-
-        if (this->parent == nullptr)
+        void Setting::bind_to_parent()
         {
-            return;
+            hierarchy::bind_child_to_parent<yli::config::Setting*>(this, this->parent->setting_pointer_vector, this->parent->free_settingID_queue, &this->parent->number_of_settings);
         }
 
-        // get `childID` from the `SettingMaster` and set pointer to this `Setting`.
-        this->bind_to_parent();
-
-        this->parent->setting_pointer_map[this->name] = this;
-
-        if (setting_struct.should_ylikuutio_call_activate_callback_now)
+        Setting::Setting(const SettingStruct& setting_struct)
         {
-            this->activate_callback(this->parent->parent, this->parent);
+            // constructor.
+            this->name = setting_struct.name;
+            this->setting_value = setting_struct.initial_value;
+            this->parent = setting_struct.setting_master;
+            this->activate_callback = setting_struct.activate_callback;
+            this->read_callback = setting_struct.read_callback;
+            this->childID = -1;
+
+            if (this->parent == nullptr)
+            {
+                return;
+            }
+
+            // get `childID` from the `SettingMaster` and set pointer to this `Setting`.
+            this->bind_to_parent();
+
+            this->parent->setting_pointer_map[this->name] = this;
+
+            if (setting_struct.should_ylikuutio_call_activate_callback_now)
+            {
+                this->activate_callback(this->parent->parent, this->parent);
+            }
         }
-    }
 
-    Setting::~Setting()
-    {
-        // destructor.
-    }
+        Setting::~Setting()
+        {
+            // destructor.
+        }
 
-    std::string Setting::help()
-    {
-        // this function returns the help string for this setting.
-        std::string help_string = this->name + " TODO: create helptext for " + this->name;
-        return help_string;
+        std::string Setting::help()
+        {
+            // this function returns the help string for this setting.
+            std::string help_string = this->name + " TODO: create helptext for " + this->name;
+            return help_string;
+        }
     }
 }

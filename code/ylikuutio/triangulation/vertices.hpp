@@ -19,35 +19,38 @@
 #include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
 
-namespace geometry
+namespace yli
 {
-    void output_triangle_vertices(
-            std::vector<glm::vec3>& temp_vertices,
-            std::vector<glm::vec2>& temp_UVs,
-            std::vector<glm::vec3>& temp_normals,
-            GLuint vertex_index[3],
-            GLuint uv_index[3],
-            GLuint normal_index[3],
-            std::vector<glm::vec3>& out_vertices,
-            std::vector<glm::vec2>& out_UVs,
-            std::vector<glm::vec3>& out_normals);
+    namespace geometry
+    {
+        void output_triangle_vertices(
+                std::vector<glm::vec3>& temp_vertices,
+                std::vector<glm::vec2>& temp_UVs,
+                std::vector<glm::vec3>& temp_normals,
+                GLuint vertex_index[3],
+                GLuint uv_index[3],
+                GLuint normal_index[3],
+                std::vector<glm::vec3>& out_vertices,
+                std::vector<glm::vec2>& out_UVs,
+                std::vector<glm::vec3>& out_normals);
 
-    bool define_vertices_UVs_and_normals(
-            const geometry::TriangulateQuadsStruct triangulate_quads_struct,
-            std::vector<glm::vec3>& temp_vertices,
-            std::vector<glm::vec2>& temp_UVs,
-            std::vector<glm::vec3>& temp_normals,
-            GLuint vertex_index[3],
-            GLuint uv_index[3],
-            GLuint normal_index[3],
-            std::vector<glm::vec3>& out_vertices,
-            std::vector<glm::vec2>& out_UVs,
-            std::vector<glm::vec3>& out_normals,
-            const int32_t actual_image_width,
-            const int32_t actual_image_height,
-            const bool is_bilinear_interpolation_in_use,
-            const bool is_southwest_northeast_edges_in_use,
-            const bool is_southeast_northwest_edges_in_use);
+        bool define_vertices_UVs_and_normals(
+                const yli::geometry::TriangulateQuadsStruct triangulate_quads_struct,
+                std::vector<glm::vec3>& temp_vertices,
+                std::vector<glm::vec2>& temp_UVs,
+                std::vector<glm::vec3>& temp_normals,
+                GLuint vertex_index[3],
+                GLuint uv_index[3],
+                GLuint normal_index[3],
+                std::vector<glm::vec3>& out_vertices,
+                std::vector<glm::vec2>& out_UVs,
+                std::vector<glm::vec3>& out_normals,
+                const int32_t actual_image_width,
+                const int32_t actual_image_height,
+                const bool is_bilinear_interpolation_in_use,
+                const bool is_southwest_northeast_edges_in_use,
+                const bool is_southeast_northwest_edges_in_use);
+    }
 }
 
 #endif

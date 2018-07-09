@@ -52,7 +52,7 @@ namespace loaders
         std::cout << "Loading ASCII grid file " << ascii_grid_filename << " ...\n";
 
         // Open the file
-        const std::string file_content = file::slurp(ascii_grid_filename);
+        const std::string file_content = yli::file::slurp(ascii_grid_filename);
 
         if (file_content.empty())
         {
@@ -65,43 +65,43 @@ namespace loaders
         // All possible block identifier strings.
         const std::vector<std::string> number_strings_vector = { "-", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
-        while (!ylikuutio::string::check_and_report_if_some_string_matches(file_content, ++file_content_i, number_strings_vector));
-        const int32_t image_width = ylikuutio::string::extract_int32_t_value_from_string(
+        while (!yli::string::check_and_report_if_some_string_matches(file_content, ++file_content_i, number_strings_vector));
+        const int32_t image_width = yli::string::extract_int32_t_value_from_string(
                 file_content,
                 --file_content_i,
                 (const char* const) " \n",
                 (const char* const) "ncols");
 
-        while (!ylikuutio::string::check_and_report_if_some_string_matches(file_content, ++file_content_i, number_strings_vector));
-        const int32_t image_height = ylikuutio::string::extract_int32_t_value_from_string(
+        while (!yli::string::check_and_report_if_some_string_matches(file_content, ++file_content_i, number_strings_vector));
+        const int32_t image_height = yli::string::extract_int32_t_value_from_string(
                 file_content,
                 --file_content_i,
                 (const char* const) " \n",
                 (const char* const) "nrows");
 
-        while (!ylikuutio::string::check_and_report_if_some_string_matches(file_content, ++file_content_i, number_strings_vector));
-        ylikuutio::string::extract_float_value_from_string(
+        while (!yli::string::check_and_report_if_some_string_matches(file_content, ++file_content_i, number_strings_vector));
+        yli::string::extract_float_value_from_string(
                 file_content,
                 --file_content_i,
                 (const char* const) " \n",
                 (const char* const) "xllcorner");
 
-        while (!ylikuutio::string::check_and_report_if_some_string_matches(file_content, ++file_content_i, number_strings_vector));
-        ylikuutio::string::extract_float_value_from_string(
+        while (!yli::string::check_and_report_if_some_string_matches(file_content, ++file_content_i, number_strings_vector));
+        yli::string::extract_float_value_from_string(
                 file_content,
                 --file_content_i,
                 (const char* const) " \n",
                 (const char* const) "yllcorner");
 
-        while (!ylikuutio::string::check_and_report_if_some_string_matches(file_content, ++file_content_i, number_strings_vector));
-        ylikuutio::string::extract_float_value_from_string(
+        while (!yli::string::check_and_report_if_some_string_matches(file_content, ++file_content_i, number_strings_vector));
+        yli::string::extract_float_value_from_string(
                 file_content,
                 --file_content_i,
                 (const char* const) " \n",
                 (const char* const) "cellsize");
 
-        while (!ylikuutio::string::check_and_report_if_some_string_matches(file_content, ++file_content_i, number_strings_vector));
-        ylikuutio::string::extract_float_value_from_string(
+        while (!yli::string::check_and_report_if_some_string_matches(file_content, ++file_content_i, number_strings_vector));
+        yli::string::extract_float_value_from_string(
                 file_content,
                 --file_content_i,
                 (const char* const) " \n",
@@ -139,11 +139,11 @@ namespace loaders
 
             for (int32_t x = 0; x < image_width; x++)
             {
-                while (!ylikuutio::string::check_and_report_if_some_string_matches(file_content, file_content_i, number_strings_vector))
+                while (!yli::string::check_and_report_if_some_string_matches(file_content, file_content_i, number_strings_vector))
                 {
                     file_content_i++;
                 }
-                *vertex_pointer++ = ylikuutio::string::extract_float_value_from_string(
+                *vertex_pointer++ = yli::string::extract_float_value_from_string(
                         file_content,
                         --file_content_i,
                         (const char* const) " \n",
@@ -155,16 +155,16 @@ namespace loaders
 
         std::cout << "Triangulating ascii grid data.\n";
 
-        geometry::TriangulateQuadsStruct triangulate_quads_struct;
+        yli::geometry::TriangulateQuadsStruct triangulate_quads_struct;
         triangulate_quads_struct.image_width = image_width;
         triangulate_quads_struct.image_height = image_height_in_use;
         triangulate_quads_struct.x_step = x_step;
         triangulate_quads_struct.z_step = z_step;
         triangulate_quads_struct.triangulation_type = triangulation_type;
         triangulate_quads_struct.sphere_radius = NAN;
-        triangulate_quads_struct.spherical_terrain_struct = geometry::SphericalTerrainStruct(); // not used, but is needed in the function call.
+        triangulate_quads_struct.spherical_terrain_struct = yli::geometry::SphericalTerrainStruct(); // not used, but is needed in the function call.
 
-        bool result = geometry::triangulate_quads(vertex_data, triangulate_quads_struct, out_vertices, out_UVs, out_normals);
+        bool result = yli::geometry::triangulate_quads(vertex_data, triangulate_quads_struct, out_vertices, out_UVs, out_normals);
         delete[] vertex_data;
         return result;
     }

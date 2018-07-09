@@ -280,72 +280,72 @@ TEST(any_value_must_be_initialized_appropriately, uint32_t_max)
 
 TEST(any_value_must_be_initialized_appropriately, universe)
 {
-    ontology::Universe* universe = static_cast<ontology::Universe*>((void*) 0xdeadbeef);
+    yli::ontology::Universe* universe = static_cast<yli::ontology::Universe*>((void*) 0xdeadbeef);
     datatypes::AnyValue universe_any_value = datatypes::AnyValue(universe);
     ASSERT_EQ(universe_any_value.type, datatypes::UNIVERSE_POINTER);
     ASSERT_EQ(universe_any_value.universe, universe);
-    ASSERT_EQ(std::strlen(universe_any_value.get_datatype().c_str()), std::strlen("ontology::Universe*"));
-    ASSERT_EQ(std::strcmp(universe_any_value.get_datatype().c_str(), "ontology::Universe*"), 0);
+    ASSERT_EQ(std::strlen(universe_any_value.get_datatype().c_str()), std::strlen("yli::ontology::Universe*"));
+    ASSERT_EQ(std::strcmp(universe_any_value.get_datatype().c_str(), "yli::ontology::Universe*"), 0);
     ASSERT_EQ(std::strlen(universe_any_value.get_string().c_str()), std::strlen("deadbeef"));
     ASSERT_EQ(std::strcmp(universe_any_value.get_string().c_str(), "deadbeef"), 0);
 }
 
 TEST(any_value_must_be_initialized_appropriately, scene)
 {
-    ontology::Scene* scene = static_cast<ontology::Scene*>((void*) 0xbad5ce6e);
+    yli::ontology::Scene* scene = static_cast<yli::ontology::Scene*>((void*) 0xbad5ce6e);
     datatypes::AnyValue scene_pointer_any_value = datatypes::AnyValue(scene);
     ASSERT_EQ(scene_pointer_any_value.type, datatypes::SCENE_POINTER);
     ASSERT_EQ(scene_pointer_any_value.scene_pointer, scene);
-    ASSERT_EQ(std::strlen(scene_pointer_any_value.get_datatype().c_str()), std::strlen("ontology::Scene*"));
-    ASSERT_EQ(std::strcmp(scene_pointer_any_value.get_datatype().c_str(), "ontology::Scene*"), 0);
+    ASSERT_EQ(std::strlen(scene_pointer_any_value.get_datatype().c_str()), std::strlen("yli::ontology::Scene*"));
+    ASSERT_EQ(std::strcmp(scene_pointer_any_value.get_datatype().c_str(), "yli::ontology::Scene*"), 0);
     ASSERT_EQ(std::strlen(scene_pointer_any_value.get_string().c_str()), std::strlen("bad5ce6e"));
     ASSERT_EQ(std::strcmp(scene_pointer_any_value.get_string().c_str(), "bad5ce6e"), 0);
 }
 
 TEST(any_value_must_be_initialized_appropriately, shader)
 {
-    ontology::Shader* shader = static_cast<ontology::Shader*>((void*) 0xbad5bade7);
+    yli::ontology::Shader* shader = static_cast<yli::ontology::Shader*>((void*) 0xbad5bade7);
     datatypes::AnyValue shader_pointer_any_value = datatypes::AnyValue(shader);
     ASSERT_EQ(shader_pointer_any_value.type, datatypes::SHADER_POINTER);
     ASSERT_EQ(shader_pointer_any_value.shader_pointer, shader);
-    ASSERT_EQ(std::strlen(shader_pointer_any_value.get_datatype().c_str()), std::strlen("ontology::Shader*"));
-    ASSERT_EQ(std::strcmp(shader_pointer_any_value.get_datatype().c_str(), "ontology::Shader*"), 0);
+    ASSERT_EQ(std::strlen(shader_pointer_any_value.get_datatype().c_str()), std::strlen("yli::ontology::Shader*"));
+    ASSERT_EQ(std::strcmp(shader_pointer_any_value.get_datatype().c_str(), "yli::ontology::Shader*"), 0);
     ASSERT_EQ(std::strlen(shader_pointer_any_value.get_string().c_str()), std::strlen("bad5bade7"));
     ASSERT_EQ(std::strcmp(shader_pointer_any_value.get_string().c_str(), "bad5bade7"), 0);
 }
 
 TEST(any_value_must_be_initialized_appropriately, material)
 {
-    ontology::Material* material = static_cast<ontology::Material*>((void*) 0xbad6a7e71a1);
+    yli::ontology::Material* material = static_cast<yli::ontology::Material*>((void*) 0xbad6a7e71a1);
     datatypes::AnyValue material_pointer_any_value = datatypes::AnyValue(material);
     ASSERT_EQ(material_pointer_any_value.type, datatypes::MATERIAL_POINTER);
     ASSERT_EQ(material_pointer_any_value.material_pointer, material);
-    ASSERT_EQ(std::strlen(material_pointer_any_value.get_datatype().c_str()), std::strlen("ontology::Material*"));
-    ASSERT_EQ(std::strcmp(material_pointer_any_value.get_datatype().c_str(), "ontology::Material*"), 0);
+    ASSERT_EQ(std::strlen(material_pointer_any_value.get_datatype().c_str()), std::strlen("yli::ontology::Material*"));
+    ASSERT_EQ(std::strcmp(material_pointer_any_value.get_datatype().c_str(), "yli::ontology::Material*"), 0);
     ASSERT_EQ(std::strlen(material_pointer_any_value.get_string().c_str()), std::strlen("bad6a7e71a1"));
     ASSERT_EQ(std::strcmp(material_pointer_any_value.get_string().c_str(), "bad6a7e71a1"), 0);
 }
 
 TEST(any_value_must_be_initialized_appropriately, species)
 {
-    ontology::Species* species = static_cast<ontology::Species*>((void*) 0xbad5bec1e5);
+    yli::ontology::Species* species = static_cast<yli::ontology::Species*>((void*) 0xbad5bec1e5);
     datatypes::AnyValue species_pointer_any_value = datatypes::AnyValue(species);
     ASSERT_EQ(species_pointer_any_value.type, datatypes::SPECIES_POINTER);
     ASSERT_EQ(species_pointer_any_value.species_pointer, species);
-    ASSERT_EQ(std::strlen(species_pointer_any_value.get_datatype().c_str()), std::strlen("ontology::Species*"));
-    ASSERT_EQ(std::strcmp(species_pointer_any_value.get_datatype().c_str(), "ontology::Species*"), 0);
+    ASSERT_EQ(std::strlen(species_pointer_any_value.get_datatype().c_str()), std::strlen("yli::ontology::Species*"));
+    ASSERT_EQ(std::strcmp(species_pointer_any_value.get_datatype().c_str(), "yli::ontology::Species*"), 0);
     ASSERT_EQ(std::strlen(species_pointer_any_value.get_string().c_str()), std::strlen("bad5bec1e5"));
     ASSERT_EQ(std::strcmp(species_pointer_any_value.get_string().c_str(), "bad5bec1e5"), 0);
 }
 
 TEST(any_value_must_be_initialized_appropriately, object)
 {
-    ontology::Object* object = static_cast<ontology::Object*>((void*) 0xbad0b1ec7);
+    yli::ontology::Object* object = static_cast<yli::ontology::Object*>((void*) 0xbad0b1ec7);
     datatypes::AnyValue object_pointer_any_value = datatypes::AnyValue(object);
     ASSERT_EQ(object_pointer_any_value.type, datatypes::OBJECT_POINTER);
     ASSERT_EQ(object_pointer_any_value.object_pointer, object);
-    ASSERT_EQ(std::strlen(object_pointer_any_value.get_datatype().c_str()), std::strlen("ontology::Object*"));
-    ASSERT_EQ(std::strcmp(object_pointer_any_value.get_datatype().c_str(), "ontology::Object*"), 0);
+    ASSERT_EQ(std::strlen(object_pointer_any_value.get_datatype().c_str()), std::strlen("yli::ontology::Object*"));
+    ASSERT_EQ(std::strcmp(object_pointer_any_value.get_datatype().c_str(), "yli::ontology::Object*"), 0);
     ASSERT_EQ(std::strlen(object_pointer_any_value.get_string().c_str()), std::strlen("bad0b1ec7"));
     ASSERT_EQ(std::strcmp(object_pointer_any_value.get_string().c_str(), "bad0b1ec7"), 0);
 }

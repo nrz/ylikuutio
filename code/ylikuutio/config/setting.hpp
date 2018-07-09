@@ -9,52 +9,58 @@
 #include <memory>   // std::make_shared, std::shared_ptr
 #include <string>   // std::string
 
-namespace console
+namespace yli
 {
-    class Console;
+    namespace console
+    {
+        class Console;
+    }
 }
 
-namespace config
+namespace yli
 {
-    class SettingMaster;
-
-    class Setting
+    namespace config
     {
-        public:
-            // constructor.
-            Setting(const SettingStruct& setting_struct);
+        class SettingMaster;
 
-            // destructor.
-            ~Setting();
+        class Setting
+        {
+            public:
+                // constructor.
+                Setting(const SettingStruct& setting_struct);
 
-            std::string help();
+                // destructor.
+                ~Setting();
 
-            friend SettingMaster;
-            friend console::Console;
+                std::string help();
 
-            template<class T1>
-                friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, int32_t* number_of_children);
-            template<class T1, class T2>
-                friend void hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent, std::vector<T1>& old_child_pointer_vector, std::queue<int32_t>& old_free_childID_queue, int32_t* old_number_of_children);
+                friend SettingMaster;
+                friend yli::console::Console;
 
-        private:
-            void bind_to_parent();
+                template<class T1>
+                    friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, int32_t* number_of_children);
+                template<class T1, class T2>
+                    friend void hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent, std::vector<T1>& old_child_pointer_vector, std::queue<int32_t>& old_free_childID_queue, int32_t* old_number_of_children);
 
-            std::string name;
+            private:
+                void bind_to_parent();
 
-            // The setting value (may be a pointer a some datatype).
-            std::shared_ptr<datatypes::AnyValue> setting_value;
+                std::string name;
 
-            // pointer to `ActivateCallback` used to activate the new value after setting it.
-            ActivateCallback activate_callback;
+                // The setting value (may be a pointer a some datatype).
+                std::shared_ptr<datatypes::AnyValue> setting_value;
 
-            // pointer to `ReadCallback` used to read the value. Leave to `nullptr` to read the value from `setting_value` of `class Setting`.
-            ReadCallback read_callback;
+                // pointer to `ActivateCallback` used to activate the new value after setting it.
+                ActivateCallback activate_callback;
 
-            config::SettingMaster* parent; // pointer to `SettingMaster`.
+                // pointer to `ReadCallback` used to read the value. Leave to `nullptr` to read the value from `setting_value` of `class Setting`.
+                ReadCallback read_callback;
 
-            int32_t childID;                       // setting ID, returned by `config::SettingMaster->get_settingID()`.
-    };
+                yli::config::SettingMaster* parent; // pointer to `SettingMaster`.
+
+                int32_t childID;                       // setting ID, returned by `yli::config::SettingMaster->get_settingID()`.
+        };
+    }
 }
 
 #endif

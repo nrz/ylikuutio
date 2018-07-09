@@ -6,16 +6,19 @@
 // Include standard headers
 #include <stdint.h>      // uint32_t etc.
 
-namespace geometry
+namespace yli
 {
-    typedef struct
+    namespace geometry
     {
-        uint32_t image_width;
-        uint32_t image_height;
-        double sphere_radius;
-        bool is_bilinear_interpolation_in_use;
-        geometry::SphericalTerrainStruct spherical_terrain_struct;
-    } TransformationStruct;
+        typedef struct
+        {
+            uint32_t image_width;
+            uint32_t image_height;
+            double sphere_radius;
+            bool is_bilinear_interpolation_in_use;
+            yli::geometry::SphericalTerrainStruct spherical_terrain_struct;
+        } TransformationStruct;
+    }
 }
 
 #endif

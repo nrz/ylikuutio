@@ -13,12 +13,15 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
-namespace ontology
+namespace yli
 {
-    class Scene;
-    class Shader;
-    class Material;
-    class SymbiontMaterial;
+    namespace ontology
+    {
+        class Scene;
+        class Shader;
+        class Material;
+        class SymbiontMaterial;
+    }
 }
 
 typedef struct SpeciesStruct
@@ -45,16 +48,16 @@ typedef struct SpeciesStruct
         // constructor.
     }
     // used for all files (for all species).
-    ontology::Scene* scene;                        // pointer to `Scene` object.
-    ontology::Shader* shader;                      // pointer to `Shader` object.
-    ontology::Material* material;                  // pointer to `Material` object.
-    ontology::SymbiontMaterial* symbiont_material; // pointer to `SymbiontMaterial` object.
+    yli::ontology::Scene* scene;                        // pointer to `Scene` object.
+    yli::ontology::Shader* shader;                      // pointer to `Shader` object.
+    yli::ontology::Material* material;                  // pointer to `Material` object.
+    yli::ontology::SymbiontMaterial* symbiont_material; // pointer to `SymbiontMaterial` object.
     bool is_terrain;                           // worlds currently neither rotate nor translate.
     float planet_radius;                      // radius of sea level in kilometers. used only for worlds.
     float divisor;                           // value by which SRTM values are divided to convert them to kilometers.
     float water_level;                       // water level in meters.
     std::string model_file_format;           // type of the model file. supported file formats so far: `"bmp"`/`"BMP"`, `"obj"`/`"OBJ"`.
-                                             // TODO: add support for `"SRTM"`.
+    // TODO: add support for `"SRTM"`.
     std::string model_filename;              // filename of the model file.
     std::string color_channel;               // color channel to use for altitude data, for BMP model files.
     bool is_symbiont_species;

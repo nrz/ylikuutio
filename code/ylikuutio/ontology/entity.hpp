@@ -8,55 +8,61 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
-namespace config
+namespace yli
 {
-    class SettingMaster;
+    namespace config
+    {
+        class SettingMaster;
+    }
 }
 
-namespace ontology
+namespace yli
 {
-    class Universe;
-
-    class Entity
+    namespace ontology
     {
-        public:
-            // constructor.
-            Entity(ontology::Universe* const universe);
+        class Universe;
 
-            // destructor.
-            virtual ~Entity();
+        class Entity
+        {
+            public:
+                // constructor.
+                Entity(yli::ontology::Universe* const universe);
 
-            std::string get_type() const;
+                // destructor.
+                virtual ~Entity();
 
-            bool get_can_be_erased() const;
+                std::string get_type() const;
 
-            ontology::Universe* get_universe() const;
-            config::SettingMaster* get_setting_master() const;
-            void set_setting_master(config::SettingMaster* const setting_master);
+                bool get_can_be_erased() const;
 
-            virtual ontology::Entity* get_parent() const = 0;
-            virtual int32_t get_number_of_children() const = 0;
-            virtual int32_t get_number_of_descendants() const = 0;
+                yli::ontology::Universe* get_universe() const;
+                yli::config::SettingMaster* get_setting_master() const;
+                void set_setting_master(yli::config::SettingMaster* const setting_master);
 
-            void set_name(const std::string& name);
+                virtual yli::ontology::Entity* get_parent() const = 0;
+                virtual int32_t get_number_of_children() const = 0;
+                virtual int32_t get_number_of_descendants() const = 0;
 
-        protected:
-            void prerender() const;
-            void postrender() const;
+                void set_name(const std::string& name);
 
-            ontology::Universe* universe;          // pointer to `Universe`.
-            config::SettingMaster* setting_master; // pointer to `SettingMaster`.
-            std::vector<void*> child_vector_pointers_vector;
-            int32_t childID;
+            protected:
+                void prerender() const;
+                void postrender() const;
 
-            std::string type;
+                yli::ontology::Universe* universe;          // pointer to `Universe`.
+                yli::config::SettingMaster* setting_master; // pointer to `SettingMaster`.
+                std::vector<void*> child_vector_pointers_vector;
+                int32_t childID;
 
-            std::string name; // name of this entity.
+                std::string type;
 
-            bool can_be_erased;
+                std::string name; // name of this entity.
 
-            PreRenderCallback prerender_callback;
-            PostRenderCallback postrender_callback;
-    };
+                bool can_be_erased;
+
+                PreRenderCallback prerender_callback;
+                PostRenderCallback postrender_callback;
+        };
+    }
 }
 #endif

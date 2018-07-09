@@ -29,7 +29,7 @@ namespace loaders
         std::cout << "Loading OBJ file " << obj_file_name << " ...\n";
 
         // Open the file
-        const std::string file_content = file::slurp(obj_file_name);
+        const std::string file_content = yli::file::slurp(obj_file_name);
 
         if (file_content.empty())
         {
@@ -52,7 +52,7 @@ namespace loaders
             // Read until any non-whitespace character.
             while (true)
             {
-                if (!ylikuutio::string::check_and_report_if_some_string_matches(file_content, file_content_i, whitespace_vector))
+                if (!yli::string::check_and_report_if_some_string_matches(file_content, file_content_i, whitespace_vector))
                 {
                     // Not whitespace.
                     break;
@@ -70,7 +70,7 @@ namespace loaders
             // OK, non-whitespace found.
             std::string current_line_string;
             const char* newline_char_end_string = "\n";
-            ylikuutio::string::extract_string_with_several_endings(file_content, file_content_i, current_line_string, newline_char_end_string);
+            yli::string::extract_string_with_several_endings(file_content, file_content_i, current_line_string, newline_char_end_string);
 
             // Replace slashes `'/'` with space `' '`, to make string processing easier.
             std::replace(current_line_string.begin(), current_line_string.end(), '/', ' ');
@@ -172,7 +172,7 @@ namespace loaders
             const std::vector<std::string> endline_vector = { "\n", "\r" };
 
             // Read until any non-whitespace character.
-            while (ylikuutio::string::check_and_report_if_some_string_matches(file_content, ++file_content_i, endline_vector));
+            while (yli::string::check_and_report_if_some_string_matches(file_content, ++file_content_i, endline_vector));
         }
 
         // For each vertex of each triangle

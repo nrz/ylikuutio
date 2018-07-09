@@ -38,7 +38,7 @@ namespace loaders
         // };
         //
         // IScene* load(const u8* data, int size)
-        std::vector<unsigned char> data_vector = file::binary_slurp(filename);
+        std::vector<unsigned char> data_vector = yli::file::binary_slurp(filename);
 
         // OpenFBX wants `u8` == `unsigned char`.
         const u8* data = reinterpret_cast<const u8*>(data_vector.data());
@@ -81,9 +81,9 @@ namespace loaders
             return false;
         }
 
-        // TODO: finalize the implementation of `ontology::Symbiosis`
+        // TODO: finalize the implementation of `yli::ontology::Symbiosis`
         // to be able to support for different materials!
-        int material_count = mesh->getMaterialCount(); // TODO: use this in  `ontology::Symbiosis` entities!
+        int material_count = mesh->getMaterialCount(); // TODO: use this in  `yli::ontology::Symbiosis` entities!
 
         if (is_debug_mode)
         {

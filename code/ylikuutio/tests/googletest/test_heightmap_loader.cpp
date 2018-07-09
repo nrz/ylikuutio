@@ -95,7 +95,7 @@ TEST(vertices_must_be_defined_and_interpolated_appropriately, a_3x3_terrain)
     const uint32_t x_step = 1;
     const uint32_t z_step = 1;
 
-    geometry::define_vertices(
+    yli::geometry::define_vertices(
             input_vertex_data,
             image_width,
             image_height,
@@ -105,7 +105,7 @@ TEST(vertices_must_be_defined_and_interpolated_appropriately, a_3x3_terrain)
             temp_vertices,
             temp_UVs);
 
-    ASSERT_TRUE(geometry::interpolate_and_define_vertices_using_bilinear_interpolation(
+    ASSERT_TRUE(yli::geometry::interpolate_and_define_vertices_using_bilinear_interpolation(
                 input_vertex_data,
                 image_width,
                 image_height,
@@ -215,7 +215,7 @@ TEST(vertices_must_be_defined_and_interpolated_appropriately, a_3x3_terrain)
     const bool is_southwest_northeast_edges_in_use = false;
     const bool is_southeast_northwest_edges_in_use = false;
 
-    ASSERT_TRUE(geometry::compute_face_normals(
+    ASSERT_TRUE(yli::geometry::compute_face_normals(
                 temp_vertices,
                 face_normal_vector_vec3,
                 image_width,
@@ -305,88 +305,88 @@ TEST(face_indices_must_be_computed_appropriately, a_4x4_terrain)
 
     const uint32_t example_width = 4;
     // x = 0, z = 0.
-    ASSERT_EQ(geometry::get_face_normal_i(0, 0, geometry::ENE, example_width), 0);
-    ASSERT_EQ(geometry::get_face_normal_i(0, 0, geometry::NNE, example_width), 1);
+    ASSERT_EQ(yli::geometry::get_face_normal_i(0, 0, yli::geometry::ENE, example_width), 0);
+    ASSERT_EQ(yli::geometry::get_face_normal_i(0, 0, yli::geometry::NNE, example_width), 1);
 
     // x = 1, z = 0.
-    ASSERT_EQ(geometry::get_face_normal_i(1, 0, geometry::WNW, example_width), 0);
-    ASSERT_EQ(geometry::get_face_normal_i(1, 0, geometry::NNW, example_width), 3);
-    ASSERT_EQ(geometry::get_face_normal_i(1, 0, geometry::NNE, example_width), 5);
-    ASSERT_EQ(geometry::get_face_normal_i(1, 0, geometry::ENE, example_width), 4);
+    ASSERT_EQ(yli::geometry::get_face_normal_i(1, 0, yli::geometry::WNW, example_width), 0);
+    ASSERT_EQ(yli::geometry::get_face_normal_i(1, 0, yli::geometry::NNW, example_width), 3);
+    ASSERT_EQ(yli::geometry::get_face_normal_i(1, 0, yli::geometry::NNE, example_width), 5);
+    ASSERT_EQ(yli::geometry::get_face_normal_i(1, 0, yli::geometry::ENE, example_width), 4);
 
     // x = 2, z = 0.
-    ASSERT_EQ(geometry::get_face_normal_i(2, 0, geometry::WNW, example_width), 4);
-    ASSERT_EQ(geometry::get_face_normal_i(2, 0, geometry::NNW, example_width), 7);
-    ASSERT_EQ(geometry::get_face_normal_i(2, 0, geometry::NNE, example_width), 9);
-    ASSERT_EQ(geometry::get_face_normal_i(2, 0, geometry::ENE, example_width), 8);
+    ASSERT_EQ(yli::geometry::get_face_normal_i(2, 0, yli::geometry::WNW, example_width), 4);
+    ASSERT_EQ(yli::geometry::get_face_normal_i(2, 0, yli::geometry::NNW, example_width), 7);
+    ASSERT_EQ(yli::geometry::get_face_normal_i(2, 0, yli::geometry::NNE, example_width), 9);
+    ASSERT_EQ(yli::geometry::get_face_normal_i(2, 0, yli::geometry::ENE, example_width), 8);
 
     // x = 3, z = 0.
-    ASSERT_EQ(geometry::get_face_normal_i(3, 0, geometry::WNW, example_width), 8);
-    ASSERT_EQ(geometry::get_face_normal_i(3, 0, geometry::NNW, example_width), 11);
+    ASSERT_EQ(yli::geometry::get_face_normal_i(3, 0, yli::geometry::WNW, example_width), 8);
+    ASSERT_EQ(yli::geometry::get_face_normal_i(3, 0, yli::geometry::NNW, example_width), 11);
 
     // x = 0, z = 1.
-    ASSERT_EQ(geometry::get_face_normal_i(0, 1, geometry::NNE, example_width), 13);
-    ASSERT_EQ(geometry::get_face_normal_i(0, 1, geometry::ENE, example_width), 12);
-    ASSERT_EQ(geometry::get_face_normal_i(0, 1, geometry::ESE, example_width), 2);
-    ASSERT_EQ(geometry::get_face_normal_i(0, 1, geometry::SSE, example_width), 1);
+    ASSERT_EQ(yli::geometry::get_face_normal_i(0, 1, yli::geometry::NNE, example_width), 13);
+    ASSERT_EQ(yli::geometry::get_face_normal_i(0, 1, yli::geometry::ENE, example_width), 12);
+    ASSERT_EQ(yli::geometry::get_face_normal_i(0, 1, yli::geometry::ESE, example_width), 2);
+    ASSERT_EQ(yli::geometry::get_face_normal_i(0, 1, yli::geometry::SSE, example_width), 1);
 
     // x = 1, z = 1.
-    ASSERT_EQ(geometry::get_face_normal_i(1, 1, geometry::NNE, example_width), 17);
-    ASSERT_EQ(geometry::get_face_normal_i(1, 1, geometry::ENE, example_width), 16);
-    ASSERT_EQ(geometry::get_face_normal_i(1, 1, geometry::ESE, example_width), 6);
-    ASSERT_EQ(geometry::get_face_normal_i(1, 1, geometry::SSE, example_width), 5);
-    ASSERT_EQ(geometry::get_face_normal_i(1, 1, geometry::SSW, example_width), 3);
-    ASSERT_EQ(geometry::get_face_normal_i(1, 1, geometry::WSW, example_width), 2);
-    ASSERT_EQ(geometry::get_face_normal_i(1, 1, geometry::WNW, example_width), 12);
-    ASSERT_EQ(geometry::get_face_normal_i(1, 1, geometry::NNW, example_width), 15);
+    ASSERT_EQ(yli::geometry::get_face_normal_i(1, 1, yli::geometry::NNE, example_width), 17);
+    ASSERT_EQ(yli::geometry::get_face_normal_i(1, 1, yli::geometry::ENE, example_width), 16);
+    ASSERT_EQ(yli::geometry::get_face_normal_i(1, 1, yli::geometry::ESE, example_width), 6);
+    ASSERT_EQ(yli::geometry::get_face_normal_i(1, 1, yli::geometry::SSE, example_width), 5);
+    ASSERT_EQ(yli::geometry::get_face_normal_i(1, 1, yli::geometry::SSW, example_width), 3);
+    ASSERT_EQ(yli::geometry::get_face_normal_i(1, 1, yli::geometry::WSW, example_width), 2);
+    ASSERT_EQ(yli::geometry::get_face_normal_i(1, 1, yli::geometry::WNW, example_width), 12);
+    ASSERT_EQ(yli::geometry::get_face_normal_i(1, 1, yli::geometry::NNW, example_width), 15);
 
     // x = 2, z = 1.
-    ASSERT_EQ(geometry::get_face_normal_i(2, 1, geometry::NNE, example_width), 21);
-    ASSERT_EQ(geometry::get_face_normal_i(2, 1, geometry::ENE, example_width), 20);
-    ASSERT_EQ(geometry::get_face_normal_i(2, 1, geometry::ESE, example_width), 10);
-    ASSERT_EQ(geometry::get_face_normal_i(2, 1, geometry::SSE, example_width), 9);
-    ASSERT_EQ(geometry::get_face_normal_i(2, 1, geometry::SSW, example_width), 7);
-    ASSERT_EQ(geometry::get_face_normal_i(2, 1, geometry::WSW, example_width), 6);
-    ASSERT_EQ(geometry::get_face_normal_i(2, 1, geometry::WNW, example_width), 16);
-    ASSERT_EQ(geometry::get_face_normal_i(2, 1, geometry::NNW, example_width), 19);
+    ASSERT_EQ(yli::geometry::get_face_normal_i(2, 1, yli::geometry::NNE, example_width), 21);
+    ASSERT_EQ(yli::geometry::get_face_normal_i(2, 1, yli::geometry::ENE, example_width), 20);
+    ASSERT_EQ(yli::geometry::get_face_normal_i(2, 1, yli::geometry::ESE, example_width), 10);
+    ASSERT_EQ(yli::geometry::get_face_normal_i(2, 1, yli::geometry::SSE, example_width), 9);
+    ASSERT_EQ(yli::geometry::get_face_normal_i(2, 1, yli::geometry::SSW, example_width), 7);
+    ASSERT_EQ(yli::geometry::get_face_normal_i(2, 1, yli::geometry::WSW, example_width), 6);
+    ASSERT_EQ(yli::geometry::get_face_normal_i(2, 1, yli::geometry::WNW, example_width), 16);
+    ASSERT_EQ(yli::geometry::get_face_normal_i(2, 1, yli::geometry::NNW, example_width), 19);
 
     // x = 3, z = 1.
-    ASSERT_EQ(geometry::get_face_normal_i(3, 1, geometry::SSW, example_width), 11);
-    ASSERT_EQ(geometry::get_face_normal_i(3, 1, geometry::WSW, example_width), 10);
-    ASSERT_EQ(geometry::get_face_normal_i(3, 1, geometry::WNW, example_width), 20);
-    ASSERT_EQ(geometry::get_face_normal_i(3, 1, geometry::NNW, example_width), 23);
+    ASSERT_EQ(yli::geometry::get_face_normal_i(3, 1, yli::geometry::SSW, example_width), 11);
+    ASSERT_EQ(yli::geometry::get_face_normal_i(3, 1, yli::geometry::WSW, example_width), 10);
+    ASSERT_EQ(yli::geometry::get_face_normal_i(3, 1, yli::geometry::WNW, example_width), 20);
+    ASSERT_EQ(yli::geometry::get_face_normal_i(3, 1, yli::geometry::NNW, example_width), 23);
 
     // x = 0, z = 2.
-    ASSERT_EQ(geometry::get_face_normal_i(0, 2, geometry::NNE, example_width), 25);
-    ASSERT_EQ(geometry::get_face_normal_i(0, 2, geometry::ENE, example_width), 24);
-    ASSERT_EQ(geometry::get_face_normal_i(0, 2, geometry::ESE, example_width), 14);
-    ASSERT_EQ(geometry::get_face_normal_i(0, 2, geometry::SSE, example_width), 13);
+    ASSERT_EQ(yli::geometry::get_face_normal_i(0, 2, yli::geometry::NNE, example_width), 25);
+    ASSERT_EQ(yli::geometry::get_face_normal_i(0, 2, yli::geometry::ENE, example_width), 24);
+    ASSERT_EQ(yli::geometry::get_face_normal_i(0, 2, yli::geometry::ESE, example_width), 14);
+    ASSERT_EQ(yli::geometry::get_face_normal_i(0, 2, yli::geometry::SSE, example_width), 13);
 
     // x = 1, z = 2.
-    ASSERT_EQ(geometry::get_face_normal_i(1, 2, geometry::NNE, example_width), 29);
-    ASSERT_EQ(geometry::get_face_normal_i(1, 2, geometry::ENE, example_width), 28);
-    ASSERT_EQ(geometry::get_face_normal_i(1, 2, geometry::ESE, example_width), 18);
-    ASSERT_EQ(geometry::get_face_normal_i(1, 2, geometry::SSE, example_width), 17);
-    ASSERT_EQ(geometry::get_face_normal_i(1, 2, geometry::SSW, example_width), 15);
-    ASSERT_EQ(geometry::get_face_normal_i(1, 2, geometry::WSW, example_width), 14);
-    ASSERT_EQ(geometry::get_face_normal_i(1, 2, geometry::WNW, example_width), 24);
-    ASSERT_EQ(geometry::get_face_normal_i(1, 2, geometry::NNW, example_width), 27);
+    ASSERT_EQ(yli::geometry::get_face_normal_i(1, 2, yli::geometry::NNE, example_width), 29);
+    ASSERT_EQ(yli::geometry::get_face_normal_i(1, 2, yli::geometry::ENE, example_width), 28);
+    ASSERT_EQ(yli::geometry::get_face_normal_i(1, 2, yli::geometry::ESE, example_width), 18);
+    ASSERT_EQ(yli::geometry::get_face_normal_i(1, 2, yli::geometry::SSE, example_width), 17);
+    ASSERT_EQ(yli::geometry::get_face_normal_i(1, 2, yli::geometry::SSW, example_width), 15);
+    ASSERT_EQ(yli::geometry::get_face_normal_i(1, 2, yli::geometry::WSW, example_width), 14);
+    ASSERT_EQ(yli::geometry::get_face_normal_i(1, 2, yli::geometry::WNW, example_width), 24);
+    ASSERT_EQ(yli::geometry::get_face_normal_i(1, 2, yli::geometry::NNW, example_width), 27);
 
     // x = 2, z = 2.
-    ASSERT_EQ(geometry::get_face_normal_i(2, 2, geometry::NNE, example_width), 33);
-    ASSERT_EQ(geometry::get_face_normal_i(2, 2, geometry::ENE, example_width), 32);
-    ASSERT_EQ(geometry::get_face_normal_i(2, 2, geometry::ESE, example_width), 22);
-    ASSERT_EQ(geometry::get_face_normal_i(2, 2, geometry::SSE, example_width), 21);
-    ASSERT_EQ(geometry::get_face_normal_i(2, 2, geometry::SSW, example_width), 19);
-    ASSERT_EQ(geometry::get_face_normal_i(2, 2, geometry::WSW, example_width), 18);
-    ASSERT_EQ(geometry::get_face_normal_i(2, 2, geometry::WNW, example_width), 28);
-    ASSERT_EQ(geometry::get_face_normal_i(2, 2, geometry::NNW, example_width), 31);
+    ASSERT_EQ(yli::geometry::get_face_normal_i(2, 2, yli::geometry::NNE, example_width), 33);
+    ASSERT_EQ(yli::geometry::get_face_normal_i(2, 2, yli::geometry::ENE, example_width), 32);
+    ASSERT_EQ(yli::geometry::get_face_normal_i(2, 2, yli::geometry::ESE, example_width), 22);
+    ASSERT_EQ(yli::geometry::get_face_normal_i(2, 2, yli::geometry::SSE, example_width), 21);
+    ASSERT_EQ(yli::geometry::get_face_normal_i(2, 2, yli::geometry::SSW, example_width), 19);
+    ASSERT_EQ(yli::geometry::get_face_normal_i(2, 2, yli::geometry::WSW, example_width), 18);
+    ASSERT_EQ(yli::geometry::get_face_normal_i(2, 2, yli::geometry::WNW, example_width), 28);
+    ASSERT_EQ(yli::geometry::get_face_normal_i(2, 2, yli::geometry::NNW, example_width), 31);
 
     // x = 3, z = 2.
-    ASSERT_EQ(geometry::get_face_normal_i(3, 2, geometry::SSW, example_width), 23);
-    ASSERT_EQ(geometry::get_face_normal_i(3, 2, geometry::WSW, example_width), 22);
-    ASSERT_EQ(geometry::get_face_normal_i(3, 2, geometry::WNW, example_width), 32);
-    ASSERT_EQ(geometry::get_face_normal_i(3, 2, geometry::NNW, example_width), 35);
+    ASSERT_EQ(yli::geometry::get_face_normal_i(3, 2, yli::geometry::SSW, example_width), 23);
+    ASSERT_EQ(yli::geometry::get_face_normal_i(3, 2, yli::geometry::WSW, example_width), 22);
+    ASSERT_EQ(yli::geometry::get_face_normal_i(3, 2, yli::geometry::WNW, example_width), 32);
+    ASSERT_EQ(yli::geometry::get_face_normal_i(3, 2, yli::geometry::NNW, example_width), 35);
 }
 
 TEST(a_BMP_terrain_must_be_loaded_appropriately, load_3x3_BMP_terrain)
@@ -798,15 +798,15 @@ TEST(a_2x2_terrain_must_be_triangulated_appropriately, bilinear_interpolation)
     std::vector<glm::vec2> UVs;      // UVs of the object.
     std::vector<glm::vec3> normals;  // normals of the object.
 
-    geometry::TriangulateQuadsStruct triangulate_quads_struct;
+    yli::geometry::TriangulateQuadsStruct triangulate_quads_struct;
     triangulate_quads_struct.image_width = image_width;
     triangulate_quads_struct.image_height = image_height;
     triangulate_quads_struct.sphere_radius = NAN;
-    triangulate_quads_struct.spherical_terrain_struct = geometry::SphericalTerrainStruct(); // not used, but is needed in the function call.
+    triangulate_quads_struct.spherical_terrain_struct = yli::geometry::SphericalTerrainStruct(); // not used, but is needed in the function call.
 
     triangulate_quads_struct.triangulation_type = "bilinear_interpolation";
 
-    const bool is_success = geometry::triangulate_quads(vertex_data, triangulate_quads_struct, vertices, UVs, normals);
+    const bool is_success = yli::geometry::triangulate_quads(vertex_data, triangulate_quads_struct, vertices, UVs, normals);
     ASSERT_TRUE(is_success);
     ASSERT_EQ(vertices.size(), 12);
     ASSERT_EQ(UVs.size(), 12);
@@ -907,15 +907,15 @@ TEST(a_2x2_terrain_must_be_triangulated_appropriately, southeast_northwest_edges
     std::vector<glm::vec2> UVs;      // UVs of the object.
     std::vector<glm::vec3> normals;  // normals of the object.
 
-    geometry::TriangulateQuadsStruct triangulate_quads_struct;
+    yli::geometry::TriangulateQuadsStruct triangulate_quads_struct;
     triangulate_quads_struct.image_width = image_width;
     triangulate_quads_struct.image_height = image_height;
     triangulate_quads_struct.sphere_radius = NAN;
-    triangulate_quads_struct.spherical_terrain_struct = geometry::SphericalTerrainStruct(); // not used, but is needed in the function call.
+    triangulate_quads_struct.spherical_terrain_struct = yli::geometry::SphericalTerrainStruct(); // not used, but is needed in the function call.
 
     triangulate_quads_struct.triangulation_type = "southeast_northwest_edges";
 
-    const bool is_success = geometry::triangulate_quads(vertex_data, triangulate_quads_struct, vertices, UVs, normals);
+    const bool is_success = yli::geometry::triangulate_quads(vertex_data, triangulate_quads_struct, vertices, UVs, normals);
     ASSERT_TRUE(is_success);
     ASSERT_EQ(vertices.size(), 6);
     ASSERT_EQ(UVs.size(), 6);
@@ -986,15 +986,15 @@ TEST(a_2x2_terrain_must_be_triangulated_appropriately, southwest_northeast_edges
     std::vector<glm::vec2> UVs;      // UVs of the object.
     std::vector<glm::vec3> normals;  // normals of the object.
 
-    geometry::TriangulateQuadsStruct triangulate_quads_struct;
+    yli::geometry::TriangulateQuadsStruct triangulate_quads_struct;
     triangulate_quads_struct.image_width = image_width;
     triangulate_quads_struct.image_height = image_height;
     triangulate_quads_struct.sphere_radius = NAN;
-    triangulate_quads_struct.spherical_terrain_struct = geometry::SphericalTerrainStruct(); // not used, but is needed in the function call.
+    triangulate_quads_struct.spherical_terrain_struct = yli::geometry::SphericalTerrainStruct(); // not used, but is needed in the function call.
 
     triangulate_quads_struct.triangulation_type = "southwest_northeast_edges";
 
-    const bool is_success = geometry::triangulate_quads(vertex_data, triangulate_quads_struct, vertices, UVs, normals);
+    const bool is_success = yli::geometry::triangulate_quads(vertex_data, triangulate_quads_struct, vertices, UVs, normals);
     ASSERT_TRUE(is_success);
     ASSERT_EQ(vertices.size(), 6);
     ASSERT_EQ(UVs.size(), 6);
@@ -1084,15 +1084,15 @@ TEST(a_3x3_terrain_must_be_triangulated_appropriately, southeast_northwest_edges
     std::vector<glm::vec2> UVs;      // UVs of the object.
     std::vector<glm::vec3> normals;  // normals of the object.
 
-    geometry::TriangulateQuadsStruct triangulate_quads_struct;
+    yli::geometry::TriangulateQuadsStruct triangulate_quads_struct;
     triangulate_quads_struct.image_width = image_width;
     triangulate_quads_struct.image_height = image_height;
     triangulate_quads_struct.sphere_radius = NAN;
-    triangulate_quads_struct.spherical_terrain_struct = geometry::SphericalTerrainStruct(); // not used, but is needed in the function call.
+    triangulate_quads_struct.spherical_terrain_struct = yli::geometry::SphericalTerrainStruct(); // not used, but is needed in the function call.
 
     triangulate_quads_struct.triangulation_type = "southeast_northwest_edges";
 
-    const bool is_success = geometry::triangulate_quads(vertex_data, triangulate_quads_struct, vertices, UVs, normals);
+    const bool is_success = yli::geometry::triangulate_quads(vertex_data, triangulate_quads_struct, vertices, UVs, normals);
     ASSERT_TRUE(is_success);
     ASSERT_EQ(vertices.size(), 24);
     ASSERT_EQ(UVs.size(), 24);
