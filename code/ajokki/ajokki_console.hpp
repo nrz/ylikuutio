@@ -1,14 +1,17 @@
 #ifndef __AJOKKI_CONSOLE_HPP_INCLUDED
 #define __AJOKKI_CONSOLE_HPP_INCLUDED
 
-namespace config
+namespace ylikuutio
 {
-    class SettingMaster;
+    namespace config
+    {
+        class SettingMaster;
+    }
 }
 
 namespace ajokki
 {
-    void set_console(config::SettingMaster* const setting_master);
+    void set_console(ylikuutio::config::SettingMaster* const setting_master);
 }
 
 #endif

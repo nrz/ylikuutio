@@ -18,7 +18,7 @@ namespace ylikuutio
             this->universe = universe;
             this->prerender_callback = nullptr;
             this->postrender_callback = nullptr;
-            this->setting_master = new config::SettingMaster(this);
+            this->setting_master = new ylikuutio::config::SettingMaster(this);
             this->can_be_erased = false;
         }
 
@@ -61,12 +61,12 @@ namespace ylikuutio
             return this->universe;
         }
 
-        config::SettingMaster* Entity::get_setting_master() const
+        ylikuutio::config::SettingMaster* Entity::get_setting_master() const
         {
             return this->setting_master;
         }
 
-        void Entity::set_setting_master(config::SettingMaster* const setting_master)
+        void Entity::set_setting_master(ylikuutio::config::SettingMaster* const setting_master)
         {
             this->setting_master = setting_master;
         }

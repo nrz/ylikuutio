@@ -8,9 +8,12 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
-namespace config
+namespace ylikuutio
 {
-    class SettingMaster;
+    namespace config
+    {
+        class SettingMaster;
+    }
 }
 
 namespace ylikuutio
@@ -33,8 +36,8 @@ namespace ylikuutio
                 bool get_can_be_erased() const;
 
                 ylikuutio::ontology::Universe* get_universe() const;
-                config::SettingMaster* get_setting_master() const;
-                void set_setting_master(config::SettingMaster* const setting_master);
+                ylikuutio::config::SettingMaster* get_setting_master() const;
+                void set_setting_master(ylikuutio::config::SettingMaster* const setting_master);
 
                 virtual ylikuutio::ontology::Entity* get_parent() const = 0;
                 virtual int32_t get_number_of_children() const = 0;
@@ -47,7 +50,7 @@ namespace ylikuutio
                 void postrender() const;
 
                 ylikuutio::ontology::Universe* universe;          // pointer to `Universe`.
-                config::SettingMaster* setting_master; // pointer to `SettingMaster`.
+                ylikuutio::config::SettingMaster* setting_master; // pointer to `SettingMaster`.
                 std::vector<void*> child_vector_pointers_vector;
                 int32_t childID;
 

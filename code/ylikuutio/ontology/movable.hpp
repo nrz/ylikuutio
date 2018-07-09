@@ -53,38 +53,38 @@ namespace ylikuutio
                     SettingStruct cartesian_coordinates_setting_struct(std::make_shared<datatypes::AnyValue>(new glm::vec3(float_x, float_y, float_z)));
                     cartesian_coordinates_setting_struct.name = "cartesian_coordinates";
                     cartesian_coordinates_setting_struct.setting_master = this->setting_master;
-                    cartesian_coordinates_setting_struct.activate_callback = &config::SettingMaster::activate_cartesian_coordinates;
-                    cartesian_coordinates_setting_struct.read_callback = &config::SettingMaster::read_cartesian_coordinates;
+                    cartesian_coordinates_setting_struct.activate_callback = &ylikuutio::config::SettingMaster::activate_cartesian_coordinates;
+                    cartesian_coordinates_setting_struct.read_callback = &ylikuutio::config::SettingMaster::read_cartesian_coordinates;
                     cartesian_coordinates_setting_struct.should_ylikuutio_call_activate_callback_now = true;
-                    std::cout << "Executing `new config::Setting(cartesian_coordinates_setting_struct);` ...\n";
-                    new config::Setting(cartesian_coordinates_setting_struct);
+                    std::cout << "Executing `new ylikuutio::config::Setting(cartesian_coordinates_setting_struct);` ...\n";
+                    new ylikuutio::config::Setting(cartesian_coordinates_setting_struct);
 
                     SettingStruct x_setting_struct(std::make_shared<datatypes::AnyValue>(float_x));
                     x_setting_struct.name = "x";
                     x_setting_struct.setting_master = this->setting_master;
-                    x_setting_struct.activate_callback = &config::SettingMaster::activate_x;
-                    x_setting_struct.read_callback = &config::SettingMaster::read_x;
+                    x_setting_struct.activate_callback = &ylikuutio::config::SettingMaster::activate_x;
+                    x_setting_struct.read_callback = &ylikuutio::config::SettingMaster::read_x;
                     x_setting_struct.should_ylikuutio_call_activate_callback_now = true;
-                    std::cout << "Executing `new config::Setting(x_setting_struct);` ...\n";
-                    new config::Setting(x_setting_struct);
+                    std::cout << "Executing `new ylikuutio::config::Setting(x_setting_struct);` ...\n";
+                    new ylikuutio::config::Setting(x_setting_struct);
 
                     SettingStruct y_setting_struct(std::make_shared<datatypes::AnyValue>(float_y));
                     y_setting_struct.name = "y";
                     y_setting_struct.setting_master = this->setting_master;
-                    y_setting_struct.activate_callback = &config::SettingMaster::activate_y;
-                    y_setting_struct.read_callback = &config::SettingMaster::read_y;
+                    y_setting_struct.activate_callback = &ylikuutio::config::SettingMaster::activate_y;
+                    y_setting_struct.read_callback = &ylikuutio::config::SettingMaster::read_y;
                     y_setting_struct.should_ylikuutio_call_activate_callback_now = true;
-                    std::cout << "Executing `new config::Setting(y_setting_struct);` ...\n";
-                    new config::Setting(y_setting_struct);
+                    std::cout << "Executing `new ylikuutio::config::Setting(y_setting_struct);` ...\n";
+                    new ylikuutio::config::Setting(y_setting_struct);
 
                     SettingStruct z_setting_struct(std::make_shared<datatypes::AnyValue>(float_z));
                     z_setting_struct.name = "z";
                     z_setting_struct.setting_master = this->setting_master;
-                    z_setting_struct.activate_callback = &config::SettingMaster::activate_z;
-                    z_setting_struct.read_callback = &config::SettingMaster::read_z;
+                    z_setting_struct.activate_callback = &ylikuutio::config::SettingMaster::activate_z;
+                    z_setting_struct.read_callback = &ylikuutio::config::SettingMaster::read_z;
                     z_setting_struct.should_ylikuutio_call_activate_callback_now = true;
-                    std::cout << "Executing `new config::Setting(z_setting_struct);` ...\n";
-                    new config::Setting(z_setting_struct);
+                    std::cout << "Executing `new ylikuutio::config::Setting(z_setting_struct);` ...\n";
+                    new ylikuutio::config::Setting(z_setting_struct);
 
                     this->can_be_erased = true;
                 }
@@ -94,7 +94,7 @@ namespace ylikuutio
                     : Entity(universe)
                 {
                     // constructor.
-                    this->setting_master = new config::SettingMaster(this);
+                    this->setting_master = new ylikuutio::config::SettingMaster(this);
                     this->cartesian_coordinates = glm::vec3(NAN, NAN, NAN);
                     this->spherical_coordinates = spherical_coordinates;
                 }

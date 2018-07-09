@@ -86,9 +86,9 @@ namespace ylikuutio
             this->font2D_pointer = console_struct.font2D_pointer;
             std::cout << "6th pointer defined in Console::Console\n";
 
-            std::cout << "Initializing config::SettingMaster setting_master\n";
+            std::cout << "Initializing ylikuutio::config::SettingMaster setting_master\n";
 
-            config::SettingMaster* setting_master = this->universe->get_setting_master();
+            ylikuutio::config::SettingMaster* setting_master = this->universe->get_setting_master();
 
             std::cout << "Initializing console_top_y\n";
 

@@ -228,7 +228,7 @@ namespace ylikuutio
             this->setting_master->set(setting_name, setting_any_value);
         }
 
-        config::Setting* Universe::get(std::string key) const
+        ylikuutio::config::Setting* Universe::get(std::string key) const
         {
             return this->setting_master->get(key);
         }
@@ -310,7 +310,7 @@ namespace ylikuutio
                 return nullptr;
             }
 
-            config::SettingMaster* setting_master = universe->setting_master;
+            ylikuutio::config::SettingMaster* setting_master = universe->setting_master;
 
             if (setting_master == nullptr)
             {
@@ -366,7 +366,7 @@ namespace ylikuutio
                 return nullptr;
             }
 
-            config::SettingMaster* setting_master = universe->setting_master;
+            ylikuutio::config::SettingMaster* setting_master = universe->setting_master;
 
             if (setting_master == nullptr)
             {

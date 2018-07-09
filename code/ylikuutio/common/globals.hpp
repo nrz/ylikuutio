@@ -50,10 +50,13 @@
 #include <unordered_map> // std::unordered_map
 #include <vector>   // std::vector
 
-namespace config
+namespace ylikuutio
 {
-    class SettingMaster;
-    class Setting;
+    namespace config
+    {
+        class SettingMaster;
+        class Setting;
+    }
 }
 
 namespace ylikuutio
@@ -80,8 +83,8 @@ namespace ylikuutio
     }
 }
 
-typedef std::shared_ptr<datatypes::AnyValue> (*PreRenderCallback) (ylikuutio::ontology::Entity* entity, config::SettingMaster* setting_master);
-typedef std::shared_ptr<datatypes::AnyValue> (*PostRenderCallback) (ylikuutio::ontology::Entity* entity, config::SettingMaster* setting_master);
+typedef std::shared_ptr<datatypes::AnyValue> (*PreRenderCallback) (ylikuutio::ontology::Entity* entity, ylikuutio::config::SettingMaster* setting_master);
+typedef std::shared_ptr<datatypes::AnyValue> (*PostRenderCallback) (ylikuutio::ontology::Entity* entity, ylikuutio::config::SettingMaster* setting_master);
 
 typedef struct PrintingStruct
 {

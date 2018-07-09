@@ -257,9 +257,12 @@
 //    y-coordinates of these are compared. The piece with the smallest y-coordinate (lowest altitude) remains terrain, other pieces become
 //    regular objects. The pieces that become regular objects will be subject to gravity the same way as any regular object.
 
-namespace config
+namespace ylikuutio
 {
-    class Setting;
+    namespace config
+    {
+        class Setting;
+    }
 }
 
 namespace ylikuutio
@@ -447,8 +450,8 @@ namespace ylikuutio
 
                 void set(std::string& setting_name, std::shared_ptr<datatypes::AnyValue> setting_any_value);
 
-                // this method returns a pointer to `config::Setting` corresponding to the given `key`.
-                config::Setting* get(std::string key) const;
+                // this method returns a pointer to `ylikuutio::config::Setting` corresponding to the given `key`.
+                ylikuutio::config::Setting* get(std::string key) const;
 
                 bool is_entity(const std::string& name) const;
                 ylikuutio::ontology::Entity* get_entity(const std::string& name) const;

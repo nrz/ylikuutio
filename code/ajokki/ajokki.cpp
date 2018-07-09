@@ -149,8 +149,8 @@ int main(int argc, char* argv[])
     ylikuutio::ontology::EntityFactory* entity_factory = my_universe->get_entity_factory();
 
     // Create the setting master, store it in `my_setting_master`.
-    std::cout << "Creating config::SettingMaster* my_setting_master ...\n";
-    config::SettingMaster* my_setting_master = new config::SettingMaster(my_universe);
+    std::cout << "Creating ylikuutio::config::SettingMaster* my_setting_master ...\n";
+    ylikuutio::config::SettingMaster* my_setting_master = new ylikuutio::config::SettingMaster(my_universe);
 
     ylikuutio::audio::AudioMaster audio_master;
 
@@ -159,9 +159,9 @@ int main(int argc, char* argv[])
     SettingStruct planet_radius_setting_struct(std::make_shared<datatypes::AnyValue>(earth_radius));
     planet_radius_setting_struct.name = "planet_radius";
     planet_radius_setting_struct.setting_master = my_setting_master;
-    planet_radius_setting_struct.activate_callback = &config::SettingMaster::activate_planet_radius; // world may be a planet or a moon.
+    planet_radius_setting_struct.activate_callback = &ylikuutio::config::SettingMaster::activate_planet_radius; // world may be a planet or a moon.
     planet_radius_setting_struct.should_ylikuutio_call_activate_callback_now = true;
-    new config::Setting(planet_radius_setting_struct);
+    new ylikuutio::config::Setting(planet_radius_setting_struct);
 
     std::cout << "Creating ylikuutio::callback_system::CallbackEngine* cleanup_callback_engine ...\n";
     ylikuutio::callback_system::CallbackEngine* cleanup_callback_engine = new ylikuutio::callback_system::CallbackEngine();
@@ -881,8 +881,8 @@ int main(int argc, char* argv[])
     std::cout << "Defining console command callback engines.\n";
 
     // Config callbacks.
-    command_callback_map["set"] = &config::SettingMaster::set_and_print;
-    command_callback_map["get"] = &config::SettingMaster::get_and_print;
+    command_callback_map["set"] = &ylikuutio::config::SettingMaster::set_and_print;
+    command_callback_map["get"] = &ylikuutio::config::SettingMaster::get_and_print;
 
     // Object handling callbacks.
     command_callback_map["info"] = &ylikuutio::ontology::Universe::info;
