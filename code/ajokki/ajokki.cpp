@@ -910,10 +910,6 @@ int main(int argc, char* argv[])
 
     bool is_exit_requested = false;
 
-    // Measure speed
-    double last_time_before_reading_keyboard = NAN;
-    double current_time_before_reading_keyboard = NAN;
-
     audio_master.add_to_playlist("Ajokki_playlist", "414270__greek555__sample-97-bpm.wav");
     audio_master.add_to_playlist("Ajokki_playlist", "419588__greek555__dreaming-of-me.ogg");
     audio_master.add_to_playlist("Ajokki_playlist", "416882__greek555__blue-play.ogg");
@@ -1158,10 +1154,8 @@ int main(int argc, char* argv[])
             char time_text[256];
             std::snprintf(time_text, sizeof(time_text), "%.2f sec", yli::time::get_time());
 
-            char null_text[] = "";
             char on_text[] = "on";
             char off_text[] = "off";
-            char in_use_text[] = " (in use)";
 
             char help_text_char[1024];
             std::snprintf(
