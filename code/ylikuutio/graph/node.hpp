@@ -1,14 +1,15 @@
 #ifndef __NODE_HPP_INCLUDED
 #define __NODE_HPP_INCLUDED
 
-#include <vector>    // std::vector
-#include <queue>     // std::queue
-#include <algorithm> // std::find
-
 #include "graph.hpp"
 #include "node_struct.hpp"
 #include "code/ylikuutio/common/globals.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
+
+// Include standard headers
+#include <vector>    // std::vector
+#include <queue>     // std::queue
+#include <algorithm> // std::find
 
 namespace graph
 {
