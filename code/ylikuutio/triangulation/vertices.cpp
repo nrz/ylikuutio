@@ -116,7 +116,6 @@ namespace yli
                 //  |/  0  \|/  4  \|/  8  \|
                 //  +-------+-------+-------+
 
-                uint32_t triangle_i = 0;
                 uint32_t current_interpolated_vertex_i = actual_image_width * actual_image_height;
 
                 for (uint32_t z = 1; z < actual_image_height; z++)
@@ -306,8 +305,6 @@ namespace yli
                 uint32_t x;
                 uint32_t z;
 
-                uint32_t triangle_i = 0;
-
                 for (z = 1; z < actual_image_height; z++)
                 {
                     for (x = 1; x < actual_image_width; x++)
@@ -419,8 +416,6 @@ namespace yli
 
                 uint32_t x;
                 uint32_t z;
-
-                uint32_t triangle_i = 0;
 
                 for (z = 1; z < actual_image_height; z++)
                 {
