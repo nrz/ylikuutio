@@ -2,6 +2,7 @@
 #include "vector_font.hpp"
 #include "text3D.hpp"
 #include "object.hpp"
+#include "object_struct.hpp"
 
 // Include standard headers
 #include <stdint.h> // uint32_t etc.

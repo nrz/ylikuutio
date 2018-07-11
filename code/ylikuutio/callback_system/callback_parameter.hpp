@@ -1,12 +1,13 @@
 #ifndef __CALLBACK_PARAMETER_HPP_INCLUDED
 #define __CALLBACK_PARAMETER_HPP_INCLUDED
 
-#include "code/ylikuutio/common/any_value.hpp"
 #include "callback_object.hpp"
+#include "code/ylikuutio/common/any_value.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include standard headers
 #include <memory>        // std::make_shared, std::shared_ptr
+#include <stdint.h>      // uint32_t etc.
 #include <string>        // std::string
 
 namespace yli

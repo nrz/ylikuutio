@@ -578,7 +578,7 @@ namespace yli
                 int32_t font_size;
 
                 // Variables related to timing of events.
-                int32_t max_FPS;
+                uint32_t max_FPS;
                 float delta_time;
 
                 double last_time_before_reading_keyboard;

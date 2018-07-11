@@ -15,6 +15,7 @@
 #endif
 
 // Include standard headers
+#include <cstddef>  // std::size_t
 #include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
 
@@ -116,17 +117,16 @@ namespace yli
                 //  |/  0  \|/  4  \|/  8  \|
                 //  +-------+-------+-------+
 
-                uint32_t triangle_i = 0;
-                uint32_t current_interpolated_vertex_i = actual_image_width * actual_image_height;
+                std::size_t current_interpolated_vertex_i = actual_image_width * actual_image_height;
 
-                for (uint32_t z = 1; z < actual_image_height; z++)
+                for (std::size_t z = 1; z < actual_image_height; z++)
                 {
                     // show progress in percents.
                     int32_t current_percent = static_cast<int32_t>(floor(100.0f * ((double) z / (double) (actual_image_height - 1))));
 
-                    for (uint32_t x = 1; x < actual_image_width; x++)
+                    for (std::size_t x = 1; x < actual_image_width; x++)
                     {
-                        uint32_t current_vertex_i = actual_image_width * z + x;
+                        std::size_t current_vertex_i = actual_image_width * z + x;
 
                         // This corresponds to "vn": specify normal of one vertex.
 
@@ -303,16 +303,11 @@ namespace yli
                 // +---+---+---+
                 // southwest northeast edges.
 
-                uint32_t x;
-                uint32_t z;
-
-                uint32_t triangle_i = 0;
-
-                for (z = 1; z < actual_image_height; z++)
+                for (std::size_t z = 1; z < actual_image_height; z++)
                 {
-                    for (x = 1; x < actual_image_width; x++)
+                    for (std::size_t x = 1; x < actual_image_width; x++)
                     {
-                        uint32_t current_vertex_i = actual_image_width * z + x;
+                        std::size_t current_vertex_i = actual_image_width * z + x;
 
                         // This corresponds to "vn": specify normal of one vertex.
 
@@ -417,16 +412,11 @@ namespace yli
                 // +---+---+---+
                 // southeast northwest edges.
 
-                uint32_t x;
-                uint32_t z;
-
-                uint32_t triangle_i = 0;
-
-                for (z = 1; z < actual_image_height; z++)
+                for (std::size_t z = 1; z < actual_image_height; z++)
                 {
-                    for (x = 1; x < actual_image_width; x++)
+                    for (std::size_t x = 1; x < actual_image_width; x++)
                     {
-                        uint32_t current_vertex_i = actual_image_width * z + x;
+                        std::size_t current_vertex_i = actual_image_width * z + x;
 
                         // This corresponds to "vn": specify normal of one vertex.
 

@@ -5,6 +5,9 @@
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/common/globals.hpp"
 
+// Include standard headers
+#include <iostream> // std::cout, std::cin, std::cerr
+
 namespace space_partition
 {
     void ChunkMaster::bind_to_parent()

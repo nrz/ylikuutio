@@ -2,11 +2,14 @@
 #define __SETTING_HPP_INCLUDED
 
 #include "setting_struct.hpp"
+#include "activate_callback.hpp"
+#include "read_callback.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
-#include "code/ylikuutio/common/globals.hpp"
 
 // Include standard headers
 #include <memory>   // std::make_shared, std::shared_ptr
+#include <queue>    // std::queue
+#include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 
 namespace yli
@@ -15,10 +18,7 @@ namespace yli
     {
         class Console;
     }
-}
 
-namespace yli
-{
     namespace config
     {
         class SettingMaster;

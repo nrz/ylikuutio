@@ -13,6 +13,7 @@
 
 // Include standard headers
 #include <cmath> // NAN, std::isnan, std::pow
+#include <stdint.h> // uint32_t etc.
 
 namespace yli
 {

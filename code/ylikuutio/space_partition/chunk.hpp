@@ -7,6 +7,16 @@
 #include "code/ylikuutio/ontology/render_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
+// Include GLM
+#ifndef __GLM_GLM_HPP_INCLUDED
+#define __GLM_GLM_HPP_INCLUDED
+#include <glm/glm.hpp> // glm
+#endif
+
+// Include standard headers
+#include <queue>   // std::queue
+#include <vector>  // std::vector
+
 // The content of any `Chunk` can be based either on some predefined
 // data (eg. height map data, laser scanning data etc.) or procedurally
 // (eg. Perlin noise or some other fractal). The parent of `Chunk` objects
