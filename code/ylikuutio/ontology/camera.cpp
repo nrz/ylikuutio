@@ -7,6 +7,11 @@
 #define RADIANS_TO_DEGREES(x) (x * 180.0f / PI)
 #endif
 
+#include "camera.hpp"
+#include "scene.hpp"
+#include "ground_level.hpp"
+#include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
+
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
 #define __GLM_GLM_HPP_INCLUDED
@@ -18,10 +23,6 @@
 #include <glm/gtc/matrix_transform.hpp>
 #endif
 
-#include "camera.hpp"
-#include "scene.hpp"
-#include "ground_level.hpp"
-#include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 namespace yli
 {
