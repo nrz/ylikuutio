@@ -21,10 +21,7 @@ namespace yli
     {
         class Entity;
     }
-}
 
-namespace yli
-{
     namespace config
     {
         SettingMaster::SettingMaster(yli::ontology::Entity* const entity)

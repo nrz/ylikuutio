@@ -15,10 +15,7 @@ namespace yli
     {
         class Console;
     }
-}
 
-namespace yli
-{
     namespace config
     {
         class SettingMaster;

@@ -8,14 +8,6 @@
 #include <unordered_map> // std::unordered_map
 #include <vector>        // std::vector
 
-namespace yli
-{
-    namespace console
-    {
-        class Console;
-    }
-}
-
 namespace datatypes
 {
     class AnyValue;
@@ -23,14 +15,16 @@ namespace datatypes
 
 namespace yli
 {
+    namespace console
+    {
+        class Console;
+    }
+
     namespace ontology
     {
         class Entity;
     }
-}
 
-namespace yli
-{
     namespace config
     {
         class Setting;
