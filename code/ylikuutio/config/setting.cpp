@@ -4,6 +4,7 @@
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include standard headers
+#include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 
 namespace yli
