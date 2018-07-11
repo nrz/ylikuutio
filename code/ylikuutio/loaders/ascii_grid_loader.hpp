@@ -12,7 +12,6 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
-
 namespace loaders
 {
     bool load_ASCII_grid(
