@@ -9,6 +9,7 @@
 #endif
 
 // Include standard headers
+#include <cstddef>  // std::size_t
 #include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
 
@@ -25,7 +26,7 @@ namespace yli
                 const bool is_southwest_northeast_edges_in_use,
                 const bool is_southeast_northwest_edges_in_use)
         {
-            int32_t current_interpolated_vertex_i = actual_image_width * actual_image_height;
+            std::size_t current_interpolated_vertex_i = actual_image_width * actual_image_height;
 
             if (actual_image_width < 2 || actual_image_height < 2)
             {
@@ -65,11 +66,11 @@ namespace yli
                 face_normal_vector_vec3.reserve(2 * (actual_image_width - 1) * (actual_image_height - 1));
             }
 
-            for (int32_t z = 1; z < actual_image_height; z++)
+            for (std::size_t z = 1; z < actual_image_height; z++)
             {
-                for (int32_t x = 1; x < actual_image_width; x++)
+                for (std::size_t x = 1; x < actual_image_width; x++)
                 {
-                    int32_t current_vertex_i = actual_image_width * z + x;
+                    std::size_t current_vertex_i = actual_image_width * z + x;
 
                     // Computing of face normals depends on triangulation type.
                     if (is_bilinear_interpolation_in_use)

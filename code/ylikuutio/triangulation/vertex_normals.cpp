@@ -9,6 +9,7 @@
 #endif
 
 // Include standard headers
+#include <cstddef>  // std::size_t
 #include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
 
@@ -67,8 +68,8 @@ namespace yli
 
             if (is_bilinear_interpolation_in_use)
             {
-                int32_t x = 0;
-                int32_t z = 0;
+                std::size_t x = 0;
+                std::size_t z = 0;
 
                 // Compute the normal of the southwesternmost vertex.
                 // Number of adjacent faces: 2.
@@ -176,8 +177,8 @@ namespace yli
             }
             else if (is_southwest_northeast_edges_in_use)
             {
-                int32_t x = 0;
-                int32_t z = 0;
+                std::size_t x = 0;
+                std::size_t z = 0;
 
                 // Compute the normal of the southwesternmost vertex.
                 // Number of adjacent faces: 2.
@@ -262,8 +263,8 @@ namespace yli
             }
             else if (is_southeast_northwest_edges_in_use)
             {
-                int32_t x = 0;
-                int32_t z = 0;
+                std::size_t x = 0;
+                std::size_t z = 0;
 
                 // Compute the normal of the southwesternmost vertex.
                 // Number of adjacent faces: 1.

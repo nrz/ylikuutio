@@ -8,6 +8,7 @@
 #endif
 
 // Include standard headers
+#include <cstddef>  // std::size_t
 #include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
 
@@ -40,7 +41,7 @@ namespace yli
             // except immediately previous and immediately next intersections.
             // TODO: write the code!
 
-            for (uint32_t vertex_i = 0; vertex_i < vertex_data->size(); vertex_i++)
+            for (std::size_t vertex_i = 0; vertex_i < vertex_data->size(); vertex_i++)
             {
             }
 
@@ -50,7 +51,7 @@ namespace yli
             // TODO: write the code!
             std::vector<std::vector<glm::vec3>> simple_polygons;
 
-            for (uint32_t vertex_i = 0; vertex_i < vertex_data->size(); vertex_i++)
+            for (std::size_t  vertex_i = 0; vertex_i < vertex_data->size(); vertex_i++)
             {
             }
 

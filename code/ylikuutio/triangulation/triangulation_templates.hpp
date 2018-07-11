@@ -16,6 +16,7 @@
 #endif
 
 // Include standard headers
+#include <cstddef>  // std::size_t
 #include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
 
@@ -90,13 +91,13 @@ namespace yli
                 temp_UVs.reserve(number_of_vertices);
 
                 // Define the temporary vertices in a double loop.
-                int32_t texture_y = 0;
+                std::size_t texture_y = 0;
 
-                for (int32_t z = 0; z < image_height; z += z_step)
+                for (std::size_t z = 0; z < image_height; z += z_step)
                 {
-                    int32_t texture_x = 0;
+                    std::size_t texture_x = 0;
 
-                    for (int32_t x = 0; x < image_width; x += x_step)
+                    for (std::size_t x = 0; x < image_width; x += x_step)
                     {
                         // current x,z coordinates).
                         float y = static_cast<float>(yli::geometry::get_y(input_vertex_pointer, x, z, image_width));
@@ -164,10 +165,10 @@ namespace yli
 
                 // Then, define the faces in a double loop.
                 // Begin from index `z_step`.
-                for (int32_t z = z_step; z < image_height; z += z_step)
+                for (std::size_t z = z_step; z < image_height; z += z_step)
                 {
                     // Begin from index `x_step`.
-                    for (int32_t x = x_step; x < image_width; x += x_step)
+                    for (std::size_t x = x_step; x < image_width; x += x_step)
                     {
                         // This corresponds to "f": specify a face (but here we specify 2 faces instead!).
 
