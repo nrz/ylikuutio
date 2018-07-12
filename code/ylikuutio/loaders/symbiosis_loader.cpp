@@ -16,10 +16,10 @@
 #endif
 
 // Include standard headers
-#include <iostream> // std::cout, std::cin, std::cerr
-#include <stdint.h> // uint32_t etc.
+#include <iostream>      // std::cout, std::cin, std::cerr
+#include <stdint.h>      // uint32_t etc.
 #include <unordered_map> // std::unordered_map
-#include <vector>   // std::vector
+#include <vector>        // std::vector
 
 namespace loaders
 {
