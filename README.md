@@ -28,8 +28,7 @@ CMake uses git for downloading Google Test testing framework.
 Ylikuutio repository in GitHub has 2 branches: `master` & `coverity_scan`.
 master is the branch that should be up to date and it's the one to build.
 `coverity_scan` is for Synopsys© Coverity Scan© analysis tool which is run through
-Travis CI. However, Coverity Scan analysis tool configuration in `.travis.yml`
-is not yet ready and does not yet work.
+Travis CI.
 
 In Linux it's simple.
 
