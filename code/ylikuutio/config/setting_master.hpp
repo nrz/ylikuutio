@@ -2,6 +2,7 @@
 #define __SETTING_MASTER_HPP_INCLUDED
 
 // Include standard headers
+#include <cstddef>       // std::size_t
 #include <memory>        // std::make_shared, std::shared_ptr
 #include <queue>         // std::queue
 #include <stdint.h>      // uint32_t etc.
@@ -122,7 +123,7 @@ namespace yli
 
                 std::vector<yli::config::Setting*> setting_pointer_vector;
                 std::queue<int32_t> free_settingID_queue;
-                int32_t number_of_settings;
+                std::size_t number_of_settings;
 
                 std::unordered_map<std::string, yli::config::Setting*> setting_pointer_map;
         };

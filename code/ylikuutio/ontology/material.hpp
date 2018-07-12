@@ -133,9 +133,9 @@ namespace yli
                 template<class T1>
                     friend void render_children(const std::vector<T1>& child_pointer_vector);
                 template<class T1>
-                    friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, int32_t* number_of_children);
+                    friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, std::size_t* number_of_children);
                 template<class T1, class T2>
-                    friend void hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent, std::vector<T1>& old_child_pointer_vector, std::queue<int32_t>& old_free_childID_queue, int32_t* old_number_of_children);
+                    friend void hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent, std::vector<T1>& old_child_pointer_vector, std::queue<int32_t>& old_free_childID_queue, std::size_t* old_number_of_children);
 
             private:
                 void bind_to_parent();
@@ -161,9 +161,9 @@ namespace yli
                 std::queue<int32_t> free_speciesID_queue;
                 std::queue<int32_t> free_vector_fontID_queue;
                 std::queue<int32_t> free_chunk_masterID_queue;
-                int32_t number_of_species;
-                int32_t number_of_vector_fonts;
-                int32_t number_of_chunk_masters;
+                std::size_t number_of_species;
+                std::size_t number_of_vector_fonts;
+                std::size_t number_of_chunk_masters;
 
                 std::string texture_file_format;       // type of the model file, eg. `"bmp"`.
                 std::string texture_filename;          // filename of the model file.

@@ -8,6 +8,7 @@
 #endif
 
 // Include standard headers
+#include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
@@ -40,7 +41,7 @@ namespace graph
 
             std::vector<graph::Node*> node_pointer_vector;
             std::queue<int32_t> free_nodeID_queue;
-            int32_t number_of_nodes;
+            std::size_t number_of_nodes;
     };
 }
 

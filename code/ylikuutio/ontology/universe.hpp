@@ -547,7 +547,7 @@ namespace yli
 
                 std::vector<yli::ontology::World*> world_pointer_vector;
                 std::queue<int32_t> free_worldID_queue;
-                int32_t number_of_worlds;
+                std::size_t number_of_worlds;
 
                 yli::ontology::World* active_world;
 

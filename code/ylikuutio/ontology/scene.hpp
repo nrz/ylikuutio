@@ -99,9 +99,9 @@ namespace yli
                 void set_camera_pointer(const int32_t childID, yli::ontology::Camera* const child_pointer);
 
                 template<class T1>
-                    friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, int32_t* number_of_children);
+                    friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, std::size_t* number_of_children);
                 template<class T1, class T2>
-                    friend void hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent, std::vector<T1>& old_child_pointer_vector, std::queue<int32_t>& old_free_childID_queue, int32_t* old_number_of_children);
+                    friend void hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent, std::vector<T1>& old_child_pointer_vector, std::queue<int32_t>& old_free_childID_queue, std::size_t* old_number_of_children);
 
             private:
                 void bind_to_parent();
@@ -117,11 +117,11 @@ namespace yli
 
                 std::vector<yli::ontology::Shader*> shader_pointer_vector;
                 std::queue<int32_t> free_shaderID_queue;
-                int32_t number_of_shaders;
+                std::size_t number_of_shaders;
 
                 std::vector<yli::ontology::Camera*> camera_pointer_vector;
                 std::queue<int32_t> free_cameraID_queue;
-                int32_t number_of_cameras;
+                std::size_t number_of_cameras;
 
                 yli::ontology::Camera* active_camera;
 

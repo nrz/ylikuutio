@@ -16,7 +16,7 @@ namespace hierarchy
                 const T1 child_pointer,
                 std::vector<T1>& child_pointer_vector,
                 std::queue<int32_t>& free_childID_queue,
-                int32_t* const number_of_children)
+                std::size_t* const number_of_children)
         {
             child_pointer_vector[childID] = child_pointer;
 
@@ -34,7 +34,10 @@ namespace hierarchy
                 }
 
                 // 1 child less.
-                (*number_of_children)--;
+                if (*number_of_children > 0)
+                {
+                    (*number_of_children)--;
+                }
             }
             else
             {
@@ -78,7 +81,7 @@ namespace hierarchy
                 const T1 child_pointer,
                 std::vector<T1>& child_pointer_vector,
                 std::queue<int32_t>& free_childID_queue,
-                int32_t* const number_of_children)
+                std::size_t* const number_of_children)
         {
             // If a class' instances have parents, this function must be
             // called in the constructor. The call must be done only once
@@ -97,7 +100,7 @@ namespace hierarchy
                 const T1 child_pointer,
                 std::vector<T1>& child_pointer_vector,
                 std::queue<int32_t>& free_childID_queue,
-                int32_t* const number_of_children)
+                std::size_t* const number_of_children)
         {
             // If a class' instances have parents, this function must be
             // called in the constructor. The call must be done only once
@@ -122,7 +125,7 @@ namespace hierarchy
                 const T2 new_parent,
                 std::vector<T1>& old_child_pointer_vector,
                 std::queue<int32_t>& old_free_childID_queue,
-                int32_t* const old_number_of_children)
+                std::size_t* const old_number_of_children)
         {
             // Set pointer to this child to `nullptr` in the old parent.
             T1 dummy_child_pointer = nullptr;
@@ -134,7 +137,7 @@ namespace hierarchy
         }
 
     template<class T1>
-        void delete_children(std::vector<T1>& child_pointer_vector, int32_t* const number_of_children)
+        void delete_children(std::vector<T1>& child_pointer_vector, std::size_t* const number_of_children)
         {
             for (std::size_t child_i = 0; child_i < child_pointer_vector.size(); child_i++)
             {

@@ -6,6 +6,7 @@
 #include "code/ylikuutio/common/globals.hpp"
 
 // Include standard headers
+#include <cstddef>  // std::size_t
 #include <queue>    // std::queue
 #include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
@@ -43,9 +44,9 @@ namespace space_partition
 
             friend class Chunk;
             template<class T1>
-                friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, int32_t* number_of_children);
+                friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, std::size_t* number_of_children);
             template<class T1, class T2>
-                friend void hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent, std::vector<T1>& old_child_pointer_vector, std::queue<int32_t>& old_free_childID_queue, int32_t* old_number_of_children);
+                friend void hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent, std::vector<T1>& old_child_pointer_vector, std::queue<int32_t>& old_free_childID_queue, std::size_t* old_number_of_children);
             template<class T1>
                 friend void yli::ontology::render_children(const std::vector<T1>& child_pointer_vector);
 
@@ -67,7 +68,7 @@ namespace space_partition
 
             std::vector<space_partition::Chunk*> chunk_pointer_vector;
             std::queue<int32_t> free_chunkID_queue;
-            int32_t number_of_chunks;
+            std::size_t number_of_chunks;
     };
 };
 

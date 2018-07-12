@@ -472,9 +472,9 @@ namespace yli
                 parent_info += std::string(parents_memory_address_char_array);
                 console->print_text(parent_info);
 
-                int32_t number_of_children = entity->get_number_of_children();
+                std::size_t number_of_children = entity->get_number_of_children();
                 char number_of_children_char_array[256];
-                snprintf(number_of_children_char_array, sizeof(number_of_children_char_array), "%d", number_of_children);
+                snprintf(number_of_children_char_array, sizeof(number_of_children_char_array), "%lu", number_of_children);
 
                 std::string children_info = "number of children: ";
                 children_info += std::string(number_of_children_char_array);
