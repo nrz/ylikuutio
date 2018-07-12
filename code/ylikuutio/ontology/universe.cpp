@@ -138,7 +138,7 @@ namespace yli
             }
         }
 
-        int32_t Universe::get_number_of_worlds() const
+        std::size_t Universe::get_number_of_worlds() const
         {
             return this->number_of_worlds;
         }
