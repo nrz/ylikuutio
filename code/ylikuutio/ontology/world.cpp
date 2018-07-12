@@ -17,7 +17,7 @@ namespace yli
         void World::bind(yli::ontology::Scene* const scene)
         {
             // get `childID` from `World` and set pointer to `scene`.
-            hierarchy::bind_child_to_parent<yli::ontology::Scene*>(
+            yli::hierarchy::bind_child_to_parent<yli::ontology::Scene*>(
                     scene,
                     this->scene_pointer_vector,
                     this->free_sceneID_queue,
@@ -37,7 +37,7 @@ namespace yli
 
             // destroy all scenes of this world.
             std::cout << "All scenes of this world will be destroyed.\n";
-            hierarchy::delete_children<yli::ontology::Scene*>(this->scene_pointer_vector, &this->number_of_scenes);
+            yli::hierarchy::delete_children<yli::ontology::Scene*>(this->scene_pointer_vector, &this->number_of_scenes);
         }
 
         void World::render()
@@ -87,7 +87,7 @@ namespace yli
 
         void World::set_scene_pointer(const int32_t childID, yli::ontology::Scene* const child_pointer)
         {
-            hierarchy::set_child_pointer(childID, child_pointer, this->scene_pointer_vector, this->free_sceneID_queue, &this->number_of_scenes);
+            yli::hierarchy::set_child_pointer(childID, child_pointer, this->scene_pointer_vector, this->free_sceneID_queue, &this->number_of_scenes);
         }
     }
 }

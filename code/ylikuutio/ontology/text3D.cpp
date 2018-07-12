@@ -27,7 +27,7 @@ namespace yli
 
             // destroy all objects of this `Text3D`.
             std::cout << "All objects (" << this->object_pointer_vector.size() << " pieces) of this 3D text will be destroyed.\n";
-            hierarchy::delete_children<yli::ontology::Object*>(this->object_pointer_vector, &this->number_of_objects);
+            yli::hierarchy::delete_children<yli::ontology::Object*>(this->object_pointer_vector, &this->number_of_objects);
 
             this->parent->set_text3D_pointer(this->childID, nullptr);
         }
@@ -49,7 +49,7 @@ namespace yli
 
         void Text3D::set_object_pointer(const int32_t childID, yli::ontology::Object* const child_pointer)
         {
-            hierarchy::set_child_pointer(childID, child_pointer, this->object_pointer_vector, this->free_objectID_queue, &this->number_of_objects);
+            yli::hierarchy::set_child_pointer(childID, child_pointer, this->object_pointer_vector, this->free_objectID_queue, &this->number_of_objects);
         }
     }
 }

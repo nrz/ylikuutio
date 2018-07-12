@@ -39,7 +39,7 @@ namespace yli
             // 5. unbind `Biont` from its `Holobiont` parent.
             //
             // get `childID` from `SymbiontSpecies` and set pointer to `biont`.
-            hierarchy::bind_child_to_parent<yli::ontology::Biont*>(
+            yli::hierarchy::bind_child_to_parent<yli::ontology::Biont*>(
                     biont,
                     this->biont_pointer_vector,
                     this->free_biontID_queue,
@@ -49,7 +49,7 @@ namespace yli
         void SymbiontSpecies::unbind_biont(const int32_t childID)
         {
             yli::ontology::Biont* dummy_child_pointer = nullptr;
-            hierarchy::set_child_pointer(
+            yli::hierarchy::set_child_pointer(
                     childID,
                     dummy_child_pointer,
                     this->biont_pointer_vector,

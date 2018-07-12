@@ -22,7 +22,7 @@ namespace graph
 
     void Graph::set_node_pointer(int32_t childID, graph::Node* child_pointer)
     {
-        hierarchy::set_child_pointer(childID, child_pointer, this->node_pointer_vector, this->free_nodeID_queue, &this->number_of_nodes);
+        yli::hierarchy::set_child_pointer(childID, child_pointer, this->node_pointer_vector, this->free_nodeID_queue, &this->number_of_nodes);
     }
 
     graph::Node* Graph::get_node_pointer(int32_t childID)
@@ -32,7 +32,7 @@ namespace graph
 
     int32_t Graph::get_nodeID()
     {
-        return hierarchy::get_childID(this->node_pointer_vector, this->free_nodeID_queue);
+        return yli::hierarchy::get_childID(this->node_pointer_vector, this->free_nodeID_queue);
     }
 
     Graph::~Graph()
@@ -42,6 +42,6 @@ namespace graph
 
         // destroy all nodes of this graph.
         std::cout << "All nodes of this graph will be destroyed.\n";
-        hierarchy::delete_children<graph::Node*>(this->node_pointer_vector, &this->number_of_nodes);
+        yli::hierarchy::delete_children<graph::Node*>(this->node_pointer_vector, &this->number_of_nodes);
     }
 }

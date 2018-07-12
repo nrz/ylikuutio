@@ -21,7 +21,7 @@ namespace yli
         void Model::bind(yli::ontology::Object* const object)
         {
             // get `childID` from `Model` and set pointer to `object`.
-            hierarchy::bind_child_to_parent<yli::ontology::Object*>(
+            yli::hierarchy::bind_child_to_parent<yli::ontology::Object*>(
                     object,
                     this->object_pointer_vector,
                     this->free_objectID_queue,
@@ -31,7 +31,7 @@ namespace yli
         void Model::unbind(const int32_t childID)
         {
             yli::ontology::Object* dummy_child_pointer = nullptr;
-            hierarchy::set_child_pointer(
+            yli::hierarchy::set_child_pointer(
                     childID,
                     dummy_child_pointer,
                     this->object_pointer_vector,

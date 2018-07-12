@@ -13,7 +13,7 @@ namespace yli
     {
         void Setting::bind_to_parent()
         {
-            hierarchy::bind_child_to_parent<yli::config::Setting*>(this, this->parent->setting_pointer_vector, this->parent->free_settingID_queue, &this->parent->number_of_settings);
+            yli::hierarchy::bind_child_to_parent<yli::config::Setting*>(this, this->parent->setting_pointer_vector, this->parent->free_settingID_queue, &this->parent->number_of_settings);
         }
 
         Setting::Setting(const SettingStruct& setting_struct)

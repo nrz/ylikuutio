@@ -53,7 +53,7 @@ namespace yli
 
         void CallbackObject::bind_to_parent()
         {
-            hierarchy::bind_child_to_parent<yli::callback_system::CallbackObject*>(this, this->parent->callback_object_pointer_vector, this->parent->free_callback_objectID_queue, &this->parent->number_of_callback_objects);
+            yli::hierarchy::bind_child_to_parent<yli::callback_system::CallbackObject*>(this, this->parent->callback_object_pointer_vector, this->parent->free_callback_objectID_queue, &this->parent->number_of_callback_objects);
         }
 
         void CallbackObject::set_new_callback(const InputParametersToAnyValueCallback callback)
