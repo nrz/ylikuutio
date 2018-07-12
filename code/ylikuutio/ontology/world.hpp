@@ -5,6 +5,7 @@
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include standard headers
+#include <cstddef>  // std::size_t
 #include <queue>    // std::queue
 #include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
@@ -57,11 +58,11 @@ namespace yli
                 void set_scene_pointer(const int32_t childID, yli::ontology::Scene* const child_pointer);
 
                 yli::ontology::Entity* get_parent() const override;
-                int32_t get_number_of_children() const override;
-                int32_t get_number_of_descendants() const override;
+                std::size_t get_number_of_children() const override;
+                std::size_t get_number_of_descendants() const override;
 
                 template<class T1>
-                    friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, int32_t* number_of_children);
+                    friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, std::size_t* number_of_children);
 
             private:
                 void bind_to_parent();
@@ -70,7 +71,7 @@ namespace yli
 
                 std::vector<yli::ontology::Scene*> scene_pointer_vector;
                 std::queue<int32_t> free_sceneID_queue;
-                int32_t number_of_scenes;
+                std::size_t number_of_scenes;
 
                 yli::ontology::Scene* active_scene;
         };

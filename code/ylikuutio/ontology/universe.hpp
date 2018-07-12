@@ -29,6 +29,7 @@
 
 // Include standard headers
 #include <cmath>         // NAN, std::isnan, std::pow
+#include <cstddef>       // std::size_t
 #include <iostream>      // std::cout, std::cin, std::cerr
 #include <memory>        // std::make_shared, std::shared_ptr
 #include <queue>         // std::queue
@@ -410,13 +411,13 @@ namespace yli
                 // this method sets a terrain `Species` pointer.
                 void set_terrain_species(yli::ontology::Species* terrain_species);
 
-                int32_t get_number_of_worlds() const;
+                std::size_t get_number_of_worlds() const;
 
                 yli::ontology::World* get_active_world() const;
 
                 yli::ontology::Entity* get_parent() const override;
-                int32_t get_number_of_children() const override;
-                int32_t get_number_of_descendants() const override;
+                std::size_t get_number_of_children() const override;
+                std::size_t get_number_of_descendants() const override;
 
                 // this method sets a new `window`.
                 void set_window(GLFWwindow* window);
@@ -546,7 +547,7 @@ namespace yli
 
                 std::vector<yli::ontology::World*> world_pointer_vector;
                 std::queue<int32_t> free_worldID_queue;
-                int32_t number_of_worlds;
+                std::size_t number_of_worlds;
 
                 yli::ontology::World* active_world;
 

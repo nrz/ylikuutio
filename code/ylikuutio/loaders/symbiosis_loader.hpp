@@ -17,9 +17,10 @@
 #endif
 
 // Include standard headers
-#include <stdint.h> // uint32_t etc.
+#include <cstddef>       // std::size_t
+#include <stdint.h>      // uint32_t etc.
 #include <unordered_map> // std::unordered_map
-#include <vector>   // std::vector
+#include <vector>        // std::vector
 
 namespace loaders
 {
@@ -37,7 +38,7 @@ namespace loaders
             std::vector<const ofbx::Texture*>& ofbx_diffuse_texture_vector,
             std::vector<const ofbx::Texture*>& ofbx_normal_texture_vector,
             std::vector<const ofbx::Texture*>& ofbx_count_texture_vector,
-            int32_t& mesh_count,
+            std::size_t& mesh_count,
             const bool is_debug_mode);
 }
 

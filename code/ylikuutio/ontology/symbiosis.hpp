@@ -31,6 +31,7 @@
 typedef unsigned char u8;
 
 // Include standard headers
+#include <cstddef>  // std::size_t
 #include <queue>    // std::queue
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
@@ -92,9 +93,9 @@ namespace yli
 
                 yli::ontology::Entity* get_parent() const override;
 
-                int32_t get_number_of_children() const override;
+                std::size_t get_number_of_children() const override;
 
-                int32_t get_number_of_descendants() const override;
+                std::size_t get_number_of_descendants() const override;
 
                 const std::string& get_model_file_format();
 
@@ -114,7 +115,7 @@ namespace yli
 
                 std::vector<uint32_t> get_indices(const int32_t biontID) const;
                 GLuint get_indices_size(const int32_t biontID) const;
-                int32_t get_number_of_symbionts() const;
+                std::size_t get_number_of_symbionts() const;
                 bool has_texture(const int32_t biontID) const;
                 GLuint get_texture(const int32_t biontID) const;
                 GLuint get_openGL_textureID(const int32_t biontID) const;
@@ -123,9 +124,9 @@ namespace yli
                 glm::vec3 get_light_position(const int32_t biontID) const;
 
                 template<class T1>
-                    friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, int32_t* number_of_children);
+                    friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, std::size_t* number_of_children);
                 template<class T1, class T2>
-                    friend void hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent, std::vector<T1>& old_child_pointer_vector, std::queue<int32_t>& old_free_childID_queue, int32_t* old_number_of_children);
+                    friend void hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent, std::vector<T1>& old_child_pointer_vector, std::queue<int32_t>& old_free_childID_queue, std::size_t* old_number_of_children);
 
             private:
                 void bind_to_parent();
@@ -142,8 +143,8 @@ namespace yli
                 std::vector<yli::ontology::Holobiont*> holobiont_pointer_vector;
                 std::queue<int32_t> free_symbiont_materialID_queue;
                 std::queue<int32_t> free_holobiontID_queue;
-                int32_t number_of_symbiont_materials;
-                int32_t number_of_holobionts;
+                std::size_t number_of_symbiont_materials;
+                std::size_t number_of_holobionts;
 
                 std::vector<std::vector<glm::vec3>> vertices;         // vertices of the object.
                 std::vector<std::vector<glm::vec2>> uvs;              // UVs of the object.
@@ -161,7 +162,7 @@ namespace yli
                 std::vector<const ofbx::Texture*> ofbx_diffuse_texture_vector;
                 std::vector<const ofbx::Texture*> ofbx_normal_texture_vector; // currently not in use.
                 std::vector<const ofbx::Texture*> ofbx_count_texture_vector;  // currently not in use.
-                int32_t ofbx_mesh_count;
+                std::size_t ofbx_mesh_count;
         };
     }
 }

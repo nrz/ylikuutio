@@ -4,6 +4,7 @@
 #include "code/ylikuutio/config/setting_master.hpp"
 
 // Include standard headers
+#include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <stdint.h> // uint32_t etc.
 
@@ -74,14 +75,14 @@ namespace yli
             return nullptr;
         }
 
-        int32_t World::get_number_of_children() const
+        std::size_t World::get_number_of_children() const
         {
             return this->number_of_scenes;
         }
 
-        int32_t World::get_number_of_descendants() const
+        std::size_t World::get_number_of_descendants() const
         {
-            return -1;
+            return 0; // TODO; write the code!
         }
 
         void World::set_scene_pointer(const int32_t childID, yli::ontology::Scene* const child_pointer)

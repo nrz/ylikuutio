@@ -13,9 +13,9 @@
 #endif
 
 // Include standard headers
+#include <cstddef>  // std::size_t
 #include <cstring>  // std::memcmp, std::strcmp, std::strlen, std::strncmp
-#include <map>
-#include <stdint.h> // uint32_t etc.
+#include <map>      // std::map
 #include <vector>   // std::vector
 
 // Returns true iif v1 can be considered equal to v2
@@ -37,7 +37,7 @@ bool getSimilarVertexIndex(
         GLuint &result)
 {
     // Lame linear search
-    for (uint32_t i = 0; i < out_vertices.size(); i++)
+    for (std::size_t i = 0; i < out_vertices.size(); i++)
     {
         if (is_near(in_vertex.x, out_vertices[i].x) &&
                 is_near(in_vertex.y, out_vertices[i].y) &&
@@ -102,7 +102,7 @@ namespace yli
             std::map<PackedVertex, GLuint> VertexToOutIndex;
 
             // For each input vertex
-            for (int32_t i = 0; i < in_vertices.size() && i < in_UVs.size() && i < in_normals.size(); i++)
+            for (std::size_t i = 0; i < in_vertices.size() && i < in_UVs.size() && i < in_normals.size(); i++)
             {
                 PackedVertex packed = { in_vertices[i], in_UVs[i], in_normals[i] };
 

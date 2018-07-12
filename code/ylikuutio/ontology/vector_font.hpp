@@ -13,6 +13,7 @@
 #include "code/ylikuutio/common/globals.hpp"
 
 // Include standard headers
+#include <cstddef>       // std::size_t
 #include <cstring>       // std::memcmp, std::strcmp, std::strlen, std::strncmp
 #include <iostream>      // std::cout, std::cin, std::cerr
 #include <queue>         // std::queue
@@ -136,9 +137,9 @@ namespace yli
                 yli::ontology::Material* parent; // pointer to `Material`.
 
                 template<class T1>
-                    friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, int32_t* number_of_children);
+                    friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, std::size_t* number_of_children);
                 template<class T1, class T2>
-                    friend void hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent, std::vector<T1>& old_child_pointer_vector, std::queue<int32_t>& old_free_childID_queue, int32_t* old_number_of_children);
+                    friend void hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent, std::vector<T1>& old_child_pointer_vector, std::queue<int32_t>& old_free_childID_queue, std::size_t* old_number_of_children);
                 template<class T1>
                     friend void render_children(const std::vector<T1>& child_pointer_vector);
 
@@ -149,8 +150,8 @@ namespace yli
                 void render();
 
                 yli::ontology::Entity* get_parent() const override;
-                int32_t get_number_of_children() const override;
-                int32_t get_number_of_descendants() const override;
+                std::size_t get_number_of_children() const override;
+                std::size_t get_number_of_descendants() const override;
 
                 std::string font_file_format;         // type of the model file, eg. `"bmp"`.
                 std::string font_filename;            // filename of the model file.
@@ -168,8 +169,8 @@ namespace yli
                 std::vector<yli::ontology::Text3D*> text3D_pointer_vector;
                 std::queue<int32_t> free_glyphID_queue;
                 std::queue<int32_t> free_text3D_ID_queue;
-                int32_t number_of_glyphs;
-                int32_t number_of_text3Ds;
+                std::size_t number_of_glyphs;
+                std::size_t number_of_text3Ds;
 
                 std::unordered_map<int32_t, yli::ontology::Glyph*> unicode_glyph_map;
         };

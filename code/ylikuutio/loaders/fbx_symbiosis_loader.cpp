@@ -12,11 +12,12 @@ typedef unsigned char u8;
 #endif
 
 // Include standard headers
-#include <iostream> // std::cout, std::cin, std::cerr
-#include <stdint.h> // uint32_t etc.
-#include <string>   // std::string
+#include <cstddef>       // std::size_t
+#include <iostream>      // std::cout, std::cin, std::cerr
+#include <stdint.h>      // uint32_t etc.
+#include <string>        // std::string
 #include <unordered_map> // std::unordered_map
-#include <vector>   // std::vector
+#include <vector>        // std::vector
 
 namespace loaders
 {
@@ -30,7 +31,7 @@ namespace loaders
             std::vector<const ofbx::Texture*>& ofbx_diffuse_texture_vector,
             std::vector<const ofbx::Texture*>& ofbx_normal_texture_vector,
             std::vector<const ofbx::Texture*>& ofbx_count_texture_vector,
-            int32_t& mesh_count,
+            std::size_t& mesh_count,
             const bool is_debug_mode)
     {
         // Functions and data of interest in OpenFBX:
@@ -64,7 +65,15 @@ namespace loaders
             return false;
         }
 
-        mesh_count = static_cast<int32_t>(ofbx_iscene->getMeshCount()); // `getMeshCount()` returns `int`.
+        int temp_mesh_count = ofbx_iscene->getMeshCount(); // `getMeshCount()` returns `int`.
+
+        if (temp_mesh_count < 0)
+        {
+            return false;
+        }
+
+        mesh_count = static_cast<std::size_t>(temp_mesh_count);
+
         ofbx_meshes.reserve(mesh_count);
 
         for (int32_t mesh_i = 0; mesh_i < mesh_count; mesh_i++)

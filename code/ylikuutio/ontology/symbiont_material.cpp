@@ -19,6 +19,7 @@
 #endif
 
 // Include standard headers
+#include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <stdint.h> // uint32_t etc.
 
@@ -78,14 +79,14 @@ namespace yli
             return this->parent;
         }
 
-        int32_t SymbiontMaterial::get_number_of_children() const
+        std::size_t SymbiontMaterial::get_number_of_children() const
         {
             return this->number_of_symbiont_species;
         }
 
-        int32_t SymbiontMaterial::get_number_of_descendants() const
+        std::size_t SymbiontMaterial::get_number_of_descendants() const
         {
-            return -1;
+            return 0; // TODO; write the code!
         }
 
         void SymbiontMaterial::set_symbiont_species_pointer(const int32_t childID, yli::ontology::SymbiontSpecies* const child_pointer)

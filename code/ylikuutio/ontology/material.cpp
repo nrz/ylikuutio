@@ -19,6 +19,7 @@
 #endif
 
 // Include standard headers
+#include <cstddef>  // std::size_t
 #include <cstring>  // std::memcmp, std::strcmp, std::strlen, std::strncmp
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <stdint.h> // uint32_t etc.
@@ -145,14 +146,14 @@ namespace yli
             return this->parent;
         }
 
-        int32_t Material::get_number_of_children() const
+        std::size_t Material::get_number_of_children() const
         {
             return this->number_of_species + this->number_of_vector_fonts + this->number_of_chunk_masters;
         }
 
-        int32_t Material::get_number_of_descendants() const
+        std::size_t Material::get_number_of_descendants() const
         {
-            return -1;
+            return 0; // TODO; write the code!
         }
 
         void Material::set_species_pointer(const int32_t childID, yli::ontology::Species* const child_pointer)

@@ -11,6 +11,7 @@
 #endif
 
 // Include standard headers
+#include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <memory>   // std::make_shared, std::shared_ptr
 #include <stdint.h> // uint32_t etc.
@@ -93,10 +94,10 @@ namespace yli
             std::cout << "Creating bionts for Holobiont located at 0x" << std::hex << (uint64_t) this << std::dec << " ...\n";
             // Create `Biont` entities so that
             // they bind this `Holobiont`.
-            int32_t correct_number_of_bionts = this->symbiosis_parent->get_number_of_symbionts();
+            std::size_t correct_number_of_bionts = this->symbiosis_parent->get_number_of_symbionts();
             std::cout << "Number of bionts to be created: " << correct_number_of_bionts << "\n";
 
-            for (int32_t biontID = 0; biontID < correct_number_of_bionts; biontID++)
+            for (std::size_t biontID = 0; biontID < correct_number_of_bionts; biontID++)
             {
                 if (!this->symbiosis_parent->has_texture(biontID))
                 {
@@ -173,14 +174,14 @@ namespace yli
             return this->symbiosis_parent;
         }
 
-        int32_t Holobiont::get_number_of_children() const
+        std::size_t Holobiont::get_number_of_children() const
         {
             return this->number_of_bionts;
         }
 
-        int32_t Holobiont::get_number_of_descendants() const
+        std::size_t Holobiont::get_number_of_descendants() const
         {
-            return 0;
+            return 0; // TODO; write the code!
         }
 
         void Holobiont::set_biont_pointer(const int32_t childID, yli::ontology::Biont* const child_pointer)

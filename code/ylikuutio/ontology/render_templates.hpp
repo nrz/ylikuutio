@@ -2,7 +2,7 @@
 #define __RENDER_TEMPLATES_HPP_INCLUDED
 
 // Include standard headers
-#include <stdint.h> // uint32_t etc.
+#include <cstddef>  // std::size_t
 #include <vector>   // std::vector
 
 namespace yli
@@ -12,7 +12,7 @@ namespace yli
         template<class T1>
             void render_children(const std::vector<T1>& child_pointer_vector)
             {
-                for (uint32_t child_i = 0; child_i < child_pointer_vector.size(); child_i++)
+                for (std::size_t child_i = 0; child_i < child_pointer_vector.size(); child_i++)
                 {
                     T1 child_pointer;
                     child_pointer = static_cast<T1>(child_pointer_vector[child_i]);

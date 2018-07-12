@@ -18,11 +18,12 @@
 #endif
 
 // Include standard headers
-#include <vector>   // std::vector
+#include <cstddef>  // std::size_t
 #include <cstring>  // std::memcmp, std::strcmp, std::strlen, std::strncmp
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
+#include <vector>   // std::vector
 
 namespace yli
 {
@@ -51,14 +52,14 @@ namespace yli
             return nullptr;
         }
 
-        int32_t Font2D::get_number_of_children() const
+        std::size_t Font2D::get_number_of_children() const
         {
-            return -1;
+            return 0; // `Font2D` has no children.
         }
 
-        int32_t Font2D::get_number_of_descendants() const
+        std::size_t Font2D::get_number_of_descendants() const
         {
-            return -1;
+            return 0; // `Font2D` has no children.
         }
 
         void Font2D::printText2D(

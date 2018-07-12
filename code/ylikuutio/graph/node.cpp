@@ -3,7 +3,9 @@
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include standard headers
+#include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
+#include <stdint.h> // uint32_t etc.
 
 namespace graph
 {
@@ -22,7 +24,7 @@ namespace graph
         this->parent->set_node_pointer(this->childID, this);
 
         // create all bidirectional links between this node and neighbor nodes.
-        for (uint32_t link_i = 0; link_i < this->neighbor_nodeIDs.size(); link_i++)
+        for (std::size_t link_i = 0; link_i < this->neighbor_nodeIDs.size(); link_i++)
         {
             this->create_bidirectional_link(this->neighbor_nodeIDs[link_i]);
         }
@@ -34,7 +36,7 @@ namespace graph
         std::cout << "Node with childID " << this->childID << " will be destroyed.\n";
 
         // delete all bidirectional links.
-        for (uint32_t link_i = 0; link_i < this->neighbor_nodeIDs.size(); link_i++)
+        for (std::size_t link_i = 0; link_i < this->neighbor_nodeIDs.size(); link_i++)
         {
             this->delete_bidirectional_link(this->neighbor_nodeIDs[link_i]);
         }

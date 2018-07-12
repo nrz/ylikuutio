@@ -18,6 +18,7 @@
 #endif
 
 // Include standard headers
+#include <cstddef>  // std::size_t
 #include <queue>    // std::queue
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
@@ -67,8 +68,8 @@ namespace yli
                 // destructor.
                 virtual ~Model();
 
-                int32_t get_number_of_children() const override;
-                int32_t get_number_of_descendants() const override;
+                std::size_t get_number_of_children() const override;
+                std::size_t get_number_of_descendants() const override;
 
                 const std::vector<glm::vec3>& get_vertices() const;
                 const std::vector<uint32_t>& get_indices() const;
@@ -87,9 +88,9 @@ namespace yli
                 void store_vertex_normal_modelspaceID(const GLuint vertex_normal_modelspaceID);
 
                 template<class T1>
-                    friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, int32_t* number_of_children);
+                    friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, std::size_t* number_of_children);
                 template<class T1, class T2>
-                    friend void hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent, std::vector<T1>& old_child_pointer_vector, std::queue<int32_t>& old_free_childID_queue, int32_t* old_number_of_children);
+                    friend void hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent, std::vector<T1>& old_child_pointer_vector, std::queue<int32_t>& old_free_childID_queue, std::size_t* old_number_of_children);
                 template<class T1>
                     friend void render_species_or_glyph(T1 species_or_glyph_pointer);
 
@@ -107,7 +108,7 @@ namespace yli
 
                 std::vector<yli::ontology::Object*> object_pointer_vector;
                 std::queue<int32_t> free_objectID_queue;
-                int32_t number_of_objects;
+                std::size_t number_of_objects;
 
                 std::string triangulation_type;
 

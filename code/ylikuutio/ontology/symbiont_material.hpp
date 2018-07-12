@@ -23,6 +23,7 @@
 #endif
 
 // Include standard headers
+#include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <queue>    // std::queue
 #include <stdint.h> // uint32_t etc.
@@ -73,7 +74,7 @@ namespace yli
                 friend class Symbiosis;
                 friend class SymbiontSpecies;
                 template<class T1>
-                    friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, int32_t* number_of_children);
+                    friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, std::size_t* number_of_children);
                 template<class T1>
                     friend void render_children(const std::vector<T1>& child_pointer_vector);
 
@@ -85,8 +86,8 @@ namespace yli
                 void render();
 
                 yli::ontology::Entity* get_parent() const override;
-                int32_t get_number_of_children() const override;
-                int32_t get_number_of_descendants() const override;
+                std::size_t get_number_of_children() const override;
+                std::size_t get_number_of_descendants() const override;
 
                 yli::ontology::Symbiosis* parent;           // pointer to `Symbiosis`.
 
@@ -97,7 +98,7 @@ namespace yli
 
                 std::vector<yli::ontology::SymbiontSpecies*> symbiont_species_pointer_vector;
                 std::queue<int32_t> free_symbiont_speciesID_queue;
-                int32_t number_of_symbiont_species;
+                std::size_t number_of_symbiont_species;
         };
     }
 }

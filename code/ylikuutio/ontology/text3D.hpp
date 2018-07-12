@@ -23,6 +23,7 @@
 #endif
 
 // Include standard headers
+#include <cstddef>  // std::size_t
 #include <cmath>    // NAN, std::isnan, std::pow
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <queue>    // std::queue
@@ -82,8 +83,8 @@ namespace yli
                 virtual ~Text3D();
 
                 yli::ontology::Entity* get_parent() const override;
-                int32_t get_number_of_children() const override;
-                int32_t get_number_of_descendants() const override;
+                std::size_t get_number_of_children() const override;
+                std::size_t get_number_of_descendants() const override;
 
                 // this method sets a object pointer.
                 void set_object_pointer(const int32_t childID, yli::ontology::Object* const child_pointer);
@@ -91,7 +92,7 @@ namespace yli
                 friend class Object;
                 friend void create_glyph_objects(const std::string& text_string, yli::ontology::Text3D* text3D);
                 template<class T1>
-                    friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, int32_t* number_of_children);
+                    friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, std::size_t* number_of_children);
 
             private:
                 void bind_to_parent();
@@ -107,7 +108,7 @@ namespace yli
 
                 std::vector<yli::ontology::Object*> object_pointer_vector;
                 std::queue<int32_t> free_objectID_queue;
-                int32_t number_of_objects;
+                std::size_t number_of_objects;
         };
     }
 }

@@ -4,6 +4,7 @@
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include standard headers
+#include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <memory>   // std::make_shared, std::shared_ptr
 #include <queue>    // std::queue
@@ -41,7 +42,7 @@ namespace yli
             std::shared_ptr<datatypes::AnyValue> any_value = nullptr;
 
             // execute all callbacks.
-            for (uint32_t child_i = 0; child_i < this->callback_object_pointer_vector.size(); child_i++)
+            for (std::size_t child_i = 0; child_i < this->callback_object_pointer_vector.size(); child_i++)
             {
                 yli::callback_system::CallbackObject* callback_object_pointer = static_cast<yli::callback_system::CallbackObject*>(this->callback_object_pointer_vector[child_i]);
 

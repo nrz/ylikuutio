@@ -56,6 +56,7 @@
 
 // Include standard headers
 #include <cmath>         // NAN, std::isnan, std::pow
+#include <cstddef>       // std::size_t
 #include <inttypes.h>    // PRId32, PRId64, PRIu32, PRIu64, PRIx32, PRIx64
 #include <iostream>      // std::cout, std::cin, std::cerr
 #include <memory>        // std::make_shared, std::shared_ptr
@@ -137,7 +138,7 @@ namespace yli
             }
         }
 
-        int32_t Universe::get_number_of_worlds() const
+        std::size_t Universe::get_number_of_worlds() const
         {
             return this->number_of_worlds;
         }
@@ -153,14 +154,14 @@ namespace yli
             return nullptr;
         }
 
-        int32_t Universe::get_number_of_children() const
+        std::size_t Universe::get_number_of_children() const
         {
             return this->number_of_worlds;
         }
 
-        int32_t Universe::get_number_of_descendants() const
+        std::size_t Universe::get_number_of_descendants() const
         {
-            return -1;
+            return 0; // TODO; write the code!
         }
 
         void Universe::set_window(GLFWwindow* window)
@@ -471,9 +472,9 @@ namespace yli
                 parent_info += std::string(parents_memory_address_char_array);
                 console->print_text(parent_info);
 
-                int32_t number_of_children = entity->get_number_of_children();
+                std::size_t number_of_children = entity->get_number_of_children();
                 char number_of_children_char_array[256];
-                snprintf(number_of_children_char_array, sizeof(number_of_children_char_array), "%d", number_of_children);
+                snprintf(number_of_children_char_array, sizeof(number_of_children_char_array), "%lu", number_of_children);
 
                 std::string children_info = "number of children: ";
                 children_info += std::string(number_of_children_char_array);
