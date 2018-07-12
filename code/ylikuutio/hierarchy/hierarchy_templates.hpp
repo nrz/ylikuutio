@@ -2,6 +2,7 @@
 #define __HIERARCHY_TEMPLATES_HPP_INCLUDED
 
 // Include standard headers
+#include <cstddef>       // std::size_t
 #include <queue>         // std::queue
 #include <stdint.h>      // uint32_t etc.
 #include <unordered_map> // std::unordered_map
@@ -135,7 +136,7 @@ namespace hierarchy
     template<class T1>
         void delete_children(std::vector<T1>& child_pointer_vector, int32_t* const number_of_children)
         {
-            for (uint32_t child_i = 0; child_i < child_pointer_vector.size(); child_i++)
+            for (std::size_t child_i = 0; child_i < child_pointer_vector.size(); child_i++)
             {
                 delete child_pointer_vector[child_i];
             }
