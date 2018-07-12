@@ -15,7 +15,7 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <cstring>  // std::memcmp, std::strcmp, std::strlen, std::strncmp
-#include <map>
+#include <map>      // std::map
 #include <vector>   // std::vector
 
 // Returns true iif v1 can be considered equal to v2
