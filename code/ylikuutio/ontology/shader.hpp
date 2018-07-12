@@ -31,6 +31,7 @@
 #endif
 
 // Include standard headers
+#include <cstddef>  // std::size_t
 #include <queue>    // std::queue
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
@@ -123,8 +124,8 @@ namespace yli
                 // this method renders all materials using this `Shader`.
                 void render();
 
-                int32_t get_number_of_children() const override;
-                int32_t get_number_of_descendants() const override;
+                std::size_t get_number_of_children() const override;
+                std::size_t get_number_of_descendants() const override;
 
                 yli::ontology::Scene* parent;      // pointer to `Scene`.
 

@@ -12,8 +12,8 @@
 #endif
 
 // Include standard headers
+#include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
-#include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 
 namespace yli
@@ -221,14 +221,14 @@ namespace yli
             return this->holobiont_parent;
         }
 
-        int32_t Biont::get_number_of_children() const
+        std::size_t Biont::get_number_of_children() const
         {
-            return 0;
+            return 0; // `Biont` has no children.
         }
 
-        int32_t Biont::get_number_of_descendants() const
+        std::size_t Biont::get_number_of_descendants() const
         {
-            return 0;
+            return 0; // `Biont` has no children.
         }
     }
 }

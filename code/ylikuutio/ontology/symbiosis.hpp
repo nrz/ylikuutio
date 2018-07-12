@@ -31,6 +31,7 @@
 typedef unsigned char u8;
 
 // Include standard headers
+#include <cstddef>  // std::size_t
 #include <queue>    // std::queue
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
@@ -92,9 +93,9 @@ namespace yli
 
                 yli::ontology::Entity* get_parent() const override;
 
-                int32_t get_number_of_children() const override;
+                std::size_t get_number_of_children() const override;
 
-                int32_t get_number_of_descendants() const override;
+                std::size_t get_number_of_descendants() const override;
 
                 const std::string& get_model_file_format();
 

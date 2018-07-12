@@ -32,7 +32,7 @@
 
 // Include standard headers
 #include <cmath>    // NAN, std::isnan, std::pow
-#include <stdint.h> // uint32_t etc.
+#include <cstddef>  // std::size_t
 
 namespace yli
 {
@@ -63,14 +63,14 @@ namespace yli
             return this->parent;
         }
 
-        int32_t Camera::get_number_of_children() const
+        std::size_t Camera::get_number_of_children() const
         {
-            return 0;
+            return 0; // `Camera` has no children.
         }
 
-        int32_t Camera::get_number_of_descendants() const
+        std::size_t Camera::get_number_of_descendants() const
         {
-            return 0;
+            return 0; // `Camera` has no children.
         }
 
         glm::mat4& Camera::get_projection_matrix()

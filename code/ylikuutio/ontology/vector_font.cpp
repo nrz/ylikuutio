@@ -17,6 +17,7 @@
 #endif
 
 // Include standard headers
+#include <cstddef>       // std::size_t
 #include <iostream>      // std::cout, std::cin, std::cerr
 #include <stdint.h>      // uint32_t etc.
 
@@ -109,14 +110,14 @@ namespace yli
             return this->parent;
         }
 
-        int32_t VectorFont::get_number_of_children() const
+        std::size_t VectorFont::get_number_of_children() const
         {
             return this->number_of_glyphs + this->number_of_text3Ds;
         }
 
-        int32_t VectorFont::get_number_of_descendants() const
+        std::size_t VectorFont::get_number_of_descendants() const
         {
-            return -1;
+            return 0; // TODO; write the code!
         }
 
         void VectorFont::set_glyph_pointer(const int32_t childID, yli::ontology::Glyph* const child_pointer)

@@ -18,6 +18,7 @@
 #endif
 
 // Include standard headers
+#include <cstddef>  // std::size_t
 #include <queue>    // std::queue
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
@@ -67,8 +68,8 @@ namespace yli
                 // destructor.
                 virtual ~Model();
 
-                int32_t get_number_of_children() const override;
-                int32_t get_number_of_descendants() const override;
+                std::size_t get_number_of_children() const override;
+                std::size_t get_number_of_descendants() const override;
 
                 const std::vector<glm::vec3>& get_vertices() const;
                 const std::vector<uint32_t>& get_indices() const;

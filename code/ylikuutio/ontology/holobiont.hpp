@@ -32,6 +32,7 @@
 #endif
 
 // Include standard headers
+#include <cstddef>  // std::size_t
 #include <queue>    // std::queue
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
@@ -108,8 +109,8 @@ namespace yli
 
                 void create_bionts();
 
-                int32_t get_number_of_children() const override;
-                int32_t get_number_of_descendants() const override;
+                std::size_t get_number_of_children() const override;
+                std::size_t get_number_of_descendants() const override;
 
                 std::vector<yli::ontology::Biont*> biont_pointer_vector;
                 std::queue<int32_t> free_biontID_queue;

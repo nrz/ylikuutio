@@ -23,6 +23,7 @@
 #endif
 
 // Include standard headers
+#include <cstddef>  // std::size_t
 #include <cmath>    // NAN, std::isnan, std::pow
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <queue>    // std::queue
@@ -82,8 +83,8 @@ namespace yli
                 virtual ~Text3D();
 
                 yli::ontology::Entity* get_parent() const override;
-                int32_t get_number_of_children() const override;
-                int32_t get_number_of_descendants() const override;
+                std::size_t get_number_of_children() const override;
+                std::size_t get_number_of_descendants() const override;
 
                 // this method sets a object pointer.
                 void set_object_pointer(const int32_t childID, yli::ontology::Object* const child_pointer);

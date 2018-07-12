@@ -13,6 +13,7 @@
 #include "code/ylikuutio/common/globals.hpp"
 
 // Include standard headers
+#include <cstddef>       // std::size_t
 #include <cstring>       // std::memcmp, std::strcmp, std::strlen, std::strncmp
 #include <iostream>      // std::cout, std::cin, std::cerr
 #include <queue>         // std::queue
@@ -149,8 +150,8 @@ namespace yli
                 void render();
 
                 yli::ontology::Entity* get_parent() const override;
-                int32_t get_number_of_children() const override;
-                int32_t get_number_of_descendants() const override;
+                std::size_t get_number_of_children() const override;
+                std::size_t get_number_of_descendants() const override;
 
                 std::string font_file_format;         // type of the model file, eg. `"bmp"`.
                 std::string font_filename;            // filename of the model file.

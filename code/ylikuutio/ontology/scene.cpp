@@ -24,6 +24,7 @@
 
 // Include standard headers
 #include <cmath>    // NAN, std::isnan, std::pow
+#include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <stdint.h> // uint32_t etc.
 #include <unordered_map> // std::unordered_map
@@ -137,14 +138,14 @@ namespace yli
             return this->parent;
         }
 
-        int32_t Scene::get_number_of_children() const
+        std::size_t Scene::get_number_of_children() const
         {
             return this->number_of_shaders;
         }
 
-        int32_t Scene::get_number_of_descendants() const
+        std::size_t Scene::get_number_of_descendants() const
         {
-            return -1;
+            return 0; // TODO; write the code!
         }
 
         // this method returns a pointer to an `Entity` using the name as key.

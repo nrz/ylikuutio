@@ -20,6 +20,7 @@
 
 // Include standard headers
 #include <cmath>    // NAN, std::isnan, std::pow
+#include <cstddef>  // std::size_t
 #include <memory>   // std::make_shared, std::shared_ptr
 #include <stdint.h> // uint32_t etc.
 #include <queue>    // std::queue
@@ -76,8 +77,8 @@ namespace yli
             private:
                 void bind_to_parent();
 
-                int32_t get_number_of_children() const override;
-                int32_t get_number_of_descendants() const override;
+                std::size_t get_number_of_children() const override;
+                std::size_t get_number_of_descendants() const override;
 
                 bool compute_and_update_matrices_from_inputs();
 

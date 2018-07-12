@@ -11,6 +11,7 @@
 #endif
 
 // Include standard headers
+#include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <memory>   // std::make_shared, std::shared_ptr
 #include <stdint.h> // uint32_t etc.
@@ -173,14 +174,14 @@ namespace yli
             return this->symbiosis_parent;
         }
 
-        int32_t Holobiont::get_number_of_children() const
+        std::size_t Holobiont::get_number_of_children() const
         {
             return this->number_of_bionts;
         }
 
-        int32_t Holobiont::get_number_of_descendants() const
+        std::size_t Holobiont::get_number_of_descendants() const
         {
-            return 0;
+            return 0; // TODO; write the code!
         }
 
         void Holobiont::set_biont_pointer(const int32_t childID, yli::ontology::Biont* const child_pointer)

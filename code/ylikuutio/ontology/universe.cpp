@@ -56,6 +56,7 @@
 
 // Include standard headers
 #include <cmath>         // NAN, std::isnan, std::pow
+#include <cstddef>       // std::size_t
 #include <inttypes.h>    // PRId32, PRId64, PRIu32, PRIu64, PRIx32, PRIx64
 #include <iostream>      // std::cout, std::cin, std::cerr
 #include <memory>        // std::make_shared, std::shared_ptr
@@ -153,14 +154,14 @@ namespace yli
             return nullptr;
         }
 
-        int32_t Universe::get_number_of_children() const
+        std::size_t Universe::get_number_of_children() const
         {
             return this->number_of_worlds;
         }
 
-        int32_t Universe::get_number_of_descendants() const
+        std::size_t Universe::get_number_of_descendants() const
         {
-            return -1;
+            return 0; // TODO; write the code!
         }
 
         void Universe::set_window(GLFWwindow* window)

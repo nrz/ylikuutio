@@ -4,6 +4,7 @@
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include standard headers
+#include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <stdint.h> // uint32_t etc.
 
@@ -36,14 +37,14 @@ namespace yli
             return this->parent;
         }
 
-        int32_t Text3D::get_number_of_children() const
+        std::size_t Text3D::get_number_of_children() const
         {
             return this->number_of_objects;
         }
 
-        int32_t Text3D::get_number_of_descendants() const
+        std::size_t Text3D::get_number_of_descendants() const
         {
-            return -1;
+            return 0; // TODO; write the code!
         }
 
         void Text3D::set_object_pointer(const int32_t childID, yli::ontology::Object* const child_pointer)

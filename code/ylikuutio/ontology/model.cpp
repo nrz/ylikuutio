@@ -8,6 +8,7 @@
 #endif
 
 // Include standard headers
+#include <cstddef>  // std::size_t
 #include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
 
@@ -43,14 +44,14 @@ namespace yli
             // destructor.
         }
 
-        int32_t Model::get_number_of_children() const
+        std::size_t Model::get_number_of_children() const
         {
             return this->number_of_objects;
         }
 
-        int32_t Model::get_number_of_descendants() const
+        std::size_t Model::get_number_of_descendants() const
         {
-            return -1;
+            return 0; // TODO; write the code!
         }
 
         const std::vector<glm::vec3>& Model::get_vertices() const

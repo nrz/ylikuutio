@@ -13,6 +13,7 @@
 
 // Include standard headers
 #include <cmath>    // NAN, std::isnan, std::pow
+#include <cstddef>  // std::size_t
 #include <memory>   // std::make_shared, std::shared_ptr
 #include <queue>    // std::queue
 #include <stdint.h> // uint32_t etc.
@@ -106,8 +107,8 @@ namespace yli
                 void bind_to_parent();
 
                 yli::ontology::Entity* get_parent() const override;
-                int32_t get_number_of_children() const override;
-                int32_t get_number_of_descendants() const override;
+                std::size_t get_number_of_children() const override;
+                std::size_t get_number_of_descendants() const override;
 
                 // this method sets a `Symbiosis` pointer.
                 void set_symbiosis_pointer(const int32_t childID, yli::ontology::Symbiosis* const child_pointer);

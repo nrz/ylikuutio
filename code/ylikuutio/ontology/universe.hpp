@@ -29,6 +29,7 @@
 
 // Include standard headers
 #include <cmath>         // NAN, std::isnan, std::pow
+#include <cstddef>       // std::size_t
 #include <iostream>      // std::cout, std::cin, std::cerr
 #include <memory>        // std::make_shared, std::shared_ptr
 #include <queue>         // std::queue
@@ -415,8 +416,8 @@ namespace yli
                 yli::ontology::World* get_active_world() const;
 
                 yli::ontology::Entity* get_parent() const override;
-                int32_t get_number_of_children() const override;
-                int32_t get_number_of_descendants() const override;
+                std::size_t get_number_of_children() const override;
+                std::size_t get_number_of_descendants() const override;
 
                 // this method sets a new `window`.
                 void set_window(GLFWwindow* window);

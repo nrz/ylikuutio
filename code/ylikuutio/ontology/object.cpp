@@ -14,6 +14,7 @@
 #endif
 
 // Include standard headers
+#include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <string>   // std::string
 
@@ -216,14 +217,14 @@ namespace yli
             }
         }
 
-        int32_t Object::get_number_of_children() const
+        std::size_t Object::get_number_of_children() const
         {
-            return 0;
+            return 0; // `Object` has no children.
         }
 
-        int32_t Object::get_number_of_descendants() const
+        std::size_t Object::get_number_of_descendants() const
         {
-            return 0;
+            return 0; // `Object` has no children.
         }
     }
 }

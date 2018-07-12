@@ -22,6 +22,7 @@
 #endif
 
 // Include standard headers
+#include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <queue>    // std::queue
 #include <stdint.h> // uint32_t etc.
@@ -142,8 +143,8 @@ namespace yli
                 // this method renders all `Species` using this `Material`.
                 void render();
 
-                int32_t get_number_of_children() const override;
-                int32_t get_number_of_descendants() const override;
+                std::size_t get_number_of_children() const override;
+                std::size_t get_number_of_descendants() const override;
 
                 yli::ontology::Shader* parent;      // pointer to `Shader`.
 

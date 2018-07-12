@@ -19,6 +19,7 @@
 #endif
 
 // Include standard headers
+#include <cstddef>   // std::size_t
 #include <string>    // std::string
 
 namespace yli
@@ -96,8 +97,8 @@ namespace yli
                 virtual ~Font2D();
 
                 yli::ontology::Entity* get_parent() const override;
-                int32_t get_number_of_children() const override;
-                int32_t get_number_of_descendants() const override;
+                std::size_t get_number_of_children() const override;
+                std::size_t get_number_of_descendants() const override;
 
                 void printText2D(
                         GLuint screen_width,

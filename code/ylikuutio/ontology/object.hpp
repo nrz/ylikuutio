@@ -35,6 +35,7 @@
 #endif
 
 // Include standard headers
+#include <cstddef>  // std::size_t
 #include <queue>    // std::queue
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
@@ -111,8 +112,8 @@ namespace yli
                 void render();
                 void render_this_object(yli::ontology::Shader* const shader_pointer);
 
-                int32_t get_number_of_children() const override;
-                int32_t get_number_of_descendants() const override;
+                std::size_t get_number_of_children() const override;
+                std::size_t get_number_of_descendants() const override;
 
                 yli::ontology::Species* species_parent; // pointer to `Species`.
                 yli::ontology::Glyph* glyph_parent;     // pointer to `Glyph`.
