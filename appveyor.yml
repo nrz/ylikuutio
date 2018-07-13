@@ -1,2 +1,32 @@
-version: 1.0.{build}
-build: off
+image:
+    - Visual Studio 2017
+
+branches:
+    only:
+        - master
+
+    clone_folder: c:\projects\ylikuutio
+
+    clone_depth: 5
+
+    version: 0.0.3.{build}
+
+    platform:
+        - x64
+
+    init:
+        - set generator="Visual Studio 15 2017 Win64"
+        - echo %generator%
+
+    before_build:
+        - cd %APPVEYOR_BUILD_FOLDER%
+        - dir
+        - mkdir build
+        - cd build
+        - cmake --version
+        - cmake .. -G %generator%
+
+    build:
+        project: c:\projects\ylikuutio\build\template.sln
+        verbosity: minimal
+        parallel: true
