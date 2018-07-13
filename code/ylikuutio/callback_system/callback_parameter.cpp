@@ -14,7 +14,7 @@ namespace yli
     {
         void CallbackParameter::bind_to_parent()
         {
-            hierarchy::bind_child_to_parent<yli::callback_system::CallbackParameter*>(this, this->parent->callback_parameter_pointer_vector, this->parent->free_callback_parameterID_queue, &this->parent->number_of_callback_parameters);
+            yli::hierarchy::bind_child_to_parent<yli::callback_system::CallbackParameter*>(this, this->parent->callback_parameter_pointer_vector, this->parent->free_callback_parameterID_queue, &this->parent->number_of_callback_parameters);
 
             if (!this->name.empty())
             {

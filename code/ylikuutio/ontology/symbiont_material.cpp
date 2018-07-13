@@ -30,7 +30,7 @@ namespace yli
         void SymbiontMaterial::bind(yli::ontology::SymbiontSpecies* const symbiont_species)
         {
             // get `childID` from `SymbiontMaterial` and set pointer to `symbiont_species`.
-            hierarchy::bind_child_to_parent<yli::ontology::SymbiontSpecies*>(
+            yli::hierarchy::bind_child_to_parent<yli::ontology::SymbiontSpecies*>(
                     symbiont_species,
                     this->symbiont_species_pointer_vector,
                     this->free_symbiont_speciesID_queue,
@@ -50,7 +50,7 @@ namespace yli
 
             // destroy all symbiont species of this symbiont material.
             std::cout << "All symbiont species of this symbiont material will be destroyed.\n";
-            hierarchy::delete_children<yli::ontology::SymbiontSpecies*>(this->symbiont_species_pointer_vector, &this->number_of_symbiont_species);
+            yli::hierarchy::delete_children<yli::ontology::SymbiontSpecies*>(this->symbiont_species_pointer_vector, &this->number_of_symbiont_species);
 
             glDeleteTextures(1, &this->texture);
 
@@ -91,7 +91,7 @@ namespace yli
 
         void SymbiontMaterial::set_symbiont_species_pointer(const int32_t childID, yli::ontology::SymbiontSpecies* const child_pointer)
         {
-            hierarchy::set_child_pointer(
+            yli::hierarchy::set_child_pointer(
                     childID, child_pointer,
                     this->symbiont_species_pointer_vector,
                     this->free_symbiont_speciesID_queue,

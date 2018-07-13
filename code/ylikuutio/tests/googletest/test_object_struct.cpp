@@ -18,7 +18,9 @@ TEST(ObjectStruct_must_be_initialized_appropriately, ObjectStruct)
     ASSERT_EQ(test_object_struct.rotate_angle, 0.0f);
     ASSERT_FALSE(test_object_struct.is_character);
     ASSERT_FALSE(test_object_struct.quaternions_in_use);
-    ASSERT_EQ(test_object_struct.cartesian_coordinates, glm::vec3(NAN, NAN, NAN));
+    ASSERT_TRUE(std::isnan(test_object_struct.cartesian_coordinates.x));
+    ASSERT_TRUE(std::isnan(test_object_struct.cartesian_coordinates.y));
+    ASSERT_TRUE(std::isnan(test_object_struct.cartesian_coordinates.z));
     ASSERT_EQ(test_object_struct.rotate_vector, glm::vec3(0.0f, 0.0f, 0.0f));
     ASSERT_EQ(test_object_struct.translate_vector, glm::vec3(0.0f, 0.0f, 0.0f));
 }

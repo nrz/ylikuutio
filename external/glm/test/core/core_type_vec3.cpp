@@ -1,4 +1,5 @@
 #define GLM_FORCE_SWIZZLE
+#include <glm/ext/vec1.hpp>
 #include <glm/vector_relational.hpp>
 #include <glm/geometric.hpp>
 #include <glm/vec2.hpp>
@@ -26,7 +27,7 @@ int test_vec3_ctor()
 		Error += std::is_copy_constructible<glm::vec3>::value ? 0 : 1;
 #	endif
 
-#if (GLM_HAS_INITIALIZER_LISTS)
+#	if GLM_HAS_INITIALIZER_LISTS
 	{
 		glm::vec3 a{ 0, 1, 2 };
 		std::vector<glm::vec3> v = {
@@ -42,28 +43,7 @@ int test_vec3_ctor()
 			{4, 5, 6},
 			{8, 9, 0}};
 	}
-#endif
-
-#if(GLM_HAS_UNRESTRICTED_UNIONS && defined(GLM_FORCE_SWIZZLE))
-	{
-		glm::vec3 A = glm::vec3(1.0f, 2.0f, 3.0f);
-		glm::vec3 B = A.xyz;
-		glm::vec3 C(A.xyz);
-		glm::vec3 D(A.xyz());
-		glm::vec3 E(A.x, A.yz);
-		glm::vec3 F(A.x, A.yz());
-		glm::vec3 G(A.xy, A.z);
-		glm::vec3 H(A.xy(), A.z);
-
-		Error += glm::all(glm::equal(A, B)) ? 0 : 1;
-		Error += glm::all(glm::equal(A, C)) ? 0 : 1;
-		Error += glm::all(glm::equal(A, D)) ? 0 : 1;
-		Error += glm::all(glm::equal(A, E)) ? 0 : 1;
-		Error += glm::all(glm::equal(A, F)) ? 0 : 1;
-		Error += glm::all(glm::equal(A, G)) ? 0 : 1;
-		Error += glm::all(glm::equal(A, H)) ? 0 : 1;
-	}
-#endif//(GLM_HAS_UNRESTRICTED_UNIONS && defined(GLM_FORCE_SWIZZLE))
+#	endif
 
 	{
 		glm::vec3 A(1);
@@ -71,7 +51,7 @@ int test_vec3_ctor()
 		
 		Error += A == B ? 0 : 1;
 	}
-	
+
 	{
 		std::vector<glm::vec3> Tests;
 		Tests.push_back(glm::vec3(glm::vec2(1, 2), 3));
@@ -82,7 +62,65 @@ int test_vec3_ctor()
 		for(std::size_t i = 0; i < Tests.size(); ++i)
 			Error += Tests[i] == glm::vec3(1, 2, 3) ? 0 : 1;
 	}
-		
+
+	{
+		glm::vec1 const R(1.0f);
+		glm::vec1 const S(2.0f);
+		glm::vec1 const T(3.0f);
+		glm::vec3 const O(1.0f, 2.0f, 3.0f);
+
+		glm::vec3 const A(R);
+		glm::vec3 const B(1.0f);
+		Error += glm::all(glm::equal(A, B)) ? 0 : 1;
+
+		glm::vec3 const C(R, S, T);
+		Error += glm::all(glm::equal(C, O)) ? 0 : 1;
+
+		glm::vec3 const D(R, 2.0f, 3.0f);
+		Error += glm::all(glm::equal(D, O)) ? 0 : 1;
+
+		glm::vec3 const E(1.0f, S, 3.0f);
+		Error += glm::all(glm::equal(E, O)) ? 0 : 1;
+
+		glm::vec3 const F(1.0f, S, T);
+		Error += glm::all(glm::equal(F, O)) ? 0 : 1;
+
+		glm::vec3 const G(R, 2.0f, T);
+		Error += glm::all(glm::equal(G, O)) ? 0 : 1;
+
+		glm::vec3 const H(R, S, 3.0f);
+		Error += glm::all(glm::equal(H, O)) ? 0 : 1;
+	}
+
+	{
+		glm::vec1 const R(1.0);
+		glm::dvec1 const S(2.0);
+		glm::vec1 const T(3.0);
+		glm::vec3 const O(1.0f, 2.0f, 3.0f);
+
+		glm::vec3 const A(R);
+		glm::vec3 const B(1.0);
+		Error += glm::all(glm::equal(A, B)) ? 0 : 1;
+
+		glm::vec3 const C(R, S, T);
+		Error += glm::all(glm::equal(C, O)) ? 0 : 1;
+
+		glm::vec3 const D(R, 2.0, 3.0);
+		Error += glm::all(glm::equal(D, O)) ? 0 : 1;
+
+		glm::vec3 const E(1.0f, S, 3.0);
+		Error += glm::all(glm::equal(E, O)) ? 0 : 1;
+
+		glm::vec3 const F(1.0, S, T);
+		Error += glm::all(glm::equal(F, O)) ? 0 : 1;
+
+		glm::vec3 const G(R, 2.0, T);
+		Error += glm::all(glm::equal(G, O)) ? 0 : 1;
+
+		glm::vec3 const H(R, S, 3.0);
+		Error += glm::all(glm::equal(H, O)) ? 0 : 1;
+	}
+
 	return Error;
 }
 
@@ -269,10 +307,8 @@ int test_vec3_size()
 	Error += glm::vec3::length() == 3 ? 0 : 1;
 	Error += glm::dvec3::length() == 3 ? 0 : 1;
 
-#	if GLM_HAS_CONSTEXPR_PARTIAL
-	constexpr std::size_t Length = glm::vec3::length();
+	GLM_CONSTEXPR_CXX11 std::size_t Length = glm::vec3::length();
 	Error += Length == 3 ? 0 : 1;
-#	endif
 
 	return Error;
 }
@@ -281,7 +317,7 @@ int test_vec3_swizzle3_2()
 {
 	int Error = 0;
 
-#	if(GLM_LANG & GLM_LANG_CXXMS_FLAG)
+#	if GLM_SWIZZLE == GLM_ENABLE && GLM_HAS_ANONYMOUS_STRUCT
 
 		glm::vec3 v(1, 2, 3);
 		glm::vec2 u;
@@ -345,7 +381,7 @@ int test_vec3_swizzle3_3()
 {
 	int Error = 0;
 
-#	if(GLM_LANG & GLM_LANG_CXXMS_FLAG)
+#	if GLM_SWIZZLE == GLM_ENABLE && GLM_HAS_ANONYMOUS_STRUCT
 	glm::vec3 v(1, 2, 3);
 	glm::vec3 u;
 
@@ -367,7 +403,6 @@ int test_vec3_swizzle3_3()
 	return Error;
 }
 
-#if !GLM_HAS_ONLY_XYZW
 int test_vec3_swizzle_operators()
 {
 	int Error = 0;
@@ -375,7 +410,7 @@ int test_vec3_swizzle_operators()
 	glm::vec3 u = glm::vec3(1, 2, 3);
 	glm::vec3 v = glm::vec3(10, 20, 30);
 
-#	if(GLM_LANG & GLM_LANG_CXXMS_FLAG)
+#	if GLM_SWIZZLE == GLM_ENABLE && GLM_HAS_ANONYMOUS_STRUCT
 		glm::vec3 q;
 
 		// Swizzle, swizzle binary operators
@@ -412,6 +447,8 @@ int test_vec3_swizzle_functions()
 {
 	int Error = 0;
 
+#	if GLM_SWIZZLE == GLM_ENABLE
+
 	// NOTE: template functions cannot pick up the implicit conversion from
 	// a swizzle to the unswizzled type, therefore the operator() must be 
 	// used.  E.g.:
@@ -444,6 +481,8 @@ int test_vec3_swizzle_functions()
 	r = glm::dot(s.xyzw(), t.xyzw());   Error += (int(r) == 300) ? 0 : 1;
 	r = glm::dot(s.xyz(), t.xyz());     Error += (int(r) == 140) ? 0 : 1;
 
+#endif//GLM_SWIZZLE == GLM_ENABLE
+
 	return Error;
 }
 
@@ -451,9 +490,10 @@ int test_vec3_swizzle_partial()
 {
 	int Error = 0;
 
+#	if GLM_SWIZZLE == GLM_ENABLE && GLM_HAS_ANONYMOUS_STRUCT
+	
 	glm::vec3 A(1, 2, 3);
 
-#	if(GLM_LANG & GLM_LANG_CXXMS_FLAG)
 	{
 		glm::vec3 B(A.xy, 3.0f);
 		Error += A == B ? 0 : 1;
@@ -468,15 +508,14 @@ int test_vec3_swizzle_partial()
 		glm::vec3 B(A.xyz);
 		Error += A == B ? 0 : 1;
 	}
-#	endif//GLM_LANG
+#	endif//GLM_SWIZZLE == GLM_ENABLE && GLM_HAS_ANONYMOUS_STRUCT
 
 	return Error;
 }
-#endif//!GLM_HAS_ONLY_XYZW
 
-int test_operator_increment()
+static int test_operator_increment()
 {
-	int Error(0);
+	int Error = 0;
 
 	glm::ivec3 v0(1);
 	glm::ivec3 v1(v0);
@@ -501,6 +540,66 @@ int test_operator_increment()
 	return Error;
 }
 
+static int test_swizzle()
+{
+	int Error = 0;
+
+#	if GLM_SWIZZLE == GLM_ENABLE && GLM_HAS_ANONYMOUS_STRUCT
+	{
+		glm::vec3 A = glm::vec3(1.0f, 2.0f, 3.0f);
+		glm::vec3 B = A.xyz;
+		glm::vec3 C(A.xyz);
+		glm::vec3 D(A.xyz());
+		glm::vec3 E(A.x, A.yz);
+		glm::vec3 F(A.x, A.yz());
+		glm::vec3 G(A.xy, A.z);
+		glm::vec3 H(A.xy(), A.z);
+
+		Error += glm::all(glm::equal(A, B)) ? 0 : 1;
+		Error += glm::all(glm::equal(A, C)) ? 0 : 1;
+		Error += glm::all(glm::equal(A, D)) ? 0 : 1;
+		Error += glm::all(glm::equal(A, E)) ? 0 : 1;
+		Error += glm::all(glm::equal(A, F)) ? 0 : 1;
+		Error += glm::all(glm::equal(A, G)) ? 0 : 1;
+		Error += glm::all(glm::equal(A, H)) ? 0 : 1;
+	}
+#	elif GLM_SWIZZLE == GLM_ENABLE
+	{
+		glm::vec3 A = glm::vec3(1.0f, 2.0f, 3.0f);
+		glm::vec3 B = A.xyz();
+		glm::vec3 C(A.xyz());
+		glm::vec3 D(A.xyz());
+		glm::vec3 E(A.x, A.yz());
+		glm::vec3 F(A.x, A.yz());
+		glm::vec3 G(A.xy(), A.z);
+		glm::vec3 H(A.xy(), A.z);
+
+		Error += glm::all(glm::equal(A, B)) ? 0 : 1;
+		Error += glm::all(glm::equal(A, C)) ? 0 : 1;
+		Error += glm::all(glm::equal(A, D)) ? 0 : 1;
+		Error += glm::all(glm::equal(A, E)) ? 0 : 1;
+		Error += glm::all(glm::equal(A, F)) ? 0 : 1;
+		Error += glm::all(glm::equal(A, G)) ? 0 : 1;
+		Error += glm::all(glm::equal(A, H)) ? 0 : 1;
+	}
+#	endif//GLM_SWIZZLE == GLM_ENABLE
+
+	return Error;
+}
+
+static int test_constexpr()
+{
+#if GLM_HAS_CONSTEXPR_CXX14
+	static_assert(glm::vec3::length() == 3, "GLM: Failed constexpr");
+	static_assert(glm::vec3(1.0f).x > 0.0f, "GLM: Failed constexpr");
+	static_assert(glm::vec3(1.0f) == glm::vec3(1.0f), "GLM: Failed constexpr");
+	static_assert(glm::vec3(1.0f, -1.0f, -1.0f).x > 0.0f, "GLM: Failed constexpr");
+	static_assert(glm::vec3(1.0f, -1.0f, -1.0f).y < 0.0f, "GLM: Failed constexpr");
+#endif
+
+	return 0;
+}
+
 int main()
 {
 	int Error = 0;
@@ -509,15 +608,15 @@ int main()
 	Error += test_bvec3_ctor();
 	Error += test_vec3_operators();
 	Error += test_vec3_size();
+	Error += test_operator_increment();
+	Error += test_constexpr();
+
+	Error += test_swizzle();
 	Error += test_vec3_swizzle3_2();
 	Error += test_vec3_swizzle3_3();
-	Error += test_operator_increment();
-
-#	if !GLM_HAS_ONLY_XYZW
-		Error += test_vec3_swizzle_partial();
-		Error += test_vec3_swizzle_operators();
-		Error += test_vec3_swizzle_functions();
-#	endif//!GLM_HAS_ONLY_XYZW
+	Error += test_vec3_swizzle_partial();
+	Error += test_vec3_swizzle_operators();
+	Error += test_vec3_swizzle_functions();
 
 	return Error;
 }

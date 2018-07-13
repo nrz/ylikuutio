@@ -72,7 +72,7 @@ namespace yli
         void Universe::bind(yli::ontology::World* const world)
         {
             // get `childID` from `Universe` and set pointer to `world`.
-            hierarchy::bind_child_to_parent<yli::ontology::World*>(
+            yli::hierarchy::bind_child_to_parent<yli::ontology::World*>(
                     world,
                     this->world_pointer_vector,
                     this->free_worldID_queue,
@@ -86,7 +86,7 @@ namespace yli
 
             // destroy all worlds of this universe.
             std::cout << "All worlds of this universe will be destroyed.\n";
-            hierarchy::delete_children<yli::ontology::World*>(this->world_pointer_vector, &this->number_of_worlds);
+            yli::hierarchy::delete_children<yli::ontology::World*>(this->world_pointer_vector, &this->number_of_worlds);
 
             std::cout << "The entity factory of this universe will be destroyed.\n";
             delete this->entity_factory;
@@ -507,7 +507,7 @@ namespace yli
 
         void Universe::set_world_pointer(int32_t childID, yli::ontology::World* child_pointer)
         {
-            hierarchy::set_child_pointer(childID, child_pointer, this->world_pointer_vector, this->free_worldID_queue, &this->number_of_worlds);
+            yli::hierarchy::set_child_pointer(childID, child_pointer, this->world_pointer_vector, this->free_worldID_queue, &this->number_of_worlds);
         }
 
         yli::ontology::Species* Universe::get_terrain_species()

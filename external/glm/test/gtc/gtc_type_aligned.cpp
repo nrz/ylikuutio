@@ -1,7 +1,7 @@
 #define GLM_FORCE_MESSAGES
 #include <glm/glm.hpp>
 
-#if GLM_HAS_ALIGNED_TYPE
+#if GLM_HAS_ANONYMOUS_STRUCT
 #include <glm/gtc/type_aligned.hpp>
 
 GLM_STATIC_ASSERT(glm::detail::is_aligned<glm::aligned_lowp>::value, "aligned_lowp is not aligned");
@@ -94,7 +94,7 @@ static int test_ctor()
 {
 	int Error = 0;
 
-#	if GLM_HAS_CONSTEXPR && GLM_ARCH == GLM_ARCH_PURE
+#	if GLM_HAS_CONSTEXPR_CXX11
 	{
 		constexpr glm::aligned_ivec4 v(1);
 
@@ -121,7 +121,7 @@ static int test_ctor()
 		Error += v.z == 1 ? 0 : 1;
 		Error += v.w == 1 ? 0 : 1;
 	}
-#	endif
+#	endif//GLM_HAS_CONSTEXPR_CXX11
 
 	return Error;
 }
@@ -143,4 +143,4 @@ int main()
 	return 0;
 }
 
-#endif//GLM_HAS_ALIGNED_TYPE
+#endif//GLM_HAS_ANONYMOUS_STRUCT

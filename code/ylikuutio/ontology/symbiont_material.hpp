@@ -74,7 +74,7 @@ namespace yli
                 friend class Symbiosis;
                 friend class SymbiontSpecies;
                 template<class T1>
-                    friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, std::size_t* number_of_children);
+                    friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, std::size_t* number_of_children);
                 template<class T1>
                     friend void render_children(const std::vector<T1>& child_pointer_vector);
 
