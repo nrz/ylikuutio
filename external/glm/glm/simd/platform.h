@@ -43,7 +43,7 @@
 #endif//
 
 // Report platform detection
-#if GLM_MESSAGES == GLM_MESSAGES_ENABLED && !defined(GLM_MESSAGE_PLATFORM_DISPLAYED)
+#if GLM_MESSAGES == GLM_ENABLE && !defined(GLM_MESSAGE_PLATFORM_DISPLAYED)
 #	define GLM_MESSAGE_PLATFORM_DISPLAYED
 #	if(GLM_PLATFORM & GLM_PLATFORM_QNXNTO)
 #		pragma message("GLM: QNX platform detected")
@@ -84,10 +84,13 @@
 
 // Visual C++ defines
 #define GLM_COMPILER_VC				0x01000000
-#define GLM_COMPILER_VC12			0x010000B0
-#define GLM_COMPILER_VC14			0x010000C0
-#define GLM_COMPILER_VC15			0x010000D0
-#define GLM_COMPILER_VC16			0x010000E0
+#define GLM_COMPILER_VC12			0x01000001
+#define GLM_COMPILER_VC14			0x01000002
+#define GLM_COMPILER_VC15			0x01000003
+#define GLM_COMPILER_VC15_3			0x01000004
+#define GLM_COMPILER_VC15_5			0x01000005
+#define GLM_COMPILER_VC15_6			0x01000006
+#define GLM_COMPILER_VC15_7			0x01000007
 
 // GCC defines
 #define GLM_COMPILER_GCC			0x02000000
@@ -200,8 +203,16 @@
 #		define GLM_COMPILER GLM_COMPILER_VC12
 #	elif _MSC_VER == 1900
 #		define GLM_COMPILER GLM_COMPILER_VC14
-#	elif _MSC_VER >= 1910
+#	elif _MSC_VER == 1910
 #		define GLM_COMPILER GLM_COMPILER_VC15
+#	elif _MSC_VER == 1911
+#		define GLM_COMPILER GLM_COMPILER_VC15_3
+#	elif _MSC_VER == 1912
+#		define GLM_COMPILER GLM_COMPILER_VC15_5
+#	elif _MSC_VER == 1913
+#		define GLM_COMPILER GLM_COMPILER_VC15_6
+#	elif _MSC_VER >= 1914
+#		define GLM_COMPILER GLM_COMPILER_VC15_7
 #	endif//_MSC_VER
 
 // G++
@@ -374,16 +385,25 @@
 #endif//GLM_ARCH
 
 #if GLM_ARCH & GLM_ARCH_SSE2_BIT
-	typedef __m128		glm_vec4;
-	typedef __m128i		glm_ivec4;
-	typedef __m128i		glm_uvec4;
+	typedef __m128			glm_f32vec4;
+	typedef __m128i			glm_i32vec4;
+	typedef __m128i			glm_u32vec4;
+	typedef __m128d			glm_f64vec2;
+	typedef __m128i			glm_i64vec2;
+	typedef __m128i			glm_u64vec2;
+
+	typedef glm_f32vec4		glm_vec4;
+	typedef glm_i32vec4		glm_ivec4;
+	typedef glm_u32vec4		glm_uvec4;
+	typedef glm_f64vec2		glm_dvec2;
 #endif
 
 #if GLM_ARCH & GLM_ARCH_AVX_BIT
-	typedef __m256d		glm_dvec4;
+	typedef __m256d			glm_f64vec4;
+	typedef glm_f64vec4		glm_dvec4;
 #endif
 
 #if GLM_ARCH & GLM_ARCH_AVX2_BIT
-	typedef __m256i		glm_i64vec4;
-	typedef __m256i		glm_u64vec4;
+	typedef __m256i			glm_i64vec4;
+	typedef __m256i			glm_u64vec4;
 #endif

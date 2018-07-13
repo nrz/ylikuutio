@@ -1,6 +1,6 @@
 #include <glm/glm.hpp>
 
-#if GLM_HAS_ALIGNED_TYPE
+#if GLM_HAS_ANONYMOUS_STRUCT
 struct vec2;
 
 struct _swizzle
@@ -10,7 +10,7 @@ struct _swizzle
 
 struct vec2
 {
-	GLM_CONSTEXPR_CTOR vec2() :
+	GLM_CONSTEXPR_CXX11 vec2() :
 		x(0), y(0)
 	{}
 

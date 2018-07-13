@@ -30,10 +30,15 @@ option(GLM_TEST_ENABLE_CXX_98 "Enable C++ 98" OFF)
 option(GLM_TEST_ENABLE_CXX_11 "Enable C++ 11" OFF)
 option(GLM_TEST_ENABLE_CXX_14 "Enable C++ 14" OFF)
 option(GLM_TEST_ENABLE_CXX_17 "Enable C++ 17" OFF)
+option(GLM_TEST_ENABLE_CXX_20 "Enable C++ 20" OFF)
 
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-if(GLM_TEST_ENABLE_CXX_17)
+if(GLM_TEST_ENABLE_CXX_20)
+	set(CMAKE_CXX_STANDARD 20)
+	message(STATUS "GLM: Build with C++20 features")
+
+elseif(GLM_TEST_ENABLE_CXX_17)
 	set(CMAKE_CXX_STANDARD 17)
 	message(STATUS "GLM: Build with C++17 features")
 
@@ -54,10 +59,15 @@ option(GLM_TEST_ENABLE_LANG_EXTENSIONS "Enable language extensions" OFF)
 
 if(GLM_TEST_ENABLE_LANG_EXTENSIONS)
 	set(CMAKE_CXX_EXTENSIONS ON)
-
+	if(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
+		add_compile_options(/Ze)
+	endif()
 	message(STATUS "GLM: Build with C++ language extensions")
 else()
 	set(CMAKE_CXX_EXTENSIONS OFF)
+	if(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
+		add_compile_options(/Za)
+	endif()
 endif()
 
 option(GLM_TEST_ENABLE_FAST_MATH "Enable fast math optimizations" OFF)

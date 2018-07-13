@@ -2,6 +2,7 @@
 #include <glm/gtc/epsilon.hpp>
 #include <glm/vector_relational.hpp>
 #include <glm/vec2.hpp>
+#include <glm/ext/vec1.hpp>
 #include <vector>
 #if GLM_HAS_TRIVIAL_QUERIES
 #	include <type_traits>
@@ -11,7 +12,7 @@ static glm::vec2 g1;
 static glm::vec2 g2(1);
 static glm::vec2 g3(1, 1);
 
-int test_vec2_operators()
+static int test_operators()
 {
 	int Error = 0;
 
@@ -196,7 +197,7 @@ int test_vec2_operators()
 	return Error;
 }
 
-int test_vec2_ctor()
+static int test_ctor()
 {
 	int Error = 0;
 
@@ -235,19 +236,6 @@ int test_vec2_ctor()
 	}
 #endif
 
-#if GLM_HAS_UNRESTRICTED_UNIONS && defined(GLM_FORCE_SWIZZLE)
-	{
-		glm::vec2 A = glm::vec2(1.0f, 2.0f);
-		glm::vec2 B = A.xy;
-		glm::vec2 C(A.xy);
-		glm::vec2 D(A.xy());
-
-		Error += glm::all(glm::equal(A, B)) ? 0 : 1;
-		Error += glm::all(glm::equal(A, C)) ? 0 : 1;
-		Error += glm::all(glm::equal(A, D)) ? 0 : 1;
-	}
-#endif//GLM_HAS_UNRESTRICTED_UNIONS && defined(GLM_FORCE_SWIZZLE)
-
 	{
 		glm::vec2 A = glm::vec2(2.0f);
 		glm::vec2 B = glm::vec2(2.0f, 3.0f);
@@ -257,10 +245,48 @@ int test_vec2_ctor()
 		glm::vec2 F(glm::ivec2(2));
 	}
 
+	{
+		glm::vec1 const R(1.0f);
+		glm::vec1 const S(2.0f);
+		glm::vec2 const O(1.0f, 2.0f);
+
+		glm::vec2 const A(R);
+		glm::vec2 const B(1.0f);
+		Error += glm::all(glm::equal(A, B)) ? 0 : 1;
+
+		glm::vec2 const C(R, S);
+		Error += glm::all(glm::equal(C, O)) ? 0 : 1;
+
+		glm::vec2 const D(R, 2.0f);
+		Error += glm::all(glm::equal(D, O)) ? 0 : 1;
+
+		glm::vec2 const E(1.0f, S);
+		Error += glm::all(glm::equal(E, O)) ? 0 : 1;
+	}
+
+	{
+		glm::vec1 const R(1.0f);
+		glm::dvec1 const S(2.0);
+		glm::vec2 const O(1.0, 2.0);
+
+		glm::vec2 const A(R);
+		glm::vec2 const B(1.0);
+		Error += glm::all(glm::equal(A, B)) ? 0 : 1;
+
+		glm::vec2 const C(R, S);
+		Error += glm::all(glm::equal(C, O)) ? 0 : 1;
+
+		glm::vec2 const D(R, 2.0);
+		Error += glm::all(glm::equal(D, O)) ? 0 : 1;
+
+		glm::vec2 const E(1.0, S);
+		Error += glm::all(glm::equal(E, O)) ? 0 : 1;
+	}
+
 	return Error;
 }
 
-int test_vec2_size()
+static int test_size()
 {
 	int Error = 0;
 
@@ -273,17 +299,15 @@ int test_vec2_size()
 	Error += glm::vec2::length() == 2 ? 0 : 1;
 	Error += glm::dvec2::length() == 2 ? 0 : 1;
 
-#	if GLM_HAS_CONSTEXPR_PARTIAL
-		constexpr std::size_t Length = glm::vec2::length();
-		Error += Length == 2 ? 0 : 1;
-#	endif
+	GLM_CONSTEXPR_CXX11 std::size_t Length = glm::vec2::length();
+	Error += Length == 2 ? 0 : 1;
 
 	return Error;
 }
 
-int test_operator_increment()
+static int test_operator_increment()
 {
-	int Error(0);
+	int Error = 0;
 
 	glm::ivec2 v0(1);
 	glm::ivec2 v1(v0);
@@ -308,14 +332,57 @@ int test_operator_increment()
 	return Error;
 }
 
+static int test_constexpr()
+{
+#if GLM_HAS_CONSTEXPR_CXX14
+	static_assert(glm::vec2::length() == 2, "GLM: Failed constexpr");
+	static_assert(glm::vec2(1.0f).x > 0.0f, "GLM: Failed constexpr");
+	static_assert(glm::vec2(1.0f, -1.0f).x > 0.0f, "GLM: Failed constexpr");
+	static_assert(glm::vec2(1.0f, -1.0f).y < 0.0f, "GLM: Failed constexpr");
+#endif
+
+	return 0;
+}
+
+static int test_swizzle()
+{
+	int Error = 0;
+
+#	if GLM_SWIZZLE == GLM_ENABLE && GLM_HAS_ANONYMOUS_STRUCT
+	{
+		glm::vec2 A = glm::vec2(1.0f, 2.0f);
+		glm::vec2 B = A.xy;
+		glm::vec2 C(A.xy);
+		glm::vec2 D(A.xy());
+
+		Error += glm::all(glm::equal(A, B)) ? 0 : 1;
+		Error += glm::all(glm::equal(A, C)) ? 0 : 1;
+		Error += glm::all(glm::equal(A, D)) ? 0 : 1;
+	}
+#	elif GLM_SWIZZLE == GLM_ENABLE
+	{
+		glm::vec2 A = glm::vec2(1.0f, 2.0f);
+		glm::vec2 B = A.xy();
+		glm::vec2 C(A.xy());
+
+		Error += glm::all(glm::equal(A, B)) ? 0 : 1;
+		Error += glm::all(glm::equal(A, C)) ? 0 : 1;
+	}
+#	endif//GLM_SWIZZLE == GLM_ENABLE
+
+	return Error;
+}
+
 int main()
 {
 	int Error = 0;
 
-	Error += test_vec2_size();
-	Error += test_vec2_ctor();
-	Error += test_vec2_operators();
+	Error += test_size();
+	Error += test_ctor();
+	Error += test_operators();
 	Error += test_operator_increment();
+	Error += test_swizzle();
+	Error += test_constexpr();
 
 	return Error;
 }
