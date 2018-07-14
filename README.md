@@ -2,7 +2,8 @@
 A hobby project of mine. Work in progress.
 
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
-[![Build status](https://travis-ci.org/nrz/ylikuutio.svg?branch=master)](https://travis-ci.org/nrz/ylikuutio)
+[![Travis CI build](https://travis-ci.org/nrz/ylikuutio.svg?branch=master)](https://travis-ci.org/nrz/ylikuutio)
+[![AppVeyor build](https://ci.appveyor.com/api/projects/status/github/nrz/ylikuutio?branch=master&svg=true)](https://ci.appveyor.com/project/nrz/ylikuutio)
 [![Coverity Scan](https://scan.coverity.com/projects/nrz-ylikuutio/badge.svg)](https://scan.coverity.com/projects/nrz-ylikuutio)
 [![Coverage Status](https://coveralls.io/repos/github/nrz/ylikuutio/badge.svg?branch=master)](https://coveralls.io/github/nrz/ylikuutio?branch=master)
 
