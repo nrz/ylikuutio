@@ -66,6 +66,6 @@ script:
     - gcc -v && g++ -v && cmake --version
     - mkdir build_gcc
     - cd build_gcc
-    - cmake ..
+    - cmake .. -DDO_UNIT_TESTS_WITH_GOOGLE_TEST=true
     - make -j 4
     - ./unit_tests_with_googletest
