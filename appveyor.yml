@@ -27,7 +27,7 @@ before_build:
     - cd build
     - dir
     - cmake --version
-    - cmake .. -DGTEST_HAS_TR1_TUPLE=0 -DDO_UNIT_TESTS_WITH_GOOGLE_TEST=true -G %generator%
+    - cmake .. -DGTEST_HAS_TR1_TUPLE=0 -G %generator%
 
 build:
     project: $(APPVEYOR_BUILD_FOLDER)\$(APPVEYOR_PROJECT_NAME).sln
