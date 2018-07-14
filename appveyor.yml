@@ -28,7 +28,7 @@ before_build:
     - cmake .. -DGTEST_HAS_TR1_TUPLE=0 -DDO_UNIT_TESTS_WITH_GOOGLE_TEST=true -G %generator%
 
 build:
-    project: %(APPVEYOR_BUILD_FOLDER)\%(APPVEYOR_PROJECT_NAME).sln
+    project: $(APPVEYOR_BUILD_FOLDER)\$(APPVEYOR_PROJECT_NAME).sln
     verbosity: minimal
     parallel: true
 
