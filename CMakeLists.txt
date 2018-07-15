@@ -76,6 +76,9 @@ set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 if (COMPILE_SFML_FROM_SOURCE)
     include_directories(
         external/SFML-2.4.2/include/
+        external/SFML-2.4.2/src
+        external/SFML-2.4.2/extlibs/headers/
+        external/SFML-2.4.2/extlibs/headers/AL/
         )
 else()
     include_directories(
