@@ -4,7 +4,8 @@
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include standard headers
-#include <stdint.h> // uint32_t etc.
+#include <cstddef>  // std::size_t
+#include <limits>   // std::numeric_limits
 #include <string>   // std::string
 
 namespace yli
@@ -24,7 +25,7 @@ namespace yli
             this->parent = setting_struct.setting_master;
             this->activate_callback = setting_struct.activate_callback;
             this->read_callback = setting_struct.read_callback;
-            this->childID = -1;
+            this->childID = std::numeric_limits<std::size_t>::max();
 
             if (this->parent == nullptr)
             {

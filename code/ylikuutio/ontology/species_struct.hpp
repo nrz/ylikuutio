@@ -8,6 +8,7 @@
 #endif
 
 // Include standard headers
+#include <cstddef>  // std::size_t
 #include <limits>   // std::numeric_limits
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
@@ -36,7 +37,7 @@ typedef struct SpeciesStruct
         divisor(1.0f),
         water_level(-1.0f * std::numeric_limits<float>::infinity()),
         is_symbiont_species(false),
-        vertex_count(-1),
+        vertex_count(std::numeric_limits<std::size_t>::max()),
         light_position(glm::vec3(0.0f, 0.0f, 0.0f)),
         latitude(0.0f),
         longitude(0.0f),
@@ -61,14 +62,14 @@ typedef struct SpeciesStruct
     std::string model_filename;              // filename of the model file.
     std::string color_channel;               // color channel to use for altitude data, for BMP model files.
     bool is_symbiont_species;
-    int32_t vertex_count;                    // For `SymbiontSpecies`.
+    std::size_t vertex_count;                // For `SymbiontSpecies`.
     std::vector<glm::vec3> vertices;         // For `SymbiontSpecies`.
     std::vector<glm::vec2> uvs;              // For `SymbiontSpecies`.
     std::vector<glm::vec3> normals;          // For `SymbiontSpecies`.
     glm::vec3 light_position;                // light position.
     double latitude;                         // in degrees, for SRTM model files.
     double longitude;                        // in degrees, for SRTM model files.
-    int32_t mesh_i;                          // for FBX.
+    std::size_t mesh_i;                      // for FBX.
     uint32_t x_step;                         // Step in x-dimension for input data (set to 1 to load all data points/measurements).
     uint32_t z_step;                         // Step in z-dimension for input data (set to 1 to load all data points/measurements).
     std::string triangulation_type;          // `"bilinear_interpolation"`, `"southwest_northeast_edges"`, `"southeast_northwest_edges"`.

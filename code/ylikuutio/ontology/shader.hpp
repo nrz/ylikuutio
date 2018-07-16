@@ -33,7 +33,6 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <queue>    // std::queue
-#include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 #include <vector>   // std::vector
 
@@ -51,8 +50,8 @@ namespace yli
                 void bind_material(yli::ontology::Material* const material);
                 void bind_symbiosis(yli::ontology::Symbiosis* const symbiosis);
 
-                void unbind_material(const int32_t childID);
-                void unbind_symbiosis(const int32_t childID);
+                void unbind_material(const std::size_t childID);
+                void unbind_symbiosis(const std::size_t childID);
 
                 // this method sets pointer to this `Shader` to nullptr, sets `parent` according to the input, and requests a new `childID` from the new `Scene`.
                 void bind_to_new_parent(yli::ontology::Scene* const new_scene_pointer);
@@ -99,10 +98,10 @@ namespace yli
                 yli::ontology::Entity* get_parent() const override;
 
                 // this method sets a `Material` pointer.
-                void set_material_pointer(const int32_t childID, yli::ontology::Material* const child_pointer);
+                void set_material_pointer(const std::size_t childID, yli::ontology::Material* const child_pointer);
 
                 // this method sets a `Symbiosis` pointer.
-                void set_symbiosis_pointer(const int32_t childID, yli::ontology::Symbiosis* const child_pointer);
+                void set_symbiosis_pointer(const std::size_t childID, yli::ontology::Symbiosis* const child_pointer);
 
                 // this method sets a scene species pointer.
                 void set_terrain_species(yli::ontology::Species* const terrain_species);
@@ -112,9 +111,9 @@ namespace yli
                 GLuint get_model_matrixID() const;
 
                 template<class T1>
-                    friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, std::size_t* number_of_children);
+                    friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t* number_of_children);
                 template<class T1, class T2>
-                    friend void yli::hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent, std::vector<T1>& old_child_pointer_vector, std::queue<int32_t>& old_free_childID_queue, std::size_t* old_number_of_children);
+                    friend void yli::hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent, std::vector<T1>& old_child_pointer_vector, std::queue<std::size_t>& old_free_childID_queue, std::size_t* old_number_of_children);
                 template<class T1>
                     friend void render_children(const std::vector<T1>& child_pointer_vector);
 
@@ -142,8 +141,8 @@ namespace yli
 
                 std::vector<yli::ontology::Material*> material_pointer_vector;
                 std::vector<yli::ontology::Symbiosis*> symbiosis_pointer_vector;
-                std::queue<int32_t> free_materialID_queue;
-                std::queue<int32_t> free_symbiosisID_queue;
+                std::queue<std::size_t> free_materialID_queue;
+                std::queue<std::size_t> free_symbiosisID_queue;
                 std::size_t number_of_materials;
                 std::size_t number_of_symbioses;
 

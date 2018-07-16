@@ -4,6 +4,7 @@
 
 // Include standard headers
 #include <iostream>      // std::cout, std::cin, std::cerr
+#include <limits>        // std::numeric_limits
 #include <string>        // std::string
 #include <unordered_map> // std::unordered_map
 
@@ -14,7 +15,7 @@ namespace yli
         Entity::Entity(yli::ontology::Universe* const universe)
         {
             // constructor.
-            this->childID = -1;
+            this->childID = std::numeric_limits<std::size_t>::max();
             this->universe = universe;
             this->prerender_callback = nullptr;
             this->postrender_callback = nullptr;

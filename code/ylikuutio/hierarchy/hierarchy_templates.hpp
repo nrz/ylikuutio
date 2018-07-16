@@ -4,7 +4,6 @@
 // Include standard headers
 #include <cstddef>       // std::size_t
 #include <queue>         // std::queue
-#include <stdint.h>      // uint32_t etc.
 #include <unordered_map> // std::unordered_map
 #include <vector>        // std::vector
 
@@ -14,10 +13,10 @@ namespace yli
     {
         template<class T1>
             void set_child_pointer(
-                    const int32_t childID,
+                    const std::size_t childID,
                     const T1 child_pointer,
                     std::vector<T1>& child_pointer_vector,
-                    std::queue<int32_t>& free_childID_queue,
+                    std::queue<std::size_t>& free_childID_queue,
                     std::size_t* const number_of_children)
             {
                 child_pointer_vector[childID] = child_pointer;
@@ -49,11 +48,11 @@ namespace yli
             }
 
         template<class T1>
-            int32_t get_childID(std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue)
+            std::size_t get_childID(std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue)
             {
                 // This function is called eg. from `bind_child_to_parent`,
                 // so that child instance gets an appropriate `childID`.
-                int32_t childID;
+                std::size_t childID;
 
                 while (!free_childID_queue.empty())
                 {
@@ -82,7 +81,7 @@ namespace yli
             void bind_child_to_parent(
                     const T1 child_pointer,
                     std::vector<T1>& child_pointer_vector,
-                    std::queue<int32_t>& free_childID_queue,
+                    std::queue<std::size_t>& free_childID_queue,
                     std::size_t* const number_of_children)
             {
                 // If a class' instances have parents, this function must be
@@ -101,7 +100,7 @@ namespace yli
                     std::unordered_map<std::string, T1>& child_hash_map,
                     const T1 child_pointer,
                     std::vector<T1>& child_pointer_vector,
-                    std::queue<int32_t>& free_childID_queue,
+                    std::queue<std::size_t>& free_childID_queue,
                     std::size_t* const number_of_children)
             {
                 // If a class' instances have parents, this function must be
@@ -126,7 +125,7 @@ namespace yli
                     const T1 child_pointer,
                     const T2 new_parent,
                     std::vector<T1>& old_child_pointer_vector,
-                    std::queue<int32_t>& old_free_childID_queue,
+                    std::queue<std::size_t>& old_free_childID_queue,
                     std::size_t* const old_number_of_children)
             {
                 // Set pointer to this child to `nullptr` in the old parent.

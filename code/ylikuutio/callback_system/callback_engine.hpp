@@ -8,7 +8,6 @@
 #include <cstddef>       // std::size_t
 #include <memory>        // std::make_shared, std::shared_ptr
 #include <queue>         // std::queue
-#include <stdint.h>      // uint32_t etc.
 #include <string>        // std::string
 #include <vector>        // std::vector
 
@@ -58,20 +57,20 @@ namespace yli
                 // execute all callbacks.
                 std::shared_ptr<datatypes::AnyValue> execute();
 
-                uint32_t get_n_of_return_values() const;
-                std::shared_ptr<datatypes::AnyValue> get_nth_return_value(uint32_t n) const;
+                std::size_t get_n_of_return_values() const;
+                std::shared_ptr<datatypes::AnyValue> get_nth_return_value(std::size_t n) const;
                 std::shared_ptr<datatypes::AnyValue> get_previous_return_value() const;
 
                 friend class CallbackObject;
                 template<class T1, class T2>
-                    friend void yli::hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent, std::vector<T1>& old_child_pointer_vector, std::queue<int32_t>& old_free_childID_queue, std::size_t* old_number_of_children);
+                    friend void yli::hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent, std::vector<T1>& old_child_pointer_vector, std::queue<std::size_t>& old_free_childID_queue, std::size_t* old_number_of_children);
 
             private:
                 // this method sets a callback object pointer.
-                void set_callback_object_pointer(const int32_t childID, yli::callback_system::CallbackObject* const child_pointer);
+                void set_callback_object_pointer(const std::size_t childID, yli::callback_system::CallbackObject* const child_pointer);
 
                 std::vector<yli::callback_system::CallbackObject*> callback_object_pointer_vector;
-                std::queue<int32_t> free_callback_objectID_queue;
+                std::queue<std::size_t> free_callback_objectID_queue;
                 std::size_t number_of_callback_objects;
 
                 std::vector<std::shared_ptr<datatypes::AnyValue>> return_values;

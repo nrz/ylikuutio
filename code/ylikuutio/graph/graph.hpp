@@ -10,7 +10,6 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
-#include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
 #include <queue>    // std::queue
 
@@ -31,16 +30,16 @@ namespace graph
 
         private:
             // this method sets a node pointer.
-            void set_node_pointer(int32_t nodeID, graph::Node* child_pointer);
+            void set_node_pointer(std::size_t nodeID, graph::Node* child_pointer);
 
             // this method gets a node pointer.
-            graph::Node* get_node_pointer(int32_t nodeID);
+            graph::Node* get_node_pointer(std::size_t nodeID);
 
             // this method gets a node ID and removes it from the `free_nodeID_queue` if it was popped from the queue.
-            int32_t get_nodeID();
+            std::size_t get_nodeID();
 
             std::vector<graph::Node*> node_pointer_vector;
-            std::queue<int32_t> free_nodeID_queue;
+            std::queue<std::size_t> free_nodeID_queue;
             std::size_t number_of_nodes;
     };
 }

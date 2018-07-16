@@ -79,7 +79,7 @@ namespace yli
 
                         std::cout << "Number of glyphs to be created: " << this->glyph_vertex_data.size() << "\n";
 
-                        for (uint32_t glyph_i = 0; glyph_i < this->glyph_vertex_data.size(); glyph_i++)
+                        for (std::size_t glyph_i = 0; glyph_i < this->glyph_vertex_data.size(); glyph_i++)
                         {
                             const char* unicode_char_pointer = this->unicode_strings.at(glyph_i).c_str();
                             const char* temp_unicode_char_pointer = unicode_char_pointer;
@@ -123,10 +123,10 @@ namespace yli
                 virtual ~VectorFont();
 
                 // this method sets `Glyph` pointer.
-                void set_glyph_pointer(const int32_t childID, yli::ontology::Glyph* const child_pointer);
+                void set_glyph_pointer(const std::size_t childID, yli::ontology::Glyph* const child_pointer);
 
                 // this method sets `Text3D` pointer.
-                void set_text3D_pointer(const int32_t childID, yli::ontology::Text3D* const child_pointer);
+                void set_text3D_pointer(const std::size_t childID, yli::ontology::Text3D* const child_pointer);
 
                 // this method returns a pointer to `Glyph` that matches the given `unicode_value`,
                 // and `nullptr` if this `VectorFont` does not contain such a `Glyph`.
@@ -137,9 +137,9 @@ namespace yli
                 yli::ontology::Material* parent; // pointer to `Material`.
 
                 template<class T1>
-                    friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, std::size_t* number_of_children);
+                    friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t* number_of_children);
                 template<class T1, class T2>
-                    friend void yli::hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent, std::vector<T1>& old_child_pointer_vector, std::queue<int32_t>& old_free_childID_queue, std::size_t* old_number_of_children);
+                    friend void yli::hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent, std::vector<T1>& old_child_pointer_vector, std::queue<std::size_t>& old_free_childID_queue, std::size_t* old_number_of_children);
                 template<class T1>
                     friend void render_children(const std::vector<T1>& child_pointer_vector);
 
@@ -167,8 +167,8 @@ namespace yli
 
                 std::vector<yli::ontology::Glyph*> glyph_pointer_vector;
                 std::vector<yli::ontology::Text3D*> text3D_pointer_vector;
-                std::queue<int32_t> free_glyphID_queue;
-                std::queue<int32_t> free_text3D_ID_queue;
+                std::queue<std::size_t> free_glyphID_queue;
+                std::queue<std::size_t> free_text3D_ID_queue;
                 std::size_t number_of_glyphs;
                 std::size_t number_of_text3Ds;
 

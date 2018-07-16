@@ -7,7 +7,7 @@
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include standard headers
-#include <stdint.h> // uint32_t etc.
+#include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
 
 namespace yli
@@ -48,7 +48,7 @@ namespace yli
             this->postrender();
         }
 
-        void Glyph::set_object_pointer(const int32_t childID, yli::ontology::Object* const child_pointer)
+        void Glyph::set_object_pointer(const std::size_t childID, yli::ontology::Object* const child_pointer)
         {
             yli::hierarchy::set_child_pointer(childID, child_pointer, this->object_pointer_vector, this->free_objectID_queue, &this->number_of_objects);
         }

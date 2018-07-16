@@ -6,8 +6,8 @@
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include standard headers
+#include <cstddef>       // std::size_t
 #include <memory>        // std::make_shared, std::shared_ptr
-#include <stdint.h>      // uint32_t etc.
 #include <string>        // std::string
 
 namespace yli
@@ -37,7 +37,7 @@ namespace yli
 
                 friend class CallbackObject;
 
-                int32_t childID;                // callback parameter ID, returned by `yli::callback_system::CallbackObject->get_callback_parameterID()`.
+                std::size_t childID;            // callback parameter ID, returned by `yli::callback_system::CallbackObject->get_callback_parameterID()`.
 
             private:
                 void bind_to_parent();

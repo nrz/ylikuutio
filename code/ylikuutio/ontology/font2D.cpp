@@ -21,7 +21,6 @@
 #include <cstddef>  // std::size_t
 #include <cstring>  // std::memcmp, std::strcmp, std::strlen, std::strncmp
 #include <iostream> // std::cout, std::cin, std::cerr
-#include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 #include <vector>   // std::vector
 
@@ -81,12 +80,12 @@ namespace yli
             //
             // If horizontal alignment is right, each line ends in the same x coordinate.
             // Newlines need to be checked beforehand.
-            uint32_t length = std::strlen(text_char);
+            std::size_t length = std::strlen(text_char);
 
             // Count the number of lines.
-            uint32_t number_of_lines = 1;
+            std::size_t number_of_lines = 1;
 
-            uint32_t i = 0;
+            std::size_t i = 0;
 
             while (i < length)
             {

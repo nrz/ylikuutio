@@ -403,7 +403,7 @@ namespace yli
                 void set_planet_radius(float planet_radius);
 
                 // this method sets a `World` pointer.
-                void set_world_pointer(int32_t childID, yli::ontology::World* child_pointer);
+                void set_world_pointer(std::size_t childID, yli::ontology::World* child_pointer);
 
                 // this method returns a terrain `Species` pointer.
                 yli::ontology::Species* get_terrain_species();
@@ -546,7 +546,7 @@ namespace yli
                 yli::ontology::EntityFactory* entity_factory;
 
                 std::vector<yli::ontology::World*> world_pointer_vector;
-                std::queue<int32_t> free_worldID_queue;
+                std::queue<std::size_t> free_worldID_queue;
                 std::size_t number_of_worlds;
 
                 yli::ontology::World* active_world;

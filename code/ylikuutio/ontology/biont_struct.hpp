@@ -13,7 +13,7 @@
 
 // Include standard headers
 #include <cmath> // NAN, std::isnan, std::pow
-#include <stdint.h> // uint32_t etc.
+#include <limits>   // std::numeric_limits
 
 namespace yli
 {
@@ -27,7 +27,7 @@ typedef struct BiontStruct
 {
     BiontStruct()
         : holobiont_parent(nullptr),
-        biontID(-1),
+        biontID(std::numeric_limits<std::size_t>::max()),
         original_scale_vector(glm::vec3(1.0f, 1.0f, 1.0f)),
         rotate_angle(0.0f),
         initial_rotate_angle(PI),
@@ -41,7 +41,7 @@ typedef struct BiontStruct
         // constructor.
     }
     yli::ontology::Holobiont* holobiont_parent; // pointer to the parent `Holobiont`.
-    int32_t biontID;
+    std::size_t biontID;
     glm::vec3 original_scale_vector; // original scale vector.
     float rotate_angle;              // rotate angle.
     float initial_rotate_angle;      // initial rotate angle.

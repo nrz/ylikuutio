@@ -22,7 +22,6 @@
 #include <cmath>    // NAN, std::isnan, std::pow
 #include <cstddef>  // std::size_t
 #include <memory>   // std::make_shared, std::shared_ptr
-#include <stdint.h> // uint32_t etc.
 #include <queue>    // std::queue
 #include <string>   // std::string
 #include <vector>   // std::vector
@@ -72,7 +71,7 @@ namespace yli
                 friend class Universe;
 
                 template<class T1>
-                    friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, std::size_t* number_of_children);
+                    friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t* number_of_children);
 
             private:
                 void bind_to_parent();

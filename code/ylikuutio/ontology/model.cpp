@@ -28,7 +28,7 @@ namespace yli
                     &this->number_of_objects);
         }
 
-        void Model::unbind(const int32_t childID)
+        void Model::unbind(const std::size_t childID)
         {
             yli::ontology::Object* dummy_child_pointer = nullptr;
             yli::hierarchy::set_child_pointer(

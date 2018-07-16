@@ -59,7 +59,7 @@ namespace yli
                     &this->number_of_holobionts);
         }
 
-        void Symbiosis::unbind_holobiont(const int32_t childID)
+        void Symbiosis::unbind_holobiont(const std::size_t childID)
         {
             yli::ontology::Holobiont* dummy_child_pointer = nullptr;
             yli::hierarchy::set_child_pointer(
@@ -133,7 +133,7 @@ namespace yli
             return this->model_file_format;
         }
 
-        void Symbiosis::set_symbiont_material_pointer(const int32_t childID, yli::ontology::SymbiontMaterial* const child_pointer)
+        void Symbiosis::set_symbiont_material_pointer(const std::size_t childID, yli::ontology::SymbiontMaterial* const child_pointer)
         {
             yli::hierarchy::set_child_pointer(
                     childID,
@@ -143,7 +143,7 @@ namespace yli
                     &this->number_of_symbiont_materials);
         }
 
-        void Symbiosis::set_holobiont_pointer(const int32_t childID, yli::ontology::Holobiont* const child_pointer)
+        void Symbiosis::set_holobiont_pointer(const std::size_t childID, yli::ontology::Holobiont* const child_pointer)
         {
             yli::hierarchy::set_child_pointer(
                     childID,
@@ -213,7 +213,7 @@ namespace yli
 
                     // Create `SymbiontSpecies`s.
                     // Care only about `ofbx::Texture*`s which are DIFFUSE textures.
-                    for (int32_t mesh_i : this->ofbx_diffuse_texture_mesh_map.at(ofbx_texture))
+                    for (std::size_t mesh_i : this->ofbx_diffuse_texture_mesh_map.at(ofbx_texture))
                     {
                         SpeciesStruct species_struct;
                         species_struct.is_symbiont_species = true;
@@ -246,53 +246,53 @@ namespace yli
             }
         }
 
-        yli::ontology::SymbiontSpecies* Symbiosis::get_symbiont_species(const int32_t biontID) const
+        yli::ontology::SymbiontSpecies* Symbiosis::get_symbiont_species(const std::size_t biontID) const
         {
             return this->biontID_symbiont_species_vector.at(biontID);
         }
 
-        GLuint Symbiosis::get_vertex_position_modelspaceID(const int32_t biontID) const
+        GLuint Symbiosis::get_vertex_position_modelspaceID(const std::size_t biontID) const
         {
             return this->biontID_symbiont_species_vector.at(biontID)->get_vertex_position_modelspaceID();
         }
 
-        GLuint Symbiosis::get_vertexUVID(const int32_t biontID) const
+        GLuint Symbiosis::get_vertexUVID(const std::size_t biontID) const
         {
             return this->biontID_symbiont_species_vector.at(biontID)->get_vertexUVID();
         }
 
-        GLuint Symbiosis::get_vertex_normal_modelspaceID(const int32_t biontID) const
+        GLuint Symbiosis::get_vertex_normal_modelspaceID(const std::size_t biontID) const
         {
             return this->biontID_symbiont_species_vector.at(biontID)->get_vertex_normal_modelspaceID();
         }
 
-        GLuint Symbiosis::get_vertexbuffer(const int32_t biontID) const
+        GLuint Symbiosis::get_vertexbuffer(const std::size_t biontID) const
         {
             return this->biontID_symbiont_species_vector.at(biontID)->get_vertexbuffer();
         }
 
-        GLuint Symbiosis::get_uvbuffer(const int32_t biontID) const
+        GLuint Symbiosis::get_uvbuffer(const std::size_t biontID) const
         {
             return this->biontID_symbiont_species_vector.at(biontID)->get_uvbuffer();
         }
 
-        GLuint Symbiosis::get_normalbuffer(const int32_t biontID) const
+        GLuint Symbiosis::get_normalbuffer(const std::size_t biontID) const
         {
             return this->biontID_symbiont_species_vector.at(biontID)->get_normalbuffer();
         }
 
-        GLuint Symbiosis::get_elementbuffer(const int32_t biontID) const
+        GLuint Symbiosis::get_elementbuffer(const std::size_t biontID) const
         {
             return this->biontID_symbiont_species_vector.at(biontID)->get_elementbuffer();
         }
 
-        std::vector<uint32_t> Symbiosis::get_indices(const int32_t biontID) const
+        std::vector<uint32_t> Symbiosis::get_indices(const std::size_t biontID) const
         {
             return this->biontID_symbiont_species_vector.at(biontID)->get_indices();
             // return this->indices.at(biontID);
         }
 
-        GLuint Symbiosis::get_indices_size(const int32_t biontID) const
+        std::size_t Symbiosis::get_indices_size(const std::size_t biontID) const
         {
             return this->biontID_symbiont_species_vector.at(biontID)->get_indices_size();
             // return this->indices.at(biontID).size();
@@ -303,7 +303,7 @@ namespace yli
             return this->ofbx_mesh_count;
         }
 
-        bool Symbiosis::has_texture(const int32_t biontID) const
+        bool Symbiosis::has_texture(const std::size_t biontID) const
         {
             if (biontID >= this->biontID_symbiont_material_vector.size())
             {
@@ -318,22 +318,22 @@ namespace yli
             return true;
         }
 
-        GLuint Symbiosis::get_texture(const int32_t biontID) const
+        GLuint Symbiosis::get_texture(const std::size_t biontID) const
         {
             return this->biontID_symbiont_material_vector.at(biontID)->get_texture();
         }
 
-        GLuint Symbiosis::get_openGL_textureID(const int32_t biontID) const
+        GLuint Symbiosis::get_openGL_textureID(const std::size_t biontID) const
         {
             return this->biontID_symbiont_material_vector.at(biontID)->get_openGL_textureID();
         }
 
-        GLuint Symbiosis::get_lightID(const int32_t biontID) const
+        GLuint Symbiosis::get_lightID(const std::size_t biontID) const
         {
             return this->biontID_symbiont_species_vector.at(biontID)->get_lightID();
         }
 
-        glm::vec3 Symbiosis::get_light_position(const int32_t biontID) const
+        glm::vec3 Symbiosis::get_light_position(const std::size_t biontID) const
         {
             return this->light_position;
         }

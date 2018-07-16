@@ -16,6 +16,7 @@
 #endif
 
 // Include standard headers
+#include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <stdint.h> // uint32_t etc.
 
@@ -80,7 +81,7 @@ namespace yli
             return this->material_parent;
         }
 
-        void Species::set_object_pointer(const int32_t childID, yli::ontology::Object* const child_pointer)
+        void Species::set_object_pointer(const std::size_t childID, yli::ontology::Object* const child_pointer)
         {
             yli::hierarchy::set_child_pointer(childID, child_pointer, this->object_pointer_vector, this->free_objectID_queue, &this->number_of_objects);
         }

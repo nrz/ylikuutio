@@ -22,7 +22,6 @@
 #include <cstddef>  // std::size_t
 #include <cstring>  // std::memcmp, std::strcmp, std::strlen, std::strncmp
 #include <iostream> // std::cout, std::cin, std::cerr
-#include <stdint.h> // uint32_t etc.
 
 namespace yli
 {
@@ -58,7 +57,7 @@ namespace yli
                     &this->number_of_chunk_masters);
         }
 
-        void Material::unbind_species(const int32_t childID)
+        void Material::unbind_species(const std::size_t childID)
         {
             yli::ontology::Species* dummy_child_pointer = nullptr;
             yli::hierarchy::set_child_pointer(
@@ -69,7 +68,7 @@ namespace yli
                     &this->number_of_species);
         }
 
-        void Material::unbind_vector_font(const int32_t childID)
+        void Material::unbind_vector_font(const std::size_t childID)
         {
             yli::ontology::VectorFont* dummy_child_pointer = nullptr;
             yli::hierarchy::set_child_pointer(
@@ -80,7 +79,7 @@ namespace yli
                     &this->number_of_vector_fonts);
         }
 
-        void Material::unbind_chunk_master(const int32_t childID)
+        void Material::unbind_chunk_master(const std::size_t childID)
         {
             space_partition::ChunkMaster* dummy_child_pointer = nullptr;
             yli::hierarchy::set_child_pointer(
@@ -156,17 +155,17 @@ namespace yli
             return 0; // TODO; write the code!
         }
 
-        void Material::set_species_pointer(const int32_t childID, yli::ontology::Species* const child_pointer)
+        void Material::set_species_pointer(const std::size_t childID, yli::ontology::Species* const child_pointer)
         {
             yli::hierarchy::set_child_pointer(childID, child_pointer, this->species_pointer_vector, this->free_speciesID_queue, &this->number_of_species);
         }
 
-        void Material::set_vector_font_pointer(const int32_t childID, yli::ontology::VectorFont* const child_pointer)
+        void Material::set_vector_font_pointer(const std::size_t childID, yli::ontology::VectorFont* const child_pointer)
         {
             yli::hierarchy::set_child_pointer(childID, child_pointer, this->vector_font_pointer_vector, this->free_vector_fontID_queue, &this->number_of_vector_fonts);
         }
 
-        void Material::set_chunk_master_pointer(const int32_t childID, space_partition::ChunkMaster* const child_pointer)
+        void Material::set_chunk_master_pointer(const std::size_t childID, space_partition::ChunkMaster* const child_pointer)
         {
             yli::hierarchy::set_child_pointer(childID, child_pointer, this->chunk_master_pointer_vector, this->free_chunk_masterID_queue, &this->number_of_chunk_masters);
         }

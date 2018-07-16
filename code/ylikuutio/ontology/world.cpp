@@ -6,7 +6,6 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
-#include <stdint.h> // uint32_t etc.
 
 namespace yli
 {
@@ -85,7 +84,7 @@ namespace yli
             return 0; // TODO; write the code!
         }
 
-        void World::set_scene_pointer(const int32_t childID, yli::ontology::Scene* const child_pointer)
+        void World::set_scene_pointer(const std::size_t childID, yli::ontology::Scene* const child_pointer)
         {
             yli::hierarchy::set_child_pointer(childID, child_pointer, this->scene_pointer_vector, this->free_sceneID_queue, &this->number_of_scenes);
         }
