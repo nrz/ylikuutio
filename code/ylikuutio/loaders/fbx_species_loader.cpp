@@ -12,6 +12,7 @@ typedef unsigned char u8;
 #endif
 
 // Include standard headers
+#include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <string>   // std::string
 #include <vector>   // std::vector
@@ -57,7 +58,15 @@ namespace loaders
             return false;
         }
 
-        int32_t mesh_count = static_cast<int32_t>(ofbx_iscene->getMeshCount()); // `getMeshCount()` returns `int`.
+        int temp_mesh_count = ofbx_iscene->getMeshCount(); // `getMeshCount()` returns `int`.
+
+        if (temp_mesh_count < 0)
+        {
+            std::cerr << "Error: mesh count is negative!\n";
+            return false;
+        }
+
+        std::size_t mesh_count = static_cast<std::size_t>(temp_mesh_count);
 
         if (mesh_i >= mesh_count)
         {
