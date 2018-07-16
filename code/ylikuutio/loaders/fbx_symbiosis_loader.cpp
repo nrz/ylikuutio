@@ -69,6 +69,7 @@ namespace loaders
 
         if (temp_mesh_count < 0)
         {
+            std::cerr << "Error: mesh count is negative!\n";
             return false;
         }
 
