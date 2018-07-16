@@ -23,8 +23,8 @@
 #endif
 
 // Include standard headers
-#include <cstddef>  // std::size_t
 #include <cmath>    // NAN, std::isnan, std::pow
+#include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <queue>    // std::queue
 #include <string>   // std::string
