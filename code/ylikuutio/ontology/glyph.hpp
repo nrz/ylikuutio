@@ -23,8 +23,8 @@
 #endif
 
 // Include standard headers
+#include <cstddef>  // std::size_t
 #include <queue>    // std::queue
-#include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 #include <vector>   // std::vector
 
@@ -45,13 +45,13 @@ namespace yli
                 yli::ontology::Entity* get_parent() const override;
 
                 // this method sets a object pointer.
-                void set_object_pointer(const int32_t childID, yli::ontology::Object* const child_pointer);
+                void set_object_pointer(const std::size_t childID, yli::ontology::Object* const child_pointer);
 
                 const char* get_unicode_char_pointer();
 
                 friend class VectorFont;
                 template<class T1>
-                    friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, std::size_t* number_of_children);
+                    friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t* number_of_children);
                 template<class T1>
                     friend void render_species_or_glyph(T1 species_or_glyph_pointer);
                 template<class T1>

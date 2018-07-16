@@ -26,7 +26,6 @@
 #include <cmath>    // NAN, std::isnan, std::pow
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
-#include <stdint.h> // uint32_t etc.
 #include <unordered_map> // std::unordered_map
 
 namespace yli
@@ -53,7 +52,7 @@ namespace yli
                     &this->number_of_cameras);
         }
 
-        void Scene::unbind_shader(const int32_t childID)
+        void Scene::unbind_shader(const std::size_t childID)
         {
             yli::ontology::Shader* dummy_child_pointer = nullptr;
             yli::hierarchy::set_child_pointer(
@@ -64,7 +63,7 @@ namespace yli
                     &this->number_of_shaders);
         }
 
-        void Scene::unbind_camera(const int32_t childID)
+        void Scene::unbind_camera(const std::size_t childID)
         {
             yli::ontology::Camera* dummy_child_pointer = nullptr;
             yli::hierarchy::set_child_pointer(
@@ -204,12 +203,12 @@ namespace yli
             return this->water_level;
         }
 
-        void Scene::set_shader_pointer(const int32_t childID, yli::ontology::Shader* const child_pointer)
+        void Scene::set_shader_pointer(const std::size_t childID, yli::ontology::Shader* const child_pointer)
         {
             yli::hierarchy::set_child_pointer(childID, child_pointer, this->shader_pointer_vector, this->free_shaderID_queue, &this->number_of_shaders);
         }
 
-        void Scene::set_camera_pointer(const int32_t childID, yli::ontology::Camera* const child_pointer)
+        void Scene::set_camera_pointer(const std::size_t childID, yli::ontology::Camera* const child_pointer)
         {
             yli::hierarchy::set_child_pointer(childID, child_pointer, this->camera_pointer_vector, this->free_cameraID_queue, &this->number_of_cameras);
         }

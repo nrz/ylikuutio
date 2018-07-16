@@ -7,7 +7,6 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <queue>    // std::queue
-#include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
 
 // `World` is just a collection of `Scene`s which share some common resources,
@@ -55,14 +54,14 @@ namespace yli
                 yli::ontology::Scene* get_active_scene() const;
 
                 // this method sets a `Scene` pointer.
-                void set_scene_pointer(const int32_t childID, yli::ontology::Scene* const child_pointer);
+                void set_scene_pointer(const std::size_t childID, yli::ontology::Scene* const child_pointer);
 
                 yli::ontology::Entity* get_parent() const override;
                 std::size_t get_number_of_children() const override;
                 std::size_t get_number_of_descendants() const override;
 
                 template<class T1>
-                    friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, std::size_t* number_of_children);
+                    friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t* number_of_children);
 
             private:
                 void bind_to_parent();
@@ -70,7 +69,7 @@ namespace yli
                 yli::ontology::Universe* parent; // pointer to the `Universe`.
 
                 std::vector<yli::ontology::Scene*> scene_pointer_vector;
-                std::queue<int32_t> free_sceneID_queue;
+                std::queue<std::size_t> free_sceneID_queue;
                 std::size_t number_of_scenes;
 
                 yli::ontology::Scene* active_scene;

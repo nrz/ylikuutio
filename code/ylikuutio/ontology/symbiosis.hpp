@@ -53,7 +53,7 @@ namespace yli
                 void bind_symbiont_material(yli::ontology::SymbiontMaterial* const symbiont_material);
                 void bind_holobiont(yli::ontology::Holobiont* const holobiont);
 
-                void unbind_holobiont(const int32_t childID);
+                void unbind_holobiont(const std::size_t childID);
 
                 // this method sets pointer to this `Symbiosis` to nullptr, sets `parent` according to the input, and requests a new `childID` from the new `Shader`.
                 void bind_to_new_parent(yli::ontology::Shader* const new_shader_pointer);
@@ -99,34 +99,34 @@ namespace yli
 
                 const std::string& get_model_file_format();
 
-                void set_symbiont_material_pointer(const int32_t childID, yli::ontology::SymbiontMaterial* const child_pointer);
+                void set_symbiont_material_pointer(const std::size_t childID, yli::ontology::SymbiontMaterial* const child_pointer);
 
-                void set_holobiont_pointer(const int32_t childID, yli::ontology::Holobiont* const child_pointer);
+                void set_holobiont_pointer(const std::size_t childID, yli::ontology::Holobiont* const child_pointer);
 
-                yli::ontology::SymbiontSpecies* get_symbiont_species(const int32_t biontID) const;
-                GLuint get_vertex_position_modelspaceID(const int32_t biontID) const;
-                GLuint get_vertexUVID(const int32_t biontID) const;
-                GLuint get_vertex_normal_modelspaceID(const int32_t biontID) const;
+                yli::ontology::SymbiontSpecies* get_symbiont_species(const std::size_t biontID) const;
+                GLuint get_vertex_position_modelspaceID(const std::size_t biontID) const;
+                GLuint get_vertexUVID(const std::size_t biontID) const;
+                GLuint get_vertex_normal_modelspaceID(const std::size_t biontID) const;
 
-                GLuint get_vertexbuffer(const int32_t biontID) const;
-                GLuint get_uvbuffer(const int32_t biontID) const;
-                GLuint get_normalbuffer(const int32_t biontID) const;
-                GLuint get_elementbuffer(const int32_t biontID) const;
+                GLuint get_vertexbuffer(const std::size_t biontID) const;
+                GLuint get_uvbuffer(const std::size_t biontID) const;
+                GLuint get_normalbuffer(const std::size_t biontID) const;
+                GLuint get_elementbuffer(const std::size_t biontID) const;
 
-                std::vector<uint32_t> get_indices(const int32_t biontID) const;
-                GLuint get_indices_size(const int32_t biontID) const;
+                std::vector<uint32_t> get_indices(const std::size_t biontID) const;
+                std::size_t get_indices_size(const std::size_t biontID) const;
                 std::size_t get_number_of_symbionts() const;
-                bool has_texture(const int32_t biontID) const;
-                GLuint get_texture(const int32_t biontID) const;
-                GLuint get_openGL_textureID(const int32_t biontID) const;
+                bool has_texture(const std::size_t biontID) const;
+                GLuint get_texture(const std::size_t biontID) const;
+                GLuint get_openGL_textureID(const std::size_t biontID) const;
 
-                GLuint get_lightID(const int32_t biontID) const;
-                glm::vec3 get_light_position(const int32_t biontID) const;
+                GLuint get_lightID(const std::size_t biontID) const;
+                glm::vec3 get_light_position(const std::size_t biontID) const;
 
                 template<class T1>
-                    friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, std::size_t* number_of_children);
+                    friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t* number_of_children);
                 template<class T1, class T2>
-                    friend void yli::hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent, std::vector<T1>& old_child_pointer_vector, std::queue<int32_t>& old_free_childID_queue, std::size_t* old_number_of_children);
+                    friend void yli::hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent, std::vector<T1>& old_child_pointer_vector, std::queue<std::size_t>& old_free_childID_queue, std::size_t* old_number_of_children);
 
             private:
                 void bind_to_parent();
@@ -141,8 +141,8 @@ namespace yli
 
                 std::vector<yli::ontology::SymbiontMaterial*> symbiont_material_pointer_vector;
                 std::vector<yli::ontology::Holobiont*> holobiont_pointer_vector;
-                std::queue<int32_t> free_symbiont_materialID_queue;
-                std::queue<int32_t> free_holobiontID_queue;
+                std::queue<std::size_t> free_symbiont_materialID_queue;
+                std::queue<std::size_t> free_holobiontID_queue;
                 std::size_t number_of_symbiont_materials;
                 std::size_t number_of_holobionts;
 

@@ -5,7 +5,6 @@
 
 // Include standard headers
 #include <cstddef>  // std::size_t
-#include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 #include <vector>   // std::vector
 
@@ -53,7 +52,7 @@ namespace yli
                 yli::ontology::Universe* universe;          // pointer to `Universe`.
                 yli::config::SettingMaster* setting_master; // pointer to `SettingMaster`.
                 std::vector<void*> child_vector_pointers_vector;
-                int32_t childID;
+                std::size_t childID;
 
                 std::string type;
 

@@ -17,8 +17,8 @@
 #endif
 
 // Include standard headers
+#include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
-#include <stdint.h> // uint32_t etc.
 
 namespace yli
 {
@@ -46,7 +46,7 @@ namespace yli
                     &this->number_of_bionts);
         }
 
-        void SymbiontSpecies::unbind_biont(const int32_t childID)
+        void SymbiontSpecies::unbind_biont(const std::size_t childID)
         {
             yli::ontology::Biont* dummy_child_pointer = nullptr;
             yli::hierarchy::set_child_pointer(
@@ -90,7 +90,7 @@ namespace yli
             return this->symbiont_material_parent;
         }
 
-        int32_t SymbiontSpecies::get_indices_size() const
+        std::size_t SymbiontSpecies::get_indices_size() const
         {
             return this->indices.size();
         }

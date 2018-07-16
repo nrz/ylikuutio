@@ -26,7 +26,6 @@
 #include <cstring>  // std::memcmp, std::strcmp, std::strlen, std::strncmp
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <queue>    // std::queue
-#include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 #include <vector>   // std::vector
 
@@ -51,9 +50,9 @@ namespace yli
                 void bind_vector_font(yli::ontology::VectorFont* const vector_font);
                 void bind_chunk_master(space_partition::ChunkMaster* const chunk_master);
 
-                void unbind_species(const int32_t childID);
-                void unbind_vector_font(const int32_t childID);
-                void unbind_chunk_master(const int32_t childID);
+                void unbind_species(const std::size_t childID);
+                void unbind_vector_font(const std::size_t childID);
+                void unbind_chunk_master(const std::size_t childID);
 
                 // constructor.
                 Material(yli::ontology::Universe* const universe, const MaterialStruct& material_struct)
@@ -120,13 +119,13 @@ namespace yli
                 yli::ontology::Entity* get_parent() const override;
 
                 // this method sets `Species` pointer.
-                void set_species_pointer(const int32_t childID, yli::ontology::Species* const child_pointer);
+                void set_species_pointer(const std::size_t childID, yli::ontology::Species* const child_pointer);
 
                 // this method sets `VectorFont` pointer.
-                void set_vector_font_pointer(const int32_t childID, yli::ontology::VectorFont* const child_pointer);
+                void set_vector_font_pointer(const std::size_t childID, yli::ontology::VectorFont* const child_pointer);
 
                 // this method sets `ChunkMaster` pointer.
-                void set_chunk_master_pointer(const int32_t childID, space_partition::ChunkMaster* const child_pointer);
+                void set_chunk_master_pointer(const std::size_t childID, space_partition::ChunkMaster* const child_pointer);
 
                 // this method sets a terrain `Species` pointer.
                 void set_terrain_species(yli::ontology::Species* const terrain_species);
@@ -134,9 +133,9 @@ namespace yli
                 template<class T1>
                     friend void render_children(const std::vector<T1>& child_pointer_vector);
                 template<class T1>
-                    friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, std::size_t* number_of_children);
+                    friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t* number_of_children);
                 template<class T1, class T2>
-                    friend void yli::hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent, std::vector<T1>& old_child_pointer_vector, std::queue<int32_t>& old_free_childID_queue, std::size_t* old_number_of_children);
+                    friend void yli::hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent, std::vector<T1>& old_child_pointer_vector, std::queue<std::size_t>& old_free_childID_queue, std::size_t* old_number_of_children);
 
             private:
                 void bind_to_parent();
@@ -159,9 +158,9 @@ namespace yli
                 std::vector<yli::ontology::Species*> species_pointer_vector;
                 std::vector<yli::ontology::VectorFont*> vector_font_pointer_vector;
                 std::vector<space_partition::ChunkMaster*> chunk_master_pointer_vector;
-                std::queue<int32_t> free_speciesID_queue;
-                std::queue<int32_t> free_vector_fontID_queue;
-                std::queue<int32_t> free_chunk_masterID_queue;
+                std::queue<std::size_t> free_speciesID_queue;
+                std::queue<std::size_t> free_vector_fontID_queue;
+                std::queue<std::size_t> free_chunk_masterID_queue;
                 std::size_t number_of_species;
                 std::size_t number_of_vector_fonts;
                 std::size_t number_of_chunk_masters;

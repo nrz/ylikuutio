@@ -31,9 +31,9 @@
 #endif
 
 // Include standard headers
+#include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <queue>    // std::queue
-#include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 #include <vector>   // std::vector
 
@@ -53,7 +53,7 @@ namespace yli
             private:
                 void bind_biont(yli::ontology::Biont* const biont);
 
-                void unbind_biont(const int32_t childID);
+                void unbind_biont(const std::size_t childID);
 
                 // constructor.
                 SymbiontSpecies(yli::ontology::Universe* const universe, const SpeciesStruct& species_struct)
@@ -123,7 +123,7 @@ namespace yli
 
                 yli::ontology::Entity* get_parent() const override;
 
-                int32_t get_indices_size() const;
+                std::size_t get_indices_size() const;
                 GLuint get_lightID() const;
 
                 glm::vec3 light_position;                // light position.
@@ -132,7 +132,7 @@ namespace yli
                 friend class SymbiontMaterial;
                 friend class Biont;
                 template<class T1>
-                    friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, std::size_t* number_of_children);
+                    friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t* number_of_children);
                 template<class T1>
                     friend void render_species_or_glyph(T1 species_or_glyph_pointer);
                 template<class T1>
@@ -144,7 +144,7 @@ namespace yli
                 void render();
 
                 std::vector<yli::ontology::Biont*> biont_pointer_vector;
-                std::queue<int32_t> free_biontID_queue;
+                std::queue<std::size_t> free_biontID_queue;
                 std::size_t number_of_bionts;
 
                 yli::ontology::SymbiontMaterial* symbiont_material_parent; // pointer to `SymbiontMaterial`.

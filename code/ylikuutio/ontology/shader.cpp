@@ -18,7 +18,6 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
-#include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 
 namespace yli
@@ -45,7 +44,7 @@ namespace yli
                     &this->number_of_symbioses);
         }
 
-        void Shader::unbind_material(const int32_t childID)
+        void Shader::unbind_material(const std::size_t childID)
         {
             yli::ontology::Material* dummy_child_pointer = nullptr;
             yli::hierarchy::set_child_pointer(
@@ -56,7 +55,7 @@ namespace yli
                     &this->number_of_materials);
         }
 
-        void Shader::unbind_symbiosis(const int32_t childID)
+        void Shader::unbind_symbiosis(const std::size_t childID)
         {
             yli::ontology::Symbiosis* dummy_child_pointer = nullptr;
             yli::hierarchy::set_child_pointer(
@@ -133,12 +132,12 @@ namespace yli
             return 0; // TODO; write the code!
         }
 
-        void Shader::set_material_pointer(const int32_t childID, yli::ontology::Material* const child_pointer)
+        void Shader::set_material_pointer(const std::size_t childID, yli::ontology::Material* const child_pointer)
         {
             yli::hierarchy::set_child_pointer(childID, child_pointer, this->material_pointer_vector, this->free_materialID_queue, &this->number_of_materials);
         }
 
-        void Shader::set_symbiosis_pointer(const int32_t childID, yli::ontology::Symbiosis* const child_pointer)
+        void Shader::set_symbiosis_pointer(const std::size_t childID, yli::ontology::Symbiosis* const child_pointer)
         {
             yli::hierarchy::set_child_pointer(childID, child_pointer, this->symbiosis_pointer_vector, this->free_symbiosisID_queue, &this->number_of_symbioses);
         }

@@ -5,7 +5,6 @@
 #include <cstddef>       // std::size_t
 #include <memory>        // std::make_shared, std::shared_ptr
 #include <queue>         // std::queue
-#include <stdint.h>      // uint32_t etc.
 #include <string>        // std::string
 #include <unordered_map> // std::unordered_map
 #include <vector>        // std::vector
@@ -122,7 +121,7 @@ namespace yli
                 yli::ontology::Entity* parent;
 
                 std::vector<yli::config::Setting*> setting_pointer_vector;
-                std::queue<int32_t> free_settingID_queue;
+                std::queue<std::size_t> free_settingID_queue;
                 std::size_t number_of_settings;
 
                 std::unordered_map<std::string, yli::config::Setting*> setting_pointer_map;

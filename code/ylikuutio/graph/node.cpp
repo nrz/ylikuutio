@@ -5,7 +5,6 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
-#include <stdint.h> // uint32_t etc.
 
 namespace graph
 {
@@ -45,7 +44,7 @@ namespace graph
         this->parent->set_node_pointer(this->childID, nullptr);
     }
 
-    void Node::create_unidirectional_link(int32_t nodeID)
+    void Node::create_unidirectional_link(std::size_t nodeID)
     {
         // this method creates an unidirectional link.
 
@@ -60,7 +59,7 @@ namespace graph
         // this->neighbor_nodeIDs.push_back(nodeID);
     }
 
-    void Node::create_bidirectional_link(int32_t nodeID)
+    void Node::create_bidirectional_link(std::size_t nodeID)
     {
         // create a link from this node to destination node.
         this->create_unidirectional_link(nodeID);
@@ -69,13 +68,13 @@ namespace graph
         static_cast<graph::Node*>(this->parent->get_node_pointer(childID))->create_unidirectional_link(this->childID);
     }
 
-    void Node::delete_unidirectional_link(int32_t nodeID)
+    void Node::delete_unidirectional_link(std::size_t nodeID)
     {
         // this method deletes an unidirectional link.
         this->neighbor_nodeIDs.erase(std::remove(this->neighbor_nodeIDs.begin(), this->neighbor_nodeIDs.end(), nodeID), this->neighbor_nodeIDs.end());
     }
 
-    void Node::delete_bidirectional_link(int32_t nodeID)
+    void Node::delete_bidirectional_link(std::size_t nodeID)
     {
         // this method deletes a bidirectional link.
         this->delete_unidirectional_link(nodeID);

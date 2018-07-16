@@ -5,9 +5,9 @@
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include standard headers
+#include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <memory>   // std::make_shared, std::shared_ptr
-#include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 #include <unordered_map> // std::unordered_map
 #include <vector>   // std::vector
@@ -26,7 +26,7 @@ namespace yli
             return std::make_shared<datatypes::AnyValue>(this->anyvalue_hashmap.at(name));
         }
 
-        std::shared_ptr<datatypes::AnyValue> CallbackObject::get_arg(const uint32_t arg_i) const
+        std::shared_ptr<datatypes::AnyValue> CallbackObject::get_arg(const std::size_t arg_i) const
         {
             if (arg_i >= this->callback_parameter_pointer_vector.size())
             {
@@ -93,13 +93,13 @@ namespace yli
 
             // destroy all callback parameters of this callback object.
             std::cout << "All callback parameters of this callback object will be destroyed.\n";
-            for (uint32_t child_i = 0; child_i < this->callback_parameter_pointer_vector.size(); child_i++)
+            for (std::size_t child_i = 0; child_i < this->callback_parameter_pointer_vector.size(); child_i++)
             {
                 delete this->callback_parameter_pointer_vector[child_i];
             }
         }
 
-        void CallbackObject::set_callback_parameter_pointer(const int32_t childID, yli::callback_system::CallbackParameter* const child_pointer)
+        void CallbackObject::set_callback_parameter_pointer(const std::size_t childID, yli::callback_system::CallbackParameter* const child_pointer)
         {
             this->callback_parameter_pointer_vector[childID] = child_pointer;
 
