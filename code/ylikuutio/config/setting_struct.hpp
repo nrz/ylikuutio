@@ -20,10 +20,10 @@ typedef struct SettingStruct
 {
     SettingStruct(std::shared_ptr<datatypes::AnyValue> initial_value)
         : initial_value(initial_value),
-        should_ylikuutio_call_activate_callback_now(true),
         setting_master(nullptr),
         activate_callback(nullptr),
-        read_callback(nullptr)
+        read_callback(nullptr),
+        should_ylikuutio_call_activate_callback_now(true)
     {
         // constructor.
     }
