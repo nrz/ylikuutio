@@ -2,21 +2,21 @@
 
 // Include standard headers
 #include <cmath>    // NAN, std::isnan, std::pow
+#include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <memory>   // std::make_shared, std::shared_ptr
-#include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
 
 namespace linear_algebra
 {
-    Matrix::Matrix(uint32_t height, uint32_t width)
+    Matrix::Matrix(std::size_t height, std::size_t width)
     {
         // constructor.
         this->width = width;
         this->height = height;
         this->array_of_arrays.resize(this->height);
 
-        for (uint32_t i = 0; i < this->height; i++)
+        for (std::size_t i = 0; i < this->height; i++)
         {
             this->array_of_arrays.at(i).resize(this->width);
         }
@@ -42,7 +42,7 @@ namespace linear_algebra
         this->height = old_matrix.height;
         this->array_of_arrays.resize(this->height);
 
-        for (uint32_t i = 0; i < this->height; i++)
+        for (std::size_t i = 0; i < this->height; i++)
         {
             this->array_of_arrays.at(i).resize(this->width);
         }
@@ -53,13 +53,13 @@ namespace linear_algebra
 
         // Copy values from old matrix (deep copy).
         // Don't care whether `old_matrix` is fully populated or not.
-        for (uint32_t y = 0; y < this->height; y++)
+        for (std::size_t y = 0; y < this->height; y++)
         {
             // Get the slices of both arrays.
             std::vector<float>& my_array = this->array_of_arrays.at(y);
             std::vector<float>& other_array = old_matrix.array_of_arrays.at(y);
 
-            for (uint32_t x = 0; x < this->width; x++)
+            for (std::size_t x = 0; x < this->width; x++)
             {
                 my_array[x] = other_array[x];
             }
@@ -79,9 +79,9 @@ namespace linear_algebra
     {
         std::shared_ptr<linear_algebra::Matrix> new_matrix = std::make_shared<linear_algebra::Matrix>(this->width, this->height); // Flip width and height.
 
-        for (uint32_t x = 0; x < this->width; x++)
+        for (std::size_t x = 0; x < this->width; x++)
         {
-            for (uint32_t y = 0; y < this->height; y++)
+            for (std::size_t y = 0; y < this->height; y++)
             {
                 *new_matrix << this->operator[](y).operator[](x);
             }
@@ -150,7 +150,7 @@ namespace linear_algebra
 
     void Matrix::operator<<(const std::vector<float>& rhs)
     {
-        uint32_t rhs_i = 0;
+        std::size_t rhs_i = 0;
 
         while (!this->is_fully_populated && rhs_i < rhs.size())
         {
@@ -182,13 +182,13 @@ namespace linear_algebra
             return false;
         }
 
-        for (uint32_t y = 0; y < this->height; y++)
+        for (std::size_t y = 0; y < this->height; y++)
         {
             // Get the slices of both arrays.
             std::vector<float>& my_array = this->array_of_arrays.at(y);
             std::vector<float>& other_array = rhs.array_of_arrays.at(y);
 
-            for (uint32_t x = 0; x < this->width; x++)
+            for (std::size_t x = 0; x < this->width; x++)
             {
                 if (my_array[x] != other_array[x])
                 {
@@ -211,13 +211,13 @@ namespace linear_algebra
             return true;
         }
 
-        for (uint32_t y = 0; y < this->height; y++)
+        for (std::size_t y = 0; y < this->height; y++)
         {
             // Get the slices of both arrays.
             std::vector<float>& my_array = this->array_of_arrays.at(y);
             std::vector<float>& other_array = rhs.array_of_arrays.at(y);
 
-            for (uint32_t x = 0; x < this->width; x++)
+            for (std::size_t x = 0; x < this->width; x++)
             {
                 if (my_array[x] != other_array[x])
                 {
@@ -232,12 +232,12 @@ namespace linear_algebra
 
     linear_algebra::Matrix& Matrix::operator++()
     {
-        for (uint32_t y = 0; y < this->height; y++)
+        for (std::size_t y = 0; y < this->height; y++)
         {
             // Get the slice.
             std::vector<float>& my_array = this->array_of_arrays.at(y);
 
-            for (uint32_t x = 0; x < this->width; x++)
+            for (std::size_t x = 0; x < this->width; x++)
             {
                 my_array[x]++;
             }
@@ -254,12 +254,12 @@ namespace linear_algebra
 
     linear_algebra::Matrix& Matrix::operator--()
     {
-        for (uint32_t y = 0; y < this->height; y++)
+        for (std::size_t y = 0; y < this->height; y++)
         {
             // Get the slice.
             std::vector<float>& my_array = this->array_of_arrays.at(y);
 
-            for (uint32_t x = 0; x < this->width; x++)
+            for (std::size_t x = 0; x < this->width; x++)
             {
                 my_array[x]--;
             }
@@ -276,12 +276,12 @@ namespace linear_algebra
 
     linear_algebra::Matrix& Matrix::operator+=(const float rhs)
     {
-        for (uint32_t y = 0; y < this->height; y++)
+        for (std::size_t y = 0; y < this->height; y++)
         {
             // Get the slice.
             std::vector<float>& my_array = this->array_of_arrays.at(y);
 
-            for (uint32_t x = 0; x < this->width; x++)
+            for (std::size_t x = 0; x < this->width; x++)
             {
                 my_array[x] += rhs;
             }
@@ -291,12 +291,12 @@ namespace linear_algebra
 
     linear_algebra::Matrix& Matrix::operator-=(const float rhs)
     {
-        for (uint32_t y = 0; y < this->height; y++)
+        for (std::size_t y = 0; y < this->height; y++)
         {
             // Get the slice.
             std::vector<float>& my_array = this->array_of_arrays.at(y);
 
-            for (uint32_t x = 0; x < this->width; x++)
+            for (std::size_t x = 0; x < this->width; x++)
             {
                 my_array[x] -= rhs;
             }
@@ -306,12 +306,12 @@ namespace linear_algebra
 
     linear_algebra::Matrix& Matrix::operator*=(const float rhs)
     {
-        for (uint32_t y = 0; y < this->height; y++)
+        for (std::size_t y = 0; y < this->height; y++)
         {
             // Get the slice.
             std::vector<float>& my_array = this->array_of_arrays.at(y);
 
-            for (uint32_t x = 0; x < this->width; x++)
+            for (std::size_t x = 0; x < this->width; x++)
             {
                 my_array[x] *= rhs;
             }
@@ -321,12 +321,12 @@ namespace linear_algebra
 
     linear_algebra::Matrix& Matrix::operator/=(const float rhs)
     {
-        for (uint32_t y = 0; y < this->height; y++)
+        for (std::size_t y = 0; y < this->height; y++)
         {
             // Get the slice.
             std::vector<float>& my_array = this->array_of_arrays.at(y);
 
-            for (uint32_t x = 0; x < this->width; x++)
+            for (std::size_t x = 0; x < this->width; x++)
             {
                 my_array[x] *= rhs;
             }
@@ -336,13 +336,13 @@ namespace linear_algebra
 
     linear_algebra::Matrix& Matrix::operator+=(linear_algebra::Matrix& rhs)
     {
-        for (uint32_t y = 0; y < this->height; y++)
+        for (std::size_t y = 0; y < this->height; y++)
         {
             // Get the slices of both arrays.
             std::vector<float>& my_array = this->array_of_arrays.at(y);
             std::vector<float>& other_array = rhs.array_of_arrays.at(y);
 
-            for (uint32_t x = 0; x < this->width; x++)
+            for (std::size_t x = 0; x < this->width; x++)
             {
                 my_array[x] += other_array[x];
             }
@@ -352,13 +352,13 @@ namespace linear_algebra
 
     linear_algebra::Matrix& Matrix::operator-=(linear_algebra::Matrix& rhs)
     {
-        for (uint32_t y = 0; y < this->height; y++)
+        for (std::size_t y = 0; y < this->height; y++)
         {
             // Get the slices of both arrays.
             std::vector<float>& my_array = this->array_of_arrays.at(y);
             std::vector<float>& other_array = rhs.array_of_arrays.at(y);
 
-            for (uint32_t x = 0; x < this->width; x++)
+            for (std::size_t x = 0; x < this->width; x++)
             {
                 my_array[x] -= other_array[x];
             }
@@ -381,13 +381,13 @@ namespace linear_algebra
         }
 
         // OK, dimensions match.
-        uint32_t target_height = lhs.height;
-        uint32_t target_width = lhs.width;
+        std::size_t target_height = lhs.height;
+        std::size_t target_width = lhs.width;
         linear_algebra::Matrix result_matrix(target_height, target_width);
 
-        for (uint32_t y = 0; y < target_height; y++)
+        for (std::size_t y = 0; y < target_height; y++)
         {
-            for (uint32_t x = 0; x < target_width; x++)
+            for (std::size_t x = 0; x < target_width; x++)
             {
                 result_matrix << lhs.operator[](y).operator[](x) + rhs.operator[](y).operator[](x);
             }
@@ -410,13 +410,13 @@ namespace linear_algebra
         }
 
         // OK, dimensions match.
-        uint32_t target_height = lhs.height;
-        uint32_t target_width = lhs.width;
+        std::size_t target_height = lhs.height;
+        std::size_t target_width = lhs.width;
         linear_algebra::Matrix result_matrix(target_height, target_width);
 
-        for (uint32_t y = 0; y < target_height; y++)
+        for (std::size_t y = 0; y < target_height; y++)
         {
-            for (uint32_t x = 0; x < target_width; x++)
+            for (std::size_t x = 0; x < target_width; x++)
             {
                 result_matrix << lhs.operator[](y).operator[](x) - rhs.operator[](y).operator[](x);
             }
@@ -439,17 +439,17 @@ namespace linear_algebra
         }
 
         // OK, dimensions match.
-        uint32_t target_height = lhs.height;
-        uint32_t target_width = rhs.width;
+        std::size_t target_height = lhs.height;
+        std::size_t target_width = rhs.width;
         linear_algebra::Matrix result_matrix(target_height, target_width);
 
-        for (uint32_t target_y = 0; target_y < target_height; target_y++)
+        for (std::size_t target_y = 0; target_y < target_height; target_y++)
         {
-            for (uint32_t target_x = 0; target_x < target_width; target_x++)
+            for (std::size_t target_x = 0; target_x < target_width; target_x++)
             {
                 float target_value = 0.0f;
 
-                for (uint32_t lhs_x = 0, rhs_y = 0; lhs_x < lhs.width && rhs_y < rhs.height; lhs_x++, rhs_y++)
+                for (std::size_t lhs_x = 0, rhs_y = 0; lhs_x < lhs.width && rhs_y < rhs.height; lhs_x++, rhs_y++)
                 {
                     // target_value += lhs[target_y][lhs_x] * rhs[rhs_y][target_x];
 

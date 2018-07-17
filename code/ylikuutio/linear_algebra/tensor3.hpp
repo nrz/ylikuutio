@@ -4,8 +4,8 @@
 #include "matrix.hpp"
 
 // Include standard headers
+#include <cstddef>  // std::size_t
 #include <memory>   // std::make_shared, std::shared_ptr
-#include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
 
 namespace linear_algebra
@@ -20,7 +20,7 @@ namespace linear_algebra
 
         public:
             // constructor.
-            Tensor3(uint32_t height, uint32_t width, uint32_t depth);
+            Tensor3(std::size_t height, std::size_t width, std::size_t depth);
 
             // copy constructor.
             Tensor3(linear_algebra::Tensor3& old_tensor3);
@@ -41,7 +41,7 @@ namespace linear_algebra
                         public:
                             Proxy(std::vector<float>& proxy_array) : proxy_array(proxy_array) { }
 
-                            float& operator[](const uint32_t index)
+                            float& operator[](const std::size_t index)
                             {
                                 return proxy_array[index];
                             }
@@ -50,7 +50,7 @@ namespace linear_algebra
                             std::vector<float>& proxy_array;
                     };
 
-                    Proxy operator[](const uint32_t index)
+                    Proxy operator[](const std::size_t index)
                     {
                         return array_of_arrays[index];
                     }
@@ -63,15 +63,15 @@ namespace linear_algebra
             void operator<<(const std::vector<float>& rhs);
             bool operator==(linear_algebra::Tensor3& rhs);
             bool operator!=(linear_algebra::Tensor3& rhs);
-            Proxy2D operator[](const uint32_t index)
+            Proxy2D operator[](const std::size_t index)
             {
                 return Proxy2D(array_of_arrays_of_arrays[index]);
             }
 
             bool is_cube;
-            uint32_t width;
-            uint32_t height;
-            uint32_t depth;
+            std::size_t width;
+            std::size_t height;
+            std::size_t depth;
 
         private:
             bool is_fully_populated;
@@ -79,9 +79,9 @@ namespace linear_algebra
             // For populating, the order of coordinates from
             // the one changing fastest to the one changing slowest is:
             // x, y, z
-            int32_t next_x_to_populate;
-            int32_t next_y_to_populate;
-            int32_t next_z_to_populate;
+            std::size_t next_x_to_populate;
+            std::size_t next_y_to_populate;
+            std::size_t next_z_to_populate;
 
             std::vector<std::vector<std::vector<float>>> array_of_arrays_of_arrays;
     };

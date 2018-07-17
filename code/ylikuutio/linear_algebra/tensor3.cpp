@@ -2,7 +2,7 @@
 #include "matrix.hpp"
 
 // Include standard headers
-#include <stdint.h> // uint32_t etc.
+#include <cstddef>  // std::size_t
 #include <vector>   // std::vector
 
 namespace linear_algebra
@@ -13,7 +13,7 @@ namespace linear_algebra
     // x = 0 is the leftmost slice.
     // z = 0 is the front slice.
 
-    Tensor3::Tensor3(uint32_t height, uint32_t width, uint32_t depth)
+    Tensor3::Tensor3(std::size_t height, std::size_t width, std::size_t depth)
     {
         // constructor.
         this->width = width;
@@ -21,11 +21,11 @@ namespace linear_algebra
         this->depth = depth;
         this->array_of_arrays_of_arrays.resize(this->height);
 
-        for (uint32_t y = 0; y < this->height; y++)
+        for (std::size_t y = 0; y < this->height; y++)
         {
             this->array_of_arrays_of_arrays.at(y).resize(this->width);
 
-            for (uint32_t x = 0; x < this->width; x++)
+            for (std::size_t x = 0; x < this->width; x++)
             {
                 this->array_of_arrays_of_arrays.at(y).at(x).resize(this->depth);
             }
@@ -54,11 +54,11 @@ namespace linear_algebra
         this->depth = old_tensor3.depth;
         this->array_of_arrays_of_arrays.resize(this->height);
 
-        for (uint32_t y = 0; y < this->height; y++)
+        for (std::size_t y = 0; y < this->height; y++)
         {
             this->array_of_arrays_of_arrays.at(y).resize(this->width);
 
-            for (uint32_t x = 0; x < this->width; x++)
+            for (std::size_t x = 0; x < this->width; x++)
             {
                 this->array_of_arrays_of_arrays.at(y).at(x).resize(this->depth);
             }
@@ -88,11 +88,11 @@ namespace linear_algebra
         this->depth = 1;
         this->array_of_arrays_of_arrays.resize(this->height);
 
-        for (uint32_t y = 0; y < this->height; y++)
+        for (std::size_t y = 0; y < this->height; y++)
         {
             this->array_of_arrays_of_arrays.at(y).resize(this->width);
 
-            for (uint32_t x = 0; x < this->width; x++)
+            for (std::size_t x = 0; x < this->width; x++)
             {
                 this->array_of_arrays_of_arrays.at(y).at(x).resize(this->depth);
             }
@@ -139,7 +139,7 @@ namespace linear_algebra
 
     void Tensor3::operator<<(const std::vector<float>& rhs)
     {
-        uint32_t rhs_i = 0;
+        std::size_t rhs_i = 0;
 
         while (!this->is_fully_populated && rhs_i < rhs.size())
         {
@@ -178,18 +178,18 @@ namespace linear_algebra
             return false;
         }
 
-        for (uint32_t y = 0; y < this->height; y++)
+        for (std::size_t y = 0; y < this->height; y++)
         {
             // Get the slices of both arrays.
             std::vector<std::vector<float>>& my_array_of_arrays = this->array_of_arrays_of_arrays[y];
             std::vector<std::vector<float>>& other_array_of_arrays = rhs.array_of_arrays_of_arrays[y];
 
-            for (uint32_t x = 0; x < this->width; x++)
+            for (std::size_t x = 0; x < this->width; x++)
             {
                 std::vector<float>& my_array = my_array_of_arrays[x];
                 std::vector<float>& other_array = other_array_of_arrays[x];
 
-                for (uint32_t z = 0; z < this->depth; z++)
+                for (std::size_t z = 0; z < this->depth; z++)
                 {
                     if (my_array[z] != other_array[z])
                     {
@@ -214,18 +214,18 @@ namespace linear_algebra
             return true;
         }
 
-        for (uint32_t y = 0; y < this->height; y++)
+        for (std::size_t y = 0; y < this->height; y++)
         {
             // Get the slices of both arrays.
             std::vector<std::vector<float>>& my_array_of_arrays = this->array_of_arrays_of_arrays[y];
             std::vector<std::vector<float>>& other_array_of_arrays = rhs.array_of_arrays_of_arrays[y];
 
-            for (uint32_t x = 0; x < this->width; x++)
+            for (std::size_t x = 0; x < this->width; x++)
             {
                 std::vector<float>& my_array = my_array_of_arrays[x];
                 std::vector<float>& other_array = other_array_of_arrays[x];
 
-                for (uint32_t z = 0; z < this->depth; z++)
+                for (std::size_t z = 0; z < this->depth; z++)
                 {
                     if (my_array[z] != other_array[z])
                     {
