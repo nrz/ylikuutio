@@ -16,11 +16,12 @@
 #endif
 
 // Include standard headers
+#include <cstddef>       // std::size_t
 #include <iterator>      // std::back_inserter
 #include <iostream>      // std::cout, std::cin, std::cerr
+#include <limits>        // std::numeric_limits
 #include <list>          // std::list
 #include <memory>        // std::make_shared, std::shared_ptr
-#include <stdint.h>      // uint32_t etc.
 #include <unordered_map> // std::unordered_map
 #include <vector>        // std::vector
 
@@ -35,8 +36,8 @@ namespace yli
             this->cursor_index = 0;
             this->in_history = false;
             this->in_historical_input = false;
-            this->history_line_i = -1;     // some dummy value.
-            this->historical_input_i = -1; // some dummy value.
+            this->history_line_i = std::numeric_limits<std::size_t>::max();     // some dummy value.
+            this->historical_input_i = std::numeric_limits<std::size_t>::max(); // some dummy value.
             this->in_console = false;
             this->can_enter_console = true;
             this->can_exit_console = false;
@@ -219,7 +220,7 @@ namespace yli
             // This function is to be called from console command callbacks to print text on console.
             // Please note that it is not necessary to be in console to be able to print in console.
             std::list<char> text_char_list;
-            int32_t current_line_length = 0;
+            std::size_t current_line_length = 0;
 
             for (const char& my_char : text)
             {
@@ -262,7 +263,7 @@ namespace yli
             if (this->in_console)
             {
                 // Convert current input into std::string.
-                int32_t characters_for_line = this->universe->get_window_width() / this->universe->get_text_size();
+                std::size_t characters_for_line = this->universe->get_window_width() / this->universe->get_text_size();
 
                 // Draw the console to screen using `font2D::printText2D`.
                 PrintingStruct printing_struct;
@@ -279,9 +280,9 @@ namespace yli
 
                 if (this->in_history)
                 {
-                    int32_t history_end_i = history_line_i + this->n_rows;
+                    std::size_t history_end_i = history_line_i + this->n_rows;
 
-                    for (int32_t history_i = history_line_i; history_i < history_end_i && history_i < this->console_history.size(); history_i++)
+                    for (std::size_t history_i = history_line_i; history_i < history_end_i && history_i < this->console_history.size(); history_i++)
                     {
                         std::list<char> historical_text = this->console_history.at(history_i);
                         printing_struct.text += yli::string::convert_std_list_char_to_std_string(historical_text, characters_for_line, characters_for_line) + "\\n";
@@ -289,9 +290,9 @@ namespace yli
                 }
                 else
                 {
-                    int32_t n_lines_of_current_input = (this->prompt.size() + this->current_input.size() - 1) / this->n_columns + 1;
+                    std::size_t n_lines_of_current_input = (this->prompt.size() + this->current_input.size() - 1) / this->n_columns + 1;
 
-                    int32_t history_start_i;
+                    std::size_t history_start_i;
 
                     if (n_lines_of_current_input > this->n_rows)
                     {
@@ -314,7 +315,7 @@ namespace yli
                                 this->n_columns);
 
                         // Print only n last lines.
-                        for (int32_t i = current_input_vector.size() - this->n_rows; i < current_input_vector.size(); i++)
+                        for (std::size_t i = current_input_vector.size() - this->n_rows; i < current_input_vector.size(); i++)
                         {
                             printing_struct.text += current_input_vector.at(i) + "\\n";
                         }
@@ -335,7 +336,7 @@ namespace yli
                         }
 
                         // We are not in history so print everything to the end of the history.
-                        for (int32_t history_i = history_start_i; history_i < this->console_history.size(); history_i++)
+                        for (std::size_t history_i = history_start_i; history_i < this->console_history.size(); history_i++)
                         {
                             std::list<char> historical_text = this->console_history.at(history_i);
                             printing_struct.text += yli::string::convert_std_list_char_to_std_string(historical_text, characters_for_line, characters_for_line) + "\\n";

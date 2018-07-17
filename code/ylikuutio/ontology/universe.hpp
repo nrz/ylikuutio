@@ -34,7 +34,6 @@
 #include <memory>        // std::make_shared, std::shared_ptr
 #include <queue>         // std::queue
 #include <unordered_map> // std::unordered_map
-#include <stdint.h>      // uint32_t etc.
 #include <string>        // std::string
 #include <vector>        // std::vector
 
@@ -426,16 +425,16 @@ namespace yli
                 GLFWwindow* get_window() const;
 
                 // this method returns current `window_width`.
-                int32_t get_window_width() const;
+                std::size_t get_window_width() const;
 
                 // this method returns current `window_height`.
-                int32_t get_window_height() const;
+                std::size_t get_window_height() const;
 
                 // this method returns current `text_size`.
-                int32_t get_text_size() const;
+                std::size_t get_text_size() const;
 
                 // this method returns current `font_size`.
-                int32_t get_font_size() const;
+                std::size_t get_font_size() const;
 
                 // this method computes the new delta time and returns it.
                 float compute_delta_time();
@@ -447,7 +446,7 @@ namespace yli
                 void finalize_delta_time_loop();
 
                 // this method returns current `max_FPS`.
-                uint32_t get_max_FPS() const;
+                std::size_t get_max_FPS() const;
 
                 void set(std::string& setting_name, std::shared_ptr<datatypes::AnyValue> setting_any_value);
 
@@ -563,8 +562,8 @@ namespace yli
 
                 // Variables related to the window.
                 GLFWwindow* window;
-                int32_t window_width;
-                int32_t window_height;
+                std::size_t window_width;
+                std::size_t window_height;
                 std::string window_title;
                 bool is_headless;
 
@@ -575,11 +574,11 @@ namespace yli
                 GLfloat initialFoV;   // at the moment all cameras use the same FoV.
 
                 // Variables related to the fonts and texts used.
-                int32_t text_size;
-                int32_t font_size;
+                std::size_t text_size;
+                std::size_t font_size;
 
                 // Variables related to timing of events.
-                uint32_t max_FPS;
+                std::size_t max_FPS;
                 float delta_time;
 
                 double last_time_before_reading_keyboard;

@@ -60,7 +60,6 @@
 #include <inttypes.h>    // PRId32, PRId64, PRIu32, PRIu64, PRIx32, PRIx64
 #include <iostream>      // std::cout, std::cin, std::cerr
 #include <memory>        // std::make_shared, std::shared_ptr
-#include <stdint.h>      // uint32_t etc.
 #include <string>        // std::string
 #include <unordered_map> // std::unordered_map
 #include <vector>        // std::vector
@@ -175,22 +174,22 @@ namespace yli
             return this->window;
         }
 
-        int32_t Universe::get_window_width() const
+        std::size_t Universe::get_window_width() const
         {
             return this->window_width;
         }
 
-        int32_t Universe::get_window_height() const
+        std::size_t Universe::get_window_height() const
         {
             return this->window_height;
         }
 
-        int32_t Universe::get_text_size() const
+        std::size_t Universe::get_text_size() const
         {
             return this->text_size;
         }
 
-        int32_t Universe::get_font_size() const
+        std::size_t Universe::get_font_size() const
         {
             return this->font_size;
         }
@@ -219,7 +218,7 @@ namespace yli
             this->last_time_before_reading_keyboard = this->current_time_before_reading_keyboard;
         }
 
-        uint32_t Universe::get_max_FPS() const
+        std::size_t Universe::get_max_FPS() const
         {
             return this->max_FPS;
         }
