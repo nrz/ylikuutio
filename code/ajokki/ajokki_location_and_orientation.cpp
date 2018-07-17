@@ -132,7 +132,7 @@ namespace ajokki
         new yli::config::Setting(vertical_angle_setting_struct);
 
         float right = NAN; // the value does not matter, `right` is read with a read callback.
-        SettingStruct right_setting_struct(std::make_shared<datatypes::AnyValue>(vertical_angle));
+        SettingStruct right_setting_struct(std::make_shared<datatypes::AnyValue>(right));
         right_setting_struct.name = "right";
         right_setting_struct.setting_master = setting_master;
         right_setting_struct.read_callback = &yli::config::SettingMaster::read_right;
@@ -141,7 +141,7 @@ namespace ajokki
         new yli::config::Setting(right_setting_struct);
 
         float up = NAN; // the value does not matter, `up` is read with a read callback.
-        SettingStruct up_setting_struct(std::make_shared<datatypes::AnyValue>(vertical_angle));
+        SettingStruct up_setting_struct(std::make_shared<datatypes::AnyValue>(up));
         up_setting_struct.name = "up";
         up_setting_struct.setting_master = setting_master;
         up_setting_struct.read_callback = &yli::config::SettingMaster::read_up;
