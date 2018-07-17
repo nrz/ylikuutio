@@ -40,7 +40,7 @@ namespace yli
                 object_struct.is_character = true;
                 object_struct.cartesian_coordinates = text3D->cartesian_coordinates; // TODO: adjust this as needed.
                 object_struct.rotate_vector = text3D->rotate_vector;
-                yli::ontology::Object* object = new yli::ontology::Object(text3D->universe, object_struct);
+                new yli::ontology::Object(text3D->universe, object_struct);
             }
 
             // TODO: Add support for Unicode strings.
