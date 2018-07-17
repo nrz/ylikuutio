@@ -6,6 +6,7 @@
 // Include standard headers
 #include <cmath>    // NAN, std::isnan, std::pow
 #include <memory>   // std::make_shared, std::shared_ptr
+#include <stdint.h> // uint32_t etc.
 
 namespace linear_algebra
 {
