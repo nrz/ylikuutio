@@ -140,9 +140,6 @@ namespace loaders
         int32_t image_height;
         std::size_t image_size;
 
-        uint32_t x_step = 1;
-        uint32_t z_step = 1;
-
         uint8_t* image_data = load_BMP_file(filename, image_width, image_height, image_size);
 
         return load_texture(image_data, image_width, image_height, true);
@@ -215,7 +212,6 @@ namespace loaders
         /* close the file pointer */
         std::fclose(fp);
 
-        uint32_t components = (fourCC == FOURCC_DXT1) ? 3 : 4;
         uint32_t format;
         switch(fourCC)
         {

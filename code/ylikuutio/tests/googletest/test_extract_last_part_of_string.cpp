@@ -10,7 +10,6 @@ TEST(extract_last_part_of_string, nothing_must_be_extracted_when_source_string_i
 {
     char text[] = "";
 
-    const char end_string[] = "";
     const std::size_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -25,7 +24,6 @@ TEST(extract_last_part_of_string, nothing_must_be_extracted_when_source_string_i
 {
     char text[] = "a";
 
-    const char end_string[] = "";
     const std::size_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -40,7 +38,6 @@ TEST(extract_last_part_of_string, nothing_must_be_extracted_when_source_string_i
 {
     char text[] = "aa";
 
-    const char end_string[] = "";
     const std::size_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -55,7 +52,6 @@ TEST(extract_last_part_of_string, nothing_must_be_extracted_when_source_string_i
 {
     char text[] = "ab";
 
-    const char end_string[] = "";
     const std::size_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -70,7 +66,6 @@ TEST(extract_last_part_of_string, nothing_must_be_extracted_when_source_string_i
 {
     char text[] = "abc";
 
-    const char end_string[] = "";
     const std::size_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -85,7 +80,6 @@ TEST(extract_last_part_of_string, nothing_must_be_extracted_when_source_string_i
 {
     char text[] = "ab";
 
-    const char end_string[] = "";
     const std::size_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -100,7 +94,6 @@ TEST(extract_last_part_of_string, nothing_must_be_extracted_when_source_string_i
 {
     char text[] = "aa";
 
-    const char end_string[] = "";
     const std::size_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -115,7 +108,6 @@ TEST(extract_last_part_of_string, nothing_must_be_extracted_when_source_string_i
 {
     char text[] = "aaa";
 
-    const char end_string[] = "";
     const std::size_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -130,7 +122,6 @@ TEST(extract_last_part_of_string, 1_char_must_be_extracted_when_source_string_is
 {
     char text[] = "ab";
 
-    const char end_string[] = "";
     const std::size_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -146,7 +137,6 @@ TEST(extract_last_part_of_string, nothing_must_be_extracted_when_source_string_i
 {
     char text[] = "abc";
 
-    const char end_string[] = "";
     const std::size_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -161,7 +151,6 @@ TEST(extract_last_part_of_string, 1_char_must_be_extracted_when_source_string_is
 {
     char text[] = "abc";
 
-    const char end_string[] = "";
     const std::size_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;
@@ -177,7 +166,6 @@ TEST(extract_last_part_of_string, 2_chars_must_be_extracted_when_source_string_i
 {
     char text[] = "abc";
 
-    const char end_string[] = "";
     const std::size_t array_size = 128;
     char* dest_array = new char[array_size];
     const char* orig_dest_array = dest_array;

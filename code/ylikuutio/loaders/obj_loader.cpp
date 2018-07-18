@@ -77,8 +77,6 @@ namespace loaders
 
             // Note: `"vt"` and `"vn"` needs to be checked for before `"v"`!
 
-            const char* whitespace_char_end_string = " \t\n";
-            int32_t current_line_string_i = 0;
             std::stringstream current_line_stringstream = std::stringstream(current_line_string);
             std::string prefix;
 

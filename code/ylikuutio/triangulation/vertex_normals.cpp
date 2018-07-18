@@ -182,8 +182,6 @@ namespace yli
 
                 // Compute the normal of the southwesternmost vertex.
                 // Number of adjacent faces: 2.
-                glm::vec3 vertex_normal;
-
                 temp_normals.push_back(glm::normalize(
                             get_face_normal_for_SW_NE(face_normal_vector_vec3, x, z, ENE_CODE_FOR_SW_NE, actual_image_width) +
                             get_face_normal_for_SW_NE(face_normal_vector_vec3, x, z, NNE_CODE_FOR_SW_NE, actual_image_width)));
@@ -268,7 +266,6 @@ namespace yli
 
                 // Compute the normal of the southwesternmost vertex.
                 // Number of adjacent faces: 1.
-                glm::vec3 vertex_normal;
                 temp_normals.push_back(get_face_normal_for_SE_NW(face_normal_vector_vec3, x, z, NE_CODE_FOR_SE_NW, actual_image_width));
 
                 // Compute the normals of southern vertices.

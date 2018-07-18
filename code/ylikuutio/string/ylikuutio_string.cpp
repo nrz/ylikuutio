@@ -98,7 +98,6 @@ namespace yli
             while (src_data_pointer + 1 < src_base_pointer + src_data_size &&
                     dest_data_pointer + 1 < dest_base_pointer + dest_data_size)
             {
-                uint32_t n_of_ending_characters = std::strlen(char_end_string);
                 const char* end_char_pointer;
                 end_char_pointer = char_end_string;
 
@@ -135,7 +134,6 @@ namespace yli
             while (data_index < data_string.size() &&
                     dest_data_pointer + 1 < dest_base_pointer + dest_data_size)
             {
-                uint32_t n_of_ending_characters = std::strlen(char_end_string);
                 const char* end_char_pointer;
                 end_char_pointer = char_end_string;
                 const std::string current_char_string = data_string.substr(data_index, 1);
@@ -172,7 +170,6 @@ namespace yli
 
             while (data_index < data_string.size())
             {
-                uint32_t n_of_ending_characters = std::strlen(char_end_string);
                 const char* end_char_pointer;
                 end_char_pointer = char_end_string;
                 const std::string current_char_string = data_string.substr(data_index, 1);
@@ -376,7 +373,6 @@ namespace yli
                     return 0xdfff; // invalid unicode!
                 }
 
-                char current_char = *unicode_char_pointer;
                 hex_string.append(unicode_char_pointer);
             }
 
