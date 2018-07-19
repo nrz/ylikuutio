@@ -8,6 +8,7 @@
 #endif
 
 // Include standard headers
+#include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 #include <vector>   // std::vector
 

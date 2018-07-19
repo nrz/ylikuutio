@@ -16,6 +16,7 @@
 
 // Include standard headers
 #include <cstring> // std::memcmp, std::strcmp, std::strlen, std::strncmp
+#include <stdint.h> // uint32_t etc.
 #include <string>  // std::string
 #include <vector>  // std::vector
 
