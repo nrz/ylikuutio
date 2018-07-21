@@ -17,7 +17,6 @@
 
 // Include standard headers
 #include <cstddef>  // std::size_t
-#include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
 
 namespace yli
@@ -27,9 +26,9 @@ namespace yli
         template<class T1>
             T1 get_y(
                     const T1* const vertex_data,
-                    const int32_t x,
-                    const int32_t z,
-                    const int32_t image_width)
+                    const std::size_t x,
+                    const std::size_t z,
+                    const std::size_t image_width)
             {
                 // This function returns the altitude value based on x & z coordinates.
                 // This works only for a raw heightmap data (for a 2D array of altitudes).
@@ -39,27 +38,27 @@ namespace yli
 
         // for bilinear interpolation.
         template<class T1>
-            float southwest_y(const int32_t x, const int32_t z, const T1* const input_vertex_pointer, const int32_t image_width, const int32_t x_step, const int32_t z_step)
+            float southwest_y(const std::size_t x, const std::size_t z, const T1* const input_vertex_pointer, const std::size_t image_width, const std::size_t x_step, const std::size_t z_step)
             {
                 return static_cast<float>(yli::geometry::get_y(input_vertex_pointer, x - x_step, z - z_step, image_width));
             }
         template<class T1>
-            float southeast_y(const int32_t x, const int32_t z, const T1* const input_vertex_pointer, const int32_t image_width, const int32_t x_step, const int32_t z_step)
+            float southeast_y(const std::size_t x, const std::size_t z, const T1* const input_vertex_pointer, const std::size_t image_width, const std::size_t x_step, const std::size_t z_step)
             {
                 return static_cast<float>(yli::geometry::get_y(input_vertex_pointer, x, z - z_step, image_width));
             }
         template<class T1>
-            float northwest_y(const int32_t x, const int32_t z, const T1* const input_vertex_pointer, const int32_t image_width, const int32_t x_step, const int32_t z_step)
+            float northwest_y(const std::size_t x, const std::size_t z, const T1* const input_vertex_pointer, const std::size_t image_width, const std::size_t x_step, const std::size_t z_step)
             {
                 return static_cast<float>(yli::geometry::get_y(input_vertex_pointer, x - x_step, z, image_width));
             }
         template<class T1>
-            float northeast_y(const int32_t x, const int32_t z, const T1* const input_vertex_pointer, const int32_t image_width, const int32_t x_step, const int32_t z_step)
+            float northeast_y(const std::size_t x, const std::size_t z, const T1* const input_vertex_pointer, const std::size_t image_width, const std::size_t x_step, const std::size_t z_step)
             {
                 return static_cast<float>(yli::geometry::get_y(input_vertex_pointer, x, z, image_width));
             }
         template<class T1>
-            float center_y(const int32_t x, const int32_t z, const T1* const input_vertex_pointer, const int32_t image_width, const int32_t x_step, const int32_t z_step)
+            float center_y(const std::size_t x, const std::size_t z, const T1* const input_vertex_pointer, const std::size_t image_width, const std::size_t x_step, const std::size_t z_step)
             {
                 return static_cast<float>(southwest_y(x, z, input_vertex_pointer, image_width, x_step, z_step) +
                         southeast_y(x, z, input_vertex_pointer, image_width, x_step, z_step) +
@@ -70,23 +69,29 @@ namespace yli
         template<class T1>
             bool define_vertices(
                     const T1* const input_vertex_pointer,
-                    const int32_t image_width,
-                    const int32_t image_height,
-                    const int32_t x_step,
-                    const int32_t z_step,
+                    const std::size_t image_width,
+                    const std::size_t image_height,
+                    const std::size_t x_step,
+                    const std::size_t z_step,
                     const bool should_ylikuutio_use_real_texture_coordinates,
                     std::vector<glm::vec3>& temp_vertices,
                     std::vector<glm::vec2>& temp_UVs)
             {
-                if (image_width < 0 || image_height < 0)
+                if (image_width < 2 || image_height < 2)
                 {
-                    // Can not define vertices if image width < 0 or image height < 0.
+                    // Can not define vertices if image width < 2 or image height < 2.
                     return false;
                 }
 
-                const int32_t actual_image_width = image_width / x_step;
-                const int32_t actual_image_height = image_height / z_step;
-                int32_t number_of_vertices = actual_image_width * actual_image_height;
+                if (x_step <= 0 || z_step <= 0)
+                {
+                    // Can not define vertices if x_step <= 0 or z_step <= 0.
+                    return false;
+                }
+
+                const std::size_t actual_image_width = image_width / x_step;
+                const std::size_t actual_image_height = image_height / z_step;
+                std::size_t number_of_vertices = actual_image_width * actual_image_height;
                 temp_vertices.reserve(number_of_vertices);
                 temp_UVs.reserve(number_of_vertices);
 
@@ -141,10 +146,10 @@ namespace yli
         template<class T1>
             const bool interpolate_and_define_vertices_using_bilinear_interpolation(
                     const T1* const input_vertex_pointer,
-                    const int32_t image_width,
-                    const int32_t image_height,
-                    const int32_t x_step,
-                    const int32_t z_step,
+                    const std::size_t image_width,
+                    const std::size_t image_height,
+                    const std::size_t x_step,
+                    const std::size_t z_step,
                     const bool should_ylikuutio_use_real_texture_coordinates,
                     std::vector<glm::vec3>& temp_vertices,
                     std::vector<glm::vec2>& temp_UVs)

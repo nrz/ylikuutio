@@ -20,7 +20,7 @@
 #endif
 
 // Include standard headers
-#include <stdint.h> // uint32_t etc.
+#include <cstddef>  // std::size_t
 #include <vector>   // std::vector
 
 namespace yli
@@ -30,42 +30,42 @@ namespace yli
         bool compute_face_normals(
                 std::vector<glm::vec3>& temp_vertices,
                 std::vector<glm::vec3>& face_normal_vector_vec3,
-                const int32_t actual_image_width,
-                const int32_t actual_image_height,
+                const std::size_t actual_image_width,
+                const std::size_t actual_image_height,
                 const bool is_bilinear_interpolation_in_use,
                 const bool is_southwest_northeast_edges_in_use,
                 const bool is_southeast_northwest_edges_in_use);
 
         glm::vec3 get_face_normal(
                 const std::vector<glm::vec3>& face_normal_data,
-                const int32_t x,
-                const int32_t z,
+                const std::size_t x,
+                const std::size_t z,
                 const BilinearDirections compass_point_code,
-                const int32_t actual_image_width);
+                const std::size_t actual_image_width);
 
         // for bilinear interpolation.
         // These functions exist to avoid need to remember
         // the array order when calling `yli::geometry::get_face_normal`.
-        glm::vec3 s_face_normal(const std::vector<glm::vec3>& face_normal_vector_vec3, const int32_t x, const int32_t z, const int32_t image_width);
-        glm::vec3 w_face_normal(const std::vector<glm::vec3>& face_normal_vector_vec3, const int32_t x, const int32_t z, const int32_t image_width);
-        glm::vec3 n_face_normal(const std::vector<glm::vec3>& face_normal_vector_vec3, const int32_t x, const int32_t z, const int32_t image_width);
-        glm::vec3 e_face_normal(const std::vector<glm::vec3>& face_normal_vector_vec3, const int32_t x, const int32_t z, const int32_t image_width);
+        glm::vec3 s_face_normal(const std::vector<glm::vec3>& face_normal_vector_vec3, const std::size_t x, const std::size_t z, const std::size_t image_width);
+        glm::vec3 w_face_normal(const std::vector<glm::vec3>& face_normal_vector_vec3, const std::size_t x, const std::size_t z, const std::size_t image_width);
+        glm::vec3 n_face_normal(const std::vector<glm::vec3>& face_normal_vector_vec3, const std::size_t x, const std::size_t z, const std::size_t image_width);
+        glm::vec3 e_face_normal(const std::vector<glm::vec3>& face_normal_vector_vec3, const std::size_t x, const std::size_t z, const std::size_t image_width);
 
         // for southeast-northwest edges.
         glm::vec3 get_face_normal_for_SE_NW(
                 const std::vector<glm::vec3>& face_normal_data,
-                const int32_t x,
-                const int32_t z,
+                const std::size_t x,
+                const std::size_t z,
                 const SoutheastNorthwestEdgesDirections compass_point_code,
-                const int32_t image_width);
+                const std::size_t image_width);
 
         // for southwest-northeast edges.
         glm::vec3 get_face_normal_for_SW_NE(
                 const std::vector<glm::vec3>& face_normal_data,
-                const int32_t x,
-                const int32_t z,
+                const std::size_t x,
+                const std::size_t z,
                 const SouthwestNortheastEdgesDirections compass_point_code,
-                const int32_t image_width);
+                const std::size_t image_width);
     }
 }
 

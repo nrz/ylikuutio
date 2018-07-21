@@ -77,7 +77,7 @@ namespace loaders
 
         ofbx_meshes.reserve(mesh_count);
 
-        for (int32_t mesh_i = 0; mesh_i < mesh_count; mesh_i++)
+        for (std::size_t mesh_i = 0; mesh_i < mesh_count; mesh_i++)
         {
             const ofbx::Mesh* mesh = ofbx_iscene->getMesh(mesh_i);
             ofbx_meshes[mesh_i] = mesh;
@@ -105,7 +105,7 @@ namespace loaders
                 std::cout << filename << ": mesh " << mesh_i << ": getMaterialCount(): " << material_count << "\n";
             }
 
-            for (int32_t material_i = 0; material_i < material_count; material_i++)
+            for (std::size_t material_i = 0; material_i < material_count; material_i++)
             {
                 if (is_debug_mode)
                 {
@@ -235,7 +235,7 @@ namespace loaders
 
             std::vector<glm::vec3> mesh_out_vertices;
 
-            for (int i = 0; i < vertex_count; i++)
+            for (std::size_t i = 0; i < vertex_count; i++)
             {
                 // vertices.
                 glm::vec3 vertex = { vertices[i].x, vertices[i].y, vertices[i].z };
@@ -255,7 +255,7 @@ namespace loaders
             }
             else
             {
-                for (int32_t vertex_i = 0; vertex_i < vertex_count; vertex_i++)
+                for (std::size_t vertex_i = 0; vertex_i < vertex_count; vertex_i++)
                 {
                     // UVs.
                     glm::vec2 uv = { uvs[vertex_i].x, uvs[vertex_i].y };
@@ -267,7 +267,7 @@ namespace loaders
 
             std::vector<glm::vec3> mesh_out_normals;
 
-            for (int i = 0; i < vertex_count; i++)
+            for (std::size_t i = 0; i < vertex_count; i++)
             {
                 // Normals.
                 glm::vec3 normal = { normals[i].x, normals[i].y, normals[i].z };

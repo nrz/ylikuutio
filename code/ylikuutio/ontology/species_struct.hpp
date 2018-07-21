@@ -10,7 +10,6 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <limits>   // std::numeric_limits
-#include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 #include <vector>   // std::vector
 
@@ -70,8 +69,8 @@ typedef struct SpeciesStruct
     double latitude;                         // in degrees, for SRTM model files.
     double longitude;                        // in degrees, for SRTM model files.
     std::size_t mesh_i;                      // for FBX.
-    uint32_t x_step;                         // Step in x-dimension for input data (set to 1 to load all data points/measurements).
-    uint32_t z_step;                         // Step in z-dimension for input data (set to 1 to load all data points/measurements).
+    std::size_t x_step;                      // Step in x-dimension for input data (set to 1 to load all data points/measurements).
+    std::size_t z_step;                      // Step in z-dimension for input data (set to 1 to load all data points/measurements).
     std::string triangulation_type;          // `"bilinear_interpolation"`, `"southwest_northeast_edges"`, `"southeast_northwest_edges"`.
 } SpeciesStruct;
 

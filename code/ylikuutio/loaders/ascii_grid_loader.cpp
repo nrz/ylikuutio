@@ -22,6 +22,7 @@
 
 // Include standard headers
 #include <cmath>    // NAN, std::isnan, std::pow
+#include <cstddef>  // std::size_t
 #include <cstdio>   // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf etc.
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <stdint.h> // uint32_t etc.
@@ -35,8 +36,8 @@ namespace loaders
             std::vector<glm::vec3>& out_vertices,
             std::vector<glm::vec2>& out_UVs,
             std::vector<glm::vec3>& out_normals,
-            const int32_t x_step,
-            const int32_t z_step,
+            const std::size_t x_step,
+            const std::size_t z_step,
             const std::string& triangulation_type)
     {
         // Beginning of `L4133D.asc`.
@@ -108,9 +109,23 @@ namespace loaders
                 (const char* const) "nodata_value");
 
         // note: the value of `image_height_in_use` can be adjusted here (for testing purposes).
-        const int32_t image_height_in_use = image_height;
+        if (image_width < 2)
+        {
+            std::cerr << "Image width is less than 2.\n";
+            return false;
+        }
 
-        float* vertex_data = new float[image_width * image_height_in_use];
+        const std::size_t image_width_in_use = static_cast<std::size_t>(image_width);
+
+        if (image_height < 2)
+        {
+            std::cerr << "Image height is less than 2.\n";
+            return false;
+        }
+
+        const std::size_t image_height_in_use = static_cast<std::size_t>(image_height);
+
+        float* vertex_data = new float[image_width_in_use * image_height_in_use];
 
         if (vertex_data == nullptr)
         {
@@ -126,7 +141,7 @@ namespace loaders
         int32_t last_percent = -1;
         int32_t current_percent = -1;
 
-        for (int32_t z = 0; z < image_height_in_use; z++)
+        for (std::size_t z = 0; z < image_height_in_use; z++)
         {
             // show progress in percents.
             current_percent = static_cast<int32_t>(floor(100.0f * ((double) z / (double) (image_height_in_use - 1))));
@@ -137,7 +152,7 @@ namespace loaders
                 last_percent = current_percent;
             }
 
-            for (int32_t x = 0; x < image_width; x++)
+            for (std::size_t x = 0; x < image_width_in_use; x++)
             {
                 while (!yli::string::check_and_report_if_some_string_matches(file_content, file_content_i, number_strings_vector))
                 {
@@ -156,7 +171,7 @@ namespace loaders
         std::cout << "Triangulating ascii grid data.\n";
 
         yli::geometry::TriangulateQuadsStruct triangulate_quads_struct;
-        triangulate_quads_struct.image_width = image_width;
+        triangulate_quads_struct.image_width = image_width_in_use;
         triangulate_quads_struct.image_height = image_height_in_use;
         triangulate_quads_struct.x_step = x_step;
         triangulate_quads_struct.z_step = z_step;

@@ -33,10 +33,6 @@ namespace yli
 
                 bool do_lines3D_intersect(const yli::geometry::Line3D* const line1, const yli::geometry::Line3D* const line2) const;
                 bool do_lines3D_intersect(const yli::geometry::Line3D* const line) const;
-
-            private:
-                glm::vec3 vec3_point1;
-                glm::vec3 vec3_point2;
         };
     }
 }

@@ -25,7 +25,6 @@ TEST(file_must_be_slurped_appropriately, test3x3_bmp)
     const std::string bmp_filename = "test3x3.bmp";
     std::vector<uint8_t> file_content = yli::file::binary_slurp(bmp_filename);
     const uint16_t* file_content_uint16_t = (uint16_t*) file_content.data();
-    const uint32_t* file_content_uint32_t = (uint32_t*) file_content.data();
 
     // a BMP file always begins with "BM".
     ASSERT_EQ(file_content[0], 'B');

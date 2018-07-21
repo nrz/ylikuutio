@@ -681,11 +681,6 @@ namespace yli
                     console->history_line_i = console->console_history.size() - 2 * console->n_rows;
                 }
 
-                if (console->history_line_i < 0)
-                {
-                    console->history_line_i = 0;
-                }
-
                 if (console->history_line_i + console->n_rows >= console->console_history.size())
                 {
                     console->in_history = false;

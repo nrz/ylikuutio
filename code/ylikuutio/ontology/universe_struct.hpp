@@ -1,6 +1,10 @@
 #ifndef __UNIVERSE_STRUCT_HPP_INCLUDED
 #define __UNIVERSE_STRUCT_HPP_INCLUDED
 
+// Include standard headers
+#include <stdint.h> // uint32_t etc.
+#include <string>   // std::string
+
 typedef struct UniverseStruct
 {
     UniverseStruct()

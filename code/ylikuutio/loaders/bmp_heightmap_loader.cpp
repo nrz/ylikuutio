@@ -26,7 +26,6 @@
 #include <cstdio>   // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf etc.
 #include <cstring>  // std::memcmp, std::strcmp, std::strlen, std::strncmp
 #include <iostream> // std::cout, std::cin, std::cerr
-#include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 #include <vector>   // std::vector
 
@@ -37,11 +36,11 @@ namespace loaders
             std::vector<glm::vec3>& out_vertices,
             std::vector<glm::vec2>& out_UVs,
             std::vector<glm::vec3>& out_normals,
-            int32_t* image_width_pointer,
-            int32_t* image_height_pointer,
+            std::size_t* image_width_pointer,
+            std::size_t* image_height_pointer,
             const std::string& color_channel,
-            const int32_t x_step,
-            const int32_t z_step,
+            const std::size_t x_step,
+            const std::size_t z_step,
             const std::string& triangulation_type)
     {
         if (x_step < 1 || z_step < 1)
@@ -56,8 +55,8 @@ namespace loaders
 
         std::size_t image_size;
 
-        int32_t image_width;
-        int32_t image_height;
+        std::size_t image_width;
+        std::size_t image_height;
 
         uint8_t* image_data = load_BMP_file(image_path, image_width, image_height, image_size);
 
@@ -71,9 +70,9 @@ namespace loaders
         }
 
         // Define terrain size.
-        int32_t terrain_size = image_width * image_height;
+        std::size_t terrain_size = image_width * image_height;
 
-        int32_t line_size_in_bytes = image_size / image_height;
+        std::size_t line_size_in_bytes = image_size / image_height;
 
         uint8_t *image_pointer;
         image_pointer = image_data;
@@ -93,13 +92,13 @@ namespace loaders
         const char* char_color_channel = color_channel.c_str();
 
         // start processing image_data.
-        for (int32_t z = 0; z < image_height; z++)
+        for (std::size_t z = 0; z < image_height; z++)
         {
             image_pointer = image_data + z * line_size_in_bytes;
 
-            for (int32_t x = 0; x < image_width; x++)
+            for (std::size_t x = 0; x < image_width; x++)
             {
-                uint32_t y;
+                std::size_t y;
 
                 if (std::strcmp(char_color_channel, "blue") == 0)
                 {

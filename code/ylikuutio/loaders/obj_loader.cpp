@@ -77,8 +77,6 @@ namespace loaders
 
             // Note: `"vt"` and `"vn"` needs to be checked for before `"v"`!
 
-            const char* whitespace_char_end_string = " \t\n";
-            int32_t current_line_string_i = 0;
             std::stringstream current_line_stringstream = std::stringstream(current_line_string);
             std::string prefix;
 
@@ -176,7 +174,7 @@ namespace loaders
         }
 
         // For each vertex of each triangle
-        for (int32_t i = 0; i < vertex_indices.size(); i++)
+        for (std::size_t i = 0; i < vertex_indices.size(); i++)
         {
             // Get the indices of its attributes
             int32_t vertex_index = vertex_indices[i];

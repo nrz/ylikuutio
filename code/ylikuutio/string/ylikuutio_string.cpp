@@ -98,7 +98,6 @@ namespace yli
             while (src_data_pointer + 1 < src_base_pointer + src_data_size &&
                     dest_data_pointer + 1 < dest_base_pointer + dest_data_size)
             {
-                uint32_t n_of_ending_characters = std::strlen(char_end_string);
                 const char* end_char_pointer;
                 end_char_pointer = char_end_string;
 
@@ -135,7 +134,6 @@ namespace yli
             while (data_index < data_string.size() &&
                     dest_data_pointer + 1 < dest_base_pointer + dest_data_size)
             {
-                uint32_t n_of_ending_characters = std::strlen(char_end_string);
                 const char* end_char_pointer;
                 end_char_pointer = char_end_string;
                 const std::string current_char_string = data_string.substr(data_index, 1);
@@ -172,7 +170,6 @@ namespace yli
 
             while (data_index < data_string.size())
             {
-                uint32_t n_of_ending_characters = std::strlen(char_end_string);
                 const char* end_char_pointer;
                 end_char_pointer = char_end_string;
                 const std::string current_char_string = data_string.substr(data_index, 1);
@@ -205,7 +202,7 @@ namespace yli
             char* src_data_pointer = const_cast<char*>(src_base_pointer);
             char* src_first_char_after_separator_pointer = nullptr;
             char* dest_data_pointer = dest_base_pointer;
-            int32_t filename_length = 0; // length without trailing null byte.
+            std::size_t filename_length = 0; // length without trailing null byte.
 
             // + 1 needed for both source and dest because of the null terminator.
             for ( ; src_data_pointer < src_base_pointer + src_data_size && dest_data_pointer + 1 < dest_base_pointer + dest_data_size; src_data_pointer++)
@@ -376,7 +373,6 @@ namespace yli
                     return 0xdfff; // invalid unicode!
                 }
 
-                char current_char = *unicode_char_pointer;
                 hex_string.append(unicode_char_pointer);
             }
 
@@ -406,11 +402,11 @@ namespace yli
 
         std::string convert_std_list_char_to_std_string(
                 const std::list<char>& std_list_char,
-                const uint32_t first_line_length,
-                const uint32_t line_length)
+                const std::size_t first_line_length,
+                const std::size_t line_length)
         {
             std::string my_string;
-            uint32_t remaining_characters_on_this_line = first_line_length;
+            std::size_t remaining_characters_on_this_line = first_line_length;
 
             for (std::list<char>::const_iterator it = std_list_char.begin(); it != std_list_char.end(); it++)
             {
@@ -428,11 +424,11 @@ namespace yli
 
         std::vector<std::string> convert_std_list_char_to_std_vector_std_string(
                 const std::list<char>& std_list_char,
-                const uint32_t line_length)
+                const std::size_t line_length)
         {
             std::vector<std::string> my_vector;
             std::string my_string;
-            uint32_t remaining_characters_on_this_line = line_length;
+            std::size_t remaining_characters_on_this_line = line_length;
 
             for (std::list<char>::const_iterator it = std_list_char.begin(); it != std_list_char.end(); it++)
             {
@@ -456,19 +452,19 @@ namespace yli
 
         bool check_if_float_string(const std::string& my_string)
         {
-            int32_t maximum_safe_length_for_float_string = 38;
+            std::size_t maximum_safe_length_for_float_string = 38;
             return check_if_floating_point_string(my_string, maximum_safe_length_for_float_string);
         }
 
         bool check_if_double_string(const std::string& my_string)
         {
-            int32_t maximum_safe_length_for_double_string = 308;
+            std::size_t maximum_safe_length_for_double_string = 308;
             return check_if_floating_point_string(my_string, maximum_safe_length_for_double_string);
         }
 
-        bool check_if_floating_point_string(const std::string& my_string, const int32_t safe_number_of_chars)
+        bool check_if_floating_point_string(const std::string& my_string, const std::size_t safe_number_of_chars)
         {
-            int32_t n_chars = 0;
+            std::size_t n_chars = 0;
 
             if (my_string.empty())
             {
@@ -477,7 +473,7 @@ namespace yli
 
             bool is_dot_found = false;
 
-            for (int32_t i = 0; i < my_string.size(); i++)
+            for (std::size_t i = 0; i < my_string.size(); i++)
             {
                 // Each of the characters must be one of the following:
                 // 0123456789.-
@@ -535,7 +531,7 @@ namespace yli
                 return false;
             }
 
-            for (int32_t i = 0; i < my_string.size(); i++)
+            for (std::size_t i = 0; i < my_string.size(); i++)
             {
                 // Each of the characters must be one of the following:
                 // 0123456789
@@ -561,7 +557,7 @@ namespace yli
                 return false;
             }
 
-            for (int32_t i = 0; i < my_string.size(); i++)
+            for (std::size_t i = 0; i < my_string.size(); i++)
             {
                 // Each of the characters must be one of the following:
                 // 0123456789
@@ -578,8 +574,8 @@ namespace yli
         void print_hexdump(const void* const start_address, const void* const end_address) // `begin` is inclusive, `end` is exclusive.
         {
             void* void_start_address = const_cast<void*>(start_address);
-            const int32_t line_width_in_bytes = 16;
-            int32_t characters_on_this_line = 0;
+            const std::size_t line_width_in_bytes = 16;
+            std::size_t characters_on_this_line = 0;
             std::string current_line_ascii = "";
             std::string current_line_hex = "";
 
@@ -606,8 +602,8 @@ namespace yli
 
             if (characters_on_this_line > 0)
             {
-                const int32_t size_of_each_bytes_hexdump = 3; // each byte's hexdump takes 3 characters.
-                const int32_t number_of_spaces_needed = (line_width_in_bytes - characters_on_this_line) * size_of_each_bytes_hexdump + 1;
+                const std::size_t size_of_each_bytes_hexdump = 3; // each byte's hexdump takes 3 characters.
+                const std::size_t number_of_spaces_needed = (line_width_in_bytes - characters_on_this_line) * size_of_each_bytes_hexdump + 1;
                 std::cout << current_line_hex << std::string(number_of_spaces_needed, ' ') << current_line_ascii << "\n";
             }
 
@@ -616,8 +612,8 @@ namespace yli
 
         void print_hexdump(const std::string& my_string)
         {
-            const int32_t line_width_in_bytes = 16;
-            int32_t characters_on_this_line = 0;
+            const std::size_t line_width_in_bytes = 16;
+            std::size_t characters_on_this_line = 0;
             std::string current_line_ascii = "";
             std::string current_line_hex = "";
 
@@ -644,8 +640,8 @@ namespace yli
 
             if (characters_on_this_line > 0)
             {
-                const int32_t size_of_each_bytes_hexdump = 3; // each byte's hexdump takes 3 characters.
-                const int32_t number_of_spaces_needed = (line_width_in_bytes - characters_on_this_line) * size_of_each_bytes_hexdump + 1;
+                const std::size_t size_of_each_bytes_hexdump = 3; // each byte's hexdump takes 3 characters.
+                const std::size_t number_of_spaces_needed = (line_width_in_bytes - characters_on_this_line) * size_of_each_bytes_hexdump + 1;
                 std::cout << current_line_hex << std::string(number_of_spaces_needed, ' ') << current_line_ascii << "\n";
             }
 

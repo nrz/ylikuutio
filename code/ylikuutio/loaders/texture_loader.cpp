@@ -30,7 +30,7 @@
 namespace loaders
 {
     // Load texture from memory.
-    GLuint load_texture(const uint8_t* const image_data, const int32_t image_width, const int32_t image_height, bool should_image_data_be_deleted)
+    GLuint load_texture(const uint8_t* const image_data, const std::size_t image_width, const std::size_t image_height, bool should_image_data_be_deleted)
     {
         // Create one OpenGL texture
         GLuint textureID;
@@ -89,7 +89,7 @@ namespace loaders
         yli::string::print_hexdump(filename);
 
         // Find out the filename.
-        const int32_t filename_buffer_size = 1024;
+        const std::size_t filename_buffer_size = 1024;
         char filename_buffer[filename_buffer_size];
         const char separator = '/'; // FIXME: don't assume slash as some operating systems may use other characters.
 
@@ -106,7 +106,7 @@ namespace loaders
         std::cout << "Texture file: " << texture_filename << "\n";
 
         // Find out the file suffix (filetype).
-        const int32_t file_suffix_buffer_size = 16;
+        const std::size_t file_suffix_buffer_size = 16;
         char file_suffix_buffer[file_suffix_buffer_size];
         const char suffix_separator = '.';
 
@@ -136,12 +136,9 @@ namespace loaders
 
     GLuint load_BMP_texture(const std::string& filename)
     {
-        int32_t image_width;
-        int32_t image_height;
+        std::size_t image_width;
+        std::size_t image_height;
         std::size_t image_size;
-
-        uint32_t x_step = 1;
-        uint32_t z_step = 1;
 
         uint8_t* image_data = load_BMP_file(filename, image_width, image_height, image_size);
 
@@ -168,7 +165,7 @@ namespace loaders
         }
 
         /* verify the type of file */
-        const uint32_t dds_magic_number_size_in_bytes = 4; // "DDS "
+        const std::size_t dds_magic_number_size_in_bytes = 4; // "DDS "
         char filecode[dds_magic_number_size_in_bytes];
 
         if (std::fread(filecode, 1, dds_magic_number_size_in_bytes, fp) != dds_magic_number_size_in_bytes)
@@ -215,7 +212,6 @@ namespace loaders
         /* close the file pointer */
         std::fclose(fp);
 
-        uint32_t components = (fourCC == FOURCC_DXT1) ? 3 : 4;
         uint32_t format;
         switch(fourCC)
         {
@@ -241,13 +237,13 @@ namespace loaders
         glBindTexture(GL_TEXTURE_2D, textureID);
         glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
-        uint32_t blockSize = (format == GL_COMPRESSED_RGBA_S3TC_DXT1_EXT) ? 8 : 16;
-        uint32_t offset = 0;
+        std::size_t blockSize = (format == GL_COMPRESSED_RGBA_S3TC_DXT1_EXT) ? 8 : 16;
+        std::size_t offset = 0;
 
         /* load the mipmaps */
-        for (uint32_t level = 0; level < mipMapCount && (width || height); ++level)
+        for (std::size_t level = 0; level < mipMapCount && (width || height); ++level)
         {
-            uint32_t size = ((width + 3) / 4) * ((height + 3) / 4) * blockSize;
+            std::size_t size = ((width + 3) / 4) * ((height + 3) / 4) * blockSize;
             glCompressedTexImage2D(
                     GL_TEXTURE_2D,
                     level,

@@ -5,7 +5,7 @@
 
 // Include standard headers
 #include <algorithm>     // std::sort
-#include <stdint.h>      // uint32_t etc.
+#include <cstddef>       // std::size_t
 #include <string>        // std::string
 #include <unordered_map> // std::unordered_map
 #include <vector>        // std::vector
@@ -26,7 +26,7 @@ namespace map
             // sort key vector alphabetically.
             std::sort(key_vector.begin(), key_vector.end());
 
-            uint32_t characters_for_line = console->get_universe()->get_window_width() / console->get_universe()->get_text_size();
+            std::size_t characters_for_line = console->get_universe()->get_window_width() / console->get_universe()->get_text_size();
 
             std::string keys_text;
 

@@ -8,6 +8,8 @@
 #endif
 
 // Include standard headers
+#include <cstddef>  // std::size_t
+#include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 #include <vector>   // std::vector
 
@@ -22,8 +24,8 @@ namespace loaders
             std::vector<glm::vec3>& out_vertices,
             std::vector<glm::vec2>& out_UVs,
             std::vector<glm::vec3>& out_normals,
-            const uint32_t x_step,
-            const uint32_t z_step,
+            const std::size_t x_step,
+            const std::size_t z_step,
             const std::string& triangulation_type);
 }
 

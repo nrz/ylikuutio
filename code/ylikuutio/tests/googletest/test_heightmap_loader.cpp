@@ -22,8 +22,8 @@
 TEST(bmp_files_must_be_loaded_approriately, test3x3_bmp)
 {
     const std::string image_path = "test3x3.bmp";
-    int32_t image_width;
-    int32_t image_height;
+    std::size_t image_width;
+    std::size_t image_height;
     std::size_t image_size;
 
     uint8_t* image_data = loaders::load_BMP_file(image_path, image_width, image_height, image_size);
@@ -66,8 +66,8 @@ TEST(bmp_files_must_be_loaded_approriately, test3x3_bmp)
 
 TEST(vertices_must_be_defined_and_interpolated_appropriately, a_3x3_terrain)
 {
-    const int32_t image_width = 3;
-    const int32_t image_height = 3;
+    const std::size_t image_width = 3;
+    const std::size_t image_height = 3;
     const bool should_ylikuutio_use_real_texture_coordinates = true;
 
     float* const input_vertex_data = new float[image_width * image_height];
@@ -92,8 +92,8 @@ TEST(vertices_must_be_defined_and_interpolated_appropriately, a_3x3_terrain)
     std::vector<glm::vec2> temp_UVs;
     std::vector<glm::vec3> temp_normals;
 
-    const uint32_t x_step = 1;
-    const uint32_t z_step = 1;
+    const std::size_t x_step = 1;
+    const std::size_t z_step = 1;
 
     yli::geometry::define_vertices(
             input_vertex_data,
@@ -303,7 +303,7 @@ TEST(face_indices_must_be_computed_appropriately, a_4x4_terrain)
     //  |/  0  \|/  4  \|/  8  \|
     //  +-------+-------+-------+
 
-    const uint32_t example_width = 4;
+    const std::size_t example_width = 4;
     // x = 0, z = 0.
     ASSERT_EQ(yli::geometry::get_face_normal_i(0, 0, yli::geometry::ENE, example_width), 0);
     ASSERT_EQ(yli::geometry::get_face_normal_i(0, 0, yli::geometry::NNE, example_width), 1);
@@ -395,11 +395,11 @@ TEST(a_BMP_terrain_must_be_loaded_appropriately, load_3x3_BMP_terrain)
     std::vector<glm::vec3> out_vertices;
     std::vector<glm::vec2> out_UVs;
     std::vector<glm::vec3> out_normals;
-    int32_t image_width = 0;
-    int32_t image_height = 0;
+    std::size_t image_width = 0;
+    std::size_t image_height = 0;
     const std::string color_channel = "mean";
-    const uint32_t x_step = 1;
-    const uint32_t z_step = 1;
+    const std::size_t x_step = 1;
+    const std::size_t z_step = 1;
     const std::string triangulation_type = "bilinear_interpolation";
 
     bool model_loading_result = loaders::load_BMP_terrain(
@@ -416,10 +416,10 @@ TEST(a_BMP_terrain_must_be_loaded_appropriately, load_3x3_BMP_terrain)
 
     ASSERT_TRUE(model_loading_result);
 
-    const uint32_t n_vertices_for_face = 3;
-    const uint32_t n_faces_for_bilinear_triangulation = 4;
-    const uint32_t n_width_of_image_file = 3;
-    const uint32_t n_height_of_image_file = 3;
+    const std::size_t n_vertices_for_face = 3;
+    const std::size_t n_faces_for_bilinear_triangulation = 4;
+    const std::size_t n_width_of_image_file = 3;
+    const std::size_t n_height_of_image_file = 3;
 
     //                         48 =                  3 *                                  4 * (                    3 - 1) * (                     3 - 1)
     ASSERT_EQ(out_vertices.size(), n_vertices_for_face * n_faces_for_bilinear_triangulation * (n_width_of_image_file - 1) * (n_height_of_image_file - 1));
@@ -731,11 +731,11 @@ TEST(a_BMP_terrain_must_be_loaded_appropriately, load_256x256_BMP_terrain)
     std::vector<glm::vec3> out_vertices;
     std::vector<glm::vec2> out_UVs;
     std::vector<glm::vec3> out_normals;
-    int32_t image_width = 0;
-    int32_t image_height = 0;
+    std::size_t image_width = 0;
+    std::size_t image_height = 0;
     const std::string color_channel = "mean";
-    const uint32_t x_step = 1;
-    const uint32_t z_step = 1;
+    const std::size_t x_step = 1;
+    const std::size_t z_step = 1;
     const std::string triangulation_type = "bilinear_interpolation";
 
     const bool model_loading_result = loaders::load_BMP_terrain(
@@ -752,10 +752,10 @@ TEST(a_BMP_terrain_must_be_loaded_appropriately, load_256x256_BMP_terrain)
 
     ASSERT_TRUE(model_loading_result);
 
-    const uint32_t n_vertices_for_face = 3;
-    const uint32_t n_faces_for_bilinear_triangulation = 4;
-    const uint32_t n_width_of_image_file = 256;
-    const uint32_t n_height_of_image_file = 256;
+    const std::size_t n_vertices_for_face = 3;
+    const std::size_t n_faces_for_bilinear_triangulation = 4;
+    const std::size_t n_width_of_image_file = 256;
+    const std::size_t n_height_of_image_file = 256;
 
     ASSERT_EQ(out_vertices.size(), n_vertices_for_face * n_faces_for_bilinear_triangulation * (n_width_of_image_file - 1) * (n_height_of_image_file - 1));
     ASSERT_EQ(out_UVs.size(), n_vertices_for_face * n_faces_for_bilinear_triangulation * (n_width_of_image_file - 1) * (n_height_of_image_file - 1));
@@ -770,18 +770,18 @@ TEST(a_2x2_terrain_must_be_triangulated_appropriately, bilinear_interpolation)
     // |/ \|
     // *---*
     // bilinear interpolation.
-    const int32_t image_width = 2;
-    const int32_t image_height = 2;
-    const uint32_t terrain_size = image_width * image_height;
+    const std::size_t image_width = 2;
+    const std::size_t image_height = 2;
+    const std::size_t terrain_size = image_width * image_height;
 
     uint32_t* const vertex_data = new uint32_t[terrain_size];
     ASSERT_NE(vertex_data, nullptr);
     uint32_t* vertex_pointer = vertex_data;
     // x, z: height (y).
-    const uint32_t southwest_height = 1;
-    const uint32_t southeast_height = 2;
-    const uint32_t northwest_height = 4;
-    const uint32_t northeast_height = 8;
+    const std::size_t southwest_height = 1;
+    const std::size_t southeast_height = 2;
+    const std::size_t northwest_height = 4;
+    const std::size_t northeast_height = 8;
     const float center_x = 0.5f;
     const float center_z = 0.5f;
 
@@ -881,18 +881,18 @@ TEST(a_2x2_terrain_must_be_triangulated_appropriately, southeast_northwest_edges
     // |  \|
     // *---*
     // southeast northwest edges.
-    const int32_t image_width = 2;
-    const int32_t image_height = 2;
-    const uint32_t terrain_size = image_width * image_height;
+    const std::size_t image_width = 2;
+    const std::size_t image_height = 2;
+    const std::size_t terrain_size = image_width * image_height;
 
     uint32_t* const vertex_data = new uint32_t[terrain_size];
     ASSERT_NE(vertex_data, nullptr);
     uint32_t* vertex_pointer = vertex_data;
     // x, z: height (y).
-    const uint32_t southwest_height = 1;
-    const uint32_t southeast_height = 2;
-    const uint32_t northwest_height = 4;
-    const uint32_t northeast_height = 8;
+    const std::size_t southwest_height = 1;
+    const std::size_t southeast_height = 2;
+    const std::size_t northwest_height = 4;
+    const std::size_t northeast_height = 8;
 
     // 0, 0: 1.
     *vertex_pointer++ = southwest_height;
@@ -960,18 +960,18 @@ TEST(a_2x2_terrain_must_be_triangulated_appropriately, southwest_northeast_edges
     // |/  |
     // *---*
     // southwest northeast edges.
-    const int32_t image_width = 2;
-    const int32_t image_height = 2;
-    const uint32_t terrain_size = image_width * image_height;
+    const std::size_t image_width = 2;
+    const std::size_t image_height = 2;
+    const std::size_t terrain_size = image_width * image_height;
 
     uint32_t* const vertex_data = new uint32_t[terrain_size];
     ASSERT_NE(vertex_data, nullptr);
     uint32_t* vertex_pointer = vertex_data;
     // x, z: height (y).
-    const uint32_t southwest_height = 1;
-    const uint32_t southeast_height = 2;
-    const uint32_t northwest_height = 4;
-    const uint32_t northeast_height = 8;
+    const std::size_t southwest_height = 1;
+    const std::size_t southeast_height = 2;
+    const std::size_t northwest_height = 4;
+    const std::size_t northeast_height = 8;
 
     // 0, 0: 1.
     *vertex_pointer++ = southwest_height;
@@ -1043,23 +1043,23 @@ TEST(a_3x3_terrain_must_be_triangulated_appropriately, southeast_northwest_edges
     // |  \|  \|
     // *---*---*
     // southeast northwest edges.
-    const int32_t image_width = 3;
-    const int32_t image_height = 3;
-    const uint32_t terrain_size = image_width * image_height;
+    const std::size_t image_width = 3;
+    const std::size_t image_height = 3;
+    const std::size_t terrain_size = image_width * image_height;
 
     uint32_t* const vertex_data = new uint32_t[terrain_size];
     ASSERT_NE(vertex_data, nullptr);
     uint32_t* vertex_pointer = vertex_data;
     // x, z: height (y).
-    const uint32_t x0_z0_height = 10;
-    const uint32_t x1_z0_height = 20;
-    const uint32_t x2_z0_height = 30;
-    const uint32_t x0_z1_height = 40;
-    const uint32_t x1_z1_height = 50;
-    const uint32_t x2_z1_height = 60;
-    const uint32_t x0_z2_height = 70;
-    const uint32_t x1_z2_height = 80;
-    const uint32_t x2_z2_height = 90;
+    const std::size_t x0_z0_height = 10;
+    const std::size_t x1_z0_height = 20;
+    const std::size_t x2_z0_height = 30;
+    const std::size_t x0_z1_height = 40;
+    const std::size_t x1_z1_height = 50;
+    const std::size_t x2_z1_height = 60;
+    const std::size_t x0_z2_height = 70;
+    const std::size_t x1_z2_height = 80;
+    const std::size_t x2_z2_height = 90;
 
     // 0, 0: 10.
     *vertex_pointer++ = x0_z0_height;

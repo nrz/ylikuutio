@@ -18,7 +18,6 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
-#include <stdint.h> // uint32_t etc.
 
 namespace yli
 {
@@ -86,7 +85,7 @@ namespace yli
             yli::hierarchy::set_child_pointer(childID, child_pointer, this->object_pointer_vector, this->free_objectID_queue, &this->number_of_objects);
         }
 
-        int32_t Species::get_image_width() const
+        std::size_t Species::get_image_width() const
         {
             return this->image_width;
         }
@@ -96,7 +95,7 @@ namespace yli
             return this->model_file_format;
         }
 
-        int32_t Species::get_image_height() const
+        std::size_t Species::get_image_height() const
         {
             return this->image_height;
         }

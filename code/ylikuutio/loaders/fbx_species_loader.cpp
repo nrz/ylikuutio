@@ -21,7 +21,7 @@ namespace loaders
 {
     bool load_FBX(
             const std::string& filename,
-            const int32_t mesh_i,
+            const std::size_t mesh_i,
             std::vector<glm::vec3>& out_vertices,
             std::vector<glm::vec2>& out_UVs,
             std::vector<glm::vec3>& out_normals,
@@ -122,7 +122,7 @@ namespace loaders
             return false;
         }
 
-        for (int i = 0; i < vertex_count; i++)
+        for (std::size_t i = 0; i < vertex_count; i++)
         {
             // vertices.
             glm::vec3 vertex = { vertices[i].x, vertices[i].y, vertices[i].z };
@@ -138,7 +138,7 @@ namespace loaders
         }
         else
         {
-            for (int32_t vertex_i = 0; vertex_i < vertex_count; vertex_i++)
+            for (std::size_t vertex_i = 0; vertex_i < vertex_count; vertex_i++)
             {
                 // UVs.
                 glm::vec2 uv = { uvs[vertex_i].x, uvs[vertex_i].y };
@@ -146,7 +146,7 @@ namespace loaders
             }
         }
 
-        for (int i = 0; i < vertex_count; i++)
+        for (std::size_t i = 0; i < vertex_count; i++)
         {
             // Normals.
             glm::vec3 normal = { normals[i].x, normals[i].y, normals[i].z };
