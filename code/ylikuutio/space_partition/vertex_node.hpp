@@ -4,6 +4,12 @@
 #include "code/ylikuutio/graph/node_struct.hpp"
 #include "code/ylikuutio/graph/node.hpp"
 
+// Include GLM
+#ifndef __GLM_GLM_HPP_INCLUDED
+#define __GLM_GLM_HPP_INCLUDED
+#include <glm/glm.hpp> // glm
+#endif
+
 namespace space_partition
 {
     class VertexNode: public graph::Node
