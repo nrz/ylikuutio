@@ -65,7 +65,7 @@ namespace loaders
             return false;
         }
 
-        int temp_mesh_count = ofbx_iscene->getMeshCount(); // `getMeshCount()` returns `int`.
+        const int temp_mesh_count = ofbx_iscene->getMeshCount(); // `getMeshCount()` returns `int`.
 
         if (temp_mesh_count < 0)
         {
