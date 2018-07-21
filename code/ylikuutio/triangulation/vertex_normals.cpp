@@ -10,7 +10,6 @@
 
 // Include standard headers
 #include <cstddef>  // std::size_t
-#include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
 
 namespace yli
@@ -20,8 +19,8 @@ namespace yli
         bool compute_vertex_normals(
                 std::vector<glm::vec3>& temp_normals,
                 std::vector<glm::vec3>& face_normal_vector_vec3,
-                const int32_t actual_image_width,
-                const int32_t actual_image_height,
+                const std::size_t actual_image_width,
+                const std::size_t actual_image_height,
                 const bool is_bilinear_interpolation_in_use,
                 const bool is_southwest_northeast_edges_in_use,
                 const bool is_southeast_northwest_edges_in_use)
@@ -52,7 +51,7 @@ namespace yli
                 }
 
                 // If bilinear interpolation is in use, then number of faces is:
-                const int32_t number_of_interpolated_vertices = (actual_image_width - 1) * (actual_image_height - 1);
+                const std::size_t number_of_interpolated_vertices = (actual_image_width - 1) * (actual_image_height - 1);
                 temp_normals.reserve(actual_image_width * actual_image_height + number_of_interpolated_vertices);
             }
             else
