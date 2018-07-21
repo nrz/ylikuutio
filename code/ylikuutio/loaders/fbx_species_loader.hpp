@@ -8,7 +8,7 @@
 #endif
 
 // Include standard headers
-#include <stdint.h> // uint32_t etc.
+#include <cstddef>  // std::size_t
 #include <string>   // std::string
 #include <vector>   // std::vector
 
@@ -16,7 +16,7 @@ namespace loaders
 {
     bool load_FBX(
             const std::string& filename,
-            const int32_t mesh_i,
+            const std::size_t mesh_i,
             std::vector<glm::vec3>& out_vertices,
             std::vector<glm::vec2>& out_UVs,
             std::vector<glm::vec3>& out_normals,

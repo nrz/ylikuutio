@@ -16,8 +16,8 @@ namespace loaders
 {
     uint8_t* load_BMP_file(
             const std::string& bmp_filename,
-            int32_t& image_width,
-            int32_t& image_height,
+            std::size_t& image_width,
+            std::size_t& image_height,
             std::size_t& image_size)
     {
         std::cout << "Loading BMP file " << bmp_filename << " ...\n";
@@ -87,13 +87,30 @@ namespace loaders
         image_size = static_cast<std::size_t>(image_size_uint32_t);
         std::cout << "image size is " << image_size << " bytes.\n";
 
-        image_width = yli::memory::read_nonaligned_32_bit<uint8_t, int32_t>(file_content_uint8_t, 0x12);
-        image_height = yli::memory::read_nonaligned_32_bit<uint8_t, int32_t>(file_content_uint8_t, 0x16);
+        int32_t temp_image_width = yli::memory::read_nonaligned_32_bit<uint8_t, int32_t>(file_content_uint8_t, 0x12);
+
+        if (temp_image_width < 0)
+        {
+            std::cerr << "image width is negative: " << temp_image_width << "\n";
+            return nullptr;
+        }
+
+        image_width = static_cast<std::size_t>(temp_image_width);
+
+        int32_t temp_image_height = yli::memory::read_nonaligned_32_bit<uint8_t, int32_t>(file_content_uint8_t, 0x16);
+
+        if (temp_image_height < 0)
+        {
+            std::cerr << "image height is negative: " << temp_image_height << "\n";
+            return nullptr;
+        }
+
+        image_height = static_cast<std::size_t>(temp_image_height);
 
         // Some BMP files are misformatted, guess missing information
         if (image_size == 0)
         {
-            int64_t number_of_pixels = static_cast<int64_t>(image_width) * image_height;
+            std::size_t number_of_pixels = image_width * image_height;
 
             if (number_of_pixels > std::numeric_limits<std::size_t>::max() / 4)
             {

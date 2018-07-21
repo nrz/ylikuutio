@@ -94,16 +94,16 @@ namespace yli
 
         std::string convert_std_list_char_to_std_string(
                 const std::list<char>& std_list_char,
-                const uint32_t first_line_length,
-                const uint32_t line_length);
+                const std::size_t first_line_length,
+                const std::size_t line_length);
 
         std::vector<std::string> convert_std_list_char_to_std_vector_std_string(
                 const std::list<char>& std_list_char,
-                const uint32_t line_length);
+                const std::size_t line_length);
 
         bool check_if_float_string(const std::string& my_string);
         bool check_if_double_string(const std::string& my_string);
-        bool check_if_floating_point_string(const std::string& my_string, const int32_t safe_number_of_chars);
+        bool check_if_floating_point_string(const std::string& my_string, const std::size_t safe_number_of_chars);
 
         bool check_if_signed_integer_string(const std::string& my_string);
 

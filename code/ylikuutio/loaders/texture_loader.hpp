@@ -10,13 +10,14 @@
 #endif
 
 // Include standard headers
+#include <cstddef>  // std::size_t
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 
 namespace loaders
 {
     // Load texture from memory.
-    GLuint load_texture(const uint8_t* const image_data, const int32_t image_width, const int32_t image_height, bool should_image_data_be_deleted);
+    GLuint load_texture(const uint8_t* const image_data, const std::size_t image_width, const std::size_t image_height, bool should_image_data_be_deleted);
 
     // Load texture from memory.
     GLuint load_FBX_texture(const ofbx::Texture* const ofbx_texture);

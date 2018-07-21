@@ -174,7 +174,7 @@ namespace loaders
         }
 
         // For each vertex of each triangle
-        for (int32_t i = 0; i < vertex_indices.size(); i++)
+        for (std::size_t i = 0; i < vertex_indices.size(); i++)
         {
             // Get the indices of its attributes
             int32_t vertex_index = vertex_indices[i];

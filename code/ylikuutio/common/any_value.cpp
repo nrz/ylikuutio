@@ -16,6 +16,7 @@
 // Include standard headers
 #include <cerrno>   // errno
 #include <cmath>    // NAN, std::isnan, std::pow
+#include <cstddef>  // std::size_t
 #include <cstdio>   // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf etc.
 #include <cstring>  // std::memcmp, std::strcmp, std::strlen, std::strncmp
 #include <inttypes.h> // PRId32, PRId64, PRIu32, PRIu64, PRIx32, PRIx64
@@ -118,7 +119,7 @@ namespace datatypes
 
     std::string AnyValue::get_string() const
     {
-        const uint32_t buffer_size = 128;
+        const std::size_t buffer_size = 128;
         char buffer[buffer_size];
 
         switch (this->type)

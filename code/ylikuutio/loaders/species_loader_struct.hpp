@@ -3,7 +3,7 @@
 
 // Include standard headers
 #include <cmath>    // NAN, std::isnan, std::pow
-#include <stdint.h> // uint32_t etc.
+#include <cstddef>  // std::size_t
 #include <string>   // std::string
 
 typedef struct SpeciesLoaderStruct
@@ -28,12 +28,12 @@ typedef struct SpeciesLoaderStruct
     double longitude;   // in degrees, for SRTM.
     float planet_radius; // for SRTM.
     float divisor;      // for SRTM.
-    int32_t mesh_i;     // for FBX.
+    std::size_t mesh_i;  // for FBX.
     std::string color_channel; // for BMP.
-    uint32_t x_step;
-    uint32_t z_step;
-    int32_t* image_width_pointer;
-    int32_t* image_height_pointer;
+    std::size_t x_step;
+    std::size_t z_step;
+    std::size_t* image_width_pointer;
+    std::size_t* image_height_pointer;
     std::string triangulation_type; // for all.
 } SpeciesLoaderStruct;
 

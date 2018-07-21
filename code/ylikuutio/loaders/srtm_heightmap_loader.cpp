@@ -20,6 +20,7 @@
 #endif
 
 // Include standard headers
+#include <cstddef>  // std::size_t
 #include <cstdio>   // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf etc.
 #include <iomanip>  // std::setfill, std::setw
 #include <iostream> // std::cout, std::cin, std::cerr
@@ -39,8 +40,8 @@ namespace loaders
             std::vector<glm::vec3>& out_vertices,
             std::vector<glm::vec2>& out_UVs,
             std::vector<glm::vec3>& out_normals,
-            const uint32_t x_step,
-            const uint32_t z_step,
+            const std::size_t x_step,
+            const std::size_t z_step,
             const std::string& triangulation_type)
     {
         // For SRTM worlds, the right heightmap filename must be resolved first.
@@ -89,8 +90,8 @@ namespace loaders
         std::stringstream latitude_stringstream;
         std::stringstream longitude_stringstream;
 
-        uint32_t SRTM_filename_n_of_latitude_chars = 2;
-        uint32_t SRTM_filename_n_of_longitude_chars = 3;
+        std::size_t SRTM_filename_n_of_latitude_chars = 2;
+        std::size_t SRTM_filename_n_of_longitude_chars = 3;
 
         latitude_stringstream << std::setw(SRTM_filename_n_of_latitude_chars) << std::setfill('0') << abs(filename_latitude);
         longitude_stringstream << std::setw(SRTM_filename_n_of_longitude_chars) << std::setfill('0') << abs(filename_longitude);
@@ -113,11 +114,11 @@ namespace loaders
             return false;
         }
 
-        uint32_t true_image_width = 1201;
-        uint32_t true_image_height = 1201;
-        uint32_t image_width_in_use = 1200;
-        uint32_t image_height_in_use = 1200;
-        uint32_t image_size = sizeof(int16_t) * true_image_width * true_image_height;
+        std::size_t true_image_width = 1201;
+        std::size_t true_image_height = 1201;
+        std::size_t image_width_in_use = 1200;
+        std::size_t image_height_in_use = 1200;
+        std::size_t image_size = sizeof(int16_t) * true_image_width * true_image_height;
 
         // Create a buffer.
         // Actual 16-bit big-endian signed integer heightmap data.
@@ -170,7 +171,7 @@ namespace loaders
         int32_t last_percent = -1;
         int32_t current_percent = -1;
 
-        for (uint32_t z = 0; z < image_height_in_use; z++)
+        for (std::size_t z = 0; z < image_height_in_use; z++)
         {
             // show progress in percents.
             current_percent = static_cast<int32_t>(floor(100.0f * ((double) z / (double) (image_height_in_use - 1))));
@@ -181,10 +182,9 @@ namespace loaders
                 last_percent = current_percent;
             }
 
-            for (uint32_t x = 0; x < image_width_in_use; x++)
+            for (std::size_t x = 0; x < image_width_in_use; x++)
             {
-                uint32_t y;
-                y = static_cast<uint32_t>(*image_pointer) << 8 | static_cast<uint32_t>(*(image_pointer + 1));
+                std::size_t y = static_cast<std::size_t>(*image_pointer) << 8 | static_cast<std::size_t>(*(image_pointer + 1));
 
                 image_pointer += sizeof(int16_t);
                 *vertex_pointer++ = static_cast<float>(y) / divisor;

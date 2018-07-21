@@ -32,6 +32,7 @@
 
 // Include standard headers
 #include <cmath>    // NAN, std::isnan, std::pow
+#include <cstddef>  // std::size_t
 #include <cstring>  // std::memcmp, std::strcmp, std::strlen, std::strncmp
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <stdint.h> // uint32_t etc.
@@ -49,19 +50,14 @@ namespace yli
                     std::vector<glm::vec2>& out_UVs,
                     std::vector<glm::vec3>& out_normals)
             {
+                const std::size_t image_width = triangulate_quads_struct.image_width;
+                const std::size_t image_height = triangulate_quads_struct.image_height;
+                const std::size_t x_step = triangulate_quads_struct.x_step;
+                const std::size_t z_step = triangulate_quads_struct.z_step;
+
                 // Input vertices (`T1* input_vertex_pointer`)
                 // can be `float`, `int32_t` or `uint32_t`.
-                const int32_t image_width = triangulate_quads_struct.image_width;
-                const int32_t image_height = triangulate_quads_struct.image_height;
-                const int32_t x_step = triangulate_quads_struct.x_step;
-                const int32_t z_step = triangulate_quads_struct.z_step;
-                const int32_t actual_image_width = (image_width - 1) / x_step + 1;
-                const int32_t actual_image_height = (image_height - 1) / z_step + 1;
-                const std::string triangulation_type = triangulate_quads_struct.triangulation_type;
-                const double sphere_radius = triangulate_quads_struct.sphere_radius;
-                const yli::geometry::SphericalTerrainStruct spherical_terrain_struct = triangulate_quads_struct.spherical_terrain_struct;
-
-                if (image_width < 2 || image_height < 2 || actual_image_width < 2 || actual_image_height < 2)
+                if (image_width < 2 || image_height < 2)
                 {
                     return false;
                 }
@@ -70,6 +66,18 @@ namespace yli
                 {
                     return false;
                 }
+
+                const std::size_t actual_image_width = (image_width - 1) / x_step + 1;
+                const std::size_t actual_image_height = (image_height - 1) / z_step + 1;
+
+                if (actual_image_width < 2 || actual_image_height < 2)
+                {
+                    return false;
+                }
+
+                const std::string triangulation_type = triangulate_quads_struct.triangulation_type;
+                const double sphere_radius = triangulate_quads_struct.sphere_radius;
+                const yli::geometry::SphericalTerrainStruct spherical_terrain_struct = triangulate_quads_struct.spherical_terrain_struct;
 
                 const char* char_triangulation_type = triangulation_type.c_str();
 
@@ -165,7 +173,7 @@ namespace yli
                 std::cout << "actual image width: " << actual_image_width << " pixels.\n";
                 std::cout << "actual image height: " << actual_image_height << " pixels.\n";
 
-                const int32_t n_faces = n_faces_for_each_vertex * (actual_image_width - 1) * (actual_image_height - 1);
+                const std::size_t n_faces = n_faces_for_each_vertex * (actual_image_width - 1) * (actual_image_height - 1);
 
                 std::cout << "number of faces: " << n_faces << ".\n";
 

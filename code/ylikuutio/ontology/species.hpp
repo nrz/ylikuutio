@@ -34,7 +34,6 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <queue>    // std::queue
-#include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 #include <vector>   // std::vector
 
@@ -151,8 +150,8 @@ namespace yli
                 // this method sets an `Object` pointer.
                 void set_object_pointer(const std::size_t childID, yli::ontology::Object* const child_pointer);
 
-                int32_t get_image_width() const;
-                int32_t get_image_height() const;
+                std::size_t get_image_width() const;
+                std::size_t get_image_height() const;
 
                 const std::string& get_model_file_format() const;
 
@@ -193,13 +192,13 @@ namespace yli
 
                 std::size_t mesh_i;
 
-                uint32_t x_step;
-                uint32_t z_step;
+                std::size_t x_step;
+                std::size_t z_step;
 
                 std::string triangulation_type;
 
-                int32_t image_width;
-                int32_t image_height;
+                std::size_t image_width;
+                std::size_t image_height;
         };
     }
 }
