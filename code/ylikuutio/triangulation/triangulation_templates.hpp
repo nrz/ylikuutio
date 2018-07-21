@@ -85,7 +85,7 @@ namespace yli
 
                 if (x_step <= 0 || z_step <= 0)
                 {
-                    // Can not define vertices if image width < 0 or image height < 0.
+                    // Can not define vertices if x_step <= 0 or z_step <= 0.
                     return false;
                 }
 
