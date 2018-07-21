@@ -90,9 +90,7 @@ namespace loaders
             return false;
         }
 
-        // TODO: finalize the implementation of `yli::ontology::Symbiosis`
-        // to be able to support for different materials!
-        const int material_count = mesh->getMaterialCount(); // TODO: use this in  `yli::ontology::Symbiosis` entities!
+        const int material_count = mesh->getMaterialCount();
 
         if (is_debug_mode)
         {
