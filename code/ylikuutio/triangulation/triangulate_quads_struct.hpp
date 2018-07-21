@@ -15,7 +15,7 @@ namespace yli
         typedef struct TriangulateQuadsStruct
         {
             TriangulateQuadsStruct()
-                : image_width(0), image_height(0), should_ylikuutio_use_real_texture_coordinates(true), x_step(1), z_step(1), sphere_radius(NAN)
+                : image_width(0), image_height(0), x_step(1), z_step(1), should_ylikuutio_use_real_texture_coordinates(true), sphere_radius(NAN)
             {
                 // constructor.
             }
