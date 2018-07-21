@@ -84,8 +84,9 @@ namespace yli
                 bool is_bilinear_interpolation_in_use = false;
                 bool is_southwest_northeast_edges_in_use = false;
                 bool is_southeast_northwest_edges_in_use = false;
-                bool is_triangulation_type_valid = false;
-                int32_t n_faces_for_each_vertex;
+                std::size_t n_faces_for_each_vertex = 2; // split each quad into 2 triangles.
+
+                std::cout << "triangulation type in use: " << triangulation_type << "\n";
 
                 if (std::strcmp(char_triangulation_type, "bilinear_interpolation") == 0)
                 {
@@ -95,7 +96,6 @@ namespace yli
                     // |/ \|
                     // *---*
                     is_bilinear_interpolation_in_use = true;
-                    is_triangulation_type_valid = true;
                     n_faces_for_each_vertex = 4;
                 }
                 else if ((std::strcmp(char_triangulation_type, "southwest_northeast_edges") == 0) || (std::strcmp(char_triangulation_type, "northeast_southwest_edges") == 0))
@@ -106,8 +106,6 @@ namespace yli
                     // |/  |
                     // *---*
                     is_southwest_northeast_edges_in_use = true;
-                    is_triangulation_type_valid = true;
-                    n_faces_for_each_vertex = 2;
                 }
                 else if ((std::strcmp(char_triangulation_type, "southeast_northwest_edges") == 0) || (std::strcmp(char_triangulation_type, "northwest_southeast_edges") == 0))
                 {
@@ -117,13 +115,8 @@ namespace yli
                     // |  \|
                     // *---*
                     is_southeast_northwest_edges_in_use = true;
-                    is_triangulation_type_valid = true;
-                    n_faces_for_each_vertex = 2;
                 }
-
-                std::cout << "triangulation type in use: " << triangulation_type << "\n";
-
-                if (!is_triangulation_type_valid)
+                else
                 {
                     std::cerr << "invalid triangulation type!\n";
                     return false;

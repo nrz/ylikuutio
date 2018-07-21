@@ -3,6 +3,16 @@
 
 #include "code/ylikuutio/graph/graph.hpp"
 
+// Include GLM
+#ifndef __GLM_GLM_HPP_INCLUDED
+#define __GLM_GLM_HPP_INCLUDED
+#include <glm/glm.hpp> // glm
+#endif
+
+// Include standard headers
+#include <stdint.h> // uint32_t etc.
+#include <string>   // std::string
+
 namespace space_partition
 {
     class VertexGraph: public graph::Graph

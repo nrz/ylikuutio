@@ -58,7 +58,7 @@ namespace loaders
             return false;
         }
 
-        int temp_mesh_count = ofbx_iscene->getMeshCount(); // `getMeshCount()` returns `int`.
+        const int temp_mesh_count = ofbx_iscene->getMeshCount(); // `getMeshCount()` returns `int`.
 
         if (temp_mesh_count < 0)
         {
@@ -66,7 +66,7 @@ namespace loaders
             return false;
         }
 
-        std::size_t mesh_count = static_cast<std::size_t>(temp_mesh_count);
+        const std::size_t mesh_count = static_cast<std::size_t>(temp_mesh_count);
 
         if (mesh_i >= mesh_count)
         {
@@ -90,21 +90,27 @@ namespace loaders
             return false;
         }
 
-        // TODO: finalize the implementation of `yli::ontology::Symbiosis`
-        // to be able to support for different materials!
-        int material_count = mesh->getMaterialCount(); // TODO: use this in  `yli::ontology::Symbiosis` entities!
+        const int material_count = mesh->getMaterialCount();
 
         if (is_debug_mode)
         {
             std::cout << filename << ": mesh " << mesh_i << ": getMaterialCount(): " << material_count << "\n";
         }
 
-        int vertex_count = geometry->getVertexCount();
+        const int temp_vertex_count = geometry->getVertexCount();
 
         if (is_debug_mode)
         {
-            std::cout << filename << ": mesh " << mesh_i << ": getVertexCount(): " << vertex_count << "\n";
+            std::cout << filename << ": mesh " << mesh_i << ": getVertexCount(): " << temp_vertex_count << "\n";
         }
+
+        if (temp_vertex_count < 0)
+        {
+            std::cerr << "vertex count is negative!\n";
+            return false;
+        }
+
+        const std::size_t vertex_count = static_cast<std::size_t>(temp_vertex_count);
 
         const ofbx::Vec3* vertices = geometry->getVertices();
 

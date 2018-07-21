@@ -40,37 +40,44 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ---------------------------------------------------------------------------
 */
-
 #include "UnitTestPCH.h"
-#include "AbstractImportExportBase.h"
-
+#include <assimp/cexport.h>
 #include <assimp/Importer.hpp>
+#include <assimp/scene.h>
+#include <assimp/postprocess.h>
 
-using namespace Assimp;
+using namespace ::Assimp;
 
-
-class utOpenGEXImportExport : public AbstractImportExportBase {
+class BlenderWorkTest : public ::testing::Test {
 public:
-    virtual bool importerTest() {
-        Assimp::Importer importer;
-        const aiScene *scene = importer.ReadFile( ASSIMP_TEST_MODELS_DIR "/OpenGEX/Example.ogex", 0 );
-        return nullptr != scene;
+    virtual void SetUp()
+    {
+        im = new Assimp::Importer();
     }
+
+    virtual void TearDown()
+    {
+        delete im;
+    }
+
+protected:
+
+    Assimp::Importer* im;
 };
 
-TEST_F( utOpenGEXImportExport, importLWSFromFileTest ) {
-    EXPECT_TRUE( importerTest() );
+TEST_F(BlenderWorkTest,work_279) {
+    const aiScene* pTest = im->ReadFile(ASSIMP_TEST_MODELS_DIR "/BLEND/test_279.blend", aiProcess_ValidateDataStructure);
+    ASSERT_TRUE(pTest != NULL);
+
+    // material has 2 diffuse textures
+    ASSERT_TRUE(pTest->HasMaterials());
+    ASSERT_TRUE(pTest->HasMeshes());
+    ASSERT_TRUE(pTest->mMeshes[0]->mNumVertices > 0);
+    ASSERT_EQ(44, pTest->mMeshes[0]->mNumFaces);
+    EXPECT_EQ(1, pTest->mNumMaterials);
 }
 
-TEST_F( utOpenGEXImportExport, Importissue1262_NoCrash ) {
-    Assimp::Importer importer;
-    const aiScene *scene = importer.ReadFile( ASSIMP_TEST_MODELS_DIR "/OpenGEX/light_issue1262.ogex", 0 );
-    EXPECT_NE( nullptr, scene );
 
-}
 
-TEST_F(utOpenGEXImportExport, Importissue1340_EmptyCameraObject) {
-    Assimp::Importer importer;
-    const aiScene *scene = importer.ReadFile(ASSIMP_TEST_MODELS_DIR "/OpenGEX/empty_camera.ogex", 0);
-    EXPECT_NE(nullptr, scene);
-}
+
+
