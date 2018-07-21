@@ -84,7 +84,7 @@ namespace yli
                 bool is_bilinear_interpolation_in_use = false;
                 bool is_southwest_northeast_edges_in_use = false;
                 bool is_southeast_northwest_edges_in_use = false;
-                int32_t n_faces_for_each_vertex = 2; // split each quad into 2 triangles.
+                std::size_t n_faces_for_each_vertex = 2; // split each quad into 2 triangles.
 
                 std::cout << "triangulation type in use: " << triangulation_type << "\n";
 
