@@ -22,50 +22,53 @@
 #include <unordered_map> // std::unordered_map
 #include <vector>        // std::vector
 
-namespace loaders
+namespace yli
 {
-    bool load_symbiosis(
-            SymbiosisLoaderStruct& symbiosis_loader_struct,
-            std::vector<std::vector<glm::vec3>>& out_vertices,
-            std::vector<std::vector<glm::vec2>>& out_UVs,
-            std::vector<std::vector<glm::vec3>>& out_normals,
-            std::vector<std::vector<GLuint>>& indices,
-            std::vector<std::vector<glm::vec3>>& indexed_vertices,
-            std::vector<std::vector<glm::vec2>>& indexed_UVs,
-            std::vector<std::vector<glm::vec3>>& indexed_normals,
-            std::unordered_map<const ofbx::Texture*, std::vector<int32_t>>& ofbx_diffuse_texture_mesh_map,
-            std::vector<const ofbx::Mesh*>& ofbx_meshes,
-            std::vector<const ofbx::Texture*>& ofbx_diffuse_texture_vector,
-            std::vector<const ofbx::Texture*>& ofbx_normal_texture_vector,
-            std::vector<const ofbx::Texture*>& ofbx_count_texture_vector,
-            std::size_t& mesh_count,
-            const bool is_debug_mode)
+    namespace loaders
     {
-        bool model_loading_result = false;
-
-        if (symbiosis_loader_struct.model_file_format.compare("fbx") == 0 || symbiosis_loader_struct.model_file_format.compare("FBX") == 0)
+        bool load_symbiosis(
+                SymbiosisLoaderStruct& symbiosis_loader_struct,
+                std::vector<std::vector<glm::vec3>>& out_vertices,
+                std::vector<std::vector<glm::vec2>>& out_UVs,
+                std::vector<std::vector<glm::vec3>>& out_normals,
+                std::vector<std::vector<GLuint>>& indices,
+                std::vector<std::vector<glm::vec3>>& indexed_vertices,
+                std::vector<std::vector<glm::vec2>>& indexed_UVs,
+                std::vector<std::vector<glm::vec3>>& indexed_normals,
+                std::unordered_map<const ofbx::Texture*, std::vector<int32_t>>& ofbx_diffuse_texture_mesh_map,
+                std::vector<const ofbx::Mesh*>& ofbx_meshes,
+                std::vector<const ofbx::Texture*>& ofbx_diffuse_texture_vector,
+                std::vector<const ofbx::Texture*>& ofbx_normal_texture_vector,
+                std::vector<const ofbx::Texture*>& ofbx_count_texture_vector,
+                std::size_t& mesh_count,
+                const bool is_debug_mode)
         {
-            model_loading_result = loaders::load_FBX(
-                    symbiosis_loader_struct.model_filename,
-                    out_vertices,
-                    out_UVs,
-                    out_normals,
-                    ofbx_diffuse_texture_mesh_map,
-                    ofbx_meshes,
-                    ofbx_diffuse_texture_vector,
-                    ofbx_normal_texture_vector,
-                    ofbx_count_texture_vector,
-                    mesh_count,
-                    is_debug_mode);
-        }
-        else
-        {
-            std::cerr << "no model was loaded!\n";
-            std::cerr << "model file format: " << symbiosis_loader_struct.model_file_format << "\n";
-            return false;
-        }
+            bool model_loading_result = false;
 
-        // TODO: Compute the graph of this object type to enable object vertex modification!
-        return model_loading_result;
+            if (symbiosis_loader_struct.model_file_format.compare("fbx") == 0 || symbiosis_loader_struct.model_file_format.compare("FBX") == 0)
+            {
+                model_loading_result = yli::loaders::load_FBX(
+                        symbiosis_loader_struct.model_filename,
+                        out_vertices,
+                        out_UVs,
+                        out_normals,
+                        ofbx_diffuse_texture_mesh_map,
+                        ofbx_meshes,
+                        ofbx_diffuse_texture_vector,
+                        ofbx_normal_texture_vector,
+                        ofbx_count_texture_vector,
+                        mesh_count,
+                        is_debug_mode);
+            }
+            else
+            {
+                std::cerr << "no model was loaded!\n";
+                std::cerr << "model file format: " << symbiosis_loader_struct.model_file_format << "\n";
+                return false;
+            }
+
+            // TODO: Compute the graph of this object type to enable object vertex modification!
+            return model_loading_result;
+        }
     }
 }

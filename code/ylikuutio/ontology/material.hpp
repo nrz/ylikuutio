@@ -86,11 +86,11 @@ namespace yli
                         // Load the texture.
                         if ((std::strcmp(this->char_texture_file_format, "bmp") == 0) || (std::strcmp(this->char_texture_file_format, "BMP") == 0))
                         {
-                            this->texture = loaders::load_BMP_texture(this->texture_filename);
+                            this->texture = yli::loaders::load_BMP_texture(this->texture_filename);
                         }
                         else if ((std::strcmp(this->char_texture_file_format, "dds") == 0) || (std::strcmp(this->char_texture_file_format, "DDS") == 0))
                         {
-                            this->texture = loaders::load_DDS_texture(this->texture_filename);
+                            this->texture = yli::loaders::load_DDS_texture(this->texture_filename);
                         }
                         else
                         {

@@ -99,7 +99,7 @@ namespace yli
 
         void SymbiontMaterial::load_texture()
         {
-            this->texture = loaders::load_FBX_texture(this->ofbx_texture);
+            this->texture = yli::loaders::load_FBX_texture(this->ofbx_texture);
 
             // Get a handle for our "myTextureSampler" uniform.
             yli::ontology::Symbiosis* symbiosis = static_cast<yli::ontology::Symbiosis*>(this->parent);

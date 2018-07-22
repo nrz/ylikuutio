@@ -64,7 +64,7 @@ namespace yli
                     {
                         const bool is_debug_mode = true;
 
-                        font_loading_result = loaders::load_SVG_font(
+                        font_loading_result = yli::loaders::load_SVG_font(
                                 this->font_filename,
                                 this->glyph_vertex_data,
                                 this->glyph_names,

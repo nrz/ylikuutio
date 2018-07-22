@@ -12,15 +12,18 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
-namespace loaders
+namespace yli
 {
-    bool load_FBX(
-            const std::string& filename,
-            const std::size_t mesh_i,
-            std::vector<glm::vec3>& out_vertices,
-            std::vector<glm::vec2>& out_UVs,
-            std::vector<glm::vec3>& out_normals,
-            const bool is_debug_mode);
+    namespace loaders
+    {
+        bool load_FBX(
+                const std::string& filename,
+                const std::size_t mesh_i,
+                std::vector<glm::vec3>& out_vertices,
+                std::vector<glm::vec2>& out_UVs,
+                std::vector<glm::vec3>& out_normals,
+                const bool is_debug_mode);
+    }
 }
 
 #endif

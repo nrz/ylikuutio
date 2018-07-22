@@ -162,7 +162,7 @@ namespace yli
 
             const bool is_debug_mode = true;
 
-            if (loaders::load_symbiosis(
+            if (yli::loaders::load_symbiosis(
                         symbiosis_loader_struct,
                         this->vertices,
                         this->uvs,

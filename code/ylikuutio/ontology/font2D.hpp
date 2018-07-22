@@ -58,11 +58,11 @@ namespace yli
                     // Initialize texture
                     if ((std::strcmp(char_font_texture_file_format, "bmp") == 0) || (std::strcmp(char_font_texture_file_format, "BMP") == 0))
                     {
-                        this->texture = loaders::load_BMP_texture(texture_filename);
+                        this->texture = yli::loaders::load_BMP_texture(texture_filename);
                     }
                     else if ((std::strcmp(char_font_texture_file_format, "dds") == 0) || (std::strcmp(char_font_texture_file_format, "DDS") == 0))
                     {
-                        this->texture = loaders::load_DDS_texture(texture_filename);
+                        this->texture = yli::loaders::load_DDS_texture(texture_filename);
                     }
                     else
                     {
@@ -76,7 +76,7 @@ namespace yli
                     glGenBuffers(1, &uvbuffer);
 
                     // Initialize Shader
-                    programID = loaders::load_shaders("TextVertexShader.vertexshader", "TextVertexShader.fragmentshader");
+                    programID = yli::loaders::load_shaders("TextVertexShader.vertexshader", "TextVertexShader.fragmentshader");
 
                     // Get a handle for our buffers
                     vertex_position_in_screenspaceID = glGetAttribLocation(programID, "vertexPosition_screenspace");

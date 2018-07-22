@@ -7,9 +7,12 @@
 #include <GL/glew.h> // GLfloat, GLuint etc.
 #endif
 
-namespace loaders
+namespace yli
 {
-    GLuint load_shaders(const char* const vertex_file_path, const char* const fragment_file_path);
+    namespace loaders
+    {
+        GLuint load_shaders(const char* const vertex_file_path, const char* const fragment_file_path);
+    }
 }
 
 #endif
