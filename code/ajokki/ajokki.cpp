@@ -28,6 +28,7 @@
 #include "code/ylikuutio/callback_system/callback_engine.hpp"
 #include "code/ylikuutio/callback_system/callback_magic_numbers.hpp"
 #include "code/ylikuutio/callback_system/key_and_callback_struct.hpp"
+#include "code/ylikuutio/command_line/command_line_master.hpp"
 #include "code/ylikuutio/console/console.hpp"
 #include "code/ylikuutio/console/console_command_callback.hpp"
 #include "code/ylikuutio/console/console_struct.hpp"
@@ -119,24 +120,10 @@ std::string g_font_texture_file_format = "bmp";
 // std::string g_font_texture_filename = "Holstein.DDS";
 std::string g_font_texture_filename = "Holstein.bmp";
 
-int main(int argc, char* argv[])
+int main(const int argc, const char* argv[])
 {
-    std::vector<std::string> arg_vector;
-
-    if (argc > 1)
-    {
-        arg_vector.assign(argv + 1, argv + argc);
-
-        // Print command line arguments (without the executable name string).
-        for (std::string argument : arg_vector)
-        {
-            std::cout << argument << "\n";
-        }
-    }
-    else
-    {
-        std::cout << "no command line arguments.\n";
-    }
+    yli::command_line::CommandLineMaster command_line_master(argc, argv);
+    command_line_master.print_keys_and_values();
 
     int input_method_in_use = yli::input::KEYBOARD;
 
