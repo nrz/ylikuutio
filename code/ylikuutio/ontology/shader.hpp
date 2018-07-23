@@ -78,7 +78,7 @@ namespace yli
                     this->bind_to_parent();
 
                     // Create and compile our GLSL program from the shaders.
-                    this->programID = loaders::load_shaders(this->char_vertex_shader, this->char_fragment_shader);
+                    this->programID = yli::loaders::load_shaders(this->char_vertex_shader, this->char_fragment_shader);
 
                     // Get a handle for our "MVP" uniform.
                     this->MatrixID = glGetUniformLocation(this->programID, "MVP");

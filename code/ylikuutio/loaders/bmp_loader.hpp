@@ -6,13 +6,16 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
-namespace loaders
+namespace yli
 {
-    uint8_t* load_BMP_file(
-            const std::string& bmp_filename,
-            std::size_t& image_width,
-            std::size_t& image_height,
-            std::size_t& image_size);
+    namespace loaders
+    {
+        uint8_t* load_BMP_file(
+                const std::string& bmp_filename,
+                std::size_t& image_width,
+                std::size_t& image_height,
+                std::size_t& image_size);
+    }
 }
 
 #endif

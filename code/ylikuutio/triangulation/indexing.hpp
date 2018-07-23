@@ -4,14 +4,9 @@
 #include "triangulation_enums.hpp"
 #include "code/ylikuutio/common/globals.hpp"
 
-// Include GLEW
-#ifndef __GL_GLEW_H_INCLUDED
-#define __GL_GLEW_H_INCLUDED
-#include <GL/glew.h> // GLfloat, GLuint etc.
-#endif
-
 // Include standard headers
-#include <stdint.h> // uint32_t etc.
+#include <cstddef>  // std::size_t
+#include <iostream> // std::cout, std::cin, std::cerr
 #include <vector>   // std::vector
 
 namespace yli
@@ -20,29 +15,29 @@ namespace yli
     {
         // For bilinear interpolation, southeast-northwest edges, and southwest-northeast edges.
         // These functions return indices.
-        constexpr GLuint southwest(const int32_t current_vertex_i, const int32_t image_width)
+        constexpr std::size_t southwest(const std::size_t current_vertex_i, const std::size_t image_width)
         {
             return current_vertex_i - image_width - 1;
         }
-        constexpr GLuint southeast(const int32_t current_vertex_i, const int32_t image_width)
+        constexpr std::size_t southeast(const std::size_t current_vertex_i, const std::size_t image_width)
         {
             return current_vertex_i - image_width;
         }
-        constexpr GLuint northwest(const int32_t current_vertex_i, const int32_t image_width)
+        constexpr std::size_t northwest(const std::size_t current_vertex_i, const std::size_t image_width)
         {
             return current_vertex_i - 1;
         }
-        constexpr GLuint northeast(const int32_t current_vertex_i, const int32_t image_width)
+        constexpr std::size_t northeast(const std::size_t current_vertex_i, const std::size_t image_width)
         {
             return current_vertex_i;
         }
 
         // for bilinear interpolation.
-        constexpr int32_t get_face_normal_i(
-                const int32_t x,
-                const int32_t z,
+        constexpr std::size_t get_face_normal_i(
+                const std::size_t x,
+                const std::size_t z,
                 const BilinearDirections compass_point_code,
-                const int32_t actual_image_width)
+                const std::size_t actual_image_width)
         {
             // Face indices example for a 4x4 image file using bilinear interpolation.
             //
@@ -91,7 +86,8 @@ namespace yli
                 case SSE:
                     return 4 * (z - 1) * (actual_image_width - 1) + (4 * x) + 1;
                 default:
-                    return -1;
+                    std::cerr << "invalid compass point code!\n";
+                    return 0;
             }
         }
     }

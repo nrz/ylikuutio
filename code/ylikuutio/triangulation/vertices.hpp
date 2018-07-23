@@ -16,7 +16,7 @@
 #endif
 
 // Include standard headers
-#include <stdint.h> // uint32_t etc.
+#include <cstddef>  // std::size_t
 #include <vector>   // std::vector
 
 namespace yli
@@ -45,8 +45,8 @@ namespace yli
                 std::vector<glm::vec3>& out_vertices,
                 std::vector<glm::vec2>& out_UVs,
                 std::vector<glm::vec3>& out_normals,
-                const int32_t actual_image_width,
-                const int32_t actual_image_height,
+                const std::size_t actual_image_width,
+                const std::size_t actual_image_height,
                 const bool is_bilinear_interpolation_in_use,
                 const bool is_southwest_northeast_edges_in_use,
                 const bool is_southeast_northwest_edges_in_use);

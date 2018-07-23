@@ -13,20 +13,23 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
-namespace loaders
+namespace yli
 {
-    bool load_SRTM_terrain(
-            const std::string& image_path,
-            const float latitude,
-            const float longitude,
-            const float planet_radius,
-            const float divisor,
-            std::vector<glm::vec3>& out_vertices,
-            std::vector<glm::vec2>& out_UVs,
-            std::vector<glm::vec3>& out_normals,
-            const std::size_t x_step,
-            const std::size_t z_step,
-            const std::string& triangulation_type);
+    namespace loaders
+    {
+        bool load_SRTM_terrain(
+                const std::string& image_path,
+                const float latitude,
+                const float longitude,
+                const float planet_radius,
+                const float divisor,
+                std::vector<glm::vec3>& out_vertices,
+                std::vector<glm::vec2>& out_UVs,
+                std::vector<glm::vec3>& out_normals,
+                const std::size_t x_step,
+                const std::size_t z_step,
+                const std::string& triangulation_type);
+    }
 }
 
 #endif

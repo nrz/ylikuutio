@@ -337,6 +337,10 @@ add_library(ylikuutio STATIC
     code/ylikuutio/callback_system/callback_parameter.hpp
     code/ylikuutio/callback_system/key_and_callback_struct.hpp
 
+    # command_line, in alphabetical order
+    code/ylikuutio/command_line/command_line_master.cpp
+    code/ylikuutio/command_line/command_line_master.hpp
+
     # common, in alphabetical order
     code/ylikuutio/common/any_value.cpp
     code/ylikuutio/common/any_value.hpp
@@ -579,6 +583,14 @@ add_library(ylikuutio STATIC
     code/ylikuutio/triangulation/vertices.hpp
     )
 # add_dependencies(ylikuutio rescan)
+
+# yli_convert
+add_executable(yli_convert
+    # yli_convert, in alphabetical order
+    code/tools/yli_convert.cpp
+    )
+add_dependencies(yli_convert rescan)
+target_link_libraries(yli_convert ylikuutio ${ALL_LIBS})
 
 # Ajokki
 add_executable(ajokki

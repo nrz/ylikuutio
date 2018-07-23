@@ -11,11 +11,14 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
-namespace loaders
+namespace yli
 {
-    bool load_LASF_data(
-            const std::string laser_scaling_file_name,
-            std::vector<glm::vec3>& laser_points);
+    namespace loaders
+    {
+        bool load_LASF_data(
+                const std::string laser_scaling_file_name,
+                std::vector<glm::vec3>& laser_points);
+    }
 }
 
 #endif

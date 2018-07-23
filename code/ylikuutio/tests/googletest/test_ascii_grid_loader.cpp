@@ -24,7 +24,7 @@ TEST(an_ASCII_grid_must_be_defined_and_interpolated_appropriately, test_3x3_0_1_
     std::vector<glm::vec2> UVs;              // UVs of the object.
     std::vector<glm::vec3> normals;          // normals of the object.
 
-    bool model_loading_result = loaders::load_ASCII_grid(
+    bool model_loading_result = yli::loaders::load_ASCII_grid(
             ASCII_grid_model_filename,
             vertices,
             UVs,

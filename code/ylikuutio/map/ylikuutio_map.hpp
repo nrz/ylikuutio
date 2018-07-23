@@ -2,61 +2,99 @@
 #define __YLIKUUTIO_MAP_HPP_INCLUDED
 
 #include "code/ylikuutio/console/console.hpp"
+#include "code/ylikuutio/ontology/universe.hpp"
 
 // Include standard headers
 #include <algorithm>     // std::sort
 #include <cstddef>       // std::size_t
+#include <iostream>      // std::cout, std::cin, std::cerr
 #include <string>        // std::string
 #include <unordered_map> // std::unordered_map
 #include <vector>        // std::vector
 
-namespace map
+namespace yli
 {
-    template <class T1>
-        void print_keys_to_console(const std::unordered_map<std::string, T1>* const unordered_map_pointer, yli::console::Console* const console)
-        {
-            std::vector<std::string> key_vector;
-            key_vector.reserve(unordered_map_pointer->size());
-
-            for (auto key_and_value : *unordered_map_pointer)
+    namespace map
+    {
+        template <class T1>
+            void print_keys_to_console(const std::unordered_map<std::string, T1>* const unordered_map_pointer, yli::console::Console* const console)
             {
-                key_vector.push_back(key_and_value.first); // key.
-            }
+                std::vector<std::string> key_vector;
+                key_vector.reserve(unordered_map_pointer->size());
 
-            // sort key vector alphabetically.
-            std::sort(key_vector.begin(), key_vector.end());
-
-            std::size_t characters_for_line = console->get_universe()->get_window_width() / console->get_universe()->get_text_size();
-
-            std::string keys_text;
-
-            for (std::string key : key_vector)
-            {
-                if (keys_text.size() > 0 &&
-                        keys_text.size() + key.size() >= characters_for_line)
+                for (auto key_and_value : *unordered_map_pointer)
                 {
-                    // Not enough space for this key on this line.
-                    // Print this line.
+                    key_vector.push_back(key_and_value.first); // key.
+                }
+
+                // sort key vector alphabetically.
+                std::sort(key_vector.begin(), key_vector.end());
+
+                std::size_t characters_for_line = console->get_universe()->get_window_width() / console->get_universe()->get_text_size();
+
+                std::string keys_text;
+
+                for (std::string key : key_vector)
+                {
+                    if (keys_text.size() > 0 &&
+                            keys_text.size() + key.size() >= characters_for_line)
+                    {
+                        // Not enough space for this key on this line.
+                        // Print this line.
+                        console->print_text(keys_text);
+                        keys_text = key;
+                    }
+                    else if (keys_text.size() > 0)
+                    {
+                        // There is space, and this is not the first key on this line.
+                        keys_text += " " + key;
+                    }
+                    else
+                    {
+                        // This is the first key on this line.
+                        keys_text += key;
+                    }
+                }
+                if (keys_text.size() > 0)
+                {
+                    // Print the last line.
                     console->print_text(keys_text);
-                    keys_text = key;
-                }
-                else if (keys_text.size() > 0)
-                {
-                    // There is space, and this is not the first key on this line.
-                    keys_text += " " + key;
-                }
-                else
-                {
-                    // This is the first key on this line.
-                    keys_text += key;
                 }
             }
-            if (keys_text.size() > 0)
+
+        template <class T1>
+            void print_keys_and_values(const std::unordered_map<std::string, T1>* const unordered_map_pointer)
             {
-                // Print the last line.
-                console->print_text(keys_text);
+                if (unordered_map_pointer->size() == 0)
+                {
+                    std::cout << "no keys.\n";
+                    return;
+                }
+
+                std::vector<std::string> key_vector;
+                key_vector.reserve(unordered_map_pointer->size());
+
+                for (auto key_and_value : *unordered_map_pointer)
+                {
+                    key_vector.push_back(key_and_value.first); // key.
+                }
+
+                // sort key vector alphabetically.
+                std::sort(key_vector.begin(), key_vector.end());
+
+                for (std::string key : key_vector)
+                {
+                    if (unordered_map_pointer->at(key).empty())
+                    {
+                        std::cout << key << " (no value)\n";
+                    }
+                    else
+                    {
+                        std::cout << key << " = " << unordered_map_pointer->at(key) << "\n";
+                    }
+                }
             }
-        }
+    }
 }
 
 #endif

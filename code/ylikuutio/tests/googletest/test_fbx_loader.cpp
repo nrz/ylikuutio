@@ -254,7 +254,7 @@ TEST(fbx_file_must_be_loaded_appropriately, rigged_and_animated_cat)
 
     const bool is_debug_mode = false; // Travis fails for too much output.
 
-    const bool result = loaders::load_FBX(filename, mesh_i, out_vertices, out_UVs, out_normals, is_debug_mode);
+    const bool result = yli::loaders::load_FBX(filename, mesh_i, out_vertices, out_UVs, out_normals, is_debug_mode);
     ASSERT_TRUE(result);
 }
 
