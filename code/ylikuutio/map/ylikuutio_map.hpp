@@ -2,6 +2,7 @@
 #define __YLIKUUTIO_MAP_HPP_INCLUDED
 
 #include "code/ylikuutio/console/console.hpp"
+#include "code/ylikuutio/ontology/universe.hpp"
 
 // Include standard headers
 #include <algorithm>     // std::sort
