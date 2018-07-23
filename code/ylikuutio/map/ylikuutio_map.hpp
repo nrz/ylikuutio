@@ -7,6 +7,7 @@
 // Include standard headers
 #include <algorithm>     // std::sort
 #include <cstddef>       // std::size_t
+#include <iostream>      // std::cout, std::cin, std::cerr
 #include <string>        // std::string
 #include <unordered_map> // std::unordered_map
 #include <vector>        // std::vector
@@ -56,6 +57,39 @@ namespace map
             {
                 // Print the last line.
                 console->print_text(keys_text);
+            }
+        }
+
+    template <class T1>
+        void print_keys_and_values(const std::unordered_map<std::string, T1>* const unordered_map_pointer)
+        {
+            if (unordered_map_pointer->size() == 0)
+            {
+                std::cout << "no keys.\n";
+                return;
+            }
+
+            std::vector<std::string> key_vector;
+            key_vector.reserve(unordered_map_pointer->size());
+
+            for (auto key_and_value : *unordered_map_pointer)
+            {
+                key_vector.push_back(key_and_value.first); // key.
+            }
+
+            // sort key vector alphabetically.
+            std::sort(key_vector.begin(), key_vector.end());
+
+            for (std::string key : key_vector)
+            {
+                if (unordered_map_pointer->at(key).empty())
+                {
+                    std::cout << key << " (no value)\n";
+                }
+                else
+                {
+                    std::cout << key << " = " << unordered_map_pointer->at(key) << "\n";
+                }
             }
         }
 }
