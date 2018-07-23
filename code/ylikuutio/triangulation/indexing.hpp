@@ -6,7 +6,6 @@
 
 // Include standard headers
 #include <cstddef>  // std::size_t
-#include <iostream> // std::cout, std::cin, std::cerr
 #include <vector>   // std::vector
 
 namespace yli
@@ -86,8 +85,7 @@ namespace yli
                 case SSE:
                     return 4 * (z - 1) * (actual_image_width - 1) + (4 * x) + 1;
                 default:
-                    std::cerr << "invalid compass point code!\n";
-                    return 0;
+                    return 0; // this line should never be reached.
             }
         }
     }
