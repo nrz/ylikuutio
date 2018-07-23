@@ -433,7 +433,7 @@ namespace yli
             {
                 // No command parameters.
                 // Print names of named entities.
-                map::print_keys_to_console(&universe->entity_map, console);
+                yli::map::print_keys_to_console(&universe->entity_map, console);
             }
             else if (command_parameters.size() == 1)
             {

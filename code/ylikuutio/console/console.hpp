@@ -50,14 +50,14 @@
 // All other console-related functions are implemented through keypress
 // callbacks and keyrelease callbacks.
 
-namespace map
-{
-    template <class T1>
-        void print_keys_to_console(const std::unordered_map<std::string, T1>* const unordered_map_pointer, yli::console::Console* const console);
-}
-
 namespace yli
 {
+    namespace map
+    {
+        template <class T1>
+            void print_keys_to_console(const std::unordered_map<std::string, T1>* const unordered_map_pointer, yli::console::Console* const console);
+    }
+
     namespace console
     {
         class Console
@@ -304,7 +304,7 @@ namespace yli
                 // Public callbacks end here.
 
                 template <class T1>
-                    friend void map::print_keys_to_console(const std::unordered_map<std::string, T1>* const unordered_map_pointer, yli::console::Console* const console);
+                    friend void yli::map::print_keys_to_console(const std::unordered_map<std::string, T1>* const unordered_map_pointer, yli::console::Console* const console);
 
             private:
                 static void charmods_callback(GLFWwindow* window, unsigned int codepoint, int mods);
