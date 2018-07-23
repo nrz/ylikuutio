@@ -24,7 +24,7 @@ namespace glm
 
 		// -- Data --
 
-#		if GLM_HAS_ANONYMOUS_STRUCT
+#		if GLM_USE_ANONYMOUS_STRUCT == GLM_ENABLE
 			union
 			{
 				struct { T x, y, z, w; };
@@ -67,7 +67,7 @@ namespace glm
 
 		// -- Implicit basic constructors --
 
-		GLM_FUNC_DECL GLM_CONSTEXPR_CXX11 vec() GLM_DEFAULT_CTOR;
+		GLM_FUNC_DECL GLM_CONSTEXPR_CXX11 vec() GLM_DEFAULT;
 		GLM_FUNC_DECL GLM_CONSTEXPR_CXX11 vec(vec<4, T, Q> const& v) GLM_DEFAULT;
 		template<qualifier P>
 		GLM_FUNC_DECL GLM_CONSTEXPR_CXX11 vec(vec<4, T, P> const& v);
@@ -219,7 +219,7 @@ namespace glm
 
 		// -- Unary arithmetic operators --
 
-		GLM_FUNC_DECL vec<4, T, Q>& operator=(vec<4, T, Q> const& v);
+		GLM_FUNC_DECL vec<4, T, Q>& operator=(vec<4, T, Q> const& v) GLM_DEFAULT;
 
 		template<typename U>
 		GLM_FUNC_DECL vec<4, T, Q>& operator=(vec<4, U, Q> const& v);
