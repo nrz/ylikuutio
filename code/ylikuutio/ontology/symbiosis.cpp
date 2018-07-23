@@ -187,7 +187,7 @@ namespace yli
 
                 this->biontID_symbiont_species_vector.resize(this->ofbx_mesh_count);
 
-                for (auto key_and_value : ofbx_diffuse_texture_mesh_map)
+                for (auto key_and_value : this->ofbx_diffuse_texture_mesh_map)
                 {
                     ofbx_diffuse_texture_pointer_vector.push_back(key_and_value.first); // key.
                 }
