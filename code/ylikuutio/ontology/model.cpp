@@ -1,6 +1,12 @@
 #include "model.hpp"
 #include "object.hpp"
 
+// Include GLEW
+#ifndef __GL_GLEW_H_INCLUDED
+#define __GL_GLEW_H_INCLUDED
+#include <GL/glew.h> // GLfloat, GLuint etc.
+#endif
+
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
 #define __GLM_GLM_HPP_INCLUDED
@@ -59,7 +65,7 @@ namespace yli
             return this->vertices;
         }
 
-        const std::vector<uint32_t>& Model::get_indices() const
+        const std::vector<GLuint>& Model::get_indices() const
         {
             return this->indices;
         }

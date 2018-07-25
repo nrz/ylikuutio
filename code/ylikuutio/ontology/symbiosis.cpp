@@ -105,12 +105,15 @@ namespace yli
 
         void Symbiosis::render()
         {
-            this->prerender();
+            if (this->vram_buffer_in_use)
+            {
+                this->prerender();
 
-            // render this `Symbiosis` by calling `render()` function of each `Holobiont`.
-            yli::ontology::render_children<yli::ontology::Holobiont*>(this->holobiont_pointer_vector);
+                // render this `Symbiosis` by calling `render()` function of each `Holobiont`.
+                yli::ontology::render_children<yli::ontology::Holobiont*>(this->holobiont_pointer_vector);
 
-            this->postrender();
+                this->postrender();
+            }
         }
 
         yli::ontology::Entity* Symbiosis::get_parent() const
@@ -177,6 +180,7 @@ namespace yli
                         this->ofbx_normal_texture_vector,
                         this->ofbx_count_texture_vector,
                         this->ofbx_mesh_count,
+                        this->vram_buffer_in_use,
                         is_debug_mode))
             {
                 std::cout << "number of meshes: " << this->ofbx_mesh_count << "\n";

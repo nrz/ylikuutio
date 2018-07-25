@@ -19,6 +19,7 @@
 
 // Include standard headers
 #include <cstddef>  // std::size_t
+#include <limits>   // std::numeric_limits
 #include <queue>    // std::queue
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
@@ -49,7 +50,7 @@ namespace yli
                     // constructor.
 
                     // Initialize class members with some dummy values.
-                    this->childID = -1;
+                    this->childID = std::numeric_limits<std::size_t>::max();
                     this->lightID = 0;
                     this->vertex_position_modelspaceID = 0;
                     this->vertexUVID = 0;
@@ -72,7 +73,7 @@ namespace yli
                 std::size_t get_number_of_descendants() const override;
 
                 const std::vector<glm::vec3>& get_vertices() const;
-                const std::vector<uint32_t>& get_indices() const;
+                const std::vector<GLuint>& get_indices() const;
 
                 GLuint get_vertex_position_modelspaceID() const;
                 GLuint get_vertexUVID() const;
@@ -120,7 +121,7 @@ namespace yli
                 std::vector<glm::vec2> uvs;              // UVs of the `Model`.
                 std::vector<glm::vec3> normals;          // normals of the `Model`.
 
-                std::vector<uint32_t> indices;           // the deleted vertices will be reused (though it is not required, if there's enough memory).
+                std::vector<GLuint> indices;             // the deleted vertices will be reused (though it is not required, if there's enough memory).
                 std::vector<glm::vec3> indexed_vertices;
                 std::vector<glm::vec2> indexed_uvs;
                 std::vector<glm::vec3> indexed_normals;
@@ -129,6 +130,8 @@ namespace yli
                 GLuint uvbuffer;
                 GLuint normalbuffer;
                 GLuint elementbuffer;
+
+                bool vram_buffer_in_use;
         };
     }
 }

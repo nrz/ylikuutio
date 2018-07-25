@@ -9,12 +9,12 @@
 //
 // parameters:
 // required:
-// `--in foo`  load 3D data from file `foo`.
-// `--out bar` export 3D data into file `bar`.
+// `--in=foo`  load 3D data from file `foo`.
+// `--out=bar` export 3D data into file `bar`.
 //
 // optional:
-// `--informat baz` assume file format `baz` (if `--informat` is left out, file format is deduced from the filename extension).
-// `--outformat qux` export 3D data into file `qux` (if `--outformat` is left out, file format is deduced from the filename extension).
+// `--informat=baz` assume file format `baz` (if `--informat` is left out, file format is deduced from the filename extension).
+// `--outformat=qux` export 3D data into file `qux` (if `--outformat` is left out, file format is deduced from the filename extension).
 
 int main(const int argc, const char* argv[])
 {

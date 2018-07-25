@@ -72,6 +72,7 @@ namespace yli
                     this->number_of_symbiont_materials = 0;
                     this->number_of_holobionts = 0;
                     this->ofbx_mesh_count = 0;
+                    this->vram_buffer_in_use = symbiosis_struct.vram_buffer_in_use;
 
                     // get `childID` from `Shader` and set pointer to this `Symbiosis`.
                     this->bind_to_parent();
@@ -150,7 +151,7 @@ namespace yli
                 std::vector<std::vector<glm::vec2>> uvs;              // UVs of the object.
                 std::vector<std::vector<glm::vec3>> normals;          // normals of the object.
 
-                std::vector<std::vector<uint32_t>> indices;           // the deleted vertices will be reused (though it is not required, if there's enough memory).
+                std::vector<std::vector<GLuint>> indices;             // the deleted vertices will be reused (though it is not required, if there's enough memory).
                 std::vector<std::vector<glm::vec3>> indexed_vertices;
                 std::vector<std::vector<glm::vec2>> indexed_uvs;
                 std::vector<std::vector<glm::vec3>> indexed_normals;
@@ -163,6 +164,8 @@ namespace yli
                 std::vector<const ofbx::Texture*> ofbx_normal_texture_vector; // currently not in use.
                 std::vector<const ofbx::Texture*> ofbx_count_texture_vector;  // currently not in use.
                 std::size_t ofbx_mesh_count;
+
+                bool vram_buffer_in_use;
         };
     }
 }

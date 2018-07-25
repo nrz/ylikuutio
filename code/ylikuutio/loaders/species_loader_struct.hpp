@@ -18,7 +18,8 @@ typedef struct SpeciesLoaderStruct
         z_step(1),
         image_width_pointer(nullptr),
         image_height_pointer(nullptr),
-        triangulation_type("bilinear_interpolation")
+        triangulation_type("bilinear_interpolation"),
+        vram_buffer_in_use(true)
     {
         // constructor.
     }
@@ -35,6 +36,7 @@ typedef struct SpeciesLoaderStruct
     std::size_t* image_width_pointer;
     std::size_t* image_height_pointer;
     std::string triangulation_type; // for all.
+    bool vram_buffer_in_use;
 } SpeciesLoaderStruct;
 
 #endif

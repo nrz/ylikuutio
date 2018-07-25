@@ -21,7 +21,7 @@ namespace yli
 typedef struct SymbiosisStruct
 {
     SymbiosisStruct()
-        : parent(nullptr), light_position(glm::vec3(0.0f, 0.0f, 0.0f)), triangulation_type("bilinear_interpolation")
+        : parent(nullptr), light_position(glm::vec3(0.0f, 0.0f, 0.0f)), triangulation_type("bilinear_interpolation"), vram_buffer_in_use(true)
     {
         // constructor.
     }
@@ -31,6 +31,7 @@ typedef struct SymbiosisStruct
     std::string model_filename;       // filename of the symbiosis model file.
     glm::vec3 light_position;         // light position.
     std::string triangulation_type;   // `"bilinear_interpolation"`, `"southwest_northeast_edges"`, `"southeast_northwest_edges"`.
+    bool vram_buffer_in_use;
 } SymbiosisStruct;
 
 #endif

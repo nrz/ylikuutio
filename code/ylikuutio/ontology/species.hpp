@@ -69,6 +69,7 @@ namespace yli
                     this->x_step            = species_struct.x_step;
                     this->z_step            = species_struct.z_step;
                     this->triangulation_type = species_struct.triangulation_type;
+                    this->vram_buffer_in_use = species_struct.vram_buffer_in_use;
 
                     this->char_model_file_format = this->model_file_format.c_str();
                     this->char_model_filename    = this->model_filename.c_str();
@@ -115,6 +116,7 @@ namespace yli
                         species_loader_struct.image_width_pointer = &this->image_width;
                         species_loader_struct.image_height_pointer = &this->image_height;
                         species_loader_struct.triangulation_type = this->triangulation_type;
+                        species_loader_struct.vram_buffer_in_use = this->vram_buffer_in_use;
 
                         const bool is_debug_mode = true;
 
@@ -131,6 +133,7 @@ namespace yli
                                 &this->uvbuffer,
                                 &this->normalbuffer,
                                 &this->elementbuffer,
+                                this->vram_buffer_in_use,
                                 is_debug_mode);
 
                         // TODO: Compute the graph of this object type to enable object vertex modification!
