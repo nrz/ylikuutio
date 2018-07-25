@@ -41,6 +41,7 @@ namespace yli
                 std::vector<const ofbx::Texture*>& ofbx_normal_texture_vector,
                 std::vector<const ofbx::Texture*>& ofbx_count_texture_vector,
                 std::size_t& mesh_count,
+                bool& vram_buffer_in_use,
                 const bool is_debug_mode);
     }
 }

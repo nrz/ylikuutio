@@ -131,7 +131,7 @@ namespace yli
                 GLuint normalbuffer;
                 GLuint elementbuffer;
 
-                bool is_in_vram_buffer;
+                bool vram_buffer_in_use;
         };
     }
 }

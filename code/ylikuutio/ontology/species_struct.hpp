@@ -43,7 +43,8 @@ typedef struct SpeciesStruct
         mesh_i(0),
         x_step(1),
         z_step(1),
-        triangulation_type("bilinear_interpolation")
+        triangulation_type("bilinear_interpolation"),
+        vram_buffer_in_use(true)
     {
         // constructor.
     }
@@ -72,6 +73,7 @@ typedef struct SpeciesStruct
     std::size_t x_step;                      // Step in x-dimension for input data (set to 1 to load all data points/measurements).
     std::size_t z_step;                      // Step in z-dimension for input data (set to 1 to load all data points/measurements).
     std::string triangulation_type;          // `"bilinear_interpolation"`, `"southwest_northeast_edges"`, `"southeast_northwest_edges"`.
+    bool vram_buffer_in_use;
 } SpeciesStruct;
 
 #endif

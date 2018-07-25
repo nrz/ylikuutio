@@ -41,6 +41,7 @@ namespace yli
                 GLuint* uvbuffer,
                 GLuint* normalbuffer,
                 GLuint* elementbuffer,
+                bool& vram_buffer_in_use,
                 const bool is_debug_mode)
         {
             bool model_loading_result = false;
@@ -126,22 +127,27 @@ namespace yli
 
             std::cout << "Indexing completed successfully.\n";
 
-            // Load it into a VBO.
-            glGenBuffers(1, vertexbuffer);
-            glBindBuffer(GL_ARRAY_BUFFER, *vertexbuffer);
-            glBufferData(GL_ARRAY_BUFFER, indexed_vertices.size() * sizeof(glm::vec3), &indexed_vertices[0], GL_STATIC_DRAW);
+            vram_buffer_in_use = species_loader_struct.vram_buffer_in_use;
 
-            glGenBuffers(1, uvbuffer);
-            glBindBuffer(GL_ARRAY_BUFFER, *uvbuffer);
-            glBufferData(GL_ARRAY_BUFFER, indexed_UVs.size() * sizeof(glm::vec2), &indexed_UVs[0], GL_STATIC_DRAW);
+            if (vram_buffer_in_use)
+            {
+                // Load it into a VBO.
+                glGenBuffers(1, vertexbuffer);
+                glBindBuffer(GL_ARRAY_BUFFER, *vertexbuffer);
+                glBufferData(GL_ARRAY_BUFFER, indexed_vertices.size() * sizeof(glm::vec3), &indexed_vertices[0], GL_STATIC_DRAW);
 
-            glGenBuffers(1, normalbuffer);
-            glBindBuffer(GL_ARRAY_BUFFER, *normalbuffer);
-            glBufferData(GL_ARRAY_BUFFER, indexed_normals.size() * sizeof(glm::vec3), &indexed_normals[0], GL_STATIC_DRAW);
+                glGenBuffers(1, uvbuffer);
+                glBindBuffer(GL_ARRAY_BUFFER, *uvbuffer);
+                glBufferData(GL_ARRAY_BUFFER, indexed_UVs.size() * sizeof(glm::vec2), &indexed_UVs[0], GL_STATIC_DRAW);
 
-            glGenBuffers(1, elementbuffer);
-            glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, *elementbuffer);
-            glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(GLuint), &indices[0] , GL_STATIC_DRAW);
+                glGenBuffers(1, normalbuffer);
+                glBindBuffer(GL_ARRAY_BUFFER, *normalbuffer);
+                glBufferData(GL_ARRAY_BUFFER, indexed_normals.size() * sizeof(glm::vec3), &indexed_normals[0], GL_STATIC_DRAW);
+
+                glGenBuffers(1, elementbuffer);
+                glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, *elementbuffer);
+                glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(GLuint), &indices[0] , GL_STATIC_DRAW);
+            }
 
             // TODO: Compute the graph of this object type to enable object vertex modification!
             return model_loading_result;

@@ -63,12 +63,15 @@ namespace yli
 
         void Species::render()
         {
-            this->prerender();
+            if (this->vram_buffer_in_use)
+            {
+                this->prerender();
 
-            // render this `Species`.
-            yli::ontology::render_species_or_glyph<yli::ontology::Species*>(this);
+                // render this `Species`.
+                yli::ontology::render_species_or_glyph<yli::ontology::Species*>(this);
 
-            this->postrender();
+                this->postrender();
+            }
         }
 
         yli::ontology::Entity* Species::get_parent() const

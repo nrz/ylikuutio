@@ -35,6 +35,7 @@ namespace yli
                 GLuint* uvbuffer,
                 GLuint* normalbuffer,
                 GLuint* elementbuffer,
+                bool& vram_buffer_in_use,
                 const bool is_debug_mode);
     }
 }
