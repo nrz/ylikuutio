@@ -19,6 +19,7 @@
 
 // Include standard headers
 #include <cstddef>  // std::size_t
+#include <limits>   // std::numeric_limits
 #include <queue>    // std::queue
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
@@ -49,7 +50,7 @@ namespace yli
                     // constructor.
 
                     // Initialize class members with some dummy values.
-                    this->childID = -1;
+                    this->childID = std::numeric_limits<std::size_t>::max();
                     this->lightID = 0;
                     this->vertex_position_modelspaceID = 0;
                     this->vertexUVID = 0;
@@ -129,6 +130,8 @@ namespace yli
                 GLuint uvbuffer;
                 GLuint normalbuffer;
                 GLuint elementbuffer;
+
+                bool is_in_vram_buffer;
         };
     }
 }
