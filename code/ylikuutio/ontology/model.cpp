@@ -65,7 +65,7 @@ namespace yli
             return this->vertices;
         }
 
-        const std::vector<uint32_t>& Model::get_indices() const
+        const std::vector<GLuint>& Model::get_indices() const
         {
             return this->indices;
         }

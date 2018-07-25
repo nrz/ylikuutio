@@ -150,7 +150,7 @@ namespace yli
                 std::vector<std::vector<glm::vec2>> uvs;              // UVs of the object.
                 std::vector<std::vector<glm::vec3>> normals;          // normals of the object.
 
-                std::vector<std::vector<uint32_t>> indices;           // the deleted vertices will be reused (though it is not required, if there's enough memory).
+                std::vector<std::vector<GLuint>> indices;             // the deleted vertices will be reused (though it is not required, if there's enough memory).
                 std::vector<std::vector<glm::vec3>> indexed_vertices;
                 std::vector<std::vector<glm::vec2>> indexed_uvs;
                 std::vector<std::vector<glm::vec3>> indexed_normals;
