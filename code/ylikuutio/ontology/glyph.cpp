@@ -40,12 +40,15 @@ namespace yli
 
         void Glyph::render()
         {
-            this->prerender();
+            if (this->vram_buffer_in_use)
+            {
+                this->prerender();
 
-            // render this `Glyph`.
-            yli::ontology::render_species_or_glyph<yli::ontology::Glyph*>(this);
+                // render this `Glyph`.
+                yli::ontology::render_species_or_glyph<yli::ontology::Glyph*>(this);
 
-            this->postrender();
+                this->postrender();
+            }
         }
 
         void Glyph::set_object_pointer(const std::size_t childID, yli::ontology::Object* const child_pointer)
