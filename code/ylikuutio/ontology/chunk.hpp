@@ -1,8 +1,8 @@
 #ifndef __CHUNK_HPP_INCLUDED
 #define __CHUNK_HPP_INCLUDED
 
-#include "chunk_master.hpp"
 #include "model.hpp"
+#include "chunk_master.hpp"
 #include "material.hpp"
 #include "render_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
