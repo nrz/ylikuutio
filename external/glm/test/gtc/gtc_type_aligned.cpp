@@ -1,9 +1,9 @@
-#define GLM_FORCE_MESSAGES
 #define GLM_FORCE_ALIGNED_GENTYPES
 #include <glm/glm.hpp>
 
 #if GLM_USE_ALIGNED_GENTYPES == GLM_ENABLE
 #include <glm/gtc/type_aligned.hpp>
+#include <glm/ext/vector_relational.hpp>
 
 GLM_STATIC_ASSERT(glm::detail::is_aligned<glm::aligned_lowp>::value, "aligned_lowp is not aligned");
 GLM_STATIC_ASSERT(glm::detail::is_aligned<glm::aligned_mediump>::value, "aligned_mediump is not aligned");
@@ -95,7 +95,7 @@ static int test_ctor()
 {
 	int Error = 0;
 
-#	if GLM_HAS_CONSTEXPR_CXX11
+#	if GLM_HAS_CONSTEXPR
 	{
 		constexpr glm::aligned_ivec4 v(1);
 
@@ -122,10 +122,29 @@ static int test_ctor()
 		Error += v.z == 1 ? 0 : 1;
 		Error += v.w == 1 ? 0 : 1;
 	}
-#	endif//GLM_HAS_CONSTEXPR_CXX11
+#	endif//GLM_HAS_CONSTEXPR
 
 	return Error;
 }
+
+/*
+using namespace glm;
+
+typedef mat<4, 4, float, aligned> aligned_mat4;
+
+static int test_aligned_mat4()
+{
+	int Error = 0;
+
+	aligned_mat4 m(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15);
+	aligned_mat4 t = transpose(m);
+	aligned_mat4 const expected = mat4(0, 4, 8, 12, 1, 5, 9, 13, 2, 6, 10, 14, 3, 7, 11, 15);
+	for (length_t l = 0; l < expected.length(); ++l)
+		Error += all(equal(t[l], expected[l], 0.0001f)) ? 0 : 1;
+
+	return Error;
+}
+*/
 
 int main()
 {
@@ -133,6 +152,7 @@ int main()
 
 	Error += test_ctor();
 	Error += test_copy();
+//	Error += test_aligned_mat4();
 
 	return Error;
 }

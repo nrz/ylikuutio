@@ -15,7 +15,7 @@ namespace glm
 		packed_mediump, ///< Typed data is tightly packed in memory  and operations are executed with medium precision in term of ULPs for higher performance
 		packed_lowp, ///< Typed data is tightly packed in memory  and operations are executed with low precision in term of ULPs to maximize performance
 
-#		if (GLM_USE_ALIGNED_GENTYPES == GLM_ENABLE)
+#		if GLM_USE_ALIGNED_GENTYPES == GLM_ENABLE
 			aligned_highp, ///< Typed data is aligned in memory allowing SIMD optimizations and operations are executed with high precision in term of ULPs
 			aligned_mediump, ///< Typed data is aligned in memory allowing SIMD optimizations and operations are executed with high precision in term of ULPs for higher performance
 			aligned_lowp, // ///< Typed data is aligned in memory allowing SIMD optimizations and operations are executed with high precision in term of ULPs to maximize performance
@@ -27,7 +27,7 @@ namespace glm
 		lowp = packed_lowp, ///< By default lowp qualifier is also packed
 		packed = packed_highp, ///< By default packed qualifier is also high precision
 
-#		if (GLM_USE_ALIGNED_GENTYPES == GLM_ENABLE) && defined(GLM_FORCE_DEFAULT_ALIGNED_GENTYPES)
+#		if GLM_USE_ALIGNED_GENTYPES == GLM_ENABLE && defined(GLM_FORCE_DEFAULT_ALIGNED_GENTYPES)
 			defaultp = aligned_highp
 #		else
 			defaultp = highp
@@ -152,5 +152,45 @@ namespace detail
 		typedef glm_u64vec4 type;
 	};
 #	endif
+
+	enum genTypeEnum
+	{
+		GENTYPE_VEC,
+		GENTYPE_MAT,
+		GENTYPE_QUAT
+	};
+
+	template <typename genType>
+	struct genTypeTrait
+	{};
+
+	template <length_t C, length_t R, typename T>
+	struct genTypeTrait<mat<C, R, T> >
+	{
+		static const genTypeEnum GENTYPE = GENTYPE_MAT;
+	};
+
+	template<typename genType, genTypeEnum type>
+	struct init_gentype
+	{
+	};
+
+	template<typename genType>
+	struct init_gentype<genType, GENTYPE_QUAT>
+	{
+		GLM_FUNC_QUALIFIER static genType identity()
+		{
+			return genType(1, 0, 0, 0);
+		}
+	};
+
+	template<typename genType>
+	struct init_gentype<genType, GENTYPE_MAT>
+	{
+		GLM_FUNC_QUALIFIER static genType identity()
+		{
+			return genType(1);
+		}
+	};
 }//namespace detail
 }//namespace glm

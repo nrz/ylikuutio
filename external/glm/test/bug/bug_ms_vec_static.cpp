@@ -1,6 +1,6 @@
 #include <glm/glm.hpp>
 
-#if GLM_HAS_ANONYMOUS_STRUCT
+#if GLM_USE_ANONYMOUS_STRUCT == GLM_ENABLE
 struct vec2;
 
 struct _swizzle
@@ -10,7 +10,7 @@ struct _swizzle
 
 struct vec2
 {
-	GLM_CONSTEXPR_CXX11 vec2() :
+	GLM_CONSTEXPR vec2() :
 		x(0), y(0)
 	{}
 
