@@ -2,9 +2,9 @@
 #define __CHUNK_HPP_INCLUDED
 
 #include "chunk_master.hpp"
-#include "code/ylikuutio/ontology/model.hpp"
-#include "code/ylikuutio/ontology/material.hpp"
-#include "code/ylikuutio/ontology/render_templates.hpp"
+#include "model.hpp"
+#include "material.hpp"
+#include "render_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include GLM

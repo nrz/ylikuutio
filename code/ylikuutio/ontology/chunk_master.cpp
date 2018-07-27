@@ -1,7 +1,7 @@
 #include "chunk_master.hpp"
 #include "chunk.hpp"
-#include "code/ylikuutio/ontology/material.hpp"
-#include "code/ylikuutio/ontology/render_templates.hpp"
+#include "material.hpp"
+#include "render_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/common/globals.hpp"
 
