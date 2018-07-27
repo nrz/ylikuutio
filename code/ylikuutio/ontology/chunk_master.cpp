@@ -1,4 +1,5 @@
 #include "chunk_master.hpp"
+#include "material.hpp"
 #include "chunk.hpp"
 #include "material.hpp"
 #include "render_templates.hpp"

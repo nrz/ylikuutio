@@ -471,6 +471,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/chunk.hpp
     code/ylikuutio/ontology/chunk_master.cpp
     code/ylikuutio/ontology/chunk_master.hpp
+    code/ylikuutio/ontology/chunk_struct.hpp
     code/ylikuutio/ontology/creature.cpp
     code/ylikuutio/ontology/creature.hpp
     code/ylikuutio/ontology/gl_attrib_locations.cpp

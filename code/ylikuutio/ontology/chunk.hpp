@@ -2,6 +2,7 @@
 #define __CHUNK_HPP_INCLUDED
 
 #include "model.hpp"
+#include "chunk_struct.hpp"
 #include "chunk_master.hpp"
 #include "material.hpp"
 #include "render_templates.hpp"
@@ -40,13 +41,13 @@ namespace yli
         {
             public:
                 // constructor.
-                Chunk(yli::ontology::Universe* universe, yli::ontology::ChunkMaster* const parent)
-                    : Model(universe)
+                Chunk(const ChunkStruct& chunk_struct)
+                    : Model(chunk_struct.universe, chunk_struct.vram_buffer_in_use)
                 {
                     // constructor.
                     this->is_original = true;
 
-                    this->parent = parent;
+                    this->parent = chunk_struct.parent;
 
                     // get `childID` from `ChunkMaster` and set pointer to this `Chunk`.
                     this->bind_to_parent();
