@@ -29,9 +29,12 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
-namespace space_partition
+namespace yli
 {
-    class ChunkMaster;
+    namespace ontology
+    {
+        class ChunkMaster;
+    }
 }
 
 namespace yli
@@ -48,7 +51,7 @@ namespace yli
             public:
                 void bind_species(yli::ontology::Species* const species);
                 void bind_vector_font(yli::ontology::VectorFont* const vector_font);
-                void bind_chunk_master(space_partition::ChunkMaster* const chunk_master);
+                void bind_chunk_master(ontology::ChunkMaster* const chunk_master);
 
                 void unbind_species(const std::size_t childID);
                 void unbind_vector_font(const std::size_t childID);
@@ -125,7 +128,7 @@ namespace yli
                 void set_vector_font_pointer(const std::size_t childID, yli::ontology::VectorFont* const child_pointer);
 
                 // this method sets `ChunkMaster` pointer.
-                void set_chunk_master_pointer(const std::size_t childID, space_partition::ChunkMaster* const child_pointer);
+                void set_chunk_master_pointer(const std::size_t childID, yli::ontology::ChunkMaster* const child_pointer);
 
                 // this method sets a terrain `Species` pointer.
                 void set_terrain_species(yli::ontology::Species* const terrain_species);
@@ -157,7 +160,7 @@ namespace yli
 
                 std::vector<yli::ontology::Species*> species_pointer_vector;
                 std::vector<yli::ontology::VectorFont*> vector_font_pointer_vector;
-                std::vector<space_partition::ChunkMaster*> chunk_master_pointer_vector;
+                std::vector<ontology::ChunkMaster*> chunk_master_pointer_vector;
                 std::queue<std::size_t> free_speciesID_queue;
                 std::queue<std::size_t> free_vector_fontID_queue;
                 std::queue<std::size_t> free_chunk_masterID_queue;

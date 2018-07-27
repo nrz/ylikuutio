@@ -25,17 +25,13 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
-namespace space_partition
-{
-    class Chunk;
-}
-
 namespace yli
 {
     namespace ontology
     {
         class Universe;
         class Object;
+        class Chunk;
 
         class Model: public yli::ontology::Entity
         {
