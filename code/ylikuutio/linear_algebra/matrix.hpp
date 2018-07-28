@@ -6,79 +6,82 @@
 #include <memory>   // std::make_shared, std::shared_ptr
 #include <vector>   // std::vector
 
-namespace linear_algebra
+namespace yli
 {
-    class Tensor3;
-
-    class Matrix
+    namespace linear_algebra
     {
-        public:
-            // constructor.
-            Matrix(std::size_t height, std::size_t width);
+        class Tensor3;
 
-            // copy constructor.
-            Matrix(linear_algebra::Matrix& old_matrix);
-            Matrix(std::shared_ptr<linear_algebra::Matrix> old_matrix)
-                : Matrix(*old_matrix) { }
+        class Matrix
+        {
+            public:
+                // constructor.
+                Matrix(std::size_t height, std::size_t width);
 
-            // Inspired by http://stackoverflow.com/questions/6969881/operator-overload/6969904#6969904
-            class Proxy
-            {
-                public:
-                    Proxy(std::vector<float>& proxy_array) : proxy_array(proxy_array) { }
+                // copy constructor.
+                Matrix(yli::linear_algebra::Matrix& old_matrix);
+                Matrix(std::shared_ptr<yli::linear_algebra::Matrix> old_matrix)
+                    : Matrix(*old_matrix) { }
 
-                    float& operator[](const std::size_t index)
-                    {
-                        return proxy_array.at(index);
-                    }
+                // Inspired by http://stackoverflow.com/questions/6969881/operator-overload/6969904#6969904
+                class Proxy
+                {
+                    public:
+                        Proxy(std::vector<float>& proxy_array) : proxy_array(proxy_array) { }
 
-                private:
-                    std::vector<float>& proxy_array;
-            };
+                        float& operator[](const std::size_t index)
+                        {
+                            return proxy_array.at(index);
+                        }
 
-            void operator<<(const float rhs);
-            void operator<<(const std::vector<float>& rhs);
-            bool operator==(linear_algebra::Matrix& rhs);
-            bool operator!=(linear_algebra::Matrix& rhs);
-            linear_algebra::Matrix& operator++();
-            linear_algebra::Matrix operator++(const int);
-            linear_algebra::Matrix& operator--();
-            linear_algebra::Matrix operator--(const int);
-            linear_algebra::Matrix& operator+=(const float rhs);
-            linear_algebra::Matrix& operator-=(const float rhs);
-            linear_algebra::Matrix& operator*=(const float rhs);
-            linear_algebra::Matrix& operator/=(const float rhs);
-            linear_algebra::Matrix& operator+=(linear_algebra::Matrix& rhs);
-            linear_algebra::Matrix& operator-=(linear_algebra::Matrix& rhs);
-            Proxy operator[](const std::size_t index)
-            {
-                return Proxy(array_of_arrays[index]);
-            }
+                    private:
+                        std::vector<float>& proxy_array;
+                };
 
-            std::shared_ptr<linear_algebra::Matrix> transpose();
-            float det();
+                void operator<<(const float rhs);
+                void operator<<(const std::vector<float>& rhs);
+                bool operator==(yli::linear_algebra::Matrix& rhs);
+                bool operator!=(yli::linear_algebra::Matrix& rhs);
+                yli::linear_algebra::Matrix& operator++();
+                yli::linear_algebra::Matrix operator++(const int);
+                yli::linear_algebra::Matrix& operator--();
+                yli::linear_algebra::Matrix operator--(const int);
+                yli::linear_algebra::Matrix& operator+=(const float rhs);
+                yli::linear_algebra::Matrix& operator-=(const float rhs);
+                yli::linear_algebra::Matrix& operator*=(const float rhs);
+                yli::linear_algebra::Matrix& operator/=(const float rhs);
+                yli::linear_algebra::Matrix& operator+=(yli::linear_algebra::Matrix& rhs);
+                yli::linear_algebra::Matrix& operator-=(yli::linear_algebra::Matrix& rhs);
+                Proxy operator[](const std::size_t index)
+                {
+                    return Proxy(array_of_arrays[index]);
+                }
 
-            friend class linear_algebra::Tensor3;
-            friend linear_algebra::Matrix operator+(linear_algebra::Matrix& lhs, linear_algebra::Matrix& rhs);
-            friend linear_algebra::Matrix operator-(linear_algebra::Matrix& lhs, linear_algebra::Matrix& rhs);
-            friend linear_algebra::Matrix operator*(linear_algebra::Matrix& lhs, linear_algebra::Matrix& rhs);
-            friend std::shared_ptr<linear_algebra::Matrix> cat(std::size_t dimension, linear_algebra::Matrix& old_matrix1, linear_algebra::Matrix& old_matrix2);
+                std::shared_ptr<yli::linear_algebra::Matrix> transpose();
+                float det();
 
-            bool is_square;
-            std::size_t width;
-            std::size_t height;
+                friend class yli::linear_algebra::Tensor3;
+                friend yli::linear_algebra::Matrix operator+(yli::linear_algebra::Matrix& lhs, yli::linear_algebra::Matrix& rhs);
+                friend yli::linear_algebra::Matrix operator-(yli::linear_algebra::Matrix& lhs, yli::linear_algebra::Matrix& rhs);
+                friend yli::linear_algebra::Matrix operator*(yli::linear_algebra::Matrix& lhs, yli::linear_algebra::Matrix& rhs);
+                friend std::shared_ptr<yli::linear_algebra::Matrix> cat(std::size_t dimension, yli::linear_algebra::Matrix& old_matrix1, yli::linear_algebra::Matrix& old_matrix2);
 
-        private:
-            bool is_fully_populated;
-            std::size_t next_y_to_populate;
-            std::size_t next_x_to_populate;
+                bool is_square;
+                std::size_t width;
+                std::size_t height;
 
-            std::vector<std::vector<float>> array_of_arrays;
-    };
+            private:
+                bool is_fully_populated;
+                std::size_t next_y_to_populate;
+                std::size_t next_x_to_populate;
 
-    linear_algebra::Matrix operator+(linear_algebra::Matrix& lhs, linear_algebra::Matrix& rhs);
-    linear_algebra::Matrix operator-(linear_algebra::Matrix& lhs, linear_algebra::Matrix& rhs);
-    linear_algebra::Matrix operator*(linear_algebra::Matrix& lhs, linear_algebra::Matrix& rhs);
+                std::vector<std::vector<float>> array_of_arrays;
+        };
+
+        yli::linear_algebra::Matrix operator+(yli::linear_algebra::Matrix& lhs, yli::linear_algebra::Matrix& rhs);
+        yli::linear_algebra::Matrix operator-(yli::linear_algebra::Matrix& lhs, yli::linear_algebra::Matrix& rhs);
+        yli::linear_algebra::Matrix operator*(yli::linear_algebra::Matrix& lhs, yli::linear_algebra::Matrix& rhs);
+    }
 }
 
 #endif

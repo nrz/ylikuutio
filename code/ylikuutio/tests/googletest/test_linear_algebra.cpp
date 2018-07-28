@@ -10,12 +10,12 @@ TEST(matrices_must_function_as_expected, matrices)
 {
     // populate matrices and matrix equality.
 
-    linear_algebra::Matrix identity3x3(3, 3);
+    yli::linear_algebra::Matrix identity3x3(3, 3);
     identity3x3 << 1; identity3x3 << 0; identity3x3 << 0;
     identity3x3 << 0; identity3x3 << 1; identity3x3 << 0;
     identity3x3 << 0; identity3x3 << 0; identity3x3 << 1;
 
-    linear_algebra::Matrix identity3x3_populate_with_vector(3, 3);
+    yli::linear_algebra::Matrix identity3x3_populate_with_vector(3, 3);
     identity3x3_populate_with_vector << std::vector<float> {
             1, 0, 0,
             0, 1, 0,
@@ -23,12 +23,12 @@ TEST(matrices_must_function_as_expected, matrices)
     ASSERT_TRUE(identity3x3 == identity3x3_populate_with_vector);
     ASSERT_FALSE(identity3x3 != identity3x3_populate_with_vector);
 
-    linear_algebra::Matrix zeros3x3(3, 3);
+    yli::linear_algebra::Matrix zeros3x3(3, 3);
     zeros3x3 << 0; zeros3x3 << 0; zeros3x3 << 0;
     zeros3x3 << 0; zeros3x3 << 0; zeros3x3 << 0;
     zeros3x3 << 0; zeros3x3 << 0; zeros3x3 << 0;
 
-    linear_algebra::Matrix zeros3x3_populate_with_vector(3, 3);
+    yli::linear_algebra::Matrix zeros3x3_populate_with_vector(3, 3);
     zeros3x3_populate_with_vector << std::vector<float> {
             0, 0, 0,
             0, 0, 0,
@@ -36,12 +36,12 @@ TEST(matrices_must_function_as_expected, matrices)
     ASSERT_TRUE(zeros3x3 == zeros3x3_populate_with_vector);
     ASSERT_FALSE(zeros3x3 != zeros3x3_populate_with_vector);
 
-    linear_algebra::Matrix ones3x3(3, 3);
+    yli::linear_algebra::Matrix ones3x3(3, 3);
     ones3x3 << 1; ones3x3 << 1; ones3x3 << 1;
     ones3x3 << 1; ones3x3 << 1; ones3x3 << 1;
     ones3x3 << 1; ones3x3 << 1; ones3x3 << 1;
 
-    linear_algebra::Matrix ones3x3_populate_with_vector(3, 3);
+    yli::linear_algebra::Matrix ones3x3_populate_with_vector(3, 3);
     ones3x3_populate_with_vector << std::vector<float> {
             1, 1, 1,
             1, 1, 1,
@@ -49,12 +49,12 @@ TEST(matrices_must_function_as_expected, matrices)
     ASSERT_TRUE(ones3x3 == ones3x3_populate_with_vector);
     ASSERT_FALSE(ones3x3 != ones3x3_populate_with_vector);
 
-    linear_algebra::Matrix magic3x3(3, 3);
+    yli::linear_algebra::Matrix magic3x3(3, 3);
     magic3x3 << 8; magic3x3 << 1; magic3x3 << 6;
     magic3x3 << 3; magic3x3 << 5; magic3x3 << 7;
     magic3x3 << 4; magic3x3 << 9; magic3x3 << 2;
 
-    linear_algebra::Matrix magic3x3_populate_with_vector(3, 3);
+    yli::linear_algebra::Matrix magic3x3_populate_with_vector(3, 3);
     magic3x3_populate_with_vector << std::vector<float> {
             8, 1, 6,
             3, 5, 7,
@@ -74,7 +74,7 @@ TEST(matrices_must_function_as_expected, matrices)
 
     // transpose.
 
-    linear_algebra::Matrix magic3x3_transposed(*magic3x3.transpose());
+    yli::linear_algebra::Matrix magic3x3_transposed(*magic3x3.transpose());
     ASSERT_EQ(magic3x3_transposed[0][0], 8);
     ASSERT_EQ(magic3x3_transposed[1][0], 1);
     ASSERT_EQ(magic3x3_transposed[2][0], 6);
@@ -118,7 +118,7 @@ TEST(matrices_must_function_as_expected, matrices)
 
     // copy constructor.
 
-    linear_algebra::Matrix magic3x3_plus_ones3x3_with_augmented_assignment(magic3x3);
+    yli::linear_algebra::Matrix magic3x3_plus_ones3x3_with_augmented_assignment(magic3x3);
     ASSERT_EQ(magic3x3_plus_ones3x3_with_augmented_assignment[0][0], 8);
     ASSERT_EQ(magic3x3_plus_ones3x3_with_augmented_assignment[1][0], 3);
     ASSERT_EQ(magic3x3_plus_ones3x3_with_augmented_assignment[2][0], 4);
@@ -131,7 +131,7 @@ TEST(matrices_must_function_as_expected, matrices)
 
     // copy constructor.
 
-    linear_algebra::Matrix magic3x3_plus_magic3x3_with_augmented_assignment(magic3x3);
+    yli::linear_algebra::Matrix magic3x3_plus_magic3x3_with_augmented_assignment(magic3x3);
     ASSERT_EQ(magic3x3_plus_magic3x3_with_augmented_assignment[0][0], 8);
     ASSERT_EQ(magic3x3_plus_magic3x3_with_augmented_assignment[1][0], 3);
     ASSERT_EQ(magic3x3_plus_magic3x3_with_augmented_assignment[2][0], 4);
@@ -170,7 +170,7 @@ TEST(matrices_must_function_as_expected, matrices)
 
     // matrix addition (binary addition).
 
-    linear_algebra::Matrix magic3x3_plus_ones3x3(3, 3);
+    yli::linear_algebra::Matrix magic3x3_plus_ones3x3(3, 3);
     magic3x3_plus_ones3x3 = magic3x3 + ones3x3;
     ASSERT_EQ(magic3x3_plus_ones3x3[0][0], 9);
     ASSERT_EQ(magic3x3_plus_ones3x3[1][0], 4);
@@ -184,7 +184,7 @@ TEST(matrices_must_function_as_expected, matrices)
 
     // matrix addition (binary addition).
 
-    linear_algebra::Matrix magic3x3_plus_magic3x3(3, 3);
+    yli::linear_algebra::Matrix magic3x3_plus_magic3x3(3, 3);
     magic3x3_plus_magic3x3 = magic3x3 + magic3x3;
     ASSERT_EQ(magic3x3_plus_magic3x3[0][0], 16);
     ASSERT_EQ(magic3x3_plus_magic3x3[1][0], 6);
@@ -198,7 +198,7 @@ TEST(matrices_must_function_as_expected, matrices)
 
     // matrix multiplication.
 
-    linear_algebra::Matrix ones3x3squared(3, 3);
+    yli::linear_algebra::Matrix ones3x3squared(3, 3);
     ones3x3squared = ones3x3 * ones3x3;
     ASSERT_EQ(ones3x3squared[0][0], 3);
     ASSERT_EQ(ones3x3squared[1][0], 3);
@@ -212,7 +212,7 @@ TEST(matrices_must_function_as_expected, matrices)
 
     // matrix multiplication.
 
-    linear_algebra::Matrix magic3x3squared(3, 3);
+    yli::linear_algebra::Matrix magic3x3squared(3, 3);
     magic3x3squared = magic3x3 * magic3x3;
     ASSERT_EQ(magic3x3squared[0][0], 91);
     ASSERT_EQ(magic3x3squared[1][0], 67);
@@ -225,7 +225,7 @@ TEST(matrices_must_function_as_expected, matrices)
     ASSERT_EQ(magic3x3squared[2][2], 91);
 
     // matrix transpose.
-    linear_algebra::Matrix magic3x3transposed = *magic3x3.transpose();
+    yli::linear_algebra::Matrix magic3x3transposed = *magic3x3.transpose();
     ASSERT_EQ(magic3x3transposed[0][0], 8);
     ASSERT_EQ(magic3x3transposed[1][0], 1);
     ASSERT_EQ(magic3x3transposed[2][0], 6);
@@ -238,8 +238,8 @@ TEST(matrices_must_function_as_expected, matrices)
 
     // matrix concatenation.
 
-    // use `Matrix(std::shared_ptr<linear_algebra::Matrix> old_matrix)`.
-    linear_algebra::Matrix magic3x3_above_magic3x3_transposed_below_with_shared_ptr(cat(1, magic3x3, magic3x3_transposed));
+    // use `Matrix(std::shared_ptr<yli::linear_algebra::Matrix> old_matrix)`.
+    yli::linear_algebra::Matrix magic3x3_above_magic3x3_transposed_below_with_shared_ptr(cat(1, magic3x3, magic3x3_transposed));
     ASSERT_EQ(magic3x3_above_magic3x3_transposed_below_with_shared_ptr[0][0], 8);
     ASSERT_EQ(magic3x3_above_magic3x3_transposed_below_with_shared_ptr[1][0], 3);
     ASSERT_EQ(magic3x3_above_magic3x3_transposed_below_with_shared_ptr[2][0], 4);
@@ -259,8 +259,8 @@ TEST(matrices_must_function_as_expected, matrices)
     ASSERT_EQ(magic3x3_above_magic3x3_transposed_below_with_shared_ptr[4][2], 9);
     ASSERT_EQ(magic3x3_above_magic3x3_transposed_below_with_shared_ptr[5][2], 2);
 
-    // use `Matrix(linear_algebra::Matrix& old_matrix)`.
-    linear_algebra::Matrix magic3x3_above_magic3x3_transposed_below_without_shared_ptr(*cat(1, magic3x3, magic3x3_transposed));
+    // use `Matrix(yli::linear_algebra::Matrix& old_matrix)`.
+    yli::linear_algebra::Matrix magic3x3_above_magic3x3_transposed_below_without_shared_ptr(*cat(1, magic3x3, magic3x3_transposed));
     ASSERT_EQ(magic3x3_above_magic3x3_transposed_below_without_shared_ptr[0][0], 8);
     ASSERT_EQ(magic3x3_above_magic3x3_transposed_below_without_shared_ptr[1][0], 3);
     ASSERT_EQ(magic3x3_above_magic3x3_transposed_below_without_shared_ptr[2][0], 4);
@@ -284,7 +284,7 @@ TEST(matrices_must_function_as_expected, matrices)
 
     // matrix concatenation.
 
-    linear_algebra::Matrix magic3x3_left_magic3x3_transposed_right(*cat(2, magic3x3, magic3x3_transposed));
+    yli::linear_algebra::Matrix magic3x3_left_magic3x3_transposed_right(*cat(2, magic3x3, magic3x3_transposed));
     ASSERT_EQ(magic3x3_left_magic3x3_transposed_right[0][0], 8);
     ASSERT_EQ(magic3x3_left_magic3x3_transposed_right[1][0], 3);
     ASSERT_EQ(magic3x3_left_magic3x3_transposed_right[2][0], 4);
@@ -309,7 +309,7 @@ TEST(tensors_must_function_as_expected, tensors)
 {
     // populate tensors and tensor equality.
 
-    linear_algebra::Tensor3 some_tensor3x3x3(3, 3, 3);
+    yli::linear_algebra::Tensor3 some_tensor3x3x3(3, 3, 3);
     some_tensor3x3x3 << 1; some_tensor3x3x3 << 2; some_tensor3x3x3 << 3;
     some_tensor3x3x3 << 4; some_tensor3x3x3 << 5; some_tensor3x3x3 << 6;
     some_tensor3x3x3 << 7; some_tensor3x3x3 << 8; some_tensor3x3x3 << 9;
@@ -322,7 +322,7 @@ TEST(tensors_must_function_as_expected, tensors)
     some_tensor3x3x3 << 22; some_tensor3x3x3 << 23; some_tensor3x3x3 << 24;
     some_tensor3x3x3 << 25; some_tensor3x3x3 << 26; some_tensor3x3x3 << 27;
 
-    linear_algebra::Tensor3 some_tensor3x3x3_populate_with_vector(3, 3, 3);
+    yli::linear_algebra::Tensor3 some_tensor3x3x3_populate_with_vector(3, 3, 3);
     some_tensor3x3x3_populate_with_vector << std::vector<float> {
         1, 2, 3,
         4, 5, 6,

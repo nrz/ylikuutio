@@ -20,7 +20,7 @@ namespace yli
         {
             // See http://mathworld.wolfram.com/Line-LineIntersection.html
 
-            linear_algebra::Matrix lower_matrix_for_solving_x_and_y(2, 2);
+            yli::linear_algebra::Matrix lower_matrix_for_solving_x_and_y(2, 2);
             lower_matrix_for_solving_x_and_y << line1->x1_minus_x2; lower_matrix_for_solving_x_and_y << line1->y1_minus_y2;
             lower_matrix_for_solving_x_and_y << line2->x1_minus_x2; lower_matrix_for_solving_x_and_y << line2->y1_minus_y2;
             float det_lower_matrix_for_solving_x_and_y = lower_matrix_for_solving_x_and_y.det();
@@ -34,12 +34,12 @@ namespace yli
             // Lines do intersect, so let's compute where!
             // TODO: Implement support for vertical lines!
 
-            linear_algebra::Matrix upper_matrix_for_solving_x(2, 2);
+            yli::linear_algebra::Matrix upper_matrix_for_solving_x(2, 2);
             upper_matrix_for_solving_x << line1->determinant; upper_matrix_for_solving_x << line1->x1_minus_x2;
             upper_matrix_for_solving_x << line2->determinant; upper_matrix_for_solving_x << line2->x1_minus_x2;
             float det_upper_matrix_for_solving_x = upper_matrix_for_solving_x.det();
 
-            linear_algebra::Matrix upper_matrix_for_solving_y(2, 2);
+            yli::linear_algebra::Matrix upper_matrix_for_solving_y(2, 2);
             upper_matrix_for_solving_y << line1->determinant; upper_matrix_for_solving_y << line1->y1_minus_y2;
             upper_matrix_for_solving_y << line2->determinant; upper_matrix_for_solving_y << line2->y1_minus_y2;
             float det_upper_matrix_for_solving_y = upper_matrix_for_solving_y.det();
