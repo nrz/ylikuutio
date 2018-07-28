@@ -17,6 +17,11 @@
 
 namespace yli
 {
+    namespace console
+    {
+        class Console;
+    }
+
     namespace ontology
     {
         class Entity;
@@ -32,18 +37,7 @@ namespace yli
         class Symbiosis;
         class Font2D;
     }
-}
 
-namespace yli
-{
-    namespace console
-    {
-        class Console;
-    }
-}
-
-namespace yli
-{
     namespace datatypes
     {
         enum datatype

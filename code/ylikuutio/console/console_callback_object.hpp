@@ -15,10 +15,7 @@ namespace yli
     {
         class CallbackParameter;
     }
-}
 
-namespace yli
-{
     namespace console
     {
         class ConsoleCallbackObject : public yli::callback_system::CallbackObject

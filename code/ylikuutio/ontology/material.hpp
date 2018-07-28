@@ -33,18 +33,11 @@ namespace yli
 {
     namespace ontology
     {
-        class ChunkMaster;
-    }
-}
-
-namespace yli
-{
-    namespace ontology
-    {
         class Universe;
         class Species;
         class Object;
         class VectorFont;
+        class ChunkMaster;
 
         class Material: public yli::ontology::Entity
         {

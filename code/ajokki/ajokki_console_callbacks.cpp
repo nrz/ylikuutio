@@ -15,10 +15,7 @@ namespace yli
     {
         class Console;
     }
-}
 
-namespace yli
-{
     namespace ontology
     {
         class Entity;

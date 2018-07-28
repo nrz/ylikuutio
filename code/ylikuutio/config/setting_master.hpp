@@ -11,17 +11,14 @@
 
 namespace yli
 {
-    namespace datatypes
-    {
-        class AnyValue;
-    }
-}
-
-namespace yli
-{
     namespace console
     {
         class Console;
+    }
+
+    namespace datatypes
+    {
+        class AnyValue;
     }
 
     namespace ontology

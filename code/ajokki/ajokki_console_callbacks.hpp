@@ -12,18 +12,12 @@ namespace yli
     {
         class Console;
     }
-}
 
-namespace yli
-{
     namespace datatypes
     {
         class AnyValue;
     }
-}
 
-namespace yli
-{
     namespace ontology
     {
         class Entity;

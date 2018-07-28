@@ -263,18 +263,12 @@ namespace yli
     {
         class Setting;
     }
-}
 
-namespace yli
-{
     namespace console
     {
         class Console;
     }
-}
 
-namespace yli
-{
     namespace ontology
     {
         class World;

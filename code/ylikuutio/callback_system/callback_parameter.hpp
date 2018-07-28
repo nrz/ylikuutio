@@ -16,10 +16,7 @@ namespace yli
     {
         class Universe;
     }
-}
 
-namespace yli
-{
     namespace callback_system
     {
         class CallbackParameter

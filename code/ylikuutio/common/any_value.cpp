@@ -30,10 +30,7 @@ namespace yli
     {
         class Console;
     }
-}
 
-namespace yli
-{
     namespace ontology
     {
         class Entity;
@@ -48,10 +45,7 @@ namespace yli
         class Text3D;
         class Symbiosis;
     }
-}
 
-namespace yli
-{
     namespace datatypes
     {
         std::string AnyValue::get_datatype()

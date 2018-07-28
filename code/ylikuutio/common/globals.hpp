@@ -52,33 +52,29 @@
 
 namespace yli
 {
-    namespace config
-    {
-        class SettingMaster;
-        class Setting;
-    }
-}
-
-namespace yli
-{
     namespace callback_system
     {
         class CallbackEngine;
         class CallbackObject;
         class CallbackParameter;
     }
-}
 
-namespace yli
-{
+    namespace config
+    {
+        class SettingMaster;
+        class Setting;
+    }
+
+    namespace console
+    {
+        class Console;
+    }
+
     namespace graph
     {
         class Graph;
     }
-}
 
-namespace yli
-{
     namespace ontology
     {
         class Entity;
@@ -121,13 +117,6 @@ typedef std::shared_ptr<yli::datatypes::AnyValue> (*InputParametersToAnyValueCal
         yli::callback_system::CallbackObject*,
         std::vector<yli::callback_system::CallbackParameter*>&);
 
-namespace yli
-{
-    namespace console
-    {
-        class Console;
-    }
-}
 typedef std::shared_ptr<yli::datatypes::AnyValue> (*InputParametersToAnyValueCallbackWithConsole) (
         yli::callback_system::CallbackEngine*,
         yli::callback_system::CallbackObject*,

@@ -12,10 +12,7 @@ namespace yli
     {
         class SettingMaster;
     }
-}
 
-namespace yli
-{
     namespace ontology
     {
         class Entity;
