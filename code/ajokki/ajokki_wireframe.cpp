@@ -15,7 +15,7 @@ namespace ajokki
 
         bool bool_false = false;
 
-        SettingStruct wireframe_setting_struct(std::make_shared<datatypes::AnyValue>(bool_false));
+        SettingStruct wireframe_setting_struct(std::make_shared<yli::datatypes::AnyValue>(bool_false));
         wireframe_setting_struct.name = "wireframe";
         wireframe_setting_struct.setting_master = setting_master;
         wireframe_setting_struct.activate_callback = &yli::config::SettingMaster::activate_wireframe;

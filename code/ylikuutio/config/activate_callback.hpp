@@ -22,6 +22,6 @@ namespace yli
     }
 }
 
-typedef std::shared_ptr<datatypes::AnyValue> (*ActivateCallback) (yli::ontology::Entity* entity, yli::config::SettingMaster* setting_master);
+typedef std::shared_ptr<yli::datatypes::AnyValue> (*ActivateCallback) (yli::ontology::Entity* entity, yli::config::SettingMaster* setting_master);
 
 #endif

@@ -40,7 +40,7 @@ namespace yli
 
             private:
                 // execute this callback.
-                std::shared_ptr<datatypes::AnyValue> execute();
+                std::shared_ptr<yli::datatypes::AnyValue> execute();
 
                 InputParametersToAnyValueCallbackWithConsole console_callback;
                 yli::console::Console* console_pointer;

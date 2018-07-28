@@ -19,7 +19,7 @@ namespace yli
 
 namespace ajokki
 {
-    std::shared_ptr<datatypes::AnyValue> full_cleanup(
+    std::shared_ptr<yli::datatypes::AnyValue> full_cleanup(
             yli::callback_system::CallbackEngine*,
             yli::callback_system::CallbackObject* callback_object,
             std::vector<yli::callback_system::CallbackParameter*>&);

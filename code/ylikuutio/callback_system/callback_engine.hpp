@@ -13,9 +13,9 @@
 
 // callback typedefs in alphabetical order.
 typedef void (*VoidToVoidCallback)(void);
-typedef void (*AnyValueToVoidCallback)(datatypes::AnyValue);
-typedef datatypes::AnyValue (*VoidToAnyValueCallback)(void);
-typedef datatypes::AnyValue (*AnyValueToAnyValueCallback)(datatypes::AnyValue);
+typedef void (*AnyValueToVoidCallback)(yli::datatypes::AnyValue);
+typedef yli::datatypes::AnyValue (*VoidToAnyValueCallback)(void);
+typedef yli::datatypes::AnyValue (*AnyValueToAnyValueCallback)(yli::datatypes::AnyValue);
 
 namespace yli
 {
@@ -55,11 +55,11 @@ namespace yli
                 ~CallbackEngine();
 
                 // execute all callbacks.
-                std::shared_ptr<datatypes::AnyValue> execute();
+                std::shared_ptr<yli::datatypes::AnyValue> execute();
 
                 std::size_t get_n_of_return_values() const;
-                std::shared_ptr<datatypes::AnyValue> get_nth_return_value(std::size_t n) const;
-                std::shared_ptr<datatypes::AnyValue> get_previous_return_value() const;
+                std::shared_ptr<yli::datatypes::AnyValue> get_nth_return_value(std::size_t n) const;
+                std::shared_ptr<yli::datatypes::AnyValue> get_previous_return_value() const;
 
                 friend class CallbackObject;
                 template<class T1, class T2>
@@ -73,7 +73,7 @@ namespace yli
                 std::queue<std::size_t> free_callback_objectID_queue;
                 std::size_t number_of_callback_objects;
 
-                std::vector<std::shared_ptr<datatypes::AnyValue>> return_values;
+                std::vector<std::shared_ptr<yli::datatypes::AnyValue>> return_values;
         };
     }
 }
