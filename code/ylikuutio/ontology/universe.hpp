@@ -344,8 +344,6 @@ namespace yli
                     this->fall_speed = this->gravity;
 
                     this->testing_spherical_terrain_in_use = false;
-                    this->is_key_I_released = true;
-                    this->is_key_F_released = true;
                     this->in_help_mode = true;
                     this->can_toggle_help_mode = false;
                     this->can_display_help_screen = true;
@@ -519,10 +517,6 @@ namespace yli
 
                 // Variables related to the current `Scene`.
                 bool testing_spherical_terrain_in_use;
-
-                // Variables related to debug & testing keys.
-                bool is_key_I_released;
-                bool is_key_F_released;
 
                 // Variables related to help mode.
                 bool in_help_mode;
