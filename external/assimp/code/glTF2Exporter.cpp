@@ -2,7 +2,8 @@
 Open Asset Import Library (assimp)
 ----------------------------------------------------------------------
 
-Copyright (c) 2006-2017, assimp team
+Copyright (c) 2006-2018, assimp team
+
 
 All rights reserved.
 
@@ -43,9 +44,9 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "glTF2Exporter.h"
 
-#include "Exceptional.h"
-#include "StringComparison.h"
-#include "ByteSwapper.h"
+#include <assimp/Exceptional.h>
+#include <assimp/StringComparison.h>
+#include <assimp/ByteSwapper.h>
 
 #include "SplitLargeMeshes.h"
 
@@ -56,7 +57,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <assimp/material.h>
 #include <assimp/scene.h>
 
-// Header files, standart library.
+// Header files, standard library.
 #include <memory>
 #include <inttypes.h>
 
@@ -77,6 +78,14 @@ namespace Assimp {
         glTF2Exporter exporter(pFile, pIOSystem, pScene, pProperties, false);
     }
 
+    // ------------------------------------------------------------------------------------------------
+    // Worker function for exporting a scene to GLB. Prototyped and registered in Exporter.cpp
+    void ExportSceneGLB2(const char* pFile, IOSystem* pIOSystem, const aiScene* pScene, const ExportProperties* pProperties)
+    {
+        // invoke the exporter
+        glTF2Exporter exporter(pFile, pIOSystem, pScene, pProperties, true);
+    }
+
 } // end of namespace Assimp
 
 glTF2Exporter::glTF2Exporter(const char* filename, IOSystem* pIOSystem, const aiScene* pScene,
@@ -85,21 +94,13 @@ glTF2Exporter::glTF2Exporter(const char* filename, IOSystem* pIOSystem, const ai
     , mIOSystem(pIOSystem)
     , mProperties(pProperties)
 {
-    aiScene* sceneCopy_tmp;
-    SceneCombiner::CopyScene(&sceneCopy_tmp, pScene);
-    std::unique_ptr<aiScene> sceneCopy(sceneCopy_tmp);
-
-    SplitLargeMeshesProcess_Triangle tri_splitter;
-    tri_splitter.SetLimit(0xffff);
-    tri_splitter.Execute(sceneCopy.get());
-
-    SplitLargeMeshesProcess_Vertex vert_splitter;
-    vert_splitter.SetLimit(0xffff);
-    vert_splitter.Execute(sceneCopy.get());
-
-    mScene = sceneCopy.get();
+    mScene = pScene;
 
     mAsset.reset( new Asset( pIOSystem ) );
+
+    if (isBinary) {
+        mAsset->SetAsBinary();
+    }
 
     ExportMetadata();
 
@@ -118,31 +119,36 @@ glTF2Exporter::glTF2Exporter(const char* filename, IOSystem* pIOSystem, const ai
 
     AssetWriter writer(*mAsset);
 
-    writer.WriteFile(filename);
+    if (isBinary) {
+        writer.WriteGLBFile(filename);
+    } else {
+        writer.WriteFile(filename);
+    }
+}
+
+glTF2Exporter::~glTF2Exporter() {
+    // empty
 }
 
 /*
  * Copy a 4x4 matrix from struct aiMatrix to typedef mat4.
  * Also converts from row-major to column-major storage.
  */
-static void CopyValue(const aiMatrix4x4& v, mat4& o)
-{
+static void CopyValue(const aiMatrix4x4& v, mat4& o) {
     o[ 0] = v.a1; o[ 1] = v.b1; o[ 2] = v.c1; o[ 3] = v.d1;
     o[ 4] = v.a2; o[ 5] = v.b2; o[ 6] = v.c2; o[ 7] = v.d2;
     o[ 8] = v.a3; o[ 9] = v.b3; o[10] = v.c3; o[11] = v.d3;
     o[12] = v.a4; o[13] = v.b4; o[14] = v.c4; o[15] = v.d4;
 }
 
-static void CopyValue(const aiMatrix4x4& v, aiMatrix4x4& o)
-{
+static void CopyValue(const aiMatrix4x4& v, aiMatrix4x4& o) {
     o.a1 = v.a1; o.a2 = v.a2; o.a3 = v.a3; o.a4 = v.a4;
     o.b1 = v.b1; o.b2 = v.b2; o.b3 = v.b3; o.b4 = v.b4;
     o.c1 = v.c1; o.c2 = v.c2; o.c3 = v.c3; o.c4 = v.c4;
     o.d1 = v.d1; o.d2 = v.d2; o.d3 = v.d3; o.d4 = v.d4;
 }
 
-static void IdentityMatrix4(mat4& o)
-{
+static void IdentityMatrix4(mat4& o) {
     o[ 0] = 1; o[ 1] = 0; o[ 2] = 0; o[ 3] = 0;
     o[ 4] = 0; o[ 5] = 1; o[ 6] = 0; o[ 7] = 0;
     o[ 8] = 0; o[ 9] = 0; o[10] = 1; o[11] = 0;
@@ -152,7 +158,9 @@ static void IdentityMatrix4(mat4& o)
 inline Ref<Accessor> ExportData(Asset& a, std::string& meshName, Ref<Buffer>& buffer,
     unsigned int count, void* data, AttribType::Value typeIn, AttribType::Value typeOut, ComponentType compType, bool isIndices = false)
 {
-    if (!count || !data) return Ref<Accessor>();
+    if (!count || !data) {
+        return Ref<Accessor>();
+    }
 
     unsigned int numCompsIn = AttribType::GetNumComponents(typeIn);
     unsigned int numCompsOut = AttribType::GetNumComponents(typeOut);
@@ -170,13 +178,13 @@ inline Ref<Accessor> ExportData(Asset& a, std::string& meshName, Ref<Buffer>& bu
     bv->buffer = buffer;
     bv->byteOffset = unsigned(offset);
     bv->byteLength = length; //! The target that the WebGL buffer should be bound to.
+    bv->byteStride = 0;
     bv->target = isIndices ? BufferViewTarget_ELEMENT_ARRAY_BUFFER : BufferViewTarget_ARRAY_BUFFER;
 
     // accessor
     Ref<Accessor> acc = a.accessors.Create(a.FindUniqueID(meshName, "accessor"));
     acc->bufferView = bv;
     acc->byteOffset = 0;
-    acc->byteStride = 0;
     acc->componentType = compType;
     acc->count = count;
     acc->type = typeOut;
@@ -299,11 +307,9 @@ void glTF2Exporter::GetMatTex(const aiMaterial* mat, Ref<Texture>& texture, aiTe
             std::string path = tex.C_Str();
 
             if (path.size() > 0) {
-                if (path[0] != '*') {
-                    std::map<std::string, unsigned int>::iterator it = mTexturesByPath.find(path);
-                    if (it != mTexturesByPath.end()) {
-                        texture = mAsset->textures.Get(it->second);
-                    }
+                std::map<std::string, unsigned int>::iterator it = mTexturesByPath.find(path);
+                if (it != mTexturesByPath.end()) {
+                    texture = mAsset->textures.Get(it->second);
                 }
 
                 if (!texture) {
@@ -372,20 +378,28 @@ void glTF2Exporter::GetMatTex(const aiMaterial* mat, OcclusionTextureInfo& prop,
     }
 }
 
-void glTF2Exporter::GetMatColor(const aiMaterial* mat, vec4& prop, const char* propName, int type, int idx)
+aiReturn glTF2Exporter::GetMatColor(const aiMaterial* mat, vec4& prop, const char* propName, int type, int idx)
 {
     aiColor4D col;
-    if (mat->Get(propName, type, idx, col) == AI_SUCCESS) {
+    aiReturn result = mat->Get(propName, type, idx, col);
+
+    if (result == AI_SUCCESS) {
         prop[0] = col.r; prop[1] = col.g; prop[2] = col.b; prop[3] = col.a;
     }
+
+    return result;
 }
 
-void glTF2Exporter::GetMatColor(const aiMaterial* mat, vec3& prop, const char* propName, int type, int idx)
+aiReturn glTF2Exporter::GetMatColor(const aiMaterial* mat, vec3& prop, const char* propName, int type, int idx)
 {
     aiColor3D col;
-    if (mat->Get(propName, type, idx, col) == AI_SUCCESS) {
+    aiReturn result = mat->Get(propName, type, idx, col);
+
+    if (result == AI_SUCCESS) {
         prop[0] = col.r; prop[1] = col.g; prop[2] = col.b;
     }
+
+    return result;
 }
 
 void glTF2Exporter::ExportMaterials()
@@ -394,7 +408,7 @@ void glTF2Exporter::ExportMaterials()
     for (unsigned int i = 0; i < mScene->mNumMaterials; ++i) {
         const aiMaterial* mat = mScene->mMaterials[i];
 
-        std::string id = "material_" + std::to_string(i);
+        std::string id = "material_" + to_string(i);
 
         Ref<Material> m = mAsset->materials.Create(id);
 
@@ -406,16 +420,49 @@ void glTF2Exporter::ExportMaterials()
 
         m->name = name;
 
-        GetMatTex(mat, m->pbrMetallicRoughness.baseColorTexture, aiTextureType_DIFFUSE);
+        GetMatTex(mat, m->pbrMetallicRoughness.baseColorTexture, AI_MATKEY_GLTF_PBRMETALLICROUGHNESS_BASE_COLOR_TEXTURE);
+
+        if (!m->pbrMetallicRoughness.baseColorTexture.texture) {
+            //if there wasn't a baseColorTexture defined in the source, fallback to any diffuse texture
+            GetMatTex(mat, m->pbrMetallicRoughness.baseColorTexture, aiTextureType_DIFFUSE);
+        }
+
         GetMatTex(mat, m->pbrMetallicRoughness.metallicRoughnessTexture, AI_MATKEY_GLTF_PBRMETALLICROUGHNESS_METALLICROUGHNESS_TEXTURE);
-        GetMatColor(mat, m->pbrMetallicRoughness.baseColorFactor, AI_MATKEY_COLOR_DIFFUSE);
+
+        if (GetMatColor(mat, m->pbrMetallicRoughness.baseColorFactor, AI_MATKEY_GLTF_PBRMETALLICROUGHNESS_BASE_COLOR_FACTOR) != AI_SUCCESS) {
+            // if baseColorFactor wasn't defined, then the source is likely not a metallic roughness material.
+            //a fallback to any diffuse color should be used instead
+            GetMatColor(mat, m->pbrMetallicRoughness.baseColorFactor, AI_MATKEY_COLOR_DIFFUSE);
+        }
 
         if (mat->Get(AI_MATKEY_GLTF_PBRMETALLICROUGHNESS_METALLIC_FACTOR, m->pbrMetallicRoughness.metallicFactor) != AI_SUCCESS) {
             //if metallicFactor wasn't defined, then the source is likely not a PBR file, and the metallicFactor should be 0
             m->pbrMetallicRoughness.metallicFactor = 0;
         }
 
-        mat->Get(AI_MATKEY_GLTF_PBRMETALLICROUGHNESS_ROUGHNESS_FACTOR, m->pbrMetallicRoughness.roughnessFactor);
+        // get roughness if source is gltf2 file
+        if (mat->Get(AI_MATKEY_GLTF_PBRMETALLICROUGHNESS_ROUGHNESS_FACTOR, m->pbrMetallicRoughness.roughnessFactor) != AI_SUCCESS) {
+            // otherwise, try to derive and convert from specular + shininess values
+            aiColor4D specularColor;
+            ai_real shininess;
+
+            if (
+                mat->Get(AI_MATKEY_COLOR_SPECULAR, specularColor) == AI_SUCCESS &&
+                mat->Get(AI_MATKEY_SHININESS, shininess) == AI_SUCCESS
+            ) {
+                // convert specular color to luminance
+                float specularIntensity = specularColor[0] * 0.2125f + specularColor[1] * 0.7154f + specularColor[2] * 0.0721f;
+                //normalize shininess (assuming max is 1000) with an inverse exponentional curve
+                float normalizedShininess = std::sqrt(shininess / 1000);
+
+                //clamp the shininess value between 0 and 1
+                normalizedShininess = std::min(std::max(normalizedShininess, 0.0f), 1.0f);
+                // low specular intensity values should produce a rough material even if shininess is high.
+                normalizedShininess = normalizedShininess * specularIntensity;
+
+                m->pbrMetallicRoughness.roughnessFactor = 1 - normalizedShininess;
+            }
+        }
 
         GetMatTex(mat, m->normalTexture, aiTextureType_NORMALS);
         GetMatTex(mat, m->occlusionTexture, aiTextureType_LIGHTMAP);
@@ -434,7 +481,7 @@ void glTF2Exporter::ExportMaterials()
 
             if (mat->Get(AI_MATKEY_OPACITY, opacity) == AI_SUCCESS) {
                 if (opacity < 1) {
-                    m->alphaMode = "MASK";
+                    m->alphaMode = "BLEND";
                     m->pbrMetallicRoughness.baseColorFactor[3] *= opacity;
                 }
             }
@@ -451,13 +498,27 @@ void glTF2Exporter::ExportMaterials()
 
             PbrSpecularGlossiness pbrSG;
 
-            GetMatColor(mat, pbrSG.diffuseFactor, AI_MATKEY_GLTF_PBRSPECULARGLOSSINESS_DIFFUSE_FACTOR);
-            GetMatColor(mat, pbrSG.specularFactor, AI_MATKEY_GLTF_PBRSPECULARGLOSSINESS_SPECULAR_FACTOR);
-            mat->Get(AI_MATKEY_GLTF_PBRSPECULARGLOSSINESS_GLOSSINESS_FACTOR, pbrSG.glossinessFactor);
-            GetMatTex(mat, pbrSG.diffuseTexture, AI_MATKEY_GLTF_PBRSPECULARGLOSSINESS_DIFFUSE_TEXTURE);
-            GetMatTex(mat, pbrSG.specularGlossinessTexture, AI_MATKEY_GLTF_PBRSPECULARGLOSSINESS_SPECULARGLOSSINESS_TEXTURE);
+            GetMatColor(mat, pbrSG.diffuseFactor, AI_MATKEY_COLOR_DIFFUSE);
+            GetMatColor(mat, pbrSG.specularFactor, AI_MATKEY_COLOR_SPECULAR);
+
+            if (mat->Get(AI_MATKEY_GLTF_PBRSPECULARGLOSSINESS_GLOSSINESS_FACTOR, pbrSG.glossinessFactor) != AI_SUCCESS) {
+				float shininess;
+
+				if (mat->Get(AI_MATKEY_SHININESS, shininess) == AI_SUCCESS) {
+                    pbrSG.glossinessFactor = shininess / 1000;
+                }
+            }
+
+            GetMatTex(mat, pbrSG.diffuseTexture, aiTextureType_DIFFUSE);
+            GetMatTex(mat, pbrSG.specularGlossinessTexture, aiTextureType_SPECULAR);
 
             m->pbrSpecularGlossiness = Nullable<PbrSpecularGlossiness>(pbrSG);
+        }
+
+        bool unlit;
+        if (mat->Get(AI_MATKEY_GLTF_UNLIT, unlit) == AI_SUCCESS && unlit) {
+            mAsset->extensionsUsed.KHR_materials_unlit = true;
+            m->unlit = true;
         }
     }
 }
@@ -574,6 +635,26 @@ void ExportSkin(Asset& mAsset, const aiMesh* aimesh, Ref<Mesh>& meshRef, Ref<Buf
     Mesh::Primitive& p = meshRef->primitives.back();
     Ref<Accessor> vertexJointAccessor = ExportData(mAsset, skinRef->id, bufferRef, aimesh->mNumVertices, vertexJointData, AttribType::VEC4, AttribType::VEC4, ComponentType_FLOAT);
     if ( vertexJointAccessor ) {
+        size_t offset = vertexJointAccessor->bufferView->byteOffset;
+        size_t bytesLen = vertexJointAccessor->bufferView->byteLength;
+        unsigned int s_bytesPerComp= ComponentTypeSize(ComponentType_UNSIGNED_SHORT);
+        unsigned int bytesPerComp = ComponentTypeSize(vertexJointAccessor->componentType);
+        size_t s_bytesLen = bytesLen * s_bytesPerComp / bytesPerComp;
+        Ref<Buffer> buf = vertexJointAccessor->bufferView->buffer;
+        uint8_t* arrys = new uint8_t[s_bytesLen];
+        unsigned int i = 0;
+        for ( unsigned int j = 0; j <= bytesLen; j += bytesPerComp ){
+            size_t len_p = offset + j;
+            float f_value = *(float *)&buf->GetPointer()[len_p];
+            unsigned short c = static_cast<unsigned short>(f_value);
+            uint8_t* data = new uint8_t[s_bytesPerComp];
+            data = (uint8_t*)&c;
+            memcpy(&arrys[i*s_bytesPerComp], data, s_bytesPerComp);
+            ++i;
+        }
+        buf->ReplaceData_joint(offset, bytesLen, arrys, s_bytesLen);
+        vertexJointAccessor->componentType = ComponentType_UNSIGNED_SHORT;
+
         p.attributes.joint.push_back( vertexJointAccessor );
     }
 
@@ -588,12 +669,7 @@ void ExportSkin(Asset& mAsset, const aiMesh* aimesh, Ref<Mesh>& meshRef, Ref<Buf
 
 void glTF2Exporter::ExportMeshes()
 {
-    // Not for
-    //     using IndicesType = decltype(aiFace::mNumIndices);
-    // But yes for
-    //     using IndicesType = unsigned short;
-    // because "ComponentType_UNSIGNED_SHORT" used for indices. And it's a maximal type according to glTF specification.
-    typedef unsigned short IndicesType;
+    typedef decltype(aiFace::mNumIndices) IndicesType;
 
     std::string fname = std::string(mFilename);
     std::string bufferIdPrefix = fname.substr(0, fname.rfind(".gltf"));
@@ -643,8 +719,15 @@ void glTF2Exporter::ExportMeshes()
 		if (v) p.attributes.position.push_back(v);
 
 		/******************** Normals ********************/
+        // Normalize all normals as the validator can emit a warning otherwise
+        if ( nullptr != aim->mNormals) {
+            for ( auto i = 0u; i < aim->mNumVertices; ++i ) {
+                aim->mNormals[ i ].Normalize();
+            }
+        }
+
 		Ref<Accessor> n = ExportData(*mAsset, meshId, b, aim->mNumVertices, aim->mNormals, AttribType::VEC3, AttribType::VEC3, ComponentType_FLOAT);
-		if (n) p.attributes.normal.push_back(n);
+        if (n) p.attributes.normal.push_back(n);
 
 		/************** Texture coordinates **************/
         for (int i = 0; i < AI_MAX_NUMBER_OF_TEXTURECOORDS; ++i) {
@@ -663,6 +746,14 @@ void glTF2Exporter::ExportMeshes()
 			}
 		}
 
+		/*************** Vertex colors ****************/
+		for (unsigned int indexColorChannel = 0; indexColorChannel < aim->GetNumColorChannels(); ++indexColorChannel)
+		{
+			Ref<Accessor> c = ExportData(*mAsset, meshId, b, aim->mNumVertices, aim->mColors[indexColorChannel], AttribType::VEC4, AttribType::VEC4, ComponentType_FLOAT, false);
+			if (c)
+				p.attributes.color.push_back(c);
+		}
+
 		/*************** Vertices indices ****************/
 		if (aim->mNumFaces > 0) {
 			std::vector<IndicesType> indices;
@@ -670,11 +761,11 @@ void glTF2Exporter::ExportMeshes()
             indices.resize(aim->mNumFaces * nIndicesPerFace);
             for (size_t i = 0; i < aim->mNumFaces; ++i) {
                 for (size_t j = 0; j < nIndicesPerFace; ++j) {
-                    indices[i*nIndicesPerFace + j] = uint16_t(aim->mFaces[i].mIndices[j]);
+                    indices[i*nIndicesPerFace + j] = IndicesType(aim->mFaces[i].mIndices[j]);
                 }
             }
 
-			p.indices = ExportData(*mAsset, meshId, b, unsigned(indices.size()), &indices[0], AttribType::SCALAR, AttribType::SCALAR, ComponentType_UNSIGNED_SHORT, true);
+			p.indices = ExportData(*mAsset, meshId, b, unsigned(indices.size()), &indices[0], AttribType::SCALAR, AttribType::SCALAR, ComponentType_UNSIGNED_INT, true);
 		}
 
         switch (aim->mPrimitiveTypes) {
@@ -751,9 +842,33 @@ void glTF2Exporter::MergeMeshes()
             for (unsigned int m = nMeshes - 1; m >= 1; --m) {
                 Ref<Mesh> mesh = node->meshes.at(m);
 
-                firstMesh->primitives.insert(firstMesh->primitives.end(), mesh->primitives.begin(), mesh->primitives.end());
+                //append this mesh's primitives to the first mesh's primitives
+                firstMesh->primitives.insert(
+                    firstMesh->primitives.end(),
+                    mesh->primitives.begin(),
+                    mesh->primitives.end()
+                );
 
-                node->meshes.erase(node->meshes.begin() + m);
+                //remove the mesh from the list of meshes
+                unsigned int removedIndex = mAsset->meshes.Remove(mesh->id.c_str());
+
+                //find the presence of the removed mesh in other nodes
+                for (unsigned int nn = 0; nn < mAsset->nodes.Size(); ++nn) {
+                    Ref<Node> node = mAsset->nodes.Get(nn);
+
+                    for (unsigned int mm = 0; mm < node->meshes.size(); ++mm) {
+                        Ref<Mesh>& meshRef = node->meshes.at(mm);
+                        unsigned int meshIndex = meshRef.GetIndex();
+
+                        if (meshIndex == removedIndex) {
+                            node->meshes.erase(node->meshes.begin() + mm);
+                        } else if (meshIndex > removedIndex) {
+                            Ref<Mesh> newMeshRef = mAsset->meshes.Get(meshIndex - 1);
+
+                            meshRef = newMeshRef;
+                        }
+                    }
+                }
             }
 
             //since we were looping backwards, reverse the order of merged primitives to their original order
@@ -769,6 +884,8 @@ void glTF2Exporter::MergeMeshes()
 unsigned int glTF2Exporter::ExportNodeHierarchy(const aiNode* n)
 {
     Ref<Node> node = mAsset->nodes.Create(mAsset->FindUniqueID(n->mName.C_Str(), "node"));
+
+    node->name = n->mName.C_Str();
 
     if (!n->mTransformation.IsIdentity()) {
         node->matrix.isPresent = true;

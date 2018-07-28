@@ -6,36 +6,39 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
-namespace console
+namespace yli
 {
-    class Console;
-}
+    namespace console
+    {
+        class Console;
+    }
 
-namespace datatypes
-{
-    class AnyValue;
-}
+    namespace datatypes
+    {
+        class AnyValue;
+    }
 
-namespace ontology
-{
-    class Entity;
+    namespace ontology
+    {
+        class Entity;
+    }
 }
 
 namespace ajokki
 {
-    std::shared_ptr<datatypes::AnyValue> version(
-            console::Console* console,
-            ontology::Entity*,
+    std::shared_ptr<yli::datatypes::AnyValue> version(
+            yli::console::Console* console,
+            yli::ontology::Entity*,
             std::vector<std::string>& command_parameters);
 
-    std::shared_ptr<datatypes::AnyValue> quit(
-            console::Console*,
-            ontology::Entity*,
+    std::shared_ptr<yli::datatypes::AnyValue> quit(
+            yli::console::Console*,
+            yli::ontology::Entity*,
             std::vector<std::string>& command_parameters);
 
-    std::shared_ptr<datatypes::AnyValue> help(
-            console::Console*,
-            ontology::Entity*,
+    std::shared_ptr<yli::datatypes::AnyValue> help(
+            yli::console::Console*,
+            yli::ontology::Entity*,
             std::vector<std::string>& command_parameters);
 }
 

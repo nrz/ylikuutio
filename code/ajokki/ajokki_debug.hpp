@@ -1,14 +1,17 @@
 #ifndef __AJOKKI_DEBUG_HPP_INCLUDED
 #define __AJOKKI_DEBUG_HPP_INCLUDED
 
-namespace config
+namespace yli
 {
-    class SettingMaster;
+    namespace config
+    {
+        class SettingMaster;
+    }
 }
 
 namespace ajokki
 {
-    void set_debug_variables(config::SettingMaster* setting_master);
+    void set_debug_variables(yli::config::SettingMaster* setting_master);
 }
 
 #endif

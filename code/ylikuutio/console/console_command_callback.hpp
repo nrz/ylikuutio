@@ -6,24 +6,27 @@
 #include <string> // std::string
 #include <vector> // std::vector
 
-namespace console
+namespace yli
 {
-    class Console;
+    namespace console
+    {
+        class Console;
+    }
+
+    namespace datatypes
+    {
+        class AnyValue;
+    }
+
+    namespace ontology
+    {
+        class Entity;
+    }
 }
 
-namespace datatypes
-{
-    class AnyValue;
-}
-
-namespace ontology
-{
-    class Entity;
-}
-
-typedef std::shared_ptr<datatypes::AnyValue> (*ConsoleCommandCallback) (
-        console::Console*,
-        ontology::Entity*,
+typedef std::shared_ptr<yli::datatypes::AnyValue> (*ConsoleCommandCallback) (
+        yli::console::Console*,
+        yli::ontology::Entity*,
         std::vector<std::string>& command_parameters);
 
 #endif

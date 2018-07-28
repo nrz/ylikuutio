@@ -9,27 +9,33 @@
 
 // Include standard headers
 #include <cmath>    // NAN, std::isnan, std::pow
-#include <memory>   // std::make_shared, std::shared_ptr
 #include <string>   // std::string
 
-namespace ontology
+namespace yli
 {
-    class VectorFont;
+    namespace ontology
+    {
+        class VectorFont;
+    }
 }
 
 typedef struct Text3DStruct
 {
     Text3DStruct()
-        : parent(nullptr), text_string_char(nullptr), original_scale_vector(glm::vec3(1.0f, 1.0f, 1.0f)), rotate_angle(NAN), cartesian_coordinates(nullptr)
+        : parent(nullptr),
+        text_string_char(nullptr),
+        original_scale_vector(glm::vec3(1.0f, 1.0f, 1.0f)),
+        rotate_angle(NAN),
+        cartesian_coordinates(glm::vec3(NAN, NAN, NAN))
     {
         // constructor.
     }
-    ontology::VectorFont* parent; // pointer to the parent `VectorFont`.
+    yli::ontology::VectorFont* parent; // pointer to the parent `VectorFont`.
     std::string text_string;
     const char* text_string_char;
     glm::vec3 original_scale_vector;      // original scale vector.
     float rotate_angle;                   // rotate angle.
-    std::shared_ptr<glm::vec3> cartesian_coordinates; // coordinate vector.
+    glm::vec3 cartesian_coordinates;      // coordinate vector.
     glm::vec3 rotate_vector;              // rotate vector.
     glm::vec3 translate_vector;           // translate vector.
 } Text3DStruct;

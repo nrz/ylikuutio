@@ -8,20 +8,23 @@
 #endif
 
 // Include standard headers
+#include <cstddef>  // std::size_t
 #include <string>   // std::string
 #include <vector>   // std::vector
 
-
-namespace loaders
+namespace yli
 {
-    bool load_ASCII_grid(
-            const std::string& ASCII_grid_file_name,
-            std::vector<glm::vec3>& out_vertices,
-            std::vector<glm::vec2>& out_UVs,
-            std::vector<glm::vec3>& out_normals,
-            const int32_t x_step,
-            const int32_t z_step,
-            const std::string& triangulation_type);
+    namespace loaders
+    {
+        bool load_ASCII_grid(
+                const std::string& ascii_grid_filename,
+                std::vector<glm::vec3>& out_vertices,
+                std::vector<glm::vec2>& out_UVs,
+                std::vector<glm::vec3>& out_normals,
+                const std::size_t x_step,
+                const std::size_t z_step,
+                const std::string& triangulation_type);
+    }
 }
 
 #endif

@@ -242,6 +242,6 @@ namespace detail
 	}
 }//namespace glm
 
-#if GLM_ARCH != GLM_ARCH_PURE && GLM_HAS_UNRESTRICTED_UNIONS
+#if GLM_USE_SIMD == GLM_ENABLE
 #	include "func_geometric_simd.inl"
 #endif

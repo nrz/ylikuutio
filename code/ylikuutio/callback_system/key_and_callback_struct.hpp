@@ -4,15 +4,18 @@
 // Include standard headers
 #include <stdint.h>      // uint32_t etc.
 
-namespace callback_system
+namespace yli
 {
-    class CallbackEngine;
+    namespace callback_system
+    {
+        class CallbackEngine;
+    }
 }
 
 typedef struct
 {
     uint32_t keycode;
-    callback_system::CallbackEngine* callback_engine;
+    yli::callback_system::CallbackEngine* callback_engine;
 } KeyAndCallbackStruct;
 
 #endif

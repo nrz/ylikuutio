@@ -21,7 +21,7 @@
 #	error "GLM: GLM_GTX_vector_query is an experimental extension and may change in the future. Use #define GLM_ENABLE_EXPERIMENTAL before including it, if you really want to use it."
 #endif
 
-#if GLM_MESSAGES == GLM_MESSAGES_ENABLED && !defined(GLM_EXT_INCLUDED)
+#if GLM_MESSAGES == GLM_ENABLE && !defined(GLM_EXT_INCLUDED)
 #	pragma message("GLM: GLM_GTX_vector_query extension included")
 #endif
 
@@ -34,7 +34,7 @@ namespace glm
 	/// @see gtx_vector_query extensions.
 	template<length_t L, typename T, qualifier Q>
 	GLM_FUNC_DECL bool areCollinear(vec<L, T, Q> const& v0, vec<L, T, Q> const& v1, T const& epsilon);
-		
+
 	//! Check whether two vectors are orthogonals.
 	/// @see gtx_vector_query extensions.
 	template<length_t L, typename T, qualifier Q>
@@ -44,7 +44,7 @@ namespace glm
 	/// @see gtx_vector_query extensions.
 	template<length_t L, typename T, qualifier Q>
 	GLM_FUNC_DECL bool isNormalized(vec<L, T, Q> const& v, T const& epsilon);
-		
+
 	//! Check whether a vector is null.
 	/// @see gtx_vector_query extensions.
 	template<length_t L, typename T, qualifier Q>

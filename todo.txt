@@ -1,22 +1,58 @@
 TODO list:
 Tasks in priority order in descending priority, the most urgent ones first. Check when ready and move to the section Ready, when ready.
 
+Fixes needed:
+[ ] Fix compiling on Visual Studio.
+
 Tasks which are necessary for the development of Ylikuutio:
-[ ] Add audio with SDL.
-[ ] Add support for `man` command in console (a container class with the command callback together with the `man` text for the command).
-[ ] Add command line parameter `--debug` to Ajokki (log all kinds of debug information).
-[ ] Add command line parameter `--headless` to Ajokki (do not open any windows).
-[ ] Add command line parameter `--input-file` to Ajokki (load keypresses and keyreleases from a file, eg. `--input-file foo` or `--input-file=foo`).
-[ ] Add support for 3D model of Helsinki: http://www.hri.fi/en/dataset/helsingin-3d-kaupunkimalli http://www.hri.fi/fi/dataset/helsingin-3d-kaupunkimalli
-[ ] Add support for OpenStreetMap data: https://www.openstreetmap.org/
-[ ] Add voxel world.
-[ ] Add AI objects (robots).
+[ ] Write code to convert ASCII grid files (height maps) to binary FBX files, storing also interpolated vertices, UVs, and normals.
+[ ] Test code used to convert ASCII grid files (height maps) to binary FBX files by loading the FBX files created with it.
+[ ] Convert ASCII grid files into binary FBX files.
+[ ] Implement `Camera` entities.
+[ ] Create `audio::Sound` class, whose parent is `Entity`.
+[ ] Create `audio::PlayList` class, whose parent is `Entity`.
+[ ] Implement `play` console command for playing `Sound`s and `Playlist`s.
+[ ] Implement `pause` console command for pausing `Sound`s and `Playlist`s.
+[ ] Implement `next` console command for changing to the next `Sound` in a `Playlist`.
+[ ] Implement `prev` console command for changing to the previous `Sound` in a `Playlist`.
+[ ] Add variable `text_size` (affects size of console text and other texts printed on screen).
+[ ] Implement support for automatic detection of optimal window size.
+[ ] Implement support for changing window size.
+[ ] Implement support for changing font size.
+[ ] Evaluate mingw-std-threads: https://github.com/meganz/mingw-std-threads
+[ ] Evaluate winpthreads: https://sourceforge.net/p/mingw-w64/mingw-w64/ci/master/tree/mingw-w64-libraries/winpthreads/ https://en.wikipedia.org/wiki/MinGW#MinGW-w64
+[ ] Evaluate Pthreads-win32, in particular MinGW-w64 support: https://sourceware.org/pthreads-win32/ https://sourceforge.net/p/mingw-w64/wiki2/Compile%20pthreads/
+[ ] Write test code using C++11 threads.
+[ ] Write test code using pthreads.
+[ ] Implement scene loading which works in the background.
+[ ] Implement command line parameter `--headless` to Ajokki (do not open any windows, do not render anything).
+[ ] Implement command line parameter `--input-file` to Ajokki (load keypresses and keyreleases from a file, eg. `--input-file foo` or `--input-file=foo`).
+[ ] Implement command line parameter `--window-size` to Ajokki (eg. `--window-size 1920x1080` or `--window-size=1920x1080`).
+[ ] Implement command line parameter `--debug` to Ajokki (log all kinds of debug information).
+[ ] Evaluate network libraries (code quality, platform & crosscompiling support, MinGW-w64). https://stackoverflow.com/questions/118945/best-c-c-network-library
+[ ] Evaluate Asio (nework and low-level I/O library): https://think-async.com/
+[ ] Evaluate cpp-netlib (network library): http://cpp-netlib.org/
+[ ] Evaluate kNet (network library): https://github.com/juj/kNet/ (used by Urho3D: https://urho3d.github.io/ )
+[ ] Implement chat server using the chosen network library.
+[ ] Implement chat client using the chosen network library.
+[ ] Evaluate AppVeyor: https://github.com/marketplace/appveyor
+[ ] Implement support for `man` command in console (a container class with the command callback together with the `man` text for the command).
+[ ] Optimize `Symbiosis` entities' rendering by going through `SymbiontMaterial`->`SymbiontSpecies`->`Biont` hierarchy.
+[ ] Add support for CityGML file format.
+[ ] Implement support for 3D model of Helsinki: http://www.hri.fi/en/dataset/helsingin-3d-kaupunkimalli http://www.hri.fi/fi/dataset/helsingin-3d-kaupunkimalli
+[ ] Implement support for 3D model of Vantaa: https://hri.fi/data/en_GB/dataset/vantaan-3d-rakennukset https://hri.fi/data/fi/dataset/vantaan-3d-rakennukset
+[ ] Implement support for OpenStreetMap data: https://www.openstreetmap.org/
+[ ] Implement support for 3D model of Oulu: http://ubicomp.oulu.fi/infrastructure-virtualoulu/ https://github.com/Oulu-UCC/3D_City_fbx
+[ ] Add support for Collada .dae file format.
+[ ] Implement support for 3D model of Turku campus and science park area: http://www.lounaistieto.fi/blog/2017/09/06/turun-kampus-ja-tiedepuistoalueen-3d-kaupunkimalli/
+[ ] Implement support for 3D model of Tampere: http://kartat.tampere.fi/splashscreen/
+[ ] Implement voxel world.
+[ ] Implement AI objects (robots).
 [ ] Add scene loading command `load` into console.
 [ ] Move main loop out of `main` function and away from Ajokki into `ontology::Universe` class of Ylikuutio.
-[ ] Add support for custom keyboard settings.
-[ ] Add support for camera objects..
+[ ] Implement support for custom keyboard settings.
+[ ] Use GLFW Android port for Android builds. https://github.com/glfw/glfw/issues/611 https://github.com/xCuri0/glfw-android-example
 [ ] Use GLFM library (only for Android builds). https://github.com/brackeen/glfm
-[ ] Add variable `text_size`.
 [ ] Add variable `direction`.
 [ ] Use TinySpline.
 [ ] Add bicubic interpolation.
@@ -24,29 +60,31 @@ Tasks which are necessary for the development of Ylikuutio:
 [ ] Variable `triangulation`: `set triangulation bilinear`/`set triangulation bicubic`/`set triangulation southwest_northeast`/`set triangulation southeast_northwest`.
 [ ] Write integration tests for Ajokki.
 [ ] Learn how to write unit tests for multithreaded C++ code.
-[ ] Implement scene loading which works in the background.
-[ ] Create a graph of the vertices and edges of a scene.
-[ ] Add vertex selection and modification (with a mouse cursor), using ray casting.
-[ ] Add modifying of vertices.
-[ ] Add octree segmentation.
-[ ] Add support for vector fonts.
-[ ] Add TinyScheme support for programming of AI objects (robots).
-[ ] Enable changing of variable `up` in the console with `set up`.
-[ ] Enable changing of variable `right` in the console with `set right`.
-[ ] Add dynamic not flowing water.
-[ ] Add physics modeling.
-[ ] Add flowing water (computed with a server).
-[ ] Add Internet code (ASIO).
-[ ] Add support for changing window size.
+[ ] Create a vertex graph of the vertices and edges of a scene.
+[ ] Implement vertex selection and modification (with a mouse cursor), using ray casting.
+[ ] Implement modifying of vertices.
+[ ] Implement octree segmentation.
+[ ] Implement frustrum culling.
+[ ] Implement generation of terrain meshes in different levels of detail (LOD) using different `x_step`s and `z_step`s (eg. 1, 2, 4, 8, 16, 32, 64, 128).
+[ ] Implement terrain mesh LOD selection based on the distance between the camera and the terrain.
+[ ] Implement terrain mesh LOD selection based on the distance between the camera and the terrain and the available video memory.
+[ ] Implement A* route finding. https://en.wikipedia.org/wiki/A*_search_algorithm
+[ ] Implement Theta* route finding. http://aigamedev.com/open/tutorials/theta-star-any-angle-paths/
+[ ] Implement support for vector fonts.
+[ ] Implement rendering into a texture.
+[ ] Implement TinyScheme support for programming of AI objects (robots).
+[ ] Implement dynamic not flowing water, using OpenGL shaders.
 
 Less urgent:
-[ ] Add TinyScheme support in console.
-[ ] Add support for 3D text.
-[ ] Add support for partially transparent text.
-[ ] Add support for over 3-dimensional objects (projected into 3D space in `Object::render()`).
+[ ] Implement rigid body physics using Bullet. https://pybullet.org/wordpress/
+[ ] Implement flowing water (computed on a server, based on players' actions).
+[ ] Implement TinyScheme support in console.
+[ ] Implement support for 3D text.
+[ ] Implement support for partially transparent text.
+[ ] Implement support for over 3D objects (`class HighDimensionalSpecies`, `class HighDimensionalObject`). projected into 3D space in `HighDimensionalObject::render()`).
 [ ] Store each robot's current view into an array from which the robot may access it programmatically using C++ and/or GLSL.
-[ ] Implement simulation of primary visual cortex (V1).
-[ ] Implement simulation of V2.
+[ ] Implement simulation of contour detection processing in the primary visual cortex (V1).
+[ ] Implement simulation of contour detection processing in V2 (visual cortex area).
 
 Ready:
 [x] Add test VBO, eg. some kind of particle object.
@@ -72,3 +110,12 @@ Ready:
 [x] Add variable `wireframe`: `set wireframe true` / `set wireframe false`.
 [x] Add object listing command `info` into console.
 [x] Add entity-specific pre-render and post-render callbacks `prerender_callback` and `postrender_callback`.
+[x] Add audio with SFML.
+[x] Add support for an initial rotation for `Object`s.
+[x] Implement `Symbiosis` entities.
+[x] Bind each `Biont` also to its corresponding `SymbiontSpecies` (and also unbind from its corresponding `SymbiontSpecies`).
+[x] Implement `Entity`-specific variables.
+[x] Fix Travis configuration file `.travis.yml`.
+[x] Fix Coverity Scan Travis integration configuration (in `.travis.yml`).
+[x] Rewrite `obj_loader.cpp` without `fscanf`, using instead `stringstream` for parsing.
+[x] Evaluate CHICKEN Scheme. https://www.call-cc.org/

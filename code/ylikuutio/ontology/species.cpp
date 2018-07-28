@@ -16,64 +16,91 @@
 #endif
 
 // Include standard headers
+#include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
-#include <stdint.h> // uint32_t etc.
 
-namespace ontology
+namespace yli
 {
-    void Species::bind_to_parent()
+    namespace ontology
     {
-        // get `childID` from `Material` and set pointer to this `Species`.
-        hierarchy::bind_child_to_parent<ontology::Species*>(this, this->parent->species_pointer_vector, this->parent->free_speciesID_queue, &this->parent->number_of_species);
-    }
+        void Species::bind_to_parent()
+        {
+            // get `childID` from `Material` and set pointer to this `Species`.
+            this->material_parent->bind_species(this);
+        }
 
-    Species::~Species()
-    {
-        // destructor.
-        std::cout << "Species with childID " << std::dec << this->childID << " will be destroyed.\n";
+        void Species::bind_to_new_parent(yli::ontology::Material* const new_material_pointer)
+        {
+            // unbind from the old parent `Material`.
+            this->material_parent->unbind_species(this->childID);
 
-        // destroy all objects of this species.
-        std::cout << "All objects of this species will be destroyed.\n";
-        hierarchy::delete_children<ontology::Object*>(this->object_pointer_vector, &this->number_of_objects);
+            // get `childID` from `Material` and set pointer to this `Species`.
+            this->material_parent = new_material_pointer;
+            this->material_parent->bind_species(this);
+        }
 
-        // Cleanup VBO, shader and texture.
-        glDeleteBuffers(1, &this->vertexbuffer);
-        glDeleteBuffers(1, &this->uvbuffer);
-        glDeleteBuffers(1, &this->normalbuffer);
-        glDeleteBuffers(1, &this->elementbuffer);
+        Species::~Species()
+        {
+            if (!this->is_symbiont_species)
+            {
+                // destructor.
+                std::cout << "Species with childID " << std::dec << this->childID << " will be destroyed.\n";
 
-        // set pointer to this species to nullptr.
-        this->parent->set_species_pointer(this->childID, nullptr);
-    }
+                // destroy all objects of this species.
+                std::cout << "All objects of this species will be destroyed.\n";
+                yli::hierarchy::delete_children<yli::ontology::Object*>(this->object_pointer_vector, &this->number_of_objects);
 
-    void Species::render()
-    {
-        this->prerender();
+                // Cleanup VBO, shader and texture.
+                glDeleteBuffers(1, &this->vertexbuffer);
+                glDeleteBuffers(1, &this->uvbuffer);
+                glDeleteBuffers(1, &this->normalbuffer);
+                glDeleteBuffers(1, &this->elementbuffer);
 
-        // render this `Species`.
-        ontology::render_species_or_glyph<ontology::Species*>(this);
+                // set pointer to this species to nullptr.
+                this->material_parent->set_species_pointer(this->childID, nullptr);
+            }
+        }
 
-        this->postrender();
-    }
+        void Species::render()
+        {
+            if (this->vram_buffer_in_use)
+            {
+                this->prerender();
 
-    ontology::Entity* Species::get_parent() const
-    {
-        return this->parent;
-    }
+                // render this `Species`.
+                yli::ontology::render_species_or_glyph<yli::ontology::Species*>(this);
 
-    void Species::set_object_pointer(const int32_t childID, ontology::Object* const child_pointer)
-    {
-        hierarchy::set_child_pointer(childID, child_pointer, this->object_pointer_vector, this->free_objectID_queue, &this->number_of_objects);
-    }
+                this->postrender();
+            }
+        }
 
-    void Species::set_name(const std::string& name)
-    {
-        ontology::set_name(name, this);
-    }
+        yli::ontology::Entity* Species::get_parent() const
+        {
+            if (this->is_symbiont_species)
+            {
+                return nullptr;
+            }
+            return this->material_parent;
+        }
 
-    void Species::bind_to_new_parent(ontology::Material* const new_material_pointer)
-    {
-        // this method sets pointer to this `Species` to nullptr, sets `parent` according to the input, and requests a new `childID` from the new `Material`.
-        hierarchy::bind_child_to_new_parent<ontology::Species*, ontology::Material*>(this, new_material_pointer, this->parent->species_pointer_vector, this->parent->free_speciesID_queue, &this->parent->number_of_species);
+        void Species::set_object_pointer(const std::size_t childID, yli::ontology::Object* const child_pointer)
+        {
+            yli::hierarchy::set_child_pointer(childID, child_pointer, this->object_pointer_vector, this->free_objectID_queue, &this->number_of_objects);
+        }
+
+        std::size_t Species::get_image_width() const
+        {
+            return this->image_width;
+        }
+
+        const std::string& Species::get_model_file_format() const
+        {
+            return this->model_file_format;
+        }
+
+        std::size_t Species::get_image_height() const
+        {
+            return this->image_height;
+        }
     }
 }

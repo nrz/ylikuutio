@@ -16,26 +16,28 @@
 #endif
 
 // Include standard headers
-#include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
 
-namespace loaders
+namespace yli
 {
-    bool load_species(
-            SpeciesLoaderStruct& species_loader_struct,
-            std::vector<glm::vec3>& out_vertices,
-            std::vector<glm::vec2>& out_UVs,
-            std::vector<glm::vec3>& out_normals,
-            std::vector<GLuint>& indices,
-            std::vector<glm::vec3>& indexed_vertices,
-            std::vector<glm::vec2>& indexed_UVs,
-            std::vector<glm::vec3>& indexed_normals,
-            GLuint* vertexbuffer,
-            GLuint* uvbuffer,
-            GLuint* normalbuffer,
-            GLuint* elementbuffer,
-            int32_t& image_width,
-            int32_t& image_height);
+    namespace loaders
+    {
+        bool load_species(
+                SpeciesLoaderStruct& species_loader_struct,
+                std::vector<glm::vec3>& out_vertices,
+                std::vector<glm::vec2>& out_UVs,
+                std::vector<glm::vec3>& out_normals,
+                std::vector<GLuint>& indices,
+                std::vector<glm::vec3>& indexed_vertices,
+                std::vector<glm::vec2>& indexed_UVs,
+                std::vector<glm::vec3>& indexed_normals,
+                GLuint* vertexbuffer,
+                GLuint* uvbuffer,
+                GLuint* normalbuffer,
+                GLuint* elementbuffer,
+                bool& vram_buffer_in_use,
+                const bool is_debug_mode);
+    }
 }
 
 #endif

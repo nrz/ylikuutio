@@ -2,14 +2,14 @@
 #define __SYMBIONT_SPECIES_HPP_INCLUDED
 
 #include "entity.hpp"
+#include "scene.hpp"
 #include "shader.hpp"
+#include "species.hpp"
 #include "species_or_glyph.hpp"
-#include "model.hpp"
 #include "symbiont_material.hpp"
-#include "symbiont_species_struct.hpp"
+#include "species_struct.hpp"
 #include "render_templates.hpp"
-#include "entity_templates.hpp"
-#include "code/ylikuutio/loaders/species_loader.hpp"
+#include "vboindexer.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include GLEW
@@ -31,121 +31,129 @@
 #endif
 
 // Include standard headers
+#include <cstddef>  // std::size_t
+#include <iostream> // std::cout, std::cin, std::cerr
 #include <queue>    // std::queue
-#include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 #include <vector>   // std::vector
 
-namespace ontology
+namespace yli
 {
-    class Universe;
-
-    class SymbiontSpecies: public ontology::Model
+    namespace ontology
     {
-        public:
-            // constructor.
-            SymbiontSpecies(const SymbiontSpeciesStruct& symbiont_species_struct)
-                : Model(symbiont_species_struct.universe)
-            {
+        class Universe;
+        class Biont;
+
+        class SymbiontSpecies: public yli::ontology::Species
+        {
+            public:
+                // destructor.
+                virtual ~SymbiontSpecies();
+
+            private:
+                void bind_biont(yli::ontology::Biont* const biont);
+
+                void unbind_biont(const std::size_t childID);
+
                 // constructor.
-                this->light_position = symbiont_species_struct.light_position;
-                this->parent   = symbiont_species_struct.parent;
-                this->universe = symbiont_species_struct.universe;
+                SymbiontSpecies(yli::ontology::Universe* const universe, const SpeciesStruct& species_struct)
+                    : Species(universe, species_struct)
+                {
+                    // constructor.
+                    this->shader                   = species_struct.shader;
+                    this->symbiont_material_parent = species_struct.symbiont_material;
+                    this->vertices                 = species_struct.vertices;
+                    this->uvs                      = species_struct.uvs;
+                    this->normals                  = species_struct.normals;
+                    this->light_position           = species_struct.light_position;
 
-                // get `childID` from `Material` and set pointer to this `SymbiontSpecies`.
-                this->bind_to_parent();
+                    std::cout << "Binding `yli::ontology::SymbiontSpecies*` to `yli::ontology::SymbiontMaterial*` ...\n";
 
-                // Get a handle for our buffers.
-                ontology::Shader* shader = symbiont_species_struct.shader;
-                this->vertexPosition_modelspaceID = glGetAttribLocation(shader->programID, "vertexPosition_modelspace");
-                this->vertexUVID = glGetAttribLocation(shader->programID, "vertexUV");
-                this->vertexNormal_modelspaceID = glGetAttribLocation(shader->programID, "vertexNormal_modelspace");
+                    // get `childID` from `SymbiontMaterial` and set pointer to this `SymbiontSpecies`.
+                    this->bind_to_parent();
 
-                // Get a handle for our "LightPosition" uniform.
-                glUseProgram(shader->programID);
-                this->lightID = glGetUniformLocation(shader->programID, "LightPosition_worldspace");
+                    // Get a handle for our buffers.
+                    this->vertex_position_modelspaceID = glGetAttribLocation(this->shader->get_programID(), "vertexPosition_modelspace");
+                    this->vertexUVID = glGetAttribLocation(this->shader->get_programID(), "vertexUV");
+                    this->vertex_normal_modelspaceID = glGetAttribLocation(this->shader->get_programID(), "vertexNormal_modelspace");
 
-                SpeciesLoaderStruct species_loader_struct;
-                species_loader_struct.model_filename = this->model_filename;
-                species_loader_struct.model_file_format = this->model_file_format;
+                    // Get a handle for our "LightPosition" uniform.
+                    glUseProgram(this->shader->get_programID());
+                    this->lightID = glGetUniformLocation(this->shader->get_programID(), "LightPosition_worldspace");
 
-                this->image_width = -1;
-                this->image_height = -1;
+                    // water level.
+                    GLuint water_level_uniform_location = glGetUniformLocation(this->shader->get_programID(), "water_level");
+                    yli::ontology::Scene* scene = static_cast<yli::ontology::Scene*>(this->shader->get_parent());
+                    glUniform1f(water_level_uniform_location, scene->get_water_level());
 
-                loaders::load_species(
-                        species_loader_struct,
-                        this->vertices,
-                        this->UVs,
-                        this->normals,
-                        this->indices,
-                        this->indexed_vertices,
-                        this->indexed_UVs,
-                        this->indexed_normals,
-                        &this->vertexbuffer,
-                        &this->uvbuffer,
-                        &this->normalbuffer,
-                        &this->elementbuffer,
-                        this->image_width,
-                        this->image_height);
+                    // Fill the index buffer.
+                    yli::ontology::indexVBO(
+                            this->vertices,
+                            this->uvs,
+                            this->normals,
+                            this->indices,
+                            this->indexed_vertices,
+                            this->indexed_uvs,
+                            this->indexed_normals);
 
-                // TODO: Compute the graph of this object type to enable object vertex modification!
+                    // Load it into a VBO.
+                    glGenBuffers(1, &this->vertexbuffer);
+                    glBindBuffer(GL_ARRAY_BUFFER, this->vertexbuffer);
+                    glBufferData(GL_ARRAY_BUFFER, this->indexed_vertices.size() * sizeof(glm::vec3), &this->indexed_vertices[0], GL_STATIC_DRAW);
 
-                this->child_vector_pointers_vector.push_back(&this->object_pointer_vector);
-                this->type = "ontology::SymbiontSpecies*";
-            }
+                    glGenBuffers(1, &this->uvbuffer);
+                    glBindBuffer(GL_ARRAY_BUFFER, this->uvbuffer);
+                    glBufferData(GL_ARRAY_BUFFER, this->indexed_uvs.size() * sizeof(glm::vec2), &this->indexed_uvs[0], GL_STATIC_DRAW);
 
-            // destructor.
-            virtual ~SymbiontSpecies();
+                    glGenBuffers(1, &this->normalbuffer);
+                    glBindBuffer(GL_ARRAY_BUFFER, this->normalbuffer);
+                    glBufferData(GL_ARRAY_BUFFER, this->indexed_normals.size() * sizeof(glm::vec3), &this->indexed_normals[0], GL_STATIC_DRAW);
 
-            ontology::Entity* get_parent() const override;
+                    glGenBuffers(1, &this->elementbuffer);
+                    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->elementbuffer);
+                    glBufferData(GL_ELEMENT_ARRAY_BUFFER, this->indices.size() * sizeof(GLuint), &this->indices[0] , GL_STATIC_DRAW);
 
-            // this method sets pointer to this `SymbiontSpecies` to nullptr, sets `parent` according to the input, and requests a new `childID` from the new `Material`.
-            // this method sets an `Object` pointer.
-            void set_object_pointer(const int32_t childID, ontology::Object* const child_pointer);
+                    // TODO: Compute the vertex graph of this `SymbiontSpecies` to enable object vertex modification!
 
-            void set_name(const std::string& name);
+                    this->number_of_bionts = 0;
 
-            bool is_terrain;                           // worlds currently do not rotate nor translate.
-            float planet_radius;                      // radius of sea level in kilometers. used only for worlds.
-            float divisor;                           // value by which SRTM values are divided to convert them to kilometers.
+                    this->child_vector_pointers_vector.push_back(&this->biont_pointer_vector);
+                    this->type = "yli::ontology::SymbiontSpecies*";
+                }
 
-            glm::vec3 light_position;                // light position.
+                yli::ontology::Entity* get_parent() const override;
 
-            friend class Object;
-            template<class T1>
-                friend void render_children(const std::vector<T1>& child_pointer_vector);
-            template<class T1>
-                friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, int32_t* number_of_children);
-            template<class T1>
-                friend void render_species_or_glyph(T1 species_or_glyph_pointer);
-            template<class T1>
-                friend void set_name(std::string name, T1 entity);
+                std::size_t get_indices_size() const;
+                GLuint get_lightID() const;
 
-        private:
-            void bind_to_parent();
+                glm::vec3 light_position;                // light position.
 
-            // this method renders all `Object`s of this `SymbiontSpecies`.
-            void render();
+                friend class Symbiosis;
+                friend class SymbiontMaterial;
+                friend class Biont;
+                template<class T1>
+                    friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t* number_of_children);
+                template<class T1>
+                    friend void render_species_or_glyph(T1 species_or_glyph_pointer);
+                template<class T1>
+                    friend void render_children(const std::vector<T1>& child_pointer_vector);
 
-            ontology::SymbiontMaterial* parent; // pointer to `SymbiontMaterial`.
+                void bind_to_parent();
 
-            std::string model_file_format;        // type of the model file, eg. `"bmp"`.
-            std::string model_filename;           // filename of the model file.
+                // this method renders all `Object`s of this `SymbiontSpecies`.
+                void render();
 
-            const char* char_model_file_format;
-            const char* char_model_filename;
+                std::vector<yli::ontology::Biont*> biont_pointer_vector;
+                std::queue<std::size_t> free_biontID_queue;
+                std::size_t number_of_bionts;
 
-            double latitude;  // for SRTM.
-            double longitude; // for SRTM.
+                yli::ontology::SymbiontMaterial* symbiont_material_parent; // pointer to `SymbiontMaterial`.
+                yli::ontology::Shader* shader;           // pointer to `Shader`.
 
-            uint32_t x_step;
-            uint32_t z_step;
-
-            std::string triangulation_type;
-
-            int32_t image_width;
-            int32_t image_height;
-    };
+                std::string model_file_format;        // type of the model file, eg. `"bmp"`.
+                std::string model_filename;           // filename of the model file.
+        };
+    }
 }
 
 #endif

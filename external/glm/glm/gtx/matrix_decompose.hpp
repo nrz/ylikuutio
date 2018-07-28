@@ -24,7 +24,7 @@
 #	error "GLM: GLM_GTX_matrix_decompose is an experimental extension and may change in the future. Use #define GLM_ENABLE_EXPERIMENTAL before including it, if you really want to use it."
 #endif
 
-#if GLM_MESSAGES == GLM_MESSAGES_ENABLED && !defined(GLM_EXT_INCLUDED)
+#if GLM_MESSAGES == GLM_ENABLE && !defined(GLM_EXT_INCLUDED)
 #	pragma message("GLM: GLM_GTX_matrix_decompose extension included")
 #endif
 
@@ -33,7 +33,7 @@ namespace glm
 	/// @addtogroup gtx_matrix_decompose
 	/// @{
 
-	/// Decomposes a model matrix to translations, rotation and scale components 
+	/// Decomposes a model matrix to translations, rotation and scale components
 	/// @see gtx_matrix_decompose
 	template<typename T, qualifier Q>
 	GLM_FUNC_DECL bool decompose(

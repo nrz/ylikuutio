@@ -1,59 +1,66 @@
 #ifndef __SETTING_HPP_INCLUDED
 #define __SETTING_HPP_INCLUDED
 
+#include "setting_struct.hpp"
+#include "activate_callback.hpp"
+#include "read_callback.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
-#include "code/ylikuutio/common/globals.hpp"
 
 // Include standard headers
+#include <cstddef>  // std::size_t
 #include <memory>   // std::make_shared, std::shared_ptr
+#include <queue>    // std::queue
 #include <string>   // std::string
 
-namespace console
+namespace yli
 {
-    class Console;
-}
-
-namespace config
-{
-    class SettingMaster;
-
-    class Setting
+    namespace console
     {
-        public:
-            // constructor.
-            Setting(const SettingStruct& setting_struct);
+        class Console;
+    }
 
-            // destructor.
-            ~Setting();
+    namespace config
+    {
+        class SettingMaster;
 
-            std::string help();
+        class Setting
+        {
+            public:
+                // constructor.
+                Setting(const SettingStruct& setting_struct);
 
-            friend SettingMaster;
-            friend console::Console;
+                // destructor.
+                ~Setting();
 
-            template<class T1>
-                friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, int32_t* number_of_children);
-            template<class T1, class T2>
-                friend void hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent, std::vector<T1>& old_child_pointer_vector, std::queue<int32_t>& old_free_childID_queue, int32_t* old_number_of_children);
+                std::string help();
 
-        private:
-            void bind_to_parent();
+                friend SettingMaster;
+                friend yli::console::Console;
 
-            std::string name;
+                template<class T1>
+                    friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t* number_of_children);
+                template<class T1, class T2>
+                    friend void yli::hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent, std::vector<T1>& old_child_pointer_vector, std::queue<std::size_t>& old_free_childID_queue, std::size_t* old_number_of_children);
 
-            // The setting value (may be a pointer a some datatype).
-            std::shared_ptr<datatypes::AnyValue> setting_value;
+            private:
+                void bind_to_parent();
 
-            // pointer to `ActivateCallback` used to activate the new value after setting it.
-            ActivateCallback activate_callback;
+                std::string name;
 
-            // pointer to `ReadCallback` used to read the value. Leave to `nullptr` to read the value from `setting_value` of `class Setting`.
-            ReadCallback read_callback;
+                // The setting value (may be a pointer a some datatype).
+                std::shared_ptr<yli::datatypes::AnyValue> setting_value;
 
-            config::SettingMaster* parent; // pointer to `SettingMaster`.
+                // pointer to `ActivateCallback` used to activate the new value after setting it.
+                ActivateCallback activate_callback;
 
-            int32_t childID;                       // setting ID, returned by `config::SettingMaster->get_settingID()`.
-    };
+                // pointer to `ReadCallback` used to read the value. Leave to `nullptr` to read the value from `setting_value` of `class Setting`.
+                ReadCallback read_callback;
+
+                yli::config::SettingMaster* parent; // pointer to `SettingMaster`.
+
+                std::size_t childID;                // setting ID, returned by `yli::config::SettingMaster->get_settingID()`.
+        };
+    }
 }
 
 #endif

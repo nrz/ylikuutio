@@ -50,49 +50,40 @@
 #include <unordered_map> // std::unordered_map
 #include <vector>   // std::vector
 
-namespace config
+namespace yli
 {
-    class SettingMaster;
-    class Setting;
-}
-
-namespace callback_system
-{
-    class CallbackEngine;
-    class CallbackObject;
-    class CallbackParameter;
-}
-
-namespace graph
-{
-    class Graph;
-}
-
-namespace ontology
-{
-    class Entity;
-    class Font2D;
-}
-
-typedef std::shared_ptr<datatypes::AnyValue> (*ActivateCallback) (ontology::Entity* entity, config::SettingMaster* setting_master);
-typedef std::shared_ptr<datatypes::AnyValue> (*ReadCallback) (ontology::Entity* entity, config::SettingMaster* setting_master);
-typedef std::shared_ptr<datatypes::AnyValue> (*PreRenderCallback) (ontology::Entity* entity, config::SettingMaster* setting_master);
-typedef std::shared_ptr<datatypes::AnyValue> (*PostRenderCallback) (ontology::Entity* entity, config::SettingMaster* setting_master);
-
-typedef struct SettingStruct
-{
-    SettingStruct(std::shared_ptr<datatypes::AnyValue> initial_value)
-        : initial_value(initial_value), should_ylikuutio_call_activate_callback_now(true), setting_master(nullptr), activate_callback(nullptr), read_callback(nullptr)
+    namespace callback_system
     {
-        // constructor.
+        class CallbackEngine;
+        class CallbackObject;
+        class CallbackParameter;
     }
-    std::string name;
-    std::shared_ptr<datatypes::AnyValue> initial_value;
-    config::SettingMaster* setting_master;
-    ActivateCallback activate_callback;
-    ReadCallback read_callback;
-    bool should_ylikuutio_call_activate_callback_now;
-} SettingStruct;
+
+    namespace config
+    {
+        class SettingMaster;
+        class Setting;
+    }
+
+    namespace console
+    {
+        class Console;
+    }
+
+    namespace graph
+    {
+        class Graph;
+    }
+
+    namespace ontology
+    {
+        class Entity;
+        class Font2D;
+    }
+}
+
+typedef std::shared_ptr<yli::datatypes::AnyValue> (*PreRenderCallback) (yli::ontology::Entity* entity, yli::config::SettingMaster* setting_master);
+typedef std::shared_ptr<yli::datatypes::AnyValue> (*PostRenderCallback) (yli::ontology::Entity* entity, yli::config::SettingMaster* setting_master);
 
 typedef struct PrintingStruct
 {
@@ -121,25 +112,21 @@ typedef struct
     bool should_ylikuutio_use_real_texture_coordinates;
 } BilinearInterpolationStruct;
 
-typedef std::shared_ptr<datatypes::AnyValue> (*InputParametersToAnyValueCallback) (
-        callback_system::CallbackEngine*,
-        callback_system::CallbackObject*,
-        std::vector<callback_system::CallbackParameter*>&);
+typedef std::shared_ptr<yli::datatypes::AnyValue> (*InputParametersToAnyValueCallback) (
+        yli::callback_system::CallbackEngine*,
+        yli::callback_system::CallbackObject*,
+        std::vector<yli::callback_system::CallbackParameter*>&);
 
-namespace console
-{
-    class Console;
-}
-typedef std::shared_ptr<datatypes::AnyValue> (*InputParametersToAnyValueCallbackWithConsole) (
-        callback_system::CallbackEngine*,
-        callback_system::CallbackObject*,
-        std::vector<callback_system::CallbackParameter*>&,
-        console::Console*);
+typedef std::shared_ptr<yli::datatypes::AnyValue> (*InputParametersToAnyValueCallbackWithConsole) (
+        yli::callback_system::CallbackEngine*,
+        yli::callback_system::CallbackObject*,
+        std::vector<yli::callback_system::CallbackParameter*>&,
+        yli::console::Console*);
 
-typedef std::shared_ptr<datatypes::AnyValue> (*GetContentCallback) (
-        callback_system::CallbackEngine*,
-        callback_system::CallbackObject*,
-        std::vector<callback_system::CallbackParameter*>&,
+typedef std::shared_ptr<yli::datatypes::AnyValue> (*GetContentCallback) (
+        yli::callback_system::CallbackEngine*,
+        yli::callback_system::CallbackObject*,
+        std::vector<yli::callback_system::CallbackParameter*>&,
         uint32_t x_start,
         uint32_t y_start,
         uint32_t z_start,

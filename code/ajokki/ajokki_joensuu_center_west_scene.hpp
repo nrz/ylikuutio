@@ -1,14 +1,14 @@
-namespace ontology
+namespace yli
 {
-    class World;
-    class Entity;
-    class EntityFactory;
+    namespace ontology
+    {
+        class World;
+        class Entity;
+        class EntityFactory;
+    }
 }
-
-// Include standard headers
-#include <memory> // std::make_shared, std::shared_ptr
 
 namespace ajokki
 {
-    ontology::Entity* create_joensuu_center_west_scene(ontology::EntityFactory* entity_factory, ontology::World* const world);
+    yli::ontology::Entity* create_joensuu_center_west_scene(yli::ontology::EntityFactory* entity_factory, yli::ontology::World* const world);
 }

@@ -180,7 +180,7 @@ int test_inverse()
 
 int test_ctr()
 {
-	int Error(0);
+	int Error = 0;
 
 #if GLM_HAS_TRIVIAL_QUERIES
 	//Error += std::is_trivially_default_constructible<glm::mat4>::value ? 0 : 1;
@@ -190,9 +190,9 @@ int test_ctr()
 	//Error += std::has_trivial_copy_constructor<glm::mat4>::value ? 0 : 1;
 #endif
 
-#if(GLM_HAS_INITIALIZER_LISTS)
+#if GLM_HAS_INITIALIZER_LISTS
 	glm::mat4 m0(
-		glm::vec4(0, 1, 2, 3), 
+		glm::vec4(0, 1, 2, 3),
 		glm::vec4(4, 5, 6, 7),
 		glm::vec4(8, 9, 10, 11),
 		glm::vec4(12, 13, 14, 15));
@@ -227,7 +227,8 @@ int test_ctr()
 		{0, 0, 1, 0},
 		{0, 0, 0, 1} };
 
-	Error += glm::equal(m4[0][3], 1.0f, 0.0001f) ? 0 : 1;
+	Error += glm::equal(m4[0][0], 1.0f, 0.0001f) ? 0 : 1;
+	Error += glm::equal(m4[3][3], 1.0f, 0.0001f) ? 0 : 1;
 
 	std::vector<glm::mat4> v1{
 		{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15},
@@ -304,7 +305,7 @@ struct repro
 	glm::mat4* matrix;
 };
 
-int test_size()
+static int test_size()
 {
 	int Error = 0;
 
@@ -316,6 +317,17 @@ int test_size()
 	Error += glm::dmat4::length() == 4 ? 0 : 1;
 
 	return Error;
+}
+
+static int test_constexpr()
+{
+	glm::mat4 const I(1.0f);
+
+#if GLM_HAS_CONSTEXPR
+	static_assert(glm::mat4::length() == 4, "GLM: Failed constexpr");
+#endif
+
+	return 0;
 }
 
 int main()
@@ -331,6 +343,7 @@ int main()
 	Error += test_operators();
 	Error += test_inverse();
 	Error += test_size();
+	Error += test_constexpr();
 
 	Error += perf_mul();
 

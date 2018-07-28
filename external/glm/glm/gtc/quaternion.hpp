@@ -19,8 +19,9 @@
 #include "../vec3.hpp"
 #include "../vec4.hpp"
 #include "../gtc/constants.hpp"
+#include "../gtc/matrix_transform.hpp"
 
-#if GLM_MESSAGES == GLM_MESSAGES_ENABLED && !defined(GLM_EXT_INCLUDED)
+#if GLM_MESSAGES == GLM_ENABLE && !defined(GLM_EXT_INCLUDED)
 #	pragma message("GLM: GLM_GTC_quaternion extension included")
 #endif
 
@@ -39,29 +40,11 @@ namespace glm
 
 		// -- Data --
 
-#		if GLM_HAS_ALIGNED_TYPE
-#			if GLM_COMPILER & GLM_COMPILER_GCC
-#				pragma GCC diagnostic push
-#				pragma GCC diagnostic ignored "-Wpedantic"
-#			endif
-#			if GLM_COMPILER & GLM_COMPILER_CLANG
-#				pragma clang diagnostic push
-#				pragma clang diagnostic ignored "-Wgnu-anonymous-struct"
-#				pragma clang diagnostic ignored "-Wnested-anon-types"
-#			endif
-		
+#		if GLM_LANG & GLM_LANG_CXXMS_FLAG
 			union
 			{
 				struct { T x, y, z, w;};
-				typename detail::storage<T, sizeof(T) * 4, detail::is_aligned<Q>::value>::type data;
 			};
-		
-#			if GLM_COMPILER & GLM_COMPILER_CLANG
-#				pragma clang diagnostic pop
-#			endif
-#			if GLM_COMPILER & GLM_COMPILER_GCC
-#				pragma GCC diagnostic pop
-#			endif
 #		else
 			T x, y, z, w;
 #		endif
@@ -143,6 +126,9 @@ namespace glm
 	GLM_FUNC_DECL tquat<T, Q> operator+(tquat<T, Q> const& q, tquat<T, Q> const& p);
 
 	template<typename T, qualifier Q>
+	GLM_FUNC_DECL tquat<T, Q> operator-(tquat<T, Q> const& q, tquat<T, Q> const& p);
+
+	template<typename T, qualifier Q>
 	GLM_FUNC_DECL tquat<T, Q> operator*(tquat<T, Q> const& q, tquat<T, Q> const& p);
 
 	template<typename T, qualifier Q>
@@ -174,8 +160,12 @@ namespace glm
 	template<typename T, qualifier Q>
 	GLM_FUNC_DECL bool operator!=(tquat<T, Q> const& q1, tquat<T, Q> const& q2);
 
+	/// Builds an identity quaternion.
+	template<typename genType>
+	GLM_FUNC_DECL genType identity();
+
 	/// Returns the length of the quaternion.
-	/// 
+	///
 	/// @tparam T Floating-point scalar types.
 	///
 	/// @see gtc_quaternion
@@ -183,15 +173,15 @@ namespace glm
 	GLM_FUNC_DECL T length(tquat<T, Q> const& q);
 
 	/// Returns the normalized quaternion.
-	/// 
+	///
 	/// @tparam T Floating-point scalar types.
 	///
 	/// @see gtc_quaternion
 	template<typename T, qualifier Q>
 	GLM_FUNC_DECL tquat<T, Q> normalize(tquat<T, Q> const& q);
-		
+
 	/// Returns dot product of q1 and q2, i.e., q1[0] * q2[0] + q1[1] * q2[1] + ...
-	/// 
+	///
 	/// @tparam T Floating-point scalar types.
 	///
 	/// @see gtc_quaternion
@@ -201,7 +191,7 @@ namespace glm
 	/// Spherical linear interpolation of two quaternions.
 	/// The interpolation is oriented and the rotation is performed at constant speed.
 	/// For short path spherical linear interpolation, use the slerp function.
-	/// 
+	///
 	/// @param x A quaternion
 	/// @param y A quaternion
 	/// @param a Interpolation factor. The interpolation is defined beyond the range [0, 1].
@@ -214,7 +204,7 @@ namespace glm
 
 	/// Linear interpolation of two quaternions.
 	/// The interpolation is oriented.
-	/// 
+	///
 	/// @param x A quaternion
 	/// @param y A quaternion
 	/// @param a Interpolation factor. The interpolation is defined in the range [0, 1].
@@ -226,7 +216,7 @@ namespace glm
 
 	/// Spherical linear interpolation of two quaternions.
 	/// The interpolation always take the short path and the rotation is performed at constant speed.
-	/// 
+	///
 	/// @param x A quaternion
 	/// @param y A quaternion
 	/// @param a Interpolation factor. The interpolation is defined beyond the range [0, 1].
@@ -237,7 +227,7 @@ namespace glm
 	GLM_FUNC_DECL tquat<T, Q> slerp(tquat<T, Q> const& x, tquat<T, Q> const& y, T a);
 
 	/// Returns the q conjugate.
-	/// 
+	///
 	/// @tparam T Floating-point scalar types.
 	///
 	/// @see gtc_quaternion
@@ -245,7 +235,7 @@ namespace glm
 	GLM_FUNC_DECL tquat<T, Q> conjugate(tquat<T, Q> const& q);
 
 	/// Returns the q inverse.
-	/// 
+	///
 	/// @tparam T Floating-point scalar types.
 	///
 	/// @see gtc_quaternion
@@ -253,7 +243,7 @@ namespace glm
 	GLM_FUNC_DECL tquat<T, Q> inverse(tquat<T, Q> const& q);
 
 	/// Rotates a quaternion from a vector of 3 components axis and an angle.
-	/// 
+	///
 	/// @param q Source orientation
 	/// @param angle Angle expressed in radians.
 	/// @param axis Axis of the rotation
@@ -297,7 +287,7 @@ namespace glm
 	GLM_FUNC_DECL T yaw(tquat<T, Q> const& x);
 
 	/// Converts a quaternion to a 3 * 3 matrix.
-	/// 
+	///
 	/// @tparam T Floating-point scalar types.
 	///
 	/// @see gtc_quaternion
@@ -305,23 +295,23 @@ namespace glm
 	GLM_FUNC_DECL mat<3, 3, T, Q> mat3_cast(tquat<T, Q> const& x);
 
 	/// Converts a quaternion to a 4 * 4 matrix.
-	/// 
+	///
 	/// @tparam T Floating-point scalar types.
 	///
 	/// @see gtc_quaternion
 	template<typename T, qualifier Q>
 	GLM_FUNC_DECL mat<4, 4, T, Q> mat4_cast(tquat<T, Q> const& x);
 
-	/// Converts a 3 * 3 matrix to a quaternion.
-	/// 
+	/// Converts a pure rotation 3 * 3 matrix to a quaternion.
+	///
 	/// @tparam T Floating-point scalar types.
 	///
 	/// @see gtc_quaternion
 	template<typename T, qualifier Q>
 	GLM_FUNC_DECL tquat<T, Q> quat_cast(mat<3, 3, T, Q> const& x);
 
-	/// Converts a 4 * 4 matrix to a quaternion.
-	/// 
+	/// Converts a pure rotation 4 * 4 matrix to a quaternion.
+	///
 	/// @tparam T Floating-point scalar types.
 	///
 	/// @see gtc_quaternion
@@ -355,7 +345,7 @@ namespace glm
 	GLM_FUNC_DECL tquat<T, Q> angleAxis(T const& angle, vec<3, T, Q> const& axis);
 
 	/// Returns the component-wise comparison result of x < y.
-	/// 
+	///
 	/// @tparam T Floating-point scalar types.
 	///
 	/// @see gtc_quaternion
@@ -394,22 +384,39 @@ namespace glm
 	template<typename T, qualifier Q>
 	GLM_FUNC_DECL vec<4, bool, Q> equal(tquat<T, Q> const& x, tquat<T, Q> const& y);
 
+	/// Returns the component-wise comparison of |x - y| < epsilon.
+	///
+	/// @tparam T Floating-point scalar types.
+	///
+	/// @see gtc_quaternion
+	template<typename T, qualifier Q>
+	GLM_FUNC_DECL vec<4, bool, Q> equal(tquat<T, Q> const& x, tquat<T, Q> const& y, T epsilon);
+
 	/// Returns the component-wise comparison of result x != y.
-	/// 
+	///
 	/// @tparam T Floating-point scalar types.
 	///
 	/// @see gtc_quaternion
 	template<typename T, qualifier Q>
 	GLM_FUNC_DECL vec<4, bool, Q> notEqual(tquat<T, Q> const& x, tquat<T, Q> const& y);
 
+	/// Returns the component-wise comparison of |x - y| >= epsilon.
+	///
+	/// @tparam T Floating-point scalar types.
+	///
+	/// @see gtc_quaternion
+	template<typename T, qualifier Q>
+	GLM_FUNC_DECL vec<4, bool, Q> notEqual(tquat<T, Q> const& x, tquat<T, Q> const& y, T epsilon);
+
+
 	/// Returns true if x holds a NaN (not a number)
 	/// representation in the underlying implementation's set of
 	/// floating point representations. Returns false otherwise,
 	/// including for implementations with no NaN
 	/// representations.
-	/// 
+	///
 	/// /!\ When using compiler fast math, this function may fail.
-	/// 
+	///
 	/// @tparam T Floating-point scalar types.
 	///
 	/// @see gtc_quaternion
@@ -421,7 +428,7 @@ namespace glm
 	/// set of floating point representations. Returns false
 	/// otherwise, including for implementations with no infinity
 	/// representations.
-	/// 
+	///
 	/// @tparam T Floating-point scalar types.
 	///
 	/// @see gtc_quaternion

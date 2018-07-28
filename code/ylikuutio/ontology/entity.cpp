@@ -1,72 +1,112 @@
 #include "entity.hpp"
 #include "universe.hpp"
+#include "code/ylikuutio/config/setting_master.hpp"
 
 // Include standard headers
 #include <iostream>      // std::cout, std::cin, std::cerr
+#include <limits>        // std::numeric_limits
 #include <string>        // std::string
 #include <unordered_map> // std::unordered_map
 
-namespace ontology
+namespace yli
 {
-    Entity::Entity(ontology::Universe* universe)
+    namespace ontology
     {
-        // constructor.
-        this->childID = -1;
-        this->universe = universe;
-        this->setting_master = nullptr;
-        this->prerender_callback = nullptr;
-        this->postrender_callback = nullptr;
-    }
-
-    Entity::~Entity()
-    {
-        // destructor.
-        std::cout << "Entity destructor called.\n";
-
-        if (this->name.empty())
+        Entity::Entity(yli::ontology::Universe* const universe)
         {
-            std::cerr << "Entity destructor: error: name is empty.\n";
-            return;
+            // constructor.
+            this->childID = std::numeric_limits<std::size_t>::max();
+            this->universe = universe;
+            this->prerender_callback = nullptr;
+            this->postrender_callback = nullptr;
+            this->setting_master = new yli::config::SettingMaster(this);
+            this->can_be_erased = false;
         }
 
-        if (this->universe == nullptr)
+        Entity::~Entity()
         {
-            std::cerr << "Entity destructor: error: `universe` is `nullptr`.\n";
-            return;
+            // destructor.
+            std::cout << "Entity destructor called.\n";
+
+            std::cout << "The setting master of this entity will be destroyed.\n";
+            delete this->setting_master;
+
+            if (this->name.empty())
+            {
+                std::cerr << "Entity destructor: error: name is empty.\n";
+                return;
+            }
+
+            if (this->universe == nullptr)
+            {
+                std::cerr << "Entity destructor: error: `universe` is `nullptr`.\n";
+                return;
+            }
+
+            // OK, this `Entity` had a name, so it's name shall be erased.
+            this->universe->erase_entity(this->name);
         }
 
-        // OK, this `Entity` had a name, so it's name shall be erased.
-        if (this->universe->entity_map.count(this->name) != 0)
+        std::string Entity::get_type() const
         {
-            std::cout << "Entity destructor: erasing " << this->name << " from `entity_map` ...\n";
-
-            // OK, `Universe` knows the name of this `Entity`.
-            this->universe->entity_map.erase(this->name);
+            return this->type;
         }
-    }
 
-    std::string Entity::get_type() const
-    {
-        return this->type;
-    }
-
-    void Entity::prerender() const
-    {
-        if (this->prerender_callback != nullptr &&
-                this->universe != nullptr &&
-                this->universe->setting_master != nullptr)
+        bool Entity::get_can_be_erased() const
         {
-            this->prerender_callback(this->universe, this->universe->setting_master);
+            return this->can_be_erased;
         }
-    }
 
-    void Entity::postrender() const
-    {
-        if (this->postrender_callback != nullptr &&
-                this->universe != nullptr &&
-                this->universe->setting_master != nullptr)
+        yli::ontology::Universe* Entity::get_universe() const
         {
-            this->postrender_callback(this->universe, this->universe->setting_master);
+            return this->universe;
+        }
+
+        yli::config::SettingMaster* Entity::get_setting_master() const
+        {
+            return this->setting_master;
+        }
+
+        void Entity::set_setting_master(yli::config::SettingMaster* const setting_master)
+        {
+            this->setting_master = setting_master;
+        }
+
+        void Entity::prerender() const
+        {
+            if (this->prerender_callback != nullptr &&
+                    this->universe != nullptr &&
+                    this->universe->setting_master != nullptr)
+            {
+                this->prerender_callback(this->universe, this->universe->setting_master);
+            }
+        }
+
+        void Entity::postrender() const
+        {
+            if (this->postrender_callback != nullptr &&
+                    this->universe != nullptr &&
+                    this->universe->setting_master != nullptr)
+            {
+                this->postrender_callback(this->universe, this->universe->setting_master);
+            }
+        }
+
+        void Entity::set_name(const std::string& name)
+        {
+            if (this->universe == nullptr)
+            {
+                return;
+            }
+
+            if (this->universe->is_entity(name))
+            {
+                // The name is already in use.
+                return;
+            }
+
+            this->name = name;
+            this->universe->add_entity(name, this);
         }
     }
 }

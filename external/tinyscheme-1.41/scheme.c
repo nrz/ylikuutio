@@ -3940,7 +3940,7 @@ static pointer opexe_4(scheme *sc, enum scheme_opcodes op) {
           port *p;
 
           if ((p=car(sc->args)->_object._port)->kind&port_string) {
-               off_t size;
+               long long size;
                char *str;
 
                size=p->rep.string.curr-p->rep.string.start+1;

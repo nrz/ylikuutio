@@ -16,92 +16,151 @@
 #endif
 
 // Include standard headers
+#include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
-#include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 
-namespace ontology
+namespace yli
 {
-    void Shader::bind_to_parent()
+    namespace ontology
     {
-        // get `childID` from `Scene` and set pointer to this `Shader`.
-        hierarchy::bind_child_to_parent<ontology::Shader*>(this, this->parent->shader_pointer_vector, this->parent->free_shaderID_queue, &this->parent->number_of_shaders);
-    }
+        void Shader::bind_material(yli::ontology::Material* const material)
+        {
+            // get `childID` from `Shader` and set pointer to `material`.
+            yli::hierarchy::bind_child_to_parent<yli::ontology::Material*>(
+                    material,
+                    this->material_pointer_vector,
+                    this->free_materialID_queue,
+                    &this->number_of_materials);
+        }
 
-    Shader::~Shader()
-    {
-        // destructor.
-        std::cout << "Shader with childID " << std::dec << this->childID << " will be destroyed.\n";
+        void Shader::bind_symbiosis(yli::ontology::Symbiosis* const symbiosis)
+        {
+            // get `childID` from `Shader` and set pointer to `symbiosis`.
+            yli::hierarchy::bind_child_to_parent<yli::ontology::Symbiosis*>(
+                    symbiosis,
+                    this->symbiosis_pointer_vector,
+                    this->free_symbiosisID_queue,
+                    &this->number_of_symbioses);
+        }
 
-        // destroy all materials of this shader.
-        std::cout << "All materials of this shader will be destroyed.\n";
-        hierarchy::delete_children<ontology::Material*>(this->material_pointer_vector, &this->number_of_materials);
+        void Shader::unbind_material(const std::size_t childID)
+        {
+            yli::ontology::Material* dummy_child_pointer = nullptr;
+            yli::hierarchy::set_child_pointer(
+                    childID,
+                    dummy_child_pointer,
+                    this->material_pointer_vector,
+                    this->free_materialID_queue,
+                    &this->number_of_materials);
+        }
 
-        // destroy all symbioses of this shader.
-        std::cout << "All symbioses of this shader will be destroyed.\n";
-        hierarchy::delete_children<ontology::Symbiosis*>(this->symbiosis_pointer_vector, &this->number_of_symbioses);
+        void Shader::unbind_symbiosis(const std::size_t childID)
+        {
+            yli::ontology::Symbiosis* dummy_child_pointer = nullptr;
+            yli::hierarchy::set_child_pointer(
+                    childID,
+                    dummy_child_pointer,
+                    this->symbiosis_pointer_vector,
+                    this->free_symbiosisID_queue,
+                    &this->number_of_symbioses);
+        }
 
-        // set pointer to this shader to nullptr.
-        this->parent->set_shader_pointer(this->childID, nullptr);
+        void Shader::bind_to_parent()
+        {
+            // get `childID` from `Scene` and set pointer to this `Shader`.
+            this->parent->bind_shader(this);
+        }
 
-        glDeleteProgram(this->programID);
-    }
+        void Shader::bind_to_new_parent(yli::ontology::Scene* const new_scene_pointer)
+        {
+            // unbind from the old parent `Scene`.
+            this->parent->unbind_shader(this->childID);
 
-    void Shader::render()
-    {
-        this->prerender();
+            // get `childID` from `Scene` and set pointer to this `Shader`.
+            this->parent = new_scene_pointer;
+            this->parent->bind_shader(this);
+        }
 
-        // [re]bind `programID` shader.
-        glUseProgram(this->programID);
+        Shader::~Shader()
+        {
+            // destructor.
+            std::cout << "Shader with childID " << std::dec << this->childID << " will be destroyed.\n";
 
-        glUniformMatrix4fv(this->ViewMatrixID, 1, GL_FALSE, &this->universe->ViewMatrix[0][0]); // This one doesn't change between objects, so this can be done once for all objects that use "programID"
+            // destroy all materials of this shader.
+            std::cout << "All materials of this shader will be destroyed.\n";
+            yli::hierarchy::delete_children<yli::ontology::Material*>(this->material_pointer_vector, &this->number_of_materials);
 
-        // render this `Shader` by calling `render()` function of each `Material` and of each `Symbiosis`.
-        ontology::render_children<ontology::Material*>(this->material_pointer_vector);
-        ontology::render_children<ontology::Symbiosis*>(this->symbiosis_pointer_vector);
+            // destroy all symbioses of this shader.
+            std::cout << "All symbioses of this shader will be destroyed.\n";
+            yli::hierarchy::delete_children<yli::ontology::Symbiosis*>(this->symbiosis_pointer_vector, &this->number_of_symbioses);
 
-        this->postrender();
-    }
+            // set pointer to this shader to nullptr.
+            this->parent->set_shader_pointer(this->childID, nullptr);
 
-    ontology::Entity* Shader::get_parent() const
-    {
-        return this->parent;
-    }
+            glDeleteProgram(this->programID);
+        }
 
-    int32_t Shader::get_number_of_children() const
-    {
-        return this->number_of_materials + this->number_of_symbioses;
-    }
+        void Shader::render()
+        {
+            this->prerender();
 
-    int32_t Shader::get_number_of_descendants() const
-    {
-        return -1;
-    }
+            // [re]bind `programID` shader.
+            glUseProgram(this->programID);
 
-    void Shader::set_material_pointer(const int32_t childID, ontology::Material* const child_pointer)
-    {
-        hierarchy::set_child_pointer(childID, child_pointer, this->material_pointer_vector, this->free_materialID_queue, &this->number_of_materials);
-    }
+            glUniformMatrix4fv(this->view_matrixID, 1, GL_FALSE, &this->universe->get_view_matrix()[0][0]); // This one doesn't change between objects, so this can be done once for all objects that use "programID"
 
-    void Shader::set_symbiosis_pointer(const int32_t childID, ontology::Symbiosis* const child_pointer)
-    {
-        hierarchy::set_child_pointer(childID, child_pointer, this->symbiosis_pointer_vector, this->free_symbiosisID_queue, &this->number_of_symbioses);
-    }
+            // render this `Shader` by calling `render()` function of each `Material` and of each `Symbiosis`.
+            yli::ontology::render_children<yli::ontology::Material*>(this->material_pointer_vector);
+            yli::ontology::render_children<yli::ontology::Symbiosis*>(this->symbiosis_pointer_vector);
 
-    void Shader::bind_to_new_parent(ontology::Scene* const new_scene_pointer)
-    {
-        // this method sets pointer to this `Shader` to nullptr, sets `parent` according to the input, and requests a new `childID` from the new `Scene`.
-        hierarchy::bind_child_to_new_parent<ontology::Shader*, ontology::Scene*>(this, new_scene_pointer, this->parent->shader_pointer_vector, this->parent->free_shaderID_queue, &this->parent->number_of_shaders);
-    }
+            this->postrender();
+        }
 
-    void Shader::set_name(std::string name)
-    {
-        ontology::set_name(name, this);
-    }
+        yli::ontology::Entity* Shader::get_parent() const
+        {
+            return this->parent;
+        }
 
-    void Shader::set_terrain_species(ontology::Species* const terrain_species)
-    {
-        this->terrain_species = terrain_species;
-        this->parent->parent->parent->set_terrain_species(this->terrain_species);
+        std::size_t Shader::get_number_of_children() const
+        {
+            return this->number_of_materials + this->number_of_symbioses;
+        }
+
+        std::size_t Shader::get_number_of_descendants() const
+        {
+            return 0; // TODO; write the code!
+        }
+
+        void Shader::set_material_pointer(const std::size_t childID, yli::ontology::Material* const child_pointer)
+        {
+            yli::hierarchy::set_child_pointer(childID, child_pointer, this->material_pointer_vector, this->free_materialID_queue, &this->number_of_materials);
+        }
+
+        void Shader::set_symbiosis_pointer(const std::size_t childID, yli::ontology::Symbiosis* const child_pointer)
+        {
+            yli::hierarchy::set_child_pointer(childID, child_pointer, this->symbiosis_pointer_vector, this->free_symbiosisID_queue, &this->number_of_symbioses);
+        }
+
+        GLuint Shader::get_programID() const
+        {
+            return this->programID;
+        }
+
+        GLuint Shader::get_matrixID() const
+        {
+            return this->MatrixID;
+        }
+
+        GLuint Shader::get_model_matrixID() const
+        {
+            return this->model_matrixID;
+        }
+
+        void Shader::set_terrain_species(yli::ontology::Species* const terrain_species)
+        {
+            this->terrain_species = terrain_species;
+            this->universe->set_terrain_species(this->terrain_species);
+        }
     }
 }

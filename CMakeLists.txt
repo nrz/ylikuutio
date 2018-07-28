@@ -10,13 +10,11 @@ project(ylikuutio)
 # comment the following line to disable scripting with TinyScheme.
 set(ENABLE_SCRIPTING_WITH_TINYSCHEME true)
 
-# comment the following line to disable unit tests with Google Test.
-set(DO_UNIT_TESTS_WITH_GOOGLE_TEST true)
+# comment the following line to use `libsfml-dev` shipped with Linux.
+set(COMPILE_SFML_FROM_SOURCE true)
 
-# uncomment the following line to download the latest versions of external projects
-# instead of using the versions carried in Ylikuutio repository (in `external/`).
-# this does not affect any library at the moment (did affect Eigen earlier, though).
-# set(ENABLE_DOWNLOAD_LATEST_VERSIONS_OF_EXTERNAL_PROJECTS)
+# comment the following line to disable unit tests with Google Test.
+# set(DO_UNIT_TESTS_WITH_GOOGLE_TEST true)
 
 # uncomment the following line to disable updating of external projects.
 set(DISABLE_UPDATE_STEP true)
@@ -30,10 +28,15 @@ endif()
 find_package(Threads REQUIRED)
 find_package(SDL2 REQUIRED)
 
+if (NOT(COMPILE_SFML_FROM_SOURCE))
+    set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
+    find_package(SFML 2 REQUIRED system audio)
+endif()
+
 # Compile external dependencies
 add_subdirectory (external)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DSFML_STATIC -std=c++14 -O3 -Wall")
 
 # set(CMAKE_COLOR_MAKEFILE ON)
 # set(CMAKE_VERBOSE_MAKEFILE ON)
@@ -70,6 +73,19 @@ set_directory_properties(PROPERTIES EP_PREFIX ${CMAKE_BINARY_DIR}/external)
 set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
+
+if (COMPILE_SFML_FROM_SOURCE)
+    include_directories(
+        external/SFML-2.4.2/include/
+        external/SFML-2.4.2/src
+        external/SFML-2.4.2/extlibs/headers/
+        external/SFML-2.4.2/extlibs/headers/AL/
+        )
+else()
+    include_directories(
+        ${SFML_INCLUDE_DIR}
+        )
+endif()
 
 include_directories(
     ${SDL2_INCLUDE_DIRS}
@@ -205,6 +221,19 @@ set(ALL_LIBS
     OpenFBX
     )
 
+if (COMPILE_SFML_FROM_SOURCE)
+    set(ALL_LIBS
+        ${ALL_LIBS}
+        sfml-system
+        sfml-audio
+        )
+else()
+    set(ALL_LIBS
+        ${ALL_LIBS}
+        ${SFML_LIBRARIES}
+        )
+endif()
+
 add_definitions(
     -DTW_STATIC
     -DTW_NO_LIB_PRAGMA
@@ -226,8 +255,38 @@ configure_file(code/tinyscheme/hello_world.scm hello_world.scm COPYONLY)
 configure_file(external/tinyscheme-1.41/init.scm init.scm COPYONLY)
 
 # 3D models.
+# Suzanne.
 configure_file(res/objects/custom/suzanne.obj suzanne.obj COPYONLY)
-configure_file(res/objects/snow_cottage_triangulated.obj snow_cottage_triangulated.obj COPYONLY)
+# Freight train.
+configure_file(res/objects/www.blendswap.com/46359_freight_train/freight_train.fbx freight_train.fbx COPYONLY)
+configure_file(res/objects/www.blendswap.com/46359_freight_train/textures/freight_train_chassis.bmp freight_train_chassis.bmp COPYONLY)
+configure_file(res/objects/www.blendswap.com/46359_freight_train/textures/freight_train_box_expage.bmp freight_train_box_expage.bmp COPYONLY)
+configure_file(res/objects/www.blendswap.com/46359_freight_train/textures/freight_train_body.bmp freight_train_body.bmp COPYONLY)
+configure_file(res/objects/www.blendswap.com/46359_freight_train/textures/freight_train_expage1.bmp freight_train_expage1.bmp COPYONLY)
+configure_file(res/objects/www.blendswap.com/46359_freight_train/textures/freight_train_expage2.bmp freight_train_expage2.bmp COPYONLY)
+configure_file(res/objects/www.blendswap.com/46359_freight_train/textures/freight_train_gray_concrete.bmp freight_train_gray_concrete.bmp COPYONLY)
+configure_file(res/objects/www.blendswap.com/46359_freight_train/textures/freight_train_iron_texture_by_pabloalvin.bmp freight_train_iron_texture_by_pabloalvin.bmp COPYONLY)
+configure_file(res/objects/www.blendswap.com/46359_freight_train/textures/freight_train_stone.bmp freight_train_stone.bmp COPYONLY)
+# Turbo polizei.
+configure_file(res/objects/www.blendswap.com/74227_Porsche_997_turbo_polizei_lowpoly/turbo_polizei.fbx turbo_polizei.fbx COPYONLY)
+configure_file(res/objects/www.blendswap.com/74227_Porsche_997_turbo_polizei_lowpoly/textures/car.png car.png COPYONLY)
+configure_file(res/objects/www.blendswap.com/74227_Porsche_997_turbo_polizei_lowpoly/textures/wheell.png wheell.png COPYONLY)
+configure_file(res/objects/www.blendswap.com/74227_Porsche_997_turbo_polizei_lowpoly/textures/car.bmp car.bmp COPYONLY)
+configure_file(res/objects/www.blendswap.com/74227_Porsche_997_turbo_polizei_lowpoly/textures/wheell.bmp wheell.bmp COPYONLY)
+# Fantasy house with balcony.
+configure_file(res/objects/www.blendswap.com/55007_fantasy_house_with_balcony/fantasy_house_with_balcony.fbx fantasy_house_with_balcony.fbx COPYONLY)
+configure_file(res/objects/www.blendswap.com/55007_fantasy_house_with_balcony/textures/fantasy_house_with_balcony_bricks.bmp fantasy_house_with_balcony_bricks.bmp COPYONLY)
+configure_file(res/objects/www.blendswap.com/55007_fantasy_house_with_balcony/textures/fantasy_house_with_balcony_copper_roof.bmp fantasy_house_with_balcony_copper_roof.bmp COPYONLY)
+configure_file(res/objects/www.blendswap.com/55007_fantasy_house_with_balcony/textures/fantasy_house_with_balcony_door2.bmp fantasy_house_with_balcony_door2.bmp COPYONLY)
+configure_file(res/objects/www.blendswap.com/55007_fantasy_house_with_balcony/textures/fantasy_house_with_balcony_door3.bmp fantasy_house_with_balcony_door3.bmp COPYONLY)
+configure_file(res/objects/www.blendswap.com/55007_fantasy_house_with_balcony/textures/fantasy_house_with_balcony_plaster.bmp fantasy_house_with_balcony_plaster.bmp COPYONLY)
+configure_file(res/objects/www.blendswap.com/55007_fantasy_house_with_balcony/textures/fantasy_house_with_balcony_roof.bmp fantasy_house_with_balcony_roof.bmp COPYONLY)
+configure_file(res/objects/www.blendswap.com/55007_fantasy_house_with_balcony/textures/fantasy_house_with_balcony_stone_wall.bmp fantasy_house_with_balcony_stone_wall.bmp COPYONLY)
+configure_file(res/objects/www.blendswap.com/55007_fantasy_house_with_balcony/textures/fantasy_house_with_balcony_window.bmp fantasy_house_with_balcony_window.bmp COPYONLY)
+configure_file(res/objects/www.blendswap.com/55007_fantasy_house_with_balcony/textures/fantasy_house_with_balcony_wood_floor.bmp fantasy_house_with_balcony_wood_floor.bmp COPYONLY)
+# Horse.
+configure_file(res/objects/www.blendswap.com/76528_horse/horse.fbx horse.fbx COPYONLY)
+# Cat.
 configure_file(res/objects/www.blendswap.com/86110_rigged_and_animated_cat/cat.fbx cat.fbx COPYONLY)
 
 # Textures.
@@ -248,14 +307,18 @@ configure_file(res/height_maps/noise128x128.bmp noise128x128.bmp COPYONLY)
 configure_file(res/height_maps/S17W069.hgt S17W069.hgt COPYONLY)
 configure_file(res/height_maps/L4133D.asc L4133D.asc COPYONLY)
 configure_file(res/height_maps/N5424G.asc N5424G.asc COPYONLY)
+configure_file(res/height_maps/test_3x3_0_1_2_4_8_16_32_64_128.asc test_3x3_0_1_2_4_8_16_32_64_128.asc COPYONLY)
 configure_file(res/laser_scanning_data/L4133D1.laz L4133D1.laz COPYONLY)
 configure_file(res/maps/Hofinkatu_Isafjordinkatu_Joensuu_Finland.osm Hofinkatu_Isafjordinkatu_Joensuu_Finland.osm COPYONLY)
 configure_file(res/maps/Exactum_Physicum_Helsinki_Finland.osm Exactum_Physicum_Helsinki_Finland.osm COPYONLY)
 
 # Audio.
+configure_file(res/audio/freesound.org/395487__frankum__tecno-pop-base-and-guitar-2.ogg 395487__frankum__tecno-pop-base-and-guitar-2.ogg COPYONLY)
 configure_file(res/audio/freesound.org/414257__sss-samples__chipland-loop-120-bpm-a-major.wav 414257__sss-samples__chipland-loop-120-bpm-a-major.wav COPYONLY)
 configure_file(res/audio/freesound.org/414269__jpmusic82__arp-bass-loop-128-bpm.mp3 414269__jpmusic82__arp-bass-loop-128-bpm.mp3 COPYONLY)
 configure_file(res/audio/freesound.org/414270__greek555__sample-97-bpm.wav 414270__greek555__sample-97-bpm.wav COPYONLY)
+configure_file(res/audio/freesound.org/416882__greek555__blue-play.ogg 416882__greek555__blue-play.ogg COPYONLY)
+configure_file(res/audio/freesound.org/419588__greek555__dreaming-of-me.ogg 419588__greek555__dreaming-of-me.ogg COPYONLY)
 
 # Image files for tests.
 configure_file(res/height_maps/noise256x256.bmp noise256x256.bmp COPYONLY)
@@ -263,6 +326,10 @@ configure_file(res/textures/test3x3.bmp test3x3.bmp COPYONLY)
 
 # Ylikuutio
 add_library(ylikuutio STATIC
+    # audio, in alphabetical order
+    code/ylikuutio/audio/audio_master.cpp
+    code/ylikuutio/audio/audio_master.hpp
+
     # callback_system, in alphabetical order
     code/ylikuutio/callback_system/callback_engine.cpp
     code/ylikuutio/callback_system/callback_engine.hpp
@@ -273,6 +340,10 @@ add_library(ylikuutio STATIC
     code/ylikuutio/callback_system/callback_parameter.hpp
     code/ylikuutio/callback_system/key_and_callback_struct.hpp
 
+    # command_line, in alphabetical order
+    code/ylikuutio/command_line/command_line_master.cpp
+    code/ylikuutio/command_line/command_line_master.hpp
+
     # common, in alphabetical order
     code/ylikuutio/common/any_value.cpp
     code/ylikuutio/common/any_value.hpp
@@ -281,10 +352,13 @@ add_library(ylikuutio STATIC
     code/ylikuutio/common/spherical_coordinates_struct.hpp
 
     # config, in alphabetical order.
+    code/ylikuutio/config/activate_callback.hpp
+    code/ylikuutio/config/read_callback.hpp
     code/ylikuutio/config/setting.cpp
     code/ylikuutio/config/setting.hpp
     code/ylikuutio/config/setting_master.cpp
     code/ylikuutio/config/setting_master.hpp
+    code/ylikuutio/config/setting_struct.hpp
 
     # console, in alphabetical order.
     code/ylikuutio/console/command_and_callback_struct.hpp
@@ -356,6 +430,8 @@ add_library(ylikuutio STATIC
     code/ylikuutio/loaders/bmp_loader.hpp
     code/ylikuutio/loaders/fbx_species_loader.cpp
     code/ylikuutio/loaders/fbx_species_loader.hpp
+    code/ylikuutio/loaders/fbx_symbiosis_loader.cpp
+    code/ylikuutio/loaders/fbx_symbiosis_loader.hpp
     code/ylikuutio/loaders/font_loader.cpp
     code/ylikuutio/loaders/font_loader.hpp
     code/ylikuutio/loaders/las_loader.cpp
@@ -369,11 +445,17 @@ add_library(ylikuutio STATIC
     code/ylikuutio/loaders/species_loader_struct.hpp
     code/ylikuutio/loaders/srtm_heightmap_loader.cpp
     code/ylikuutio/loaders/srtm_heightmap_loader.hpp
+    code/ylikuutio/loaders/symbiosis_loader.cpp
+    code/ylikuutio/loaders/symbiosis_loader.hpp
+    code/ylikuutio/loaders/symbiosis_loader_struct.hpp
     code/ylikuutio/loaders/texture_loader.cpp
     code/ylikuutio/loaders/texture_loader.hpp
 
     # map, in alphabetical order
     code/ylikuutio/map/ylikuutio_map.hpp
+
+    # memory, in alphabetical order
+    code/ylikuutio/memory/memory_templates.hpp
 
     # network, in alphabetical order
     # code/ylikuutio/network/tcp_connection.cpp
@@ -382,6 +464,17 @@ add_library(ylikuutio STATIC
     # code/ylikuutio/network/tcp_server.hpp
 
     # ontology, in alphabetical order
+    code/ylikuutio/ontology/biont.cpp
+    code/ylikuutio/ontology/biont.hpp
+    code/ylikuutio/ontology/biont_struct.hpp
+    code/ylikuutio/ontology/camera.cpp
+    code/ylikuutio/ontology/camera.hpp
+    code/ylikuutio/ontology/camera_struct.hpp
+    code/ylikuutio/ontology/chunk.cpp
+    code/ylikuutio/ontology/chunk.hpp
+    code/ylikuutio/ontology/chunk_master.cpp
+    code/ylikuutio/ontology/chunk_master.hpp
+    code/ylikuutio/ontology/chunk_struct.hpp
     code/ylikuutio/ontology/creature.cpp
     code/ylikuutio/ontology/creature.hpp
     code/ylikuutio/ontology/gl_attrib_locations.cpp
@@ -392,7 +485,6 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/entity.hpp
     code/ylikuutio/ontology/entity_factory.cpp
     code/ylikuutio/ontology/entity_factory.hpp
-    code/ylikuutio/ontology/entity_templates.hpp
     code/ylikuutio/ontology/font2D.cpp
     code/ylikuutio/ontology/font2D.hpp
     code/ylikuutio/ontology/glyph.cpp
@@ -400,7 +492,9 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/glyph_struct.hpp
     code/ylikuutio/ontology/ground_level.cpp
     code/ylikuutio/ontology/ground_level.hpp
-    code/ylikuutio/ontology/info_struct.hpp
+    code/ylikuutio/ontology/holobiont.cpp
+    code/ylikuutio/ontology/holobiont.hpp
+    code/ylikuutio/ontology/holobiont_struct.hpp
     code/ylikuutio/ontology/material.cpp
     code/ylikuutio/ontology/material.hpp
     code/ylikuutio/ontology/material_struct.hpp
@@ -427,23 +521,28 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/species_struct.hpp
     code/ylikuutio/ontology/symbiont_material.cpp
     code/ylikuutio/ontology/symbiont_material.hpp
-    code/ylikuutio/ontology/symbiont_material_struct.hpp
     code/ylikuutio/ontology/symbiont_species.cpp
     code/ylikuutio/ontology/symbiont_species.hpp
-    code/ylikuutio/ontology/symbiont_species_struct.hpp
     code/ylikuutio/ontology/symbiosis.cpp
     code/ylikuutio/ontology/symbiosis.hpp
     code/ylikuutio/ontology/symbiosis_struct.hpp
+    code/ylikuutio/ontology/terrain_generation_callbacks.cpp
+    code/ylikuutio/ontology/terrain_generation_callbacks.hpp
     code/ylikuutio/ontology/text3D.hpp
     code/ylikuutio/ontology/text3D.cpp
     code/ylikuutio/ontology/text3D_struct.hpp
     code/ylikuutio/ontology/universe.cpp
     code/ylikuutio/ontology/universe.hpp
+    code/ylikuutio/ontology/universe_struct.hpp
     code/ylikuutio/ontology/vector_font.cpp
     code/ylikuutio/ontology/vector_font.hpp
     code/ylikuutio/ontology/vector_font_struct.hpp
     code/ylikuutio/ontology/vehicle.cpp
     code/ylikuutio/ontology/vehicle.hpp
+    code/ylikuutio/ontology/vertex_graph.cpp
+    code/ylikuutio/ontology/vertex_graph.hpp
+    code/ylikuutio/ontology/vertex_node.cpp
+    code/ylikuutio/ontology/vertex_node.hpp
     code/ylikuutio/ontology/vboindexer.cpp
     code/ylikuutio/ontology/vboindexer.hpp
     code/ylikuutio/ontology/world.cpp
@@ -460,18 +559,6 @@ add_library(ylikuutio STATIC
     code/ylikuutio/shaders/TextureFragmentShader.fragmentshader
     code/ylikuutio/shaders/TextVertexShader.fragmentshader
     code/ylikuutio/shaders/TextVertexShader.vertexshader
-
-    # space partition, in alphabetical order.
-    code/ylikuutio/space_partition/chunk.cpp
-    code/ylikuutio/space_partition/chunk.hpp
-    code/ylikuutio/space_partition/chunk_master.cpp
-    code/ylikuutio/space_partition/chunk_master.hpp
-    code/ylikuutio/space_partition/terrain_generation_callbacks.cpp
-    code/ylikuutio/space_partition/terrain_generation_callbacks.hpp
-    code/ylikuutio/space_partition/vertex_graph.cpp
-    code/ylikuutio/space_partition/vertex_graph.hpp
-    code/ylikuutio/space_partition/vertex_node.cpp
-    code/ylikuutio/space_partition/vertex_node.hpp
 
     # string, in alphabetical order
     code/ylikuutio/string/ylikuutio_string.cpp
@@ -498,6 +585,14 @@ add_library(ylikuutio STATIC
     code/ylikuutio/triangulation/vertices.hpp
     )
 # add_dependencies(ylikuutio rescan)
+
+# yli_convert
+add_executable(yli_convert
+    # yli_convert, in alphabetical order
+    code/tools/yli_convert.cpp
+    )
+add_dependencies(yli_convert rescan)
+target_link_libraries(yli_convert ylikuutio ${ALL_LIBS})
 
 # Ajokki
 add_executable(ajokki
@@ -594,10 +689,13 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/linear_algebra/matrix_functions.hpp
         code/ylikuutio/linear_algebra/tensor3.cpp
         code/ylikuutio/linear_algebra/tensor3.hpp
+        code/ylikuutio/loaders/ascii_grid_loader.cpp
+        code/ylikuutio/loaders/ascii_grid_loader.hpp
         code/ylikuutio/loaders/fbx_species_loader.cpp
         code/ylikuutio/loaders/fbx_species_loader.hpp
         code/ylikuutio/loaders/font_loader.cpp
         code/ylikuutio/loaders/font_loader.hpp
+        code/ylikuutio/memory/memory_templates.hpp
         code/ylikuutio/ontology/glyph_struct.hpp
         code/ylikuutio/ontology/material_struct.hpp
         code/ylikuutio/ontology/object_struct.hpp
@@ -605,6 +703,8 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/ontology/species_struct.hpp
         code/ylikuutio/ontology/text3D_struct.hpp
         code/ylikuutio/ontology/vector_font_struct.hpp
+        code/ylikuutio/ontology/universe.cpp
+        code/ylikuutio/ontology/universe.hpp
         code/ylikuutio/string/ylikuutio_string.cpp
         code/ylikuutio/string/ylikuutio_string.hpp
         code/ylikuutio/triangulation/face_normals.cpp
@@ -620,41 +720,47 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         )
     set(UNIT_TESTS
         code/ylikuutio/tests/googletest/test_any_value.cpp
+        code/ylikuutio/tests/googletest/test_ascii_grid_loader.cpp
         # code/ylikuutio/tests/googletest/test_asio.cpp
         code/ylikuutio/tests/googletest/test_bilinear_interpolation2D.cpp
         code/ylikuutio/tests/googletest/test_callback_system.cpp
+        code/ylikuutio/tests/googletest/test_check_and_report_if_some_string_matches.cpp
+        code/ylikuutio/tests/googletest/test_extract_last_part_of_string.cpp
+        code/ylikuutio/tests/googletest/test_extract_string.cpp
+        code/ylikuutio/tests/googletest/test_extract_string_with_several_endings.cpp
+        code/ylikuutio/tests/googletest/test_extract_unicode_value_from_string.cpp
         code/ylikuutio/tests/googletest/test_fbx_loader.cpp
         code/ylikuutio/tests/googletest/test_file_loader.cpp
         code/ylikuutio/tests/googletest/test_font_loader.cpp
-        code/ylikuutio/tests/googletest/test_node_struct.cpp
-        code/ylikuutio/tests/googletest/test_shader_struct.cpp
-        code/ylikuutio/tests/googletest/test_material_struct.cpp
-        code/ylikuutio/tests/googletest/test_species_struct.cpp
-        code/ylikuutio/tests/googletest/test_vector_font_struct.cpp
         code/ylikuutio/tests/googletest/test_glyph_struct.cpp
-        code/ylikuutio/tests/googletest/test_object_struct.cpp
         code/ylikuutio/tests/googletest/test_heightmap_loader.cpp
         code/ylikuutio/tests/googletest/test_line2D.cpp
         code/ylikuutio/tests/googletest/test_line_line_intersection.cpp
         code/ylikuutio/tests/googletest/test_line_segment_line_segment_intersection.cpp
         code/ylikuutio/tests/googletest/test_linear_algebra.cpp
+        code/ylikuutio/tests/googletest/test_material_struct.cpp
+        code/ylikuutio/tests/googletest/test_node_struct.cpp
+        code/ylikuutio/tests/googletest/test_obj_loader.cpp
+        code/ylikuutio/tests/googletest/test_object_struct.cpp
         code/ylikuutio/tests/googletest/test_pugixml.cpp
-        code/ylikuutio/tests/googletest/test_ylikuutio_string.cpp)
+        code/ylikuutio/tests/googletest/test_shader_struct.cpp
+        code/ylikuutio/tests/googletest/test_species_struct.cpp
+        code/ylikuutio/tests/googletest/test_vector_font_struct.cpp)
     set(MAIN_FILE code/ylikuutio/tests/googletest/main.cpp)
 
-    add_library(codeToTest ${FILES_TO_TEST})
-    add_dependencies(codeToTest OpenFBX)
+    add_library(code_to_test ${FILES_TO_TEST})
+    add_dependencies(code_to_test OpenFBX)
 
     add_executable(do_tests_googletest ${MAIN_FILE})
     add_dependencies(do_tests_googletest OpenFBX)
-    target_link_libraries(do_tests_googletest codeToTest)
+    target_link_libraries(do_tests_googletest code_to_test)
 
-    add_executable(unit_tests_with_Google_Test code/ylikuutio/tests/googletest/test_main.cpp ${UNIT_TESTS})
-    target_link_libraries(unit_tests_with_Google_Test gtest libgtest rt pthread codeToTest)
+    add_executable(unit_tests_with_googletest code/ylikuutio/tests/googletest/test_main.cpp ${UNIT_TESTS})
+    target_link_libraries(unit_tests_with_googletest gtest libgtest rt pthread code_to_test)
 
     # Xcode and Visual working directories
-    set_target_properties(unit_tests_with_Google_Test PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/code/tests/googletest/")
-    create_target_launcher(unit_tests_with_Google_Test WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/code/tests/googletest/")
+    set_target_properties(unit_tests_with_googletest PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/code/tests/googletest/")
+    create_target_launcher(unit_tests_with_googletest WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/code/tests/googletest/")
 endif()
 
 source_group(common REGULAR_EXPRESSION ".*/code/common/.*" )

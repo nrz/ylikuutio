@@ -9,7 +9,7 @@
 typedef struct
 {
     std::string command;
-    callback_system::CallbackEngine* callback_engine;
+    yli::callback_system::CallbackEngine* callback_engine;
 } CommandAndCallbackStruct;
 
 #endif

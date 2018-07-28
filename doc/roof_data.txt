@@ -1,0 +1,82 @@
+Size of record for different roof types.
+
+2 bytes for a flat roof.
+4 bytes for a skillion roof.
+4 bytes for a gabled roof.
+6 bytes for a half-hipped roof.
+6 bytes for a hipped roof.
+4 bytes for a pyramidal roof.
+
+offset type     content
+0      uint16_t roof:shape
+.      .        http://wiki.openstreetmap.org/wiki/Simple_3D_buildings#Roof
+
+.      .        Format is the following:
+.      .        hhhhhhhh hhhhssss
+
+.      .        h = eave height in meters as 10.2 fixed point ('räystäskorkeus' in Finnish).
+.      .        s = shape.
+
+.      .        0 = flat ('tasakatto' in Finnish).
+.      .        1 = skillion ('pulpettikatto' in Finnish; also needed: direction: 2 bits, and eave height ('räystäskorkeus' in Finnish)).
+.      .        2 = gabled ('harjakatto' in Finnish; also needed direction: 1 bit, and eave height ('räystäskorkeus')).
+.      .        3 = half-hipped (Also needed direction: 1 bit, and eave height ('räystäskorkeus'), and point P2).
+.      .        4 = hipped ('aumakatto' in Finnish; also needed direction: 1 bit, and point P2).
+.      .        5 = pyramidal ('pyramidikatto' in Finnish; also needed: eave height ('räystäskorkeus' in Finnish)).
+.      .        6 = gambrel ('taitekatto' in Finnish; also needed direction: 1 bit, eave height ('räystäskorkeus'), and point P2).
+.      .        7 = mansard ('mansardikatto' in Finnish; also needed direction: 1 bit, eave height ('räystäskorkeus'), and point P2 x 2).
+.      .        8 = dome ('kupolikatto' in Finnish; also needed eave height ('räystäskorkeus'), and point P2. 2nd degree Bézier curve, 'quadratic Bézier curve')
+.      .        9 = onion ('sipulikatto' in Finnish; also needed eave height ('räystäskorkeus'), and points P2 and P3. 3rd degree Bézier curve, 'cubic Bézier curve').
+.      .        10 = round (Also needed direction: 1 bit, eave height ('räystäskorkeus'), and point P2. 2nd degree Bézier curve, 'quadratic Bézier curve').
+.      .        11 = saltbox (Also needed direction: 1 bit, and points P2 and P3).
+.      .        12 = reserved for future use.
+.      .        13 = reserved for future use.
+.      .        14 = reserved for future use.
+.      .        15 = reserved for future use.
+
+If roof:shape is 'flat', then the struct ends here.
+If roof:shape is something else, then the struct continues with the rest of the necessary information.
+
+2      uint16_t If roof:shape is 'skillion' ('pulpettikatto' in Finnish), then:
+
+.      .        rrrddhhh hhhhhhhh
+
+.      .        r = reserved, must be 0.
+.      .        d = direction of roof (2 bits).
+.      .        h = relative height of roof ridge compared to eave height as 9.2 fixed point.
+
+2      uint16_t If roof:shape is 'gabled' ('harjakatto' in Finnish), then:
+
+.      .        rrrrdhhh hhhhhhhh
+
+.      .        r = reserved, must be 0.
+.      .        d = direction of roof.
+.      .        h = relative height of roof ridge compared to eave height as 9.2 fixed point.
+
+If roof:shape is 'skillion' ('pulpettikatto' in Finnish) tai 'gabled' ('harjakatto' in Finnish), then struct ends here.
+
+2      uint32_t If roof:shape is 'half-hipped', then:
+
+.      .        rreeeeee xxxxxxyy yyyydhhh hhhhhhhhh
+
+.      .        r = reserved, must be 0.
+.      .        e = position of end of roof ridge relative to building length. 0.6 fixed point. (0: no roof ridge, 1: full-length roof ridge).
+.      .        x = katon taitepisteen x-koordinaatin sijainti suhteessa räystään ja katonharjan sijainteihin. 0.6 fixed point. TODO: translate into English!
+.      .        y = katon taitepisteen y-koordinaatin sijainti suhteessa räystään ja katonharjan sijainteihin. 0.6 fixed point. TODO: translate into English!
+.      .        d = direction of roof: 0 = north-south, 1 = east-west.
+.      .        h = relative height of roof ridge compared to eave height as 9.2 fixed point.
+
+2      uint32_t If roof:shape is 'hipped' ('aumakatto'), then:
+
+.      .        rrrrrrrr rrrrrree eeeedhhh hhhhhhhhh
+
+.      .        r = reserved, must be 0.
+.      .        e = position of end of roof ridge relative to building length. 0.6 fixed point. (0: no roof ridge, 1: full-length roof ridge).
+
+2      uint16_t If roof:shape is 'pyramidal' ('pyramidikatto'), then:
+
+.      .        rrrrrhhh hhhhhhhh
+
+.      .        h = relative height of roof ridge compared to eave height as 9.2 fixed point.
+
+TODO: Add specification for the rest roof types!

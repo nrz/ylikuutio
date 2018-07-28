@@ -1,0 +1,13 @@
+#!/bin/bash
+original_dir=$(pwd)
+script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+timestamp=$(date --rfc-3339=seconds | sed 's/ /_/g')
+coverity_scan_build_dir="coverity_scan_build_${timestamp}"
+mkdir ${coverity_scan_build_dir}
+cd ${coverity_scan_build_dir}
+cmake ..
+cov-build --dir cov-int make -j $(($(nproc) - 1))
+tar caf ylikuutio.lzma cov-int
+ls -la ylikuutio.lzma
+pwd
+cd ${original_dir}

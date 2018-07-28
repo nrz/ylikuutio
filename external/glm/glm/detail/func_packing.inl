@@ -95,7 +95,7 @@ namespace glm
 
 		return vec4(u.out[0], u.out[1], u.out[2], u.out[3]) * 0.0039215686274509803921568627451f;
 	}
-	
+
 	GLM_FUNC_QUALIFIER uint packSnorm4x8(vec4 const& v)
 	{
 		union
@@ -113,7 +113,7 @@ namespace glm
 
 		return u.out;
 	}
-	
+
 	GLM_FUNC_QUALIFIER glm::vec4 unpackSnorm4x8(uint p)
 	{
 		union
@@ -184,7 +184,7 @@ namespace glm
 	}
 }//namespace glm
 
-#if GLM_ARCH != GLM_ARCH_PURE && GLM_HAS_UNRESTRICTED_UNIONS
+#if GLM_USE_SIMD == GLM_ENABLE
 #	include "func_packing_simd.inl"
 #endif
 

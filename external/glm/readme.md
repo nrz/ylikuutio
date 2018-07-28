@@ -51,7 +51,29 @@ glm::mat4 camera(float Translate, glm::vec2 const& Rotate)
 
 ## Release notes
 
-### [GLM 0.9.9.0](https://github.com/g-truc/glm/releases/latest) - 2017-XX-XX
+### [GLM 0.9.9.1](https://github.com/g-truc/glm/commits/master) - 2018-0X-XX
+#### Features:
+- Added bitfieldDeinterleave to GTC_bitfield
+- Added C++17 detection
+- Added Visual C++ language standard version detection
+
+#### Improvements:
+- Added missing vec1 based constructors
+- Redesigned constexpr support which excludes both SIMD and constexpr #783
+- Added detection of Visual C++ 2017 toolsets
+- Added missing equal and notEqual with epsilon for quaternion types in EXT_vector_relational
+- Added missing equal and notEqual with epsilon for matrix types in EXT_vector_relational
+- Added identity functions #765
+
+#### Fixes:
+- Fixed build problems due to printf and std::clock_t #778
+- Fixed int mod
+- Anonymous unions require C++ language extensions
+- Fixed ortho #790
+- Fixed Visual C++ 2013 warnings in vector relational code #782
+- Fixed ICC build errors with constexpr #704
+
+### [GLM 0.9.9.0](https://github.com/g-truc/glm/releases/tag/0.9.9.0) - 2018-05-22
 #### Features:
 - Added RGBM encoding in GTC_packing #420
 - Added GTX_color_encoding extension
@@ -69,6 +91,7 @@ glm::mat4 camera(float Translate, glm::vec2 const& Rotate)
 - Added GTX_texture: levels function
 - Added spearate functions to use both nagative one and zero near clip plans #680
 - Added GLM_FORCE_SINGLE_ONLY to use GLM on platforms that don't support double #627
+- Added GTX_easing for interpolation functions #761
 
 #### Improvements:
 - No more default initialization of vector, matrix and quaternion types
@@ -89,6 +112,8 @@ glm::mat4 camera(float Translate, glm::vec2 const& Rotate)
 - Added support of -Weverything with Clang #646
 - Improved exponential funtion test coverage
 - Enabled warnings as error with Clang unit tests
+- Conan package is an external repository: https://github.com/bincrafters/conan-glm
+- Clarify quat_cast documentation, applying on pure rotation matrices #759
 
 #### Fixes:
 - Removed doxygen references to GTC_half_float which was removed in 0.9.4
@@ -108,6 +133,7 @@ glm::mat4 camera(float Translate, glm::vec2 const& Rotate)
 - Fixed quaternion constructor from two vectors special cases #469
 - Fixed glm::to_string on quaternions wrong components order #681
 - Fixed acsch #698
+- Fixed isnan on CUDA #727
 
 #### Deprecation:
 - Requires Visual Studio 2013, GCC 4.7, Clang 3.4, Cuda 7, ICC 2013 or a C++11 compiler

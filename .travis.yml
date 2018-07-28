@@ -44,6 +44,7 @@ addons:
             - libx11-dev
             - libgl1-mesa-dev
             - libglu1-mesa-dev
+            - libsfml-dev
             - libxcursor-dev
             - libxrandr-dev
             - libxext-dev
@@ -52,18 +53,19 @@ addons:
             - make
     coverity_scan:
         project:
-            name: "nrz/ylikuutio"
-            description: "Ylikuutio 3D engine. Build submitted via Travis CI"
-            notification_email: antti.nuortimo@gmail.com
-        build_command_prepend: "mkdir build_coverity && cd build_coverity && cmake .."
-        build_command: "make -j 4"
-            # https://scan.coverity.com/faq#frequency
+            name: nrz/ylikuutio
+            version: 0.0.3
+            description: Ylikuutio 3D engine. Build submitted via Travis CI
+
+        notification_email: antti.nuortimo@gmail.com
+        build_command_prepend: mkdir build_coverity && cd build_coverity && cmake ..
+        build_command: make -j 4
         branch_pattern: coverity_scan
 
 script:
     - gcc -v && g++ -v && cmake --version
     - mkdir build_gcc
     - cd build_gcc
-    - cmake ..
+    - cmake .. -DDO_UNIT_TESTS_WITH_GOOGLE_TEST=true
     - make -j 4
-    - ./unit_tests_with_Google_Test
+    - ./unit_tests_with_googletest

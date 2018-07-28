@@ -3,6 +3,9 @@
 
 #include "entity.hpp"
 #include "entity_factory.hpp"
+#include "universe_struct.hpp"
+#include "camera_struct.hpp"
+#include "code/ylikuutio/opengl/opengl.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
 #include "code/ylikuutio/common/globals.hpp"
 
@@ -25,13 +28,14 @@
 #endif
 
 // Include standard headers
-#include <iostream> // std::cout, std::cin, std::cerr
-#include <memory>   // std::make_shared, std::shared_ptr
-#include <queue>    // std::queue
+#include <cmath>         // NAN, std::isnan, std::pow
+#include <cstddef>       // std::size_t
+#include <iostream>      // std::cout, std::cin, std::cerr
+#include <memory>        // std::make_shared, std::shared_ptr
+#include <queue>         // std::queue
 #include <unordered_map> // std::unordered_map
-#include <stdint.h> // uint32_t etc.
-#include <string>   // std::string
-#include <vector>   // std::vector
+#include <string>        // std::string
+#include <vector>        // std::vector
 
 // `Universe`, `Scene`, `Shader`, `Material`, `Species`, `Object`.
 // `Universe`, `Scene`, `Shader`, `Material`, `VectorFont`, `Glyph`, `Object`.
@@ -42,7 +46,7 @@
 // `Species` must be create before any `Object` of that `Species`. `parent` must be given to each `Object` of the `Species`.
 //
 //
-// Hierarchy of regular `Object`s (including terrain species):
+// Hierarchy of regular `Object`s (including terrain `Species`):
 //
 //    Universe
 //       ^
@@ -60,7 +64,7 @@
 //
 // Please note that for regular `Object`s the hierarchy above is both the ontological hierarchy and the rendering hierarchy.
 //
-// Ontological hierarchy of `Glyph` (character) objects:
+// Ontological hierarchy of `Glyph` (character) entities:
 //
 //    Universe
 //       ^
@@ -81,7 +85,7 @@
 // Ontological hierarchy affects how objects can be created and how they can be destroyed,
 // though the precise ways how objects can be created depends on the functions available.
 //
-// Rendering hierarchy of `Glyph` (character) objects:
+// Rendering hierarchy of `Glyph` (character) entities:
 //
 //    Universe
 //       ^
@@ -104,7 +108,7 @@
 // even if the children (which are of type `Object`) may belong to many different `Text3D` objects.
 // `Text3D` is anyway needed in the ontological hierarchy, so that complete 3D texts can be destroyed and manipulated at once.
 //
-// Ontological hierarchy of `Symbiosis` objects:
+// Ontological hierarchy of `Symbiosis` entities:
 //
 //    Universe
 //       ^
@@ -112,20 +116,25 @@
 //       ^
 //     Scene
 //       ^
-//   Symbiosis
-//       ^
 //     Shader
 //       ^
-//    Material
+//   Symbiosis < SymbiontMaterial
+//       ^              ^
+//   Holobiont   SymbiontSpecies
 //       ^
-//    Species
-//       ^
-//     Object
+//     Biont
+//
+// Each `Holobiont` is a composite organism which consists of 0 more `Bionts`.
+// The `Biont`s of the `Holobiont` each belong to their corresponding
+// `SymbiontSpecies`.
+//
+// For more information about holobionts, check Wikipedia:
+// https://en.wikipedia.org/wiki/Holobiont
 //
 // Ontological hierarchy affects how objects can be created and how they can be destroyed,
 // though the precise ways how objects can be created depends on the functions available.
 //
-// Rendering hierarchy of `Symbiosis` objects:
+// Rendering hierarchy of `Symbiosis` entities:
 //
 //    Universe
 //       ^
@@ -135,13 +144,81 @@
 //       ^
 //     Shader
 //       ^
-//    Material
+//   Symbiosis > SymbiontMaterial
+//       ^              v
+//   Holobiont   SymbiontSpecies
 //       ^
-//    Species
-//       ^
-//     Object
+//     Biont
 //
-// Please note that `Symbiosis` is ignored completely in rendering hierarchy.
+// Optimized rendering hierarchy of `Symbiosis` entities:
+//
+//      Universe
+//         ^
+//       World
+//         ^
+//       Scene
+//         ^
+//       Shader
+//         ^
+//     Symbiosis
+//         ^
+//  SymbiontMaterial
+//         ^
+//  SymbiontSpecies
+//         ^
+//       Biont
+//
+// TODO: implement optimized rendering hierarchy for `Symbiosis` entities!
+//
+// Ontological hierarchy of `ShaderSymbiosis` entities:
+//
+//      Universe
+//         ^
+//       World
+//         ^
+//       Scene
+//         ^
+//  ShaderSymbiosis < SymbiontShader
+//         ^                ^
+//     Holobiont     SymbiontMaterial
+//         ^                ^
+//       Biont       SymbiontSpecies
+//
+// Rendering hierarchy of `ShaderSymbiosis` entities:
+//
+//      Universe
+//         ^
+//       World
+//         ^
+//       Scene
+//         ^
+//  ShaderSymbiosis > SymbiontShader
+//         ^                v
+//     Holobiont     SymbiontMaterial
+//         ^                v
+//       Biont       SymbiontSpecies
+//
+// TODO: implement `ShaderSymbiosis` entities!
+//
+// Optimized rendering hierarchy of `ShaderSymbiosis` entities:
+//
+//      Universe
+//         ^
+//       World
+//         ^
+//       Scene
+//         ^
+//  ShaderSymbiosis
+//         ^
+//   SymbiontShader
+//         ^
+//  SymbiontMaterial
+//         ^
+//  SymbiontSpecies
+//         ^
+//       Biont
+//
+// TODO: implement optimized rendering hierarchy for `ShaderSymbiosis` entities!
 //
 // Deleting a `Universe` also deletes all worlds, scenes, all shaders, materials, species, fonts, glyphs and objects that are bound to the same `Universe`.
 // Deleting a `World` also deletes all scenes, all shaders, materials, species, fonts, glyphs and objects that are bound to the same `World`.
@@ -180,296 +257,328 @@
 //    y-coordinates of these are compared. The piece with the smallest y-coordinate (lowest altitude) remains terrain, other pieces become
 //    regular objects. The pieces that become regular objects will be subject to gravity the same way as any regular object.
 
-namespace config
+namespace yli
 {
-    class Setting;
-    class SettingMaster;
-}
-
-namespace console
-{
-    class Console;
-}
-
-namespace ontology
-{
-    class World;
-    class Scene;
-    class Shader;
-    class Species;
-    class Object;
-
-    class Universe: public ontology::Entity
+    namespace config
     {
-        public:
-            // constructor.
-            Universe()
-                : Entity(nullptr) // `Universe` has no parent.
-            {
-                this->entity_factory = new ontology::EntityFactory(this);
+        class Setting;
+    }
 
-                this->cartesian_coordinates = nullptr;
-                this->spherical_coordinates = nullptr;
+    namespace console
+    {
+        class Console;
+    }
+
+    namespace ontology
+    {
+        class World;
+        class Scene;
+        class Species;
+
+        class Universe: public yli::ontology::Entity
+        {
+            public:
+                void bind(yli::ontology::World* const world);
 
                 // constructor.
-                this->planet_radius = NAN; // world radius is NAN as long it doesn't get `set` by `SettingMaster`.
-                this->terrain_species = nullptr;
-                this->active_world = nullptr;
-                this->console_pointer = nullptr;
+                Universe(const UniverseStruct& universe_struct)
+                    : Entity(this) // `Universe` has no parent.
+                {
+                    this->entity_factory = new yli::ontology::EntityFactory(this);
 
-                this->background_red = NAN;
-                this->background_green = NAN;
-                this->background_blue = NAN;
-                this->background_alpha = NAN;
+                    this->current_camera_cartesian_coordinates = glm::vec3(NAN, NAN, NAN); // dummy coordinates.
+
+                    this->current_camera_spherical_coordinates.rho = NAN;   // dummy coordinates.
+                    this->current_camera_spherical_coordinates.theta = NAN; // dummy coordinates.
+                    this->current_camera_spherical_coordinates.phi = NAN;   // dummy coordinates.
+
+                    this->planet_radius = NAN; // world radius is NAN as long it doesn't get `set` by `SettingMaster`.
+                    this->terrain_species = nullptr;
+                    this->active_world = nullptr;
+                    this->console_pointer = nullptr;
+
+                    this->background_red = NAN;
+                    this->background_green = NAN;
+                    this->background_blue = NAN;
+                    this->background_alpha = NAN;
+
+                    // Variables related to the window.
+                    this->window = nullptr;
+                    this->window_width = universe_struct.window_width;
+                    this->window_height = universe_struct.window_height;
+                    this->window_title = universe_struct.window_title;
+                    this->is_headless = universe_struct.is_headless;
+
+                    this->current_camera_projection_matrix = glm::mat4(1.0f); // identity matrix (dummy value).
+                    this->current_camera_view_matrix = glm::mat4(1.0f);       // identity matrix (dummy value).
+                    this->current_camera_horizontal_angle = NAN;
+                    this->current_camera_vertical_angle = NAN;
+
+                    // Variables related to the camera.
+                    this->aspect_ratio = static_cast<GLfloat>(this->window_width / this->window_height);
+                    this->initialFoV = 60.0f;
+
+                    this->text_size = universe_struct.text_size;
+                    this->font_size = universe_struct.font_size;
+
+                    this->max_FPS = universe_struct.max_FPS;
+                    this->delta_time = NAN;
+                    this->last_time_before_reading_keyboard = NAN;
+                    this->current_time_before_reading_keyboard = NAN;
+
+                    this->has_mouse_ever_moved = false;
+                    this->can_toggle_invert_mouse = false;
+                    this->is_invert_mouse_in_use = false;
+                    this->can_toggle_flight_mode = false;
+                    this->is_flight_mode_in_use = false;
+                    this->is_first_turbo_pressed = false;
+                    this->is_second_turbo_pressed = false;
+
+                    this->turbo_factor = NAN;
+                    this->twin_turbo_factor = NAN;
+
+                    this->speed = universe_struct.speed;
+                    this->mouse_speed = universe_struct.mouse_speed;
+
+                    this->gravity = universe_struct.gravity;
+                    this->fall_speed = this->gravity;
+
+                    this->testing_spherical_terrain_in_use = false;
+                    this->is_key_I_released = true;
+                    this->is_key_F_released = true;
+                    this->in_help_mode = true;
+                    this->can_toggle_help_mode = false;
+                    this->can_display_help_screen = true;
+
+                    this->number_of_worlds = 0;
+
+                    this->child_vector_pointers_vector.push_back(&this->world_pointer_vector);
+                    this->type = "yli::ontology::Universe*";
+
+                    // Initialise GLFW
+                    if (!yli::opengl::init_window())
+                    {
+                        std::cerr << "Failed to initialize GLFW.\n";
+                        return;
+                    }
+
+                    // Open a window and create its OpenGL context.
+                    std::cout << "Opening a window and creating its OpenGL context...\n";
+                    this->set_window(
+                            yli::opengl::create_window(
+                                static_cast<int>(this->window_width),
+                                static_cast<int>(this->window_height),
+                                this->window_title.c_str(),
+                                nullptr,
+                                nullptr));
+
+                    // Disable vertical sync.
+                    // TODO: add option to enable/disable vsync in the console.
+                    glfwSwapInterval(0);
+                }
+
+                // destructor.
+                virtual ~Universe();
+
+                // this method renders the active `Scene` of this `Universe`.
+                void render();
+
+                // this method stes the active `World`.
+                void set_active_world(yli::ontology::World* const world);
+
+                // this method stes the active `Scene`.
+                void set_active_scene(yli::ontology::Scene* const world);
+
+                yli::console::Console* get_console() const;
+                void set_console(yli::console::Console* console);
+
+                float get_planet_radius() const;
+                void set_planet_radius(float planet_radius);
+
+                // this method sets a `World` pointer.
+                void set_world_pointer(std::size_t childID, yli::ontology::World* child_pointer);
+
+                // this method returns a terrain `Species` pointer.
+                yli::ontology::Species* get_terrain_species();
+
+                // this method sets a terrain `Species` pointer.
+                void set_terrain_species(yli::ontology::Species* terrain_species);
+
+                std::size_t get_number_of_worlds() const;
+
+                yli::ontology::World* get_active_world() const;
+
+                yli::ontology::Entity* get_parent() const override;
+                std::size_t get_number_of_children() const override;
+                std::size_t get_number_of_descendants() const override;
+
+                // this method sets a new `window`.
+                void set_window(GLFWwindow* window);
+
+                // this method returns current `window`.
+                GLFWwindow* get_window() const;
+
+                // this method returns current `window_width`.
+                std::size_t get_window_width() const;
+
+                // this method returns current `window_height`.
+                std::size_t get_window_height() const;
+
+                // this method returns current `text_size`.
+                std::size_t get_text_size() const;
+
+                // this method returns current `font_size`.
+                std::size_t get_font_size() const;
+
+                // this method computes the new delta time and returns it.
+                float compute_delta_time();
+
+                // this method returns the last computed delta time.
+                float get_delta_time() const;
+
+                // this method stores `current_time_before_reading_keyboard` into `last_time_before_reading_keyboard`.
+                void finalize_delta_time_loop();
+
+                // this method returns current `max_FPS`.
+                std::size_t get_max_FPS() const;
+
+                void set(std::string& setting_name, std::shared_ptr<yli::datatypes::AnyValue> setting_any_value);
+
+                // this method returns a pointer to `yli::config::Setting` corresponding to the given `key`.
+                yli::config::Setting* get(std::string key) const;
+
+                bool is_entity(const std::string& name) const;
+                yli::ontology::Entity* get_entity(const std::string& name) const;
+                std::string get_entity_names() const;
+
+                void add_entity(const std::string& name, yli::ontology::Entity* const entity);
+                void erase_entity(const std::string& name);
+
+                yli::ontology::EntityFactory* get_entity_factory() const;
+
+                glm::mat4& get_projection_matrix();
+                void set_projection_matrix(glm::mat4& projection_matrix);
+
+                glm::mat4& get_view_matrix();
+                void set_view_matrix(glm::mat4& view_matrix);
+
+                GLfloat get_aspect_ratio();
+                GLfloat get_initialFoV();
+
+                // Public callbacks.
+
+                static std::shared_ptr<yli::datatypes::AnyValue> delete_entity(
+                        yli::console::Console* const console,
+                        yli::ontology::Entity* const entity,
+                        std::vector<std::string>& command_parameters);
+
+                static std::shared_ptr<yli::datatypes::AnyValue> activate(
+                        yli::console::Console* const console,
+                        yli::ontology::Entity* const universe_entity,
+                        std::vector<std::string>& command_parameters);
+
+                static std::shared_ptr<yli::datatypes::AnyValue> info(
+                        yli::console::Console* const console,
+                        yli::ontology::Entity* const entity,
+                        std::vector<std::string>& command_parameters);
+
+                // Public callbacks end here.
+
+                // Variables related to location and orientation.
+
+                // `cartesian_coordinates` can be accessed as a vector or as single coordinates `x`, `y`, `z`.
+                glm::vec3 current_camera_cartesian_coordinates;
+
+                // `spherical_coordinates` can be accessed as a vector or as single coordinates `rho`, `theta`, `phi`.
+                SphericalCoordinatesStruct current_camera_spherical_coordinates;
+
+                // `direction` can be accessed as a vector or as single coordinates `pitch`, `roll`, `yaw`.
+                glm::vec3 current_camera_direction;
+
+                glm::vec3 current_camera_right; // note: `right` can not be set directly using console.
+                glm::vec3 current_camera_up;    // note: `up` can not be set directly using console.
+
+                double current_camera_horizontal_angle;
+                double current_camera_vertical_angle;
+
+                float speed;
+                float turbo_factor;
+                float twin_turbo_factor;
+                float mouse_speed;
+                bool has_mouse_ever_moved;
+                bool can_toggle_invert_mouse;
+                bool is_invert_mouse_in_use;
+                bool can_toggle_flight_mode;
+                bool is_flight_mode_in_use;
+                bool is_first_turbo_pressed;
+                bool is_second_turbo_pressed;
+
+                // Variables related to physics.
+                float gravity;
+                float fall_speed;
+
+                // Variables related to the current `Scene`.
+                bool testing_spherical_terrain_in_use;
+
+                // Variables related to debug & testing keys.
+                bool is_key_I_released;
+                bool is_key_F_released;
+
+                // Variables related to help mode.
+                bool in_help_mode;
+                bool can_toggle_help_mode;
+                bool can_display_help_screen;
+
+            private:
+                bool compute_and_update_matrices_from_inputs();
+
+                void* terrain_species;               // pointer to terrain `Species` (used in collision detection).
+
+                float planet_radius;
+
+                yli::ontology::EntityFactory* entity_factory;
+
+                std::vector<yli::ontology::World*> world_pointer_vector;
+                std::queue<std::size_t> free_worldID_queue;
+                std::size_t number_of_worlds;
+
+                yli::ontology::World* active_world;
+
+                yli::console::Console* console_pointer;     // pointer to `Console`.
+
+                // Named entities are stored here so that they can be recalled, if needed.
+                std::unordered_map<std::string, yli::ontology::Entity*> entity_map;
+
+                GLclampf background_red;
+                GLclampf background_green;
+                GLclampf background_blue;
+                GLclampf background_alpha;
 
                 // Variables related to the window.
-                this->window = nullptr;
-                this->window_width = 1600; // default width.
-                this->window_height = 900; // default height.
-
-                this->ProjectionMatrix = glm::mat4(1.0f); // identity matrix (dummy value).
-                this->ViewMatrix = glm::mat4(1.0f);       // identity matrix (dummy value).
+                GLFWwindow* window;
+                std::size_t window_width;
+                std::size_t window_height;
+                std::string window_title;
+                bool is_headless;
 
                 // Variables related to the camera.
-                this->aspect_ratio = static_cast<GLfloat>(this->window_width / this->window_height);
-                this->initialFoV = 60.0f;
-
-                this->text_size = 40; // default text size.
-                this->font_size = 16; // default font size.
-
-                this->max_FPS = 60; // default value max 60 frames per second.
-                this->delta_time = NAN;
-                this->last_time_before_reading_keyboard = NAN;
-                this->current_time_before_reading_keyboard = NAN;
-
-                this->has_mouse_ever_moved = false;
-                this->can_toggle_invert_mouse = false;
-                this->is_invert_mouse_in_use = false;
-                this->can_toggle_flight_mode = false;
-                this->is_flight_mode_in_use = false;
-                this->is_first_turbo_pressed = false;
-                this->is_second_turbo_pressed = false;
-
-                this->horizontal_angle = NAN;
-                this->vertical_angle = NAN;
-                this->turbo_factor = NAN;
-                this->twin_turbo_factor = NAN;
-
-                this->speed = 5.0f; // 5.0 units / second
-                this->mouse_speed = 0.005f;
-
-                this->gravity = 9.81f / 60.0f;
-                this->fall_speed = this->gravity;
-
-                this->testing_spherical_terrain_in_use = false;
-                this->is_key_I_released = true;
-                this->is_key_F_released = true;
-                this->in_help_mode = true;
-                this->can_toggle_help_mode = false;
-                this->can_display_help_screen = true;
-
-                this->number_of_worlds = 0;
-
-                this->child_vector_pointers_vector.push_back(&this->world_pointer_vector);
-                this->type = "ontology::Universe*";
-            }
-
-            // destructor.
-            virtual ~Universe();
-
-            // this method renders the active `Scene` of this `Universe`.
-            void render();
-
-            // this method stes the active `World`.
-            void set_active_world(ontology::World* world);
-
-            // this method stes the active `Scene`.
-            void set_active_scene(ontology::Scene* world);
-
-            ontology::World* get_active_world() const;
-
-            ontology::Entity* get_parent() const override;
-            int32_t get_number_of_children() const override;
-            int32_t get_number_of_descendants() const override;
-
-            // this method sets a new `window`.
-            void set_window(GLFWwindow* window);
-
-            // this method returns current `window`.
-            GLFWwindow* get_window() const;
-
-            // this method returns current `window_width`.
-            int32_t get_window_width() const;
-
-            // this method returns current `window_height`.
-            int32_t get_window_height() const;
-
-            // this method returns current `text_size`.
-            int32_t get_text_size() const;
-
-            // this method returns current `font_size`.
-            int32_t get_font_size() const;
-
-            // this method computes the new delta time and returns it.
-            float compute_delta_time();
-
-            // this method returns the last computed delta time.
-            float get_delta_time() const;
-
-            // this method stores `current_time_before_reading_keyboard` into `last_time_before_reading_keyboard`.
-            void finalize_delta_time_loop();
-
-            // this method returns current `max_FPS`.
-            uint32_t get_max_FPS() const;
-
-            void set(std::string& setting_name, std::shared_ptr<datatypes::AnyValue> setting_any_value);
-
-            // this method returns a pointer to `config::Setting` corresponding to the given `key`.
-            config::Setting* get(std::string key) const;
-
-            ontology::Entity* get_entity(const std::string& name) const;
-
-            std::string get_entity_names() const;
-
-            ontology::EntityFactory* get_entity_factory() const;
-
-            // Public callbacks.
-
-            static std::shared_ptr<datatypes::AnyValue> delete_entity(
-                    console::Console* const console,
-                    ontology::Entity* const entity,
-                    std::vector<std::string>& command_parameters);
-
-            static std::shared_ptr<datatypes::AnyValue> activate(
-                    console::Console* const console,
-                    ontology::Entity* const universe_entity,
-                    std::vector<std::string>& command_parameters);
-
-            static std::shared_ptr<datatypes::AnyValue> info(
-                    console::Console* const console,
-                    ontology::Entity* const entity,
-                    std::vector<std::string>& command_parameters);
-
-            // Public callbacks end here.
-
-            // Variables related to location and orientation.
-
-            // `cartesian_coordinates` can be accessed as a vector or as single coordinates `x`, `y`, `z`.
-            glm::vec3* cartesian_coordinates;
-
-            // `spherical_coordinates` can be accessed as a vector or as single coordinates `rho`, `theta`, `phi`.
-            SphericalCoordinatesStruct* spherical_coordinates;
-
-            // `direction` can be accessed as a vector or as single coordinates `pitch`, `roll`, `yaw`.
-            glm::vec3 direction;
-
-            glm::vec3 right; // note: `right` can not be set directly using console.
-            glm::vec3 up;    // note: `up` can not be set directly using console.
-
-            double horizontal_angle;
-            double vertical_angle;
-
-            float speed;
-            float turbo_factor;
-            float twin_turbo_factor;
-            float mouse_speed;
-            bool has_mouse_ever_moved;
-            bool can_toggle_invert_mouse;
-            bool is_invert_mouse_in_use;
-            bool can_toggle_flight_mode;
-            bool is_flight_mode_in_use;
-            bool is_first_turbo_pressed;
-            bool is_second_turbo_pressed;
-
-            // Variables related to physics.
-            float gravity;
-            float fall_speed;
-
-            // Variables related to the current `Scene`.
-            bool testing_spherical_terrain_in_use;
-
-            // Variables related to debug & testing keys.
-            bool is_key_I_released;
-            bool is_key_F_released;
-
-            // Variables related to help mode.
-            bool in_help_mode;
-            bool can_toggle_help_mode;
-            bool can_display_help_screen;
-
-            friend class Entity;
-            friend class World;
-            friend class Scene;
-            friend class Shader;
-            friend class Material;
-            friend class Species;
-            friend class Object;
-            friend class VectorFont;
-            friend class Glyph;
-            friend class Text3D;
-            friend class Font2D;
-            friend class config::Setting;
-            friend class config::SettingMaster;
-            friend class console::Console;
-
-            template<class T1>
-                friend void set_name(const std::string name, T1 entity);
-            template<class T1>
-                friend void set_name(const std::string& name, T1 entity);
-
-        private:
-            // this method sets a `World` pointer.
-            void set_world_pointer(int32_t childID, ontology::World* child_pointer);
-
-            // this method sets a terrain `Species` pointer.
-            void set_terrain_species(ontology::Species* terrain_species);
-
-            bool compute_matrices_from_inputs();
-
-            void* terrain_species;               // pointer to terrain `Species` (used in collision detection).
-
-            float planet_radius;
-
-            ontology::EntityFactory* entity_factory;
-
-            std::vector<ontology::World*> world_pointer_vector;
-            std::queue<int32_t> free_worldID_queue;
-            int32_t number_of_worlds;
-
-            ontology::World* active_world;
-
-            console::Console* console_pointer;     // pointer to `Console`.
-
-            // Named entities are stored here so that they can be recalled, if needed.
-            std::unordered_map<std::string, ontology::Entity*> entity_map;
-
-            GLclampf background_red;
-            GLclampf background_green;
-            GLclampf background_blue;
-            GLclampf background_alpha;
-
-            // Variables related to the window.
-            GLFWwindow* window;
-            int32_t window_width;
-            int32_t window_height;
-
-            // Variables related to the camera.
-            glm::mat4 ProjectionMatrix;
-            glm::mat4 ViewMatrix;
-            GLfloat aspect_ratio;
-            GLfloat initialFoV;
-
-            // Variables related to the fonts and texts used.
-            int32_t text_size;
-            int32_t font_size;
-
-            // Variables related to timing of events.
-            uint32_t max_FPS;
-            float delta_time;
-
-            double last_time_before_reading_keyboard;
-            double current_time_before_reading_keyboard;
-    };
+                glm::mat4 current_camera_projection_matrix;
+                glm::mat4 current_camera_view_matrix;
+                GLfloat aspect_ratio; // at the moment all cameras use the same aspect ratio.
+                GLfloat initialFoV;   // at the moment all cameras use the same FoV.
+
+                // Variables related to the fonts and texts used.
+                std::size_t text_size;
+                std::size_t font_size;
+
+                // Variables related to timing of events.
+                std::size_t max_FPS;
+                float delta_time;
+
+                double last_time_before_reading_keyboard;
+                double current_time_before_reading_keyboard;
+        };
+    }
 }
 
 #endif

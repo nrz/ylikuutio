@@ -20,7 +20,7 @@
 #	error "GLM: GLM_GTX_raw_data is an experimental extension and may change in the future. Use #define GLM_ENABLE_EXPERIMENTAL before including it, if you really want to use it."
 #endif
 
-#if GLM_MESSAGES == GLM_MESSAGES_ENABLED && !defined(GLM_EXT_INCLUDED)
+#if GLM_MESSAGES == GLM_ENABLE && !defined(GLM_EXT_INCLUDED)
 #	pragma message("GLM: GLM_GTX_raw_data extension included")
 #endif
 
@@ -29,19 +29,19 @@ namespace glm
 	/// @addtogroup gtx_raw_data
 	/// @{
 
-	//! Type for byte numbers. 
+	//! Type for byte numbers.
 	//! From GLM_GTX_raw_data extension.
 	typedef detail::uint8		byte;
 
-	//! Type for word numbers. 
+	//! Type for word numbers.
 	//! From GLM_GTX_raw_data extension.
 	typedef detail::uint16		word;
 
-	//! Type for dword numbers. 
+	//! Type for dword numbers.
 	//! From GLM_GTX_raw_data extension.
 	typedef detail::uint32		dword;
 
-	//! Type for qword numbers. 
+	//! Type for qword numbers.
 	//! From GLM_GTX_raw_data extension.
 	typedef detail::uint64		qword;
 

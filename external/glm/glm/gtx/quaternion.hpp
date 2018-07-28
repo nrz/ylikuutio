@@ -23,7 +23,7 @@
 #	error "GLM: GLM_GTX_quaternion is an experimental extension and may change in the future. Use #define GLM_ENABLE_EXPERIMENTAL before including it, if you really want to use it."
 #endif
 
-#if GLM_MESSAGES == GLM_MESSAGES_ENABLED && !defined(GLM_EXT_INCLUDED)
+#if GLM_MESSAGES == GLM_ENABLE && !defined(GLM_EXT_INCLUDED)
 #	pragma message("GLM: GLM_GTX_quaternion extension included")
 #endif
 
@@ -54,7 +54,7 @@ namespace glm
 		vec<3, T, Q> const& v,
 		tquat<T, Q> const& q);
 
-	//! Compute a point on a path according squad equation. 
+	//! Compute a point on a path according squad equation.
 	//! q1 and q2 are control points; s1 and s2 are intermediate control points.
 	///
 	/// @see gtx_quaternion
@@ -180,7 +180,7 @@ namespace glm
 	/// @see gtx_quaternion
 	template<typename T, qualifier Q>
 	GLM_FUNC_DECL tquat<T, Q> rotation(
-		vec<3, T, Q> const& orig, 
+		vec<3, T, Q> const& orig,
 		vec<3, T, Q> const& dest);
 
 	/// Build a look at quaternion based on the default handedness.
@@ -209,9 +209,9 @@ namespace glm
 	GLM_FUNC_DECL tquat<T, Q> quatLookAtLH(
 		vec<3, T, Q> const& direction,
 		vec<3, T, Q> const& up);
-	
+
 	/// Returns the squared length of x.
-	/// 
+	///
 	/// @see gtx_quaternion
 	template<typename T, qualifier Q>
 	GLM_FUNC_DECL T length2(tquat<T, Q> const& q);

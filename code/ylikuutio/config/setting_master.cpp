@@ -2,6 +2,9 @@
 #include "setting.hpp"
 #include "code/ylikuutio/console/console.hpp"
 #include "code/ylikuutio/ontology/entity.hpp"
+#include "code/ylikuutio/ontology/universe.hpp"
+#include "code/ylikuutio/ontology/holobiont.hpp"
+#include "code/ylikuutio/ontology/movable.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
 
@@ -9,979 +12,1385 @@
 #include <iostream>      // std::cout, std::cin, std::cerr
 #include <memory>        // std::make_shared, std::shared_ptr
 #include <string>        // std::string
-#include <vector>        // std::vector
 #include <unordered_map> // std::unordered_map
+#include <vector>        // std::vector
 
-namespace ontology
+namespace yli
 {
-    class Entity;
-}
-
-namespace config
-{
-    SettingMaster::SettingMaster(ontology::Entity* const entity)
+    namespace ontology
     {
-        // costructor.
-        this->parent = entity;
-        this->number_of_settings = 0;
-
-        // bind to parent.
-        // there can be only 1 `SettingMaster`.
-        this->parent->setting_master = this;
+        class Entity;
     }
 
-    SettingMaster::~SettingMaster()
+    namespace config
     {
-        // destructor.
-    }
-
-    bool SettingMaster::is_setting(const std::string& setting_name)
-    {
-        std::cout << "Checking if " << setting_name << " is a Setting.\n";
-        bool is_setting = (this->setting_pointer_map.count(setting_name) == 1);
-        std::cout << "Returning from SettingMaster::is_setting\n";
-        return is_setting;
-    }
-
-    std::string SettingMaster::help()
-    {
-        std::string help_string = "TODO: create general helptext";
-        return help_string;
-    }
-
-    std::string SettingMaster::help(const std::string& setting_name)
-    {
-        if (this->is_setting(setting_name))
+        SettingMaster::SettingMaster(yli::ontology::Entity* const entity)
         {
-            config::Setting* setting = this->setting_pointer_map[setting_name];
+            // costructor.
+            this->parent = entity;
+            this->number_of_settings = 0;
 
-            if (setting != nullptr)
+            // bind to parent.
+            // there can be only 1 `SettingMaster`.
+            this->parent->set_setting_master(this);
+        }
+
+        SettingMaster::~SettingMaster()
+        {
+            // destructor.
+        }
+
+        bool SettingMaster::is_setting(const std::string& setting_name)
+        {
+            std::cout << "Checking if " << setting_name << " is a Setting.\n";
+            bool is_setting = (this->setting_pointer_map.count(setting_name) == 1);
+            std::cout << "Returning from SettingMaster::is_setting\n";
+            return is_setting;
+        }
+
+        std::string SettingMaster::help()
+        {
+            std::string help_string = "TODO: create general helptext";
+            return help_string;
+        }
+
+        std::string SettingMaster::help(const std::string& setting_name)
+        {
+            if (this->is_setting(setting_name))
             {
-                return setting->help();
-            }
-        }
-        return this->help();
-    }
+                yli::config::Setting* setting = this->setting_pointer_map[setting_name];
 
-    bool SettingMaster::set(std::string& setting_name, std::shared_ptr<datatypes::AnyValue> setting_new_any_value)
-    {
-        if (!this->is_setting(setting_name))
-        {
-            return false;
-        }
-
-        // OK, this is a valid variable name.
-        // Set the variable value and activate it by
-        // calling the corresponding activate callback.
-        config::Setting* setting = this->setting_pointer_map[setting_name];
-
-        // create empty `AnyValue` (there is no suitable constructor yet).
-        setting_new_any_value->type = setting->setting_value->type;
-
-        setting->setting_value = setting_new_any_value;
-        setting->activate_callback(this->parent, this);
-        return true;
-    }
-
-    config::Setting* SettingMaster::get(std::string& setting_name)
-    {
-        return this->setting_pointer_map[setting_name];
-    }
-
-    // public callbacks.
-
-    std::shared_ptr<datatypes::AnyValue> SettingMaster::set_and_print(
-            console::Console* const console,
-            ontology::Entity* const entity,
-            std::vector<std::string>& command_parameters)
-    {
-        // Usage:
-        // to get variable names: set
-        // to get valid values:   set <variable>
-        // to set variable:       set <variable> value[s]
-
-        config::SettingMaster* setting_master = entity->setting_master;
-
-        if (command_parameters.size() == 0)
-        {
-            // No command parameters.
-            // Print variable names.
-            console->print_text(setting_master->help());
-        }
-        else if (command_parameters.size() == 1)
-        {
-            std::string setting_name = command_parameters.at(0);
-
-            // One (1) command parameter.
-            // Print current value of the given variable.
-            if (setting_master->is_setting(setting_name))
-            {
-                config::Setting* setting = setting_master->get(setting_name);
-
-                if (setting != nullptr && setting->setting_value != nullptr && setting->read_callback == nullptr)
+                if (setting != nullptr)
                 {
-                    // Print variable value.
-                    console->print_text(setting->setting_value->get_string());
-                }
-                else if (setting != nullptr && setting->setting_value != nullptr)
-                {
-                    console->print_text(setting->read_callback(entity, setting_master)->get_string());
-                }
-                else
-                {
-                    // Invalid variable name.
-                    console->print_text("invalid variable name");
-                    console->print_text(setting_master->help());
+                    return setting->help();
                 }
             }
-            else
+            return this->help();
+        }
+
+        bool SettingMaster::set(std::string& setting_name, std::shared_ptr<yli::datatypes::AnyValue> setting_new_any_value)
+        {
+            if (!this->is_setting(setting_name))
             {
-                // Invalid variable name.
-                console->print_text("invalid variable name");
+                return false;
+            }
+
+            // OK, this is a valid variable name.
+            // Set the variable value and activate it by
+            // calling the corresponding activate callback.
+            yli::config::Setting* setting = this->setting_pointer_map[setting_name];
+
+            // create empty `AnyValue` (there is no suitable constructor yet).
+            setting_new_any_value->type = setting->setting_value->type;
+
+            setting->setting_value = setting_new_any_value;
+            setting->activate_callback(this->parent, this);
+            return true;
+        }
+
+        yli::config::Setting* SettingMaster::get(std::string& setting_name)
+        {
+            return this->setting_pointer_map[setting_name];
+        }
+
+        // public callbacks.
+
+        std::shared_ptr<yli::datatypes::AnyValue> SettingMaster::set_and_print(
+                yli::console::Console* const console,
+                yli::ontology::Entity* const entity,
+                std::vector<std::string>& command_parameters)
+        {
+            // Usage:
+            // to get variable names: set
+            // to get valid values:   set <variable>
+            // to set variable:       set <variable> <value>
+            // to set variable:       set <entity> <variable> <value>
+
+            yli::config::SettingMaster* setting_master = entity->get_setting_master();
+
+            if (command_parameters.size() == 0)
+            {
+                // No command parameters.
+                // Print variable names.
                 console->print_text(setting_master->help());
             }
-        }
-        else
-        {
-            std::string setting_name = command_parameters.at(0);
-
-            // At least 2 variables.
-            // Check the validity of the variable name.
-            if (setting_master->is_setting(setting_name))
+            else if (command_parameters.size() == 1)
             {
-                // OK, this is a valid variable name.
-                // Set the variable value and activate it by
-                // calling the corresponding activate callback.
-                config::Setting* setting = setting_master->setting_pointer_map[setting_name];
+                // Exactly 1 parameter.
 
-                // create empty `AnyValue` (there is no suitable constructor yet).
-                std::shared_ptr<datatypes::AnyValue> setting_any_value = std::make_shared<datatypes::AnyValue>();
-                setting_any_value->type = setting->setting_value->type;
+                std::string setting_name = command_parameters.at(0);
 
-                // set a new value.
-                bool success = setting_any_value->set_value(command_parameters.at(1));
-
-                if (success)
+                // Print current value of the given variable.
+                if (setting_master->is_setting(setting_name))
                 {
-                    setting->setting_value = setting_any_value;
+                    yli::config::Setting* setting = setting_master->get(setting_name);
 
-                    if (setting->activate_callback != nullptr)
+                    if (setting != nullptr && setting->setting_value != nullptr && setting->read_callback == nullptr)
                     {
-                        setting->activate_callback(entity, setting_master);
+                        // Print variable value.
+                        console->print_text(setting->setting_value->get_string());
+                    }
+                    else if (setting != nullptr && setting->setting_value != nullptr)
+                    {
+                        std::shared_ptr<yli::datatypes::AnyValue> any_value_shared_ptr = setting->read_callback(entity, setting_master);
+
+                        if (any_value_shared_ptr != nullptr)
+                        {
+                            console->print_text(any_value_shared_ptr->get_string());
+                        }
+                        else
+                        {
+                            console->print_text("read_callback returned nullptr");
+                        }
+                    }
+                    else
+                    {
+                        // Invalid variable name.
+                        console->print_text("invalid variable name");
                     }
                 }
+                else
+                {
+                    // Invalid variable name.
+                    console->print_text("invalid variable name");
+                }
             }
-            else
+            else if (command_parameters.size() == 2)
             {
+                // Exactly 2 parameters.
+
+                std::string setting_name = command_parameters.at(0);
+
+                // Check the validity of the variable name.
+                if (setting_master->is_setting(setting_name))
+                {
+                    // OK, this is a valid variable name.
+                    // Set the variable value and activate it by
+                    // calling the corresponding activate callback.
+                    yli::config::Setting* setting = setting_master->setting_pointer_map[setting_name];
+
+                    // create empty `AnyValue` (there is no suitable constructor yet).
+                    std::shared_ptr<yli::datatypes::AnyValue> setting_any_value = std::make_shared<yli::datatypes::AnyValue>();
+                    setting_any_value->type = setting->setting_value->type;
+
+                    // set a new value.
+                    bool success = setting_any_value->set_value(command_parameters.at(1));
+
+                    if (success)
+                    {
+                        setting->setting_value = setting_any_value;
+
+                        if (setting->activate_callback != nullptr)
+                        {
+                            setting->activate_callback(entity, setting_master);
+                        }
+                    }
+                }
+                else
+                {
+                    console->print_text(setting_master->help());
+                }
+            }
+            else if (command_parameters.size() == 3)
+            {
+                // Exactly 3 parameters.
+
+                std::string entity_name = command_parameters.at(0);
+
+                // if `set_and_print` is called through `Console::enter_key`,
+                // then `entity` is `yli::ontology::Universe`, as
+                // `Console::enter_key` passes `yli::ontology::Universe` as
+                // the 2nd parameter to any `ConsoleCommandCallback` it calls.
+                //
+                // But now we want the `Entity` that corresponds `entity_name`
+                // in `yli::ontology::Universe` 'namespace' (Ylikuutio namespace, not
+                // C++ namespace!), so we need to request it from `yli::ontology::Universe`.
+                // We also want the `SettingMaster` of the same `Entity`.
+
+                yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
+
+                if (universe == nullptr)
+                {
+                    // `entity` is not a `yli::ontology::Universe*`,
+                    // can not proceed further.
+                    return nullptr;
+                }
+
+                // Check the validity of the entity name.
+                if (!universe->is_entity(entity_name))
+                {
+                    // Not a valid `Entity`.
+                    return nullptr;
+                }
+
+                yli::ontology::Entity* named_entity = universe->get_entity(entity_name);
+                setting_master = named_entity->get_setting_master();
+
+                std::string setting_name = command_parameters.at(1);
+
+                // Check the validity of the variable name.
+                if (setting_master->is_setting(setting_name))
+                {
+                    // OK, this is a valid variable name.
+                    // Set the variable value and activate it by
+                    // calling the corresponding activate callback.
+                    yli::config::Setting* setting = setting_master->setting_pointer_map[setting_name];
+
+                    // create empty `AnyValue` (there is no suitable constructor yet).
+                    std::shared_ptr<yli::datatypes::AnyValue> setting_any_value = std::make_shared<yli::datatypes::AnyValue>();
+                    setting_any_value->type = setting->setting_value->type;
+
+                    // set a new value.
+                    bool success = setting_any_value->set_value(command_parameters.at(2));
+
+                    if (success)
+                    {
+                        setting->setting_value = setting_any_value;
+
+                        if (setting->activate_callback != nullptr)
+                        {
+                            setting->activate_callback(named_entity, setting_master);
+                        }
+                    }
+                }
+                else
+                {
+                    console->print_text(setting_master->help());
+                }
+            }
+
+            return nullptr;
+        }
+
+        std::shared_ptr<yli::datatypes::AnyValue> SettingMaster::get_and_print(
+                yli::console::Console* const console,
+                yli::ontology::Entity* const entity,
+                std::vector<std::string>& command_parameters)
+        {
+            // Usage:
+            // to get variable names: get
+            // to get variable value: get <variable>
+            yli::config::SettingMaster* setting_master = entity->get_setting_master();
+
+            if (command_parameters.size() == 0)
+            {
+                // No command parameters.
+                // Print variable names.
                 console->print_text(setting_master->help());
             }
-        }
-
-        return nullptr;
-    }
-
-    std::shared_ptr<datatypes::AnyValue> SettingMaster::get_and_print(
-            console::Console* const console,
-            ontology::Entity* const entity,
-            std::vector<std::string>& command_parameters)
-    {
-        // Usage:
-        // to get variable names: get
-        // to get variable value: get <variable>
-        config::SettingMaster* setting_master = entity->setting_master;
-
-        if (command_parameters.size() == 0)
-        {
-            // No command parameters.
-            // Print variable names.
-            console->print_text(setting_master->help());
-        }
-        else if (command_parameters.size() == 1)
-        {
-            std::string setting_name = command_parameters.at(0);
-
-            // One (1) command parameter.
-            // Print valid values of the given variable.
-            if (setting_master->is_setting(setting_name))
+            else if (command_parameters.size() == 1)
             {
-                config::Setting* setting = setting_master->get(setting_name);
+                // Exactly 1 parameter.
 
-                if (setting != nullptr && setting->setting_value != nullptr && setting->read_callback == nullptr)
+                std::string setting_name = command_parameters.at(0);
+
+                // Print valid values of the given variable.
+                if (setting_master->is_setting(setting_name))
                 {
-                    // Print variable value.
-                    console->print_text(setting->setting_value->get_string());
-                }
-                else if (setting != nullptr && setting->setting_value != nullptr)
-                {
-                    console->print_text(setting->read_callback(entity, setting_master)->get_string());
+                    yli::config::Setting* setting = setting_master->get(setting_name);
+
+                    if (setting != nullptr && setting->setting_value != nullptr && setting->read_callback == nullptr)
+                    {
+                        // Print variable value.
+                        console->print_text(setting->setting_value->get_string());
+                    }
+                    else if (setting != nullptr && setting->setting_value != nullptr)
+                    {
+                        std::shared_ptr<yli::datatypes::AnyValue> any_value_shared_ptr = setting->read_callback(entity, setting_master);
+
+                        if (any_value_shared_ptr != nullptr)
+                        {
+                            console->print_text(any_value_shared_ptr->get_string());
+                        }
+                        else
+                        {
+                            console->print_text("read_callback returned nullptr");
+                        }
+                    }
+                    else
+                    {
+                        // Invalid variable name.
+                        console->print_text("invalid variable name");
+                    }
                 }
                 else
                 {
                     // Invalid variable name.
                     console->print_text("invalid variable name");
-                    console->print_text(setting_master->help());
+                }
+            }
+            else if (command_parameters.size() == 2)
+            {
+                // Exactly 2 parameters.
+
+                std::string entity_name = command_parameters.at(0);
+
+                // if `get_and_print` is called through `Console::enter_key`,
+                // then `entity` is `yli::ontology::Universe`, as
+                // `Console::enter_key` passes `yli::ontology::Universe` as
+                // the 2nd parameter to any `ConsoleCommandCallback` it calls.
+                //
+                // But now we want the `Entity` that corresponds `entity_name`
+                // in `yli::ontology::Universe` 'namespace' (Ylikuutio namespace, not
+                // C++ namespace!), so we need to request it from `yli::ontology::Universe`.
+                // We also want the `SettingMaster` of the same `Entity`.
+
+                yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
+
+                if (universe == nullptr)
+                {
+                    // `entity` is not a `yli::ontology::Universe*`,
+                    // can not proceed further.
+                    return nullptr;
+                }
+
+                // Check the validity of the entity name.
+                if (!universe->is_entity(entity_name))
+                {
+                    // Not a valid `Entity`.
+                    return nullptr;
+                }
+
+                yli::ontology::Entity* named_entity = universe->get_entity(entity_name);
+                setting_master = named_entity->get_setting_master();
+
+                std::string setting_name = command_parameters.at(1);
+
+                // Print valid values of the given variable.
+                if (setting_master->is_setting(setting_name))
+                {
+                    yli::config::Setting* setting = setting_master->get(setting_name);
+
+                    if (setting != nullptr && setting->setting_value != nullptr && setting->read_callback == nullptr)
+                    {
+                        // Print variable value.
+                        console->print_text(setting->setting_value->get_string());
+                    }
+                    else if (setting != nullptr && setting->setting_value != nullptr)
+                    {
+                        std::shared_ptr<yli::datatypes::AnyValue> any_value_shared_ptr = setting->read_callback(named_entity, setting_master);
+
+                        if (any_value_shared_ptr != nullptr)
+                        {
+                            console->print_text(any_value_shared_ptr->get_string());
+                        }
+                        else
+                        {
+                            console->print_text("read_callback returned nullptr");
+                        }
+                    }
+                    else
+                    {
+                        // Invalid variable name.
+                        console->print_text("invalid variable name");
+                    }
+                }
+                else
+                {
+                    // Invalid variable name.
+                    console->print_text("invalid variable name");
                 }
             }
             else
             {
-                // Invalid variable name.
-                console->print_text("invalid variable name");
+                // More than 2 command parameters.
+                // Print variable names.
                 console->print_text(setting_master->help());
             }
-        }
-        else
-        {
-            // More than 1 command parameter.
-            // Print variable names.
-            console->print_text(setting_master->help());
-        }
-
-        return nullptr;
-    }
 
-    std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_planet_radius(ontology::Entity* const entity, config::SettingMaster* const setting_master)
-    {
-        if (entity == nullptr || setting_master == nullptr)
-        {
             return nullptr;
         }
 
-        if (setting_master->setting_pointer_map.count("planet_radius") != 1)
+        std::shared_ptr<yli::datatypes::AnyValue> SettingMaster::activate_planet_radius(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
-            return nullptr;
-        }
+            if (entity == nullptr || setting_master == nullptr)
+            {
+                return nullptr;
+            }
 
-        std::shared_ptr<datatypes::AnyValue> planet_radius_any_value = std::make_shared<datatypes::AnyValue>(*setting_master->setting_pointer_map["planet_radius"]->setting_value);
+            if (setting_master->setting_pointer_map.count("planet_radius") != 1)
+            {
+                return nullptr;
+            }
 
-        if (planet_radius_any_value == nullptr || planet_radius_any_value->type != datatypes::FLOAT)
-        {
-            return nullptr;
-        }
+            std::shared_ptr<yli::datatypes::AnyValue> planet_radius_any_value = std::make_shared<yli::datatypes::AnyValue>(*setting_master->setting_pointer_map["planet_radius"]->setting_value);
 
-        ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
+            if (planet_radius_any_value == nullptr || planet_radius_any_value->type != yli::datatypes::FLOAT)
+            {
+                return nullptr;
+            }
 
-        if (universe == nullptr)
-        {
-            return nullptr;
-        }
+            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
-        universe->planet_radius = planet_radius_any_value->float_value;
-        return nullptr;
-    }
+            if (universe == nullptr)
+            {
+                return nullptr;
+            }
 
-    std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_background_color(ontology::Entity* const entity, config::SettingMaster* const setting_master)
-    {
-        if (entity == nullptr || setting_master == nullptr)
-        {
+            universe->set_planet_radius(planet_radius_any_value->float_value);
             return nullptr;
         }
 
-        if (setting_master->setting_pointer_map.count("red") != 1 ||
-                setting_master->setting_pointer_map.count("green") != 1 ||
-                setting_master->setting_pointer_map.count("blue") != 1 ||
-                setting_master->setting_pointer_map.count("alpha") != 1)
+        std::shared_ptr<yli::datatypes::AnyValue> SettingMaster::activate_background_color(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
-            return nullptr;
-        }
+            if (entity == nullptr || setting_master == nullptr)
+            {
+                return nullptr;
+            }
 
-        // red.
-        std::shared_ptr<datatypes::AnyValue> red_any_value = std::make_shared<datatypes::AnyValue>(*setting_master->setting_pointer_map["red"]->setting_value);
+            if (setting_master->setting_pointer_map.count("red") != 1 ||
+                    setting_master->setting_pointer_map.count("green") != 1 ||
+                    setting_master->setting_pointer_map.count("blue") != 1 ||
+                    setting_master->setting_pointer_map.count("alpha") != 1)
+            {
+                return nullptr;
+            }
 
-        if (red_any_value == nullptr || red_any_value->type != datatypes::FLOAT)
-        {
-            return nullptr;
-        }
+            // red.
+            std::shared_ptr<yli::datatypes::AnyValue> red_any_value = std::make_shared<yli::datatypes::AnyValue>(*setting_master->setting_pointer_map["red"]->setting_value);
 
-        GLclampf red = static_cast<GLclampf>(red_any_value->float_value);
+            if (red_any_value == nullptr || red_any_value->type != yli::datatypes::FLOAT)
+            {
+                return nullptr;
+            }
 
-        // green.
-        std::shared_ptr<datatypes::AnyValue> green_any_value = std::make_shared<datatypes::AnyValue>(*setting_master->setting_pointer_map["green"]->setting_value);
+            GLclampf red = static_cast<GLclampf>(red_any_value->float_value);
 
-        if (green_any_value == nullptr || green_any_value->type != datatypes::FLOAT)
-        {
-            return nullptr;
-        }
+            // green.
+            std::shared_ptr<yli::datatypes::AnyValue> green_any_value = std::make_shared<yli::datatypes::AnyValue>(*setting_master->setting_pointer_map["green"]->setting_value);
 
-        GLclampf green = static_cast<GLclampf>(green_any_value->float_value);
+            if (green_any_value == nullptr || green_any_value->type != yli::datatypes::FLOAT)
+            {
+                return nullptr;
+            }
 
-        // blue.
-        std::shared_ptr<datatypes::AnyValue> blue_any_value = std::make_shared<datatypes::AnyValue>(*setting_master->setting_pointer_map["blue"]->setting_value);
+            GLclampf green = static_cast<GLclampf>(green_any_value->float_value);
 
-        if (blue_any_value == nullptr || blue_any_value->type != datatypes::FLOAT)
-        {
-            return nullptr;
-        }
+            // blue.
+            std::shared_ptr<yli::datatypes::AnyValue> blue_any_value = std::make_shared<yli::datatypes::AnyValue>(*setting_master->setting_pointer_map["blue"]->setting_value);
 
-        GLclampf blue = static_cast<GLclampf>(blue_any_value->float_value);
+            if (blue_any_value == nullptr || blue_any_value->type != yli::datatypes::FLOAT)
+            {
+                return nullptr;
+            }
 
-        // alpha.
-        std::shared_ptr<datatypes::AnyValue> alpha_any_value = std::make_shared<datatypes::AnyValue>(*setting_master->setting_pointer_map["alpha"]->setting_value);
+            GLclampf blue = static_cast<GLclampf>(blue_any_value->float_value);
 
-        if (alpha_any_value == nullptr || alpha_any_value->type != datatypes::FLOAT)
-        {
-            return nullptr;
-        }
+            // alpha.
+            std::shared_ptr<yli::datatypes::AnyValue> alpha_any_value = std::make_shared<yli::datatypes::AnyValue>(*setting_master->setting_pointer_map["alpha"]->setting_value);
 
-        GLclampf alpha = static_cast<GLclampf>(alpha_any_value->float_value);
+            if (alpha_any_value == nullptr || alpha_any_value->type != yli::datatypes::FLOAT)
+            {
+                return nullptr;
+            }
 
-        ylikuutio::opengl::set_background_color(red, green, blue, alpha);
-        return nullptr;
-    }
+            GLclampf alpha = static_cast<GLclampf>(alpha_any_value->float_value);
 
-    std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_wireframe(ontology::Entity* const entity, config::SettingMaster* const setting_master)
-    {
-        if (entity == nullptr || setting_master == nullptr)
-        {
+            yli::opengl::set_background_color(red, green, blue, alpha);
             return nullptr;
         }
 
-        if (setting_master->setting_pointer_map.count("wireframe") != 1)
+        std::shared_ptr<yli::datatypes::AnyValue> SettingMaster::activate_wireframe(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
-            return nullptr;
-        }
+            if (entity == nullptr || setting_master == nullptr)
+            {
+                return nullptr;
+            }
 
-        std::shared_ptr<datatypes::AnyValue> wireframe_any_value = std::make_shared<datatypes::AnyValue>(*setting_master->setting_pointer_map["wireframe"]->setting_value);
+            if (setting_master->setting_pointer_map.count("wireframe") != 1)
+            {
+                return nullptr;
+            }
 
-        if (wireframe_any_value == nullptr || wireframe_any_value->type != datatypes::BOOL)
-        {
-            return nullptr;
-        }
+            std::shared_ptr<yli::datatypes::AnyValue> wireframe_any_value = std::make_shared<yli::datatypes::AnyValue>(*setting_master->setting_pointer_map["wireframe"]->setting_value);
 
-        ylikuutio::opengl::set_wireframe(wireframe_any_value->bool_value);
-        return nullptr;
-    }
+            if (wireframe_any_value == nullptr || wireframe_any_value->type != yli::datatypes::BOOL)
+            {
+                return nullptr;
+            }
 
-    std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_spherical_coordinates(ontology::Entity* const entity, config::SettingMaster* const setting_master)
-    {
-        if (entity == nullptr || setting_master == nullptr)
-        {
+            yli::opengl::set_wireframe(wireframe_any_value->bool_value);
             return nullptr;
         }
 
-        if (setting_master->setting_pointer_map.count("spherical_coordinates") != 1)
+        std::shared_ptr<yli::datatypes::AnyValue> SettingMaster::activate_spherical_coordinates(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
-            return nullptr;
-        }
+            if (entity == nullptr || setting_master == nullptr)
+            {
+                return nullptr;
+            }
 
-        std::shared_ptr<datatypes::AnyValue> spherical_coordinates_any_value = std::make_shared<datatypes::AnyValue>(*setting_master->setting_pointer_map["spherical_coordinates"]->setting_value);
+            yli::ontology::Movable* movable = dynamic_cast<yli::ontology::Movable*>(entity);
 
-        if (spherical_coordinates_any_value == nullptr || spherical_coordinates_any_value->type != datatypes::SPHERICAL_COORDINATES_STRUCT_POINTER)
-        {
-            return nullptr;
-        }
+            if (movable != nullptr)
+            {
+                if (setting_master->setting_pointer_map.count("spherical_coordinates") != 1)
+                {
+                    return nullptr;
+                }
 
-        ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
+                std::shared_ptr<yli::datatypes::AnyValue> spherical_coordinates_any_value = std::make_shared<yli::datatypes::AnyValue>(*setting_master->setting_pointer_map["spherical_coordinates"]->setting_value);
 
-        if (universe == nullptr)
-        {
+                if (spherical_coordinates_any_value == nullptr || spherical_coordinates_any_value->type != yli::datatypes::SPHERICAL_COORDINATES_STRUCT_POINTER)
+                {
+                    return nullptr;
+                }
+
+                movable->spherical_coordinates = *spherical_coordinates_any_value->spherical_coordinates_struct_pointer;
+                return nullptr;
+            }
+
+            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
+
+            if (universe == nullptr || setting_master->setting_pointer_map.count("spherical_coordinates") != 1)
+            {
+                return nullptr;
+            }
+
+            std::shared_ptr<yli::datatypes::AnyValue> spherical_coordinates_any_value = std::make_shared<yli::datatypes::AnyValue>(*setting_master->setting_pointer_map["spherical_coordinates"]->setting_value);
+
+            if (spherical_coordinates_any_value == nullptr || spherical_coordinates_any_value->type != yli::datatypes::SPHERICAL_COORDINATES_STRUCT_POINTER)
+            {
+                return nullptr;
+            }
+
+            universe->current_camera_spherical_coordinates = *spherical_coordinates_any_value->spherical_coordinates_struct_pointer;
             return nullptr;
         }
 
-        delete universe->spherical_coordinates; // delete the old `SphericalCoordinatesStruct`.
-        universe->spherical_coordinates = spherical_coordinates_any_value->spherical_coordinates_struct_pointer;
-        return nullptr;
-    }
-
-    std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_rho(ontology::Entity* const entity, config::SettingMaster* const setting_master)
-    {
-        if (entity == nullptr || setting_master == nullptr)
+        std::shared_ptr<yli::datatypes::AnyValue> SettingMaster::activate_rho(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
-            return nullptr;
-        }
+            if (entity == nullptr || setting_master == nullptr)
+            {
+                return nullptr;
+            }
 
-        ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
+            yli::ontology::Movable* movable = dynamic_cast<yli::ontology::Movable*>(entity);
 
-        if (universe == nullptr || universe->spherical_coordinates == nullptr)
-        {
+            if (movable != nullptr)
+            {
+                if (setting_master->setting_pointer_map.count("spherical_coordinates") != 1)
+                {
+                    return nullptr;
+                }
+
+                std::shared_ptr<yli::datatypes::AnyValue> rho_any_value = std::make_shared<yli::datatypes::AnyValue>(*setting_master->setting_pointer_map["rho"]->setting_value);
+
+                if (rho_any_value == nullptr || rho_any_value->type != yli::datatypes::FLOAT)
+                {
+                    return nullptr;
+                }
+
+                movable->spherical_coordinates.rho = rho_any_value->float_value;
+                return nullptr;
+            }
+
+            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
+
+            if (universe == nullptr)
+            {
+                return nullptr;
+            }
+
+            if (setting_master->setting_pointer_map.count("spherical_coordinates") != 1)
+            {
+                return nullptr;
+            }
+
+            std::shared_ptr<yli::datatypes::AnyValue> rho_any_value = std::make_shared<yli::datatypes::AnyValue>(*setting_master->setting_pointer_map["rho"]->setting_value);
+
+            if (rho_any_value == nullptr || rho_any_value->type != yli::datatypes::FLOAT)
+            {
+                return nullptr;
+            }
+
+            universe->current_camera_spherical_coordinates.rho = rho_any_value->float_value;
             return nullptr;
         }
 
-        if (setting_master->setting_pointer_map.count("spherical_coordinates") != 1)
+        std::shared_ptr<yli::datatypes::AnyValue> SettingMaster::activate_theta(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
-            return nullptr;
-        }
+            if (entity == nullptr || setting_master == nullptr)
+            {
+                return nullptr;
+            }
 
-        std::shared_ptr<datatypes::AnyValue> rho_any_value = std::make_shared<datatypes::AnyValue>(*setting_master->setting_pointer_map["rho"]->setting_value);
+            yli::ontology::Movable* movable = dynamic_cast<yli::ontology::Movable*>(entity);
 
-        if (rho_any_value == nullptr || rho_any_value->type != datatypes::FLOAT)
-        {
-            return nullptr;
-        }
+            if (movable != nullptr)
+            {
+                if (setting_master->setting_pointer_map.count("spherical_coordinates") != 1)
+                {
+                    return nullptr;
+                }
 
-        universe->spherical_coordinates->rho = rho_any_value->float_value;
-        return nullptr;
-    }
+                std::shared_ptr<yli::datatypes::AnyValue> theta_any_value = std::make_shared<yli::datatypes::AnyValue>(*setting_master->setting_pointer_map["theta"]->setting_value);
 
-    std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_theta(ontology::Entity* const entity, config::SettingMaster* const setting_master)
-    {
-        if (entity == nullptr || setting_master == nullptr)
-        {
-            return nullptr;
-        }
+                if (theta_any_value == nullptr || theta_any_value->type != yli::datatypes::FLOAT)
+                {
+                    return nullptr;
+                }
 
-        ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
+                movable->spherical_coordinates.theta = theta_any_value->float_value;
+                return nullptr;
+            }
 
-        if (universe == nullptr || universe->spherical_coordinates == nullptr)
-        {
+            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
+
+            if (universe == nullptr)
+            {
+                return nullptr;
+            }
+
+            if (setting_master->setting_pointer_map.count("spherical_coordinates") != 1)
+            {
+                return nullptr;
+            }
+
+            std::shared_ptr<yli::datatypes::AnyValue> theta_any_value = std::make_shared<yli::datatypes::AnyValue>(*setting_master->setting_pointer_map["theta"]->setting_value);
+
+            if (theta_any_value == nullptr || theta_any_value->type != yli::datatypes::FLOAT)
+            {
+                return nullptr;
+            }
+
+            universe->current_camera_spherical_coordinates.theta = theta_any_value->float_value;
             return nullptr;
         }
 
-        if (setting_master->setting_pointer_map.count("spherical_coordinates") != 1)
+        std::shared_ptr<yli::datatypes::AnyValue> SettingMaster::activate_phi(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
-            return nullptr;
-        }
+            if (entity == nullptr || setting_master == nullptr)
+            {
+                return nullptr;
+            }
 
-        std::shared_ptr<datatypes::AnyValue> theta_any_value = std::make_shared<datatypes::AnyValue>(*setting_master->setting_pointer_map["theta"]->setting_value);
+            yli::ontology::Movable* movable = dynamic_cast<yli::ontology::Movable*>(entity);
 
-        if (theta_any_value == nullptr || theta_any_value->type != datatypes::FLOAT)
-        {
-            return nullptr;
-        }
+            if (movable != nullptr)
+            {
+                if (setting_master->setting_pointer_map.count("spherical_coordinates") != 1)
+                {
+                    return nullptr;
+                }
 
-        universe->spherical_coordinates->theta = theta_any_value->float_value;
-        return nullptr;
-    }
+                std::shared_ptr<yli::datatypes::AnyValue> phi_any_value = std::make_shared<yli::datatypes::AnyValue>(*setting_master->setting_pointer_map["phi"]->setting_value);
 
-    std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_phi(ontology::Entity* const entity, config::SettingMaster* const setting_master)
-    {
-        if (entity == nullptr || setting_master == nullptr)
-        {
-            return nullptr;
-        }
+                if (phi_any_value == nullptr || phi_any_value->type != yli::datatypes::FLOAT)
+                {
+                    return nullptr;
+                }
 
-        ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
+                movable->spherical_coordinates.phi = phi_any_value->float_value;
+                return nullptr;
+            }
 
-        if (universe == nullptr || universe->spherical_coordinates == nullptr)
-        {
+            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
+
+            if (universe == nullptr)
+            {
+                return nullptr;
+            }
+
+            if (setting_master->setting_pointer_map.count("spherical_coordinates") != 1)
+            {
+                return nullptr;
+            }
+
+            std::shared_ptr<yli::datatypes::AnyValue> phi_any_value = std::make_shared<yli::datatypes::AnyValue>(*setting_master->setting_pointer_map["phi"]->setting_value);
+
+            if (phi_any_value == nullptr || phi_any_value->type != yli::datatypes::FLOAT)
+            {
+                return nullptr;
+            }
+
+            universe->current_camera_spherical_coordinates.phi = phi_any_value->float_value;
             return nullptr;
         }
 
-        if (setting_master->setting_pointer_map.count("spherical_coordinates") != 1)
+        std::shared_ptr<yli::datatypes::AnyValue> SettingMaster::activate_cartesian_coordinates(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
-            return nullptr;
-        }
+            if (entity == nullptr || setting_master == nullptr)
+            {
+                return nullptr;
+            }
 
-        std::shared_ptr<datatypes::AnyValue> phi_any_value = std::make_shared<datatypes::AnyValue>(*setting_master->setting_pointer_map["phi"]->setting_value);
+            yli::ontology::Movable* movable = dynamic_cast<yli::ontology::Movable*>(entity);
 
-        if (phi_any_value == nullptr || phi_any_value->type != datatypes::FLOAT)
-        {
-            return nullptr;
-        }
+            if (movable != nullptr)
+            {
+                if (setting_master->setting_pointer_map.count("cartesian_coordinates") != 1)
+                {
+                    return nullptr;
+                }
 
-        universe->spherical_coordinates->phi = phi_any_value->float_value;
-        return nullptr;
-    }
+                std::shared_ptr<yli::datatypes::AnyValue> cartesian_coordinates_any_value = std::make_shared<yli::datatypes::AnyValue>(*setting_master->setting_pointer_map["cartesian_coordinates"]->setting_value);
 
-    std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_cartesian_coordinates(ontology::Entity* const entity, config::SettingMaster* const setting_master)
-    {
-        if (entity == nullptr || setting_master == nullptr)
-        {
-            return nullptr;
-        }
+                if (cartesian_coordinates_any_value == nullptr || cartesian_coordinates_any_value->type != yli::datatypes::GLM_VEC3_POINTER)
+                {
+                    return nullptr;
+                }
 
-        ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
+                movable->cartesian_coordinates = glm::vec3(*cartesian_coordinates_any_value->glm_vec3_pointer);
+                return nullptr;
+            }
 
-        if (universe == nullptr || setting_master->setting_pointer_map.count("cartesian_coordinates") != 1)
-        {
-            return nullptr;
-        }
+            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
-        std::shared_ptr<datatypes::AnyValue> cartesian_coordinates_any_value = std::make_shared<datatypes::AnyValue>(*setting_master->setting_pointer_map["cartesian_coordinates"]->setting_value);
+            if (universe == nullptr || setting_master->setting_pointer_map.count("cartesian_coordinates") != 1)
+            {
+                return nullptr;
+            }
 
-        if (cartesian_coordinates_any_value == nullptr || cartesian_coordinates_any_value->type != datatypes::GLM_VEC3_POINTER)
-        {
+            std::shared_ptr<yli::datatypes::AnyValue> cartesian_coordinates_any_value = std::make_shared<yli::datatypes::AnyValue>(*setting_master->setting_pointer_map["cartesian_coordinates"]->setting_value);
+
+            if (cartesian_coordinates_any_value == nullptr || cartesian_coordinates_any_value->type != yli::datatypes::GLM_VEC3_POINTER)
+            {
+                return nullptr;
+            }
+
+            universe->current_camera_cartesian_coordinates = glm::vec3(*cartesian_coordinates_any_value->glm_vec3_pointer);
             return nullptr;
         }
 
-        delete universe->cartesian_coordinates; // delete the old `glm::vec3`.
-        universe->cartesian_coordinates = cartesian_coordinates_any_value->glm_vec3_pointer;
-        return nullptr;
-    }
-
-    std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_x(ontology::Entity* const entity, config::SettingMaster* const setting_master)
-    {
-        if (entity == nullptr || setting_master == nullptr)
+        std::shared_ptr<yli::datatypes::AnyValue> SettingMaster::activate_x(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
-            return nullptr;
-        }
+            if (entity == nullptr || setting_master == nullptr)
+            {
+                return nullptr;
+            }
 
-        ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
+            yli::ontology::Movable* movable = dynamic_cast<yli::ontology::Movable*>(entity);
 
-        if (universe == nullptr || universe->cartesian_coordinates == nullptr)
-        {
+            if (movable != nullptr)
+            {
+                if (setting_master->setting_pointer_map.count("x") != 1)
+                {
+                    return nullptr;
+                }
+
+                std::shared_ptr<yli::datatypes::AnyValue> x_any_value = std::make_shared<yli::datatypes::AnyValue>(*setting_master->setting_pointer_map["x"]->setting_value);
+
+                if (x_any_value == nullptr || x_any_value->type != yli::datatypes::FLOAT)
+                {
+                    return nullptr;
+                }
+
+                movable->cartesian_coordinates.x = x_any_value->float_value;
+                movable->model_matrix[3][0] = x_any_value->float_value;
+
+                yli::ontology::Holobiont* holobiont = dynamic_cast<yli::ontology::Holobiont*>(movable);
+
+                if (holobiont != nullptr)
+                {
+                    holobiont->update_x(x_any_value->float_value);
+                }
+
+                return nullptr;
+            }
+
+            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
+
+            if (universe == nullptr)
+            {
+                return nullptr;
+            }
+
+            if (setting_master->setting_pointer_map.count("x") != 1)
+            {
+                return nullptr;
+            }
+
+            std::shared_ptr<yli::datatypes::AnyValue> x_any_value = std::make_shared<yli::datatypes::AnyValue>(*setting_master->setting_pointer_map["x"]->setting_value);
+
+            if (x_any_value == nullptr || x_any_value->type != yli::datatypes::FLOAT)
+            {
+                return nullptr;
+            }
+
+            universe->current_camera_cartesian_coordinates.x = x_any_value->float_value;
             return nullptr;
         }
 
-        if (setting_master->setting_pointer_map.count("x") != 1)
+        std::shared_ptr<yli::datatypes::AnyValue> SettingMaster::activate_y(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
-            return nullptr;
-        }
+            if (entity == nullptr || setting_master == nullptr)
+            {
+                return nullptr;
+            }
 
-        std::shared_ptr<datatypes::AnyValue> x_any_value = std::make_shared<datatypes::AnyValue>(*setting_master->setting_pointer_map["x"]->setting_value);
+            yli::ontology::Movable* movable = dynamic_cast<yli::ontology::Movable*>(entity);
 
-        if (x_any_value == nullptr || x_any_value->type != datatypes::FLOAT)
-        {
-            return nullptr;
-        }
+            if (movable != nullptr)
+            {
+                if (setting_master->setting_pointer_map.count("y") != 1)
+                {
+                    return nullptr;
+                }
 
-        universe->cartesian_coordinates->x = x_any_value->float_value;
-        return nullptr;
-    }
+                std::shared_ptr<yli::datatypes::AnyValue> y_any_value = std::make_shared<yli::datatypes::AnyValue>(*setting_master->setting_pointer_map["y"]->setting_value);
 
-    std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_y(ontology::Entity* const entity, config::SettingMaster* const setting_master)
-    {
-        if (entity == nullptr || setting_master == nullptr)
-        {
-            return nullptr;
-        }
+                if (y_any_value == nullptr || y_any_value->type != yli::datatypes::FLOAT)
+                {
+                    return nullptr;
+                }
 
-        ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
+                movable->cartesian_coordinates.y = y_any_value->float_value;
+                movable->model_matrix[3][1] = y_any_value->float_value;
 
-        if (universe == nullptr || universe->cartesian_coordinates == nullptr)
-        {
+                yli::ontology::Holobiont* holobiont = dynamic_cast<yli::ontology::Holobiont*>(movable);
+
+                if (holobiont != nullptr)
+                {
+                    holobiont->update_y(y_any_value->float_value);
+                }
+
+                return nullptr;
+            }
+
+            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
+
+            if (universe == nullptr)
+            {
+                return nullptr;
+            }
+
+            if (setting_master->setting_pointer_map.count("y") != 1)
+            {
+                return nullptr;
+            }
+
+            std::shared_ptr<yli::datatypes::AnyValue> y_any_value = std::make_shared<yli::datatypes::AnyValue>(*setting_master->setting_pointer_map["y"]->setting_value);
+
+            if (y_any_value == nullptr || y_any_value->type != yli::datatypes::FLOAT)
+            {
+                return nullptr;
+            }
+
+            universe->current_camera_cartesian_coordinates.y = y_any_value->float_value;
             return nullptr;
         }
 
-        if (setting_master->setting_pointer_map.count("y") != 1)
+        std::shared_ptr<yli::datatypes::AnyValue> SettingMaster::activate_z(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
-            return nullptr;
-        }
+            if (entity == nullptr || setting_master == nullptr)
+            {
+                return nullptr;
+            }
 
-        std::shared_ptr<datatypes::AnyValue> y_any_value = std::make_shared<datatypes::AnyValue>(*setting_master->setting_pointer_map["y"]->setting_value);
+            yli::ontology::Movable* movable = dynamic_cast<yli::ontology::Movable*>(entity);
 
-        if (y_any_value == nullptr || y_any_value->type != datatypes::FLOAT)
-        {
-            return nullptr;
-        }
+            if (movable != nullptr)
+            {
+                if (setting_master->setting_pointer_map.count("z") != 1)
+                {
+                    return nullptr;
+                }
 
-        universe->cartesian_coordinates->y = y_any_value->float_value;
-        return nullptr;
-    }
+                std::shared_ptr<yli::datatypes::AnyValue> z_any_value = std::make_shared<yli::datatypes::AnyValue>(*setting_master->setting_pointer_map["z"]->setting_value);
 
-    std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_z(ontology::Entity* const entity, config::SettingMaster* const setting_master)
-    {
-        if (entity == nullptr || setting_master == nullptr)
-        {
-            return nullptr;
-        }
+                if (z_any_value == nullptr || z_any_value->type != yli::datatypes::FLOAT)
+                {
+                    return nullptr;
+                }
 
-        ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
+                movable->cartesian_coordinates.z = z_any_value->float_value;
+                movable->model_matrix[3][2] = z_any_value->float_value;
 
-        if (universe == nullptr || universe->cartesian_coordinates == nullptr)
-        {
+                yli::ontology::Holobiont* holobiont = dynamic_cast<yli::ontology::Holobiont*>(movable);
+
+                if (holobiont != nullptr)
+                {
+                    holobiont->update_z(z_any_value->float_value);
+                }
+
+                return nullptr;
+            }
+
+            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
+
+            if (universe == nullptr)
+            {
+                return nullptr;
+            }
+
+            if (setting_master->setting_pointer_map.count("z") != 1)
+            {
+                return nullptr;
+            }
+
+            std::shared_ptr<yli::datatypes::AnyValue> z_any_value = std::make_shared<yli::datatypes::AnyValue>(*setting_master->setting_pointer_map["z"]->setting_value);
+
+            if (z_any_value == nullptr || z_any_value->type != yli::datatypes::FLOAT)
+            {
+                return nullptr;
+            }
+
+            universe->current_camera_cartesian_coordinates.z = z_any_value->float_value;
             return nullptr;
         }
 
-        if (setting_master->setting_pointer_map.count("z") != 1)
+        std::shared_ptr<yli::datatypes::AnyValue> SettingMaster::activate_horizontal_angle(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
-            return nullptr;
-        }
+            if (entity == nullptr || setting_master == nullptr)
+            {
+                return nullptr;
+            }
 
-        std::shared_ptr<datatypes::AnyValue> z_any_value = std::make_shared<datatypes::AnyValue>(*setting_master->setting_pointer_map["z"]->setting_value);
+            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
-        if (z_any_value == nullptr || z_any_value->type != datatypes::FLOAT)
-        {
-            return nullptr;
-        }
+            if (universe == nullptr)
+            {
+                return nullptr;
+            }
 
-        universe->cartesian_coordinates->z = z_any_value->float_value;
-        return nullptr;
-    }
+            if (setting_master->setting_pointer_map.count("horizontal_angle") != 1)
+            {
+                return nullptr;
+            }
 
-    std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_horizontal_angle(ontology::Entity* const entity, config::SettingMaster* const setting_master)
-    {
-        if (entity == nullptr || setting_master == nullptr)
-        {
-            return nullptr;
-        }
+            std::shared_ptr<yli::datatypes::AnyValue> horizontal_angle_any_value = std::make_shared<yli::datatypes::AnyValue>(*setting_master->setting_pointer_map["horizontal_angle"]->setting_value);
 
-        ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
+            if (horizontal_angle_any_value == nullptr || horizontal_angle_any_value->type != yli::datatypes::DOUBLE)
+            {
+                return nullptr;
+            }
 
-        if (universe == nullptr)
-        {
+            universe->current_camera_horizontal_angle = horizontal_angle_any_value->double_value;
             return nullptr;
         }
 
-        if (setting_master->setting_pointer_map.count("horizontal_angle") != 1)
+        std::shared_ptr<yli::datatypes::AnyValue> SettingMaster::activate_vertical_angle(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
-            return nullptr;
-        }
+            if (entity == nullptr || setting_master == nullptr)
+            {
+                return nullptr;
+            }
 
-        std::shared_ptr<datatypes::AnyValue> horizontal_angle_any_value = std::make_shared<datatypes::AnyValue>(*setting_master->setting_pointer_map["horizontal_angle"]->setting_value);
+            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
-        if (horizontal_angle_any_value == nullptr || horizontal_angle_any_value->type != datatypes::DOUBLE)
-        {
-            return nullptr;
-        }
+            if (universe == nullptr)
+            {
+                return nullptr;
+            }
 
-        universe->horizontal_angle = horizontal_angle_any_value->double_value;
-        return nullptr;
-    }
+            if (setting_master->setting_pointer_map.count("vertical_angle") != 1)
+            {
+                return nullptr;
+            }
 
-    std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_vertical_angle(ontology::Entity* const entity, config::SettingMaster* const setting_master)
-    {
-        if (entity == nullptr || setting_master == nullptr)
-        {
-            return nullptr;
-        }
+            std::shared_ptr<yli::datatypes::AnyValue> vertical_angle_any_value = std::make_shared<yli::datatypes::AnyValue>(*setting_master->setting_pointer_map["vertical_angle"]->setting_value);
 
-        ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
+            if (vertical_angle_any_value == nullptr || vertical_angle_any_value->type != yli::datatypes::DOUBLE)
+            {
+                return nullptr;
+            }
 
-        if (universe == nullptr)
-        {
+            universe->current_camera_vertical_angle = vertical_angle_any_value->double_value;
             return nullptr;
         }
 
-        if (setting_master->setting_pointer_map.count("vertical_angle") != 1)
+        std::shared_ptr<yli::datatypes::AnyValue> SettingMaster::activate_speed(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
-            return nullptr;
-        }
+            if (entity == nullptr || setting_master == nullptr)
+            {
+                return nullptr;
+            }
 
-        std::shared_ptr<datatypes::AnyValue> vertical_angle_any_value = std::make_shared<datatypes::AnyValue>(*setting_master->setting_pointer_map["vertical_angle"]->setting_value);
+            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
-        if (vertical_angle_any_value == nullptr || vertical_angle_any_value->type != datatypes::DOUBLE)
-        {
-            return nullptr;
-        }
+            if (universe == nullptr)
+            {
+                return nullptr;
+            }
 
-        universe->vertical_angle = vertical_angle_any_value->double_value;
-        return nullptr;
-    }
+            if (setting_master->setting_pointer_map.count("speed") != 1)
+            {
+                return nullptr;
+            }
 
-    std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_speed(ontology::Entity* const entity, config::SettingMaster* const setting_master)
-    {
-        if (entity == nullptr || setting_master == nullptr)
-        {
-            return nullptr;
-        }
+            std::shared_ptr<yli::datatypes::AnyValue> speed_any_value = std::make_shared<yli::datatypes::AnyValue>(*setting_master->setting_pointer_map["speed"]->setting_value);
 
-        ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
+            if (speed_any_value == nullptr || speed_any_value->type != yli::datatypes::FLOAT)
+            {
+                return nullptr;
+            }
 
-        if (universe == nullptr)
-        {
+            universe->speed = speed_any_value->float_value;
             return nullptr;
         }
 
-        if (setting_master->setting_pointer_map.count("speed") != 1)
+        std::shared_ptr<yli::datatypes::AnyValue> SettingMaster::activate_turbo_factor(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
-            return nullptr;
-        }
+            if (entity == nullptr || setting_master == nullptr)
+            {
+                return nullptr;
+            }
 
-        std::shared_ptr<datatypes::AnyValue> speed_any_value = std::make_shared<datatypes::AnyValue>(*setting_master->setting_pointer_map["speed"]->setting_value);
+            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
-        if (speed_any_value == nullptr || speed_any_value->type != datatypes::FLOAT)
-        {
-            return nullptr;
-        }
+            if (universe == nullptr)
+            {
+                return nullptr;
+            }
 
-        universe->speed = speed_any_value->float_value;
-        return nullptr;
-    }
+            if (setting_master->setting_pointer_map.count("turbo_factor") != 1)
+            {
+                return nullptr;
+            }
 
-    std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_turbo_factor(ontology::Entity* const entity, config::SettingMaster* const setting_master)
-    {
-        if (entity == nullptr || setting_master == nullptr)
-        {
-            return nullptr;
-        }
+            std::shared_ptr<yli::datatypes::AnyValue> turbo_factor_any_value = std::make_shared<yli::datatypes::AnyValue>(*setting_master->setting_pointer_map["turbo_factor"]->setting_value);
 
-        ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
+            if (turbo_factor_any_value == nullptr || turbo_factor_any_value->type != yli::datatypes::FLOAT)
+            {
+                return nullptr;
+            }
 
-        if (universe == nullptr)
-        {
+            universe->turbo_factor = turbo_factor_any_value->float_value;
             return nullptr;
         }
 
-        if (setting_master->setting_pointer_map.count("turbo_factor") != 1)
+        std::shared_ptr<yli::datatypes::AnyValue> SettingMaster::activate_twin_turbo_factor(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
-            return nullptr;
-        }
+            if (entity == nullptr || setting_master == nullptr)
+            {
+                return nullptr;
+            }
 
-        std::shared_ptr<datatypes::AnyValue> turbo_factor_any_value = std::make_shared<datatypes::AnyValue>(*setting_master->setting_pointer_map["turbo_factor"]->setting_value);
+            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
-        if (turbo_factor_any_value == nullptr || turbo_factor_any_value->type != datatypes::FLOAT)
-        {
-            return nullptr;
-        }
+            if (universe == nullptr)
+            {
+                return nullptr;
+            }
 
-        universe->turbo_factor = turbo_factor_any_value->float_value;
-        return nullptr;
-    }
+            if (setting_master->setting_pointer_map.count("twin_turbo_factor") != 1)
+            {
+                return nullptr;
+            }
 
-    std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_twin_turbo_factor(ontology::Entity* const entity, config::SettingMaster* const setting_master)
-    {
-        if (entity == nullptr || setting_master == nullptr)
-        {
-            return nullptr;
-        }
+            std::shared_ptr<yli::datatypes::AnyValue> twin_turbo_factor_any_value = std::make_shared<yli::datatypes::AnyValue>(*setting_master->setting_pointer_map["twin_turbo_factor"]->setting_value);
 
-        ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
+            if (twin_turbo_factor_any_value == nullptr || twin_turbo_factor_any_value->type != yli::datatypes::FLOAT)
+            {
+                return nullptr;
+            }
 
-        if (universe == nullptr)
-        {
+            universe->twin_turbo_factor = twin_turbo_factor_any_value->float_value;
             return nullptr;
         }
 
-        if (setting_master->setting_pointer_map.count("twin_turbo_factor") != 1)
+        std::shared_ptr<yli::datatypes::AnyValue> SettingMaster::activate_mouse_speed(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
-            return nullptr;
-        }
+            if (entity == nullptr || setting_master == nullptr)
+            {
+                return nullptr;
+            }
 
-        std::shared_ptr<datatypes::AnyValue> twin_turbo_factor_any_value = std::make_shared<datatypes::AnyValue>(*setting_master->setting_pointer_map["twin_turbo_factor"]->setting_value);
+            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
-        if (twin_turbo_factor_any_value == nullptr || twin_turbo_factor_any_value->type != datatypes::FLOAT)
-        {
-            return nullptr;
-        }
+            if (universe == nullptr)
+            {
+                return nullptr;
+            }
 
-        universe->twin_turbo_factor = twin_turbo_factor_any_value->float_value;
-        return nullptr;
-    }
+            if (setting_master->setting_pointer_map.count("mouse_speed") != 1)
+            {
+                return nullptr;
+            }
 
-    std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_mouse_speed(ontology::Entity* const entity, config::SettingMaster* const setting_master)
-    {
-        if (entity == nullptr || setting_master == nullptr)
-        {
-            return nullptr;
-        }
+            std::shared_ptr<yli::datatypes::AnyValue> mouse_speed_any_value = std::make_shared<yli::datatypes::AnyValue>(*setting_master->setting_pointer_map["mouse_speed"]->setting_value);
 
-        ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
+            if (mouse_speed_any_value == nullptr || mouse_speed_any_value->type != yli::datatypes::FLOAT)
+            {
+                return nullptr;
+            }
 
-        if (universe == nullptr)
-        {
+            universe->mouse_speed = mouse_speed_any_value->float_value;
             return nullptr;
         }
 
-        if (setting_master->setting_pointer_map.count("mouse_speed") != 1)
+        std::shared_ptr<yli::datatypes::AnyValue> SettingMaster::activate_is_flight_mode_in_use(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
-            return nullptr;
-        }
+            if (entity == nullptr || setting_master == nullptr)
+            {
+                return nullptr;
+            }
 
-        std::shared_ptr<datatypes::AnyValue> mouse_speed_any_value = std::make_shared<datatypes::AnyValue>(*setting_master->setting_pointer_map["mouse_speed"]->setting_value);
+            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
-        if (mouse_speed_any_value == nullptr || mouse_speed_any_value->type != datatypes::FLOAT)
-        {
-            return nullptr;
-        }
+            if (universe == nullptr)
+            {
+                return nullptr;
+            }
 
-        universe->mouse_speed = mouse_speed_any_value->float_value;
-        return nullptr;
-    }
+            if (setting_master->setting_pointer_map.count("is_flight_mode_in_use") != 1)
+            {
+                return nullptr;
+            }
 
-    std::shared_ptr<datatypes::AnyValue> SettingMaster::activate_is_flight_mode_in_use(ontology::Entity* const entity, config::SettingMaster* const setting_master)
-    {
-        if (entity == nullptr || setting_master == nullptr)
-        {
-            return nullptr;
-        }
+            std::shared_ptr<yli::datatypes::AnyValue> is_flight_mode_in_use_any_value = std::make_shared<yli::datatypes::AnyValue>(*setting_master->setting_pointer_map["is_flight_mode_in_use"]->setting_value);
 
-        ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
+            if (is_flight_mode_in_use_any_value == nullptr || is_flight_mode_in_use_any_value->type != yli::datatypes::BOOL)
+            {
+                return nullptr;
+            }
 
-        if (universe == nullptr)
-        {
+            universe->is_flight_mode_in_use = is_flight_mode_in_use_any_value->bool_value;
             return nullptr;
         }
 
-        if (setting_master->setting_pointer_map.count("is_flight_mode_in_use") != 1)
+        std::shared_ptr<yli::datatypes::AnyValue> SettingMaster::read_cartesian_coordinates(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
-            return nullptr;
-        }
+            if (entity == nullptr)
+            {
+                return nullptr;
+            }
 
-        std::shared_ptr<datatypes::AnyValue> is_flight_mode_in_use_any_value = std::make_shared<datatypes::AnyValue>(*setting_master->setting_pointer_map["is_flight_mode_in_use"]->setting_value);
+            yli::ontology::Movable* movable = dynamic_cast<yli::ontology::Movable*>(entity);
 
-        if (is_flight_mode_in_use_any_value == nullptr || is_flight_mode_in_use_any_value->type != datatypes::BOOL)
-        {
-            return nullptr;
-        }
+            if (movable != nullptr)
+            {
+                return std::make_shared<yli::datatypes::AnyValue>(&movable->cartesian_coordinates);
+            }
 
-        universe->is_flight_mode_in_use = is_flight_mode_in_use_any_value->bool_value;
-        return nullptr;
-    }
+            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
-    std::shared_ptr<datatypes::AnyValue> SettingMaster::read_x(ontology::Entity* const entity, config::SettingMaster* const setting_master)
-    {
-        if (entity == nullptr)
-        {
-            return nullptr;
-        }
+            if (universe == nullptr)
+            {
+                return nullptr;
+            }
 
-        ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
+            return std::make_shared<yli::datatypes::AnyValue>(&universe->current_camera_cartesian_coordinates);
+        }
 
-        if (universe == nullptr || universe->cartesian_coordinates == nullptr)
+        std::shared_ptr<yli::datatypes::AnyValue> SettingMaster::read_x(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
-            return nullptr;
-        }
+            if (entity == nullptr)
+            {
+                return nullptr;
+            }
 
-        return std::make_shared<datatypes::AnyValue>(universe->cartesian_coordinates->x);
-    }
+            yli::ontology::Movable* movable = dynamic_cast<yli::ontology::Movable*>(entity);
 
-    std::shared_ptr<datatypes::AnyValue> SettingMaster::read_y(ontology::Entity* const entity, config::SettingMaster* const setting_master)
-    {
-        if (entity == nullptr)
-        {
-            return nullptr;
-        }
+            if (movable != nullptr)
+            {
+                return std::make_shared<yli::datatypes::AnyValue>(movable->cartesian_coordinates.x);
+            }
 
-        ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
+            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
-        if (universe == nullptr || universe->cartesian_coordinates == nullptr)
-        {
-            return nullptr;
-        }
+            if (universe == nullptr)
+            {
+                return nullptr;
+            }
 
-        return std::make_shared<datatypes::AnyValue>(universe->cartesian_coordinates->y);
-    }
+            return std::make_shared<yli::datatypes::AnyValue>(universe->current_camera_cartesian_coordinates.x);
+        }
 
-    std::shared_ptr<datatypes::AnyValue> SettingMaster::read_z(ontology::Entity* const entity, config::SettingMaster* const setting_master)
-    {
-        if (entity == nullptr)
+        std::shared_ptr<yli::datatypes::AnyValue> SettingMaster::read_y(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
-            return nullptr;
-        }
+            if (entity == nullptr)
+            {
+                return nullptr;
+            }
 
-        ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
+            yli::ontology::Movable* movable = dynamic_cast<yli::ontology::Movable*>(entity);
 
-        if (universe == nullptr || universe->cartesian_coordinates == nullptr)
-        {
-            return nullptr;
-        }
+            if (movable != nullptr)
+            {
+                return std::make_shared<yli::datatypes::AnyValue>(movable->cartesian_coordinates.y);
+            }
 
-        return std::make_shared<datatypes::AnyValue>(universe->cartesian_coordinates->z);
-    }
+            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
-    std::shared_ptr<datatypes::AnyValue> SettingMaster::read_rho(ontology::Entity* const entity, config::SettingMaster* const setting_master)
-    {
-        if (entity == nullptr)
-        {
-            return nullptr;
-        }
+            if (universe == nullptr)
+            {
+                return nullptr;
+            }
 
-        ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
+            return std::make_shared<yli::datatypes::AnyValue>(universe->current_camera_cartesian_coordinates.y);
+        }
 
-        if (universe == nullptr || universe->spherical_coordinates == nullptr)
+        std::shared_ptr<yli::datatypes::AnyValue> SettingMaster::read_z(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
-            return nullptr;
-        }
+            if (entity == nullptr)
+            {
+                return nullptr;
+            }
 
-        return std::make_shared<datatypes::AnyValue>(universe->spherical_coordinates->rho);
-    }
+            yli::ontology::Movable* movable = dynamic_cast<yli::ontology::Movable*>(entity);
 
-    std::shared_ptr<datatypes::AnyValue> SettingMaster::read_theta(ontology::Entity* const entity, config::SettingMaster* const setting_master)
-    {
-        if (entity == nullptr)
-        {
-            return nullptr;
-        }
+            if (movable != nullptr)
+            {
+                return std::make_shared<yli::datatypes::AnyValue>(movable->cartesian_coordinates.z);
+            }
 
-        ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
+            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
-        if (universe == nullptr || universe->spherical_coordinates == nullptr)
-        {
-            return nullptr;
-        }
+            if (universe == nullptr)
+            {
+                return nullptr;
+            }
 
-        return std::make_shared<datatypes::AnyValue>(universe->spherical_coordinates->theta);
-    }
+            return std::make_shared<yli::datatypes::AnyValue>(universe->current_camera_cartesian_coordinates.z);
+        }
 
-    std::shared_ptr<datatypes::AnyValue> SettingMaster::read_phi(ontology::Entity* const entity, config::SettingMaster* const setting_master)
-    {
-        if (entity == nullptr)
+        std::shared_ptr<yli::datatypes::AnyValue> SettingMaster::read_rho(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
-            return nullptr;
-        }
+            if (entity == nullptr)
+            {
+                return nullptr;
+            }
 
-        ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
+            yli::ontology::Movable* movable = dynamic_cast<yli::ontology::Movable*>(entity);
 
-        if (universe == nullptr || universe->spherical_coordinates == nullptr)
-        {
-            return nullptr;
-        }
+            if (movable != nullptr)
+            {
+                return std::make_shared<yli::datatypes::AnyValue>(movable->spherical_coordinates.rho);
+            }
 
-        return std::make_shared<datatypes::AnyValue>(universe->spherical_coordinates->phi);
-    }
+            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
-    std::shared_ptr<datatypes::AnyValue> SettingMaster::read_up(ontology::Entity* const entity, config::SettingMaster* const setting_master)
-    {
-        if (entity == nullptr)
-        {
-            return nullptr;
-        }
+            if (universe == nullptr)
+            {
+                return nullptr;
+            }
 
-        ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
+            return std::make_shared<yli::datatypes::AnyValue>(universe->current_camera_spherical_coordinates.rho);
+        }
 
-        if (universe == nullptr)
+        std::shared_ptr<yli::datatypes::AnyValue> SettingMaster::read_theta(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
-            return nullptr;
-        }
+            if (entity == nullptr)
+            {
+                return nullptr;
+            }
 
-        return std::make_shared<datatypes::AnyValue>(&universe->up);
-    }
+            yli::ontology::Movable* movable = dynamic_cast<yli::ontology::Movable*>(entity);
 
-    std::shared_ptr<datatypes::AnyValue> SettingMaster::read_right(ontology::Entity* const entity, config::SettingMaster* const setting_master)
-    {
-        if (entity == nullptr)
-        {
-            return nullptr;
-        }
+            if (movable != nullptr)
+            {
+                return std::make_shared<yli::datatypes::AnyValue>(movable->spherical_coordinates.theta);
+            }
 
-        ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
+            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
-        if (universe == nullptr)
-        {
-            return nullptr;
-        }
+            if (universe == nullptr)
+            {
+                return nullptr;
+            }
 
-        return std::make_shared<datatypes::AnyValue>(&universe->right);
-    }
+            return std::make_shared<yli::datatypes::AnyValue>(universe->current_camera_spherical_coordinates.theta);
+        }
 
-    std::shared_ptr<datatypes::AnyValue> SettingMaster::read_horizontal_angle(ontology::Entity* const entity, config::SettingMaster* const setting_master)
-    {
-        if (entity == nullptr)
+        std::shared_ptr<yli::datatypes::AnyValue> SettingMaster::read_phi(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
-            return nullptr;
-        }
+            if (entity == nullptr)
+            {
+                return nullptr;
+            }
 
-        ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
+            yli::ontology::Movable* movable = dynamic_cast<yli::ontology::Movable*>(entity);
 
-        if (universe == nullptr)
-        {
-            return nullptr;
-        }
+            if (movable != nullptr)
+            {
+                return std::make_shared<yli::datatypes::AnyValue>(movable->spherical_coordinates.phi);
+            }
 
-        return std::make_shared<datatypes::AnyValue>(universe->horizontal_angle);
-    }
+            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
-    std::shared_ptr<datatypes::AnyValue> SettingMaster::read_vertical_angle(ontology::Entity* const entity, config::SettingMaster* const setting_master)
-    {
-        if (entity == nullptr)
-        {
-            return nullptr;
-        }
+            if (universe == nullptr)
+            {
+                return nullptr;
+            }
 
-        ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
+            return std::make_shared<yli::datatypes::AnyValue>(universe->current_camera_spherical_coordinates.phi);
+        }
 
-        if (universe == nullptr)
+        std::shared_ptr<yli::datatypes::AnyValue> SettingMaster::read_up(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
-            return nullptr;
-        }
+            if (entity == nullptr)
+            {
+                return nullptr;
+            }
+
+            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
+
+            if (universe == nullptr)
+            {
+                return nullptr;
+            }
 
-        return std::make_shared<datatypes::AnyValue>(universe->vertical_angle);
-    }
+            return std::make_shared<yli::datatypes::AnyValue>(&universe->current_camera_up);
+        }
 
-    std::shared_ptr<datatypes::AnyValue> SettingMaster::read_is_flight_mode_in_use(ontology::Entity* const entity, config::SettingMaster* const setting_master)
-    {
-        if (entity == nullptr)
+        std::shared_ptr<yli::datatypes::AnyValue> SettingMaster::read_right(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
-            return nullptr;
+            if (entity == nullptr)
+            {
+                return nullptr;
+            }
+
+            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
+
+            if (universe == nullptr)
+            {
+                return nullptr;
+            }
+
+            return std::make_shared<yli::datatypes::AnyValue>(&universe->current_camera_right);
         }
+
+        std::shared_ptr<yli::datatypes::AnyValue> SettingMaster::read_horizontal_angle(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
+        {
+            if (entity == nullptr)
+            {
+                return nullptr;
+            }
+
+            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
+
+            if (universe == nullptr)
+            {
+                return nullptr;
+            }
 
-        ontology::Universe* universe = dynamic_cast<ontology::Universe*>(entity);
+            return std::make_shared<yli::datatypes::AnyValue>(universe->current_camera_horizontal_angle);
+        }
 
-        if (universe == nullptr)
+        std::shared_ptr<yli::datatypes::AnyValue> SettingMaster::read_vertical_angle(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
-            return nullptr;
+            if (entity == nullptr)
+            {
+                return nullptr;
+            }
+
+            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
+
+            if (universe == nullptr)
+            {
+                return nullptr;
+            }
+
+            return std::make_shared<yli::datatypes::AnyValue>(universe->current_camera_vertical_angle);
         }
 
-        return std::make_shared<datatypes::AnyValue>(universe->is_flight_mode_in_use);
+        std::shared_ptr<yli::datatypes::AnyValue> SettingMaster::read_is_flight_mode_in_use(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
+        {
+            if (entity == nullptr)
+            {
+                return nullptr;
+            }
+
+            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
+
+            if (universe == nullptr)
+            {
+                return nullptr;
+            }
+
+            return std::make_shared<yli::datatypes::AnyValue>(universe->is_flight_mode_in_use);
+        }
     }
 }

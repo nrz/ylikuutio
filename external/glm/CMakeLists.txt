@@ -11,42 +11,37 @@ include(CMakePackageConfigHelpers)
 
 enable_testing()
 
-option(GLM_STATIC_LIBRARY_ENABLE "GLM static library" OFF)
-if(GLM_STATIC_LIBRARY_ENABLE)
-	message(STATUS "GLM is a header only library, no need to build it. Set the option GLM_STATIC_LIBRARY_ENABLE with ON to build an optional static library")
-endif()
-
-option(GLM_DYNAMIC_LIBRARY_ENABLE "GLM dynamic library" OFF)
-if(GLM_DYNAMIC_LIBRARY_ENABLE)
-	message(STATUS "GLM is a header only library, no need to build it. Set the option GLM_DYNAMIC_LIBRARY_ENABLE with ON to build an optional dynamic library")
-endif()
-
-option(GLM_TEST_ENABLE "GLM test" OFF)
-if(NOT GLM_TEST_ENABLE)
-	message(STATUS "GLM is a header only library, no need to build it. Set the option GLM_TEST_ENABLE with ON to build and run the test bench")
-endif()
-
 option(GLM_TEST_ENABLE_CXX_98 "Enable C++ 98" OFF)
 option(GLM_TEST_ENABLE_CXX_11 "Enable C++ 11" OFF)
 option(GLM_TEST_ENABLE_CXX_14 "Enable C++ 14" OFF)
 option(GLM_TEST_ENABLE_CXX_17 "Enable C++ 17" OFF)
+option(GLM_TEST_ENABLE_CXX_20 "Enable C++ 20" OFF)
 
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-if(GLM_TEST_ENABLE_CXX_17)
+if(GLM_TEST_ENABLE_CXX_20)
+	set(CMAKE_CXX_STANDARD 20)
+#	add_definitions(-DGLM_FORCE_CXX2A)
+	message(STATUS "GLM: Build with C++20 features")
+
+elseif(GLM_TEST_ENABLE_CXX_17)
 	set(CMAKE_CXX_STANDARD 17)
+#	add_definitions(-DGLM_FORCE_CXX17)
 	message(STATUS "GLM: Build with C++17 features")
 
 elseif(GLM_TEST_ENABLE_CXX_14)
 	set(CMAKE_CXX_STANDARD 14)
+#	add_definitions(-DGLM_FORCE_CXX14)
 	message(STATUS "GLM: Build with C++14 features")
 
 elseif(GLM_TEST_ENABLE_CXX_11)
 	set(CMAKE_CXX_STANDARD 11)
+#	add_definitions(-DGLM_FORCE_CXX11)
 	message(STATUS "GLM: Build with C++11 features")
 
 elseif(GLM_TEST_ENABLE_CXX_98)
 	set(CMAKE_CXX_STANDARD 98)
+#	add_definitions(-DGLM_FORCE_CXX98)
 	message(STATUS "GLM: Build with C++98 features")
 endif()
 
@@ -54,10 +49,18 @@ option(GLM_TEST_ENABLE_LANG_EXTENSIONS "Enable language extensions" OFF)
 
 if(GLM_TEST_ENABLE_LANG_EXTENSIONS)
 	set(CMAKE_CXX_EXTENSIONS ON)
-
+	if((CMAKE_CXX_COMPILER_ID MATCHES "Clang") OR (CMAKE_CXX_COMPILER_ID MATCHES "GNU"))
+		add_compile_options(-fms-extensions)
+	endif()
 	message(STATUS "GLM: Build with C++ language extensions")
 else()
 	set(CMAKE_CXX_EXTENSIONS OFF)
+	if(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
+		add_compile_options(/Za)
+		if(MSVC15)
+			add_compile_options(/permissive-)
+		endif()
+	endif()
 endif()
 
 option(GLM_TEST_ENABLE_FAST_MATH "Enable fast math optimizations" OFF)
@@ -152,7 +155,7 @@ elseif(CMAKE_CXX_COMPILER_ID MATCHES "Intel")
 elseif(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
 	message("GLM: Visual C++ - ${CMAKE_CXX_COMPILER_ID} compiler")
 
-	add_compile_options(/FAs /W4 /WX)
+	add_compile_options(/W4 /WX)
 	add_compile_options(/wd4309 /wd4324 /wd4389 /wd4127 /wd4267 /wd4146 /wd4201 /wd4464 /wd4514 /wd4701 /wd4820 /wd4365)
 	add_definitions(-D_CRT_SECURE_NO_WARNINGS)
 endif()
@@ -162,12 +165,8 @@ include_directories("${PROJECT_SOURCE_DIR}")
 add_subdirectory(glm)
 add_subdirectory(test)
 
-option(GLM_INSTALL_ENABLE "GLM install" ON)
-
 set(GLM_INSTALL_CONFIGDIR "${CMAKE_INSTALL_LIBDIR}/cmake/glm")
-if (GLM_INSTALL_ENABLE)
-	install(DIRECTORY glm DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
-endif()
+install(DIRECTORY glm DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 
 write_basic_package_version_file("${CMAKE_CURRENT_BINARY_DIR}/glmConfigVersion.cmake" VERSION ${GLM_VERSION} COMPATIBILITY AnyNewerVersion)
 
@@ -182,12 +181,10 @@ configure_package_config_file(
 	PATH_VARS CMAKE_INSTALL_INCLUDEDIR
 	NO_CHECK_REQUIRED_COMPONENTS_MACRO)
 
-if(GLM_INSTALL_ENABLE)
-	install(FILES
-		"${CMAKE_CURRENT_BINARY_DIR}/${GLM_INSTALL_CONFIGDIR}/glmConfig.cmake"
-		"${CMAKE_CURRENT_BINARY_DIR}/glmConfigVersion.cmake"
-		DESTINATION ${GLM_INSTALL_CONFIGDIR})
-endif()
+install(FILES
+	"${CMAKE_CURRENT_BINARY_DIR}/${GLM_INSTALL_CONFIGDIR}/glmConfig.cmake"
+	"${CMAKE_CURRENT_BINARY_DIR}/glmConfigVersion.cmake"
+	DESTINATION ${GLM_INSTALL_CONFIGDIR})
 
 add_library(glm INTERFACE)
 target_include_directories(glm INTERFACE
@@ -197,17 +194,13 @@ install(TARGETS glm EXPORT glmTargets)
 
 export(EXPORT glmTargets FILE "${CMAKE_CURRENT_BINARY_DIR}/glmTargets.cmake")
 
-if(GLM_INSTALL_ENABLE)
-	install(EXPORT glmTargets FILE glmTargets.cmake DESTINATION ${GLM_INSTALL_CONFIGDIR})
-endif()
+install(EXPORT glmTargets FILE glmTargets.cmake DESTINATION ${GLM_INSTALL_CONFIGDIR})
 
 # build pkg-config file
 configure_file("./cmake/glm.pc.in" "glm.pc" @ONLY)
 
 # install pkg-config file
-if (GLM_INSTALL_ENABLE)
-	install(FILES "${CMAKE_CURRENT_BINARY_DIR}/glm.pc" DESTINATION "${CMAKE_INSTALL_LIBDIR}/pkgconfig")
-endif()
+install(FILES "${CMAKE_CURRENT_BINARY_DIR}/glm.pc" DESTINATION "${CMAKE_INSTALL_LIBDIR}/pkgconfig")
 
 export(PACKAGE glm)
 

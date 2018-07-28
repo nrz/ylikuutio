@@ -15,7 +15,7 @@
 // Include standard headers
 #include <iostream> // std::cout, std::cin, std::cerr
 
-namespace ylikuutio
+namespace yli
 {
     namespace opengl
     {
@@ -33,12 +33,12 @@ namespace ylikuutio
             return true;
         }
 
-        GLFWwindow* create_window(int window_width, int window_height, const char* title, GLFWmonitor* monitor, GLFWwindow* share)
+        GLFWwindow* create_window(const int window_width, const int window_height, const char* const title, GLFWmonitor* const monitor, GLFWwindow* const share)
         {
             return glfwCreateWindow(window_width, window_height, title, monitor, share);
         }
 
-        void make_context_current(GLFWwindow* window)
+        void make_context_current(GLFWwindow* const window)
         {
             glfwMakeContextCurrent(window);
         }
@@ -59,19 +59,25 @@ namespace ylikuutio
             glEnable(GL_DEPTH_TEST);
         }
 
+        void disable_depth_test()
+        {
+            // Disable depth test.
+            glDisable(GL_DEPTH_TEST);
+        }
+
         void set_depth_func_to_less()
         {
-            // Accept fragment if it closer to the camera than the former one.
+            // Accept a fragment if it closer to the camera than the former one.
             glDepthFunc(GL_LESS);
         }
 
         void cull_triangles()
         {
-            // Cull triangles which normal is not towards the camera.
+            // Cull triangles whose normal is not towards the camera.
             glEnable(GL_CULL_FACE);
         }
 
-        void set_background_color(float red, float green, float blue, float alpha)
+        void set_background_color(const float red, const float green, const float blue, const float alpha)
         {
             glClearColor(
                     static_cast<GLclampf>(red),
@@ -80,7 +86,7 @@ namespace ylikuutio
                     static_cast<GLclampf>(alpha));
         }
 
-        void set_wireframe(bool wireframe)
+        void set_wireframe(const bool wireframe)
         {
             if (wireframe)
             {

@@ -10,7 +10,7 @@
 /// @ingroup gtx
 ///
 /// Include <glm/gtx/io.hpp> to use the features of this extension.
-/// 
+///
 /// std::[w]ostream support for glm types
 ///
 /// std::[w]ostream support for glm types + qualifier/width/etc. manipulators
@@ -27,7 +27,7 @@
 #	error "GLM: GLM_GTX_io is an experimental extension and may change in the future. Use #define GLM_ENABLE_EXPERIMENTAL before including it, if you really want to use it."
 #endif
 
-#if GLM_MESSAGES == GLM_MESSAGES_ENABLED && !defined(GLM_EXT_INCLUDED)
+#if GLM_MESSAGES == GLM_ENABLE && !defined(GLM_EXT_INCLUDED)
 # pragma message("GLM: GLM_GTX_io extension included")
 #endif
 

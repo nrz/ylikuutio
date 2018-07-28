@@ -7,24 +7,22 @@
 #include <memory>   // std::make_shared, std::shared_ptr
 #include <vector>   // std::vector
 
-namespace callback_system
+namespace yli
 {
-    class CallbackEngine;
-    class CallbackObject;
-    class CallbackParameter;
+    namespace callback_system
+    {
+        class CallbackEngine;
+        class CallbackObject;
+        class CallbackParameter;
+    }
 }
 
 namespace ajokki
 {
-    std::shared_ptr<datatypes::AnyValue> glfwTerminate_cleanup(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject*,
-            std::vector<callback_system::CallbackParameter*>& input_parameters);
-
-    std::shared_ptr<datatypes::AnyValue> full_cleanup(
-            callback_system::CallbackEngine*,
-            callback_system::CallbackObject* callback_object,
-            std::vector<callback_system::CallbackParameter*>&);
+    std::shared_ptr<yli::datatypes::AnyValue> full_cleanup(
+            yli::callback_system::CallbackEngine*,
+            yli::callback_system::CallbackObject* callback_object,
+            std::vector<yli::callback_system::CallbackParameter*>&);
 }
 
 #endif

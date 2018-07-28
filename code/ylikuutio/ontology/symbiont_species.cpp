@@ -4,6 +4,7 @@
 #include "scene.hpp"
 #include "shader.hpp"
 #include "symbiont_material.hpp"
+#include "biont.hpp"
 #include "object.hpp"
 #include "species_or_glyph.hpp"
 #include "render_templates.hpp"
@@ -16,51 +17,87 @@
 #endif
 
 // Include standard headers
+#include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
-#include <stdint.h> // uint32_t etc.
 
-namespace ontology
+namespace yli
 {
-    void SymbiontSpecies::bind_to_parent()
+    namespace ontology
     {
-        // get `childID` from `SymbiontMaterial` and set pointer to this `SymbiontSpecies`.
-        hierarchy::bind_child_to_parent<ontology::SymbiontSpecies*>(this, this->parent->symbiont_species_pointer_vector, this->parent->free_symbiont_speciesID_queue, &this->parent->number_of_symbiont_species);
-    }
+        void SymbiontSpecies::bind_biont(yli::ontology::Biont* const biont)
+        {
+            // `SymbiontSpecies` is not the ontological parent of `Biont`,
+            // as `Holobiont` is the ontological parent of `Biont`.
+            // The relationship between `SymbiontSpecies` and `Biont`
+            // is purely only for rendering.
+            //
+            // To avoid potential problems in the future, follow this order:
+            // 1. bind `Biont` to its `Holobiont` parent.
+            // 2. bind `Biont` to its corresponding `SymbiontSpecies`.
+            // 3. do stuff
+            // 4. unbind `Biont` from its `SymbiontSpecies`.
+            // 5. unbind `Biont` from its `Holobiont` parent.
+            //
+            // get `childID` from `SymbiontSpecies` and set pointer to `biont`.
+            yli::hierarchy::bind_child_to_parent<yli::ontology::Biont*>(
+                    biont,
+                    this->biont_pointer_vector,
+                    this->free_biontID_queue,
+                    &this->number_of_bionts);
+        }
 
-    SymbiontSpecies::~SymbiontSpecies()
-    {
-        // destructor.
-        std::cout << "SymbiontSpecies with childID " << std::dec << this->childID << " will be destroyed.\n";
+        void SymbiontSpecies::unbind_biont(const std::size_t childID)
+        {
+            yli::ontology::Biont* dummy_child_pointer = nullptr;
+            yli::hierarchy::set_child_pointer(
+                    childID,
+                    dummy_child_pointer,
+                    this->biont_pointer_vector,
+                    this->free_biontID_queue,
+                    &this->number_of_bionts);
+        }
 
-        glDeleteBuffers(1, &this->normalbuffer);
-        glDeleteBuffers(1, &this->elementbuffer);
+        void SymbiontSpecies::bind_to_parent()
+        {
+            // get `childID` from `SymbiontMaterial` and set pointer to this `SymbiontSpecies`.
+            this->symbiont_material_parent->bind(this);
+        }
 
-        // set pointer to this symbiont_species to nullptr.
-        this->parent->set_symbiont_species_pointer(this->childID, nullptr);
-    }
+        SymbiontSpecies::~SymbiontSpecies()
+        {
+            // destructor.
+            std::cout << "SymbiontSpecies with childID " << std::dec << this->childID << " will be destroyed.\n";
 
-    void SymbiontSpecies::render()
-    {
-        this->prerender();
+            glDeleteBuffers(1, &this->normalbuffer);
+            glDeleteBuffers(1, &this->elementbuffer);
 
-        // render this `SymbiontSpecies`.
-        ontology::render_species_or_glyph<ontology::SymbiontSpecies*>(this);
+            // set pointer to this `SymbiontSpecies` to `nullptr`.
+            this->symbiont_material_parent->set_symbiont_species_pointer(this->childID, nullptr);
+        }
 
-        this->postrender();
-    }
+        void SymbiontSpecies::render()
+        {
+            this->prerender();
 
-    ontology::Entity* SymbiontSpecies::get_parent() const
-    {
-        return this->parent;
-    }
+            // render this `SymbiontSpecies`.
+            yli::ontology::render_species_or_glyph<yli::ontology::SymbiontSpecies*>(this);
 
-    void SymbiontSpecies::set_object_pointer(const int32_t childID, ontology::Object* const child_pointer)
-    {
-        hierarchy::set_child_pointer(childID, child_pointer, this->object_pointer_vector, this->free_objectID_queue, &this->number_of_objects);
-    }
+            this->postrender();
+        }
 
-    void SymbiontSpecies::set_name(const std::string& name)
-    {
-        ontology::set_name(name, this);
+        yli::ontology::Entity* SymbiontSpecies::get_parent() const
+        {
+            return this->symbiont_material_parent;
+        }
+
+        std::size_t SymbiontSpecies::get_indices_size() const
+        {
+            return this->indices.size();
+        }
+
+        GLuint SymbiontSpecies::get_lightID() const
+        {
+            return this->lightID;
+        }
     }
 }

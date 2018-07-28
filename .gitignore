@@ -4,32 +4,5 @@
 # Build directories.
 /build*/
 
-# These are needed because GDAL/OGR 2.1.1 is built in-source:
-
-# Ignore some build configuration files etc.
-/external/gdal-2.1.1/GDALmake.opt
-/external/gdal-2.1.1/config.log
-/external/gdal-2.1.1/config.status
-/external/gdal-2.1.1/gdal.pc
-/external/gdal-2.1.1/libtool
-/external/gdal-2.1.1/port/cpl_config.h
-
-# Ignore all object files and binaries in all `/external/gdal-2.1.1/` subdirectories.
-/external/gdal-2.1.1/**/*.a
-/external/gdal-2.1.1/**/*.la
-/external/gdal-2.1.1/**/*.lai
-/external/gdal-2.1.1/**/*.o
-/external/gdal-2.1.1/**/*.lo
-/external/gdal-2.1.1/**/*.so
-/external/gdal-2.1.1/**/*.so.20
-/external/gdal-2.1.1/**/*.so.20.1.1
-
-# Keep only `*.cpp`, `*.hpp`, *.h`in `/external/gdal-2.1.1/apps/`.
-/external/gdal-2.1.1/apps/*
-!/external/gdal-2.1.1/apps/*.cpp
-!/external/gdal-2.1.1/apps/*.hpp
-!/external/gdal-2.1.1/apps/*.h
-
-# Ignore generated `*.c` & `*.h` in `/external/gdal-2.1.1/frmts/jpeg/libjpeg12/` directory.
-/external/gdal-2.1.1/frmts/jpeg/libjpeg12/*.c
-/external/gdal-2.1.1/frmts/jpeg/libjpeg12/*.h
+# Vim swap files.
+.*.swp

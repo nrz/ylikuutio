@@ -1,6 +1,7 @@
 #include <glm/gtc/quaternion.hpp>
-#include <glm/gtc/epsilon.hpp>
-#include <glm/vector_relational.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/ext/vector_relational.hpp>
+#include <glm/glm.hpp>
 #include <vector>
 
 int test_quat_angle()
@@ -202,7 +203,7 @@ int test_quat_slerp()
 
 int test_quat_mul()
 {
-	int Error(0);
+	int Error = 0;
 
 	glm::quat temp1 = glm::normalize(glm::quat(1.0f, glm::vec3(0.0, 1.0, 0.0)));
 	glm::quat temp2 = glm::normalize(glm::quat(0.5f, glm::vec3(1.0, 0.0, 0.0)));
@@ -307,6 +308,36 @@ int test_size()
 	return Error;
 }
 
+static int test_constexpr()
+{
+#if GLM_HAS_CONSTEXPR
+	static_assert(glm::quat::length() == 4, "GLM: Failed constexpr");
+	static_assert(glm::quat(1.0f, glm::vec3(0.0f)).w > 0.0f, "GLM: Failed constexpr");
+#endif
+
+	return 0;
+}
+
+int test_identity()
+{
+	int Error = 0;
+
+	glm::quat const Q = glm::identity<glm::quat>();
+
+	Error += glm::all(glm::equal(Q, glm::quat(1, 0, 0, 0), 0.0001f)) ? 0 : 1;
+	Error += glm::any(glm::notEqual(Q, glm::quat(1, 0, 0, 0), 0.0001f)) ? 1 : 0;
+
+	glm::mat4 const M = glm::identity<glm::mat4x4>();
+	glm::mat4 const N(1.0f);
+
+	Error += glm::all(glm::equal(M[0], N[0], 0.0001f)) ? 0 : 1;
+	Error += glm::all(glm::equal(M[1], N[1], 0.0001f)) ? 0 : 1;
+	Error += glm::all(glm::equal(M[2], N[2], 0.0001f)) ? 0 : 1;
+	Error += glm::all(glm::equal(M[3], N[3], 0.0001f)) ? 0 : 1;
+
+	return Error;
+}
+
 int main()
 {
 	int Error = 0;
@@ -323,6 +354,8 @@ int main()
 	Error += test_quat_euler();
 	Error += test_quat_slerp();
 	Error += test_size();
+	Error += test_constexpr();
+	Error += test_identity();
 
 	return Error;
 }

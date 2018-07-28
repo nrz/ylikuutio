@@ -4,13 +4,18 @@
 #include "../trigonometric.hpp"
 #include "../geometric.hpp"
 #include "../exponential.hpp"
-#include "../detail/compute_vector_relational.hpp"
 #include "epsilon.hpp"
 #include <limits>
 
 namespace glm{
 namespace detail
 {
+	template <typename T>
+	struct genTypeTrait<tquat<T> >
+	{
+		static const genTypeEnum GENTYPE = GENTYPE_QUAT;
+	};
+
 	template<typename T, qualifier Q, bool Aligned>
 	struct compute_dot<tquat<T, Q>, T, Aligned>
 	{
@@ -85,18 +90,19 @@ namespace detail
 
 	// -- Implicit basic constructors --
 
-#	if !GLM_HAS_DEFAULTED_FUNCTIONS
+#	if GLM_USE_DEFAULTED_FUNCTIONS == GLM_DISABLE
 		template<typename T, qualifier Q>
 		GLM_FUNC_QUALIFIER GLM_CONSTEXPR tquat<T, Q>::tquat()
+#			if GLM_USE_DEFAULTED_FUNCTIONS != GLM_DISABLE
+			: x(0), y(0), z(0), w(1)
+#			endif
 		{}
-#	endif
 
-#	if !GLM_HAS_DEFAULTED_FUNCTIONS
 		template<typename T, qualifier Q>
 		GLM_FUNC_QUALIFIER GLM_CONSTEXPR tquat<T, Q>::tquat(tquat<T, Q> const& q)
 			: x(q.x), y(q.y), z(q.z), w(q.w)
 		{}
-#	endif//!GLM_HAS_DEFAULTED_FUNCTIONS
+#	endif
 
 	template<typename T, qualifier Q>
 	template<qualifier P>
@@ -127,7 +133,7 @@ namespace detail
 		, w(static_cast<T>(q.w))
 	{}
 
-	//template<typename valType> 
+	//template<typename valType>
 	//GLM_FUNC_QUALIFIER tquat<valType>::tquat
 	//(
 	//	valType const& pitch,
@@ -138,7 +144,7 @@ namespace detail
 	//	vec<3, valType> eulerAngle(pitch * valType(0.5), yaw * valType(0.5), roll * valType(0.5));
 	//	vec<3, valType> c = glm::cos(eulerAngle * valType(0.5));
 	//	vec<3, valType> s = glm::sin(eulerAngle * valType(0.5));
-	//	
+	//
 	//	this->w = c.x * c.y * c.z + s.x * s.y * s.z;
 	//	this->x = s.x * c.y * c.z - c.x * s.y * s.z;
 	//	this->y = c.x * s.y * c.z + s.x * c.y * s.z;
@@ -174,7 +180,7 @@ namespace detail
 	{
 		vec<3, T, Q> c = glm::cos(eulerAngle * T(0.5));
 		vec<3, T, Q> s = glm::sin(eulerAngle * T(0.5));
-		
+
 		this->w = c.x * c.y * c.z + s.x * s.y * s.z;
 		this->x = s.x * c.y * c.z - c.x * s.y * s.z;
 		this->y = c.x * s.y * c.z + s.x * c.y * s.z;
@@ -199,8 +205,8 @@ namespace detail
 	{
 		return mat3_cast(*this);
 	}
-	
-	template<typename T, qualifier Q>	
+
+	template<typename T, qualifier Q>
 	GLM_FUNC_QUALIFIER tquat<T, Q>::operator mat<4, 4, T, Q>()
 	{
 		return mat4_cast(*this);
@@ -221,7 +227,7 @@ namespace detail
 
 	// -- Unary arithmetic operators --
 
-#	if !GLM_HAS_DEFAULTED_FUNCTIONS
+#	if GLM_USE_DEFAULTED_FUNCTIONS == GLM_DISABLE
 		template<typename T, qualifier Q>
 		GLM_FUNC_QUALIFIER tquat<T, Q> & tquat<T, Q>::operator=(tquat<T, Q> const& q)
 		{
@@ -231,7 +237,7 @@ namespace detail
 			this->z = q.z;
 			return *this;
 		}
-#	endif//!GLM_HAS_DEFAULTED_FUNCTIONS
+#	endif
 
 	template<typename T, qualifier Q>
 	template<typename U>
@@ -306,6 +312,12 @@ namespace detail
 	GLM_FUNC_QUALIFIER tquat<T, Q> operator+(tquat<T, Q> const& q, tquat<T, Q> const& p)
 	{
 		return tquat<T, Q>(q) += p;
+	}
+
+	template<typename T, qualifier Q>
+	GLM_FUNC_QUALIFIER tquat<T, Q> operator-(tquat<T, Q> const& q, tquat<T, Q> const& p)
+	{
+		return tquat<T, Q>(q) -= p;
 	}
 
 	template<typename T, qualifier Q>
@@ -452,8 +464,8 @@ namespace detail
 	template<typename T, qualifier Q>
 	GLM_FUNC_QUALIFIER tquat<T, Q> mix2
 	(
-		tquat<T, Q> const& x, 
-		tquat<T, Q> const& y, 
+		tquat<T, Q> const& x,
+		tquat<T, Q> const& y,
 		T const& a
 	)
 	{
@@ -482,7 +494,7 @@ namespace detail
 
 		if(flip)
 			alpha = -alpha;
-		
+
 		return normalize(beta * x + alpha * y);
 	}
 */
@@ -527,7 +539,7 @@ namespace detail
 
 		T cosTheta = dot(x, y);
 
-		// If cosTheta < 0, the interpolation will take the long way around the sphere. 
+		// If cosTheta < 0, the interpolation will take the long way around the sphere.
 		// To fix this, one quat must be negated.
 		if (cosTheta < T(0))
 		{
@@ -594,7 +606,7 @@ namespace detail
 		const T y = static_cast<T>(2) * (q.y * q.z + q.w * q.x);
 		const T x = q.w * q.w - q.x * q.x - q.y * q.y + q.z * q.z;
 
-		if(detail::compute_equal<T>::call(y, static_cast<T>(0)) && detail::compute_equal<T>::call(x, static_cast<T>(0))) //avoid atan2(0,0) - handle singularity - Matiis
+		if(detail::compute_equal<T, std::numeric_limits<T>::is_iec559>::call(y, static_cast<T>(0)) && detail::compute_equal<T, std::numeric_limits<T>::is_iec559>::call(x, static_cast<T>(0))) //avoid atan2(0,0) - handle singularity - Matiis
 			return static_cast<T>(static_cast<T>(2) * atan(q.x,q.w));
 
 		return static_cast<T>(atan(y,x));
@@ -763,8 +775,15 @@ namespace detail
 	{
 		vec<4, bool, Q> Result;
 		for(length_t i = 0; i < x.length(); ++i)
-			Result[i] = detail::compute_equal<T>::call(x[i], y[i]);
+			Result[i] = detail::compute_equal<T, std::numeric_limits<T>::is_iec559>::call(x[i], y[i]);
 		return Result;
+	}
+
+	template<typename T, qualifier Q>
+	GLM_FUNC_QUALIFIER vec<4, bool, Q> equal(tquat<T, Q> const& x, tquat<T, Q> const& y, T epsilon)
+	{
+		vec<4, T, Q> v(x.x - y.x, x.y - y.y, x.z - y.z, x.w - y.w);
+		return lessThan(abs(v), vec<4, T, Q>(epsilon));
 	}
 
 	template<typename T, qualifier Q>
@@ -772,8 +791,15 @@ namespace detail
 	{
 		vec<4, bool, Q> Result;
 		for(length_t i = 0; i < x.length(); ++i)
-			Result[i] = !detail::compute_equal<T>::call(x[i], y[i]);
+			Result[i] = !detail::compute_equal<T, std::numeric_limits<T>::is_iec559>::call(x[i], y[i]);
 		return Result;
+	}
+
+	template<typename T, qualifier Q>
+	GLM_FUNC_QUALIFIER vec<4, bool, Q> notEqual(tquat<T, Q> const& x, tquat<T, Q> const& y, T epsilon)
+	{
+		vec<4, T, Q> v(x.x - y.x, x.y - y.y, x.z - y.z, x.w - y.w);
+		return greaterThanEqual(abs(v), vec<4, T, Q>(epsilon));
 	}
 
 	template<typename T, qualifier Q>
@@ -793,7 +819,7 @@ namespace detail
 	}
 }//namespace glm
 
-#if GLM_ARCH != GLM_ARCH_PURE && GLM_HAS_ALIGNED_TYPE
+#if GLM_USE_SIMD == GLM_ENABLE
 #	include "quaternion_simd.inl"
 #endif
 

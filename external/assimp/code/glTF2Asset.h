@@ -2,7 +2,8 @@
 Open Asset Import Library (assimp)
 ----------------------------------------------------------------------
 
-Copyright (c) 2006-2017, assimp team
+Copyright (c) 2006-2018, assimp team
+
 
 All rights reserved.
 
@@ -44,6 +45,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  * glTF Extensions Support:
  *   KHR_materials_pbrSpecularGlossiness full
+ *   KHR_materials_unlit full
  */
 #ifndef GLTF2ASSET_H_INC
 #define GLTF2ASSET_H_INC
@@ -65,7 +67,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifdef ASSIMP_API
 #   include <memory>
 #   include <assimp/DefaultIOSystem.h>
-#   include "ByteSwapper.h"
+#   include <assimp/ByteSwapper.h>
 #else
 #   include <memory>
 #   define AI_SWAP4(p)
@@ -87,6 +89,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #       define gltf_unordered_map tr1::unordered_map
 #   endif
 #endif
+
+#include <assimp/StringUtils.h>
 
 namespace glTF2
 {
@@ -134,7 +138,7 @@ namespace glTF2
     // Vec/matrix types, as raw float arrays
     typedef float (vec3)[3];
     typedef float (vec4)[4];
-	typedef float (mat4)[16];
+    typedef float (mat4)[16];
 
     namespace Util
     {
@@ -163,44 +167,37 @@ namespace glTF2
 
     //! Magic number for GLB files
 	#define AI_GLB_MAGIC_NUMBER "glTF"
-
-	#define AI_MATKEY_GLTF_PBRMETALLICROUGHNESS_METALLIC_FACTOR "$mat.gltf.pbrMetallicRoughness.metallicFactor", 0, 0
-	#define AI_MATKEY_GLTF_PBRMETALLICROUGHNESS_ROUGHNESS_FACTOR "$mat.gltf.pbrMetallicRoughness.roughnessFactor", 0, 0
-	#define AI_MATKEY_GLTF_PBRMETALLICROUGHNESS_METALLICROUGHNESS_TEXTURE aiTextureType_UNKNOWN, 0
-	#define AI_MATKEY_GLTF_ALPHAMODE "$mat.gltf.alphaMode", 0, 0
-	#define AI_MATKEY_GLTF_ALPHACUTOFF "$mat.gltf.alphaCutoff", 0, 0
-	#define AI_MATKEY_GLTF_PBRSPECULARGLOSSINESS "$mat.gltf.pbrSpecularGlossiness", 0, 0
-	#define AI_MATKEY_GLTF_PBRSPECULARGLOSSINESS_DIFFUSE_FACTOR "$clr.diffuse", 0, 1
-	#define AI_MATKEY_GLTF_PBRSPECULARGLOSSINESS_SPECULAR_FACTOR "$clr.specular", 0, 1
-	#define AI_MATKEY_GLTF_PBRSPECULARGLOSSINESS_GLOSSINESS_FACTOR "$mat.gltf.pbrMetallicRoughness.glossinessFactor", 0, 0
-	#define AI_MATKEY_GLTF_PBRSPECULARGLOSSINESS_DIFFUSE_TEXTURE aiTextureType_DIFFUSE, 1
-	#define AI_MATKEY_GLTF_PBRSPECULARGLOSSINESS_SPECULARGLOSSINESS_TEXTURE aiTextureType_UNKNOWN, 1
-
-	#define _AI_MATKEY_GLTF_TEXTURE_TEXCOORD_BASE "$tex.file.texCoord"
-	#define _AI_MATKEY_GLTF_MAPPINGNAME_BASE "$tex.mappingname"
-	#define _AI_MATKEY_GLTF_MAPPINGID_BASE "$tex.mappingid"
-	#define _AI_MATKEY_GLTF_MAPPINGFILTER_MAG_BASE "$tex.mappingfiltermag"
-	#define _AI_MATKEY_GLTF_MAPPINGFILTER_MIN_BASE "$tex.mappingfiltermin"
-
-	#define AI_MATKEY_GLTF_TEXTURE_TEXCOORD _AI_MATKEY_GLTF_TEXTURE_TEXCOORD_BASE, type, N
-	#define AI_MATKEY_GLTF_MAPPINGNAME(type, N) _AI_MATKEY_GLTF_MAPPINGNAME_BASE, type, N
-	#define AI_MATKEY_GLTF_MAPPINGID(type, N) _AI_MATKEY_GLTF_MAPPINGID_BASE, type, N
-	#define AI_MATKEY_GLTF_MAPPINGFILTER_MAG(type, N) _AI_MATKEY_GLTF_MAPPINGFILTER_MAG_BASE, type, N
-	#define AI_MATKEY_GLTF_MAPPINGFILTER_MIN(type, N) _AI_MATKEY_GLTF_MAPPINGFILTER_MIN_BASE, type, N
+	#include <assimp/pbrmaterial.h>
 
     #ifdef ASSIMP_API
         #include "./../include/assimp/Compiler/pushpack1.h"
     #endif
+
+    //! For binary .glb files
+    //! 12-byte header (+ the JSON + a "body" data section)
+    struct GLB_Header
+    {
+        uint8_t magic[4];     //!< Magic number: "glTF"
+        uint32_t version;     //!< Version number (always 2 as of the last update)
+        uint32_t length;      //!< Total length of the Binary glTF, including header, scene, and body, in bytes
+    } PACK_STRUCT;
+
+    struct GLB_Chunk
+    {
+        uint32_t chunkLength;
+        uint32_t chunkType;
+    } PACK_STRUCT;
 
     #ifdef ASSIMP_API
         #include "./../include/assimp/Compiler/poppack1.h"
     #endif
 
 
-    //! Values for the GLB_Header::sceneFormat field
-    enum SceneFormat
+    //! Values for the GLB_Chunk::chunkType field
+    enum ChunkType
     {
-        SceneFormat_JSON = 0
+        ChunkType_JSON = 0x4E4F534A,
+        ChunkType_BIN  = 0x004E4942
     };
 
     //! Values for the mesh primitive modes
@@ -241,7 +238,7 @@ namespace glTF2
             case ComponentType_UNSIGNED_BYTE:
                 return 1;
             default:
-                throw DeadlyImportError("GLTF: Unsupported Component Type " + std::to_string(t));
+                throw DeadlyImportError("GLTF: Unsupported Component Type " + to_string(t));
         }
     }
 
@@ -390,7 +387,7 @@ namespace glTF2
     };
 
 
-    //! Base classe for all glTF top-level objects
+    //! Base class for all glTF top-level objects
     struct Object
     {
         int index;        //!< The index of this object within its property container
@@ -405,7 +402,7 @@ namespace glTF2
         virtual ~Object() {}
 
         //! Maps special IDs to another ID, where needed. Subclasses may override it (statically)
-        static const char* TranslateId(Asset& r, const char* id)
+        static const char* TranslateId(Asset& /*r*/, const char* id)
             { return id; }
     };
 
@@ -420,7 +417,6 @@ namespace glTF2
     {
         Ref<BufferView> bufferView;  //!< The ID of the bufferView. (required)
         unsigned int byteOffset;     //!< The offset relative to the start of the bufferView in bytes. (required)
-        unsigned int byteStride;     //!< The stride, in bytes, between attributes referenced by this accessor. (default: 0)
         ComponentType componentType; //!< The datatype of components in the attribute. (required)
         unsigned int count;          //!< The number of attributes referenced by this accessor. (required)
         AttribType::Value type;      //!< Specifies if the attribute is a scalar, vector, or matrix. (required)
@@ -586,6 +582,7 @@ namespace glTF2
 		/// \param [in] pReplace_Count - count of bytes in new data.
 		/// \return true - if successfully replaced, false if input arguments is out of range.
 		bool ReplaceData(const size_t pBufferData_Offset, const size_t pBufferData_Count, const uint8_t* pReplace_Data, const size_t pReplace_Count);
+		bool ReplaceData_joint(const size_t pBufferData_Offset, const size_t pBufferData_Count, const uint8_t* pReplace_Data, const size_t pReplace_Count);
 
         size_t AppendData(uint8_t* data, size_t length);
         void Grow(size_t amount);
@@ -611,6 +608,7 @@ namespace glTF2
         Ref<Buffer> buffer; //! The ID of the buffer. (required)
         size_t byteOffset; //! The offset into the buffer in bytes. (required)
         size_t byteLength; //! The length of the bufferView in bytes. (default: 0)
+        unsigned int byteStride; //!< The stride, in bytes, between attributes referenced by this accessor. (default: 0)
 
         BufferViewTarget target; //! The target that the WebGL buffer should be bound to.
 
@@ -744,6 +742,9 @@ namespace glTF2
         //extension: KHR_materials_pbrSpecularGlossiness
         Nullable<PbrSpecularGlossiness> pbrSpecularGlossiness;
 
+        //extension: KHR_materials_unlit 
+        bool unlit;
+
         Material() { SetDefaults(); }
         void Read(Value& obj, Asset& r);
         void SetDefaults();
@@ -759,15 +760,22 @@ namespace glTF2
             PrimitiveMode mode;
 
             struct Attributes {
-                AccessorList position, normal, texcoord, color, joint, jointmatrix, weight;
+                AccessorList position, normal, tangent, texcoord, color, joint, jointmatrix, weight;
             } attributes;
 
             Ref<Accessor> indices;
 
             Ref<Material> material;
+
+            struct Target {
+                AccessorList position, normal, tangent;
+            };
+            std::vector<Target> targets;
         };
 
         std::vector<Primitive> primitives;
+
+        std::vector<float> weights;
 
         Mesh() {}
 
@@ -973,6 +981,8 @@ namespace glTF2
         Ref<T> Create(const std::string& id)
             { return Create(id.c_str()); }
 
+        unsigned int Remove(const char* id);
+
         inline unsigned int Size() const
             { return unsigned(mObjs.size()); }
 
@@ -1038,6 +1048,7 @@ namespace glTF2
         struct Extensions
         {
             bool KHR_materials_pbrSpecularGlossiness;
+            bool KHR_materials_unlit;
 
         } extensionsUsed;
 
@@ -1084,7 +1095,10 @@ namespace glTF2
         }
 
         //! Main function
-        void Load(const std::string& file);
+        void Load(const std::string& file, bool isBinary = false);
+
+        //! Enables binary encoding on the asset
+        void SetAsBinary();
 
         //! Search for an available name, starting from the given strings
         std::string FindUniqueID(const std::string& str, const char* suffix);
@@ -1093,6 +1107,8 @@ namespace glTF2
             { return mBodyBuffer; }
 
     private:
+        void ReadBinaryHeader(IOStream& stream, std::vector<char>& sceneData);
+
         void ReadExtensionsUsed(Document& doc);
 
         IOStream* OpenFile(std::string path, const char* mode, bool absolute = false);

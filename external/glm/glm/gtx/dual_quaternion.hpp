@@ -24,7 +24,7 @@
 #	error "GLM: GLM_GTX_dual_quaternion is an experimental extension and may change in the future. Use #define GLM_ENABLE_EXPERIMENTAL before including it, if you really want to use it."
 #endif
 
-#if GLM_MESSAGES == GLM_MESSAGES_ENABLED && !defined(GLM_EXT_INCLUDED)
+#if GLM_MESSAGES == GLM_ENABLE && !defined(GLM_EXT_INCLUDED)
 #	pragma message("GLM: GLM_GTX_dual_quaternion extension included")
 #endif
 
@@ -72,8 +72,8 @@ namespace glm
 		template<typename U, qualifier P>
 		GLM_FUNC_DECL GLM_CONSTEXPR GLM_EXPLICIT tdualquat(tdualquat<U, P> const& q);
 
-		GLM_FUNC_DECL GLM_EXPLICIT tdualquat(mat<2, 4, T, Q> const& holder_mat);
-		GLM_FUNC_DECL GLM_EXPLICIT tdualquat(mat<3, 4, T, Q> const& aug_mat);
+		GLM_FUNC_DECL GLM_EXPLICIT GLM_CONSTEXPR tdualquat(mat<2, 4, T, Q> const& holder_mat);
+		GLM_FUNC_DECL GLM_EXPLICIT GLM_CONSTEXPR tdualquat(mat<3, 4, T, Q> const& aug_mat);
 
 		// -- Unary arithmetic operators --
 

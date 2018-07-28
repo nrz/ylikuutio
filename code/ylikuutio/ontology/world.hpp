@@ -2,76 +2,79 @@
 #define __WORLD_HPP_INCLUDED
 
 #include "entity.hpp"
-#include "code/ylikuutio/config/setting_master.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include standard headers
+#include <cstddef>  // std::size_t
 #include <queue>    // std::queue
-#include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
 
 // `World` is just a collection of `Scene`s which share some common resources,
 // like `VectorFont`s.
 
-namespace ontology
+namespace yli
 {
-    class Universe;
-    class Scene;
-
-    class World: public ontology::Entity
+    namespace ontology
     {
-        public:
-            // constructor.
-            World(ontology::Universe* const universe)
-                : Entity(universe)
-            {
-                this->universe = universe;
-                this->parent = universe;
+        class Universe;
+        class Scene;
 
-                this->number_of_scenes = 0;
+        class World: public yli::ontology::Entity
+        {
+            public:
+                void bind(yli::ontology::Scene* const scene);
 
-                // get `childID` from `Universe` and set pointer to this `World`.
-                this->bind_to_parent();
+                // constructor.
+                World(yli::ontology::Universe* const universe)
+                    : Entity(universe)
+                {
+                    this->parent = universe;
+                    this->active_scene = nullptr;
 
-                this->child_vector_pointers_vector.push_back(&this->scene_pointer_vector);
-                this->type = "ontology::World*";
-            }
+                    this->number_of_scenes = 0;
 
-            // destructor.
-            virtual ~World();
+                    // get `childID` from `Universe` and set pointer to this `World`.
+                    this->bind_to_parent();
 
-            // this method renders the active `Scene` of this `World`.
-            void render();
+                    this->child_vector_pointers_vector.push_back(&this->scene_pointer_vector);
+                    this->type = "yli::ontology::World*";
 
-            // this method stes the active `Scene`.
-            void set_active_scene(ontology::Scene* scene);
+                    this->can_be_erased = true;
+                }
 
-            ontology::Scene* get_active_scene() const;
+                // destructor.
+                virtual ~World();
 
-            ontology::Entity* get_parent() const override;
-            int32_t get_number_of_children() const override;
-            int32_t get_number_of_descendants() const override;
+                // this method renders the active `Scene` of this `World`.
+                void render();
 
-            friend class Universe;
-            friend class Scene;
-            friend class Shader;
-            template<class T1>
-                friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, int32_t* number_of_children);
+                // this method stes the active `Scene`.
+                void set_active_scene(yli::ontology::Scene* const scene);
 
-        private:
-            void bind_to_parent();
+                yli::ontology::Scene* get_active_scene() const;
 
-            // this method sets a `Scene` pointer.
-            void set_scene_pointer(int32_t childID, ontology::Scene* child_pointer);
+                // this method sets a `Scene` pointer.
+                void set_scene_pointer(const std::size_t childID, yli::ontology::Scene* const child_pointer);
 
-            ontology::Universe* parent; // pointer to the `Universe`.
+                yli::ontology::Entity* get_parent() const override;
+                std::size_t get_number_of_children() const override;
+                std::size_t get_number_of_descendants() const override;
 
-            std::vector<ontology::Scene*> scene_pointer_vector;
-            std::queue<int32_t> free_sceneID_queue;
-            int32_t number_of_scenes;
+                template<class T1>
+                    friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t* number_of_children);
 
-            ontology::Scene* active_scene;
-    };
+            private:
+                void bind_to_parent();
+
+                yli::ontology::Universe* parent; // pointer to the `Universe`.
+
+                std::vector<yli::ontology::Scene*> scene_pointer_vector;
+                std::queue<std::size_t> free_sceneID_queue;
+                std::size_t number_of_scenes;
+
+                yli::ontology::Scene* active_scene;
+        };
+    }
 }
 
 #endif

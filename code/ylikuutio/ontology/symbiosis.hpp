@@ -1,165 +1,173 @@
 #ifndef __SYMBIOSIS_HPP_INCLUDED
 #define __SYMBIOSIS_HPP_INCLUDED
-// `Symbiosis` consists usually of 2 or more different `Material`s and 2 or more `Species` bound to these `Material`s.
-// Symbiont `Species` use the same `Shader`. In the future, a new class `ShaderSymbiosis` may be crated should need for such class arise.
-// `ShaderSymbiosis` is like `Symbiosis`, but it contains also `Shader`s in addition to `Material`s and `Species`.
+// `Symbiosis` consists usually of 2 or more different `SymbiontMaterial`s and 2 or more `SymbiontSpecies` bound to these `SymbiontMaterial`s.
+// All `SymbiontSpecies` of the same `Symbiosis` use the same `Shader`.
+//
+// In the future, a new class `ShaderSymbiosis` may be created should need for such class arise.
+// `ShaderSymbiosis` is like `Symbiosis`, but it contains also `SymbiontShader`s in addition to `SymbiontMaterial`s and `SymbiontSpecies`.
 
 #include "entity.hpp"
-#include "symbiont_species.hpp"
 #include "symbiosis_struct.hpp"
-#include "symbiont_species_struct.hpp"
-#include "entity_templates.hpp"
+#include "material_struct.hpp"
+#include "code/ylikuutio/loaders/symbiosis_loader.hpp"
+#include "code/ylikuutio/loaders/symbiosis_loader_struct.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/file/file_loader.hpp"
 #include <ofbx.h>
+
+// Include GLEW
+#ifndef __GL_GLEW_H_INCLUDED
+#define __GL_GLEW_H_INCLUDED
+#include <GL/glew.h> // GLfloat, GLuint etc.
+#endif
+
+// Include GLM
+#ifndef __GLM_GLM_HPP_INCLUDED
+#define __GLM_GLM_HPP_INCLUDED
+#include <glm/glm.hpp> // glm
+#endif
 
 // OpenFBX wants `u8` == `unsigned char`.
 typedef unsigned char u8;
 
 // Include standard headers
+#include <cstddef>  // std::size_t
 #include <queue>    // std::queue
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
+#include <unordered_map> // std::unordered_map
 #include <vector>   // std::vector
 
-namespace ontology
+namespace yli
 {
-    class Shader;
-    class SymbiontMaterial;
-    class SymbiontSpecies;
-
-    class Symbiosis: public ontology::Entity
+    namespace ontology
     {
-        public:
-            // constructor.
-            Symbiosis(const SymbiosisStruct& symbiosis_struct)
-                : Entity(symbiosis_struct.parent->universe)
-            {
+        class Shader;
+        class SymbiontMaterial;
+        class SymbiontSpecies;
+        class Holobiont;
+
+        class Symbiosis: public yli::ontology::Entity
+        {
+            public:
+                void bind_symbiont_material(yli::ontology::SymbiontMaterial* const symbiont_material);
+                void bind_holobiont(yli::ontology::Holobiont* const holobiont);
+
+                void unbind_holobiont(const std::size_t childID);
+
+                // this method sets pointer to this `Symbiosis` to nullptr, sets `parent` according to the input, and requests a new `childID` from the new `Shader`.
+                void bind_to_new_parent(yli::ontology::Shader* const new_shader_pointer);
+
                 // constructor.
-                this->parent = symbiosis_struct.parent;
-
-                this->number_of_symbiont_materials = 0;
-
-                // get `childID` from `Shader` and set pointer to this `Symbiosis`.
-                this->bind_to_parent();
-
-                if (symbiosis_struct.model_file_format.compare("fbx") == 0 || symbiosis_struct.model_file_format.compare("FBX") == 0)
+                Symbiosis(yli::ontology::Universe* universe, const SymbiosisStruct& symbiosis_struct)
+                    : Entity(universe)
                 {
-                    // TODO: write the FBX symbiosis loading code!
-                    std::vector<unsigned char> data_vector = file::binary_slurp(symbiosis_struct.model_filename);
+                    // constructor.
+                    this->parent = symbiosis_struct.parent;
+                    this->model_filename = symbiosis_struct.model_filename;
+                    this->model_file_format = symbiosis_struct.model_file_format;
+                    this->triangulation_type = symbiosis_struct.triangulation_type;
+                    this->light_position = symbiosis_struct.light_position;
 
-                    // OpenFBX wants `u8` == `unsigned char`.
-                    const u8* data = reinterpret_cast<const u8*>(data_vector.data());
-                    int size = data_vector.size();
-                    ofbx::IScene* ofbx_iscene = ofbx::load(data, size);
+                    this->number_of_symbiont_materials = 0;
+                    this->number_of_holobionts = 0;
+                    this->ofbx_mesh_count = 0;
+                    this->vram_buffer_in_use = symbiosis_struct.vram_buffer_in_use;
 
-                    if (ofbx_iscene == nullptr)
-                    {
-                        std::cerr << "Error: ofbx_iscene is nullptr!\n";
-                        return;
-                    }
+                    // get `childID` from `Shader` and set pointer to this `Symbiosis`.
+                    this->bind_to_parent();
 
-                    int32_t mesh_count = static_cast<int32_t>(ofbx_iscene->getMeshCount()); // `getMeshCount()` returns `int`.
+                    this->child_vector_pointers_vector.push_back(&this->symbiont_material_pointer_vector);
+                    this->child_vector_pointers_vector.push_back(&this->holobiont_pointer_vector);
+                    this->type = "yli::ontology::Symbiosis*";
 
-                    for (int32_t mesh_i = 0; mesh_i < mesh_count; mesh_i++)
-                    {
-                        const ofbx::Mesh* mesh = ofbx_iscene->getMesh(mesh_i);
-
-                        if (mesh == nullptr)
-                        {
-                            std::cerr << "Error: mesh is nullptr!\n";
-                            continue;
-                        }
-
-                        const ofbx::Geometry* geometry = mesh->getGeometry();
-
-                        if (geometry == nullptr)
-                        {
-                            std::cerr << "Error: geometry is nullptr!\n";
-                            continue;
-                        }
-
-                        int material_count = mesh->getMaterialCount(); // TODO: use this in  `ontology::Symbiosis` entities!
-                        std::cout << symbiosis_struct.model_filename << ": mesh " << mesh_i << ": getMaterialCount(): " << material_count << "\n";
-
-                        int vertex_count = geometry->getVertexCount();
-                        std::cout << symbiosis_struct.model_filename << ": mesh " << mesh_i << ": getVertexCount(): " << vertex_count << "\n";
-
-                        if (vertex_count <= 0)
-                        {
-                            std::cerr << "Error: vertex count is <= 0 !\n";
-                            continue;
-                        }
-
-                        const ofbx::Vec3* vertices = geometry->getVertices();
-
-                        if (vertices == nullptr)
-                        {
-                            std::cerr << "Error: vertices is nullptr!\n";
-                            continue;
-                        }
-
-                        const ofbx::Vec3* normals = geometry->getNormals();
-
-                        if (normals == nullptr)
-                        {
-                            std::cerr << "Error: normals is nullptr!\n";
-                            continue;
-                        }
-
-                        const ofbx::Vec2* uvs = geometry->getUVs();
-
-                        if (uvs == nullptr)
-                        {
-                            std::cerr << "Error: uvs is nullptr!\n";
-                            continue;
-                        }
-                    }
-                }
-                else
-                {
-                    std::cerr << "no model was loaded!\n";
-                    std::cerr << "model file format: " << symbiosis_struct.model_file_format << "\n";
+                    this->can_be_erased = true;
                 }
 
-                // TODO: Compute the graph of each type to enable object vertex modification!
+                // destructor.
+                virtual ~Symbiosis();
 
-                this->type = "ontology::Symbiosis*";
-            }
+                void create_symbionts();
 
-            // destructor.
-            virtual ~Symbiosis();
+                // this method renders all `SymbiontMaterial`s belonging to this `Symbiosis`.
+                void render();
 
-            // this method renders all `SymbiontMaterial`s belonging to this `Symbiosis`.
-            void render();
+                yli::ontology::Entity* get_parent() const override;
 
-            int32_t get_number_of_children() const override;
+                std::size_t get_number_of_children() const override;
 
-            int32_t get_number_of_descendants() const override;
+                std::size_t get_number_of_descendants() const override;
 
-            void set_symbiont_material_pointer(const int32_t childID, ontology::SymbiontMaterial* const child_pointer);
+                const std::string& get_model_file_format();
 
-            // this method sets pointer to this `Symbiosis` to nullptr, sets `parent` according to the input, and requests a new `childID` from the new `Shader`.
-            void bind_to_new_parent(ontology::Shader* new_shader_pointer);
+                void set_symbiont_material_pointer(const std::size_t childID, yli::ontology::SymbiontMaterial* const child_pointer);
 
-            void set_name(std::string name);
+                void set_holobiont_pointer(const std::size_t childID, yli::ontology::Holobiont* const child_pointer);
 
-            friend class SymbiontSpecies;
-            friend class SymbiontMaterial;
-            template<class T1>
-                friend void hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<int32_t>& free_childID_queue, int32_t* number_of_children);
-            template<class T1, class T2>
-                friend void hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent, std::vector<T1>& old_child_pointer_vector, std::queue<int32_t>& old_free_childID_queue, int32_t* old_number_of_children);
+                yli::ontology::SymbiontSpecies* get_symbiont_species(const std::size_t biontID) const;
+                GLuint get_vertex_position_modelspaceID(const std::size_t biontID) const;
+                GLuint get_vertexUVID(const std::size_t biontID) const;
+                GLuint get_vertex_normal_modelspaceID(const std::size_t biontID) const;
 
-        private:
-            void bind_to_parent();
+                GLuint get_vertexbuffer(const std::size_t biontID) const;
+                GLuint get_uvbuffer(const std::size_t biontID) const;
+                GLuint get_normalbuffer(const std::size_t biontID) const;
+                GLuint get_elementbuffer(const std::size_t biontID) const;
 
-            ontology::Shader* parent; // pointer to `Scene`.
+                std::vector<uint32_t> get_indices(const std::size_t biontID) const;
+                std::size_t get_indices_size(const std::size_t biontID) const;
+                std::size_t get_number_of_symbionts() const;
+                bool has_texture(const std::size_t biontID) const;
+                GLuint get_texture(const std::size_t biontID) const;
+                GLuint get_openGL_textureID(const std::size_t biontID) const;
 
-            std::vector<ontology::SymbiontMaterial*> symbiont_material_pointer_vector;
-            std::queue<int32_t> free_symbiont_materialID_queue;
-            int32_t number_of_symbiont_materials;
-    };
+                GLuint get_lightID(const std::size_t biontID) const;
+                glm::vec3 get_light_position(const std::size_t biontID) const;
+
+                template<class T1>
+                    friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t* number_of_children);
+                template<class T1, class T2>
+                    friend void yli::hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent, std::vector<T1>& old_child_pointer_vector, std::queue<std::size_t>& old_free_childID_queue, std::size_t* old_number_of_children);
+
+            private:
+                void bind_to_parent();
+
+                yli::ontology::Shader* parent; // pointer to `Shader`.
+
+                std::string model_file_format;  // type of the model file, eg. `"fbx"`.
+                std::string model_filename;     // filename of the model file.
+                std::string triangulation_type;
+
+                glm::vec3 light_position;       // light position.
+
+                std::vector<yli::ontology::SymbiontMaterial*> symbiont_material_pointer_vector;
+                std::vector<yli::ontology::Holobiont*> holobiont_pointer_vector;
+                std::queue<std::size_t> free_symbiont_materialID_queue;
+                std::queue<std::size_t> free_holobiontID_queue;
+                std::size_t number_of_symbiont_materials;
+                std::size_t number_of_holobionts;
+
+                std::vector<std::vector<glm::vec3>> vertices;         // vertices of the object.
+                std::vector<std::vector<glm::vec2>> uvs;              // UVs of the object.
+                std::vector<std::vector<glm::vec3>> normals;          // normals of the object.
+
+                std::vector<std::vector<GLuint>> indices;             // the deleted vertices will be reused (though it is not required, if there's enough memory).
+                std::vector<std::vector<glm::vec3>> indexed_vertices;
+                std::vector<std::vector<glm::vec2>> indexed_uvs;
+                std::vector<std::vector<glm::vec3>> indexed_normals;
+
+                std::unordered_map<const ofbx::Texture*, std::vector<int32_t>> ofbx_diffuse_texture_mesh_map;
+                std::vector<yli::ontology::SymbiontMaterial*> biontID_symbiont_material_vector;
+                std::vector<yli::ontology::SymbiontSpecies*> biontID_symbiont_species_vector;
+                std::vector<const ofbx::Mesh*> ofbx_meshes;
+                std::vector<const ofbx::Texture*> ofbx_diffuse_texture_vector;
+                std::vector<const ofbx::Texture*> ofbx_normal_texture_vector; // currently not in use.
+                std::vector<const ofbx::Texture*> ofbx_count_texture_vector;  // currently not in use.
+                std::size_t ofbx_mesh_count;
+
+                bool vram_buffer_in_use;
+        };
+    }
 }
 
 #endif

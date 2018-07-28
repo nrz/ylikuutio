@@ -41,20 +41,20 @@ namespace glm
 		// if determinant is near zero, ray lies in plane of triangle
 		T const det = glm::dot(edge1, p);
 
-		vec<3, T, Q> qvec;
+		vec<3, T, Q> qvec(0);
 
 		if(det > std::numeric_limits<T>::epsilon())
 		{
 			// calculate distance from vert0 to ray origin
-			vec<3, T, Q> const tvec = orig - vert0;
+			vec<3, T, Q> const dist = orig - vert0;
 
 			// calculate U parameter and test bounds
-			baryPosition.x = glm::dot(tvec, p);
+			baryPosition.x = glm::dot(dist, p);
 			if(baryPosition.x < static_cast<T>(0) || baryPosition.x > det)
 				return false;
 
 			// prepare to test V parameter
-			qvec = glm::cross(tvec, edge1);
+			qvec = glm::cross(dist, edge1);
 
 			// calculate V parameter and test bounds
 			baryPosition.y = glm::dot(dir, qvec);
@@ -64,15 +64,15 @@ namespace glm
 		else if(det < -std::numeric_limits<T>::epsilon())
 		{
 			// calculate distance from vert0 to ray origin
-			vec<3, T, Q> const tvec = orig - vert0;
+			vec<3, T, Q> const dist = orig - vert0;
 
 			// calculate U parameter and test bounds
-			baryPosition.x = glm::dot(tvec, p);
+			baryPosition.x = glm::dot(dist, p);
 			if((baryPosition.x > static_cast<T>(0)) || (baryPosition.x < det))
 				return false;
 
 			// prepare to test V parameter
-			qvec = glm::cross(tvec, edge1);
+			qvec = glm::cross(dist, edge1);
 
 			// calculate V parameter and test bounds
 			baryPosition.y = glm::dot(dir, qvec);
@@ -90,33 +90,6 @@ namespace glm
 
 		return true;
 	}
-
-/*
-		typename genType::value_type Epsilon = std::numeric_limits<typename genType::value_type>::epsilon();
-		if(a < Epsilon && a > -Epsilon)
-			return false;
-
-		typename genType::value_type f = typename genType::value_type(1.0f) / a;
-
-		genType s = orig - v0;
-		baryPosition.x = f * glm::dot(s, p);
-		if(baryPosition.x < typename genType::value_type(0.0f))
-			return false;
-		if(baryPosition.x > typename genType::value_type(1.0f))
-			return false;
-
-		genType q = glm::cross(s, e1);
-		baryPosition.y = f * glm::dot(dir, q);
-		if(baryPosition.y < typename genType::value_type(0.0f))
-			return false;
-		if(baryPosition.y + baryPosition.x > typename genType::value_type(1.0f))
-			return false;
-
-		baryPosition.z = f * glm::dot(e2, q);
-
-		return baryPosition.z >= typename genType::value_type(0.0f);
-	}
-*/
 
 	template<typename genType>
 	GLM_FUNC_QUALIFIER bool intersectLineTriangle
@@ -200,7 +173,7 @@ namespace glm
 	(
 		genType const& point0, genType const& point1,
 		genType const& sphereCenter, typename genType::value_type sphereRadius,
-		genType & intersectionPoint1, genType & intersectionNormal1, 
+		genType & intersectionPoint1, genType & intersectionNormal1,
 		genType & intersectionPoint2, genType & intersectionNormal2
 	)
 	{

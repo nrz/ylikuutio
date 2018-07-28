@@ -1,14 +1,17 @@
 #include "creature.hpp"
 
-namespace ontology
+namespace yli
 {
-    Creature::~Creature()
+    namespace ontology
     {
-        // destructor.
-    }
+        Creature::~Creature()
+        {
+            // destructor.
+        }
 
-    void Creature::act()
-    {
-        // TODO: act according to this `Creature`'s programming.
+        void Creature::act()
+        {
+            // TODO: act according to this `Creature`'s programming.
+        }
     }
 }
