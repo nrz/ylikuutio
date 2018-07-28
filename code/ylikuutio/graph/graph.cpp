@@ -12,36 +12,39 @@
 #include <cstddef>  // std::size_t
 #include <vector>   // std::vector
 
-namespace graph
+namespace yli
 {
-    Graph::Graph()
+    namespace graph
     {
-        // constructor.
-        this->number_of_nodes = 0;
-    }
+        Graph::Graph()
+        {
+            // constructor.
+            this->number_of_nodes = 0;
+        }
 
-    void Graph::set_node_pointer(std::size_t childID, graph::Node* child_pointer)
-    {
-        yli::hierarchy::set_child_pointer(childID, child_pointer, this->node_pointer_vector, this->free_nodeID_queue, &this->number_of_nodes);
-    }
+        void Graph::set_node_pointer(std::size_t childID, yli::graph::Node* child_pointer)
+        {
+            yli::hierarchy::set_child_pointer(childID, child_pointer, this->node_pointer_vector, this->free_nodeID_queue, &this->number_of_nodes);
+        }
 
-    graph::Node* Graph::get_node_pointer(std::size_t childID)
-    {
-        return this->node_pointer_vector[childID];
-    }
+        yli::graph::Node* Graph::get_node_pointer(std::size_t childID)
+        {
+            return this->node_pointer_vector[childID];
+        }
 
-    std::size_t Graph::get_nodeID()
-    {
-        return yli::hierarchy::get_childID(this->node_pointer_vector, this->free_nodeID_queue);
-    }
+        std::size_t Graph::get_nodeID()
+        {
+            return yli::hierarchy::get_childID(this->node_pointer_vector, this->free_nodeID_queue);
+        }
 
-    Graph::~Graph()
-    {
-        // destructor.
-        std::cout << "This graph will be destroyed.\n";
+        Graph::~Graph()
+        {
+            // destructor.
+            std::cout << "This graph will be destroyed.\n";
 
-        // destroy all nodes of this graph.
-        std::cout << "All nodes of this graph will be destroyed.\n";
-        yli::hierarchy::delete_children<graph::Node*>(this->node_pointer_vector, &this->number_of_nodes);
+            // destroy all nodes of this graph.
+            std::cout << "All nodes of this graph will be destroyed.\n";
+            yli::hierarchy::delete_children<yli::graph::Node*>(this->node_pointer_vector, &this->number_of_nodes);
+        }
     }
 }

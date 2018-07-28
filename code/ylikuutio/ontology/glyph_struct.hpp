@@ -23,7 +23,7 @@ namespace yli
 typedef struct GlyphStruct
 {
     GlyphStruct()
-        : glyph_vertex_data(nullptr), glyph_name_pointer(nullptr), unicode_char_pointer(nullptr), universe(nullptr), shader_pointer(nullptr), parent(nullptr), light_position(glm::vec3(0.0f, 0.0f, 0.0f))
+        : glyph_vertex_data(nullptr), glyph_name_pointer(nullptr), unicode_char_pointer(nullptr), universe(nullptr), shader_pointer(nullptr), parent(nullptr), light_position(glm::vec3(0.0f, 0.0f, 0.0f)), vram_buffer_in_use(true)
     {
         // constructor.
     }
@@ -35,6 +35,7 @@ typedef struct GlyphStruct
     yli::ontology::Shader* shader_pointer;     // pointer to the `Shader`.
     yli::ontology::VectorFont* parent; // pointer to the font object.
     glm::vec3 light_position;             // light position.
+    bool vram_buffer_in_use;
 } GlyphStruct;
 
 #endif

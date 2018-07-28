@@ -467,6 +467,11 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/camera.cpp
     code/ylikuutio/ontology/camera.hpp
     code/ylikuutio/ontology/camera_struct.hpp
+    code/ylikuutio/ontology/chunk.cpp
+    code/ylikuutio/ontology/chunk.hpp
+    code/ylikuutio/ontology/chunk_master.cpp
+    code/ylikuutio/ontology/chunk_master.hpp
+    code/ylikuutio/ontology/chunk_struct.hpp
     code/ylikuutio/ontology/creature.cpp
     code/ylikuutio/ontology/creature.hpp
     code/ylikuutio/ontology/gl_attrib_locations.cpp
@@ -518,6 +523,8 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/symbiosis.cpp
     code/ylikuutio/ontology/symbiosis.hpp
     code/ylikuutio/ontology/symbiosis_struct.hpp
+    code/ylikuutio/ontology/terrain_generation_callbacks.cpp
+    code/ylikuutio/ontology/terrain_generation_callbacks.hpp
     code/ylikuutio/ontology/text3D.hpp
     code/ylikuutio/ontology/text3D.cpp
     code/ylikuutio/ontology/text3D_struct.hpp
@@ -529,6 +536,10 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/vector_font_struct.hpp
     code/ylikuutio/ontology/vehicle.cpp
     code/ylikuutio/ontology/vehicle.hpp
+    code/ylikuutio/ontology/vertex_graph.cpp
+    code/ylikuutio/ontology/vertex_graph.hpp
+    code/ylikuutio/ontology/vertex_node.cpp
+    code/ylikuutio/ontology/vertex_node.hpp
     code/ylikuutio/ontology/vboindexer.cpp
     code/ylikuutio/ontology/vboindexer.hpp
     code/ylikuutio/ontology/world.cpp
@@ -545,18 +556,6 @@ add_library(ylikuutio STATIC
     code/ylikuutio/shaders/TextureFragmentShader.fragmentshader
     code/ylikuutio/shaders/TextVertexShader.fragmentshader
     code/ylikuutio/shaders/TextVertexShader.vertexshader
-
-    # space partition, in alphabetical order.
-    code/ylikuutio/space_partition/chunk.cpp
-    code/ylikuutio/space_partition/chunk.hpp
-    code/ylikuutio/space_partition/chunk_master.cpp
-    code/ylikuutio/space_partition/chunk_master.hpp
-    code/ylikuutio/space_partition/terrain_generation_callbacks.cpp
-    code/ylikuutio/space_partition/terrain_generation_callbacks.hpp
-    code/ylikuutio/space_partition/vertex_graph.cpp
-    code/ylikuutio/space_partition/vertex_graph.hpp
-    code/ylikuutio/space_partition/vertex_node.cpp
-    code/ylikuutio/space_partition/vertex_node.hpp
 
     # string, in alphabetical order
     code/ylikuutio/string/ylikuutio_string.cpp

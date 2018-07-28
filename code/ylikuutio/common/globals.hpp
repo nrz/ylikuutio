@@ -52,30 +52,29 @@
 
 namespace yli
 {
-    namespace config
-    {
-        class SettingMaster;
-        class Setting;
-    }
-}
-
-namespace yli
-{
     namespace callback_system
     {
         class CallbackEngine;
         class CallbackObject;
         class CallbackParameter;
     }
-}
 
-namespace graph
-{
-    class Graph;
-}
+    namespace config
+    {
+        class SettingMaster;
+        class Setting;
+    }
 
-namespace yli
-{
+    namespace console
+    {
+        class Console;
+    }
+
+    namespace graph
+    {
+        class Graph;
+    }
+
     namespace ontology
     {
         class Entity;
@@ -83,8 +82,8 @@ namespace yli
     }
 }
 
-typedef std::shared_ptr<datatypes::AnyValue> (*PreRenderCallback) (yli::ontology::Entity* entity, yli::config::SettingMaster* setting_master);
-typedef std::shared_ptr<datatypes::AnyValue> (*PostRenderCallback) (yli::ontology::Entity* entity, yli::config::SettingMaster* setting_master);
+typedef std::shared_ptr<yli::datatypes::AnyValue> (*PreRenderCallback) (yli::ontology::Entity* entity, yli::config::SettingMaster* setting_master);
+typedef std::shared_ptr<yli::datatypes::AnyValue> (*PostRenderCallback) (yli::ontology::Entity* entity, yli::config::SettingMaster* setting_master);
 
 typedef struct PrintingStruct
 {
@@ -113,25 +112,18 @@ typedef struct
     bool should_ylikuutio_use_real_texture_coordinates;
 } BilinearInterpolationStruct;
 
-typedef std::shared_ptr<datatypes::AnyValue> (*InputParametersToAnyValueCallback) (
+typedef std::shared_ptr<yli::datatypes::AnyValue> (*InputParametersToAnyValueCallback) (
         yli::callback_system::CallbackEngine*,
         yli::callback_system::CallbackObject*,
         std::vector<yli::callback_system::CallbackParameter*>&);
 
-namespace yli
-{
-    namespace console
-    {
-        class Console;
-    }
-}
-typedef std::shared_ptr<datatypes::AnyValue> (*InputParametersToAnyValueCallbackWithConsole) (
+typedef std::shared_ptr<yli::datatypes::AnyValue> (*InputParametersToAnyValueCallbackWithConsole) (
         yli::callback_system::CallbackEngine*,
         yli::callback_system::CallbackObject*,
         std::vector<yli::callback_system::CallbackParameter*>&,
         yli::console::Console*);
 
-typedef std::shared_ptr<datatypes::AnyValue> (*GetContentCallback) (
+typedef std::shared_ptr<yli::datatypes::AnyValue> (*GetContentCallback) (
         yli::callback_system::CallbackEngine*,
         yli::callback_system::CallbackObject*,
         std::vector<yli::callback_system::CallbackParameter*>&,

@@ -263,18 +263,12 @@ namespace yli
     {
         class Setting;
     }
-}
 
-namespace yli
-{
     namespace console
     {
         class Console;
     }
-}
 
-namespace yli
-{
     namespace ontology
     {
         class World;
@@ -448,7 +442,7 @@ namespace yli
                 // this method returns current `max_FPS`.
                 std::size_t get_max_FPS() const;
 
-                void set(std::string& setting_name, std::shared_ptr<datatypes::AnyValue> setting_any_value);
+                void set(std::string& setting_name, std::shared_ptr<yli::datatypes::AnyValue> setting_any_value);
 
                 // this method returns a pointer to `yli::config::Setting` corresponding to the given `key`.
                 yli::config::Setting* get(std::string key) const;
@@ -473,17 +467,17 @@ namespace yli
 
                 // Public callbacks.
 
-                static std::shared_ptr<datatypes::AnyValue> delete_entity(
+                static std::shared_ptr<yli::datatypes::AnyValue> delete_entity(
                         yli::console::Console* const console,
                         yli::ontology::Entity* const entity,
                         std::vector<std::string>& command_parameters);
 
-                static std::shared_ptr<datatypes::AnyValue> activate(
+                static std::shared_ptr<yli::datatypes::AnyValue> activate(
                         yli::console::Console* const console,
                         yli::ontology::Entity* const universe_entity,
                         std::vector<std::string>& command_parameters);
 
-                static std::shared_ptr<datatypes::AnyValue> info(
+                static std::shared_ptr<yli::datatypes::AnyValue> info(
                         yli::console::Console* const console,
                         yli::ontology::Entity* const entity,
                         std::vector<std::string>& command_parameters);

@@ -18,7 +18,7 @@ namespace yli
 
 typedef struct SettingStruct
 {
-    SettingStruct(std::shared_ptr<datatypes::AnyValue> initial_value)
+    SettingStruct(std::shared_ptr<yli::datatypes::AnyValue> initial_value)
         : initial_value(initial_value),
         setting_master(nullptr),
         activate_callback(nullptr),
@@ -28,7 +28,7 @@ typedef struct SettingStruct
         // constructor.
     }
     std::string name;
-    std::shared_ptr<datatypes::AnyValue> initial_value;
+    std::shared_ptr<yli::datatypes::AnyValue> initial_value;
     yli::config::SettingMaster* setting_master;
     ActivateCallback activate_callback;
     ReadCallback read_callback;

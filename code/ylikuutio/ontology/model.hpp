@@ -25,17 +25,13 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
-namespace space_partition
-{
-    class Chunk;
-}
-
 namespace yli
 {
     namespace ontology
     {
         class Universe;
         class Object;
+        class Chunk;
 
         class Model: public yli::ontology::Entity
         {
@@ -44,7 +40,7 @@ namespace yli
                 void unbind(const std::size_t childID);
 
                 // constructor.
-                Model(yli::ontology::Universe* const universe)
+                Model(yli::ontology::Universe* const universe, const bool vram_buffer_in_use)
                     : Entity(universe)
                 {
                     // constructor.
@@ -64,6 +60,7 @@ namespace yli
 
                     this->number_of_objects = 0;
                     this->child_vector_pointers_vector.push_back(&this->object_pointer_vector);
+                    this->vram_buffer_in_use = vram_buffer_in_use;
                 }
 
                 // destructor.

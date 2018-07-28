@@ -9,10 +9,10 @@ static glm::vec1 g2(1);
 
 int test_vec1_operators()
 {
-	int Error(0);
+	int Error = 0;
 
-	glm::vec1 A(1.0f);
-	glm::vec1 B(1.0f);
+	glm::ivec1 A(1);
+	glm::ivec1 B(1);
 	{
 		bool R = A != B;
 		bool S = A == B;
@@ -21,10 +21,10 @@ int test_vec1_operators()
 	}
 
 	{
-		A *= 1.0f;
-		B *= 1.0;
-		A += 1.0f;
-		B += 1.0;
+		A *= 1;
+		B *= 1;
+		A += 1;
+		B += 1;
 
 		bool R = A != B;
 		bool S = A == B;
@@ -145,7 +145,7 @@ static int test_swizzle()
 
 static int test_constexpr()
 {
-#if GLM_HAS_CONSTEXPR_CXX14
+#if GLM_HAS_CONSTEXPR
 	static_assert(glm::vec1::length() == 1, "GLM: Failed constexpr");
 	static_assert(glm::vec1(1.0f).x > 0.0f, "GLM: Failed constexpr");
 #endif

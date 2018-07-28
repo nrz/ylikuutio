@@ -5,6 +5,7 @@
 
 // Include standard headers
 #include <memory>   // std::make_shared, std::shared_ptr
+#include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
 #include <vector>   // std::vector
 
@@ -14,10 +15,7 @@ namespace yli
     {
         class Console;
     }
-}
 
-namespace yli
-{
     namespace ontology
     {
         class Entity;
@@ -26,7 +24,7 @@ namespace yli
 
 namespace ajokki
 {
-    std::shared_ptr<datatypes::AnyValue> version(
+    std::shared_ptr<yli::datatypes::AnyValue> version(
             yli::console::Console* console,
             yli::ontology::Entity*,
             std::vector<std::string>& command_parameters)
@@ -35,16 +33,16 @@ namespace ajokki
         return nullptr;
     }
 
-    std::shared_ptr<datatypes::AnyValue> quit(
+    std::shared_ptr<yli::datatypes::AnyValue> quit(
             yli::console::Console*,
             yli::ontology::Entity*,
             std::vector<std::string>& command_parameters)
     {
         uint32_t exit_program_magic_number = EXIT_PROGRAM_MAGIC_NUMBER;
-        return std::make_shared<datatypes::AnyValue>(exit_program_magic_number);
+        return std::make_shared<yli::datatypes::AnyValue>(exit_program_magic_number);
     }
 
-    std::shared_ptr<datatypes::AnyValue> help(
+    std::shared_ptr<yli::datatypes::AnyValue> help(
             yli::console::Console* console,
             yli::ontology::Entity*,
             std::vector<std::string>& command_parameters)

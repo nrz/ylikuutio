@@ -36,13 +36,6 @@
 #include "../simd/platform.h"
 
 ///////////////////////////////////////////////////////////////////////////////////
-// Incompatible GLM_FORCE defines
-
-#if defined(GLM_FORCE_SWIZZLE) && defined(GLM_FORCE_UNRESTRICTED_GENTYPE)
-#	error "Both GLM_FORCE_SWIZZLE and GLM_FORCE_UNRESTRICTED_GENTYPE can't be defined at the same time"
-#endif
-
-///////////////////////////////////////////////////////////////////////////////////
 // Build model
 
 #if defined(__arch64__) || defined(__LP64__) || defined(_M_X64) || defined(__ppc64__) || defined(__x86_64__)
@@ -216,7 +209,7 @@
 #	define GLM_HAS_INITIALIZER_LISTS 1
 #else
 #	define GLM_HAS_INITIALIZER_LISTS ((GLM_LANG & GLM_LANG_CXX0X_FLAG) && (\
-		((GLM_COMPILER & GLM_COMPILER_VC) && (GLM_COMPILER >= GLM_COMPILER_VC14)) || \
+		((GLM_COMPILER & GLM_COMPILER_VC) && (GLM_COMPILER >= GLM_COMPILER_VC15)) || \
 		((GLM_COMPILER & GLM_COMPILER_INTEL) && (GLM_COMPILER >= GLM_COMPILER_INTEL14)) || \
 		((GLM_COMPILER & GLM_COMPILER_CUDA) && (GLM_COMPILER >= GLM_COMPILER_CUDA75))))
 #endif
@@ -233,9 +226,7 @@
 #endif
 
 // N2346
-#if defined(GLM_FORCE_UNRESTRICTED_GENTYPE)
-#	define GLM_HAS_DEFAULTED_FUNCTIONS 0
-#elif GLM_COMPILER & GLM_COMPILER_CLANG
+#if GLM_COMPILER & GLM_COMPILER_CLANG
 #	define GLM_HAS_DEFAULTED_FUNCTIONS __has_feature(cxx_defaulted_functions)
 #elif GLM_LANG & GLM_LANG_CXX11_FLAG
 #	define GLM_HAS_DEFAULTED_FUNCTIONS 1
@@ -306,39 +297,21 @@
 #endif
 
 // N2235 Generalized Constant Expressions http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2007/n2235.pdf
-#if (GLM_COMPILER & GLM_COMPILER_CLANG) && !(GLM_ARCH & GLM_ARCH_SIMD_BIT)
-#	define GLM_HAS_CONSTEXPR_CXX11 __has_feature(cxx_constexpr)
-#elif (GLM_LANG & GLM_LANG_CXX11_FLAG) && !(GLM_ARCH & GLM_ARCH_SIMD_BIT)
-#	define GLM_HAS_CONSTEXPR_CXX11 1
-#else
-	// GCC 4.6 support constexpr but there is a compiler bug causing a crash
-	// Visual C++ has a bug #594 https://github.com/g-truc/glm/issues/594
-#	define GLM_HAS_CONSTEXPR_CXX11 ((GLM_LANG & GLM_LANG_CXX0X_FLAG) && !(GLM_ARCH & GLM_ARCH_SIMD_BIT) && (\
-		((GLM_COMPILER & GLM_COMPILER_INTEL) && (GLM_COMPILER >= GLM_COMPILER_INTEL14)) || \
-		((GLM_COMPILER & GLM_COMPILER_VC) && (GLM_COMPILER >= GLM_COMPILER_VC14))))
-#endif
-
-#if GLM_HAS_CONSTEXPR_CXX11
-#	define GLM_CONSTEXPR_CXX11 constexpr
-#else
-#	define GLM_CONSTEXPR_CXX11
-#endif
-
 // N3652 Extended Constant Expressions http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2013/n3652.html
 #if (GLM_COMPILER & GLM_COMPILER_CLANG) && !(GLM_ARCH & GLM_ARCH_SIMD_BIT)
-#	define GLM_HAS_CONSTEXPR_CXX14 __has_feature(cxx_relaxed_constexpr)
+#	define GLM_HAS_CONSTEXPR __has_feature(cxx_relaxed_constexpr)
 #elif (GLM_LANG & GLM_LANG_CXX14_FLAG) && !(GLM_ARCH & GLM_ARCH_SIMD_BIT)
-#	define GLM_HAS_CONSTEXPR_CXX14 1
+#	define GLM_HAS_CONSTEXPR 1
 #else
-#	define GLM_HAS_CONSTEXPR_CXX14 ((GLM_LANG & GLM_LANG_CXX0X_FLAG) && !(GLM_ARCH & GLM_ARCH_SIMD_BIT) && GLM_HAS_INITIALIZER_LISTS && (\
+#	define GLM_HAS_CONSTEXPR ((GLM_LANG & GLM_LANG_CXX0X_FLAG) && !(GLM_ARCH & GLM_ARCH_SIMD_BIT) && GLM_HAS_INITIALIZER_LISTS && (\
 		((GLM_COMPILER & GLM_COMPILER_INTEL) && (GLM_COMPILER >= GLM_COMPILER_INTEL17)) || \
 		((GLM_COMPILER & GLM_COMPILER_VC) && (GLM_COMPILER >= GLM_COMPILER_VC15))))
 #endif
 
-#if GLM_HAS_CONSTEXPR_CXX14
-#	define GLM_CONSTEXPR_CXX14 constexpr
+#if GLM_HAS_CONSTEXPR
+#	define GLM_CONSTEXPR constexpr
 #else
-#	define GLM_CONSTEXPR_CXX14
+#	define GLM_CONSTEXPR
 #endif
 
 //
@@ -408,12 +381,12 @@
 // nullptr
 
 #if GLM_LANG & GLM_LANG_CXX0X_FLAG
-#	define GLM_HAS_NULLPTR 1
+#	define GLM_USE_NULLPTR GLM_ENABLE
 #else
-#	define GLM_HAS_NULLPTR 0
+#	define GLM_USE_NULLPTR GLM_DISABLE
 #endif
 
-#if GLM_HAS_NULLPTR
+#if GLM_USE_NULLPTR == GLM_ENABLE
 #	define GLM_NULLPTR nullptr
 #else
 #	define GLM_NULLPTR 0
@@ -440,12 +413,6 @@
 #else
 #	define GLM_CUDA_FUNC_DEF
 #	define GLM_CUDA_FUNC_DECL
-#endif
-
-#if GLM_COMPILER & GLM_COMPILER_GCC
-#	define GLM_VAR_USED __attribute__ ((unused))
-#else
-#	define GLM_VAR_USED
 #endif
 
 #if defined(GLM_FORCE_INLINE)
@@ -498,7 +465,8 @@
 #endif
 
 ///////////////////////////////////////////////////////////////////////////////////
-// Clip control
+// Clip control, define GLM_FORCE_DEPTH_ZERO_TO_ONE before including GLM
+// to use a clip space between 0 to 1.
 
 #define GLM_DEPTH_ZERO_TO_ONE				0x00000001
 #define GLM_DEPTH_NEGATIVE_ONE_TO_ONE		0x00000002
@@ -527,62 +495,16 @@
 
 #if (GLM_COMPILER & GLM_COMPILER_VC) || ((GLM_COMPILER & GLM_COMPILER_INTEL) && (GLM_PLATFORM & GLM_PLATFORM_WINDOWS))
 #	define GLM_DEPRECATED __declspec(deprecated)
-#	define GLM_ALIGN(x) __declspec(align(x))
-#	define GLM_ALIGNED_STRUCT(x) struct __declspec(align(x))
 #	define GLM_ALIGNED_TYPEDEF(type, name, alignment) typedef __declspec(align(alignment)) type name
-#	define GLM_RESTRICT_FUNC __declspec(restrict)
-#	define GLM_RESTRICT __restrict
-#	if GLM_COMPILER >= GLM_COMPILER_VC12
-#		define GLM_VECTOR_CALL __vectorcall
-#	else
-#		define GLM_VECTOR_CALL
-#	endif
 #elif GLM_COMPILER & (GLM_COMPILER_GCC | GLM_COMPILER_CLANG | GLM_COMPILER_INTEL)
 #	define GLM_DEPRECATED __attribute__((__deprecated__))
-#	define GLM_ALIGN(x) __attribute__((aligned(x)))
-#	define GLM_ALIGNED_STRUCT(x) struct __attribute__((aligned(x)))
 #	define GLM_ALIGNED_TYPEDEF(type, name, alignment) typedef type name __attribute__((aligned(alignment)))
-#	define GLM_RESTRICT_FUNC __restrict__
-#	define GLM_RESTRICT __restrict__
-#	if GLM_COMPILER & GLM_COMPILER_CLANG
-#		if GLM_COMPILER >= GLM_COMPILER_CLANG37
-#			define GLM_VECTOR_CALL __vectorcall
-#		else
-#			define GLM_VECTOR_CALL
-#		endif
-#	else
-#		define GLM_VECTOR_CALL
-#	endif
 #elif GLM_COMPILER & GLM_COMPILER_CUDA
 #	define GLM_DEPRECATED
-#	define GLM_ALIGN(x) __align__(x)
-#	define GLM_ALIGNED_STRUCT(x) struct __align__(x)
 #	define GLM_ALIGNED_TYPEDEF(type, name, alignment) typedef type name __align__(x)
-#	define GLM_RESTRICT_FUNC __restrict__
-#	define GLM_RESTRICT __restrict__
-#	define GLM_VECTOR_CALL
 #else
 #	define GLM_DEPRECATED
-#	define GLM_ALIGN
-#	define GLM_ALIGNED_STRUCT(x) struct
 #	define GLM_ALIGNED_TYPEDEF(type, name, alignment) typedef type name
-#	define GLM_RESTRICT_FUNC
-#	define GLM_RESTRICT
-#	define GLM_VECTOR_CALL
-#endif//GLM_COMPILER
-
-///////////////////////////////////////////////////////////////////////////////////
-
-#ifdef GLM_FORCE_NO_CTOR_INIT
-#	undef GLM_FORCE_CTOR_INIT
-#endif
-
-#if GLM_HAS_DEFAULTED_FUNCTIONS && !defined(GLM_FORCE_CTOR_INIT)
-#	define GLM_USE_DEFAULTED_FUNCTIONS GLM_ENABLE
-#	define GLM_DEFAULT = default
-#else
-#	define GLM_USE_DEFAULTED_FUNCTIONS GLM_DISABLE
-#	define GLM_DEFAULT
 #endif
 
 ///////////////////////////////////////////////////////////////////////////////////
@@ -613,7 +535,7 @@ namespace glm
 ///////////////////////////////////////////////////////////////////////////////////
 // countof
 
-#if GLM_HAS_CONSTEXPR_CXX11
+#if GLM_HAS_CONSTEXPR
 	namespace glm
 	{
 		template<typename T, std::size_t N>
@@ -630,29 +552,63 @@ namespace glm
 #endif
 
 ///////////////////////////////////////////////////////////////////////////////////
-// Check inclusions of different versions of GLM
+// Configure the use of defaulted initialized types
 
-#elif ((GLM_SETUP_INCLUDED != GLM_VERSION) && !defined(GLM_FORCE_IGNORE_VERSION))
-#	error "GLM error: A different version of GLM is already included. Define GLM_FORCE_IGNORE_VERSION before including GLM headers to ignore this error."
-#elif GLM_SETUP_INCLUDED == GLM_VERSION
+#define GLM_CTOR_INITIALIZER_LIST	(1 << 1)
+#define GLM_CTOR_INITIALISATION		(1 << 2)
+
+#if defined(GLM_FORCE_CTOR_INIT) && GLM_HAS_INITIALIZER_LISTS
+#	define GLM_USE_CTOR_INIT GLM_CTOR_INITIALIZER_LIST
+#elif defined(GLM_FORCE_CTOR_INIT) && !GLM_HAS_INITIALIZER_LISTS
+#	define GLM_USE_CTOR_INIT GLM_CTOR_INITIALISATION
+#else
+#	define GLM_USE_CTOR_INIT GLM_DISABLE
+#endif
 
 ///////////////////////////////////////////////////////////////////////////////////
-// Enable aligned gentypes
+// Configure the use of defaulted function
 
-#if defined(GLM_FORCE_ALIGNED_GENTYPES) && GLM_HAS_ALIGNOF
+#if GLM_HAS_DEFAULTED_FUNCTIONS && GLM_USE_CTOR_INIT == GLM_DISABLE
+#	define GLM_USE_DEFAULTED_FUNCTIONS GLM_ENABLE
+#	define GLM_DEFAULT = default
+#else
+#	define GLM_USE_DEFAULTED_FUNCTIONS GLM_DISABLE
+#	define GLM_DEFAULT
+#endif
+
+///////////////////////////////////////////////////////////////////////////////////
+// Configure the use of aligned gentypes
+
+#if defined(GLM_FORCE_ALIGNED_GENTYPES) && GLM_HAS_ALIGNOF && (GLM_LANG & GLM_LANG_CXXMS_FLAG)
 #	define GLM_USE_ALIGNED_GENTYPES GLM_ENABLE
 #else
 #	define GLM_USE_ALIGNED_GENTYPES GLM_DISABLE
 #endif
 
 ///////////////////////////////////////////////////////////////////////////////////
-// Implementation detail
+// Use SIMD instruction sets
 
-#if (((GLM_LANG & GLM_LANG_CXXMS_FLAG) && (GLM_ARCH & GLM_ARCH_SIMD_BIT)) || (GLM_SWIZZLE == GLM_SWIZZLE_OPERATOR) || (GLM_USE_ALIGNED_GENTYPES == GLM_ENABLE))
+#if (GLM_LANG & GLM_LANG_CXXMS_FLAG) && (GLM_ARCH & GLM_ARCH_SIMD_BIT)
+#define GLM_USE_SIMD GLM_ENABLE
+#else
+#define GLM_USE_SIMD GLM_DISABLE
+#endif
+
+///////////////////////////////////////////////////////////////////////////////////
+// Configure the use of anonymous structure as implementation detail
+
+#if ((GLM_USE_SIMD == GLM_ENABLE) || (GLM_SWIZZLE == GLM_SWIZZLE_OPERATOR) || (GLM_USE_ALIGNED_GENTYPES == GLM_ENABLE))
 #	define GLM_USE_ANONYMOUS_STRUCT GLM_ENABLE
 #else
 #	define GLM_USE_ANONYMOUS_STRUCT GLM_DISABLE
 #endif
+
+///////////////////////////////////////////////////////////////////////////////////
+// Check inclusions of different versions of GLM
+
+#elif ((GLM_SETUP_INCLUDED != GLM_VERSION) && !defined(GLM_FORCE_IGNORE_VERSION))
+#	error "GLM error: A different version of GLM is already included. Define GLM_FORCE_IGNORE_VERSION before including GLM headers to ignore this error."
+#elif GLM_SETUP_INCLUDED == GLM_VERSION
 
 ///////////////////////////////////////////////////////////////////////////////////
 // Messages

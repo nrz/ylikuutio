@@ -6,9 +6,12 @@
 #include <limits>   // std::numeric_limits
 #include <vector>   // std::vector
 
-namespace graph
+namespace yli
 {
-    class Graph;
+    namespace graph
+    {
+        class Graph;
+    }
 }
 
 typedef struct NodeStruct
@@ -19,7 +22,7 @@ typedef struct NodeStruct
         // constructor.
     }
     std::size_t nodeID;
-    graph::Graph* parent;
+    yli::graph::Graph* parent;
     std::vector<std::size_t> neighbor_nodeIDs;
 } NodeStruct;
 

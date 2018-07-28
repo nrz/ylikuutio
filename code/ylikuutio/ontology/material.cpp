@@ -3,7 +3,7 @@
 #include "species.hpp"
 #include "render_templates.hpp"
 #include "material_struct.hpp"
-#include "code/ylikuutio/space_partition/chunk_master.hpp"
+#include "code/ylikuutio/ontology/chunk_master.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include GLEW
@@ -47,10 +47,10 @@ namespace yli
                     &this->number_of_vector_fonts);
         }
 
-        void Material::bind_chunk_master(space_partition::ChunkMaster* const chunk_master)
+        void Material::bind_chunk_master(ontology::ChunkMaster* const chunk_master)
         {
             // get `childID` from `Material` and set pointer to `chunk_master`.
-            yli::hierarchy::bind_child_to_parent<space_partition::ChunkMaster*>(
+            yli::hierarchy::bind_child_to_parent<ontology::ChunkMaster*>(
                     chunk_master,
                     this->chunk_master_pointer_vector,
                     this->free_chunk_masterID_queue,
@@ -81,7 +81,7 @@ namespace yli
 
         void Material::unbind_chunk_master(const std::size_t childID)
         {
-            space_partition::ChunkMaster* dummy_child_pointer = nullptr;
+            yli::ontology::ChunkMaster* dummy_child_pointer = nullptr;
             yli::hierarchy::set_child_pointer(
                     childID,
                     dummy_child_pointer,
@@ -113,7 +113,7 @@ namespace yli
 
                 // destroy all chunk masters of this material.
                 std::cout << "All chunk masters of this material will be destroyed.\n";
-                yli::hierarchy::delete_children<space_partition::ChunkMaster*>(this->chunk_master_pointer_vector, &this->number_of_chunk_masters);
+                yli::hierarchy::delete_children<ontology::ChunkMaster*>(this->chunk_master_pointer_vector, &this->number_of_chunk_masters);
 
                 glDeleteTextures(1, &this->texture);
 
@@ -135,7 +135,7 @@ namespace yli
             // render this `Material` by calling `render()` function of each `Species`, each `VectorFont`, and each `ChunkMaster`.
             yli::ontology::render_children<yli::ontology::Species*>(this->species_pointer_vector);
             yli::ontology::render_children<yli::ontology::VectorFont*>(this->vector_font_pointer_vector);
-            yli::ontology::render_children<space_partition::ChunkMaster*>(this->chunk_master_pointer_vector);
+            yli::ontology::render_children<ontology::ChunkMaster*>(this->chunk_master_pointer_vector);
 
             this->postrender();
         }
@@ -165,7 +165,7 @@ namespace yli
             yli::hierarchy::set_child_pointer(childID, child_pointer, this->vector_font_pointer_vector, this->free_vector_fontID_queue, &this->number_of_vector_fonts);
         }
 
-        void Material::set_chunk_master_pointer(const std::size_t childID, space_partition::ChunkMaster* const child_pointer)
+        void Material::set_chunk_master_pointer(const std::size_t childID, yli::ontology::ChunkMaster* const child_pointer)
         {
             yli::hierarchy::set_child_pointer(childID, child_pointer, this->chunk_master_pointer_vector, this->free_chunk_masterID_queue, &this->number_of_chunk_masters);
         }

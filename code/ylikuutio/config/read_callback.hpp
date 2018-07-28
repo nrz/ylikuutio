@@ -12,16 +12,13 @@ namespace yli
     {
         class SettingMaster;
     }
-}
 
-namespace yli
-{
     namespace ontology
     {
         class Entity;
     }
 }
 
-typedef std::shared_ptr<datatypes::AnyValue> (*ReadCallback) (yli::ontology::Entity* entity, yli::config::SettingMaster* setting_master);
+typedef std::shared_ptr<yli::datatypes::AnyValue> (*ReadCallback) (yli::ontology::Entity* entity, yli::config::SettingMaster* setting_master);
 
 #endif

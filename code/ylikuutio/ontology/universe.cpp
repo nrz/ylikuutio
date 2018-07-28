@@ -223,7 +223,7 @@ namespace yli
             return this->max_FPS;
         }
 
-        void Universe::set(std::string& setting_name, std::shared_ptr<datatypes::AnyValue> setting_any_value)
+        void Universe::set(std::string& setting_name, std::shared_ptr<yli::datatypes::AnyValue> setting_any_value)
         {
             this->setting_master->set(setting_name, setting_any_value);
         }
@@ -293,7 +293,7 @@ namespace yli
 
         // Public callbacks.
 
-        std::shared_ptr<datatypes::AnyValue> Universe::delete_entity(
+        std::shared_ptr<yli::datatypes::AnyValue> Universe::delete_entity(
                 yli::console::Console* const console,
                 yli::ontology::Entity* const entity,
                 std::vector<std::string>& command_parameters)
@@ -345,7 +345,7 @@ namespace yli
             return nullptr;
         }
 
-        std::shared_ptr<datatypes::AnyValue> Universe::activate(
+        std::shared_ptr<yli::datatypes::AnyValue> Universe::activate(
                 yli::console::Console* const console,
                 yli::ontology::Entity* const universe_entity,
                 std::vector<std::string>& command_parameters)
@@ -412,7 +412,7 @@ namespace yli
             return nullptr;
         }
 
-        std::shared_ptr<datatypes::AnyValue> Universe::info(
+        std::shared_ptr<yli::datatypes::AnyValue> Universe::info(
                 yli::console::Console* const console,
                 yli::ontology::Entity* const entity,
                 std::vector<std::string>& command_parameters)

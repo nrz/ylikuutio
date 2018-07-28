@@ -17,16 +17,16 @@ namespace yli
     namespace callback_system
     {
         // getter function for callbacks and callback objects.
-        std::shared_ptr<datatypes::AnyValue> CallbackObject::get_any_value(const std::string& name) const
+        std::shared_ptr<yli::datatypes::AnyValue> CallbackObject::get_any_value(const std::string& name) const
         {
             if (this->anyvalue_hashmap.count(name) != 1)
             {
                 return nullptr;
             }
-            return std::make_shared<datatypes::AnyValue>(this->anyvalue_hashmap.at(name));
+            return std::make_shared<yli::datatypes::AnyValue>(this->anyvalue_hashmap.at(name));
         }
 
-        std::shared_ptr<datatypes::AnyValue> CallbackObject::get_arg(const std::size_t arg_i) const
+        std::shared_ptr<yli::datatypes::AnyValue> CallbackObject::get_arg(const std::size_t arg_i) const
         {
             if (arg_i >= this->callback_parameter_pointer_vector.size())
             {
@@ -42,11 +42,11 @@ namespace yli
                 return nullptr;
             }
 
-            return std::make_shared<datatypes::AnyValue>(*callback_parameter->any_value);
+            return std::make_shared<yli::datatypes::AnyValue>(*callback_parameter->any_value);
         }
 
         // setter function for callbacks and callback objects.
-        void CallbackObject::set_any_value(const std::string& name, std::shared_ptr<datatypes::AnyValue> any_value)
+        void CallbackObject::set_any_value(const std::string& name, std::shared_ptr<yli::datatypes::AnyValue> any_value)
         {
             this->anyvalue_hashmap[name] = *any_value;
         }
@@ -118,7 +118,7 @@ namespace yli
             }
         }
 
-        std::shared_ptr<datatypes::AnyValue> CallbackObject::execute()
+        std::shared_ptr<yli::datatypes::AnyValue> CallbackObject::execute()
         {
             if (this->callback != nullptr)
             {

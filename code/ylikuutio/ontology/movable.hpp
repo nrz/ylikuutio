@@ -50,7 +50,7 @@ namespace yli
                     float float_y = cartesian_coordinates.y;
                     float float_z = cartesian_coordinates.z;
 
-                    SettingStruct cartesian_coordinates_setting_struct(std::make_shared<datatypes::AnyValue>(new glm::vec3(float_x, float_y, float_z)));
+                    SettingStruct cartesian_coordinates_setting_struct(std::make_shared<yli::datatypes::AnyValue>(new glm::vec3(float_x, float_y, float_z)));
                     cartesian_coordinates_setting_struct.name = "cartesian_coordinates";
                     cartesian_coordinates_setting_struct.setting_master = this->setting_master;
                     cartesian_coordinates_setting_struct.activate_callback = &yli::config::SettingMaster::activate_cartesian_coordinates;
@@ -59,7 +59,7 @@ namespace yli
                     std::cout << "Executing `new yli::config::Setting(cartesian_coordinates_setting_struct);` ...\n";
                     new yli::config::Setting(cartesian_coordinates_setting_struct);
 
-                    SettingStruct x_setting_struct(std::make_shared<datatypes::AnyValue>(float_x));
+                    SettingStruct x_setting_struct(std::make_shared<yli::datatypes::AnyValue>(float_x));
                     x_setting_struct.name = "x";
                     x_setting_struct.setting_master = this->setting_master;
                     x_setting_struct.activate_callback = &yli::config::SettingMaster::activate_x;
@@ -68,7 +68,7 @@ namespace yli
                     std::cout << "Executing `new yli::config::Setting(x_setting_struct);` ...\n";
                     new yli::config::Setting(x_setting_struct);
 
-                    SettingStruct y_setting_struct(std::make_shared<datatypes::AnyValue>(float_y));
+                    SettingStruct y_setting_struct(std::make_shared<yli::datatypes::AnyValue>(float_y));
                     y_setting_struct.name = "y";
                     y_setting_struct.setting_master = this->setting_master;
                     y_setting_struct.activate_callback = &yli::config::SettingMaster::activate_y;
@@ -77,7 +77,7 @@ namespace yli
                     std::cout << "Executing `new yli::config::Setting(y_setting_struct);` ...\n";
                     new yli::config::Setting(y_setting_struct);
 
-                    SettingStruct z_setting_struct(std::make_shared<datatypes::AnyValue>(float_z));
+                    SettingStruct z_setting_struct(std::make_shared<yli::datatypes::AnyValue>(float_z));
                     z_setting_struct.name = "z";
                     z_setting_struct.setting_master = this->setting_master;
                     z_setting_struct.activate_callback = &yli::config::SettingMaster::activate_z;

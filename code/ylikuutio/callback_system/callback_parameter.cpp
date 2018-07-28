@@ -19,11 +19,11 @@ namespace yli
             if (!this->name.empty())
             {
                 // This is a named variable, so store it in parent's `anyvalue_hashmap`.
-                this->parent->set_any_value(this->name, std::make_shared<datatypes::AnyValue>(*this->any_value));
+                this->parent->set_any_value(this->name, std::make_shared<yli::datatypes::AnyValue>(*this->any_value));
             }
         }
 
-        CallbackParameter::CallbackParameter(const std::string& name, std::shared_ptr<datatypes::AnyValue> any_value, const bool is_reference, yli::callback_system::CallbackObject* const parent)
+        CallbackParameter::CallbackParameter(const std::string& name, std::shared_ptr<yli::datatypes::AnyValue> any_value, const bool is_reference, yli::callback_system::CallbackObject* const parent)
         {
             // constructor.
             this->name = name;
@@ -44,9 +44,9 @@ namespace yli
             this->parent->set_callback_parameter_pointer(this->childID, nullptr);
         }
 
-        std::shared_ptr<datatypes::AnyValue> CallbackParameter::get_any_value() const
+        std::shared_ptr<yli::datatypes::AnyValue> CallbackParameter::get_any_value() const
         {
-            return std::make_shared<datatypes::AnyValue>(*this->any_value);
+            return std::make_shared<yli::datatypes::AnyValue>(*this->any_value);
         }
     }
 }

@@ -96,15 +96,15 @@ namespace yli
             if (setting_master != nullptr && setting_master->is_setting("console_top_y"))
             {
                 // OK, there is a setting for `console_top_y`.
-                std::shared_ptr<datatypes::AnyValue> console_top_y_any_value = std::make_shared<datatypes::AnyValue>(*universe->get_setting_master()->setting_pointer_map["console_top_y"]->setting_value);
+                std::shared_ptr<yli::datatypes::AnyValue> console_top_y_any_value = std::make_shared<yli::datatypes::AnyValue>(*universe->get_setting_master()->setting_pointer_map["console_top_y"]->setting_value);
 
-                if (console_top_y_any_value->type == datatypes::UINT32_T)
+                if (console_top_y_any_value->type == yli::datatypes::UINT32_T)
                 {
                     this->console_top_y = console_top_y_any_value->uint32_t_value;
                 }
                 else
                 {
-                    // console_top_y` not `datatypes::UINT32_T`, so set `console_top_y` to 9.
+                    // console_top_y` not `yli::datatypes::UINT32_T`, so set `console_top_y` to 9.
                     this->console_top_y = 9;
                 }
             }
@@ -119,15 +119,15 @@ namespace yli
             if (setting_master != nullptr && setting_master->is_setting("console_bottom_y"))
             {
                 // OK, there is a setting for `console_bottom_y`.
-                std::shared_ptr<datatypes::AnyValue> console_bottom_y_any_value = std::make_shared<datatypes::AnyValue>(*universe->get_setting_master()->setting_pointer_map["console_bottom_y"]->setting_value);
+                std::shared_ptr<yli::datatypes::AnyValue> console_bottom_y_any_value = std::make_shared<yli::datatypes::AnyValue>(*universe->get_setting_master()->setting_pointer_map["console_bottom_y"]->setting_value);
 
-                if (console_bottom_y_any_value->type == datatypes::UINT32_T)
+                if (console_bottom_y_any_value->type == yli::datatypes::UINT32_T)
                 {
                     this->console_bottom_y = console_bottom_y_any_value->uint32_t_value;
                 }
                 else
                 {
-                    // console_bottom_y` not `datatypes::UINT32_T`, so set `console_bottom_y` to zero 0.
+                    // console_bottom_y` not `yli::datatypes::UINT32_T`, so set `console_bottom_y` to zero 0.
                     this->console_bottom_y = 0;
                 }
             }
@@ -142,15 +142,15 @@ namespace yli
             if (setting_master != nullptr && setting_master->is_setting("console_left_x"))
             {
                 // OK, there is a setting for `console_left_x`.
-                std::shared_ptr<datatypes::AnyValue> console_left_x_any_value = std::make_shared<datatypes::AnyValue>(*universe->get_setting_master()->setting_pointer_map["console_left_x"]->setting_value);
+                std::shared_ptr<yli::datatypes::AnyValue> console_left_x_any_value = std::make_shared<yli::datatypes::AnyValue>(*universe->get_setting_master()->setting_pointer_map["console_left_x"]->setting_value);
 
-                if (console_left_x_any_value->type == datatypes::UINT32_T)
+                if (console_left_x_any_value->type == yli::datatypes::UINT32_T)
                 {
                     this->console_left_x = console_left_x_any_value->uint32_t_value;
                 }
                 else
                 {
-                    // console_left_x` not `datatypes::UINT32_T`, so set `console_left_x` to zero 0.
+                    // console_left_x` not `yli::datatypes::UINT32_T`, so set `console_left_x` to zero 0.
                     this->console_left_x = 0;
                 }
             }
@@ -165,15 +165,15 @@ namespace yli
             if (setting_master != nullptr && setting_master->is_setting("console_right_x"))
             {
                 // OK, there is a setting for `console_right_x`.
-                std::shared_ptr<datatypes::AnyValue> console_right_x_any_value = std::make_shared<datatypes::AnyValue>(*universe->get_setting_master()->setting_pointer_map["console_right_x"]->setting_value);
+                std::shared_ptr<yli::datatypes::AnyValue> console_right_x_any_value = std::make_shared<yli::datatypes::AnyValue>(*universe->get_setting_master()->setting_pointer_map["console_right_x"]->setting_value);
 
-                if (console_right_x_any_value->type == datatypes::UINT32_T)
+                if (console_right_x_any_value->type == yli::datatypes::UINT32_T)
                 {
                     this->console_right_x = console_right_x_any_value->uint32_t_value;
                 }
                 else
                 {
-                    // console_right_x` not `datatypes::UINT32_T`, so set `console_right_x` to 9.
+                    // console_right_x` not `yli::datatypes::UINT32_T`, so set `console_right_x` to 9.
                     this->console_right_x = 9;
                 }
             }

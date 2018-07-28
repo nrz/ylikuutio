@@ -24,7 +24,7 @@ namespace yli
                 Line2D(const std::vector<float> point1, const std::vector<float> point2)
                     : Line(point1, point2)
                 {
-                    linear_algebra::Matrix line_points_matrix(2, 2);
+                    yli::linear_algebra::Matrix line_points_matrix(2, 2);
                     line_points_matrix << this->point1.at(0); line_points_matrix << this->point1.at(1);
                     line_points_matrix << this->point2.at(0); line_points_matrix << this->point2.at(1);
                     this->determinant = line_points_matrix.det();

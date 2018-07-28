@@ -10,6 +10,12 @@
 namespace glm{
 namespace detail
 {
+	template <typename T>
+	struct genTypeTrait<tquat<T> >
+	{
+		static const genTypeEnum GENTYPE = GENTYPE_QUAT;
+	};
+
 	template<typename T, qualifier Q, bool Aligned>
 	struct compute_dot<tquat<T, Q>, T, Aligned>
 	{
@@ -86,33 +92,33 @@ namespace detail
 
 #	if GLM_USE_DEFAULTED_FUNCTIONS == GLM_DISABLE
 		template<typename T, qualifier Q>
-		GLM_FUNC_QUALIFIER GLM_CONSTEXPR_CXX11 tquat<T, Q>::tquat()
-#			ifdef GLM_FORCE_CTOR_INIT
+		GLM_FUNC_QUALIFIER GLM_CONSTEXPR tquat<T, Q>::tquat()
+#			if GLM_USE_DEFAULTED_FUNCTIONS != GLM_DISABLE
 			: x(0), y(0), z(0), w(1)
 #			endif
 		{}
 
 		template<typename T, qualifier Q>
-		GLM_FUNC_QUALIFIER GLM_CONSTEXPR_CXX11 tquat<T, Q>::tquat(tquat<T, Q> const& q)
+		GLM_FUNC_QUALIFIER GLM_CONSTEXPR tquat<T, Q>::tquat(tquat<T, Q> const& q)
 			: x(q.x), y(q.y), z(q.z), w(q.w)
 		{}
 #	endif
 
 	template<typename T, qualifier Q>
 	template<qualifier P>
-	GLM_FUNC_QUALIFIER GLM_CONSTEXPR_CXX11 tquat<T, Q>::tquat(tquat<T, P> const& q)
+	GLM_FUNC_QUALIFIER GLM_CONSTEXPR tquat<T, Q>::tquat(tquat<T, P> const& q)
 		: x(q.x), y(q.y), z(q.z), w(q.w)
 	{}
 
 	// -- Explicit basic constructors --
 
 	template<typename T, qualifier Q>
-	GLM_FUNC_QUALIFIER GLM_CONSTEXPR_CXX11 tquat<T, Q>::tquat(T s, vec<3, T, Q> const& v)
+	GLM_FUNC_QUALIFIER GLM_CONSTEXPR tquat<T, Q>::tquat(T s, vec<3, T, Q> const& v)
 		: x(v.x), y(v.y), z(v.z), w(s)
 	{}
 
 	template <typename T, qualifier Q>
-	GLM_FUNC_QUALIFIER GLM_CONSTEXPR_CXX11 tquat<T, Q>::tquat(T _w, T _x, T _y, T _z)
+	GLM_FUNC_QUALIFIER GLM_CONSTEXPR tquat<T, Q>::tquat(T _w, T _x, T _y, T _z)
 		: x(_x), y(_y), z(_z), w(_w)
 	{}
 
@@ -120,7 +126,7 @@ namespace detail
 
 	template<typename T, qualifier Q>
 	template<typename U, qualifier P>
-	GLM_FUNC_QUALIFIER GLM_CONSTEXPR_CXX11 tquat<T, Q>::tquat(tquat<U, P> const& q)
+	GLM_FUNC_QUALIFIER GLM_CONSTEXPR tquat<T, Q>::tquat(tquat<U, P> const& q)
 		: x(static_cast<T>(q.x))
 		, y(static_cast<T>(q.y))
 		, z(static_cast<T>(q.z))
@@ -774,12 +780,26 @@ namespace detail
 	}
 
 	template<typename T, qualifier Q>
+	GLM_FUNC_QUALIFIER vec<4, bool, Q> equal(tquat<T, Q> const& x, tquat<T, Q> const& y, T epsilon)
+	{
+		vec<4, T, Q> v(x.x - y.x, x.y - y.y, x.z - y.z, x.w - y.w);
+		return lessThan(abs(v), vec<4, T, Q>(epsilon));
+	}
+
+	template<typename T, qualifier Q>
 	GLM_FUNC_QUALIFIER vec<4, bool, Q> notEqual(tquat<T, Q> const& x, tquat<T, Q> const& y)
 	{
 		vec<4, bool, Q> Result;
 		for(length_t i = 0; i < x.length(); ++i)
 			Result[i] = !detail::compute_equal<T, std::numeric_limits<T>::is_iec559>::call(x[i], y[i]);
 		return Result;
+	}
+
+	template<typename T, qualifier Q>
+	GLM_FUNC_QUALIFIER vec<4, bool, Q> notEqual(tquat<T, Q> const& x, tquat<T, Q> const& y, T epsilon)
+	{
+		vec<4, T, Q> v(x.x - y.x, x.y - y.y, x.z - y.z, x.w - y.w);
+		return greaterThanEqual(abs(v), vec<4, T, Q>(epsilon));
 	}
 
 	template<typename T, qualifier Q>
@@ -799,7 +819,7 @@ namespace detail
 	}
 }//namespace glm
 
-#if (GLM_ARCH & GLM_ARCH_SIMD_BIT) && (GLM_HAS_ANONYMOUS_STRUCT)
+#if GLM_USE_SIMD == GLM_ENABLE
 #	include "quaternion_simd.inl"
 #endif
 

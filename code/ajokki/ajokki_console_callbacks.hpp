@@ -12,15 +12,12 @@ namespace yli
     {
         class Console;
     }
-}
 
-namespace datatypes
-{
-    class AnyValue;
-}
+    namespace datatypes
+    {
+        class AnyValue;
+    }
 
-namespace yli
-{
     namespace ontology
     {
         class Entity;
@@ -29,17 +26,17 @@ namespace yli
 
 namespace ajokki
 {
-    std::shared_ptr<datatypes::AnyValue> version(
+    std::shared_ptr<yli::datatypes::AnyValue> version(
             yli::console::Console* console,
             yli::ontology::Entity*,
             std::vector<std::string>& command_parameters);
 
-    std::shared_ptr<datatypes::AnyValue> quit(
+    std::shared_ptr<yli::datatypes::AnyValue> quit(
             yli::console::Console*,
             yli::ontology::Entity*,
             std::vector<std::string>& command_parameters);
 
-    std::shared_ptr<datatypes::AnyValue> help(
+    std::shared_ptr<yli::datatypes::AnyValue> help(
             yli::console::Console*,
             yli::ontology::Entity*,
             std::vector<std::string>& command_parameters);
