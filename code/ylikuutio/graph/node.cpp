@@ -6,94 +6,97 @@
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
 
-namespace graph
+namespace yli
 {
-    void Node::bind_to_parent()
+    namespace graph
     {
-        yli::hierarchy::bind_child_to_parent<graph::Node*>(this, this->parent->node_pointer_vector, this->parent->free_nodeID_queue, &this->parent->number_of_nodes);
-    }
-
-    Node::Node(const NodeStruct& node_struct)
-    {
-        // constructor.
-        this->childID = node_struct.nodeID;
-        this->parent = node_struct.parent;
-
-        // set pointer to this node.
-        this->parent->set_node_pointer(this->childID, this);
-
-        // create all bidirectional links between this node and neighbor nodes.
-        for (std::size_t link_i = 0; link_i < this->neighbor_nodeIDs.size(); link_i++)
+        void Node::bind_to_parent()
         {
-            this->create_bidirectional_link(this->neighbor_nodeIDs[link_i]);
-        }
-    }
-
-    Node::~Node()
-    {
-        // destructor.
-        std::cout << "Node with childID " << this->childID << " will be destroyed.\n";
-
-        // delete all bidirectional links.
-        for (std::size_t link_i = 0; link_i < this->neighbor_nodeIDs.size(); link_i++)
-        {
-            this->delete_bidirectional_link(this->neighbor_nodeIDs[link_i]);
+            yli::hierarchy::bind_child_to_parent<yli::graph::Node*>(this, this->parent->node_pointer_vector, this->parent->free_nodeID_queue, &this->parent->number_of_nodes);
         }
 
-        // set pointer to this node to nullptr.
-        this->parent->set_node_pointer(this->childID, nullptr);
-    }
-
-    void Node::create_unidirectional_link(std::size_t nodeID)
-    {
-        // this method creates an unidirectional link.
-
-        // check that a link not exist already.
-        if (std::find(this->neighbor_nodeIDs.begin(), this->neighbor_nodeIDs.end(), nodeID) == this->neighbor_nodeIDs.end())
+        Node::Node(const NodeStruct& node_struct)
         {
-            // OK, it does not exist yet,
-            // so create a link from this node to destination node.
-            this->neighbor_nodeIDs.push_back(nodeID);
+            // constructor.
+            this->childID = node_struct.nodeID;
+            this->parent = node_struct.parent;
+
+            // set pointer to this node.
+            this->parent->set_node_pointer(this->childID, this);
+
+            // create all bidirectional links between this node and neighbor nodes.
+            for (std::size_t link_i = 0; link_i < this->neighbor_nodeIDs.size(); link_i++)
+            {
+                this->create_bidirectional_link(this->neighbor_nodeIDs[link_i]);
+            }
         }
-        // an alternative: create a link from this node to destination node without checking its prior existence.
-        // this->neighbor_nodeIDs.push_back(nodeID);
-    }
 
-    void Node::create_bidirectional_link(std::size_t nodeID)
-    {
-        // create a link from this node to destination node.
-        this->create_unidirectional_link(nodeID);
+        Node::~Node()
+        {
+            // destructor.
+            std::cout << "Node with childID " << this->childID << " will be destroyed.\n";
 
-        // create a link from destination node to this node.
-        static_cast<graph::Node*>(this->parent->get_node_pointer(childID))->create_unidirectional_link(this->childID);
-    }
+            // delete all bidirectional links.
+            for (std::size_t link_i = 0; link_i < this->neighbor_nodeIDs.size(); link_i++)
+            {
+                this->delete_bidirectional_link(this->neighbor_nodeIDs[link_i]);
+            }
 
-    void Node::delete_unidirectional_link(std::size_t nodeID)
-    {
-        // this method deletes an unidirectional link.
-        this->neighbor_nodeIDs.erase(std::remove(this->neighbor_nodeIDs.begin(), this->neighbor_nodeIDs.end(), nodeID), this->neighbor_nodeIDs.end());
-    }
+            // set pointer to this node to nullptr.
+            this->parent->set_node_pointer(this->childID, nullptr);
+        }
 
-    void Node::delete_bidirectional_link(std::size_t nodeID)
-    {
-        // this method deletes a bidirectional link.
-        this->delete_unidirectional_link(nodeID);
+        void Node::create_unidirectional_link(std::size_t nodeID)
+        {
+            // this method creates an unidirectional link.
 
-        // delete a link from destination node to this node.
-        static_cast<graph::Node*>(this->parent->get_node_pointer(childID))->delete_unidirectional_link(this->childID);
-    }
+            // check that a link not exist already.
+            if (std::find(this->neighbor_nodeIDs.begin(), this->neighbor_nodeIDs.end(), nodeID) == this->neighbor_nodeIDs.end())
+            {
+                // OK, it does not exist yet,
+                // so create a link from this node to destination node.
+                this->neighbor_nodeIDs.push_back(nodeID);
+            }
+            // an alternative: create a link from this node to destination node without checking its prior existence.
+            // this->neighbor_nodeIDs.push_back(nodeID);
+        }
 
-    // Transfering a `Node` to a new `Graph` is similar to `bind_to_new_parent`, but there is one important difference:
-    // `Node`s have references (links) to other `Node`s, whereas `Shader`s, `Material`s, `Species`, `VectorFont`s, `Glyph`s, and `Object`s do not.
-    // The easiest way would be to request new `childID` for each new `Node`, and this will be probably be implemented first.
-    // Another option would be to change only those `childID`'s for which there would be duplicate `childID`'s.
-    // However, that may consume huge amounts of memory if a big object (eg. a terrain object) is split into several smaller objects.
-    // Therefore a `childID_bias` needs to be defined for each `Graph`, it will be used for reindexing.
-    // If `Node::bind_to_parent` would cause overflow (2^32 = 4 294 967 295), it will instead give smallest current `childID` of the graph and
-    // decrement `childID_bias` by 1.
+        void Node::create_bidirectional_link(std::size_t nodeID)
+        {
+            // create a link from this node to destination node.
+            this->create_unidirectional_link(nodeID);
 
-    void Node::bind_to_new_parent(graph::Graph *new_graph_pointer)
-    {
-        yli::hierarchy::bind_child_to_new_parent<graph::Node*, graph::Graph*>(this, new_graph_pointer, this->parent->node_pointer_vector, this->parent->free_nodeID_queue, &this->parent->number_of_nodes);
+            // create a link from destination node to this node.
+            static_cast<yli::graph::Node*>(this->parent->get_node_pointer(childID))->create_unidirectional_link(this->childID);
+        }
+
+        void Node::delete_unidirectional_link(std::size_t nodeID)
+        {
+            // this method deletes an unidirectional link.
+            this->neighbor_nodeIDs.erase(std::remove(this->neighbor_nodeIDs.begin(), this->neighbor_nodeIDs.end(), nodeID), this->neighbor_nodeIDs.end());
+        }
+
+        void Node::delete_bidirectional_link(std::size_t nodeID)
+        {
+            // this method deletes a bidirectional link.
+            this->delete_unidirectional_link(nodeID);
+
+            // delete a link from destination node to this node.
+            static_cast<yli::graph::Node*>(this->parent->get_node_pointer(childID))->delete_unidirectional_link(this->childID);
+        }
+
+        // Transfering a `Node` to a new `Graph` is similar to `bind_to_new_parent`, but there is one important difference:
+        // `Node`s have references (links) to other `Node`s, whereas `Shader`s, `Material`s, `Species`, `VectorFont`s, `Glyph`s, and `Object`s do not.
+        // The easiest way would be to request new `childID` for each new `Node`, and this will be probably be implemented first.
+        // Another option would be to change only those `childID`'s for which there would be duplicate `childID`'s.
+        // However, that may consume huge amounts of memory if a big object (eg. a terrain object) is split into several smaller objects.
+        // Therefore a `childID_bias` needs to be defined for each `Graph`, it will be used for reindexing.
+        // If `Node::bind_to_parent` would cause overflow (2^32 = 4 294 967 295), it will instead give smallest current `childID` of the graph and
+        // decrement `childID_bias` by 1.
+
+        void Node::bind_to_new_parent(yli::graph::Graph *new_graph_pointer)
+        {
+            yli::hierarchy::bind_child_to_new_parent<yli::graph::Node*, yli::graph::Graph*>(this, new_graph_pointer, this->parent->node_pointer_vector, this->parent->free_nodeID_queue, &this->parent->number_of_nodes);
+        }
     }
 }

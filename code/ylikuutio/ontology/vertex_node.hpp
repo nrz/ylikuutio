@@ -14,12 +14,12 @@ namespace yli
 {
     namespace ontology
     {
-        class VertexNode: public graph::Node
+        class VertexNode: public yli::graph::Node
         {
             public:
                 // constructor.
                 VertexNode(glm::vec3 coordinate_vector, const NodeStruct& node_struct)
-                    : graph::Node(node_struct)
+                    : yli::graph::Node(node_struct)
                 {
                     // constructor.
                     this->coordinate_vector = coordinate_vector;

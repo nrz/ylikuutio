@@ -69,9 +69,12 @@ namespace yli
     }
 }
 
-namespace graph
+namespace yli
 {
-    class Graph;
+    namespace graph
+    {
+        class Graph;
+    }
 }
 
 namespace yli
