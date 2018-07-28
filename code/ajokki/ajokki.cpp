@@ -82,6 +82,7 @@
 
 // Include standard headers
 #include <cmath>         // NAN, std::isnan, std::pow
+#include <cstddef>       // std::size_t
 #include <cstdio>        // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf etc.
 #include <iostream>      // std::cout, std::cin, std::cerr
 #include <limits>        // std::numeric_limits
@@ -988,7 +989,7 @@ int main(const int argc, const char* argv[])
             my_universe->current_camera_up = glm::cross(my_universe->current_camera_right, my_universe->current_camera_direction);
 
             // Check for key releases and call corresponding callbacks.
-            for (uint32_t i = 0; i < (*current_keyrelease_callback_engine_vector_pointer)->size(); i++)
+            for (std::size_t i = 0; i < (*current_keyrelease_callback_engine_vector_pointer)->size(); i++)
             {
                 bool is_released = false;
 
@@ -1066,7 +1067,7 @@ int main(const int argc, const char* argv[])
                             // they signal it, eg. with `ENTER_CONSOLE_MAGIC_NUMBER`
                             // (as in this loop).
 
-                            for (uint32_t key_code = 0; key_code <= GLFW_KEY_LAST; key_code++)
+                            for (std::size_t key_code = 0; key_code <= GLFW_KEY_LAST; key_code++)
                             {
                                 glfwGetKey(my_universe->get_window(), static_cast<int>(key_code));
                             }
@@ -1082,7 +1083,7 @@ int main(const int argc, const char* argv[])
                             // this are the same as when entering the console.
                             // See the above comment related to entering the console.
 
-                            for (uint32_t key_code = 0; key_code <= GLFW_KEY_LAST; key_code++)
+                            for (std::size_t key_code = 0; key_code <= GLFW_KEY_LAST; key_code++)
                             {
                                 glfwGetKey(my_universe->get_window(), static_cast<int>(key_code));
                             }
@@ -1098,7 +1099,7 @@ int main(const int argc, const char* argv[])
                             // this are the same as when entering the console.
                             // See the above comment related to entering the console.
 
-                            for (uint32_t key_code = 0; key_code <= GLFW_KEY_LAST; key_code++)
+                            for (std::size_t key_code = 0; key_code <= GLFW_KEY_LAST; key_code++)
                             {
                                 glfwGetKey(my_universe->get_window(), static_cast<int>(key_code));
                             }
@@ -1249,14 +1250,14 @@ int main(const int argc, const char* argv[])
     cleanup_callback_engine->execute();
 
     // Delete all keyrelease callback engines.
-    for (uint32_t i = 0; i < action_mode_keyrelease_callback_engines->size(); i++)
+    for (std::size_t i = 0; i < action_mode_keyrelease_callback_engines->size(); i++)
     {
         delete action_mode_keyrelease_callback_engines->at(i).callback_engine;
     }
     delete action_mode_keyrelease_callback_engines;
 
     // Delete all keypress callback engines.
-    for (uint32_t i = 0; i < action_mode_keypress_callback_engines->size(); i++)
+    for (std::size_t i = 0; i < action_mode_keypress_callback_engines->size(); i++)
     {
         delete action_mode_keypress_callback_engines->at(i).callback_engine;
     }
