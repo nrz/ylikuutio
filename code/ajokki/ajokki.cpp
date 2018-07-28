@@ -994,7 +994,7 @@ int main(const int argc, const char* argv[])
 
                 if (input_method_in_use == yli::input::KEYBOARD)
                 {
-                    if (glfwGetKey(my_universe->get_window(), (*current_keyrelease_callback_engine_vector_pointer)->at(i).keycode) == GLFW_RELEASE)
+                    if (glfwGetKey(my_universe->get_window(), static_cast<int>((*current_keyrelease_callback_engine_vector_pointer)->at(i).keycode)) == GLFW_RELEASE)
                     {
                         is_released = true;
                     }
@@ -1020,13 +1020,13 @@ int main(const int argc, const char* argv[])
             }
 
             // Check for keypresses and call corresponding callbacks.
-            for (uint32_t i = 0; i < (*current_keypress_callback_engine_vector_pointer)->size(); i++)
+            for (std::size_t i = 0; i < (*current_keypress_callback_engine_vector_pointer)->size(); i++)
             {
                 bool is_pressed = false;
 
                 if (input_method_in_use == yli::input::KEYBOARD)
                 {
-                    if (glfwGetKey(my_universe->get_window(), (*current_keypress_callback_engine_vector_pointer)->at(i).keycode) == GLFW_PRESS)
+                    if (glfwGetKey(my_universe->get_window(), static_cast<int>((*current_keypress_callback_engine_vector_pointer)->at(i).keycode)) == GLFW_PRESS)
                     {
                         is_pressed = true;
                     }
@@ -1068,7 +1068,7 @@ int main(const int argc, const char* argv[])
 
                             for (uint32_t key_code = 0; key_code <= GLFW_KEY_LAST; key_code++)
                             {
-                                glfwGetKey(my_universe->get_window(), key_code);
+                                glfwGetKey(my_universe->get_window(), static_cast<int>(key_code));
                             }
 
                             // Do not display help screen when in console.
@@ -1084,7 +1084,7 @@ int main(const int argc, const char* argv[])
 
                             for (uint32_t key_code = 0; key_code <= GLFW_KEY_LAST; key_code++)
                             {
-                                glfwGetKey(my_universe->get_window(), key_code);
+                                glfwGetKey(my_universe->get_window(), static_cast<int>(key_code));
                             }
 
                             // Enable display help screen when not in console.
@@ -1100,7 +1100,7 @@ int main(const int argc, const char* argv[])
 
                             for (uint32_t key_code = 0; key_code <= GLFW_KEY_LAST; key_code++)
                             {
-                                glfwGetKey(my_universe->get_window(), key_code);
+                                glfwGetKey(my_universe->get_window(), static_cast<int>(key_code));
                             }
 
                             is_exit_requested = true;
