@@ -2,7 +2,6 @@
 #define __SYMBIOSIS_LOADER_STRUCT_HPP_INCLUDED
 
 // Include standard headers
-#include <cmath>    // NAN, std::isnan, std::pow
 #include <string>   // std::string
 
 typedef struct SymbiosisLoaderStruct
