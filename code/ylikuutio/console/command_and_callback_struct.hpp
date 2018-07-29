@@ -1,10 +1,16 @@
 #ifndef __COMMAND_AND_CALLBACK_STRUCT_HPP_INCLUDED
 #define __COMMAND_AND_CALLBACK_STRUCT_HPP_INCLUDED
 
-#include "code/ylikuutio/callback_system/callback_engine.hpp"
-
 // Include standard headers
 #include <string>   // std::string
+
+namespace yli
+{
+    namespace callback_system
+    {
+        class CallbackEngine;
+    }
+}
 
 typedef struct
 {
