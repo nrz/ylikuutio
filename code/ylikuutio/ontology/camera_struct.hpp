@@ -21,21 +21,23 @@ namespace yli
 typedef struct CameraStruct
 {
     CameraStruct()
-        : parent(nullptr),
-        cartesian_coordinates(glm::vec3(NAN, NAN, NAN)),
+        : cartesian_coordinates(glm::vec3(NAN, NAN, NAN)),
         direction(glm::vec3(NAN, NAN, NAN)),
+        parent(nullptr),
         horizontal_angle(NAN),
         vertical_angle(NAN)
     {
         // constructor.
     }
-    yli::ontology::Scene* parent;                          // pointer to the parent `Scene`.
 
     // `cartesian_coordinates` can be accessed as a vector or as single coordinates `x`, `y`, `z`.
     glm::vec3 cartesian_coordinates; // coordinate vector.
 
     // `direction` can be accessed as a vector or as single coordinates `pitch`, `roll`, `yaw`.
     glm::vec3 direction;             // direction vector.
+
+    yli::ontology::Scene* parent;    // pointer to the parent `Scene`.
+
     double horizontal_angle;
     double vertical_angle;
 } CameraStruct;

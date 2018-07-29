@@ -32,30 +32,30 @@ namespace yli
 typedef struct BiontStruct
 {
     BiontStruct()
-        : holobiont_parent(nullptr),
-        biontID(std::numeric_limits<std::size_t>::max()),
-        original_scale_vector(glm::vec3(1.0f, 1.0f, 1.0f)),
-        rotate_angle(0.0f),
-        initial_rotate_angle(PI),
-        quaternions_in_use(false),
+        : original_scale_vector(glm::vec3(1.0f, 1.0f, 1.0f)),
         cartesian_coordinates(glm::vec3(NAN, NAN, NAN)),
         rotate_vector(glm::vec3(0.0f, 0.0f, 0.0f)),
         initial_rotate_vector(glm::vec3(0.0f, 1.0f, 1.0f)),
         translate_vector(glm::vec3(0.0f, 0.0f, 0.0f)),
+        holobiont_parent(nullptr),
+        biontID(std::numeric_limits<std::size_t>::max()),
+        rotate_angle(0.0f),
+        initial_rotate_angle(PI),
+        quaternions_in_use(false),
         texture(0)
     {
         // constructor.
     }
-    yli::ontology::Holobiont* holobiont_parent; // pointer to the parent `Holobiont`.
-    std::size_t biontID;
     glm::vec3 original_scale_vector; // original scale vector.
-    float rotate_angle;              // rotate angle.
-    float initial_rotate_angle;      // initial rotate angle.
-    bool quaternions_in_use;
     glm::vec3 cartesian_coordinates; // coordinate vector.
     glm::vec3 rotate_vector;         // rotate vector.
     glm::vec3 initial_rotate_vector; // initial rotate vector.
     glm::vec3 translate_vector;      // translate vector.
+    yli::ontology::Holobiont* holobiont_parent; // pointer to the parent `Holobiont`.
+    std::size_t biontID;
+    float rotate_angle;              // rotate angle.
+    float initial_rotate_angle;      // initial rotate angle.
+    bool quaternions_in_use;
     GLuint texture;
 } BiontStruct;
 
