@@ -192,7 +192,7 @@ namespace yli
             dest_string = data_string.substr(original_data_index, data_index - original_data_index);
         }
 
-        int32_t extract_last_part_of_string(
+        std::size_t extract_last_part_of_string(
                 const char* const src_base_pointer,
                 const std::size_t src_data_size,
                 char* const dest_base_pointer,

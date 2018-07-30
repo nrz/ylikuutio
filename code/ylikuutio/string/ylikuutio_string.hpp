@@ -55,7 +55,7 @@ namespace yli
                 std::string& dest_string,
                 const char* const char_end_string);
 
-        int32_t extract_last_part_of_string(
+        std::size_t extract_last_part_of_string(
                 const char* const src_base_pointer,
                 const std::size_t src_data_size,
                 char* const dest_base_pointer,
