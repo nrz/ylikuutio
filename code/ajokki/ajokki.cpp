@@ -59,7 +59,7 @@
 #include "code/ylikuutio/opengl/opengl.hpp"
 #include "code/ylikuutio/time/time.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
-#include "code/ylikuutio/common/globals.hpp"
+#include "code/ylikuutio/common/printing_struct.hpp"
 #include "code/ylikuutio/common/pi.hpp"
 
 // Include GLEW

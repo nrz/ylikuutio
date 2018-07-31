@@ -346,6 +346,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/common/any_value.hpp
     code/ylikuutio/common/globals.hpp
     code/ylikuutio/common/pi.hpp
+    code/ylikuutio/common/printing_struct.hpp
     code/ylikuutio/common/spherical_coordinates_struct.hpp
 
     # config, in alphabetical order.
