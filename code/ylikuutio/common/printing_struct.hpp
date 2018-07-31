@@ -7,7 +7,16 @@
 typedef struct PrintingStruct
 {
     PrintingStruct()
-        : screen_width(-1), screen_height(-1), x(-1), y(-1), text_size(-1), font_size(-1), text_char(nullptr), char_font_texture_file_format(nullptr), horizontal_alignment(nullptr), vertical_alignment(nullptr)
+        : screen_width(-1),
+        screen_height(-1),
+        x(-1),
+        y(-1),
+        text_size(-1),
+        font_size(-1),
+        text_char(nullptr),
+        char_font_texture_file_format(nullptr),
+        horizontal_alignment(nullptr),
+        vertical_alignment(nullptr)
     {
         // constructor.
     }
