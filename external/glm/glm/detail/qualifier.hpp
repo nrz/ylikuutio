@@ -15,7 +15,7 @@ namespace glm
 		packed_mediump, ///< Typed data is tightly packed in memory  and operations are executed with medium precision in term of ULPs for higher performance
 		packed_lowp, ///< Typed data is tightly packed in memory  and operations are executed with low precision in term of ULPs to maximize performance
 
-#		if GLM_USE_ALIGNED_GENTYPES == GLM_ENABLE
+#		if GLM_CONFIG_ALIGNED_GENTYPES == GLM_ENABLE
 			aligned_highp, ///< Typed data is aligned in memory allowing SIMD optimizations and operations are executed with high precision in term of ULPs
 			aligned_mediump, ///< Typed data is aligned in memory allowing SIMD optimizations and operations are executed with high precision in term of ULPs for higher performance
 			aligned_lowp, // ///< Typed data is aligned in memory allowing SIMD optimizations and operations are executed with high precision in term of ULPs to maximize performance
@@ -27,7 +27,7 @@ namespace glm
 		lowp = packed_lowp, ///< By default lowp qualifier is also packed
 		packed = packed_highp, ///< By default packed qualifier is also high precision
 
-#		if GLM_USE_ALIGNED_GENTYPES == GLM_ENABLE && defined(GLM_FORCE_DEFAULT_ALIGNED_GENTYPES)
+#		if GLM_CONFIG_ALIGNED_GENTYPES == GLM_ENABLE && defined(GLM_FORCE_DEFAULT_ALIGNED_GENTYPES)
 			defaultp = aligned_highp
 #		else
 			defaultp = highp
@@ -47,7 +47,7 @@ namespace detail
 		static const bool value = false;
 	};
 
-#	if GLM_USE_ALIGNED_GENTYPES == GLM_ENABLE
+#	if GLM_CONFIG_ALIGNED_GENTYPES == GLM_ENABLE
 		template<>
 		struct is_aligned<glm::aligned_lowp>
 		{
@@ -178,7 +178,7 @@ namespace detail
 	template<typename genType>
 	struct init_gentype<genType, GENTYPE_QUAT>
 	{
-		GLM_FUNC_QUALIFIER static genType identity()
+		GLM_FUNC_QUALIFIER GLM_CONSTEXPR static genType identity()
 		{
 			return genType(1, 0, 0, 0);
 		}
@@ -187,7 +187,7 @@ namespace detail
 	template<typename genType>
 	struct init_gentype<genType, GENTYPE_MAT>
 	{
-		GLM_FUNC_QUALIFIER static genType identity()
+		GLM_FUNC_QUALIFIER GLM_CONSTEXPR static genType identity()
 		{
 			return genType(1);
 		}
