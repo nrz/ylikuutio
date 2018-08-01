@@ -1120,8 +1120,8 @@ int main(const int argc, const char* argv[])
             my_console->draw_console();
 
             PrintingStruct printing_struct;
-            printing_struct.screen_width = static_cast<GLuint>(my_universe->get_window_width());
-            printing_struct.screen_height = static_cast<GLuint>(my_universe->get_window_height());
+            printing_struct.screen_width = my_universe->get_window_width();
+            printing_struct.screen_height = my_universe->get_window_height();
             printing_struct.text_size = my_universe->get_text_size();
             printing_struct.font_size = my_universe->get_font_size();
             printing_struct.char_font_texture_file_format = "bmp";
