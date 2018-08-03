@@ -103,6 +103,16 @@ namespace yli
             return this->arg_map.count(key) == 1;
         }
 
+        std::string CommandLineMaster::get_value(const std::string& key)
+        {
+            if (this->arg_map.count(key) == 1)
+            {
+                return this->arg_map[key];
+            }
+
+            return "";
+        }
+
         void CommandLineMaster::print_keys()
         {
             // Print command line arguments (without the executable name string).
