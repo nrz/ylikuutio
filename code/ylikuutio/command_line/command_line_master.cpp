@@ -98,6 +98,11 @@ namespace yli
             }
         }
 
+        bool CommandLineMaster::is_key(const std::string& key)
+        {
+            return this->arg_map.count(key) == 1;
+        }
+
         void CommandLineMaster::print_keys()
         {
             // Print command line arguments (without the executable name string).
