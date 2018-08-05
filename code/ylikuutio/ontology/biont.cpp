@@ -30,14 +30,12 @@ namespace yli
 
         void Biont::bind_to_symbiont_species()
         {
-            if (this->holobiont_parent == nullptr)
+            if (this->holobiont_parent != nullptr)
             {
-                return;
+                yli::ontology::Symbiosis* symbiosis = static_cast<yli::ontology::Symbiosis*>(this->holobiont_parent->get_parent());
+                this->symbiont_species = symbiosis->get_symbiont_species(this->biontID);
+                this->symbiont_species->bind_biont(this);
             }
-
-            yli::ontology::Symbiosis* symbiosis = static_cast<yli::ontology::Symbiosis*>(this->holobiont_parent->get_parent());
-            this->symbiont_species = symbiosis->get_symbiont_species(this->biontID);
-            this->symbiont_species->bind_biont(this);
         }
 
         void Biont::bind_to_new_parent(yli::ontology::Holobiont* const new_holobiont_parent)
