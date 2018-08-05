@@ -62,6 +62,11 @@ namespace yli
                 const std::size_t dest_data_size,
                 const char separator);
 
+        std::size_t extract_last_part_of_string(
+                const std::string& data_string,
+                std::string& dest_string,
+                const char separator);
+
         int32_t extract_int32_t_value_from_string(
                 const char* const src_base_pointer,
                 char*& src_data_pointer,
