@@ -131,6 +131,15 @@ namespace yli
 
         void Holobiont::create_bionts()
         {
+            // requirements:
+            // `this->symbiosis_parent` must not be `nullptr`.
+
+            if (this->symbiosis_parent == nullptr)
+            {
+                std::cerr << "ERROR: `Holobiont::create_bionts`: `this->symbiosis_parent` is `nullptr`!\n";
+                return;
+            }
+
             std::cout << "Creating bionts for Holobiont located at 0x" << std::hex << (uint64_t) this << std::dec << " ...\n";
             // Create `Biont` entities so that
             // they bind this `Holobiont`.
