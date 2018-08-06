@@ -135,15 +135,31 @@ namespace yli
         void Biont::render()
         {
             // render this `Biont`.
+            //
+            // requirements:
+            // `this->holobiont_parent` must not be `nullptr`.
+            // `this->holobiont_parent->get_parent()` must not be `nullptr`.
+
+            const yli::ontology::Holobiont* const holobiont = this->holobiont_parent;
+
+            if (holobiont == nullptr)
+            {
+                std::cerr << "ERROR: `Biont::render`: `holobiont` is `nullptr`!\n";
+                return;
+            }
+
+            const yli::ontology::Symbiosis* const symbiosis = static_cast<yli::ontology::Symbiosis*>(holobiont->get_parent());
+
+            if (symbiosis == nullptr)
+            {
+                std::cerr << "ERROR: `Biont::render`: `symbiosis` is `nullptr`!\n";
+                return;
+            }
 
             if (this->should_ylikuutio_render_this_biont)
             {
                 this->prerender();
-
-                yli::ontology::Symbiosis* symbiosis = static_cast<yli::ontology::Symbiosis*>(this->holobiont_parent->get_parent());
-                yli::ontology::Shader* shader = static_cast<yli::ontology::Shader*>(symbiosis->get_parent());
-                this->render_this_biont(shader);
-
+                this->render_this_biont(static_cast<yli::ontology::Shader*>(symbiosis->get_parent()));
                 this->postrender();
             }
         }
