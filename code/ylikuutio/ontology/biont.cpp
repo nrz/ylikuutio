@@ -1,5 +1,6 @@
 #include "biont.hpp"
 #include "holobiont.hpp"
+#include "symbiosis.hpp"
 #include "symbiont_species.hpp"
 #include "biont_struct.hpp"
 #include "render_templates.hpp"
