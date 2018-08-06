@@ -19,6 +19,7 @@
 
 // Include standard headers
 #include <cmath> // NAN, std::isnan, std::pow
+#include <cstddef>  // std::size_t
 #include <limits>   // std::numeric_limits
 
 namespace yli
