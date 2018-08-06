@@ -61,14 +61,33 @@ namespace yli
 
         void Holobiont::bind_to_new_parent(yli::ontology::Symbiosis* const new_parent)
         {
-            // this method sets pointer to this `Object` to nullptr, sets `parent` according to the input,
+            // this method sets pointer to this `Holobiont` to `nullptr`, sets `symbiosis_parent` according to the input,
             // and requests a new `childID` from the new `Symbiosis`.
+            //
+            // requirements:
+            // `this->symbiosis_parent` must not be `nullptr`.
+            // `new_parent` must not be `nullptr`.
 
-            // unbind from the old parent `Model`.
-            this->symbiosis_parent->unbind_holobiont(this->childID);
+            yli::ontology::Symbiosis* const symbiosis = this->symbiosis_parent;
 
-            // get `childID` from `Model` and set pointer to this `Object`.
-            new_parent->bind_holobiont(this);
+            if (symbiosis == nullptr)
+            {
+                std::cerr << "ERROR: `Holobiont::bind_to_new_parent`: `symbiosis` is `nullptr`!\n";
+                return;
+            }
+
+            if (new_parent == nullptr)
+            {
+                std::cerr << "ERROR: `Holobiont::bind_to_new_parent`: `new_parent` is `nullptr`!\n";
+                return;
+            }
+
+            // unbind from the old parent `Symbiosis`.
+            symbiosis->unbind_holobiont(this->childID);
+
+            // get `childID` from `Symbiosis` and set pointer to this `Holobiont`.
+            this->symbiosis_parent = new_parent;
+            this->symbiosis_parent->bind_holobiont(this);
         }
 
         Holobiont::~Holobiont()
