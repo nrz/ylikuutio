@@ -1,4 +1,5 @@
 #include "biont.hpp"
+#include "shader.hpp"
 #include "holobiont.hpp"
 #include "symbiosis.hpp"
 #include "symbiont_species.hpp"
