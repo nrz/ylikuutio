@@ -2,7 +2,6 @@
 #define __HOLOBIONT_HPP_INCLUDED
 
 #include "movable.hpp"
-#include "shader.hpp"
 #include "symbiosis.hpp"
 #include "holobiont_struct.hpp"
 #include "render_templates.hpp"
