@@ -164,10 +164,51 @@ namespace yli
             }
         }
 
-        void Biont::render_this_biont(yli::ontology::Shader* const shader_pointer)
+        void Biont::render_this_biont(const yli::ontology::Shader* const shader)
         {
-            yli::ontology::Holobiont* holobiont = this->holobiont_parent;
-            yli::ontology::Symbiosis* symbiosis = static_cast<yli::ontology::Symbiosis*>(holobiont->get_parent());
+            // requirements:
+            // `this->universe` must not be `nullptr`.
+            // `shader` must not be `nullptr`.
+            // `this->holobiont_parent` must not be `nullptr`.
+            // `this->symbiont_species` must not be `nullptr`.
+
+            yli::ontology::Universe* const universe = this->universe;
+
+            if (universe == nullptr)
+            {
+                std::cerr << "ERROR: `Biont::render_this_biont`: `universe` is `nullptr`!\n";
+                return;
+            }
+
+            if (shader == nullptr)
+            {
+                std::cerr << "ERROR: `Biont::render_this_biont`: `shader` is `nullptr`!\n";
+                return;
+            }
+
+            const yli::ontology::Holobiont* const holobiont = this->holobiont_parent;
+
+            if (holobiont == nullptr)
+            {
+                std::cerr << "ERROR: `Biont::render_this_biont`: `holobiont` is `nullptr`!\n";
+                return;
+            }
+
+            yli::ontology::Symbiosis* const symbiosis = static_cast<yli::ontology::Symbiosis*>(holobiont->get_parent());
+
+            if (symbiosis == nullptr)
+            {
+                std::cerr << "ERROR: `Biont::render_this_biont`: `symbiosis` is `nullptr`!\n";
+                return;
+            }
+
+            const yli::ontology::SymbiontSpecies* const symbiont_species = this->symbiont_species;
+
+            if (symbiont_species == nullptr)
+            {
+                std::cerr << "ERROR: `Biont::render_this_biont`: `symbiont_species` is `nullptr`!\n";
+                return;
+            }
 
             if (!this->has_entered)
             {
@@ -209,7 +250,7 @@ namespace yli
                 this->cartesian_coordinates = glm::vec3(this->model_matrix[3][0], this->model_matrix[3][1], this->model_matrix[3][2]);
             }
 
-            this->MVP_matrix = this->universe->get_projection_matrix() * this->universe->get_view_matrix() * this->model_matrix;
+            this->MVP_matrix = universe->get_projection_matrix() * universe->get_view_matrix() * this->model_matrix;
 
             // Bind our texture in Texture Unit 0.
             glActiveTexture(GL_TEXTURE0);
@@ -229,8 +270,6 @@ namespace yli
                     light_position.y,
                     light_position.z);
 
-            const yli::ontology::SymbiontSpecies* const symbiont_species = this->symbiont_species;
-
             // 1st attribute buffer : vertices.
             glEnableVertexAttribArray(symbiont_species->get_vertex_position_modelspaceID());
 
@@ -244,8 +283,8 @@ namespace yli
 
             // Send our transformation to the currently bound shader,
             // in the "MVP" uniform.
-            glUniformMatrix4fv(shader_pointer->get_matrixID(), 1, GL_FALSE, &this->MVP_matrix[0][0]);
-            glUniformMatrix4fv(shader_pointer->get_model_matrixID(), 1, GL_FALSE, &this->model_matrix[0][0]);
+            glUniformMatrix4fv(shader->get_matrixID(), 1, GL_FALSE, &this->MVP_matrix[0][0]);
+            glUniformMatrix4fv(shader->get_model_matrixID(), 1, GL_FALSE, &this->model_matrix[0][0]);
 
             GLuint vertexbuffer = symbiont_species->get_vertexbuffer();
             GLuint vertex_position_modelspaceID = symbiont_species->get_vertex_position_modelspaceID();

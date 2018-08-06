@@ -100,7 +100,7 @@ namespace yli
 
                 // this method renders this `Biont`.
                 void render();
-                void render_this_biont(yli::ontology::Shader* const shader_pointer);
+                void render_this_biont(const yli::ontology::Shader* const shader);
 
                 std::size_t get_number_of_children() const override;
                 std::size_t get_number_of_descendants() const override;
