@@ -40,12 +40,36 @@ namespace yli
 
         void Biont::bind_to_symbiont_species()
         {
-            if (this->holobiont_parent != nullptr)
+            // requirements:
+            // `this->holobiont_parent` must not be `nullptr`.
+            // `this->holobiont_parent->get_parent()` must not be `nullptr`.
+            // `this->symbiont_species` must not be `nullptr`.
+
+            const yli::ontology::Holobiont* const holobiont = this->holobiont_parent;
+
+            if (holobiont == nullptr)
             {
-                yli::ontology::Symbiosis* symbiosis = static_cast<yli::ontology::Symbiosis*>(this->holobiont_parent->get_parent());
-                this->symbiont_species = symbiosis->get_symbiont_species(this->biontID);
-                this->symbiont_species->bind_biont(this);
+                std::cerr << "ERROR: `Biont::bind_to_symbiont_species`: `holobiont` is `nullptr`!\n";
+                return;
             }
+
+            const yli::ontology::Symbiosis* const symbiosis = static_cast<yli::ontology::Symbiosis*>(holobiont->get_parent());
+
+            if (symbiosis == nullptr)
+            {
+                std::cerr << "ERROR: `Biont::bind_to_symbiont_species`: `symbiosis` is `nullptr`!\n";
+                return;
+            }
+
+            yli::ontology::SymbiontSpecies* const symbiont_species = this->symbiont_species;
+
+            if (symbiont_species == nullptr)
+            {
+                std::cerr << "ERROR: `Biont::bind_to_symbiont_species`: `symbiont_species` is `nullptr`!\n";
+                return;
+            }
+
+            symbiont_species->bind_biont(this);
         }
 
         void Biont::bind_to_new_parent(yli::ontology::Holobiont* const new_holobiont_parent)
