@@ -95,7 +95,7 @@ namespace yli
             char filename_buffer[filename_buffer_size];
             const char separator = '/'; // FIXME: don't assume slash as some operating systems may use other characters.
 
-            int32_t filename_length = yli::string::extract_last_part_of_string(
+            std::size_t filename_length = yli::string::extract_last_part_of_string(
                     filename.c_str(),
                     filename.size(),
                     filename_buffer,

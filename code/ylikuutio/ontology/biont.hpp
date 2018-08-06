@@ -9,12 +9,6 @@
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/common/globals.hpp"
 
-// Include GLEW
-#ifndef __GL_GLEW_H_INCLUDED
-#define __GL_GLEW_H_INCLUDED
-#include <GL/glew.h> // GLfloat, GLuint etc.
-#endif
-
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
 #define __GLM_GLM_HPP_INCLUDED
@@ -56,22 +50,26 @@ namespace yli
                 {
                     // constructor.
                     this->holobiont_parent      = biont_struct.holobiont_parent;
-                    this->biontID               = biont_struct.biontID;
+                    this->symbiont_species      = biont_struct.symbiont_species;
+
                     this->original_scale_vector = biont_struct.original_scale_vector;
-                    this->rotate_angle          = biont_struct.rotate_angle;
                     this->rotate_vector         = biont_struct.rotate_vector;
-                    this->initial_rotate_angle  = biont_struct.initial_rotate_angle;
                     this->initial_rotate_vector = biont_struct.initial_rotate_vector;
                     this->translate_vector      = biont_struct.translate_vector;
-                    this->has_entered           = false;
+
+                    this->biontID               = biont_struct.biontID;
+
+                    this->initial_rotate_angle  = biont_struct.initial_rotate_angle;
+                    this->rotate_angle          = biont_struct.rotate_angle;
 
                     // enable rendering of a recently entered Biont.
                     // TODO: enable entering without enabling rendering.
                     this->should_ylikuutio_render_this_biont = true;
+                    this->has_entered = false;
+                    this->quaternions_in_use = biont_struct.quaternions_in_use;
 
-                    this->quaternions_in_use    = biont_struct.quaternions_in_use;
+                    // `ontology::Movable` member variables begin here.
                     this->cartesian_coordinates = biont_struct.cartesian_coordinates;
-                    this->symbiont_species      = nullptr;         // dummy value.
                     this->model_matrix          = glm::mat4(1.0f); // identity matrix (dummy value).
                     this->MVP_matrix            = glm::mat4(1.0f); // identity matrix (dummy value).
 
@@ -79,6 +77,8 @@ namespace yli
                     this->bind_to_parent();
                     // get `childID` from `SymbiontSpecies` and set pointer to this `Biont`.
                     this->bind_to_symbiont_species();
+
+                    // `ontology::Entity` member variables begin here.
                     this->type = "yli::ontology::Biont*";
                 }
 
@@ -100,26 +100,27 @@ namespace yli
 
                 // this method renders this `Biont`.
                 void render();
-                void render_this_biont(yli::ontology::Shader* const shader_pointer);
+                void render_this_biont(const yli::ontology::Shader* const shader);
 
                 std::size_t get_number_of_children() const override;
                 std::size_t get_number_of_descendants() const override;
 
                 yli::ontology::Holobiont* holobiont_parent; // pointer to `Holobiont`.
-                std::size_t biontID;
-                bool quaternions_in_use;
-
                 yli::ontology::SymbiontSpecies* symbiont_species; // pointer to `SymbiontSpecies`.
 
-                bool has_entered;
-                bool should_ylikuutio_render_this_biont;
-
                 glm::vec3 original_scale_vector;       // original scale vector.
-                GLfloat rotate_angle;                  // rotate angle.
                 glm::vec3 rotate_vector;               // rotate vector.
                 glm::vec3 translate_vector;            // translate vector.
-                GLfloat initial_rotate_angle;          // initial rotate angle.
                 glm::vec3 initial_rotate_vector;       // initial rotate vector.
+
+                std::size_t biontID;
+
+                float initial_rotate_angle;            // initial rotate angle.
+                float rotate_angle;                    // rotate angle.
+
+                bool should_ylikuutio_render_this_biont;
+                bool has_entered;
+                bool quaternions_in_use;
         };
     }
 }

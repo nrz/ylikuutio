@@ -4,7 +4,7 @@
 #include "entity.hpp"
 #include "code/ylikuutio/loaders/shader_loader.hpp"
 #include "code/ylikuutio/loaders/texture_loader.hpp"
-#include "code/ylikuutio/common/globals.hpp"
+#include "code/ylikuutio/common/printing_struct.hpp"
 
 // Include GLEW
 #ifndef __GL_GLEW_H_INCLUDED

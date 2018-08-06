@@ -346,6 +346,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/common/any_value.hpp
     code/ylikuutio/common/globals.hpp
     code/ylikuutio/common/pi.hpp
+    code/ylikuutio/common/printing_struct.hpp
     code/ylikuutio/common/spherical_coordinates_struct.hpp
 
     # config, in alphabetical order.
@@ -660,6 +661,8 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/callback_system/callback_object.hpp
         code/ylikuutio/callback_system/callback_parameter.cpp
         code/ylikuutio/callback_system/callback_parameter.hpp
+        code/ylikuutio/command_line/command_line_master.cpp
+        code/ylikuutio/command_line/command_line_master.hpp
         code/ylikuutio/common/any_value.cpp
         code/ylikuutio/common/any_value.hpp
         code/ylikuutio/common/globals.hpp
@@ -722,6 +725,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/googletest/test_bilinear_interpolation2D.cpp
         code/ylikuutio/tests/googletest/test_callback_system.cpp
         code/ylikuutio/tests/googletest/test_check_and_report_if_some_string_matches.cpp
+        code/ylikuutio/tests/googletest/test_command_line_master.cpp
         code/ylikuutio/tests/googletest/test_extract_last_part_of_string.cpp
         code/ylikuutio/tests/googletest/test_extract_string.cpp
         code/ylikuutio/tests/googletest/test_extract_string_with_several_endings.cpp

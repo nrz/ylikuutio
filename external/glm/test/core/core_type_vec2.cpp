@@ -9,17 +9,17 @@
 #	include <type_traits>
 #endif
 
-static glm::vec2 g1;
-static glm::vec2 g2(1);
-static glm::vec2 g3(1, 1);
+static glm::ivec2 g1;
+static glm::ivec2 g2(1);
+static glm::ivec2 g3(1, 1);
 
 static int test_operators()
 {
 	int Error = 0;
 
 	{
-		glm::vec2 A(1.0f);
-		glm::vec2 B(1.0f);
+		glm::ivec2 A(1);
+		glm::ivec2 B(1);
 		Error += A != B ? 1 : 0;
 		Error += A == B ? 0 : 1;
 	}
@@ -349,7 +349,7 @@ static int test_swizzle()
 {
 	int Error = 0;
 
-#	if GLM_SWIZZLE == GLM_SWIZZLE_OPERATOR
+#	if GLM_CONFIG_SWIZZLE == GLM_SWIZZLE_OPERATOR
 	{
 		glm::vec2 A = glm::vec2(1.0f, 2.0f);
 		glm::vec2 B = A.xy;
@@ -360,9 +360,9 @@ static int test_swizzle()
 		Error += glm::all(glm::equal(A, C, 0.0001f)) ? 0 : 1;
 		Error += glm::all(glm::equal(A, D, 0.0001f)) ? 0 : 1;
 	}
-#	endif//GLM_SWIZZLE == GLM_SWIZZLE_OPERATOR
+#	endif//GLM_CONFIG_SWIZZLE == GLM_SWIZZLE_OPERATOR
 
-#	if GLM_SWIZZLE == GLM_SWIZZLE_OPERATOR || GLM_SWIZZLE == GLM_SWIZZLE_FUNCTION
+#	if GLM_CONFIG_SWIZZLE == GLM_SWIZZLE_OPERATOR || GLM_CONFIG_SWIZZLE == GLM_SWIZZLE_FUNCTION
 	{
 		glm::vec2 A = glm::vec2(1.0f, 2.0f);
 		glm::vec2 B = A.xy();
@@ -371,7 +371,7 @@ static int test_swizzle()
 		Error += glm::all(glm::equal(A, B, 0.0001f)) ? 0 : 1;
 		Error += glm::all(glm::equal(A, C, 0.0001f)) ? 0 : 1;
 	}
-#	endif//GLM_SWIZZLE == GLM_SWIZZLE_OPERATOR || GLM_SWIZZLE == GLM_SWIZZLE_FUNCTION
+#	endif//GLM_CONFIG_SWIZZLE == GLM_SWIZZLE_OPERATOR || GLM_CONFIG_SWIZZLE == GLM_SWIZZLE_FUNCTION
 
 	return Error;
 }

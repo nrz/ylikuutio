@@ -192,7 +192,7 @@ namespace yli
             dest_string = data_string.substr(original_data_index, data_index - original_data_index);
         }
 
-        int32_t extract_last_part_of_string(
+        std::size_t extract_last_part_of_string(
                 const char* const src_base_pointer,
                 const std::size_t src_data_size,
                 char* const dest_base_pointer,
@@ -226,6 +226,38 @@ namespace yli
 
             dest_data_pointer += filename_length;
             *dest_data_pointer = '\0';
+            return filename_length;
+        }
+
+        std::size_t extract_last_part_of_string(
+                const std::string& data_string,
+                std::string& dest_string,
+                const char separator)
+        {
+            std::size_t filename_length = 0;
+            auto separator_it = data_string.end(); // by default no last part.
+
+            for (auto it = data_string.begin(); it != data_string.end(); it++)
+            {
+                if (*it == separator)
+                {
+                    separator_it = it;
+                    filename_length = 0;
+                }
+                else
+                {
+                    filename_length++;
+                }
+            }
+
+            if (separator_it == data_string.end())
+            {
+                dest_string = "";
+                return 0;
+            }
+
+            separator_it++;
+            dest_string = std::string(separator_it, data_string.end());
             return filename_length;
         }
 

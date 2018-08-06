@@ -5,11 +5,20 @@ Fixes needed:
 [ ] Fix compiling on Visual Studio.
 
 Tasks which are necessary for the development of Ylikuutio:
-[ ] Evaluate CHICKEN Scheme. https://www.call-cc.org/
 [ ] Write code to convert ASCII grid files (height maps) to binary FBX files, storing also interpolated vertices, UVs, and normals.
 [ ] Test code used to convert ASCII grid files (height maps) to binary FBX files by loading the FBX files created with it.
 [ ] Convert ASCII grid files into binary FBX files.
 [ ] Implement `Camera` entities.
+[ ] Create `audio::Sound` class, whose parent is `Entity`.
+[ ] Create `audio::PlayList` class, whose parent is `Entity`.
+[ ] Implement `play` console command for playing `Sound`s and `Playlist`s.
+[ ] Implement `pause` console command for pausing `Sound`s and `Playlist`s.
+[ ] Implement `next` console command for changing to the next `Sound` in a `Playlist`.
+[ ] Implement `prev` console command for changing to the previous `Sound` in a `Playlist`.
+[ ] Add variable `text_size` (affects size of console text and other texts printed on screen).
+[ ] Implement support for automatic detection of optimal window size.
+[ ] Implement support for changing window size.
+[ ] Implement support for changing font size.
 [ ] Evaluate mingw-std-threads: https://github.com/meganz/mingw-std-threads
 [ ] Evaluate winpthreads: https://sourceforge.net/p/mingw-w64/mingw-w64/ci/master/tree/mingw-w64-libraries/winpthreads/ https://en.wikipedia.org/wiki/MinGW#MinGW-w64
 [ ] Evaluate Pthreads-win32, in particular MinGW-w64 support: https://sourceware.org/pthreads-win32/ https://sourceforge.net/p/mingw-w64/wiki2/Compile%20pthreads/
@@ -40,15 +49,10 @@ Tasks which are necessary for the development of Ylikuutio:
 [ ] Implement voxel world.
 [ ] Implement AI objects (robots).
 [ ] Add scene loading command `load` into console.
-[ ] Implement `play` console command for playing `Sound`s and `Playlist`s.
-[ ] Implement `pause` console command for pausing `Sound`s and `Playlist`s.
-[ ] Implement `next` console command for changing to the next `Sound` in a `Playlist`.
-[ ] Implement `prev` console command for changing to the previous `Sound` in a `Playlist`.
 [ ] Move main loop out of `main` function and away from Ajokki into `ontology::Universe` class of Ylikuutio.
 [ ] Implement support for custom keyboard settings.
 [ ] Use GLFW Android port for Android builds. https://github.com/glfw/glfw/issues/611 https://github.com/xCuri0/glfw-android-example
 [ ] Use GLFM library (only for Android builds). https://github.com/brackeen/glfm
-[ ] Add variable `text_size` (affects size of console text and other texts printed on screen).
 [ ] Add variable `direction`.
 [ ] Use TinySpline.
 [ ] Add bicubic interpolation.
@@ -64,21 +68,16 @@ Tasks which are necessary for the development of Ylikuutio:
 [ ] Implement generation of terrain meshes in different levels of detail (LOD) using different `x_step`s and `z_step`s (eg. 1, 2, 4, 8, 16, 32, 64, 128).
 [ ] Implement terrain mesh LOD selection based on the distance between the camera and the terrain.
 [ ] Implement terrain mesh LOD selection based on the distance between the camera and the terrain and the available video memory.
-[ ] Implement A* route finding.
-[ ] Implement Theta* route finding.
+[ ] Implement A* route finding. https://en.wikipedia.org/wiki/A*_search_algorithm
+[ ] Implement Theta* route finding. http://aigamedev.com/open/tutorials/theta-star-any-angle-paths/
 [ ] Implement support for vector fonts.
 [ ] Implement rendering into a texture.
 [ ] Implement TinyScheme support for programming of AI objects (robots).
-[ ] Implement dynamic not flowing water.
-[ ] Implement physics modeling.
-[ ] Implement flowing water (computed on a server).
-[ ] Implement support for automatic detection of optimal window size.
-[ ] Implement support for changing window size.
-[ ] Implement support for changing font size.
-[ ] Create `audio::Sound` class, whose parent is `Entity`.
-[ ] Create `audio::PlayList` class, whose parent is `Entity`.
+[ ] Implement dynamic not flowing water, using OpenGL shaders.
 
 Less urgent:
+[ ] Implement rigid body physics using Bullet. https://pybullet.org/wordpress/
+[ ] Implement flowing water (computed on a server, based on players' actions).
 [ ] Implement TinyScheme support in console.
 [ ] Implement support for 3D text.
 [ ] Implement support for partially transparent text.
@@ -119,3 +118,4 @@ Ready:
 [x] Fix Travis configuration file `.travis.yml`.
 [x] Fix Coverity Scan Travis integration configuration (in `.travis.yml`).
 [x] Rewrite `obj_loader.cpp` without `fscanf`, using instead `stringstream` for parsing.
+[x] Evaluate CHICKEN Scheme. https://www.call-cc.org/

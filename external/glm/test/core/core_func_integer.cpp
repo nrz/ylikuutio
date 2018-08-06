@@ -1,6 +1,11 @@
 #include <glm/integer.hpp>
 #include <glm/vector_relational.hpp>
-#include <glm/gtc/vec1.hpp>
+#include <glm/vector_ivec2.hpp>
+#include <glm/vector_ivec3.hpp>
+#include <glm/vector_ivec4.hpp>
+#include <glm/vector_uvec2.hpp>
+#include <glm/vector_uvec3.hpp>
+#include <glm/vector_uvec4.hpp>
 #include <vector>
 #include <ctime>
 #include <cstdio>
@@ -173,7 +178,7 @@ namespace bitfieldReverse
 		return bitfieldReverseLoop(glm::vec<1, T>(v)).x;
 	}
 
-	GLM_FUNC_QUALIFIER glm::uint32_t bitfieldReverseUint32(glm::uint32_t x)
+	GLM_FUNC_QUALIFIER glm::uint32 bitfieldReverseUint32(glm::uint32 x)
 	{
 		x = (x & 0x55555555) <<  1 | (x & 0xAAAAAAAA) >>  1;
 		x = (x & 0x33333333) <<  2 | (x & 0xCCCCCCCC) >>  2;
@@ -183,7 +188,7 @@ namespace bitfieldReverse
 		return x;
 	}
 
-	GLM_FUNC_QUALIFIER glm::uint64_t bitfieldReverseUint64(glm::uint64_t x)
+	GLM_FUNC_QUALIFIER glm::uint64 bitfieldReverseUint64(glm::uint64 x)
 	{
 		x = (x & 0x5555555555555555) <<  1 | (x & 0xAAAAAAAAAAAAAAAA) >>  1;
 		x = (x & 0x3333333333333333) <<  2 | (x & 0xCCCCCCCCCCCCCCCC) >>  2;

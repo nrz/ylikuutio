@@ -14,10 +14,11 @@
 #pragma once
 
 // Dependency:
-#include "../mat3x3.hpp"
-#include "../mat4x4.hpp"
-#include "../vec3.hpp"
-#include "../vec4.hpp"
+#include "../detail/type_mat3x3.hpp"
+#include "../detail/type_mat4x4.hpp"
+#include "../detail/type_vec3.hpp"
+#include "../detail/type_vec4.hpp"
+#include "../ext/vector_relational.hpp"
 #include "../gtc/constants.hpp"
 #include "../gtc/matrix_transform.hpp"
 
@@ -44,6 +45,8 @@ namespace glm
 			union
 			{
 				struct { T x, y, z, w;};
+
+				typename detail::storage<4, T, detail::is_aligned<Q>::value>::type data;
 			};
 #		else
 			T x, y, z, w;
@@ -55,8 +58,8 @@ namespace glm
 		/// Return the count of components of a quaternion
 		GLM_FUNC_DECL static GLM_CONSTEXPR length_type length(){return 4;}
 
-		GLM_FUNC_DECL T & operator[](length_type i);
-		GLM_FUNC_DECL T const& operator[](length_type i) const;
+		GLM_FUNC_DECL GLM_CONSTEXPR T & operator[](length_type i);
+		GLM_FUNC_DECL GLM_CONSTEXPR T const& operator[](length_type i) const;
 
 		// -- Implicit basic constructors --
 
@@ -155,14 +158,14 @@ namespace glm
 	// -- Boolean operators --
 
 	template<typename T, qualifier Q>
-	GLM_FUNC_DECL bool operator==(tquat<T, Q> const& q1, tquat<T, Q> const& q2);
+	GLM_FUNC_DECL GLM_CONSTEXPR bool operator==(tquat<T, Q> const& q1, tquat<T, Q> const& q2);
 
 	template<typename T, qualifier Q>
-	GLM_FUNC_DECL bool operator!=(tquat<T, Q> const& q1, tquat<T, Q> const& q2);
+	GLM_FUNC_DECL GLM_CONSTEXPR bool operator!=(tquat<T, Q> const& q1, tquat<T, Q> const& q2);
 
 	/// Builds an identity quaternion.
 	template<typename genType>
-	GLM_FUNC_DECL genType identity();
+	GLM_FUNC_DECL GLM_CONSTEXPR genType identity();
 
 	/// Returns the length of the quaternion.
 	///
@@ -434,6 +437,80 @@ namespace glm
 	/// @see gtc_quaternion
 	template<typename T, qualifier Q>
 	GLM_FUNC_DECL vec<4, bool, Q> isinf(tquat<T, Q> const& x);
+
+	/// Quaternion of low single-qualifier floating-point numbers.
+	///
+	/// @see gtc_quaternion
+	typedef tquat<float, lowp>		lowp_quat;
+
+	/// Quaternion of medium single-qualifier floating-point numbers.
+	///
+	/// @see gtc_quaternion
+	typedef tquat<float, mediump>	mediump_quat;
+
+	/// Quaternion of high single-qualifier floating-point numbers.
+	///
+	/// @see gtc_quaternion
+	typedef tquat<float, highp>		highp_quat;
+
+#if(defined(GLM_PRECISION_HIGHP_FLOAT) && !defined(GLM_PRECISION_MEDIUMP_FLOAT) && !defined(GLM_PRECISION_LOWP_FLOAT))
+	typedef highp_quat			quat;
+#elif(!defined(GLM_PRECISION_HIGHP_FLOAT) && defined(GLM_PRECISION_MEDIUMP_FLOAT) && !defined(GLM_PRECISION_LOWP_FLOAT))
+	typedef mediump_quat		quat;
+#elif(!defined(GLM_PRECISION_HIGHP_FLOAT) && !defined(GLM_PRECISION_MEDIUMP_FLOAT) && defined(GLM_PRECISION_LOWP_FLOAT))
+	typedef lowp_quat			quat;
+#elif(!defined(GLM_PRECISION_HIGHP_FLOAT) && !defined(GLM_PRECISION_MEDIUMP_FLOAT) && !defined(GLM_PRECISION_LOWP_FLOAT))
+	/// Quaternion of default single-qualifier floating-point numbers.
+	typedef highp_quat			quat;
+#endif
+
+	/// Quaternion of low single-qualifier floating-point numbers.
+	///
+	/// @see gtc_quaternion
+	typedef lowp_quat			lowp_fquat;
+
+	/// Quaternion of medium single-qualifier floating-point numbers.
+	///
+	/// @see gtc_quaternion
+	typedef mediump_quat		mediump_fquat;
+
+	/// Quaternion of high single-qualifier floating-point numbers.
+	///
+	/// @see gtc_quaternion
+	typedef highp_quat			highp_fquat;
+
+	/// Quaternion of default single-qualifier floating-point numbers.
+	///
+	/// @see gtc_quaternion
+	typedef quat				fquat;
+
+	/// Quaternion of low double-qualifier floating-point numbers.
+	///
+	/// @see gtc_quaternion
+	typedef tquat<double, lowp>		lowp_dquat;
+
+	/// Quaternion of medium double-qualifier floating-point numbers.
+	///
+	/// @see gtc_quaternion
+	typedef tquat<double, mediump>	mediump_dquat;
+
+	/// Quaternion of high double-qualifier floating-point numbers.
+	///
+	/// @see gtc_quaternion
+	typedef tquat<double, highp>	highp_dquat;
+
+#if(defined(GLM_PRECISION_HIGHP_DOUBLE) && !defined(GLM_PRECISION_MEDIUMP_DOUBLE) && !defined(GLM_PRECISION_LOWP_DOUBLE))
+	typedef highp_dquat			dquat;
+#elif(!defined(GLM_PRECISION_HIGHP_DOUBLE) && defined(GLM_PRECISION_MEDIUMP_DOUBLE) && !defined(GLM_PRECISION_LOWP_DOUBLE))
+	typedef mediump_dquat		dquat;
+#elif(!defined(GLM_PRECISION_HIGHP_DOUBLE) && !defined(GLM_PRECISION_MEDIUMP_DOUBLE) && defined(GLM_PRECISION_LOWP_DOUBLE))
+	typedef lowp_dquat			dquat;
+#elif(!defined(GLM_PRECISION_HIGHP_DOUBLE) && !defined(GLM_PRECISION_MEDIUMP_DOUBLE) && !defined(GLM_PRECISION_LOWP_DOUBLE))
+	/// Quaternion of default double-qualifier floating-point numbers.
+	///
+	/// @see gtc_quaternion
+	typedef highp_dquat			dquat;
+#endif
 
 	/// @}
 } //namespace glm

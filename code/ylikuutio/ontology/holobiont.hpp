@@ -2,18 +2,11 @@
 #define __HOLOBIONT_HPP_INCLUDED
 
 #include "movable.hpp"
-#include "shader.hpp"
 #include "symbiosis.hpp"
 #include "holobiont_struct.hpp"
 #include "render_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/common/globals.hpp"
-
-// Include GLEW
-#ifndef __GL_GLEW_H_INCLUDED
-#define __GL_GLEW_H_INCLUDED
-#include <GL/glew.h> // GLfloat, GLuint etc.
-#endif
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -61,24 +54,28 @@ namespace yli
                     this->symbiosis_parent      = holobiont_struct.symbiosis_parent;
 
                     this->original_scale_vector = holobiont_struct.original_scale_vector;
-                    this->rotate_angle          = holobiont_struct.rotate_angle;
                     this->rotate_vector         = holobiont_struct.rotate_vector;
-                    this->initial_rotate_angle  = holobiont_struct.initial_rotate_angle;
-                    this->initial_rotate_vector = holobiont_struct.initial_rotate_vector;
-                    this->quaternions_in_use    = holobiont_struct.quaternions_in_use;
-                    this->cartesian_coordinates = holobiont_struct.cartesian_coordinates;
                     this->translate_vector      = holobiont_struct.translate_vector;
-                    this->has_entered           = false;
+                    this->initial_rotate_vector = holobiont_struct.initial_rotate_vector;
+
+                    this->number_of_bionts = 0;
+
+                    this->rotate_angle          = holobiont_struct.rotate_angle;
+                    this->initial_rotate_angle  = holobiont_struct.initial_rotate_angle;
 
                     this->should_ylikuutio_render_this_holobiont = true;
-                    this->number_of_bionts = 0;
+                    this->has_entered           = false;
+                    this->quaternions_in_use    = holobiont_struct.quaternions_in_use;
+
+                    this->cartesian_coordinates = holobiont_struct.cartesian_coordinates;
 
                     // get `childID` from `Symbiosis` and set pointer to this `Holobiont`.
                     this->bind_to_parent();
-                    this->type = "yli::ontology::Holobiont*";
 
                     this->create_bionts();
 
+                    // `ontology::Entity` member variables begin here.
+                    this->type = "yli::ontology::Holobiont*";
                     this->can_be_erased = true;
                 }
 
@@ -111,23 +108,24 @@ namespace yli
                 std::size_t get_number_of_children() const override;
                 std::size_t get_number_of_descendants() const override;
 
-                std::vector<yli::ontology::Biont*> biont_pointer_vector;
-                std::queue<std::size_t> free_biontID_queue;
-                std::size_t number_of_bionts;
-
                 yli::ontology::Symbiosis* symbiosis_parent; // pointer to `Symbiosis`.
 
-                bool quaternions_in_use;
-
-                bool has_entered;
-                bool should_ylikuutio_render_this_holobiont;
+                std::vector<yli::ontology::Biont*> biont_pointer_vector;
+                std::queue<std::size_t> free_biontID_queue;
 
                 glm::vec3 original_scale_vector;       // original scale vector.
-                GLfloat rotate_angle;                  // rotate angle.
                 glm::vec3 rotate_vector;               // rotate vector.
                 glm::vec3 translate_vector;            // translate vector.
-                GLfloat initial_rotate_angle;          // initial rotate angle.
                 glm::vec3 initial_rotate_vector;       // initial rotate vector.
+
+                std::size_t number_of_bionts;
+
+                float rotate_angle;                    // rotate angle.
+                float initial_rotate_angle;            // initial rotate angle.
+
+                bool should_ylikuutio_render_this_holobiont;
+                bool has_entered;
+                bool quaternions_in_use;
         };
     }
 }

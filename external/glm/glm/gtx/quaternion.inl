@@ -1,5 +1,4 @@
 /// @ref gtx_quaternion
-/// @file glm/gtx/quaternion.inl
 
 #include <limits>
 #include "../gtc/constants.hpp"
@@ -220,7 +219,7 @@ namespace glm
 	template<typename T, qualifier Q>
 	GLM_FUNC_QUALIFIER tquat<T, Q> quatLookAt(vec<3, T, Q> const& direction, vec<3, T, Q> const& up)
 	{
-#		if GLM_COORDINATE_SYSTEM == GLM_LEFT_HANDED
+#		if GLM_CONFIG_CLIP_CONTROL & GLM_CLIP_CONTROL_LH_BIT
 			return quatLookAtLH(direction, up);
 #		else
 			return quatLookAtRH(direction, up);

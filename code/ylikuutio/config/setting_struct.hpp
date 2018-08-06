@@ -14,6 +14,11 @@ namespace yli
     {
         class SettingMaster;
     }
+
+    namespace datatypes
+    {
+        class AnyValue;
+    }
 }
 
 typedef struct SettingStruct

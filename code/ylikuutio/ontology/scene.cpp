@@ -113,7 +113,7 @@ namespace yli
             this->postrender();
         }
 
-        yli::ontology::Camera* Scene::get_active_camera()
+        yli::ontology::Camera* Scene::get_active_camera() const
         {
             return this->active_camera;
         }

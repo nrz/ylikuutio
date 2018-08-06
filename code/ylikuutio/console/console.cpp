@@ -7,7 +7,7 @@
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
 #include "code/ylikuutio/map/ylikuutio_map.hpp"
-#include "code/ylikuutio/common/globals.hpp"
+#include "code/ylikuutio/common/printing_struct.hpp"
 
 // Include GLFW
 #ifndef __GLFW3_H_INCLUDED
@@ -267,8 +267,8 @@ namespace yli
 
                 // Draw the console to screen using `font2D::printText2D`.
                 PrintingStruct printing_struct;
-                printing_struct.screen_width = static_cast<GLuint>(this->universe->get_window_width());
-                printing_struct.screen_height = static_cast<GLuint>(this->universe->get_window_height());
+                printing_struct.screen_width = this->universe->get_window_width();
+                printing_struct.screen_height = this->universe->get_window_height();
                 printing_struct.text_size = this->universe->get_text_size();
                 printing_struct.font_size = this->universe->get_font_size();
                 printing_struct.char_font_texture_file_format = "bmp";

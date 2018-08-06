@@ -76,7 +76,7 @@ namespace yli
                 // this method renders all `Shader`s of this `Scene`.
                 void render();
 
-                yli::ontology::Camera* get_active_camera();
+                yli::ontology::Camera* get_active_camera() const;
                 void set_active_camera(yli::ontology::Camera* camera);
 
                 // this method returns a pointer to an `Entity` using the name as key.

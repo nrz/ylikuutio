@@ -1,11 +1,9 @@
 /// @ref gtc_epsilon
-/// @file glm/gtc/epsilon.inl
 
 // Dependency:
 #include "quaternion.hpp"
 #include "../vector_relational.hpp"
 #include "../common.hpp"
-#include "../detail/type_vec.hpp"
 
 namespace glm
 {

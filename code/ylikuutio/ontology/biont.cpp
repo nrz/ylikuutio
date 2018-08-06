@@ -1,5 +1,7 @@
 #include "biont.hpp"
+#include "shader.hpp"
 #include "holobiont.hpp"
+#include "symbiosis.hpp"
 #include "symbiont_species.hpp"
 #include "biont_struct.hpp"
 #include "render_templates.hpp"
@@ -24,28 +26,75 @@ namespace yli
 
         void Biont::bind_to_parent()
         {
+            // requirements:
+            // `this->holobiont_parent` must not be `nullptr`.
+
+            if (this->holobiont_parent == nullptr)
+            {
+                std::cerr << "ERROR: `Biont::bind_to_parent`: `this->holobiont_parent` is `nullptr`!\n";
+                return;
+            }
+
             // get `childID` from `Holobiont` and set pointer to this `Biont`.
             this->holobiont_parent->bind_biont(this);
         }
 
         void Biont::bind_to_symbiont_species()
         {
-            if (this->holobiont_parent == nullptr)
+            // requirements:
+            // `this->holobiont_parent` must not be `nullptr`.
+            // `this->holobiont_parent->get_parent()` must not be `nullptr`.
+            // `this->symbiont_species` must not be `nullptr`.
+
+            const yli::ontology::Holobiont* const holobiont = this->holobiont_parent;
+
+            if (holobiont == nullptr)
             {
+                std::cerr << "ERROR: `Biont::bind_to_symbiont_species`: `holobiont` is `nullptr`!\n";
                 return;
             }
 
-            yli::ontology::Symbiosis* symbiosis = static_cast<yli::ontology::Symbiosis*>(this->holobiont_parent->get_parent());
-            this->symbiont_species = symbiosis->get_symbiont_species(this->biontID);
-            this->symbiont_species->bind_biont(this);
+            const yli::ontology::Symbiosis* const symbiosis = static_cast<yli::ontology::Symbiosis*>(holobiont->get_parent());
+
+            if (symbiosis == nullptr)
+            {
+                std::cerr << "ERROR: `Biont::bind_to_symbiont_species`: `symbiosis` is `nullptr`!\n";
+                return;
+            }
+
+            yli::ontology::SymbiontSpecies* const symbiont_species = this->symbiont_species;
+
+            if (symbiont_species == nullptr)
+            {
+                std::cerr << "ERROR: `Biont::bind_to_symbiont_species`: `symbiont_species` is `nullptr`!\n";
+                return;
+            }
+
+            symbiont_species->bind_biont(this);
         }
 
         void Biont::bind_to_new_parent(yli::ontology::Holobiont* const new_holobiont_parent)
         {
             // this method sets pointer to this `Biont` to nullptr, sets `parent` according to the input,
             // and requests a new `childID` from the new `Holobiont`.
+            //
+            // requirements:
+            // `this->holobiont_parent` must not be `nullptr`.
+            // `new_holobiont_parent` must not be `nullptr`.
 
             // unbind from the old parent `Holobiont`.
+            if (this->holobiont_parent == nullptr)
+            {
+                std::cerr << "ERROR: `Biont::bind_to_new_parent`: `this->holobiont_parent` is `nullptr`!\n";
+                return;
+            }
+
+            if (new_holobiont_parent == nullptr)
+            {
+                std::cerr << "ERROR: `Biont::bind_to_new_parent`: `new_holobiont_parent` is `nullptr`!\n";
+                return;
+            }
+
             this->holobiont_parent->unbind_biont(this->childID);
 
             // get `childID` from `Holobiont` and set pointer to this `Biont`.
@@ -56,33 +105,111 @@ namespace yli
         Biont::~Biont()
         {
             // destructor.
+            //
+            // requirements:
+            // `this->holobiont_parent` must not be `nullptr`.
+            // `this->symbiont_species` must not be `nullptr`.
+
+            yli::ontology::Holobiont* const holobiont = this->holobiont_parent;
+
+            if (holobiont == nullptr)
+            {
+                std::cerr << "ERROR: `Biont::~Biont`: `holobiont` is `nullptr`!\n";
+                return;
+            }
+
+            yli::ontology::SymbiontSpecies* const symbiont_species = this->symbiont_species;
+
+            if (symbiont_species == nullptr)
+            {
+                std::cerr << "ERROR: `Biont::~Biont`: `symbiont_species` is `nullptr`!\n";
+                return;
+            }
+
             std::cout << "Biont with childID " << std::dec << this->childID << " will be destroyed.\n";
 
             // set pointer to this biont to nullptr.
-            this->symbiont_species->unbind_biont(this->childID);
-            this->holobiont_parent->set_biont_pointer(this->childID, nullptr);
+            symbiont_species->unbind_biont(this->childID);
+            holobiont->set_biont_pointer(this->childID, nullptr);
         }
 
         void Biont::render()
         {
             // render this `Biont`.
+            //
+            // requirements:
+            // `this->holobiont_parent` must not be `nullptr`.
+            // `this->holobiont_parent->get_parent()` must not be `nullptr`.
+
+            const yli::ontology::Holobiont* const holobiont = this->holobiont_parent;
+
+            if (holobiont == nullptr)
+            {
+                std::cerr << "ERROR: `Biont::render`: `holobiont` is `nullptr`!\n";
+                return;
+            }
+
+            const yli::ontology::Symbiosis* const symbiosis = static_cast<yli::ontology::Symbiosis*>(holobiont->get_parent());
+
+            if (symbiosis == nullptr)
+            {
+                std::cerr << "ERROR: `Biont::render`: `symbiosis` is `nullptr`!\n";
+                return;
+            }
 
             if (this->should_ylikuutio_render_this_biont)
             {
                 this->prerender();
-
-                yli::ontology::Symbiosis* symbiosis = static_cast<yli::ontology::Symbiosis*>(this->holobiont_parent->get_parent());
-                yli::ontology::Shader* shader = static_cast<yli::ontology::Shader*>(symbiosis->get_parent());
-                this->render_this_biont(shader);
-
+                this->render_this_biont(static_cast<yli::ontology::Shader*>(symbiosis->get_parent()));
                 this->postrender();
             }
         }
 
-        void Biont::render_this_biont(yli::ontology::Shader* const shader_pointer)
+        void Biont::render_this_biont(const yli::ontology::Shader* const shader)
         {
-            yli::ontology::Holobiont* holobiont = this->holobiont_parent;
-            yli::ontology::Symbiosis* symbiosis = static_cast<yli::ontology::Symbiosis*>(holobiont->get_parent());
+            // requirements:
+            // `this->universe` must not be `nullptr`.
+            // `shader` must not be `nullptr`.
+            // `this->holobiont_parent` must not be `nullptr`.
+            // `this->symbiont_species` must not be `nullptr`.
+
+            yli::ontology::Universe* const universe = this->universe;
+
+            if (universe == nullptr)
+            {
+                std::cerr << "ERROR: `Biont::render_this_biont`: `universe` is `nullptr`!\n";
+                return;
+            }
+
+            if (shader == nullptr)
+            {
+                std::cerr << "ERROR: `Biont::render_this_biont`: `shader` is `nullptr`!\n";
+                return;
+            }
+
+            const yli::ontology::Holobiont* const holobiont = this->holobiont_parent;
+
+            if (holobiont == nullptr)
+            {
+                std::cerr << "ERROR: `Biont::render_this_biont`: `holobiont` is `nullptr`!\n";
+                return;
+            }
+
+            yli::ontology::Symbiosis* const symbiosis = static_cast<yli::ontology::Symbiosis*>(holobiont->get_parent());
+
+            if (symbiosis == nullptr)
+            {
+                std::cerr << "ERROR: `Biont::render_this_biont`: `symbiosis` is `nullptr`!\n";
+                return;
+            }
+
+            const yli::ontology::SymbiontSpecies* const symbiont_species = this->symbiont_species;
+
+            if (symbiont_species == nullptr)
+            {
+                std::cerr << "ERROR: `Biont::render_this_biont`: `symbiont_species` is `nullptr`!\n";
+                return;
+            }
 
             if (!this->has_entered)
             {
@@ -124,7 +251,7 @@ namespace yli
                 this->cartesian_coordinates = glm::vec3(this->model_matrix[3][0], this->model_matrix[3][1], this->model_matrix[3][2]);
             }
 
-            this->MVP_matrix = this->universe->get_projection_matrix() * this->universe->get_view_matrix() * this->model_matrix;
+            this->MVP_matrix = universe->get_projection_matrix() * universe->get_view_matrix() * this->model_matrix;
 
             // Bind our texture in Texture Unit 0.
             glActiveTexture(GL_TEXTURE0);
@@ -144,8 +271,6 @@ namespace yli
                     light_position.y,
                     light_position.z);
 
-            yli::ontology::SymbiontSpecies* symbiont_species = symbiosis->get_symbiont_species(this->biontID);
-
             // 1st attribute buffer : vertices.
             glEnableVertexAttribArray(symbiont_species->get_vertex_position_modelspaceID());
 
@@ -159,8 +284,8 @@ namespace yli
 
             // Send our transformation to the currently bound shader,
             // in the "MVP" uniform.
-            glUniformMatrix4fv(shader_pointer->get_matrixID(), 1, GL_FALSE, &this->MVP_matrix[0][0]);
-            glUniformMatrix4fv(shader_pointer->get_model_matrixID(), 1, GL_FALSE, &this->model_matrix[0][0]);
+            glUniformMatrix4fv(shader->get_matrixID(), 1, GL_FALSE, &this->MVP_matrix[0][0]);
+            glUniformMatrix4fv(shader->get_model_matrixID(), 1, GL_FALSE, &this->model_matrix[0][0]);
 
             GLuint vertexbuffer = symbiont_species->get_vertexbuffer();
             GLuint vertex_position_modelspaceID = symbiont_species->get_vertex_position_modelspaceID();
