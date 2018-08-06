@@ -1,7 +1,9 @@
 #include <glm/gtc/constants.hpp>
 #include <glm/gtc/quaternion.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+#include <glm/ext/matrix_relational.hpp>
 #include <glm/ext/vector_relational.hpp>
+#include <glm/ext/scalar_relational.hpp>
 #include <glm/glm.hpp>
 #include <vector>
 
@@ -299,8 +301,10 @@ int test_size()
 {
 	int Error = 0;
 
-	Error += 16 == sizeof(glm::quat) ? 0 : 1;
-	Error += 32 == sizeof(glm::dquat) ? 0 : 1;
+	std::size_t const A = sizeof(glm::quat);
+	Error += 16 == A ? 0 : 1;
+	std::size_t const B = sizeof(glm::dquat);
+	Error += 32 == B ? 0 : 1;
 	Error += glm::quat().length() == 4 ? 0 : 1;
 	Error += glm::dquat().length() == 4 ? 0 : 1;
 	Error += glm::quat::length() == 4 ? 0 : 1;

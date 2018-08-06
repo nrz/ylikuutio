@@ -1,6 +1,6 @@
 /// @ref gtc_packing
-/// @file glm/gtc/packing.inl
 
+#include "../ext/scalar_relational.hpp"
 #include "../ext/vector_relational.hpp"
 #include "../common.hpp"
 #include "../vec2.hpp"
