@@ -116,7 +116,6 @@ namespace yli
                 biont_struct.quaternions_in_use    = this->quaternions_in_use;
                 biont_struct.cartesian_coordinates = this->cartesian_coordinates;
                 biont_struct.translate_vector      = this->translate_vector;
-                biont_struct.texture               = this->symbiosis_parent->get_texture(biontID);
 
                 std::cout << "Creating biont with biontID " << biontID << " ...\n";
 
