@@ -57,20 +57,24 @@ namespace yli
                     // constructor.
                     this->holobiont_parent      = biont_struct.holobiont_parent;
                     this->symbiont_species      = biont_struct.symbiont_species;
-                    this->biontID               = biont_struct.biontID;
+
                     this->original_scale_vector = biont_struct.original_scale_vector;
-                    this->rotate_angle          = biont_struct.rotate_angle;
                     this->rotate_vector         = biont_struct.rotate_vector;
-                    this->initial_rotate_angle  = biont_struct.initial_rotate_angle;
                     this->initial_rotate_vector = biont_struct.initial_rotate_vector;
                     this->translate_vector      = biont_struct.translate_vector;
-                    this->has_entered           = false;
+
+                    this->biontID               = biont_struct.biontID;
+
+                    this->initial_rotate_angle  = biont_struct.initial_rotate_angle;
+                    this->rotate_angle          = biont_struct.rotate_angle;
 
                     // enable rendering of a recently entered Biont.
                     // TODO: enable entering without enabling rendering.
                     this->should_ylikuutio_render_this_biont = true;
+                    this->has_entered = false;
+                    this->quaternions_in_use = biont_struct.quaternions_in_use;
 
-                    this->quaternions_in_use    = biont_struct.quaternions_in_use;
+                    // `ontology::Movable` member variables begin here.
                     this->cartesian_coordinates = biont_struct.cartesian_coordinates;
                     this->model_matrix          = glm::mat4(1.0f); // identity matrix (dummy value).
                     this->MVP_matrix            = glm::mat4(1.0f); // identity matrix (dummy value).
@@ -79,6 +83,8 @@ namespace yli
                     this->bind_to_parent();
                     // get `childID` from `SymbiontSpecies` and set pointer to this `Biont`.
                     this->bind_to_symbiont_species();
+
+                    // `ontology::Entity` member variables begin here.
                     this->type = "yli::ontology::Biont*";
                 }
 
@@ -106,20 +112,21 @@ namespace yli
                 std::size_t get_number_of_descendants() const override;
 
                 yli::ontology::Holobiont* holobiont_parent; // pointer to `Holobiont`.
-                std::size_t biontID;
-                bool quaternions_in_use;
-
                 yli::ontology::SymbiontSpecies* symbiont_species; // pointer to `SymbiontSpecies`.
 
-                bool has_entered;
-                bool should_ylikuutio_render_this_biont;
-
                 glm::vec3 original_scale_vector;       // original scale vector.
-                GLfloat rotate_angle;                  // rotate angle.
                 glm::vec3 rotate_vector;               // rotate vector.
                 glm::vec3 translate_vector;            // translate vector.
-                GLfloat initial_rotate_angle;          // initial rotate angle.
                 glm::vec3 initial_rotate_vector;       // initial rotate vector.
+
+                std::size_t biontID;
+
+                GLfloat initial_rotate_angle;          // initial rotate angle.
+                GLfloat rotate_angle;                  // rotate angle.
+
+                bool should_ylikuutio_render_this_biont;
+                bool has_entered;
+                bool quaternions_in_use;
         };
     }
 }
