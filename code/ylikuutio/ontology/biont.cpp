@@ -24,6 +24,15 @@ namespace yli
 
         void Biont::bind_to_parent()
         {
+            // requirements:
+            // `this->holobiont_parent` must not be `nullptr`.
+
+            if (this->holobiont_parent == nullptr)
+            {
+                std::cerr << "ERROR: `Biont::bind_to_parent`: `this->holobiont_parent` is `nullptr`!\n";
+                return;
+            }
+
             // get `childID` from `Holobiont` and set pointer to this `Biont`.
             this->holobiont_parent->bind_biont(this);
         }
