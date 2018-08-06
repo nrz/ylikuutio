@@ -76,8 +76,24 @@ namespace yli
         {
             // this method sets pointer to this `Biont` to nullptr, sets `parent` according to the input,
             // and requests a new `childID` from the new `Holobiont`.
+            //
+            // requirements:
+            // `this->holobiont_parent` must not be `nullptr`.
+            // `new_holobiont_parent` must not be `nullptr`.
 
             // unbind from the old parent `Holobiont`.
+            if (this->holobiont_parent == nullptr)
+            {
+                std::cerr << "ERROR: `Biont::bind_to_new_parent`: `this->holobiont_parent` is `nullptr`!\n";
+                return;
+            }
+
+            if (new_holobiont_parent == nullptr)
+            {
+                std::cerr << "ERROR: `Biont::bind_to_new_parent`: `new_holobiont_parent` is `nullptr`!\n";
+                return;
+            }
+
             this->holobiont_parent->unbind_biont(this->childID);
 
             // get `childID` from `Holobiont` and set pointer to this `Biont`.
