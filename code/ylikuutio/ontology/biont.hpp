@@ -9,12 +9,6 @@
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/common/globals.hpp"
 
-// Include GLEW
-#ifndef __GL_GLEW_H_INCLUDED
-#define __GL_GLEW_H_INCLUDED
-#include <GL/glew.h> // GLfloat, GLuint etc.
-#endif
-
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
 #define __GLM_GLM_HPP_INCLUDED
@@ -121,8 +115,8 @@ namespace yli
 
                 std::size_t biontID;
 
-                GLfloat initial_rotate_angle;          // initial rotate angle.
-                GLfloat rotate_angle;                  // rotate angle.
+                float initial_rotate_angle;            // initial rotate angle.
+                float rotate_angle;                    // rotate angle.
 
                 bool should_ylikuutio_render_this_biont;
                 bool has_entered;
