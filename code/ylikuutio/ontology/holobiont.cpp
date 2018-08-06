@@ -93,13 +93,25 @@ namespace yli
         Holobiont::~Holobiont()
         {
             // destructor.
+            //
+            // requirements:
+            // `this->symbiosis_parent` must not be `nullptr`.
+
+            ontology::Symbiosis* const symbiosis = this->symbiosis_parent;
+
+            if (symbiosis == nullptr)
+            {
+                std::cerr << "ERROR: `Holobiont::~Holobiont`: `symbiosis` is `nullptr`!\n";
+                return;
+            }
+
             std::cout << "Holobiont with childID " << std::dec << this->childID << " will be destroyed.\n";
 
             std::cout << "All bionts of this holobiont will be destroyed.\n";
             yli::hierarchy::delete_children<yli::ontology::Biont*>(this->biont_pointer_vector, &this->number_of_bionts);
 
             // set pointer to this `Holobiont` to nullptr.
-            this->symbiosis_parent->set_holobiont_pointer(this->childID, nullptr);
+            symbiosis->set_holobiont_pointer(this->childID, nullptr);
         }
 
         void Holobiont::render()
