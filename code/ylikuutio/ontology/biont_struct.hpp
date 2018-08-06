@@ -27,6 +27,7 @@ namespace yli
     namespace ontology
     {
         class Holobiont;
+        class SymbiontSpecies;
     }
 }
 
@@ -39,6 +40,7 @@ typedef struct BiontStruct
         initial_rotate_vector(glm::vec3(0.0f, 1.0f, 1.0f)),
         translate_vector(glm::vec3(0.0f, 0.0f, 0.0f)),
         holobiont_parent(nullptr),
+        symbiont_species(nullptr),
         biontID(std::numeric_limits<std::size_t>::max()),
         rotate_angle(0.0f),
         initial_rotate_angle(PI),
@@ -53,6 +55,7 @@ typedef struct BiontStruct
     glm::vec3 initial_rotate_vector; // initial rotate vector.
     glm::vec3 translate_vector;      // translate vector.
     yli::ontology::Holobiont* holobiont_parent; // pointer to the parent `Holobiont`.
+    yli::ontology::SymbiontSpecies* symbiont_species; // pointer to the `SymbiontSpecies`.
     std::size_t biontID;
     float rotate_angle;              // rotate angle.
     float initial_rotate_angle;      // initial rotate angle.

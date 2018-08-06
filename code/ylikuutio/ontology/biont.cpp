@@ -151,7 +151,7 @@ namespace yli
                     light_position.y,
                     light_position.z);
 
-            yli::ontology::SymbiontSpecies* symbiont_species = symbiosis->get_symbiont_species(this->biontID);
+            const yli::ontology::SymbiontSpecies* const symbiont_species = this->symbiont_species;
 
             // 1st attribute buffer : vertices.
             glEnableVertexAttribArray(symbiont_species->get_vertex_position_modelspaceID());

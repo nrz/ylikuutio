@@ -107,6 +107,7 @@ namespace yli
                 BiontStruct biont_struct;
                 biont_struct.biontID               = biontID;
                 biont_struct.holobiont_parent      = this;
+                biont_struct.symbiont_species      = this->symbiosis_parent->get_symbiont_species(biontID);
                 biont_struct.original_scale_vector = this->original_scale_vector;
                 biont_struct.rotate_angle          = this->rotate_angle;
                 biont_struct.rotate_vector         = this->rotate_vector;

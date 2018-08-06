@@ -56,6 +56,7 @@ namespace yli
                 {
                     // constructor.
                     this->holobiont_parent      = biont_struct.holobiont_parent;
+                    this->symbiont_species      = biont_struct.symbiont_species;
                     this->biontID               = biont_struct.biontID;
                     this->original_scale_vector = biont_struct.original_scale_vector;
                     this->rotate_angle          = biont_struct.rotate_angle;
@@ -71,7 +72,6 @@ namespace yli
 
                     this->quaternions_in_use    = biont_struct.quaternions_in_use;
                     this->cartesian_coordinates = biont_struct.cartesian_coordinates;
-                    this->symbiont_species      = nullptr;         // dummy value.
                     this->model_matrix          = glm::mat4(1.0f); // identity matrix (dummy value).
                     this->MVP_matrix            = glm::mat4(1.0f); // identity matrix (dummy value).
 
