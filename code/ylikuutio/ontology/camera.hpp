@@ -68,6 +68,9 @@ namespace yli
                 float get_horizontal_angle() const;
                 float get_vertical_angle() const;
 
+                std::size_t get_number_of_children() const override;
+                std::size_t get_number_of_descendants() const override;
+
                 friend class Universe;
 
                 template<class T1>
@@ -75,9 +78,6 @@ namespace yli
 
             private:
                 void bind_to_parent();
-
-                std::size_t get_number_of_children() const override;
-                std::size_t get_number_of_descendants() const override;
 
                 bool compute_and_update_matrices_from_inputs();
 
