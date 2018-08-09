@@ -19,7 +19,7 @@ namespace yli
                 Matrix(std::size_t height, std::size_t width);
 
                 // copy constructor.
-                Matrix(yli::linear_algebra::Matrix& old_matrix);
+                Matrix(const yli::linear_algebra::Matrix& old_matrix);
                 Matrix(std::shared_ptr<yli::linear_algebra::Matrix> old_matrix)
                     : Matrix(*old_matrix) { }
 

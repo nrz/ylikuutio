@@ -37,7 +37,7 @@ namespace yli
             }
         }
 
-        Matrix::Matrix(yli::linear_algebra::Matrix& old_matrix)
+        Matrix::Matrix(const yli::linear_algebra::Matrix& old_matrix)
         {
             // copy constructor.
             this->width = old_matrix.width;
@@ -59,7 +59,7 @@ namespace yli
             {
                 // Get the slices of both arrays.
                 std::vector<float>& my_array = this->array_of_arrays.at(y);
-                std::vector<float>& other_array = old_matrix.array_of_arrays.at(y);
+                const std::vector<float>& other_array = old_matrix.array_of_arrays.at(y);
 
                 for (std::size_t x = 0; x < this->width; x++)
                 {
