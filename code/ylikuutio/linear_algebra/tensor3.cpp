@@ -48,7 +48,7 @@ namespace yli
             }
         }
 
-        Tensor3::Tensor3(yli::linear_algebra::Tensor3& old_tensor3)
+        Tensor3::Tensor3(const yli::linear_algebra::Tensor3& old_tensor3)
         {
             // copy constructor.
             this->width = old_tensor3.width;

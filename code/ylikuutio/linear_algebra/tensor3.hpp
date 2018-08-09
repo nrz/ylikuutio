@@ -25,7 +25,7 @@ namespace yli
                 Tensor3(std::size_t height, std::size_t width, std::size_t depth);
 
                 // copy constructor.
-                Tensor3(yli::linear_algebra::Tensor3& old_tensor3);
+                Tensor3(const yli::linear_algebra::Tensor3& old_tensor3);
                 Tensor3(std::shared_ptr<yli::linear_algebra::Tensor3> old_matrix)
                     : Tensor3(*old_matrix) { }
 
