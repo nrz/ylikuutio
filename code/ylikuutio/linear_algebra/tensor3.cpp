@@ -81,7 +81,7 @@ namespace yli
             }
         }
 
-        Tensor3::Tensor3(yli::linear_algebra::Matrix& old_matrix)
+        Tensor3::Tensor3(const yli::linear_algebra::Matrix& old_matrix)
         {
             // constructor.
 

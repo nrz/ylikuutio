@@ -30,7 +30,7 @@ namespace yli
                     : Tensor3(*old_matrix) { }
 
                 // constructor.
-                Tensor3(yli::linear_algebra::Matrix& old_matrix);
+                Tensor3(const yli::linear_algebra::Matrix& old_matrix);
 
                 // Inspired by http://stackoverflow.com/questions/6969881/operator-overload/6969904#6969904
                 class Proxy2D
