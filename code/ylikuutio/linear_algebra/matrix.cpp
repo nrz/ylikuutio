@@ -20,7 +20,7 @@ namespace yli
 
             for (std::size_t i = 0; i < this->height; i++)
             {
-                this->array_of_arrays.at(i).resize(this->width);
+                this->array_of_arrays[i].resize(this->width);
             }
 
             this->next_x_to_populate = 0;
@@ -46,7 +46,7 @@ namespace yli
 
             for (std::size_t i = 0; i < this->height; i++)
             {
-                this->array_of_arrays.at(i).resize(this->width);
+                this->array_of_arrays[i].resize(this->width);
             }
 
             this->next_x_to_populate = old_matrix.next_x_to_populate;
@@ -58,8 +58,8 @@ namespace yli
             for (std::size_t y = 0; y < this->height; y++)
             {
                 // Get the slices of both arrays.
-                std::vector<float>& my_array = this->array_of_arrays.at(y);
-                const std::vector<float>& other_array = old_matrix.array_of_arrays.at(y);
+                std::vector<float>& my_array = this->array_of_arrays[y];
+                const std::vector<float>& other_array = old_matrix.array_of_arrays[y];
 
                 for (std::size_t x = 0; x < this->width; x++)
                 {
@@ -134,7 +134,7 @@ namespace yli
             }
 
             // First, get the slice.
-            std::vector<float>& my_array = this->array_of_arrays.at(this->next_y_to_populate);
+            std::vector<float>& my_array = this->array_of_arrays[this->next_y_to_populate];
 
             // Then store the value.
             my_array[this->next_x_to_populate++] = rhs;
@@ -157,10 +157,10 @@ namespace yli
             while (!this->is_fully_populated && rhs_i < rhs.size())
             {
                 // First, get the slice.
-                std::vector<float>& my_array = this->array_of_arrays.at(this->next_y_to_populate);
+                std::vector<float>& my_array = this->array_of_arrays[this->next_y_to_populate];
 
                 // Then store the value.
-                my_array[this->next_x_to_populate++] = rhs.at(rhs_i++);
+                my_array[this->next_x_to_populate++] = rhs[rhs_i++];
 
                 if (this->next_x_to_populate >= this->width)
                 {
@@ -174,7 +174,7 @@ namespace yli
             }
         }
 
-        bool Matrix::operator==(yli::linear_algebra::Matrix& rhs)
+        bool Matrix::operator==(const yli::linear_algebra::Matrix& rhs)
         {
             // compare if matrices are equal.
             if (this->width != rhs.width ||
@@ -187,8 +187,8 @@ namespace yli
             for (std::size_t y = 0; y < this->height; y++)
             {
                 // Get the slices of both arrays.
-                std::vector<float>& my_array = this->array_of_arrays.at(y);
-                std::vector<float>& other_array = rhs.array_of_arrays.at(y);
+                const std::vector<float>& my_array = this->array_of_arrays[y];
+                const std::vector<float>& other_array = rhs.array_of_arrays[y];
 
                 for (std::size_t x = 0; x < this->width; x++)
                 {
@@ -203,7 +203,7 @@ namespace yli
             return true;
         }
 
-        bool Matrix::operator!=(yli::linear_algebra::Matrix& rhs)
+        bool Matrix::operator!=(const yli::linear_algebra::Matrix& rhs)
         {
             // compare if matrices are equal.
             if (this->width != rhs.width ||
@@ -216,8 +216,8 @@ namespace yli
             for (std::size_t y = 0; y < this->height; y++)
             {
                 // Get the slices of both arrays.
-                std::vector<float>& my_array = this->array_of_arrays.at(y);
-                std::vector<float>& other_array = rhs.array_of_arrays.at(y);
+                const std::vector<float>& my_array = this->array_of_arrays[y];
+                const std::vector<float>& other_array = rhs.array_of_arrays[y];
 
                 for (std::size_t x = 0; x < this->width; x++)
                 {
@@ -237,7 +237,7 @@ namespace yli
             for (std::size_t y = 0; y < this->height; y++)
             {
                 // Get the slice.
-                std::vector<float>& my_array = this->array_of_arrays.at(y);
+                std::vector<float>& my_array = this->array_of_arrays[y];
 
                 for (std::size_t x = 0; x < this->width; x++)
                 {
@@ -259,7 +259,7 @@ namespace yli
             for (std::size_t y = 0; y < this->height; y++)
             {
                 // Get the slice.
-                std::vector<float>& my_array = this->array_of_arrays.at(y);
+                std::vector<float>& my_array = this->array_of_arrays[y];
 
                 for (std::size_t x = 0; x < this->width; x++)
                 {
@@ -281,7 +281,7 @@ namespace yli
             for (std::size_t y = 0; y < this->height; y++)
             {
                 // Get the slice.
-                std::vector<float>& my_array = this->array_of_arrays.at(y);
+                std::vector<float>& my_array = this->array_of_arrays[y];
 
                 for (std::size_t x = 0; x < this->width; x++)
                 {
@@ -296,7 +296,7 @@ namespace yli
             for (std::size_t y = 0; y < this->height; y++)
             {
                 // Get the slice.
-                std::vector<float>& my_array = this->array_of_arrays.at(y);
+                std::vector<float>& my_array = this->array_of_arrays[y];
 
                 for (std::size_t x = 0; x < this->width; x++)
                 {
@@ -311,7 +311,7 @@ namespace yli
             for (std::size_t y = 0; y < this->height; y++)
             {
                 // Get the slice.
-                std::vector<float>& my_array = this->array_of_arrays.at(y);
+                std::vector<float>& my_array = this->array_of_arrays[y];
 
                 for (std::size_t x = 0; x < this->width; x++)
                 {
@@ -326,7 +326,7 @@ namespace yli
             for (std::size_t y = 0; y < this->height; y++)
             {
                 // Get the slice.
-                std::vector<float>& my_array = this->array_of_arrays.at(y);
+                std::vector<float>& my_array = this->array_of_arrays[y];
 
                 for (std::size_t x = 0; x < this->width; x++)
                 {
@@ -341,8 +341,8 @@ namespace yli
             for (std::size_t y = 0; y < this->height; y++)
             {
                 // Get the slices of both arrays.
-                std::vector<float>& my_array = this->array_of_arrays.at(y);
-                std::vector<float>& other_array = rhs.array_of_arrays.at(y);
+                std::vector<float>& my_array = this->array_of_arrays[y];
+                std::vector<float>& other_array = rhs.array_of_arrays[y];
 
                 for (std::size_t x = 0; x < this->width; x++)
                 {
@@ -357,8 +357,8 @@ namespace yli
             for (std::size_t y = 0; y < this->height; y++)
             {
                 // Get the slices of both arrays.
-                std::vector<float>& my_array = this->array_of_arrays.at(y);
-                std::vector<float>& other_array = rhs.array_of_arrays.at(y);
+                std::vector<float>& my_array = this->array_of_arrays[y];
+                std::vector<float>& other_array = rhs.array_of_arrays[y];
 
                 for (std::size_t x = 0; x < this->width; x++)
                 {
