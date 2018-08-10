@@ -14,15 +14,14 @@ namespace yli
     {
         class Tensor3
         {
-            // `class Tensor3` uses the same coordinate order as MATLAB,
-            // to make testing easier. So: y, x, z.
-            // y = 0 is the uppermost slice
+            // `class Tensor3` uses the coordinate order x, y, z:
             // x = 0 is the leftmost slice.
+            // y = 0 is the uppermost slice
             // z = 0 is the front slice.
 
             public:
                 // constructor.
-                Tensor3(std::size_t height, std::size_t width, std::size_t depth);
+                Tensor3(std::size_t width, std::size_t height, std::size_t depth);
 
                 // copy constructor.
                 Tensor3(const yli::linear_algebra::Tensor3& old_tensor3);
@@ -36,7 +35,7 @@ namespace yli
                 class Proxy2D
                 {
                     public:
-                        Proxy2D(std::vector<std::vector<float>>& array_of_arrays) : array_of_arrays(array_of_arrays) { }
+                        Proxy2D(const std::vector<std::vector<float>>& array_of_arrays) : array_of_arrays(array_of_arrays) { }
 
                         class Proxy
                         {
@@ -63,11 +62,11 @@ namespace yli
 
                 void operator<<(const float rhs);
                 void operator<<(const std::vector<float>& rhs);
-                bool operator==(yli::linear_algebra::Tensor3& rhs);
-                bool operator!=(yli::linear_algebra::Tensor3& rhs);
+                bool operator==(const yli::linear_algebra::Tensor3& rhs);
+                bool operator!=(const yli::linear_algebra::Tensor3& rhs);
                 Proxy2D operator[](const std::size_t index)
                 {
-                    return Proxy2D(array_of_arrays_of_arrays[index]);
+                    return Proxy2D(this->array_of_arrays_of_arrays[index]);
                 }
 
                 bool is_cube;
