@@ -74,6 +74,11 @@ namespace yli
 
         void Entity::prerender() const
         {
+            // requirements:
+            // `this->prerender_callback` must not be `nullptr`.
+            // `this->universe` must not be `nullptr`.
+            // `this->universe->setting_master` must not be `nullptr`.
+
             if (this->prerender_callback != nullptr &&
                     this->universe != nullptr &&
                     this->universe->setting_master != nullptr)
@@ -84,6 +89,11 @@ namespace yli
 
         void Entity::postrender() const
         {
+            // requirements:
+            // `this->postrender_callback` must not be `nullptr`.
+            // `this->universe` must not be `nullptr`.
+            // `this->universe->setting_master` must not be `nullptr`.
+
             if (this->postrender_callback != nullptr &&
                     this->universe != nullptr &&
                     this->universe->setting_master != nullptr)
@@ -94,6 +104,10 @@ namespace yli
 
         void Entity::set_name(const std::string& name)
         {
+            // requirements:
+            // `this->universe` must not be `nullptr`.
+            // `name` must not be already in use.
+
             if (this->universe == nullptr)
             {
                 return;
