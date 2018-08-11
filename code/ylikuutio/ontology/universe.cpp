@@ -87,9 +87,6 @@ namespace yli
             std::cout << "All worlds of this universe will be destroyed.\n";
             yli::hierarchy::delete_children<yli::ontology::World*>(this->world_pointer_vector, this->number_of_worlds);
 
-            std::cout << "The entity factory of this universe will be destroyed.\n";
-            delete this->entity_factory;
-
             glfwTerminate();
         }
 
@@ -288,7 +285,7 @@ namespace yli
 
         yli::ontology::EntityFactory* Universe::get_entity_factory() const
         {
-            return this->entity_factory;
+            return this->entity_factory.get();
         }
 
         // Public callbacks.
