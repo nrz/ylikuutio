@@ -135,7 +135,7 @@ namespace yli
 
         std::size_t Scene::get_number_of_children() const
         {
-            return this->number_of_shaders;
+            return this->number_of_shaders + this->number_of_cameras;
         }
 
         std::size_t Scene::get_number_of_descendants() const
