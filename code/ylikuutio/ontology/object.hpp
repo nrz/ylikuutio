@@ -98,10 +98,11 @@ namespace yli
 
                 yli::ontology::Entity* get_parent() const override;
 
+                std::size_t get_number_of_children() const override;
+                std::size_t get_number_of_descendants() const override;
+
                 template<class T1>
                     friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
-                template<class T1>
-                    friend std::size_t yli::ontology::get_number_of_descendants(const std::vector<T1>& child_pointer_vector);
                 template<class T1>
                     friend void render_children(const std::vector<T1>& child_pointer_vector);
 
@@ -111,9 +112,6 @@ namespace yli
                 // this method renders this `Object`.
                 void render();
                 void render_this_object(yli::ontology::Shader* const shader_pointer);
-
-                std::size_t get_number_of_children() const override;
-                std::size_t get_number_of_descendants() const override;
 
                 yli::ontology::Species* species_parent; // pointer to `Species`.
                 yli::ontology::Glyph* glyph_parent;     // pointer to `Glyph`.
