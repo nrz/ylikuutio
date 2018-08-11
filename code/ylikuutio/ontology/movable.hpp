@@ -94,7 +94,6 @@ namespace yli
                     : Entity(universe)
                 {
                     // constructor.
-                    this->setting_master = new yli::config::SettingMaster(this);
                     this->cartesian_coordinates = glm::vec3(NAN, NAN, NAN);
                     this->spherical_coordinates = spherical_coordinates;
                 }
