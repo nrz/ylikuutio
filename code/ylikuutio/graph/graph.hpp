@@ -10,8 +10,8 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
-#include <vector>   // std::vector
 #include <queue>    // std::queue
+#include <vector>   // std::vector
 
 namespace yli
 {
@@ -22,6 +22,9 @@ namespace yli
         class Graph
         {
             public:
+                void bind_node(yli::graph::Node* const node);
+                void unbind_node(const std::size_t childID);
+
                 // constructor.
                 Graph();
 

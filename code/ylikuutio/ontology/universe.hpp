@@ -278,13 +278,13 @@ namespace yli
         class Universe: public yli::ontology::Entity
         {
             public:
-                void bind(yli::ontology::World* const world);
+                void bind_world(yli::ontology::World* const world);
 
                 // constructor.
                 Universe(const UniverseStruct& universe_struct)
                     : Entity(this) // `Universe` has no parent.
                 {
-                    this->entity_factory = new yli::ontology::EntityFactory(this);
+                    this->entity_factory = std::make_shared<yli::ontology::EntityFactory>(this);
 
                     this->current_camera_cartesian_coordinates = glm::vec3(NAN, NAN, NAN); // dummy coordinates.
 
@@ -530,7 +530,7 @@ namespace yli
 
                 float planet_radius;
 
-                yli::ontology::EntityFactory* entity_factory;
+                std::shared_ptr<yli::ontology::EntityFactory> entity_factory;
 
                 std::vector<yli::ontology::World*> world_pointer_vector;
                 std::queue<std::size_t> free_worldID_queue;

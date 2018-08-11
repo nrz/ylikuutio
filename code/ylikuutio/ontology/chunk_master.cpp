@@ -14,6 +14,25 @@ namespace yli
 {
     namespace ontology
     {
+        void ChunkMaster::bind_chunk(yli::ontology::Chunk* const chunk)
+        {
+            // get `childID` from `ChunkMaster` and set pointer to `chunk`.
+            yli::hierarchy::bind_child_to_parent<yli::ontology::Chunk*>(
+                    chunk,
+                    this->chunk_pointer_vector,
+                    this->free_chunkID_queue,
+                    this->number_of_chunks);
+        }
+
+        void ChunkMaster::unbind_chunk(const std::size_t childID)
+        {
+            yli::hierarchy::unbind_child_from_parent(
+                    childID,
+                    this->chunk_pointer_vector,
+                    this->free_chunkID_queue,
+                    this->number_of_chunks);
+        }
+
         void ChunkMaster::bind_to_parent()
         {
             // get `childID` from `Material` and set pointer to this `ChunkMaster`.
@@ -26,7 +45,7 @@ namespace yli
 
             // destroy all chunks of this material.
             std::cout << "All chunks of this material will be destroyed.\n";
-            yli::hierarchy::delete_children<ontology::Chunk*>(this->chunk_pointer_vector, &this->number_of_chunks);
+            yli::hierarchy::delete_children<ontology::Chunk*>(this->chunk_pointer_vector, this->number_of_chunks);
 
             // set pointer to this `ChunkMaster` to nullptr.
             this->parent->set_chunk_master_pointer(this->childID, nullptr);
@@ -34,7 +53,7 @@ namespace yli
 
         void ChunkMaster::set_chunk_pointer(std::size_t childID, yli::ontology::Chunk* child_pointer)
         {
-            yli::hierarchy::set_child_pointer(childID, child_pointer, this->chunk_pointer_vector, this->free_chunkID_queue, &this->number_of_chunks);
+            yli::hierarchy::set_child_pointer(childID, child_pointer, this->chunk_pointer_vector, this->free_chunkID_queue, this->number_of_chunks);
         }
 
         void ChunkMaster::render()

@@ -3,6 +3,7 @@
 
 // Include standard headers
 #include <cstddef>       // std::size_t
+#include <limits>        // std::numeric_limits
 #include <queue>         // std::queue
 #include <unordered_map> // std::unordered_map
 #include <vector>        // std::vector
@@ -17,8 +18,17 @@ namespace yli
                     const T1 child_pointer,
                     std::vector<T1>& child_pointer_vector,
                     std::queue<std::size_t>& free_childID_queue,
-                    std::size_t* const number_of_children)
+                    std::size_t& number_of_children)
             {
+                // requirements:
+                // `childID` must not be `std::numeric_limits<std::size_t>::max()`.
+                //     (`std::numeric_limits<std::size_t>::max()` as `childID` value means that `childID` is uninitialized).
+
+                if (childID == std::numeric_limits<std::size_t>::max())
+                {
+                    return;
+                }
+
                 child_pointer_vector[childID] = child_pointer;
 
                 if (child_pointer == nullptr)
@@ -35,15 +45,15 @@ namespace yli
                     }
 
                     // 1 child less.
-                    if (*number_of_children > 0)
+                    if (number_of_children > 0)
                     {
-                        (*number_of_children)--;
+                        number_of_children--;
                     }
                 }
                 else
                 {
                     // 1 child more.
-                    (*number_of_children)++;
+                    number_of_children++;
                 }
             }
 
@@ -67,6 +77,7 @@ namespace yli
                         return childID;
                     }
                 }
+
                 // OK, the queue is empty.
                 // A new child index must be created.
                 childID = child_pointer_vector.size();
@@ -82,13 +93,16 @@ namespace yli
                     const T1 child_pointer,
                     std::vector<T1>& child_pointer_vector,
                     std::queue<std::size_t>& free_childID_queue,
-                    std::size_t* const number_of_children)
+                    std::size_t& number_of_children)
             {
                 // If a class' instances have parents, this function must be
                 // called in the constructor. The call must be done only once
                 // in each constructor, usually after setting
                 // `this->parent`. So, get `childID` from the parent,
                 // because every child deserves a unique ID!
+                //
+                // requirements:
+                // `child_pointer` must not be `nullptr` (use `this` as the first argument).
                 child_pointer->childID = get_childID(child_pointer_vector, free_childID_queue);
                 // set pointer to the child in parent's child pointer vector so that parent knows about children's whereabouts!
                 set_child_pointer(child_pointer->childID, child_pointer, child_pointer_vector, free_childID_queue, number_of_children);
@@ -101,7 +115,7 @@ namespace yli
                     const T1 child_pointer,
                     std::vector<T1>& child_pointer_vector,
                     std::queue<std::size_t>& free_childID_queue,
-                    std::size_t* const number_of_children)
+                    std::size_t& number_of_children)
             {
                 // If a class' instances have parents, this function must be
                 // called in the constructor. The call must be done only once
@@ -120,32 +134,35 @@ namespace yli
                 set_child_pointer(child_pointer->childID, child_pointer, child_pointer_vector, free_childID_queue, number_of_children);
             }
 
-        template <class T1, class T2>
-            void bind_child_to_new_parent(
-                    const T1 child_pointer,
-                    const T2 new_parent,
-                    std::vector<T1>& old_child_pointer_vector,
-                    std::queue<std::size_t>& old_free_childID_queue,
-                    std::size_t* const old_number_of_children)
+        template <class T1>
+            void unbind_child_from_parent(
+                    const std::size_t childID,
+                    std::vector<T1>& child_pointer_vector,
+                    std::queue<std::size_t>& free_childID_queue,
+                    std::size_t& number_of_children)
             {
+                // requirements:
+                // `child_pointer->childID` must not be `std::numeric_limits<std::size_t>::max()`.
+                //     (`std::numeric_limits<std::size_t>::max()` as `childID` value means that `childID` is uninitialized).
+
+                if (childID == std::numeric_limits<std::size_t>::max())
+                {
+                    return;
+                }
+
                 // Set pointer to this child to `nullptr` in the old parent.
-                T1 dummy_child_pointer = nullptr;
-                set_child_pointer(child_pointer->childID, dummy_child_pointer, old_child_pointer_vector, old_free_childID_queue, old_number_of_children);
-                // set the new parent pointer.
-                child_pointer->parent = new_parent;
-                // bind to the new parent.
-                child_pointer->bind_to_parent();
+                set_child_pointer(childID, static_cast<T1>(nullptr), child_pointer_vector, free_childID_queue, number_of_children);
             }
 
         template<class T1>
-            void delete_children(std::vector<T1>& child_pointer_vector, std::size_t* const number_of_children)
+            void delete_children(std::vector<T1>& child_pointer_vector, std::size_t& number_of_children)
             {
                 for (std::size_t child_i = 0; child_i < child_pointer_vector.size(); child_i++)
                 {
                     delete child_pointer_vector[child_i];
                 }
 
-                *number_of_children = 0; // no children any more.
+                number_of_children = 0; // no children any more.
             }
     }
 }

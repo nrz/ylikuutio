@@ -82,14 +82,14 @@ namespace yli
                 std::stringstream current_line_stringstream = std::stringstream(current_line_string);
                 std::string prefix;
 
-                // #
                 if (current_line_string.compare(0, std::strlen("#"), "#") == 0)
                 {
+                    // `#`
                     // This line is a comment.
                 }
-                // vt
                 else if (current_line_string.compare(0, std::strlen("vt"), "vt") == 0)
                 {
+                    // `vt`
                     // This line specifies texture coordinate of one vertex.
                     // Example:
                     // vt 0.748573 0.750412
@@ -97,9 +97,9 @@ namespace yli
                     current_line_stringstream >> prefix >> uv.x >> uv.y;
                     temp_UVs.push_back(uv);
                 }
-                // vn
                 else if (current_line_string.compare(0, std::strlen("vn"), "vn") == 0)
                 {
+                    // `vn`
                     // This line specifies the normal of one vertex.
                     // Example:
                     // vn 0.000000 0.000000 -1.000000
@@ -107,9 +107,9 @@ namespace yli
                     current_line_stringstream >> prefix >> normal.x >> normal.y >> normal.z;
                     temp_normals.push_back(normal);
                 }
-                // v
                 else if (current_line_string.compare(0, std::strlen("v"), "v") == 0)
                 {
+                    // `v`
                     // This line specifies a vertex.
                     // Example:
                     // v 1.000000 -1.000000 -1.000000
@@ -117,9 +117,9 @@ namespace yli
                     current_line_stringstream >> prefix >> vertex.x >> vertex.y >> vertex.z;
                     temp_vertices.push_back(vertex);
                 }
-                // f
                 else if (current_line_string.compare(0, std::strlen("f"), "f") == 0)
                 {
+                    // `f`
                     // This line specifies a face.
                     // Example:
                     // f 5/1/1 1/2/1 4/3/1
@@ -143,29 +143,31 @@ namespace yli
                     normal_indices.push_back(normal_i2);
                     normal_indices.push_back(normal_i3);
                 }
-                // l
                 else if (current_line_string.compare(0, std::strlen("l"), "l") == 0)
                 {
+                    // `l`
                     // TODO: implement `l`.
                 }
-                // o
                 else if (current_line_string.compare(0, std::strlen("o"), "o") == 0)
                 {
+                    // `o`
                     // TODO: implement `o`.
                     // Currently, terminate processing when `o` is encountered.
                     break;
                 }
-                // s
                 else if (current_line_string.compare(0, std::strlen("s"), "s") == 0)
                 {
+                    // `s`
                     // TODO: implement `s`.
                 }
                 else if (current_line_string.compare(0, std::strlen("mtllib"), "mtllib") == 0)
                 {
+                    // `mtllib`
                     // TODO: implement `mtllib`.
                 }
                 else if (current_line_string.compare(0, std::strlen("usemtl"), "usemtl") == 0)
                 {
+                    // `usemtl`
                     // TODO: implement `usemtl`.
                 }
 

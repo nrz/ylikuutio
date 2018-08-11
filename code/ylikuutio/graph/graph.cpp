@@ -16,6 +16,25 @@ namespace yli
 {
     namespace graph
     {
+        void Graph::bind_node(yli::graph::Node* const node)
+        {
+            // get `childID` from `Symbiosis` and set pointer to `symbiont_material`.
+            yli::hierarchy::bind_child_to_parent<yli::graph::Node*>(
+                    node,
+                    this->node_pointer_vector,
+                    this->free_nodeID_queue,
+                    this->number_of_nodes);
+        }
+
+        void Graph::unbind_node(const std::size_t childID)
+        {
+            yli::hierarchy::unbind_child_from_parent(
+                    childID,
+                    this->node_pointer_vector,
+                    this->free_nodeID_queue,
+                    this->number_of_nodes);
+        }
+
         Graph::Graph()
         {
             // constructor.
@@ -24,7 +43,7 @@ namespace yli
 
         void Graph::set_node_pointer(std::size_t childID, yli::graph::Node* child_pointer)
         {
-            yli::hierarchy::set_child_pointer(childID, child_pointer, this->node_pointer_vector, this->free_nodeID_queue, &this->number_of_nodes);
+            yli::hierarchy::set_child_pointer(childID, child_pointer, this->node_pointer_vector, this->free_nodeID_queue, this->number_of_nodes);
         }
 
         yli::graph::Node* Graph::get_node_pointer(std::size_t childID)
@@ -44,7 +63,7 @@ namespace yli
 
             // destroy all nodes of this graph.
             std::cout << "All nodes of this graph will be destroyed.\n";
-            yli::hierarchy::delete_children<yli::graph::Node*>(this->node_pointer_vector, &this->number_of_nodes);
+            yli::hierarchy::delete_children<yli::graph::Node*>(this->node_pointer_vector, this->number_of_nodes);
         }
     }
 }

@@ -136,17 +136,13 @@ int main(const int argc, const char* argv[])
 
     yli::ontology::EntityFactory* entity_factory = my_universe->get_entity_factory();
 
-    // Create the setting master, store it in `my_setting_master`.
-    std::cout << "Creating yli::config::SettingMaster* my_setting_master ...\n";
-    yli::config::SettingMaster* my_setting_master = new yli::config::SettingMaster(my_universe);
-
     yli::audio::AudioMaster audio_master;
 
     float earth_radius = 6371.0f; // in kilometres
 
     SettingStruct planet_radius_setting_struct(std::make_shared<yli::datatypes::AnyValue>(earth_radius));
     planet_radius_setting_struct.name = "planet_radius";
-    planet_radius_setting_struct.setting_master = my_setting_master;
+    planet_radius_setting_struct.setting_master = my_universe->get_setting_master();
     planet_radius_setting_struct.activate_callback = &yli::config::SettingMaster::activate_planet_radius; // world may be a planet or a moon.
     planet_radius_setting_struct.should_ylikuutio_call_activate_callback_now = true;
     new yli::config::Setting(planet_radius_setting_struct);
@@ -187,17 +183,17 @@ int main(const int argc, const char* argv[])
     yli::opengl::cull_triangles();
 
     std::cout << "Setting up background colors ...\n";
-    ajokki::set_background_colors(my_setting_master);
+    ajokki::set_background_colors(my_universe->get_setting_master());
     std::cout << "Setting up wireframe state ...\n";
-    ajokki::set_wireframe(my_setting_master);
+    ajokki::set_wireframe(my_universe->get_setting_master());
     std::cout << "Setting up movement ...\n";
-    ajokki::set_movement(my_setting_master);
+    ajokki::set_movement(my_universe->get_setting_master());
     std::cout << "Setting up location and orientation ...\n";
-    ajokki::set_location_and_orientation(my_setting_master);
+    ajokki::set_location_and_orientation(my_universe->get_setting_master());
     std::cout << "Setting up debug variables ...\n";
-    ajokki::set_debug_variables(my_setting_master);
+    ajokki::set_debug_variables(my_universe->get_setting_master());
     std::cout << "Setting up console ...\n";
-    ajokki::set_console(my_setting_master);
+    ajokki::set_console(my_universe->get_setting_master());
 
     // Create the `World`s.
 

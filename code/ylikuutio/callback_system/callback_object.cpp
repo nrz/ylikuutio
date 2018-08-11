@@ -16,6 +16,31 @@ namespace yli
 {
     namespace callback_system
     {
+        void CallbackObject::bind_callback_parameter(yli::callback_system::CallbackParameter* const callback_parameter)
+        {
+            // get `childID` from `CallbackObject` and set pointer to `callback_parameter`.
+            yli::hierarchy::bind_child_to_parent<yli::callback_system::CallbackParameter*>(
+                    callback_parameter,
+                    this->callback_parameter_pointer_vector,
+                    this->free_callback_parameterID_queue,
+                    this->number_of_callback_parameters);
+
+            if (!callback_parameter->name.empty())
+            {
+                // This parameter is a named variable, so store it in `anyvalue_hashmap`.
+                this->set_any_value(callback_parameter->name, std::make_shared<yli::datatypes::AnyValue>(*callback_parameter->any_value));
+            }
+        }
+
+        void CallbackObject::unbind_callback_parameter(const std::size_t childID)
+        {
+            yli::hierarchy::unbind_child_from_parent(
+                    childID,
+                    this->callback_parameter_pointer_vector,
+                    this->free_callback_parameterID_queue,
+                    this->number_of_callback_parameters);
+        }
+
         // getter function for callbacks and callback objects.
         std::shared_ptr<yli::datatypes::AnyValue> CallbackObject::get_any_value(const std::string& name) const
         {
@@ -23,6 +48,7 @@ namespace yli
             {
                 return nullptr;
             }
+
             return std::make_shared<yli::datatypes::AnyValue>(this->anyvalue_hashmap.at(name));
         }
 
@@ -53,7 +79,7 @@ namespace yli
 
         void CallbackObject::bind_to_parent()
         {
-            yli::hierarchy::bind_child_to_parent<yli::callback_system::CallbackObject*>(this, this->parent->callback_object_pointer_vector, this->parent->free_callback_objectID_queue, &this->parent->number_of_callback_objects);
+            this->parent->bind_callback_object(this);
         }
 
         void CallbackObject::set_new_callback(const InputParametersToAnyValueCallback callback)

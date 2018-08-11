@@ -22,7 +22,7 @@ namespace yli
         class World: public yli::ontology::Entity
         {
             public:
-                void bind(yli::ontology::Scene* const scene);
+                void bind_scene(yli::ontology::Scene* const scene);
 
                 // constructor.
                 World(yli::ontology::Universe* const universe)
@@ -61,7 +61,7 @@ namespace yli
                 std::size_t get_number_of_descendants() const override;
 
                 template<class T1>
-                    friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t* number_of_children);
+                    friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
 
             private:
                 void bind_to_parent();

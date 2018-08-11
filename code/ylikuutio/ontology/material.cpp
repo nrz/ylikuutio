@@ -1,4 +1,5 @@
 #include "material.hpp"
+#include "shader.hpp"
 #include "vector_font.hpp"
 #include "species.hpp"
 #include "render_templates.hpp"
@@ -34,7 +35,7 @@ namespace yli
                     species,
                     this->species_pointer_vector,
                     this->free_speciesID_queue,
-                    &this->number_of_species);
+                    this->number_of_species);
         }
 
         void Material::bind_vector_font(yli::ontology::VectorFont* const vector_font)
@@ -44,7 +45,7 @@ namespace yli
                     vector_font,
                     this->vector_font_pointer_vector,
                     this->free_vector_fontID_queue,
-                    &this->number_of_vector_fonts);
+                    this->number_of_vector_fonts);
         }
 
         void Material::bind_chunk_master(ontology::ChunkMaster* const chunk_master)
@@ -54,40 +55,34 @@ namespace yli
                     chunk_master,
                     this->chunk_master_pointer_vector,
                     this->free_chunk_masterID_queue,
-                    &this->number_of_chunk_masters);
+                    this->number_of_chunk_masters);
         }
 
         void Material::unbind_species(const std::size_t childID)
         {
-            yli::ontology::Species* dummy_child_pointer = nullptr;
-            yli::hierarchy::set_child_pointer(
+            yli::hierarchy::unbind_child_from_parent<yli::ontology::Species*>(
                     childID,
-                    dummy_child_pointer,
                     this->species_pointer_vector,
                     this->free_speciesID_queue,
-                    &this->number_of_species);
+                    this->number_of_species);
         }
 
         void Material::unbind_vector_font(const std::size_t childID)
         {
-            yli::ontology::VectorFont* dummy_child_pointer = nullptr;
-            yli::hierarchy::set_child_pointer(
+            yli::hierarchy::unbind_child_from_parent<yli::ontology::VectorFont*>(
                     childID,
-                    dummy_child_pointer,
                     this->vector_font_pointer_vector,
                     this->free_vector_fontID_queue,
-                    &this->number_of_vector_fonts);
+                    this->number_of_vector_fonts);
         }
 
         void Material::unbind_chunk_master(const std::size_t childID)
         {
-            yli::ontology::ChunkMaster* dummy_child_pointer = nullptr;
-            yli::hierarchy::set_child_pointer(
+            yli::hierarchy::unbind_child_from_parent<yli::ontology::ChunkMaster*>(
                     childID,
-                    dummy_child_pointer,
                     this->chunk_master_pointer_vector,
                     this->free_chunk_masterID_queue,
-                    &this->number_of_chunk_masters);
+                    this->number_of_chunk_masters);
         }
 
         void Material::bind_to_parent()
@@ -105,15 +100,15 @@ namespace yli
 
                 // destroy all species of this material.
                 std::cout << "All species of this material will be destroyed.\n";
-                yli::hierarchy::delete_children<yli::ontology::Species*>(this->species_pointer_vector, &this->number_of_species);
+                yli::hierarchy::delete_children<yli::ontology::Species*>(this->species_pointer_vector, this->number_of_species);
 
                 // destroy all fonts of this material.
                 std::cout << "All fonts of this material will be destroyed.\n";
-                yli::hierarchy::delete_children<yli::ontology::VectorFont*>(this->vector_font_pointer_vector, &this->number_of_vector_fonts);
+                yli::hierarchy::delete_children<yli::ontology::VectorFont*>(this->vector_font_pointer_vector, this->number_of_vector_fonts);
 
                 // destroy all chunk masters of this material.
                 std::cout << "All chunk masters of this material will be destroyed.\n";
-                yli::hierarchy::delete_children<ontology::ChunkMaster*>(this->chunk_master_pointer_vector, &this->number_of_chunk_masters);
+                yli::hierarchy::delete_children<ontology::ChunkMaster*>(this->chunk_master_pointer_vector, this->number_of_chunk_masters);
 
                 glDeleteTextures(1, &this->texture);
 
@@ -157,26 +152,43 @@ namespace yli
 
         void Material::set_species_pointer(const std::size_t childID, yli::ontology::Species* const child_pointer)
         {
-            yli::hierarchy::set_child_pointer(childID, child_pointer, this->species_pointer_vector, this->free_speciesID_queue, &this->number_of_species);
+            yli::hierarchy::set_child_pointer(childID, child_pointer, this->species_pointer_vector, this->free_speciesID_queue, this->number_of_species);
         }
 
         void Material::set_vector_font_pointer(const std::size_t childID, yli::ontology::VectorFont* const child_pointer)
         {
-            yli::hierarchy::set_child_pointer(childID, child_pointer, this->vector_font_pointer_vector, this->free_vector_fontID_queue, &this->number_of_vector_fonts);
+            yli::hierarchy::set_child_pointer(childID, child_pointer, this->vector_font_pointer_vector, this->free_vector_fontID_queue, this->number_of_vector_fonts);
         }
 
         void Material::set_chunk_master_pointer(const std::size_t childID, yli::ontology::ChunkMaster* const child_pointer)
         {
-            yli::hierarchy::set_child_pointer(childID, child_pointer, this->chunk_master_pointer_vector, this->free_chunk_masterID_queue, &this->number_of_chunk_masters);
+            yli::hierarchy::set_child_pointer(childID, child_pointer, this->chunk_master_pointer_vector, this->free_chunk_masterID_queue, this->number_of_chunk_masters);
         }
 
-        void Material::bind_to_new_parent(yli::ontology::Shader* const new_shader_pointer)
+        void Material::bind_to_new_parent(yli::ontology::Shader* const new_parent)
         {
+            // requirements:
+            // `this->parent` must not be `nullptr`.
+            // `new_parent` must not be `nullptr`.
+            yli::ontology::Shader* const shader = this->parent;
+
+            if (shader == nullptr)
+            {
+                std::cerr << "ERROR: `Material::bind_to_new_parent`: `shader` is `nullptr`!\n";
+                return;
+            }
+
+            if (new_parent == nullptr)
+            {
+                std::cerr << "ERROR: `Material::bind_to_new_parent`: `new_parent` is `nullptr`!\n";
+                return;
+            }
+
             // unbind from the old parent `Shader`.
             this->parent->unbind_material(this->childID);
 
             // get `childID` from `Shader` and set pointer to this `Material`.
-            this->parent = new_shader_pointer;
+            this->parent = new_parent;
             this->parent->bind_material(this);
         }
 

@@ -9,7 +9,7 @@ namespace yli
         void Chunk::bind_to_parent()
         {
             // get `childID` from the `ChunkMaster` and set pointer to this `Chunk`.
-            yli::hierarchy::bind_child_to_parent<ontology::Chunk*>(this, this->parent->chunk_pointer_vector, this->parent->free_chunkID_queue, &this->parent->number_of_chunks);
+            this->parent->bind_chunk(this);
         }
 
         Chunk::~Chunk()

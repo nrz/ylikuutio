@@ -52,7 +52,7 @@ namespace yli
 
                     SettingStruct cartesian_coordinates_setting_struct(std::make_shared<yli::datatypes::AnyValue>(new glm::vec3(float_x, float_y, float_z)));
                     cartesian_coordinates_setting_struct.name = "cartesian_coordinates";
-                    cartesian_coordinates_setting_struct.setting_master = this->setting_master;
+                    cartesian_coordinates_setting_struct.setting_master = this->get_setting_master();
                     cartesian_coordinates_setting_struct.activate_callback = &yli::config::SettingMaster::activate_cartesian_coordinates;
                     cartesian_coordinates_setting_struct.read_callback = &yli::config::SettingMaster::read_cartesian_coordinates;
                     cartesian_coordinates_setting_struct.should_ylikuutio_call_activate_callback_now = true;
@@ -61,7 +61,7 @@ namespace yli
 
                     SettingStruct x_setting_struct(std::make_shared<yli::datatypes::AnyValue>(float_x));
                     x_setting_struct.name = "x";
-                    x_setting_struct.setting_master = this->setting_master;
+                    x_setting_struct.setting_master = this->get_setting_master();
                     x_setting_struct.activate_callback = &yli::config::SettingMaster::activate_x;
                     x_setting_struct.read_callback = &yli::config::SettingMaster::read_x;
                     x_setting_struct.should_ylikuutio_call_activate_callback_now = true;
@@ -70,7 +70,7 @@ namespace yli
 
                     SettingStruct y_setting_struct(std::make_shared<yli::datatypes::AnyValue>(float_y));
                     y_setting_struct.name = "y";
-                    y_setting_struct.setting_master = this->setting_master;
+                    y_setting_struct.setting_master = this->get_setting_master();
                     y_setting_struct.activate_callback = &yli::config::SettingMaster::activate_y;
                     y_setting_struct.read_callback = &yli::config::SettingMaster::read_y;
                     y_setting_struct.should_ylikuutio_call_activate_callback_now = true;
@@ -79,7 +79,7 @@ namespace yli
 
                     SettingStruct z_setting_struct(std::make_shared<yli::datatypes::AnyValue>(float_z));
                     z_setting_struct.name = "z";
-                    z_setting_struct.setting_master = this->setting_master;
+                    z_setting_struct.setting_master = this->get_setting_master();
                     z_setting_struct.activate_callback = &yli::config::SettingMaster::activate_z;
                     z_setting_struct.read_callback = &yli::config::SettingMaster::read_z;
                     z_setting_struct.should_ylikuutio_call_activate_callback_now = true;
@@ -94,7 +94,6 @@ namespace yli
                     : Entity(universe)
                 {
                     // constructor.
-                    this->setting_master = new yli::config::SettingMaster(this);
                     this->cartesian_coordinates = glm::vec3(NAN, NAN, NAN);
                     this->spherical_coordinates = spherical_coordinates;
                 }

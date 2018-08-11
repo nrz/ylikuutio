@@ -39,7 +39,7 @@ namespace yli
                     shader,
                     this->shader_pointer_vector,
                     this->free_shaderID_queue,
-                    &this->number_of_shaders);
+                    this->number_of_shaders);
         }
 
         void Scene::bind_camera(yli::ontology::Camera* const camera)
@@ -49,35 +49,31 @@ namespace yli
                     camera,
                     this->camera_pointer_vector,
                     this->free_cameraID_queue,
-                    &this->number_of_cameras);
+                    this->number_of_cameras);
         }
 
         void Scene::unbind_shader(const std::size_t childID)
         {
-            yli::ontology::Shader* dummy_child_pointer = nullptr;
-            yli::hierarchy::set_child_pointer(
+            yli::hierarchy::unbind_child_from_parent(
                     childID,
-                    dummy_child_pointer,
                     this->shader_pointer_vector,
                     this->free_shaderID_queue,
-                    &this->number_of_shaders);
+                    this->number_of_shaders);
         }
 
         void Scene::unbind_camera(const std::size_t childID)
         {
-            yli::ontology::Camera* dummy_child_pointer = nullptr;
-            yli::hierarchy::set_child_pointer(
+            yli::hierarchy::unbind_child_from_parent(
                     childID,
-                    dummy_child_pointer,
                     this->camera_pointer_vector,
                     this->free_cameraID_queue,
-                    &this->number_of_cameras);
+                    this->number_of_cameras);
         }
 
         void Scene::bind_to_parent()
         {
             // get `childID` from `World` and set pointer to this `Scene`.
-            this->parent->bind(this);
+            this->parent->bind_scene(this);
         }
 
         Scene::~Scene()
@@ -87,11 +83,11 @@ namespace yli
 
             // destroy all `Shader`s of this `Scene`.
             std::cout << "All shaders of this scene will be destroyed.\n";
-            yli::hierarchy::delete_children<yli::ontology::Shader*>(this->shader_pointer_vector, &this->number_of_shaders);
+            yli::hierarchy::delete_children<yli::ontology::Shader*>(this->shader_pointer_vector, this->number_of_shaders);
 
             // destroy all `Camera`s of this `Scene`.
             std::cout << "All cameras of this scene will be destroyed.\n";
-            yli::hierarchy::delete_children<yli::ontology::Camera*>(this->camera_pointer_vector, &this->number_of_cameras);
+            yli::hierarchy::delete_children<yli::ontology::Camera*>(this->camera_pointer_vector, this->number_of_cameras);
 
             if (this->parent->get_active_scene() == this)
             {
@@ -139,7 +135,7 @@ namespace yli
 
         std::size_t Scene::get_number_of_children() const
         {
-            return this->number_of_shaders;
+            return this->number_of_shaders + this->number_of_cameras;
         }
 
         std::size_t Scene::get_number_of_descendants() const
@@ -205,12 +201,12 @@ namespace yli
 
         void Scene::set_shader_pointer(const std::size_t childID, yli::ontology::Shader* const child_pointer)
         {
-            yli::hierarchy::set_child_pointer(childID, child_pointer, this->shader_pointer_vector, this->free_shaderID_queue, &this->number_of_shaders);
+            yli::hierarchy::set_child_pointer(childID, child_pointer, this->shader_pointer_vector, this->free_shaderID_queue, this->number_of_shaders);
         }
 
         void Scene::set_camera_pointer(const std::size_t childID, yli::ontology::Camera* const child_pointer)
         {
-            yli::hierarchy::set_child_pointer(childID, child_pointer, this->camera_pointer_vector, this->free_cameraID_queue, &this->number_of_cameras);
+            yli::hierarchy::set_child_pointer(childID, child_pointer, this->camera_pointer_vector, this->free_cameraID_queue, this->number_of_cameras);
         }
     }
 }

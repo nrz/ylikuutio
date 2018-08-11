@@ -12,7 +12,18 @@ namespace yli
     {
         void Node::bind_to_parent()
         {
-            yli::hierarchy::bind_child_to_parent<yli::graph::Node*>(this, this->parent->node_pointer_vector, this->parent->free_nodeID_queue, &this->parent->number_of_nodes);
+            // requirements:
+            // `this->parent` must not be `nullptr`.
+
+            yli::graph::Graph* const graph = this->parent;
+
+            if (graph == nullptr)
+            {
+                std::cerr << "ERROR: `Node::bind_to_new_parent`: `graph` is `nullptr`!\n";
+                return;
+            }
+
+            graph->bind_node(this);
         }
 
         Node::Node(const NodeStruct& node_struct)
@@ -57,6 +68,7 @@ namespace yli
                 // so create a link from this node to destination node.
                 this->neighbor_nodeIDs.push_back(nodeID);
             }
+
             // an alternative: create a link from this node to destination node without checking its prior existence.
             // this->neighbor_nodeIDs.push_back(nodeID);
         }
@@ -94,9 +106,35 @@ namespace yli
         // If `Node::bind_to_parent` would cause overflow (2^32 = 4 294 967 295), it will instead give smallest current `childID` of the graph and
         // decrement `childID_bias` by 1.
 
-        void Node::bind_to_new_parent(yli::graph::Graph *new_graph_pointer)
+        void Node::bind_to_new_parent(yli::graph::Graph* const new_parent)
         {
-            yli::hierarchy::bind_child_to_new_parent<yli::graph::Node*, yli::graph::Graph*>(this, new_graph_pointer, this->parent->node_pointer_vector, this->parent->free_nodeID_queue, &this->parent->number_of_nodes);
+            // this method sets pointer to this `Node` to `nullptr`, sets `parent` according to the input,
+            // and requests a new `childID` from the new `Graph`.
+            //
+            // requirements:
+            // `this->parent` must not be `nullptr`.
+            // `new_parent` must not be `nullptr`.
+
+            yli::graph::Graph* const graph = this->parent;
+
+            if (graph == nullptr)
+            {
+                std::cerr << "ERROR: `Node::bind_to_new_parent`: `graph` is `nullptr`!\n";
+                return;
+            }
+
+            if (new_parent == nullptr)
+            {
+                std::cerr << "ERROR: `Node::bind_to_new_parent`: `new_parent` is `nullptr`!\n";
+                return;
+            }
+
+            // unbind from the old parent `Graph`.
+            graph->unbind_node(this->childID);
+
+            // get `childID` from `Graph` and set pointer to this `Node`.
+            this->parent = new_parent;
+            this->parent->bind_node(this);
         }
     }
 }

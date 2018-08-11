@@ -40,6 +40,9 @@ namespace yli
         class EntityFactory
         {
             public:
+                // constructor.
+                EntityFactory(yli::ontology::Universe* const universe);
+
                 // destructor.
                 ~EntityFactory();
 
@@ -66,10 +69,6 @@ namespace yli
                 friend class Universe;
 
             private:
-                // constructor.
-                // only `Universe` can create an `EntityFactory`.
-                EntityFactory(yli::ontology::Universe* const universe);
-
                 yli::ontology::Universe* universe;
         };
     }

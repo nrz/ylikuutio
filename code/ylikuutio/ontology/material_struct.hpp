@@ -24,6 +24,7 @@ typedef struct MaterialStruct
     MaterialStruct()
         : shader(nullptr),
         symbiosis(nullptr),
+        ofbx_texture(nullptr),
         is_symbiont_material(false)
     {
         // constructor.
