@@ -1,6 +1,7 @@
 #include "vector_font.hpp"
 #include "text3D.hpp"
 #include "render_templates.hpp"
+#include "family_templates.hpp"
 #include "vector_font_struct.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
@@ -117,7 +118,8 @@ namespace yli
 
         std::size_t VectorFont::get_number_of_descendants() const
         {
-            return 0; // TODO; write the code!
+            return yli::ontology::get_number_of_descendants(this->glyph_pointer_vector) +
+                yli::ontology::get_number_of_descendants(this->text3D_pointer_vector);
         }
 
         void VectorFont::set_glyph_pointer(const std::size_t childID, yli::ontology::Glyph* const child_pointer)

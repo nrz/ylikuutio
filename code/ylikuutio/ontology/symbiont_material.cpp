@@ -2,6 +2,7 @@
 #include "symbiont_species.hpp"
 #include "symbiosis.hpp"
 #include "render_templates.hpp"
+#include "family_templates.hpp"
 #include "material_struct.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include <ofbx.h>
@@ -85,7 +86,7 @@ namespace yli
 
         std::size_t SymbiontMaterial::get_number_of_descendants() const
         {
-            return 0; // TODO; write the code!
+            return yli::ontology::get_number_of_descendants(this->symbiont_species_pointer_vector);
         }
 
         void SymbiontMaterial::set_symbiont_species_pointer(const std::size_t childID, yli::ontology::SymbiontSpecies* const child_pointer)

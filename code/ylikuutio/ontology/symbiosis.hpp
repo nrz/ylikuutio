@@ -7,6 +7,7 @@
 // `ShaderSymbiosis` is like `Symbiosis`, but it contains also `SymbiontShader`s in addition to `SymbiontMaterial`s and `SymbiontSpecies`.
 
 #include "entity.hpp"
+#include "family_templates.hpp"
 #include "symbiosis_struct.hpp"
 #include "material_struct.hpp"
 #include "code/ylikuutio/loaders/symbiosis_loader.hpp"
@@ -126,6 +127,8 @@ namespace yli
 
                 template<class T1>
                     friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
+                template<class T1>
+                    friend std::size_t yli::ontology::get_number_of_descendants(const std::vector<T1>& child_pointer_vector);
 
             private:
                 void bind_to_parent();

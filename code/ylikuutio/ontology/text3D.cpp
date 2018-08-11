@@ -1,6 +1,7 @@
 #include "text3D.hpp"
 #include "vector_font.hpp"
 #include "object.hpp"
+#include "family_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include standard headers
@@ -43,7 +44,7 @@ namespace yli
 
         std::size_t Text3D::get_number_of_descendants() const
         {
-            return 0; // TODO; write the code!
+            return yli::ontology::get_number_of_descendants(this->object_pointer_vector);
         }
 
         void Text3D::set_object_pointer(const std::size_t childID, yli::ontology::Object* const child_pointer)

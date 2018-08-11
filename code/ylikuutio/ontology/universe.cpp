@@ -22,6 +22,7 @@
 #include "species.hpp"
 #include "ground_level.hpp"
 #include "render_templates.hpp"
+#include "family_templates.hpp"
 #include "code/ylikuutio/config/setting.hpp"
 #include "code/ylikuutio/config/setting_master.hpp"
 #include "code/ylikuutio/console/console.hpp"
@@ -157,7 +158,7 @@ namespace yli
 
         std::size_t Universe::get_number_of_descendants() const
         {
-            return 0; // TODO; write the code!
+            return yli::ontology::get_number_of_descendants(this->world_pointer_vector);
         }
 
         void Universe::set_window(GLFWwindow* window)
@@ -475,6 +476,14 @@ namespace yli
                 std::string children_info = "number of children: ";
                 children_info += std::string(number_of_children_char_array);
                 console->print_text(children_info);
+
+                std::size_t number_of_descendants = entity->get_number_of_descendants();
+                char number_of_descendants_char_array[256];
+                snprintf(number_of_descendants_char_array, sizeof(number_of_descendants_char_array), "%lu", number_of_descendants);
+
+                std::string descendants_info = "number of descendants: ";
+                descendants_info += std::string(number_of_descendants_char_array);
+                console->print_text(descendants_info);
             }
             return nullptr;
         }

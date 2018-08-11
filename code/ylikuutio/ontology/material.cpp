@@ -3,6 +3,7 @@
 #include "vector_font.hpp"
 #include "species.hpp"
 #include "render_templates.hpp"
+#include "family_templates.hpp"
 #include "material_struct.hpp"
 #include "code/ylikuutio/ontology/chunk_master.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
@@ -147,7 +148,9 @@ namespace yli
 
         std::size_t Material::get_number_of_descendants() const
         {
-            return 0; // TODO; write the code!
+            return yli::ontology::get_number_of_descendants(this->species_pointer_vector) +
+                yli::ontology::get_number_of_descendants(this->vector_font_pointer_vector) +
+                yli::ontology::get_number_of_descendants(this->chunk_master_pointer_vector);
         }
 
         void Material::set_species_pointer(const std::size_t childID, yli::ontology::Species* const child_pointer)

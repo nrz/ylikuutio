@@ -1,6 +1,7 @@
 #include "world.hpp"
 #include "universe.hpp"
 #include "scene.hpp"
+#include "family_templates.hpp"
 #include "code/ylikuutio/config/setting_master.hpp"
 
 // Include standard headers
@@ -81,7 +82,7 @@ namespace yli
 
         std::size_t World::get_number_of_descendants() const
         {
-            return 0; // TODO; write the code!
+            return yli::ontology::get_number_of_descendants(this->scene_pointer_vector);
         }
 
         void World::set_scene_pointer(const std::size_t childID, yli::ontology::Scene* const child_pointer)

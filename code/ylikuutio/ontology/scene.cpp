@@ -13,6 +13,7 @@
 #include "shader.hpp"
 #include "camera.hpp"
 #include "render_templates.hpp"
+#include "family_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/common/pi.hpp"
 
@@ -140,7 +141,8 @@ namespace yli
 
         std::size_t Scene::get_number_of_descendants() const
         {
-            return 0; // TODO; write the code!
+            return yli::ontology::get_number_of_descendants(this->shader_pointer_vector) +
+                yli::ontology::get_number_of_descendants(this->camera_pointer_vector);
         }
 
         // this method returns a pointer to an `Entity` using the name as key.

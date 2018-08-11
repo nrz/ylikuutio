@@ -6,6 +6,7 @@
 #include "glyph.hpp"
 #include "symbiosis.hpp"
 #include "render_templates.hpp"
+#include "family_templates.hpp"
 #include "shader_struct.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
@@ -125,7 +126,8 @@ namespace yli
 
         std::size_t Shader::get_number_of_descendants() const
         {
-            return 0; // TODO; write the code!
+            return yli::ontology::get_number_of_descendants(this->material_pointer_vector) +
+                yli::ontology::get_number_of_descendants(this->symbiosis_pointer_vector);
         }
 
         void Shader::set_material_pointer(const std::size_t childID, yli::ontology::Material* const child_pointer)

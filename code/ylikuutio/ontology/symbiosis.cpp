@@ -5,6 +5,7 @@
 #include "holobiont.hpp"
 #include "material_struct.hpp"
 #include "render_templates.hpp"
+#include "family_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include <ofbx.h>
 
@@ -126,7 +127,8 @@ namespace yli
 
         std::size_t Symbiosis::get_number_of_descendants() const
         {
-            return 0; // TODO; write the code!
+            return yli::ontology::get_number_of_descendants(this->symbiont_material_pointer_vector) +
+                yli::ontology::get_number_of_descendants(this->holobiont_pointer_vector);
         }
 
         const std::string& Symbiosis::get_model_file_format()
