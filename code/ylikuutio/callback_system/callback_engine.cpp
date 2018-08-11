@@ -15,6 +15,15 @@ namespace yli
 {
     namespace callback_system
     {
+        void CallbackEngine::bind_callback_object(yli::callback_system::CallbackObject* const callback_object)
+        {
+            yli::hierarchy::bind_child_to_parent<yli::callback_system::CallbackObject*>(
+                    callback_object,
+                    this->callback_object_pointer_vector,
+                    this->free_callback_objectID_queue,
+                    this->number_of_callback_objects);
+        }
+
         CallbackEngine::CallbackEngine()
         {
             // constructor.
@@ -28,12 +37,12 @@ namespace yli
 
             // destroy all callback objects of this callback engine.
             std::cout << "All callback objects of this callback engine will be destroyed.\n";
-            yli::hierarchy::delete_children<yli::callback_system::CallbackObject*>(this->callback_object_pointer_vector, &this->number_of_callback_objects);
+            yli::hierarchy::delete_children<yli::callback_system::CallbackObject*>(this->callback_object_pointer_vector, this->number_of_callback_objects);
         }
 
         void CallbackEngine::set_callback_object_pointer(const std::size_t childID, yli::callback_system::CallbackObject* const child_pointer)
         {
-            yli::hierarchy::set_child_pointer(childID, child_pointer, this->callback_object_pointer_vector, this->free_callback_objectID_queue, &this->number_of_callback_objects);
+            yli::hierarchy::set_child_pointer(childID, child_pointer, this->callback_object_pointer_vector, this->free_callback_objectID_queue, this->number_of_callback_objects);
         }
 
         std::shared_ptr<yli::datatypes::AnyValue> CallbackEngine::execute()

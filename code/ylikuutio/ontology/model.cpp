@@ -24,25 +24,23 @@ namespace yli
     {
         class Universe;
 
-        void Model::bind(yli::ontology::Object* const object)
+        void Model::bind_object(yli::ontology::Object* const object)
         {
             // get `childID` from `Model` and set pointer to `object`.
             yli::hierarchy::bind_child_to_parent<yli::ontology::Object*>(
                     object,
                     this->object_pointer_vector,
                     this->free_objectID_queue,
-                    &this->number_of_objects);
+                    this->number_of_objects);
         }
 
-        void Model::unbind(const std::size_t childID)
+        void Model::unbind_object(const std::size_t childID)
         {
-            yli::ontology::Object* dummy_child_pointer = nullptr;
-            yli::hierarchy::set_child_pointer(
+            yli::hierarchy::unbind_child_from_parent(
                     childID,
-                    dummy_child_pointer,
                     this->object_pointer_vector,
                     this->free_objectID_queue,
-                    &this->number_of_objects);
+                    this->number_of_objects);
         }
 
         Model::~Model()

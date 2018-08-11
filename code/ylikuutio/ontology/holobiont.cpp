@@ -29,18 +29,16 @@ namespace yli
                     biont,
                     this->biont_pointer_vector,
                     this->free_biontID_queue,
-                    &this->number_of_bionts);
+                    this->number_of_bionts);
         }
 
         void Holobiont::unbind_biont(const std::size_t childID)
         {
-            yli::ontology::Biont* dummy_child_pointer = nullptr;
-            yli::hierarchy::set_child_pointer(
+            yli::hierarchy::unbind_child_from_parent<yli::ontology::Biont*>(
                     childID,
-                    dummy_child_pointer,
                     this->biont_pointer_vector,
                     this->free_biontID_queue,
-                    &this->number_of_bionts);
+                    this->number_of_bionts);
         }
 
         void Holobiont::bind_to_parent()
@@ -97,7 +95,7 @@ namespace yli
             // always delete all `Biont`s of this `Holobiont`.
 
             std::cout << "All bionts of this holobiont will be destroyed.\n";
-            yli::hierarchy::delete_children<yli::ontology::Biont*>(this->biont_pointer_vector, &this->number_of_bionts);
+            yli::hierarchy::delete_children<yli::ontology::Biont*>(this->biont_pointer_vector, this->number_of_bionts);
 
             // requirements for further actions:
             // `this->symbiosis_parent` must not be `nullptr`.
@@ -239,7 +237,7 @@ namespace yli
 
         void Holobiont::set_biont_pointer(const std::size_t childID, yli::ontology::Biont* const child_pointer)
         {
-            yli::hierarchy::set_child_pointer(childID, child_pointer, this->biont_pointer_vector, this->free_biontID_queue, &this->number_of_bionts);
+            yli::hierarchy::set_child_pointer(childID, child_pointer, this->biont_pointer_vector, this->free_biontID_queue, this->number_of_bionts);
         }
     }
 }

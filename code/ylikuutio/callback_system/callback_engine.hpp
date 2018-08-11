@@ -48,6 +48,8 @@ namespace yli
             //    as input parameter for the `CallbackParameter` constructor.
 
             public:
+                void bind_callback_object(yli::callback_system::CallbackObject* const callback_object);
+
                 // constructor.
                 CallbackEngine();
 
@@ -62,8 +64,6 @@ namespace yli
                 std::shared_ptr<yli::datatypes::AnyValue> get_previous_return_value() const;
 
                 friend class CallbackObject;
-                template<class T1, class T2>
-                    friend void yli::hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent, std::vector<T1>& old_child_pointer_vector, std::queue<std::size_t>& old_free_childID_queue, std::size_t* old_number_of_children);
 
             private:
                 // this method sets a callback object pointer.

@@ -278,7 +278,7 @@ namespace yli
         class Universe: public yli::ontology::Entity
         {
             public:
-                void bind(yli::ontology::World* const world);
+                void bind_world(yli::ontology::World* const world);
 
                 // constructor.
                 Universe(const UniverseStruct& universe_struct)

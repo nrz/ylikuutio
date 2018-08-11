@@ -31,7 +31,7 @@ namespace yli
                     material,
                     this->material_pointer_vector,
                     this->free_materialID_queue,
-                    &this->number_of_materials);
+                    this->number_of_materials);
         }
 
         void Shader::bind_symbiosis(yli::ontology::Symbiosis* const symbiosis)
@@ -41,29 +41,25 @@ namespace yli
                     symbiosis,
                     this->symbiosis_pointer_vector,
                     this->free_symbiosisID_queue,
-                    &this->number_of_symbioses);
+                    this->number_of_symbioses);
         }
 
         void Shader::unbind_material(const std::size_t childID)
         {
-            yli::ontology::Material* dummy_child_pointer = nullptr;
-            yli::hierarchy::set_child_pointer(
+            yli::hierarchy::unbind_child_from_parent(
                     childID,
-                    dummy_child_pointer,
                     this->material_pointer_vector,
                     this->free_materialID_queue,
-                    &this->number_of_materials);
+                    this->number_of_materials);
         }
 
         void Shader::unbind_symbiosis(const std::size_t childID)
         {
-            yli::ontology::Symbiosis* dummy_child_pointer = nullptr;
-            yli::hierarchy::set_child_pointer(
+            yli::hierarchy::unbind_child_from_parent(
                     childID,
-                    dummy_child_pointer,
                     this->symbiosis_pointer_vector,
                     this->free_symbiosisID_queue,
-                    &this->number_of_symbioses);
+                    this->number_of_symbioses);
         }
 
         void Shader::bind_to_parent()
@@ -89,11 +85,11 @@ namespace yli
 
             // destroy all materials of this shader.
             std::cout << "All materials of this shader will be destroyed.\n";
-            yli::hierarchy::delete_children<yli::ontology::Material*>(this->material_pointer_vector, &this->number_of_materials);
+            yli::hierarchy::delete_children<yli::ontology::Material*>(this->material_pointer_vector, this->number_of_materials);
 
             // destroy all symbioses of this shader.
             std::cout << "All symbioses of this shader will be destroyed.\n";
-            yli::hierarchy::delete_children<yli::ontology::Symbiosis*>(this->symbiosis_pointer_vector, &this->number_of_symbioses);
+            yli::hierarchy::delete_children<yli::ontology::Symbiosis*>(this->symbiosis_pointer_vector, this->number_of_symbioses);
 
             // set pointer to this shader to nullptr.
             this->parent->set_shader_pointer(this->childID, nullptr);
@@ -134,12 +130,12 @@ namespace yli
 
         void Shader::set_material_pointer(const std::size_t childID, yli::ontology::Material* const child_pointer)
         {
-            yli::hierarchy::set_child_pointer(childID, child_pointer, this->material_pointer_vector, this->free_materialID_queue, &this->number_of_materials);
+            yli::hierarchy::set_child_pointer(childID, child_pointer, this->material_pointer_vector, this->free_materialID_queue, this->number_of_materials);
         }
 
         void Shader::set_symbiosis_pointer(const std::size_t childID, yli::ontology::Symbiosis* const child_pointer)
         {
-            yli::hierarchy::set_child_pointer(childID, child_pointer, this->symbiosis_pointer_vector, this->free_symbiosisID_queue, &this->number_of_symbioses);
+            yli::hierarchy::set_child_pointer(childID, child_pointer, this->symbiosis_pointer_vector, this->free_symbiosisID_queue, this->number_of_symbioses);
         }
 
         GLuint Shader::get_programID() const

@@ -30,7 +30,7 @@ namespace yli
             yli::ontology::Model* glyph_parent_model = this->glyph_parent;
             yli::ontology::Model* species_parent_model = this->species_parent;
             yli::ontology::Model* parent_model = (this->is_character ? glyph_parent_model : species_parent_model);
-            parent_model->bind(this);
+            parent_model->bind_object(this);
         }
 
         void Object::bind_to_new_parent(void* const new_parent)
@@ -43,7 +43,7 @@ namespace yli
             yli::ontology::Model* parent_model = (this->is_character ? glyph_parent_model : species_parent_model);
 
             // unbind from the old parent `Model`.
-            parent_model->unbind(this->childID);
+            parent_model->unbind_object(this->childID);
 
             if (this->is_character)
             {
@@ -55,7 +55,7 @@ namespace yli
             }
 
             // get `childID` from `Model` and set pointer to this `Object`.
-            parent_model->bind(this);
+            parent_model->bind_object(this);
         }
 
         Object::~Object()

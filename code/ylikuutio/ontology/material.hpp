@@ -110,7 +110,7 @@ namespace yli
                 virtual ~Material();
 
                 // this method sets pointer to this `Material` to nullptr, sets `parent` according to the input, and requests a new `childID` from the new `Shader`.
-                void bind_to_new_parent(yli::ontology::Shader* const new_shader_pointer);
+                void bind_to_new_parent(yli::ontology::Shader* const new_parent);
 
                 yli::ontology::Entity* get_parent() const override;
 
@@ -127,11 +127,11 @@ namespace yli
                 void set_terrain_species(yli::ontology::Species* const terrain_species);
 
                 template<class T1>
-                    friend void render_children(const std::vector<T1>& child_pointer_vector);
+                    friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
+                template <class T1>
+                    friend void yli::hierarchy::unbind_child_from_parent(const std::size_t childID, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
                 template<class T1>
-                    friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t* number_of_children);
-                template<class T1, class T2>
-                    friend void yli::hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent, std::vector<T1>& old_child_pointer_vector, std::queue<std::size_t>& old_free_childID_queue, std::size_t* old_number_of_children);
+                    friend void render_children(const std::vector<T1>& child_pointer_vector);
 
             private:
                 void bind_to_parent();

@@ -14,13 +14,8 @@ namespace yli
     {
         void CallbackParameter::bind_to_parent()
         {
-            yli::hierarchy::bind_child_to_parent<yli::callback_system::CallbackParameter*>(this, this->parent->callback_parameter_pointer_vector, this->parent->free_callback_parameterID_queue, &this->parent->number_of_callback_parameters);
-
-            if (!this->name.empty())
-            {
-                // This is a named variable, so store it in parent's `anyvalue_hashmap`.
-                this->parent->set_any_value(this->name, std::make_shared<yli::datatypes::AnyValue>(*this->any_value));
-            }
+            // note: `CallbackObject::bind_callback_parameter` also stores named variables in its `anyvalue_hashmap`.
+            this->parent->bind_callback_parameter(this);
         }
 
         CallbackParameter::CallbackParameter(const std::string& name, std::shared_ptr<yli::datatypes::AnyValue> any_value, const bool is_reference, yli::callback_system::CallbackObject* const parent)

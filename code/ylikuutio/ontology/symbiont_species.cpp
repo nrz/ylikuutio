@@ -43,24 +43,22 @@ namespace yli
                     biont,
                     this->biont_pointer_vector,
                     this->free_biontID_queue,
-                    &this->number_of_bionts);
+                    this->number_of_bionts);
         }
 
         void SymbiontSpecies::unbind_biont(const std::size_t childID)
         {
-            yli::ontology::Biont* dummy_child_pointer = nullptr;
-            yli::hierarchy::set_child_pointer(
+            yli::hierarchy::unbind_child_from_parent(
                     childID,
-                    dummy_child_pointer,
                     this->biont_pointer_vector,
                     this->free_biontID_queue,
-                    &this->number_of_bionts);
+                    this->number_of_bionts);
         }
 
         void SymbiontSpecies::bind_to_parent()
         {
             // get `childID` from `SymbiontMaterial` and set pointer to this `SymbiontSpecies`.
-            this->symbiont_material_parent->bind(this);
+            this->symbiont_material_parent->bind_symbiont_species(this);
         }
 
         SymbiontSpecies::~SymbiontSpecies()

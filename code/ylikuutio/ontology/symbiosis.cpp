@@ -46,7 +46,7 @@ namespace yli
                     symbiont_material,
                     this->symbiont_material_pointer_vector,
                     this->free_symbiont_materialID_queue,
-                    &this->number_of_symbiont_materials);
+                    this->number_of_symbiont_materials);
         }
 
         void Symbiosis::bind_holobiont(yli::ontology::Holobiont* const holobiont)
@@ -56,18 +56,16 @@ namespace yli
                     holobiont,
                     this->holobiont_pointer_vector,
                     this->free_holobiontID_queue,
-                    &this->number_of_holobionts);
+                    this->number_of_holobionts);
         }
 
         void Symbiosis::unbind_holobiont(const std::size_t childID)
         {
-            yli::ontology::Holobiont* dummy_child_pointer = nullptr;
-            yli::hierarchy::set_child_pointer(
+            yli::hierarchy::unbind_child_from_parent(
                     childID,
-                    dummy_child_pointer,
                     this->holobiont_pointer_vector,
                     this->free_holobiontID_queue,
-                    &this->number_of_holobionts);
+                    this->number_of_holobionts);
         }
 
         void Symbiosis::bind_to_parent()
@@ -93,11 +91,11 @@ namespace yli
 
             // destroy all `Holobiont`s of this `Symbiosis`.
             std::cout << "All holobionts of this symbiosis will be destroyed.\n";
-            yli::hierarchy::delete_children<yli::ontology::Holobiont*>(this->holobiont_pointer_vector, &this->number_of_holobionts);
+            yli::hierarchy::delete_children<yli::ontology::Holobiont*>(this->holobiont_pointer_vector, this->number_of_holobionts);
 
             // destroy all `SymbiontMaterial`s of this `Symbiosis`.
             std::cout << "All symbiont materials of this symbiosis will be destroyed.\n";
-            yli::hierarchy::delete_children<yli::ontology::SymbiontMaterial*>(this->symbiont_material_pointer_vector, &this->number_of_symbiont_materials);
+            yli::hierarchy::delete_children<yli::ontology::SymbiontMaterial*>(this->symbiont_material_pointer_vector, this->number_of_symbiont_materials);
 
             // set pointer to this `Symbiosis` to `nullptr`.
             this->parent->set_symbiosis_pointer(this->childID, nullptr);
@@ -143,7 +141,7 @@ namespace yli
                     child_pointer,
                     this->symbiont_material_pointer_vector,
                     this->free_symbiont_materialID_queue,
-                    &this->number_of_symbiont_materials);
+                    this->number_of_symbiont_materials);
         }
 
         void Symbiosis::set_holobiont_pointer(const std::size_t childID, yli::ontology::Holobiont* const child_pointer)
@@ -153,7 +151,7 @@ namespace yli
                     child_pointer,
                     this->holobiont_pointer_vector,
                     this->free_holobiontID_queue,
-                    &this->number_of_holobionts);
+                    this->number_of_holobionts);
         }
 
         void Symbiosis::create_symbionts()

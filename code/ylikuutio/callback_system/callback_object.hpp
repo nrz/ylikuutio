@@ -25,6 +25,9 @@ namespace yli
             // CallbackObject is an object that contains a single callback.
 
             public:
+                void bind_callback_parameter(yli::callback_system::CallbackParameter* const callback_parameter);
+                void unbind_callback_parameter(const std::size_t childID);
+
                 // constructor.
                 CallbackObject(yli::callback_system::CallbackEngine* parent);
 
@@ -47,9 +50,7 @@ namespace yli
                 friend class CallbackEngine;
                 friend class CallbackParameter;
                 template<class T1>
-                    friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t* number_of_children);
-                template<class T1, class T2>
-                    friend void yli::hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent, std::vector<T1>& old_child_pointer_vector, std::queue<std::size_t>& old_free_childID_queue, std::size_t* old_number_of_children);
+                    friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
 
             protected:
                 void bind_to_parent();
