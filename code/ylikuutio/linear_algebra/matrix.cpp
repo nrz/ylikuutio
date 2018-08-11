@@ -88,6 +88,7 @@ namespace yli
                     *new_matrix << this->operator[](y).operator[](x);
                 }
             }
+
             return new_matrix;
         }
 
@@ -199,6 +200,7 @@ namespace yli
                     }
                 }
             }
+
             // Everything matches. Arrays are identical.
             return true;
         }
@@ -228,6 +230,7 @@ namespace yli
                     }
                 }
             }
+
             // Everything matches. Arrays are identical.
             return false;
         }
@@ -244,6 +247,7 @@ namespace yli
                     my_array[x]++;
                 }
             }
+
             return *this;
         }
 
@@ -266,6 +270,7 @@ namespace yli
                     my_array[x]--;
                 }
             }
+
             return *this;
         }
 
@@ -288,6 +293,7 @@ namespace yli
                     my_array[x] += rhs;
                 }
             }
+
             return *this;
         }
 
@@ -303,6 +309,7 @@ namespace yli
                     my_array[x] -= rhs;
                 }
             }
+
             return *this;
         }
 
@@ -318,6 +325,7 @@ namespace yli
                     my_array[x] *= rhs;
                 }
             }
+
             return *this;
         }
 
@@ -333,6 +341,7 @@ namespace yli
                     my_array[x] *= rhs;
                 }
             }
+
             return *this;
         }
 
@@ -349,6 +358,7 @@ namespace yli
                     my_array[x] += other_array[x];
                 }
             }
+
             return *this;
         }
 
@@ -365,6 +375,7 @@ namespace yli
                     my_array[x] -= other_array[x];
                 }
             }
+
             return *this;
         }
 
@@ -394,6 +405,7 @@ namespace yli
                     result_matrix << lhs.operator[](y).operator[](x) + rhs.operator[](y).operator[](x);
                 }
             }
+
             return result_matrix;
         }
 
@@ -423,6 +435,7 @@ namespace yli
                     result_matrix << lhs.operator[](y).operator[](x) - rhs.operator[](y).operator[](x);
                 }
             }
+
             return result_matrix;
         }
 
@@ -460,6 +473,7 @@ namespace yli
                     result_matrix << target_value;
                 }
             }
+
             return result_matrix;
         }
     }

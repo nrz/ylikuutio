@@ -222,6 +222,7 @@ namespace yli
                     }
                 }
             }
+
             // Everything matches. Arrays are identical.
             return true;
         }
@@ -258,6 +259,7 @@ namespace yli
                     }
                 }
             }
+
             // Everything matches. Arrays are identical.
             return false;
         }

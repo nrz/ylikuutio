@@ -77,6 +77,7 @@ namespace yli
                         return childID;
                     }
                 }
+
                 // OK, the queue is empty.
                 // A new child index must be created.
                 childID = child_pointer_vector.size();

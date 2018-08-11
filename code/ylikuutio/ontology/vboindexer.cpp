@@ -52,6 +52,7 @@ bool getSimilarVertexIndex(
             return true;
         }
     }
+
     // No other vertex could be used instead.
     // Looks like we'll have to add it to the VBO.
     return false;

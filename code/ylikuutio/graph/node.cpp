@@ -68,6 +68,7 @@ namespace yli
                 // so create a link from this node to destination node.
                 this->neighbor_nodeIDs.push_back(nodeID);
             }
+
             // an alternative: create a link from this node to destination node without checking its prior existence.
             // this->neighbor_nodeIDs.push_back(nodeID);
         }

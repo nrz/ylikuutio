@@ -48,6 +48,7 @@ namespace yli
             {
                 return nullptr;
             }
+
             return std::make_shared<yli::datatypes::AnyValue>(this->anyvalue_hashmap.at(name));
         }
 
