@@ -1,4 +1,5 @@
 #include "material.hpp"
+#include "shader.hpp"
 #include "vector_font.hpp"
 #include "species.hpp"
 #include "render_templates.hpp"
