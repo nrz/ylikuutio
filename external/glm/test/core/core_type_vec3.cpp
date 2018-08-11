@@ -1,6 +1,6 @@
 #define GLM_FORCE_SWIZZLE
 #include <glm/gtc/constants.hpp>
-#include <glm/ext/vec1.hpp>
+#include <glm/gtc/vec1.hpp>
 #include <glm/ext/vector_relational.hpp>
 #include <glm/vector_relational.hpp>
 #include <glm/geometric.hpp>
@@ -600,7 +600,6 @@ static int test_constexpr()
 #if GLM_HAS_CONSTEXPR
 	static_assert(glm::vec3::length() == 3, "GLM: Failed constexpr");
 	static_assert(glm::vec3(1.0f).x > 0.0f, "GLM: Failed constexpr");
-	static_assert(glm::vec3(1.0f) == glm::vec3(1.0f), "GLM: Failed constexpr");
 	static_assert(glm::vec3(1.0f, -1.0f, -1.0f).x > 0.0f, "GLM: Failed constexpr");
 	static_assert(glm::vec3(1.0f, -1.0f, -1.0f).y < 0.0f, "GLM: Failed constexpr");
 #endif
