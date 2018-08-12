@@ -8,8 +8,18 @@ namespace yli
     {
         void Chunk::bind_to_parent()
         {
+            // requirements:
+            // `this->parent` must not be `nullptr`.
+            yli::ontology::ChunkMaster* const chunk_master = this->parent;
+
+            if (chunk_master == nullptr)
+            {
+                std::cerr << "ERROR: `Chunk::bind_to_parent`: `chunk_master` is `nullptr`!\n";
+                return;
+            }
+
             // get `childID` from the `ChunkMaster` and set pointer to this `Chunk`.
-            this->parent->bind_chunk(this);
+            chunk_master->bind_chunk(this);
         }
 
         Chunk::~Chunk()
