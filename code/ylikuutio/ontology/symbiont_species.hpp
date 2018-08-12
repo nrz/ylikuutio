@@ -70,6 +70,16 @@ namespace yli
                     // get `childID` from `SymbiontMaterial` and set pointer to this `SymbiontSpecies`.
                     this->bind_to_parent();
 
+                    this->number_of_bionts = 0;
+                    this->child_vector_pointers_vector.push_back(&this->biont_pointer_vector);
+                    this->type = "yli::ontology::SymbiontSpecies*";
+
+                    if (this->shader == nullptr)
+                    {
+                        std::cerr << "ERROR: `SymbiontSpecies::SymbiontSpecies`: `this->shader` is `nullptr`!\n";
+                        return;
+                    }
+
                     // Get a handle for our buffers.
                     this->vertex_position_modelspaceID = glGetAttribLocation(this->shader->get_programID(), "vertexPosition_modelspace");
                     this->vertexUVID = glGetAttribLocation(this->shader->get_programID(), "vertexUV");
@@ -112,11 +122,6 @@ namespace yli
                     glBufferData(GL_ELEMENT_ARRAY_BUFFER, this->indices.size() * sizeof(GLuint), &this->indices[0] , GL_STATIC_DRAW);
 
                     // TODO: Compute the vertex graph of this `SymbiontSpecies` to enable object vertex modification!
-
-                    this->number_of_bionts = 0;
-
-                    this->child_vector_pointers_vector.push_back(&this->biont_pointer_vector);
-                    this->type = "yli::ontology::SymbiontSpecies*";
                 }
 
                 yli::ontology::Entity* get_parent() const override;
