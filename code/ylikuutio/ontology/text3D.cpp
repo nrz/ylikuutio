@@ -35,8 +35,18 @@ namespace yli
 
         void Text3D::bind_to_parent()
         {
+            // requirements:
+            // `this->parent` must not be `nullptr`.
+            yli::ontology::VectorFont* const vector_font = this->parent;
+
+            if (vector_font == nullptr)
+            {
+                std::cerr << "ERROR: `Text3D::bind_to_parent`: `vector_font` is `nullptr`!\n";
+                return;
+            }
+
             // get `childID` from `VectorFont` and set pointer to this `Text3D`.
-            this->parent->bind_text3D(this);
+            vector_font->bind_text3D(this);
         }
 
         Text3D::~Text3D()
