@@ -1,5 +1,5 @@
-#ifndef __FONT_HPP_INCLUDED
-#define __FONT_HPP_INCLUDED
+#ifndef __VECTOR_FONT_HPP_INCLUDED
+#define __VECTOR_FONT_HPP_INCLUDED
 
 #include "entity.hpp"
 #include "glyph.hpp"
