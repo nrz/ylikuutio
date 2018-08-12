@@ -93,15 +93,25 @@ namespace yli
                             std::cerr << "texture file format: " << this->texture_file_format << "\n";
                         }
 
-                        // Get a handle for our "myTextureSampler" uniform.
-                        this->openGL_textureID = glGetUniformLocation(this->parent->get_programID(), "myTextureSampler");
-
                         this->child_vector_pointers_vector.push_back(&this->species_pointer_vector);
                         this->child_vector_pointers_vector.push_back(&this->vector_font_pointer_vector);
                         this->child_vector_pointers_vector.push_back(&this->chunk_master_pointer_vector);
                         this->type = "yli::ontology::Material*";
 
                         this->can_be_erased = true;
+
+                        // requirements for further actions:
+                        // `this->parent` must not be `nullptr`.
+                        yli::ontology::Shader* const shader = this->parent;
+
+                        if (shader == nullptr)
+                        {
+                            std::cerr << "ERROR: `Material::Material`: `shader` is `nullptr`!\n";
+                            return;
+                        }
+
+                        // Get a handle for our "myTextureSampler" uniform.
+                        this->openGL_textureID = glGetUniformLocation(shader->get_programID(), "myTextureSampler");
                     }
                 }
 
