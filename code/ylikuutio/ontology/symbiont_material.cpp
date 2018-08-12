@@ -54,8 +54,19 @@ namespace yli
 
             glDeleteTextures(1, &this->texture);
 
+            // requirements for further actions:
+            // `this->parent` must not be `nullptr`.
+
+            yli::ontology::Symbiosis* const symbiosis = this->parent;
+
+            if (symbiosis == nullptr)
+            {
+                std::cerr << "ERROR: `SymbiontMaterial::~SymbiontMaterial`: `symbiosis` is `nullptr`!\n";
+                return;
+            }
+
             // set pointer to this symbiont_material to nullptr.
-            this->parent->set_symbiont_material_pointer(this->childID, nullptr);
+            symbiosis->unbind_symbiont_material(this->childID);
         }
 
         void SymbiontMaterial::render()

@@ -50,6 +50,15 @@ namespace yli
                     this->number_of_symbiont_materials);
         }
 
+        void Symbiosis::unbind_symbiont_material(const std::size_t childID)
+        {
+            yli::hierarchy::unbind_child_from_parent(
+                    childID,
+                    this->symbiont_material_pointer_vector,
+                    this->free_symbiont_materialID_queue,
+                    this->number_of_symbiont_materials);
+        }
+
         void Symbiosis::bind_holobiont(yli::ontology::Holobiont* const holobiont)
         {
             // get `childID` from `Symbiosis` and set pointer to `holobiont`.
