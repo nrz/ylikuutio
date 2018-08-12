@@ -100,7 +100,16 @@ namespace yli
                             glyph_struct.glyph_name_pointer = this->glyph_names.at(glyph_i).c_str();
                             glyph_struct.unicode_char_pointer = unicode_char_pointer;
                             glyph_struct.universe = universe;
-                            glyph_struct.shader_pointer = static_cast<yli::ontology::Shader*>(this->parent->get_parent());
+
+                            if (this->parent != nullptr)
+                            {
+                                glyph_struct.shader_pointer = static_cast<yli::ontology::Shader*>(this->parent->get_parent());
+                            }
+                            else
+                            {
+                                glyph_struct.shader_pointer = nullptr;
+                            }
+
                             glyph_struct.parent = this;
 
                             std::string glyph_name_string = glyph_struct.glyph_name_pointer;
