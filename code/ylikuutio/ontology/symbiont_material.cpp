@@ -37,6 +37,15 @@ namespace yli
                     this->number_of_symbiont_species);
         }
 
+        void SymbiontMaterial::unbind_symbiont_species(const std::size_t childID)
+        {
+            yli::hierarchy::unbind_child_from_parent<yli::ontology::SymbiontSpecies*>(
+                    childID,
+                    this->symbiont_species_pointer_vector,
+                    this->free_symbiont_speciesID_queue,
+                    this->number_of_symbiont_species);
+        }
+
         void SymbiontMaterial::bind_to_parent()
         {
             // requirements:

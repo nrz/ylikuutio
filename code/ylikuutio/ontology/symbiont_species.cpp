@@ -79,8 +79,19 @@ namespace yli
             glDeleteBuffers(1, &this->normalbuffer);
             glDeleteBuffers(1, &this->elementbuffer);
 
+            // requirements for further actions:
+            // `this->symbiont_material_parent` must not be `nullptr`.
+
+            yli::ontology::SymbiontMaterial* const symbiont_material = this->symbiont_material_parent;
+
             // set pointer to this `SymbiontSpecies` to `nullptr`.
-            this->symbiont_material_parent->set_symbiont_species_pointer(this->childID, nullptr);
+            if (symbiont_material == nullptr)
+            {
+                std::cerr << "ERROR: `SymbiontSpecies::~SymbiontSpecies`: `symbiont_material` is `nullptr`!\n";
+                return;
+            }
+
+            symbiont_material->unbind_symbiont_species(this->childID);
         }
 
         void SymbiontSpecies::render()
