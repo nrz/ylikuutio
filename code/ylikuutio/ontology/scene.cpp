@@ -168,7 +168,10 @@ namespace yli
 
         float Scene::get_turbo_factor() const
         {
-            if (this->parent == this->universe->get_active_world() && this == this->parent->get_active_scene())
+            if (this->parent != nullptr &&
+                    this->universe != nullptr &&
+                    this->parent == this->universe->get_active_world() &&
+                    this == this->parent->get_active_scene())
             {
                 return this->universe->turbo_factor;
             }
@@ -180,7 +183,10 @@ namespace yli
         {
             this->turbo_factor = turbo_factor;
 
-            if (this->parent == this->universe->get_active_world() && this == this->parent->get_active_scene())
+            if (this->parent != nullptr &&
+                    this->universe != nullptr &&
+                    this->parent == this->universe->get_active_world() &&
+                    this == this->parent->get_active_scene())
             {
                 this->universe->turbo_factor = this->turbo_factor;
             }
@@ -188,7 +194,10 @@ namespace yli
 
         float Scene::get_twin_turbo_factor() const
         {
-            if (this->parent == this->universe->get_active_world() && this == this->parent->get_active_scene())
+            if (this->parent != nullptr &&
+                    this->universe != nullptr &&
+                    this->parent == this->universe->get_active_world() &&
+                    this == this->parent->get_active_scene())
             {
                 return this->universe->twin_turbo_factor;
             }
@@ -200,7 +209,10 @@ namespace yli
         {
             this->twin_turbo_factor = twin_turbo_factor;
 
-            if (this->parent == this->universe->get_active_world() && this == this->parent->get_active_scene())
+            if (this->parent != nullptr &&
+                    this->universe != nullptr &&
+                    this->parent == this->universe->get_active_world() &&
+                    this == this->parent->get_active_scene())
             {
                 this->universe->twin_turbo_factor = this->twin_turbo_factor;
             }
