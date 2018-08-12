@@ -73,8 +73,18 @@ namespace yli
 
         void Scene::bind_to_parent()
         {
-            // get `childID` from `World` and set pointer to this `Scene`.
-            this->parent->bind_scene(this);
+            // requirements:
+            // `this->parent` must not be `nullptr`.
+            yli::ontology::World* const world = this->parent;
+
+            if (world == nullptr)
+            {
+                std::cerr << "ERROR: `Scene::bind_to_parent`: `world` is `nullptr`!\n";
+                return;
+            }
+
+            // get `childID` from the `World` and set pointer to this `Scene`.
+            world->bind_scene(this);
         }
 
         Scene::~Scene()
