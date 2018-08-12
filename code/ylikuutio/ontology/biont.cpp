@@ -130,7 +130,7 @@ namespace yli
                 return;
             }
 
-            // set pointer to this biont to nullptr.
+            // set pointer to this `Biont` to `nullptr`.
             symbiont_species->unbind_biont(this->childID);
             holobiont->set_biont_pointer(this->childID, nullptr);
         }
