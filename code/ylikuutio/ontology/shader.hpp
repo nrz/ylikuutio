@@ -55,7 +55,7 @@ namespace yli
                 void unbind_symbiosis(const std::size_t childID);
 
                 // this method sets pointer to this `Shader` to nullptr, sets `parent` according to the input, and requests a new `childID` from the new `Scene`.
-                void bind_to_new_parent(yli::ontology::Scene* const new_scene_pointer);
+                void bind_to_new_parent(yli::ontology::Scene* const new_parent);
 
                 // constructor.
                 Shader(yli::ontology::Universe* const universe, const ShaderStruct& shader_struct)
