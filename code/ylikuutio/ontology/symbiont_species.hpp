@@ -67,8 +67,6 @@ namespace yli
                     this->normals                  = species_struct.normals;
                     this->light_position           = species_struct.light_position;
 
-                    std::cout << "Binding `yli::ontology::SymbiontSpecies*` to `yli::ontology::SymbiontMaterial*` ...\n";
-
                     // get `childID` from `SymbiontMaterial` and set pointer to this `SymbiontSpecies`.
                     this->bind_to_parent();
 
