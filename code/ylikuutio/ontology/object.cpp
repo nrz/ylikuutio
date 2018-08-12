@@ -196,7 +196,7 @@ namespace yli
                 {
                     const std::string model_file_format = this->species_parent->get_model_file_format();
 
-                    if (model_file_format.compare("fbx") == 0 || model_file_format.compare("FBX") == 0)
+                    if (model_file_format == "fbx" || model_file_format == "FBX")
                     {
                         // Only FBX objects need initial rotation.
                         this->model_matrix = glm::rotate(this->model_matrix, this->initial_rotate_angle, this->initial_rotate_vector);

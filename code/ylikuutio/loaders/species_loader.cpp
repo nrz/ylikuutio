@@ -46,7 +46,7 @@ namespace yli
         {
             bool model_loading_result = false;
 
-            if (species_loader_struct.model_file_format.compare("obj") == 0 || species_loader_struct.model_file_format.compare("OBJ") == 0)
+            if (species_loader_struct.model_file_format == "obj" || species_loader_struct.model_file_format == "OBJ")
             {
                 model_loading_result = yli::loaders::load_OBJ(
                         species_loader_struct.model_filename.c_str(),
@@ -54,7 +54,7 @@ namespace yli
                         out_UVs,
                         out_normals);
             }
-            else if (species_loader_struct.model_file_format.compare("fbx") == 0 || species_loader_struct.model_file_format.compare("FBX") == 0)
+            else if (species_loader_struct.model_file_format == "fbx" || species_loader_struct.model_file_format == "FBX")
             {
                 model_loading_result = yli::loaders::load_FBX(
                         species_loader_struct.model_filename,
@@ -66,7 +66,7 @@ namespace yli
 
                 std::cout << species_loader_struct.model_filename << " loaded successfully.\n";
             }
-            else if (species_loader_struct.model_file_format.compare("srtm") == 0 || species_loader_struct.model_file_format.compare("SRTM") == 0)
+            else if (species_loader_struct.model_file_format == "srtm" || species_loader_struct.model_file_format == "SRTM")
             {
                 model_loading_result = yli::loaders::load_SRTM_terrain(
                         species_loader_struct.model_filename,
@@ -81,7 +81,7 @@ namespace yli
                         species_loader_struct.z_step,
                         species_loader_struct.triangulation_type);
             }
-            else if (species_loader_struct.model_file_format.compare("bmp") == 0 || species_loader_struct.model_file_format.compare("BMP") == 0)
+            else if (species_loader_struct.model_file_format == "bmp" || species_loader_struct.model_file_format == "BMP")
             {
                 model_loading_result = yli::loaders::load_BMP_terrain(
                         species_loader_struct.model_filename,
@@ -95,7 +95,7 @@ namespace yli
                         species_loader_struct.z_step,
                         species_loader_struct.triangulation_type);
             }
-            else if (species_loader_struct.model_file_format.compare("ascii_grid") == 0 || species_loader_struct.model_file_format.compare("ASCII_grid") == 0)
+            else if (species_loader_struct.model_file_format == "ascii_grid" || species_loader_struct.model_file_format == "ASCII_grid")
             {
                 model_loading_result = yli::loaders::load_ASCII_grid(
                         species_loader_struct.model_filename,
