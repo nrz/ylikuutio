@@ -70,8 +70,18 @@ namespace yli
 
         void VectorFont::bind_to_parent()
         {
-            // get `childID` from `Material` and set pointer to this `VectorFont`.
-            this->parent->bind_vector_font(this);
+            // requirements:
+            // `this->parent` must not be `nullptr`.
+            yli::ontology::Material* const material = this->parent;
+
+            if (material == nullptr)
+            {
+                std::cerr << "ERROR: `VectorFont::bind_to_parent`: `material` is `nullptr`!\n";
+                return;
+            }
+
+            // get `childID` from the `Material` and set pointer to this `VectorFont`.
+            material->bind_vector_font(this);
         }
 
         // this method returns a pointer to `Glyph` that matches the given `unicode_value`,
