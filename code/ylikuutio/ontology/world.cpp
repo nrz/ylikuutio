@@ -26,8 +26,18 @@ namespace yli
 
         void World::bind_to_parent()
         {
-            // get `childID` from `Universe` and set pointer to this `World`.
-            this->parent->bind_world(this);
+            // requirements:
+            // `this->parent` must not be `nullptr`.
+            yli::ontology::Universe* const universe = this->parent;
+
+            if (universe == nullptr)
+            {
+                std::cerr << "ERROR: `World::bind_to_parent`: `universe` is `nullptr`!\n";
+                return;
+            }
+
+            // get `childID` from the `Universe` and set pointer to this `World`.
+            universe->bind_world(this);
         }
 
         World::~World()
