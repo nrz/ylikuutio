@@ -65,8 +65,18 @@ namespace yli
 
         void Shader::bind_to_parent()
         {
-            // get `childID` from `Scene` and set pointer to this `Shader`.
-            this->parent->bind_shader(this);
+            // requirements:
+            // `this->parent` must not be `nullptr`.
+            yli::ontology::Scene* const scene = this->parent;
+
+            if (scene == nullptr)
+            {
+                std::cerr << "ERROR: `Shader::bind_to_parent`: `scene` is `nullptr`!\n";
+                return;
+            }
+
+            // get `childID` from the `Scene` and set pointer to this `Shader`.
+            scene->bind_shader(this);
         }
 
         void Shader::bind_to_new_parent(yli::ontology::Scene* const new_scene_pointer)
