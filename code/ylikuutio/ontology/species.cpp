@@ -107,8 +107,18 @@ namespace yli
                 glDeleteBuffers(1, &this->normalbuffer);
                 glDeleteBuffers(1, &this->elementbuffer);
 
-                // set pointer to this species to nullptr.
-                this->material_parent->set_species_pointer(this->childID, nullptr);
+                // requirements for further actions:
+                // `this->material_parent` must not be `nullptr`.
+
+                yli::ontology::Material* const material = this->material_parent;
+
+                if (material == nullptr)
+                {
+                    std::cerr << "ERROR: `Species::~Species`: `material` is `nullptr`!\n";
+                    return;
+                }
+
+                this->material_parent->unbind_species(this->childID);
             }
         }
 
