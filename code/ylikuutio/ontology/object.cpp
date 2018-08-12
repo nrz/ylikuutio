@@ -30,6 +30,16 @@ namespace yli
             yli::ontology::Model* glyph_parent_model = this->glyph_parent;
             yli::ontology::Model* species_parent_model = this->species_parent;
             yli::ontology::Model* parent_model = (this->is_character ? glyph_parent_model : species_parent_model);
+
+            // requirements:
+            // `parent_model` must not be `nullptr`.
+
+            if (parent_model == nullptr)
+            {
+                std::cerr << "ERROR: `Object::bind_to_parent`: `parent_model` is `nullptr`!\n";
+                return;
+            }
+
             parent_model->bind_object(this);
         }
 
