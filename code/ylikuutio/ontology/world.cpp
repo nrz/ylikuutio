@@ -74,13 +74,27 @@ namespace yli
 
         void World::set_active_scene(yli::ontology::Scene* scene)
         {
-            this->active_scene = scene;
+            // requirements:
+            // `this->parent` must not be `nullptr`.
+            // `scene` must not be `nullptr`.
 
-            if (this->active_scene != nullptr)
+            yli::ontology::Universe* const universe = this->parent;
+
+            if (universe == nullptr)
             {
-                this->parent->turbo_factor = this->active_scene->get_turbo_factor();
-                this->parent->twin_turbo_factor = this->active_scene->get_twin_turbo_factor();
+                std::cerr << "ERROR: `World::set_active_scene`: `universe` is `nullptr`!\n";
+                return;
             }
+
+            if (scene == nullptr)
+            {
+                std::cerr << "ERROR: `World::set_active_scene`: `scene` is `nullptr`!\n";
+                return;
+            }
+
+            this->active_scene = scene;
+            universe->turbo_factor = this->active_scene->get_turbo_factor();
+            universe->twin_turbo_factor = this->active_scene->get_twin_turbo_factor();
         }
 
         yli::ontology::Scene* World::get_active_scene() const
