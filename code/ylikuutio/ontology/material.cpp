@@ -88,8 +88,18 @@ namespace yli
 
         void Material::bind_to_parent()
         {
-            // get `childID` from `Shader` and set pointer to this `Material`.
-            this->parent->bind_material(this);
+            // requirements:
+            // `this->parent` must not be `nullptr`.
+            yli::ontology::Shader* const shader = this->parent;
+
+            if (shader == nullptr)
+            {
+                std::cerr << "ERROR: `Material::bind_to_parent`: `shader` is `nullptr`!\n";
+                return;
+            }
+
+            // get `childID` from the `Shader` and set pointer to this `Material`.
+            shader->bind_material(this);
         }
 
         Material::~Material()
