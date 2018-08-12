@@ -7,6 +7,7 @@
 #include "object.hpp"
 #include "species_or_glyph.hpp"
 #include "render_templates.hpp"
+#include "family_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include GLEW
@@ -23,6 +24,25 @@ namespace yli
 {
     namespace ontology
     {
+        void Species::bind_object(yli::ontology::Object* const object)
+        {
+            // get `childID` from `Species` and set pointer to `object`.
+            yli::hierarchy::bind_child_to_parent<yli::ontology::Object*>(
+                    object,
+                    this->object_pointer_vector,
+                    this->free_objectID_queue,
+                    this->number_of_objects);
+        }
+
+        void Species::unbind_object(const std::size_t childID)
+        {
+            yli::hierarchy::unbind_child_from_parent(
+                    childID,
+                    this->object_pointer_vector,
+                    this->free_objectID_queue,
+                    this->number_of_objects);
+        }
+
         void Species::bind_to_parent()
         {
             // get `childID` from `Material` and set pointer to this `Species`.

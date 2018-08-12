@@ -14,6 +14,25 @@ namespace yli
     {
         class Object;
 
+        void Text3D::bind_object(yli::ontology::Object* const object)
+        {
+            // get `childID` from `Text3d` and set pointer to `object`.
+            yli::hierarchy::bind_child_to_parent<yli::ontology::Object*>(
+                    object,
+                    this->object_pointer_vector,
+                    this->free_objectID_queue,
+                    this->number_of_objects);
+        }
+
+        void Text3D::unbind_object(const std::size_t childID)
+        {
+            yli::hierarchy::unbind_child_from_parent(
+                    childID,
+                    this->object_pointer_vector,
+                    this->free_objectID_queue,
+                    this->number_of_objects);
+        }
+
         void Text3D::bind_to_parent()
         {
             // get `childID` from `VectorFont` and set pointer to this `Text3D`.

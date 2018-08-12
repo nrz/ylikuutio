@@ -33,8 +33,8 @@ typedef struct ObjectStruct
         initial_rotate_vector(glm::vec3(0.0f, 1.0f, 1.0f)),
         translate_vector(glm::vec3(0.0f, 0.0f, 0.0f)),
         species_parent(nullptr),
-        glyph_parent(nullptr),
         text3D_parent(nullptr),
+        glyph(nullptr),
         rotate_angle(0.0f),
         initial_rotate_angle(PI),
         is_character(false),
@@ -50,8 +50,8 @@ typedef struct ObjectStruct
     glm::vec3 initial_rotate_vector;        // initial rotate vector.
     glm::vec3 translate_vector;             // translate vector.
     yli::ontology::Species* species_parent; // pointer to the parent `Species`.
-    yli::ontology::Glyph* glyph_parent;     // pointer to the parent `Glyph`.
     yli::ontology::Text3D* text3D_parent;   // pointer to the parent `Text3D`.
+    yli::ontology::Glyph* glyph;            // pointer to the `Glyph` (not a parent!).
     float rotate_angle;                     // rotate angle.
     float initial_rotate_angle;             // initial rotate angle.
     bool is_character;                      // The parent of a character object is a `Glyph`. The parent of a regular object is a `Species`.

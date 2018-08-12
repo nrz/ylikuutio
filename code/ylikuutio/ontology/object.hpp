@@ -13,12 +13,6 @@
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/common/globals.hpp"
 
-// Include GLEW
-#ifndef __GL_GLEW_H_INCLUDED
-#define __GL_GLEW_H_INCLUDED
-#include <GL/glew.h> // GLfloat, GLuint etc.
-#endif
-
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
 #define __GLM_GLM_HPP_INCLUDED
@@ -61,11 +55,13 @@ namespace yli
                 {
                     // constructor.
                     this->original_scale_vector = object_struct.original_scale_vector;
-                    this->rotate_angle          = object_struct.rotate_angle;
                     this->rotate_vector         = object_struct.rotate_vector;
-                    this->initial_rotate_angle  = object_struct.initial_rotate_angle;
-                    this->initial_rotate_vector = object_struct.initial_rotate_vector;
                     this->translate_vector      = object_struct.translate_vector;
+                    this->initial_rotate_vector = object_struct.initial_rotate_vector;
+
+                    this->initial_rotate_angle  = object_struct.initial_rotate_angle;
+                    this->rotate_angle          = object_struct.rotate_angle;
+
                     this->has_entered           = false;
 
                     // enable rendering of a recently entered Object.
@@ -77,15 +73,15 @@ namespace yli
 
                     if (this->is_character)
                     {
-                        this->glyph_parent   = object_struct.glyph_parent;
                         this->text3D_parent  = object_struct.text3D_parent;
                         this->species_parent = nullptr;
+                        this->glyph          = object_struct.glyph;
                     }
                     else
                     {
                         this->species_parent = object_struct.species_parent;
-                        this->glyph_parent   = nullptr;
                         this->text3D_parent  = nullptr;
+                        this->glyph          = nullptr;
                     }
 
                     // get `childID` from `Species` or `Glyph` and set pointer to this `Object`.
@@ -113,21 +109,22 @@ namespace yli
                 void render();
                 void render_this_object(yli::ontology::Shader* const shader_pointer);
 
-                yli::ontology::Species* species_parent; // pointer to `Species`.
-                yli::ontology::Glyph* glyph_parent;     // pointer to `Glyph`.
-                yli::ontology::Text3D* text3D_parent;   // pointer to `Text3D`.
+                yli::ontology::Species* species_parent; // pointer to `Species` parent.
+                yli::ontology::Text3D* text3D_parent;   // pointer to `Text3D` parent.
+                yli::ontology::Glyph* glyph;            // pointer to `Glyph` (not a parent!).
+
                 bool is_character;
                 bool quaternions_in_use;
-
                 bool has_entered;
                 bool should_ylikuutio_render_this_object;
 
                 glm::vec3 original_scale_vector;       // original scale vector.
-                GLfloat rotate_angle;                  // rotate angle.
                 glm::vec3 rotate_vector;               // rotate vector.
                 glm::vec3 translate_vector;            // translate vector.
-                GLfloat initial_rotate_angle;          // initial rotate angle.
                 glm::vec3 initial_rotate_vector;       // initial rotate vector.
+
+                float initial_rotate_angle;          // initial rotate angle.
+                float rotate_angle;                  // rotate angle.
         };
     }
 }

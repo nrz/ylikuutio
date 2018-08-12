@@ -36,9 +36,6 @@ namespace yli
         class Model: public yli::ontology::Entity
         {
             public:
-                void bind_object(yli::ontology::Object* const object);
-                void unbind_object(const std::size_t childID);
-
                 // constructor.
                 Model(yli::ontology::Universe* const universe, const bool vram_buffer_in_use)
                     : Entity(universe)
