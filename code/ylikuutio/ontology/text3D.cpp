@@ -58,7 +58,18 @@ namespace yli
             std::cout << "All objects (" << this->object_pointer_vector.size() << " pieces) of this 3D text will be destroyed.\n";
             yli::hierarchy::delete_children<yli::ontology::Object*>(this->object_pointer_vector, this->number_of_objects);
 
-            this->parent->set_text3D_pointer(this->childID, nullptr);
+            // requirements for further actions:
+            // `this->parent` must not be `nullptr`.
+
+            yli::ontology::VectorFont* const vector_font = this->parent;
+
+            if (vector_font == nullptr)
+            {
+                std::cerr << "ERROR: `Text3D::~Text3D`: `vector_font` is `nullptr`!\n";
+                return;
+            }
+
+            vector_font->unbind_text3D(this->childID);
         }
 
         yli::ontology::Entity* Text3D::get_parent() const

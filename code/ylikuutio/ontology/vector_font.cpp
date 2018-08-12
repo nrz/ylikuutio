@@ -49,6 +49,15 @@ namespace yli
                     this->number_of_text3Ds);
         }
 
+        void VectorFont::unbind_text3D(const std::size_t childID)
+        {
+            yli::hierarchy::unbind_child_from_parent<yli::ontology::Text3D*>(
+                    childID,
+                    this->text3D_pointer_vector,
+                    this->free_text3D_ID_queue,
+                    this->number_of_text3Ds);
+        }
+
         void VectorFont::bind_to_new_parent(yli::ontology::Material* const new_material_pointer)
         {
             // unbind from the old parent `Material`.
