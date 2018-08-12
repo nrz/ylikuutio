@@ -59,13 +59,34 @@ namespace yli
             this->material_parent->bind_species(this);
         }
 
-        void Species::bind_to_new_parent(yli::ontology::Material* const new_material_pointer)
+        void Species::bind_to_new_parent(yli::ontology::Material* const new_parent)
         {
+            // this method sets pointer to this `Species` to `nullptr`, sets `material_parent` according to the input,
+            // and requests a new `childID` from the new `Material`.
+            //
+            // requirements:
+            // `this->material_parent` must not be `nullptr`.
+            // `new_parent` must not be `nullptr`.
+
+            yli::ontology::Material* const material = this->material_parent;
+
+            if (material == nullptr)
+            {
+                std::cerr << "ERROR: `Species::bind_to_new_parent`: `material` is `nullptr`!\n";
+                return;
+            }
+
+            if (new_parent == nullptr)
+            {
+                std::cerr << "ERROR: `Species::bind_to_new_parent`: `new_parent` is `nullptr`!\n";
+                return;
+            }
+
             // unbind from the old parent `Material`.
-            this->material_parent->unbind_species(this->childID);
+            material->unbind_species(this->childID);
 
             // get `childID` from `Material` and set pointer to this `Species`.
-            this->material_parent = new_material_pointer;
+            this->material_parent = new_parent;
             this->material_parent->bind_species(this);
         }
 
