@@ -52,6 +52,18 @@ namespace yli
             yli::ontology::Model* species_parent_model = this->species_parent;
             yli::ontology::Model* parent_model = (this->is_character ? glyph_parent_model : species_parent_model);
 
+            if (parent_model == nullptr)
+            {
+                std::cerr << "ERROR: `Object::bind_to_new_parent`: `parent_model` is `nullptr`!\n";
+                return;
+            }
+
+            if (new_parent == nullptr)
+            {
+                std::cerr << "ERROR: `Object::bind_to_new_parent`: `new_parent` is `nullptr`!\n";
+                return;
+            }
+
             // unbind from the old parent `Model`.
             parent_model->unbind_object(this->childID);
 
