@@ -29,14 +29,16 @@ namespace yli
             // requirements:
             // `this->holobiont_parent` must not be `nullptr`.
 
-            if (this->holobiont_parent == nullptr)
+            yli::ontology::Holobiont* const holobiont = this->holobiont_parent;
+
+            if (holobiont == nullptr)
             {
-                std::cerr << "ERROR: `Biont::bind_to_parent`: `this->holobiont_parent` is `nullptr`!\n";
+                std::cerr << "ERROR: `Biont::bind_to_parent`: `holobiont` is `nullptr`!\n";
                 return;
             }
 
             // get `childID` from `Holobiont` and set pointer to this `Biont`.
-            this->holobiont_parent->bind_biont(this);
+            holobiont->bind_biont(this);
         }
 
         void Biont::bind_to_symbiont_species()
