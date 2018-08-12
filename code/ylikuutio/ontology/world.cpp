@@ -24,6 +24,15 @@ namespace yli
                     this->number_of_scenes);
         }
 
+        void World::unbind_scene(const std::size_t childID)
+        {
+            yli::hierarchy::unbind_child_from_parent(
+                    childID,
+                    this->scene_pointer_vector,
+                    this->free_sceneID_queue,
+                    this->number_of_scenes);
+        }
+
         void World::bind_to_parent()
         {
             // requirements:

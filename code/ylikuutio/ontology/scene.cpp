@@ -100,14 +100,25 @@ namespace yli
             std::cout << "All cameras of this scene will be destroyed.\n";
             yli::hierarchy::delete_children<yli::ontology::Camera*>(this->camera_pointer_vector, this->number_of_cameras);
 
-            if (this->parent->get_active_scene() == this)
+            // requirements for further actions:
+            // `this->parent` must not be `nullptr`.
+
+            yli::ontology::World* const world = this->parent;
+
+            if (world == nullptr)
+            {
+                std::cerr << "ERROR: `Scene::~Scene`: `world` is `nullptr`!\n";
+                return;
+            }
+
+            if (world->get_active_scene() == this)
             {
                 // Make this `Scene` no more the active `Scene`.
                 this->parent->set_active_scene(nullptr);
             }
 
             // set pointer to this `Scene` to `nullptr`.
-            this->parent->set_scene_pointer(this->childID, nullptr);
+            world->unbind_scene(this->childID);
         }
 
         void Scene::render()
