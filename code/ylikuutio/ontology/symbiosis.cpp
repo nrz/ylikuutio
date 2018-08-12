@@ -80,8 +80,18 @@ namespace yli
 
         void Symbiosis::bind_to_parent()
         {
+            // requirements:
+            // `this->parent` must not be `nullptr`.
+            yli::ontology::Shader* const shader = this->parent;
+
+            if (shader == nullptr)
+            {
+                std::cerr << "ERROR: `Symbiosis::bind_to_parent`: `shader` is `nullptr`!\n";
+                return;
+            }
+
             // get `childID` from `Shader` and set pointer to this `Symbiosis`.
-            this->parent->bind_symbiosis(this);
+            shader->bind_symbiosis(this);
         }
 
         void Symbiosis::bind_to_new_parent(yli::ontology::Shader* const new_shader_pointer)
