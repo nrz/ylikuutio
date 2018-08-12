@@ -110,7 +110,7 @@ namespace yli
             }
 
             // set pointer to this `Holobiont` to nullptr.
-            symbiosis->set_holobiont_pointer(this->childID, nullptr);
+            symbiosis->unbind_holobiont(this->childID);
         }
 
         void Holobiont::render()
