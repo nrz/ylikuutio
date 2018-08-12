@@ -132,7 +132,7 @@ namespace yli
 
             // set pointer to this `Biont` to `nullptr`.
             symbiont_species->unbind_biont(this->childID);
-            holobiont->set_biont_pointer(this->childID, nullptr);
+            holobiont->unbind_biont(this->childID);
         }
 
         void Biont::render()
