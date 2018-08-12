@@ -42,6 +42,7 @@ namespace yli
     namespace ontology
     {
         class Material;
+        class Object;
 
         class Species: public yli::ontology::Model
         {
