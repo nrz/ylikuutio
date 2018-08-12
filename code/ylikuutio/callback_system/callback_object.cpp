@@ -79,7 +79,18 @@ namespace yli
 
         void CallbackObject::bind_to_parent()
         {
-            this->parent->bind_callback_object(this);
+            // requirements:
+            // `this->parent` must not be `nullptr`.
+
+            yli::callback_system::CallbackEngine* const callback_engine = this->parent;
+
+            if (callback_engine == nullptr)
+            {
+                std::cerr << "ERROR: `CallbackObject::bind_to_parent`: `callback_engine` is `nullptr`!\n";
+                return;
+            }
+
+            callback_engine->bind_callback_object(this);
         }
 
         void CallbackObject::set_new_callback(const InputParametersToAnyValueCallback callback)
