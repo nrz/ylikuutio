@@ -39,8 +39,18 @@ namespace yli
 
         void SymbiontMaterial::bind_to_parent()
         {
+            // requirements:
+            // `this->symbiosis_parent` must not be `nullptr`.
+            yli::ontology::Symbiosis* const symbiosis = this->parent;
+
+            if (symbiosis == nullptr)
+            {
+                std::cerr << "ERROR: `SymbiontMaterial::bind_to_parent`: `symbiosis` is `nullptr`!\n";
+                return;
+            }
+
             // get `childID` from `Symbiosis` and set pointer to this `SymbiontMaterial`.
-            this->parent->bind_symbiont_material(this);
+            symbiosis->bind_symbiont_material(this);
         }
 
         SymbiontMaterial::~SymbiontMaterial()
