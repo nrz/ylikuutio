@@ -209,7 +209,7 @@ namespace yli
             }
 
             // unbind from the old parent `Shader`.
-            this->parent->unbind_material(this->childID);
+            shader->unbind_material(this->childID);
 
             // get `childID` from `Shader` and set pointer to this `Material`.
             this->parent = new_parent;
