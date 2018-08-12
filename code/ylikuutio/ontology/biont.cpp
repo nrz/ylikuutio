@@ -110,6 +110,8 @@ namespace yli
             // `this->holobiont_parent` must not be `nullptr`.
             // `this->symbiont_species` must not be `nullptr`.
 
+            std::cout << "Biont with childID " << std::dec << this->childID << " will be destroyed.\n";
+
             yli::ontology::Holobiont* const holobiont = this->holobiont_parent;
 
             if (holobiont == nullptr)
@@ -125,8 +127,6 @@ namespace yli
                 std::cerr << "ERROR: `Biont::~Biont`: `symbiont_species` is `nullptr`!\n";
                 return;
             }
-
-            std::cout << "Biont with childID " << std::dec << this->childID << " will be destroyed.\n";
 
             // set pointer to this biont to nullptr.
             symbiont_species->unbind_biont(this->childID);
