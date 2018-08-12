@@ -45,6 +45,16 @@ namespace yli
 
         void Species::bind_to_parent()
         {
+            // requirements:
+            // `this->material_parent` must not be `nullptr`.
+            yli::ontology::Material* const material = this->material_parent;
+
+            if (material == nullptr)
+            {
+                std::cerr << "ERROR: `Species::bind_to_parent`: `material` is `nullptr`!\n";
+                return;
+            }
+
             // get `childID` from `Material` and set pointer to this `Species`.
             this->material_parent->bind_species(this);
         }
