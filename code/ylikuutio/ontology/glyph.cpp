@@ -16,8 +16,19 @@ namespace yli
     {
         void Glyph::bind_to_parent()
         {
+            // requirements:
+            // `this->parent` must not be `nullptr`.
+
+            yli::ontology::VectorFont* const vector_font = this->parent;
+
+            if (vector_font == nullptr)
+            {
+                std::cerr << "ERROR: `Glyph::bind_to_parent`: `vector_font` is `nullptr`!\n";
+                return;
+            }
+
             // get `childID` from `VectorFont` and set pointer to this `Glyph`.
-            this->parent->bind_glyph(this);
+            vector_font->bind_glyph(this);
         }
 
         Glyph::~Glyph()
