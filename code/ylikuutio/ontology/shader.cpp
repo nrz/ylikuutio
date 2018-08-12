@@ -123,8 +123,20 @@ namespace yli
             std::cout << "All symbioses of this shader will be destroyed.\n";
             yli::hierarchy::delete_children<yli::ontology::Symbiosis*>(this->symbiosis_pointer_vector, this->number_of_symbioses);
 
-            // set pointer to this shader to nullptr.
-            this->parent->set_shader_pointer(this->childID, nullptr);
+            // requirements for further actions (except `glDeleteProgram`):
+            // `this->parent` must not be `nullptr`.
+
+            yli::ontology::Scene* const scene = this->parent;
+
+            if (scene == nullptr)
+            {
+                std::cerr << "ERROR: `Shader::~Shader`: `scene` is `nullptr`!\n";
+            }
+            else
+            {
+                // set pointer to this `Shader` to `nullptr`.
+                scene->unbind_shader(this->childID);
+            }
 
             glDeleteProgram(this->programID);
         }
