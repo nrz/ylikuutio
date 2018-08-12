@@ -138,8 +138,19 @@ namespace yli
             std::cout << "All symbiont materials of this symbiosis will be destroyed.\n";
             yli::hierarchy::delete_children<yli::ontology::SymbiontMaterial*>(this->symbiont_material_pointer_vector, this->number_of_symbiont_materials);
 
+            // requirements for further actions:
+            // `this->parent` must not be `nullptr`.
+
+            yli::ontology::Shader* const shader = this->parent;
+
+            if (shader == nullptr)
+            {
+                std::cerr << "ERROR: `Symbiosis::~Symbiosis`: `shader` is `nullptr`!\n";
+                return;
+            }
+
             // set pointer to this `Symbiosis` to `nullptr`.
-            this->parent->set_symbiosis_pointer(this->childID, nullptr);
+            shader->unbind_symbiosis(this->childID);
         }
 
         void Symbiosis::render()
