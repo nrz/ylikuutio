@@ -272,7 +272,16 @@ namespace yli
                     {
                         SpeciesStruct species_struct;
                         species_struct.is_symbiont_species = true;
-                        species_struct.scene = static_cast<yli::ontology::Scene*>(this->parent->get_parent());
+
+                        if (this->parent != nullptr)
+                        {
+                            species_struct.scene = static_cast<yli::ontology::Scene*>(this->parent->get_parent());
+                        }
+                        else
+                        {
+                            species_struct.scene = nullptr;
+                        }
+
                         species_struct.shader = this->parent;
                         species_struct.symbiont_material = symbiont_material;
                         species_struct.vertex_count = mesh_i < this->vertices.size() ? this->vertices.at(mesh_i).size() : 0;
