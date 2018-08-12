@@ -14,6 +14,7 @@
 #include "glyph.hpp"
 #include "shader_struct.hpp"
 #include "render_templates.hpp"
+#include "family_templates.hpp"
 #include "code/ylikuutio/loaders/shader_loader.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/common/pi.hpp"
@@ -54,7 +55,7 @@ namespace yli
                 void unbind_symbiosis(const std::size_t childID);
 
                 // this method sets pointer to this `Shader` to nullptr, sets `parent` according to the input, and requests a new `childID` from the new `Scene`.
-                void bind_to_new_parent(yli::ontology::Scene* const new_scene_pointer);
+                void bind_to_new_parent(yli::ontology::Scene* const new_parent);
 
                 // constructor.
                 Shader(yli::ontology::Universe* const universe, const ShaderStruct& shader_struct)
@@ -115,7 +116,9 @@ namespace yli
                 template <class T1>
                     friend void yli::hierarchy::unbind_child_from_parent(const std::size_t childID, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
                 template<class T1>
-                    friend void render_children(const std::vector<T1>& child_pointer_vector);
+                    friend std::size_t yli::ontology::get_number_of_descendants(const std::vector<T1>& child_pointer_vector);
+                template<class T1>
+                    friend void yli::ontology::render_children(const std::vector<T1>& child_pointer_vector);
 
             private:
                 void bind_to_parent();

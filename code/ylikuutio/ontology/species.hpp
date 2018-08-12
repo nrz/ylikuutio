@@ -42,12 +42,16 @@ namespace yli
     namespace ontology
     {
         class Material;
+        class Object;
 
         class Species: public yli::ontology::Model
         {
             public:
+                void bind_object(yli::ontology::Object* const object);
+                void unbind_object(const std::size_t childID);
+
                 // this method sets pointer to this `Species` to nullptr, sets `parent` according to the input, and requests a new `childID` from the new `Material`.
-                void bind_to_new_parent(yli::ontology::Material* const new_material_pointer);
+                void bind_to_new_parent(yli::ontology::Material* const new_parent);
 
                 // constructor.
                 Species(yli::ontology::Universe* const universe, const SpeciesStruct& species_struct)
@@ -167,9 +171,9 @@ namespace yli
                 template<class T1>
                     friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
                 template<class T1>
-                    friend void render_species_or_glyph(T1 species_or_glyph_pointer);
+                    friend void yli::ontology::render_species_or_glyph(T1 species_or_glyph_pointer);
                 template<class T1>
-                    friend void render_children(const std::vector<T1>& child_pointer_vector);
+                    friend void yli::ontology::render_children(const std::vector<T1>& child_pointer_vector);
 
             private:
                 void bind_to_parent();

@@ -70,7 +70,7 @@ namespace yli
         {
             if (this->sound_map.count(audio_file) == 1)
             {
-                if (this->current_sound.compare(audio_file) == 0)
+                if (this->current_sound == audio_file)
                 {
                     // The sound to be unloaded may be currently in play.
                     if (this->sound_map.count(audio_file) == 1)

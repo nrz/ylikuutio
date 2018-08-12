@@ -3,6 +3,7 @@
 
 #include "entity.hpp"
 #include "material.hpp"
+#include "render_templates.hpp"
 #include "code/ylikuutio/common/globals.hpp"
 
 // Include standard headers

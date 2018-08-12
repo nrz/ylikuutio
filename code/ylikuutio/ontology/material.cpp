@@ -3,6 +3,7 @@
 #include "vector_font.hpp"
 #include "species.hpp"
 #include "render_templates.hpp"
+#include "family_templates.hpp"
 #include "material_struct.hpp"
 #include "code/ylikuutio/ontology/chunk_master.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
@@ -87,8 +88,18 @@ namespace yli
 
         void Material::bind_to_parent()
         {
-            // get `childID` from `Shader` and set pointer to this `Material`.
-            this->parent->bind_material(this);
+            // requirements:
+            // `this->parent` must not be `nullptr`.
+            yli::ontology::Shader* const shader = this->parent;
+
+            if (shader == nullptr)
+            {
+                std::cerr << "ERROR: `Material::bind_to_parent`: `shader` is `nullptr`!\n";
+                return;
+            }
+
+            // get `childID` from the `Shader` and set pointer to this `Material`.
+            shader->bind_material(this);
         }
 
         Material::~Material()
@@ -112,8 +123,19 @@ namespace yli
 
                 glDeleteTextures(1, &this->texture);
 
-                // set pointer to this material to nullptr.
-                this->parent->set_material_pointer(this->childID, nullptr);
+                // requirements for further actions:
+                // `this->parent` must not be `nullptr`.
+
+                yli::ontology::Shader* const shader = this->parent;
+
+                // set pointer to this `Material` to `nullptr`.
+                if (shader == nullptr)
+                {
+                    std::cerr << "ERROR: `Material::~Material`: `shader` is `nullptr`!\n";
+                    return;
+                }
+
+                shader->unbind_material(this->childID);
             }
         }
 
@@ -147,7 +169,9 @@ namespace yli
 
         std::size_t Material::get_number_of_descendants() const
         {
-            return 0; // TODO; write the code!
+            return yli::ontology::get_number_of_descendants(this->species_pointer_vector) +
+                yli::ontology::get_number_of_descendants(this->vector_font_pointer_vector) +
+                yli::ontology::get_number_of_descendants(this->chunk_master_pointer_vector);
         }
 
         void Material::set_species_pointer(const std::size_t childID, yli::ontology::Species* const child_pointer)
@@ -185,17 +209,11 @@ namespace yli
             }
 
             // unbind from the old parent `Shader`.
-            this->parent->unbind_material(this->childID);
+            shader->unbind_material(this->childID);
 
             // get `childID` from `Shader` and set pointer to this `Material`.
             this->parent = new_parent;
             this->parent->bind_material(this);
-        }
-
-        void Material::set_terrain_species(yli::ontology::Species* const terrain_species)
-        {
-            this->terrain_species = terrain_species;
-            this->parent->set_terrain_species(this->terrain_species);
         }
     }
 }

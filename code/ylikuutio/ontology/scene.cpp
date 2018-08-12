@@ -13,6 +13,7 @@
 #include "shader.hpp"
 #include "camera.hpp"
 #include "render_templates.hpp"
+#include "family_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/common/pi.hpp"
 
@@ -72,8 +73,18 @@ namespace yli
 
         void Scene::bind_to_parent()
         {
-            // get `childID` from `World` and set pointer to this `Scene`.
-            this->parent->bind_scene(this);
+            // requirements:
+            // `this->parent` must not be `nullptr`.
+            yli::ontology::World* const world = this->parent;
+
+            if (world == nullptr)
+            {
+                std::cerr << "ERROR: `Scene::bind_to_parent`: `world` is `nullptr`!\n";
+                return;
+            }
+
+            // get `childID` from the `World` and set pointer to this `Scene`.
+            world->bind_scene(this);
         }
 
         Scene::~Scene()
@@ -89,14 +100,25 @@ namespace yli
             std::cout << "All cameras of this scene will be destroyed.\n";
             yli::hierarchy::delete_children<yli::ontology::Camera*>(this->camera_pointer_vector, this->number_of_cameras);
 
-            if (this->parent->get_active_scene() == this)
+            // requirements for further actions:
+            // `this->parent` must not be `nullptr`.
+
+            yli::ontology::World* const world = this->parent;
+
+            if (world == nullptr)
+            {
+                std::cerr << "ERROR: `Scene::~Scene`: `world` is `nullptr`!\n";
+                return;
+            }
+
+            if (world->get_active_scene() == this)
             {
                 // Make this `Scene` no more the active `Scene`.
                 this->parent->set_active_scene(nullptr);
             }
 
             // set pointer to this `Scene` to `nullptr`.
-            this->parent->set_scene_pointer(this->childID, nullptr);
+            world->unbind_scene(this->childID);
         }
 
         void Scene::render()
@@ -140,7 +162,8 @@ namespace yli
 
         std::size_t Scene::get_number_of_descendants() const
         {
-            return 0; // TODO; write the code!
+            return yli::ontology::get_number_of_descendants(this->shader_pointer_vector) +
+                yli::ontology::get_number_of_descendants(this->camera_pointer_vector);
         }
 
         // this method returns a pointer to an `Entity` using the name as key.
@@ -156,7 +179,10 @@ namespace yli
 
         float Scene::get_turbo_factor() const
         {
-            if (this->parent == this->universe->get_active_world() && this == this->parent->get_active_scene())
+            if (this->parent != nullptr &&
+                    this->universe != nullptr &&
+                    this->parent == this->universe->get_active_world() &&
+                    this == this->parent->get_active_scene())
             {
                 return this->universe->turbo_factor;
             }
@@ -168,7 +194,10 @@ namespace yli
         {
             this->turbo_factor = turbo_factor;
 
-            if (this->parent == this->universe->get_active_world() && this == this->parent->get_active_scene())
+            if (this->parent != nullptr &&
+                    this->universe != nullptr &&
+                    this->parent == this->universe->get_active_world() &&
+                    this == this->parent->get_active_scene())
             {
                 this->universe->turbo_factor = this->turbo_factor;
             }
@@ -176,7 +205,10 @@ namespace yli
 
         float Scene::get_twin_turbo_factor() const
         {
-            if (this->parent == this->universe->get_active_world() && this == this->parent->get_active_scene())
+            if (this->parent != nullptr &&
+                    this->universe != nullptr &&
+                    this->parent == this->universe->get_active_world() &&
+                    this == this->parent->get_active_scene())
             {
                 return this->universe->twin_turbo_factor;
             }
@@ -188,7 +220,10 @@ namespace yli
         {
             this->twin_turbo_factor = twin_turbo_factor;
 
-            if (this->parent == this->universe->get_active_world() && this == this->parent->get_active_scene())
+            if (this->parent != nullptr &&
+                    this->universe != nullptr &&
+                    this->parent == this->universe->get_active_world() &&
+                    this == this->parent->get_active_scene())
             {
                 this->universe->twin_turbo_factor = this->twin_turbo_factor;
             }

@@ -5,6 +5,7 @@
 #include "holobiont.hpp"
 #include "material_struct.hpp"
 #include "render_templates.hpp"
+#include "family_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include <ofbx.h>
 
@@ -49,6 +50,15 @@ namespace yli
                     this->number_of_symbiont_materials);
         }
 
+        void Symbiosis::unbind_symbiont_material(const std::size_t childID)
+        {
+            yli::hierarchy::unbind_child_from_parent(
+                    childID,
+                    this->symbiont_material_pointer_vector,
+                    this->free_symbiont_materialID_queue,
+                    this->number_of_symbiont_materials);
+        }
+
         void Symbiosis::bind_holobiont(yli::ontology::Holobiont* const holobiont)
         {
             // get `childID` from `Symbiosis` and set pointer to `holobiont`.
@@ -70,17 +80,48 @@ namespace yli
 
         void Symbiosis::bind_to_parent()
         {
+            // requirements:
+            // `this->parent` must not be `nullptr`.
+            yli::ontology::Shader* const shader = this->parent;
+
+            if (shader == nullptr)
+            {
+                std::cerr << "ERROR: `Symbiosis::bind_to_parent`: `shader` is `nullptr`!\n";
+                return;
+            }
+
             // get `childID` from `Shader` and set pointer to this `Symbiosis`.
-            this->parent->bind_symbiosis(this);
+            shader->bind_symbiosis(this);
         }
 
-        void Symbiosis::bind_to_new_parent(yli::ontology::Shader* const new_shader_pointer)
+        void Symbiosis::bind_to_new_parent(yli::ontology::Shader* const new_parent)
         {
+            // this method sets pointer to this `Symbiosis` to `nullptr`, sets `parent` according to the input,
+            // and requests a new `childID` from the new `Shader`.
+            //
+            // requirements:
+            // `this->parent` must not be `nullptr`.
+            // `new_parent` must not be `nullptr`.
+
+            yli::ontology::Shader* const shader = this->parent;
+
+            if (shader == nullptr)
+            {
+                std::cerr << "ERROR: `Symbiosis::bind_to_new_parent`: `shader` is `nullptr`!\n";
+                return;
+            }
+
+            if (new_parent == nullptr)
+            {
+                std::cerr << "ERROR: `Symbiosis::bind_to_new_parent`: `new_parent` is `nullptr`!\n";
+                return;
+            }
+
             // unbind from the old parent `Shader`.
-            this->parent->unbind_symbiosis(this->childID);
+            shader->unbind_symbiosis(this->childID);
 
             // get `childID` from `Shader` and set pointer to this `Symbiosis`.
-            this->parent = new_shader_pointer;
+            this->parent = new_parent;
             this->parent->bind_symbiosis(this);
         }
 
@@ -97,8 +138,19 @@ namespace yli
             std::cout << "All symbiont materials of this symbiosis will be destroyed.\n";
             yli::hierarchy::delete_children<yli::ontology::SymbiontMaterial*>(this->symbiont_material_pointer_vector, this->number_of_symbiont_materials);
 
+            // requirements for further actions:
+            // `this->parent` must not be `nullptr`.
+
+            yli::ontology::Shader* const shader = this->parent;
+
+            if (shader == nullptr)
+            {
+                std::cerr << "ERROR: `Symbiosis::~Symbiosis`: `shader` is `nullptr`!\n";
+                return;
+            }
+
             // set pointer to this `Symbiosis` to `nullptr`.
-            this->parent->set_symbiosis_pointer(this->childID, nullptr);
+            shader->unbind_symbiosis(this->childID);
         }
 
         void Symbiosis::render()
@@ -126,7 +178,8 @@ namespace yli
 
         std::size_t Symbiosis::get_number_of_descendants() const
         {
-            return 0; // TODO; write the code!
+            return yli::ontology::get_number_of_descendants(this->symbiont_material_pointer_vector) +
+                yli::ontology::get_number_of_descendants(this->holobiont_pointer_vector);
         }
 
         const std::string& Symbiosis::get_model_file_format()
@@ -219,7 +272,16 @@ namespace yli
                     {
                         SpeciesStruct species_struct;
                         species_struct.is_symbiont_species = true;
-                        species_struct.scene = static_cast<yli::ontology::Scene*>(this->parent->get_parent());
+
+                        if (this->parent != nullptr)
+                        {
+                            species_struct.scene = static_cast<yli::ontology::Scene*>(this->parent->get_parent());
+                        }
+                        else
+                        {
+                            species_struct.scene = nullptr;
+                        }
+
                         species_struct.shader = this->parent;
                         species_struct.symbiont_material = symbiont_material;
                         species_struct.vertex_count = mesh_i < this->vertices.size() ? this->vertices.at(mesh_i).size() : 0;

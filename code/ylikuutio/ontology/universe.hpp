@@ -58,9 +58,9 @@
 //       ^
 //    Material
 //       ^
-//    Species
+//    Species : Model
 //       ^
-//     Object
+//     Object : Movable
 //
 // Please note that for regular `Object`s the hierarchy above is both the ontological hierarchy and the rendering hierarchy.
 //
@@ -76,11 +76,11 @@
 //       ^
 //    Material
 //       ^
-//   VectorFont < Glyph
+//   VectorFont < Glyph : Model
 //       ^
 //     Text3D
 //       ^
-//     Object
+//     Object : Movable
 //
 // Ontological hierarchy affects how objects can be created and how they can be destroyed,
 // though the precise ways how objects can be created depends on the functions available.
@@ -99,9 +99,9 @@
 //       ^
 //   VectorFont
 //       ^
-//     Glyph
+//     Glyph : Model
 //       ^
-//     Object
+//     Object : Movable
 //
 // Please note that rendering hierarchy does not include `Text3D` at all, as each `Glyph` points directly to `VectorFont`.
 // So, `render_species_or_glyph` is called only once for each glyph, and that call renders all the children of that `Glyph`,
@@ -118,11 +118,11 @@
 //       ^
 //     Shader
 //       ^
-//   Symbiosis < SymbiontMaterial
-//       ^              ^
-//   Holobiont   SymbiontSpecies
+//   Symbiosis : Entity  < SymbiontMaterial : Material
+//       ^                        ^
+//   Holobiont : Movable   SymbiontSpecies : Species
 //       ^
-//     Biont
+//     Biont : Movable
 //
 // Each `Holobiont` is a composite organism which consists of 0 more `Bionts`.
 // The `Biont`s of the `Holobiont` each belong to their corresponding
@@ -144,11 +144,11 @@
 //       ^
 //     Shader
 //       ^
-//   Symbiosis > SymbiontMaterial
-//       ^              v
-//   Holobiont   SymbiontSpecies
+//   Symbiosis : Entity  > SymbiontMaterial : Material
+//       ^                        v
+//   Holobiont : Movable   SymbiontSpecies : Species
 //       ^
-//     Biont
+//     Biont : Movable
 //
 // Optimized rendering hierarchy of `Symbiosis` entities:
 //
@@ -162,11 +162,11 @@
 //         ^
 //     Symbiosis
 //         ^
-//  SymbiontMaterial
+//  SymbiontMaterial : Material
 //         ^
-//  SymbiontSpecies
+//  SymbiontSpecies : Species
 //         ^
-//       Biont
+//       Biont : Movable
 //
 // TODO: implement optimized rendering hierarchy for `Symbiosis` entities!
 //
@@ -178,11 +178,11 @@
 //         ^
 //       Scene
 //         ^
-//  ShaderSymbiosis < SymbiontShader
-//         ^                ^
-//     Holobiont     SymbiontMaterial
-//         ^                ^
-//       Biont       SymbiontSpecies
+//  ShaderSymbiosis : Symbiosis < SymbiontShader : Shader
+//         ^                            ^
+//     Holobiont : Movable       SymbiontMaterial : Material
+//         ^                            ^
+//       Biont : Movable         SymbiontSpecies : Species
 //
 // Rendering hierarchy of `ShaderSymbiosis` entities:
 //
@@ -192,11 +192,11 @@
 //         ^
 //       Scene
 //         ^
-//  ShaderSymbiosis > SymbiontShader
-//         ^                v
-//     Holobiont     SymbiontMaterial
-//         ^                v
-//       Biont       SymbiontSpecies
+//  ShaderSymbiosis : Symbiosis  > SymbiontShader : Shader
+//         ^                             v
+//     Holobiont : Movable        SymbiontMaterial : Material
+//         ^                             v
+//       Biont : Movable          SymbiontSpecies : Species
 //
 // TODO: implement `ShaderSymbiosis` entities!
 //
@@ -210,13 +210,13 @@
 //         ^
 //  ShaderSymbiosis
 //         ^
-//   SymbiontShader
+//   SymbiontShader : Shader
 //         ^
-//  SymbiontMaterial
+//  SymbiontMaterial : Material
 //         ^
-//  SymbiontSpecies
+//  SymbiontSpecies : Species
 //         ^
-//       Biont
+//       Biont : Movable
 //
 // TODO: implement optimized rendering hierarchy for `ShaderSymbiosis` entities!
 //

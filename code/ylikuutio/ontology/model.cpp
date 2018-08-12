@@ -1,5 +1,6 @@
 #include "model.hpp"
 #include "object.hpp"
+#include "family_templates.hpp"
 
 // Include GLEW
 #ifndef __GL_GLEW_H_INCLUDED
@@ -24,25 +25,6 @@ namespace yli
     {
         class Universe;
 
-        void Model::bind_object(yli::ontology::Object* const object)
-        {
-            // get `childID` from `Model` and set pointer to `object`.
-            yli::hierarchy::bind_child_to_parent<yli::ontology::Object*>(
-                    object,
-                    this->object_pointer_vector,
-                    this->free_objectID_queue,
-                    this->number_of_objects);
-        }
-
-        void Model::unbind_object(const std::size_t childID)
-        {
-            yli::hierarchy::unbind_child_from_parent(
-                    childID,
-                    this->object_pointer_vector,
-                    this->free_objectID_queue,
-                    this->number_of_objects);
-        }
-
         Model::~Model()
         {
             // destructor.
@@ -55,7 +37,7 @@ namespace yli
 
         std::size_t Model::get_number_of_descendants() const
         {
-            return 0; // TODO; write the code!
+            return yli::ontology::get_number_of_descendants(this->object_pointer_vector);
         }
 
         const std::vector<glm::vec3>& Model::get_vertices() const

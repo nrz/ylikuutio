@@ -13,9 +13,9 @@
 
 #pragma once
 
-#include "vector_uvec2.hpp"
-#include "vector_vec2.hpp"
-#include "vector_vec4.hpp"
+#include "./ext/vector_uint2.hpp"
+#include "./ext/vector_float2.hpp"
+#include "./ext/vector_float4.hpp"
 
 namespace glm
 {

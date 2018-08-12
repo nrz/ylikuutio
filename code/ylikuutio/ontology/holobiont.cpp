@@ -2,6 +2,7 @@
 #include "symbiosis.hpp"
 #include "biont.hpp"
 #include "render_templates.hpp"
+#include "family_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include GLM
@@ -91,16 +92,16 @@ namespace yli
         Holobiont::~Holobiont()
         {
             // destructor.
-            //
-            // always delete all `Biont`s of this `Holobiont`.
+            std::cout << "Holobiont with childID " << std::dec << this->childID << " will be destroyed.\n";
 
+            // always delete all `Biont`s of this `Holobiont`.
             std::cout << "All bionts of this holobiont will be destroyed.\n";
             yli::hierarchy::delete_children<yli::ontology::Biont*>(this->biont_pointer_vector, this->number_of_bionts);
 
             // requirements for further actions:
             // `this->symbiosis_parent` must not be `nullptr`.
 
-            ontology::Symbiosis* const symbiosis = this->symbiosis_parent;
+            yli::ontology::Symbiosis* const symbiosis = this->symbiosis_parent;
 
             if (symbiosis == nullptr)
             {
@@ -108,10 +109,8 @@ namespace yli
                 return;
             }
 
-            std::cout << "Holobiont with childID " << std::dec << this->childID << " will be destroyed.\n";
-
             // set pointer to this `Holobiont` to nullptr.
-            symbiosis->set_holobiont_pointer(this->childID, nullptr);
+            symbiosis->unbind_holobiont(this->childID);
         }
 
         void Holobiont::render()
@@ -232,7 +231,7 @@ namespace yli
 
         std::size_t Holobiont::get_number_of_descendants() const
         {
-            return 0; // TODO; write the code!
+            return yli::ontology::get_number_of_descendants(this->biont_pointer_vector);
         }
 
         void Holobiont::set_biont_pointer(const std::size_t childID, yli::ontology::Biont* const child_pointer)

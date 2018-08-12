@@ -1,4 +1,7 @@
 glmCreateTestGTC(ext_matrix_relational)
+glmCreateTestGTC(ext_quaternion_geometric)
+glmCreateTestGTC(ext_quaternion_relational)
+glmCreateTestGTC(ext_quaternion_type)
 glmCreateTestGTC(ext_scalar_relational)
 glmCreateTestGTC(ext_vec1)
 glmCreateTestGTC(ext_vector_vec1)

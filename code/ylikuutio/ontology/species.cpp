@@ -7,6 +7,7 @@
 #include "object.hpp"
 #include "species_or_glyph.hpp"
 #include "render_templates.hpp"
+#include "family_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include GLEW
@@ -23,19 +24,69 @@ namespace yli
 {
     namespace ontology
     {
+        void Species::bind_object(yli::ontology::Object* const object)
+        {
+            // get `childID` from `Species` and set pointer to `object`.
+            yli::hierarchy::bind_child_to_parent<yli::ontology::Object*>(
+                    object,
+                    this->object_pointer_vector,
+                    this->free_objectID_queue,
+                    this->number_of_objects);
+        }
+
+        void Species::unbind_object(const std::size_t childID)
+        {
+            yli::hierarchy::unbind_child_from_parent(
+                    childID,
+                    this->object_pointer_vector,
+                    this->free_objectID_queue,
+                    this->number_of_objects);
+        }
+
         void Species::bind_to_parent()
         {
+            // requirements:
+            // `this->material_parent` must not be `nullptr`.
+            yli::ontology::Material* const material = this->material_parent;
+
+            if (material == nullptr)
+            {
+                std::cerr << "ERROR: `Species::bind_to_parent`: `material` is `nullptr`!\n";
+                return;
+            }
+
             // get `childID` from `Material` and set pointer to this `Species`.
             this->material_parent->bind_species(this);
         }
 
-        void Species::bind_to_new_parent(yli::ontology::Material* const new_material_pointer)
+        void Species::bind_to_new_parent(yli::ontology::Material* const new_parent)
         {
+            // this method sets pointer to this `Species` to `nullptr`, sets `material_parent` according to the input,
+            // and requests a new `childID` from the new `Material`.
+            //
+            // requirements:
+            // `this->material_parent` must not be `nullptr`.
+            // `new_parent` must not be `nullptr`.
+
+            yli::ontology::Material* const material = this->material_parent;
+
+            if (material == nullptr)
+            {
+                std::cerr << "ERROR: `Species::bind_to_new_parent`: `material` is `nullptr`!\n";
+                return;
+            }
+
+            if (new_parent == nullptr)
+            {
+                std::cerr << "ERROR: `Species::bind_to_new_parent`: `new_parent` is `nullptr`!\n";
+                return;
+            }
+
             // unbind from the old parent `Material`.
-            this->material_parent->unbind_species(this->childID);
+            material->unbind_species(this->childID);
 
             // get `childID` from `Material` and set pointer to this `Species`.
-            this->material_parent = new_material_pointer;
+            this->material_parent = new_parent;
             this->material_parent->bind_species(this);
         }
 
@@ -56,8 +107,18 @@ namespace yli
                 glDeleteBuffers(1, &this->normalbuffer);
                 glDeleteBuffers(1, &this->elementbuffer);
 
-                // set pointer to this species to nullptr.
-                this->material_parent->set_species_pointer(this->childID, nullptr);
+                // requirements for further actions:
+                // `this->material_parent` must not be `nullptr`.
+
+                yli::ontology::Material* const material = this->material_parent;
+
+                if (material == nullptr)
+                {
+                    std::cerr << "ERROR: `Species::~Species`: `material` is `nullptr`!\n";
+                    return;
+                }
+
+                this->material_parent->unbind_species(this->childID);
             }
         }
 

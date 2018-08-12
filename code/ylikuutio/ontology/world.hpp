@@ -23,6 +23,7 @@ namespace yli
         {
             public:
                 void bind_scene(yli::ontology::Scene* const scene);
+                void unbind_scene(const std::size_t childID);
 
                 // constructor.
                 World(yli::ontology::Universe* const universe)

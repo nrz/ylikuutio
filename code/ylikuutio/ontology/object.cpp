@@ -26,53 +26,142 @@ namespace yli
 
         void Object::bind_to_parent()
         {
-            // get `childID` from `Species` or `Text3D` and set pointer to this `Object`.
-            yli::ontology::Model* glyph_parent_model = this->glyph_parent;
-            yli::ontology::Model* species_parent_model = this->species_parent;
-            yli::ontology::Model* parent_model = (this->is_character ? glyph_parent_model : species_parent_model);
-            parent_model->bind_object(this);
+            if (this->is_character)
+            {
+                // requirements for further actions in this block:
+                // `this->text3D_parent` must not be `nullptr`.
+
+                yli::ontology::Text3D* const text3D = this->text3D_parent;
+
+                if (text3D == nullptr)
+                {
+                    std::cerr << "ERROR: `Object::bind_to_parent`: `text3D` is `nullptr`!\n";
+                    return;
+                }
+
+                // get `childID` from `Text3D` and set pointer to this `Object`.
+                text3D->bind_object(this);
+            }
+            else
+            {
+                // requirements for further actions in this block:
+                // `this->species_parent` must not be `nullptr`.
+
+                yli::ontology::Species* const species = this->species_parent;
+
+                if (species == nullptr)
+                {
+                    std::cerr << "ERROR: `Object::bind_to_parent`: `species` is `nullptr`!\n";
+                    return;
+                }
+
+                // get `childID` from `Species` and set pointer to this `Object`.
+                species->bind_object(this);
+            }
         }
 
         void Object::bind_to_new_parent(void* const new_parent)
         {
             // this method sets pointer to this `Object` to nullptr, sets `parent` according to the input,
-            // and requests a new `childID` from the new `Species` or from the new `Glyph`.
-
-            yli::ontology::Model* glyph_parent_model = this->glyph_parent;
-            yli::ontology::Model* species_parent_model = this->species_parent;
-            yli::ontology::Model* parent_model = (this->is_character ? glyph_parent_model : species_parent_model);
-
-            // unbind from the old parent `Model`.
-            parent_model->unbind_object(this->childID);
+            // and requests a new `childID` from the new `Species` or from the new `Text3D`.
 
             if (this->is_character)
             {
-                this->glyph_parent = static_cast<yli::ontology::Glyph*>(new_parent);
+                // requirements for further actions in this block:
+                // `this->text3D_parent` must not be `nullptr`.
+                // `new_parent` must not be `nullptr`.
+
+                yli::ontology::Text3D* const text3D = this->text3D_parent;
+
+                if (text3D == nullptr)
+                {
+                    std::cerr << "ERROR: `Object::bind_to_new_parent`: `text3D` is `nullptr`!\n";
+                    return;
+                }
+
+                if (new_parent == nullptr)
+                {
+                    std::cerr << "ERROR: `Object::bind_to_new_parent`: `new_parent` is `nullptr`!\n";
+                    return;
+                }
+
+                // unbind from the old parent `Text3D`.
+                text3D->unbind_object(this->childID);
+
+                // get `childID` from `Text3D` and set pointer to this `Object`.
+                this->text3D_parent = static_cast<yli::ontology::Text3D*>(new_parent);
+                this->text3D_parent->bind_object(this);
             }
             else
             {
-                this->species_parent = static_cast<yli::ontology::Species*>(new_parent);
-            }
+                // requirements for further actions in this block:
+                // `this->species_parent` must not be `nullptr`.
+                // `new_parent` must not be `nullptr`.
 
-            // get `childID` from `Model` and set pointer to this `Object`.
-            parent_model->bind_object(this);
+                yli::ontology::Species* const species = this->species_parent;
+
+                if (species == nullptr)
+                {
+                    std::cerr << "ERROR: `Object::bind_to_new_parent`: `species` is `nullptr`!\n";
+                    return;
+                }
+
+                if (new_parent == nullptr)
+                {
+                    std::cerr << "ERROR: `Object::bind_to_new_parent`: `new_parent` is `nullptr`!\n";
+                    return;
+                }
+
+                // unbind from the old parent `Species`.
+                species->unbind_object(this->childID);
+
+                // get `childID` from `Species` and set pointer to this `Object`.
+                this->species_parent = static_cast<yli::ontology::Species*>(new_parent);
+                this->species_parent->bind_object(this);
+            }
         }
 
         Object::~Object()
         {
             // destructor.
+            std::cout << "Object with childID " << std::dec << this->childID << " will be destroyed.\n";
 
             // set pointer to this object to nullptr.
             if (this->is_character)
             {
-                std::string unicode_string = this->glyph_parent->get_unicode_char_pointer();
-                std::cout << "Object with childID " << std::dec << this->childID << " (Unicode: \"" << unicode_string << "\") will be destroyed.\n";
-                this->text3D_parent->set_object_pointer(this->childID, nullptr);
+                if (this->glyph != nullptr)
+                {
+                    std::string unicode_string = this->glyph->get_unicode_char_pointer();
+                    std::cout << "Object with childID " << std::dec << this->childID << " (Unicode: \"" << unicode_string << "\") will be destroyed.\n";
+                }
+
+                // requirements for further actions in this block:
+                // `this->text3D_parent` must not be `nullptr`.
+
+                yli::ontology::Text3D* text3D = this->text3D_parent;
+
+                if (text3D == nullptr)
+                {
+                    std::cerr << "ERROR: `Object::~Object`: `text3D` is `nullptr`!\n";
+                    return;
+                }
+
+                text3D->unbind_object(this->childID);
             }
             else
             {
-                std::cout << "Object with childID " << std::dec << this->childID << " will be destroyed.\n";
-                this->species_parent->set_object_pointer(this->childID, nullptr);
+                // requirements for further actions in this block:
+                // `this->species_parent` must not be `nullptr`.
+
+                yli::ontology::Species* species = this->species_parent;
+
+                if (species == nullptr)
+                {
+                    std::cerr << "ERROR: `Object::~Object`: `species` is `nullptr`!\n";
+                    return;
+                }
+
+                species->unbind_object(this->childID);
             }
         }
 
@@ -86,7 +175,7 @@ namespace yli
 
                 if (this->is_character)
                 {
-                    this->render_this_object(static_cast<yli::ontology::Shader*>(this->glyph_parent->get_parent()->get_parent()->get_parent()));
+                    this->render_this_object(static_cast<yli::ontology::Shader*>(this->glyph->get_parent()->get_parent()->get_parent()));
                 }
                 else
                 {
@@ -107,7 +196,7 @@ namespace yli
                 {
                     const std::string model_file_format = this->species_parent->get_model_file_format();
 
-                    if (model_file_format.compare("fbx") == 0 || model_file_format.compare("FBX") == 0)
+                    if (model_file_format == "fbx" || model_file_format == "FBX")
                     {
                         // Only FBX objects need initial rotation.
                         this->model_matrix = glm::rotate(this->model_matrix, this->initial_rotate_angle, this->initial_rotate_vector);
@@ -148,9 +237,9 @@ namespace yli
             glUniformMatrix4fv(shader_pointer->get_matrixID(), 1, GL_FALSE, &this->MVP_matrix[0][0]);
             glUniformMatrix4fv(shader_pointer->get_model_matrixID(), 1, GL_FALSE, &this->model_matrix[0][0]);
 
-            yli::ontology::Model* glyph_parent_model = this->glyph_parent;
+            yli::ontology::Model* glyph_model = this->glyph;
             yli::ontology::Model* species_parent_model = this->species_parent;
-            yli::ontology::Model* parent_model = (this->is_character ? glyph_parent_model : species_parent_model);
+            yli::ontology::Model* parent_model = (this->is_character ? glyph_model : species_parent_model);
             GLuint vertexbuffer = parent_model->get_vertexbuffer();
             GLuint vertex_position_modelspaceID = parent_model->get_vertex_position_modelspaceID();
             GLuint uvbuffer = parent_model->get_uvbuffer();
@@ -209,7 +298,7 @@ namespace yli
         {
             if (this->is_character)
             {
-                return this->glyph_parent;
+                return this->text3D_parent;
             }
             else
             {

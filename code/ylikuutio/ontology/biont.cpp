@@ -29,14 +29,16 @@ namespace yli
             // requirements:
             // `this->holobiont_parent` must not be `nullptr`.
 
-            if (this->holobiont_parent == nullptr)
+            yli::ontology::Holobiont* const holobiont = this->holobiont_parent;
+
+            if (holobiont == nullptr)
             {
-                std::cerr << "ERROR: `Biont::bind_to_parent`: `this->holobiont_parent` is `nullptr`!\n";
+                std::cerr << "ERROR: `Biont::bind_to_parent`: `holobiont` is `nullptr`!\n";
                 return;
             }
 
             // get `childID` from `Holobiont` and set pointer to this `Biont`.
-            this->holobiont_parent->bind_biont(this);
+            holobiont->bind_biont(this);
         }
 
         void Biont::bind_to_symbiont_species()
@@ -110,6 +112,8 @@ namespace yli
             // `this->holobiont_parent` must not be `nullptr`.
             // `this->symbiont_species` must not be `nullptr`.
 
+            std::cout << "Biont with childID " << std::dec << this->childID << " will be destroyed.\n";
+
             yli::ontology::Holobiont* const holobiont = this->holobiont_parent;
 
             if (holobiont == nullptr)
@@ -126,11 +130,9 @@ namespace yli
                 return;
             }
 
-            std::cout << "Biont with childID " << std::dec << this->childID << " will be destroyed.\n";
-
-            // set pointer to this biont to nullptr.
+            // set pointer to this `Biont` to `nullptr`.
             symbiont_species->unbind_biont(this->childID);
-            holobiont->set_biont_pointer(this->childID, nullptr);
+            holobiont->unbind_biont(this->childID);
         }
 
         void Biont::render()
@@ -217,7 +219,7 @@ namespace yli
 
                 const std::string model_file_format = symbiosis->get_model_file_format();
 
-                if (model_file_format.compare("fbx") == 0 || model_file_format.compare("FBX") == 0)
+                if (model_file_format == "fbx" || model_file_format == "FBX")
                 {
                     // Only FBX bionts need initial rotation.
                     this->model_matrix = glm::rotate(this->model_matrix, this->initial_rotate_angle, this->initial_rotate_vector);

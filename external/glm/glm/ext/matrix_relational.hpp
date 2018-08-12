@@ -13,7 +13,6 @@
 #pragma once
 
 // Dependencies
-#include "../detail/setup.hpp"
 #include "../detail/qualifier.hpp"
 
 #if GLM_MESSAGES == GLM_ENABLE && !defined(GLM_EXT_INCLUDED)
@@ -35,7 +34,7 @@ namespace glm
 	///
 	/// @see ext_matrix_relational
 	template<length_t C, length_t R, typename T, qualifier Q>
-	GLM_FUNC_DECL vec<C, bool, Q> equal(mat<C, R, T, Q> const& x, mat<C, R, T, Q> const& y);
+	GLM_FUNC_DECL GLM_CONSTEXPR vec<C, bool, Q> equal(mat<C, R, T, Q> const& x, mat<C, R, T, Q> const& y);
 
 	/// Returns the component-wise comparison of |x - y| < epsilon.
 	/// True if this expression is satisfied.
@@ -47,7 +46,7 @@ namespace glm
 	///
 	/// @see ext_matrix_relational
 	template<length_t C, length_t R, typename T, qualifier Q>
-	GLM_FUNC_DECL vec<C, bool, Q> equal(mat<C, R, T, Q> const& x, mat<C, R, T, Q> const& y, T epsilon);
+	GLM_FUNC_DECL GLM_CONSTEXPR vec<C, bool, Q> equal(mat<C, R, T, Q> const& x, mat<C, R, T, Q> const& y, T epsilon);
 
 	/// Returns the component-wise comparison of |x - y| < epsilon.
 	/// True if this expression is satisfied.
@@ -59,7 +58,7 @@ namespace glm
 	///
 	/// @see ext_matrix_relational
 	template<length_t C, length_t R, typename T, qualifier Q>
-	GLM_FUNC_DECL vec<C, bool, Q> equal(mat<C, R, T, Q> const& x, mat<C, R, T, Q> const& y, vec<C, T, Q> const& epsilon);
+	GLM_FUNC_DECL GLM_CONSTEXPR vec<C, bool, Q> equal(mat<C, R, T, Q> const& x, mat<C, R, T, Q> const& y, vec<C, T, Q> const& epsilon);
 
 	/// Perform a component-wise not-equal-to comparison of two matrices.
 	/// Return a boolean vector which components value is True if this expression is satisfied per column of the matrices.
@@ -71,7 +70,7 @@ namespace glm
 	///
 	/// @see ext_matrix_relational
 	template<length_t C, length_t R, typename T, qualifier Q>
-	GLM_FUNC_DECL vec<C, bool, Q> notEqual(mat<C, R, T, Q> const& x, mat<C, R, T, Q> const& y);
+	GLM_FUNC_DECL GLM_CONSTEXPR vec<C, bool, Q> notEqual(mat<C, R, T, Q> const& x, mat<C, R, T, Q> const& y);
 
 	/// Returns the component-wise comparison of |x - y| < epsilon.
 	/// True if this expression is not satisfied.
@@ -83,7 +82,7 @@ namespace glm
 	///
 	/// @see ext_matrix_relational
 	template<length_t C, length_t R, typename T, qualifier Q>
-	GLM_FUNC_DECL vec<C, bool, Q> notEqual(mat<C, R, T, Q> const& x, mat<C, R, T, Q> const& y, T epsilon);
+	GLM_FUNC_DECL GLM_CONSTEXPR vec<C, bool, Q> notEqual(mat<C, R, T, Q> const& x, mat<C, R, T, Q> const& y, T epsilon);
 
 	/// Returns the component-wise comparison of |x - y| >= epsilon.
 	/// True if this expression is not satisfied.
@@ -95,7 +94,7 @@ namespace glm
 	///
 	/// @see ext_vector_relational
 	template<length_t C, length_t R, typename T, qualifier Q>
-	GLM_FUNC_DECL vec<C, bool, Q> notEqual(mat<C, R, T, Q> const& x, mat<C, R, T, Q> const& y, vec<C, T, Q> const& epsilon);
+	GLM_FUNC_DECL GLM_CONSTEXPR vec<C, bool, Q> notEqual(mat<C, R, T, Q> const& x, mat<C, R, T, Q> const& y, vec<C, T, Q> const& epsilon);
 
 	/// @}
 }//namespace glm

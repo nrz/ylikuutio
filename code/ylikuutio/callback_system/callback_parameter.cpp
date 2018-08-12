@@ -14,8 +14,18 @@ namespace yli
     {
         void CallbackParameter::bind_to_parent()
         {
+            // requirements:
+            // `this->parent` must not be `nullptr`.
+            yli::callback_system::CallbackObject* const callback_object = this->parent;
+
+            if (callback_object == nullptr)
+            {
+                std::cerr << "ERROR: `CallbackParameter::bind_to_parent`: `callback_object` is `nullptr`!\n";
+                return;
+            }
+
             // note: `CallbackObject::bind_callback_parameter` also stores named variables in its `anyvalue_hashmap`.
-            this->parent->bind_callback_parameter(this);
+            callback_object->bind_callback_parameter(this);
         }
 
         CallbackParameter::CallbackParameter(const std::string& name, std::shared_ptr<yli::datatypes::AnyValue> any_value, const bool is_reference, yli::callback_system::CallbackObject* const parent)
@@ -33,10 +43,22 @@ namespace yli
         CallbackParameter::~CallbackParameter()
         {
             // destructor.
+            //
+            // requirements:
+            // `this->parent` must not be `nullptr`.
+
             std::cout << "Callback parameter with childID " << this->childID << " will be destroyed.\n";
 
-            // set pointer to this object to nullptr.
-            this->parent->set_callback_parameter_pointer(this->childID, nullptr);
+            yli::callback_system::CallbackObject* const callback_object = this->parent;
+
+            if (callback_object == nullptr)
+            {
+                std::cerr << "ERROR: `CallbackParameter::~CallbackParameter`: `callback_object` is `nullptr`!\n";
+                return;
+            }
+
+            // set pointer to this `CallbackParameter` to `nullptr`.
+            callback_object->set_callback_parameter_pointer(this->childID, nullptr);
         }
 
         std::shared_ptr<yli::datatypes::AnyValue> CallbackParameter::get_any_value() const

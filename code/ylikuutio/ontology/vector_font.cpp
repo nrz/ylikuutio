@@ -1,6 +1,7 @@
 #include "vector_font.hpp"
 #include "text3D.hpp"
 #include "render_templates.hpp"
+#include "family_templates.hpp"
 #include "vector_font_struct.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
@@ -48,6 +49,15 @@ namespace yli
                     this->number_of_text3Ds);
         }
 
+        void VectorFont::unbind_text3D(const std::size_t childID)
+        {
+            yli::hierarchy::unbind_child_from_parent<yli::ontology::Text3D*>(
+                    childID,
+                    this->text3D_pointer_vector,
+                    this->free_text3D_ID_queue,
+                    this->number_of_text3Ds);
+        }
+
         void VectorFont::bind_to_new_parent(yli::ontology::Material* const new_material_pointer)
         {
             // unbind from the old parent `Material`.
@@ -60,8 +70,18 @@ namespace yli
 
         void VectorFont::bind_to_parent()
         {
-            // get `childID` from `Material` and set pointer to this `VectorFont`.
-            this->parent->bind_vector_font(this);
+            // requirements:
+            // `this->parent` must not be `nullptr`.
+            yli::ontology::Material* const material = this->parent;
+
+            if (material == nullptr)
+            {
+                std::cerr << "ERROR: `VectorFont::bind_to_parent`: `material` is `nullptr`!\n";
+                return;
+            }
+
+            // get `childID` from the `Material` and set pointer to this `VectorFont`.
+            material->bind_vector_font(this);
         }
 
         // this method returns a pointer to `Glyph` that matches the given `unicode_value`,
@@ -117,7 +137,8 @@ namespace yli
 
         std::size_t VectorFont::get_number_of_descendants() const
         {
-            return 0; // TODO; write the code!
+            return yli::ontology::get_number_of_descendants(this->glyph_pointer_vector) +
+                yli::ontology::get_number_of_descendants(this->text3D_pointer_vector);
         }
 
         void VectorFont::set_glyph_pointer(const std::size_t childID, yli::ontology::Glyph* const child_pointer)

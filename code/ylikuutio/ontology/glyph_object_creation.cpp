@@ -35,7 +35,7 @@ namespace yli
                 std::cout << "Creating the glyph Object for unicode_value 0x" << std::hex << unicode_value << std::dec << "\n";
 
                 ObjectStruct object_struct;
-                object_struct.glyph_parent = glyph_pointer;
+                object_struct.glyph = glyph_pointer;
                 object_struct.text3D_parent = text3D;
                 object_struct.original_scale_vector = text3D->original_scale_vector;
                 object_struct.rotate_angle = text3D->rotate_angle;

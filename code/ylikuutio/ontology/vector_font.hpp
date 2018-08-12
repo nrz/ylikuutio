@@ -1,5 +1,5 @@
-#ifndef __FONT_HPP_INCLUDED
-#define __FONT_HPP_INCLUDED
+#ifndef __VECTOR_FONT_HPP_INCLUDED
+#define __VECTOR_FONT_HPP_INCLUDED
 
 #include "entity.hpp"
 #include "glyph.hpp"
@@ -7,6 +7,7 @@
 #include "glyph_struct.hpp"
 #include "vector_font_struct.hpp"
 #include "render_templates.hpp"
+#include "family_templates.hpp"
 #include "code/ylikuutio/loaders/font_loader.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
@@ -34,6 +35,8 @@ namespace yli
             public:
                 void bind_glyph(yli::ontology::Glyph* const glyph);
                 void bind_text3D(yli::ontology::Text3D* const text3D);
+
+                void unbind_text3D(const std::size_t childID);
 
                 // this method sets pointer to this species to nullptr, sets `parent` according to the input, and requests a new `childID` from the new material.
                 void bind_to_new_parent(yli::ontology::Material* const new_material_pointer);
@@ -97,7 +100,16 @@ namespace yli
                             glyph_struct.glyph_name_pointer = this->glyph_names.at(glyph_i).c_str();
                             glyph_struct.unicode_char_pointer = unicode_char_pointer;
                             glyph_struct.universe = universe;
-                            glyph_struct.shader_pointer = static_cast<yli::ontology::Shader*>(this->parent->get_parent());
+
+                            if (this->parent != nullptr)
+                            {
+                                glyph_struct.shader_pointer = static_cast<yli::ontology::Shader*>(this->parent->get_parent());
+                            }
+                            else
+                            {
+                                glyph_struct.shader_pointer = nullptr;
+                            }
+
                             glyph_struct.parent = this;
 
                             std::string glyph_name_string = glyph_struct.glyph_name_pointer;
@@ -139,7 +151,9 @@ namespace yli
                 template<class T1>
                     friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
                 template<class T1>
-                    friend void render_children(const std::vector<T1>& child_pointer_vector);
+                    friend std::size_t yli::ontology::get_number_of_descendants(const std::vector<T1>& child_pointer_vector);
+                template<class T1>
+                    friend void yli::ontology::render_children(const std::vector<T1>& child_pointer_vector);
 
             private:
                 void bind_to_parent();
