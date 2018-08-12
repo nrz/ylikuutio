@@ -25,9 +25,18 @@ namespace yli
         Chunk::~Chunk()
         {
             // destructor.
+            //
+            // requirements:
+            // `this->parent` must not be `nullptr`.
+            yli::ontology::ChunkMaster* const chunk_master = this->parent;
 
-            // set pointer to this `Chunk` to nullptr.
-            this->parent->set_chunk_pointer(this->childID, nullptr);
+            if (chunk_master == nullptr)
+            {
+                std::cerr << "ERROR: `Chunk::~Chunk`: `chunk_master` is `nullptr`!\n";
+                return;
+            }
+
+            chunk_master->unbind_chunk(this->childID);
         }
 
         void Chunk::render()
