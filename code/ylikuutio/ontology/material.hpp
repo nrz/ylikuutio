@@ -60,8 +60,6 @@ namespace yli
 
                     this->is_symbiont_material = material_struct.is_symbiont_material;
 
-                    this->terrain_species = nullptr;
-
                     this->texture_file_format = material_struct.texture_file_format;
                     this->texture_filename    = material_struct.texture_filename;
 
@@ -124,9 +122,6 @@ namespace yli
                 // this method sets `ChunkMaster` pointer.
                 void set_chunk_master_pointer(const std::size_t childID, yli::ontology::ChunkMaster* const child_pointer);
 
-                // this method sets a terrain `Species` pointer.
-                void set_terrain_species(yli::ontology::Species* const terrain_species);
-
                 template<class T1>
                     friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
                 template <class T1>
@@ -148,8 +143,6 @@ namespace yli
                 yli::ontology::Shader* parent;      // pointer to `Shader`.
 
                 bool is_symbiont_material;
-
-                yli::ontology::Species* terrain_species;    // pointer to terrain `Species` (used in collision detection).
 
                 GLuint texture;                        // Texture of this `Material`, returned by `load_BMP_texture` or `load_DDS_texture` (used for `glGenTextures` etc.).
                 GLuint openGL_textureID;               // texture ID, returned by `glGetUniformLocation(programID, "myTextureSampler");`.

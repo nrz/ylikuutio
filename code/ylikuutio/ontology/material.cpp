@@ -215,11 +215,5 @@ namespace yli
             this->parent = new_parent;
             this->parent->bind_material(this);
         }
-
-        void Material::set_terrain_species(yli::ontology::Species* const terrain_species)
-        {
-            this->terrain_species = terrain_species;
-            this->parent->set_terrain_species(this->terrain_species);
-        }
     }
 }
