@@ -101,7 +101,7 @@ namespace yli
             // requirements for further actions:
             // `this->symbiosis_parent` must not be `nullptr`.
 
-            ontology::Symbiosis* const symbiosis = this->symbiosis_parent;
+            yli::ontology::Symbiosis* const symbiosis = this->symbiosis_parent;
 
             if (symbiosis == nullptr)
             {
