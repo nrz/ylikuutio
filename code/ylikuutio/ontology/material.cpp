@@ -123,8 +123,19 @@ namespace yli
 
                 glDeleteTextures(1, &this->texture);
 
-                // set pointer to this material to nullptr.
-                this->parent->set_material_pointer(this->childID, nullptr);
+                // requirements for further actions:
+                // `this->parent` must not be `nullptr`.
+
+                yli::ontology::Shader* const shader = this->parent;
+
+                // set pointer to this `Material` to `nullptr`.
+                if (shader == nullptr)
+                {
+                    std::cerr << "ERROR: `Material::~Material`: `shader` is `nullptr`!\n";
+                    return;
+                }
+
+                shader->unbind_material(this->childID);
             }
         }
 
