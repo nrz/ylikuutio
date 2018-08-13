@@ -132,8 +132,19 @@ namespace yli
             std::cout << "All glyphs of this font will be destroyed.\n";
             yli::hierarchy::delete_children<yli::ontology::Glyph*>(this->glyph_pointer_vector, this->number_of_glyphs);
 
+            // requirements for further actions:
+            // `this->parent` must not be `nullptr`.
+
+            yli::ontology::Material* const material = this->parent;
+
+            if (material == nullptr)
+            {
+                std::cerr << "ERROR: `VectorFont::~VectorFont`: `material` is `nullptr`!\n";
+                return;
+            }
+
             // set pointer to this `VectorFont` to nullptr.
-            this->parent->unbind_vector_font(this->childID);
+            material->unbind_vector_font(this->childID);
         }
 
         void VectorFont::render()
