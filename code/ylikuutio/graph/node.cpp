@@ -65,8 +65,19 @@ namespace yli
                 this->delete_bidirectional_link(this->neighbor_nodeIDs[link_i]);
             }
 
-            // set pointer to this node to nullptr.
-            this->parent->unbind_node(this->childID);
+            // requirements for further actions:
+            // `this->parent` must not be `nullptr`.
+
+            yli::graph::Graph* const graph = this->parent;
+
+            if (graph == nullptr)
+            {
+                std::cerr << "ERROR: `Node::~Node`: `graph` is `nullptr`!\n";
+                return;
+            }
+
+            // set pointer to this `Node` to `nullptr`.
+            graph->unbind_node(this->childID);
         }
 
         void Node::create_unidirectional_link(std::size_t nodeID)
