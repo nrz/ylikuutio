@@ -41,11 +41,6 @@ namespace yli
             this->number_of_nodes = 0;
         }
 
-        void Graph::set_node_pointer(std::size_t childID, yli::graph::Node* child_pointer)
-        {
-            yli::hierarchy::set_child_pointer(childID, child_pointer, this->node_pointer_vector, this->free_nodeID_queue, this->number_of_nodes);
-        }
-
         yli::graph::Node* Graph::get_node_pointer(std::size_t childID)
         {
             return this->node_pointer_vector[childID];

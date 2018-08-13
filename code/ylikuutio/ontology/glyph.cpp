@@ -77,11 +77,6 @@ namespace yli
             }
         }
 
-        void Glyph::set_object_pointer(const std::size_t childID, yli::ontology::Object* const child_pointer)
-        {
-            yli::hierarchy::set_child_pointer(childID, child_pointer, this->object_pointer_vector, this->free_objectID_queue, this->number_of_objects);
-        }
-
         const char* Glyph::get_unicode_char_pointer()
         {
             return this->unicode_char_pointer;

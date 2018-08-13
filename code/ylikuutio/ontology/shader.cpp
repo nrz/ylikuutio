@@ -173,16 +173,6 @@ namespace yli
                 yli::ontology::get_number_of_descendants(this->symbiosis_pointer_vector);
         }
 
-        void Shader::set_material_pointer(const std::size_t childID, yli::ontology::Material* const child_pointer)
-        {
-            yli::hierarchy::set_child_pointer(childID, child_pointer, this->material_pointer_vector, this->free_materialID_queue, this->number_of_materials);
-        }
-
-        void Shader::set_symbiosis_pointer(const std::size_t childID, yli::ontology::Symbiosis* const child_pointer)
-        {
-            yli::hierarchy::set_child_pointer(childID, child_pointer, this->symbiosis_pointer_vector, this->free_symbiosisID_queue, this->number_of_symbioses);
-        }
-
         GLuint Shader::get_programID() const
         {
             return this->programID;

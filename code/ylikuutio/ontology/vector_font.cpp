@@ -177,10 +177,5 @@ namespace yli
         {
             yli::hierarchy::set_child_pointer(childID, child_pointer, this->glyph_pointer_vector, this->free_glyphID_queue, this->number_of_glyphs);
         }
-
-        void VectorFont::set_text3D_pointer(const std::size_t childID, yli::ontology::Text3D* const child_pointer)
-        {
-            yli::hierarchy::set_child_pointer(childID, child_pointer, this->text3D_pointer_vector, this->free_text3D_ID_queue, this->number_of_text3Ds);
-        }
     }
 }

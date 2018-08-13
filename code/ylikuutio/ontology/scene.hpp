@@ -92,12 +92,6 @@ namespace yli
 
                 float get_water_level() const;
 
-                // this method sets a `Shader` pointer.
-                void set_shader_pointer(const std::size_t childID, yli::ontology::Shader* const child_pointer);
-
-                // this method sets a `Camera` pointer.
-                void set_camera_pointer(const std::size_t childID, yli::ontology::Camera* const child_pointer);
-
                 template<class T1>
                     friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
                 template<class T1>
@@ -109,9 +103,6 @@ namespace yli
                 yli::ontology::Entity* get_parent() const override;
                 std::size_t get_number_of_children() const override;
                 std::size_t get_number_of_descendants() const override;
-
-                // this method sets a `Symbiosis` pointer.
-                void set_symbiosis_pointer(const std::size_t childID, yli::ontology::Symbiosis* const child_pointer);
 
                 yli::ontology::World* parent;   // pointer to the `World`.
 

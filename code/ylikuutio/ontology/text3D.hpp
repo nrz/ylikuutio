@@ -88,9 +88,6 @@ namespace yli
                 std::size_t get_number_of_children() const override;
                 std::size_t get_number_of_descendants() const override;
 
-                // this method sets a object pointer.
-                void set_object_pointer(const std::size_t childID, yli::ontology::Object* const child_pointer);
-
                 friend class Object;
                 friend void create_glyph_objects(const std::string& text_string, yli::ontology::Text3D* text3D);
                 template<class T1>

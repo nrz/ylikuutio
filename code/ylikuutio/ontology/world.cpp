@@ -117,10 +117,5 @@ namespace yli
         {
             return yli::ontology::get_number_of_descendants(this->scene_pointer_vector);
         }
-
-        void World::set_scene_pointer(const std::size_t childID, yli::ontology::Scene* const child_pointer)
-        {
-            yli::hierarchy::set_child_pointer(childID, child_pointer, this->scene_pointer_vector, this->free_sceneID_queue, this->number_of_scenes);
-        }
     }
 }

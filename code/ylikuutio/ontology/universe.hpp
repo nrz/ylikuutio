@@ -393,9 +393,6 @@ namespace yli
                 float get_planet_radius() const;
                 void set_planet_radius(float planet_radius);
 
-                // this method sets a `World` pointer.
-                void set_world_pointer(std::size_t childID, yli::ontology::World* child_pointer);
-
                 // this method returns a terrain `Species` pointer.
                 yli::ontology::Species* get_terrain_species();
 

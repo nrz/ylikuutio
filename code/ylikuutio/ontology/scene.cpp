@@ -233,15 +233,5 @@ namespace yli
         {
             return this->water_level;
         }
-
-        void Scene::set_shader_pointer(const std::size_t childID, yli::ontology::Shader* const child_pointer)
-        {
-            yli::hierarchy::set_child_pointer(childID, child_pointer, this->shader_pointer_vector, this->free_shaderID_queue, this->number_of_shaders);
-        }
-
-        void Scene::set_camera_pointer(const std::size_t childID, yli::ontology::Camera* const child_pointer)
-        {
-            yli::hierarchy::set_child_pointer(childID, child_pointer, this->camera_pointer_vector, this->free_cameraID_queue, this->number_of_cameras);
-        }
     }
 }

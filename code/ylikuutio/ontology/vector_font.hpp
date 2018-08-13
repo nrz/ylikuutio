@@ -138,9 +138,6 @@ namespace yli
                 // this method sets `Glyph` pointer.
                 void set_glyph_pointer(const std::size_t childID, yli::ontology::Glyph* const child_pointer);
 
-                // this method sets `Text3D` pointer.
-                void set_text3D_pointer(const std::size_t childID, yli::ontology::Text3D* const child_pointer);
-
                 // this method returns a pointer to `Glyph` that matches the given `unicode_value`,
                 // and `nullptr` if this `VectorFont` does not contain such a `Glyph`.
                 yli::ontology::Glyph* get_glyph_pointer(const int32_t unicode_value) const;

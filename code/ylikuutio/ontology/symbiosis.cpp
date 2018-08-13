@@ -187,26 +187,6 @@ namespace yli
             return this->model_file_format;
         }
 
-        void Symbiosis::set_symbiont_material_pointer(const std::size_t childID, yli::ontology::SymbiontMaterial* const child_pointer)
-        {
-            yli::hierarchy::set_child_pointer(
-                    childID,
-                    child_pointer,
-                    this->symbiont_material_pointer_vector,
-                    this->free_symbiont_materialID_queue,
-                    this->number_of_symbiont_materials);
-        }
-
-        void Symbiosis::set_holobiont_pointer(const std::size_t childID, yli::ontology::Holobiont* const child_pointer)
-        {
-            yli::hierarchy::set_child_pointer(
-                    childID,
-                    child_pointer,
-                    this->holobiont_pointer_vector,
-                    this->free_holobiontID_queue,
-                    this->number_of_holobionts);
-        }
-
         void Symbiosis::create_symbionts()
         {
             SymbiosisLoaderStruct symbiosis_loader_struct;

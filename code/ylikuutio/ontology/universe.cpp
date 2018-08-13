@@ -510,11 +510,6 @@ namespace yli
             this->planet_radius = planet_radius;
         }
 
-        void Universe::set_world_pointer(std::size_t childID, yli::ontology::World* child_pointer)
-        {
-            yli::hierarchy::set_child_pointer(childID, child_pointer, this->world_pointer_vector, this->free_worldID_queue, this->number_of_worlds);
-        }
-
         yli::ontology::Species* Universe::get_terrain_species()
         {
             return static_cast<yli::ontology::Species*>(this->terrain_species);

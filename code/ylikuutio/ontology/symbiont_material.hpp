@@ -66,9 +66,6 @@ namespace yli
                     this->type = "yli::ontology::SymbiontMaterial*";
                 }
 
-                // this method sets `SymbiontSpecies` pointer.
-                void set_symbiont_species_pointer(const std::size_t childID, yli::ontology::SymbiontSpecies* const child_pointer);
-
                 GLuint get_texture() const;
                 GLuint get_openGL_textureID() const;
 
