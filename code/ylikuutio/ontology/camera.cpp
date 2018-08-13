@@ -55,7 +55,7 @@ namespace yli
             }
 
             // set pointer to this `Camera` to `nullptr`.
-            this->parent->set_camera_pointer(this->childID, nullptr);
+            this->parent->unbind_camera(this->childID);
         }
 
         yli::ontology::Entity* Camera::get_parent() const
