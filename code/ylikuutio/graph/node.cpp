@@ -1,4 +1,5 @@
 #include "node.hpp"
+#include "graph.hpp"
 #include "node_struct.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
