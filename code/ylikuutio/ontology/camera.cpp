@@ -33,6 +33,7 @@
 // Include standard headers
 #include <cmath>    // NAN, std::isnan, std::pow
 #include <cstddef>  // std::size_t
+#include <iostream> // std::cout, std::cin, std::cerr
 
 namespace yli
 {
@@ -40,8 +41,18 @@ namespace yli
     {
         void Camera::bind_to_parent()
         {
+            // requirements:
+            // `this->parent` must not be `nullptr`.
+            yli::ontology::Scene* const scene = this->parent;
+
+            if (scene == nullptr)
+            {
+                std::cerr << "ERROR: `Camera::bind_to_parent`: `scene` is `nullptr`!\n";
+                return;
+            }
+
             // get `childID` from `Scene` and set pointer to this `Camera`.
-            this->parent->bind_camera(this);
+            scene->bind_camera(this);
         }
 
         Camera::~Camera()
