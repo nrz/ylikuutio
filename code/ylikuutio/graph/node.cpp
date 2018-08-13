@@ -54,7 +54,7 @@ namespace yli
             }
 
             // set pointer to this node to nullptr.
-            this->parent->set_node_pointer(this->childID, nullptr);
+            this->parent->unbind_node(this->childID);
         }
 
         void Node::create_unidirectional_link(std::size_t nodeID)
