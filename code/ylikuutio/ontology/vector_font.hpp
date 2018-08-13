@@ -62,6 +62,11 @@ namespace yli
                     // get `childID` from `Material` and set pointer to this `VectorFont`.
                     this->bind_to_parent();
 
+                    this->child_vector_pointers_vector.push_back(&this->glyph_pointer_vector);
+                    this->child_vector_pointers_vector.push_back(&this->text3D_pointer_vector);
+                    this->type = "yli::ontology::VectorFont*";
+
+                    this->can_be_erased = true;
                     bool font_loading_result = false;
 
                     if ((std::strcmp(this->char_font_file_format, "svg") == 0) || (std::strcmp(this->char_font_file_format, "SVG") == 0))
@@ -74,6 +79,17 @@ namespace yli
                                 this->glyph_names,
                                 this->unicode_strings,
                                 is_debug_mode);
+                    }
+
+                    // requirements for further actions:
+                    // `this->parent` must not be `nullptr`.
+
+                    yli::ontology::Material* const material = this->parent;
+
+                    if (material == nullptr)
+                    {
+                        std::cerr << "ERROR: `VectorFont::VectorFont`: `material` is `nullptr`!\n";
+                        return;
                     }
 
                     if (font_loading_result)
@@ -101,16 +117,7 @@ namespace yli
                             glyph_struct.glyph_name_pointer = this->glyph_names.at(glyph_i).c_str();
                             glyph_struct.unicode_char_pointer = unicode_char_pointer;
                             glyph_struct.universe = universe;
-
-                            if (this->parent != nullptr)
-                            {
-                                glyph_struct.shader_pointer = static_cast<yli::ontology::Shader*>(this->parent->get_parent());
-                            }
-                            else
-                            {
-                                glyph_struct.shader_pointer = nullptr;
-                            }
-
+                            glyph_struct.shader_pointer = static_cast<yli::ontology::Shader*>(material->get_parent());
                             glyph_struct.parent = this;
 
                             std::string glyph_name_string = glyph_struct.glyph_name_pointer;
@@ -123,12 +130,6 @@ namespace yli
                             this->unicode_glyph_map[unicode_value] = glyph;
                         }
                     }
-
-                    this->child_vector_pointers_vector.push_back(&this->glyph_pointer_vector);
-                    this->child_vector_pointers_vector.push_back(&this->text3D_pointer_vector);
-                    this->type = "yli::ontology::VectorFont*";
-
-                    this->can_be_erased = true;
                 }
 
                 // destructor.
