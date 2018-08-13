@@ -20,7 +20,7 @@ namespace yli
 
             if (graph == nullptr)
             {
-                std::cerr << "ERROR: `Node::bind_to_new_parent`: `graph` is `nullptr`!\n";
+                std::cerr << "ERROR: `Node::bind_to_parent`: `graph` is `nullptr`!\n";
                 return;
             }
 
