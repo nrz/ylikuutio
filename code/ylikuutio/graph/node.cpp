@@ -32,8 +32,19 @@ namespace yli
             this->childID = node_struct.nodeID;
             this->parent = node_struct.parent;
 
-            // set pointer to this node.
-            this->parent->bind_node(this);
+            // requirements for further actions:
+            // `this->parent` must not be `nullptr`.
+
+            yli::graph::Graph* const graph = this->parent;
+
+            if (graph == nullptr)
+            {
+                std::cerr << "ERROR: `Node::Node`: `graph` is `nullptr`!\n";
+                return;
+            }
+
+            // set pointer to this `Node`.
+            graph->bind_node(this);
 
             // create all bidirectional links between this node and neighbor nodes.
             for (std::size_t link_i = 0; link_i < this->neighbor_nodeIDs.size(); link_i++)
