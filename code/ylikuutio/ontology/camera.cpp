@@ -58,15 +58,25 @@ namespace yli
         Camera::~Camera()
         {
             // destructor.
+            //
+            // requirements:
+            // `this->parent` must not be `nullptr`.
+            yli::ontology::Scene* const scene = this->parent;
 
-            if (this->parent->get_active_camera() == this)
+            if (scene == nullptr)
+            {
+                std::cerr << "ERROR: `Camera::~Camera`: `scene` is `nullptr`!\n";
+                return;
+            }
+
+            if (scene->get_active_camera() == this)
             {
                 // Make this `Camera` no more the active `Camera`.
-                this->parent->set_active_camera(nullptr);
+                scene->set_active_camera(nullptr);
             }
 
             // set pointer to this `Camera` to `nullptr`.
-            this->parent->unbind_camera(this->childID);
+            scene->unbind_camera(this->childID);
         }
 
         yli::ontology::Entity* Camera::get_parent() const
