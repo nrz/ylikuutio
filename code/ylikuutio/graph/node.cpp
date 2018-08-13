@@ -98,11 +98,22 @@ namespace yli
 
         void Node::create_bidirectional_link(std::size_t nodeID)
         {
+            // requirements:
+            // `this->parent` must not be `nullptr`.
+
+            yli::graph::Graph* const graph = this->parent;
+
+            if (graph == nullptr)
+            {
+                std::cerr << "ERROR: `Node::create_bidirectional_link`: `graph` is `nullptr`!\n";
+                return;
+            }
+
             // create a link from this node to destination node.
             this->create_unidirectional_link(nodeID);
 
             // create a link from destination node to this node.
-            static_cast<yli::graph::Node*>(this->parent->get_node_pointer(childID))->create_unidirectional_link(this->childID);
+            static_cast<yli::graph::Node*>(graph->get_node_pointer(childID))->create_unidirectional_link(this->childID);
         }
 
         void Node::delete_unidirectional_link(std::size_t nodeID)
