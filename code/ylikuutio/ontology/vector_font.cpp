@@ -58,6 +58,22 @@ namespace yli
                     this->number_of_text3Ds);
         }
 
+        void VectorFont::bind_to_parent()
+        {
+            // requirements:
+            // `this->parent` must not be `nullptr`.
+            yli::ontology::Material* const material = this->parent;
+
+            if (material == nullptr)
+            {
+                std::cerr << "ERROR: `VectorFont::bind_to_parent`: `material` is `nullptr`!\n";
+                return;
+            }
+
+            // get `childID` from the `Material` and set pointer to this `VectorFont`.
+            material->bind_vector_font(this);
+        }
+
         void VectorFont::bind_to_new_parent(yli::ontology::Material* const new_parent)
         {
             // this method sets pointer to this `Species` to `nullptr`, sets `parent` according to the input,
@@ -87,22 +103,6 @@ namespace yli
             // get `childID` from `Material` and set pointer to this `VectorFont`.
             this->parent = new_parent;
             this->parent->bind_vector_font(this);
-        }
-
-        void VectorFont::bind_to_parent()
-        {
-            // requirements:
-            // `this->parent` must not be `nullptr`.
-            yli::ontology::Material* const material = this->parent;
-
-            if (material == nullptr)
-            {
-                std::cerr << "ERROR: `VectorFont::bind_to_parent`: `material` is `nullptr`!\n";
-                return;
-            }
-
-            // get `childID` from the `Material` and set pointer to this `VectorFont`.
-            material->bind_vector_font(this);
         }
 
         // this method returns a pointer to `Glyph` that matches the given `unicode_value`,
