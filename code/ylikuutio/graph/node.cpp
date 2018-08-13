@@ -124,11 +124,22 @@ namespace yli
 
         void Node::delete_bidirectional_link(std::size_t nodeID)
         {
+            // requirements:
+            // `this->parent` must not be `nullptr`.
+
+            yli::graph::Graph* const graph = this->parent;
+
+            if (graph == nullptr)
+            {
+                std::cerr << "ERROR: `Node::delete_bidirectional_link`: `graph` is `nullptr`!\n";
+                return;
+            }
+
             // this method deletes a bidirectional link.
             this->delete_unidirectional_link(nodeID);
 
             // delete a link from destination node to this node.
-            static_cast<yli::graph::Node*>(this->parent->get_node_pointer(childID))->delete_unidirectional_link(this->childID);
+            static_cast<yli::graph::Node*>(graph->get_node_pointer(childID))->delete_unidirectional_link(this->childID);
         }
 
         // Transfering a `Node` to a new `Graph` is similar to `bind_to_new_parent`, but there is one important difference:
