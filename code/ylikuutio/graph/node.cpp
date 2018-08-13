@@ -33,7 +33,7 @@ namespace yli
             this->parent = node_struct.parent;
 
             // set pointer to this node.
-            this->parent->set_node_pointer(this->childID, this);
+            this->parent->bind_node(this);
 
             // create all bidirectional links between this node and neighbor nodes.
             for (std::size_t link_i = 0; link_i < this->neighbor_nodeIDs.size(); link_i++)
