@@ -34,9 +34,6 @@ namespace yli
                 friend class Node;
 
             private:
-                // this method sets a node pointer.
-                void set_node_pointer(std::size_t nodeID, yli::graph::Node* child_pointer);
-
                 // this method gets a node pointer.
                 yli::graph::Node* get_node_pointer(std::size_t nodeID);
 

@@ -153,9 +153,6 @@ namespace yli
 
                 yli::ontology::Entity* get_parent() const override;
 
-                // this method sets an `Object` pointer.
-                void set_object_pointer(const std::size_t childID, yli::ontology::Object* const child_pointer);
-
                 std::size_t get_image_width() const;
                 std::size_t get_image_height() const;
 

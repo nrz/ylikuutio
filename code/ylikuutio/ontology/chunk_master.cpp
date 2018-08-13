@@ -35,8 +35,18 @@ namespace yli
 
         void ChunkMaster::bind_to_parent()
         {
+            // requirements:
+            // `this->parent` must not be `nullptr`.
+            yli::ontology::Material* const material = this->parent;
+
+            if (material == nullptr)
+            {
+                std::cerr << "ERROR: `ChunkMaster::bind_to_parent`: `material` is `nullptr`!\n";
+                return;
+            }
+
             // get `childID` from `Material` and set pointer to this `ChunkMaster`.
-            this->parent->bind_chunk_master(this);
+            material->bind_chunk_master(this);
         }
 
         ChunkMaster::~ChunkMaster()
@@ -47,8 +57,18 @@ namespace yli
             std::cout << "All chunks of this material will be destroyed.\n";
             yli::hierarchy::delete_children<ontology::Chunk*>(this->chunk_pointer_vector, this->number_of_chunks);
 
-            // set pointer to this `ChunkMaster` to nullptr.
-            this->parent->set_chunk_master_pointer(this->childID, nullptr);
+            // requirements for further actions:
+            // `this->parent` must not be `nullptr`.
+            yli::ontology::Material* const material = this->parent;
+
+            if (material == nullptr)
+            {
+                std::cerr << "ERROR: `ChunkMaster::~ChunkMaster`: `material` is `nullptr`!\n";
+                return;
+            }
+
+            // set pointer to this `ChunkMaster` to `nullptr`.
+            material->unbind_chunk_master(this->childID);
         }
 
         void ChunkMaster::set_chunk_pointer(std::size_t childID, yli::ontology::Chunk* child_pointer)

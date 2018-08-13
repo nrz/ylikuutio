@@ -88,9 +88,6 @@ namespace yli
                     friend void yli::ontology::render_species_or_glyph(T1 species_or_glyph_pointer);
 
             protected:
-                // this method sets a object pointer.
-                void set_object_pointer(const std::size_t childID, yli::ontology::Object* const child_pointer);
-
                 GLfloat initial_rotate_angle;            // initial rotate angle.
                 glm::vec3 initial_rotate_vector;         // initial rotate vector.
 

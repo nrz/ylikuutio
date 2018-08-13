@@ -1,4 +1,5 @@
 #include "node.hpp"
+#include "graph.hpp"
 #include "node_struct.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
@@ -19,7 +20,7 @@ namespace yli
 
             if (graph == nullptr)
             {
-                std::cerr << "ERROR: `Node::bind_to_new_parent`: `graph` is `nullptr`!\n";
+                std::cerr << "ERROR: `Node::bind_to_parent`: `graph` is `nullptr`!\n";
                 return;
             }
 
@@ -32,8 +33,19 @@ namespace yli
             this->childID = node_struct.nodeID;
             this->parent = node_struct.parent;
 
-            // set pointer to this node.
-            this->parent->set_node_pointer(this->childID, this);
+            // requirements for further actions:
+            // `this->parent` must not be `nullptr`.
+
+            yli::graph::Graph* const graph = this->parent;
+
+            if (graph == nullptr)
+            {
+                std::cerr << "ERROR: `Node::Node`: `graph` is `nullptr`!\n";
+                return;
+            }
+
+            // set pointer to this `Node`.
+            graph->bind_node(this);
 
             // create all bidirectional links between this node and neighbor nodes.
             for (std::size_t link_i = 0; link_i < this->neighbor_nodeIDs.size(); link_i++)
@@ -53,8 +65,19 @@ namespace yli
                 this->delete_bidirectional_link(this->neighbor_nodeIDs[link_i]);
             }
 
-            // set pointer to this node to nullptr.
-            this->parent->set_node_pointer(this->childID, nullptr);
+            // requirements for further actions:
+            // `this->parent` must not be `nullptr`.
+
+            yli::graph::Graph* const graph = this->parent;
+
+            if (graph == nullptr)
+            {
+                std::cerr << "ERROR: `Node::~Node`: `graph` is `nullptr`!\n";
+                return;
+            }
+
+            // set pointer to this `Node` to `nullptr`.
+            graph->unbind_node(this->childID);
         }
 
         void Node::create_unidirectional_link(std::size_t nodeID)
@@ -75,11 +98,22 @@ namespace yli
 
         void Node::create_bidirectional_link(std::size_t nodeID)
         {
+            // requirements:
+            // `this->parent` must not be `nullptr`.
+
+            yli::graph::Graph* const graph = this->parent;
+
+            if (graph == nullptr)
+            {
+                std::cerr << "ERROR: `Node::create_bidirectional_link`: `graph` is `nullptr`!\n";
+                return;
+            }
+
             // create a link from this node to destination node.
             this->create_unidirectional_link(nodeID);
 
             // create a link from destination node to this node.
-            static_cast<yli::graph::Node*>(this->parent->get_node_pointer(childID))->create_unidirectional_link(this->childID);
+            static_cast<yli::graph::Node*>(graph->get_node_pointer(childID))->create_unidirectional_link(this->childID);
         }
 
         void Node::delete_unidirectional_link(std::size_t nodeID)
@@ -90,11 +124,22 @@ namespace yli
 
         void Node::delete_bidirectional_link(std::size_t nodeID)
         {
+            // requirements:
+            // `this->parent` must not be `nullptr`.
+
+            yli::graph::Graph* const graph = this->parent;
+
+            if (graph == nullptr)
+            {
+                std::cerr << "ERROR: `Node::delete_bidirectional_link`: `graph` is `nullptr`!\n";
+                return;
+            }
+
             // this method deletes a bidirectional link.
             this->delete_unidirectional_link(nodeID);
 
             // delete a link from destination node to this node.
-            static_cast<yli::graph::Node*>(this->parent->get_node_pointer(childID))->delete_unidirectional_link(this->childID);
+            static_cast<yli::graph::Node*>(graph->get_node_pointer(childID))->delete_unidirectional_link(this->childID);
         }
 
         // Transfering a `Node` to a new `Graph` is similar to `bind_to_new_parent`, but there is one important difference:

@@ -98,12 +98,6 @@ namespace yli
 
                 yli::ontology::Entity* get_parent() const override;
 
-                // this method sets a `Material` pointer.
-                void set_material_pointer(const std::size_t childID, yli::ontology::Material* const child_pointer);
-
-                // this method sets a `Symbiosis` pointer.
-                void set_symbiosis_pointer(const std::size_t childID, yli::ontology::Symbiosis* const child_pointer);
-
                 // this method sets a scene species pointer.
                 void set_terrain_species(yli::ontology::Species* const terrain_species);
 

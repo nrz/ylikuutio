@@ -102,10 +102,6 @@ namespace yli
 
                 const std::string& get_model_file_format();
 
-                void set_symbiont_material_pointer(const std::size_t childID, yli::ontology::SymbiontMaterial* const child_pointer);
-
-                void set_holobiont_pointer(const std::size_t childID, yli::ontology::Holobiont* const child_pointer);
-
                 yli::ontology::SymbiontSpecies* get_symbiont_species(const std::size_t biontID) const;
                 GLuint get_vertex_position_modelspaceID(const std::size_t biontID) const;
                 GLuint get_vertexUVID(const std::size_t biontID) const;

@@ -119,15 +119,6 @@ namespace yli
             return yli::ontology::get_number_of_descendants(this->symbiont_species_pointer_vector);
         }
 
-        void SymbiontMaterial::set_symbiont_species_pointer(const std::size_t childID, yli::ontology::SymbiontSpecies* const child_pointer)
-        {
-            yli::hierarchy::set_child_pointer(
-                    childID, child_pointer,
-                    this->symbiont_species_pointer_vector,
-                    this->free_symbiont_speciesID_queue,
-                    this->number_of_symbiont_species);
-        }
-
         void SymbiontMaterial::load_texture()
         {
             this->texture = yli::loaders::load_FBX_texture(this->ofbx_texture);

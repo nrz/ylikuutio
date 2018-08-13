@@ -44,9 +44,6 @@ namespace yli
 
                 yli::ontology::Entity* get_parent() const override;
 
-                // this method sets a object pointer.
-                void set_object_pointer(const std::size_t childID, yli::ontology::Object* const child_pointer);
-
                 const char* get_unicode_char_pointer();
 
                 friend class VectorFont;

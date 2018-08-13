@@ -174,21 +174,6 @@ namespace yli
                 yli::ontology::get_number_of_descendants(this->chunk_master_pointer_vector);
         }
 
-        void Material::set_species_pointer(const std::size_t childID, yli::ontology::Species* const child_pointer)
-        {
-            yli::hierarchy::set_child_pointer(childID, child_pointer, this->species_pointer_vector, this->free_speciesID_queue, this->number_of_species);
-        }
-
-        void Material::set_vector_font_pointer(const std::size_t childID, yli::ontology::VectorFont* const child_pointer)
-        {
-            yli::hierarchy::set_child_pointer(childID, child_pointer, this->vector_font_pointer_vector, this->free_vector_fontID_queue, this->number_of_vector_fonts);
-        }
-
-        void Material::set_chunk_master_pointer(const std::size_t childID, yli::ontology::ChunkMaster* const child_pointer)
-        {
-            yli::hierarchy::set_child_pointer(childID, child_pointer, this->chunk_master_pointer_vector, this->free_chunk_masterID_queue, this->number_of_chunk_masters);
-        }
-
         void Material::bind_to_new_parent(yli::ontology::Shader* const new_parent)
         {
             // requirements:

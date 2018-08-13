@@ -38,8 +38,9 @@ namespace yli
 
                 void unbind_text3D(const std::size_t childID);
 
-                // this method sets pointer to this species to nullptr, sets `parent` according to the input, and requests a new `childID` from the new material.
-                void bind_to_new_parent(yli::ontology::Material* const new_material_pointer);
+                // this method sets pointer to this `Species` to `nullptr`, sets `parent` according to the input,
+                // and requests a new `childID` from the new `Material`.
+                void bind_to_new_parent(yli::ontology::Material* const new_parent);
 
                 // constructor.
                 // TODO: `VectorFont` constructor also creates each `Glyph` and binds them to the `VectorFont`.
@@ -136,9 +137,6 @@ namespace yli
 
                 // this method sets `Glyph` pointer.
                 void set_glyph_pointer(const std::size_t childID, yli::ontology::Glyph* const child_pointer);
-
-                // this method sets `Text3D` pointer.
-                void set_text3D_pointer(const std::size_t childID, yli::ontology::Text3D* const child_pointer);
 
                 // this method returns a pointer to `Glyph` that matches the given `unicode_value`,
                 // and `nullptr` if this `VectorFont` does not contain such a `Glyph`.

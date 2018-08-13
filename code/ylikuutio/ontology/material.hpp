@@ -123,15 +123,6 @@ namespace yli
 
                 yli::ontology::Entity* get_parent() const override;
 
-                // this method sets `Species` pointer.
-                void set_species_pointer(const std::size_t childID, yli::ontology::Species* const child_pointer);
-
-                // this method sets `VectorFont` pointer.
-                void set_vector_font_pointer(const std::size_t childID, yli::ontology::VectorFont* const child_pointer);
-
-                // this method sets `ChunkMaster` pointer.
-                void set_chunk_master_pointer(const std::size_t childID, yli::ontology::ChunkMaster* const child_pointer);
-
                 template<class T1>
                     friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
                 template <class T1>
