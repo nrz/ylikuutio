@@ -42,7 +42,6 @@ namespace yli
                 // destructor.
                 virtual ~SymbiontMaterial();
 
-            private:
                 void bind_symbiont_species(yli::ontology::SymbiontSpecies* const symbiont_species);
                 void unbind_symbiont_species(const std::size_t childID);
 
@@ -69,8 +68,6 @@ namespace yli
                 GLuint get_texture() const;
                 GLuint get_openGL_textureID() const;
 
-                friend class Symbiosis;
-                friend class SymbiontSpecies;
                 template<class T1>
                     friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
                 template<class T1>
@@ -78,6 +75,7 @@ namespace yli
                 template<class T1>
                     friend void yli::ontology::render_children(const std::vector<T1>& child_pointer_vector);
 
+            private:
                 void bind_to_parent();
 
                 void load_texture();
