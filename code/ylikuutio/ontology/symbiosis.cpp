@@ -242,7 +242,6 @@ namespace yli
                     material_struct.is_symbiont_material = true;
                     material_struct.ofbx_texture = ofbx_texture;
                     yli::ontology::SymbiontMaterial* symbiont_material = new yli::ontology::SymbiontMaterial(this->universe, material_struct);
-                    symbiont_material->load_texture();
 
                     std::cout << "yli::ontology::SymbiontMaterial* successfully created.\n";
 
