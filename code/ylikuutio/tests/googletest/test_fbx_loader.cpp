@@ -3,12 +3,12 @@
 #include "code/ylikuutio/loaders/fbx_species_loader.cpp"
 
 // Include miniz (required by OpenFBX)
-#include <miniz.c>
 #include <miniz.h>
+#include <miniz.c>
 
 // Include OpenFBX
-#include <ofbx.cpp>
 #include <ofbx.h>
+#include <ofbx.cpp>
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
