@@ -362,8 +362,6 @@ namespace ajokki
 
         freight_train_symbiosis->set_name("freight_train_symbiosis");
 
-        freight_train_symbiosis->create_symbionts();
-
         HolobiontStruct freight_train_object_struct1;
         freight_train_object_struct1.symbiosis_parent = freight_train_symbiosis;
         freight_train_object_struct1.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
@@ -408,8 +406,6 @@ namespace ajokki
 
         turbo_polizei_symbiosis->set_name("turbo_polizei_symbiosis");
 
-        turbo_polizei_symbiosis->create_symbionts();
-
         HolobiontStruct turbo_polizei_object_struct1;
         turbo_polizei_object_struct1.symbiosis_parent = turbo_polizei_symbiosis;
         turbo_polizei_object_struct1.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
@@ -453,8 +449,6 @@ namespace ajokki
         }
 
         fantasy_house_with_balcony_symbiosis->set_name("fantasy_house_with_balcony_symbiosis");
-
-        fantasy_house_with_balcony_symbiosis->create_symbionts();
 
         HolobiontStruct fantasy_house_with_balcony_object_struct1;
         fantasy_house_with_balcony_object_struct1.symbiosis_parent = fantasy_house_with_balcony_symbiosis;

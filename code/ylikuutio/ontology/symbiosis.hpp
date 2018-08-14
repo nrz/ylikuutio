@@ -79,6 +79,8 @@ namespace yli
                     // get `childID` from `Shader` and set pointer to this `Symbiosis`.
                     this->bind_to_parent();
 
+                    this->create_symbionts();
+
                     this->child_vector_pointers_vector.push_back(&this->symbiont_material_pointer_vector);
                     this->child_vector_pointers_vector.push_back(&this->holobiont_pointer_vector);
                     this->type = "yli::ontology::Symbiosis*";
@@ -88,8 +90,6 @@ namespace yli
 
                 // destructor.
                 virtual ~Symbiosis();
-
-                void create_symbionts();
 
                 // this method renders all `SymbiontMaterial`s belonging to this `Symbiosis`.
                 void render();
@@ -129,6 +129,8 @@ namespace yli
 
             private:
                 void bind_to_parent();
+
+                void create_symbionts();
 
                 yli::ontology::Shader* parent; // pointer to `Shader`.
 

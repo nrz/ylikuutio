@@ -1,3 +1,4 @@
+#include "code/ylikuutio/ontology/symbiosis.hpp"
 #include "code/ylikuutio/ontology/symbiosis_struct.hpp"
 #include "code/ylikuutio/command_line/command_line_master.hpp"
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
@@ -107,8 +108,8 @@ int main(const int argc, const char* argv[])
     symbiosis_struct.triangulation_type = "bilinear_interpolation";
     symbiosis_struct.parent = nullptr;           // no parent.
     symbiosis_struct.vram_buffer_in_use = false; // do not use VRAM buffer.
-
-    // TODO: Load 3D model file.
+    yli::ontology::Universe* const universe = nullptr;
+    yli::ontology::Symbiosis* const symbiosis = new yli::ontology::Symbiosis(universe, symbiosis_struct);
 
     // TODO: Export 3D model file.
     if (out_file_format == "obj")
