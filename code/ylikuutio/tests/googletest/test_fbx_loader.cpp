@@ -267,7 +267,7 @@ TEST(fbx_file_must_be_loaded_appropriately, rigged_and_animated_cat)
     ASSERT_TRUE(result);
 }
 
-TEST(fbx_file_must_be_loaded_appropriately, freight_train)
+TEST(OpenFBX_must_function_appropriately, freight_train)
 {
     const std::string filename = "freight_train.fbx";
     std::vector<uint8_t> data_vector = yli::file::binary_slurp(filename);
