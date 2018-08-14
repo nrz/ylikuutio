@@ -47,7 +47,7 @@ TEST(OpenFBX_must_function_appropriately, rigged_and_animated_cat)
     ASSERT_EQ(ofbx_object_type, ofbx::Object::Type::ROOT);
 
     const int ofbx_mesh_count = ofbx_iscene->getMeshCount();
-    ASSERT_GT(ofbx_mesh_count, 0);
+    ASSERT_EQ(ofbx_mesh_count, 5);
 
     // FBX file may contain several meshes (`ofbx::Mesh`).
     // Each mesh may have several materials (`ofbx::Material`).
@@ -124,7 +124,16 @@ TEST(OpenFBX_must_function_appropriately, rigged_and_animated_cat)
     }
 
     const int ofbx_animation_stack_count = ofbx_iscene->getAnimationStackCount();
-    ASSERT_GT(ofbx_mesh_count, 0);
+    ASSERT_GT(ofbx_animation_stack_count, 0);
+
+    for (int i = 0; i < ofbx_animation_stack_count; i++)
+    {
+        const ofbx::AnimationStack* animation_stack = ofbx_iscene->getAnimationStack(i);
+        ASSERT_NE(animation_stack, nullptr);
+
+        const ofbx::Object::Type animation_stack_type = animation_stack->getType();
+        ASSERT_EQ(animation_stack_type, ofbx::Object::Type::ANIMATION_STACK);
+    }
 
     const ofbx::Object* const* const ofbx_all_objects = ofbx_iscene->getAllObjects();
     ASSERT_NE(ofbx_all_objects, nullptr);
@@ -157,7 +166,7 @@ TEST(OpenFBX_must_function_appropriately, turbo_polizei)
     ASSERT_EQ(ofbx_object_type, ofbx::Object::Type::ROOT);
 
     const int ofbx_mesh_count = ofbx_iscene->getMeshCount();
-    ASSERT_GT(ofbx_mesh_count, 0);
+    ASSERT_EQ(ofbx_mesh_count, 5);
 
     // FBX file may contain several meshes (`ofbx::Mesh`).
     // Each mesh may have several materials (`ofbx::Material`).
@@ -234,7 +243,7 @@ TEST(OpenFBX_must_function_appropriately, turbo_polizei)
     }
 
     const int ofbx_animation_stack_count = ofbx_iscene->getAnimationStackCount();
-    ASSERT_GT(ofbx_mesh_count, 0);
+    ASSERT_EQ(ofbx_animation_stack_count, 0);
 
     const ofbx::Object* const* ofbx_all_objects = ofbx_iscene->getAllObjects();
     ASSERT_NE(ofbx_all_objects, nullptr);
@@ -359,7 +368,7 @@ TEST(fbx_file_must_be_loaded_appropriately, freight_train)
     }
 
     const int ofbx_animation_stack_count = ofbx_iscene->getAnimationStackCount();
-    ASSERT_GT(ofbx_mesh_count, 0);
+    ASSERT_EQ(ofbx_animation_stack_count, 0);
 
     const ofbx::Object* const* ofbx_all_objects = ofbx_iscene->getAllObjects();
     ASSERT_NE(ofbx_all_objects, nullptr);
