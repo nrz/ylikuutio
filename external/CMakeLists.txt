@@ -28,6 +28,10 @@ add_subdirectory(pugixml)
 ### GLFW ###
 add_subdirectory(glfw)
 
+if (COMPILE_SDL_FROM_SOURCE)
+    add_subdirectory(SDL2-2.0.8)
+endif()
+
 # SFML
 if (COMPILE_SFML_FROM_SOURCE)
     if(CMAKE_SYSTEM_NAME STREQUAL "Windows")

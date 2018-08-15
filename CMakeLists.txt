@@ -10,6 +10,9 @@ project(ylikuutio)
 # comment the following line to disable scripting with TinyScheme.
 set(ENABLE_SCRIPTING_WITH_TINYSCHEME true)
 
+# comment the following line to use `libsdl2-dev` shipped with Linux.
+set(COMPILE_SDL_FROM_SOURCE true)
+
 # comment the following line to use `libsfml-dev` shipped with Linux.
 set(COMPILE_SFML_FROM_SOURCE true)
 
@@ -26,11 +29,15 @@ else()
 endif()
 
 find_package(Threads REQUIRED)
-find_package(SDL2 REQUIRED)
 
 if (NOT(COMPILE_SFML_FROM_SOURCE))
     set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
     find_package(SFML 2 REQUIRED system audio)
+endif()
+
+if (NOT(COMPILE_SDL_FROM_SOURCE))
+    set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
+    find_package(SDL2 REQUIRED)
 endif()
 
 # Compile external dependencies
@@ -87,8 +94,17 @@ else()
         )
 endif()
 
+if (COMPILE_SDL_FROM_SOURCE)
+    include_directories(
+        external/SDL2-2.0.8/include/
+        )
+else()
+    include_directories(
+        ${SDL2_INCLUDE_DIRS}
+        )
+endif()
+
 include_directories(
-    ${SDL2_INCLUDE_DIRS}
     # external/asio/asio/include/
     external/FastNoiseSIMD/
     external/glew-2.0.0/include/
