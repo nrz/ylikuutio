@@ -341,7 +341,7 @@ namespace yli
             // return this->indices.at(biontID).size();
         }
 
-        std::size_t Symbiosis::get_number_of_symbionts() const
+        std::size_t Symbiosis::get_number_of_meshes() const
         {
             return this->ofbx_mesh_count;
         }

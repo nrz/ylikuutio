@@ -114,7 +114,7 @@ namespace yli
 
                 std::vector<uint32_t> get_indices(const std::size_t biontID) const;
                 std::size_t get_indices_size(const std::size_t biontID) const;
-                std::size_t get_number_of_symbionts() const;
+                std::size_t get_number_of_meshes() const;
                 bool has_texture(const std::size_t biontID) const;
                 GLuint get_texture(const std::size_t biontID) const;
                 GLuint get_openGL_textureID(const std::size_t biontID) const;
