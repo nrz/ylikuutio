@@ -7,10 +7,11 @@
 
 // Include standard headers
 #include <cmath>    // NAN, std::isnan, std::pow
+#include <iostream> // std::cout, std::cin, std::cerr
 #include <memory>   // std::make_shared, std::shared_ptr
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
-#include <iostream> // std::cout, std::cin, std::cerr
+#include <vector>   // std::vector
 
 std::shared_ptr<yli::datatypes::AnyValue> square(yli::callback_system::CallbackEngine*, yli::callback_system::CallbackObject*, std::vector<yli::callback_system::CallbackParameter*>& input_parameters)
 {

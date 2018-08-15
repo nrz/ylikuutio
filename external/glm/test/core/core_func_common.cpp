@@ -1,9 +1,14 @@
 #define GLM_FORCE_EXPLICIT_CTOR
-#include <glm/ext/vector_relational.hpp>
-#include <glm/common.hpp>
 #include <glm/gtc/constants.hpp>
-#include <glm/gtc/vec1.hpp>
 #include <glm/gtc/random.hpp>
+#include <glm/gtc/vec1.hpp>
+#include <glm/ext/scalar_relational.hpp>
+#include <glm/ext/vector_relational.hpp>
+#include <glm/ext/vector_float1.hpp>
+#include <glm/common.hpp>
+#include <glm/vec4.hpp>
+#include <glm/vec3.hpp>
+#include <glm/vec2.hpp>
 #include <vector>
 #include <cstdio>
 #include <cmath>
@@ -18,7 +23,7 @@ namespace floor_
 {
 	static int test()
 	{
-		int Error(0);
+		int Error = 0;
 
 		{
 			float A = 1.1f;
@@ -995,22 +1000,22 @@ namespace sign
 
 	int test_i32vec4()
 	{
-		type<glm::i32vec4> const Data[] =
+		type<glm::ivec4> const Data[] =
 		{
-			{glm::i32vec4( 1), glm::i32vec4( 1)},
-			{glm::i32vec4( 0), glm::i32vec4( 0)},
-			{glm::i32vec4( 2), glm::i32vec4( 1)},
-			{glm::i32vec4( 3), glm::i32vec4( 1)},
-			{glm::i32vec4(-1), glm::i32vec4(-1)},
-			{glm::i32vec4(-2), glm::i32vec4(-1)},
-			{glm::i32vec4(-3), glm::i32vec4(-1)}
+			{glm::ivec4( 1), glm::ivec4( 1)},
+			{glm::ivec4( 0), glm::ivec4( 0)},
+			{glm::ivec4( 2), glm::ivec4( 1)},
+			{glm::ivec4( 3), glm::ivec4( 1)},
+			{glm::ivec4(-1), glm::ivec4(-1)},
+			{glm::ivec4(-2), glm::ivec4(-1)},
+			{glm::ivec4(-3), glm::ivec4(-1)}
 		};
 
 		int Error = 0;
 
-		for(std::size_t i = 0; i < sizeof(Data) / sizeof(type<glm::i32vec4>); ++i)
+		for(std::size_t i = 0; i < sizeof(Data) / sizeof(type<glm::ivec4>); ++i)
 		{
-			glm::i32vec4 Result = glm::sign(Data[i].Value);
+			glm::ivec4 Result = glm::sign(Data[i].Value);
 			Error += glm::all(glm::equal(Data[i].Return, Result)) ? 0 : 1;
 		}
 
@@ -1035,7 +1040,7 @@ namespace sign
 		for(std::size_t i = 0; i < sizeof(Data) / sizeof(type<glm::vec4>); ++i)
 		{
 			glm::vec4 Result = glm::sign(Data[i].Value);
-			Error += glm::all(glm::equal(Data[i].Return, Result)) ? 0 : 1;
+			Error += glm::all(glm::equal(Data[i].Return, Result, glm::epsilon<float>())) ? 0 : 1;
 		}
 
 		return Error;
@@ -1213,37 +1218,37 @@ namespace frexp_
 {
 	static int test()
 	{
-		int Error(0);
+		int Error = 0;
 
 		{
-			glm::vec1 x(1024);
+			glm::vec1 const x(1024);
 			glm::ivec1 exp;
 			glm::vec1 A = glm::frexp(x, exp);
-			Error += glm::all(glm::equal(A, glm::vec1(0.5), 0.00001f)) ? 0 : 1;
+			Error += glm::all(glm::equal(A, glm::vec1(0.5), glm::epsilon<float>())) ? 0 : 1;
 			Error += glm::all(glm::equal(exp, glm::ivec1(11))) ? 0 : 1;
 		}
 
 		{
-			glm::vec2 x(1024, 0.24);
+			glm::vec2 const x(1024, 0.24);
 			glm::ivec2 exp;
 			glm::vec2 A = glm::frexp(x, exp);
-			Error += glm::all(glm::equal(A, glm::vec2(0.5, 0.96), 0.00001f)) ? 0 : 1;
+			Error += glm::all(glm::equal(A, glm::vec2(0.5, 0.96), glm::epsilon<float>())) ? 0 : 1;
 			Error += glm::all(glm::equal(exp, glm::ivec2(11, -2))) ? 0 : 1;
 		}
 
 		{
-			glm::vec3 x(1024, 0.24, 0);
+			glm::vec3 const x(1024, 0.24, 0);
 			glm::ivec3 exp;
 			glm::vec3 A = glm::frexp(x, exp);
-			Error += glm::all(glm::equal(A, glm::vec3(0.5, 0.96, 0.0), 0.00001f)) ? 0 : 1;
+			Error += glm::all(glm::equal(A, glm::vec3(0.5, 0.96, 0.0), glm::epsilon<float>())) ? 0 : 1;
 			Error += glm::all(glm::equal(exp, glm::ivec3(11, -2, 0))) ? 0 : 1;
 		}
 
 		{
-			glm::vec4 x(1024, 0.24, 0, -1.33);
+			glm::vec4 const x(1024, 0.24, 0, -1.33);
 			glm::ivec4 exp;
 			glm::vec4 A = glm::frexp(x, exp);
-			Error += glm::all(glm::equal(A, glm::vec4(0.5, 0.96, 0.0, -0.665), 0.00001f)) ? 0 : 1;
+			Error += glm::all(glm::equal(A, glm::vec4(0.5, 0.96, 0.0, -0.665), glm::epsilon<float>())) ? 0 : 1;
 			Error += glm::all(glm::equal(exp, glm::ivec4(11, -2, 0, 1))) ? 0 : 1;
 		}
 
@@ -1293,10 +1298,10 @@ static int test_constexpr()
 {
 #if GLM_HAS_CONSTEXPR
 	static_assert(glm::abs(1.0f) > 0.0f, "GLM: Failed constexpr");
-	static_assert(glm::abs(glm::vec1(1.0f)) != glm::vec1(0.0f), "GLM: Failed constexpr");
-	static_assert(glm::abs(glm::vec2(1.0f)) != glm::vec2(0.0f), "GLM: Failed constexpr");
-	static_assert(glm::abs(glm::vec3(1.0f)) != glm::vec3(0.0f), "GLM: Failed constexpr");
-	static_assert(glm::abs(glm::vec4(1.0f)) != glm::vec4(0.0f), "GLM: Failed constexpr");
+	constexpr glm::vec1 const A = glm::abs(glm::vec1(1.0f));
+	constexpr glm::vec2 const B = glm::abs(glm::vec2(1.0f));
+	constexpr glm::vec3 const C = glm::abs(glm::vec3(1.0f));
+	constexpr glm::vec4 const D = glm::abs(glm::vec4(1.0f));
 #endif // GLM_HAS_CONSTEXPR
 
 	return 0;

@@ -1,9 +1,10 @@
-#define GLM_FORCE_ALIGNED_GENTYPES
 #include <glm/glm.hpp>
 
-#if GLM_USE_ALIGNED_GENTYPES == GLM_ENABLE
+#if GLM_CONFIG_ALIGNED_GENTYPES == GLM_ENABLE
 #include <glm/gtc/type_aligned.hpp>
+#include <glm/gtc/type_precision.hpp>
 #include <glm/ext/vector_relational.hpp>
+#include <glm/ext/matrix_relational.hpp>
 
 GLM_STATIC_ASSERT(glm::detail::is_aligned<glm::aligned_lowp>::value, "aligned_lowp is not aligned");
 GLM_STATIC_ASSERT(glm::detail::is_aligned<glm::aligned_mediump>::value, "aligned_mediump is not aligned");
@@ -127,24 +128,36 @@ static int test_ctor()
 	return Error;
 }
 
-/*
-using namespace glm;
+static int test_aligned_ivec4()
+{
+	int Error = 0;
 
-typedef mat<4, 4, float, aligned> aligned_mat4;
+	glm::aligned_ivec4 const v(1, 2, 3, 4);
+	Error += glm::all(glm::equal(v, glm::aligned_ivec4(1, 2, 3, 4))) ? 0 : 1;
+
+	glm::aligned_ivec4 const u = v * 2;
+	Error += glm::all(glm::equal(u, glm::aligned_ivec4(2, 4, 6, 8))) ? 0 : 1;
+
+	return Error;
+}
 
 static int test_aligned_mat4()
 {
 	int Error = 0;
 
-	aligned_mat4 m(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15);
-	aligned_mat4 t = transpose(m);
-	aligned_mat4 const expected = mat4(0, 4, 8, 12, 1, 5, 9, 13, 2, 6, 10, 14, 3, 7, 11, 15);
-	for (length_t l = 0; l < expected.length(); ++l)
-		Error += all(equal(t[l], expected[l], 0.0001f)) ? 0 : 1;
+	glm::aligned_vec4 const u(1.f, 2.f, 3.f, 4.f);
+	Error += glm::all(glm::equal(u, glm::aligned_vec4(1.f, 2.f, 3.f, 4.f), 0.0001f)) ? 0 : 1;
+
+	glm::aligned_vec4 const v(1, 2, 3, 4);
+	Error += glm::all(glm::equal(v, glm::aligned_vec4(1.f, 2.f, 3.f, 4.f), 0.0001f)) ? 0 : 1;
+
+	glm::aligned_mat4 const m(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15);
+	glm::aligned_mat4 const t = glm::transpose(m);
+	glm::aligned_mat4 const expected = glm::mat4(0, 4, 8, 12, 1, 5, 9, 13, 2, 6, 10, 14, 3, 7, 11, 15);
+	Error += glm::all(glm::equal(t, expected, 0.0001f)) ? 0 : 1;
 
 	return Error;
 }
-*/
 
 int main()
 {
@@ -152,7 +165,8 @@ int main()
 
 	Error += test_ctor();
 	Error += test_copy();
-//	Error += test_aligned_mat4();
+	Error += test_aligned_ivec4();
+	Error += test_aligned_mat4();
 
 	return Error;
 }
@@ -164,4 +178,4 @@ int main()
 	return 0;
 }
 
-#endif//GLM_USE_ANONYMOUS_STRUCT
+#endif//GLM_CONFIG_ANONYMOUS_STRUCT

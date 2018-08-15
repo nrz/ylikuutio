@@ -2,6 +2,7 @@
 #include "symbiosis.hpp"
 #include "biont.hpp"
 #include "render_templates.hpp"
+#include "family_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include GLM
@@ -29,36 +30,63 @@ namespace yli
                     biont,
                     this->biont_pointer_vector,
                     this->free_biontID_queue,
-                    &this->number_of_bionts);
+                    this->number_of_bionts);
         }
 
         void Holobiont::unbind_biont(const std::size_t childID)
         {
-            yli::ontology::Biont* dummy_child_pointer = nullptr;
-            yli::hierarchy::set_child_pointer(
+            yli::hierarchy::unbind_child_from_parent<yli::ontology::Biont*>(
                     childID,
-                    dummy_child_pointer,
                     this->biont_pointer_vector,
                     this->free_biontID_queue,
-                    &this->number_of_bionts);
+                    this->number_of_bionts);
         }
 
         void Holobiont::bind_to_parent()
         {
+            // requirements:
+            // `this->symbiosis_parent` must not be `nullptr`.
+            yli::ontology::Symbiosis* const symbiosis = this->symbiosis_parent;
+
+            if (symbiosis == nullptr)
+            {
+                std::cerr << "ERROR: `Holobiont::bind_to_parent`: `symbiosis` is `nullptr`!\n";
+                return;
+            }
+
             // get `childID` from `Symbiosis` and set pointer to this `Holobiont`.
-            this->symbiosis_parent->bind_holobiont(this);
+            symbiosis->bind_holobiont(this);
         }
 
         void Holobiont::bind_to_new_parent(yli::ontology::Symbiosis* const new_parent)
         {
-            // this method sets pointer to this `Object` to nullptr, sets `parent` according to the input,
+            // this method sets pointer to this `Holobiont` to `nullptr`, sets `symbiosis_parent` according to the input,
             // and requests a new `childID` from the new `Symbiosis`.
+            //
+            // requirements:
+            // `this->symbiosis_parent` must not be `nullptr`.
+            // `new_parent` must not be `nullptr`.
 
-            // unbind from the old parent `Model`.
-            this->symbiosis_parent->unbind_holobiont(this->childID);
+            yli::ontology::Symbiosis* const symbiosis = this->symbiosis_parent;
 
-            // get `childID` from `Model` and set pointer to this `Object`.
-            new_parent->bind_holobiont(this);
+            if (symbiosis == nullptr)
+            {
+                std::cerr << "ERROR: `Holobiont::bind_to_new_parent`: `symbiosis` is `nullptr`!\n";
+                return;
+            }
+
+            if (new_parent == nullptr)
+            {
+                std::cerr << "ERROR: `Holobiont::bind_to_new_parent`: `new_parent` is `nullptr`!\n";
+                return;
+            }
+
+            // unbind from the old parent `Symbiosis`.
+            symbiosis->unbind_holobiont(this->childID);
+
+            // get `childID` from `Symbiosis` and set pointer to this `Holobiont`.
+            this->symbiosis_parent = new_parent;
+            this->symbiosis_parent->bind_holobiont(this);
         }
 
         Holobiont::~Holobiont()
@@ -66,11 +94,23 @@ namespace yli
             // destructor.
             std::cout << "Holobiont with childID " << std::dec << this->childID << " will be destroyed.\n";
 
+            // always delete all `Biont`s of this `Holobiont`.
             std::cout << "All bionts of this holobiont will be destroyed.\n";
-            yli::hierarchy::delete_children<yli::ontology::Biont*>(this->biont_pointer_vector, &this->number_of_bionts);
+            yli::hierarchy::delete_children<yli::ontology::Biont*>(this->biont_pointer_vector, this->number_of_bionts);
+
+            // requirements for further actions:
+            // `this->symbiosis_parent` must not be `nullptr`.
+
+            yli::ontology::Symbiosis* const symbiosis = this->symbiosis_parent;
+
+            if (symbiosis == nullptr)
+            {
+                std::cerr << "ERROR: `Holobiont::~Holobiont`: `symbiosis` is `nullptr`!\n";
+                return;
+            }
 
             // set pointer to this `Holobiont` to nullptr.
-            this->symbiosis_parent->set_holobiont_pointer(this->childID, nullptr);
+            symbiosis->unbind_holobiont(this->childID);
         }
 
         void Holobiont::render()
@@ -90,23 +130,35 @@ namespace yli
 
         void Holobiont::create_bionts()
         {
+            // requirements:
+            // `this->symbiosis_parent` must not be `nullptr`.
+
+            yli::ontology::Symbiosis* const symbiosis = this->symbiosis_parent;
+
+            if (symbiosis == nullptr)
+            {
+                std::cerr << "ERROR: `Holobiont::create_bionts`: `symbiosis` is `nullptr`!\n";
+                return;
+            }
+
             std::cout << "Creating bionts for Holobiont located at 0x" << std::hex << (uint64_t) this << std::dec << " ...\n";
-            // Create `Biont` entities so that
-            // they bind this `Holobiont`.
-            std::size_t correct_number_of_bionts = this->symbiosis_parent->get_number_of_symbionts();
+
+            // Create `Biont` entities so that they bind to this `Holobiont`.
+            const std::size_t correct_number_of_bionts = symbiosis->get_number_of_meshes();
             std::cout << "Number of bionts to be created: " << correct_number_of_bionts << "\n";
 
             for (std::size_t biontID = 0; biontID < correct_number_of_bionts; biontID++)
             {
-                if (!this->symbiosis_parent->has_texture(biontID))
+                if (!symbiosis->has_texture(biontID))
                 {
-                    std::cout << "There is no texture for biont with biontID " << biontID << "\n";
+                    std::cerr << "ERROR: `Holobiont::create_bionts`: There is no texture for biont with biontID " << biontID << "\n";
                     continue;
                 }
 
                 BiontStruct biont_struct;
                 biont_struct.biontID               = biontID;
                 biont_struct.holobiont_parent      = this;
+                biont_struct.symbiont_species      = symbiosis->get_symbiont_species(biontID);
                 biont_struct.original_scale_vector = this->original_scale_vector;
                 biont_struct.rotate_angle          = this->rotate_angle;
                 biont_struct.rotate_vector         = this->rotate_vector;
@@ -115,7 +167,6 @@ namespace yli
                 biont_struct.quaternions_in_use    = this->quaternions_in_use;
                 biont_struct.cartesian_coordinates = this->cartesian_coordinates;
                 biont_struct.translate_vector      = this->translate_vector;
-                biont_struct.texture               = this->symbiosis_parent->get_texture(biontID);
 
                 std::cout << "Creating biont with biontID " << biontID << " ...\n";
 
@@ -180,12 +231,7 @@ namespace yli
 
         std::size_t Holobiont::get_number_of_descendants() const
         {
-            return 0; // TODO; write the code!
-        }
-
-        void Holobiont::set_biont_pointer(const std::size_t childID, yli::ontology::Biont* const child_pointer)
-        {
-            yli::hierarchy::set_child_pointer(childID, child_pointer, this->biont_pointer_vector, this->free_biontID_queue, &this->number_of_bionts);
+            return yli::ontology::get_number_of_descendants(this->biont_pointer_vector);
         }
     }
 }

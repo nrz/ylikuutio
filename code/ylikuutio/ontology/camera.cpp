@@ -33,6 +33,7 @@
 // Include standard headers
 #include <cmath>    // NAN, std::isnan, std::pow
 #include <cstddef>  // std::size_t
+#include <iostream> // std::cout, std::cin, std::cerr
 
 namespace yli
 {
@@ -40,22 +41,42 @@ namespace yli
     {
         void Camera::bind_to_parent()
         {
+            // requirements:
+            // `this->parent` must not be `nullptr`.
+            yli::ontology::Scene* const scene = this->parent;
+
+            if (scene == nullptr)
+            {
+                std::cerr << "ERROR: `Camera::bind_to_parent`: `scene` is `nullptr`!\n";
+                return;
+            }
+
             // get `childID` from `Scene` and set pointer to this `Camera`.
-            this->parent->bind_camera(this);
+            scene->bind_camera(this);
         }
 
         Camera::~Camera()
         {
             // destructor.
+            //
+            // requirements:
+            // `this->parent` must not be `nullptr`.
+            yli::ontology::Scene* const scene = this->parent;
 
-            if (this->parent->get_active_camera() == this)
+            if (scene == nullptr)
+            {
+                std::cerr << "ERROR: `Camera::~Camera`: `scene` is `nullptr`!\n";
+                return;
+            }
+
+            if (scene->get_active_camera() == this)
             {
                 // Make this `Camera` no more the active `Camera`.
-                this->parent->set_active_camera(nullptr);
+                scene->set_active_camera(nullptr);
             }
 
             // set pointer to this `Camera` to `nullptr`.
-            this->parent->set_camera_pointer(this->childID, nullptr);
+            scene->unbind_camera(this->childID);
         }
 
         yli::ontology::Entity* Camera::get_parent() const

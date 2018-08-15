@@ -10,6 +10,16 @@ add_definitions(
     -D_CRT_SECURE_NO_WARNINGS
     )
 
+include_directories(
+    # asio/asio/include/
+    FastNoiseSIMD/
+    glew-2.0.0/include/
+    glfw/include/
+    glm/
+    OpenFBX/src/
+    pugixml/src/
+    )
+
 # Compile external dependencies
 
 # pugixml
@@ -22,44 +32,17 @@ add_subdirectory(glfw)
 if (COMPILE_SFML_FROM_SOURCE)
     if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
         include_directories(
-            # asio/asio/include/
-            FastNoiseSIMD/
-            glew-2.0.0/include/
-            glfw/include/
-            glm/
-            OpenFBX/src/
-            pugixml/src/
             SFML-2.4.2/include/
             SFML-2.4.2/src/
             SFML-2.4.2/extlibs/headers/
             SFML-2.4.2/extlibs/headers/AL/
-            .
             )
     else()
         include_directories(
-            # asio/asio/include/
-            FastNoiseSIMD/
-            glew-2.0.0/include/
-            glfw/include/
-            glm/
-            OpenFBX/src/
-            pugixml/src/
             SFML-2.4.2/include/
             SFML-2.4.2/src/
-            .
             )
     endif()
-else()
-    include_directories(
-        # asio/asio/include/
-        FastNoiseSIMD/
-        glew-2.0.0/include/
-        glfw/include/
-        glm/
-        OpenFBX/src/
-        pugixml/src/
-        .
-        )
 endif()
 
 if(${CMAKE_SYSTEM_NAME} MATCHES "Linux")

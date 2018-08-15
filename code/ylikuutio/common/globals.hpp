@@ -22,32 +22,9 @@
 #endif
 #endif
 
-// GLEW must be included here, because `globals.hpp` may be compiled
-// first, and if `GL/glew.h` is not included before `glfw3.h` (?),
-// then g++ prints the following error:
-// `error: #error gl.h included before glew.h`
-#ifndef __GL_GLEW_H_INCLUDED
-#define __GL_GLEW_H_INCLUDED
-#include <GL/glew.h> // GLfloat, GLuint etc.
-#endif
-
-// Include GLFW
-#ifndef __GLFW3_H_INCLUDED
-#define __GLFW3_H_INCLUDED
-#include <GLFW/glfw3.h>
-#endif
-
-// Include GLM
-#ifndef __GLM_GLM_HPP_INCLUDED
-#define __GLM_GLM_HPP_INCLUDED
-#include <glm/glm.hpp> // glm
-#endif
-
 // Include standard headers
 #include <memory>   // std::make_shared, std::shared_ptr
 #include <stdint.h> // uint32_t etc.
-#include <string>   // std::string
-#include <unordered_map> // std::unordered_map
 #include <vector>   // std::vector
 
 namespace yli
@@ -84,26 +61,6 @@ namespace yli
 
 typedef std::shared_ptr<yli::datatypes::AnyValue> (*PreRenderCallback) (yli::ontology::Entity* entity, yli::config::SettingMaster* setting_master);
 typedef std::shared_ptr<yli::datatypes::AnyValue> (*PostRenderCallback) (yli::ontology::Entity* entity, yli::config::SettingMaster* setting_master);
-
-typedef struct PrintingStruct
-{
-    PrintingStruct()
-        : screen_width(-1), screen_height(-1), x(-1), y(-1), text_size(-1), font_size(-1), text_char(nullptr), char_font_texture_file_format(nullptr), horizontal_alignment(nullptr), vertical_alignment(nullptr)
-    {
-        // constructor.
-    }
-    int32_t screen_width;
-    int32_t screen_height;
-    int32_t x;
-    int32_t y;
-    int32_t text_size;
-    int32_t font_size;
-    std::string text;
-    const char* text_char;
-    const char* char_font_texture_file_format;
-    const char* horizontal_alignment;
-    const char* vertical_alignment;
-} PrintingStruct;
 
 typedef struct
 {

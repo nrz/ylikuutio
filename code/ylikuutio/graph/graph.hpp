@@ -10,8 +10,8 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
-#include <vector>   // std::vector
 #include <queue>    // std::queue
+#include <vector>   // std::vector
 
 namespace yli
 {
@@ -22,6 +22,9 @@ namespace yli
         class Graph
         {
             public:
+                void bind_node(yli::graph::Node* const node);
+                void unbind_node(const std::size_t childID);
+
                 // constructor.
                 Graph();
 
@@ -31,9 +34,6 @@ namespace yli
                 friend class Node;
 
             private:
-                // this method sets a node pointer.
-                void set_node_pointer(std::size_t nodeID, yli::graph::Node* child_pointer);
-
                 // this method gets a node pointer.
                 yli::graph::Node* get_node_pointer(std::size_t nodeID);
 

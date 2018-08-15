@@ -1,7 +1,6 @@
 /// @ref core
-/// @file glm/detail/func_integer.inl
 
-#include "../ext/vec1.hpp"
+#include "type_vec1.hpp"
 #include "type_vec2.hpp"
 #include "type_vec3.hpp"
 #include "type_vec4.hpp"
@@ -372,7 +371,7 @@ namespace detail
 	}
 }//namespace glm
 
-#if GLM_USE_SIMD == GLM_ENABLE
+#if GLM_CONFIG_SIMD == GLM_ENABLE
 #	include "func_integer_simd.inl"
 #endif
 

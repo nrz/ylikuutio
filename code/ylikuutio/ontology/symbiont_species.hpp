@@ -18,12 +18,6 @@
 #include <GL/glew.h> // GLfloat, GLuint etc.
 #endif
 
-// Include GLFW
-#ifndef __GLFW3_H_INCLUDED
-#define __GLFW3_H_INCLUDED
-#include <GLFW/glfw3.h>
-#endif
-
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
 #define __GLM_GLM_HPP_INCLUDED
@@ -47,13 +41,15 @@ namespace yli
         class SymbiontSpecies: public yli::ontology::Species
         {
             public:
-                // destructor.
-                virtual ~SymbiontSpecies();
-
-            private:
                 void bind_biont(yli::ontology::Biont* const biont);
 
                 void unbind_biont(const std::size_t childID);
+
+                // destructor.
+                virtual ~SymbiontSpecies();
+
+                std::size_t get_indices_size() const;
+                GLuint get_lightID() const;
 
                 // constructor.
                 SymbiontSpecies(yli::ontology::Universe* const universe, const SpeciesStruct& species_struct)
@@ -67,10 +63,18 @@ namespace yli
                     this->normals                  = species_struct.normals;
                     this->light_position           = species_struct.light_position;
 
-                    std::cout << "Binding `yli::ontology::SymbiontSpecies*` to `yli::ontology::SymbiontMaterial*` ...\n";
-
                     // get `childID` from `SymbiontMaterial` and set pointer to this `SymbiontSpecies`.
                     this->bind_to_parent();
+
+                    this->number_of_bionts = 0;
+                    this->child_vector_pointers_vector.push_back(&this->biont_pointer_vector);
+                    this->type = "yli::ontology::SymbiontSpecies*";
+
+                    if (this->shader == nullptr)
+                    {
+                        std::cerr << "ERROR: `SymbiontSpecies::SymbiontSpecies`: `this->shader` is `nullptr`!\n";
+                        return;
+                    }
 
                     // Get a handle for our buffers.
                     this->vertex_position_modelspaceID = glGetAttribLocation(this->shader->get_programID(), "vertexPosition_modelspace");
@@ -83,7 +87,8 @@ namespace yli
 
                     // water level.
                     GLuint water_level_uniform_location = glGetUniformLocation(this->shader->get_programID(), "water_level");
-                    yli::ontology::Scene* scene = static_cast<yli::ontology::Scene*>(this->shader->get_parent());
+
+                    const yli::ontology::Scene* const scene = static_cast<yli::ontology::Scene*>(this->shader->get_parent());
                     glUniform1f(water_level_uniform_location, scene->get_water_level());
 
                     // Fill the index buffer.
@@ -114,29 +119,19 @@ namespace yli
                     glBufferData(GL_ELEMENT_ARRAY_BUFFER, this->indices.size() * sizeof(GLuint), &this->indices[0] , GL_STATIC_DRAW);
 
                     // TODO: Compute the vertex graph of this `SymbiontSpecies` to enable object vertex modification!
-
-                    this->number_of_bionts = 0;
-
-                    this->child_vector_pointers_vector.push_back(&this->biont_pointer_vector);
-                    this->type = "yli::ontology::SymbiontSpecies*";
                 }
 
                 yli::ontology::Entity* get_parent() const override;
 
-                std::size_t get_indices_size() const;
-                GLuint get_lightID() const;
-
+            private:
                 glm::vec3 light_position;                // light position.
 
-                friend class Symbiosis;
-                friend class SymbiontMaterial;
-                friend class Biont;
                 template<class T1>
-                    friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t* number_of_children);
+                    friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
                 template<class T1>
-                    friend void render_species_or_glyph(T1 species_or_glyph_pointer);
+                    friend void yli::ontology::render_species_or_glyph(T1 species_or_glyph_pointer);
                 template<class T1>
-                    friend void render_children(const std::vector<T1>& child_pointer_vector);
+                    friend void yli::ontology::render_children(const std::vector<T1>& child_pointer_vector);
 
                 void bind_to_parent();
 

@@ -114,6 +114,7 @@ namespace yli
                     {
                         y = static_cast<float>(*(image_pointer + 2)); // y-coordinate is the red (R) value.
                     }
+
                     // y-coordinate is the mean of R, G, & B.
                     else if ((std::strcmp(char_color_channel, "mean") == 0) || (std::strcmp(char_color_channel, "all") == 0))
                     {

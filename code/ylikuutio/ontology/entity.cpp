@@ -5,6 +5,7 @@
 // Include standard headers
 #include <iostream>      // std::cout, std::cin, std::cerr
 #include <limits>        // std::numeric_limits
+#include <memory>        // std::make_shared, std::shared_ptr
 #include <string>        // std::string
 #include <unordered_map> // std::unordered_map
 
@@ -19,7 +20,7 @@ namespace yli
             this->universe = universe;
             this->prerender_callback = nullptr;
             this->postrender_callback = nullptr;
-            this->setting_master = new yli::config::SettingMaster(this);
+            this->setting_master = std::make_shared<yli::config::SettingMaster>(this);
             this->can_be_erased = false;
         }
 
@@ -27,9 +28,6 @@ namespace yli
         {
             // destructor.
             std::cout << "Entity destructor called.\n";
-
-            std::cout << "The setting master of this entity will be destroyed.\n";
-            delete this->setting_master;
 
             if (this->name.empty())
             {
@@ -64,36 +62,45 @@ namespace yli
 
         yli::config::SettingMaster* Entity::get_setting_master() const
         {
-            return this->setting_master;
-        }
-
-        void Entity::set_setting_master(yli::config::SettingMaster* const setting_master)
-        {
-            this->setting_master = setting_master;
+            return this->setting_master.get();
         }
 
         void Entity::prerender() const
         {
+            // requirements:
+            // `this->prerender_callback` must not be `nullptr`.
+            // `this->universe` must not be `nullptr`.
+            // `this->universe->setting_master` must not be `nullptr`.
+
             if (this->prerender_callback != nullptr &&
                     this->universe != nullptr &&
                     this->universe->setting_master != nullptr)
             {
-                this->prerender_callback(this->universe, this->universe->setting_master);
+                this->prerender_callback(this->universe, this->universe->setting_master.get());
             }
         }
 
         void Entity::postrender() const
         {
+            // requirements:
+            // `this->postrender_callback` must not be `nullptr`.
+            // `this->universe` must not be `nullptr`.
+            // `this->universe->setting_master` must not be `nullptr`.
+
             if (this->postrender_callback != nullptr &&
                     this->universe != nullptr &&
                     this->universe->setting_master != nullptr)
             {
-                this->postrender_callback(this->universe, this->universe->setting_master);
+                this->postrender_callback(this->universe, this->universe->setting_master.get());
             }
         }
 
         void Entity::set_name(const std::string& name)
         {
+            // requirements:
+            // `this->universe` must not be `nullptr`.
+            // `name` must not be already in use.
+
             if (this->universe == nullptr)
             {
                 return;

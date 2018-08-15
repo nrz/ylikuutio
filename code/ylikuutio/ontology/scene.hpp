@@ -3,6 +3,7 @@
 
 #include "entity.hpp"
 #include "universe.hpp"
+#include "family_templates.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include GLEW
@@ -76,7 +77,7 @@ namespace yli
                 // this method renders all `Shader`s of this `Scene`.
                 void render();
 
-                yli::ontology::Camera* get_active_camera();
+                yli::ontology::Camera* get_active_camera() const;
                 void set_active_camera(yli::ontology::Camera* camera);
 
                 // this method returns a pointer to an `Entity` using the name as key.
@@ -91,16 +92,10 @@ namespace yli
 
                 float get_water_level() const;
 
-                // this method sets a `Shader` pointer.
-                void set_shader_pointer(const std::size_t childID, yli::ontology::Shader* const child_pointer);
-
-                // this method sets a `Camera` pointer.
-                void set_camera_pointer(const std::size_t childID, yli::ontology::Camera* const child_pointer);
-
                 template<class T1>
-                    friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t* number_of_children);
-                template<class T1, class T2>
-                    friend void yli::hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent, std::vector<T1>& old_child_pointer_vector, std::queue<std::size_t>& old_free_childID_queue, std::size_t* old_number_of_children);
+                    friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
+                template<class T1>
+                    friend std::size_t yli::ontology::get_number_of_descendants(const std::vector<T1>& child_pointer_vector);
 
             private:
                 void bind_to_parent();
@@ -108,9 +103,6 @@ namespace yli
                 yli::ontology::Entity* get_parent() const override;
                 std::size_t get_number_of_children() const override;
                 std::size_t get_number_of_descendants() const override;
-
-                // this method sets a `Symbiosis` pointer.
-                void set_symbiosis_pointer(const std::size_t childID, yli::ontology::Symbiosis* const child_pointer);
 
                 yli::ontology::World* parent;   // pointer to the `World`.
 

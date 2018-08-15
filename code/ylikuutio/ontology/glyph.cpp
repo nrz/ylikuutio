@@ -16,8 +16,19 @@ namespace yli
     {
         void Glyph::bind_to_parent()
         {
+            // requirements:
+            // `this->parent` must not be `nullptr`.
+
+            yli::ontology::VectorFont* const vector_font = this->parent;
+
+            if (vector_font == nullptr)
+            {
+                std::cerr << "ERROR: `Glyph::bind_to_parent`: `vector_font` is `nullptr`!\n";
+                return;
+            }
+
             // get `childID` from `VectorFont` and set pointer to this `Glyph`.
-            this->parent->bind_glyph(this);
+            vector_font->bind_glyph(this);
         }
 
         Glyph::~Glyph()
@@ -27,10 +38,25 @@ namespace yli
             std::string unicode_string = this->unicode_char_pointer;
             std::cout << "This glyph (\"" << glyph_name_string << "\", Unicode: \"" << std::dec << unicode_string << "\") will be destroyed.\n";
 
-            // TODO: Cleanup VBO, shader and texture (copy these from `Species::~Species()`).
+            // Cleanup VBO, shader and texture.
+            glDeleteBuffers(1, &this->vertexbuffer);
+            glDeleteBuffers(1, &this->uvbuffer);
+            glDeleteBuffers(1, &this->normalbuffer);
+            glDeleteBuffers(1, &this->elementbuffer);
+
+            // requirements for further actions:
+            // `this->parent` must not be `nullptr`.
+
+            yli::ontology::VectorFont* const vector_font = this->parent;
+
+            if (vector_font == nullptr)
+            {
+                std::cerr << "ERROR: `Glyph::~Glyph`: `vector_font` is `nullptr`!\n";
+                return;
+            }
 
             // set pointer to this `Glyph` to nullptr.
-            this->parent->set_glyph_pointer(this->childID, nullptr);
+            vector_font->set_glyph_pointer(this->childID, nullptr);
         }
 
         yli::ontology::Entity* Glyph::get_parent() const
@@ -49,11 +75,6 @@ namespace yli
 
                 this->postrender();
             }
-        }
-
-        void Glyph::set_object_pointer(const std::size_t childID, yli::ontology::Object* const child_pointer)
-        {
-            yli::hierarchy::set_child_pointer(childID, child_pointer, this->object_pointer_vector, this->free_objectID_queue, &this->number_of_objects);
         }
 
         const char* Glyph::get_unicode_char_pointer()

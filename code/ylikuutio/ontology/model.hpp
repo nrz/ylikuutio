@@ -36,9 +36,6 @@ namespace yli
         class Model: public yli::ontology::Entity
         {
             public:
-                void bind(yli::ontology::Object* const object);
-                void unbind(const std::size_t childID);
-
                 // constructor.
                 Model(yli::ontology::Universe* const universe, const bool vram_buffer_in_use)
                     : Entity(universe)
@@ -86,16 +83,11 @@ namespace yli
                 void store_vertex_normal_modelspaceID(const GLuint vertex_normal_modelspaceID);
 
                 template<class T1>
-                    friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t* number_of_children);
-                template<class T1, class T2>
-                    friend void yli::hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent, std::vector<T1>& old_child_pointer_vector, std::queue<std::size_t>& old_free_childID_queue, std::size_t* old_number_of_children);
+                    friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
                 template<class T1>
-                    friend void render_species_or_glyph(T1 species_or_glyph_pointer);
+                    friend void yli::ontology::render_species_or_glyph(T1 species_or_glyph_pointer);
 
             protected:
-                // this method sets a object pointer.
-                void set_object_pointer(const std::size_t childID, yli::ontology::Object* const child_pointer);
-
                 GLfloat initial_rotate_angle;            // initial rotate angle.
                 glm::vec3 initial_rotate_vector;         // initial rotate vector.
 

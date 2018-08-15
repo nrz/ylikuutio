@@ -1,5 +1,5 @@
-#ifndef __FONT_HPP_INCLUDED
-#define __FONT_HPP_INCLUDED
+#ifndef __VECTOR_FONT_HPP_INCLUDED
+#define __VECTOR_FONT_HPP_INCLUDED
 
 #include "entity.hpp"
 #include "glyph.hpp"
@@ -7,6 +7,7 @@
 #include "glyph_struct.hpp"
 #include "vector_font_struct.hpp"
 #include "render_templates.hpp"
+#include "family_templates.hpp"
 #include "code/ylikuutio/loaders/font_loader.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
@@ -35,8 +36,11 @@ namespace yli
                 void bind_glyph(yli::ontology::Glyph* const glyph);
                 void bind_text3D(yli::ontology::Text3D* const text3D);
 
-                // this method sets pointer to this species to nullptr, sets `parent` according to the input, and requests a new `childID` from the new material.
-                void bind_to_new_parent(yli::ontology::Material* const new_material_pointer);
+                void unbind_text3D(const std::size_t childID);
+
+                // this method sets pointer to this `Species` to `nullptr`, sets `parent` according to the input,
+                // and requests a new `childID` from the new `Material`.
+                void bind_to_new_parent(yli::ontology::Material* const new_parent);
 
                 // constructor.
                 // TODO: `VectorFont` constructor also creates each `Glyph` and binds them to the `VectorFont`.
@@ -58,6 +62,11 @@ namespace yli
                     // get `childID` from `Material` and set pointer to this `VectorFont`.
                     this->bind_to_parent();
 
+                    this->child_vector_pointers_vector.push_back(&this->glyph_pointer_vector);
+                    this->child_vector_pointers_vector.push_back(&this->text3D_pointer_vector);
+                    this->type = "yli::ontology::VectorFont*";
+
+                    this->can_be_erased = true;
                     bool font_loading_result = false;
 
                     if ((std::strcmp(this->char_font_file_format, "svg") == 0) || (std::strcmp(this->char_font_file_format, "SVG") == 0))
@@ -70,6 +79,17 @@ namespace yli
                                 this->glyph_names,
                                 this->unicode_strings,
                                 is_debug_mode);
+                    }
+
+                    // requirements for further actions:
+                    // `this->parent` must not be `nullptr`.
+
+                    yli::ontology::Material* const material = this->parent;
+
+                    if (material == nullptr)
+                    {
+                        std::cerr << "ERROR: `VectorFont::VectorFont`: `material` is `nullptr`!\n";
+                        return;
                     }
 
                     if (font_loading_result)
@@ -97,7 +117,7 @@ namespace yli
                             glyph_struct.glyph_name_pointer = this->glyph_names.at(glyph_i).c_str();
                             glyph_struct.unicode_char_pointer = unicode_char_pointer;
                             glyph_struct.universe = universe;
-                            glyph_struct.shader_pointer = static_cast<yli::ontology::Shader*>(this->parent->get_parent());
+                            glyph_struct.shader_pointer = static_cast<yli::ontology::Shader*>(material->get_parent());
                             glyph_struct.parent = this;
 
                             std::string glyph_name_string = glyph_struct.glyph_name_pointer;
@@ -110,12 +130,6 @@ namespace yli
                             this->unicode_glyph_map[unicode_value] = glyph;
                         }
                     }
-
-                    this->child_vector_pointers_vector.push_back(&this->glyph_pointer_vector);
-                    this->child_vector_pointers_vector.push_back(&this->text3D_pointer_vector);
-                    this->type = "yli::ontology::VectorFont*";
-
-                    this->can_be_erased = true;
                 }
 
                 // destructor.
@@ -124,9 +138,6 @@ namespace yli
 
                 // this method sets `Glyph` pointer.
                 void set_glyph_pointer(const std::size_t childID, yli::ontology::Glyph* const child_pointer);
-
-                // this method sets `Text3D` pointer.
-                void set_text3D_pointer(const std::size_t childID, yli::ontology::Text3D* const child_pointer);
 
                 // this method returns a pointer to `Glyph` that matches the given `unicode_value`,
                 // and `nullptr` if this `VectorFont` does not contain such a `Glyph`.
@@ -137,11 +148,11 @@ namespace yli
                 yli::ontology::Material* parent; // pointer to `Material`.
 
                 template<class T1>
-                    friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t* number_of_children);
-                template<class T1, class T2>
-                    friend void yli::hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent, std::vector<T1>& old_child_pointer_vector, std::queue<std::size_t>& old_free_childID_queue, std::size_t* old_number_of_children);
+                    friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
                 template<class T1>
-                    friend void render_children(const std::vector<T1>& child_pointer_vector);
+                    friend std::size_t yli::ontology::get_number_of_descendants(const std::vector<T1>& child_pointer_vector);
+                template<class T1>
+                    friend void yli::ontology::render_children(const std::vector<T1>& child_pointer_vector);
 
             private:
                 void bind_to_parent();

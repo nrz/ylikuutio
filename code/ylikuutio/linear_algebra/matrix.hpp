@@ -19,7 +19,7 @@ namespace yli
                 Matrix(std::size_t height, std::size_t width);
 
                 // copy constructor.
-                Matrix(yli::linear_algebra::Matrix& old_matrix);
+                Matrix(const yli::linear_algebra::Matrix& old_matrix);
                 Matrix(std::shared_ptr<yli::linear_algebra::Matrix> old_matrix)
                     : Matrix(*old_matrix) { }
 
@@ -31,7 +31,7 @@ namespace yli
 
                         float& operator[](const std::size_t index)
                         {
-                            return proxy_array.at(index);
+                            return this->proxy_array[index];
                         }
 
                     private:
@@ -40,8 +40,8 @@ namespace yli
 
                 void operator<<(const float rhs);
                 void operator<<(const std::vector<float>& rhs);
-                bool operator==(yli::linear_algebra::Matrix& rhs);
-                bool operator!=(yli::linear_algebra::Matrix& rhs);
+                bool operator==(const yli::linear_algebra::Matrix& rhs);
+                bool operator!=(const yli::linear_algebra::Matrix& rhs);
                 yli::linear_algebra::Matrix& operator++();
                 yli::linear_algebra::Matrix operator++(const int);
                 yli::linear_algebra::Matrix& operator--();

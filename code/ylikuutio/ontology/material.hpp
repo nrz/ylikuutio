@@ -5,6 +5,7 @@
 #include "shader.hpp"
 #include "material_struct.hpp"
 #include "render_templates.hpp"
+#include "family_templates.hpp"
 #include "code/ylikuutio/loaders/texture_loader.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/common/globals.hpp"
@@ -13,12 +14,6 @@
 #ifndef __GL_GLEW_H_INCLUDED
 #define __GL_GLEW_H_INCLUDED
 #include <GL/glew.h> // GLfloat, GLuint etc.
-#endif
-
-// Include GLFW
-#ifndef __GLFW3_H_INCLUDED
-#define __GLFW3_H_INCLUDED
-#include <GLFW/glfw3.h>
 #endif
 
 // Include standard headers
@@ -59,8 +54,6 @@ namespace yli
 
                     this->is_symbiont_material = material_struct.is_symbiont_material;
 
-                    this->terrain_species = nullptr;
-
                     this->texture_file_format = material_struct.texture_file_format;
                     this->texture_filename    = material_struct.texture_filename;
 
@@ -94,15 +87,25 @@ namespace yli
                             std::cerr << "texture file format: " << this->texture_file_format << "\n";
                         }
 
-                        // Get a handle for our "myTextureSampler" uniform.
-                        this->openGL_textureID = glGetUniformLocation(this->parent->get_programID(), "myTextureSampler");
-
                         this->child_vector_pointers_vector.push_back(&this->species_pointer_vector);
                         this->child_vector_pointers_vector.push_back(&this->vector_font_pointer_vector);
                         this->child_vector_pointers_vector.push_back(&this->chunk_master_pointer_vector);
                         this->type = "yli::ontology::Material*";
 
                         this->can_be_erased = true;
+
+                        // requirements for further actions:
+                        // `this->parent` must not be `nullptr`.
+                        yli::ontology::Shader* const shader = this->parent;
+
+                        if (shader == nullptr)
+                        {
+                            std::cerr << "ERROR: `Material::Material`: `shader` is `nullptr`!\n";
+                            return;
+                        }
+
+                        // Get a handle for our "myTextureSampler" uniform.
+                        this->openGL_textureID = glGetUniformLocation(shader->get_programID(), "myTextureSampler");
                     }
                 }
 
@@ -110,28 +113,18 @@ namespace yli
                 virtual ~Material();
 
                 // this method sets pointer to this `Material` to nullptr, sets `parent` according to the input, and requests a new `childID` from the new `Shader`.
-                void bind_to_new_parent(yli::ontology::Shader* const new_shader_pointer);
+                void bind_to_new_parent(yli::ontology::Shader* const new_parent);
 
                 yli::ontology::Entity* get_parent() const override;
 
-                // this method sets `Species` pointer.
-                void set_species_pointer(const std::size_t childID, yli::ontology::Species* const child_pointer);
-
-                // this method sets `VectorFont` pointer.
-                void set_vector_font_pointer(const std::size_t childID, yli::ontology::VectorFont* const child_pointer);
-
-                // this method sets `ChunkMaster` pointer.
-                void set_chunk_master_pointer(const std::size_t childID, yli::ontology::ChunkMaster* const child_pointer);
-
-                // this method sets a terrain `Species` pointer.
-                void set_terrain_species(yli::ontology::Species* const terrain_species);
-
                 template<class T1>
-                    friend void render_children(const std::vector<T1>& child_pointer_vector);
+                    friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
+                template <class T1>
+                    friend void yli::hierarchy::unbind_child_from_parent(const std::size_t childID, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
                 template<class T1>
-                    friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t* number_of_children);
-                template<class T1, class T2>
-                    friend void yli::hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent, std::vector<T1>& old_child_pointer_vector, std::queue<std::size_t>& old_free_childID_queue, std::size_t* old_number_of_children);
+                    friend std::size_t yli::ontology::get_number_of_descendants(const std::vector<T1>& child_pointer_vector);
+                template<class T1>
+                    friend void yli::ontology::render_children(const std::vector<T1>& child_pointer_vector);
 
             private:
                 void bind_to_parent();
@@ -145,8 +138,6 @@ namespace yli
                 yli::ontology::Shader* parent;      // pointer to `Shader`.
 
                 bool is_symbiont_material;
-
-                yli::ontology::Species* terrain_species;    // pointer to terrain `Species` (used in collision detection).
 
                 GLuint texture;                        // Texture of this `Material`, returned by `load_BMP_texture` or `load_DDS_texture` (used for `glGenTextures` etc.).
                 GLuint openGL_textureID;               // texture ID, returned by `glGetUniformLocation(programID, "myTextureSampler");`.

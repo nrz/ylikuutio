@@ -27,9 +27,7 @@ namespace yli
 
                 friend class Graph;
                 template<class T1>
-                    friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t* number_of_children);
-                template<class T1, class T2>
-                    friend void yli::hierarchy::bind_child_to_new_parent(T1 child_pointer, T2 new_parent, std::vector<T1>& old_child_pointer_vector, std::queue<std::size_t>& old_free_childID_queue, std::size_t* old_number_of_children);
+                    friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
 
             private:
                 void bind_to_parent();
@@ -47,7 +45,7 @@ namespace yli
                 // all nodes that are to be transferred must be transferred separately.
                 // before transfering any node to a new graph,
                 // all links to nodes that do not belong to the new graph of this node must be deleted with separate `delete_bidirectional_link` calls.
-                void bind_to_new_parent(yli::graph::Graph *new_graph_pointer);
+                void bind_to_new_parent(yli::graph::Graph* const new_parent);
 
                 std::size_t childID;
                 yli::graph::Graph* parent;

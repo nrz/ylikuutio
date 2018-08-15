@@ -22,22 +22,23 @@ namespace yli
 typedef struct Text3DStruct
 {
     Text3DStruct()
-        : parent(nullptr),
+        : original_scale_vector(glm::vec3(1.0f, 1.0f, 1.0f)),
+        cartesian_coordinates(glm::vec3(NAN, NAN, NAN)),
         text_string_char(nullptr),
-        original_scale_vector(glm::vec3(1.0f, 1.0f, 1.0f)),
-        rotate_angle(NAN),
-        cartesian_coordinates(glm::vec3(NAN, NAN, NAN))
+        parent(nullptr),
+        rotate_angle(NAN)
     {
         // constructor.
     }
-    yli::ontology::VectorFont* parent; // pointer to the parent `VectorFont`.
+
+    glm::vec3 original_scale_vector;   // original scale vector.
+    glm::vec3 cartesian_coordinates;   // coordinate vector.
+    glm::vec3 rotate_vector;           // rotate vector.
+    glm::vec3 translate_vector;        // translate vector.
     std::string text_string;
     const char* text_string_char;
-    glm::vec3 original_scale_vector;      // original scale vector.
-    float rotate_angle;                   // rotate angle.
-    glm::vec3 cartesian_coordinates;      // coordinate vector.
-    glm::vec3 rotate_vector;              // rotate vector.
-    glm::vec3 translate_vector;           // translate vector.
+    yli::ontology::VectorFont* parent; // pointer to the parent `VectorFont`.
+    float rotate_angle;                // rotate angle.
 } Text3DStruct;
 
 #endif

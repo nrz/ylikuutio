@@ -29,10 +29,6 @@ namespace yli
             // costructor.
             this->parent = entity;
             this->number_of_settings = 0;
-
-            // bind to parent.
-            // there can be only 1 `SettingMaster`.
-            this->parent->set_setting_master(this);
         }
 
         SettingMaster::~SettingMaster()

@@ -5,6 +5,7 @@
 #include "symbiosis.hpp"
 #include "material_struct.hpp"
 #include "render_templates.hpp"
+#include "family_templates.hpp"
 #include "code/ylikuutio/loaders/texture_loader.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/common/globals.hpp"
@@ -14,12 +15,6 @@
 #ifndef __GL_GLEW_H_INCLUDED
 #define __GL_GLEW_H_INCLUDED
 #include <GL/glew.h> // GLfloat, GLuint etc.
-#endif
-
-// Include GLFW
-#ifndef __GLFW3_H_INCLUDED
-#define __GLFW3_H_INCLUDED
-#include <GLFW/glfw3.h>
 #endif
 
 // Include standard headers
@@ -41,8 +36,8 @@ namespace yli
                 // destructor.
                 virtual ~SymbiontMaterial();
 
-            private:
-                void bind(yli::ontology::SymbiontSpecies* const symbiont_species);
+                void bind_symbiont_species(yli::ontology::SymbiontSpecies* const symbiont_species);
+                void unbind_symbiont_species(const std::size_t childID);
 
                 // constructor.
                 SymbiontMaterial(yli::ontology::Universe* const universe, const MaterialStruct& material_struct)
@@ -64,19 +59,17 @@ namespace yli
                     this->type = "yli::ontology::SymbiontMaterial*";
                 }
 
-                // this method sets `SymbiontSpecies` pointer.
-                void set_symbiont_species_pointer(const std::size_t childID, yli::ontology::SymbiontSpecies* const child_pointer);
-
                 GLuint get_texture() const;
                 GLuint get_openGL_textureID() const;
 
-                friend class Symbiosis;
-                friend class SymbiontSpecies;
                 template<class T1>
-                    friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t* number_of_children);
+                    friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
                 template<class T1>
-                    friend void render_children(const std::vector<T1>& child_pointer_vector);
+                    friend std::size_t yli::ontology::get_number_of_descendants(const std::vector<T1>& child_pointer_vector);
+                template<class T1>
+                    friend void yli::ontology::render_children(const std::vector<T1>& child_pointer_vector);
 
+            private:
                 void bind_to_parent();
 
                 void load_texture();

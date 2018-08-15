@@ -6,6 +6,7 @@
 #include "glyph.hpp"
 #include "symbiosis.hpp"
 #include "render_templates.hpp"
+#include "family_templates.hpp"
 #include "shader_struct.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
@@ -31,7 +32,7 @@ namespace yli
                     material,
                     this->material_pointer_vector,
                     this->free_materialID_queue,
-                    &this->number_of_materials);
+                    this->number_of_materials);
         }
 
         void Shader::bind_symbiosis(yli::ontology::Symbiosis* const symbiosis)
@@ -41,44 +42,71 @@ namespace yli
                     symbiosis,
                     this->symbiosis_pointer_vector,
                     this->free_symbiosisID_queue,
-                    &this->number_of_symbioses);
+                    this->number_of_symbioses);
         }
 
         void Shader::unbind_material(const std::size_t childID)
         {
-            yli::ontology::Material* dummy_child_pointer = nullptr;
-            yli::hierarchy::set_child_pointer(
+            yli::hierarchy::unbind_child_from_parent(
                     childID,
-                    dummy_child_pointer,
                     this->material_pointer_vector,
                     this->free_materialID_queue,
-                    &this->number_of_materials);
+                    this->number_of_materials);
         }
 
         void Shader::unbind_symbiosis(const std::size_t childID)
         {
-            yli::ontology::Symbiosis* dummy_child_pointer = nullptr;
-            yli::hierarchy::set_child_pointer(
+            yli::hierarchy::unbind_child_from_parent(
                     childID,
-                    dummy_child_pointer,
                     this->symbiosis_pointer_vector,
                     this->free_symbiosisID_queue,
-                    &this->number_of_symbioses);
+                    this->number_of_symbioses);
         }
 
         void Shader::bind_to_parent()
         {
-            // get `childID` from `Scene` and set pointer to this `Shader`.
-            this->parent->bind_shader(this);
+            // requirements:
+            // `this->parent` must not be `nullptr`.
+            yli::ontology::Scene* const scene = this->parent;
+
+            if (scene == nullptr)
+            {
+                std::cerr << "ERROR: `Shader::bind_to_parent`: `scene` is `nullptr`!\n";
+                return;
+            }
+
+            // get `childID` from the `Scene` and set pointer to this `Shader`.
+            scene->bind_shader(this);
         }
 
-        void Shader::bind_to_new_parent(yli::ontology::Scene* const new_scene_pointer)
+        void Shader::bind_to_new_parent(yli::ontology::Scene* const new_parent)
         {
+            // this method sets pointer to this `Shader` to `nullptr`, sets `parent` according to the input,
+            // and requests a new `childID` from the new `Scene`.
+            //
+            // requirements:
+            // `this->symbiosis_parent` must not be `nullptr`.
+            // `new_parent` must not be `nullptr`.
+
+            yli::ontology::Scene* const scene = this->parent;
+
+            if (scene == nullptr)
+            {
+                std::cerr << "ERROR: `Shader::bind_to_new_parent`: `scene` is `nullptr`!\n";
+                return;
+            }
+
+            if (new_parent == nullptr)
+            {
+                std::cerr << "ERROR: `Shader::bind_to_new_parent`: `new_parent` is `nullptr`!\n";
+                return;
+            }
+
             // unbind from the old parent `Scene`.
             this->parent->unbind_shader(this->childID);
 
             // get `childID` from `Scene` and set pointer to this `Shader`.
-            this->parent = new_scene_pointer;
+            this->parent = new_parent;
             this->parent->bind_shader(this);
         }
 
@@ -89,14 +117,26 @@ namespace yli
 
             // destroy all materials of this shader.
             std::cout << "All materials of this shader will be destroyed.\n";
-            yli::hierarchy::delete_children<yli::ontology::Material*>(this->material_pointer_vector, &this->number_of_materials);
+            yli::hierarchy::delete_children<yli::ontology::Material*>(this->material_pointer_vector, this->number_of_materials);
 
             // destroy all symbioses of this shader.
             std::cout << "All symbioses of this shader will be destroyed.\n";
-            yli::hierarchy::delete_children<yli::ontology::Symbiosis*>(this->symbiosis_pointer_vector, &this->number_of_symbioses);
+            yli::hierarchy::delete_children<yli::ontology::Symbiosis*>(this->symbiosis_pointer_vector, this->number_of_symbioses);
 
-            // set pointer to this shader to nullptr.
-            this->parent->set_shader_pointer(this->childID, nullptr);
+            // requirements for further actions (except `glDeleteProgram`):
+            // `this->parent` must not be `nullptr`.
+
+            yli::ontology::Scene* const scene = this->parent;
+
+            if (scene == nullptr)
+            {
+                std::cerr << "ERROR: `Shader::~Shader`: `scene` is `nullptr`!\n";
+            }
+            else
+            {
+                // set pointer to this `Shader` to `nullptr`.
+                scene->unbind_shader(this->childID);
+            }
 
             glDeleteProgram(this->programID);
         }
@@ -129,17 +169,8 @@ namespace yli
 
         std::size_t Shader::get_number_of_descendants() const
         {
-            return 0; // TODO; write the code!
-        }
-
-        void Shader::set_material_pointer(const std::size_t childID, yli::ontology::Material* const child_pointer)
-        {
-            yli::hierarchy::set_child_pointer(childID, child_pointer, this->material_pointer_vector, this->free_materialID_queue, &this->number_of_materials);
-        }
-
-        void Shader::set_symbiosis_pointer(const std::size_t childID, yli::ontology::Symbiosis* const child_pointer)
-        {
-            yli::hierarchy::set_child_pointer(childID, child_pointer, this->symbiosis_pointer_vector, this->free_symbiosisID_queue, &this->number_of_symbioses);
+            return yli::ontology::get_number_of_descendants(this->material_pointer_vector) +
+                yli::ontology::get_number_of_descendants(this->symbiosis_pointer_vector);
         }
 
         GLuint Shader::get_programID() const

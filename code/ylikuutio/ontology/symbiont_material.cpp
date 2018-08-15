@@ -2,6 +2,7 @@
 #include "symbiont_species.hpp"
 #include "symbiosis.hpp"
 #include "render_templates.hpp"
+#include "family_templates.hpp"
 #include "material_struct.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include <ofbx.h>
@@ -12,12 +13,6 @@
 #include <GL/glew.h> // GLfloat, GLuint etc.
 #endif
 
-// Include GLFW
-#ifndef __GLFW3_H_INCLUDED
-#define __GLFW3_H_INCLUDED
-#include <GLFW/glfw3.h>
-#endif
-
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
@@ -26,20 +21,39 @@ namespace yli
 {
     namespace ontology
     {
-        void SymbiontMaterial::bind(yli::ontology::SymbiontSpecies* const symbiont_species)
+        void SymbiontMaterial::bind_symbiont_species(yli::ontology::SymbiontSpecies* const symbiont_species)
         {
             // get `childID` from `SymbiontMaterial` and set pointer to `symbiont_species`.
             yli::hierarchy::bind_child_to_parent<yli::ontology::SymbiontSpecies*>(
                     symbiont_species,
                     this->symbiont_species_pointer_vector,
                     this->free_symbiont_speciesID_queue,
-                    &this->number_of_symbiont_species);
+                    this->number_of_symbiont_species);
+        }
+
+        void SymbiontMaterial::unbind_symbiont_species(const std::size_t childID)
+        {
+            yli::hierarchy::unbind_child_from_parent<yli::ontology::SymbiontSpecies*>(
+                    childID,
+                    this->symbiont_species_pointer_vector,
+                    this->free_symbiont_speciesID_queue,
+                    this->number_of_symbiont_species);
         }
 
         void SymbiontMaterial::bind_to_parent()
         {
+            // requirements:
+            // `this->symbiosis_parent` must not be `nullptr`.
+            yli::ontology::Symbiosis* const symbiosis = this->parent;
+
+            if (symbiosis == nullptr)
+            {
+                std::cerr << "ERROR: `SymbiontMaterial::bind_to_parent`: `symbiosis` is `nullptr`!\n";
+                return;
+            }
+
             // get `childID` from `Symbiosis` and set pointer to this `SymbiontMaterial`.
-            this->parent->bind_symbiont_material(this);
+            symbiosis->bind_symbiont_material(this);
         }
 
         SymbiontMaterial::~SymbiontMaterial()
@@ -49,12 +63,23 @@ namespace yli
 
             // destroy all symbiont species of this symbiont material.
             std::cout << "All symbiont species of this symbiont material will be destroyed.\n";
-            yli::hierarchy::delete_children<yli::ontology::SymbiontSpecies*>(this->symbiont_species_pointer_vector, &this->number_of_symbiont_species);
+            yli::hierarchy::delete_children<yli::ontology::SymbiontSpecies*>(this->symbiont_species_pointer_vector, this->number_of_symbiont_species);
 
             glDeleteTextures(1, &this->texture);
 
+            // requirements for further actions:
+            // `this->parent` must not be `nullptr`.
+
+            yli::ontology::Symbiosis* const symbiosis = this->parent;
+
+            if (symbiosis == nullptr)
+            {
+                std::cerr << "ERROR: `SymbiontMaterial::~SymbiontMaterial`: `symbiosis` is `nullptr`!\n";
+                return;
+            }
+
             // set pointer to this symbiont_material to nullptr.
-            this->parent->set_symbiont_material_pointer(this->childID, nullptr);
+            symbiosis->unbind_symbiont_material(this->childID);
         }
 
         void SymbiontMaterial::render()
@@ -85,16 +110,7 @@ namespace yli
 
         std::size_t SymbiontMaterial::get_number_of_descendants() const
         {
-            return 0; // TODO; write the code!
-        }
-
-        void SymbiontMaterial::set_symbiont_species_pointer(const std::size_t childID, yli::ontology::SymbiontSpecies* const child_pointer)
-        {
-            yli::hierarchy::set_child_pointer(
-                    childID, child_pointer,
-                    this->symbiont_species_pointer_vector,
-                    this->free_symbiont_speciesID_queue,
-                    &this->number_of_symbiont_species);
+            return yli::ontology::get_number_of_descendants(this->symbiont_species_pointer_vector);
         }
 
         void SymbiontMaterial::load_texture()

@@ -41,6 +41,9 @@ namespace yli
         class Text3D: public yli::ontology::Movable
         {
             public:
+                void bind_object(yli::ontology::Object* const object);
+                void unbind_object(const std::size_t childID);
+
                 // this method deletes all glyph Objects of this `Text3D`,
                 // sets pointer to this `Text3D` to nullptr,
                 // sets `parent` according to the input (the new `VectorFont`),
@@ -85,13 +88,10 @@ namespace yli
                 std::size_t get_number_of_children() const override;
                 std::size_t get_number_of_descendants() const override;
 
-                // this method sets a object pointer.
-                void set_object_pointer(const std::size_t childID, yli::ontology::Object* const child_pointer);
-
                 friend class Object;
                 friend void create_glyph_objects(const std::string& text_string, yli::ontology::Text3D* text3D);
                 template<class T1>
-                    friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t* number_of_children);
+                    friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
 
             private:
                 void bind_to_parent();

@@ -11,12 +11,6 @@
 #include <GL/glew.h> // GLfloat, GLuint etc.
 #endif
 
-// Include GLFW
-#ifndef __GLFW3_H_INCLUDED
-#define __GLFW3_H_INCLUDED
-#include <GLFW/glfw3.h>
-#endif
-
 // Include standard headers
 #include <cmath>    // floor, NAN, sqrt, std::isnan, std::pow
 #include <cstddef>  // std::size_t
@@ -95,7 +89,7 @@ namespace yli
             char filename_buffer[filename_buffer_size];
             const char separator = '/'; // FIXME: don't assume slash as some operating systems may use other characters.
 
-            int32_t filename_length = yli::string::extract_last_part_of_string(
+            std::size_t filename_length = yli::string::extract_last_part_of_string(
                     filename.c_str(),
                     filename.size(),
                     filename_buffer,

@@ -180,7 +180,7 @@ namespace detail
 	{
 		return detail::compute_cross<T, Q, detail::is_aligned<Q>::value>::call(x, y);
 	}
-
+/*
 	// normalize
 	template<typename genType>
 	GLM_FUNC_QUALIFIER genType normalize(genType const& x)
@@ -189,7 +189,7 @@ namespace detail
 
 		return x < genType(0) ? genType(-1) : genType(1);
 	}
-
+*/
 	template<length_t L, typename T, qualifier Q>
 	GLM_FUNC_QUALIFIER vec<L, T, Q> normalize(vec<L, T, Q> const& x)
 	{
@@ -242,6 +242,6 @@ namespace detail
 	}
 }//namespace glm
 
-#if GLM_USE_SIMD == GLM_ENABLE
+#if GLM_CONFIG_SIMD == GLM_ENABLE
 #	include "func_geometric_simd.inl"
 #endif

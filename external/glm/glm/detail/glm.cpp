@@ -4,7 +4,7 @@
 #define GLM_FORCE_MESSAGES
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm/glm.hpp>
-#include <glm/ext/vec1.hpp>
+#include <glm/gtc/vec1.hpp>
 #include <glm/gtc/quaternion.hpp>
 #include <glm/gtx/dual_quaternion.hpp>
 
@@ -237,14 +237,14 @@ template struct mat<4, 4, float32, highp>;
 template struct mat<4, 4, float64, highp>;
 
 // tquat type explicit instantiation
-template struct tquat<float32, lowp>;
-template struct tquat<float64, lowp>;
+template struct qua<float32, lowp>;
+template struct qua<float64, lowp>;
 
-template struct tquat<float32, mediump>;
-template struct tquat<float64, mediump>;
+template struct qua<float32, mediump>;
+template struct qua<float64, mediump>;
 
-template struct tquat<float32, highp>;
-template struct tquat<float64, highp>;
+template struct qua<float32, highp>;
+template struct qua<float64, highp>;
 
 //tdualquat type explicit instantiation
 template struct tdualquat<float32, lowp>;

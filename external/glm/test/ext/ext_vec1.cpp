@@ -1,6 +1,6 @@
 #define GLM_FORCE_SWIZZLE
 #include <glm/vector_relational.hpp>
-#include <glm/ext/vec1.hpp>
+#include <glm/gtc/vec1.hpp>
 #include <vector>
 
 static glm::vec1 g1;
@@ -10,8 +10,8 @@ static int test_vec1_operators()
 {
 	int Error(0);
 
-	glm::vec1 A(1.0f);
-	glm::vec1 B(1.0f);
+	glm::ivec1 A(1);
+	glm::ivec1 B(1);
 	{
 		bool R = A != B;
 		bool S = A == B;
@@ -20,10 +20,10 @@ static int test_vec1_operators()
 	}
 
 	{
-		A *= 1.0f;
-		B *= 1.0;
-		A += 1.0f;
-		B += 1.0;
+		A *= 1;
+		B *= 1;
+		A += 1;
+		B += 1;
 
 		bool R = A != B;
 		bool S = A == B;

@@ -670,12 +670,12 @@ namespace yli
             {
                 if (console->in_history)
                 {
-                    console->history_line_i -= console->n_rows;
+                    console->history_line_i = console->history_line_i > console->n_rows ? console->history_line_i - console->n_rows : 0;
                 }
                 else
                 {
                     console->in_history = true;
-                    console->history_line_i = console->console_history.size() - 2 * console->n_rows;
+                    console->history_line_i = console->console_history.size() > 2 * console->n_rows ? console->console_history.size() > 2 * console->n_rows : 0;
                 }
 
                 if (console->history_line_i + console->n_rows >= console->console_history.size())

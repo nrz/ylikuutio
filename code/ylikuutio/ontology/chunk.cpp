@@ -8,16 +8,35 @@ namespace yli
     {
         void Chunk::bind_to_parent()
         {
+            // requirements:
+            // `this->parent` must not be `nullptr`.
+            yli::ontology::ChunkMaster* const chunk_master = this->parent;
+
+            if (chunk_master == nullptr)
+            {
+                std::cerr << "ERROR: `Chunk::bind_to_parent`: `chunk_master` is `nullptr`!\n";
+                return;
+            }
+
             // get `childID` from the `ChunkMaster` and set pointer to this `Chunk`.
-            yli::hierarchy::bind_child_to_parent<ontology::Chunk*>(this, this->parent->chunk_pointer_vector, this->parent->free_chunkID_queue, &this->parent->number_of_chunks);
+            chunk_master->bind_chunk(this);
         }
 
         Chunk::~Chunk()
         {
             // destructor.
+            //
+            // requirements:
+            // `this->parent` must not be `nullptr`.
+            yli::ontology::ChunkMaster* const chunk_master = this->parent;
 
-            // set pointer to this `Chunk` to nullptr.
-            this->parent->set_chunk_pointer(this->childID, nullptr);
+            if (chunk_master == nullptr)
+            {
+                std::cerr << "ERROR: `Chunk::~Chunk`: `chunk_master` is `nullptr`!\n";
+                return;
+            }
+
+            chunk_master->unbind_chunk(this->childID);
         }
 
         void Chunk::render()

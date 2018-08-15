@@ -13,7 +13,6 @@
 #	pragma message("GLM: All extensions included (not recommended)")
 #endif//GLM_MESSAGES
 
-#include "./ext/vec1.hpp"
 #include "./ext/vector_relational.hpp"
 
 #include "./gtc/bitfield.hpp"
@@ -35,7 +34,7 @@
 #include "./gtc/type_ptr.hpp"
 #include "./gtc/ulp.hpp"
 #include "./gtc/vec1.hpp"
-#if GLM_USE_ALIGNED_GENTYPES == GLM_ENABLE
+#if GLM_CONFIG_ALIGNED_GENTYPES == GLM_ENABLE
 #	include "./gtc/type_aligned.hpp"
 #endif
 
