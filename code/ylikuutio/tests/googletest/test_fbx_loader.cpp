@@ -193,6 +193,7 @@ TEST(OpenFBX_must_function_appropriately, turbo_polizei)
         ASSERT_NE(normals, nullptr);
 
         const ofbx::Vec2* const uvs = geometry->getUVs();
+        ASSERT_NE(uvs, nullptr);
 
         const ofbx::Vec4* const colors = geometry->getColors();
 
