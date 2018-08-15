@@ -450,6 +450,15 @@ TEST(OpenFBX_must_function_appropriately, fantasy_house_with_balcony)
         const int material_count = mesh->getMaterialCount();
         ASSERT_GT(material_count, 0);
 
+        if (i == 0)
+        {
+            ASSERT_EQ(material_count, 12);
+        }
+        else
+        {
+            ASSERT_EQ(material_count, 1);
+        }
+
         for (int j = 0; j < material_count; j++)
         {
             const ofbx::Material* const material = mesh->getMaterial(j);
