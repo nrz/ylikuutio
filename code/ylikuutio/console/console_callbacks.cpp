@@ -27,19 +27,6 @@ namespace yli
 
         // Action mode keyrelease callbacks begin here.
 
-        std::shared_ptr<yli::datatypes::AnyValue> Console::enable_enter_console(
-                yli::callback_system::CallbackEngine*,
-                yli::callback_system::CallbackObject*,
-                std::vector<yli::callback_system::CallbackParameter*>&,
-                yli::console::Console* console)
-        {
-            if (!console->in_console)
-            {
-                console->can_enter_console = true;
-            }
-            return nullptr;
-        }
-
         // Action mode keypress callbacks begin here.
 
         std::shared_ptr<yli::datatypes::AnyValue> Console::enter_console(
@@ -49,7 +36,6 @@ namespace yli
                 yli::console::Console* console)
         {
             if (!console->in_console &&
-                    console->can_enter_console &&
                     console->my_keypress_callback_engine_vector_pointer != nullptr &&
                     console->my_keyrelease_callback_engine_vector_pointer != nullptr &&
                     console->current_keypress_callback_engine_vector_pointer_pointer != nullptr &&
@@ -71,15 +57,9 @@ namespace yli
                 *console->current_keyrelease_callback_engine_vector_pointer_pointer =
                     console->my_keyrelease_callback_engine_vector_pointer;
 
-                glfwSetCharModsCallback(console->universe->get_window(), Console::charmods_callback);
-
                 // Mark that we're in console.
                 console->in_console = true;
                 console->in_historical_input = false;
-
-                // Usually key release is required to enable enter console.
-                console->can_exit_console = false;
-                console->can_enter_console = false;
 
                 // Signal to caller that we have entered the console.
                 uint32_t enter_console_magic_number = ENTER_CONSOLE_MAGIC_NUMBER;
@@ -92,19 +72,6 @@ namespace yli
         }
 
         // Console mode keyrelease callbacks begin here.
-
-        std::shared_ptr<yli::datatypes::AnyValue> Console::enable_exit_console(
-                yli::callback_system::CallbackEngine*,
-                yli::callback_system::CallbackObject*,
-                std::vector<yli::callback_system::CallbackParameter*>&,
-                yli::console::Console* console)
-        {
-            if (console->in_console)
-            {
-                console->can_exit_console = true;
-            }
-            return nullptr;
-        }
 
         std::shared_ptr<yli::datatypes::AnyValue> Console::release_left_control_in_console(
                 yli::callback_system::CallbackEngine*,
@@ -751,42 +718,6 @@ namespace yli
         }
 
         // Public callbacks end here.
-
-        // Keep these variable types as this is according to GLFW documentation!
-        // So: `unsigned int codepoint`, `int mods`.
-        void Console::charmods_callback(GLFWwindow* window, unsigned int codepoint, int mods)
-        {
-            // `int mods` values:
-            // No modificators:       0x00
-            // Shift (left or right): 0x01
-            // Alt (not AltGr):       0x04
-            // Shift + Alt:           0x05
-            yli::ontology::Universe* universe = static_cast<yli::ontology::Universe*>(glfwGetWindowUserPointer(window));
-
-            if (universe == nullptr)
-            {
-                return;
-            }
-
-            yli::console::Console* console = universe->get_console();
-
-            if (console == nullptr)
-            {
-                return;
-            }
-
-            if ((mods == 0 || mods == 1) &&
-                    console->in_console &&
-                    !console->is_left_control_pressed &&
-                    !console->is_right_control_pressed &&
-                    !console->is_left_alt_pressed)
-            {
-                console->in_history = false;
-                console->cursor_it = console->current_input.insert(console->cursor_it, static_cast<char>(codepoint));
-                console->cursor_it++;
-                console->cursor_index++;
-            }
-        }
 
         // Callbacks end here.
     }

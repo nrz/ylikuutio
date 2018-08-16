@@ -1,5 +1,5 @@
 # CMake entry point
-cmake_minimum_required(VERSION 2.6.2)
+cmake_minimum_required(VERSION 2.8.11)
 project(ylikuutio)
 
 # http://stackoverflow.com/questions/11783932/how-to-add-linker-or-compile-flag-in-cmake-file/11797272#11797272
@@ -11,7 +11,7 @@ project(ylikuutio)
 set(ENABLE_SCRIPTING_WITH_TINYSCHEME true)
 
 # comment the following line to use `libsdl2-dev` shipped with Linux.
-set(COMPILE_SDL_FROM_SOURCE true)
+# set(COMPILE_SDL_FROM_SOURCE true)
 
 # comment the following line to use `libsfml-dev` shipped with Linux.
 set(COMPILE_SFML_FROM_SOURCE true)
@@ -76,11 +76,6 @@ enable_testing()
 # Set default ExternalProject root directory
 set_directory_properties(PROPERTIES EP_PREFIX ${CMAKE_BINARY_DIR}/external)
 
-# Do not compile GLFW tests, examples and documentation.
-set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
-set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
-set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
-
 if (COMPILE_SFML_FROM_SOURCE)
     include_directories(
         external/SFML-2.4.2/include/
@@ -97,6 +92,7 @@ endif()
 if (COMPILE_SDL_FROM_SOURCE)
     include_directories(
         external/SDL2-2.0.8/include/
+        external/SDL2-2.0.8/src
         )
 else()
     include_directories(
@@ -108,7 +104,6 @@ include_directories(
     # external/asio/asio/include/
     external/FastNoiseSIMD/
     external/glew-2.0.0/include/
-    external/glfw/include/
     external/glm/
     external/OpenFBX/src/
     external/pugixml/src/
@@ -228,9 +223,7 @@ endif()
 
 set(ALL_LIBS
     ${OPENGL_LIBRARY}
-    ${SDL2_LIBRARIES}
     # assimp
-    glfw
     GLEW_200
     pugixml
     miniz
@@ -247,6 +240,18 @@ else()
     set(ALL_LIBS
         ${ALL_LIBS}
         ${SFML_LIBRARIES}
+        )
+endif()
+
+
+if (COMPILE_SDL_FROM_SOURCE)
+    set(ALL_LIBS
+        ${ALL_LIBS}
+        )
+else()
+    set(ALL_LIBS
+        ${ALL_LIBS}
+        ${SDL2_LIBRARIES}
         )
 endif()
 

@@ -14,7 +14,6 @@ include_directories(
     # asio/asio/include/
     FastNoiseSIMD/
     glew-2.0.0/include/
-    glfw/include/
     glm/
     OpenFBX/src/
     pugixml/src/
@@ -24,9 +23,6 @@ include_directories(
 
 # pugixml
 add_subdirectory(pugixml)
-
-### GLFW ###
-add_subdirectory(glfw)
 
 if (COMPILE_SDL_FROM_SOURCE)
     add_subdirectory(SDL2-2.0.8)
@@ -55,14 +51,12 @@ if(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
             ${OPENGL_LIBRARY}
             -lGL -lGLU -lXrandr -lXext -lX11 -lrt
             ${CMAKE_DL_LIBS}
-            ${GLFW_LIBRARIES}
             )
     endif()
 elseif(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     set(OPENGL_LIBRARY
         ${OPENGL_LIBRARY}
         ${CMAKE_DL_LIBS}
-        ${GLFW_LIBRARIES}
         )
 endif(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
 
