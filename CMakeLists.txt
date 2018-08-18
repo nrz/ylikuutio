@@ -11,7 +11,7 @@ project(ylikuutio)
 set(ENABLE_SCRIPTING_WITH_TINYSCHEME true)
 
 # comment the following line to use `libsdl2-dev` shipped with Linux.
-# set(COMPILE_SDL_FROM_SOURCE true)
+set(COMPILE_SDL_FROM_SOURCE true)
 
 # comment the following line to use `libsfml-dev` shipped with Linux.
 set(COMPILE_SFML_FROM_SOURCE true)
@@ -89,10 +89,9 @@ else()
         )
 endif()
 
-if (COMPILE_SDL_FROM_SOURCE)
+if(COMPILE_SDL_FROM_SOURCE)
     include_directories(
         external/SDL2-2.0.8/include/
-        external/SDL2-2.0.8/src
         )
 else()
     include_directories(
@@ -247,6 +246,7 @@ endif()
 if (COMPILE_SDL_FROM_SOURCE)
     set(ALL_LIBS
         ${ALL_LIBS}
+        SDL2
         )
 else()
     set(ALL_LIBS

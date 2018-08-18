@@ -1,6 +1,6 @@
 #include "time.hpp"
 
-#include <SDL.h>
+#include "SDL.h"
 
 // Include standard headers
 #include <stdint.h> // uint32_t etc.

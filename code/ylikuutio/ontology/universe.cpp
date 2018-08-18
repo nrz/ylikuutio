@@ -38,7 +38,7 @@
 #include <GL/glew.h> // GLfloat, GLuint etc.
 #endif
 
-#include <SDL.h>
+#include "SDL.h"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED

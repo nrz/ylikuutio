@@ -9,7 +9,7 @@
 #include "code/ylikuutio/map/ylikuutio_map.hpp"
 #include "code/ylikuutio/common/printing_struct.hpp"
 
-#include <SDL.h>
+#include "SDL.h"
 
 // Include standard headers
 #include <cstddef>       // std::size_t

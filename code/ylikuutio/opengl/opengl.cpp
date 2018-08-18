@@ -6,7 +6,7 @@
 #include <GL/glew.h> // GLfloat, GLuint etc.
 #endif
 
-#include <SDL.h>
+#include "SDL.h"
 
 // Include standard headers
 #include <iostream> // std::cout, std::cin, std::cerr
