@@ -15,11 +15,7 @@
 #include <GL/glew.h> // GLfloat, GLuint etc.
 #endif
 
-// Include GLFW
-#ifndef __GLFW3_H_INCLUDED
-#define __GLFW3_H_INCLUDED
-#include <GLFW/glfw3.h>
-#endif
+#include "SDL.h"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -31,8 +27,10 @@
 #include <cmath>         // NAN, std::isnan, std::pow
 #include <cstddef>       // std::size_t
 #include <iostream>      // std::cout, std::cin, std::cerr
+#include <limits>        // std::numeric_limits
 #include <memory>        // std::make_shared, std::shared_ptr
 #include <queue>         // std::queue
+#include <stdint.h>      // uint32_t etc.
 #include <unordered_map> // std::unordered_map
 #include <string>        // std::string
 #include <vector>        // std::vector
@@ -323,8 +321,8 @@ namespace yli
 
                     this->max_FPS = universe_struct.max_FPS;
                     this->delta_time = NAN;
-                    this->last_time_before_reading_keyboard = NAN;
-                    this->current_time_before_reading_keyboard = NAN;
+                    this->last_time_before_reading_keyboard = std::numeric_limits<uint32_t>::max();
+                    this->current_time_before_reading_keyboard = std::numeric_limits<uint32_t>::max();
 
                     this->has_mouse_ever_moved = false;
                     this->can_toggle_invert_mouse = false;
@@ -353,26 +351,31 @@ namespace yli
                     this->child_vector_pointers_vector.push_back(&this->world_pointer_vector);
                     this->type = "yli::ontology::Universe*";
 
-                    // Initialise GLFW
+                    // Initialise SDL
                     if (!yli::opengl::init_window())
                     {
-                        std::cerr << "Failed to initialize GLFW.\n";
+                        std::cerr << "Failed to initialize SDL.\n";
                         return;
                     }
 
                     // Open a window and create its OpenGL context.
                     std::cout << "Opening a window and creating its OpenGL context...\n";
-                    this->set_window(
-                            yli::opengl::create_window(
-                                static_cast<int>(this->window_width),
-                                static_cast<int>(this->window_height),
-                                this->window_title.c_str(),
-                                nullptr,
-                                nullptr));
+                    this->window = yli::opengl::create_window(
+                            static_cast<int>(this->window_width),
+                            static_cast<int>(this->window_height),
+                            this->window_title.c_str());
+
+                    if (this->window == nullptr)
+                    {
+                        std::cerr << "SDL Window could not be created!\n";
+                    }
+
+                    this->create_context();
+                    this->make_context_current();
 
                     // Disable vertical sync.
                     // TODO: add option to enable/disable vsync in the console.
-                    glfwSwapInterval(0);
+                    SDL_GL_SetSwapInterval(0);
                 }
 
                 // destructor.
@@ -407,11 +410,11 @@ namespace yli
                 std::size_t get_number_of_children() const override;
                 std::size_t get_number_of_descendants() const override;
 
-                // this method sets a new `window`.
-                void set_window(GLFWwindow* window);
+                void create_context();
+                void make_context_current();
 
                 // this method returns current `window`.
-                GLFWwindow* get_window() const;
+                SDL_Window* get_window() const;
 
                 // this method returns current `window_width`.
                 std::size_t get_window_width() const;
@@ -546,11 +549,12 @@ namespace yli
                 GLclampf background_alpha;
 
                 // Variables related to the window.
-                GLFWwindow* window;
+                SDL_Window* window;
                 std::size_t window_width;
                 std::size_t window_height;
                 std::string window_title;
                 bool is_headless;
+                SDL_GLContext context;
 
                 // Variables related to the camera.
                 glm::mat4 current_camera_projection_matrix;
@@ -564,10 +568,10 @@ namespace yli
 
                 // Variables related to timing of events.
                 std::size_t max_FPS;
-                float delta_time;
+                double delta_time;
 
-                double last_time_before_reading_keyboard;
-                double current_time_before_reading_keyboard;
+                uint32_t last_time_before_reading_keyboard;
+                uint32_t current_time_before_reading_keyboard;
         };
     }
 }

@@ -193,6 +193,7 @@ TEST(OpenFBX_must_function_appropriately, turbo_polizei)
         ASSERT_NE(normals, nullptr);
 
         const ofbx::Vec2* const uvs = geometry->getUVs();
+        ASSERT_NE(uvs, nullptr);
 
         const ofbx::Vec4* const colors = geometry->getColors();
 
@@ -448,6 +449,15 @@ TEST(OpenFBX_must_function_appropriately, fantasy_house_with_balcony)
 
         const int material_count = mesh->getMaterialCount();
         ASSERT_GT(material_count, 0);
+
+        if (i == 0)
+        {
+            ASSERT_EQ(material_count, 12);
+        }
+        else
+        {
+            ASSERT_EQ(material_count, 1);
+        }
 
         for (int j = 0; j < material_count; j++)
         {

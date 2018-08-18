@@ -38,11 +38,7 @@
 #include <GL/glew.h> // GLfloat, GLuint etc.
 #endif
 
-// Include GLFW
-#ifndef __GLFW3_H_INCLUDED
-#define __GLFW3_H_INCLUDED
-#include <GLFW/glfw3.h>
-#endif
+#include "SDL.h"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -60,7 +56,9 @@
 #include <cstddef>       // std::size_t
 #include <inttypes.h>    // PRId32, PRId64, PRIu32, PRIu64, PRIx32, PRIx64
 #include <iostream>      // std::cout, std::cin, std::cerr
+#include <limits>        // std::numeric_limits
 #include <memory>        // std::make_shared, std::shared_ptr
+#include <stdint.h>      // uint32_t etc.
 #include <string>        // std::string
 #include <unordered_map> // std::unordered_map
 #include <vector>        // std::vector
@@ -88,7 +86,7 @@ namespace yli
             std::cout << "All worlds of this universe will be destroyed.\n";
             yli::hierarchy::delete_children<yli::ontology::World*>(this->world_pointer_vector, this->number_of_worlds);
 
-            glfwTerminate();
+            SDL_Quit();
         }
 
         void Universe::render()
@@ -161,13 +159,17 @@ namespace yli
             return yli::ontology::get_number_of_descendants(this->world_pointer_vector);
         }
 
-        void Universe::set_window(GLFWwindow* window)
+        void Universe::create_context()
         {
-            this->window = window;
-            glfwSetWindowUserPointer(this->window, this);
+            this->context = SDL_GL_CreateContext(this->window);
         }
 
-        GLFWwindow* Universe::get_window() const
+        void Universe::make_context_current()
+        {
+            opengl::make_context_current(this->window, this->context);
+        }
+
+        SDL_Window* Universe::get_window() const
         {
             return this->window;
         }
@@ -194,13 +196,13 @@ namespace yli
 
         float Universe::compute_delta_time()
         {
-            if (std::isnan(this->last_time_before_reading_keyboard))
+            if (this->last_time_before_reading_keyboard == std::numeric_limits<uint32_t>::max())
             {
                 // `glfwGetTime()` is called here only once, the first time this function is called.
-                this->last_time_before_reading_keyboard = glfwGetTime();
+                this->last_time_before_reading_keyboard = SDL_GetTicks();
             }
 
-            this->current_time_before_reading_keyboard = glfwGetTime();
+            this->current_time_before_reading_keyboard = SDL_GetTicks();
 
             this->delta_time = static_cast<float>(current_time_before_reading_keyboard - last_time_before_reading_keyboard);
             return this->delta_time;

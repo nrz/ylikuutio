@@ -14,7 +14,6 @@ include_directories(
     # asio/asio/include/
     FastNoiseSIMD/
     glew-2.0.0/include/
-    glfw/include/
     glm/
     OpenFBX/src/
     pugixml/src/
@@ -25,8 +24,147 @@ include_directories(
 # pugixml
 add_subdirectory(pugixml)
 
-### GLFW ###
-add_subdirectory(glfw)
+if (COMPILE_SDL_FROM_SOURCE)
+    include_directories(
+        SDL2-2.0.8/loadso
+        SDL2-2.0.8/loadso/dummy
+        SDL2-2.0.8/loadso/windows
+        SDL2-2.0.8/loadso/dlopen
+        SDL2-2.0.8/main
+        SDL2-2.0.8/main/dummy
+        SDL2-2.0.8/main/haiku
+        SDL2-2.0.8/main/android
+        SDL2-2.0.8/main/winrt
+        SDL2-2.0.8/main/nacl
+        SDL2-2.0.8/main/psp
+        SDL2-2.0.8/main/windows
+        SDL2-2.0.8/audio
+        SDL2-2.0.8/audio/dummy
+        SDL2-2.0.8/audio/haiku
+        SDL2-2.0.8/audio/directsound
+        SDL2-2.0.8/audio/arts
+        SDL2-2.0.8/audio/winmm
+        SDL2-2.0.8/audio/emscripten
+        SDL2-2.0.8/audio/android
+        SDL2-2.0.8/audio/dsp
+        SDL2-2.0.8/audio/coreaudio
+        SDL2-2.0.8/audio/nacl
+        SDL2-2.0.8/audio/wasapi
+        SDL2-2.0.8/audio/pulseaudio
+        SDL2-2.0.8/audio/sun
+        SDL2-2.0.8/audio/jack
+        SDL2-2.0.8/audio/fusionsound
+        SDL2-2.0.8/audio/psp
+        SDL2-2.0.8/audio/disk
+        SDL2-2.0.8/audio/paudio
+        SDL2-2.0.8/audio/nas
+        SDL2-2.0.8/audio/sndio
+        SDL2-2.0.8/audio/netbsd
+        SDL2-2.0.8/audio/esd
+        SDL2-2.0.8/audio/alsa
+        SDL2-2.0.8/audio/qsa
+        SDL2-2.0.8/stdlib
+        SDL2-2.0.8/atomic
+        SDL2-2.0.8/render
+        SDL2-2.0.8/render/metal
+        SDL2-2.0.8/render/psp
+        SDL2-2.0.8/render/opengles2
+        SDL2-2.0.8/render/direct3d
+        SDL2-2.0.8/render/direct3d11
+        SDL2-2.0.8/render/opengles
+        SDL2-2.0.8/render/opengl
+        SDL2-2.0.8/render/software
+        SDL2-2.0.8/timer
+        SDL2-2.0.8/timer/dummy
+        SDL2-2.0.8/timer/haiku
+        SDL2-2.0.8/timer/psp
+        SDL2-2.0.8/timer/windows
+        SDL2-2.0.8/timer/unix
+        SDL2-2.0.8/joystick
+        SDL2-2.0.8/joystick/bsd
+        SDL2-2.0.8/joystick/dummy
+        SDL2-2.0.8/joystick/haiku
+        SDL2-2.0.8/joystick/emscripten
+        SDL2-2.0.8/joystick/android
+        SDL2-2.0.8/joystick/linux
+        SDL2-2.0.8/joystick/darwin
+        SDL2-2.0.8/joystick/iphoneos
+        SDL2-2.0.8/joystick/psp
+        SDL2-2.0.8/joystick/windows
+        SDL2-2.0.8/joystick/steam
+        SDL2-2.0.8/power
+        SDL2-2.0.8/power/haiku
+        SDL2-2.0.8/power/emscripten
+        SDL2-2.0.8/power/android
+        SDL2-2.0.8/power/winrt
+        SDL2-2.0.8/power/uikit
+        SDL2-2.0.8/power/linux
+        SDL2-2.0.8/power/psp
+        SDL2-2.0.8/power/windows
+        SDL2-2.0.8/power/macosx
+        SDL2-2.0.8/dynapi
+        SDL2-2.0.8/haptic
+        SDL2-2.0.8/haptic/dummy
+        SDL2-2.0.8/haptic/android
+        SDL2-2.0.8/haptic/linux
+        SDL2-2.0.8/haptic/darwin
+        SDL2-2.0.8/haptic/windows
+        SDL2-2.0.8/test
+        SDL2-2.0.8/cpuinfo
+        SDL2-2.0.8/thread
+        SDL2-2.0.8/thread/generic
+        SDL2-2.0.8/thread/pthread
+        SDL2-2.0.8/thread/psp
+        SDL2-2.0.8/thread/windows
+        SDL2-2.0.8/thread/stdcpp
+        SDL2-2.0.8/file
+        SDL2-2.0.8/file/cocoa
+        SDL2-2.0.8/libm
+        SDL2-2.0.8/core
+        SDL2-2.0.8/core/android
+        SDL2-2.0.8/core/winrt
+        SDL2-2.0.8/core/linux
+        SDL2-2.0.8/core/windows
+        SDL2-2.0.8/core/unix
+        SDL2-2.0.8/filesystem
+        SDL2-2.0.8/filesystem/cocoa
+        SDL2-2.0.8/filesystem/dummy
+        SDL2-2.0.8/filesystem/haiku
+        SDL2-2.0.8/filesystem/emscripten
+        SDL2-2.0.8/filesystem/android
+        SDL2-2.0.8/filesystem/winrt
+        SDL2-2.0.8/filesystem/nacl
+        SDL2-2.0.8/filesystem/windows
+        SDL2-2.0.8/filesystem/unix
+        SDL2-2.0.8/video
+        SDL2-2.0.8/video/cocoa
+        SDL2-2.0.8/video/dummy
+        SDL2-2.0.8/video/haiku
+        SDL2-2.0.8/video/kmsdrm
+        SDL2-2.0.8/video/emscripten
+        SDL2-2.0.8/video/yuv2rgb
+        SDL2-2.0.8/video/android
+        SDL2-2.0.8/video/winrt
+        SDL2-2.0.8/video/uikit
+        SDL2-2.0.8/video/nacl
+        SDL2-2.0.8/video/wayland
+        SDL2-2.0.8/video/vivante
+        SDL2-2.0.8/video/x11
+        SDL2-2.0.8/video/psp
+        SDL2-2.0.8/video/qnx
+        SDL2-2.0.8/video/directfb
+        SDL2-2.0.8/video/windows
+        SDL2-2.0.8/video/raspberry
+        SDL2-2.0.8/video/pandora
+        SDL2-2.0.8/video/mir
+        SDL2-2.0.8/video/khronos
+        SDL2-2.0.8/video/khronos/GLES2
+        SDL2-2.0.8/video/khronos/vulkan
+        SDL2-2.0.8/video/khronos/KHR
+        SDL2-2.0.8/video/khronos/EGL
+        SDL2-2.0.8/events
+        )
+endif()
 
 # SFML
 if (COMPILE_SFML_FROM_SOURCE)
@@ -51,14 +189,12 @@ if(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
             ${OPENGL_LIBRARY}
             -lGL -lGLU -lXrandr -lXext -lX11 -lrt
             ${CMAKE_DL_LIBS}
-            ${GLFW_LIBRARIES}
             )
     endif()
 elseif(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     set(OPENGL_LIBRARY
         ${OPENGL_LIBRARY}
         ${CMAKE_DL_LIBS}
-        ${GLFW_LIBRARIES}
         )
 endif(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
 
@@ -255,4 +391,8 @@ if(COMPILE_SFML_FROM_SOURCE)
         endif()
         set_property(TARGET sfml-audio PROPERTY COMPILE_FLAGS "-DSFML_STATIC -DSFML_STATIC_LIBRARIES -DSFML_USE_STATIC_STD_LIBS")
     endif()
+endif()
+
+if(COMPILE_SDL_FROM_SOURCE)
+    add_subdirectory(SDL2-2.0.8)
 endif()
