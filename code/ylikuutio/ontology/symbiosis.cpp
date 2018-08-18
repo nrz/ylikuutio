@@ -160,6 +160,11 @@ namespace yli
             }
         }
 
+        std::size_t Symbiosis::get_number_of_symbiont_materials() const
+        {
+            return this->number_of_symbiont_materials;
+        }
+
         yli::ontology::Entity* Symbiosis::get_parent() const
         {
             return this->parent;

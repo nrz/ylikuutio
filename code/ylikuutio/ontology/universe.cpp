@@ -161,12 +161,15 @@ namespace yli
 
         void Universe::create_context()
         {
-            this->context = SDL_GL_CreateContext(this->window);
+            this->context = std::make_shared<SDL_GLContext>(SDL_GL_CreateContext(this->window));
         }
 
         void Universe::make_context_current()
         {
-            opengl::make_context_current(this->window, this->context);
+            if (this->context != nullptr)
+            {
+                opengl::make_context_current(this->window, *this->context);
+            }
         }
 
         SDL_Window* Universe::get_window() const
