@@ -33,6 +33,11 @@ namespace yli
             return SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, window_width, window_height, SDL_WINDOW_OPENGL);
         }
 
+        int set_window_windowed(SDL_Window* window)
+        {
+            SDL_SetWindowFullscreen(window, 0);
+        }
+
         void make_context_current(SDL_Window* window, SDL_GLContext context)
         {
             SDL_GL_MakeCurrent(window, context);
