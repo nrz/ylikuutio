@@ -882,6 +882,7 @@ int main(const int argc, const char* argv[])
     bool ms_frame_text_ready = false;
 
     bool is_exit_requested = false;
+    bool has_mouse_focus = true;
 
     audio_master.add_to_playlist("Ajokki_playlist", "414270__greek555__sample-97-bpm.wav");
     audio_master.add_to_playlist("Ajokki_playlist", "419588__greek555__dreaming-of-me.ogg");
@@ -1011,6 +1012,17 @@ int main(const int argc, const char* argv[])
                         }
                     }
                 }
+                else if (sdl_event.type == SDL_WINDOWEVENT)
+                {
+                    if (sdl_event.window.event == SDL_WINDOWEVENT_FOCUS_GAINED)
+                    {
+                        has_mouse_focus = true;
+                    }
+                    else if (sdl_event.window.event == SDL_WINDOWEVENT_FOCUS_LOST)
+                    {
+                        has_mouse_focus = false;
+                    }
+                }
                 else if (sdl_event.type == SDL_QUIT)
                 {
                     is_exit_requested = true;
@@ -1024,10 +1036,13 @@ int main(const int argc, const char* argv[])
             my_universe->compute_delta_time();
 
             // Reset mouse position for next frame
-            yli::input::set_cursor_position(
-                    my_universe->get_window(),
-                    static_cast<double>(my_universe->get_window_width()) / 2,
-                    static_cast<double>(my_universe->get_window_height()) / 2);
+            if (has_mouse_focus)
+            {
+                yli::input::set_cursor_position(
+                        my_universe->get_window(),
+                        static_cast<double>(my_universe->get_window_width()) / 2,
+                        static_cast<double>(my_universe->get_window_height()) / 2);
+            }
 
             if (my_universe->has_mouse_ever_moved || (abs(xpos) > 0.0001) || (abs(ypos) > 0.0001))
             {
