@@ -17,11 +17,7 @@
 #include <GL/glew.h> // GLfloat, GLuint etc.
 #endif
 
-// Include GLFW
-#ifndef __GLFW3_H_INCLUDED
-#define __GLFW3_H_INCLUDED
-#include <GLFW/glfw3.h>
-#endif
+#include "SDL.h"
 
 // Include standard headers
 #include <cstddef>       // std::size_t
@@ -74,6 +70,9 @@ namespace yli
                 void print_text(const std::string& text);
                 void print_help();
                 void draw_console() const;
+
+                bool get_in_console() const;
+                void process_key_event(const SDL_KeyboardEvent& keyboard_event);
 
                 // Public callbacks.
 
@@ -307,7 +306,7 @@ namespace yli
                     friend void yli::map::print_keys_to_console(const std::unordered_map<std::string, T1>* const unordered_map_pointer, yli::console::Console* const console);
 
             private:
-                static void charmods_callback(GLFWwindow* window, unsigned int codepoint, int mods);
+                static void charmods_callback(SDL_Window* window, unsigned int codepoint, int mods);
 
                 // Callbacks end here.
 
@@ -325,8 +324,6 @@ namespace yli
                 std::list<char>::iterator cursor_it;
                 std::size_t cursor_index;
                 bool in_console;
-                bool can_enter_console;
-                bool can_exit_console;
                 bool can_move_to_previous_input;
                 bool can_move_to_next_input;
                 bool can_backspace;

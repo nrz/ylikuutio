@@ -9,11 +9,7 @@
 #include "code/ylikuutio/map/ylikuutio_map.hpp"
 #include "code/ylikuutio/common/printing_struct.hpp"
 
-// Include GLFW
-#ifndef __GLFW3_H_INCLUDED
-#define __GLFW3_H_INCLUDED
-#include <GLFW/glfw3.h>
-#endif
+#include "SDL.h"
 
 // Include standard headers
 #include <cstddef>       // std::size_t
@@ -39,8 +35,6 @@ namespace yli
             this->history_line_i = std::numeric_limits<std::size_t>::max();     // some dummy value.
             this->historical_input_i = std::numeric_limits<std::size_t>::max(); // some dummy value.
             this->in_console = false;
-            this->can_enter_console = true;
-            this->can_exit_console = false;
             this->can_move_to_previous_input = false;
             this->can_move_to_next_input = false;
             this->can_backspace = false;
@@ -352,6 +346,43 @@ namespace yli
             }
         }
 
+        bool Console::get_in_console() const
+        {
+            return this->in_console;
+        }
+
+        void Console::process_key_event(const SDL_KeyboardEvent& keyboard_event)
+        {
+            const uint16_t modifiers = keyboard_event.keysym.mod;
+            const uint16_t shift_bitmask = KMOD_LSHIFT | KMOD_RSHIFT;
+            const uint16_t ctrl_alt_altgr_bitmask = KMOD_LCTRL | KMOD_RCTRL | KMOD_LALT | KMOD_RALT | KMOD_MODE;
+
+            if (keyboard_event.state == SDL_PRESSED &&
+                    keyboard_event.keysym.sym != SDLK_UNKNOWN &&
+                    keyboard_event.keysym.sym != SDLK_RETURN &&
+                    keyboard_event.keysym.sym != SDLK_KP_ENTER &&
+                    keyboard_event.keysym.sym >= 0x20 &&
+                    keyboard_event.keysym.sym <= 0x7f &&
+                    ((modifiers & ctrl_alt_altgr_bitmask) == 0) &&
+                    this->in_console)
+            {
+                this->in_history = false;
+
+                // FIXME: this is a temporary workaround to enable entering underscores in console.
+                if (static_cast<char>(keyboard_event.keysym.sym) == '-' && ((modifiers & shift_bitmask) != 0))
+                {
+                    this->cursor_it = this->current_input.insert(this->cursor_it, '_');
+                }
+                else
+                {
+                    this->cursor_it = this->current_input.insert(this->cursor_it, static_cast<char>(keyboard_event.keysym.sym));
+                }
+
+                this->cursor_it++;
+                this->cursor_index++;
+            }
+        }
+
         yli::ontology::Universe* Console::get_universe() const
         {
             return this->universe;
@@ -372,7 +403,6 @@ namespace yli
         bool Console::exit_console()
         {
             if (this->in_console &&
-                    this->can_exit_console &&
                     this->previous_keypress_callback_engine_vector_pointer != nullptr &&
                     this->previous_keyrelease_callback_engine_vector_pointer != nullptr)
             {
@@ -382,14 +412,9 @@ namespace yli
                 // Restore previous keyrelease callback engine vector pointer.
                 *this->current_keyrelease_callback_engine_vector_pointer_pointer = this->previous_keyrelease_callback_engine_vector_pointer;
 
-                glfwSetCharModsCallback(this->universe->get_window(), nullptr);
-
                 // Mark that we have exited the console.
                 this->in_console = false;
 
-                // Usually key release is required to enable exit console.
-                this->can_enter_console = false;
-                this->can_exit_console = false;
                 return true;
             }
             return false;

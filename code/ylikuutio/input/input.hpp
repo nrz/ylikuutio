@@ -4,11 +4,7 @@
 #include <GL/glew.h> // GLfloat, GLuint etc.
 #endif
 
-// Include GLFW
-#ifndef __GLFW3_H_INCLUDED
-#define __GLFW3_H_INCLUDED
-#include <GLFW/glfw3.h>
-#endif
+#include "SDL.h"
 
 namespace yli
 {
@@ -23,8 +19,9 @@ namespace yli
             INPUT_FILE_THEN_AI        // input from file, then AI input (TODO: implement).
         };
 
-        void disable_cursor(GLFWwindow* window);
-        void set_sticky_keys(GLFWwindow* window);
-        void set_cursor_position(GLFWwindow* window, double xpos, double ypos);
+        void disable_cursor();
+        void set_sticky_keys(SDL_Window* window);
+        void set_cursor_position(SDL_Window* window, double xpos, double ypos);
+        void enable_relative_mouse_mode();
     }
 }

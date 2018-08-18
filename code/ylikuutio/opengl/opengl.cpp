@@ -6,11 +6,7 @@
 #include <GL/glew.h> // GLfloat, GLuint etc.
 #endif
 
-// Include GLFW
-#ifndef __GLFW3_H_INCLUDED
-#define __GLFW3_H_INCLUDED
-#include <GLFW/glfw3.h>
-#endif
+#include "SDL.h"
 
 // Include standard headers
 #include <iostream> // std::cout, std::cin, std::cerr
@@ -21,26 +17,30 @@ namespace yli
     {
         bool init_window()
         {
-            if (!glfwInit())
+            if (SDL_Init(SDL_INIT_VIDEO) < 0)
             {
-                std::cerr << "Failed to initialize GLFW.\n";
+                std::cerr << "Failed to initialize SDL.\n";
                 return false;
             }
 
-            glfwWindowHint(GLFW_SAMPLES, 4);
-            glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);
-            glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
+            SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
+            SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
             return true;
         }
 
-        GLFWwindow* create_window(const int window_width, const int window_height, const char* const title, GLFWmonitor* const monitor, GLFWwindow* const share)
+        SDL_Window* create_window(const int window_width, const int window_height, const char* const title)
         {
-            return glfwCreateWindow(window_width, window_height, title, monitor, share);
+            return SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, window_width, window_height, SDL_WINDOW_OPENGL);
         }
 
-        void make_context_current(GLFWwindow* const window)
+        int set_window_windowed(SDL_Window* window)
         {
-            glfwMakeContextCurrent(window);
+            SDL_SetWindowFullscreen(window, 0);
+        }
+
+        void make_context_current(SDL_Window* window, SDL_GLContext context)
+        {
+            SDL_GL_MakeCurrent(window, context);
         }
 
         bool init_glew()

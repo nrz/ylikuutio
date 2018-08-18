@@ -20,7 +20,7 @@ namespace ajokki
     void set_movement(yli::config::SettingMaster* const setting_master)
     {
         // Variables related to voluntary movement.
-        float speed = 5.0f; // 5 units / second
+        float speed = 0.5f; // 0.5 units/second
         std::shared_ptr<yli::datatypes::AnyValue> any_value_speed = std::make_shared<yli::datatypes::AnyValue>(speed);
         SettingStruct speed_setting_struct(any_value_speed);
         speed_setting_struct.name = "speed";

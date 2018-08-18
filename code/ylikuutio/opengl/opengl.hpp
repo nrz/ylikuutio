@@ -4,19 +4,16 @@
 #include <GL/glew.h> // GLfloat, GLuint etc.
 #endif
 
-// Include GLFW
-#ifndef __GLFW3_H_INCLUDED
-#define __GLFW3_H_INCLUDED
-#include <GLFW/glfw3.h>
-#endif
+#include "SDL.h"
 
 namespace yli
 {
     namespace opengl
     {
         bool init_window();
-        GLFWwindow* create_window(const int window_width, const int window_height, const char* const title, GLFWmonitor* const monitor, GLFWwindow* const share);
-        void make_context_current(GLFWwindow* const window);
+        SDL_Window* create_window(const int window_width, const int window_height, const char* const title);
+        int set_window_windowed(SDL_Window* window);
+        void make_context_current(SDL_Window* window, SDL_GLContext context);
         bool init_glew();
         void enable_depth_test();
         void disable_depth_test();

@@ -6,29 +6,25 @@
 #include <GL/glew.h> // GLfloat, GLuint etc.
 #endif
 
-// Include GLFW
-#ifndef __GLFW3_H_INCLUDED
-#define __GLFW3_H_INCLUDED
-#include <GLFW/glfw3.h>
-#endif
+#include "SDL.h"
 
 namespace yli
 {
     namespace input
     {
-        void disable_cursor(GLFWwindow* window)
+        void disable_cursor()
         {
-            glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+            SDL_ShowCursor(SDL_DISABLE);
         }
 
-        void set_sticky_keys(GLFWwindow* window)
+        void set_cursor_position(SDL_Window* window, double xpos, double ypos)
         {
-            glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
+            SDL_WarpMouseInWindow(window, static_cast<int>(xpos), static_cast<int>(ypos));
         }
 
-        void set_cursor_position(GLFWwindow* window, double xpos, double ypos)
+        void enable_relative_mouse_mode()
         {
-            glfwSetCursorPos(window, xpos, ypos);
+            SDL_SetRelativeMouseMode(SDL_TRUE);
         }
     }
 }
