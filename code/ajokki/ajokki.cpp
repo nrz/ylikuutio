@@ -68,6 +68,8 @@
 #include <GL/glew.h> // GLfloat, GLuint etc.
 #endif
 
+#define SDL_main main
+
 #include "SDL.h"
 
 // Include GLM
