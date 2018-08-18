@@ -929,6 +929,8 @@ int main(const int argc, const char* argv[])
             // Clear the screen.
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+            my_universe->compute_delta_time();
+
             int32_t mouse_x = my_universe->get_window_width() / 2;
             int32_t mouse_y = my_universe->get_window_height() / 2;
 
@@ -1032,8 +1034,6 @@ int main(const int argc, const char* argv[])
             // mouse position.
             double xpos = static_cast<double>(mouse_x);
             double ypos = static_cast<double>(mouse_y);
-
-            my_universe->compute_delta_time();
 
             // Reset mouse position for next frame
             if (has_mouse_focus)
