@@ -351,6 +351,9 @@ namespace yli
                     this->child_vector_pointers_vector.push_back(&this->world_pointer_vector);
                     this->type = "yli::ontology::Universe*";
 
+                    this->context = nullptr;
+                    this->window = nullptr;
+
                     // Initialise SDL
                     if (!yli::opengl::init_window())
                     {
@@ -549,12 +552,12 @@ namespace yli
                 GLclampf background_alpha;
 
                 // Variables related to the window.
+                std::shared_ptr<SDL_GLContext> context;
                 SDL_Window* window;
                 std::size_t window_width;
                 std::size_t window_height;
                 std::string window_title;
                 bool is_headless;
-                SDL_GLContext context;
 
                 // Variables related to the camera.
                 glm::mat4 current_camera_projection_matrix;
