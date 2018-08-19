@@ -1,5 +1,5 @@
-#ifndef __COMMON_SHADER_HPP_INCLUDED
-#define __COMMON_SHADER_HPP_INCLUDED
+#ifndef __SHADER_LOADER_HPP_INCLUDED
+#define __SHADER_LOADER_HPP_INCLUDED
 
 #include "shader_loader.hpp"
 
