@@ -28,6 +28,7 @@ namespace yli
                 // destructor.
                 virtual ~Entity();
 
+                std::size_t get_childID() const;
                 std::string get_type() const;
 
                 bool get_can_be_erased() const;

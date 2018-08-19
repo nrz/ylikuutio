@@ -45,6 +45,11 @@ namespace yli
             this->universe->erase_entity(this->name);
         }
 
+        std::size_t Entity::get_childID() const
+        {
+            return this->childID;
+        }
+
         std::string Entity::get_type() const
         {
             return this->type;
