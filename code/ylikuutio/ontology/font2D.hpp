@@ -2,8 +2,8 @@
 #define __FONT2D_HPP_INCLUDED
 
 #include "entity.hpp"
-#include "code/ylikuutio/loaders/shader_loader.hpp"
-#include "code/ylikuutio/loaders/texture_loader.hpp"
+#include "code/ylikuutio/load/shader_loader.hpp"
+#include "code/ylikuutio/load/texture_loader.hpp"
 #include "code/ylikuutio/common/printing_struct.hpp"
 
 // Include GLEW

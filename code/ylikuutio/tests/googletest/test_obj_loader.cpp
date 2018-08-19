@@ -1,5 +1,5 @@
 #include "gtest/gtest.h"
-#include "code/ylikuutio/loaders/obj_loader.cpp"
+#include "code/ylikuutio/load/obj_loader.cpp"
 
 // Include standard headers
 #include <stdint.h> // uint32_t etc.

@@ -1,6 +1,6 @@
 #include "gtest/gtest.h"
-#include "code/ylikuutio/loaders/ascii_grid_loader.hpp"
-#include "code/ylikuutio/loaders/ascii_grid_loader.cpp"
+#include "code/ylikuutio/load/ascii_grid_loader.hpp"
+#include "code/ylikuutio/load/ascii_grid_loader.cpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED

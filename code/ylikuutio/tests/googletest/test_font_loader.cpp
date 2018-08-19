@@ -1,5 +1,5 @@
 #include "gtest/gtest.h"
-#include "code/ylikuutio/loaders/font_loader.hpp"
+#include "code/ylikuutio/load/font_loader.hpp"
 #include "code/ylikuutio/file/file_loader.hpp"
 
 // Include GLEW

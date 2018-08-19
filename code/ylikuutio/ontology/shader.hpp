@@ -15,7 +15,7 @@
 #include "shader_struct.hpp"
 #include "render_templates.hpp"
 #include "family_templates.hpp"
-#include "code/ylikuutio/loaders/shader_loader.hpp"
+#include "code/ylikuutio/load/shader_loader.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/common/pi.hpp"
 

@@ -9,8 +9,8 @@
 #include "ground_level.hpp"
 #include "species_struct.hpp"
 #include "render_templates.hpp"
-#include "code/ylikuutio/loaders/species_loader.hpp"
-#include "code/ylikuutio/loaders/species_loader_struct.hpp"
+#include "code/ylikuutio/load/species_loader.hpp"
+#include "code/ylikuutio/load/species_loader_struct.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include GLEW
