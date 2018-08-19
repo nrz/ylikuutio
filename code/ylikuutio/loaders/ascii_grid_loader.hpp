@@ -14,7 +14,7 @@
 
 namespace yli
 {
-    namespace loaders
+    namespace load
     {
         bool load_ASCII_grid(
                 const std::string& ascii_grid_filename,

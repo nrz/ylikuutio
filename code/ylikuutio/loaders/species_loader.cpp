@@ -26,7 +26,7 @@
 
 namespace yli
 {
-    namespace loaders
+    namespace load
     {
         bool load_species(
                 SpeciesLoaderStruct& species_loader_struct,
@@ -48,7 +48,7 @@ namespace yli
 
             if (species_loader_struct.model_file_format == "obj" || species_loader_struct.model_file_format == "OBJ")
             {
-                model_loading_result = yli::loaders::load_OBJ(
+                model_loading_result = yli::load::load_OBJ(
                         species_loader_struct.model_filename.c_str(),
                         out_vertices,
                         out_UVs,
@@ -56,7 +56,7 @@ namespace yli
             }
             else if (species_loader_struct.model_file_format == "fbx" || species_loader_struct.model_file_format == "FBX")
             {
-                model_loading_result = yli::loaders::load_FBX(
+                model_loading_result = yli::load::load_FBX(
                         species_loader_struct.model_filename,
                         species_loader_struct.mesh_i,
                         out_vertices,
@@ -68,7 +68,7 @@ namespace yli
             }
             else if (species_loader_struct.model_file_format == "srtm" || species_loader_struct.model_file_format == "SRTM")
             {
-                model_loading_result = yli::loaders::load_SRTM_terrain(
+                model_loading_result = yli::load::load_SRTM_terrain(
                         species_loader_struct.model_filename,
                         species_loader_struct.latitude,
                         species_loader_struct.longitude,
@@ -83,7 +83,7 @@ namespace yli
             }
             else if (species_loader_struct.model_file_format == "bmp" || species_loader_struct.model_file_format == "BMP")
             {
-                model_loading_result = yli::loaders::load_BMP_terrain(
+                model_loading_result = yli::load::load_BMP_terrain(
                         species_loader_struct.model_filename,
                         out_vertices,
                         out_UVs,
@@ -97,7 +97,7 @@ namespace yli
             }
             else if (species_loader_struct.model_file_format == "ascii_grid" || species_loader_struct.model_file_format == "ASCII_grid")
             {
-                model_loading_result = yli::loaders::load_ASCII_grid(
+                model_loading_result = yli::load::load_ASCII_grid(
                         species_loader_struct.model_filename,
                         out_vertices,
                         out_UVs,

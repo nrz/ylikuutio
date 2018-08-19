@@ -20,7 +20,7 @@
 
 namespace yli
 {
-    namespace loaders
+    namespace load
     {
         bool load_species(
                 SpeciesLoaderStruct& species_loader_struct,

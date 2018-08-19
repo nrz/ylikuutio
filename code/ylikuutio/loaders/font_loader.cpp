@@ -17,7 +17,7 @@
 
 namespace yli
 {
-    namespace loaders
+    namespace load
     {
         bool check_if_we_are_inside_block(const char* SVG_base_pointer, char*& SVG_data_pointer, uint64_t data_size)
         {
@@ -73,7 +73,7 @@ namespace yli
                         return false;
                     }
 
-                    is_inside_block = yli::loaders::check_if_we_are_inside_block(SVG_base_pointer, SVG_data_pointer, data_size);
+                    is_inside_block = yli::load::check_if_we_are_inside_block(SVG_base_pointer, SVG_data_pointer, data_size);
                     SVG_data_pointer++;
                 }
                 else
@@ -134,7 +134,7 @@ namespace yli
             {
                 if (std::strncmp(vertex_data_pointer, "M", std::strlen("M")) == 0)
                 {
-                    current_vertex.x = yli::loaders::extract_value_from_string_with_standard_endings(
+                    current_vertex.x = yli::load::extract_value_from_string_with_standard_endings(
                             char_path,
                             vertex_data_pointer,
                             sizeof(char_path),
@@ -143,7 +143,7 @@ namespace yli
 
                     while (std::strncmp(vertex_data_pointer++, " ", std::strlen(" ")) != 0);
 
-                    current_vertex.y = yli::loaders::extract_value_from_string_with_standard_endings(
+                    current_vertex.y = yli::load::extract_value_from_string_with_standard_endings(
                             char_path,
                             --vertex_data_pointer,
                             sizeof(char_path),
@@ -156,7 +156,7 @@ namespace yli
                 else if (std::strncmp(vertex_data_pointer, "h", std::strlen("h")) == 0)
                 {
                     // OK, this is horizontal relative lineto.
-                    int32_t horizontal_lineto_value = yli::loaders::extract_value_from_string_with_standard_endings(
+                    int32_t horizontal_lineto_value = yli::load::extract_value_from_string_with_standard_endings(
                             char_path,
                             vertex_data_pointer,
                             sizeof(char_path),
@@ -169,7 +169,7 @@ namespace yli
                 else if (std::strncmp(vertex_data_pointer, "v", std::strlen("v")) == 0)
                 {
                     // OK, this is vertical relative lineto.
-                    int32_t vertical_lineto_value = yli::loaders::extract_value_from_string_with_standard_endings(
+                    int32_t vertical_lineto_value = yli::load::extract_value_from_string_with_standard_endings(
                             char_path,
                             vertex_data_pointer,
                             sizeof(char_path),
@@ -360,7 +360,7 @@ namespace yli
                 } // else if (std::strncmp(SVG_data_pointer, "unicode=", std::strlen("unicode=")) == 0)
                 else if (std::strncmp(SVG_data_pointer, "d=", std::strlen("d=")) == 0)
                 {
-                    bool result = yli::loaders::load_vertex_data(SVG_base_pointer, SVG_data_pointer, data_size, current_glyph_vertices, is_debug_mode);
+                    bool result = yli::load::load_vertex_data(SVG_base_pointer, SVG_data_pointer, data_size, current_glyph_vertices, is_debug_mode);
                     if (result == false)
                     {
                         return false;
@@ -435,7 +435,7 @@ namespace yli
             SVG_data_pointer = SVG_data;
 
             // SVG files are XML files, so we just need to read until we find the data we need.
-            is_first_glyph_found = yli::loaders::find_first_glyph_in_SVG(SVG_base_pointer, SVG_data_pointer, file_size);
+            is_first_glyph_found = yli::load::find_first_glyph_in_SVG(SVG_base_pointer, SVG_data_pointer, file_size);
 
             if (!is_first_glyph_found || SVG_data_pointer == nullptr)
             {
@@ -455,7 +455,7 @@ namespace yli
             {
                 if (std::strncmp(SVG_data_pointer, "<glyph", std::strlen("<glyph")) == 0)
                 {
-                    bool result = yli::loaders::load_SVG_glyph(
+                    bool result = yli::load::load_SVG_glyph(
                             SVG_base_pointer,
                             SVG_data_pointer,
                             file_size,

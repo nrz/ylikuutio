@@ -15,7 +15,7 @@
 
 namespace yli
 {
-    namespace loaders
+    namespace load
     {
         bool load_SRTM_terrain(
                 const std::string& image_path,

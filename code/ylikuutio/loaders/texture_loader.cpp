@@ -23,7 +23,7 @@
 
 namespace yli
 {
-    namespace loaders
+    namespace load
     {
         // Load texture from memory.
         GLuint load_texture(const uint8_t* const image_data, const std::size_t image_width, const std::size_t image_height, bool should_image_data_be_deleted)
@@ -120,7 +120,7 @@ namespace yli
             if (strncmp(texture_file_suffix, "bmp", sizeof("bmp")) == 0)
             {
                 const std::string filename_string = std::string((char*) &filename_buffer);
-                return yli::loaders::load_BMP_texture(filename_string);
+                return yli::load::load_BMP_texture(filename_string);
             }
             else if (strncmp(texture_file_suffix, "png", sizeof("png")) == 0)
             {

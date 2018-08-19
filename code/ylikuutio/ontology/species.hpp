@@ -117,7 +117,7 @@ namespace yli
 
                         const bool is_debug_mode = true;
 
-                        yli::loaders::load_species(
+                        yli::load::load_species(
                                 species_loader_struct,
                                 this->vertices,
                                 this->uvs,

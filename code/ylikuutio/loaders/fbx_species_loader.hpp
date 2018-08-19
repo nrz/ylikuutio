@@ -14,7 +14,7 @@
 
 namespace yli
 {
-    namespace loaders
+    namespace load
     {
         bool load_FBX(
                 const std::string& filename,

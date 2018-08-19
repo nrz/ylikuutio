@@ -24,7 +24,7 @@
 
 namespace yli
 {
-    namespace loaders
+    namespace load
     {
         bool load_symbiosis(
                 SymbiosisLoaderStruct& symbiosis_loader_struct,

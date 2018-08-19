@@ -14,7 +14,7 @@
 
 namespace yli
 {
-    namespace loaders
+    namespace load
     {
         bool load_BMP_terrain(
                 const std::string& image_path,
