@@ -58,7 +58,7 @@ namespace yli
             }
 
         template<class T1>
-            std::size_t get_childID(std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue)
+            std::size_t request_childID(std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue)
             {
                 // This function is called eg. from `bind_child_to_parent`,
                 // so that child instance gets an appropriate `childID`.
@@ -103,7 +103,7 @@ namespace yli
                 //
                 // requirements:
                 // `child_pointer` must not be `nullptr` (use `this` as the first argument).
-                child_pointer->childID = get_childID(child_pointer_vector, free_childID_queue);
+                child_pointer->childID = request_childID(child_pointer_vector, free_childID_queue);
                 // set pointer to the child in parent's child pointer vector so that parent knows about children's whereabouts!
                 set_child_pointer(child_pointer->childID, child_pointer, child_pointer_vector, free_childID_queue, number_of_children);
             }
@@ -129,7 +129,7 @@ namespace yli
                     child_hash_map[child_name] = child_pointer;
                 }
 
-                child_pointer->childID = get_childID(child_pointer_vector, free_childID_queue);
+                child_pointer->childID = request_childID(child_pointer_vector, free_childID_queue);
                 // set pointer to the child in parent's child pointer vector so that parent knows about children's whereabouts!
                 set_child_pointer(child_pointer->childID, child_pointer, child_pointer_vector, free_childID_queue, number_of_children);
             }
