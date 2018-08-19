@@ -608,14 +608,12 @@ add_library(ylikuutio STATIC
     code/ylikuutio/triangulation/vertices.cpp
     code/ylikuutio/triangulation/vertices.hpp
     )
-# add_dependencies(ylikuutio rescan)
 
 # yli_convert
 add_executable(yli_convert
     # yli_convert, in alphabetical order
     code/tools/yli_convert.cpp
     )
-add_dependencies(yli_convert rescan)
 target_link_libraries(yli_convert ylikuutio ${ALL_LIBS})
 
 # Ajokki
@@ -645,7 +643,6 @@ add_executable(ajokki
     code/ajokki/ajokki_wireframe.cpp
     code/ajokki/ajokki_wireframe.hpp
     )
-add_dependencies(ajokki rescan)
 target_link_libraries(ajokki ylikuutio ${ALL_LIBS})
 
 if (ENABLE_SCRIPTING_WITH_TINYSCHEME)
