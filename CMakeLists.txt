@@ -1,5 +1,5 @@
 # CMake entry point
-cmake_minimum_required(VERSION 2.8.11)
+cmake_minimum_required(VERSION 2.6.2)
 project(ylikuutio)
 
 # http://stackoverflow.com/questions/11783932/how-to-add-linker-or-compile-flag-in-cmake-file/11797272#11797272
