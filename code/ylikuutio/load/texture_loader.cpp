@@ -77,6 +77,8 @@ namespace yli
         }
 
         // Load texture from memory.
+        // FIXME: return `false` for failure and `true` for success.
+        // FIXME: receive `GLuint` as a reference.
         GLuint load_FBX_texture(const ofbx::Texture* const ofbx_texture)
         {
             // requirements:
@@ -85,6 +87,7 @@ namespace yli
             if (ofbx_texture == nullptr)
             {
                 std::cerr << "ERROR: `yli::load::load_FBX_texture`: `ofbx_texture` is `nullptr`!\n";
+                // FIXME: return `false` for failure and `true` for success.
                 return 0;
             }
 
@@ -129,6 +132,7 @@ namespace yli
             if (strncmp(texture_file_suffix, "bmp", sizeof("bmp")) == 0)
             {
                 const std::string filename_string = std::string((char*) &filename_buffer);
+                // FIXME: return `false` for failure and `true` for success.
                 return yli::load::load_BMP_texture(filename_string);
             }
             else if (strncmp(texture_file_suffix, "png", sizeof("png")) == 0)
@@ -136,6 +140,7 @@ namespace yli
                 // TODO: implement PNG loading!
             }
 
+            // FIXME: return `false` for failure and `true` for success.
             return 0;
         }
 
