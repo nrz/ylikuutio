@@ -40,6 +40,11 @@ namespace yli
             return yli::ontology::get_number_of_descendants(this->object_pointer_vector);
         }
 
+        std::size_t Model::get_number_of_vertices() const
+        {
+            return this->vertices.size();
+        }
+
         const std::vector<glm::vec3>& Model::get_vertices() const
         {
             return this->vertices;

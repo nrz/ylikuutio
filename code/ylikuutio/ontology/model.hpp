@@ -66,6 +66,7 @@ namespace yli
                 std::size_t get_number_of_children() const override;
                 std::size_t get_number_of_descendants() const override;
 
+                std::size_t get_number_of_vertices() const;
                 const std::vector<glm::vec3>& get_vertices() const;
                 const std::vector<GLuint>& get_indices() const;
 
