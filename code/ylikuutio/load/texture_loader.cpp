@@ -79,6 +79,15 @@ namespace yli
         // Load texture from memory.
         GLuint load_FBX_texture(const ofbx::Texture* const ofbx_texture)
         {
+            // requirements:
+            // `ofbx_texture` must not be `nullptr`.
+
+            if (ofbx_texture == nullptr)
+            {
+                std::cerr << "ERROR: `yli::load::load_FBX_texture`: `ofbx_texture` is `nullptr`!\n";
+                return 0;
+            }
+
             // Load the texture.
             const std::string filename = std::string((const char*) ofbx_texture->getFileName().begin, (const char*) ofbx_texture->getFileName().end);
 
