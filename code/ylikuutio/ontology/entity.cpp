@@ -31,13 +31,13 @@ namespace yli
 
             if (this->name.empty())
             {
-                std::cerr << "Entity destructor: error: name is empty.\n";
+                std::cerr << "ERROR: `Entity::~Entity`: `this->name` is empty.\n";
                 return;
             }
 
             if (this->universe == nullptr)
             {
-                std::cerr << "Entity destructor: error: `universe` is `nullptr`.\n";
+                std::cerr << "ERROR: `Entity::~Entity`: `this->universe` is `nullptr`.\n";
                 return;
             }
 
