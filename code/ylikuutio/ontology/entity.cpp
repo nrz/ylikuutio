@@ -67,6 +67,12 @@ namespace yli
 
         yli::config::SettingMaster* Entity::get_setting_master() const
         {
+            if (this->setting_master == nullptr)
+            {
+                std::cerr << "ERROR: `Entity::get_setting_master`: `this->setting_master` is `nullptr`.\n";
+                return nullptr;
+            }
+
             return this->setting_master.get();
         }
 
