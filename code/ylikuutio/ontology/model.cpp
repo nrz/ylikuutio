@@ -50,6 +50,16 @@ namespace yli
             return this->vertices;
         }
 
+        const std::vector<glm::vec2>& Model::get_uvs() const
+        {
+            return this->uvs;
+        }
+
+        const std::vector<glm::vec3>& Model::get_normals() const
+        {
+            return this->normals;
+        }
+
         const std::vector<GLuint>& Model::get_indices() const
         {
             return this->indices;

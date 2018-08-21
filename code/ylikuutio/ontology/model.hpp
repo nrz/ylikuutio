@@ -68,6 +68,8 @@ namespace yli
 
                 std::size_t get_number_of_vertices() const;
                 const std::vector<glm::vec3>& get_vertices() const;
+                const std::vector<glm::vec2>& get_uvs() const;
+                const std::vector<glm::vec3>& get_normals() const;
                 const std::vector<GLuint>& get_indices() const;
 
                 GLuint get_vertex_position_modelspaceID() const;
