@@ -291,6 +291,11 @@ namespace yli
 
         yli::ontology::EntityFactory* Universe::get_entity_factory() const
         {
+            if (this->entity_factory == nullptr)
+            {
+                return nullptr;
+            }
+
             return this->entity_factory.get();
         }
 
