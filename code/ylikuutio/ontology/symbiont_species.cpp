@@ -76,8 +76,11 @@ namespace yli
             // destructor.
             std::cout << "SymbiontSpecies with childID " << std::dec << this->childID << " will be destroyed.\n";
 
-            glDeleteBuffers(1, &this->normalbuffer);
-            glDeleteBuffers(1, &this->elementbuffer);
+            if (this->vram_buffer_in_use)
+            {
+                glDeleteBuffers(1, &this->normalbuffer);
+                glDeleteBuffers(1, &this->elementbuffer);
+            }
 
             // requirements for further actions:
             // `this->symbiont_material_parent` must not be `nullptr`.
