@@ -267,6 +267,7 @@ namespace yli
                         species_struct.uvs = mesh_i < this->uvs.size() ? this->uvs.at(mesh_i) : std::vector<glm::vec2>();
                         species_struct.normals = mesh_i < this->normals.size() ? this->normals.at(mesh_i) : std::vector<glm::vec3>();
                         species_struct.light_position = this->light_position;
+                        species_struct.vram_buffer_in_use = this->vram_buffer_in_use;
 
                         std::cout << "Creating yli::ontology::SymbiontSpecies*, mesh index " << mesh_i << "...\n";
 
