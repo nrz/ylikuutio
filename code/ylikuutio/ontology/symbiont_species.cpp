@@ -99,12 +99,15 @@ namespace yli
 
         void SymbiontSpecies::render()
         {
-            this->prerender();
+            if (this->vram_buffer_in_use)
+            {
+                this->prerender();
 
-            // render this `SymbiontSpecies`.
-            yli::ontology::render_species_or_glyph<yli::ontology::SymbiontSpecies*>(this);
+                // render this `SymbiontSpecies`.
+                yli::ontology::render_species_or_glyph<yli::ontology::SymbiontSpecies*>(this);
 
-            this->postrender();
+                this->postrender();
+            }
         }
 
         yli::ontology::Entity* SymbiontSpecies::get_parent() const
