@@ -23,7 +23,7 @@
 
 namespace yli
 {
-    namespace loaders
+    namespace load
     {
         // Load texture from memory.
         GLuint load_texture(const uint8_t* const image_data, const std::size_t image_width, const std::size_t image_height, bool should_image_data_be_deleted)
@@ -77,8 +77,20 @@ namespace yli
         }
 
         // Load texture from memory.
+        // FIXME: return `false` for failure and `true` for success.
+        // FIXME: receive `GLuint` as a reference.
         GLuint load_FBX_texture(const ofbx::Texture* const ofbx_texture)
         {
+            // requirements:
+            // `ofbx_texture` must not be `nullptr`.
+
+            if (ofbx_texture == nullptr)
+            {
+                std::cerr << "ERROR: `yli::load::load_FBX_texture`: `ofbx_texture` is `nullptr`!\n";
+                // FIXME: return `false` for failure and `true` for success.
+                return 0;
+            }
+
             // Load the texture.
             const std::string filename = std::string((const char*) ofbx_texture->getFileName().begin, (const char*) ofbx_texture->getFileName().end);
 
@@ -120,13 +132,15 @@ namespace yli
             if (strncmp(texture_file_suffix, "bmp", sizeof("bmp")) == 0)
             {
                 const std::string filename_string = std::string((char*) &filename_buffer);
-                return yli::loaders::load_BMP_texture(filename_string);
+                // FIXME: return `false` for failure and `true` for success.
+                return yli::load::load_BMP_texture(filename_string);
             }
             else if (strncmp(texture_file_suffix, "png", sizeof("png")) == 0)
             {
                 // TODO: implement PNG loading!
             }
 
+            // FIXME: return `false` for failure and `true` for success.
             return 0;
         }
 

@@ -8,7 +8,7 @@
 #include "vector_font_struct.hpp"
 #include "render_templates.hpp"
 #include "family_templates.hpp"
-#include "code/ylikuutio/loaders/font_loader.hpp"
+#include "code/ylikuutio/load/font_loader.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
 #include "code/ylikuutio/common/globals.hpp"
@@ -51,13 +51,13 @@ namespace yli
                     this->font_file_format      = vector_font_struct.font_file_format;
                     this->font_filename         = vector_font_struct.font_filename;
                     this->vertex_scaling_factor = vector_font_struct.vertex_scaling_factor;
-                    this->parent        = vector_font_struct.parent;
+                    this->parent                = vector_font_struct.parent;
 
                     this->char_font_file_format = this->font_file_format.c_str();
                     this->char_font_filename    = this->font_filename.c_str();
 
-                    this->number_of_glyphs = 0;
-                    this->number_of_text3Ds = 0;
+                    this->number_of_glyphs      = 0;
+                    this->number_of_text3Ds     = 0;
 
                     // get `childID` from `Material` and set pointer to this `VectorFont`.
                     this->bind_to_parent();
@@ -66,14 +66,14 @@ namespace yli
                     this->child_vector_pointers_vector.push_back(&this->text3D_pointer_vector);
                     this->type = "yli::ontology::VectorFont*";
 
-                    this->can_be_erased = true;
+                    this->can_be_erased      = true;
                     bool font_loading_result = false;
 
                     if ((std::strcmp(this->char_font_file_format, "svg") == 0) || (std::strcmp(this->char_font_file_format, "SVG") == 0))
                     {
                         const bool is_debug_mode = true;
 
-                        font_loading_result = yli::loaders::load_SVG_font(
+                        font_loading_result = yli::load::load_SVG_font(
                                 this->font_filename,
                                 this->glyph_vertex_data,
                                 this->glyph_names,

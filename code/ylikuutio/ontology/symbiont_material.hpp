@@ -6,7 +6,7 @@
 #include "material_struct.hpp"
 #include "render_templates.hpp"
 #include "family_templates.hpp"
-#include "code/ylikuutio/loaders/texture_loader.hpp"
+#include "code/ylikuutio/load/texture_loader.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/common/globals.hpp"
 #include <ofbx.h>
@@ -44,10 +44,8 @@ namespace yli
                     : Material(universe, material_struct)
                 {
                     // constructor.
-                    this->parent = material_struct.symbiosis;
-
-                    this->ofbx_texture = material_struct.ofbx_texture;
-
+                    this->parent                     = material_struct.symbiosis;
+                    this->ofbx_texture               = material_struct.ofbx_texture;
                     this->number_of_symbiont_species = 0;
 
                     // get `childID` from the `Symbiosis` and set pointer to this `SymbiontMaterial`.

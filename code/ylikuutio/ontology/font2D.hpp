@@ -2,8 +2,8 @@
 #define __FONT2D_HPP_INCLUDED
 
 #include "entity.hpp"
-#include "code/ylikuutio/loaders/shader_loader.hpp"
-#include "code/ylikuutio/loaders/texture_loader.hpp"
+#include "code/ylikuutio/load/shader_loader.hpp"
+#include "code/ylikuutio/load/texture_loader.hpp"
 #include "code/ylikuutio/common/printing_struct.hpp"
 
 // Include GLEW
@@ -38,25 +38,25 @@ namespace yli
                     // constructor.
 
                     // Initialize class members with some dummy values.
-                    this->vertexbuffer = 0;
-                    this->uvbuffer = 0;
-                    this->programID = 0;
+                    this->vertexbuffer                     = 0;
+                    this->uvbuffer                         = 0;
+                    this->programID                        = 0;
                     this->vertex_position_in_screenspaceID = 0;
-                    this->vertexUVID = 0;
-                    this->Text2DUniformID = 0;
-                    this->screen_width_uniform_ID = 0;
-                    this->screen_height_uniform_ID = 0;
+                    this->vertexUVID                       = 0;
+                    this->Text2DUniformID                  = 0;
+                    this->screen_width_uniform_ID          = 0;
+                    this->screen_height_uniform_ID         = 0;
 
                     const char* char_font_texture_file_format = font_texture_file_format.c_str();
 
                     // Initialize texture
                     if ((std::strcmp(char_font_texture_file_format, "bmp") == 0) || (std::strcmp(char_font_texture_file_format, "BMP") == 0))
                     {
-                        this->texture = yli::loaders::load_BMP_texture(texture_filename);
+                        this->texture = yli::load::load_BMP_texture(texture_filename);
                     }
                     else if ((std::strcmp(char_font_texture_file_format, "dds") == 0) || (std::strcmp(char_font_texture_file_format, "DDS") == 0))
                     {
-                        this->texture = yli::loaders::load_DDS_texture(texture_filename);
+                        this->texture = yli::load::load_DDS_texture(texture_filename);
                     }
                     else
                     {
@@ -70,7 +70,7 @@ namespace yli
                     glGenBuffers(1, &uvbuffer);
 
                     // Initialize Shader
-                    programID = yli::loaders::load_shaders("TextVertexShader.vertexshader", "TextVertexShader.fragmentshader");
+                    programID = yli::load::load_shaders("TextVertexShader.vertexshader", "TextVertexShader.fragmentshader");
 
                     // Get a handle for our buffers
                     vertex_position_in_screenspaceID = glGetAttribLocation(programID, "vertexPosition_screenspace");

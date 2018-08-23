@@ -2,10 +2,10 @@
 #include "code/ylikuutio/geometry/spherical_terrain_struct.hpp"
 #include "code/ylikuutio/triangulation/triangulate_quads_struct.hpp"
 #include "code/ylikuutio/triangulation/quad_triangulation.hpp"
-#include "code/ylikuutio/loaders/bmp_heightmap_loader.hpp"
-#include "code/ylikuutio/loaders/bmp_heightmap_loader.cpp"
-#include "code/ylikuutio/loaders/bmp_loader.hpp"
-#include "code/ylikuutio/loaders/bmp_loader.cpp"
+#include "code/ylikuutio/load/bmp_heightmap_loader.hpp"
+#include "code/ylikuutio/load/bmp_heightmap_loader.cpp"
+#include "code/ylikuutio/load/bmp_loader.hpp"
+#include "code/ylikuutio/load/bmp_loader.cpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -26,7 +26,7 @@ TEST(bmp_files_must_be_loaded_approriately, test3x3_bmp)
     std::size_t image_height;
     std::size_t image_size;
 
-    uint8_t* image_data = yli::loaders::load_BMP_file(image_path, image_width, image_height, image_size);
+    uint8_t* image_data = yli::load::load_BMP_file(image_path, image_width, image_height, image_size);
     ASSERT_EQ(image_data[0], 0);
     ASSERT_EQ(image_data[1], 0);
     ASSERT_EQ(image_data[2], 0);
@@ -402,7 +402,7 @@ TEST(a_BMP_terrain_must_be_loaded_appropriately, load_3x3_BMP_terrain)
     const std::size_t z_step = 1;
     const std::string triangulation_type = "bilinear_interpolation";
 
-    bool model_loading_result = yli::loaders::load_BMP_terrain(
+    bool model_loading_result = yli::load::load_BMP_terrain(
             image_path,
             *&out_vertices,
             *&out_UVs,
@@ -738,7 +738,7 @@ TEST(a_BMP_terrain_must_be_loaded_appropriately, load_256x256_BMP_terrain)
     const std::size_t z_step = 1;
     const std::string triangulation_type = "bilinear_interpolation";
 
-    const bool model_loading_result = yli::loaders::load_BMP_terrain(
+    const bool model_loading_result = yli::load::load_BMP_terrain(
             image_path,
             *&out_vertices,
             *&out_UVs,

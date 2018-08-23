@@ -14,7 +14,7 @@
 
 namespace yli
 {
-    namespace loaders
+    namespace load
     {
         uint8_t* load_BMP_file(
                 const std::string& bmp_filename,

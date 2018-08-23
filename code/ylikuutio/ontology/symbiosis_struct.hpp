@@ -33,7 +33,7 @@ typedef struct SymbiosisStruct
     std::string model_file_format;    // type of the symbiosis model file.
     std::string triangulation_type;   // `"bilinear_interpolation"`, `"southwest_northeast_edges"`, `"southeast_northwest_edges"`.
     glm::vec3 light_position;         // light position.
-    yli::ontology::Shader* parent; // pointer to the `Scene` object.
+    yli::ontology::Shader* parent;    // pointer to the `Scene` object.
     bool vram_buffer_in_use;
 } SymbiosisStruct;
 

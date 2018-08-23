@@ -66,8 +66,8 @@ namespace yli
                     // enable rendering of a recently entered Biont.
                     // TODO: enable entering without enabling rendering.
                     this->should_ylikuutio_render_this_biont = true;
-                    this->has_entered = false;
-                    this->quaternions_in_use = biont_struct.quaternions_in_use;
+                    this->has_entered           = false;
+                    this->quaternions_in_use    = biont_struct.quaternions_in_use;
 
                     // `ontology::Movable` member variables begin here.
                     this->cartesian_coordinates = biont_struct.cartesian_coordinates;

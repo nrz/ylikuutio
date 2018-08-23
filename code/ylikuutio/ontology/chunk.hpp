@@ -47,7 +47,7 @@ namespace yli
                     // constructor.
                     this->is_original = true;
 
-                    this->parent = chunk_struct.parent;
+                    this->parent      = chunk_struct.parent;
 
                     // get `childID` from `ChunkMaster` and set pointer to this `Chunk`.
                     this->bind_to_parent();

@@ -61,8 +61,8 @@ namespace yli
                 {
                     // constructor.
                     this->rotate_angle = NAN;
-                    this->text_string = text3D_struct.text_string;
-                    this->parent = text3D_struct.parent;
+                    this->text_string  = text3D_struct.text_string;
+                    this->parent       = text3D_struct.parent;
 
                     this->number_of_objects = 0;
 

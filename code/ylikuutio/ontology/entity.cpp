@@ -31,18 +31,23 @@ namespace yli
 
             if (this->name.empty())
             {
-                std::cerr << "Entity destructor: error: name is empty.\n";
+                std::cerr << "ERROR: `Entity::~Entity`: `this->name` is empty.\n";
                 return;
             }
 
             if (this->universe == nullptr)
             {
-                std::cerr << "Entity destructor: error: `universe` is `nullptr`.\n";
+                std::cerr << "ERROR: `Entity::~Entity`: `this->universe` is `nullptr`.\n";
                 return;
             }
 
             // OK, this `Entity` had a name, so it's name shall be erased.
             this->universe->erase_entity(this->name);
+        }
+
+        std::size_t Entity::get_childID() const
+        {
+            return this->childID;
         }
 
         std::string Entity::get_type() const
@@ -62,6 +67,12 @@ namespace yli
 
         yli::config::SettingMaster* Entity::get_setting_master() const
         {
+            if (this->setting_master == nullptr)
+            {
+                std::cerr << "ERROR: `Entity::get_setting_master`: `this->setting_master` is `nullptr`.\n";
+                return nullptr;
+            }
+
             return this->setting_master.get();
         }
 

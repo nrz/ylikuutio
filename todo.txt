@@ -77,7 +77,7 @@ Tasks which are necessary for the development of Ylikuutio:
 
 Less urgent:
 [ ] Implement rigid body physics using Bullet. https://pybullet.org/wordpress/
-[ ] Implement flowing water (computed on a server, based on players' actions).
+[ ] Implement flowing water (computed on a server, based on players' actions) using GridFluidSim3D. https://github.com/rlguy/GridFluidSim3D
 [ ] Implement TinyScheme support in console.
 [ ] Implement support for 3D text.
 [ ] Implement support for partially transparent text.

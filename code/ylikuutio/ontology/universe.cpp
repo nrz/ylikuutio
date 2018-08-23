@@ -291,6 +291,11 @@ namespace yli
 
         yli::ontology::EntityFactory* Universe::get_entity_factory() const
         {
+            if (this->entity_factory == nullptr)
+            {
+                return nullptr;
+            }
+
             return this->entity_factory.get();
         }
 
@@ -313,7 +318,7 @@ namespace yli
                 return nullptr;
             }
 
-            yli::config::SettingMaster* setting_master = universe->setting_master.get();
+            yli::config::SettingMaster* setting_master = universe->get_setting_master();
 
             if (setting_master == nullptr)
             {

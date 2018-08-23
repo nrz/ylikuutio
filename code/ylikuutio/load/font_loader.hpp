@@ -13,7 +13,7 @@
 
 namespace yli
 {
-    namespace loaders
+    namespace load
     {
         bool load_SVG_font(std::string font_file_path,
                 std::vector<std::vector<std::vector<glm::vec2>>>& out_glyph_vertex_data,

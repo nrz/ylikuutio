@@ -24,7 +24,7 @@
 
 namespace yli
 {
-    namespace loaders
+    namespace load
     {
         bool load_symbiosis(
                 SymbiosisLoaderStruct& symbiosis_loader_struct,
@@ -48,7 +48,7 @@ namespace yli
 
             if (symbiosis_loader_struct.model_file_format == "fbx" || symbiosis_loader_struct.model_file_format == "FBX")
             {
-                model_loading_result = yli::loaders::load_FBX(
+                model_loading_result = yli::load::load_FBX(
                         symbiosis_loader_struct.model_filename,
                         out_vertices,
                         out_UVs,

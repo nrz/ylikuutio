@@ -43,17 +43,17 @@ namespace yli
                     // constructor.
 
                     // Initialize class members with some dummy values.
-                    this->childID = std::numeric_limits<std::size_t>::max();
-                    this->lightID = 0;
+                    this->childID                      = std::numeric_limits<std::size_t>::max();
+                    this->lightID                      = 0;
                     this->vertex_position_modelspaceID = 0;
-                    this->vertexUVID = 0;
-                    this->vertex_normal_modelspaceID = 0;
-                    this->vertexbuffer = 0;
-                    this->uvbuffer = 0;
-                    this->normalbuffer = 0;
-                    this->elementbuffer = 0;
-                    this->initial_rotate_angle = 0.0f;
-                    this->initial_rotate_vector = glm::vec3(0.0f, 1.0f, 1.0f);
+                    this->vertexUVID                   = 0;
+                    this->vertex_normal_modelspaceID   = 0;
+                    this->vertexbuffer                 = 0;
+                    this->uvbuffer                     = 0;
+                    this->normalbuffer                 = 0;
+                    this->elementbuffer                = 0;
+                    this->initial_rotate_angle         = 0.0f;
+                    this->initial_rotate_vector        = glm::vec3(0.0f, 1.0f, 1.0f);
 
                     this->number_of_objects = 0;
                     this->child_vector_pointers_vector.push_back(&this->object_pointer_vector);
@@ -66,7 +66,10 @@ namespace yli
                 std::size_t get_number_of_children() const override;
                 std::size_t get_number_of_descendants() const override;
 
+                std::size_t get_number_of_vertices() const;
                 const std::vector<glm::vec3>& get_vertices() const;
+                const std::vector<glm::vec2>& get_uvs() const;
+                const std::vector<glm::vec3>& get_normals() const;
                 const std::vector<GLuint>& get_indices() const;
 
                 GLuint get_vertex_position_modelspaceID() const;

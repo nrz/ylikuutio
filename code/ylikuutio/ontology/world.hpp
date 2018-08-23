@@ -29,7 +29,7 @@ namespace yli
                 World(yli::ontology::Universe* const universe)
                     : Entity(universe)
                 {
-                    this->parent = universe;
+                    this->parent       = universe;
                     this->active_scene = nullptr;
 
                     this->number_of_scenes = 0;

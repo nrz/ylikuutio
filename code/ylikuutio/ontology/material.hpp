@@ -6,7 +6,7 @@
 #include "material_struct.hpp"
 #include "render_templates.hpp"
 #include "family_templates.hpp"
-#include "code/ylikuutio/loaders/texture_loader.hpp"
+#include "code/ylikuutio/load/texture_loader.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/common/globals.hpp"
 
@@ -50,22 +50,17 @@ namespace yli
                     : Entity(universe)
                 {
                     // constructor.
-                    this->parent = material_struct.shader;
-
-                    this->is_symbiont_material = material_struct.is_symbiont_material;
-
-                    this->texture_file_format = material_struct.texture_file_format;
-                    this->texture_filename    = material_struct.texture_filename;
-
+                    this->parent                   = material_struct.shader;
+                    this->is_symbiont_material     = material_struct.is_symbiont_material;
+                    this->texture_file_format      = material_struct.texture_file_format;
+                    this->texture_filename         = material_struct.texture_filename;
                     this->char_texture_file_format = this->texture_file_format.c_str();
                     this->char_texture_filename    = this->texture_filename.c_str();
-
-                    this->number_of_species = 0;
-                    this->number_of_vector_fonts = 0;
-                    this->number_of_chunk_masters = 0;
-
-                    this->texture = 0; // some dummy value.
-                    this->openGL_textureID = 0; // some dummy value.
+                    this->number_of_species        = 0;
+                    this->number_of_vector_fonts   = 0;
+                    this->number_of_chunk_masters  = 0;
+                    this->texture                  = 0; // some dummy value.
+                    this->openGL_textureID         = 0; // some dummy value.
 
                     if (!this->is_symbiont_material)
                     {
@@ -75,11 +70,11 @@ namespace yli
                         // Load the texture.
                         if ((std::strcmp(this->char_texture_file_format, "bmp") == 0) || (std::strcmp(this->char_texture_file_format, "BMP") == 0))
                         {
-                            this->texture = yli::loaders::load_BMP_texture(this->texture_filename);
+                            this->texture = yli::load::load_BMP_texture(this->texture_filename);
                         }
                         else if ((std::strcmp(this->char_texture_file_format, "dds") == 0) || (std::strcmp(this->char_texture_file_format, "DDS") == 0))
                         {
-                            this->texture = yli::loaders::load_DDS_texture(this->texture_filename);
+                            this->texture = yli::load::load_DDS_texture(this->texture_filename);
                         }
                         else
                         {

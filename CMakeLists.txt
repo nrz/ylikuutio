@@ -1,5 +1,5 @@
 # CMake entry point
-cmake_minimum_required(VERSION 2.8.11)
+cmake_minimum_required(VERSION 2.6.2)
 project(ylikuutio)
 
 # http://stackoverflow.com/questions/11783932/how-to-add-linker-or-compile-flag-in-cmake-file/11797272#11797272
@@ -444,35 +444,35 @@ add_library(ylikuutio STATIC
     code/ylikuutio/linear_algebra/tensor3.cpp
     code/ylikuutio/linear_algebra/tensor3.hpp
 
-    # loaders, in alphabetical order.
-    code/ylikuutio/loaders/ascii_grid_loader.cpp
-    code/ylikuutio/loaders/ascii_grid_loader.hpp
-    code/ylikuutio/loaders/bmp_heightmap_loader.cpp
-    code/ylikuutio/loaders/bmp_heightmap_loader.hpp
-    code/ylikuutio/loaders/bmp_loader.cpp
-    code/ylikuutio/loaders/bmp_loader.hpp
-    code/ylikuutio/loaders/fbx_species_loader.cpp
-    code/ylikuutio/loaders/fbx_species_loader.hpp
-    code/ylikuutio/loaders/fbx_symbiosis_loader.cpp
-    code/ylikuutio/loaders/fbx_symbiosis_loader.hpp
-    code/ylikuutio/loaders/font_loader.cpp
-    code/ylikuutio/loaders/font_loader.hpp
-    code/ylikuutio/loaders/las_loader.cpp
-    code/ylikuutio/loaders/las_loader.hpp
-    code/ylikuutio/loaders/obj_loader.cpp
-    code/ylikuutio/loaders/obj_loader.hpp
-    code/ylikuutio/loaders/shader_loader.cpp
-    code/ylikuutio/loaders/shader_loader.hpp
-    code/ylikuutio/loaders/species_loader.cpp
-    code/ylikuutio/loaders/species_loader.hpp
-    code/ylikuutio/loaders/species_loader_struct.hpp
-    code/ylikuutio/loaders/srtm_heightmap_loader.cpp
-    code/ylikuutio/loaders/srtm_heightmap_loader.hpp
-    code/ylikuutio/loaders/symbiosis_loader.cpp
-    code/ylikuutio/loaders/symbiosis_loader.hpp
-    code/ylikuutio/loaders/symbiosis_loader_struct.hpp
-    code/ylikuutio/loaders/texture_loader.cpp
-    code/ylikuutio/loaders/texture_loader.hpp
+    # load, in alphabetical order.
+    code/ylikuutio/load/ascii_grid_loader.cpp
+    code/ylikuutio/load/ascii_grid_loader.hpp
+    code/ylikuutio/load/bmp_heightmap_loader.cpp
+    code/ylikuutio/load/bmp_heightmap_loader.hpp
+    code/ylikuutio/load/bmp_loader.cpp
+    code/ylikuutio/load/bmp_loader.hpp
+    code/ylikuutio/load/fbx_species_loader.cpp
+    code/ylikuutio/load/fbx_species_loader.hpp
+    code/ylikuutio/load/fbx_symbiosis_loader.cpp
+    code/ylikuutio/load/fbx_symbiosis_loader.hpp
+    code/ylikuutio/load/font_loader.cpp
+    code/ylikuutio/load/font_loader.hpp
+    code/ylikuutio/load/las_loader.cpp
+    code/ylikuutio/load/las_loader.hpp
+    code/ylikuutio/load/obj_loader.cpp
+    code/ylikuutio/load/obj_loader.hpp
+    code/ylikuutio/load/shader_loader.cpp
+    code/ylikuutio/load/shader_loader.hpp
+    code/ylikuutio/load/species_loader.cpp
+    code/ylikuutio/load/species_loader.hpp
+    code/ylikuutio/load/species_loader_struct.hpp
+    code/ylikuutio/load/srtm_heightmap_loader.cpp
+    code/ylikuutio/load/srtm_heightmap_loader.hpp
+    code/ylikuutio/load/symbiosis_loader.cpp
+    code/ylikuutio/load/symbiosis_loader.hpp
+    code/ylikuutio/load/symbiosis_loader_struct.hpp
+    code/ylikuutio/load/texture_loader.cpp
+    code/ylikuutio/load/texture_loader.hpp
 
     # map, in alphabetical order
     code/ylikuutio/map/ylikuutio_map.hpp
@@ -608,14 +608,12 @@ add_library(ylikuutio STATIC
     code/ylikuutio/triangulation/vertices.cpp
     code/ylikuutio/triangulation/vertices.hpp
     )
-# add_dependencies(ylikuutio rescan)
 
 # yli_convert
 add_executable(yli_convert
     # yli_convert, in alphabetical order
     code/tools/yli_convert.cpp
     )
-add_dependencies(yli_convert rescan)
 target_link_libraries(yli_convert ylikuutio ${ALL_LIBS})
 
 # Ajokki
@@ -645,7 +643,6 @@ add_executable(ajokki
     code/ajokki/ajokki_wireframe.cpp
     code/ajokki/ajokki_wireframe.hpp
     )
-add_dependencies(ajokki rescan)
 target_link_libraries(ajokki ylikuutio ${ALL_LIBS})
 
 if (ENABLE_SCRIPTING_WITH_TINYSCHEME)
@@ -715,12 +712,12 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/linear_algebra/matrix_functions.hpp
         code/ylikuutio/linear_algebra/tensor3.cpp
         code/ylikuutio/linear_algebra/tensor3.hpp
-        code/ylikuutio/loaders/ascii_grid_loader.cpp
-        code/ylikuutio/loaders/ascii_grid_loader.hpp
-        code/ylikuutio/loaders/fbx_species_loader.cpp
-        code/ylikuutio/loaders/fbx_species_loader.hpp
-        code/ylikuutio/loaders/font_loader.cpp
-        code/ylikuutio/loaders/font_loader.hpp
+        code/ylikuutio/load/ascii_grid_loader.cpp
+        code/ylikuutio/load/ascii_grid_loader.hpp
+        code/ylikuutio/load/fbx_species_loader.cpp
+        code/ylikuutio/load/fbx_species_loader.hpp
+        code/ylikuutio/load/font_loader.cpp
+        code/ylikuutio/load/font_loader.hpp
         code/ylikuutio/memory/memory_templates.hpp
         code/ylikuutio/ontology/glyph_struct.hpp
         code/ylikuutio/ontology/material_struct.hpp

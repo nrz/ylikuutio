@@ -39,15 +39,15 @@ namespace yli
                 Camera(yli::ontology::Universe* const universe, CameraStruct& camera_struct)
                     : Movable(universe, camera_struct.cartesian_coordinates)
                 {
-                    this->horizontal_angle = NAN;
-                    this->vertical_angle = NAN;
+                    this->horizontal_angle  = NAN;
+                    this->vertical_angle    = NAN;
 
                     // Variables related to the camera.
                     this->projection_matrix = glm::mat4(1.0f); // identity matrix (dummy value).
-                    this->view_matrix = glm::mat4(1.0f);       // identity matrix (dummy value).
+                    this->view_matrix       = glm::mat4(1.0f); // identity matrix (dummy value).
 
                     // constructor.
-                    this->parent = camera_struct.parent;
+                    this->parent            = camera_struct.parent;
 
                     // get `childID` from `Scene` and set pointer to this `Camera`.
                     this->bind_to_parent();

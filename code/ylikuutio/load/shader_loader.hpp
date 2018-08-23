@@ -9,7 +9,7 @@
 
 namespace yli
 {
-    namespace loaders
+    namespace load
     {
         GLuint load_shaders(const char* const vertex_file_path, const char* const fragment_file_path);
     }

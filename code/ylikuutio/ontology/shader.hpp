@@ -15,7 +15,7 @@
 #include "shader_struct.hpp"
 #include "render_templates.hpp"
 #include "family_templates.hpp"
-#include "code/ylikuutio/loaders/shader_loader.hpp"
+#include "code/ylikuutio/load/shader_loader.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/common/pi.hpp"
 
@@ -64,16 +64,16 @@ namespace yli
                     this->char_fragment_shader = this->fragment_shader.c_str();
                     this->parent               = shader_struct.parent;
 
-                    this->terrain_species = nullptr;
+                    this->terrain_species      = nullptr;
 
-                    this->number_of_materials = 0;
-                    this->number_of_symbioses = 0;
+                    this->number_of_materials  = 0;
+                    this->number_of_symbioses  = 0;
 
                     // get `childID` from `Scene` and set pointer to this `Shader`.
                     this->bind_to_parent();
 
                     // Create and compile our GLSL program from the shaders.
-                    this->programID = yli::loaders::load_shaders(this->char_vertex_shader, this->char_fragment_shader);
+                    this->programID = yli::load::load_shaders(this->char_vertex_shader, this->char_fragment_shader);
 
                     // Get a handle for our "MVP" uniform.
                     this->MatrixID = glGetUniformLocation(this->programID, "MVP");

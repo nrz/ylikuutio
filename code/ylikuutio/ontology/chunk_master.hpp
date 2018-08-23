@@ -34,9 +34,8 @@ namespace yli
                 {
                     // constructor.
                     this->get_content_callback = get_content_callback;
-                    this->number_of_chunks = 0;
-
-                    this->parent = parent;
+                    this->number_of_chunks     = 0;
+                    this->parent               = parent;
 
                     // get `childID` from `Material` and set pointer to this `ChunkMaster`.
                     this->bind_to_parent();

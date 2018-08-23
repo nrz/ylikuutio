@@ -76,8 +76,11 @@ namespace yli
             // destructor.
             std::cout << "SymbiontSpecies with childID " << std::dec << this->childID << " will be destroyed.\n";
 
-            glDeleteBuffers(1, &this->normalbuffer);
-            glDeleteBuffers(1, &this->elementbuffer);
+            if (this->vram_buffer_in_use)
+            {
+                glDeleteBuffers(1, &this->normalbuffer);
+                glDeleteBuffers(1, &this->elementbuffer);
+            }
 
             // requirements for further actions:
             // `this->symbiont_material_parent` must not be `nullptr`.
@@ -96,12 +99,15 @@ namespace yli
 
         void SymbiontSpecies::render()
         {
-            this->prerender();
+            if (this->vram_buffer_in_use)
+            {
+                this->prerender();
 
-            // render this `SymbiontSpecies`.
-            yli::ontology::render_species_or_glyph<yli::ontology::SymbiontSpecies*>(this);
+                // render this `SymbiontSpecies`.
+                yli::ontology::render_species_or_glyph<yli::ontology::SymbiontSpecies*>(this);
 
-            this->postrender();
+                this->postrender();
+            }
         }
 
         yli::ontology::Entity* SymbiontSpecies::get_parent() const

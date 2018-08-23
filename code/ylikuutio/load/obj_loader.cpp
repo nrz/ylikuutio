@@ -20,7 +20,7 @@
 
 namespace yli
 {
-    namespace loaders
+    namespace load
     {
         bool load_OBJ(
                 const std::string& obj_file_name,

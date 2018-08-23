@@ -59,7 +59,7 @@ namespace yli
                     this->translate_vector      = holobiont_struct.translate_vector;
                     this->initial_rotate_vector = holobiont_struct.initial_rotate_vector;
 
-                    this->number_of_bionts = 0;
+                    this->number_of_bionts      = 0;
 
                     this->rotate_angle          = holobiont_struct.rotate_angle;
                     this->initial_rotate_angle  = holobiont_struct.initial_rotate_angle;

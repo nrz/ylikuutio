@@ -36,13 +36,13 @@ typedef struct GlyphStruct
     }
 
     // used for all files (for all glyph).
-    glm::vec3 light_position;             // light position.
+    glm::vec3 light_position;              // light position.
     std::vector<std::vector<glm::vec2>>* glyph_vertex_data;
-    const char* glyph_name_pointer;       // we need only a pointer, because glyphs are always created by the `VectorFont` constructor.
-    const char* unicode_char_pointer;     // we need only a pointer, because glyphs are always created by the `VectorFont` constructor.
-    yli::ontology::Universe* universe; // pointer to the `Universe`.
-    yli::ontology::Shader* shader_pointer;     // pointer to the `Shader`.
-    yli::ontology::VectorFont* parent; // pointer to the font object.
+    const char* glyph_name_pointer;        // we need only a pointer, because glyphs are always created by the `VectorFont` constructor.
+    const char* unicode_char_pointer;      // we need only a pointer, because glyphs are always created by the `VectorFont` constructor.
+    yli::ontology::Universe* universe;     // pointer to the `Universe`.
+    yli::ontology::Shader* shader_pointer; // pointer to the `Shader`.
+    yli::ontology::VectorFont* parent;     // pointer to the font object.
     bool vram_buffer_in_use;
 } GlyphStruct;
 

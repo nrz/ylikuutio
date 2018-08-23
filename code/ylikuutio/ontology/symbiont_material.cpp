@@ -115,11 +115,38 @@ namespace yli
 
         void SymbiontMaterial::load_texture()
         {
-            this->texture = yli::loaders::load_FBX_texture(this->ofbx_texture);
+            // requirements:
+            // `this->ofbx_texture` must not be `nullptr`.
+            // `this->parent` must not be `nullptr`.
+            // `this->parent->get_parent()` must not be `nullptr`.
+
+            const ofbx::Texture* const texture = this->ofbx_texture;
+
+            if (texture == nullptr)
+            {
+                std::cerr << "ERROR: `SymbiontMaterial::load_texture`: `texture` is `nullptr`!\n";
+                return;
+            }
+
+            const yli::ontology::Symbiosis* const symbiosis = static_cast<yli::ontology::Symbiosis*>(this->parent);
+
+            if (symbiosis == nullptr)
+            {
+                std::cerr << "ERROR: `SymbiontMaterial::load_texture`: `symbiosis` is `nullptr`!\n";
+                return;
+            }
+
+            const yli::ontology::Shader* const shader = static_cast<yli::ontology::Shader*>(symbiosis->get_parent());
+
+            if (shader == nullptr)
+            {
+                std::cerr << "ERROR: `SymbiontMaterial::load_texture`: `shader` is `nullptr`!\n";
+                return;
+            }
+
+            this->texture = yli::load::load_FBX_texture(texture);
 
             // Get a handle for our "myTextureSampler" uniform.
-            yli::ontology::Symbiosis* symbiosis = static_cast<yli::ontology::Symbiosis*>(this->parent);
-            yli::ontology::Shader* shader = static_cast<yli::ontology::Shader*>(symbiosis->get_parent());
             this->openGL_textureID = glGetUniformLocation(shader->get_programID(), "myTextureSampler");
         }
 

@@ -34,21 +34,21 @@ namespace yli
                     : Entity(universe)
                 {
                     // constructor.
-                    this->cartesian_coordinates.x = cartesian_coordinates.x;
-                    this->cartesian_coordinates.y = cartesian_coordinates.y;
-                    this->cartesian_coordinates.z = cartesian_coordinates.z;
-                    this->spherical_coordinates.rho = NAN;
+                    this->cartesian_coordinates.x     = cartesian_coordinates.x;
+                    this->cartesian_coordinates.y     = cartesian_coordinates.y;
+                    this->cartesian_coordinates.z     = cartesian_coordinates.z;
+                    this->spherical_coordinates.rho   = NAN;
                     this->spherical_coordinates.theta = NAN;
-                    this->spherical_coordinates.phi = NAN;
-                    this->horizontal_angle = 0.0f;
-                    this->vertical_angle = 0.0f;
+                    this->spherical_coordinates.phi   = NAN;
+                    this->horizontal_angle            = 0.0f;
+                    this->vertical_angle              = 0.0f;
 
-                    this->model_matrix = glm::mat4(1.0f); // identity matrix (dummy value).
-                    this->MVP_matrix   = glm::mat4(1.0f); // identity matrix (dummy value).
+                    this->model_matrix                = glm::mat4(1.0f); // identity matrix (dummy value).
+                    this->MVP_matrix                  = glm::mat4(1.0f); // identity matrix (dummy value).
 
-                    float float_x = cartesian_coordinates.x;
-                    float float_y = cartesian_coordinates.y;
-                    float float_z = cartesian_coordinates.z;
+                    float float_x                     = cartesian_coordinates.x;
+                    float float_y                     = cartesian_coordinates.y;
+                    float float_z                     = cartesian_coordinates.z;
 
                     SettingStruct cartesian_coordinates_setting_struct(std::make_shared<yli::datatypes::AnyValue>(new glm::vec3(float_x, float_y, float_z)));
                     cartesian_coordinates_setting_struct.name = "cartesian_coordinates";

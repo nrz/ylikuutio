@@ -1,5 +1,5 @@
-#ifndef __COMMON_SHADER_HPP_INCLUDED
-#define __COMMON_SHADER_HPP_INCLUDED
+#ifndef __SHADER_LOADER_HPP_INCLUDED
+#define __SHADER_LOADER_HPP_INCLUDED
 
 #include "shader_loader.hpp"
 
@@ -19,7 +19,7 @@
 
 namespace yli
 {
-    namespace loaders
+    namespace load
     {
         GLuint load_shaders(const char* const vertex_file_path, const char* const fragment_file_path)
         {

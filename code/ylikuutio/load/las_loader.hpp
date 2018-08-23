@@ -13,7 +13,7 @@
 
 namespace yli
 {
-    namespace loaders
+    namespace load
     {
         bool load_LASF_data(
                 const std::string laser_scaling_file_name,

@@ -1,5 +1,5 @@
-#ifndef __ASCII_GRID_LOADER_HPP_INCLUDED
-#define __ASCII_GRID_LOADER_HPP_INCLUDED
+#ifndef __FBX_SPECIES_LOADER_HPP_INCLUDED
+#define __FBX_SPECIES_LOADER_HPP_INCLUDED
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -14,16 +14,15 @@
 
 namespace yli
 {
-    namespace loaders
+    namespace load
     {
-        bool load_ASCII_grid(
-                const std::string& ascii_grid_filename,
+        bool load_FBX(
+                const std::string& filename,
+                const std::size_t mesh_i,
                 std::vector<glm::vec3>& out_vertices,
                 std::vector<glm::vec2>& out_UVs,
                 std::vector<glm::vec3>& out_normals,
-                const std::size_t x_step,
-                const std::size_t z_step,
-                const std::string& triangulation_type);
+                const bool is_debug_mode);
     }
 }
 
