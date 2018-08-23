@@ -78,8 +78,8 @@ namespace yli
 
                     // Get a handle for our buffers.
                     this->vertex_position_modelspaceID = glGetAttribLocation(this->shader->get_programID(), "vertexPosition_modelspace");
-                    this->vertexUVID = glGetAttribLocation(this->shader->get_programID(), "vertexUV");
-                    this->vertex_normal_modelspaceID = glGetAttribLocation(this->shader->get_programID(), "vertexNormal_modelspace");
+                    this->vertexUVID                   = glGetAttribLocation(this->shader->get_programID(), "vertexUV");
+                    this->vertex_normal_modelspaceID   = glGetAttribLocation(this->shader->get_programID(), "vertexNormal_modelspace");
 
                     // Get a handle for our "LightPosition" uniform.
                     glUseProgram(this->shader->get_programID());

@@ -65,16 +65,16 @@ namespace yli
                     : Entity(universe)
                 {
                     // constructor.
-                    this->parent = symbiosis_struct.parent;
-                    this->model_filename = symbiosis_struct.model_filename;
-                    this->model_file_format = symbiosis_struct.model_file_format;
-                    this->triangulation_type = symbiosis_struct.triangulation_type;
-                    this->light_position = symbiosis_struct.light_position;
+                    this->parent                       = symbiosis_struct.parent;
+                    this->model_filename               = symbiosis_struct.model_filename;
+                    this->model_file_format            = symbiosis_struct.model_file_format;
+                    this->triangulation_type           = symbiosis_struct.triangulation_type;
+                    this->light_position               = symbiosis_struct.light_position;
 
                     this->number_of_symbiont_materials = 0;
-                    this->number_of_holobionts = 0;
-                    this->ofbx_mesh_count = 0;
-                    this->vram_buffer_in_use = symbiosis_struct.vram_buffer_in_use;
+                    this->number_of_holobionts         = 0;
+                    this->ofbx_mesh_count              = 0;
+                    this->vram_buffer_in_use           = symbiosis_struct.vram_buffer_in_use;
 
                     // get `childID` from `Shader` and set pointer to this `Symbiosis`.
                     this->bind_to_parent();

@@ -54,25 +54,25 @@ namespace yli
                     // constructor.
                     this->is_terrain          = species_struct.is_terrain;
                     this->is_symbiont_species = species_struct.is_symbiont_species;
-                    this->planet_radius      = species_struct.planet_radius;
-                    this->divisor           = species_struct.divisor;
-                    this->model_file_format = species_struct.model_file_format;
-                    this->model_filename    = species_struct.model_filename;
-                    this->color_channel     = species_struct.color_channel;
-                    this->light_position    = species_struct.light_position;
-                    this->latitude          = species_struct.latitude;
-                    this->longitude         = species_struct.longitude;
-                    this->material_parent   = species_struct.material;
-                    this->mesh_i            = species_struct.mesh_i;
-                    this->x_step            = species_struct.x_step;
-                    this->z_step            = species_struct.z_step;
-                    this->triangulation_type = species_struct.triangulation_type;
+                    this->planet_radius       = species_struct.planet_radius;
+                    this->divisor             = species_struct.divisor;
+                    this->model_file_format   = species_struct.model_file_format;
+                    this->model_filename      = species_struct.model_filename;
+                    this->color_channel       = species_struct.color_channel;
+                    this->light_position      = species_struct.light_position;
+                    this->latitude            = species_struct.latitude;
+                    this->longitude           = species_struct.longitude;
+                    this->material_parent     = species_struct.material;
+                    this->mesh_i              = species_struct.mesh_i;
+                    this->x_step              = species_struct.x_step;
+                    this->z_step              = species_struct.z_step;
+                    this->triangulation_type  = species_struct.triangulation_type;
 
                     this->char_model_file_format = this->model_file_format.c_str();
                     this->char_model_filename    = this->model_filename.c_str();
 
-                    this->image_width = -1;
-                    this->image_height = -1;
+                    this->image_width            = -1;
+                    this->image_height           = -1;
 
                     if (!this->is_symbiont_species)
                     {

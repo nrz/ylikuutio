@@ -64,10 +64,10 @@ namespace yli
                     this->char_fragment_shader = this->fragment_shader.c_str();
                     this->parent               = shader_struct.parent;
 
-                    this->terrain_species = nullptr;
+                    this->terrain_species      = nullptr;
 
-                    this->number_of_materials = 0;
-                    this->number_of_symbioses = 0;
+                    this->number_of_materials  = 0;
+                    this->number_of_symbioses  = 0;
 
                     // get `childID` from `Scene` and set pointer to this `Shader`.
                     this->bind_to_parent();

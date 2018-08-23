@@ -60,12 +60,11 @@ namespace yli
                     : Model(glyph_struct.universe, glyph_struct.vram_buffer_in_use)
                 {
                     // constructor.
-                    this->parent = glyph_struct.parent;
-
-                    this->glyph_vertex_data = glyph_struct.glyph_vertex_data;
-                    this->glyph_name_pointer = glyph_struct.glyph_name_pointer;
+                    this->parent               = glyph_struct.parent;
+                    this->glyph_vertex_data    = glyph_struct.glyph_vertex_data;
+                    this->glyph_name_pointer   = glyph_struct.glyph_name_pointer;
                     this->unicode_char_pointer = glyph_struct.unicode_char_pointer;
-                    this->light_position = glyph_struct.light_position;
+                    this->light_position       = glyph_struct.light_position;
 
                     // get `childID` from `VectorFont` and set pointer to this `Glyph`.
                     this->bind_to_parent();

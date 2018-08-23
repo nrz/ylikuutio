@@ -45,22 +45,20 @@ namespace yli
                     : Entity(universe)
                 {
                     // constructor.
-                    this->gravity = 9.81f / 60.0f;
-                    this->fall_speed = this->gravity;
-                    this->water_level = water_level;
-
-                    this->parent = world;
-
+                    this->gravity               = 9.81f / 60.0f;
+                    this->fall_speed            = this->gravity;
+                    this->water_level           = water_level;
+                    this->parent                = world;
                     this->cartesian_coordinates = nullptr;
                     this->spherical_coordinates = nullptr;
-                    this->horizontal_angle = NAN;
-                    this->vertical_angle = NAN;
-                    this->turbo_factor = 1.0f;
-                    this->twin_turbo_factor = 1.0f;
+                    this->horizontal_angle      = NAN;
+                    this->vertical_angle        = NAN;
+                    this->turbo_factor          = 1.0f;
+                    this->twin_turbo_factor     = 1.0f;
 
-                    this->number_of_shaders = 0;
-                    this->number_of_cameras = 0;
-                    this->active_camera = nullptr;
+                    this->number_of_shaders     = 0;
+                    this->number_of_cameras     = 0;
+                    this->active_camera         = nullptr;
 
                     // get `childID` from `World` and set pointer to this `Scene`.
                     this->bind_to_parent();

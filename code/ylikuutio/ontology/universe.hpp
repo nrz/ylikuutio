@@ -286,65 +286,65 @@ namespace yli
 
                     this->current_camera_cartesian_coordinates = glm::vec3(NAN, NAN, NAN); // dummy coordinates.
 
-                    this->current_camera_spherical_coordinates.rho = NAN;   // dummy coordinates.
+                    this->current_camera_spherical_coordinates.rho   = NAN; // dummy coordinates.
                     this->current_camera_spherical_coordinates.theta = NAN; // dummy coordinates.
-                    this->current_camera_spherical_coordinates.phi = NAN;   // dummy coordinates.
+                    this->current_camera_spherical_coordinates.phi   = NAN; // dummy coordinates.
 
-                    this->planet_radius = NAN; // world radius is NAN as long it doesn't get `set` by `SettingMaster`.
-                    this->terrain_species = nullptr;
-                    this->active_world = nullptr;
-                    this->console_pointer = nullptr;
+                    this->planet_radius    = NAN;     // world radius is NAN as long it doesn't get `set` by `SettingMaster`.
+                    this->terrain_species  = nullptr;
+                    this->active_world     = nullptr;
+                    this->console_pointer  = nullptr;
 
-                    this->background_red = NAN;
+                    this->background_red   = NAN;
                     this->background_green = NAN;
-                    this->background_blue = NAN;
+                    this->background_blue  = NAN;
                     this->background_alpha = NAN;
 
                     // Variables related to the window.
-                    this->window = nullptr;
-                    this->window_width = universe_struct.window_width;
+                    this->window        = nullptr;
+                    this->window_width  = universe_struct.window_width;
                     this->window_height = universe_struct.window_height;
-                    this->window_title = universe_struct.window_title;
-                    this->is_headless = universe_struct.is_headless;
+                    this->window_title  = universe_struct.window_title;
+                    this->is_headless   = universe_struct.is_headless;
 
                     this->current_camera_projection_matrix = glm::mat4(1.0f); // identity matrix (dummy value).
-                    this->current_camera_view_matrix = glm::mat4(1.0f);       // identity matrix (dummy value).
-                    this->current_camera_horizontal_angle = NAN;
-                    this->current_camera_vertical_angle = NAN;
+                    this->current_camera_view_matrix       = glm::mat4(1.0f);       // identity matrix (dummy value).
+                    this->current_camera_horizontal_angle  = NAN;
+                    this->current_camera_vertical_angle    = NAN;
 
                     // Variables related to the camera.
                     this->aspect_ratio = static_cast<GLfloat>(this->window_width / this->window_height);
-                    this->initialFoV = 60.0f;
+                    this->initialFoV   = 60.0f;
 
                     this->text_size = universe_struct.text_size;
                     this->font_size = universe_struct.font_size;
 
-                    this->max_FPS = universe_struct.max_FPS;
-                    this->delta_time = NAN;
-                    this->last_time_before_reading_keyboard = std::numeric_limits<uint32_t>::max();
+                    this->max_FPS                              = universe_struct.max_FPS;
+                    this->delta_time                           = NAN;
+                    this->last_time_before_reading_keyboard    = std::numeric_limits<uint32_t>::max();
                     this->current_time_before_reading_keyboard = std::numeric_limits<uint32_t>::max();
 
-                    this->has_mouse_ever_moved = false;
+                    this->has_mouse_ever_moved    = false;
                     this->can_toggle_invert_mouse = false;
-                    this->is_invert_mouse_in_use = false;
-                    this->can_toggle_flight_mode = false;
-                    this->is_flight_mode_in_use = false;
-                    this->is_first_turbo_pressed = false;
+                    this->is_invert_mouse_in_use  = false;
+                    this->can_toggle_flight_mode  = false;
+                    this->is_flight_mode_in_use   = false;
+                    this->is_first_turbo_pressed  = false;
                     this->is_second_turbo_pressed = false;
 
-                    this->turbo_factor = NAN;
+                    this->turbo_factor      = NAN;
                     this->twin_turbo_factor = NAN;
 
-                    this->speed = universe_struct.speed;
+                    this->speed       = universe_struct.speed;
                     this->mouse_speed = universe_struct.mouse_speed;
 
-                    this->gravity = universe_struct.gravity;
+                    this->gravity    = universe_struct.gravity;
                     this->fall_speed = this->gravity;
 
                     this->testing_spherical_terrain_in_use = false;
-                    this->in_help_mode = true;
-                    this->can_toggle_help_mode = false;
-                    this->can_display_help_screen = true;
+                    this->in_help_mode                     = true;
+                    this->can_toggle_help_mode             = false;
+                    this->can_display_help_screen          = true;
 
                     this->number_of_worlds = 0;
 
@@ -352,7 +352,7 @@ namespace yli
                     this->type = "yli::ontology::Universe*";
 
                     this->context = nullptr;
-                    this->window = nullptr;
+                    this->window  = nullptr;
 
                     // Initialise SDL
                     if (!yli::opengl::init_window())

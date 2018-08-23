@@ -50,22 +50,17 @@ namespace yli
                     : Entity(universe)
                 {
                     // constructor.
-                    this->parent = material_struct.shader;
-
-                    this->is_symbiont_material = material_struct.is_symbiont_material;
-
-                    this->texture_file_format = material_struct.texture_file_format;
-                    this->texture_filename    = material_struct.texture_filename;
-
+                    this->parent                   = material_struct.shader;
+                    this->is_symbiont_material     = material_struct.is_symbiont_material;
+                    this->texture_file_format      = material_struct.texture_file_format;
+                    this->texture_filename         = material_struct.texture_filename;
                     this->char_texture_file_format = this->texture_file_format.c_str();
                     this->char_texture_filename    = this->texture_filename.c_str();
-
-                    this->number_of_species = 0;
-                    this->number_of_vector_fonts = 0;
-                    this->number_of_chunk_masters = 0;
-
-                    this->texture = 0; // some dummy value.
-                    this->openGL_textureID = 0; // some dummy value.
+                    this->number_of_species        = 0;
+                    this->number_of_vector_fonts   = 0;
+                    this->number_of_chunk_masters  = 0;
+                    this->texture                  = 0; // some dummy value.
+                    this->openGL_textureID         = 0; // some dummy value.
 
                     if (!this->is_symbiont_material)
                     {

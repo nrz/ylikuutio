@@ -44,10 +44,8 @@ namespace yli
                     : Material(universe, material_struct)
                 {
                     // constructor.
-                    this->parent = material_struct.symbiosis;
-
-                    this->ofbx_texture = material_struct.ofbx_texture;
-
+                    this->parent                     = material_struct.symbiosis;
+                    this->ofbx_texture               = material_struct.ofbx_texture;
                     this->number_of_symbiont_species = 0;
 
                     // get `childID` from the `Symbiosis` and set pointer to this `SymbiontMaterial`.

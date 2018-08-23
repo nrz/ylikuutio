@@ -38,14 +38,14 @@ namespace yli
                     // constructor.
 
                     // Initialize class members with some dummy values.
-                    this->vertexbuffer = 0;
-                    this->uvbuffer = 0;
-                    this->programID = 0;
+                    this->vertexbuffer                     = 0;
+                    this->uvbuffer                         = 0;
+                    this->programID                        = 0;
                     this->vertex_position_in_screenspaceID = 0;
-                    this->vertexUVID = 0;
-                    this->Text2DUniformID = 0;
-                    this->screen_width_uniform_ID = 0;
-                    this->screen_height_uniform_ID = 0;
+                    this->vertexUVID                       = 0;
+                    this->Text2DUniformID                  = 0;
+                    this->screen_width_uniform_ID          = 0;
+                    this->screen_height_uniform_ID         = 0;
 
                     const char* char_font_texture_file_format = font_texture_file_format.c_str();
 
