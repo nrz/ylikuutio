@@ -603,7 +603,7 @@ int main(const int argc, const char* argv[])
             switch_to_pink_geometric_tiles_material_callback_object);
 
     // Callback code for T: transform `suzanne2` into terrain.
-    std::string helsinki_species_string = "Helsinki_species";
+    std::string helsinki_species_string = "helsinki_east_downtown_terrain_species";
     std::string suzanne2_string = "suzanne2";
     yli::callback_system::CallbackEngine* transform_into_terrain_callback_engine = new yli::callback_system::CallbackEngine();
     yli::callback_system::CallbackObject* transform_into_terrain_callback_object = new yli::callback_system::CallbackObject(
