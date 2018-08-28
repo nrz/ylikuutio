@@ -301,58 +301,6 @@ namespace yli
 
         // Public callbacks.
 
-        std::shared_ptr<yli::datatypes::AnyValue> Universe::delete_entity(
-                yli::console::Console* const console,
-                yli::ontology::Entity* const universe_entity,
-                std::vector<std::string>& command_parameters)
-        {
-            if (console == nullptr || universe_entity == nullptr)
-            {
-                return nullptr;
-            }
-
-            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(universe_entity);
-
-            if (universe == nullptr)
-            {
-                return nullptr;
-            }
-
-            yli::config::SettingMaster* setting_master = universe->get_setting_master();
-
-            if (setting_master == nullptr)
-            {
-                return nullptr;
-            }
-
-            if (command_parameters.size() == 0)
-            {
-                // No command parameters.
-                // Print variable names.
-                console->print_text(setting_master->help());
-            }
-            else if (command_parameters.size() == 1)
-            {
-                std::string name = command_parameters[0];
-
-                if (universe->entity_map.count(name) == 0)
-                {
-                    return nullptr;
-                }
-
-                yli::ontology::Entity* entity = universe->entity_map[name];
-                universe->entity_map.erase(name);
-
-                if (entity == nullptr)
-                {
-                    return nullptr;
-                }
-
-                delete entity;
-            }
-            return nullptr;
-        }
-
         std::shared_ptr<yli::datatypes::AnyValue> Universe::activate(
                 yli::console::Console* const console,
                 yli::ontology::Entity* const universe_entity,
@@ -416,6 +364,58 @@ namespace yli
                     // The named `Entity` is a `Scene`.
                     universe->set_active_scene(scene);
                 }
+            }
+            return nullptr;
+        }
+
+        std::shared_ptr<yli::datatypes::AnyValue> Universe::delete_entity(
+                yli::console::Console* const console,
+                yli::ontology::Entity* const universe_entity,
+                std::vector<std::string>& command_parameters)
+        {
+            if (console == nullptr || universe_entity == nullptr)
+            {
+                return nullptr;
+            }
+
+            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(universe_entity);
+
+            if (universe == nullptr)
+            {
+                return nullptr;
+            }
+
+            yli::config::SettingMaster* setting_master = universe->get_setting_master();
+
+            if (setting_master == nullptr)
+            {
+                return nullptr;
+            }
+
+            if (command_parameters.size() == 0)
+            {
+                // No command parameters.
+                // Print variable names.
+                console->print_text(setting_master->help());
+            }
+            else if (command_parameters.size() == 1)
+            {
+                std::string name = command_parameters[0];
+
+                if (universe->entity_map.count(name) == 0)
+                {
+                    return nullptr;
+                }
+
+                yli::ontology::Entity* entity = universe->entity_map[name];
+                universe->entity_map.erase(name);
+
+                if (entity == nullptr)
+                {
+                    return nullptr;
+                }
+
+                delete entity;
             }
             return nullptr;
         }
