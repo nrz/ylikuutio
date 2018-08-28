@@ -374,7 +374,7 @@ namespace yli
                 return nullptr;
             }
 
-            yli::config::SettingMaster* setting_master = universe->setting_master.get();
+            yli::config::SettingMaster* setting_master = universe->get_setting_master();
 
             if (setting_master == nullptr)
             {
