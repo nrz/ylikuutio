@@ -34,7 +34,7 @@ typedef struct SpeciesStruct
         shader(nullptr),
         material(nullptr),
         symbiont_material(nullptr),
-        vertex_count(std::numeric_limits<std::size_t>::max()),
+        vertex_count(std::numeric_limits<std::size_t>::max()), // `std::numeric_limits<std::size_t>::max()` means that `vertex_count` is not defined.
         mesh_i(0),
         x_step(1),
         z_step(1),

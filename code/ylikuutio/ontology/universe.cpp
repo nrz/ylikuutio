@@ -199,6 +199,7 @@ namespace yli
 
         float Universe::compute_delta_time()
         {
+            // `std::numeric_limits<std::size_t>::max()` means that `last_time_before_reading_keyboard` is not defined.
             if (this->last_time_before_reading_keyboard == std::numeric_limits<uint32_t>::max())
             {
                 // `glfwGetTime()` is called here only once, the first time this function is called.

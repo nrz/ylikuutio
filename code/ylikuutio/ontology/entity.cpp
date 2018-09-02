@@ -16,7 +16,7 @@ namespace yli
         Entity::Entity(yli::ontology::Universe* const universe)
         {
             // constructor.
-            this->childID = std::numeric_limits<std::size_t>::max();
+            this->childID = std::numeric_limits<std::size_t>::max(); // `std::numeric_limits<std::size_t>::max()` means that `childID` is not defined.
             this->universe = universe;
             this->prerender_callback = nullptr;
             this->postrender_callback = nullptr;

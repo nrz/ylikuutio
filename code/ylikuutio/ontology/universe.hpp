@@ -321,7 +321,11 @@ namespace yli
 
                     this->max_FPS                              = universe_struct.max_FPS;
                     this->delta_time                           = NAN;
+
+                    // `std::numeric_limits<std::size_t>::max()` means that `last_time_before_reading_keyboard` is not defined.
                     this->last_time_before_reading_keyboard    = std::numeric_limits<uint32_t>::max();
+
+                    // `std::numeric_limits<std::size_t>::max()` means that `current_time_before_reading_keyboard` is not defined.
                     this->current_time_before_reading_keyboard = std::numeric_limits<uint32_t>::max();
 
                     this->has_mouse_ever_moved    = false;

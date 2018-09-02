@@ -43,6 +43,7 @@ namespace yli
                     // constructor.
 
                     // Initialize class members with some dummy values.
+                    // `std::numeric_limits<std::size_t>::max()` means that `childID` is not defined.
                     this->childID                      = std::numeric_limits<std::size_t>::max();
                     this->lightID                      = 0;
                     this->vertex_position_modelspaceID = 0;
