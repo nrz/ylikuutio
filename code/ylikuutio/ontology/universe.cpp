@@ -422,15 +422,15 @@ namespace yli
 
         std::shared_ptr<yli::datatypes::AnyValue> Universe::info(
                 yli::console::Console* const console,
-                yli::ontology::Entity* const entity,
+                yli::ontology::Entity* const universe_entity,
                 std::vector<std::string>& command_parameters)
         {
-            if (console == nullptr || entity == nullptr)
+            if (console == nullptr || universe_entity == nullptr)
             {
                 return nullptr;
             }
 
-            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
+            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(universe_entity);
 
             if (universe == nullptr)
             {

@@ -480,7 +480,7 @@ namespace yli
 
                 static std::shared_ptr<yli::datatypes::AnyValue> info(
                         yli::console::Console* const console,
-                        yli::ontology::Entity* const entity,
+                        yli::ontology::Entity* const universe_entity,
                         std::vector<std::string>& command_parameters);
 
                 // Public callbacks end here.
