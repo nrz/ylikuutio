@@ -5,12 +5,6 @@
 #include "vector_font_struct.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
-// Include GLEW
-#ifndef __GL_GLEW_H_INCLUDED
-#define __GL_GLEW_H_INCLUDED
-#include <GL/glew.h> // GLfloat, GLuint etc.
-#endif
-
 // Include standard headers
 #include <cstddef>       // std::size_t
 #include <iostream>      // std::cout, std::cin, std::cerr
