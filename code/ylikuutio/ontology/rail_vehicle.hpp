@@ -23,7 +23,7 @@ namespace yli
         {
             public:
                 // constructor.
-                RailVehicle(yli::ontology::Universe* const universe, ObjectStruct& object_struct)
+                RailVehicle(yli::ontology::Universe* const universe, const ObjectStruct& object_struct)
                     : Vehicle(universe, object_struct)
                 {
                     // constructor.

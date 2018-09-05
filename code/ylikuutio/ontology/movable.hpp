@@ -30,7 +30,7 @@ namespace yli
         {
             public:
                 // constructor.
-                Movable(yli::ontology::Universe* const universe, glm::vec3& cartesian_coordinates)
+                Movable(yli::ontology::Universe* const universe, const glm::vec3& cartesian_coordinates)
                     : Entity(universe)
                 {
                     // constructor.
