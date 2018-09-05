@@ -1,3 +1,6 @@
+#ifndef __VEHICLE_HPP_INCLUDED
+#define __VEHICLE_HPP_INCLUDED
+
 #include "object.hpp"
 
 namespace yli
@@ -21,3 +24,5 @@ namespace yli
         };
     }
 }
+
+#endif

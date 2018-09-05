@@ -1,3 +1,6 @@
+#ifndef __ROAD_VEHICLE_HPP_INCLUDED
+#define __ROAD_VEHICLE_HPP_INCLUDED
+
 #include "vehicle.hpp"
 #include "object_struct.hpp"
 
@@ -31,3 +34,5 @@ namespace yli
         };
     }
 }
+
+#endif

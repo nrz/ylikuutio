@@ -1,3 +1,6 @@
+#ifndef __CREATURE_HPP_INCLUDED
+#define __CREATURE_HPP_INCLUDED
+
 #include "object.hpp"
 
 // Every intentional entity is a `Creature`.
@@ -127,3 +130,5 @@ namespace yli
         };
     }
 }
+
+#endif
