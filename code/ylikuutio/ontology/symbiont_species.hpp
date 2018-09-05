@@ -42,7 +42,6 @@ namespace yli
         {
             public:
                 void bind_biont(yli::ontology::Biont* const biont);
-
                 void unbind_biont(const std::size_t childID);
 
                 // destructor.

@@ -35,7 +35,6 @@ namespace yli
             public:
                 void bind_glyph(yli::ontology::Glyph* const glyph);
                 void bind_text3D(yli::ontology::Text3D* const text3D);
-
                 void unbind_text3D(const std::size_t childID);
 
                 // this method sets pointer to this `Species` to `nullptr`, sets `parent` according to the input,
