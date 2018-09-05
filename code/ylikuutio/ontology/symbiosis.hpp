@@ -32,12 +32,12 @@
 typedef unsigned char u8;
 
 // Include standard headers
-#include <cstddef>  // std::size_t
-#include <queue>    // std::queue
-#include <stdint.h> // uint32_t etc.
-#include <string>   // std::string
+#include <cstddef>       // std::size_t
+#include <queue>         // std::queue
+#include <stdint.h>      // uint32_t etc.
+#include <string>        // std::string
 #include <unordered_map> // std::unordered_map
-#include <vector>   // std::vector
+#include <vector>        // std::vector
 
 namespace yli
 {
