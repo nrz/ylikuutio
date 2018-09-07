@@ -9,6 +9,7 @@ Tasks which are necessary for the development of Ylikuutio:
 [ ] Test code used to convert ASCII grid files (height maps) to binary FBX files by loading the FBX files created with it.
 [ ] Convert ASCII grid files into binary FBX files.
 [ ] Implement `Camera` entities.
+[ ] Evaluate s7 Scheme. https://ccrma.stanford.edu/software/snd/snd/s7.html
 [ ] Create `audio::Sound` class, whose parent is `Entity`.
 [ ] Create `audio::PlayList` class, whose parent is `Entity`.
 [ ] Implement `play` console command for playing `Sound`s and `Playlist`s.
