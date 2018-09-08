@@ -3,8 +3,6 @@
 
 #include "entity.hpp"
 #include "movable.hpp"
-#include "shader.hpp"
-#include "text3D.hpp"
 #include "object_struct.hpp"
 #include "render_templates.hpp"
 #include "family_templates.hpp"
@@ -37,7 +35,9 @@ namespace yli
 {
     namespace ontology
     {
+        class Shader;
         class Species;
+        class Text3D;
         class Glyph;
 
         class Object: public yli::ontology::Movable
