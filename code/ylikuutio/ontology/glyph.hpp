@@ -90,7 +90,7 @@ namespace yli
 
                     // TODO: load the vertex data the same way as in `yli::ontology::Species::Species(SpeciesStruct species_struct)`!
 
-                    this->type = "yli::ontology::Glyph*";
+                    this->type_string = "yli::ontology::Glyph*";
                 }
 
                 void bind_to_parent();

@@ -38,7 +38,7 @@ namespace yli
                     this->bind_to_parent();
 
                     this->child_vector_pointers_vector.push_back(&this->scene_pointer_vector);
-                    this->type = "yli::ontology::World*";
+                    this->type_string = "yli::ontology::World*";
 
                     this->can_be_erased = true;
                 }

@@ -77,7 +77,7 @@ namespace yli
                     this->create_bionts();
 
                     // `ontology::Entity` member variables begin here.
-                    this->type = "yli::ontology::Holobiont*";
+                    this->type_string = "yli::ontology::Holobiont*";
                     this->can_be_erased = true;
                 }
 

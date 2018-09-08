@@ -52,7 +52,7 @@ namespace yli
 
         std::string Entity::get_type() const
         {
-            return this->type;
+            return this->type_string;
         }
 
         bool Entity::get_can_be_erased() const

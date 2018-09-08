@@ -353,7 +353,7 @@ namespace yli
                     this->number_of_worlds = 0;
 
                     this->child_vector_pointers_vector.push_back(&this->world_pointer_vector);
-                    this->type = "yli::ontology::Universe*";
+                    this->type_string = "yli::ontology::Universe*";
 
                     this->context = nullptr;
                     this->window  = nullptr;

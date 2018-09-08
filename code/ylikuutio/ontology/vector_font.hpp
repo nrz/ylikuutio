@@ -63,7 +63,7 @@ namespace yli
 
                     this->child_vector_pointers_vector.push_back(&this->glyph_pointer_vector);
                     this->child_vector_pointers_vector.push_back(&this->text3D_pointer_vector);
-                    this->type = "yli::ontology::VectorFont*";
+                    this->type_string = "yli::ontology::VectorFont*";
 
                     this->can_be_erased      = true;
                     bool font_loading_result = false;

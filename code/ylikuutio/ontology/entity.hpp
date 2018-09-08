@@ -52,7 +52,7 @@ namespace yli
                 std::vector<void*> child_vector_pointers_vector;
                 std::size_t childID; // TODO: add checks for `std::numeric_limits<std::size_t>::max();` (invalid value).
 
-                std::string type;
+                std::string type_string;
 
                 std::string name; // name of this entity.
 

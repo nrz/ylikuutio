@@ -64,7 +64,7 @@ namespace yli
                     this->bind_to_parent();
 
                     this->child_vector_pointers_vector.push_back(&this->shader_pointer_vector);
-                    this->type = "yli::ontology::Scene*";
+                    this->type_string = "yli::ontology::Scene*";
 
                     this->can_be_erased = true;
                 }

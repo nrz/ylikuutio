@@ -84,7 +84,7 @@ namespace yli
 
                     // get `childID` from `Species` or `Glyph` and set pointer to this `Object`.
                     this->bind_to_parent();
-                    this->type = "yli::ontology::Object*";
+                    this->type_string = "yli::ontology::Object*";
                 }
 
                 // destructor.

@@ -40,7 +40,7 @@ namespace yli
                     // get `childID` from `Material` and set pointer to this `ChunkMaster`.
                     this->bind_to_parent();
 
-                    this->type = "ontology::ChunkMaster*";
+                    this->type_string = "ontology::ChunkMaster*";
                 }
 
                 // destructor.

@@ -81,7 +81,7 @@ namespace yli
                     this->bind_to_symbiont_species();
 
                     // `ontology::Entity` member variables begin here.
-                    this->type = "yli::ontology::Biont*";
+                    this->type_string = "yli::ontology::Biont*";
                 }
 
                 // destructor.
