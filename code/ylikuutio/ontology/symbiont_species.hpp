@@ -1,7 +1,6 @@
 #ifndef __SYMBIONT_SPECIES_HPP_INCLUDED
 #define __SYMBIONT_SPECIES_HPP_INCLUDED
 
-#include "entity.hpp"
 #include "scene.hpp"
 #include "shader.hpp"
 #include "species.hpp"
@@ -35,6 +34,7 @@ namespace yli
 {
     namespace ontology
     {
+        class Entity;
         class Universe;
         class Biont;
 
