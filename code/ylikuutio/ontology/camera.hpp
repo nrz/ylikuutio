@@ -51,6 +51,9 @@ namespace yli
 
                     // get `childID` from `Scene` and set pointer to this `Camera`.
                     this->bind_to_parent();
+
+                    // `ontology::Entity` member variables begin here.
+                    this->type_string = "yli::ontology::Camera*";
                 }
 
                 // destructor.
