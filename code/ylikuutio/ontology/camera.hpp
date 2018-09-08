@@ -36,7 +36,7 @@ namespace yli
         {
             public:
                 // constructor.
-                Camera(yli::ontology::Universe* const universe, CameraStruct& camera_struct)
+                Camera(yli::ontology::Universe* const universe, const CameraStruct& camera_struct)
                     : Movable(universe, camera_struct.cartesian_coordinates)
                 {
                     this->horizontal_angle  = NAN;
