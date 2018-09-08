@@ -32,6 +32,7 @@ namespace yli
 {
     namespace ontology
     {
+        class Entity;
         class Holobiont;
 
         void Symbiosis::bind_symbiont_material(yli::ontology::SymbiontMaterial* const symbiont_material)

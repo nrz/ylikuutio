@@ -36,6 +36,7 @@ namespace yli
 {
     namespace ontology
     {
+        class Entity;
         class Holobiont;
 
         class Biont: public yli::ontology::Movable

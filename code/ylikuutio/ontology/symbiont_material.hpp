@@ -28,6 +28,7 @@ namespace yli
 {
     namespace ontology
     {
+        class Entity;
         class SymbiontSpecies;
 
         class SymbiontMaterial: public yli::ontology::Material
