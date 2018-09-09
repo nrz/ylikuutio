@@ -611,22 +611,11 @@ namespace yli
             camera_cartesian_coordinates.y += 2.0f;
 
             // Projection matrix : 45° Field of View, aspect ratio, display range : 0.1 unit <-> 100 units
-            if (this->testing_spherical_terrain_in_use)
-            {
-                this->current_camera_projection_matrix = glm::perspective(
-                        DEGREES_TO_RADIANS(FoV),
-                        this->aspect_ratio,
-                        0.001f,
-                        5000.0f + 2.0f * static_cast<GLfloat>(this->planet_radius));
-            }
-            else
-            {
-                this->current_camera_projection_matrix = glm::perspective(
-                        DEGREES_TO_RADIANS(FoV),
-                        this->aspect_ratio,
-                        1.0f,
-                        5000.0f); // visibility: 5000 units.
-            }
+            this->current_camera_projection_matrix = glm::perspective(
+                    DEGREES_TO_RADIANS(FoV),
+                    this->aspect_ratio,
+                    this->znear,
+                    this->zfar);
 
             // Camera matrix
             this->current_camera_view_matrix = glm::lookAt(

@@ -345,6 +345,9 @@ namespace yli
                     this->gravity    = universe_struct.gravity;
                     this->fall_speed = this->gravity;
 
+                    this->znear      = universe_struct.znear;
+                    this->zfar       = universe_struct.zfar;
+
                     this->testing_spherical_terrain_in_use = false;
                     this->in_help_mode                     = true;
                     this->can_toggle_help_mode             = false;
@@ -521,6 +524,10 @@ namespace yli
                 // Variables related to physics.
                 float gravity;
                 float fall_speed;
+
+                // Variables related to graphics.
+                float znear;
+                float zfar;
 
                 // Variables related to the current `Scene`.
                 bool testing_spherical_terrain_in_use;
