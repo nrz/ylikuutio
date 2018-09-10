@@ -57,7 +57,7 @@ namespace yli
                 void unbind_symbiont_material(const std::size_t childID);
                 void unbind_holobiont(const std::size_t childID);
 
-                // this method sets pointer to this `Symbiosis` to nullptr, sets `parent` according to the input, and requests a new `childID` from the new `Shader`.
+                // this method sets pointer to this `Symbiosis` to `nullptr`, sets `parent` according to the input, and requests a new `childID` from the new `Shader`.
                 void bind_to_new_parent(yli::ontology::Shader* const new_parent);
 
                 // constructor.
@@ -81,10 +81,10 @@ namespace yli
 
                     this->create_symbionts();
 
+                    // `yli::ontology::Entity` member variables begin here.
                     this->child_vector_pointers_vector.push_back(&this->symbiont_material_pointer_vector);
                     this->child_vector_pointers_vector.push_back(&this->holobiont_pointer_vector);
                     this->type_string = "yli::ontology::Symbiosis*";
-
                     this->can_be_erased = true;
                 }
 

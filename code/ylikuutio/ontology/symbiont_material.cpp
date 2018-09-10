@@ -80,7 +80,7 @@ namespace yli
                 return;
             }
 
-            // set pointer to this symbiont_material to nullptr.
+            // set pointer to this symbiont_material to `nullptr`.
             symbiosis->unbind_symbiont_material(this->childID);
         }
 

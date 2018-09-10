@@ -107,7 +107,7 @@ namespace yli
                 // destructor.
                 virtual ~Material();
 
-                // this method sets pointer to this `Material` to nullptr, sets `parent` according to the input, and requests a new `childID` from the new `Shader`.
+                // this method sets pointer to this `Material` to `nullptr`, sets `parent` according to the input, and requests a new `childID` from the new `Shader`.
                 void bind_to_new_parent(yli::ontology::Shader* const new_parent);
 
                 yli::ontology::Entity* get_parent() const override;

@@ -28,7 +28,7 @@ namespace yli
 
                 if (glyph_pointer == nullptr)
                 {
-                    // nullptr, so skip this character.
+                    // `nullptr`, so skip this character.
                     std::cerr << "Error: no matching Glyph found for unicode_value 0x" << std::hex << unicode_value << std::dec << "\n";
                     continue;
                 }

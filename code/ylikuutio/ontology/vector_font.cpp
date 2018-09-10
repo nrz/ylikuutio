@@ -64,7 +64,7 @@ namespace yli
 
         void VectorFont::bind_to_new_parent(yli::ontology::Material* const new_parent)
         {
-            // this method sets pointer to this `Species` to `nullptr`, sets `parent` according to the input,
+            // this method sets pointer to this `VectorFont` to `nullptr`, sets `parent` according to the input,
             // and requests a new `childID` from the new `Material`.
             //
             // requirements:
@@ -131,7 +131,7 @@ namespace yli
                 return;
             }
 
-            // set pointer to this `VectorFont` to nullptr.
+            // set pointer to this `VectorFont` to `nullptr`.
             material->unbind_vector_font(this->childID);
         }
 

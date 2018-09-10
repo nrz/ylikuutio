@@ -62,7 +62,7 @@ namespace yli
 
         void Object::bind_to_new_parent(void* const new_parent)
         {
-            // this method sets pointer to this `Object` to nullptr, sets `parent` according to the input,
+            // this method sets pointer to this `Object` to `nullptr`, sets `parent` according to the input,
             // and requests a new `childID` from the new `Species` or from the new `Text3D`.
 
             if (this->is_character)
@@ -126,7 +126,7 @@ namespace yli
             // destructor.
             std::cout << "Object with childID " << std::dec << this->childID << " will be destroyed.\n";
 
-            // set pointer to this object to nullptr.
+            // set pointer to this object to `nullptr`.
             if (this->is_character)
             {
                 if (this->glyph != nullptr)

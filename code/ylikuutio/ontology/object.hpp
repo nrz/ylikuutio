@@ -43,7 +43,7 @@ namespace yli
         class Object: public yli::ontology::Movable
         {
             public:
-                // this method sets pointer to this `Object` to nullptr, sets `parent` according to the input,
+                // this method sets pointer to this `Object` to `nullptr`, sets `parent` according to the input,
                 // and requests a new `childID` from the new `Species` or from the new `Glyph`.
                 void bind_to_new_parent(void* const new_parent);
 
@@ -84,6 +84,8 @@ namespace yli
 
                     // get `childID` from `Species` or `Glyph` and set pointer to this `Object`.
                     this->bind_to_parent();
+
+                    // `yli::ontology::Entity` member variables begin here.
                     this->type_string = "yli::ontology::Object*";
                 }
 

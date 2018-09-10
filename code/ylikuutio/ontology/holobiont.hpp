@@ -44,8 +44,8 @@ namespace yli
                 void bind_biont(yli::ontology::Biont* const biont);
                 void unbind_biont(const std::size_t childID);
 
-                // this method sets pointer to this `Object` to nullptr, sets `parent` according to the input,
-                // and requests a new `childID` from the new `Species` or from the new `Glyph`.
+                // this method sets pointer to this `Holobiont` to `nullptr`, sets `parent` according to the input,
+                // and requests a new `childID` from the new `Symbiosis`.
                 void bind_to_new_parent(yli::ontology::Symbiosis* const new_parent);
 
                 // constructor.
@@ -76,7 +76,7 @@ namespace yli
 
                     this->create_bionts();
 
-                    // `ontology::Entity` member variables begin here.
+                    // `yli::ontology::Entity` member variables begin here.
                     this->type_string = "yli::ontology::Holobiont*";
                     this->can_be_erased = true;
                 }

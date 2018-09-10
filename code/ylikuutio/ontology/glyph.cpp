@@ -56,7 +56,7 @@ namespace yli
                 return;
             }
 
-            // set pointer to this `Glyph` to nullptr.
+            // set pointer to this `Glyph` to `nullptr`.
             vector_font->set_glyph_pointer(this->childID, nullptr);
         }
 

@@ -86,6 +86,7 @@ namespace yli
                     std::cout << "Executing `new yli::config::Setting(z_setting_struct);` ...\n";
                     new yli::config::Setting(z_setting_struct);
 
+                    // `yli::ontology::Entity` member variables begin here.
                     this->can_be_erased = true;
                 }
 
