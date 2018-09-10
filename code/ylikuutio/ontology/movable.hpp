@@ -87,6 +87,7 @@ namespace yli
                     new yli::config::Setting(z_setting_struct);
 
                     // `yli::ontology::Entity` member variables begin here.
+                    this->type_string = "yli::ontology::Movable*";
                     this->can_be_erased = true;
                 }
 
