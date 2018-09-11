@@ -49,7 +49,7 @@ namespace yli
                 void bind_to_new_parent(yli::ontology::Symbiosis* const new_parent);
 
                 // constructor.
-                Holobiont(yli::ontology::Universe* const universe, HolobiontStruct& holobiont_struct)
+                Holobiont(yli::ontology::Universe* const universe, const HolobiontStruct& holobiont_struct)
                     : Movable(universe, holobiont_struct.cartesian_coordinates)
                 {
                     // constructor.
