@@ -25,6 +25,9 @@ namespace yli
                     : Object(universe, object_struct)
                 {
                     // constructor.
+
+                    // `yli::ontology::Entity` member variables begin here.
+                    this->type_string = "yli::ontology::Creature*";
                 }
 
                 // destructor.
