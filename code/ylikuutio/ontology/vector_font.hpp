@@ -61,10 +61,6 @@ namespace yli
                     // get `childID` from `Material` and set pointer to this `VectorFont`.
                     this->bind_to_parent();
 
-                    this->child_vector_pointers_vector.push_back(&this->glyph_pointer_vector);
-                    this->child_vector_pointers_vector.push_back(&this->text3D_pointer_vector);
-                    this->type_string = "yli::ontology::VectorFont*";
-
                     this->can_be_erased      = true;
                     bool font_loading_result = false;
 
@@ -129,6 +125,11 @@ namespace yli
                             this->unicode_glyph_map[unicode_value] = glyph;
                         }
                     }
+
+                    // `yli::ontology::Entity` member variables begin here.
+                    this->child_vector_pointers_vector.push_back(&this->glyph_pointer_vector);
+                    this->child_vector_pointers_vector.push_back(&this->text3D_pointer_vector);
+                    this->type_string = "yli::ontology::VectorFont*";
                 }
 
                 // destructor.
