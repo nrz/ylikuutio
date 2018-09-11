@@ -57,8 +57,14 @@ namespace yli
                     this->initial_rotate_vector        = glm::vec3(0.0f, 1.0f, 1.0f);
 
                     this->number_of_objects = 0;
-                    this->child_vector_pointers_vector.push_back(&this->object_pointer_vector);
+
                     this->vram_buffer_in_use = vram_buffer_in_use;
+
+                    // `yli::ontology::Entity` member variables begin here.
+                    // `yli::ontology::Model` constructor takes care of `child_vector_pointers_vector`.
+                    // Descendant classes of `yli::ontology::Model` need to set the value of `type_string`!
+                    // Descendant classes of `yli::ontology::Model` need to set the value of `can_be_erased`!
+                    this->child_vector_pointers_vector.push_back(&this->object_pointer_vector);
                 }
 
                 // destructor.
