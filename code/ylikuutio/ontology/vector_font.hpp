@@ -13,12 +13,6 @@
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
 #include "code/ylikuutio/common/globals.hpp"
 
-// Include GLEW
-#ifndef __GL_GLEW_H_INCLUDED
-#define __GL_GLEW_H_INCLUDED
-#include <GL/glew.h> // GLfloat, GLuint etc.
-#endif
-
 // Include standard headers
 #include <cstddef>       // std::size_t
 #include <cstring>       // std::memcmp, std::strcmp, std::strlen, std::strncmp
@@ -173,7 +167,7 @@ namespace yli
 
                 std::string font_file_format;         // type of the model file, eg. `"bmp"`.
                 std::string font_filename;            // filename of the model file.
-                GLfloat vertex_scaling_factor;
+                float vertex_scaling_factor;
                 const char* char_font_file_format;
                 const char* char_font_filename;
 
