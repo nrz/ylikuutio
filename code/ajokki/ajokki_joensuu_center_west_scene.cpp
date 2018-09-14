@@ -141,6 +141,8 @@ namespace ajokki
             return nullptr;
         }
 
+        orange_fur_material_joensuu->set_name("joensuu_center_west_orange_fur_material");
+
         SpeciesStruct horse_species_struct;
         horse_species_struct.scene = joensuu_center_west_scene;
         horse_species_struct.shader = joensuu_center_west_shader;
