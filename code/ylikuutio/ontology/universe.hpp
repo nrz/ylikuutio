@@ -355,9 +355,6 @@ namespace yli
 
                     this->number_of_worlds = 0;
 
-                    this->child_vector_pointers_vector.push_back(&this->world_pointer_vector);
-                    this->type_string = "yli::ontology::Universe*";
-
                     this->context = nullptr;
                     this->window  = nullptr;
 
@@ -386,6 +383,10 @@ namespace yli
                     // Disable vertical sync.
                     // TODO: add option to enable/disable vsync in the console.
                     SDL_GL_SetSwapInterval(0);
+
+                    // `yli::ontology::Entity` member variables begin here.
+                    this->child_vector_pointers_vector.push_back(&this->world_pointer_vector);
+                    this->type_string = "yli::ontology::Universe*";
                 }
 
                 // destructor.
