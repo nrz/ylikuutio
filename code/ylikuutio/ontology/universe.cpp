@@ -409,14 +409,18 @@ namespace yli
                 }
 
                 yli::ontology::Entity* entity = universe->entity_map[name];
-                universe->entity_map.erase(name);
 
                 if (entity == nullptr)
                 {
+                    universe->entity_map.erase(name);
                     return nullptr;
                 }
 
-                delete entity;
+                if (entity->get_can_be_erased())
+                {
+                    universe->entity_map.erase(name);
+                    delete entity;
+                }
             }
             return nullptr;
         }
