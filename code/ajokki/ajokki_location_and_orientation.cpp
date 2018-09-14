@@ -29,9 +29,9 @@ namespace ajokki
     void set_location_and_orientation(yli::config::SettingMaster* const setting_master)
     {
         // Variables related to location and orientation.
-        float float_rho = -5682.32f;
-        float float_theta = -1641.20f;
-        float float_phi = 2376.45f;
+        const float float_rho = -5682.32f;
+        const float float_theta = -1641.20f;
+        const float float_phi = 2376.45f;
         SphericalCoordinatesStruct spherical_coordinates_struct;
         spherical_coordinates_struct.rho = float_rho;
         spherical_coordinates_struct.theta = float_theta;
@@ -71,9 +71,9 @@ namespace ajokki
         std::cout << "Executing `new yli::config::Setting(phi_setting_struct);` ...\n";
         new yli::config::Setting(phi_setting_struct);
 
-        float float_x = 100.0f;
-        float float_y = 100.0f;
-        float float_z = 100.0f;
+        const float float_x = 100.0f;
+        const float float_y = 100.0f;
+        const float float_z = 100.0f;
 
         SettingStruct cartesian_coordinates_setting_struct(std::make_shared<yli::datatypes::AnyValue>(new glm::vec3(float_x, float_y, float_z)));
         cartesian_coordinates_setting_struct.name = "cartesian_coordinates";
@@ -111,7 +111,7 @@ namespace ajokki
         std::cout << "Executing `new yli::config::Setting(z_setting_struct);` ...\n";
         new yli::config::Setting(z_setting_struct);
 
-        double horizontal_angle = 42.42f;
+        const double horizontal_angle = 42.42f;
         SettingStruct horizontal_angle_setting_struct(std::make_shared<yli::datatypes::AnyValue>(horizontal_angle));
         horizontal_angle_setting_struct.name = "horizontal_angle";
         horizontal_angle_setting_struct.setting_master = setting_master;
@@ -121,7 +121,7 @@ namespace ajokki
         std::cout << "Executing `new yli::config::Setting(horizontal_angle_setting_struct);` ...\n";
         new yli::config::Setting(horizontal_angle_setting_struct);
 
-        double vertical_angle = 7.44f;
+        const double vertical_angle = 7.44f;
         SettingStruct vertical_angle_setting_struct(std::make_shared<yli::datatypes::AnyValue>(vertical_angle));
         vertical_angle_setting_struct.name = "vertical_angle";
         vertical_angle_setting_struct.setting_master = setting_master;
@@ -131,7 +131,7 @@ namespace ajokki
         std::cout << "Executing `new yli::config::Setting(vertical_angle_setting_struct);` ...\n";
         new yli::config::Setting(vertical_angle_setting_struct);
 
-        float right = NAN; // the value does not matter, `right` is read with a read callback.
+        const float right = NAN; // the value does not matter, `right` is read with a read callback.
         SettingStruct right_setting_struct(std::make_shared<yli::datatypes::AnyValue>(right));
         right_setting_struct.name = "right";
         right_setting_struct.setting_master = setting_master;
@@ -140,7 +140,7 @@ namespace ajokki
         std::cout << "Executing `new yli::config::Setting(right_setting_struct);` ...\n";
         new yli::config::Setting(right_setting_struct);
 
-        float up = NAN; // the value does not matter, `up` is read with a read callback.
+        const float up = NAN; // the value does not matter, `up` is read with a read callback.
         SettingStruct up_setting_struct(std::make_shared<yli::datatypes::AnyValue>(up));
         up_setting_struct.name = "up";
         up_setting_struct.setting_master = setting_master;
