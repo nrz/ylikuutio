@@ -13,6 +13,13 @@ namespace yli
 {
     namespace ontology
     {
+        void Entity::bind_to_new_parent(yli::ontology::Entity* new_entity_parent)
+        {
+            // do nothing.
+            // `yli::ontology` classes which support binding must `override`
+            // this `yli::ontology::Entity` base class implementation.
+        }
+
         Entity::Entity(yli::ontology::Universe* const universe)
         {
             // constructor.
