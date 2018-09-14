@@ -131,6 +131,7 @@ int main(const int argc, const char* argv[])
     UniverseStruct universe_struct;
     universe_struct.window_title = "Ajokki 0.0.3, powered by Ylikuutio 0.0.3";
     yli::ontology::Universe* my_universe = new yli::ontology::Universe(universe_struct);
+    my_universe->set_name("universe");
 
     yli::ontology::EntityFactory* entity_factory = my_universe->get_entity_factory();
 
