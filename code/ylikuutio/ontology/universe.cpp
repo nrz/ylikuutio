@@ -199,6 +199,7 @@ namespace yli
 
         float Universe::compute_delta_time()
         {
+            // `std::numeric_limits<std::size_t>::max()` means that `last_time_before_reading_keyboard` is not defined.
             if (this->last_time_before_reading_keyboard == std::numeric_limits<uint32_t>::max())
             {
                 // `glfwGetTime()` is called here only once, the first time this function is called.
@@ -301,58 +302,6 @@ namespace yli
 
         // Public callbacks.
 
-        std::shared_ptr<yli::datatypes::AnyValue> Universe::delete_entity(
-                yli::console::Console* const console,
-                yli::ontology::Entity* const entity,
-                std::vector<std::string>& command_parameters)
-        {
-            if (console == nullptr || entity == nullptr)
-            {
-                return nullptr;
-            }
-
-            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
-
-            if (universe == nullptr)
-            {
-                return nullptr;
-            }
-
-            yli::config::SettingMaster* setting_master = universe->get_setting_master();
-
-            if (setting_master == nullptr)
-            {
-                return nullptr;
-            }
-
-            if (command_parameters.size() == 0)
-            {
-                // No command parameters.
-                // Print variable names.
-                console->print_text(setting_master->help());
-            }
-            else if (command_parameters.size() == 1)
-            {
-                std::string name = command_parameters[0];
-
-                if (universe->entity_map.count(name) == 0)
-                {
-                    return nullptr;
-                }
-
-                yli::ontology::Entity* entity = universe->entity_map[name];
-                universe->entity_map.erase(name);
-
-                if (entity == nullptr)
-                {
-                    return nullptr;
-                }
-
-                delete entity;
-            }
-            return nullptr;
-        }
-
         std::shared_ptr<yli::datatypes::AnyValue> Universe::activate(
                 yli::console::Console* const console,
                 yli::ontology::Entity* const universe_entity,
@@ -374,7 +323,7 @@ namespace yli
                 return nullptr;
             }
 
-            yli::config::SettingMaster* setting_master = universe->setting_master.get();
+            yli::config::SettingMaster* setting_master = universe->get_setting_master();
 
             if (setting_master == nullptr)
             {
@@ -420,17 +369,73 @@ namespace yli
             return nullptr;
         }
 
-        std::shared_ptr<yli::datatypes::AnyValue> Universe::info(
+        std::shared_ptr<yli::datatypes::AnyValue> Universe::delete_entity(
                 yli::console::Console* const console,
-                yli::ontology::Entity* const entity,
+                yli::ontology::Entity* const universe_entity,
                 std::vector<std::string>& command_parameters)
         {
-            if (console == nullptr || entity == nullptr)
+            if (console == nullptr || universe_entity == nullptr)
             {
                 return nullptr;
             }
 
-            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
+            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(universe_entity);
+
+            if (universe == nullptr)
+            {
+                return nullptr;
+            }
+
+            yli::config::SettingMaster* setting_master = universe->get_setting_master();
+
+            if (setting_master == nullptr)
+            {
+                return nullptr;
+            }
+
+            if (command_parameters.size() == 0)
+            {
+                // No command parameters.
+                // Print variable names.
+                console->print_text(setting_master->help());
+            }
+            else if (command_parameters.size() == 1)
+            {
+                std::string name = command_parameters[0];
+
+                if (universe->entity_map.count(name) == 0)
+                {
+                    return nullptr;
+                }
+
+                yli::ontology::Entity* entity = universe->entity_map[name];
+
+                if (entity == nullptr)
+                {
+                    universe->entity_map.erase(name);
+                    return nullptr;
+                }
+
+                if (entity->get_can_be_erased())
+                {
+                    universe->entity_map.erase(name);
+                    delete entity;
+                }
+            }
+            return nullptr;
+        }
+
+        std::shared_ptr<yli::datatypes::AnyValue> Universe::info(
+                yli::console::Console* const console,
+                yli::ontology::Entity* const universe_entity,
+                std::vector<std::string>& command_parameters)
+        {
+            if (console == nullptr || universe_entity == nullptr)
+            {
+                return nullptr;
+            }
+
+            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(universe_entity);
 
             if (universe == nullptr)
             {
@@ -495,6 +500,60 @@ namespace yli
                 descendants_info += std::string(number_of_descendants_char_array);
                 console->print_text(descendants_info);
             }
+
+            return nullptr;
+        }
+
+        std::shared_ptr<yli::datatypes::AnyValue> Universe::bind(
+                yli::console::Console* const console,
+                yli::ontology::Entity* const universe_entity,
+                std::vector<std::string>& command_parameters)
+        {
+            if (console == nullptr || universe_entity == nullptr)
+            {
+                return nullptr;
+            }
+
+            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(universe_entity);
+
+            if (universe == nullptr)
+            {
+                return nullptr;
+            }
+
+            if (command_parameters.size() == 2)
+            {
+                std::string child_entity_name = command_parameters[0];
+
+                if (universe->entity_map.count(child_entity_name) != 1)
+                {
+                    return nullptr;
+                }
+
+                yli::ontology::Entity* child_entity = universe->entity_map[child_entity_name];
+
+                if (child_entity == nullptr)
+                {
+                    return nullptr;
+                }
+
+                std::string parent_entity_name = command_parameters[1];
+
+                if (universe->entity_map.count(parent_entity_name) != 1)
+                {
+                    return nullptr;
+                }
+
+                yli::ontology::Entity* parent_entity = universe->entity_map[parent_entity_name];
+
+                if (parent_entity == nullptr)
+                {
+                    return nullptr;
+                }
+
+                child_entity->bind_to_new_parent(parent_entity);
+            }
+
             return nullptr;
         }
 
@@ -610,22 +669,11 @@ namespace yli
             camera_cartesian_coordinates.y += 2.0f;
 
             // Projection matrix : 45° Field of View, aspect ratio, display range : 0.1 unit <-> 100 units
-            if (this->testing_spherical_terrain_in_use)
-            {
-                this->current_camera_projection_matrix = glm::perspective(
-                        DEGREES_TO_RADIANS(FoV),
-                        this->aspect_ratio,
-                        0.001f,
-                        5000.0f + 2.0f * static_cast<GLfloat>(this->planet_radius));
-            }
-            else
-            {
-                this->current_camera_projection_matrix = glm::perspective(
-                        DEGREES_TO_RADIANS(FoV),
-                        this->aspect_ratio,
-                        1.0f,
-                        5000.0f); // visibility: 5000 units.
-            }
+            this->current_camera_projection_matrix = glm::perspective(
+                    DEGREES_TO_RADIANS(FoV),
+                    this->aspect_ratio,
+                    this->znear,
+                    this->zfar);
 
             // Camera matrix
             this->current_camera_view_matrix = glm::lookAt(

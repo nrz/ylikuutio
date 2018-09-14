@@ -1,7 +1,6 @@
 #ifndef __SYMBIONT_SPECIES_HPP_INCLUDED
 #define __SYMBIONT_SPECIES_HPP_INCLUDED
 
-#include "entity.hpp"
 #include "scene.hpp"
 #include "shader.hpp"
 #include "species.hpp"
@@ -35,6 +34,7 @@ namespace yli
 {
     namespace ontology
     {
+        class Entity;
         class Universe;
         class Biont;
 
@@ -42,7 +42,6 @@ namespace yli
         {
             public:
                 void bind_biont(yli::ontology::Biont* const biont);
-
                 void unbind_biont(const std::size_t childID);
 
                 // destructor.
@@ -68,7 +67,7 @@ namespace yli
 
                     this->number_of_bionts = 0;
                     this->child_vector_pointers_vector.push_back(&this->biont_pointer_vector);
-                    this->type = "yli::ontology::SymbiontSpecies*";
+                    this->type_string = "yli::ontology::SymbiontSpecies*";
 
                     if (this->shader == nullptr)
                     {
@@ -119,6 +118,9 @@ namespace yli
                     glBufferData(GL_ELEMENT_ARRAY_BUFFER, this->indices.size() * sizeof(GLuint), &this->indices[0] , GL_STATIC_DRAW);
 
                     // TODO: Compute the vertex graph of this `SymbiontSpecies` to enable object vertex modification!
+
+                    // `yli::ontology::Entity` member variables begin here.
+                    this->type_string = "yli::ontology::SymbiontSpecies*";
                 }
 
                 yli::ontology::Entity* get_parent() const override;

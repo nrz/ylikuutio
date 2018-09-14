@@ -44,8 +44,9 @@ namespace yli
                 void bind_object(yli::ontology::Object* const object);
                 void unbind_object(const std::size_t childID);
 
-                // this method sets pointer to this `Species` to nullptr, sets `parent` according to the input, and requests a new `childID` from the new `Material`.
+                // this method sets pointer to this `Species` to `nullptr`, sets `parent` according to the input, and requests a new `childID` from the new `Material`.
                 void bind_to_new_parent(yli::ontology::Material* const new_parent);
+                void bind_to_new_parent(yli::ontology::Entity* const new_parent) override;
 
                 // constructor.
                 Species(yli::ontology::Universe* const universe, const SpeciesStruct& species_struct)
@@ -135,9 +136,9 @@ namespace yli
 
                         // TODO: Compute the graph of this object type to enable object vertex modification!
 
-                        this->child_vector_pointers_vector.push_back(&this->object_pointer_vector);
-                        this->type = "yli::ontology::Species*";
-
+                        // `yli::ontology::Entity` member variables begin here.
+                        // `yli::ontology::Model` constructor takes care of `child_vector_pointers_vector`.
+                        this->type_string = "yli::ontology::Species*";
                         this->can_be_erased = true;
                     }
                 }

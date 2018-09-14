@@ -37,9 +37,9 @@ namespace yli
                     // get `childID` from `Universe` and set pointer to this `World`.
                     this->bind_to_parent();
 
+                    // `yli::ontology::Entity` member variables begin here.
                     this->child_vector_pointers_vector.push_back(&this->scene_pointer_vector);
-                    this->type = "yli::ontology::World*";
-
+                    this->type_string = "yli::ontology::World*";
                     this->can_be_erased = true;
                 }
 

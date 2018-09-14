@@ -36,7 +36,7 @@ namespace yli
         {
             public:
                 // constructor.
-                Camera(yli::ontology::Universe* const universe, CameraStruct& camera_struct)
+                Camera(yli::ontology::Universe* const universe, const CameraStruct& camera_struct)
                     : Movable(universe, camera_struct.cartesian_coordinates)
                 {
                     this->horizontal_angle  = NAN;
@@ -51,6 +51,9 @@ namespace yli
 
                     // get `childID` from `Scene` and set pointer to this `Camera`.
                     this->bind_to_parent();
+
+                    // `yli::ontology::Entity` member variables begin here.
+                    this->type_string = "yli::ontology::Camera*";
                 }
 
                 // destructor.

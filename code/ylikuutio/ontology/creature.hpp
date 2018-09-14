@@ -1,3 +1,6 @@
+#ifndef __CREATURE_HPP_INCLUDED
+#define __CREATURE_HPP_INCLUDED
+
 #include "object.hpp"
 
 // Every intentional entity is a `Creature`.
@@ -22,6 +25,9 @@ namespace yli
                     : Object(universe, object_struct)
                 {
                     // constructor.
+
+                    // `yli::ontology::Entity` member variables begin here.
+                    this->type_string = "yli::ontology::Creature*";
                 }
 
                 // destructor.
@@ -127,3 +133,5 @@ namespace yli
         };
     }
 }
+
+#endif

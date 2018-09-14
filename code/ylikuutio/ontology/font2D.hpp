@@ -86,6 +86,9 @@ namespace yli
                     // Initialize uniform window height.
                     screen_height_uniform_ID = glGetUniformLocation(programID, "screen_height");
                     glUniform1i(screen_height_uniform_ID, screen_height);
+
+                    // `yli::ontology::Entity` member variables begin here.
+                    this->type_string = "yli::ontology::Font2D*";
                 }
 
                 // destructor.

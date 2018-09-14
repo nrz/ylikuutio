@@ -4,8 +4,11 @@
 #include "symbiont_species.hpp"
 #include "holobiont.hpp"
 #include "material_struct.hpp"
+#include "species_struct.hpp"
 #include "render_templates.hpp"
 #include "family_templates.hpp"
+#include "code/ylikuutio/load/symbiosis_loader.hpp"
+#include "code/ylikuutio/load/symbiosis_loader_struct.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include <ofbx.h>
 
@@ -32,6 +35,7 @@ namespace yli
 {
     namespace ontology
     {
+        class Entity;
         class Holobiont;
 
         void Symbiosis::bind_symbiont_material(yli::ontology::SymbiontMaterial* const symbiont_material)
@@ -291,53 +295,53 @@ namespace yli
 
         yli::ontology::SymbiontSpecies* Symbiosis::get_symbiont_species(const std::size_t biontID) const
         {
-            return this->biontID_symbiont_species_vector.at(biontID);
+            return this->biontID_symbiont_species_vector[biontID];
         }
 
         GLuint Symbiosis::get_vertex_position_modelspaceID(const std::size_t biontID) const
         {
-            return this->biontID_symbiont_species_vector.at(biontID)->get_vertex_position_modelspaceID();
+            return this->biontID_symbiont_species_vector[biontID]->get_vertex_position_modelspaceID();
         }
 
         GLuint Symbiosis::get_vertexUVID(const std::size_t biontID) const
         {
-            return this->biontID_symbiont_species_vector.at(biontID)->get_vertexUVID();
+            return this->biontID_symbiont_species_vector[biontID]->get_vertexUVID();
         }
 
         GLuint Symbiosis::get_vertex_normal_modelspaceID(const std::size_t biontID) const
         {
-            return this->biontID_symbiont_species_vector.at(biontID)->get_vertex_normal_modelspaceID();
+            return this->biontID_symbiont_species_vector[biontID]->get_vertex_normal_modelspaceID();
         }
 
         GLuint Symbiosis::get_vertexbuffer(const std::size_t biontID) const
         {
-            return this->biontID_symbiont_species_vector.at(biontID)->get_vertexbuffer();
+            return this->biontID_symbiont_species_vector[biontID]->get_vertexbuffer();
         }
 
         GLuint Symbiosis::get_uvbuffer(const std::size_t biontID) const
         {
-            return this->biontID_symbiont_species_vector.at(biontID)->get_uvbuffer();
+            return this->biontID_symbiont_species_vector[biontID]->get_uvbuffer();
         }
 
         GLuint Symbiosis::get_normalbuffer(const std::size_t biontID) const
         {
-            return this->biontID_symbiont_species_vector.at(biontID)->get_normalbuffer();
+            return this->biontID_symbiont_species_vector[biontID]->get_normalbuffer();
         }
 
         GLuint Symbiosis::get_elementbuffer(const std::size_t biontID) const
         {
-            return this->biontID_symbiont_species_vector.at(biontID)->get_elementbuffer();
+            return this->biontID_symbiont_species_vector[biontID]->get_elementbuffer();
         }
 
         std::vector<uint32_t> Symbiosis::get_indices(const std::size_t biontID) const
         {
-            return this->biontID_symbiont_species_vector.at(biontID)->get_indices();
+            return this->biontID_symbiont_species_vector[biontID]->get_indices();
             // return this->indices.at(biontID);
         }
 
         std::size_t Symbiosis::get_indices_size(const std::size_t biontID) const
         {
-            return this->biontID_symbiont_species_vector.at(biontID)->get_indices_size();
+            return this->biontID_symbiont_species_vector[biontID]->get_indices_size();
             // return this->indices.at(biontID).size();
         }
 

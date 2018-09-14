@@ -131,6 +131,7 @@ int main(const int argc, const char* argv[])
     UniverseStruct universe_struct;
     universe_struct.window_title = "Ajokki 0.0.3, powered by Ylikuutio 0.0.3";
     yli::ontology::Universe* my_universe = new yli::ontology::Universe(universe_struct);
+    my_universe->set_name("universe");
 
     yli::ontology::EntityFactory* entity_factory = my_universe->get_entity_factory();
 
@@ -559,7 +560,7 @@ int main(const int argc, const char* argv[])
             switch_to_grass_material_callback_object);
 
     // Callback code for O: switch to orange fur material.
-    std::string orange_fur_material_string = "orange_fur_material";
+    std::string orange_fur_material_string = "helsinki_east_downtown_orange_fur_material";
     yli::callback_system::CallbackEngine* switch_to_orange_fur_material_callback_engine = new yli::callback_system::CallbackEngine();
     yli::callback_system::CallbackObject* switch_to_orange_fur_material_callback_object = new yli::callback_system::CallbackObject(
             &ajokki::switch_to_new_material,
@@ -581,7 +582,7 @@ int main(const int argc, const char* argv[])
             switch_to_orange_fur_material_callback_object);
 
     // Callback code for P: switch to pink_geometric_tiles_material.
-    std::string pink_geometric_tiles_material_string = "pink_geometric_tiles_material";
+    std::string pink_geometric_tiles_material_string = "helsinki_east_downtown_pink_geometric_tiles_material";
     yli::callback_system::CallbackEngine* switch_to_pink_geometric_tiles_material_callback_engine = new yli::callback_system::CallbackEngine();
     yli::callback_system::CallbackObject* switch_to_pink_geometric_tiles_material_callback_object = new yli::callback_system::CallbackObject(
             &ajokki::switch_to_new_material,
@@ -603,7 +604,7 @@ int main(const int argc, const char* argv[])
             switch_to_pink_geometric_tiles_material_callback_object);
 
     // Callback code for T: transform `suzanne2` into terrain.
-    std::string helsinki_species_string = "Helsinki_species";
+    std::string helsinki_species_string = "helsinki_east_downtown_terrain_species";
     std::string suzanne2_string = "suzanne2";
     yli::callback_system::CallbackEngine* transform_into_terrain_callback_engine = new yli::callback_system::CallbackEngine();
     yli::callback_system::CallbackObject* transform_into_terrain_callback_object = new yli::callback_system::CallbackObject(
@@ -858,9 +859,10 @@ int main(const int argc, const char* argv[])
     command_callback_map["get"] = &yli::config::SettingMaster::get_and_print;
 
     // Object handling callbacks.
-    command_callback_map["info"] = &yli::ontology::Universe::info;
-    command_callback_map["delete"] = &yli::ontology::Universe::delete_entity;
     command_callback_map["activate"] = &yli::ontology::Universe::activate;
+    command_callback_map["delete"] = &yli::ontology::Universe::delete_entity;
+    command_callback_map["info"] = &yli::ontology::Universe::info;
+    command_callback_map["bind"] = &yli::ontology::Universe::bind;
 
     // Exit program callbacks.
     command_callback_map["bye"] = &ajokki::quit;

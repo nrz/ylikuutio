@@ -24,6 +24,8 @@ namespace yli
 {
     namespace ontology
     {
+        class Entity;
+
         void SymbiontSpecies::bind_biont(yli::ontology::Biont* const biont)
         {
             // `SymbiontSpecies` is not the ontological parent of `Biont`,

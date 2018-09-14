@@ -28,6 +28,7 @@ namespace yli
 {
     namespace ontology
     {
+        class Entity;
         class SymbiontSpecies;
 
         class SymbiontMaterial: public yli::ontology::Material
@@ -53,8 +54,9 @@ namespace yli
 
                     this->load_texture();
 
+                    // `yli::ontology::Entity` member variables begin here.
                     this->child_vector_pointers_vector.push_back(&this->symbiont_species_pointer_vector);
-                    this->type = "yli::ontology::SymbiontMaterial*";
+                    this->type_string = "yli::ontology::SymbiontMaterial*";
                 }
 
                 GLuint get_texture() const;

@@ -35,7 +35,6 @@ namespace yli
             public:
                 void bind_glyph(yli::ontology::Glyph* const glyph);
                 void bind_text3D(yli::ontology::Text3D* const text3D);
-
                 void unbind_text3D(const std::size_t childID);
 
                 // this method sets pointer to this `Species` to `nullptr`, sets `parent` according to the input,
@@ -61,10 +60,6 @@ namespace yli
 
                     // get `childID` from `Material` and set pointer to this `VectorFont`.
                     this->bind_to_parent();
-
-                    this->child_vector_pointers_vector.push_back(&this->glyph_pointer_vector);
-                    this->child_vector_pointers_vector.push_back(&this->text3D_pointer_vector);
-                    this->type = "yli::ontology::VectorFont*";
 
                     this->can_be_erased      = true;
                     bool font_loading_result = false;
@@ -130,6 +125,12 @@ namespace yli
                             this->unicode_glyph_map[unicode_value] = glyph;
                         }
                     }
+
+                    // `yli::ontology::Entity` member variables begin here.
+                    this->child_vector_pointers_vector.push_back(&this->glyph_pointer_vector);
+                    this->child_vector_pointers_vector.push_back(&this->text3D_pointer_vector);
+                    this->type_string = "yli::ontology::VectorFont*";
+                    this->can_be_erased = true;
                 }
 
                 // destructor.
@@ -166,7 +167,7 @@ namespace yli
 
                 std::string font_file_format;         // type of the model file, eg. `"bmp"`.
                 std::string font_filename;            // filename of the model file.
-                GLfloat vertex_scaling_factor;
+                float vertex_scaling_factor;
                 const char* char_font_file_format;
                 const char* char_font_filename;
 

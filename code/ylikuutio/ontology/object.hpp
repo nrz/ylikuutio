@@ -3,10 +3,6 @@
 
 #include "entity.hpp"
 #include "movable.hpp"
-#include "shader.hpp"
-#include "species.hpp"
-#include "text3D.hpp"
-#include "glyph.hpp"
 #include "object_struct.hpp"
 #include "render_templates.hpp"
 #include "family_templates.hpp"
@@ -39,18 +35,22 @@ namespace yli
 {
     namespace ontology
     {
+        class Shader;
         class Species;
+        class Text3D;
         class Glyph;
 
         class Object: public yli::ontology::Movable
         {
             public:
-                // this method sets pointer to this `Object` to nullptr, sets `parent` according to the input,
+                // this method sets pointer to this `Object` to `nullptr`, sets `parent` according to the input,
                 // and requests a new `childID` from the new `Species` or from the new `Glyph`.
-                void bind_to_new_parent(void* const new_parent);
+                void bind_to_new_parent(yli::ontology::Species* const new_parent);
+                void bind_to_new_parent(yli::ontology::Text3D* const new_parent);
+                void bind_to_new_parent(yli::ontology::Entity* const new_parent) override;
 
                 // constructor.
-                Object(yli::ontology::Universe* const universe, ObjectStruct& object_struct)
+                Object(yli::ontology::Universe* const universe, const ObjectStruct& object_struct)
                     : Movable(universe, object_struct.cartesian_coordinates)
                 {
                     // constructor.
@@ -86,7 +86,10 @@ namespace yli
 
                     // get `childID` from `Species` or `Glyph` and set pointer to this `Object`.
                     this->bind_to_parent();
-                    this->type = "yli::ontology::Object*";
+
+                    // `yli::ontology::Entity` member variables begin here.
+                    this->type_string = "yli::ontology::Object*";
+                    this->can_be_erased = true;
                 }
 
                 // destructor.

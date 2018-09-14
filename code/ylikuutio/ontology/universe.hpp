@@ -321,7 +321,11 @@ namespace yli
 
                     this->max_FPS                              = universe_struct.max_FPS;
                     this->delta_time                           = NAN;
+
+                    // `std::numeric_limits<std::size_t>::max()` means that `last_time_before_reading_keyboard` is not defined.
                     this->last_time_before_reading_keyboard    = std::numeric_limits<uint32_t>::max();
+
+                    // `std::numeric_limits<std::size_t>::max()` means that `current_time_before_reading_keyboard` is not defined.
                     this->current_time_before_reading_keyboard = std::numeric_limits<uint32_t>::max();
 
                     this->has_mouse_ever_moved    = false;
@@ -341,15 +345,15 @@ namespace yli
                     this->gravity    = universe_struct.gravity;
                     this->fall_speed = this->gravity;
 
+                    this->znear      = universe_struct.znear;
+                    this->zfar       = universe_struct.zfar;
+
                     this->testing_spherical_terrain_in_use = false;
                     this->in_help_mode                     = true;
                     this->can_toggle_help_mode             = false;
                     this->can_display_help_screen          = true;
 
                     this->number_of_worlds = 0;
-
-                    this->child_vector_pointers_vector.push_back(&this->world_pointer_vector);
-                    this->type = "yli::ontology::Universe*";
 
                     this->context = nullptr;
                     this->window  = nullptr;
@@ -379,6 +383,10 @@ namespace yli
                     // Disable vertical sync.
                     // TODO: add option to enable/disable vsync in the console.
                     SDL_GL_SetSwapInterval(0);
+
+                    // `yli::ontology::Entity` member variables begin here.
+                    this->child_vector_pointers_vector.push_back(&this->world_pointer_vector);
+                    this->type_string = "yli::ontology::Universe*";
                 }
 
                 // destructor.
@@ -468,19 +476,24 @@ namespace yli
 
                 // Public callbacks.
 
-                static std::shared_ptr<yli::datatypes::AnyValue> delete_entity(
+                static std::shared_ptr<yli::datatypes::AnyValue> activate(
                         yli::console::Console* const console,
-                        yli::ontology::Entity* const entity,
+                        yli::ontology::Entity* const universe_entity,
                         std::vector<std::string>& command_parameters);
 
-                static std::shared_ptr<yli::datatypes::AnyValue> activate(
+                static std::shared_ptr<yli::datatypes::AnyValue> delete_entity(
                         yli::console::Console* const console,
                         yli::ontology::Entity* const universe_entity,
                         std::vector<std::string>& command_parameters);
 
                 static std::shared_ptr<yli::datatypes::AnyValue> info(
                         yli::console::Console* const console,
-                        yli::ontology::Entity* const entity,
+                        yli::ontology::Entity* const universe_entity,
+                        std::vector<std::string>& command_parameters);
+
+                static std::shared_ptr<yli::datatypes::AnyValue> bind(
+                        yli::console::Console* const console,
+                        yli::ontology::Entity* const universe_entity,
                         std::vector<std::string>& command_parameters);
 
                 // Public callbacks end here.
@@ -517,6 +530,10 @@ namespace yli
                 // Variables related to physics.
                 float gravity;
                 float fall_speed;
+
+                // Variables related to graphics.
+                float znear;
+                float zfar;
 
                 // Variables related to the current `Scene`.
                 bool testing_spherical_terrain_in_use;

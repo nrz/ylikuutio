@@ -21,6 +21,8 @@ namespace yli
 {
     namespace ontology
     {
+        class Entity;
+
         void SymbiontMaterial::bind_symbiont_species(yli::ontology::SymbiontSpecies* const symbiont_species)
         {
             // get `childID` from `SymbiontMaterial` and set pointer to `symbiont_species`.
@@ -78,7 +80,7 @@ namespace yli
                 return;
             }
 
-            // set pointer to this symbiont_material to nullptr.
+            // set pointer to this symbiont_material to `nullptr`.
             symbiosis->unbind_symbiont_material(this->childID);
         }
 

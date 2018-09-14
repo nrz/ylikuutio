@@ -9,6 +9,7 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
+#include <string>   // std::string
 
 namespace yli
 {
@@ -55,7 +56,7 @@ namespace yli
                 return;
             }
 
-            // set pointer to this `Glyph` to nullptr.
+            // set pointer to this `Glyph` to `nullptr`.
             vector_font->set_glyph_pointer(this->childID, nullptr);
         }
 

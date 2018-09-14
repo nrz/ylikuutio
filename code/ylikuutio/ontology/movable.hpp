@@ -30,7 +30,7 @@ namespace yli
         {
             public:
                 // constructor.
-                Movable(yli::ontology::Universe* const universe, glm::vec3& cartesian_coordinates)
+                Movable(yli::ontology::Universe* const universe, const glm::vec3& cartesian_coordinates)
                     : Entity(universe)
                 {
                     // constructor.
@@ -86,6 +86,8 @@ namespace yli
                     std::cout << "Executing `new yli::config::Setting(z_setting_struct);` ...\n";
                     new yli::config::Setting(z_setting_struct);
 
+                    // `yli::ontology::Entity` member variables begin here.
+                    this->type_string = "yli::ontology::Movable*";
                     this->can_be_erased = true;
                 }
 

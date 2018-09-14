@@ -36,12 +36,13 @@ namespace yli
 {
     namespace ontology
     {
+        class Entity;
         class Holobiont;
 
         class Biont: public yli::ontology::Movable
         {
             public:
-                // this method sets pointer to this `Biont` to nullptr, sets `parent` according to the input,
+                // this method sets pointer to this `Biont` to `nullptr`, sets `parent` according to the input,
                 // and requests a new `childID` from the new `Species` or from the new `Glyph`.
                 void bind_to_new_parent(yli::ontology::Holobiont* const new_holobiont_parent);
 
@@ -69,7 +70,7 @@ namespace yli
                     this->has_entered           = false;
                     this->quaternions_in_use    = biont_struct.quaternions_in_use;
 
-                    // `ontology::Movable` member variables begin here.
+                    // `yli::ontology::Movable` member variables begin here.
                     this->cartesian_coordinates = biont_struct.cartesian_coordinates;
                     this->model_matrix          = glm::mat4(1.0f); // identity matrix (dummy value).
                     this->MVP_matrix            = glm::mat4(1.0f); // identity matrix (dummy value).
@@ -79,8 +80,8 @@ namespace yli
                     // get `childID` from `SymbiontSpecies` and set pointer to this `Biont`.
                     this->bind_to_symbiont_species();
 
-                    // `ontology::Entity` member variables begin here.
-                    this->type = "yli::ontology::Biont*";
+                    // `yli::ontology::Entity` member variables begin here.
+                    this->type_string = "yli::ontology::Biont*";
                 }
 
                 // destructor.

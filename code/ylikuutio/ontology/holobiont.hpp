@@ -35,6 +35,7 @@ namespace yli
 {
     namespace ontology
     {
+        class Entity;
         class Biont;
 
         class Holobiont: public yli::ontology::Movable
@@ -43,12 +44,12 @@ namespace yli
                 void bind_biont(yli::ontology::Biont* const biont);
                 void unbind_biont(const std::size_t childID);
 
-                // this method sets pointer to this `Object` to nullptr, sets `parent` according to the input,
-                // and requests a new `childID` from the new `Species` or from the new `Glyph`.
+                // this method sets pointer to this `Holobiont` to `nullptr`, sets `parent` according to the input,
+                // and requests a new `childID` from the new `Symbiosis`.
                 void bind_to_new_parent(yli::ontology::Symbiosis* const new_parent);
 
                 // constructor.
-                Holobiont(yli::ontology::Universe* const universe, HolobiontStruct& holobiont_struct)
+                Holobiont(yli::ontology::Universe* const universe, const HolobiontStruct& holobiont_struct)
                     : Movable(universe, holobiont_struct.cartesian_coordinates)
                 {
                     // constructor.
@@ -75,8 +76,9 @@ namespace yli
 
                     this->create_bionts();
 
-                    // `ontology::Entity` member variables begin here.
-                    this->type = "yli::ontology::Holobiont*";
+                    // `yli::ontology::Entity` member variables begin here.
+                    this->child_vector_pointers_vector.push_back(&this->biont_pointer_vector);
+                    this->type_string = "yli::ontology::Holobiont*";
                     this->can_be_erased = true;
                 }
 

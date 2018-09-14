@@ -45,7 +45,7 @@ namespace yli
                 void unbind_object(const std::size_t childID);
 
                 // this method deletes all glyph Objects of this `Text3D`,
-                // sets pointer to this `Text3D` to nullptr,
+                // sets pointer to this `Text3D` to `nullptr`,
                 // sets `parent` according to the input (the new `VectorFont`),
                 // requests a new `childID` from the new `VectorFont`,
                 // and creates all glyph Objects of this `Text3D` with the font data.
@@ -75,9 +75,9 @@ namespace yli
 
                     yli::ontology::create_glyph_objects(this->text_string, this);
 
+                    // `yli::ontology::Entity` member variables begin here.
                     this->child_vector_pointers_vector.push_back(&this->object_pointer_vector);
-                    this->type = "yli::ontology::Text3D*";
-
+                    this->type_string = "yli::ontology::Text3D*";
                     this->can_be_erased = true;
                 }
 

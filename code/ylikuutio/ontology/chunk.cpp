@@ -2,6 +2,9 @@
 #include "chunk_master.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
+// Include standard headers
+#include <iostream> // std::cout, std::cin, std::cerr
+
 namespace yli
 {
     namespace ontology

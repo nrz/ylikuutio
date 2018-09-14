@@ -60,10 +60,10 @@ namespace yli
             }
         }
 
-        void Object::bind_to_new_parent(void* const new_parent)
+        void Object::bind_to_new_parent(yli::ontology::Text3D* const new_parent)
         {
-            // this method sets pointer to this `Object` to nullptr, sets `parent` according to the input,
-            // and requests a new `childID` from the new `Species` or from the new `Text3D`.
+            // this method sets pointer to this `Object` to `nullptr`, sets `parent` according to the input,
+            // and requests a new `childID` from the new `Text3D`.
 
             if (this->is_character)
             {
@@ -92,7 +92,14 @@ namespace yli
                 this->text3D_parent = static_cast<yli::ontology::Text3D*>(new_parent);
                 this->text3D_parent->bind_object(this);
             }
-            else
+        }
+
+        void Object::bind_to_new_parent(yli::ontology::Species* const new_parent)
+        {
+            // this method sets pointer to this `Object` to `nullptr`, sets `parent` according to the input,
+            // and requests a new `childID` from the new `Species`.
+
+            if (!this->is_character)
             {
                 // requirements for further actions in this block:
                 // `this->species_parent` must not be `nullptr`.
@@ -121,12 +128,39 @@ namespace yli
             }
         }
 
+        void Object::bind_to_new_parent(yli::ontology::Entity* const new_parent)
+        {
+            // this method sets pointer to this `Object` to `nullptr`, sets `parent` according to the input,
+            // and requests a new `childID` from the new `Species` or from the new `Text3D`.
+            //
+            // requirements:
+            // `new_parent` must not be `nullptr`.
+
+            yli::ontology::Species* const species_parent = dynamic_cast<yli::ontology::Species*>(new_parent);
+
+            if (species_parent != nullptr)
+            {
+                this->bind_to_new_parent(species_parent);
+                return;
+            }
+
+            yli::ontology::Text3D* const text3D_parent = dynamic_cast<yli::ontology::Text3D*>(new_parent);
+
+            if (text3D_parent != nullptr)
+            {
+                this->bind_to_new_parent(text3D_parent);
+                return;
+            }
+
+            std::cerr << "ERROR: `Object::bind_to_new_parent`: `new_parent` is neither `yli::ontology::Species*` nor `yli::ontology::Text3D*`!\n";
+        }
+
         Object::~Object()
         {
             // destructor.
             std::cout << "Object with childID " << std::dec << this->childID << " will be destroyed.\n";
 
-            // set pointer to this object to nullptr.
+            // set pointer to this object to `nullptr`.
             if (this->is_character)
             {
                 if (this->glyph != nullptr)

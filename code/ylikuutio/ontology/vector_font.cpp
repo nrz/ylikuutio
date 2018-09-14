@@ -5,12 +5,6 @@
 #include "vector_font_struct.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
-// Include GLEW
-#ifndef __GL_GLEW_H_INCLUDED
-#define __GL_GLEW_H_INCLUDED
-#include <GL/glew.h> // GLfloat, GLuint etc.
-#endif
-
 // Include standard headers
 #include <cstddef>       // std::size_t
 #include <iostream>      // std::cout, std::cin, std::cerr
@@ -70,7 +64,7 @@ namespace yli
 
         void VectorFont::bind_to_new_parent(yli::ontology::Material* const new_parent)
         {
-            // this method sets pointer to this `Species` to `nullptr`, sets `parent` according to the input,
+            // this method sets pointer to this `VectorFont` to `nullptr`, sets `parent` according to the input,
             // and requests a new `childID` from the new `Material`.
             //
             // requirements:
@@ -137,7 +131,7 @@ namespace yli
                 return;
             }
 
-            // set pointer to this `VectorFont` to nullptr.
+            // set pointer to this `VectorFont` to `nullptr`.
             material->unbind_vector_font(this->childID);
         }
 

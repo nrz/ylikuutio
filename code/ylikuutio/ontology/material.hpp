@@ -82,13 +82,6 @@ namespace yli
                             std::cerr << "texture file format: " << this->texture_file_format << "\n";
                         }
 
-                        this->child_vector_pointers_vector.push_back(&this->species_pointer_vector);
-                        this->child_vector_pointers_vector.push_back(&this->vector_font_pointer_vector);
-                        this->child_vector_pointers_vector.push_back(&this->chunk_master_pointer_vector);
-                        this->type = "yli::ontology::Material*";
-
-                        this->can_be_erased = true;
-
                         // requirements for further actions:
                         // `this->parent` must not be `nullptr`.
                         yli::ontology::Shader* const shader = this->parent;
@@ -101,13 +94,20 @@ namespace yli
 
                         // Get a handle for our "myTextureSampler" uniform.
                         this->openGL_textureID = glGetUniformLocation(shader->get_programID(), "myTextureSampler");
+
+                        // `yli::ontology::Entity` member variables begin here.
+                        this->child_vector_pointers_vector.push_back(&this->species_pointer_vector);
+                        this->child_vector_pointers_vector.push_back(&this->vector_font_pointer_vector);
+                        this->child_vector_pointers_vector.push_back(&this->chunk_master_pointer_vector);
+                        this->type_string = "yli::ontology::Material*";
+                        this->can_be_erased = true;
                     }
                 }
 
                 // destructor.
                 virtual ~Material();
 
-                // this method sets pointer to this `Material` to nullptr, sets `parent` according to the input, and requests a new `childID` from the new `Shader`.
+                // this method sets pointer to this `Material` to `nullptr`, sets `parent` according to the input, and requests a new `childID` from the new `Shader`.
                 void bind_to_new_parent(yli::ontology::Shader* const new_parent);
 
                 yli::ontology::Entity* get_parent() const override;

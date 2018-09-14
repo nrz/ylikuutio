@@ -11,7 +11,7 @@
 #include <queue>    // std::queue
 #include <vector>   // std::vector
 
-// `ChunkMaster` takes care of acquiring vertices (through `callback`),
+// `ChunkMaster` takes care of acquiring vertices (through `get_content_callback`),
 // organizing vertices into `Chunk` objects, reconstructing `Chunk`
 // objects (if vertices have been modified) and deactivating (by
 // unbinding) and possibly deleting `Chunk` objects (if needed).
@@ -40,7 +40,8 @@ namespace yli
                     // get `childID` from `Material` and set pointer to this `ChunkMaster`.
                     this->bind_to_parent();
 
-                    this->type = "ontology::ChunkMaster*";
+                    // `yli::ontology::Entity` member variables begin here.
+                    this->type_string = "ontology::ChunkMaster*";
                 }
 
                 // destructor.

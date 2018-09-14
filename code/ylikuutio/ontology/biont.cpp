@@ -77,7 +77,7 @@ namespace yli
 
         void Biont::bind_to_new_parent(yli::ontology::Holobiont* const new_holobiont_parent)
         {
-            // this method sets pointer to this `Biont` to nullptr, sets `parent` according to the input,
+            // this method sets pointer to this `Biont` to `nullptr`, sets `parent` according to the input,
             // and requests a new `childID` from the new `Holobiont`.
             //
             // requirements:

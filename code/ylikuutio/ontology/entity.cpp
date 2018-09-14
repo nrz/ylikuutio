@@ -13,10 +13,17 @@ namespace yli
 {
     namespace ontology
     {
+        void Entity::bind_to_new_parent(yli::ontology::Entity* new_entity_parent)
+        {
+            // do nothing.
+            // `yli::ontology` classes which support binding must `override`
+            // this `yli::ontology::Entity` base class implementation.
+        }
+
         Entity::Entity(yli::ontology::Universe* const universe)
         {
             // constructor.
-            this->childID = std::numeric_limits<std::size_t>::max();
+            this->childID = std::numeric_limits<std::size_t>::max(); // `std::numeric_limits<std::size_t>::max()` means that `childID` is not defined.
             this->universe = universe;
             this->prerender_callback = nullptr;
             this->postrender_callback = nullptr;
@@ -52,7 +59,7 @@ namespace yli
 
         std::string Entity::get_type() const
         {
-            return this->type;
+            return this->type_string;
         }
 
         bool Entity::get_can_be_erased() const

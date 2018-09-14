@@ -52,7 +52,8 @@ namespace yli
                     // get `childID` from `ChunkMaster` and set pointer to this `Chunk`.
                     this->bind_to_parent();
 
-                    this->type = "ontology::Chunk*";
+                    // `yli::ontology::Entity` member variables begin here.
+                    this->type_string = "ontology::Chunk*";
                 }
 
                 // destructor.

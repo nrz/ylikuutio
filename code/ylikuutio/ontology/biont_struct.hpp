@@ -35,7 +35,7 @@ typedef struct BiontStruct
         translate_vector(glm::vec3(0.0f, 0.0f, 0.0f)),
         holobiont_parent(nullptr),
         symbiont_species(nullptr),
-        biontID(std::numeric_limits<std::size_t>::max()),
+        biontID(std::numeric_limits<std::size_t>::max()), // `std::numeric_limits<std::size_t>::max()` means that `biontID` is not defined.
         rotate_angle(0.0f),
         initial_rotate_angle(PI),
         quaternions_in_use(false)

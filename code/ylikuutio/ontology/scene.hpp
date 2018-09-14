@@ -13,13 +13,13 @@
 #endif
 
 // Include standard headers
-#include <cmath>    // NAN, std::isnan, std::pow
-#include <cstddef>  // std::size_t
-#include <memory>   // std::make_shared, std::shared_ptr
-#include <queue>    // std::queue
-#include <string>   // std::string
+#include <cmath>         // NAN, std::isnan, std::pow
+#include <cstddef>       // std::size_t
+#include <memory>        // std::make_shared, std::shared_ptr
+#include <queue>         // std::queue
+#include <string>        // std::string
 #include <unordered_map> // std::unordered_map
-#include <vector>   // std::vector
+#include <vector>        // std::vector
 
 namespace yli
 {
@@ -63,9 +63,9 @@ namespace yli
                     // get `childID` from `World` and set pointer to this `Scene`.
                     this->bind_to_parent();
 
+                    // `yli::ontology::Entity` member variables begin here.
                     this->child_vector_pointers_vector.push_back(&this->shader_pointer_vector);
-                    this->type = "yli::ontology::Scene*";
-
+                    this->type_string = "yli::ontology::Scene*";
                     this->can_be_erased = true;
                 }
 

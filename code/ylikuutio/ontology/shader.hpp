@@ -48,7 +48,7 @@ namespace yli
                 void unbind_material(const std::size_t childID);
                 void unbind_symbiosis(const std::size_t childID);
 
-                // this method sets pointer to this `Shader` to nullptr, sets `parent` according to the input, and requests a new `childID` from the new `Scene`.
+                // this method sets pointer to this `Shader` to `nullptr`, sets `parent` according to the input, and requests a new `childID` from the new `Scene`.
                 void bind_to_new_parent(yli::ontology::Scene* const new_parent);
 
                 // constructor.
@@ -80,10 +80,10 @@ namespace yli
                     this->view_matrixID = glGetUniformLocation(this->programID, "V");
                     this->model_matrixID = glGetUniformLocation(this->programID, "M");
 
+                    // `yli::ontology::Entity` member variables begin here.
                     this->child_vector_pointers_vector.push_back(&this->material_pointer_vector);
                     this->child_vector_pointers_vector.push_back(&this->symbiosis_pointer_vector);
-                    this->type = "yli::ontology::Shader*";
-
+                    this->type_string = "yli::ontology::Shader*";
                     this->can_be_erased = true;
                 }
 

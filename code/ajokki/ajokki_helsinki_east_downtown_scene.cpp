@@ -10,6 +10,7 @@
 #include "code/ylikuutio/ontology/object.hpp"
 #include "code/ylikuutio/ontology/symbiosis.hpp"
 #include "code/ylikuutio/ontology/holobiont.hpp"
+#include "code/ylikuutio/ontology/vector_font.hpp"
 #include "code/ylikuutio/ontology/shader_struct.hpp"
 #include "code/ylikuutio/ontology/material_struct.hpp"
 #include "code/ylikuutio/ontology/species_struct.hpp"
@@ -76,6 +77,8 @@ namespace ajokki
             return nullptr;
         }
 
+        helsinki_east_downtown_shader->set_name("helsinki_east_downtown_shader");
+
         // Create the material, store it in `helsinki_east_downtown_grass_material`.
         MaterialStruct helsinki_east_downtown_grass_material_struct;
         helsinki_east_downtown_grass_material_struct.shader = helsinki_east_downtown_shader;
@@ -112,7 +115,7 @@ namespace ajokki
             return nullptr;
         }
 
-        pink_geometric_tiles_material->set_name("pink_geometric_tiles_material");
+        pink_geometric_tiles_material->set_name("helsinki_east_downtown_pink_geometric_tiles_material");
 
         // Create the material, store it in `orange_fur_material`.
         MaterialStruct orange_fur_material_struct;
@@ -131,7 +134,7 @@ namespace ajokki
             return nullptr;
         }
 
-        orange_fur_material->set_name("orange_fur_material");
+        orange_fur_material->set_name("helsinki_east_downtown_orange_fur_material");
 
         SpeciesStruct helsinki_east_downtown_terrain_species_struct;
         helsinki_east_downtown_terrain_species_struct.scene = helsinki_east_downtown_scene;

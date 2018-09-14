@@ -1,3 +1,6 @@
+#ifndef __RAIL_VEHICLE_HPP_INCLUDED
+#define __RAIL_VEHICLE_HPP_INCLUDED
+
 #include "vehicle.hpp"
 #include "object_struct.hpp"
 
@@ -20,10 +23,14 @@ namespace yli
         {
             public:
                 // constructor.
-                RailVehicle(yli::ontology::Universe* const universe, ObjectStruct& object_struct)
+                RailVehicle(yli::ontology::Universe* const universe, const ObjectStruct& object_struct)
                     : Vehicle(universe, object_struct)
                 {
                     // constructor.
+
+                    // `yli::ontology::Entity` member variables begin here.
+                    this->type_string = "yli::ontology::RailVehicle*";
+                    this->can_be_erased = true;
                 }
 
                 // destructor.
@@ -31,3 +38,5 @@ namespace yli
         };
     }
 }
+
+#endif
