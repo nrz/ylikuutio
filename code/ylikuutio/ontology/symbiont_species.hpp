@@ -118,6 +118,9 @@ namespace yli
                     glBufferData(GL_ELEMENT_ARRAY_BUFFER, this->indices.size() * sizeof(GLuint), &this->indices[0] , GL_STATIC_DRAW);
 
                     // TODO: Compute the vertex graph of this `SymbiontSpecies` to enable object vertex modification!
+
+                    // `yli::ontology::Entity` member variables begin here.
+                    this->type_string = "yli::ontology::SymbiontSpecies*";
                 }
 
                 yli::ontology::Entity* get_parent() const override;
