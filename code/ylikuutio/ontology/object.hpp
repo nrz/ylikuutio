@@ -45,7 +45,9 @@ namespace yli
             public:
                 // this method sets pointer to this `Object` to `nullptr`, sets `parent` according to the input,
                 // and requests a new `childID` from the new `Species` or from the new `Glyph`.
-                void bind_to_new_parent(void* const new_parent);
+                void bind_to_new_parent(yli::ontology::Species* const new_parent);
+                void bind_to_new_parent(yli::ontology::Text3D* const new_parent);
+                void bind_to_new_parent(yli::ontology::Entity* const new_parent) override;
 
                 // constructor.
                 Object(yli::ontology::Universe* const universe, const ObjectStruct& object_struct)
