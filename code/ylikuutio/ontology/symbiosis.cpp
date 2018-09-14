@@ -4,8 +4,11 @@
 #include "symbiont_species.hpp"
 #include "holobiont.hpp"
 #include "material_struct.hpp"
+#include "species_struct.hpp"
 #include "render_templates.hpp"
 #include "family_templates.hpp"
+#include "code/ylikuutio/load/symbiosis_loader.hpp"
+#include "code/ylikuutio/load/symbiosis_loader_struct.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include <ofbx.h>
 
