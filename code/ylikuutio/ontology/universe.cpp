@@ -500,6 +500,60 @@ namespace yli
                 descendants_info += std::string(number_of_descendants_char_array);
                 console->print_text(descendants_info);
             }
+
+            return nullptr;
+        }
+
+        std::shared_ptr<yli::datatypes::AnyValue> Universe::bind(
+                yli::console::Console* const console,
+                yli::ontology::Entity* const universe_entity,
+                std::vector<std::string>& command_parameters)
+        {
+            if (console == nullptr || universe_entity == nullptr)
+            {
+                return nullptr;
+            }
+
+            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(universe_entity);
+
+            if (universe == nullptr)
+            {
+                return nullptr;
+            }
+
+            if (command_parameters.size() == 2)
+            {
+                std::string child_entity_name = command_parameters[0];
+
+                if (universe->entity_map.count(child_entity_name) != 1)
+                {
+                    return nullptr;
+                }
+
+                yli::ontology::Entity* child_entity = universe->entity_map[child_entity_name];
+
+                if (child_entity == nullptr)
+                {
+                    return nullptr;
+                }
+
+                std::string parent_entity_name = command_parameters[1];
+
+                if (universe->entity_map.count(parent_entity_name) != 1)
+                {
+                    return nullptr;
+                }
+
+                yli::ontology::Entity* parent_entity = universe->entity_map[parent_entity_name];
+
+                if (parent_entity == nullptr)
+                {
+                    return nullptr;
+                }
+
+                child_entity->bind_to_new_parent(parent_entity);
+            }
+
             return nullptr;
         }
 

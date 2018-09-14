@@ -862,6 +862,7 @@ int main(const int argc, const char* argv[])
     command_callback_map["activate"] = &yli::ontology::Universe::activate;
     command_callback_map["delete"] = &yli::ontology::Universe::delete_entity;
     command_callback_map["info"] = &yli::ontology::Universe::info;
+    command_callback_map["bind"] = &yli::ontology::Universe::bind;
 
     // Exit program callbacks.
     command_callback_map["bye"] = &ajokki::quit;

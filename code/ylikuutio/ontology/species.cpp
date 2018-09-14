@@ -90,6 +90,26 @@ namespace yli
             this->material_parent->bind_species(this);
         }
 
+        void Species::bind_to_new_parent(yli::ontology::Entity* const new_parent)
+        {
+            // this method sets pointer to this `Species` to `nullptr`, sets `material_parent` according to the input,
+            // and requests a new `childID` from the new `Material`.
+            //
+            // requirements:
+            // `this->material_parent` must not be `nullptr`.
+            // `new_parent` must not be `nullptr`.
+
+            yli::ontology::Material* const material_parent = dynamic_cast<yli::ontology::Material*>(new_parent);
+
+            if (material_parent == nullptr)
+            {
+                std::cerr << "ERROR: `Species::bind_to_new_parent`: `new_parent` is not `yli::ontology::Material*`!\n";
+                return;
+            }
+
+            this->bind_to_new_parent(material_parent);
+        }
+
         Species::~Species()
         {
             if (!this->is_symbiont_species)
