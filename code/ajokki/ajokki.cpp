@@ -560,7 +560,7 @@ int main(const int argc, const char* argv[])
             switch_to_grass_material_callback_object);
 
     // Callback code for O: switch to orange fur material.
-    std::string orange_fur_material_string = "orange_fur_material";
+    std::string orange_fur_material_string = "helsinki_east_downtown_orange_fur_material";
     yli::callback_system::CallbackEngine* switch_to_orange_fur_material_callback_engine = new yli::callback_system::CallbackEngine();
     yli::callback_system::CallbackObject* switch_to_orange_fur_material_callback_object = new yli::callback_system::CallbackObject(
             &ajokki::switch_to_new_material,
@@ -582,7 +582,7 @@ int main(const int argc, const char* argv[])
             switch_to_orange_fur_material_callback_object);
 
     // Callback code for P: switch to pink_geometric_tiles_material.
-    std::string pink_geometric_tiles_material_string = "pink_geometric_tiles_material";
+    std::string pink_geometric_tiles_material_string = "helsinki_east_downtown_pink_geometric_tiles_material";
     yli::callback_system::CallbackEngine* switch_to_pink_geometric_tiles_material_callback_engine = new yli::callback_system::CallbackEngine();
     yli::callback_system::CallbackObject* switch_to_pink_geometric_tiles_material_callback_object = new yli::callback_system::CallbackObject(
             &ajokki::switch_to_new_material,

@@ -115,7 +115,7 @@ namespace ajokki
             return nullptr;
         }
 
-        pink_geometric_tiles_material->set_name("pink_geometric_tiles_material");
+        pink_geometric_tiles_material->set_name("helsinki_east_downtown_pink_geometric_tiles_material");
 
         // Create the material, store it in `orange_fur_material`.
         MaterialStruct orange_fur_material_struct;
@@ -134,7 +134,7 @@ namespace ajokki
             return nullptr;
         }
 
-        orange_fur_material->set_name("orange_fur_material");
+        orange_fur_material->set_name("helsinki_east_downtown_orange_fur_material");
 
         SpeciesStruct helsinki_east_downtown_terrain_species_struct;
         helsinki_east_downtown_terrain_species_struct.scene = helsinki_east_downtown_scene;
