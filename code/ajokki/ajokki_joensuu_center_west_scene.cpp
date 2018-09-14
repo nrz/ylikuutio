@@ -71,6 +71,8 @@ namespace ajokki
             return nullptr;
         }
 
+        joensuu_center_west_shader->set_name("joensuu_center_west_shader");
+
         // Create the material, store it in `joensuu_center_west_grass_material_struct`.
         MaterialStruct joensuu_center_west_grass_material_struct;
         joensuu_center_west_grass_material_struct.shader = joensuu_center_west_shader;

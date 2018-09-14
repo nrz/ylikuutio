@@ -77,6 +77,8 @@ namespace ajokki
             return nullptr;
         }
 
+        helsinki_east_downtown_shader->set_name("helsinki_east_downtown_shader");
+
         // Create the material, store it in `helsinki_east_downtown_grass_material`.
         MaterialStruct helsinki_east_downtown_grass_material_struct;
         helsinki_east_downtown_grass_material_struct.shader = helsinki_east_downtown_shader;
