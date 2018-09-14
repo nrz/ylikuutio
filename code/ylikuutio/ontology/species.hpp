@@ -137,7 +137,6 @@ namespace yli
 
                         // `yli::ontology::Entity` member variables begin here.
                         // `yli::ontology::Model` constructor takes care of `child_vector_pointers_vector`.
-                        this->child_vector_pointers_vector.push_back(&this->object_pointer_vector);
                         this->type_string = "yli::ontology::Species*";
                         this->can_be_erased = true;
                     }
