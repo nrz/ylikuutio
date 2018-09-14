@@ -87,6 +87,7 @@ namespace yli
 
                     // `yli::ontology::Entity` member variables begin here.
                     this->type_string = "yli::ontology::Object*";
+                    this->can_be_erased = true;
                 }
 
                 // destructor.
