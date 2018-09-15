@@ -362,6 +362,7 @@ namespace yli
 
         std::size_t Symbiosis::get_number_of_ofbx_meshes() const
         {
+            // the value of `ofbx_mesh_count` comes from OpenFBX.
             return this->ofbx_mesh_count;
         }
 
