@@ -408,7 +408,7 @@ namespace yli
             return this->biontID_symbiont_species_vector.at(biontID)->get_lightID();
         }
 
-        glm::vec3 Symbiosis::get_light_position(const std::size_t biontID) const
+        const glm::vec3& Symbiosis::get_light_position(const std::size_t biontID) const
         {
             return this->light_position;
         }

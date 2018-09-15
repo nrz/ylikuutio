@@ -266,7 +266,7 @@ namespace yli
             // '`Species`' part begins here.
 
             // Compute the MVP matrix from keyboard and mouse input.
-            glm::vec3 light_position = symbiosis->get_light_position(this->biontID);
+            const glm::vec3& light_position = symbiosis->get_light_position(this->biontID);
             glUniform3f(
                     symbiosis->get_lightID(this->biontID),
                     light_position.x,
