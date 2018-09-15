@@ -63,8 +63,8 @@ namespace yli
             }
             else
             {
-                std::cerr << "no model was loaded!\n";
-                std::cerr << "model file format: " << symbiosis_loader_struct.model_file_format << "\n";
+                std::cerr << "ERROR: no model was loaded!\n";
+                std::cerr << "Model file format: " << symbiosis_loader_struct.model_file_format << "\n";
                 return false;
             }
 

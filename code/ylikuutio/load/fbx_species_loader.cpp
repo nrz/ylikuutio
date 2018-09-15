@@ -49,14 +49,14 @@ namespace yli
 
             if (is_debug_mode)
             {
-                std::cout << "loaded FBX data vector size: " << size << "\n";
+                std::cout << "Loaded FBX data vector size: " << size << "\n";
             }
 
             ofbx::IScene* ofbx_iscene = ofbx::load(data, size);
 
             if (ofbx_iscene == nullptr)
             {
-                std::cerr << "Error: ofbx_iscene is nullptr!\n";
+                std::cerr << "ERROR: `ofbx_iscene` is `nullptr`!\n";
                 return false;
             }
 
@@ -64,7 +64,7 @@ namespace yli
 
             if (temp_mesh_count < 0)
             {
-                std::cerr << "Error: mesh count is negative!\n";
+                std::cerr << "ERROR: mesh count is negative!\n";
                 return false;
             }
 
@@ -72,7 +72,7 @@ namespace yli
 
             if (mesh_i >= mesh_count)
             {
-                std::cerr << "Error: mesh_i >= mesh_count\n";
+                std::cerr << "ERROR: `mesh_i` >= `mesh_count`\n";
                 return false;
             }
 
@@ -80,7 +80,7 @@ namespace yli
 
             if (mesh == nullptr)
             {
-                std::cerr << "Error: mesh is nullptr!\n";
+                std::cerr << "ERROR: `mesh` is `nullptr`!\n";
                 return false;
             }
 
@@ -88,7 +88,7 @@ namespace yli
 
             if (geometry == nullptr)
             {
-                std::cerr << "Error: geometry is nullptr!\n";
+                std::cerr << "ERROR: `geometry` is `nullptr`!\n";
                 return false;
             }
 
@@ -108,7 +108,7 @@ namespace yli
 
             if (temp_vertex_count < 0)
             {
-                std::cerr << "vertex count is negative!\n";
+                std::cerr << "ERROR: vertex count is negative!\n";
                 return false;
             }
 
@@ -118,7 +118,7 @@ namespace yli
 
             if (vertices == nullptr)
             {
-                std::cerr << "Error: vertices is nullptr!\n";
+                std::cerr << "ERROR: `vertices` is `nullptr`!\n";
                 return false;
             }
 
@@ -126,7 +126,7 @@ namespace yli
 
             if (normals == nullptr)
             {
-                std::cerr << "Error: normals is nullptr!\n";
+                std::cerr << "ERROR: `normals` is `nullptr`!\n";
                 return false;
             }
 
@@ -142,7 +142,7 @@ namespace yli
             if (uvs == nullptr)
             {
                 // `uvs` should not be `nullptr`.
-                std::cerr << "Error: uvs is nullptr!\n";
+                std::cerr << "ERROR: `uvs` is `nullptr`!\n";
             }
             else
             {
