@@ -61,9 +61,9 @@ namespace yli
 
                 yli::ontology::Entity* get_parent() const override;
 
-                glm::vec3 get_direction() const;
-                glm::vec3 get_up() const;
-                glm::vec3 get_right() const;
+                const glm::vec3& get_direction() const;
+                const glm::vec3& get_up() const;
+                const glm::vec3& get_right() const;
                 void adjust_horizontal_angle(float adjustment);
 
                 glm::mat4& get_projection_matrix();
