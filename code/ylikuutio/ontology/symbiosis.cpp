@@ -293,6 +293,16 @@ namespace yli
             }
         }
 
+        yli::ontology::SymbiontMaterial* Symbiosis::get_symbiont_material(const std::size_t symbiont_material_i) const
+        {
+            if (symbiont_material_i >= this->symbiont_material_pointer_vector.size())
+            {
+                return nullptr;
+            }
+
+            return this->symbiont_material_pointer_vector[symbiont_material_i];
+        }
+
         yli::ontology::SymbiontSpecies* Symbiosis::get_symbiont_species(const std::size_t biontID) const
         {
             if (biontID >= this->biontID_symbiont_species_vector.size())

@@ -104,6 +104,7 @@ namespace yli
 
                 const std::string& get_model_file_format();
 
+                yli::ontology::SymbiontMaterial* get_symbiont_material(const std::size_t symbiont_material_i) const;
                 yli::ontology::SymbiontSpecies* get_symbiont_species(const std::size_t biontID) const;
                 GLuint get_vertex_position_modelspaceID(const std::size_t biontID) const;
                 GLuint get_vertexUVID(const std::size_t biontID) const;
