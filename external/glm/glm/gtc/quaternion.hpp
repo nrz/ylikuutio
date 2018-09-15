@@ -17,12 +17,15 @@
 #include "../gtc/constants.hpp"
 #include "../gtc/matrix_transform.hpp"
 #include "../ext/vector_relational.hpp"
+#include "../ext/quaternion_common.hpp"
 #include "../ext/quaternion_float.hpp"
 #include "../ext/quaternion_float_precision.hpp"
 #include "../ext/quaternion_double.hpp"
 #include "../ext/quaternion_double_precision.hpp"
 #include "../ext/quaternion_relational.hpp"
 #include "../ext/quaternion_geometric.hpp"
+#include "../ext/quaternion_trigonometric.hpp"
+#include "../ext/quaternion_transform.hpp"
 #include "../detail/type_mat3x3.hpp"
 #include "../detail/type_mat4x4.hpp"
 #include "../detail/type_vec3.hpp"
@@ -36,71 +39,6 @@ namespace glm
 {
 	/// @addtogroup gtc_quaternion
 	/// @{
-
-	/// Spherical linear interpolation of two quaternions.
-	/// The interpolation is oriented and the rotation is performed at constant speed.
-	/// For short path spherical linear interpolation, use the slerp function.
-	///
-	/// @param x A quaternion
-	/// @param y A quaternion
-	/// @param a Interpolation factor. The interpolation is defined beyond the range [0, 1].
-	/// @tparam T Floating-point scalar types.
-	///
-	/// @see - slerp(qua<T, Q> const& x, qua<T, Q> const& y, T const& a)
-	/// @see gtc_quaternion
-	template<typename T, qualifier Q>
-	GLM_FUNC_DECL qua<T, Q> mix(qua<T, Q> const& x, qua<T, Q> const& y, T a);
-
-	/// Linear interpolation of two quaternions.
-	/// The interpolation is oriented.
-	///
-	/// @param x A quaternion
-	/// @param y A quaternion
-	/// @param a Interpolation factor. The interpolation is defined in the range [0, 1].
-	/// @tparam T Floating-point scalar types.
-	///
-	/// @see gtc_quaternion
-	template<typename T, qualifier Q>
-	GLM_FUNC_DECL qua<T, Q> lerp(qua<T, Q> const& x, qua<T, Q> const& y, T a);
-
-	/// Spherical linear interpolation of two quaternions.
-	/// The interpolation always take the short path and the rotation is performed at constant speed.
-	///
-	/// @param x A quaternion
-	/// @param y A quaternion
-	/// @param a Interpolation factor. The interpolation is defined beyond the range [0, 1].
-	/// @tparam T Floating-point scalar types.
-	///
-	/// @see gtc_quaternion
-	template<typename T, qualifier Q>
-	GLM_FUNC_DECL qua<T, Q> slerp(qua<T, Q> const& x, qua<T, Q> const& y, T a);
-
-	/// Returns the q conjugate.
-	///
-	/// @tparam T Floating-point scalar types.
-	///
-	/// @see gtc_quaternion
-	template<typename T, qualifier Q>
-	GLM_FUNC_DECL qua<T, Q> conjugate(qua<T, Q> const& q);
-
-	/// Returns the q inverse.
-	///
-	/// @tparam T Floating-point scalar types.
-	///
-	/// @see gtc_quaternion
-	template<typename T, qualifier Q>
-	GLM_FUNC_DECL qua<T, Q> inverse(qua<T, Q> const& q);
-
-	/// Rotates a quaternion from a vector of 3 components axis and an angle.
-	///
-	/// @param q Source orientation
-	/// @param angle Angle expressed in radians.
-	/// @param axis Axis of the rotation
-	/// @tparam T Floating-point scalar types.
-	///
-	/// @see gtc_quaternion
-	template<typename T, qualifier Q>
-	GLM_FUNC_DECL qua<T, Q> rotate(qua<T, Q> const& q, T const& angle, vec<3, T, Q> const& axis);
 
 	/// Returns euler angles, pitch as x, yaw as y, roll as z.
 	/// The result is expressed in radians.
@@ -167,58 +105,6 @@ namespace glm
 	template<typename T, qualifier Q>
 	GLM_FUNC_DECL qua<T, Q> quat_cast(mat<4, 4, T, Q> const& x);
 
-	/// Returns the quaternion rotation angle.
-	///
-	/// @tparam T Floating-point scalar types.
-	///
-	/// @see gtc_quaternion
-	template<typename T, qualifier Q>
-	GLM_FUNC_DECL T angle(qua<T, Q> const& x);
-
-	/// Returns the q rotation axis.
-	///
-	/// @tparam T Floating-point scalar types.
-	///
-	/// @see gtc_quaternion
-	template<typename T, qualifier Q>
-	GLM_FUNC_DECL vec<3, T, Q> axis(qua<T, Q> const& x);
-
-	/// Build a quaternion from an angle and a normalized axis.
-	///
-	/// @param angle Angle expressed in radians.
-	/// @param axis Axis of the quaternion, must be normalized.
-	/// @tparam T Floating-point scalar types.
-	///
-	/// @see gtc_quaternion
-	template<typename T, qualifier Q>
-	GLM_FUNC_DECL qua<T, Q> angleAxis(T const& angle, vec<3, T, Q> const& axis);
-
-	/// Returns true if x holds a NaN (not a number)
-	/// representation in the underlying implementation's set of
-	/// floating point representations. Returns false otherwise,
-	/// including for implementations with no NaN
-	/// representations.
-	///
-	/// /!\ When using compiler fast math, this function may fail.
-	///
-	/// @tparam T Floating-point scalar types.
-	///
-	/// @see gtc_quaternion
-	template<typename T, qualifier Q>
-	GLM_FUNC_DECL vec<4, bool, Q> isnan(qua<T, Q> const& x);
-
-	/// Returns true if x holds a positive infinity or negative
-	/// infinity representation in the underlying implementation's
-	/// set of floating point representations. Returns false
-	/// otherwise, including for implementations with no infinity
-	/// representations.
-	///
-	/// @tparam T Floating-point scalar types.
-	///
-	/// @see gtc_quaternion
-	template<typename T, qualifier Q>
-	GLM_FUNC_DECL vec<4, bool, Q> isinf(qua<T, Q> const& x);
-
 	/// Returns the component-wise comparison result of x < y.
 	///
 	/// @tparam T Floating-point scalar types
@@ -255,6 +141,32 @@ namespace glm
 	template<typename T, qualifier Q>
 	GLM_FUNC_DECL vec<4, bool, Q> greaterThanEqual(qua<T, Q> const& x, qua<T, Q> const& y);
 
+	/// Build a look at quaternion based on the default handedness.
+	///
+	/// @param direction Desired forward direction. Needs to be normalized.
+	/// @param up Up vector, how the camera is oriented. Typically (0, 1, 0).
+	template<typename T, qualifier Q>
+	GLM_FUNC_DECL qua<T, Q> quatLookAt(
+		vec<3, T, Q> const& direction,
+		vec<3, T, Q> const& up);
+
+	/// Build a right-handed look at quaternion.
+	///
+	/// @param direction Desired forward direction onto which the -z-axis gets mapped. Needs to be normalized.
+	/// @param up Up vector, how the camera is oriented. Typically (0, 1, 0).
+	template<typename T, qualifier Q>
+	GLM_FUNC_DECL qua<T, Q> quatLookAtRH(
+		vec<3, T, Q> const& direction,
+		vec<3, T, Q> const& up);
+
+	/// Build a left-handed look at quaternion.
+	///
+	/// @param direction Desired forward direction onto which the +z-axis gets mapped. Needs to be normalized.
+	/// @param up Up vector, how the camera is oriented. Typically (0, 1, 0).
+	template<typename T, qualifier Q>
+	GLM_FUNC_DECL qua<T, Q> quatLookAtLH(
+		vec<3, T, Q> const& direction,
+		vec<3, T, Q> const& up);
 	/// @}
 } //namespace glm
 

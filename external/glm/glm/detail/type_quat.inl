@@ -89,7 +89,7 @@ namespace detail
 #	if GLM_CONFIG_DEFAULTED_FUNCTIONS == GLM_DISABLE
 		template<typename T, qualifier Q>
 		GLM_FUNC_QUALIFIER GLM_CONSTEXPR qua<T, Q>::qua()
-#			if GLM_CONFIG_DEFAULTED_FUNCTIONS != GLM_DISABLE
+#			if GLM_CONFIG_CTOR_INIT != GLM_CTOR_INIT_DISABLE
 			: x(0), y(0), z(0), w(1)
 #			endif
 		{}
@@ -208,18 +208,6 @@ namespace detail
 		return mat4_cast(*this);
 	}
 #	endif//GLM_HAS_EXPLICIT_CONVERSION_OPERATORS
-
-	template<typename T, qualifier Q>
-	GLM_FUNC_QUALIFIER qua<T, Q> conjugate(qua<T, Q> const& q)
-	{
-		return qua<T, Q>(q.w, -q.x, -q.y, -q.z);
-	}
-
-	template<typename T, qualifier Q>
-	GLM_FUNC_QUALIFIER qua<T, Q> inverse(qua<T, Q> const& q)
-	{
-		return conjugate(q) / dot(q, q);
-	}
 
 	// -- Unary arithmetic operators --
 

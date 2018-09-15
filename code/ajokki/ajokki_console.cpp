@@ -5,6 +5,7 @@
 
 // Include standard headers
 #include <memory> // std::make_shared, std::shared_ptr
+#include <stdint.h> // uint32_t etc.
 
 namespace yli
 {

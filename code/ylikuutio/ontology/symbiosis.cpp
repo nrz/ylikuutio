@@ -169,6 +169,18 @@ namespace yli
             return this->number_of_symbiont_materials;
         }
 
+        std::size_t Symbiosis::get_number_of_symbiont_species() const
+        {
+            std::size_t number_of_symbiont_species = 0;
+
+            for (auto symbiont_material : this->symbiont_material_pointer_vector)
+            {
+                number_of_symbiont_species += symbiont_material->get_number_of_children();
+            }
+
+            return number_of_symbiont_species;
+        }
+
         yli::ontology::Entity* Symbiosis::get_parent() const
         {
             return this->parent;
@@ -293,8 +305,23 @@ namespace yli
             }
         }
 
+        yli::ontology::SymbiontMaterial* Symbiosis::get_symbiont_material(const std::size_t symbiont_material_i) const
+        {
+            if (symbiont_material_i >= this->symbiont_material_pointer_vector.size())
+            {
+                return nullptr;
+            }
+
+            return this->symbiont_material_pointer_vector[symbiont_material_i];
+        }
+
         yli::ontology::SymbiontSpecies* Symbiosis::get_symbiont_species(const std::size_t biontID) const
         {
+            if (biontID >= this->biontID_symbiont_species_vector.size())
+            {
+                return nullptr;
+            }
+
             return this->biontID_symbiont_species_vector[biontID];
         }
 
@@ -345,8 +372,9 @@ namespace yli
             // return this->indices.at(biontID).size();
         }
 
-        std::size_t Symbiosis::get_number_of_meshes() const
+        std::size_t Symbiosis::get_number_of_ofbx_meshes() const
         {
+            // the value of `ofbx_mesh_count` comes from OpenFBX.
             return this->ofbx_mesh_count;
         }
 
@@ -380,7 +408,7 @@ namespace yli
             return this->biontID_symbiont_species_vector.at(biontID)->get_lightID();
         }
 
-        glm::vec3 Symbiosis::get_light_position(const std::size_t biontID) const
+        const glm::vec3& Symbiosis::get_light_position(const std::size_t biontID) const
         {
             return this->light_position;
         }

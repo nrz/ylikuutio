@@ -1,6 +1,3 @@
-/// @ref core
-/// @file glm/detail/setup.hpp
-
 #ifndef GLM_SETUP_INCLUDED
 
 #include <cassert>
@@ -9,11 +6,11 @@
 #define GLM_VERSION_MAJOR			0
 #define GLM_VERSION_MINOR			9
 #define GLM_VERSION_PATCH			9
-#define GLM_VERSION_REVISION		1
-#define GLM_VERSION					991
-#define GLM_VERSION_MESSAGE			"GLM: version 0.9.9.1"
+#define GLM_VERSION_REVISION		3
+#define GLM_VERSION					993
+#define GLM_VERSION_MESSAGE			"GLM: version 0.9.9.3"
 
-#define GLM_SETUP_INCLUDED GLM_VERSION
+#define GLM_SETUP_INCLUDED			GLM_VERSION
 
 ///////////////////////////////////////////////////////////////////////////////////
 // Active states
@@ -75,56 +72,32 @@
 #define GLM_LANG_CXXMS			GLM_LANG_CXXMS_FLAG
 #define GLM_LANG_CXXGNU			GLM_LANG_CXXGNU_FLAG
 
-#ifdef _MSC_EXTENSIONS
+#if (defined(_MSC_EXTENSIONS))
+#	define GLM_LANG_EXT GLM_LANG_CXXMS_FLAG
+#elif ((GLM_COMPILER & (GLM_COMPILER_CLANG | GLM_COMPILER_GCC)) && (GLM_ARCH & GLM_ARCH_SIMD_BIT))
 #	define GLM_LANG_EXT GLM_LANG_CXXMS_FLAG
 #else
 #	define GLM_LANG_EXT 0
 #endif
 
-#if defined(GLM_FORCE_CXX2A)
-#	if GLM_MESSAGES == GLM_ENABLE && !defined(GLM_MESSAGE_FORCE_CXX2A_DISPLAYED)
-#		define GLM_MESSAGE_FORCE_CXX2A_DISPLAYED
-#		pragma message("GLM: Force the use of C++2a only")
-#	endif//GLM_MESSAGES
+#if (defined(GLM_FORCE_CXX_UNKNOWN))
+#	define GLM_LANG 0
+#elif defined(GLM_FORCE_CXX2A)
 #	define GLM_LANG (GLM_LANG_CXX2A | GLM_LANG_EXT)
 #	define GLM_LANG_STL11_FORCED
 #elif defined(GLM_FORCE_CXX17)
-#	if GLM_MESSAGES == GLM_ENABLE && !defined(GLM_MESSAGE_FORCE_CXX17_DISPLAYED)
-#		define GLM_MESSAGE_FORCE_CXX17_DISPLAYED
-#		if (__cplusplus >= 201703L) || ((GLM_COMPILER & GLM_COMPILER_VC) && (GLM_COMPILER >= GLM_COMPILER_VC15_7)) || ((GLM_COMPILER & GLM_COMPILER_GCC) && (GLM_COMPILER >= GLM_COMPILER_GCC80)) || ((GLM_COMPILER & GLM_COMPILER_CLANG) && (GLM_COMPILER >= GLM_COMPILER_CLANG50))
-#			pragma message("GLM: Force the use of C++17 only")
-#		else
-#			pragma message("GLM: Force the use of C++17 on a compiler that doesn't have full C++17 support")
-#		endif
-#	endif//GLM_MESSAGES
 #	define GLM_LANG (GLM_LANG_CXX17 | GLM_LANG_EXT)
 #	define GLM_LANG_STL11_FORCED
 #elif defined(GLM_FORCE_CXX14)
-#	if GLM_MESSAGES == GLM_ENABLE && !defined(GLM_MESSAGE_FORCE_CXX14_DISPLAYED)
-#		define GLM_MESSAGE_FORCE_CXX14_DISPLAYED
-#		if (__cplusplus >= 201402L) || ((GLM_COMPILER & GLM_COMPILER_VC) && (GLM_COMPILER >= GLM_COMPILER_VC15)) || ((GLM_COMPILER & GLM_COMPILER_GCC) && (GLM_COMPILER >= GLM_COMPILER_GCC50)) || ((GLM_COMPILER & GLM_COMPILER_CLANG) && (GLM_COMPILER >= GLM_COMPILER_CLANG34))
-#			pragma message("GLM: Force the use of C++14 only")
-#		else
-#			pragma message("GLM: Force the use of C++14 on a compiler that doesn't have full C++14 support")
-#		endif
-#	endif//GLM_MESSAGES
 #	define GLM_LANG (GLM_LANG_CXX14 | GLM_LANG_EXT)
 #	define GLM_LANG_STL11_FORCED
 #elif defined(GLM_FORCE_CXX11)
-#	if GLM_MESSAGES == GLM_ENABLE && !defined(GLM_MESSAGE_FORCE_CXX11_DISPLAYED)
-#		define GLM_MESSAGE_FORCE_CXX11_DISPLAYED
-#		if (__cplusplus >= 201103L) || ((GLM_COMPILER & GLM_COMPILER_VC) && (GLM_COMPILER >= GLM_COMPILER_VC14)) || ((GLM_COMPILER & GLM_COMPILER_GCC) && (GLM_COMPILER >= GLM_COMPILER_GCC49)) || ((GLM_COMPILER & GLM_COMPILER_CLANG) && (GLM_COMPILER >= GLM_COMPILER_CLANG33))
-#			pragma message("GLM: Force the use of C++11 only")
-#		else
-#			pragma message("GLM: Force the use of C++11 on a compiler that doesn't have full C++11 support")
-#		endif
-#	endif//GLM_MESSAGES
 #	define GLM_LANG (GLM_LANG_CXX11 | GLM_LANG_EXT)
 #	define GLM_LANG_STL11_FORCED
 #elif defined(GLM_FORCE_CXX03)
-#	define GLM_LANG GLM_LANG_CXX03
+#	define GLM_LANG (GLM_LANG_CXX03 | GLM_LANG_EXT)
 #elif defined(GLM_FORCE_CXX98)
-#	define GLM_LANG GLM_LANG_CXX98
+#	define GLM_LANG (GLM_LANG_CXX98 | GLM_LANG_EXT)
 #else
 #	if GLM_COMPILER & GLM_COMPILER_VC && defined(_MSVC_LANG)
 #		if GLM_COMPILER >= GLM_COMPILER_VC15_7
@@ -175,8 +148,11 @@
 #	else
 #		define GLM_HAS_CXX11_STL 0
 #	endif
+#elif GLM_LANG & GLM_LANG_CXX11_FLAG
+#	define GLM_HAS_CXX11_STL 1
 #else
 #	define GLM_HAS_CXX11_STL ((GLM_LANG & GLM_LANG_CXX0X_FLAG) && (\
+		((GLM_COMPILER & GLM_COMPILER_GCC) && (GLM_COMPILER >= GLM_COMPILER_GCC48)) || \
 		((GLM_COMPILER & GLM_COMPILER_VC) && (GLM_COMPILER >= GLM_COMPILER_VC12)) || \
 		((GLM_PLATFORM != GLM_PLATFORM_WINDOWS) && (GLM_COMPILER & GLM_COMPILER_INTEL) && (GLM_COMPILER >= GLM_COMPILER_INTEL15))))
 #endif
@@ -286,7 +262,7 @@
 
 // N2341 http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2007/n2341.pdf
 #if GLM_COMPILER & GLM_COMPILER_CLANG
-#	define GLM_HAS_ALIGNOF __has_feature(c_alignof)
+#	define GLM_HAS_ALIGNOF __has_feature(cxx_alignas)
 #elif GLM_LANG & GLM_LANG_CXX11_FLAG
 #	define GLM_HAS_ALIGNOF 1
 #else
@@ -298,12 +274,14 @@
 
 // N2235 Generalized Constant Expressions http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2007/n2235.pdf
 // N3652 Extended Constant Expressions http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2013/n3652.html
-#if (GLM_COMPILER & GLM_COMPILER_CLANG) && !(GLM_ARCH & GLM_ARCH_SIMD_BIT)
+#if (GLM_ARCH & GLM_ARCH_SIMD_BIT) // Compiler SIMD intrinsics don't support constexpr...
+#	define GLM_HAS_CONSTEXPR 0
+#elif (GLM_COMPILER & GLM_COMPILER_CLANG)
 #	define GLM_HAS_CONSTEXPR __has_feature(cxx_relaxed_constexpr)
-#elif (GLM_LANG & GLM_LANG_CXX14_FLAG) && !(GLM_ARCH & GLM_ARCH_SIMD_BIT)
+#elif (GLM_LANG & GLM_LANG_CXX14_FLAG)
 #	define GLM_HAS_CONSTEXPR 1
 #else
-#	define GLM_HAS_CONSTEXPR ((GLM_LANG & GLM_LANG_CXX0X_FLAG) && !(GLM_ARCH & GLM_ARCH_SIMD_BIT) && GLM_HAS_INITIALIZER_LISTS && (\
+#	define GLM_HAS_CONSTEXPR ((GLM_LANG & GLM_LANG_CXX0X_FLAG) && GLM_HAS_INITIALIZER_LISTS && (\
 		((GLM_COMPILER & GLM_COMPILER_INTEL) && (GLM_COMPILER >= GLM_COMPILER_INTEL17)) || \
 		((GLM_COMPILER & GLM_COMPILER_VC) && (GLM_COMPILER >= GLM_COMPILER_VC15))))
 #endif
@@ -335,6 +313,7 @@
 		((GLM_COMPILER & GLM_COMPILER_CUDA))))
 #endif
 
+//
 #if defined(GLM_FORCE_PURE)
 #	define GLM_HAS_BITSCAN_WINDOWS 0
 #else
@@ -400,8 +379,7 @@
 #elif GLM_COMPILER & GLM_COMPILER_VC
 #	define GLM_STATIC_ASSERT(x, message) typedef char __CASSERT__##__LINE__[(x) ? 1 : -1]
 #else
-#	define GLM_STATIC_ASSERT(x, message)
-#	define GLM_STATIC_ASSERT_NULL
+#	define GLM_STATIC_ASSERT(x, message) assert(x)
 #endif//GLM_LANG
 
 ///////////////////////////////////////////////////////////////////////////////////
@@ -446,9 +424,13 @@
 #define GLM_SWIZZLE_OPERATOR		1
 #define GLM_SWIZZLE_FUNCTION		2
 
-#if defined(GLM_FORCE_SWIZZLE) && !defined(GLM_FORCE_XYZW_ONLY) && (GLM_LANG & GLM_LANG_CXXMS_FLAG)
+#if defined(GLM_FORCE_XYZW_ONLY)
+#	undef GLM_FORCE_SWIZZLE
+#endif
+
+#if defined(GLM_FORCE_SWIZZLE) && (GLM_LANG & GLM_LANG_CXXMS_FLAG)
 #	define GLM_CONFIG_SWIZZLE GLM_SWIZZLE_OPERATOR
-#elif defined(GLM_FORCE_SWIZZLE) && !defined(GLM_FORCE_XYZW_ONLY)
+#elif defined(GLM_FORCE_SWIZZLE)
 #	define GLM_CONFIG_SWIZZLE GLM_SWIZZLE_FUNCTION
 #else
 #	define GLM_CONFIG_SWIZZLE GLM_SWIZZLE_DISABLED
@@ -570,23 +552,180 @@ namespace glm
 #endif
 
 ///////////////////////////////////////////////////////////////////////////////////
+// uint
+
+namespace glm{
+namespace detail
+{
+	template<typename T>
+	struct is_int
+	{
+		enum test {value = 0};
+	};
+
+	template<>
+	struct is_int<unsigned int>
+	{
+		enum test {value = ~0};
+	};
+
+	template<>
+	struct is_int<signed int>
+	{
+		enum test {value = ~0};
+	};
+}//namespace detail
+
+	typedef unsigned int	uint;
+}//namespace glm
+
+///////////////////////////////////////////////////////////////////////////////////
+// 64-bit int
+
+#if GLM_HAS_EXTENDED_INTEGER_TYPE
+#	include <cstdint>
+#endif
+
+namespace glm{
+namespace detail
+{
+#	if GLM_HAS_EXTENDED_INTEGER_TYPE
+		typedef std::uint64_t						uint64;
+		typedef std::int64_t						int64;
+#	elif (defined(__STDC_VERSION__) && (__STDC_VERSION__ >= 199901L)) // C99 detected, 64 bit types available
+		typedef uint64_t							uint64;
+		typedef int64_t								int64;
+#	elif GLM_COMPILER & GLM_COMPILER_VC
+		typedef unsigned __int64					uint64;
+		typedef signed __int64						int64;
+#	elif GLM_COMPILER & GLM_COMPILER_GCC
+#		pragma GCC diagnostic ignored "-Wlong-long"
+		__extension__ typedef unsigned long long	uint64;
+		__extension__ typedef signed long long		int64;
+#	elif (GLM_COMPILER & GLM_COMPILER_CLANG)
+#		pragma clang diagnostic ignored "-Wc++11-long-long"
+		typedef unsigned long long					uint64;
+		typedef signed long long					int64;
+#	else//unknown compiler
+		typedef unsigned long long					uint64;
+		typedef signed long long					int64;
+#	endif
+}//namespace detail
+}//namespace glm
+
+///////////////////////////////////////////////////////////////////////////////////
+// make_unsigned
+
+#if GLM_HAS_MAKE_SIGNED
+#	include <type_traits>
+
+namespace glm{
+namespace detail
+{
+	using std::make_unsigned;
+}//namespace detail
+}//namespace glm
+
+#else
+
+namespace glm{
+namespace detail
+{
+	template<typename genType>
+	struct make_unsigned
+	{};
+
+	template<>
+	struct make_unsigned<char>
+	{
+		typedef unsigned char type;
+	};
+
+	template<>
+	struct make_unsigned<short>
+	{
+		typedef unsigned short type;
+	};
+
+	template<>
+	struct make_unsigned<int>
+	{
+		typedef unsigned int type;
+	};
+
+	template<>
+	struct make_unsigned<long>
+	{
+		typedef unsigned long type;
+	};
+
+	template<>
+	struct make_unsigned<int64>
+	{
+		typedef uint64 type;
+	};
+
+	template<>
+	struct make_unsigned<unsigned char>
+	{
+		typedef unsigned char type;
+	};
+
+	template<>
+	struct make_unsigned<unsigned short>
+	{
+		typedef unsigned short type;
+	};
+
+	template<>
+	struct make_unsigned<unsigned int>
+	{
+		typedef unsigned int type;
+	};
+
+	template<>
+	struct make_unsigned<unsigned long>
+	{
+		typedef unsigned long type;
+	};
+
+	template<>
+	struct make_unsigned<uint64>
+	{
+		typedef uint64 type;
+	};
+}//namespace detail
+}//namespace glm
+#endif
+
+///////////////////////////////////////////////////////////////////////////////////
+// Only use x, y, z, w as vector type components
+
+#ifdef GLM_FORCE_XYZW_ONLY
+#	define GLM_CONFIG_XYZW_ONLY GLM_ENABLE
+#else
+#	define GLM_CONFIG_XYZW_ONLY GLM_DISABLE
+#endif
+
+///////////////////////////////////////////////////////////////////////////////////
 // Configure the use of defaulted initialized types
 
-#define GLM_CTOR_INITIALIZER_LIST	(1 << 1)
-#define GLM_CTOR_INITIALISATION		(1 << 2)
+#define GLM_CTOR_INIT_DISABLE		0
+#define GLM_CTOR_INITIALIZER_LIST	1
+#define GLM_CTOR_INITIALISATION		2
 
 #if defined(GLM_FORCE_CTOR_INIT) && GLM_HAS_INITIALIZER_LISTS
 #	define GLM_CONFIG_CTOR_INIT GLM_CTOR_INITIALIZER_LIST
 #elif defined(GLM_FORCE_CTOR_INIT) && !GLM_HAS_INITIALIZER_LISTS
 #	define GLM_CONFIG_CTOR_INIT GLM_CTOR_INITIALISATION
 #else
-#	define GLM_CONFIG_CTOR_INIT GLM_DISABLE
+#	define GLM_CONFIG_CTOR_INIT GLM_CTOR_INIT_DISABLE
 #endif
 
 ///////////////////////////////////////////////////////////////////////////////////
 // Configure the use of defaulted function
 
-#if GLM_HAS_DEFAULTED_FUNCTIONS && GLM_CONFIG_CTOR_INIT == GLM_DISABLE
+#if GLM_HAS_DEFAULTED_FUNCTIONS && GLM_CONFIG_CTOR_INIT == GLM_CTOR_INIT_DISABLE
 #	define GLM_CONFIG_DEFAULTED_FUNCTIONS GLM_ENABLE
 #	define GLM_DEFAULT = default
 #else
@@ -597,6 +736,10 @@ namespace glm
 ///////////////////////////////////////////////////////////////////////////////////
 // Configure the use of aligned gentypes
 
+#ifdef GLM_FORCE_ALIGNED // Legacy define
+#	define GLM_FORCE_DEFAULT_ALIGNED_GENTYPES
+#endif
+
 #if GLM_HAS_ALIGNOF && (GLM_LANG & GLM_LANG_CXXMS_FLAG)
 #	define GLM_CONFIG_ALIGNED_GENTYPES GLM_ENABLE
 #else
@@ -606,19 +749,10 @@ namespace glm
 ///////////////////////////////////////////////////////////////////////////////////
 // Use SIMD instruction sets
 
-#if (GLM_LANG & GLM_LANG_CXXMS_FLAG) && (GLM_ARCH & GLM_ARCH_SIMD_BIT)
-#define GLM_CONFIG_SIMD GLM_ENABLE
+#if GLM_HAS_ALIGNOF && (GLM_LANG & GLM_LANG_CXXMS_FLAG) && (GLM_ARCH & GLM_ARCH_SIMD_BIT)
+#	define GLM_CONFIG_SIMD GLM_ENABLE
 #else
-#define GLM_CONFIG_SIMD GLM_DISABLE
-#endif
-
-///////////////////////////////////////////////////////////////////////////////////
-// Only use x, y, z, w as vector type components
-
-#ifdef GLM_FORCE_XYZW_ONLY
-#	define GLM_CONFIG_XYZW_ONLY GLM_ENABLE
-#else
-#	define GLM_CONFIG_XYZW_ONLY GLM_DISABLE
+#	define GLM_CONFIG_SIMD GLM_DISABLE
 #endif
 
 ///////////////////////////////////////////////////////////////////////////////////
@@ -637,51 +771,51 @@ namespace glm
 #define GLM_MEDIUMP		2
 #define GLM_LOWP		3
 
-#ifdef GLM_PRECISION_HIGHP_BOOL
+#if defined(GLM_FORCE_PRECISION_HIGHP_BOOL) || defined(GLM_PRECISION_HIGHP_BOOL)
 #	define GLM_CONFIG_PRECISION_BOOL		GLM_HIGHP
-#elif defined(GLM_PRECISION_MEDIUMP_BOOL)
+#elif defined(GLM_FORCE_PRECISION_MEDIUMP_BOOL) || defined(GLM_PRECISION_MEDIUMP_BOOL)
 #	define GLM_CONFIG_PRECISION_BOOL		GLM_MEDIUMP
-#elif defined(GLM_PRECISION_LOWP_BOOL)
+#elif defined(GLM_FORCE_PRECISION_LOWP_BOOL) || defined(GLM_PRECISION_LOWP_BOOL)
 #	define GLM_CONFIG_PRECISION_BOOL		GLM_LOWP
 #else
 #	define GLM_CONFIG_PRECISION_BOOL		GLM_HIGHP
 #endif
 
-#ifdef GLM_PRECISION_HIGHP_INT
+#if defined(GLM_FORCE_PRECISION_HIGHP_INT) || defined(GLM_PRECISION_HIGHP_INT)
 #	define GLM_CONFIG_PRECISION_INT			GLM_HIGHP
-#elif defined(GLM_PRECISION_MEDIUMP_INT)
+#elif defined(GLM_FORCE_PRECISION_MEDIUMP_INT) || defined(GLM_PRECISION_MEDIUMP_INT)
 #	define GLM_CONFIG_PRECISION_INT			GLM_MEDIUMP
-#elif defined(GLM_PRECISION_LOWP_INT)
+#elif defined(GLM_FORCE_PRECISION_LOWP_INT) || defined(GLM_PRECISION_LOWP_INT)
 #	define GLM_CONFIG_PRECISION_INT			GLM_LOWP
 #else
 #	define GLM_CONFIG_PRECISION_INT			GLM_HIGHP
 #endif
 
-#ifdef GLM_PRECISION_HIGHP_UINT
+#if defined(GLM_FORCE_PRECISION_HIGHP_UINT) || defined(GLM_PRECISION_HIGHP_UINT)
 #	define GLM_CONFIG_PRECISION_UINT		GLM_HIGHP
-#elif defined(GLM_PRECISION_MEDIUMP_UINT)
+#elif defined(GLM_FORCE_PRECISION_MEDIUMP_UINT) || defined(GLM_PRECISION_MEDIUMP_UINT)
 #	define GLM_CONFIG_PRECISION_UINT		GLM_MEDIUMP
-#elif defined(GLM_PRECISION_LOWP_UINT)
+#elif defined(GLM_FORCE_PRECISION_LOWP_UINT) || defined(GLM_PRECISION_LOWP_UINT)
 #	define GLM_CONFIG_PRECISION_UINT		GLM_LOWP
 #else
 #	define GLM_CONFIG_PRECISION_UINT		GLM_HIGHP
 #endif
 
-#ifdef GLM_PRECISION_HIGHP_FLOAT
+#if defined(GLM_FORCE_PRECISION_HIGHP_FLOAT) || defined(GLM_PRECISION_HIGHP_FLOAT)
 #	define GLM_CONFIG_PRECISION_FLOAT		GLM_HIGHP
-#elif defined(GLM_PRECISION_MEDIUMP_FLOAT)
+#elif defined(GLM_FORCE_PRECISION_MEDIUMP_FLOAT) || defined(GLM_PRECISION_MEDIUMP_FLOAT)
 #	define GLM_CONFIG_PRECISION_FLOAT		GLM_MEDIUMP
-#elif defined(GLM_PRECISION_LOWP_FLOAT)
+#elif defined(GLM_FORCE_PRECISION_LOWP_FLOAT) || defined(GLM_PRECISION_LOWP_FLOAT)
 #	define GLM_CONFIG_PRECISION_FLOAT		GLM_LOWP
 #else
 #	define GLM_CONFIG_PRECISION_FLOAT		GLM_HIGHP
 #endif
 
-#ifdef GLM_PRECISION_HIGHP_DOUBLE
+#if defined(GLM_FORCE_PRECISION_HIGHP_DOUBLE) || defined(GLM_PRECISION_HIGHP_DOUBLE)
 #	define GLM_CONFIG_PRECISION_DOUBLE		GLM_HIGHP
-#elif defined(GLM_PRECISION_MEDIUMP_DOUBLE)
+#elif defined(GLM_FORCE_PRECISION_MEDIUMP_DOUBLE) || defined(GLM_PRECISION_MEDIUMP_DOUBLE)
 #	define GLM_CONFIG_PRECISION_DOUBLE		GLM_MEDIUMP
-#elif defined(GLM_PRECISION_LOWP_DOUBLE)
+#elif defined(GLM_FORCE_PRECISION_LOWP_DOUBLE) || defined(GLM_PRECISION_LOWP_DOUBLE)
 #	define GLM_CONFIG_PRECISION_DOUBLE		GLM_LOWP
 #else
 #	define GLM_CONFIG_PRECISION_DOUBLE		GLM_HIGHP
@@ -699,53 +833,41 @@ namespace glm
 
 #if GLM_MESSAGES == GLM_ENABLE && !defined(GLM_MESSAGE_DISPLAYED)
 #	define GLM_MESSAGE_DISPLAYED
+#		define GLM_STR_HELPER(x) #x
+#		define GLM_STR(x) GLM_STR_HELPER(x)
 
 	// Report GLM version
-#	pragma message (GLM_VERSION_MESSAGE)
+#		pragma message (GLM_STR(GLM_VERSION_MESSAGE))
 
 	// Report C++ language
-#	if GLM_LANG & GLM_LANG_CXX2A_FLAG
-#		if GLM_LANG & (GLM_LANG_CXXGNU_FLAG | GLM_LANG_CXXMS_FLAG)
-#			pragma message("GLM: C++ 2A with extensions")
-#		else
-#			pragma message("GLM: C++ 2A")
-#		endif
-#	elif GLM_LANG & GLM_LANG_CXX17_FLAG
-#		if GLM_LANG & (GLM_LANG_CXXGNU_FLAG | GLM_LANG_CXXMS_FLAG)
-#			pragma message("GLM: C++ 17 with extensions")
-#		else
-#			pragma message("GLM: C++ 17")
-#		endif
-#	elif GLM_LANG & GLM_LANG_CXX14_FLAG
-#		if GLM_LANG & (GLM_LANG_CXXGNU_FLAG | GLM_LANG_CXXMS_FLAG)
-#			pragma message("GLM: C++ 14 with extensions")
-#		else
-#			pragma message("GLM: C++ 14")
-#		endif
-#	elif GLM_LANG & GLM_LANG_CXX11_FLAG
-#		if GLM_LANG & (GLM_LANG_CXXGNU_FLAG | GLM_LANG_CXXMS_FLAG)
-#			pragma message("GLM: C++ 11 with extensions")
-#		else
-#			pragma message("GLM: C++ 11")
-#		endif
-#	elif GLM_LANG & GLM_LANG_CXX0X_FLAG
-#		if GLM_LANG & (GLM_LANG_CXXGNU_FLAG | GLM_LANG_CXXMS_FLAG)
-#			pragma message("GLM: C++ 0x with extensions")
-#		else
-#			pragma message("GLM: C++ 0x")
-#		endif
-#	elif GLM_LANG & GLM_LANG_CXX03_FLAG
-#		if GLM_LANG & (GLM_LANG_CXXGNU_FLAG | GLM_LANG_CXXMS_FLAG)
-#			pragma message("GLM: C++ 03 with extensions")
-#		else
-#			pragma message("GLM: C++ 03")
-#		endif
-#	elif GLM_LANG & GLM_LANG_CXX98_FLAG
-#		if GLM_LANG & (GLM_LANG_CXXGNU_FLAG | GLM_LANG_CXXMS_FLAG)
-#			pragma message("GLM: C++ 98 with extensions")
-#		else
-#			pragma message("GLM: C++ 98")
-#		endif
+#	if (GLM_LANG & GLM_LANG_CXX2A_FLAG) && (GLM_LANG & GLM_LANG_EXT)
+#		pragma message("GLM: C++ 2A with extensions")
+#	elif (GLM_LANG & GLM_LANG_CXX2A_FLAG)
+#		pragma message("GLM: C++ 2A")
+#	elif (GLM_LANG & GLM_LANG_CXX17_FLAG) && (GLM_LANG & GLM_LANG_EXT)
+#		pragma message("GLM: C++ 17 with extensions")
+#	elif (GLM_LANG & GLM_LANG_CXX17_FLAG)
+#		pragma message("GLM: C++ 17")
+#	elif (GLM_LANG & GLM_LANG_CXX14_FLAG) && (GLM_LANG & GLM_LANG_EXT)
+#		pragma message("GLM: C++ 14 with extensions")
+#	elif (GLM_LANG & GLM_LANG_CXX14_FLAG)
+#		pragma message("GLM: C++ 14")
+#	elif (GLM_LANG & GLM_LANG_CXX11_FLAG) && (GLM_LANG & GLM_LANG_EXT)
+#		pragma message("GLM: C++ 11 with extensions")
+#	elif (GLM_LANG & GLM_LANG_CXX11_FLAG)
+#		pragma message("GLM: C++ 11")
+#	elif (GLM_LANG & GLM_LANG_CXX0X_FLAG) && (GLM_LANG & GLM_LANG_EXT)
+#		pragma message("GLM: C++ 0x with extensions")
+#	elif (GLM_LANG & GLM_LANG_CXX0X_FLAG)
+#		pragma message("GLM: C++ 0x")
+#	elif (GLM_LANG & GLM_LANG_CXX03_FLAG) && (GLM_LANG & GLM_LANG_EXT)
+#		pragma message("GLM: C++ 03 with extensions")
+#	elif (GLM_LANG & GLM_LANG_CXX03_FLAG)
+#		pragma message("GLM: C++ 03")
+#	elif (GLM_LANG & GLM_LANG_CXX98_FLAG) && (GLM_LANG & GLM_LANG_EXT)
+#		pragma message("GLM: C++ 98 with extensions")
+#	elif (GLM_LANG & GLM_LANG_CXX98_FLAG)
+#		pragma message("GLM: C++ 98")
 #	else
 #		pragma message("GLM: C++ language undetected")
 #	endif//GLM_LANG
@@ -766,78 +888,65 @@ namespace glm
 #	endif
 
 	// Report build target
-#	if GLM_ARCH & GLM_ARCH_AVX2_BIT
-#		if GLM_MODEL == GLM_MODEL_64
-#			pragma message("GLM: x86 64 bits with AVX2 instruction set build target")
-#		else
-#			pragma message("GLM: x86 32 bits with AVX2 instruction set build target")
-#		endif
-#	elif GLM_ARCH & GLM_ARCH_AVX_BIT
-#		if GLM_MODEL == GLM_MODEL_64
-#			pragma message("GLM: x86 64 bits with AVX instruction set build target")
-#		else
-#			pragma message("GLM: x86 32 bits with AVX instruction set build target")
-#		endif
-#	elif GLM_ARCH & GLM_ARCH_SSE42_BIT
-#		if GLM_MODEL == GLM_MODEL_64
-#			pragma message("GLM: x86 64 bits with SSE4.2 instruction set build target")
-#		else
-#			pragma message("GLM: x86 32 bits with SSE4.2 instruction set build target")
-#		endif
-#	elif GLM_ARCH & GLM_ARCH_SSE41_BIT
-#		if GLM_MODEL == GLM_MODEL_64
-#			pragma message("GLM: x86 64 bits with SSE4.1 instruction set build target")
-#		else
-#			pragma message("GLM: x86 32 bits with SSE4.1 instruction set build target")
-#		endif
-#	elif GLM_ARCH & GLM_ARCH_SSSE3_BIT
-#		if GLM_MODEL == GLM_MODEL_64
-#			pragma message("GLM: x86 64 bits with SSSE3 instruction set build target")
-#		else
-#			pragma message("GLM: x86 32 bits with SSSE3 instruction set build target")
-#		endif
-#	elif GLM_ARCH & GLM_ARCH_SSE3_BIT
-#		if GLM_MODEL == GLM_MODEL_64
-#			pragma message("GLM: x86 64 bits with SSE3 instruction set build target")
-#		else
-#			pragma message("GLM: x86 32 bits with SSE3 instruction set build target")
-#		endif
-#	elif GLM_ARCH & GLM_ARCH_SSE2_BIT
-#		if GLM_MODEL == GLM_MODEL_64
-#			pragma message("GLM: x86 64 bits with SSE2 instruction set build target")
-#		else
-#			pragma message("GLM: x86 32 bits with SSE2 instruction set build target")
-#		endif
-#	elif GLM_ARCH & GLM_ARCH_X86_BIT
-#		if GLM_MODEL == GLM_MODEL_64
-#			pragma message("GLM: x86 64 bits build target")
-#		else
-#			pragma message("GLM: x86 32 bits build target")
-#		endif
-#	elif GLM_ARCH & GLM_ARCH_NEON_BIT
-#		if GLM_MODEL == GLM_MODEL_64
-#			pragma message("GLM: ARM 64 bits with Neon instruction set build target")
-#		else
-#			pragma message("GLM: ARM 32 bits with Neon instruction set build target")
-#		endif
-#	elif GLM_ARCH & GLM_ARCH_ARM_BIT
-#		if GLM_MODEL == GLM_MODEL_64
-#			pragma message("GLM: ARM 64 bits build target")
-#		else
-#			pragma message("GLM: ARM 32 bits build target")
-#		endif
-#	elif GLM_ARCH & GLM_ARCH_MIPS_BIT
-#		if GLM_MODEL == GLM_MODEL_64
-#			pragma message("GLM: MIPS 64 bits build target")
-#		else
-#			pragma message("GLM: MIPS 32 bits build target")
-#		endif
-#	elif GLM_ARCH & GLM_ARCH_PPC_BIT
-#		if GLM_MODEL == GLM_MODEL_64
-#			pragma message("GLM: PowerPC 64 bits build target")
-#		else
-#			pragma message("GLM: PowerPC 32 bits build target")
-#		endif
+#	if (GLM_ARCH & GLM_ARCH_AVX2_BIT) && (GLM_MODEL == GLM_MODEL_64)
+#		pragma message("GLM: x86 64 bits with AVX2 instruction set build target")
+#	elif (GLM_ARCH & GLM_ARCH_AVX2_BIT) && (GLM_MODEL == GLM_MODEL_32)
+#		pragma message("GLM: x86 32 bits with AVX2 instruction set build target")
+
+#	elif (GLM_ARCH & GLM_ARCH_AVX_BIT) && (GLM_MODEL == GLM_MODEL_64)
+#		pragma message("GLM: x86 64 bits with AVX instruction set build target")
+#	elif (GLM_ARCH & GLM_ARCH_AVX_BIT) && (GLM_MODEL == GLM_MODEL_32)
+#		pragma message("GLM: x86 32 bits with AVX instruction set build target")
+
+#	elif (GLM_ARCH & GLM_ARCH_SSE42_BIT) && (GLM_MODEL == GLM_MODEL_64)
+#		pragma message("GLM: x86 64 bits with SSE4.2 instruction set build target")
+#	elif (GLM_ARCH & GLM_ARCH_SSE42_BIT) && (GLM_MODEL == GLM_MODEL_32)
+#		pragma message("GLM: x86 32 bits with SSE4.2 instruction set build target")
+
+#	elif (GLM_ARCH & GLM_ARCH_SSE41_BIT) && (GLM_MODEL == GLM_MODEL_64)
+#		pragma message("GLM: x86 64 bits with SSE4.1 instruction set build target")
+#	elif (GLM_ARCH & GLM_ARCH_SSE41_BIT) && (GLM_MODEL == GLM_MODEL_32)
+#		pragma message("GLM: x86 32 bits with SSE4.1 instruction set build target")
+
+#	elif (GLM_ARCH & GLM_ARCH_SSSE3_BIT) && (GLM_MODEL == GLM_MODEL_64)
+#		pragma message("GLM: x86 64 bits with SSSE3 instruction set build target")
+#	elif (GLM_ARCH & GLM_ARCH_SSSE3_BIT) && (GLM_MODEL == GLM_MODEL_32)
+#		pragma message("GLM: x86 32 bits with SSSE3 instruction set build target")
+
+#	elif (GLM_ARCH & GLM_ARCH_SSE3_BIT) && (GLM_MODEL == GLM_MODEL_64)
+#		pragma message("GLM: x86 64 bits with SSE3 instruction set build target")
+#	elif (GLM_ARCH & GLM_ARCH_SSE3_BIT) && (GLM_MODEL == GLM_MODEL_32)
+#		pragma message("GLM: x86 32 bits with SSE3 instruction set build target")
+
+#	elif (GLM_ARCH & GLM_ARCH_SSE2_BIT) && (GLM_MODEL == GLM_MODEL_64)
+#		pragma message("GLM: x86 64 bits with SSE2 instruction set build target")
+#	elif (GLM_ARCH & GLM_ARCH_SSE2_BIT) && (GLM_MODEL == GLM_MODEL_32)
+#		pragma message("GLM: x86 32 bits with SSE2 instruction set build target")
+
+#	elif (GLM_ARCH & GLM_ARCH_X86_BIT) && (GLM_MODEL == GLM_MODEL_64)
+#		pragma message("GLM: x86 64 bits build target")
+#	elif (GLM_ARCH & GLM_ARCH_X86_BIT) && (GLM_MODEL == GLM_MODEL_32)
+#		pragma message("GLM: x86 32 bits build target")
+
+#	elif (GLM_ARCH & GLM_ARCH_NEON_BIT) && (GLM_MODEL == GLM_MODEL_64)
+#		pragma message("GLM: ARM 64 bits with Neon instruction set build target")
+#	elif (GLM_ARCH & GLM_ARCH_NEON_BIT) && (GLM_MODEL == GLM_MODEL_32)
+#		pragma message("GLM: ARM 32 bits with Neon instruction set build target")
+
+#	elif (GLM_ARCH & GLM_ARCH_ARM_BIT) && (GLM_MODEL == GLM_MODEL_64)
+#		pragma message("GLM: ARM 64 bits build target")
+#	elif (GLM_ARCH & GLM_ARCH_ARM_BIT) && (GLM_MODEL == GLM_MODEL_32)
+#		pragma message("GLM: ARM 32 bits build target")
+
+#	elif (GLM_ARCH & GLM_ARCH_MIPS_BIT) && (GLM_MODEL == GLM_MODEL_64)
+#		pragma message("GLM: MIPS 64 bits build target")
+#	elif (GLM_ARCH & GLM_ARCH_MIPS_BIT) && (GLM_MODEL == GLM_MODEL_32)
+#		pragma message("GLM: MIPS 32 bits build target")
+
+#	elif (GLM_ARCH & GLM_ARCH_PPC_BIT) && (GLM_MODEL == GLM_MODEL_64)
+#		pragma message("GLM: PowerPC 64 bits build target")
+#	elif (GLM_ARCH & GLM_ARCH_PPC_BIT) && (GLM_MODEL == GLM_MODEL_32)
+#		pragma message("GLM: PowerPC 32 bits build target")
 #	else
 #		pragma message("GLM: Unknown build target")
 #	endif//GLM_ARCH
@@ -883,19 +992,24 @@ namespace glm
 
 	// Report .length() type
 #	if GLM_CONFIG_LENGTH_TYPE == GLM_LENGTH_SIZE_T
-#		pragma message("GLM: GLM_FORCE_SIZE_T_LENGTH is defined. .length() returns a glm::length_t, a typedef of std::size_t instead of int.")
+#		pragma message("GLM: GLM_FORCE_SIZE_T_LENGTH is defined. .length() returns a glm::length_t, a typedef of std::size_t.")
 #	else
-#		pragma message("GLM: GLM_FORCE_SIZE_T_LENGTH is undefined. .length() returns a glm::length_t, a typedef of int following the GLSL specification. Define GLM_FORCE_SIZE_T_LENGTH to make glm::length_t, a typedef of std::size_t.")
+#		pragma message("GLM: GLM_FORCE_SIZE_T_LENGTH is undefined. .length() returns a glm::length_t, a typedef of int following GLSL.")
 #	endif
 
 #	if GLM_CONFIG_UNRESTRICTED_GENTYPE == GLM_ENABLE
-#		pragma message("GLM: GLM_FORCE_UNRESTRICTED_GENTYPE is defined. Removes GLSL specification restrictions on valid function genTypes.")
+#		pragma message("GLM: GLM_FORCE_UNRESTRICTED_GENTYPE is defined. Removes GLSL restrictions on valid function genTypes.")
 #	else
-#		pragma message("GLM: GLM_FORCE_UNRESTRICTED_GENTYPE is undefined. Follows strictly GLSL specification on valid function genTypes.")
+#		pragma message("GLM: GLM_FORCE_UNRESTRICTED_GENTYPE is undefined. Follows strictly GLSL on valid function genTypes.")
 #	endif
 
 #	ifdef GLM_FORCE_SINGLE_ONLY
 #		pragma message("GLM: GLM_FORCE_SINGLE_ONLY is defined. Using only single precision floating-point types")
+#	endif
+
+#	if defined(GLM_FORCE_DEFAULT_ALIGNED_GENTYPES) && (GLM_CONFIG_ALIGNED_GENTYPES == GLM_DISABLE)
+#		undef GLM_FORCE_DEFAULT_ALIGNED_GENTYPES
+#		pragma message("GLM: GLM_FORCE_DEFAULT_ALIGNED_GENTYPES is defined but is disabled. It requires C++11 and language extensions")
 #	endif
 
 #	if GLM_CONFIG_CLIP_CONTROL & GLM_CLIP_CONTROL_ZO_BIT

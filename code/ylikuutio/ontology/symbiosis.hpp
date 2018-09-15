@@ -92,6 +92,7 @@ namespace yli
                 virtual ~Symbiosis();
 
                 std::size_t get_number_of_symbiont_materials() const;
+                std::size_t get_number_of_symbiont_species() const;
 
                 // this method renders all `SymbiontMaterial`s belonging to this `Symbiosis`.
                 void render();
@@ -104,6 +105,7 @@ namespace yli
 
                 const std::string& get_model_file_format();
 
+                yli::ontology::SymbiontMaterial* get_symbiont_material(const std::size_t symbiont_material_i) const;
                 yli::ontology::SymbiontSpecies* get_symbiont_species(const std::size_t biontID) const;
                 GLuint get_vertex_position_modelspaceID(const std::size_t biontID) const;
                 GLuint get_vertexUVID(const std::size_t biontID) const;
@@ -116,13 +118,13 @@ namespace yli
 
                 std::vector<uint32_t> get_indices(const std::size_t biontID) const;
                 std::size_t get_indices_size(const std::size_t biontID) const;
-                std::size_t get_number_of_meshes() const;
+                std::size_t get_number_of_ofbx_meshes() const;
                 bool has_texture(const std::size_t biontID) const;
                 GLuint get_texture(const std::size_t biontID) const;
                 GLuint get_openGL_textureID(const std::size_t biontID) const;
 
                 GLuint get_lightID(const std::size_t biontID) const;
-                glm::vec3 get_light_position(const std::size_t biontID) const;
+                const glm::vec3& get_light_position(const std::size_t biontID) const;
 
                 template<class T1>
                     friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
@@ -165,7 +167,7 @@ namespace yli
                 std::vector<const ofbx::Texture*> ofbx_diffuse_texture_vector;
                 std::vector<const ofbx::Texture*> ofbx_normal_texture_vector; // currently not in use.
                 std::vector<const ofbx::Texture*> ofbx_count_texture_vector;  // currently not in use.
-                std::size_t ofbx_mesh_count;
+                std::size_t ofbx_mesh_count;                                  // the value of `ofbx_mesh_count` comes from OpenFBX.
 
                 bool vram_buffer_in_use;
         };

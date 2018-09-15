@@ -144,7 +144,7 @@ namespace yli
             std::cout << "Creating bionts for Holobiont located at 0x" << std::hex << (uint64_t) this << std::dec << " ...\n";
 
             // Create `Biont` entities so that they bind to this `Holobiont`.
-            const std::size_t correct_number_of_bionts = symbiosis->get_number_of_meshes();
+            const std::size_t correct_number_of_bionts = symbiosis->get_number_of_ofbx_meshes();
             std::cout << "Number of bionts to be created: " << correct_number_of_bionts << "\n";
 
             for (std::size_t biontID = 0; biontID < correct_number_of_bionts; biontID++)

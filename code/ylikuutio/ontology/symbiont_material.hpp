@@ -59,6 +59,10 @@ namespace yli
                     this->type_string = "yli::ontology::SymbiontMaterial*";
                 }
 
+                yli::ontology::Entity* get_parent() const override;
+                std::size_t get_number_of_children() const override;
+                std::size_t get_number_of_descendants() const override;
+
                 GLuint get_texture() const;
                 GLuint get_openGL_textureID() const;
 
@@ -76,10 +80,6 @@ namespace yli
 
                 // this method renders all `SymbiontSpecies` using this `SymbiontMaterial`.
                 void render();
-
-                yli::ontology::Entity* get_parent() const override;
-                std::size_t get_number_of_children() const override;
-                std::size_t get_number_of_descendants() const override;
 
                 yli::ontology::Symbiosis* parent;           // pointer to `Symbiosis`.
 

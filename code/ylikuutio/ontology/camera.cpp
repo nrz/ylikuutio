@@ -178,17 +178,17 @@ namespace yli
             return true;
         }
 
-        glm::vec3 Camera::get_direction() const
+        const glm::vec3& Camera::get_direction() const
         {
             return this->direction;
         }
 
-        glm::vec3 Camera::get_right() const
+        const glm::vec3& Camera::get_right() const
         {
             return this->right;
         }
 
-        glm::vec3 Camera::get_up() const
+        const glm::vec3& Camera::get_up() const
         {
             return this->up;
         }

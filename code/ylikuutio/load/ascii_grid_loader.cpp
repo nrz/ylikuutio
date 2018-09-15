@@ -59,7 +59,7 @@ namespace yli
 
             if (file_content.empty())
             {
-                std::cerr << ascii_grid_filename << " could not be opened, or the file is empty.\n";
+                std::cerr << "ERROR: " << ascii_grid_filename << " could not be opened, or the file is empty.\n";
                 return false;
             }
 
@@ -113,7 +113,7 @@ namespace yli
             // note: the value of `image_height_in_use` can be adjusted here (for testing purposes).
             if (image_width < 2)
             {
-                std::cerr << "Image width is less than 2.\n";
+                std::cerr << "ERROR: image width is less than 2.\n";
                 return false;
             }
 
@@ -121,7 +121,7 @@ namespace yli
 
             if (image_height < 2)
             {
-                std::cerr << "Image height is less than 2.\n";
+                std::cerr << "ERROR: image height is less than 2.\n";
                 return false;
             }
 
@@ -131,7 +131,7 @@ namespace yli
 
             if (vertex_data == nullptr)
             {
-                std::cerr << "Reserving memory for vertex data failed.\n";
+                std::cerr << "ERROR: reserving memory for vertex data failed.\n";
                 return false;
             }
 
@@ -170,7 +170,7 @@ namespace yli
 
             std::cout << "\n";
 
-            std::cout << "Triangulating ascii grid data.\n";
+            std::cout << "Triangulating ASCII grid data.\n";
 
             yli::geometry::TriangulateQuadsStruct triangulate_quads_struct;
             triangulate_quads_struct.image_width = image_width_in_use;

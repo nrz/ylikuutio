@@ -476,13 +476,20 @@ namespace yli
                 entity_info += std::string(memory_address_char_array);
                 console->print_text(entity_info);
 
-                uint64_t parents_memory_address = reinterpret_cast<uint64_t>((void*) entity->get_parent());
-                char parents_memory_address_char_array[256];
-                snprintf(parents_memory_address_char_array, sizeof(parents_memory_address_char_array), "0x%" PRIx64, static_cast<uint64_t>(parents_memory_address));
+                if (entity->get_parent() == nullptr)
+                {
+                    console->print_text("parent's address: nullptr");
+                }
+                else
+                {
+                    uint64_t parents_memory_address = reinterpret_cast<uint64_t>((void*) entity->get_parent());
+                    char parents_memory_address_char_array[256];
+                    snprintf(parents_memory_address_char_array, sizeof(parents_memory_address_char_array), "0x%" PRIx64, static_cast<uint64_t>(parents_memory_address));
 
-                std::string parent_info = "parent's address: ";
-                parent_info += std::string(parents_memory_address_char_array);
-                console->print_text(parent_info);
+                    std::string parent_info = "parent's address: ";
+                    parent_info += std::string(parents_memory_address_char_array);
+                    console->print_text(parent_info);
+                }
 
                 std::size_t number_of_children = entity->get_number_of_children();
                 char number_of_children_char_array[256];
