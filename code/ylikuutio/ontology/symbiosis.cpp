@@ -169,6 +169,18 @@ namespace yli
             return this->number_of_symbiont_materials;
         }
 
+        std::size_t Symbiosis::get_number_of_symbiont_species() const
+        {
+            std::size_t number_of_symbiont_species = 0;
+
+            for (auto symbiont_material : this->symbiont_material_pointer_vector)
+            {
+                number_of_symbiont_species += symbiont_material->get_number_of_children();
+            }
+
+            return number_of_symbiont_species;
+        }
+
         yli::ontology::Entity* Symbiosis::get_parent() const
         {
             return this->parent;

@@ -92,6 +92,7 @@ namespace yli
                 virtual ~Symbiosis();
 
                 std::size_t get_number_of_symbiont_materials() const;
+                std::size_t get_number_of_symbiont_species() const;
 
                 // this method renders all `SymbiontMaterial`s belonging to this `Symbiosis`.
                 void render();
