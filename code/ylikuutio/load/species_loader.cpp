@@ -45,6 +45,7 @@ namespace yli
                 const bool is_debug_mode)
         {
             bool model_loading_result = false;
+            bool needs_indexing = true;
 
             if (species_loader_struct.model_file_format == "obj" || species_loader_struct.model_file_format == "OBJ")
             {
@@ -115,17 +116,33 @@ namespace yli
 
             std::cout << "Indexing...\n";
 
-            // Fill the index buffer.
-            yli::ontology::indexVBO(
-                    out_vertices,
-                    out_UVs,
-                    out_normals,
-                    indices,
-                    indexed_vertices,
-                    indexed_UVs,
-                    indexed_normals);
+            if (needs_indexing)
+            {
+                // Fill the index buffer.
+                yli::ontology::indexVBO(
+                        out_vertices,
+                        out_UVs,
+                        out_normals,
+                        indices,
+                        indexed_vertices,
+                        indexed_UVs,
+                        indexed_normals);
 
-            std::cout << "Indexing completed successfully.\n";
+                std::cout << "Indexing completed successfully.\n";
+            }
+            else
+            {
+                indices.resize(out_vertices.size());
+
+                for (GLuint i = 0; i < out_vertices.size(); i++)
+                {
+                    indices[i] = i;
+                }
+
+                indexed_vertices = out_vertices;
+                indexed_UVs = out_UVs;
+                indexed_normals = out_normals;
+            }
 
             vram_buffer_in_use = species_loader_struct.vram_buffer_in_use;
 
