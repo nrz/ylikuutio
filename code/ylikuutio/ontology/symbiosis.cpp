@@ -295,6 +295,11 @@ namespace yli
 
         yli::ontology::SymbiontSpecies* Symbiosis::get_symbiont_species(const std::size_t biontID) const
         {
+            if (biontID >= this->biontID_symbiont_species_vector.size())
+            {
+                return nullptr;
+            }
+
             return this->biontID_symbiont_species_vector[biontID];
         }
 
