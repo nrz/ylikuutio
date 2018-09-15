@@ -1,6 +1,3 @@
-/// @ref simd
-/// @file glm/simd/platform.h
-
 #pragma once
 
 ///////////////////////////////////////////////////////////////////////////////////
@@ -239,7 +236,7 @@
 #define GLM_ARCH_AVX_BIT	(0x00000080)
 #define GLM_ARCH_AVX2_BIT	(0x00000100)
 
-#define GLM_ARCH_UNKNOWED	(0)
+#define GLM_ARCH_UNKNOWN	(0)
 #define GLM_ARCH_X86		(GLM_ARCH_X86_BIT)
 #define GLM_ARCH_SSE		(GLM_ARCH_SSE_BIT | GLM_ARCH_SIMD_BIT | GLM_ARCH_X86)
 #define GLM_ARCH_SSE2		(GLM_ARCH_SSE2_BIT | GLM_ARCH_SSE)
@@ -254,7 +251,9 @@
 #define GLM_ARCH_MIPS		(GLM_ARCH_MIPS_BIT)
 #define GLM_ARCH_PPC		(GLM_ARCH_PPC_BIT)
 
-#if defined(GLM_FORCE_PURE) || defined(GLM_FORCE_XYZW_ONLY)
+#ifdef GLM_FORCE_ARCH_UNKNOWN
+#	define GLM_ARCH GLM_ARCH_UNKNOWN
+#elif defined(GLM_FORCE_PURE) || defined(GLM_FORCE_XYZW_ONLY)
 #	if defined(__x86_64__) || defined(_M_X64) || defined(_M_IX86) || defined(__i386__)
 #		define GLM_ARCH (GLM_ARCH_X86)
 #	elif defined(__arm__ ) || defined(_M_ARM)

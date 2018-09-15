@@ -1,14 +1,15 @@
 /// @ref ext_vector_float1
 /// @file glm/ext/vector_float1.hpp
 ///
-/// @see core (dependence)
-///
 /// @defgroup ext_vector_float1 GLM_EXT_vector_float1
 /// @ingroup ext
 ///
+/// Exposes single-precision floating point vector type with one component.
+///
 /// Include <glm/ext/vector_float1.hpp> to use the features of this extension.
 ///
-/// Exposes vec1 vector type.
+/// @see ext_vector_float1_precision extension.
+/// @see ext_vector_double1 extension.
 
 #pragma once
 
@@ -23,16 +24,8 @@ namespace glm
 	/// @addtogroup ext_vector_float1
 	/// @{
 
-#	if GLM_CONFIG_PRECISION_FLOAT == GLM_LOWP
-		typedef vec<1, float, lowp>			vec1;
-#	elif GLM_CONFIG_PRECISION_FLOAT == GLM_MEDIUMP
-		typedef vec<1, float, mediump>		vec1;
-#	else
-		/// 1 components vector of single-precision floating-point numbers.
-		///
-		/// @see ext_vector_float1 extension.
-		typedef vec<1, float, highp>		vec1;
-#	endif
+	/// 1 components vector of single-precision floating-point numbers.
+	typedef vec<1, float, defaultp>		vec1;
 
 	/// @}
 }//namespace glm

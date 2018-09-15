@@ -1,18 +1,17 @@
 #ifndef GLM_FORCE_PURE
 #	define GLM_FORCE_PURE
 #endif//GLM_FORCE_PURE
-#define GLM_FORCE_ALIGNED
+#define GLM_FORCE_DEFAULT_ALIGNED_GENTYPES
 #define GLM_FORCE_SWIZZLE
 #include <glm/ext/vector_relational.hpp>
 #include <glm/vector_relational.hpp>
 #include <glm/vec2.hpp>
 #include <glm/vec3.hpp>
 #include <glm/vec4.hpp>
-#include <cstdio>
 #include <ctime>
 #include <vector>
 
-int test_vec4_ctor()
+static int test_vec4_ctor()
 {
 	int Error = 0;
 
@@ -138,7 +137,7 @@ int test_vec4_ctor()
 	return Error;
 }
 
-int test_bvec4_ctor()
+static int test_bvec4_ctor()
 {
 	int Error = 0;
 
@@ -162,7 +161,7 @@ int test_bvec4_ctor()
 	return Error;
 }
 
-int test_vec4_operators()
+static int test_vec4_operators()
 {
 	int Error = 0;
 	
@@ -298,7 +297,7 @@ int test_vec4_operators()
 	return Error;
 }
 
-int test_vec4_equal()
+static int test_vec4_equal()
 {
 	int Error = 0;
 
@@ -319,7 +318,7 @@ int test_vec4_equal()
 	return Error;
 }
 
-int test_vec4_size()
+static int test_vec4_size()
 {
 	int Error = 0;
 
@@ -337,36 +336,37 @@ int test_vec4_size()
 	return Error;
 }
 
-int test_vec4_swizzle_partial()
+static int test_vec4_swizzle_partial()
 {
 	int Error = 0;
 
-	glm::vec4 A(1, 2, 3, 4);
-
 #	if GLM_CONFIG_SWIZZLE == GLM_SWIZZLE_OPERATOR
+
+	glm::ivec4 A(1, 2, 3, 4);
+
 	{
-		glm::vec4 B(A.xy, A.zw);
+		glm::ivec4 B(A.xy, A.zw);
 		Error += A == B ? 0 : 1;
 	}
 	{
-		glm::vec4 B(A.xy, 3.0f, 4.0f);
+		glm::ivec4 B(A.xy, 3, 4);
 		Error += A == B ? 0 : 1;
 	}
 	{
-		glm::vec4 B(1.0f, A.yz, 4.0f);
+		glm::ivec4 B(1, A.yz, 4);
 		Error += A == B ? 0 : 1;
 	}
 	{
-		glm::vec4 B(1.0f, 2.0f, A.zw);
+		glm::ivec4 B(1, 2, A.zw);
 		Error += A == B ? 0 : 1;
 	}
 
 	{
-		glm::vec4 B(A.xyz, 4.0f);
+		glm::ivec4 B(A.xyz, 4);
 		Error += A == B ? 0 : 1;
 	}
 	{
-		glm::vec4 B(1.0f, A.yzw);
+		glm::ivec4 B(1, A.yzw);
 		Error += A == B ? 0 : 1;
 	}
 #	endif
@@ -374,7 +374,7 @@ int test_vec4_swizzle_partial()
 	return Error;
 }
 
-int test_operator_increment()
+static int test_operator_increment()
 {
 	int Error(0);
 
@@ -401,34 +401,7 @@ int test_operator_increment()
 	return Error;
 }
 
-namespace heap
-{
-	struct A
-	{
-		float f;
-	};
-
-	struct B : public A
-	{
-		float g;
-		glm::vec4 v;
-	};
-
-	int test()
-	{
-		int Error = 0;
-
-		A* p = new B;
-		p->f = 0.f;
-		delete p;
-
-		Error += sizeof(B) == (sizeof(glm::vec4) + sizeof(float) * 2) ? 0 : 1;
-
-		return Error;
-	}
-}//namespace heap
-
-int test_vec4_simd()
+static int test_vec4_simd()
 {
 	int Error = 0;
 
@@ -455,7 +428,6 @@ int main()
 	Error += test_vec4_swizzle_partial();
 	Error += test_vec4_simd();
 	Error += test_operator_increment();
-	Error += heap::test();
 
 	return Error;
 }

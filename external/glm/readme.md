@@ -26,8 +26,9 @@ Thanks for contributing to the project by [submitting issues](https://github.com
 #include <glm/vec3.hpp> // glm::vec3
 #include <glm/vec4.hpp> // glm::vec4
 #include <glm/mat4x4.hpp> // glm::mat4
-#include <glm/gtc/matrix_transform.hpp> // glm::translate, glm::rotate, glm::scale, glm::perspective
-#include <glm/gtc/constants.hpp> // glm::pi
+#include <glm/ext/matrix_transform.hpp> // glm::translate, glm::rotate, glm::scale
+#include <glm/ext/matrix_clip_space.hpp> // glm::perspective
+#include <glm/ext/constants.hpp> // glm::pi
 
 glm::mat4 camera(float Translate, glm::vec2 const& Rotate)
 {
@@ -46,12 +47,19 @@ glm::mat4 camera(float Translate, glm::vec2 const& Rotate)
 
 | Service | System | Compiler | Status |
 | ------- | ------ | -------- | ------ |
-| [Travis CI](https://travis-ci.org/g-truc/glm)| MacOSX, Linux 64 bits | Clang 3.4, Clang 3.6, Clang 4.0, GCC 4.9, GCC 7.0 | [![Travis CI](https://travis-ci.org/g-truc/glm.svg?branch=master)](https://travis-ci.org/g-truc/glm)
+| [Travis CI](https://travis-ci.org/g-truc/glm)| MacOSX, Linux 64 bits | Clang 3.6, Clang 5.0, GCC 4.9, GCC 7.3 | [![Travis CI](https://travis-ci.org/g-truc/glm.svg?branch=master)](https://travis-ci.org/g-truc/glm)
 | [AppVeyor](https://ci.appveyor.com/project/Groovounet/glm)| Windows 32 and 64 | Visual Studio 2013, Visual Studio 2015, Visual Studio 2017 | [![AppVeyor](https://ci.appveyor.com/api/projects/status/32r7s2skrgm9ubva?svg=true)](https://ci.appveyor.com/project/Groovounet/glm)
 
 ## Release notes
 
-### [GLM 0.9.9.1](https://github.com/g-truc/glm/commits/master) - 2018-0X-XX
+### [GLM 0.9.9.3](https://github.com/g-truc/glm/commits/master) - 201X-XX-XX
+
+### [GLM 0.9.9.2](https://github.com/g-truc/glm/releases/tag/0.9.9.2) - 2018-09-14
+#### Fixes:
+- Fixed GLM_FORCE_CXX** section in the manual
+- Fixed default initialization with vector and quaternion types using GLM_FORCE_CTOR_INIT #812
+
+### [GLM 0.9.9.1](https://github.com/g-truc/glm/releases/tag/0.9.9.1) - 2018-09-03
 #### Features:
 - Added bitfieldDeinterleave to GTC_bitfield
 - Added missing equal and notEqual with epsilon for quaternion types to GTC_quaternion
@@ -59,15 +67,21 @@ glm::mat4 camera(float Translate, glm::vec2 const& Rotate)
 - Added missing aligned matrix types to GTC_type_aligned
 - Added C++17 detection
 - Added Visual C++ language standard version detection
+- Added PDF manual build from markdown
 
 #### Improvements:
+- Added a section to the manual for contributing to GLM
+- Refactor manual, lists all configuration defines
 - Added missing vec1 based constructors
 - Redesigned constexpr support which excludes both SIMD and constexpr #783
 - Added detection of Visual C++ 2017 toolsets
 - Added identity functions #765
-- Split headers to improve compilation time #670
+- Splitted headers into EXT extensions to improve compilation time #670
+- Added separated performance tests
+- Clarified refract valid range of the indices of refraction, between -1 and 1 inclusively #806
 
 #### Fixes:
+- Fixed SIMD detection on Clang and GCC
 - Fixed build problems due to printf and std::clock_t #778
 - Fixed int mod
 - Anonymous unions require C++ language extensions

@@ -10,7 +10,6 @@ glmCreateTestGTC(core_force_xyzw_only)
 glmCreateTestGTC(core_type_aligned)
 glmCreateTestGTC(core_type_cast)
 glmCreateTestGTC(core_type_ctor)
-glmCreateTestGTC(core_type_float)
 glmCreateTestGTC(core_type_int)
 glmCreateTestGTC(core_type_length)
 glmCreateTestGTC(core_type_mat2x2)
@@ -42,7 +41,5 @@ glmCreateTestGTC(core_func_swizzle)
 glmCreateTestGTC(core_setup_force_cxx98)
 glmCreateTestGTC(core_setup_force_size_t_length)
 glmCreateTestGTC(core_setup_message)
+glmCreateTestGTC(core_setup_platform_unknown)
 glmCreateTestGTC(core_setup_precision)
-
-
-

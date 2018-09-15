@@ -1,10 +1,6 @@
-/// @ref core
-/// @file glm/detail/qualifier.hpp
-
 #pragma once
 
 #include "setup.hpp"
-#include "type_int.hpp"
 
 namespace glm
 {
@@ -119,13 +115,13 @@ namespace detail
 	};
 
 	template<>
-	struct storage<4, int32, true>
+	struct storage<4, int, true>
 	{
 		typedef glm_i32vec4 type;
 	};
 
 	template<>
-	struct storage<4, uint32, true>
+	struct storage<4, unsigned int, true>
 	{
 		typedef glm_u32vec4 type;
 	};
@@ -137,13 +133,13 @@ namespace detail
 	};
 
 	template<>
-	struct storage<2, int64, true>
+	struct storage<2, detail::int64, true>
 	{
 		typedef glm_i64vec2 type;
 	};
 
 	template<>
-	struct storage<2, uint64, true>
+	struct storage<2, detail::uint64, true>
 	{
 		typedef glm_u64vec2 type;
 	};
@@ -159,13 +155,13 @@ namespace detail
 
 #	if (GLM_ARCH & GLM_ARCH_AVX2_BIT)
 	template<>
-	struct storage<4, int64, true>
+	struct storage<4, detail::int64, true>
 	{
 		typedef glm_i64vec4 type;
 	};
 
 	template<>
-	struct storage<4, uint64, true>
+	struct storage<4, detail::uint64, true>
 	{
 		typedef glm_u64vec4 type;
 	};
