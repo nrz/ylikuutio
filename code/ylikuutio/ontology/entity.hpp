@@ -22,7 +22,7 @@ namespace yli
         class Entity
         {
             public:
-                virtual void bind_to_new_parent(yli::ontology::Entity* new_entity_parent);
+                virtual void bind_to_new_parent(yli::ontology::Entity* const new_entity_parent);
 
                 // constructor.
                 Entity(yli::ontology::Universe* const universe);
