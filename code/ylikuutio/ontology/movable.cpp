@@ -17,7 +17,7 @@ namespace yli
             // destructor.
         }
 
-        glm::vec3& Movable::get_cartesian_coordinates()
+        const glm::vec3& Movable::get_cartesian_coordinates()
         {
             return this->cartesian_coordinates;
         }
