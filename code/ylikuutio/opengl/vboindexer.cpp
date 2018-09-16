@@ -28,9 +28,9 @@ bool is_near(float v1, float v2)
 // for a similar one.
 // Similar = same position + same UVs + same normal
 bool getSimilarVertexIndex(
-        glm::vec3 &in_vertex,
-        glm::vec2 &in_uv,
-        glm::vec3 &in_normal,
+        glm::vec3& in_vertex,
+        glm::vec2& in_uv,
+        glm::vec3& in_normal,
         std::vector<glm::vec3>& out_vertices,
         std::vector<glm::vec2>& out_UVs,
         std::vector<glm::vec3>& out_normals,
@@ -74,9 +74,9 @@ namespace yli
         };
 
         bool getSimilarVertexIndex_fast(
-                PackedVertex &packed,
+                PackedVertex& packed,
                 std::map<PackedVertex, GLuint>& VertexToOutIndex,
-                GLuint &result)
+                GLuint& result)
         {
             std::map<PackedVertex, GLuint>::iterator it = VertexToOutIndex.find(packed);
             if (it == VertexToOutIndex.end())
