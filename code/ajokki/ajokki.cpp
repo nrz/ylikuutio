@@ -90,22 +90,6 @@
 #include <unordered_map> // std::unordered_map
 #include <vector>        // std::vector
 
-// texture file format: bmp/...
-std::string g_texture_file_format = "bmp";
-
-// color channel to use for height data.
-std::string g_height_data_color_channel = "mean"; // "all" is equivalent to "mean".
-
-// texture filename.
-std::string g_texture_filename = "GrassGreenTexture0002.bmp";
-
-// font texture file format: bmp/...
-std::string g_font_texture_file_format = "bmp";
-
-// font texture filename.
-// std::string g_font_texture_filename = "Holstein.DDS";
-std::string g_font_texture_filename = "Holstein.bmp";
-
 int main(const int argc, const char* argv[])
 {
     yli::command_line::CommandLineMaster command_line_master(argc, argv);
@@ -276,8 +260,8 @@ int main(const int argc, const char* argv[])
     // Create the material, store it in `altiplano_grass_material`.
     MaterialStruct altiplano_grass_material_struct;
     altiplano_grass_material_struct.shader = altiplano_shader;
-    altiplano_grass_material_struct.texture_file_format = g_texture_file_format;
-    altiplano_grass_material_struct.texture_filename = g_texture_filename;
+    altiplano_grass_material_struct.texture_file_format = "bmp";
+    altiplano_grass_material_struct.texture_filename = "GrassGreenTexture0002.bmp";
 
     std::cout << "Creating yli::ontology::Entity* altiplano_grass_material_entity ...\n";
     yli::ontology::Entity* altiplano_grass_material_entity = entity_factory->create_Material(altiplano_grass_material_struct);
@@ -299,7 +283,7 @@ int main(const int argc, const char* argv[])
     altiplano_terrain_species_struct.material = altiplano_grass_material;
     altiplano_terrain_species_struct.model_file_format = "SRTM";
     altiplano_terrain_species_struct.model_filename = "./"; // for testing
-    altiplano_terrain_species_struct.color_channel = g_height_data_color_channel;
+    altiplano_terrain_species_struct.color_channel = "mean"; // "all" is equivalent to "mean".
     altiplano_terrain_species_struct.light_position = glm::vec3(0, 100000, 100000);
     altiplano_terrain_species_struct.latitude = -16.50f;  // in degrees.
     altiplano_terrain_species_struct.longitude = -68.15f; // in degrees.
@@ -350,8 +334,8 @@ int main(const int argc, const char* argv[])
     current_keyrelease_callback_engine_vector_pointer = &action_mode_keyrelease_callback_engines;
 
     // Initialize our little text library with the Holstein font
-    const char* char_g_font_texture_filename = g_font_texture_filename.c_str();
-    const char* char_g_font_texture_file_format = g_font_texture_file_format.c_str();
+    const char* char_g_font_texture_filename = "Holstein.bmp";
+    const char* char_g_font_texture_file_format = "bmp";
 
     std::cout << "Creating yli::ontology::Entity* my_font2D_entity ...\n";
     yli::ontology::Entity* my_font2D_entity = entity_factory->create_Font2D(
