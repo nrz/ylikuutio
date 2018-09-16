@@ -90,26 +90,13 @@
 #include <unordered_map> // std::unordered_map
 #include <vector>        // std::vector
 
-// model filename.
-// std::string g_model_filename = "cube.obj";
-// std::string g_model_filename = "oma_icosphere.obj";
-// std::string g_model_filename = "kirjainkuutio.obj";
-// std::string g_model_filename = "noise1024x1024.bmp";
-std::string g_model_filename = "noise256x256.bmp";
-// std::string g_model_filename = "noise128x128.bmp";
-
 // texture file format: bmp/...
 std::string g_texture_file_format = "bmp";
 
 // color channel to use for height data.
-// std::string g_height_data_color_channel = "red";
-// std::string g_height_data_color_channel = "green";
-// std::string g_height_data_color_channel = "blue";
 std::string g_height_data_color_channel = "mean"; // "all" is equivalent to "mean".
 
 // texture filename.
-// std::string_g_texture_filename = "kuutio-uv-numerot.bmp";
-// std::string g_texture_filename = "punamusta.bmp";
 std::string g_texture_filename = "GrassGreenTexture0002.bmp";
 
 // font texture file format: bmp/...
