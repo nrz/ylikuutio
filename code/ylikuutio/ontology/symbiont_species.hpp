@@ -8,7 +8,7 @@
 #include "symbiont_material.hpp"
 #include "species_struct.hpp"
 #include "render_templates.hpp"
-#include "vboindexer.hpp"
+#include "code/ylikuutio/opengl/vboindexer.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include GLEW

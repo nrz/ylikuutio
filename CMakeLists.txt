@@ -567,14 +567,14 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/vertex_graph.hpp
     code/ylikuutio/ontology/vertex_node.cpp
     code/ylikuutio/ontology/vertex_node.hpp
-    code/ylikuutio/ontology/vboindexer.cpp
-    code/ylikuutio/ontology/vboindexer.hpp
     code/ylikuutio/ontology/world.cpp
     code/ylikuutio/ontology/world.hpp
 
     # opengl, in alphabetical order
     code/ylikuutio/opengl/opengl.cpp
     code/ylikuutio/opengl/opengl.hpp
+    code/ylikuutio/opengl/vboindexer.cpp
+    code/ylikuutio/opengl/vboindexer.hpp
 
     # shaders, in alphabetical order
     code/ylikuutio/shaders/StandardShading.fragmentshader
