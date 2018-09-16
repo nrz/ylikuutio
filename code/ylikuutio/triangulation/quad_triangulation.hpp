@@ -35,7 +35,6 @@
 #include <cstddef>  // std::size_t
 #include <cstring>  // std::memcmp, std::strcmp, std::strlen, std::strncmp
 #include <iostream> // std::cout, std::cin, std::cerr
-#include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
 
 namespace yli
@@ -45,7 +44,7 @@ namespace yli
         template<class T1>
             bool triangulate_quads(
                     const T1* input_vertex_pointer,
-                    const yli::geometry::TriangulateQuadsStruct triangulate_quads_struct,
+                    const yli::geometry::TriangulateQuadsStruct& triangulate_quads_struct,
                     std::vector<glm::vec3>& out_vertices,
                     std::vector<glm::vec2>& out_UVs,
                     std::vector<glm::vec3>& out_normals)
@@ -170,8 +169,6 @@ namespace yli
 
                 std::cout << "number of faces: " << n_faces << ".\n";
 
-                uint32_t vertex_index[3], uv_index[3], normal_index[3];
-
                 if (is_bilinear_interpolation_in_use)
                 {
                     // 2. Interpolate the vertices between, using bilinear interpolation, `push_back` to `temp_vertices`.
@@ -257,9 +254,6 @@ namespace yli
                             temp_vertices,
                             temp_UVs,
                             temp_normals,
-                            vertex_index,
-                            uv_index,
-                            normal_index,
                             out_vertices,
                             out_UVs,
                             out_normals,

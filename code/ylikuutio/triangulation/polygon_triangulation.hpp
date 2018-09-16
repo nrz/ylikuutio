@@ -17,13 +17,13 @@ namespace yli
     namespace geometry
     {
         bool triangulate_simple_polygon(
-                const yli::geometry::TriangulatePolygonsStruct triangulate_polygons_struct,
+                const yli::geometry::TriangulatePolygonsStruct& triangulate_polygons_struct,
                 std::vector<glm::vec3>& out_vertices,
                 std::vector<glm::vec2>& out_UVs,
                 std::vector<glm::vec3>& out_normals);
 
         bool triangulate_polygons(
-                const yli::geometry::TriangulatePolygonsStruct triangulate_polygons_struct,
+                const yli::geometry::TriangulatePolygonsStruct& triangulate_polygons_struct,
                 std::vector<glm::vec3>& out_vertices,
                 std::vector<glm::vec2>& out_UVs,
                 std::vector<glm::vec3>& out_normals);

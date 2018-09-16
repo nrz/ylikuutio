@@ -34,7 +34,6 @@
 #include "code/ylikuutio/console/console_struct.hpp"
 #include "code/ylikuutio/console/console_callback_object.hpp"
 #include "code/ylikuutio/input/input.hpp"
-#include "code/ylikuutio/ontology/vboindexer.hpp"
 #include "code/ylikuutio/ontology/font2D.hpp"
 #include "code/ylikuutio/ontology/object.hpp"
 #include "code/ylikuutio/ontology/object_struct.hpp"
@@ -57,6 +56,7 @@
 #include "code/ylikuutio/config/setting_master.hpp"
 #include "code/ylikuutio/config/setting_struct.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
+#include "code/ylikuutio/opengl/vboindexer.hpp"
 #include "code/ylikuutio/time/time.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
 #include "code/ylikuutio/common/printing_struct.hpp"
@@ -85,39 +85,10 @@
 #include <iostream>      // std::cout, std::cin, std::cerr
 #include <limits>        // std::numeric_limits
 #include <memory>        // std::make_shared, std::shared_ptr
-#include <string>        // std::string
 #include <stdint.h>      // uint32_t etc.
+#include <string>        // std::string
 #include <unordered_map> // std::unordered_map
 #include <vector>        // std::vector
-
-// model filename.
-// std::string g_model_filename = "cube.obj";
-// std::string g_model_filename = "oma_icosphere.obj";
-// std::string g_model_filename = "kirjainkuutio.obj";
-// std::string g_model_filename = "noise1024x1024.bmp";
-std::string g_model_filename = "noise256x256.bmp";
-// std::string g_model_filename = "noise128x128.bmp";
-
-// texture file format: bmp/...
-std::string g_texture_file_format = "bmp";
-
-// color channel to use for height data.
-// std::string g_height_data_color_channel = "red";
-// std::string g_height_data_color_channel = "green";
-// std::string g_height_data_color_channel = "blue";
-std::string g_height_data_color_channel = "mean"; // "all" is equivalent to "mean".
-
-// texture filename.
-// std::string_g_texture_filename = "kuutio-uv-numerot.bmp";
-// std::string g_texture_filename = "punamusta.bmp";
-std::string g_texture_filename = "GrassGreenTexture0002.bmp";
-
-// font texture file format: bmp/...
-std::string g_font_texture_file_format = "bmp";
-
-// font texture filename.
-// std::string g_font_texture_filename = "Holstein.DDS";
-std::string g_font_texture_filename = "Holstein.bmp";
 
 int main(const int argc, const char* argv[])
 {
@@ -200,6 +171,7 @@ int main(const int argc, const char* argv[])
 
     if (earth_world == nullptr)
     {
+        cleanup_callback_engine->execute();
         return -1;
     }
 
@@ -219,6 +191,7 @@ int main(const int argc, const char* argv[])
 
     if (helsinki_east_downtown_scene_entity == nullptr)
     {
+        cleanup_callback_engine->execute();
         return -1;
     }
 
@@ -229,6 +202,7 @@ int main(const int argc, const char* argv[])
 
     if (helsinki_east_downtown_scene == nullptr)
     {
+        cleanup_callback_engine->execute();
         return -1;
     }
 
@@ -243,6 +217,7 @@ int main(const int argc, const char* argv[])
     std::cout << "Creating yli::ontology::Scene* joensuu_center_west_scene and its contents ...\n";
     if (ajokki::create_joensuu_center_west_scene(entity_factory, earth_world) == nullptr)
     {
+        cleanup_callback_engine->execute();
         return -1;
     }
 
@@ -258,6 +233,7 @@ int main(const int argc, const char* argv[])
     if (altiplano_scene == nullptr)
     {
         std::cerr << "Failed to create Scene.\n";
+        cleanup_callback_engine->execute();
         return -1;
     }
 
@@ -283,14 +259,15 @@ int main(const int argc, const char* argv[])
     if (altiplano_shader == nullptr)
     {
         std::cerr << "Failed to create Shader.\n";
+        cleanup_callback_engine->execute();
         return -1;
     }
 
     // Create the material, store it in `altiplano_grass_material`.
     MaterialStruct altiplano_grass_material_struct;
     altiplano_grass_material_struct.shader = altiplano_shader;
-    altiplano_grass_material_struct.texture_file_format = g_texture_file_format;
-    altiplano_grass_material_struct.texture_filename = g_texture_filename;
+    altiplano_grass_material_struct.texture_file_format = "bmp";
+    altiplano_grass_material_struct.texture_filename = "GrassGreenTexture0002.bmp";
 
     std::cout << "Creating yli::ontology::Entity* altiplano_grass_material_entity ...\n";
     yli::ontology::Entity* altiplano_grass_material_entity = entity_factory->create_Material(altiplano_grass_material_struct);
@@ -300,6 +277,7 @@ int main(const int argc, const char* argv[])
     if (altiplano_grass_material == nullptr)
     {
         std::cerr << "Failed to create grass Material.\n";
+        cleanup_callback_engine->execute();
         return -1;
     }
 
@@ -312,7 +290,7 @@ int main(const int argc, const char* argv[])
     altiplano_terrain_species_struct.material = altiplano_grass_material;
     altiplano_terrain_species_struct.model_file_format = "SRTM";
     altiplano_terrain_species_struct.model_filename = "./"; // for testing
-    altiplano_terrain_species_struct.color_channel = g_height_data_color_channel;
+    altiplano_terrain_species_struct.color_channel = "mean"; // "all" is equivalent to "mean".
     altiplano_terrain_species_struct.light_position = glm::vec3(0, 100000, 100000);
     altiplano_terrain_species_struct.latitude = -16.50f;  // in degrees.
     altiplano_terrain_species_struct.longitude = -68.15f; // in degrees.
@@ -330,6 +308,7 @@ int main(const int argc, const char* argv[])
     if (altiplano_terrain_species == nullptr)
     {
         std::cerr << "Failed to create Species.\n";
+        cleanup_callback_engine->execute();
         return -1;
     }
 
@@ -363,8 +342,8 @@ int main(const int argc, const char* argv[])
     current_keyrelease_callback_engine_vector_pointer = &action_mode_keyrelease_callback_engines;
 
     // Initialize our little text library with the Holstein font
-    const char* char_g_font_texture_filename = g_font_texture_filename.c_str();
-    const char* char_g_font_texture_file_format = g_font_texture_file_format.c_str();
+    const char* char_g_font_texture_filename = "Holstein.bmp";
+    const char* char_g_font_texture_file_format = "bmp";
 
     std::cout << "Creating yli::ontology::Entity* my_font2D_entity ...\n";
     yli::ontology::Entity* my_font2D_entity = entity_factory->create_Font2D(
@@ -378,6 +357,7 @@ int main(const int argc, const char* argv[])
     if (my_font2D == nullptr)
     {
         std::cerr << "Failed to create Font2D.\n";
+        cleanup_callback_engine->execute();
         return -1;
     }
 

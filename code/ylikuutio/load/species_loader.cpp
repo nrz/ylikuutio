@@ -5,7 +5,7 @@
 #include "ascii_grid_loader.hpp"
 #include "bmp_heightmap_loader.hpp"
 #include "srtm_heightmap_loader.hpp"
-#include "code/ylikuutio/ontology/vboindexer.hpp"
+#include "code/ylikuutio/opengl/vboindexer.hpp"
 
 // Include GLEW
 #ifndef __GL_GLEW_H_INCLUDED
@@ -119,7 +119,7 @@ namespace yli
             if (needs_indexing)
             {
                 // Fill the index buffer.
-                yli::ontology::indexVBO(
+                yli::opengl::indexVBO(
                         out_vertices,
                         out_UVs,
                         out_normals,

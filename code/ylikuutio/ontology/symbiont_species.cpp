@@ -1,5 +1,4 @@
 #include "symbiont_species.hpp"
-#include "vboindexer.hpp"
 #include "universe.hpp"
 #include "scene.hpp"
 #include "shader.hpp"
@@ -8,6 +7,7 @@
 #include "object.hpp"
 #include "species_or_glyph.hpp"
 #include "render_templates.hpp"
+#include "code/ylikuutio/opengl/vboindexer.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include GLEW

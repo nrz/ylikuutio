@@ -18,12 +18,12 @@
 
 namespace yli
 {
-    namespace ontology
+    namespace opengl
     {
         void indexVBO(
-                std::vector<glm::vec3>& in_vertices,
-                std::vector<glm::vec2>& in_uvs,
-                std::vector<glm::vec3>& in_normals,
+                const std::vector<glm::vec3>& in_vertices,
+                const std::vector<glm::vec2>& in_uvs,
+                const std::vector<glm::vec3>& in_normals,
                 std::vector<GLuint>& out_indices,
                 std::vector<glm::vec3>& out_vertices,
                 std::vector<glm::vec2>& out_uvs,

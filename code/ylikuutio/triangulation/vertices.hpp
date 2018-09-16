@@ -24,24 +24,21 @@ namespace yli
     namespace geometry
     {
         void output_triangle_vertices(
-                std::vector<glm::vec3>& temp_vertices,
-                std::vector<glm::vec2>& temp_UVs,
-                std::vector<glm::vec3>& temp_normals,
-                GLuint vertex_index[3],
-                GLuint uv_index[3],
-                GLuint normal_index[3],
+                const std::vector<glm::vec3>& temp_vertices,
+                const std::vector<glm::vec2>& temp_UVs,
+                const std::vector<glm::vec3>& temp_normals,
+                const GLuint vertex_index[3],
+                const GLuint uv_index[3],
+                const GLuint normal_index[3],
                 std::vector<glm::vec3>& out_vertices,
                 std::vector<glm::vec2>& out_UVs,
                 std::vector<glm::vec3>& out_normals);
 
         bool define_vertices_UVs_and_normals(
-                const yli::geometry::TriangulateQuadsStruct triangulate_quads_struct,
-                std::vector<glm::vec3>& temp_vertices,
-                std::vector<glm::vec2>& temp_UVs,
-                std::vector<glm::vec3>& temp_normals,
-                GLuint vertex_index[3],
-                GLuint uv_index[3],
-                GLuint normal_index[3],
+                const yli::geometry::TriangulateQuadsStruct& triangulate_quads_struct,
+                const std::vector<glm::vec3>& temp_vertices,
+                const std::vector<glm::vec2>& temp_UVs,
+                const std::vector<glm::vec3>& temp_normals,
                 std::vector<glm::vec3>& out_vertices,
                 std::vector<glm::vec2>& out_UVs,
                 std::vector<glm::vec3>& out_normals,

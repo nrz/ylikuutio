@@ -8,7 +8,7 @@
 #include "symbiont_material.hpp"
 #include "species_struct.hpp"
 #include "render_templates.hpp"
-#include "vboindexer.hpp"
+#include "code/ylikuutio/opengl/vboindexer.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include GLEW
@@ -91,7 +91,7 @@ namespace yli
                     glUniform1f(water_level_uniform_location, scene->get_water_level());
 
                     // Fill the index buffer.
-                    yli::ontology::indexVBO(
+                    yli::opengl::indexVBO(
                             this->vertices,
                             this->uvs,
                             this->normals,

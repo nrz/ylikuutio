@@ -28,9 +28,9 @@ bool is_near(float v1, float v2)
 // for a similar one.
 // Similar = same position + same UVs + same normal
 bool getSimilarVertexIndex(
-        glm::vec3 &in_vertex,
-        glm::vec2 &in_uv,
-        glm::vec3 &in_normal,
+        const glm::vec3& in_vertex,
+        const glm::vec2& in_uv,
+        const glm::vec3& in_normal,
         std::vector<glm::vec3>& out_vertices,
         std::vector<glm::vec2>& out_UVs,
         std::vector<glm::vec3>& out_normals,
@@ -60,7 +60,7 @@ bool getSimilarVertexIndex(
 
 namespace yli
 {
-    namespace ontology
+    namespace opengl
     {
         struct PackedVertex
         {
@@ -74,11 +74,11 @@ namespace yli
         };
 
         bool getSimilarVertexIndex_fast(
-                PackedVertex &packed,
-                std::map<PackedVertex, GLuint>& VertexToOutIndex,
-                GLuint &result)
+                const PackedVertex& packed,
+                const std::map<PackedVertex, GLuint>& VertexToOutIndex,
+                GLuint& result)
         {
-            std::map<PackedVertex, GLuint>::iterator it = VertexToOutIndex.find(packed);
+            const std::map<PackedVertex, GLuint>::const_iterator it = VertexToOutIndex.find(packed);
             if (it == VertexToOutIndex.end())
             {
                 return false;
@@ -91,9 +91,9 @@ namespace yli
         }
 
         void indexVBO(
-                std::vector<glm::vec3>& in_vertices,
-                std::vector<glm::vec2>& in_UVs,
-                std::vector<glm::vec3>& in_normals,
+                const std::vector<glm::vec3>& in_vertices,
+                const std::vector<glm::vec2>& in_UVs,
+                const std::vector<glm::vec3>& in_normals,
                 std::vector<GLuint>& out_indices,
                 std::vector<glm::vec3>& out_vertices,
                 std::vector<glm::vec2>& out_UVs,
