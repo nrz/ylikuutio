@@ -171,6 +171,7 @@ int main(const int argc, const char* argv[])
 
     if (earth_world == nullptr)
     {
+        cleanup_callback_engine->execute();
         return -1;
     }
 
@@ -190,6 +191,7 @@ int main(const int argc, const char* argv[])
 
     if (helsinki_east_downtown_scene_entity == nullptr)
     {
+        cleanup_callback_engine->execute();
         return -1;
     }
 
@@ -200,6 +202,7 @@ int main(const int argc, const char* argv[])
 
     if (helsinki_east_downtown_scene == nullptr)
     {
+        cleanup_callback_engine->execute();
         return -1;
     }
 
@@ -214,6 +217,7 @@ int main(const int argc, const char* argv[])
     std::cout << "Creating yli::ontology::Scene* joensuu_center_west_scene and its contents ...\n";
     if (ajokki::create_joensuu_center_west_scene(entity_factory, earth_world) == nullptr)
     {
+        cleanup_callback_engine->execute();
         return -1;
     }
 
@@ -229,6 +233,7 @@ int main(const int argc, const char* argv[])
     if (altiplano_scene == nullptr)
     {
         std::cerr << "Failed to create Scene.\n";
+        cleanup_callback_engine->execute();
         return -1;
     }
 
@@ -254,6 +259,7 @@ int main(const int argc, const char* argv[])
     if (altiplano_shader == nullptr)
     {
         std::cerr << "Failed to create Shader.\n";
+        cleanup_callback_engine->execute();
         return -1;
     }
 
@@ -271,6 +277,7 @@ int main(const int argc, const char* argv[])
     if (altiplano_grass_material == nullptr)
     {
         std::cerr << "Failed to create grass Material.\n";
+        cleanup_callback_engine->execute();
         return -1;
     }
 
@@ -301,6 +308,7 @@ int main(const int argc, const char* argv[])
     if (altiplano_terrain_species == nullptr)
     {
         std::cerr << "Failed to create Species.\n";
+        cleanup_callback_engine->execute();
         return -1;
     }
 
@@ -349,6 +357,7 @@ int main(const int argc, const char* argv[])
     if (my_font2D == nullptr)
     {
         std::cerr << "Failed to create Font2D.\n";
+        cleanup_callback_engine->execute();
         return -1;
     }
 
