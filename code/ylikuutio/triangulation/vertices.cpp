@@ -47,7 +47,7 @@ namespace yli
         }
 
         bool define_vertices_UVs_and_normals(
-                const yli::geometry::TriangulateQuadsStruct triangulate_quads_struct,
+                const yli::geometry::TriangulateQuadsStruct& triangulate_quads_struct,
                 const std::vector<glm::vec3>& temp_vertices,
                 const std::vector<glm::vec2>& temp_UVs,
                 const std::vector<glm::vec3>& temp_normals,

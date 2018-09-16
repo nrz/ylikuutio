@@ -45,7 +45,7 @@ namespace yli
         template<class T1>
             bool triangulate_quads(
                     const T1* input_vertex_pointer,
-                    const yli::geometry::TriangulateQuadsStruct triangulate_quads_struct,
+                    const yli::geometry::TriangulateQuadsStruct& triangulate_quads_struct,
                     std::vector<glm::vec3>& out_vertices,
                     std::vector<glm::vec2>& out_UVs,
                     std::vector<glm::vec3>& out_normals)
