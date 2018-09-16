@@ -119,7 +119,7 @@ namespace yli
             if (needs_indexing)
             {
                 // Fill the index buffer.
-                yli::ontology::indexVBO(
+                yli::opengl::indexVBO(
                         out_vertices,
                         out_UVs,
                         out_normals,

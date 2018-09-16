@@ -60,7 +60,7 @@ bool getSimilarVertexIndex(
 
 namespace yli
 {
-    namespace ontology
+    namespace opengl
     {
         struct PackedVertex
         {

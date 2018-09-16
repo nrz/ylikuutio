@@ -18,7 +18,7 @@
 
 namespace yli
 {
-    namespace ontology
+    namespace opengl
     {
         void indexVBO(
                 std::vector<glm::vec3>& in_vertices,
