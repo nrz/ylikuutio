@@ -358,6 +358,7 @@ namespace yli
             const uint16_t ctrl_alt_altgr_bitmask = KMOD_LCTRL | KMOD_RCTRL | KMOD_LALT | KMOD_RALT | KMOD_MODE;
 
             if (keyboard_event.state == SDL_PRESSED &&
+                    keyboard_event.keysym.scancode != SDL_SCANCODE_GRAVE &&
                     keyboard_event.keysym.sym != SDLK_UNKNOWN &&
                     keyboard_event.keysym.sym != SDLK_RETURN &&
                     keyboard_event.keysym.sym != SDLK_KP_ENTER &&
