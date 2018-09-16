@@ -51,9 +51,6 @@ namespace yli
                 const std::vector<glm::vec3>& temp_vertices,
                 const std::vector<glm::vec2>& temp_UVs,
                 const std::vector<glm::vec3>& temp_normals,
-                GLuint vertex_index[3],
-                GLuint uv_index[3],
-                GLuint normal_index[3],
                 std::vector<glm::vec3>& out_vertices,
                 std::vector<glm::vec2>& out_UVs,
                 std::vector<glm::vec3>& out_normals,
@@ -126,6 +123,10 @@ namespace yli
                     for (std::size_t x = 1; x < actual_image_width; x++)
                     {
                         std::size_t current_vertex_i = actual_image_width * z + x;
+
+                        GLuint vertex_index[3];
+                        GLuint uv_index[3];
+                        GLuint normal_index[3];
 
                         // This corresponds to "vn": specify normal of one vertex.
 
@@ -308,6 +309,10 @@ namespace yli
                     {
                         std::size_t current_vertex_i = actual_image_width * z + x;
 
+                        GLuint vertex_index[3];
+                        GLuint uv_index[3];
+                        GLuint normal_index[3];
+
                         // This corresponds to "vn": specify normal of one vertex.
 
                         // Then, define the triangles (2 faces).
@@ -416,6 +421,10 @@ namespace yli
                     for (std::size_t x = 1; x < actual_image_width; x++)
                     {
                         std::size_t current_vertex_i = actual_image_width * z + x;
+
+                        GLuint vertex_index[3];
+                        GLuint uv_index[3];
+                        GLuint normal_index[3];
 
                         // This corresponds to "vn": specify normal of one vertex.
 

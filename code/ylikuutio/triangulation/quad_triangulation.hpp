@@ -170,8 +170,6 @@ namespace yli
 
                 std::cout << "number of faces: " << n_faces << ".\n";
 
-                uint32_t vertex_index[3], uv_index[3], normal_index[3];
-
                 if (is_bilinear_interpolation_in_use)
                 {
                     // 2. Interpolate the vertices between, using bilinear interpolation, `push_back` to `temp_vertices`.
@@ -257,9 +255,6 @@ namespace yli
                             temp_vertices,
                             temp_UVs,
                             temp_normals,
-                            vertex_index,
-                            uv_index,
-                            normal_index,
                             out_vertices,
                             out_UVs,
                             out_normals,
