@@ -457,6 +457,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/load/fbx_symbiosis_loader.hpp
     code/ylikuutio/load/font_loader.cpp
     code/ylikuutio/load/font_loader.hpp
+    code/ylikuutio/load/heightmap_loader_struct.hpp
     code/ylikuutio/load/las_loader.cpp
     code/ylikuutio/load/las_loader.hpp
     code/ylikuutio/load/obj_loader.cpp

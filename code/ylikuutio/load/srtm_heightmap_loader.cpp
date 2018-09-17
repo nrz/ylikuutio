@@ -8,6 +8,7 @@
 #endif
 
 #include "srtm_heightmap_loader.hpp"
+#include "heightmap_loader_struct.hpp"
 #include "code/ylikuutio/geometry/spherical_terrain_struct.hpp"
 #include "code/ylikuutio/triangulation/triangulate_quads_struct.hpp"
 #include "code/ylikuutio/triangulation/quad_triangulation.hpp"
@@ -34,16 +35,11 @@ namespace yli
     namespace load
     {
         bool load_SRTM_terrain(
+                const HeightmapLoaderStruct& heightmap_loader_struct,
                 const std::string& image_path,
-                const float latitude,
-                const float longitude,
-                const float planet_radius,
-                const float divisor,
                 std::vector<glm::vec3>& out_vertices,
                 std::vector<glm::vec2>& out_UVs,
                 std::vector<glm::vec3>& out_normals,
-                const std::size_t x_step,
-                const std::size_t z_step,
                 const std::string& triangulation_type)
         {
             // For SRTM worlds, the right heightmap filename must be resolved first.
@@ -55,11 +51,11 @@ namespace yli
             // and positive value mean north for latitude and east for longitude.
             // Therefore the SRTM heightmap filename can be resolved by rounding both latitude and longitude down (towards negative infinity).
 
-            int32_t filename_latitude = std::floor(latitude);
-            int32_t filename_longitude = std::floor(longitude);
+            int32_t filename_latitude = std::floor(heightmap_loader_struct.latitude);
+            int32_t filename_longitude = std::floor(heightmap_loader_struct.longitude);
 
-            float southern_latitude = std::floor(latitude);
-            float western_longitude = std::floor(longitude);
+            float southern_latitude = std::floor(heightmap_loader_struct.latitude);
+            float western_longitude = std::floor(heightmap_loader_struct.longitude);
 
             float northern_latitude = southern_latitude + 1.0f;
             float eastern_longitude = western_longitude + 1.0f;
@@ -189,7 +185,7 @@ namespace yli
                     std::size_t y = static_cast<std::size_t>(*image_pointer) << 8 | static_cast<std::size_t>(*(image_pointer + 1));
 
                     image_pointer += sizeof(int16_t);
-                    *vertex_pointer++ = static_cast<float>(y) / divisor;
+                    *vertex_pointer++ = static_cast<float>(y) / heightmap_loader_struct.divisor;
                 }
                 image_pointer -= sizeof(int16_t) * (image_width_in_use + true_image_width);
             }
@@ -207,10 +203,10 @@ namespace yli
             yli::geometry::TriangulateQuadsStruct triangulate_quads_struct;
             triangulate_quads_struct.image_width = image_width_in_use;
             triangulate_quads_struct.image_height = image_height_in_use;
-            triangulate_quads_struct.x_step = x_step;
-            triangulate_quads_struct.z_step = z_step;
+            triangulate_quads_struct.x_step = heightmap_loader_struct.x_step;
+            triangulate_quads_struct.z_step = heightmap_loader_struct.z_step;
             triangulate_quads_struct.triangulation_type = triangulation_type;
-            triangulate_quads_struct.sphere_radius = planet_radius;
+            triangulate_quads_struct.sphere_radius = heightmap_loader_struct.planet_radius;
             triangulate_quads_struct.spherical_terrain_struct = spherical_terrain_struct;
 
             bool result = yli::geometry::triangulate_quads(vertex_data, triangulate_quads_struct, out_vertices, out_UVs, out_normals);
