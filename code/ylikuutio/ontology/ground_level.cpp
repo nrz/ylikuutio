@@ -23,7 +23,7 @@ namespace yli
     namespace ontology
     {
         float get_ground_level(
-                yli::ontology::Species* const terrain_species,
+                const yli::ontology::Species* const terrain_species,
                 const glm::vec3& position)
         {
             if (!terrain_species->is_terrain)
@@ -90,7 +90,7 @@ namespace yli
         }
 
         float get_floor_level(
-                yli::ontology::Species* const terrain_species,
+                const yli::ontology::Species* const terrain_species,
                 const glm::vec3& position)
         {
             if (!terrain_species->is_terrain)
