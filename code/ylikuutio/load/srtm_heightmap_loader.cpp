@@ -151,11 +151,8 @@ namespace yli
                 return false;
             }
 
-            uint8_t *image_pointer;
-            image_pointer = image_data + sizeof(int16_t) * (true_image_height - 1) * true_image_width; // start from southwestern corner.
-
-            float* vertex_pointer;
-            vertex_pointer = vertex_data;
+            uint8_t* image_pointer = image_data + sizeof(int16_t) * (true_image_height - 1) * true_image_width; // start from southwestern corner.
+            float* vertex_pointer = vertex_data;
 
             // start processing image_data.
             // 90 meters is for equator.
