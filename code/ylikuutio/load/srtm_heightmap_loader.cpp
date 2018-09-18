@@ -51,14 +51,14 @@ namespace yli
             // and positive value mean north for latitude and east for longitude.
             // Therefore the SRTM heightmap filename can be resolved by rounding both latitude and longitude down (towards negative infinity).
 
-            int32_t filename_latitude = std::floor(heightmap_loader_struct.latitude);
-            int32_t filename_longitude = std::floor(heightmap_loader_struct.longitude);
+            const int32_t filename_latitude = std::floor(heightmap_loader_struct.latitude);
+            const int32_t filename_longitude = std::floor(heightmap_loader_struct.longitude);
 
-            float southern_latitude = std::floor(heightmap_loader_struct.latitude);
-            float western_longitude = std::floor(heightmap_loader_struct.longitude);
+            const float southern_latitude = std::floor(heightmap_loader_struct.latitude);
+            const float western_longitude = std::floor(heightmap_loader_struct.longitude);
 
-            float northern_latitude = southern_latitude + 1.0f;
-            float eastern_longitude = western_longitude + 1.0f;
+            const float northern_latitude = southern_latitude + 1.0f;
+            const float eastern_longitude = western_longitude + 1.0f;
 
             std::string south_north_char;
             std::string west_east_char;
@@ -88,39 +88,39 @@ namespace yli
             std::stringstream latitude_stringstream;
             std::stringstream longitude_stringstream;
 
-            std::size_t SRTM_filename_n_of_latitude_chars = 2;
-            std::size_t SRTM_filename_n_of_longitude_chars = 3;
+            const std::size_t SRTM_filename_n_of_latitude_chars = 2;
+            const std::size_t SRTM_filename_n_of_longitude_chars = 3;
 
             latitude_stringstream << std::setw(SRTM_filename_n_of_latitude_chars) << std::setfill('0') << abs(filename_latitude);
             longitude_stringstream << std::setw(SRTM_filename_n_of_longitude_chars) << std::setfill('0') << abs(filename_longitude);
 
-            std::string latitude_string = latitude_stringstream.str();
-            std::string longitude_string = longitude_stringstream.str();
+            const std::string latitude_string = latitude_stringstream.str();
+            const std::string longitude_string = longitude_stringstream.str();
 
-            std::string hgt_suffix = ".hgt";
+            const std::string hgt_suffix = ".hgt";
 
-            std::string abs_image_path = image_path + south_north_char + latitude_string + west_east_char + longitude_string + hgt_suffix;
+            const std::string abs_image_path = image_path + south_north_char + latitude_string + west_east_char + longitude_string + hgt_suffix;
 
             std::cout << "Loading SRTM file " << abs_image_path << " ...\n";
 
             // Open the file
-            const char* char_image_path = abs_image_path.c_str();
-            std::FILE* file = std::fopen(char_image_path, "rb");
+            const char* const char_image_path = abs_image_path.c_str();
+            std::FILE* const file = std::fopen(char_image_path, "rb");
             if (!file)
             {
                 std::cerr << abs_image_path << " could not be opened.\n";
                 return false;
             }
 
-            std::size_t true_image_width = 1201;
-            std::size_t true_image_height = 1201;
-            std::size_t image_width_in_use = 1200;
-            std::size_t image_height_in_use = 1200;
-            std::size_t image_size = sizeof(int16_t) * true_image_width * true_image_height;
+            const std::size_t true_image_width = 1201;
+            const std::size_t true_image_height = 1201;
+            const std::size_t image_width_in_use = 1200;
+            const std::size_t image_height_in_use = 1200;
+            const std::size_t image_size = sizeof(int16_t) * true_image_width * true_image_height;
 
             // Create a buffer.
             // Actual 16-bit big-endian signed integer heightmap data.
-            uint8_t* image_data = new uint8_t[image_size];
+            uint8_t* const image_data = new uint8_t[image_size];
 
             if (image_data == nullptr)
             {
@@ -141,7 +141,7 @@ namespace yli
             // Everything is in memory now, the file can be closed
             std::fclose(file);
 
-            float* vertex_data = new float[image_width_in_use * image_height_in_use];
+            float* const vertex_data = new float[image_width_in_use * image_height_in_use];
 
             if (vertex_data == nullptr)
             {
@@ -151,7 +151,7 @@ namespace yli
                 return false;
             }
 
-            uint8_t* image_pointer = image_data + sizeof(int16_t) * (true_image_height - 1) * true_image_width; // start from southwestern corner.
+            const uint8_t* image_pointer = image_data + sizeof(int16_t) * (true_image_height - 1) * true_image_width; // start from southwestern corner.
             float* vertex_pointer = vertex_data;
 
             // start processing image_data.
@@ -206,7 +206,7 @@ namespace yli
             triangulate_quads_struct.sphere_radius = heightmap_loader_struct.planet_radius;
             triangulate_quads_struct.spherical_terrain_struct = spherical_terrain_struct;
 
-            bool result = yli::geometry::triangulate_quads(vertex_data, triangulate_quads_struct, out_vertices, out_UVs, out_normals);
+            const bool result = yli::geometry::triangulate_quads(vertex_data, triangulate_quads_struct, out_vertices, out_UVs, out_normals);
             delete[] vertex_data;
             return result;
         }
