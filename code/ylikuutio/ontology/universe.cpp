@@ -588,7 +588,7 @@ namespace yli
 
         yli::ontology::Species* Universe::get_terrain_species()
         {
-            return static_cast<yli::ontology::Species*>(this->terrain_species);
+            return this->terrain_species;
         }
 
         void Universe::set_terrain_species(yli::ontology::Species* terrain_species)
@@ -642,7 +642,7 @@ namespace yli
                 if (this->terrain_species != nullptr)
                 {
                     GLfloat ground_y = yli::ontology::get_floor_level(
-                            static_cast<yli::ontology::Species*>(this->terrain_species),
+                            this->terrain_species,
                             this->current_camera_cartesian_coordinates);
 
                     if (!std::isnan(ground_y) && this->current_camera_cartesian_coordinates.y < ground_y)

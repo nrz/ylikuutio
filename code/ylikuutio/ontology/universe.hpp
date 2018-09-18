@@ -546,7 +546,7 @@ namespace yli
             private:
                 bool compute_and_update_matrices_from_inputs();
 
-                void* terrain_species;               // pointer to terrain `Species` (used in collision detection).
+                yli::ontology::Species* terrain_species; // pointer to terrain `Species` (used in collision detection).
 
                 float planet_radius;
 
