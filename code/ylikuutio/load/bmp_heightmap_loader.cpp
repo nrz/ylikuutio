@@ -38,8 +38,8 @@ namespace yli
                 std::vector<glm::vec3>& out_vertices,
                 std::vector<glm::vec2>& out_UVs,
                 std::vector<glm::vec3>& out_normals,
-                std::size_t* image_width_pointer,
-                std::size_t* image_height_pointer,
+                std::size_t* const image_width_pointer,
+                std::size_t* const image_height_pointer,
                 const std::string& color_channel,
                 const std::size_t x_step,
                 const std::size_t z_step,
@@ -72,14 +72,14 @@ namespace yli
             }
 
             // Define terrain size.
-            std::size_t terrain_size = image_width * image_height;
+            const std::size_t terrain_size = image_width * image_height;
 
-            std::size_t line_size_in_bytes = image_size / image_height;
+            const std::size_t line_size_in_bytes = image_size / image_height;
 
-            uint8_t *image_pointer;
+            uint8_t const *image_pointer;
             image_pointer = image_data;
 
-            float* vertex_data = new float[terrain_size];
+            float* const vertex_data = new float[terrain_size];
 
             if (vertex_data == nullptr)
             {
@@ -145,7 +145,7 @@ namespace yli
             triangulate_quads_struct.triangulation_type = triangulation_type;
             triangulate_quads_struct.sphere_radius = NAN;
 
-            bool result = yli::geometry::triangulate_quads(vertex_data, triangulate_quads_struct, out_vertices, out_UVs, out_normals);
+            const bool result = yli::geometry::triangulate_quads(vertex_data, triangulate_quads_struct, out_vertices, out_UVs, out_normals);
             delete[] vertex_data;
             return result;
         }
