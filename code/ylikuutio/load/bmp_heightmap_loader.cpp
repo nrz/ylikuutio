@@ -76,8 +76,7 @@ namespace yli
 
             const std::size_t line_size_in_bytes = image_size / image_height;
 
-            uint8_t const *image_pointer;
-            image_pointer = image_data;
+            uint8_t const* image_pointer = image_data;
 
             float* const vertex_data = new float[terrain_size];
 
@@ -88,8 +87,7 @@ namespace yli
                 return false;
             }
 
-            float* vertex_pointer;
-            vertex_pointer = vertex_data;
+            float* vertex_pointer = vertex_data;
 
             const char* char_color_channel = color_channel.c_str();
 
