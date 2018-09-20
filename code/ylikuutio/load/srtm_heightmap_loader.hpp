@@ -10,6 +10,7 @@
 #endif
 
 // Include standard headers
+#include <cstddef>  // std::size_t
 #include <string>   // std::string
 #include <vector>   // std::vector
 
@@ -23,6 +24,8 @@ namespace yli
                 std::vector<glm::vec3>& out_vertices,
                 std::vector<glm::vec2>& out_UVs,
                 std::vector<glm::vec3>& out_normals,
+                std::size_t& image_width,
+                std::size_t& image_height,
                 const std::string& triangulation_type);
     }
 }

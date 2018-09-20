@@ -40,6 +40,8 @@ namespace yli
                 std::vector<glm::vec3>& out_vertices,
                 std::vector<glm::vec2>& out_UVs,
                 std::vector<glm::vec3>& out_normals,
+                std::size_t& image_width,
+                std::size_t& image_height,
                 const std::string& triangulation_type)
         {
             // For SRTM worlds, the right heightmap filename must be resolved first.
@@ -114,8 +116,8 @@ namespace yli
 
             const std::size_t true_image_width = 1201;
             const std::size_t true_image_height = 1201;
-            const std::size_t image_width_in_use = 1200;
-            const std::size_t image_height_in_use = 1200;
+            image_width = 1200;  // rightmost column is not used (it is duplicated in the next SRTM file to the east).
+            image_height = 1200; // bottom row is not used (it us duplicated in the next SRTM file to the south).
             const std::size_t image_size = sizeof(int16_t) * true_image_width * true_image_height;
 
             // Create a buffer.
@@ -141,7 +143,7 @@ namespace yli
             // Everything is in memory now, the file can be closed
             std::fclose(file);
 
-            float* const vertex_data = new float[image_width_in_use * image_height_in_use];
+            float* const vertex_data = new float[image_width * image_height];
 
             if (vertex_data == nullptr)
             {
@@ -166,10 +168,10 @@ namespace yli
             int32_t last_percent = -1;
             int32_t current_percent = -1;
 
-            for (std::size_t z = 0; z < image_height_in_use; z++)
+            for (std::size_t z = 0; z < image_height; z++)
             {
                 // show progress in percents.
-                current_percent = static_cast<int32_t>(floor(100.0f * ((double) z / (double) (image_height_in_use - 1))));
+                current_percent = static_cast<int32_t>(floor(100.0f * ((double) z / (double) (image_height - 1))));
 
                 if (current_percent > last_percent)
                 {
@@ -177,14 +179,14 @@ namespace yli
                     last_percent = current_percent;
                 }
 
-                for (std::size_t x = 0; x < image_width_in_use; x++)
+                for (std::size_t x = 0; x < image_width; x++)
                 {
                     std::size_t y = static_cast<std::size_t>(*image_pointer) << 8 | static_cast<std::size_t>(*(image_pointer + 1));
 
                     image_pointer += sizeof(int16_t);
                     *vertex_pointer++ = static_cast<float>(y) / heightmap_loader_struct.divisor;
                 }
-                image_pointer -= sizeof(int16_t) * (image_width_in_use + true_image_width);
+                image_pointer -= sizeof(int16_t) * (image_width + true_image_width);
             }
 
             std::cout << "\n";
@@ -198,8 +200,8 @@ namespace yli
             spherical_terrain_struct.eastern_longitude = eastern_longitude; // must be float, though SRTM data is split between full degrees.
 
             yli::geometry::TriangulateQuadsStruct triangulate_quads_struct;
-            triangulate_quads_struct.image_width = image_width_in_use;
-            triangulate_quads_struct.image_height = image_height_in_use;
+            triangulate_quads_struct.image_width = image_width;
+            triangulate_quads_struct.image_height = image_height;
             triangulate_quads_struct.x_step = heightmap_loader_struct.x_step;
             triangulate_quads_struct.z_step = heightmap_loader_struct.z_step;
             triangulate_quads_struct.triangulation_type = triangulation_type;

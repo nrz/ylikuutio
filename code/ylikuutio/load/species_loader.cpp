@@ -84,6 +84,8 @@ namespace yli
                         out_vertices,
                         out_UVs,
                         out_normals,
+                        *species_loader_struct.image_width_pointer,
+                        *species_loader_struct.image_height_pointer,
                         species_loader_struct.triangulation_type);
             }
             else if (species_loader_struct.model_file_format == "bmp" || species_loader_struct.model_file_format == "BMP")
