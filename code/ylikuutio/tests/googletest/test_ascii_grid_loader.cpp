@@ -23,12 +23,16 @@ TEST(an_ASCII_grid_must_be_defined_and_interpolated_appropriately, test_3x3_0_1_
     std::vector<glm::vec3> vertices;         // vertices of the object.
     std::vector<glm::vec2> UVs;              // UVs of the object.
     std::vector<glm::vec3> normals;          // normals of the object.
+    std::size_t image_width;
+    std::size_t image_height;
 
     bool model_loading_result = yli::load::load_ASCII_grid(
             ASCII_grid_model_filename,
             vertices,
             UVs,
             normals,
+            image_width,
+            image_height,
             x_step,
             z_step,
             triangulation_type);

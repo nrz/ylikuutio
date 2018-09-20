@@ -107,6 +107,8 @@ namespace yli
                         out_vertices,
                         out_UVs,
                         out_normals,
+                        *species_loader_struct.image_width_pointer,
+                        *species_loader_struct.image_height_pointer,
                         species_loader_struct.x_step,
                         species_loader_struct.z_step,
                         species_loader_struct.triangulation_type);

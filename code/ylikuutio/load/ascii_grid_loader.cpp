@@ -38,6 +38,8 @@ namespace yli
                 std::vector<glm::vec3>& out_vertices,
                 std::vector<glm::vec2>& out_UVs,
                 std::vector<glm::vec3>& out_normals,
+                std::size_t& image_width,
+                std::size_t& image_height,
                 const std::size_t x_step,
                 const std::size_t z_step,
                 const std::string& triangulation_type)
@@ -69,14 +71,14 @@ namespace yli
             const std::vector<std::string> number_strings_vector = { "-", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
             while (!yli::string::check_and_report_if_some_string_matches(file_content, ++file_content_i, number_strings_vector));
-            const int32_t image_width = yli::string::extract_int32_t_value_from_string(
+            const int32_t image_width_int32_t = yli::string::extract_int32_t_value_from_string(
                     file_content,
                     --file_content_i,
                     (const char* const) " \n",
                     (const char* const) "ncols");
 
             while (!yli::string::check_and_report_if_some_string_matches(file_content, ++file_content_i, number_strings_vector));
-            const int32_t image_height = yli::string::extract_int32_t_value_from_string(
+            const int32_t image_height_int32_t = yli::string::extract_int32_t_value_from_string(
                     file_content,
                     --file_content_i,
                     (const char* const) " \n",
@@ -110,24 +112,22 @@ namespace yli
                     (const char* const) " \n",
                     (const char* const) "nodata_value");
 
-            // note: the value of `image_height_in_use` can be adjusted here (for testing purposes).
-            if (image_width < 2)
+            if (image_width_int32_t < 2)
             {
                 std::cerr << "ERROR: image width is less than 2.\n";
                 return false;
             }
 
-            const std::size_t image_width_in_use = static_cast<std::size_t>(image_width);
-
-            if (image_height < 2)
+            if (image_height_int32_t < 2)
             {
                 std::cerr << "ERROR: image height is less than 2.\n";
                 return false;
             }
 
-            const std::size_t image_height_in_use = static_cast<std::size_t>(image_height);
+            image_width = static_cast<std::size_t>(image_width_int32_t);
+            image_height = static_cast<std::size_t>(image_height_int32_t);
 
-            float* const vertex_data = new float[image_width_in_use * image_height_in_use];
+            float* const vertex_data = new float[image_width * image_height];
 
             if (vertex_data == nullptr)
             {
@@ -143,10 +143,10 @@ namespace yli
             int32_t last_percent = -1;
             int32_t current_percent = -1;
 
-            for (std::size_t z = 0; z < image_height_in_use; z++)
+            for (std::size_t z = 0; z < image_height; z++)
             {
                 // show progress in percents.
-                current_percent = static_cast<int32_t>(floor(100.0f * ((double) z / (double) (image_height_in_use - 1))));
+                current_percent = static_cast<int32_t>(floor(100.0f * ((double) z / (double) (image_height - 1))));
 
                 if (current_percent > last_percent)
                 {
@@ -154,7 +154,7 @@ namespace yli
                     last_percent = current_percent;
                 }
 
-                for (std::size_t x = 0; x < image_width_in_use; x++)
+                for (std::size_t x = 0; x < image_width; x++)
                 {
                     while (!yli::string::check_and_report_if_some_string_matches(file_content, file_content_i, number_strings_vector))
                     {
@@ -173,8 +173,8 @@ namespace yli
             std::cout << "Triangulating ASCII grid data.\n";
 
             yli::geometry::TriangulateQuadsStruct triangulate_quads_struct;
-            triangulate_quads_struct.image_width = image_width_in_use;
-            triangulate_quads_struct.image_height = image_height_in_use;
+            triangulate_quads_struct.image_width = image_width;
+            triangulate_quads_struct.image_height = image_height;
             triangulate_quads_struct.x_step = x_step;
             triangulate_quads_struct.z_step = z_step;
             triangulate_quads_struct.triangulation_type = triangulation_type;
