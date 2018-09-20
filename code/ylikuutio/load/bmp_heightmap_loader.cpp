@@ -45,8 +45,15 @@ namespace yli
                 const std::size_t z_step,
                 const std::string& triangulation_type)
         {
-            if (x_step < 1 || z_step < 1)
+            if (x_step < 1)
             {
+                std::cerr << "ERROR: x_step is less than 1.\n";
+                return false;
+            }
+
+            if (z_step < 1)
+            {
+                std::cerr << "ERROR: z_step is less than 1.\n";
                 return false;
             }
 
