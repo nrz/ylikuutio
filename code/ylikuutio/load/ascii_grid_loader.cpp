@@ -127,7 +127,7 @@ namespace yli
 
             const std::size_t image_height_in_use = static_cast<std::size_t>(image_height);
 
-            float* vertex_data = new float[image_width_in_use * image_height_in_use];
+            float* const vertex_data = new float[image_width_in_use * image_height_in_use];
 
             if (vertex_data == nullptr)
             {
@@ -180,7 +180,7 @@ namespace yli
             triangulate_quads_struct.triangulation_type = triangulation_type;
             triangulate_quads_struct.sphere_radius = NAN;
 
-            bool result = yli::geometry::triangulate_quads(vertex_data, triangulate_quads_struct, out_vertices, out_UVs, out_normals);
+            const bool result = yli::geometry::triangulate_quads(vertex_data, triangulate_quads_struct, out_vertices, out_UVs, out_normals);
             delete[] vertex_data;
             return result;
         }
