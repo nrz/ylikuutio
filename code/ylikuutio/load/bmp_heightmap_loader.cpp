@@ -38,8 +38,8 @@ namespace yli
                 std::vector<glm::vec3>& out_vertices,
                 std::vector<glm::vec2>& out_UVs,
                 std::vector<glm::vec3>& out_normals,
-                std::size_t* const image_width_pointer,
-                std::size_t* const image_height_pointer,
+                std::size_t& image_width,
+                std::size_t& image_height,
                 const std::string& color_channel,
                 const std::size_t x_step,
                 const std::size_t z_step,
@@ -50,20 +50,9 @@ namespace yli
                 return false;
             }
 
-            if (image_width_pointer == nullptr || image_height_pointer == nullptr)
-            {
-                return false;
-            }
-
             std::size_t image_size;
 
-            std::size_t image_width;
-            std::size_t image_height;
-
             uint8_t* image_data = load_BMP_file(image_path, image_width, image_height, image_size);
-
-            *image_width_pointer = image_width;
-            *image_height_pointer = image_height;
 
             if (image_width < 2 || image_height < 2)
             {
