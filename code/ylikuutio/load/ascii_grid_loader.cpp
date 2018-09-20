@@ -56,6 +56,18 @@ namespace yli
 
             std::cout << "Loading ASCII grid file " << ascii_grid_filename << " ...\n";
 
+            if (x_step < 1)
+            {
+                std::cerr << "ERROR: x_step is less than 1.\n";
+                return false;
+            }
+
+            if (z_step < 1)
+            {
+                std::cerr << "ERROR: z_step is less than 1.\n";
+                return false;
+            }
+
             // Open the file
             const std::string file_content = yli::file::slurp(ascii_grid_filename);
 
