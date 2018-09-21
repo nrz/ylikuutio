@@ -56,21 +56,42 @@ namespace yli
 
                 // Input vertices (`T1* input_vertex_pointer`)
                 // can be `float`, `int32_t` or `uint32_t`.
-                if (image_width < 2 || image_height < 2)
+                if (image_width < 2)
                 {
+                    std::cerr << "ERROR: image_width is less than 2.\n";
                     return false;
                 }
 
-                if (x_step < 1 || z_step < 1)
+                if (image_height < 2)
                 {
+                    std::cerr << "ERROR: image_height is less than 2.\n";
+                    return false;
+                }
+
+                if (x_step < 1)
+                {
+                    std::cerr << "ERROR: x_step is less than 1.\n";
+                    return false;
+                }
+
+                if (z_step < 1)
+                {
+                    std::cerr << "ERROR: z_step is less than 1.\n";
                     return false;
                 }
 
                 const std::size_t actual_image_width = (image_width - 1) / x_step + 1;
                 const std::size_t actual_image_height = (image_height - 1) / z_step + 1;
 
-                if (actual_image_width < 2 || actual_image_height < 2)
+                if (actual_image_width < 2)
                 {
+                    std::cerr << "ERROR: actual_image_width is less than 2.\n";
+                    return false;
+                }
+
+                if (actual_image_height < 2)
+                {
+                    std::cerr << "ERROR: actual_image_height is less than 2.\n";
                     return false;
                 }
 
