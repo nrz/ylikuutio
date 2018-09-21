@@ -21,6 +21,7 @@
 #endif
 
 // Include standard headers
+#include <cmath>    // NAN, std::isnan, std::pow
 #include <cstddef>  // std::size_t
 #include <cstdio>   // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf etc.
 #include <iomanip>  // std::setfill, std::setw
@@ -193,20 +194,24 @@ namespace yli
 
             delete[] image_data;
 
-            yli::geometry::SphericalTerrainStruct spherical_terrain_struct;
-            spherical_terrain_struct.southern_latitude = southern_latitude; // must be float, though SRTM data is split between full degrees.
-            spherical_terrain_struct.northern_latitude = northern_latitude; // must be float, though SRTM data is split between full degrees.
-            spherical_terrain_struct.western_longitude = western_longitude; // must be float, though SRTM data is split between full degrees.
-            spherical_terrain_struct.eastern_longitude = eastern_longitude; // must be float, though SRTM data is split between full degrees.
-
             yli::geometry::TriangulateQuadsStruct triangulate_quads_struct;
             triangulate_quads_struct.image_width = image_width;
             triangulate_quads_struct.image_height = image_height;
             triangulate_quads_struct.x_step = heightmap_loader_struct.x_step;
             triangulate_quads_struct.z_step = heightmap_loader_struct.z_step;
             triangulate_quads_struct.triangulation_type = triangulation_type;
-            triangulate_quads_struct.sphere_radius = heightmap_loader_struct.planet_radius;
-            triangulate_quads_struct.spherical_terrain_struct = spherical_terrain_struct;
+
+            if (!std::isnan(heightmap_loader_struct.planet_radius))
+            {
+                yli::geometry::SphericalTerrainStruct spherical_terrain_struct;
+                spherical_terrain_struct.southern_latitude = southern_latitude; // must be float, though SRTM data is split between full degrees.
+                spherical_terrain_struct.northern_latitude = northern_latitude; // must be float, though SRTM data is split between full degrees.
+                spherical_terrain_struct.western_longitude = western_longitude; // must be float, though SRTM data is split between full degrees.
+                spherical_terrain_struct.eastern_longitude = eastern_longitude; // must be float, though SRTM data is split between full degrees.
+
+                triangulate_quads_struct.sphere_radius = heightmap_loader_struct.planet_radius;
+                triangulate_quads_struct.spherical_terrain_struct = spherical_terrain_struct;
+            }
 
             const bool result = yli::geometry::triangulate_quads(vertex_data, triangulate_quads_struct, out_vertices, out_UVs, out_normals);
             delete[] vertex_data;
