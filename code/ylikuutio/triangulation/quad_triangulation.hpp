@@ -203,6 +203,7 @@ namespace yli
                                 temp_vertices,
                                 temp_UVs))
                     {
+                        std::cerr << "ERROR: interpolating and defining vertices using bilinear interpolation failed.\n";
                         return false;
                     }
                 }
@@ -252,6 +253,7 @@ namespace yli
                             is_southwest_northeast_edges_in_use,
                             is_southeast_northwest_edges_in_use))
                 {
+                    std::cerr << "ERROR: computing face normals failed.\n";
                     return false;
                 }
 
@@ -265,6 +267,7 @@ namespace yli
                             is_southwest_northeast_edges_in_use,
                             is_southeast_northwest_edges_in_use))
                 {
+                    std::cerr << "ERROR: computing vertex normals failed.\n";
                     return false;
                 }
 
@@ -284,6 +287,7 @@ namespace yli
                             is_southwest_northeast_edges_in_use,
                             is_southeast_northwest_edges_in_use))
                 {
+                    std::cerr << "ERROR: defining vertices, UVs, and normals failed.\n";
                     return false;
                 }
 
