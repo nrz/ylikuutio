@@ -138,7 +138,7 @@ namespace yli
                 }
                 else
                 {
-                    std::cerr << "invalid triangulation type!\n";
+                    std::cerr << "ERROR: invalid triangulation type: " << triangulation_type << "\n";
                     return false;
                 }
 
