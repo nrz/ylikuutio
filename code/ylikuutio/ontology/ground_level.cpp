@@ -1,12 +1,6 @@
 #include "ground_level.hpp"
 #include "species.hpp"
 
-// Include GLEW
-#ifndef __GL_GLEW_H_INCLUDED
-#define __GL_GLEW_H_INCLUDED
-#include <GL/glew.h> // GLfloat, GLuint etc.
-#endif
-
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
 #define __GLM_GLM_HPP_INCLUDED
@@ -45,10 +39,10 @@ namespace yli
             }
 
             // compute the indices of closest vertices.
-            GLuint southwest_i = (GLuint) floor(position.z) * terrain_species->get_image_width() + floor(position.x);
-            GLuint southeast_i = (GLuint) floor(position.z) * terrain_species->get_image_width() + ceil(position.x);
-            GLuint northwest_i = (GLuint) ceil(position.z) * terrain_species->get_image_width() + floor(position.x);
-            GLuint northeast_i = (GLuint) ceil(position.z) * terrain_species->get_image_width() + ceil(position.x);
+            std::size_t southwest_i = static_cast<std::size_t>(floor(position.z) * terrain_species->get_image_width() + floor(position.x));
+            std::size_t southeast_i = static_cast<std::size_t>(floor(position.z) * terrain_species->get_image_width() + ceil(position.x));
+            std::size_t northwest_i = static_cast<std::size_t>(ceil(position.z) * terrain_species->get_image_width() + floor(position.x));
+            std::size_t northeast_i = static_cast<std::size_t>(ceil(position.z) * terrain_species->get_image_width() + ceil(position.x));
 
             // read closest the heights of closest integer coordinates to be used in bilinear interpolation.
             float southwest_height = terrain_species->get_vertices()[southwest_i].y;
