@@ -22,7 +22,7 @@ namespace yli
         {
             if (!terrain_species->is_terrain)
             {
-                // if the current species is not a world species, no collision detection to the ground will be performed.
+                // if the current species is not a terrain `Species`, no collision detection to the ground will be performed.
                 return NAN;
             }
 
