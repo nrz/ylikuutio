@@ -111,7 +111,7 @@ namespace yli
             std::FILE* const file = std::fopen(char_image_path, "rb");
             if (!file)
             {
-                std::cerr << abs_image_path << " could not be opened.\n";
+                std::cerr << "ERROR: " << abs_image_path << " could not be opened.\n";
                 return false;
             }
 
@@ -127,7 +127,7 @@ namespace yli
 
             if (image_data == nullptr)
             {
-                std::cerr << "Reserving memory for image data failed.\n";
+                std::cerr << "ERROR: reserving memory for image data failed.\n";
                 std::fclose(file);
                 return false;
             }
@@ -135,7 +135,7 @@ namespace yli
             // Read the actual image data from the file into the buffer.
             if (std::fread(image_data, 1, image_size, file) != image_size)
             {
-                std::cerr << "Error while reading " << image_path << "\n";
+                std::cerr << "ERROR: error while reading " << image_path << "\n";
                 std::fclose(file);
                 delete[] image_data;
                 return false;
@@ -148,7 +148,7 @@ namespace yli
 
             if (vertex_data == nullptr)
             {
-                std::cerr << "Reserving memory for vertex data failed.\n";
+                std::cerr << "ERROR: reserving memory for vertex data failed.\n";
                 delete[] image_data;
                 std::fclose(file);
                 return false;
