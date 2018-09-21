@@ -78,7 +78,7 @@ namespace yli
 
             if (vertex_data == nullptr)
             {
-                std::cerr << "Reserving memory for vertex data failed.\n";
+                std::cerr << "ERROR: reserving memory for vertex data failed.\n";
                 delete[] image_data;
                 return false;
             }
@@ -116,7 +116,7 @@ namespace yli
                     }
                     else
                     {
-                        std::cerr << "invalid color channel!\n";
+                        std::cerr << "ERROR: invalid color channel.\n";
                         delete[] image_data;
                         delete[] vertex_data;
                         return false;
