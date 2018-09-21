@@ -297,8 +297,6 @@ int main(const int argc, const char* argv[])
     altiplano_terrain_species_struct.is_terrain = true;
     altiplano_terrain_species_struct.x_step = 1;
     altiplano_terrain_species_struct.z_step = 1;
-    altiplano_terrain_species_struct.planet_radius = earth_radius;
-    altiplano_terrain_species_struct.divisor = 1000.0f;
 
     std::cout << "Creating yli::ontology::Entity* altiplano_terrain_species_entity ...\n";
     yli::ontology::Entity* altiplano_terrain_species_entity = entity_factory->create_Species(altiplano_terrain_species_struct);
