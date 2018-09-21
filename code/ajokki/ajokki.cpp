@@ -289,7 +289,7 @@ int main(const int argc, const char* argv[])
     altiplano_terrain_species_struct.shader = altiplano_shader;
     altiplano_terrain_species_struct.material = altiplano_grass_material;
     altiplano_terrain_species_struct.model_file_format = "SRTM";
-    altiplano_terrain_species_struct.light_position = glm::vec3(0, 100000, 100000);
+    altiplano_terrain_species_struct.light_position = glm::vec3(0, 100000, 0);
     altiplano_terrain_species_struct.latitude = -16.50f;  // in degrees.
     altiplano_terrain_species_struct.longitude = -68.15f; // in degrees.
     altiplano_terrain_species_struct.is_terrain = true;
