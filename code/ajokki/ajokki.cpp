@@ -226,7 +226,7 @@ int main(const int argc, const char* argv[])
     // altiplano `Scene` begins here.
 
     std::cout << "Creating yli::ontology::Entity* altiplano_scene_entity ...\n";
-    yli::ontology::Entity* altiplano_scene_entity = entity_factory->create_Scene(earth_world, -1.0f * std::numeric_limits<float>::infinity());
+    yli::ontology::Entity* altiplano_scene_entity = entity_factory->create_Scene(earth_world, 3815.51f);
     std::cout << "Creating yli::ontology::Scene* altiplano_scene ...\n";
     yli::ontology::Scene* altiplano_scene = dynamic_cast<yli::ontology::Scene*>(altiplano_scene_entity);
 
