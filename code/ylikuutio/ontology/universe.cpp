@@ -20,7 +20,6 @@
 #include "entity.hpp"
 #include "world.hpp"
 #include "scene.hpp"
-#include "species.hpp"
 #include "ground_level.hpp"
 #include "render_templates.hpp"
 #include "family_templates.hpp"
@@ -68,6 +67,8 @@ namespace yli
 {
     namespace ontology
     {
+        class Species;
+
         void Universe::bind_world(yli::ontology::World* const world)
         {
             // get `childID` from `Universe` and set pointer to `world`.
