@@ -38,8 +38,8 @@ namespace yli
                 return NAN;
             }
 
-            const float x = position.x;
-            const float z = position.z;
+            const float x = position.x / terrain_species->get_x_step();
+            const float z = position.z / terrain_species->get_z_step();
 
             const std::size_t image_width = terrain_species->get_image_width();
 
