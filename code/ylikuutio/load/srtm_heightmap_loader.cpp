@@ -43,6 +43,8 @@ namespace yli
                 std::vector<glm::vec3>& out_normals,
                 std::size_t& image_width,
                 std::size_t& image_height,
+                const std::size_t x_step,
+                const std::size_t z_step,
                 const std::string& triangulation_type)
         {
             // For SRTM worlds, the right heightmap filename must be resolved first.
@@ -53,6 +55,18 @@ namespace yli
             // In coordinates (`latitude` and `longitude`) negative values mean south for latitude and west for longitude,
             // and positive value mean north for latitude and east for longitude.
             // Therefore the SRTM heightmap filename can be resolved by rounding both latitude and longitude down (towards negative infinity).
+
+            if (x_step < 1)
+            {
+                std::cerr << "ERROR: x_step is less than 1.\n";
+                return false;
+            }
+
+            if (z_step < 1)
+            {
+                std::cerr << "ERROR: z_step is less than 1.\n";
+                return false;
+            }
 
             const int32_t filename_latitude = std::floor(heightmap_loader_struct.latitude);
             const int32_t filename_longitude = std::floor(heightmap_loader_struct.longitude);
@@ -197,8 +211,8 @@ namespace yli
             yli::geometry::TriangulateQuadsStruct triangulate_quads_struct;
             triangulate_quads_struct.image_width = image_width;
             triangulate_quads_struct.image_height = image_height;
-            triangulate_quads_struct.x_step = heightmap_loader_struct.x_step;
-            triangulate_quads_struct.z_step = heightmap_loader_struct.z_step;
+            triangulate_quads_struct.x_step = x_step;
+            triangulate_quads_struct.z_step = z_step;
             triangulate_quads_struct.triangulation_type = triangulation_type;
 
             if (!std::isnan(heightmap_loader_struct.planet_radius))

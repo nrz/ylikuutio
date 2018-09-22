@@ -11,9 +11,7 @@ typedef struct HeightmapLoaderStruct
         : latitude(NAN),
         longitude(NAN),
         planet_radius(NAN),
-        divisor(NAN),
-        x_step(1),
-        z_step(1)
+        divisor(NAN)
     {
         // constructor.
     }
@@ -22,8 +20,6 @@ typedef struct HeightmapLoaderStruct
     float longitude;
     float planet_radius;
     float divisor;
-    std::size_t x_step;
-    std::size_t z_step;
 } HeightmapLoaderStruct;
 
 #endif

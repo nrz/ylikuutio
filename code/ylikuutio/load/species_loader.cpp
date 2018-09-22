@@ -75,8 +75,6 @@ namespace yli
                 heightmap_loader_struct.longitude = species_loader_struct.longitude;
                 heightmap_loader_struct.planet_radius = species_loader_struct.planet_radius;
                 heightmap_loader_struct.divisor = species_loader_struct.divisor;
-                heightmap_loader_struct.x_step = species_loader_struct.x_step;
-                heightmap_loader_struct.z_step = species_loader_struct.z_step;
 
                 model_loading_result = yli::load::load_SRTM_terrain(
                         heightmap_loader_struct,
@@ -86,6 +84,8 @@ namespace yli
                         out_normals,
                         *species_loader_struct.image_width_pointer,
                         *species_loader_struct.image_height_pointer,
+                        species_loader_struct.x_step,
+                        species_loader_struct.z_step,
                         species_loader_struct.triangulation_type);
             }
             else if (species_loader_struct.model_file_format == "bmp" || species_loader_struct.model_file_format == "BMP")

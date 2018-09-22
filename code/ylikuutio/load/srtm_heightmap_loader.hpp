@@ -26,6 +26,8 @@ namespace yli
                 std::vector<glm::vec3>& out_normals,
                 std::size_t& image_width,
                 std::size_t& image_height,
+                const std::size_t x_step,
+                const std::size_t z_step,
                 const std::string& triangulation_type);
     }
 }
