@@ -25,6 +25,8 @@ namespace yli
 {
     namespace ontology
     {
+        class Species;
+
         void Shader::bind_material(yli::ontology::Material* const material)
         {
             // get `childID` from `Shader` and set pointer to `material`.

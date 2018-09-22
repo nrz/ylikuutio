@@ -37,6 +37,7 @@ namespace yli
     {
         class Scene;
         class Material;
+        class Species;
         class Symbiosis;
 
         class Shader: public yli::ontology::Entity
