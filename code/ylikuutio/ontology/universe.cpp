@@ -115,6 +115,7 @@ namespace yli
             {
                 this->turbo_factor = this->active_world->get_active_scene()->get_turbo_factor();
                 this->twin_turbo_factor = this->active_world->get_active_scene()->get_twin_turbo_factor();
+                this->terrain_species = this->active_world->get_active_scene()->get_terrain_species();
             }
         }
 
@@ -132,6 +133,7 @@ namespace yli
             {
                 this->turbo_factor = this->active_world->get_active_scene()->get_turbo_factor();
                 this->twin_turbo_factor = this->active_world->get_active_scene()->get_twin_turbo_factor();
+                this->terrain_species = this->active_world->get_active_scene()->get_terrain_species();
             }
         }
 
@@ -365,7 +367,13 @@ namespace yli
                 else if (scene != nullptr && world == nullptr)
                 {
                     // The named `Entity` is a `Scene`.
-                    universe->set_active_scene(scene);
+                    yli::ontology::World* const world_parent_of_scene = scene->get_world_parent();
+
+                    if (world_parent_of_scene != nullptr)
+                    {
+                        universe->set_active_world(world_parent_of_scene);
+                        universe->set_active_scene(scene);
+                    }
                 }
             }
             return nullptr;

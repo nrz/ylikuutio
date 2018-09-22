@@ -112,6 +112,10 @@ namespace yli
 
                 yli::ontology::Entity* get_parent() const override;
 
+                // set terrain `Species` pointers in `Scene` and `Universe` so that they point to the chosen terrain `Species`.
+                // currently there can be only one terrain `Species` in each `Scene` (used in collision detection).
+                void set_terrain_species(yli::ontology::Species* const terrain_species);
+
                 template<class T1>
                     friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
                 template <class T1>

@@ -33,6 +33,8 @@ namespace yli
 {
     namespace ontology
     {
+        class Species;
+
         void Scene::bind_shader(yli::ontology::Shader* const shader)
         {
             // get `childID` from `Scene` and set pointer to `shader`.
@@ -227,6 +229,37 @@ namespace yli
             {
                 this->universe->twin_turbo_factor = this->twin_turbo_factor;
             }
+        }
+
+        yli::ontology::Species* Scene::get_terrain_species() const
+        {
+            if (this->parent != nullptr &&
+                    this->universe != nullptr &&
+                    this->parent == this->universe->get_active_world() &&
+                    this == this->parent->get_active_scene())
+            {
+                return this->terrain_species;
+            }
+
+            return nullptr;
+        }
+
+        void Scene::set_terrain_species(yli::ontology::Species* const terrain_species)
+        {
+            this->terrain_species = terrain_species;
+
+            if (this->parent != nullptr &&
+                    this->universe != nullptr &&
+                    this->parent == this->universe->get_active_world() &&
+                    this == this->parent->get_active_scene())
+            {
+                this->universe->set_terrain_species(this->terrain_species);
+            }
+        }
+
+        yli::ontology::World* Scene::get_world_parent() const
+        {
+            return this->parent;
         }
 
         float Scene::get_water_level() const
