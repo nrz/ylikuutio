@@ -26,13 +26,13 @@ namespace yli
                 return NAN;
             }
 
-            if ((position.x < 0.0f) || (position.x > terrain_species->get_image_width()))
+            if ((position.x < 0.0f) || (position.x >= terrain_species->get_image_width()))
             {
                 // if the x coordinate is out of range, no collision detection to the ground will be performed.
                 return NAN;
             }
 
-            if ((position.z < 0.0f) || (position.z > terrain_species->get_image_height()))
+            if ((position.z < 0.0f) || (position.z >= terrain_species->get_image_height()))
             {
                 // if the z coordinate is out of range, no collision detection to the ground will be performed.
                 return NAN;
