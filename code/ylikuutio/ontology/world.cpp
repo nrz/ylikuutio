@@ -72,7 +72,7 @@ namespace yli
             }
         }
 
-        void World::set_active_scene(yli::ontology::Scene* scene)
+        void World::set_active_scene(yli::ontology::Scene* const scene)
         {
             // requirements:
             // `this->parent` must not be `nullptr`.
