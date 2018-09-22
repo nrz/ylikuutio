@@ -19,6 +19,7 @@
 #include "universe.hpp"
 #include "entity.hpp"
 #include "world.hpp"
+#include "scene.hpp"
 #include "species.hpp"
 #include "ground_level.hpp"
 #include "render_templates.hpp"
