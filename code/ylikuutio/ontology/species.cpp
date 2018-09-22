@@ -164,6 +164,16 @@ namespace yli
             return this->material_parent;
         }
 
+        std::size_t Species::get_x_step() const
+        {
+            return this->x_step;
+        }
+
+        std::size_t Species::get_z_step() const
+        {
+            return this->z_step;
+        }
+
         std::size_t Species::get_image_width() const
         {
             return this->image_width;
