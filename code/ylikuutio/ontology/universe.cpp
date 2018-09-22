@@ -19,7 +19,7 @@
 #include "universe.hpp"
 #include "entity.hpp"
 #include "world.hpp"
-#include "species.hpp"
+#include "scene.hpp"
 #include "ground_level.hpp"
 #include "render_templates.hpp"
 #include "family_templates.hpp"
@@ -67,6 +67,8 @@ namespace yli
 {
     namespace ontology
     {
+        class Species;
+
         void Universe::bind_world(yli::ontology::World* const world)
         {
             // get `childID` from `Universe` and set pointer to `world`.
@@ -113,6 +115,7 @@ namespace yli
             {
                 this->turbo_factor = this->active_world->get_active_scene()->get_turbo_factor();
                 this->twin_turbo_factor = this->active_world->get_active_scene()->get_twin_turbo_factor();
+                this->terrain_species = this->active_world->get_active_scene()->get_terrain_species();
             }
         }
 
@@ -130,6 +133,7 @@ namespace yli
             {
                 this->turbo_factor = this->active_world->get_active_scene()->get_turbo_factor();
                 this->twin_turbo_factor = this->active_world->get_active_scene()->get_twin_turbo_factor();
+                this->terrain_species = this->active_world->get_active_scene()->get_terrain_species();
             }
         }
 
@@ -363,7 +367,13 @@ namespace yli
                 else if (scene != nullptr && world == nullptr)
                 {
                     // The named `Entity` is a `Scene`.
-                    universe->set_active_scene(scene);
+                    yli::ontology::World* const world_parent_of_scene = scene->get_world_parent();
+
+                    if (world_parent_of_scene != nullptr)
+                    {
+                        universe->set_active_world(world_parent_of_scene);
+                        universe->set_active_scene(scene);
+                    }
                 }
             }
             return nullptr;
@@ -588,10 +598,10 @@ namespace yli
 
         yli::ontology::Species* Universe::get_terrain_species()
         {
-            return static_cast<yli::ontology::Species*>(this->terrain_species);
+            return this->terrain_species;
         }
 
-        void Universe::set_terrain_species(yli::ontology::Species* terrain_species)
+        void Universe::set_terrain_species(yli::ontology::Species* const terrain_species)
         {
             this->terrain_species = terrain_species;
         }
@@ -642,7 +652,7 @@ namespace yli
                 if (this->terrain_species != nullptr)
                 {
                     GLfloat ground_y = yli::ontology::get_floor_level(
-                            static_cast<yli::ontology::Species*>(this->terrain_species),
+                            this->terrain_species,
                             this->current_camera_cartesian_coordinates);
 
                     if (!std::isnan(ground_y) && this->current_camera_cartesian_coordinates.y < ground_y)

@@ -28,6 +28,7 @@ namespace yli
         class Universe;
         class World;
         class Shader;
+        class Species;
         class Symbiosis;
         class Camera;
 
@@ -59,6 +60,7 @@ namespace yli
                     this->number_of_shaders     = 0;
                     this->number_of_cameras     = 0;
                     this->active_camera         = nullptr;
+                    this->terrain_species       = nullptr;
 
                     // get `childID` from `World` and set pointer to this `Scene`.
                     this->bind_to_parent();
@@ -88,6 +90,14 @@ namespace yli
                 float get_twin_turbo_factor() const;
                 void set_twin_turbo_factor(float turbo_factor);
 
+                yli::ontology::Species* get_terrain_species() const;
+
+                // set terrain `Species` pointers in `Scene` and `Universe` so that they point to the chosen terrain `Species`.
+                // currently there can be only one terrain `Species` in each `Scene` (used in collision detection).
+                void set_terrain_species(yli::ontology::Species* const terrain_species);
+
+                yli::ontology::World* get_world_parent() const;
+
                 float get_water_level() const;
 
                 template<class T1>
@@ -113,6 +123,8 @@ namespace yli
                 std::size_t number_of_cameras;
 
                 yli::ontology::Camera* active_camera;
+
+                yli::ontology::Species* terrain_species;
 
                 // For finding any `Entity`s of this `Scene` by using its name.
                 std::unordered_map<std::string, yli::ontology::Entity*> name_map;

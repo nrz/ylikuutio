@@ -6,6 +6,7 @@
 #include "universe.hpp"
 #include "scene.hpp"
 #include "shader.hpp"
+#include "material.hpp"
 #include "ground_level.hpp"
 #include "species_struct.hpp"
 #include "render_templates.hpp"
@@ -91,9 +92,14 @@ namespace yli
 
                         if (this->is_terrain)
                         {
-                            // set world species pointer so that it points to this species.
-                            // currently there can be only one world species (used in collision detection).
-                            this->universe->set_terrain_species(this);
+                            // set terrain `Species` pointer so that it points to this `Species`.
+                            // currently there can be only one terrain `Species` in each `Scene` (used in collision detection).
+                            yli::ontology::Material* const material = this->material_parent;
+
+                            if (material != nullptr)
+                            {
+                                material->set_terrain_species(this);
+                            }
                         }
 
                         // water level.
@@ -148,6 +154,8 @@ namespace yli
 
                 yli::ontology::Entity* get_parent() const override;
 
+                std::size_t get_x_step() const;
+                std::size_t get_z_step() const;
                 std::size_t get_image_width() const;
                 std::size_t get_image_height() const;
 

@@ -226,7 +226,7 @@ int main(const int argc, const char* argv[])
     // altiplano `Scene` begins here.
 
     std::cout << "Creating yli::ontology::Entity* altiplano_scene_entity ...\n";
-    yli::ontology::Entity* altiplano_scene_entity = entity_factory->create_Scene(earth_world, -1.0f * std::numeric_limits<float>::infinity());
+    yli::ontology::Entity* altiplano_scene_entity = entity_factory->create_Scene(earth_world, 3815.51f);
     std::cout << "Creating yli::ontology::Scene* altiplano_scene ...\n";
     yli::ontology::Scene* altiplano_scene = dynamic_cast<yli::ontology::Scene*>(altiplano_scene_entity);
 
@@ -289,16 +289,12 @@ int main(const int argc, const char* argv[])
     altiplano_terrain_species_struct.shader = altiplano_shader;
     altiplano_terrain_species_struct.material = altiplano_grass_material;
     altiplano_terrain_species_struct.model_file_format = "SRTM";
-    altiplano_terrain_species_struct.model_filename = "./"; // for testing
-    altiplano_terrain_species_struct.color_channel = "mean"; // "all" is equivalent to "mean".
-    altiplano_terrain_species_struct.light_position = glm::vec3(0, 100000, 100000);
+    altiplano_terrain_species_struct.light_position = glm::vec3(0, 100000, 0);
     altiplano_terrain_species_struct.latitude = -16.50f;  // in degrees.
     altiplano_terrain_species_struct.longitude = -68.15f; // in degrees.
     altiplano_terrain_species_struct.is_terrain = true;
     altiplano_terrain_species_struct.x_step = 1;
     altiplano_terrain_species_struct.z_step = 1;
-    altiplano_terrain_species_struct.planet_radius = earth_radius;
-    altiplano_terrain_species_struct.divisor = 1000.0f;
 
     std::cout << "Creating yli::ontology::Entity* altiplano_terrain_species_entity ...\n";
     yli::ontology::Entity* altiplano_terrain_species_entity = entity_factory->create_Species(altiplano_terrain_species_struct);

@@ -25,6 +25,8 @@ namespace yli
 {
     namespace ontology
     {
+        class Species;
+
         void Shader::bind_material(yli::ontology::Material* const material)
         {
             // get `childID` from `Shader` and set pointer to `material`.
@@ -190,8 +192,12 @@ namespace yli
 
         void Shader::set_terrain_species(yli::ontology::Species* const terrain_species)
         {
-            this->terrain_species = terrain_species;
-            this->universe->set_terrain_species(this->terrain_species);
+            yli::ontology::Scene* const scene_parent = this->parent;
+
+            if (scene_parent != nullptr)
+            {
+                scene_parent->set_terrain_species(terrain_species);
+            }
         }
     }
 }

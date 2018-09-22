@@ -37,6 +37,7 @@ namespace yli
     {
         class Scene;
         class Material;
+        class Species;
         class Symbiosis;
 
         class Shader: public yli::ontology::Entity
@@ -64,8 +65,6 @@ namespace yli
                     this->char_fragment_shader = this->fragment_shader.c_str();
                     this->parent               = shader_struct.parent;
 
-                    this->terrain_species      = nullptr;
-
                     this->number_of_materials  = 0;
                     this->number_of_symbioses  = 0;
 
@@ -92,8 +91,9 @@ namespace yli
 
                 yli::ontology::Entity* get_parent() const override;
 
-                // this method sets a scene species pointer.
-                void set_terrain_species(yli::ontology::Species* const terrain_species);
+                // set terrain `Species` pointers in `Scene` and `Universe` so that they point to the chosen terrain `Species`.
+                // currently there can be only one terrain `Species` in each `Scene` (used in collision detection).
+                void set_terrain_species(yli::ontology::Species* terrain_species);
 
                 GLuint get_programID() const;
                 GLuint get_matrixID() const;
@@ -124,8 +124,6 @@ namespace yli
                 GLuint MatrixID;
                 GLuint view_matrixID;
                 GLuint model_matrixID;
-
-                yli::ontology::Species* terrain_species;   // pointer to scene species (used in collision detection).
 
                 std::string vertex_shader;            // filename of vertex shader.
                 std::string fragment_shader;          // filename of fragment shader.

@@ -13,8 +13,8 @@ namespace yli
     {
         class Species;
 
-        float get_ground_level(yli::ontology::Species* const terrain_species, const glm::vec3& position);
-        float get_floor_level(yli::ontology::Species* const terrain_species, const glm::vec3& position);
+        float get_ground_level(const yli::ontology::Species* const terrain_species, const glm::vec3& position);
+        float get_floor_level(const yli::ontology::Species* const terrain_species, const glm::vec3& position);
     }
 }
 

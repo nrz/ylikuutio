@@ -194,5 +194,15 @@ namespace yli
             this->parent = new_parent;
             this->parent->bind_material(this);
         }
+
+        void Material::set_terrain_species(yli::ontology::Species* const terrain_species)
+        {
+            yli::ontology::Shader* const shader_parent = this->parent;
+
+            if (shader_parent != nullptr)
+            {
+                shader_parent->set_terrain_species(terrain_species);
+            }
+        }
     }
 }

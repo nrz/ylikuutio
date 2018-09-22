@@ -72,7 +72,7 @@ namespace yli
             }
         }
 
-        void World::set_active_scene(yli::ontology::Scene* scene)
+        void World::set_active_scene(yli::ontology::Scene* const scene)
         {
             // requirements:
             // `this->parent` must not be `nullptr`.
@@ -95,6 +95,7 @@ namespace yli
             this->active_scene = scene;
             universe->turbo_factor = this->active_scene->get_turbo_factor();
             universe->twin_turbo_factor = this->active_scene->get_twin_turbo_factor();
+            universe->set_terrain_species(this->active_scene->get_terrain_species());
         }
 
         yli::ontology::Scene* World::get_active_scene() const

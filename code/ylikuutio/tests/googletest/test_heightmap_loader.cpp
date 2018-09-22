@@ -407,8 +407,8 @@ TEST(a_BMP_terrain_must_be_loaded_appropriately, load_3x3_BMP_terrain)
             *&out_vertices,
             *&out_UVs,
             *&out_normals,
-            &image_width,
-            &image_height,
+            image_width,
+            image_height,
             color_channel,
             x_step,
             z_step,
@@ -743,8 +743,8 @@ TEST(a_BMP_terrain_must_be_loaded_appropriately, load_256x256_BMP_terrain)
             *&out_vertices,
             *&out_UVs,
             *&out_normals,
-            &image_width,
-            &image_height,
+            image_width,
+            image_height,
             color_channel,
             x_step,
             z_step,
@@ -802,7 +802,6 @@ TEST(a_2x2_terrain_must_be_triangulated_appropriately, bilinear_interpolation)
     triangulate_quads_struct.image_width = image_width;
     triangulate_quads_struct.image_height = image_height;
     triangulate_quads_struct.sphere_radius = NAN;
-    triangulate_quads_struct.spherical_terrain_struct = yli::geometry::SphericalTerrainStruct(); // not used, but is needed in the function call.
 
     triangulate_quads_struct.triangulation_type = "bilinear_interpolation";
 

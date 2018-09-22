@@ -1,12 +1,6 @@
 #include "ground_level.hpp"
 #include "species.hpp"
 
-// Include GLEW
-#ifndef __GL_GLEW_H_INCLUDED
-#define __GL_GLEW_H_INCLUDED
-#include <GL/glew.h> // GLfloat, GLuint etc.
-#endif
-
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
 #define __GLM_GLM_HPP_INCLUDED
@@ -23,38 +17,45 @@ namespace yli
     namespace ontology
     {
         float get_ground_level(
-                yli::ontology::Species* const terrain_species,
+                const yli::ontology::Species* const terrain_species,
                 const glm::vec3& position)
         {
             if (!terrain_species->is_terrain)
             {
-                // if the current species is not a world species, no collision detection to the ground will be performed.
+                // if the current species is not a terrain `Species`, no collision detection to the ground will be performed.
                 return NAN;
             }
 
-            if ((position.x < 0.0f) || (position.x > terrain_species->get_image_width()))
+            if ((position.x < 0.0f) || (position.x >= terrain_species->get_image_width()))
             {
                 // if the x coordinate is out of range, no collision detection to the ground will be performed.
                 return NAN;
             }
 
-            if ((position.z < 0.0f) || (position.z > terrain_species->get_image_height()))
+            if ((position.z < 0.0f) || (position.z >= terrain_species->get_image_height()))
             {
                 // if the z coordinate is out of range, no collision detection to the ground will be performed.
                 return NAN;
             }
 
+            const float x = position.x / terrain_species->get_x_step();
+            const float z = position.z / terrain_species->get_z_step();
+
+            const std::size_t image_width = terrain_species->get_image_width();
+
             // compute the indices of closest vertices.
-            GLuint southwest_i = (GLuint) floor(position.z) * terrain_species->get_image_width() + floor(position.x);
-            GLuint southeast_i = (GLuint) floor(position.z) * terrain_species->get_image_width() + ceil(position.x);
-            GLuint northwest_i = (GLuint) ceil(position.z) * terrain_species->get_image_width() + floor(position.x);
-            GLuint northeast_i = (GLuint) ceil(position.z) * terrain_species->get_image_width() + ceil(position.x);
+            std::size_t southwest_i = static_cast<std::size_t>(floor(z) * image_width + floor(x));
+            std::size_t southeast_i = static_cast<std::size_t>(floor(z) * image_width + ceil(x));
+            std::size_t northwest_i = static_cast<std::size_t>(ceil(z) * image_width + floor(x));
+            std::size_t northeast_i = static_cast<std::size_t>(ceil(z) * image_width + ceil(x));
+
+            const std::vector<glm::vec3>& vertices = terrain_species->get_vertices();
 
             // read closest the heights of closest integer coordinates to be used in bilinear interpolation.
-            float southwest_height = terrain_species->get_vertices()[southwest_i].y;
-            float southeast_height = terrain_species->get_vertices()[southeast_i].y;
-            float northwest_height = terrain_species->get_vertices()[northwest_i].y;
-            float northeast_height = terrain_species->get_vertices()[northeast_i].y;
+            float southwest_height = vertices[southwest_i].y;
+            float southeast_height = vertices[southeast_i].y;
+            float northwest_height = vertices[northwest_i].y;
+            float northeast_height = vertices[northeast_i].y;
 
             // these are not actually means but interpolations.
             // the result of the interpolation is mean if and only if (ceil(x) - x == 0.5) & (x - floor(x) == 0.5) , likewise for the z coordinate.
@@ -62,7 +63,7 @@ namespace yli
             float north_mean;
             float mean;
 
-            if ((position.x - floor(position.x) < 0.01f) || (ceil(position.x) - position.x < 0.01f))
+            if ((x - floor(x) < 0.01f) || (ceil(x) - x < 0.01f))
             {
                 // if the x coordinate is too close to integer, the height of the closest vertex is used instead.
                 south_mean = southwest_height;
@@ -71,11 +72,11 @@ namespace yli
             else
             {
                 // the height is computed using bilinear interpolation.
-                south_mean = ((ceil(position.x) - position.x) * southwest_height) + ((position.x - floor(position.x)) * southeast_height);
-                north_mean = ((ceil(position.x) - position.x) * northwest_height) + ((position.x - floor(position.x)) * northeast_height);
+                south_mean = ((ceil(x) - x) * southwest_height) + ((x - floor(x)) * southeast_height);
+                north_mean = ((ceil(x) - x) * northwest_height) + ((x - floor(x)) * northeast_height);
             }
 
-            if ((position.z - floor(position.z) < 0.01f) || (ceil(position.z) - position.z < 0.01f))
+            if ((z - floor(z) < 0.01f) || (ceil(z) - z < 0.01f))
             {
                 // if the z coordinate is too close to integer, the mean is used instead of bilinear interpolation.
                 mean = (south_mean + north_mean) / 2.0f;
@@ -83,14 +84,14 @@ namespace yli
             else
             {
                 // the height is computed using bilinear interpolation.
-                mean = ((ceil(position.z) - position.z) * south_mean) + ((position.z - floor(position.z)) * north_mean);
+                mean = ((ceil(z) - z) * south_mean) + ((z - floor(z)) * north_mean);
             }
 
             return mean;
         }
 
         float get_floor_level(
-                yli::ontology::Species* const terrain_species,
+                const yli::ontology::Species* const terrain_species,
                 const glm::vec3& position)
         {
             if (!terrain_species->is_terrain)
@@ -101,33 +102,36 @@ namespace yli
 
 #define CHARACTER_RADIUS 1.0f
             float current_ground_level = get_ground_level(terrain_species, position);
+            float x = position.x;
+            float y = position.y;
+            float z = position.z;
 
             // Get ground level at current location and +/- 1.0f.
             glm::vec3 south_position;
-            south_position.x = position.x;
-            south_position.y = position.y;
-            south_position.z = position.z;
+            south_position.x = x;
+            south_position.y = y;
+            south_position.z = z;
             south_position.z -= CHARACTER_RADIUS;
             float south_ground_level = get_ground_level(terrain_species, south_position);
 
             glm::vec3 west_position;
-            west_position.x = position.x;
-            west_position.y = position.y;
-            west_position.z = position.z;
+            west_position.x = x;
+            west_position.y = y;
+            west_position.z = z;
             west_position.x -= CHARACTER_RADIUS;
             float west_ground_level = get_ground_level(terrain_species, west_position);
 
             glm::vec3 north_position;
-            north_position.x = position.x;
-            north_position.y = position.y;
-            north_position.z = position.z;
+            north_position.x = x;
+            north_position.y = y;
+            north_position.z = z;
             north_position.z += CHARACTER_RADIUS;
             float north_ground_level = get_ground_level(terrain_species, north_position);
 
             glm::vec3 east_position;
-            east_position.x = position.x;
-            east_position.y = position.y;
-            east_position.z = position.z;
+            east_position.x = x;
+            east_position.y = y;
+            east_position.z = z;
             east_position.x += CHARACTER_RADIUS;
             float east_ground_level = get_ground_level(terrain_species, east_position);
 

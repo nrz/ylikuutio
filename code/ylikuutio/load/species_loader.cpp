@@ -5,6 +5,7 @@
 #include "ascii_grid_loader.hpp"
 #include "bmp_heightmap_loader.hpp"
 #include "srtm_heightmap_loader.hpp"
+#include "heightmap_loader_struct.hpp"
 #include "code/ylikuutio/opengl/vboindexer.hpp"
 
 // Include GLEW
@@ -29,7 +30,7 @@ namespace yli
     namespace load
     {
         bool load_species(
-                SpeciesLoaderStruct& species_loader_struct,
+                const SpeciesLoaderStruct& species_loader_struct,
                 std::vector<glm::vec3>& out_vertices,
                 std::vector<glm::vec2>& out_UVs,
                 std::vector<glm::vec3>& out_normals,
@@ -69,15 +70,20 @@ namespace yli
             }
             else if (species_loader_struct.model_file_format == "srtm" || species_loader_struct.model_file_format == "SRTM")
             {
+                HeightmapLoaderStruct heightmap_loader_struct;
+                heightmap_loader_struct.latitude = species_loader_struct.latitude;
+                heightmap_loader_struct.longitude = species_loader_struct.longitude;
+                heightmap_loader_struct.planet_radius = species_loader_struct.planet_radius;
+                heightmap_loader_struct.divisor = species_loader_struct.divisor;
+
                 model_loading_result = yli::load::load_SRTM_terrain(
+                        heightmap_loader_struct,
                         species_loader_struct.model_filename,
-                        species_loader_struct.latitude,
-                        species_loader_struct.longitude,
-                        species_loader_struct.planet_radius,
-                        species_loader_struct.divisor,
                         out_vertices,
                         out_UVs,
                         out_normals,
+                        *species_loader_struct.image_width_pointer,
+                        *species_loader_struct.image_height_pointer,
                         species_loader_struct.x_step,
                         species_loader_struct.z_step,
                         species_loader_struct.triangulation_type);
@@ -89,8 +95,8 @@ namespace yli
                         out_vertices,
                         out_UVs,
                         out_normals,
-                        species_loader_struct.image_width_pointer,
-                        species_loader_struct.image_height_pointer,
+                        *species_loader_struct.image_width_pointer,
+                        *species_loader_struct.image_height_pointer,
                         species_loader_struct.color_channel,
                         species_loader_struct.x_step,
                         species_loader_struct.z_step,
@@ -103,6 +109,8 @@ namespace yli
                         out_vertices,
                         out_UVs,
                         out_normals,
+                        *species_loader_struct.image_width_pointer,
+                        *species_loader_struct.image_height_pointer,
                         species_loader_struct.x_step,
                         species_loader_struct.z_step,
                         species_loader_struct.triangulation_type);
