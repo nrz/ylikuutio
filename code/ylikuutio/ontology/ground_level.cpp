@@ -102,33 +102,36 @@ namespace yli
 
 #define CHARACTER_RADIUS 1.0f
             float current_ground_level = get_ground_level(terrain_species, position);
+            float x = position.x;
+            float y = position.y;
+            float z = position.z;
 
             // Get ground level at current location and +/- 1.0f.
             glm::vec3 south_position;
-            south_position.x = position.x;
-            south_position.y = position.y;
-            south_position.z = position.z;
+            south_position.x = x;
+            south_position.y = y;
+            south_position.z = z;
             south_position.z -= CHARACTER_RADIUS;
             float south_ground_level = get_ground_level(terrain_species, south_position);
 
             glm::vec3 west_position;
-            west_position.x = position.x;
-            west_position.y = position.y;
-            west_position.z = position.z;
+            west_position.x = x;
+            west_position.y = y;
+            west_position.z = z;
             west_position.x -= CHARACTER_RADIUS;
             float west_ground_level = get_ground_level(terrain_species, west_position);
 
             glm::vec3 north_position;
-            north_position.x = position.x;
-            north_position.y = position.y;
-            north_position.z = position.z;
+            north_position.x = x;
+            north_position.y = y;
+            north_position.z = z;
             north_position.z += CHARACTER_RADIUS;
             float north_ground_level = get_ground_level(terrain_species, north_position);
 
             glm::vec3 east_position;
-            east_position.x = position.x;
-            east_position.y = position.y;
-            east_position.z = position.z;
+            east_position.x = x;
+            east_position.y = y;
+            east_position.z = z;
             east_position.x += CHARACTER_RADIUS;
             float east_ground_level = get_ground_level(terrain_species, east_position);
 
