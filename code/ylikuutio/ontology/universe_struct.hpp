@@ -2,7 +2,7 @@
 #define __UNIVERSE_STRUCT_HPP_INCLUDED
 
 // Include standard headers
-#include <stdint.h> // uint32_t etc.
+#include <cstddef>  // std::size_t
 #include <string>   // std::string
 
 typedef struct UniverseStruct
@@ -25,11 +25,11 @@ typedef struct UniverseStruct
     }
 
     std::string window_title;
-    int32_t window_width;
-    int32_t window_height;
-    int32_t text_size;
-    int32_t font_size;
-    uint32_t max_FPS;
+    std::size_t window_width;
+    std::size_t window_height;
+    std::size_t text_size;
+    std::size_t font_size;
+    std::size_t max_FPS;
     float speed;
     float mouse_speed;
     float gravity;
