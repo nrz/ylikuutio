@@ -593,7 +593,7 @@ namespace yli
             return this->terrain_species;
         }
 
-        void Universe::set_terrain_species(yli::ontology::Species* terrain_species)
+        void Universe::set_terrain_species(yli::ontology::Species* const terrain_species)
         {
             this->terrain_species = terrain_species;
         }

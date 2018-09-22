@@ -411,7 +411,7 @@ namespace yli
                 yli::ontology::Species* get_terrain_species();
 
                 // this method sets a terrain `Species` pointer.
-                void set_terrain_species(yli::ontology::Species* terrain_species);
+                void set_terrain_species(yli::ontology::Species* const terrain_species);
 
                 std::size_t get_number_of_worlds() const;
 
