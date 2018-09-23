@@ -651,7 +651,7 @@ namespace yli
             {
                 if (this->terrain_species != nullptr)
                 {
-                    GLfloat ground_y = yli::ontology::get_floor_level(
+                    float ground_y = yli::ontology::get_floor_level(
                             this->terrain_species,
                             this->current_camera_cartesian_coordinates);
 
