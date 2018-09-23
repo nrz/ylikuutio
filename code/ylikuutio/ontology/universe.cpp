@@ -638,17 +638,17 @@ namespace yli
 
         bool Universe::compute_and_update_matrices_from_inputs()
         {
-            if (!this->is_flight_mode_in_use)
-            {
-                this->fall_speed += this->gravity;
-                this->current_camera_cartesian_coordinates.y -= this->fall_speed;
-            }
-
             GLfloat FoV = this->initialFoV;
 
-            // adjust position according to the ground.
             if (!this->is_flight_mode_in_use)
             {
+                // accelerate and fall.
+
+                this->fall_speed += this->gravity;
+                this->current_camera_cartesian_coordinates.y -= this->fall_speed;
+
+                // adjust position according to the ground.
+
                 if (this->terrain_species != nullptr)
                 {
                     float ground_y = yli::ontology::get_floor_level(
