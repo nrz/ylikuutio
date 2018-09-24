@@ -91,17 +91,19 @@ namespace yli
             SDL_Quit();
         }
 
+        void Universe::do_physics()
+        {
+            this->compute_and_update_matrices_from_inputs();
+        }
+
         void Universe::render()
         {
             if (this->active_world != nullptr)
             {
                 this->prerender();
 
-                if (this->compute_and_update_matrices_from_inputs())
-                {
-                    // render this `Universe` by calling `render()` function of the active `World`.
-                    this->active_world->render();
-                }
+                // render this `Universe` by calling `render()` function of the active `World`.
+                this->active_world->render();
 
                 this->postrender();
             }

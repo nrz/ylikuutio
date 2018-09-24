@@ -392,6 +392,9 @@ namespace yli
                 // destructor.
                 virtual ~Universe();
 
+                // this method processes the physics.
+                void do_physics();
+
                 // this method renders the active `Scene` of this `Universe`.
                 void render();
 
