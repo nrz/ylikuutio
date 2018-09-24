@@ -44,18 +44,18 @@ namespace yli
             const std::size_t image_width = terrain_species->get_image_width();
 
             // compute the indices of closest vertices.
-            std::size_t southwest_i = static_cast<std::size_t>(floor(z) * image_width + floor(x));
-            std::size_t southeast_i = static_cast<std::size_t>(floor(z) * image_width + ceil(x));
-            std::size_t northwest_i = static_cast<std::size_t>(ceil(z) * image_width + floor(x));
-            std::size_t northeast_i = static_cast<std::size_t>(ceil(z) * image_width + ceil(x));
+            const std::size_t southwest_i = static_cast<std::size_t>(floor(z) * image_width + floor(x));
+            const std::size_t southeast_i = static_cast<std::size_t>(floor(z) * image_width + ceil(x));
+            const std::size_t northwest_i = static_cast<std::size_t>(ceil(z) * image_width + floor(x));
+            const std::size_t northeast_i = static_cast<std::size_t>(ceil(z) * image_width + ceil(x));
 
             const std::vector<glm::vec3>& vertices = terrain_species->get_vertices();
 
             // read closest the heights of closest integer coordinates to be used in bilinear interpolation.
-            float southwest_height = vertices[southwest_i].y;
-            float southeast_height = vertices[southeast_i].y;
-            float northwest_height = vertices[northwest_i].y;
-            float northeast_height = vertices[northeast_i].y;
+            const float southwest_height = vertices[southwest_i].y;
+            const float southeast_height = vertices[southeast_i].y;
+            const float northwest_height = vertices[northwest_i].y;
+            const float northeast_height = vertices[northeast_i].y;
 
             // these are not actually means but interpolations.
             // the result of the interpolation is mean if and only if (ceil(x) - x == 0.5) & (x - floor(x) == 0.5) , likewise for the z coordinate.
