@@ -161,19 +161,35 @@ namespace yli
         // for bilinear interpolation.
         // These functions exist to avoid need to remember
         // the array order when calling `yli::geometry::get_face_normal`.
-        const glm::vec3& s_face_normal(const std::vector<glm::vec3>& face_normal_vector_vec3, const std::size_t x, const std::size_t z, const std::size_t image_width)
+        const glm::vec3& s_face_normal(
+                const std::vector<glm::vec3>& face_normal_vector_vec3,
+                const std::size_t x,
+                const std::size_t z,
+                const std::size_t image_width)
         {
             return yli::geometry::get_face_normal(face_normal_vector_vec3, x - 1, z - 1, ENE, image_width);
         }
-        const glm::vec3& w_face_normal(const std::vector<glm::vec3>& face_normal_vector_vec3, const std::size_t x, const std::size_t z, const std::size_t image_width)
+        const glm::vec3& w_face_normal(
+                const std::vector<glm::vec3>& face_normal_vector_vec3,
+                const std::size_t x,
+                const std::size_t z,
+                const std::size_t image_width)
         {
             return yli::geometry::get_face_normal(face_normal_vector_vec3, x - 1, z - 1, NNE, image_width);
         }
-        const glm::vec3& n_face_normal(const std::vector<glm::vec3>& face_normal_vector_vec3, const std::size_t x, const std::size_t z, const std::size_t image_width)
+        const glm::vec3& n_face_normal(
+                const std::vector<glm::vec3>& face_normal_vector_vec3,
+                const std::size_t x,
+                const std::size_t z,
+                const std::size_t image_width)
         {
             return yli::geometry::get_face_normal(face_normal_vector_vec3, x, z, WSW, image_width);
         }
-        const glm::vec3& e_face_normal(const std::vector<glm::vec3>& face_normal_vector_vec3, const std::size_t x, const std::size_t z, const std::size_t image_width)
+        const glm::vec3& e_face_normal(
+                const std::vector<glm::vec3>& face_normal_vector_vec3,
+                const std::size_t x,
+                const std::size_t z,
+                const std::size_t image_width)
         {
             return yli::geometry::get_face_normal(face_normal_vector_vec3, x, z, SSW, image_width);
         }
