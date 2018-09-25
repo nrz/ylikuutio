@@ -75,33 +75,22 @@ namespace yli
                     // Computing of face normals depends on triangulation type.
                     if (is_bilinear_interpolation_in_use)
                     {
-                        glm::vec3 edge1;
-                        glm::vec3 edge2;
-                        glm::vec3 face_normal;
+                        const glm::vec3& southeast_edge = temp_vertices[southeast(current_vertex_i, actual_image_width)] - temp_vertices[current_interpolated_vertex_i];
+                        const glm::vec3& southwest_edge = temp_vertices[southwest(current_vertex_i, actual_image_width)] - temp_vertices[current_interpolated_vertex_i];
+                        const glm::vec3& northwest_edge = temp_vertices[northwest(current_vertex_i, actual_image_width)] - temp_vertices[current_interpolated_vertex_i];
+                        const glm::vec3& northeast_edge = temp_vertices[northeast(current_vertex_i, actual_image_width)] - temp_vertices[current_interpolated_vertex_i];
 
                         // Compute the normal of S face.
-                        edge1 = temp_vertices[southeast(current_vertex_i, actual_image_width)] - temp_vertices[current_interpolated_vertex_i];
-                        edge2 = temp_vertices[southwest(current_vertex_i, actual_image_width)] - temp_vertices[current_interpolated_vertex_i];
-                        face_normal = glm::normalize(glm::cross(edge1, edge2));
-                        face_normal_vector_vec3.push_back(face_normal);
+                        face_normal_vector_vec3.push_back(glm::normalize(glm::cross(southeast_edge, southwest_edge)));
 
                         // Compute the normal of W face.
-                        edge1 = temp_vertices[southwest(current_vertex_i, actual_image_width)] - temp_vertices[current_interpolated_vertex_i];
-                        edge2 = temp_vertices[northwest(current_vertex_i, actual_image_width)] - temp_vertices[current_interpolated_vertex_i];
-                        face_normal = glm::normalize(glm::cross(edge1, edge2));
-                        face_normal_vector_vec3.push_back(face_normal);
+                        face_normal_vector_vec3.push_back(glm::normalize(glm::cross(southwest_edge, northwest_edge)));
 
                         // Compute the normal of N face.
-                        edge1 = temp_vertices[northwest(current_vertex_i, actual_image_width)] - temp_vertices[current_interpolated_vertex_i];
-                        edge2 = temp_vertices[northeast(current_vertex_i, actual_image_width)] - temp_vertices[current_interpolated_vertex_i];
-                        face_normal = glm::normalize(glm::cross(edge1, edge2));
-                        face_normal_vector_vec3.push_back(face_normal);
+                        face_normal_vector_vec3.push_back(glm::normalize(glm::cross(northwest_edge, northeast_edge)));
 
                         // Compute the normal of E face.
-                        edge1 = temp_vertices[northeast(current_vertex_i, actual_image_width)] - temp_vertices[current_interpolated_vertex_i];
-                        edge2 = temp_vertices[southeast(current_vertex_i, actual_image_width)] - temp_vertices[current_interpolated_vertex_i];
-                        face_normal = glm::normalize(glm::cross(edge1, edge2));
-                        face_normal_vector_vec3.push_back(face_normal);
+                        face_normal_vector_vec3.push_back(glm::normalize(glm::cross(northeast_edge, southeast_edge)));
                     }
                     else if (is_southwest_northeast_edges_in_use)
                     {
