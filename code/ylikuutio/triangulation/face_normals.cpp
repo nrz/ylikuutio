@@ -28,9 +28,17 @@ namespace yli
         {
             std::size_t current_interpolated_vertex_i = actual_image_width * actual_image_height;
 
-            if (actual_image_width < 2 || actual_image_height < 2)
+            if (actual_image_width < 2)
             {
-                // If width or height is < 2, there are no faces.
+                // If width is < 2, there are no faces.
+                std::cerr << "ERROR: `actual_image_width` is less than 2.\n";
+                return false;
+            }
+
+            if (actual_image_height < 2)
+            {
+                // If height is < 2, there are no faces.
+                std::cerr << "ERROR: `actual_image_height` is less than 2.\n";
                 return false;
             }
 
@@ -40,6 +48,7 @@ namespace yli
                     (!is_bilinear_interpolation_in_use && !is_southwest_northeast_edges_in_use && !is_southeast_northwest_edges_in_use))
             {
                 // Exactly 1 triangulation method must be selected.
+                std::cerr << "ERROR: exactly 1 triangulation method must be selected.\n";
                 return false;
             }
 
@@ -48,6 +57,7 @@ namespace yli
                 if (temp_vertices.size() != actual_image_width * actual_image_height + (actual_image_width - 1) * (actual_image_height - 1))
                 {
                     // Number of vertices must be correct.
+                    std::cerr << "ERROR: incorrect number of vertices.\n";
                     return false;
                 }
 
@@ -60,6 +70,7 @@ namespace yli
                 if (temp_vertices.size() != actual_image_width * actual_image_height)
                 {
                     // If number of face normals is not width * height, then the number of vertices is incorrect.
+                    std::cerr << "ERROR: incorrect number of vertices.\n";
                     return false;
                 }
 
