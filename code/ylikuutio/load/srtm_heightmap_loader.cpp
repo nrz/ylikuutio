@@ -45,7 +45,8 @@ namespace yli
                 std::size_t& image_height,
                 const std::size_t x_step,
                 const std::size_t z_step,
-                const std::string& triangulation_type)
+                const std::string& triangulation_type,
+                const bool should_ylikuutio_use_real_texture_coordinates)
         {
             // For SRTM worlds, the right heightmap filename must be resolved first.
             // The SRTM filenames contain always the southwest coordinate of the block.

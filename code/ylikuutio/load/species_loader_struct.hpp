@@ -19,7 +19,8 @@ typedef struct SpeciesLoaderStruct
         longitude(NAN),
         planet_radius(NAN),
         divisor(NAN),
-        vram_buffer_in_use(true)
+        vram_buffer_in_use(true),
+        should_ylikuutio_use_real_texture_coordinates(true)
     {
         // constructor.
     }
@@ -37,6 +38,7 @@ typedef struct SpeciesLoaderStruct
     float planet_radius;            // for SRTM. can be a planet or a moon.
     float divisor;                  // for SRTM.
     bool vram_buffer_in_use;
+    bool should_ylikuutio_use_real_texture_coordinates;
 } SpeciesLoaderStruct;
 
 #endif

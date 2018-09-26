@@ -19,6 +19,7 @@ TEST(an_ASCII_grid_must_be_defined_and_interpolated_appropriately, test_3x3_0_1_
     const int32_t x_step = 1;
     const int32_t z_step = 1;
     const std::string triangulation_type = "bilinear_interpolation";
+    const bool should_ylikuutio_use_real_texture_coordinates = true;
 
     std::vector<glm::vec3> vertices;         // vertices of the object.
     std::vector<glm::vec2> UVs;              // UVs of the object.
@@ -35,7 +36,8 @@ TEST(an_ASCII_grid_must_be_defined_and_interpolated_appropriately, test_3x3_0_1_
             image_height,
             x_step,
             z_step,
-            triangulation_type);
+            triangulation_type,
+            should_ylikuutio_use_real_texture_coordinates);
 
     ASSERT_TRUE(model_loading_result);
 
