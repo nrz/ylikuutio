@@ -18,6 +18,7 @@
 // Include standard headers
 #include <cmath>    // NAN, std::isnan, std::pow
 #include <cstddef>  // std::size_t
+#include <iostream> // std::cout, std::cin, std::cerr
 #include <vector>   // std::vector
 
 namespace yli
@@ -68,6 +69,52 @@ namespace yli
             }
 
         template<class T1>
+            bool compute_range(
+                    const T1* const input_vertex_pointer,
+                    const std::size_t image_width,
+                    const std::size_t image_height,
+                    const std::size_t x_step,
+                    const std::size_t z_step,
+                    float& min_y_value,
+                    float& max_y_value,
+                    float& divisor)
+            {
+                for (std::size_t z = 0; z < image_height; z += z_step)
+                {
+                    for (std::size_t x = 0; x < image_width; x += x_step)
+                    {
+                        const T1& vertex_height = input_vertex_pointer[image_width * z + x];
+
+                        if (std::isnan(min_y_value) || vertex_height < min_y_value)
+                        {
+                            min_y_value = vertex_height;
+                        }
+
+                        if (std::isnan(max_y_value) || vertex_height > max_y_value)
+                        {
+                            max_y_value = vertex_height;
+                        }
+                    }
+                }
+
+                divisor = max_y_value - min_y_value;
+
+                if (std::isnan(divisor))
+                {
+                    std::cerr << "ERROR: the value of `divisor` is `NAN`.\n";
+                    return false;
+                }
+
+                if (divisor == 0)
+                {
+                    std::cerr << "ERROR: the value of `divisor` is 0.\n";
+                    return false;
+                }
+
+                return true;
+            }
+
+        template<class T1>
             bool define_vertices(
                     const T1* const input_vertex_pointer,
                     const std::size_t image_width,
@@ -98,37 +145,18 @@ namespace yli
 
                 if (!should_ylikuutio_use_real_texture_coordinates)
                 {
-                    for (std::size_t z = 0; z < image_height; z += z_step)
+                    bool result = yli::geometry::compute_range(
+                            input_vertex_pointer,
+                            image_width,
+                            image_height,
+                            x_step,
+                            z_step,
+                            min_y_value,
+                            max_y_value,
+                            divisor);
+
+                    if (!result)
                     {
-                        for (std::size_t x = 0; x < image_width; x += x_step)
-                        {
-                            const T1& vertex_height = input_vertex_pointer[image_width * z + x];
-
-                            if (std::isnan(min_y_value) || vertex_height < min_y_value)
-                            {
-                                min_y_value = vertex_height;
-                                std::cout << "value of min_y_value is " << min_y_value << "\n";
-                            }
-
-                            if (std::isnan(max_y_value) || vertex_height > max_y_value)
-                            {
-                                max_y_value = vertex_height;
-                                std::cout << "value of max_y_value is " << max_y_value << "\n";
-                            }
-                        }
-                    }
-
-                    divisor = max_y_value - min_y_value;
-
-                    if (std::isnan(divisor))
-                    {
-                        std::cerr << "ERROR: the value of `divisor` is `NAN`.\n";
-                        return false;
-                    }
-
-                    if (divisor == 0)
-                    {
-                        std::cerr << "ERROR: the value of `divisor` is 0.\n";
                         return false;
                     }
                 }
@@ -220,37 +248,18 @@ namespace yli
 
                 if (!should_ylikuutio_use_real_texture_coordinates)
                 {
-                    for (std::size_t z = 0; z < image_height; z += z_step)
+                    bool result = yli::geometry::compute_range(
+                            input_vertex_pointer,
+                            image_width,
+                            image_height,
+                            x_step,
+                            z_step,
+                            min_y_value,
+                            max_y_value,
+                            divisor);
+
+                    if (!result)
                     {
-                        for (std::size_t x = 0; x < image_width; x += x_step)
-                        {
-                            const T1& vertex_height = input_vertex_pointer[image_width * z + x];
-
-                            if (std::isnan(min_y_value) || vertex_height < min_y_value)
-                            {
-                                min_y_value = vertex_height;
-                                std::cout << "value of min_y_value is " << min_y_value << "\n";
-                            }
-
-                            if (std::isnan(max_y_value) || vertex_height > max_y_value)
-                            {
-                                max_y_value = vertex_height;
-                                std::cout << "value of max_y_value is " << max_y_value << "\n";
-                            }
-                        }
-                    }
-
-                    divisor = max_y_value - min_y_value;
-
-                    if (std::isnan(divisor))
-                    {
-                        std::cerr << "ERROR: the value of `divisor` is `NAN`.\n";
-                        return false;
-                    }
-
-                    if (divisor == 0)
-                    {
-                        std::cerr << "ERROR: the value of `divisor` is 0.\n";
                         return false;
                     }
                 }
