@@ -87,13 +87,11 @@ namespace yli
                         if (std::isnan(min_y_value) || vertex_height < min_y_value)
                         {
                             min_y_value = vertex_height;
-                            std::cout << "value of min_y_value is " << min_y_value << "\n";
                         }
 
                         if (std::isnan(max_y_value) || vertex_height > max_y_value)
                         {
                             max_y_value = vertex_height;
-                            std::cout << "value of max_y_value is " << max_y_value << "\n";
                         }
                     }
                 }
