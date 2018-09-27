@@ -45,7 +45,8 @@ typedef struct SpeciesStruct
         water_level(-1.0f * std::numeric_limits<float>::infinity()),
         is_terrain(false),
         is_symbiont_species(false),
-        vram_buffer_in_use(true)
+        vram_buffer_in_use(true),
+        should_ylikuutio_use_real_texture_coordinates(true)
     {
         // constructor.
     }
@@ -75,6 +76,7 @@ typedef struct SpeciesStruct
     bool is_terrain;                                    // worlds currently neither rotate nor translate.
     bool is_symbiont_species;
     bool vram_buffer_in_use;
+    bool should_ylikuutio_use_real_texture_coordinates;
 } SpeciesStruct;
 
 #endif

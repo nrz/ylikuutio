@@ -191,6 +191,7 @@ namespace yli
             triangulate_quads_struct.x_step = x_step;
             triangulate_quads_struct.z_step = z_step;
             triangulate_quads_struct.triangulation_type = triangulation_type;
+            triangulate_quads_struct.should_ylikuutio_use_real_texture_coordinates = should_ylikuutio_use_real_texture_coordinates;
 
             const bool result = yli::geometry::triangulate_quads(vertex_data, triangulate_quads_struct, out_vertices, out_UVs, out_normals);
             delete[] vertex_data;

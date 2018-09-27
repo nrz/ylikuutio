@@ -215,6 +215,7 @@ namespace yli
             triangulate_quads_struct.x_step = x_step;
             triangulate_quads_struct.z_step = z_step;
             triangulate_quads_struct.triangulation_type = triangulation_type;
+            triangulate_quads_struct.should_ylikuutio_use_real_texture_coordinates = should_ylikuutio_use_real_texture_coordinates;
 
             if (!std::isnan(heightmap_loader_struct.planet_radius))
             {
