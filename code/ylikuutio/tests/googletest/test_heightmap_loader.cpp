@@ -401,6 +401,7 @@ TEST(a_BMP_terrain_must_be_loaded_appropriately, load_3x3_BMP_terrain)
     const std::size_t x_step = 1;
     const std::size_t z_step = 1;
     const std::string triangulation_type = "bilinear_interpolation";
+    const bool should_ylikuutio_use_real_texture_coordinates = true;
 
     bool model_loading_result = yli::load::load_BMP_terrain(
             image_path,
@@ -412,7 +413,8 @@ TEST(a_BMP_terrain_must_be_loaded_appropriately, load_3x3_BMP_terrain)
             color_channel,
             x_step,
             z_step,
-            triangulation_type);
+            triangulation_type,
+            should_ylikuutio_use_real_texture_coordinates);
 
     ASSERT_TRUE(model_loading_result);
 
@@ -737,6 +739,7 @@ TEST(a_BMP_terrain_must_be_loaded_appropriately, load_256x256_BMP_terrain)
     const std::size_t x_step = 1;
     const std::size_t z_step = 1;
     const std::string triangulation_type = "bilinear_interpolation";
+    const bool should_ylikuutio_use_real_texture_coordinates = true;
 
     const bool model_loading_result = yli::load::load_BMP_terrain(
             image_path,
@@ -748,7 +751,8 @@ TEST(a_BMP_terrain_must_be_loaded_appropriately, load_256x256_BMP_terrain)
             color_channel,
             x_step,
             z_step,
-            triangulation_type);
+            triangulation_type,
+            should_ylikuutio_use_real_texture_coordinates);
 
     ASSERT_TRUE(model_loading_result);
 

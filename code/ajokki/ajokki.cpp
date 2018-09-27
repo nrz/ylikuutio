@@ -1118,6 +1118,9 @@ int main(const int argc, const char* argv[])
                 }
             }
 
+            // Gravity etc.
+            my_universe->do_physics();
+
             // Render the `Universe`.
             my_universe->render();
 

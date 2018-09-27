@@ -76,6 +76,8 @@ namespace yli
                     this->image_width            = -1;
                     this->image_height           = -1;
 
+                    this->should_ylikuutio_use_real_texture_coordinates = species_struct.should_ylikuutio_use_real_texture_coordinates;
+
                     if (!this->is_symbiont_species)
                     {
                         // get `childID` from `Material` and set pointer to this `Species`.
@@ -121,6 +123,7 @@ namespace yli
                         species_loader_struct.image_height_pointer = &this->image_height;
                         species_loader_struct.triangulation_type = this->triangulation_type;
                         species_loader_struct.vram_buffer_in_use = this->vram_buffer_in_use;
+                        species_loader_struct.should_ylikuutio_use_real_texture_coordinates = this->should_ylikuutio_use_real_texture_coordinates;
 
                         const bool is_debug_mode = true;
 
@@ -203,6 +206,8 @@ namespace yli
 
                 std::size_t image_width;
                 std::size_t image_height;
+
+                bool should_ylikuutio_use_real_texture_coordinates;
         };
     }
 }

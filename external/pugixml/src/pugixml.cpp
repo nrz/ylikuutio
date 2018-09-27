@@ -10871,13 +10871,14 @@ PUGI__NS_BEGIN
 			// Rewrite [position()=expr] with [expr]
 			// Note that this step has to go before classification to recognize [position()=1]
 			if ((_type == ast_filter || _type == ast_predicate) &&
+				_right && // workaround for clang static analyzer (_right is never null for ast_filter/ast_predicate)
 				_right->_type == ast_op_equal && _right->_left->_type == ast_func_position && _right->_right->_rettype == xpath_type_number)
 			{
 				_right = _right->_right;
 			}
 
 			// Classify filter/predicate ops to perform various optimizations during evaluation
-			if (_type == ast_filter || _type == ast_predicate)
+			if ((_type == ast_filter || _type == ast_predicate) && _right) // workaround for clang static analyzer (_right is never null for ast_filter/ast_predicate)
 			{
 				assert(_test == predicate_default);
 
@@ -10893,8 +10894,8 @@ PUGI__NS_BEGIN
 			// The former is a full form of //foo, the latter is much faster since it executes the node test immediately
 			// Do a similar kind of rewrite for self/descendant/descendant-or-self axes
 			// Note that we only rewrite positionally invariant steps (//foo[1] != /descendant::foo[1])
-			if (_type == ast_step && (_axis == axis_child || _axis == axis_self || _axis == axis_descendant || _axis == axis_descendant_or_self) && _left &&
-				_left->_type == ast_step && _left->_axis == axis_descendant_or_self && _left->_test == nodetest_type_node && !_left->_right &&
+			if (_type == ast_step && (_axis == axis_child || _axis == axis_self || _axis == axis_descendant || _axis == axis_descendant_or_self) &&
+				_left && _left->_type == ast_step && _left->_axis == axis_descendant_or_self && _left->_test == nodetest_type_node && !_left->_right &&
 				is_posinv_step())
 			{
 				if (_axis == axis_child || _axis == axis_descendant)
@@ -10906,7 +10907,9 @@ PUGI__NS_BEGIN
 			}
 
 			// Use optimized lookup table implementation for translate() with constant arguments
-			if (_type == ast_func_translate && _right->_type == ast_string_constant && _right->_next->_type == ast_string_constant)
+			if (_type == ast_func_translate &&
+				_right && // workaround for clang static analyzer (_right is never null for ast_func_translate)
+				_right->_type == ast_string_constant && _right->_next->_type == ast_string_constant)
 			{
 				unsigned char* table = translate_table_generate(alloc, _right->_data.string, _right->_next->_data.string);
 
@@ -10919,6 +10922,7 @@ PUGI__NS_BEGIN
 
 			// Use optimized path for @attr = 'value' or @attr = $value
 			if (_type == ast_op_equal &&
+				_left && // workaround for clang static analyzer (_left is never null for ast_op_equal)
 				_left->_type == ast_step && _left->_axis == axis_attribute && _left->_test == nodetest_name && !_left->_left && !_left->_right &&
 				(_right->_type == ast_string_constant || (_right->_type == ast_variable && _right->_rettype == xpath_type_string)))
 			{
@@ -12013,74 +12017,61 @@ namespace pugi
 
 		size_t size_ = static_cast<size_t>(end_ - begin_);
 
-		if (size_ <= 1)
+		// use internal buffer for 0 or 1 elements, heap buffer otherwise
+		xpath_node* storage = (size_ <= 1) ? _storage : static_cast<xpath_node*>(impl::xml_memory::allocate(size_ * sizeof(xpath_node)));
+
+		if (!storage)
 		{
-			// deallocate old buffer
-			if (_begin != &_storage) impl::xml_memory::deallocate(_begin);
-
-			// use internal buffer
-			if (begin_ != end_) _storage = *begin_;
-
-			_begin = &_storage;
-			_end = &_storage + size_;
-			_type = type_;
+		#ifdef PUGIXML_NO_EXCEPTIONS
+			return;
+		#else
+			throw std::bad_alloc();
+		#endif
 		}
-		else
-		{
-			// make heap copy
-			xpath_node* storage = static_cast<xpath_node*>(impl::xml_memory::allocate(size_ * sizeof(xpath_node)));
 
-			if (!storage)
-			{
-			#ifdef PUGIXML_NO_EXCEPTIONS
-				return;
-			#else
-				throw std::bad_alloc();
-			#endif
-			}
+		// deallocate old buffer
+		if (_begin != _storage)
+			impl::xml_memory::deallocate(_begin);
 
+		// size check is necessary because for begin_ = end_ = nullptr, memcpy is UB
+		if (size_)
 			memcpy(storage, begin_, size_ * sizeof(xpath_node));
 
-			// deallocate old buffer
-			if (_begin != &_storage) impl::xml_memory::deallocate(_begin);
-
-			// finalize
-			_begin = storage;
-			_end = storage + size_;
-			_type = type_;
-		}
+		_begin = storage;
+		_end = storage + size_;
+		_type = type_;
 	}
 
 #ifdef PUGIXML_HAS_MOVE
 	PUGI__FN void xpath_node_set::_move(xpath_node_set& rhs) PUGIXML_NOEXCEPT
 	{
 		_type = rhs._type;
-		_storage = rhs._storage;
-		_begin = (rhs._begin == &rhs._storage) ? &_storage : rhs._begin;
+		_storage[0] = rhs._storage[0];
+		_begin = (rhs._begin == rhs._storage) ? _storage : rhs._begin;
 		_end = _begin + (rhs._end - rhs._begin);
 
 		rhs._type = type_unsorted;
-		rhs._begin = &rhs._storage;
-		rhs._end = rhs._begin;
+		rhs._begin = rhs._storage;
+		rhs._end = rhs._storage;
 	}
 #endif
 
-	PUGI__FN xpath_node_set::xpath_node_set(): _type(type_unsorted), _begin(&_storage), _end(&_storage)
+	PUGI__FN xpath_node_set::xpath_node_set(): _type(type_unsorted), _begin(_storage), _end(_storage)
 	{
 	}
 
-	PUGI__FN xpath_node_set::xpath_node_set(const_iterator begin_, const_iterator end_, type_t type_): _type(type_unsorted), _begin(&_storage), _end(&_storage)
+	PUGI__FN xpath_node_set::xpath_node_set(const_iterator begin_, const_iterator end_, type_t type_): _type(type_unsorted), _begin(_storage), _end(_storage)
 	{
 		_assign(begin_, end_, type_);
 	}
 
 	PUGI__FN xpath_node_set::~xpath_node_set()
 	{
-		if (_begin != &_storage)
+		if (_begin != _storage)
 			impl::xml_memory::deallocate(_begin);
 	}
 
-	PUGI__FN xpath_node_set::xpath_node_set(const xpath_node_set& ns): _type(type_unsorted), _begin(&_storage), _end(&_storage)
+	PUGI__FN xpath_node_set::xpath_node_set(const xpath_node_set& ns): _type(type_unsorted), _begin(_storage), _end(_storage)
 	{
 		_assign(ns._begin, ns._end, ns._type);
 	}
@@ -12095,7 +12086,7 @@ namespace pugi
 	}
 
 #ifdef PUGIXML_HAS_MOVE
-	PUGI__FN xpath_node_set::xpath_node_set(xpath_node_set&& rhs) PUGIXML_NOEXCEPT: _type(type_unsorted), _begin(&_storage), _end(&_storage)
+	PUGI__FN xpath_node_set::xpath_node_set(xpath_node_set&& rhs) PUGIXML_NOEXCEPT: _type(type_unsorted), _begin(_storage), _end(_storage)
 	{
 		_move(rhs);
 	}
@@ -12104,7 +12095,7 @@ namespace pugi
 	{
 		if (this == &rhs) return *this;
 
-		if (_begin != &_storage)
+		if (_begin != _storage)
 			impl::xml_memory::deallocate(_begin);
 
 		_move(rhs);

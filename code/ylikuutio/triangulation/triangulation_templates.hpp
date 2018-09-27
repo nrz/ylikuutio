@@ -16,6 +16,7 @@
 #endif
 
 // Include standard headers
+#include <cmath>    // NAN, std::isnan, std::pow
 #include <cstddef>  // std::size_t
 #include <vector>   // std::vector
 
@@ -89,6 +90,49 @@ namespace yli
                     return false;
                 }
 
+                // Elevation maps are created using a mapping from [min_y_value, max_y_value] to [0, 1].
+                // `min_y_value` & `max_y_value` are needed only for elevation maps.
+                float min_y_value = NAN;
+                float max_y_value = NAN;
+                float divisor = NAN;
+
+                if (!should_ylikuutio_use_real_texture_coordinates)
+                {
+                    for (std::size_t z = 0; z < image_height; z += z_step)
+                    {
+                        for (std::size_t x = 0; x < image_width; x += x_step)
+                        {
+                            const T1& vertex_height = input_vertex_pointer[image_width * z + x];
+
+                            if (std::isnan(min_y_value) || vertex_height < min_y_value)
+                            {
+                                min_y_value = vertex_height;
+                                std::cout << "value of min_y_value is " << min_y_value << "\n";
+                            }
+
+                            if (std::isnan(max_y_value) || vertex_height > max_y_value)
+                            {
+                                max_y_value = vertex_height;
+                                std::cout << "value of max_y_value is " << max_y_value << "\n";
+                            }
+                        }
+                    }
+
+                    divisor = max_y_value - min_y_value;
+
+                    if (std::isnan(divisor))
+                    {
+                        std::cerr << "ERROR: the value of `divisor` is `NAN`.\n";
+                        return false;
+                    }
+
+                    if (divisor == 0)
+                    {
+                        std::cerr << "ERROR: the value of `divisor` is 0.\n";
+                        return false;
+                    }
+                }
+
                 const std::size_t actual_image_width = image_width / x_step;
                 const std::size_t actual_image_height = image_height / z_step;
                 std::size_t number_of_vertices = actual_image_width * actual_image_height;
@@ -124,7 +168,7 @@ namespace yli
                         }
                         else
                         {
-                            uv.x = static_cast<GLfloat>(y) / 256.0f;
+                            uv.x = static_cast<GLfloat>(y - min_y_value) / divisor;
                             uv.y = 0.0f;
                         }
 
@@ -168,6 +212,49 @@ namespace yli
                     return false;
                 }
 
+                // Elevation maps are created using a mapping from [min_y_value, max_y_value] to [0, 1].
+                // `min_y_value` & `max_y_value` are needed only for elevation maps.
+                float min_y_value = NAN;
+                float max_y_value = NAN;
+                float divisor = NAN;
+
+                if (!should_ylikuutio_use_real_texture_coordinates)
+                {
+                    for (std::size_t z = 0; z < image_height; z += z_step)
+                    {
+                        for (std::size_t x = 0; x < image_width; x += x_step)
+                        {
+                            const T1& vertex_height = input_vertex_pointer[image_width * z + x];
+
+                            if (std::isnan(min_y_value) || vertex_height < min_y_value)
+                            {
+                                min_y_value = vertex_height;
+                                std::cout << "value of min_y_value is " << min_y_value << "\n";
+                            }
+
+                            if (std::isnan(max_y_value) || vertex_height > max_y_value)
+                            {
+                                max_y_value = vertex_height;
+                                std::cout << "value of max_y_value is " << max_y_value << "\n";
+                            }
+                        }
+                    }
+
+                    divisor = max_y_value - min_y_value;
+
+                    if (std::isnan(divisor))
+                    {
+                        std::cerr << "ERROR: the value of `divisor` is `NAN`.\n";
+                        return false;
+                    }
+
+                    if (divisor == 0)
+                    {
+                        std::cerr << "ERROR: the value of `divisor` is 0.\n";
+                        return false;
+                    }
+                }
+
                 // Then, define the faces in a double loop.
                 // Begin from index `z_step`.
                 for (std::size_t z = z_step; z < image_height; z += z_step)
@@ -198,7 +285,7 @@ namespace yli
                         }
                         else
                         {
-                            uv.x = y / 256.0f;
+                            uv.x = static_cast<GLfloat>(y - min_y_value) / divisor;
                             uv.y = 0.0f;
                         }
 

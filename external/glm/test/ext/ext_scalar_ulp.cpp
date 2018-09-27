@@ -1,8 +1,7 @@
-#include <glm/gtc/ulp.hpp>
+#include <glm/ext/scalar_ulp.hpp>
 #include <glm/ext/scalar_relational.hpp>
-#include <limits>
 
-int test_ulp_float_dist()
+static int test_ulp_float_dist()
 {
 	int Error = 0;
 
@@ -21,7 +20,7 @@ int test_ulp_float_dist()
 	return Error;
 }
 
-int test_ulp_float_step()
+static int test_ulp_float_step()
 {
 	int Error = 0;
 
@@ -43,7 +42,7 @@ int test_ulp_float_step()
 	return Error;
 }
 
-int test_ulp_double_dist()
+static int test_ulp_double_dist()
 {
 	int Error = 0;
 
@@ -62,7 +61,7 @@ int test_ulp_double_dist()
 	return Error;
 }
 
-int test_ulp_double_step()
+static int test_ulp_double_step()
 {
 	int Error = 0;
 
@@ -95,5 +94,3 @@ int main()
 
 	return Error;
 }
-
-

@@ -147,19 +147,9 @@ namespace yli
                         normal_index[1] = southeast(current_vertex_i, actual_image_width);
                         normal_index[2] = southwest(current_vertex_i, actual_image_width);
 
-                        if (triangulate_quads_struct.should_ylikuutio_use_real_texture_coordinates)
-                        {
-                            uv_index[0] = current_interpolated_vertex_i;
-                            uv_index[1] = southeast(current_vertex_i, actual_image_width);
-                            uv_index[2] = southwest(current_vertex_i, actual_image_width);
-                        }
-                        else
-                        {
-                            // Use altitude as texture coordinate (useful for elevation maps).
-                            // uv_index[0] = static_cast<GLuint>(center_y(x, z, input_vertex_pointer, actual_image_width));
-                            // uv_index[1] = static_cast<GLuint>(southeast_y(x, z, input_vertex_pointer, actual_image_width));
-                            // uv_index[2] = static_cast<GLuint>(southwest_y(x, z, input_vertex_pointer, actual_image_width));
-                        }
+                        uv_index[0] = current_interpolated_vertex_i;
+                        uv_index[1] = southeast(current_vertex_i, actual_image_width);
+                        uv_index[2] = southwest(current_vertex_i, actual_image_width);
 
                         yli::geometry::output_triangle_vertices(
                                 temp_vertices,
@@ -181,19 +171,9 @@ namespace yli
                         normal_index[1] = southwest(current_vertex_i, actual_image_width);
                         normal_index[2] = northwest(current_vertex_i, actual_image_width);
 
-                        if (triangulate_quads_struct.should_ylikuutio_use_real_texture_coordinates)
-                        {
-                            uv_index[0] = current_interpolated_vertex_i;
-                            uv_index[1] = southwest(current_vertex_i, actual_image_width);
-                            uv_index[2] = northwest(current_vertex_i, actual_image_width);
-                        }
-                        else
-                        {
-                            // Use altitude as texture coordinate (useful for elevation maps).
-                            // uv_index[0] = static_cast<GLuint>(center_y(x, z, input_vertex_pointer, actual_image_width));
-                            // uv_index[1] = static_cast<GLuint>(southwest_y(x, z, input_vertex_pointer, actual_image_width));
-                            // uv_index[2] = static_cast<GLuint>(northwest_y(x, z, input_vertex_pointer, actual_image_width));
-                        }
+                        uv_index[0] = current_interpolated_vertex_i;
+                        uv_index[1] = southwest(current_vertex_i, actual_image_width);
+                        uv_index[2] = northwest(current_vertex_i, actual_image_width);
 
                         yli::geometry::output_triangle_vertices(
                                 temp_vertices,
@@ -215,19 +195,9 @@ namespace yli
                         normal_index[1] = northwest(current_vertex_i, actual_image_width);
                         normal_index[2] = northeast(current_vertex_i, actual_image_width);
 
-                        if (triangulate_quads_struct.should_ylikuutio_use_real_texture_coordinates)
-                        {
-                            uv_index[0] = current_interpolated_vertex_i;
-                            uv_index[1] = northwest(current_vertex_i, actual_image_width);
-                            uv_index[2] = northeast(current_vertex_i, actual_image_width);
-                        }
-                        else
-                        {
-                            // Use altitude as texture coordinate (useful for elevation maps).
-                            // uv_index[0] = static_cast<GLuint>(center_y(x, z, input_vertex_pointer, actual_image_width));
-                            // uv_index[1] = static_cast<GLuint>(northwest_y(x, z, input_vertex_pointer, actual_image_width));
-                            // uv_index[2] = static_cast<GLuint>(northeast_y(x, z, input_vertex_pointer, actual_image_width));
-                        }
+                        uv_index[0] = current_interpolated_vertex_i;
+                        uv_index[1] = northwest(current_vertex_i, actual_image_width);
+                        uv_index[2] = northeast(current_vertex_i, actual_image_width);
 
                         yli::geometry::output_triangle_vertices(
                                 temp_vertices,
@@ -249,19 +219,9 @@ namespace yli
                         normal_index[1] = northeast(current_vertex_i, actual_image_width);
                         normal_index[2] = southeast(current_vertex_i, actual_image_width);
 
-                        if (triangulate_quads_struct.should_ylikuutio_use_real_texture_coordinates)
-                        {
-                            uv_index[0] = current_interpolated_vertex_i;
-                            uv_index[1] = northeast(current_vertex_i, actual_image_width);
-                            uv_index[2] = southeast(current_vertex_i, actual_image_width);
-                        }
-                        else
-                        {
-                            // Use altitude as texture coordinate (useful for elevation maps).
-                            // uv_index[0] = static_cast<GLuint>(center_y(x, z, input_vertex_pointer, actual_image_width));
-                            // uv_index[1] = static_cast<GLuint>(northeast_y(x, z, input_vertex_pointer, actual_image_width));
-                            // uv_index[2] = static_cast<GLuint>(southeast_y(x, z, input_vertex_pointer, actual_image_width));
-                        }
+                        uv_index[0] = current_interpolated_vertex_i;
+                        uv_index[1] = northeast(current_vertex_i, actual_image_width);
+                        uv_index[2] = southeast(current_vertex_i, actual_image_width);
 
                         yli::geometry::output_triangle_vertices(
                                 temp_vertices,
@@ -330,19 +290,9 @@ namespace yli
                         normal_index[1] = southwest(current_vertex_i, actual_image_width);
                         normal_index[2] = northeast(current_vertex_i, actual_image_width);
 
-                        if (triangulate_quads_struct.should_ylikuutio_use_real_texture_coordinates)
-                        {
-                            uv_index[0] = southeast(current_vertex_i, actual_image_width);
-                            uv_index[1] = southwest(current_vertex_i, actual_image_width);
-                            uv_index[2] = northeast(current_vertex_i, actual_image_width);
-                        }
-                        else
-                        {
-                            // Use altitude as texture coordinate (useful for elevation maps).
-                            // uv_index[0] = static_cast<GLuint>(southeast_y(x, z, input_vertex_pointer, actual_image_width));
-                            // uv_index[1] = static_cast<GLuint>(southwest_y(x, z, input_vertex_pointer, actual_image_width));
-                            // uv_index[2] = static_cast<GLuint>(northeast_y(x, z, input_vertex_pointer, actual_image_width));
-                        }
+                        uv_index[0] = southeast(current_vertex_i, actual_image_width);
+                        uv_index[1] = southwest(current_vertex_i, actual_image_width);
+                        uv_index[2] = northeast(current_vertex_i, actual_image_width);
 
                         yli::geometry::output_triangle_vertices(
                                 temp_vertices,
@@ -364,19 +314,9 @@ namespace yli
                         normal_index[1] = northeast(current_vertex_i, actual_image_width);
                         normal_index[2] = southwest(current_vertex_i, actual_image_width);
 
-                        if (triangulate_quads_struct.should_ylikuutio_use_real_texture_coordinates)
-                        {
-                            uv_index[0] = northwest(current_vertex_i, actual_image_width);
-                            uv_index[1] = northeast(current_vertex_i, actual_image_width);
-                            uv_index[2] = southwest(current_vertex_i, actual_image_width);
-                        }
-                        else
-                        {
-                            // Use altitude as texture coordinate (useful for elevation maps).
-                            // uv_index[0] = static_cast<GLuint>(northwest_y(x, z, input_vertex_pointer, actual_image_width));
-                            // uv_index[1] = static_cast<GLuint>(northeast_y(x, z, input_vertex_pointer, actual_image_width));
-                            // uv_index[2] = static_cast<GLuint>(southwest_y(x, z, input_vertex_pointer, actual_image_width));
-                        }
+                        uv_index[0] = northwest(current_vertex_i, actual_image_width);
+                        uv_index[1] = northeast(current_vertex_i, actual_image_width);
+                        uv_index[2] = southwest(current_vertex_i, actual_image_width);
 
                         yli::geometry::output_triangle_vertices(
                                 temp_vertices,
@@ -443,19 +383,9 @@ namespace yli
                         normal_index[1] = northwest(current_vertex_i, actual_image_width);
                         normal_index[2] = southeast(current_vertex_i, actual_image_width);
 
-                        if (triangulate_quads_struct.should_ylikuutio_use_real_texture_coordinates)
-                        {
-                            uv_index[0] = southwest(current_vertex_i, actual_image_width);
-                            uv_index[1] = northwest(current_vertex_i, actual_image_width);
-                            uv_index[2] = southeast(current_vertex_i, actual_image_width);
-                        }
-                        else
-                        {
-                            // Use altitude as texture coordinate (useful for elevation maps).
-                            // uv_index[0] = static_cast<GLuint>(southwest_y(x, z, input_vertex_pointer, actual_image_width));
-                            // uv_index[1] = static_cast<GLuint>(northwest_y(x, z, input_vertex_pointer, actual_image_width));
-                            // uv_index[2] = static_cast<GLuint>(southeast_y(x, z, input_vertex_pointer, actual_image_width));
-                        }
+                        uv_index[0] = southwest(current_vertex_i, actual_image_width);
+                        uv_index[1] = northwest(current_vertex_i, actual_image_width);
+                        uv_index[2] = southeast(current_vertex_i, actual_image_width);
 
                         yli::geometry::output_triangle_vertices(
                                 temp_vertices,
@@ -477,19 +407,9 @@ namespace yli
                         normal_index[1] = southeast(current_vertex_i, actual_image_width);
                         normal_index[2] = northwest(current_vertex_i, actual_image_width);
 
-                        if (triangulate_quads_struct.should_ylikuutio_use_real_texture_coordinates)
-                        {
-                            uv_index[0] = northeast(current_vertex_i, actual_image_width);
-                            uv_index[1] = southeast(current_vertex_i, actual_image_width);
-                            uv_index[2] = northwest(current_vertex_i, actual_image_width);
-                        }
-                        else
-                        {
-                            // Use altitude as texture coordinate (useful for elevation maps).
-                            // uv_index[0] = static_cast<GLuint>(northeast_y(x, z, input_vertex_pointer, actual_image_width));
-                            // uv_index[1] = static_cast<GLuint>(southeast_y(x, z, input_vertex_pointer, actual_image_width));
-                            // uv_index[2] = static_cast<GLuint>(northwest_y(x, z, input_vertex_pointer, actual_image_width));
-                        }
+                        uv_index[0] = northeast(current_vertex_i, actual_image_width);
+                        uv_index[1] = southeast(current_vertex_i, actual_image_width);
+                        uv_index[2] = northwest(current_vertex_i, actual_image_width);
 
                         yli::geometry::output_triangle_vertices(
                                 temp_vertices,

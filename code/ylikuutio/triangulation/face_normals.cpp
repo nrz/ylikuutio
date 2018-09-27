@@ -28,9 +28,17 @@ namespace yli
         {
             std::size_t current_interpolated_vertex_i = actual_image_width * actual_image_height;
 
-            if (actual_image_width < 2 || actual_image_height < 2)
+            if (actual_image_width < 2)
             {
-                // If width or height is < 2, there are no faces.
+                // If width is < 2, there are no faces.
+                std::cerr << "ERROR: `actual_image_width` is less than 2.\n";
+                return false;
+            }
+
+            if (actual_image_height < 2)
+            {
+                // If height is < 2, there are no faces.
+                std::cerr << "ERROR: `actual_image_height` is less than 2.\n";
                 return false;
             }
 
@@ -40,6 +48,7 @@ namespace yli
                     (!is_bilinear_interpolation_in_use && !is_southwest_northeast_edges_in_use && !is_southeast_northwest_edges_in_use))
             {
                 // Exactly 1 triangulation method must be selected.
+                std::cerr << "ERROR: exactly 1 triangulation method must be selected.\n";
                 return false;
             }
 
@@ -48,6 +57,7 @@ namespace yli
                 if (temp_vertices.size() != actual_image_width * actual_image_height + (actual_image_width - 1) * (actual_image_height - 1))
                 {
                     // Number of vertices must be correct.
+                    std::cerr << "ERROR: incorrect number of vertices.\n";
                     return false;
                 }
 
@@ -60,6 +70,7 @@ namespace yli
                 if (temp_vertices.size() != actual_image_width * actual_image_height)
                 {
                     // If number of face normals is not width * height, then the number of vertices is incorrect.
+                    std::cerr << "ERROR: incorrect number of vertices.\n";
                     return false;
                 }
 
@@ -75,33 +86,22 @@ namespace yli
                     // Computing of face normals depends on triangulation type.
                     if (is_bilinear_interpolation_in_use)
                     {
-                        glm::vec3 edge1;
-                        glm::vec3 edge2;
-                        glm::vec3 face_normal;
+                        const glm::vec3& southeast_edge = temp_vertices[southeast(current_vertex_i, actual_image_width)] - temp_vertices[current_interpolated_vertex_i];
+                        const glm::vec3& southwest_edge = temp_vertices[southwest(current_vertex_i, actual_image_width)] - temp_vertices[current_interpolated_vertex_i];
+                        const glm::vec3& northwest_edge = temp_vertices[northwest(current_vertex_i, actual_image_width)] - temp_vertices[current_interpolated_vertex_i];
+                        const glm::vec3& northeast_edge = temp_vertices[northeast(current_vertex_i, actual_image_width)] - temp_vertices[current_interpolated_vertex_i];
 
                         // Compute the normal of S face.
-                        edge1 = temp_vertices[southeast(current_vertex_i, actual_image_width)] - temp_vertices[current_interpolated_vertex_i];
-                        edge2 = temp_vertices[southwest(current_vertex_i, actual_image_width)] - temp_vertices[current_interpolated_vertex_i];
-                        face_normal = glm::normalize(glm::cross(edge1, edge2));
-                        face_normal_vector_vec3.push_back(face_normal);
+                        face_normal_vector_vec3.push_back(glm::normalize(glm::cross(southeast_edge, southwest_edge)));
 
                         // Compute the normal of W face.
-                        edge1 = temp_vertices[southwest(current_vertex_i, actual_image_width)] - temp_vertices[current_interpolated_vertex_i];
-                        edge2 = temp_vertices[northwest(current_vertex_i, actual_image_width)] - temp_vertices[current_interpolated_vertex_i];
-                        face_normal = glm::normalize(glm::cross(edge1, edge2));
-                        face_normal_vector_vec3.push_back(face_normal);
+                        face_normal_vector_vec3.push_back(glm::normalize(glm::cross(southwest_edge, northwest_edge)));
 
                         // Compute the normal of N face.
-                        edge1 = temp_vertices[northwest(current_vertex_i, actual_image_width)] - temp_vertices[current_interpolated_vertex_i];
-                        edge2 = temp_vertices[northeast(current_vertex_i, actual_image_width)] - temp_vertices[current_interpolated_vertex_i];
-                        face_normal = glm::normalize(glm::cross(edge1, edge2));
-                        face_normal_vector_vec3.push_back(face_normal);
+                        face_normal_vector_vec3.push_back(glm::normalize(glm::cross(northwest_edge, northeast_edge)));
 
                         // Compute the normal of E face.
-                        edge1 = temp_vertices[northeast(current_vertex_i, actual_image_width)] - temp_vertices[current_interpolated_vertex_i];
-                        edge2 = temp_vertices[southeast(current_vertex_i, actual_image_width)] - temp_vertices[current_interpolated_vertex_i];
-                        face_normal = glm::normalize(glm::cross(edge1, edge2));
-                        face_normal_vector_vec3.push_back(face_normal);
+                        face_normal_vector_vec3.push_back(glm::normalize(glm::cross(northeast_edge, southeast_edge)));
                     }
                     else if (is_southwest_northeast_edges_in_use)
                     {
@@ -147,7 +147,7 @@ namespace yli
         }
 
         // for bilinear interpolation.
-        glm::vec3 get_face_normal(
+        const glm::vec3& get_face_normal(
                 const std::vector<glm::vec3>& face_normal_data,
                 const std::size_t x,
                 const std::size_t z,
@@ -161,19 +161,35 @@ namespace yli
         // for bilinear interpolation.
         // These functions exist to avoid need to remember
         // the array order when calling `yli::geometry::get_face_normal`.
-        glm::vec3 s_face_normal(const std::vector<glm::vec3>& face_normal_vector_vec3, const std::size_t x, const std::size_t z, const std::size_t image_width)
+        const glm::vec3& s_face_normal(
+                const std::vector<glm::vec3>& face_normal_vector_vec3,
+                const std::size_t x,
+                const std::size_t z,
+                const std::size_t image_width)
         {
             return yli::geometry::get_face_normal(face_normal_vector_vec3, x - 1, z - 1, ENE, image_width);
         }
-        glm::vec3 w_face_normal(const std::vector<glm::vec3>& face_normal_vector_vec3, const std::size_t x, const std::size_t z, const std::size_t image_width)
+        const glm::vec3& w_face_normal(
+                const std::vector<glm::vec3>& face_normal_vector_vec3,
+                const std::size_t x,
+                const std::size_t z,
+                const std::size_t image_width)
         {
             return yli::geometry::get_face_normal(face_normal_vector_vec3, x - 1, z - 1, NNE, image_width);
         }
-        glm::vec3 n_face_normal(const std::vector<glm::vec3>& face_normal_vector_vec3, const std::size_t x, const std::size_t z, const std::size_t image_width)
+        const glm::vec3& n_face_normal(
+                const std::vector<glm::vec3>& face_normal_vector_vec3,
+                const std::size_t x,
+                const std::size_t z,
+                const std::size_t image_width)
         {
             return yli::geometry::get_face_normal(face_normal_vector_vec3, x, z, WSW, image_width);
         }
-        glm::vec3 e_face_normal(const std::vector<glm::vec3>& face_normal_vector_vec3, const std::size_t x, const std::size_t z, const std::size_t image_width)
+        const glm::vec3& e_face_normal(
+                const std::vector<glm::vec3>& face_normal_vector_vec3,
+                const std::size_t x,
+                const std::size_t z,
+                const std::size_t image_width)
         {
             return yli::geometry::get_face_normal(face_normal_vector_vec3, x, z, SSW, image_width);
         }

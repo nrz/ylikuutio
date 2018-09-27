@@ -33,6 +33,7 @@
 + [2.16. GLM\_FORCE\_DEPTH\_ZERO\_TO\_ONE: Force the use of a clip space between 0 to 1](#section2_16)
 + [2.17. GLM\_FORCE\_SIZE\_T\_LENGTH: Vector and matrix static size type](#section2_17)
 + [2.18. GLM\_FORCE\_UNRESTRICTED\_GENTYPE: Removing genType restriction](#section2_18)
++ [2.19. GLM\_FORCE\_SILENT\_WARNINGS: Silent C++ warnings from language extensions](#section2_19)
 + [3. Stable extensions](#section3)
 + [3.1. Scalar types](#section3_1)
 + [3.2. Scalar functions](#section3_2)
@@ -696,6 +697,11 @@ int average(int const A, int const B)
 }
 ```
 
+### <a name="section2_19"></a> 2.19. GLM\_FORCE\_SILENT\_WARNINGS: Silent C++ warnings from language extensions
+
+When using /W4 on Visual C++ or -Wpedantic on GCC, for example, the compilers will generate warnings for using C++ language extensions (/Za with Visual C++) such as anonymous struct.
+GLM relies on anonymous structs for swizzle operators and aligned vector types. To silent those warnings define `GLM_FORCE_SILENT_WARNINGS` before including GLM headers.
+
 ---
 <div style="page-break-after: always;"> </div>
 
@@ -785,6 +791,22 @@ bool equalULP1(float const a, float const b)
 ```
 
 Include `<glm/ext/scalar_constants.hpp>` to use these features.
+
+#### 3.2.4. GLM_EXT_scalar_ulp
+
+This extension exposes function that measure of accuracy in numeric calculations.
+
+```cpp
+#include <glm/ext/scalar_ulp.hpp>
+
+bool test_ulp(float x)
+{
+    float const a = glm::next_float(x); // return a float a ULP away from the float argument.
+    return float_distance(a, x) == 1; // check both float are a single ULP away.
+}
+```
+
+Include `<glm/ext/scalar_ulp.hpp>` to use these features.
 
 ### <a name="section3_3"></a> 3.3. Vector types
 
@@ -992,6 +1014,24 @@ bool epsilonEqual(glm::vec2 const& A, glm::vec2 const& B)
 ```
 
 Include `<glm/ext/vector_relational.hpp>` to use these features.
+
+#### 3.5.3. GLM_EXT_vector_ulp
+
+This extension exposes function that measure of accuracy in numeric calculations.
+
+```cpp
+#include <glm/ext/vector_ulp.hpp>
+#include <glm/ext/vector_float4.hpp>
+#include <glm/ext/vector_int4.hpp>
+
+bool test_ulp(glm::vec4 const& x)
+{
+    glm::vec4 const a = glm::next_float(x); // return a float a ULP away from the float argument.
+    return glm::all(float_distance(a, x) == glm::ivec4(1)); // check both float are a single ULP away.
+}
+```
+
+Include `<glm/ext/vector_ulp.hpp>` to use these features.
 
 ### <a name="section3_6"></a> 3.6. Matrix types
 
