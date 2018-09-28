@@ -85,7 +85,7 @@ To cross compile from Linux to Windows:
 
 Crosscompiling from Linux to Windows fails to compile tests.
 This is a known bug in Google Test. Just run `make` *again* if
-compiling ends before you get `ajokki.exe` and `tinyscheme_test.exe`.
+compiling ends before you get `ajokki.exe` and `s7_test.exe`.
 By default compiling tests is disabled when crosscompiling from Linux
 to Windows, due to this issue.
 https://github.com/google/googletest/issues/606
@@ -214,10 +214,10 @@ A: Some parts of Ylikuutio (shaders, some file loaders, etc.) are based
 on [http://www.opengl-tutorial.org/](http://www.opengl-tutorial.org/), which I really recommend for anyone
 interested in learning OpenGL programming. Ylikuutio also uses external
 libraries such as (in alphabetical order) Asio, Assimp, GLM, GLEW, OpenFBX,
-SDL, SFML, TinyScheme, and pugixml. The rest is written from scratch.
+s7, SDL, SFML, and pugixml. The rest is written from scratch.
 
-Q: Why TinyScheme is chosen as the scripting language of Ylikuutio?
-A: I like Lisp-family languages and TinyScheme fulfils my
+Q: Why s7 is chosen as the scripting language of Ylikuutio?
+A: I like Lisp-family languages and s7 fulfils my
    requirements related to a small size and a suitable license.
 
 Q: Does Ylikuutio use right-handed or left-handed world coordinates?
@@ -275,7 +275,7 @@ A: Ylikuutio uses right-handed world coordinates, so X grows eastward, Z grows s
 * more physics
 * artificial intelligence (AI) creatures
 * A\* and Theta\* pathfinding
-* TinyScheme as scripting language
+* s7 as scripting language
 * visual pattern recognition for AI: V1 (primary visual cortex) and V2 simulation
 * GUI for scripting, asset creation etc.
 * Internet gaming with ASIO
@@ -287,9 +287,9 @@ A: Ylikuutio uses right-handed world coordinates, so X grows eastward, Z grows s
 * [OpenGL Mathematics (GLM)](https://glm.g-truc.net/) is licensed under [The Happy Bunny License (Modified MIT License) and MIT License](http://glm.g-truc.net/copying.txt).
 * [The OpenGL Extension Wrangler Library (GLEW)](http://glew.sourceforge.net/) is licensed under [the Modified BSD License, the Mesa 3-D License (MIT) and the Khronos License (MIT)](https://github.com/nigels-com/glew#copyright-and-licensing).
 * [OpenFBX](https://github.com/nem0/OpenFBX) is licensed under [the MIT license](https://github.com/nem0/OpenFBX/blob/master/LICENSE).
+* [s7](https://ccrma.stanford.edu/software/snd/snd/s7.html) is licensed under a BSD license.
 * [SDL2](https://www.libsdl.org/) is licensed under [the zlib license](https://www.libsdl.org/).
 * [SFML](https://www.sfml-dev.org/) is licensed under [the zlib/png license](https://www.sfml-dev.org/license.php).
-* [TinyScheme](http://tinyscheme.sourceforge.net/) is licensed under [BSD-style license](http://tinyscheme.sourceforge.net/license.txt).
 * [pugixml](https://pugixml.org/) is licensed under [the MIT license](https://github.com/zeux/pugixml/blob/master/README.md).
 
 ### Libraries not yet in use

@@ -220,15 +220,11 @@ target_link_libraries(GLEW_200
     ${EXTRA_LIBS}
     )
 
-add_library(tinyscheme STATIC
-    tinyscheme-1.41/dynload.c
-    tinyscheme-1.41/dynload.h
-    tinyscheme-1.41/opdefines.h
-    tinyscheme-1.41/scheme.c
-    tinyscheme-1.41/scheme.h
-    tinyscheme-1.41/scheme-private.h
+add_library(s7 STATIC
+    s7/mus-config.h
+    s7/s7.c
+    s7/s7.h
     )
-set_property(TARGET tinyscheme PROPERTY COMPILE_FLAGS "-DSTANDALONE=0 -DUSE_INTERFACE=1")
 
 add_library(miniz STATIC
     OpenFBX/src/miniz.c
