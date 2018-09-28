@@ -21,7 +21,7 @@ do
     cd ${build_dir}
     ${script_dir}/compile_linux_clang
     ./unit_tests_with_googletest
-    ./tinyscheme_test
+    ./s7_test
     break
 done
 
