@@ -7,8 +7,8 @@ project(ylikuutio)
 # SET(CMAKE_C_FLAGS  "${CMAKE_C_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS}")
 # SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS}")
 
-# comment the following line to disable scripting with TinyScheme.
-set(ENABLE_SCRIPTING_WITH_TINYSCHEME true)
+# comment the following line to disable scripting with S7 Scheme.
+set(ENABLE_SCRIPTING_WITH_S7_SCHEME true)
 
 # comment the following line to use `libsdl2-dev` shipped with Linux.
 set(COMPILE_SDL_FROM_SOURCE true)
@@ -110,9 +110,9 @@ include_directories(
     .
     )
 
-if(ENABLE_SCRIPTING_WITH_TINYSCHEME)
+if(ENABLE_SCRIPTING_WITH_S7_SCHEME)
     include_directories(
-        external/tinyscheme-1.41/
+        external/s7/
         )
 endif()
 
@@ -272,9 +272,8 @@ configure_file(code/ylikuutio/shaders/StandardShading.fragmentshader StandardSha
 configure_file(code/ylikuutio/shaders/TextVertexShader.vertexshader TextVertexShader.vertexshader COPYONLY)
 configure_file(code/ylikuutio/shaders/TextVertexShader.fragmentshader TextVertexShader.fragmentshader COPYONLY)
 
-# TinyScheme code.
-configure_file(code/tinyscheme/hello_world.scm hello_world.scm COPYONLY)
-configure_file(external/tinyscheme-1.41/init.scm init.scm COPYONLY)
+# S7 Scheme code.
+configure_file(code/s7/hello_world.scm hello_world.scm COPYONLY)
 
 # 3D models.
 # Suzanne.
@@ -646,11 +645,11 @@ add_executable(ajokki
     )
 target_link_libraries(ajokki ylikuutio ${ALL_LIBS})
 
-if (ENABLE_SCRIPTING_WITH_TINYSCHEME)
-    # TinyScheme-test
-    add_executable(tinyscheme_test code/tinyscheme/tinyscheme_test.cpp
+if (ENABLE_SCRIPTING_WITH_S7_SCHEME)
+    # S7 Scheme test
+    add_executable(s7_test code/s7/s7_test.cpp
         )
-    target_link_libraries(tinyscheme_test tinyscheme)
+    target_link_libraries(s7_test s7 pthread)
 endif()
 
 # Asio-test

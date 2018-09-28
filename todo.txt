@@ -9,7 +9,6 @@ Tasks which are necessary for the development of Ylikuutio:
 [ ] Test code used to convert ASCII grid files (height maps) to binary FBX files by loading the FBX files created with it.
 [ ] Convert ASCII grid files into binary FBX files.
 [ ] Implement `Camera` entities.
-[ ] Evaluate s7 Scheme. https://ccrma.stanford.edu/software/snd/snd/s7.html
 [ ] Create `audio::Sound` class, whose parent is `Entity`.
 [ ] Create `audio::PlayList` class, whose parent is `Entity`.
 [ ] Implement `play` console command for playing `Sound`s and `Playlist`s.
@@ -73,13 +72,13 @@ Tasks which are necessary for the development of Ylikuutio:
 [ ] Implement Theta* route finding. http://aigamedev.com/open/tutorials/theta-star-any-angle-paths/
 [ ] Implement support for vector fonts.
 [ ] Implement rendering into a texture.
-[ ] Implement TinyScheme support for programming of AI objects (robots).
+[ ] Implement s7 support for programming of AI objects (robots).
 [ ] Implement dynamic not flowing water, using OpenGL shaders.
 
 Less urgent:
 [ ] Implement rigid body physics using Bullet. https://pybullet.org/wordpress/
 [ ] Implement flowing water (computed on a server, based on players' actions) using GridFluidSim3D. https://github.com/rlguy/GridFluidSim3D
-[ ] Implement TinyScheme support in console.
+[ ] Implement s7 support in console.
 [ ] Implement support for 3D text.
 [ ] Implement support for partially transparent text.
 [ ] Implement support for over 3D objects (`class HighDimensionalSpecies`, `class HighDimensionalObject`). projected into 3D space in `HighDimensionalObject::render()`).
@@ -120,3 +119,4 @@ Ready:
 [x] Fix Coverity Scan Travis integration configuration (in `.travis.yml`).
 [x] Rewrite `obj_loader.cpp` without `fscanf`, using instead `stringstream` for parsing.
 [x] Evaluate CHICKEN Scheme. https://www.call-cc.org/
+[x] Evaluate s7 Scheme. https://ccrma.stanford.edu/software/snd/snd/s7.html
