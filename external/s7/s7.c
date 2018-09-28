@@ -25270,7 +25270,6 @@ s7_pointer s7_load(s7_scheme *sc, const char *filename)
 
 
 #if WITH_C_LOADER
-#include <dlfcn.h>
 
 static block_t *full_filename(s7_scheme *sc, const char *filename)
 {
@@ -25299,149 +25298,12 @@ static block_t *full_filename(s7_scheme *sc, const char *filename)
 
 static s7_pointer g_load(s7_scheme *sc, s7_pointer args)
 {
+    s7_pointer name = NULL;
+    return(method_or_bust(sc, name, sc->load_symbol, args, T_STRING, 1));
+
   #define H_load "(load file (env (rootlet))) loads the scheme file 'file'. The 'env' argument \
 defaults to the rootlet.  To load into the current environment instead, pass (curlet)."
   #define Q_load s7_make_signature(sc, 3, sc->values_symbol, sc->is_string_symbol, sc->is_let_symbol)
-
-  FILE *fp = NULL;
-  s7_pointer name, port;
-  const char *fname;
-
-  name = car(args);
-  if (!is_string(name))
-    return(method_or_bust(sc, name, sc->load_symbol, args, T_STRING, 1));
-
-  if (is_not_null(cdr(args)))
-    {
-      s7_pointer e;
-      e = cadr(args);
-      if (!is_let(e))
-	return(wrong_type_argument_with_type(sc, sc->load_symbol, 2, e, a_let_string));
-      if (e == sc->rootlet)
-	sc->envir = sc->nil;
-      else sc->envir = e;
-    }
-  else sc->envir = sc->nil;
-
-  fname = string_value(name);
-  if ((!fname) || (!(*fname)))                 /* fopen("", "r") returns a file pointer?? */
-    return(s7_error(sc, sc->out_of_range_symbol, set_elist_2(sc, wrap_string(sc, "load's first argument, ~S, should be a filename", 47), name)));
-
-  if (is_directory(fname))
-    return(s7_error(sc, sc->wrong_type_arg_symbol, set_elist_2(sc, wrap_string(sc, "load argument, ~S, is a directory", 33), name)));
-
-#if WITH_C_LOADER
-  /* if fname ends in .so, try loading it as a c shared object
-   *   (load "/home/bil/cl/m_j0.so" (inlet (cons 'init_func 'init_m_j0)))
-   */
-  {
-    s7_int fname_len;
-
-    fname_len = safe_strlen(fname);
-    if ((fname_len > 3) &&
-	(is_pair(cdr(args))) &&
-	(local_strcmp((const char *)(fname + (fname_len - 3)), ".so")))
-      {
-	s7_pointer init;
-
-	init = s7_let_ref(sc, (is_null(sc->envir)) ? sc->rootlet : sc->envir, s7_make_symbol(sc, "init_func"));
-	if (is_symbol(init))
-	  {
-	    void *library;
-	    char *pwd_name;
-	    block_t *pname = NULL;
-
-	    if (fname[0] != '/')
-	      {
-		pname = full_filename(sc, fname); /* this is necessary, at least in Linux -- we can't blithely dlopen whatever is passed to us */
-		pwd_name = (char *)block_data(pname);
-	      }
-	    library = dlopen((pname) ? pwd_name : fname, RTLD_NOW);
-	    if (library)
-	      {
-		const char *init_name;
-		void *init_func;
-
-		init_name = symbol_name(init);
-		init_func = dlsym(library, init_name);
-		if (init_func)
-		  {
-		    typedef void *(*dl_func)(s7_scheme *sc);
-		    ((dl_func)init_func)(sc);
-		    if (pname) liberate(sc, pname);
-		    return(sc->T);
-		  }
-		else
-		  {
-		    s7_warn(sc, 512, "loaded %s, but can't find %s (%s)?\n", fname, init_name, dlerror());
-		    dlclose(library);
-		  }
-	      }
-	    else s7_warn(sc, 512, "load %s failed: %s\n", (pname) ? pwd_name : fname, dlerror());
-	    if (pname) liberate(sc, pname);
-	  }
-	else s7_warn(sc, 512, "can't load %s: no init function\n", fname);
-	return(sc->F);
-      }
-  }
-#endif
-
-  fp = fopen(fname, "r");
-
-#if WITH_GCC
-  if (!fp)
-    {
-      /* catch one special case, "~/..." since it causes 99.9% of the "can't load ..." errors */
-      if ((fname[0] == '~') &&
-	  (fname[1] == '/'))
-	{
-	  char *home;
-	  home = getenv("HOME");
-	  if (home)
-	    {
-	      block_t *b;
-	      char *filename;
-	      s7_int len;
-	      len = safe_strlen(fname) + safe_strlen(home) + 1;
-	      b = mallocate(sc, len);
-	      filename = (char *)block_data(b);
-	      filename[0] = '\0';
-	      catstrs(filename, len, home, (char *)(fname + 1), NULL);
-	      fp = fopen(filename, "r");
-	      liberate(sc, b);
-	    }
-	}
-    }
-#endif
-
-  if (!fp)
-    {
-      block_t *b;
-      b = search_load_path(sc, fname);
-      if (!b)
-	return(file_error(sc, "load", "can't open", fname));
-      fp = (FILE *)block_info(b);
-      liberate(sc, b);
-    }
-
-  port = read_file(sc, fp, fname, -1, "load");
-  port_file_number(port) = remember_file_name(sc, fname);
-  set_loader_port(port);
-  sc->temp6 = port;
-  push_input_port(sc, port);
-  sc->temp6 = sc->nil;
-
-  push_stack_op_let(sc, OP_LOAD_CLOSE_AND_POP_IF_EOF);  /* was pushing args and code, but I don't think they're used later */
-  push_stack_op_let(sc, OP_READ_INTERNAL);
-
-  /* now we've opened and moved to the file to be loaded, and set up the stack to return
-   *   to where we were.  Call *load-hook* if it is a procedure.
-   */
-
-  if (hook_has_functions(sc->load_hook))
-    s7_apply_function(sc, sc->load_hook, list_1(sc, sc->temp4 = s7_make_string(sc, fname)));
-
-  return(sc->unspecified);
 }
 
 
