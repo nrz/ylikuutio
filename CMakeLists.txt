@@ -649,7 +649,7 @@ if (ENABLE_SCRIPTING_WITH_S7_SCHEME)
     # S7 Scheme test
     add_executable(s7_test code/s7/s7_test.cpp
         )
-    target_link_libraries(s7_test s7)
+    target_link_libraries(s7_test s7 pthread)
 endif()
 
 # Asio-test
