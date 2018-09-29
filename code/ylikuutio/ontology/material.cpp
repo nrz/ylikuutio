@@ -204,5 +204,15 @@ namespace yli
                 shader_parent->set_terrain_species(terrain_species);
             }
         }
+
+        const std::string& Material::get_texture_file_format()
+        {
+            return this->texture_file_format;
+        }
+
+        const std::string& Material::get_texture_filename()
+        {
+            return this->texture_filename;
+        }
     }
 }
