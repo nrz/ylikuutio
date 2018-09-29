@@ -41,6 +41,11 @@ if (NOT(COMPILE_SDL_FROM_SOURCE))
     find_package(SDL2 REQUIRED)
 endif()
 
+if (NOT(COMPILE_SDL_FROM_SOURCE))
+    set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
+    find_package(assimp REQUIRED)
+endif()
+
 # Compile external dependencies
 add_subdirectory (external)
 
@@ -223,7 +228,7 @@ endif()
 
 set(ALL_LIBS
     ${OPENGL_LIBRARY}
-    # assimp
+    assimp
     GLEW_200
     pugixml
     miniz
