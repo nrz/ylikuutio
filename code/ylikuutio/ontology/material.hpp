@@ -54,8 +54,6 @@ namespace yli
                     this->is_symbiont_material     = material_struct.is_symbiont_material;
                     this->texture_file_format      = material_struct.texture_file_format;
                     this->texture_filename         = material_struct.texture_filename;
-                    this->char_texture_file_format = this->texture_file_format.c_str();
-                    this->char_texture_filename    = this->texture_filename.c_str();
                     this->number_of_species        = 0;
                     this->number_of_vector_fonts   = 0;
                     this->number_of_chunk_masters  = 0;
@@ -68,11 +66,11 @@ namespace yli
                         this->bind_to_parent();
 
                         // Load the texture.
-                        if ((std::strcmp(this->char_texture_file_format, "bmp") == 0) || (std::strcmp(this->char_texture_file_format, "BMP") == 0))
+                        if (this->texture_file_format == "bmp" || this->texture_file_format == "BMP")
                         {
                             this->texture = yli::load::load_BMP_texture(this->texture_filename);
                         }
-                        else if ((std::strcmp(this->char_texture_file_format, "dds") == 0) || (std::strcmp(this->char_texture_file_format, "DDS") == 0))
+                        else if (this->texture_file_format == "dds" || this->texture_file_format == "DDS")
                         {
                             this->texture = yli::load::load_DDS_texture(this->texture_filename);
                         }
@@ -156,8 +154,6 @@ namespace yli
 
                 std::string texture_file_format;       // type of the model file, eg. `"bmp"`.
                 std::string texture_filename;          // filename of the model file.
-                const char* char_texture_file_format;
-                const char* char_texture_filename;
         };
     }
 }
