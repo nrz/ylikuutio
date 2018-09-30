@@ -42,6 +42,7 @@ addons:
             - cmake
             - git
             - libx11-dev
+            - libassimp-dev
             - libgl1-mesa-dev
             - libglu1-mesa-dev
             - libsfml-dev
