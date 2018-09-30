@@ -43,9 +43,10 @@ endif()
 
 if (NOT(COMPILE_SDL_FROM_SOURCE))
     set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
-    if(NOT(CMAKE_SYSTEM_NAME STREQUAL "Windows"))
-        find_package(assimp REQUIRED)
-    endif()
+endif()
+
+if(NOT(CMAKE_SYSTEM_NAME STREQUAL "Windows"))
+    find_package(assimp REQUIRED)
 endif()
 
 # Compile external dependencies
