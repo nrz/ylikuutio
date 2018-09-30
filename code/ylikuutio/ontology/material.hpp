@@ -54,8 +54,6 @@ namespace yli
                     this->is_symbiont_material     = material_struct.is_symbiont_material;
                     this->texture_file_format      = material_struct.texture_file_format;
                     this->texture_filename         = material_struct.texture_filename;
-                    this->char_texture_file_format = this->texture_file_format.c_str();
-                    this->char_texture_filename    = this->texture_filename.c_str();
                     this->number_of_species        = 0;
                     this->number_of_vector_fonts   = 0;
                     this->number_of_chunk_masters  = 0;
@@ -68,11 +66,11 @@ namespace yli
                         this->bind_to_parent();
 
                         // Load the texture.
-                        if ((std::strcmp(this->char_texture_file_format, "bmp") == 0) || (std::strcmp(this->char_texture_file_format, "BMP") == 0))
+                        if (this->texture_file_format == "bmp" || this->texture_file_format == "BMP")
                         {
                             this->texture = yli::load::load_BMP_texture(this->texture_filename);
                         }
-                        else if ((std::strcmp(this->char_texture_file_format, "dds") == 0) || (std::strcmp(this->char_texture_file_format, "DDS") == 0))
+                        else if (this->texture_file_format == "dds" || this->texture_file_format == "DDS")
                         {
                             this->texture = yli::load::load_DDS_texture(this->texture_filename);
                         }
@@ -116,6 +114,9 @@ namespace yli
                 // currently there can be only one terrain `Species` in each `Scene` (used in collision detection).
                 void set_terrain_species(yli::ontology::Species* const terrain_species);
 
+                const std::string& get_texture_file_format();
+                const std::string& get_texture_filename();
+
                 template<class T1>
                     friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);
                 template <class T1>
@@ -153,8 +154,6 @@ namespace yli
 
                 std::string texture_file_format;       // type of the model file, eg. `"bmp"`.
                 std::string texture_filename;          // filename of the model file.
-                const char* char_texture_file_format;
-                const char* char_texture_filename;
         };
     }
 }
