@@ -437,6 +437,12 @@ void glTF2Importer::ImportMeshes(glTF2::Asset& r)
             }
 
             for (size_t tc = 0; tc < attr.texcoord.size() && tc < AI_MAX_NUMBER_OF_TEXTURECOORDS; ++tc) {
+                if (attr.texcoord[tc]->count != aim->mNumVertices) {
+                    DefaultLogger::get()->warn("Texcoord stream size in mesh \"" + mesh.name +
+                                               "\" does not match the vertex count");
+                    continue;
+                }
+
                 attr.texcoord[tc]->ExtractData(aim->mTextureCoords[tc]);
                 aim->mNumUVComponents[tc] = attr.texcoord[tc]->GetNumComponents();
 
@@ -812,7 +818,7 @@ void glTF2Importer::ImportEmbeddedTextures(glTF2::Asset& r)
 
     // Add the embedded textures
     for (size_t i = 0; i < r.images.Size(); ++i) {
-        Image img = r.images[i];
+        Image &img = r.images[i];
         if (!img.HasData()) continue;
 
         int idx = mScene->mNumTextures++;
