@@ -45,10 +45,6 @@ if (NOT(COMPILE_SDL_FROM_SOURCE))
     set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
 endif()
 
-if(NOT(CMAKE_SYSTEM_NAME STREQUAL "Windows"))
-    find_package(assimp REQUIRED)
-endif()
-
 # Compile external dependencies
 add_subdirectory (external)
 
@@ -110,6 +106,7 @@ endif()
 
 include_directories(
     # external/asio/asio/include/
+    external/assimp/include/
     external/FastNoiseSIMD/
     external/glew-2.0.0/include/
     external/glm/
@@ -229,24 +226,13 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
     include_directories(${GTEST_INCLUDE_DIRS})
 endif()
 
-if(NOT(CMAKE_SYSTEM_NAME STREQUAL "Windows"))
-    set(ALL_LIBS
-        ${OPENGL_LIBRARY}
-        assimp
-        GLEW_200
-        pugixml
-        miniz
-        OpenFBX
-        )
-else()
-    set(ALL_LIBS
-        ${OPENGL_LIBRARY}
-        GLEW_200
-        pugixml
-        miniz
-        OpenFBX
-        )
-endif()
+set(ALL_LIBS
+    ${OPENGL_LIBRARY}
+    GLEW_200
+    pugixml
+    miniz
+    OpenFBX
+    )
 
 if (COMPILE_SFML_FROM_SOURCE)
     set(ALL_LIBS
@@ -628,13 +614,12 @@ add_library(ylikuutio STATIC
     )
 
 # yli_convert
-if(NOT(CMAKE_SYSTEM_NAME STREQUAL "Windows"))
-    add_executable(yli_convert
-        # yli_convert, in alphabetical order
-        code/tools/yli_convert.cpp
-        )
-    target_link_libraries(yli_convert ylikuutio ${ALL_LIBS})
-endif()
+add_executable(yli_convert
+    # yli_convert, in alphabetical order
+    code/tools/yli_convert.cpp
+    )
+target_link_libraries(yli_convert ylikuutio ${ALL_LIBS} assimp)
+set_target_properties(yli_convert PROPERTIES COMPILE_DEFINITIONS "USE_ASSIMP")
 
 # Ajokki
 add_executable(ajokki
@@ -691,9 +676,6 @@ if(FALSE)
 endif()
 
 # Xcode and Visual working directories
-if(NOT(CMAKE_SYSTEM_NAME STREQUAL "Windows"))
-    set_target_properties(ajokki PROPERTIES COMPILE_DEFINITIONS "USE_ASSIMP")
-endif()
 set_target_properties(ajokki PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/code/ajokki/")
 create_target_launcher(ajokki WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/code/ajokki/")
 

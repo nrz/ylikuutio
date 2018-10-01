@@ -12,6 +12,7 @@ add_definitions(
 
 include_directories(
     # asio/asio/include/
+    assimp/include/
     FastNoiseSIMD/
     glew-2.0.0/include/
     glm/
@@ -23,6 +24,9 @@ include_directories(
 
 # pugixml
 add_subdirectory(pugixml)
+
+# assimp
+add_subdirectory(assimp)
 
 if (COMPILE_SDL_FROM_SOURCE)
     include_directories(
