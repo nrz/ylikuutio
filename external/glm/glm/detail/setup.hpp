@@ -283,6 +283,7 @@
 #else
 #	define GLM_HAS_CONSTEXPR ((GLM_LANG & GLM_LANG_CXX0X_FLAG) && GLM_HAS_INITIALIZER_LISTS && (\
 		((GLM_COMPILER & GLM_COMPILER_INTEL) && (GLM_COMPILER >= GLM_COMPILER_INTEL17)) || \
+		((GLM_COMPILER & GLM_COMPILER_GCC) && (GLM_COMPILER >= GLM_COMPILER_GCC6)) || \
 		((GLM_COMPILER & GLM_COMPILER_VC) && (GLM_COMPILER >= GLM_COMPILER_VC15))))
 #endif
 
@@ -723,6 +724,15 @@ namespace detail
 #endif
 
 ///////////////////////////////////////////////////////////////////////////////////
+// Use SIMD instruction sets
+
+#if GLM_HAS_ALIGNOF && (GLM_LANG & GLM_LANG_CXXMS_FLAG) && (GLM_ARCH & GLM_ARCH_SIMD_BIT)
+#	define GLM_CONFIG_SIMD GLM_ENABLE
+#else
+#	define GLM_CONFIG_SIMD GLM_DISABLE
+#endif
+
+///////////////////////////////////////////////////////////////////////////////////
 // Configure the use of defaulted function
 
 #if GLM_HAS_DEFAULTED_FUNCTIONS && GLM_CONFIG_CTOR_INIT == GLM_CTOR_INIT_DISABLE
@@ -740,19 +750,14 @@ namespace detail
 #	define GLM_FORCE_DEFAULT_ALIGNED_GENTYPES
 #endif
 
-#if GLM_HAS_ALIGNOF && (GLM_LANG & GLM_LANG_CXXMS_FLAG)
+#ifdef GLM_FORCE_DEFAULT_ALIGNED_GENTYPES
+#	define GLM_FORCE_ALIGNED_GENTYPES
+#endif
+
+#if GLM_HAS_ALIGNOF && (GLM_LANG & GLM_LANG_CXXMS_FLAG) && (defined(GLM_FORCE_ALIGNED_GENTYPES) || (GLM_CONFIG_SIMD == GLM_ENABLE))
 #	define GLM_CONFIG_ALIGNED_GENTYPES GLM_ENABLE
 #else
 #	define GLM_CONFIG_ALIGNED_GENTYPES GLM_DISABLE
-#endif
-
-///////////////////////////////////////////////////////////////////////////////////
-// Use SIMD instruction sets
-
-#if GLM_HAS_ALIGNOF && (GLM_LANG & GLM_LANG_CXXMS_FLAG) && (GLM_ARCH & GLM_ARCH_SIMD_BIT)
-#	define GLM_CONFIG_SIMD GLM_ENABLE
-#else
-#	define GLM_CONFIG_SIMD GLM_DISABLE
 #endif
 
 ///////////////////////////////////////////////////////////////////////////////////
@@ -1020,6 +1025,14 @@ namespace detail
 
 #	ifdef GLM_FORCE_SINGLE_ONLY
 #		pragma message("GLM: GLM_FORCE_SINGLE_ONLY is defined. Using only single precision floating-point types")
+#	endif
+
+#	if defined(GLM_FORCE_ALIGNED_GENTYPES) && (GLM_CONFIG_ALIGNED_GENTYPES == GLM_ENABLE)
+#		undef GLM_FORCE_ALIGNED_GENTYPES
+#		pragma message("GLM: GLM_FORCE_ALIGNED_GENTYPES is defined, allowing aligned types. This prevents the use of C++ constexpr.")
+#	elif defined(GLM_FORCE_ALIGNED_GENTYPES) && (GLM_CONFIG_ALIGNED_GENTYPES == GLM_DISABLE)
+#		undef GLM_FORCE_ALIGNED_GENTYPES
+#		pragma message("GLM: GLM_FORCE_ALIGNED_GENTYPES is defined but is disabled. It requires C++11 and language extensions")
 #	endif
 
 #	if defined(GLM_FORCE_DEFAULT_ALIGNED_GENTYPES) && (GLM_CONFIG_ALIGNED_GENTYPES == GLM_DISABLE)
