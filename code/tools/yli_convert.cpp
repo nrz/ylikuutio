@@ -8,6 +8,10 @@
 #include <assimp/Exporter.hpp>
 #include <assimp/types.h>
 
+#define SDL_main main
+
+#include "SDL.h"
+
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
 #define __GLM_GLM_HPP_INCLUDED
