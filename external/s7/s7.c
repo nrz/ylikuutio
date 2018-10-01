@@ -8,6 +8,8 @@
  *   Based on MiniScheme (original credits follow)
  * (MINISCM)               coded by Atsushi Moriwaki (11/5/1989)
  * (MINISCM)           E-MAIL :  moriwaki@kurims.kurims.kyoto-u.ac.jp
+ * (MINISCM) This version has been modified by Antti Nuortimo.
+ * (MINISCM)
  * (MINISCM) This version has been modified by R.C. Secrist.
  * (MINISCM)
  * (MINISCM) Mini-Scheme is now maintained by Akira KIDA.
@@ -25298,6 +25300,10 @@ static block_t *full_filename(s7_scheme *sc, const char *filename)
 
 static s7_pointer g_load(s7_scheme *sc, s7_pointer args)
 {
+    // This function has been modified by Antti Nuortimo.
+    // This modified version probably does not do anything useful,
+    // but on the other hand it does not need `dlfcn.h` either,
+    // so crosscompiling from Linux to Windows with MinGW-w64 works.
     s7_pointer name = NULL;
     return(method_or_bust(sc, name, sc->load_symbol, args, T_STRING, 1));
 
