@@ -9,6 +9,7 @@ Tasks which are necessary for the development of Ylikuutio:
 [ ] Test code used to convert ASCII grid files (height maps) to binary FBX files by loading the FBX files created with it.
 [ ] Convert ASCII grid files into binary FBX files.
 [ ] Implement `Camera` entities.
+[ ] Implement vertex selection and modification (with a mouse cursor), using Bullet Physics SDK. https://pybullet.org/
 [ ] Create `audio::Sound` class, whose parent is `Entity`.
 [ ] Create `audio::PlayList` class, whose parent is `Entity`.
 [ ] Implement `play` console command for playing `Sound`s and `Playlist`s.
@@ -51,8 +52,6 @@ Tasks which are necessary for the development of Ylikuutio:
 [ ] Add scene loading command `load` into console.
 [ ] Move main loop out of `main` function and away from Ajokki into `ontology::Universe` class of Ylikuutio.
 [ ] Implement support for custom keyboard settings.
-[ ] Use GLFW Android port for Android builds. https://github.com/glfw/glfw/issues/611 https://github.com/xCuri0/glfw-android-example
-[ ] Use GLFM library (only for Android builds). https://github.com/brackeen/glfm
 [ ] Add variable `direction`.
 [ ] Use TinySpline.
 [ ] Add bicubic interpolation.
@@ -61,7 +60,6 @@ Tasks which are necessary for the development of Ylikuutio:
 [ ] Write integration tests for Ajokki.
 [ ] Learn how to write unit tests for multithreaded C++ code.
 [ ] Create a vertex graph of the vertices and edges of a scene.
-[ ] Implement vertex selection and modification (with a mouse cursor), using ray casting.
 [ ] Implement modifying of vertices.
 [ ] Implement octree segmentation.
 [ ] Implement frustrum culling.
@@ -76,7 +74,7 @@ Tasks which are necessary for the development of Ylikuutio:
 [ ] Implement dynamic not flowing water, using OpenGL shaders.
 
 Less urgent:
-[ ] Implement rigid body physics using Bullet. https://pybullet.org/wordpress/
+[ ] Implement rigid body physics using using Bullet Physics SDK. https://pybullet.org/
 [ ] Implement flowing water (computed on a server, based on players' actions) using GridFluidSim3D. https://github.com/rlguy/GridFluidSim3D
 [ ] Implement s7 support in console.
 [ ] Implement support for 3D text.
