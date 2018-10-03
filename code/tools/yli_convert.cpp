@@ -4,9 +4,9 @@
 #include "code/ylikuutio/command_line/command_line_master.hpp"
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
 
-#include <assimp/scene.h>
-#include <assimp/Exporter.hpp>
-#include <assimp/types.h>
+#include "assimp/scene.h"
+#include "assimp/Exporter.hpp"
+#include "assimp/types.h"
 
 #define SDL_main main
 
