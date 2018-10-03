@@ -2,6 +2,7 @@
 
 // Include standard headers
 #include <iostream>      // std::cout, std::cin, std::cerr
+#include <string>        // std::string
 
 static s7_pointer cube(s7_scheme* s7, s7_pointer args)
 {
