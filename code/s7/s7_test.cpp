@@ -43,16 +43,13 @@ bool do_stuff(s7_scheme* s7)
 
     /* eval a C string as Scheme code */
     std::string hello_world_string = "(display \"Hello world!\n\")";
-    s7_pointer val = s7_eval_c_string(s7, hello_world_string.c_str());
-    // std::cout << s7_object_to_c_string(s7, val);
+    s7_eval_c_string(s7, hello_world_string.c_str());
 
     std::string cube_string = "(display (string-append \"5.0 cubed is \" (number->string (cube 5.0)) \"\n\"))";
-    val = s7_eval_c_string(s7, cube_string.c_str());
-    // std::cout << s7_object_to_c_string(s7, val);
+    s7_eval_c_string(s7, cube_string.c_str());
 
     std::string see_you_string = "(display \"See you!\n\")";
-    val = s7_eval_c_string(s7, see_you_string.c_str());
-    // std::cout << s7_object_to_c_string(s7, val);
+    s7_eval_c_string(s7, see_you_string.c_str());
 
     return true;
 }
