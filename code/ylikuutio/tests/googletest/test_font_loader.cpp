@@ -94,12 +94,12 @@ TEST(font_must_be_loaded_appropriately, kongtext_svg)
 
     const bool is_debug_mode = false; // Travis fails for too much output.
 
-    const bool font_loading_result = yli::load::load_SVG_font(
-            font_filename,
-            glyph_vertex_data,
-            glyph_names,
-            unicode_strings,
-            is_debug_mode);
+    ASSERT_TRUE(yli::load::load_SVG_font(
+                font_filename,
+                glyph_vertex_data,
+                glyph_names,
+                unicode_strings,
+                is_debug_mode));
 
     ASSERT_EQ(glyph_names.size(), 217);
     ASSERT_EQ(glyph_vertex_data.size(), 217);

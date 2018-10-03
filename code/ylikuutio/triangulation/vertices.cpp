@@ -117,9 +117,6 @@ namespace yli
 
                 for (std::size_t z = 1; z < actual_image_height; z++)
                 {
-                    // show progress in percents.
-                    std::size_t current_percent = static_cast<std::size_t>(floor(100.0f * ((double) z / (double) (actual_image_height - 1))));
-
                     for (std::size_t x = 1; x < actual_image_width; x++)
                     {
                         std::size_t current_vertex_i = actual_image_width * z + x;
