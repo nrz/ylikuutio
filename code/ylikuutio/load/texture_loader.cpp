@@ -1,6 +1,7 @@
 #include "texture_loader.hpp"
 #include "bmp_loader.hpp"
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
+#include "code/ylikuutio/memory/memory_templates.hpp"
 
 // Include OpenFBX
 #include <ofbx.h>
@@ -199,11 +200,11 @@ namespace yli
                 return 0;
             }
 
-            uint32_t height      = *(uint32_t*) &header[8];
-            uint32_t width       = *(uint32_t*) &header[12];
-            uint32_t linearSize  = *(uint32_t*) &header[16];
-            uint32_t mipMapCount = *(uint32_t*) &header[24];
-            uint32_t fourCC      = *(uint32_t*) &header[80];
+            uint32_t height      = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(header, 8);
+            uint32_t width       = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(header, 12);
+            uint32_t linearSize  = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(header, 16);
+            uint32_t mipMapCount = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(header, 24);
+            uint32_t fourCC      = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(header, 80);
 
             uint8_t* buffer;
             std::size_t bufsize;
