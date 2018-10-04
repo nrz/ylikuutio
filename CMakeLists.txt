@@ -140,7 +140,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
             # Disable update step
             UPDATE_COMMAND ""
             # custom patch command
-            PATCH_COMMAND git reset --hard 6316d8943313d0c267417bb7d2fba4716a8bb6ee
+            PATCH_COMMAND git reset --hard 77962730563eece3525f40b8769e4ca0c6baf64c
             LOG_DOWNLOAD ON
             LOG_BUILD ON
             )
@@ -153,7 +153,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
             # Disable install step
             INSTALL_COMMAND ""
             # custom patch command
-            PATCH_COMMAND git reset --hard 6316d8943313d0c267417bb7d2fba4716a8bb6ee
+            PATCH_COMMAND git reset --hard 77962730563eece3525f40b8769e4ca0c6baf64c
             LOG_DOWNLOAD ON
             LOG_BUILD ON
             )
@@ -198,7 +198,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
             # Disable update step
             UPDATE_COMMAND ""
             # custom patch command
-            PATCH_COMMAND git reset --hard 6316d8943313d0c267417bb7d2fba4716a8bb6ee
+            PATCH_COMMAND git reset --hard 77962730563eece3525f40b8769e4ca0c6baf64c
             LOG_DOWNLOAD ON
             LOG_BUILD ON
             )
@@ -211,7 +211,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
             # Disable install step
             INSTALL_COMMAND ""
             # custom patch command
-            PATCH_COMMAND git reset --hard 6316d8943313d0c267417bb7d2fba4716a8bb6ee
+            PATCH_COMMAND git reset --hard 77962730563eece3525f40b8769e4ca0c6baf64c
             LOG_DOWNLOAD ON
             LOG_BUILD ON
             )
