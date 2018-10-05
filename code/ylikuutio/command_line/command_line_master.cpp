@@ -15,20 +15,27 @@ namespace yli
         {
             this->argc = argc;
             this->arg_vector.assign(argv + 1, argv + argc);
+            bool is_previous_argument_available = false;
+            std::string previous_argument = ""; // dummy value.
 
             // Go through the command line arguments and store the keys and values.
-            for (const std::string argument : this->arg_vector)
+            for (std::vector<std::string>::const_iterator it = this->arg_vector.begin(); it != this->arg_vector.end(); it++)
             {
+                const std::string argument = *it;
+
                 // If the argument begins with `---`, the the argument is invalid.
                 // If the argument begins with `--`, then leave those out of the argument key.
                 // If the argument begins with `-`, then each char after `-` is an argument key.
-                // If the argument begins with something else, store the argument key as is.
+                // If the argument begins with something else and it the 1st argument, discard the argument.
+                // If the argument begins with something else and the previous argument contained `=`, discard the current argument.
+                // If the argument begins with something else, use it as a value for the previous argument.
                 // If the argument contains `=`, then use the value `=` as the value, and the argument key is the char or chars before `=`.
                 // Multiple `=` in the same argument is an error.
 
                 std::size_t n_leading_dashes = 0;
                 std::size_t index_of_equal_sign = std::numeric_limits<std::size_t>::max(); // maximum value here means "not found yet".
 
+                // count the number of leading dashes and check the location of potential equal sign.
                 for (std::size_t i = 0; i < argument.size(); i++)
                 {
                     if (i == n_leading_dashes && argument[i] == '-')
@@ -42,9 +49,30 @@ namespace yli
                     }
                 }
 
+                if (n_leading_dashes == 0 && is_previous_argument_available)
+                {
+                    this->arg_map[previous_argument] = argument;
+                    is_previous_argument_available = false;
+                    continue;
+                }
+                else if (n_leading_dashes == 0)
+                {
+                    // there is no previous argument available for this value.
+                    continue;
+                }
+
+                if (is_previous_argument_available)
+                {
+                    // there was no value available for the previous argument.
+                    this->arg_map[previous_argument] = "";
+                }
+
+                // arguments without dashes are processed already.
+                is_previous_argument_available = false;
+
                 if (n_leading_dashes > 2)
                 {
-                    // an argument beginning with `---` is invalid.
+                    // an argument beginning with `---` is invalid, therefore it is discarded.
                     continue;
                 }
 
@@ -52,40 +80,33 @@ namespace yli
                 {
                     // no equal sign.
 
-                    if (n_leading_dashes == 0)
-                    {
-                        // the entire string is the key, the value is an empty string.
-                        this->arg_map[argument] = "";
-                    }
-                    else if (n_leading_dashes == 2)
+                    if (n_leading_dashes == 2)
                     {
                         // the string without dashes is the key, the value is an empty string.
                         const std::string string_without_dashes = argument.substr(2); // the string without 2 leading dashes.
-                        this->arg_map[string_without_dashes] = "";
+                        previous_argument = string_without_dashes;
+                        is_previous_argument_available = true;
                     }
                     else
                     {
+                        // 1 leading dash.
                         // each character is a key, concatenated with a leading dash.
-                        for (std::size_t j = 1; j < argument.size(); j++)
+                        // the last one may have a value.
+                        for (std::size_t j = 1; j < argument.size() - 1; j++)
                         {
                             std::string current_argument_string = "-";
                             const std::string current_char_string = argument.substr(j, 1);
                             current_argument_string.append(current_char_string);
                             this->arg_map[current_argument_string] = "";
                         }
+
+                        previous_argument = argument[argument.size() - 1];
+                        is_previous_argument_available = true;
                     }
                 }
                 else
                 {
-                    if (n_leading_dashes == 0)
-                    {
-                        // the characters until the equal sign is the key.
-                        // the characters after the equal sign is the value.
-                        const std::string key = argument.substr(0, index_of_equal_sign);
-                        const std::string value = argument.substr(index_of_equal_sign + 1);
-                        this->arg_map[key] = value;
-                    }
-                    else if (n_leading_dashes == 2)
+                    if (n_leading_dashes == 2)
                     {
                         // the characters between leading dashes and the equal sign is the key.
                         // the characters after the equal sign is the value.
@@ -95,6 +116,7 @@ namespace yli
                     }
                     else
                     {
+                        // 1 leading dash.
                         // each character is a key, concatenated with a leading dash.
                         // the value of the last key is the characters after the equal sign.
                         // the value of the other keys is an empty string.
@@ -116,6 +138,11 @@ namespace yli
                         }
                     }
                 }
+            }
+
+            if (is_previous_argument_available)
+            {
+                this->arg_map[previous_argument] = "";
             }
         }
 

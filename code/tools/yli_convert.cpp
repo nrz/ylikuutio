@@ -32,12 +32,17 @@
 // parameters:
 // required:
 // `--in=foo`  load 3D data from file `foo`.
+// `--in foo`  load 3D data from file `foo`.
 // `--out=bar` export 3D data into file `bar`.
+// `--out bar` export 3D data into file `bar`.
 //
 // optional:
 // `--informat=baz` assume file format `baz` (if `--informat` is left out, file format is deduced from the filename extension).
+// `--informat baz` assume file format `baz` (if `--informat` is left out, file format is deduced from the filename extension).
 // `--outformat=qux` export 3D data into file `qux` (if `--outformat` is left out, file format is deduced from the filename extension).
+// `--outformat qux` export 3D data into file `qux` (if `--outformat` is left out, file format is deduced from the filename extension).
 // `--intexture=quux` use texture data into file `quux` as the material for all meshes (eg. `.obj` input file).
+// `--intexture quux` use texture data into file `quux` as the material for all meshes (eg. `.obj` input file).
 
 namespace yli
 {
@@ -52,26 +57,26 @@ int main(const int argc, const char* argv[])
     yli::command_line::CommandLineMaster command_line_master(argc, argv);
     command_line_master.print_keys_and_values();
 
-    if (!command_line_master.is_key("--in"))
+    if (!command_line_master.is_key("in"))
     {
         std::cerr << "ERROR: --in parameter is required!\n\nexample:\n\nyli_convert --in=foo --out=bar\n";
         exit(EXIT_FAILURE);
     }
 
-    if (!command_line_master.is_key("--out"))
+    if (!command_line_master.is_key("out"))
     {
         std::cerr << "ERROR: --out parameter is required!\n\nexample:\n\nyli_convert --in=foo --out=bar\n";
         exit(EXIT_FAILURE);
     }
 
-    const std::string in_file = command_line_master.get_value("--in");
-    const std::string out_file = command_line_master.get_value("--out");
+    const std::string in_file = command_line_master.get_value("in");
+    const std::string out_file = command_line_master.get_value("out");
 
     std::string in_file_format = ""; // dummy value.
 
-    if (command_line_master.is_key("--informat"))
+    if (command_line_master.is_key("informat"))
     {
-        in_file_format = command_line_master.get_value("--informat");
+        in_file_format = command_line_master.get_value("informat");
     }
     else
     {
@@ -89,9 +94,9 @@ int main(const int argc, const char* argv[])
 
     std::string out_file_format = ""; // dummy value.
 
-    if (command_line_master.is_key("--outformat"))
+    if (command_line_master.is_key("outformat"))
     {
-        out_file_format = command_line_master.get_value("--outformat");
+        out_file_format = command_line_master.get_value("outformat");
     }
     else
     {
