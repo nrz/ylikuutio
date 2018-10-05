@@ -143,6 +143,8 @@ int main(const int argc, const char* argv[])
     ai_scene.mMaterials = new aiMaterial*[ai_scene.mNumMaterials];
     ai_scene.mNumMeshes = symbiosis.get_number_of_symbiont_species();
     ai_scene.mMeshes = new aiMesh*[ai_scene.mNumMeshes];
+    ai_scene.mRootNode->mNumMeshes = symbiosis.get_number_of_symbiont_species();
+    ai_scene.mRootNode->mMeshes = new unsigned int[symbiosis.get_number_of_symbiont_species()];
 
     std::cout << "Number of `SymbiontMaterial`s: " << symbiosis.get_number_of_symbiont_materials() << "\n";
 
@@ -169,6 +171,9 @@ int main(const int argc, const char* argv[])
 
     for (std::size_t symbiont_species_i = 0; symbiont_species_i < symbiosis.get_number_of_symbiont_species(); symbiont_species_i++)
     {
+        ai_scene.mRootNode->mMeshes[symbiont_species_i] = symbiont_species_i;
+        ai_scene.mMeshes[symbiont_species_i] = new aiMesh();
+
         const yli::ontology::SymbiontSpecies* const symbiont_species = symbiosis.get_symbiont_species(symbiont_species_i);
 
         if (symbiont_species == nullptr)
@@ -177,7 +182,6 @@ int main(const int argc, const char* argv[])
             continue;
         }
 
-        ai_scene.mMeshes[symbiont_species_i] = new aiMesh();
         const yli::ontology::SymbiontMaterial* const symbiont_material = static_cast<yli::ontology::SymbiontMaterial*>(symbiont_species->get_parent());
 
         if (symbiont_material == nullptr)
