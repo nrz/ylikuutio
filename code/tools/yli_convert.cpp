@@ -202,7 +202,7 @@ int main(const int argc, const char* argv[])
         for (std::size_t vertex_i = 0; vertex_i < number_of_vertices; vertex_i++)
         {
             ai_scene.mMeshes[symbiont_species_i]->mVertices[vertex_i] = aiVector3D(vertices[vertex_i].x, vertices[vertex_i].y, vertices[vertex_i].z);
-            ai_scene.mMeshes[symbiont_species_i]->mVertices[vertex_i] = aiVector3D(normals[vertex_i].x, normals[vertex_i].y, normals[vertex_i].z);
+            ai_scene.mMeshes[symbiont_species_i]->mNormals[vertex_i] = aiVector3D(normals[vertex_i].x, normals[vertex_i].y, normals[vertex_i].z);
             ai_scene.mMeshes[symbiont_species_i]->mTextureCoords[0][vertex_i] = aiVector3D(uvs[vertex_i].x, uvs[vertex_i].y, 0);
         }
 
