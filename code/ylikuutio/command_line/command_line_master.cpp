@@ -19,6 +19,7 @@ namespace yli
             // Go through the command line arguments and store the keys and values.
             for (const std::string argument : this->arg_vector)
             {
+                // If the argument begins with `---`, the the argument is invalid.
                 // If the argument begins with `--`, then leave those out of the argument key.
                 // If the argument begins with `-`, then each char after `-` is an argument key.
                 // If the argument begins with something else, store the argument key as is.
@@ -41,14 +42,26 @@ namespace yli
                     }
                 }
 
+                if (n_leading_dashes > 2)
+                {
+                    // an argument beginning with `---` is invalid.
+                    continue;
+                }
+
                 if (index_of_equal_sign == std::numeric_limits<std::size_t>::max())
                 {
                     // no equal sign.
 
-                    if (n_leading_dashes != 1)
+                    if (n_leading_dashes == 0)
                     {
                         // the entire string is the key, the value is an empty string.
                         this->arg_map[argument] = "";
+                    }
+                    else if (n_leading_dashes == 2)
+                    {
+                        // the string without dashes is the key, the value is an empty string.
+                        const std::string string_without_dashes = argument.substr(2); // the string without 2 leading dashes.
+                        this->arg_map[string_without_dashes] = "";
                     }
                     else
                     {
@@ -64,11 +77,19 @@ namespace yli
                 }
                 else
                 {
-                    if (n_leading_dashes != 1)
+                    if (n_leading_dashes == 0)
                     {
                         // the characters until the equal sign is the key.
                         // the characters after the equal sign is the value.
                         const std::string key = argument.substr(0, index_of_equal_sign);
+                        const std::string value = argument.substr(index_of_equal_sign + 1);
+                        this->arg_map[key] = value;
+                    }
+                    else if (n_leading_dashes == 2)
+                    {
+                        // the characters between leading dashes and the equal sign is the key.
+                        // the characters after the equal sign is the value.
+                        const std::string key = argument.substr(2, index_of_equal_sign - 2); // the characters between leading dashes and the equal sign.
                         const std::string value = argument.substr(index_of_equal_sign + 1);
                         this->arg_map[key] = value;
                     }
