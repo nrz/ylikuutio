@@ -31,7 +31,7 @@ namespace yli
                 const uint8_t* const image_data,
                 const std::size_t image_width,
                 const std::size_t image_height,
-                bool should_image_data_be_deleted)
+                const bool should_image_data_be_deleted)
         {
             // Create one OpenGL texture
             GLuint textureID;
