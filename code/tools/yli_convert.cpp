@@ -151,7 +151,7 @@ int main(const int argc, const char* argv[])
     for (std::size_t symbiont_material_i = 0; symbiont_material_i < symbiosis.get_number_of_symbiont_materials(); symbiont_material_i++)
     {
         std::cout << "Processing `SymbiontMaterial` " << symbiont_material_i << "\n";
-        yli::ontology::SymbiontMaterial* symbiont_material = symbiosis.get_symbiont_material(symbiont_material_i);
+        const yli::ontology::SymbiontMaterial* const symbiont_material = symbiosis.get_symbiont_material(symbiont_material_i);
 
         ai_scene.mMaterials[symbiont_material_i] = new aiMaterial();
 
@@ -191,9 +191,9 @@ int main(const int argc, const char* argv[])
 
         ai_scene.mMeshes[symbiont_species_i]->mMaterialIndex = symbiont_material->get_childID();
 
-        std::vector<glm::vec3> vertices = symbiont_species->get_vertices();
-        std::vector<glm::vec3> normals = symbiont_species->get_normals();
-        std::vector<glm::vec2> uvs = symbiont_species->get_uvs();
+        const std::vector<glm::vec3>& vertices = symbiont_species->get_vertices();
+        const std::vector<glm::vec3>& normals = symbiont_species->get_normals();
+        const std::vector<glm::vec2>& uvs = symbiont_species->get_uvs();
 
         const std::size_t number_of_vertices = vertices.size();
 
