@@ -186,6 +186,7 @@ int main(const int argc, const char* argv[])
 
         if (symbiont_material == nullptr)
         {
+            std::cerr << "ERROR: `yli_convert`: `symbiont_material` is `nullptr`!\n";
             continue;
         }
 
