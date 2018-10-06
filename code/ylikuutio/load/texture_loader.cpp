@@ -106,7 +106,7 @@ namespace yli
             char filename_buffer[filename_buffer_size];
             const char separator = '/'; // FIXME: don't assume slash as some operating systems may use other characters.
 
-            std::size_t filename_length = yli::string::extract_last_part_of_string(
+            const std::size_t filename_length = yli::string::extract_last_part_of_string(
                     filename.c_str(),
                     filename.size(),
                     filename_buffer,
@@ -115,7 +115,7 @@ namespace yli
 
             std::cout << "Filename length: " << filename_length << " bytes.\n";
 
-            char* texture_filename = static_cast<char*>(static_cast<void*>(filename_buffer));
+            const char* const texture_filename = static_cast<char*>(static_cast<void*>(filename_buffer));
             std::cout << "Texture file: " << texture_filename << "\n";
 
             // Find out the file suffix (filetype).
@@ -130,7 +130,7 @@ namespace yli
                     file_suffix_buffer_size,
                     suffix_separator);
 
-            const char* texture_file_suffix = static_cast<char*>(static_cast<void*>(file_suffix_buffer));
+            const char* const texture_file_suffix = static_cast<char*>(static_cast<void*>(file_suffix_buffer));
 
             std::cout << "Texture file suffix: " << texture_file_suffix << "\n";
 
@@ -155,7 +155,7 @@ namespace yli
             std::size_t image_height;
             std::size_t image_size;
 
-            uint8_t* image_data = load_BMP_file(filename, image_width, image_height, image_size);
+            const uint8_t* const image_data = load_BMP_file(filename, image_width, image_height, image_size);
 
             return load_texture(image_data, image_width, image_height, true);
         }
@@ -166,12 +166,12 @@ namespace yli
 
         GLuint load_DDS_texture(const std::string& filename)
         {
-            const char* imagepath = filename.c_str();
+            const char* const imagepath = filename.c_str();
 
             uint8_t header[124];
 
             /* try to open the file */
-            std::FILE* fp = std::fopen(imagepath, "rb");
+            std::FILE* const fp = std::fopen(imagepath, "rb");
             if (fp == nullptr)
             {
                 std::printf("%s could not be opened. Are you in the right directory ? Don't forget to read the FAQ !\n", imagepath);
@@ -203,15 +203,15 @@ namespace yli
                 return 0;
             }
 
-            uint32_t height      = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(header, 8);
-            uint32_t width       = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(header, 12);
-            uint32_t linearSize  = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(header, 16);
-            uint32_t mipMapCount = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(header, 24);
-            uint32_t fourCC      = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(header, 80);
+            uint32_t height            = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(header, 8);
+            uint32_t width             = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(header, 12);
+            const uint32_t linearSize  = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(header, 16);
+            const uint32_t mipMapCount = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(header, 24);
+            const uint32_t fourCC      = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(header, 80);
 
             /* how big is it going to be including all mipmaps? */
-            std::size_t bufsize = mipMapCount > 1 ? 2 * static_cast<std::size_t>(linearSize) : linearSize;
-            uint8_t* buffer = (uint8_t*) malloc(bufsize * sizeof(uint8_t));
+            const std::size_t bufsize = mipMapCount > 1 ? 2 * static_cast<std::size_t>(linearSize) : linearSize;
+            uint8_t* const buffer = (uint8_t*) malloc(bufsize * sizeof(uint8_t));
 
             if (std::fread(buffer, 1, bufsize, fp) != bufsize)
             {
@@ -249,7 +249,7 @@ namespace yli
             glBindTexture(GL_TEXTURE_2D, textureID);
             glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
-            std::size_t blockSize = (format == GL_COMPRESSED_RGBA_S3TC_DXT1_EXT) ? 8 : 16;
+            const std::size_t blockSize = (format == GL_COMPRESSED_RGBA_S3TC_DXT1_EXT) ? 8 : 16;
             std::size_t offset = 0;
 
             /* load the mipmaps */
