@@ -169,10 +169,9 @@ namespace yli
             const char* imagepath = filename.c_str();
 
             uint8_t header[124];
-            std::FILE* fp;
 
             /* try to open the file */
-            fp = std::fopen(imagepath, "rb");
+            std::FILE* fp = std::fopen(imagepath, "rb");
             if (fp == nullptr)
             {
                 std::printf("%s could not be opened. Are you in the right directory ? Don't forget to read the FAQ !\n", imagepath);
@@ -210,11 +209,9 @@ namespace yli
             uint32_t mipMapCount = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(header, 24);
             uint32_t fourCC      = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(header, 80);
 
-            uint8_t* buffer;
-            std::size_t bufsize;
             /* how big is it going to be including all mipmaps? */
-            bufsize = mipMapCount > 1 ? 2 * static_cast<std::size_t>(linearSize) : linearSize;
-            buffer = (uint8_t*) malloc(bufsize * sizeof(uint8_t));
+            std::size_t bufsize = mipMapCount > 1 ? 2 * static_cast<std::size_t>(linearSize) : linearSize;
+            uint8_t* buffer = (uint8_t*) malloc(bufsize * sizeof(uint8_t));
 
             if (std::fread(buffer, 1, bufsize, fp) != bufsize)
             {
