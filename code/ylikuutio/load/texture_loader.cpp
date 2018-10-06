@@ -27,7 +27,11 @@ namespace yli
     namespace load
     {
         // Load texture from memory.
-        GLuint load_texture(const uint8_t* const image_data, const std::size_t image_width, const std::size_t image_height, bool should_image_data_be_deleted)
+        GLuint load_texture(
+                const uint8_t* const image_data,
+                const std::size_t image_width,
+                const std::size_t image_height,
+                bool should_image_data_be_deleted)
         {
             // Create one OpenGL texture
             GLuint textureID;
