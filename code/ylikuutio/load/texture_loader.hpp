@@ -19,11 +19,12 @@ namespace yli
     namespace load
     {
         // Load texture from memory.
-        GLuint load_texture(
+        bool load_texture(
                 const uint8_t* const image_data,
                 const std::size_t image_width,
                 const std::size_t image_height,
-                const bool should_image_data_be_deleted);
+                const bool should_image_data_be_deleted,
+                GLuint& textureID);
 
         // Load texture from memory.
         GLuint load_FBX_texture(const ofbx::Texture* const ofbx_texture);

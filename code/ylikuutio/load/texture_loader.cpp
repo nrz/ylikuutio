@@ -26,14 +26,14 @@ namespace yli
     namespace load
     {
         // Load texture from memory.
-        GLuint load_texture(
+        bool load_texture(
                 const uint8_t* const image_data,
                 const std::size_t image_width,
                 const std::size_t image_height,
-                const bool should_image_data_be_deleted)
+                const bool should_image_data_be_deleted,
+                GLuint& textureID)
         {
             // Create one OpenGL texture
-            GLuint textureID;
             glGenTextures(1, &textureID);
 
             // "Bind" the newly created texture : all future texture functions will modify this texture
@@ -76,8 +76,8 @@ namespace yli
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
             glGenerateMipmap(GL_TEXTURE_2D);
 
-            // Return the ID of the texture we just created
-            return textureID;
+            // success.
+            return true;
         }
 
         // Load texture from memory.
@@ -156,7 +156,10 @@ namespace yli
 
             const uint8_t* const image_data = load_BMP_file(filename, image_width, image_height, image_size);
 
-            return load_texture(image_data, image_width, image_height, true);
+            GLuint textureID;
+            load_texture(image_data, image_width, image_height, true, textureID);
+
+            return textureID;
         }
 
 #define FOURCC_DXT1 0x31545844 // Equivalent to "DXT1" in ASCII
