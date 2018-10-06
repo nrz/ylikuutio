@@ -141,6 +141,15 @@ int main(const int argc, const char* argv[])
     ai_scene.mRootNode = new aiNode();
     ai_scene.mNumMaterials = symbiosis.get_number_of_symbiont_materials();
     ai_scene.mMaterials = new aiMaterial*[ai_scene.mNumMaterials];
+    ai_scene.mNumAnimations = 0;
+    ai_scene.mAnimations = nullptr;
+    ai_scene.mNumTextures = symbiosis.get_number_of_symbiont_materials();
+    ai_scene.mTextures = new aiTexture*[ai_scene.mNumMaterials];
+    ai_scene.mNumLights = 0;
+    ai_scene.mLights = nullptr;
+    ai_scene.mNumCameras = 0;
+    ai_scene.mCameras = nullptr;
+    ai_scene.mMetaData = nullptr;
     ai_scene.mNumMeshes = symbiosis.get_number_of_symbiont_species();
     ai_scene.mMeshes = new aiMesh*[ai_scene.mNumMeshes];
     ai_scene.mRootNode->mNumMeshes = symbiosis.get_number_of_symbiont_species();
@@ -154,6 +163,7 @@ int main(const int argc, const char* argv[])
         const yli::ontology::SymbiontMaterial* const symbiont_material = symbiosis.get_symbiont_material(symbiont_material_i);
 
         ai_scene.mMaterials[symbiont_material_i] = new aiMaterial();
+        ai_scene.mTextures[symbiont_material_i] = new aiTexture();
 
         if (symbiont_material == nullptr)
         {
