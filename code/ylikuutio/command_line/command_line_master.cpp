@@ -30,7 +30,6 @@ namespace yli
                 // If the argument begins with something else and the previous argument contained `=`, discard the current argument.
                 // If the argument begins with something else, use it as a value for the previous argument.
                 // If the argument contains `=`, then use the value `=` as the value, and the argument key is the char or chars before `=`.
-                // Multiple `=` in the same argument is an error.
 
                 std::size_t n_leading_dashes = 0;
                 std::size_t index_of_equal_sign = std::numeric_limits<std::size_t>::max(); // maximum value here means "not found yet".
@@ -44,6 +43,8 @@ namespace yli
                     }
                     else if (argument[i] == '=')
                     {
+                        // only first equal sign `=` matters.
+                        // the rest equal signs (if any) are part of the value.
                         index_of_equal_sign = i;
                         break;
                     }
@@ -106,10 +107,12 @@ namespace yli
                 }
                 else
                 {
+                    // there was at least 1 equal sign.
+
                     if (n_leading_dashes == 2)
                     {
-                        // the characters between leading dashes and the equal sign is the key.
-                        // the characters after the equal sign is the value.
+                        // the characters between leading dashes and the equal sign are the key.
+                        // the characters after the equal sign are the value.
                         const std::string key = argument.substr(2, index_of_equal_sign - 2); // the characters between leading dashes and the equal sign.
                         const std::string value = argument.substr(index_of_equal_sign + 1);
                         this->arg_map[key] = value;
@@ -163,9 +166,10 @@ namespace yli
 
         void CommandLineMaster::print_keys()
         {
-            // Print command line arguments (without the executable name string).
             if (this->argc > 1)
             {
+                // Print command line arguments (without the executable name string).
+
                 for (std::string argument : arg_vector)
                 {
                     std::cout << argument << "\n";
