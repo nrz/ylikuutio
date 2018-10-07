@@ -641,6 +641,8 @@ add_executable(ajokki
     code/ajokki/ajokki_console_callbacks.hpp
     code/ajokki/ajokki_debug.cpp
     code/ajokki/ajokki_debug.hpp
+    code/ajokki/ajokki_altiplano_scene.cpp
+    code/ajokki/ajokki_altiplano_scene.hpp
     code/ajokki/ajokki_helsinki_east_downtown_scene.cpp
     code/ajokki/ajokki_helsinki_east_downtown_scene.hpp
     code/ajokki/ajokki_joensuu_center_west_scene.cpp
