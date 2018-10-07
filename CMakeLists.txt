@@ -337,6 +337,7 @@ configure_file(res/fonts/Holstein.bmp Holstein.bmp COPYONLY)
 configure_file(res/height_maps/noise1024x1024.bmp noise1024x1024.bmp COPYONLY)
 configure_file(res/height_maps/noise256x256.bmp noise256x256.bmp COPYONLY)
 configure_file(res/height_maps/noise128x128.bmp noise128x128.bmp COPYONLY)
+configure_file(res/height_maps/N59E024.hgt N59E024.hgt COPYONLY)
 configure_file(res/height_maps/S17W069.hgt S17W069.hgt COPYONLY)
 configure_file(res/height_maps/L4133D.asc L4133D.asc COPYONLY)
 configure_file(res/height_maps/N5424G.asc N5424G.asc COPYONLY)
@@ -653,6 +654,8 @@ add_executable(ajokki
     code/ajokki/ajokki_location_and_orientation.hpp
     code/ajokki/ajokki_movement.cpp
     code/ajokki/ajokki_movement.hpp
+    code/ajokki/ajokki_tallinn_scene.cpp
+    code/ajokki/ajokki_tallinn_scene.hpp
     code/ajokki/ajokki_wireframe.cpp
     code/ajokki/ajokki_wireframe.hpp
     )

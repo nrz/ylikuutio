@@ -17,6 +17,7 @@
 #include "ajokki_altiplano_scene.hpp"
 #include "ajokki_helsinki_east_downtown_scene.hpp"
 #include "ajokki_joensuu_center_west_scene.hpp"
+#include "ajokki_tallinn_scene.hpp"
 #include "ajokki_keyboard_callbacks.hpp"
 #include "ajokki_debug.hpp"
 #include "ajokki_console.hpp"
@@ -234,6 +235,17 @@ int main(const int argc, const char* argv[])
     }
 
     // altiplano `Scene` ends here.
+
+    // Tallinn `Scene` begins here.
+
+    std::cout << "Creating yli::ontology::Scene* tallinn_scene and its contents ...\n";
+    if (ajokki::create_tallinn_scene(entity_factory, earth_world) == nullptr)
+    {
+        cleanup_callback_engine->execute();
+        return -1;
+    }
+
+    // Tallinn `Scene` ends here.
 
     my_universe->turbo_factor = 100.0f;
     my_universe->twin_turbo_factor = 500.0f;
