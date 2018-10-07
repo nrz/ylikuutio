@@ -15,7 +15,6 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <cstdio>   // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf etc.
-#include <cstring>  // std::memcmp, std::memcpy, std::strcmp, std::strlen, std::strncmp
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <stdint.h> // uint32_t etc.
 #include <stdlib.h> // free, malloc
@@ -132,16 +131,17 @@ namespace yli
                     file_suffix_buffer_size,
                     suffix_separator);
 
-            const char* const texture_file_suffix = static_cast<char*>(static_cast<void*>(file_suffix_buffer));
+            const char* const texture_file_suffix_char = static_cast<char*>(static_cast<void*>(file_suffix_buffer));
+            const std::string texture_file_suffix = std::string(texture_file_suffix_char);
 
             std::cout << "Texture file suffix: " << texture_file_suffix << "\n";
 
-            if (strncmp(texture_file_suffix, "bmp", sizeof("bmp")) == 0)
+            if (texture_file_suffix == "bmp")
             {
                 const std::string filename_string = std::string((char*) &filename_buffer);
                 return yli::load::load_BMP_texture(filename_string, textureID);
             }
-            else if (strncmp(texture_file_suffix, "png", sizeof("png")) == 0)
+            else if (texture_file_suffix == "png")
             {
                 // TODO: implement PNG loading!
                 return false;
@@ -187,16 +187,18 @@ namespace yli
 
             /* verify the type of file */
             const std::size_t dds_magic_number_size_in_bytes = 4; // "DDS "
-            char filecode[dds_magic_number_size_in_bytes];
+            char filecode_char[dds_magic_number_size_in_bytes];
 
-            if (std::fread(filecode, 1, dds_magic_number_size_in_bytes, fp) != dds_magic_number_size_in_bytes)
+            if (std::fread(filecode_char, 1, dds_magic_number_size_in_bytes, fp) != dds_magic_number_size_in_bytes)
             {
                 std::cerr << "Error while reading " << filename << "\n";
                 std::fclose(fp);
                 return false;
             }
 
-            if (std::strncmp(filecode, "DDS ", dds_magic_number_size_in_bytes) != 0)
+            const std::string filecode = std::string(filecode_char);
+
+            if (filecode != "DDS ")
             {
                 std::fclose(fp);
                 return false;
