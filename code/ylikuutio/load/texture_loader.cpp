@@ -86,7 +86,9 @@ namespace yli
         }
 
         // Load texture from memory.
-        bool load_FBX_texture(const ofbx::Texture* const ofbx_texture, GLuint& textureID)
+        bool load_FBX_texture(
+                const ofbx::Texture* const ofbx_texture,
+                GLuint& textureID)
         {
             // requirements:
             // `ofbx_texture` must not be `nullptr`.
@@ -150,7 +152,9 @@ namespace yli
             return false;
         }
 
-        bool load_BMP_texture(const std::string& filename, GLuint& textureID)
+        bool load_BMP_texture(
+                const std::string& filename,
+                GLuint& textureID)
         {
             std::size_t image_width;
             std::size_t image_height;
@@ -171,7 +175,9 @@ namespace yli
 #define FOURCC_DXT3 0x33545844 // Equivalent to "DXT3" in ASCII
 #define FOURCC_DXT5 0x35545844 // Equivalent to "DXT5" in ASCII
 
-        bool load_DDS_texture(const std::string& filename, GLuint& textureID)
+        bool load_DDS_texture(
+                const std::string& filename,
+                GLuint& textureID)
         {
             const char* const imagepath = filename.c_str();
 
