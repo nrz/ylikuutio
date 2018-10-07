@@ -169,7 +169,7 @@ namespace yli
                 return false;
             }
 
-            const uint8_t* image_pointer = image_data + sizeof(int16_t) * (true_image_height - 1) * true_image_width; // start from southwestern corner.
+            const uint8_t* image_pointer = image_data; // start from northwestern corner.
             float* vertex_pointer = vertex_data;
 
             // start processing image_data.
@@ -202,7 +202,7 @@ namespace yli
                     image_pointer += sizeof(int16_t);
                     *vertex_pointer++ = static_cast<float>(y) / heightmap_loader_struct.divisor;
                 }
-                image_pointer -= sizeof(int16_t) * (image_width + true_image_width);
+                image_pointer += sizeof(int16_t) * (true_image_width - image_width);
             }
 
             std::cout << "\n";
