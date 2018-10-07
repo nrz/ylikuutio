@@ -632,6 +632,8 @@ set_target_properties(yli_convert PROPERTIES COMPILE_DEFINITIONS "USE_ASSIMP")
 add_executable(ajokki
     # ajokki, in alphabetical order
     code/ajokki/ajokki.cpp
+    code/ajokki/ajokki_altiplano_scene.cpp
+    code/ajokki/ajokki_altiplano_scene.hpp
     code/ajokki/ajokki_background_colors.cpp
     code/ajokki/ajokki_background_colors.hpp
     code/ajokki/ajokki_cleanup_callbacks.cpp
@@ -642,8 +644,6 @@ add_executable(ajokki
     code/ajokki/ajokki_console_callbacks.hpp
     code/ajokki/ajokki_debug.cpp
     code/ajokki/ajokki_debug.hpp
-    code/ajokki/ajokki_altiplano_scene.cpp
-    code/ajokki/ajokki_altiplano_scene.hpp
     code/ajokki/ajokki_helsinki_east_downtown_scene.cpp
     code/ajokki/ajokki_helsinki_east_downtown_scene.hpp
     code/ajokki/ajokki_joensuu_center_west_scene.cpp
