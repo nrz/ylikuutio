@@ -19,13 +19,28 @@ namespace yli
     namespace load
     {
         // Load texture from memory.
-        GLuint load_texture(const uint8_t* const image_data, const std::size_t image_width, const std::size_t image_height, bool should_image_data_be_deleted);
+        bool load_texture(
+                const uint8_t* const image_data,
+                const std::size_t image_width,
+                const std::size_t image_height,
+                const bool should_image_data_be_deleted,
+                GLuint& textureID);
 
         // Load texture from memory.
-        GLuint load_FBX_texture(const ofbx::Texture* const ofbx_texture);
+        bool load_FBX_texture(
+                const ofbx::Texture* const ofbx_texture,
+                std::size_t& image_width,
+                std::size_t& image_height,
+                std::size_t& image_size,
+                GLuint& textureID);
 
         // Load a .BMP file using our custom loader
-        GLuint load_BMP_texture(const std::string& filename);
+        bool load_BMP_texture(
+                const std::string& filename,
+                std::size_t& image_width,
+                std::size_t& image_height,
+                std::size_t& image_size,
+                GLuint& textureID);
 
         //// Since GLFW 3, glfwLoadTexture2D() has been removed. You have to use another texture loading library,
         //// or do it yourself (just like load_BMP_texture and load_DDS_texture)
@@ -33,7 +48,12 @@ namespace yli
         //GLuint loadTGA_glfw(const char*  imagepath);
 
         // Load a .DDS file using GLFW's own loader
-        GLuint load_DDS_texture(const std::string& filename);
+        bool load_DDS_texture(
+                const std::string& filename,
+                std::size_t& image_width,
+                std::size_t& image_height,
+                std::size_t& image_size,
+                GLuint& textureID);
     }
 }
 

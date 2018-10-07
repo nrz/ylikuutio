@@ -52,11 +52,17 @@ namespace yli
                     // Initialize texture
                     if ((std::strcmp(char_font_texture_file_format, "bmp") == 0) || (std::strcmp(char_font_texture_file_format, "BMP") == 0))
                     {
-                        this->texture = yli::load::load_BMP_texture(texture_filename);
+                        if (!yli::load::load_BMP_texture(texture_filename, this->image_width, this->image_height, this->image_size, this->texture))
+                        {
+                            std::cerr << "ERROR: loading BMP texture failed!\n";
+                        }
                     }
                     else if ((std::strcmp(char_font_texture_file_format, "dds") == 0) || (std::strcmp(char_font_texture_file_format, "DDS") == 0))
                     {
-                        this->texture = yli::load::load_DDS_texture(texture_filename);
+                        if (!yli::load::load_DDS_texture(texture_filename, this->image_width, this->image_height, this->image_size, this->texture))
+                        {
+                            std::cerr << "ERROR: loading DDS texture failed!\n";
+                        }
                     }
                     else
                     {
@@ -132,6 +138,10 @@ namespace yli
                 GLuint Text2DUniformID;                  // Location of the program's texture attribute.
                 GLuint screen_width_uniform_ID;          // Location of the program's window width uniform.
                 GLuint screen_height_uniform_ID;         // Location of the program's window height uniform.
+
+                std::size_t image_width;
+                std::size_t image_height;
+                std::size_t image_size;
         };
     }
 }

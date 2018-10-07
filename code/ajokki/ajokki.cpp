@@ -14,8 +14,10 @@
 #include "ajokki_background_colors.hpp"
 #include "ajokki_cleanup_callbacks.hpp"
 #include "ajokki_console_callbacks.hpp"
+#include "ajokki_altiplano_scene.hpp"
 #include "ajokki_helsinki_east_downtown_scene.hpp"
 #include "ajokki_joensuu_center_west_scene.hpp"
+#include "ajokki_tallinn_scene.hpp"
 #include "ajokki_keyboard_callbacks.hpp"
 #include "ajokki_debug.hpp"
 #include "ajokki_console.hpp"
@@ -225,100 +227,25 @@ int main(const int argc, const char* argv[])
 
     // altiplano `Scene` begins here.
 
-    std::cout << "Creating yli::ontology::Entity* altiplano_scene_entity ...\n";
-    yli::ontology::Entity* altiplano_scene_entity = entity_factory->create_Scene(earth_world, 3815.51f);
-    std::cout << "Creating yli::ontology::Scene* altiplano_scene ...\n";
-    yli::ontology::Scene* altiplano_scene = dynamic_cast<yli::ontology::Scene*>(altiplano_scene_entity);
-
-    if (altiplano_scene == nullptr)
+    std::cout << "Creating yli::ontology::Scene* altiplano_scene and its contents ...\n";
+    if (ajokki::create_altiplano_scene(entity_factory, earth_world) == nullptr)
     {
-        std::cerr << "Failed to create Scene.\n";
         cleanup_callback_engine->execute();
         return -1;
     }
 
-    altiplano_scene->set_name("altiplano_scene");
-
-    // Set `altiplano_scene` to be the currently active `Scene`.
-    // my_universe->set_active_scene(altiplano_scene);
-
-    altiplano_scene->set_turbo_factor(5.0f);
-    altiplano_scene->set_twin_turbo_factor(100.0f);
-
-    // Create the shader, store it in `altiplano_shader`.
-    ShaderStruct altiplano_shader_struct;
-    altiplano_shader_struct.parent = altiplano_scene;
-    altiplano_shader_struct.vertex_shader = "StandardShading.vertexshader";
-    altiplano_shader_struct.fragment_shader = "StandardShading.fragmentshader";
-
-    std::cout << "Creating yli::ontology::Entity* altiplano_shader_entity ...\n";
-    yli::ontology::Entity* altiplano_shader_entity = entity_factory->create_Shader(altiplano_shader_struct);
-    std::cout << "Creating yli::ontology::Shader* altiplano_shader ...\n";
-    yli::ontology::Shader* altiplano_shader = dynamic_cast<yli::ontology::Shader*>(altiplano_shader_entity);
-
-    if (altiplano_shader == nullptr)
-    {
-        std::cerr << "Failed to create Shader.\n";
-        cleanup_callback_engine->execute();
-        return -1;
-    }
-
-    // Create the material, store it in `altiplano_grass_material`.
-    MaterialStruct altiplano_grass_material_struct;
-    altiplano_grass_material_struct.shader = altiplano_shader;
-    altiplano_grass_material_struct.texture_file_format = "bmp";
-    altiplano_grass_material_struct.texture_filename = "GrassGreenTexture0002.bmp";
-
-    std::cout << "Creating yli::ontology::Entity* altiplano_grass_material_entity ...\n";
-    yli::ontology::Entity* altiplano_grass_material_entity = entity_factory->create_Material(altiplano_grass_material_struct);
-    std::cout << "Creating yli::ontology::Material* altiplano_grass_material ...\n";
-    yli::ontology::Material* altiplano_grass_material = dynamic_cast<yli::ontology::Material*>(altiplano_grass_material_entity);
-
-    if (altiplano_grass_material == nullptr)
-    {
-        std::cerr << "Failed to create grass Material.\n";
-        cleanup_callback_engine->execute();
-        return -1;
-    }
-
-    altiplano_grass_material->set_name("altiplano_grass_material");
-
-    // Create the species, store it in `terrain_species`.
-    SpeciesStruct(altiplano_terrain_species_struct);
-    altiplano_terrain_species_struct.scene = altiplano_scene;
-    altiplano_terrain_species_struct.shader = altiplano_shader;
-    altiplano_terrain_species_struct.material = altiplano_grass_material;
-    altiplano_terrain_species_struct.model_file_format = "SRTM";
-    altiplano_terrain_species_struct.light_position = glm::vec3(0, 100000, 0);
-    altiplano_terrain_species_struct.latitude = -16.50f;  // in degrees.
-    altiplano_terrain_species_struct.longitude = -68.15f; // in degrees.
-    altiplano_terrain_species_struct.is_terrain = true;
-    altiplano_terrain_species_struct.x_step = 1;
-    altiplano_terrain_species_struct.z_step = 1;
-
-    std::cout << "Creating yli::ontology::Entity* altiplano_terrain_species_entity ...\n";
-    yli::ontology::Entity* altiplano_terrain_species_entity = entity_factory->create_Species(altiplano_terrain_species_struct);
-    std::cout << "Creating yli::ontology::Species* altiplano_terrain_species ...\n";
-    yli::ontology::Species* altiplano_terrain_species = dynamic_cast<yli::ontology::Species*>(altiplano_terrain_species_entity);
-
-    if (altiplano_terrain_species == nullptr)
-    {
-        std::cerr << "Failed to create Species.\n";
-        cleanup_callback_engine->execute();
-        return -1;
-    }
-
-    altiplano_terrain_species->set_name("altiplano_terrain_species");
-
-    // Create altiplano terrain.
-    ObjectStruct altiplano_struct;
-    altiplano_struct.species_parent = altiplano_terrain_species;
-    altiplano_struct.cartesian_coordinates = glm::vec3(0.0f, 0.0f, 0.0f);
-    altiplano_struct.rotate_angle = 0.0f;
-    altiplano_struct.rotate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
-    altiplano_struct.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
-    entity_factory->create_Object(altiplano_struct);
     // altiplano `Scene` ends here.
+
+    // Tallinn `Scene` begins here.
+
+    std::cout << "Creating yli::ontology::Scene* tallinn_scene and its contents ...\n";
+    if (ajokki::create_tallinn_scene(entity_factory, earth_world) == nullptr)
+    {
+        cleanup_callback_engine->execute();
+        return -1;
+    }
+
+    // Tallinn `Scene` ends here.
 
     my_universe->turbo_factor = 100.0f;
     my_universe->twin_turbo_factor = 500.0f;

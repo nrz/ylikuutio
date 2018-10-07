@@ -68,11 +68,17 @@ namespace yli
                         // Load the texture.
                         if (this->texture_file_format == "bmp" || this->texture_file_format == "BMP")
                         {
-                            this->texture = yli::load::load_BMP_texture(this->texture_filename);
+                            if (!yli::load::load_BMP_texture(this->texture_filename, this->image_width, this->image_height, this->image_size, this->texture))
+                            {
+                                std::cerr << "ERROR: loading BMP texture failed!\n";
+                            }
                         }
                         else if (this->texture_file_format == "dds" || this->texture_file_format == "DDS")
                         {
-                            this->texture = yli::load::load_DDS_texture(this->texture_filename);
+                            if (!yli::load::load_DDS_texture(this->texture_filename, this->image_width, this->image_height, this->image_size, this->texture))
+                            {
+                                std::cerr << "ERROR: loading DDS texture failed!\n";
+                            }
                         }
                         else
                         {
@@ -125,6 +131,11 @@ namespace yli
                     friend std::size_t yli::ontology::get_number_of_descendants(const std::vector<T1>& child_pointer_vector);
                 template<class T1>
                     friend void yli::ontology::render_children(const std::vector<T1>& child_pointer_vector);
+
+            protected:
+                std::size_t image_width;
+                std::size_t image_height;
+                std::size_t image_size;
 
             private:
                 void bind_to_parent();

@@ -32,12 +32,17 @@
 // parameters:
 // required:
 // `--in=foo`  load 3D data from file `foo`.
+// `--in foo`  load 3D data from file `foo`.
 // `--out=bar` export 3D data into file `bar`.
+// `--out bar` export 3D data into file `bar`.
 //
 // optional:
 // `--informat=baz` assume file format `baz` (if `--informat` is left out, file format is deduced from the filename extension).
+// `--informat baz` assume file format `baz` (if `--informat` is left out, file format is deduced from the filename extension).
 // `--outformat=qux` export 3D data into file `qux` (if `--outformat` is left out, file format is deduced from the filename extension).
+// `--outformat qux` export 3D data into file `qux` (if `--outformat` is left out, file format is deduced from the filename extension).
 // `--intexture=quux` use texture data into file `quux` as the material for all meshes (eg. `.obj` input file).
+// `--intexture quux` use texture data into file `quux` as the material for all meshes (eg. `.obj` input file).
 
 namespace yli
 {
@@ -52,26 +57,26 @@ int main(const int argc, const char* argv[])
     yli::command_line::CommandLineMaster command_line_master(argc, argv);
     command_line_master.print_keys_and_values();
 
-    if (!command_line_master.is_key("--in"))
+    if (!command_line_master.is_key("in"))
     {
         std::cerr << "ERROR: --in parameter is required!\n\nexample:\n\nyli_convert --in=foo --out=bar\n";
         exit(EXIT_FAILURE);
     }
 
-    if (!command_line_master.is_key("--out"))
+    if (!command_line_master.is_key("out"))
     {
         std::cerr << "ERROR: --out parameter is required!\n\nexample:\n\nyli_convert --in=foo --out=bar\n";
         exit(EXIT_FAILURE);
     }
 
-    const std::string in_file = command_line_master.get_value("--in");
-    const std::string out_file = command_line_master.get_value("--out");
+    const std::string in_file = command_line_master.get_value("in");
+    const std::string out_file = command_line_master.get_value("out");
 
     std::string in_file_format = ""; // dummy value.
 
-    if (command_line_master.is_key("--informat"))
+    if (command_line_master.is_key("informat"))
     {
-        in_file_format = command_line_master.get_value("--informat");
+        in_file_format = command_line_master.get_value("informat");
     }
     else
     {
@@ -89,9 +94,9 @@ int main(const int argc, const char* argv[])
 
     std::string out_file_format = ""; // dummy value.
 
-    if (command_line_master.is_key("--outformat"))
+    if (command_line_master.is_key("outformat"))
     {
-        out_file_format = command_line_master.get_value("--outformat");
+        out_file_format = command_line_master.get_value("outformat");
     }
     else
     {
@@ -127,7 +132,7 @@ int main(const int argc, const char* argv[])
     symbiosis_struct.parent = nullptr;           // no parent.
     symbiosis_struct.vram_buffer_in_use = false; // do not use VRAM buffer.
     yli::ontology::Universe* const universe = nullptr;
-    yli::ontology::Symbiosis const symbiosis = yli::ontology::Symbiosis(universe, symbiosis_struct);
+    const yli::ontology::Symbiosis symbiosis = yli::ontology::Symbiosis(universe, symbiosis_struct);
 
     // Assimp usage example:
     // https://github.com/assimp/assimp/issues/203
@@ -136,17 +141,29 @@ int main(const int argc, const char* argv[])
     ai_scene.mRootNode = new aiNode();
     ai_scene.mNumMaterials = symbiosis.get_number_of_symbiont_materials();
     ai_scene.mMaterials = new aiMaterial*[ai_scene.mNumMaterials];
+    ai_scene.mNumAnimations = 0;
+    ai_scene.mAnimations = nullptr;
+    ai_scene.mNumTextures = symbiosis.get_number_of_symbiont_materials();
+    ai_scene.mTextures = new aiTexture*[ai_scene.mNumMaterials];
+    ai_scene.mNumLights = 0;
+    ai_scene.mLights = nullptr;
+    ai_scene.mNumCameras = 0;
+    ai_scene.mCameras = nullptr;
+    ai_scene.mMetaData = nullptr;
     ai_scene.mNumMeshes = symbiosis.get_number_of_symbiont_species();
     ai_scene.mMeshes = new aiMesh*[ai_scene.mNumMeshes];
+    ai_scene.mRootNode->mNumMeshes = symbiosis.get_number_of_symbiont_species();
+    ai_scene.mRootNode->mMeshes = new unsigned int[symbiosis.get_number_of_symbiont_species()];
 
     std::cout << "Number of `SymbiontMaterial`s: " << symbiosis.get_number_of_symbiont_materials() << "\n";
 
     for (std::size_t symbiont_material_i = 0; symbiont_material_i < symbiosis.get_number_of_symbiont_materials(); symbiont_material_i++)
     {
         std::cout << "Processing `SymbiontMaterial` " << symbiont_material_i << "\n";
-        yli::ontology::SymbiontMaterial* symbiont_material = symbiosis.get_symbiont_material(symbiont_material_i);
+        const yli::ontology::SymbiontMaterial* const symbiont_material = symbiosis.get_symbiont_material(symbiont_material_i);
 
         ai_scene.mMaterials[symbiont_material_i] = new aiMaterial();
+        ai_scene.mTextures[symbiont_material_i] = new aiTexture();
 
         if (symbiont_material == nullptr)
         {
@@ -164,6 +181,9 @@ int main(const int argc, const char* argv[])
 
     for (std::size_t symbiont_species_i = 0; symbiont_species_i < symbiosis.get_number_of_symbiont_species(); symbiont_species_i++)
     {
+        ai_scene.mRootNode->mMeshes[symbiont_species_i] = symbiont_species_i;
+        ai_scene.mMeshes[symbiont_species_i] = new aiMesh();
+
         const yli::ontology::SymbiontSpecies* const symbiont_species = symbiosis.get_symbiont_species(symbiont_species_i);
 
         if (symbiont_species == nullptr)
@@ -172,19 +192,19 @@ int main(const int argc, const char* argv[])
             continue;
         }
 
-        ai_scene.mMeshes[symbiont_species_i] = new aiMesh();
         const yli::ontology::SymbiontMaterial* const symbiont_material = static_cast<yli::ontology::SymbiontMaterial*>(symbiont_species->get_parent());
 
         if (symbiont_material == nullptr)
         {
+            std::cerr << "ERROR: `yli_convert`: `symbiont_material` is `nullptr`!\n";
             continue;
         }
 
         ai_scene.mMeshes[symbiont_species_i]->mMaterialIndex = symbiont_material->get_childID();
 
-        std::vector<glm::vec3> vertices = symbiont_species->get_vertices();
-        std::vector<glm::vec3> normals = symbiont_species->get_normals();
-        std::vector<glm::vec2> uvs = symbiont_species->get_uvs();
+        const std::vector<glm::vec3>& vertices = symbiont_species->get_vertices();
+        const std::vector<glm::vec3>& normals = symbiont_species->get_normals();
+        const std::vector<glm::vec2>& uvs = symbiont_species->get_uvs();
 
         const std::size_t number_of_vertices = vertices.size();
 
@@ -197,7 +217,7 @@ int main(const int argc, const char* argv[])
         for (std::size_t vertex_i = 0; vertex_i < number_of_vertices; vertex_i++)
         {
             ai_scene.mMeshes[symbiont_species_i]->mVertices[vertex_i] = aiVector3D(vertices[vertex_i].x, vertices[vertex_i].y, vertices[vertex_i].z);
-            ai_scene.mMeshes[symbiont_species_i]->mVertices[vertex_i] = aiVector3D(normals[vertex_i].x, normals[vertex_i].y, normals[vertex_i].z);
+            ai_scene.mMeshes[symbiont_species_i]->mNormals[vertex_i] = aiVector3D(normals[vertex_i].x, normals[vertex_i].y, normals[vertex_i].z);
             ai_scene.mMeshes[symbiont_species_i]->mTextureCoords[0][vertex_i] = aiVector3D(uvs[vertex_i].x, uvs[vertex_i].y, 0);
         }
 

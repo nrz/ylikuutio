@@ -13,10 +13,8 @@
 #endif
 
 // Include standard headers
-#include <cmath>    // floor, NAN, sqrt, std::isnan, std::pow
 #include <cstddef>  // std::size_t
 #include <cstdio>   // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf etc.
-#include <cstring>  // std::memcmp, std::memcpy, std::strcmp, std::strlen, std::strncmp
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <stdint.h> // uint32_t etc.
 #include <stdlib.h> // free, malloc
@@ -27,10 +25,20 @@ namespace yli
     namespace load
     {
         // Load texture from memory.
-        GLuint load_texture(const uint8_t* const image_data, const std::size_t image_width, const std::size_t image_height, bool should_image_data_be_deleted)
+        bool load_texture(
+                const uint8_t* const image_data,
+                const std::size_t image_width,
+                const std::size_t image_height,
+                const bool should_image_data_be_deleted,
+                GLuint& textureID)
         {
+            if (image_data == nullptr)
+            {
+                std::cerr << "ERROR: `image_data` is `nullptr`!\n";
+                return false;
+            }
+
             // Create one OpenGL texture
-            GLuint textureID;
             glGenTextures(1, &textureID);
 
             // "Bind" the newly created texture : all future texture functions will modify this texture
@@ -73,14 +81,17 @@ namespace yli
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
             glGenerateMipmap(GL_TEXTURE_2D);
 
-            // Return the ID of the texture we just created
-            return textureID;
+            // success.
+            return true;
         }
 
         // Load texture from memory.
-        // FIXME: return `false` for failure and `true` for success.
-        // FIXME: receive `GLuint` as a reference.
-        GLuint load_FBX_texture(const ofbx::Texture* const ofbx_texture)
+        bool load_FBX_texture(
+                const ofbx::Texture* const ofbx_texture,
+                std::size_t& image_width,
+                std::size_t& image_height,
+                std::size_t& image_size,
+                GLuint& textureID)
         {
             // requirements:
             // `ofbx_texture` must not be `nullptr`.
@@ -88,8 +99,7 @@ namespace yli
             if (ofbx_texture == nullptr)
             {
                 std::cerr << "ERROR: `yli::load::load_FBX_texture`: `ofbx_texture` is `nullptr`!\n";
-                // FIXME: return `false` for failure and `true` for success.
-                return 0;
+                return false;
             }
 
             // Load the texture.
@@ -102,7 +112,7 @@ namespace yli
             char filename_buffer[filename_buffer_size];
             const char separator = '/'; // FIXME: don't assume slash as some operating systems may use other characters.
 
-            std::size_t filename_length = yli::string::extract_last_part_of_string(
+            const std::size_t filename_length = yli::string::extract_last_part_of_string(
                     filename.c_str(),
                     filename.size(),
                     filename_buffer,
@@ -111,7 +121,7 @@ namespace yli
 
             std::cout << "Filename length: " << filename_length << " bytes.\n";
 
-            char* texture_filename = static_cast<char*>(static_cast<void*>(filename_buffer));
+            const char* const texture_filename = static_cast<char*>(static_cast<void*>(filename_buffer));
             std::cout << "Texture file: " << texture_filename << "\n";
 
             // Find out the file suffix (filetype).
@@ -126,70 +136,83 @@ namespace yli
                     file_suffix_buffer_size,
                     suffix_separator);
 
-            const char* texture_file_suffix = static_cast<char*>(static_cast<void*>(file_suffix_buffer));
+            const char* const texture_file_suffix_char = static_cast<char*>(static_cast<void*>(file_suffix_buffer));
+            const std::string texture_file_suffix = std::string(texture_file_suffix_char);
 
             std::cout << "Texture file suffix: " << texture_file_suffix << "\n";
 
-            if (strncmp(texture_file_suffix, "bmp", sizeof("bmp")) == 0)
+            if (texture_file_suffix == "bmp")
             {
                 const std::string filename_string = std::string((char*) &filename_buffer);
-                // FIXME: return `false` for failure and `true` for success.
-                return yli::load::load_BMP_texture(filename_string);
+                return yli::load::load_BMP_texture(filename_string, image_width, image_height, image_size, textureID);
             }
-            else if (strncmp(texture_file_suffix, "png", sizeof("png")) == 0)
+            else if (texture_file_suffix == "png")
             {
                 // TODO: implement PNG loading!
+                return false;
             }
 
-            // FIXME: return `false` for failure and `true` for success.
-            return 0;
+            return false;
         }
 
-        GLuint load_BMP_texture(const std::string& filename)
+        bool load_BMP_texture(
+                const std::string& filename,
+                std::size_t& image_width,
+                std::size_t& image_height,
+                std::size_t& image_size,
+                GLuint& textureID)
         {
-            std::size_t image_width;
-            std::size_t image_height;
-            std::size_t image_size;
+            const uint8_t* const image_data = load_BMP_file(filename, image_width, image_height, image_size);
 
-            uint8_t* image_data = load_BMP_file(filename, image_width, image_height, image_size);
+            if (image_data == nullptr)
+            {
+                std::cerr << "ERROR: `image_data` is `nullptr`!\n";
+                return false;
+            }
 
-            return load_texture(image_data, image_width, image_height, true);
+            return load_texture(image_data, image_width, image_height, true, textureID);
         }
 
 #define FOURCC_DXT1 0x31545844 // Equivalent to "DXT1" in ASCII
 #define FOURCC_DXT3 0x33545844 // Equivalent to "DXT3" in ASCII
 #define FOURCC_DXT5 0x35545844 // Equivalent to "DXT5" in ASCII
 
-        GLuint load_DDS_texture(const std::string& filename)
+        bool load_DDS_texture(
+                const std::string& filename,
+                std::size_t& image_width,
+                std::size_t& image_height,
+                std::size_t& image_size,
+                GLuint& textureID)
         {
-            const char* imagepath = filename.c_str();
+            const char* const imagepath = filename.c_str();
 
             uint8_t header[124];
-            std::FILE* fp;
 
             /* try to open the file */
-            fp = std::fopen(imagepath, "rb");
+            std::FILE* const fp = std::fopen(imagepath, "rb");
             if (fp == nullptr)
             {
                 std::printf("%s could not be opened. Are you in the right directory ? Don't forget to read the FAQ !\n", imagepath);
-                return 0;
+                return false;
             }
 
             /* verify the type of file */
             const std::size_t dds_magic_number_size_in_bytes = 4; // "DDS "
-            char filecode[dds_magic_number_size_in_bytes];
+            char filecode_char[dds_magic_number_size_in_bytes];
 
-            if (std::fread(filecode, 1, dds_magic_number_size_in_bytes, fp) != dds_magic_number_size_in_bytes)
+            if (std::fread(filecode_char, 1, dds_magic_number_size_in_bytes, fp) != dds_magic_number_size_in_bytes)
             {
                 std::cerr << "Error while reading " << filename << "\n";
                 std::fclose(fp);
-                return 0;
+                return false;
             }
 
-            if (std::strncmp(filecode, "DDS ", dds_magic_number_size_in_bytes) != 0)
+            const std::string filecode = std::string(filecode_char);
+
+            if (filecode != "DDS ")
             {
                 std::fclose(fp);
-                return 0;
+                return false;
             }
 
             /* get the surface desc */
@@ -197,27 +220,25 @@ namespace yli
             {
                 std::cerr << "Error while reading " << filename << "\n";
                 std::fclose(fp);
-                return 0;
+                return false;
             }
 
-            uint32_t height      = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(header, 8);
-            uint32_t width       = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(header, 12);
-            uint32_t linearSize  = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(header, 16);
-            uint32_t mipMapCount = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(header, 24);
-            uint32_t fourCC      = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(header, 80);
+            image_height               = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(header, 8);
+            image_width                = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(header, 12);
+            const uint32_t linearSize  = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(header, 16);
+            const uint32_t mipMapCount = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(header, 24);
+            const uint32_t fourCC      = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(header, 80);
 
-            uint8_t* buffer;
-            std::size_t bufsize;
             /* how big is it going to be including all mipmaps? */
-            bufsize = mipMapCount > 1 ? 2 * static_cast<std::size_t>(linearSize) : linearSize;
-            buffer = (uint8_t*) malloc(bufsize * sizeof(uint8_t));
+            const std::size_t bufsize = mipMapCount > 1 ? 2 * static_cast<std::size_t>(linearSize) : linearSize;
+            uint8_t* const buffer = (uint8_t*) malloc(bufsize * sizeof(uint8_t));
 
             if (std::fread(buffer, 1, bufsize, fp) != bufsize)
             {
                 std::cerr << "Error while reading " << filename << "\n";
                 free(buffer);
                 std::fclose(fp);
-                return 0;
+                return false;
             }
 
             /* close the file pointer */
@@ -237,51 +258,53 @@ namespace yli
                     break;
                 default:
                     free(buffer);
-                    return 0;
+                    return false;
             }
 
             // Create one OpenGL texture
-            GLuint textureID;
             glGenTextures(1, &textureID);
 
             // "Bind" the newly created texture : all future texture functions will modify this texture
             glBindTexture(GL_TEXTURE_2D, textureID);
             glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
-            std::size_t blockSize = (format == GL_COMPRESSED_RGBA_S3TC_DXT1_EXT) ? 8 : 16;
+            const std::size_t blockSize = (format == GL_COMPRESSED_RGBA_S3TC_DXT1_EXT) ? 8 : 16;
             std::size_t offset = 0;
 
+            std::size_t temp_width = image_width;
+            std::size_t temp_height = image_height;
+
             /* load the mipmaps */
-            for (std::size_t level = 0; level < mipMapCount && (width || height); ++level)
+            for (std::size_t level = 0; level < mipMapCount && (temp_width || temp_height); ++level)
             {
-                std::size_t size = ((width + 3) / 4) * ((height + 3) / 4) * blockSize;
+                std::size_t size = ((temp_width + 3) / 4) * ((temp_height + 3) / 4) * blockSize;
                 glCompressedTexImage2D(
                         GL_TEXTURE_2D,
                         level,
                         format,
-                        width,
-                        height,
+                        temp_width,
+                        temp_height,
                         0,
                         size,
                         buffer + offset);
 
                 offset += size;
-                width  /= 2;
-                height /= 2;
+                temp_width /= 2;
+                temp_height /= 2;
 
                 // Deal with Non-Power-Of-Two textures. This code is not included in the webpage to reduce clutter.
-                if (width < 1)
+                if (temp_width < 1)
                 {
-                    width = 1;
+                    temp_width = 1;
                 }
-                if (height < 1)
+                if (temp_height < 1)
                 {
-                    height = 1;
+                    temp_height = 1;
                 }
             }
             free(buffer);
 
-            return textureID;
+            return true;
         }
     }
 }
