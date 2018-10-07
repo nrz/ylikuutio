@@ -33,6 +33,12 @@ namespace yli
                 const bool should_image_data_be_deleted,
                 GLuint& textureID)
         {
+            if (image_data == nullptr)
+            {
+                std::cerr << "ERROR: `image_data` is `nullptr`!\n";
+                return false;
+            }
+
             // Create one OpenGL texture
             glGenTextures(1, &textureID);
 
