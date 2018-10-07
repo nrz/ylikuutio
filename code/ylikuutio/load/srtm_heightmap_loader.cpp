@@ -175,9 +175,6 @@ namespace yli
             // start processing image_data.
             // 90 meters is for equator.
 
-            // FIXME: this is a temporary testing code with a hardcoded start from the southwestern corner.
-            // TODO: write a proper code for loading the appropriate chunks (based on real spherical coordinates) into VBOs!
-
             // start processing image_data.
             std::cout << "Processing SRTM heightmap data.\n";
 
