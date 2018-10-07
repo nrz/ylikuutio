@@ -146,7 +146,7 @@ namespace yli
                 return;
             }
 
-            if (!yli::load::load_FBX_texture(texture, this->texture))
+            if (!yli::load::load_FBX_texture(texture, this->image_width, this->image_height, this->image_size, this->texture))
             {
                 std::cerr << "ERROR: loading FBX texture failed!\n";
             }

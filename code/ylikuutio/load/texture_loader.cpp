@@ -88,6 +88,9 @@ namespace yli
         // Load texture from memory.
         bool load_FBX_texture(
                 const ofbx::Texture* const ofbx_texture,
+                std::size_t& image_width,
+                std::size_t& image_height,
+                std::size_t& image_size,
                 GLuint& textureID)
         {
             // requirements:
@@ -141,7 +144,7 @@ namespace yli
             if (texture_file_suffix == "bmp")
             {
                 const std::string filename_string = std::string((char*) &filename_buffer);
-                return yli::load::load_BMP_texture(filename_string, textureID);
+                return yli::load::load_BMP_texture(filename_string, image_width, image_height, image_size, textureID);
             }
             else if (texture_file_suffix == "png")
             {
@@ -154,12 +157,11 @@ namespace yli
 
         bool load_BMP_texture(
                 const std::string& filename,
+                std::size_t& image_width,
+                std::size_t& image_height,
+                std::size_t& image_size,
                 GLuint& textureID)
         {
-            std::size_t image_width;
-            std::size_t image_height;
-            std::size_t image_size;
-
             const uint8_t* const image_data = load_BMP_file(filename, image_width, image_height, image_size);
 
             if (image_data == nullptr)
@@ -177,6 +179,9 @@ namespace yli
 
         bool load_DDS_texture(
                 const std::string& filename,
+                std::size_t& image_width,
+                std::size_t& image_height,
+                std::size_t& image_size,
                 GLuint& textureID)
         {
             const char* const imagepath = filename.c_str();
@@ -218,8 +223,8 @@ namespace yli
                 return false;
             }
 
-            uint32_t height            = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(header, 8);
-            uint32_t width             = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(header, 12);
+            image_height               = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(header, 8);
+            image_width                = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(header, 12);
             const uint32_t linearSize  = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(header, 16);
             const uint32_t mipMapCount = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(header, 24);
             const uint32_t fourCC      = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(header, 80);
@@ -266,32 +271,35 @@ namespace yli
             const std::size_t blockSize = (format == GL_COMPRESSED_RGBA_S3TC_DXT1_EXT) ? 8 : 16;
             std::size_t offset = 0;
 
+            std::size_t temp_width = image_width;
+            std::size_t temp_height = image_height;
+
             /* load the mipmaps */
-            for (std::size_t level = 0; level < mipMapCount && (width || height); ++level)
+            for (std::size_t level = 0; level < mipMapCount && (temp_width || temp_height); ++level)
             {
-                std::size_t size = ((width + 3) / 4) * ((height + 3) / 4) * blockSize;
+                std::size_t size = ((temp_width + 3) / 4) * ((temp_height + 3) / 4) * blockSize;
                 glCompressedTexImage2D(
                         GL_TEXTURE_2D,
                         level,
                         format,
-                        width,
-                        height,
+                        temp_width,
+                        temp_height,
                         0,
                         size,
                         buffer + offset);
 
                 offset += size;
-                width  /= 2;
-                height /= 2;
+                temp_width /= 2;
+                temp_height /= 2;
 
                 // Deal with Non-Power-Of-Two textures. This code is not included in the webpage to reduce clutter.
-                if (width < 1)
+                if (temp_width < 1)
                 {
-                    width = 1;
+                    temp_width = 1;
                 }
-                if (height < 1)
+                if (temp_height < 1)
                 {
-                    height = 1;
+                    temp_height = 1;
                 }
             }
             free(buffer);

@@ -29,11 +29,17 @@ namespace yli
         // Load texture from memory.
         bool load_FBX_texture(
                 const ofbx::Texture* const ofbx_texture,
+                std::size_t& image_width,
+                std::size_t& image_height,
+                std::size_t& image_size,
                 GLuint& textureID);
 
         // Load a .BMP file using our custom loader
         bool load_BMP_texture(
                 const std::string& filename,
+                std::size_t& image_width,
+                std::size_t& image_height,
+                std::size_t& image_size,
                 GLuint& textureID);
 
         //// Since GLFW 3, glfwLoadTexture2D() has been removed. You have to use another texture loading library,
@@ -44,6 +50,9 @@ namespace yli
         // Load a .DDS file using GLFW's own loader
         bool load_DDS_texture(
                 const std::string& filename,
+                std::size_t& image_width,
+                std::size_t& image_height,
+                std::size_t& image_size,
                 GLuint& textureID);
     }
 }
