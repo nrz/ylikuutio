@@ -87,9 +87,7 @@ namespace yli
         }
 
         // Load texture from memory.
-        // FIXME: return `false` for failure and `true` for success.
-        // FIXME: receive `GLuint` as a reference.
-        GLuint load_FBX_texture(const ofbx::Texture* const ofbx_texture)
+        bool load_FBX_texture(const ofbx::Texture* const ofbx_texture, GLuint& textureID)
         {
             // requirements:
             // `ofbx_texture` must not be `nullptr`.
@@ -97,8 +95,7 @@ namespace yli
             if (ofbx_texture == nullptr)
             {
                 std::cerr << "ERROR: `yli::load::load_FBX_texture`: `ofbx_texture` is `nullptr`!\n";
-                // FIXME: return `false` for failure and `true` for success.
-                return 0;
+                return false;
             }
 
             // Load the texture.
@@ -142,19 +139,18 @@ namespace yli
             if (strncmp(texture_file_suffix, "bmp", sizeof("bmp")) == 0)
             {
                 const std::string filename_string = std::string((char*) &filename_buffer);
-                // FIXME: return `false` for failure and `true` for success.
-                return yli::load::load_BMP_texture(filename_string);
+                return yli::load::load_BMP_texture(filename_string, textureID);
             }
             else if (strncmp(texture_file_suffix, "png", sizeof("png")) == 0)
             {
                 // TODO: implement PNG loading!
+                return false;
             }
 
-            // FIXME: return `false` for failure and `true` for success.
-            return 0;
+            return false;
         }
 
-        GLuint load_BMP_texture(const std::string& filename)
+        bool load_BMP_texture(const std::string& filename, GLuint& textureID)
         {
             std::size_t image_width;
             std::size_t image_height;
@@ -162,17 +158,20 @@ namespace yli
 
             const uint8_t* const image_data = load_BMP_file(filename, image_width, image_height, image_size);
 
-            GLuint textureID;
-            load_texture(image_data, image_width, image_height, true, textureID);
+            if (image_data == nullptr)
+            {
+                std::cerr << "ERROR: `image_data` is `nullptr`!\n";
+                return false;
+            }
 
-            return textureID;
+            return load_texture(image_data, image_width, image_height, true, textureID);
         }
 
 #define FOURCC_DXT1 0x31545844 // Equivalent to "DXT1" in ASCII
 #define FOURCC_DXT3 0x33545844 // Equivalent to "DXT3" in ASCII
 #define FOURCC_DXT5 0x35545844 // Equivalent to "DXT5" in ASCII
 
-        GLuint load_DDS_texture(const std::string& filename)
+        bool load_DDS_texture(const std::string& filename, GLuint& textureID)
         {
             const char* const imagepath = filename.c_str();
 
@@ -183,7 +182,7 @@ namespace yli
             if (fp == nullptr)
             {
                 std::printf("%s could not be opened. Are you in the right directory ? Don't forget to read the FAQ !\n", imagepath);
-                return 0;
+                return false;
             }
 
             /* verify the type of file */
@@ -194,13 +193,13 @@ namespace yli
             {
                 std::cerr << "Error while reading " << filename << "\n";
                 std::fclose(fp);
-                return 0;
+                return false;
             }
 
             if (std::strncmp(filecode, "DDS ", dds_magic_number_size_in_bytes) != 0)
             {
                 std::fclose(fp);
-                return 0;
+                return false;
             }
 
             /* get the surface desc */
@@ -208,7 +207,7 @@ namespace yli
             {
                 std::cerr << "Error while reading " << filename << "\n";
                 std::fclose(fp);
-                return 0;
+                return false;
             }
 
             uint32_t height            = yli::memory::read_nonaligned_32_bit<uint8_t, uint32_t>(header, 8);
@@ -226,7 +225,7 @@ namespace yli
                 std::cerr << "Error while reading " << filename << "\n";
                 free(buffer);
                 std::fclose(fp);
-                return 0;
+                return false;
             }
 
             /* close the file pointer */
@@ -246,11 +245,10 @@ namespace yli
                     break;
                 default:
                     free(buffer);
-                    return 0;
+                    return false;
             }
 
             // Create one OpenGL texture
-            GLuint textureID;
             glGenTextures(1, &textureID);
 
             // "Bind" the newly created texture : all future texture functions will modify this texture
@@ -290,7 +288,7 @@ namespace yli
             }
             free(buffer);
 
-            return textureID;
+            return true;
         }
     }
 }

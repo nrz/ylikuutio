@@ -52,11 +52,17 @@ namespace yli
                     // Initialize texture
                     if ((std::strcmp(char_font_texture_file_format, "bmp") == 0) || (std::strcmp(char_font_texture_file_format, "BMP") == 0))
                     {
-                        this->texture = yli::load::load_BMP_texture(texture_filename);
+                        if (!yli::load::load_BMP_texture(texture_filename, this->texture))
+                        {
+                            std::cerr << "ERROR: loading BMP texture failed!\n";
+                        }
                     }
                     else if ((std::strcmp(char_font_texture_file_format, "dds") == 0) || (std::strcmp(char_font_texture_file_format, "DDS") == 0))
                     {
-                        this->texture = yli::load::load_DDS_texture(texture_filename);
+                        if (!yli::load::load_DDS_texture(texture_filename, this->texture))
+                        {
+                            std::cerr << "ERROR: loading DDS texture failed!\n";
+                        }
                     }
                     else
                     {

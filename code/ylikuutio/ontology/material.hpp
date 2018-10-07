@@ -68,11 +68,17 @@ namespace yli
                         // Load the texture.
                         if (this->texture_file_format == "bmp" || this->texture_file_format == "BMP")
                         {
-                            this->texture = yli::load::load_BMP_texture(this->texture_filename);
+                            if (!yli::load::load_BMP_texture(this->texture_filename, this->texture))
+                            {
+                                std::cerr << "ERROR: loading BMP texture failed!\n";
+                            }
                         }
                         else if (this->texture_file_format == "dds" || this->texture_file_format == "DDS")
                         {
-                            this->texture = yli::load::load_DDS_texture(this->texture_filename);
+                            if (!yli::load::load_DDS_texture(this->texture_filename, this->texture))
+                            {
+                                std::cerr << "ERROR: loading DDS texture failed!\n";
+                            }
                         }
                         else
                         {
