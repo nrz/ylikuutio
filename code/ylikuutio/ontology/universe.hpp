@@ -411,7 +411,7 @@ namespace yli
                 void set_planet_radius(float planet_radius);
 
                 // this method returns a terrain `Species` pointer.
-                yli::ontology::Species* get_terrain_species();
+                yli::ontology::Species* get_terrain_species() const;
 
                 // this method sets a terrain `Species` pointer.
                 void set_terrain_species(yli::ontology::Species* const terrain_species);
@@ -474,8 +474,8 @@ namespace yli
                 glm::mat4& get_view_matrix();
                 void set_view_matrix(glm::mat4& view_matrix);
 
-                GLfloat get_aspect_ratio();
-                GLfloat get_initialFoV();
+                GLfloat get_aspect_ratio() const;
+                GLfloat get_initialFoV() const;
 
                 // Public callbacks.
 

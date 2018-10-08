@@ -598,7 +598,7 @@ namespace yli
             this->planet_radius = planet_radius;
         }
 
-        yli::ontology::Species* Universe::get_terrain_species()
+        yli::ontology::Species* Universe::get_terrain_species() const
         {
             return this->terrain_species;
         }
@@ -628,12 +628,12 @@ namespace yli
             this->current_camera_view_matrix = view_matrix;
         }
 
-        GLfloat Universe::get_aspect_ratio()
+        GLfloat Universe::get_aspect_ratio() const
         {
             return this->aspect_ratio;
         }
 
-        GLfloat Universe::get_initialFoV()
+        GLfloat Universe::get_initialFoV() const
         {
             return this->initialFoV;
         }
