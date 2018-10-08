@@ -97,5 +97,10 @@ namespace yli
                 glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
             }
         }
+
+        bool has_ext_framebuffer_object()
+        {
+            return GLEW_EXT_framebuffer_object;
+        }
     }
 }

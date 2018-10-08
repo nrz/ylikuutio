@@ -21,5 +21,6 @@ namespace yli
         void cull_triangles();
         void set_background_color(const float red, const float green, const float blue, const float alpha);
         void set_wireframe(const bool wireframe);
+        bool has_ext_framebuffer_object();
     }
 }
