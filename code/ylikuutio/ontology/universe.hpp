@@ -482,22 +482,22 @@ namespace yli
                 static std::shared_ptr<yli::datatypes::AnyValue> activate(
                         yli::console::Console* const console,
                         yli::ontology::Entity* const universe_entity,
-                        std::vector<std::string>& command_parameters);
+                        const std::vector<std::string>& command_parameters);
 
                 static std::shared_ptr<yli::datatypes::AnyValue> delete_entity(
                         yli::console::Console* const console,
                         yli::ontology::Entity* const universe_entity,
-                        std::vector<std::string>& command_parameters);
+                        const std::vector<std::string>& command_parameters);
 
                 static std::shared_ptr<yli::datatypes::AnyValue> info(
                         yli::console::Console* const console,
                         yli::ontology::Entity* const universe_entity,
-                        std::vector<std::string>& command_parameters);
+                        const std::vector<std::string>& command_parameters);
 
                 static std::shared_ptr<yli::datatypes::AnyValue> bind(
                         yli::console::Console* const console,
                         yli::ontology::Entity* const universe_entity,
-                        std::vector<std::string>& command_parameters);
+                        const std::vector<std::string>& command_parameters);
 
                 // Public callbacks end here.
 

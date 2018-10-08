@@ -29,17 +29,17 @@ namespace ajokki
     std::shared_ptr<yli::datatypes::AnyValue> version(
             yli::console::Console* const console,
             yli::ontology::Entity* const,
-            std::vector<std::string>& command_parameters);
+            const std::vector<std::string>& command_parameters);
 
     std::shared_ptr<yli::datatypes::AnyValue> quit(
             yli::console::Console* const,
             yli::ontology::Entity* const,
-            std::vector<std::string>& command_parameters);
+            const std::vector<std::string>& command_parameters);
 
     std::shared_ptr<yli::datatypes::AnyValue> help(
             yli::console::Console* const,
             yli::ontology::Entity* const,
-            std::vector<std::string>& command_parameters);
+            const std::vector<std::string>& command_parameters);
 }
 
 #endif

@@ -311,7 +311,7 @@ namespace yli
         std::shared_ptr<yli::datatypes::AnyValue> Universe::activate(
                 yli::console::Console* const console,
                 yli::ontology::Entity* const universe_entity,
-                std::vector<std::string>& command_parameters)
+                const std::vector<std::string>& command_parameters)
         {
             // This function can be used to activate a `World` or a `Scene`.
             // A `World` can be activated always, assuming that the `universe_entity` is a `Universe`.
@@ -384,7 +384,7 @@ namespace yli
         std::shared_ptr<yli::datatypes::AnyValue> Universe::delete_entity(
                 yli::console::Console* const console,
                 yli::ontology::Entity* const universe_entity,
-                std::vector<std::string>& command_parameters)
+                const std::vector<std::string>& command_parameters)
         {
             if (console == nullptr || universe_entity == nullptr)
             {
@@ -440,7 +440,7 @@ namespace yli
         std::shared_ptr<yli::datatypes::AnyValue> Universe::info(
                 yli::console::Console* const console,
                 yli::ontology::Entity* const universe_entity,
-                std::vector<std::string>& command_parameters)
+                const std::vector<std::string>& command_parameters)
         {
             if (console == nullptr || universe_entity == nullptr)
             {
@@ -526,7 +526,7 @@ namespace yli
         std::shared_ptr<yli::datatypes::AnyValue> Universe::bind(
                 yli::console::Console* const console,
                 yli::ontology::Entity* const universe_entity,
-                std::vector<std::string>& command_parameters)
+                const std::vector<std::string>& command_parameters)
         {
             if (console == nullptr || universe_entity == nullptr)
             {

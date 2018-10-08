@@ -94,7 +94,7 @@ namespace yli
         std::shared_ptr<yli::datatypes::AnyValue> SettingMaster::set_and_print(
                 yli::console::Console* const console,
                 yli::ontology::Entity* const entity,
-                std::vector<std::string>& command_parameters)
+                const std::vector<std::string>& command_parameters)
         {
             // Usage:
             // to get variable names: set
@@ -261,7 +261,7 @@ namespace yli
         std::shared_ptr<yli::datatypes::AnyValue> SettingMaster::get_and_print(
                 yli::console::Console* const console,
                 yli::ontology::Entity* const entity,
-                std::vector<std::string>& command_parameters)
+                const std::vector<std::string>& command_parameters)
         {
             // Usage:
             // to get variable names: get
