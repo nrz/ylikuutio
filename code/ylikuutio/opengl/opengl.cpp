@@ -102,5 +102,10 @@ namespace yli
         {
             return GLEW_EXT_framebuffer_object;
         }
+
+        bool has_arb_shader_objects()
+        {
+            return GLEW_ARB_shader_objects;
+        }
     }
 }
