@@ -277,8 +277,6 @@ add_definitions(
     )
 
 # Shaders.
-configure_file(code/ylikuutio/shaders/TransformVertexShader.vertexshader TransformVertexShader.vertexshader COPYONLY)
-configure_file(code/ylikuutio/shaders/TextureFragmentShader.fragmentshader TextureFragmentShader.fragmentshader COPYONLY)
 configure_file(code/ylikuutio/shaders/StandardShading.vertexshader StandardShading.vertexshader COPYONLY)
 configure_file(code/ylikuutio/shaders/StandardShading.fragmentshader StandardShading.fragmentshader COPYONLY)
 configure_file(code/ylikuutio/shaders/TextVertexShader.vertexshader TextVertexShader.vertexshader COPYONLY)
@@ -590,8 +588,6 @@ add_library(ylikuutio STATIC
     # shaders, in alphabetical order
     code/ylikuutio/shaders/StandardShading.fragmentshader
     code/ylikuutio/shaders/StandardShading.vertexshader
-    code/ylikuutio/shaders/TransformVertexShader.vertexshader
-    code/ylikuutio/shaders/TextureFragmentShader.fragmentshader
     code/ylikuutio/shaders/TextVertexShader.fragmentshader
     code/ylikuutio/shaders/TextVertexShader.vertexshader
 
