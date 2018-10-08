@@ -778,6 +778,7 @@ int main(const int argc, const char* argv[])
     // Other callbacks.
     command_callback_map["help"] = &ajokki::help;
     command_callback_map["version"] = &ajokki::version;
+    command_callback_map["screenshot"] = &yli::ontology::Universe::screenshot;
 
     // For speed computation
     double last_time_to_display_FPS = yli::time::get_time();

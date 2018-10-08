@@ -28,6 +28,7 @@
 #include "code/ylikuutio/console/console.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/map/ylikuutio_map.hpp"
+#include "code/ylikuutio/file/file_writer.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
 #include "code/ylikuutio/common/globals.hpp"
 #include "code/ylikuutio/common/pi.hpp"
@@ -571,6 +572,86 @@ namespace yli
                 }
 
                 child_entity->bind_to_new_parent(parent_entity);
+            }
+
+            return nullptr;
+        }
+
+        std::shared_ptr<yli::datatypes::AnyValue> Universe::screenshot(
+                yli::console::Console* const console,
+                yli::ontology::Entity* const universe_entity,
+                const std::vector<std::string>& command_parameters)
+        {
+            if (console == nullptr || universe_entity == nullptr)
+            {
+                return nullptr;
+            }
+
+            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(universe_entity);
+
+            if (universe == nullptr)
+            {
+                return nullptr;
+            }
+
+            if (!yli::opengl::has_ext_framebuffer_object())
+            {
+                return nullptr;
+            }
+
+            if (command_parameters.size() == 1)
+            {
+                const std::string filename = command_parameters[0];
+
+                // http://www.mathematik.uni-dortmund.de/~goeddeke/gpgpu/tutorial.html
+
+                // create FBO (off-screen framebuffer object):
+                GLuint fb;
+                glGenFramebuffersEXT(1, &fb);
+
+                // bind offscreen buffer.
+                glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, fb);
+
+                // create texture.
+                GLuint tex;
+                glGenTextures(1, &tex);
+                glBindTexture(GL_TEXTURE_RECTANGLE_ARB, tex);
+
+                glTexParameteri(GL_TEXTURE_RECTANGLE_ARB, GL_TEXTURE_WRAP_S, GL_REPEAT);
+                glTexParameteri(GL_TEXTURE_RECTANGLE_ARB, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+                glTexParameteri(GL_TEXTURE_RECTANGLE_ARB, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+                glTexParameteri(GL_TEXTURE_RECTANGLE_ARB, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_NEAREST);
+
+                const std::size_t texture_width = universe->window_width;
+                const std::size_t texture_height = universe->window_height;;
+
+                // define texture.
+                glTexImage2D(GL_TEXTURE_RECTANGLE_ARB, 0, GL_RGB, texture_width, texture_height, 0, GL_BGR, GL_UNSIGNED_BYTE, 0);
+
+                // attach texture.
+                glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT, GL_COLOR_ATTACHMENT0_EXT, GL_TEXTURE_RECTANGLE_ARB, tex, 0);
+
+                universe->render(); // render to framebuffer.
+
+                // transfer data from GPU texture to CPU array.
+                const std::size_t number_color_channels = 3;
+                const std::size_t number_of_texels = texture_width * texture_height;
+                const std::size_t number_of_elements = number_color_channels * number_of_texels;
+                uint8_t* const result_array = (uint8_t*) malloc(number_of_elements * sizeof(uint8_t));
+
+                glReadBuffer(GL_COLOR_ATTACHMENT0_EXT);
+                glReadPixels(0, 0, texture_width, texture_height, GL_RGB, GL_UNSIGNED_BYTE, result_array);
+
+                const std::vector<uint8_t> result_vector(result_array, result_array + number_of_elements);
+
+                yli::file::binary_write(result_vector, filename);
+
+                free(result_array);
+                glDeleteFramebuffersEXT(1, &fb);
+
+                // bind onscreen buffer.
+                glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
             }
 
             return nullptr;
