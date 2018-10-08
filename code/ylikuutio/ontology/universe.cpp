@@ -174,7 +174,7 @@ namespace yli
         {
             if (this->context != nullptr)
             {
-                opengl::make_context_current(this->window, *this->context);
+                yli::opengl::make_context_current(this->window, *this->context);
             }
         }
 
