@@ -55,13 +55,13 @@ namespace yli
                 // Public callbacks.
 
                 static std::shared_ptr<yli::datatypes::AnyValue> set_and_print(
-                        yli::console::Console* console,
-                        yli::ontology::Entity* entity,
+                        yli::console::Console* const console,
+                        yli::ontology::Entity* const entity,
                         std::vector<std::string>& command_parameters);
 
                 static std::shared_ptr<yli::datatypes::AnyValue> get_and_print(
-                        yli::console::Console* console,
-                        yli::ontology::Entity* entity,
+                        yli::console::Console* const console,
+                        yli::ontology::Entity* const entity,
                         std::vector<std::string>& command_parameters);
 
                 static std::shared_ptr<yli::datatypes::AnyValue> activate_planet_radius(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
