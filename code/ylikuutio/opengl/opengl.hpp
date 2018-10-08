@@ -24,5 +24,6 @@ namespace yli
         bool has_ext_framebuffer_object();
         bool has_arb_shader_objects();
         bool has_arb_vertex_shader();
+        bool has_arb_fragment_shader();
     }
 }

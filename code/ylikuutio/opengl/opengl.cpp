@@ -112,5 +112,10 @@ namespace yli
         {
             return GLEW_ARB_vertex_shader;
         }
+
+        bool has_arb_fragment_shader()
+        {
+            return GLEW_ARB_fragment_shader;
+        }
     }
 }
