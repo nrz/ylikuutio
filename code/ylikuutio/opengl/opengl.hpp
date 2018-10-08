@@ -23,5 +23,6 @@ namespace yli
         void set_wireframe(const bool wireframe);
         bool has_ext_framebuffer_object();
         bool has_arb_shader_objects();
+        bool has_arb_vertex_shader();
     }
 }

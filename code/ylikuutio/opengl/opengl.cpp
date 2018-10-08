@@ -107,5 +107,10 @@ namespace yli
         {
             return GLEW_ARB_shader_objects;
         }
+
+        bool has_arb_vertex_shader()
+        {
+            return GLEW_ARB_vertex_shader;
+        }
     }
 }
