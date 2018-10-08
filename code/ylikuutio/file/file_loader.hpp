@@ -1,3 +1,6 @@
+#ifndef __FILE_LOADER_HPP_INCLUDED
+#define __FILE_LOADER_HPP_INCLUDED
+
 // Include standard headers
 #include <stdint.h> // uint32_t etc.
 #include <string>   // std::string
@@ -11,3 +14,5 @@ namespace yli
         std::vector<uint8_t> binary_slurp(const std::string& file_path);
     }
 }
+
+#endif

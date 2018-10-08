@@ -25,8 +25,8 @@ namespace yli
 }
 
 typedef std::shared_ptr<yli::datatypes::AnyValue> (*ConsoleCommandCallback) (
-        yli::console::Console*,
-        yli::ontology::Entity*,
-        std::vector<std::string>& command_parameters);
+        yli::console::Console* const,
+        yli::ontology::Entity* const,
+        const std::vector<std::string>& command_parameters);
 
 #endif

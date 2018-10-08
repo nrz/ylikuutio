@@ -25,27 +25,27 @@ namespace yli
 namespace ajokki
 {
     std::shared_ptr<yli::datatypes::AnyValue> version(
-            yli::console::Console* console,
-            yli::ontology::Entity*,
-            std::vector<std::string>& command_parameters)
+            yli::console::Console* const console,
+            yli::ontology::Entity* const,
+            const std::vector<std::string>& command_parameters)
     {
         console->print_text("Ajokki 0.0.3 / Ylikuutio 0.0.3");
         return nullptr;
     }
 
     std::shared_ptr<yli::datatypes::AnyValue> quit(
-            yli::console::Console*,
-            yli::ontology::Entity*,
-            std::vector<std::string>& command_parameters)
+            yli::console::Console* const,
+            yli::ontology::Entity* const,
+            const std::vector<std::string>& command_parameters)
     {
         uint32_t exit_program_magic_number = EXIT_PROGRAM_MAGIC_NUMBER;
         return std::make_shared<yli::datatypes::AnyValue>(exit_program_magic_number);
     }
 
     std::shared_ptr<yli::datatypes::AnyValue> help(
-            yli::console::Console* console,
-            yli::ontology::Entity*,
-            std::vector<std::string>& command_parameters)
+            yli::console::Console* const console,
+            yli::ontology::Entity* const,
+            const std::vector<std::string>& command_parameters)
     {
         console->print_help();
         return nullptr;

@@ -277,8 +277,6 @@ add_definitions(
     )
 
 # Shaders.
-configure_file(code/ylikuutio/shaders/TransformVertexShader.vertexshader TransformVertexShader.vertexshader COPYONLY)
-configure_file(code/ylikuutio/shaders/TextureFragmentShader.fragmentshader TextureFragmentShader.fragmentshader COPYONLY)
 configure_file(code/ylikuutio/shaders/StandardShading.vertexshader StandardShading.vertexshader COPYONLY)
 configure_file(code/ylikuutio/shaders/StandardShading.fragmentshader StandardShading.fragmentshader COPYONLY)
 configure_file(code/ylikuutio/shaders/TextVertexShader.vertexshader TextVertexShader.vertexshader COPYONLY)
@@ -408,6 +406,8 @@ add_library(ylikuutio STATIC
     # file, in alphabetical order.
     code/ylikuutio/file/file_loader.cpp
     code/ylikuutio/file/file_loader.hpp
+    code/ylikuutio/file/file_writer.cpp
+    code/ylikuutio/file/file_writer.hpp
 
     # geometry, in alphabetical order.
     code/ylikuutio/geometry/line.cpp
@@ -590,8 +590,6 @@ add_library(ylikuutio STATIC
     # shaders, in alphabetical order
     code/ylikuutio/shaders/StandardShading.fragmentshader
     code/ylikuutio/shaders/StandardShading.vertexshader
-    code/ylikuutio/shaders/TransformVertexShader.vertexshader
-    code/ylikuutio/shaders/TextureFragmentShader.fragmentshader
     code/ylikuutio/shaders/TextVertexShader.fragmentshader
     code/ylikuutio/shaders/TextVertexShader.vertexshader
 
@@ -632,6 +630,8 @@ set_target_properties(yli_convert PROPERTIES COMPILE_DEFINITIONS "USE_ASSIMP")
 add_executable(ajokki
     # ajokki, in alphabetical order
     code/ajokki/ajokki.cpp
+    code/ajokki/ajokki_altiplano_scene.cpp
+    code/ajokki/ajokki_altiplano_scene.hpp
     code/ajokki/ajokki_background_colors.cpp
     code/ajokki/ajokki_background_colors.hpp
     code/ajokki/ajokki_cleanup_callbacks.cpp
@@ -642,8 +642,6 @@ add_executable(ajokki
     code/ajokki/ajokki_console_callbacks.hpp
     code/ajokki/ajokki_debug.cpp
     code/ajokki/ajokki_debug.hpp
-    code/ajokki/ajokki_altiplano_scene.cpp
-    code/ajokki/ajokki_altiplano_scene.hpp
     code/ajokki/ajokki_helsinki_east_downtown_scene.cpp
     code/ajokki/ajokki_helsinki_east_downtown_scene.hpp
     code/ajokki/ajokki_joensuu_center_west_scene.cpp
@@ -706,6 +704,8 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/common/globals.hpp
         code/ylikuutio/file/file_loader.cpp
         code/ylikuutio/file/file_loader.hpp
+        code/ylikuutio/file/file_writer.cpp
+        code/ylikuutio/file/file_writer.hpp
         code/ylikuutio/geometry/line.cpp
         code/ylikuutio/geometry/line.hpp
         code/ylikuutio/geometry/line2D.cpp

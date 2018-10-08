@@ -97,5 +97,25 @@ namespace yli
                 glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
             }
         }
+
+        bool has_ext_framebuffer_object()
+        {
+            return GLEW_EXT_framebuffer_object;
+        }
+
+        bool has_arb_shader_objects()
+        {
+            return GLEW_ARB_shader_objects;
+        }
+
+        bool has_arb_vertex_shader()
+        {
+            return GLEW_ARB_vertex_shader;
+        }
+
+        bool has_arb_fragment_shader()
+        {
+            return GLEW_ARB_fragment_shader;
+        }
     }
 }

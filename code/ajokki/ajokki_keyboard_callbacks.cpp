@@ -926,4 +926,3 @@ namespace ajokki
         return nullptr;
     }
 }
-
