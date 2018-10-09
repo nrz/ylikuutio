@@ -721,8 +721,6 @@ namespace yli
 
         bool Universe::compute_and_update_matrices_from_inputs()
         {
-            GLfloat FoV = this->initialFoV;
-
             if (!this->is_flight_mode_in_use)
             {
                 // accelerate and fall.
@@ -770,7 +768,7 @@ namespace yli
 
             // Projection matrix : 45° Field of View, aspect ratio, display range : 0.1 unit <-> 100 units
             this->current_camera_projection_matrix = glm::perspective(
-                    DEGREES_TO_RADIANS(FoV),
+                    DEGREES_TO_RADIANS(this->initialFoV),
                     this->aspect_ratio,
                     this->znear,
                     this->zfar);
