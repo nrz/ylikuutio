@@ -638,7 +638,7 @@ namespace yli
                 const std::size_t number_color_channels = 3;
                 const std::size_t number_of_texels = texture_width * texture_height;
                 const std::size_t number_of_elements = number_color_channels * number_of_texels;
-                uint8_t* const result_array = (uint8_t*) malloc(number_of_elements * sizeof(uint8_t));
+                uint8_t* const result_array = new uint8_t[number_of_elements];
 
                 glReadBuffer(GL_COLOR_ATTACHMENT0_EXT);
                 glReadPixels(0, 0, texture_width, texture_height, GL_RGB, GL_UNSIGNED_BYTE, result_array);
@@ -647,7 +647,7 @@ namespace yli
 
                 yli::file::binary_write(result_vector, filename);
 
-                free(result_array);
+                delete[] result_array;
                 glDeleteFramebuffersEXT(1, &fb);
 
                 // bind onscreen buffer.
