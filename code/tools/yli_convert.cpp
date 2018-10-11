@@ -171,6 +171,9 @@ int main(const int argc, const char* argv[])
             continue;
         }
 
+        ai_scene.mTextures[symbiont_material_i]->mWidth = static_cast<unsigned int>(symbiont_material->get_image_width());
+        ai_scene.mTextures[symbiont_material_i]->mHeight = static_cast<unsigned int>(symbiont_material->get_image_height());
+
         if (symbiont_material->get_childID() == std::numeric_limits<std::size_t>::max())
         {
             // childID is the default (invalid) value, not a real childID!
