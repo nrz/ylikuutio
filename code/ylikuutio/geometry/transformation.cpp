@@ -25,6 +25,7 @@
 #endif
 
 // Include standard headers
+#include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
@@ -82,10 +83,10 @@ namespace yli
 
             double current_latitude_in_degrees = spherical_terrain_struct.southern_latitude;
 
-            GLuint temp_vertices_i = 0;
+            std::size_t temp_vertices_i = 0;
 
             // Loop through `temp_vertices` and transform all vertices from spherical coordinates to cartesian coordinates.
-            for (uint32_t z = 0; z < image_height; z++)
+            for (std::size_t z = 0; z < image_height; z++)
             {
                 // loop through all latitudes.
 
@@ -119,13 +120,13 @@ namespace yli
 
                 double current_latitude_in_degrees = spherical_terrain_struct.southern_latitude;
 
-                for (uint32_t z = 1; z < image_height; z++)
+                for (std::size_t z = 1; z < image_height; z++)
                 {
                     // loop through all latitudes.
 
                     double current_longitude_in_degrees = spherical_terrain_struct.western_longitude;
 
-                    for (uint32_t x = 1; x < image_width; x++)
+                    for (std::size_t x = 1; x < image_width; x++)
                     {
                         glm::vec3 spherical_terrain_vertex = temp_vertices[temp_vertices_i];
                         spherical_terrain_vertex.x = (GLfloat) current_longitude_in_degrees;
