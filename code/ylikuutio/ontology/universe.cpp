@@ -99,15 +99,15 @@ namespace yli
 
         void Universe::render()
         {
+            this->prerender();
+
             if (this->active_world != nullptr)
             {
-                this->prerender();
-
                 // render this `Universe` by calling `render()` function of the active `World`.
                 this->active_world->render();
-
-                this->postrender();
             }
+
+            this->postrender();
         }
 
         void Universe::set_active_world(yli::ontology::World* const world)
