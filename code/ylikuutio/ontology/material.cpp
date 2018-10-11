@@ -205,12 +205,12 @@ namespace yli
             }
         }
 
-        const std::string& Material::get_texture_file_format()
+        const std::string& Material::get_texture_file_format() const
         {
             return this->texture_file_format;
         }
 
-        const std::string& Material::get_texture_filename()
+        const std::string& Material::get_texture_filename() const
         {
             return this->texture_filename;
         }
