@@ -1,5 +1,6 @@
 #include "console.hpp"
 #include "console_struct.hpp"
+#include "console_command_callback.hpp"
 #include "code/ylikuutio/ontology/font2D.hpp"
 #include "code/ylikuutio/config/setting.hpp"
 #include "code/ylikuutio/config/setting_master.hpp"
