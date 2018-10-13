@@ -42,7 +42,7 @@ namespace ajokki
             return false;
         }
 
-        yli::ontology::Universe* universe = any_value_universe->universe;
+        yli::ontology::Universe* const universe = any_value_universe->universe;
 
         if (universe == nullptr)
         {
@@ -50,7 +50,7 @@ namespace ajokki
             return false;
         }
 
-        yli::ontology::World* world = universe->get_active_world();
+        yli::ontology::World* const world = universe->get_active_world();
 
         if (world == nullptr)
         {
@@ -58,7 +58,7 @@ namespace ajokki
             return false;
         }
 
-        yli::ontology::Scene* scene = universe->get_active_world()->get_active_scene();
+        const yli::ontology::Scene* const scene = universe->get_active_world()->get_active_scene();
 
         if (scene == nullptr)
         {
@@ -108,7 +108,7 @@ namespace ajokki
             return nullptr;
         }
 
-        yli::ontology::Universe* universe = any_value_universe->universe;
+        yli::ontology::Universe* const universe = any_value_universe->universe;
 
         if (universe == nullptr)
         {
@@ -139,7 +139,7 @@ namespace ajokki
             return nullptr;
         }
 
-        yli::ontology::Universe* universe = any_value_universe->universe;
+        yli::ontology::Universe* const universe = any_value_universe->universe;
 
         if (universe == nullptr)
         {
@@ -170,7 +170,7 @@ namespace ajokki
             return nullptr;
         }
 
-        yli::ontology::Universe* universe = any_value_universe->universe;
+        yli::ontology::Universe* const universe = any_value_universe->universe;
 
         if (universe == nullptr)
         {
@@ -201,7 +201,7 @@ namespace ajokki
             return nullptr;
         }
 
-        yli::ontology::Universe* universe = any_value_universe->universe;
+        yli::ontology::Universe* const universe = any_value_universe->universe;
 
         if (universe == nullptr)
         {
@@ -232,7 +232,7 @@ namespace ajokki
             return nullptr;
         }
 
-        yli::ontology::Universe* universe = any_value_universe->universe;
+        yli::ontology::Universe* const universe = any_value_universe->universe;
 
         if (universe == nullptr)
         {
@@ -253,7 +253,7 @@ namespace ajokki
             yli::callback_system::CallbackObject*,
             std::vector<yli::callback_system::CallbackParameter*>&)
     {
-        uint32_t exit_program_magic_number = EXIT_PROGRAM_MAGIC_NUMBER;
+        const uint32_t exit_program_magic_number = EXIT_PROGRAM_MAGIC_NUMBER;
         return std::make_shared<yli::datatypes::AnyValue>(exit_program_magic_number);
     }
 
@@ -276,7 +276,7 @@ namespace ajokki
             return nullptr;
         }
 
-        yli::ontology::Universe* universe = any_value_universe->universe;
+        yli::ontology::Universe* const universe = any_value_universe->universe;
 
         if (universe == nullptr)
         {
@@ -307,7 +307,7 @@ namespace ajokki
             return nullptr;
         }
 
-        yli::ontology::Universe* universe = any_value_universe->universe;
+        yli::ontology::Universe* const universe = any_value_universe->universe;
 
         if (universe == nullptr)
         {
@@ -338,7 +338,7 @@ namespace ajokki
             return nullptr;
         }
 
-        yli::ontology::Universe* universe = any_value_universe->universe;
+        yli::ontology::Universe* const universe = any_value_universe->universe;
 
         if (universe == nullptr)
         {
@@ -369,7 +369,7 @@ namespace ajokki
             return nullptr;
         }
 
-        yli::ontology::Universe* universe = any_value_universe->universe;
+        yli::ontology::Universe* const universe = any_value_universe->universe;
 
         if (universe == nullptr)
         {
@@ -400,7 +400,7 @@ namespace ajokki
             return nullptr;
         }
 
-        yli::ontology::Universe* universe = any_value_universe->universe;
+        yli::ontology::Universe* const universe = any_value_universe->universe;
 
         if (universe == nullptr)
         {
@@ -431,7 +431,7 @@ namespace ajokki
             return nullptr;
         }
 
-        yli::ontology::Universe* universe = any_value_universe->universe;
+        yli::ontology::Universe* const universe = any_value_universe->universe;
 
         if (universe == nullptr)
         {
@@ -462,7 +462,7 @@ namespace ajokki
             return nullptr;
         }
 
-        yli::ontology::Universe* universe = any_value_universe->universe;
+        yli::ontology::Universe* const universe = any_value_universe->universe;
 
         if (universe == nullptr)
         {
@@ -493,7 +493,7 @@ namespace ajokki
             return nullptr;
         }
 
-        yli::ontology::Universe* universe = any_value_universe->universe;
+        yli::ontology::Universe* const universe = any_value_universe->universe;
 
         if (universe == nullptr)
         {
@@ -524,7 +524,7 @@ namespace ajokki
             return nullptr;
         }
 
-        yli::ontology::Universe* universe = any_value_universe->universe;
+        yli::ontology::Universe* const universe = any_value_universe->universe;
 
         if (universe == nullptr)
         {
@@ -559,7 +559,7 @@ namespace ajokki
             return nullptr;
         }
 
-        yli::ontology::Universe* universe = any_value_universe->universe;
+        yli::ontology::Universe* const universe = any_value_universe->universe;
 
         if (universe == nullptr)
         {
@@ -595,7 +595,7 @@ namespace ajokki
             return nullptr;
         }
 
-        yli::ontology::Universe* universe = any_value_universe->universe;
+        yli::ontology::Universe* const universe = any_value_universe->universe;
 
         if (universe == nullptr)
         {
@@ -643,7 +643,7 @@ namespace ajokki
             return nullptr;
         }
 
-        yli::ontology::Universe* universe = any_value_universe->universe;
+        yli::ontology::Universe* const universe = any_value_universe->universe;
 
         if (universe == nullptr)
         {
@@ -665,16 +665,16 @@ namespace ajokki
             return nullptr;
         }
 
-        std::string* entity_string_pointer = any_value_entity_string->std_string_pointer;
+        const std::string* const entity_string_pointer = any_value_entity_string->std_string_pointer;
 
         if (entity_string_pointer == nullptr)
         {
             return nullptr;
         }
 
-        std::string entity_string = *entity_string_pointer;
+        const std::string entity_string = *entity_string_pointer;
 
-        yli::ontology::Entity* entity = universe->get_entity(entity_string);
+        yli::ontology::Entity* const entity = universe->get_entity(entity_string);
 
         if (entity == nullptr)
         {
@@ -705,7 +705,7 @@ namespace ajokki
             return nullptr;
         }
 
-        yli::ontology::Universe* universe = any_value_universe->universe;
+        yli::ontology::Universe* const universe = any_value_universe->universe;
 
         if (universe == nullptr)
         {
@@ -727,32 +727,32 @@ namespace ajokki
             return nullptr;
         }
 
-        std::string* entity_string_pointer = any_value_entity_string->std_string_pointer;
+        const std::string* const entity_string_pointer = any_value_entity_string->std_string_pointer;
 
         if (entity_string_pointer == nullptr)
         {
             return nullptr;
         }
 
-        std::string entity_string = *entity_string_pointer;
+        const std::string entity_string = *entity_string_pointer;
 
-        yli::ontology::Entity* entity = universe->get_entity(entity_string);
+        yli::ontology::Entity* const entity = universe->get_entity(entity_string);
 
         if (entity == nullptr)
         {
             return nullptr;
         }
 
-        yli::ontology::Species* species = dynamic_cast<yli::ontology::Species*>(entity);
+        yli::ontology::Species* const species = dynamic_cast<yli::ontology::Species*>(entity);
 
         if (species == nullptr)
         {
             return nullptr;
         }
 
-        yli::ontology::Entity* old_material_entity = species->get_parent();
+        yli::ontology::Entity* const old_material_entity = species->get_parent();
 
-        yli::ontology::Material* old_material = dynamic_cast<yli::ontology::Material*>(old_material_entity);
+        const yli::ontology::Material* const old_material = dynamic_cast<yli::ontology::Material*>(old_material_entity);
 
         if (old_material == nullptr)
         {
@@ -780,16 +780,16 @@ namespace ajokki
             return nullptr;
         }
 
-        std::string new_material_string = *new_material_string_pointer;
+        const std::string new_material_string = *new_material_string_pointer;
 
-        yli::ontology::Entity* new_material_entity = universe->get_entity(new_material_string);
+        yli::ontology::Entity* const new_material_entity = universe->get_entity(new_material_string);
 
         if (new_material_entity == nullptr)
         {
             return nullptr;
         }
 
-        yli::ontology::Material* new_material = dynamic_cast<yli::ontology::Material*>(new_material_entity);
+        yli::ontology::Material* const new_material = dynamic_cast<yli::ontology::Material*>(new_material_entity);
 
         if (new_material == nullptr)
         {
@@ -825,7 +825,7 @@ namespace ajokki
             return nullptr;
         }
 
-        yli::ontology::Universe* universe = any_value_universe->universe;
+        yli::ontology::Universe* const universe = any_value_universe->universe;
 
         if (universe == nullptr)
         {
@@ -847,32 +847,32 @@ namespace ajokki
             return nullptr;
         }
 
-        std::string* entity_string_pointer = any_value_entity_string->std_string_pointer;
+        const std::string* const entity_string_pointer = any_value_entity_string->std_string_pointer;
 
         if (entity_string_pointer == nullptr)
         {
             return nullptr;
         }
 
-        std::string entity_string = *entity_string_pointer;
+        const std::string entity_string = *entity_string_pointer;
 
-        yli::ontology::Entity* entity = universe->get_entity(entity_string);
+        yli::ontology::Entity* const entity = universe->get_entity(entity_string);
 
         if (entity == nullptr)
         {
             return nullptr;
         }
 
-        yli::ontology::Object* object = dynamic_cast<yli::ontology::Object*>(entity);
+        yli::ontology::Object* const object = dynamic_cast<yli::ontology::Object*>(entity);
 
         if (object == nullptr)
         {
             return nullptr;
         }
 
-        yli::ontology::Entity* old_species_entity = object->get_parent();
+        yli::ontology::Entity* const old_species_entity = object->get_parent();
 
-        yli::ontology::Species* old_species = dynamic_cast<yli::ontology::Species*>(old_species_entity);
+        const yli::ontology::Species* const old_species = dynamic_cast<yli::ontology::Species*>(old_species_entity);
 
         if (old_species == nullptr)
         {
@@ -893,23 +893,23 @@ namespace ajokki
             return nullptr;
         }
 
-        std::string* new_species_string_pointer = any_value_species_string->std_string_pointer;
+        const std::string* const new_species_string_pointer = any_value_species_string->std_string_pointer;
 
         if (new_species_string_pointer == nullptr)
         {
             return nullptr;
         }
 
-        std::string new_species_string = *new_species_string_pointer;
+        const std::string new_species_string = *new_species_string_pointer;
 
-        yli::ontology::Entity* new_species_entity = universe->get_entity(new_species_string);
+        yli::ontology::Entity* const new_species_entity = universe->get_entity(new_species_string);
 
         if (new_species_entity == nullptr)
         {
             return nullptr;
         }
 
-        yli::ontology::Species* new_species = dynamic_cast<yli::ontology::Species*>(new_species_entity);
+        yli::ontology::Species* const new_species = dynamic_cast<yli::ontology::Species*>(new_species_entity);
 
         if (new_species == nullptr)
         {
