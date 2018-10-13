@@ -67,6 +67,7 @@ namespace yli
 
                 void set_my_keypress_callback_engine_vector_pointer(std::vector<KeyAndCallbackStruct>* my_keypress_callback_engine_vector_pointer);
                 void set_my_keyrelease_callback_engine_vector_pointer(std::vector<KeyAndCallbackStruct>* my_keyrelease_callback_engine_vector_pointer);
+                void add_command_callback(const std::string& command, ConsoleCommandCallback callback);
                 void print_text(const std::string& text);
                 void print_help();
                 void draw_console() const;
@@ -360,8 +361,8 @@ namespace yli
                 std::vector<KeyAndCallbackStruct>* previous_keyrelease_callback_engine_vector_pointer;
                 std::vector<KeyAndCallbackStruct>* my_keyrelease_callback_engine_vector_pointer;
 
-                // This is a pointer to `std::unordered_map<std::string, bool>` that contains console command callbacks.
-                std::unordered_map<std::string, ConsoleCommandCallback>* command_callback_map_pointer;
+                // `std::unordered_map` contains console command callbacks.
+                std::unordered_map<std::string, ConsoleCommandCallback> command_callback_map;
 
                 // This is a pointer to `yli::ontology::Universe`.
                 yli::ontology::Universe* universe;

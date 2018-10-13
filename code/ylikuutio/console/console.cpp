@@ -66,10 +66,6 @@ namespace yli
             this->current_keyrelease_callback_engine_vector_pointer_pointer = console_struct.current_keyrelease_callback_engine_vector_pointer_pointer;
             std::cout << "2nd pointer defined in Console::Console\n";
 
-            // This is a pointer to `std::unordered_map<std::string, bool>` that contains console command callbacks.
-            this->command_callback_map_pointer = console_struct.command_callback_map_pointer;
-            std::cout << "3rd pointer defined in Console::Console\n";
-
             // This is a pointer to `yli::ontology::Universe`.
             this->universe = console_struct.universe;
             std::cout << "4th pointer defined in Console::Console\n";
@@ -204,6 +200,11 @@ namespace yli
             this->my_keypress_callback_engine_vector_pointer = my_keypress_callback_engine_vector_pointer;
         }
 
+        void Console::add_command_callback(const std::string& command, ConsoleCommandCallback callback)
+        {
+            this->command_callback_map[command] = callback;
+        }
+
         void Console::set_my_keyrelease_callback_engine_vector_pointer(std::vector<KeyAndCallbackStruct>* my_keyrelease_callback_engine_vector_pointer)
         {
             this->my_keyrelease_callback_engine_vector_pointer = my_keyrelease_callback_engine_vector_pointer;
@@ -249,7 +250,7 @@ namespace yli
         void Console::print_help()
         {
             this->print_text("Available commands:");
-            yli::map::print_keys_to_console(this->command_callback_map_pointer, this);
+            yli::map::print_keys_to_console(&this->command_callback_map, this);
         }
 
         void Console::draw_console() const
