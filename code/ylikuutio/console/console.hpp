@@ -7,8 +7,8 @@
 #include "code/ylikuutio/callback_system/callback_parameter.hpp"
 #include "code/ylikuutio/callback_system/callback_object.hpp"
 #include "code/ylikuutio/callback_system/callback_engine.hpp"
-#include "code/ylikuutio/common/any_value.hpp"
 #include "code/ylikuutio/ontology/font2D.hpp"
+#include "code/ylikuutio/common/any_value.hpp"
 #include "code/ylikuutio/common/globals.hpp"
 
 // Include GLEW
