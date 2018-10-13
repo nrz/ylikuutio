@@ -2,7 +2,6 @@
 #define __CONSOLE_HPP_INCLUDED
 
 #include "console_struct.hpp"
-#include "command_and_callback_struct.hpp"
 #include "code/ylikuutio/callback_system/key_and_callback_struct.hpp"
 #include "code/ylikuutio/callback_system/callback_parameter.hpp"
 #include "code/ylikuutio/callback_system/callback_object.hpp"
