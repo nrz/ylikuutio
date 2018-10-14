@@ -210,6 +210,11 @@ namespace yli
             this->my_keyrelease_callback_engine_vector_pointer = my_keyrelease_callback_engine_vector_pointer;
         }
 
+        void Console::set_font2D(yli::ontology::Font2D* const font2D)
+        {
+            this->font2D_pointer = font2D;
+        }
+
         void Console::print_text(const std::string& text)
         {
             // This function is to be called from console command callbacks to print text on console.
