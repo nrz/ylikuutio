@@ -47,17 +47,15 @@ namespace yli
                     this->screen_width_uniform_ID          = 0;
                     this->screen_height_uniform_ID         = 0;
 
-                    const char* char_font_texture_file_format = font_texture_file_format.c_str();
-
                     // Initialize texture
-                    if ((std::strcmp(char_font_texture_file_format, "bmp") == 0) || (std::strcmp(char_font_texture_file_format, "BMP") == 0))
+                    if (font_texture_file_format == "bmp" || font_texture_file_format == "BMP")
                     {
                         if (!yli::load::load_BMP_texture(texture_filename, this->image_width, this->image_height, this->image_size, this->texture))
                         {
                             std::cerr << "ERROR: loading BMP texture failed!\n";
                         }
                     }
-                    else if ((std::strcmp(char_font_texture_file_format, "dds") == 0) || (std::strcmp(char_font_texture_file_format, "DDS") == 0))
+                    else if (font_texture_file_format == "dds" || font_texture_file_format == "DDS")
                     {
                         if (!yli::load::load_DDS_texture(texture_filename, this->image_width, this->image_height, this->image_size, this->texture))
                         {
@@ -66,7 +64,8 @@ namespace yli
                     }
                     else
                     {
-                        printf("Invalid font texture file format: `%s`. Supported font texture file formats: bmp, BMP, dds, DDS.\n", char_font_texture_file_format);
+                        std::cerr << "ERROR: invalid font texture file format: " << font_texture_file_format << "\n";
+                        std::cerr << "supported font texture file formats: bmp, BMP, dds, DDS.\n";
                         this->texture = 0;
                         return;
                     }
