@@ -39,7 +39,7 @@ namespace ajokki
 
     bool move_to_direction(const yli::callback_system::CallbackObject* const callback_object, const glm::vec3& moving_direction)
     {
-        std::shared_ptr<yli::datatypes::AnyValue> any_value_universe = std::make_shared<yli::datatypes::AnyValue>(*callback_object->get_arg(0));
+        const std::shared_ptr<yli::datatypes::AnyValue> any_value_universe = std::make_shared<yli::datatypes::AnyValue>(*callback_object->get_arg(0));
 
         if (any_value_universe == nullptr)
         {
@@ -105,7 +105,7 @@ namespace ajokki
             yli::callback_system::CallbackObject* callback_object,
             std::vector<yli::callback_system::CallbackParameter*>&)
     {
-        std::shared_ptr<yli::datatypes::AnyValue> any_value_universe = std::make_shared<yli::datatypes::AnyValue>(*callback_object->get_arg(0));
+        const std::shared_ptr<yli::datatypes::AnyValue> any_value_universe = std::make_shared<yli::datatypes::AnyValue>(*callback_object->get_arg(0));
 
         if (any_value_universe == nullptr)
         {
@@ -136,7 +136,7 @@ namespace ajokki
             yli::callback_system::CallbackObject* callback_object,
             std::vector<yli::callback_system::CallbackParameter*>&)
     {
-        std::shared_ptr<yli::datatypes::AnyValue> any_value_universe = std::make_shared<yli::datatypes::AnyValue>(*callback_object->get_arg(0));
+        const std::shared_ptr<yli::datatypes::AnyValue> any_value_universe = std::make_shared<yli::datatypes::AnyValue>(*callback_object->get_arg(0));
 
         if (any_value_universe == nullptr)
         {
@@ -167,7 +167,7 @@ namespace ajokki
             yli::callback_system::CallbackObject* callback_object,
             std::vector<yli::callback_system::CallbackParameter*>&)
     {
-        std::shared_ptr<yli::datatypes::AnyValue> any_value_universe = std::make_shared<yli::datatypes::AnyValue>(*callback_object->get_arg(0));
+        const std::shared_ptr<yli::datatypes::AnyValue> any_value_universe = std::make_shared<yli::datatypes::AnyValue>(*callback_object->get_arg(0));
 
         if (any_value_universe == nullptr)
         {
@@ -198,7 +198,7 @@ namespace ajokki
             yli::callback_system::CallbackObject* callback_object,
             std::vector<yli::callback_system::CallbackParameter*>&)
     {
-        std::shared_ptr<yli::datatypes::AnyValue> any_value_universe = std::make_shared<yli::datatypes::AnyValue>(*callback_object->get_arg(0));
+        const std::shared_ptr<yli::datatypes::AnyValue> any_value_universe = std::make_shared<yli::datatypes::AnyValue>(*callback_object->get_arg(0));
 
         if (any_value_universe == nullptr)
         {
@@ -229,7 +229,7 @@ namespace ajokki
             yli::callback_system::CallbackObject* callback_object,
             std::vector<yli::callback_system::CallbackParameter*>&)
     {
-        std::shared_ptr<yli::datatypes::AnyValue> any_value_universe = std::make_shared<yli::datatypes::AnyValue>(*callback_object->get_arg(0));
+        const std::shared_ptr<yli::datatypes::AnyValue> any_value_universe = std::make_shared<yli::datatypes::AnyValue>(*callback_object->get_arg(0));
 
         if (any_value_universe == nullptr)
         {
@@ -273,7 +273,7 @@ namespace ajokki
             yli::callback_system::CallbackObject* callback_object,
             std::vector<yli::callback_system::CallbackParameter*>&)
     {
-        std::shared_ptr<yli::datatypes::AnyValue> any_value_universe = std::make_shared<yli::datatypes::AnyValue>(*callback_object->get_arg(0));
+        const std::shared_ptr<yli::datatypes::AnyValue> any_value_universe = std::make_shared<yli::datatypes::AnyValue>(*callback_object->get_arg(0));
 
         if (any_value_universe == nullptr)
         {
@@ -304,7 +304,7 @@ namespace ajokki
             yli::callback_system::CallbackObject* callback_object,
             std::vector<yli::callback_system::CallbackParameter*>&)
     {
-        std::shared_ptr<yli::datatypes::AnyValue> any_value_universe = std::make_shared<yli::datatypes::AnyValue>(*callback_object->get_arg(0));
+        const std::shared_ptr<yli::datatypes::AnyValue> any_value_universe = std::make_shared<yli::datatypes::AnyValue>(*callback_object->get_arg(0));
 
         if (any_value_universe == nullptr)
         {
@@ -335,7 +335,7 @@ namespace ajokki
             yli::callback_system::CallbackObject* callback_object,
             std::vector<yli::callback_system::CallbackParameter*>&)
     {
-        std::shared_ptr<yli::datatypes::AnyValue> any_value_universe = std::make_shared<yli::datatypes::AnyValue>(*callback_object->get_arg(0));
+        const std::shared_ptr<yli::datatypes::AnyValue> any_value_universe = std::make_shared<yli::datatypes::AnyValue>(*callback_object->get_arg(0));
 
         if (any_value_universe == nullptr)
         {
@@ -366,7 +366,7 @@ namespace ajokki
             yli::callback_system::CallbackObject* callback_object,
             std::vector<yli::callback_system::CallbackParameter*>&)
     {
-        std::shared_ptr<yli::datatypes::AnyValue> any_value_universe = std::make_shared<yli::datatypes::AnyValue>(*callback_object->get_arg(0));
+        const std::shared_ptr<yli::datatypes::AnyValue> any_value_universe = std::make_shared<yli::datatypes::AnyValue>(*callback_object->get_arg(0));
 
         if (any_value_universe == nullptr)
         {
@@ -397,7 +397,7 @@ namespace ajokki
             yli::callback_system::CallbackObject* callback_object,
             std::vector<yli::callback_system::CallbackParameter*>&)
     {
-        std::shared_ptr<yli::datatypes::AnyValue> any_value_universe = std::make_shared<yli::datatypes::AnyValue>(*callback_object->get_arg(0));
+        const std::shared_ptr<yli::datatypes::AnyValue> any_value_universe = std::make_shared<yli::datatypes::AnyValue>(*callback_object->get_arg(0));
 
         if (any_value_universe == nullptr)
         {
@@ -428,7 +428,7 @@ namespace ajokki
             yli::callback_system::CallbackObject* callback_object,
             std::vector<yli::callback_system::CallbackParameter*>&)
     {
-        std::shared_ptr<yli::datatypes::AnyValue> any_value_universe = std::make_shared<yli::datatypes::AnyValue>(*callback_object->get_arg(0));
+        const std::shared_ptr<yli::datatypes::AnyValue> any_value_universe = std::make_shared<yli::datatypes::AnyValue>(*callback_object->get_arg(0));
 
         if (any_value_universe == nullptr)
         {
@@ -459,7 +459,7 @@ namespace ajokki
             yli::callback_system::CallbackObject* callback_object,
             std::vector<yli::callback_system::CallbackParameter*>&)
     {
-        std::shared_ptr<yli::datatypes::AnyValue> any_value_universe = std::make_shared<yli::datatypes::AnyValue>(*callback_object->get_arg(0));
+        const std::shared_ptr<yli::datatypes::AnyValue> any_value_universe = std::make_shared<yli::datatypes::AnyValue>(*callback_object->get_arg(0));
 
         if (any_value_universe == nullptr)
         {
@@ -490,7 +490,7 @@ namespace ajokki
             yli::callback_system::CallbackObject* callback_object,
             std::vector<yli::callback_system::CallbackParameter*>&)
     {
-        std::shared_ptr<yli::datatypes::AnyValue> any_value_universe = std::make_shared<yli::datatypes::AnyValue>(*callback_object->get_arg(0));
+        const std::shared_ptr<yli::datatypes::AnyValue> any_value_universe = std::make_shared<yli::datatypes::AnyValue>(*callback_object->get_arg(0));
 
         if (any_value_universe == nullptr)
         {
@@ -521,7 +521,7 @@ namespace ajokki
             yli::callback_system::CallbackObject* callback_object,
             std::vector<yli::callback_system::CallbackParameter*>&)
     {
-        std::shared_ptr<yli::datatypes::AnyValue> any_value_universe = std::make_shared<yli::datatypes::AnyValue>(*callback_object->get_arg(0));
+        const std::shared_ptr<yli::datatypes::AnyValue> any_value_universe = std::make_shared<yli::datatypes::AnyValue>(*callback_object->get_arg(0));
 
         if (any_value_universe == nullptr)
         {
@@ -556,7 +556,7 @@ namespace ajokki
             yli::callback_system::CallbackObject* callback_object,
             std::vector<yli::callback_system::CallbackParameter*>&)
     {
-        std::shared_ptr<yli::datatypes::AnyValue> any_value_universe = std::make_shared<yli::datatypes::AnyValue>(*callback_object->get_arg(0));
+        const std::shared_ptr<yli::datatypes::AnyValue> any_value_universe = std::make_shared<yli::datatypes::AnyValue>(*callback_object->get_arg(0));
 
         if (any_value_universe == nullptr)
         {
@@ -592,7 +592,7 @@ namespace ajokki
             yli::callback_system::CallbackObject* callback_object,
             std::vector<yli::callback_system::CallbackParameter*>&)
     {
-        std::shared_ptr<yli::datatypes::AnyValue> any_value_universe = std::make_shared<yli::datatypes::AnyValue>(*callback_object->get_arg(0));
+        const std::shared_ptr<yli::datatypes::AnyValue> any_value_universe = std::make_shared<yli::datatypes::AnyValue>(*callback_object->get_arg(0));
 
         if (any_value_universe == nullptr)
         {
@@ -627,7 +627,7 @@ namespace ajokki
             yli::callback_system::CallbackObject* callback_object,
             std::vector<yli::callback_system::CallbackParameter*>&)
     {
-        std::shared_ptr<yli::datatypes::AnyValue> any_value_universe = std::make_shared<yli::datatypes::AnyValue>(*callback_object->get_arg(0));
+        const std::shared_ptr<yli::datatypes::AnyValue> any_value_universe = std::make_shared<yli::datatypes::AnyValue>(*callback_object->get_arg(0));
 
         if (any_value_universe == nullptr)
         {
@@ -689,7 +689,7 @@ namespace ajokki
             yli::callback_system::CallbackObject* callback_object,
             std::vector<yli::callback_system::CallbackParameter*>&)
     {
-        std::shared_ptr<yli::datatypes::AnyValue> any_value_universe = std::make_shared<yli::datatypes::AnyValue>(*callback_object->get_arg(0));
+        const std::shared_ptr<yli::datatypes::AnyValue> any_value_universe = std::make_shared<yli::datatypes::AnyValue>(*callback_object->get_arg(0));
 
         if (any_value_universe == nullptr)
         {
@@ -809,7 +809,7 @@ namespace ajokki
             yli::callback_system::CallbackObject* callback_object,
             std::vector<yli::callback_system::CallbackParameter*>&)
     {
-        std::shared_ptr<yli::datatypes::AnyValue> any_value_universe = std::make_shared<yli::datatypes::AnyValue>(*callback_object->get_arg(0));
+        const std::shared_ptr<yli::datatypes::AnyValue> any_value_universe = std::make_shared<yli::datatypes::AnyValue>(*callback_object->get_arg(0));
 
         if (any_value_universe == nullptr)
         {
