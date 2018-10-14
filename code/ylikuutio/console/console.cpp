@@ -266,6 +266,11 @@ namespace yli
                 return;
             }
 
+            if (this->font2D_pointer == nullptr)
+            {
+                return;
+            }
+
             // Convert current input into std::string.
             std::size_t characters_for_line = this->universe->get_window_width() / this->universe->get_text_size();
 
