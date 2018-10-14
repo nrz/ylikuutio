@@ -24,6 +24,19 @@
 #include <stdint.h> // uint32_t etc.
 #include <vector>   // std::vector
 
+// Callbacks' input parameters can be accessed either through
+// `yli::callback_system::CallbackObject* callback_object`or
+// `std::vector<yli::callback_system::CallbackParameter*>& input parameters`.
+//
+// To access named input variables:
+// `yli::datatypes::AnyValue* some_any_value = callback_object->get_any_value("foo");`
+// where `"foo"` is the variable name.
+//
+// To access input variables without name (this works for named input variables too):
+// `yli::datatypes::AnyValue* some_any_value = input_parameters.at(foo)->get_any_value();`
+// where `foo` is the zero-based index of the variable. First `CallbackParameter` of
+// a `CallbackObject` gets index 0, second `CallbackParameter` gets index 1, etc.
+
 namespace ajokki
 {
     bool move_to_direction(yli::callback_system::CallbackObject* callback_object, glm::vec3 moving_direction)
@@ -616,19 +629,6 @@ namespace ajokki
             yli::callback_system::CallbackObject* callback_object,
             std::vector<yli::callback_system::CallbackParameter*>&)
     {
-        // Callbacks' input parameters can be accessed either through
-        // `yli::callback_system::CallbackObject* callback_object`or
-        // `std::vector<yli::callback_system::CallbackParameter*>& input parameters`.
-        //
-        // To access named input variables:
-        // `yli::datatypes::AnyValue* some_any_value = callback_object->get_any_value("foo");`
-        // where `"foo"` is the variable name.
-        //
-        // To access input variables without name (this works for named input variables too):
-        // `yli::datatypes::AnyValue* some_any_value = input_parameters.at(foo)->get_any_value();`
-        // where `foo` is the zero-based index of the variable. First `CallbackParameter` of
-        // a `CallbackObject` gets index 0, second `CallbackParameter` gets index 1, etc.
-
         std::shared_ptr<yli::datatypes::AnyValue> any_value_universe = std::make_shared<yli::datatypes::AnyValue>(*callback_object->get_arg(0));
 
         if (any_value_universe == nullptr)
