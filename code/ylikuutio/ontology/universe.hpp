@@ -313,7 +313,7 @@ namespace yli
                     this->current_camera_vertical_angle    = NAN;
 
                     // Variables related to the camera.
-                    this->aspect_ratio = static_cast<GLfloat>(this->window_width / this->window_height);
+                    this->aspect_ratio = static_cast<float>(this->window_width / this->window_height);
                     this->initialFoV   = 60.0f;
 
                     this->text_size = universe_struct.text_size;
@@ -474,7 +474,7 @@ namespace yli
                 glm::mat4& get_view_matrix();
                 void set_view_matrix(glm::mat4& view_matrix);
 
-                GLfloat get_aspect_ratio() const;
+                float get_aspect_ratio() const;
                 GLfloat get_initialFoV() const;
 
                 // Public callbacks.
@@ -587,7 +587,7 @@ namespace yli
                 // Variables related to the camera.
                 glm::mat4 current_camera_projection_matrix;
                 glm::mat4 current_camera_view_matrix;
-                GLfloat aspect_ratio; // at the moment all cameras use the same aspect ratio.
+                float aspect_ratio;   // at the moment all cameras use the same aspect ratio.
                 GLfloat initialFoV;   // at the moment all cameras use the same FoV.
 
                 // Variables related to the fonts and texts used.

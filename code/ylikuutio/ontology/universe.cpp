@@ -709,7 +709,7 @@ namespace yli
             this->current_camera_view_matrix = view_matrix;
         }
 
-        GLfloat Universe::get_aspect_ratio() const
+        float Universe::get_aspect_ratio() const
         {
             return this->aspect_ratio;
         }
