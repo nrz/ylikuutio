@@ -99,6 +99,21 @@ int main(const int argc, const char* argv[])
 
     int input_method_in_use = yli::input::KEYBOARD;
 
+    // keypress callbacks.
+    std::vector<KeyAndCallbackStruct>* action_mode_keypress_callback_engines = new std::vector<KeyAndCallbackStruct>();
+    std::vector<KeyAndCallbackStruct>* action_mode_continuous_keypress_callback_engines = new std::vector<KeyAndCallbackStruct>();
+
+    // This vector points to current keypress callback engines vector.
+    std::vector<KeyAndCallbackStruct>** current_keypress_callback_engine_vector_pointer;
+    current_keypress_callback_engine_vector_pointer = &action_mode_keypress_callback_engines;
+
+    // keyrelease callbacks.
+    std::vector<KeyAndCallbackStruct>* action_mode_keyrelease_callback_engines = new std::vector<KeyAndCallbackStruct>();
+
+    // This vector points to current keyrelease callback engines vector.
+    std::vector<KeyAndCallbackStruct>** current_keyrelease_callback_engine_vector_pointer;
+    current_keyrelease_callback_engine_vector_pointer = &action_mode_keyrelease_callback_engines;
+
     // Create the world, store it in `my_universe`.
     std::cout << "Creating yli::ontology::Entity* my_universe_entity ...\n";
     UniverseStruct universe_struct;
@@ -249,20 +264,6 @@ int main(const int argc, const char* argv[])
 
     my_universe->turbo_factor = 100.0f;
     my_universe->twin_turbo_factor = 500.0f;
-    // keypress callbacks.
-    std::vector<KeyAndCallbackStruct>* action_mode_keypress_callback_engines = new std::vector<KeyAndCallbackStruct>();
-    std::vector<KeyAndCallbackStruct>* action_mode_continuous_keypress_callback_engines = new std::vector<KeyAndCallbackStruct>();
-
-    // This vector points to current keypress callback engines vector.
-    std::vector<KeyAndCallbackStruct>** current_keypress_callback_engine_vector_pointer;
-    current_keypress_callback_engine_vector_pointer = &action_mode_keypress_callback_engines;
-
-    // keyrelease callbacks.
-    std::vector<KeyAndCallbackStruct>* action_mode_keyrelease_callback_engines = new std::vector<KeyAndCallbackStruct>();
-
-    // This vector points to current keyrelease callback engines vector.
-    std::vector<KeyAndCallbackStruct>** current_keyrelease_callback_engine_vector_pointer;
-    current_keyrelease_callback_engine_vector_pointer = &action_mode_keyrelease_callback_engines;
 
     // Initialize our little text library with the Holstein font
     const char* char_g_font_texture_filename = "Holstein.bmp";
