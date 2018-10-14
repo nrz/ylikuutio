@@ -183,7 +183,7 @@ namespace yli
             if (this->n_columns > this->universe->get_window_width() / this->universe->get_text_size())
             {
                 // Upper limit for the the number of columns is window width divided by text size.
-                this-> n_columns = this->universe->get_window_width() / this->universe->get_text_size();
+                this->n_columns = this->universe->get_window_width() / this->universe->get_text_size();
             }
 
             this->print_text("Welcome! Please write \"help\" for more");
