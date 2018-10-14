@@ -33,6 +33,10 @@
 
 namespace ajokki
 {
+    /*********************************************************************\
+     * Helper functions for callbacks begin here.                        *
+    \*********************************************************************/
+
     bool move_to_direction(yli::callback_system::CallbackObject* callback_object, glm::vec3 moving_direction)
     {
         std::shared_ptr<yli::datatypes::AnyValue> any_value_universe = std::make_shared<yli::datatypes::AnyValue>(*callback_object->get_arg(0));
