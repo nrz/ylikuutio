@@ -69,6 +69,7 @@ namespace yli
     namespace ontology
     {
         class Species;
+        class Font2D;
 
         void Universe::bind_world(yli::ontology::World* const world)
         {
@@ -658,6 +659,11 @@ namespace yli
         }
 
         // Public callbacks end here.
+
+        void Universe::set_font2D(yli::ontology::Font2D* const font2D)
+        {
+            this->font2D = font2D;
+        }
 
         yli::console::Console* Universe::get_console() const
         {
