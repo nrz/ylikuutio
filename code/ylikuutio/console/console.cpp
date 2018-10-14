@@ -5,6 +5,7 @@
 #include "code/ylikuutio/config/setting.hpp"
 #include "code/ylikuutio/config/setting_master.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
+#include "code/ylikuutio/callback_system/key_and_callback_struct.hpp"
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
 #include "code/ylikuutio/map/ylikuutio_map.hpp"
 #include "code/ylikuutio/common/printing_struct.hpp"
