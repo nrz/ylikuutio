@@ -12,12 +12,6 @@
 #include "code/ylikuutio/common/any_value.hpp"
 #include "code/ylikuutio/common/globals.hpp"
 
-// Include GLEW
-#ifndef __GL_GLEW_H_INCLUDED
-#define __GL_GLEW_H_INCLUDED
-#include <GL/glew.h> // GLfloat, GLuint etc.
-#endif
-
 // Include standard headers
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <memory>   // std::make_shared, std::shared_ptr
@@ -79,7 +73,7 @@ namespace ajokki
             return false;
         }
 
-        GLfloat temp_speed;
+        float temp_speed;
 
         if (universe->is_first_turbo_pressed && universe->is_second_turbo_pressed)
         {
