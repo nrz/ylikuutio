@@ -660,6 +660,11 @@ namespace yli
 
         // Public callbacks end here.
 
+        yli::ontology::Font2D* Universe::get_font2D() const
+        {
+            return this->font2D;
+        }
+
         void Universe::set_font2D(yli::ontology::Font2D* const font2D)
         {
             this->font2D = font2D;
