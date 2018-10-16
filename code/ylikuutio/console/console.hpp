@@ -78,14 +78,6 @@ namespace yli
 
                 // Public callbacks.
 
-                // Action mode keyrelease callbacks begin here.
-
-                static std::shared_ptr<yli::datatypes::AnyValue> enable_enter_console(
-                        yli::callback_system::CallbackEngine*,
-                        yli::callback_system::CallbackObject*,
-                        std::vector<yli::callback_system::CallbackParameter*>&,
-                        yli::console::Console* console);
-
                 // Action mode keypress callbacks begin here.
 
                 static std::shared_ptr<yli::datatypes::AnyValue> enter_console(
@@ -95,12 +87,6 @@ namespace yli
                         yli::console::Console* console);
 
                 // Console mode keyrelease callbacks begin here.
-
-                static std::shared_ptr<yli::datatypes::AnyValue> enable_exit_console(
-                        yli::callback_system::CallbackEngine*,
-                        yli::callback_system::CallbackObject*,
-                        std::vector<yli::callback_system::CallbackParameter*>&,
-                        yli::console::Console* console);
 
                 static std::shared_ptr<yli::datatypes::AnyValue> release_left_control_in_console(
                         yli::callback_system::CallbackEngine*,
