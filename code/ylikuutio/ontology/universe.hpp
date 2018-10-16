@@ -272,6 +272,7 @@ namespace yli
         class World;
         class Scene;
         class Species;
+        class Font2D;
 
         class Universe: public yli::ontology::Entity
         {
@@ -313,7 +314,7 @@ namespace yli
                     this->current_camera_vertical_angle    = NAN;
 
                     // Variables related to the camera.
-                    this->aspect_ratio = static_cast<GLfloat>(this->window_width / this->window_height);
+                    this->aspect_ratio = static_cast<float>(this->window_width / this->window_height);
                     this->initialFoV   = 60.0f;
 
                     this->text_size = universe_struct.text_size;
@@ -404,6 +405,9 @@ namespace yli
                 // this method stes the active `Scene`.
                 void set_active_scene(yli::ontology::Scene* const world);
 
+                yli::ontology::Font2D* get_font2D() const;
+                void set_font2D(yli::ontology::Font2D* const font2D);
+
                 yli::console::Console* get_console() const;
                 void set_console(yli::console::Console* console);
 
@@ -474,7 +478,7 @@ namespace yli
                 glm::mat4& get_view_matrix();
                 void set_view_matrix(glm::mat4& view_matrix);
 
-                GLfloat get_aspect_ratio() const;
+                float get_aspect_ratio() const;
                 GLfloat get_initialFoV() const;
 
                 // Public callbacks.
@@ -565,6 +569,7 @@ namespace yli
                 std::size_t number_of_worlds;
 
                 yli::ontology::World* active_world;
+                yli::ontology::Font2D* font2D;
 
                 yli::console::Console* console_pointer;     // pointer to `Console`.
 
@@ -587,7 +592,7 @@ namespace yli
                 // Variables related to the camera.
                 glm::mat4 current_camera_projection_matrix;
                 glm::mat4 current_camera_view_matrix;
-                GLfloat aspect_ratio; // at the moment all cameras use the same aspect ratio.
+                float aspect_ratio;   // at the moment all cameras use the same aspect ratio.
                 GLfloat initialFoV;   // at the moment all cameras use the same FoV.
 
                 // Variables related to the fonts and texts used.

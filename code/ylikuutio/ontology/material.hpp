@@ -120,8 +120,11 @@ namespace yli
                 // currently there can be only one terrain `Species` in each `Scene` (used in collision detection).
                 void set_terrain_species(yli::ontology::Species* const terrain_species);
 
-                const std::string& get_texture_file_format();
-                const std::string& get_texture_filename();
+                const std::string& get_texture_file_format() const;
+                const std::string& get_texture_filename() const;
+                std::size_t get_image_width() const;
+                std::size_t get_image_height() const;
+                std::size_t get_image_size() const;
 
                 template<class T1>
                     friend void yli::hierarchy::bind_child_to_parent(T1 child_pointer, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children);

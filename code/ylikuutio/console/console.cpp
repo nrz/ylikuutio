@@ -1,10 +1,11 @@
 #include "console.hpp"
 #include "console_struct.hpp"
-#include "command_and_callback_struct.hpp"
+#include "console_command_callback.hpp"
 #include "code/ylikuutio/ontology/font2D.hpp"
 #include "code/ylikuutio/config/setting.hpp"
 #include "code/ylikuutio/config/setting_master.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
+#include "code/ylikuutio/callback_system/key_and_callback_struct.hpp"
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
 #include "code/ylikuutio/map/ylikuutio_map.hpp"
 #include "code/ylikuutio/common/printing_struct.hpp"
@@ -65,10 +66,6 @@ namespace yli
             // This is a pointer to `std::vector<KeyAndCallbackStruct>*` that controls keyrelease callbacks.
             this->current_keyrelease_callback_engine_vector_pointer_pointer = console_struct.current_keyrelease_callback_engine_vector_pointer_pointer;
             std::cout << "2nd pointer defined in Console::Console\n";
-
-            // This is a pointer to `std::unordered_map<std::string, bool>` that contains console command callbacks.
-            this->command_callback_map_pointer = console_struct.command_callback_map_pointer;
-            std::cout << "3rd pointer defined in Console::Console\n";
 
             // This is a pointer to `yli::ontology::Universe`.
             this->universe = console_struct.universe;
@@ -186,7 +183,7 @@ namespace yli
             if (this->n_columns > this->universe->get_window_width() / this->universe->get_text_size())
             {
                 // Upper limit for the the number of columns is window width divided by text size.
-                this-> n_columns = this->universe->get_window_width() / this->universe->get_text_size();
+                this->n_columns = this->universe->get_window_width() / this->universe->get_text_size();
             }
 
             this->print_text("Welcome! Please write \"help\" for more");
@@ -204,9 +201,19 @@ namespace yli
             this->my_keypress_callback_engine_vector_pointer = my_keypress_callback_engine_vector_pointer;
         }
 
+        void Console::add_command_callback(const std::string& command, ConsoleCommandCallback callback)
+        {
+            this->command_callback_map[command] = callback;
+        }
+
         void Console::set_my_keyrelease_callback_engine_vector_pointer(std::vector<KeyAndCallbackStruct>* my_keyrelease_callback_engine_vector_pointer)
         {
             this->my_keyrelease_callback_engine_vector_pointer = my_keyrelease_callback_engine_vector_pointer;
+        }
+
+        void Console::set_font2D(yli::ontology::Font2D* const font2D)
+        {
+            this->font2D_pointer = font2D;
         }
 
         void Console::print_text(const std::string& text)
@@ -249,101 +256,108 @@ namespace yli
         void Console::print_help()
         {
             this->print_text("Available commands:");
-            yli::map::print_keys_to_console(this->command_callback_map_pointer, this);
+            yli::map::print_keys_to_console(&this->command_callback_map, this);
         }
 
         void Console::draw_console() const
         {
-            if (this->in_console)
+            if (!this->in_console)
             {
-                // Convert current input into std::string.
-                std::size_t characters_for_line = this->universe->get_window_width() / this->universe->get_text_size();
+                return;
+            }
 
-                // Draw the console to screen using `font2D::printText2D`.
-                PrintingStruct printing_struct;
-                printing_struct.screen_width = this->universe->get_window_width();
-                printing_struct.screen_height = this->universe->get_window_height();
-                printing_struct.text_size = this->universe->get_text_size();
-                printing_struct.font_size = this->universe->get_font_size();
-                printing_struct.char_font_texture_file_format = "bmp";
+            if (this->font2D_pointer == nullptr)
+            {
+                return;
+            }
 
-                printing_struct.x = 0;
-                printing_struct.y = this->universe->get_window_height() - (2 * this->universe->get_text_size());
-                printing_struct.horizontal_alignment = "left";
-                printing_struct.vertical_alignment = "top";
+            // Convert current input into std::string.
+            std::size_t characters_for_line = this->universe->get_window_width() / this->universe->get_text_size();
 
-                if (this->in_history)
+            // Draw the console to screen using `font2D::printText2D`.
+            PrintingStruct printing_struct;
+            printing_struct.screen_width = this->universe->get_window_width();
+            printing_struct.screen_height = this->universe->get_window_height();
+            printing_struct.text_size = this->universe->get_text_size();
+            printing_struct.font_size = this->universe->get_font_size();
+            printing_struct.char_font_texture_file_format = "bmp";
+
+            printing_struct.x = 0;
+            printing_struct.y = this->universe->get_window_height() - (2 * this->universe->get_text_size());
+            printing_struct.horizontal_alignment = "left";
+            printing_struct.vertical_alignment = "top";
+
+            if (this->in_history)
+            {
+                std::size_t history_end_i = history_line_i + this->n_rows;
+
+                for (std::size_t history_i = history_line_i; history_i < history_end_i && history_i < this->console_history.size(); history_i++)
                 {
-                    std::size_t history_end_i = history_line_i + this->n_rows;
+                    std::list<char> historical_text = this->console_history.at(history_i);
+                    printing_struct.text += yli::string::convert_std_list_char_to_std_string(historical_text, characters_for_line, characters_for_line) + "\\n";
+                }
+            }
+            else
+            {
+                std::size_t n_lines_of_current_input = (this->prompt.size() + this->current_input.size() - 1) / this->n_columns + 1;
 
-                    for (std::size_t history_i = history_line_i; history_i < history_end_i && history_i < this->console_history.size(); history_i++)
+                std::size_t history_start_i;
+
+                if (n_lines_of_current_input > this->n_rows)
+                {
+                    // Current input does not fit completely in the console 'window'.
+
+                    // Split current input into lines and print only n last lines,
+                    // where n == `this->n_rows`.
+                    std::list<char> current_input_with_prompt = this->current_input;
+                    std::list<char>::iterator it = current_input_with_prompt.begin();
+
+                    // Copy prompt into the front of the current input.
+                    for (const char& my_char : this->prompt)
                     {
-                        std::list<char> historical_text = this->console_history.at(history_i);
-                        printing_struct.text += yli::string::convert_std_list_char_to_std_string(historical_text, characters_for_line, characters_for_line) + "\\n";
+                        current_input_with_prompt.insert(it, my_char);
+                    }
+
+                    // Convert into a vector of lines.
+                    std::vector<std::string> current_input_vector = yli::string::convert_std_list_char_to_std_vector_std_string(
+                            current_input_with_prompt,
+                            this->n_columns);
+
+                    // Print only n last lines.
+                    for (std::size_t i = current_input_vector.size() - this->n_rows; i < current_input_vector.size(); i++)
+                    {
+                        printing_struct.text += current_input_vector.at(i) + "\\n";
                     }
                 }
                 else
                 {
-                    std::size_t n_lines_of_current_input = (this->prompt.size() + this->current_input.size() - 1) / this->n_columns + 1;
+                    // Current input fits completely in the console 'window'.
 
-                    std::size_t history_start_i;
-
-                    if (n_lines_of_current_input > this->n_rows)
+                    if (this->console_history.size() + n_lines_of_current_input > this->n_rows)
                     {
-                        // Current input does not fit completely in the console 'window'.
-
-                        // Split current input into lines and print only n last lines,
-                        // where n == `this->n_rows`.
-                        std::list<char> current_input_with_prompt = this->current_input;
-                        std::list<char>::iterator it = current_input_with_prompt.begin();
-
-                        // Copy prompt into the front of the current input.
-                        for (const char& my_char : this->prompt)
-                        {
-                            current_input_with_prompt.insert(it, my_char);
-                        }
-
-                        // Convert into a vector of lines.
-                        std::vector<std::string> current_input_vector = yli::string::convert_std_list_char_to_std_vector_std_string(
-                                current_input_with_prompt,
-                                this->n_columns);
-
-                        // Print only n last lines.
-                        for (std::size_t i = current_input_vector.size() - this->n_rows; i < current_input_vector.size(); i++)
-                        {
-                            printing_struct.text += current_input_vector.at(i) + "\\n";
-                        }
+                        // Everything does not fit in the console 'window'.
+                        history_start_i = this->console_history.size() - this->n_rows + n_lines_of_current_input;
                     }
                     else
                     {
-                        // Current input fits completely in the console 'window'.
-
-                        if (this->console_history.size() + n_lines_of_current_input > this->n_rows)
-                        {
-                            // Everything does not fit in the console 'window'.
-                            history_start_i = this->console_history.size() - this->n_rows + n_lines_of_current_input;
-                        }
-                        else
-                        {
-                            // Everything does fit in the console 'window'.
-                            history_start_i = 0;
-                        }
-
-                        // We are not in history so print everything to the end of the history.
-                        for (std::size_t history_i = history_start_i; history_i < this->console_history.size(); history_i++)
-                        {
-                            std::list<char> historical_text = this->console_history.at(history_i);
-                            printing_struct.text += yli::string::convert_std_list_char_to_std_string(historical_text, characters_for_line, characters_for_line) + "\\n";
-                        }
-                        printing_struct.text += this->prompt + yli::string::convert_std_list_char_to_std_string(
-                                this->current_input,
-                                characters_for_line - this->prompt.size(), // First line is shorter due to space taken by the prompt.
-                                characters_for_line);                      // The rest lines have full length.
+                        // Everything does fit in the console 'window'.
+                        history_start_i = 0;
                     }
-                }
 
-                this->font2D_pointer->printText2D(printing_struct);
+                    // We are not in history so print everything to the end of the history.
+                    for (std::size_t history_i = history_start_i; history_i < this->console_history.size(); history_i++)
+                    {
+                        std::list<char> historical_text = this->console_history.at(history_i);
+                        printing_struct.text += yli::string::convert_std_list_char_to_std_string(historical_text, characters_for_line, characters_for_line) + "\\n";
+                    }
+                    printing_struct.text += this->prompt + yli::string::convert_std_list_char_to_std_string(
+                            this->current_input,
+                            characters_for_line - this->prompt.size(), // First line is shorter due to space taken by the prompt.
+                            characters_for_line);                      // The rest lines have full length.
+                }
             }
+
+            this->font2D_pointer->printText2D(printing_struct);
         }
 
         bool Console::get_in_console() const

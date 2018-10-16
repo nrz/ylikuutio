@@ -53,7 +53,7 @@ namespace yli
             return this->universe;
         }
 
-        yli::ontology::Entity* EntityFactory::create_World()
+        yli::ontology::Entity* EntityFactory::create_World() const
         {
             return new yli::ontology::World(this->universe);
         }

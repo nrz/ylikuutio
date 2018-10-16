@@ -99,6 +99,21 @@ int main(const int argc, const char* argv[])
 
     int input_method_in_use = yli::input::KEYBOARD;
 
+    // keypress callbacks.
+    std::vector<KeyAndCallbackStruct>* action_mode_keypress_callback_engines = new std::vector<KeyAndCallbackStruct>();
+    std::vector<KeyAndCallbackStruct>* action_mode_continuous_keypress_callback_engines = new std::vector<KeyAndCallbackStruct>();
+
+    // This vector points to current keypress callback engines vector.
+    std::vector<KeyAndCallbackStruct>** current_keypress_callback_engine_vector_pointer;
+    current_keypress_callback_engine_vector_pointer = &action_mode_keypress_callback_engines;
+
+    // keyrelease callbacks.
+    std::vector<KeyAndCallbackStruct>* action_mode_keyrelease_callback_engines = new std::vector<KeyAndCallbackStruct>();
+
+    // This vector points to current keyrelease callback engines vector.
+    std::vector<KeyAndCallbackStruct>** current_keyrelease_callback_engine_vector_pointer;
+    current_keyrelease_callback_engine_vector_pointer = &action_mode_keyrelease_callback_engines;
+
     // Create the world, store it in `my_universe`.
     std::cout << "Creating yli::ontology::Entity* my_universe_entity ...\n";
     UniverseStruct universe_struct;
@@ -249,20 +264,6 @@ int main(const int argc, const char* argv[])
 
     my_universe->turbo_factor = 100.0f;
     my_universe->twin_turbo_factor = 500.0f;
-    // keypress callbacks.
-    std::vector<KeyAndCallbackStruct>* action_mode_keypress_callback_engines = new std::vector<KeyAndCallbackStruct>();
-    std::vector<KeyAndCallbackStruct>* action_mode_continuous_keypress_callback_engines = new std::vector<KeyAndCallbackStruct>();
-
-    // This vector points to current keypress callback engines vector.
-    std::vector<KeyAndCallbackStruct>** current_keypress_callback_engine_vector_pointer;
-    current_keypress_callback_engine_vector_pointer = &action_mode_keypress_callback_engines;
-
-    // keyrelease callbacks.
-    std::vector<KeyAndCallbackStruct>* action_mode_keyrelease_callback_engines = new std::vector<KeyAndCallbackStruct>();
-
-    // This vector points to current keyrelease callback engines vector.
-    std::vector<KeyAndCallbackStruct>** current_keyrelease_callback_engine_vector_pointer;
-    current_keyrelease_callback_engine_vector_pointer = &action_mode_keyrelease_callback_engines;
 
     // Initialize our little text library with the Holstein font
     const char* char_g_font_texture_filename = "Holstein.bmp";
@@ -286,12 +287,9 @@ int main(const int argc, const char* argv[])
 
     std::cout << "Font2D created successfully.\n";
 
-    std::unordered_map<std::string, ConsoleCommandCallback> command_callback_map;
-
     ConsoleStruct console_struct;
     console_struct.current_keypress_callback_engine_vector_pointer_pointer = current_keypress_callback_engine_vector_pointer;
     console_struct.current_keyrelease_callback_engine_vector_pointer_pointer = current_keyrelease_callback_engine_vector_pointer;
-    console_struct.command_callback_map_pointer = &command_callback_map;
     console_struct.universe = my_universe;
     console_struct.font2D_pointer = my_font2D;
 
@@ -758,27 +756,27 @@ int main(const int argc, const char* argv[])
     std::cout << "Defining console command callback engines.\n";
 
     // Config callbacks.
-    command_callback_map["set"] = &yli::config::SettingMaster::set_and_print;
-    command_callback_map["get"] = &yli::config::SettingMaster::get_and_print;
+    my_console->add_command_callback("set", &yli::config::SettingMaster::set_and_print);
+    my_console->add_command_callback("get", &yli::config::SettingMaster::get_and_print);
 
     // Object handling callbacks.
-    command_callback_map["activate"] = &yli::ontology::Universe::activate;
-    command_callback_map["delete"] = &yli::ontology::Universe::delete_entity;
-    command_callback_map["info"] = &yli::ontology::Universe::info;
-    command_callback_map["bind"] = &yli::ontology::Universe::bind;
+    my_console->add_command_callback("activate", &yli::ontology::Universe::activate);
+    my_console->add_command_callback("delete", &yli::ontology::Universe::delete_entity);
+    my_console->add_command_callback("info", &yli::ontology::Universe::info);
+    my_console->add_command_callback("bind", &yli::ontology::Universe::bind);
 
     // Exit program callbacks.
-    command_callback_map["bye"] = &ajokki::quit;
-    command_callback_map["chau"] = &ajokki::quit;
-    command_callback_map["ciao"] = &ajokki::quit;
-    command_callback_map["heippa"] = &ajokki::quit;
-    command_callback_map["quit"] = &ajokki::quit;
-    command_callback_map["sayonara"] = &ajokki::quit;
+    my_console->add_command_callback("bye", &ajokki::quit);
+    my_console->add_command_callback("chau", &ajokki::quit);
+    my_console->add_command_callback("ciao", &ajokki::quit);
+    my_console->add_command_callback("heippa", &ajokki::quit);
+    my_console->add_command_callback("quit", &ajokki::quit);
+    my_console->add_command_callback("sayonara", &ajokki::quit);
 
     // Other callbacks.
-    command_callback_map["help"] = &ajokki::help;
-    command_callback_map["version"] = &ajokki::version;
-    command_callback_map["screenshot"] = &yli::ontology::Universe::screenshot;
+    my_console->add_command_callback("help", &ajokki::help);
+    my_console->add_command_callback("version", &ajokki::version);
+    my_console->add_command_callback("screenshot", &yli::ontology::Universe::screenshot);
 
     // For speed computation
     double last_time_to_display_FPS = yli::time::get_time();

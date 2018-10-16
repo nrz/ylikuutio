@@ -48,8 +48,7 @@ namespace yli
 
                 yli::ontology::Universe* get_universe() const;
 
-                yli::ontology::Entity* create_Universe();
-                yli::ontology::Entity* create_World();
+                yli::ontology::Entity* create_World() const;
                 yli::ontology::Entity* create_Scene(yli::ontology::World* const world, const float water_level);
                 yli::ontology::Entity* create_Shader(const ShaderStruct& shader_struct);
                 yli::ontology::Entity* create_Material(const MaterialStruct& material_struct);

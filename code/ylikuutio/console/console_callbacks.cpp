@@ -544,10 +544,9 @@ namespace yli
                 if (is_command)
                 {
                     // Call the corresponding console command callback, if there is one.
-                    if (console->command_callback_map_pointer != nullptr &&
-                            console->command_callback_map_pointer->count(command) == 1)
+                    if (console->command_callback_map.count(command) == 1)
                     {
-                        ConsoleCommandCallback callback = console->command_callback_map_pointer->at(command);
+                        ConsoleCommandCallback callback = console->command_callback_map[command];
                         any_value = callback(console, console->universe, parameter_vector);
                     }
                 }

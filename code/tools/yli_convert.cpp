@@ -141,15 +141,15 @@ int main(const int argc, const char* argv[])
     ai_scene.mRootNode = new aiNode();
     ai_scene.mNumMaterials = symbiosis.get_number_of_symbiont_materials();
     ai_scene.mMaterials = new aiMaterial*[ai_scene.mNumMaterials];
-    ai_scene.mNumAnimations = 0;
-    ai_scene.mAnimations = nullptr;
+    ai_scene.mNumAnimations = 0;    // yli_convert does not yet support animations.
+    ai_scene.mAnimations = nullptr; // yli_convert does not yet support animations.
     ai_scene.mNumTextures = symbiosis.get_number_of_symbiont_materials();
     ai_scene.mTextures = new aiTexture*[ai_scene.mNumMaterials];
-    ai_scene.mNumLights = 0;
-    ai_scene.mLights = nullptr;
-    ai_scene.mNumCameras = 0;
-    ai_scene.mCameras = nullptr;
-    ai_scene.mMetaData = nullptr;
+    ai_scene.mNumLights = 0;        // yli_convert does not yet support lights.
+    ai_scene.mLights = nullptr;     // yli_convert does not yet support lights.
+    ai_scene.mNumCameras = 0;       // yli_convert does not yet support cameras.
+    ai_scene.mCameras = nullptr;    // yli_convert does not yet support cameras.
+    ai_scene.mMetaData = nullptr;   // yli_convert does not yet support metadata.
     ai_scene.mNumMeshes = symbiosis.get_number_of_symbiont_species();
     ai_scene.mMeshes = new aiMesh*[ai_scene.mNumMeshes];
     ai_scene.mRootNode->mNumMeshes = symbiosis.get_number_of_symbiont_species();
@@ -170,6 +170,9 @@ int main(const int argc, const char* argv[])
             std::cerr << "ERROR: `yli_convert`: `symbiont_material` is `nullptr`!\n";
             continue;
         }
+
+        ai_scene.mTextures[symbiont_material_i]->mWidth = static_cast<unsigned int>(symbiont_material->get_image_width());
+        ai_scene.mTextures[symbiont_material_i]->mHeight = static_cast<unsigned int>(symbiont_material->get_image_height());
 
         if (symbiont_material->get_childID() == std::numeric_limits<std::size_t>::max())
         {

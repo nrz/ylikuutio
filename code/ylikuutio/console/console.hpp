@@ -2,13 +2,13 @@
 #define __CONSOLE_HPP_INCLUDED
 
 #include "console_struct.hpp"
-#include "command_and_callback_struct.hpp"
+#include "console_command_callback.hpp"
 #include "code/ylikuutio/callback_system/key_and_callback_struct.hpp"
 #include "code/ylikuutio/callback_system/callback_parameter.hpp"
 #include "code/ylikuutio/callback_system/callback_object.hpp"
 #include "code/ylikuutio/callback_system/callback_engine.hpp"
-#include "code/ylikuutio/common/any_value.hpp"
 #include "code/ylikuutio/ontology/font2D.hpp"
+#include "code/ylikuutio/common/any_value.hpp"
 #include "code/ylikuutio/common/globals.hpp"
 
 // Include GLEW
@@ -67,6 +67,8 @@ namespace yli
 
                 void set_my_keypress_callback_engine_vector_pointer(std::vector<KeyAndCallbackStruct>* my_keypress_callback_engine_vector_pointer);
                 void set_my_keyrelease_callback_engine_vector_pointer(std::vector<KeyAndCallbackStruct>* my_keyrelease_callback_engine_vector_pointer);
+                void set_font2D(yli::ontology::Font2D* const font2D);
+                void add_command_callback(const std::string& command, ConsoleCommandCallback callback);
                 void print_text(const std::string& text);
                 void print_help();
                 void draw_console() const;
@@ -75,14 +77,6 @@ namespace yli
                 void process_key_event(const SDL_KeyboardEvent& keyboard_event);
 
                 // Public callbacks.
-
-                // Action mode keyrelease callbacks begin here.
-
-                static std::shared_ptr<yli::datatypes::AnyValue> enable_enter_console(
-                        yli::callback_system::CallbackEngine*,
-                        yli::callback_system::CallbackObject*,
-                        std::vector<yli::callback_system::CallbackParameter*>&,
-                        yli::console::Console* console);
 
                 // Action mode keypress callbacks begin here.
 
@@ -93,12 +87,6 @@ namespace yli
                         yli::console::Console* console);
 
                 // Console mode keyrelease callbacks begin here.
-
-                static std::shared_ptr<yli::datatypes::AnyValue> enable_exit_console(
-                        yli::callback_system::CallbackEngine*,
-                        yli::callback_system::CallbackObject*,
-                        std::vector<yli::callback_system::CallbackParameter*>&,
-                        yli::console::Console* console);
 
                 static std::shared_ptr<yli::datatypes::AnyValue> release_left_control_in_console(
                         yli::callback_system::CallbackEngine*,
@@ -360,8 +348,8 @@ namespace yli
                 std::vector<KeyAndCallbackStruct>* previous_keyrelease_callback_engine_vector_pointer;
                 std::vector<KeyAndCallbackStruct>* my_keyrelease_callback_engine_vector_pointer;
 
-                // This is a pointer to `std::unordered_map<std::string, bool>` that contains console command callbacks.
-                std::unordered_map<std::string, ConsoleCommandCallback>* command_callback_map_pointer;
+                // `std::unordered_map` contains console command callbacks.
+                std::unordered_map<std::string, ConsoleCommandCallback> command_callback_map;
 
                 // This is a pointer to `yli::ontology::Universe`.
                 yli::ontology::Universe* universe;

@@ -98,6 +98,7 @@ namespace yli
             }
 
             image_width = static_cast<std::size_t>(temp_image_width);
+            std::cout << "image width is " << image_width << " pixels.\n";
 
             int32_t temp_image_height = yli::memory::read_nonaligned_32_bit<uint8_t, int32_t>(file_content_uint8_t, 0x16);
 
@@ -108,11 +109,13 @@ namespace yli
             }
 
             image_height = static_cast<std::size_t>(temp_image_height);
+            std::cout << "image height is " << image_height << " pixels.\n";
 
             // Some BMP files are misformatted, guess missing information
             if (image_size == 0)
             {
                 std::size_t number_of_pixels = image_width * image_height;
+                std::cout << "image contains " << number_of_pixels << " pixels.\n";
 
                 if (number_of_pixels > std::numeric_limits<std::size_t>::max() / 4)
                 {
@@ -132,7 +135,9 @@ namespace yli
                 return nullptr;
             }
 
+            std::cout << "copying image data ...\n";
             std::copy(file_content.begin() + pixel_array_start_offset, file_content.end(), image_data);
+            std::cout << "image data copied.\n";
 
             return image_data;
         }

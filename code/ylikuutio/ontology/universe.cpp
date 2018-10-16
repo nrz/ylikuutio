@@ -69,6 +69,7 @@ namespace yli
     namespace ontology
     {
         class Species;
+        class Font2D;
 
         void Universe::bind_world(yli::ontology::World* const world)
         {
@@ -99,15 +100,15 @@ namespace yli
 
         void Universe::render()
         {
+            this->prerender();
+
             if (this->active_world != nullptr)
             {
-                this->prerender();
-
                 // render this `Universe` by calling `render()` function of the active `World`.
                 this->active_world->render();
-
-                this->postrender();
             }
+
+            this->postrender();
         }
 
         void Universe::set_active_world(yli::ontology::World* const world)
@@ -638,7 +639,7 @@ namespace yli
                 const std::size_t number_color_channels = 3;
                 const std::size_t number_of_texels = texture_width * texture_height;
                 const std::size_t number_of_elements = number_color_channels * number_of_texels;
-                uint8_t* const result_array = (uint8_t*) malloc(number_of_elements * sizeof(uint8_t));
+                uint8_t* const result_array = new uint8_t[number_of_elements];
 
                 glReadBuffer(GL_COLOR_ATTACHMENT0_EXT);
                 glReadPixels(0, 0, texture_width, texture_height, GL_RGB, GL_UNSIGNED_BYTE, result_array);
@@ -647,7 +648,7 @@ namespace yli
 
                 yli::file::binary_write(result_vector, filename);
 
-                free(result_array);
+                delete[] result_array;
                 glDeleteFramebuffersEXT(1, &fb);
 
                 // bind onscreen buffer.
@@ -658,6 +659,16 @@ namespace yli
         }
 
         // Public callbacks end here.
+
+        yli::ontology::Font2D* Universe::get_font2D() const
+        {
+            return this->font2D;
+        }
+
+        void Universe::set_font2D(yli::ontology::Font2D* const font2D)
+        {
+            this->font2D = font2D;
+        }
 
         yli::console::Console* Universe::get_console() const
         {
@@ -709,7 +720,7 @@ namespace yli
             this->current_camera_view_matrix = view_matrix;
         }
 
-        GLfloat Universe::get_aspect_ratio() const
+        float Universe::get_aspect_ratio() const
         {
             return this->aspect_ratio;
         }
@@ -721,8 +732,6 @@ namespace yli
 
         bool Universe::compute_and_update_matrices_from_inputs()
         {
-            GLfloat FoV = this->initialFoV;
-
             if (!this->is_flight_mode_in_use)
             {
                 // accelerate and fall.
@@ -770,7 +779,7 @@ namespace yli
 
             // Projection matrix : 45° Field of View, aspect ratio, display range : 0.1 unit <-> 100 units
             this->current_camera_projection_matrix = glm::perspective(
-                    DEGREES_TO_RADIANS(FoV),
+                    DEGREES_TO_RADIANS(this->initialFoV),
                     this->aspect_ratio,
                     this->znear,
                     this->zfar);

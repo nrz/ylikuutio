@@ -170,7 +170,7 @@ namespace yli
                 return false;
             }
 
-            return load_texture(image_data, image_width, image_height, true, textureID);
+            return yli::load::load_texture(image_data, image_width, image_height, true, textureID);
         }
 
 #define FOURCC_DXT1 0x31545844 // Equivalent to "DXT1" in ASCII
