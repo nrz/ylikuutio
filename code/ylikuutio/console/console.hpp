@@ -21,6 +21,7 @@
 #include <cstddef>       // std::size_t
 #include <list>          // std::list
 #include <memory>        // std::make_shared, std::shared_ptr
+#include <stdint.h>      // uint32_t etc.
 #include <string>        // std::string
 #include <unordered_map> // std::unordered_map
 #include <vector>        // std::vector
@@ -69,6 +70,10 @@ namespace yli
                 void set_my_keypress_callback_engine_vector_pointer(std::vector<KeyAndCallbackStruct>* my_keypress_callback_engine_vector_pointer);
                 void set_my_keyrelease_callback_engine_vector_pointer(std::vector<KeyAndCallbackStruct>* my_keyrelease_callback_engine_vector_pointer);
                 void add_command_callback(const std::string& command, ConsoleCommandCallback callback);
+                void set_console_top_y(const uint32_t console_top_y);
+                void set_console_bottom_y(const uint32_t console_bottom_y);
+                void set_console_left_x(const uint32_t console_left_x);
+                void set_console_right_x(const uint32_t console_right_x);
                 void print_text(const std::string& text);
                 void print_help();
                 void draw_console() const;

@@ -93,6 +93,10 @@ namespace yli
                 static std::shared_ptr<yli::datatypes::AnyValue> activate_mouse_speed(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
 
                 static std::shared_ptr<yli::datatypes::AnyValue> activate_is_flight_mode_in_use(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
+                static std::shared_ptr<yli::datatypes::AnyValue> activate_console_top_y(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
+                static std::shared_ptr<yli::datatypes::AnyValue> activate_console_bottom_y(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
+                static std::shared_ptr<yli::datatypes::AnyValue> activate_console_left_x(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
+                static std::shared_ptr<yli::datatypes::AnyValue> activate_console_right_x(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
 
                 static std::shared_ptr<yli::datatypes::AnyValue> read_cartesian_coordinates(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
                 static std::shared_ptr<yli::datatypes::AnyValue> read_x(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master);
