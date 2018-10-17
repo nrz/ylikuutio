@@ -5,6 +5,7 @@
 #include "entity_factory.hpp"
 #include "universe_struct.hpp"
 #include "camera_struct.hpp"
+#include "code/ylikuutio/console/console.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
 #include "code/ylikuutio/common/globals.hpp"
@@ -262,11 +263,6 @@ namespace yli
         class Setting;
     }
 
-    namespace console
-    {
-        class Console;
-    }
-
     namespace ontology
     {
         class World;
@@ -294,7 +290,6 @@ namespace yli
                     this->planet_radius    = NAN;     // world radius is NAN as long it doesn't get `set` by `SettingMaster`.
                     this->terrain_species  = nullptr;
                     this->active_world     = nullptr;
-                    this->console_pointer  = nullptr;
 
                     this->background_red   = NAN;
                     this->background_green = NAN;
@@ -384,6 +379,11 @@ namespace yli
                     // Disable vertical sync.
                     // TODO: add option to enable/disable vsync in the console.
                     SDL_GL_SetSwapInterval(0);
+
+                    this->console_pointer = new yli::console::Console(
+                            this,
+                            universe_struct.current_keypress_callback_engine_vector_pointer_pointer,
+                            universe_struct.current_keyrelease_callback_engine_vector_pointer_pointer);
 
                     // `yli::ontology::Entity` member variables begin here.
                     this->child_vector_pointers_vector.push_back(&this->world_pointer_vector);

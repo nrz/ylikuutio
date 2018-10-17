@@ -1,6 +1,8 @@
 #ifndef __UNIVERSE_STRUCT_HPP_INCLUDED
 #define __UNIVERSE_STRUCT_HPP_INCLUDED
 
+#include "code/ylikuutio/callback_system/key_and_callback_struct.hpp"
+
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <string>   // std::string
@@ -19,7 +21,9 @@ typedef struct UniverseStruct
         gravity(9.81f / 60.0f),
         znear(1.0f),
         zfar(5000.0f), // visibility: 5000 units.
-        is_headless(false)
+        is_headless(false),
+        current_keypress_callback_engine_vector_pointer_pointer(nullptr),
+        current_keyrelease_callback_engine_vector_pointer_pointer(nullptr)
     {
         // constructor.
     }
@@ -36,6 +40,10 @@ typedef struct UniverseStruct
     float znear;
     float zfar;
     bool is_headless;
+
+    // these are for `yli::console::Console`.
+    std::vector<KeyAndCallbackStruct>** current_keypress_callback_engine_vector_pointer_pointer;
+    std::vector<KeyAndCallbackStruct>** current_keyrelease_callback_engine_vector_pointer_pointer;
 } UniverseStruct;
 
 #endif

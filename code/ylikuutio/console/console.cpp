@@ -1,9 +1,6 @@
 #include "console.hpp"
-#include "console_struct.hpp"
 #include "console_command_callback.hpp"
 #include "code/ylikuutio/ontology/font2D.hpp"
-#include "code/ylikuutio/config/setting.hpp"
-#include "code/ylikuutio/config/setting_master.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/callback_system/key_and_callback_struct.hpp"
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
@@ -19,6 +16,7 @@
 #include <limits>        // std::numeric_limits
 #include <list>          // std::list
 #include <memory>        // std::make_shared, std::shared_ptr
+#include <stdint.h>      // uint32_t etc.
 #include <unordered_map> // std::unordered_map
 #include <vector>        // std::vector
 
@@ -26,7 +24,10 @@ namespace yli
 {
     namespace console
     {
-        Console::Console(const ConsoleStruct& console_struct)
+        Console::Console(
+                yli::ontology::Universe* const universe,
+                std::vector<KeyAndCallbackStruct>** current_keypress_callback_engine_vector_pointer_pointer,
+                std::vector<KeyAndCallbackStruct>** current_keyrelease_callback_engine_vector_pointer_pointer)
         {
             // constructor.
             this->cursor_it = this->current_input.begin();
@@ -60,134 +61,61 @@ namespace yli
             std::cout << "Defining pointers in Console::Console\n";
 
             // This is a pointer to `std::vector<KeyAndCallbackStruct>*` that controls keypress callbacks.
-            this->current_keypress_callback_engine_vector_pointer_pointer = console_struct.current_keypress_callback_engine_vector_pointer_pointer;
+            this->current_keypress_callback_engine_vector_pointer_pointer = current_keypress_callback_engine_vector_pointer_pointer;
             std::cout << "1st pointer defined in Console::Console\n";
 
             // This is a pointer to `std::vector<KeyAndCallbackStruct>*` that controls keyrelease callbacks.
-            this->current_keyrelease_callback_engine_vector_pointer_pointer = console_struct.current_keyrelease_callback_engine_vector_pointer_pointer;
+            this->current_keyrelease_callback_engine_vector_pointer_pointer = current_keyrelease_callback_engine_vector_pointer_pointer;
             std::cout << "2nd pointer defined in Console::Console\n";
 
             // This is a pointer to `yli::ontology::Universe`.
-            this->universe = console_struct.universe;
+            this->universe = universe;
             std::cout << "4th pointer defined in Console::Console\n";
 
             this->universe->set_console(this);
             std::cout << "5th pointer defined in Console::Console\n";
 
-            // This is a pointer to `font2D::Font2D` instance that is used for printing.
-            this->font2D_pointer = console_struct.font2D_pointer;
-            std::cout << "6th pointer defined in Console::Console\n";
-
-            std::cout << "Initializing yli::config::SettingMaster setting_master\n";
-
-            yli::config::SettingMaster* setting_master = this->universe->get_setting_master();
-
+            // Initialize `console_top_y` to 9.
+            // `console_top_y` should be set by `activate_console_top_y` anyway.
             std::cout << "Initializing console_top_y\n";
+            this->console_top_y = 9;
 
-            if (setting_master != nullptr && setting_master->is_setting("console_top_y"))
-            {
-                // OK, there is a setting for `console_top_y`.
-                std::shared_ptr<yli::datatypes::AnyValue> console_top_y_any_value = std::make_shared<yli::datatypes::AnyValue>(*universe->get_setting_master()->setting_pointer_map["console_top_y"]->setting_value);
-
-                if (console_top_y_any_value->type == yli::datatypes::UINT32_T)
-                {
-                    this->console_top_y = console_top_y_any_value->uint32_t_value;
-                }
-                else
-                {
-                    // console_top_y` not `yli::datatypes::UINT32_T`, so set `console_top_y` to 9.
-                    this->console_top_y = 9;
-                }
-            }
-            else
-            {
-                // console_top_y` not defined, so set `console_top_y` to 9.
-                this->console_top_y = 9;
-            }
-
+            // Initialize `console_bottom_y` to 0.
+            // `console_bottom_y` should be set by `activate_console_bottom_y` anyway.
             std::cout << "Initializing console_bottom_y\n";
+            this->console_top_y = 0;
 
-            if (setting_master != nullptr && setting_master->is_setting("console_bottom_y"))
-            {
-                // OK, there is a setting for `console_bottom_y`.
-                std::shared_ptr<yli::datatypes::AnyValue> console_bottom_y_any_value = std::make_shared<yli::datatypes::AnyValue>(*universe->get_setting_master()->setting_pointer_map["console_bottom_y"]->setting_value);
-
-                if (console_bottom_y_any_value->type == yli::datatypes::UINT32_T)
-                {
-                    this->console_bottom_y = console_bottom_y_any_value->uint32_t_value;
-                }
-                else
-                {
-                    // console_bottom_y` not `yli::datatypes::UINT32_T`, so set `console_bottom_y` to zero 0.
-                    this->console_bottom_y = 0;
-                }
-            }
-            else
-            {
-                // console_bottom_y` not defined, so set `console_bottom_y` to zero 0.
-                this->console_bottom_y = 0;
-            }
-
+            // Initialize `console_left_x` to 0.
+            // `console_left_x` should be set by `activate_console_left_x` anyway.
             std::cout << "Initializing console_left_x\n";
+            this->console_left_x = 0;
 
-            if (setting_master != nullptr && setting_master->is_setting("console_left_x"))
-            {
-                // OK, there is a setting for `console_left_x`.
-                std::shared_ptr<yli::datatypes::AnyValue> console_left_x_any_value = std::make_shared<yli::datatypes::AnyValue>(*universe->get_setting_master()->setting_pointer_map["console_left_x"]->setting_value);
-
-                if (console_left_x_any_value->type == yli::datatypes::UINT32_T)
-                {
-                    this->console_left_x = console_left_x_any_value->uint32_t_value;
-                }
-                else
-                {
-                    // console_left_x` not `yli::datatypes::UINT32_T`, so set `console_left_x` to zero 0.
-                    this->console_left_x = 0;
-                }
-            }
-            else
-            {
-                // console_left_x` not defined, so set `console_left_x` to zero 0.
-                this->console_left_x = 0;
-            }
-
+            // Initialize `console_right_x` to 9.
+            // `console_right_x` should be set by `activate_console_right_x` anyway.
             std::cout << "Initializing console_right_x\n";
+            this->console_right_x = 9;
 
-            if (setting_master != nullptr && setting_master->is_setting("console_right_x"))
-            {
-                // OK, there is a setting for `console_right_x`.
-                std::shared_ptr<yli::datatypes::AnyValue> console_right_x_any_value = std::make_shared<yli::datatypes::AnyValue>(*universe->get_setting_master()->setting_pointer_map["console_right_x"]->setting_value);
-
-                if (console_right_x_any_value->type == yli::datatypes::UINT32_T)
-                {
-                    this->console_right_x = console_right_x_any_value->uint32_t_value;
-                }
-                else
-                {
-                    // console_right_x` not `yli::datatypes::UINT32_T`, so set `console_right_x` to 9.
-                    this->console_right_x = 9;
-                }
-            }
-            else
-            {
-                // console_right_x` not defined, so set `console_right_x` to 9.
-                this->console_right_x = 9;
-            }
-
+            // Initialize `n_rows`.
+            // `n_rows` should be set by `activate_console_top_y` and `activate_console_bottom_y` anyway.
             std::cout << "Initializing n_rows\n";
             this->n_rows = this->console_top_y - this->console_bottom_y + 1;
 
+            // Initialize `n_columns`.
+            // `n_columns` should be set by `activate_console_left_x` and `activate_console_right_x` anyway.
             std::cout << "Initializing n_columns\n";
             this->n_columns = this->console_right_x - this->console_left_x + 1;
+
+            if (this->n_rows > this->universe->get_window_height() / this->universe->get_text_size())
+            {
+                // Upper limit for the the number of rows is window height divided by text size.
+                this->n_rows = this->universe->get_window_height() / this->universe->get_text_size();
+            }
 
             if (this->n_columns > this->universe->get_window_width() / this->universe->get_text_size())
             {
                 // Upper limit for the the number of columns is window width divided by text size.
                 this->n_columns = this->universe->get_window_width() / this->universe->get_text_size();
             }
-
-            this->print_text("Welcome! Please write \"help\" for more");
-            this->print_text("information.");
         }
 
         Console::~Console()
@@ -206,14 +134,57 @@ namespace yli
             this->command_callback_map[command] = callback;
         }
 
+        void Console::set_console_top_y(const uint32_t console_top_y)
+        {
+            this->console_top_y = console_top_y;
+            this->n_rows = this->console_top_y - this->console_bottom_y + 1;
+
+            if (this->n_rows > this->universe->get_window_height() / this->universe->get_text_size())
+            {
+                // Upper limit for the the number of rows is window height divided by text size.
+                this->n_rows = this->universe->get_window_height() / this->universe->get_text_size();
+            }
+        }
+
+        void Console::set_console_bottom_y(const uint32_t console_bottom_y)
+        {
+            this->console_bottom_y = console_bottom_y;
+            this->n_rows = this->console_top_y - this->console_bottom_y + 1;
+
+            if (this->n_rows > this->universe->get_window_height() / this->universe->get_text_size())
+            {
+                // Upper limit for the the number of rows is window height divided by text size.
+                this->n_rows = this->universe->get_window_height() / this->universe->get_text_size();
+            }
+        }
+
+        void Console::set_console_left_x(const uint32_t console_left_x)
+        {
+            this->console_left_x = console_left_x;
+            this->n_columns = this->console_right_x - this->console_left_x + 1;
+
+            if (this->n_columns > this->universe->get_window_width() / this->universe->get_text_size())
+            {
+                // Upper limit for the the number of columns is window width divided by text size.
+                this->n_columns = this->universe->get_window_width() / this->universe->get_text_size();
+            }
+        }
+
+        void Console::set_console_right_x(const uint32_t console_right_x)
+        {
+            this->console_right_x = console_right_x;
+            this->n_columns = this->console_right_x - this->console_left_x + 1;
+
+            if (this->n_columns > this->universe->get_window_width() / this->universe->get_text_size())
+            {
+                // Upper limit for the the number of columns is window width divided by text size.
+                this->n_columns = this->universe->get_window_width() / this->universe->get_text_size();
+            }
+        }
+
         void Console::set_my_keyrelease_callback_engine_vector_pointer(std::vector<KeyAndCallbackStruct>* my_keyrelease_callback_engine_vector_pointer)
         {
             this->my_keyrelease_callback_engine_vector_pointer = my_keyrelease_callback_engine_vector_pointer;
-        }
-
-        void Console::set_font2D(yli::ontology::Font2D* const font2D)
-        {
-            this->font2D_pointer = font2D;
         }
 
         void Console::print_text(const std::string& text)
@@ -266,7 +237,14 @@ namespace yli
                 return;
             }
 
-            if (this->font2D_pointer == nullptr)
+            if (this->universe == nullptr)
+            {
+                return;
+            }
+
+            yli::ontology::Font2D* const font2D = this->universe->get_font2D();
+
+            if (font2D == nullptr)
             {
                 return;
             }
@@ -357,7 +335,7 @@ namespace yli
                 }
             }
 
-            this->font2D_pointer->printText2D(printing_struct);
+            font2D->printText2D(printing_struct);
         }
 
         bool Console::get_in_console() const

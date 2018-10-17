@@ -37,7 +37,7 @@ namespace yli
 
             this->parent->setting_pointer_map[this->name] = this;
 
-            if (setting_struct.should_ylikuutio_call_activate_callback_now)
+            if (setting_struct.should_ylikuutio_call_activate_callback_now && this->activate_callback != nullptr)
             {
                 this->activate_callback(this->parent->parent, this->parent);
             }
