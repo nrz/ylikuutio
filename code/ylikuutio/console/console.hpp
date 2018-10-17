@@ -1,13 +1,11 @@
 #ifndef __CONSOLE_HPP_INCLUDED
 #define __CONSOLE_HPP_INCLUDED
 
-#include "console_struct.hpp"
 #include "console_command_callback.hpp"
 #include "code/ylikuutio/callback_system/key_and_callback_struct.hpp"
 #include "code/ylikuutio/callback_system/callback_parameter.hpp"
 #include "code/ylikuutio/callback_system/callback_object.hpp"
 #include "code/ylikuutio/callback_system/callback_engine.hpp"
-#include "code/ylikuutio/ontology/font2D.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
 #include "code/ylikuutio/common/globals.hpp"
 
@@ -60,14 +58,16 @@ namespace yli
         {
             public:
                 // constructor.
-                Console(const ConsoleStruct& console_struct);
+                Console(
+                        yli::ontology::Universe* const universe,
+                        std::vector<KeyAndCallbackStruct>** current_keypress_callback_engine_vector_pointer_pointer,
+                        std::vector<KeyAndCallbackStruct>** current_keyrelease_callback_engine_vector_pointer_pointer);
 
                 // destructor.
                 ~Console();
 
                 void set_my_keypress_callback_engine_vector_pointer(std::vector<KeyAndCallbackStruct>* my_keypress_callback_engine_vector_pointer);
                 void set_my_keyrelease_callback_engine_vector_pointer(std::vector<KeyAndCallbackStruct>* my_keyrelease_callback_engine_vector_pointer);
-                void set_font2D(yli::ontology::Font2D* const font2D);
                 void add_command_callback(const std::string& command, ConsoleCommandCallback callback);
                 void print_text(const std::string& text);
                 void print_help();
@@ -353,9 +353,6 @@ namespace yli
 
                 // This is a pointer to `yli::ontology::Universe`.
                 yli::ontology::Universe* universe;
-
-                // This is a pointer to `font2D::Font2D` instance that is used for printing.
-                yli::ontology::Font2D* font2D_pointer;
 
                 std::size_t console_top_y;
                 std::size_t console_bottom_y;

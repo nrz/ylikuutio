@@ -90,6 +90,8 @@ namespace yli
             std::cout << "All worlds of this universe will be destroyed.\n";
             yli::hierarchy::delete_children<yli::ontology::World*>(this->world_pointer_vector, this->number_of_worlds);
 
+            delete this->console_pointer;
+
             SDL_Quit();
         }
 

@@ -33,7 +33,6 @@
 #include "code/ylikuutio/command_line/command_line_master.hpp"
 #include "code/ylikuutio/console/console.hpp"
 #include "code/ylikuutio/console/console_command_callback.hpp"
-#include "code/ylikuutio/console/console_struct.hpp"
 #include "code/ylikuutio/console/console_callback_object.hpp"
 #include "code/ylikuutio/input/input.hpp"
 #include "code/ylikuutio/ontology/font2D.hpp"
@@ -118,6 +117,8 @@ int main(const int argc, const char* argv[])
     std::cout << "Creating yli::ontology::Entity* my_universe_entity ...\n";
     UniverseStruct universe_struct;
     universe_struct.window_title = "Ajokki 0.0.3, powered by Ylikuutio 0.0.3";
+    universe_struct.current_keypress_callback_engine_vector_pointer_pointer = current_keypress_callback_engine_vector_pointer;
+    universe_struct.current_keyrelease_callback_engine_vector_pointer_pointer = current_keyrelease_callback_engine_vector_pointer;
     yli::ontology::Universe* my_universe = new yli::ontology::Universe(universe_struct);
     my_universe->set_name("universe");
 
@@ -287,15 +288,10 @@ int main(const int argc, const char* argv[])
 
     std::cout << "Font2D created successfully.\n";
 
-    ConsoleStruct console_struct;
-    console_struct.current_keypress_callback_engine_vector_pointer_pointer = current_keypress_callback_engine_vector_pointer;
-    console_struct.current_keyrelease_callback_engine_vector_pointer_pointer = current_keyrelease_callback_engine_vector_pointer;
-    console_struct.universe = my_universe;
-    console_struct.font2D_pointer = my_font2D;
-
-    std::cout << "Creating yli::console::Console* my_console ...\n";
-
-    yli::console::Console* my_console = new yli::console::Console(console_struct); // create a console.
+    my_universe->set_font2D(my_font2D);
+    yli::console::Console* const my_console = my_universe->get_console();
+    my_console->print_text("Welcome! Please write \"help\" for more");
+    my_console->print_text("information.");
 
     /*********************************************************************\
      *  Callback engines for action mode keyreleases begin here.         *
@@ -1194,7 +1190,6 @@ int main(const int argc, const char* argv[])
     delete action_mode_keypress_callback_engines;
 
     delete cleanup_callback_engine;
-    delete my_console;
 
     return 0;
 }
