@@ -1136,6 +1136,154 @@ namespace yli
             return nullptr;
         }
 
+        std::shared_ptr<yli::datatypes::AnyValue> SettingMaster::activate_console_top_y(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
+        {
+            if (entity == nullptr || setting_master == nullptr)
+            {
+                return nullptr;
+            }
+
+            if (setting_master->setting_pointer_map.count("console_top_y") != 1)
+            {
+                return nullptr;
+            }
+
+            std::shared_ptr<yli::datatypes::AnyValue> console_top_y_any_value = std::make_shared<yli::datatypes::AnyValue>(*setting_master->setting_pointer_map["console_top_y"]->setting_value);
+
+            if (console_top_y_any_value == nullptr || console_top_y_any_value->type != yli::datatypes::UINT32_T)
+            {
+                return nullptr;
+            }
+
+            yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
+
+            if (universe == nullptr)
+            {
+                return nullptr;
+            }
+
+            yli::console::Console* const console = universe->get_console();
+
+            if (console == nullptr)
+            {
+                return nullptr;
+            }
+
+            console->set_console_top_y(console_top_y_any_value->uint32_t_value);
+            return nullptr;
+        }
+
+        std::shared_ptr<yli::datatypes::AnyValue> SettingMaster::activate_console_bottom_y(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
+        {
+            if (entity == nullptr || setting_master == nullptr)
+            {
+                return nullptr;
+            }
+
+            if (setting_master->setting_pointer_map.count("console_bottom_y") != 1)
+            {
+                return nullptr;
+            }
+
+            std::shared_ptr<yli::datatypes::AnyValue> console_bottom_y_any_value = std::make_shared<yli::datatypes::AnyValue>(*setting_master->setting_pointer_map["console_bottom_y"]->setting_value);
+
+            if (console_bottom_y_any_value == nullptr || console_bottom_y_any_value->type != yli::datatypes::UINT32_T)
+            {
+                return nullptr;
+            }
+
+            yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
+
+            if (universe == nullptr)
+            {
+                return nullptr;
+            }
+
+            yli::console::Console* const console = universe->get_console();
+
+            if (console == nullptr)
+            {
+                return nullptr;
+            }
+
+            console->set_console_bottom_y(console_bottom_y_any_value->uint32_t_value);
+            return nullptr;
+        }
+
+        std::shared_ptr<yli::datatypes::AnyValue> SettingMaster::activate_console_left_x(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
+        {
+            if (entity == nullptr || setting_master == nullptr)
+            {
+                return nullptr;
+            }
+
+            if (setting_master->setting_pointer_map.count("console_left_x") != 1)
+            {
+                return nullptr;
+            }
+
+            std::shared_ptr<yli::datatypes::AnyValue> console_left_x_any_value = std::make_shared<yli::datatypes::AnyValue>(*setting_master->setting_pointer_map["console_left_x"]->setting_value);
+
+            if (console_left_x_any_value == nullptr || console_left_x_any_value->type != yli::datatypes::UINT32_T)
+            {
+                return nullptr;
+            }
+
+            yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
+
+            if (universe == nullptr)
+            {
+                return nullptr;
+            }
+
+            yli::console::Console* const console = universe->get_console();
+
+            if (console == nullptr)
+            {
+                return nullptr;
+            }
+
+            console->set_console_left_x(console_left_x_any_value->uint32_t_value);
+            return nullptr;
+        }
+
+        std::shared_ptr<yli::datatypes::AnyValue> SettingMaster::activate_console_right_x(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
+        {
+            if (entity == nullptr || setting_master == nullptr)
+            {
+                return nullptr;
+            }
+
+            if (setting_master->setting_pointer_map.count("console_right_x") != 1)
+            {
+                return nullptr;
+            }
+
+            std::shared_ptr<yli::datatypes::AnyValue> console_right_x_any_value = std::make_shared<yli::datatypes::AnyValue>(*setting_master->setting_pointer_map["console_right_x"]->setting_value);
+
+            if (console_right_x_any_value == nullptr || console_right_x_any_value->type != yli::datatypes::UINT32_T)
+            {
+                return nullptr;
+            }
+
+            yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
+
+            if (universe == nullptr)
+            {
+                return nullptr;
+            }
+
+            yli::console::Console* const console = universe->get_console();
+
+            if (console == nullptr)
+            {
+                return nullptr;
+            }
+
+            console->set_console_right_x(console_right_x_any_value->uint32_t_value);
+            return nullptr;
+        }
+
         std::shared_ptr<yli::datatypes::AnyValue> SettingMaster::read_cartesian_coordinates(yli::ontology::Entity* const entity, yli::config::SettingMaster* const setting_master)
         {
             if (entity == nullptr)

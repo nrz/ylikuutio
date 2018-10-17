@@ -398,7 +398,6 @@ add_library(ylikuutio STATIC
     code/ylikuutio/console/console.hpp
     code/ylikuutio/console/console_callbacks.cpp
     code/ylikuutio/console/console_command_callback.hpp
-    code/ylikuutio/console/console_struct.hpp
     code/ylikuutio/console/console_callback_object.cpp
     code/ylikuutio/console/console_callback_object.hpp
 
