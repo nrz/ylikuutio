@@ -326,7 +326,7 @@ namespace yli
                 return nullptr;
             }
 
-            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(universe_entity);
+            yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(universe_entity);
 
             if (universe == nullptr)
             {
@@ -356,8 +356,8 @@ namespace yli
                 }
 
                 yli::ontology::Entity* entity = universe->entity_map[name];
-                yli::ontology::World* world = dynamic_cast<yli::ontology::World*>(entity);
-                yli::ontology::Scene* scene = dynamic_cast<yli::ontology::Scene*>(entity);
+                yli::ontology::World* const world = dynamic_cast<yli::ontology::World*>(entity);
+                yli::ontology::Scene* const scene = dynamic_cast<yli::ontology::Scene*>(entity);
 
                 if (world == nullptr && scene == nullptr)
                 {
@@ -395,7 +395,7 @@ namespace yli
                 return nullptr;
             }
 
-            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(universe_entity);
+            yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(universe_entity);
 
             if (universe == nullptr)
             {
@@ -451,7 +451,7 @@ namespace yli
                 return nullptr;
             }
 
-            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(universe_entity);
+            yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(universe_entity);
 
             if (universe == nullptr)
             {
@@ -537,7 +537,7 @@ namespace yli
                 return nullptr;
             }
 
-            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(universe_entity);
+            yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(universe_entity);
 
             if (universe == nullptr)
             {
@@ -590,7 +590,7 @@ namespace yli
                 return nullptr;
             }
 
-            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(universe_entity);
+            yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(universe_entity);
 
             if (universe == nullptr)
             {

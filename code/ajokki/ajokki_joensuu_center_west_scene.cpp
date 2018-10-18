@@ -36,9 +36,9 @@ namespace ajokki
         // Joensuu `Scene` begins here.
 
         std::cout << "Creating yli::ontology::Entity* joensuu_center_west_scene_entity ...\n";
-        yli::ontology::Entity* joensuu_center_west_scene_entity = entity_factory->create_Scene(world, 77.0f);
+        yli::ontology::Entity* const joensuu_center_west_scene_entity = entity_factory->create_Scene(world, 77.0f);
         std::cout << "Creating yli::ontology::Scene* joensuu_center_west_scene ...\n";
-        yli::ontology::Scene* joensuu_center_west_scene = dynamic_cast<yli::ontology::Scene*>(joensuu_center_west_scene_entity);
+        yli::ontology::Scene* const joensuu_center_west_scene = dynamic_cast<yli::ontology::Scene*>(joensuu_center_west_scene_entity);
 
         if (joensuu_center_west_scene == nullptr)
         {
@@ -61,9 +61,9 @@ namespace ajokki
         joensuu_center_west_shader_struct.fragment_shader = "StandardShading.fragmentshader";
 
         std::cout << "Creating yli::ontology::Entity* joensuu_center_west_shader_entity ...\n";
-        yli::ontology::Entity* joensuu_center_west_shader_entity = entity_factory->create_Shader(joensuu_center_west_shader_struct);
+        yli::ontology::Entity* const joensuu_center_west_shader_entity = entity_factory->create_Shader(joensuu_center_west_shader_struct);
         std::cout << "Creating yli::ontology::Shader* joensuu_center_west_shader ...\n";
-        yli::ontology::Shader* joensuu_center_west_shader = dynamic_cast<yli::ontology::Shader*>(joensuu_center_west_shader_entity);
+        yli::ontology::Shader* const joensuu_center_west_shader = dynamic_cast<yli::ontology::Shader*>(joensuu_center_west_shader_entity);
 
         if (joensuu_center_west_shader == nullptr)
         {
@@ -80,9 +80,9 @@ namespace ajokki
         joensuu_center_west_grass_material_struct.texture_filename = "GrassGreenTexture0002.bmp";
 
         std::cout << "Creating yli::ontology::Entity* joensuu_center_west_grass_material_entity ...\n";
-        yli::ontology::Entity* joensuu_center_west_grass_material_entity = entity_factory->create_Material(joensuu_center_west_grass_material_struct);
+        yli::ontology::Entity* const joensuu_center_west_grass_material_entity = entity_factory->create_Material(joensuu_center_west_grass_material_struct);
         std::cout << "Creating yli::ontology::Material* joensuu_center_west_grass_material ...\n";
-        yli::ontology::Material* joensuu_center_west_grass_material = dynamic_cast<yli::ontology::Material*>(joensuu_center_west_grass_material_entity);
+        yli::ontology::Material* const joensuu_center_west_grass_material = dynamic_cast<yli::ontology::Material*>(joensuu_center_west_grass_material_entity);
 
         if (joensuu_center_west_grass_material == nullptr)
         {
@@ -103,9 +103,9 @@ namespace ajokki
         joensuu_center_west_terrain_species_struct.x_step = 4;
         joensuu_center_west_terrain_species_struct.z_step = 4;
         std::cout << "Creating yli::ontology::Entity* joensuu_center_west_terrain_species_entity ...\n";
-        yli::ontology::Entity* joensuu_center_west_terrain_species_entity = entity_factory->create_Species(joensuu_center_west_terrain_species_struct);
+        yli::ontology::Entity* const joensuu_center_west_terrain_species_entity = entity_factory->create_Species(joensuu_center_west_terrain_species_struct);
         std::cout << "Creating yli::ontology::Species* joensuu_center_west_terrain_species ...\n";
-        yli::ontology::Species* joensuu_center_west_terrain_species = dynamic_cast<yli::ontology::Species*>(joensuu_center_west_terrain_species_entity);
+        yli::ontology::Species* const joensuu_center_west_terrain_species = dynamic_cast<yli::ontology::Species*>(joensuu_center_west_terrain_species_entity);
 
         if (joensuu_center_west_terrain_species == nullptr)
         {
@@ -131,9 +131,9 @@ namespace ajokki
         orange_fur_material_joensuu_struct.texture_filename = "orange_fur_texture.bmp";
 
         std::cout << "Creating yli::ontology::Entity* orange_fur_material_joensuu_entity ...\n";
-        yli::ontology::Entity* orange_fur_material_joensuu_entity = entity_factory->create_Material(orange_fur_material_joensuu_struct);
+        yli::ontology::Entity* const orange_fur_material_joensuu_entity = entity_factory->create_Material(orange_fur_material_joensuu_struct);
         std::cout << "Creating yli::ontology::Material* orange_fur_material_joensuu ...\n";
-        yli::ontology::Material* orange_fur_material_joensuu = dynamic_cast<yli::ontology::Material*>(orange_fur_material_joensuu_entity);
+        yli::ontology::Material* const orange_fur_material_joensuu = dynamic_cast<yli::ontology::Material*>(orange_fur_material_joensuu_entity);
 
         if (orange_fur_material_joensuu == nullptr)
         {
@@ -152,10 +152,10 @@ namespace ajokki
         horse_species_struct.light_position = glm::vec3(0, 100000, 100000);
 
         std::cout << "Creating yli::ontology::Entity* horse_species_entity ...\n";
-        yli::ontology::Entity* horse_species_entity = entity_factory->create_Species(horse_species_struct);
+        yli::ontology::Entity* const horse_species_entity = entity_factory->create_Species(horse_species_struct);
 
         std::cout << "Creating yli::ontology::Species* horse_species ...\n";
-        yli::ontology::Species* horse_species = dynamic_cast<yli::ontology::Species*>(horse_species_entity);
+        yli::ontology::Species* const horse_species = dynamic_cast<yli::ontology::Species*>(horse_species_entity);
 
         if (horse_species == nullptr)
         {
@@ -172,8 +172,8 @@ namespace ajokki
         horse_object_struct1.rotate_angle = 0.00f;
         horse_object_struct1.rotate_vector = glm::vec3(1.0f, 1.0f, 1.0f);
         horse_object_struct1.translate_vector = glm::vec3(0.0f, 0.0f, 0.0f);
-        yli::ontology::Entity* horse1_entity = entity_factory->create_Object(horse_object_struct1);
-        yli::ontology::Object* horse1 = dynamic_cast<yli::ontology::Object*>(horse1_entity);
+        yli::ontology::Entity* const horse1_entity = entity_factory->create_Object(horse_object_struct1);
+        yli::ontology::Object* const horse1 = dynamic_cast<yli::ontology::Object*>(horse1_entity);
 
         if (horse1 == nullptr)
         {

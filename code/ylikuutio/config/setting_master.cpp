@@ -203,7 +203,7 @@ namespace yli
                 // C++ namespace!), so we need to request it from `yli::ontology::Universe`.
                 // We also want the `SettingMaster` of the same `Entity`.
 
-                yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
+                yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
                 if (universe == nullptr)
                 {
@@ -331,7 +331,7 @@ namespace yli
                 // C++ namespace!), so we need to request it from `yli::ontology::Universe`.
                 // We also want the `SettingMaster` of the same `Entity`.
 
-                yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
+                yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
                 if (universe == nullptr)
                 {
@@ -416,7 +416,7 @@ namespace yli
                 return nullptr;
             }
 
-            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
+            yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
             if (universe == nullptr)
             {
@@ -516,7 +516,7 @@ namespace yli
                 return nullptr;
             }
 
-            yli::ontology::Movable* movable = dynamic_cast<yli::ontology::Movable*>(entity);
+            yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(entity);
 
             if (movable != nullptr)
             {
@@ -536,7 +536,7 @@ namespace yli
                 return nullptr;
             }
 
-            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
+            yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
             if (universe == nullptr || setting_master->setting_pointer_map.count("spherical_coordinates") != 1)
             {
@@ -561,7 +561,7 @@ namespace yli
                 return nullptr;
             }
 
-            yli::ontology::Movable* movable = dynamic_cast<yli::ontology::Movable*>(entity);
+            yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(entity);
 
             if (movable != nullptr)
             {
@@ -581,7 +581,7 @@ namespace yli
                 return nullptr;
             }
 
-            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
+            yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
             if (universe == nullptr)
             {
@@ -611,7 +611,7 @@ namespace yli
                 return nullptr;
             }
 
-            yli::ontology::Movable* movable = dynamic_cast<yli::ontology::Movable*>(entity);
+            yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(entity);
 
             if (movable != nullptr)
             {
@@ -631,7 +631,7 @@ namespace yli
                 return nullptr;
             }
 
-            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
+            yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
             if (universe == nullptr)
             {
@@ -661,7 +661,7 @@ namespace yli
                 return nullptr;
             }
 
-            yli::ontology::Movable* movable = dynamic_cast<yli::ontology::Movable*>(entity);
+            yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(entity);
 
             if (movable != nullptr)
             {
@@ -681,7 +681,7 @@ namespace yli
                 return nullptr;
             }
 
-            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
+            yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
             if (universe == nullptr)
             {
@@ -711,7 +711,7 @@ namespace yli
                 return nullptr;
             }
 
-            yli::ontology::Movable* movable = dynamic_cast<yli::ontology::Movable*>(entity);
+            yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(entity);
 
             if (movable != nullptr)
             {
@@ -731,7 +731,7 @@ namespace yli
                 return nullptr;
             }
 
-            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
+            yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
             if (universe == nullptr || setting_master->setting_pointer_map.count("cartesian_coordinates") != 1)
             {
@@ -756,7 +756,7 @@ namespace yli
                 return nullptr;
             }
 
-            yli::ontology::Movable* movable = dynamic_cast<yli::ontology::Movable*>(entity);
+            yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(entity);
 
             if (movable != nullptr)
             {
@@ -775,7 +775,7 @@ namespace yli
                 movable->cartesian_coordinates.x = x_any_value->float_value;
                 movable->model_matrix[3][0] = x_any_value->float_value;
 
-                yli::ontology::Holobiont* holobiont = dynamic_cast<yli::ontology::Holobiont*>(movable);
+                yli::ontology::Holobiont* const holobiont = dynamic_cast<yli::ontology::Holobiont*>(movable);
 
                 if (holobiont != nullptr)
                 {
@@ -785,7 +785,7 @@ namespace yli
                 return nullptr;
             }
 
-            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
+            yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
             if (universe == nullptr)
             {
@@ -815,7 +815,7 @@ namespace yli
                 return nullptr;
             }
 
-            yli::ontology::Movable* movable = dynamic_cast<yli::ontology::Movable*>(entity);
+            yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(entity);
 
             if (movable != nullptr)
             {
@@ -834,7 +834,7 @@ namespace yli
                 movable->cartesian_coordinates.y = y_any_value->float_value;
                 movable->model_matrix[3][1] = y_any_value->float_value;
 
-                yli::ontology::Holobiont* holobiont = dynamic_cast<yli::ontology::Holobiont*>(movable);
+                yli::ontology::Holobiont* const holobiont = dynamic_cast<yli::ontology::Holobiont*>(movable);
 
                 if (holobiont != nullptr)
                 {
@@ -844,7 +844,7 @@ namespace yli
                 return nullptr;
             }
 
-            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
+            yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
             if (universe == nullptr)
             {
@@ -874,7 +874,7 @@ namespace yli
                 return nullptr;
             }
 
-            yli::ontology::Movable* movable = dynamic_cast<yli::ontology::Movable*>(entity);
+            yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(entity);
 
             if (movable != nullptr)
             {
@@ -893,7 +893,7 @@ namespace yli
                 movable->cartesian_coordinates.z = z_any_value->float_value;
                 movable->model_matrix[3][2] = z_any_value->float_value;
 
-                yli::ontology::Holobiont* holobiont = dynamic_cast<yli::ontology::Holobiont*>(movable);
+                yli::ontology::Holobiont* const holobiont = dynamic_cast<yli::ontology::Holobiont*>(movable);
 
                 if (holobiont != nullptr)
                 {
@@ -903,7 +903,7 @@ namespace yli
                 return nullptr;
             }
 
-            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
+            yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
             if (universe == nullptr)
             {
@@ -933,7 +933,7 @@ namespace yli
                 return nullptr;
             }
 
-            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
+            yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
             if (universe == nullptr)
             {
@@ -963,7 +963,7 @@ namespace yli
                 return nullptr;
             }
 
-            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
+            yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
             if (universe == nullptr)
             {
@@ -993,7 +993,7 @@ namespace yli
                 return nullptr;
             }
 
-            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
+            yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
             if (universe == nullptr)
             {
@@ -1023,7 +1023,7 @@ namespace yli
                 return nullptr;
             }
 
-            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
+            yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
             if (universe == nullptr)
             {
@@ -1053,7 +1053,7 @@ namespace yli
                 return nullptr;
             }
 
-            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
+            yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
             if (universe == nullptr)
             {
@@ -1083,7 +1083,7 @@ namespace yli
                 return nullptr;
             }
 
-            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
+            yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
             if (universe == nullptr)
             {
@@ -1113,7 +1113,7 @@ namespace yli
                 return nullptr;
             }
 
-            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
+            yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
             if (universe == nullptr)
             {
@@ -1291,14 +1291,14 @@ namespace yli
                 return nullptr;
             }
 
-            yli::ontology::Movable* movable = dynamic_cast<yli::ontology::Movable*>(entity);
+            yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(entity);
 
             if (movable != nullptr)
             {
                 return std::make_shared<yli::datatypes::AnyValue>(&movable->cartesian_coordinates);
             }
 
-            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
+            yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
             if (universe == nullptr)
             {
@@ -1315,14 +1315,14 @@ namespace yli
                 return nullptr;
             }
 
-            yli::ontology::Movable* movable = dynamic_cast<yli::ontology::Movable*>(entity);
+            yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(entity);
 
             if (movable != nullptr)
             {
                 return std::make_shared<yli::datatypes::AnyValue>(movable->cartesian_coordinates.x);
             }
 
-            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
+            yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
             if (universe == nullptr)
             {
@@ -1339,14 +1339,14 @@ namespace yli
                 return nullptr;
             }
 
-            yli::ontology::Movable* movable = dynamic_cast<yli::ontology::Movable*>(entity);
+            yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(entity);
 
             if (movable != nullptr)
             {
                 return std::make_shared<yli::datatypes::AnyValue>(movable->cartesian_coordinates.y);
             }
 
-            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
+            yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
             if (universe == nullptr)
             {
@@ -1363,14 +1363,14 @@ namespace yli
                 return nullptr;
             }
 
-            yli::ontology::Movable* movable = dynamic_cast<yli::ontology::Movable*>(entity);
+            yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(entity);
 
             if (movable != nullptr)
             {
                 return std::make_shared<yli::datatypes::AnyValue>(movable->cartesian_coordinates.z);
             }
 
-            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
+            yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
             if (universe == nullptr)
             {
@@ -1387,14 +1387,14 @@ namespace yli
                 return nullptr;
             }
 
-            yli::ontology::Movable* movable = dynamic_cast<yli::ontology::Movable*>(entity);
+            yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(entity);
 
             if (movable != nullptr)
             {
                 return std::make_shared<yli::datatypes::AnyValue>(movable->spherical_coordinates.rho);
             }
 
-            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
+            yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
             if (universe == nullptr)
             {
@@ -1411,14 +1411,14 @@ namespace yli
                 return nullptr;
             }
 
-            yli::ontology::Movable* movable = dynamic_cast<yli::ontology::Movable*>(entity);
+            yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(entity);
 
             if (movable != nullptr)
             {
                 return std::make_shared<yli::datatypes::AnyValue>(movable->spherical_coordinates.theta);
             }
 
-            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
+            yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
             if (universe == nullptr)
             {
@@ -1435,14 +1435,14 @@ namespace yli
                 return nullptr;
             }
 
-            yli::ontology::Movable* movable = dynamic_cast<yli::ontology::Movable*>(entity);
+            yli::ontology::Movable* const movable = dynamic_cast<yli::ontology::Movable*>(entity);
 
             if (movable != nullptr)
             {
                 return std::make_shared<yli::datatypes::AnyValue>(movable->spherical_coordinates.phi);
             }
 
-            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
+            yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
             if (universe == nullptr)
             {
@@ -1459,7 +1459,7 @@ namespace yli
                 return nullptr;
             }
 
-            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
+            yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
             if (universe == nullptr)
             {
@@ -1476,7 +1476,7 @@ namespace yli
                 return nullptr;
             }
 
-            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
+            yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
             if (universe == nullptr)
             {
@@ -1493,7 +1493,7 @@ namespace yli
                 return nullptr;
             }
 
-            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
+            yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
             if (universe == nullptr)
             {
@@ -1510,7 +1510,7 @@ namespace yli
                 return nullptr;
             }
 
-            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
+            yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
             if (universe == nullptr)
             {
@@ -1527,7 +1527,7 @@ namespace yli
                 return nullptr;
             }
 
-            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(entity);
+            yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(entity);
 
             if (universe == nullptr)
             {
