@@ -48,7 +48,7 @@ namespace yli
 
     namespace datatypes
     {
-        std::string AnyValue::get_datatype()
+        std::string AnyValue::get_datatype() const
         {
             std::string datatype_string;
 
