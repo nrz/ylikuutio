@@ -136,13 +136,13 @@ int main(const int argc, const char* argv[])
     new yli::config::Setting(planet_radius_setting_struct);
 
     std::cout << "Creating yli::callback_system::CallbackEngine* cleanup_callback_engine ...\n";
-    yli::callback_system::CallbackEngine* const cleanup_callback_engine = new yli::callback_system::CallbackEngine();
-    yli::callback_system::CallbackObject* const cleanup_callback_object = new yli::callback_system::CallbackObject(nullptr, cleanup_callback_engine);
+    yli::callback_system::CallbackEngine cleanup_callback_engine = yli::callback_system::CallbackEngine();
+    yli::callback_system::CallbackObject* const cleanup_callback_object = new yli::callback_system::CallbackObject(nullptr, &cleanup_callback_engine);
 
     if (my_universe->get_window() == nullptr)
     {
         std::cerr << "Failed to open SDL window.\n";
-        cleanup_callback_engine->execute();
+        cleanup_callback_engine.execute();
         return -1;
     }
 
@@ -152,7 +152,7 @@ int main(const int argc, const char* argv[])
     // Initialize GLEW.
     if (!yli::opengl::init_glew())
     {
-        cleanup_callback_engine->execute();
+        cleanup_callback_engine.execute();
         return -1;
     }
 
@@ -189,7 +189,7 @@ int main(const int argc, const char* argv[])
 
     if (earth_world == nullptr)
     {
-        cleanup_callback_engine->execute();
+        cleanup_callback_engine.execute();
         return -1;
     }
 
@@ -209,7 +209,7 @@ int main(const int argc, const char* argv[])
 
     if (helsinki_east_downtown_scene_entity == nullptr)
     {
-        cleanup_callback_engine->execute();
+        cleanup_callback_engine.execute();
         return -1;
     }
 
@@ -220,7 +220,7 @@ int main(const int argc, const char* argv[])
 
     if (helsinki_east_downtown_scene == nullptr)
     {
-        cleanup_callback_engine->execute();
+        cleanup_callback_engine.execute();
         return -1;
     }
 
@@ -235,7 +235,7 @@ int main(const int argc, const char* argv[])
     std::cout << "Creating yli::ontology::Scene* joensuu_center_west_scene and its contents ...\n";
     if (ajokki::create_joensuu_center_west_scene(entity_factory, earth_world) == nullptr)
     {
-        cleanup_callback_engine->execute();
+        cleanup_callback_engine.execute();
         return -1;
     }
 
@@ -246,7 +246,7 @@ int main(const int argc, const char* argv[])
     std::cout << "Creating yli::ontology::Scene* altiplano_scene and its contents ...\n";
     if (ajokki::create_altiplano_scene(entity_factory, earth_world) == nullptr)
     {
-        cleanup_callback_engine->execute();
+        cleanup_callback_engine.execute();
         return -1;
     }
 
@@ -257,7 +257,7 @@ int main(const int argc, const char* argv[])
     std::cout << "Creating yli::ontology::Scene* tallinn_scene and its contents ...\n";
     if (ajokki::create_tallinn_scene(entity_factory, earth_world) == nullptr)
     {
-        cleanup_callback_engine->execute();
+        cleanup_callback_engine.execute();
         return -1;
     }
 
@@ -282,7 +282,7 @@ int main(const int argc, const char* argv[])
     if (my_font2D == nullptr)
     {
         std::cerr << "Failed to create Font2D.\n";
-        cleanup_callback_engine->execute();
+        cleanup_callback_engine.execute();
         return -1;
     }
 
@@ -1173,7 +1173,7 @@ int main(const int argc, const char* argv[])
     }
 
     // do cleanup.
-    cleanup_callback_engine->execute();
+    cleanup_callback_engine.execute();
 
     // Delete all keyrelease callback engines.
     for (std::size_t i = 0; i < action_mode_keyrelease_callback_engines->size(); i++)
@@ -1188,8 +1188,6 @@ int main(const int argc, const char* argv[])
         delete action_mode_keypress_callback_engines->at(i).callback_engine;
     }
     delete action_mode_keypress_callback_engines;
-
-    delete cleanup_callback_engine;
 
     return 0;
 }
