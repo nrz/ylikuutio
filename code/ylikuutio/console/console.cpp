@@ -242,7 +242,7 @@ namespace yli
                 return;
             }
 
-            yli::ontology::Font2D* const font2D = this->universe->get_font2D();
+            yli::ontology::Font2D* const font2D = this->universe->get_active_font2D();
 
             if (font2D == nullptr)
             {
