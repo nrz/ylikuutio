@@ -569,7 +569,7 @@ namespace yli
                 std::size_t number_of_worlds;
 
                 yli::ontology::World* active_world;
-                yli::ontology::Font2D* font2D;
+                yli::ontology::Font2D* active_font2D;
 
                 yli::console::Console* console_pointer;     // pointer to `Console`.
 

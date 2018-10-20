@@ -91,7 +91,7 @@ namespace yli
             yli::hierarchy::delete_children<yli::ontology::World*>(this->world_pointer_vector, this->number_of_worlds);
 
             delete this->console_pointer;
-            delete this->font2D;
+            delete this->active_font2D;
 
             SDL_Quit();
         }
@@ -665,12 +665,12 @@ namespace yli
 
         yli::ontology::Font2D* Universe::get_font2D() const
         {
-            return this->font2D;
+            return this->active_font2D;
         }
 
         void Universe::set_font2D(yli::ontology::Font2D* const font2D)
         {
-            this->font2D = font2D;
+            this->active_font2D = font2D;
         }
 
         yli::console::Console* Universe::get_console() const
