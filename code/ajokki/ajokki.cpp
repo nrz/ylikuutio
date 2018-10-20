@@ -99,26 +99,26 @@ int main(const int argc, const char* argv[])
     int input_method_in_use = yli::input::KEYBOARD;
 
     // keypress callbacks.
-    std::vector<KeyAndCallbackStruct>* action_mode_keypress_callback_engines = new std::vector<KeyAndCallbackStruct>();
-    std::vector<KeyAndCallbackStruct>* action_mode_continuous_keypress_callback_engines = new std::vector<KeyAndCallbackStruct>();
+    std::vector<KeyAndCallbackStruct> action_mode_keypress_callback_engines = std::vector<KeyAndCallbackStruct>();
+    std::vector<KeyAndCallbackStruct> action_mode_continuous_keypress_callback_engines = std::vector<KeyAndCallbackStruct>();
 
     // This vector points to current keypress callback engines vector.
-    std::vector<KeyAndCallbackStruct>** current_keypress_callback_engine_vector_pointer;
+    std::vector<KeyAndCallbackStruct>* current_keypress_callback_engine_vector_pointer;
     current_keypress_callback_engine_vector_pointer = &action_mode_keypress_callback_engines;
 
     // keyrelease callbacks.
-    std::vector<KeyAndCallbackStruct>* action_mode_keyrelease_callback_engines = new std::vector<KeyAndCallbackStruct>();
+    std::vector<KeyAndCallbackStruct> action_mode_keyrelease_callback_engines = std::vector<KeyAndCallbackStruct>();
 
     // This vector points to current keyrelease callback engines vector.
-    std::vector<KeyAndCallbackStruct>** current_keyrelease_callback_engine_vector_pointer;
+    std::vector<KeyAndCallbackStruct>* current_keyrelease_callback_engine_vector_pointer;
     current_keyrelease_callback_engine_vector_pointer = &action_mode_keyrelease_callback_engines;
 
     // Create the world, store it in `my_universe`.
     std::cout << "Creating yli::ontology::Entity* my_universe_entity ...\n";
     UniverseStruct universe_struct;
     universe_struct.window_title = "Ajokki 0.0.3, powered by Ylikuutio 0.0.3";
-    universe_struct.current_keypress_callback_engine_vector_pointer_pointer = current_keypress_callback_engine_vector_pointer;
-    universe_struct.current_keyrelease_callback_engine_vector_pointer_pointer = current_keyrelease_callback_engine_vector_pointer;
+    universe_struct.current_keypress_callback_engine_vector_pointer_pointer = &current_keypress_callback_engine_vector_pointer;
+    universe_struct.current_keyrelease_callback_engine_vector_pointer_pointer = &current_keyrelease_callback_engine_vector_pointer;
     yli::ontology::Universe* const my_universe = new yli::ontology::Universe(universe_struct);
     my_universe->set_name("universe");
 
@@ -670,79 +670,79 @@ int main(const int argc, const char* argv[])
 
     // Keyrelease callbacks for action mode.
     // Key releases are checked in the order of this struct.
-    action_mode_keyrelease_callback_engines->push_back(KeyAndCallbackStruct { SDL_SCANCODE_LCTRL, release_first_turbo_callback_engine });
-    action_mode_keyrelease_callback_engines->push_back(KeyAndCallbackStruct { SDL_SCANCODE_RCTRL, release_second_turbo_callback_engine });
-    action_mode_keyrelease_callback_engines->push_back(KeyAndCallbackStruct { SDL_SCANCODE_I, enable_toggle_invert_mouse_callback_engine });
-    action_mode_keyrelease_callback_engines->push_back(KeyAndCallbackStruct { SDL_SCANCODE_F, enable_toggle_flight_mode_callback_engine });
-    action_mode_keyrelease_callback_engines->push_back(KeyAndCallbackStruct { SDL_SCANCODE_F1, enable_toggle_help_mode_callback_engine });
+    action_mode_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_LCTRL, release_first_turbo_callback_engine });
+    action_mode_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_RCTRL, release_second_turbo_callback_engine });
+    action_mode_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_I, enable_toggle_invert_mouse_callback_engine });
+    action_mode_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_F, enable_toggle_flight_mode_callback_engine });
+    action_mode_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_F1, enable_toggle_help_mode_callback_engine });
 
     // Keypress callbacks for action mode.
     // Keypresses are checked in the order of this struct.
-    action_mode_keypress_callback_engines->push_back(KeyAndCallbackStruct { SDL_SCANCODE_GRAVE, enter_console_callback_engine });
-    action_mode_keypress_callback_engines->push_back(KeyAndCallbackStruct { SDL_SCANCODE_ESCAPE, exit_program_callback_engine });
-    action_mode_keypress_callback_engines->push_back(KeyAndCallbackStruct { SDL_SCANCODE_LCTRL, first_turbo_callback_engine });
-    action_mode_keypress_callback_engines->push_back(KeyAndCallbackStruct { SDL_SCANCODE_RCTRL, second_turbo_callback_engine });
-    action_mode_keypress_callback_engines->push_back(KeyAndCallbackStruct { SDL_SCANCODE_I, toggle_invert_mouse_callback_engine });
-    action_mode_keypress_callback_engines->push_back(KeyAndCallbackStruct { SDL_SCANCODE_F, toggle_flight_mode_callback_engine });
-    action_mode_keypress_callback_engines->push_back(KeyAndCallbackStruct { SDL_SCANCODE_F1, toggle_help_mode_callback_engine });
-    action_mode_keypress_callback_engines->push_back(KeyAndCallbackStruct { SDL_SCANCODE_D, delete_suzanne_species_callback_engine });
-    action_mode_keypress_callback_engines->push_back(KeyAndCallbackStruct { SDL_SCANCODE_G, switch_to_grass_material_callback_engine });
-    action_mode_keypress_callback_engines->push_back(KeyAndCallbackStruct { SDL_SCANCODE_O, switch_to_orange_fur_material_callback_engine });
-    action_mode_keypress_callback_engines->push_back(KeyAndCallbackStruct { SDL_SCANCODE_P, switch_to_pink_geometric_tiles_material_callback_engine });
-    action_mode_keypress_callback_engines->push_back(KeyAndCallbackStruct { SDL_SCANCODE_T, transform_into_terrain_callback_engine });
-    action_mode_keypress_callback_engines->push_back(KeyAndCallbackStruct { SDL_SCANCODE_A, transform_into_monkey_callback_engine });
+    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_GRAVE, enter_console_callback_engine });
+    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_ESCAPE, exit_program_callback_engine });
+    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_LCTRL, first_turbo_callback_engine });
+    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_RCTRL, second_turbo_callback_engine });
+    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_I, toggle_invert_mouse_callback_engine });
+    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_F, toggle_flight_mode_callback_engine });
+    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_F1, toggle_help_mode_callback_engine });
+    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_D, delete_suzanne_species_callback_engine });
+    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_G, switch_to_grass_material_callback_engine });
+    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_O, switch_to_orange_fur_material_callback_engine });
+    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_P, switch_to_pink_geometric_tiles_material_callback_engine });
+    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_T, transform_into_terrain_callback_engine });
+    action_mode_keypress_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_A, transform_into_monkey_callback_engine });
 
     // Continuous keypress callbacks for action mode.
     // Keypresses are checked in the order of this struct.
-    action_mode_continuous_keypress_callback_engines->push_back(KeyAndCallbackStruct { SDL_SCANCODE_UP, move_forward_callback_engine });
-    action_mode_continuous_keypress_callback_engines->push_back(KeyAndCallbackStruct { SDL_SCANCODE_DOWN, move_backward_callback_engine });
-    action_mode_continuous_keypress_callback_engines->push_back(KeyAndCallbackStruct { SDL_SCANCODE_LEFT, strafe_left_callback_engine });
-    action_mode_continuous_keypress_callback_engines->push_back(KeyAndCallbackStruct { SDL_SCANCODE_RIGHT, strafe_right_callback_engine });
-    action_mode_continuous_keypress_callback_engines->push_back(KeyAndCallbackStruct { SDL_SCANCODE_SPACE, ascent_callback_engine });
-    action_mode_continuous_keypress_callback_engines->push_back(KeyAndCallbackStruct { SDL_SCANCODE_RETURN, descent_callback_engine });
+    action_mode_continuous_keypress_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_UP, move_forward_callback_engine });
+    action_mode_continuous_keypress_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_DOWN, move_backward_callback_engine });
+    action_mode_continuous_keypress_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_LEFT, strafe_left_callback_engine });
+    action_mode_continuous_keypress_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_RIGHT, strafe_right_callback_engine });
+    action_mode_continuous_keypress_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_SPACE, ascent_callback_engine });
+    action_mode_continuous_keypress_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_RETURN, descent_callback_engine });
 
     // Keyrelease callbacks for console.
     // Key releases are checked in the order of this struct.
-    std::vector<KeyAndCallbackStruct>* console_keyrelease_callback_engines = new std::vector<KeyAndCallbackStruct>();
-    console_keyrelease_callback_engines->push_back(KeyAndCallbackStruct { SDL_SCANCODE_LCTRL, release_left_control_in_console_callback_engine });
-    console_keyrelease_callback_engines->push_back(KeyAndCallbackStruct { SDL_SCANCODE_RCTRL, release_right_control_in_console_callback_engine });
-    console_keyrelease_callback_engines->push_back(KeyAndCallbackStruct { SDL_SCANCODE_LALT, release_left_alt_in_console_callback_engine });
-    console_keyrelease_callback_engines->push_back(KeyAndCallbackStruct { SDL_SCANCODE_RALT, release_right_alt_in_console_callback_engine });
-    console_keyrelease_callback_engines->push_back(KeyAndCallbackStruct { SDL_SCANCODE_LSHIFT, release_left_shift_in_console_callback_engine });
-    console_keyrelease_callback_engines->push_back(KeyAndCallbackStruct { SDL_SCANCODE_RSHIFT, release_right_shift_in_console_callback_engine });
-    console_keyrelease_callback_engines->push_back(KeyAndCallbackStruct { SDL_SCANCODE_UP, enable_move_to_previous_input_callback_engine });
-    console_keyrelease_callback_engines->push_back(KeyAndCallbackStruct { SDL_SCANCODE_DOWN, enable_move_to_next_input_callback_engine });
-    console_keyrelease_callback_engines->push_back(KeyAndCallbackStruct { SDL_SCANCODE_BACKSPACE, enable_backspace_callback_engine });
-    console_keyrelease_callback_engines->push_back(KeyAndCallbackStruct { SDL_SCANCODE_RETURN, enable_enter_key_callback_engine });
-    console_keyrelease_callback_engines->push_back(KeyAndCallbackStruct { SDL_SCANCODE_C, enable_ctrl_c_callback_engine });
-    console_keyrelease_callback_engines->push_back(KeyAndCallbackStruct { SDL_SCANCODE_W, enable_ctrl_w_callback_engine });
-    console_keyrelease_callback_engines->push_back(KeyAndCallbackStruct { SDL_SCANCODE_PAGEUP, enable_page_up_callback_engine });
-    console_keyrelease_callback_engines->push_back(KeyAndCallbackStruct { SDL_SCANCODE_PAGEDOWN, enable_page_down_callback_engine });
-    console_keyrelease_callback_engines->push_back(KeyAndCallbackStruct { SDL_SCANCODE_HOME, enable_home_callback_engine });
-    console_keyrelease_callback_engines->push_back(KeyAndCallbackStruct { SDL_SCANCODE_END, enable_end_callback_engine });
-    my_console->set_my_keyrelease_callback_engine_vector_pointer(console_keyrelease_callback_engines);
+    std::vector<KeyAndCallbackStruct> console_keyrelease_callback_engines = std::vector<KeyAndCallbackStruct>();
+    console_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_LCTRL, release_left_control_in_console_callback_engine });
+    console_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_RCTRL, release_right_control_in_console_callback_engine });
+    console_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_LALT, release_left_alt_in_console_callback_engine });
+    console_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_RALT, release_right_alt_in_console_callback_engine });
+    console_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_LSHIFT, release_left_shift_in_console_callback_engine });
+    console_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_RSHIFT, release_right_shift_in_console_callback_engine });
+    console_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_UP, enable_move_to_previous_input_callback_engine });
+    console_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_DOWN, enable_move_to_next_input_callback_engine });
+    console_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_BACKSPACE, enable_backspace_callback_engine });
+    console_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_RETURN, enable_enter_key_callback_engine });
+    console_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_C, enable_ctrl_c_callback_engine });
+    console_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_W, enable_ctrl_w_callback_engine });
+    console_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_PAGEUP, enable_page_up_callback_engine });
+    console_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_PAGEDOWN, enable_page_down_callback_engine });
+    console_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_HOME, enable_home_callback_engine });
+    console_keyrelease_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_END, enable_end_callback_engine });
+    my_console->set_my_keyrelease_callback_engine_vector_pointer(&console_keyrelease_callback_engines);
 
     // Keypress callbacks for console.
     // Keypresses are checked in the order of this struct.
-    std::vector<KeyAndCallbackStruct>* console_keypress_callback_engines = new std::vector<KeyAndCallbackStruct>();
-    console_keypress_callback_engines->push_back(KeyAndCallbackStruct { SDL_SCANCODE_GRAVE, exit_console_callback_engine });
-    console_keypress_callback_engines->push_back(KeyAndCallbackStruct { SDL_SCANCODE_LCTRL, press_left_control_in_console_callback_engine });
-    console_keypress_callback_engines->push_back(KeyAndCallbackStruct { SDL_SCANCODE_RCTRL, press_right_control_in_console_callback_engine });
-    console_keypress_callback_engines->push_back(KeyAndCallbackStruct { SDL_SCANCODE_LALT, press_left_alt_in_console_callback_engine });
-    console_keypress_callback_engines->push_back(KeyAndCallbackStruct { SDL_SCANCODE_RALT, press_right_alt_in_console_callback_engine });
-    console_keypress_callback_engines->push_back(KeyAndCallbackStruct { SDL_SCANCODE_LSHIFT, press_left_shift_in_console_callback_engine });
-    console_keypress_callback_engines->push_back(KeyAndCallbackStruct { SDL_SCANCODE_RSHIFT, press_right_shift_in_console_callback_engine });
-    console_keypress_callback_engines->push_back(KeyAndCallbackStruct { SDL_SCANCODE_UP, move_to_previous_input_callback_engine });
-    console_keypress_callback_engines->push_back(KeyAndCallbackStruct { SDL_SCANCODE_DOWN, move_to_next_input_callback_engine });
-    console_keypress_callback_engines->push_back(KeyAndCallbackStruct { SDL_SCANCODE_BACKSPACE, backspace_callback_engine });
-    console_keypress_callback_engines->push_back(KeyAndCallbackStruct { SDL_SCANCODE_RETURN, enter_callback_engine });
-    console_keypress_callback_engines->push_back(KeyAndCallbackStruct { SDL_SCANCODE_C, ctrl_c_callback_engine });
-    console_keypress_callback_engines->push_back(KeyAndCallbackStruct { SDL_SCANCODE_W, ctrl_w_callback_engine });
-    console_keypress_callback_engines->push_back(KeyAndCallbackStruct { SDL_SCANCODE_PAGEUP, page_up_callback_engine });
-    console_keypress_callback_engines->push_back(KeyAndCallbackStruct { SDL_SCANCODE_PAGEDOWN, page_down_callback_engine });
-    console_keypress_callback_engines->push_back(KeyAndCallbackStruct { SDL_SCANCODE_HOME, home_callback_engine });
-    console_keypress_callback_engines->push_back(KeyAndCallbackStruct { SDL_SCANCODE_END, end_callback_engine });
-    my_console->set_my_keypress_callback_engine_vector_pointer(console_keypress_callback_engines);
+    std::vector<KeyAndCallbackStruct> console_keypress_callback_engines = std::vector<KeyAndCallbackStruct>();
+    console_keypress_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_GRAVE, exit_console_callback_engine });
+    console_keypress_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_LCTRL, press_left_control_in_console_callback_engine });
+    console_keypress_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_RCTRL, press_right_control_in_console_callback_engine });
+    console_keypress_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_LALT, press_left_alt_in_console_callback_engine });
+    console_keypress_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_RALT, press_right_alt_in_console_callback_engine });
+    console_keypress_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_LSHIFT, press_left_shift_in_console_callback_engine });
+    console_keypress_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_RSHIFT, press_right_shift_in_console_callback_engine });
+    console_keypress_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_UP, move_to_previous_input_callback_engine });
+    console_keypress_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_DOWN, move_to_next_input_callback_engine });
+    console_keypress_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_BACKSPACE, backspace_callback_engine });
+    console_keypress_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_RETURN, enter_callback_engine });
+    console_keypress_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_C, ctrl_c_callback_engine });
+    console_keypress_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_W, ctrl_w_callback_engine });
+    console_keypress_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_PAGEUP, page_up_callback_engine });
+    console_keypress_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_PAGEDOWN, page_down_callback_engine });
+    console_keypress_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_HOME, home_callback_engine });
+    console_keypress_callback_engines.push_back(KeyAndCallbackStruct { SDL_SCANCODE_END, end_callback_engine });
+    my_console->set_my_keypress_callback_engine_vector_pointer(&console_keypress_callback_engines);
 
     /*********************************************************************\
      * Callback engines for console commands begin here.                 *
@@ -847,11 +847,11 @@ int main(const int argc, const char* argv[])
                 {
                     uint32_t scancode = static_cast<std::uint32_t>(sdl_event.key.keysym.scancode);
 
-                    for (std::size_t i = 0; i < (*current_keypress_callback_engine_vector_pointer)->size(); i++)
+                    for (std::size_t i = 0; i < current_keypress_callback_engine_vector_pointer->size(); i++)
                     {
-                        if ((*current_keypress_callback_engine_vector_pointer)->at(i).keycode == scancode)
+                        if (current_keypress_callback_engine_vector_pointer->at(i).keycode == scancode)
                         {
-                            yli::callback_system::CallbackEngine* const callback_engine = (*current_keypress_callback_engine_vector_pointer)->at(i).callback_engine;
+                            yli::callback_system::CallbackEngine* const callback_engine = current_keypress_callback_engine_vector_pointer->at(i).callback_engine;
                             const std::shared_ptr<yli::datatypes::AnyValue> any_value = callback_engine->execute();
 
                             if (any_value != nullptr &&
@@ -884,11 +884,11 @@ int main(const int argc, const char* argv[])
                 {
                     const uint32_t scancode = static_cast<std::uint32_t>(sdl_event.key.keysym.scancode);
 
-                    for (std::size_t i = 0; i < (*current_keyrelease_callback_engine_vector_pointer)->size(); i++)
+                    for (std::size_t i = 0; i < current_keyrelease_callback_engine_vector_pointer->size(); i++)
                     {
-                        if ((*current_keyrelease_callback_engine_vector_pointer)->at(i).keycode == scancode)
+                        if (current_keyrelease_callback_engine_vector_pointer->at(i).keycode == scancode)
                         {
-                            yli::callback_system::CallbackEngine* const callback_engine = (*current_keyrelease_callback_engine_vector_pointer)->at(i).callback_engine;
+                            yli::callback_system::CallbackEngine* const callback_engine = current_keyrelease_callback_engine_vector_pointer->at(i).callback_engine;
                             const std::shared_ptr<yli::datatypes::AnyValue> any_value = callback_engine->execute();
 
                             if (any_value != nullptr &&
@@ -987,13 +987,13 @@ int main(const int argc, const char* argv[])
                 const uint8_t* const current_key_states = SDL_GetKeyboardState(nullptr);
 
                 // Check for keypresses and call corresponding callbacks.
-                for (std::size_t i = 0; i < action_mode_continuous_keypress_callback_engines->size(); i++)
+                for (std::size_t i = 0; i < action_mode_continuous_keypress_callback_engines.size(); i++)
                 {
                     bool is_pressed = false;
 
                     if (input_method_in_use == yli::input::KEYBOARD)
                     {
-                        if (current_key_states[action_mode_continuous_keypress_callback_engines->at(i).keycode] == 1) // 1 = pressed, 0 = not pressed.
+                        if (current_key_states[action_mode_continuous_keypress_callback_engines.at(i).keycode] == 1) // 1 = pressed, 0 = not pressed.
                         {
                             is_pressed = true;
                         }
@@ -1013,7 +1013,7 @@ int main(const int argc, const char* argv[])
 
                     if (is_pressed)
                     {
-                        yli::callback_system::CallbackEngine* const callback_engine = action_mode_continuous_keypress_callback_engines->at(i).callback_engine;
+                        yli::callback_system::CallbackEngine* const callback_engine = action_mode_continuous_keypress_callback_engines.at(i).callback_engine;
                         const std::shared_ptr<yli::datatypes::AnyValue> any_value = callback_engine->execute();
 
                         if (any_value != nullptr &&
@@ -1175,27 +1175,6 @@ int main(const int argc, const char* argv[])
 
     // do cleanup.
     cleanup_callback_engine.execute();
-
-    // Delete all keyrelease callback engines.
-    for (std::size_t i = 0; i < action_mode_keyrelease_callback_engines->size(); i++)
-    {
-        delete action_mode_keyrelease_callback_engines->at(i).callback_engine;
-    }
-    delete action_mode_keyrelease_callback_engines;
-
-    // Delete all continuous keypress callback engines.
-    for (std::size_t i = 0; i < action_mode_continuous_keypress_callback_engines->size(); i++)
-    {
-        delete action_mode_continuous_keypress_callback_engines->at(i).callback_engine;
-    }
-    delete action_mode_continuous_keypress_callback_engines;
-
-    // Delete all keypress callback engines.
-    for (std::size_t i = 0; i < action_mode_keypress_callback_engines->size(); i++)
-    {
-        delete action_mode_keypress_callback_engines->at(i).callback_engine;
-    }
-    delete action_mode_keypress_callback_engines;
 
     return 0;
 }
