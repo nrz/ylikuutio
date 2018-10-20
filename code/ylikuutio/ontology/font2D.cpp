@@ -48,7 +48,7 @@ namespace yli
 
         yli::ontology::Entity* Font2D::get_parent() const
         {
-            // Currently `Font2D`'s do not any parents.
+            // Currently `Font2D`'s do not have any parents.
             return nullptr;
         }
 
