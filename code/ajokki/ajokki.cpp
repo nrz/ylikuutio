@@ -12,7 +12,6 @@
 #endif
 
 #include "ajokki_background_colors.hpp"
-#include "ajokki_cleanup_callbacks.hpp"
 #include "ajokki_console_callbacks.hpp"
 #include "ajokki_altiplano_scene.hpp"
 #include "ajokki_helsinki_east_downtown_scene.hpp"
@@ -135,7 +134,7 @@ int main(const int argc, const char* const argv[])
 
     std::cout << "Creating yli::callback_system::CallbackEngine* cleanup_callback_engine ...\n";
     yli::callback_system::CallbackEngine cleanup_callback_engine = yli::callback_system::CallbackEngine();
-    yli::callback_system::CallbackObject* const cleanup_callback_object = new yli::callback_system::CallbackObject(nullptr, &cleanup_callback_engine);
+    new yli::callback_system::CallbackObject(nullptr, &cleanup_callback_engine);
 
     if (my_universe->get_window() == nullptr)
     {
@@ -661,10 +660,6 @@ int main(const int argc, const char* const argv[])
     // Callback code for End.
     yli::callback_system::CallbackEngine* const end_callback_engine = new yli::callback_system::CallbackEngine();
     new yli::console::ConsoleCallbackObject(&yli::console::Console::end, end_callback_engine, my_console);
-
-    new yli::callback_system::CallbackParameter("", std::make_shared<yli::datatypes::AnyValue>(my_universe), false, cleanup_callback_object);
-    new yli::callback_system::CallbackParameter("font2D_pointer", std::make_shared<yli::datatypes::AnyValue>(my_font2D), false, cleanup_callback_object);
-    cleanup_callback_object->set_new_callback(&ajokki::full_cleanup);
 
     // Keyrelease callbacks for action mode.
     // Key releases are checked in the order of this struct.
