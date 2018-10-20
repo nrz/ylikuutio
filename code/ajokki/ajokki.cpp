@@ -103,15 +103,13 @@ int main(const int argc, const char* argv[])
     std::vector<KeyAndCallbackStruct> action_mode_continuous_keypress_callback_engines = std::vector<KeyAndCallbackStruct>();
 
     // This vector points to current keypress callback engines vector.
-    std::vector<KeyAndCallbackStruct>* current_keypress_callback_engine_vector_pointer;
-    current_keypress_callback_engine_vector_pointer = &action_mode_keypress_callback_engines;
+    std::vector<KeyAndCallbackStruct>* current_keypress_callback_engine_vector_pointer = &action_mode_keypress_callback_engines;
 
     // keyrelease callbacks.
     std::vector<KeyAndCallbackStruct> action_mode_keyrelease_callback_engines = std::vector<KeyAndCallbackStruct>();
 
     // This vector points to current keyrelease callback engines vector.
-    std::vector<KeyAndCallbackStruct>* current_keyrelease_callback_engine_vector_pointer;
-    current_keyrelease_callback_engine_vector_pointer = &action_mode_keyrelease_callback_engines;
+    std::vector<KeyAndCallbackStruct>* current_keyrelease_callback_engine_vector_pointer = &action_mode_keyrelease_callback_engines;
 
     // Create the world, store it in `my_universe`.
     std::cout << "Creating yli::ontology::Entity* my_universe_entity ...\n";
