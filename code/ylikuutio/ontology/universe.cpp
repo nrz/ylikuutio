@@ -20,6 +20,7 @@
 #include "entity.hpp"
 #include "world.hpp"
 #include "scene.hpp"
+#include "font2D.hpp"
 #include "ground_level.hpp"
 #include "render_templates.hpp"
 #include "family_templates.hpp"
@@ -69,7 +70,6 @@ namespace yli
     namespace ontology
     {
         class Species;
-        class Font2D;
 
         void Universe::bind_world(yli::ontology::World* const world)
         {
@@ -91,6 +91,7 @@ namespace yli
             yli::hierarchy::delete_children<yli::ontology::World*>(this->world_pointer_vector, this->number_of_worlds);
 
             delete this->console_pointer;
+            delete this->font2D;
 
             SDL_Quit();
         }
