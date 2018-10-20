@@ -82,9 +82,11 @@
 #include <cmath>         // NAN, std::isnan, std::pow
 #include <cstddef>       // std::size_t
 #include <cstdio>        // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf etc.
+#include <iomanip>       // std::setfill, std::setprecision, std::setw
 #include <iostream>      // std::cout, std::cin, std::cerr
 #include <limits>        // std::numeric_limits
 #include <memory>        // std::make_shared, std::shared_ptr
+#include <sstream>       // std::istringstream, std::ostringstream, std::stringstream
 #include <stdint.h>      // uint32_t etc.
 #include <string>        // std::string
 #include <unordered_map> // std::unordered_map
@@ -785,6 +787,7 @@ int main(const int argc, const char* const argv[])
     audio_master.play_playlist("Ajokki_playlist");
 
     SDL_Event sdl_event;
+    std::string ms_frame_text;
 
     while (!is_exit_requested)
     {
@@ -794,7 +797,6 @@ int main(const int argc, const char* const argv[])
         {
             last_time_for_display_sync = yli::time::get_time();
 
-            char ms_frame_text[256];
             number_of_frames++;
 
             while (current_time_in_main_loop - last_time_to_display_FPS >= 1.0f)
@@ -803,12 +805,10 @@ int main(const int argc, const char* const argv[])
                 // `std::printf` and reset.
                 if (number_of_frames > 0)
                 {
-                    std::snprintf(
-                            ms_frame_text,
-                            sizeof(ms_frame_text),
-                            "%.02f ms/frame; %d Hz",
-                            1000.0f / ((double) number_of_frames),
-                            number_of_frames);
+                    std::stringstream ms_frame_text_stringstream;
+                    ms_frame_text_stringstream << std::fixed << std::setprecision(2) << 1000.0f / static_cast<double>(number_of_frames) << " ms/frame; " <<
+                        number_of_frames << " Hz";
+                    ms_frame_text = ms_frame_text_stringstream.str();
                     ms_frame_text_ready = true;
                     number_of_frames = 0;
                 }
@@ -1151,7 +1151,7 @@ int main(const int argc, const char* const argv[])
                 // print frame rate data on top right corner.
                 printing_struct.x = my_universe->get_window_width();
                 printing_struct.y = my_universe->get_window_height();
-                printing_struct.text_char = ms_frame_text;
+                printing_struct.text_char = ms_frame_text.c_str();
                 printing_struct.horizontal_alignment = "right";
                 printing_struct.vertical_alignment = "top";
                 my_font2D->printText2D(printing_struct);
