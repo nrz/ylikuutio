@@ -1183,6 +1183,13 @@ int main(const int argc, const char* argv[])
     }
     delete action_mode_keyrelease_callback_engines;
 
+    // Delete all continuous keypress callback engines.
+    for (std::size_t i = 0; i < action_mode_continuous_keypress_callback_engines->size(); i++)
+    {
+        delete action_mode_continuous_keypress_callback_engines->at(i).callback_engine;
+    }
+    delete action_mode_continuous_keypress_callback_engines;
+
     // Delete all keypress callback engines.
     for (std::size_t i = 0; i < action_mode_keypress_callback_engines->size(); i++)
     {
