@@ -91,7 +91,7 @@
 #include <unordered_map> // std::unordered_map
 #include <vector>        // std::vector
 
-int main(const int argc, const char* argv[])
+int main(const int argc, const char* const argv[])
 {
     yli::command_line::CommandLineMaster command_line_master(argc, argv);
     command_line_master.print_keys_and_values();

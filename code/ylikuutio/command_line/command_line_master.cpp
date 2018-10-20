@@ -11,7 +11,7 @@ namespace yli
 {
     namespace command_line
     {
-        CommandLineMaster::CommandLineMaster(const int argc, const char* argv[])
+        CommandLineMaster::CommandLineMaster(const int argc, const char* const argv[])
         {
             this->argc = argc;
             this->arg_vector.assign(argv + 1, argv + argc);
