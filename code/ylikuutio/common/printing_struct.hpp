@@ -3,6 +3,7 @@
 
 // Include standard headers
 #include <cstddef> // std::size_t
+#include <string>  // std::string
 
 typedef struct PrintingStruct
 {
