@@ -91,6 +91,13 @@ namespace yli
             {
                 char character = text[i++];
 
+                if (i >= length)
+                {
+                    // Backslash `\` is the last character of string.
+                    // End processing to avoid buffer over-read.
+                    break;
+                }
+
                 if (character == (char) '\\')
                 {
                     // OK, this character was backslash, so read the next character.
@@ -167,6 +174,13 @@ namespace yli
                 {
                     // OK, this character was backslash, so read the next character.
                     character = text[i++];
+
+                    if (i >= length)
+                    {
+                        // Backslash `\` is the last character of string.
+                        // End processing to avoid buffer over-read.
+                        break;
+                    }
 
                     if (character == 'n')
                     {
