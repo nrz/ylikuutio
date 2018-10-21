@@ -381,7 +381,6 @@ add_library(ylikuutio STATIC
     code/ylikuutio/common/any_value.hpp
     code/ylikuutio/common/globals.hpp
     code/ylikuutio/common/pi.hpp
-    code/ylikuutio/common/printing_struct.hpp
     code/ylikuutio/common/spherical_coordinates_struct.hpp
 
     # config, in alphabetical order.
@@ -564,6 +563,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/text3D.hpp
     code/ylikuutio/ontology/text3D.cpp
     code/ylikuutio/ontology/text3D_struct.hpp
+    code/ylikuutio/ontology/text_struct.hpp
     code/ylikuutio/ontology/universe.cpp
     code/ylikuutio/ontology/universe.hpp
     code/ylikuutio/ontology/universe_struct.hpp

@@ -2,9 +2,9 @@
 #define __FONT2D_HPP_INCLUDED
 
 #include "entity.hpp"
+#include "text_struct.hpp"
 #include "code/ylikuutio/load/shader_loader.hpp"
 #include "code/ylikuutio/load/texture_loader.hpp"
-#include "code/ylikuutio/common/printing_struct.hpp"
 
 // Include GLEW
 #ifndef __GL_GLEW_H_INCLUDED
@@ -114,7 +114,7 @@ namespace yli
                         const std::string horizontal_alignment,
                         const std::string vertical_alignment) const;
 
-                void printText2D(const PrintingStruct& printing_struct);
+                void printText2D(const TextStruct& text_struct);
 
                 void printText2D(
                         std::size_t screen_width,

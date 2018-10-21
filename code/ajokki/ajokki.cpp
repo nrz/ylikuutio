@@ -52,6 +52,7 @@
 #include "code/ylikuutio/ontology/world.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/entity_factory.hpp"
+#include "code/ylikuutio/ontology/text_struct.hpp"
 #include "code/ylikuutio/config/setting.hpp"
 #include "code/ylikuutio/config/setting_master.hpp"
 #include "code/ylikuutio/config/setting_struct.hpp"
@@ -59,7 +60,6 @@
 #include "code/ylikuutio/opengl/vboindexer.hpp"
 #include "code/ylikuutio/time/time.hpp"
 #include "code/ylikuutio/common/any_value.hpp"
-#include "code/ylikuutio/common/printing_struct.hpp"
 #include "code/ylikuutio/common/pi.hpp"
 
 // Include GLEW
@@ -1044,12 +1044,12 @@ int main(const int argc, const char* const argv[])
             // Render the `Console` (including current input).
             my_console->render();
 
-            PrintingStruct printing_struct;
-            printing_struct.screen_width = my_universe->get_window_width();
-            printing_struct.screen_height = my_universe->get_window_height();
-            printing_struct.text_size = my_universe->get_text_size();
-            printing_struct.font_size = my_universe->get_font_size();
-            printing_struct.font_texture_file_format = "bmp";
+            TextStruct text_struct;
+            text_struct.screen_width = my_universe->get_window_width();
+            text_struct.screen_height = my_universe->get_window_height();
+            text_struct.text_size = my_universe->get_text_size();
+            text_struct.font_size = my_universe->get_font_size();
+            text_struct.font_texture_file_format = "bmp";
 
             std::stringstream angles_and_coordinates_stringstream;
             angles_and_coordinates_stringstream << std::fixed << std::setprecision(2) <<
@@ -1104,52 +1104,52 @@ int main(const int argc, const char* const argv[])
             }
 
             // print cartesian coordinates on bottom left corner.
-            printing_struct.x = 0;
-            printing_struct.y = 0;
-            printing_struct.text = angles_and_coordinates_string;
-            printing_struct.horizontal_alignment = "left";
-            printing_struct.vertical_alignment = "bottom";
-            my_font2D->printText2D(printing_struct);
+            text_struct.x = 0;
+            text_struct.y = 0;
+            text_struct.text = angles_and_coordinates_string;
+            text_struct.horizontal_alignment = "left";
+            text_struct.vertical_alignment = "bottom";
+            my_font2D->printText2D(text_struct);
 
             if (my_universe->in_help_mode && my_universe->can_display_help_screen)
             {
                 // print help text.
-                printing_struct.x = 0;
-                printing_struct.y = my_universe->get_window_height() - (3 * my_universe->get_text_size());
-                printing_struct.text = help_text_string;
-                printing_struct.horizontal_alignment = "left";
-                printing_struct.vertical_alignment = "top";
-                my_font2D->printText2D(printing_struct);
+                text_struct.x = 0;
+                text_struct.y = my_universe->get_window_height() - (3 * my_universe->get_text_size());
+                text_struct.text = help_text_string;
+                text_struct.horizontal_alignment = "left";
+                text_struct.vertical_alignment = "top";
+                my_font2D->printText2D(text_struct);
             }
 
             if (my_universe->testing_spherical_terrain_in_use)
             {
                 // print spherical coordinates on bottom left corner.
-                printing_struct.x = 0;
-                printing_struct.y += 2 * my_universe->get_text_size();
-                printing_struct.text = spherical_coordinates_string;
-                printing_struct.horizontal_alignment = "left";
-                printing_struct.vertical_alignment = "bottom";
-                my_font2D->printText2D(printing_struct);
+                text_struct.x = 0;
+                text_struct.y += 2 * my_universe->get_text_size();
+                text_struct.text = spherical_coordinates_string;
+                text_struct.horizontal_alignment = "left";
+                text_struct.vertical_alignment = "bottom";
+                my_font2D->printText2D(text_struct);
             }
 
             // print time data on top left corner.
-            printing_struct.x = 0;
-            printing_struct.y = static_cast<GLuint>(my_universe->get_window_height());
-            printing_struct.text = time_string;
-            printing_struct.horizontal_alignment = "left";
-            printing_struct.vertical_alignment = "top";
-            my_font2D->printText2D(printing_struct);
+            text_struct.x = 0;
+            text_struct.y = static_cast<GLuint>(my_universe->get_window_height());
+            text_struct.text = time_string;
+            text_struct.horizontal_alignment = "left";
+            text_struct.vertical_alignment = "top";
+            my_font2D->printText2D(text_struct);
 
             if (ms_frame_text_ready)
             {
                 // print frame rate data on top right corner.
-                printing_struct.x = my_universe->get_window_width();
-                printing_struct.y = my_universe->get_window_height();
-                printing_struct.text = ms_frame_text;
-                printing_struct.horizontal_alignment = "right";
-                printing_struct.vertical_alignment = "top";
-                my_font2D->printText2D(printing_struct);
+                text_struct.x = my_universe->get_window_width();
+                text_struct.y = my_universe->get_window_height();
+                text_struct.text = ms_frame_text;
+                text_struct.horizontal_alignment = "right";
+                text_struct.vertical_alignment = "top";
+                my_font2D->printText2D(text_struct);
             }
 
             yli::opengl::enable_depth_test();

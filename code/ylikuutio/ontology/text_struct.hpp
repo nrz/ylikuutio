@@ -1,13 +1,13 @@
-#ifndef __PRINTING_STRUCT_HPP_INCLUDED
-#define __PRINTING_STRUCT_HPP_INCLUDED
+#ifndef __TEXT_STRUCT_HPP_INCLUDED
+#define __TEXT_STRUCT_HPP_INCLUDED
 
 // Include standard headers
 #include <cstddef> // std::size_t
 #include <string>  // std::string
 
-typedef struct PrintingStruct
+typedef struct TextStruct
 {
-    PrintingStruct()
+    TextStruct()
         : screen_width(0),
         screen_height(0),
         x(0),
@@ -27,6 +27,6 @@ typedef struct PrintingStruct
     std::string font_texture_file_format;
     std::string horizontal_alignment;
     std::string vertical_alignment;
-} PrintingStruct;
+} TextStruct;
 
 #endif

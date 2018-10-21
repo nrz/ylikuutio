@@ -1,5 +1,5 @@
 #include "font2D.hpp"
-#include "code/ylikuutio/common/printing_struct.hpp"
+#include "text_struct.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -292,35 +292,35 @@ namespace yli
             glDisableVertexAttribArray(vertexUVID);
         }
 
-        void Font2D::printText2D(const PrintingStruct& printing_struct)
+        void Font2D::printText2D(const TextStruct& text_struct)
         {
-            if (printing_struct.text.empty())
+            if (text_struct.text.empty())
             {
                 printText2D(
-                        printing_struct.screen_width,
-                        printing_struct.screen_height,
-                        printing_struct.x,
-                        printing_struct.y,
-                        printing_struct.text_size,
-                        printing_struct.font_size,
-                        printing_struct.text,
-                        printing_struct.font_texture_file_format,
-                        printing_struct.horizontal_alignment,
-                        printing_struct.vertical_alignment);
+                        text_struct.screen_width,
+                        text_struct.screen_height,
+                        text_struct.x,
+                        text_struct.y,
+                        text_struct.text_size,
+                        text_struct.font_size,
+                        text_struct.text,
+                        text_struct.font_texture_file_format,
+                        text_struct.horizontal_alignment,
+                        text_struct.vertical_alignment);
             }
             else
             {
                 printText2D(
-                        printing_struct.screen_width,
-                        printing_struct.screen_height,
-                        printing_struct.x,
-                        printing_struct.y,
-                        printing_struct.text_size,
-                        printing_struct.font_size,
-                        printing_struct.text,
-                        printing_struct.font_texture_file_format,
-                        printing_struct.horizontal_alignment,
-                        printing_struct.vertical_alignment);
+                        text_struct.screen_width,
+                        text_struct.screen_height,
+                        text_struct.x,
+                        text_struct.y,
+                        text_struct.text_size,
+                        text_struct.font_size,
+                        text_struct.text,
+                        text_struct.font_texture_file_format,
+                        text_struct.horizontal_alignment,
+                        text_struct.vertical_alignment);
             }
         }
 
