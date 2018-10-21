@@ -67,6 +67,24 @@ namespace yli
                 const std::string horizontal_alignment,
                 const std::string vertical_alignment) const
         {
+            // Bind shader
+            glUseProgram(programID);
+
+            // Bind texture
+            glActiveTexture(GL_TEXTURE0);
+            glBindTexture(GL_TEXTURE_2D, texture);
+            // Set our "myTextureSampler" sampler to user Material Unit 0
+            glUniform1i(Text2DUniformID, 0);
+
+            // Set screen width.
+            glUniform1i(screen_width_uniform_ID, screen_width);
+
+            // Set screen height.
+            glUniform1i(screen_height_uniform_ID, screen_height);
+
+            glEnable(GL_BLEND);
+            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
             // If horizontal alignment is `"left"`, each line begins from the same x coordinate.
             // If horizontal alignment is `"left"` and vertical alignment is `"top"`,
             // then there is no need to check the text beforehand for newlines.
@@ -255,21 +273,6 @@ namespace yli
             glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
             glBufferData(GL_ARRAY_BUFFER, UVs.size() * sizeof(glm::vec2), &UVs[0], GL_STATIC_DRAW);
 
-            // Bind shader
-            glUseProgram(programID);
-
-            // Bind texture
-            glActiveTexture(GL_TEXTURE0);
-            glBindTexture(GL_TEXTURE_2D, texture);
-            // Set our "myTextureSampler" sampler to user Material Unit 0
-            glUniform1i(Text2DUniformID, 0);
-
-            // Set screen width.
-            glUniform1i(screen_width_uniform_ID, screen_width);
-
-            // Set screen height.
-            glUniform1i(screen_height_uniform_ID, screen_height);
-
             // 1st attribute buffer : vertices
             glEnableVertexAttribArray(vertex_position_in_screenspaceID);
             glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
@@ -280,16 +283,13 @@ namespace yli
             glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
             glVertexAttribPointer(vertexUVID, 2, GL_FLOAT, GL_FALSE, 0, (void*) 0);
 
-            glEnable(GL_BLEND);
-            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
             // Draw call
             glDrawArrays(GL_TRIANGLES, 0, vertices.size());
 
-            glDisable(GL_BLEND);
-
             glDisableVertexAttribArray(vertex_position_in_screenspaceID);
             glDisableVertexAttribArray(vertexUVID);
+
+            glDisable(GL_BLEND);
         }
 
         void Font2D::printText2D(const TextStruct& text_struct)
