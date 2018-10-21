@@ -17,13 +17,13 @@ Ylikuutio is a 3D game engine designed for 3D games and simulations.
 Ylikuutio aims to run fast and support also older hardware.
 Currently Ylikuutio works on 64-bit Linux and Windows systems.
 Android support is a work in progress.
+OpenGL 3.0 or newer is required.
 
 ## Compiling
 Ylikuutio can be compiled with GCC, Clang or Visual Studio.
 In Visual Studio compiling may break due to compiler-specific bugs.
 Cross compiling from Linux® to Windows using MinGW-w64 works fine.
 C++14 support is required.
-OpenGL 3.0 or newer is required.
 CMake 2.6.2 or newer is needed for the compiling process, but
 external libraries such as `glm` require CMake 3.2 or a newer version.
 CMake uses git for downloading Google Test testing framework.
