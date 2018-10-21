@@ -230,7 +230,7 @@ namespace yli
             yli::map::print_keys_to_console(&this->command_callback_map, this);
         }
 
-        void Console::draw_console() const
+        void Console::render() const
         {
             if (!this->in_console)
             {

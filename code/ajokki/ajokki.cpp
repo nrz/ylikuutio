@@ -1041,8 +1041,8 @@ int main(const int argc, const char* const argv[])
 
             yli::opengl::disable_depth_test();
 
-            // Draw the console (including current input).
-            my_console->draw_console();
+            // Render the `Console` (including current input).
+            my_console->render();
 
             PrintingStruct printing_struct;
             printing_struct.screen_width = my_universe->get_window_width();
