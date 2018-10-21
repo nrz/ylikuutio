@@ -801,8 +801,8 @@ int main(const int argc, const char* const argv[])
 
             while (current_time_in_main_loop - last_time_to_display_FPS >= 1.0f)
             {
-                // If last `std::printf()` was more than 1 sec ago,
-                // `std::printf` and reset.
+                // If last `std::stringstream` here was more than 1 sec ago,
+                // std::stringstream` and reset number of frames.
                 if (number_of_frames > 0)
                 {
                     std::stringstream ms_frame_text_stringstream;
