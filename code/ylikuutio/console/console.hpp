@@ -76,7 +76,7 @@ namespace yli
                 void set_console_right_x(const uint32_t console_right_x);
                 void print_text(const std::string& text);
                 void print_help();
-                void draw_console() const;
+                void render() const;
 
                 bool get_in_console() const;
                 void process_key_event(const SDL_KeyboardEvent& keyboard_event);

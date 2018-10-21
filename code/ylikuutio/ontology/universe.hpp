@@ -405,8 +405,8 @@ namespace yli
                 // this method stes the active `Scene`.
                 void set_active_scene(yli::ontology::Scene* const world);
 
-                yli::ontology::Font2D* get_font2D() const;
-                void set_font2D(yli::ontology::Font2D* const font2D);
+                yli::ontology::Font2D* get_active_font2D() const;
+                void set_active_font2D(yli::ontology::Font2D* const font2D);
 
                 yli::console::Console* get_console() const;
                 void set_console(yli::console::Console* console);
@@ -569,7 +569,7 @@ namespace yli
                 std::size_t number_of_worlds;
 
                 yli::ontology::World* active_world;
-                yli::ontology::Font2D* font2D;
+                yli::ontology::Font2D* active_font2D;
 
                 yli::console::Console* console_pointer;     // pointer to `Console`.
 

@@ -20,6 +20,7 @@
 #include "entity.hpp"
 #include "world.hpp"
 #include "scene.hpp"
+#include "font2D.hpp"
 #include "ground_level.hpp"
 #include "render_templates.hpp"
 #include "family_templates.hpp"
@@ -69,7 +70,6 @@ namespace yli
     namespace ontology
     {
         class Species;
-        class Font2D;
 
         void Universe::bind_world(yli::ontology::World* const world)
         {
@@ -91,6 +91,7 @@ namespace yli
             yli::hierarchy::delete_children<yli::ontology::World*>(this->world_pointer_vector, this->number_of_worlds);
 
             delete this->console_pointer;
+            delete this->active_font2D;
 
             SDL_Quit();
         }
@@ -326,7 +327,7 @@ namespace yli
                 return nullptr;
             }
 
-            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(universe_entity);
+            yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(universe_entity);
 
             if (universe == nullptr)
             {
@@ -356,8 +357,8 @@ namespace yli
                 }
 
                 yli::ontology::Entity* entity = universe->entity_map[name];
-                yli::ontology::World* world = dynamic_cast<yli::ontology::World*>(entity);
-                yli::ontology::Scene* scene = dynamic_cast<yli::ontology::Scene*>(entity);
+                yli::ontology::World* const world = dynamic_cast<yli::ontology::World*>(entity);
+                yli::ontology::Scene* const scene = dynamic_cast<yli::ontology::Scene*>(entity);
 
                 if (world == nullptr && scene == nullptr)
                 {
@@ -395,7 +396,7 @@ namespace yli
                 return nullptr;
             }
 
-            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(universe_entity);
+            yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(universe_entity);
 
             if (universe == nullptr)
             {
@@ -451,7 +452,7 @@ namespace yli
                 return nullptr;
             }
 
-            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(universe_entity);
+            yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(universe_entity);
 
             if (universe == nullptr)
             {
@@ -537,7 +538,7 @@ namespace yli
                 return nullptr;
             }
 
-            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(universe_entity);
+            yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(universe_entity);
 
             if (universe == nullptr)
             {
@@ -590,7 +591,7 @@ namespace yli
                 return nullptr;
             }
 
-            yli::ontology::Universe* universe = dynamic_cast<yli::ontology::Universe*>(universe_entity);
+            yli::ontology::Universe* const universe = dynamic_cast<yli::ontology::Universe*>(universe_entity);
 
             if (universe == nullptr)
             {
@@ -662,14 +663,14 @@ namespace yli
 
         // Public callbacks end here.
 
-        yli::ontology::Font2D* Universe::get_font2D() const
+        yli::ontology::Font2D* Universe::get_active_font2D() const
         {
-            return this->font2D;
+            return this->active_font2D;
         }
 
-        void Universe::set_font2D(yli::ontology::Font2D* const font2D)
+        void Universe::set_active_font2D(yli::ontology::Font2D* const font2D)
         {
-            this->font2D = font2D;
+            this->active_font2D = font2D;
         }
 
         yli::console::Console* Universe::get_console() const

@@ -36,9 +36,9 @@ namespace ajokki
         // altiplano `Scene` begins here.
 
         std::cout << "Creating yli::ontology::Entity* altiplano_scene_entity ...\n";
-        yli::ontology::Entity* altiplano_scene_entity = entity_factory->create_Scene(world, 3815.51f);
+        yli::ontology::Entity* const altiplano_scene_entity = entity_factory->create_Scene(world, 3815.51f);
         std::cout << "Creating yli::ontology::Scene* altiplano_scene ...\n";
-        yli::ontology::Scene* altiplano_scene = dynamic_cast<yli::ontology::Scene*>(altiplano_scene_entity);
+        yli::ontology::Scene* const altiplano_scene = dynamic_cast<yli::ontology::Scene*>(altiplano_scene_entity);
 
         if (altiplano_scene == nullptr)
         {
@@ -61,9 +61,9 @@ namespace ajokki
         altiplano_shader_struct.fragment_shader = "StandardShading.fragmentshader";
 
         std::cout << "Creating yli::ontology::Entity* altiplano_shader_entity ...\n";
-        yli::ontology::Entity* altiplano_shader_entity = entity_factory->create_Shader(altiplano_shader_struct);
+        yli::ontology::Entity* const altiplano_shader_entity = entity_factory->create_Shader(altiplano_shader_struct);
         std::cout << "Creating yli::ontology::Shader* altiplano_shader ...\n";
-        yli::ontology::Shader* altiplano_shader = dynamic_cast<yli::ontology::Shader*>(altiplano_shader_entity);
+        yli::ontology::Shader* const altiplano_shader = dynamic_cast<yli::ontology::Shader*>(altiplano_shader_entity);
 
         if (altiplano_shader == nullptr)
         {
@@ -78,9 +78,9 @@ namespace ajokki
         altiplano_grass_material_struct.texture_filename = "GrassGreenTexture0002.bmp";
 
         std::cout << "Creating yli::ontology::Entity* altiplano_grass_material_entity ...\n";
-        yli::ontology::Entity* altiplano_grass_material_entity = entity_factory->create_Material(altiplano_grass_material_struct);
+        yli::ontology::Entity* const altiplano_grass_material_entity = entity_factory->create_Material(altiplano_grass_material_struct);
         std::cout << "Creating yli::ontology::Material* altiplano_grass_material ...\n";
-        yli::ontology::Material* altiplano_grass_material = dynamic_cast<yli::ontology::Material*>(altiplano_grass_material_entity);
+        yli::ontology::Material* const altiplano_grass_material = dynamic_cast<yli::ontology::Material*>(altiplano_grass_material_entity);
 
         if (altiplano_grass_material == nullptr)
         {
@@ -104,9 +104,9 @@ namespace ajokki
         altiplano_terrain_species_struct.z_step = 1;
 
         std::cout << "Creating yli::ontology::Entity* altiplano_terrain_species_entity ...\n";
-        yli::ontology::Entity* altiplano_terrain_species_entity = entity_factory->create_Species(altiplano_terrain_species_struct);
+        yli::ontology::Entity* const altiplano_terrain_species_entity = entity_factory->create_Species(altiplano_terrain_species_struct);
         std::cout << "Creating yli::ontology::Species* altiplano_terrain_species ...\n";
-        yli::ontology::Species* altiplano_terrain_species = dynamic_cast<yli::ontology::Species*>(altiplano_terrain_species_entity);
+        yli::ontology::Species* const altiplano_terrain_species = dynamic_cast<yli::ontology::Species*>(altiplano_terrain_species_entity);
 
         if (altiplano_terrain_species == nullptr)
         {

@@ -75,7 +75,7 @@ namespace yli
         typedef class AnyValue
         {
             public:
-                std::string get_datatype();
+                std::string get_datatype() const;
                 std::string get_string() const;
                 yli::ontology::Entity* get_entity_pointer() const;
                 bool set_value(const std::string& value_string);

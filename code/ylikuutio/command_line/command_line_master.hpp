@@ -10,7 +10,7 @@ namespace yli
         class CommandLineMaster
         {
             public:
-                CommandLineMaster(const int argc, const char* argv[]);
+                CommandLineMaster(const int argc, const char* const argv[]);
                 bool is_key(const std::string& key);
                 std::string get_value(const std::string& key);
                 void print_keys();

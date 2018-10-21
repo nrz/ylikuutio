@@ -87,7 +87,7 @@ namespace yli
             // and requests a new `childID` from the new `Scene`.
             //
             // requirements:
-            // `this->symbiosis_parent` must not be `nullptr`.
+            // `this->parent` must not be `nullptr`.
             // `new_parent` must not be `nullptr`.
 
             yli::ontology::Scene* const scene = this->parent;

@@ -2,10 +2,10 @@
 #include "console_command_callback.hpp"
 #include "code/ylikuutio/ontology/font2D.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
+#include "code/ylikuutio/ontology/text_struct.hpp"
 #include "code/ylikuutio/callback_system/key_and_callback_struct.hpp"
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
 #include "code/ylikuutio/map/ylikuutio_map.hpp"
-#include "code/ylikuutio/common/printing_struct.hpp"
 
 #include "SDL.h"
 
@@ -230,7 +230,7 @@ namespace yli
             yli::map::print_keys_to_console(&this->command_callback_map, this);
         }
 
-        void Console::draw_console() const
+        void Console::render() const
         {
             if (!this->in_console)
             {
@@ -242,7 +242,7 @@ namespace yli
                 return;
             }
 
-            yli::ontology::Font2D* const font2D = this->universe->get_font2D();
+            yli::ontology::Font2D* const font2D = this->universe->get_active_font2D();
 
             if (font2D == nullptr)
             {
@@ -253,17 +253,17 @@ namespace yli
             std::size_t characters_for_line = this->universe->get_window_width() / this->universe->get_text_size();
 
             // Draw the console to screen using `font2D::printText2D`.
-            PrintingStruct printing_struct;
-            printing_struct.screen_width = this->universe->get_window_width();
-            printing_struct.screen_height = this->universe->get_window_height();
-            printing_struct.text_size = this->universe->get_text_size();
-            printing_struct.font_size = this->universe->get_font_size();
-            printing_struct.char_font_texture_file_format = "bmp";
+            TextStruct text_struct;
+            text_struct.screen_width = this->universe->get_window_width();
+            text_struct.screen_height = this->universe->get_window_height();
+            text_struct.text_size = this->universe->get_text_size();
+            text_struct.font_size = this->universe->get_font_size();
+            text_struct.font_texture_file_format = "bmp";
 
-            printing_struct.x = 0;
-            printing_struct.y = this->universe->get_window_height() - (2 * this->universe->get_text_size());
-            printing_struct.horizontal_alignment = "left";
-            printing_struct.vertical_alignment = "top";
+            text_struct.x = 0;
+            text_struct.y = this->universe->get_window_height() - (2 * this->universe->get_text_size());
+            text_struct.horizontal_alignment = "left";
+            text_struct.vertical_alignment = "top";
 
             if (this->in_history)
             {
@@ -272,7 +272,7 @@ namespace yli
                 for (std::size_t history_i = history_line_i; history_i < history_end_i && history_i < this->console_history.size(); history_i++)
                 {
                     std::list<char> historical_text = this->console_history.at(history_i);
-                    printing_struct.text += yli::string::convert_std_list_char_to_std_string(historical_text, characters_for_line, characters_for_line) + "\\n";
+                    text_struct.text += yli::string::convert_std_list_char_to_std_string(historical_text, characters_for_line, characters_for_line) + "\\n";
                 }
             }
             else
@@ -304,7 +304,7 @@ namespace yli
                     // Print only n last lines.
                     for (std::size_t i = current_input_vector.size() - this->n_rows; i < current_input_vector.size(); i++)
                     {
-                        printing_struct.text += current_input_vector.at(i) + "\\n";
+                        text_struct.text += current_input_vector.at(i) + "\\n";
                     }
                 }
                 else
@@ -326,16 +326,16 @@ namespace yli
                     for (std::size_t history_i = history_start_i; history_i < this->console_history.size(); history_i++)
                     {
                         std::list<char> historical_text = this->console_history.at(history_i);
-                        printing_struct.text += yli::string::convert_std_list_char_to_std_string(historical_text, characters_for_line, characters_for_line) + "\\n";
+                        text_struct.text += yli::string::convert_std_list_char_to_std_string(historical_text, characters_for_line, characters_for_line) + "\\n";
                     }
-                    printing_struct.text += this->prompt + yli::string::convert_std_list_char_to_std_string(
+                    text_struct.text += this->prompt + yli::string::convert_std_list_char_to_std_string(
                             this->current_input,
                             characters_for_line - this->prompt.size(), // First line is shorter due to space taken by the prompt.
                             characters_for_line);                      // The rest lines have full length.
                 }
             }
 
-            font2D->printText2D(printing_struct);
+            font2D->printText2D(text_struct);
         }
 
         bool Console::get_in_console() const

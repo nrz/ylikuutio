@@ -2,9 +2,9 @@
 #define __FONT2D_HPP_INCLUDED
 
 #include "entity.hpp"
+#include "text_struct.hpp"
 #include "code/ylikuutio/load/shader_loader.hpp"
 #include "code/ylikuutio/load/texture_loader.hpp"
-#include "code/ylikuutio/common/printing_struct.hpp"
 
 // Include GLEW
 #ifndef __GL_GLEW_H_INCLUDED
@@ -14,7 +14,6 @@
 
 // Include standard headers
 #include <cstddef>   // std::size_t
-#include <cstring>   // std::memcmp, std::memcpy, std::strcmp, std::strlen, std::strncmp
 #include <string>    // std::string
 
 namespace yli
@@ -29,8 +28,8 @@ namespace yli
                 // constructor.
                 Font2D(
                         yli::ontology::Universe* const universe,
-                        GLuint screen_width,
-                        GLuint screen_height,
+                        std::size_t screen_width,
+                        std::size_t screen_height,
                         const std::string& texture_filename,
                         const std::string& font_texture_file_format)
                     : Entity(universe)
@@ -104,28 +103,28 @@ namespace yli
                 std::size_t get_number_of_descendants() const override;
 
                 void printText2D(
-                        GLuint screen_width,
-                        GLuint screen_height,
-                        GLuint x,
-                        GLuint y,
-                        GLuint text_size,
-                        GLuint font_size,
-                        const char* const text_char,
-                        const char* const char_font_texture_file_format,
-                        const char* const horizontal_alignment,
-                        const char* const vertical_alignment) const;
+                        std::size_t screen_width,
+                        std::size_t screen_height,
+                        std::size_t x,
+                        std::size_t y,
+                        std::size_t text_size,
+                        std::size_t font_size,
+                        const std::string text,
+                        const std::string font_texture_file_format,
+                        const std::string horizontal_alignment,
+                        const std::string vertical_alignment) const;
 
-                void printText2D(const PrintingStruct& printing_struct);
+                void printText2D(const TextStruct& text_struct);
 
                 void printText2D(
-                        GLuint screen_width,
-                        GLuint screen_height,
-                        GLuint x,
-                        GLuint y,
-                        GLuint text_size,
-                        GLuint font_size,
-                        const char* const text_char,
-                        const char* const char_font_texture_file_format);
+                        std::size_t screen_width,
+                        std::size_t screen_height,
+                        std::size_t x,
+                        std::size_t y,
+                        std::size_t text_size,
+                        std::size_t font_size,
+                        const std::string text,
+                        const std::string font_texture_file_format);
 
             private:
                 GLuint texture;      // Texture containing the glyphs, reterned by `load_BMP_texture` or `load_DDS_texture` (used for `glGenTextures` etc.).
