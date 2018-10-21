@@ -1,12 +1,6 @@
 #include "font2D.hpp"
 #include "code/ylikuutio/common/printing_struct.hpp"
 
-// Include GLEW
-#ifndef __GL_GLEW_H_INCLUDED
-#define __GL_GLEW_H_INCLUDED
-#include <GL/glew.h> // GLfloat, GLuint etc.
-#endif
-
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
 #define __GLM_GLM_HPP_INCLUDED
@@ -62,12 +56,12 @@ namespace yli
         }
 
         void Font2D::printText2D(
-                GLuint screen_width,
-                GLuint screen_height,
-                GLuint x,
-                GLuint y,
-                GLuint text_size,
-                GLuint font_size,
+                std::size_t screen_width,
+                std::size_t screen_height,
+                std::size_t x,
+                std::size_t y,
+                std::size_t text_size,
+                std::size_t font_size,
                 const std::string text,
                 const std::string font_texture_file_format,
                 const std::string horizontal_alignment,
@@ -110,8 +104,8 @@ namespace yli
                 }
             }
 
-            GLuint current_left_x;
-            GLuint current_top_y;
+            std::size_t current_left_x;
+            std::size_t current_top_y;
 
             if (horizontal_alignment == "left")
             {
@@ -159,14 +153,14 @@ namespace yli
             {
                 // Print to the right side of X (so far there is no check for input length).
                 // Print up of Y.
-                GLfloat vertex_up_left_x;
-                GLfloat vertex_up_left_y;
-                GLfloat vertex_up_right_x;
-                GLfloat vertex_up_right_y;
-                GLfloat vertex_down_left_x;
-                GLfloat vertex_down_left_y;
-                GLfloat vertex_down_right_x;
-                GLfloat vertex_down_right_y;
+                std::size_t vertex_up_left_x;
+                std::size_t vertex_up_left_y;
+                std::size_t vertex_up_right_x;
+                std::size_t vertex_up_right_y;
+                std::size_t vertex_down_left_x;
+                std::size_t vertex_down_left_y;
+                std::size_t vertex_down_right_x;
+                std::size_t vertex_down_right_y;
 
                 char character = text[i++];
 
@@ -213,17 +207,17 @@ namespace yli
                 vertices.push_back(vertex_up_right);
                 vertices.push_back(vertex_down_left);
 
-                float uv_x = (character % font_size) / (GLfloat) font_size;
+                float uv_x = (character % font_size) / static_cast<float>(font_size);
                 float uv_y;
 
                 if (font_texture_file_format == "dds" || font_texture_file_format == "DDS")
                 {
-                    uv_y = (character / font_size) / (GLfloat) font_size;
+                    uv_y = (character / font_size) / static_cast<float>(font_size);
                 }
                 else if (font_texture_file_format == "bmp" || font_texture_file_format == "BMP")
                 {
                     // BMP is stored in the file beginning from the bottom line.
-                    uv_y = 1 - (character / font_size) / (GLfloat) font_size;
+                    uv_y = 1 - (character / font_size) / static_cast<float>(font_size);
                 }
                 else
                 {
@@ -232,20 +226,20 @@ namespace yli
                 }
 
                 glm::vec2 uv_up_left = glm::vec2(uv_x, uv_y);
-                glm::vec2 uv_up_right = glm::vec2(uv_x + (1.0f / (GLfloat) font_size), uv_y);
+                glm::vec2 uv_up_right = glm::vec2(uv_x + (1.0f / static_cast<float>(font_size)), uv_y);
                 glm::vec2 uv_down_right;
                 glm::vec2 uv_down_left;
 
                 if (font_texture_file_format == "dds" || font_texture_file_format == "DDS")
                 {
-                    uv_down_right = glm::vec2(uv_x + (1.0f / (GLfloat) font_size), (uv_y + 1.0f / (GLfloat) font_size));
-                    uv_down_left = glm::vec2(uv_x, (uv_y + 1.0f / (GLfloat) font_size));
+                    uv_down_right = glm::vec2(uv_x + (1.0f / static_cast<float>(font_size)), (uv_y + 1.0f / static_cast<float>(font_size)));
+                    uv_down_left = glm::vec2(uv_x, (uv_y + 1.0f / static_cast<float>(font_size)));
                 }
                 else if (font_texture_file_format == "bmp" || font_texture_file_format == "BMP")
                 {
                     // BMP is stored in the file beginning from the bottom line.
-                    uv_down_right = glm::vec2(uv_x + (1.0f / (GLfloat) font_size), (uv_y - 1.0f / (GLfloat) font_size));
-                    uv_down_left = glm::vec2(uv_x, (uv_y - 1.0f / (GLfloat) font_size));
+                    uv_down_right = glm::vec2(uv_x + (1.0f / static_cast<float>(font_size)), (uv_y - 1.0f / static_cast<float>(font_size)));
+                    uv_down_left = glm::vec2(uv_x, (uv_y - 1.0f / static_cast<float>(font_size)));
                 }
                 UVs.push_back(uv_up_left);
                 UVs.push_back(uv_down_left);
@@ -331,12 +325,12 @@ namespace yli
         }
 
         void Font2D::printText2D(
-                GLuint screen_width,
-                GLuint screen_height,
-                GLuint x,
-                GLuint y,
-                GLuint text_size,
-                GLuint font_size,
+                std::size_t screen_width,
+                std::size_t screen_height,
+                std::size_t x,
+                std::size_t y,
+                std::size_t text_size,
+                std::size_t font_size,
                 const std::string text,
                 const std::string font_texture_file_format)
         {

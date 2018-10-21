@@ -29,8 +29,8 @@ namespace yli
                 // constructor.
                 Font2D(
                         yli::ontology::Universe* const universe,
-                        GLuint screen_width,
-                        GLuint screen_height,
+                        std::size_t screen_width,
+                        std::size_t screen_height,
                         const std::string& texture_filename,
                         const std::string& font_texture_file_format)
                     : Entity(universe)
@@ -104,12 +104,12 @@ namespace yli
                 std::size_t get_number_of_descendants() const override;
 
                 void printText2D(
-                        GLuint screen_width,
-                        GLuint screen_height,
-                        GLuint x,
-                        GLuint y,
-                        GLuint text_size,
-                        GLuint font_size,
+                        std::size_t screen_width,
+                        std::size_t screen_height,
+                        std::size_t x,
+                        std::size_t y,
+                        std::size_t text_size,
+                        std::size_t font_size,
                         const std::string text,
                         const std::string font_texture_file_format,
                         const std::string horizontal_alignment,
@@ -118,12 +118,12 @@ namespace yli
                 void printText2D(const PrintingStruct& printing_struct);
 
                 void printText2D(
-                        GLuint screen_width,
-                        GLuint screen_height,
-                        GLuint x,
-                        GLuint y,
-                        GLuint text_size,
-                        GLuint font_size,
+                        std::size_t screen_width,
+                        std::size_t screen_height,
+                        std::size_t x,
+                        std::size_t y,
+                        std::size_t text_size,
+                        std::size_t font_size,
                         const std::string text,
                         const std::string font_texture_file_format);
 
