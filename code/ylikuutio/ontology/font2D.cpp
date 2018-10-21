@@ -20,7 +20,6 @@
 
 // Include standard headers
 #include <cstddef>  // std::size_t
-#include <cstring>  // std::memcmp, std::strcmp, std::strlen, std::strncmp
 #include <iostream> // std::cout, std::cin, std::cerr
 #include <string>   // std::string
 #include <vector>   // std::vector
@@ -69,10 +68,10 @@ namespace yli
                 GLuint y,
                 GLuint text_size,
                 GLuint font_size,
-                const char* const text_char,
-                const char* const char_font_texture_file_format,
-                const char* const horizontal_alignment,
-                const char* const vertical_alignment) const
+                const std::string text,
+                const std::string font_texture_file_format,
+                const std::string horizontal_alignment,
+                const std::string vertical_alignment) const
         {
             // If horizontal alignment is `"left"`, each line begins from the same x coordinate.
             // If horizontal alignment is `"left"` and vertical alignment is `"top"`,
@@ -81,7 +80,7 @@ namespace yli
             //
             // If horizontal alignment is right, each line ends in the same x coordinate.
             // Newlines need to be checked beforehand.
-            std::size_t length = std::strlen(text_char);
+            const std::size_t length = text.size();
 
             // Count the number of lines.
             std::size_t number_of_lines = 1;
@@ -90,12 +89,12 @@ namespace yli
 
             while (i < length)
             {
-                char character = text_char[i++];
+                char character = text[i++];
 
                 if (character == (char) '\\')
                 {
                     // OK, this character was backslash, so read the next character.
-                    character = text_char[i++];
+                    character = text[i++];
 
                     if (character == 'n')
                     {
@@ -107,15 +106,15 @@ namespace yli
             GLuint current_left_x;
             GLuint current_top_y;
 
-            if (std::strcmp(horizontal_alignment, "left") == 0)
+            if (horizontal_alignment == "left")
             {
                 current_left_x = x;
             }
-            else if (std::strcmp(horizontal_alignment, "center") == 0)
+            else if (horizontal_alignment == "center")
             {
                 current_left_x = x - 0.5f * length * text_size;
             }
-            else if (std::strcmp(horizontal_alignment, "right") == 0)
+            else if (horizontal_alignment == "right")
             {
                 current_left_x = x - length * text_size;
             }
@@ -125,15 +124,15 @@ namespace yli
                 return;
             }
 
-            if (std::strcmp(vertical_alignment, "top") == 0)
+            if (vertical_alignment == "top")
             {
                 current_top_y = y;
             }
-            else if (std::strcmp(vertical_alignment, "center") == 0)
+            else if (vertical_alignment == "center")
             {
                 current_top_y = y + 0.5f * number_of_lines * text_size;
             }
-            else if (std::strcmp(vertical_alignment, "bottom") == 0)
+            else if (vertical_alignment == "bottom")
             {
                 current_top_y = y + number_of_lines * text_size;
             }
@@ -162,12 +161,12 @@ namespace yli
                 GLfloat vertex_down_right_x;
                 GLfloat vertex_down_right_y;
 
-                char character = text_char[i++];
+                char character = text[i++];
 
                 if (character == (char) '\\')
                 {
                     // OK, this character was backslash, so read the next character.
-                    character = text_char[i++];
+                    character = text[i++];
 
                     if (character == 'n')
                     {
@@ -203,18 +202,18 @@ namespace yli
                 float uv_x = (character % font_size) / (GLfloat) font_size;
                 float uv_y;
 
-                if ((std::strcmp(char_font_texture_file_format, "dds") == 0) || (std::strcmp(char_font_texture_file_format, "DDS") == 0))
+                if (font_texture_file_format == "dds" || font_texture_file_format == "DDS")
                 {
                     uv_y = (character / font_size) / (GLfloat) font_size;
                 }
-                else if ((std::strcmp(char_font_texture_file_format, "bmp") == 0) || (std::strcmp(char_font_texture_file_format, "BMP") == 0))
+                else if (font_texture_file_format == "bmp" || font_texture_file_format == "BMP")
                 {
                     // BMP is stored in the file beginning from the bottom line.
                     uv_y = 1 - (character / font_size) / (GLfloat) font_size;
                 }
                 else
                 {
-                    std::cerr << "invalid char_font_texture_file_format " << std::string(char_font_texture_file_format) << "\n";
+                    std::cerr << "invalid font_texture_file_format " << std::string(font_texture_file_format) << "\n";
                     return;
                 }
 
@@ -223,12 +222,12 @@ namespace yli
                 glm::vec2 uv_down_right;
                 glm::vec2 uv_down_left;
 
-                if ((std::strcmp(char_font_texture_file_format, "dds") == 0) || (std::strcmp(char_font_texture_file_format, "DDS") == 0))
+                if (font_texture_file_format == "dds" || font_texture_file_format == "DDS")
                 {
                     uv_down_right = glm::vec2(uv_x + (1.0f / (GLfloat) font_size), (uv_y + 1.0f / (GLfloat) font_size));
                     uv_down_left = glm::vec2(uv_x, (uv_y + 1.0f / (GLfloat) font_size));
                 }
-                else if ((std::strcmp(char_font_texture_file_format, "bmp") == 0) || (std::strcmp(char_font_texture_file_format, "BMP") == 0))
+                else if (font_texture_file_format == "bmp" || font_texture_file_format == "BMP")
                 {
                     // BMP is stored in the file beginning from the bottom line.
                     uv_down_right = glm::vec2(uv_x + (1.0f / (GLfloat) font_size), (uv_y - 1.0f / (GLfloat) font_size));
@@ -296,8 +295,8 @@ namespace yli
                         printing_struct.y,
                         printing_struct.text_size,
                         printing_struct.font_size,
-                        printing_struct.text_char,
-                        printing_struct.char_font_texture_file_format,
+                        printing_struct.text,
+                        printing_struct.font_texture_file_format,
                         printing_struct.horizontal_alignment,
                         printing_struct.vertical_alignment);
             }
@@ -310,8 +309,8 @@ namespace yli
                         printing_struct.y,
                         printing_struct.text_size,
                         printing_struct.font_size,
-                        printing_struct.text.c_str(),
-                        printing_struct.char_font_texture_file_format,
+                        printing_struct.text,
+                        printing_struct.font_texture_file_format,
                         printing_struct.horizontal_alignment,
                         printing_struct.vertical_alignment);
             }
@@ -324,10 +323,10 @@ namespace yli
                 GLuint y,
                 GLuint text_size,
                 GLuint font_size,
-                const char* const text_char,
-                const char* const char_font_texture_file_format)
+                const std::string text,
+                const std::string font_texture_file_format)
         {
-            printText2D(screen_width, screen_height, x, y, text_size, font_size, text_char, char_font_texture_file_format, "left", "bottom");
+            printText2D(screen_width, screen_height, x, y, text_size, font_size, text, font_texture_file_format, "left", "bottom");
         }
     }
 }

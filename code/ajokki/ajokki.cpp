@@ -1049,7 +1049,7 @@ int main(const int argc, const char* const argv[])
             printing_struct.screen_height = my_universe->get_window_height();
             printing_struct.text_size = my_universe->get_text_size();
             printing_struct.font_size = my_universe->get_font_size();
-            printing_struct.char_font_texture_file_format = "bmp";
+            printing_struct.font_texture_file_format = "bmp";
 
             std::stringstream angles_and_coordinates_stringstream;
             angles_and_coordinates_stringstream << std::fixed << std::setprecision(2) <<
@@ -1106,7 +1106,7 @@ int main(const int argc, const char* const argv[])
             // print cartesian coordinates on bottom left corner.
             printing_struct.x = 0;
             printing_struct.y = 0;
-            printing_struct.text_char = angles_and_coordinates_string.c_str();
+            printing_struct.text = angles_and_coordinates_string;
             printing_struct.horizontal_alignment = "left";
             printing_struct.vertical_alignment = "bottom";
             my_font2D->printText2D(printing_struct);
@@ -1116,7 +1116,7 @@ int main(const int argc, const char* const argv[])
                 // print help text.
                 printing_struct.x = 0;
                 printing_struct.y = my_universe->get_window_height() - (3 * my_universe->get_text_size());
-                printing_struct.text_char = help_text_string.c_str();
+                printing_struct.text = help_text_string;
                 printing_struct.horizontal_alignment = "left";
                 printing_struct.vertical_alignment = "top";
                 my_font2D->printText2D(printing_struct);
@@ -1127,7 +1127,7 @@ int main(const int argc, const char* const argv[])
                 // print spherical coordinates on bottom left corner.
                 printing_struct.x = 0;
                 printing_struct.y += 2 * my_universe->get_text_size();
-                printing_struct.text_char = spherical_coordinates_string.c_str();
+                printing_struct.text = spherical_coordinates_string;
                 printing_struct.horizontal_alignment = "left";
                 printing_struct.vertical_alignment = "bottom";
                 my_font2D->printText2D(printing_struct);
@@ -1136,7 +1136,7 @@ int main(const int argc, const char* const argv[])
             // print time data on top left corner.
             printing_struct.x = 0;
             printing_struct.y = static_cast<GLuint>(my_universe->get_window_height());
-            printing_struct.text_char = time_string.c_str();
+            printing_struct.text = time_string;
             printing_struct.horizontal_alignment = "left";
             printing_struct.vertical_alignment = "top";
             my_font2D->printText2D(printing_struct);
@@ -1146,7 +1146,7 @@ int main(const int argc, const char* const argv[])
                 // print frame rate data on top right corner.
                 printing_struct.x = my_universe->get_window_width();
                 printing_struct.y = my_universe->get_window_height();
-                printing_struct.text_char = ms_frame_text.c_str();
+                printing_struct.text = ms_frame_text;
                 printing_struct.horizontal_alignment = "right";
                 printing_struct.vertical_alignment = "top";
                 my_font2D->printText2D(printing_struct);
