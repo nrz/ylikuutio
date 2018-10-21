@@ -1,4 +1,52 @@
-Ajokki 0.0.1 / Ylikuutio 0.0.1 manual.
+Ajokki 0.0.3 / Ylikuutio 0.0.3 manual.
+
+Ylikuutio is a 3D game and simulation engine.
+It is designed with two different game types in mind:
+1. real-time action adventures (either first-person or third-person).
+2. turn-based tactical games.
+
+Other design goals include support also for slower video cards, and
+Linux, Windows, and Android as target operating systems (Android support
+is not implemented yet). Only 64-bit systems are supported.
+OpenGL 3.0 or newer is required.
+
+Ylikuutio can be compiled with GCC, Clang or Visual Studio.
+In Visual Studio compiling may break due to compiler-specific bugs.
+Cross compiling from Linux® to Windows using MinGW-w64 works fine.
+C++14 support is required.
+CMake 2.6.2 or newer is needed for the compiling process, but
+external libraries such as `glm` require CMake 3.2 or a newer version.
+CMake uses git for downloading Google Test testing framework.
+
+The present document explains some design choices of Ylikuutio. To
+understand how to use Ylikuutio in practice, Ajokki and Ylikuutio code
+itself are the best references on that. The information in the present
+manual reflects the current state of development of Ylikuutio.
+
+Ylikuutio has an ontological hierarchy (class hierarchy), consisting of
+classes most of which belong to namespace `yli::ontology`. The top
+class of this ontological hierarchy is `yli::ontology::Universe`. Each
+class is responsible of the lifetime of its children. The hierarchy is
+implemented using function templates belonging to `yli::hierarchy`.
+This means that the destructor of each `yli::ontology` class must
+`delete` all its children.
+
+To initialize the ontological hierarchy, `yli::ontology::Universe` needs
+to created. After that an `EntityFactory` should be requested from
+the newly created `yli::ontology::Universe` and the rest of the objects
+should be created using this `EntityFactory`.
+
+Some of the `yli::ontology` classes have a more complex position in the
+ontological hierarchy. For example, `yli::ontology::Symbiosis` and the
+classes related to it. Please see the ontological class diagram.
+
+Keyboard and mouse handling is based on callbacks.
+Console command processing is based on callbacks.
+Game event processing will be based on callbacks.
+
+Ajokki
+
+Ajokki is a demo program for testing Ylikuutio.
 
 F1 to get help.
 ` to enter/exit console.
