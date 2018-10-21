@@ -81,7 +81,6 @@
 // Include standard headers
 #include <cmath>         // NAN, std::isnan, std::pow
 #include <cstddef>       // std::size_t
-#include <cstdio>        // std::FILE, std::fclose, std::fopen, std::fread, std::getchar, std::printf etc.
 #include <iomanip>       // std::setfill, std::setprecision, std::setw
 #include <iostream>      // std::cout, std::cin, std::cerr
 #include <limits>        // std::numeric_limits
@@ -1052,29 +1051,27 @@ int main(const int argc, const char* const argv[])
             printing_struct.font_size = my_universe->get_font_size();
             printing_struct.char_font_texture_file_format = "bmp";
 
-            char angles_and_coordinates_text[256];
-            std::snprintf(
-                    angles_and_coordinates_text,
-                    sizeof(angles_and_coordinates_text),
-                    "%.2f,%.2f rad; %.2f,%.2f deg\\n(%.2f,%.2f,%.2f)",
-                    my_universe->current_camera_horizontal_angle,
-                    my_universe->current_camera_vertical_angle,
-                    RADIANS_TO_DEGREES(my_universe->current_camera_horizontal_angle),
-                    RADIANS_TO_DEGREES(my_universe->current_camera_vertical_angle),
-                    my_universe->current_camera_cartesian_coordinates.x,
-                    my_universe->current_camera_cartesian_coordinates.y,
-                    my_universe->current_camera_cartesian_coordinates.z);
+            std::stringstream angles_and_coordinates_stringstream;
+            angles_and_coordinates_stringstream << std::fixed << std::setprecision(2) <<
+                my_universe->current_camera_horizontal_angle << "," <<
+                my_universe->current_camera_vertical_angle << " rad; " <<
+                RADIANS_TO_DEGREES(my_universe->current_camera_horizontal_angle) << "," <<
+                RADIANS_TO_DEGREES(my_universe->current_camera_vertical_angle) << " deg\\n" <<
+                "(" <<
+                my_universe->current_camera_cartesian_coordinates.x << "," <<
+                my_universe->current_camera_cartesian_coordinates.y << "," <<
+                my_universe->current_camera_cartesian_coordinates.z << ")";
+            const std::string angles_and_coordinates_string = angles_and_coordinates_stringstream.str();
 
-            char time_text[256];
-            std::snprintf(time_text, sizeof(time_text), "%.2f sec", yli::time::get_time());
+            std::stringstream time_stringstream;
+            time_stringstream << std::fixed << std::setprecision(2) << yli::time::get_time() << " sec";
+            const std::string time_string = time_stringstream.str();
 
-            const char on_text[] = "on";
-            const char off_text[] = "off";
+            const std::string on_string = "on";
+            const std::string off_string = "off";
 
-            char help_text_char[1024];
-            std::snprintf(
-                    help_text_char,
-                    sizeof(help_text_char),
+            std::stringstream help_text_stringstream;
+            help_text_stringstream <<
                     "Ajokki 0.0.3\\n"
                     "\\n"
                     "arrow keys\\n"
@@ -1082,36 +1079,34 @@ int main(const int argc, const char* const argv[])
                     "enter duck\\n"
                     "F1 help mode\\n"
                     "`  enter console\\n"
-                    "I  invert mouse (%s)\\n"
-                    "F  flight mode (%s)\\n"
-                    "Ctrl      turbo\\n"
-                    "Ctrl+Ctrl extra turbo\\n"
-                    "for debugging:\\n"
-                    "G  grass texture\\n"
-                    "O  orange fur texture\\n"
-                    "P  pink geometric tiles texture\\n"
-                    "T  terrain species\\n"
-                    "A  suzanne species\\n",
-                    (my_universe->is_invert_mouse_in_use ? on_text : off_text),
-                    (my_universe->is_flight_mode_in_use ? on_text : off_text));
+                    "I  invert mouse (" << (my_universe->is_invert_mouse_in_use ? on_string : off_string) << ")\\n"
+                    "F  flight mode (" << (my_universe->is_flight_mode_in_use ? on_string : off_string) << ")\\n"
+                    "Ctrl      turbo\\n" <<
+                    "Ctrl+Ctrl extra turbo\\n" <<
+                    "for debugging:\\n" <<
+                    "G  grass texture\\n" <<
+                    "O  orange fur texture\\n" <<
+                    "P  pink geometric tiles texture\\n" <<
+                    "T  terrain species\\n" <<
+                    "A  suzanne species\\n";
+            const std::string help_text_string = help_text_stringstream.str();
 
-            char spherical_coordinates_text[256];
+            std::string spherical_coordinates_string;
 
             if (my_universe->testing_spherical_terrain_in_use)
             {
-                std::snprintf(
-                        spherical_coordinates_text,
-                        sizeof(spherical_coordinates_text),
-                        "rho:%.2f theta:%.2f phi:%.2f",
-                        my_universe->current_camera_spherical_coordinates.rho,
-                        my_universe->current_camera_spherical_coordinates.theta,
-                        my_universe->current_camera_spherical_coordinates.phi);
+                std::stringstream spherical_coordinates_stringstream;
+                spherical_coordinates_stringstream << std::fixed << std::setprecision(2) <<
+                    "rho:" << my_universe->current_camera_spherical_coordinates.rho <<
+                    "theta:" << my_universe->current_camera_spherical_coordinates.theta <<
+                    "phi:" << my_universe->current_camera_spherical_coordinates.phi;
+                spherical_coordinates_string = spherical_coordinates_stringstream.str();
             }
 
             // print cartesian coordinates on bottom left corner.
             printing_struct.x = 0;
             printing_struct.y = 0;
-            printing_struct.text_char = angles_and_coordinates_text;
+            printing_struct.text_char = angles_and_coordinates_string.c_str();
             printing_struct.horizontal_alignment = "left";
             printing_struct.vertical_alignment = "bottom";
             my_font2D->printText2D(printing_struct);
@@ -1121,7 +1116,7 @@ int main(const int argc, const char* const argv[])
                 // print help text.
                 printing_struct.x = 0;
                 printing_struct.y = my_universe->get_window_height() - (3 * my_universe->get_text_size());
-                printing_struct.text_char = help_text_char;
+                printing_struct.text_char = help_text_string.c_str();
                 printing_struct.horizontal_alignment = "left";
                 printing_struct.vertical_alignment = "top";
                 my_font2D->printText2D(printing_struct);
@@ -1132,7 +1127,7 @@ int main(const int argc, const char* const argv[])
                 // print spherical coordinates on bottom left corner.
                 printing_struct.x = 0;
                 printing_struct.y += 2 * my_universe->get_text_size();
-                printing_struct.text_char = spherical_coordinates_text;
+                printing_struct.text_char = spherical_coordinates_string.c_str();
                 printing_struct.horizontal_alignment = "left";
                 printing_struct.vertical_alignment = "bottom";
                 my_font2D->printText2D(printing_struct);
@@ -1141,7 +1136,7 @@ int main(const int argc, const char* const argv[])
             // print time data on top left corner.
             printing_struct.x = 0;
             printing_struct.y = static_cast<GLuint>(my_universe->get_window_height());
-            printing_struct.text_char = time_text;
+            printing_struct.text_char = time_string.c_str();
             printing_struct.horizontal_alignment = "left";
             printing_struct.vertical_alignment = "top";
             my_font2D->printText2D(printing_struct);
