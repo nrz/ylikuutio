@@ -29,14 +29,14 @@ namespace yli
             // destructor.
 
             // Delete buffers
-            glDeleteBuffers(1, &vertexbuffer);
-            glDeleteBuffers(1, &uvbuffer);
+            glDeleteBuffers(1, &this->vertexbuffer);
+            glDeleteBuffers(1, &this->uvbuffer);
 
             // Delete texture
-            glDeleteTextures(1, &texture);
+            glDeleteTextures(1, &this->texture);
 
             // Delete shader
-            glDeleteProgram(programID);
+            glDeleteProgram(this->programID);
         }
 
         yli::ontology::Entity* Font2D::get_parent() const
@@ -68,11 +68,11 @@ namespace yli
                 const std::string vertical_alignment) const
         {
             // Bind shader
-            glUseProgram(programID);
+            glUseProgram(this->programID);
 
             // Bind texture
             glActiveTexture(GL_TEXTURE0);
-            glBindTexture(GL_TEXTURE_2D, texture);
+            glBindTexture(GL_TEXTURE_2D, this->texture);
             // Set our "myTextureSampler" sampler to user Material Unit 0
             glUniform1i(Text2DUniformID, 0);
 
@@ -268,26 +268,26 @@ namespace yli
                 UVs.push_back(uv_down_left);
             }
 
-            glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
+            glBindBuffer(GL_ARRAY_BUFFER, this->vertexbuffer);
             glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(glm::vec2), &vertices[0], GL_STATIC_DRAW);
-            glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
+            glBindBuffer(GL_ARRAY_BUFFER, this->uvbuffer);
             glBufferData(GL_ARRAY_BUFFER, UVs.size() * sizeof(glm::vec2), &UVs[0], GL_STATIC_DRAW);
 
             // 1st attribute buffer : vertices
-            glEnableVertexAttribArray(vertex_position_in_screenspaceID);
-            glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
-            glVertexAttribPointer(vertex_position_in_screenspaceID, 2, GL_FLOAT, GL_FALSE, 0, (void*) 0);
+            glEnableVertexAttribArray(this->vertex_position_in_screenspaceID);
+            glBindBuffer(GL_ARRAY_BUFFER, this->vertexbuffer);
+            glVertexAttribPointer(this->vertex_position_in_screenspaceID, 2, GL_FLOAT, GL_FALSE, 0, (void*) 0);
 
             // 2nd attribute buffer : UVs
-            glEnableVertexAttribArray(vertexUVID);
-            glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
-            glVertexAttribPointer(vertexUVID, 2, GL_FLOAT, GL_FALSE, 0, (void*) 0);
+            glEnableVertexAttribArray(this->vertexUVID);
+            glBindBuffer(GL_ARRAY_BUFFER, this->uvbuffer);
+            glVertexAttribPointer(this->vertexUVID, 2, GL_FLOAT, GL_FALSE, 0, (void*) 0);
 
             // Draw call
             glDrawArrays(GL_TRIANGLES, 0, vertices.size());
 
-            glDisableVertexAttribArray(vertex_position_in_screenspaceID);
-            glDisableVertexAttribArray(vertexUVID);
+            glDisableVertexAttribArray(this->vertex_position_in_screenspaceID);
+            glDisableVertexAttribArray(this->vertexUVID);
 
             glDisable(GL_BLEND);
         }
