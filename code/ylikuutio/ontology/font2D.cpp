@@ -1,4 +1,5 @@
 #include "font2D.hpp"
+#include "universe.hpp"
 #include "text_struct.hpp"
 
 // Include GLM
@@ -22,8 +23,6 @@ namespace yli
 {
     namespace ontology
     {
-        class Universe;
-
         Font2D::~Font2D()
         {
             // destructor.
@@ -41,8 +40,7 @@ namespace yli
 
         yli::ontology::Entity* Font2D::get_parent() const
         {
-            // Currently `Font2D`'s do not have any parents.
-            return nullptr;
+            return this->parent;
         }
 
         std::size_t Font2D::get_number_of_children() const

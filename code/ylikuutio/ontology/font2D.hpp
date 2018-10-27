@@ -35,6 +35,7 @@ namespace yli
                     : Entity(universe)
                 {
                     // constructor.
+                    this->parent = universe;
 
                     // Initialize class members with some dummy values.
                     this->vertexbuffer                     = 0;
@@ -127,6 +128,8 @@ namespace yli
                         const std::string font_texture_file_format) const;
 
             private:
+                yli::ontology::Universe* parent; // pointer to the `Universe`.
+
                 GLuint texture;      // Texture containing the glyphs, reterned by `load_BMP_texture` or `load_DDS_texture` (used for `glGenTextures` etc.).
                 GLuint vertexbuffer; // Buffer containing the vertices
                 GLuint uvbuffer;     // Buffer containing the UVs
